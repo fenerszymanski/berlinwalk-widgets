@@ -11,7 +11,7 @@
   var BASE_URL = SCRIPT_URL && SCRIPT_URL.includes('/where-in-berlin/')
     ? SCRIPT_URL.replace(/where-in-berlin\/where-in-berlin-element\.js(?:\?.*)?$/, '')
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-  var BUILD = 'where-in-berlin-20260712-share-card-v2';
+  var BUILD = 'where-in-berlin-20260712-share-card-v3';
   var DATA_URL = new URL('where-in-berlin/data.json', BASE_URL).toString();
   var SHARE_CARD_URL = asset('js/bw-share-card.js');
   var TRACKING_ENDPOINT_PROD = 'https://berlinwalk-content-app.vercel.app/api/where-in-berlin-event';
@@ -519,12 +519,12 @@
         if (window.BerlinWalkShareCard && navigator.share && window.File) {
           var shareImage = await loadShareImage(gameAsset(result.district.poster));
           var canvas = window.BerlinWalkShareCard.createCard({
-            title: 'Berlin match',
+            title: '',
             subtitle: result.district.district,
             score: result.percent + '%',
             meta: result.district.archetype,
             lines: result.reasons,
-            footer: 'berlinwalk.com/games/where-in-berlin',
+            footer: '',
             cta: 'Where in Berlin do you belong?',
             image: shareImage
           });

@@ -116,15 +116,20 @@
     ctx.fill();
     ctx.shadowColor = 'transparent';
 
-    ctx.fillStyle = colors.green;
-    ctx.font = '900 42px Montserrat, Arial, sans-serif';
-    ctx.fillText(title, 112, 166);
+    const hasTitle = Boolean(String(title || '').trim());
+    if (hasTitle) {
+      ctx.fillStyle = colors.green;
+      ctx.font = '900 42px Montserrat, Arial, sans-serif';
+      ctx.fillText(title, 112, 166);
+    }
 
-    ctx.fillStyle = colors.muted;
-    ctx.font = '700 28px Montserrat, Arial, sans-serif';
-    drawWrappedText(ctx, subtitle, 112, 212, width - 224, 33, 2);
+    ctx.fillStyle = hasTitle ? colors.muted : colors.green;
+    ctx.font = `${hasTitle ? '700 28px' : '900 38px'} Montserrat, Arial, sans-serif`;
+    drawWrappedText(ctx, subtitle, 112, hasTitle ? 212 : 174, width - 224, hasTitle ? 33 : 44, 2);
 
-    const hasImage = drawCoverImage(ctx, image, 112, 274, width - 224, 365);
+    const imageY = hasTitle ? 274 : 218;
+    const imageHeight = hasTitle ? 365 : 405;
+    const hasImage = drawCoverImage(ctx, image, 112, imageY, width - 224, imageHeight);
     const scoreY = hasImage ? 748 : 380;
     const metaY = hasImage ? 798 : 430;
     const reasonsStartY = hasImage ? 878 : 530;
@@ -154,9 +159,11 @@
     ctx.font = '900 34px Montserrat, Arial, sans-serif';
     drawWrappedText(ctx, cta, 112, height - 160, width - 224, 40, 2);
 
-    ctx.fillStyle = colors.muted;
-    ctx.font = '800 26px Montserrat, Arial, sans-serif';
-    ctx.fillText(footer, 112, height - 110);
+    if (String(footer || '').trim()) {
+      ctx.fillStyle = colors.muted;
+      ctx.font = '800 26px Montserrat, Arial, sans-serif';
+      ctx.fillText(footer, 112, height - 110);
+    }
 
     return canvas;
   }
