@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Olympiastadion Berlin: Plan Your Visit — Match Day or Open Day?</title>
+<meta name="description" content="Plan a visit to Berlin's Olympiastadion. Flip between a normal open day and a Hertha home game or major event day, then pick how you want to see it: a self-guided walk-in, a guided tour, the Glockenturm bell tower, or a match. See price, time and what you actually reach." />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  .op {
+    font-family: 'Montserrat', system-ui, sans-serif;
+    color: var(--bw-text);
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 4px 4px 14px;
+    box-sizing: border-box;
+  }
+  .op *, .op *::before, .op *::after { box-sizing: border-box; }
+  .op__head {
+    background: var(--bw-green);
+    color: #fff;
+    border-radius: 16px 16px 0 0;
+    padding: 18px 20px 16px;
+  }
+  .op__kicker {
+    font-size: 11px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--bw-yellow); margin: 0 0 6px;
+  }
+  .op__title { font-size: 21px; font-weight: 800; margin: 0 0 5px; line-height: 1.22; }
+  .op__sub { font-size: 13.5px; margin: 0; color: #E8F0E0; line-height: 1.5; }
+
+  .op__body {
+    background: var(--bw-cream);
+    border: 1px solid var(--bw-border);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    padding: 16px 16px 18px;
+  }
+
+  /* Day switch */
+  .op__dayswitch {
+    display: flex; gap: 8px; margin: 0 0 14px;
+    background: #fff; border: 1px solid var(--bw-border);
+    border-radius: 12px; padding: 6px;
+  }
+  .op__day {
+    flex: 1; border: none; cursor: pointer; border-radius: 8px;
+    padding: 10px 8px; font-family: inherit; font-weight: 700; font-size: 13px;
+    background: transparent; color: var(--bw-muted); line-height: 1.25;
+    transition: background .15s, color .15s;
+  }
+  .op__day small { display: block; font-weight: 500; font-size: 10.5px; letter-spacing: .02em; margin-top: 2px; opacity: .85; }
+  .op__day[aria-pressed="true"] { background: var(--bw-green); color: #fff; }
+  .op__day.op__day--event[aria-pressed="true"] { background: #8a1a1a; color: #fff; }
+
+  /* Map */
+  .op__mapwrap { margin: 0 0 6px; }
+  .op__map { width: 100%; height: auto; display: block; border-radius: 12px; }
+  .op__maphint {
+    text-align: center; font-size: 11.5px; color: var(--bw-muted);
+    margin: 4px 0 12px; font-style: italic;
+  }
+
+  /* Zone styles inside SVG */
+  .zone { transition: fill .18s, opacity .18s; }
+  .zone-off { opacity: .32; }
+  .zone-lbl { font: 700 12px Montserrat, sans-serif; fill: #fff; }
+  .zone-lbl-dark { font: 700 11px Montserrat, sans-serif; fill: var(--bw-green-dark); }
+
+  /* Mode chips */
+  .op__modes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 0 0 14px; }
+  .op__mode {
+    text-align: left; cursor: pointer; border-radius: 12px; padding: 11px 12px;
+    background: #fff; border: 2px solid var(--bw-border); font-family: inherit;
+    transition: border-color .15s, box-shadow .15s, opacity .15s;
+  }
+  .op__mode:disabled { cursor: not-allowed; opacity: .45; }
+  .op__mode[aria-pressed="true"] { border-color: var(--bw-green); box-shadow: 0 3px 10px rgba(27,94,32,.14); }
+  .op__mode-t { display: flex; align-items: center; gap: 7px; font-weight: 800; font-size: 13.5px; color: var(--bw-green-dark); }
+  .op__mode-ic { font-size: 16px; line-height: 1; }
+  .op__mode-p { font-size: 11.5px; color: var(--bw-muted); margin: 3px 0 0; font-weight: 600; }
+
+  /* Detail card */
+  .op__card {
+    background: #fff; border: 1px solid var(--bw-border); border-left: 5px solid var(--bw-lime);
+    border-radius: 12px; padding: 15px 16px;
+  }
+  .op__card--closed { border-left-color: #8a1a1a; }
+  .op__card-h { font-size: 16px; font-weight: 800; margin: 0 0 3px; color: var(--bw-text); }
+  .op__card-tag { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--bw-lime); margin: 0 0 8px; }
+  .op__card--closed .op__card-tag { color: #8a1a1a; }
+  .op__facts { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 10px; }
+  .op__fact { background: var(--bw-lime-soft); border-radius: 8px; padding: 6px 10px; font-size: 12px; font-weight: 700; color: var(--bw-green-dark); }
+  .op__card-p { font-size: 13.5px; line-height: 1.55; margin: 0; color: var(--bw-text); }
+  .op__card-p + .op__card-p { margin-top: 8px; }
+  .op__verdict { font-size: 13px; line-height: 1.5; margin: 10px 0 0; padding: 9px 11px; background: var(--bw-cream); border-radius: 8px; }
+  .op__verdict b { color: var(--bw-green-dark); }
+
+  .op__foot { font-size: 11.5px; color: var(--bw-muted); text-align: center; margin: 12px 4px 0; line-height: 1.5; }
+
+  @media (max-width: 460px) {
+    .op__modes { grid-template-columns: 1fr; }
+    .op__title { font-size: 19px; }
+    .op__day { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="op" id="op">
+  <div class="op__head">
+    <p class="op__kicker">BERLINWALK.COM • BERLIN HISTORY</p>
+    <h2 class="op__title">Olympiastadion: is it even open, and how should you see it?</h2>
+    <p class="op__sub">The catch nobody warns you about: on Hertha home games and big events the visitor centre shuts and you cannot just walk in. Set the day, then pick how you want to visit.</p>
+  </div>
+
+  <div class="op__body">
+    <div class="op__dayswitch" role="group" aria-label="What kind of day is it?">
+      <button class="op__day" id="day-open" aria-pressed="true">Normal open day<small>walk in, self-guided</small></button>
+      <button class="op__day op__day--event" id="day-event" aria-pressed="false">Match / big event<small>Hertha home game, concert</small></button>
+    </div>
+
+    <div class="op__mapwrap">
+      <svg class="op__map" viewBox="0 0 680 360" role="img" aria-label="Simplified plan of the Olympiastadion grounds">
+        <rect x="0" y="0" width="680" height="360" rx="14" fill="#EAF1E0"/>
+        <!-- forest hint -->
+        <rect x="0" y="0" width="680" height="360" rx="14" fill="url(#g)" opacity="0"/>
+        <!-- Maifeld -->
+        <rect class="zone" id="z-maifeld" x="24" y="112" width="150" height="150" rx="10" fill="#A7C48A"/>
+        <text class="zone-lbl-dark" x="99" y="188" text-anchor="middle">Maifeld</text>
+        <text class="zone-lbl-dark" x="99" y="204" text-anchor="middle" style="font-size:9px;font-weight:600">rally field</text>
+        <!-- Glockenturm -->
+        <g class="zone" id="z-tower">
+          <circle cx="63" cy="66" r="30" fill="#5E8C3A"/>
+          <text class="zone-lbl" x="63" y="63" text-anchor="middle" style="font-size:10px">Glocken-</text>
+          <text class="zone-lbl" x="63" y="76" text-anchor="middle" style="font-size:10px">turm</text>
+        </g>
+        <!-- Stadium bowl (outer stands + pitch) -->
+        <g class="zone" id="z-bowl">
+          <ellipse cx="410" cy="180" rx="205" ry="150" fill="#2E7D32"/>
+          <ellipse cx="410" cy="180" rx="150" ry="102" fill="#3E9142"/>
+          <text class="zone-lbl" x="410" y="72" text-anchor="middle">Stands (the bowl)</text>
+        </g>
+        <!-- Pitch -->
+        <g class="zone" id="z-pitch">
+          <rect x="330" y="138" width="160" height="84" rx="8" fill="#6FBF57"/>
+          <line x1="410" y1="138" x2="410" y2="222" stroke="#eaf1e0" stroke-width="2"/>
+          <circle cx="410" cy="180" r="16" fill="none" stroke="#eaf1e0" stroke-width="2"/>
+          <text class="zone-lbl-dark" x="410" y="184" text-anchor="middle" style="fill:#0f3a14">pitch</text>
+        </g>
+        <!-- Marathon gate + Olympic bell (west opening) -->
+        <g class="zone" id="z-gate">
+          <rect x="196" y="150" width="34" height="60" rx="6" fill="#C9A227"/>
+          <text class="zone-lbl" x="213" y="176" text-anchor="middle" style="font-size:9px">Mara-</text>
+          <text class="zone-lbl" x="213" y="188" text-anchor="middle" style="font-size:9px">thon</text>
+          <text class="zone-lbl" x="213" y="200" text-anchor="middle" style="font-size:9px">gate</text>
+        </g>
+        <!-- Visitor centre / entrance (east) -->
+        <g class="zone" id="z-entry">
+          <rect x="596" y="150" width="60" height="60" rx="8" fill="#164a1a"/>
+          <text class="zone-lbl" x="626" y="176" text-anchor="middle" style="font-size:9px">visitor</text>
+          <text class="zone-lbl" x="626" y="188" text-anchor="middle" style="font-size:9px">centre</text>
+          <text class="zone-lbl" x="626" y="200" text-anchor="middle" style="font-size:9px">/ S-Bahn</text>
+        </g>
+      </svg>
+    </div>
+    <p class="op__maphint" id="maphint">Green areas are what you reach on your chosen visit. Faded areas stay off-limits.</p>
+
+    <div class="op__modes" id="modes" role="group" aria-label="How do you want to visit?"></div>
+
+    <div class="op__card" id="card" aria-live="polite"></div>
+
+    <p class="op__foot">Prices and hours are 2026 guidance from the official visitor centre and can change at short notice. Always check <b>olympiastadion.berlin</b> for your date before travelling out.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var HIGHLIGHT = '#2E7D32', HIGHLIGHT2 = '#3E9142';
+  var modes = [
+    {
+      id: 'self', icon: '🚶', name: 'Self-guided walk-in', price: '€11 · €8 reduced',
+      tag: 'The default visit', dur: '60–90 min', time: 'Open days ~11:00–18:00',
+      zones: ['z-bowl','z-pitch','z-gate','z-entry'],
+      body: 'Buy a ticket at the visitor centre (Olympischer Platz 3) and wander the bowl on your own. You get the stands, the running track edge, the Marathon Gate with its eternal flame and the cracked 1936 Olympic bell on the ground. Info boards fill in the history.',
+      addon: 'Add a multimedia guide for €4: a GPS handset that walks you round in about 75–100 minutes, in English.',
+      verdict: '<b>Worth it if</b> you like standing where Jesse Owens ran in 1936 and reading the layers of history at your own pace.',
+      eventNote: null
+    },
+    {
+      id: 'guided', icon: '🎧', name: 'Guided tour', price: '~€15+',
+      tag: 'Goes where you cannot', dur: '60–75 min', time: 'Fixed slots, book ahead',
+      zones: ['z-bowl','z-pitch','z-gate','z-entry'],
+      body: 'A guide takes you into parts the self-guided route skips, typically the players\' tunnel, dressing rooms and VIP areas, with the full story of the 1936 Games, the Nazi architecture and the 2006 World Cup rebuild.',
+      addon: 'This is the only way in on match and event days, when the visitor centre is closed to walk-ins.',
+      verdict: '<b>Worth it if</b> you want the pitch-level, behind-the-scenes version and do not mind fixed times.',
+      eventNote: 'On event days, guided tours are the only option and sell out. Book before you travel.'
+    },
+    {
+      id: 'tower', icon: '🔔', name: 'Glockenturm bell tower', price: 'separate ticket',
+      tag: 'The best view', dur: '30–45 min', time: 'Own opening hours',
+      zones: ['z-tower','z-maifeld'],
+      body: 'The bell tower stands apart from the stadium, above the Maifeld. A lift takes you up for the widest view of the whole Olympic Park, the bowl, the Waldbühne and the forests and lakes stretching west.',
+      addon: 'It has its own entrance and ticket, separate from the stadium, so treat it as a second stop, not part of the walk-in.',
+      verdict: '<b>Worth it if</b> you want the panorama and the quieter, greener side of the grounds most visitors skip.',
+      eventNote: 'The tower keeps its own hours and is usually unaffected by what is happening in the bowl. Still check before you go.'
+    },
+    {
+      id: 'match', icon: '⚽', name: 'See a match or concert', price: 'event ticket',
+      tag: 'The stadium alive', dur: 'a full evening', time: 'Match / event dates',
+      zones: ['z-bowl','z-pitch','z-entry'],
+      body: 'Nothing beats the place full. Hertha BSC play their home games here, the DFB-Pokal cup final lands every May, and summer brings big concerts and the ISTAF athletics meet. 74,000 seats, the old marble bowl roaring.',
+      addon: 'S-Bahn S3 or S9 to S Olympiastadion, or U2 to Olympia-Stadion; both are inside Berlin\'s AB zone, so a normal city ticket covers it.',
+      verdict: '<b>Worth it if</b> your dates line up. Even a lower-league game gives you the scale the empty stadium cannot.',
+      eventNote: 'This is exactly the day the visitor centre shuts, so pick the match instead of a walk-in.'
+    }
+  ];
+
+  var openDay = true;
+  var current = 'self';
+  var modesEl = document.getElementById('modes');
+  var cardEl = document.getElementById('card');
+  var hintEl = document.getElementById('maphint');
+  var dayOpen = document.getElementById('day-open');
+  var dayEvent = document.getElementById('day-event');
+
+  modes.forEach(function (m) {
+    var b = document.createElement('button');
+    b.className = 'op__mode';
+    b.id = 'mode-' + m.id;
+    b.setAttribute('aria-pressed', m.id === current ? 'true' : 'false');
+    b.innerHTML = '<span class="op__mode-t"><span class="op__mode-ic">' + m.icon + '</span>' + m.name + '</span><span class="op__mode-p">' + m.price + '</span>';
+    b.addEventListener('click', function () { if (!b.disabled) { current = m.id; render(); } });
+    modesEl.appendChild(b);
+  });
+
+  function setZones(ids) {
+    ['z-tower','z-maifeld','z-bowl','z-pitch','z-gate','z-entry'].forEach(function (zid) {
+      var el = document.getElementById(zid);
+      if (!el) return;
+      if (ids.indexOf(zid) !== -1) el.classList.remove('zone-off');
+      else el.classList.add('zone-off');
+    });
+  }
+
+  function render() {
+    dayOpen.setAttribute('aria-pressed', openDay ? 'true' : 'false');
+    dayEvent.setAttribute('aria-pressed', openDay ? 'false' : 'true');
+
+    var m = modes.filter(function (x) { return x.id === current; })[0];
+
+    // Availability logic: on event days, self-guided walk-in is not possible.
+    modes.forEach(function (x) {
+      var el = document.getElementById('mode-' + x.id);
+      var blocked = (!openDay && x.id === 'self');
+      el.disabled = blocked;
+      el.setAttribute('aria-pressed', x.id === current ? 'true' : 'false');
+    });
+
+    if (!openDay && current === 'self') {
+      // walk-in closed today; show the closed state and nudge to guided/match
+      setZones([]);
+      hintEl.textContent = 'On this kind of day the walk-in route is closed, so nothing here is open to self-guided visitors.';
+      cardEl.className = 'op__card op__card--closed';
+      cardEl.innerHTML =
+        '<p class="op__card-tag">Closed to walk-ins today</p>' +
+        '<h3 class="op__card-h">You cannot just walk in on a match or event day</h3>' +
+        '<p class="op__card-p">On Hertha BSC home games and major events the visitor centre closes and the self-guided route is off. You have two good moves instead:</p>' +
+        '<div class="op__facts" style="margin-top:10px"><span class="op__fact">Book a guided tour</span><span class="op__fact">Or go to the event itself</span></div>' +
+        '<p class="op__verdict"><b>Simple fix:</b> if you specifically want to see the inside, check olympiastadion.berlin for a guided tour slot on your date. If the fixture or concert appeals, buy a ticket and see the bowl full instead.</p>';
+      resize();
+      return;
+    }
+
+    setZones(m.zones);
+    hintEl.textContent = 'Green areas are what you reach on this visit. Faded areas stay off-limits.';
+    cardEl.className = 'op__card';
+    var facts = '<div class="op__facts">' +
+      '<span class="op__fact">' + m.price + '</span>' +
+      '<span class="op__fact">⏱ ' + m.dur + '</span>' +
+      '<span class="op__fact">' + m.time + '</span>' +
+      '</div>';
+    var addon = m.addon ? '<p class="op__card-p">' + m.addon + '</p>' : '';
+    var evNote = (!openDay && m.eventNote) ? '<p class="op__card-p" style="color:#8a1a1a;font-weight:600">' + m.eventNote + '</p>' : '';
+    cardEl.innerHTML =
+      '<p class="op__card-tag">' + m.tag + '</p>' +
+      '<h3 class="op__card-h">' + m.name + '</h3>' +
+      facts +
+      '<p class="op__card-p">' + m.body + '</p>' +
+      addon + evNote +
+      '<p class="op__verdict">' + m.verdict + '</p>';
+    resize();
+  }
+
+  function resize() {
+    if (window.requestAnimationFrame) window.requestAnimationFrame(function(){});
+  }
+
+  dayOpen.addEventListener('click', function () { openDay = true; render(); });
+  dayEvent.addEventListener('click', function () {
+    openDay = false;
+    if (current === 'self') current = 'guided';
+    render();
+  });
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

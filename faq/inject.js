@@ -198,7 +198,8 @@
   "markthalle-neun-berlin": "markthalle-neun-berlin",
   "currency-exchange-in-berlin": "currency-exchange-in-berlin",
   "gendarmenmarkt-berlin": "gendarmenmarkt-berlin",
-  "berlin-street-art": "berlin-street-art"
+  "berlin-street-art": "berlin-street-art",
+  "olympiastadion-berlin": "olympiastadion-berlin"
 };
 
   var SCHEMAS = {
@@ -9366,6 +9367,68 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Not really. My free walking tour stays in the older, medieval core of the city around Alexanderplatz and Museum Island, which is history rather than street art. But Haus Schwarzenberg, the easiest street art in the city, is only about five minutes from where the tour ends near Hackescher Markt, so it is an easy add straight afterwards."
+        }
+      }
+    ]
+  },
+  "olympiastadion-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can you visit Olympiastadion Berlin, and how much does it cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. On normal open days you can walk in without booking. A self-guided ticket is 11 EUR for adults, 8 EUR reduced, and 6 EUR for children aged 6 to 14, bought at the visitor centre at Olympischer Platz 3 or online. A 4 EUR multimedia guide adds a GPS audio tour of about 75 to 100 minutes in English."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the opening hours of Olympiastadion Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "On open days the self-guided visit usually runs from around 11:00 to 18:00, with last entry about 30 minutes before closing. The hours change often depending on matches and events and can change at short notice, so check olympiastadion.berlin for your exact date before you head out."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Olympiastadion open on match days and event days?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not for walk-ins. On Hertha BSC home games and major events the visitor centre closes and the self-guided route stops. On those days only guided tours run, and they sell out, so book ahead. If your date is an event day, it is often better to see the match or concert itself."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you get to Olympiastadion by public transport?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Take S-Bahn line S3 or S9 to S Olympiastadion, or U-Bahn line U2 to Olympia-Stadion. Both stations are a short walk from the gates and both sit inside Berlin's AB fare zone, so a normal Berlin city ticket covers the trip. It is about 20 to 30 minutes from the centre."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is there to see at Olympiastadion?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The stands and bowl, the running track, and the Marathon Gate with its eternal-flame cauldron and the original cracked 1936 Olympic bell displayed at ground level. This is where Jesse Owens won four gold medals in 1936. A guided tour also reaches the players' tunnel and dressing rooms, and the separate Glockenturm bell tower gives the widest view over the Olympic Park."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is Olympiastadion Berlin historically important?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It was built for the 1936 Summer Olympics under the Nazi regime as a showcase of power, with the neighbouring Maifeld used for rallies. Those Games are remembered above all for Jesse Owens, the Black American athlete whose four golds undercut Nazi racial propaganda. The stadium survived the war, was renovated for the 2006 World Cup, and hosted the Euro 2024 final."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Olympiastadion worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If you have an interest in history or sport, yes. Standing in the bowl where the 1936 Games happened, and reading how the site has been reused since, is genuinely moving. It is out in the west and takes a half-morning, so it suits a slower day rather than a packed first-time itinerary. Seeing a Hertha match is the most memorable way to experience it."
         }
       }
     ]
