@@ -197,7 +197,8 @@
   "u-bahn-vs-s-bahn-berlin": "u-bahn-vs-s-bahn-berlin",
   "markthalle-neun-berlin": "markthalle-neun-berlin",
   "currency-exchange-in-berlin": "currency-exchange-in-berlin",
-  "gendarmenmarkt-berlin": "gendarmenmarkt-berlin"
+  "gendarmenmarkt-berlin": "gendarmenmarkt-berlin",
+  "berlin-street-art": "berlin-street-art"
 };
 
   var SCHEMAS = {
@@ -9303,6 +9304,68 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "In December the square hosts one of Berlin's best-known Christmas markets, with a small entry fee on busy days. Outside the festive season the square is open and free. Dates change each year, so check the current listing before you go."
+        }
+      }
+    ]
+  },
+  "berlin-street-art": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where is the best street art in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The strongest street art is out of the tourist centre, in Friedrichshain and Kreuzberg. The East Side Gallery and the RAW-Gelände are both near Warschauer Straße, and Kreuzberg around Kottbusser Tor has the big murals, including Victor Ash's \"Astronaut Cosmonaut\". For something central and quick, Haus Schwarzenberg by Hackescher Markt is the easiest to reach."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is street art in Berlin free to see?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Almost all of it is. The East Side Gallery, RAW-Gelände, the Kreuzberg murals, Haus Schwarzenberg and the Mauerpark wall are all outdoors and free. The Urban Nation museum is also free to enter. The main exception is Teufelsberg, which charges an entry fee of around 10 euros."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the East Side Gallery the same as Berlin street art?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It is the most famous piece of it, but not the whole story. The East Side Gallery is a 1.3 km section of the Berlin Wall painted by artists in 1990, so it is Wall history as well as street art. Berlin's living street art scene is spread across Friedrichshain, Kreuzberg, Schöneberg and beyond, and it changes constantly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the closest street art to the Berlin city centre?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Haus Schwarzenberg, a courtyard at Rosenthaler Straße 39 next to the Hackesche Höfe by Hackescher Markt. It is free, open 24 hours, and covered in paste-ups and murals that are repainted almost weekly. It is about five minutes on foot from where my walking tour finishes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Teufelsberg worth visiting for street art?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on your time. Teufelsberg is an abandoned Cold War listening station in the Grunewald forest, covered in what is often called Europe's largest open-air street art gallery. It is a great half-day if you love street art or Cold War ruins, but it costs around 10 euros, involves a real walk from the S-Bahn, and is easy to skip on a tight first visit."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is graffiti legal in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Unauthorised graffiti is illegal, as it is anywhere, but Berlin also has legal and tolerated walls where painting is allowed, such as the Mauerpark wall and parts of the RAW-Gelände. That mix of official commissions and tolerated free walls is a big reason the city has so much of it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I see street art on your Berlin walking tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not really. My free walking tour stays in the older, medieval core of the city around Alexanderplatz and Museum Island, which is history rather than street art. But Haus Schwarzenberg, the easiest street art in the city, is only about five minutes from where the tour ends near Hackescher Markt, so it is an easy add straight afterwards."
         }
       }
     ]
