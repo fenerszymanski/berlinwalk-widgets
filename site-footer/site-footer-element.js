@@ -1,5 +1,6 @@
 const BW_SITE_FOOTER_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
-const BW_SITE_FOOTER_LOGO_URL = 'https://static.wixstatic.com/media/5a08a3_2f62d59b419643c0994771fac5765c79~mv2.png';
+const BW_SITE_FOOTER_SCRIPT_URL = (document.currentScript && document.currentScript.src) || 'https://fenerszymanski.github.io/berlinwalk-widgets/site-footer/site-footer-element.js';
+const BW_SITE_FOOTER_LOGO_URL = new URL('../assets/berlinwalk-wordmark-yellow.png', BW_SITE_FOOTER_SCRIPT_URL).href;
 const BW_SITE_FOOTER_LINKS = {
   home: 'https://www.berlinwalk.com/',
   meetingPoint: 'https://www.berlinwalk.com/meeting-point',
@@ -139,11 +140,10 @@ class BWSiteFooterElement extends HTMLElement {
 
         .bw-site-footer .bw-logo-link {
           align-items: center;
-          background: var(--cream);
-          border-radius: 6px;
+          background: transparent;
           display: inline-flex;
           margin-bottom: 18px;
-          padding: 10px 12px;
+          padding: 0;
           text-decoration: none;
         }
 
@@ -439,7 +439,7 @@ class BWSiteFooterElement extends HTMLElement {
           <div class="bw-footer-main">
             <div class="bw-footer-brand">
               <a class="bw-logo-link" href="${BW_SITE_FOOTER_LINKS.home}" aria-label="BerlinWalk home">
-                <img class="bw-logo-img" src="${BW_SITE_FOOTER_LOGO_URL}" alt="BerlinWalk" width="1080" height="450" loading="lazy" decoding="async">
+                <img class="bw-logo-img" src="${BW_SITE_FOOTER_LOGO_URL}" alt="BerlinWalk" width="897" height="188" loading="lazy" decoding="async">
               </a>
               <p>Free tip-based walking tours through Berlin's historic centre, built for travellers who want the city to make sense while they are standing inside it.</p>
               ${this._renderSocialLinks()}

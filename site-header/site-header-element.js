@@ -1,4 +1,5 @@
-const BW_HEADER_LOGO_URL = 'https://static.wixstatic.com/media/5a08a3_2f62d59b419643c0994771fac5765c79~mv2.png';
+const BW_HEADER_SCRIPT_URL = (document.currentScript && document.currentScript.src) || 'https://fenerszymanski.github.io/berlinwalk-widgets/site-header/site-header-element.js';
+const BW_HEADER_LOGO_URL = new URL('../assets/berlinwalk-wordmark-green.png', BW_HEADER_SCRIPT_URL).href;
 const BW_HEADER_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
 const BW_HEADER_LINKS = {
   home: 'https://www.berlinwalk.com/',
@@ -393,7 +394,7 @@ class BWHeaderElement extends HTMLElement {
 
         .bw-header-logo img {
           display: block;
-          height: 72px;
+          height: 40px;
           transition: height 200ms ease;
           width: auto;
         }
@@ -646,7 +647,7 @@ class BWHeaderElement extends HTMLElement {
         }
 
         .bw-header-shrunk .bw-header-logo img {
-          height: 52px;
+          height: 32px;
         }
 
         .bw-header-shrunk .bw-header-book {
@@ -717,8 +718,8 @@ class BWHeaderElement extends HTMLElement {
           background: #FFFFFF;
           border-radius: 6px;
           display: block;
-          height: 40px;
-          padding: 4px 8px;
+          height: 34px;
+          padding: 5px 9px;
           width: auto;
         }
 
@@ -838,7 +839,7 @@ class BWHeaderElement extends HTMLElement {
           }
           .bw-header-logo img {
             display: block !important;
-            height: 56px !important;
+            height: 36px !important;
             max-width: 200px;
             width: auto !important;
           }
@@ -851,7 +852,7 @@ class BWHeaderElement extends HTMLElement {
             padding: 8px 18px !important;
           }
           .bw-header-shrunk .bw-header-logo img {
-            height: 44px !important;
+            height: 30px !important;
           }
         }
       </style>
@@ -875,7 +876,7 @@ class BWHeaderElement extends HTMLElement {
         <header class="bw-header" role="banner">
           <div class="bw-header-inner bw-header-main">
             <a class="bw-header-logo" href="${BW_HEADER_LINKS.home}" aria-label="BerlinWalk home">
-              <img src="${BW_HEADER_LOGO_URL}" alt="BerlinWalk" width="1080" height="450" loading="eager" decoding="async">
+              <img src="${BW_HEADER_LOGO_URL}" alt="BerlinWalk" width="897" height="188" loading="eager" decoding="async">
             </a>
 
             <nav class="bw-header-nav" aria-label="Primary">
@@ -940,7 +941,7 @@ class BWHeaderElement extends HTMLElement {
         <div id="bw-header-mobile-menu" class="bw-header-mobile" aria-hidden="true" aria-label="Mobile menu">
           <div class="bw-header-mobile-inner">
             <div class="bw-header-mobile-head">
-              <img src="${BW_HEADER_LOGO_URL}" alt="BerlinWalk" width="1080" height="450">
+              <img src="${BW_HEADER_LOGO_URL}" alt="BerlinWalk" width="897" height="188">
               <button class="bw-header-mobile-close" type="button" aria-label="Close menu">×</button>
             </div>
 
