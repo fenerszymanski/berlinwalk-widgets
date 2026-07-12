@@ -459,9 +459,12 @@
         wrapper.style.alignSelf = 'start';
         wrapper.style.justifySelf = 'stretch';
         wrapper.style.placeSelf = 'start stretch';
+        wrapper.style.height = 'auto';
         wrapper.style.maxWidth = '100%';
+        wrapper.style.minHeight = '0';
         wrapper.style.minWidth = '0';
-        wrapper.style.overflowX = 'hidden';
+        wrapper.style.overflowX = 'clip';
+        wrapper.style.overflowY = 'visible';
         wrapper.style.width = '100%';
 
         container.style.alignItems = 'start';
@@ -469,17 +472,23 @@
         container.style.gridTemplateRows = 'auto';
         container.style.height = 'auto';
         container.style.maxWidth = '100%';
+        container.style.minHeight = '0';
         container.style.minWidth = '0';
-        container.style.overflowX = 'hidden';
+        container.style.overflowX = 'clip';
+        container.style.overflowY = 'visible';
 
         section.style.height = 'auto';
         section.style.maxWidth = '100%';
         section.style.minHeight = '0';
         section.style.minWidth = '0';
-        section.style.overflowX = 'hidden';
+        section.style.overflowX = 'clip';
+        section.style.overflowY = 'visible';
+        this.style.height = 'auto';
         this.style.maxWidth = '100%';
+        this.style.minHeight = '0';
         this.style.minWidth = '0';
-        this.style.overflowX = 'hidden';
+        this.style.overflowX = 'clip';
+        this.style.overflowY = 'visible';
         this.dataset.bwWixLayoutFixed = 'true';
       };
 
