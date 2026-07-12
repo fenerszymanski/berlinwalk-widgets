@@ -338,8 +338,9 @@
     var path = window.location.pathname.toLowerCase();
     var isBookingService = path === '/book-berlin-walking-tour' || path.indexOf('/book-berlin-walking-tour/') === 0;
     var isBookingForm = path.indexOf('/booking-form') === 0;
+    var isBookingConfirmation = path.indexOf('/booking-confirmation') === 0;
     var isThankYou = path.indexOf('/thank-you-page') === 0;
-    var isBookingFlow = isBookingService || isBookingForm || path.indexOf('/booking-confirmation') === 0 || isThankYou;
+    var isBookingFlow = isBookingService || isBookingForm || isBookingConfirmation || isThankYou;
     if (!isBookingFlow) return;
 
     var params = new URLSearchParams(window.location.search || '');
@@ -488,7 +489,21 @@
       beaconFallback();
     }
 
+    function bookingCompleteKey() {
+      var match = path.match(/\/(?:thank-you-page|booking-confirmation)\/([^\/?#]+)/);
+      return 'bwBookingCompleteFired:' + (match ? match[1] : path);
+    }
+
+    function bookingCompleteAlreadyFired() {
+      try { return Boolean(window.localStorage.getItem(bookingCompleteKey())); } catch (err) { return false; }
+    }
+
+    function markBookingCompleteFired() {
+      try { window.localStorage.setItem(bookingCompleteKey(), new Date().toISOString()); } catch (err) {}
+    }
+
     function sendEvent(name, detail) {
+      if (name === 'bw_booking_complete' && bookingCompleteAlreadyFired()) return false;
       if (!analyticsAllowed()) return false;
       var state = ensureTracking();
       if (!state) return false;
@@ -506,6 +521,7 @@
         if (typeof window.gtag === 'function') window.gtag('event', name, payload);
       } catch (err) {}
       sendEndpoint(name, payload, state);
+      if (name === 'bw_booking_complete') markBookingCompleteFired();
       return true;
     }
 
@@ -517,7 +533,7 @@
     function sendInitialBookingEvents() {
       if (isBookingService) once('booking_page_view', 'bw_booking_page_view', {});
       if (isBookingForm) once('booking_form_view', 'bw_booking_form_view', {});
-      if (isThankYou) once('booking_complete', 'bw_booking_complete', {});
+      if (isBookingConfirmation || isThankYou) once('booking_complete', 'bw_booking_complete', {});
     }
 
     document.addEventListener('bwBookingFunnelEvent', function (event) {
