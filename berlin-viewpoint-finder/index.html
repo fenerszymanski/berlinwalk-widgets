@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Berlin Viewpoint Finder — Which High View Is Worth Paying For</title>
+<meta name="description" content="Compare Berlin's public high viewpoints by real height, price, and how you get up. Tap a tower on the skyline, or pick what matters most, and see which view is worth your money." />
+<link rel="stylesheet" href="../css/brand.css" />
+<script defer src="../js/brand.js"></script>
+<style>
+  .vpf {
+    font-family: 'Montserrat', system-ui, sans-serif;
+    color: var(--bw-text);
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 4px 4px 12px;
+    box-sizing: border-box;
+  }
+  .vpf *, .vpf *::before, .vpf *::after { box-sizing: border-box; }
+  .vpf__head {
+    background: var(--bw-green);
+    color: #fff;
+    border-radius: 16px 16px 0 0;
+    padding: 18px 20px 16px;
+  }
+  .vpf__kicker {
+    font-size: 11px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--bw-yellow); margin: 0 0 6px;
+  }
+  .vpf__title { font-size: 21px; font-weight: 800; margin: 0 0 4px; line-height: 1.25; }
+  .vpf__sub { font-size: 13.5px; margin: 0; color: #E8F0E0; line-height: 1.5; }
+  .vpf__body {
+    background: var(--bw-white);
+    border: 1px solid var(--bw-border);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    padding: 16px 16px 20px;
+  }
+  .vpf__label {
+    display: block; font-size: 12px; font-weight: 700; color: var(--bw-muted);
+    margin: 2px 0 8px; text-transform: uppercase; letter-spacing: .05em;
+  }
+  .vpf__pills { display: flex; flex-wrap: wrap; gap: 7px; }
+  .vpf__pill {
+    font-family: inherit; font-size: 12.5px; font-weight: 700; cursor: pointer;
+    padding: 8px 12px; border-radius: 999px; border: 1.5px solid var(--bw-border);
+    background: var(--bw-cream); color: var(--bw-text); line-height: 1.2;
+  }
+  .vpf__pill:hover { border-color: var(--bw-lime); }
+  .vpf__pill.is-active { background: var(--bw-green); border-color: var(--bw-green); color: #fff; }
+
+  .vpf__rec {
+    margin: 12px 0 4px; padding: 11px 13px; border-radius: 11px;
+    background: var(--bw-lime-soft); border: 1px solid var(--bw-border);
+    font-size: 13px; line-height: 1.5; color: var(--bw-text);
+    display: none;
+  }
+  .vpf__rec.is-on { display: block; }
+  .vpf__rec b { color: var(--bw-green); }
+
+  .vpf__stage {
+    margin: 14px 0 4px; background: linear-gradient(180deg,#EAF2FB 0%,#F5F9F0 78%,#EDF3E2 100%);
+    border: 1px solid var(--bw-border); border-radius: 13px; padding: 8px 6px 4px;
+  }
+  .vpf__svg { width: 100%; height: auto; display: block; }
+  .vpf__tower { cursor: pointer; }
+  .vpf__tower rect.body { transition: opacity .18s ease; }
+  .vpf__tower.dim { opacity: .32; }
+  .vpf__tower .sel-ring { opacity: 0; }
+  .vpf__tower.selected .sel-ring { opacity: 1; }
+  .vpf__cap { font-size: 11px; font-style: italic; color: var(--bw-muted); text-align: center; margin: 2px 0 0; line-height: 1.4; }
+
+  .vpf__card { margin-top: 14px; border: 1px solid var(--bw-border); border-radius: 13px; overflow: hidden; }
+  .vpf__card-top { background: var(--bw-green); color: #fff; padding: 13px 15px; }
+  .vpf__card-name { font-size: 17px; font-weight: 800; margin: 0; line-height: 1.25; }
+  .vpf__card-where { font-size: 12px; color: #D9EBC8; margin: 3px 0 0; font-weight: 600; }
+  .vpf__stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--bw-border); }
+  .vpf__stat { background: var(--bw-white); padding: 10px 8px; text-align: center; }
+  .vpf__stat b { display: block; font-size: 15px; font-weight: 800; color: var(--bw-green); line-height: 1.2; }
+  .vpf__stat span { display: block; font-size: 10.5px; color: var(--bw-muted); text-transform: uppercase; letter-spacing: .04em; margin-top: 3px; }
+  .vpf__card-body { padding: 12px 15px 15px; }
+  .vpf__row { font-size: 13px; line-height: 1.5; margin: 0 0 7px; }
+  .vpf__row:last-child { margin-bottom: 0; }
+  .vpf__row .k { font-weight: 800; color: var(--bw-text); }
+  .vpf__tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; }
+  .vpf__tag { font-size: 11px; font-weight: 700; padding: 4px 9px; border-radius: 999px;
+    background: var(--bw-lime-soft); color: var(--bw-green); border: 1px solid var(--bw-border); }
+  .vpf__hint { font-size: 11.5px; color: var(--bw-muted); text-align: center; margin: 10px 0 0; }
+
+  @media (max-width: 430px) {
+    .vpf__title { font-size: 19px; }
+    .vpf__stat b { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+<div class="vpf" id="vpf">
+  <div class="vpf__head">
+    <p class="vpf__kicker">Berlin Viewpoint Finder</p>
+    <h2 class="vpf__title">Which high view is actually worth paying for?</h2>
+    <p class="vpf__sub">Five public viewpoints, drawn to real height. Tap a tower, or pick what matters most to you.</p>
+  </div>
+  <div class="vpf__body">
+    <span class="vpf__label">What matters most?</span>
+    <div class="vpf__pills" id="vpfPills">
+      <button class="vpf__pill" data-pri="cheapest" type="button">Cheapest</button>
+      <button class="vpf__pill" data-pri="highest" type="button">Highest up</button>
+      <button class="vpf__pill" data-pri="nobooking" type="button">No booking</button>
+      <button class="vpf__pill" data-pri="openair" type="button">Open air</button>
+      <button class="vpf__pill" data-pri="sunset" type="button">Sunset</button>
+    </div>
+
+    <div class="vpf__rec" id="vpfRec"></div>
+
+    <div class="vpf__stage">
+      <svg class="vpf__svg" id="vpfSvg" viewBox="0 0 700 300" role="img" aria-label="Berlin viewpoints compared by real height"></svg>
+    </div>
+    <p class="vpf__cap">Bars are drawn to the real height of each public viewing level, from 24 m at the Reichstag dome to 203 m at the TV Tower.</p>
+
+    <div class="vpf__card" id="vpfCard"></div>
+
+    <p class="vpf__hint">Tap any tower to compare. Prices are 2026 adult rates and can change; the TV Tower uses dynamic pricing.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var VIEWS = [
+    {
+      id: 'reichstag', short: 'Reichstag', name: 'Reichstag Dome',
+      where: 'Government district, U/S Brandenburger Tor', m: 24,
+      price: 'Free', access: 'Spiral ramp', air: 'Open dome',
+      priceNum: 0,
+      what: 'A glass dome and roof terrace over the Bundestag, looking across the Tiergarten and the government quarter. You do not get a full skyline, but the building and the free price make it special.',
+      book: 'Yes. Register online in advance with your passport or ID. Free slots go days ahead in summer.',
+      best: 'Free views and modern architecture.',
+      tags: ['Free', 'Book ahead', 'Open air'],
+      pri: { cheapest: true, highest: false, nobooking: false, openair: true, sunset: true }
+    },
+    {
+      id: 'victory', short: 'Victory Col.', name: 'Victory Column (Siegessäule)',
+      where: 'Middle of the Tiergarten, Bus 100 stop', m: 51,
+      price: '~€4 cash', access: '285 steps', air: 'Open air',
+      priceNum: 4,
+      what: 'A narrow open balcony under the golden statue, with the straight sightline down Straße des 17. Juni to the Brandenburg Gate and a sea of green all around. No lift, just the climb.',
+      book: 'No. Walk up and pay in cash at the base. Bring coins.',
+      best: 'A cheap, active climb and the greenest view in the city.',
+      tags: ['Cheap', 'No booking', 'Open air', 'Stairs only'],
+      pri: { cheapest: true, highest: false, nobooking: true, openair: true, sunset: false }
+    },
+    {
+      id: 'panoramapunkt', short: 'Panorama-\npunkt', name: 'Panoramapunkt (Kollhoff Tower)',
+      where: 'Potsdamer Platz, U/S Potsdamer Platz', m: 100,
+      price: '€9', access: '20s lift', air: 'Open terrace',
+      priceNum: 9,
+      what: 'An open terrace 100 m over Potsdamer Platz reached by the fastest lift in Europe. Real wind, no glass, a café, and an open-air history exhibition about the square below. My pick for value.',
+      book: 'No timed slot needed. Walk up and buy a ticket, or skip the short line with an online ticket.',
+      best: 'Best value and an open-air terrace without the crowds.',
+      tags: ['Best value', 'No booking', 'Open air', 'Sunset'],
+      pri: { cheapest: false, highest: false, nobooking: true, openair: true, sunset: true }
+    },
+    {
+      id: 'parkinn', short: 'Park Inn', name: 'Park Inn Panorama Terrasse',
+      where: 'Alexanderplatz, next to the TV Tower', m: 120,
+      price: '€6', access: 'Lift', air: 'Open roof',
+      priceNum: 6,
+      what: 'The open roof of a 1970s hotel on the 39th floor, facing the TV Tower head-on. It is the best place to photograph the Fernsehturm itself, and it is almost never busy.',
+      book: 'No. Take the lift from the lobby and pay at the top. Cash or card.',
+      best: 'The best TV Tower photo and a quiet open rooftop.',
+      tags: ['Cheap', 'No booking', 'Open air', 'TV Tower photo'],
+      pri: { cheapest: true, highest: false, nobooking: true, openair: true, sunset: true }
+    },
+    {
+      id: 'tvtower', short: 'TV Tower', name: 'Fernsehturm (TV Tower)',
+      where: 'Alexanderplatz, U/S Alexanderplatz', m: 203,
+      price: 'from €24.50', access: '40s lift', air: 'Enclosed',
+      priceNum: 24.5,
+      what: 'The 203 m enclosed deck inside the tower you can see from half of Berlin, plus a revolving restaurant above it. It is the highest and the most iconic public view, and by far the most expensive.',
+      book: 'Strongly recommended. Prices are dynamic and rise close to the date, and walk-up queues can be long.',
+      best: 'The highest, most iconic view, if you plan and pay for it.',
+      tags: ['Highest', 'Most iconic', 'Book ahead', 'Enclosed'],
+      pri: { cheapest: false, highest: true, nobooking: false, openair: false, sunset: false }
+    }
+  ];
+
+  var REC = {
+    cheapest: { pick: 'reichstag', text: 'the <b>Reichstag Dome</b> is free, but you must register in advance with your passport. No registration in hand? The <b>Victory Column</b> is about €4 in cash with no booking.' },
+    highest: { pick: 'tvtower', text: 'the <b>Fernsehturm</b> at 203 m is the highest public view in Berlin. Book a time slot online so you skip the queue and lock a lower price.' },
+    nobooking: { pick: 'panoramapunkt', text: 'the <b>Panoramapunkt</b> is a walk-up: pay €9, up in 20 seconds, open air, rarely a long wait. The <b>Park Inn roof</b> nearby is even cheaper at €6.' },
+    openair: { pick: 'panoramapunkt', text: 'the <b>Panoramapunkt</b> terrace puts real wind and no glass between you and the city, 100 m over Potsdamer Platz. The <b>Park Inn roof</b> is the open-air budget option.' },
+    sunset: { pick: 'panoramapunkt', text: 'the open west-facing <b>Panoramapunkt</b> terrace looks straight into the sunset over Potsdamer Platz. Check the summer closing time, usually 7pm, so you are not turned away.' }
+  };
+
+  var svg = document.getElementById('vpfSvg');
+  var card = document.getElementById('vpfCard');
+  var rec = document.getElementById('vpfRec');
+  var pills = document.getElementById('vpfPills');
+  var selected = 'tvtower';
+  var activePri = null;
+
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  var MAXM = 203;
+  var baseY = 262, topPad = 26, plotH = baseY - topPad;
+  var n = VIEWS.length, slot = 700 / n, barW = 62;
+
+  function el(name, attrs) {
+    var e = document.createElementNS(SVGNS, name);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+
+  function buildSvg() {
+    // ground line
+    svg.appendChild(el('line', { x1: 0, y1: baseY, x2: 700, y2: baseY, stroke: '#B9C9A6', 'stroke-width': 2 }));
+    VIEWS.forEach(function (v, i) {
+      var h = Math.max(14, (v.m / MAXM) * plotH);
+      var cx = i * slot + slot / 2;
+      var x = cx - barW / 2;
+      var y = baseY - h;
+      var g = el('g', { class: 'vpf__tower', tabindex: 0, role: 'button' });
+      g.setAttribute('data-id', v.id);
+      g.setAttribute('aria-label', v.name + ', ' + v.m + ' metres');
+      // selection ring
+      g.appendChild(el('rect', { class: 'sel-ring', x: x - 4, y: y - 4, width: barW + 8, height: h + 4, rx: 8, fill: 'none', stroke: 'var(--bw-yellow)', 'stroke-width': 3 }));
+      // tower body
+      g.appendChild(el('rect', { class: 'body', x: x, y: y, width: barW, height: h, rx: 5, fill: 'var(--bw-green)' }));
+      // little cap band
+      g.appendChild(el('rect', { class: 'body', x: x, y: y, width: barW, height: Math.min(9, h), rx: 5, fill: 'var(--bw-lime)' }));
+      // height label
+      var hl = el('text', { x: cx, y: y - 8, 'text-anchor': 'middle', 'font-size': 13, 'font-weight': 800, fill: '#1B5E20', 'font-family': 'Montserrat, sans-serif' });
+      hl.textContent = v.m + ' m';
+      g.appendChild(hl);
+      // name label(s) below baseline
+      var parts = v.short.split('\n');
+      parts.forEach(function (p, pi) {
+        var nl = el('text', { x: cx, y: baseY + 16 + pi * 12, 'text-anchor': 'middle', 'font-size': 11, 'font-weight': 700, fill: '#4E5A4E', 'font-family': 'Montserrat, sans-serif' });
+        nl.textContent = p;
+        g.appendChild(nl);
+      });
+      g.addEventListener('click', function () { select(v.id); });
+      g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(v.id); } });
+      svg.appendChild(g);
+    });
+  }
+
+  function paint() {
+    var towers = svg.querySelectorAll('.vpf__tower');
+    towers.forEach(function (t) {
+      var id = t.getAttribute('data-id');
+      t.classList.toggle('selected', id === selected);
+      var dim = false;
+      if (activePri) {
+        var v = VIEWS.filter(function (x) { return x.id === id; })[0];
+        dim = !(v && v.pri[activePri]);
+      }
+      t.classList.toggle('dim', dim);
+    });
+  }
+
+  function renderCard(id) {
+    var v = VIEWS.filter(function (x) { return x.id === id; })[0];
+    if (!v) return;
+    var tags = v.tags.map(function (t) { return '<span class="vpf__tag">' + t + '</span>'; }).join('');
+    card.innerHTML =
+      '<div class="vpf__card-top">' +
+        '<p class="vpf__card-name">' + v.name + '</p>' +
+        '<p class="vpf__card-where">' + v.where + '</p>' +
+      '</div>' +
+      '<div class="vpf__stats">' +
+        '<div class="vpf__stat"><b>' + v.m + ' m</b><span>Height</span></div>' +
+        '<div class="vpf__stat"><b>' + v.price + '</b><span>Adult</span></div>' +
+        '<div class="vpf__stat"><b>' + v.access + '</b><span>Getting up</span></div>' +
+      '</div>' +
+      '<div class="vpf__card-body">' +
+        '<p class="vpf__row">' + v.what + '</p>' +
+        '<p class="vpf__row"><span class="k">Booking:</span> ' + v.book + '</p>' +
+        '<p class="vpf__row"><span class="k">Best for:</span> ' + v.best + '</p>' +
+        '<div class="vpf__tags">' + tags + '</div>' +
+      '</div>';
+  }
+
+  function select(id) {
+    selected = id;
+    renderCard(id);
+    paint();
+  }
+
+  function setPri(p) {
+    if (activePri === p) { activePri = null; }
+    else { activePri = p; }
+    // update pill states
+    pills.querySelectorAll('.vpf__pill').forEach(function (b) {
+      b.classList.toggle('is-active', b.getAttribute('data-pri') === activePri);
+    });
+    if (activePri && REC[activePri]) {
+      rec.classList.add('is-on');
+      rec.innerHTML = 'For <b>' + pills.querySelector('[data-pri="' + activePri + '"]').textContent.toLowerCase() + '</b>: ' + REC[activePri].text;
+      selected = REC[activePri].pick;
+      renderCard(selected);
+    } else {
+      rec.classList.remove('is-on');
+    }
+    paint();
+  }
+
+  pills.addEventListener('click', function (e) {
+    var b = e.target.closest('.vpf__pill');
+    if (b) setPri(b.getAttribute('data-pri'));
+  });
+
+  buildSvg();
+  select('tvtower');
+})();
+</script>
+</body>
+</html>
