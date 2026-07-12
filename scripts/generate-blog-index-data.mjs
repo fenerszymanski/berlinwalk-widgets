@@ -541,6 +541,8 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if (/(berlin-observation-decks|observation deck|observation decks|viewpoint finder)/.test(s)) return 'berlin-landmarks-map';
+  if (/(tiergarten-berlin|tiergarten)/.test(s)) return 'victory-column-climb-planner';
   if (/(u-bahn-vs-s-bahn-berlin|u-bahn vs s-bahn|s-bahn vs u-bahn|ubahn vs sbahn|which berlin train|berlin rail decoder)/.test(s)) return 'berlin-rail-decoder';
   if (/(markthalle-neun-berlin|markthalle neun|markthalle ix|street food thursday)/.test(s)) return 'markthalle-neun-week-planner';
   if (/(currency-exchange-in-berlin|currency exchange|exchange money|change money|money exchange|where to exchange)/.test(s)) return 'berlin-atm-fee-checker';
