@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Berlin Name Pronouncer — Say the Station Names Right</title>
+<meta name="description" content="Tap a Berlin station or district name to see a simple English-style respelling, the stressed syllable, the sounds that trip tourists up, and hear it spoken in German. Built for visitors who do not want to mangle Schönhauser Allee or Gesundbrunnen." />
+<link rel="stylesheet" href="../css/brand.css" />
+<script defer src="../js/brand.js"></script>
+<style>
+  .bnp {
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+    color: var(--bw-text);
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4px 4px 14px;
+    box-sizing: border-box;
+  }
+  .bnp *, .bnp *::before, .bnp *::after { box-sizing: border-box; }
+
+  .bnp__head {
+    background: var(--bw-green);
+    color: #fff;
+    border-radius: 16px 16px 0 0;
+    padding: 18px 20px 16px;
+  }
+  .bnp__kicker {
+    font-size: 11px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--bw-yellow); margin: 0 0 6px;
+  }
+  .bnp__title { font-size: 21px; font-weight: 800; margin: 0 0 5px; line-height: 1.22; }
+  .bnp__sub { font-size: 13.5px; margin: 0; color: #E8F0E0; line-height: 1.5; }
+
+  .bnp__body {
+    background: var(--bw-white);
+    border: 1px solid var(--bw-border);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    padding: 16px 14px 18px;
+  }
+
+  /* ---- Focus card ---- */
+  .bnp__focus {
+    border: 1px solid var(--bw-border);
+    border-radius: 14px;
+    background: linear-gradient(180deg, #FBFDF6 0%, #FFFFFF 60%);
+    padding: 16px 16px 15px;
+    box-shadow: 0 2px 10px rgba(27,94,32,.06);
+  }
+  .bnp__meta {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    font-size: 11px; font-weight: 700; letter-spacing: .05em;
+    text-transform: uppercase; color: var(--bw-muted); margin: 0 0 6px;
+  }
+  .bnp__meta .bnp__mode { color: var(--bw-green); }
+  .bnp__name {
+    font-size: clamp(24px, 6.4vw, 34px); font-weight: 800;
+    line-height: 1.1; margin: 0; color: var(--bw-green);
+    letter-spacing: -.01em; word-break: break-word;
+  }
+  .bnp__say {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 5px;
+    margin: 10px 0 2px;
+  }
+  .bnp__syl {
+    font-size: clamp(16px, 4.4vw, 21px); font-weight: 700; color: #2a3a2a;
+    letter-spacing: .01em;
+  }
+  .bnp__syl.is-stress {
+    background: var(--bw-yellow); color: #123D18;
+    border-radius: 7px; padding: 1px 7px;
+  }
+  .bnp__dot { color: var(--bw-lime); font-weight: 700; opacity: .8; }
+  .bnp__row {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    margin-top: 12px;
+  }
+  .bnp__hear {
+    appearance: none; border: 0; cursor: pointer;
+    background: var(--bw-green); color: #fff;
+    font-family: inherit; font-size: 14px; font-weight: 700;
+    padding: 10px 16px; border-radius: 999px;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: background .15s ease, transform .05s ease;
+  }
+  .bnp__hear:hover { background: #164a1a; }
+  .bnp__hear:active { transform: translateY(1px); }
+  .bnp__hear[disabled] { opacity: .55; cursor: default; }
+  .bnp__hear.is-playing { background: var(--bw-lime); color: #123D18; }
+  .bnp__hint {
+    font-size: 12px; color: var(--bw-muted); line-height: 1.45; margin: 0;
+    flex: 1 1 180px; min-width: 150px;
+  }
+
+  .bnp__tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 13px 0 0; }
+  .bnp__tag {
+    font-size: 12px; font-weight: 600; color: #33502f;
+    background: var(--bw-lime-soft); border: 1px solid var(--bw-border);
+    border-radius: 999px; padding: 4px 10px; line-height: 1.3;
+  }
+  .bnp__gloss {
+    margin: 13px 0 0; padding-top: 12px; border-top: 1px dashed var(--bw-border);
+    font-size: 13.5px; line-height: 1.55; color: #33402f;
+  }
+  .bnp__gloss b { color: var(--bw-green); }
+  .bnp__where {
+    display: flex; align-items: flex-start; gap: 7px;
+    margin: 8px 0 0; font-size: 13px; line-height: 1.5; color: var(--bw-muted);
+  }
+  .bnp__where svg { flex: 0 0 15px; margin-top: 2px; }
+
+  /* ---- Filters ---- */
+  .bnp__filters {
+    display: flex; flex-wrap: wrap; gap: 7px; margin: 18px 0 10px;
+  }
+  .bnp__filter {
+    appearance: none; cursor: pointer; font-family: inherit;
+    font-size: 12.5px; font-weight: 700; color: var(--bw-muted);
+    background: #fff; border: 1.5px solid var(--bw-border);
+    border-radius: 999px; padding: 6px 12px; transition: all .12s ease;
+  }
+  .bnp__filter:hover { border-color: var(--bw-lime); color: var(--bw-green); }
+  .bnp__filter.is-on {
+    background: var(--bw-green); border-color: var(--bw-green); color: #fff;
+  }
+
+  /* ---- Name grid ---- */
+  .bnp__grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
+    gap: 8px;
+  }
+  .bnp__chip {
+    appearance: none; cursor: pointer; text-align: left; font-family: inherit;
+    background: #fff; border: 1.5px solid var(--bw-border);
+    border-radius: 11px; padding: 9px 11px; transition: all .12s ease;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .bnp__chip:hover { border-color: var(--bw-lime); background: #FBFDF6; }
+  .bnp__chip.is-active { border-color: var(--bw-green); background: #F2F8E8; box-shadow: 0 0 0 1px var(--bw-green) inset; }
+  .bnp__chip-name { font-size: 13.5px; font-weight: 700; color: var(--bw-text); line-height: 1.2; }
+  .bnp__chip-say { font-size: 11.5px; color: var(--bw-muted); line-height: 1.25; }
+  .bnp__chip-say b { color: #123D18; background: var(--bw-yellow); border-radius: 4px; padding: 0 4px; font-weight: 700; }
+  .bnp__empty { grid-column: 1 / -1; font-size: 13px; color: var(--bw-muted); padding: 10px 2px; }
+
+  /* ---- Cheat sheet ---- */
+  .bnp__cheat { margin-top: 16px; border: 1px solid var(--bw-border); border-radius: 12px; overflow: hidden; }
+  .bnp__cheat-btn {
+    width: 100%; appearance: none; cursor: pointer; font-family: inherit;
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    background: #F2F8E8; border: 0; padding: 12px 14px;
+    font-size: 13.5px; font-weight: 700; color: var(--bw-green); text-align: left;
+  }
+  .bnp__cheat-btn .bnp__chev { transition: transform .18s ease; }
+  .bnp__cheat.is-open .bnp__chev { transform: rotate(180deg); }
+  .bnp__cheat-body { display: none; padding: 4px 14px 14px; background: #fff; }
+  .bnp__cheat.is-open .bnp__cheat-body { display: block; }
+  .bnp__rule { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid #EFF3E6; font-size: 13px; line-height: 1.45; }
+  .bnp__rule:last-child { border-bottom: 0; }
+  .bnp__rule-k { flex: 0 0 74px; font-weight: 800; color: var(--bw-green); }
+  .bnp__rule-v { color: #33402f; }
+
+  @media (max-width: 420px) {
+    .bnp__grid { grid-template-columns: 1fr 1fr; }
+    .bnp__chip { padding: 8px 9px; }
+    .bnp__body { padding: 14px 11px 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="bnp">
+  <div class="bnp__head">
+    <p class="bnp__kicker">BerlinWalk.com · German Language</p>
+    <h1 class="bnp__title">Berlin Name Pronouncer</h1>
+    <p class="bnp__sub">Tap any station or district. See a plain English-style respelling, the syllable to stress, the sounds that trip visitors up, and hear it spoken in German.</p>
+  </div>
+  <div class="bnp__body">
+
+    <div class="bnp__focus" id="bnpFocus" aria-live="polite">
+      <!-- filled by JS -->
+    </div>
+
+    <div class="bnp__filters" id="bnpFilters" role="group" aria-label="Filter names"></div>
+
+    <div class="bnp__grid" id="bnpGrid"></div>
+
+    <div class="bnp__cheat" id="bnpCheat">
+      <button class="bnp__cheat-btn" id="bnpCheatBtn" aria-expanded="false">
+        <span>The five sounds that unlock most Berlin names</span>
+        <span class="bnp__chev" aria-hidden="true">▾</span>
+      </button>
+      <div class="bnp__cheat-body">
+        <div class="bnp__rule"><span class="bnp__rule-k">w = v</span><span class="bnp__rule-v">A German <b>w</b> is an English <b>v</b>. Wedding is "VED-ing", Warschauer is "VAR-show-er".</span></div>
+        <div class="bnp__rule"><span class="bnp__rule-k">z = ts</span><span class="bnp__rule-v"><b>z</b> is always "ts". Platz is "plats", Kreuz is "kroyts", Zoo is "tsoh".</span></div>
+        <div class="bnp__rule"><span class="bnp__rule-k">ei vs ie</span><span class="bnp__rule-v">Say the second letter's name: <b>ei</b> = "eye", <b>ie</b> = "ee". Friedrich is "FREE-drikh".</span></div>
+        <div class="bnp__rule"><span class="bnp__rule-k">ö / ü</span><span class="bnp__rule-v"><b>ö</b> is the vowel in "her" with rounded lips; <b>ü</b> is "ee" with rounded lips. Schön is "shurn".</span></div>
+        <div class="bnp__rule"><span class="bnp__rule-k">au / eu</span><span class="bnp__rule-v"><b>au</b> = "ow" as in cow (Hauptbahnhof); <b>eu</b> = "oy" (Kreuzberg, Neukölln).</span></div>
+        <div class="bnp__rule"><span class="bnp__rule-k">‑ow</span><span class="bnp__rule-v">In Berlin names, <b>‑ow</b> is a long "oh", not "ow". Pankow is "PAN-koh", never "PAN-cow".</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  var NAMES = [
+    { id:'alexanderplatz', de:'Alexanderplatz', syl:['ah','lex','AHN','der','platz'], stress:2,
+      sounds:['z = ts','stress the AHN'],
+      meaning:"Alexander's Square, named after a Russian tsar who visited in 1805.",
+      where:"U2 / U5 / U8 and S-Bahn hub. My free walking tour meets right here.",
+      groups:['use'] },
+    { id:'hauptbahnhof', de:'Hauptbahnhof', syl:['HOWPT','bahn','hohf'], stress:0,
+      sounds:['au = ow','Haupt = main'],
+      meaning:"'Main station', Berlin's huge glass central rail hub.",
+      where:"Where many visitors first arrive by train.",
+      groups:['use'] },
+    { id:'friedrichstrasse', de:'Friedrichstraße', syl:['FREE','drikh','shtrah','suh'], stress:0,
+      sounds:['ie = ee','str = shtr','ß = ss'],
+      meaning:"'Frederick Street', the central shopping and theatre axis.",
+      where:"U6 and S-Bahn, one block from Unter den Linden.",
+      groups:['use','trap'] },
+    { id:'zoologischer-garten', de:'Zoologischer Garten', syl:['tso','oh','LOH','gish','er','GAR','ten'], stress:2,
+      sounds:['Z = ts → "tso"','just say "Bahnhof Zoo"'],
+      meaning:"'Zoo station', the old heart of West Berlin.",
+      where:"U2 / U9 and S-Bahn, next to the actual zoo.",
+      groups:['use','trap'] },
+    { id:'warschauer-strasse', de:'Warschauer Straße', syl:['var','SHOW','er','SHTRAH','suh'], stress:1,
+      sounds:['W = V','sch = sh','au = ow'],
+      meaning:"Named after Warsaw; your gateway to Friedrichshain nightlife.",
+      where:"U1 / U3 and S-Bahn, beside the East Side Gallery.",
+      groups:['use','trap'] },
+    { id:'schoenhauser-allee', de:'Schönhauser Allee', syl:['SHURN','how','zer','ah','LAY'], stress:0,
+      sounds:['ö = "ur"','au = ow','Allee = ah-LAY'],
+      meaning:"A long Prenzlauer Berg avenue; 'schön' means pretty.",
+      where:"U8 and S-Bahn Ring, Sunday flea-market territory.",
+      groups:['use','umlaut'] },
+    { id:'gesundbrunnen', de:'Gesundbrunnen', syl:['guh','ZOONT','broo','nen'], stress:1,
+      sounds:['s = z','hard g','stress the ZOONT'],
+      meaning:"'Health spring', named after an old mineral well.",
+      where:"U8 and S-Bahn Ring, a big northern interchange.",
+      groups:['use','trap'] },
+    { id:'kottbusser-tor', de:'Kottbusser Tor', syl:['KOT','boo','ser','TOR'], stress:0,
+      sounds:['Tor = gate'],
+      meaning:"Kreuzberg's loud, alive crossroads. Locals just say 'Kotti'.",
+      where:"U1 / U3 / U8, late-night Kreuzberg.",
+      groups:['use'] },
+    { id:'kreuzberg', de:'Kreuzberg', syl:['KROYTS','bairk'], stress:0,
+      sounds:['eu = oy','z = ts → "kroyts"'],
+      meaning:"'Cross hill'. Turkish markets, street art and nightlife.",
+      where:"The district, not a single stop. You will hear it constantly.",
+      groups:['use','trap'] },
+    { id:'neukoelln', de:'Neukölln', syl:['noy','KURLN'], stress:1,
+      sounds:['eu = oy','ö = "ur"'],
+      meaning:"'New Cologne', the buzzy district south of Kreuzberg.",
+      where:"U7 / U8, home of the Maybachufer Turkish market.",
+      groups:['use','umlaut'] },
+    { id:'schoeneberg', de:'Schöneberg', syl:['SHUR','nuh','bairk'], stress:0,
+      sounds:['ö = "ur"'],
+      meaning:"'Pretty hill', a calm residential district.",
+      where:"Where JFK gave the 'Ich bin ein Berliner' speech in 1963.",
+      groups:['umlaut'] },
+    { id:'goerlitzer-bahnhof', de:'Görlitzer Bahnhof', syl:['GUR','lit','ser','BAHN','hohf'], stress:0,
+      sounds:['ö = "ur"','z = ts'],
+      meaning:"Kreuzberg park stop; locals shorten it to 'Görli'.",
+      where:"U1 / U3, next to Görlitzer Park.",
+      groups:['umlaut'] },
+    { id:'moeckernbruecke', de:'Möckernbrücke', syl:['MUR','kern','broo','kuh'], stress:0,
+      sounds:['ö = "ur"','ü = "ue"','Brücke = bridge'],
+      meaning:"A Kreuzberg canal interchange by the Technikmuseum.",
+      where:"U1 / U3 / U7.",
+      groups:['umlaut'] },
+    { id:'charlottenburg', de:'Charlottenburg', syl:['shar','LOT','ten','boork'], stress:1,
+      sounds:['ch = sh here','-burg = "boork"'],
+      meaning:"Queen Sophie Charlotte's old palace quarter in the west.",
+      where:"U7 / S-Bahn, near Schloss Charlottenburg.",
+      groups:['use'] },
+    { id:'hackescher-markt', de:'Hackescher Markt', syl:['HAK','esh','er','MARKT'], stress:0,
+      sounds:['ck = k','sch = sh'],
+      meaning:"Courtyards, boutiques and bars in the middle of Mitte.",
+      where:"S-Bahn, a short walk from where my tour explores.",
+      groups:['use'] },
+    { id:'prenzlauer-berg', de:'Prenzlauer Berg', syl:['PRENTS','low','er','bairk'], stress:0,
+      sounds:['z = ts → "Prents"','Berg = "bairk"'],
+      meaning:"Leafy café-and-playground district north of Mitte.",
+      where:"Around U2 Eberswalder Straße.",
+      groups:['trap'] },
+    { id:'wedding', de:'Wedding', syl:['VED','ing'], stress:0,
+      sounds:['W = V'],
+      meaning:"A working-class northern district, nothing to do with marriage.",
+      where:"U6 / U9. Say 'VED-ing', not the English word.",
+      groups:['use','trap'] },
+    { id:'treptower-park', de:'Treptower Park', syl:['TREP','toh','er','PARK'], stress:0,
+      sounds:['-ow = long "oh", not "ow"'],
+      meaning:"Riverside park with the vast Soviet War Memorial.",
+      where:"S-Bahn. Say 'TREP-toh', never 'TREP-tow'.",
+      groups:['ow'] },
+    { id:'pankow', de:'Pankow', syl:['PAN','koh'], stress:0,
+      sounds:['-ow = "oh"'],
+      meaning:"Northern district at the end of the U2.",
+      where:"Say 'PAN-koh'. 'PAN-cow' marks you as a visitor instantly.",
+      groups:['ow'] },
+    { id:'potsdamer-platz', de:'Potsdamer Platz', syl:['POTS','dah','mer','platz'], stress:0,
+      sounds:['z = ts','Platz = "plats"'],
+      meaning:"The rebuilt square where the Wall's death strip once ran.",
+      where:"U2 / S-Bahn, near the Panoramapunkt viewpoint.",
+      groups:['use'] }
+  ];
+
+  var FILTERS = [
+    { key:'all', label:'All 20 names' },
+    { key:'use', label:"Ones you'll actually use" },
+    { key:'umlaut', label:'ö / ü sounds' },
+    { key:'trap', label:'Common traps' },
+    { key:'ow', label:'The Berlin -ow tell' }
+  ];
+
+  var root = document.querySelector('.bnp');
+  var focusEl = root.querySelector('#bnpFocus');
+  var filtersEl = root.querySelector('#bnpFilters');
+  var gridEl = root.querySelector('#bnpGrid');
+  var cheatEl = root.querySelector('#bnpCheat');
+  var cheatBtn = root.querySelector('#bnpCheatBtn');
+
+  var state = { filter:'all', activeId:'alexanderplatz' };
+  var deVoice = null;
+  var voicesReady = false;
+
+  function pickGermanVoice() {
+    try {
+      if (!('speechSynthesis' in window)) return null;
+      var voices = window.speechSynthesis.getVoices() || [];
+      voicesReady = voices.length > 0;
+      var de = voices.filter(function (v) { return /^de(-|_|$)/i.test(v.lang || ''); });
+      if (!de.length) return null;
+      // Prefer a Germany voice, then any German voice.
+      var deDE = de.filter(function (v) { return /de[-_]DE/i.test(v.lang || ''); });
+      return (deDE[0] || de[0]) || null;
+    } catch (e) { return null; }
+  }
+
+  function refreshVoice() { deVoice = pickGermanVoice(); renderFocus(); }
+  if ('speechSynthesis' in window) {
+    deVoice = pickGermanVoice();
+    window.speechSynthesis.onvoiceschanged = refreshVoice;
+    // Safari sometimes needs a nudge.
+    setTimeout(function () { if (!deVoice) refreshVoice(); }, 400);
+  }
+
+  function byId(id) { for (var i=0;i<NAMES.length;i++){ if (NAMES[i].id===id) return NAMES[i]; } return NAMES[0]; }
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]; }); }
+
+  function sayLine(item, big) {
+    var out = [];
+    for (var i=0;i<item.syl.length;i++) {
+      var cls = 'bnp__syl' + (i===item.stress ? ' is-stress' : '');
+      out.push('<span class="'+cls+'">'+esc(item.syl[i])+'</span>');
+      if (i < item.syl.length-1) out.push('<span class="bnp__dot" aria-hidden="true">·</span>');
+    }
+    return out.join('');
+  }
+
+  function chipSay(item) {
+    // compact respelling for the grid chips
+    var parts = item.syl.map(function (s, i) {
+      return i===item.stress ? '<b>'+esc(s)+'</b>' : esc(s);
+    });
+    return parts.join('-');
+  }
+
+  function renderFocus() {
+    var item = byId(state.activeId);
+    var canHear = !!deVoice;
+    var hintText = canHear
+      ? "Spoken by your device's German voice."
+      : "No German voice on this device, so use the respelling and the sound guide below.";
+    var tags = item.sounds.map(function (s){ return '<span class="bnp__tag">'+esc(s)+'</span>'; }).join('');
+    focusEl.innerHTML =
+      '<p class="bnp__meta"><span class="bnp__mode">Say it right</span><span aria-hidden="true">·</span><span>'+esc(item.de)+'</span></p>' +
+      '<p class="bnp__name">'+esc(item.de)+'</p>' +
+      '<div class="bnp__say" aria-label="Pronunciation">'+sayLine(item)+'</div>' +
+      '<div class="bnp__row">' +
+        '<button class="bnp__hear" id="bnpHear" '+(canHear?'':'disabled')+' type="button">🔊 Hear it</button>' +
+        '<p class="bnp__hint">'+esc(hintText)+'</p>' +
+      '</div>' +
+      '<div class="bnp__tags">'+tags+'</div>' +
+      '<p class="bnp__gloss">'+item.meaning+'</p>' +
+      '<p class="bnp__where">' +
+        '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2C7.9 2 4.5 5.4 4.5 9.5c0 5.2 6.4 11.6 6.9 12.1a1 1 0 0 0 1.2 0c.5-.5 6.9-6.9 6.9-12.1C19.5 5.4 16.1 2 12 2Zm0 10.2a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4Z" fill="#7CB342"/></svg>' +
+        '<span>'+esc(item.where)+'</span>' +
+      '</p>';
+
+    var hearBtn = focusEl.querySelector('#bnpHear');
+    if (hearBtn) hearBtn.addEventListener('click', function () { speak(item, hearBtn); });
+  }
+
+  function speak(item, btn) {
+    try {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      var u = new SpeechSynthesisUtterance(item.de);
+      u.lang = (deVoice && deVoice.lang) || 'de-DE';
+      if (deVoice) u.voice = deVoice;
+      u.rate = 0.82; u.pitch = 1;
+      if (btn) {
+        btn.classList.add('is-playing');
+        u.onend = u.onerror = function () { btn.classList.remove('is-playing'); };
+      }
+      window.speechSynthesis.speak(u);
+    } catch (e) { if (btn) btn.classList.remove('is-playing'); }
+  }
+
+  function renderFilters() {
+    filtersEl.innerHTML = FILTERS.map(function (f) {
+      return '<button class="bnp__filter'+(state.filter===f.key?' is-on':'')+'" type="button" data-f="'+f.key+'">'+esc(f.label)+'</button>';
+    }).join('');
+    Array.prototype.forEach.call(filtersEl.querySelectorAll('.bnp__filter'), function (b) {
+      b.addEventListener('click', function () {
+        state.filter = b.getAttribute('data-f');
+        renderFilters(); renderGrid();
+      });
+    });
+  }
+
+  function visibleNames() {
+    if (state.filter==='all') return NAMES;
+    return NAMES.filter(function (n){ return n.groups.indexOf(state.filter) !== -1; });
+  }
+
+  function renderGrid() {
+    var list = visibleNames();
+    if (!list.length) { gridEl.innerHTML = '<p class="bnp__empty">No names in this group.</p>'; return; }
+    gridEl.innerHTML = list.map(function (n) {
+      return '<button class="bnp__chip'+(n.id===state.activeId?' is-active':'')+'" type="button" data-id="'+n.id+'">' +
+        '<span class="bnp__chip-name">'+esc(n.de)+'</span>' +
+        '<span class="bnp__chip-say">'+chipSay(n)+'</span>' +
+      '</button>';
+    }).join('');
+    Array.prototype.forEach.call(gridEl.querySelectorAll('.bnp__chip'), function (b) {
+      b.addEventListener('click', function () {
+        state.activeId = b.getAttribute('data-id');
+        renderFocus(); renderGrid();
+      });
+    });
+  }
+
+  cheatBtn.addEventListener('click', function () {
+    var open = cheatEl.classList.toggle('is-open');
+    cheatBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  renderFocus();
+  renderFilters();
+  renderGrid();
+})();
+</script>
+</body>
+</html>

@@ -201,7 +201,8 @@
   "berlin-street-art": "berlin-street-art",
   "olympiastadion-berlin": "olympiastadion-berlin",
   "tiergarten-berlin": "tiergarten-berlin",
-  "berlin-observation-decks": "berlin-observation-decks"
+  "berlin-observation-decks": "berlin-observation-decks",
+  "how-to-pronounce-berlin-station-names": "how-to-pronounce-berlin-station-names"
 };
 
   var SCHEMAS = {
@@ -9539,6 +9540,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "If you specifically want the highest and most famous Berlin view and you book ahead, it is worth it. If you mostly want a great open-air photo of the city without the crowds, the €9 Panoramapunkt or the €6 Park Inn roof give you more for far less money. Plenty of visitors end up happier at the cheaper open-air roofs."
+        }
+      }
+    ]
+  },
+  "how-to-pronounce-berlin-station-names": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do you pronounce Alexanderplatz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It is \"ah-lex-AHN-der-plats\", with the stress on \"AHN\" and the z said as \"ts\", so the end is \"plats\", not \"platz\". The square is named after Tsar Alexander I of Russia. Alexanderplatz is a U2, U5, U8 and S-Bahn hub, and it is where my free walking tour meets, so it is a good one to get right early."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the hardest part of German pronunciation for tourists?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Two things catch people most. First, the letter z, which is always \"ts\" (Platz is \"plats\", Kreuz is \"kroyts\"). Second, the umlauts ö and ü. For ö, say the vowel in \"her\" with rounded lips; for ü, say \"ee\" with rounded lips. You do not need them perfect, just close enough to be understood."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you say Schönhauser Allee and Gesundbrunnen?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Schönhauser Allee is \"SHURN-how-zer ah-LAY\", where ö sounds like \"ur\", au sounds like \"ow\", and Allee is stressed on the last syllable. Gesundbrunnen is \"guh-ZOONT-broo-nen\", with a hard g and the s said as \"z\". Both are large northern interchanges you may pass through."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do locals say Pankow and Treptow differently than they look?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In Berlin-area names the ending -ow is a long \"oh\", not the \"ow\" in \"cow\". So Pankow is \"PAN-koh\" and Treptow is \"TREP-toh\". Saying \"PAN-cow\" is the classic out-of-towner tell, and getting it right is an easy way to sound like you know the city."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to speak German to use Berlin public transport?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Signs are clear, many staff and ticket machines offer English, and you can always point at a map. But being able to say your stop, ask for it, and recognise it in an announcement removes a lot of stress. Learning three or four station names before you go is usually enough."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Berlin names should I learn to pronounce first?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The ones you will use on day one: your hotel's station, your airport station, and Alexanderplatz (\"ah-lex-AHN-der-plats\"). After that, add the districts you plan to visit, such as Kreuzberg (\"KROYTS-bairk\"), Neukölln (\"noy-KURLN\"), or Prenzlauer Berg (\"PRENTS-low-er bairk\")."
         }
       }
     ]
