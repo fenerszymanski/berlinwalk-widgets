@@ -10,8 +10,9 @@
  *
  * Self-contained UI: light DOM, instance state, no globals, no iframe, no
  * postMessage/resize, no MutationObserver, no external CSS/JS. The 30-day
- * photo batch loads from data/archive-current.json with a 10-photo inlined
- * fallback if the archive file is unavailable.
+ * photo batch loads from data/archive-current.json. There is no local photo
+ * fallback: everyone plays the same daily set, so if the archive cannot load
+ * the game shows a retry screen instead of a different set of photos.
  *
  * Mount:
  *   <bw-berlin-rewind-v2></bw-berlin-rewind-v2>
@@ -21,14 +22,14 @@
  *   <bw-berlin-rewind-result-games-v2></bw-berlin-rewind-result-games-v2>
  *   <script src=".../berlin-rewind-v2/berlin-rewind-v2-element.js" defer></script>
  *
- * Build marker: berlin-rewind-v2-year-only-rename-20260712
+ * Build marker: berlin-rewind-v2-canonical-set-20260712
  */
 (function () {
   'use strict';
 
   var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var GAMES_URL = 'https://www.berlinwalk.com/games?utm_source=berlin_rewind&utm_medium=result_screen&utm_campaign=berlinwalk_games&utm_content=play_other_games';
-  var BUILD = 'berlin-rewind-v2-year-only-rename-20260712';
+  var BUILD = 'berlin-rewind-v2-canonical-set-20260712';
   var TRACKING_ENDPOINT_PROD = 'https://app.berlinwalk.com/api/rewind-event';
   var TRACKING_ENDPOINT_LOCAL = 'http://127.0.0.1:5173/api/rewind-event';
   var LEADERBOARD_ENDPOINT_PROD = 'https://app.berlinwalk.com/api/rewind-leaderboard';
@@ -72,38 +73,6 @@
     'reinickendorf': { label: 'Reinickendorf', neighbors: ['mitte', 'pankow', 'charlottenburg-wilmersdorf', 'spandau'] }
   };
 
-  var PHOTOS = [
-    { id: 'ph_001', title: 'Traffic tower at Potsdamer Platz', year: 1924, tol: 1, district: 'mitte', difficulty: 'easy',
-      story: 'Potsdamer Platz still looked like Berlin’s electric crossroads here, with the traffic tower acting like a stage prop in the middle of the city. On the walk, I use corners like this to show how much movement Berlin had before the Wall turned so many addresses into edges.',
-      credit: 'Bundesarchiv Bild 102-00843 / CC BY-SA 3.0 DE', sourceUrl: 'https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_102-00843,_Berlin,_Verkehrsturm_auf_dem_Potsdamer_Platz.jpg' },
-    { id: 'ph_002', title: 'Constitution Day at Brandenburg Gate', year: 1923, tol: 0, district: 'mitte', difficulty: 'medium',
-      story: 'Brandenburg Gate is easy to flatten into postcard Berlin, but scenes like this remind me that it also held the city’s public mood long before the Cold War image took over. My move here is always to ask what the crowd is telling you before you look for the monument.',
-      credit: 'Bundesarchiv Bild 102-00136 / CC BY-SA 3.0 DE', sourceUrl: 'https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_102-00136,_Berlin,_Brandenburger_Tor,_Verfassungsfeier.jpg' },
-    { id: 'ph_003', title: 'Big flight day at Tempelhof', year: 1928, tol: 1, district: 'tempelhof-schoneberg', difficulty: 'medium',
-      story: 'Tempelhof already carried spectacle before it became shorthand for airlifts, runways and open-field sunsets. When visitors ask me why Berlin stories feel layered, this is exactly the kind of earlier chapter I want them to hold in their heads.',
-      credit: 'Bundesarchiv Bild 102-06485 / CC BY-SA 3.0 DE', sourceUrl: 'https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_102-06485,_Berlin-Tempelhof,_Gro%C3%9Fflugtag.jpg' },
-    { id: 'ph_004', title: 'BVG strike at Potsdamer Platz', year: 1932, tol: 0, district: 'mitte', difficulty: 'hard',
-      story: 'A transport strike has been part of Berlin’s rhythm for longer than most visitors imagine. I like this photo because it makes the city feel instantly familiar: once the movement breaks, every small decision around it gets louder.',
-      credit: 'Bundesarchiv Bild 102-13993 / CC BY-SA 3.0 DE', sourceUrl: 'https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_102-13993,_Berlin,_Potsdamer_Platz,_BVG-Streik.jpg' },
-    { id: 'ph_005', title: 'Treptow fairground day', year: 1948, tol: 0, district: 'treptow-kopenick', difficulty: 'hard',
-      story: 'Treptow does not always get first billing in tourist Berlin, which is partly why I wanted it in the pool. This kind of local fair scene is a good reminder that the city was rebuilding its ordinary life even when the big history headline sat somewhere else.',
-      credit: 'Bundesarchiv Bild 183-H25478 / CC BY-SA 3.0 DE', sourceUrl: 'https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_183-H25478,_Berlin-Treptow,_Volksfest.jpg' },
-    { id: 'ph_006', title: 'Housing block in Prenzlauer Berg', year: 1952, tol: 0, district: 'pankow', difficulty: 'hard',
-      story: 'Prenzlauer Berg now reads as cafe terraces and strollers to a lot of visitors, so I like throwing this version into the set. My advice is to notice how quickly Berlin neighbourhood myths fall apart once you put one earlier image beside today’s street.',
-      credit: 'Bundesarchiv Bild 183-16218-0006 / CC BY-SA 3.0 DE', sourceUrl: 'https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_183-16218-0006,_Berlin,_Prenzlauer_Berg,_Wohnblock,_Baustelle.jpg' },
-    { id: 'ph_007', title: 'Cafe Kranzler on Kurfurstendamm', year: 1955, tol: 0, district: 'charlottenburg-wilmersdorf', difficulty: 'medium',
-      story: 'West Berlin glamour usually gets reduced to one or two names, and Cafe Kranzler is one of them for a reason. If you want to read old Kurfurstendamm quickly, the useful move is to look at who is lingering rather than just what is being sold.',
-      credit: 'Bundesarchiv B 145 Bild-F002774-0008 / CC BY-SA 3.0 DE', sourceUrl: 'https://commons.wikimedia.org/wiki/File:Bundesarchiv_B_145_Bild-F002774-0008,_Berlin,_Caf%C3%A9_Kranzler.jpg' },
-    { id: 'ph_008', title: 'Water cannon at Brandenburg Gate', year: 1961, tol: 0, district: 'mitte', difficulty: 'easy',
-      story: 'This is one of those Berlin images where the mood tells the date almost as loudly as the objects do. On the walk, I usually tell people not to memorise the Wall as a single symbol. Read the pressure in the street first, and the symbol makes more sense after that.',
-      credit: 'Bundesarchiv Bild 173-1282 / CC BY-SA 3.0 DE', sourceUrl: 'https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_173-1282,_Berlin,_Brandenburger_Tor,_Wasserwerfer.jpg' },
-    { id: 'ph_009', title: 'Alexanderplatz from the TV Tower at night', year: 1969, tol: 0, district: 'mitte', difficulty: 'easy',
-      story: 'Alexanderplatz has that rare Berlin quality where one skyline shot can already tell you the political era. If you are in the square today, the simple move is to stop spinning for a second and notice which pieces still make the old city plan legible.',
-      credit: 'Bundesarchiv Bild 183-H1006-0001-005 / CC BY-SA 3.0 DE', sourceUrl: 'https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_183-H1006-0001-005,_Berlin,_Blick_vom_Fernsehturm_auf_den_Alexanderplatz_bei_Nacht.jpg' },
-    { id: 'ph_010', title: 'Checkpoint Charlie, the night the Wall opened', year: 1989, tol: 0, district: 'mitte', difficulty: 'easy',
-      story: 'People usually arrive at this photo already knowing the headline, which is why I like using it late in a set rather than first. The better question is not only what happened, but how quickly a border city can start behaving like a crowd city again.',
-      credit: 'Bundesarchiv Bild 183-1989-1110-018 / CC BY-SA 3.0 DE', sourceUrl: 'https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_183-1989-1110-018,_Berlin,_Checkpoint_Charlie,_Nacht_des_Mauerfalls.jpg' }
-  ];
 
   var TIERS = [
     { min: 850, emoji: '🗃️', title: 'Berlin archive eye', desc: 'You are not guessing the decade, you are recognising it. Cars, clothes, rubble or fresh concrete, you read the year straight off the street.' },
@@ -316,7 +285,7 @@
     return d.toISOString().slice(0, 10);
   }
   function dailyIndices(dateStr, photos, archive) {
-    photos = Array.isArray(photos) && photos.length ? photos : PHOTOS;
+    photos = Array.isArray(photos) ? photos : [];
     if (archive && archive.schedule && archive.schedule[dateStr]) {
       var byId = {};
       photos.forEach(function (photo, i) { byId[photo.id] = i; });
@@ -483,12 +452,12 @@
       this._assetBase = this.getAttribute('data-asset-base') || ASSET_BASE;
       if (this._assetBase.slice(-1) !== '/') this._assetBase += '/';
       this._today = berlinToday();
-      this._photos = PHOTOS;
+      this._photos = null;
       this._archive = null;
       this._player = playerProfile();
       this._injectCSS();
       this._renderLoading();
-      this._loadArchive().then(() => this._route(), () => this._route());
+      this._loadArchive().then(() => this._route(), () => this._renderLoadError());
     }
 
     _injectCSS() {
@@ -538,15 +507,51 @@
     }
 
     async _loadArchive() {
-      var url = this._assetBase + 'data/archive-current.json?v=' + encodeURIComponent(this._today);
-      var res = await fetch(url, { cache: 'no-store' });
-      if (!res.ok) throw new Error('archive load failed');
-      var data = await res.json();
-      if (!validArchive(data)) throw new Error('archive invalid');
-      this._archive = data;
-      this._photos = data.photos;
-      this.setAttribute('data-archive-batch', data.batchId || 'archive');
-      this.setAttribute('data-archive-count', String(data.photos.length));
+      var v = encodeURIComponent(this._today);
+      // Everyone must play the same daily set, so the archive is required. Try
+      // the primary host a few times, then a jsDelivr mirror, before giving up
+      // (the caller then shows a retry screen, never a different set of photos).
+      var urls = [
+        this._assetBase + 'data/archive-current.json?v=' + v,
+        this._assetBase + 'data/archive-current.json?v=' + v,
+        'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@main/berlin-rewind-v2/data/archive-current.json?v=' + v
+      ];
+      var lastErr;
+      for (var i = 0; i < urls.length; i++) {
+        try {
+          var res = await fetch(urls[i], { cache: 'no-store' });
+          if (!res.ok) throw new Error('archive load failed ' + res.status);
+          var data = await res.json();
+          if (!validArchive(data)) throw new Error('archive invalid');
+          this._archive = data;
+          this._photos = data.photos;
+          this.setAttribute('data-archive-batch', data.batchId || 'archive');
+          this.setAttribute('data-archive-count', String(data.photos.length));
+          return;
+        } catch (e) {
+          lastErr = e;
+          if (i < urls.length - 1) await new Promise(function (r) { setTimeout(r, 600 * (i + 1)); });
+        }
+      }
+      throw lastErr || new Error('archive load failed');
+    }
+
+    _renderLoadError() {
+      var self = this;
+      this.innerHTML =
+        '<div class="bw-rw-card">' +
+          '<div class="bw-rw-screen is-on bw-rw-result-screen" style="text-align:center;">' +
+            '<div class="bw-rw-r-emoji">🗺️</div>' +
+            '<h2 class="bw-rw-r-title">Today’s Rewind did not load</h2>' +
+            '<p class="bw-rw-r-desc">Everyone plays the same five Berlin photos each day, so I will not show a different set. Check your connection and try again.</p>' +
+            '<div class="bw-rw-btnrow"><button type="button" class="bw-rw-btn" data-retry="1">Try again</button></div>' +
+          '</div>' +
+        '</div>';
+      var btn = this.querySelector('[data-retry]');
+      if (btn) btn.addEventListener('click', function () {
+        self._renderLoading();
+        self._loadArchive().then(function () { self._route(); }, function () { self._renderLoadError(); });
+      });
     }
 
     _route() {
@@ -564,7 +569,7 @@
 
     _stripHtml() {
       // decorative archival thumbnails that are NOT in today's set (no spoilers)
-      var photos = this._photos || PHOTOS;
+      var photos = this._photos || [];
       var daily = dailyIndices(this._today, photos, this._archive);
       var others = photos.map(function (_, i) { return i; }).filter(function (i) { return daily.indexOf(i) === -1; });
       var pick = shuffle(others).slice(0, 3);
@@ -879,7 +884,7 @@
       this._mode = mode;
       this._submittedDailyResult = false;
       this._dailyStartTracked = false;
-      var photos = this._photos || PHOTOS;
+      var photos = this._photos || [];
       var indices = (mode === 'daily') ? dailyIndices(this._today, photos, this._archive) : shuffle(photos.map(function (_, i) { return i; })).slice(0, ROUNDS_PER_GAME);
       this._deck = indices.map(function (i) { return photos[i]; });
       this._round = 0;
@@ -1059,7 +1064,7 @@
     }
 
     _submitDailyResult(tier, st) {
-      if (this._mode !== 'daily' || this._submittedDailyResult) return;
+      if (this._mode !== 'daily' || this._submittedDailyResult || !this._archive) return;
       this._submittedDailyResult = true;
       var profile = this._player || playerProfile();
       var previous = pendingCompletion();
