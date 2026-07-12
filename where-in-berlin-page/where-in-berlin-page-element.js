@@ -5,7 +5,7 @@
   var BASE_URL = SCRIPT_URL && SCRIPT_URL.includes('/where-in-berlin-page/')
     ? SCRIPT_URL.replace(/where-in-berlin-page\/where-in-berlin-page-element\.js(?:\?.*)?$/, '')
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-  var BUILD = 'where-in-berlin-page-20260711c';
+  var BUILD = 'where-in-berlin-page-20260712-share-card-v2';
   var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=game&utm_medium=where_in_berlin_page&utm_campaign=berlinwalk_games&utm_content=book_tour';
   var GAMES_URL = 'https://www.berlinwalk.com/games?utm_source=game&utm_medium=where_in_berlin_page&utm_campaign=berlinwalk_games&utm_content=all_games';
 

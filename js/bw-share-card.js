@@ -10,6 +10,61 @@
     ctx.closePath();
   }
 
+  function wrapText(ctx, text, maxWidth, maxLines = 2) {
+    const words = String(text || '').trim().split(/\s+/).filter(Boolean);
+    const lines = [];
+    let line = '';
+
+    words.forEach((word) => {
+      const candidate = line ? `${line} ${word}` : word;
+      if (!line || ctx.measureText(candidate).width <= maxWidth) {
+        line = candidate;
+      } else {
+        lines.push(line);
+        line = word;
+      }
+    });
+    if (line) lines.push(line);
+
+    if (lines.length > maxLines) {
+      const visible = lines.slice(0, maxLines);
+      let last = visible[maxLines - 1];
+      while (last && ctx.measureText(`${last}...`).width > maxWidth) {
+        last = last.replace(/\s+\S+$/, '');
+      }
+      visible[maxLines - 1] = `${last || ''}...`;
+      return visible;
+    }
+    return lines;
+  }
+
+  function drawWrappedText(ctx, text, x, y, maxWidth, lineHeight, maxLines = 2) {
+    const lines = wrapText(ctx, text, maxWidth, maxLines);
+    lines.forEach((line, index) => ctx.fillText(line, x, y + index * lineHeight));
+    return lines.length;
+  }
+
+  function drawCoverImage(ctx, image, x, y, width, height) {
+    if (!image || !image.naturalWidth || !image.naturalHeight) return false;
+    const scale = Math.max(width / image.naturalWidth, height / image.naturalHeight);
+    const sourceWidth = width / scale;
+    const sourceHeight = height / scale;
+    const sourceX = (image.naturalWidth - sourceWidth) / 2;
+    const sourceY = (image.naturalHeight - sourceHeight) / 2;
+
+    ctx.save();
+    roundedRect(ctx, x, y, width, height, 20);
+    ctx.clip();
+    ctx.drawImage(image, sourceX, sourceY, sourceWidth, sourceHeight, x, y, width, height);
+    const gradient = ctx.createLinearGradient(x, y, x + width, y);
+    gradient.addColorStop(0, 'rgba(6, 56, 26, 0.2)');
+    gradient.addColorStop(0.58, 'rgba(6, 56, 26, 0)');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(x, y, width, height);
+    ctx.restore();
+    return true;
+  }
+
   function createCard({
     width = 1080,
     height = 1350,
@@ -19,6 +74,8 @@
     meta = '',
     lines = [],
     footer = 'berlinwalk.com/games',
+    cta = 'Play the next Berlin set tomorrow',
+    image = null,
     palette = {},
   } = {}) {
     const colors = {
@@ -61,35 +118,41 @@
 
     ctx.fillStyle = colors.green;
     ctx.font = '900 42px Montserrat, Arial, sans-serif';
-    ctx.fillText(title, 112, 180);
+    ctx.fillText(title, 112, 166);
 
     ctx.fillStyle = colors.muted;
     ctx.font = '700 28px Montserrat, Arial, sans-serif';
-    ctx.fillText(subtitle, 112, 226);
+    drawWrappedText(ctx, subtitle, 112, 212, width - 224, 33, 2);
+
+    const hasImage = drawCoverImage(ctx, image, 112, 274, width - 224, 365);
+    const scoreY = hasImage ? 748 : 380;
+    const metaY = hasImage ? 798 : 430;
+    const reasonsStartY = hasImage ? 878 : 530;
+    const reasonHeight = hasImage ? 76 : 82;
+    const reasonGap = hasImage ? 88 : 98;
 
     ctx.fillStyle = colors.green;
-    ctx.font = '900 118px "IBM Plex Mono", monospace';
-    ctx.fillText(String(score || ''), 112, 380);
+    ctx.font = `900 ${hasImage ? 88 : 118}px "IBM Plex Mono", monospace`;
+    ctx.fillText(String(score || ''), 112, scoreY);
 
     ctx.fillStyle = colors.muted;
     ctx.font = '800 26px Montserrat, Arial, sans-serif';
-    ctx.fillText(meta, 112, 430);
+    drawWrappedText(ctx, meta, 112, metaY, width - 224, 31, 2);
 
-    ctx.fillStyle = colors.green;
-    ctx.font = '900 26px Montserrat, Arial, sans-serif';
-    let y = 530;
-    lines.forEach((line, index) => {
-      roundedRect(ctx, 112, y - 42, width - 224, 74, 18);
+    let y = reasonsStartY;
+    lines.slice(0, 3).forEach((line, index) => {
+      roundedRect(ctx, 112, y - 38, width - 224, reasonHeight, 18);
       ctx.fillStyle = index % 2 === 0 ? 'rgba(124, 179, 66, 0.11)' : 'rgba(255, 230, 0, 0.12)';
       ctx.fill();
       ctx.fillStyle = colors.green;
-      ctx.fillText(String(line), 140, y);
-      y += 94;
+      ctx.font = `900 ${hasImage ? 21 : 24}px Montserrat, Arial, sans-serif`;
+      drawWrappedText(ctx, line, 140, y - (hasImage ? 4 : 2), width - 280, hasImage ? 25 : 29, 2);
+      y += reasonGap;
     });
 
     ctx.fillStyle = colors.green;
     ctx.font = '900 34px Montserrat, Arial, sans-serif';
-    ctx.fillText('Play the next Berlin set tomorrow', 112, height - 160);
+    drawWrappedText(ctx, cta, 112, height - 160, width - 224, 40, 2);
 
     ctx.fillStyle = colors.muted;
     ctx.font = '800 26px Montserrat, Arial, sans-serif';

@@ -11,9 +11,9 @@
   var BASE_URL = SCRIPT_URL && SCRIPT_URL.includes('/where-in-berlin/')
     ? SCRIPT_URL.replace(/where-in-berlin\/where-in-berlin-element\.js(?:\?.*)?$/, '')
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-  var BUILD = 'where-in-berlin-20260711d';
+  var BUILD = 'where-in-berlin-20260712-share-card-v2';
   var DATA_URL = new URL('where-in-berlin/data.json', BASE_URL).toString();
-  var SHARE_CARD_URL = new URL('js/bw-share-card.js', BASE_URL).toString();
+  var SHARE_CARD_URL = asset('js/bw-share-card.js');
   var TRACKING_ENDPOINT_PROD = 'https://berlinwalk-content-app.vercel.app/api/where-in-berlin-event';
   var TRACKING_ENDPOINT_LOCAL = 'http://127.0.0.1:5173/api/where-in-berlin-event';
   var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
@@ -58,6 +58,16 @@
 
   function gameAsset(path) {
     return asset('where-in-berlin/' + String(path || '').replace(/^\/+/, ''));
+  }
+
+  function loadShareImage(src) {
+    return new Promise(function (resolve) {
+      var image = new Image();
+      image.crossOrigin = 'anonymous';
+      image.addEventListener('load', function () { resolve(image); }, { once: true });
+      image.addEventListener('error', function () { resolve(null); }, { once: true });
+      image.src = src;
+    });
   }
 
   function escapeHtml(value) {
@@ -507,13 +517,16 @@
       try {
         await waitForScript(SHARE_CARD_URL, 'bw-district-share-card');
         if (window.BerlinWalkShareCard && navigator.share && window.File) {
+          var shareImage = await loadShareImage(gameAsset(result.district.poster));
           var canvas = window.BerlinWalkShareCard.createCard({
             title: 'Berlin match',
             subtitle: result.district.district,
             score: result.percent + '%',
             meta: result.district.archetype,
             lines: result.reasons,
-            footer: 'berlinwalk.com/games/where-in-berlin'
+            footer: 'berlinwalk.com/games/where-in-berlin',
+            cta: 'Where in Berlin do you belong?',
+            image: shareImage
           });
           var blob = await new Promise(function (resolve) { canvas.toBlob(resolve, 'image/png'); });
           if (blob) {
