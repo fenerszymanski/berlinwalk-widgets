@@ -21,14 +21,14 @@
  *   <bw-berlin-rewind-result-games-v2></bw-berlin-rewind-result-games-v2>
  *   <script src=".../berlin-rewind-v2/berlin-rewind-v2-element.js" defer></script>
  *
- * Build marker: berlin-rewind-v2-archive-skin-20260711b
+ * Build marker: berlin-rewind-v2-year-only-20260712
  */
 (function () {
   'use strict';
 
   var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var GAMES_URL = 'https://www.berlinwalk.com/games?utm_source=berlin_rewind&utm_medium=result_screen&utm_campaign=berlinwalk_games&utm_content=play_other_games';
-  var BUILD = 'berlin-rewind-v2-archive-skin-20260711b';
+  var BUILD = 'berlin-rewind-v2-year-only-20260712';
   var TRACKING_ENDPOINT_PROD = 'https://app.berlinwalk.com/api/rewind-event';
   var TRACKING_ENDPOINT_LOCAL = 'http://127.0.0.1:5173/api/rewind-event';
   var LEADERBOARD_ENDPOINT_PROD = 'https://app.berlinwalk.com/api/rewind-leaderboard';
@@ -106,10 +106,10 @@
   ];
 
   var TIERS = [
-    { min: 850, emoji: '🗃️', title: 'Berlin archive eye', desc: 'You read old Berlin like a local reads a menu. You are not guessing the era, you are recognising it.' },
-    { min: 650, emoji: '🏛️', title: 'Sharp local eye', desc: 'Strong instincts for the city’s layers. You catch the decade in the light and the district in the details.' },
-    { min: 400, emoji: '🎫', title: 'Weekend Berliner', desc: 'A good feel for the big landmarks and eras, a little shakier on the quieter corners. The walk fills those gaps fast.' },
-    { min: 0, emoji: '🧭', title: 'First-timer’s eye', desc: 'Berlin’s timeline is a puzzle right now, which is honestly the best moment to walk it. It all clicks once you see it on foot.' }
+    { min: 850, emoji: '🗃️', title: 'Berlin archive eye', desc: 'You are not guessing the decade, you are recognising it. Cars, clothes, rubble or fresh concrete, you read the year straight off the street.' },
+    { min: 650, emoji: '🏛️', title: 'Sharp local eye', desc: 'Strong instincts for the city’s eras. You catch the decade in the light, the vehicles and the state of the buildings, and you are rarely far off.' },
+    { min: 400, emoji: '🎫', title: 'Weekend Berliner', desc: 'A good feel for the big eras, a little shakier on the quiet years between them. Walking the real streets closes that gap fast.' },
+    { min: 0, emoji: '🧭', title: 'First-timer’s eye', desc: 'Berlin’s timeline is still a blur, which is honestly the best moment to walk it. The decades start lining up once you see them on foot.' }
   ];
 
   var CSS = [
@@ -188,15 +188,6 @@
     '.bw-rw-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:30px;height:30px;border-radius:50%;background:var(--g);border:4px solid #fff;box-shadow:0 4px 12px rgba(16,36,20,.3);cursor:pointer;}',
     '.bw-rw-slider::-moz-range-thumb{width:28px;height:28px;border-radius:50%;background:var(--g);border:4px solid #fff;box-shadow:0 4px 12px rgba(16,36,20,.3);cursor:pointer;}',
     ".bw-rw-scale{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:600;color:var(--lg);margin-bottom:16px;}",
-    // districts
-    '.bw-rw-dist{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:16px;}',
-    '.bw-rw-dbtn{width:100%;min-height:52px;text-align:center;background:var(--paper);border:2px solid var(--line);color:var(--gd);border-radius:13px;padding:12px 8px;font-size:14.5px;font-weight:700;cursor:pointer;transition:transform .05s,border-color .15s;}',
-    '.bw-rw-dbtn:hover{border-color:var(--y);}',
-    '.bw-rw-dbtn:active{transform:scale(.98);}',
-    '.bw-rw-dbtn.sel{border-color:var(--y);background:#fff;box-shadow:0 0 0 3px rgba(255,230,0,.35);}',
-    '.bw-rw-dbtn[disabled]{opacity:.75;cursor:default;}',
-    '.bw-rw-dbtn.correct{background:#DFF5C8;border-color:var(--lime);color:#1B5E20;}',
-    '.bw-rw-dbtn.wrong{background:#f6d9d9;border-color:var(--red);color:#7a2530;}',
     // buttons
     '.bw-rw-btn{display:block;width:100%;background:var(--y);color:var(--gd);border:none;border-radius:14px;padding:16px;font-size:17px;font-weight:700;cursor:pointer;min-height:52px;transition:transform .05s,filter .15s;text-align:center;text-decoration:none;box-sizing:border-box;box-shadow:0 10px 24px rgba(16,36,20,.12);}',
     '.bw-rw-btn:hover{filter:brightness(1.03);}',
@@ -251,15 +242,12 @@
     '.bw-rw-year-val{font-size:34px;}',
     '.bw-rw-step{width:42px;height:42px;}',
     '.bw-rw-scale{margin-bottom:12px;}',
-    '.bw-rw-dist{gap:8px;margin-bottom:12px;}',
-    '.bw-rw-dbtn{min-height:48px;font-size:13.5px;padding:10px 7px;}',
     '.bw-rw-guess-panel .bw-rw-btn,.bw-rw-answer-panel .bw-rw-btn{margin-top:auto;}',
     '.bw-rw-reveal{margin:0;}',
     '.bw-rw-rrow{margin-bottom:10px;}',
     '.bw-rw-rbox{padding:10px;}',
     '.bw-rw-rbox-actual{font-size:20px;}',
     '.bw-rw-phototitle{font-size:16px;margin:0 0 7px;}',
-    '.bw-rw-picked{font-size:12.5px;line-height:1.35;color:var(--lg);margin:0 0 8px;}',
     '.bw-rw-story{font-size:14px;line-height:1.48;margin:0 0 9px;overflow-wrap:anywhere;}',
     '.bw-rw-credit{font-size:10.5px;margin:0 0 10px;}',
     '.bw-rw-recap{max-width:660px;width:100%;}',
@@ -283,7 +271,7 @@
     '.bw-rw-result-screen .bw-rw-btn{min-height:46px;padding:12px 14px;font-size:15px;}',
     '.bw-rw-result-screen .bw-rw-copied{margin-top:0;}',
     '@media(min-width:901px){.bw-rw-title{font-size:34px}.bw-rw-play-screen .bw-rw-photo{align-self:start}.bw-rw-home-screen.is-on{justify-content:flex-start;padding-block:0}.bw-rw-home-screen .bw-rw-eyebrow{font-size:11px;margin-bottom:5px}.bw-rw-home-screen .bw-rw-title{font-size:30px;line-height:1.02;letter-spacing:0;margin-bottom:10px}.bw-rw-home-screen .bw-rw-strip{max-width:560px;gap:8px;margin-bottom:12px}.bw-rw-home-screen .bw-rw-strip-thumb{aspect-ratio:4/3}.bw-rw-home-screen .bw-rw-sub{font-size:14.5px;line-height:1.38;margin-bottom:11px}.bw-rw-home-screen .bw-rw-chiprow{margin-bottom:9px}.bw-rw-home-screen .bw-rw-chip{font-size:12.5px;padding:7px 11px}.bw-rw-home-screen .bw-rw-table{margin-bottom:9px;padding:3px 12px 6px}.bw-rw-home-screen .bw-rw-table-h{font-size:10px;padding:8px 0 5px}.bw-rw-home-screen .bw-rw-trow{padding:5px 0}.bw-rw-home-screen .bw-rw-global{margin-bottom:9px;padding:8px 10px}.bw-rw-home-screen .bw-rw-global-head{margin-bottom:6px}.bw-rw-home-screen .bw-rw-me{margin-bottom:6px}.bw-rw-home-screen .bw-rw-me span{padding:6px 7px}.bw-rw-home-screen .bw-rw-lrow{min-height:20px;padding-top:3px}.bw-rw-home-screen .bw-rw-tomorrow{margin:7px 0 0;font-size:13px}.bw-rw-home-screen .bw-rw-btnrow{margin-top:7px;gap:8px}.bw-rw-home-screen .bw-rw-btn{min-height:44px;padding:11px 14px;font-size:15px}.bw-rw-home-screen .bw-rw-foot{margin-top:7px;font-size:10.5px}.bw-rw-result-screen.is-on{max-width:980px;display:grid;grid-template-columns:minmax(300px,390px) minmax(0,1fr);grid-template-areas:"badge recap" "score recap" "sub recap" "title recap" "desc table" "streak table" "buttons table" "copied table";column-gap:24px;row-gap:5px;align-content:center;justify-content:stretch;padding-inline:26px}.bw-rw-result-screen .bw-rw-r-emoji{grid-area:badge}.bw-rw-result-screen .bw-rw-r-score{grid-area:score}.bw-rw-result-screen .bw-rw-r-scoresub{grid-area:sub}.bw-rw-result-screen .bw-rw-r-title{grid-area:title}.bw-rw-result-screen .bw-rw-r-desc{grid-area:desc}.bw-rw-result-screen .bw-rw-recap{grid-area:recap;align-self:end;width:100%;max-width:none}.bw-rw-result-screen .bw-rw-tomorrow{grid-area:streak}.bw-rw-result-screen .bw-rw-table,.bw-rw-result-screen .bw-rw-global{grid-area:table;align-self:start;width:100%}.bw-rw-result-screen .bw-rw-btnrow{grid-area:buttons}.bw-rw-result-screen .bw-rw-copied{grid-area:copied}}',
-    '@media(max-width:900px){.bw-rw{max-width:600px}.bw-rw-card{height:780px;padding:16px;border-radius:18px}.bw-rw-title{font-size:28px}.bw-rw-sub{font-size:15px;line-height:1.42}.bw-rw-foot{font-size:11.5px}.bw-rw-board{display:block}.bw-rw-photo{margin-bottom:12px}.bw-rw-swap{padding:12px}.bw-rw-year-val{font-size:31px}.bw-rw-step{width:40px;height:40px}.bw-rw-dbtn{min-height:46px;font-size:12.5px}.bw-rw-rrow{gap:8px}.bw-rw-rbox-actual{font-size:18px}.bw-rw-rbox-actual.district{font-size:14px}.bw-rw-home-screen{padding-inline:16px}.bw-rw-result-screen{justify-content:flex-start;padding-inline:14px}.bw-rw-result-screen .bw-rw-r-emoji{font-size:34px;margin:-2px 0 0}.bw-rw-result-screen .bw-rw-r-score{font-size:31px}.bw-rw-result-screen .bw-rw-r-score span{font-size:15px!important}.bw-rw-result-screen .bw-rw-r-scoresub{font-size:11px;margin:0 0 5px}.bw-rw-result-screen .bw-rw-r-title{font-size:20px;margin-bottom:5px}.bw-rw-result-screen .bw-rw-r-desc{font-size:12.8px;line-height:1.34;margin-bottom:7px}.bw-rw-result-screen .bw-rw-recap{padding:6px 10px;margin-bottom:0}.bw-rw-result-screen .bw-rw-recap-row{font-size:11.2px;padding:4px 0}.bw-rw-result-screen .bw-rw-tomorrow{font-size:12px;margin:6px 0}.bw-rw-result-screen .bw-rw-table{padding:2px 9px 5px;margin-bottom:0}.bw-rw-result-screen .bw-rw-table-h{font-size:9.5px;padding:7px 0 4px}.bw-rw-result-screen .bw-rw-trow{padding:4px 0}.bw-rw-result-screen .bw-rw-tdate{font-size:11px;width:104px}.bw-rw-result-screen .bw-rw-tscore{font-size:11.5px;width:44px}.bw-rw-result-screen .bw-rw-btnrow{gap:7px;margin-top:7px}.bw-rw-result-screen .bw-rw-btn{min-height:42px;padding:10px 12px;font-size:13.5px}.bw-rw-result-screen .bw-rw-copied{font-size:11px;min-height:13px}.bw-rw-r-emoji{font-size:48px}.bw-rw-r-score{font-size:38px}.bw-rw-r-title{font-size:23px}.bw-rw-r-desc{font-size:14px;line-height:1.42}.bw-rw-recap-row{font-size:12.5px;padding:5px 0}.bw-rw-table{padding:4px 10px 6px}.bw-rw-trow{padding:5px 0}}',
+    '@media(max-width:900px){.bw-rw{max-width:600px}.bw-rw-card{height:780px;padding:16px;border-radius:18px}.bw-rw-title{font-size:28px}.bw-rw-sub{font-size:15px;line-height:1.42}.bw-rw-foot{font-size:11.5px}.bw-rw-board{display:block}.bw-rw-photo{margin-bottom:12px}.bw-rw-swap{padding:12px}.bw-rw-year-val{font-size:31px}.bw-rw-step{width:40px;height:40px}.bw-rw-rrow{gap:8px}.bw-rw-rbox-actual{font-size:18px}.bw-rw-rbox-actual.district{font-size:14px}.bw-rw-home-screen{padding-inline:16px}.bw-rw-result-screen{justify-content:flex-start;padding-inline:14px}.bw-rw-result-screen .bw-rw-r-emoji{font-size:34px;margin:-2px 0 0}.bw-rw-result-screen .bw-rw-r-score{font-size:31px}.bw-rw-result-screen .bw-rw-r-score span{font-size:15px!important}.bw-rw-result-screen .bw-rw-r-scoresub{font-size:11px;margin:0 0 5px}.bw-rw-result-screen .bw-rw-r-title{font-size:20px;margin-bottom:5px}.bw-rw-result-screen .bw-rw-r-desc{font-size:12.8px;line-height:1.34;margin-bottom:7px}.bw-rw-result-screen .bw-rw-recap{padding:6px 10px;margin-bottom:0}.bw-rw-result-screen .bw-rw-recap-row{font-size:11.2px;padding:4px 0}.bw-rw-result-screen .bw-rw-tomorrow{font-size:12px;margin:6px 0}.bw-rw-result-screen .bw-rw-table{padding:2px 9px 5px;margin-bottom:0}.bw-rw-result-screen .bw-rw-table-h{font-size:9.5px;padding:7px 0 4px}.bw-rw-result-screen .bw-rw-trow{padding:4px 0}.bw-rw-result-screen .bw-rw-tdate{font-size:11px;width:104px}.bw-rw-result-screen .bw-rw-tscore{font-size:11.5px;width:44px}.bw-rw-result-screen .bw-rw-btnrow{gap:7px;margin-top:7px}.bw-rw-result-screen .bw-rw-btn{min-height:42px;padding:10px 12px;font-size:13.5px}.bw-rw-result-screen .bw-rw-copied{font-size:11px;min-height:13px}.bw-rw-r-emoji{font-size:48px}.bw-rw-r-score{font-size:38px}.bw-rw-r-title{font-size:23px}.bw-rw-r-desc{font-size:14px;line-height:1.42}.bw-rw-recap-row{font-size:12.5px;padding:5px 0}.bw-rw-table{padding:4px 10px 6px}.bw-rw-trow{padding:5px 0}}',
     '@media(max-width:420px){.bw-rw-chip{font-size:12px;padding:7px 10px}.bw-rw-chiprow{gap:6px}.bw-rw-home-screen{padding-inline:14px}.bw-rw-home-screen.is-on{justify-content:flex-start}.bw-rw-home-screen .bw-rw-title{font-size:26px;line-height:1.04;margin-bottom:8px}.bw-rw-home-screen .bw-rw-sub{font-size:14px;line-height:1.36;margin-bottom:10px}.bw-rw-home-screen .bw-rw-strip{margin-bottom:9px}.bw-rw-home-screen .bw-rw-strip-thumb{aspect-ratio:4/3}.bw-rw-home-screen .bw-rw-chiprow{margin-bottom:8px}.bw-rw-home-screen .bw-rw-table{margin-bottom:8px}.bw-rw-home-screen .bw-rw-global{margin-bottom:8px}.bw-rw-home-screen .bw-rw-lrow:nth-of-type(n+4){display:none}.bw-rw-home-screen .bw-rw-foot{margin-top:8px}.bw-rw-btnrow{gap:8px;margin-top:12px}.bw-rw-btn{min-height:48px;padding:13px;font-size:15px}.bw-rw-story{font-size:13.5px;line-height:1.43}.bw-rw-credit{font-size:10px}.bw-rw-global{padding:8px 9px}.bw-rw-lists{grid-template-columns:1fr}.bw-rw-lists .bw-rw-lcol:last-child{display:none}.bw-rw-result-screen{padding-inline:13px}.bw-rw-result-screen .bw-rw-global{padding:7px 8px}.bw-rw-result-screen .bw-rw-global-head{margin-bottom:5px}.bw-rw-result-screen .bw-rw-me{margin-bottom:5px}.bw-rw-result-screen .bw-rw-lrow:nth-of-type(n+5){display:none}.bw-rw-result-screen .bw-rw-btnrow{gap:6px;margin-top:6px}.bw-rw-result-screen .bw-rw-btn{min-height:40px;padding:9px 10px;font-size:13px}}'
     ,'.bw-rw-card{height:auto!important;min-height:0}.bw-rw-screen.is-on{height:auto;min-height:0}'
   ].join('');
@@ -461,7 +449,7 @@
 
   function scoreYear(guess, actual, tol) {
     var eff = Math.max(0, Math.abs(guess - actual) - (tol || 0));
-    return Math.max(0, Math.min(100, Math.round(100 - eff * 6)));
+    return Math.max(0, Math.min(200, Math.round(200 - eff * 10)));
   }
   function yearBand(guess, actual, tol) {
     var diff = Math.abs(guess - actual);
@@ -471,25 +459,6 @@
     if (diff <= 12) return 'A bit off';
     return 'Way off';
   }
-  function districtScore(pickKey, correctKey) {
-    if (pickKey === correctKey) return { pts: 100, band: 'Exact district' };
-    var n = (DISTRICTS[correctKey] && DISTRICTS[correctKey].neighbors) || [];
-    if (n.indexOf(pickKey) > -1) return { pts: 50, band: 'Next door' };
-    return { pts: 0, band: 'Wrong side of town' };
-  }
-  function buildDistrictOptions(correctKey) {
-    var all = Object.keys(DISTRICTS);
-    var neighbors = (DISTRICTS[correctKey].neighbors || []).slice();
-    var others = all.filter(function (k) { return k !== correctKey && neighbors.indexOf(k) === -1; });
-    var opts = [correctKey];
-    if (neighbors.length) opts.push(shuffle(neighbors)[0]);
-    var pool = shuffle(others);
-    while (opts.length < 4 && pool.length) opts.push(pool.shift());
-    var extraN = shuffle(neighbors).filter(function (k) { return opts.indexOf(k) === -1; });
-    while (opts.length < 4 && extraN.length) opts.push(extraN.shift());
-    return shuffle(opts);
-  }
-
   class BWBerlinRewindV2 extends HTMLElement {
     constructor() {
       super();
@@ -932,10 +901,10 @@
       this._renderRound();
     }
 
-    _roundControlsHtml(distHtml) {
+    _roundControlsHtml() {
       return [
         '<div class="bw-rw-guess-panel">',
-          '<p class="bw-rw-ask">1. What year is this?</p>',
+          '<p class="bw-rw-ask">What year is this?</p>',
           '<div class="bw-rw-year">',
             '<button type="button" class="bw-rw-step" data-ystep="-1" aria-label="earlier">−</button>',
             '<span class="bw-rw-year-val" data-yearval>1955</span>',
@@ -943,15 +912,12 @@
           '</div>',
           '<input type="range" class="bw-rw-slider" min="' + YEAR_MIN + '" max="' + YEAR_MAX + '" value="1955" step="1" data-yslider>',
           '<div class="bw-rw-scale"><span>' + YEAR_MIN + '</span><span>' + YEAR_MAX + '</span></div>',
-          '<p class="bw-rw-ask">2. Which district?</p>',
-          distHtml,
-          '<button type="button" class="bw-rw-btn" data-reveal="1" disabled>Pick a district to reveal</button>',
+          '<button type="button" class="bw-rw-btn" data-reveal="1">Lock in the year</button>',
         '</div>'
       ].join('');
     }
 
-    _revealHtml(p, yPts, yBand, dRes, isLast) {
-      var picked = (DISTRICTS[this._pickedDistrict] && DISTRICTS[this._pickedDistrict].label) || 'No district';
+    _revealHtml(p, yPts, yBand, isLast) {
       return [
         '<div class="bw-rw-answer-panel">',
           '<div class="bw-rw-rrow">',
@@ -962,14 +928,12 @@
               '<span class="bw-rw-rbox-pts">+' + yPts + '</span>',
             '</div>',
             '<div class="bw-rw-rbox">',
-              '<div class="bw-rw-rbox-k">District</div>',
+              '<div class="bw-rw-rbox-k">Where</div>',
               '<div class="bw-rw-rbox-actual district">' + esc(DISTRICTS[p.district].label) + '</div>',
-              '<div class="bw-rw-rbox-you">' + esc(dRes.band) + '</div>',
-              '<span class="bw-rw-rbox-pts">+' + dRes.pts + '</span>',
+              '<div class="bw-rw-rbox-you">Berlin</div>',
             '</div>',
           '</div>',
           '<div class="bw-rw-phototitle">' + esc(p.title) + '</div>',
-          '<p class="bw-rw-picked">You picked ' + esc(picked) + ' · correct: ' + esc(DISTRICTS[p.district].label) + '</p>',
           '<p class="bw-rw-story">' + esc(p.story) + '</p>',
           '<p class="bw-rw-credit">' + esc(p.credit) + ' · <a href="' + p.sourceUrl + '" target="_blank" rel="noopener">source</a></p>',
           '<button type="button" class="bw-rw-btn" data-next="1">' + (isLast ? 'See my Berlin eye' : 'Next photo') + '</button>',
@@ -981,18 +945,10 @@
       var self = this;
       var p = this._deck[this._round];
       this._year = 1955;
-      this._pickedDistrict = null;
-      this._options = buildDistrictOptions(p.district);
 
       var progress = '<div class="bw-rw-progress">';
       for (var i = 0; i < ROUNDS_PER_GAME; i++) progress += '<div class="bw-rw-seg' + (i < this._round ? ' on' : '') + '"></div>';
       progress += '</div>';
-
-      var distHtml = '<div class="bw-rw-dist">';
-      this._options.forEach(function (k, idx) {
-        distHtml += '<button type="button" class="bw-rw-dbtn" data-dist="' + idx + '">' + esc(DISTRICTS[k].label) + '</button>';
-      });
-      distHtml += '</div>';
 
       var label = (this._mode === 'practice') ? 'Practice' : 'Photo';
 
@@ -1010,7 +966,7 @@
                 '<span class="bw-rw-loading" data-loading>Loading photo…</span>' +
                 '<img alt="Archival Berlin photograph to identify" data-photo src="' + this._photoUrl(p) + '">' +
               '</div>' +
-              '<div class="bw-rw-swap" data-swap>' + this._roundControlsHtml(distHtml) + '</div>' +
+              '<div class="bw-rw-swap" data-swap>' + this._roundControlsHtml() + '</div>' +
             '</div>' +
           '</div>' +
         '</div>';
@@ -1034,17 +990,7 @@
       });
 
       var revealBtn = this.querySelector('[data-reveal]');
-      this.querySelectorAll('[data-dist]').forEach(function (b) {
-        b.addEventListener('click', function () {
-          markDailyStart();
-          self._pickedDistrict = self._options[parseInt(b.getAttribute('data-dist'), 10)];
-          self.querySelectorAll('[data-dist]').forEach(function (x) { x.classList.remove('sel'); });
-          b.classList.add('sel');
-          revealBtn.removeAttribute('disabled');
-          revealBtn.textContent = 'Reveal the answer';
-        });
-      });
-      revealBtn.addEventListener('click', function () { if (!revealBtn.hasAttribute('disabled')) self._reveal(); });
+      revealBtn.addEventListener('click', function () { markDailyStart(); self._reveal(); });
     }
 
     _reveal() {
@@ -1052,8 +998,7 @@
       var p = this._deck[this._round];
       var yPts = scoreYear(this._year, p.year, p.tol);
       var yBand = yearBand(this._year, p.year, p.tol);
-      var dRes = districtScore(this._pickedDistrict, p.district);
-      var roundPts = yPts + dRes.pts;
+      var roundPts = yPts;
       var yearDiff = Math.abs(this._year - p.year);
       this._total += roundPts;
       this._recap.push({
@@ -1064,10 +1009,7 @@
         actualYear: p.year,
         yearDiff: yearDiff,
         yearPoints: yPts,
-        districtGuess: this._pickedDistrict,
-        actualDistrict: p.district,
-        districtResult: dRes.band,
-        districtPoints: dRes.pts
+        actualDistrict: p.district
       });
       if (this._mode === 'daily') {
         this._track('bw_berlin_rewind_photo_guess', {
@@ -1080,10 +1022,7 @@
           actualYear: String(p.year),
           yearDiff: String(yearDiff),
           yearPoints: String(yPts),
-          districtGuess: this._pickedDistrict,
           actualDistrict: p.district,
-          districtResult: dRes.band,
-          districtPoints: String(dRes.pts),
           totalScore: String(this._total),
           maxScore: String(ROUNDS_PER_GAME * 200),
           dailyMode: this._mode
@@ -1092,7 +1031,7 @@
 
       var isLast = this._round >= ROUNDS_PER_GAME - 1;
       var swap = this.querySelector('[data-swap]');
-      if (swap) swap.innerHTML = this._revealHtml(p, yPts, yBand, dRes, isLast);
+      if (swap) swap.innerHTML = this._revealHtml(p, yPts, yBand, isLast);
       var pill = this.querySelector('.bw-rw-scorepill');
       if (pill) pill.textContent = this._total + ' pts';
 
