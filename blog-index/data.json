@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-07-12T02:06:54.958Z",
+  "updatedAt": "2026-07-12T07:07:12.427Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 192,
+  "totalPosts": 194,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -812,6 +812,23 @@
           "relatedToolSlug": "berlin-pfand-calculator"
         },
         {
+          "title": "Berlin Street Art: Where to Find the Best Murals and Graffiti (2026)",
+          "slug": "berlin-street-art",
+          "path": "/post/berlin-street-art",
+          "url": "https://www.berlinwalk.com/post/berlin-street-art",
+          "excerpt": "You land expecting street art everywhere, then barely see a spray can around Museum Island. Berlin's best murals and graffiti sit a short train ride out, and almost all of it is free. Here is where to actually find it, from the courtyard five minutes off my tour to the Cold War ruin covered in art.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "free-budget",
+          "topicLabel": "Free & Budget",
+          "readTime": "6 min read",
+          "publishedDate": "2026-07-12T07:05:14.796Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_a9b73d95a0854efcae5e344d635e8fda~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-street-art-cosmonaut-victor-ash-kreuzberg-cover.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_a9b73d95a0854efcae5e344d635e8fda~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-street-art-cosmonaut-victor-ash-kreuzberg-cover.jpg",
+          "alt": "The giant \"Astronaut Cosmonaut\" mural by Victor Ash on a Kreuzberg building wall, a stencilled spaceman in black and white above a line of trees under a blue sky",
+          "relatedToolSlug": ""
+        },
+        {
           "title": "Gendarmenmarkt: A Local Guide to Berlin's Most Beautiful Square (2026)",
           "slug": "gendarmenmarkt-berlin",
           "path": "/post/gendarmenmarkt-berlin",
@@ -844,23 +861,6 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_d3ee6a028d234005b82402da57a8300d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-jewish-museum-berlin-cover.jpg",
           "alt": "Baroque Old Building and zinc-clad Libeskind Building of the Jewish Museum Berlin seen from Lindenstrasse.",
           "relatedToolSlug": "jewish-museum-visit-sequence"
-        },
-        {
-          "title": "Kaiser Wilhelm Memorial Church: How to Visit Berlin's Broken Tower (2026)",
-          "slug": "kaiser-wilhelm-memorial-church-berlin",
-          "path": "/post/kaiser-wilhelm-memorial-church-berlin",
-          "url": "https://www.berlinwalk.com/post/kaiser-wilhelm-memorial-church-berlin",
-          "excerpt": "Berlin's 'hollow tooth' is free, quick, and easy to miss the point of. A local guide to visiting the Kaiser Wilhelm Memorial Church: the two interiors, the hours that trip people up, and when to go.",
-          "category": "Tourist Tips",
-          "categorySlug": "tourist-tips",
-          "topic": "free-budget",
-          "topicLabel": "Free & Budget",
-          "readTime": "5 min read",
-          "publishedDate": "2026-07-10T16:08:12.974Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_9e407dc4339c4218861c3f7820e560a3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-memorial-church-night-cover.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_9e407dc4339c4218861c3f7820e560a3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-memorial-church-night-cover.jpg",
-          "alt": "The blue-lit modern church and the floodlit broken old tower of the Kaiser Wilhelm Memorial Church at night on Breitscheidplatz",
-          "relatedToolSlug": "memorial-church-visit-planner"
         }
       ]
     },
@@ -1617,6 +1617,40 @@
   ],
   "latest": [
     {
+      "title": "Olympiastadion Berlin: How to Visit the 1936 Olympic Stadium (2026)",
+      "slug": "olympiastadion-berlin",
+      "path": "/post/olympiastadion-berlin",
+      "url": "https://www.berlinwalk.com/post/olympiastadion-berlin",
+      "excerpt": "The stadium the Nazis built for the 1936 Olympics is still standing and still full most weekends. On a normal day you can buy an 11 EUR ticket and walk straight in. Here is how to visit Olympiastadion Berlin, what you see inside, how to get there cheaply, and the one match-day catch to avoid.",
+      "category": "Berlin History",
+      "categorySlug": "berlin-history",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-07-12T07:05:15.706Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_be407886b9334da08006905dce9b9e17~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-olympiastadion-berlin-interior-bowl-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_be407886b9334da08006905dce9b9e17~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-olympiastadion-berlin-interior-bowl-cover.jpg",
+      "alt": "The Olympic flame cauldron on its pillars at the Marathon Gate inside Berlin's Olympiastadion, framed by the stadium roof opening",
+      "relatedToolSlug": ""
+    },
+    {
+      "title": "Berlin Street Art: Where to Find the Best Murals and Graffiti (2026)",
+      "slug": "berlin-street-art",
+      "path": "/post/berlin-street-art",
+      "url": "https://www.berlinwalk.com/post/berlin-street-art",
+      "excerpt": "You land expecting street art everywhere, then barely see a spray can around Museum Island. Berlin's best murals and graffiti sit a short train ride out, and almost all of it is free. Here is where to actually find it, from the courtyard five minutes off my tour to the Cold War ruin covered in art.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "free-budget",
+      "topicLabel": "Free & Budget",
+      "readTime": "6 min read",
+      "publishedDate": "2026-07-12T07:05:14.796Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_a9b73d95a0854efcae5e344d635e8fda~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-street-art-cosmonaut-victor-ash-kreuzberg-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_a9b73d95a0854efcae5e344d635e8fda~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-street-art-cosmonaut-victor-ash-kreuzberg-cover.jpg",
+      "alt": "The giant \"Astronaut Cosmonaut\" mural by Victor Ash on a Kreuzberg building wall, a stencilled spaceman in black and white above a line of trees under a blue sky",
+      "relatedToolSlug": ""
+    },
+    {
       "title": "Gendarmenmarkt: A Local Guide to Berlin's Most Beautiful Square (2026)",
       "slug": "gendarmenmarkt-berlin",
       "path": "/post/gendarmenmarkt-berlin",
@@ -1785,43 +1819,43 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_56c8fde64eb04e31828d5a7a4273fd21~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-bernauer-memorial-strip-cover.jpg",
       "alt": "The preserved Berlin Wall death strip on Bernauer Strasse seen from the viewing tower, with the TV Tower on the skyline",
       "relatedToolSlug": "berlin-wall-remnants"
-    },
-    {
-      "title": "Turkish Market Berlin: How to Visit the Maybachufer Market",
-      "slug": "turkish-market-berlin-maybachufer",
-      "path": "/post/turkish-market-berlin-maybachufer",
-      "url": "https://www.berlinwalk.com/post/turkish-market-berlin-maybachufer",
-      "excerpt": "A Berlin guide's practical guide to the Turkish Market on Maybachufer: the days and times that matter, what to actually buy and eat, and how to fold it into a Neukölln afternoon.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "history-myths",
-      "topicLabel": "Berlin History & Myths",
-      "readTime": "5 min read",
-      "publishedDate": "2026-07-09T12:10:25.880Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_a4f522e3e7564f52880e25b7fc1822c4~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-market-crowd-canopies.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_a4f522e3e7564f52880e25b7fc1822c4~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-market-crowd-canopies.jpg",
-      "alt": "A busy crowd browsing stalls under leafy green canopies at the Maybachufer Turkish Market in Berlin",
-      "relatedToolSlug": "best-month-to-visit-berlin"
-    },
-    {
-      "title": "Where to Watch the Sunset in Berlin: Best Spots and Real Timing (2026)",
-      "slug": "where-to-watch-sunset-in-berlin",
-      "path": "/post/where-to-watch-sunset-in-berlin",
-      "url": "https://www.berlinwalk.com/post/where-to-watch-sunset-in-berlin",
-      "excerpt": "A Berlin guide's practical guide to the sunset in Berlin: real sunset and golden-hour timing by season, and the best spots to watch the light over water, the city or a wide-open horizon.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-07-09T12:09:58.557Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_b12916e0ba6b42819129df08d0acb49b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-oberbaumbruecke-sunset-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_b12916e0ba6b42819129df08d0acb49b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-oberbaumbruecke-sunset-cover.jpg",
-      "alt": "The sun setting through the arches of the Oberbaumbrücke over the Spree in Berlin, with a yellow U-Bahn crossing the bridge",
-      "relatedToolSlug": ""
     }
   ],
   "allPosts": [
+    {
+      "title": "Olympiastadion Berlin: How to Visit the 1936 Olympic Stadium (2026)",
+      "slug": "olympiastadion-berlin",
+      "path": "/post/olympiastadion-berlin",
+      "url": "https://www.berlinwalk.com/post/olympiastadion-berlin",
+      "excerpt": "The stadium the Nazis built for the 1936 Olympics is still standing and still full most weekends. On a normal day you can buy an 11 EUR ticket and walk straight in. Here is how to visit Olympiastadion Berlin, what you see inside, how to get there cheaply, and the one match-day catch to avoid.",
+      "category": "Berlin History",
+      "categorySlug": "berlin-history",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-07-12T07:05:15.706Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_be407886b9334da08006905dce9b9e17~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-olympiastadion-berlin-interior-bowl-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_be407886b9334da08006905dce9b9e17~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-olympiastadion-berlin-interior-bowl-cover.jpg",
+      "alt": "The Olympic flame cauldron on its pillars at the Marathon Gate inside Berlin's Olympiastadion, framed by the stadium roof opening",
+      "relatedToolSlug": ""
+    },
+    {
+      "title": "Berlin Street Art: Where to Find the Best Murals and Graffiti (2026)",
+      "slug": "berlin-street-art",
+      "path": "/post/berlin-street-art",
+      "url": "https://www.berlinwalk.com/post/berlin-street-art",
+      "excerpt": "You land expecting street art everywhere, then barely see a spray can around Museum Island. Berlin's best murals and graffiti sit a short train ride out, and almost all of it is free. Here is where to actually find it, from the courtyard five minutes off my tour to the Cold War ruin covered in art.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "free-budget",
+      "topicLabel": "Free & Budget",
+      "readTime": "6 min read",
+      "publishedDate": "2026-07-12T07:05:14.796Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_a9b73d95a0854efcae5e344d635e8fda~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-street-art-cosmonaut-victor-ash-kreuzberg-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_a9b73d95a0854efcae5e344d635e8fda~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-street-art-cosmonaut-victor-ash-kreuzberg-cover.jpg",
+      "alt": "The giant \"Astronaut Cosmonaut\" mural by Victor Ash on a Kreuzberg building wall, a stencilled spaceman in black and white above a line of trees under a blue sky",
+      "relatedToolSlug": ""
+    },
     {
       "title": "Gendarmenmarkt: A Local Guide to Berlin's Most Beautiful Square (2026)",
       "slug": "gendarmenmarkt-berlin",
