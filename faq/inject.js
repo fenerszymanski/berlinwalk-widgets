@@ -199,7 +199,8 @@
   "currency-exchange-in-berlin": "currency-exchange-in-berlin",
   "gendarmenmarkt-berlin": "gendarmenmarkt-berlin",
   "berlin-street-art": "berlin-street-art",
-  "olympiastadion-berlin": "olympiastadion-berlin"
+  "olympiastadion-berlin": "olympiastadion-berlin",
+  "tiergarten-berlin": "tiergarten-berlin"
 };
 
   var SCHEMAS = {
@@ -9429,6 +9430,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "If you have an interest in history or sport, yes. Standing in the bowl where the 1936 Games happened, and reading how the site has been reused since, is genuinely moving. It is out in the west and takes a half-morning, so it suits a slower day rather than a packed first-time itinerary. Seeing a Hertha match is the most memorable way to experience it."
+        }
+      }
+    ]
+  },
+  "tiergarten-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Tiergarten Berlin free to visit, and is it open at night?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Tiergarten is a public park with no entrance fee and no gates, so it is open around the clock. During the day it is busy with joggers, cyclists and families. After dark, treat it like any large city park: stick to the lit main paths such as the Straße des 17. Juni and Spreeweg rather than cutting through the trees."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does Tiergarten look so young for a 500-year-old park?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Because most of it genuinely is young. After the Second World War, Berliners cut down the park for firewood during the fuel shortage, and only around 700 of more than 200,000 trees survived. The land was also turned into roughly 2,550 potato and vegetable plots. Replanting began on 17 March 1949 and continued for a decade, with about 250,000 donated trees arriving from across West Germany, some flown in during the Berlin Blockade."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the main landmarks inside Tiergarten?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Victory Column at the Großer Stern roundabout is the obvious centrepiece and is climbable for a view. The Soviet War Memorial, near Brandenburger Tor, commemorates 80,000 Soviet soldiers and was built within months of the war ending in 1945. Bellevue Palace, the German President's official residence, sits on the park's northwestern edge but has no public entry."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much time should I give Tiergarten?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on your entry point. From a station right next to a landmark, 30 to 60 minutes covers a real two or three-stop loop. From a farther entry point, or if you want to see most of the park's landmarks including the Englischer Garten and Neuer See, plan on 90 minutes or more. The loop planner tool on this page works this out for your specific starting point and time budget."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I get to Tiergarten by public transport?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "There is no single main entrance. Brandenburger Tor (U55/U5, S-Bahn) is closest to the Soviet War Memorial and the eastern half of the park. Bellevue (S3/S5/S7/S9) is closest to Bellevue Palace and the Englischer Garten. Tiergarten station (S5/S7/S9) sits just south of the Straße des 17. Juni. Zoologischer Garten (S+U-Bahn) covers the southwestern corner next to Berlin Zoo."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Tiergarten part of the BerlinWalk walking tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. My free walking tour stays in the historic medieval core around Alexanderplatz, Museum Island and Hackescher Markt, and does not cross into Tiergarten. It is worth visiting as its own slower half-day rather than a rushed add-on to the tour."
         }
       }
     ]

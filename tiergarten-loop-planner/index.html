@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tiergarten Loop Planner — Berlin's Park in the Time You Actually Have</title>
+<meta name="description" content="Pick your entry point and how much time you have, and this tool plots a real walking loop through Tiergarten's landmarks, in the right order, with a suggested exit station." />
+<link rel="stylesheet" href="../css/brand.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script defer src="../js/brand.js"></script>
+<style>
+  .tlp {
+    font-family: 'Montserrat', system-ui, sans-serif;
+    color: var(--bw-text);
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 4px 4px 12px;
+    box-sizing: border-box;
+  }
+  .tlp *, .tlp *::before, .tlp *::after { box-sizing: border-box; }
+  .tlp__head {
+    background: var(--bw-green);
+    color: #fff;
+    border-radius: 16px 16px 0 0;
+    padding: 18px 20px 16px;
+  }
+  .tlp__kicker {
+    font-size: 11px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--bw-yellow); margin: 0 0 6px;
+  }
+  .tlp__title { font-size: 21px; font-weight: 800; margin: 0 0 4px; line-height: 1.25; }
+  .tlp__sub { font-size: 13.5px; margin: 0; color: #E8F0E0; line-height: 1.5; }
+  .tlp__body {
+    background: var(--bw-white);
+    border: 1px solid var(--bw-border);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    padding: 18px 18px 20px;
+  }
+  .tlp__label {
+    display: block; font-size: 12.5px; font-weight: 700; color: var(--bw-muted);
+    margin: 0 0 8px; text-transform: uppercase; letter-spacing: .04em;
+  }
+  .tlp__group { margin-bottom: 16px; }
+  .tlp__pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tlp__pill {
+    font-family: inherit; font-size: 13.5px; font-weight: 700; cursor: pointer;
+    padding: 9px 14px; border-radius: 11px; border: 1.5px solid var(--bw-border);
+    background: var(--bw-cream); color: var(--bw-text); text-align: left; line-height: 1.3;
+  }
+  .tlp__pill small { display: block; font-weight: 600; font-size: 11px; color: var(--bw-muted); margin-top: 1px; }
+  .tlp__pill:hover { border-color: var(--bw-lime); }
+  .tlp__pill.is-active {
+    background: var(--bw-green); border-color: var(--bw-green); color: #fff;
+  }
+  .tlp__pill.is-active small { color: #D9EBC8; }
+  .tlp__time-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .tlp__time {
+    font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer;
+    padding: 10px 0; border-radius: 11px; border: 1.5px solid var(--bw-border);
+    background: var(--bw-cream); color: var(--bw-text); flex: 1; min-width: 70px;
+  }
+  .tlp__time:hover { border-color: var(--bw-lime); }
+  .tlp__time.is-active { background: var(--bw-yellow); border-color: var(--bw-yellow); color: var(--bw-green-dark); }
+  .tlp__result { margin-top: 6px; }
+  .tlp__map {
+    width: 100%; height: 300px; border-radius: 12px; overflow: hidden;
+    border: 1px solid var(--bw-border); margin-bottom: 14px;
+  }
+  .tlp__summary {
+    font-size: 14px; font-weight: 700; color: var(--bw-green-dark);
+    background: var(--bw-lime-soft); border-radius: 10px; padding: 10px 13px; margin: 0 0 12px;
+    line-height: 1.5;
+  }
+  .tlp__stops { list-style: none; margin: 0; padding: 0; counter-reset: stop; }
+  .tlp__stop {
+    display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--bw-border);
+  }
+  .tlp__stop:last-child { border-bottom: none; }
+  .tlp__num {
+    flex: none; width: 26px; height: 26px; border-radius: 999px; background: var(--bw-green);
+    color: var(--bw-yellow); font-weight: 800; font-size: 13px;
+    display: flex; align-items: center; justify-content: center; margin-top: 1px;
+  }
+  .tlp__stop-name { font-weight: 800; font-size: 14.5px; margin: 0 0 2px; }
+  .tlp__stop-meta { font-size: 12px; font-weight: 700; color: var(--bw-muted); margin: 0 0 4px; }
+  .tlp__stop-blurb { font-size: 13.5px; line-height: 1.5; margin: 0; color: var(--bw-text); }
+  .tlp__exit {
+    margin-top: 14px; font-size: 13.5px; font-weight: 700; color: var(--bw-text);
+    background: var(--bw-cream); border: 1.5px dashed var(--bw-border); border-radius: 10px;
+    padding: 11px 13px; line-height: 1.5;
+  }
+  .tlp__exit b { color: var(--bw-green-dark); }
+  .tlp__empty { font-size: 13.5px; color: var(--bw-muted); text-align: center; padding: 20px 8px; }
+  .tlp .leaflet-container { font-family: 'Montserrat', system-ui, sans-serif; }
+  .tlp-pin {
+    width: 26px; height: 26px; border-radius: 999px; background: var(--bw-green);
+    color: var(--bw-yellow); font-weight: 800; font-size: 12px; border: 2px solid #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,.25);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .tlp-pin.tlp-pin--entry { background: var(--bw-yellow); color: var(--bw-green-dark); }
+  .tlp-pin.tlp-pin--exit { background: #fff; color: var(--bw-green-dark); border-color: var(--bw-green); }
+</style>
+</head>
+<body>
+<div class="tlp" id="tlp">
+  <div class="tlp__head">
+    <p class="tlp__kicker">BERLINWALK.COM &bull; TIERGARTEN</p>
+    <h2 class="tlp__title">Tiergarten Loop Planner</h2>
+    <p class="tlp__sub">Pick where you are starting and how much time you have. This works out a real walking order through the park and where to exit.</p>
+  </div>
+  <div class="tlp__body">
+    <div class="tlp__group">
+      <span class="tlp__label">Where are you starting from?</span>
+      <div class="tlp__pills" id="tlpEntry"></div>
+    </div>
+    <div class="tlp__group">
+      <span class="tlp__label">How much time do you have?</span>
+      <div class="tlp__time-row" id="tlpTime"></div>
+    </div>
+    <div class="tlp__result" id="tlpResult"></div>
+  </div>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function () {
+  var STATIONS = [
+    { id: 'brandenburger-tor', name: 'Brandenburger Tor', short: 'U55/U5, S-Bahn', lat: 52.5163, lng: 13.3777 },
+    { id: 'bellevue', name: 'Bellevue S-Bahn', short: 'S3/S5/S7/S9', lat: 52.5199, lng: 13.3466 },
+    { id: 'tiergarten', name: 'Tiergarten S-Bahn', short: 'S5/S7/S9', lat: 52.5145, lng: 13.3379 },
+    { id: 'zoologischer-garten', name: 'Zoologischer Garten', short: 'S+U-Bahn', lat: 52.5073, lng: 13.3324 },
+    { id: 'potsdamer-platz', name: 'Potsdamer Platz', short: 'S+U-Bahn', lat: 52.5096, lng: 13.3759 }
+  ];
+
+  var LANDMARKS = [
+    { id: 'soviet-memorial', name: 'Soviet War Memorial', dwell: 8, lat: 52.5150, lng: 13.3617,
+      blurb: 'Two T-34 tanks flank a red-granite colonnade built in months in 1945, for 80,000 Soviet dead.' },
+    { id: 'victory-column', name: 'Victory Column (Großer Stern)', dwell: 10, lat: 52.5145, lng: 13.3501,
+      blurb: 'The park’s obvious centrepiece. Climbable for a view; add about 20 minutes if you want to go up.' },
+    { id: 'bellevue-palace', name: 'Bellevue Palace', dwell: 6, lat: 52.5145, lng: 13.3466,
+      blurb: 'The German President’s residence. No public entry, but a genuinely handsome building on open lawn.' },
+    { id: 'englischer-garten', name: 'Englischer Garten', dwell: 10, lat: 52.5172, lng: 13.3423,
+      blurb: 'Quiet rhododendron paths, donated by Britain’s Royal House in the 1950s. The tea house burned down in 2024.' },
+    { id: 'loewenbruecke', name: 'Löwenbrücke', dwell: 5, lat: 52.5119, lng: 13.3527,
+      blurb: 'A stone-lion footbridge almost every visitor walks straight past. Two minutes, worth the detour.' },
+    { id: 'neuer-see', name: 'Neuer See', dwell: 15, lat: 52.5091, lng: 13.3444,
+      blurb: 'Rowboats and pedal boats for rent at Café am Neuen See, roughly 10 EUR an hour in season.' }
+  ];
+
+  var TIMES = [15, 30, 60, 90];
+  var WALK_KMH = 4.5;
+
+  var state = { entry: 'brandenburger-tor', minutes: 30 };
+  var map = null;
+  var mapLayer = null;
+
+  function haversineKm(a, b) {
+    var R = 6371;
+    var dLat = (b.lat - a.lat) * Math.PI / 180;
+    var dLng = (b.lng - a.lng) * Math.PI / 180;
+    var lat1 = a.lat * Math.PI / 180, lat2 = b.lat * Math.PI / 180;
+    var h = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    return 2 * R * Math.asin(Math.sqrt(h));
+  }
+  function walkMinutes(a, b) {
+    return haversineKm(a, b) / WALK_KMH * 60;
+  }
+  function nearestStation(point, excludeId) {
+    var best = null, bestT = Infinity;
+    STATIONS.forEach(function (s) {
+      var t = walkMinutes(point, s);
+      if (t < bestT) { bestT = t; best = s; }
+    });
+    return { station: best, minutes: bestT };
+  }
+
+  function planRoute(entryId, budget) {
+    var entry = STATIONS.filter(function (s) { return s.id === entryId; })[0];
+    // Step 1: build the full nearest-neighbor order from the entry point,
+    // ignoring the time budget, so there is always a real order to slice.
+    var current = entry;
+    var unvisited = LANDMARKS.slice();
+    var full = [];
+    var elapsed = 0;
+    while (unvisited.length) {
+      var best = null, bestTime = Infinity;
+      unvisited.forEach(function (l) {
+        var t = walkMinutes(current, l);
+        if (t < bestTime) { bestTime = t; best = l; }
+      });
+      elapsed += bestTime;
+      full.push({ landmark: best, arriveAt: elapsed, walkMin: bestTime, cumBeforeExit: elapsed + best.dwell });
+      elapsed += best.dwell;
+      current = best;
+      unvisited = unvisited.filter(function (l) { return l.id !== best.id; });
+    }
+
+    // Step 2: keep stops while the running total (walk + dwell so far, plus
+    // the walk out to the nearest station from that stop) still fits the
+    // budget. Always keep at least the first stop, even if it runs a little
+    // over — Tiergarten is big, and "nothing fits" is not useful advice.
+    var stops = [];
+    var kept = 0;
+    for (var i = 0; i < full.length; i++) {
+      var exitInfo = nearestStation(full[i].landmark, null);
+      var totalIfKept = full[i].cumBeforeExit + exitInfo.minutes;
+      if (stops.length > 0 && totalIfKept > budget) break;
+      stops.push(full[i]);
+      kept = totalIfKept;
+      if (totalIfKept > budget) break; // first stop kept even if tight, then stop
+    }
+
+    var last = stops[stops.length - 1].landmark;
+    var exit = nearestStation(last, null);
+    var totalMinutes = Math.round(stops[stops.length - 1].cumBeforeExit + exit.minutes);
+    return {
+      entry: entry,
+      stops: stops.map(function (s) {
+        return { landmark: s.landmark, arriveAt: Math.round(s.arriveAt), walkMin: Math.round(s.walkMin) };
+      }),
+      exit: exit.station,
+      exitWalk: Math.round(exit.minutes),
+      totalMinutes: totalMinutes,
+      tight: totalMinutes > budget
+    };
+  }
+
+  function el(tag, cls, html) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (html !== undefined) e.innerHTML = html;
+    return e;
+  }
+
+  function renderControls() {
+    var entryWrap = document.getElementById('tlpEntry');
+    entryWrap.innerHTML = '';
+    STATIONS.forEach(function (s) {
+      var btn = el('button', 'tlp__pill' + (state.entry === s.id ? ' is-active' : ''),
+        s.name + '<small>' + s.short + '</small>');
+      btn.type = 'button';
+      btn.addEventListener('click', function () { state.entry = s.id; render(); });
+      entryWrap.appendChild(btn);
+    });
+
+    var timeWrap = document.getElementById('tlpTime');
+    timeWrap.innerHTML = '';
+    TIMES.forEach(function (m) {
+      var btn = el('button', 'tlp__time' + (state.minutes === m ? ' is-active' : ''),
+        (m === 90 ? '90+' : m) + ' min');
+      btn.type = 'button';
+      btn.addEventListener('click', function () { state.minutes = m; render(); });
+      timeWrap.appendChild(btn);
+    });
+  }
+
+  function renderResult() {
+    var plan = planRoute(state.entry, state.minutes === 90 ? 105 : state.minutes);
+    var resultWrap = document.getElementById('tlpResult');
+    resultWrap.innerHTML = '';
+
+    var mapBox = el('div', 'tlp__map');
+    mapBox.id = 'tlpMap';
+    resultWrap.appendChild(mapBox);
+
+    var minutesLabel = state.minutes === 90 ? '90+' : state.minutes;
+    var summaryText;
+    if (plan.stops.length === 1 && plan.tight) {
+      summaryText = 'From ' + plan.entry.name + ', the nearest thing worth a stop is about ' +
+        plan.totalMinutes + ' minutes there, look and back to a station — a bit more than your ' +
+        minutesLabel + ' minutes, but Tiergarten is 210 hectares, so this is the honest nearest option.';
+    } else {
+      summaryText = 'From ' + plan.entry.name + ' in about ' + minutesLabel + ' minutes: a ' + plan.stops.length +
+        '-stop loop, roughly ' + plan.totalMinutes + ' minutes door to door, exiting near ' + plan.exit.name + '.';
+    }
+    var summaryEl = el('p', 'tlp__summary', summaryText);
+    resultWrap.appendChild(summaryEl);
+
+    var stopsList = el('ul', 'tlp__stops');
+    plan.stops.forEach(function (s, i) {
+      var li = el('li', 'tlp__stop');
+      li.appendChild(el('span', 'tlp__num', String(i + 1)));
+      var body = el('div');
+      body.appendChild(el('p', 'tlp__stop-name', s.landmark.name));
+      body.appendChild(el('p', 'tlp__stop-meta', 'About ' + s.arriveAt + ' min in • ' + s.walkMin + ' min walk to get here'));
+      body.appendChild(el('p', 'tlp__stop-blurb', s.landmark.blurb));
+      li.appendChild(body);
+      stopsList.appendChild(li);
+    });
+    resultWrap.appendChild(stopsList);
+
+    var exitBox = el('p', 'tlp__exit',
+      'Exit near <b>' + plan.exit.name + '</b> (' + plan.exit.short + '), about ' + plan.exitWalk + ' min walk from your last stop.');
+    resultWrap.appendChild(exitBox);
+
+    drawMap([plan.entry], plan.stops, plan.exit);
+  }
+
+  function drawMap(entryPoints, stops, exitPoint) {
+    var box = document.getElementById('tlpMap');
+    if (!box) return;
+    if (map) { map.remove(); map = null; }
+    map = L.map(box, { zoomControl: true, attributionControl: true, scrollWheelZoom: false }).setView([52.5145, 13.3520], 14);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    var pts = [];
+    var entry = entryPoints[0];
+    var entryIcon = L.divIcon({ className: '', html: '<div class="tlp-pin tlp-pin--entry">A</div>', iconSize: [26, 26] });
+    L.marker([entry.lat, entry.lng], { icon: entryIcon }).addTo(map).bindPopup('<b>Start:</b> ' + entry.name);
+    pts.push([entry.lat, entry.lng]);
+
+    stops.forEach(function (s, i) {
+      var l = s.landmark;
+      var icon = L.divIcon({ className: '', html: '<div class="tlp-pin">' + (i + 1) + '</div>', iconSize: [26, 26] });
+      L.marker([l.lat, l.lng], { icon: icon }).addTo(map).bindPopup('<b>' + (i + 1) + '. ' + l.name + '</b><br>' + l.blurb);
+      pts.push([l.lat, l.lng]);
+    });
+
+    if (exitPoint && exitPoint.lat) {
+      var exitIcon = L.divIcon({ className: '', html: '<div class="tlp-pin tlp-pin--exit">B</div>', iconSize: [26, 26] });
+      L.marker([exitPoint.lat, exitPoint.lng], { icon: exitIcon }).addTo(map).bindPopup('<b>Exit:</b> ' + exitPoint.name);
+      pts.push([exitPoint.lat, exitPoint.lng]);
+    }
+
+    if (pts.length > 1) {
+      L.polyline(pts, { color: '#1B5E20', weight: 3, opacity: 0.8, dashArray: '2 8' }).addTo(map);
+      map.fitBounds(pts, { padding: [26, 26] });
+    }
+  }
+
+  function render() {
+    renderControls();
+    renderResult();
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>
