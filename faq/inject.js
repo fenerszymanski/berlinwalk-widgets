@@ -204,7 +204,8 @@
   "berlin-observation-decks": "berlin-observation-decks",
   "how-to-pronounce-berlin-station-names": "how-to-pronounce-berlin-station-names",
   "teufelsberg-berlin": "teufelsberg-berlin",
-  "kreuzberg-berlin": "kreuzberg-berlin"
+  "kreuzberg-berlin": "kreuzberg-berlin",
+  "kadewe-berlin": "kadewe-berlin"
 };
 
   var SCHEMAS = {
@@ -9712,6 +9713,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Half a day is enough to get a real feel for one half. If you want both, do the western Bergmannkiez in daylight (coffee on Bergmannstraße, then the Kreuzberg hill in Viktoriapark) and drift east into SO36 as it gets dark (Oranienstraße, Markthalle Neun, the Oberbaumbrücke). The U1 links the two sides, so you can move between them in minutes rather than planning two separate trips."
+        }
+      }
+    ]
+  },
+  "kadewe-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is KaDeWe and is it worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "KaDeWe (Kaufhaus des Westens, \"the department store of the west\") is Berlin's grand luxury department store, open since 1907 and the largest in continental Europe after Harrods in London. Most travellers come for one thing: the food hall on the sixth floor. If you like markets, food shopping and grand old buildings, an hour there is well spent. If you have no interest in food or fashion, you can skip it without missing much of Berlin's history."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What floor is the KaDeWe food hall on?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The famous food hall, the Feinschmeckeretage, is on the sixth floor. It has around 35 counters covering everything from oysters, a champagne bar and fresh fish to cheese, charcuterie, chocolate and pastries. Entry is free, so you can browse, watch, and buy a single item to eat on the spot. One floor above, on the seventh floor, is the Winter Garden rooftop restaurant under a glass roof."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are KaDeWe’s opening hours? Is it open on Sunday?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "KaDeWe is generally open Monday to Saturday, roughly 10:00 to 20:00, and closed on Sundays, like almost every shop in Germany. Hours can shift slightly around holidays, so check the official KaDeWe website before a special trip. If you are in Berlin only on a Sunday, plan the food hall for another day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I get to KaDeWe?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The U-Bahn station Wittenbergplatz (lines U1, U2 and U3) is directly outside the store on Tauentzienstraße. From Alexanderplatz it is about 20 to 25 minutes on the U2. It sits in the former West Berlin, near the Kaiser Wilhelm Memorial Church and the Kurfürstendamm shopping street, so it pairs naturally with a west-Berlin afternoon rather than with the historic centre."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is KaDeWe expensive? Do I have to buy anything?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You do not have to spend a cent to look around, and that is exactly how a lot of locals treat it. The building, the ground-floor beauty hall and the sixth-floor food hall are free to walk through. The goods themselves range from everyday chocolate and coffee to serious luxury prices, so it is easy to enjoy it as a browse and buy one small treat. Cards are accepted, and non-EU visitors can ask about a VAT refund on larger purchases."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between the food hall and the Winter Garden?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The sixth-floor food hall is a market: standing counters, quick bites and food to take away. The seventh-floor Winter Garden is a rooftop food court under a glass roof, with proper seating and a view over Wittenbergplatz, so it is the better choice if you want to sit down and eat rather than graze on your feet. Many people do both: browse the sixth floor, then go one floor up to sit."
         }
       }
     ]
