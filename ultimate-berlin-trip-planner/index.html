@@ -12011,6 +12011,7 @@
   var TRACK_VISITOR_KEY = 'bwTripPlannerVisitorId.v1';
   var TRACK_SESSION_KEY = 'bwTripPlannerSessionId.v1';
   var CHECKOUT_SESSION_KEY = 'bwTripPlannerCheckoutSession.v1';
+  var META_PURCHASE_GUARD_PREFIX = 'bwTripPlannerMetaPurchase.v1:';
   var AI_GENERATION_LIMIT = 2;
   var LEGACY_UNLOCK_KEY = 'bw_trip_planner_unlock';
   var UNLOCK_KEY = 'bw_trip_planner_pro_entitlement_v1';
@@ -12385,13 +12386,17 @@
   var trackingConsent = (function () {
     try {
       var params = new URLSearchParams(window.location.search || '');
+      var advertising = params.get('advertising_consent') === '1';
       return {
         analytics: params.get('analytics_consent') === '1',
-        advertising: params.get('advertising_consent') === '1',
-        functional: params.get('functional_consent') === '1'
+        advertising: advertising,
+        functional: params.get('functional_consent') === '1',
+        fbclid: advertising ? params.get('fbclid') || '' : '',
+        fbc: advertising ? params.get('fbc') || '' : '',
+        fbp: advertising ? params.get('fbp') || '' : ''
       };
     } catch (error) {
-      return { analytics: false, advertising: false, functional: false };
+      return { analytics: false, advertising: false, functional: false, fbclid: '', fbc: '', fbp: '' };
     }
   })();
   resetLocalUnlockForQa();
@@ -12495,8 +12500,103 @@
     trackingConsent.analytics = event.data.analytics === true;
     trackingConsent.advertising = event.data.advertising === true;
     trackingConsent.functional = event.data.functional === true;
+    trackingConsent.fbclid = trackingConsent.advertising ? String(event.data.fbclid || '').slice(0, 220) : '';
+    trackingConsent.fbc = trackingConsent.advertising ? String(event.data.fbc || '').slice(0, 260) : '';
+    trackingConsent.fbp = trackingConsent.advertising ? String(event.data.fbp || '').slice(0, 260) : '';
     if (!trackingConsent.analytics) tripPlannerTracking = null;
   });
+
+  function cookieValue(name) {
+    try {
+      var prefix = String(name || '') + '=';
+      var parts = String(document.cookie || '').split(';');
+      for (var i = 0; i < parts.length; i += 1) {
+        var part = parts[i].trim();
+        if (part.indexOf(prefix) === 0) return decodeURIComponent(part.slice(prefix.length));
+      }
+    } catch (error) {}
+    return '';
+  }
+
+  function metaCheckoutContext() {
+    if (!advertisingAllowed()) {
+      return { advertisingConsent: false, fbclid: '', fbc: '', fbp: '' };
+    }
+    var params;
+    try { params = new URLSearchParams(window.location.search || ''); } catch (error) { params = new URLSearchParams(); }
+    var fbclid = String(trackingConsent.fbclid || params.get('fbclid') || '').slice(0, 220);
+    var fbc = String(trackingConsent.fbc || params.get('fbc') || cookieValue('_fbc') || '').slice(0, 260);
+    var fbp = String(trackingConsent.fbp || params.get('fbp') || cookieValue('_fbp') || '').slice(0, 260);
+    if (!fbc && fbclid) fbc = ('fb.1.' + Date.now() + '.' + fbclid).slice(0, 260);
+    return { advertisingConsent: true, fbclid: fbclid, fbc: fbc, fbp: fbp };
+  }
+
+  function privacySafeTrackingUrl(value) {
+    var clean = String(value || '');
+    if (!clean || advertisingAllowed()) return clean;
+    try {
+      var url = new URL(clean);
+      ['fbclid', 'fbc', 'fbp'].forEach(function (key) { url.searchParams.delete(key); });
+      return url.toString();
+    } catch (error) {
+      return clean;
+    }
+  }
+
+  function metaPurchaseAlreadyFired(orderId) {
+    var key = META_PURCHASE_GUARD_PREFIX + orderId;
+    try {
+      return Boolean(
+        (window.sessionStorage && window.sessionStorage.getItem(key)) ||
+        (window.localStorage && window.localStorage.getItem(key))
+      );
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function rememberMetaPurchase(orderId) {
+    var key = META_PURCHASE_GUARD_PREFIX + orderId;
+    try { if (window.sessionStorage) window.sessionStorage.setItem(key, '1'); } catch (error) {}
+    try { if (window.localStorage) window.localStorage.setItem(key, '1'); } catch (error) {}
+  }
+
+  function fireVerifiedBrowserMetaPurchase(purchase) {
+    if (!advertisingAllowed() || !purchase || purchase.eventName !== 'Purchase') return false;
+    var orderId = String(purchase.eventId || '');
+    if (!/^tppo_[A-Za-z0-9_-]{12,}$/.test(orderId) || metaPurchaseAlreadyFired(orderId)) return false;
+    if (Number(purchase.value) !== PRO_PRICE_EUR || String(purchase.currency || '').toUpperCase() !== 'EUR') return false;
+    var contentIds = Array.isArray(purchase.contentIds) ? purchase.contentIds : [];
+    if (contentIds.length !== 1 || contentIds[0] !== PRO_OFFER_VARIANT || purchase.contentType !== 'product') return false;
+    var parameters = {
+      value: PRO_PRICE_EUR,
+      currency: 'EUR',
+      content_ids: [PRO_OFFER_VARIANT],
+      content_type: 'product'
+    };
+    var delivered = false;
+    try {
+      if (typeof window.fbq === 'function') {
+        window.fbq('track', 'Purchase', parameters, { eventID: orderId });
+        delivered = true;
+      } else if (window.parent && window.parent !== window) {
+        window.parent.postMessage({
+          type: 'bw-trip-planner-purchase',
+          purchase: {
+            eventName: 'Purchase',
+            eventId: orderId,
+            value: PRO_PRICE_EUR,
+            currency: 'EUR',
+            contentIds: [PRO_OFFER_VARIANT],
+            contentType: 'product'
+          }
+        }, parentTrackingOrigin());
+        delivered = true;
+      }
+    } catch (error) {}
+    if (delivered) rememberMetaPurchase(orderId);
+    return delivered;
+  }
 
   function randomTrackingId(prefix) {
     return prefix + '_' + Math.random().toString(36).slice(2) + '_' + Date.now().toString(36);
@@ -12720,9 +12820,9 @@
       visitorId: tracking.visitorId,
       isPaid: Boolean(tracking.isPaid),
       pagePath: visiblePagePath(),
-      pageUrl: visiblePageUrl(),
-      referrer: document.referrer || '',
-      landingPage: tracking.landingPage || '',
+      pageUrl: privacySafeTrackingUrl(visiblePageUrl()),
+      referrer: privacySafeTrackingUrl(document.referrer || ''),
+      landingPage: privacySafeTrackingUrl(tracking.landingPage || ''),
       firstPage: tracking.firstPage || '',
       utmSource: tracking.utm_source || '',
       utmMedium: tracking.utm_medium || '',
@@ -21097,7 +21197,10 @@
 
   function plannerCheckoutReturnUrl() {
     try {
-      var url = new URL(window.location.href);
+      // Stripe must return to the Wix page which owns the Pixel. Returning the
+      // top window to the GitHub Pages iframe URL would orphan browser Purchase
+      // from the consent-aware parent bridge.
+      var url = new URL(parentPageUrlParam() || window.location.href);
       var params = plannerStateParams();
       params.forEach(function (value, key) { url.searchParams.set(key, value); });
       url.searchParams.delete('trip_planner_session_id');
@@ -21105,7 +21208,7 @@
       url.searchParams.delete('trip_planner_checkout');
       return url.toString();
     } catch (error) {
-      return window.location.href;
+      return parentPageUrlParam() || window.location.href;
     }
   }
 
@@ -21132,6 +21235,11 @@
       var url = new URL(window.location.href);
       ['trip_planner_session_id', 'trip_planner_order', 'trip_planner_checkout'].forEach(function (key) { url.searchParams.delete(key); });
       window.history.replaceState({}, document.title, url.toString());
+    } catch (error) {}
+    try {
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: 'bw-trip-planner-checkout-cleanup' }, parentTrackingOrigin());
+      }
     } catch (error) {}
   }
 
@@ -21313,6 +21421,7 @@
         expiresAt: Date.now() + UNLOCK_MS
       };
       rememberEntitlement(record);
+      fireVerifiedBrowserMetaPurchase(body.metaPurchase);
       track('bw_trip_planner_pro_purchase', { offer_variant: PRO_OFFER_VARIANT, order_id: record.orderId });
       return verifyStoredEntitlement('verified_payment_return');
     }).catch(function () {
@@ -22039,15 +22148,16 @@
       successUrl: plannerCheckoutReturnUrl(),
       cancelUrl: plannerCheckoutReturnUrl(),
       pagePath: visiblePagePath(),
-      pageUrl: visiblePageUrl(),
-      referrer: document.referrer || '',
-      landingPage: tracking.landingPage || '',
+      pageUrl: privacySafeTrackingUrl(visiblePageUrl()),
+      referrer: privacySafeTrackingUrl(document.referrer || ''),
+      landingPage: privacySafeTrackingUrl(tracking.landingPage || ''),
       utm_source: tracking.utm_source || '',
       utm_medium: tracking.utm_medium || '',
       utm_campaign: tracking.utm_campaign || '',
       utm_content: tracking.utm_content || '',
       utm_term: tracking.utm_term || ''
     };
+    Object.assign(payload, metaCheckoutContext());
 
     var request = typeof fetch === 'function'
       ? fetch(TRIP_PLANNER_PRO_API_URL, {

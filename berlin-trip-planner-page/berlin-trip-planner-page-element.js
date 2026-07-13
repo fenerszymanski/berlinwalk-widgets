@@ -33,6 +33,39 @@
     return currentConsentPolicy().functional === true;
   }
 
+  function cookieValue(name) {
+    try {
+      const prefix = `${String(name || '')}=`;
+      const part = String(document.cookie || '').split(';').map((item) => item.trim()).find((item) => item.startsWith(prefix));
+      return part ? decodeURIComponent(part.slice(prefix.length)) : '';
+    } catch (error) {
+      return '';
+    }
+  }
+
+  function metaAttribution() {
+    if (!advertisingConsent()) return { fbclid: '', fbc: '', fbp: '' };
+    try {
+      const params = new URLSearchParams(window.location.search || '');
+      const fbclid = String(params.get('fbclid') || '').slice(0, 220);
+      const fbc = String(params.get('fbc') || cookieValue('_fbc') || (fbclid ? `fb.1.${Date.now()}.${fbclid}` : '')).slice(0, 260);
+      const fbp = String(params.get('fbp') || cookieValue('_fbp') || '').slice(0, 260);
+      return { fbclid, fbc, fbp };
+    } catch (error) {
+      return { fbclid: '', fbc: '', fbp: '' };
+    }
+  }
+
+  function plannerParentUrl() {
+    try {
+      const url = new URL(window.location.href);
+      if (!advertisingConsent()) ['fbclid', 'fbc', 'fbp'].forEach((key) => url.searchParams.delete(key));
+      return url.toString();
+    } catch (error) {
+      return window.location.href;
+    }
+  }
+
   function ensureFont() {
     if (document.querySelector('link[data-bw-trip-page-font]')) return;
     const preconnect = document.createElement('link');
@@ -117,7 +150,9 @@
         'utm_campaign',
         'utm_content',
         'utm_term',
-        'fbclid'
+        'trip_planner_session_id',
+        'trip_planner_order',
+        'trip_planner_checkout'
       ];
       keys.forEach((key) => {
         if (current.has(key)) url.searchParams.set(key, current.get(key));
@@ -125,11 +160,15 @@
       if (!url.searchParams.has('context')) url.searchParams.set('context', 'tool');
       url.searchParams.set('source', current.get('source') || 'berlin_trip_planner_page');
       url.searchParams.set('parent_path', window.location.pathname || '/berlin-trip-planner');
-      url.searchParams.set('parent_url', window.location.href);
+      url.searchParams.set('parent_url', plannerParentUrl());
       url.searchParams.set('attribution', 'none');
       url.searchParams.set('analytics_consent', analyticsConsent() ? '1' : '0');
       url.searchParams.set('advertising_consent', advertisingConsent() ? '1' : '0');
       url.searchParams.set('functional_consent', functionalConsent() ? '1' : '0');
+      const meta = metaAttribution();
+      if (meta.fbclid) url.searchParams.set('fbclid', meta.fbclid);
+      if (meta.fbc) url.searchParams.set('fbc', meta.fbc);
+      if (meta.fbp) url.searchParams.set('fbp', meta.fbp);
       return url.toString();
     }
 
@@ -290,9 +329,8 @@
       };
 
       const isPlannerMessage = (event) => {
-        if (event.source === frame.contentWindow) return true;
         const origin = plannerOrigin();
-        return !!(event.origin && origin && event.origin === origin);
+        return Boolean(event.source === frame.contentWindow && event.origin && origin && event.origin === origin);
       };
 
       const readFrameHeight = () => {
@@ -354,11 +392,15 @@
       const sendConsentToPlanner = () => {
         try {
           if (!frame.contentWindow) return;
+          const meta = metaAttribution();
           frame.contentWindow.postMessage({
             type: 'bw-consent-update',
             analytics: analyticsConsent(),
             advertising: advertisingConsent(),
-            functional: functionalConsent()
+            functional: functionalConsent(),
+            fbclid: meta.fbclid,
+            fbc: meta.fbc,
+            fbp: meta.fbp
           }, plannerOrigin() || '*');
         } catch (error) {}
       };
@@ -385,14 +427,67 @@
         } catch (error) {}
       };
 
+      const pushPlannerMetaPurchase = (purchase) => {
+        if (!advertisingConsent() || !purchase || typeof window.fbq !== 'function') return;
+        const orderId = String(purchase.eventId || '');
+        if (!/^tppo_[A-Za-z0-9_-]{12,}$/.test(orderId)) return;
+        if (
+          purchase.eventName !== 'Purchase' ||
+          Number(purchase.value) !== 7.99 ||
+          String(purchase.currency || '').toUpperCase() !== 'EUR' ||
+          purchase.contentType !== 'product' ||
+          !Array.isArray(purchase.contentIds) ||
+          purchase.contentIds.length !== 1 ||
+          purchase.contentIds[0] !== 'trip_planner_detailed_7_99'
+        ) return;
+        const storageKey = `bwTripPlannerMetaPurchase.v1:${orderId}`;
+        this._metaPurchaseOrderIds = this._metaPurchaseOrderIds || new Set();
+        try {
+          if (
+            this._metaPurchaseOrderIds.has(orderId) ||
+            (window.sessionStorage && window.sessionStorage.getItem(storageKey)) ||
+            (window.localStorage && window.localStorage.getItem(storageKey))
+          ) return;
+        } catch (error) {
+          if (this._metaPurchaseOrderIds.has(orderId)) return;
+        }
+        window.fbq('track', 'Purchase', {
+          value: 7.99,
+          currency: 'EUR',
+          content_ids: ['trip_planner_detailed_7_99'],
+          content_type: 'product'
+        }, { eventID: orderId });
+        this._metaPurchaseOrderIds.add(orderId);
+        try { if (window.sessionStorage) window.sessionStorage.setItem(storageKey, '1'); } catch (error) {}
+        try { if (window.localStorage) window.localStorage.setItem(storageKey, '1'); } catch (error) {}
+      };
+
+      const cleanParentCheckoutParams = () => {
+        try {
+          const url = new URL(window.location.href);
+          ['trip_planner_session_id', 'trip_planner_order', 'trip_planner_checkout'].forEach((key) => url.searchParams.delete(key));
+          window.history.replaceState({}, document.title, url.toString());
+        } catch (error) {}
+      };
+
       this._messageHandler = (event) => {
         if (!event.data) return;
         const isResize = event.data.type === 'bw-resize' && validHeight(event.data.height);
         const isScroll = event.data.type === 'bw-scroll-to' && validScrollTop(event.data.top);
         const isTrackingEvent = event.data.type === 'bw-trip-planner-event' && validTripPlannerEvent(event.data.event);
-        if (!isResize && !isScroll && !isTrackingEvent) return;
+        const isMetaPurchase = event.data.type === 'bw-trip-planner-purchase';
+        const isCheckoutCleanup = event.data.type === 'bw-trip-planner-checkout-cleanup';
+        if (!isResize && !isScroll && !isTrackingEvent && !isMetaPurchase && !isCheckoutCleanup) return;
         if (!isPlannerMessage(event)) return;
 
+        if (isCheckoutCleanup) {
+          cleanParentCheckoutParams();
+          return;
+        }
+        if (isMetaPurchase) {
+          pushPlannerMetaPurchase(event.data.purchase);
+          return;
+        }
         if (isTrackingEvent) {
           pushPlannerAnalyticsEvent(event.data.event, event.data.payload);
           return;
