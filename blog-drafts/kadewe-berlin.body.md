@@ -48,7 +48,7 @@ Because it is easy to wander KaDeWe with no plan and burn an hour without reachi
 
 ## Getting there: Wittenbergplatz and the west
 
-KaDeWe stands on **Tauentzienstraße**, and the U-Bahn station **Wittenbergplatz** (lines U1, U2 and U3) is right outside its door. From Alexanderplatz it is about 20 to 25 minutes on the U2. If you are still getting your head around the network, my explainer on the [difference between the U-Bahn and S-Bahn](/u-bahn-vs-s-bahn-berlin) will help you read the map.
+KaDeWe stands on **Tauentzienstraße**, and the U-Bahn station **Wittenbergplatz** (lines U1, U2 and U3) is right outside its door. From Alexanderplatz it is about 15 to 20 minutes on the U2. If you are still getting your head around the network, my explainer on the [difference between the U-Bahn and S-Bahn](/u-bahn-vs-s-bahn-berlin) will help you read the map.
 
 ![The illuminated Wittenbergplatz U-Bahn station entrance next to KaDeWe in Berlin at night](blog-drafts/images/kadewe-berlin/optimized/05-wittenbergplatz-u-bahn-entrance.jpg)
 

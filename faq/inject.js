@@ -9726,7 +9726,7 @@
         "name": "What is KaDeWe and is it worth visiting?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "KaDeWe (Kaufhaus des Westens, \"the department store of the west\") is Berlin's grand luxury department store, open since 1907 and the largest in continental Europe after Harrods in London. Most travellers come for one thing: the food hall on the sixth floor. If you like markets, food shopping and grand old buildings, an hour there is well spent. If you have no interest in food or fashion, you can skip it without missing much of Berlin's history."
+          "text": "KaDeWe (Kaufhaus des Westens, \"the department store of the west\") is Berlin's grand luxury department store, open since 1907 and the largest department store in continental Europe, second in all of Europe only to Harrods in London. Most travellers come for one thing: the food hall on the sixth floor. If you like markets, food shopping and grand old buildings, an hour there is well spent. If you have no interest in food or fashion, you can skip it without missing much of Berlin's history."
         }
       },
       {
@@ -9750,7 +9750,7 @@
         "name": "How do I get to KaDeWe?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The U-Bahn station Wittenbergplatz (lines U1, U2 and U3) is directly outside the store on Tauentzienstraße. From Alexanderplatz it is about 20 to 25 minutes on the U2. It sits in the former West Berlin, near the Kaiser Wilhelm Memorial Church and the Kurfürstendamm shopping street, so it pairs naturally with a west-Berlin afternoon rather than with the historic centre."
+          "text": "The U-Bahn station Wittenbergplatz (lines U1, U2 and U3) is directly outside the store on Tauentzienstraße. From Alexanderplatz it is about 15 to 20 minutes on the U2. It sits in the former West Berlin, near the Kaiser Wilhelm Memorial Church and the Kurfürstendamm shopping street, so it pairs naturally with a west-Berlin afternoon rather than with the historic centre."
         }
       },
       {
