@@ -178,10 +178,14 @@ const TOPICS = [
 // guides. Keep this curated because the /blog hero is the first editorial
 // signal visitors see before the Latest shelf.
 const HERO_SLUGS = {
-  lead: 'tiergarten-berlin',
+  lead: 'kreuzberg-berlin',
   secondary: [
-    'berlin-observation-decks',
+    'kadewe-berlin',
+    'hitlers-bunker-berlin',
+    'how-to-pronounce-berlin-station-names',
+    'tiergarten-berlin',
     'currency-exchange-in-berlin',
+    'berlin-observation-decks',
     'u-bahn-vs-s-bahn-berlin',
     'air-conditioning-in-berlin',
     'berlin-wall-memorial-bernauer-strasse',
@@ -231,6 +235,10 @@ const REQUIRED_SLUGS = [
   'why-is-berlin-founding-year-1237',
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
+  'kreuzberg-berlin',
+  'kadewe-berlin',
+  'hitlers-bunker-berlin',
+  'how-to-pronounce-berlin-station-names',
   'tiergarten-berlin',
   'berlin-observation-decks',
   'mauerpark-berlin-sunday',
