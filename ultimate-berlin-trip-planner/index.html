@@ -11574,7 +11574,7 @@
       #bw-trip-planner .bw-quiz-shell,
       #bw-trip-planner .bw-question {
         border-radius: 12px;
-        padding: 16px;
+        padding: 13px;
       }
 
       #bw-trip-planner .bw-quiz-copy strong {
@@ -11595,11 +11595,11 @@
       }
 
       #bw-trip-planner .bw-options.cols-7 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
       #bw-trip-planner [data-group="tripLength"] .bw-option[data-value="7"] {
-        grid-column: span 2;
+        grid-column: span 3;
       }
     }
   </style>
@@ -12176,8 +12176,8 @@
       key: 'arrivalDate',
       keys: ['arrivalDate', 'tripLength'],
       selector: '[data-arrival-date]',
-      title: 'When are you in Berlin, and how many days do you have?',
-      subtitle: 'I will plan only the days you actually have, with the right weather and opening-day checks.',
+      title: 'Tell me when you arrive.',
+      subtitle: 'The free preview starts with your real dates. You can change every answer before the plan is built.',
       next: 'Next: arrival and base'
     },
     {

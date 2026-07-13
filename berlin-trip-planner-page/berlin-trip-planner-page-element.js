@@ -176,7 +176,6 @@
       const heroImage = asset('ultimate-berlin-trip-planner/assets/berlin-trip-planner-hero.jpg');
       const yusufImage = 'https://static.wixstatic.com/media/5a08a3_ac78d5df37b2486ab6662cf3872ea9a6~mv2.jpg/v1/fill/w_900,h_1125,al_c,q_85/file.jpg';
       const proofPlanIcon = asset('berlin-trip-planner-page/assets/proof-plan.webp');
-      const proofWeatherIcon = asset('berlin-trip-planner-page/assets/proof-weather.webp');
       const proofMapIcon = asset('berlin-trip-planner-page/assets/proof-map.webp');
       const proofGuideIcon = asset('berlin-trip-planner-page/assets/proof-guide.webp');
       const mapArt = asset('route/assets/berlin-mitte-illustration.png');
@@ -188,20 +187,37 @@
       this.innerHTML = `
         <style>${this._styles()}</style>
         <main class="bw-trip-page">
-          <section class="bw-trip-hero" aria-labelledby="bw-trip-page-title">
-            <div class="bw-trip-inner bw-trip-hero-grid">
-              <div class="bw-trip-hero-message">
-                <div class="bw-trip-hero-copy-wrap">
-                  <p class="bw-trip-kicker">Berlin Trip Planner</p>
-                  <h1 id="bw-trip-page-title">A Berlin plan built around the days you actually have.</h1>
-                  <span class="bw-trip-title-rule" aria-hidden="true"></span>
-                  <p class="bw-trip-hero-copy">Choose your arrival date. Get daily stops grouped by area, Google Maps links, weather checks, and a printable PDF.</p>
-                  <div class="bw-trip-actions">
-                    <a class="bw-trip-btn bw-trip-btn-primary" href="#planner">Build my Berlin plan</a>
-                  </div>
-                  <p class="bw-trip-trust-line">Free preview · 1–7 days · No account needed</p>
+          <section class="bw-trip-launch" aria-labelledby="bw-trip-page-title">
+            <div class="bw-trip-inner bw-trip-launch-inner">
+              <header class="bw-trip-intro">
+                <p class="bw-trip-kicker">My trip. My Berlin.</p>
+                <h1 id="bw-trip-page-title">A Berlin plan built around the days you actually have.</h1>
+                <p class="bw-trip-intro-copy">I check the route, weather, and opening hours so you don&rsquo;t have to.</p>
+              </header>
+
+              <section class="bw-trip-planner-band" id="planner" aria-label="Berlin trip planner widget">
+                <div class="bw-trip-widget-shell">
+                  <iframe data-bw-trip-planner-frame src="${this._plannerSrc()}" title="Berlin Trip Planner" loading="eager" scrolling="no"></iframe>
                 </div>
-                <figure class="bw-trip-hero-art">
+              </section>
+            </div>
+          </section>
+
+          <section class="bw-trip-proof-band" aria-label="Planner benefits">
+            <div class="bw-trip-inner bw-trip-proof">
+              <div class="bw-trip-proof-item"><img src="${proofPlanIcon}" alt="" aria-hidden="true"><span><b>Free preview</b><small>1–7 days · No account needed</small></span></div>
+              <div class="bw-trip-proof-item"><img src="${proofGuideIcon}" alt="" aria-hidden="true"><span><b>Built by a local guide</b><small>Real Berlin · Local tips</small></span></div>
+              <div class="bw-trip-proof-item"><img src="${proofMapIcon}" alt="" aria-hidden="true"><span><b>No generic lists</b><small>Opening hours · Route sense · Weather-aware</small></span></div>
+            </div>
+          </section>
+
+          <section class="bw-trip-section bw-trip-sample" aria-labelledby="bw-trip-sample-title">
+            <div class="bw-trip-inner bw-trip-sample-grid">
+              <div class="bw-trip-sample-copy">
+                <p class="bw-trip-section-kicker">See the shape first</p>
+                <h2 id="bw-trip-sample-title">Your days stay close together.</h2>
+                <p>I group each day by area, then check the route against arrival time, weather, and opening days. You see the free plan shape before deciding whether the detailed version is useful.</p>
+                <figure class="bw-trip-sample-art">
                   <img src="${heroImage}" alt="Illustrated summer view of Museum Island and the Berlin TV Tower">
                 </figure>
               </div>
@@ -234,30 +250,6 @@
                   <a href="#planner">View plan</a>
                 </div>
               </aside>
-            </div>
-          </section>
-
-          <section class="bw-trip-proof-band" aria-label="Planner benefits">
-            <div class="bw-trip-inner bw-trip-proof">
-              <span><img src="${proofPlanIcon}" alt="" aria-hidden="true"><b>Grouped by area</b></span>
-              <span><img src="${proofWeatherIcon}" alt="" aria-hidden="true"><b>Weather checked</b></span>
-              <span><img src="${proofMapIcon}" alt="" aria-hidden="true"><b>Google Maps ready</b></span>
-              <span><img src="${proofGuideIcon}" alt="" aria-hidden="true"><b>Local guide logic</b></span>
-            </div>
-          </section>
-
-          <section class="bw-trip-planner-band" id="planner" aria-label="Berlin trip planner widget">
-            <div class="bw-trip-inner">
-              <div class="bw-trip-planner-head">
-                <div>
-                  <p class="bw-trip-section-kicker">Start your plan</p>
-                  <h2>Tell me when you arrive.</h2>
-                </div>
-                <p>The free preview starts with your real dates. You can change every answer before the plan is built.</p>
-              </div>
-              <div class="bw-trip-widget-shell">
-                <iframe data-bw-trip-planner-frame src="${this._plannerSrc()}" title="Berlin Trip Planner" loading="eager" scrolling="no"></iframe>
-              </div>
             </div>
           </section>
 
@@ -521,7 +513,7 @@
       this._plannerResizeHandler = scheduleHeightChecks;
       window.addEventListener('resize', this._plannerResizeHandler);
       if (window.visualViewport) window.visualViewport.addEventListener('resize', this._plannerResizeHandler);
-      setHeight(1900);
+      setHeight(window.matchMedia('(max-width: 760px)').matches ? 610 : 560);
       scheduleHeightChecks();
       window.setTimeout(sendConsentToPlanner, 800);
     }
@@ -1275,6 +1267,276 @@
             align-items: stretch;
             flex-direction: column;
             padding: 28px 24px;
+          }
+        }
+
+        /* Option 2: planner-first landing. Keep the real iframe as the first
+           interactive surface and move the product proof below it. */
+        .bw-trip-launch {
+          background:
+            radial-gradient(circle at 50% -20%, rgba(197, 225, 165, 0.18), transparent 42%),
+            linear-gradient(180deg, #FFFDF8 0%, #FAFAF5 100%);
+          border-bottom: 1px solid var(--line);
+          padding: 34px 0 44px;
+        }
+
+        .bw-trip-launch-inner {
+          max-width: 1000px;
+          width: min(100% - 48px, 1000px);
+        }
+
+        .bw-trip-intro {
+          margin: 0 auto 26px;
+          max-width: 900px;
+          text-align: center;
+        }
+
+        .bw-trip-intro .bw-trip-kicker {
+          margin-bottom: 12px;
+        }
+
+        .bw-trip-intro h1 {
+          color: #16251A;
+          font-family: Merriweather, Georgia, serif;
+          font-size: clamp(42px, 5vw, 66px);
+          font-weight: 700;
+          letter-spacing: -2px;
+          line-height: 1.08;
+          margin: 0 auto;
+          max-width: 900px;
+          text-wrap: balance;
+        }
+
+        .bw-trip-intro-copy {
+          color: #3F4A40;
+          font-size: clamp(16px, 1.6vw, 19px);
+          font-weight: 500;
+          line-height: 1.55;
+          margin: 16px auto 0;
+          max-width: 660px;
+        }
+
+        .bw-trip-launch .bw-trip-planner-band {
+          background: transparent;
+          padding: 0;
+          scroll-margin-top: 24px;
+        }
+
+        .bw-trip-launch .bw-trip-widget-shell {
+          background: rgba(255, 255, 255, 0.9);
+          border: 1px solid rgba(27, 94, 32, 0.62);
+          border-radius: 20px;
+          box-shadow: 0 18px 42px rgba(27, 94, 32, 0.08);
+          max-width: 920px;
+          overflow: hidden;
+          padding: 20px 24px;
+        }
+
+        .bw-trip-launch .bw-trip-widget-shell iframe {
+          height: 560px;
+          min-height: 560px;
+        }
+
+        .bw-trip-proof-band {
+          padding: 0;
+        }
+
+        .bw-trip-proof {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          max-width: 1000px;
+        }
+
+        .bw-trip-proof-item {
+          align-items: center;
+          border-right: 1px solid #E6EDD9;
+          display: flex;
+          gap: 14px;
+          min-height: 112px;
+          padding: 20px 30px;
+        }
+
+        .bw-trip-proof-item:last-child {
+          border-right: 0;
+        }
+
+        .bw-trip-proof-item > span {
+          align-items: initial;
+          border: 0;
+          display: grid;
+          gap: 4px;
+          min-height: 0;
+          min-width: 0;
+          padding: 0;
+        }
+
+        .bw-trip-proof-item img {
+          flex: 0 0 auto;
+          height: 48px;
+          object-fit: contain;
+          width: 48px;
+        }
+
+        .bw-trip-proof-item b,
+        .bw-trip-proof-item small {
+          display: block;
+        }
+
+        .bw-trip-proof-item b {
+          color: #243024;
+          font-size: 14px;
+          line-height: 1.3;
+        }
+
+        .bw-trip-proof-item small {
+          color: #596459;
+          font-size: 12px;
+          font-weight: 500;
+          line-height: 1.45;
+        }
+
+        .bw-trip-sample {
+          background: #F2F6EA;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .bw-trip-sample-grid {
+          align-items: center;
+          display: grid;
+          gap: clamp(34px, 5vw, 64px);
+          grid-template-columns: minmax(300px, 0.72fr) minmax(500px, 1fr);
+        }
+
+        .bw-trip-sample-copy h2 {
+          color: #173C1B;
+          font-family: Merriweather, Georgia, serif;
+          font-size: clamp(34px, 4vw, 52px);
+          font-weight: 700;
+          letter-spacing: -1.2px;
+          line-height: 1.08;
+          margin-bottom: 18px;
+        }
+
+        .bw-trip-sample-copy > p:not(.bw-trip-section-kicker) {
+          color: var(--muted);
+          font-size: 16px;
+          font-weight: 500;
+          line-height: 1.65;
+          margin-bottom: 24px;
+        }
+
+        .bw-trip-sample-art {
+          border-radius: 16px;
+          height: 210px;
+          margin: 0;
+          overflow: hidden;
+        }
+
+        .bw-trip-sample-art img {
+          display: block;
+          height: 100%;
+          object-fit: cover;
+          object-position: center 60%;
+          width: 100%;
+        }
+
+        .bw-trip-sample .bw-trip-preview {
+          min-height: 650px;
+        }
+
+        @media (max-width: 1040px) {
+          .bw-trip-sample-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .bw-trip-sample-copy {
+            margin-inline: auto;
+            max-width: 780px;
+          }
+
+          .bw-trip-sample .bw-trip-preview {
+            margin-inline: auto;
+            max-width: 780px;
+            width: 100%;
+          }
+        }
+
+        @media (max-width: 760px) {
+          .bw-trip-launch {
+            padding: 20px 0 28px;
+          }
+
+          .bw-trip-launch-inner {
+            width: min(100% - 20px, 1000px);
+          }
+
+          .bw-trip-intro {
+            margin-bottom: 20px;
+            padding-inline: 8px;
+          }
+
+          .bw-trip-intro .bw-trip-kicker {
+            font-size: 11px;
+            letter-spacing: 1.8px;
+            margin-bottom: 10px;
+          }
+
+          .bw-trip-intro h1 {
+            font-size: clamp(34px, 9.7vw, 46px);
+            letter-spacing: -1.25px;
+            line-height: 1.08;
+          }
+
+          .bw-trip-intro-copy {
+            font-size: 15px;
+            line-height: 1.5;
+            margin-top: 12px;
+          }
+
+          .bw-trip-launch .bw-trip-widget-shell {
+            border-radius: 16px;
+            padding: 10px;
+          }
+
+          .bw-trip-launch .bw-trip-widget-shell iframe {
+            height: 610px;
+            min-height: 610px;
+          }
+
+          .bw-trip-proof {
+            grid-template-columns: 1fr;
+          }
+
+          .bw-trip-proof-item,
+          .bw-trip-proof-item:last-child {
+            border-bottom: 1px solid #E6EDD9;
+            border-right: 0;
+            min-height: 82px;
+            padding: 14px 16px;
+          }
+
+          .bw-trip-proof-item:last-child {
+            border-bottom: 0;
+          }
+
+          .bw-trip-proof-item img {
+            height: 42px;
+            width: 42px;
+          }
+
+          .bw-trip-sample-grid {
+            gap: 26px;
+          }
+
+          .bw-trip-sample-copy h2 {
+            font-size: 34px;
+          }
+
+          .bw-trip-sample-art {
+            height: 190px;
+          }
+
+          .bw-trip-sample .bw-trip-preview {
+            min-height: 0;
           }
         }
 
