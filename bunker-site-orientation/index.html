@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Finding the Führerbunker Site — Orientation Map</title>
+<meta name="description" content="The site of Hitler's bunker is deliberately unmarked. This orientation map shows exactly where it is, what you will actually find there today, and how to walk to it from Potsdamer Platz, Brandenburg Gate, or the Holocaust Memorial." />
+<link rel="stylesheet" href="../css/brand.css" />
+<script defer src="../js/brand.js"></script>
+<style>
+  .bso {
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+    color: var(--bw-text);
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 4px 4px 14px;
+    box-sizing: border-box;
+  }
+  .bso *, .bso *::before, .bso *::after { box-sizing: border-box; }
+
+  .bso__head {
+    background: var(--bw-green);
+    color: #fff;
+    border-radius: 16px 16px 0 0;
+    padding: 18px 20px 15px;
+  }
+  .bso__kicker {
+    font-size: 11px; font-weight: 700; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--bw-yellow); margin: 0 0 6px;
+  }
+  .bso__title { font-size: 21px; font-weight: 800; margin: 0 0 5px; line-height: 1.22; }
+  .bso__sub { font-size: 13.5px; margin: 0; color: #E8F0E0; line-height: 1.5; }
+
+  .bso__body {
+    background: var(--bw-white);
+    border: 1px solid var(--bw-border);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    padding: 14px 14px 18px;
+  }
+
+  .bso__reality {
+    display: flex; gap: 9px; align-items: flex-start;
+    background: var(--bw-lime-soft); border-left: 3px solid var(--bw-green);
+    border-radius: 0 9px 9px 0; padding: 9px 12px; margin: 0 0 13px;
+    font-size: 12.5px; line-height: 1.5; color: #2C3A2C;
+  }
+  .bso__reality b { color: var(--bw-green); }
+  .bso__realityIcon { flex: 0 0 auto; font-size: 15px; line-height: 1.2; }
+
+  .bso__routeLabel { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--bw-muted); margin: 0 0 7px; }
+  .bso__chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 0 0 12px; }
+  .bso__chip {
+    font-family: inherit; font-size: 12px; font-weight: 700;
+    border: 1.5px solid var(--bw-border); background: var(--bw-cream);
+    color: var(--bw-muted); border-radius: 999px; padding: 6px 12px;
+    cursor: pointer; transition: .15s; line-height: 1;
+  }
+  .bso__chip:hover { border-color: var(--bw-lime); color: var(--bw-green); }
+  .bso__chip[aria-pressed="true"] { background: var(--bw-yellow); border-color: var(--bw-yellow); color: #123D18; }
+
+  .bso__grid { display: flex; gap: 16px; align-items: stretch; }
+  .bso__mapWrap { flex: 1 1 340px; min-width: 0; }
+  .bso__panel { flex: 1 1 250px; min-width: 0; display: flex; flex-direction: column; }
+
+  .bso__svg { width: 100%; height: auto; display: block; border-radius: 12px; border: 1px solid var(--bw-border); background: #EDF2E6; }
+
+  .site { cursor: pointer; }
+  .site .site__hit { fill: transparent; }
+  .site__num circle { transition: .16s; }
+  .site.is-active .site__num circle { fill: var(--bw-yellow); stroke: var(--bw-green); }
+  .site.is-active .site__num text { fill: #123D18; }
+  .site__ring { opacity: 0; transition: .16s; }
+  .site.is-active .site__ring { opacity: 1; }
+  .site:focus { outline: none; }
+  .site:focus-visible .site__ring { opacity: 1; }
+
+  .bso__route { stroke: var(--bw-green); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; fill: none; opacity: 0; stroke-dasharray: 3 7; }
+  .bso__route.is-on { opacity: 1; }
+  .bso__routeDot { fill: var(--bw-green); opacity: 0; }
+  .bso__routeDot.is-on { opacity: 1; }
+
+  .bso__dir {
+    font-size: 12.5px; line-height: 1.5; color: #2C3A2C;
+    background: var(--bw-cream); border: 1px solid var(--bw-border);
+    border-radius: 10px; padding: 9px 11px; margin: 10px 0 0;
+    min-height: 44px;
+  }
+  .bso__dir b { color: var(--bw-green); }
+  .bso__dir .bso__min {
+    font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-weight: 600; color: var(--bw-green);
+  }
+
+  .bso__card {
+    background: var(--bw-cream); border: 1px solid var(--bw-border);
+    border-radius: 12px; padding: 14px 15px 15px; height: 100%;
+  }
+  .bso__cardTag {
+    font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 11.5px; font-weight: 600; letter-spacing: .03em; color: var(--bw-green);
+    margin: 0 0 3px; display: flex; align-items: center; gap: 7px;
+  }
+  .bso__pin {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 20px; height: 20px; border-radius: 50%; background: var(--bw-green);
+    color: #fff; font-size: 12px; font-weight: 700; flex: 0 0 auto;
+  }
+  .bso__cardTitle { font-size: 16.5px; font-weight: 800; margin: 3px 0 9px; line-height: 1.25; color: var(--bw-text); }
+  .bso__now, .bso__then { font-size: 13px; line-height: 1.55; margin: 0 0 8px; color: #33403A; }
+  .bso__lbl { font-weight: 700; color: var(--bw-green); display: block; font-size: 11px; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 1px; }
+  .bso__then { margin-bottom: 0; }
+
+  .bso__hint { font-size: 11.5px; color: var(--bw-muted); margin: 12px 2px 0; text-align: center; }
+  .bso__hint b { color: var(--bw-green); }
+  .bso__scale { font-style: italic; }
+
+  @media (max-width: 560px) {
+    .bso__grid { flex-direction: column; gap: 12px; }
+    .bso__title { font-size: 19px; }
+    .bso__mapWrap { flex-basis: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="bso" id="bso">
+  <div class="bso__head">
+    <p class="bso__kicker">BerlinWalk.com • Berlin History</p>
+    <h2 class="bso__title">Finding the Führerbunker site</h2>
+    <p class="bso__sub">The spot is deliberately unmarked, so people walk right past it. Here is exactly where it is, what you will actually find, and how to walk there.</p>
+  </div>
+
+  <div class="bso__body">
+    <div class="bso__reality">
+      <span class="bso__realityIcon">i</span>
+      <span><b>There is no bunker to go into.</b> The site today is an ordinary residential car park with one small information board. That plainness is a deliberate choice, not neglect.</span>
+    </div>
+
+    <p class="bso__routeLabel">Walking there from</p>
+    <div class="bso__chips" id="bsoChips" role="group" aria-label="Choose a starting point for walking directions">
+      <button class="bso__chip" type="button" data-route="potsdamer" aria-pressed="false">Potsdamer Platz</button>
+      <button class="bso__chip" type="button" data-route="brandenburg" aria-pressed="false">Brandenburg Gate</button>
+      <button class="bso__chip" type="button" data-route="memorial" aria-pressed="false">Holocaust Memorial</button>
+    </div>
+
+    <div class="bso__grid">
+      <div class="bso__mapWrap">
+        <svg class="bso__svg" viewBox="0 0 380 320" role="img" aria-label="Orientation map of the government quarter showing the Führerbunker car park, the information board, the Holocaust Memorial, the old and new Reich Chancellery sites, and nearby stations. Not to scale.">
+          <!-- Tiergarten green (top-left, west of Ebertstraße) -->
+          <path d="M0 0 H60 L60 118 L0 128 Z" fill="#CADFB0"/>
+          <text x="6" y="96" font-size="9" fill="#5E7D3E" font-family="Montserrat, sans-serif" font-weight="600">Tiergarten</text>
+
+          <!-- Roads -->
+          <!-- Ebertstraße (vertical, west) -->
+          <rect x="62" y="0" width="15" height="320" fill="#FFFFFF" stroke="#D8E0CC" stroke-width="1"/>
+          <text x="69.5" y="292" font-size="8.5" fill="#7A8570" font-family="Montserrat, sans-serif" transform="rotate(-90 69.5 292)">Ebertstraße</text>
+          <!-- Wilhelmstraße (vertical, east) -->
+          <rect x="296" y="0" width="15" height="320" fill="#FFFFFF" stroke="#D8E0CC" stroke-width="1"/>
+          <text x="303.5" y="118" font-size="8.5" fill="#7A8570" font-family="Montserrat, sans-serif" transform="rotate(-90 303.5 118)">Wilhelmstraße</text>
+          <!-- Hannah-Arendt-Straße (horizontal, north of memorial) -->
+          <rect x="77" y="120" width="219" height="12" fill="#FFFFFF" stroke="#D8E0CC" stroke-width="1"/>
+          <!-- Gertrud-Kolmar-Straße (horizontal, along the site) -->
+          <rect x="132" y="205" width="164" height="11" fill="#FFFFFF" stroke="#D8E0CC" stroke-width="1"/>
+          <text x="200" y="213" font-size="8" fill="#7A8570" font-family="Montserrat, sans-serif">Gertrud-Kolmar-Straße</text>
+          <!-- Voßstraße (horizontal, south) -->
+          <rect x="132" y="252" width="179" height="12" fill="#FFFFFF" stroke="#D8E0CC" stroke-width="1"/>
+          <text x="150" y="261" font-size="8.5" fill="#7A8570" font-family="Montserrat, sans-serif">Voßstraße</text>
+
+          <!-- Holocaust Memorial stelae field -->
+          <rect x="86" y="140" width="86" height="60" fill="#E8E4DA" stroke="#CFC8B8" stroke-width="1" rx="2"/>
+          <g fill="#BDB6A5">
+            <rect x="92" y="146" width="8" height="10"/><rect x="104" y="146" width="8" height="12"/><rect x="116" y="146" width="8" height="10"/><rect x="128" y="146" width="8" height="13"/><rect x="140" y="146" width="8" height="10"/><rect x="152" y="146" width="8" height="12"/><rect x="162" y="146" width="7" height="10"/>
+            <rect x="92" y="164" width="8" height="12"/><rect x="104" y="164" width="8" height="10"/><rect x="116" y="164" width="8" height="13"/><rect x="128" y="164" width="8" height="10"/><rect x="140" y="164" width="8" height="12"/><rect x="152" y="164" width="8" height="10"/><rect x="162" y="164" width="7" height="12"/>
+            <rect x="92" y="182" width="8" height="11"/><rect x="104" y="182" width="8" height="13"/><rect x="116" y="182" width="8" height="10"/><rect x="128" y="182" width="8" height="12"/><rect x="140" y="182" width="8" height="10"/><rect x="152" y="182" width="8" height="12"/><rect x="162" y="182" width="7" height="10"/>
+          </g>
+
+          <!-- Bunker-site block (car park) -->
+          <rect x="180" y="164" width="70" height="40" fill="#DDE6CE" stroke="#B9C9A2" stroke-width="1.5" rx="3"/>
+          <!-- parking hatch -->
+          <g stroke="#B2C398" stroke-width="1">
+            <line x1="192" y1="168" x2="192" y2="200"/><line x1="204" y1="168" x2="204" y2="200"/><line x1="216" y1="168" x2="216" y2="200"/><line x1="228" y1="168" x2="228" y2="200"/><line x1="240" y1="168" x2="240" y2="200"/>
+          </g>
+          <text x="215" y="160" font-size="8.5" fill="#5C6B4A" font-family="Montserrat, sans-serif" text-anchor="middle" font-weight="600">car park</text>
+
+          <!-- New Reich Chancellery footprint (south, along Voßstraße) -->
+          <rect x="180" y="268" width="96" height="20" fill="#E4DED2" stroke="#CFC8B8" stroke-width="1" rx="2"/>
+          <text x="210" y="281" font-size="7.5" fill="#8A8271" font-family="Montserrat, sans-serif" text-anchor="start">New Chancellery</text>
+
+          <!-- Route lines (drawn under markers) -->
+          <path class="bso__route" id="route-potsdamer" d="M60 296 L69 250 L69 150 L120 150 L200 184"/>
+          <path class="bso__route" id="route-brandenburg" d="M95 46 L69 120 L69 150 L120 150 L200 184"/>
+          <path class="bso__route" id="route-memorial" d="M150 178 L200 184"/>
+
+          <!-- Start-point landmark markers -->
+          <g id="lm-brandenburg">
+            <rect x="82" y="36" width="26" height="18" rx="3" fill="#fff" stroke="#9AA98A" stroke-width="1.2"/>
+            <g stroke="#7A8570" stroke-width="2"><line x1="88" y1="40" x2="88" y2="50"/><line x1="95" y1="40" x2="95" y2="50"/><line x1="102" y1="40" x2="102" y2="50"/></g>
+            <circle class="bso__routeDot" data-dot="brandenburg" cx="95" cy="46" r="4"/>
+            <text x="95" y="66" font-size="8.5" fill="#4E5A4E" font-family="Montserrat, sans-serif" text-anchor="middle" font-weight="600">Brandenburg Gate</text>
+          </g>
+          <g id="lm-potsdamer">
+            <circle cx="60" cy="296" r="6" fill="#fff" stroke="#9AA98A" stroke-width="1.4"/>
+            <text x="60" y="299.5" font-size="8" fill="#4E5A4E" font-family="Montserrat, sans-serif" text-anchor="middle" font-weight="700">S</text>
+            <circle class="bso__routeDot" data-dot="potsdamer" cx="60" cy="296" r="4.5"/>
+            <text x="60" y="313" font-size="8.5" fill="#4E5A4E" font-family="Montserrat, sans-serif" text-anchor="middle" font-weight="600">Potsdamer Platz</text>
+          </g>
+          <g id="lm-mohren">
+            <circle cx="336" cy="216" r="6" fill="#fff" stroke="#9AA98A" stroke-width="1.4"/>
+            <text x="336" y="219.5" font-size="8" fill="#4E5A4E" font-family="Montserrat, sans-serif" text-anchor="middle" font-weight="700">U</text>
+            <text x="336" y="233" font-size="8" fill="#4E5A4E" font-family="Montserrat, sans-serif" text-anchor="middle" font-weight="600">Mohrenstr.</text>
+          </g>
+
+          <!-- Interactive numbered points -->
+          <!-- 1 Bunker site -->
+          <g class="site" id="site-bunker" data-key="bunker" role="button" tabindex="0" aria-label="Point 1, the Führerbunker site, now a car park">
+            <rect class="site__ring" x="178" y="162" width="74" height="44" rx="5" fill="none" stroke="var(--bw-green)" stroke-width="2.5"/>
+            <rect class="site__hit" x="180" y="164" width="70" height="40"/>
+            <g class="site__num"><circle cx="215" cy="184" r="12" fill="var(--bw-green)" stroke="#fff" stroke-width="2"/><text x="215" y="188.5" text-anchor="middle" font-size="13" font-weight="700" fill="#fff" font-family="Montserrat, sans-serif">1</text></g>
+          </g>
+          <!-- 2 Information board (corner of Gertrud-Kolmar-Straße) -->
+          <g class="site" id="site-board" data-key="board" role="button" tabindex="0" aria-label="Point 2, the information board">
+            <circle class="site__ring" cx="170" cy="210" r="14" fill="none" stroke="var(--bw-green)" stroke-width="2.5"/>
+            <rect x="181" y="201" width="12" height="9" rx="1.5" fill="#fff" stroke="#7A8570" stroke-width="1.2"/>
+            <line x1="187" y1="210" x2="187" y2="216" stroke="#7A8570" stroke-width="1.4"/>
+            <circle class="site__hit" cx="176" cy="210" r="17"/>
+            <g class="site__num"><circle cx="170" cy="210" r="10" fill="var(--bw-green)" stroke="#fff" stroke-width="1.8"/><text x="170" y="214" text-anchor="middle" font-size="12" font-weight="700" fill="#fff" font-family="Montserrat, sans-serif">2</text></g>
+          </g>
+          <!-- 3 Holocaust Memorial -->
+          <g class="site" id="site-memorial" data-key="memorial" role="button" tabindex="0" aria-label="Point 3, the Holocaust Memorial">
+            <rect class="site__ring" x="84" y="138" width="90" height="64" rx="4" fill="none" stroke="var(--bw-green)" stroke-width="2.5"/>
+            <rect class="site__hit" x="86" y="140" width="86" height="60"/>
+            <g class="site__num"><circle cx="129" cy="170" r="12" fill="var(--bw-green)" stroke="#fff" stroke-width="2"/><text x="129" y="174.5" text-anchor="middle" font-size="13" font-weight="700" fill="#fff" font-family="Montserrat, sans-serif">3</text></g>
+          </g>
+          <!-- 4 Old Reich Chancellery (Wilhelmstraße) -->
+          <g class="site" id="site-oldrc" data-key="oldrc" role="button" tabindex="0" aria-label="Point 4, the old Reich Chancellery site on Wilhelmstraße">
+            <circle class="site__ring" cx="283" cy="170" r="15" fill="none" stroke="var(--bw-green)" stroke-width="2.5"/>
+            <circle class="site__hit" cx="283" cy="170" r="14"/>
+            <g class="site__num"><circle cx="283" cy="170" r="12" fill="var(--bw-green)" stroke="#fff" stroke-width="2"/><text x="283" y="174.5" text-anchor="middle" font-size="13" font-weight="700" fill="#fff" font-family="Montserrat, sans-serif">4</text></g>
+          </g>
+          <!-- 5 New Reich Chancellery (Voßstraße) -->
+          <g class="site" id="site-newrc" data-key="newrc" role="button" tabindex="0" aria-label="Point 5, the new Reich Chancellery site on Voßstraße">
+            <rect class="site__ring" x="178" y="266" width="100" height="24" rx="4" fill="none" stroke="var(--bw-green)" stroke-width="2.5"/>
+            <rect class="site__hit" x="180" y="268" width="96" height="20"/>
+            <g class="site__num"><circle cx="192" cy="278" r="11" fill="var(--bw-green)" stroke="#fff" stroke-width="2"/><text x="192" y="282.5" text-anchor="middle" font-size="12" font-weight="700" fill="#fff" font-family="Montserrat, sans-serif">5</text></g>
+          </g>
+
+          <!-- compass -->
+          <g transform="translate(354 18)">
+            <circle r="11" fill="#fff" stroke="#C4CDB6" stroke-width="1"/>
+            <path d="M0 -8 L3 2 L0 -1 L-3 2 Z" fill="var(--bw-green)"/>
+            <text x="0" y="-12.5" font-size="8" fill="#4E5A4E" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="700">N</text>
+          </g>
+        </svg>
+        <div class="bso__dir" id="bsoDir" aria-live="polite">
+          <b>Pick a start point</b> above to see the walking line and rough time on foot.
+        </div>
+      </div>
+
+      <div class="bso__panel">
+        <div class="bso__card" id="bsoCard" aria-live="polite"><!-- filled by JS --></div>
+      </div>
+    </div>
+
+    <p class="bso__hint">Tap a numbered point on the map to read what is there now and what stood there before. <span class="bso__scale">Orientation map, not to scale.</span></p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var POINTS = {
+    bunker: {
+      pin: '1',
+      tag: 'The spot itself',
+      title: 'The bunker site, now a car park',
+      now: 'An ordinary residential car park behind the apartment blocks between Gertrud-Kolmar-Straße and Wilhelmstraße. Cars park over it every day and most people never notice.',
+      then: 'The underground shelter where Hitler spent his final weeks and died on 30 April 1945, about 8.5 metres below the old Reich Chancellery garden. Nothing of it is open or visible.'
+    },
+    board: {
+      pin: '2',
+      tag: 'What marks it',
+      title: 'One small information board',
+      now: 'A single bilingual panel (German and English) put up in 2006 by the Berliner Unterwelten association, with a simple diagram of the bunker layout. It is easy to miss on the corner.',
+      then: 'Before 2006 there was nothing at all. The board was kept deliberately plain, meant as a factual record rather than a memorial or a place to gather.'
+    },
+    memorial: {
+      pin: '3',
+      tag: 'Right next door',
+      title: 'The Holocaust Memorial',
+      now: 'The Memorial to the Murdered Jews of Europe: 2,711 concrete stelae you can walk through, free and open at any hour. It sits a two minute walk west of the bunker site.',
+      then: 'Placed here on purpose. The contrast between a vast, open memorial to the victims and an unmarked car park over the bunker is the real story of this block.'
+    },
+    oldrc: {
+      pin: '4',
+      tag: 'To the east',
+      title: 'The old Reich Chancellery',
+      now: 'Wilhelmstraße today is offices, apartments and embassies. The palace that stood at number 77 is gone, with only a plain streetscape left.',
+      then: 'The bunker was dug under the garden of this old Reich Chancellery. It was the working heart of the Nazi government until the final days of the war.'
+    },
+    newrc: {
+      pin: '5',
+      tag: 'To the south',
+      title: 'The New Reich Chancellery',
+      now: 'Voßstraße is a quiet side street. Nothing of the huge building survives above ground; the site is ordinary city block today.',
+      then: 'Albert Speer’s monumental New Reich Chancellery ran along Voßstraße, about 120 metres south of the bunker. It was demolished after 1945 and its stone reused elsewhere.'
+    }
+  };
+
+  var ROUTES = {
+    potsdamer: 'From <b>Potsdamer Platz</b> it is a <span class="bso__min">~5 min</span> walk. Head north up Ebertstraße along the Tiergarten edge, then turn right (east) into Gertrud-Kolmar-Straße. The car park is on your left.',
+    brandenburg: 'From <b>Brandenburg Gate</b> it is a <span class="bso__min">~7 min</span> walk. Go south down Ebertstraße past the Holocaust Memorial, then turn left (east) into Gertrud-Kolmar-Straße.',
+    memorial: 'From the <b>Holocaust Memorial</b> it is a <span class="bso__min">~2 min</span> walk. Cross to the east edge of the stelae field and step into Gertrud-Kolmar-Straße. The site is right there.'
+  };
+
+  var ORDER = ['bunker', 'board', 'memorial', 'oldrc', 'newrc'];
+  var siteEls = {};
+  ORDER.forEach(function (k) { siteEls[k] = document.getElementById('site-' + k); });
+  var card = document.getElementById('bsoCard');
+  var dir = document.getElementById('bsoDir');
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.bso__chip'));
+  var routeEls = {
+    potsdamer: document.getElementById('route-potsdamer'),
+    brandenburg: document.getElementById('route-brandenburg'),
+    memorial: document.getElementById('route-memorial')
+  };
+  var dots = Array.prototype.slice.call(document.querySelectorAll('.bso__routeDot'));
+
+  function renderCard(key) {
+    var d = POINTS[key];
+    card.innerHTML =
+      '<p class="bso__cardTag"><span class="bso__pin">' + d.pin + '</span>' + d.tag + '</p>' +
+      '<h3 class="bso__cardTitle">' + d.title + '</h3>' +
+      '<p class="bso__now"><span class="bso__lbl">Here now</span>' + d.now + '</p>' +
+      '<p class="bso__then"><span class="bso__lbl">Here before</span>' + d.then + '</p>';
+  }
+
+  function selectPoint(key) {
+    ORDER.forEach(function (k) {
+      var active = k === key;
+      siteEls[k].classList.toggle('is-active', active);
+      siteEls[k].setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    renderCard(key);
+  }
+
+  function selectRoute(key) {
+    Object.keys(routeEls).forEach(function (k) {
+      routeEls[k].classList.toggle('is-on', k === key);
+    });
+    dots.forEach(function (dot) { dot.classList.toggle('is-on', dot.getAttribute('data-dot') === key); });
+    chips.forEach(function (c) { c.setAttribute('aria-pressed', c.dataset.route === key ? 'true' : 'false'); });
+    dir.innerHTML = ROUTES[key];
+  }
+
+  chips.forEach(function (c) {
+    c.addEventListener('click', function () {
+      var on = c.getAttribute('aria-pressed') === 'true';
+      if (on) {
+        c.setAttribute('aria-pressed', 'false');
+        Object.keys(routeEls).forEach(function (k) { routeEls[k].classList.remove('is-on'); });
+        dots.forEach(function (dot) { dot.classList.remove('is-on'); });
+        dir.innerHTML = '<b>Pick a start point</b> above to see the walking line and rough time on foot.';
+      } else {
+        selectRoute(c.dataset.route);
+      }
+    });
+  });
+
+  ORDER.forEach(function (k) {
+    var el = siteEls[k];
+    el.addEventListener('click', function () { selectPoint(k); });
+    el.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectPoint(k); }
+    });
+  });
+
+  selectPoint('bunker');
+})();
+</script>
+</body>
+</html>
