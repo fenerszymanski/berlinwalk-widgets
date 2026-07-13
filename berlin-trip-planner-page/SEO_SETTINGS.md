@@ -17,7 +17,7 @@ Add this to the page body:
 
 ```html
 <bw-berlin-trip-planner-page></bw-berlin-trip-planner-page>
-<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-trip-planner-page/berlin-trip-planner-page-element.js?v=20260606-wrapper"></script>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-trip-planner-page/berlin-trip-planner-page-element.js?v=20260713-responsive"></script>
 ```
 
 ## Structured Data
