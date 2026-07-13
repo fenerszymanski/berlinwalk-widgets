@@ -545,6 +545,9 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if (/(kreuzberg-berlin|kreuzberg berlin|so36|bergmannkiez)/.test(s)) return 'berlin-landmarks-map';
+  if (/(kadewe-berlin|kadewe berlin|kaufhaus des westens|food hall)/.test(s)) return 'berlin-shopping-areas';
+  if (/(hitlers-bunker-berlin|hitler's bunker|hitlers bunker|führerbunker|fuehrerbunker)/.test(s)) return 'berlin-landmarks-map';
   if (/(teufelsberg|devil's mountain|field station berlin)/.test(s)) return 'berlin-viewpoint-finder';
   if (/(how-to-pronounce-berlin-station-names|pronounce berlin station|how to pronounce)/.test(s)) return 'berlin-rail-decoder';
   if (/(berlin-observation-decks|observation deck|observation decks|viewpoint finder)/.test(s)) return 'berlin-viewpoint-finder';
