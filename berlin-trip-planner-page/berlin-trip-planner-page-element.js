@@ -107,6 +107,7 @@
       }
       if (this._resizeObserver) this._resizeObserver.disconnect();
       if (this._plannerFrameLoadHandler && this._plannerFrame) this._plannerFrame.removeEventListener('load', this._plannerFrameLoadHandler);
+      if (this._plannerFrameStyleObserver) this._plannerFrameStyleObserver.disconnect();
       if (this._plannerResizeHandler) {
         window.removeEventListener('resize', this._plannerResizeHandler);
         if (window.visualViewport) window.visualViewport.removeEventListener('resize', this._plannerResizeHandler);
@@ -304,9 +305,11 @@
       this._plannerShell = frame.closest('.bw-trip-widget-shell');
       this._plannerBand = this.querySelector('#planner');
       this._plannerResizeTimers = [];
+      if (this._plannerFrameStyleObserver) this._plannerFrameStyleObserver.disconnect();
 
       let lastHeight = 0;
       let currentPhase = 'quiz';
+      let requestedFrameHeight = 0;
       const heightBuffer = 24;
       // Reserve the tallest of the four short quiz steps from the first screen.
       // The card therefore stays still while answers change, then may expand for
@@ -318,6 +321,18 @@
         band.style.setProperty('height', 'auto', 'important');
         band.style.setProperty('min-height', '0', 'important');
         band.style.setProperty('max-height', 'none', 'important');
+      };
+      const enforceFrameHeight = () => {
+        if (!requestedFrameHeight) return;
+        const height = `${requestedFrameHeight}px`;
+        if (
+          frame.style.getPropertyValue('height') !== height ||
+          frame.style.getPropertyPriority('height') !== 'important'
+        ) frame.style.setProperty('height', height, 'important');
+        if (
+          frame.style.getPropertyValue('min-height') !== height ||
+          frame.style.getPropertyPriority('min-height') !== 'important'
+        ) frame.style.setProperty('min-height', height, 'important');
       };
       const setHeight = (height, phase) => {
         if (phase) currentPhase = phase;
@@ -338,10 +353,10 @@
           shell.style.setProperty('height', `${next}px`, 'important');
           shell.style.setProperty('min-height', `${next}px`, 'important');
         }
+        requestedFrameHeight = next;
+        enforceFrameHeight();
         if (Math.abs(next - lastHeight) < 2) return;
         lastHeight = next;
-        frame.style.setProperty('height', `${next}px`, 'important');
-        frame.style.setProperty('min-height', `${next}px`, 'important');
       };
 
       const plannerOrigin = () => {
@@ -563,6 +578,8 @@
         sendConsentToPlanner();
       };
       frame.addEventListener('load', this._plannerFrameLoadHandler);
+      this._plannerFrameStyleObserver = new MutationObserver(enforceFrameHeight);
+      this._plannerFrameStyleObserver.observe(frame, { attributes: true, attributeFilter: ['style'] });
       this._plannerResizeHandler = () => {
         if (currentPhase !== 'plan') setHeight(quizFloor() - heightBuffer, 'quiz');
         scheduleHeightChecks();
