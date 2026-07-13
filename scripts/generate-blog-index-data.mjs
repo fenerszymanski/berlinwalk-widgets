@@ -545,6 +545,8 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if (/(teufelsberg|devil's mountain|field station berlin)/.test(s)) return 'berlin-viewpoint-finder';
+  if (/(how-to-pronounce-berlin-station-names|pronounce berlin station|how to pronounce)/.test(s)) return 'berlin-rail-decoder';
   if (/(berlin-observation-decks|observation deck|observation decks|viewpoint finder)/.test(s)) return 'berlin-viewpoint-finder';
   if (/(tiergarten-berlin|tiergarten)/.test(s)) return 'tiergarten-loop-planner';
   if (/(u-bahn-vs-s-bahn-berlin|u-bahn vs s-bahn|s-bahn vs u-bahn|ubahn vs sbahn|which berlin train|berlin rail decoder)/.test(s)) return 'berlin-rail-decoder';
