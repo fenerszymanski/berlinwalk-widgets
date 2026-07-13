@@ -3556,6 +3556,75 @@
       "relatedBlog": "/post/tiergarten-berlin",
       "iconStatus": "live-wix-media",
       "cmsItemId": "4ffe1628-44ca-41fa-b232-6fe3945c55e0"
+    },
+    {
+      "slug": "teufelsberg-cross-section",
+      "title": "Inside Teufelsberg",
+      "lead": "Tap through the four layers of Berlin's strangest hill: the buried Nazi college at the base, 26 million cubic metres of wartime rubble, the forest that grew over it, and the Cold War spy station on top.",
+      "category": "Discovery",
+      "hubCategory": "CultureLandmarks",
+      "type": "Guide",
+      "tags": [
+        "Teufelsberg",
+        "Cold War",
+        "spy station",
+        "Grunewald",
+        "Berlin history",
+        "rubble hill",
+        "Field Station Berlin",
+        "radar domes",
+        "street art",
+        "landmarks"
+      ],
+      "aliases": [
+        "Teufelsberg",
+        "Devil's Mountain Berlin",
+        "Teufelsberg layers",
+        "Teufelsberg spy station",
+        "what is Teufelsberg made of",
+        "Field Station Berlin"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/teufelsberg-cross-section/",
+      "embedHeight": 1180,
+      "image": "https://static.wixstatic.com/media/5a08a3_2674858c43c644ffa0d0bfa70d429b12~mv2.png",
+      "relatedBlog": "/post/teufelsberg-berlin",
+      "relatedBlogSlug": "teufelsberg-berlin",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "1ccf925a-3995-4ef9-8316-c2e592a9b4e0"
+    },
+    {
+      "slug": "berlin-name-pronouncer",
+      "title": "Berlin Name Pronouncer",
+      "lead": "Tap any Berlin station or district name to see a simple English-style respelling, the stressed syllable, the sounds that trip tourists up, and hear it spoken in German.",
+      "category": "Transport",
+      "hubCategory": "Transport",
+      "type": "Guide",
+      "tags": [
+        "pronunciation",
+        "German",
+        "station names",
+        "U-Bahn",
+        "S-Bahn",
+        "Berlin districts",
+        "how to say",
+        "tourist tips",
+        "language",
+        "Alexanderplatz"
+      ],
+      "aliases": [
+        "how to pronounce Berlin stations",
+        "Berlin name pronouncer",
+        "say Berlin station names",
+        "Schonhauser Allee pronunciation",
+        "German pronunciation Berlin"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-name-pronouncer/",
+      "embedHeight": 1020,
+      "image": "https://static.wixstatic.com/media/5a08a3_14492432c35844d187509480f623afd2~mv2.png",
+      "relatedBlog": "/post/how-to-pronounce-berlin-station-names",
+      "relatedBlogSlug": "how-to-pronounce-berlin-station-names",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "26d2e522-992e-472e-9cb0-3a87e3f5f332"
     }
   ],
   "hubCategories": [
