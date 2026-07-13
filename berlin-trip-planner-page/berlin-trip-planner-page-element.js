@@ -301,15 +301,47 @@
       const frame = this.querySelector('[data-bw-trip-planner-frame]');
       if (!frame) return;
       this._plannerFrame = frame;
+      this._plannerShell = frame.closest('.bw-trip-widget-shell');
+      this._plannerBand = this.querySelector('#planner');
       this._plannerResizeTimers = [];
 
       let lastHeight = 0;
-      const setHeight = (height) => {
-        const next = Math.ceil(height) + 8;
+      let currentPhase = 'quiz';
+      const heightBuffer = 24;
+      // Reserve the tallest of the four short quiz steps from the first screen.
+      // The card therefore stays still while answers change, then may expand for
+      // the generated plan where extra content is expected.
+      const quizFloor = () => window.matchMedia('(max-width: 760px)').matches ? 1240 : 820;
+      const resetPlannerBand = () => {
+        const band = this._plannerBand;
+        if (!band) return;
+        band.style.setProperty('height', 'auto', 'important');
+        band.style.setProperty('min-height', '0', 'important');
+        band.style.setProperty('max-height', 'none', 'important');
+      };
+      const setHeight = (height, phase) => {
+        if (phase) currentPhase = phase;
+        const natural = Math.ceil(height) + heightBuffer;
+        const isQuiz = phase === 'quiz';
+        const isLegacyQuiz = phase === 'legacy-quiz';
+        const next = isLegacyQuiz
+          ? quizFloor()
+          : isQuiz
+            ? Math.max(quizFloor(), natural)
+            : natural;
+        resetPlannerBand();
+        const shell = this._plannerShell;
+        if (shell) {
+          // Wix keeps padding on this card. Content-box lets the iframe use its
+          // full measured height instead of cutting the legal note at the bottom.
+          shell.style.setProperty('box-sizing', 'content-box', 'important');
+          shell.style.setProperty('height', `${next}px`, 'important');
+          shell.style.setProperty('min-height', `${next}px`, 'important');
+        }
         if (Math.abs(next - lastHeight) < 2) return;
         lastHeight = next;
-        frame.style.height = `${next}px`;
-        frame.style.minHeight = `${next}px`;
+        frame.style.setProperty('height', `${next}px`, 'important');
+        frame.style.setProperty('min-height', `${next}px`, 'important');
       };
 
       const plannerOrigin = () => {
@@ -326,6 +358,10 @@
       };
 
       const readFrameHeight = () => {
+        // The child emits its own measured height. Reading a same-origin iframe
+        // here creates a resize feedback loop because its viewport follows this
+        // frame's height, so leave same-origin sizing to that message channel.
+        if (plannerOrigin() === window.location.origin) return 0;
         try {
           const doc = frame.contentDocument;
           if (!doc) return 0;
@@ -343,9 +379,26 @@
         }
       };
 
+      const readFramePhase = () => {
+        try {
+          const form = frame.contentDocument && frame.contentDocument.querySelector('.bw-form');
+          return form && form.classList.contains('is-quiz-flow') && !form.classList.contains('is-plan-generated')
+            ? 'quiz'
+            : 'plan';
+        } catch (error) {
+          return '';
+        }
+      };
+
+      const phaseFromMessage = (phase) => phase === 'plan'
+        ? 'plan'
+        : phase === 'quiz'
+          ? 'quiz'
+          : 'legacy-quiz';
+
       const syncFromReadableFrame = () => {
         const height = readFrameHeight();
-        if (validHeight(height)) setHeight(height);
+        if (validHeight(height)) setHeight(height, readFramePhase());
       };
 
       const scheduleHeightChecks = () => {
@@ -485,12 +538,12 @@
           return;
         }
         if (isResize) {
-          setHeight(event.data.height);
+          setHeight(event.data.height, phaseFromMessage(event.data.phase));
           scheduleHeightChecks();
           return;
         }
         if (isScroll) {
-          if (validHeight(event.data.height)) setHeight(event.data.height);
+          if (validHeight(event.data.height)) setHeight(event.data.height, phaseFromMessage(event.data.phase));
           scheduleHeightChecks();
           scrollToPlannerOffset(event.data.top);
         }
@@ -510,10 +563,13 @@
         sendConsentToPlanner();
       };
       frame.addEventListener('load', this._plannerFrameLoadHandler);
-      this._plannerResizeHandler = scheduleHeightChecks;
+      this._plannerResizeHandler = () => {
+        if (currentPhase !== 'plan') setHeight(quizFloor() - heightBuffer, 'quiz');
+        scheduleHeightChecks();
+      };
       window.addEventListener('resize', this._plannerResizeHandler);
       if (window.visualViewport) window.visualViewport.addEventListener('resize', this._plannerResizeHandler);
-      setHeight(window.matchMedia('(max-width: 760px)').matches ? 610 : 560);
+      setHeight(quizFloor() - heightBuffer, 'quiz');
       scheduleHeightChecks();
       window.setTimeout(sendConsentToPlanner, 800);
     }
@@ -533,9 +589,18 @@
 
       const sync = () => {
         const section = this.closest('section.wixui-section');
+        const plannerBand = this._plannerBand || this.querySelector('#planner');
         this.style.marginTop = '';
         this.style.marginBottom = '';
         delete this.dataset.bwWixTopGap;
+
+        // Older Wix layout data can leave this inner section at a fixed 2600px.
+        // Keep the band content-sized so the next section starts after the widget.
+        if (plannerBand) {
+          plannerBand.style.setProperty('height', 'auto', 'important');
+          plannerBand.style.setProperty('min-height', '0', 'important');
+          plannerBand.style.setProperty('max-height', 'none', 'important');
+        }
 
         const wrapper = this.parentElement;
         const container = wrapper && wrapper.parentElement;

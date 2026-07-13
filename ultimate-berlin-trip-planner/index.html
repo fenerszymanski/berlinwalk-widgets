@@ -12060,6 +12060,13 @@
   var plannerFrameResizeObserver = null;
   var tourRecommendationViewKey = '';
 
+  function plannerFramePhase() {
+    var form = root && root.querySelector('.bw-form');
+    return form && form.classList.contains('is-quiz-flow') && !form.classList.contains('is-plan-generated')
+      ? 'quiz'
+      : 'plan';
+  }
+
   function plannerContentHeight() {
     if (!document.body || !document.body.children || !document.body.children.length) return 0;
     var max = 0;
@@ -12077,7 +12084,7 @@
     var height = plannerContentHeight();
     if (height > 0) {
       try {
-        window.parent.postMessage({ type: 'bw-resize', height: height }, '*');
+        window.parent.postMessage({ type: 'bw-resize', height: height, phase: plannerFramePhase() }, '*');
       } catch (error) {}
     }
     return height;
@@ -12097,7 +12104,8 @@
         window.parent.postMessage({
           type: 'bw-scroll-to',
           top: top,
-          height: reportPlannerHeight()
+          height: reportPlannerHeight(),
+          phase: plannerFramePhase()
         }, '*');
       } catch (error) {}
       return;
