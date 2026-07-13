@@ -15,7 +15,7 @@ Design standard:
 - Final files must be RGBA PNGs with clean transparent/cream outer corners, no black/vignette corners, no visible text, and must remain readable at 64-160px.
 - For every new tool icon, save the source prompt/output, create canonical `tools-home/icons/<slug>.png` and `<slug>-160.png`, update both icon manifests, and wire the tool card image. Do not ship fallback letters or one-off visual styles.
 
-Tool count: 57
+Tool count: 60
 
 - `spati-survival-checker` - Späti Survival Checker (Maps)
 - `vegan-berlin-locations-map` - Vegan Berlin Interactive Map (Maps)
@@ -69,4 +69,7 @@ Tool count: 57
 - `berlin-pfand-calculator` - Berlin Pfand Calculator (Money)
 - `berlin-city-tax-calculator` - Berlin City Tax Calculator (Money)
 - `berlin-tax-free-refund-calculator` - Berlin Tax Free Refund Calculator (Money)
+- `kreuzberg-two-faces` - Kreuzberg Two Faces (Discovery)
+- `kadewe-visit-planner` - KaDeWe Visit Planner (Discovery)
+- `bunker-site-orientation` - Bunker Site Orientation (Discovery)
 - `berlin-taxi-uber-cost-checker` - Berlin Taxi or Uber Cost Checker (Money)
