@@ -202,7 +202,8 @@
   "olympiastadion-berlin": "olympiastadion-berlin",
   "tiergarten-berlin": "tiergarten-berlin",
   "berlin-observation-decks": "berlin-observation-decks",
-  "how-to-pronounce-berlin-station-names": "how-to-pronounce-berlin-station-names"
+  "how-to-pronounce-berlin-station-names": "how-to-pronounce-berlin-station-names",
+  "teufelsberg-berlin": "teufelsberg-berlin"
 };
 
   var SCHEMAS = {
@@ -9594,6 +9595,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "The ones you will use on day one: your hotel's station, your airport station, and Alexanderplatz (\"ah-lex-AHN-der-plats\"). After that, add the districts you plan to visit, such as Kreuzberg (\"KROYTS-bairk\"), Neukölln (\"noy-KURLN\"), or Prenzlauer Berg (\"PRENTS-low-er bairk\")."
+        }
+      }
+    ]
+  },
+  "teufelsberg-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Teufelsberg in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Teufelsberg is an artificial hill in the Grunewald forest in west Berlin, built from around 26 million cubic metres of Second World War rubble dumped here between 1950 and 1972. It rises about 120 m and is one of Berlin's highest points. Buried at its base is an unfinished Nazi military college, and on its summit sits an abandoned Cold War spy station, so the hill is really several eras of Berlin stacked on top of each other."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Teufelsberg worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If you like Cold War history, urban exploration or street art, yes. The abandoned radar domes are striking, the story is genuinely unusual, and the viewing platform gives a wide look over Berlin and the western lakes. It is less worth the trip if you only have a day or two and want the classic central sights, because Teufelsberg is out in the far west and takes a half day. I would go on a second or third visit, not a first afternoon."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you get to Teufelsberg?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Take the S-Bahn to Grunewald (or Heerstraße), then walk about 2 km, roughly 30 minutes, uphill through the Grunewald forest to the entrance. There is free parking at the bottom of the access road if you drive, but you still walk the last stretch up. There is no station or car park at the top, so wear proper shoes and expect a gentle climb."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much are Teufelsberg tickets and when is it open in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tickets are €12 for adults, €10 reduced (students, seniors, visitors with disabilities), €5 for children and youth up to 17, and free for under-7s; a family ticket is €27. It is open daily from 11:00 until sunset, so closing is later in summer (around 21:00) and earlier in winter (around 16:30), with last entry one hour before closing. You can buy online in advance or pay on site by cash or card, and it is closed on 24 and 31 December."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is buried under Teufelsberg?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Under the rubble lies the concrete shell of an unfinished Nazi military-technical college (the Wehrtechnische Fakultät), designed by Albert Speer as part of Hitler's planned world capital 'Germania'. Construction stopped during the war and it was never completed. It was built so solidly that after 1945 it was easier to bury it under wartime rubble than to demolish it, which is a large part of why the hill exists at all."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why did the Americans build a spy station on Teufelsberg?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Because it was the highest point around and gave a clear line of sight over East Germany. During the Cold War the US ran Field Station Berlin here, one of its biggest listening posts, using the domed antennas to intercept radio and satellite signals from the Eastern Bloc. It operated until the Cold War ended around 1990, after which the equipment was removed and the site was left to decay."
         }
       }
     ]

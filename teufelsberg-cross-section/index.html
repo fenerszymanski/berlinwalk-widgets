@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Inside Teufelsberg — What the Hill Is Made Of</title>
+<meta name="description" content="Teufelsberg is not a natural hill. Tap through its layers to see what it is really made of: a buried Nazi military college, 26 million cubic metres of wartime rubble, a forest surface, and a Cold War spy station on top." />
+<link rel="stylesheet" href="../css/brand.css" />
+<script defer src="../js/brand.js"></script>
+<style>
+  .tbx {
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+    color: var(--bw-text);
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 4px 4px 14px;
+    box-sizing: border-box;
+  }
+  .tbx *, .tbx *::before, .tbx *::after { box-sizing: border-box; }
+
+  .tbx__head {
+    background: var(--bw-green);
+    color: #fff;
+    border-radius: 16px 16px 0 0;
+    padding: 18px 20px 16px;
+  }
+  .tbx__kicker {
+    font-size: 11px; font-weight: 700; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--bw-yellow); margin: 0 0 6px;
+  }
+  .tbx__title { font-size: 21px; font-weight: 800; margin: 0 0 5px; line-height: 1.22; }
+  .tbx__sub { font-size: 13.5px; margin: 0; color: #E8F0E0; line-height: 1.5; }
+
+  .tbx__body {
+    background: var(--bw-white);
+    border: 1px solid var(--bw-border);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    padding: 14px 14px 18px;
+  }
+
+  .tbx__chips {
+    display: flex; flex-wrap: wrap; gap: 7px; margin: 0 0 12px;
+  }
+  .tbx__chip {
+    font-family: inherit; font-size: 12px; font-weight: 700;
+    border: 1.5px solid var(--bw-border); background: var(--bw-cream);
+    color: var(--bw-muted); border-radius: 999px; padding: 6px 12px;
+    cursor: pointer; transition: .15s; line-height: 1;
+  }
+  .tbx__chip:hover { border-color: var(--bw-lime); color: var(--bw-green); }
+  .tbx__chip[aria-pressed="true"] {
+    background: var(--bw-yellow); border-color: var(--bw-yellow); color: #123D18;
+  }
+
+  .tbx__grid { display: flex; gap: 16px; align-items: stretch; }
+  .tbx__figure { flex: 0 0 300px; max-width: 300px; }
+  .tbx__panel { flex: 1 1 auto; min-width: 0; }
+
+  .tbx__svg { width: 100%; height: auto; display: block; border-radius: 12px; overflow: visible; }
+
+  .layer { cursor: pointer; }
+  .layer .layer__fill { transition: opacity .18s, filter .18s; }
+  .layer.is-dim .layer__fill { opacity: .28; }
+  .layer.is-dim .layer__num { opacity: .3; }
+  .layer__num circle { transition: .18s; }
+  .layer.is-active .layer__num circle { fill: var(--bw-yellow); stroke: var(--bw-green); }
+  .layer.is-active .layer__num text { fill: #123D18; }
+  .layer:focus { outline: none; }
+  .layer:focus-visible .layer__ring { opacity: 1; }
+  .layer__ring { opacity: 0; }
+  .layer.is-active .layer__ring { opacity: 1; }
+
+  .tbx__panelCard {
+    background: var(--bw-cream); border: 1px solid var(--bw-border);
+    border-radius: 12px; padding: 14px 15px 15px; height: 100%;
+  }
+  .tbx__era {
+    font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12px; font-weight: 600; letter-spacing: .04em;
+    color: var(--bw-green); margin: 0 0 3px; display: flex; align-items: center; gap: 8px;
+  }
+  .tbx__swatch { width: 13px; height: 13px; border-radius: 4px; flex: 0 0 auto; border: 1px solid rgba(0,0,0,.12); }
+  .tbx__panelTitle { font-size: 17px; font-weight: 800; margin: 2px 0 8px; line-height: 1.25; color: var(--bw-text); }
+  .tbx__panelText { font-size: 13.5px; line-height: 1.6; margin: 0 0 10px; color: #33403A; }
+  .tbx__fact {
+    display: flex; gap: 8px; align-items: flex-start;
+    background: var(--bw-lime-soft); border-left: 3px solid var(--bw-lime);
+    border-radius: 0 8px 8px 0; padding: 8px 10px; font-size: 12.5px; line-height: 1.5; color: #2C3A2C;
+  }
+  .tbx__fact b { color: var(--bw-green); }
+  .tbx__factIcon { flex: 0 0 auto; font-size: 14px; line-height: 1.3; }
+
+  .tbx__hint { font-size: 11.5px; color: var(--bw-muted); margin: 11px 2px 0; text-align: center; }
+  .tbx__hint b { color: var(--bw-green); }
+
+  @media (max-width: 560px) {
+    .tbx__grid { flex-direction: column; gap: 12px; }
+    .tbx__figure { flex-basis: auto; max-width: 340px; margin: 0 auto; width: 100%; }
+    .tbx__title { font-size: 19px; }
+  }
+</style>
+</head>
+<body>
+<div class="tbx" id="tbx">
+  <div class="tbx__head">
+    <p class="tbx__kicker">BerlinWalk.com • Berlin History</p>
+    <h2 class="tbx__title">Inside Teufelsberg: what the hill is actually made of</h2>
+    <p class="tbx__sub">Teufelsberg is not a natural hill. It is four eras of Berlin stacked on top of each other. Tap a layer to see what is under your feet.</p>
+  </div>
+  <div class="tbx__body">
+    <div class="tbx__chips" id="tbxChips" role="group" aria-label="Filter by era">
+      <button class="tbx__chip" type="button" data-era="all" aria-pressed="true">Whole hill</button>
+      <button class="tbx__chip" type="button" data-era="dome" aria-pressed="false">Cold War</button>
+      <button class="tbx__chip" type="button" data-era="today" aria-pressed="false">Today</button>
+      <button class="tbx__chip" type="button" data-era="rubble" aria-pressed="false">Rubble years</button>
+      <button class="tbx__chip" type="button" data-era="college" aria-pressed="false">Nazi era</button>
+    </div>
+
+    <div class="tbx__grid">
+      <div class="tbx__figure">
+        <svg class="tbx__svg" viewBox="0 0 300 400" role="img" aria-label="Cross-section of Teufelsberg from the spy-station domes on top down to the buried Nazi college at the base">
+          <!-- sky -->
+          <rect x="0" y="0" width="300" height="400" fill="#EAF1F6" rx="12"/>
+
+          <!-- 5: original ground / plain -->
+          <g class="layer" id="lyr-ground" data-key="ground" role="button" tabindex="0" aria-label="Original ground level">
+            <rect class="layer__fill" x="0" y="300" width="300" height="100" fill="#E7DCC4"/>
+            <rect class="layer__ring" x="1.5" y="301.5" width="297" height="97" fill="none" stroke="var(--bw-green)" stroke-width="3" rx="4"/>
+          </g>
+
+          <!-- 4: buried college (straddles ground line, mostly below) -->
+          <g class="layer" id="lyr-college" data-key="college" role="button" tabindex="0" aria-label="Buried unfinished Nazi military college">
+            <path class="layer__fill" d="M96 286 h108 v70 h-108 z" fill="#3E4C41"/>
+            <g fill="#55655A">
+              <rect x="104" y="296" width="14" height="18"/><rect x="128" y="296" width="14" height="18"/>
+              <rect x="152" y="296" width="14" height="18"/><rect x="176" y="296" width="14" height="18"/>
+              <rect x="116" y="326" width="14" height="18"/><rect x="140" y="326" width="14" height="18"/>
+              <rect x="164" y="326" width="14" height="18"/>
+            </g>
+            <rect class="layer__ring" x="95" y="285" width="110" height="72" fill="none" stroke="var(--bw-yellow)" stroke-width="3" rx="3"/>
+          </g>
+
+          <!-- 3: rubble mound -->
+          <g class="layer" id="lyr-rubble" data-key="rubble" role="button" tabindex="0" aria-label="26 million cubic metres of wartime rubble">
+            <path class="layer__fill" d="M18 300 C70 210 96 150 150 118 C204 150 230 210 282 300 Z" fill="#B58A5B"/>
+            <g fill="#9C744A" opacity="0.7">
+              <circle cx="96" cy="240" r="4"/><circle cx="150" cy="205" r="4.5"/><circle cx="120" cy="270" r="3.5"/>
+              <circle cx="188" cy="245" r="4"/><circle cx="210" cy="280" r="3.5"/><circle cx="70" cy="285" r="4"/>
+              <circle cx="150" cy="260" r="4"/><circle cx="235" cy="292" r="3.5"/><circle cx="132" cy="175" r="3.5"/>
+            </g>
+            <rect class="layer__ring" x="16" y="112" width="268" height="190" fill="none" stroke="var(--bw-green)" stroke-width="3" rx="6"/>
+          </g>
+
+          <!-- 2: surface / forest skin -->
+          <g class="layer" id="lyr-today" data-key="today" role="button" tabindex="0" aria-label="Forest surface, viewing platform and street art today">
+            <path class="layer__fill" d="M18 300 C70 210 96 150 150 118 C204 150 230 210 282 300 L272 300 C224 216 200 160 150 130 C100 160 76 216 28 300 Z" fill="#7CB342"/>
+            <g fill="#5E9430">
+              <path d="M104 176 l5 -12 5 12 z"/><path d="M150 150 l5 -12 5 12 z"/><path d="M190 178 l5 -12 5 12 z"/>
+              <path d="M78 230 l5 -12 5 12 z"/><path d="M214 232 l5 -12 5 12 z"/>
+            </g>
+            <rect class="layer__ring" x="16" y="116" width="268" height="188" fill="none" stroke="var(--bw-green)" stroke-width="3" rx="6"/>
+          </g>
+
+          <!-- 1: dome / spy station -->
+          <g class="layer" id="lyr-dome" data-key="dome" role="button" tabindex="0" aria-label="Cold War NSA spy station domes on top">
+            <rect x="140" y="86" width="20" height="34" fill="#B9C2C7"/>
+            <path class="layer__fill" d="M124 92 a26 26 0 0 1 52 0 q-26 12 -52 0 z" fill="#F4F7FA"/>
+            <path d="M124 92 a26 26 0 0 1 52 0" fill="none" stroke="#C4CDD3" stroke-width="1.4"/>
+            <line x1="150" y1="44" x2="150" y2="66" stroke="#8A959B" stroke-width="2.4"/>
+            <ellipse cx="150" cy="70" rx="12" ry="7" fill="#F4F7FA" stroke="#C4CDD3" stroke-width="1.2"/>
+            <rect class="layer__ring" x="118" y="40" width="64" height="84" fill="none" stroke="var(--bw-green)" stroke-width="3" rx="8"/>
+          </g>
+
+          <!-- number badges (drawn last so they sit on top) -->
+          <g class="layer__num" data-for="dome"><circle cx="200" cy="70" r="13" fill="var(--bw-green)" stroke="#fff" stroke-width="2"/><text x="200" y="75" text-anchor="middle" font-size="15" font-weight="700" fill="#fff" font-family="Montserrat, sans-serif">1</text></g>
+          <g class="layer__num" data-for="today"><circle cx="248" cy="200" r="13" fill="var(--bw-green)" stroke="#fff" stroke-width="2"/><text x="248" y="205" text-anchor="middle" font-size="15" font-weight="700" fill="#fff" font-family="Montserrat, sans-serif">2</text></g>
+          <g class="layer__num" data-for="rubble"><circle cx="150" cy="245" r="13" fill="var(--bw-green)" stroke="#fff" stroke-width="2"/><text x="150" y="250" text-anchor="middle" font-size="15" font-weight="700" fill="#fff" font-family="Montserrat, sans-serif">3</text></g>
+          <g class="layer__num" data-for="college"><circle cx="150" cy="321" r="13" fill="var(--bw-green)" stroke="#fff" stroke-width="2"/><text x="150" y="326" text-anchor="middle" font-size="15" font-weight="700" fill="#fff" font-family="Montserrat, sans-serif">4</text></g>
+          <g class="layer__num" data-for="ground"><circle cx="40" cy="330" r="13" fill="var(--bw-green)" stroke="#fff" stroke-width="2"/><text x="40" y="335" text-anchor="middle" font-size="15" font-weight="700" fill="#fff" font-family="Montserrat, sans-serif">5</text></g>
+        </svg>
+      </div>
+
+      <div class="tbx__panel">
+        <div class="tbx__panelCard" id="tbxCard" aria-live="polite">
+          <!-- filled by JS -->
+        </div>
+      </div>
+    </div>
+    <p class="tbx__hint">Tap a numbered layer on the hill, or use the era buttons. <b>The whole hill is about 120 m high and made by people, not nature.</b></p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var LAYERS = {
+    dome: {
+      swatch: '#F4F7FA',
+      era: '1963 – 1991 · Cold War',
+      title: 'A spy station on the summit',
+      text: 'The United States built one of its biggest listening posts, Field Station Berlin, right on top of the hill. The white golf-ball shapes are radomes: weatherproof covers over antennas that intercepted radio and satellite signals from across the Eastern Bloc. It was part of the global ECHELON network and worked until the Cold War ended.',
+      fact: 'The domes you photograph today are empty shells. The listening gear was stripped out after 1990, and the site sat abandoned for years.'
+    },
+    today: {
+      swatch: '#7CB342',
+      era: '2016 – now · Today',
+      title: 'Forest, a 360° platform and street art',
+      text: 'Grunewald forest grew over the rubble, so the surface feels like a normal wooded hill. Since it reopened to visitors, the old station has become one of Europe’s largest open-air street-art galleries, and the viewing platform gives a wide 360-degree look over Berlin and the lakes to the west.',
+      fact: 'Getting here is a walk: take the S-Bahn to Grunewald, then about 2 km (30 minutes) up through the forest. Wear real shoes.'
+    },
+    rubble: {
+      swatch: '#B58A5B',
+      era: '1950 – 1972 · Rubble years',
+      title: '26 million cubic metres of a destroyed city',
+      text: 'After the Second World War, Berlin had to dispose of mountains of bombed brick and concrete. Trucks dumped it here for over twenty years, slowly building an artificial hill about 80 m above the flat plain. Much of central Berlin’s wartime ruin is literally piled under the grass.',
+      fact: 'At peak, hundreds of trucks a day climbed the growing mound. When dumping stopped in 1972, roughly 26 million m³ of rubble had been left here.'
+    },
+    college: {
+      swatch: '#3E4C41',
+      era: '1937 – 1940 · Nazi era',
+      title: 'A buried, unfinished Nazi building',
+      text: 'Under all the rubble sits the concrete shell of a military-technical college designed by Albert Speer for Hitler’s planned world capital "Germania". Construction stopped during the war and it was never finished. It was built so solidly that after 1945 the Allies could not easily blow it up.',
+      fact: 'Instead of demolishing the shell, they decided to simply bury it. The rubble hill above is partly a way of hiding a building nobody could destroy.'
+    },
+    ground: {
+      swatch: '#E7DCC4',
+      era: 'Before 1950 · Original ground',
+      title: 'There was no hill here at all',
+      text: 'This whole western edge of Berlin, the Teltow plain, is naturally flat. Everything above this line was put here by people: first the buried college, then two decades of wartime rubble, then a spy station on top. Teufelsberg is one of Berlin’s highest points and none of it is natural.',
+      fact: 'The name means "Devil’s Mountain", after the nearby Teufelssee (Devil’s Lake), not the strange history stacked on top of it.'
+    },
+    all: {
+      swatch: '#1B5E20',
+      era: 'The whole hill',
+      title: 'Four eras of Berlin, stacked',
+      text: 'Almost nothing about Teufelsberg is what it looks like. From the bottom up it is a buried Nazi ruin, twenty years of a bombed city’s rubble, a forest that grew over it, and a Cold War spy station on the summit. Tap each numbered layer to see how the hill was really built.',
+      fact: 'Use it as a Cold War day out in the west, separate from my free tour in the historic centre by Alexanderplatz.'
+    }
+  };
+  var ORDER = ['dome', 'today', 'rubble', 'college', 'ground'];
+
+  var root = document.getElementById('tbx');
+  var card = document.getElementById('tbxCard');
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.tbx__chip'));
+  var layerEls = {};
+  ORDER.forEach(function (k) { layerEls[k] = document.getElementById('lyr-' + k); });
+
+  function render(key) {
+    var d = LAYERS[key] || LAYERS.all;
+    card.innerHTML =
+      '<p class="tbx__era"><span class="tbx__swatch" style="background:' + d.swatch + '"></span>' + d.era + '</p>' +
+      '<h3 class="tbx__panelTitle">' + d.title + '</h3>' +
+      '<p class="tbx__panelText">' + d.text + '</p>' +
+      '<div class="tbx__fact"><span class="tbx__factIcon">⚑</span><span><b>Keep in mind:</b> ' + d.fact + '</span></div>';
+  }
+
+  function select(key) {
+    var isAll = key === 'all';
+    ORDER.forEach(function (k) {
+      var el = layerEls[k];
+      var active = !isAll && k === key;
+      el.classList.toggle('is-active', active);
+      el.classList.toggle('is-dim', !isAll && !active);
+      el.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    chips.forEach(function (c) { c.setAttribute('aria-pressed', c.dataset.era === key ? 'true' : 'false'); });
+    render(key);
+  }
+
+  chips.forEach(function (c) {
+    c.addEventListener('click', function () { select(c.dataset.era); });
+  });
+  ORDER.forEach(function (k) {
+    var el = layerEls[k];
+    el.addEventListener('click', function () {
+      select(el.getAttribute('aria-pressed') === 'true' ? 'all' : k);
+    });
+    el.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        select(el.getAttribute('aria-pressed') === 'true' ? 'all' : k);
+      }
+    });
+  });
+
+  select('all');
+})();
+</script>
+</body>
+</html>
