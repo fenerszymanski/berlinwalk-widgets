@@ -203,7 +203,8 @@
   "tiergarten-berlin": "tiergarten-berlin",
   "berlin-observation-decks": "berlin-observation-decks",
   "how-to-pronounce-berlin-station-names": "how-to-pronounce-berlin-station-names",
-  "teufelsberg-berlin": "teufelsberg-berlin"
+  "teufelsberg-berlin": "teufelsberg-berlin",
+  "kreuzberg-berlin": "kreuzberg-berlin"
 };
 
   var SCHEMAS = {
@@ -9649,6 +9650,68 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Because it was the highest point around and gave a clear line of sight over East Germany. During the Cold War the US ran Field Station Berlin here, one of its biggest listening posts, using the domed antennas to intercept radio and satellite signals from the Eastern Bloc. It operated until the Cold War ended around 1990, after which the equipment was removed and the site was left to decay."
+        }
+      }
+    ]
+  },
+  "kreuzberg-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Kreuzberg known for?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Kreuzberg is Berlin's most famous alternative district, known for its large Turkish community, punk and squat history, street art, nightlife and food. It splits into two very different halves: the eastern SO36 around Kottbusser Tor and Oranienstraße, which is loud and busy after dark, and the western Bergmannkiez around Bergmannstraße, which is leafy, café-heavy and calmer. The name comes from the small Kreuzberg hill in Viktoriapark, at 66 m the highest natural point in inner-city Berlin."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Kreuzberg safe for tourists?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For everyday visits, yes. Kreuzberg is a busy, lived-in district and most of it is completely fine to walk during the day and evening. The main caution is Görlitzer Park, which has a long-standing open drug-dealing scene; treat it as a normal park in daylight but do not linger there alone late at night. Around Kottbusser Tor you will see visible poverty and drug use, but ordinary street awareness is enough. Keep an eye on your phone and bag in crowded nightlife spots, as you would anywhere."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between SO36 and Kreuzberg 61?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "They are the two old postal zones of the district, and the split still describes two moods. SO36 (eastern Kreuzberg, postal 10997/10999) is the gritty, Turkish, punk, nightlife side: Kottbusser Tor, Oranienstraße, Wrangelkiez, Görlitzer Park and Schlesisches Tor. Kreuzberg 61 (western, around 10961 to 10965) is the quieter, more middle-class side: Bergmannstraße cafés, Chamissoplatz, the Marheineke market hall and Viktoriapark. Locals still use SO36 as a badge of the rougher, more famous half."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I get to Kreuzberg by U-Bahn?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For the eastern SO36 side, take the U1 or U3 to Kottbusser Tor, Görlitzer Bahnhof or Schlesisches Tor; the U8 also stops at Kottbusser Tor. For the western Bergmannkiez side, use the U7 to Gneisenaustraße or Südstern, or the U6/U7 to Mehringdamm for the Curry 36 and Mustafa's Gemüse Kebap food corner. The U1/U3 line runs on an elevated viaduct through east Kreuzberg, which makes it easy to hop between stops and see the district from above."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I eat in Kreuzberg?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Kreuzberg is one of the best eating areas in Berlin. The Mehringdamm corner has Curry 36 (currywurst) and Mustafa's Gemüse Kebap (grilled-vegetable kebab), both with famous queues. Markthalle Neun on Eisenbahnstraße is a historic market hall that runs Street Food Thursday from 17:00 to 22:00 and hosts weekend markets. On the canal, the Maybachufer Turkish Market (Tuesdays and Fridays) is a short walk away on the Neukölln side. For a sit-down brunch, head to Bergmannstraße or the Marheineke market hall."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Görlitzer Park closed at night in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It is complicated. The city built a fence and gates around Görlitzer Park and began closing it at night in spring 2026. On 1 June 2026 an administrative court ruled in summary proceedings that the nighttime closure was not lawful for now, so the gates are being kept open again while the Senate appeals. In practice that means the fence is there but the park is currently open at night, and the final outcome is still undecided. Either way, I would visit in daylight and not treat it as a nighttime hangout."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much time do I need for Kreuzberg?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Half a day is enough to get a real feel for one half. If you want both, do the western Bergmannkiez in daylight (coffee on Bergmannstraße, then the Kreuzberg hill in Viktoriapark) and drift east into SO36 as it gets dark (Oranienstraße, Markthalle Neun, the Oberbaumbrücke). The U1 links the two sides, so you can move between them in minutes rather than planning two separate trips."
         }
       }
     ]

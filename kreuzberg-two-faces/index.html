@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Which Kreuzberg Is Yours? SO36 vs Bergmannkiez</title>
+<meta name="description" content="Kreuzberg has two very different halves: loud, late-night SO36 in the east and leafy, café-slow Bergmannkiez in the west. Answer four quick questions and see which side of Kreuzberg fits your afternoon or evening, with the real spots and U-Bahn stations for each." />
+<link rel="stylesheet" href="../css/brand.css" />
+<script defer src="../js/brand.js"></script>
+<style>
+  .kbx {
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+    color: var(--bw-text);
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 4px 4px 14px;
+    box-sizing: border-box;
+  }
+  .kbx *, .kbx *::before, .kbx *::after { box-sizing: border-box; }
+
+  .kbx__head {
+    background: var(--bw-green);
+    color: #fff;
+    border-radius: 16px 16px 0 0;
+    padding: 18px 20px 16px;
+  }
+  .kbx__kicker {
+    font-size: 11px; font-weight: 700; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--bw-yellow); margin: 0 0 6px;
+  }
+  .kbx__title { font-size: 21px; font-weight: 800; margin: 0 0 5px; line-height: 1.22; }
+  .kbx__sub { font-size: 13.5px; margin: 0; color: #E8F0E0; line-height: 1.5; }
+
+  .kbx__body {
+    background: var(--bw-white);
+    border: 1px solid var(--bw-border);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    padding: 14px 14px 18px;
+  }
+
+  /* The two panels */
+  .kbx__panels { display: flex; gap: 12px; align-items: stretch; }
+  .kbx__panel {
+    flex: 1 1 0; min-width: 0;
+    border: 1.5px solid var(--bw-border);
+    border-radius: 14px;
+    background: var(--bw-cream);
+    padding: 14px 14px 12px;
+    transition: box-shadow .2s, border-color .2s, transform .2s;
+  }
+  .kbx__panel[data-active="true"] {
+    border-color: var(--bw-green);
+    box-shadow: 0 6px 18px rgba(27,94,32,.16);
+    transform: translateY(-2px);
+    background: var(--bw-lime-soft);
+  }
+  .kbx__side {
+    font-size: 10.5px; font-weight: 800; letter-spacing: .11em;
+    text-transform: uppercase; color: var(--bw-lime);
+  }
+  .kbx__name { font-size: 17px; font-weight: 800; margin: 2px 0 2px; color: var(--bw-green); line-height: 1.2; }
+  .kbx__vibe { font-size: 12.5px; color: var(--bw-muted); margin: 0 0 10px; line-height: 1.45; font-style: italic; }
+
+  .kbx__meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 10px; }
+  .kbx__tag {
+    font-size: 11px; font-weight: 700; line-height: 1;
+    background: #fff; border: 1px solid var(--bw-border);
+    color: var(--bw-green); border-radius: 999px; padding: 5px 9px;
+  }
+
+  .kbx__spots { list-style: none; margin: 0; padding: 0; }
+  .kbx__spot { padding: 7px 0; border-top: 1px dashed var(--bw-border); }
+  .kbx__spot:first-child { border-top: none; }
+  .kbx__spotname { font-size: 13px; font-weight: 700; margin: 0 0 1px; }
+  .kbx__spotdesc { font-size: 12px; color: var(--bw-muted); margin: 0 0 2px; line-height: 1.42; }
+  .kbx__ubahn {
+    display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .02em;
+    background: var(--bw-green); color: var(--bw-yellow);
+    border-radius: 5px; padding: 2px 6px; margin-top: 2px;
+  }
+
+  .kbx__divider {
+    flex: 0 0 30px; align-self: stretch;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 6px;
+  }
+  .kbx__canal { flex: 1 1 auto; width: 3px; border-radius: 3px;
+    background: repeating-linear-gradient(180deg, var(--bw-lime) 0 6px, transparent 6px 12px); }
+  .kbx__vs {
+    font-size: 11px; font-weight: 800; color: var(--bw-muted);
+    background: #fff; border: 1.5px solid var(--bw-border); border-radius: 999px;
+    width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
+  }
+
+  /* Match strip */
+  .kbx__match { margin-top: 16px; border-top: 2px solid var(--bw-border); padding-top: 14px; }
+  .kbx__matchtitle { font-size: 13px; font-weight: 800; color: var(--bw-green); margin: 0 0 2px; }
+  .kbx__matchhint { font-size: 12px; color: var(--bw-muted); margin: 0 0 12px; line-height: 1.45; }
+
+  .kbx__q { margin: 0 0 10px; }
+  .kbx__qlabel { font-size: 12px; font-weight: 700; color: var(--bw-text); margin: 0 0 5px; }
+  .kbx__opts { display: flex; gap: 8px; }
+  .kbx__opt {
+    flex: 1 1 0; min-width: 0; font-family: inherit;
+    font-size: 12px; font-weight: 700; line-height: 1.3;
+    border: 1.5px solid var(--bw-border); background: #fff; color: var(--bw-muted);
+    border-radius: 10px; padding: 9px 10px; cursor: pointer; transition: .15s;
+    text-align: left;
+  }
+  .kbx__opt:hover { border-color: var(--bw-lime); color: var(--bw-green); }
+  .kbx__opt[aria-pressed="true"] {
+    background: var(--bw-yellow); border-color: var(--bw-yellow); color: #123D18;
+  }
+  .kbx__opt small { display: block; font-weight: 600; font-size: 10.5px; opacity: .8; margin-top: 1px; }
+
+  /* Tilt meter */
+  .kbx__meter { margin: 14px 0 4px; }
+  .kbx__meterlabels { display: flex; justify-content: space-between; font-size: 10.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--bw-muted); margin-bottom: 5px; }
+  .kbx__track { position: relative; height: 12px; border-radius: 999px;
+    background: linear-gradient(90deg, #7CB342, #DCE8C8 45%, #DCE8C8 55%, #164a1a); }
+  .kbx__marker {
+    position: absolute; top: 50%; left: 50%; width: 20px; height: 20px;
+    border-radius: 50%; background: var(--bw-yellow); border: 3px solid var(--bw-green);
+    transform: translate(-50%, -50%); transition: left .35s cubic-bezier(.4,1.3,.5,1);
+    box-shadow: 0 2px 6px rgba(0,0,0,.2);
+  }
+
+  .kbx__verdict {
+    margin-top: 12px; border-radius: 12px; padding: 12px 14px;
+    background: var(--bw-green); color: #fff; font-size: 13px; line-height: 1.5;
+  }
+  .kbx__verdict strong { color: var(--bw-yellow); }
+  .kbx__verdict[data-empty="true"] { background: #fff; border: 1.5px dashed var(--bw-border); color: var(--bw-muted); }
+
+  .kbx__reset {
+    margin-top: 10px; font-family: inherit; font-size: 12px; font-weight: 700;
+    background: none; border: none; color: var(--bw-muted); cursor: pointer;
+    text-decoration: underline; padding: 2px;
+  }
+  .kbx__reset:hover { color: var(--bw-green); }
+
+  .kbx__foot { font-size: 11px; color: var(--bw-muted); margin: 12px 0 0; line-height: 1.5; }
+
+  @media (max-width: 560px) {
+    .kbx__panels { flex-direction: column; }
+    .kbx__divider { flex-direction: row; width: 100%; height: 26px; }
+    .kbx__canal { height: 3px; width: auto; flex: 1 1 auto;
+      background: repeating-linear-gradient(90deg, var(--bw-lime) 0 6px, transparent 6px 12px); }
+    .kbx__title { font-size: 19px; }
+  }
+</style>
+</head>
+<body>
+<div class="kbx" id="kbx">
+  <div class="kbx__head">
+    <p class="kbx__kicker">BERLINWALK.COM • KREUZBERG</p>
+    <h2 class="kbx__title">Which Kreuzberg Is Yours?</h2>
+    <p class="kbx__sub">Kreuzberg is really two districts sharing a name. Compare the two halves, then answer four quick questions to see which side fits the time you actually have.</p>
+  </div>
+  <div class="kbx__body">
+    <div class="kbx__panels">
+      <div class="kbx__panel" id="panel-west" data-side="west">
+        <div class="kbx__side">West · Kreuzberg 61</div>
+        <div class="kbx__name">Bergmannkiez</div>
+        <p class="kbx__vibe">Leafy, cobbled and café-slow. The calm, daytime Kreuzberg.</p>
+        <div class="kbx__meta">
+          <span class="kbx__tag">Best in daylight</span>
+          <span class="kbx__tag">Brunch &amp; walking</span>
+          <span class="kbx__tag">Families ok</span>
+        </div>
+        <ul class="kbx__spots">
+          <li class="kbx__spot">
+            <p class="kbx__spotname">Bergmannstraße &amp; Marheineke Markthalle</p>
+            <p class="kbx__spotdesc">Café strip and a covered market hall for lunch and coffee.</p>
+            <span class="kbx__ubahn">U7 Gneisenaustraße</span>
+          </li>
+          <li class="kbx__spot">
+            <p class="kbx__spotname">Viktoriapark &amp; the Kreuzberg hill</p>
+            <p class="kbx__spotdesc">The 66 m hill the district is named after, with a waterfall and a Schinkel monument on top.</p>
+            <span class="kbx__ubahn">U6 Platz der Luftbrücke</span>
+          </li>
+          <li class="kbx__spot">
+            <p class="kbx__spotname">Mehringdamm food corner</p>
+            <p class="kbx__spotdesc">Curry 36 and Mustafa's Gemüse Kebap, two of Berlin's most-queued snacks.</p>
+            <span class="kbx__ubahn">U6/U7 Mehringdamm</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="kbx__divider" aria-hidden="true">
+        <span class="kbx__canal"></span>
+        <span class="kbx__vs">vs</span>
+        <span class="kbx__canal"></span>
+      </div>
+
+      <div class="kbx__panel" id="panel-east" data-side="east">
+        <div class="kbx__side">East · SO36 / Kreuzberg 36</div>
+        <div class="kbx__name">Kottbusser Tor &amp; Wrangelkiez</div>
+        <p class="kbx__vibe">Loud, Turkish, punk and awake late. The Kreuzberg on the postcards.</p>
+        <div class="kbx__meta">
+          <span class="kbx__tag">Best from evening</span>
+          <span class="kbx__tag">Bars &amp; kebab</span>
+          <span class="kbx__tag">High energy</span>
+        </div>
+        <ul class="kbx__spots">
+          <li class="kbx__spot">
+            <p class="kbx__spotname">Oranienstraße &amp; Kottbusser Tor</p>
+            <p class="kbx__spotdesc">The bar-and-kebab spine of east Kreuzberg. Busy, gritty, alive after dark.</p>
+            <span class="kbx__ubahn">U1/U3/U8 Kottbusser Tor</span>
+          </li>
+          <li class="kbx__spot">
+            <p class="kbx__spotname">Markthalle Neun</p>
+            <p class="kbx__spotdesc">Historic market hall. Street Food Thursday runs 17:00 to 22:00.</p>
+            <span class="kbx__ubahn">U1/U3 Görlitzer Bahnhof</span>
+          </li>
+          <li class="kbx__spot">
+            <p class="kbx__spotname">Oberbaumbrücke &amp; Schlesisches Tor</p>
+            <p class="kbx__spotdesc">The brick bridge over the Spree to Friedrichshain, with the U1 running across it.</p>
+            <span class="kbx__ubahn">U1/U3 Schlesisches Tor</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="kbx__match">
+      <p class="kbx__matchtitle">Match me to a side</p>
+      <p class="kbx__matchhint">Pick the option that sounds more like your plan. The marker leans toward the Kreuzberg that fits.</p>
+      <div id="kbx-questions"></div>
+
+      <div class="kbx__meter" aria-hidden="true">
+        <div class="kbx__meterlabels"><span>Bergmannkiez</span><span>SO36</span></div>
+        <div class="kbx__track"><span class="kbx__marker" id="kbx-marker"></span></div>
+      </div>
+
+      <div class="kbx__verdict" id="kbx-verdict" data-empty="true" role="status" aria-live="polite">
+        Answer a question or two and I will point you to the right half of Kreuzberg.
+      </div>
+      <button type="button" class="kbx__reset" id="kbx-reset">Start over</button>
+    </div>
+
+    <p class="kbx__foot">Rough guide only. Both halves are walkable in an afternoon if you have the legs for it; the point is to pick where to start.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('kbx');
+  if (!root) return;
+
+  var QUESTIONS = [
+    { label: 'What time will you actually be there?',
+      west: { t: 'Daytime', s: 'Coffee, market, a slow walk' },
+      east: { t: 'Evening', s: 'Bars, kebab, staying out late' } },
+    { label: 'What are you most in the mood for?',
+      west: { t: 'Calm and green', s: 'A park bench and a view' },
+      east: { t: 'Loud and busy', s: 'Crowds and street noise' } },
+    { label: 'How do you want to eat?',
+      west: { t: 'Sit-down brunch', s: 'Marheineke market hall' },
+      east: { t: 'Street food', s: 'Kebab and Markthalle Neun' } },
+    { label: 'Who are you with?',
+      west: { t: 'Family or an easy pace', s: 'Nothing too intense' },
+      east: { t: 'Friends chasing energy', s: 'The real Kreuzberg buzz' } }
+  ];
+
+  var answers = new Array(QUESTIONS.length).fill(null); // 'west' | 'east' | null
+
+  var VERDICTS = {
+    west: 'Start in <strong>Bergmannkiez</strong>, the western half. Come out at U7 Gneisenaustraße, walk Bergmannstraße for coffee, then climb the Kreuzberg hill in Viktoriapark. Add Mehringdamm if you want the famous kebab queue.',
+    east: 'Start in <strong>SO36</strong>, the eastern half. Come out at U1 Kottbusser Tor, wander Oranienstraße, and aim for Markthalle Neun or the Oberbaumbrücke as the light drops. This side wakes up in the evening.',
+    tie: 'You are split down the middle, which is very Kreuzberg. Do the <strong>west in daylight</strong> (Bergmannstraße, Viktoriapark) and drift <strong>east as it gets dark</strong> (Oranienstraße, Markthalle Neun). The U1 links both.'
+  };
+
+  var qWrap = document.getElementById('kbx-questions');
+  QUESTIONS.forEach(function (q, qi) {
+    var block = document.createElement('div');
+    block.className = 'kbx__q';
+    var label = document.createElement('p');
+    label.className = 'kbx__qlabel';
+    label.textContent = (qi + 1) + '. ' + q.label;
+    block.appendChild(label);
+    var opts = document.createElement('div');
+    opts.className = 'kbx__opts';
+    ['west', 'east'].forEach(function (side) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'kbx__opt';
+      btn.setAttribute('aria-pressed', 'false');
+      btn.dataset.q = qi;
+      btn.dataset.side = side;
+      btn.innerHTML = q[side].t + '<small>' + q[side].s + '</small>';
+      btn.addEventListener('click', function () { choose(qi, side); });
+      opts.appendChild(btn);
+    });
+    block.appendChild(opts);
+    qWrap.appendChild(block);
+  });
+
+  var marker = document.getElementById('kbx-marker');
+  var verdict = document.getElementById('kbx-verdict');
+  var panelEast = document.getElementById('panel-east');
+  var panelWest = document.getElementById('panel-west');
+
+  function choose(qi, side) {
+    answers[qi] = (answers[qi] === side) ? null : side;
+    qWrap.querySelectorAll('.kbx__opt[data-q="' + qi + '"]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.side === answers[qi]));
+    });
+    render();
+  }
+
+  function render() {
+    var east = answers.filter(function (a) { return a === 'east'; }).length;
+    var west = answers.filter(function (a) { return a === 'west'; }).length;
+    var answered = east + west;
+    var total = QUESTIONS.length;
+    // marker position: 50% centre, slides toward the leading side
+    var net = east - west; // -total..+total
+    var pct = 50 + (net / total) * 42;
+    marker.style.left = pct + '%';
+
+    panelEast.dataset.active = 'false';
+    panelWest.dataset.active = 'false';
+
+    if (answered === 0) {
+      verdict.dataset.empty = 'true';
+      verdict.innerHTML = 'Answer a question or two and I will point you to the right half of Kreuzberg.';
+      return;
+    }
+    verdict.dataset.empty = 'false';
+    if (east > west) {
+      panelEast.dataset.active = 'true';
+      verdict.innerHTML = VERDICTS.east;
+    } else if (west > east) {
+      panelWest.dataset.active = 'true';
+      verdict.innerHTML = VERDICTS.west;
+    } else {
+      panelEast.dataset.active = 'true';
+      panelWest.dataset.active = 'true';
+      verdict.innerHTML = VERDICTS.tie;
+    }
+  }
+
+  document.getElementById('kbx-reset').addEventListener('click', function () {
+    answers = new Array(QUESTIONS.length).fill(null);
+    qWrap.querySelectorAll('.kbx__opt').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
