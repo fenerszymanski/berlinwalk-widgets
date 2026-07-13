@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Which Berlin Ticket to Buy on Your Phone</title>
+<meta name="description" content="Tell this picker your plan for the day and it shows the exact ticket to tap in the BVG app, the 2026 price, the fare zone, and whether you need to validate it." />
+<link rel="stylesheet" href="../css/brand.css" />
+<script defer src="../js/brand.js"></script>
+<style>
+  .pt {
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+    color: var(--bw-text);
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 4px 4px 14px;
+    box-sizing: border-box;
+  }
+  .pt *, .pt *::before, .pt *::after { box-sizing: border-box; }
+
+  .pt__head { background: var(--bw-green); color: #fff; border-radius: 16px 16px 0 0; padding: 18px 20px 16px; }
+  .pt__kicker { font-size: 11px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: var(--bw-yellow); margin: 0 0 6px; }
+  .pt__title { font-size: 21px; font-weight: 800; margin: 0 0 5px; line-height: 1.22; }
+  .pt__sub { font-size: 13.5px; margin: 0; color: #E8F0E0; line-height: 1.5; }
+
+  .pt__body { background: var(--bw-white); border: 1px solid var(--bw-border); border-top: none; border-radius: 0 0 16px 16px; padding: 16px 14px 18px; }
+
+  .pt__grid { display: flex; gap: 16px; align-items: flex-start; }
+  .pt__left { flex: 1 1 0; min-width: 0; }
+  .pt__right { flex: 0 0 264px; }
+
+  .pt__q { margin: 0 0 14px; }
+  .pt__qlabel { font-size: 12px; font-weight: 800; color: var(--bw-green); margin: 0 0 8px; letter-spacing: .01em; }
+  .pt__qlabel span { color: var(--bw-muted); font-weight: 600; }
+  .pt__opts { display: flex; flex-direction: column; gap: 8px; }
+  .pt__opt {
+    display: flex; align-items: center; gap: 11px; text-align: left; width: 100%;
+    font-family: inherit; font-size: 13px; font-weight: 700; line-height: 1.3;
+    border: 1.5px solid var(--bw-border); background: #fff; color: var(--bw-text);
+    border-radius: 12px; padding: 11px 13px; cursor: pointer; transition: .15s;
+  }
+  .pt__opt:hover { border-color: var(--bw-lime); background: var(--bw-lime-soft); }
+  .pt__opt[aria-pressed="true"] { border-color: var(--bw-green); background: var(--bw-lime-soft); box-shadow: inset 0 0 0 1px var(--bw-green); }
+  .pt__ic { flex: 0 0 34px; height: 34px; border-radius: 9px; background: var(--bw-lime-soft); display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .pt__opt[aria-pressed="true"] .pt__ic { background: var(--bw-yellow); }
+  .pt__opt small { display: block; font-weight: 600; font-size: 11px; color: var(--bw-muted); margin-top: 1px; }
+
+  .pt__group { margin-top: 2px; }
+  .pt__grow { display: flex; gap: 8px; }
+  .pt__grow .pt__gbtn {
+    flex: 1 1 0; font-family: inherit; font-size: 12.5px; font-weight: 800;
+    border: 1.5px solid var(--bw-border); background: #fff; color: var(--bw-muted);
+    border-radius: 10px; padding: 9px 6px; cursor: pointer; transition: .15s;
+  }
+  .pt__grow .pt__gbtn:hover { border-color: var(--bw-lime); color: var(--bw-green); }
+  .pt__grow .pt__gbtn[aria-pressed="true"] { background: var(--bw-green); border-color: var(--bw-green); color: #fff; }
+
+  /* Phone mockup result */
+  .pt__phone {
+    background: #10240f; border-radius: 26px; padding: 12px 12px 14px;
+    box-shadow: 0 12px 30px rgba(16,36,15,.28); position: sticky; top: 6px;
+  }
+  .pt__notch { width: 74px; height: 5px; border-radius: 3px; background: rgba(255,255,255,.28); margin: 2px auto 11px; }
+  .pt__screen { background: var(--bw-cream); border-radius: 16px; overflow: hidden; }
+  .pt__scrhead { background: var(--bw-green); color: #fff; padding: 11px 14px 10px; display: flex; align-items: center; justify-content: space-between; }
+  .pt__app { font-size: 11px; font-weight: 800; letter-spacing: .04em; }
+  .pt__zone { font-size: 11px; font-weight: 800; background: var(--bw-yellow); color: #123D18; border-radius: 6px; padding: 3px 8px; }
+  .pt__scrbody { padding: 15px 15px 16px; }
+  .pt__tname { font-size: 15.5px; font-weight: 800; color: var(--bw-green); margin: 0 0 3px; line-height: 1.25; }
+  .pt__twhy { font-size: 11.5px; color: var(--bw-muted); margin: 0 0 12px; line-height: 1.45; }
+  .pt__price { font-size: 30px; font-weight: 800; color: var(--bw-text); margin: 0; line-height: 1; }
+  .pt__price small { font-size: 12px; font-weight: 700; color: var(--bw-muted); }
+  .pt__pnote { font-size: 11px; color: var(--bw-muted); margin: 3px 0 13px; }
+  .pt__buy { font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--bw-muted); margin: 0 0 5px; }
+  .pt__apps { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 13px; }
+  .pt__apps span { font-size: 11px; font-weight: 700; background: #fff; border: 1.5px solid var(--bw-border); color: var(--bw-green); border-radius: 999px; padding: 5px 10px; }
+  .pt__valid { display: flex; gap: 8px; align-items: flex-start; background: #fff; border: 1px solid var(--bw-border); border-radius: 10px; padding: 9px 11px; }
+  .pt__vic { flex: 0 0 auto; width: 18px; height: 18px; border-radius: 50%; background: var(--bw-safe); color: #fff; font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+  .pt__vtext { font-size: 11px; color: var(--bw-text); line-height: 1.4; }
+  .pt__vtext strong { color: var(--bw-green); }
+
+  .pt__foot { font-size: 11px; color: var(--bw-muted); margin: 13px 2px 0; line-height: 1.5; }
+  .pt__foot a { color: var(--bw-green); font-weight: 700; }
+
+  @media (max-width: 620px) {
+    .pt__grid { flex-direction: column; }
+    .pt__right { flex: 1 1 auto; width: 100%; max-width: 340px; margin: 4px auto 0; }
+    .pt__phone { position: static; }
+    .pt__title { font-size: 19px; }
+  }
+</style>
+</head>
+<body>
+<div class="pt">
+  <div class="pt__head">
+    <p class="pt__kicker">Berlinwalk.com • Berlin Transport</p>
+    <h2 class="pt__title">Which ticket do I tap in the app?</h2>
+    <p class="pt__sub">Every Berlin ticket sells in the BVG app. Tell it your plan and it shows the exact ticket, the 2026 price, the fare zone, and whether you need to validate it.</p>
+  </div>
+  <div class="pt__body">
+    <div class="pt__grid">
+      <div class="pt__left">
+        <div class="pt__q">
+          <p class="pt__qlabel">1. What is your plan today?</p>
+          <div class="pt__opts" id="pt-plan" role="group" aria-label="Your plan today"></div>
+        </div>
+        <div class="pt__q pt__group" id="pt-group-wrap" hidden>
+          <p class="pt__qlabel">2. Just you, or a group? <span>(up to 5 travels on one day ticket)</span></p>
+          <div class="pt__grow" role="group" aria-label="Group size">
+            <button class="pt__gbtn" data-group="solo" aria-pressed="true" type="button">Just me</button>
+            <button class="pt__gbtn" data-group="group" aria-pressed="false" type="button">2 to 5 of us</button>
+          </div>
+        </div>
+      </div>
+      <div class="pt__right">
+        <div class="pt__phone" aria-live="polite">
+          <div class="pt__notch"></div>
+          <div class="pt__screen">
+            <div class="pt__scrhead">
+              <span class="pt__app" id="pt-app">BVG Tickets</span>
+              <span class="pt__zone" id="pt-zone">AB</span>
+            </div>
+            <div class="pt__scrbody">
+              <p class="pt__tname" id="pt-tname">Pick your plan</p>
+              <p class="pt__twhy" id="pt-twhy">Choose an option on the left and your ticket appears here, ready to buy.</p>
+              <p class="pt__price" id="pt-price">—</p>
+              <p class="pt__pnote" id="pt-pnote">2026 fare</p>
+              <p class="pt__buy">Buy it in</p>
+              <div class="pt__apps" id="pt-apps"><span>BVG Fahrinfo</span><span>BVG Tickets</span></div>
+              <div class="pt__valid">
+                <span class="pt__vic">✓</span>
+                <span class="pt__vtext" id="pt-valid">A phone ticket is <strong>valid the moment you buy it</strong>. No yellow box, no stamping.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="pt__foot">Prices are the January 2026 VBB fares. A screenshot is not a valid ticket: keep the live ticket open in the app for the inspector. Full details in the <a href="https://www.bvg.de/en/subscriptions-and-tickets/all-apps" target="_blank" rel="noopener">official BVG app overview</a>.</p>
+  </div>
+</div>
+<script>
+(function () {
+  var PLANS = [
+    { id: 'quick', icon: '🎫', label: 'One or two quick rides in the centre', sub: 'A hop between sights, then walking' },
+    { id: 'day', icon: '🗺️', label: 'A full day of sightseeing', sub: 'Three or more rides across town' },
+    { id: 'ber', icon: '✈️', label: 'Getting to or from BER Airport', sub: 'The airport sits in fare zone C' },
+    { id: 'potsdam', icon: '🏰', label: 'A day trip to Potsdam', sub: 'Also outside the city, zone C' },
+    { id: 'stay', icon: '📅', label: 'Staying several days, riding daily', sub: 'Same trains every day of the trip' }
+  ];
+
+  function result(plan, group) {
+    switch (plan) {
+      case 'quick':
+        return {
+          app: 'BVG Tickets', apps: ['BVG Fahrinfo', 'BVG Tickets'], zone: 'AB',
+          name: 'Single ticket AB', why: 'One ride across the city, changes and all, for up to 2 hours in one direction.',
+          price: '€4.00', pnote: 'Or a Kurzstrecke short-trip for €2.80 if it is 3 rail stops or fewer with no change.',
+          valid: 'A single you buy in the app is <strong>valid straight away</strong>. Buy it just before you board; never stamp it.'
+        };
+      case 'day':
+        if (group === 'group') return {
+          app: 'BVG Tickets', apps: ['BVG Fahrinfo', 'BVG Tickets'], zone: 'AB',
+          name: '24-hour ticket AB, group', why: 'Unlimited rides for up to 5 people together for 24 hours. Cheaper than five separate day tickets.',
+          price: '€35.30', pnote: 'One ticket covers the whole group; you all travel together.',
+          valid: 'Valid the moment you buy it. Keep it open on <strong>one phone</strong> for the whole group when checked.'
+        };
+        return {
+          app: 'BVG Tickets', apps: ['BVG Fahrinfo', 'BVG Tickets'], zone: 'AB',
+          name: '24-hour ticket AB', why: 'Unlimited U-Bahn, S-Bahn, tram and bus for 24 hours. Pays off from about the third ride.',
+          price: '€11.20', pnote: 'Runs 24 hours from the start time, not just to midnight.',
+          valid: 'Valid the moment you buy it. No yellow box, no stamping; just keep it open in the app.'
+        };
+      case 'ber':
+        return {
+          app: 'BVG Fahrinfo', apps: ['BVG Fahrinfo', 'VBB Bus & Bahn', 'DB Navigator'], zone: 'ABC',
+          name: 'Single ticket ABC', why: 'BER Airport is in zone C, so you need the ABC ticket the app rarely picks for you by default.',
+          price: '€5.00', pnote: 'Sightseeing the same day too? A 24-hour ABC ticket is €12.90.',
+          valid: 'Buy the <strong>ABC</strong> ticket before you leave the airport station. Valid at once; no stamping.'
+        };
+      case 'potsdam':
+        return {
+          app: 'VBB Bus & Bahn', apps: ['VBB Bus & Bahn', 'DB Navigator', 'BVG Fahrinfo'], zone: 'ABC',
+          name: 'Single ticket ABC', why: 'Potsdam sits in zone C. The regional RE and S-Bahn there are both covered by one ABC ticket.',
+          price: '€5.00', pnote: 'Out and back and around all day? A 24-hour ABC ticket is €12.90.',
+          valid: 'Pick <strong>zone ABC</strong>. Valid the moment you buy it, on regional trains too.'
+        };
+      case 'stay':
+        return {
+          app: 'BVG app (subscription)', apps: ['BVG Fahrinfo', 'BVG Tickets'], zone: 'AB',
+          name: 'Deutschlandticket', why: 'Riding daily for about 6+ days? This flat monthly ticket beats stacking day tickets, and works nationwide.',
+          price: '€63', pnote: 'Per month. It is a subscription: cancel by the 10th so it does not renew.',
+          valid: 'A registered mobile ticket in the app. Always valid; <strong>zone C and BER are not included</strong>, buy an add-on for the airport.'
+        };
+      default:
+        return null;
+    }
+  }
+
+  var planWrap = document.getElementById('pt-plan');
+  var groupWrap = document.getElementById('pt-group-wrap');
+  var state = { plan: null, group: 'solo' };
+
+  PLANS.forEach(function (p) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'pt__opt';
+    b.setAttribute('data-plan', p.id);
+    b.setAttribute('aria-pressed', 'false');
+    b.innerHTML = '<span class="pt__ic">' + p.icon + '</span><span>' + p.label + '<small>' + p.sub + '</small></span>';
+    planWrap.appendChild(b);
+  });
+
+  function render() {
+    var r = result(state.plan, state.group);
+    if (!r) return;
+    document.getElementById('pt-app').textContent = r.app;
+    document.getElementById('pt-zone').textContent = r.zone;
+    document.getElementById('pt-tname').textContent = r.name;
+    document.getElementById('pt-twhy').textContent = r.why;
+    document.getElementById('pt-price').innerHTML = r.price;
+    document.getElementById('pt-pnote').textContent = r.pnote;
+    document.getElementById('pt-valid').innerHTML = r.valid;
+    var apps = document.getElementById('pt-apps');
+    apps.innerHTML = '';
+    r.apps.forEach(function (a) { var s = document.createElement('span'); s.textContent = a; apps.appendChild(s); });
+  }
+
+  planWrap.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-plan]');
+    if (!btn) return;
+    state.plan = btn.getAttribute('data-plan');
+    Array.prototype.forEach.call(planWrap.children, function (c) {
+      c.setAttribute('aria-pressed', c === btn ? 'true' : 'false');
+    });
+    groupWrap.hidden = state.plan !== 'day';
+    render();
+  });
+
+  groupWrap.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-group]');
+    if (!btn) return;
+    state.group = btn.getAttribute('data-group');
+    Array.prototype.forEach.call(btn.parentNode.children, function (c) {
+      c.setAttribute('aria-pressed', c === btn ? 'true' : 'false');
+    });
+    render();
+  });
+})();
+</script>
+</body>
+</html>

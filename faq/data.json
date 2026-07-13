@@ -5696,5 +5696,35 @@
         "a": "The area is dense with Nazi-era and Cold War history. Within a short walk you have the Memorial to the Murdered Jews of Europe, the Topography of Terror on the site of the former SS and Gestapo headquarters, and Bebelplatz, where the 1933 book burning took place. These places explain the period far more honestly than the empty car park can, and they are the better use of your time if you want to actually understand what happened."
       }
     ]
+  },
+  "buy-berlin-transport-tickets-on-your-phone": {
+    "title": "Buying Berlin Tickets on Your Phone - FAQ",
+    "subtitle": "Quick answers on buying Berlin transport tickets on your phone: which app to use, which ticket and zone to pick, whether a mobile ticket needs validating, and how to pay without a German bank account.",
+    "items": [
+      {
+        "q": "Can I buy Berlin transport tickets on my phone?",
+        "a": "Yes. Every ticket the machines sell is also available in the BVG apps, including single rides, the 24-hour day ticket, the group day ticket, the airport ABC ticket and the nationwide Deutschlandticket. Berlin has no ticket gates, so a ticket in the app works exactly like a paper one. You pay with an international card, PayPal, Apple Pay or Google Pay, so no German bank account is needed."
+      },
+      {
+        "q": "Which Berlin ticket app is best for tourists?",
+        "a": "For most visitors, BVG Fahrinfo is the one to download: it plans your route and sells the correct ticket at the end of it. BVG Tickets is a faster buy-only app if you already know what you want. Jelbi is BVG's all-in-one mobility app that also books scooters, bikes and car-sharing. For a day trip to Potsdam or a trip to BER Airport, VBB Bus & Bahn or DB Navigator handle the regional trains most cleanly."
+      },
+      {
+        "q": "Do I need to validate or stamp a ticket I bought in the app?",
+        "a": "No. The yellow and red validator boxes on Berlin platforms are only for old-style paper tickets that come blank and need a timestamp. A ticket you buy in the app is already validated: a single is live from the moment you buy it or from a start time you choose, so you simply buy it and board. Just keep the real, live ticket open in the app, because a screenshot is not accepted."
+      },
+      {
+        "q": "How much do Berlin tickets cost in 2026?",
+        "a": "After the 1 January 2026 fare change, a single AB ticket is €4.00, the short-trip Kurzstrecke is €2.80, a 24-hour AB day ticket is €11.20, and a 24-hour group ticket for up to five people is €35.30. If your trip includes BER Airport or Potsdam you need the ABC version: €5.00 for a single or €12.90 for 24 hours. The Deutschlandticket is €63 per month."
+      },
+      {
+        "q": "Which fare zone do I choose in the app, AB or ABC?",
+        "a": "Zone AB covers the whole city of Berlin, which is all most visitors ever need. You only need to add zone C, making it ABC, for BER Airport or a day trip to Potsdam. Buying ABC when you only travel inside the city wastes money on every ride, and buying only AB when you are coming from the airport counts as travelling without a valid ticket, so set the zone deliberately before you pay."
+      },
+      {
+        "q": "What happens if I buy my ticket after boarding the train?",
+        "a": "Buy on the platform, not on the train. Once the doors close and you drop into a U-Bahn tunnel your signal can disappear before the purchase completes, and riding while you are still buying counts as travelling without a ticket. If an inspector checks you before the ticket is live, the fine is €60. Buying while you still have wifi or a signal on the platform avoids the whole problem."
+      }
+    ]
   }
 }
