@@ -308,13 +308,9 @@
       if (this._plannerFrameStyleObserver) this._plannerFrameStyleObserver.disconnect();
 
       let lastHeight = 0;
-      let currentPhase = 'quiz';
       let requestedFrameHeight = 0;
-      const heightBuffer = 24;
-      // Reserve the tallest of the four short quiz steps from the first screen.
-      // The card therefore stays still while answers change, then may expand for
-      // the generated plan where extra content is expected.
-      const quizFloor = () => window.matchMedia('(max-width: 760px)').matches ? 1240 : 820;
+      const heightBuffer = 12;
+      const initialHeight = () => window.matchMedia('(max-width: 760px)').matches ? 680 : 580;
       const resetPlannerBand = () => {
         const band = this._plannerBand;
         if (!band) return;
@@ -335,23 +331,20 @@
         ) frame.style.setProperty('min-height', height, 'important');
       };
       const setHeight = (height, phase) => {
-        if (phase) currentPhase = phase;
         const natural = Math.ceil(height) + heightBuffer;
-        const isQuiz = phase === 'quiz';
-        const isLegacyQuiz = phase === 'legacy-quiz';
-        const next = isLegacyQuiz
-          ? quizFloor()
-          : isQuiz
-            ? Math.max(quizFloor(), natural)
-            : natural;
+        const next = Math.max(360, natural);
         resetPlannerBand();
         const shell = this._plannerShell;
         if (shell) {
-          // Wix keeps padding on this card. Content-box lets the iframe use its
-          // full measured height instead of cutting the legal note at the bottom.
-          shell.style.setProperty('box-sizing', 'content-box', 'important');
-          shell.style.setProperty('height', `${next}px`, 'important');
-          shell.style.setProperty('min-height', `${next}px`, 'important');
+          // Keep the card in border-box sizing so its padding never widens the
+          // iframe beyond a narrow phone viewport. The iframe owns the height;
+          // the shell then wraps it naturally without an artificial blank floor.
+          shell.style.setProperty('box-sizing', 'border-box', 'important');
+          shell.style.setProperty('height', 'auto', 'important');
+          shell.style.setProperty('min-height', '0', 'important');
+          shell.style.setProperty('max-height', 'none', 'important');
+          shell.style.setProperty('max-width', '100%', 'important');
+          shell.style.setProperty('width', '100%', 'important');
         }
         requestedFrameHeight = next;
         enforceFrameHeight();
@@ -405,11 +398,14 @@
         }
       };
 
-      const phaseFromMessage = (phase) => phase === 'plan'
-        ? 'plan'
-        : phase === 'quiz'
-          ? 'quiz'
-          : 'legacy-quiz';
+      const phaseFromMessage = (phase) => phase === 'plan' ? 'plan' : 'quiz';
+
+      const requestFrameMeasure = () => {
+        try {
+          if (!frame.contentWindow) return;
+          frame.contentWindow.postMessage({ type: 'bw-measure-request' }, plannerOrigin() || '*');
+        } catch (error) {}
+      };
 
       const syncFromReadableFrame = () => {
         const height = readFrameHeight();
@@ -575,19 +571,21 @@
         }
         watchReadableFrame();
         scheduleHeightChecks();
+        requestFrameMeasure();
         sendConsentToPlanner();
       };
       frame.addEventListener('load', this._plannerFrameLoadHandler);
       this._plannerFrameStyleObserver = new MutationObserver(enforceFrameHeight);
       this._plannerFrameStyleObserver.observe(frame, { attributes: true, attributeFilter: ['style'] });
       this._plannerResizeHandler = () => {
-        if (currentPhase !== 'plan') setHeight(quizFloor() - heightBuffer, 'quiz');
         scheduleHeightChecks();
+        requestFrameMeasure();
       };
       window.addEventListener('resize', this._plannerResizeHandler);
       if (window.visualViewport) window.visualViewport.addEventListener('resize', this._plannerResizeHandler);
-      setHeight(quizFloor() - heightBuffer, 'quiz');
+      setHeight(initialHeight() - heightBuffer, 'quiz');
       scheduleHeightChecks();
+      requestFrameMeasure();
       window.setTimeout(sendConsentToPlanner, 800);
     }
 
@@ -1408,15 +1406,24 @@
           background: rgba(255, 255, 255, 0.9);
           border: 1px solid rgba(27, 94, 32, 0.62);
           border-radius: 20px;
+          box-sizing: border-box;
           box-shadow: 0 18px 42px rgba(27, 94, 32, 0.08);
           max-width: 920px;
+          min-width: 0;
           overflow: hidden;
+          overflow-anchor: none;
           padding: 20px 24px;
+          width: 100%;
         }
 
         .bw-trip-launch .bw-trip-widget-shell iframe {
+          box-sizing: border-box;
           height: 560px;
+          max-width: 100%;
           min-height: 560px;
+          min-width: 0;
+          transition: height 200ms cubic-bezier(0.22, 1, 0.36, 1), min-height 200ms cubic-bezier(0.22, 1, 0.36, 1);
+          width: 100%;
         }
 
         .bw-trip-proof-band {
@@ -1623,7 +1630,8 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .bw-trip-btn {
+          .bw-trip-btn,
+          .bw-trip-launch .bw-trip-widget-shell iframe {
             transition: none;
           }
         }
