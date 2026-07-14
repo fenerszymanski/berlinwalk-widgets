@@ -20,7 +20,7 @@ A Ring departure display: the S41 running clockwise through Ostkreuz, Neukölln 
 
 This is the part that trips people up, and it is simpler than it looks. The **S41 runs clockwise** and the **S42 runs anticlockwise**. Same circle, opposite directions, sharing the track like two runners going opposite ways around a stadium.
 
-You do not need to memorise the whole loop. Just do what locals do: **look at the front of the train and the destination it shows**. If the next big corner it lists sits in the direction you want to go, hop on. If not, the platform opposite has a train going the other way that reaches the same stop, only by the long route. Either train gets you there in the end, so if one is already pulling in, take it. The clockwise or anticlockwise choice only matters when you want the faster half of the circle.
+You do not need to memorise the whole loop. Just do what locals do: **look at the front of the train and the destination it shows**. If the next big corner it lists sits in the direction you want to go, hop on. If not, the platform opposite has a train going the other way that reaches the same stop, only by the long route. Either train gets you there in the end, so if one is already pulling in, take it. The clockwise or anticlockwise choice only matters when you want the faster half of the circle. You can check live departures for the [S41 and S42 on the S-Bahn Berlin site](https://sbahn.berlin/en/plan-a-journey/s41/).
 
 For a wider picture of how the S-Bahn fits with the U-Bahn, trams and buses, my guide to [the U-Bahn and S-Bahn](https://www.berlinwalk.com/post/u-bahn-vs-s-bahn-berlin) is worth a read before you travel.
 
