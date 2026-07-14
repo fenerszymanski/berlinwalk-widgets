@@ -203,7 +203,8 @@
   "prenzlauer-berg-berlin": "prenzlauer-berg-berlin",
   "berlin-layover-guide": "berlin-layover-guide",
   "open-air-cinema-berlin": "open-air-cinema-berlin",
-  "berlin-ticket-machines": "berlin-ticket-machines"
+  "berlin-ticket-machines": "berlin-ticket-machines",
+  "hidden-places-central-berlin": "hidden-places-central-berlin"
 };
 
   var SCHEMAS = {
@@ -9649,6 +9650,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "BER airport is in fare Zone C, so you need a ticket that covers zones A, B, and C. Buy a Single ticket ABC for 5.00 euros for the ride, or a Day ticket ABC for 12.90 euros if you will keep travelling that day. A normal AB ticket does not reach the airport, and getting caught with the wrong zone still counts as travelling without a valid ticket."
+        }
+      }
+    ]
+  },
+  "hidden-places-central-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How long is this hidden Berlin walk?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The route is about 5.3 kilometres from S Anhalter Bahnhof to Alexanderplatz. Allow 90 to 120 minutes if you keep every stop outside. Add at least 45 to 60 minutes if you enter the free Tränenpalast exhibition, and leave extra time for busy crossings or temporary construction in central Berlin."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where does the walk start and finish?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start outside S Anhalter Bahnhof at the surviving portal on Askanischer Platz. The route moves north through Erna-Berger-Strasse and Potsdamer Platz, continues to Friedrichstrasse and the Spree, then passes Rosenstrasse, Hackescher Markt and Spandauer Strasse. Finish at Berolinahaus on Alexanderplatz, close to the U-Bahn, S-Bahn, trams and buses."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the hidden Berlin route free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Every observation point in this article can be seen from public space without a ticket, and the permanent exhibition inside Tränenpalast is also free. Do not assume interiors such as the GDR watchtower or Heilig-Geist-Kapelle are open; their access depends on current notices or events. The optional BerlinWalk audio route is a separate €4.99 product."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I do the route without buying the audio guide?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. This article gives you the start, finish, route shape, practical stops and enough context to walk independently. The paid Hidden Berlin Audio Route is for visitors who want the complete 10-stop sequence, 12 narrated tracks, offline MP3 downloads and a route card on their phone."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the route wheelchair accessible?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The route mostly follows ordinary central-Berlin pavements, but I would not promise a fully step-free experience without checking it on the day. Cobbles, kerbs, station approaches, temporary barriers and construction can change the practical route. Tränenpalast itself has official barrier-free visitor information, but the full outdoor walk has not been certified as an accessible route."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best time to walk from Anhalter Bahnhof to Alexanderplatz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Daylight is best because the small architectural clues are easier to see and the route includes several busy crossings. Tuesday to Sunday is the useful window if you also want to enter Tränenpalast; it is normally closed on Monday. Start with two free hours and avoid placing a fixed museum reservation immediately after the walk."
         }
       }
     ]

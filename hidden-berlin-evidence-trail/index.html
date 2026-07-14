@@ -1,0 +1,882 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hidden Berlin Evidence Trail | Anhalter Bahnhof to Alexanderplatz</title>
+  <meta name="description" content="Train your eye for four overlooked pieces of Berlin history before walking from Anhalter Bahnhof to Alexanderplatz.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <style>
+    :root {
+      --hbe-ink: #142017;
+      --hbe-paper: #f7f3e8;
+      --hbe-green: #123d18;
+      --hbe-mid: #1b5e20;
+      --hbe-yellow: #ffe600;
+      --hbe-lime: #9fcf5b;
+      --hbe-line: rgba(247, 243, 232, 0.2);
+      --hbe-muted: #bcc8bc;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    html, body {
+      background: transparent;
+      margin: 0;
+      padding: 0;
+    }
+
+    .hbe,
+    .hbe * {
+      box-sizing: border-box;
+    }
+
+    .hbe {
+      width: min(100%, 960px);
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 86% 8%, rgba(159, 207, 91, 0.16), transparent 30%),
+        linear-gradient(145deg, #07190c 0%, #123d18 56%, #0c2c11 100%);
+      color: #fff;
+      font-family: Montserrat, Arial, sans-serif;
+      box-shadow: 0 22px 58px rgba(12, 44, 17, 0.2);
+    }
+
+    .hbe__top {
+      padding: 28px 28px 22px;
+      border-bottom: 1px solid var(--hbe-line);
+    }
+
+    .hbe__kicker {
+      margin: 0 0 8px;
+      color: var(--hbe-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .hbe__title {
+      max-width: 690px;
+      margin: 0;
+      color: #fff;
+      font-family: Merriweather, Georgia, serif;
+      font-size: clamp(29px, 5vw, 50px);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+    }
+
+    .hbe__intro {
+      max-width: 680px;
+      margin: 12px 0 0;
+      color: #d6dfd6;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .hbe__facts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .hbe__facts li {
+      border: 1px solid var(--hbe-line);
+      border-radius: 999px;
+      padding: 7px 11px;
+      color: #e5ebe5;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .hbe__route {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 0;
+      padding: 18px 28px;
+      border-bottom: 1px solid var(--hbe-line);
+    }
+
+    .hbe__route-stop {
+      position: relative;
+      min-width: 0;
+      padding: 18px 8px 0 0;
+      color: var(--hbe-muted);
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .hbe__route-stop::before {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 0;
+      z-index: 2;
+      width: 8px;
+      height: 8px;
+      border: 2px solid var(--hbe-yellow);
+      border-radius: 50%;
+      background: var(--hbe-green);
+    }
+
+    .hbe__route-stop::after {
+      content: "";
+      position: absolute;
+      top: 7px;
+      right: 0;
+      left: 8px;
+      height: 1px;
+      background: rgba(255, 230, 0, 0.42);
+    }
+
+    .hbe__route-stop:last-child::after {
+      display: none;
+    }
+
+    .hbe__route-stop strong {
+      display: block;
+      overflow-wrap: anywhere;
+      color: #fff;
+      font-size: 10.5px;
+    }
+
+    .hbe__stage {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+      min-height: 500px;
+    }
+
+    .hbe__photo-wrap {
+      position: relative;
+      min-height: 500px;
+      overflow: hidden;
+      background: #0a240f;
+    }
+
+    .hbe__photo {
+      width: 100%;
+      height: 100%;
+      min-height: 500px;
+      object-fit: cover;
+      object-position: center;
+      transition: opacity 180ms ease, transform 420ms ease;
+    }
+
+    .hbe__photo.is-changing {
+      opacity: 0.28;
+      transform: scale(1.018);
+    }
+
+    .hbe__photo-shade {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(7, 25, 12, 0.02) 45%, rgba(7, 25, 12, 0.84) 100%);
+    }
+
+    .hbe__photo-label {
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      left: 18px;
+      margin: 0;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.45;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
+    }
+
+    .hbe__panel {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      padding: 26px;
+      background: rgba(6, 23, 10, 0.72);
+    }
+
+    .hbe__count {
+      margin: 0 0 6px;
+      color: var(--hbe-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .hbe__place {
+      margin: 0;
+      color: #fff;
+      font-family: Merriweather, Georgia, serif;
+      font-size: 29px;
+      line-height: 1.14;
+    }
+
+    .hbe__address {
+      margin: 7px 0 18px;
+      color: var(--hbe-muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .hbe__switch {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin: 0 0 18px;
+      padding: 4px;
+      border: 1px solid var(--hbe-line);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .hbe__switch button {
+      min-height: 42px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: #c9d4c9;
+      font: 800 11px/1.25 Montserrat, Arial, sans-serif;
+      cursor: pointer;
+    }
+
+    .hbe__switch button[aria-selected="true"] {
+      background: var(--hbe-yellow);
+      color: var(--hbe-green);
+    }
+
+    .hbe__switch button:focus-visible,
+    .hbe__nav button:focus-visible,
+    .hbe__dot:focus-visible,
+    .hbe__cta:focus-visible,
+    .hbe__compare:focus-visible,
+    .hbe__credits-toggle:focus-visible,
+    .hbe__credits-close:focus-visible {
+      outline: 3px solid #fff;
+      outline-offset: 2px;
+    }
+
+    .hbe__copy-label {
+      margin: 0 0 5px;
+      color: var(--hbe-lime);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .hbe__copy {
+      min-height: 116px;
+      margin: 0;
+      color: #eef3ee;
+      font-size: 14px;
+      line-height: 1.67;
+    }
+
+    .hbe__move {
+      margin: 18px 0 0;
+      padding: 12px 13px;
+      border-left: 3px solid var(--hbe-yellow);
+      background: rgba(255, 255, 255, 0.055);
+      color: #dde6dd;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .hbe__move strong {
+      color: #fff;
+    }
+
+    .hbe__nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: auto;
+      padding-top: 24px;
+    }
+
+    .hbe__nav-btn {
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--hbe-line);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+      font-size: 21px;
+      cursor: pointer;
+    }
+
+    .hbe__nav-btn:hover {
+      border-color: var(--hbe-yellow);
+    }
+
+    .hbe__dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+    }
+
+    .hbe__dot {
+      width: 9px;
+      height: 9px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: #607463;
+      cursor: pointer;
+    }
+
+    .hbe__dot[aria-current="step"] {
+      width: 23px;
+      border-radius: 999px;
+      background: var(--hbe-yellow);
+    }
+
+    .hbe__bottom {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: center;
+      padding: 22px 28px 26px;
+      border-top: 1px solid var(--hbe-line);
+      background: rgba(2, 14, 6, 0.55);
+    }
+
+    .hbe__bottom-copy {
+      margin: 0;
+      color: #d4ddd4;
+      font-size: 12.5px;
+      line-height: 1.55;
+    }
+
+    .hbe__bottom-copy strong {
+      color: #fff;
+    }
+
+    .hbe__credits-toggle {
+      display: inline-flex;
+      min-height: 32px;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      border: 1px solid var(--hbe-line);
+      border-radius: 999px;
+      padding: 7px 10px;
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+      font: 800 9px/1 Montserrat, Arial, sans-serif;
+      cursor: pointer;
+    }
+
+    .hbe__credits-toggle:hover {
+      border-color: var(--hbe-yellow);
+    }
+
+    .hbe__actions {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .hbe__cta,
+    .hbe__compare {
+      display: inline-flex;
+      min-height: 46px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 11px 16px;
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.25;
+      text-align: center;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .hbe__cta,
+    .hbe__cta:visited,
+    .hbe__cta:hover,
+    .hbe__cta:active {
+      background: var(--hbe-yellow);
+      color: var(--hbe-green);
+    }
+
+    .hbe__compare,
+    .hbe__compare:visited {
+      border: 1px solid var(--hbe-line);
+      color: #fff;
+    }
+
+    .hbe__compare:hover,
+    .hbe__compare:active {
+      border-color: var(--hbe-yellow);
+      color: #fff;
+    }
+
+    .hbe__credits-panel {
+      position: fixed;
+      right: max(14px, calc(50% - 360px));
+      bottom: 16px;
+      left: max(14px, calc(50% - 360px));
+      z-index: 60;
+      max-width: 720px;
+      max-height: min(72vh, 430px);
+      overflow: auto;
+      border: 1px solid rgba(18, 61, 24, 0.2);
+      border-top: 5px solid var(--hbe-green);
+      border-radius: 12px;
+      padding: 18px;
+      background: var(--hbe-paper);
+      color: var(--hbe-ink);
+      font-family: Montserrat, Arial, sans-serif;
+      box-shadow: 0 18px 50px rgba(18, 61, 24, 0.3);
+    }
+
+    .hbe__credits-panel[hidden] {
+      display: none !important;
+    }
+
+    .hbe__credits-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 11px;
+    }
+
+    .hbe__credits-title {
+      margin: 0;
+      color: var(--hbe-green);
+      font-family: Merriweather, Georgia, serif;
+      font-size: 18px;
+      line-height: 1.25;
+    }
+
+    .hbe__credits-close {
+      display: inline-flex;
+      width: 32px;
+      height: 32px;
+      flex: 0 0 32px;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 50%;
+      background: var(--hbe-green);
+      color: #fff;
+      font: 700 19px/1 Arial, sans-serif;
+      cursor: pointer;
+    }
+
+    .hbe__credits-list {
+      margin: 0;
+      padding-left: 19px;
+      color: #465447;
+      font-size: 10px;
+      line-height: 1.55;
+    }
+
+    .hbe__credits-list li {
+      margin-bottom: 8px;
+    }
+
+    .hbe__credits-list a,
+    .hbe__credits-list a:visited {
+      color: var(--hbe-green);
+      font-weight: 800;
+    }
+
+    @media (max-width: 760px) {
+      .hbe {
+        border-radius: 18px;
+      }
+
+      .hbe__top {
+        padding: 23px 20px 19px;
+      }
+
+      .hbe__route {
+        overflow: hidden;
+        padding: 14px 20px;
+      }
+
+      .hbe__route-stop {
+        font-size: 0;
+      }
+
+      .hbe__route-stop strong {
+        font-size: 9px;
+      }
+
+      .hbe__stage {
+        grid-template-columns: 1fr;
+      }
+
+      .hbe__photo-wrap,
+      .hbe__photo {
+        height: 330px;
+        min-height: 330px;
+      }
+
+      .hbe__panel {
+        padding: 22px 20px 24px;
+      }
+
+      .hbe__copy {
+        min-height: 0;
+      }
+
+      .hbe__bottom {
+        grid-template-columns: 1fr;
+        padding: 20px;
+      }
+
+      .hbe__actions {
+        flex-wrap: wrap;
+      }
+
+      .hbe__cta,
+      .hbe__compare {
+        flex: 1 1 180px;
+        white-space: normal;
+      }
+
+      .hbe__credits-panel {
+        right: 10px;
+        bottom: 10px;
+        left: 10px;
+      }
+    }
+
+    @media (max-width: 440px) {
+      .hbe__top {
+        padding: 20px 18px 16px;
+      }
+
+      .hbe__title {
+        font-size: 29px;
+      }
+
+      .hbe__intro {
+        margin-top: 9px;
+        font-size: 12.5px;
+        line-height: 1.52;
+      }
+
+      .hbe__facts {
+        margin-top: 12px;
+      }
+
+      .hbe__facts li:nth-child(3) {
+        display: none;
+      }
+
+      .hbe__route-stop strong {
+        font-size: 0;
+      }
+
+      .hbe__route-stop:nth-child(1) strong::after { content: "Start"; font-size: 9px; }
+      .hbe__route-stop:nth-child(2) strong::after { content: "Wall"; font-size: 9px; }
+      .hbe__route-stop:nth-child(3) strong::after { content: "Border"; font-size: 9px; }
+      .hbe__route-stop:nth-child(4) strong::after { content: "Rail"; font-size: 9px; }
+      .hbe__route-stop:nth-child(5) strong::after { content: "Finish"; font-size: 9px; }
+
+      .hbe__photo-wrap,
+      .hbe__photo {
+        height: 245px;
+        min-height: 245px;
+      }
+
+      .hbe__panel {
+        padding: 18px;
+      }
+
+      .hbe__place {
+        font-size: 24px;
+      }
+
+      .hbe__address {
+        margin: 6px 0 12px;
+      }
+
+      .hbe__switch {
+        margin-bottom: 12px;
+      }
+
+      .hbe__copy {
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      .hbe__move {
+        margin-top: 12px;
+        padding: 10px 11px;
+      }
+
+      .hbe__nav {
+        padding-top: 16px;
+      }
+
+      .hbe__bottom {
+        gap: 12px;
+        padding: 18px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hbe__photo {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="hbe" aria-labelledby="hbe-title">
+    <header class="hbe__top">
+      <p class="hbe__kicker">BerlinWalk • Look before you walk</p>
+      <h2 class="hbe__title" id="hbe-title">Hidden Berlin Evidence Trail</h2>
+      <p class="hbe__intro">Four ordinary-looking fragments can change how you read the whole route from Anhalter Bahnhof to Alexanderplatz. Switch from the visible layer to the historical layer before you start walking.</p>
+      <ul class="hbe__facts" aria-label="Route facts">
+        <li>5.3 km</li>
+        <li>90 to 120 minutes</li>
+        <li>Anhalter Bahnhof to Alexanderplatz</li>
+      </ul>
+    </header>
+
+    <div class="hbe__route" aria-label="Route sequence">
+      <span class="hbe__route-stop"><strong>Anhalter</strong>Start</span>
+      <span class="hbe__route-stop"><strong>Potsdamer</strong>Wall traces</span>
+      <span class="hbe__route-stop"><strong>Friedrichstr.</strong>Border hall</span>
+      <span class="hbe__route-stop"><strong>Hackescher</strong>Old railway</span>
+      <span class="hbe__route-stop"><strong>Alexanderplatz</strong>Finish</span>
+    </div>
+
+    <div class="hbe__stage">
+      <div class="hbe__photo-wrap">
+        <img class="hbe__photo" id="hbe-photo" src="assets/anhalter-bahnhof.jpg" alt="Surviving brick portal of Anhalter Bahnhof" width="1400" height="933">
+        <div class="hbe__photo-shade" aria-hidden="true"></div>
+        <p class="hbe__photo-label" id="hbe-photo-label">Stand back far enough to see the empty ground behind the portal.</p>
+      </div>
+
+      <div class="hbe__panel">
+        <p class="hbe__count" id="hbe-count">Clue 1 of 4</p>
+        <h3 class="hbe__place" id="hbe-place">Anhalter Bahnhof</h3>
+        <p class="hbe__address" id="hbe-address">Askanischer Platz • Start outside S Anhalter Bahnhof</p>
+
+        <div class="hbe__switch" role="tablist" aria-label="Evidence layer">
+          <button id="hbe-visible-tab" type="button" role="tab" aria-selected="true" aria-controls="hbe-copy">What you see</button>
+          <button id="hbe-history-tab" type="button" role="tab" aria-selected="false" aria-controls="hbe-copy">What it reveals</button>
+        </div>
+
+        <p class="hbe__copy-label" id="hbe-copy-label">Visible layer</p>
+        <p class="hbe__copy" id="hbe-copy" role="tabpanel" aria-live="polite">One large brick entrance wall, three lower openings and a clock. The rest of the station seems to be missing.</p>
+        <p class="hbe__move" id="hbe-move"><strong>Do this:</strong> Look through the openings before walking around the back. The empty footprint makes the scale clear.</p>
+
+        <nav class="hbe__nav" aria-label="Evidence trail controls">
+          <button class="hbe__nav-btn" id="hbe-prev" type="button" aria-label="Previous clue">‹</button>
+          <div class="hbe__dots" id="hbe-dots" aria-label="Choose a clue"></div>
+          <button class="hbe__nav-btn" id="hbe-next" type="button" aria-label="Next clue">›</button>
+        </nav>
+      </div>
+    </div>
+
+    <footer class="hbe__bottom">
+      <div>
+        <p class="hbe__bottom-copy"><strong>This is the visual warm-up.</strong> The full audio route has 12 short tracks, 10 stops, offline MP3s and a route card.</p>
+        <button class="hbe__credits-toggle" id="hbe-credits-toggle" type="button" aria-controls="hbe-credits-panel" aria-expanded="false">
+          <span aria-hidden="true">◉</span> Image credits
+        </button>
+      </div>
+      <div class="hbe__actions">
+        <a class="hbe__compare" href="https://www.berlinwalk.com/audio-tours?utm_source=blog_widget&amp;utm_medium=referral&amp;utm_campaign=hidden_places_central_berlin&amp;utm_content=compare_audio_guides" target="_blank" rel="noopener">Compare audio guides</a>
+        <a class="hbe__cta" href="https://www.berlinwalk.com/products/hidden-berlin-audio-route?utm_source=blog_widget&amp;utm_medium=referral&amp;utm_campaign=hidden_places_central_berlin&amp;utm_content=hidden_route_cta" target="_blank" rel="noopener">Get the route • €4.99</a>
+      </div>
+    </footer>
+  </section>
+
+  <aside class="hbe__credits-panel" id="hbe-credits-panel" role="dialog" aria-modal="false" aria-labelledby="hbe-credits-title" hidden>
+    <div class="hbe__credits-head">
+      <h2 class="hbe__credits-title" id="hbe-credits-title">Image credits</h2>
+      <button class="hbe__credits-close" id="hbe-credits-close" type="button" aria-label="Close image credits">×</button>
+    </div>
+    <ul class="hbe__credits-list">
+      <li>Anhalter Bahnhof: <a href="https://commons.wikimedia.org/wiki/File:Berlin_Anhalter_Bahnhof_-_01.jpg" target="_blank" rel="noopener">Carlos Delgado</a>, CC BY-SA 4.0.</li>
+      <li>Tränenpalast: <a href="https://commons.wikimedia.org/wiki/File:Berlin,_Mitte,_Friedrichstrasse,_Traenenpalast.jpg" target="_blank" rel="noopener">Jörg Zägel</a>, CC BY-SA 3.0.</li>
+      <li>Hackescher Markt station: BerlinWalk.</li>
+      <li>Historic Berolina: <a href="https://commons.wikimedia.org/wiki/File:Berlin_Alexanderplatz_Berolina.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, public domain.</li>
+      <li>Alexanderplatz World Clock: <a href="https://commons.wikimedia.org/wiki/File:Berlin_-_Alexanderplatz_-_Weltzeituhr_01.jpg" target="_blank" rel="noopener">Wikimedia Commons contributor</a>, CC BY-SA 4.0.</li>
+    </ul>
+  </aside>
+
+  <script>
+    (function () {
+      var clues = [
+        {
+          place: 'Anhalter Bahnhof',
+          address: 'Askanischer Platz • Start outside S Anhalter Bahnhof',
+          image: 'assets/anhalter-bahnhof.jpg',
+          alt: 'Surviving brick portal of Anhalter Bahnhof',
+          photoLabel: 'Stand back far enough to see the empty ground behind the portal.',
+          visible: 'One large brick entrance wall, three lower openings and a clock. The rest of the station seems to be missing.',
+          history: 'The wall is the surviving front edge of a major long-distance station. Its absence is physical evidence of war damage, closure and post-war demolition.',
+          move: 'Look through the openings before walking around the back. The empty footprint makes the scale clear.'
+        },
+        {
+          place: 'Tränenpalast',
+          address: 'Reichstagufer 17 • Beside S+U Friedrichstrasse',
+          image: 'assets/traenenpalast.jpg',
+          alt: 'Low glass hall of the Tränenpalast beside Friedrichstrasse station',
+          photoLabel: 'The building is low and ordinary because it was a border departure hall, not a grand station.',
+          visible: 'A modest glass hall pressed against one of central Berlin\'s busiest stations. It is easy to read it as a station annex.',
+          history: 'This was a departure checkpoint between East and West Berlin. Its human scale turns the abstract border into a place of searches, documents and farewells.',
+          move: 'Pause outside even if the exhibition is closed. If it is open, admission is free and the visit deserves its own time.'
+        },
+        {
+          place: 'Hackescher Markt station',
+          address: 'An der Spandauer Brücke • Look up from street level',
+          image: 'assets/hackescher-markt.jpg',
+          alt: 'Brick facade and entrance of Hackescher Markt S-Bahn station',
+          photoLabel: 'Follow the terracotta detail upward instead of reading only the shop and station signs.',
+          visible: 'A working S-Bahn station with brick arches, terracotta ornament and restaurants tucked below the tracks.',
+          history: 'The station belongs to Berlin\'s nineteenth-century Stadtbahn. It carried different names through imperial, East German and reunified Berlin.',
+          move: 'Stand across from the entrance and trace the brickwork from the arches to the roofline for one full minute.'
+        },
+        {
+          place: 'The missing Berolina',
+          address: 'Berolinahaus • Alexanderplatz finish',
+          image: 'assets/berolina-1900.jpg',
+          alt: 'Historic Berolina statue standing on Alexanderplatz around 1900',
+          photoLabel: 'Use the old photograph to place the vanished figure back into today\'s open square.',
+          visible: 'A historic photograph shows a monumental female figure commanding Alexanderplatz. There is no matching statue on the square today.',
+          history: 'Berolina personified Berlin. The statue disappeared, while Berolinahaus kept the name. A surviving word can carry a vanished monument.',
+          move: 'Stand near Berolinahaus, hold the photograph at eye level and compare the old background with the square in front of you.'
+        }
+      ];
+
+      var index = 0;
+      var layer = 'visible';
+      var photo = document.getElementById('hbe-photo');
+      var photoLabel = document.getElementById('hbe-photo-label');
+      var count = document.getElementById('hbe-count');
+      var place = document.getElementById('hbe-place');
+      var address = document.getElementById('hbe-address');
+      var copyLabel = document.getElementById('hbe-copy-label');
+      var copy = document.getElementById('hbe-copy');
+      var move = document.getElementById('hbe-move');
+      var visibleTab = document.getElementById('hbe-visible-tab');
+      var historyTab = document.getElementById('hbe-history-tab');
+      var dots = document.getElementById('hbe-dots');
+      var creditsToggle = document.getElementById('hbe-credits-toggle');
+      var creditsPanel = document.getElementById('hbe-credits-panel');
+      var creditsClose = document.getElementById('hbe-credits-close');
+
+      clues.forEach(function (clue, i) {
+        var preload = new Image();
+        preload.src = clue.image;
+        var dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'hbe__dot';
+        dot.setAttribute('aria-label', 'Show clue ' + (i + 1) + ': ' + clue.place);
+        dot.addEventListener('click', function () { show(i); });
+        dots.appendChild(dot);
+      });
+
+      function updateLayer() {
+        var clue = clues[index];
+        var isVisible = layer === 'visible';
+        visibleTab.setAttribute('aria-selected', isVisible ? 'true' : 'false');
+        historyTab.setAttribute('aria-selected', isVisible ? 'false' : 'true');
+        copyLabel.textContent = isVisible ? 'Visible layer' : 'Historical layer';
+        copy.textContent = isVisible ? clue.visible : clue.history;
+      }
+
+      function render() {
+        var clue = clues[index];
+        count.textContent = 'Clue ' + (index + 1) + ' of ' + clues.length;
+        place.textContent = clue.place;
+        address.textContent = clue.address;
+        photoLabel.textContent = clue.photoLabel;
+        move.innerHTML = '<strong>Do this:</strong> ' + clue.move;
+        updateLayer();
+        Array.prototype.forEach.call(dots.children, function (dot, i) {
+          if (i === index) dot.setAttribute('aria-current', 'step');
+          else dot.removeAttribute('aria-current');
+        });
+      }
+
+      function show(nextIndex) {
+        index = (nextIndex + clues.length) % clues.length;
+        layer = 'visible';
+        var clue = clues[index];
+        photo.classList.add('is-changing');
+        window.setTimeout(function () {
+          photo.src = clue.image;
+          photo.alt = clue.alt;
+          render();
+          window.requestAnimationFrame(function () {
+            photo.classList.remove('is-changing');
+          });
+        }, 120);
+      }
+
+      visibleTab.addEventListener('click', function () {
+        layer = 'visible';
+        updateLayer();
+      });
+
+      historyTab.addEventListener('click', function () {
+        layer = 'history';
+        updateLayer();
+      });
+
+      document.getElementById('hbe-prev').addEventListener('click', function () { show(index - 1); });
+      document.getElementById('hbe-next').addEventListener('click', function () { show(index + 1); });
+
+      function setCredits(open, returnFocus) {
+        creditsPanel.hidden = !open;
+        creditsToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (open) creditsClose.focus();
+        else if (returnFocus) creditsToggle.focus();
+      }
+
+      creditsToggle.addEventListener('click', function (event) {
+        event.stopPropagation();
+        setCredits(creditsToggle.getAttribute('aria-expanded') !== 'true', false);
+      });
+
+      creditsClose.addEventListener('click', function () {
+        setCredits(false, true);
+      });
+
+      document.addEventListener('click', function (event) {
+        if (creditsPanel.hidden) return;
+        if (creditsPanel.contains(event.target) || creditsToggle.contains(event.target)) return;
+        setCredits(false, false);
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && !creditsPanel.hidden) {
+          event.preventDefault();
+          setCredits(false, true);
+        }
+      });
+
+      render();
+      setCredits(false, false);
+    })();
+  </script>
+</body>
+</html>
