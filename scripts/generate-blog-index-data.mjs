@@ -553,6 +553,9 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if (/(berlin-layover-guide|layover in berlin|ber layover|spend a layover)/.test(s)) return 'berlin-layover-planner';
+  if (/(prenzlauer-berg-berlin|prenzlauer berg)/.test(s)) return 'prenzlauer-berg-walk';
+  if (/(buy-berlin-transport-tickets-on-your-phone|tickets on your phone|phone ticket|bvg app)/.test(s)) return 'berlin-phone-ticket-picker';
   if (/(kreuzberg-berlin|kreuzberg berlin|so36|bergmannkiez)/.test(s)) return 'berlin-landmarks-map';
   if (/(kadewe-berlin|kadewe berlin|kaufhaus des westens|food hall)/.test(s)) return 'berlin-shopping-areas';
   if (/(hitlers-bunker-berlin|hitler's bunker|hitlers bunker|führerbunker|fuehrerbunker)/.test(s)) return 'berlin-landmarks-map';

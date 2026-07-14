@@ -1,0 +1,26 @@
+{
+  "at": "2026-07-14T10:25:12.175Z",
+  "tools": [
+    {
+      "slug": "berlin-layover-planner",
+      "iconUrl": "https://static.wixstatic.com/media/5a08a3_01e0c4909ba849e3834a44bc142c8f6d~mv2.png",
+      "itemId": "66744bd3-a095-47bd-b21c-d606f608f66d",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-layover-planner/",
+      "live": "https://www.berlinwalk.com/tools/berlin-layover-planner"
+    },
+    {
+      "slug": "prenzlauer-berg-walk",
+      "iconUrl": "https://static.wixstatic.com/media/5a08a3_2d35ef739652495e85f749b2331c0e10~mv2.png",
+      "itemId": "19c01dab-3bf8-49da-b6ae-232d287a5160",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/prenzlauer-berg-walk/",
+      "live": "https://www.berlinwalk.com/tools/prenzlauer-berg-walk"
+    },
+    {
+      "slug": "berlin-phone-ticket-picker",
+      "iconUrl": "https://static.wixstatic.com/media/5a08a3_ecb8bd3c7e4f4c109e1b085af4ffb1c4~mv2.png",
+      "itemId": "e3562fe6-c0e4-4759-9295-1f0871135cf1",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-phone-ticket-picker/",
+      "live": "https://www.berlinwalk.com/tools/berlin-phone-ticket-picker"
+    }
+  ]
+}

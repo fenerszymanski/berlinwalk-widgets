@@ -3625,6 +3625,112 @@
       "relatedBlogSlug": "how-to-pronounce-berlin-station-names",
       "iconStatus": "live-wix-media",
       "cmsItemId": "26d2e522-992e-472e-9cb0-3a87e3f5f332"
+    },
+    {
+      "slug": "berlin-layover-planner",
+      "title": "Berlin Layover Planner",
+      "lead": "Work out how much real city time a Berlin layover gives you after the airport buffers and train rides, then see what is sensible to do, from staying airside to walking the historic centre.",
+      "category": "Transport",
+      "image": "https://static.wixstatic.com/media/5a08a3_01e0c4909ba849e3834a44bc142c8f6d~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-layover-planner/",
+      "embedHeight": 1180,
+      "hubCategory": "Transport",
+      "type": "Planner",
+      "priority": 40,
+      "tags": [
+        "layover",
+        "BER",
+        "airport",
+        "stopover",
+        "transit",
+        "connection",
+        "S9",
+        "Alexanderplatz",
+        "buffer",
+        "Schengen",
+        "city time"
+      ],
+      "aliases": [
+        "ber layover",
+        "airport layover berlin",
+        "berlin stopover",
+        "how long layover berlin",
+        "leave ber airport",
+        "berlin transit tour"
+      ],
+      "relatedBlog": "/post/berlin-layover-guide",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "66744bd3-a095-47bd-b21c-d606f608f66d"
+    },
+    {
+      "slug": "prenzlauer-berg-walk",
+      "title": "Self-Guided Prenzlauer Berg Walk",
+      "lead": "A self-guided half-day loop through Prenzlauer Berg in walking order: Eberswalder Strasse and Konnopke's, the Kulturbrauerei, Kollwitzplatz market, the Wasserturm, Kastanienallee and Mauerpark.",
+      "category": "Discovery",
+      "image": "https://static.wixstatic.com/media/5a08a3_2d35ef739652495e85f749b2331c0e10~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/prenzlauer-berg-walk/",
+      "embedHeight": 1120,
+      "hubCategory": "CultureLandmarks",
+      "type": "Planner",
+      "priority": 41,
+      "tags": [
+        "Prenzlauer Berg",
+        "walk",
+        "self-guided",
+        "Mauerpark",
+        "Kollwitzplatz",
+        "Kulturbrauerei",
+        "Wasserturm",
+        "Konnopke",
+        "Kastanienallee",
+        "district"
+      ],
+      "aliases": [
+        "prenzlauer berg walk",
+        "prenzlauer berg self-guided",
+        "prenzlauer berg walking tour",
+        "prenzlauer berg loop",
+        "things to do prenzlauer berg"
+      ],
+      "relatedBlog": "/post/prenzlauer-berg-berlin",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "19c01dab-3bf8-49da-b6ae-232d287a5160"
+    },
+    {
+      "slug": "berlin-phone-ticket-picker",
+      "title": "Berlin Phone Ticket Picker",
+      "lead": "Tell it your plan for the day and it shows the exact Berlin transport ticket to buy in the app, the 2026 price, the fare zone, the German ticket name, and whether you need to validate it.",
+      "category": "Money",
+      "image": "https://static.wixstatic.com/media/5a08a3_ecb8bd3c7e4f4c109e1b085af4ffb1c4~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-phone-ticket-picker/",
+      "embedHeight": 900,
+      "hubCategory": "Transport",
+      "type": "Planner",
+      "priority": 42,
+      "tags": [
+        "ticket",
+        "BVG",
+        "app",
+        "phone",
+        "Einzelfahrschein",
+        "24-Stunden-Karte",
+        "Deutschlandticket",
+        "ABC",
+        "AB",
+        "Kurzstrecke",
+        "fare zone",
+        "validate"
+      ],
+      "aliases": [
+        "which berlin ticket",
+        "bvg app ticket",
+        "berlin ticket on phone",
+        "buy berlin ticket app",
+        "berlin transport ticket picker"
+      ],
+      "relatedBlog": "/post/buy-berlin-transport-tickets-on-your-phone",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "e3562fe6-c0e4-4759-9295-1f0871135cf1"
     }
   ],
   "hubCategories": [
