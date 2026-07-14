@@ -67,6 +67,9 @@
   .pt__zone { font-size: 11px; font-weight: 800; background: var(--bw-yellow); color: #123D18; border-radius: 6px; padding: 3px 8px; }
   .pt__scrbody { padding: 15px 15px 16px; }
   .pt__tname { font-size: 15.5px; font-weight: 800; color: var(--bw-green); margin: 0 0 3px; line-height: 1.25; }
+  .pt__tde { font-size: 11px; font-weight: 700; color: #123D18; background: var(--bw-yellow); border-radius: 6px; padding: 3px 8px; margin: 0 0 8px; display: inline-flex; align-items: baseline; gap: 5px; line-height: 1.3; }
+  .pt__tde b { font-weight: 800; }
+  .pt__tde span { font-size: 9px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; opacity: .7; }
   .pt__twhy { font-size: 11.5px; color: var(--bw-muted); margin: 0 0 12px; line-height: 1.45; }
   .pt__price { font-size: 30px; font-weight: 800; color: var(--bw-text); margin: 0; line-height: 1; }
   .pt__price small { font-size: 12px; font-weight: 700; color: var(--bw-muted); }
@@ -122,6 +125,7 @@
             </div>
             <div class="pt__scrbody">
               <p class="pt__tname" id="pt-tname">Pick your plan</p>
+              <p class="pt__tde" id="pt-tde" hidden></p>
               <p class="pt__twhy" id="pt-twhy">Choose an option on the left and your ticket appears here, ready to buy.</p>
               <p class="pt__price" id="pt-price">—</p>
               <p class="pt__pnote" id="pt-pnote">2026 fare</p>
@@ -136,7 +140,7 @@
         </div>
       </div>
     </div>
-    <p class="pt__foot">Prices are the January 2026 VBB fares. A screenshot is not a valid ticket: keep the live ticket open in the app for the inspector. Full details in the <a href="https://www.bvg.de/en/subscriptions-and-tickets/all-apps" target="_blank" rel="noopener">official BVG app overview</a>.</p>
+    <p class="pt__foot">Prices are the January 2026 VBB fares. The German ticket name is shown because the app often keeps it in German even in the English interface: look for the bold word above. The single ticket reads <strong>Einzelfahrschein</strong> in the BVG app and <strong>Einzelfahrausweis</strong> in the VBB app; both are the same ticket. A screenshot is not a valid ticket: keep the live ticket open in the app for the inspector. Full details in the <a href="https://www.bvg.de/en/subscriptions-and-tickets/all-apps" target="_blank" rel="noopener">official BVG app overview</a>.</p>
   </div>
 </div>
 <script>
@@ -154,34 +158,34 @@
       case 'quick':
         return {
           app: 'BVG Tickets', apps: ['BVG Fahrinfo', 'BVG Tickets'], zone: 'AB',
-          name: 'Single ticket AB', why: 'One ride across the city, changes and all, for up to 2 hours in one direction.',
+          name: 'Single ticket AB', de: 'Einzelfahrschein AB', why: 'One ride across the city, changes and all, for up to 2 hours in one direction.',
           price: '€4.00', pnote: 'Or a Kurzstrecke short-trip for €2.80 if it is 3 rail stops or fewer with no change.',
           valid: 'A single you buy in the app is <strong>valid straight away</strong>. Buy it just before you board; never stamp it.'
         };
       case 'day':
         if (group === 'group') return {
           app: 'BVG Tickets', apps: ['BVG Fahrinfo', 'BVG Tickets'], zone: 'AB',
-          name: '24-hour ticket AB, group', why: 'Unlimited rides for up to 5 people together for 24 hours. Cheaper than five separate day tickets.',
+          name: '24-hour ticket AB, group', de: '24-Stunden-Karte Kleingruppe AB', why: 'Unlimited rides for up to 5 people together for 24 hours. Cheaper than five separate day tickets.',
           price: '€35.30', pnote: 'One ticket covers the whole group; you all travel together.',
           valid: 'Valid the moment you buy it. Keep it open on <strong>one phone</strong> for the whole group when checked.'
         };
         return {
           app: 'BVG Tickets', apps: ['BVG Fahrinfo', 'BVG Tickets'], zone: 'AB',
-          name: '24-hour ticket AB', why: 'Unlimited U-Bahn, S-Bahn, tram and bus for 24 hours. Pays off from about the third ride.',
+          name: '24-hour ticket AB', de: '24-Stunden-Karte AB', why: 'Unlimited U-Bahn, S-Bahn, tram and bus for 24 hours. Pays off from about the third ride.',
           price: '€11.20', pnote: 'Runs 24 hours from the start time, not just to midnight.',
           valid: 'Valid the moment you buy it. No yellow box, no stamping; just keep it open in the app.'
         };
       case 'ber':
         return {
           app: 'BVG Fahrinfo', apps: ['BVG Fahrinfo', 'VBB Bus & Bahn', 'DB Navigator'], zone: 'ABC',
-          name: 'Single ticket ABC', why: 'BER Airport is in zone C, so you need the ABC ticket the app rarely picks for you by default.',
+          name: 'Single ticket ABC', de: 'Einzelfahrschein ABC', why: 'BER Airport is in zone C, so you need the ABC ticket the app rarely picks for you by default.',
           price: '€5.00', pnote: 'Sightseeing the same day too? A 24-hour ABC ticket is €12.90.',
           valid: 'Buy the <strong>ABC</strong> ticket before you leave the airport station. Valid at once; no stamping.'
         };
       case 'potsdam':
         return {
           app: 'VBB Bus & Bahn', apps: ['VBB Bus & Bahn', 'DB Navigator', 'BVG Fahrinfo'], zone: 'ABC',
-          name: 'Single ticket ABC', why: 'Potsdam sits in zone C. The regional RE and S-Bahn there are both covered by one ABC ticket.',
+          name: 'Single ticket ABC', de: 'Einzelfahrausweis Berlin ABC', why: 'Potsdam sits in zone C. The regional RE and S-Bahn there are both covered by one ABC ticket.',
           price: '€5.00', pnote: 'Out and back and around all day? A 24-hour ABC ticket is €12.90.',
           valid: 'Pick <strong>zone ABC</strong>. Valid the moment you buy it, on regional trains too.'
         };
@@ -217,6 +221,13 @@
     document.getElementById('pt-app').textContent = r.app;
     document.getElementById('pt-zone').textContent = r.zone;
     document.getElementById('pt-tname').textContent = r.name;
+    var tde = document.getElementById('pt-tde');
+    if (r.de && r.de !== r.name) {
+      tde.innerHTML = '<span>In the app</span><b>' + r.de + '</b>';
+      tde.hidden = false;
+    } else {
+      tde.hidden = true;
+    }
     document.getElementById('pt-twhy').textContent = r.why;
     document.getElementById('pt-price').innerHTML = r.price;
     document.getElementById('pt-pnote').textContent = r.pnote;
