@@ -5632,5 +5632,43 @@
         "a": "Daylight is best because the small architectural clues are easier to see and the route includes several busy crossings. Tuesday to Sunday is the useful window if you also want to enter Tränenpalast; it is normally closed on Monday. Start with two free hours and avoid placing a fixed museum reservation immediately after the walk."
       }
     ]
+  },
+  "berlin-ringbahn": {
+    "title": "Berlin Ringbahn - FAQ",
+    "subtitle": "Quick answers on the S41/S42 circle line: which direction is which, what ticket you need for a full loop, how long it takes, and which stops are worth leaving the train for.",
+    "items": [
+      {
+        "q": "What is the Berlin Ringbahn?",
+        "a": "The Ringbahn is a circular S-Bahn line that loops right around inner Berlin. Two services share the track: the S41 and the S42. It has 27 stations, runs about 37 km all the way round, and takes roughly 60 minutes for one full circle. Berliners call its rounded, slightly lopsided shape the Hundekopf, the dog's head."
+      },
+      {
+        "q": "What is the difference between the S41 and the S42?",
+        "a": "They are the same circle in opposite directions. The S41 runs clockwise (Gesundbrunnen towards Ostkreuz and Südkreuz), and the S42 runs anticlockwise (Gesundbrunnen towards Westkreuz and Südkreuz). To pick the faster way to your stop, check the 41 or 42 on the front of the train and the corner station it shows as its destination."
+      },
+      {
+        "q": "How long does it take to ride the whole Ringbahn?",
+        "a": "A non-stop full loop is about 60 minutes. You will not wait long for a train: the Ring runs every 10 minutes for most of the day and every 5 minutes at weekday peak times, so you can hop on and off freely."
+      },
+      {
+        "q": "Which ticket do I need for the Ringbahn?",
+        "a": "The entire ring sits inside fare Zone AB, so any standard Berlin AB ticket covers it. A single AB ticket is 4.00 euros in 2026 and is valid for two hours in one general direction, but it is not valid for a round trip. To ride the full circle back to where you started, buy a day ticket (AB, 11.20 euros), which allows unlimited travel including loops."
+      },
+      {
+        "q": "Is the Ringbahn worth riding just for sightseeing?",
+        "a": "Honestly, it is not a monument tour. The Ring circles around the famous centre rather than through it, so you mostly see rooftops, backyards, parks and railway yards, not the Brandenburg Gate. For landmarks from a seat, Bus 100 is the better ride. The Ring is worth it for a cheap hour that shows you the real shape of the city, and as the fastest way to reach the neighbourhoods around the centre."
+      },
+      {
+        "q": "Which Ringbahn stops are worth getting off at?",
+        "a": "The best stops are Treptower Park for the vast Soviet War Memorial, Tempelhof for the open expanse of Tempelhofer Feld, Sonnenallee and Neukölln for Arab and Turkish food, Schönhauser Allee for Prenzlauer Berg, and Frankfurter Allee or Ostkreuz for Friedrichshain and the East Side Gallery. Gesundbrunnen is a short walk from Mauerpark. Many other Ring stops are residential or industrial and not worth leaving the train for."
+      },
+      {
+        "q": "Does the Ringbahn go to Berlin Brandenburg Airport (BER)?",
+        "a": "No. The Ringbahn stays inside the city, while BER is well to the south-east in fare Zone C, so you need an ABC ticket to reach it. Change off the Ring onto an airport train such as the S9, S45, the FEX express or a regional train. Ostkreuz, Gesundbrunnen and Südkreuz are the natural places to switch."
+      },
+      {
+        "q": "Does the Ringbahn run at night?",
+        "a": "During the day it runs every 5 to 10 minutes. On Friday and Saturday nights it keeps circling all night, roughly every 15 minutes. On other nights there is a gap in the early hours when night buses take over the route, so check the last train if you are out late."
+      }
+    ]
   }
 }
