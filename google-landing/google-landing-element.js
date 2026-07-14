@@ -5,7 +5,6 @@
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
   const AVAILABILITY_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/booking-calendar-availability';
   const BOOKING_URL = 'https://www.berlinwalk.com/booking-form';
-  const TRACK_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/pf-event';
 
   const asset = (path) => new URL(path, ROOT_URL).toString();
 
@@ -44,33 +43,14 @@
       this._activateLanding();
       this._render();
       this._loadAvailability();
-      this._trackPageViewWhenAllowed();
+      if (/^(?:localhost|127\.0\.0\.1)$/i.test(window.location.hostname)) {
+        this._track('bw_booking_page_view', { source: 'google_search_landing' });
+      }
     }
 
     disconnectedCallback() {
-      if (this._consentHandler) {
-        document.removeEventListener('consentPolicyChanged', this._consentHandler);
-        document.removeEventListener('consentPolicyInitialized', this._consentHandler);
-        window.removeEventListener('ucConsentEvent', this._consentHandler);
-      }
       document.documentElement.classList.remove('bw-google-landing-active');
       document.body?.classList.remove('bw-google-landing-active');
-    }
-
-    _trackPageViewWhenAllowed() {
-      const send = () => {
-        if (this._pageViewTracked || !this._analyticsConsent()) return;
-        this._pageViewTracked = this._track('bw_booking_page_view', {
-          source: 'google_search_landing',
-          headlineVariant: this._variant(),
-        });
-      };
-      send();
-      if (this._pageViewTracked) return;
-      this._consentHandler = send;
-      document.addEventListener('consentPolicyChanged', send);
-      document.addEventListener('consentPolicyInitialized', send);
-      window.addEventListener('ucConsentEvent', send);
     }
 
     async _loadAvailability() {
@@ -451,83 +431,24 @@
       };
     }
 
-    _currentConsentPolicy() {
-      try {
-        const manager = window.consentPolicyManager;
-        const current = manager && typeof manager.getCurrentConsentPolicy === 'function'
-          ? manager.getCurrentConsentPolicy()
-          : null;
-        if (current) return current.policy || current;
-        const match = String(document.cookie || '').match(/(?:^|;\s*)consent-policy=([^;]+)/);
-        return match ? JSON.parse(decodeURIComponent(match[1])) : {};
-      } catch {
-        return {};
-      }
-    }
-
-    _analyticsConsent() {
-      if (/^(?:localhost|127\.0\.0\.1)$/i.test(window.location.hostname)) return true;
-      const policy = this._currentConsentPolicy();
-      return policy.analytics === true || policy.anl === 1 || policy.anl === true;
-    }
-
     _track(name, detail) {
-      if (!this._analyticsConsent()) return false;
-      const now = new Date().toISOString();
       const params = this._params();
-      const dataLayerPayload = {
-        event: name,
-        eventName: name,
-        pagePath: window.location.pathname,
-        detail: detail || {},
-        ts: now,
+      const payload = {
+        ...(detail || {}),
+        headlineVariant: this._variant(),
+        gclid: params.gclid,
+        gbraid: params.gbraid,
+        wbraid: params.wbraid,
       };
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push(dataLayerPayload);
-      if (typeof window.gtag === 'function') window.gtag('event', name, detail || {});
-      if (!/(^|\.)berlinwalk\.com$/i.test(window.location.hostname)) return;
-
-      fetch(TRACK_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        keepalive: true,
-        body: JSON.stringify({
-          eventName: name,
-          consentGranted: true,
-          analyticsConsent: true,
-          consent: { analytics: true },
-          timestamp: now,
-          sessionId: this._sessionId(),
-          pagePath: window.location.pathname,
-          landingPage: window.location.href,
-          referrer: document.referrer || '',
-          isPaid: params.utm_medium === 'paid_search' || Boolean(params.gclid || params.gbraid || params.wbraid),
-          screenWidth: String(window.screen?.width || ''),
-          viewportWidth: String(window.innerWidth || ''),
-          utmSource: params.utm_source,
-          utmMedium: params.utm_medium,
-          utmCampaign: params.utm_campaign,
-          utmContent: params.utm_content,
-          utmTerm: params.utm_term,
-          fbclid: params.fbclid,
-          fbc: params.fbc,
-          fbp: params.fbp,
-          payload: {
-            ...(detail || {}),
-            gclid: params.gclid,
-            gbraid: params.gbraid,
-            wbraid: params.wbraid,
-          },
-        }),
-      }).catch(() => {});
-      return true;
-    }
-
-    _sessionId() {
-      if (!this._ephemeralSessionId) {
-        this._ephemeralSessionId = `bwgl_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 10)}`;
+      if (/^(?:localhost|127\.0\.0\.1)$/i.test(window.location.hostname)) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: name, page_path: window.location.pathname, ...payload });
+        return true;
       }
-      return this._ephemeralSessionId;
+      document.dispatchEvent(new CustomEvent('bwBookingFunnelEvent', {
+        detail: { name, payload },
+      }));
+      return true;
     }
 
     _escape(value) {
