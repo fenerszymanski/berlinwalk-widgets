@@ -205,7 +205,8 @@
   "open-air-cinema-berlin": "open-air-cinema-berlin",
   "berlin-ticket-machines": "berlin-ticket-machines",
   "hidden-places-central-berlin": "hidden-places-central-berlin",
-  "berlin-ringbahn": "berlin-ringbahn"
+  "berlin-ringbahn": "berlin-ringbahn",
+  "berlin-train-announcements": "berlin-train-announcements"
 };
 
   var SCHEMAS = {
@@ -9775,6 +9776,76 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "During the day it runs every 5 to 10 minutes. On Friday and Saturday nights it keeps circling all night, roughly every 15 minutes. On other nights there is a gap in the early hours when night buses take over the route, so check the last train if you are out late."
+        }
+      }
+    ]
+  },
+  "berlin-train-announcements": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What does \"Zurückbleiben, bitte\" mean on Berlin trains?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It means \"stand back, please\". It is the recorded warning that plays as the doors are about to close, and it is the announcement you will hear most on the Berlin U-Bahn. When you hear it, step back from the doors instead of squeezing in. Waiting for the next train costs only a few minutes on the central lines."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between the U-Bahn and S-Bahn announcements?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "They are run by two different operators, so they sound different. The U-Bahn (BVG, the yellow underground trains) is sparse: older trains give you little more than the destination and \"Zurückbleiben, bitte\". The S-Bahn (DB, the red-and-yellow trains on raised or surface tracks) is chattier and announces the next stop, which side to exit, and connections at big stations."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does \"Nächster Halt\" mean?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "\"Nächster Halt\" means \"next stop\", followed by the station name, for example \"Nächster Halt: Hackescher Markt\". The recorded voice and the small strip display above the doors say the same thing, so you can listen for your station or just watch the screen."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What do \"Ausstieg rechts\" and \"Ausstieg links\" mean?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "\"Ausstieg\" means exit, so \"Ausstieg rechts\" is \"exit on the right\" and \"Ausstieg links\" is \"exit on the left\", always in the direction the train is travelling. The S-Bahn announces this before most stops. Move toward the correct doors before the train stops to avoid the scramble across a full carriage."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does \"Ersatzverkehr\" or \"Schienenersatzverkehr\" mean?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It means rail replacement service: part of a line is closed and a bus takes over that section. The buses are usually purple and marked \"Ersatzverkehr\", and they run every few minutes along roughly the same route. Your normal AB ticket still covers the bus. Weekend and summer engineering works are the most common cause, so check for the letters SEV before you travel."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does \"Endstation\" mean?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "\"Endstation\" means the end of the line, the last stop the train will make. You will often hear \"Endstation, bitte alle aussteigen\", which is \"end of the line, everybody off please\". If that is not where you meant to be, you rode past your stop or took the wrong direction, so cross to the opposite platform and ride back."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the three-note S-Bahn door chime, and is it disappearing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The short \"doo-DOO-doo\" tone that plays as S-Bahn doors close has been part of Berlin since 1986. An EU rail-safety rule now requires a faster, pulsing warning tone, so the newest S-Bahn trains (the 483/484 series introduced from 2021) use a plain beep instead. The older trains with the classic chime are being phased out gradually into the 2030s, so you can still hear it for now."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are Berlin train announcements in English too?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Mostly no. On-board U-Bahn and S-Bahn announcements are almost always in German only, which is exactly why a quick decoder helps. You will sometimes see English on station displays at the airport and major hubs, and airport-bound trains may add a line in English, but do not count on an English translation of the spoken announcements."
         }
       }
     ]
