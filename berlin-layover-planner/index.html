@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Berlin Layover Planner — Do You Have Time to Leave BER Airport?</title>
+<meta name="description" content="Work out how much real city time a Berlin layover gives you after the airport buffers and train rides, and what is sensible to see, from staying airside to walking the historic centre." />
+<link rel="stylesheet" href="../css/brand.css" />
+<script defer src="../js/brand.js"></script>
+<style>
+  :root{
+    --green:#1B5E20; --green-d:#123D18; --yellow:#FFE600; --lime:#7CB342;
+    --lgreen:#C5E1A5; --cream:#FAFAF5; --ink:#212121; --red:#E63946;
+    --line:rgba(18,61,24,.14);
+  }
+  .llp{
+    font-family:'Montserrat',system-ui,-apple-system,'Segoe UI',sans-serif;
+    color:var(--ink); max-width:760px; margin:0 auto; padding:2px 4px 16px;
+    box-sizing:border-box; -webkit-text-size-adjust:100%;
+  }
+  .llp *,.llp *::before,.llp *::after{box-sizing:border-box;}
+  .llp__card{
+    background:var(--cream); border:1px solid var(--line); border-radius:18px;
+    padding:18px; box-shadow:0 10px 30px rgba(18,61,24,.08);
+  }
+  .llp__eyebrow{
+    font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--green); margin:0 0 4px;
+  }
+  .llp__title{font-size:21px; line-height:1.2; font-weight:800; margin:0 0 4px; color:var(--green-d);}
+  .llp__sub{font-size:13.5px; line-height:1.5; margin:0 0 16px; color:#40513f;}
+
+  /* slider */
+  .llp__field{margin:0 0 14px;}
+  .llp__label{display:flex; justify-content:space-between; align-items:baseline; gap:10px; margin:0 0 8px;}
+  .llp__label b{font-size:13.5px; font-weight:700; color:var(--green-d);}
+  .llp__val{
+    font-weight:800; font-size:15px; color:var(--green-d);
+    background:var(--yellow); border-radius:999px; padding:3px 12px; white-space:nowrap;
+  }
+  .llp__range{
+    -webkit-appearance:none; appearance:none; width:100%; height:10px; border-radius:999px;
+    background:linear-gradient(90deg,var(--lime),var(--green)); outline:none; margin:2px 0 4px;
+  }
+  .llp__range::-webkit-slider-thumb{
+    -webkit-appearance:none; appearance:none; width:26px; height:26px; border-radius:50%;
+    background:var(--yellow); border:3px solid var(--green); cursor:pointer;
+    box-shadow:0 2px 6px rgba(0,0,0,.25);
+  }
+  .llp__range::-moz-range-thumb{
+    width:22px; height:22px; border-radius:50%; background:var(--yellow);
+    border:3px solid var(--green); cursor:pointer;
+  }
+  .llp__ticks{display:flex; justify-content:space-between; font-size:10.5px; color:#6b7a68; margin-top:2px;}
+
+  /* toggles */
+  .llp__toggles{display:grid; gap:10px; margin:14px 0 4px;}
+  .llp__toggle{
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    background:#fff; border:1px solid var(--line); border-radius:12px; padding:11px 13px; cursor:pointer;
+  }
+  .llp__toggle span{font-size:12.5px; line-height:1.4; color:var(--green-d); font-weight:600;}
+  .llp__switch{position:relative; flex:0 0 auto; width:46px; height:26px; border-radius:999px; background:#cdd6cb; transition:background .18s;}
+  .llp__switch::after{content:""; position:absolute; top:3px; left:3px; width:20px; height:20px; border-radius:50%; background:#fff; transition:transform .18s; box-shadow:0 1px 3px rgba(0,0,0,.3);}
+  .llp__toggle[aria-pressed="true"] .llp__switch{background:var(--green);}
+  .llp__toggle[aria-pressed="true"] .llp__switch::after{transform:translateX(20px);}
+  .llp__timefield{display:flex; align-items:center; gap:10px; background:#fff; border:1px solid var(--line); border-radius:12px; padding:9px 13px;}
+  .llp__timefield label{font-size:12.5px; font-weight:600; color:var(--green-d);}
+  .llp__timefield input{
+    font-family:inherit; font-size:14px; font-weight:700; color:var(--green-d);
+    border:1px solid var(--line); border-radius:8px; padding:6px 8px; margin-left:auto; background:var(--cream);
+  }
+
+  /* timeline */
+  .llp__tl-wrap{margin:20px 0 6px;}
+  .llp__tl-head{font-size:12px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--green); margin:0 0 8px;}
+  .llp__bar{display:flex; width:100%; height:44px; border-radius:12px; overflow:hidden; border:1px solid var(--line); background:#eef1ec;}
+  .llp__seg{display:flex; align-items:center; justify-content:center; min-width:0; overflow:hidden; transition:width .35s ease; position:relative;}
+  .llp__seg small{font-size:10px; font-weight:700; color:#fff; padding:0 4px; white-space:nowrap; text-shadow:0 1px 2px rgba(0,0,0,.35);}
+  .llp__seg.city small{color:var(--green-d); text-shadow:none;}
+  .seg-arrive{background:#8aa0a8;}
+  .seg-train{background:var(--lime);}
+  .seg-city{background:var(--yellow);}
+  .seg-buffer{background:var(--green);}
+  .seg-empty{background:repeating-linear-gradient(45deg,#e2c7c7,#e2c7c7 7px,#edd6d6 7px,#edd6d6 14px);}
+  .llp__legend{display:flex; flex-wrap:wrap; gap:12px; margin-top:9px;}
+  .llp__legend span{display:flex; align-items:center; gap:6px; font-size:11px; color:#4a5a48;}
+  .llp__legend i{width:12px; height:12px; border-radius:3px; display:inline-block;}
+
+  /* result */
+  .llp__result{margin-top:18px; border-radius:14px; padding:16px; border:1px solid var(--line);}
+  .llp__result.go{background:#eef6e6;}
+  .llp__result.tight{background:#fff8e1;}
+  .llp__result.stay{background:#fdecec;}
+  .llp__verdict{display:flex; align-items:center; gap:12px; margin:0 0 10px;}
+  .llp__chip{font-size:22px; line-height:1; flex:0 0 auto;}
+  .llp__vtext b{display:block; font-size:16.5px; font-weight:800; color:var(--green-d); line-height:1.25;}
+  .llp__vtext em{font-style:normal; font-size:12.5px; color:#54614f;}
+  .llp__citytime{font-weight:800; color:var(--green-d);}
+  .llp__plan{margin:8px 0 0; padding:0; list-style:none;}
+  .llp__plan li{position:relative; padding:5px 0 5px 26px; font-size:13px; line-height:1.45; color:#33402f; border-top:1px dashed var(--line);}
+  .llp__plan li:first-child{border-top:none;}
+  .llp__plan li::before{content:"›"; position:absolute; left:8px; top:5px; color:var(--lime); font-weight:800;}
+  .llp__deadline{margin-top:12px; font-size:12.5px; background:#fff; border:1px solid var(--line); border-radius:10px; padding:10px 12px; color:var(--green-d);}
+  .llp__deadline b{color:var(--red);}
+  .llp__foot{font-size:11px; color:#6b7a68; margin:12px 2px 0; line-height:1.5;}
+
+  @media (max-width:430px){
+    .llp__card{padding:14px;}
+    .llp__title{font-size:19px;}
+    .llp__seg small{font-size:9px;}
+  }
+</style>
+</head>
+<body>
+<div class="llp">
+  <div class="llp__card">
+    <p class="llp__eyebrow">BerlinWalk · Layover tool</p>
+    <h2 class="llp__title">Do you have time to leave BER?</h2>
+    <p class="llp__sub">Slide your layover length and set your flight type. This works out the real city time left after the airport buffers and train rides, then tells you what is sensible to see.</p>
+
+    <div class="llp__field">
+      <div class="llp__label"><b>How long is your layover?</b><span class="llp__val" id="lvVal">6h 00m</span></div>
+      <input class="llp__range" id="lvRange" type="range" min="120" max="720" step="15" value="360" aria-label="Layover length in minutes" />
+      <div class="llp__ticks"><span>2h</span><span>4h</span><span>6h</span><span>8h</span><span>10h</span><span>12h</span></div>
+    </div>
+
+    <div class="llp__toggles">
+      <div class="llp__toggle" id="tgArrive" role="button" tabindex="0" aria-pressed="false">
+        <span>I am arriving from <b>outside</b> the Schengen area (adds passport control)</span>
+        <span class="llp__switch" aria-hidden="true"></span>
+      </div>
+      <div class="llp__toggle" id="tgDepart" role="button" tabindex="0" aria-pressed="false">
+        <span>My onward flight <b>leaves</b> the Schengen area (longer return buffer)</span>
+        <span class="llp__switch" aria-hidden="true"></span>
+      </div>
+      <div class="llp__timefield">
+        <label for="landTime">What time do you land? (optional)</label>
+        <input id="landTime" type="time" aria-label="Landing time" />
+      </div>
+    </div>
+
+    <div class="llp__tl-wrap">
+      <p class="llp__tl-head">Where your layover goes</p>
+      <div class="llp__bar" id="bar" aria-hidden="true"></div>
+      <div class="llp__legend">
+        <span><i style="background:#8aa0a8"></i>Arrival</span>
+        <span><i style="background:var(--lime)"></i>Train each way</span>
+        <span><i style="background:var(--yellow)"></i>City time</span>
+        <span><i style="background:var(--green)"></i>Airport buffer</span>
+      </div>
+    </div>
+
+    <div class="llp__result" id="result">
+      <div class="llp__verdict">
+        <span class="llp__chip" id="chip">🟢</span>
+        <span class="llp__vtext"><b id="verdict">Loading…</b><em id="cityline"></em></span>
+      </div>
+      <ul class="llp__plan" id="plan"></ul>
+      <div class="llp__deadline" id="deadline" hidden></div>
+    </div>
+
+    <p class="llp__foot">Planning numbers are deliberately cautious: 20 minutes to get off the plane, 30 more if you clear passport control on arrival, 45 minutes on the train each way, and a 90 minute (Schengen) or 120 minute (non-Schengen) buffer back at BER. A single ABC ticket is 5.00 euros in 2026. Always check live train times and your airline's boarding cut-off on the day.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var DEPLANE=20, ARRIVE_CTRL=30, TRAIN=45;
+  var range=document.getElementById('lvRange'), lvVal=document.getElementById('lvVal');
+  var tgArrive=document.getElementById('tgArrive'), tgDepart=document.getElementById('tgDepart');
+  var landTime=document.getElementById('landTime');
+  var bar=document.getElementById('bar'), result=document.getElementById('result');
+  var chip=document.getElementById('chip'), verdict=document.getElementById('verdict');
+  var cityline=document.getElementById('cityline'), plan=document.getElementById('plan');
+  var deadline=document.getElementById('deadline');
+
+  function fmt(m){ m=Math.max(0,Math.round(m)); var h=Math.floor(m/60), mm=m%60; if(h&&mm) return h+'h '+String(mm).padStart(2,'0')+'m'; if(h) return h+'h'; return mm+'m'; }
+  function fmtShort(m){ m=Math.round(m); var h=Math.floor(m/60), mm=m%60; return (h?h+'h':'')+(mm?(h?' ':'')+mm+'m':(h?'':'0m')); }
+  function pressed(el){ return el.getAttribute('aria-pressed')==='true'; }
+
+  function addMinutes(hhmm, mins){
+    var p=hhmm.split(':'); if(p.length!==2) return null;
+    var d=new Date(2000,0,1, parseInt(p[0],10), parseInt(p[1],10));
+    d.setMinutes(d.getMinutes()+Math.round(mins));
+    return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+  }
+
+  var PLANS={
+    stay:[
+      'Stay airside and treat this as a rest stop, not a city trip.',
+      'Grab real food landside before security, then relax at the gate.',
+      'Save Berlin for a layover of about 5 hours or more.'
+    ],
+    quick:[
+      'Take the S9 straight to Alexanderplatz, no change needed.',
+      'Walk to the TV Tower and the red-brick Rotes Rathaus, then down to the Berliner Dom on the Spree.',
+      'Turn back at Museum Island so the clock never becomes a problem.'
+    ],
+    core:[
+      'Take the S9 to Alexanderplatz and lock a bag in a station locker.',
+      'Walk the historic line: TV Tower, Rotes Rathaus, Berliner Dom and Museum Island.',
+      'Continue down Unter den Linden to the Brandenburg Gate, then head back.'
+    ],
+    slow:[
+      'Take the S9 to Alexanderplatz and store your bag there.',
+      'Walk the full core: TV Tower, Museum Island, Unter den Linden and the Brandenburg Gate.',
+      'You have spare time to sit by the Spree, add a coffee, or step into one Museum Island building.'
+    ]
+  };
+
+  function render(){
+    var layover=parseInt(range.value,10);
+    lvVal.textContent=fmt(layover);
+    var arriveOut=pressed(tgArrive), departOut=pressed(tgDepart);
+    var arrive=DEPLANE+(arriveOut?ARRIVE_CTRL:0);
+    var buffer=departOut?120:90;
+    var fixed=arrive+TRAIN*2+buffer;
+    var city=layover-fixed;
+
+    // timeline segments (proportional to layover)
+    var segs;
+    if(city>0){
+      segs=[
+        {c:'seg-arrive',label:'Arrival',v:arrive},
+        {c:'seg-train',label:'Train',v:TRAIN},
+        {c:'seg-city city',label:'City '+fmtShort(city),v:city},
+        {c:'seg-train',label:'Train',v:TRAIN},
+        {c:'seg-buffer',label:'Buffer',v:buffer}
+      ];
+    } else {
+      segs=[
+        {c:'seg-arrive',label:'Arrival',v:arrive},
+        {c:'seg-train',label:'Train',v:TRAIN},
+        {c:'seg-train',label:'Train',v:TRAIN},
+        {c:'seg-buffer',label:'Buffer',v:buffer},
+        {c:'seg-empty',label:'',v:Math.max(fixed-layover, fixed*0.12)}
+      ];
+    }
+    var total=segs.reduce(function(s,x){return s+x.v;},0);
+    bar.innerHTML=segs.map(function(s){
+      var pct=(s.v/total*100).toFixed(2);
+      var show=(pct>9 && s.label)?('<small>'+s.label+'</small>'):'';
+      return '<div class="llp__seg '+s.c+'" style="width:'+pct+'%">'+show+'</div>';
+    }).join('');
+
+    // verdict bucket
+    var cls,ic,head,sub,steps;
+    if(city<45){ cls='stay'; ic='🔴'; head='Stay at the airport this time'; sub='Not enough clear time to make a city trip calm.'; steps=PLANS.stay; }
+    else if(city<120){ cls='tight'; ic='🟡'; head='Enough for a quick taste of the centre'; sub='Go in, but keep it to the Alexanderplatz end and come straight back.'; steps=PLANS.quick; }
+    else if(city<210){ cls='go'; ic='🟢'; head='Time for the historic core on foot'; sub='A comfortable walk through the middle of Berlin and back.'; steps=PLANS.core; }
+    else { cls='go'; ic='🟢'; head='A relaxed few hours in Berlin'; sub='Enough to walk the core and still slow down somewhere good.'; steps=PLANS.slow; }
+
+    result.className='llp__result '+cls;
+    chip.textContent=ic;
+    verdict.textContent=head;
+    if(city>=45){ cityline.innerHTML='About <span class="llp__citytime">'+fmt(city)+'</span> of real city time after buffers.'; }
+    else if(city>0){ cityline.innerHTML='Only about <span class="llp__citytime">'+fmt(city)+'</span> in the city, which is too tight to enjoy.'; }
+    else { cityline.innerHTML='The buffers already use your whole layover, so there is <span class="llp__citytime">no</span> safe city time.'; }
+    plan.innerHTML=steps.map(function(s){return '<li>'+s+'</li>';}).join('');
+
+    // optional clock deadlines
+    if(landTime.value && city>=45){
+      var boardReady=addMinutes(landTime.value, layover-buffer);           // be back at BER security
+      var leaveCentre=addMinutes(landTime.value, arrive+TRAIN+city);        // last minute to start the return train
+      if(boardReady && leaveCentre){
+        deadline.hidden=false;
+        deadline.innerHTML='Start heading back from the centre by <b>'+leaveCentre+'</b>, and be back at BER security by <b>'+boardReady+'</b>.';
+      } else { deadline.hidden=true; }
+    } else { deadline.hidden=true; }
+  }
+
+  function toggle(el){ el.setAttribute('aria-pressed', pressed(el)?'false':'true'); render(); }
+  range.addEventListener('input', render);
+  landTime.addEventListener('input', render);
+  [tgArrive,tgDepart].forEach(function(el){
+    el.addEventListener('click', function(){toggle(el);});
+    el.addEventListener('keydown', function(e){ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); toggle(el);} });
+  });
+  render();
+})();
+</script>
+</body>
+</html>

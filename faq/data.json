@@ -5756,5 +5756,35 @@
         "a": "It depends on what you want. Sunday is the liveliest day, with the Mauerpark flea market and afternoon Bearpit Karaoke, but note that Konnopke's is closed on Sundays. Thursday or Saturday gives you the Kollwitzplatz market instead. The Museum in der Kulturbrauerei is open Tuesday to Sunday. For a first visit, a Sunday captures the district's famous weekend energy best."
       }
     ]
+  },
+  "berlin-layover-guide": {
+    "title": "Berlin Layover - FAQ",
+    "subtitle": "Quick answers on whether you can leave BER during a layover, how much time you need, and what you can realistically see in central Berlin.",
+    "items": [
+      {
+        "q": "Can I leave BER airport during a layover?",
+        "a": "Usually yes, if your documents let you enter Germany. Travelling within the Schengen area, there is normally no passport control at BER, and most visa-exempt travellers and Schengen-visa holders can leave freely. The exception is nationalities that need an airport transit visa (an A-visa) for Germany, who must stay in the transit zone. If your onward flight leaves the Schengen area, you also pass an exit check on the way back, so allow a little extra time."
+      },
+      {
+        "q": "How long a layover do I need to visit Berlin?",
+        "a": "Under about 4 hours, it is better to stay airside. Around 5 to 6 hours gives you a genuine couple of hours in the historic centre, and 7 hours or more lets you slow down or add a museum. The reason is the buffers: getting off the plane, the train each way, and being back at BER security about 90 minutes before a Schengen departure or 2 hours before a non-Schengen one. The train ride is short; the airport time is what adds up."
+      },
+      {
+        "q": "How do I get from BER to central Berlin?",
+        "a": "The station is directly under Terminal 1. The S9 runs straight to Alexanderplatz with no change, roughly every 20 minutes, which is the handiest line for a layover. The FEX Airport Express reaches Berlin Hauptbahnhof in about 23 minutes, every 15 minutes. BER is in fare zone C, so you need an ABC ticket, not the AB ticket used across most of Berlin. A single ABC ride is 5.00 euros in 2026, and an ABC day ticket is 12.90 euros."
+      },
+      {
+        "q": "What can I see in Berlin in a couple of hours?",
+        "a": "From Alexanderplatz almost everything a first-time visitor pictures is on one flat, walkable line heading west: the TV Tower, the red-brick Rotes Rathaus, the Berliner Dom and Museum Island on the Spree, then down Unter den Linden to the Brandenburg Gate. That is the historic core of Berlin and it takes a comfortable couple of hours on foot with photo stops. You do not need to plan a route; just walk west and turn back at the gate."
+      },
+      {
+        "q": "Where can I store my luggage during a Berlin layover?",
+        "a": "There are luggage lockers at BER in Terminal 1 on level U1, roughly 7 to 10 euros a day depending on bag size. In the city, the big stations have lockers too, including Hauptbahnhof, Alexanderplatz and Friedrichstraße, so if you come in on the S9 you can lock a bag at Alexanderplatz and start walking. Lockers can fill up on busy days, so it helps to have a backup in mind."
+      },
+      {
+        "q": "Is a layover long enough to join a walking tour?",
+        "a": "It can be, if your layover is comfortably over 6 hours. My free walking tour starts at Alexanderplatz, exactly where the S9 from the airport arrives, and lasts about 2 hours, which fits inside a 6 hour layover with the train time added on each side. It is tip-based, so there is no ticket to buy in advance. If your layover is tighter, it is safer to walk the same central route yourself and keep an eye on the clock rather than commit to a fixed start time."
+      }
+    ]
   }
 }
