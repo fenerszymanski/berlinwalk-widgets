@@ -89,9 +89,9 @@ The chapel that stands here now was built in 2000 on the same spot, and its ramm
 
 ## Walk it with me: the Death Strip audio guide
 
-Bernauer Strasse is long, quiet, and easy to misread. The meaning is in small markers, ground lines and gaps, and most people walk straight past the best of it without knowing what they are looking at. That is exactly why I recorded a self-guided audio walk for this stretch.
+Bernauer Strasse is long, quiet, and easy to misread. The meaning is in small markers, ground lines and gaps, and most people walk straight past the best of it without knowing what they are looking at. That is exactly why I recorded a [self-guided audio walk for this stretch](https://www.berlinwalk.com/products/death-strip-audio-route).
 
-It follows the route stop by stop, from the ghost station at Nordbahnhof to the preserved death strip, the escape tunnels, and the people who died trying to cross here. You go at your own pace, with my voice in your ears instead of a guidebook in your hand. Have a listen to the free sample below before you decide.
+It follows the route stop by stop, from the ghost station at Nordbahnhof to the preserved death strip, the escape tunnels, and the people who died trying to cross here. You go at your own pace, with my voice in your ears instead of a guidebook in your hand. Have a listen to the free sample below before you decide. If you are choosing between themes, [compare both Berlin audio tours](https://www.berlinwalk.com/audio-tours) first.
 
 {{widget:death-strip-audio-route-banner}}
 
