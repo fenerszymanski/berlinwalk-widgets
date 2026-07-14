@@ -6,6 +6,7 @@ const BW_SITE_FOOTER_LINKS = {
   meetingPoint: 'https://www.berlinwalk.com/meeting-point',
   reviews: 'https://www.berlinwalk.com/reviews',
   route: 'https://www.berlinwalk.com/berlin-walking-tour-route',
+  wallTimeline: 'https://www.berlinwalk.com/berlin-wall-timeline',
   faq: 'https://www.berlinwalk.com/#faq',
   guide: 'https://www.berlinwalk.com/the-guide',
   blog: 'https://www.berlinwalk.com/blog',
@@ -482,6 +483,7 @@ class BWSiteFooterElement extends HTMLElement {
               ['Blog', BW_SITE_FOOTER_LINKS.blog],
               ['Berlin Trip Planner', BW_SITE_FOOTER_LINKS.planner],
               ['Berlin Tools', BW_SITE_FOOTER_LINKS.tools],
+              ['Berlin Wall Timeline', BW_SITE_FOOTER_LINKS.wallTimeline],
               ['Embed Berlin Tools', BW_SITE_FOOTER_LINKS.widgets],
               ['Instagram', BW_SITE_FOOTER_LINKS.instagram]
             ])}
