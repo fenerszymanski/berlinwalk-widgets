@@ -5,13 +5,13 @@ The catch for someone who does not speak German is simple: you want a screening 
 {{quick-summary}}
 
 ![The big illuminated screen at Freiluftkino Hasenheide in Neukölln, glowing against the dusk sky](blog-drafts/images/open-air-cinema-berlin/optimized/01-cover-freiluftkino-hasenheide.jpg)
-_The screen at Freiluftkino Hasenheide in Neukölln, lit up at dusk. Most open-air cinemas start once it is properly dark, which in high summer is not until close to 21:30._
+_The screen at Freiluftkino Hasenheide in Neukölln, lit up at dusk. Most open-air cinemas start around nightfall, which in high summer means screenings from about 21:00._
 
 ## What an open-air cinema night in Berlin is actually like
 
 An open-air cinema in Berlin is not a slick multiplex experience, and that is the point. Most sit inside a park or a courtyard, with the screen built against trees or an old wall. You buy a ticket, walk in, and find a spot on a bench, a deckchair, or the grass. There is usually a small bar selling beer, wine, and popcorn, and the crowd is a relaxed mix of Berliners and visitors who all had the same good idea.
 
-The season runs from early May to around the middle of September, with most venues opening in the second half of May. Screenings start when it gets dark, so in June and July that means a late start, often not before 21:30. Bring that into your evening plan: eat first, arrive with light still in the sky, and treat the film as the second half of the night rather than the whole thing.
+The season runs from early May to around the middle of September, with most venues opening in the second half of May. Screenings start around dusk, so in June and July that means a late start, usually between 21:00 and 21:30. Bring that into your evening plan: eat first, arrive with light still in the sky, and treat the film as the second half of the night rather than the whole thing.
 
 My advice: do not overthink the film itself. The setting does most of the work. A decent film in a Berlin park on a warm night beats a great film in a dark box, and you came here for the evening as much as the movie.
 
@@ -51,7 +51,7 @@ These are the classic Freiluftkino experience: a real park, a big screen, and a 
 
 **Freiluftkino Friedrichshain**, run with radioeins, sits inside Volkspark Friedrichshain with modern projection, wooden benches, and grass to spread out on. Its programme mixes current releases, classics, and English or subtitled versions. Nearest access is the north side of the park near Am Friedrichshain, reachable by tram M4 or a walk from U5 Strausberger Platz.
 
-**Freiluftkino Rehberge** is my pick if you want the calm, leafy version. It plays out on an old stone open-air stage under huge trees in Volkspark Rehberge in Wedding, with proper benches with backrests, and it has a clear filter for English and subtitled screenings. The bonus here is transport: U6 Rehberge drops you almost at the gate.
+**Freiluftkino Rehberge** is my pick if you want the calm, leafy version. It plays out on the old Freilichtbühne, an open-air stage under huge trees in Volkspark Rehberge in Wedding, with proper benches with backrests, and it has a clear filter for English and subtitled screenings. The bonus here is transport: U6 Rehberge drops you almost at the gate.
 
 **Freiluftkino Kreuzberg**, in the courtyard of the Kunstquartier Bethanien on Mariannenplatz, is the arthouse-leaning one, strong on festival films and original versions with subtitles. It feels sheltered and intimate rather than sprawling. Nearest stops are U1 and U3 Kottbusser Tor or U8 Moritzplatz, then a short walk to Mariannenplatz. It pairs naturally with an evening in [Kreuzberg](https://www.berlinwalk.com/post/kreuzberg-berlin).
 
@@ -75,7 +75,7 @@ My advice, and the one simple move if you take nothing else from this: choose th
 A few small things separate a good open-air night from a slightly miserable one.
 
 - **Bring a layer.** Berlin evenings cool down fast once the sun is gone, even after a hot day. A jacket or a light blanket makes the difference over two hours on a bench. My [average temperature guide](https://www.berlinwalk.com/post/average-temperature-in-berlin-by-month-a-complete-climate-guide) shows just how much the nights drop.
-- **Book popular nights ahead.** Tickets usually run around 9 to 12 euros. Big titles and warm weekends sell out, so buy online in advance when you can; smaller nights often still sell at the box office, which tends to open about 30 minutes before the film.
+- **Book popular nights ahead.** Tickets run between about 8.50 and 12 euros depending on the venue. Big titles and warm weekends sell out, so buy online in advance when you can; smaller nights often still sell at the box office, which tends to open about 30 minutes before the film.
 - **Check the weather policy.** Hasenheide plays rain or shine, but several venues cancel in heavy rain and post the decision on their site or social media that afternoon. If a storm is forecast, check before you travel. On a truly washed-out night, switch to my list of [indoor things to do in Berlin when it rains](https://www.berlinwalk.com/post/what-to-do-in-berlin-when-it-rains-12-indoor-activities-worth-your-time).
 - **Arrive with light in the sky.** Getting there 20 to 30 minutes early means a decent seat, a drink from the bar, and time to settle before the screen lights up.
 
@@ -86,7 +86,7 @@ _A summer afternoon in Volkspark Friedrichshain. Arriving early and using the pa
 
 There is an easy way to build this into a full Berlin day. My free walking tour ends at [Hackescher Markt](https://www.berlinwalk.com/post/what-to-do-near-hackescher-markt-after-walking-tour), which is a two-minute walk from the Kino Central courtyard at Haus Schwarzenberg. You could spend the afternoon walking the historic centre, eat somewhere around the Hackesche Höfe, and end the day watching a film in that hidden backyard without ever getting back on a train.
 
-![The stone open-air stage in Volkspark Rehberge that hosts Freiluftkino Rehberge, framed by tall old trees](blog-drafts/images/open-air-cinema-berlin/optimized/05-freiluftkino-rehberge.jpg)
+![The old open-air stage in Volkspark Rehberge that hosts Freiluftkino Rehberge, framed by tall old trees](blog-drafts/images/open-air-cinema-berlin/optimized/05-freiluftkino-rehberge.jpg)
 _The Freilichtbühne in Volkspark Rehberge, home to Freiluftkino Rehberge. The old trees and backed benches make it the most comfortable of the park screens._
 
 The tour itself is free and tip-based, starts at Alexanderplatz, and lasts about 2 hours. It is a good way to understand the city in daylight before you settle in for a film under the stars. You can see the full path on my [Berlin walking tour route](https://www.berlinwalk.com/berlin-walking-tour-route) page, and if you are filling out a wider summer plan, my guide to [Berlin in July](https://www.berlinwalk.com/post/berlin-in-july-2026) puts the open-air season in context with everything else happening in the city.

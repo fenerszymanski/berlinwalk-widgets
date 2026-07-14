@@ -9553,7 +9553,7 @@
         "name": "When is open-air cinema season in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Berlin's open-air cinemas (Freiluftkinos) run from early May to around the middle of September, with most venues opening in the second half of May. Screenings begin when it gets dark, so in June and July the start is late, often not before 21:30. A few venues run afternoon and early-evening screenings too, especially Freiluftkino Hasenheide, which programmes up to three films a day."
+          "text": "Berlin's open-air cinemas (Freiluftkinos) run from early May to around the middle of September, with most venues opening in the second half of May. Screenings begin around dusk, so in June and July the start is late, usually between 21:00 and 21:30. A few venues run afternoon and early-evening screenings too, especially Freiluftkino Hasenheide, which programmes up to three films a day."
         }
       },
       {
@@ -9577,7 +9577,7 @@
         "name": "How much do open-air cinema tickets cost, and do I need to book?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Tickets are usually about 9 to 12 euros. Popular titles and warm weekends do sell out, so it is worth buying online in advance when you can. Smaller nights often still sell tickets at the box office, which tends to open around 30 minutes before the film. If you are choosing on the day, arrive with light still in the sky to get a decent seat and a drink from the bar before it starts."
+          "text": "Tickets are between about 8.50 and 12 euros depending on the venue. Popular titles and warm weekends do sell out, so it is worth buying online in advance when you can. Smaller nights often still sell tickets at the box office, which tends to open around 30 minutes before the film. If you are choosing on the day, arrive with light still in the sky to get a decent seat and a drink from the bar before it starts."
         }
       },
       {
