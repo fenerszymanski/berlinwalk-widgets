@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-07-14T15:23:01.650Z",
+  "updatedAt": "2026-07-14T23:06:39.762Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 205,
+  "totalPosts": 208,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -43,23 +43,91 @@
   ],
   "hero": {
     "lead": {
-      "title": "Mauerpark on a Sunday: Berlin's Best Free Flea Market and Karaoke (2026)",
-      "slug": "mauerpark-berlin-sunday",
-      "path": "/post/mauerpark-berlin-sunday",
-      "url": "https://www.berlinwalk.com/post/mauerpark-berlin-sunday",
-      "excerpt": "A Berlin guide's take on Mauerpark on a Sunday: the free flea market, the open-air Bearpit Karaoke, the best times to arrive, and how to shape a Berlin Sunday around it.",
+      "title": "Kreuzberg Berlin: A Local Guide to the District's Two Very Different Halves (2026)",
+      "slug": "kreuzberg-berlin",
+      "path": "/post/kreuzberg-berlin",
+      "url": "https://www.berlinwalk.com/post/kreuzberg-berlin",
+      "excerpt": "Kreuzberg is really two districts sharing one name: loud, Turkish, late-night SO36 in the east, and leafy, café-slow Bergmannkiez in the west. Here is what to see and eat in each half, whether it is safe, and which side fits your day.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "first-day",
       "topicLabel": "First Day in Berlin",
-      "readTime": "5 min read",
-      "publishedDate": "2026-07-10T06:43:44.749Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_17f9e2b8fda0483d96054f07e06c4833~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-mauerpark-bearpit-karaoke-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_17f9e2b8fda0483d96054f07e06c4833~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-mauerpark-bearpit-karaoke-cover.jpg",
-      "alt": "A large crowd fills the stone amphitheatre at Mauerpark for the Sunday Bearpit Karaoke, with the green park behind them",
-      "relatedToolSlug": "mauerpark-sunday-timeline"
+      "readTime": "6 min read",
+      "publishedDate": "2026-07-13T13:30:15.343Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_3db3ba7e56c945e6afd5b28bdc688226~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kreuzberg-berlin-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_3db3ba7e56c945e6afd5b28bdc688226~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kreuzberg-berlin-cover.jpg",
+      "alt": "The Oberbaumbrücke brick bridge over the Spree connecting Kreuzberg and Friedrichshain in Berlin",
+      "relatedToolSlug": "berlin-landmarks-map"
     },
     "secondary": [
+      {
+        "title": "KaDeWe Berlin: A Visitor's Guide to the Grand Store and Its Famous Food Hall",
+        "slug": "kadewe-berlin",
+        "path": "/post/kadewe-berlin",
+        "url": "https://www.berlinwalk.com/post/kadewe-berlin",
+        "excerpt": "KaDeWe is Berlin's grand old department store, and its sixth-floor food hall is the real reason to go. Here is what it is, the free food hall and rooftop, opening hours and Sundays, how to get there, and whether it is worth your time.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "first-day",
+        "topicLabel": "First Day in Berlin",
+        "readTime": "6 min read",
+        "publishedDate": "2026-07-13T13:30:17.178Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_326ea893a3864cf49a6e3b65274e164a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kadewe-berlin-cover.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_326ea893a3864cf49a6e3b65274e164a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kadewe-berlin-cover.jpg",
+        "alt": "The KaDeWe department store building with its red roofline on Tauentzienstraße in west Berlin",
+        "relatedToolSlug": "berlin-shopping-areas"
+      },
+      {
+        "title": "Where Was Hitler's Bunker in Berlin? What You'll Actually Find Today",
+        "slug": "hitlers-bunker-berlin",
+        "path": "/post/hitlers-bunker-berlin",
+        "url": "https://www.berlinwalk.com/post/hitlers-bunker-berlin",
+        "excerpt": "The site of Hitler's bunker in Berlin is one of the city's most searched-for spots, and there is almost nothing to see. Here is where the Fuhrerbunker really was, what you will and will not find today, why Berlin left it unmarked, and how to visit respectfully.",
+        "category": "Berlin History",
+        "categorySlug": "berlin-history",
+        "topic": "practical",
+        "topicLabel": "Practical Berlin",
+        "readTime": "5 min read",
+        "publishedDate": "2026-07-13T13:30:19.403Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_2390e27e589e40369cc46747042a3046~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-hitlers-bunker-berlin-cover.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_2390e27e589e40369cc46747042a3046~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-hitlers-bunker-berlin-cover.jpg",
+        "alt": "The site of Hitler's bunker in Berlin today, an ordinary car park with a small information board and apartment blocks behind it",
+        "relatedToolSlug": "berlin-landmarks-map"
+      },
+      {
+        "title": "How to Pronounce Berlin Station Names: A Simple Guide for Tourists (2026)",
+        "slug": "how-to-pronounce-berlin-station-names",
+        "path": "/post/how-to-pronounce-berlin-station-names",
+        "url": "https://www.berlinwalk.com/post/how-to-pronounce-berlin-station-names",
+        "excerpt": "German station names can look like someone sat on a keyboard, but they are more predictable than they seem. Here is how to pronounce Berlin station names, built around the stops you will really use, with plain respellings and the sounds that catch visitors out.",
+        "category": "German Language",
+        "categorySlug": "german-language",
+        "topic": "route-stories",
+        "topicLabel": "Tour Route Stories",
+        "readTime": "5 min read",
+        "publishedDate": "2026-07-13T05:57:42.578Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_95f6a44c136747208760c6881797ecfd~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-how-to-pronounce-berlin-station-names-cover.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_95f6a44c136747208760c6881797ecfd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-how-to-pronounce-berlin-station-names-cover.jpg",
+        "alt": "Berlin U-Bahn enamel station sign reading Schönhauser Allee, one of the names this guide helps you say",
+        "relatedToolSlug": "berlin-rail-decoder"
+      },
+      {
+        "title": "Tiergarten Berlin: What's Actually Worth Seeing in the City's Biggest Park",
+        "slug": "tiergarten-berlin",
+        "path": "/post/tiergarten-berlin",
+        "url": "https://www.berlinwalk.com/post/tiergarten-berlin",
+        "excerpt": "Tiergarten is 210 hectares of woodland, lakes and formal garden sitting right between the Brandenburg Gate and Zoologischer Garten station, open around the clock and free to walk into. Here is what's actually worth seeing, the WWII story behind why the trees are so young, and how much time to give it.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "free-budget",
+        "topicLabel": "Free & Budget",
+        "readTime": "7 min read",
+        "publishedDate": "2026-07-12T17:46:18.939Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_aaf86f406f66468b95e545784fcc5cb8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-tiergarten-berlin-loewenbruecke-cyclist-cover.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_aaf86f406f66468b95e545784fcc5cb8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-tiergarten-berlin-loewenbruecke-cyclist-cover.jpg",
+        "alt": "A cyclist crossing an ornamental stone bridge over a calm waterway in Berlin's Tiergarten, framed by spring blossoms",
+        "relatedToolSlug": "tiergarten-loop-planner"
+      },
       {
         "title": "Currency Exchange in Berlin: Where to Change Money (and Where Not To) in 2026",
         "slug": "currency-exchange-in-berlin",
@@ -76,74 +144,6 @@
         "thumb": "https://static.wixstatic.com/media/5a08a3_adb12d60572b4982a56db12599fa65c4~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-currency-exchange-berlin-euro-cash-cover.jpg",
         "alt": "Close-up of euro banknotes, a fifty and a twenty, the cash most visitors think they need to exchange before arriving in Berlin",
         "relatedToolSlug": "berlin-atm-fee-checker"
-      },
-      {
-        "title": "U-Bahn vs S-Bahn in Berlin: What's the Difference?",
-        "slug": "u-bahn-vs-s-bahn-berlin",
-        "path": "/post/u-bahn-vs-s-bahn-berlin",
-        "url": "https://www.berlinwalk.com/post/u-bahn-vs-s-bahn-berlin",
-        "excerpt": "A blue U, a green S and a row of numbers on the same wall. A local guide to the U-Bahn vs S-Bahn difference: which is which, which to take, and why one ticket covers both.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "first-day",
-        "topicLabel": "First Day in Berlin",
-        "readTime": "6 min read",
-        "publishedDate": "2026-07-11T06:53:23.589Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_55f5b0bf49fd42b1bb41eb25255ef6e5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-s-bahn-hackescher-markt-viaduct-cover.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_55f5b0bf49fd42b1bb41eb25255ef6e5~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-s-bahn-hackescher-markt-viaduct-cover.jpg",
-        "alt": "Berlin S-Bahn train on the red-brick Stadtbahn viaduct curving past the domes and rooftops of the city centre near Hackescher Markt",
-        "relatedToolSlug": "berlin-rail-decoder"
-      },
-      {
-        "title": "Gendarmenmarkt: A Local Guide to Berlin's Most Beautiful Square (2026)",
-        "slug": "gendarmenmarkt-berlin",
-        "path": "/post/gendarmenmarkt-berlin",
-        "url": "https://www.berlinwalk.com/post/gendarmenmarkt-berlin",
-        "excerpt": "Two of Gendarmenmarkt's three landmarks are called cathedrals, and neither one is. A local guide to Berlin's most beautiful square: what each building really is, the free exhibition inside the German Cathedral, and whether the French tower climb is worth it.",
-        "category": "Berlin History",
-        "categorySlug": "berlin-history",
-        "topic": "free-budget",
-        "topicLabel": "Free & Budget",
-        "readTime": "6 min read",
-        "publishedDate": "2026-07-11T23:20:59.580Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_fedc190718194fc5bfa281a6e1c8cabe~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-gendarmenmarkt-berlin-square-konzerthaus-french-cathedral-cover.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_fedc190718194fc5bfa281a6e1c8cabe~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-gendarmenmarkt-berlin-square-konzerthaus-french-cathedral-cover.jpg",
-        "alt": "Wide view across Gendarmenmarkt in Berlin, with the Konzerthaus on the left, the Schiller monument in the middle, and the French Cathedral with its green domed tower on the right",
-        "relatedToolSlug": ""
-      },
-      {
-        "title": "Air Conditioning in Berlin: Do Hotels Have It, and How to Stay Cool (2026)",
-        "slug": "air-conditioning-in-berlin",
-        "path": "/post/air-conditioning-in-berlin",
-        "url": "https://www.berlinwalk.com/post/air-conditioning-in-berlin",
-        "excerpt": "A Berlin guide's honest take on air conditioning in Berlin: why so few places have it, how to check before you book, and how to keep a no-AC room liveable in a summer heatwave.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "history-myths",
-        "topicLabel": "Berlin History & Myths",
-        "readTime": "7 min read",
-        "publishedDate": "2026-07-10T03:51:28.865Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_cb83f548cfc6401b8879e1f250496bfa~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-altbau-room-no-ac-cover.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_cb83f548cfc6401b8879e1f250496bfa~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-altbau-room-no-ac-cover.jpg",
-        "alt": "A classic Berlin Altbau room in summer with two tall open casement windows, sheer curtains, potted plants on the sill, an old cast-iron radiator, herringbone parquet floor and a small white electric fan by the window, warm afternoon sunlight across the floor",
-        "relatedToolSlug": "berlin-room-heat-check"
-      },
-      {
-        "title": "Berlin Wall Memorial (Bernauer Strasse): How to Visit the Real Wall Site (2026)",
-        "slug": "berlin-wall-memorial-bernauer-strasse",
-        "path": "/post/berlin-wall-memorial-bernauer-strasse",
-        "url": "https://www.berlinwalk.com/post/berlin-wall-memorial-bernauer-strasse",
-        "excerpt": "A Berlin guide's practical guide to the Berlin Wall Memorial on Bernauer Strasse: the preserved death strip, the viewing tower, the ghost station and the Window of Remembrance, plus hours and how to get there.",
-        "category": "Berlin History",
-        "categorySlug": "berlin-history",
-        "topic": "history-myths",
-        "topicLabel": "Berlin History & Myths",
-        "readTime": "7 min read",
-        "publishedDate": "2026-07-09T20:08:58.800Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_56c8fde64eb04e31828d5a7a4273fd21~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-bernauer-memorial-strip-cover.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_56c8fde64eb04e31828d5a7a4273fd21~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-bernauer-memorial-strip-cover.jpg",
-        "alt": "The preserved Berlin Wall death strip on Bernauer Strasse seen from the viewing tower, with the TV Tower on the skyline",
-        "relatedToolSlug": "berlin-wall-remnants"
       }
     ]
   },
@@ -826,7 +826,7 @@
           "image": "https://static.wixstatic.com/media/5a08a3_aaf86f406f66468b95e545784fcc5cb8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-tiergarten-berlin-loewenbruecke-cyclist-cover.jpg",
           "thumb": "https://static.wixstatic.com/media/5a08a3_aaf86f406f66468b95e545784fcc5cb8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-tiergarten-berlin-loewenbruecke-cyclist-cover.jpg",
           "alt": "A cyclist crossing an ornamental stone bridge over a calm waterway in Berlin's Tiergarten, framed by spring blossoms",
-          "relatedToolSlug": ""
+          "relatedToolSlug": "tiergarten-loop-planner"
         },
         {
           "title": "Berlin Observation Decks: Which High View Is Actually Worth Paying For in 2026",
@@ -843,7 +843,7 @@
           "image": "https://static.wixstatic.com/media/5a08a3_15067773729749f59218b76506a5ae4a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-observation-decks-cover-skyline.jpg",
           "thumb": "https://static.wixstatic.com/media/5a08a3_15067773729749f59218b76506a5ae4a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-observation-decks-cover-skyline.jpg",
           "alt": "Warm evening view over central Berlin with the TV Tower rising above the rooftops and the Spree river",
-          "relatedToolSlug": ""
+          "relatedToolSlug": "berlin-viewpoint-finder"
         },
         {
           "title": "Berlin Street Art: Where to Find the Best Murals and Graffiti (2026)",
@@ -988,7 +988,7 @@
           "image": "https://static.wixstatic.com/media/5a08a3_95f6a44c136747208760c6881797ecfd~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-how-to-pronounce-berlin-station-names-cover.jpg",
           "thumb": "https://static.wixstatic.com/media/5a08a3_95f6a44c136747208760c6881797ecfd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-how-to-pronounce-berlin-station-names-cover.jpg",
           "alt": "Berlin U-Bahn enamel station sign reading Schönhauser Allee, one of the names this guide helps you say",
-          "relatedToolSlug": ""
+          "relatedToolSlug": "berlin-rail-decoder"
         },
         {
           "title": "Renting a Bike in Berlin: Which Option Actually Fits Your Trip",
@@ -1617,6 +1617,57 @@
   ],
   "latest": [
     {
+      "title": "How to Use a Berlin Ticket Machine: Buy a BVG Ticket Step by Step (2026)",
+      "slug": "berlin-ticket-machines",
+      "path": "/post/berlin-ticket-machines",
+      "url": "https://www.berlinwalk.com/post/berlin-ticket-machines",
+      "excerpt": "Standing in front of a Berlin ticket machine, staring at German words while a train pulls in, is a rite of passage. Here is how the BVG machine really works: English menus, the right 2026 fare, how to pay, and the one step that saves you a 60 euro fine.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-07-14T23:01:22.370Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_8468d9d913ae45d9a4d0b244ab191c8b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-bvg-ticket-machine.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_8468d9d913ae45d9a4d0b244ab191c8b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-bvg-ticket-machine.jpg",
+      "alt": "A yellow BVG ticket machine on a Berlin U-Bahn platform, labelled Fahrscheine Tickets.",
+      "relatedToolSlug": "berlin-zone-ticket-decoder"
+    },
+    {
+      "title": "The Berlin Ringbahn: How to Ride the S41/S42 Circle Line (2026)",
+      "slug": "berlin-ringbahn",
+      "path": "/post/berlin-ringbahn",
+      "url": "https://www.berlinwalk.com/post/berlin-ringbahn",
+      "excerpt": "Berlin's Ringbahn, the S41 and S42, loops right around the city through 27 stations in about an hour. Here is what the circle line actually is, how to tell which direction each train goes, what ticket covers a full loop, and the stops that are genuinely worth leaving the train for.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-07-14T23:01:19.832Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_cb3a52c075e0406d8a3634dd57353355~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ringbahn-bridge-s-bahn-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_cb3a52c075e0406d8a3634dd57353355~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ringbahn-bridge-s-bahn-cover.jpg",
+      "alt": "A red and ochre Berlin S-Bahn crossing the curving iron Ringbahn bridge over the Oberspree river",
+      "relatedToolSlug": "berlin-rail-decoder"
+    },
+    {
+      "title": "Berlin Train Announcements Decoded: What the U-Bahn and S-Bahn Voice Is Saying (2026)",
+      "slug": "berlin-train-announcements",
+      "path": "/post/berlin-train-announcements",
+      "url": "https://www.berlinwalk.com/post/berlin-train-announcements",
+      "excerpt": "The first German you hear in Berlin is a recorded voice on the train. Here is what Zurückbleiben bitte, Nächster Halt, Ausstieg rechts and Ersatzverkehr actually mean, why the S-Bahn plays that little three-note chime, and the one word that tells you the train is about to terminate.",
+      "category": "German Language",
+      "categorySlug": "german-language",
+      "topic": "when-to-visit",
+      "topicLabel": "Month-by-Month Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-07-14T23:01:18.140Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_c5b335ed26f14a6a87b0d44bfba04992~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-sbahn-alexanderplatz-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_c5b335ed26f14a6a87b0d44bfba04992~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-sbahn-alexanderplatz-cover.jpg",
+      "alt": "An S-Bahn train arriving under the glass roof of Alexanderplatz station in Berlin",
+      "relatedToolSlug": "berlin-rail-decoder"
+    },
+    {
       "title": "Open-Air Cinema in Berlin: How to Catch a Film in English Under the Stars (2026)",
       "slug": "open-air-cinema-berlin",
       "path": "/post/open-air-cinema-berlin",
@@ -1648,7 +1699,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_8f5b124325b3463ab987e87addcdc0a9~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-s-bahn-hauptbahnhof.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_8f5b124325b3463ab987e87addcdc0a9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-s-bahn-hauptbahnhof.jpg",
       "alt": "A red-and-cream Berlin S-Bahn train pulling through Berlin Hauptbahnhof, with the station name sign clearly visible on the platform",
-      "relatedToolSlug": "transport-ticket-calculator"
+      "relatedToolSlug": "berlin-phone-ticket-picker"
     },
     {
       "title": "Prenzlauer Berg Berlin: A Local Guide to the Café and Sunday District (2026)",
@@ -1665,7 +1716,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_eba644ec4e3c4cff91aec148653e1d93~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-wasserturm-prenzlauer-berg.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_eba644ec4e3c4cff91aec148653e1d93~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-wasserturm-prenzlauer-berg.jpg",
       "alt": "The Wasserturm, Berlin's oldest water tower, a round brick building on a green hill in Prenzlauer Berg under a summer sky",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "prenzlauer-berg-walk"
     },
     {
       "title": "How to Spend a Layover in Berlin: What You Can Actually See in a Few Hours (2026)",
@@ -1682,7 +1733,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_0bedeaf76ef94f12b4eea1c7213201e1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-ber-terminal-1.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_0bedeaf76ef94f12b4eea1c7213201e1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-ber-terminal-1.jpg",
       "alt": "Berlin Brandenburg Airport Terminal 1 seen from outside at dusk",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-layover-planner"
     },
     {
       "title": "Where Was Hitler's Bunker in Berlin? What You'll Actually Find Today",
@@ -1699,7 +1750,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_2390e27e589e40369cc46747042a3046~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-hitlers-bunker-berlin-cover.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_2390e27e589e40369cc46747042a3046~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-hitlers-bunker-berlin-cover.jpg",
       "alt": "The site of Hitler's bunker in Berlin today, an ordinary car park with a small information board and apartment blocks behind it",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-landmarks-map"
     },
     {
       "title": "KaDeWe Berlin: A Visitor's Guide to the Grand Store and Its Famous Food Hall",
@@ -1716,7 +1767,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_326ea893a3864cf49a6e3b65274e164a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kadewe-berlin-cover.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_326ea893a3864cf49a6e3b65274e164a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kadewe-berlin-cover.jpg",
       "alt": "The KaDeWe department store building with its red roofline on Tauentzienstraße in west Berlin",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-shopping-areas"
     },
     {
       "title": "Kreuzberg Berlin: A Local Guide to the District's Two Very Different Halves (2026)",
@@ -1733,7 +1784,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_3db3ba7e56c945e6afd5b28bdc688226~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kreuzberg-berlin-cover.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_3db3ba7e56c945e6afd5b28bdc688226~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kreuzberg-berlin-cover.jpg",
       "alt": "The Oberbaumbrücke brick bridge over the Spree connecting Kreuzberg and Friedrichshain in Berlin",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-landmarks-map"
     },
     {
       "title": "How to Pronounce Berlin Station Names: A Simple Guide for Tourists (2026)",
@@ -1750,7 +1801,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_95f6a44c136747208760c6881797ecfd~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-how-to-pronounce-berlin-station-names-cover.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_95f6a44c136747208760c6881797ecfd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-how-to-pronounce-berlin-station-names-cover.jpg",
       "alt": "Berlin U-Bahn enamel station sign reading Schönhauser Allee, one of the names this guide helps you say",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-rail-decoder"
     },
     {
       "title": "Teufelsberg Berlin: The Cold War Spy Station on a Man-Made Hill (2026)",
@@ -1767,62 +1818,62 @@
       "image": "https://static.wixstatic.com/media/5a08a3_b63d3880d44b4e2eaa29be619bbed52b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-teufelsberg-berlin-cover.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_b63d3880d44b4e2eaa29be619bbed52b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-teufelsberg-berlin-cover.jpg",
       "alt": "The radar domes and tower of the former Teufelsberg spy station in Berlin above walls covered in street art",
-      "relatedToolSlug": ""
-    },
-    {
-      "title": "Tiergarten Berlin: What's Actually Worth Seeing in the City's Biggest Park",
-      "slug": "tiergarten-berlin",
-      "path": "/post/tiergarten-berlin",
-      "url": "https://www.berlinwalk.com/post/tiergarten-berlin",
-      "excerpt": "Tiergarten is 210 hectares of woodland, lakes and formal garden sitting right between the Brandenburg Gate and Zoologischer Garten station, open around the clock and free to walk into. Here is what's actually worth seeing, the WWII story behind why the trees are so young, and how much time to give it.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "free-budget",
-      "topicLabel": "Free & Budget",
-      "readTime": "7 min read",
-      "publishedDate": "2026-07-12T17:46:18.939Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_aaf86f406f66468b95e545784fcc5cb8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-tiergarten-berlin-loewenbruecke-cyclist-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_aaf86f406f66468b95e545784fcc5cb8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-tiergarten-berlin-loewenbruecke-cyclist-cover.jpg",
-      "alt": "A cyclist crossing an ornamental stone bridge over a calm waterway in Berlin's Tiergarten, framed by spring blossoms",
-      "relatedToolSlug": ""
-    },
-    {
-      "title": "Berlin Observation Decks: Which High View Is Actually Worth Paying For in 2026",
-      "slug": "berlin-observation-decks",
-      "path": "/post/berlin-observation-decks",
-      "url": "https://www.berlinwalk.com/post/berlin-observation-decks",
-      "excerpt": "Berlin has five public high viewpoints, from the free Reichstag dome to the 203 m TV Tower deck, and they are not equal on price, height or booking. Here is what each one costs in 2026, how you get up, and which Berlin observation deck I would actually send you to.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "free-budget",
-      "topicLabel": "Free & Budget",
-      "readTime": "6 min read",
-      "publishedDate": "2026-07-12T17:45:04.864Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_15067773729749f59218b76506a5ae4a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-observation-decks-cover-skyline.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_15067773729749f59218b76506a5ae4a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-observation-decks-cover-skyline.jpg",
-      "alt": "Warm evening view over central Berlin with the TV Tower rising above the rooftops and the Spree river",
-      "relatedToolSlug": ""
-    },
-    {
-      "title": "Olympiastadion Berlin: How to Visit the 1936 Olympic Stadium (2026)",
-      "slug": "olympiastadion-berlin",
-      "path": "/post/olympiastadion-berlin",
-      "url": "https://www.berlinwalk.com/post/olympiastadion-berlin",
-      "excerpt": "The stadium the Nazis built for the 1936 Olympics is still standing and still full most weekends. On a normal day you can buy an 11 EUR ticket and walk straight in. Here is how to visit Olympiastadion Berlin, what you see inside, how to get there cheaply, and the one match-day catch to avoid.",
-      "category": "Berlin History",
-      "categorySlug": "berlin-history",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "5 min read",
-      "publishedDate": "2026-07-12T07:05:15.706Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_be407886b9334da08006905dce9b9e17~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-olympiastadion-berlin-interior-bowl-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_be407886b9334da08006905dce9b9e17~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-olympiastadion-berlin-interior-bowl-cover.jpg",
-      "alt": "The Olympic flame cauldron on its pillars at the Marathon Gate inside Berlin's Olympiastadion, framed by the stadium roof opening",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-viewpoint-finder"
     }
   ],
   "allPosts": [
     {
+      "title": "How to Use a Berlin Ticket Machine: Buy a BVG Ticket Step by Step (2026)",
+      "slug": "berlin-ticket-machines",
+      "path": "/post/berlin-ticket-machines",
+      "url": "https://www.berlinwalk.com/post/berlin-ticket-machines",
+      "excerpt": "Standing in front of a Berlin ticket machine, staring at German words while a train pulls in, is a rite of passage. Here is how the BVG machine really works: English menus, the right 2026 fare, how to pay, and the one step that saves you a 60 euro fine.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-07-14T23:01:22.370Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_8468d9d913ae45d9a4d0b244ab191c8b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-bvg-ticket-machine.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_8468d9d913ae45d9a4d0b244ab191c8b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-bvg-ticket-machine.jpg",
+      "alt": "A yellow BVG ticket machine on a Berlin U-Bahn platform, labelled Fahrscheine Tickets.",
+      "relatedToolSlug": "berlin-zone-ticket-decoder"
+    },
+    {
+      "title": "The Berlin Ringbahn: How to Ride the S41/S42 Circle Line (2026)",
+      "slug": "berlin-ringbahn",
+      "path": "/post/berlin-ringbahn",
+      "url": "https://www.berlinwalk.com/post/berlin-ringbahn",
+      "excerpt": "Berlin's Ringbahn, the S41 and S42, loops right around the city through 27 stations in about an hour. Here is what the circle line actually is, how to tell which direction each train goes, what ticket covers a full loop, and the stops that are genuinely worth leaving the train for.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-07-14T23:01:19.832Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_cb3a52c075e0406d8a3634dd57353355~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ringbahn-bridge-s-bahn-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_cb3a52c075e0406d8a3634dd57353355~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ringbahn-bridge-s-bahn-cover.jpg",
+      "alt": "A red and ochre Berlin S-Bahn crossing the curving iron Ringbahn bridge over the Oberspree river",
+      "relatedToolSlug": "berlin-rail-decoder"
+    },
+    {
+      "title": "Berlin Train Announcements Decoded: What the U-Bahn and S-Bahn Voice Is Saying (2026)",
+      "slug": "berlin-train-announcements",
+      "path": "/post/berlin-train-announcements",
+      "url": "https://www.berlinwalk.com/post/berlin-train-announcements",
+      "excerpt": "The first German you hear in Berlin is a recorded voice on the train. Here is what Zurückbleiben bitte, Nächster Halt, Ausstieg rechts and Ersatzverkehr actually mean, why the S-Bahn plays that little three-note chime, and the one word that tells you the train is about to terminate.",
+      "category": "German Language",
+      "categorySlug": "german-language",
+      "topic": "when-to-visit",
+      "topicLabel": "Month-by-Month Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-07-14T23:01:18.140Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_c5b335ed26f14a6a87b0d44bfba04992~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-sbahn-alexanderplatz-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_c5b335ed26f14a6a87b0d44bfba04992~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-sbahn-alexanderplatz-cover.jpg",
+      "alt": "An S-Bahn train arriving under the glass roof of Alexanderplatz station in Berlin",
+      "relatedToolSlug": "berlin-rail-decoder"
+    },
+    {
       "title": "Open-Air Cinema in Berlin: How to Catch a Film in English Under the Stars (2026)",
       "slug": "open-air-cinema-berlin",
       "path": "/post/open-air-cinema-berlin",
@@ -1854,7 +1905,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_8f5b124325b3463ab987e87addcdc0a9~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-s-bahn-hauptbahnhof.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_8f5b124325b3463ab987e87addcdc0a9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-s-bahn-hauptbahnhof.jpg",
       "alt": "A red-and-cream Berlin S-Bahn train pulling through Berlin Hauptbahnhof, with the station name sign clearly visible on the platform",
-      "relatedToolSlug": "transport-ticket-calculator"
+      "relatedToolSlug": "berlin-phone-ticket-picker"
     },
     {
       "title": "Prenzlauer Berg Berlin: A Local Guide to the Café and Sunday District (2026)",
@@ -1871,7 +1922,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_eba644ec4e3c4cff91aec148653e1d93~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-wasserturm-prenzlauer-berg.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_eba644ec4e3c4cff91aec148653e1d93~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-wasserturm-prenzlauer-berg.jpg",
       "alt": "The Wasserturm, Berlin's oldest water tower, a round brick building on a green hill in Prenzlauer Berg under a summer sky",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "prenzlauer-berg-walk"
     },
     {
       "title": "How to Spend a Layover in Berlin: What You Can Actually See in a Few Hours (2026)",
@@ -1888,7 +1939,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_0bedeaf76ef94f12b4eea1c7213201e1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-ber-terminal-1.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_0bedeaf76ef94f12b4eea1c7213201e1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-ber-terminal-1.jpg",
       "alt": "Berlin Brandenburg Airport Terminal 1 seen from outside at dusk",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-layover-planner"
     },
     {
       "title": "Where Was Hitler's Bunker in Berlin? What You'll Actually Find Today",
@@ -1905,7 +1956,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_2390e27e589e40369cc46747042a3046~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-hitlers-bunker-berlin-cover.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_2390e27e589e40369cc46747042a3046~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-hitlers-bunker-berlin-cover.jpg",
       "alt": "The site of Hitler's bunker in Berlin today, an ordinary car park with a small information board and apartment blocks behind it",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-landmarks-map"
     },
     {
       "title": "KaDeWe Berlin: A Visitor's Guide to the Grand Store and Its Famous Food Hall",
@@ -1922,7 +1973,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_326ea893a3864cf49a6e3b65274e164a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kadewe-berlin-cover.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_326ea893a3864cf49a6e3b65274e164a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kadewe-berlin-cover.jpg",
       "alt": "The KaDeWe department store building with its red roofline on Tauentzienstraße in west Berlin",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-shopping-areas"
     },
     {
       "title": "Kreuzberg Berlin: A Local Guide to the District's Two Very Different Halves (2026)",
@@ -1939,7 +1990,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_3db3ba7e56c945e6afd5b28bdc688226~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kreuzberg-berlin-cover.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_3db3ba7e56c945e6afd5b28bdc688226~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kreuzberg-berlin-cover.jpg",
       "alt": "The Oberbaumbrücke brick bridge over the Spree connecting Kreuzberg and Friedrichshain in Berlin",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-landmarks-map"
     },
     {
       "title": "How to Pronounce Berlin Station Names: A Simple Guide for Tourists (2026)",
@@ -1956,7 +2007,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_95f6a44c136747208760c6881797ecfd~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-how-to-pronounce-berlin-station-names-cover.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_95f6a44c136747208760c6881797ecfd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-how-to-pronounce-berlin-station-names-cover.jpg",
       "alt": "Berlin U-Bahn enamel station sign reading Schönhauser Allee, one of the names this guide helps you say",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-rail-decoder"
     },
     {
       "title": "Teufelsberg Berlin: The Cold War Spy Station on a Man-Made Hill (2026)",
@@ -1973,7 +2024,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_b63d3880d44b4e2eaa29be619bbed52b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-teufelsberg-berlin-cover.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_b63d3880d44b4e2eaa29be619bbed52b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-teufelsberg-berlin-cover.jpg",
       "alt": "The radar domes and tower of the former Teufelsberg spy station in Berlin above walls covered in street art",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-viewpoint-finder"
     },
     {
       "title": "Tiergarten Berlin: What's Actually Worth Seeing in the City's Biggest Park",
@@ -1990,7 +2041,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_aaf86f406f66468b95e545784fcc5cb8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-tiergarten-berlin-loewenbruecke-cyclist-cover.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_aaf86f406f66468b95e545784fcc5cb8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-tiergarten-berlin-loewenbruecke-cyclist-cover.jpg",
       "alt": "A cyclist crossing an ornamental stone bridge over a calm waterway in Berlin's Tiergarten, framed by spring blossoms",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "tiergarten-loop-planner"
     },
     {
       "title": "Berlin Observation Decks: Which High View Is Actually Worth Paying For in 2026",
@@ -2007,7 +2058,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_15067773729749f59218b76506a5ae4a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-observation-decks-cover-skyline.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_15067773729749f59218b76506a5ae4a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-observation-decks-cover-skyline.jpg",
       "alt": "Warm evening view over central Berlin with the TV Tower rising above the rooftops and the Spree river",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-viewpoint-finder"
     },
     {
       "title": "Olympiastadion Berlin: How to Visit the 1936 Olympic Stadium (2026)",

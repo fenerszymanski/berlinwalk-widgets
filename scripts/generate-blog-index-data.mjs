@@ -561,6 +561,9 @@ function relatedToolSlugFor(post) {
   if (/(hitlers-bunker-berlin|hitler's bunker|hitlers bunker|führerbunker|fuehrerbunker)/.test(s)) return 'berlin-landmarks-map';
   if (/(teufelsberg|devil's mountain|field station berlin)/.test(s)) return 'berlin-viewpoint-finder';
   if (/(how-to-pronounce-berlin-station-names|pronounce berlin station|how to pronounce)/.test(s)) return 'berlin-rail-decoder';
+  if (/(berlin-train-announcements|train announcements|zurückbleiben|zuruckbleiben|u-bahn and s-bahn voice|announcement decoder)/.test(s)) return 'berlin-rail-decoder';
+  if (/(berlin-ringbahn|ringbahn|s41\/s42|s41 s42|circle line|ring line)/.test(s)) return 'berlin-rail-decoder';
+  if (/(berlin-ticket-machines|ticket machine|bvg machine|buy a bvg ticket|ticket vending)/.test(s)) return 'berlin-zone-ticket-decoder';
   if (/(berlin-observation-decks|observation deck|observation decks|viewpoint finder)/.test(s)) return 'berlin-viewpoint-finder';
   if (/(tiergarten-berlin|tiergarten)/.test(s)) return 'tiergarten-loop-planner';
   if (/(u-bahn-vs-s-bahn-berlin|u-bahn vs s-bahn|s-bahn vs u-bahn|ubahn vs sbahn|which berlin train|berlin rail decoder)/.test(s)) return 'berlin-rail-decoder';
