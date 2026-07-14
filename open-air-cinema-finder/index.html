@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Berlin Open-Air Cinema Finder — Which Freiluftkino, and Is It in English?</title>
+<meta name="description" content="Find the right Berlin open-air cinema for your night. Filter by films in English, central location, leafy park, skyline view, rain or shine, and family-friendly, with the nearest station for each Freiluftkino." />
+<link rel="stylesheet" href="../css/brand.css" />
+<script defer src="../js/brand.js"></script>
+<style>
+  :root{
+    --green:#1B5E20; --green-d:#123D18; --yellow:#FFE600; --lime:#7CB342;
+    --lgreen:#C5E1A5; --cream:#FAFAF5; --ink:#212121; --red:#E63946;
+    --line:rgba(18,61,24,.14); --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  .oac{
+    font-family:'Montserrat',system-ui,-apple-system,'Segoe UI',sans-serif;
+    color:var(--ink); max-width:780px; margin:0 auto; padding:2px 4px 16px;
+    box-sizing:border-box; -webkit-text-size-adjust:100%;
+  }
+  .oac *,.oac *::before,.oac *::after{box-sizing:border-box;}
+  .oac__card{
+    background:var(--cream); border:1px solid var(--line); border-radius:18px;
+    padding:18px; box-shadow:0 10px 30px rgba(18,61,24,.08);
+  }
+  .oac__eyebrow{font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--green); margin:0 0 4px;}
+  .oac__title{font-size:21px; line-height:1.2; font-weight:800; margin:0 0 5px; color:var(--green-d);}
+  .oac__sub{font-size:13.5px; line-height:1.55; margin:0 0 4px; color:#40513f;}
+
+  .oac__legend{font-size:11.5px; line-height:1.5; color:#54614f; background:#fff; border:1px solid var(--line); border-radius:10px; padding:9px 12px; margin:12px 0 4px;}
+  .oac__legend b{color:var(--green-d);}
+
+  .oac__filthead{font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--green); margin:16px 0 8px;}
+  .oac__chips{display:flex; flex-wrap:wrap; gap:8px;}
+  .oac__chip{
+    font-family:inherit; font-size:12.5px; font-weight:700; color:var(--green-d);
+    background:#fff; border:1px solid var(--line); border-radius:999px; padding:7px 13px; cursor:pointer;
+    display:inline-flex; align-items:center; gap:6px; transition:background .15s,border-color .15s,transform .05s;
+  }
+  .oac__chip:hover{border-color:var(--lime);}
+  .oac__chip:active{transform:translateY(1px);}
+  .oac__chip[aria-pressed="true"]{background:var(--yellow); border-color:var(--green-d); color:var(--green-d);}
+  .oac__chip .ic{font-size:13px;}
+
+  .oac__meta{display:flex; align-items:center; justify-content:space-between; gap:10px; margin:16px 0 8px;}
+  .oac__count{font-size:12.5px; font-weight:700; color:var(--green-d);}
+  .oac__reset{font-family:inherit; font-size:12px; font-weight:700; color:var(--green); background:none; border:none; cursor:pointer; text-decoration:underline; padding:4px;}
+  .oac__reset[hidden]{display:none;}
+
+  .oac__grid{display:grid; gap:12px;}
+  .oac__venue{
+    background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px 15px; position:relative;
+  }
+  .oac__venue.pick{border-color:var(--green); box-shadow:0 4px 14px rgba(27,94,32,.12);}
+  .oac__ribbon{
+    position:absolute; top:-9px; right:14px; font-size:10px; font-weight:800; letter-spacing:.04em; text-transform:uppercase;
+    color:var(--green-d); background:var(--yellow); border-radius:999px; padding:3px 10px; box-shadow:0 2px 6px rgba(0,0,0,.15);
+  }
+  .oac__vtop{display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap;}
+  .oac__vname{font-size:16px; font-weight:800; color:var(--green-d); margin:0; line-height:1.2;}
+  .oac__vhood{font-size:11.5px; font-weight:700; color:var(--lime); text-transform:uppercase; letter-spacing:.04em; white-space:nowrap;}
+  .oac__vdesc{font-size:13px; line-height:1.5; color:#33402f; margin:7px 0 10px;}
+  .oac__tags{display:flex; flex-wrap:wrap; gap:6px; margin:0 0 10px;}
+  .oac__tag{font-size:10.5px; font-weight:700; color:var(--green-d); background:var(--lgreen); border-radius:999px; padding:3px 9px;}
+  .oac__tag.eng{background:var(--yellow);}
+  .oac__tag.check{background:#eef1ec; color:#54614f;}
+  .oac__vbot{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; border-top:1px dashed var(--line); padding-top:10px;}
+  .oac__station{font-family:var(--mono); font-size:11.5px; color:var(--green-d);}
+  .oac__station i{font-style:normal; opacity:.7;}
+  .oac__link{
+    font-size:12px; font-weight:800; color:var(--green-d); background:var(--yellow);
+    border-radius:999px; padding:6px 13px; text-decoration:none; white-space:nowrap;
+  }
+  .oac__link:hover,.oac__link:focus,.oac__link:visited,.oac__link:active{color:var(--green-d);}
+
+  .oac__empty{background:#fff8e1; border:1px solid var(--line); border-radius:12px; padding:14px 15px; font-size:13px; line-height:1.5; color:var(--green-d);}
+  .oac__empty[hidden]{display:none;}
+  .oac__foot{font-size:11px; color:#6b7a68; margin:14px 2px 0; line-height:1.5;}
+
+  @media (max-width:430px){
+    .oac__card{padding:14px;}
+    .oac__title{font-size:19px;}
+    .oac__vhood{width:100%;}
+  }
+</style>
+</head>
+<body>
+<div class="oac">
+  <div class="oac__card">
+    <p class="oac__eyebrow">BerlinWalk · Open-air cinema finder</p>
+    <h2 class="oac__title">Which Berlin open-air cinema is right for tonight?</h2>
+    <p class="oac__sub">Berlin has more than a dozen open-air screens in summer. Pick what matters to you and this shows the ones that fit, with the nearest station and how to check that night's language.</p>
+
+    <p class="oac__legend"><b>Reading the listings:</b> <b>OV</b> is the original language, so English for most big films. <b>OmU</b> is the original language with German subtitles (still English audio). <b>OmeU</b> adds English subtitles. Avoid a plain German dub, usually shown with no code.</p>
+
+    <p class="oac__filthead">What matters to you tonight?</p>
+    <div class="oac__chips" id="chips">
+      <button class="oac__chip" data-f="english" aria-pressed="false"><span class="ic">🗣️</span>Films in English</button>
+      <button class="oac__chip" data-f="central" aria-pressed="false"><span class="ic">📍</span>Central and easy</button>
+      <button class="oac__chip" data-f="park" aria-pressed="false"><span class="ic">🌳</span>Leafy park</button>
+      <button class="oac__chip" data-f="skyline" aria-pressed="false"><span class="ic">🏙️</span>Skyline view</button>
+      <button class="oac__chip" data-f="rain" aria-pressed="false"><span class="ic">🌧️</span>Rain or shine</button>
+      <button class="oac__chip" data-f="family" aria-pressed="false"><span class="ic">👨‍👩‍👧</span>Good with kids</button>
+      <button class="oac__chip" data-f="tour" aria-pressed="false"><span class="ic">🚶</span>Near my tour end</button>
+    </div>
+
+    <div class="oac__meta">
+      <span class="oac__count" id="count"></span>
+      <button class="oac__reset" id="reset" hidden>Clear filters</button>
+    </div>
+
+    <div class="oac__grid" id="grid" aria-live="polite"></div>
+    <div class="oac__empty" id="empty" hidden>No open-air cinema matches every filter at once. Try removing one, for example keep <b>Films in English</b> but drop <b>Skyline view</b>.</div>
+
+    <p class="oac__foot">Season runs roughly early May to mid-September, with films starting after dark (often not before 21:30 in high summer). Tickets are usually about 9 to 12 euros. Always confirm the date's language code and any weather cancellation on the cinema's own page before you travel.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var VENUES=[
+    {
+      name:'Kino Central (open-air)', hood:'Mitte',
+      desc:'A scruffy, characterful screen in the graffiti-covered courtyard of Haus Schwarzenberg, two minutes from Hackescher Markt. Arthouse and modern classics, often in the original version.',
+      english:true, tags:['English OV/OmU','Courtyard','Central'],
+      station:'S Hackescher Markt · U8 Weinmeisterstr.',
+      url:'https://www.kino-central.de/',
+      f:{english:1,central:1,tour:1}
+    },
+    {
+      name:'Sommerkino Kulturforum', hood:'Tiergarten',
+      desc:'Deckchairs on the square by the Kulturforum with the city skyline behind the screen. Run with ARTE and frequently programmed in the original language. The most comfortable central option.',
+      english:true, tags:['English OV','Skyline','Deckchairs'],
+      station:'S+U Potsdamer Platz',
+      url:'https://openair-kino.net/',
+      f:{english:1,central:1,skyline:1}
+    },
+    {
+      name:'Freiluftkino Friedrichshain', hood:'Friedrichshain',
+      desc:'A big park screen in Volkspark Friedrichshain, run with radioeins. Wooden benches, grass to spread out on, and a mix of current releases with English and subtitled nights.',
+      english:true, tags:['English OmU','Big park','Benches + grass'],
+      station:'Tram M4 Am Friedrichshain · U5 Strausberger Platz',
+      url:'https://freiluftkino-friedrichshain.de/',
+      f:{english:1,park:1,family:1}
+    },
+    {
+      name:'Freiluftkino Rehberge', hood:'Wedding',
+      desc:'The calm, leafy one: an old stone open-air stage under huge trees in Volkspark Rehberge, with backed benches and a clear filter for English and subtitled screenings. U6 stops almost at the gate.',
+      english:true, tags:['English OmU','Leafy + quiet','Backed benches'],
+      station:'U6 Rehberge',
+      url:'https://freiluftkino-rehberge.de/',
+      f:{english:1,park:1}
+    },
+    {
+      name:'Freiluftkino Kreuzberg', hood:'Kreuzberg',
+      desc:'A sheltered, intimate courtyard at the Kunstquartier Bethanien on Mariannenplatz. Strong on festival films and original versions with subtitles. Feels a little secret once the film starts.',
+      english:true, tags:['English OmU','Courtyard','Arthouse'],
+      station:'U1/U3 Kottbusser Tor · U8 Moritzplatz',
+      url:'https://www.freiluftkino-kreuzberg.de/',
+      f:{english:1,central:1}
+    },
+    {
+      name:'Freiluftkino Hasenheide', hood:'Neukölln',
+      desc:'The dependable workhorse: up to three screenings a day in Volkspark Hasenheide, and it plays come rain or shine. The safest bet for an unsettled forecast or an afternoon film with children. Check the code for original-version nights.',
+      english:false, tags:['Rain or shine','Up to 3/day','Good with kids'],
+      station:'U7 Südstern · U8 Hermannplatz',
+      url:'https://www.freiluftkino-hasenheide.de/',
+      f:{park:1,rain:1,family:1}
+    }
+  ];
+
+  var chips=document.getElementById('chips');
+  var grid=document.getElementById('grid');
+  var countEl=document.getElementById('count');
+  var resetEl=document.getElementById('reset');
+  var emptyEl=document.getElementById('empty');
+  var active={};
+
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+  function card(v, isPick){
+    var tags=v.tags.map(function(t){
+      var cls='oac__tag';
+      if(/English/i.test(t)) cls+=' eng';
+      return '<span class="'+cls+'">'+esc(t)+'</span>';
+    }).join('');
+    return '<div class="oac__venue'+(isPick?' pick':'')+'">'
+      + (isPick?'<span class="oac__ribbon">Good pick</span>':'')
+      + '<div class="oac__vtop"><h3 class="oac__vname">'+esc(v.name)+'</h3><span class="oac__vhood">'+esc(v.hood)+'</span></div>'
+      + '<p class="oac__vdesc">'+esc(v.desc)+'</p>'
+      + '<div class="oac__tags">'+tags+'</div>'
+      + '<div class="oac__vbot"><span class="oac__station"><i>Nearest:</i> '+esc(v.station)+'</span>'
+      + '<a class="oac__link" href="'+esc(v.url)+'" target="_blank" rel="noopener">Check tonight’s film →</a></div>'
+      + '</div>';
+  }
+
+  function activeKeys(){ return Object.keys(active).filter(function(k){return active[k];}); }
+
+  function render(){
+    var keys=activeKeys();
+    var matches=VENUES.filter(function(v){
+      return keys.every(function(k){ return !!v.f[k]; });
+    });
+    resetEl.hidden = keys.length===0;
+    if(!matches.length){
+      grid.innerHTML='';
+      emptyEl.hidden=false;
+      countEl.textContent='0 of '+VENUES.length+' open-air cinemas';
+      return;
+    }
+    emptyEl.hidden=true;
+    grid.innerHTML=matches.map(function(v,i){ return card(v, keys.length>0 && i===0); }).join('');
+    if(keys.length===0){
+      countEl.textContent='All '+VENUES.length+' open-air cinemas';
+    } else {
+      countEl.textContent=matches.length+' of '+VENUES.length+' match your night';
+    }
+  }
+
+  chips.addEventListener('click', function(e){
+    var btn=e.target.closest('.oac__chip'); if(!btn) return;
+    var f=btn.getAttribute('data-f');
+    active[f]=!active[f];
+    btn.setAttribute('aria-pressed', active[f]?'true':'false');
+    render();
+  });
+  resetEl.addEventListener('click', function(){
+    active={};
+    Array.prototype.forEach.call(chips.querySelectorAll('.oac__chip'), function(b){ b.setAttribute('aria-pressed','false'); });
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
