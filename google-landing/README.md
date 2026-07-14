@@ -8,7 +8,7 @@ It:
 - changes the H1 from the existing Google Ads `utm_content` value;
 - loads live Wix Bookings availability from the shared availability endpoint;
 - carries UTM, `gclid`, `gbraid`, and `wbraid` values into `/booking-form`;
-- sends the existing first-party `bw_booking_*` funnel events;
+- sends the existing first-party `bw_booking_*` funnel events after analytics consent;
 - keeps the service booking form and confirmation flow unchanged.
 
 Headline mapping:

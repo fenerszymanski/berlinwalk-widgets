@@ -41,6 +41,7 @@
 - Selecting the 15:30 slot updated `aria-pressed`, the booking URL, and the selected session ID.
 - The booking CTA preserved `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `utm_id`, `gclid`, `gbraid`, `wbraid`, `fbclid`, `fbc`, and `fbp`.
 - `bw_booking_page_view`, `bw_booking_pick_date_click`, `bw_booking_slot_select`, and `bw_booking_next_click` were emitted in order.
+- Production first-party requests are analytics-consent gated and include the endpoint's explicit consent fields; the local preview keeps event-order QA available without writing production rows.
 - Tour details scrolled the route section to the top of the viewport.
 - FAQ disclosures opened correctly.
 - Free-tour and English-tour dynamic headlines rendered correctly.

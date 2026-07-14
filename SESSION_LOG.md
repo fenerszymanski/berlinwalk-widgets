@@ -8632,6 +8632,6 @@ Follow-up: created the unpublished Wix Blog draft for the Ultimate SEO article, 
 - Wix: no change; the route loader is dry-run ready but not installed or published.
 
 **Opened:** Live publication is pending; source and selected-design QA are complete.
-**Closed:** Playwright comparison against Yusuf's selected mock passed on 390px mobile, 426px matched-source mobile, 1024px tablet, and 1440px desktop. The CTA remains above the first fold, yellow contrast and horizontal overflow checks pass, both dynamic headlines render correctly, all booking attribution values survive, live slot selection works, and clean sessions report zero console errors or warnings. Evidence and comparison history are in `design-qa.md`.
+**Closed:** Playwright comparison against Yusuf's selected mock passed on 390px mobile, 426px matched-source mobile, 1024px tablet, and 1440px desktop. The CTA remains above the first fold, yellow contrast and horizontal overflow checks pass, both dynamic headlines render correctly, all booking attribution values survive, live slot selection works, consent-gated first-party payloads include the endpoint's required consent fields, and clean sessions report zero console errors or warnings. Evidence and comparison history are in `design-qa.md`.
 
 **Next session should:** Push the source, wait for GitHub Pages, install the exact-path Wix loader, publish, and verify both Google ad-group URLs plus first-party events live.

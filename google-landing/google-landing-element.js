@@ -44,15 +44,33 @@
       this._activateLanding();
       this._render();
       this._loadAvailability();
-      this._track('bw_booking_page_view', {
-        source: 'google_search_landing',
-        headlineVariant: this._variant(),
-      });
+      this._trackPageViewWhenAllowed();
     }
 
     disconnectedCallback() {
+      if (this._consentHandler) {
+        document.removeEventListener('consentPolicyChanged', this._consentHandler);
+        document.removeEventListener('consentPolicyInitialized', this._consentHandler);
+        window.removeEventListener('ucConsentEvent', this._consentHandler);
+      }
       document.documentElement.classList.remove('bw-google-landing-active');
       document.body?.classList.remove('bw-google-landing-active');
+    }
+
+    _trackPageViewWhenAllowed() {
+      const send = () => {
+        if (this._pageViewTracked || !this._analyticsConsent()) return;
+        this._pageViewTracked = this._track('bw_booking_page_view', {
+          source: 'google_search_landing',
+          headlineVariant: this._variant(),
+        });
+      };
+      send();
+      if (this._pageViewTracked) return;
+      this._consentHandler = send;
+      document.addEventListener('consentPolicyChanged', send);
+      document.addEventListener('consentPolicyInitialized', send);
+      window.addEventListener('ucConsentEvent', send);
     }
 
     async _loadAvailability() {
@@ -433,7 +451,28 @@
       };
     }
 
+    _currentConsentPolicy() {
+      try {
+        const manager = window.consentPolicyManager;
+        const current = manager && typeof manager.getCurrentConsentPolicy === 'function'
+          ? manager.getCurrentConsentPolicy()
+          : null;
+        if (current) return current.policy || current;
+        const match = String(document.cookie || '').match(/(?:^|;\s*)consent-policy=([^;]+)/);
+        return match ? JSON.parse(decodeURIComponent(match[1])) : {};
+      } catch {
+        return {};
+      }
+    }
+
+    _analyticsConsent() {
+      if (/^(?:localhost|127\.0\.0\.1)$/i.test(window.location.hostname)) return true;
+      const policy = this._currentConsentPolicy();
+      return policy.analytics === true || policy.anl === 1 || policy.anl === true;
+    }
+
     _track(name, detail) {
+      if (!this._analyticsConsent()) return false;
       const now = new Date().toISOString();
       const params = this._params();
       const dataLayerPayload = {
@@ -454,6 +493,9 @@
         keepalive: true,
         body: JSON.stringify({
           eventName: name,
+          consentGranted: true,
+          analyticsConsent: true,
+          consent: { analytics: true },
           timestamp: now,
           sessionId: this._sessionId(),
           pagePath: window.location.pathname,
@@ -478,6 +520,7 @@
           },
         }),
       }).catch(() => {});
+      return true;
     }
 
     _sessionId() {
