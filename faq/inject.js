@@ -202,7 +202,8 @@
   "olympiastadion-berlin": "olympiastadion-berlin",
   "prenzlauer-berg-berlin": "prenzlauer-berg-berlin",
   "berlin-layover-guide": "berlin-layover-guide",
-  "open-air-cinema-berlin": "open-air-cinema-berlin"
+  "open-air-cinema-berlin": "open-air-cinema-berlin",
+  "berlin-ticket-machines": "berlin-ticket-machines"
 };
 
   var SCHEMAS = {
@@ -9594,6 +9595,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. Kino Central sits in the courtyard of Haus Schwarzenberg on Rosenthaler Strasse, a two-minute walk from Hackescher Markt, which is where my free walking tour ends. That makes it easy to walk the historic centre in the afternoon, eat around the Hackesche Höfe, and finish the day with a film in a hidden Mitte backyard without getting back on a train. Sommerkino Kulturforum near Potsdamer Platz is the other genuinely central option."
+        }
+      }
+    ]
+  },
+  "berlin-ticket-machines": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I buy a ticket from a Berlin ticket machine?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Touch the dark screen to wake it, choose English, then pick your ticket type, for example a Single AB ticket for a normal city trip. Confirm the fare shown on screen, then pay with a card, your phone, coins, or a note. The machine prints a paper ticket. One last step that trips up most tourists: push that paper ticket into the small yellow or red validation box on the platform to stamp it before you board."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which ticket should I buy, and what does it cost in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For one normal trip across the city, buy a Single ticket AB for 4.00 euros; it is valid for 120 minutes in one direction, with changes between lines allowed. If you are only going a few stops, the Kurzstrecke short-trip ticket is 2.80 euros and covers 3 stops on the U-Bahn or S-Bahn (one change allowed) or 6 stops on a bus or tram. For a full day of sightseeing, a Day ticket AB is 11.20 euros. These are the standard VBB fares and can change, so always check the price on the screen."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do Berlin ticket machines take cards, or do I need cash?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Both. The machines accept girocard, Visa, Mastercard, Maestro, and usually Apple Pay and Google Pay, so a contactless card or phone is the easiest option. They also take coins from 5 cents up to 2 euros and notes of 5, 10, and 20 euros, but they hold only limited change, so avoid paying for a 2.80 euro ticket with a 20 euro note."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to validate a ticket I bought from the machine?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, if it is a paper single or day ticket. A machine ticket is not active until you stamp it in the small yellow or red box marked Bitte hier entwerten / Please validate here, which is on the platform near the stairs, not inside the train. The stamp prints the date, time, and station. Riding on an unstamped ticket is treated as travelling without a valid ticket and the fine is 60 euros. Tickets bought in the BVG app are already validated and do not need stamping."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are the U-Bahn (BVG) and S-Bahn (DB) machines different?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "They look different and are run by different companies, but for a tourist it does not matter which one you use. BVG machines stand on U-Bahn platforms and the red Deutsche Bahn machines stand on S-Bahn platforms. Both sell the same VBB tickets for the AB and ABC zones, and a ticket from either machine is valid on the U-Bahn, S-Bahn, tram, and bus across Berlin."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which ticket do I buy at the machine for the airport?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "BER airport is in fare Zone C, so you need a ticket that covers zones A, B, and C. Buy a Single ticket ABC for 5.00 euros for the ride, or a Day ticket ABC for 12.90 euros if you will keep travelling that day. A normal AB ticket does not reach the airport, and getting caught with the wrong zone still counts as travelling without a valid ticket."
         }
       }
     ]
