@@ -1,70 +1,64 @@
-# BerlinWalk Google Search Landing Design QA
+# BerlinWalk Global Navigation Design QA
 
-## Evidence
+**Comparison Target**
 
-- Source visual truth: `/Users/yusufucuz/.codex/generated_images/019f5f40-79aa-77a1-a605-0fef42511be6/exec-ad117358-110c-43a0-b5d1-8a964ad9c743.png`
-- Browser-rendered implementation: `/tmp/berlinwalk-google-search-landing-20260714/output/playwright/google-search-landing-20260714/local-mobile-free-tour-426x950-final.png`
-- Full-view side-by-side comparison: `/tmp/berlinwalk-google-search-landing-20260714/output/playwright/google-search-landing-20260714/mobile-comparison-final.png`
-- Mobile production state: `/tmp/berlinwalk-google-search-landing-20260714/output/playwright/google-search-landing-20260714/local-mobile-free-tour-390x844-final.png`
-- Dynamic English headline state: `/tmp/berlinwalk-google-search-landing-20260714/output/playwright/google-search-landing-20260714/local-mobile-english-tour-390x844.png`
-- Desktop first fold: `/tmp/berlinwalk-google-search-landing-20260714/output/playwright/google-search-landing-20260714/local-desktop-free-tour-1440x1000.png`
-- Desktop route and guide: `/tmp/berlinwalk-google-search-landing-20260714/output/playwright/google-search-landing-20260714/local-desktop-route-1440x1000.png`
-- Desktop FAQ and final CTA: `/tmp/berlinwalk-google-search-landing-20260714/output/playwright/google-search-landing-20260714/local-desktop-faq-1440x1000.png`
-- Tablet landscape: `/tmp/berlinwalk-google-search-landing-20260714/output/playwright/google-search-landing-20260714/local-tablet-landscape-1024x768.png`
+- Source visual truth: `/var/folders/qy/p38mnw8s6zdcgddbj_0b8z2m0000gn/T/codex-clipboard-3acf1240-eaa9-4751-bad3-8f4f7275546a.png`
+- Source intent: information architecture and menu grouping. The existing BerlinWalk wordmark, typography, trust bar, colors, and CTA treatment are intentionally retained.
+- Rendered implementation, closed desktop: `/Users/yusufucuz/Documents/New project/output/qa/global-nav-redesign-20260714/local-header/webkit-desktop/.playwright-cli/page-2026-07-14T22-18-25-572Z.png`
+- Rendered implementation, Tour dropdown: `/Users/yusufucuz/Documents/New project/output/qa/global-nav-redesign-20260714/local-header/webkit-desktop/.playwright-cli/page-2026-07-14T22-18-39-536Z.png`
+- Rendered implementation, Products dropdown: `/Users/yusufucuz/Documents/New project/output/qa/global-nav-redesign-20260714/local-header/webkit-desktop/.playwright-cli/page-2026-07-14T22-18-48-200Z.png`
+- Rendered implementation, mobile menu: `/Users/yusufucuz/Documents/New project/output/qa/global-nav-redesign-20260714/local-header/webkit-mobile/.playwright-cli/page-2026-07-14T22-19-15-083Z.png`
+- Desktop viewport/state: 1456 × 458, closed plus Tour-open and Products-open states, WebKit.
+- Mobile viewport/state: iPhone 13 emulation, 390 × 664 visible viewport, menu open with both groups initially closed, WebKit.
 
-## Comparison target
+**Comparison Evidence**
 
-- Viewport: 426 x 950 CSS px, matching the 852 x 1900 selected source at 2x density.
-- State: free-tour headline, 14 July at 11:30, first date selected, mobile first fold.
-- The source date became unavailable while QA was running. The comparison capture uses that date only as a browser-local visual fixture. All functional availability tests used the current live endpoint and its real slots.
-- Focused region comparison was not needed because the native-scale side-by-side keeps the header, typography, image crop, booking controls, CTA, fact band, and route heading readable in one comparison input.
+- Full-view comparison: `/Users/yusufucuz/Documents/New project/output/qa/global-nav-redesign-20260714/design-comparison.png`
+- Focused navigation and dropdown comparison: `/Users/yusufucuz/Documents/New project/output/qa/global-nav-redesign-20260714/design-comparison-focused.png`
+- The focused comparison is required because submenu labels, ordering, caret states, and CTA contrast are too small to judge reliably from the full-view board alone.
 
-## Findings
+**Findings**
 
 - No actionable P0, P1, or P2 differences remain.
-- [P3] The source mock has slightly softer raster antialiasing and a stylized generated BW coin. The implementation uses the real BerlinWalk coin asset and browser-rendered Montserrat. The hierarchy, dimensions, crop, palette, and interaction affordances remain faithful.
+- Information architecture: exact target order and grouping are present. Tour contains Tour Route, Meeting Point, Reviews, and The Guide. Products contains Berlin Trip Planner, Audio Tours, First-Day Rescue Plan, and Photo Missions. Games, Blog, and Berlin Hacks are direct links. Individual games and audio routes are absent from the header.
+- Fonts and typography: the implementation intentionally preserves BerlinWalk's existing Montserrat navigation and official wordmark instead of copying the schematic reference's black serif wordmark. Labels remain legible, consistently weighted, and untruncated across the tested desktop and mobile widths.
+- Spacing and layout rhythm: the desktop order, group separation, dropdown alignment, CTA separation, radii, and elevation match the structural hierarchy in the source. The existing trust strip adds brand context without changing the requested navigation hierarchy. The header switches cleanly to the mobile pattern at 980 px with no horizontal overflow.
+- Colors and visual tokens: existing BerlinWalk green, cream, and yellow tokens are retained. The yellow CTA has dark text in normal and focus states, satisfying the project contrast rule.
+- Image quality and asset fidelity: the supplied BerlinWalk wordmark asset is sharp and correctly scaled. The reference contains no other photographic or illustrative assets, and no placeholder or code-drawn replacement was introduced.
+- Copy and content: all public labels match the approved menu brief. Canonical `www.berlinwalk.com` URLs are used, including the Photo Missions canonical URL.
+- Behavior and accessibility: desktop menus work with pointer, hover, Enter, Space, Escape, outside click, and submenu selection. Closed dropdowns are removed from the accessibility tree with `visibility: hidden`; `aria-expanded` reflects state. Mobile groups are native disclosure controls, only one opens at a time, closing the overlay resets both groups, Escape restores focus to the hamburger, and body scroll lock is removed.
+- Responsiveness: Chromium passed 1440, 1280, 1024, 981, 980, 390, 375, and 360 px checks. WebKit passed desktop and iPhone 13 checks. No tested state produced horizontal overflow.
+- Wix dual-mount safety: a two-header responsive harness passed 30 active-menu transitions between 981 and 980 px in both Chromium and WebKit with `failures: []`. Exactly one overlay and two submenu portals remained under `body`, IDs stayed unique, inactive-mount removal preserved the active scroll lock, and active-mount removal released it.
 
-## Required fidelity surfaces
+**Comparison History**
 
-- Fonts and typography: Montserrat is loaded for the functional landing page. The two-line mobile H1, eyebrow, lead, proof labels, live date, time, and CTA match the selected hierarchy and wrapping.
-- Spacing and layout rhythm: header, intro, World Clock image, overlapping calendar card, fact band, and route heading align closely in the 426 x 950 comparison. The 390 x 844 view keeps the reservation CTA fully visible, with its bottom at 776 px.
-- Colors and tokens: cream `#FAFAF5`, dark green `#083511`, brand green `#1B5E20`, and yellow `#FFE600` match the target. The yellow CTA computed to `rgb(255, 230, 0)` with dark-green text `rgb(8, 53, 17)`.
-- Image quality and asset fidelity: the production page uses the real 1600 px World Clock image and real 1200 px Yusuf image. Both loaded with positive natural dimensions. The World Clock crop was tuned against the source.
-- Copy and content: the selected headline, trust proof, payment reassurance, duration, language, meeting point, route, guide, FAQ, and final CTA are present. The duration is `~2h`; no Berlin Wall route claim is made.
-- Icons: Material Symbols Rounded is used consistently. Fact-band icons use the outline variation seen in the source.
-- Accessibility and responsiveness: semantic links, buttons, details, `aria-pressed`, `aria-selected`, alt text, focus-visible styles, and reduced-motion handling are present. Horizontal page overflow is zero at 390, 1024, and 1440 px.
+1. Earlier P2 — a pointer click could close a dropdown that had just opened on hover. Fix: the first click after hover keeps the selected menu open, while a subsequent click and Enter/Space retain toggle behavior. Post-fix evidence: the final Tour and Products screenshots above plus an `aria-expanded` readback of `true` after the first click and `false` after the second.
+2. Earlier P2 — showing all mobile child links at once made the menu too dense for the visible phone viewport. Fix: Tour and Products became default-closed native disclosure groups with mutually exclusive opening and compact link spacing. Post-fix evidence: the final mobile screenshot above.
+3. Earlier P2 — Escape closed the mobile menu without returning keyboard focus. Fix: Escape, close-button, and backdrop dismissal now restore focus to the hamburger. Post-fix evidence: WebKit state readback reported `activeLabel: "Open menu"`, body overflow reset, and both disclosure groups closed.
+4. Earlier P2 — closed desktop submenus remained discoverable in the accessibility tree, and the initially unpositioned hidden sibling could produce a compositor artifact in dropdown captures. Fix: closed menus now use `visibility: hidden`, and both menus receive a safe initial position before interaction. Post-fix evidence: the focused comparison shows clean Tour and Products states, and the closed WebKit accessibility snapshot contains no submenu items.
+5. Earlier P1 — an open desktop dropdown survived a 981→980 px transition, and an open mobile overlay survived 980→981 px with body scroll still locked. Fix: viewport-mode changes now close both portal types before the responsive mount changes. Post-fix evidence: Chromium and WebKit each passed 30 alternating open-menu transitions with no stale open layer or scroll lock.
+6. Earlier P1 — Wix's two simultaneously connected responsive header instances could each create portals and could clear another instance's body scroll lock during cleanup. Fix: a visibility-scored active-instance coordinator now permits only one runtime owner, every portal ID is instance-unique, and body scroll lock is released only by its owner. Post-fix evidence: the dual-mount harness held exactly one body overlay and two body submenus, reported no duplicate IDs, preserved lock after inactive-instance removal, and fully cleaned portals after active-instance removal.
+7. Earlier P2 — `role="menu"` / `role="menuitem"` implied an application-menu keyboard model that the navigation did not implement. Fix: desktop dropdowns now use native navigation list/link semantics with `aria-expanded` and instance-unique `aria-controls` relationships. Post-fix evidence: the final accessibility snapshots expose ordinary lists and links only when the relevant disclosure is visible.
 
-## Primary interactions tested
+**Open Questions**
 
-- Live availability loaded from the production endpoint.
-- Selecting a new date updated the active date, slot, and booking session ID.
-- Selecting the 15:30 slot updated `aria-pressed`, the booking URL, and the selected session ID.
-- The booking CTA preserved `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `utm_id`, `gclid`, `gbraid`, `wbraid`, `fbclid`, `fbc`, and `fbp`.
-- `bw_booking_page_view`, `bw_booking_pick_date_click`, `bw_booking_slot_select`, and `bw_booking_next_click` were emitted in order.
-- Production interactions use the site's shared consent-gated funnel tracker, so the page view and its downstream actions keep one first-party session. The local preview keeps event-order QA available without writing production rows.
-- Tour details scrolled the route section to the top of the viewport.
-- FAQ disclosures opened correctly.
-- Free-tour and English-tour dynamic headlines rendered correctly.
-- Final clean local sessions reported zero console errors and zero warnings.
+- None. The visual reference was treated as the requested menu structure, while the established BerlinWalk brand system was preserved.
 
-## Comparison history
+**Implementation Checklist**
 
-1. Initial mobile pass found a P2 density mismatch: the H1 wrapped to three lines and the CTA was cut below the 390 x 844 first fold. Mobile typography, spacing, image crop, calendar density, and fact-band layout were tightened. Post-fix evidence: `local-mobile-free-tour-390x844-final.png`.
-2. The first matched-state comparison found a P2 proportional drift in the World Clock crop, booking-card height, date-chip widths, CTA height, and route-heading position. The image zoom, mobile spacing, chip width, card padding, CTA dimensions, and route offset were corrected. Post-fix evidence: `mobile-comparison-final.png`.
-3. Desktop QA found a P1 conversion issue: the booking CTA was below the first 1000 px viewport. The desktop hero was changed to a responsive two-column layout with the live calendar over the World Clock image. Post-fix evidence: `local-desktop-free-tour-1440x1000.png`; CTA bottom was 721 px.
-4. The 1024 px pass found a P2 proof-row wrap with a stranded divider. The proof signals now stack cleanly between 1000 and 1150 px. Post-fix evidence: `local-tablet-landscape-1024x768.png`.
+- [x] Exact desktop order and dropdown contents.
+- [x] Exact canonical link targets.
+- [x] Direct Games, Blog, and Berlin Hacks links.
+- [x] Individual game and audio-route links removed from the header.
+- [x] Keyboard and pointer interaction states.
+- [x] Mobile disclosure behavior and focus restoration.
+- [x] Breakpoint and overflow checks in Chromium and WebKit.
+- [x] Dynamic 981↔980 transition and dual Wix mount lifecycle checks in Chromium and WebKit.
+- [x] Yellow CTA contrast check.
+- [x] Browser console checked; final local WebKit navigation run had zero errors and zero warnings.
 
-## Open questions
+**Follow-up Polish**
 
-- None.
-
-## Implementation checklist
-
-- Mobile design comparison passed.
-- Responsive desktop and tablet layouts passed.
-- Live slot and tracking interactions passed.
-- Attribution continuity passed.
-- Yellow contrast rule passed.
-- Console and overflow checks passed.
+- None required for this structural change.
 
 final result: passed

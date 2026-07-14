@@ -3,46 +3,129 @@ const BW_HEADER_LOGO_URL = new URL('../assets/berlinwalk-wordmark-green.png', BW
 const BW_HEADER_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
 const BW_HEADER_LINKS = {
   home: 'https://www.berlinwalk.com/',
-  tour: 'https://www.berlinwalk.com/',
   route: 'https://www.berlinwalk.com/berlin-walking-tour-route',
-  wallTimeline: 'https://www.berlinwalk.com/berlin-wall-timeline',
   guide: 'https://www.berlinwalk.com/the-guide',
   reviews: 'https://www.berlinwalk.com/reviews',
   meetingPoint: 'https://www.berlinwalk.com/meeting-point',
   plan: 'https://www.berlinwalk.com/berlin-tools',
   planner: 'https://www.berlinwalk.com/berlin-trip-planner',
+  audioTours: 'https://www.berlinwalk.com/audio-tours',
+  photoMissions: 'https://www.berlinwalk.com/products/hidden-berlin-photo-missions',
   games: 'https://www.berlinwalk.com/games',
-  whereInBerlin: 'https://www.berlinwalk.com/games/where-in-berlin',
-  battle: 'https://www.berlinwalk.com/games/berlin-battle',
-  daySurvival: 'https://www.berlinwalk.com/games/berlin-day-survival',
-  rewind: 'https://www.berlinwalk.com/games/berlin-rewind',
-  bouncer: 'https://www.berlinwalk.com/games/berghain-bouncer',
-  smile: 'https://www.berlinwalk.com/games/berlin-smile-challenge',
   blog: 'https://www.berlinwalk.com/blog',
-  widgets: 'https://www.berlinwalk.com/widgets',
-  faq: 'https://www.berlinwalk.com/#faq',
-  firstDayRescue: 'https://www.berlinwalk.com/products/berlin-first-day-rescue-plan',
-  hiddenBerlinAudio: 'https://www.berlinwalk.com/products/hidden-berlin-audio-route',
-  deathStripAudio: 'https://www.berlinwalk.com/products/death-strip-audio-route'
+  firstDayRescue: 'https://www.berlinwalk.com/products/berlin-first-day-rescue-plan'
 };
+
+const BW_HEADER_INSTANCES = new Set();
+let BW_HEADER_ACTIVE_INSTANCE = null;
+let BW_HEADER_RECONCILE_FRAME = 0;
+let BW_HEADER_INSTANCE_SEQUENCE = 0;
+let BW_HEADER_SCROLL_LOCK_OWNER = null;
+
+function bwHeaderVisibilityScore(instance) {
+  if (!instance || !instance.isConnected) return 0;
+  let node = instance;
+  let depth = 0;
+  while (node && node.nodeType === 1 && depth < 12) {
+    const style = window.getComputedStyle(node);
+    if (
+      node.hidden ||
+      node.getAttribute('aria-hidden') === 'true' ||
+      style.display === 'none' ||
+      style.visibility === 'hidden' ||
+      Number.parseFloat(style.opacity || '1') === 0
+    ) return 0;
+    node = node.parentElement;
+    depth++;
+  }
+  const rect = instance.getBoundingClientRect();
+  if (rect.width < 2 || rect.height < 2) return 0;
+  return rect.width * rect.height;
+}
+
+function bwHeaderReconcile() {
+  BW_HEADER_RECONCILE_FRAME = 0;
+  const candidates = Array.from(BW_HEADER_INSTANCES)
+    .map((instance) => ({ instance, score: bwHeaderVisibilityScore(instance) }))
+    .filter(({ score }) => score > 0)
+    .sort((a, b) => b.score - a.score);
+  let next = candidates[0]?.instance || null;
+  const activeCandidate = candidates.find(({ instance }) => instance === BW_HEADER_ACTIVE_INSTANCE);
+  if (activeCandidate && activeCandidate.score >= (candidates[0]?.score || 0) * 0.99) {
+    next = BW_HEADER_ACTIVE_INSTANCE;
+  }
+  if (next === BW_HEADER_ACTIVE_INSTANCE) {
+    if (next && !next._runtimeActive) next._activateRuntime();
+    return;
+  }
+  const previous = BW_HEADER_ACTIVE_INSTANCE;
+  BW_HEADER_ACTIVE_INSTANCE = next;
+  if (previous) previous._deactivateRuntime();
+  if (next) next._activateRuntime();
+}
+
+function bwHeaderScheduleReconcile() {
+  if (BW_HEADER_RECONCILE_FRAME) return;
+  BW_HEADER_RECONCILE_FRAME = window.requestAnimationFrame(bwHeaderReconcile);
+}
 
 class BWHeaderElement extends HTMLElement {
   connectedCallback() {
+    if (this._connected) return;
+    this._connected = true;
+    this._instanceId = `bw-header-instance-${++BW_HEADER_INSTANCE_SEQUENCE}`;
+    this._mobileMenuId = `${this._instanceId}-mobile-menu`;
+    this._tourMenuId = `${this._instanceId}-tour-menu`;
+    this._productsMenuId = `${this._instanceId}-products-menu`;
     this._render();
-    this._setupFrame = window.requestAnimationFrame(() => {
-      this._setupFrame = null;
-      if (!this.isConnected || this._isEffectivelyHidden()) return;
-      this._setupScroll();
-      this._setupMobile();
-      this._setupDropdown();
-    });
+    BW_HEADER_INSTANCES.add(this);
+    this._visibilityChangeHandler = bwHeaderScheduleReconcile;
+    window.addEventListener('resize', this._visibilityChangeHandler, { passive: true });
+    if ('ResizeObserver' in window) {
+      this._visibilityObserver = new ResizeObserver(this._visibilityChangeHandler);
+      this._visibilityTargets = [];
+      let node = this;
+      let depth = 0;
+      while (node && node.nodeType === 1 && depth < 8) {
+        this._visibilityObserver.observe(node);
+        this._visibilityTargets.push(node);
+        node = node.parentElement;
+        depth++;
+      }
+    }
+    bwHeaderScheduleReconcile();
   }
 
   disconnectedCallback() {
-    if (this._setupFrame) {
-      window.cancelAnimationFrame(this._setupFrame);
-      this._setupFrame = null;
+    this._connected = false;
+    if (this._visibilityObserver) this._visibilityObserver.disconnect();
+    if (this._visibilityChangeHandler) window.removeEventListener('resize', this._visibilityChangeHandler);
+    this._visibilityObserver = null;
+    this._visibilityTargets = null;
+    this._visibilityChangeHandler = null;
+    BW_HEADER_INSTANCES.delete(this);
+    if (BW_HEADER_ACTIVE_INSTANCE === this) BW_HEADER_ACTIVE_INSTANCE = null;
+    this._deactivateRuntime();
+    bwHeaderScheduleReconcile();
+  }
+
+  _activateRuntime() {
+    if (this._runtimeActive || !this.isConnected || BW_HEADER_ACTIVE_INSTANCE !== this) return;
+    if (this._needsRuntimeRender) {
+      this._render();
+      this._needsRuntimeRender = false;
     }
+    this._runtimeActive = true;
+    this._setupScroll();
+    this._setupMobile();
+    this._setupDropdown();
+    this._setupViewportMode();
+  }
+
+  _deactivateRuntime() {
+    if (!this._runtimeActive) return;
+    this._runtimeActive = false;
+    if (this._setMobileOpen) this._setMobileOpen(false);
     if (this._scrollTargets && this._scrollHandler) {
       this._scrollTargets.forEach((target) => {
         if (target && target.removeEventListener) target.removeEventListener('scroll', this._scrollHandler);
@@ -57,11 +140,13 @@ class BWHeaderElement extends HTMLElement {
     }
     this._setHeaderHidden(false);
     if (this._keyHandler) document.removeEventListener('keydown', this._keyHandler);
+    if (this._dropdownKeyHandler) document.removeEventListener('keydown', this._dropdownKeyHandler);
     if (this._docClickHandler) document.removeEventListener('click', this._docClickHandler);
     if (this._dropdownReposition) {
       window.removeEventListener('resize', this._dropdownReposition);
       window.removeEventListener('scroll', this._dropdownReposition);
     }
+    if (this._viewportModeHandler) window.removeEventListener('resize', this._viewportModeHandler);
     if (this._dropdownContexts) {
       this._dropdownContexts.forEach((context) => {
         if (context.cancelClose) context.cancelClose();
@@ -77,7 +162,23 @@ class BWHeaderElement extends HTMLElement {
     } else if (this._dropdownMenu && this._dropdownMenu.parentNode === document.body) {
       document.body.removeChild(this._dropdownMenu);
     }
-    document.body.style.overflow = '';
+    if (BW_HEADER_SCROLL_LOCK_OWNER === this) {
+      BW_HEADER_SCROLL_LOCK_OWNER = null;
+      document.body.style.overflow = '';
+    }
+    this._keyHandler = null;
+    this._dropdownKeyHandler = null;
+    this._docClickHandler = null;
+    this._dropdownReposition = null;
+    this._viewportModeHandler = null;
+    this._dropdownContexts = null;
+    this._dropdownMenus = null;
+    this._mobileOverlay = null;
+    this._setMobileOpen = null;
+    this._closeDropdowns = null;
+    this._scrollTargets = null;
+    this._scrollHandler = null;
+    this._needsRuntimeRender = this.isConnected;
   }
 
   _isEffectivelyHidden() {
@@ -180,23 +281,68 @@ class BWHeaderElement extends HTMLElement {
     this._mobileOverlay = overlay;
 
     const closeBtn = overlay.querySelector('.bw-header-mobile-close');
+    const mobileSections = Array.from(overlay.querySelectorAll('details.bw-header-mobile-section'));
+    mobileSections.forEach((section) => {
+      const summary = section.querySelector('summary');
+      if (!summary) return;
+      summary.addEventListener('click', () => {
+        mobileSections.forEach((other) => {
+          if (other !== section) other.open = false;
+        });
+      });
+    });
     const setOpen = (open) => {
+      if (open && (!this._runtimeActive || BW_HEADER_ACTIVE_INSTANCE !== this)) return;
       overlay.classList.toggle('bw-header-mobile-open', open);
       btn.classList.toggle('bw-header-hamburger-open', open);
       btn.setAttribute('aria-expanded', String(open));
       overlay.setAttribute('aria-hidden', String(!open));
-      document.body.style.overflow = open ? 'hidden' : '';
+      if (!open) mobileSections.forEach((section) => { section.open = false; });
+      if (open) {
+        if (BW_HEADER_SCROLL_LOCK_OWNER && BW_HEADER_SCROLL_LOCK_OWNER !== this) {
+          BW_HEADER_SCROLL_LOCK_OWNER._setMobileOpen?.(false);
+        }
+        BW_HEADER_SCROLL_LOCK_OWNER = this;
+        document.body.style.overflow = 'hidden';
+      } else if (BW_HEADER_SCROLL_LOCK_OWNER === this) {
+        BW_HEADER_SCROLL_LOCK_OWNER = null;
+        document.body.style.overflow = '';
+      }
     };
+    this._setMobileOpen = setOpen;
     btn.addEventListener('click', () => setOpen(!overlay.classList.contains('bw-header-mobile-open')));
-    if (closeBtn) closeBtn.addEventListener('click', () => setOpen(false));
+    if (closeBtn) closeBtn.addEventListener('click', () => {
+      setOpen(false);
+      btn.focus();
+    });
     overlay.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
     overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) setOpen(false);
+      if (e.target === overlay) {
+        setOpen(false);
+        btn.focus();
+      }
     });
     this._keyHandler = (e) => {
-      if (e.key === 'Escape' && overlay.classList.contains('bw-header-mobile-open')) setOpen(false);
+      if (e.key === 'Escape' && overlay.classList.contains('bw-header-mobile-open')) {
+        e.preventDefault();
+        setOpen(false);
+        btn.focus();
+      }
     };
     document.addEventListener('keydown', this._keyHandler);
+  }
+
+  _setupViewportMode() {
+    this._mobileMode = window.innerWidth <= 980;
+    this._viewportModeHandler = () => {
+      if (!this._runtimeActive) return;
+      const nextMobileMode = window.innerWidth <= 980;
+      if (nextMobileMode === this._mobileMode) return;
+      this._mobileMode = nextMobileMode;
+      if (this._closeDropdowns) this._closeDropdowns();
+      if (this._setMobileOpen) this._setMobileOpen(false);
+    };
+    window.addEventListener('resize', this._viewportModeHandler, { passive: true });
   }
 
   _setupDropdown() {
@@ -244,6 +390,7 @@ class BWHeaderElement extends HTMLElement {
         if (open) positionMenu();
       };
       let closeTimer = null;
+      let openedByHover = false;
       const cancelClose = () => {
         if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
       };
@@ -259,24 +406,45 @@ class BWHeaderElement extends HTMLElement {
         e.stopPropagation();
         cancelClose();
         closeAll(context);
-        setOpen(!wrap.classList.contains('bw-header-dropdown-open'));
+        const isPointerClick = e.detail > 0;
+        const isOpen = wrap.classList.contains('bw-header-dropdown-open');
+        if (isPointerClick && openedByHover && isOpen) {
+          openedByHover = false;
+          setOpen(true);
+        } else {
+          openedByHover = false;
+          setOpen(!isOpen);
+        }
       });
       wrap.addEventListener('mouseenter', () => {
         cancelClose();
         closeAll(context);
+        if (!wrap.classList.contains('bw-header-dropdown-open')) openedByHover = true;
         setOpen(true);
       });
       wrap.addEventListener('mouseleave', scheduleClose);
       menu.addEventListener('mouseenter', cancelClose);
       menu.addEventListener('mouseleave', scheduleClose);
+      menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => closeAll()));
+      if (trigger.getBoundingClientRect().width > 0) positionMenu();
     });
 
     this._dropdownContexts = contexts;
+    this._closeDropdowns = () => closeAll();
     this._docClickHandler = (e) => {
       const insideDropdown = contexts.some((context) => context.wrap.contains(e.target) || context.menu.contains(e.target));
       if (!insideDropdown) closeAll();
     };
     document.addEventListener('click', this._docClickHandler);
+    this._dropdownKeyHandler = (event) => {
+      if (event.key !== 'Escape') return;
+      const openContext = contexts.find((context) => context.wrap.classList.contains('bw-header-dropdown-open'));
+      if (!openContext) return;
+      event.preventDefault();
+      closeAll();
+      openContext.trigger.focus();
+    };
+    document.addEventListener('keydown', this._dropdownKeyHandler);
     this._dropdownReposition = () => {
       contexts.forEach((context) => {
         if (context.wrap.classList.contains('bw-header-dropdown-open')) context.positionMenu();
@@ -521,6 +689,7 @@ class BWHeaderElement extends HTMLElement {
           top: 0;
           transform: translateY(-4px);
           transition: opacity 160ms ease, transform 160ms ease;
+          visibility: hidden;
           z-index: 2147483647;
         }
         .bw-header-submenu * { box-sizing: border-box; }
@@ -533,6 +702,7 @@ class BWHeaderElement extends HTMLElement {
           opacity: 1;
           pointer-events: auto;
           transform: translateY(0);
+          visibility: visible;
         }
 
         .bw-header-submenu a {
@@ -747,11 +917,11 @@ class BWHeaderElement extends HTMLElement {
           border-bottom: 1px solid rgba(255, 255, 255, 0.12);
           color: #FFFFFF;
           display: block;
-          font-size: 22px;
+          font-size: 19px;
           font-weight: 800;
           letter-spacing: 0.4px;
           line-height: 1.2;
-          padding: 18px 0;
+          padding: 14px 0;
           text-transform: none;
         }
 
@@ -760,19 +930,29 @@ class BWHeaderElement extends HTMLElement {
         }
 
         .bw-header-mobile-section-label {
-          color: rgba(255, 255, 255, 0.55);
-          font-size: 11px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+          color: #FFFFFF;
+          cursor: pointer;
+          font-size: 19px;
           font-weight: 800;
-          letter-spacing: 1.6px;
-          line-height: 1;
-          margin-top: 18px;
-          padding: 8px 0 4px;
-          text-transform: uppercase;
+          letter-spacing: 0.4px;
+          line-height: 1.2;
+          padding: 14px 0;
+          text-transform: none;
+        }
+
+        .bw-header-mobile-section-label::marker {
+          color: var(--yellow);
+          font-size: 13px;
+        }
+
+        .bw-header-mobile-section[open] .bw-header-mobile-section-label {
+          color: var(--yellow);
         }
 
         .bw-header-mobile-section a {
-          font-size: 17px;
-          padding: 14px 0;
+          font-size: 16px;
+          padding: 11px 0 11px 18px;
         }
 
         .bw-header-mobile-cta {
@@ -881,53 +1061,37 @@ class BWHeaderElement extends HTMLElement {
 
             <nav class="bw-header-nav" aria-label="Primary">
               <ul class="bw-header-nav-list">
-                <li><a href="${BW_HEADER_LINKS.tour}">Tour</a></li>
-                <li><a href="${BW_HEADER_LINKS.guide}">The Guide</a></li>
-                <li><a href="${BW_HEADER_LINKS.reviews}">Reviews</a></li>
                 <li class="bw-header-dropdown">
-                  <button class="bw-header-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false">
+                  <button class="bw-header-dropdown-trigger" type="button" aria-expanded="false" aria-controls="${this._tourMenuId}">
+                    Tour <span class="bw-header-caret" aria-hidden="true">⌄</span>
+                  </button>
+                  <ul id="${this._tourMenuId}" class="bw-header-submenu">
+                    <li><a href="${BW_HEADER_LINKS.route}">Tour Route</a></li>
+                    <li><a href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a></li>
+                    <li><a href="${BW_HEADER_LINKS.reviews}">Reviews</a></li>
+                    <li><a href="${BW_HEADER_LINKS.guide}">The Guide</a></li>
+                  </ul>
+                </li>
+                <li class="bw-header-dropdown">
+                  <button class="bw-header-dropdown-trigger" type="button" aria-expanded="false" aria-controls="${this._productsMenuId}">
                     Products <span class="bw-header-caret" aria-hidden="true">⌄</span>
                   </button>
-                  <ul class="bw-header-submenu" role="menu">
-                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.firstDayRescue}">Berlin First-Day Rescue Plan</a></li>
-                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.hiddenBerlinAudio}">🎧 Hidden Berlin Audio Route</a></li>
-                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.deathStripAudio}">🎧 Berlin Wall: The Death Strip Audio Route</a></li>
+                  <ul id="${this._productsMenuId}" class="bw-header-submenu">
+                    <li><a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner</a></li>
+                    <li><a href="${BW_HEADER_LINKS.audioTours}">Audio Tours</a></li>
+                    <li><a href="${BW_HEADER_LINKS.firstDayRescue}">First-Day Rescue Plan</a></li>
+                    <li><a href="${BW_HEADER_LINKS.photoMissions}">Photo Missions</a></li>
                   </ul>
                 </li>
-                <li class="bw-header-dropdown">
-                  <button class="bw-header-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false">
-                    Games <span class="bw-header-caret" aria-hidden="true">⌄</span>
-                  </button>
-                  <ul class="bw-header-submenu" role="menu">
-                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.games}">All Games</a></li>
-                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.whereInBerlin}">Where in Berlin Do You Belong?</a></li>
-                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.battle}">Berlin Battle</a></li>
-                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.daySurvival}">Berlin Day Survival</a></li>
-                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.rewind}">Berlin Rewind</a></li>
-                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.bouncer}">Berghain Bouncer</a></li>
-                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.smile}">Berlin Smile Challenge</a></li>
-                  </ul>
-                </li>
-                <li class="bw-header-dropdown">
-                  <button class="bw-header-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false">
-                    Resources <span class="bw-header-caret" aria-hidden="true">⌄</span>
-                  </button>
-                  <ul class="bw-header-submenu" role="menu">
-                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner</a></li>
-                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a></li>
-                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.route}">Tour Route</a></li>
-                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.wallTimeline}">Berlin Wall Timeline</a></li>
-                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.plan}">Berlin Hacks</a></li>
-                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.blog}">Blog</a></li>
-                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.widgets}">Embed Berlin Tools</a></li>
-                  </ul>
-                </li>
+                <li><a href="${BW_HEADER_LINKS.games}">Games</a></li>
+                <li><a href="${BW_HEADER_LINKS.blog}">Blog</a></li>
+                <li><a href="${BW_HEADER_LINKS.plan}">Berlin Hacks</a></li>
               </ul>
             </nav>
 
             <div class="bw-header-cta">
               <a class="bw-header-book" href="${BW_HEADER_BOOKING_URL}">Book Now</a>
-              <button class="bw-header-hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="bw-header-mobile-menu">
+              <button class="bw-header-hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="${this._mobileMenuId}">
                 <span></span><span></span><span></span>
               </button>
             </div>
@@ -938,7 +1102,7 @@ class BWHeaderElement extends HTMLElement {
           </div>
         </header>
 
-        <div id="bw-header-mobile-menu" class="bw-header-mobile" aria-hidden="true" aria-label="Mobile menu">
+        <div id="${this._mobileMenuId}" class="bw-header-mobile" aria-hidden="true" aria-label="Mobile menu">
           <div class="bw-header-mobile-inner">
             <div class="bw-header-mobile-head">
               <img src="${BW_HEADER_LOGO_URL}" alt="BerlinWalk" width="897" height="188">
@@ -946,38 +1110,25 @@ class BWHeaderElement extends HTMLElement {
             </div>
 
             <nav class="bw-header-mobile-nav" aria-label="Mobile primary">
-              <a href="${BW_HEADER_LINKS.tour}">Tour</a>
-              <a href="${BW_HEADER_LINKS.guide}">The Guide</a>
-              <a href="${BW_HEADER_LINKS.reviews}">Reviews</a>
-
-              <div class="bw-header-mobile-section">
-                <div class="bw-header-mobile-section-label">Products</div>
-                <a href="${BW_HEADER_LINKS.firstDayRescue}">Berlin First-Day Rescue Plan</a>
-                <a href="${BW_HEADER_LINKS.hiddenBerlinAudio}">🎧 Hidden Berlin Audio Route</a>
-                <a href="${BW_HEADER_LINKS.deathStripAudio}">🎧 Berlin Wall: The Death Strip Audio Route</a>
-              </div>
-
-              <div class="bw-header-mobile-section">
-                <div class="bw-header-mobile-section-label">Resources</div>
-                <a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner</a>
-                <a href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a>
+              <details class="bw-header-mobile-section">
+                <summary class="bw-header-mobile-section-label">Tour</summary>
                 <a href="${BW_HEADER_LINKS.route}">Tour Route</a>
-                <a href="${BW_HEADER_LINKS.wallTimeline}">Berlin Wall Timeline</a>
-                <a href="${BW_HEADER_LINKS.plan}">Berlin Hacks</a>
-                <a href="${BW_HEADER_LINKS.blog}">Blog</a>
-                <a href="${BW_HEADER_LINKS.widgets}">Embed Berlin Tools</a>
-              </div>
+                <a href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a>
+                <a href="${BW_HEADER_LINKS.reviews}">Reviews</a>
+                <a href="${BW_HEADER_LINKS.guide}">The Guide</a>
+              </details>
 
-              <div class="bw-header-mobile-section">
-                <div class="bw-header-mobile-section-label">Games</div>
-                <a href="${BW_HEADER_LINKS.games}">All Games</a>
-                <a href="${BW_HEADER_LINKS.whereInBerlin}">Where in Berlin Do You Belong?</a>
-                <a href="${BW_HEADER_LINKS.battle}">Berlin Battle</a>
-                <a href="${BW_HEADER_LINKS.daySurvival}">Berlin Day Survival</a>
-                <a href="${BW_HEADER_LINKS.rewind}">Berlin Rewind</a>
-                <a href="${BW_HEADER_LINKS.bouncer}">Berghain Bouncer</a>
-                <a href="${BW_HEADER_LINKS.smile}">Berlin Smile Challenge</a>
-              </div>
+              <details class="bw-header-mobile-section">
+                <summary class="bw-header-mobile-section-label">Products</summary>
+                <a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner</a>
+                <a href="${BW_HEADER_LINKS.audioTours}">Audio Tours</a>
+                <a href="${BW_HEADER_LINKS.firstDayRescue}">First-Day Rescue Plan</a>
+                <a href="${BW_HEADER_LINKS.photoMissions}">Photo Missions</a>
+              </details>
+
+              <a href="${BW_HEADER_LINKS.games}">Games</a>
+              <a href="${BW_HEADER_LINKS.blog}">Blog</a>
+              <a href="${BW_HEADER_LINKS.plan}">Berlin Hacks</a>
             </nav>
 
             <div class="bw-header-mobile-cta">
