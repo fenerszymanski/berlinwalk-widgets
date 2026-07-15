@@ -2464,5 +2464,18 @@
       "**\"Ersatzverkehr\" or \"Schienenersatzverkehr (SEV)\" means a replacement bus.** Part of the line is closed, so a bus takes over. Follow the signs to the marked bus, usually purple, and your normal ticket still covers it.",
       "**\"Endstation, bitte alle aussteigen\" means end of the line, everybody off.** If it is not the stop you wanted, you have ridden too far or taken the wrong direction. Cross to the other platform and ride back."
     ]
+  },
+  "berlin-trams-guide": {
+    "title": "Berlin Trams - Quick Summary",
+    "icon": "🚊",
+    "kicker": "BERLINWALK.COM • TOURIST TIPS",
+    "items": [
+      "**Berlin's trams live in the East.** West Berlin scrapped its last tram in 1967 and never brought it back, so almost every line runs through the old East: Alexanderplatz, Friedrichshain, Prenzlauer Berg and outward. Only the M10 and M13 now cross into the former West.",
+      "**The \"M\" lines are the ones you want.** Nine MetroTram lines (M1, M2, M4, M5, M6, M8, M10, M13, M17) run often and around the clock. The plain numbered lines are more local. For sightseeing, think M10, M1 and M2.",
+      "**A tram uses the exact same ticket as the U-Bahn and S-Bahn.** One AB single is 4.00 euro in 2026, a short hop (Kurzstrecke) is 2.80 euro, and a 24-hour AB ticket is 11.20 euro. There is no separate tram fare.",
+      "**Buy and stamp on board.** A yellow ticket machine sits mid-carriage and its tickets come already validated. If you bought a paper ticket earlier, punch it in the little box by the door the moment you step on.",
+      "**A tram is named by its final stop, not a platform.** The sign on the front reads a destination like \"Warschauer Str.\" or \"Rosenthal Nord\". Match that to the way you want to go and you are on the right one.",
+      "**The M10 is the ride worth taking for its own sake.** It rolls past Friedrichshain, the Mauerpark edge and Prenzlauer Berg above ground, which no U-Bahn tunnel will ever show you."
+    ]
   }
 }

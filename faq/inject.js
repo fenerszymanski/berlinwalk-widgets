@@ -206,7 +206,8 @@
   "berlin-ticket-machines": "berlin-ticket-machines",
   "hidden-places-central-berlin": "hidden-places-central-berlin",
   "berlin-ringbahn": "berlin-ringbahn",
-  "berlin-train-announcements": "berlin-train-announcements"
+  "berlin-train-announcements": "berlin-train-announcements",
+  "berlin-trams-guide": "berlin-trams-guide"
 };
 
   var SCHEMAS = {
@@ -9846,6 +9847,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Mostly no. On-board U-Bahn and S-Bahn announcements are almost always in German only, which is exactly why a quick decoder helps. You will sometimes see English on station displays at the airport and major hubs, and airport-bound trains may add a line in English, but do not count on an English translation of the spoken announcements."
+        }
+      }
+    ]
+  },
+  "berlin-trams-guide": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do Berlin trams use the same ticket as the U-Bahn and S-Bahn?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Berlin runs one fare system across the tram, U-Bahn, S-Bahn and bus, so any valid AB ticket works on all of them. In 2026 a single AB ride is 4.00 euro, a short trip (Kurzstrecke, up to six tram stops) is 2.80 euro, and a 24-hour AB ticket is 11.20 euro. If you are riding more than twice in a day, the 24-hour ticket almost always wins."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where do I buy a tram ticket in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can buy it on the tram itself. There is a yellow ticket machine roughly in the middle of the carriage; the newer ones take cards and phones, the older ones take coins only, and the ticket it prints is already validated. You can also buy in the BVG app before you board, which is the easiest option. Unlike on the bus, the tram driver does not sell tickets."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to validate my tram ticket?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If your ticket is not already stamped, yes. A ticket bought from the onboard machine or the app is pre-validated and ready to go. A paper ticket you bought earlier is not: stamp it in the small red or yellow box by the door the moment you get on. An unstamped ticket counts as no ticket, and the fine is 60 euro."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why are there no trams in West Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It was a political choice. After the city was divided, West Berlin decided in the 1950s to bet on buses and the U-Bahn and tore out its tram tracks, running the last West Berlin tram on 2 October 1967. The East kept and expanded its network. That is why, decades after reunification, the tram map still traces the old East almost exactly, with only the M10 and M13 reaching across the former border."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Berlin tram is best for tourists?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The M10 is the one to ride for the view: it runs above ground through Friedrichshain, past the Mauerpark edge and along Prenzlauer Berg. The M1 is the most useful, linking the Museum Island area at Am Kupfergraben to Hackescher Markt and Prenzlauer Berg. The M2 climbs straight from Alexanderplatz up into the Kollwitzplatz cafe streets."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do Berlin trams run at night?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The MetroTram lines (the ones with an M, like the M10 and M4) run 24 hours a day, every day, though less often through the small hours. The plain numbered lines mostly stop in the evening, when night buses take over. So after midnight, stick to an M line or check the BVG app for the nearest Nachtbus."
         }
       }
     ]
