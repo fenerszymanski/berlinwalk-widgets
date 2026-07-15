@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-15T02:08:08.094Z",
+  "updatedAt": "2026-07-15T06:39:14.288Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 208,
@@ -57,7 +57,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_8468d9d913ae45d9a4d0b244ab191c8b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-bvg-ticket-machine.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_8468d9d913ae45d9a4d0b244ab191c8b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-bvg-ticket-machine.jpg",
       "alt": "A yellow BVG ticket machine on a Berlin U-Bahn platform, labelled Fahrscheine Tickets.",
-      "relatedToolSlug": "berlin-zone-ticket-decoder"
+      "relatedToolSlug": "berlin-ticket-machine-simulator"
     },
     "secondary": [
       {
@@ -75,7 +75,7 @@
         "image": "https://static.wixstatic.com/media/5a08a3_cb3a52c075e0406d8a3634dd57353355~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ringbahn-bridge-s-bahn-cover.jpg",
         "thumb": "https://static.wixstatic.com/media/5a08a3_cb3a52c075e0406d8a3634dd57353355~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ringbahn-bridge-s-bahn-cover.jpg",
         "alt": "A red and ochre Berlin S-Bahn crossing the curving iron Ringbahn bridge over the Oberspree river",
-        "relatedToolSlug": "berlin-rail-decoder"
+        "relatedToolSlug": "berlin-ringbahn"
       },
       {
         "title": "Berlin Train Announcements Decoded: What the U-Bahn and S-Bahn Voice Is Saying (2026)",
@@ -92,7 +92,7 @@
         "image": "https://static.wixstatic.com/media/5a08a3_c5b335ed26f14a6a87b0d44bfba04992~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-sbahn-alexanderplatz-cover.jpg",
         "thumb": "https://static.wixstatic.com/media/5a08a3_c5b335ed26f14a6a87b0d44bfba04992~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-sbahn-alexanderplatz-cover.jpg",
         "alt": "An S-Bahn train arriving under the glass roof of Alexanderplatz station in Berlin",
-        "relatedToolSlug": "berlin-rail-decoder"
+        "relatedToolSlug": "berlin-train-announcements"
       },
       {
         "title": "Open-Air Cinema in Berlin: How to Catch a Film in English Under the Stars (2026)",
@@ -1631,7 +1631,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_8468d9d913ae45d9a4d0b244ab191c8b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-bvg-ticket-machine.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_8468d9d913ae45d9a4d0b244ab191c8b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-bvg-ticket-machine.jpg",
       "alt": "A yellow BVG ticket machine on a Berlin U-Bahn platform, labelled Fahrscheine Tickets.",
-      "relatedToolSlug": "berlin-zone-ticket-decoder"
+      "relatedToolSlug": "berlin-ticket-machine-simulator"
     },
     {
       "title": "The Berlin Ringbahn: How to Ride the S41/S42 Circle Line (2026)",
@@ -1648,7 +1648,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_cb3a52c075e0406d8a3634dd57353355~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ringbahn-bridge-s-bahn-cover.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_cb3a52c075e0406d8a3634dd57353355~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ringbahn-bridge-s-bahn-cover.jpg",
       "alt": "A red and ochre Berlin S-Bahn crossing the curving iron Ringbahn bridge over the Oberspree river",
-      "relatedToolSlug": "berlin-rail-decoder"
+      "relatedToolSlug": "berlin-ringbahn"
     },
     {
       "title": "Berlin Train Announcements Decoded: What the U-Bahn and S-Bahn Voice Is Saying (2026)",
@@ -1665,7 +1665,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_c5b335ed26f14a6a87b0d44bfba04992~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-sbahn-alexanderplatz-cover.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_c5b335ed26f14a6a87b0d44bfba04992~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-sbahn-alexanderplatz-cover.jpg",
       "alt": "An S-Bahn train arriving under the glass roof of Alexanderplatz station in Berlin",
-      "relatedToolSlug": "berlin-rail-decoder"
+      "relatedToolSlug": "berlin-train-announcements"
     },
     {
       "title": "Open-Air Cinema in Berlin: How to Catch a Film in English Under the Stars (2026)",
@@ -1837,7 +1837,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_8468d9d913ae45d9a4d0b244ab191c8b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-bvg-ticket-machine.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_8468d9d913ae45d9a4d0b244ab191c8b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-bvg-ticket-machine.jpg",
       "alt": "A yellow BVG ticket machine on a Berlin U-Bahn platform, labelled Fahrscheine Tickets.",
-      "relatedToolSlug": "berlin-zone-ticket-decoder"
+      "relatedToolSlug": "berlin-ticket-machine-simulator"
     },
     {
       "title": "The Berlin Ringbahn: How to Ride the S41/S42 Circle Line (2026)",
@@ -1854,7 +1854,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_cb3a52c075e0406d8a3634dd57353355~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ringbahn-bridge-s-bahn-cover.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_cb3a52c075e0406d8a3634dd57353355~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ringbahn-bridge-s-bahn-cover.jpg",
       "alt": "A red and ochre Berlin S-Bahn crossing the curving iron Ringbahn bridge over the Oberspree river",
-      "relatedToolSlug": "berlin-rail-decoder"
+      "relatedToolSlug": "berlin-ringbahn"
     },
     {
       "title": "Berlin Train Announcements Decoded: What the U-Bahn and S-Bahn Voice Is Saying (2026)",
@@ -1871,7 +1871,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_c5b335ed26f14a6a87b0d44bfba04992~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-sbahn-alexanderplatz-cover.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_c5b335ed26f14a6a87b0d44bfba04992~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-sbahn-alexanderplatz-cover.jpg",
       "alt": "An S-Bahn train arriving under the glass roof of Alexanderplatz station in Berlin",
-      "relatedToolSlug": "berlin-rail-decoder"
+      "relatedToolSlug": "berlin-train-announcements"
     },
     {
       "title": "Open-Air Cinema in Berlin: How to Catch a Film in English Under the Stars (2026)",

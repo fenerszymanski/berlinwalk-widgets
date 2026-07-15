@@ -3731,6 +3731,111 @@
       "relatedBlog": "/post/buy-berlin-transport-tickets-on-your-phone",
       "iconStatus": "live-wix-media",
       "cmsItemId": "e3562fe6-c0e4-4759-9295-1f0871135cf1"
+    },
+    {
+      "slug": "berlin-train-announcements",
+      "title": "Berlin Train Announcement Decoder",
+      "lead": "Ride one Berlin train and decode the German announcements you actually hear, from Zurückbleiben bitte to Ausstieg rechts and Ersatzverkehr, with the plain-English meaning and the one move each one asks you to make.",
+      "category": "Transport",
+      "image": "https://static.wixstatic.com/media/5a08a3_ec541d4ae030416cabe254b7a1f72f14~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-train-announcements/",
+      "embedHeight": 1180,
+      "hubCategory": "Transport",
+      "type": "Guide",
+      "priority": 43,
+      "tags": [
+        "announcements",
+        "Zurückbleiben bitte",
+        "U-Bahn",
+        "S-Bahn",
+        "Nächster Halt",
+        "Ausstieg",
+        "Ersatzverkehr",
+        "German",
+        "transport",
+        "BVG",
+        "Endstation"
+      ],
+      "aliases": [
+        "berlin train announcements",
+        "zuruckbleiben bitte meaning",
+        "what does the berlin train say",
+        "u-bahn announcements english",
+        "s-bahn announcements"
+      ],
+      "relatedBlog": "/post/berlin-train-announcements",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "d4b7bca4-9a7d-441a-9b08-f78a27d2f302"
+    },
+    {
+      "slug": "berlin-ringbahn",
+      "title": "Berlin Ringbahn Explorer",
+      "lead": "An interactive map of Berlin's Ringbahn, the S41 and S42 circle line locals call the Hundekopf. Tap any of the 27 stations to see which neighbourhood it opens up, or follow the ring clockwise (S41) and anticlockwise (S42).",
+      "category": "Transport",
+      "image": "https://static.wixstatic.com/media/5a08a3_079b8fac4ed244698df37f30918b87af~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-ringbahn/",
+      "embedHeight": 1500,
+      "hubCategory": "Transport",
+      "type": "Map",
+      "priority": 44,
+      "tags": [
+        "Ringbahn",
+        "S41",
+        "S42",
+        "circle line",
+        "S-Bahn",
+        "Hundekopf",
+        "stations",
+        "transport",
+        "Gesundbrunnen",
+        "Ostkreuz",
+        "Südkreuz",
+        "Westkreuz"
+      ],
+      "aliases": [
+        "berlin ringbahn",
+        "s41 s42",
+        "berlin circle line",
+        "ring line berlin",
+        "berlin ring s-bahn"
+      ],
+      "relatedBlog": "/post/berlin-ringbahn",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "de3cd310-d657-429c-afe3-9c924e143e2b"
+    },
+    {
+      "slug": "berlin-ticket-machine-simulator",
+      "title": "Berlin Ticket Machine Simulator",
+      "lead": "Practise buying a BVG ticket before you stand at a real machine in Berlin: step through the touchscreen, pick the right fare, and get a two-question nudge toward the ticket that fits your trip.",
+      "category": "Transport",
+      "image": "https://static.wixstatic.com/media/5a08a3_bd24dd96657c45b0bfb1e688e827bc37~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-ticket-machine-simulator/",
+      "embedHeight": 1200,
+      "hubCategory": "Transport",
+      "type": "Guide",
+      "priority": 45,
+      "tags": [
+        "ticket machine",
+        "BVG",
+        "Fahrausweis",
+        "single ticket",
+        "day ticket",
+        "validate",
+        "AB",
+        "ABC",
+        "transport",
+        "buy ticket"
+      ],
+      "aliases": [
+        "berlin ticket machine",
+        "how to buy a berlin ticket",
+        "bvg machine",
+        "berlin u-bahn ticket machine",
+        "buy bvg ticket"
+      ],
+      "relatedBlog": "/post/berlin-ticket-machines",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "aa6b07a3-3d5c-4e99-ad48-f380a84f3127"
     }
   ],
   "hubCategories": [
