@@ -1,3 +1,41 @@
+# Berlin Trip Planner Landing A/B Design QA
+
+**Comparison Target**
+
+- Control: the existing premium `/berlin-trip-planner` landing and its single embedded planner.
+- Value-first B: one compact product-value card immediately before that same planner, without changing the form or checkout.
+- Live B desktop card: `/Users/yusufucuz/Documents/New project/berlinwalk-widgets/.playwright-cli/element-2026-07-15T18-44-38-251Z.png`
+- Live B mobile card: `/Users/yusufucuz/Documents/New project/berlinwalk-widgets/.playwright-cli/element-2026-07-15T18-45-49-741Z.png`
+- Local full-page captures: `output/playwright/trip-planner-ab-20260715/value-first-desktop.png`, `value-first-mobile.png`, and `control-desktop.png`.
+
+**Findings**
+
+- No actionable P0, P1, or P2 difference remains.
+- Value hierarchy: the B card names a real sample route (`Alexanderplatz -> Museum Island -> Hackescher Markt`) before listing the paid plan's concrete additions. The EUR7.99 price and free-preview reassurance are visible beside the CTA on desktop and directly above it on mobile.
+- Experiment isolation: forced live B rendered exactly one `.bw-trip-value-first` and one iframe; forced control rendered zero value cards and one iframe. Both arms resolve to the same embedded planner and checkout.
+- Behavior: `Build my free preview` scrolls the planner frame to about 21px below the viewport top and focuses the active `Arrival date` field inside the iframe. It does not reset or duplicate the form.
+- Responsiveness: at 390 x 844 the B card measured 370px from x=10 to x=380 with document horizontal overflow `0`. The route panel, benefit chips, price and full-width CTA stack cleanly with no clipped text.
+- Contrast: the live B CTA computed to dark green `rgb(18,61,24)` on yellow `rgb(255,230,0)`.
+- Assignment: a normal live session kept the same `value_first` variant and assignment ID across reload; test event requests were mocked. Forced control/B sessions carried `forced_qa` and were excluded from the production report.
+- Accessibility and SEO: the value card uses a labelled region, semantic heading/list, descriptive route label and ordinary anchor CTA. Final rendered DOM had exactly one H1 in both arms.
+- Runtime: live Chromium reported zero console errors. Two pre-existing load-before-navigation `bw-measure-request` target-origin warnings appeared during the iframe height handshake; the loaded iframe, resize channel, CTA focus and form all worked normally.
+
+**Implementation Checklist**
+
+- [x] Stable 50/50 control/value-first assignment.
+- [x] Same single planner and checkout in both arms.
+- [x] Concrete route and paid value before the B form.
+- [x] Desktop and 390px mobile visual review.
+- [x] No horizontal overflow.
+- [x] Yellow CTA contrast verified from computed styles.
+- [x] B CTA scroll and input focus verified.
+- [x] Control/B QA separation and reload persistence verified.
+- [x] Live GitHub Pages source and production Wix page verified.
+
+final result: passed
+
+---
+
 # BerlinWalk Global Navigation Design QA
 
 **Comparison Target**
