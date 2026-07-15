@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Build a German Number — Berlin Prices, Platforms and Quantities</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
+    --yellow:#FFE600; --ink:#1c2a1c; --panel:#ffffff; --bone:#f4f9ec;
+    --line:#e0eccf; --shadow:0 10px 30px rgba(18,61,24,.14);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .wrap{max-width:940px;margin:0 auto;padding:4px}
+  .card{background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+  .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:20px 22px}
+  .kick{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:700;margin:0 0 6px;font-family:"IBM Plex Mono",monospace}
+  .head h1{margin:0;font-size:22px;font-weight:800;line-height:1.2}
+  .head p{margin:8px 0 0;font-size:14px;color:#e7f3e2;max-width:640px}
+  .panel{padding:20px 22px}
+  /* stage */
+  .stage{background:var(--bone);border:1px solid var(--line);border-radius:16px;padding:20px 18px;text-align:center}
+  .numeral{font-family:"IBM Plex Mono",monospace;font-size:46px;font-weight:700;color:var(--green-deep);line-height:1;margin:0}
+  .word{margin:12px 0 4px;font-size:34px;font-weight:800;line-height:1.15;word-break:break-word}
+  .word .u{color:var(--green-deep);background:var(--yellow);border-radius:6px;padding:0 4px}
+  .word .t{color:#fff;background:var(--green);border-radius:6px;padding:0 4px}
+  .word .n{color:#41643a}
+  .word .plain{color:var(--green)}
+  @media (max-width:520px){ .word{font-size:24px} .numeral{font-size:38px} }
+  .flip{display:inline-flex;align-items:center;gap:7px;margin:8px 0 0;font-size:12px;font-weight:700;color:#7a5a00;background:#fff7cc;border:1px solid #f2e08a;border-radius:999px;padding:5px 11px}
+  .flip.hide{display:none}
+  .phon{margin:12px 0 0;font-family:"IBM Plex Mono",monospace;font-size:14px;color:#55634f;font-weight:600}
+  .hearrow{margin-top:14px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .hear{border:0;background:var(--green);color:#fff;font:inherit;font-weight:700;font-size:14px;padding:10px 18px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:.12s}
+  .hear:hover{background:var(--green-deep)}
+  .hear:disabled{opacity:.5;cursor:default}
+  /* context */
+  .ctx{margin-top:14px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--lime);border-radius:10px;padding:12px 14px;font-size:13.5px;color:#34432f;text-align:left;min-height:20px}
+  .ctx b{color:var(--green)}
+  /* controls */
+  .controls{margin-top:18px}
+  label.b{display:block;font-weight:700;font-size:13px;margin:0 0 6px;color:var(--green-deep)}
+  .row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  input[type=range]{flex:1;min-width:160px;accent-color:var(--green)}
+  .numbox input{width:76px;font:inherit;font-weight:800;font-size:20px;color:var(--green);border:1px solid #d8cbab;border-radius:8px;padding:5px 8px;text-align:center;font-family:"IBM Plex Mono",monospace}
+  .presets{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0 0}
+  .presets .plabel{width:100%;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#7a8574;font-weight:700;margin-bottom:2px;font-family:"IBM Plex Mono",monospace}
+  .presets button{border:1px solid var(--soft);background:var(--bone);color:var(--green-deep);font:inherit;font-weight:600;font-size:12.5px;padding:7px 12px;border-radius:999px;cursor:pointer;transition:.12s}
+  .presets button:hover{background:var(--soft)}
+  .presets button.on{background:var(--green);color:#fff;border-color:var(--green)}
+  /* comma money mini */
+  .money{margin-top:20px;border-top:1px dashed #d8cbab;padding-top:16px}
+  .money h3{margin:0 0 4px;font-size:15px;color:var(--green-deep)}
+  .money p{margin:0 0 12px;font-size:13px;color:#4a5744}
+  .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+  .mcell{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 13px}
+  .mcell .price{font-family:"IBM Plex Mono",monospace;font-weight:700;color:var(--green-deep);font-size:17px}
+  .mcell .say{font-size:13px;font-weight:700;color:var(--green);margin-top:3px}
+  .mcell .lit{font-size:11.5px;color:#6d7a67;margin-top:2px}
+  .foot{padding:12px 22px 16px;font-size:11px;color:#7a8574;border-top:1px solid #eef3e8}
+  .foot a{color:var(--green);font-weight:700;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="head">
+      <p class="kick">German numbers • Berlin</p>
+      <h1>Build any German number</h1>
+      <p>German says the small digit first: <b>einundzwanzig</b> is literally "one-and-twenty" for 21. That flip is what trips up most visitors at a till or on a platform. Move the slider, watch the word build, and hear it.</p>
+    </div>
+    <div class="panel">
+      <div class="stage">
+        <p class="numeral" id="numeral">21</p>
+        <div class="word" id="word"></div>
+        <div class="flip" id="flip">
+          <span aria-hidden="true">&#8635;</span>
+          <span>You say the <b>unit first</b>, then the ten</span>
+        </div>
+        <p class="phon" id="phon"></p>
+        <div class="hearrow">
+          <button class="hear" id="hear" type="button"><span aria-hidden="true">&#9658;</span> Hear it in German</button>
+        </div>
+        <div class="ctx" id="ctx"></div>
+      </div>
+
+      <div class="controls">
+        <label class="b" for="rng">Pick a number (0&ndash;100)</label>
+        <div class="row">
+          <input type="range" id="rng" min="0" max="100" step="1" value="21" />
+          <span class="numbox"><input type="number" id="num" min="0" max="100" value="21" /></span>
+        </div>
+        <div class="presets" id="presets">
+          <span class="plabel">Real Berlin numbers to try</span>
+          <button data-n="4">Single ticket &euro;4</button>
+          <button data-n="16">Gleis 16</button>
+          <button data-n="8">The U8 line</button>
+          <button data-n="2">2 Bier bitte</button>
+          <button data-n="25">25 cent Pfand</button>
+          <button data-n="22">Hausnummer 22</button>
+          <button data-n="67">67 (the flip trap)</button>
+        </div>
+      </div>
+
+      <div class="money">
+        <h3>Prices: the comma is the cents</h3>
+        <p>A German price tag uses a comma, not a dot, and the euros and cents are often said as two numbers with no "and" between them.</p>
+        <div class="mgrid">
+          <div class="mcell">
+            <div class="price">3,50 &euro;</div>
+            <div class="say">drei fünfzig</div>
+            <div class="lit">"three fifty" = 3 euros 50 cents</div>
+          </div>
+          <div class="mcell">
+            <div class="price">4,00 &euro;</div>
+            <div class="say">vier Euro</div>
+            <div class="lit">a single AB ticket in 2026</div>
+          </div>
+          <div class="mcell">
+            <div class="price">2,80 &euro;</div>
+            <div class="say">zwei achtzig</div>
+            <div class="lit">the Kurzstrecke short hop</div>
+          </div>
+          <div class="mcell">
+            <div class="price">0,25 &euro;</div>
+            <div class="say">fünfundzwanzig Cent</div>
+            <div class="lit">the Pfand on a can or bottle</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="foot">
+      Numbers here are standard High German. In a fast Berlin accent you will also hear <b>fuffzich</b> for fünfzig and <b>zwo</b> for zwei on train platforms. <a href="https://www.berlinwalk.com/post/german-numbers-for-tourists-berlin" target="_blank" rel="noopener">Read the full guide &rarr;</a>
+    </div>
+  </div>
+</div>
+<script defer src="../js/brand.js"></script>
+<script>
+(function(){
+  var ONES = ['null','eins','zwei','drei','vier','fünf','sechs','sieben','acht','neun'];
+  // unit word used as a prefix in compounds (1 becomes "ein", not "eins")
+  var PREFIX = ['','ein','zwei','drei','vier','fünf','sechs','sieben','acht','neun'];
+  var TEENS = ['zehn','elf','zwölf','dreizehn','vierzehn','fünfzehn','sechzehn','siebzehn','achtzehn','neunzehn'];
+  var TENS = {20:'zwanzig',30:'dreißig',40:'vierzig',50:'fünfzig',60:'sechzig',70:'siebzig',80:'achtzig',90:'neunzig'};
+
+  var PH_ONES = {0:'nool',1:'eyns',2:'tsvy',3:'dry',4:'feer',5:'fuenf',6:'zeks',7:'ZEE-ben',8:'akht',9:'noyn'};
+  var PH_PREFIX = {1:'eyn',2:'tsvy',3:'dry',4:'feer',5:'fuenf',6:'zeks',7:'ZEE-ben',8:'akht',9:'noyn'};
+  var PH_TEENS = ['tsayn','elf','tsverlf','DRY-tsayn','FEER-tsayn','FUENF-tsayn','ZEK-tsayn','ZEEP-tsayn','AKHT-tsayn','NOYN-tsayn'];
+  var PH_TENS = {20:'TSVAN-tsish',30:'DRY-sish',40:'FEER-tsish',50:'FUENF-tsish',60:'ZEK-tsish',70:'ZEEP-tsish',80:'AKH-tsish',90:'NOYN-tsish'};
+
+  // Berlin context lines for specific numbers
+  var CTX = {
+    0:'Zero is <b>null</b>. You will hear it in phone numbers and scores, said one digit at a time.',
+    2:'On a platform the announcer often says <b>zwo</b> instead of zwei, so 2 and 3 do not sound alike. "Zwei Bier bitte" is two beers, please.',
+    4:'A single AB ticket costs <b>vier Euro</b> in 2026. Simple: no flip, no und.',
+    8:'The <b>U8</b> line is said "U acht". U and S line numbers are just the plain digit: U1 is "U eins", S7 is "S sieben".',
+    11:'Elf is one of the odd ones: not "einzehn". Elf and zwölf (12) have their own words.',
+    16:'A platform is a <b>Gleis</b>. "Gleis sechzehn" is track 16 at Berlin Hauptbahnhof. Note sechzehn drops the s from sechs.',
+    17:'Siebzehn drops the -en from sieben. The same happens at siebzig (70).',
+    22:'A Berlin <b>Hausnummer</b> like 22 is "zweiundzwanzig". On many old streets the numbers run up one side and back down the other, so 22 can sit opposite a much higher number.',
+    25:'The <b>Pfand</b> deposit on a can or single-use bottle is 25 cent: "fünfundzwanzig Cent". You get it back at the machine.',
+    30:'Dreißig is the spelling trap: it ends in -ßig, not -zig like all the other tens.',
+    67:'This is the classic flip trap: 67 is <b>siebenundsechzig</b>, "seven-and-sixty". Your brain hears the 7 first and wants to write 76.',
+    100:'Hundert (or einhundert) is where the tens end. From here prices are usually said as euros and cents, not one long number.'
+  };
+
+  var rng = document.getElementById('rng');
+  var num = document.getElementById('num');
+  var presets = document.getElementById('presets');
+  var numeralEl = document.getElementById('numeral');
+  var wordEl = document.getElementById('word');
+  var flipEl = document.getElementById('flip');
+  var phonEl = document.getElementById('phon');
+  var ctxEl = document.getElementById('ctx');
+  var hearBtn = document.getElementById('hear');
+  var current = 21;
+
+  function span(cls, text){ return '<span class="'+cls+'">'+text+'</span>'; }
+
+  // returns {plain, html, flip, phon}
+  function build(n){
+    if (n <= 9) return { plain: ONES[n], html: span('plain', ONES[n]), flip:false, phon: PH_ONES[n] };
+    if (n <= 19) {
+      var i = n - 10;
+      // teens 13-19 also put the small digit first (drei-zehn), highlight it
+      if (n >= 13) {
+        var stem = TEENS[i].replace('zehn','');
+        return { plain: TEENS[i], html: span('u', stem) + span('n','zehn'), flip:true, phon: PH_TEENS[i] };
+      }
+      return { plain: TEENS[i], html: span('plain', TEENS[i]), flip:false, phon: PH_TEENS[i] };
+    }
+    if (n === 100) return { plain:'(ein)hundert', html: span('plain','(ein)hundert'), flip:false, phon:'(eyn)-HOON-dert' };
+    var tens = Math.floor(n/10)*10;
+    var unit = n % 10;
+    if (unit === 0) return { plain: TENS[tens], html: span('t', TENS[tens]), flip:false, phon: PH_TENS[tens] };
+    var word = PREFIX[unit] + 'und' + TENS[tens];
+    var html = span('u', PREFIX[unit]) + span('n','und') + span('t', TENS[tens]);
+    var phon = PH_PREFIX[unit] + '-oont-' + PH_TENS[tens];
+    return { plain: word, html: html, flip:true, phon: phon };
+  }
+
+  function update(n){
+    n = Math.max(0, Math.min(100, Math.round(n||0)));
+    current = n;
+    var b = build(n);
+    numeralEl.textContent = n;
+    wordEl.innerHTML = b.html;
+    phonEl.textContent = 'say it like: ' + b.phon;
+    flipEl.classList.toggle('hide', !b.flip);
+    ctxEl.innerHTML = CTX[n] || defaultCtx(n, b);
+    if (String(rng.value) !== String(n)) rng.value = n;
+    if (String(num.value) !== String(n)) num.value = n;
+    Array.prototype.forEach.call(presets.querySelectorAll('button'), function(btn){
+      btn.classList.toggle('on', Number(btn.getAttribute('data-n')) === n);
+    });
+  }
+
+  function defaultCtx(n, b){
+    if (b.flip) return 'In German you say <b>' + b.plain + '</b>: the unit digit comes first, then the ten, joined by und. Read it right to left and it lines up with English.';
+    if (n <= 12) return '<b>' + b.plain + '</b> is a single word you just learn. No flip until you pass twelve.';
+    return '<b>' + b.plain + '</b>. A round ten, so nothing gets flipped.';
+  }
+
+  // Speech
+  var canSpeak = 'speechSynthesis' in window;
+  if (!canSpeak) { hearBtn.disabled = true; hearBtn.innerHTML = 'Audio not supported here'; }
+  function pickGermanVoice(){
+    var voices = window.speechSynthesis.getVoices() || [];
+    return voices.filter(function(v){ return /de(-|_)/i.test(v.lang); })[0] || null;
+  }
+  function speak(){
+    if (!canSpeak) return;
+    try {
+      window.speechSynthesis.cancel();
+      var b = build(current);
+      var u = new SpeechSynthesisUtterance(b.plain.replace(/[()]/g,''));
+      u.lang = 'de-DE'; u.rate = 0.85;
+      var v = pickGermanVoice(); if (v) u.voice = v;
+      window.speechSynthesis.speak(u);
+    } catch(e){}
+  }
+  hearBtn.addEventListener('click', speak);
+  if (canSpeak && typeof window.speechSynthesis.onvoiceschanged !== 'undefined') {
+    window.speechSynthesis.onvoiceschanged = function(){};
+  }
+
+  rng.addEventListener('input', function(){ update(Number(rng.value)); });
+  num.addEventListener('input', function(){ update(Number(num.value)); });
+  presets.addEventListener('click', function(e){
+    var btn = e.target.closest('button'); if(!btn) return;
+    update(Number(btn.getAttribute('data-n')));
+  });
+  update(21);
+})();
+</script>
+</body>
+</html>

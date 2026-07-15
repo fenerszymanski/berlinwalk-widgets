@@ -212,7 +212,8 @@
   "2-days-in-berlin-itinerary": "2-days-in-berlin-itinerary",
   "weekend-in-berlin-48-hour-itinerary": "weekend-in-berlin-48-hour-itinerary",
   "berlin-audio-guide-app-vs-no-app": "berlin-audio-guide-app-vs-no-app",
-  "self-guided-berlin-walking-tour-audio-guide": "self-guided-berlin-walking-tour-audio-guide"
+  "self-guided-berlin-walking-tour-audio-guide": "self-guided-berlin-walking-tour-audio-guide",
+  "german-numbers-for-tourists-berlin": "german-numbers-for-tourists-berlin"
 };
 
   var SCHEMAS = {
@@ -10208,6 +10209,68 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Pause before reading names or memorial panels, keep one ear free near roads and cycle lanes, and do not turn the site into a rapid photo checklist. Audio should add context without making the phone more important than the place."
+        }
+      }
+    ]
+  },
+  "german-numbers-for-tourists-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why do Germans say numbers backwards?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "German puts the unit digit before the ten and joins them with und. So 21 is einundzwanzig (\"one-and-twenty\") and 67 is siebenundsechzig (\"seven-and-sixty\"). It is not random: it is the old \"four and twenty blackbirds\" order that English mostly dropped. The trick is to read the German word right to left, and it lines up with the way you already think."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you say prices in German?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A German price tag uses a comma for the decimal, so 3,50 € is three euros fifty cents. Out loud it is usually said as two numbers with no \"and\": \"drei fünfzig.\" A round price like 4,00 € is just \"vier Euro.\" Watch the separators: a comma is cents, and a dot is the thousands separator, so 1.000 means one thousand."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does Gleis mean on a Berlin station sign?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Gleis means platform or track. \"Gleis sechzehn\" is track 16. At Berlin Hauptbahnhof the regional and long-distance platforms are numbered, and the number you need is on your ticket or the departure board. U-Bahn and S-Bahn lines are said as the plain digit, so U8 is \"U acht\" and S7 is \"S sieben.\""
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to understand spoken German to buy a ticket?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Every BVG and S-Bahn ticket machine has an English option and shows the price on the screen as digits, so you never have to decode a spoken number to pay. Knowing the numbers just helps when a person at a market or bakery says the total out loud. See the step-by-step machine guide for the buying flow."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the German numbers 1 to 10?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "eins (1), zwei (2), drei (3), vier (4), fünf (5), sechs (6), sieben (7), acht (8), neun (9), zehn (10). Then elf (11) and zwölf (12) have their own words before the pattern settles into dreizehn (13), vierzehn (14) and so on. Zero is null."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do I sometimes hear \"zwo\" instead of \"zwei\"?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "On train platforms and on the phone, Germans often say zwo for 2 so it cannot be confused with drei (3), which can sound similar over a loudspeaker. It means exactly the same thing. You will hear it in announcements like \"Gleis zwo\" for platform 2."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is Pfand and how much is it?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Pfand is a refundable deposit added to most drink containers. A single-use can or plastic bottle carries 25 cent (\"fünfundzwanzig Cent\"), and refillable bottles carry 8 or 15 cent. You pay it at the till and get it back by feeding the empty into a return machine at any supermarket."
         }
       }
     ]
