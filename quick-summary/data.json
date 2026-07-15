@@ -2516,5 +2516,31 @@
       "**Use Sunday for Bernauer Straße and Mauerpark.** Start at Nordbahnhof, read the preserved border landscape, then continue to the Sunday flea market and weather-dependent afternoon karaoke.",
       "**Keep a real departure buffer.** An early Sunday train or flight means leaving Mauerpark before the afternoon develops. A later departure makes Prenzlauer Berg lunch or karaoke possible without rushing."
     ]
+  },
+  "berlin-audio-guide-app-vs-no-app": {
+    "title": "Berlin Audio Guide App vs No-App - Quick Summary",
+    "icon": "🎧",
+    "kicker": "BERLINWALK.COM • AUDIO GUIDES",
+    "items": [
+      "**Use an audio guide app when the platform is the point.** A large catalogue, GPS triggers, integrated maps and several cities in one account can justify the install, login and storage.",
+      "**Use a no-app browser route for one focused Berlin walk.** It opens on the phone you already have and removes the app-store, account and notification layer before the first chapter.",
+      "**Save the MP3 and route card on Wi-Fi.** The browser is the convenient front door; the downloaded files are the fallback when signal becomes weak outside a station or memorial site.",
+      "**Offline maps do not solve every walking problem.** Google notes that walking and public-transport directions are unavailable offline, so keep named stops and route-card directions as well as the map.",
+      "**All five BerlinWalk paid routes cost €4.99.** Hidden Berlin, Berlin Wall, Medieval Berlin, Third Reich Berlin and Kreuzberg Street Art use the same browser-plus-backup format.",
+      "**My recommendation:** use an app for a multi-city catalogue. For one Berlin route this afternoon, open the browser route, download the backup and put the phone away between chapters."
+    ]
+  },
+  "self-guided-berlin-walking-tour-audio-guide": {
+    "title": "Self-Guided Berlin Walking Tour with Audio - Quick Summary",
+    "icon": "🗺️",
+    "kicker": "BERLINWALK.COM • TOUR ROUTE",
+    "items": [
+      "**Choose the route by its real start and finish, not only by the topic.** Nordbahnhof, Anhalter Bahnhof, the World Clock, the Reichstag and East Side Gallery sit in different parts of Berlin.",
+      "**A useful audio walk is more than an MP3.** It needs a named starting point, short place-linked chapters, written directions or map links, an honest time range and an offline backup.",
+      "**The five paid routes cost €4.99 each.** Walking times range from 75 to 120 minutes: Medieval Berlin is shortest, while Hidden Berlin, Third Reich Berlin and Kreuzberg can take closer to two hours.",
+      "**Add 30 minutes before any hard deadline.** Exhibitions, photographs, memorial panels, construction and station exits can turn a 90-minute route into a longer walk.",
+      "**Use a live guide for first-day orientation and questions.** Use audio later for one focused subject at your own pace; the free tour does not follow the full Berlin Wall route.",
+      "**Prepare the evening before.** Save the start, finish and return connection, download the audio and route card on Wi-Fi, charge the phone and keep one ear free at crossings."
+    ]
   }
 }

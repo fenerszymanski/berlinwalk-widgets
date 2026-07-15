@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Audio Route Map</title>
+  <meta name="description" content="Compare the real start and finish of five Berlin audio walks and a free sampler on an interactive map.">
+  <meta name="robots" content="noindex,follow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    :root {
+      --green: #1b5e20;
+      --green-dark: #0b2f14;
+      --green-deep: #061d0c;
+      --yellow: #ffe600;
+      --lime: #7cb342;
+      --cream: #fafaf5;
+      --ink: #212121;
+      --muted: #626962;
+      --line: rgba(27, 94, 32, .22);
+      --white: #fff;
+    }
+
+    * { box-sizing: border-box; }
+    html { background: var(--cream); }
+    body {
+      margin: 0;
+      min-width: 0;
+      overflow-x: hidden;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: "Space Grotesk", Montserrat, Arial, sans-serif;
+    }
+    button, a { font: inherit; }
+    [hidden] { display: none !important; }
+
+    .route-atlas {
+      width: min(1160px, 100%);
+      margin: 0 auto;
+      border: 1px solid var(--line);
+      background: var(--white);
+      box-shadow: 0 24px 70px rgba(10, 47, 20, .12);
+      overflow: hidden;
+    }
+
+    .atlas-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, .65fr);
+      gap: 24px;
+      align-items: end;
+      padding: clamp(28px, 5vw, 58px);
+      background: var(--green-deep);
+      color: var(--white);
+    }
+    .eyebrow { margin: 0 0 12px; color: var(--yellow); font: 600 12px/1.25 "IBM Plex Mono", monospace; letter-spacing: .16em; text-transform: uppercase; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: 13px; font-family: Fraunces, Georgia, serif; font-size: clamp(39px, 6vw, 66px); line-height: 1; letter-spacing: -.035em; }
+    .atlas-head p:last-child { margin: 0; color: rgba(255,255,255,.78); line-height: 1.6; }
+    .map-note { padding: 18px; border-left: 4px solid var(--yellow); background: rgba(255,255,255,.08); }
+    .map-note strong { display: block; margin-bottom: 6px; color: var(--yellow); }
+    .map-note span { color: rgba(255,255,255,.78); font-size: 14px; line-height: 1.5; }
+
+    .route-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 14px clamp(18px, 4vw, 46px);
+      border-bottom: 1px solid var(--line);
+      background: #f2f4eb;
+      scrollbar-width: thin;
+    }
+    .route-tab {
+      flex: 0 0 auto;
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 99px;
+      padding: 10px 15px;
+      background: var(--white);
+      color: var(--green-dark);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .route-tab[aria-pressed="true"] { border-color: var(--yellow); background: var(--yellow); color: var(--green-dark); }
+    .route-tab:focus-visible, .route-card:focus-visible, .credits-btn:focus-visible, .close-btn:focus-visible, .route-link:focus-visible {
+      outline: 3px solid var(--lime);
+      outline-offset: 2px;
+    }
+
+    .atlas-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(330px, .75fr); min-height: 600px; }
+    .map-shell { position: relative; min-width: 0; min-height: 600px; background: #dde6d7; }
+    #map { position: absolute; inset: 0; width: 100%; min-height: 600px; }
+    .map-fallback { position: absolute; inset: 0; z-index: 10; display: grid; place-items: center; padding: 30px; background: #eef2e8; text-align: center; }
+    .map-fallback strong { display: block; margin-bottom: 7px; color: var(--green-dark); font-size: 20px; }
+    .map-fallback p { margin: 0; color: var(--muted); line-height: 1.5; }
+
+    .route-panel { min-width: 0; padding: 24px; border-left: 1px solid var(--line); background: var(--cream); }
+    .route-panel-head { margin-bottom: 17px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+    .route-panel-head h2 { margin-bottom: 7px; color: var(--green-dark); font-family: Fraunces, Georgia, serif; font-size: 31px; line-height: 1.06; }
+    .route-panel-head p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
+    .route-list { display: grid; gap: 10px; }
+    .route-card {
+      width: 100%;
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--route-color, var(--green));
+      padding: 15px;
+      background: var(--white);
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+    }
+    .route-card[aria-current="true"] { border-color: var(--green); border-left-color: var(--route-color, var(--green)); box-shadow: 0 10px 24px rgba(27,94,32,.12); }
+    .route-top { display: flex; align-items: start; justify-content: space-between; gap: 10px; margin-bottom: 7px; }
+    .route-top strong { color: var(--green-dark); font-size: 16px; line-height: 1.25; }
+    .price { flex: 0 0 auto; padding: 4px 7px; background: var(--yellow); color: var(--green-dark); font: 700 11px/1.2 "IBM Plex Mono", monospace; }
+    .route-path { display: block; margin-bottom: 5px; color: var(--ink); font-size: 13px; font-weight: 650; }
+    .route-meta { display: block; color: var(--muted); font-size: 12px; line-height: 1.4; }
+
+    .selection {
+      margin-top: 18px;
+      padding: 18px;
+      border-top: 5px solid var(--yellow);
+      background: var(--green-dark);
+      color: var(--white);
+    }
+    .selection .eyebrow { margin-bottom: 8px; }
+    .selection h3 { margin-bottom: 7px; font-size: 22px; }
+    .selection p { margin-bottom: 14px; color: rgba(255,255,255,.76); font-size: 14px; line-height: 1.5; }
+    .route-link {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 15px;
+      background: var(--yellow);
+      color: var(--green-dark) !important;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 18px;
+      align-items: center;
+      padding: 16px clamp(18px, 4vw, 46px);
+      border-top: 1px solid var(--line);
+      background: var(--white);
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .legend span { display: inline-flex; align-items: center; gap: 7px; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px rgba(27,94,32,.16); }
+    .dash { width: 28px; border-top: 3px dashed var(--green); }
+    .widget-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px clamp(18px, 4vw, 46px); border-top: 1px solid var(--line); background: #f2f4eb; }
+    .widget-footer p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .credits-btn, .close-btn { min-height: 44px; border: 1px solid var(--green); padding: 10px 15px; background: transparent; color: var(--green-dark); font-weight: 700; cursor: pointer; }
+
+    .credits-layer { position: fixed; inset: 0; z-index: 10000; display: grid; place-items: center; padding: 18px; background: rgba(2,18,7,.75); }
+    .credits-panel { width: min(700px, 100%); max-height: min(76vh, 620px); overflow: auto; padding: 24px; border-top: 7px solid var(--yellow); background: var(--cream); box-shadow: 0 30px 90px rgba(0,0,0,.35); }
+    .credits-head { display: flex; align-items: start; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+    .credits-head h2 { margin: 0; color: var(--green-dark); font-family: Fraunces, Georgia, serif; font-size: 30px; }
+    .credits-list { margin: 0; padding-left: 20px; color: var(--muted); }
+    .credits-list li { margin: 0 0 10px; line-height: 1.5; }
+    .credits-list a { color: var(--green); font-weight: 700; }
+
+    .leaflet-control-attribution { font-size: 10px; }
+    .leaflet-popup-content-wrapper { border-radius: 0; font-family: "Space Grotesk", sans-serif; }
+    .leaflet-popup-content { margin: 12px 14px; line-height: 1.4; }
+    .map-pin { display: grid; place-items: center; width: 30px !important; height: 30px !important; margin: -15px 0 0 -15px !important; border: 3px solid #fff; border-radius: 50%; background: var(--pin-color, var(--green)); color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,.3); font: 700 11px/1 "IBM Plex Mono", monospace; }
+
+    @media (max-width: 860px) {
+      .atlas-head { grid-template-columns: 1fr; }
+      .atlas-grid { grid-template-columns: 1fr; }
+      .map-shell, #map { min-height: 430px; }
+      .route-panel { border-left: 0; border-top: 1px solid var(--line); }
+      .route-list { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .atlas-head { padding: 28px 20px; }
+      h1 { font-size: 38px; }
+      .map-shell, #map { min-height: 360px; }
+      .route-panel { padding: 20px 16px; }
+      .route-list { grid-template-columns: 1fr; }
+      .widget-footer { align-items: start; flex-direction: column; }
+      .credits-btn { width: 100%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="route-atlas" aria-labelledby="route-atlas-title">
+    <header class="atlas-head">
+      <div>
+        <p class="eyebrow">Berlin audio route atlas</p>
+        <h1 id="route-atlas-title">See where the walk fits.</h1>
+        <p>Compare the real start and finish before choosing by subject. Tap a route to move the map and check the handoff to the next part of your day.</p>
+      </div>
+      <aside class="map-note">
+        <strong>Orientation, not directions</strong>
+        <span>The dashed lines show each route's span across Berlin. Open the product page for the exact walking order and map links.</span>
+      </aside>
+    </header>
+
+    <nav class="route-tabs" aria-label="Audio route map filter">
+      <button class="route-tab" type="button" aria-pressed="true" data-route="all">All routes</button>
+      <button class="route-tab" type="button" aria-pressed="false" data-route="hidden">Hidden</button>
+      <button class="route-tab" type="button" aria-pressed="false" data-route="wall">Berlin Wall</button>
+      <button class="route-tab" type="button" aria-pressed="false" data-route="medieval">Medieval</button>
+      <button class="route-tab" type="button" aria-pressed="false" data-route="third-reich">Third Reich</button>
+      <button class="route-tab" type="button" aria-pressed="false" data-route="kreuzberg">Street art</button>
+      <button class="route-tab" type="button" aria-pressed="false" data-route="sample">Free sampler</button>
+    </nav>
+
+    <div class="atlas-grid">
+      <section class="map-shell" aria-label="Interactive map of Berlin audio route starts and finishes">
+        <div id="map"></div>
+        <div class="map-fallback" id="mapFallback" hidden>
+          <div><strong>The map did not load.</strong><p>The route list still gives every start, finish and product link. Reload when you have a stable connection.</p></div>
+        </div>
+      </section>
+
+      <aside class="route-panel">
+        <div class="route-panel-head">
+          <p class="eyebrow" style="color:var(--green)">Six starting lines</p>
+          <h2>Choose by geography.</h2>
+          <p>A route near your current station usually beats a stronger theme on the other side of the city.</p>
+        </div>
+        <div class="route-list" id="routeList"></div>
+        <div class="selection" aria-live="polite">
+          <p class="eyebrow">Selected route</p>
+          <h3 id="selectionTitle">All Berlin audio walks</h3>
+          <p id="selectionCopy">The full map shows how the routes occupy different parts of the city. Choose one to inspect its start and finish.</p>
+          <a class="route-link" id="selectionLink" href="https://www.berlinwalk.com/audio-tours" target="_top">Compare all routes</a>
+        </div>
+      </aside>
+    </div>
+
+    <div class="legend" aria-label="Map legend">
+      <span><i class="dot" aria-hidden="true"></i> Named start or finish</span>
+      <span><i class="dash" aria-hidden="true"></i> Route span, not the exact path</span>
+      <span>Map data © OpenStreetMap contributors</span>
+    </div>
+    <footer class="widget-footer">
+      <p>Times are walking ranges from the current BerlinWalk catalogue. Check each route page before setting off.</p>
+      <button class="credits-btn" id="creditsOpen" type="button" aria-expanded="false" aria-controls="creditsLayer">Image credits</button>
+    </footer>
+  </main>
+
+  <div class="credits-layer" id="creditsLayer" hidden>
+    <section class="credits-panel" role="dialog" aria-modal="true" aria-labelledby="creditsTitle">
+      <div class="credits-head">
+        <h2 id="creditsTitle">Image and map credits</h2>
+        <button class="close-btn" id="creditsClose" type="button">Close</button>
+      </div>
+      <ul class="credits-list">
+        <li>Interactive map data and tiles: <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>.</li>
+        <li>Berlin Wall Memorial border strip: Pedelecs, Wikimedia Commons, CC BY-SA 3.0.</li>
+        <li>S Nordbahnhof: Burkhard Muecke, Wikimedia Commons, CC BY-SA 4.0.</li>
+        <li>Anhalter Bahnhof: Carlos Delgado, Wikimedia Commons, CC BY-SA 4.0.</li>
+        <li>Hackescher Markt station: BerlinWalk / Yusuf local photo asset.</li>
+        <li>Mauerpark path: Ansgar Koreng, Wikimedia Commons, CC BY-SA 3.0 DE.</li>
+      </ul>
+    </section>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script>
+    (function () {
+      var routes = [
+        {
+          id: 'hidden', name: 'Hidden Berlin', theme: 'Lost places and divided-city traces',
+          start: 'Anhalter Bahnhof', finish: 'Alexanderplatz', time: '90-120 min', price: '€4.99', color: '#1b5e20',
+          points: [[52.50312, 13.38178], [52.52133, 13.41331]],
+          url: 'https://www.berlinwalk.com/products/hidden-berlin-audio-route'
+        },
+        {
+          id: 'wall', name: 'Berlin Wall', theme: 'Bernauer Strasse and the former border strip',
+          start: 'S Nordbahnhof', finish: 'Mauerpark', time: 'about 90 min', price: '€4.99', color: '#365f91',
+          points: [[52.53215, 13.38710], [52.54332, 13.40238]],
+          url: 'https://www.berlinwalk.com/products/death-strip-audio-route'
+        },
+        {
+          id: 'medieval', name: 'Medieval Berlin', theme: 'Berlin-Cölln origins and Nikolaiviertel',
+          start: 'World Clock', finish: 'Lustgarten', time: '75-90 min', price: '€4.99', color: '#9b6b18',
+          points: [[52.52133, 13.41331], [52.51811, 13.39972]],
+          url: 'https://www.berlinwalk.com/products/medieval-berlin-audio-tour'
+        },
+        {
+          id: 'third-reich', name: 'Third Reich Berlin', theme: 'Power, persecution and resistance',
+          start: 'Reichstag', finish: 'Topography of Terror', time: '100-120 min', price: '€4.99', color: '#7f4038',
+          points: [[52.51862, 13.37618], [52.50684, 13.38254]],
+          url: 'https://www.berlinwalk.com/products/third-reich-berlin-audio-tour'
+        },
+        {
+          id: 'kreuzberg', name: 'Kreuzberg Street Art', theme: 'Murals, protest and neighbourhood change',
+          start: 'East Side Gallery', finish: 'Kottbusser Tor', time: 'about 120 min', price: '€4.99', color: '#8f2d73',
+          points: [[52.50173, 13.44501], [52.49907, 13.41833]],
+          url: 'https://www.berlinwalk.com/products/kreuzberg-street-art-audio-tour'
+        },
+        {
+          id: 'sample', name: 'Berlin in 9 Minutes', theme: 'A free test of the format',
+          start: 'World Clock', finish: 'Museum Island', time: 'about 9 min audio', price: 'Free', color: '#5b7f24',
+          points: [[52.52133, 13.41331], [52.51691, 13.40102]],
+          url: 'https://www.berlinwalk.com/tools/free-berlin-audio-tour'
+        }
+      ];
+
+      var list = document.getElementById('routeList');
+      routes.forEach(function (route) {
+        var button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'route-card';
+        button.setAttribute('data-route', route.id);
+        button.setAttribute('aria-current', 'false');
+        button.style.setProperty('--route-color', route.color);
+        button.innerHTML = '<span class="route-top"><strong>' + route.name + '</strong><span class="price">' + route.price + '</span></span>' +
+          '<span class="route-path">' + route.start + ' → ' + route.finish + '</span>' +
+          '<span class="route-meta">' + route.time + ' · ' + route.theme + '</span>';
+        button.addEventListener('click', function () { selectRoute(route.id); });
+        list.appendChild(button);
+      });
+
+      var map = null;
+      var layers = [];
+      var fallbackTimer = window.setTimeout(function () {
+        if (!map) document.getElementById('mapFallback').hidden = false;
+      }, 4500);
+
+      function markerIcon(label, color) {
+        return L.divIcon({ className: 'map-pin', html: label, iconSize: [30, 30], iconAnchor: [15, 15], popupAnchor: [0, -17], bgPos: [0, 0] });
+      }
+
+      function clearLayers() {
+        if (!map) return;
+        layers.forEach(function (layer) { map.removeLayer(layer); });
+        layers = [];
+      }
+
+      function addRoute(route, strong, withMarkers) {
+        if (!map) return;
+        var line = L.polyline(route.points, {
+          color: route.color,
+          weight: strong ? 6 : 3,
+          opacity: strong ? .95 : .46,
+          dashArray: strong ? '9 7' : '5 8'
+        }).addTo(map);
+        layers.push(line);
+        if (withMarkers) {
+          var startIcon = markerIcon('S', route.color);
+          var finishIcon = markerIcon('F', route.color);
+          var start = L.marker(route.points[0], { icon: startIcon }).addTo(map).bindPopup('<strong>' + route.name + ' start</strong><br>' + route.start);
+          var finish = L.marker(route.points[1], { icon: finishIcon }).addTo(map).bindPopup('<strong>' + route.name + ' finish</strong><br>' + route.finish);
+          var startNode = start.getElement ? start.getElement() : null;
+          var finishNode = finish.getElement ? finish.getElement() : null;
+          if (startNode) startNode.style.setProperty('--pin-color', route.color);
+          if (finishNode) finishNode.style.setProperty('--pin-color', route.color);
+          layers.push(start, finish);
+        }
+      }
+
+      function drawAll() {
+        clearLayers();
+        routes.forEach(function (route) { addRoute(route, false, false); });
+        var points = routes.reduce(function (all, route) { return all.concat(route.points); }, []);
+        map.fitBounds(points, { padding: [34, 34], maxZoom: 13 });
+      }
+
+      function updateSelection(route) {
+        document.querySelectorAll('.route-tab').forEach(function (button) {
+          button.setAttribute('aria-pressed', button.getAttribute('data-route') === (route ? route.id : 'all') ? 'true' : 'false');
+        });
+        document.querySelectorAll('.route-card').forEach(function (button) {
+          button.setAttribute('aria-current', route && button.getAttribute('data-route') === route.id ? 'true' : 'false');
+        });
+        var title = document.getElementById('selectionTitle');
+        var copy = document.getElementById('selectionCopy');
+        var link = document.getElementById('selectionLink');
+        if (!route) {
+          title.textContent = 'All Berlin audio walks';
+          copy.textContent = 'The full map shows how the routes occupy different parts of the city. Choose one to inspect its start and finish.';
+          link.href = 'https://www.berlinwalk.com/audio-tours';
+          link.textContent = 'Compare all routes';
+          return;
+        }
+        title.textContent = route.name;
+        copy.textContent = route.start + ' to ' + route.finish + '. ' + route.time + '. ' + route.theme + '.';
+        link.href = route.url;
+        link.textContent = route.price === 'Free' ? 'Open the free sampler' : 'Open this €4.99 route';
+      }
+
+      function selectRoute(id) {
+        if (id === 'all') {
+          if (map) drawAll();
+          updateSelection(null);
+          return;
+        }
+        var route = routes.find(function (item) { return item.id === id; });
+        if (!route) return;
+        if (map) {
+          clearLayers();
+          routes.forEach(function (item) { if (item.id !== route.id) addRoute(item, false, false); });
+          addRoute(route, true, true);
+          map.fitBounds(route.points, { padding: [80, 80], maxZoom: 14 });
+        }
+        updateSelection(route);
+      }
+
+      document.querySelectorAll('.route-tab').forEach(function (button) {
+        button.addEventListener('click', function () { selectRoute(button.getAttribute('data-route')); });
+      });
+
+      try {
+        if (!window.L) throw new Error('Leaflet unavailable');
+        map = L.map('map', { zoomControl: true, scrollWheelZoom: false }).setView([52.5178, 13.4048], 12);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        window.clearTimeout(fallbackTimer);
+        drawAll();
+        window.setTimeout(function () { map.invalidateSize(); }, 250);
+      } catch (error) {
+        document.getElementById('mapFallback').hidden = false;
+      }
+
+      var layer = document.getElementById('creditsLayer');
+      var open = document.getElementById('creditsOpen');
+      var close = document.getElementById('creditsClose');
+      function openCredits() { layer.hidden = false; open.setAttribute('aria-expanded', 'true'); close.focus(); }
+      function closeCredits() { layer.hidden = true; open.setAttribute('aria-expanded', 'false'); open.focus(); }
+      open.addEventListener('click', openCredits);
+      close.addEventListener('click', closeCredits);
+      layer.addEventListener('click', function (event) { if (event.target === layer) closeCredits(); });
+      document.addEventListener('keydown', function (event) { if (event.key === 'Escape' && !layer.hidden) closeCredits(); });
+    })();
+  </script>
+  <script src="../js/brand.js"></script>
+</body>
+</html>

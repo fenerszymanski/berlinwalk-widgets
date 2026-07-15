@@ -5836,5 +5836,73 @@
         "a": "Berlin AB covers the central itinerary, including Alexanderplatz, Museum Island, Brandenburg Gate, Bernauer Straße and Mauerpark. BER Airport is in zone C, so airport travel needs ABC coverage. A BVG 24-hour ticket runs for 24 hours from validation, which can be useful from Friday evening into Saturday evening."
       }
     ]
+  },
+  "berlin-audio-guide-app-vs-no-app": {
+    "title": "Berlin Audio Guide App vs No-App - FAQ",
+    "subtitle": "Plain answers on apps, browser audio routes, offline backups, battery and the BerlinWalk format.",
+    "items": [
+      {
+        "q": "Is a Berlin audio guide app better than a no-app audio tour?",
+        "a": "It depends on the job. An app is better when you want a large catalogue, GPS triggers, integrated maps and several cities in one account. A no-app browser route is usually simpler when you have already chosen one Berlin walk and want to begin without an app-store download, account or notification layer."
+      },
+      {
+        "q": "Can I use a no-app audio tour offline?",
+        "a": "Yes, if the product includes downloadable MP3 files and a route card and you save them before leaving Wi-Fi. The browser route is still the easiest front door, while the saved files let the narration continue if mobile data becomes weak."
+      },
+      {
+        "q": "Will an offline Google map give me walking directions?",
+        "a": "Not reliably. Google's own help says that walking and public-transport directions are unavailable offline. Download the map area if useful, but also save the route card and the names of the next real stops."
+      },
+      {
+        "q": "Does GPS drain the phone battery on an audio tour?",
+        "a": "Continuous location use and a bright screen can add to battery drain. For a long Berlin walking day, turn on your phone's power-saving mode, lower the brightness and use named stops instead of watching the map continuously when the route is clear."
+      },
+      {
+        "q": "How do BerlinWalk audio tours work?",
+        "a": "They use a no-app format. The route opens in the browser after purchase and includes named stops, map links, short chapters and offline files. The aim is to keep one Berlin walk simple rather than build another multi-city platform."
+      },
+      {
+        "q": "How much are the BerlinWalk audio routes?",
+        "a": "Hidden Berlin, Berlin Wall, Medieval Berlin, Third Reich Berlin and Kreuzberg Street Art each cost €4.99. The free Berlin in 9 Minutes sampler lets you test the listening format before buying a route."
+      },
+      {
+        "q": "When should I choose a live Berlin guide instead?",
+        "a": "Choose a live guide for first-day orientation, conversation and questions. Choose audio later when you want one focused subject at your own pace, such as Bernauer Strasse, hidden central Berlin, old Berlin, Third Reich sites or Kreuzberg street art."
+      }
+    ]
+  },
+  "self-guided-berlin-walking-tour-audio-guide": {
+    "title": "Self-Guided Berlin Walking Tour with Audio - FAQ",
+    "subtitle": "Quick answers on choosing a route, walking time, offline preparation, live guides and the five BerlinWalk audio walks.",
+    "items": [
+      {
+        "q": "What makes a good self-guided Berlin walking tour with audio?",
+        "a": "It needs a named start you can find, short chapters tied to real places, written directions or map links between stops, an honest walking-time range, offline audio and a finish near useful transport. An MP3 without route structure is not enough."
+      },
+      {
+        "q": "Which Berlin audio route should I choose?",
+        "a": "Choose by geography first. Use Berlin Wall from Nordbahnhof, Hidden Berlin from Anhalter Bahnhof, Medieval Berlin from the World Clock, Third Reich Berlin from the Reichstag, or Kreuzberg Street Art from the East Side Gallery. A route near your current station is usually the better afternoon plan."
+      },
+      {
+        "q": "How long do the BerlinWalk audio tours take?",
+        "a": "Medieval Berlin takes about 75 to 90 minutes, Berlin Wall about 90 minutes, Hidden Berlin 90 to 120 minutes, Third Reich Berlin 100 to 120 minutes and Kreuzberg Street Art about 120 minutes. Add 30 minutes before a dinner booking, museum slot or train."
+      },
+      {
+        "q": "How much does a self-guided Berlin audio walk cost?",
+        "a": "Each of the five full BerlinWalk audio routes costs €4.99. Berlin in 9 Minutes is a free sampler from Alexanderplatz toward Museum Island and is useful if you want to test the format first."
+      },
+      {
+        "q": "Should I take a live tour or a self-guided audio tour first?",
+        "a": "For a first morning, a live tour is better for orientation and questions. Use a self-guided audio route later for one focused subject and your own pace. The BerlinWalk live tour explores the historic centre of former East Berlin and does not follow the full Berlin Wall line."
+      },
+      {
+        "q": "Can I walk a Berlin audio route without mobile data?",
+        "a": "You can keep the narration available by downloading the MP3 files and route card on Wi-Fi. Save the start, finish and named stops too, because offline map areas do not provide walking or public-transport directions."
+      },
+      {
+        "q": "What should I do at memorial sites while listening?",
+        "a": "Pause before reading names or memorial panels, keep one ear free near roads and cycle lanes, and do not turn the site into a rapid photo checklist. Audio should add context without making the phone more important than the place."
+      }
+    ]
   }
 }

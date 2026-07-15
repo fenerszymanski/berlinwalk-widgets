@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Audio Format Field Test</title>
+  <meta name="description" content="Test an audio guide app, browser route and MP3 backup against four real moments on a Berlin walking day.">
+  <meta name="robots" content="noindex,follow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    :root {
+      --green: #1b5e20;
+      --green-dark: #0b2f14;
+      --green-deep: #061d0c;
+      --yellow: #ffe600;
+      --lime: #7cb342;
+      --cream: #fafaf5;
+      --ink: #212121;
+      --muted: #5f665f;
+      --line: rgba(27, 94, 32, .22);
+      --white: #fff;
+      --danger: #a2342c;
+    }
+
+    * { box-sizing: border-box; }
+    html { color-scheme: light; background: var(--cream); }
+    body {
+      margin: 0;
+      min-width: 0;
+      overflow-x: hidden;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: "Space Grotesk", Montserrat, Arial, sans-serif;
+    }
+    button, input { font: inherit; }
+    button { -webkit-tap-highlight-color: transparent; }
+    [hidden] { display: none !important; }
+
+    .field-test {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      border: 1px solid var(--line);
+      background: var(--white);
+      box-shadow: 0 24px 70px rgba(10, 47, 20, .12);
+      overflow: hidden;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 390px;
+      display: grid;
+      align-items: end;
+      isolation: isolate;
+      background: var(--green-dark);
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background-image: var(--scene-image);
+      background-position: center;
+      background-size: cover;
+      transition: opacity .25s ease, transform .45s ease;
+      transform: scale(1.015);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(90deg, rgba(4, 27, 10, .96) 0%, rgba(7, 42, 15, .87) 50%, rgba(7, 42, 15, .35) 100%),
+        linear-gradient(0deg, rgba(4, 24, 9, .82), transparent 55%);
+    }
+    .hero-copy { width: min(780px, 100%); padding: 34px clamp(22px, 5vw, 64px) 38px; color: var(--white); }
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--yellow);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      margin-bottom: 14px;
+      max-width: 760px;
+      font-family: Fraunces, Georgia, serif;
+      font-size: clamp(38px, 7vw, 70px);
+      line-height: .98;
+      letter-spacing: -.035em;
+    }
+    .hero-copy > p:last-child { max-width: 680px; margin: 0; color: rgba(255,255,255,.84); font-size: 17px; line-height: 1.55; }
+
+    .scene-nav {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid rgba(255,255,255,.18);
+      background: var(--green-deep);
+    }
+    .scene-btn {
+      min-height: 72px;
+      border: 0;
+      border-right: 1px solid rgba(255,255,255,.13);
+      padding: 14px 16px;
+      background: transparent;
+      color: rgba(255,255,255,.7);
+      text-align: left;
+      cursor: pointer;
+    }
+    .scene-btn:last-child { border-right: 0; }
+    .scene-btn span { display: block; margin-bottom: 5px; color: var(--yellow); font: 600 11px/1.2 "IBM Plex Mono", monospace; letter-spacing: .1em; }
+    .scene-btn strong { display: block; font-size: 14px; line-height: 1.25; }
+    .scene-btn[aria-selected="true"] { background: var(--yellow); color: var(--green-dark); }
+    .scene-btn[aria-selected="true"] span { color: var(--green-dark); }
+    .scene-btn:focus-visible, .choice:focus-within, .credits-btn:focus-visible, .close-btn:focus-visible {
+      outline: 3px solid var(--lime);
+      outline-offset: -3px;
+    }
+
+    .workbench { padding: clamp(24px, 4vw, 48px); }
+    .scene-note {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(230px, .8fr);
+      gap: 20px;
+      align-items: start;
+      margin-bottom: 28px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--line);
+    }
+    .scene-note h2 { margin-bottom: 8px; color: var(--green-dark); font-family: Fraunces, Georgia, serif; font-size: clamp(28px, 4vw, 42px); line-height: 1.05; }
+    .scene-note p { margin: 0; color: var(--muted); line-height: 1.6; }
+    .scene-fact { padding: 16px; border-left: 4px solid var(--yellow); background: #f4f7ed; }
+    .scene-fact strong { display: block; margin-bottom: 5px; color: var(--green-dark); }
+    .scene-fact span { color: var(--muted); font-size: 14px; line-height: 1.45; }
+
+    .controls {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .control {
+      min-width: 0;
+      padding: 18px;
+      border: 1px solid var(--line);
+      background: var(--cream);
+    }
+    .control-label { display: block; margin-bottom: 12px; color: var(--green-dark); font-weight: 700; }
+    .segmented { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .choice {
+      min-width: 0;
+      min-height: 46px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      background: var(--white);
+      color: var(--green-dark);
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      cursor: pointer;
+    }
+    .choice input { position: absolute; opacity: 0; pointer-events: none; }
+    .choice:has(input:checked) { border-color: var(--green); background: var(--green); color: var(--white); }
+    .switches { display: grid; gap: 8px; }
+    .switch {
+      min-height: 46px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      cursor: pointer;
+    }
+    .switch input { width: 20px; height: 20px; accent-color: var(--green); }
+    .switch span { font-size: 13px; font-weight: 650; }
+    .battery-row { display: flex; align-items: center; gap: 12px; }
+    .battery-row input { width: 100%; accent-color: var(--green); }
+    .battery-value { min-width: 58px; padding: 7px 8px; background: var(--yellow); color: var(--green-dark); font: 700 14px/1 "IBM Plex Mono", monospace; text-align: center; }
+
+    .results-heading { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 14px; }
+    .results-heading h2 { margin: 0; color: var(--green-dark); font-family: Fraunces, Georgia, serif; font-size: clamp(28px, 4vw, 42px); line-height: 1.05; }
+    .results-heading p { margin: 0; color: var(--muted); font-size: 13px; }
+    .formats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .format-card { position: relative; min-width: 0; padding: 20px; border: 1px solid var(--line); background: var(--white); }
+    .format-card[data-winner="true"] { border: 2px solid var(--green); box-shadow: 0 12px 30px rgba(27,94,32,.13); }
+    .winner-flag { display: inline-flex; min-height: 26px; align-items: center; margin-bottom: 12px; padding: 5px 9px; border-radius: 99px; background: var(--yellow); color: var(--green-dark); font: 700 10px/1 "IBM Plex Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
+    .format-card:not([data-winner="true"]) .winner-flag { visibility: hidden; }
+    .format-card h3 { margin-bottom: 7px; color: var(--green-dark); font-size: 20px; }
+    .format-card > p { min-height: 62px; margin-bottom: 15px; color: var(--muted); font-size: 14px; line-height: 1.5; }
+    .score-line { display: flex; align-items: center; justify-content: space-between; margin-bottom: 7px; color: var(--green-dark); font: 600 12px/1 "IBM Plex Mono", monospace; }
+    .score-track { height: 9px; overflow: hidden; border-radius: 99px; background: #e6eadf; }
+    .score-fill { width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--green), var(--lime), var(--yellow)); transition: width .25s ease; }
+    .status { margin-top: 12px; font-size: 13px; font-weight: 700; }
+    .status[data-tone="good"] { color: var(--green); }
+    .status[data-tone="prep"] { color: #795900; }
+    .status[data-tone="friction"] { color: var(--danger); }
+
+    .recommendation { margin-top: 18px; padding: 22px; border-left: 5px solid var(--yellow); background: var(--green-dark); color: var(--white); }
+    .recommendation span { display: block; margin-bottom: 7px; color: var(--yellow); font: 600 11px/1.2 "IBM Plex Mono", monospace; letter-spacing: .12em; text-transform: uppercase; }
+    .recommendation strong { display: block; margin-bottom: 7px; font-size: 20px; }
+    .recommendation p { margin: 0; color: rgba(255,255,255,.78); line-height: 1.55; }
+
+    .widget-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px clamp(22px, 4vw, 48px); border-top: 1px solid var(--line); background: #f2f4eb; }
+    .widget-footer p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .credits-btn, .close-btn {
+      min-height: 44px;
+      border: 1px solid var(--green);
+      padding: 10px 15px;
+      background: transparent;
+      color: var(--green-dark);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .credits-layer { position: fixed; inset: 0; z-index: 10000; display: grid; place-items: center; padding: 18px; background: rgba(2,18,7,.75); }
+    .credits-panel { width: min(680px, 100%); max-height: min(76vh, 620px); overflow: auto; padding: 24px; border-top: 7px solid var(--yellow); background: var(--cream); box-shadow: 0 30px 90px rgba(0,0,0,.35); }
+    .credits-head { display: flex; align-items: start; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+    .credits-head h2 { margin: 0; color: var(--green-dark); font-family: Fraunces, Georgia, serif; font-size: 30px; }
+    .credits-list { margin: 0; padding-left: 20px; color: var(--muted); }
+    .credits-list li { margin: 0 0 10px; line-height: 1.5; }
+    .credits-list a { color: var(--green); font-weight: 700; }
+
+    @media (max-width: 760px) {
+      .hero { min-height: 350px; }
+      .hero-copy { padding: 28px 22px 30px; }
+      .scene-nav { grid-template-columns: 1fr 1fr; }
+      .scene-btn:nth-child(2) { border-right: 0; }
+      .scene-btn:nth-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,.13); }
+      .scene-note { grid-template-columns: 1fr; }
+      .controls, .formats { grid-template-columns: 1fr; }
+      .format-card > p { min-height: 0; }
+      .results-heading { display: block; }
+      .results-heading p { margin-top: 8px; }
+      .widget-footer { align-items: start; flex-direction: column; }
+      .credits-btn { width: 100%; }
+    }
+
+    @media (max-width: 380px) {
+      h1 { font-size: 35px; }
+      .workbench { padding: 20px 16px; }
+      .scene-btn { padding: 12px; }
+      .scene-btn strong { font-size: 13px; }
+      .segmented { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="field-test" aria-labelledby="field-test-title">
+    <section class="hero" id="sceneHero" style="--scene-image:url('../blog-drafts/images/hidden-places-central-berlin/optimized/05-alexanderplatz-world-clock.jpg')">
+      <div class="hero-copy">
+        <p class="eyebrow">Berlin audio field test</p>
+        <h1 id="field-test-title">Will the format still work outside?</h1>
+        <p>Move through four real moments. Change your preparation, battery and trip scope to see where an app, browser route or MP3 backup creates the least friction.</p>
+      </div>
+    </section>
+
+    <nav class="scene-nav" aria-label="Field test scene" role="tablist">
+      <button class="scene-btn" type="button" role="tab" aria-selected="true" data-scene="hotel"><span>01 / PREP</span><strong>Hotel Wi-Fi</strong></button>
+      <button class="scene-btn" type="button" role="tab" aria-selected="false" data-scene="nordbahnhof"><span>02 / START</span><strong>S Nordbahnhof</strong></button>
+      <button class="scene-btn" type="button" role="tab" aria-selected="false" data-scene="bernauer"><span>03 / LISTEN</span><strong>Bernauer Strasse</strong></button>
+      <button class="scene-btn" type="button" role="tab" aria-selected="false" data-scene="mauerpark"><span>04 / FINISH</span><strong>Mauerpark</strong></button>
+    </nav>
+
+    <section class="workbench">
+      <div class="scene-note">
+        <div>
+          <p class="eyebrow" style="color:var(--green)">Current moment</p>
+          <h2 id="sceneTitle">Before leaving the hotel</h2>
+          <p id="sceneCopy">This is the cheapest moment to install, sign in, download files and save the first stop. Any format can work if the preparation happens here.</p>
+        </div>
+        <div class="scene-fact">
+          <strong id="sceneFactTitle">Best move</strong>
+          <span id="sceneFactCopy">Open the route once and save the offline files while the connection is stable.</span>
+        </div>
+      </div>
+
+      <form class="controls" aria-label="Audio format conditions" onsubmit="return false">
+        <fieldset class="control" style="border:1px solid var(--line)">
+          <legend class="control-label">What do you need?</legend>
+          <div class="segmented">
+            <label class="choice"><input type="radio" name="scope" value="one" checked><span>One Berlin walk</span></label>
+            <label class="choice"><input type="radio" name="scope" value="many"><span>Several cities</span></label>
+          </div>
+        </fieldset>
+
+        <div class="control">
+          <label class="control-label" for="battery">Battery at the start</label>
+          <div class="battery-row">
+            <input id="battery" type="range" min="10" max="100" step="5" value="35">
+            <output class="battery-value" id="batteryValue" for="battery">35%</output>
+          </div>
+        </div>
+
+        <div class="control">
+          <span class="control-label">Preparation</span>
+          <div class="switches">
+            <label class="switch"><input id="installed" type="checkbox"><span>App already installed</span></label>
+            <label class="switch"><input id="backup" type="checkbox"><span>MP3 backup saved</span></label>
+          </div>
+        </div>
+      </form>
+
+      <div class="results-heading">
+        <h2>Format under pressure</h2>
+        <p>Scores describe this scene, not every audio product.</p>
+      </div>
+
+      <div class="formats" aria-live="polite">
+        <article class="format-card" data-format="app" data-winner="false">
+          <span class="winner-flag">Best fit now</span>
+          <h3>Installed audio app</h3>
+          <p>Catalogue, integrated maps and GPS can be useful when the setup is already finished.</p>
+          <div class="score-line"><span>Scene fit</span><strong data-score>0</strong></div>
+          <div class="score-track" aria-hidden="true"><div class="score-fill"></div></div>
+          <div class="status" data-status></div>
+        </article>
+
+        <article class="format-card" data-format="browser" data-winner="false">
+          <span class="winner-flag">Best fit now</span>
+          <h3>No-app browser route</h3>
+          <p>Fast opening for one chosen route, with map links and a backup saved before the walk.</p>
+          <div class="score-line"><span>Scene fit</span><strong data-score>0</strong></div>
+          <div class="score-track" aria-hidden="true"><div class="score-fill"></div></div>
+          <div class="status" data-status></div>
+        </article>
+
+        <article class="format-card" data-format="mp3" data-winner="false">
+          <span class="winner-flag">Best fit now</span>
+          <h3>Downloaded MP3 backup</h3>
+          <p>The most dependable audio layer offline, but less useful for finding the next stop by itself.</p>
+          <div class="score-line"><span>Scene fit</span><strong data-score>0</strong></div>
+          <div class="score-track" aria-hidden="true"><div class="score-fill"></div></div>
+          <div class="status" data-status></div>
+        </article>
+      </div>
+
+      <div class="recommendation" aria-live="polite">
+        <span>What I would do</span>
+        <strong id="recommendationTitle">Prepare the browser route and save the backup.</strong>
+        <p id="recommendationCopy">For one Berlin walk, the browser is the quickest front door. The MP3 is the fallback if signal or battery changes later.</p>
+      </div>
+    </section>
+
+    <footer class="widget-footer">
+      <p>This is a format check, not a battery-life guarantee. Phone settings, signal and route design still matter.</p>
+      <button class="credits-btn" id="creditsOpen" type="button" aria-expanded="false" aria-controls="creditsLayer">Image credits</button>
+    </footer>
+  </main>
+
+  <div class="credits-layer" id="creditsLayer" hidden>
+    <section class="credits-panel" role="dialog" aria-modal="true" aria-labelledby="creditsTitle">
+      <div class="credits-head">
+        <h2 id="creditsTitle">Image credits</h2>
+        <button class="close-btn" id="creditsClose" type="button">Close</button>
+      </div>
+      <ul class="credits-list">
+        <li>Alexanderplatz World Clock: Wikimedia Commons, CC BY-SA 4.0.</li>
+        <li>S Nordbahnhof: Burkhard Muecke, <a href="https://commons.wikimedia.org/wiki/File:Bahnhof_Berlin_Nordbahnhof,_S-Bahnhof_9.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, CC BY-SA 4.0.</li>
+        <li>Bernauer Strasse memorial strip: Pedelecs, <a href="https://commons.wikimedia.org/wiki/File:Berlin_Bernauer_Stra%C3%9Fe_Mauerstreifen.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, CC BY-SA 3.0.</li>
+        <li>Mauerpark path: Ansgar Koreng, Wikimedia Commons, CC BY-SA 3.0 DE.</li>
+        <li>Article images also include Carlos Delgado via Wikimedia Commons, CC BY-SA 4.0, and an existing BerlinWalk station photo.</li>
+      </ul>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      var scenes = {
+        hotel: {
+          title: 'Before leaving the hotel',
+          copy: 'This is the cheapest moment to install, sign in, download files and save the first stop. Any format can work if the preparation happens here.',
+          factTitle: 'Best move',
+          factCopy: 'Open the route once and save the offline files while the connection is stable.',
+          image: '../blog-drafts/images/hidden-places-central-berlin/optimized/05-alexanderplatz-world-clock.jpg'
+        },
+        nordbahnhof: {
+          title: 'Outside S Nordbahnhof',
+          copy: 'You need the exact exit toward Bernauer Strasse and the first chapter. A new login or app-store download is expensive here because the walk has already started.',
+          factTitle: 'Best move',
+          factCopy: 'Open the first chapter before leaving the station and confirm the street exit.',
+          image: '../blog-drafts/images/berlin-wall-memorial-bernauer-strasse/optimized/02-nordbahnhof-ghost-station.jpg'
+        },
+        bernauer: {
+          title: 'At the preserved border strip',
+          copy: 'The site needs your attention. The strongest format is the one that keeps playing without making you stare at GPS, permissions or a loading screen.',
+          factTitle: 'Best move',
+          factCopy: 'Pause before reading memorial panels and keep one ear free near the cycle lane.',
+          image: '../blog-drafts/images/berlin-wall-memorial-bernauer-strasse/optimized/01-bernauer-memorial-strip-cover.jpg'
+        },
+        mauerpark: {
+          title: 'Finishing at Mauerpark',
+          copy: 'Now the question changes from narration to the next connection. The route should leave you with a named finish, saved files and enough battery for the way home.',
+          factTitle: 'Best move',
+          factCopy: 'Stop the audio, check the saved return connection and put the phone away in the crowd.',
+          image: '../blog-drafts/images/mauerpark-berlin-sunday/optimized/05-mauerpark-path-tv-tower.jpg'
+        }
+      };
+
+      var sceneKey = 'hotel';
+      var hero = document.getElementById('sceneHero');
+      var battery = document.getElementById('battery');
+      var batteryValue = document.getElementById('batteryValue');
+      var installed = document.getElementById('installed');
+      var backup = document.getElementById('backup');
+      var cards = Array.prototype.slice.call(document.querySelectorAll('.format-card'));
+
+      function clamp(value) { return Math.max(0, Math.min(100, Math.round(value))); }
+
+      function currentScope() {
+        var selected = document.querySelector('input[name="scope"]:checked');
+        return selected ? selected.value : 'one';
+      }
+
+      function scores() {
+        var power = Number(battery.value);
+        var scope = currentScope();
+        var app = 58 + (scope === 'many' ? 25 : -4) + (installed.checked ? 16 : (sceneKey === 'hotel' ? -5 : -27));
+        var browser = 70 + (scope === 'one' ? 18 : -9) + (backup.checked ? 7 : 0);
+        var mp3 = 48 + (scope === 'one' ? 10 : -4) + (backup.checked ? 34 : -36);
+
+        if (power <= 25) { app -= 19; browser -= 7; mp3 -= 3; }
+        else if (power >= 60) { app += 7; browser += 4; mp3 += 3; }
+
+        if (sceneKey === 'hotel') { app += 8; browser += 5; mp3 += backup.checked ? 5 : 0; }
+        if (sceneKey === 'nordbahnhof') { app -= installed.checked ? 1 : 8; browser += 8; mp3 -= 8; }
+        if (sceneKey === 'bernauer') { app -= 6; browser += backup.checked ? 9 : 2; mp3 += backup.checked ? 13 : -5; }
+        if (sceneKey === 'mauerpark') { app += installed.checked ? 3 : -5; browser += 4; mp3 -= 9; }
+
+        return { app: clamp(app), browser: clamp(browser), mp3: clamp(mp3) };
+      }
+
+      function status(score) {
+        if (score >= 78) return { label: 'Smooth in this moment', tone: 'good' };
+        if (score >= 56) return { label: 'Works with preparation', tone: 'prep' };
+        return { label: 'Expect avoidable friction', tone: 'friction' };
+      }
+
+      function recommendation(winner) {
+        var scope = currentScope();
+        if (winner === 'app') {
+          return {
+            title: 'Use the installed app, but finish setup on Wi-Fi.',
+            copy: scope === 'many'
+              ? 'A catalogue and integrated maps earn their place when several cities share one account. Download the Berlin route before leaving.'
+              : 'The app works here because it is already installed and the battery is healthy. Save the route before the first station.'
+          };
+        }
+        if (winner === 'mp3') {
+          return {
+            title: 'Switch to the downloaded MP3 backup.',
+            copy: 'The audio will survive a weak connection. Use the route card for the next named stop because an MP3 alone is not a walking map.'
+          };
+        }
+        return {
+          title: 'Use the browser route and keep the MP3 as backup.',
+          copy: backup.checked
+            ? 'For one Berlin walk, the browser is the quickest front door and the saved MP3 removes the main signal risk.'
+            : 'The browser is the cleanest front door. Save the MP3 before leaving Wi-Fi so the route also survives a weak connection.'
+        };
+      }
+
+      function render() {
+        batteryValue.textContent = battery.value + '%';
+        var all = scores();
+        var winner = Object.keys(all).sort(function (a, b) { return all[b] - all[a]; })[0];
+        cards.forEach(function (card) {
+          var key = card.getAttribute('data-format');
+          var score = all[key];
+          var tone = status(score);
+          card.setAttribute('data-winner', key === winner ? 'true' : 'false');
+          card.querySelector('[data-score]').textContent = score + '/100';
+          card.querySelector('.score-fill').style.width = score + '%';
+          var statusNode = card.querySelector('[data-status]');
+          statusNode.textContent = tone.label;
+          statusNode.setAttribute('data-tone', tone.tone);
+        });
+        var rec = recommendation(winner);
+        document.getElementById('recommendationTitle').textContent = rec.title;
+        document.getElementById('recommendationCopy').textContent = rec.copy;
+      }
+
+      function selectScene(nextKey) {
+        sceneKey = nextKey;
+        var scene = scenes[nextKey];
+        document.getElementById('sceneTitle').textContent = scene.title;
+        document.getElementById('sceneCopy').textContent = scene.copy;
+        document.getElementById('sceneFactTitle').textContent = scene.factTitle;
+        document.getElementById('sceneFactCopy').textContent = scene.factCopy;
+        hero.style.setProperty('--scene-image', 'url("' + scene.image + '")');
+        document.querySelectorAll('.scene-btn').forEach(function (button) {
+          button.setAttribute('aria-selected', button.getAttribute('data-scene') === nextKey ? 'true' : 'false');
+        });
+        render();
+      }
+
+      document.querySelectorAll('.scene-btn').forEach(function (button) {
+        button.addEventListener('click', function () { selectScene(button.getAttribute('data-scene')); });
+      });
+      document.querySelectorAll('input').forEach(function (input) { input.addEventListener('input', render); input.addEventListener('change', render); });
+
+      var layer = document.getElementById('creditsLayer');
+      var open = document.getElementById('creditsOpen');
+      var close = document.getElementById('creditsClose');
+      function openCredits() { layer.hidden = false; open.setAttribute('aria-expanded', 'true'); close.focus(); }
+      function closeCredits() { layer.hidden = true; open.setAttribute('aria-expanded', 'false'); open.focus(); }
+      open.addEventListener('click', openCredits);
+      close.addEventListener('click', closeCredits);
+      layer.addEventListener('click', function (event) { if (event.target === layer) closeCredits(); });
+      document.addEventListener('keydown', function (event) { if (event.key === 'Escape' && !layer.hidden) closeCredits(); });
+
+      render();
+    })();
+  </script>
+  <script src="../js/brand.js"></script>
+</body>
+</html>
