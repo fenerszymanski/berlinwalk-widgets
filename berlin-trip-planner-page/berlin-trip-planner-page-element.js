@@ -5,6 +5,10 @@
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
   const WIDGET_PATH = 'ultimate-berlin-trip-planner/';
   const BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+  const LANDING_EXPERIMENT_ID = 'tp_lp_value_path_v1';
+  const LANDING_EXPERIMENT_VARIANTS = ['control', 'value_first'];
+  const LANDING_EXPERIMENT_SESSION_KEY = 'bwTripPlannerLandingExperiment.session.v1';
+  const LANDING_EXPERIMENT_LOCAL_KEY = 'bwTripPlannerLandingExperiment.local.v1';
 
   const asset = (path) => new URL(path, BASE_URL).toString();
 
@@ -90,9 +94,115 @@
     return typeof value === 'number' && Number.isFinite(value) && value >= 0 && value < 30000;
   }
 
+  function randomExperimentId() {
+    try {
+      if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+        return `tpa_${window.crypto.randomUUID().replace(/-/g, '')}`;
+      }
+      if (window.crypto && typeof window.crypto.getRandomValues === 'function') {
+        const values = new Uint32Array(4);
+        window.crypto.getRandomValues(values);
+        return `tpa_${Array.from(values).map((value) => value.toString(36).padStart(7, '0')).join('')}`;
+      }
+    } catch (error) {}
+    return `tpa_${Math.random().toString(36).slice(2)}${Date.now().toString(36)}`;
+  }
+
+  function validExperimentVariant(value) {
+    const variant = String(value || '').toLowerCase();
+    return LANDING_EXPERIMENT_VARIANTS.includes(variant) ? variant : '';
+  }
+
+  function validExperimentAssignmentId(value) {
+    const assignmentId = String(value || '');
+    return /^[A-Za-z0-9_-]{12,180}$/.test(assignmentId) ? assignmentId : '';
+  }
+
+  function validExperimentAssignedAt(value) {
+    const assignedAt = String(value || '');
+    return assignedAt && Number.isFinite(Date.parse(assignedAt)) ? assignedAt : '';
+  }
+
+  function readExperimentStorage(storage, key) {
+    try {
+      const raw = storage && storage.getItem(key);
+      if (!raw) return null;
+      const parsed = JSON.parse(raw);
+      const variant = validExperimentVariant(parsed && parsed.variant);
+      const assignmentId = validExperimentAssignmentId(parsed && parsed.assignmentId);
+      if (!variant || !assignmentId || parsed.experimentId !== LANDING_EXPERIMENT_ID) return null;
+      return {
+        experimentId: LANDING_EXPERIMENT_ID,
+        variant,
+        assignmentId,
+        assignmentSource: 'random_50_50',
+        assignedAt: validExperimentAssignedAt(parsed.assignedAt) || new Date().toISOString(),
+        isQa: false
+      };
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function writeExperimentStorage(storage, key, assignment) {
+    try {
+      if (!storage || !assignment || assignment.isQa) return;
+      storage.setItem(key, JSON.stringify({
+        experimentId: assignment.experimentId,
+        variant: assignment.variant,
+        assignmentId: assignment.assignmentId,
+        assignedAt: assignment.assignedAt
+      }));
+    } catch (error) {}
+  }
+
+  function browserStorage(name) {
+    try {
+      return window[name] || null;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function carriedExperimentAssignment(params) {
+    const variant = validExperimentVariant(params.get('tp_lp_variant'));
+    const isForcedQa = /^(1|true)$/i.test(params.get('tp_lp_qa') || '');
+    if (variant && isForcedQa) {
+      return {
+        experimentId: LANDING_EXPERIMENT_ID,
+        variant,
+        assignmentId: validExperimentAssignmentId(params.get('tp_lp_assignment_id')) || randomExperimentId(),
+        assignmentSource: 'forced_qa',
+        assignedAt: validExperimentAssignedAt(params.get('tp_lp_assigned_at')) || new Date().toISOString(),
+        isQa: true
+      };
+    }
+
+    const experimentId = String(params.get('tp_lp_experiment_id') || '');
+    const assignmentId = validExperimentAssignmentId(params.get('tp_lp_assignment_id'));
+    if (experimentId !== LANDING_EXPERIMENT_ID || !variant || !assignmentId) return null;
+    const assignmentSource = params.get('tp_lp_assignment_source') === 'forced_qa'
+      ? 'forced_qa'
+      : 'random_50_50';
+    return {
+      experimentId: LANDING_EXPERIMENT_ID,
+      variant,
+      assignmentId,
+      assignmentSource,
+      assignedAt: validExperimentAssignedAt(params.get('tp_lp_assigned_at')) || new Date().toISOString(),
+      isQa: params.get('tp_lp_is_qa') === '1' || assignmentSource === 'forced_qa'
+    };
+  }
+
   class BWBerlinTripPlannerPage extends HTMLElement {
     connectedCallback() {
       ensureFont();
+      this._plannerFrameReady = false;
+      this._queuedPlannerCommand = null;
+      this._experimentAssignment = this._resolveExperimentAssignment();
+      this.dataset.bwTpExperiment = this._experimentAssignment.experimentId;
+      this.dataset.bwTpVariant = this._experimentAssignment.variant;
+      this.dataset.bwTpQa = this._experimentAssignment.isQa ? 'true' : 'false';
       this._render();
       this._bind();
       this._setupPlannerResize();
@@ -121,6 +231,70 @@
       }
       if (this._gapResizeObserver) this._gapResizeObserver.disconnect();
       if (this._gapRaf) window.cancelAnimationFrame(this._gapRaf);
+    }
+
+    _resolveExperimentAssignment() {
+      let params;
+      try {
+        params = new URLSearchParams(window.location.search || '');
+      } catch (error) {
+        params = new URLSearchParams();
+      }
+
+      const carried = carriedExperimentAssignment(params);
+      if (carried) {
+        if (!carried.isQa) this._persistExperimentAssignment(carried);
+        return carried;
+      }
+
+      const sessionAssignment = readExperimentStorage(browserStorage('sessionStorage'), LANDING_EXPERIMENT_SESSION_KEY);
+      const mayPersistLocally = functionalConsent() || analyticsConsent();
+      const localAssignment = mayPersistLocally
+        ? readExperimentStorage(browserStorage('localStorage'), LANDING_EXPERIMENT_LOCAL_KEY)
+        : null;
+      const existing = sessionAssignment || localAssignment;
+      if (existing) {
+        this._persistExperimentAssignment(existing);
+        return existing;
+      }
+
+      let coin = Math.random();
+      try {
+        if (window.crypto && typeof window.crypto.getRandomValues === 'function') {
+          const values = new Uint32Array(1);
+          window.crypto.getRandomValues(values);
+          coin = values[0] / 4294967296;
+        }
+      } catch (error) {}
+      const assignment = {
+        experimentId: LANDING_EXPERIMENT_ID,
+        variant: coin < 0.5 ? 'control' : 'value_first',
+        assignmentId: randomExperimentId(),
+        assignmentSource: 'random_50_50',
+        assignedAt: new Date().toISOString(),
+        isQa: false
+      };
+      this._persistExperimentAssignment(assignment);
+      return assignment;
+    }
+
+    _persistExperimentAssignment(assignment) {
+      writeExperimentStorage(browserStorage('sessionStorage'), LANDING_EXPERIMENT_SESSION_KEY, assignment);
+      if (functionalConsent() || analyticsConsent()) {
+        writeExperimentStorage(browserStorage('localStorage'), LANDING_EXPERIMENT_LOCAL_KEY, assignment);
+      }
+    }
+
+    _experimentQueryEntries() {
+      const assignment = this._experimentAssignment || {};
+      return {
+        tp_lp_experiment_id: assignment.experimentId || LANDING_EXPERIMENT_ID,
+        tp_lp_variant: assignment.variant || 'control',
+        tp_lp_assignment_id: assignment.assignmentId || '',
+        tp_lp_assignment_source: assignment.assignmentSource || 'random_50_50',
+        tp_lp_assigned_at: assignment.assignedAt || '',
+        tp_lp_is_qa: assignment.isQa ? '1' : '0'
+      };
     }
 
     _plannerSrc() {
@@ -170,7 +344,38 @@
       if (meta.fbclid) url.searchParams.set('fbclid', meta.fbclid);
       if (meta.fbc) url.searchParams.set('fbc', meta.fbc);
       if (meta.fbp) url.searchParams.set('fbp', meta.fbp);
+      Object.entries(this._experimentQueryEntries()).forEach(([key, value]) => {
+        if (value) url.searchParams.set(key, value);
+      });
       return url.toString();
+    }
+
+    _valueFirstCard() {
+      if (!this._experimentAssignment || this._experimentAssignment.variant !== 'value_first') return '';
+      return `
+        <section class="bw-trip-value-first" aria-labelledby="bw-trip-value-first-title">
+          <div class="bw-trip-value-route" aria-label="Example Day 1 route in Mitte">
+            <span class="bw-trip-value-day">Example Day 1 · Mitte</span>
+            <strong>Alexanderplatz <i aria-hidden="true">→</i> Museum Island <i aria-hidden="true">→</i> Hackescher Markt</strong>
+            <small>Stops stay in route order, with one practical backup for the day.</small>
+          </div>
+          <div class="bw-trip-value-offer">
+            <p class="bw-trip-value-kicker">Detailed 1–7 day Berlin plan</p>
+            <h2 id="bw-trip-value-first-title">See what the detailed plan adds before you build your free preview.</h2>
+            <p>I keep each day in one useful part of Berlin, then add Google Maps links and the weather and opening checks that matter on your dates.</p>
+            <ul aria-label="Detailed plan includes">
+              <li>Daily stops</li>
+              <li>Google Maps links</li>
+              <li>PDF for phone &amp; print</li>
+              <li>Weather &amp; opening checks</li>
+            </ul>
+            <div class="bw-trip-value-action">
+              <span><strong>€7.99</strong><small>The free preview still comes first.</small></span>
+              <a class="bw-trip-value-cta" href="#planner" data-bw-trip-landing-cta="value_first_card">Build my free preview</a>
+            </div>
+          </div>
+        </section>
+      `;
     }
 
     _render() {
@@ -187,7 +392,7 @@
 
       this.innerHTML = `
         <style>${this._styles()}</style>
-        <main class="bw-trip-page">
+        <main class="bw-trip-page" data-bw-tp-experiment="${LANDING_EXPERIMENT_ID}" data-bw-tp-variant="${this._experimentAssignment.variant}">
           <section class="bw-trip-launch" aria-labelledby="bw-trip-page-title">
             <div class="bw-trip-inner bw-trip-launch-inner">
               <header class="bw-trip-intro">
@@ -195,6 +400,8 @@
                 <h1 id="bw-trip-page-title">A Berlin plan built around the days you actually have.</h1>
                 <p class="bw-trip-intro-copy">I check the route, weather, and opening hours so you don&rsquo;t have to.</p>
               </header>
+
+              ${this._valueFirstCard()}
 
               <section class="bw-trip-planner-band" id="planner" aria-label="Berlin trip planner widget">
                 <div class="bw-trip-widget-shell">
@@ -248,7 +455,7 @@
                 <div class="bw-trip-preview-day"><strong>Day 3 · Prenzlauer Berg</strong><span>View</span></div>
                 <div class="bw-trip-preview-paid">
                   <div><strong>Full 3-day plan — €7.99</strong><span>Daily stops · Maps · PDF · Opening checks</span></div>
-                  <a href="#planner">View plan</a>
+                  <a href="#planner" data-bw-trip-landing-cta="sample_plan">View plan</a>
                 </div>
               </aside>
             </div>
@@ -276,7 +483,7 @@
                 <p>Choose your arrival date and trip length. The first preview is free.</p>
               </div>
               <div class="bw-trip-actions">
-                <a class="bw-trip-btn bw-trip-btn-primary" href="#planner">Build my Berlin plan</a>
+                <a class="bw-trip-btn bw-trip-btn-primary" href="#planner" data-bw-trip-landing-cta="final_cta">Build my Berlin plan</a>
               </div>
             </div>
           </section>
@@ -294,8 +501,25 @@
             ? target.querySelector('.bw-trip-widget-shell') || target
             : target;
           scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          const landingSurface = link.getAttribute('data-bw-trip-landing-cta');
+          if (landingSurface) this._sendPlannerLandingCta(landingSurface);
         });
       });
+    }
+
+    _sendPlannerLandingCta(surface) {
+      const frame = this._plannerFrame || this.querySelector('[data-bw-trip-planner-frame]');
+      if (!frame) return;
+      const command = {
+        type: 'bw-trip-planner-command',
+        command: 'landing-cta',
+        surface: String(surface || 'landing').slice(0, 80)
+      };
+      if (!this._plannerFrameReady) this._queuedPlannerCommand = command;
+      try {
+        const origin = new URL(frame.src, window.location.href).origin;
+        if (frame.contentWindow) frame.contentWindow.postMessage(command, origin);
+      } catch (error) {}
     }
 
     _setupPlannerResize() {
@@ -448,6 +672,7 @@
       const sendConsentToPlanner = () => {
         try {
           if (!frame.contentWindow) return;
+          this._persistExperimentAssignment(this._experimentAssignment);
           const meta = metaAttribution();
           frame.contentWindow.postMessage({
             type: 'bw-consent-update',
@@ -565,6 +790,7 @@
       document.addEventListener('consentPolicyChanged', this._consentHandler);
       document.addEventListener('consentPolicyInitialized', this._consentHandler);
       this._plannerFrameLoadHandler = () => {
+        this._plannerFrameReady = true;
         if (this._plannerContentObserver) {
           this._plannerContentObserver.disconnect();
           this._plannerContentObserver = null;
@@ -573,6 +799,13 @@
         scheduleHeightChecks();
         requestFrameMeasure();
         sendConsentToPlanner();
+        if (this._queuedPlannerCommand) {
+          const command = this._queuedPlannerCommand;
+          this._queuedPlannerCommand = null;
+          try {
+            if (frame.contentWindow) frame.contentWindow.postMessage(command, plannerOrigin() || '*');
+          } catch (error) {}
+        }
       };
       frame.addEventListener('load', this._plannerFrameLoadHandler);
       this._plannerFrameStyleObserver = new MutationObserver(enforceFrameHeight);
@@ -1396,6 +1629,166 @@
           max-width: 660px;
         }
 
+        .bw-trip-value-first {
+          background: #FFFFFF;
+          border: 1px solid rgba(27, 94, 32, 0.38);
+          border-radius: 20px;
+          box-shadow: 0 18px 42px rgba(27, 94, 32, 0.09);
+          display: grid;
+          gap: 0;
+          grid-template-columns: minmax(250px, 0.76fr) minmax(0, 1.24fr);
+          margin: 0 auto 22px;
+          max-width: 920px;
+          overflow: hidden;
+        }
+
+        .bw-trip-value-route {
+          align-content: center;
+          background:
+            linear-gradient(145deg, rgba(18, 61, 24, 0.97), rgba(27, 94, 32, 0.92)),
+            var(--green-dark);
+          color: #FFFFFF;
+          display: grid;
+          gap: 12px;
+          min-width: 0;
+          padding: 30px;
+        }
+
+        .bw-trip-value-day {
+          color: var(--yellow);
+          font-size: 11px;
+          font-weight: 900;
+          letter-spacing: 1.25px;
+          text-transform: uppercase;
+        }
+
+        .bw-trip-value-route strong {
+          font-family: Merriweather, Georgia, serif;
+          font-size: clamp(18px, 2vw, 24px);
+          line-height: 1.5;
+        }
+
+        .bw-trip-value-route strong i {
+          color: var(--yellow);
+          font-family: Montserrat, Arial, sans-serif;
+          font-style: normal;
+          padding: 0 3px;
+        }
+
+        .bw-trip-value-route small {
+          color: rgba(255, 255, 255, 0.78);
+          font-size: 12px;
+          font-weight: 600;
+          line-height: 1.55;
+        }
+
+        .bw-trip-value-offer {
+          min-width: 0;
+          padding: 26px 30px 28px;
+        }
+
+        .bw-trip-value-kicker {
+          color: var(--green);
+          font-size: 11px;
+          font-weight: 900;
+          letter-spacing: 1.35px;
+          margin-bottom: 7px;
+          text-transform: uppercase;
+        }
+
+        .bw-trip-value-offer h2 {
+          color: #173C1B;
+          font-family: Merriweather, Georgia, serif;
+          font-size: clamp(22px, 2.4vw, 30px);
+          letter-spacing: -0.45px;
+          line-height: 1.16;
+          margin-bottom: 10px;
+        }
+
+        .bw-trip-value-offer > p:not(.bw-trip-value-kicker) {
+          color: #4C584D;
+          font-size: 13px;
+          font-weight: 500;
+          line-height: 1.55;
+          margin-bottom: 14px;
+        }
+
+        .bw-trip-value-offer ul {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 7px;
+          list-style: none;
+          margin: 0 0 18px;
+          padding: 0;
+        }
+
+        .bw-trip-value-offer li {
+          background: #F1F7E9;
+          border: 1px solid #D8E7C7;
+          border-radius: 999px;
+          color: #2C462E;
+          font-size: 10px;
+          font-weight: 800;
+          line-height: 1.25;
+          padding: 7px 10px;
+        }
+
+        .bw-trip-value-action {
+          align-items: center;
+          display: flex;
+          gap: 18px;
+          justify-content: space-between;
+        }
+
+        .bw-trip-value-action > span {
+          display: grid;
+          gap: 2px;
+        }
+
+        .bw-trip-value-action strong {
+          color: var(--green-dark);
+          font-size: 28px;
+          line-height: 1;
+        }
+
+        .bw-trip-value-action small {
+          color: #687168;
+          font-size: 10px;
+          font-weight: 700;
+          line-height: 1.35;
+        }
+
+        .bw-trip-page .bw-trip-value-cta,
+        .bw-trip-page .bw-trip-value-cta:visited {
+          align-items: center;
+          background: var(--yellow);
+          border-radius: 9px;
+          box-shadow: 0 10px 22px rgba(180, 155, 0, 0.2);
+          color: var(--green-dark);
+          display: inline-flex;
+          flex: 0 0 auto;
+          font-size: 13px;
+          font-weight: 900;
+          justify-content: center;
+          min-height: 48px;
+          padding: 13px 18px;
+          text-decoration: none;
+          transition: background 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+        }
+
+        .bw-trip-page .bw-trip-value-cta:hover,
+        .bw-trip-page .bw-trip-value-cta:focus-visible {
+          background: #FFF04A;
+          box-shadow: 0 13px 24px rgba(180, 155, 0, 0.25);
+          color: var(--green-dark);
+          transform: translateY(-1px);
+        }
+
+        .bw-trip-page .bw-trip-value-cta:focus-visible {
+          outline: 3px solid var(--lime);
+          outline-offset: 4px;
+        }
+
         .bw-trip-launch .bw-trip-planner-band {
           background: transparent;
           padding: 0;
@@ -1579,6 +1972,41 @@
             font-size: 15px;
             line-height: 1.5;
             margin-top: 12px;
+          }
+
+          .bw-trip-value-first {
+            border-radius: 16px;
+            grid-template-columns: 1fr;
+            margin-bottom: 16px;
+          }
+
+          .bw-trip-value-route,
+          .bw-trip-value-offer {
+            padding: 20px;
+          }
+
+          .bw-trip-value-route {
+            gap: 8px;
+          }
+
+          .bw-trip-value-route strong {
+            font-size: 18px;
+            line-height: 1.45;
+          }
+
+          .bw-trip-value-offer h2 {
+            font-size: 22px;
+          }
+
+          .bw-trip-value-action {
+            align-items: stretch;
+            flex-direction: column;
+            gap: 12px;
+          }
+
+          .bw-trip-page .bw-trip-value-cta,
+          .bw-trip-page .bw-trip-value-cta:visited {
+            width: 100%;
           }
 
           .bw-trip-launch .bw-trip-widget-shell {

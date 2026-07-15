@@ -12043,6 +12043,8 @@
   var PRO_PRICE_EUR = 7.99;
   var FDR_OFFER_VARIANT = 'fdr_addon_2_99';
   var FDR_PRICE_EUR = 2.99;
+  var LANDING_EXPERIMENT_ID = 'tp_lp_value_path_v1';
+  var LANDING_EXPERIMENT_EXPOSURE_KEY = 'bwTripPlannerExperimentExposure.v1:';
 
   function plannerBookingUrl(content) {
     var safeContent = String(content || 'tour_day_card').replace(/[^a-z0-9_:-]/gi, '_').slice(0, 64) || 'tour_day_card';
@@ -12414,6 +12416,8 @@
   var aiStatus = 'idle';
   var aiRequestId = 0;
   var tripPlannerTracking = null;
+  var landingExperiment = readLandingExperiment();
+  var experimentExposureTracked = false;
   var trackingConsent = (function () {
     try {
       var params = new URLSearchParams(window.location.search || '');
@@ -12514,9 +12518,90 @@
     return trackingConsent.functional === true;
   }
 
+  function validLandingExperimentVariant(value) {
+    var variant = String(value || '').toLowerCase();
+    return variant === 'control' || variant === 'value_first' ? variant : '';
+  }
+
+  function readLandingExperiment() {
+    try {
+      var params = new URLSearchParams(window.location.search || '');
+      var experimentId = String(params.get('tp_lp_experiment_id') || '');
+      var variant = validLandingExperimentVariant(params.get('tp_lp_variant'));
+      var assignmentId = String(params.get('tp_lp_assignment_id') || '');
+      var assignmentSource = params.get('tp_lp_assignment_source') === 'forced_qa' ? 'forced_qa' : 'random_50_50';
+      var assignedAt = String(params.get('tp_lp_assigned_at') || '');
+      if (
+        experimentId !== LANDING_EXPERIMENT_ID ||
+        !variant ||
+        !/^[A-Za-z0-9_-]{12,180}$/.test(assignmentId)
+      ) {
+        return {
+          experimentId: '',
+          experimentVariant: '',
+          experimentAssignmentId: '',
+          experimentAssignmentSource: '',
+          experimentAssignedAt: '',
+          isQa: false
+        };
+      }
+      return {
+        experimentId: LANDING_EXPERIMENT_ID,
+        experimentVariant: variant,
+        experimentAssignmentId: assignmentId,
+        experimentAssignmentSource: assignmentSource,
+        experimentAssignedAt: assignedAt && Number.isFinite(Date.parse(assignedAt)) ? assignedAt : '',
+        isQa: params.get('tp_lp_is_qa') === '1' || assignmentSource === 'forced_qa'
+      };
+    } catch (error) {
+      return {
+        experimentId: '',
+        experimentVariant: '',
+        experimentAssignmentId: '',
+        experimentAssignmentSource: '',
+        experimentAssignedAt: '',
+        isQa: false
+      };
+    }
+  }
+
+  function landingExperimentPayload() {
+    return {
+      experiment_id: landingExperiment.experimentId || '',
+      experiment_variant: landingExperiment.experimentVariant || '',
+      experiment_assignment_id: landingExperiment.experimentAssignmentId || '',
+      experiment_assignment_source: landingExperiment.experimentAssignmentSource || '',
+      experiment_assigned_at: landingExperiment.experimentAssignedAt || '',
+      is_qa: landingExperiment.isQa === true
+    };
+  }
+
+  function landingExperimentCheckoutContext() {
+    return {
+      experimentId: landingExperiment.experimentId || '',
+      experimentVariant: landingExperiment.experimentVariant || '',
+      experimentAssignmentId: landingExperiment.experimentAssignmentId || '',
+      experimentAssignmentSource: landingExperiment.experimentAssignmentSource || '',
+      experimentAssignedAt: landingExperiment.experimentAssignedAt || '',
+      isQa: landingExperiment.isQa === true
+    };
+  }
+
+  function landingExperimentReturnParams() {
+    if (!landingExperiment.experimentId) return {};
+    return {
+      tp_lp_experiment_id: landingExperiment.experimentId,
+      tp_lp_variant: landingExperiment.experimentVariant,
+      tp_lp_assignment_id: landingExperiment.experimentAssignmentId,
+      tp_lp_assignment_source: landingExperiment.experimentAssignmentSource,
+      tp_lp_assigned_at: landingExperiment.experimentAssignedAt,
+      tp_lp_is_qa: landingExperiment.isQa ? '1' : '0'
+    };
+  }
+
   function trustedConsentMessage(event) {
     try {
-      if (!event || !event.origin) return false;
+      if (!event || !event.origin || !window.parent || event.source !== window.parent) return false;
       var origin = new URL(event.origin);
       var ref = referrerUrl();
       if (ref && origin.origin === ref.origin) return true;
@@ -12535,6 +12620,28 @@
     trackingConsent.fbc = trackingConsent.advertising ? String(event.data.fbc || '').slice(0, 260) : '';
     trackingConsent.fbp = trackingConsent.advertising ? String(event.data.fbp || '').slice(0, 260) : '';
     if (!trackingConsent.analytics) tripPlannerTracking = null;
+    if (trackingConsent.analytics) setTimeout(trackLandingExperimentExposure, 0);
+  });
+
+  window.addEventListener('message', function (event) {
+    if (
+      !event.data ||
+      event.data.type !== 'bw-trip-planner-command' ||
+      event.data.command !== 'landing-cta' ||
+      !trustedConsentMessage(event)
+    ) return;
+    var surface = String(event.data.surface || 'landing').replace(/[^a-z0-9_:-]/gi, '_').slice(0, 80) || 'landing';
+    track('bw_trip_planner_landing_cta_click', { surface: surface });
+    var shouldFocusFirstStep = surface === 'value_first_card';
+    if (shouldFocusFirstStep && quizFlowEnabled) setQuizStep(0, { scroll: false });
+    var target = shouldFocusFirstStep
+      ? root.querySelector('[data-arrival-date]') || root.querySelector('[data-quiz-shell]')
+      : root.querySelector('[data-quiz-shell]');
+    syncPlannerFrame(root.querySelector('[data-quiz-shell]') || target, false);
+    setTimeout(function () {
+      if (!shouldFocusFirstStep || !target || typeof target.focus !== 'function') return;
+      try { target.focus({ preventScroll: true }); } catch (error) { target.focus(); }
+    }, 80);
   });
 
   function cookieValue(name) {
@@ -12793,7 +12900,7 @@
       tour_intent: state.tourIntent,
       plan_generated: planGenerated,
       unlocked: unlocked
-    }, extra || {});
+    }, extra || {}, landingExperimentPayload());
   }
 
   function tripPlannerAnalyticsPayload(payload) {
@@ -12860,6 +12967,12 @@
       utmCampaign: tracking.utm_campaign || '',
       utmContent: tracking.utm_content || '',
       utmTerm: tracking.utm_term || '',
+      experimentId: landingExperiment.experimentId || '',
+      experimentVariant: landingExperiment.experimentVariant || '',
+      experimentAssignmentId: landingExperiment.experimentAssignmentId || '',
+      experimentAssignmentSource: landingExperiment.experimentAssignmentSource || '',
+      experimentAssignedAt: landingExperiment.experimentAssignedAt || '',
+      isQa: landingExperiment.isQa === true,
       fbclid: '',
       fbc: '',
       fbp: '',
@@ -12914,6 +13027,27 @@
     } catch (error) {}
     postParentTrackingEvent(event, analyticsPayload);
     if (allowAnalytics) sendTripPlannerTrackingEvent(event, payload);
+  }
+
+  function trackLandingExperimentExposure() {
+    if (experimentExposureTracked || !analyticsAllowed() || !landingExperiment.experimentId) return;
+    var tracking = tripPlannerTracking || initTripPlannerTracking();
+    if (!tracking || !tracking.sessionId) return;
+    tripPlannerTracking = tracking;
+    var storageKey = LANDING_EXPERIMENT_EXPOSURE_KEY + landingExperiment.experimentAssignmentId + ':' + tracking.sessionId;
+    try {
+      if (window.sessionStorage && window.sessionStorage.getItem(storageKey)) {
+        experimentExposureTracked = true;
+        return;
+      }
+    } catch (error) {}
+    experimentExposureTracked = true;
+    track('bw_trip_planner_experiment_exposure', {
+      experiment_surface: 'berlin_trip_planner_landing'
+    });
+    try {
+      if (window.sessionStorage) window.sessionStorage.setItem(storageKey, '1');
+    } catch (error) {}
   }
 
   function trackFormStart(field) {
@@ -21234,6 +21368,10 @@
       var url = new URL(parentPageUrlParam() || window.location.href);
       var params = plannerStateParams();
       params.forEach(function (value, key) { url.searchParams.set(key, value); });
+      var experimentParams = landingExperimentReturnParams();
+      Object.keys(experimentParams).forEach(function (key) {
+        if (experimentParams[key]) url.searchParams.set(key, experimentParams[key]);
+      });
       url.searchParams.delete('trip_planner_session_id');
       url.searchParams.delete('trip_planner_order');
       url.searchParams.delete('trip_planner_checkout');
@@ -21245,10 +21383,11 @@
 
   function postTripPlannerPro(payload) {
     if (typeof window.fetch !== 'function') return Promise.reject(new Error('Secure checkout is unavailable.'));
+    var requestPayload = Object.assign({}, payload || {}, landingExperimentCheckoutContext());
     return window.fetch(TRIP_PLANNER_PRO_API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(requestPayload)
     }).then(function (response) {
       return response.json().catch(function () { return {}; }).then(function (body) {
         if (!response.ok || !body || body.ok !== true) {
@@ -22188,6 +22327,7 @@
       utm_content: tracking.utm_content || '',
       utm_term: tracking.utm_term || ''
     };
+    Object.assign(payload, landingExperimentCheckoutContext());
     Object.assign(payload, metaCheckoutContext());
 
     var request = typeof fetch === 'function'
@@ -25717,6 +25857,7 @@
     ensureFdrAddonPanel();
     renderFdrAddon();
     handleCheckoutReturn();
+    trackLandingExperimentExposure();
     track('bw_trip_planner_page_view', {
       context: currentContext(),
       arrival_date: state.arrivalDate,
