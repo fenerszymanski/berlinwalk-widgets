@@ -8,23 +8,23 @@
   if (typeof customElements === 'undefined' || customElements.get('bw-audio-tour')) return;
 
   // Chapter markers — derived from the real chapter durations after the
-  // ElevenLabs run on 2026-05-25 (1-second silence inserted between each chapter).
-  // Total: ~8:51. Only welcome + outro start times depend on regen — others stable.
+  // ElevenLabs run on 2026-07-15 (1-second silence inserted between each chapter).
+  // Total: ~8:44. Keep these markers aligned whenever the narration is regenerated.
   const CHAPTERS = [
     { id: 'welcome',         t:    0, label: 'Welcome' },
-    { id: 'world-clock',     t:   39, label: 'World Clock' },
-    { id: 'tv-tower',        t:  109, label: 'TV Tower & the Pope’s Revenge' },
-    { id: 'marienkirche',    t:  176, label: 'Marienkirche & Rotes Rathaus' },
-    { id: 'nikolaiviertel',  t:  231, label: 'Nikolaiviertel' },
-    { id: 'berliner-dom',    t:  278, label: 'Berliner Dom' },
-    { id: 'lustgarten',      t:  343, label: 'Lustgarten & Altes Museum' },
-    { id: 'museum-island',   t:  387, label: 'Museum Island & Pergamon' },
-    { id: 'bode-walk',       t:  448, label: 'Bode Museum walk' },
-    { id: 'outro',           t:  488, label: 'Book the tour' }
+    { id: 'world-clock',     t:   42, label: 'World Clock' },
+    { id: 'tv-tower',        t:  104, label: 'TV Tower & the Pope’s Revenge' },
+    { id: 'marienkirche',    t:  172, label: 'Marienkirche & Rotes Rathaus' },
+    { id: 'nikolaiviertel',  t:  225, label: 'Nikolaiviertel' },
+    { id: 'berliner-dom',    t:  275, label: 'Berliner Dom' },
+    { id: 'lustgarten',      t:  341, label: 'Lustgarten & Altes Museum' },
+    { id: 'museum-island',   t:  382, label: 'Museum Island & Pergamon' },
+    { id: 'bode-walk',       t:  447, label: 'Bode Museum walk' },
+    { id: 'outro',           t:  486, label: 'Book the tour' }
   ];
 
   const BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
-  const DEFAULT_AUDIO_SRC = 'https://static.wixstatic.com/mp3/5a08a3_0cc1ef88511e4e638658dbf39ab3a93a.mp3';
+  const DEFAULT_AUDIO_SRC = 'https://music.wixstatic.com/mp3/5a08a3_9eb16d58f6f14741aee87b164cdd6fec.mp3';
 
   function fmtTime(seconds) {
     if (!isFinite(seconds) || seconds < 0) seconds = 0;
@@ -48,7 +48,7 @@
       const audioSrc = this.getAttribute('audio-src') || DEFAULT_AUDIO_SRC;
       this._audioSrc = audioSrc;
       this._currentChapterIdx = 0;
-      this._duration = 531; // expected total seconds (~8:51); updated from real audio metadata on load
+      this._duration = 524; // expected total seconds (~8:44); updated from real audio metadata on load
 
       this.innerHTML = this._render(audioSrc);
       this._wire();
@@ -361,12 +361,12 @@
         <div class="at-wrap">
           <div class="at-head">
             <span class="at-head-icon" aria-hidden="true">🎧</span>
-            <span class="at-kicker">Free Audio Preview · By Yusuf</span>
+            <span class="at-kicker">Free Audio Preview · Written by Yusuf</span>
           </div>
 
           <div class="at-hero">
             <h3 class="at-title">Berlin in 9 Minutes</h3>
-            <p class="at-sub">A short audio walk from Alexanderplatz to Hackescher Markt, recorded by the guide who leads the free tour every day at 11:30. Listen before you book.</p>
+            <p class="at-sub">A short audio walk from Alexanderplatz to Hackescher Markt, written and checked by Yusuf, then narrated with BerlinWalk’s approved AI tour voice. Listen before you book.</p>
           </div>
 
           <div class="at-player">
@@ -379,7 +379,7 @@
                 <div class="at-now">
                   <div class="at-now-label">Now playing</div>
                   <div class="at-now-title">${this._esc(CHAPTERS[0].label)}</div>
-                  <div class="at-times"><span class="at-current">0:00</span> / <span class="at-total">8:51</span></div>
+                  <div class="at-times"><span class="at-current">0:00</span> / <span class="at-total">8:44</span></div>
                 </div>
               </div>
 
@@ -406,7 +406,7 @@
             <a class="at-cta-btn" href="${BOOK_URL}" target="_top" rel="noopener" data-at-cta="book">Book Free Tour →</a>
           </div>
 
-          <div class="at-foot">Recorded by Yusuf · Berlin walking guide · berlinwalk.com</div>
+          <div class="at-foot">Written and checked by Yusuf · AI-narrated · berlinwalk.com</div>
         </div>
 
         <audio class="at-audio" preload="metadata" src="${this._esc(audioSrc)}"></audio>
