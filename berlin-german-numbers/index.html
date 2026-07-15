@@ -227,28 +227,36 @@
     return '<b>' + b.plain + '</b>. A round ten, so nothing gets flipped.';
   }
 
-  // Speech
+  // Audio: real German voice clips recorded per number (0-100). Browser
+  // text-to-speech is only a silent fallback if a clip fails to load.
+  var AUDIO_BASE = 'audio/';
+  var player = new Audio();
+  player.preload = 'none';
   var canSpeak = 'speechSynthesis' in window;
-  if (!canSpeak) { hearBtn.disabled = true; hearBtn.innerHTML = 'Audio not supported here'; }
-  function pickGermanVoice(){
-    var voices = window.speechSynthesis.getVoices() || [];
-    return voices.filter(function(v){ return /de(-|_)/i.test(v.lang); })[0] || null;
-  }
-  function speak(){
+
+  function fallbackSpeak(){
     if (!canSpeak) return;
     try {
       window.speechSynthesis.cancel();
       var b = build(current);
       var u = new SpeechSynthesisUtterance(b.plain.replace(/[()]/g,''));
       u.lang = 'de-DE'; u.rate = 0.85;
-      var v = pickGermanVoice(); if (v) u.voice = v;
       window.speechSynthesis.speak(u);
     } catch(e){}
   }
-  hearBtn.addEventListener('click', speak);
-  if (canSpeak && typeof window.speechSynthesis.onvoiceschanged !== 'undefined') {
-    window.speechSynthesis.onvoiceschanged = function(){};
+  function playAudio(){
+    var handled = false;
+    function fb(){ if (handled) return; handled = true; fallbackSpeak(); }
+    try {
+      player.pause();
+      player.currentTime = 0;
+      player.onerror = fb;
+      player.src = AUDIO_BASE + current + '.mp3';
+      var pr = player.play();
+      if (pr && typeof pr.catch === 'function') pr.catch(function(){});
+    } catch(e){ fb(); }
   }
+  hearBtn.addEventListener('click', playAudio);
 
   rng.addEventListener('input', function(){ update(Number(rng.value)); });
   num.addEventListener('input', function(){ update(Number(num.value)); });
