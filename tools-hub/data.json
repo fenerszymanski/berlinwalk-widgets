@@ -3871,6 +3871,69 @@
       "relatedBlogSlug": "2-days-in-berlin-itinerary",
       "iconStatus": "live-wix-media",
       "cmsItemId": "012d9e41-c8d0-470e-b5a7-35d5db011ef2"
+    },
+    {
+      "slug": "berlin-german-numbers",
+      "title": "German Number Decoder",
+      "lead": "Build any German number from 0 to 100 and hear it spoken in a real German voice. See the units-before-tens flip that makes 21 einundzwanzig (one-and-twenty), and decode the Berlin prices, platforms and quantities you actually meet.",
+      "category": "Transport",
+      "image": "https://static.wixstatic.com/media/5a08a3_7d9bb71967184a9894405de7a6ee92f0~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-german-numbers/",
+      "embedHeight": 1300,
+      "hubCategory": "Transport",
+      "type": "Guide",
+      "tags": [
+        "German numbers",
+        "counting in German",
+        "German prices",
+        "Gleis",
+        "platform number",
+        "Pfand",
+        "einundzwanzig",
+        "German for tourists",
+        "language"
+      ],
+      "aliases": [
+        "german numbers",
+        "how to say numbers in german",
+        "german numbers 1 to 100",
+        "counting in german",
+        "german prices euro"
+      ],
+      "relatedBlog": "/post/german-numbers-for-tourists-berlin",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "df63abe6-7ec6-40b0-986e-a2dc29645699"
+    },
+    {
+      "slug": "berlin-natural-history-museum",
+      "title": "World's Tallest Dinosaur Scale",
+      "lead": "The Giraffatitan skeleton in Berlin's Natural History Museum stands 13.27 metres tall, the tallest mounted dinosaur on Earth. Set your own height and see exactly what you are walking up to.",
+      "category": "Museums",
+      "image": "https://static.wixstatic.com/media/5a08a3_9d4d261694da49f38c182bbea88d1d3b~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-natural-history-museum/",
+      "embedHeight": 1400,
+      "hubCategory": "CultureLandmarks",
+      "type": "Guide",
+      "tags": [
+        "Natural History Museum",
+        "Museum für Naturkunde",
+        "dinosaur",
+        "Giraffatitan",
+        "tallest dinosaur",
+        "Berlin museums",
+        "height comparison",
+        "with kids"
+      ],
+      "aliases": [
+        "berlin dinosaur museum",
+        "giraffatitan height",
+        "tallest dinosaur berlin",
+        "natural history museum berlin",
+        "museum fur naturkunde"
+      ],
+      "relatedBlog": "/post/berlin-natural-history-museum",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "f22a1f6b-c84f-468b-902d-63a438fb2482"
     }
   ],
   "hubCategories": [
