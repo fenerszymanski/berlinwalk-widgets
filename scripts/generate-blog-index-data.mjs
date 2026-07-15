@@ -178,13 +178,17 @@ const TOPICS = [
 // guides. Keep this curated because the /blog hero is the first editorial
 // signal visitors see before the Latest shelf.
 const HERO_SLUGS = {
-  lead: 'kreuzberg-berlin',
+  lead: 'berlin-ticket-machines',
   secondary: [
+    'berlin-ringbahn',
+    'berlin-train-announcements',
+    'open-air-cinema-berlin',
+    'where-to-watch-2026-world-cup-in-berlin',
+    'currency-exchange-in-berlin',
+    'kreuzberg-berlin',
     'kadewe-berlin',
-    'hitlers-bunker-berlin',
     'how-to-pronounce-berlin-station-names',
     'tiergarten-berlin',
-    'currency-exchange-in-berlin',
     'berlin-observation-decks',
     'u-bahn-vs-s-bahn-berlin',
     'air-conditioning-in-berlin',
@@ -235,6 +239,12 @@ const REQUIRED_SLUGS = [
   'why-is-berlin-founding-year-1237',
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
+  'berlin-ticket-machines',
+  'berlin-ringbahn',
+  'berlin-train-announcements',
+  'open-air-cinema-berlin',
+  'buy-berlin-transport-tickets-on-your-phone',
+  'berlin-layover-guide',
   'kreuzberg-berlin',
   'kadewe-berlin',
   'hitlers-bunker-berlin',
