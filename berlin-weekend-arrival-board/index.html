@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Berlin Weekend Arrival Board | BerlinWalk</title>
+  <meta name="description" content="Shift a realistic Berlin weekend plan around your Friday or Saturday arrival and Sunday departure.">
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,650&family=IBM+Plex+Mono:wght@500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    :root{--ink:#082a18;--green:#123d18;--brand:#1b5e20;--lime:#7cb342;--yellow:#ffe600;--cream:#fafaf5;--paper:#fffef8;--muted:#5c665d;--line:#cad7c7;--red:#b83b42}
+    *{box-sizing:border-box}
+    html{background:transparent}
+    body{margin:0;background:transparent;color:var(--ink);font-family:"Space Grotesk",system-ui,sans-serif}
+    button,a{font:inherit}
+    .wab{max-width:1040px;margin:0 auto;background:var(--cream);border:1px solid #d7dfd4;border-radius:28px;overflow:hidden;box-shadow:0 24px 60px rgba(8,42,24,.13)}
+    .wab__top{position:relative;padding:34px 34px 30px;color:#fff;background:linear-gradient(135deg,#082a18 0%,#123d18 64%,#1b5e20 100%)}
+    .wab__top:after{content:"";position:absolute;inset:auto 0 0;height:5px;background:linear-gradient(90deg,var(--yellow),var(--lime))}
+    .wab__eyebrow{margin:0 0 10px;color:var(--yellow);font:600 12px/1.2 "IBM Plex Mono",monospace;letter-spacing:.16em;text-transform:uppercase}
+    .wab h1{max-width:760px;margin:0;font:650 clamp(34px,6vw,64px)/.98 "Fraunces",serif;letter-spacing:-.035em}
+    .wab__intro{max-width:760px;margin:16px 0 0;color:#e7efe6;font-size:17px;line-height:1.55}
+    .wab__controls{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:26px 34px 12px}
+    .wab__control{min-width:0}
+    .wab__label{display:block;margin:0 0 9px;color:var(--green);font:600 11px/1.2 "IBM Plex Mono",monospace;letter-spacing:.13em;text-transform:uppercase}
+    .wab__seg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+    .wab__seg button{min-height:48px;padding:10px 12px;border:1px solid #b7c8b4;border-radius:12px;background:var(--paper);color:var(--green);font-weight:650;cursor:pointer;text-align:left;transition:.16s ease}
+    .wab__seg button:hover{border-color:var(--brand);transform:translateY(-1px)}
+    .wab__seg button[aria-pressed="true"]{border-color:var(--yellow);background:var(--yellow);color:#123d18;box-shadow:0 0 0 2px rgba(255,230,0,.2)}
+    .wab__summary{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;margin:14px 34px 0;padding:18px 20px;border:1px solid #b9c9b6;border-radius:16px;background:#eef4eb}
+    .wab__hours{min-width:110px;padding-right:18px;border-right:1px solid #b9c9b6}
+    .wab__hours strong{display:block;font:650 34px/1 "Fraunces",serif;color:var(--brand)}
+    .wab__hours span{font:600 10px/1.3 "IBM Plex Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+    .wab__summary p{margin:0;color:#304236;line-height:1.45}
+    .wab__board{padding:24px 34px 30px}
+    .wab__day{margin-top:18px;border:1px solid #c8d3c5;border-radius:18px;background:var(--paper);overflow:hidden}
+    .wab__day:first-child{margin-top:0}
+    .wab__dayhead{display:grid;grid-template-columns:120px 1fr;align-items:center;gap:16px;padding:12px 16px;background:#e6efe2;border-bottom:1px solid #c8d3c5}
+    .wab__dayname{font:600 12px/1.2 "IBM Plex Mono",monospace;letter-spacing:.13em;text-transform:uppercase;color:var(--brand)}
+    .wab__dayrule{height:1px;background:#b8c9b4}
+    .wab__row{display:grid;grid-template-columns:92px 170px 1fr;gap:16px;align-items:start;padding:17px 16px;border-top:1px solid #e2e8df}
+    .wab__row:first-of-type{border-top:0}
+    .wab__time{font:600 12px/1.35 "IBM Plex Mono",monospace;color:var(--brand)}
+    .wab__place{font-weight:700;color:var(--ink)}
+    .wab__move{color:#4b5b50;line-height:1.45}
+    .wab__row[data-status="buffer"]{background:#fff9d9}
+    .wab__row[data-status="buffer"] .wab__place:before{content:"BUFFER";display:inline-block;margin:0 7px 2px 0;padding:3px 5px;background:var(--yellow);color:#123d18;font:600 9px/1 "IBM Plex Mono",monospace;letter-spacing:.08em}
+    .wab__note{margin:0 34px 28px;padding:15px 17px;border-left:4px solid var(--yellow);background:#fffbe6;color:#3b483e;font-size:14px;line-height:1.5}
+    .wab__cta{display:flex;gap:18px;align-items:center;justify-content:space-between;padding:24px 34px;background:#082a18;color:#fff}
+    .wab__cta p{max-width:600px;margin:0;color:#e0e9df;line-height:1.5}
+    .wab__cta a,.wab__cta a:visited{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 18px;border-radius:10px;background:var(--yellow);color:#123d18!important;font-weight:800;text-decoration:none;white-space:nowrap}
+    .wab__cta a:hover,.wab__cta a:focus,.wab__cta a:active{background:#f4d900;color:#123d18!important}
+    @media(max-width:720px){
+      .wab{border-radius:20px}.wab__top{padding:27px 20px 25px}.wab h1{font-size:42px}.wab__intro{font-size:16px}
+      .wab__controls{grid-template-columns:1fr;padding:22px 20px 8px}.wab__summary{margin:12px 20px 0;padding:15px}.wab__board{padding:20px}.wab__note{margin:0 20px 22px}
+      .wab__row{grid-template-columns:78px 1fr;gap:6px 12px}.wab__move{grid-column:2}.wab__cta{align-items:stretch;flex-direction:column;padding:22px 20px}.wab__cta a{width:100%}
+    }
+    @media(max-width:390px){
+      .wab h1{font-size:36px}.wab__seg{grid-template-columns:1fr}.wab__summary{grid-template-columns:1fr;gap:10px}.wab__hours{padding:0 0 10px;border:0;border-bottom:1px solid #b9c9b6}.wab__dayhead{grid-template-columns:1fr}.wab__dayrule{display:none}.wab__row{grid-template-columns:68px 1fr;padding:15px 13px}
+    }
+    @media(prefers-reduced-motion:reduce){.wab__seg button{transition:none}}
+  </style>
+</head>
+<body>
+  <main class="wab" aria-labelledby="wab-title">
+    <header class="wab__top">
+      <p class="wab__eyebrow">Berlin weekend arrival board</p>
+      <h1 id="wab-title">Start with the hours you actually have.</h1>
+      <p class="wab__intro">Choose your arrival and departure. The board protects one central Saturday line and changes Sunday before it starts inventing impossible Berlin hours.</p>
+    </header>
+
+    <section class="wab__controls" aria-label="Weekend timing">
+      <div class="wab__control">
+        <span class="wab__label">I reach my hotel</span>
+        <div class="wab__seg" id="arrival-options">
+          <button type="button" data-arrival="fri18" aria-pressed="true">Friday, 18:00</button>
+          <button type="button" data-arrival="fri22" aria-pressed="false">Friday, 22:00</button>
+          <button type="button" data-arrival="sat09" aria-pressed="false">Saturday, 09:00</button>
+          <button type="button" data-arrival="sat14" aria-pressed="false">Saturday, 14:00</button>
+        </div>
+      </div>
+      <div class="wab__control">
+        <span class="wab__label">I need to leave the centre</span>
+        <div class="wab__seg" id="departure-options">
+          <button type="button" data-departure="sun16" aria-pressed="false">Sunday, 16:00</button>
+          <button type="button" data-departure="sun20" aria-pressed="true">Sunday, 20:00</button>
+          <button type="button" data-departure="mon10" aria-pressed="false">Monday, 10:00</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="wab__summary" aria-live="polite">
+      <div class="wab__hours"><strong id="hours-value">50</strong><span>usable hours</span></div>
+      <p id="plan-summary">Friday is useful. Keep it small around Hackescher Markt, then start the main line on Saturday.</p>
+    </section>
+
+    <section class="wab__board" id="schedule" aria-label="Adjusted Berlin weekend schedule"></section>
+
+    <p class="wab__note"><strong>Check before you go:</strong> Museum entrances, Reichstag registration, transport works and weather-dependent Mauerpark karaoke can change. The board gives the order, not a promise that every door is open.</p>
+
+    <footer class="wab__cta">
+      <p>Different hotel, interests or mobility needs? Put the real dates and stay area into the Berlin Trip Planner instead of forcing this first-visit line.</p>
+      <a href="https://www.berlinwalk.com/berlin-trip-planner?utm_source=blog-widget&amp;utm_medium=arrival-board&amp;utm_campaign=weekend-in-berlin-48-hour-itinerary">Build my Berlin plan</a>
+    </footer>
+  </main>
+
+  <script>
+    (() => {
+      const profiles = {
+        fri18: {
+          hours: { sun16: 46, sun20: 50, mon10: 64 },
+          summary: "Friday is useful. Keep it small around Hackescher Markt, then start the main line on Saturday.",
+          days: [
+            ["FRIDAY", [
+              ["19:30", "Hackescher Markt", "Eat, walk the Hackesche Höfe courtyards and finish beside the Spree."],
+              ["22:00", "Hotel", "Stop. Saturday is more valuable than squeezing in one more district.", "buffer"]
+            ]],
+            ["SATURDAY", [
+              ["10:30", "Alexanderplatz", "Find the World Clock, get coffee and let the transport stress finish."],
+              ["11:30", "BerlinWalk tour", "Walk the historic centre for about 2 hours and finish near Hackescher Markt."],
+              ["14:15", "Museum Island", "Choose one museum. Do not stack three buildings into the afternoon."],
+              ["17:30", "Brandenburg Gate", "Walk Unter den Linden west and use the gate as the end of the central line."],
+              ["20:00", "Kreuzberg", "Eat around Oranienstraße and stay in the district for the evening."]
+            ]],
+            ["SUNDAY", [
+              ["10:00", "Nordbahnhof", "Enter the Berlin Wall Memorial from Bernauer Straße."],
+              ["12:30", "Mauerpark", "Browse the Sunday flea market, then continue into Prenzlauer Berg."],
+              ["15:00", "Karaoke or coffee", "Stay for weather-dependent karaoke, or use a café around Kastanienallee."]
+            ]]
+          ]
+        },
+        fri22: {
+          hours: { sun16: 42, sun20: 46, mon10: 60 },
+          summary: "Friday is a landing night. Eat near the hotel and protect the 11:30 Saturday start.",
+          days: [
+            ["FRIDAY", [["22:30", "Hotel area", "Eat close to the hotel. Do not turn a late arrival into a cross-city mission.", "buffer"]]],
+            ["SATURDAY", [
+              ["10:30", "Alexanderplatz", "Find the World Clock and begin with the central historic line."],
+              ["11:30", "BerlinWalk tour", "Walk the historic centre for about 2 hours and finish near Hackescher Markt."],
+              ["14:15", "Museum Island", "Choose one museum and give it your real attention."],
+              ["17:30", "Brandenburg Gate", "Walk Unter den Linden west, with a booked Reichstag slot only if you have one."],
+              ["20:00", "Kreuzberg", "Choose dinner and the rest of the evening around Oranienstraße."]
+            ]],
+            ["SUNDAY", [
+              ["10:00", "Nordbahnhof", "Walk the Berlin Wall Memorial along Bernauer Straße."],
+              ["12:30", "Mauerpark", "Browse the market and use Prenzlauer Berg for lunch."],
+              ["15:00", "Karaoke or coffee", "Keep this only if your departure leaves a calm luggage and station buffer."]
+            ]]
+          ]
+        },
+        sat09: {
+          hours: { sun16: 31, sun20: 35, mon10: 49 },
+          summary: "Leave the bag first. Saturday still works if Alexanderplatz is your first sightseeing stop.",
+          days: [
+            ["SATURDAY", [
+              ["09:30", "Bag drop", "Use the hotel or a locker before the city. Do not sightsee with luggage."],
+              ["11:30", "BerlinWalk tour", "Start at the World Clock and walk the historic centre for about 2 hours."],
+              ["14:15", "Museum Island", "Have lunch, then choose one museum."],
+              ["17:30", "Brandenburg Gate", "Walk Unter den Linden west and stop at the gate or Tiergarten."],
+              ["20:00", "Kreuzberg", "Eat around Oranienstraße and stay in one district."]
+            ]],
+            ["SUNDAY", [
+              ["10:00", "Nordbahnhof", "Use Bernauer Straße to understand the border landscape."],
+              ["12:30", "Mauerpark", "Browse the market and continue into Prenzlauer Berg."],
+              ["15:00", "Karaoke or coffee", "Stay only when the departure buffer remains comfortable."]
+            ]]
+          ]
+        },
+        sat14: {
+          hours: { sun16: 26, sun20: 30, mon10: 44 },
+          summary: "Saturday afternoon is still useful. Take the 15:30 central walk and let Sunday carry the Wall and Mauerpark.",
+          days: [
+            ["SATURDAY", [
+              ["14:15", "Bag drop", "Leave the luggage before moving into the centre."],
+              ["15:30", "BerlinWalk tour", "Start at the World Clock and finish near Hackescher Markt at about 17:30."],
+              ["18:00", "Museum Island outside", "Walk the Spree and courtyards. Save an indoor museum for another visit."],
+              ["20:00", "Hackescher Markt", "Eat nearby. Kreuzberg is optional, not a task."]
+            ]],
+            ["SUNDAY", [
+              ["10:00", "Nordbahnhof", "Walk the Berlin Wall Memorial along Bernauer Straße."],
+              ["12:30", "Mauerpark", "Use the Sunday market as the second half of the Wall route."],
+              ["15:00", "Karaoke or coffee", "Keep this only if your departure is after 20:00."]
+            ]]
+          ]
+        }
+      };
+
+      const departureRules = {
+        sun16: { cutSundayAfter: "12:30", suffix: " Leave Mauerpark early enough to collect bags and reach your train or airport." },
+        sun20: { cutSundayAfter: null, suffix: " Sunday keeps Mauerpark, but leave a real bag and station buffer." },
+        mon10: { cutSundayAfter: null, suffix: " Sunday evening stays open. Use Prenzlauer Berg for dinner instead of adding another district." }
+      };
+
+      let arrival = "fri18";
+      let departure = "sun20";
+      const schedule = document.getElementById("schedule");
+      const hours = document.getElementById("hours-value");
+      const summary = document.getElementById("plan-summary");
+
+      function toMinutes(value) {
+        const [h, m] = value.split(":").map(Number);
+        return h * 60 + m;
+      }
+
+      function visibleRows(dayName, rows) {
+        const cut = departureRules[departure].cutSundayAfter;
+        if (dayName !== "SUNDAY" || !cut) return rows;
+        return rows.filter(row => toMinutes(row[0]) <= toMinutes(cut));
+      }
+
+      function render() {
+        const profile = profiles[arrival];
+        hours.textContent = profile.hours[departure];
+        summary.textContent = profile.summary + departureRules[departure].suffix;
+        schedule.replaceChildren();
+
+        profile.days.forEach(([name, rows]) => {
+          const day = document.createElement("section");
+          day.className = "wab__day";
+          const head = document.createElement("div");
+          head.className = "wab__dayhead";
+          head.innerHTML = `<span class="wab__dayname">${name}</span><span class="wab__dayrule" aria-hidden="true"></span>`;
+          day.appendChild(head);
+
+          visibleRows(name, rows).forEach(([time, place, move, status]) => {
+            const row = document.createElement("div");
+            row.className = "wab__row";
+            if (status) row.dataset.status = status;
+            row.innerHTML = `<div class="wab__time">${time}</div><div class="wab__place">${place}</div><div class="wab__move">${move}</div>`;
+            day.appendChild(row);
+          });
+          schedule.appendChild(day);
+        });
+      }
+
+      document.getElementById("arrival-options").addEventListener("click", event => {
+        const button = event.target.closest("button[data-arrival]");
+        if (!button) return;
+        arrival = button.dataset.arrival;
+        document.querySelectorAll("[data-arrival]").forEach(item => item.setAttribute("aria-pressed", String(item === button)));
+        render();
+      });
+
+      document.getElementById("departure-options").addEventListener("click", event => {
+        const button = event.target.closest("button[data-departure]");
+        if (!button) return;
+        departure = button.dataset.departure;
+        document.querySelectorAll("[data-departure]").forEach(item => item.setAttribute("aria-pressed", String(item === button)));
+        render();
+      });
+
+      render();
+    })();
+  </script>
+  <script src="../js/brand.js"></script>
+</body>
+</html>

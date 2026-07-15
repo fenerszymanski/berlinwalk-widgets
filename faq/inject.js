@@ -209,7 +209,8 @@
   "berlin-train-announcements": "berlin-train-announcements",
   "berlin-trams-guide": "berlin-trams-guide",
   "berlin-natural-history-museum": "berlin-natural-history-museum",
-  "2-days-in-berlin-itinerary": "2-days-in-berlin-itinerary"
+  "2-days-in-berlin-itinerary": "2-days-in-berlin-itinerary",
+  "weekend-in-berlin-48-hour-itinerary": "weekend-in-berlin-48-hour-itinerary"
 };
 
   var SCHEMAS = {
@@ -10019,6 +10020,68 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Plan for roughly 5 to 7 kilometres of walking each day, depending on museum choices and evening detours. Berlin is flat, but long periods of standing add up. The M10 tram handles the biggest transfer on Day 2, from Eberswalder Strasse toward Warschauer Strasse."
+        }
+      }
+    ]
+  },
+  "weekend-in-berlin-48-hour-itinerary": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is 48 hours enough for a weekend in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, 48 hours is enough for a strong first layer of Berlin if you keep the route coherent. Use Saturday for Alexanderplatz, the historic centre, one museum and Brandenburg Gate. Use Sunday for the Berlin Wall Memorial on Bernauer Straße and Mauerpark. It is not enough for every major museum and neighbourhood, so do not build a cross-city checklist."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I do in Berlin on Friday evening?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If you reach your hotel by about 19:00, eat around Hackescher Markt, walk through Hackesche Höfe and follow the Spree beside Museum Island. If you arrive after 21:00, eat near the hotel and protect Saturday morning rather than starting a late cross-city trip."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best Saturday route for a first weekend in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start at the World Clock on Alexanderplatz, walk through the historic centre, finish near Hackescher Markt, choose one Museum Island building, then continue along Unter den Linden to Brandenburg Gate. This keeps the main sights on one understandable east-to-west line."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to book anything before a 48-hour Berlin trip?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Book the Reichstag dome in advance if it matters to you because the German Bundestag requires prior registration. Check the official Museum Island page before choosing a museum and reserve popular timed slots when available. The BerlinWalk Saturday tour can also be booked before arrival so the World Clock start is protected."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are Berlin shops open on Sunday?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most normal shops in Berlin close on Sundays. Limited exceptions include some supermarkets at major stations, airport retail and specially authorised Sunday-shopping dates. Buy specific clothes, toiletries and groceries on Friday or Saturday, then use Sunday for the Berlin Wall Memorial, a museum, a park or a flea market."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I do in Berlin on Sunday?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start at Nordbahnhof and walk the Berlin Wall Memorial on Bernauer Straße. Continue uphill to Mauerpark for the Sunday flea market, then use Prenzlauer Berg for lunch. Weather-dependent Mauerpark karaoke usually belongs to the later afternoon, so keep it only when your departure leaves a comfortable bag and station buffer."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which transport ticket fits a weekend in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin AB covers the central itinerary, including Alexanderplatz, Museum Island, Brandenburg Gate, Bernauer Straße and Mauerpark. BER Airport is in zone C, so airport travel needs ABC coverage. A BVG 24-hour ticket runs for 24 hours from validation, which can be useful from Friday evening into Saturday evening."
         }
       }
     ]
