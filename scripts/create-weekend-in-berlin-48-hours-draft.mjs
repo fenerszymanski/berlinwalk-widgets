@@ -422,15 +422,20 @@ function seoData(cover) {
   };
 }
 
-async function findExistingTag(label) {
-  try {
-    const existing = await wixFetch(`/blog/v3/tags/labels/${encodeURIComponent(label)}`, { method: 'GET' });
-    const tag = existing.tag || existing;
-    return tag.id || null;
-  } catch (error) {
-    console.warn(`WARN existing tag not found, leaving label out of tagIds: ${label}`);
-    return null;
+async function ensureTag(label) {
+  const created = await fetch(`${API_ROOT}/blog/v3/tags`, {
+    method: 'POST',
+    headers: headers({ 'Content-Type': 'application/json' }),
+    body: JSON.stringify({ label }),
+  });
+  if (created.ok) {
+    const tag = (await created.json()).tag;
+    if (tag?.id) return tag.id;
   }
+  const existing = await wixFetch(`/blog/v3/tags/labels/${encodeURIComponent(label)}`, { method: 'GET' });
+  const tag = existing.tag || existing;
+  if (!tag.id) throw new Error(`Could not create/find tag: ${label}`);
+  return tag.id;
 }
 
 async function findExistingDraft() {
@@ -577,11 +582,9 @@ async function createOrUpdateDraft({ dryRun }) {
 
   const tagIds = [];
   for (const label of POST.tagLabels) {
-    const tagId = await findExistingTag(label);
-    if (tagId) {
-      tagIds.push(tagId);
-      console.log(`OK existing tag "${label}" -> ${tagId}`);
-    }
+    const tagId = await ensureTag(label);
+    tagIds.push(tagId);
+    console.log(`OK tag "${label}" -> ${tagId}`);
   }
 
   const wordCount = body.split(/\s+/).filter(Boolean).length;

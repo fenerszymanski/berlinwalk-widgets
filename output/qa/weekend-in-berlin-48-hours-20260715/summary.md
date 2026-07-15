@@ -1,4 +1,4 @@
-# Weekend in Berlin 48-Hour Article - Local QA
+# Weekend in Berlin 48-Hour Article - Draft and Live-Asset QA
 
 Run: 2026-07-15 Europe/Berlin
 
@@ -11,7 +11,10 @@ Run: 2026-07-15 Europe/Berlin
 - Body: 1,820 words, 0 Markdown H1, 6 inline images, 6 styled-caption sources, 3 embeds.
 - Internal links: 7 unique BerlinWalk destinations in the body.
 - Official source links: BVG, Museum Island/SMB, German Bundestag, Berlin Wall Memorial and visitBerlin.
-- Wix state: no API call made and no remote draft created. The helper defaults to `--dry-run`; its exact mutation flag is `--create-unpublished-draft`, its create body includes `publish: false`, and it has no publish endpoint.
+- Wix state: draft `7d3ac682-daf9-418f-8d16-0d1d03f140bd` created and read back as `UNPUBLISHED`; `hasUnpublishedChanges=true`. The helper defaults to `--dry-run`; its exact mutation flag is `--create-unpublished-draft`, its create body includes `publish: false`, and it has no publish endpoint.
+- Wix readback: slug `weekend-in-berlin-48-hour-itinerary`, 6 images with 6 alt texts, 6 styled captions, 3 embeds, 0 body H1, 16 SEO tags and 0 internal leak terms.
+- Wix tags: all five intended article tags are attached, including newly created `Weekend in Berlin`, `48 Hours in Berlin` and `First Time in Berlin` tags.
+- Draft edit URL: `https://manage.wix.com/dashboard/12ee5ea0-70a7-492f-8020-ffb27cbb630f/blog/drafts/7d3ac682-daf9-418f-8d16-0d1d03f140bd/edit`.
 
 ## Content validation
 
@@ -25,6 +28,9 @@ Run: 2026-07-15 Europe/Berlin
 ## Widget validation
 
 - Widget: `berlin-weekend-arrival-board/`.
+- GitHub Pages asset returned HTTP 200 after deployment and matched the committed SHA-256 hash byte for byte.
+- Live Chromium mobile and WebKit mobile both rendered the 26-hour late-arrival/early-departure state with zero horizontal overflow, no Friday block and no late Sunday karaoke block.
+- Live Quick Summary returned the intended six numbered items; live FAQ returned the intended seven questions.
 - Interaction: 4 arrival states x 3 departure states.
 - Automated state matrix: 36/36 PASS across 1100, 390 and 320 px.
 - The matrix checked expected usable-hours values, exactly two pressed controls, correct Friday removal, correct 16:00 Sunday karaoke cutoff, zero horizontal overflow and dark `rgb(18, 61, 24)` text on all yellow selected controls and the CTA.
@@ -42,7 +48,5 @@ Run: 2026-07-15 Europe/Berlin
 
 ## Publish boundary
 
-- This branch does not push or deploy assets.
-- This branch does not call Wix mutation APIs.
 - This branch does not publish a Wix post.
-- After integration/deploy, the normal next gate is: verify GitHub Pages assets, load the Wix API key from Keychain, run the helper with `--create-unpublished-draft`, read back `UNPUBLISHED`, and hand the exact draft to Yusuf for review.
+- The article remains an exact, reviewable Wix draft. Publication requires Yusuf's explicit approval for this draft.
