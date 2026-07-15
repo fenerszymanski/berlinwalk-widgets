@@ -207,7 +207,8 @@
   "hidden-places-central-berlin": "hidden-places-central-berlin",
   "berlin-ringbahn": "berlin-ringbahn",
   "berlin-train-announcements": "berlin-train-announcements",
-  "berlin-trams-guide": "berlin-trams-guide"
+  "berlin-trams-guide": "berlin-trams-guide",
+  "berlin-natural-history-museum": "berlin-natural-history-museum"
 };
 
   var SCHEMAS = {
@@ -9901,6 +9902,68 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "The MetroTram lines (the ones with an M, like the M10 and M4) run 24 hours a day, every day, though less often through the small hours. The plain numbered lines mostly stop in the evening, when night buses take over. So after midnight, stick to an M line or check the BVG app for the nearest Nachtbus."
+        }
+      }
+    ]
+  },
+  "berlin-natural-history-museum": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the Berlin Natural History Museum famous for?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Museum für Naturkunde is famous for the world's tallest mounted dinosaur skeleton, a Giraffatitan brancai that stands 13.27 metres high and 26.8 metres long in its glass-roofed central hall. The same building holds Tristan Otto, a real Tyrannosaurus rex, and the Berlin Archaeopteryx, the celebrated fossil that links dinosaurs and birds. Those three exhibits alone are the reason most visitors come."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much do tickets cost in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adult entry is 11 euros, reduced (students, pensioners, unemployed) is 5 euros, and children under 6 go free. A family ticket for 2 adults and up to 3 children under 14 is 18 euros. You can buy on arrival or, better on busy weekends and school holidays, book a timed slot on the museum's website up to two weeks ahead to avoid the queue."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Berlin Natural History Museum free on the first Sunday of the month?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, not any more. Berlin's Museumssonntag scheme, which gave free entry on the first Sunday of each month, ran for the last time in December 2024 and has not been relaunched for 2026. Older guides still promise a free Sunday here, but it no longer applies. If you want a big free-entry museum night instead, the twice-yearly Lange Nacht der Museen is the event to look for."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the opening hours?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The museum is closed on Mondays. It opens Tuesday to Friday from 9:30 and Saturday, Sunday and public holidays from 10:00, and it closes at 18:00 every open day. Last admission is 30 minutes before closing, so aim to arrive by 17:00 at the very latest if you want time with the dinosaurs."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long do you need, and is it good for kids?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "One to two hours covers it comfortably. The central dinosaur hall, the T. rex and the interactive Jurascope binoculars that put skin and muscle back on the skeletons are a genuine hit with children, and the building is calm, indoor and well lit. It is one of the better rainy-afternoon or family calls in central Berlin."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you get to the museum?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Take the U6 to Naturkundemuseum station, which sits about 300 metres from the door on Invalidenstraße 43. It is also a short walk from Nordbahnhof (S1, S2) and about 1.3 km from Hauptbahnhof. Because it is just north of the government quarter, it slots neatly into a day that also takes in the Berlin Wall Memorial on Bernauer Straße or the central sights."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Berlin Natural History Museum worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, if you like dinosaurs, natural history or a break from Berlin's heavier 20th-century history, it is an easy recommendation and strong value at 11 euros. It is not a vast day-long museum like the ones on Museum Island, and a few side halls feel dated, but the Giraffatitan, Tristan and the Archaeopteryx are world-class. Treat it as a focused one-to-two-hour highlight rather than a full day out."
         }
       }
     ]
