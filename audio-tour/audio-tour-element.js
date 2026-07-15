@@ -401,7 +401,7 @@
           <div class="at-cta">
             <div class="at-cta-text">
               <small>Liked what you heard?</small>
-              Walk the rest with me. Free, tip-based, daily 11:30 at the World Clock.
+              Walk the rest with me. Free, tip-based, Tue-Sat at 11:30 and 15:30 at the World Clock.
             </div>
             <a class="at-cta-btn" href="${BOOK_URL}" target="_top" rel="noopener" data-at-cta="book">Book Free Tour →</a>
           </div>
