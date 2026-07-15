@@ -1,4 +1,4 @@
-# 2 Days in Berlin Itinerary - Pre-draft Readback
+# 2 Days in Berlin Itinerary - Draft Readback
 
 Checked: 2026-07-15 (Europe/Berlin)
 
@@ -30,6 +30,11 @@ Checked: 2026-07-15 (Europe/Berlin)
 
 ## Route-map QA
 
+- GitHub Pages deployment `028cb8e` completed successfully.
+- Live widget and 160 px icon both returned HTTP 200 and matched the committed SHA-256 hashes byte for byte.
+- Live BerlinTools page: `https://www.berlinwalk.com/tools/berlin-two-day-route-map`.
+- BerlinTools mobile shell kept the normal header geometry and had no horizontal overflow in Chromium or WebKit.
+
 ### Chromium mobile
 
 - Real OpenStreetMap/Leaflet base map loaded with 7 stops on each day.
@@ -55,8 +60,15 @@ Checked: 2026-07-15 (Europe/Berlin)
 - Public credits are in a compact, default-closed disclosure inside the route-map widget.
 - The BerlinTools icon is available at 512 px and 160 px with a prompt/source record kept outside the public article copy.
 
-## Remaining gates
+## Wix draft readback
 
-- Rebase onto the latest `origin/main` and resolve append-only data files without dropping newer entries.
-- Push and verify GitHub Pages assets.
-- Create the exact Wix draft, then read back `UNPUBLISHED`, slug, image/alt, embed, caption and SEO-tag counts.
+- Draft ID: `b27adae0-12de-4a62-9093-b138087deab9`.
+- Status: `UNPUBLISHED`; `hasUnpublishedChanges=true`.
+- Slug: `2-days-in-berlin-itinerary`.
+- Images: 5; alt texts: 5; HTML embeds: 3; body H1: 0; styled captions: 5.
+- SEO tags: 16; leak terms: none.
+- Edit URL: `https://manage.wix.com/dashboard/12ee5ea0-70a7-492f-8020-ffb27cbb630f/blog/drafts/b27adae0-12de-4a62-9093-b138087deab9/edit`.
+
+## Remaining gate
+
+- Yusuf must review and explicitly approve this exact draft before publication.
