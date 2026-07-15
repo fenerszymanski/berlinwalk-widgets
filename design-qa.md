@@ -62,3 +62,63 @@
 - None required for this structural change.
 
 final result: passed
+
+---
+
+# BerlinWalk Homepage Products Design QA
+
+**Comparison Target**
+
+- Source visual truth: `/Users/yusufucuz/.codex/generated_images/019f5d2f-fb10-7690-988e-10e8be912812/exec-b213bf4d-cb79-43af-b348-393ec2755777.png`
+- Rendered implementation, desktop: `/tmp/berlinwalk-home-products-local-desktop-final.png`
+- Rendered implementation, mobile top: `/tmp/berlinwalk-home-products-mobile-top.png`
+- Rendered implementation, mobile middle: `/tmp/berlinwalk-home-products-mobile-mid.png`
+- Rendered implementation, mobile bottom: `/tmp/berlinwalk-home-products-mobile-bottom.png`
+- Desktop viewport/state: 1280 × 720 viewport, full component capture, default state.
+- Mobile viewport/state: 390 × 844 viewport, top/middle/bottom scroll states after all lazy images loaded.
+
+**Comparison Evidence**
+
+- Combined full-view comparison: `/Users/yusufucuz/Documents/New project/output/qa/home-products-redesign-20260715/source-vs-local-native.png`
+- The full-view comparison is high resolution and keeps both the selected direction and the complete implementation legible, so no separate focused crop was required.
+
+**Findings**
+
+- No actionable P0, P1, or P2 differences remain.
+- Visual hierarchy: the selected split composition is preserved. Trip Planner remains the dominant product on the left; Audio Tours, First-Day Rescue Plan, and Photo Missions form the scannable secondary stack on the right.
+- Fonts and typography: local Fraunces and Space Grotesk files reproduce the selected editorial display/body pairing without a third-party font request. Heading wraps and card title scale remain stable at desktop and 390 px mobile widths.
+- Spacing and layout rhythm: the implementation keeps the source's cream canvas, generous heading space, one large feature card, three ruled secondary rows, and compact yellow CTAs. The layout becomes one column below 1040 px and converts the secondary rows to compact image-and-copy cards below 720 px.
+- Colors and visual tokens: BerlinWalk cream, dark green, green labels, and yellow CTA tokens are retained. Every yellow CTA computes to dark green text in its default state; hover and focus rules explicitly keep the same dark foreground.
+- Image quality and asset fidelity: all four cards use real BerlinWalk assets already present in the project. Images loaded at their natural dimensions, used `object-fit: cover`, had descriptive alt text, and produced no broken or placeholder state.
+- Copy and content: the section now reflects the current product family rather than the older narrow card set. All public copy is English, concise, concrete, and points to canonical `www.berlinwalk.com` URLs.
+- Behavior and accessibility: each entire card is one descriptive link with one focus target. The Trip Planner card was clicked in the local build and navigated to the live Trip Planner page. All four canonical destinations returned HTTP 200.
+- Responsiveness: the 390 px run had `scrollWidth === clientWidth`, no horizontal overflow, and all four card images loaded after scroll. Desktop had the same no-overflow result. Browser console output was empty in both runs.
+
+**Comparison History**
+
+1. Earlier P2 — the first Photo Missions thumbnail used a dense product-cover graphic that became noisy at the compact card size. Fix: it was replaced with the real Anhalter Bahnhof route image and a precise alt description. Post-fix evidence: the final desktop and mobile captures above.
+2. Earlier P2 — the first mobile full-page capture showed blank lower thumbnails because those images were intentionally lazy-loaded and had not entered the viewport. Fix: the page was scrolled through all card states, every image was confirmed complete at its natural dimensions, and separate top/middle/bottom captures were inspected. No loading bug remained.
+3. Implementation adaptation — the source concept uses generated campaign imagery and arrow glyphs. The production version uses existing BerlinWalk product/route imagery and makes the entire card clickable, avoiding decorative controls and unverified imagery while preserving the approved hierarchy.
+
+**Implementation Checklist**
+
+- [x] Selected option 1 hierarchy implemented.
+- [x] Current product family and canonical URLs.
+- [x] Local brand fonts and project color tokens.
+- [x] Desktop and 390 px mobile visual QA.
+- [x] No horizontal overflow.
+- [x] Four images loaded with descriptive alt text.
+- [x] Yellow CTA foreground contrast verified.
+- [x] Primary product interaction verified.
+- [x] All four destinations returned HTTP 200.
+- [x] Browser console checked with zero errors.
+
+**Open Questions**
+
+- None.
+
+**Follow-up Polish**
+
+- None required before publication.
+
+final result: passed
