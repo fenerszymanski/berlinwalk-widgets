@@ -3842,7 +3842,7 @@
       "title": "Berlin Two-Day Route Map",
       "lead": "Switch between two realistic first-visit routes, tap every stop in walking order, and see the M10 handover from the Berlin Wall Memorial to the East Side Gallery.",
       "category": "Discovery",
-      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-two-day-route-map-160.png",
+      "image": "https://static.wixstatic.com/media/5a08a3_2b6723c373e645a78f488a11aed8ade5~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-two-day-route-map/",
       "embedHeight": 1500,
       "hubCategory": "TripPlans",
@@ -3869,7 +3869,8 @@
       ],
       "relatedBlog": "/post/2-days-in-berlin-itinerary",
       "relatedBlogSlug": "2-days-in-berlin-itinerary",
-      "iconStatus": "local-ready"
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "012d9e41-c8d0-470e-b5a7-35d5db011ef2"
     }
   ],
   "hubCategories": [
