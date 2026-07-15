@@ -1,0 +1,18 @@
+{
+  "checkedAt": "2026-07-15T14:57:35Z",
+  "property": "sc-domain:berlinwalk.com",
+  "requests": [
+    {
+      "url": "https://www.berlinwalk.com/post/2-days-in-berlin-itinerary",
+      "before": "URL is not on Google; URL is unknown to Google",
+      "result": "Indexing requested",
+      "queue": "priority crawl queue"
+    },
+    {
+      "url": "https://www.berlinwalk.com/post/weekend-in-berlin-48-hour-itinerary",
+      "before": "URL is not on Google; URL is unknown to Google",
+      "result": "Indexing requested",
+      "queue": "priority crawl queue"
+    }
+  ]
+}

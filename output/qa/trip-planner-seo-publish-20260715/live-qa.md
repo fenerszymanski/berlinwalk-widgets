@@ -28,9 +28,19 @@
 - Total published posts: 214.
 - Latest positions: Weekend itinerary first, Two-day itinerary second.
 - Related tools mapped explicitly: Weekend itinerary to `ultimate-berlin-trip-planner`; Two-day itinerary to `berlin-two-day-route-map`.
+- GitHub Pages workflows `29425304891` and `29425302968` completed successfully for commit `a44bb8a`.
+- GitHub Pages readback returned 214 posts and the two new slugs in positions one and two of the source `latest` array.
+- Live `https://www.berlinwalk.com/blog` mobile QA at 390x844: both new links appear once in `Latest Berlin notes`, in the correct order, with zero horizontal overflow and zero console errors.
+
+## Google Search Console
+
+- Property: `sc-domain:berlinwalk.com`.
+- Both new URLs initially returned `URL is not on Google` / `URL is unknown to Google`.
+- Both indexing requests completed with `Indexing requested`; each URL was added to Google's priority crawl queue.
+- Evidence: `search-console-indexing.json`.
 
 ## Evidence
 
 - `publish-2-days-in-berlin-itinerary.json`
 - `publish-weekend-in-berlin-48-hour-itinerary.json`
-- Playwright screenshots are stored locally under `output/playwright/trip-planner-seo-publish/`.
+- Playwright screenshots are stored locally under `output/playwright/trip-planner-seo-publish/`, including the mobile `Latest Berlin notes` readback.
