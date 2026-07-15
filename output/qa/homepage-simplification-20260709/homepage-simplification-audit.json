@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "generatedAt": "2026-07-09T11:27:20.011Z",
+  "generatedAt": "2026-07-15T17:30:33.705Z",
   "homeUrl": "https://www.berlinwalk.com/",
   "checks": {
     "homepageStatus": {
@@ -13,47 +13,47 @@
         {
           "key": "hero",
           "needle": "<bw-hero-home",
-          "index": 26797
+          "index": 27158
         },
         {
           "key": "why",
           "needle": "<bw-why",
-          "index": 27477
+          "index": 27838
         },
         {
           "key": "route",
           "needle": "<bw-route",
-          "index": 28145
+          "index": 28506
         },
         {
           "key": "guide",
           "needle": "<bw-guide-home",
-          "index": 28817
+          "index": 29178
         },
         {
           "key": "reviews",
           "needle": "<bw-testimonials",
-          "index": 29499
+          "index": 29860
         },
         {
           "key": "booking",
           "needle": "id=\"comp-mmp417v9\"",
-          "index": 29561
+          "index": 29922
         },
         {
           "key": "products",
-          "needle": "Berlin on your own schedule",
-          "index": 35594
+          "needle": "id=\"comp-mrd7ywil\"",
+          "index": 35076
         },
         {
           "key": "faq",
           "needle": "<bw-faq",
-          "index": 40222
+          "index": 40583
         },
         {
           "key": "explore",
           "needle": "Keep planning your trip",
-          "index": 40962
+          "index": 41323
         }
       ]
     },
@@ -110,22 +110,28 @@
       "ok": true,
       "details": [
         {
+          "url": "https://www.berlinwalk.com/berlin-trip-planner",
+          "ok": true,
+          "status": 200,
+          "finalUrl": "https://www.berlinwalk.com/berlin-trip-planner"
+        },
+        {
+          "url": "https://www.berlinwalk.com/audio-tours",
+          "ok": true,
+          "status": 200,
+          "finalUrl": "https://www.berlinwalk.com/audio-tours"
+        },
+        {
           "url": "https://www.berlinwalk.com/products/berlin-first-day-rescue-plan",
           "ok": true,
           "status": 200,
           "finalUrl": "https://www.berlinwalk.com/products/berlin-first-day-rescue-plan"
         },
         {
-          "url": "https://www.berlinwalk.com/products/hidden-berlin-audio-route",
+          "url": "https://www.berlinwalk.com/products/hidden-berlin-photo-missions",
           "ok": true,
           "status": 200,
-          "finalUrl": "https://www.berlinwalk.com/products/hidden-berlin-audio-route"
-        },
-        {
-          "url": "https://www.berlinwalk.com/products/death-strip-audio-route",
-          "ok": true,
-          "status": 200,
-          "finalUrl": "https://www.berlinwalk.com/products/death-strip-audio-route"
+          "finalUrl": "https://www.berlinwalk.com/products/hidden-berlin-photo-missions"
         },
         {
           "url": "https://www.berlinwalk.com/berlin-tools",
@@ -146,20 +152,20 @@
           "finalUrl": "https://www.berlinwalk.com/games"
         },
         {
-          "url": "https://www.berlinwalk.com/blog",
+          "url": "https://www.berlinwalk.com/berlin-wall-timeline",
           "ok": true,
           "status": 200,
-          "finalUrl": "https://www.berlinwalk.com/blog"
+          "finalUrl": "https://www.berlinwalk.com/berlin-wall-timeline"
         }
       ]
     },
     "quizToolLive": {
       "ok": true,
       "details": {
-        "url": "https://www.berlinwalk.com/tools/are-you-ready-for-berlin-quiz?bwqa=homepage-simplification-1783596432352",
+        "url": "https://www.berlinwalk.com/tools/are-you-ready-for-berlin-quiz?bwqa=homepage-simplification-1784136626297",
         "ok": true,
         "status": 200,
-        "finalUrl": "https://www.berlinwalk.com/tools/are-you-ready-for-berlin-quiz?bwqa=homepage-simplification-1783596432352"
+        "finalUrl": "https://www.berlinwalk.com/tools/are-you-ready-for-berlin-quiz?bwqa=homepage-simplification-1784136626297"
       }
     },
     "faq": {
@@ -256,10 +262,10 @@
         },
         "productsExploreCustom": {
           "name": "BerlinWalk Homepage Products Explore Custom Layer",
-          "revision": "14",
+          "revision": "22",
           "enabled": true,
           "position": "BODY_END",
-          "htmlLength": 12313,
+          "htmlLength": 12868,
           "homepageProductsExploreBuild": true
         }
       }
@@ -268,7 +274,7 @@
       "ok": true,
       "details": {
         "name": "BerlinWalk Homepage Products Explore Custom Layer",
-        "revision": "14",
+        "revision": "22",
         "enabled": true,
         "position": "BODY_END",
         "homepageProductsExploreBuild": true
@@ -279,51 +285,63 @@
     {
       "key": "hero",
       "needle": "<bw-hero-home",
-      "index": 26797
+      "index": 27158
     },
     {
       "key": "why",
       "needle": "<bw-why",
-      "index": 27477
+      "index": 27838
     },
     {
       "key": "route",
       "needle": "<bw-route",
-      "index": 28145
+      "index": 28506
     },
     {
       "key": "guide",
       "needle": "<bw-guide-home",
-      "index": 28817
+      "index": 29178
     },
     {
       "key": "reviews",
       "needle": "<bw-testimonials",
-      "index": 29499
+      "index": 29860
     },
     {
       "key": "booking",
       "needle": "id=\"comp-mmp417v9\"",
-      "index": 29561
+      "index": 29922
     },
     {
       "key": "products",
-      "needle": "Berlin on your own schedule",
-      "index": 35594
+      "needle": "id=\"comp-mrd7ywil\"",
+      "index": 35076
     },
     {
       "key": "faq",
       "needle": "<bw-faq",
-      "index": 40222
+      "index": 40583
     },
     {
       "key": "explore",
       "needle": "Keep planning your trip",
-      "index": 40962
+      "index": 41323
     }
   ],
   "linkChecks": {
     "product": [
+      {
+        "url": "https://www.berlinwalk.com/berlin-trip-planner",
+        "ok": true,
+        "status": 200,
+        "finalUrl": "https://www.berlinwalk.com/berlin-trip-planner"
+      },
+      {
+        "url": "https://www.berlinwalk.com/audio-tours",
+        "ok": true,
+        "status": 200,
+        "finalUrl": "https://www.berlinwalk.com/audio-tours"
+      },
       {
         "url": "https://www.berlinwalk.com/products/berlin-first-day-rescue-plan",
         "ok": true,
@@ -331,16 +349,10 @@
         "finalUrl": "https://www.berlinwalk.com/products/berlin-first-day-rescue-plan"
       },
       {
-        "url": "https://www.berlinwalk.com/products/hidden-berlin-audio-route",
+        "url": "https://www.berlinwalk.com/products/hidden-berlin-photo-missions",
         "ok": true,
         "status": 200,
-        "finalUrl": "https://www.berlinwalk.com/products/hidden-berlin-audio-route"
-      },
-      {
-        "url": "https://www.berlinwalk.com/products/death-strip-audio-route",
-        "ok": true,
-        "status": 200,
-        "finalUrl": "https://www.berlinwalk.com/products/death-strip-audio-route"
+        "finalUrl": "https://www.berlinwalk.com/products/hidden-berlin-photo-missions"
       }
     ],
     "explore": [
@@ -363,17 +375,17 @@
         "finalUrl": "https://www.berlinwalk.com/games"
       },
       {
-        "url": "https://www.berlinwalk.com/blog",
+        "url": "https://www.berlinwalk.com/berlin-wall-timeline",
         "ok": true,
         "status": 200,
-        "finalUrl": "https://www.berlinwalk.com/blog"
+        "finalUrl": "https://www.berlinwalk.com/berlin-wall-timeline"
       }
     ],
     "quizTool": {
-      "url": "https://www.berlinwalk.com/tools/are-you-ready-for-berlin-quiz?bwqa=homepage-simplification-1783596432352",
+      "url": "https://www.berlinwalk.com/tools/are-you-ready-for-berlin-quiz?bwqa=homepage-simplification-1784136626297",
       "ok": true,
       "status": 200,
-      "finalUrl": "https://www.berlinwalk.com/tools/are-you-ready-for-berlin-quiz?bwqa=homepage-simplification-1783596432352"
+      "finalUrl": "https://www.berlinwalk.com/tools/are-you-ready-for-berlin-quiz?bwqa=homepage-simplification-1784136626297"
     }
   },
   "embeds": {
@@ -427,10 +439,10 @@
     },
     "productsExploreCustom": {
       "name": "BerlinWalk Homepage Products Explore Custom Layer",
-      "revision": "14",
+      "revision": "22",
       "enabled": true,
       "position": "BODY_END",
-      "htmlLength": 12313,
+      "htmlLength": 12868,
       "homepageProductsExploreBuild": true
     }
   },
