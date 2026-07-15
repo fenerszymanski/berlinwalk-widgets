@@ -1,6 +1,16 @@
 # Audio support articles: main-domain migration runbook
 
-Status: local package only. No Wix draft, Wix publish, Vercel deploy, app-domain redirect, sitemap change or Search Console request has been made from this branch.
+Status: **COMPLETE on 2026-07-15.** Both main-domain owners are published and verified, the two exact app-domain paths permanently redirect in one hop, duplicate discovery signals are removed, the blog index is refreshed and Search Console indexing requests are confirmed.
+
+## Completion record
+
+- Main-domain Wix owners: `e7e11184-b5b0-427e-91af-df57ed24b452` and `ee37cfc3-f8c4-41a4-ad2e-91de5838e899`.
+- Production Vercel deployment: `dpl_As1hCcKiAqZSgXDsqWc85UguHqMr` (`app.berlinwalk.com`).
+- Rollback deployment: `dpl_EYTXjQVQa8vxxFcsPbKfjsHKPU1Y`.
+- Redirect result: `308`, exactly one hop, final owner `200`, tested with and without trailing slashes.
+- Wix Blog sitemap: both new post URLs present.
+- Search Console: both new audio-support owners plus the Hidden Berlin discovery post were added to the priority crawl queue.
+- No global header, footer, Wix shell, product checkout, audio asset entitlement or unrelated app route changed during this migration.
 
 ## Ownership map
 

@@ -1,0 +1,22 @@
+{
+  "checkedAt": "2026-07-15T15:44:49+02:00",
+  "property": "sc-domain:berlinwalk.com",
+  "browserAccount": "yusuf.ucuz@gmail.com",
+  "results": [
+    {
+      "url": "https://www.berlinwalk.com/post/hidden-places-central-berlin",
+      "inspectionBefore": "URL is not on Google; URL is unknown to Google",
+      "requestResult": "Indexing requested; URL added to priority crawl queue"
+    },
+    {
+      "url": "https://www.berlinwalk.com/post/berlin-audio-guide-app-vs-no-app",
+      "inspectionBefore": "URL is not on Google; URL is unknown to Google",
+      "requestResult": "Indexing requested; URL added to priority crawl queue"
+    },
+    {
+      "url": "https://www.berlinwalk.com/post/self-guided-berlin-walking-tour-audio-guide",
+      "inspectionBefore": "URL is not on Google; URL is unknown to Google",
+      "requestResult": "Indexing requested; URL added to priority crawl queue"
+    }
+  ]
+}

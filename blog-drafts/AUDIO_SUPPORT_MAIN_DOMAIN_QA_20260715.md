@@ -2,9 +2,9 @@
 
 Date: 2026-07-15
 
-Scope: local package and local browser only
+Scope: package, Wix publication, live browser QA and exact app-domain migration
 
-Live mutation: none
+Live mutation: both Wix Blog owners published one at a time; only the two matching app-domain article paths permanently redirected
 
 ## Automated package checks
 
@@ -58,9 +58,16 @@ Route-map widget:
 
 Local screenshots are under `output/playwright/audio-support-main-domain-20260715/`. That folder is intentionally ignored by git. It contains mobile and desktop captures for both widgets, the credits modal and both contact sheets.
 
-## Remaining live gates
+## Completed live gates
 
-- GitHub Pages assets are not deployed from this branch.
-- Wix drafts are not created or published.
-- App-domain redirects are not configured.
-- The migration runbook requires static-asset propagation, draft readback and live main-domain verification before either old URL can redirect.
+- Both GitHub Pages widget owners, Quick Summary datasets and FAQ datasets propagated before publication.
+- Wix post `e7e11184-b5b0-427e-91af-df57ed24b452` is published at `https://www.berlinwalk.com/post/berlin-audio-guide-app-vs-no-app`.
+- Wix post `ee37cfc3-f8c4-41a4-ad2e-91de5838e899` is published at `https://www.berlinwalk.com/post/self-guided-berlin-walking-tour-audio-guide`.
+- Both live pages return `200`, are indexable, self-canonical, expose one public H1, include `BlogPosting` and `FAQPage`, and render three embeds without horizontal overflow in Chromium or WebKit mobile QA.
+- The field-test widget's four deploy-safe scene images return `200`; all four mobile states now measure `2968 px` of content inside a `2972 px` iframe, so route changes do not clip the footer.
+- The route-map widget's seven filter states update correctly. The parent iframe follows each content height within its 4 px wrapper allowance, and all five paid routes plus the free sampler link to their intended main-domain owners.
+- Audio Tours hub QA passed with five paid product cards, both editorial links on the main domain, a working `View all five routes` jump, no mobile overflow and an iframe height matching its content.
+- Vercel production deployment `dpl_As1hCcKiAqZSgXDsqWc85UguHqMr` is live on `app.berlinwalk.com`; rollback owner before migration was `dpl_EYTXjQVQa8vxxFcsPbKfjsHKPU1Y`.
+- Each old app article URL, with and without a trailing slash, returns one `308` hop to its matching `200` main-domain owner. `/audio-tours` and all five product routes remain `200`.
+- The old article paths are absent from the app sitemap and robots file, while the Wix Blog sitemap contains both new owners.
+- Search Console initially reported all three newly published posts as `URL is unknown to Google`; `Request indexing` completed for Hidden Berlin and both audio-support owners, each with `Indexing requested` / priority crawl queue confirmation.
