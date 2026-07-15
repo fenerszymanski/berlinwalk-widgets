@@ -208,7 +208,8 @@
   "berlin-ringbahn": "berlin-ringbahn",
   "berlin-train-announcements": "berlin-train-announcements",
   "berlin-trams-guide": "berlin-trams-guide",
-  "berlin-natural-history-museum": "berlin-natural-history-museum"
+  "berlin-natural-history-museum": "berlin-natural-history-museum",
+  "2-days-in-berlin-itinerary": "2-days-in-berlin-itinerary"
 };
 
   var SCHEMAS = {
@@ -9964,6 +9965,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes, if you like dinosaurs, natural history or a break from Berlin's heavier 20th-century history, it is an easy recommendation and strong value at 11 euros. It is not a vast day-long museum like the ones on Museum Island, and a few side halls feel dated, but the Giraffatitan, Tristan and the Archaeopteryx are world-class. Treat it as a focused one-to-two-hour highlight rather than a full day out."
+        }
+      }
+    ]
+  },
+  "2-days-in-berlin-itinerary": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is 2 days enough for Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, two mostly full days are enough for a strong first visit if you keep the geography simple. Use the first day for the historic centre from Alexanderplatz to the Reichstag. Use the second for the Berlin Wall Memorial, Mauerpark, the East Side Gallery and Kreuzberg. You will not finish Berlin, but you will understand its main layers without spending the trip crossing the city."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I do on my first day in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start at the World Clock on Alexanderplatz, walk through Rotes Rathaus and Nikolaiviertel, then continue to Museum Island. After lunch around Hackescher Markt, choose one museum or stay outside, walk Unter den Linden to Brandenburg Gate, and finish at the Reichstag or in Tiergarten."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I do on my second day in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start outside S Nordbahnhof and follow the Berlin Wall Memorial along Bernauer Strasse to Mauerpark. After lunch near Eberswalder Strasse, take the M10 tram to Warschauer Strasse, walk the East Side Gallery, cross Oberbaum Bridge and stay in Kreuzberg for dinner."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I book in advance for two days in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Register for the Reichstag dome first because entry is free but timed registration is required. Reserve one Museum Island museum when your dates are busy, and place any fixed tour or timed attraction inside the area you are already visiting. Do not book several attractions on opposite sides of Berlin on the same day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How should I change this itinerary if one day is Monday?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Put the outdoor Wall route on Monday and use the other day for Museum Island. Most Staatliche Museen venues on Museum Island close on Mondays, while the outdoor Berlin Wall Memorial and East Side Gallery remain accessible. Keep each day's geography together even if you swap Day 1 and Day 2."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much walking is in this 2-day Berlin itinerary?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Plan for roughly 5 to 7 kilometres of walking each day, depending on museum choices and evening detours. Berlin is flat, but long periods of standing add up. The M10 tram handles the biggest transfer on Day 2, from Eberswalder Strasse toward Warschauer Strasse."
         }
       }
     ]

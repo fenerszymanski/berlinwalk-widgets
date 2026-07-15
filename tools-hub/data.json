@@ -3836,6 +3836,40 @@
       "relatedBlog": "/post/berlin-ticket-machines",
       "iconStatus": "live-wix-media",
       "cmsItemId": "aa6b07a3-3d5c-4e99-ad48-f380a84f3127"
+    },
+    {
+      "slug": "berlin-two-day-route-map",
+      "title": "Berlin Two-Day Route Map",
+      "lead": "Switch between two realistic first-visit routes, tap every stop in walking order, and see the M10 handover from the Berlin Wall Memorial to the East Side Gallery.",
+      "category": "Discovery",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-two-day-route-map-160.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-two-day-route-map/",
+      "embedHeight": 1500,
+      "hubCategory": "TripPlans",
+      "type": "Planner",
+      "priority": 43,
+      "tags": [
+        "2 days",
+        "two day itinerary",
+        "route map",
+        "Alexanderplatz",
+        "Museum Island",
+        "Berlin Wall Memorial",
+        "East Side Gallery",
+        "M10",
+        "first visit",
+        "walking route"
+      ],
+      "aliases": [
+        "48 hours Berlin",
+        "Berlin two day plan",
+        "Berlin in two days",
+        "2 day Berlin map",
+        "first time Berlin itinerary"
+      ],
+      "relatedBlog": "/post/2-days-in-berlin-itinerary",
+      "relatedBlogSlug": "2-days-in-berlin-itinerary",
+      "iconStatus": "local-ready"
     }
   ],
   "hubCategories": [

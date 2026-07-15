@@ -1492,5 +1492,18 @@
     "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/bunker-site-orientation-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/bunker-site-orientation-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_b9a1e1087c024bb0af21b2fcada7859e~mv2.png"
+  },
+  {
+    "slug": "berlin-two-day-route-map",
+    "title": "Berlin Two-Day Route Map",
+    "category": "Discovery",
+    "source": "codex-built-in-imagegen-20260715",
+    "generatedAt": "2026-07-15",
+    "promptFile": "tools-home/icons/_src/codex-built-in-imagegen-20260715/berlin-two-day-route-map/PROMPT.md",
+    "sourceImage": "tools-home/icons/_src/codex-built-in-imagegen-20260715/berlin-two-day-route-map/source.png",
+    "png512": "tools-home/icons/berlin-two-day-route-map.png",
+    "png160": "tools-home/icons/berlin-two-day-route-map-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-two-day-route-map-160.png",
+    "wixUrl": ""
   }
 ]
