@@ -1557,5 +1557,18 @@
     "png160": "tools-home/icons/friedrichshain-kiez-loop-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/friedrichshain-kiez-loop-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_e41d61a8176640d7a679cda275300c51~mv2.png"
+  },
+  {
+    "slug": "neukolln-kiez-decoder",
+    "title": "Which Part of Neukölln?",
+    "category": "Discovery",
+    "source": "codex-built-in-imagegen-20260716",
+    "generatedAt": "2026-07-16",
+    "promptFile": "tools-home/icons/_src/codex-built-in-imagegen-20260716/neukolln-kiez-decoder/PROMPT.md",
+    "sourceImage": "tools-home/icons/_src/codex-built-in-imagegen-20260716/neukolln-kiez-decoder/source.png",
+    "png512": "tools-home/icons/neukolln-kiez-decoder.png",
+    "png160": "tools-home/icons/neukolln-kiez-decoder-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/neukolln-kiez-decoder-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_7ade9f263f514cb38f02b70d11595dc6~mv2.png"
   }
 ]
