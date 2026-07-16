@@ -216,7 +216,8 @@
   "german-numbers-for-tourists-berlin": "german-numbers-for-tourists-berlin",
   "stasi-museum-berlin": "stasi-museum-berlin",
   "how-to-order-doner-in-berlin": "how-to-order-doner-in-berlin",
-  "treptower-park-berlin": "treptower-park-berlin"
+  "treptower-park-berlin": "treptower-park-berlin",
+  "friedrichshain-berlin": "friedrichshain-berlin"
 };
 
   var SCHEMAS = {
@@ -10476,6 +10477,68 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "If you have any interest in the Second World War, the Soviet role in 1945, or Cold War and East Berlin history, yes, it is one of the most powerful and least crowded sights in the city. The sheer scale of the memorial is hard to grasp from photos. Even if history is not your main reason to visit Berlin, it pairs naturally with a relaxed afternoon by the Spree, which is why it makes a good half-day away from the busy centre."
+        }
+      }
+    ]
+  },
+  "friedrichshain-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Friedrichshain and where is it in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Friedrichshain is a district in former East Berlin, just east of the city centre and north of the River Spree. It shares a borough with Kreuzberg on the other side of the river, and the two are linked by the Oberbaumbrücke. It is a young, lived-in, slightly scruffy area known for street art, nightlife, cheap food and a big park, rather than for grand monuments. The main gateway is Warschauer Straße station."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I get to Friedrichshain?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The easiest entry point is Warschauer Straße, served by the U1 and U3, the S-Bahn (S3, S5, S7 and S9) and trams M10 and M13. It puts you right next to the East Side Gallery and RAW-Gelände. For Karl-Marx-Allee, use Frankfurter Tor or Weberwiese on the U5. Ostkreuz, on the district's eastern edge, is one of Berlin's biggest S-Bahn interchanges, and Ostbahnhof sits next to the East Side Gallery."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is there to do in Friedrichshain?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start with the East Side Gallery, the 1.3 km painted stretch of Berlin Wall along the Spree. Cross the Oberbaumbrücke for the view, then spend time in the Boxhagener Platz area around Simon-Dach-Straße for cafés, bars and its weekend markets. For green space and history, walk Volkspark Friedrichshain, Berlin's oldest public park, and the monumental socialist boulevard of Karl-Marx-Allee up to Frankfurter Tor. At night the RAW-Gelände is the district's rough-edged party yard."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Friedrichshain worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, if you want to see the everyday, creative, post-reunification side of Berlin rather than just the historic centre. You come for the atmosphere, the street art, the nightlife and the parks, not for a checklist of famous buildings. If your trip is very short and focused on the classic sights around Mitte, you can skip it, but even one relaxed afternoon and evening here gives you a completely different feel of the city."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is RAW-Gelände still open in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Mostly, but it is changing fast. RAW-Gelände is a former railway repair works turned into a cluster of bars, clubs, a skate hall, a climbing wall, street art and a Sunday flea market. The site is at the centre of a long redevelopment dispute, and in early 2026 several venues were issued operating bans over fire-safety concerns, with construction starting at one edge. Much of it is still running, but do not assume a specific club or bar is open. Look it up the same day before you head over."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When is the Boxhagener Platz flea market?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The flea market on Boxhagener Platz runs on Sundays, roughly from 10:00 to 18:00, with books, records, vintage clothes, furniture and odds and ends. It is smaller and more relaxed than the big Mauerpark market. On Saturdays the same square hosts a farmers market with regional produce, bread and cheese, usually from about 10:00 into the afternoon."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Friedrichshain safe, and is it good for nightlife?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Friedrichshain is one of Berlin's main nightlife districts and is generally safe, with the usual big-city common sense at night: watch your phone and bag in crowds and around busy party areas. The streets around Simon-Dach-Straße are packed with easy, walkable bars and cheap eats, while RAW-Gelände and nearby clubs cover the harder, later end of the night. It is lively and busy rather than dangerous."
         }
       }
     ]

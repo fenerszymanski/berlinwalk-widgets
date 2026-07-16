@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>A day in Friedrichshain, hour by hour — plan your east-Berlin loop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
+    --yellow:#FFE600; --ink:#1c2a1c; --panel:#ffffff; --bone:#f4f9ec;
+    --line:#e3edd6; --stone:#6d7b66; --shadow:0 10px 30px rgba(18,61,24,.14);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .fx{max-width:940px;margin:0 auto;padding:4px}
+  .card{background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+
+  .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:18px 22px 16px}
+  .kick{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:700;margin:0 0 6px;font-family:"IBM Plex Mono",monospace}
+  .head h1{margin:0;font-size:21px;font-weight:800;line-height:1.2}
+  .head p{margin:8px 0 0;font-size:13.5px;color:#e7f3e2;max-width:680px}
+
+  /* district ribbon */
+  .ribbon{background:var(--bone);border-bottom:1px solid var(--line);padding:13px 16px 12px}
+  .ribbon .cap{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);font-weight:700;margin:0 0 8px;font-family:"IBM Plex Mono",monospace}
+  .zones{display:flex;gap:6px}
+  .zone{flex:1;min-width:0;border-radius:10px;background:#e6efd8;padding:8px 7px;text-align:center;transition:.22s;border:1px solid transparent}
+  .zone .zn{display:block;font-size:11px;font-weight:800;color:#7f8d75;line-height:1.2}
+  .zone .zs{display:block;font-size:9.5px;color:#9aa891;margin-top:3px;font-weight:600}
+  .zone.on{background:var(--green);border-color:var(--green-deep)}
+  .zone.on .zn{color:#fff}
+  .zone.on .zs{color:var(--soft)}
+  @media (max-width:520px){.zone .zs{display:none}.zone{padding:9px 5px}}
+
+  /* time bands */
+  .bands{display:flex;gap:7px;padding:15px 16px 4px;flex-wrap:wrap}
+  .band{flex:1;min-width:132px;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:10px 8px;cursor:pointer;text-align:center;font:inherit;transition:.18s}
+  .band .bt{display:block;font-size:13px;font-weight:800;color:var(--green-deep)}
+  .band .bh{display:block;font-size:10.5px;color:var(--stone);margin-top:2px;font-weight:600;font-family:"IBM Plex Mono",monospace}
+  .band:hover{border-color:var(--lime)}
+  .band[aria-pressed="true"]{background:var(--green);border-color:var(--green)}
+  .band[aria-pressed="true"] .bt{color:#fff}
+  .band[aria-pressed="true"] .bh{color:var(--yellow)}
+
+  .stage{padding:14px 16px 4px}
+  .lead{font-size:13.5px;color:#42513c;margin:0 0 12px;font-weight:600}
+  .lead b{color:var(--green-deep)}
+
+  .stop{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:stretch;background:var(--bone);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:12px}
+  .stop .pic{background:#dfe8d3 center/cover no-repeat;min-height:118px}
+  .stop .body{padding:12px 14px}
+  .stop .nm{margin:0;font-size:15px;font-weight:800;color:var(--green-deep);line-height:1.2}
+  .stop .bl{margin:6px 0 0;font-size:12.8px;color:#42513c;line-height:1.5}
+  .stop .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+  .chip{display:inline-block;background:var(--soft);color:var(--green-deep);font-size:10.5px;font-weight:800;letter-spacing:.02em;padding:4px 9px;border-radius:999px;font-family:"IBM Plex Mono",monospace}
+  .maps{display:inline-block;background:var(--yellow);color:#123D18;text-decoration:none;font-size:11.5px;font-weight:800;padding:5px 11px;border-radius:999px;border:1px solid #d9c400}
+  .maps:hover{filter:brightness(.97)}
+  @media (max-width:520px){
+    .stop{grid-template-columns:1fr}
+    .stop .pic{min-height:150px}
+    .stop .body{padding:12px 14px 14px}
+  }
+
+  .note{margin:4px 16px 16px;background:#fbfdf6;border:1px solid var(--line);border-left:4px solid var(--lime);border-radius:0 12px 12px 0;padding:11px 14px;font-size:12.6px;color:#3c4a37;line-height:1.55}
+  .note b{color:var(--green-deep)}
+</style>
+</head>
+<body>
+<div class="fx">
+  <div class="card">
+    <div class="head">
+      <p class="kick">Berlinwalk.com • Friedrichshain</p>
+      <h1>A day in Friedrichshain, hour by hour</h1>
+      <p>Berlin's east-side district works differently depending on when you show up. Pick a time of day and I will point you to the spots that are actually good then, and where they sit in the Kiez.</p>
+    </div>
+
+    <div class="ribbon">
+      <p class="cap">Where you are in the district</p>
+      <div class="zones" id="zones">
+        <div class="zone" data-z="spree"><span class="zn">Spree &amp; the Wall</span><span class="zs">East Side Gallery, Oberbaumbrücke</span></div>
+        <div class="zone" data-z="raw"><span class="zn">Warschauer &amp; RAW</span><span class="zs">nightlife yard, stations</span></div>
+        <div class="zone" data-z="boxi"><span class="zn">Boxhagen &amp; Simon-Dach</span><span class="zs">cafés, market square</span></div>
+        <div class="zone" data-z="park"><span class="zn">Park &amp; Boulevard</span><span class="zs">Volkspark, Karl-Marx-Allee</span></div>
+      </div>
+    </div>
+
+    <div class="bands" id="bands">
+      <button class="band" data-band="morning" aria-pressed="true"><span class="bt">Morning</span><span class="bh">08:00–10:30</span></button>
+      <button class="band" data-band="afternoon" aria-pressed="false"><span class="bt">Afternoon</span><span class="bh">11:00–16:00</span></button>
+      <button class="band" data-band="golden" aria-pressed="false"><span class="bt">Golden hour</span><span class="bh">18:00–21:00</span></button>
+      <button class="band" data-band="dark" aria-pressed="false"><span class="bt">After dark</span><span class="bh">21:00 on</span></button>
+    </div>
+
+    <div class="stage">
+      <p class="lead" id="lead"></p>
+      <div id="stops"></div>
+    </div>
+    <div class="note" id="note"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var DATA = {
+    morning: {
+      zones: ['spree'],
+      lead: 'Start on the river. <b>The light is soft, the Wall is quiet, and the crowds have not arrived yet.</b>',
+      stops: [
+        { key:'eastside', name:'East Side Gallery', best:'08:00–09:30',
+          blurb:'Walk the 1.3 km of painted Berlin Wall along the Spree while it is nearly empty. Go early: by late morning tour groups fill the narrow strip in front of the famous murals.',
+          maps:'East Side Gallery Berlin' },
+        { key:'oberbaum', name:'Oberbaumbrücke', best:'09:30–10:30',
+          blurb:'Cross the double-decker brick bridge into Kreuzberg with the U1 rattling overhead. It is the prettiest way to leave Friedrichshain and the river opens right up.',
+          maps:'Oberbaumbrücke Berlin' }
+      ],
+      note: '<b>My advice:</b> do the East Side Gallery first thing or skip the photos. It is the single busiest spot in the district by midday, and the murals are right next to the traffic, so early morning is the only time it feels calm.'
+    },
+    afternoon: {
+      zones: ['boxi','park'],
+      lead: 'Head into the residential Kiez. <b>This is the part of Friedrichshain people actually live in, not the postcard.</b>',
+      stops: [
+        { key:'boxhagener', name:'Boxhagener Platz & Simon-Dach-Straße', best:'11:00–15:00',
+          blurb:'Coffee on Simon-Dach-Straße, then the square. Saturdays there is a farmers market until about 16:00; Sundays a relaxed flea market from 10:00 to 18:00, smaller and calmer than Mauerpark.',
+          maps:'Boxhagener Platz Berlin' },
+        { key:'volkspark', name:'Volkspark Friedrichshain', best:'13:00–16:00',
+          blurb:'Berlin’s oldest public park (1848). Picnic by the fairy-tale Märchenbrunnen fountain, then climb the Bunkerberg, a hill built from wartime rubble with a view back over the rooftops.',
+          maps:'Volkspark Friedrichshain Märchenbrunnen' }
+      ],
+      note: '<b>Good to know:</b> the Sunday flea market on Boxhagener Platz is the low-key alternative to Mauerpark. Come for the browse and the café tables around the square, not for a huge market.'
+    },
+    golden: {
+      zones: ['park','spree'],
+      lead: 'Chase the last light. <b>Friedrichshain has two very different golden-hour views.</b>',
+      stops: [
+        { key:'frankfurtertor', name:'Karl-Marx-Allee & Frankfurter Tor', best:'18:00–20:00',
+          blurb:'Walk the wide Stalinist boulevard between the two domed towers of Frankfurter Tor. The scale is deliberate socialist grandeur, and the low sun makes the tiled facades glow.',
+          maps:'Frankfurter Tor Berlin' },
+        { key:'oberbaum', name:'Back to the Spree', best:'19:30–21:00',
+          blurb:'End the day on the water near the Oberbaumbrücke. The sun drops behind the bridge and the river fills with people doing exactly the same thing.',
+          maps:'Oberbaumbrücke Berlin' }
+      ],
+      note: '<b>My advice:</b> if you only have one golden hour, take Karl-Marx-Allee. Nowhere else in Berlin gives you that empty, monumental East-German avenue, and most visitors never walk it.'
+    },
+    dark: {
+      zones: ['raw','boxi'],
+      lead: 'This is where Friedrichshain earned its reputation. <b>Bars, clubs, and a lot of concrete.</b>',
+      stops: [
+        { key:'raw', name:'RAW-Gelände', best:'21:00 on',
+          blurb:'A former railway repair yard turned into Berlin’s rawest nightlife cluster: bars, a climbing hall, street art, a Sunday flea market and clubs. Loud, grubby and very Berlin.',
+          maps:'RAW-Gelände Berlin' },
+        { key:'boxhagener', name:'Simon-Dach-Straße bars', best:'20:00 on',
+          blurb:'The streets around Boxhagener Platz are wall-to-wall bars and cheap eats. Busier and more touristy than it once was, but an easy, walkable night out with no plan needed.',
+          maps:'Simon-Dach-Straße Berlin' }
+      ],
+      note: '<b>Check before you go:</b> RAW-Gelände is shrinking under a long redevelopment fight, and in early 2026 several venues were hit with operating bans. Most of it is still open, but look up the specific bar or club the same day rather than assuming it is still there.'
+    }
+  };
+
+  var order = ['morning','afternoon','golden','dark'];
+  var zonesEl = document.getElementById('zones');
+  var bandsEl = document.getElementById('bands');
+  var stopsEl = document.getElementById('stops');
+  var leadEl = document.getElementById('lead');
+  var noteEl = document.getElementById('note');
+  var zoneNodes = zonesEl.querySelectorAll('.zone');
+
+  function mapLink(q){
+    return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q);
+  }
+
+  function render(band){
+    var d = DATA[band];
+    // ribbon
+    for (var i=0;i<zoneNodes.length;i++){
+      var z = zoneNodes[i].getAttribute('data-z');
+      zoneNodes[i].classList.toggle('on', d.zones.indexOf(z) !== -1);
+    }
+    // bands pressed state
+    var bs = bandsEl.querySelectorAll('.band');
+    for (var j=0;j<bs.length;j++){
+      bs[j].setAttribute('aria-pressed', bs[j].getAttribute('data-band')===band ? 'true':'false');
+    }
+    leadEl.innerHTML = d.lead;
+    var html = '';
+    for (var k=0;k<d.stops.length;k++){
+      var s = d.stops[k];
+      html += '<div class="stop">'
+        + '<div class="pic" style="background-image:url(\'img/'+s.key+'.jpg\')"></div>'
+        + '<div class="body">'
+        + '<p class="nm">'+s.name+'</p>'
+        + '<p class="bl">'+s.blurb+'</p>'
+        + '<div class="row">'
+        + '<span class="chip">Best ~ '+s.best+'</span>'
+        + '<a class="maps" href="'+mapLink(s.maps)+'" target="_blank" rel="noopener">Open in Maps →</a>'
+        + '</div></div></div>';
+    }
+    stopsEl.innerHTML = html;
+    noteEl.innerHTML = d.note;
+  }
+
+  bandsEl.addEventListener('click', function(e){
+    var b = e.target.closest('.band');
+    if (!b) return;
+    render(b.getAttribute('data-band'));
+  });
+
+  render('morning');
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
