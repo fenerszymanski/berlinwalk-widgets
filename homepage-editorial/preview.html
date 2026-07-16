@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,nofollow">
+    <title>BerlinWalk Homepage Editorial Preview</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./homepage-editorial.css">
+    <script>
+      if (new URLSearchParams(window.location.search).has('qa')) {
+        window.__bwEditorialPreviewErrors = [];
+        window.addEventListener('error', (event) => {
+          window.__bwEditorialPreviewErrors.push(`error:${event.message || 'unknown'}`);
+        });
+        window.addEventListener('unhandledrejection', (event) => {
+          window.__bwEditorialPreviewErrors.push(`rejection:${String(event.reason || 'unknown')}`);
+        });
+      }
+    </script>
+    <style>
+      html {
+        background: #fafaf5;
+        min-width: 320px;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-width: 320px;
+      }
+
+      .bw-preview-host {
+        height: auto;
+        min-height: 0;
+        overflow: visible;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <bw-site-header></bw-site-header>
+
+    <main aria-label="BerlinWalk homepage editorial preview">
+      <div id="comp-lktn0mqe" class="bw-preview-host">
+        <bw-hero-home></bw-hero-home>
+      </div>
+
+      <div id="comp-mp3itwb7" class="bw-preview-host">
+        <bw-why></bw-why>
+      </div>
+
+      <div id="comp-mp3r7wr5" class="bw-preview-host">
+        <bw-route></bw-route>
+      </div>
+
+      <div id="comp-mm3jgkrf" class="bw-preview-host">
+        <bw-guide-home></bw-guide-home>
+      </div>
+
+      <div id="comp-mp3gxo5s" class="bw-preview-host">
+        <bw-testimonials></bw-testimonials>
+      </div>
+
+      <div id="comp-mmp417v9" class="bw-preview-host">
+        <section class="bw-home-booking-custom" data-build="homepage-editorial-preview" aria-labelledby="bw-home-booking-custom-title">
+          <div class="bw-home-booking-inner">
+            <header class="bw-home-booking-head">
+              <h2 id="bw-home-booking-custom-title">Ready to Discover Berlin?</h2>
+              <p>Book your free spot today. No fixed price - just tip what you feel the experience is worth.</p>
+            </header>
+            <bw-booking-calendar
+              service-title="Pick your tour date"
+              cta-label="Reserve your spot"
+              availability-days="365"
+              hide-future-tbd
+            >
+              <div class="bw-home-booking-fallback">Loading real tour availability...</div>
+            </bw-booking-calendar>
+          </div>
+        </section>
+      </div>
+
+      <div id="comp-mrd7ywil" class="bw-preview-host">
+        <bw-home-products></bw-home-products>
+      </div>
+
+      <div id="comp-mp3uj6o4" class="bw-preview-host">
+        <bw-faq id="faq" post="home" heading="Frequently Asked Questions"></bw-faq>
+      </div>
+
+      <div id="comp-mrd8c838" class="bw-preview-host">
+        <bw-home-explore></bw-home-explore>
+      </div>
+    </main>
+
+    <bw-site-footer></bw-site-footer>
+
+    <script src="../site-header/site-header-element.js"></script>
+    <script src="../hero-home/hero-home-element.js"></script>
+    <script src="../why/why-element.js"></script>
+    <script src="../route/route-element.js"></script>
+    <script src="../guide-home/guide-home-element.js"></script>
+    <script src="../testimonials/testimonials-element.js"></script>
+    <script src="../booking-calendar/booking-calendar-element.js"></script>
+    <script src="../home-products/home-products-element.js"></script>
+    <script src="../faq/faq-element.js"></script>
+    <script src="../home-explore/home-explore-element.js"></script>
+    <script src="../site-footer/site-footer-element.js"></script>
+  </body>
+</html>

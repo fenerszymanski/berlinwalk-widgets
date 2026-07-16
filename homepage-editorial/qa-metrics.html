@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,nofollow">
+    <title>BerlinWalk Homepage Editorial Atlas Metrics</title>
+    <style>
+      body {
+        background: #fafaf5;
+        color: #102414;
+        font: 600 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        margin: 0;
+        padding: 32px;
+      }
+
+      h1 {
+        font-size: 28px;
+        margin: 0 0 12px;
+      }
+
+      #status {
+        max-width: 760px;
+      }
+
+      #qa-frame {
+        border: 0;
+        height: 900px;
+        left: -10000px;
+        opacity: 0.001;
+        pointer-events: none;
+        position: fixed;
+        top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Atlas responsive metrics</h1>
+    <p id="status">Loading the real component preview, waiting for async data, then measuring every approved breakpoint.</p>
+    <iframe id="qa-frame" title="Homepage measurement frame" src="./preview.html?qa=1"></iframe>
+
+    <script>
+      (() => {
+        const widths = [1366, 1040, 980, 768, 721, 720, 640, 520, 430, 390, 375, 360, 320];
+        const sectionIds = [
+          'comp-lktn0mqe',
+          'comp-mp3itwb7',
+          'comp-mp3r7wr5',
+          'comp-mm3jgkrf',
+          'comp-mp3gxo5s',
+          'comp-mmp417v9',
+          'comp-mrd7ywil',
+          'comp-mp3uj6o4',
+          'comp-mrd8c838',
+        ];
+        const frame = document.getElementById('qa-frame');
+        const status = document.getElementById('status');
+        const wait = (ms) => new Promise((resolve) => window.setTimeout(resolve, ms));
+
+        function compactMetrics(width) {
+          const win = frame.contentWindow;
+          const doc = frame.contentDocument;
+          const root = doc.documentElement;
+          const headings = Array.from(doc.querySelectorAll('h1, h2'));
+          const yellowTargets = Array.from(doc.querySelectorAll(
+            '.bw-hero-btn-primary, .bw-route-btn-primary, .bw-guide-home-btn-secondary, .bw-booking-cta, .bw-cal-cta, .bw-home-products__cta, .bw-home-explore__arrow'
+          ));
+          const yellowContrast = yellowTargets.every((node) => {
+            const style = win.getComputedStyle(node);
+            return style.color !== 'rgb(255, 255, 255)';
+          });
+          const images = Array.from(doc.images);
+          const heights = sectionIds.map((id) => Math.round(doc.getElementById(id)?.getBoundingClientRect().height || 0));
+          const tops = sectionIds.map((id) => Math.round(doc.getElementById(id)?.getBoundingClientRect().top || 0));
+          const counts = [
+            '.bw-hero-home',
+            '.bw-why',
+            '.bw-route',
+            '.bw-guide-home',
+            '.bw-testimonials',
+            '.bw-home-booking-custom',
+            '.bw-home-products',
+            '.bw-faq',
+            '.bw-home-explore',
+          ].map((selector) => doc.querySelectorAll(selector).length);
+
+          return {
+            w: width,
+            cw: root.clientWidth,
+            ov: Math.max(0, root.scrollWidth - root.clientWidth),
+            h: heights,
+            order: tops.every((top, index) => index === 0 || top >= tops[index - 1]),
+            mounts: counts,
+            h1: doc.querySelectorAll('h1').length,
+            fraunces: Boolean(doc.fonts && doc.fonts.check('650 48px "BW Fraunces"')),
+            headingFonts: headings.every((node) => {
+              if (node.tagName === 'H1' || node.closest('#comp-mp3itwb7, #comp-mp3r7wr5, #comp-mm3jgkrf, #comp-mp3gxo5s, #comp-mmp417v9, #comp-mp3uj6o4, #comp-mrd7ywil, #comp-mrd8c838')) {
+                return win.getComputedStyle(node).fontFamily.includes('BW Fraunces');
+              }
+              return true;
+            }),
+            yellowContrast,
+            brokenImages: images.filter((image) => image.complete && image.naturalWidth === 0).length,
+            missingAlt: images.filter((image) => !image.hasAttribute('alt')).length,
+          };
+        }
+
+        frame.addEventListener('load', async () => {
+          try {
+            status.textContent = 'Components loaded. Waiting for route, reviews, FAQ and images...';
+            await wait(7000);
+            const results = [];
+            for (const width of widths) {
+              frame.style.width = `${width}px`;
+              await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+              await wait(420);
+              results.push(compactMetrics(width));
+            }
+            const payload = {
+              ok: true,
+              at: new Date().toISOString(),
+              widths: results,
+              errors: frame.contentWindow.__bwEditorialPreviewErrors || [],
+            };
+            status.textContent = `Complete: ${results.length} widths measured. The terminal received the exact payload.`;
+            fetch(`/__homepage_editorial_metrics?payload=${encodeURIComponent(JSON.stringify(payload))}`).catch(() => {});
+          } catch (error) {
+            status.textContent = `Metrics failed: ${error.message}`;
+            fetch(`/__homepage_editorial_metrics_error?message=${encodeURIComponent(error.stack || error.message)}`).catch(() => {});
+          }
+        }, { once: true });
+      })();
+    </script>
+  </body>
+</html>
