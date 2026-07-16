@@ -36,6 +36,62 @@ final result: passed
 
 ---
 
+# BerlinWalk Homepage Editorial System Design QA
+
+**Comparison Target**
+
+- Source visual truth: `/Users/yusufucuz/Documents/New project/output/qa/home-products-redesign-20260715/live/homepage-headless-chromium-products-desktop-1366x900.jpg`
+- Combined source and implementation board: `/Users/yusufucuz/Documents/New project/output/qa/homepage-editorial-20260716/preview/source-products-vs-atlas-preview.jpg`
+- Final local desktop hero: `/Users/yusufucuz/Documents/New project/output/qa/homepage-editorial-20260716/preview/desktop-final-hero.png`
+- Final local 390 px route: `/Users/yusufucuz/Documents/New project/output/qa/homepage-editorial-20260716/preview/mobile-final-route-390.png`
+- Live Atlas desktop hero: `/Users/yusufucuz/Documents/New project/output/qa/homepage-editorial-20260716/live/atlas-desktop-01-hero.png`
+- Live Atlas top-level narrow hero and mobile menu: `/Users/yusufucuz/Documents/New project/output/qa/homepage-editorial-20260716/live/atlas-top-level-narrow-01-hero.png` and `/Users/yusufucuz/Documents/New project/output/qa/homepage-editorial-20260716/live/atlas-top-level-narrow-02-menu.png`
+- Live Atlas top-level narrow route, booking, and footer: `/Users/yusufucuz/Documents/New project/output/qa/homepage-editorial-20260716/live/atlas-top-level-narrow-03-route.png`, `/Users/yusufucuz/Documents/New project/output/qa/homepage-editorial-20260716/live/atlas-top-level-narrow-04-booking.png`, and `/Users/yusufucuz/Documents/New project/output/qa/homepage-editorial-20260716/live/atlas-top-level-narrow-05-footer.png`
+
+**Findings**
+
+- No actionable P0, P1, or P2 visual defect remains in the authorized Atlas scope.
+- The Products section remains the visual source and is not overridden. Its live Wix embed stayed at revision 22 with unchanged SHA256 `cade6a5f3ec21a6bdd78e33054a843c81e4ba6733366ada3a5a825ef087732a3`.
+- Booking behavior remains on the existing revision 6 layer with unchanged SHA256 `927f5fd37a414d922386b32dddb94431eeee478e500657747b837656640eafdb`.
+- Fraunces is loaded from the same commit-pinned repository asset. Montserrat remains the body and control family; Merriweather remains limited to genuine quote or caption content.
+- Hero, Why, Route, Guide, Reviews, Booking, FAQ, and Explore now share the approved editorial type, spacing, surface, rule, radius, and CTA language without changing public copy, section order, canonical URLs, component APIs, or data schemas.
+- Atlas measurements passed at 1366, 1040, 980, 768, 721, 720, 640, 520, 430, 390, 375, 360, and 320 CSS pixels. Every width reported zero horizontal overflow, one H1, one mount per section, correct section order, loaded Fraunces, dark text on yellow controls, zero broken images, zero missing alt attributes, and zero preview runtime errors.
+- Live desktop Atlas QA passed for the header dropdown, Route, Guide, Reviews, Booking, Products, FAQ, Explore, and footer. The review carousel changed cards after a dot click. FAQ changed open item after a click.
+- Live Booking QA selected a new date and the 15:30 slot, kept the selected state green, and handed off to the real Booking Form with `bookings_timezone`, `bookings_serviceId`, `bookings_locationId`, a non-empty `bookings_sessionId`, and the existing direct-booking UTM parameters. No booking was submitted.
+- Live top-level narrow Atlas QA passed for the mobile header, hamburger menu, hero, route metadata rail, 16:9 map and real photo strip, copy-before-calendar booking order, selected-slot treatment, footer, and single Privacy Settings link.
+- The final footer is present once and Privacy Settings is inside its closing metadata row. No trailing blank section, missing footer, or runaway-height state was visible at the live page end.
+- The Editorial HEAD embed is enabled at revision 1 and points to commit `def46d340c5bcdebd995a1900a7bb2768c047223`. The stylesheet returned `200 text/css`; its Fraunces asset returned `200 font/ttf`. The updated reserve is enabled at revision 6 with SHA256 `29a914176bb17c8ac58ccdde36ada87f9451f49599e36f1a4ab20400a40636db`.
+
+**Resolved During QA**
+
+1. Hero line break could orphan `Tour.` at desktop. The highlighted title segment now stays together.
+2. Mobile Route metadata stacked vertically. It now remains a compact three-item horizontal rail.
+3. Mobile Route briefly used a 4:3 crop that could displace percentage-based pins. The original 16:9 map geometry is preserved.
+4. Booking host styling could have affected the pre-mount fallback. The dark host treatment now applies only when the active custom booking root is mounted.
+5. The original mobile hydration reserves were too short for the new editorial composition. The reserve formulas were updated and staged with the Editorial embed before one site publish.
+
+**Implementation Checklist**
+
+- [x] Exact host-scoped CSS with no global `body` or `main` rules.
+- [x] No DOM writes, observers, section reordering, or early script loader.
+- [x] Products and Booking lifecycle code untouched.
+- [x] Commit-pinned CSS and font verified before Wix staging.
+- [x] Baseline Wix HTML, revision, and SHA256 backup captured before writes.
+- [x] Editorial and hydration reserve staged without publish, then read back.
+- [x] Fail-closed asset, marker, position, enabled-state, and reserve-hash preflight.
+- [x] Exactly one Wix publish.
+- [x] Live Atlas desktop and top-level narrow acceptance.
+- [x] Rollback dry-run targets only Editorial disable and baseline Reserve restore while fingerprint-protecting Products and Booking.
+
+**Authorized Test Scope**
+
+- Automated Chromium and WebKit regression was not run because the approved plan requires separate permission first. CLS, LCP, cross-engine console, and automated pointer-interception thresholds are therefore not claimed here.
+- The release result below covers the authorized Atlas visual and functional acceptance, the 13-width Atlas same-origin measurement harness, live HTML/API readback, and CDN asset checks.
+
+final result: passed
+
+---
+
 # BerlinWalk Global Navigation Design QA
 
 **Comparison Target**
