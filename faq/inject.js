@@ -217,7 +217,8 @@
   "stasi-museum-berlin": "stasi-museum-berlin",
   "how-to-order-doner-in-berlin": "how-to-order-doner-in-berlin",
   "treptower-park-berlin": "treptower-park-berlin",
-  "friedrichshain-berlin": "friedrichshain-berlin"
+  "friedrichshain-berlin": "friedrichshain-berlin",
+  "neukolln-berlin": "neukolln-berlin"
 };
 
   var SCHEMAS = {
@@ -10539,6 +10540,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Friedrichshain is one of Berlin's main nightlife districts and is generally safe, with the usual big-city common sense at night: watch your phone and bag in crowds and around busy party areas. The streets around Simon-Dach-Straße are packed with easy, walkable bars and cheap eats, while RAW-Gelände and nearby clubs cover the harder, later end of the night. It is lively and busy rather than dangerous."
+        }
+      }
+    ]
+  },
+  "neukolln-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where is Neukölln and what is it like?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Neukölln is a large district in the south-east of Berlin, bordering Kreuzberg at Hermannplatz. It is not a district of grand monuments. It is a lived-in, immigrant, creative part of the city that swings between loud party and food streets and surprisingly quiet corners like Körnerpark and the old Rixdorf village. The trick to visiting is to pick which part of Neukölln you want rather than trying to see all of it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why was Rixdorf renamed Neukölln?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Until 1912 the area was called Rixdorf, and the name had become a byword for drinking and dancing, made famous by the song \"In Rixdorf ist Musike.\" In January 1912 the town officially renamed itself Neukölln to shed that rowdy image and sound more respectable. The old name survives in Rixdorf, the historic village core around Richardplatz, which still feels like a small town inside the city."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the best things to do in Neukölln?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For the calm side, see Körnerpark, a free sunken garden with a fountain and an orangery gallery, and Rixdorf around Richardplatz, an 18th-century Bohemian village with cobbles and a working smithy. For the lively side, spend an evening in the Reuterkiez around the Maybachufer canal, walk Sonnenallee for cheap Middle Eastern food, and go up to the Klunkerkranich rooftop bar on Karl-Marx-Straße for the sunset."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I get to Neukölln?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The central gateway is Hermannplatz, where the U7 and U8 lines cross, on the Kreuzberg border. For the Reuterkiez and the Maybachufer canal, use Schönleinstraße (U8). For Karl-Marx-Straße and Klunkerkranich, use Rathaus Neukölln or Karl-Marx-Straße (U7). For Körnerpark and Rixdorf, use S+U Neukölln or Hermannstraße (U8 plus the Ringbahn), and Sonnenallee station on the Ringbahn sits at the far end of the food street."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I get to the Klunkerkranich rooftop, and is it open?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Klunkerkranich is a rooftop bar and garden on top of the multi-storey car park at the Neukölln Arcaden shopping centre on Karl-Marx-Straße. You reach it by going up through the mall to the top parking level. It usually opens daily from around 16:00 between spring and autumn, but it is seasonal, weather-dependent and sometimes closed for private events, so check before you climb up. Come for the sunset view rather than for a specific act."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Neukölln safe, and is it worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Neukölln is a normal, busy, lived-in part of Berlin, not a no-go zone, though as in any crowded city district it is worth keeping an eye on your phone and bag around the busy squares and late-night streets. It is worth an afternoon if you go in with a plan: Körnerpark and Rixdorf for the quiet, the Maybachufer canal for the evening, Sonnenallee for food. If your trip is very short and focused on the historic centre, you can skip it without guilt."
         }
       }
     ]

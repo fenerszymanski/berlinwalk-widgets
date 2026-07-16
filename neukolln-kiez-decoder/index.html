@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Which part of Neukölln? A local's decoder for your one free afternoon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
+    --yellow:#FFE600; --ink:#1c2a1c; --panel:#ffffff; --bone:#f4f9ec;
+    --line:#e3edd6; --stone:#6d7b66; --shadow:0 10px 30px rgba(18,61,24,.14);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .nx{max-width:940px;margin:0 auto;padding:4px}
+  .card{background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+
+  .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:18px 22px 16px}
+  .kick{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:700;margin:0 0 6px;font-family:"IBM Plex Mono",monospace}
+  .head h1{margin:0;font-size:21px;font-weight:800;line-height:1.2}
+  .head p{margin:8px 0 0;font-size:13.5px;color:#e7f3e2;max-width:680px}
+
+  /* intent picker */
+  .pick{background:var(--bone);border-bottom:1px solid var(--line);padding:13px 16px 12px}
+  .pick .cap{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);font-weight:700;margin:0 0 9px;font-family:"IBM Plex Mono",monospace}
+  .chips{display:flex;flex-wrap:wrap;gap:7px}
+  .chip{border:1.5px solid var(--line);background:#fff;color:var(--green-deep);border-radius:999px;padding:7px 13px;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;transition:.16s}
+  .chip:hover{border-color:var(--lime)}
+  .chip[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+
+  /* main body: rail + verdict */
+  .grid{display:grid;grid-template-columns:236px 1fr;gap:0}
+  .rail{border-right:1px solid var(--line);padding:10px;background:#fbfdf6}
+  .rl{display:block;width:100%;text-align:left;border:1px solid transparent;background:#fff;border-radius:12px;padding:9px 11px;margin-bottom:7px;cursor:pointer;font:inherit;transition:.16s}
+  .rl:hover{border-color:var(--soft)}
+  .rl:last-child{margin-bottom:0}
+  .rl .rn{display:block;font-size:13px;font-weight:800;color:var(--green-deep);line-height:1.25}
+  .rl .rt{display:block;font-size:10.5px;color:var(--stone);margin-top:2px;font-weight:600}
+  .rl.on{background:var(--green);border-color:var(--green-deep)}
+  .rl.on .rn{color:#fff}
+  .rl.on .rt{color:var(--soft)}
+  .rl.match:not(.on){border-color:var(--lime);box-shadow:0 0 0 2px rgba(124,179,66,.16)}
+
+  .verdict{min-width:0}
+  .vpic{position:relative;height:168px;background:#dfe8d3 center/cover no-repeat}
+  .vpic::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,61,24,0) 34%,rgba(18,61,24,.82) 100%)}
+  .vpic .vtitle{position:absolute;left:0;right:0;bottom:0;padding:12px 16px;z-index:2;color:#fff}
+  .vpic .vn{margin:0;font-size:18px;font-weight:800;line-height:1.15;text-shadow:0 1px 6px rgba(0,0,0,.35)}
+  .vpic .vtag{display:inline-block;margin-top:6px;background:var(--yellow);color:#123D18;font-size:10.5px;font-weight:800;letter-spacing:.02em;padding:3px 9px;border-radius:999px;font-family:"IBM Plex Mono",monospace}
+
+  .vbody{padding:14px 16px 16px}
+  .vwhat{margin:0 0 12px;font-size:13.8px;color:#38472f;line-height:1.55}
+  .vrow{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+  .meta{display:inline-flex;align-items:center;gap:6px;background:var(--bone);border:1px solid var(--line);color:var(--green-deep);font-size:11px;font-weight:700;padding:5px 10px;border-radius:999px}
+  .meta b{font-family:"IBM Plex Mono",monospace;font-weight:700}
+  .maps{display:inline-block;background:var(--yellow);color:#123D18;text-decoration:none;font-size:11.5px;font-weight:800;padding:6px 12px;border-radius:999px;border:1px solid #d9c400}
+  .maps:hover{filter:brightness(.97)}
+
+  .move{background:#fbfdf6;border:1px solid var(--line);border-left:4px solid var(--lime);border-radius:0 12px 12px 0;padding:10px 13px;font-size:12.8px;color:#3c4a37;line-height:1.55;margin-bottom:13px}
+  .move b{color:var(--green-deep)}
+
+  .worth{display:flex;align-items:center;gap:11px;background:#f2f7ea;border:1px solid var(--line);border-radius:12px;padding:10px 13px}
+  .meter{display:flex;gap:5px;flex-shrink:0}
+  .dot{width:13px;height:13px;border-radius:50%;background:#d7e3c6;border:1px solid #c4d3ae}
+  .dot.f{background:var(--lime);border-color:var(--green)}
+  .worth .wtxt{font-size:12.4px;color:#3c4a37;line-height:1.45}
+  .worth .wlabel{display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);font-weight:800;font-family:"IBM Plex Mono",monospace;margin-bottom:2px}
+
+  @media (max-width:560px){
+    .grid{grid-template-columns:1fr}
+    .rail{border-right:none;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:10px}
+    .rl{margin-bottom:0}
+    .rl .rt{display:none}
+    .vpic{height:150px}
+  }
+</style>
+</head>
+<body>
+<div class="nx">
+  <div class="card">
+    <div class="head">
+      <p class="kick">Berlinwalk.com • Neukölln</p>
+      <h1>Which part of Neukölln?</h1>
+      <p>Neukölln is not one place. It swings from a loud kebab-and-club street to a silent sunken garden in a ten-minute walk. Tell me what you came for, or tap a corner, and I will tell you honestly whether it is worth your limited time.</p>
+    </div>
+
+    <div class="pick">
+      <p class="cap">I came to Neukölln for...</p>
+      <div class="chips" id="chips">
+        <button class="chip" data-intent="calm" aria-pressed="false">Calm &amp; green</button>
+        <button class="chip" data-intent="food" aria-pressed="false">Food</button>
+        <button class="chip" data-intent="bars" aria-pressed="false">Bars &amp; canal</button>
+        <button class="chip" data-intent="history" aria-pressed="false">History &amp; village</button>
+        <button class="chip" data-intent="sunset" aria-pressed="false">A sunset view</button>
+        <button class="chip" data-intent="passing" aria-pressed="false">Just passing through</button>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="rail" id="rail"></div>
+      <div class="verdict">
+        <div class="vpic" id="vpic">
+          <div class="vtitle"><p class="vn" id="vn"></p><span class="vtag" id="vtag"></span></div>
+        </div>
+        <div class="vbody">
+          <p class="vwhat" id="vwhat"></p>
+          <div class="vrow" id="vrow"></div>
+          <div class="move" id="vmove"></div>
+          <div class="worth">
+            <div class="meter" id="vmeter"></div>
+            <div class="wtxt"><span class="wlabel">My honest verdict</span><span id="vverdict"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var KIEZ = [
+    { id:'reuterkiez', name:'Reuterkiez / Kreuzkölln', img:'reuterkiez.jpg',
+      tag:'Canal, bars, market',
+      what:'The hip northern edge that blends straight into Kreuzberg: small bars, natural-wine spots, cafes and the Maybachufer canal. This is the Neukölln most travel articles actually mean.',
+      station:'U8 Schönleinstraße', maps:'Maybachufer Berlin', time:'2–3 hrs, best early evening',
+      move:'Sit on the canal bank with a drink and watch the light drop. If it is a Tuesday or Friday, hit the Maybachufer Turkish market first.',
+      worth:3, verdict:'The safe first answer to "where in Neukölln?" Easy to love, hard to get wrong.',
+      intents:['bars','food'] },
+    { id:'koernerpark', name:'Körnerpark', img:'koernerpark.jpg',
+      tag:'Hidden sunken garden',
+      what:'A formal neo-baroque garden dropped five to seven metres below the street, with a fountain, an orangery holding a free gallery and cafe, and almost no crowd. It feels like a different city.',
+      station:'S+U Neukölln / U8 Hermannstraße', maps:'Körnerpark Berlin', time:'30–45 min',
+      move:'Come around the corner from the noisy streets, look down over the balustrades, and just sit for a while.',
+      worth:3, verdict:'The most surprising calm spot in the district and my top hidden pick.',
+      intents:['calm'] },
+    { id:'rixdorf', name:'Rixdorf / Böhmisches Dorf', img:'rixdorf.jpg',
+      tag:'A surviving 1737 village',
+      what:'A tiny 18th-century Bohemian village around Richardplatz, settled by Protestant refugees in 1737. Cobbles, low houses, a working blacksmith and no traffic. Rixdorf was the district’s old name.',
+      station:'U7 Karl-Marx-Straße', maps:'Richardplatz Berlin', time:'30–45 min',
+      move:'Walk Richardplatz and the quiet lanes of the Bohemian Village. It is hard to believe you are inside a city of nearly four million.',
+      worth:3, verdict:'History with no crowd. Pair it with Körnerpark for one quiet loop.',
+      intents:['calm','history'] },
+    { id:'karlmarx', name:'Karl-Marx-Straße & Klunkerkranich', img:'karlmarx.jpg',
+      tag:'Main drag, rooftop view',
+      what:'The everyday shopping artery past Rathaus Neukölln, plain on its own, but hiding the Klunkerkranich rooftop bar on top of a shopping-centre car park with a wide view over the rooftops.',
+      station:'U7 Rathaus Neukölln', maps:'Klunkerkranich Berlin', time:'1–2 hrs around sunset',
+      move:'Go up through the Neukölln Arcaden mall to Klunkerkranich for the sunset. Check it is open first: it is seasonal and weather-dependent.',
+      worth:2, verdict:'The street is functional; the rooftop is the reason. Time it for sunset or skip it.',
+      intents:['sunset'] },
+    { id:'sonnenallee', name:'Sonnenallee', img:'sonnenallee.jpg',
+      tag:'Late-night food mile',
+      what:'A long Middle Eastern eating street of Lebanese, Syrian and Palestinian bakeries, shawarma counters and sweet shops running south-east from Hermannplatz. Busy, cheap and completely genuine.',
+      station:'U7/U8 Hermannplatz (top end)', maps:'Sonnenallee Berlin', time:'1 hr, best late',
+      move:'Walk it hungry. Fresh flatbread, hummus, grilled meat and knafeh long after normal Berlin kitchens have closed.',
+      worth:3, verdict:'The cheapest great meal in the area. Come hungry and come late.',
+      intents:['food'] },
+    { id:'hermannplatz', name:'Hermannplatz', img:'hermannplatz.jpg',
+      tag:'The gateway, do not linger',
+      what:'The loud U7/U8 interchange and Karstadt square on the Kreuzberg border. Useful for arriving and getting your bearings, but grey, busy and not what you came for.',
+      station:'U7/U8 Hermannplatz', maps:'Hermannplatz Berlin', time:'5 min, just orient',
+      move:'Do not judge Neukölln here. Get your bearings, then move: north to the canal, south to the food, east to the quiet.',
+      worth:1, verdict:'A hinge, not a destination. The worst first impression Neukölln gives you.',
+      intents:['passing'] }
+  ];
+
+  var byId = {}; KIEZ.forEach(function(k){ byId[k.id] = k; });
+  var railEl = document.getElementById('rail');
+  var chipsEl = document.getElementById('chips');
+  var current = 'reuterkiez';
+  var activeIntent = null;
+
+  function mapLink(q){ return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q); }
+
+  // build rail
+  railEl.innerHTML = KIEZ.map(function(k){
+    return '<button class="rl" data-id="'+k.id+'"><span class="rn">'+k.name+'</span><span class="rt">'+k.tag+'</span></button>';
+  }).join('');
+
+  function render(){
+    var k = byId[current];
+    // rail states
+    var rows = railEl.querySelectorAll('.rl');
+    for (var i=0;i<rows.length;i++){
+      var id = rows[i].getAttribute('data-id');
+      rows[i].classList.toggle('on', id === current);
+      var isMatch = activeIntent && byId[id].intents.indexOf(activeIntent) !== -1;
+      rows[i].classList.toggle('match', !!isMatch);
+    }
+    document.getElementById('vpic').style.backgroundImage = "url('img/"+k.img+"')";
+    document.getElementById('vn').textContent = k.name;
+    document.getElementById('vtag').textContent = k.tag;
+    document.getElementById('vwhat').textContent = k.what;
+    document.getElementById('vrow').innerHTML =
+      '<span class="meta">Nearest <b>'+k.station+'</b></span>' +
+      '<span class="meta">Time <b>'+k.time+'</b></span>' +
+      '<a class="maps" href="'+mapLink(k.maps)+'" target="_blank" rel="noopener">Open in Maps →</a>';
+    document.getElementById('vmove').innerHTML = '<b>Do this:</b> ' + k.move;
+    var dots = '';
+    for (var d=1; d<=3; d++){ dots += '<span class="dot'+(d<=k.worth?' f':'')+'"></span>'; }
+    document.getElementById('vmeter').innerHTML = dots;
+    var label = k.worth===3 ? 'Worth a special trip. ' : k.worth===2 ? 'Worth it if timed right. ' : 'Skip, or just pass through. ';
+    document.getElementById('vverdict').textContent = label + k.verdict;
+  }
+
+  railEl.addEventListener('click', function(e){
+    var b = e.target.closest('.rl'); if (!b) return;
+    current = b.getAttribute('data-id');
+    render();
+  });
+
+  chipsEl.addEventListener('click', function(e){
+    var c = e.target.closest('.chip'); if (!c) return;
+    var intent = c.getAttribute('data-intent');
+    var chips = chipsEl.querySelectorAll('.chip');
+    if (activeIntent === intent){
+      activeIntent = null;
+      for (var j=0;j<chips.length;j++) chips[j].setAttribute('aria-pressed','false');
+    } else {
+      activeIntent = intent;
+      for (var m=0;m<chips.length;m++) chips[m].setAttribute('aria-pressed', chips[m].getAttribute('data-intent')===intent ? 'true':'false');
+      var best = KIEZ.filter(function(k){ return k.intents.indexOf(intent) !== -1; })
+                     .sort(function(a,b){ return b.worth - a.worth; })[0];
+      if (best) current = best.id;
+    }
+    render();
+  });
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
