@@ -1,9 +1,13 @@
 /* lead-form-inject.js — blog-post BerlinWalk booking card.
  *
- * GetYourGuide-style activity card: promo photo, title, rating, free/tip-based
- * price slot, horizontally scrollable live date chips, and a full-width
- * "Check availability" CTA. Date chips carry real Wix Bookings session IDs,
- * so a click lands on the native Wix booking step with that date selected.
+ * Compact booking card (2026-07-16 redesign, Yusuf-approved variant B):
+ * dark green "FREE BERLIN WALKING TOUR" strip with the FreeTour rating,
+ * 116px square promo thumb, title + facts line, horizontally scrollable
+ * live date chips, and a full-width "Check availability" CTA. Date chips
+ * carry real Wix Bookings session IDs, so a click lands on the native Wix
+ * booking step with that date selected. The card is inserted after the
+ * first paragraph that follows the 2nd H2 (~25% depth) so most readers
+ * see it before bouncing; the pre-2026-07-16 version sat at the middle H2.
  *
  * Live safety: enabled on /post/* pages. Disable temporarily with:
  *   ?bwBlogBooking=0
@@ -72,8 +76,8 @@
     for (var i = 0; i < allHeadings.length; i++) {
       if (isVisible(allHeadings[i])) headings.push(allHeadings[i]);
     }
-    if (headings.length >= 3) {
-      var heading = headings[Math.floor(headings.length / 2)];
+    if (headings.length) {
+      var heading = headings.length >= 2 ? headings[1] : headings[0];
       var node = heading.nextElementSibling;
       while (node) {
         var tag = (node.tagName || '').toUpperCase();
@@ -83,14 +87,13 @@
       }
       return heading;
     }
-    if (headings.length) return headings[Math.floor(headings.length / 2)];
 
     var paragraphs = [];
     var allParagraphs = body.querySelectorAll('p');
     for (var p = 0; p < allParagraphs.length; p++) {
       if (isVisible(allParagraphs[p])) paragraphs.push(allParagraphs[p]);
     }
-    if (paragraphs.length >= 4) return paragraphs[Math.floor(paragraphs.length / 2)];
+    if (paragraphs.length >= 4) return paragraphs[Math.min(3, Math.floor(paragraphs.length / 2))];
     return null;
   }
 
@@ -99,48 +102,42 @@
     var style = document.createElement('style');
     style.id = STYLE_ID;
     style.textContent = [
-      '.bw-blog-booking-card{box-sizing:border-box;display:flex;margin:34px 0;max-width:100%;min-width:0;padding:0;background:#fff;border:1px solid #DCE3DD;border-radius:16px;box-shadow:0 12px 30px rgba(27,94,32,.10);font-family:Montserrat,Arial,sans-serif;color:#212121;overflow:hidden;}',
+      '.bw-blog-booking-card{box-sizing:border-box;display:block;margin:30px 0;max-width:100%;min-width:0;padding:0;background:#fff;border:1px solid #CFE4C8;border-radius:14px;box-shadow:0 8px 22px rgba(27,94,32,.08);font-family:Montserrat,Arial,sans-serif;color:#212121;overflow:hidden;}',
       '.bw-blog-booking-card *{box-sizing:border-box;}',
-      '.bw-blog-booking-media{flex:0 0 230px;min-width:0;position:relative;}',
-      '.bw-blog-booking-media img{display:block;width:100%;height:100%;min-height:100%;object-fit:cover;margin:0!important;border-radius:0!important;}',
-      '.bw-blog-booking-flag{position:absolute;top:10px;left:10px;background:#FFE600;border-radius:999px;color:#1B5E20!important;font-size:11px;font-weight:900;letter-spacing:.08em;line-height:1;padding:7px 10px;text-transform:uppercase;}',
-      '.bw-blog-booking-body{display:flex;flex:1 1 auto;flex-direction:column;gap:10px;min-width:0;padding:16px 18px;}',
-      '.bw-blog-booking-toprow{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;min-width:0;}',
-      '.bw-blog-booking-headgroup{min-width:0;}',
-      '.bw-blog-booking-title{display:block;margin:0 0 4px!important;color:#212121!important;font-size:20px!important;font-weight:900!important;line-height:1.18!important;letter-spacing:0!important;text-transform:none!important;}',
-      '.bw-blog-booking-rating{display:flex;align-items:center;gap:5px;color:#4E5A4E;font-size:13px;font-weight:700;line-height:1;}',
-      '.bw-blog-booking-rating .bw-star{color:#F5A623;font-size:15px;line-height:1;}',
-      '.bw-blog-booking-rating b{color:#212121;font-weight:900;}',
-      '.bw-blog-booking-price{flex:0 0 auto;text-align:right;}',
-      '.bw-blog-booking-price b{display:block;color:#1B5E20!important;font-size:16px;font-weight:900;line-height:1.15;white-space:nowrap;}',
-      '.bw-blog-booking-price span{display:block;margin-top:3px;color:#4E5A4E;font-size:11px;font-weight:700;line-height:1.2;white-space:nowrap;}',
-      '.bw-blog-booking-text{margin:0!important;color:#4E5A4E!important;font-size:14px!important;font-weight:500!important;line-height:1.45!important;}',
+      '.bw-blog-booking-strip{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#1B5E20;color:#fff;padding:8px 14px;font-size:10px;font-weight:900;letter-spacing:.12em;line-height:1.3;text-transform:uppercase;}',
+      '.bw-blog-booking-strip span{color:#fff!important;}',
+      '.bw-blog-booking-strip .bw-star{color:#FFE600;}',
+      '.bw-blog-booking-inner{display:flex;min-width:0;}',
+      '.bw-blog-booking-media{flex:0 0 116px;min-width:0;margin:14px 0 14px 14px;}',
+      '.bw-blog-booking-media img{display:block;width:116px;height:116px;object-fit:cover;margin:0!important;border-radius:12px!important;}',
+      '.bw-blog-booking-body{display:flex;flex:1 1 auto;flex-direction:column;gap:8px;min-width:0;padding:14px 16px;}',
+      '.bw-blog-booking-title{display:block;margin:0!important;color:#212121!important;font-size:17px!important;font-weight:900!important;line-height:1.2!important;letter-spacing:0!important;text-transform:none!important;}',
+      '.bw-blog-booking-facts{margin:0;color:#4E5A4E!important;font-size:12px;font-weight:700;line-height:1.35;}',
       '.bw-blog-booking-dates{display:flex;gap:8px;min-width:0;overflow-x:auto;padding:2px;scrollbar-width:none;-webkit-overflow-scrolling:touch;}',
       '.bw-blog-booking-dates::-webkit-scrollbar{display:none;}',
-      '.bw-blog-booking-date{align-items:center;appearance:none;-webkit-appearance:none;background:#fff;border:1px solid #CFE4C8;border-radius:12px;color:#1B5E20!important;cursor:pointer;display:grid;flex:0 0 auto;font-family:inherit;gap:2px;justify-items:center;margin:0;min-height:68px;min-width:62px;padding:8px 6px;text-align:center;text-decoration:none!important;}',
+      '.bw-blog-booking-date{align-items:center;appearance:none;-webkit-appearance:none;background:#fff;border:1px solid #CFE4C8;border-radius:12px;color:#1B5E20!important;cursor:pointer;display:grid;flex:0 0 auto;font-family:inherit;gap:2px;justify-items:center;margin:0;min-height:56px;min-width:54px;padding:7px 4px;text-align:center;text-decoration:none!important;}',
       '.bw-blog-booking-date.bw-selected{background:#1B5E20;border-color:#1B5E20;color:#fff!important;}',
       '.bw-blog-booking-date span,.bw-blog-booking-date b,.bw-blog-booking-date small{color:inherit!important;}',
       'body .bw-blog-booking-card .bw-blog-booking-dates .bw-blog-booking-date.bw-selected,body .bw-blog-booking-card .bw-blog-booking-dates .bw-blog-booking-date.bw-selected span,body .bw-blog-booking-card .bw-blog-booking-dates .bw-blog-booking-date.bw-selected b,body .bw-blog-booking-card .bw-blog-booking-dates .bw-blog-booking-date.bw-selected small{color:#fff!important;}',
-      '.bw-blog-booking-date span{font-size:10px;font-weight:900;line-height:1;text-transform:uppercase;}',
-      '.bw-blog-booking-date b{font-size:21px;font-weight:900;line-height:1;}',
-      '.bw-blog-booking-date small{font-size:10px;font-weight:800;line-height:1.1;}',
+      '.bw-blog-booking-date span{font-size:9px;font-weight:900;line-height:1;text-transform:uppercase;}',
+      '.bw-blog-booking-date b{font-size:17px;font-weight:900;line-height:1;}',
+      '.bw-blog-booking-date small{font-size:9px;font-weight:800;line-height:1.1;}',
       '.bw-blog-booking-date:hover,.bw-blog-booking-date:focus-visible{outline:2px solid #FFE600;outline-offset:2px;}',
-      '.bw-blog-booking-more{align-items:center;background:#F8FBF4;border:1px solid #CFE4C8;border-radius:12px;color:#1B5E20!important;display:flex;flex:0 0 auto;justify-content:center;min-height:68px;min-width:52px;text-decoration:none!important;}',
-      '.bw-blog-booking-more svg{display:block;width:22px;height:22px;}',
+      '.bw-blog-booking-more{align-items:center;background:#F8FBF4;border:1px solid #CFE4C8;border-radius:12px;color:#1B5E20!important;display:flex;flex:0 0 auto;justify-content:center;min-height:56px;min-width:46px;text-decoration:none!important;}',
+      '.bw-blog-booking-more svg{display:block;width:19px;height:19px;}',
       '.bw-blog-booking-more:hover,.bw-blog-booking-more:focus-visible{outline:2px solid #FFE600;outline-offset:2px;}',
       '.bw-blog-booking-loading,.bw-blog-booking-empty{color:#4E5A4E;font-size:13px;font-weight:700;line-height:1.4;padding:10px 2px;}',
       '.bw-blog-booking-day{align-items:center;display:flex;flex-wrap:wrap;gap:8px;min-width:0;}',
       '.bw-blog-booking-times-label{color:#4E5A4E!important;font-size:11px;font-weight:900;letter-spacing:.06em;line-height:1;text-transform:uppercase;}',
       '.bw-blog-booking-times{display:flex;flex-wrap:wrap;gap:8px;}',
-      '.bw-blog-booking-time{appearance:none;-webkit-appearance:none;background:#fff;border:1px solid #CFE4C8;border-radius:999px;color:#1B5E20!important;cursor:pointer;font-family:inherit;font-size:13px;font-weight:900;line-height:1;margin:0;padding:9px 14px;}',
+      '.bw-blog-booking-time{appearance:none;-webkit-appearance:none;background:#fff;border:1px solid #CFE4C8;border-radius:999px;color:#1B5E20!important;cursor:pointer;font-family:inherit;font-size:12px;font-weight:900;line-height:1;margin:0;padding:8px 12px;}',
       '.bw-blog-booking-time.bw-selected{background:#1B5E20;border-color:#1B5E20;color:#fff!important;}',
       '.bw-blog-booking-time:hover,.bw-blog-booking-time:focus-visible{outline:2px solid #FFE600;outline-offset:2px;}',
-      '.bw-blog-booking-meta{color:#4E5A4E!important;flex:1 1 100%;font-size:12px;font-weight:600;line-height:1.35;margin:0;}',
+      '.bw-blog-booking-meta{color:#4E5A4E!important;flex:1 1 100%;font-size:11px;font-weight:600;line-height:1.35;margin:0;}',
       '.bw-blog-booking-cta{display:block;margin-top:2px;}',
-      '.bw-blog-booking-cta a{align-items:center;background:#FFE600;border-radius:999px;color:#1B5E20!important;display:flex;font-size:15px;font-weight:900;justify-content:center;min-height:48px;padding:0 16px;text-decoration:none!important;width:100%;}',
+      '.bw-blog-booking-cta a{align-items:center;background:#FFE600;border-radius:999px;color:#1B5E20!important;display:flex;font-size:14px;font-weight:900;justify-content:center;min-height:44px;padding:0 16px;text-decoration:none!important;width:100%;}',
       '.bw-blog-booking-cta a:hover,.bw-blog-booking-cta a:focus-visible{outline:2px solid #1B5E20;outline-offset:2px;}',
-      '.bw-blog-booking-note{display:block;margin:0;color:#4E5A4E;font-size:12px;font-weight:600;line-height:1.35;text-align:center;}',
-      '@media(max-width:640px){.bw-blog-booking-card{flex-direction:column;margin:28px 0;border-radius:14px;}.bw-blog-booking-media{flex:0 0 auto;}.bw-blog-booking-media img{height:170px;min-height:0;}.bw-blog-booking-body{padding:14px;}.bw-blog-booking-toprow{flex-direction:column;gap:6px;}.bw-blog-booking-price{text-align:left;}.bw-blog-booking-title{font-size:19px!important;}}'
+      '@media(max-width:640px){.bw-blog-booking-card{margin:24px 0;}.bw-blog-booking-strip{font-size:9px;letter-spacing:.1em;}.bw-blog-booking-inner{display:block;padding:12px;}.bw-blog-booking-media{float:left;width:92px;flex:none;margin:0 10px 4px 0;}.bw-blog-booking-media img{width:92px;height:92px;}.bw-blog-booking-body{display:block;padding:0;}.bw-blog-booking-title{font-size:16px!important;margin:0 0 6px!important;}.bw-blog-booking-facts{font-size:11.5px;}.bw-blog-booking-dates{clear:both;margin-top:10px;}.bw-blog-booking-day{margin-top:8px;}.bw-blog-booking-cta{margin-top:8px;}}'
     ].join('');
     document.head.appendChild(style);
   }
@@ -215,7 +212,7 @@
         dateKey: key
       });
     });
-    return Object.keys(byDate).sort().slice(0, 8).map(function (key) {
+    return Object.keys(byDate).sort().slice(0, 6).map(function (key) {
       return {
         dateKey: key,
         slots: byDate[key].sort(function (a, b) {
@@ -272,7 +269,7 @@
     var dateLabel = parts.weekday + ' ' + parts.day + ' ' + parts.month;
     panel.querySelector('[data-bw-booking-meta]').textContent =
       (slot.openSpots === null || slot.openSpots > 0 ? 'Spots available' : 'Few spots left') +
-      ' for ' + dateLabel + ' · about 2 hours, ends near Hackescher Markt';
+      ' for ' + dateLabel + ' · ends near Hackescher Markt';
 
     var cta = panel.querySelector('[data-bw-booking-cta]');
     cta.setAttribute('href', bookingHref(slot));
@@ -339,22 +336,20 @@
     var IMG_ALT = 'BerlinWalk guide Yusuf leading guests outside the Altes Museum on Museum Island';
 
     wrapper.innerHTML = [
+      '<div class="bw-blog-booking-strip">',
+      '  <span>Free Berlin walking tour &middot; live dates</span>',
+      '  <span><span class="bw-star" aria-hidden="true">&#9733;</span> 9.8 / 10 on FreeTour</span>',
+      '</div>',
+      '<div class="bw-blog-booking-inner">',
       '<div class="bw-blog-booking-media">',
       '  <picture>',
       '    <source srcset="' + IMG_BASE + '.webp" type="image/webp">',
       '    <img src="' + IMG_BASE + '.jpg" alt="' + escapeHtml(IMG_ALT) + '" loading="lazy">',
       '  </picture>',
-      '  <span class="bw-blog-booking-flag">Free tour</span>',
       '</div>',
       '<div class="bw-blog-booking-body">',
-      '  <div class="bw-blog-booking-toprow">',
-      '    <div class="bw-blog-booking-headgroup">',
-      '      <div class="bw-blog-booking-title" role="heading" aria-level="2">Berlin: Free Walking Tour of the Historic Centre</div>',
-      '      <div class="bw-blog-booking-rating"><span class="bw-star" aria-hidden="true">&#9733;</span><b>9.8</b><span>/ 10 on FreeTour</span></div>',
-      '    </div>',
-      '    <div class="bw-blog-booking-price"><b>Free &middot; tip-based</b><span>no upfront payment</span></div>',
-      '  </div>',
-      '  <p class="bw-blog-booking-text">Join my 2-hour walk from the World Clock at Alexanderplatz: 12 stops through the streets where Berlin began.</p>',
+      '  <div class="bw-blog-booking-title" role="heading" aria-level="2">Berlin: Free Walking Tour of the Historic Centre</div>',
+      '  <div class="bw-blog-booking-facts">Free, tip-based &middot; about 2 hours &middot; starts at the World Clock, Alexanderplatz</div>',
       '  <div class="bw-blog-booking-dates" data-bw-booking-dates aria-label="Pick a tour date">',
       '    <div class="bw-blog-booking-loading">Loading live tour dates...</div>',
       '  </div>',
@@ -366,7 +361,7 @@
       '  <div class="bw-blog-booking-cta">',
       '    <a href="' + escapeHtml(bookingHref()) + '" target="_top" data-bw-booking-cta>Check availability</a>',
       '  </div>',
-      '  <span class="bw-blog-booking-note">Free reservation &middot; you choose the number of guests on the next step</span>',
+      '</div>',
       '</div>'
     ].join('');
 
