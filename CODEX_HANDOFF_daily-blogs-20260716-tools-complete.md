@@ -30,7 +30,8 @@ Local repo work:
   changes the generated timestamp and related-tool fields only; it does not
   modify published post bodies or metadata.
 
-The changes were pushed to `origin/main` as commit `08312ca`. GitHub Actions is
-still deploying that commit; until the deployment finishes, the Wix pages are
-live but the new hub icons and regenerated `/blog` relation data may still be
-served from the previous GitHub Pages build.
+The latest widget-repo push includes the five tool records, icon assets and
+regenerated `/blog` relation data. GitHub Actions and GitHub Pages deployment
+completed successfully; the live widget, icon assets and `/blog` JSON returned
+HTTP 200. The Neukölln blog draft remains unpublished, so its own relation is
+intentionally absent from the published index.
