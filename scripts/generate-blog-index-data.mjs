@@ -581,6 +581,10 @@ function relatedToolSlugFor(post) {
   if ((post.slug || '') === 'weekend-in-berlin-48-hour-itinerary') return 'ultimate-berlin-trip-planner';
   if ((post.slug || '') === 'berlin-natural-history-museum') return 'berlin-natural-history-museum';
   if ((post.slug || '') === 'german-numbers-for-tourists-berlin') return 'berlin-german-numbers';
+  if ((post.slug || '') === 'how-to-order-doner-in-berlin') return 'berlin-doner-order-builder';
+  if ((post.slug || '') === 'stasi-museum-berlin') return 'stasi-surveillance-scale';
+  if ((post.slug || '') === 'treptower-park-berlin') return 'treptower-memorial-walk';
+  if ((post.slug || '') === 'friedrichshain-berlin') return 'friedrichshain-kiez-loop';
   if (/(berlin-layover-guide|layover in berlin|ber layover|spend a layover)/.test(s)) return 'berlin-layover-planner';
   if (/(prenzlauer-berg-berlin|prenzlauer berg)/.test(s)) return 'prenzlauer-berg-walk';
   if (/(buy-berlin-transport-tickets-on-your-phone|tickets on your phone|phone ticket|bvg app)/.test(s)) return 'berlin-phone-ticket-picker';

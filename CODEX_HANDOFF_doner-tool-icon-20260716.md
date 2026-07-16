@@ -55,5 +55,17 @@ NOT publish the post.
 6. `node tools-hub/validate-data.mjs`, then commit/push. Do NOT add to homepage
    `tools-home/data.json` (not a top-8 tool).
 
+## Completion update — 2026-07-16
+
+This deferred handoff is complete. The built-in Codex image-generation route
+produced the icon; the 512px asset was uploaded to Wix Media; CMS item
+`7a220296-35f7-4321-a8e2-9666028e236e` is live at
+`/tools/berlin-doner-order-builder`; and the local hub/blog data is wired. The
+Wix media URL is recorded in `tools-hub/data.json` and the icon manifests.
+
+The direct Wix page returned HTTP 200 and browser QA confirmed the correct
+widget iframe, related post and related-tool links. The widget-repo commit is
+local; GitHub Pages push remains Yusuf's manual step under the repo workflow.
+
 This does NOT publish the blog post; the post stays UNPUBLISHED until Yusuf
 approves it.

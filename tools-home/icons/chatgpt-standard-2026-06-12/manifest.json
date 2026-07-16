@@ -1505,5 +1505,57 @@
     "png160": "tools-home/icons/berlin-two-day-route-map-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-two-day-route-map-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_2b6723c373e645a78f488a11aed8ade5~mv2.png"
+  },
+  {
+    "slug": "stasi-surveillance-scale",
+    "title": "The Stasi, by the Numbers",
+    "category": "Discovery",
+    "source": "codex-built-in-imagegen-20260716",
+    "generatedAt": "2026-07-16",
+    "promptFile": "tools-home/icons/_src/codex-built-in-imagegen-20260716/stasi-surveillance-scale/PROMPT.md",
+    "sourceImage": "tools-home/icons/_src/codex-built-in-imagegen-20260716/stasi-surveillance-scale/source.png",
+    "png512": "tools-home/icons/stasi-surveillance-scale.png",
+    "png160": "tools-home/icons/stasi-surveillance-scale-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/stasi-surveillance-scale-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_bbd77d18893d48189d807e5ea23082ac~mv2.png"
+  },
+  {
+    "slug": "berlin-doner-order-builder",
+    "title": "Berlin Döner Order Builder",
+    "category": "Discovery",
+    "source": "codex-built-in-imagegen-20260716",
+    "generatedAt": "2026-07-16",
+    "promptFile": "tools-home/icons/_src/codex-built-in-imagegen-20260716/berlin-doner-order-builder/PROMPT.md",
+    "sourceImage": "tools-home/icons/_src/codex-built-in-imagegen-20260716/berlin-doner-order-builder/source.png",
+    "png512": "tools-home/icons/berlin-doner-order-builder.png",
+    "png160": "tools-home/icons/berlin-doner-order-builder-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-doner-order-builder-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_bd1d96141bef43be973fd7961a5500b7~mv2.png"
+  },
+  {
+    "slug": "treptower-memorial-walk",
+    "title": "Treptower Park Memorial Walk",
+    "category": "Discovery",
+    "source": "codex-built-in-imagegen-20260716",
+    "generatedAt": "2026-07-16",
+    "promptFile": "tools-home/icons/_src/codex-built-in-imagegen-20260716/treptower-memorial-walk/PROMPT.md",
+    "sourceImage": "tools-home/icons/_src/codex-built-in-imagegen-20260716/treptower-memorial-walk/source.png",
+    "png512": "tools-home/icons/treptower-memorial-walk.png",
+    "png160": "tools-home/icons/treptower-memorial-walk-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/treptower-memorial-walk-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_efaaf3553ad54378a50c02aa13df423d~mv2.png"
+  },
+  {
+    "slug": "friedrichshain-kiez-loop",
+    "title": "Friedrichshain Kiez Loop",
+    "category": "Discovery",
+    "source": "codex-built-in-imagegen-20260716",
+    "generatedAt": "2026-07-16",
+    "promptFile": "tools-home/icons/_src/codex-built-in-imagegen-20260716/friedrichshain-kiez-loop/PROMPT.md",
+    "sourceImage": "tools-home/icons/_src/codex-built-in-imagegen-20260716/friedrichshain-kiez-loop/source.png",
+    "png512": "tools-home/icons/friedrichshain-kiez-loop.png",
+    "png160": "tools-home/icons/friedrichshain-kiez-loop-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/friedrichshain-kiez-loop-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_e41d61a8176640d7a679cda275300c51~mv2.png"
   }
 ]

@@ -49,3 +49,15 @@ NOT publish the post.
    jsonLd WebApplication, widgetUrl, relatedBlog `/post/stasi-museum-berlin`).
 6. `node tools-hub/validate-data.mjs`, commit/push (own paths only).
 7. Do NOT add to homepage `tools-home/data.json` (not a top-8 tool).
+
+## Completion update — 2026-07-16
+
+This deferred handoff is complete. The built-in Codex image-generation route
+produced the icon; the 512px asset was uploaded to Wix Media; CMS item
+`9301d985-4703-436e-afa2-a40d61c5a9d3` is live at
+`/tools/stasi-surveillance-scale`; and the local hub/blog data is wired. The
+Wix media URL is recorded in `tools-hub/data.json` and the icon manifests.
+
+The direct Wix page returned HTTP 200 and browser QA confirmed the correct
+widget iframe, related post and related-tool links. The widget-repo commit is
+local; GitHub Pages push remains Yusuf's manual step under the repo workflow.

@@ -3934,6 +3934,125 @@
       "relatedBlog": "/post/berlin-natural-history-museum",
       "iconStatus": "live-wix-media",
       "cmsItemId": "f22a1f6b-c84f-468b-902d-63a438fb2482"
+    },
+    {
+      "slug": "berlin-doner-order-builder",
+      "title": "Berlin Döner Order Builder",
+      "lead": "Build your exact döner order and get the German line to say at the counter: pick the form (Döner, Dürüm, Teller, Box), the filling, salad, sauces and extras, and see the phrase, rough pronunciation, what you get and the 2026 price.",
+      "category": "Discovery",
+      "image": "https://static.wixstatic.com/media/5a08a3_bd1d96141bef43be973fd7961a5500b7~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-doner-order-builder/",
+      "embedHeight": 1280,
+      "hubCategory": "FoodNightlife",
+      "type": "Guide",
+      "tags": [
+        "döner",
+        "Gemüse Kebap",
+        "Dürüm",
+        "Berlin food",
+        "street food",
+        "how to order in German",
+        "kebab"
+      ],
+      "aliases": [
+        "order doner berlin",
+        "how to order doner",
+        "doner german phrases",
+        "mit alles",
+        "gemuse kebap",
+        "durum vs doner"
+      ],
+      "relatedBlog": "/post/how-to-order-doner-in-berlin",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "7a220296-35f7-4321-a8e2-9666028e236e"
+    },
+    {
+      "slug": "stasi-surveillance-scale",
+      "title": "The Stasi, by the Numbers",
+      "lead": "See how deep East Germany's secret police reached: pick any group size and watch the informer and Stasi-file ratios appear.",
+      "category": "Discovery",
+      "image": "https://static.wixstatic.com/media/5a08a3_bbd77d18893d48189d807e5ea23082ac~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/stasi-surveillance-scale/",
+      "embedHeight": 1500,
+      "hubCategory": "CultureLandmarks",
+      "type": "Guide",
+      "tags": [
+        "Stasi",
+        "Cold War Berlin",
+        "GDR",
+        "surveillance",
+        "Berlin history",
+        "DDR"
+      ],
+      "aliases": [
+        "stasi museum berlin",
+        "stasi numbers",
+        "stasi informers",
+        "hohenschonhausen",
+        "cold war berlin"
+      ],
+      "relatedBlog": "/post/stasi-museum-berlin",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "9301d985-4703-436e-afa2-a40d61c5a9d3"
+    },
+    {
+      "slug": "treptower-memorial-walk",
+      "title": "Treptower Park Memorial Walk",
+      "lead": "Walk the Soviet War Memorial in the order it was built: from the grieving mother and red granite flags to the soldier on the hill, with the distance, timing and what to notice at each stop.",
+      "category": "Discovery",
+      "image": "https://static.wixstatic.com/media/5a08a3_efaaf3553ad54378a50c02aa13df423d~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/treptower-memorial-walk/",
+      "embedHeight": 980,
+      "hubCategory": "CultureLandmarks",
+      "type": "Guide",
+      "tags": [
+        "Treptower Park",
+        "Soviet War Memorial",
+        "Berlin history",
+        "memorial walk",
+        "World War II history",
+        "Berlin parks"
+      ],
+      "aliases": [
+        "treptower park memorial",
+        "soviet memorial berlin",
+        "treptower memorial walk",
+        "soviet war memorial berlin",
+        "treptower park walk"
+      ],
+      "relatedBlog": "/post/treptower-park-berlin",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "15791870-6c55-471f-940a-3b763670b415"
+    },
+    {
+      "slug": "friedrichshain-kiez-loop",
+      "title": "Friedrichshain Kiez Loop",
+      "lead": "Build a practical Friedrichshain day around Boxhagener Platz, RAW-Gelände, Karl-Marx-Allee, the East Side Gallery and Oberbaumbrücke: choose the time of day and see which stops are worth it then.",
+      "category": "Discovery",
+      "image": "https://static.wixstatic.com/media/5a08a3_e41d61a8176640d7a679cda275300c51~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/friedrichshain-kiez-loop/",
+      "embedHeight": 1180,
+      "hubCategory": "CultureLandmarks",
+      "type": "Guide",
+      "tags": [
+        "Friedrichshain",
+        "Boxhagener Platz",
+        "RAW-Gelände",
+        "East Side Gallery",
+        "Oberbaumbrücke",
+        "Karl-Marx-Allee",
+        "Berlin neighborhoods"
+      ],
+      "aliases": [
+        "friedrichshain guide",
+        "friedrichshain itinerary",
+        "boxhagener platz guide",
+        "raw gelande berlin",
+        "east side gallery walk"
+      ],
+      "relatedBlog": "/post/friedrichshain-berlin",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "31383c66-d696-4c20-bd8a-3f30577f0788"
     }
   ],
   "hubCategories": [
