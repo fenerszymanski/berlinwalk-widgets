@@ -178,13 +178,19 @@ const TOPICS = [
 // guides. Keep this curated because the /blog hero is the first editorial
 // signal visitors see before the Latest shelf.
 const HERO_SLUGS = {
-  lead: 'berlin-ticket-machines',
+  lead: '2-days-in-berlin-itinerary',
   secondary: [
+    'weekend-in-berlin-48-hour-itinerary',
+    'berlin-natural-history-museum',
+    'german-numbers-for-tourists-berlin',
+    'berlin-ticket-machines',
+    'where-to-watch-2026-world-cup-in-berlin',
     'berlin-ringbahn',
     'berlin-train-announcements',
     'open-air-cinema-berlin',
-    'where-to-watch-2026-world-cup-in-berlin',
     'currency-exchange-in-berlin',
+    'hidden-places-central-berlin',
+    'berlin-trams-guide',
     'kreuzberg-berlin',
     'kadewe-berlin',
     'how-to-pronounce-berlin-station-names',
@@ -239,6 +245,14 @@ const REQUIRED_SLUGS = [
   'why-is-berlin-founding-year-1237',
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
+  '2-days-in-berlin-itinerary',
+  'weekend-in-berlin-48-hour-itinerary',
+  'berlin-natural-history-museum',
+  'german-numbers-for-tourists-berlin',
+  'self-guided-berlin-walking-tour-audio-guide',
+  'berlin-audio-guide-app-vs-no-app',
+  'hidden-places-central-berlin',
+  'berlin-trams-guide',
   'berlin-ticket-machines',
   'berlin-ringbahn',
   'berlin-train-announcements',
@@ -565,6 +579,8 @@ function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
   if ((post.slug || '') === '2-days-in-berlin-itinerary') return 'berlin-two-day-route-map';
   if ((post.slug || '') === 'weekend-in-berlin-48-hour-itinerary') return 'ultimate-berlin-trip-planner';
+  if ((post.slug || '') === 'berlin-natural-history-museum') return 'berlin-natural-history-museum';
+  if ((post.slug || '') === 'german-numbers-for-tourists-berlin') return 'berlin-german-numbers';
   if (/(berlin-layover-guide|layover in berlin|ber layover|spend a layover)/.test(s)) return 'berlin-layover-planner';
   if (/(prenzlauer-berg-berlin|prenzlauer berg)/.test(s)) return 'prenzlauer-berg-walk';
   if (/(buy-berlin-transport-tickets-on-your-phone|tickets on your phone|phone ticket|bvg app)/.test(s)) return 'berlin-phone-ticket-picker';

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-15T20:50:07.854Z",
+  "updatedAt": "2026-07-16T02:08:53.644Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 216,
@@ -43,73 +43,90 @@
   ],
   "hero": {
     "lead": {
-      "title": "How to Use a Berlin Ticket Machine: Buy a BVG Ticket Step by Step (2026)",
-      "slug": "berlin-ticket-machines",
-      "path": "/post/berlin-ticket-machines",
-      "url": "https://www.berlinwalk.com/post/berlin-ticket-machines",
-      "excerpt": "Standing in front of a Berlin ticket machine, staring at German words while a train pulls in, is a rite of passage. Here is how the BVG machine really works: English menus, the right 2026 fare, how to pay, and the one step that saves you a 60 euro fine.",
+      "title": "2 Days in Berlin: A Realistic Itinerary for First-Time Visitors",
+      "slug": "2-days-in-berlin-itinerary",
+      "path": "/post/2-days-in-berlin-itinerary",
+      "url": "https://www.berlinwalk.com/post/2-days-in-berlin-itinerary",
+      "excerpt": "Two days in Berlin work when the geography stays simple. Follow a realistic first-day route through the historic centre, then use the second day for the Berlin Wall Memorial, East Side Gallery and Kreuzberg.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "first-day",
       "topicLabel": "First Day in Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-07-14T23:01:22.370Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_8468d9d913ae45d9a4d0b244ab191c8b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-bvg-ticket-machine.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_8468d9d913ae45d9a4d0b244ab191c8b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-bvg-ticket-machine.jpg",
-      "alt": "A yellow BVG ticket machine on a Berlin U-Bahn platform, labelled Fahrscheine Tickets.",
-      "relatedToolSlug": "berlin-ticket-machine-simulator"
+      "readTime": "8 min read",
+      "publishedDate": "2026-07-15T14:41:06.847Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_0c4d22b9b4e64a2b9cf8c624f2ba8b68~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island-tv-tower-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_0c4d22b9b4e64a2b9cf8c624f2ba8b68~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island-tv-tower-cover.jpg",
+      "alt": "Museum Island and the Berlin TV Tower seen across the Spree",
+      "relatedToolSlug": "berlin-two-day-route-map"
     },
     "secondary": [
       {
-        "title": "The Berlin Ringbahn: How to Ride the S41/S42 Circle Line (2026)",
-        "slug": "berlin-ringbahn",
-        "path": "/post/berlin-ringbahn",
-        "url": "https://www.berlinwalk.com/post/berlin-ringbahn",
-        "excerpt": "Berlin's Ringbahn, the S41 and S42, loops right around the city through 27 stations in about an hour. Here is what the circle line actually is, how to tell which direction each train goes, what ticket covers a full loop, and the stops that are genuinely worth leaving the train for.",
+        "title": "Weekend in Berlin: A 48-Hour Itinerary That Fits Your Arrival",
+        "slug": "weekend-in-berlin-48-hour-itinerary",
+        "path": "/post/weekend-in-berlin-48-hour-itinerary",
+        "url": "https://www.berlinwalk.com/post/weekend-in-berlin-48-hour-itinerary",
+        "excerpt": "A realistic 48-hour Berlin itinerary for Friday-evening or Saturday-morning arrivals, with one central Saturday line, a slower Sunday and no cross-city race.",
         "category": "Tourist Tips",
         "categorySlug": "tourist-tips",
         "topic": "first-day",
         "topicLabel": "First Day in Berlin",
-        "readTime": "5 min read",
-        "publishedDate": "2026-07-14T23:01:19.832Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_cb3a52c075e0406d8a3634dd57353355~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ringbahn-bridge-s-bahn-cover.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_cb3a52c075e0406d8a3634dd57353355~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ringbahn-bridge-s-bahn-cover.jpg",
-        "alt": "A red and ochre Berlin S-Bahn crossing the curving iron Ringbahn bridge over the Oberspree river",
-        "relatedToolSlug": "berlin-ringbahn"
+        "readTime": "7 min read",
+        "publishedDate": "2026-07-15T14:44:35.980Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_1898c1d5123d42c4b1f3c04744733bf0~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island-tv-tower.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_1898c1d5123d42c4b1f3c04744733bf0~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island-tv-tower.jpg",
+        "alt": "Museum Island and the Berlin TV Tower beside the River Spree",
+        "relatedToolSlug": "ultimate-berlin-trip-planner"
       },
       {
-        "title": "Berlin Train Announcements Decoded: What the U-Bahn and S-Bahn Voice Is Saying (2026)",
-        "slug": "berlin-train-announcements",
-        "path": "/post/berlin-train-announcements",
-        "url": "https://www.berlinwalk.com/post/berlin-train-announcements",
-        "excerpt": "The first German you hear in Berlin is a recorded voice on the train. Here is what Zurückbleiben bitte, Nächster Halt, Ausstieg rechts and Ersatzverkehr actually mean, why the S-Bahn plays that little three-note chime, and the one word that tells you the train is about to terminate.",
-        "category": "German Language",
-        "categorySlug": "german-language",
-        "topic": "when-to-visit",
-        "topicLabel": "Month-by-Month Berlin",
-        "readTime": "6 min read",
-        "publishedDate": "2026-07-14T23:01:18.140Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_c5b335ed26f14a6a87b0d44bfba04992~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-sbahn-alexanderplatz-cover.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_c5b335ed26f14a6a87b0d44bfba04992~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-sbahn-alexanderplatz-cover.jpg",
-        "alt": "An S-Bahn train arriving under the glass roof of Alexanderplatz station in Berlin",
-        "relatedToolSlug": "berlin-train-announcements"
-      },
-      {
-        "title": "Open-Air Cinema in Berlin: How to Catch a Film in English Under the Stars (2026)",
-        "slug": "open-air-cinema-berlin",
-        "path": "/post/open-air-cinema-berlin",
-        "url": "https://www.berlinwalk.com/post/open-air-cinema-berlin",
-        "excerpt": "Some of the best summer evenings in Berlin happen outdoors, watching a film in a park under the open sky. Here is how to find an open-air cinema showing something in English, which Freiluftkino to pick, and how to plan the night.",
+        "title": "Berlin Natural History Museum: The World's Tallest Dinosaur, and How to Visit (2026)",
+        "slug": "berlin-natural-history-museum",
+        "path": "/post/berlin-natural-history-museum",
+        "url": "https://www.berlinwalk.com/post/berlin-natural-history-museum",
+        "excerpt": "The Museum für Naturkunde, Berlin's natural history museum, holds the tallest mounted dinosaur skeleton on Earth, a real Tyrannosaurus rex, and the priceless Berlin Archaeopteryx. Here are 2026 tickets and hours, the exhibits worth your time, how to get there, and an honest take on whether it is worth it.",
         "category": "Tourist Tips",
         "categorySlug": "tourist-tips",
-        "topic": "when-to-visit",
-        "topicLabel": "Month-by-Month Berlin",
-        "readTime": "7 min read",
-        "publishedDate": "2026-07-14T15:21:55.543Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_1a1b92d7983c44f1b4f72642bb831bba~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-freiluftkino-hasenheide.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_1a1b92d7983c44f1b4f72642bb831bba~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-freiluftkino-hasenheide.jpg",
-        "alt": "The big illuminated screen at Freiluftkino Hasenheide in Neukölln, glowing against the dusk sky",
-        "relatedToolSlug": ""
+        "topic": "first-day",
+        "topicLabel": "First Day in Berlin",
+        "readTime": "6 min read",
+        "publishedDate": "2026-07-15T20:47:05.267Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_0110deff2faf4b5b9bd207c02a300628~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-giraffatitan-hall.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_0110deff2faf4b5b9bd207c02a300628~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-giraffatitan-hall.jpg",
+        "alt": "The glass-roofed central hall of the Berlin Natural History Museum, with the towering Giraffatitan dinosaur skeleton on the left and a Diplodocus alongside, visitors standing at their feet for scale",
+        "relatedToolSlug": "berlin-natural-history-museum"
+      },
+      {
+        "title": "German Numbers for Tourists: How to Read Berlin Prices, Platforms and Menus (2026)",
+        "slug": "german-numbers-for-tourists-berlin",
+        "path": "/post/german-numbers-for-tourists-berlin",
+        "url": "https://www.berlinwalk.com/post/german-numbers-for-tourists-berlin",
+        "excerpt": "German numbers come at you fast in Berlin: a price at a bakery, a platform called out at Hauptbahnhof, the deposit on a bottle. This guide covers the one rule that makes them click (the small digit comes first), how prices and the comma work, what Gleis and the line numbers mean, and an interactive tool to build and hear any German number.",
+        "category": "German Language",
+        "categorySlug": "german-language",
+        "topic": "practical",
+        "topicLabel": "Practical Berlin",
+        "readTime": "6 min read",
+        "publishedDate": "2026-07-15T20:46:26.547Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_f74127293404404d804b214116a442c0~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-german-prices-euro-banknotes.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_f74127293404404d804b214116a442c0~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-german-prices-euro-banknotes.jpg",
+        "alt": "Euro banknotes showing the numbers 20 and 50, the printed figures visitors handle every day in Berlin",
+        "relatedToolSlug": "berlin-german-numbers"
+      },
+      {
+        "title": "How to Use a Berlin Ticket Machine: Buy a BVG Ticket Step by Step (2026)",
+        "slug": "berlin-ticket-machines",
+        "path": "/post/berlin-ticket-machines",
+        "url": "https://www.berlinwalk.com/post/berlin-ticket-machines",
+        "excerpt": "Standing in front of a Berlin ticket machine, staring at German words while a train pulls in, is a rite of passage. Here is how the BVG machine really works: English menus, the right 2026 fare, how to pay, and the one step that saves you a 60 euro fine.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "first-day",
+        "topicLabel": "First Day in Berlin",
+        "readTime": "6 min read",
+        "publishedDate": "2026-07-14T23:01:22.370Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_8468d9d913ae45d9a4d0b244ab191c8b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-bvg-ticket-machine.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_8468d9d913ae45d9a4d0b244ab191c8b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-bvg-ticket-machine.jpg",
+        "alt": "A yellow BVG ticket machine on a Berlin U-Bahn platform, labelled Fahrscheine Tickets.",
+        "relatedToolSlug": "berlin-ticket-machine-simulator"
       },
       {
         "title": "Where to Watch the 2026 World Cup in Berlin (No, There's No Brandenburg Gate Fan Mile This Year)",
@@ -127,23 +144,6 @@
         "thumb": "https://static.wixstatic.com/media/5a08a3_fef2d645c235423dab6035f42558e352~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
         "alt": "A summer evening football public viewing in Berlin with a relaxed crowd, outdoor screen and TV Tower skyline",
         "relatedToolSlug": "watch-world-cup-2026-berlin"
-      },
-      {
-        "title": "Currency Exchange in Berlin: Where to Change Money (and Where Not To) in 2026",
-        "slug": "currency-exchange-in-berlin",
-        "path": "/post/currency-exchange-in-berlin",
-        "url": "https://www.berlinwalk.com/post/currency-exchange-in-berlin",
-        "excerpt": "Most visitors do not need to exchange cash in Berlin at all. A local guide to getting euros without the hidden margin: bank ATMs, the airport-desk trap, the dynamic-conversion question, and how much cash to actually carry.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "first-day",
-        "topicLabel": "First Day in Berlin",
-        "readTime": "6 min read",
-        "publishedDate": "2026-07-11T20:37:50.719Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_adb12d60572b4982a56db12599fa65c4~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-currency-exchange-berlin-euro-cash-cover.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_adb12d60572b4982a56db12599fa65c4~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-currency-exchange-berlin-euro-cash-cover.jpg",
-        "alt": "Close-up of euro banknotes, a fifty and a twenty, the cash most visitors think they need to exchange before arriving in Berlin",
-        "relatedToolSlug": "berlin-atm-fee-checker"
       }
     ]
   },
@@ -1631,7 +1631,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_0110deff2faf4b5b9bd207c02a300628~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-giraffatitan-hall.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_0110deff2faf4b5b9bd207c02a300628~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-giraffatitan-hall.jpg",
       "alt": "The glass-roofed central hall of the Berlin Natural History Museum, with the towering Giraffatitan dinosaur skeleton on the left and a Diplodocus alongside, visitors standing at their feet for scale",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-natural-history-museum"
     },
     {
       "title": "German Numbers for Tourists: How to Read Berlin Prices, Platforms and Menus (2026)",
@@ -1648,7 +1648,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_f74127293404404d804b214116a442c0~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-german-prices-euro-banknotes.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_f74127293404404d804b214116a442c0~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-german-prices-euro-banknotes.jpg",
       "alt": "Euro banknotes showing the numbers 20 and 50, the printed figures visitors handle every day in Berlin",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-german-numbers"
     },
     {
       "title": "Weekend in Berlin: A 48-Hour Itinerary That Fits Your Arrival",
@@ -1837,7 +1837,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_0110deff2faf4b5b9bd207c02a300628~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-giraffatitan-hall.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_0110deff2faf4b5b9bd207c02a300628~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-giraffatitan-hall.jpg",
       "alt": "The glass-roofed central hall of the Berlin Natural History Museum, with the towering Giraffatitan dinosaur skeleton on the left and a Diplodocus alongside, visitors standing at their feet for scale",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-natural-history-museum"
     },
     {
       "title": "German Numbers for Tourists: How to Read Berlin Prices, Platforms and Menus (2026)",
@@ -1854,7 +1854,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_f74127293404404d804b214116a442c0~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-german-prices-euro-banknotes.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_f74127293404404d804b214116a442c0~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-german-prices-euro-banknotes.jpg",
       "alt": "Euro banknotes showing the numbers 20 and 50, the printed figures visitors handle every day in Berlin",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-german-numbers"
     },
     {
       "title": "Weekend in Berlin: A 48-Hour Itinerary That Fits Your Arrival",

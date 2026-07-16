@@ -2067,7 +2067,6 @@
       "hubCategory": "Transport",
       "type": "Planner",
       "priority": 9,
-      "featured": true,
       "tags": [
         "airport",
         "ber airport",
@@ -3847,7 +3846,8 @@
       "embedHeight": 1500,
       "hubCategory": "TripPlans",
       "type": "Planner",
-      "priority": 43,
+      "priority": 3,
+      "featured": true,
       "tags": [
         "2 days",
         "two day itinerary",
