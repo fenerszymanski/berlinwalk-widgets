@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Stasi, by the Numbers: Surveillance Scale Visualizer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
+    --yellow:#FFE600; --ink:#1c2a1c; --panel:#ffffff; --bone:#f4f9ec;
+    --line:#e0eccf; --shadow:0 10px 30px rgba(18,61,24,.14);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .wrap{max-width:940px;margin:0 auto;padding:4px}
+  .card{background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+  .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:20px 22px}
+  .kick{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:700;margin:0 0 6px;font-family:"IBM Plex Mono",monospace}
+  .head h1{margin:0;font-size:22px;font-weight:800;line-height:1.2}
+  .head p{margin:8px 0 0;font-size:14px;color:#e7f3e2;max-width:660px}
+  .panel{padding:18px 20px}
+
+  .seg{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+  .seg button{flex:1 1 200px;border:1px solid var(--line);background:#fff;color:var(--green-deep);font:inherit;font-weight:700;font-size:13.5px;padding:11px 12px;border-radius:12px;cursor:pointer;transition:.12s;text-align:left;line-height:1.25}
+  .seg button .lab{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6d8163;font-weight:700;margin-bottom:2px}
+  .seg button[aria-pressed="true"]{background:var(--green);color:#fff;border-color:var(--green)}
+  .seg button[aria-pressed="true"] .lab{color:var(--yellow)}
+
+  .controls{background:var(--bone);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:0 0 14px}
+  .controls label{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;font-weight:700;color:var(--green-deep);margin:0 0 8px}
+  .controls .val{font-family:"IBM Plex Mono",monospace;font-size:15px}
+  input[type=range]{width:100%;accent-color:var(--green);height:26px}
+  .presets{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0 0}
+  .presets button{border:1px solid var(--line);background:#fff;color:var(--green-deep);font:inherit;font-weight:700;font-size:12px;padding:6px 11px;border-radius:999px;cursor:pointer}
+  .presets button:hover{border-color:var(--lime)}
+
+  .readout{font-size:16px;line-height:1.5;margin:0 0 12px;color:var(--ink)}
+  .readout b{color:var(--green-deep)}
+  .readout .hi{background:var(--yellow);color:var(--green-deep);border-radius:6px;padding:0 6px;font-weight:800;font-family:"IBM Plex Mono",monospace}
+
+  .grid{display:flex;flex-wrap:wrap;gap:5px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;min-height:96px}
+  .dot{width:13px;height:13px;border-radius:50%;background:#dfe9d2;border:1px solid #cfe0bd;flex:0 0 auto}
+  .dot.on{background:var(--yellow);border-color:#e4c800;box-shadow:0 0 0 2px rgba(27,94,32,.14)}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin:10px 2px 0;font-size:12px;color:#55634f;font-weight:600}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+  .legend i.a{background:var(--yellow);border:1px solid #e4c800}
+  .legend i.b{background:#dfe9d2;border:1px solid #cfe0bd}
+
+  .nums{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0 4px}
+  @media (max-width:560px){ .nums{grid-template-columns:repeat(2,1fr)} }
+  .tile{background:var(--bone);border:1px solid var(--line);border-radius:14px;padding:14px 12px}
+  .tile .n{font-family:"IBM Plex Mono",monospace;font-size:26px;font-weight:700;color:var(--green-deep);line-height:1;margin:0}
+  .tile .t{font-size:12px;color:#4c5a44;margin:7px 0 0;font-weight:600;line-height:1.35}
+  @media (max-width:560px){ .tile .n{font-size:22px} }
+
+  .foot{font-size:11.5px;color:#6d7a64;margin:14px 2px 0;line-height:1.45}
+  h2.sec{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--green);margin:18px 2px 10px;font-weight:800;font-family:"IBM Plex Mono",monospace}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="head">
+      <p class="kick">Berlinwalk.com • Berlin History</p>
+      <h1>The Stasi, by the numbers</h1>
+      <p>East Germany was watched by one of the densest surveillance machines in modern history. Set the size of any group of people and see how deep the Ministry for State Security actually reached.</p>
+    </div>
+    <div class="panel">
+
+      <div class="seg" role="tablist" aria-label="What to show">
+        <button id="mode-im" aria-pressed="true">
+          <span class="lab">View</span>
+          Unofficial informers (IMs), about 1 in 90
+        </button>
+        <button id="mode-file" aria-pressed="false">
+          <span class="lab">View</span>
+          People the Stasi kept a file on, more than 1 in 3
+        </button>
+      </div>
+
+      <div class="controls">
+        <label for="people">People in the room <span class="val" id="peopleVal">60</span></label>
+        <input type="range" id="people" min="10" max="600" step="5" value="60" />
+        <div class="presets" id="presets">
+          <button data-n="10">A dinner table (10)</button>
+          <button data-n="30">A classroom (30)</button>
+          <button data-n="90">An office floor (90)</button>
+          <button data-n="300">An apartment block (300)</button>
+        </div>
+      </div>
+
+      <p class="readout" id="readout"></p>
+
+      <div class="grid" id="grid" aria-hidden="true"></div>
+      <div class="legend">
+        <span><i class="a"></i> <span id="legendOn">informer</span></span>
+        <span><i class="b"></i> everyone else</span>
+      </div>
+
+      <h2 class="sec">The whole country, 1989</h2>
+      <div class="nums">
+        <div class="tile"><p class="n" data-count="91015" data-suffix="">0</p><p class="t">full-time Stasi officers</p></div>
+        <div class="tile"><p class="n" data-count="189000" data-prefix="~">0</p><p class="t">unofficial informers (IMs)</p></div>
+        <div class="tile"><p class="n" data-count="6" data-suffix=" million">0</p><p class="t">people with a Stasi file</p></div>
+        <div class="tile"><p class="n" data-count="111" data-suffix=" km">0</p><p class="t">shelf length of surviving files</p></div>
+        <div class="tile"><p class="n" data-count="16000" data-prefix="~">0</p><p class="t">sacks of hand-shredded pages left</p></div>
+        <div class="tile"><p class="n" data-count="40" data-prefix="~" data-suffix=" yrs">0</p><p class="t">of secret policing (1950 to 1990)</p></div>
+      </div>
+
+      <p class="foot">Figures for 1989, the Stasi's last full year, from the Stasi Records Archive and standard histories. Informer estimates vary between studies; "about 1 in 90" uses roughly 189,000 unofficial informers against a population of about 16.4 million. The often-quoted "one in 6.5 people" counts every part-time contact and is disputed by historians, so it is not used here.</p>
+    </div>
+  </div>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function(){
+  var IM_RATIO = 90;      // ~1 unofficial informer per 90 people
+  var FILE_RATIO = 0.37;  // more than 1 in 3 had a file
+  var mode = 'im';
+  var MAX_DOTS = 600;
+
+  var peopleEl = document.getElementById('people');
+  var peopleVal = document.getElementById('peopleVal');
+  var grid = document.getElementById('grid');
+  var readout = document.getElementById('readout');
+  var legendOn = document.getElementById('legendOn');
+  var btnIm = document.getElementById('mode-im');
+  var btnFile = document.getElementById('mode-file');
+
+  function highlighted(n){
+    return mode === 'im' ? Math.round(n / IM_RATIO) : Math.round(n * FILE_RATIO);
+  }
+
+  function render(){
+    var n = parseInt(peopleEl.value, 10);
+    peopleVal.textContent = n;
+    var on = highlighted(n);
+    var shown = Math.min(n, MAX_DOTS);
+    // Build dots. Spread highlighted dots evenly so the pattern reads clearly.
+    var frag = document.createDocumentFragment();
+    var onShown = Math.round(on * (shown / n));
+    var step = onShown > 0 ? shown / onShown : Infinity;
+    var next = step / 2;
+    for (var i = 0; i < shown; i++){
+      var d = document.createElement('span');
+      d.className = 'dot';
+      if (onShown > 0 && i >= Math.floor(next) && onShown > 0){
+        d.className = 'dot on';
+        next += step;
+        onShown--;
+      }
+      frag.appendChild(d);
+    }
+    grid.innerHTML = '';
+    grid.appendChild(frag);
+
+    legendOn.textContent = mode === 'im' ? 'informer' : 'had a Stasi file';
+    if (mode === 'im'){
+      readout.innerHTML = 'In a room of <b>' + n + '</b> East Germans, roughly <span class="hi">' + on +
+        '</span> would have been secretly reporting to the Stasi as an unofficial informer, often a neighbour, colleague, friend or family member.';
+    } else {
+      readout.innerHTML = 'Out of <b>' + n + '</b> East Germans, the Stasi is likely to have opened a file on more than <span class="hi">' + on +
+        '</span> of them. By 1989 it held files on about a third of the whole population.';
+    }
+  }
+
+  function setMode(m){
+    mode = m;
+    btnIm.setAttribute('aria-pressed', m === 'im');
+    btnFile.setAttribute('aria-pressed', m === 'file');
+    render();
+  }
+
+  peopleEl.addEventListener('input', render);
+  btnIm.addEventListener('click', function(){ setMode('im'); });
+  btnFile.addEventListener('click', function(){ setMode('file'); });
+  document.getElementById('presets').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if(!b) return;
+    peopleEl.value = b.getAttribute('data-n');
+    render();
+  });
+
+  // Count-up for the stat tiles when they scroll into view.
+  function animate(el){
+    if(el.getAttribute('data-done')) return;
+    el.setAttribute('data-done','1');
+    var target = parseFloat(el.getAttribute('data-count'));
+    var prefix = el.getAttribute('data-prefix') || '';
+    var suffix = el.getAttribute('data-suffix') || '';
+    var start = null, dur = 1100;
+    function fmt(v){
+      var r = Math.round(v);
+      return prefix + r.toLocaleString('en-US') + suffix;
+    }
+    function tick(ts){
+      if(!start) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(target * eased);
+      if(p < 1) requestAnimationFrame(tick);
+      else { el.textContent = fmt(target); clearTimeout(guard); }
+    }
+    // requestAnimationFrame is paused while the tab/iframe is hidden, which can
+    // freeze the count mid-way. This guard guarantees the correct final number
+    // is shown once the widget is actually on screen and timers resume.
+    var guard = setTimeout(function(){ el.textContent = fmt(target); }, dur + 600);
+    requestAnimationFrame(tick);
+  }
+  var tiles = document.querySelectorAll('.tile .n');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ animate(en.target); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.25 });
+    tiles.forEach(function(t){ io.observe(t); });
+    // Safety net: if a tile never triggers the observer (embedded iframe that is
+    // auto-resized, off-screen at load, etc.), reveal the numbers anyway.
+    setTimeout(function(){ tiles.forEach(animate); }, 2500);
+  } else {
+    tiles.forEach(animate);
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>
