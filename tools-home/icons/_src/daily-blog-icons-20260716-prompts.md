@@ -73,3 +73,24 @@ Create ONE square 1:1 app icon for BerlinWalk, in a strict fixed style. STRUCTUR
 - This does NOT publish the blog post; the post stays UNPUBLISHED until Yusuf
   approves it.
 ```
+
+## `friedrichshain-kiez-loop` (A day in Friedrichshain)
+
+```text
+Create ONE square 1:1 app icon for BerlinWalk, in a strict fixed style. STRUCTURE, exactly three layers and nothing else: (1) a plain cream background; (2) a solid deep green #1B5E20 rounded-square app tile with soft glossy 3D bevel that fills the frame; (3) one large centered bright yellow #FFE600 glossy circular medallion disc on the tile. Resting on the yellow disc is ONE clear glossy soft-3D object: a single upright segment of the painted Berlin Wall (the East Side Gallery), one standalone concrete slab standing vertically, its front face covered in a few bold abstract strokes of colorful street-art paint. No faces, no portraits, no recognizable mural, no people, no scenery, no second slab, no second disc, no text. Colors: green tile #1B5E20, yellow disc #FFE600, concrete slab in warm light grey with soft highlights, paint strokes in bright accents including lime #7CB342, red, blue and warm yellow. No text, no letters, no numbers, no logos. Do NOT use a white, glass, frosted, or pale tile. Chunky simple shapes, high contrast, centered, clearly readable at 160x160, clean.
+```
+
+### Remaining wiring after the raw icon is downloaded
+- Crop to `tools-home/icons/friedrichshain-kiez-loop.png` (512) and
+  `friedrichshain-kiez-loop-160.png` (160), clean RGBA / cream corners, no text.
+- Upload the 512 to Wix Media; record the media id + URL.
+- Add the tool entry to `tools-hub/data.json` (see the block in
+  `CODEX_HANDOFF_friedrichshain-tool-icon-20260716.md`) with `image` (Wix media URL),
+  `cmsItemId`, and `iconStatus: "live-wix-media"`.
+- Create the `BerlinTools` CMS item so `/tools/friedrichshain-kiez-loop` is live
+  (slug, title, h1, lead, seoTitle, seoDescription, jsonLd WebApplication,
+  widgetUrl, relatedBlog `/post/friedrichshain-berlin`).
+- `node tools-hub/validate-data.mjs`, then commit/push.
+- This does NOT publish the blog post; the post stays UNPUBLISHED until Yusuf
+  approves it.
+```
