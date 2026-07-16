@@ -30,8 +30,10 @@ Local repo work:
   changes the generated timestamp and related-tool fields only; it does not
   modify published post bodies or metadata.
 
-The latest widget-repo push includes the five tool records, icon assets and
-regenerated `/blog` relation data. GitHub Actions and GitHub Pages deployment
-completed successfully; the live widget, icon assets and `/blog` JSON returned
-HTTP 200. The Neukölln blog draft remains unpublished, so its own relation is
-intentionally absent from the published index.
+The functional widget-repo push (`5f12dc0`) includes the five tool records,
+icon assets and regenerated `/blog` relation data; its GitHub Actions and
+GitHub Pages deployment completed successfully, and the live widget, icon
+assets and `/blog` JSON returned HTTP 200. The follow-up push (`c2059e6`) only
+updates this handoff Markdown and does not change runtime assets. The Neukölln
+blog draft remains unpublished, so its own relation is intentionally absent
+from the published index.
