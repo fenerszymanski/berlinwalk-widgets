@@ -214,7 +214,8 @@
   "berlin-audio-guide-app-vs-no-app": "berlin-audio-guide-app-vs-no-app",
   "self-guided-berlin-walking-tour-audio-guide": "self-guided-berlin-walking-tour-audio-guide",
   "german-numbers-for-tourists-berlin": "german-numbers-for-tourists-berlin",
-  "stasi-museum-berlin": "stasi-museum-berlin"
+  "stasi-museum-berlin": "stasi-museum-berlin",
+  "how-to-order-doner-in-berlin": "how-to-order-doner-in-berlin"
 };
 
   var SCHEMAS = {
@@ -10334,6 +10335,76 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "By 1989, its last full year, the Stasi employed 91,015 full-time officers and ran roughly 189,000 unofficial informers (inoffizielle Mitarbeiter) who reported on neighbours, colleagues and family. It held files on about a third of the East German population. When the regime collapsed, staff shredded documents by hand; about 16,000 sacks of torn pages survive and are still being pieced back together. That scale is exactly what both the museum and the prison help you understand."
+        }
+      }
+    ]
+  },
+  "how-to-order-doner-in-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I order a döner in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use one simple pattern: \"Einmal [form] mit [meat], mit alles, mit [sauce], bitte.\" For example, \"Einmal Dürüm mit Hähnchen, mit alles, mit Knoblauch und scharf, bitte.\" \"Einmal\" means one and avoids German article endings, so it works for any style. If you draw a blank, \"Einen Döner, bitte\" alone still gets you a good chicken or mixed-meat döner with the works."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does \"mit alles\" mean?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "\"Mit alles\" means with everything: the full salad of lettuce, tomato, cucumber, cabbage and onions. If you do not want raw onion, say \"mit alles, ohne Zwiebeln.\" That single phrase, ohne Zwiebeln, saves a lot of people."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a Gemüse Kebap?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Gemüse means vegetables. A Gemüse Kebap is the Berlin style: on top of the usual meat and fresh salad, the cook adds fried or grilled vegetables such as potato, courgette, aubergine and peppers, then finishes it with fresh mint, lemon and crumbled white cheese. It is the version that made kiosks like Mustafa's famous."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between a Döner and a Dürüm?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A Döner im Brot has the filling folded into a triangle of flatbread, and it is what you get by default. A Dürüm is the same filling rolled tightly inside a thin, soft yufka wrap instead of bread. The Dürüm is less bready, tidier to eat while walking, and holds together better, which makes it a good first choice."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does a döner cost in Berlin in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Typically about 7 to 8 euros, and a loaded Gemüse Kebap or Dürüm at a popular spot can be a little more. Before the pandemic it was often 3 to 4 euros, and the sharp rise earned the nickname \"Dönerflation.\" In 2024 the debate even reached politics, with a proposed price cap of 4.90 euros that the government ruled out. Most kiosks take cash and many now take cards."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What sauces can I choose?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most counters offer three: Knoblauch (creamy garlic-yogurt), Kräuter (mild herb-yogurt) and scharf (hot chili). Some also have Cocktailsoße, a milder, slightly sweet option. Just name the ones you want, for example \"mit Knoblauch und scharf,\" or say \"ohne Soße\" for none."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a vegetarian or vegan döner in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, easily. Order any Gemüse Kebap \"vegetarisch\" to drop the meat and lean on the fried vegetables, salad and cheese. For a vegan version, ask for Falafel im Brot with no cheese, or visit one of the dedicated vegan döner shops. VöNer in Friedrichshain was the early pioneer and newer spots do convincing seitan or soy versions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where should I eat döner in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You do not need to queue for an hour. Mustafa's Gemüse Kebap at Mehringdamm is good and famous, but the line is long and mostly tourists. Excellent kiosks in every neighbourhood do the same thing without the wait. A simple rule: if you walk past a busy kiosk full of locals on their lunch break, that is your answer."
         }
       }
     ]
