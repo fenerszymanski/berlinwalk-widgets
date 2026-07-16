@@ -52,3 +52,24 @@ Create ONE square 1:1 app icon for BerlinWalk, in a strict fixed style. STRUCTUR
 - This does NOT publish the blog post; the post stays UNPUBLISHED until Yusuf
   approves it.
 ```
+
+## `treptower-memorial-walk` (Walk the Soviet War Memorial)
+
+```text
+Create ONE square 1:1 app icon for BerlinWalk, in a strict fixed style. STRUCTURE, exactly three layers and nothing else: (1) a plain cream background; (2) a solid deep green #1B5E20 rounded-square app tile with soft glossy 3D bevel that fills the frame; (3) one large centered bright yellow #FFE600 glossy circular medallion disc on the tile. Resting on the yellow disc is ONE clear glossy soft-3D object: a single simplified standing memorial soldier statue on a small round plinth, a heroic figure in a long coat with the sword lowered point-down at his side, rendered like a smooth bronze/verdigris monument. No child, no swastika, no weapons detail, no scenery, no trees, no park, no people around it, no second disc, no text. Colors: green tile #1B5E20, yellow disc #FFE600, statue in warm bronze with soft green-patina highlights and a stone-grey plinth, one small lime #7CB342 accent allowed. No text, no letters, no numbers, no logos. Do NOT use a white, glass, frosted, or pale tile. Chunky simple dignified shapes, high contrast, centered, clearly readable at 160x160, clean.
+```
+
+### Remaining wiring after the raw icon is downloaded
+- Crop to `tools-home/icons/treptower-memorial-walk.png` (512) and
+  `treptower-memorial-walk-160.png` (160), clean RGBA / cream corners, no text.
+- Upload the 512 to Wix Media; record the media id + URL.
+- Add the tool entry to `tools-hub/data.json` (see the block in
+  `CODEX_HANDOFF_treptower-tool-icon-20260716.md`) with `image` (Wix media URL),
+  `cmsItemId`, and `iconStatus: "live-wix-media"`.
+- Create the `BerlinTools` CMS item so `/tools/treptower-memorial-walk` is live
+  (slug, title, h1, lead, seoTitle, seoDescription, jsonLd WebApplication,
+  widgetUrl, relatedBlog `/post/treptower-park-berlin`).
+- `node tools-hub/validate-data.mjs`, then commit/push.
+- This does NOT publish the blog post; the post stays UNPUBLISHED until Yusuf
+  approves it.
+```
