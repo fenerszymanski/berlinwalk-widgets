@@ -71,27 +71,41 @@
   }
 
   function findInsertionAnchor(body) {
-    var headings = [];
-    var allHeadings = body.querySelectorAll('h2');
-    for (var i = 0; i < allHeadings.length; i++) {
-      if (isVisible(allHeadings[i])) headings.push(allHeadings[i]);
+    /* Wix wraps every rich-content block in its own div, so walking
+     * nextElementSibling from a heading never reaches that section's
+     * paragraphs. Work in document order over the visible h2/p blocks
+     * instead: insert after the first real paragraph that follows the
+     * 2nd H2 (~25% depth), staying inside that section. */
+    var blocks = [];
+    var all = body.querySelectorAll('h2, p');
+    for (var i = 0; i < all.length; i++) {
+      if (isVisible(all[i])) blocks.push(all[i]);
     }
-    if (headings.length) {
-      var heading = headings.length >= 2 ? headings[1] : headings[0];
-      var node = heading.nextElementSibling;
-      while (node) {
-        var tag = (node.tagName || '').toUpperCase();
-        if (tag === 'H2' || tag === 'H3') break;
-        if (tag === 'P' && isVisible(node)) return node;
-        node = node.nextElementSibling;
+
+    var headingIndexes = [];
+    for (var h = 0; h < blocks.length; h++) {
+      if (blocks[h].tagName.toUpperCase() === 'H2') headingIndexes.push(h);
+    }
+
+    if (headingIndexes.length) {
+      var anchorIndex = headingIndexes.length >= 2 ? headingIndexes[1] : headingIndexes[0];
+      var sectionEnd = blocks.length;
+      for (var s = 0; s < headingIndexes.length; s++) {
+        if (headingIndexes[s] > anchorIndex) { sectionEnd = headingIndexes[s]; break; }
       }
-      return heading;
+      for (var j = anchorIndex + 1; j < sectionEnd; j++) {
+        var block = blocks[j];
+        if (block.tagName.toUpperCase() !== 'P') continue;
+        if (!block.textContent.trim()) continue;
+        if (block.closest && block.closest('figure,li,blockquote')) continue;
+        return block;
+      }
+      return blocks[anchorIndex];
     }
 
     var paragraphs = [];
-    var allParagraphs = body.querySelectorAll('p');
-    for (var p = 0; p < allParagraphs.length; p++) {
-      if (isVisible(allParagraphs[p])) paragraphs.push(allParagraphs[p]);
+    for (var p = 0; p < blocks.length; p++) {
+      if (blocks[p].tagName.toUpperCase() === 'P') paragraphs.push(blocks[p]);
     }
     if (paragraphs.length >= 4) return paragraphs[Math.min(3, Math.floor(paragraphs.length / 2))];
     return null;
