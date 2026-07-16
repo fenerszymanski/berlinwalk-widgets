@@ -215,7 +215,8 @@
   "self-guided-berlin-walking-tour-audio-guide": "self-guided-berlin-walking-tour-audio-guide",
   "german-numbers-for-tourists-berlin": "german-numbers-for-tourists-berlin",
   "stasi-museum-berlin": "stasi-museum-berlin",
-  "how-to-order-doner-in-berlin": "how-to-order-doner-in-berlin"
+  "how-to-order-doner-in-berlin": "how-to-order-doner-in-berlin",
+  "treptower-park-berlin": "treptower-park-berlin"
 };
 
   var SCHEMAS = {
@@ -10405,6 +10406,76 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "You do not need to queue for an hour. Mustafa's Gemüse Kebap at Mehringdamm is good and famous, but the line is long and mostly tourists. Excellent kiosks in every neighbourhood do the same thing without the wait. A simple rule: if you walk past a busy kiosk full of locals on their lunch break, that is your answer."
+        }
+      }
+    ]
+  },
+  "treptower-park-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Treptower Park and the Soviet War Memorial?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Treptower Park is a large 19th century public park on the River Spree in southeast Berlin. Inside it is the Soviet War Memorial (Sowjetisches Ehrenmal Treptow), a monumental war cemetery built by the Soviet Union between 1946 and 1949 and opened on 8 May 1949. It is the biggest Soviet memorial in Germany and the burial place of around 7,000 Red Army soldiers who died in the Battle of Berlin in 1945. It was designed by architect Yakov Belopolsky, with the central statue by sculptor Yevgeny Vuchetich."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I get to Treptower Park and the memorial?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Take the S-Bahn to S Treptower Park, which is served by the S8, S85, S9, S41 and S42 lines. From the station it is about a 10 to 15 minute walk into the park to the memorial entrance. Buses 165, 166 and 194 also stop nearby. The memorial is roughly 20 minutes by train from the city centre, so it works well as a half-day trip paired with the East Side Gallery or a walk along the Spree."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it free, and do I need a ticket or booking?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, it is completely free and there is no ticket, booking or opening time. The memorial is an open-air site in a public park, so you can walk in at any hour, although daylight is best for seeing the reliefs and the view down the axis. There is no visitor centre and no cloakroom, so just arrive and walk."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What will I actually see there?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The memorial is laid out as one long straight axis that you walk in order. You pass a stone archway, then the seated \"Mother Homeland\" statue mourning her sons, then two enormous flags carved from red granite with a kneeling bronze soldier beneath each. From there the path drops into a sunken green field lined with 16 white stone sarcophagi, one for each Soviet republic of the time, each carved with a war scene and a Stalin quotation. At the far end, a 12 metre bronze soldier stands on a mound over a small memorial hall."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it true the red granite came from Hitler’s Reich Chancellery?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "This is one of Berlin's most repeated memorial myths, and it is not true. Guides and blogs often claim the deep red granite of the two flags was salvaged from the ruins of Hitler's Reich Chancellery as a symbolic act. In reality the stone was quarried for the memorial. It is a neat story, but treat it as a legend rather than a fact."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it appropriate to visit, and can I take photos?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. This is a genuine cemetery where thousands of soldiers are buried, so visitors are expected to be quiet and respectful, but it is a normal and welcome place to walk, learn and photograph. Keep your voice down near the graves and the sarcophagi, do not climb on the monuments, and be aware that on 8 and 9 May (Victory Day) the site is used for commemorations and can be busier."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does a visit take, and what is nearby?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Allow about 30 to 45 minutes to walk the full axis and take it in, or longer if you sit by the Spree afterwards. Treptower Park itself is a fine summer park with a riverbank, boat rental and the small Insel der Jugend island reached by a footbridge. The former Spreepark amusement park in the neighbouring Plänterwald is being rebuilt and is due to reopen in spring 2027, with construction-site tours running from April 2026. The Archenhold Observatory nearby is currently closed, so check ahead before planning a visit there."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Treptower Park worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If you have any interest in the Second World War, the Soviet role in 1945, or Cold War and East Berlin history, yes, it is one of the most powerful and least crowded sights in the city. The sheer scale of the memorial is hard to grasp from photos. Even if history is not your main reason to visit Berlin, it pairs naturally with a relaxed afternoon by the Spree, which is why it makes a good half-day away from the busy centre."
         }
       }
     ]
