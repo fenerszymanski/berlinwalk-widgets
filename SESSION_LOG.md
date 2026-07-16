@@ -8660,3 +8660,16 @@ Follow-up: created the unpublished Wix Blog draft for the Ultimate SEO article, 
 
 - 2026-07-14 13:15 CEST (Codex): Yusuf'un acil pause talebiyle Wix `BerlinWalk Google Search Landing` embed'i `7baf92b7-20ce-492e-9701-b18de4554eb8` rev3 `enabled:false` yapildi ve site publish edildi. Fresh 390px live check native `/book-berlin-walking-tour` sayfasinin geri dondugunu, custom element/loader olmadigini ve overflowX `0` oldugunu dogruladi. Google Ads kampanyasi `24016010145` API ile PAUSED; readback `status=PAUSED`, `primaryStatus=PAUSED`. Meta hesabindaki iki ACTIVE kampanya (`120245847565860711`, `120244492521130711`) PAUSED yapildi; hesap geneli final readback `62/62 PAUSED`, configured/effective ACTIVE `0`. Kaynak commitleri `c03d651`, `e86cd6e`, `8ce1f59` origin/main'de. Yusuf diger mobil task bittikten sonra acikca devam demeden embed veya kampanyalar yeniden acilmayacak.
 - 2026-07-15 12:04 CEST (Codex): FREE BERLIN AUDIO SAMPLER REFRESH LIVE — `audio-tour/audio-tour-element.js` ve `audio-tour/index.html` approved voice `auq43ws1oslv0tO4BDa7` ile uretilen 8:44 sampler'a gecti; 10 marker senkron, truthful Yusuf-authorship + AI-narration disclosure mevcut, eski media URL/kayit iddialari yok. Audio source commit `7171bcc`; live Tools shell `tools-hub/data.json` lead duzeltmesi `b2d397d`; GitHub Pages deploy runs `29406028764` + `29406028074` success. Raw/main/Pages hashes match; standalone Chromium/WebKit desktop/mobile 4/4 ve real Wix shell 4/4 PASS, overflow 0, chapter jump/play/pause calisiyor. Kapanis taramasinda eski `daily 11:30` CTA da current `Tue-Sat 11:30 and 15:30` programina cekildi; CMS body schedule exact-backup/readback ile ayni gercege uyarlandi. Eski ses silinmedi; rollback Wix CMS backup root workspace `output/qa/audio-sampler-refresh-20260715/cms-before.json`.
+## 2026-07-16 — Codex
+
+**Did:** Homepage Editorial System CSS, full desktop/mobile previews, 13-width Atlas metrics, and live Atlas release QA completed; immutable CSS commit `def46d340c5bcdebd995a1900a7bb2768c047223` is live through the new Wix HEAD embed.
+
+**Changed:**
+- `homepage-editorial/` — exact-host editorial stylesheet, full real-component preview, 390 px preview, and Atlas metric harness.
+- `design-qa.md` — source-vs-implementation evidence, resolved findings, live interaction checks, and authorized-scope acceptance.
+- Wix: Editorial System rev1 and Hydration Height Reserve rev6 staged and read back before one publish; Products rev22 and Booking rev6 remained revision/hash identical.
+
+**Opened:** Automated Chromium/WebKit regression and CLS/LCP measurement were not run because the approved plan requires separate permission.
+**Closed:** Homepage editorial alignment, Booking handoff, active Products layer, header/menu, review carousel, FAQ, Explore, footer, and Privacy Settings live acceptance.
+
+**Next session should:** Use the baseline backup and `scripts/rollback-homepage-editorial-system.mjs` only if a live regression is reported. Otherwise leave the immutable Editorial embed and existing Products/Booking lifecycle code unchanged.
