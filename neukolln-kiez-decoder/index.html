@@ -234,5 +234,56 @@
 })();
 </script>
 <script src="../js/brand.js"></script>
+<script>
+/* Wix Blog can hydrate an HTML embed at desktop width and narrow it only
+   afterwards. Report the post-hydration height as well, otherwise this widget
+   can keep its original 1200px frame and gain an inner scrollbar on phones. */
+(function(){
+  if (window.parent === window) return;
+  var last = 0;
+  var timer = 0;
+  var observer = null;
+
+  function contentHeight(){
+    var max = 0;
+    var children = document.body ? document.body.children : [];
+    for (var i = 0; i < children.length; i++) {
+      var rect = children[i].getBoundingClientRect();
+      var styles = window.getComputedStyle(children[i]);
+      var bottom = rect.bottom + (parseFloat(styles.marginBottom) || 0);
+      if (bottom > max) max = bottom;
+    }
+    return Math.ceil(max);
+  }
+
+  function report(){
+    timer = 0;
+    var height = contentHeight();
+    if (height > 0 && Math.abs(height - last) > 2) {
+      last = height;
+      window.parent.postMessage({ type:'bw-resize', height:height }, '*');
+    }
+  }
+
+  function schedule(){
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(report, 80);
+  }
+
+  function boot(){
+    window.addEventListener('resize', schedule, { passive:true });
+    if (typeof ResizeObserver !== 'undefined') {
+      observer = new ResizeObserver(schedule);
+      observer.observe(document.body);
+    }
+    schedule();
+    setTimeout(schedule, 500);
+    setTimeout(schedule, 1500);
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();
+</script>
 </body>
 </html>
