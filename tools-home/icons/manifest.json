@@ -1738,5 +1738,29 @@
     "png160": "tools-home/icons/neukolln-kiez-decoder-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/neukolln-kiez-decoder-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_7ade9f263f514cb38f02b70d11595dc6~mv2.png"
+  },
+  {
+    "slug": "one-day-berlin-planner",
+    "title": "Berlin One-Day Time Planner",
+    "category": "Discovery",
+    "source": "chatgpt-browser-imagegen-20260717",
+    "generatedAt": "2026-07-17",
+    "promptFile": "tools-home/icons/_src/daily-blog-one-day-icon-20260717-prompt.md",
+    "png512": "tools-home/icons/one-day-berlin-planner.png",
+    "png160": "tools-home/icons/one-day-berlin-planner-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/one-day-berlin-planner-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_ecde0a1550ff44d6906d5a1b2b24cdd4~mv2.png"
+  },
+  {
+    "slug": "berlin-rooftop-bars",
+    "title": "Berlin Rooftop Sunset Planner",
+    "category": "Discovery",
+    "source": "chatgpt-browser-imagegen-20260717",
+    "generatedAt": "2026-07-17",
+    "promptFile": "tools-home/icons/_src/daily-blog-rooftop-bars-icon-20260717-prompt.md",
+    "png512": "tools-home/icons/berlin-rooftop-bars.png",
+    "png160": "tools-home/icons/berlin-rooftop-bars-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-rooftop-bars-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_5520100ed685408a9dd3ea9ca85d1f3a~mv2.png"
   }
 ]

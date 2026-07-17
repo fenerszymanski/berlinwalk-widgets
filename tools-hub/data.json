@@ -4086,6 +4086,71 @@
       "relatedBlog": "/post/neukolln-berlin",
       "iconStatus": "live-wix-media",
       "cmsItemId": "84cc3215-7a8c-4573-b31e-365774b53993"
+    },
+    {
+      "slug": "one-day-berlin-planner",
+      "title": "Berlin One-Day Time Planner",
+      "lead": "One day in Berlin is not enough to see everything, and this tool is honest about it. Set the hours you actually have and the kind of day you want, and it builds a realistic, clock-timed plan on the central historic spine from Alexanderplatz to the Brandenburg Gate, then tells you straight what will not fit.",
+      "category": "Discovery",
+      "image": "https://static.wixstatic.com/media/5a08a3_ecde0a1550ff44d6906d5a1b2b24cdd4~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/one-day-berlin-planner/",
+      "embedHeight": 1360,
+      "hubCategory": "TripPlans",
+      "type": "Planner",
+      "tags": [
+        "One day in Berlin",
+        "Berlin itinerary",
+        "24 hours in Berlin",
+        "Berlin in a day",
+        "Trip planning",
+        "First time Berlin",
+        "Historic centre",
+        "Berlin day plan"
+      ],
+      "aliases": [
+        "one day in berlin",
+        "berlin in one day",
+        "24 hours in berlin",
+        "berlin day itinerary",
+        "what to do in berlin in a day",
+        "berlin one day plan"
+      ],
+      "relatedBlog": "/post/one-day-in-berlin",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "fa202826-0aa3-4b3c-b6f0-5feb53a1203a"
+    },
+    {
+      "slug": "berlin-rooftop-bars",
+      "title": "Berlin Rooftop Sunset Planner",
+      "lead": "Berlin's best rooftop bars are open-air, so the evening lives and dies with the sunset. Enter a date and this planner works out tonight's Berlin sunset, tells you when to arrive, and matches five real rooftops (Klunkerkranich, Monkey Bar, House of Weekend, Deck 5, Solar) to the evening you want.",
+      "category": "Discovery",
+      "image": "https://static.wixstatic.com/media/5a08a3_5520100ed685408a9dd3ea9ca85d1f3a~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-rooftop-bars/",
+      "embedHeight": 1300,
+      "hubCategory": "FoodNightlife",
+      "type": "Planner",
+      "tags": [
+        "Berlin rooftop bars",
+        "Rooftop sunset",
+        "Klunkerkranich",
+        "Monkey Bar",
+        "Deck 5",
+        "Berlin nightlife",
+        "Sunset timing",
+        "Berlin views"
+      ],
+      "aliases": [
+        "berlin rooftop bars",
+        "rooftop bar berlin",
+        "klunkerkranich",
+        "deck 5 berlin",
+        "monkey bar berlin",
+        "best rooftop berlin",
+        "rooftop sunset berlin"
+      ],
+      "relatedBlog": "/post/berlin-rooftop-bars",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "5b259192-e0e3-4abc-9bcd-f8e7eb952439"
     }
   ],
   "hubCategories": [
