@@ -1,0 +1,36 @@
+{
+  "status": "UNPUBLISHED_LOCAL_PACKAGE",
+  "title": "Berlin Then and Now: How to See the City That Disappeared",
+  "slug": "berlin-then-and-now",
+  "url": "https://www.berlinwalk.com/post/berlin-then-and-now",
+  "canonical": "https://www.berlinwalk.com/post/berlin-then-and-now",
+  "metaTitle": "Berlin Then and Now: See the City That Disappeared",
+  "metaDescription": "See Berlin then and now through lost streets, surviving monuments and old photographs. Learn how to read the city's hidden layers at Mehringplatz.",
+  "excerpt": "Berlin rarely preserves an old street whole. It leaves a column, a curve or an empty space. Mehringplatz shows how to connect the clues.",
+  "primaryKeyword": "Berlin then and now",
+  "secondaryKeywords": [
+    "old Berlin",
+    "Mehringplatz",
+    "Belle-Alliance-Platz",
+    "Berlin historical photos",
+    "Berlin before and after"
+  ],
+  "robots": "index,follow,max-image-preview:large",
+  "coverImage": "assets/optimized/circa-1900-belle-alliance-platz.jpg",
+  "coverAlt": "A colour photochrom looking through Hallesches Tor toward Belle-Alliance-Platz around 1900",
+  "bodyHasH1": false,
+  "schema": {
+    "types": ["BlogPosting", "FAQPage"],
+    "faqSource": "faq.json",
+    "datePublished": null,
+    "dateModified": null
+  },
+  "internalLinks": [
+    "/post/alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos",
+    "/post/why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point",
+    "/post/museum-island-before-and-after-wwii-the-destruction-nobody-expected",
+    "/post/hackescher-markt-before-and-after-from-rubble-to-berlin-s-coolest-neighborhood",
+    "/post/hidden-places-central-berlin"
+  ],
+  "leadMagnetUrl": "https://www.berlinwalk.com/berlin-before-and-now?utm_source=berlinwalk_blog&utm_medium=organic&utm_campaign=berlin_before_now&utm_content=berlin_then_now_mehringplatz"
+}

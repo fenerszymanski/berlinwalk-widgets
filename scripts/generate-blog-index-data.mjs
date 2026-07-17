@@ -595,6 +595,7 @@ function relatedToolSlugFor(post) {
   if ((post.slug || '') === 'neukolln-berlin') return 'neukolln-kiez-decoder';
   if ((post.slug || '') === 'one-day-in-berlin') return 'one-day-berlin-planner';
   if ((post.slug || '') === 'berlin-rooftop-bars') return 'berlin-rooftop-bars';
+  if ((post.slug || '') === 'berlin-then-and-now') return 'mehringplatz-time-layer-viewer';
   if (/(berlin-layover-guide|layover in berlin|ber layover|spend a layover)/.test(s)) return 'berlin-layover-planner';
   if (/(prenzlauer-berg-berlin|prenzlauer berg)/.test(s)) return 'prenzlauer-berg-walk';
   if (/(buy-berlin-transport-tickets-on-your-phone|tickets on your phone|phone ticket|bvg app)/.test(s)) return 'berlin-phone-ticket-picker';

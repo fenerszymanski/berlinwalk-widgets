@@ -220,7 +220,8 @@
   "friedrichshain-berlin": "friedrichshain-berlin",
   "neukolln-berlin": "neukolln-berlin",
   "berlin-rooftop-bars": "berlin-rooftop-bars",
-  "one-day-in-berlin": "one-day-in-berlin"
+  "one-day-in-berlin": "one-day-in-berlin",
+  "berlin-then-and-now": "berlin-then-and-now"
 };
 
   var SCHEMAS = {
@@ -10704,6 +10705,44 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "If you are on a layover or arriving late, do not attempt the whole spine. Take the shortest version: Alexanderplatz, a walk down Unter den Linden, and the Brandenburg Gate, then back. That stretch is doable in about three hours including transit and still shows you the core of the city. A dedicated layover plan with the airport connection worked out makes it tighter."
+        }
+      }
+    ]
+  },
+  "berlin-then-and-now": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where can you still see old Berlin today?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nikolaiviertel, Museum Island, Gendarmenmarkt and parts of Spandau contain strong historical references, but not every old-looking surface is original. For a more honest reading of the city, combine intact buildings with places such as Mehringplatz, where a monument and street geometry survive inside a later plan."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does Berlin have so few intact old streets?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "War damage is central, but it is not the only reason. Berlin expanded quickly, replaced older buildings during the 19th and early 20th centuries, cleared ruins after 1945 and rebuilt under different planning systems in East and West. Later reconstruction added another layer."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Mehringplatz the former Belle-Alliance-Platz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The earlier Rondell was renamed Belle-Alliance-Platz in 1815 and became Mehringplatz just after the Second World War. The present pedestrian square preserves the circular idea and central Peace Column, but its buildings and dimensions come mainly from the postwar redesign."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you compare an old Berlin photograph with the street today?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start with the documented viewpoint and one fixed anchor. Then compare road directions, the shape of the public space and gaps in the building line. Do not assume two photographs share the same angle or lens, and check whether a monument was rebuilt or moved."
         }
       }
     ]

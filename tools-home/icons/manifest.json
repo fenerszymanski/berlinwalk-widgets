@@ -1762,5 +1762,18 @@
     "png160": "tools-home/icons/berlin-rooftop-bars-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-rooftop-bars-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_5520100ed685408a9dd3ea9ca85d1f3a~mv2.png"
+  },
+  {
+    "slug": "mehringplatz-time-layer-viewer",
+    "title": "Mehringplatz Time-Layer Viewer",
+    "category": "Discovery",
+    "source": "codex-built-in-imagegen-20260717",
+    "generatedAt": "2026-07-17",
+    "promptFile": "tools-home/icons/_src/codex-20260717/mehringplatz-time-layer-viewer/PROMPT.md",
+    "sourceImage": "tools-home/icons/_src/codex-20260717/mehringplatz-time-layer-viewer/raw.png",
+    "png512": "tools-home/icons/mehringplatz-time-layer-viewer.png",
+    "png160": "tools-home/icons/mehringplatz-time-layer-viewer-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/mehringplatz-time-layer-viewer-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_aaef97065cee4c218b4b7083457480bc~mv2.png"
   }
 ]

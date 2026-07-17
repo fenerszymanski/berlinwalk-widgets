@@ -47,7 +47,12 @@ note. Do not replace them with AI reconstructions or unverified downloads.
   with `api-base`.
 - Override the asset manifest only for local QA with
   `window.BW_HISTORY_LEAD_ASSET_MANIFEST`.
-- Public consent text version: `history-lead-v1-2026-07-17`.
+- Public consent text version: `history-series-v2-2026-07-17`.
+
+The single required checkbox covers only the finite two-email series: Story 2
+immediately after confirmation and Story 3 about 48 hours later. Both emails
+may include BerlinWalk walking-tour information. It does not opt the visitor
+into unspecified or occasional future updates.
 
 The blog experiment loader lives in `../js/lead-form-inject.js`. Its default
 stage is `qa`, so normal visitors keep the existing booking card until a Wix
@@ -64,10 +69,30 @@ window.BW_HISTORY_LEAD_ELEMENT_URL =
 </script>
 ```
 
-For the first 24 hours, only the old-town article receives a 10% variant. Once
-24 hours have elapsed, the loader automatically uses a 50/50 split on the
-old-town and wide-streets articles. Alexanderplatz remains excluded. It can be
-added only after the readout with `{stage:'expanded',enableExpansion:true}`.
+For the first 24 hours, all six eligible articles receive a 10% variant:
+
+- `why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point`
+- `why-berlin-s-streets-are-so-wide-it-wasn-t-always-the-plan`
+- `where-was-the-berlin-wall-interactive-map`
+- `the-ampelmann-how-a-traffic-light-became-berlin-s-most-beloved-symbol`
+- `unter-den-linden-berlin`
+- `why-is-berlin-founding-year-1237`
+
+Once 24 hours have elapsed from `safetyStartedAt`, the loader automatically
+uses a 50/50 split on those same six articles. Alexanderplatz remains excluded.
+It can be added only after the readout with
+`{stage:'expanded',enableExpansion:true}`.
+
+Experiment persistence starts only after analytics consent. The injector and
+element send the PII-free fields `acquisitionCohort`, `placement`,
+`assignmentId`, and `analyticsConsentAtSubmit` with eligible events and form
+submissions. Blog placements use `blog_inline_booking_slot`; the standalone
+lead-magnet page is distinct as `direct_landing` / `history_landing_full`.
+
+The existing booking card is the fail-safe. Invalid experiment configuration,
+element-script load failure, element render failure, or a seven-second readiness
+timeout removes the incomplete variant and restores the unchanged control card.
+The global kill switch and `?bwHistoryLead=0` use the same control path.
 
 ## Hourly Story 3 job
 

@@ -10,6 +10,15 @@ const injectorPath = path.join(root, 'js', 'lead-form-inject.js');
 const elementPath = path.join(__dirname, 'history-lead-magnet-element.js');
 const injectorSource = fs.readFileSync(injectorPath, 'utf8');
 const elementSource = fs.readFileSync(elementPath, 'utf8');
+const eligibleSlugs = [
+  'why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point',
+  'why-berlin-s-streets-are-so-wide-it-wasn-t-always-the-plan',
+  'where-was-the-berlin-wall-interactive-map',
+  'the-ampelmann-how-a-traffic-light-became-berlin-s-most-beloved-symbol',
+  'unter-den-linden-berlin',
+  'why-is-berlin-founding-year-1237',
+];
+const exactConsentCopy = 'Email me Story 2 now and Story 3 about 48 hours later. These two emails include Berlin history and may also include information about BerlinWalk walking tours. I can unsubscribe at any time. Read the Privacy Policy.';
 
 function controlFunctionHash() {
   const start = injectorSource.indexOf('  function buildBookingCard() {');
@@ -45,6 +54,7 @@ function makeInjectorContext(options = {}) {
   const window = {
     BW_HISTORY_LEAD_TEST_HOOKS: true,
     BW_HISTORY_LEAD_EXPERIMENT_CONFIG: options.config || {},
+    BW_DISABLE_HISTORY_LEAD: options.disableGlobal === true,
     addEventListener(name, fn) { listeners[`window:${name}`] = fn; },
     removeEventListener() {},
     consentPolicyManager: {
@@ -133,7 +143,9 @@ test('asset manifest exposes only complete approved image pairs', () => {
 });
 
 test('element contains the required consent and success copy without a prechecked checkbox', () => {
-  assert.match(elementSource, /Email me the next two Berlin stories and occasional BerlinWalk updates\./);
+  assert.equal(elementSource.includes(exactConsentCopy), true);
+  assert.doesNotMatch(elementSource, /occasional BerlinWalk updates/i);
+  assert.match(elementSource, /history-series-v2-2026-07-17/);
   assert.match(elementSource, /Check your inbox\. Click the confirmation link to open Story 2\./);
   assert.doesNotMatch(elementSource, /name="consent"[^>]*\schecked(?:\s|>)/);
   assert.match(elementSource, /analyticsAllowed\(\)/);
@@ -145,53 +157,147 @@ test('element contains the required consent and success copy without a prechecke
   assert.doesNotMatch(elementSource, /Story 3 arrives 48 hours/);
 });
 
-test('safety stage uses 10% on only the old-town slug for the first 24 hours', () => {
-  const ctx = makeInjectorContext({
+test('safety stage uses 10% on every eligible article for the first 24 hours', async (t) => {
+  for (const slug of eligibleSlugs) {
+    await t.test(slug, () => {
+      const variant = makeInjectorContext({
+        pathname: `/post/${slug}`,
+        random: 0.05,
+        config: { stage: 'safety', safetyStartedAt: new Date(Date.now() - 60 * 60 * 1000).toISOString() },
+      });
+      assert.equal(variant.hooks.effectiveStage(), 'ramp');
+      assert.equal(variant.hooks.assignment().variant, 'variant');
+      assert.equal(variant.hooks.assignment().inExperiment, true);
+
+      const control = makeInjectorContext({
+        pathname: `/post/${slug}`,
+        random: 0.15,
+        config: { stage: 'safety', safetyStartedAt: new Date(Date.now() - 60 * 60 * 1000).toISOString() },
+      });
+      assert.equal(control.hooks.assignment().variant, 'control');
+      assert.equal(control.hooks.assignment().inExperiment, true);
+    });
+  }
+
+  const unrelated = makeInjectorContext({
+    pathname: '/post/unrelated',
     random: 0.05,
     config: { stage: 'safety', safetyStartedAt: new Date(Date.now() - 60 * 60 * 1000).toISOString() },
   });
-  assert.equal(ctx.hooks.effectiveStage(), 'ramp');
-  assert.equal(ctx.hooks.assignment().variant, 'variant');
-
-  ctx.location.pathname = '/post/why-berlin-s-streets-are-so-wide-it-wasn-t-always-the-plan';
-  ctx.hooks.resetBucket();
-  assert.equal(ctx.hooks.assignment().inExperiment, false);
+  assert.equal(unrelated.hooks.assignment().inExperiment, false);
 });
 
-test('safety stage becomes 50/50 on two slugs after 24 hours and leaves Alexanderplatz off', () => {
-  const ctx = makeInjectorContext({
+test('safety stage becomes 50/50 on every eligible article after 24 hours', async (t) => {
+  for (const slug of eligibleSlugs) {
+    await t.test(slug, () => {
+      const variant = makeInjectorContext({
+        pathname: `/post/${slug}`,
+        random: 0.20,
+        config: { stage: 'safety', safetyStartedAt: new Date(Date.now() - 25 * 60 * 60 * 1000).toISOString() },
+      });
+      assert.equal(variant.hooks.effectiveStage(), 'pilot');
+      assert.equal(variant.hooks.assignment().variant, 'variant');
+
+      const control = makeInjectorContext({
+        pathname: `/post/${slug}`,
+        random: 0.60,
+        config: { stage: 'safety', safetyStartedAt: new Date(Date.now() - 25 * 60 * 60 * 1000).toISOString() },
+      });
+      assert.equal(control.hooks.assignment().variant, 'control');
+      assert.equal(control.hooks.assignment().inExperiment, true);
+    });
+  }
+
+  const alexanderplatz = makeInjectorContext({
+    pathname: '/post/alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos',
     random: 0.20,
-    pathname: '/post/why-berlin-s-streets-are-so-wide-it-wasn-t-always-the-plan',
     config: { stage: 'safety', safetyStartedAt: new Date(Date.now() - 25 * 60 * 60 * 1000).toISOString() },
   });
-  assert.equal(ctx.hooks.effectiveStage(), 'pilot');
-  assert.equal(ctx.hooks.assignment().variant, 'variant');
-
-  ctx.location.pathname = '/post/alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos';
-  ctx.hooks.resetBucket();
-  assert.equal(ctx.hooks.assignment().inExperiment, false);
+  assert.equal(alexanderplatz.hooks.assignment().inExperiment, false);
 });
 
-test('assignment persistence starts only after analytics consent', () => {
+test('assignment ID persistence starts only after analytics consent and remains stable', () => {
   const ctx = makeInjectorContext({
     analytics: false,
     random: 0.05,
     config: { stage: 'ramp' },
   });
-  assert.equal(ctx.hooks.assignment().variant, 'variant');
+  const beforeConsent = ctx.hooks.assignment();
+  assert.equal(beforeConsent.variant, 'variant');
+  assert.equal(beforeConsent.assignmentId, '');
   assert.equal(ctx.store.has(ctx.hooks.storageKey), false);
+
   ctx.setAnalytics(true);
-  assert.equal(ctx.hooks.assignment().variant, 'variant');
+  const afterConsent = ctx.hooks.assignment();
+  assert.equal(afterConsent.variant, 'variant');
+  assert.match(afterConsent.assignmentId, /^hwa_[a-f0-9]{32}$/);
   assert.equal(ctx.store.has(ctx.hooks.storageKey), true);
+  const persisted = JSON.parse(ctx.store.get(ctx.hooks.storageKey));
+  assert.equal(persisted.assignmentId, afterConsent.assignmentId);
+  assert.ok(Math.abs(persisted.bucket - 0.05) < 1e-8);
+
+  ctx.setRandom(0.90);
+  ctx.hooks.resetBucket();
+  const repeated = ctx.hooks.assignment();
+  assert.equal(repeated.variant, 'variant');
+  assert.equal(repeated.assignmentId, afterConsent.assignmentId);
 });
 
 test('forced QA and kill-switch query parameters are deterministic', () => {
   const variant = makeInjectorContext({ pathname: '/post/unrelated', search: '?bwHistoryLead=variant' });
-  assert.deepEqual(
-    JSON.parse(JSON.stringify(variant.hooks.assignment())),
-    { variant: 'variant', inExperiment: true, qa: true, stage: 'qa' }
-  );
+  const forced = variant.hooks.assignment();
+  assert.equal(forced.variant, 'variant');
+  assert.equal(forced.inExperiment, true);
+  assert.equal(forced.qa, true);
+  assert.equal(forced.stage, 'qa');
+  assert.equal(forced.acquisitionCohort, 'blog_forced_qa');
+  assert.equal(forced.placement, 'blog_inline_booking_slot');
+  assert.equal(forced.assignmentId, '');
+
   const killed = makeInjectorContext({ search: '?bwHistoryLead=0', config: { stage: 'pilot' } });
   assert.equal(killed.hooks.assignment().variant, 'control');
   assert.equal(killed.hooks.assignment().inExperiment, false);
+
+  const globallyKilled = makeInjectorContext({ disableGlobal: true, config: { stage: 'pilot' } });
+  assert.equal(globallyKilled.hooks.assignment().variant, 'control');
+  assert.equal(globallyKilled.hooks.assignment().inExperiment, false);
+});
+
+test('event payload carries PII-free cohort, placement, assignment and consent fields', () => {
+  const ctx = makeInjectorContext({
+    analytics: true,
+    random: 0.05,
+    pathname: '/post/where-was-the-berlin-wall-interactive-map',
+    config: { stage: 'ramp' },
+  });
+  const assignment = ctx.hooks.assignment();
+  const payload = ctx.hooks.eventPayload('bw_history_lead_experiment_view', assignment);
+  assert.equal(payload.acquisitionCohort, 'blog_relevant_rollout');
+  assert.equal(payload.placement, 'blog_inline_booking_slot');
+  assert.equal(payload.analyticsConsentAtSubmit, true);
+  assert.equal(payload.assignmentId, assignment.assignmentId);
+  assert.match(payload.assignmentId, /^hwa_[a-f0-9]{32}$/);
+  assert.equal(JSON.stringify(payload).includes('@'), false);
+
+  assert.match(elementSource, /acquisitionCohort: tracking\.acquisitionCohort/);
+  assert.match(elementSource, /placement: tracking\.placement/);
+  assert.match(elementSource, /assignmentId: tracking\.assignmentId/);
+  assert.match(elementSource, /analyticsConsentAtSubmit: tracking\.analyticsConsentAtSubmit/);
+  assert.match(elementSource, /DIRECT_ACQUISITION_COHORT = 'direct_landing'/);
+  assert.match(elementSource, /DIRECT_PLACEMENT = 'history_landing_full'/);
+});
+
+test('configuration and element failures are fail-safe to the existing booking control', () => {
+  const brokenConfig = new Proxy({}, {
+    get() { throw new Error('broken config'); },
+  });
+  const ctx = makeInjectorContext({ config: brokenConfig });
+  const assignment = ctx.hooks.assignment();
+  assert.equal(assignment.variant, 'control');
+  assert.equal(assignment.inExperiment, false);
+  assert.equal(ctx.hooks.fallbackAssignment().variant, 'control');
+  assert.match(injectorSource, /restoreBookingControl\(requestedPath, assignment, error/);
+  assert.match(injectorSource, /data-bw-history-lead-ready/);
+  assert.match(injectorSource, /bw-history-lead-error/);
+  assert.match(elementSource, /setAttribute\('data-bw-history-lead-ready', 'error'\)/);
 });

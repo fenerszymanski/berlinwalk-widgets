@@ -42,6 +42,18 @@
   var HISTORY_RAMP_SLUG = 'why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point';
   var HISTORY_PILOT_SLUG = 'why-berlin-s-streets-are-so-wide-it-wasn-t-always-the-plan';
   var HISTORY_EXPANSION_SLUG = 'alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos';
+  var HISTORY_INLINE_PLACEMENT = 'blog_inline_booking_slot';
+  var HISTORY_ELEMENT_READY_TIMEOUT_MS = 7000;
+  var HISTORY_ORIGINAL_CANARY_SLUGS = {};
+  var HISTORY_RELEVANT_ROLLOUT_SLUGS = {};
+  HISTORY_ORIGINAL_CANARY_SLUGS[HISTORY_RAMP_SLUG] = true;
+  HISTORY_ORIGINAL_CANARY_SLUGS[HISTORY_PILOT_SLUG] = true;
+  [
+    'where-was-the-berlin-wall-interactive-map',
+    'the-ampelmann-how-a-traffic-light-became-berlin-s-most-beloved-symbol',
+    'unter-den-linden-berlin',
+    'why-is-berlin-founding-year-1237'
+  ].forEach(function (slug) { HISTORY_RELEVANT_ROLLOUT_SLUGS[slug] = true; });
 
   var injections = 0;
   var reinjectTimer = null;
@@ -50,6 +62,8 @@
   var historyElementPromise = null;
   var historyInsertionPending = false;
   var historyMemoryBucket = null;
+  var historyMemoryAssignmentId = '';
+  var historyFallbackPaths = {};
   var pendingHistoryViews = {};
   var sentHistoryViews = {};
 
@@ -404,16 +418,31 @@
    * visitors can receive the lead-magnet variant. This keeps a code deploy from
    * starting the experiment before the API and approved photos are ready. */
   function historyConfig() {
-    var override = window.BW_HISTORY_LEAD_EXPERIMENT_CONFIG || {};
-    return {
-      enabled: override.enabled !== false,
-      stage: String(override.stage || 'qa').toLowerCase(),
-      safetyStartedAt: String(override.safetyStartedAt || ''),
-      rampWeight: Number.isFinite(Number(override.rampWeight)) ? Number(override.rampWeight) : 0.10,
-      pilotWeight: Number.isFinite(Number(override.pilotWeight)) ? Number(override.pilotWeight) : 0.50,
-      expandedWeight: Number.isFinite(Number(override.expandedWeight)) ? Number(override.expandedWeight) : 0.50,
-      enableExpansion: override.enableExpansion === true
-    };
+    try {
+      var override = window.BW_HISTORY_LEAD_EXPERIMENT_CONFIG || {};
+      return {
+        enabled: override.enabled !== false,
+        stage: String(override.stage || 'qa').toLowerCase(),
+        safetyStartedAt: String(override.safetyStartedAt || ''),
+        rampWeight: Number.isFinite(Number(override.rampWeight)) ? Number(override.rampWeight) : 0.10,
+        pilotWeight: Number.isFinite(Number(override.pilotWeight)) ? Number(override.pilotWeight) : 0.50,
+        expandedWeight: Number.isFinite(Number(override.expandedWeight)) ? Number(override.expandedWeight) : 0.50,
+        enableExpansion: override.enableExpansion === true,
+        invalid: false
+      };
+    } catch (error) {
+      console.warn(LOG, 'history experiment config invalid; restored booking control', error && error.message || error);
+      return {
+        enabled: false,
+        stage: 'qa',
+        safetyStartedAt: '',
+        rampWeight: 0,
+        pilotWeight: 0,
+        expandedWeight: 0,
+        enableExpansion: false,
+        invalid: true
+      };
+    }
   }
 
   function historyEffectiveStage(config) {
@@ -437,6 +466,13 @@
     var parts = String(location.pathname || '').replace(/\/+$/, '').split('/');
     try { return decodeURIComponent(parts[parts.length - 1] || ''); }
     catch (err) { return parts[parts.length - 1] || ''; }
+  }
+
+  function historyAcquisitionCohort(slug) {
+    slug = slug || historySlug();
+    if (HISTORY_ORIGINAL_CANARY_SLUGS[slug]) return 'blog_original_canary';
+    if (HISTORY_RELEVANT_ROLLOUT_SLUGS[slug]) return 'blog_relevant_rollout';
+    return 'blog_forced_qa';
   }
 
   function currentConsentPolicy() {
@@ -472,24 +508,49 @@
     return Math.random();
   }
 
-  function readStoredHistoryBucket() {
+  function validHistoryAssignmentId(value) {
+    value = String(value || '');
+    return /^hwa_[a-f0-9]{32}$/i.test(value) ? value : '';
+  }
+
+  function randomHistoryAssignmentId() {
+    try {
+      if (window.crypto && typeof window.crypto.getRandomValues === 'function') {
+        var values = new Uint32Array(4);
+        window.crypto.getRandomValues(values);
+        return 'hwa_' + Array.prototype.map.call(values, function (value) {
+          return Number(value).toString(16).padStart(8, '0');
+        }).join('');
+      }
+    } catch (err) {}
+    var fallback = '';
+    for (var i = 0; i < 4; i++) fallback += Math.floor(Math.random() * 4294967296).toString(16).padStart(8, '0');
+    return 'hwa_' + fallback;
+  }
+
+  function readStoredHistoryAssignment() {
     if (!historyAnalyticsAllowed()) return null;
     try {
       var raw = window.localStorage.getItem(HISTORY_STORAGE_KEY);
       var parsed = raw ? JSON.parse(raw) : null;
       if (parsed && parsed.experiment === HISTORY_EXPERIMENT_ID && typeof parsed.bucket === 'number' && parsed.bucket >= 0 && parsed.bucket < 1) {
-        return parsed.bucket;
+        return {
+          bucket: parsed.bucket,
+          assignmentId: validHistoryAssignmentId(parsed.assignmentId)
+        };
       }
     } catch (err) {}
     return null;
   }
 
-  function rememberHistoryBucket() {
+  function rememberHistoryAssignment() {
     if (!historyAnalyticsAllowed() || historyMemoryBucket === null) return;
     try {
+      if (!historyMemoryAssignmentId) historyMemoryAssignmentId = randomHistoryAssignmentId();
       window.localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify({
         experiment: HISTORY_EXPERIMENT_ID,
         bucket: historyMemoryBucket,
+        assignmentId: historyMemoryAssignmentId,
         assignedAt: new Date().toISOString()
       }));
     } catch (err) {}
@@ -497,19 +558,27 @@
 
   function historyBucket() {
     if (historyMemoryBucket !== null) {
-      rememberHistoryBucket();
+      rememberHistoryAssignment();
       return historyMemoryBucket;
     }
-    var stored = readStoredHistoryBucket();
-    historyMemoryBucket = stored === null ? randomHistoryBucket() : stored;
-    rememberHistoryBucket();
+    var stored = readStoredHistoryAssignment();
+    historyMemoryBucket = stored === null ? randomHistoryBucket() : stored.bucket;
+    historyMemoryAssignmentId = stored && stored.assignmentId || '';
+    rememberHistoryAssignment();
     return historyMemoryBucket;
   }
 
+  function historyAssignmentId() {
+    if (!historyAnalyticsAllowed()) return '';
+    historyBucket();
+    rememberHistoryAssignment();
+    return historyMemoryAssignmentId;
+  }
+
   function historyStageEligibility(stage, slug) {
-    if (stage === 'ramp') return slug === HISTORY_RAMP_SLUG;
-    if (stage === 'pilot') return slug === HISTORY_RAMP_SLUG || slug === HISTORY_PILOT_SLUG;
-    if (stage === 'expanded') return slug === HISTORY_RAMP_SLUG || slug === HISTORY_PILOT_SLUG || slug === HISTORY_EXPANSION_SLUG;
+    var coreEligible = Boolean(HISTORY_ORIGINAL_CANARY_SLUGS[slug] || HISTORY_RELEVANT_ROLLOUT_SLUGS[slug]);
+    if (stage === 'ramp' || stage === 'pilot') return coreEligible;
+    if (stage === 'expanded') return coreEligible || slug === HISTORY_EXPANSION_SLUG;
     return false;
   }
 
@@ -521,24 +590,42 @@
     return 0;
   }
 
-  function historyAssignment() {
-    var config = historyConfig();
-    var stage = historyEffectiveStage(config);
-    var choice = historyQueryChoice();
-    var slug = historySlug();
-    var globallyDisabled = window.BW_DISABLE_HISTORY_LEAD === true || choice === 'off' || !config.enabled;
-    if (globallyDisabled) return { variant: 'control', inExperiment: false, qa: false, stage: stage };
-    if (choice === 'variant') return { variant: 'variant', inExperiment: true, qa: true, stage: 'qa' };
-    if (choice === 'control') return { variant: 'control', inExperiment: true, qa: true, stage: 'qa' };
-    if (stage === 'expanded' && !config.enableExpansion) stage = 'pilot';
-    var eligible = historyStageEligibility(stage, slug);
-    if (!eligible) return { variant: 'control', inExperiment: false, qa: false, stage: stage };
+  function historyAssignmentShape(variant, inExperiment, qa, stage, slug) {
     return {
-      variant: historyBucket() < historyStageWeight(config, stage) ? 'variant' : 'control',
-      inExperiment: true,
-      qa: false,
-      stage: stage
+      variant: variant,
+      inExperiment: Boolean(inExperiment),
+      qa: Boolean(qa),
+      stage: stage || 'qa',
+      sourceSlug: slug || historySlug(),
+      acquisitionCohort: historyAcquisitionCohort(slug),
+      placement: HISTORY_INLINE_PLACEMENT,
+      assignmentId: inExperiment ? historyAssignmentId() : ''
     };
+  }
+
+  function historyAssignment() {
+    var slug = historySlug();
+    try {
+      var config = historyConfig();
+      var stage = historyEffectiveStage(config);
+      var choice = historyQueryChoice();
+      var globallyDisabled = window.BW_DISABLE_HISTORY_LEAD === true || choice === 'off' || !config.enabled || historyFallbackPaths[location.pathname];
+      if (globallyDisabled) return historyAssignmentShape('control', false, false, stage, slug);
+      if (choice === 'variant') return historyAssignmentShape('variant', true, true, 'qa', slug);
+      if (choice === 'control') return historyAssignmentShape('control', true, true, 'qa', slug);
+      if (stage === 'expanded' && !config.enableExpansion) stage = 'pilot';
+      if (!historyStageEligibility(stage, slug)) return historyAssignmentShape('control', false, false, stage, slug);
+      return historyAssignmentShape(
+        historyBucket() < historyStageWeight(config, stage) ? 'variant' : 'control',
+        true,
+        false,
+        stage,
+        slug
+      );
+    } catch (error) {
+      console.warn(LOG, 'history assignment failed; restored booking control', error && error.message || error);
+      return historyAssignmentShape('control', false, false, 'qa', slug);
+    }
   }
 
   function safeHistoryUrl(value) {
@@ -574,29 +661,53 @@
     return url.toString();
   }
 
-  function sendHistoryEvent(eventName, variant, qa) {
+  function historyEventPayload(eventName, assignment) {
     if (!historyAnalyticsAllowed()) return false;
-    var body = {
+    assignment = assignment || historyAssignmentShape('control', false, false, 'qa', historySlug());
+    var assignmentId = historyAssignmentId();
+    return {
       eventName: eventName,
       occurredAt: new Date().toISOString(),
       analyticsConsent: true,
-      sourceSlug: historySlug(),
+      analyticsConsentAtSubmit: true,
+      sourceSlug: assignment.sourceSlug || historySlug(),
       pageUrl: safeHistoryUrl(window.location.href),
       referrer: safeHistoryUrl(document.referrer),
       experiment: HISTORY_EXPERIMENT_ID,
-      variant: variant,
+      variant: assignment.variant,
+      acquisitionCohort: assignment.acquisitionCohort || historyAcquisitionCohort(assignment.sourceSlug),
+      placement: assignment.placement || HISTORY_INLINE_PLACEMENT,
+      assignmentId: assignmentId,
       storyId: '',
       utm: historyUtm(),
       device: {
         width: Number(window.innerWidth || 0),
         height: Number(window.innerHeight || 0)
       },
-      qa: Boolean(qa)
+      qa: Boolean(assignment.qa)
     };
+  }
+
+  function sendHistoryEvent(eventName, assignment) {
+    var body = historyEventPayload(eventName, assignment);
+    if (!body) return false;
     try {
       window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: eventName, experiment: HISTORY_EXPERIMENT_ID, variant: variant });
-      if (typeof window.gtag === 'function') window.gtag('event', eventName, { experiment: HISTORY_EXPERIMENT_ID, variant: variant });
+      window.dataLayer.push({
+        event: eventName,
+        experiment: HISTORY_EXPERIMENT_ID,
+        variant: body.variant,
+        acquisition_cohort: body.acquisitionCohort,
+        placement: body.placement,
+        assignment_id: body.assignmentId
+      });
+      if (typeof window.gtag === 'function') window.gtag('event', eventName, {
+        experiment: HISTORY_EXPERIMENT_ID,
+        variant: body.variant,
+        acquisition_cohort: body.acquisitionCohort,
+        placement: body.placement,
+        assignment_id: body.assignmentId
+      });
       fetch(historyEventUrl(), {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
@@ -618,11 +729,14 @@
   }
 
   function flushHistoryExperimentViews() {
-    rememberHistoryBucket();
+    rememberHistoryAssignment();
     if (!historyAnalyticsAllowed()) return;
     Object.keys(pendingHistoryViews).forEach(function (key) {
       var assignment = pendingHistoryViews[key];
-      if (sendHistoryEvent('bw_history_lead_experiment_view', assignment.variant, assignment.qa)) {
+      assignment.assignmentId = historyAssignmentId();
+      var element = document.querySelector('[' + HISTORY_MARKER + ']');
+      if (element && assignment.assignmentId) element.setAttribute('assignment-id', assignment.assignmentId);
+      if (sendHistoryEvent('bw_history_lead_experiment_view', assignment)) {
         sentHistoryViews[key] = true;
         delete pendingHistoryViews[key];
       }
@@ -633,7 +747,7 @@
     if (!assignment.inExperiment) return;
     card.addEventListener('click', function (event) {
       var target = event.target.closest('[data-bw-booking-cta],[data-bw-day-index],[data-bw-slot-index],.bw-blog-booking-more');
-      if (target) sendHistoryEvent('bw_history_control_booking_click', 'control', assignment.qa);
+      if (target) sendHistoryEvent('bw_history_control_booking_click', assignment);
     });
   }
 
@@ -702,34 +816,72 @@
     return true;
   }
 
+  function restoreBookingControl(requestedPath, assignment, error, element) {
+    historyInsertionPending = false;
+    historyFallbackPaths[requestedPath] = true;
+    if (element && element.parentNode) element.parentNode.removeChild(element);
+    if (location.pathname !== requestedPath) return false;
+    if (document.querySelector('[' + MARKER + ']')) return true;
+    var anchor = currentInsertionAnchor();
+    if (!anchor) {
+      scheduleInject();
+      return false;
+    }
+    var fallback = historyAssignmentShape('control', false, assignment && assignment.qa, assignment && assignment.stage, assignment && assignment.sourceSlug);
+    insertControl(anchor, fallback);
+    console.warn(LOG, 'history variant unavailable; restored booking control', error && error.message || error);
+    return true;
+  }
+
+  function monitorHistoryElement(element, requestedPath, assignment) {
+    var startedAt = Date.now();
+    function checkReady() {
+      if (location.pathname !== requestedPath || !element.parentNode) return;
+      var ready = element.getAttribute('data-bw-history-lead-ready');
+      if (ready === 'true') {
+        queueHistoryExperimentView(assignment);
+        return;
+      }
+      if (ready === 'error' || Date.now() - startedAt >= HISTORY_ELEMENT_READY_TIMEOUT_MS) {
+        restoreBookingControl(requestedPath, assignment, new Error('History lead element did not become ready'), element);
+        return;
+      }
+      setTimeout(checkReady, 250);
+    }
+    element.addEventListener('bw-history-lead-error', function () {
+      restoreBookingControl(requestedPath, assignment, new Error('History lead element render failed'), element);
+    }, { once: true });
+    setTimeout(checkReady, 250);
+  }
+
   function insertHistoryVariant(assignment) {
     if (historyInsertionPending) return true;
     historyInsertionPending = true;
     var requestedPath = location.pathname;
+    var insertedElement = null;
     loadHistoryElement().then(function () {
       historyInsertionPending = false;
       if (location.pathname !== requestedPath || document.querySelector('[' + MARKER + ']')) return;
       var anchor = currentInsertionAnchor();
       if (!anchor) return;
       var element = document.createElement(HISTORY_ELEMENT_TAG);
+      insertedElement = element;
       element.setAttribute(MARKER, '1');
       element.setAttribute(HISTORY_MARKER, '1');
       element.setAttribute('mode', 'inline');
       element.setAttribute('experiment', HISTORY_EXPERIMENT_ID);
       element.setAttribute('variant', 'variant');
       element.setAttribute('api-base', HISTORY_API_BASE);
+      element.setAttribute('acquisition-cohort', assignment.acquisitionCohort);
+      element.setAttribute('placement', assignment.placement);
+      if (assignment.assignmentId) element.setAttribute('assignment-id', assignment.assignmentId);
       if (assignment.qa) element.setAttribute('qa', 'true');
       anchor.parentNode.insertBefore(element, anchor.nextSibling);
       injections += 1;
-      queueHistoryExperimentView(assignment);
+      monitorHistoryElement(element, requestedPath, assignment);
       console.log(LOG, 'injected attempt', injections, 'experiment variant');
     }).catch(function (error) {
-      historyInsertionPending = false;
-      if (location.pathname !== requestedPath || document.querySelector('[' + MARKER + ']')) return;
-      var anchor = currentInsertionAnchor();
-      if (!anchor) return;
-      insertControl(anchor, { variant: 'control', inExperiment: false, qa: assignment.qa, stage: assignment.stage });
-      console.warn(LOG, 'history variant unavailable; restored booking control', error && error.message || error);
+      restoreBookingControl(requestedPath, assignment, error, insertedElement);
     });
     return true;
   }
@@ -745,9 +897,15 @@
     var anchor = findInsertionAnchor(body);
     if (!anchor) return false;
 
-    var assignment = historyAssignment();
-    if (assignment.variant === 'variant') return insertHistoryVariant(assignment);
-    return insertControl(anchor, assignment);
+    var assignment;
+    try {
+      assignment = historyAssignment();
+      if (assignment.variant === 'variant') return insertHistoryVariant(assignment);
+      return insertControl(anchor, assignment);
+    } catch (error) {
+      console.warn(LOG, 'history experiment failed; restored booking control', error && error.message || error);
+      return insertControl(anchor, historyAssignmentShape('control', false, false, 'qa', historySlug()));
+    }
   }
 
   function scheduleInject() {
@@ -793,8 +951,13 @@
     window.__bwHistoryLeadTestHooks = {
       assignment: historyAssignment,
       effectiveStage: function () { return historyEffectiveStage(historyConfig()); },
-      resetBucket: function () { historyMemoryBucket = null; },
-      storageKey: HISTORY_STORAGE_KEY
+      eventPayload: historyEventPayload,
+      eligible: historyStageEligibility,
+      cohort: historyAcquisitionCohort,
+      fallbackAssignment: function () { return historyAssignmentShape('control', false, false, 'qa', historySlug()); },
+      resetBucket: function () { historyMemoryBucket = null; historyMemoryAssignmentId = ''; },
+      storageKey: HISTORY_STORAGE_KEY,
+      placement: HISTORY_INLINE_PLACEMENT
     };
   }
 

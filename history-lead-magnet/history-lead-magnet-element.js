@@ -13,8 +13,17 @@
   var API_BASE_DEFAULT = 'https://app.berlinwalk.com/api/history-lead';
   var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var PRIVACY_URL_DEFAULT = 'https://www.berlinwalk.com/privacy-policy';
-  var CONSENT_VERSION = 'history-lead-v1-2026-07-17';
+  var CONSENT_VERSION = 'history-series-v2-2026-07-17';
   var EXPERIMENT_DEFAULT = 'history_story_lead_v1';
+  var EXPERIMENT_STORAGE_KEY = 'bwHistoryLeadExperiment.v1';
+  var DIRECT_ASSIGNMENT_STORAGE_KEY = 'bwHistoryLeadDirectAssignment.v1';
+  var DIRECT_ACQUISITION_COHORT = 'direct_landing';
+  var INLINE_ACQUISITION_COHORT = 'blog_history_inline';
+  var DIRECT_PLACEMENT = 'history_landing_full';
+  var INLINE_PLACEMENT = 'blog_inline_booking_slot';
+  var PRIVACY_LINK_COPY = 'Read the Privacy Policy.';
+  var SERIES_CONSENT_COPY = 'Email me Story 2 now and Story 3 about 48 hours later. These two emails include Berlin history and may also include information about BerlinWalk walking tours. I can unsubscribe at any time. Read the Privacy Policy.';
+  var directMemoryAssignmentId = '';
   var ALLOWED_LICENSES = {
     'Public Domain': true,
     'CC0 1.0': true,
@@ -139,6 +148,87 @@
     return policy.analytics === true || policy.anl === true || policy.anl === 1;
   }
 
+  function validAssignmentId(value) {
+    value = String(value || '');
+    return /^hwa_[a-f0-9]{32}$/i.test(value) ? value : '';
+  }
+
+  function randomAssignmentId() {
+    try {
+      if (window.crypto && typeof window.crypto.getRandomValues === 'function') {
+        var values = new Uint32Array(4);
+        window.crypto.getRandomValues(values);
+        return 'hwa_' + Array.prototype.map.call(values, function (value) {
+          return Number(value).toString(16).padStart(8, '0');
+        }).join('');
+      }
+    } catch (err) {}
+    var fallback = '';
+    for (var i = 0; i < 4; i++) fallback += Math.floor(Math.random() * 4294967296).toString(16).padStart(8, '0');
+    return 'hwa_' + fallback;
+  }
+
+  function storedAssignmentId(key) {
+    if (!analyticsAllowed()) return '';
+    try {
+      var raw = window.localStorage.getItem(key);
+      var parsed = raw ? JSON.parse(raw) : null;
+      return validAssignmentId(parsed && parsed.assignmentId);
+    } catch (err) {
+      return '';
+    }
+  }
+
+  function directAssignmentId() {
+    if (!analyticsAllowed()) return '';
+    if (!directMemoryAssignmentId) directMemoryAssignmentId = storedAssignmentId(DIRECT_ASSIGNMENT_STORAGE_KEY);
+    if (!directMemoryAssignmentId) directMemoryAssignmentId = randomAssignmentId();
+    try {
+      window.localStorage.setItem(DIRECT_ASSIGNMENT_STORAGE_KEY, JSON.stringify({
+        assignmentId: directMemoryAssignmentId,
+        assignedAt: new Date().toISOString()
+      }));
+    } catch (err) {}
+    return directMemoryAssignmentId;
+  }
+
+  function acquisitionCohort(element) {
+    var explicit = cleanAttribution(element.getAttribute('acquisition-cohort'));
+    if (explicit) return explicit;
+    return element._mode() === 'full' ? DIRECT_ACQUISITION_COHORT : INLINE_ACQUISITION_COHORT;
+  }
+
+  function placement(element) {
+    var explicit = cleanAttribution(element.getAttribute('placement'));
+    if (explicit) return explicit;
+    return element._mode() === 'full' ? DIRECT_PLACEMENT : INLINE_PLACEMENT;
+  }
+
+  function assignmentId(element) {
+    if (!analyticsAllowed()) return '';
+    var explicit = validAssignmentId(element.getAttribute('assignment-id'));
+    if (explicit) return explicit;
+    var value = element._mode() === 'inline'
+      ? storedAssignmentId(EXPERIMENT_STORAGE_KEY)
+      : directAssignmentId();
+    if (value) element.setAttribute('assignment-id', value);
+    return value;
+  }
+
+  function trackingMetadata(element) {
+    return {
+      acquisitionCohort: acquisitionCohort(element),
+      placement: placement(element),
+      assignmentId: assignmentId(element),
+      analyticsConsentAtSubmit: analyticsAllowed()
+    };
+  }
+
+  function renderSeriesConsentCopy(privacyUrl) {
+    var prefix = SERIES_CONSENT_COPY.slice(0, -PRIVACY_LINK_COPY.length);
+    return escapeHtml(prefix) + '<a href="' + escapeHtml(privacyUrl) + '" target="_top">' + escapeHtml(PRIVACY_LINK_COPY) + '</a>';
+  }
+
   function getUtm() {
     var params = new URLSearchParams(window.location.search || '');
     return {
@@ -217,6 +307,12 @@
       this._installConsentListeners();
       Promise.all([this._loadManifest(), this._resolveStoryAccess()]).then(function () {
         this._render();
+      }.bind(this)).catch(function () {
+        this.setAttribute('data-bw-history-lead-ready', 'error');
+        this.innerHTML = '<div class="bw-history-lead__loading" role="alert">The Berlin story could not load. Please try again.</div>';
+        try {
+          this.dispatchEvent(new CustomEvent('bw-history-lead-error', { bubbles: true }));
+        } catch (err) {}
       }.bind(this));
     }
 
@@ -420,7 +516,7 @@
         '<div class="bw-history-lead__honeypot" aria-hidden="true"><label>Website<input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>',
         '<label class="bw-history-lead__consent">',
         '<input name="consent" type="checkbox" required data-bw-history-consent>',
-        '<span>Email me the next two Berlin stories and occasional BerlinWalk updates. I can unsubscribe at any time. <a href="' + escapeHtml(privacyUrl) + '" target="_top">Read the Privacy Policy.</a></span>',
+        '<span>' + renderSeriesConsentCopy(privacyUrl) + '</span>',
         '</label>',
         '<p class="bw-history-lead__status" role="status" aria-live="polite" data-bw-history-status></p>',
         '</form>',
@@ -547,6 +643,7 @@
       button.disabled = true;
       button.textContent = 'Sending...';
       status.textContent = '';
+      var tracking = trackingMetadata(this);
       var body = {
         email: String(email.value || '').trim(),
         consent: true,
@@ -555,6 +652,10 @@
         sourceUrl: safeUrl(window.location.href),
         experiment: this.getAttribute('experiment') || EXPERIMENT_DEFAULT,
         variant: this.getAttribute('variant') || (mode === 'inline' ? 'variant' : 'standalone'),
+        acquisitionCohort: tracking.acquisitionCohort,
+        placement: tracking.placement,
+        assignmentId: tracking.assignmentId,
+        analyticsConsentAtSubmit: tracking.analyticsConsentAtSubmit,
         storyId: storyId,
         utm: getUtm(),
         website: String(form.querySelector('[name="website"]').value || ''),
@@ -616,15 +717,20 @@
 
     _sendEvent(eventName, storyId) {
       if (!EVENT_NAMES[eventName] || !analyticsAllowed()) return false;
+      var tracking = trackingMetadata(this);
       var body = {
         eventName: eventName,
         occurredAt: new Date().toISOString(),
         analyticsConsent: true,
+        analyticsConsentAtSubmit: tracking.analyticsConsentAtSubmit,
         sourceSlug: sourceSlug(),
         pageUrl: safeUrl(window.location.href),
         referrer: safeUrl(document.referrer),
         experiment: this.getAttribute('experiment') || EXPERIMENT_DEFAULT,
         variant: this.getAttribute('variant') || (this._mode() === 'inline' ? 'variant' : 'standalone'),
+        acquisitionCohort: tracking.acquisitionCohort,
+        placement: tracking.placement,
+        assignmentId: tracking.assignmentId,
         storyId: storyId || '',
         utm: getUtm(),
         device: {
@@ -635,8 +741,23 @@
       };
       try {
         window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({ event: eventName, story_id: storyId || '', experiment: body.experiment, variant: body.variant });
-        if (typeof window.gtag === 'function') window.gtag('event', eventName, { story_id: storyId || '', experiment: body.experiment, variant: body.variant });
+        window.dataLayer.push({
+          event: eventName,
+          story_id: storyId || '',
+          experiment: body.experiment,
+          variant: body.variant,
+          acquisition_cohort: body.acquisitionCohort,
+          placement: body.placement,
+          assignment_id: body.assignmentId
+        });
+        if (typeof window.gtag === 'function') window.gtag('event', eventName, {
+          story_id: storyId || '',
+          experiment: body.experiment,
+          variant: body.variant,
+          acquisition_cohort: body.acquisitionCohort,
+          placement: body.placement,
+          assignment_id: body.assignmentId
+        });
         fetch(this._apiUrl('event'), {
           method: 'POST',
           headers: { 'content-type': 'application/json' },

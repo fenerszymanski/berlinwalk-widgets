@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="data:,">
+  <title>Mehringplatz Time-Layer Viewer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="time-layer" data-time-layer-viewer>
+    <header class="viewer-header">
+      <div>
+        <p class="eyebrow">MEHRINGPLATZ · 1894–2024</p>
+        <h1>One circle, four different Berlins</h1>
+      </div>
+      <p class="intro">Choose a year, then compare its evidence with another layer. The photographs were made from different positions and with different lenses.</p>
+    </header>
+
+    <section class="timeline" aria-labelledby="timeline-title">
+      <div class="timeline-heading">
+        <h2 id="timeline-title">Choose the main layer</h2>
+        <span class="viewpoint-note">Different viewpoints</span>
+      </div>
+      <div class="year-tabs" role="tablist" aria-label="Mehringplatz years">
+        <button class="year-tab" type="button" role="tab" id="tab-1894" aria-controls="layer-panel" aria-selected="true" tabindex="0" data-year="1894">
+          <span class="tab-year">1894</span>
+          <span class="tab-label">Gateway</span>
+        </button>
+        <button class="year-tab" type="button" role="tab" id="tab-1957" aria-controls="layer-panel" aria-selected="false" tabindex="-1" data-year="1957">
+          <span class="tab-year">1957</span>
+          <span class="tab-label">Cleared</span>
+        </button>
+        <button class="year-tab" type="button" role="tab" id="tab-1974" aria-controls="layer-panel" aria-selected="false" tabindex="-1" data-year="1974">
+          <span class="tab-year">1974</span>
+          <span class="tab-label">Rebuilding</span>
+        </button>
+        <button class="year-tab" type="button" role="tab" id="tab-2024" aria-controls="layer-panel" aria-selected="false" tabindex="-1" data-year="2024">
+          <span class="tab-year">2024</span>
+          <span class="tab-label">Today</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="comparison" id="layer-panel" role="tabpanel" aria-labelledby="tab-1894" tabindex="0">
+      <article class="photo-card photo-card-primary">
+        <div class="photo-meta">
+          <div>
+            <span class="photo-role">MAIN LAYER</span>
+            <h2 id="primary-title">1894 · A southern gateway</h2>
+          </div>
+          <span class="evidence-badge" id="primary-badge">ANCHOR + AXIS</span>
+        </div>
+        <div class="image-stage">
+          <img id="primary-image" src="assets/1894-hallesches-tor.jpg" alt="A busy 1894 view through Hallesches Tor toward Belle-Alliance-Platz, with the Peace Column at its centre" width="1800" height="1331">
+        </div>
+        <p class="viewpoint" id="primary-viewpoint"><strong>Viewpoint:</strong> looking north through Hallesches Tor. Do not align the gatehouses with the current photograph.</p>
+      </article>
+
+      <div class="compare-control">
+        <label for="comparison-year">Compare with</label>
+        <select id="comparison-year" aria-describedby="comparison-help">
+          <option value="2024" selected>2024 · Today</option>
+          <option value="1974">1974 · Rebuilding</option>
+          <option value="1957">1957 · Cleared</option>
+          <option value="1894">1894 · Gateway</option>
+        </select>
+        <p id="comparison-help">The viewer prevents identical year pairs.</p>
+      </div>
+
+      <article class="photo-card">
+        <div class="photo-meta">
+          <div>
+            <span class="photo-role">REFERENCE LAYER</span>
+            <h2 id="reference-title">2024 · The inherited circle</h2>
+          </div>
+          <span class="evidence-badge" id="reference-badge">ANCHOR + SCALE</span>
+        </div>
+        <div class="image-stage">
+          <img id="reference-image" src="assets/2024-mehringplatz.jpg" alt="Mehringplatz in 2024, with the Peace Column between the postwar inner-ring buildings" width="1800" height="1200">
+        </div>
+        <p class="viewpoint" id="reference-viewpoint"><strong>Viewpoint:</strong> from the southern side of the pedestrian square, looking north. The old gatehouses are gone.</p>
+      </article>
+    </section>
+
+    <section class="evidence-panel" aria-labelledby="evidence-title">
+      <div>
+        <p class="section-kicker">WHAT TO COMPARE</p>
+        <h2 id="evidence-title">Read the evidence, not the pixels</h2>
+      </div>
+      <div class="evidence-grid" id="evidence-grid">
+        <article>
+          <span>01 · SURVIVES</span>
+          <h3>The Peace Column</h3>
+          <p>The winged figure marks the centre across the oldest and newest views.</p>
+        </article>
+        <article>
+          <span>02 · DISAPPEARS</span>
+          <h3>The gatehouses</h3>
+          <p>The monumental southern entrance frames 1894 but does not return after the war.</p>
+        </article>
+        <article>
+          <span>03 · CHANGES</span>
+          <h3>The size of the room</h3>
+          <p>The postwar inner ring preserves a circle while making the public space smaller.</p>
+        </article>
+      </div>
+    </section>
+
+    <footer class="viewer-footer">
+      <p><strong>On the street:</strong> stand south of the Peace Column and face north. Use the column first, then read the opening of Friedrichstraße behind it.</p>
+      <button type="button" class="credits-trigger" id="credits-button" aria-haspopup="dialog" aria-expanded="false" aria-controls="credits-dialog">Image credits</button>
+    </footer>
+
+    <p class="sr-only" id="viewer-status" aria-live="polite"></p>
+
+    <div class="credits-backdrop" id="credits-backdrop" hidden></div>
+    <section class="credits-dialog" id="credits-dialog" role="dialog" aria-modal="true" aria-labelledby="credits-title" hidden>
+      <div class="credits-dialog-header">
+        <div>
+          <p class="section-kicker">SOURCE RECORD</p>
+          <h2 id="credits-title">Image credits</h2>
+        </div>
+        <button type="button" class="credits-close" id="credits-close" aria-label="Close image credits">Close</button>
+      </div>
+      <ul>
+        <li><strong>1894:</strong> Robert Prager, <em>Hallesches Tor, Berlin 1894</em>. Public domain, via Wikimedia Commons.</li>
+        <li><strong>Around 1900:</strong> unknown creator, <em>Berlin Belle Alliance Platz um 1900</em>. Public domain, Library of Congress, via Wikimedia Commons.</li>
+        <li><strong>1957:</strong> Willy Pragher, <em>Berlin Mehringplatz 049041</em>. CC BY 3.0, via Wikimedia Commons and Deutsche Digitale Bibliothek.</li>
+        <li><strong>1974:</strong> Andreas Schwarzkopf, <em>Neubau am Mehringplatz</em>. CC BY-SA 3.0, via Wikimedia Commons.</li>
+        <li><strong>2022:</strong> Andreas Achsel, <em>Friedenssäule 11.07.2022</em>. CC BY-SA 4.0, via Wikimedia Commons.</li>
+        <li><strong>2024:</strong> Andrzej Otrębski, <em>Berlin Mehringplatz</em>. CC BY-SA 4.0, via Wikimedia Commons.</li>
+      </ul>
+      <p>Images are shown as historical evidence. No reconstruction or same-angle overlay has been created.</p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
