@@ -292,147 +292,45 @@ class BWMeetingPointElement extends HTMLElement {
           margin-bottom: 20px;
         }
 
-        .bw-meeting-point .bw-mp-map-frame {
-          background:
-            linear-gradient(90deg, rgba(27, 94, 32, 0.08) 0 1px, transparent 1px 48px),
-            linear-gradient(rgba(27, 94, 32, 0.08) 0 1px, transparent 1px 48px),
-            #FAFAF5;
-          border: 4px solid #FFE600;
-          border-radius: 8px;
-          min-height: 420px;
-          overflow: hidden;
-          position: relative;
-        }
-
-        .bw-meeting-point .bw-mp-map-poster {
-          color: #212121;
-          display: block;
-          height: 100%;
-          min-height: 420px;
-          position: relative;
-          text-decoration: none;
-          width: 100%;
-        }
-
-        .bw-meeting-point .bw-mp-map-road {
-          background: #C5E1A5;
-          border-radius: 999px;
-          display: block;
-          height: 16px;
-          left: 9%;
-          position: absolute;
-          right: 8%;
-          top: 48%;
-          transform: rotate(-8deg);
-        }
-
-        .bw-meeting-point .bw-mp-map-road::before,
-        .bw-meeting-point .bw-mp-map-road::after {
-          background: #C5E1A5;
-          border-radius: 999px;
-          content: "";
-          display: block;
-          height: 14px;
-          position: absolute;
-          width: 68%;
-        }
-
-        .bw-meeting-point .bw-mp-map-road::before {
-          left: 8%;
-          top: -92px;
-          transform: rotate(42deg);
-        }
-
-        .bw-meeting-point .bw-mp-map-road::after {
-          right: 2%;
-          top: 92px;
-          transform: rotate(38deg);
-        }
-
-        .bw-meeting-point .bw-mp-map-station,
-        .bw-meeting-point .bw-mp-map-end,
-        .bw-meeting-point .bw-mp-map-pin,
-        .bw-meeting-point .bw-mp-map-cta {
-          position: absolute;
-          z-index: 2;
-        }
-
-        .bw-meeting-point .bw-mp-map-station,
-        .bw-meeting-point .bw-mp-map-end {
-          background: #FFFFFF;
+        .bw-meeting-point .bw-mp-arrival-list {
+          background: #FAFAF5;
           border: 1px solid #C5E1A5;
           border-radius: 8px;
-          box-shadow: 0 8px 20px rgba(27, 94, 32, 0.08);
+          list-style: none;
+          margin: 0;
+          padding: 0 24px;
+        }
+
+        .bw-meeting-point .bw-mp-arrival-step {
+          display: grid;
+          gap: 16px;
+          grid-template-columns: 44px minmax(0, 1fr);
+          padding: 22px 0;
+        }
+
+        .bw-meeting-point .bw-mp-arrival-step + .bw-mp-arrival-step {
+          border-top: 1px solid #C5E1A5;
+        }
+
+        .bw-meeting-point .bw-mp-arrival-number {
           color: #1B5E20;
-          font-size: 13px;
+          font-size: 24px;
           font-weight: 800;
-          letter-spacing: 0.6px;
-          padding: 10px 12px;
-          text-transform: uppercase;
+          line-height: 1;
         }
 
-        .bw-meeting-point .bw-mp-map-station {
-          left: 9%;
-          top: 16%;
-        }
-
-        .bw-meeting-point .bw-mp-map-end {
-          bottom: 16%;
-          right: 10%;
-        }
-
-        .bw-meeting-point .bw-mp-map-pin {
-          align-items: center;
-          background: #1B5E20;
-          border: 5px solid #FFE600;
-          border-radius: 50%;
-          color: #FFFFFF;
-          display: flex;
-          font-size: 13px;
-          font-weight: 800;
-          height: 112px;
-          justify-content: center;
-          left: 50%;
-          line-height: 1.15;
-          padding: 12px;
-          text-align: center;
-          top: 50%;
-          transform: translate(-50%, -50%);
-          width: 112px;
-        }
-
-        .bw-meeting-point .bw-mp-map-pin::after {
-          border-left: 12px solid transparent;
-          border-right: 12px solid transparent;
-          border-top: 18px solid #FFE600;
-          bottom: -20px;
-          content: "";
-          left: 50%;
-          position: absolute;
-          transform: translateX(-50%);
-        }
-
-        .bw-meeting-point .bw-mp-map-cta {
-          background: #FFE600;
-          border-radius: 999px;
-          bottom: 20px;
+        .bw-meeting-point .bw-mp-arrival-step h3 {
           color: #1B5E20;
-          font-size: 12px;
-          font-weight: 800;
-          letter-spacing: 0.8px;
-          left: 20px;
-          padding: 10px 14px;
-          text-transform: uppercase;
+          font-size: 17px;
+          line-height: 1.3;
+          margin-bottom: 6px;
         }
 
-        .bw-meeting-point .bw-mp-map-poster:hover .bw-mp-map-cta,
-        .bw-meeting-point .bw-mp-map-poster:focus-visible .bw-mp-map-cta {
-          background: #fff04a;
-        }
-
-        .bw-meeting-point .bw-mp-map-poster:focus-visible {
-          outline: 3px solid #FFFFFF;
-          outline-offset: -8px;
+        .bw-meeting-point .bw-mp-arrival-step p {
+          color: #4E5A4E;
+          font-size: 15px;
+          line-height: 1.55;
+          margin: 0;
         }
 
         .bw-meeting-point .bw-mp-main {
@@ -610,16 +508,6 @@ class BWMeetingPointElement extends HTMLElement {
             padding-right: 16px;
           }
 
-          .bw-meeting-point .bw-mp-map-frame,
-          .bw-meeting-point .bw-mp-map-poster {
-            min-height: 320px;
-          }
-
-          .bw-meeting-point .bw-mp-map-pin {
-            height: 96px;
-            width: 96px;
-          }
-
           .bw-meeting-point .bw-mp-panel {
             padding: 22px;
           }
@@ -630,12 +518,12 @@ class BWMeetingPointElement extends HTMLElement {
         }
       </style>
 
-      <section class="bw-meeting-point">
+      <section class="bw-meeting-point bw-page-editorial" data-editorial-build="four-page-editorial-20260717" aria-labelledby="bw-meeting-point-title">
         <header class="bw-mp-hero">
           <div class="bw-mp-inner bw-mp-hero-grid">
             <div>
               <span class="bw-mp-eyebrow">Meeting Point</span>
-              <h1>Meet at the <span class="bw-mp-highlight">World Clock</span></h1>
+              <h1 id="bw-meeting-point-title">Meet at the <span class="bw-mp-highlight">World Clock</span></h1>
               <p class="bw-mp-hero-lead">Your BerlinWalk tour starts at the Weltzeituhr on Alexanderplatz. Arrive 5 minutes early, look for the green umbrella, and get ready to walk from Alexanderplatz to Hackescher Markt.</p>
               <div class="bw-mp-actions">
                 <a class="bw-mp-btn bw-mp-btn-primary" href="${BW_MEETING_POINT_MAPS_URL}" target="_blank" rel="noopener">Open in Google Maps</a>
@@ -684,19 +572,33 @@ class BWMeetingPointElement extends HTMLElement {
               <p>Alexanderplatz is one of Berlin's easiest meeting points, with U-Bahn, S-Bahn, tram, bus, and regional train connections nearby. Once you are on the square, the World Clock is the round landmark people gather around.</p>
               <a class="bw-mp-btn bw-mp-btn-secondary" href="${BW_MEETING_POINT_MAPS_URL}" target="_blank" rel="noopener">Open map</a>
             </div>
-            <div class="bw-mp-map-frame">
-              <a class="bw-mp-map-poster" href="${BW_MEETING_POINT_MAPS_URL}" target="_blank" rel="noopener" aria-label="Open the meeting point in Google Maps">
-                <span class="bw-mp-map-road" aria-hidden="true"></span>
-                <span class="bw-mp-map-station">Alexanderplatz station</span>
-                <span class="bw-mp-map-pin">World Clock<br>meeting point</span>
-                <span class="bw-mp-map-end">Hackescher Markt finish</span>
-                <span class="bw-mp-map-cta">Open in Google Maps</span>
-              </a>
-            </div>
+            <ol class="bw-mp-arrival-list" aria-label="Directions from Alexanderplatz station to the World Clock">
+              <li class="bw-mp-arrival-step">
+                <span class="bw-mp-arrival-number" aria-hidden="true">01</span>
+                <div>
+                  <h3>Exit onto Alexanderplatz</h3>
+                  <p>Follow signs for Alexanderplatz rather than the Alexa shopping centre. Any central square exit works.</p>
+                </div>
+              </li>
+              <li class="bw-mp-arrival-step">
+                <span class="bw-mp-arrival-number" aria-hidden="true">02</span>
+                <div>
+                  <h3>Find the rotating World Clock</h3>
+                  <p>Look for the large silver clock with the solar-system sculpture above it, between the station and the TV Tower.</p>
+                </div>
+              </li>
+              <li class="bw-mp-arrival-step">
+                <span class="bw-mp-arrival-number" aria-hidden="true">03</span>
+                <div>
+                  <h3>Look for the green umbrella</h3>
+                  <p>I meet the group beside the World Clock. Arrive 5 minutes early so the walk can start on time.</p>
+                </div>
+              </li>
+            </ol>
           </div>
         </section>
 
-        <main class="bw-mp-main">
+        <section class="bw-mp-main" aria-label="Tour-day details">
           <div class="bw-mp-inner">
             <section class="bw-mp-route-strip" aria-label="Tour route summary">
               <div class="bw-mp-route-stop">
@@ -705,7 +607,7 @@ class BWMeetingPointElement extends HTMLElement {
               </div>
               <div class="bw-mp-route-stop">
                 <h3>Walk</h3>
-                <p>About 2 hours through Berlin's historic center</p>
+                <p>About 2 hours through Berlin's historic centre</p>
               </div>
               <div class="bw-mp-route-stop">
                 <h3>End</h3>
@@ -716,7 +618,7 @@ class BWMeetingPointElement extends HTMLElement {
             <section class="bw-mp-guidance">
               <div class="bw-mp-panel">
                 <h2>If you are late</h2>
-                <p>The group can only wait a few minutes before starting. If you are running late, message us through your booking confirmation and we will tell you whether you can still join nearby.</p>
+                <p>The group can only wait a few minutes before starting. If you are running late, message me through your booking confirmation and I will tell you whether you can still join nearby.</p>
               </div>
               <div class="bw-mp-panel">
                 <h2>Before you arrive</h2>
@@ -728,11 +630,11 @@ class BWMeetingPointElement extends HTMLElement {
               </div>
             </section>
           </div>
-        </main>
+        </section>
 
         <footer class="bw-mp-final">
           <div class="bw-mp-inner">
-            <h2>Ready to walk through Berlin's historic center?</h2>
+            <h2>Ready to walk through Berlin's historic centre?</h2>
             <p>Reserve your spot for the free tip-based Berlin walking tour from Alexanderplatz to Hackescher Markt.</p>
             <a class="bw-mp-btn bw-mp-btn-primary" href="${BW_MEETING_POINT_BOOKING_URL}">Book your spot</a>
           </div>
