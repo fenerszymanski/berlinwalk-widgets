@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,nofollow">
+    <title>BerlinWalk Four-Page Editorial Atlas Metrics</title>
+    <style>
+      body { background: #fafaf5; color: #102414; font: 600 15px/1.5 system-ui, sans-serif; margin: 0; padding: 32px; }
+      h1 { margin: 0 0 12px; }
+      pre { background: #fff; border: 1px solid rgba(16,36,20,.2); border-radius: 8px; overflow: auto; padding: 16px; white-space: pre-wrap; }
+      iframe { border: 0; height: 900px; left: -10000px; opacity: .001; pointer-events: none; position: fixed; top: 0; }
+    </style>
+  </head>
+  <body>
+    <h1>Atlas responsive metrics</h1>
+    <p id="status">Loading four real previews and waiting for live review/audio data.</p>
+    <pre id="result">Pending…</pre>
+    <div id="frames"></div>
+    <script>
+      (() => {
+        const widths = [1366, 1040, 980, 768, 430, 390, 375, 360, 320];
+        const pages = [
+          { key: 'meeting', src: '../meeting-point/', root: '.bw-meeting-point', expected: { arrivals: 3 } },
+          { key: 'reviews', src: '../reviews/', root: '.bw-reviews', expected: { reviews: 15 } },
+          { key: 'guide', src: '../the-guide/', root: '.bw-guide', expected: { quotes: 3 } },
+          { key: 'route', src: '../route-story/', root: '.bw-route-story', expected: { stops: 12 } },
+        ];
+        const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+        const frames = document.getElementById('frames');
+        const status = document.getElementById('status');
+        const result = document.getElementById('result');
+
+        function loadFrame(page) {
+          return new Promise((resolve, reject) => {
+            const frame = document.createElement('iframe');
+            frame.title = `${page.key} metrics frame`;
+            frame.src = page.src;
+            frame.addEventListener('load', () => resolve(frame), { once: true });
+            frame.addEventListener('error', reject, { once: true });
+            frames.appendChild(frame);
+          });
+        }
+
+        function metrics(frame, page, width) {
+          const win = frame.contentWindow;
+          const doc = frame.contentDocument;
+          const root = doc.querySelector(page.root);
+          const yellowTargets = Array.from(doc.querySelectorAll(
+            '.bw-mp-btn-primary, .bw-mp-btn-secondary, .bw-rs-btn-primary, .bw-rs-btn-yellow, .bw-guide-btn-primary, .bw-guide-btn-secondary'
+          ));
+          const images = Array.from(doc.images);
+          return {
+            width,
+            clientWidth: doc.documentElement.clientWidth,
+            overflow: Math.max(0, doc.documentElement.scrollWidth - doc.documentElement.clientWidth),
+            marker: Boolean(root?.classList.contains('bw-page-editorial')),
+            h1: root?.querySelectorAll('h1').length || 0,
+            fraunces: Boolean(doc.fonts?.check('650 48px "BW Fraunces"')),
+            headingFont: root ? win.getComputedStyle(root.querySelector('h1')).fontFamily.includes('BW Fraunces') : false,
+            yellowContrast: yellowTargets.every((node) => win.getComputedStyle(node).color !== 'rgb(255, 255, 255)'),
+            brokenImages: images.filter((image) => image.complete && image.naturalWidth === 0).length,
+            missingAlt: images.filter((image) => !image.hasAttribute('alt')).length,
+            arrivals: doc.querySelectorAll('.bw-mp-arrival-step').length,
+            fakeMapParts: doc.querySelectorAll('.bw-mp-map-road, .bw-mp-map-pin, .bw-mp-map-poster').length,
+            reviewCards: doc.querySelectorAll('.bw-review-card').length,
+            reviewQuotes: doc.querySelectorAll('blockquote.bw-review-quote').length,
+            reviewBusy: doc.querySelector('[data-list]')?.getAttribute('aria-busy') || null,
+            guideQuotes: doc.querySelectorAll('.bw-guide-quote').length,
+            audioElement: doc.querySelectorAll('bw-audio-tour').length,
+            routeStops: doc.querySelectorAll('.bw-rs-stop').length,
+            routePins: doc.querySelectorAll('.bw-rs-pin').length,
+            routeTitleId: Boolean(doc.querySelector('#bw-rs-title')),
+          };
+        }
+
+        function interactionMetrics(frame, page) {
+          const win = frame.contentWindow;
+          const doc = frame.contentDocument;
+          if (page.key === 'meeting') {
+            const mapLink = doc.querySelector('a[href*="google.com/maps/search"]');
+            const bookingLinks = Array.from(doc.querySelectorAll('a[href*="/book-berlin-walking-tour/"]'));
+            return {
+              mapTargetBlank: mapLink?.target === '_blank' && mapLink?.rel.includes('noopener'),
+              bookingLinks: bookingLinks.length,
+              canonicalBooking: bookingLinks.every((link) => link.href === 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based'),
+            };
+          }
+          if (page.key === 'reviews') {
+            const sourceLinks = Array.from(doc.querySelectorAll('.bw-review-source a'));
+            return {
+              cards: doc.querySelectorAll('.bw-review-card').length,
+              status: doc.querySelector('[data-status]')?.textContent || '',
+              busy: doc.querySelector('[data-list]')?.getAttribute('aria-busy'),
+              safeSourceLinks: sourceLinks.every((link) => ['http:', 'https:'].includes(new URL(link.href).protocol)),
+            };
+          }
+          if (page.key === 'guide') {
+            const audio = doc.querySelector('bw-audio-tour');
+            return {
+              customElementDefined: Boolean(win.customElements.get('bw-audio-tour')),
+              audioMounted: Boolean(audio),
+              bookingHref: doc.querySelector('.bw-guide-btn-primary')?.href || '',
+            };
+          }
+          if (page.key === 'route') {
+            win.dataLayer = [];
+            doc.querySelector('[data-stop-target="5"]')?.click();
+            const pinActive = doc.querySelector('[data-stop-target="5"]')?.getAttribute('aria-current') === 'step';
+            doc.querySelector('[data-act-target="Museum Island"]')?.click();
+            const actActive = doc.querySelector('[data-act-target="Museum Island"]')?.getAttribute('aria-pressed') === 'true';
+            const book = doc.querySelector('[data-bw-book-route-story]');
+            book?.addEventListener('click', (event) => event.preventDefault(), { once: true });
+            book?.click();
+            return {
+              pinActive,
+              actActive,
+              mapActiveStop: doc.querySelector('.bw-rs-map-panel')?.getAttribute('data-active-stop'),
+              eventNames: win.dataLayer.map((item) => item.event),
+              stopPayload: win.dataLayer.find((item) => item.event === 'bw_route_story_stop_click')?.stop_id,
+              actPayload: win.dataLayer.find((item) => item.event === 'bw_route_story_act_click')?.act,
+              bookingPayload: win.dataLayer.find((item) => item.event === 'bw_route_story_book_click')?.source,
+            };
+          }
+          return {};
+        }
+
+        (async () => {
+          try {
+            const loaded = [];
+            for (const page of pages) loaded.push({ page, frame: await loadFrame(page) });
+            status.textContent = 'Previews loaded. Waiting for live reviews, audio upgrade and images…';
+            await wait(7000);
+            const payload = { at: new Date().toISOString(), widths: {}, interactions: {}, errors: [] };
+            for (const { page, frame } of loaded) {
+              payload.interactions[page.key] = interactionMetrics(frame, page);
+              payload.widths[page.key] = [];
+              for (const width of widths) {
+                frame.style.width = `${width}px`;
+                await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+                await wait(180);
+                payload.widths[page.key].push(metrics(frame, page, width));
+              }
+            }
+            const failed = Object.values(payload.widths).flat().filter((row) =>
+              row.overflow > 2 || !row.marker || row.h1 !== 1 || !row.fraunces || !row.headingFont ||
+              !row.yellowContrast || row.brokenImages || row.missingAlt || row.fakeMapParts ||
+              (row.arrivals && row.arrivals !== 3) || (row.reviewCards && row.reviewQuotes !== row.reviewCards) ||
+              (row.reviewBusy && row.reviewBusy !== 'false') || (row.guideQuotes && row.guideQuotes !== 3) ||
+              (row.routeStops && (row.routeStops !== 12 || row.routePins !== 12 || !row.routeTitleId))
+            );
+            const interactionFailures = [
+              !payload.interactions.meeting.mapTargetBlank,
+              payload.interactions.meeting.bookingLinks < 2,
+              !payload.interactions.meeting.canonicalBooking,
+              payload.interactions.reviews.cards < 1,
+              payload.interactions.reviews.status !== `${payload.interactions.reviews.cards} ${payload.interactions.reviews.cards === 1 ? 'review' : 'reviews'} loaded.`,
+              payload.interactions.reviews.busy !== 'false',
+              !payload.interactions.reviews.safeSourceLinks,
+              !payload.interactions.guide.customElementDefined,
+              !payload.interactions.guide.audioMounted,
+              payload.interactions.guide.bookingHref !== 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based',
+              !payload.interactions.route.pinActive,
+              !payload.interactions.route.actActive,
+              payload.interactions.route.mapActiveStop !== '10',
+              payload.interactions.route.stopPayload !== 5,
+              payload.interactions.route.actPayload !== 'Museum Island',
+              payload.interactions.route.bookingPayload !== 'route_story',
+            ].filter(Boolean);
+            payload.ok = failed.length === 0 && interactionFailures.length === 0;
+            payload.failedRows = failed;
+            payload.interactionFailureCount = interactionFailures.length;
+            status.textContent = payload.ok ? 'PASS · all four pages and nine widths' : `FAIL · ${failed.length} rows`;
+            result.textContent = JSON.stringify(payload, null, 2);
+            await fetch('/__four_page_editorial_metrics', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload),
+            });
+          } catch (error) {
+            const payload = { ok: false, error: error.stack || error.message };
+            status.textContent = 'Metrics failed';
+            result.textContent = JSON.stringify(payload, null, 2);
+            await fetch('/__four_page_editorial_metrics', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload),
+            }).catch(() => {});
+          }
+        })();
+      })();
+    </script>
+  </body>
+</html>

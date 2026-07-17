@@ -2,6 +2,7 @@ gallery/source/
 .playwright-cli/
 tmp/
 output/playwright/
+output/qa/four-page-editorial-20260717/
 email-journey/.automation-*.json
 ultimate-berlin-trip-planner/email/paste-ready/message-ids.local.json
 ultimate-berlin-trip-planner/email/paste-ready/message-ids.*.local.json

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,nofollow">
+    <title>BerlinWalk Editorial Before and After</title>
+    <style>
+      * { box-sizing: border-box; }
+      body { background: #e7ebe5; color: #102414; font: 700 12px/1.4 Montserrat, Arial, sans-serif; margin: 0; padding: 18px; }
+      header { align-items: end; display: flex; justify-content: space-between; margin: 0 auto 12px; max-width: 1600px; }
+      h1 { font: 650 28px/1.05 Georgia, serif; margin: 0; }
+      p { margin: 0; }
+      .board { display: grid; gap: 14px; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0 auto; max-width: 1600px; }
+      figure { background: #fff; border: 1px solid rgba(16,36,20,.22); border-radius: 10px; margin: 0; overflow: hidden; }
+      figcaption { background: #fafaf5; border-bottom: 1px solid rgba(16,36,20,.16); letter-spacing: .1em; padding: 9px 12px; text-transform: uppercase; }
+      img { display: block; height: auto; width: 100%; }
+      @media (max-width: 760px) { .board { grid-template-columns: 1fr; } header { align-items: start; flex-direction: column; gap: 5px; } }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1 id="title">BerlinWalk editorial comparison</h1>
+      <p>Same Atlas viewport and top-of-page state</p>
+    </header>
+    <main class="board">
+      <figure>
+        <figcaption>Source: current live page</figcaption>
+        <img id="before" alt="Current live BerlinWalk page before the editorial redesign">
+      </figure>
+      <figure>
+        <figcaption>Implementation: editorial system</figcaption>
+        <img id="after" alt="Local BerlinWalk page after the editorial redesign">
+      </figure>
+    </main>
+    <script>
+      const pages = {
+        meeting: { title: 'Meeting Point', before: '01-meeting-point-desktop-top.png', after: 'meeting-desktop-final.jpg' },
+        reviews: { title: 'Reviews', before: '05-reviews-desktop-top.png', after: 'reviews-desktop-final.jpg' },
+        guide: { title: 'The Guide', before: '07-guide-desktop-top.png', after: 'guide-desktop-final.jpg' },
+        route: { title: 'Route', before: '03-route-desktop-top.png', after: 'route-desktop-final.jpg' },
+      };
+      const key = new URLSearchParams(location.search).get('page') || 'meeting';
+      const page = pages[key] || pages.meeting;
+      document.getElementById('title').textContent = `${page.title}: before and after`;
+      document.getElementById('before').src = `../output/qa/four-page-editorial-20260717/reference/${page.before}`;
+      document.getElementById('after').src = `../output/qa/four-page-editorial-20260717/local/${page.after}`;
+    </script>
+  </body>
+</html>
