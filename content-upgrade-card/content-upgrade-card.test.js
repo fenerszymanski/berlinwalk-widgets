@@ -150,6 +150,7 @@ test('component is compact, accessible and has no inner scrolling surface', () =
   assert.match(elementSource, /background:#ffe600[^}]+color:#123d18!important/);
   assert.doesNotMatch(elementSource, /overflow(?:-y)?:\s*(?:auto|scroll)/i);
   assert.doesNotMatch(elementSource, /max-height\s*:/i);
+  assert.match(elementSource, /white-space:normal/);
   assert.match(elementSource, /data-bw-content-upgrade-ready/);
   assert.match(elementSource, /bw-content-upgrade-error/);
 });

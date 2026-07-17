@@ -105,7 +105,7 @@
     _render() {
       this._root.innerHTML = `
         <style>
-          :host{box-sizing:border-box;contain:inline-size;display:block;margin:30px 0;max-width:100%;min-width:0;overflow:visible;color:#212121;font-family:Montserrat,Arial,sans-serif}
+          :host{box-sizing:border-box;contain:inline-size;display:block;margin:30px 0;max-width:100%;min-width:0;overflow:visible;color:#212121;font-family:Montserrat,Arial,sans-serif;white-space:normal}
           *{box-sizing:border-box}
           [hidden]{display:none!important}
           .card{background:#fff;border:1px solid #bed4b7;border-radius:16px;box-shadow:0 16px 34px rgba(18,61,24,.16);max-width:100%;overflow:visible}
