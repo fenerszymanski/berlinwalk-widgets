@@ -3,8 +3,7 @@ const BW_REVIEWS_API_URL = 'https://www.berlinwalk.com/_functions/listReviews?li
 class BWReviewsElement extends HTMLElement {
   constructor() {
     super();
-    this._animated = false;
-    this._observer = null;
+    this._cardObserver = null;
     this._controller = null;
     this._reduceMotion = false;
   }
@@ -18,7 +17,7 @@ class BWReviewsElement extends HTMLElement {
   }
 
   disconnectedCallback() {
-    if (this._observer) this._observer.disconnect();
+    if (this._cardObserver) this._cardObserver.disconnect();
     if (this._controller) this._controller.abort();
   }
 
@@ -239,6 +238,16 @@ class BWReviewsElement extends HTMLElement {
 
         .bw-reviews-state.error { color: #C62828; }
 
+        .bw-reviews-status {
+          clip: rect(0 0 0 0);
+          clip-path: inset(50%);
+          height: 1px;
+          overflow: hidden;
+          position: absolute;
+          white-space: nowrap;
+          width: 1px;
+        }
+
         .bw-reviews-skeleton-row {
           display: grid;
           gap: 20px;
@@ -305,7 +314,7 @@ class BWReviewsElement extends HTMLElement {
         }
       </style>
 
-      <section class="bw-reviews" aria-labelledby="bw-reviews-title">
+      <section class="bw-reviews bw-page-editorial" data-editorial-build="four-page-editorial-20260717" aria-labelledby="bw-reviews-title">
         <div class="bw-reviews-inner">
           <header class="bw-reviews-header">
             <div class="bw-reviews-eyebrow">
@@ -313,11 +322,12 @@ class BWReviewsElement extends HTMLElement {
               <span>From real walkers</span>
             </div>
             <h1 id="bw-reviews-title" class="bw-reviews-title">What guests are saying</h1>
-            <p class="bw-reviews-lead">Honest reviews from people I've walked Berlin with. Each one is a real booking, moderated for spam but never edited.</p>
+            <p class="bw-reviews-lead">Honest reviews from people I've walked Berlin with. Names are shown only when guests choose to share them.</p>
           </header>
 
-          <div data-summary></div>
-          <div data-list>
+          <div data-summary aria-live="polite"></div>
+          <p class="bw-reviews-status" data-status aria-live="polite"></p>
+          <div data-list aria-busy="true">
             ${this._renderSkeleton()}
           </div>
         </div>
@@ -357,36 +367,53 @@ class BWReviewsElement extends HTMLElement {
     const listEl = this.querySelector('[data-list]');
     if (!summaryEl || !listEl) return;
 
-    const avg = reviews.length
-      ? Math.round((reviews.reduce((acc, r) => acc + (Number(r.rating) || 0), 0) / reviews.length) * 10) / 10
+    const ratedReviews = reviews.filter((review) =>
+      Number.isFinite(Number(review.rating)) && Number(review.rating) > 0 && Number(review.rating) <= 5);
+    const avg = ratedReviews.length
+      ? Math.round((ratedReviews.reduce((acc, r) => acc + Number(r.rating), 0) / ratedReviews.length) * 10) / 10
       : 0;
     const total = totalCount || reviews.length;
+    const populationLabel = total
+      ? `Based on ${total} ${total === 1 ? 'review' : 'reviews'}`
+      : 'No reviews yet';
+    const sampleLabel = total > reviews.length && reviews.length
+      ? `Average shown from the latest ${reviews.length}`
+      : '';
 
     summaryEl.innerHTML = `
       <div class="bw-reviews-summary">
-        <div class="bw-reviews-summary-avg">${avg ? avg.toFixed(1) : '—'}</div>
+        <div class="bw-reviews-summary-avg">${avg ? avg.toFixed(1) : 'N/A'}</div>
         <div class="bw-reviews-summary-stars" aria-label="${avg} out of 5 stars">${this._starString(avg)}</div>
-        <div class="bw-reviews-summary-count">${total ? `Based on ${total} ${total === 1 ? 'review' : 'reviews'}` : 'No reviews yet'}</div>
+        <div class="bw-reviews-summary-count">${populationLabel}</div>
+        ${sampleLabel ? `<div class="bw-reviews-summary-sample">${sampleLabel}</div>` : ''}
       </div>
     `;
 
     if (!reviews.length) {
       listEl.innerHTML = `<p class="bw-reviews-state">No reviews yet. After the next walk, this page will start to fill up.</p>`;
+      listEl.setAttribute('aria-busy', 'false');
+      this._announce('No reviews are available yet.');
       this._revealSummary();
       return;
     }
 
+    const [featured, ...rest] = reviews;
     listEl.innerHTML = `
       <div class="bw-reviews-grid">
-        ${reviews.map(r => this._renderCard(r)).join('')}
+        <div class="bw-reviews-featured">
+          ${this._renderCard(featured, true)}
+        </div>
+        ${rest.length ? `<div class="bw-reviews-ledger">${rest.map((review) => this._renderCard(review)).join('')}</div>` : ''}
       </div>
     `;
+    listEl.setAttribute('aria-busy', 'false');
+    this._announce(`${reviews.length} ${reviews.length === 1 ? 'review' : 'reviews'} loaded.`);
 
     this._revealSummary();
     this._revealCards();
   }
 
-  _renderCard(r) {
+  _renderCard(r, featured = false) {
     const rating = Number(r.rating) || 0;
     const stars = this._renderStarSpans(rating);
     const quote = this._escapeHtml(r.reviewText || '');
@@ -402,8 +429,9 @@ class BWReviewsElement extends HTMLElement {
     let sourceLine = '';
     if (r.source && r.source !== 'direct') {
       const safeSource = this._escapeHtml(r.source);
-      if (r.sourceUrl) {
-        const safeUrl = this._escapeHtml(r.sourceUrl);
+      const sourceUrl = this._safeSourceUrl(r.sourceUrl);
+      if (sourceUrl) {
+        const safeUrl = this._escapeHtml(sourceUrl);
         sourceLine = `<p class="bw-review-source">Originally posted on <a href="${safeUrl}" target="_blank" rel="noopener">${safeSource}</a></p>`;
       } else {
         sourceLine = `<p class="bw-review-source">Originally posted on ${safeSource}</p>`;
@@ -411,9 +439,9 @@ class BWReviewsElement extends HTMLElement {
     }
 
     return `
-      <article class="bw-review-card">
+      <article class="bw-review-card${featured ? ' bw-review-card-featured' : ''}">
         <div class="bw-review-stars" aria-label="${rating} out of 5 stars">${stars}</div>
-        <p class="bw-review-quote">&ldquo;${quote}&rdquo;</p>
+        <blockquote class="bw-review-quote">&ldquo;${quote}&rdquo;</blockquote>
         <p class="bw-review-byline">${byline}</p>
         ${sourceLine}
       </article>
@@ -447,7 +475,11 @@ class BWReviewsElement extends HTMLElement {
     const summaryEl = this.querySelector('[data-summary]');
     const listEl = this.querySelector('[data-list]');
     if (summaryEl) summaryEl.innerHTML = '';
-    if (listEl) listEl.innerHTML = `<p class="bw-reviews-state error">Reviews could not be loaded right now. Please try again in a moment.</p>`;
+    if (listEl) {
+      listEl.innerHTML = `<p class="bw-reviews-state error" role="status">Reviews could not be loaded right now. Please try again in a moment.</p>`;
+      listEl.setAttribute('aria-busy', 'false');
+      this._announce('Reviews could not be loaded right now.');
+    }
   }
 
   _revealSummary() {
@@ -465,17 +497,17 @@ class BWReviewsElement extends HTMLElement {
       cards.forEach(c => c.classList.add('visible'));
       return;
     }
-    const io = new IntersectionObserver((entries) => {
+    this._cardObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          io.unobserve(entry.target);
+          this._cardObserver?.unobserve(entry.target);
         }
       });
     }, { threshold: 0.15 });
     cards.forEach((card, i) => {
       card.style.transitionDelay = `${Math.min(i * 60, 360)}ms`;
-      io.observe(card);
+      this._cardObserver.observe(card);
     });
   }
 
@@ -484,12 +516,27 @@ class BWReviewsElement extends HTMLElement {
     // This stub exists for parity with other elements and future use.
   }
 
+  _announce(message) {
+    const status = this.querySelector('[data-status]');
+    if (status) status.textContent = message;
+  }
+
   _escapeHtml(value) {
     return String(value)
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;');
+  }
+
+  _safeSourceUrl(value) {
+    if (!value) return '';
+    try {
+      const url = new URL(String(value), window.location.href);
+      return url.protocol === 'https:' || url.protocol === 'http:' ? url.href : '';
+    } catch (error) {
+      return '';
+    }
   }
 }
 
