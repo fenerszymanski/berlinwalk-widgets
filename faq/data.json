@@ -6296,5 +6296,39 @@
         "a": "It is harder than it needs to be if you stay only in the postcard centre. The German restaurants around Alexanderplatz and Mitte are built around pork, sausage and Schnitzel, so halal options are thin. The fix is simple: the reliable halal food is only a few U-Bahn stops away in Neukölln, Kreuzberg and Wedding, so plan to eat there rather than assuming a central kebab shop is halal."
       }
     ]
+  },
+  "berlin-airports": {
+    "title": "Berlin Airports - FAQ",
+    "subtitle": "A local's plain answers on flying into Berlin in 2026: which airport, what happened to Tegel and Schönefeld, which terminal you arrive at, and how to reach the city.",
+    "items": [
+      {
+        "q": "How many airports does Berlin have in 2026?",
+        "a": "Just one. Since October 2020, every commercial flight to Berlin lands at Berlin Brandenburg Airport, code BER, about 18 km southeast of the city centre. The old two-and-three airport era is over, so when people compare Berlin airports today they are really only choosing between terminals inside BER, plus a couple of former airports you can still visit but not fly from."
+      },
+      {
+        "q": "Is Tegel airport still open?",
+        "a": "No. Tegel (TXL) closed permanently in November 2020, a few weeks after BER fully opened. Its famous hexagonal terminal still stands, but the site is being redeveloped into a research and housing district. There are no flights at Tegel, so if a friend or an old article points you there, redirect to BER."
+      },
+      {
+        "q": "What happened to Schönefeld airport?",
+        "a": "Schönefeld (SXF) was not demolished, it was absorbed. When BER opened, the old Schönefeld terminal became BER Terminal 5 and ran as an overflow terminal for a while. Terminal 5 has since been closed for good. Schönefeld still exists as a place and a regional train stop, but as an airport it is now part of BER, not a separate destination."
+      },
+      {
+        "q": "Which terminal will I arrive at when I fly into BER?",
+        "a": "Most flights use Terminal 1 (T1), the main building, including Lufthansa and its partners and many other airlines. Terminal 2 (T2) is a smaller building a short covered walk from T1, used at busy times and by low-cost carriers such as easyJet. Both share the same train station underneath, so the difference barely affects your arrival. Terminal 5 is closed and no longer used."
+      },
+      {
+        "q": "Can you still visit Tempelhof airport?",
+        "a": "Yes, just not by plane. Tempelhof (THF) closed in 2008 and reopened as Tempelhofer Feld, an enormous free public park on the old runways and apron. Berliners cycle, skate and picnic there, especially in summer. It is one of the best relaxed half-days in the city, and the old terminal building still hosts events and tours."
+      },
+      {
+        "q": "How do I get from BER airport to central Berlin?",
+        "a": "The fastest option is the FEX Airport Express, which runs about every 15 minutes and reaches Berlin Hauptbahnhof in around 23 minutes. Regional trains (RE7, RB14, RB22 and others) also serve central stations, and the S-Bahn S9 is a slower but frequent option for the eastern city. A taxi or ride-hailing car takes roughly 30 to 45 minutes and costs around 50 to 60 euros. All trains leave from the station Flughafen BER - Terminal 1-2, directly under the terminals."
+      },
+      {
+        "q": "What ticket do I need for the train from BER airport?",
+        "a": "BER is in fare zone C, so you need a Berlin ABC ticket for any train to or from the airport. In 2026 an ABC single costs 5.00 euros. Buy it from a BVG or VBB ticket machine or the app before you board, and if it is a paper ticket, stamp it in the small validator on the platform. The same ABC ticket covers your onward journey within its time limit."
+      }
+    ]
   }
 }
