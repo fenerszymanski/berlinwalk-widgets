@@ -1800,5 +1800,18 @@
     "png160": "tools-home/icons/how-many-days-in-berlin-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/how-many-days-in-berlin-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_40b85d0571b640688e879bf73f466b05~mv2.png"
+  },
+  {
+    "slug": "halal-food-in-berlin",
+    "title": "Berlin Halal Check",
+    "category": "Discovery",
+    "source": "chatgpt-browser-imagegen-20260717",
+    "generatedAt": "2026-07-17",
+    "promptFile": "tools-home/icons/_src/daily-blog-halal-food-icon-20260717-prompt.md",
+    "sourceImage": "tools-home/icons/_src/daily-blog-halal-food-icon-20260717-source.png",
+    "png512": "tools-home/icons/halal-food-in-berlin.png",
+    "png160": "tools-home/icons/halal-food-in-berlin-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/halal-food-in-berlin-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_4d20deea0fe543b09c2b4956f638c2d1~mv2.png"
   }
 ]
