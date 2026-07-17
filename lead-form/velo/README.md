@@ -98,7 +98,13 @@ Subscriptions successfully through:
 POST https://www.wixapis.com/email-marketing/v1/email-subscriptions/query
 ```
 
-To make the live Velo endpoint subscribe opted-in leads:
+The legacy Survival Guide form does not capture a versioned marketing consent.
+Its requested guide email may remain transactional, but it must not subscribe
+the address to Email Marketing. The helper therefore defaults to
+`consent_required` and changes nothing unless the caller passes an explicit
+second argument after a real consent control was accepted.
+
+For a future consented form only:
 
 1. Add the same Wix REST API key to Wix Secrets Manager under `WIX_API_KEY`.
 2. Add `emailMarketingSubscription.js` as
@@ -113,7 +119,7 @@ import { subscribeEmailMarketing } from 'backend/emailMarketingSubscription';
    has been created/labelled, run the helper without blocking the PDF unlock:
 
 ```js
-const subscriptionDebug = await subscribeEmailMarketing(email);
+const subscriptionDebug = await subscribeEmailMarketing(email, payload.marketingConsent === true);
 ```
 
 5. Keep returning the existing `success: true` response. If you include
@@ -140,7 +146,9 @@ The script defaults to a dry run and skips contacts currently marked
 
 1. Test the live form with a fresh email address.
 2. Confirm the subscriber welcome email and owner notification arrive quickly.
-3. Confirm `subscriptionDebug.ok === true` or equivalent in the JSON response.
+3. For the retired legacy form, confirm `subscriptionDebug.reason === 'consent_required'`
+   and that the existing subscription state is unchanged. For a future form
+   with explicit consent, confirm `subscriptionDebug.ok === true`.
 4. Keep these two old label-trigger automations inactive to avoid duplicate sends:
    - `Berlin Survival Map Welcome Email - v2`
    - `Berlin Survival Map - Owner Notification`

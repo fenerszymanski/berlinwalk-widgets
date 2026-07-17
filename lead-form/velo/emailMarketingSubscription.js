@@ -37,13 +37,27 @@ function compactApiMessage(parsed, fallbackText) {
   return cleanText(fallbackText).slice(0, 500);
 }
 
-export async function subscribeEmailMarketing(email) {
+export async function subscribeEmailMarketing(email, consentGranted = false) {
   const normalizedEmail = cleanEmail(email);
 
   if (!normalizedEmail || !isLikelyEmail(normalizedEmail)) {
     return {
       ok: false,
       reason: 'invalid_email'
+    };
+  }
+
+  // The legacy Survival Guide form never captured a versioned marketing
+  // consent. Delivering the requested guide can remain transactional, but the
+  // endpoint must not silently add that address to Email Marketing. Callers
+  // must pass an explicit boolean only after a real consent control was shown
+  // and accepted.
+  if (consentGranted !== true) {
+    return {
+      ok: false,
+      reason: 'consent_required',
+      email: normalizedEmail,
+      subscriptionStatus: 'UNCHANGED'
     };
   }
 

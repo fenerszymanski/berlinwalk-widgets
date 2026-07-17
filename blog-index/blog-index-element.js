@@ -830,8 +830,7 @@ class BWBlogIndexElement extends HTMLElement {
 
         .bw-blog-index .bw-popular-signup {
           display: grid;
-          gap: 72px;
-          grid-template-columns: minmax(0, 1fr) minmax(300px, 0.38fr);
+          grid-template-columns: minmax(0, 1fr);
           margin: 58px 0 44px;
         }
 
@@ -883,62 +882,6 @@ class BWBlogIndexElement extends HTMLElement {
           font-weight: 500;
           line-height: 1.18;
           overflow-wrap: anywhere;
-        }
-
-        .bw-blog-index .bw-newsletter-box {
-          align-self: start;
-          border: 2px dotted var(--text);
-          padding: 28px 30px;
-        }
-
-        .bw-blog-index .bw-newsletter-box p {
-          color: var(--text);
-          font-family: "Courier New", Courier, monospace;
-          font-size: 17px;
-          line-height: 1.32;
-          margin-bottom: 22px;
-        }
-
-        .bw-blog-index .bw-newsletter-box strong {
-          font-family: Montserrat, Arial, sans-serif;
-          font-weight: 900;
-        }
-
-        .bw-blog-index .bw-newsletter-form {
-          display: grid;
-          gap: 14px;
-        }
-
-        .bw-blog-index .bw-newsletter-form input {
-          background: #FFFFFF;
-          border: 1px solid var(--text);
-          border-radius: 0;
-          color: var(--text);
-          font: 500 17px/1 Montserrat, Arial, sans-serif;
-          min-height: 54px;
-          padding: 0 16px;
-          width: 100%;
-        }
-
-        .bw-blog-index .bw-newsletter-form button {
-          background: var(--yellow);
-          border: 0;
-          border-radius: 0;
-          color: var(--text);
-          cursor: pointer;
-          font: 900 14px/1 Montserrat, Arial, sans-serif;
-          justify-self: start;
-          min-height: 52px;
-          padding: 0 28px;
-        }
-
-        .bw-blog-index .bw-newsletter-status {
-          color: var(--muted);
-          font-size: 12px;
-          font-weight: 800;
-          line-height: 1.45;
-          margin: 0;
-          min-height: 18px;
         }
 
         .bw-blog-index .bw-feature-section {
@@ -1522,7 +1465,7 @@ class BWBlogIndexElement extends HTMLElement {
   _renderPopularSignup() {
     const posts = this._popularPosts();
     return `
-      <section class="bw-popular-signup" aria-label="Popular Berlin guides and newsletter signup">
+      <section class="bw-popular-signup" aria-label="Popular Berlin guides">
         <div>
           <h2>Most Popular</h2>
           <ol class="bw-popular-list">
@@ -1536,17 +1479,6 @@ class BWBlogIndexElement extends HTMLElement {
             `).join('')}
           </ol>
         </div>
-        <aside class="bw-newsletter-box" aria-label="Berlin Survival Guide signup">
-          <p><strong>Berlin Survival Guide</strong> Get the practical first-day guide: tickets, toilets, luggage, Sundays, cash, and the simple route that makes Berlin easier.</p>
-          <form class="bw-newsletter-form" data-bw-newsletter-form>
-            <label>
-              <span class="bw-visually-hidden">Email address</span>
-              <input type="email" name="email" placeholder="Enter your email" autocomplete="email" required>
-            </label>
-            <button type="submit">Sign Up</button>
-            <span class="bw-newsletter-status" data-bw-newsletter-status aria-live="polite"></span>
-          </form>
-        </aside>
       </section>
     `;
   }
@@ -1823,52 +1755,6 @@ class BWBlogIndexElement extends HTMLElement {
       });
     });
 
-    this.querySelectorAll('[data-bw-newsletter-form]').forEach((form) => {
-      form.addEventListener('submit', (event) => this._submitNewsletter(event, form));
-    });
-  }
-
-  async _submitNewsletter(event, form) {
-    event.preventDefault();
-    const input = form.querySelector('input[type="email"]');
-    const button = form.querySelector('button');
-    const status = form.querySelector('[data-bw-newsletter-status]');
-    const email = (input?.value || '').trim();
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      if (status) status.textContent = 'Please enter a valid email address.';
-      input?.focus();
-      return;
-    }
-
-    if (button) {
-      button.disabled = true;
-      button.textContent = 'Sending...';
-    }
-    if (status) status.textContent = '';
-
-    try {
-      const response = await fetch('https://www.berlinwalk.com/_functions/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email,
-          source: 'blog-index-newsletter',
-          offer: 'berlin-survival-map',
-          page: window.location.href,
-        }),
-      });
-      const data = await response.json().catch(() => ({}));
-      if (!response.ok || !data.success) throw new Error(data.error || 'subscribe_failed');
-      form.reset();
-      if (status) status.textContent = 'Saved. Check your inbox for the Berlin Survival Guide.';
-    } catch {
-      if (status) status.textContent = 'Something went wrong. Please try again.';
-    } finally {
-      if (button) {
-        button.disabled = false;
-        button.textContent = 'Sign Up';
-      }
-    }
   }
 
   _filteredPosts() {

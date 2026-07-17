@@ -33,14 +33,30 @@
   var LOG = '[BW blog booking]';
   var MAX_REINJECTS = 8;
   var REINJECT_DEBOUNCE_MS = 400;
+  var HISTORY_ELEMENT_TAG = 'bw-history-lead-magnet';
+  var HISTORY_MARKER = 'data-bw-history-lead';
+  var HISTORY_EXPERIMENT_ID = 'history_story_lead_v1';
+  var HISTORY_STORAGE_KEY = 'bwHistoryLeadExperiment.v1';
+  var HISTORY_API_BASE = window.BW_HISTORY_LEAD_API_BASE || 'https://app.berlinwalk.com/api/history-lead';
+  var HISTORY_ELEMENT_URL = window.BW_HISTORY_LEAD_ELEMENT_URL || 'https://fenerszymanski.github.io/berlinwalk-widgets/history-lead-magnet/history-lead-magnet-element.js';
+  var HISTORY_RAMP_SLUG = 'why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point';
+  var HISTORY_PILOT_SLUG = 'why-berlin-s-streets-are-so-wide-it-wasn-t-always-the-plan';
+  var HISTORY_EXPANSION_SLUG = 'alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos';
 
   var injections = 0;
   var reinjectTimer = null;
   var observer = null;
   var lastPath = location.pathname;
+  var historyElementPromise = null;
+  var historyInsertionPending = false;
+  var historyMemoryBucket = null;
+  var pendingHistoryViews = {};
+  var sentHistoryViews = {};
 
   function isPostPage() {
-    return location.pathname.indexOf('/post/') === 0;
+    return location.pathname.indexOf('/post/') === 0 ||
+      window.BW_ENABLE_BLOG_BOOKING === true ||
+      /[?&]bwBlogBooking=1(?:&|$)/.test(location.search);
   }
 
   function isVisible(el) {
@@ -383,20 +399,355 @@
     return wrapper;
   }
 
+  /* The history lead experiment defaults to QA-only. A Wix Custom Code config
+   * must explicitly set stage to "ramp", "pilot", or "expanded" before normal
+   * visitors can receive the lead-magnet variant. This keeps a code deploy from
+   * starting the experiment before the API and approved photos are ready. */
+  function historyConfig() {
+    var override = window.BW_HISTORY_LEAD_EXPERIMENT_CONFIG || {};
+    return {
+      enabled: override.enabled !== false,
+      stage: String(override.stage || 'qa').toLowerCase(),
+      safetyStartedAt: String(override.safetyStartedAt || ''),
+      rampWeight: Number.isFinite(Number(override.rampWeight)) ? Number(override.rampWeight) : 0.10,
+      pilotWeight: Number.isFinite(Number(override.pilotWeight)) ? Number(override.pilotWeight) : 0.50,
+      expandedWeight: Number.isFinite(Number(override.expandedWeight)) ? Number(override.expandedWeight) : 0.50,
+      enableExpansion: override.enableExpansion === true
+    };
+  }
+
+  function historyEffectiveStage(config) {
+    if (config.stage !== 'safety') return config.stage;
+    var startedAt = new Date(config.safetyStartedAt).getTime();
+    if (!Number.isFinite(startedAt) || startedAt > Date.now()) return 'qa';
+    return Date.now() - startedAt >= 24 * 60 * 60 * 1000 ? 'pilot' : 'ramp';
+  }
+
+  function historyQueryChoice() {
+    var match = String(location.search || '').match(/[?&]bwHistoryLead=([^&]+)/);
+    if (!match) return '';
+    var value = decodeURIComponent(match[1] || '').toLowerCase();
+    if (value === '0' || value === 'off') return 'off';
+    if (value === 'control') return 'control';
+    if (value === '1' || value === 'on' || value === 'variant') return 'variant';
+    return '';
+  }
+
+  function historySlug() {
+    var parts = String(location.pathname || '').replace(/\/+$/, '').split('/');
+    try { return decodeURIComponent(parts[parts.length - 1] || ''); }
+    catch (err) { return parts[parts.length - 1] || ''; }
+  }
+
+  function currentConsentPolicy() {
+    try {
+      var manager = window.consentPolicyManager;
+      var current = manager && typeof manager.getCurrentConsentPolicy === 'function'
+        ? manager.getCurrentConsentPolicy()
+        : null;
+      current = current && (current.policy || current);
+      if (current && Object.keys(current).length) return current;
+    } catch (err) {}
+    try {
+      var match = document.cookie.match(/(?:^|;\s*)consent-policy=([^;]+)/);
+      return match ? JSON.parse(decodeURIComponent(match[1])) : {};
+    } catch (err) {
+      return {};
+    }
+  }
+
+  function historyAnalyticsAllowed() {
+    var policy = currentConsentPolicy();
+    return policy.analytics === true || policy.anl === true || policy.anl === 1;
+  }
+
+  function randomHistoryBucket() {
+    try {
+      if (window.crypto && typeof window.crypto.getRandomValues === 'function') {
+        var values = new Uint32Array(1);
+        window.crypto.getRandomValues(values);
+        return values[0] / 4294967296;
+      }
+    } catch (err) {}
+    return Math.random();
+  }
+
+  function readStoredHistoryBucket() {
+    if (!historyAnalyticsAllowed()) return null;
+    try {
+      var raw = window.localStorage.getItem(HISTORY_STORAGE_KEY);
+      var parsed = raw ? JSON.parse(raw) : null;
+      if (parsed && parsed.experiment === HISTORY_EXPERIMENT_ID && typeof parsed.bucket === 'number' && parsed.bucket >= 0 && parsed.bucket < 1) {
+        return parsed.bucket;
+      }
+    } catch (err) {}
+    return null;
+  }
+
+  function rememberHistoryBucket() {
+    if (!historyAnalyticsAllowed() || historyMemoryBucket === null) return;
+    try {
+      window.localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify({
+        experiment: HISTORY_EXPERIMENT_ID,
+        bucket: historyMemoryBucket,
+        assignedAt: new Date().toISOString()
+      }));
+    } catch (err) {}
+  }
+
+  function historyBucket() {
+    if (historyMemoryBucket !== null) {
+      rememberHistoryBucket();
+      return historyMemoryBucket;
+    }
+    var stored = readStoredHistoryBucket();
+    historyMemoryBucket = stored === null ? randomHistoryBucket() : stored;
+    rememberHistoryBucket();
+    return historyMemoryBucket;
+  }
+
+  function historyStageEligibility(stage, slug) {
+    if (stage === 'ramp') return slug === HISTORY_RAMP_SLUG;
+    if (stage === 'pilot') return slug === HISTORY_RAMP_SLUG || slug === HISTORY_PILOT_SLUG;
+    if (stage === 'expanded') return slug === HISTORY_RAMP_SLUG || slug === HISTORY_PILOT_SLUG || slug === HISTORY_EXPANSION_SLUG;
+    return false;
+  }
+
+  function historyStageWeight(config, stage) {
+    stage = stage || historyEffectiveStage(config);
+    if (stage === 'ramp') return Math.max(0, Math.min(1, config.rampWeight));
+    if (stage === 'pilot') return Math.max(0, Math.min(1, config.pilotWeight));
+    if (stage === 'expanded' && config.enableExpansion) return Math.max(0, Math.min(1, config.expandedWeight));
+    return 0;
+  }
+
+  function historyAssignment() {
+    var config = historyConfig();
+    var stage = historyEffectiveStage(config);
+    var choice = historyQueryChoice();
+    var slug = historySlug();
+    var globallyDisabled = window.BW_DISABLE_HISTORY_LEAD === true || choice === 'off' || !config.enabled;
+    if (globallyDisabled) return { variant: 'control', inExperiment: false, qa: false, stage: stage };
+    if (choice === 'variant') return { variant: 'variant', inExperiment: true, qa: true, stage: 'qa' };
+    if (choice === 'control') return { variant: 'control', inExperiment: true, qa: true, stage: 'qa' };
+    if (stage === 'expanded' && !config.enableExpansion) stage = 'pilot';
+    var eligible = historyStageEligibility(stage, slug);
+    if (!eligible) return { variant: 'control', inExperiment: false, qa: false, stage: stage };
+    return {
+      variant: historyBucket() < historyStageWeight(config, stage) ? 'variant' : 'control',
+      inExperiment: true,
+      qa: false,
+      stage: stage
+    };
+  }
+
+  function safeHistoryUrl(value) {
+    try {
+      var url = new URL(String(value || ''), window.location.href);
+      if (url.protocol !== 'https:' && url.protocol !== 'http:') return '';
+      return url.origin + url.pathname;
+    } catch (err) {
+      return '';
+    }
+  }
+
+  function cleanHistoryAttribution(value) {
+    var cleaned = String(value || '').trim().slice(0, 180);
+    return /@|%40/i.test(cleaned) ? '' : cleaned;
+  }
+
+  function historyUtm() {
+    var params = new URLSearchParams(window.location.search || '');
+    return {
+      source: cleanHistoryAttribution(params.get('utm_source')),
+      medium: cleanHistoryAttribution(params.get('utm_medium')),
+      campaign: cleanHistoryAttribution(params.get('utm_campaign')),
+      content: cleanHistoryAttribution(params.get('utm_content')),
+      term: cleanHistoryAttribution(params.get('utm_term')),
+      id: cleanHistoryAttribution(params.get('utm_id'))
+    };
+  }
+
+  function historyEventUrl() {
+    var url = new URL(HISTORY_API_BASE, window.location.href);
+    url.searchParams.set('action', 'event');
+    return url.toString();
+  }
+
+  function sendHistoryEvent(eventName, variant, qa) {
+    if (!historyAnalyticsAllowed()) return false;
+    var body = {
+      eventName: eventName,
+      occurredAt: new Date().toISOString(),
+      analyticsConsent: true,
+      sourceSlug: historySlug(),
+      pageUrl: safeHistoryUrl(window.location.href),
+      referrer: safeHistoryUrl(document.referrer),
+      experiment: HISTORY_EXPERIMENT_ID,
+      variant: variant,
+      storyId: '',
+      utm: historyUtm(),
+      device: {
+        width: Number(window.innerWidth || 0),
+        height: Number(window.innerHeight || 0)
+      },
+      qa: Boolean(qa)
+    };
+    try {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: eventName, experiment: HISTORY_EXPERIMENT_ID, variant: variant });
+      if (typeof window.gtag === 'function') window.gtag('event', eventName, { experiment: HISTORY_EXPERIMENT_ID, variant: variant });
+      fetch(historyEventUrl(), {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        keepalive: true,
+        body: JSON.stringify(body)
+      }).catch(function () {});
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  function queueHistoryExperimentView(assignment) {
+    if (!assignment.inExperiment) return;
+    var key = location.pathname + ':' + assignment.variant + ':' + (assignment.qa ? 'qa' : 'live');
+    if (sentHistoryViews[key]) return;
+    pendingHistoryViews[key] = assignment;
+    flushHistoryExperimentViews();
+  }
+
+  function flushHistoryExperimentViews() {
+    rememberHistoryBucket();
+    if (!historyAnalyticsAllowed()) return;
+    Object.keys(pendingHistoryViews).forEach(function (key) {
+      var assignment = pendingHistoryViews[key];
+      if (sendHistoryEvent('bw_history_lead_experiment_view', assignment.variant, assignment.qa)) {
+        sentHistoryViews[key] = true;
+        delete pendingHistoryViews[key];
+      }
+    });
+  }
+
+  function bindControlHistoryTracking(card, assignment) {
+    if (!assignment.inExperiment) return;
+    card.addEventListener('click', function (event) {
+      var target = event.target.closest('[data-bw-booking-cta],[data-bw-day-index],[data-bw-slot-index],.bw-blog-booking-more');
+      if (target) sendHistoryEvent('bw_history_control_booking_click', 'control', assignment.qa);
+    });
+  }
+
+  function loadHistoryElement() {
+    if (window.customElements && customElements.get(HISTORY_ELEMENT_TAG)) return Promise.resolve();
+    if (historyElementPromise) return historyElementPromise;
+    historyElementPromise = new Promise(function (resolve, reject) {
+      var done = false;
+      var timeout = setTimeout(function () {
+        if (done) return;
+        done = true;
+        reject(new Error('History lead element timed out'));
+      }, 7000);
+
+      function finish() {
+        if (done) return;
+        if (!window.customElements || !customElements.get(HISTORY_ELEMENT_TAG)) return;
+        done = true;
+        clearTimeout(timeout);
+        resolve();
+      }
+
+      var existing = document.querySelector('script[data-bw-history-lead-element]');
+      if (existing) {
+        if (window.customElements && typeof customElements.whenDefined === 'function') customElements.whenDefined(HISTORY_ELEMENT_TAG).then(finish);
+        existing.addEventListener('error', function () {
+          if (done) return;
+          done = true;
+          clearTimeout(timeout);
+          reject(new Error('History lead element failed to load'));
+        }, { once: true });
+        return;
+      }
+
+      var script = document.createElement('script');
+      script.src = HISTORY_ELEMENT_URL;
+      script.async = true;
+      script.setAttribute('data-bw-history-lead-element', '1');
+      script.onload = function () {
+        finish();
+        if (!done && window.customElements && typeof customElements.whenDefined === 'function') customElements.whenDefined(HISTORY_ELEMENT_TAG).then(finish);
+      };
+      script.onerror = function () {
+        if (done) return;
+        done = true;
+        clearTimeout(timeout);
+        reject(new Error('History lead element failed to load'));
+      };
+      document.head.appendChild(script);
+    });
+    return historyElementPromise;
+  }
+
+  function currentInsertionAnchor() {
+    var body = findPostBody();
+    return body ? findInsertionAnchor(body) : null;
+  }
+
+  function insertControl(anchor, assignment) {
+    var card = buildBookingCard();
+    bindControlHistoryTracking(card, assignment);
+    anchor.parentNode.insertBefore(card, anchor.nextSibling);
+    injections += 1;
+    queueHistoryExperimentView(assignment);
+    console.log(LOG, 'injected attempt', injections, assignment.inExperiment ? 'experiment control' : 'booking card');
+    return true;
+  }
+
+  function insertHistoryVariant(assignment) {
+    if (historyInsertionPending) return true;
+    historyInsertionPending = true;
+    var requestedPath = location.pathname;
+    loadHistoryElement().then(function () {
+      historyInsertionPending = false;
+      if (location.pathname !== requestedPath || document.querySelector('[' + MARKER + ']')) return;
+      var anchor = currentInsertionAnchor();
+      if (!anchor) return;
+      var element = document.createElement(HISTORY_ELEMENT_TAG);
+      element.setAttribute(MARKER, '1');
+      element.setAttribute(HISTORY_MARKER, '1');
+      element.setAttribute('mode', 'inline');
+      element.setAttribute('experiment', HISTORY_EXPERIMENT_ID);
+      element.setAttribute('variant', 'variant');
+      element.setAttribute('api-base', HISTORY_API_BASE);
+      if (assignment.qa) element.setAttribute('qa', 'true');
+      anchor.parentNode.insertBefore(element, anchor.nextSibling);
+      injections += 1;
+      queueHistoryExperimentView(assignment);
+      console.log(LOG, 'injected attempt', injections, 'experiment variant');
+    }).catch(function (error) {
+      historyInsertionPending = false;
+      if (location.pathname !== requestedPath || document.querySelector('[' + MARKER + ']')) return;
+      var anchor = currentInsertionAnchor();
+      if (!anchor) return;
+      insertControl(anchor, { variant: 'control', inExperiment: false, qa: assignment.qa, stage: assignment.stage });
+      console.warn(LOG, 'history variant unavailable; restored booking control', error && error.message || error);
+    });
+    return true;
+  }
+
   function inject() {
     if (!isPostPage()) return false;
     if (document.querySelector('[' + MARKER + ']')) return false;
     if (injections >= MAX_REINJECTS) return false;
+    if (historyInsertionPending) return false;
 
     var body = findPostBody();
     if (!body) return false;
     var anchor = findInsertionAnchor(body);
     if (!anchor) return false;
 
-    anchor.parentNode.insertBefore(buildBookingCard(), anchor.nextSibling);
-    injections += 1;
-    console.log(LOG, 'injected attempt', injections);
-    return true;
+    var assignment = historyAssignment();
+    if (assignment.variant === 'variant') return insertHistoryVariant(assignment);
+    return insertControl(anchor, assignment);
   }
 
   function scheduleInject() {
@@ -415,6 +766,7 @@
 
   function bootForCurrentPage() {
     injections = 0;
+    historyInsertionPending = false;
     setTimeout(function () {
       inject();
       startObserving();
@@ -430,6 +782,20 @@
     document.addEventListener('DOMContentLoaded', bootForCurrentPage);
   } else {
     bootForCurrentPage();
+  }
+
+  ['consentPolicyChanged', 'consentPolicyInitialized', 'ucConsentEvent'].forEach(function (name) {
+    window.addEventListener(name, flushHistoryExperimentViews);
+    document.addEventListener(name, flushHistoryExperimentViews);
+  });
+
+  if (window.BW_HISTORY_LEAD_TEST_HOOKS === true) {
+    window.__bwHistoryLeadTestHooks = {
+      assignment: historyAssignment,
+      effectiveStage: function () { return historyEffectiveStage(historyConfig()); },
+      resetBucket: function () { historyMemoryBucket = null; },
+      storageKey: HISTORY_STORAGE_KEY
+    };
   }
 
   setInterval(function () {

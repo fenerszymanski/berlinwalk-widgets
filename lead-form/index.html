@@ -3,645 +3,99 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BerlinWalk Berlin First-Day Survival Guide Signup</title>
-  <link rel="stylesheet" href="../css/brand.css">
+  <meta name="robots" content="noindex,follow">
+  <title>Berlin First-Day Survival Guide Retired | BerlinWalk</title>
   <style>
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      background: transparent;
-    }
-
-    body {
+    :root {
+      color-scheme: light;
       font-family: Montserrat, Arial, sans-serif;
-    }
-
-    .bw-signup {
-      --bw-green: #1B5E20;
-      --bw-green-dark: #164a1a;
-      --bw-yellow: #FFE600;
-      --bw-lime: #7CB342;
-      --bw-border: #DCE8C8;
-      --bw-text: #212121;
-      --bw-muted: #4E5A4E;
-      --bw-white: #FFFFFF;
-      --bw-error: #C62828;
-
-      width: 100%;
-      max-width: 760px;
-      margin: 0 auto;
-      color: var(--bw-text);
+      color: #17351d;
       background: transparent;
     }
 
-    .bw-signup,
-    .bw-signup * {
-      box-sizing: border-box;
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: transparent; }
+
+    .retired {
+      width: min(100%, 720px);
+      margin: 0 auto;
+      padding: 28px;
+      border: 1px solid #dce8c8;
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 12px 32px rgba(27, 94, 32, .08);
     }
 
-    .bw-wrap {
-      border: 1px solid var(--bw-border);
-      border-radius: 12px;
-      background: var(--bw-white);
-      overflow: hidden;
-      box-shadow: 0 10px 28px rgba(27, 94, 32, 0.08);
-      display: grid;
-      grid-template-columns: 192px minmax(0, 1fr);
-      min-height: 244px;
-    }
-
-    .bw-visual {
-      background: #FAFAF5;
-      border-right: 1px solid var(--bw-border);
-      padding: 18px 16px;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 210px;
-      isolation: isolate;
-    }
-
-    .bw-visual::before {
-      content: "";
-      position: absolute;
-      inset: 0 auto 0 0;
-      width: 42px;
-      background: var(--bw-green);
-      z-index: 0;
-    }
-
-    .bw-visual::after {
-      content: "";
-      position: absolute;
-      left: 19px;
-      top: 50px;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--bw-yellow);
-      box-shadow:
-        0 36px 0 var(--bw-yellow),
-        0 72px 0 var(--bw-yellow),
-        0 108px 0 var(--bw-yellow);
-      z-index: 1;
-    }
-
-    .bw-pdf-wrap {
-      position: relative;
-      z-index: 2;
-      margin-left: 18px;
-    }
-
-    .bw-pdf-mock {
-      width: 128px;
-      height: 181px;
-      background: var(--bw-white) url("assets/berlin-first-day-survival-guide-cover.jpg") center/cover no-repeat;
-      border: 1px solid rgba(27, 94, 32, 0.16);
-      border-radius: 6px;
-      box-shadow: 0 12px 26px rgba(27, 94, 32, 0.18);
-      position: relative;
-      transform: rotate(-2deg);
-      z-index: 2;
-    }
-
-    .bw-pdf-mock::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: 5px;
-      box-shadow: inset 0 0 0 1px rgba(27, 94, 32, 0.18);
-      pointer-events: none;
-    }
-
-    .bw-pdf-header {
-      display: none !important;
-      background: var(--bw-green);
-      height: 30px;
-      border-radius: 6px 6px 0 0;
-      padding: 6px 8px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 3px;
-    }
-
-    .bw-pdf-kicker {
-      background: var(--bw-yellow);
-      width: 50%;
-      height: 4px;
-      border-radius: 2px;
-    }
-
-    .bw-pdf-title {
-      background: var(--bw-white);
-      width: 80%;
-      height: 6px;
-      border-radius: 2px;
-    }
-
-    .bw-pdf-lines {
-      display: none !important;
-      padding: 10px 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .bw-pdf-lines span {
-      height: 3px;
-      background: #E8EEDC;
-      border-radius: 2px;
-    }
-
-    .bw-pdf-lines span:nth-child(1) { width: 90%; }
-    .bw-pdf-lines span:nth-child(2) { width: 75%; }
-    .bw-pdf-lines span:nth-child(3) { width: 85%; }
-    .bw-pdf-lines span:nth-child(4) { width: 60%; }
-    .bw-pdf-lines span:nth-child(5) { width: 80%; }
-    .bw-pdf-lines span:nth-child(6) { width: 70%; }
-    .bw-pdf-lines span:nth-child(7) { width: 65%; }
-
-    .bw-pdf-badge {
-      position: absolute;
-      top: -13px;
-      right: -18px;
-      background: var(--bw-yellow);
-      color: var(--bw-green);
-      font-size: 9px;
-      font-weight: 800;
-      letter-spacing: 1.2px;
-      padding: 6px 10px;
-      border-radius: 20px;
-      transform: rotate(4deg);
-      box-shadow: 0 5px 14px rgba(27, 94, 32, 0.2);
-      z-index: 3;
-      white-space: nowrap;
-    }
-
-    .bw-form {
-      padding: 24px 28px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .bw-kicker {
-      color: var(--bw-green);
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 2.4px;
-      text-transform: uppercase;
-      margin-bottom: 9px;
-    }
-
-    .bw-title {
-      margin: 0 0 9px;
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--bw-text);
-      line-height: 1.22;
-    }
-
-    .bw-desc {
-      margin: 0 0 13px;
-      font-size: 13px;
-      color: var(--bw-muted);
-      line-height: 1.5;
-    }
-
-    .bw-highlights {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      margin: 0 0 15px;
-    }
-
-    .bw-highlights span {
-      display: inline-flex;
-      align-items: center;
-      min-height: 24px;
-      border: 1px solid rgba(124, 179, 66, 0.32);
-      border-radius: 999px;
-      background: #FAFAF5;
-      color: var(--bw-green);
-      font-size: 10.5px;
-      font-weight: 800;
-      line-height: 1;
-      padding: 6px 9px;
-      white-space: nowrap;
-    }
-
-    .bw-input-row {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 8px;
-      margin-bottom: 9px;
-    }
-
-    .bw-input {
-      flex: 1;
-      min-width: 0;
-      padding: 13px 14px;
-      font-size: 13.5px;
-      font-family: inherit;
-      border: 1.5px solid var(--bw-border);
-      border-radius: 8px;
-      outline: none;
-      background: #FAFAF5;
-      color: var(--bw-text);
-    }
-
-    .bw-input:focus {
-      border-color: var(--bw-lime);
-      background: var(--bw-white);
-    }
-
-    .bw-input::placeholder {
-      color: #9BA59B;
-    }
-
-    .bw-submit {
-      padding: 13px 17px;
-      background: var(--bw-green);
-      color: var(--bw-yellow);
-      font-family: inherit;
-      font-size: 13.5px;
-      font-weight: 800;
-      letter-spacing: 0.3px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .bw-submit:hover {
-      background: var(--bw-green-dark);
-    }
-
-    .bw-submit:active {
-      transform: scale(0.97);
-    }
-
-    .bw-submit:disabled {
-      opacity: 0.6;
-      cursor: wait;
-    }
-
-    .bw-privacy {
-      font-size: 11px;
-      color: var(--bw-muted);
-      line-height: 1.45;
-    }
-
-    .bw-message {
-      padding: 10px 14px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      margin-top: 10px;
-      display: none;
-      line-height: 1.45;
-    }
-
-    .bw-message.show {
-      display: block;
-    }
-
-    .bw-message.success {
-      background: #EAF3DE;
-      color: #27500A;
-      border: 1px solid #C8D8B0;
-    }
-
-    .bw-message.error {
-      background: #FCEBEB;
-      color: var(--bw-error);
-      border: 1px solid #F5C6C6;
-    }
-
-    .bw-signup.is-submitted .bw-input-row,
-    .bw-signup.is-submitted .bw-privacy {
-      display: none;
-    }
-
-    .bw-success-detail {
+    .eyebrow {
+      margin: 0 0 8px;
+      color: #1b5e20;
       font-size: 12px;
-      font-weight: 500;
-      margin-top: 4px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
     }
 
-    .bw-download {
+    h1 {
+      margin: 0;
+      font-size: clamp(24px, 5vw, 38px);
+      line-height: 1.08;
+    }
+
+    p {
+      margin: 14px 0 0;
+      color: #465548;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .cta {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 100%;
-      margin-top: 10px;
-      padding: 12px 14px;
-      border-radius: 10px;
-      background: var(--bw-green);
-      color: var(--bw-yellow);
-      font-size: 13px;
+      min-height: 48px;
+      margin-top: 20px;
+      padding: 12px 20px;
+      border: 2px solid #ffe600;
+      border-radius: 999px;
+      background: #ffe600;
+      color: #102414;
+      font-size: 15px;
       font-weight: 800;
       text-decoration: none;
     }
 
-    .bw-download:hover,
-    .bw-download:focus-visible {
-      background: var(--bw-green-dark);
-      outline: 2px solid var(--bw-yellow);
-      outline-offset: 2px;
+    .cta:hover,
+    .cta:focus-visible {
+      border-color: #1b5e20;
+      color: #102414;
+      outline: none;
     }
 
-    .bw-next-offer {
-      display: block;
-      margin-top: 12px;
-      padding-top: 10px;
-      border-top: 1px solid #C8D8B0;
-      font-size: 12px;
-      font-weight: 500;
-      line-height: 1.5;
-    }
-
-    .bw-next-offer a {
-      color: #27500A;
-      font-weight: 800;
-      text-decoration: underline;
-    }
-
-    @media (max-width: 600px) {
-      .bw-signup {
-        max-width: 100%;
-      }
-
-      .bw-wrap {
-        grid-template-columns: 1fr;
-        min-height: 0;
-      }
-
-      .bw-visual {
-        display: none;
-      }
-
-      .bw-form {
-        padding: 16px;
-      }
-
-      .bw-kicker {
-        font-size: 9px;
-        letter-spacing: 2px;
-        margin-bottom: 6px;
-      }
-
-      .bw-title {
-        font-size: 16px;
-        line-height: 1.18;
-        margin-bottom: 6px;
-      }
-
-      .bw-desc {
-        font-size: 12px;
-        line-height: 1.38;
-        margin-bottom: 10px;
-      }
-
-      .bw-highlights {
-        gap: 5px;
-        margin-bottom: 11px;
-      }
-
-      .bw-highlights span {
-        min-height: 21px;
-        font-size: 9.5px;
-        padding: 5px 7px;
-      }
-
-      .bw-input-row {
-        flex-direction: column;
-        display: flex;
-        gap: 7px;
-        margin-bottom: 7px;
-      }
-
-      .bw-input {
-        padding: 10px 12px;
-        font-size: 13px;
-      }
-
-      .bw-submit {
-        padding: 10px 12px;
-        font-size: 13px;
-      }
-
-      .bw-submit {
-        width: 100%;
-      }
-
-      .bw-privacy {
-        font-size: 10.5px;
-      }
-
-      .bw-message {
-        margin-top: 8px;
-        padding: 7px 9px;
-        font-size: 11.5px;
-        line-height: 1.3;
-      }
-
-      .bw-success-detail {
-        font-size: 11.5px;
-        margin-top: 2px;
-      }
+    @media (max-width: 520px) {
+      .retired { padding: 22px 18px; border-radius: 12px; }
+      .cta { width: 100%; }
     }
   </style>
 </head>
 <body>
-  <div class="bw-signup">
-    <div class="bw-wrap">
-      <div class="bw-visual" aria-hidden="true">
-        <div class="bw-pdf-wrap">
-          <div class="bw-pdf-mock">
-            <div class="bw-pdf-header">
-              <div class="bw-pdf-kicker"></div>
-              <div class="bw-pdf-title"></div>
-            </div>
-            <div class="bw-pdf-lines">
-              <span></span><span></span><span></span>
-              <span></span><span></span><span></span><span></span>
-            </div>
-          </div>
-          <div class="bw-pdf-badge">FREE PDF</div>
-        </div>
-      </div>
-
-      <div class="bw-form">
-        <div class="bw-kicker">First day in Berlin</div>
-        <h3 class="bw-title">Get the free<br>Berlin First-Day Survival Guide</h3>
-        <p class="bw-desc">Airport tickets, toilets, luggage, cash, Sundays, and the first walk that makes Berlin easier to understand.</p>
-        <div class="bw-highlights" aria-label="Guide includes">
-          <span>BER tickets</span>
-          <span>Sunday rules</span>
-          <span>Toilets + luggage</span>
-        </div>
-
-        <form class="bw-signup-form" novalidate>
-          <div class="bw-input-row">
-            <input type="email" class="bw-input" name="email" placeholder="your@email.com" required autocomplete="email" aria-label="Email address">
-            <button type="submit" class="bw-submit">Get the guide -&gt;</button>
-          </div>
-          <div class="bw-privacy">No spam, unsubscribe anytime.</div>
-          <div class="bw-message" role="status" aria-live="polite"></div>
-        </form>
-      </div>
-    </div>
-  </div>
+  <main class="retired">
+    <p class="eyebrow">BerlinWalk update</p>
+    <h1>This free guide has retired.</h1>
+    <p>I am replacing it with a smaller Berlin history experience built around real archival photographs and details you can still find in the city today.</p>
+    <a class="cta" href="https://www.berlinwalk.com/berlin-before-and-now?utm_source=berlinwalk&amp;utm_medium=legacy_lead_form&amp;utm_campaign=history_sampler_v1" target="_top" rel="noopener">Open Berlin Before &amp; Now</a>
+  </main>
 
   <script>
     (function () {
-      if (window.parent === window) return;
-      var lastReported = 0;
-      var pending = false;
-
-      function contentHeight() {
-        if (!document.body || !document.body.children.length) return 0;
-        var max = 0;
-        for (var i = 0; i < document.body.children.length; i++) {
-          var child = document.body.children[i];
-          var rect = child.getBoundingClientRect();
-          var styles = window.getComputedStyle ? window.getComputedStyle(child) : null;
-          var marginBottom = styles ? (parseFloat(styles.marginBottom) || 0) : 0;
-          max = Math.max(max, rect.bottom + marginBottom);
-        }
-        return Math.ceil(max);
+      function reportHeight() {
+        if (window.parent === window) return;
+        var height = Math.ceil(document.documentElement.scrollHeight || document.body.scrollHeight || 0);
+        if (height > 0) window.parent.postMessage({ type: 'bw-resize', height: height }, '*');
       }
-
-      function reportNow() {
-        var height = contentHeight();
-        if (height > 0 && Math.abs(height - lastReported) > 2) {
-          lastReported = height;
-          try {
-            window.parent.postMessage({ type: 'bw-resize', height: height }, '*');
-          } catch (err) {}
-        }
-      }
-
-      function report() {
-        if (pending) return;
-        pending = true;
-        (window.requestAnimationFrame || function (cb) { setTimeout(cb, 16); })(function () {
-          pending = false;
-          reportNow();
-        });
-      }
-
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', report);
-      } else {
-        report();
-      }
-      window.addEventListener('load', report);
-      if (typeof ResizeObserver !== 'undefined') {
-        try { new ResizeObserver(report).observe(document.body); } catch (err) {}
-      }
-      document.addEventListener('input', function () { setTimeout(report, 50); }, true);
-      document.addEventListener('change', function () { setTimeout(report, 50); }, true);
-      document.addEventListener('click', function () {
-        setTimeout(report, 50);
-        setTimeout(report, 250);
-      }, true);
-      setTimeout(report, 500);
-      setTimeout(report, 1500);
-    })();
-
-    (function () {
-      var API_URL = 'https://www.berlinwalk.com/_functions/subscribe';
-      var DOWNLOAD_URL = 'https://12ee5ea0-70a7-492f-8020-ffb27cbb630f.usrfiles.com/ugd/5a08a3_12853b807c6947f09135e339d6ea0a57.pdf';
-
-      var form = document.querySelector('.bw-signup-form');
-      var input = document.querySelector('.bw-input');
-      var btn = document.querySelector('.bw-submit');
-      var msg = document.querySelector('.bw-message');
-
-      if (!form || !input || !btn || !msg) return;
-
-      var params = new URLSearchParams(window.location.search);
-      var source = params.get('source') || 'survival-map-blog-post';
-
-      try {
-        var refUrl = (document.referrer || '').toLowerCase();
-        var match = refUrl.match(/\/post\/([^/?#]+)/);
-        if (match) {
-          source = 'post:' + match[1].slice(0, 60);
-        }
-      } catch (e) {}
-
-      function showMessage(type, html) {
-        msg.className = 'bw-message ' + type + ' show';
-        msg.innerHTML = html;
-      }
-
-      function validateEmail(value) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-      }
-
-      form.addEventListener('submit', async function (event) {
-        event.preventDefault();
-
-        var email = input.value.trim();
-        if (!validateEmail(email)) {
-          showMessage('error', 'Please enter a valid email address.');
-          input.focus();
-          return;
-        }
-
-        btn.disabled = true;
-        btn.textContent = 'Sending...';
-        msg.className = 'bw-message';
-
-        try {
-          var response = await fetch(API_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              email: email,
-              source: source,
-              offer: 'berlin-survival-map',
-              page: document.referrer || window.location.href
-            })
-          });
-
-          var data = await response.json();
-
-          btn.disabled = false;
-          btn.textContent = 'Get the guide ->';
-
-          if (response.ok && data.success) {
-            form.reset();
-            document.querySelector('.bw-signup').classList.add('is-submitted');
-
-            showMessage(
-              'success',
-              '<strong>You are in.</strong> Download the guide now.' +
-              '<a class="bw-download" href="' + DOWNLOAD_URL + '" target="_blank" rel="noopener">Download Berlin First-Day Guide</a>' +
-              '<span class="bw-next-offer">Want the rest of the trip planned too? Enter your dates and stay area, and I build your Berlin days area by area with weather and opening-day checks. The preview is free. ' +
-              '<a href="https://www.berlinwalk.com/berlin-trip-planner?utm_source=berlinwalk&utm_medium=lead_magnet&utm_campaign=trip_planner_leadmagnet_bridge&utm_content=leadform_thankyou" target="_top" rel="noopener">Build my Berlin plan</a></span>'
-            );
-          } else {
-            var errorMsg = data.error === 'invalid_email'
-              ? 'Please enter a valid email address.'
-              : 'Something went wrong. Please try again in a moment.';
-
-            showMessage('error', errorMsg);
-          }
-        } catch (err) {
-          btn.disabled = false;
-          btn.textContent = 'Get the guide ->';
-          showMessage('error', 'Connection error. Please try again.');
-          console.error('Subscribe fetch error:', err);
-        }
-      });
+      window.addEventListener('load', reportHeight);
+      window.addEventListener('resize', reportHeight);
+      if (typeof ResizeObserver !== 'undefined') new ResizeObserver(reportHeight).observe(document.body);
+      reportHeight();
     })();
   </script>
 </body>

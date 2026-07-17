@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>History lead experiment injection QA</title>
+  <style>
+    body{color:#212121;font-family:Georgia,serif;margin:0 auto;max-width:760px;padding:32px 18px}
+    article p{font-size:17px;line-height:1.7}
+  </style>
+</head>
+<body>
+  <article data-hook="post-content">
+    <h1>Test Berlin article</h1>
+    <p>This page exists only to verify the blog insertion slot locally.</p>
+    <h2>First section</h2>
+    <p>The first section has enough copy to behave like a Wix rich-content post.</p>
+    <p>A second paragraph keeps the post-body detector above its minimum.</p>
+    <h2>Second section</h2>
+    <p>The experiment card should appear immediately after this paragraph.</p>
+    <p>The rest of the article continues below the inserted card.</p>
+    <h2>Third section</h2>
+    <p>This is the final paragraph in the local test article.</p>
+  </article>
+  <script>
+    window.BW_ENABLE_BLOG_BOOKING = true;
+    window.BW_HISTORY_LEAD_ELEMENT_URL = /[?&]badElement=1(?:&|$)/.test(location.search)
+      ? './missing-history-lead-element.js'
+      : './history-lead-magnet-element.js';
+    window.BW_HISTORY_LEAD_API_BASE = 'http://localhost:3000/api/history-lead';
+  </script>
+  <script src="../js/lead-form-inject.js"></script>
+</body>
+</html>
