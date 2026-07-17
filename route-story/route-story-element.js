@@ -2,8 +2,9 @@ const BW_ROUTE_STORY_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walki
 const BW_ROUTE_STORY_MEETING_URL = 'https://www.berlinwalk.com/meeting-point';
 const BW_ROUTE_STORY_GUIDE_URL = 'https://www.berlinwalk.com/the-guide';
 const BW_ROUTE_STORY_AUDIO_URL = 'https://www.berlinwalk.com/tools/free-berlin-audio-tour';
-const BW_ROUTE_STORY_MAP_IMAGE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/route/assets/berlin-mitte-illustration.png';
-const BW_ROUTE_STORY_MAP_IMAGE_2X_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/route/assets/berlin-mitte-illustration@2x.png';
+const BW_ROUTE_STORY_MAP_IMAGE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/route/assets/berlin-mitte-illustration-960w.webp';
+const BW_ROUTE_STORY_MAP_IMAGE_720_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/route/assets/berlin-mitte-illustration-720w.webp';
+const BW_ROUTE_STORY_MAP_IMAGE_1200_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/route/assets/berlin-mitte-illustration-1200w.webp';
 const BW_ROUTE_STORY_HERO_IMAGE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/06-1600w.webp';
 const BW_ROUTE_STORY_HERO_FALLBACK_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/06-1600w.jpg';
 const BW_ROUTE_STORY_DOM_IMAGE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/07-1200w.webp';
@@ -14,7 +15,7 @@ const BW_ROUTE_STORY_STOPS = [
     id: 1,
     name: 'World Clock',
     location: 'Alexanderplatz',
-    x: 97,
+    x: 95,
     y: 37,
     act: 'Start',
     layer: 'Orientation',
@@ -206,7 +207,7 @@ class BWRouteStoryElement extends HTMLElement {
 
     this.innerHTML = `
       <style>${this._styles()}</style>
-      <article class="bw-route-story" aria-labelledby="bw-rs-title">
+      <article class="bw-route-story bw-page-editorial" data-editorial-build="four-page-editorial-20260717" aria-labelledby="bw-rs-title">
         <section class="bw-rs-hero">
           <picture class="bw-rs-hero-media" aria-hidden="true">
             <source srcset="${BW_ROUTE_STORY_HERO_IMAGE_URL}" type="image/webp">
@@ -254,7 +255,8 @@ class BWRouteStoryElement extends HTMLElement {
                   <img
                     class="bw-rs-map-image"
                     src="${BW_ROUTE_STORY_MAP_IMAGE_URL}"
-                    srcset="${BW_ROUTE_STORY_MAP_IMAGE_URL} 1x, ${BW_ROUTE_STORY_MAP_IMAGE_2X_URL} 2x"
+                    srcset="${BW_ROUTE_STORY_MAP_IMAGE_720_URL} 720w, ${BW_ROUTE_STORY_MAP_IMAGE_URL} 960w, ${BW_ROUTE_STORY_MAP_IMAGE_1200_URL} 1200w"
+                    sizes="(max-width: 1040px) calc(100vw - 36px), 560px"
                     alt="Illustrated BerlinWalk route map from Alexanderplatz to Hackescher Markt"
                     loading="lazy"
                     decoding="async"
@@ -286,9 +288,9 @@ class BWRouteStoryElement extends HTMLElement {
               <figcaption>Same route, different layers of Berlin.</figcaption>
             </figure>
             <div class="bw-rs-proof-copy">
-              <span class="bw-rs-eyebrow">Why this sells the tour</span>
-              <h2>People do not book because a route has 12 stops. They book because the route promises clarity.</h2>
-              <p>The page gives visitors a reason to trust the walk before they meet Yusuf: they can see the logic, the pacing, and the kind of understanding they will take away.</p>
+              <span class="bw-rs-eyebrow">What you leave with</span>
+              <h2>The route is built to give you a clear mental map of Berlin.</h2>
+              <p>You can see the logic, pacing, and historical layers before the walk begins. By Hackescher Markt, the stops connect as one story rather than a list of monuments.</p>
               <div class="bw-rs-proof-actions">
                 <a class="bw-rs-btn bw-rs-btn-primary" href="${BW_ROUTE_STORY_BOOKING_URL}" data-bw-book-route-story>Book the free walking tour</a>
                 <a class="bw-rs-text-link" href="${BW_ROUTE_STORY_AUDIO_URL}">Listen to the 9-minute audio preview</a>
@@ -863,6 +865,12 @@ class BWRouteStoryElement extends HTMLElement {
         line-height: 1;
       }
 
+      .bw-route-story .bw-rs-pin::after {
+        content: '';
+        inset: -8px;
+        position: absolute;
+      }
+
       .bw-route-story .bw-rs-pin:hover,
       .bw-route-story .bw-rs-pin:focus-visible {
         transform: translate(-50%, -50%) scale(1.12);
@@ -1238,6 +1246,10 @@ class BWRouteStoryElement extends HTMLElement {
           min-height: 27px;
           min-width: 27px;
           width: 27px;
+        }
+
+        .bw-route-story .bw-rs-pin::after {
+          inset: -9px;
         }
 
         .bw-route-story .bw-rs-pin span {
