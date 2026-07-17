@@ -1787,5 +1787,18 @@
     "png160": "tools-home/icons/berlin-hop-on-hop-off-decision-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-hop-on-hop-off-decision-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_0b677e96f8d14f63a5b1dee85591b332~mv2.png"
+  },
+  {
+    "slug": "how-many-days-in-berlin",
+    "title": "Berlin Trip Length Advisor",
+    "category": "Discovery",
+    "source": "codex-built-in-imagegen-20260717",
+    "generatedAt": "2026-07-17",
+    "promptFile": "tools-home/icons/_src/daily-blog-how-many-days-icon-20260717-prompt.md",
+    "sourceImage": "tools-home/icons/_src/daily-blog-how-many-days-icon-20260717-source.png",
+    "png512": "tools-home/icons/how-many-days-in-berlin.png",
+    "png160": "tools-home/icons/how-many-days-in-berlin-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/how-many-days-in-berlin-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_40b85d0571b640688e879bf73f466b05~mv2.png"
   }
 ]
