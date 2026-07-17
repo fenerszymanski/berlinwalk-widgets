@@ -34,6 +34,9 @@ jobs:
             --exclude='node_modules/' \
             --exclude='output/' \
             ./ _site/
+          mkdir -p _site/blog-drafts/images/berlin-ab-abc-ticket-zones/assets
+          cp -R blog-drafts/images/berlin-ab-abc-ticket-zones/assets/optimized \
+            _site/blog-drafts/images/berlin-ab-abc-ticket-zones/assets/
           touch _site/.nojekyll
           du -sh _site
 
