@@ -167,3 +167,68 @@ final result: passed
 - None required after publication.
 
 final result: passed
+
+---
+
+# BerlinWalk Four-Page Editorial System Design QA
+
+## Scope
+
+Meeting Point, Reviews, The Guide, and Route were brought into the homepage editorial language without making the four pages identical. Existing public URLs, content, booking links, Custom Element tags, Route analytics hooks, Reviews API, Guide audio element, global header/footer, and sticky tour control remain outside the styling layer.
+
+## Same-input visual comparison
+
+Each board places the current live source capture and the final local Atlas implementation in one image at the same desktop viewport and top-of-page state.
+
+- Meeting Point: `/Users/yusufucuz/Documents/New project/output/qa/four-page-editorial-20260717/local/comparison-meeting.jpg`
+- Reviews: `/Users/yusufucuz/Documents/New project/output/qa/four-page-editorial-20260717/local/comparison-reviews.jpg`
+- The Guide: `/Users/yusufucuz/Documents/New project/output/qa/four-page-editorial-20260717/local/comparison-guide.jpg`
+- Route: `/Users/yusufucuz/Documents/New project/output/qa/four-page-editorial-20260717/local/comparison-route.jpg`
+
+Visible review:
+
+- Meeting Point keeps the real World Clock image and precise wayfinding identity, while replacing the generic sans headline and pill CTA treatment with Fraunces hierarchy and rectangular actions.
+- Reviews now reads as a social-proof ledger: one strong quote panel, a compact score rail, and lower visual noise.
+- The Guide is deliberately portrait-led, with the real guide photo becoming the first visual anchor rather than another generic card layout.
+- Route keeps its dark photographic story-atlas identity while adopting the same display typography, CTA geometry, spacing, and surface rhythm.
+- No fake map, placeholder illustration, handcrafted icon, or approximate asset was introduced.
+
+## Responsive and functional evidence
+
+Atlas executed the real local components at `1366`, `1040`, `980`, `768`, `430`, `390`, `375`, `360`, and `320px`.
+
+Evidence: `/Users/yusufucuz/Documents/New project/output/qa/four-page-editorial-20260717/local/atlas-responsive-metrics.json`
+
+Result:
+
+- 36 page-width rows passed with `0px` horizontal overflow.
+- Every page had exactly one H1, the Fraunces asset loaded, heading computed font matched, yellow CTA text stayed dark, images loaded, and every image retained alt markup.
+- Meeting Point rendered three arrival steps and zero fake-map parts.
+- Reviews loaded 15 current reviews, rendered one semantic blockquote per card, and left `aria-busy=false`.
+- The Guide rendered three verified quotes and mounted the existing audio Custom Element.
+- Route rendered 12 stops and 12 pins and retained `#bw-rs-title`.
+- Route pin, chapter, and booking interactions emitted the original three analytics events with the expected payloads.
+- Meeting Point map and booking links, Reviews source URL safety, and Guide booking/audio contracts passed.
+
+Mobile Atlas captures:
+
+- `/Users/yusufucuz/Documents/New project/output/qa/four-page-editorial-20260717/local/meeting-mobile-390-final.jpg`
+- `/Users/yusufucuz/Documents/New project/output/qa/four-page-editorial-20260717/local/reviews-mobile-390-final.jpg`
+- `/Users/yusufucuz/Documents/New project/output/qa/four-page-editorial-20260717/local/guide-mobile-390-final.jpg`
+- `/Users/yusufucuz/Documents/New project/output/qa/four-page-editorial-20260717/local/route-mobile-390-final.jpg`
+
+## Accessibility and release review
+
+- The Guide no longer creates a nested `main` landmark.
+- Reviews announces only a short load status instead of reading all review text as one live-region update.
+- Review averages reject ratings outside `1–5`, source links permit only HTTP(S), and the partial-sample label remains available if the API total exceeds the returned rows.
+- Focus rings switch to yellow on dark surfaces.
+- Route pins keep an expanded mobile pointer target and the first pin is moved away from the clipped map edge.
+- Only the portrait image is eager on The Guide; below-fold photos are lazy.
+- Static contract validation passed 34 checks, and all modified JavaScript files passed `node --check` and `git diff --check`.
+
+Automated Chromium/WebKit regression and numeric live CLS/LCP measurement were not run because the approved plan requires separate permission before that browser automation. Atlas cold-load and first-scroll checks remain part of the live release gate; no numeric performance claim is made here.
+
+## Result
+
+passed
