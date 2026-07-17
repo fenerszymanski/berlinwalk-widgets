@@ -223,7 +223,8 @@
   "one-day-in-berlin": "one-day-in-berlin",
   "berlin-then-and-now": "berlin-then-and-now",
   "berlin-hop-on-hop-off-bus-worth-it": "berlin-hop-on-hop-off-bus-worth-it",
-  "how-many-days-in-berlin": "how-many-days-in-berlin"
+  "how-many-days-in-berlin": "how-many-days-in-berlin",
+  "halal-food-in-berlin": "halal-food-in-berlin"
 };
 
   var SCHEMAS = {
@@ -10869,6 +10870,68 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "It changes how much you can do per day more than the total. A long June evening gives you far more usable time than a short, wet November afternoon, so the same three-day trip feels fuller in summer. If your dates are fixed in a darker month, lean toward an extra day or a gentler plan rather than trying to force a summer pace into winter hours."
+        }
+      }
+    ]
+  },
+  "halal-food-in-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is döner kebab halal in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The large majority of döner in Berlin is made with halal meat, especially in the Turkish and Arab neighbourhoods where the kebab was popularised in the 1970s. In Germany, visible halal certification is less standardised than in the UK or US, so you will not always see a framed certificate. Instead look for a green Halal sticker or the Arabic word حلال in the window. Around Kottbusser Tor, Hermannplatz and Gesundbrunnen the döner is halal so reliably that locals never check, and if you are ever unsure you can simply ask at the counter."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is the best halal food in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Head to Neukölln, Kreuzberg and Wedding. These immigrant neighbourhoods have whole streets where the kitchens are halal by default, unlike the tourist-central German restaurants around Alexanderplatz and Unter den Linden, which are built on pork and sausage. The single best address is Sonnenallee in Neukölln, known locally as Arab Street, with its Lebanese, Syrian and Palestinian restaurants, bakeries and sweet shops."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Sonnenallee good for halal food?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, Sonnenallee in northern Neukölln is the heart of halal Berlin. Locals call it Arab Street, and the stretch running down from Hermannplatz is lined with Levantine restaurants, fresh bakeries, juice bars, sweet shops and Arab supermarkets. Most kitchens are halal as a matter of course and many are alcohol-free. It is also the best place in the city for an Arab breakfast of hummus, foul, labneh, olives and fresh bread."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I know if a Berlin restaurant is halal?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Read the signals. A green Halal sign or حلال in the window is the clearest tell. No pork, ham or bacon anywhere on the menu is a strong sign at a Turkish or Arab grill, and a place that serves no alcohol is very often a deliberately halal kitchen. A busy, family-run grill in Neukölln, Kreuzberg or Wedding is a safer bet than a generic tourist kebab shop in the centre. The failsafe is always the same short question at the counter: Ist das Fleisch halal?"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are there mosques and prayer rooms in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, mostly in the same neighbourhoods as the food. The Şehitlik Mosque on Columbiadamm, beside the first Islamic cemetery in Germany from 1866, is one of the most beautiful and welcomes respectful visitors outside prayer times. The Omar Ibn al-Khattab Mosque near Kottbusser Tor is one of the largest. If you arrive or leave through BER airport, there is a quiet Room of Silence for prayer and reflection."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I buy halal groceries in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Turkish market on Maybachufer, on the Neukölln bank of the Landwehrkanal, is the classic stop for halal meat, produce, cheese, olives and bread at good prices. It runs on Tuesdays and Fridays from 11:00 to 18:30. Sonnenallee and Karl-Marx-Straße are also lined with Arab supermarkets and halal butchers if you are self-catering."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it hard to eat halal in central tourist Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It is harder than it needs to be if you stay only in the postcard centre. The German restaurants around Alexanderplatz and Mitte are built around pork, sausage and Schnitzel, so halal options are thin. The fix is simple: the reliable halal food is only a few U-Bahn stops away in Neukölln, Kreuzberg and Wedding, so plan to eat there rather than assuming a central kebab shop is halal."
         }
       }
     ]
