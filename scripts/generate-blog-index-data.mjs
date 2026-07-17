@@ -178,13 +178,17 @@ const TOPICS = [
 // guides. Keep this curated because the /blog hero is the first editorial
 // signal visitors see before the Latest shelf.
 const HERO_SLUGS = {
-  lead: '2-days-in-berlin-itinerary',
+  lead: 'friedrichshain-berlin',
   secondary: [
+    'how-to-order-doner-in-berlin',
+    'treptower-park-berlin',
+    'stasi-museum-berlin',
+    '2-days-in-berlin-itinerary',
+    'where-to-watch-2026-world-cup-in-berlin',
     'weekend-in-berlin-48-hour-itinerary',
     'berlin-natural-history-museum',
     'german-numbers-for-tourists-berlin',
     'berlin-ticket-machines',
-    'where-to-watch-2026-world-cup-in-berlin',
     'berlin-ringbahn',
     'berlin-train-announcements',
     'open-air-cinema-berlin',
@@ -225,7 +229,6 @@ const HERO_SLUGS = {
     'drink-alcohol-in-public-berlin',
     'topography-of-terror-berlin',
     'berlin-public-transport-ferries',
-    'where-to-watch-2026-world-cup-in-berlin',
     'berlin-ber-airport-departure-guide',
     'sachsenhausen-from-berlin',
     'grocery-shopping-in-berlin',
@@ -245,6 +248,10 @@ const REQUIRED_SLUGS = [
   'why-is-berlin-founding-year-1237',
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
+  'friedrichshain-berlin',
+  'how-to-order-doner-in-berlin',
+  'treptower-park-berlin',
+  'stasi-museum-berlin',
   '2-days-in-berlin-itinerary',
   'weekend-in-berlin-48-hour-itinerary',
   'berlin-natural-history-museum',
