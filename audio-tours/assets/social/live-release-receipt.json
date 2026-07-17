@@ -1,0 +1,55 @@
+{
+  "releasedAt": "2026-07-17T07:39:00.000Z",
+  "page": {
+    "url": "https://www.berlinwalk.com/audio-tours",
+    "pageId": "u8luz",
+    "siteId": "12ee5ea0-70a7-492f-8020-ffb27cbb630f",
+    "siteRevision": "641"
+  },
+  "design": {
+    "direction": "Editorial Split",
+    "boardId": "b749bd24-352e-49d3-b55c-f1ddc43d0ee1",
+    "localAsset": "audio-tours/assets/social/audio-tours-social-1200x630.jpg",
+    "sha256": "4be7cfcd9ccfdd9e6fd41b0c9080a8fcbba6cad35e20920dc71c89cebe1f39d8",
+    "width": 1200,
+    "height": 630
+  },
+  "wixMedia": {
+    "id": "5a08a3_7601aca6767b4bce9de2eb65a2f06560~mv2.jpg",
+    "url": "https://static.wixstatic.com/media/5a08a3_7601aca6767b4bce9de2eb65a2f06560~mv2.jpg",
+    "status": "READY",
+    "httpStatus": 200
+  },
+  "social": {
+    "title": "Berlin Audio Tours You Can Walk at Your Own Pace",
+    "description": "Press play and step into Berlin with five self-guided audio walks available now for €4.99 each.",
+    "rawOgImage": "https://static.wixstatic.com/media/5a08a3_7601aca6767b4bce9de2eb65a2f06560~mv2.jpg/v1/fill/w_1200,h_630,al_c/5a08a3_7601aca6767b4bce9de2eb65a2f06560~mv2.jpg",
+    "rawTwitterImage": "https://static.wixstatic.com/media/5a08a3_7601aca6767b4bce9de2eb65a2f06560~mv2.jpg/v1/fill/w_1200,h_630,al_c/5a08a3_7601aca6767b4bce9de2eb65a2f06560~mv2.jpg",
+    "rawSocialTagsContainOldSitewideAsset": false,
+    "browserSocialTagsAllContainNewAsset": true
+  },
+  "embeds": {
+    "head": {
+      "id": "7bae8b0e-7900-4824-ad63-1951c250bb68",
+      "revision": "6",
+      "enabled": true,
+      "sha256": "93d7e99fbbd87aed17d3a8fba4ceb8dbbc3b3270a976007e4555ca612c9e30ec"
+    },
+    "body": {
+      "id": "1fba47ba-8052-4b65-a647-02170f1f7ff9",
+      "revision": "7",
+      "enabled": true,
+      "sha256": "cad1466a5ea70e5c621cca55fae375c167b30e551f00b9a32aea7b08c8da6810",
+      "unchanged": true
+    }
+  },
+  "qa": {
+    "rawHtmlStatus": 200,
+    "canonical": "https://www.berlinwalk.com/audio-tours",
+    "headMarker": true,
+    "bodyMarker": true,
+    "jsonLd": true,
+    "h1Count": 1,
+    "newRuntimeErrors": []
+  }
+}
