@@ -222,7 +222,8 @@
   "berlin-rooftop-bars": "berlin-rooftop-bars",
   "one-day-in-berlin": "one-day-in-berlin",
   "berlin-then-and-now": "berlin-then-and-now",
-  "berlin-hop-on-hop-off-bus-worth-it": "berlin-hop-on-hop-off-bus-worth-it"
+  "berlin-hop-on-hop-off-bus-worth-it": "berlin-hop-on-hop-off-bus-worth-it",
+  "how-many-days-in-berlin": "how-many-days-in-berlin"
 };
 
   var SCHEMAS = {
@@ -10806,6 +10807,68 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Usually no. You can buy on the day at a stop or online, and most operators offer free cancellation up to 24 hours before. Booking ahead is only worth it for a specific timed extra, like an evening tour or a cruise slot, or in the busiest summer weeks."
+        }
+      }
+    ]
+  },
+  "how-many-days-in-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How many days do you need in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a first visit, three full days is the sweet spot. It fits the historic core, one museum you actually care about, one lived-in neighbourhood, and enough unplanned time to enjoy the city. Two days works as a short break covering the centre plus one other side, and four or five days is where day trips and a slower pace become comfortable. The number is lower than most people expect because Berlin's headline sights sit on one walkable line through Mitte."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is 2 days enough for Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, two days is enough for a proper short trip. Spend day one on the walkable historic core from Alexanderplatz to the Reichstag plus a Cold War site like the East Side Gallery, and day two on either museums or a neighbourhood such as Kreuzberg or Prenzlauer Berg. The classic two-day mistake is trying to do both museums and a neighbourhood in one day, which leaves you tired and only half-satisfied."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is one day enough to see Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "One day is a taster, not a real visit. If a day is all you have, do not try to fit in a museum, a club and a day trip. Walk the central axis from Alexanderplatz past the TV Tower and Museum Island to the Brandenburg Gate and Reichstag. That single flat line gives you most of what people picture when they think of Berlin, and a guided or slow self-guided walk teaches you more than a rushed dash between ticketed sights."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is 3 days too long for Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Three days is the length most first-time visitors are happiest with, and it is not padding. The third day is not for adding more sights; it is for returning to whatever surprised you, at a slower pace, with a viewpoint or a park to finish. If anything, most people who come for two days end up wishing they had a third."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many days do I need for a day trip from Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Plan a day trip from day four onward. Potsdam and the palaces of Sanssouci are about 30 to 40 minutes away by regional train, and the Sachsenhausen memorial is under an hour, so each one realistically takes a full day. On a two or three day trip a day trip eats too much of your city time, but on a four or five day trip it fits naturally."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What wastes the most time for visitors in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A few avoidable things. Most Museum Island museums close on Mondays, so a Monday is better spent walking and exploring neighbourhoods than planning a museum day. The Pergamon Museum is closed until 4 June 2027, so do not build a trip around it yet. The Reichstag dome is free but needs advance registration with ID, so book it before you fly. And because neighbourhoods are a train apart, group each day by area instead of criss-crossing the city."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the time of year change how many days I need?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It changes how much you can do per day more than the total. A long June evening gives you far more usable time than a short, wet November afternoon, so the same three-day trip feels fuller in summer. If your dates are fixed in a darker month, lean toward an extra day or a gentler plan rather than trying to force a summer pace into winter hours."
         }
       }
     ]

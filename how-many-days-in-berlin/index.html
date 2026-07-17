@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Berlin Trip Length Advisor: how many days do you need in Berlin?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
+    --yellow:#FFE600; --ink:#1c2a1c; --panel:#ffffff; --bone:#f4f9ec;
+    --line:#e3edd6; --stone:#6d7b66; --shadow:0 10px 30px rgba(18,61,24,.14);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .bx{max-width:940px;margin:0 auto;padding:4px}
+  .card{background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+
+  .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:18px 22px 16px}
+  .kick{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:700;margin:0 0 6px;font-family:"IBM Plex Mono",monospace}
+  .head h1{margin:0;font-size:21px;font-weight:800;line-height:1.2}
+  .head p{margin:8px 0 0;font-size:13.5px;color:#e7f3e2;max-width:720px}
+
+  .body{padding:16px 16px 8px}
+
+  /* ---- day dial ---- */
+  .dial{display:flex;align-items:center;justify-content:center;gap:14px;margin:2px 0 8px}
+  .dbtn{width:44px;height:44px;border-radius:14px;border:1.5px solid var(--line);background:#fff;font-size:24px;font-weight:800;color:var(--green);cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center}
+  .dbtn:disabled{opacity:.35;cursor:not-allowed}
+  .dnum{min-width:150px;text-align:center}
+  .dnum b{display:block;font-size:46px;font-weight:800;color:var(--green-deep);line-height:1}
+  .dnum span{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);font-weight:700;font-family:"IBM Plex Mono",monospace;margin-top:2px}
+
+  /* ---- preferences ---- */
+  .prefs{border-top:1px dashed var(--line);margin-top:6px;padding-top:12px;display:grid;gap:12px}
+  .lab{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);font-weight:700;font-family:"IBM Plex Mono",monospace;margin-bottom:6px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 13px;font-size:13px;font-weight:700;color:var(--green-deep);cursor:pointer;font-family:Montserrat,sans-serif}
+  .chip[aria-pressed="true"]{background:var(--green);color:#fff;border-color:var(--green)}
+  .seg{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;background:#fff;overflow:hidden}
+  .seg button{border:0;background:#fff;font-size:13px;font-weight:700;color:var(--green-deep);padding:8px 14px;cursor:pointer;font-family:Montserrat,sans-serif}
+  .seg button+button{border-left:1.5px solid var(--line)}
+  .seg button[aria-pressed="true"]{background:var(--green);color:#fff}
+
+  /* ---- verdict ---- */
+  .verdict{margin:16px 0 6px;background:var(--bone);border:1px solid var(--line);border-left:5px solid var(--lime);border-radius:12px;padding:13px 15px}
+  .verdict .vh{font-size:15px;font-weight:800;color:var(--green-deep);margin:0 0 3px}
+  .verdict .vp{font-size:13.5px;color:#31402f;margin:0}
+  .verdict.match{border-left-color:var(--yellow)}
+
+  /* ---- coverage meter ---- */
+  .cov{margin:14px 0 4px}
+  .cov .ct{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;color:var(--stone);font-weight:700;margin-bottom:6px}
+  .cov .ct b{color:var(--green-deep);font-size:14px}
+  .track{height:14px;border-radius:999px;background:#eef4e3;overflow:hidden}
+  .fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--lime),var(--green));transition:width .45s cubic-bezier(.2,.8,.2,1)}
+
+  /* ---- day stack ---- */
+  .stackh{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);font-weight:700;font-family:"IBM Plex Mono",monospace;margin:18px 0 8px}
+  .stack{display:grid;gap:10px}
+  .day{display:grid;grid-template-columns:52px 1fr;gap:12px;align-items:stretch;border:1px solid var(--line);border-radius:14px;background:#fff;padding:12px 13px;opacity:0;transform:translateY(8px);animation:pop .4s forwards}
+  @keyframes pop{to{opacity:1;transform:none}}
+  .day .dn{background:var(--green);color:#fff;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800}
+  .day .dn small{font-size:9px;font-weight:700;letter-spacing:.1em;opacity:.85;font-family:"IBM Plex Mono",monospace}
+  .day .dn b{font-size:22px;line-height:1}
+  .day .dc h4{margin:0 0 2px;font-size:14.5px;font-weight:800;color:var(--green-deep)}
+  .day .dc p{margin:0;font-size:13px;color:#3a473697;color:#42513f}
+  .tag{display:inline-block;margin-top:6px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;font-family:"IBM Plex Mono",monospace;padding:2px 8px;border-radius:999px}
+  .tag.ess{background:#e8f2dc;color:#33691e}
+  .tag.rec{background:#fff6c8;color:#7a6a00}
+  .tag.ex{background:#eef1ec;color:#5b675a}
+  .ghost{border-style:dashed;background:#fbfdf7}
+  .ghost .dn{background:#c6d3bd}
+  .ghost .dc h4{color:#6d7b66}
+  .ghost .dc p{color:#77826f}
+
+  .foot{font-size:12px;color:var(--stone);margin:14px 2px 4px;line-height:1.5}
+  .foot a{color:var(--green);font-weight:700}
+  @media(max-width:430px){
+    .head h1{font-size:19px}
+    .dnum b{font-size:40px}
+    .day{grid-template-columns:44px 1fr;gap:10px}
+  }
+</style>
+</head>
+<body>
+<div class="bx">
+  <div class="card">
+    <div class="head">
+      <p class="kick">BerlinWalk.com • Trip planner</p>
+      <h1>How many days do you need in Berlin?</h1>
+      <p>Set the number of days you are thinking about, then tell me your pace and what you care about. I will show what each day realistically covers, and whether your number fits.</p>
+    </div>
+    <div class="body">
+
+      <div class="dial">
+        <button class="dbtn" id="minus" aria-label="One day fewer">−</button>
+        <div class="dnum"><b id="dayNum">3</b><span id="dayWord">days in Berlin</span></div>
+        <button class="dbtn" id="plus" aria-label="One day more">+</button>
+      </div>
+
+      <div class="prefs">
+        <div>
+          <div class="lab">Your pace</div>
+          <div class="seg" id="pace" role="group" aria-label="Pace">
+            <button data-v="relaxed">Relaxed</button>
+            <button data-v="balanced" aria-pressed="true">Balanced</button>
+            <button data-v="packed">Packed</button>
+          </div>
+        </div>
+        <div>
+          <div class="lab">What pulls at you? (pick any)</div>
+          <div class="chips" id="interests">
+            <button class="chip" data-k="museums">Museums &amp; art</button>
+            <button class="chip" data-k="kiez">Neighbourhoods &amp; food</button>
+            <button class="chip" data-k="history">Cold War history</button>
+            <button class="chip" data-k="slow">Parks &amp; slow time</button>
+          </div>
+        </div>
+        <div>
+          <div class="lab">A day trip (Potsdam or Sachsenhausen)?</div>
+          <div class="seg" id="daytrip" role="group" aria-label="Day trip">
+            <button data-v="no" aria-pressed="true">No</button>
+            <button data-v="yes">Yes</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="verdict" id="verdict">
+        <p class="vh" id="vh">Three days is the sweet spot.</p>
+        <p class="vp" id="vp"></p>
+      </div>
+
+      <div class="cov">
+        <div class="ct"><span>Classic Berlin essentials you will comfortably cover</span><b id="covPct">88%</b></div>
+        <div class="track"><div class="fill" id="covFill" style="width:88%"></div></div>
+      </div>
+
+      <div class="stackh">Your day-by-day shape</div>
+      <div class="stack" id="stack"></div>
+
+      <p class="foot">This is a planning guide, not a fixed schedule. For a real hour-by-hour version, see my <a href="https://www.berlinwalk.com/post/berlin-in-3-days-the-perfect-itinerary-from-a-local-guide">Berlin in 3 days itinerary</a>, and start any trip with the free <a href="https://www.berlinwalk.com/berlin-walking-tour-route">walking tour route</a>.</p>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var MIN=1, MAX=6;
+  var state={ days:3, pace:'balanced', daytrip:false, interests:{} };
+
+  var MOD={
+    core:{t:'The walkable centre',p:'Alexanderplatz to the Reichstag on foot, down Unter den Linden past Museum Island and the Brandenburg Gate, plus one Berlin Wall site.'},
+    museums:{t:'Museum Island in depth',p:'Pick one museum and give it a real morning rather than rushing five. The Pergamon stays closed until June 2027.'},
+    kiez:{t:'A lived-in kiez',p:'Trade the centre for Kreuzberg or Prenzlauer Berg: food, cafés and street life where Berliners actually spend their day.'},
+    history:{t:'Cold War Berlin',p:'Checkpoint Charlie, the Topography of Terror and the East Side Gallery, the longest surviving stretch of the Wall.'},
+    slow:{t:'A slow day',p:'An unhurried Tiergarten walk, a viewpoint and a long café hour. This is the day that makes a trip feel like a rest, not a race.'},
+    daytrip:{t:'Day trip out of the city',p:'Potsdam and Sanssouci are about 30 to 40 minutes by regional train; the Sachsenhausen memorial is under an hour. Give it the whole day.'}
+  };
+  var COV={1:45,2:70,3:88,4:96,5:100,6:100};
+
+  function recommend(){
+    var r=3;
+    if(state.daytrip) r+=1;
+    if(state.pace==='relaxed') r+=1;
+    if(state.pace==='packed') r-=1;
+    var n=Object.keys(state.interests).filter(function(k){return state.interests[k];}).length;
+    if(n>=4) r+=1;
+    return Math.max(2,Math.min(5,r));
+  }
+
+  function buildSeq(days){
+    var seq=['core'];
+    var base=['museums','kiez','history','slow'];
+    var pref=[];
+    base.forEach(function(k){ if(state.interests[k]) pref.push(k); });
+    base.forEach(function(k){ if(!state.interests[k]) pref.push(k); });
+    var pi=0;
+    for(var d=2; d<=days; d++){
+      if(state.daytrip && d>=4 && seq.indexOf('daytrip')<0){ seq.push('daytrip'); continue; }
+      if(pi<pref.length){ seq.push(pref[pi++]); }
+      else if(state.daytrip && seq.indexOf('daytrip')<0){ seq.push('daytrip'); }
+      else { seq.push('slow'); }
+    }
+    if(state.daytrip && seq.indexOf('daytrip')<0 && days>=2){ seq[seq.length-1]='daytrip'; }
+    return seq;
+  }
+
+  function tagFor(day, rec){
+    if(day===1) return {c:'ess',l:'Essential'};
+    if(day<=rec) return {c:'rec',l:'Recommended'};
+    return {c:'ex',l:'Extra'};
+  }
+
+  function render(){
+    var rec=recommend();
+    document.getElementById('dayNum').textContent=state.days;
+    document.getElementById('dayWord').textContent=(state.days===1?'day in Berlin':'days in Berlin');
+    document.getElementById('minus').disabled=(state.days<=MIN);
+    document.getElementById('plus').disabled=(state.days>=MAX);
+
+    // verdict
+    var vh=document.getElementById('vh'), vp=document.getElementById('vp'), vbox=document.getElementById('verdict');
+    var reasons=[];
+    if(state.daytrip) reasons.push('a day trip');
+    if(state.pace==='relaxed') reasons.push('a relaxed pace');
+    var nInt=Object.keys(state.interests).filter(function(k){return state.interests[k];}).length;
+    if(nInt>=4) reasons.push('a broad mix of interests');
+    var rlist = reasons.length? reasons.join(' and ') : 'the plan you described';
+    vbox.className='verdict'+(state.days===rec?' match':'');
+    if(state.days===rec){
+      vh.textContent=state.days+(state.days===1?' day':' days')+' fits well.';
+      vp.textContent='That matches what I would book for '+rlist+'. You get the essentials without turning the trip into a checklist.';
+    } else if(state.days<rec){
+      vh.textContent=state.days+(state.days===1?' day':' days')+' is doable, but a little tight.';
+      vp.textContent='With '+rlist+', I would lean toward '+rec+' days. At '+state.days+' you will be cutting the last day below, so drop whichever matters least to you.';
+    } else {
+      vh.textContent=state.days+' days is generous.';
+      vp.textContent=rec+' days already covers '+rlist+'. Spend the extra time going slower and returning to what surprised you, not adding more sights.';
+    }
+
+    // coverage
+    var pct=COV[state.days]||100;
+    document.getElementById('covPct').textContent=pct+'%';
+    document.getElementById('covFill').style.width=pct+'%';
+
+    // stack
+    var seq=buildSeq(state.days);
+    var stack=document.getElementById('stack');
+    stack.innerHTML='';
+    seq.forEach(function(id,i){
+      var m=MOD[id]; var day=i+1; var tg=tagFor(day,rec);
+      var el=document.createElement('div');
+      el.className='day'; el.style.animationDelay=(i*55)+'ms';
+      el.innerHTML='<div class="dn"><small>DAY</small><b>'+day+'</b></div>'+
+        '<div class="dc"><h4>'+m.t+'</h4><p>'+m.p+'</p><span class="tag '+tg.c+'">'+tg.l+'</span></div>';
+      stack.appendChild(el);
+    });
+    // ghost: what one more day adds
+    if(state.days<MAX){
+      var nextSeq=buildSeq(state.days+1);
+      var nextId=nextSeq[state.days];
+      if(nextId && MOD[nextId]){
+        var gm=MOD[nextId];
+        var g=document.createElement('div');
+        g.className='day ghost'; g.style.animationDelay=(seq.length*55)+'ms';
+        g.innerHTML='<div class="dn"><small>+1</small><b>'+(state.days+1)+'</b></div>'+
+          '<div class="dc"><h4>With one more day: '+gm.t.toLowerCase()+'</h4><p>'+gm.p+'</p></div>';
+        stack.appendChild(g);
+      }
+    }
+    if(window.BWResize) window.BWResize();
+  }
+
+  document.getElementById('minus').addEventListener('click',function(){ if(state.days>MIN){state.days--;render();} });
+  document.getElementById('plus').addEventListener('click',function(){ if(state.days<MAX){state.days++;render();} });
+  Array.prototype.forEach.call(document.querySelectorAll('#pace button'),function(b){
+    b.addEventListener('click',function(){
+      Array.prototype.forEach.call(document.querySelectorAll('#pace button'),function(x){x.setAttribute('aria-pressed','false');});
+      b.setAttribute('aria-pressed','true'); state.pace=b.dataset.v; render();
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('#daytrip button'),function(b){
+    b.addEventListener('click',function(){
+      Array.prototype.forEach.call(document.querySelectorAll('#daytrip button'),function(x){x.setAttribute('aria-pressed','false');});
+      b.setAttribute('aria-pressed','true'); state.daytrip=(b.dataset.v==='yes'); render();
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('#interests .chip'),function(b){
+    b.addEventListener('click',function(){
+      var k=b.dataset.k; var on=b.getAttribute('aria-pressed')==='true';
+      b.setAttribute('aria-pressed', on?'false':'true'); state.interests[k]=!on; render();
+    });
+  });
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
