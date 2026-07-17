@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Berlin Sightseeing Bus Value Calculator — is the hop-on hop-off worth it?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
+    --yellow:#FFE600; --ink:#1c2a1c; --panel:#ffffff; --bone:#f4f9ec;
+    --line:#e3edd6; --stone:#6d7b66; --shadow:0 10px 30px rgba(18,61,24,.14);
+    --busred:#C0392B; --busyellow:#E1A100;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .bx{max-width:940px;margin:0 auto;padding:4px}
+  .card{background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+
+  .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:18px 22px 16px}
+  .kick{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:700;margin:0 0 6px;font-family:"IBM Plex Mono",monospace}
+  .head h1{margin:0;font-size:21px;font-weight:800;line-height:1.2}
+  .head p{margin:8px 0 0;font-size:13.5px;color:#e7f3e2;max-width:700px}
+
+  .body{padding:16px 16px 6px}
+
+  .ctrls{display:grid;gap:14px}
+  .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  .lab{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);font-weight:700;font-family:"IBM Plex Mono",monospace;flex:0 0 100%;margin-bottom:-4px}
+
+  .seg{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;background:#fff;overflow:hidden}
+  .seg button{border:0;background:#fff;font-family:Montserrat,sans-serif;font-size:13.5px;font-weight:700;color:var(--green-deep);padding:8px 15px;cursor:pointer}
+  .seg button+button{border-left:1.5px solid var(--line)}
+  .seg button[aria-pressed="true"]{background:var(--green);color:#fff}
+
+  .step{display:inline-flex;align-items:center;gap:0;border:1.5px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .step button{border:0;background:#f0f7e6;color:var(--green-deep);font-size:19px;font-weight:800;width:38px;height:38px;cursor:pointer;line-height:1}
+  .step button:active{background:#e3f0d2}
+  .step .val{min-width:56px;text-align:center;font-weight:800;font-size:15px;color:var(--green-deep)}
+  .step .cap{font-size:11px;color:var(--stone);font-weight:600;display:block;letter-spacing:.02em}
+  .steps{display:flex;gap:14px;flex-wrap:wrap}
+  .stepgroup{display:flex;flex-direction:column;gap:5px}
+  .stepgroup .name{font-size:12px;font-weight:700;color:var(--ink)}
+  .stepgroup .name small{color:var(--stone);font-weight:600}
+
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{border:1.5px solid var(--line);border-radius:12px;background:#fff;padding:9px 13px;cursor:pointer;font-size:13px;font-weight:700;color:var(--green-deep);display:flex;align-items:center;gap:7px}
+  .chip .e{font-size:16px}
+  .chip[aria-pressed="true"]{background:var(--green);color:#fff;border-color:var(--green)}
+
+  /* verdict */
+  .verdict{margin:16px 0 6px;border-radius:16px;padding:16px 16px 15px;border:1.5px solid var(--line);background:var(--bone)}
+  .verdict.ride{background:#fff6e2;border-color:#f2d98a}
+  .verdict.local{background:#eef7e1;border-color:#c9e3a4}
+  .vtag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;font-family:"IBM Plex Mono",monospace;color:var(--stone);margin:0 0 6px}
+  .verdict h2{margin:0;font-size:17px;font-weight:800;color:var(--green-deep);line-height:1.25}
+  .verdict.ride h2{color:#8a5a00}
+  .verdict p{margin:8px 0 0;font-size:13.5px;color:#33402f}
+  .verdict .save{display:inline-block;margin-top:10px;font-size:13px;font-weight:800;color:var(--green-deep);background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:6px 13px}
+
+  /* cost bars */
+  .bars{margin:14px 0 6px;display:grid;gap:11px}
+  .barrow{background:#fff;border:1px solid #eef2e6;border-radius:13px;padding:11px 12px}
+  .bartop{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:8px}
+  .bartop .n{font-size:13.5px;font-weight:800;color:var(--ink);line-height:1.2}
+  .bartop .n small{display:block;font-size:11.5px;font-weight:600;color:var(--stone);margin-top:2px}
+  .bartop .money{font-size:16px;font-weight:800;color:var(--green-deep);white-space:nowrap;font-family:"IBM Plex Mono",monospace}
+  .track{height:16px;border-radius:999px;background:#eef2e6;overflow:hidden}
+  .fill{height:100%;border-radius:999px;width:0;transition:width .5s cubic-bezier(.22,.61,.36,1)}
+  .fill.bus{background:linear-gradient(90deg,var(--busred),#e05a49)}
+  .fill.hundred{background:linear-gradient(90deg,var(--green),var(--lime))}
+  .fill.walk{background:linear-gradient(90deg,#2e7d32,#9ccc65)}
+  .pick{box-shadow:0 0 0 2px var(--green) inset;border-color:var(--green)}
+  .picktag{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--green);border-radius:999px;padding:2px 8px;margin-left:8px;vertical-align:middle}
+
+  .foot{margin:6px 2px 2px;font-size:12px;color:var(--stone);line-height:1.5}
+  .foot b{color:var(--ink)}
+  .disc{margin:10px 2px 4px;font-size:11px;color:#8a978a;line-height:1.45}
+</style>
+</head>
+<body>
+<div class="bx">
+  <div class="card">
+    <div class="head">
+      <p class="kick">BerlinWalk.com • Tourist Tips</p>
+      <h1>Is the Hop-On Hop-Off Worth It for Your Trip?</h1>
+      <p>Set up your Berlin trip and see the honest cost of the sightseeing bus against the two things locals actually use: the €4 Bus 100/200 corridor and a tip-based walking tour. The numbers move as you change your plan.</p>
+    </div>
+
+    <div class="body">
+      <div class="ctrls">
+        <div class="row">
+          <span class="lab">Days you want city sightseeing</span>
+          <div class="seg" id="days" role="group" aria-label="Days">
+            <button data-d="1" aria-pressed="true">1 day</button>
+            <button data-d="2" aria-pressed="false">2 days</button>
+            <button data-d="3" aria-pressed="false">3 days</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <span class="lab">Who is travelling</span>
+          <div class="steps">
+            <div class="stepgroup">
+              <span class="name">Adults <small>(15+)</small></span>
+              <div class="step" data-who="adults">
+                <button data-inc="-1" aria-label="Fewer adults">–</button>
+                <span class="val" id="adultsVal">2</span>
+                <button data-inc="1" aria-label="More adults">+</button>
+              </div>
+            </div>
+            <div class="stepgroup">
+              <span class="name">Children <small>(6–14)</small></span>
+              <div class="step" data-who="children">
+                <button data-inc="-1" aria-label="Fewer children">–</button>
+                <span class="val" id="childrenVal">0</span>
+                <button data-inc="1" aria-label="More children">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <span class="lab">How you like to get around</span>
+          <div class="chips" id="style" role="group" aria-label="Travel style">
+            <button class="chip" data-s="walk" aria-pressed="true"><span class="e">🚶</span> I love walking</button>
+            <button class="chip" data-s="ride" aria-pressed="false"><span class="e">🚌</span> I'd rather ride</button>
+            <button class="chip" data-s="limited" aria-pressed="false"><span class="e">♿</span> Limited walking</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="verdict" id="verdict">
+        <p class="vtag">My honest call</p>
+        <h2 id="vhead">…</h2>
+        <p id="vwhy">…</p>
+        <span class="save" id="vsave"></span>
+      </div>
+
+      <div class="bars" id="bars">
+        <div class="barrow" id="row-bus">
+          <div class="bartop">
+            <div class="n">Hop-on hop-off bus pass <span id="tag-bus"></span><small id="sub-bus">24-hour pass, whole group</small></div>
+            <div class="money" id="money-bus">€0</div>
+          </div>
+          <div class="track"><div class="fill bus" id="fill-bus"></div></div>
+        </div>
+        <div class="barrow" id="row-hundred">
+          <div class="bartop">
+            <div class="n">Day ticket + Bus 100/200 <span id="tag-hundred"></span><small id="sub-hundred">Ride the same corridor on a normal bus</small></div>
+            <div class="money" id="money-hundred">€0</div>
+          </div>
+          <div class="track"><div class="fill hundred" id="fill-hundred"></div></div>
+        </div>
+        <div class="barrow" id="row-walk">
+          <div class="bartop">
+            <div class="n">Free walking tour + walk <span id="tag-walk"></span><small id="sub-walk">Tip-based guide, then explore on foot</small></div>
+            <div class="money" id="money-walk">€0</div>
+          </div>
+          <div class="track"><div class="fill walk" id="fill-walk"></div></div>
+        </div>
+      </div>
+
+      <p class="foot" id="foot"></p>
+      <p class="disc">Typical 2026 figures. Hop-on hop-off is shown as a mid-range price across Berlin's main operators (roughly €30–€45 per adult for 24 hours); exact fares, child prices and multi-day passes vary by operator. Bus 100/200 is a normal BVG bus covered by any valid ticket, so its cost is just the €11.20 AB day ticket. The walking-tour line is tip-based, so what you pay is up to you.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var state = { days:1, adults:2, children:0, style:'walk' };
+
+  // ---- typical 2026 price model (per person) ----
+  // hop-on hop-off: 24h adult ~36, 48h ~45, 72h ~52; child roughly half.
+  var HOHO_ADULT = {1:36, 2:45, 3:52};
+  var HOHO_CHILD = {1:18, 2:23, 3:26};
+  // BVG 24-hour AB ticket: adult 11.20, reduced (child 6-14) ~7.00. Under 6 free.
+  var DAY_ADULT = 11.20, DAY_CHILD = 7.00;
+
+  function euro(n){ return '€' + (Math.round(n*100)/100).toFixed(n % 1 === 0 ? 0 : 2); }
+
+  function costs(){
+    var d = state.days, a = state.adults, c = state.children;
+    var bus = a*HOHO_ADULT[d] + c*HOHO_CHILD[d];
+    var hundred = d * (a*DAY_ADULT + c*DAY_CHILD);
+    // Free walking tour is fixed 0; if they still want to ride the long stretch, one day ticket helps,
+    // but the honest cheapest anchor is on-foot + tip, so keep the fixed cost at 0.
+    var walk = 0;
+    return { bus:bus, hundred:hundred, walk:walk };
+  }
+
+  function verdict(cost){
+    var s = state.style, d = state.days, hasKids = state.children > 0;
+    var saveVsBus = cost.bus - cost.hundred;
+    if (s === 'limited'){
+      return {
+        cls:'ride',
+        head:'For limited walking, the hop-on hop-off earns its price.',
+        why:'This is the one situation where I recommend it without hesitation. You get a seat, a roof, step-free-ish access to the big sights, and you never have to work out a route on foot. Pick an operator with a stop near your hotel and treat the bus as your moving base for the day.',
+        pick:'bus'
+      };
+    }
+    if (s === 'ride'){
+      return {
+        cls:'ride',
+        head:'You want to ride, so start with Bus 100/200, not the tourist bus.',
+        why:'Bus 100 and 200 are normal double-deckers that run the same central corridor past the Reichstag, Brandenburg Gate and Tiergarten. Grab a top-front seat and you get the sightseeing view for the price of a day ticket. Save the paid bus for a day you specifically want recorded commentary in your language.',
+        save: saveVsBus > 1 ? 'You keep about ' + euro(saveVsBus) + ' by riding Bus 100/200 instead' : '',
+        pick:'hundred'
+      };
+    }
+    // walk
+    return {
+      cls:'local',
+      head:'You like walking, so the bus is the expensive way to see a walkable centre.',
+      why:'Almost every headline sight sits in a tight line from Alexanderplatz to the Brandenburg Gate, about 30 flat minutes on foot. Start with a tip-based walking tour to get the story and your bearings, use Bus 100/200 for the one longer stretch, and keep the sightseeing-bus money for food.' + (hasKids ? ' With kids, one AB day ticket per adult plus Bus 100 gives you the ride days without the pass price.' : ''),
+      save: saveVsBus > 1 ? 'That is about ' + euro(saveVsBus) + ' less than the bus pass for your group' : '',
+      pick:'walk'
+    };
+  }
+
+  function render(){
+    var cost = costs();
+    var v = verdict(cost);
+    var max = Math.max(cost.bus, cost.hundred, cost.walk, 1);
+
+    document.getElementById('money-bus').textContent = euro(cost.bus);
+    document.getElementById('money-hundred').textContent = euro(cost.hundred);
+    document.getElementById('money-walk').textContent = cost.walk === 0 ? '€0 + tip' : euro(cost.walk);
+
+    document.getElementById('fill-bus').style.width = (cost.bus/max*100) + '%';
+    document.getElementById('fill-hundred').style.width = Math.max(cost.hundred/max*100, 4) + '%';
+    document.getElementById('fill-walk').style.width = '4%';
+
+    var passLabel = {1:'24-hour pass', 2:'48-hour pass', 3:'72-hour pass'};
+    document.getElementById('sub-bus').textContent = passLabel[state.days] + ', whole group';
+    document.getElementById('sub-hundred').textContent = state.days + (state.days>1?' day tickets':' day ticket') + ', whole group';
+
+    // verdict box
+    var vb = document.getElementById('verdict');
+    vb.className = 'verdict ' + v.cls;
+    document.getElementById('vhead').textContent = v.head;
+    document.getElementById('vwhy').textContent = v.why;
+    var saveEl = document.getElementById('vsave');
+    if (v.save){ saveEl.style.display='inline-block'; saveEl.textContent = v.save; }
+    else { saveEl.style.display='none'; }
+
+    // pick highlighting
+    ['bus','hundred','walk'].forEach(function(k){
+      document.getElementById('row-'+k).classList.toggle('pick', v.pick===k);
+      document.getElementById('tag-'+k).innerHTML = v.pick===k ? '<span class="picktag">Best for you</span>' : '';
+    });
+
+    document.getElementById('foot').innerHTML = 'The buses run a fixed loop and mostly stop by early evening, so a "24-hour" pass is really a daytime pass. <b>Bus 100/200 and your own feet keep going all day and all night</b>, which is why the local option usually wins for a central Berlin trip.';
+  }
+
+  // ---- wiring ----
+  document.getElementById('days').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if(!b) return;
+    state.days = +b.dataset.d;
+    [].forEach.call(this.querySelectorAll('button'), function(x){ x.setAttribute('aria-pressed', x===b); });
+    render();
+  });
+  document.getElementById('style').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if(!b) return;
+    state.style = b.dataset.s;
+    [].forEach.call(this.querySelectorAll('button'), function(x){ x.setAttribute('aria-pressed', x===b); });
+    render();
+  });
+  [].forEach.call(document.querySelectorAll('.step'), function(step){
+    step.addEventListener('click', function(e){
+      var b = e.target.closest('button'); if(!b) return;
+      var who = step.dataset.who, delta = +b.dataset.inc;
+      var min = who==='adults' ? 1 : 0;
+      state[who] = Math.max(min, Math.min(8, state[who] + delta));
+      document.getElementById(who+'Val').textContent = state[who];
+      render();
+    });
+  });
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

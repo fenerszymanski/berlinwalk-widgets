@@ -221,7 +221,8 @@
   "neukolln-berlin": "neukolln-berlin",
   "berlin-rooftop-bars": "berlin-rooftop-bars",
   "one-day-in-berlin": "one-day-in-berlin",
-  "berlin-then-and-now": "berlin-then-and-now"
+  "berlin-then-and-now": "berlin-then-and-now",
+  "berlin-hop-on-hop-off-bus-worth-it": "berlin-hop-on-hop-off-bus-worth-it"
 };
 
   var SCHEMAS = {
@@ -10743,6 +10744,68 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Start with the documented viewpoint and one fixed anchor. Then compare road directions, the shape of the public space and gaps in the building line. Do not assume two photographs share the same angle or lens, and check whether a monument was rebuilt or moved."
+        }
+      }
+    ]
+  },
+  "berlin-hop-on-hop-off-bus-worth-it": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is the hop-on hop-off bus worth it in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on your trip. For most people staying in the centre it is the expensive way to solve a problem Berlin already solves cheaply, because the big sights are walkable and Bus 100/200 covers almost the same corridor for the price of a normal ticket. The paid bus earns its price when walking is hard, when you have very little time and want wide coverage fast, in cold or wet weather, or for families who want a seated base with recorded commentary."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does the Berlin hop-on hop-off bus cost in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A 24-hour adult pass is roughly €30 to €45 depending on the operator and the extras included, with children at a reduced rate. Most operators also sell 48-hour and 72-hour passes. For comparison, a BVG 24-hour AB day ticket is €11.20 and a single AB ride is €4.00."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between the hop-on hop-off bus and Bus 100?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Bus 100 and Bus 200 are normal BVG public buses, so any valid ticket covers them and the cost is just the €11.20 day ticket. They run the same central corridor past the Reichstag, Brandenburg Gate and Tiergarten, and a top-front seat gives a similar view. What you do not get is recorded commentary, a fixed loop of tourist-only stops, or the extras some passes bundle in, such as a boat cruise or a walking tour."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Who are the main hop-on hop-off operators in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin has about four operators running six routes, including Big Bus Tours and City Sightseeing, plus smaller ones such as City Circle and Tempelhofer Sightseeing. Big Bus runs a longer red route and a shorter blue route and bundles extras like a walking tour and a seasonal Spree cruise. City Sightseeing runs a Classic central route and a separate east Berlin and Wall route. Routes and stops overlap heavily, so the choice is mostly about price and which extras you will actually use."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What time do the sightseeing buses run?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most run from about 09:30 to 18:00, with the last full loop leaving in the late afternoon, and they run less often or pause in winter. That is why a 24-hour pass is really a daytime pass. If you want to be out in the evening, your own feet and the normal buses and trains are the ones still moving."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the hop-on hop-off bus good for families with children?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It can be. A seated base with a roof, recorded commentary and a fixed loop takes the stress out of a day with tired children, and child tickets are cheaper. That said, one AB day ticket per adult plus Bus 100/200 usually gives families the same ride days for a lot less, so I would only pay for the tourist bus if the commentary and the fixed base genuinely help your group."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to book the Berlin sightseeing bus in advance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Usually no. You can buy on the day at a stop or online, and most operators offer free cancellation up to 24 hours before. Booking ahead is only worth it for a specific timed extra, like an evening tour or a cruise slot, or in the busiest summer weeks."
         }
       }
     ]
