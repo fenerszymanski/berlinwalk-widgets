@@ -54,6 +54,32 @@
     'unter-den-linden-berlin',
     'why-is-berlin-founding-year-1237'
   ].forEach(function (slug) { HISTORY_RELEVANT_ROLLOUT_SLUGS[slug] = true; });
+  var CONTENT_UPGRADE_ELEMENT_TAG = 'bw-content-upgrade-card';
+  var CONTENT_UPGRADE_MARKER = 'data-bw-content-upgrade';
+  var CONTENT_UPGRADE_EXPERIMENT_ID = 'transport_ticket_pocket_card_v1';
+  var CONTENT_UPGRADE_STORAGE_KEY = 'bwContentUpgrade.transportTicket.v1';
+  var CONTENT_UPGRADE_API_BASE = window.BW_DOWNLOAD_LEAD_API_BASE || 'https://app.berlinwalk.com/api/download-lead';
+  var CONTENT_UPGRADE_ELEMENT_URL = window.BW_CONTENT_UPGRADE_ELEMENT_URL || 'https://fenerszymanski.github.io/berlinwalk-widgets/content-upgrade-card/content-upgrade-card-element.js';
+  var CONTENT_UPGRADE_ASSET_ID = 'berlin-transport-ticket-pocket-card';
+  var CONTENT_UPGRADE_ASSET_VERSION = '2026-07-v1';
+  var CONTENT_UPGRADE_PLACEMENT = 'blog_inline_booking_slot';
+  var CONTENT_UPGRADE_SAFETY_SLUG = 'berlin-ticket-machines';
+  var CONTENT_UPGRADE_READY_TIMEOUT_MS = 7000;
+  var CONTENT_UPGRADE_SLUGS = {};
+  [
+    'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
+    'berlin-ticket-machines',
+    'buy-berlin-transport-tickets-on-your-phone',
+    'berlin-ab-abc-ticket-zones',
+    'do-you-really-need-to-validate-your-ticket-on-berlin-trains',
+    'berlin-u-bahn-fine',
+    'deutschlandticket-berlin-tourists',
+    'u-bahn-vs-s-bahn-berlin',
+    'berlin-trams-guide',
+    'berlin-night-transport',
+    'bus-100-berlin-the-4-sightseeing-tour-locals-don-t-want-you-to-know-about',
+    'berlin-public-transport-ferries'
+  ].forEach(function (slug) { CONTENT_UPGRADE_SLUGS[slug] = true; });
 
   var injections = 0;
   var reinjectTimer = null;
@@ -66,6 +92,13 @@
   var historyFallbackPaths = {};
   var pendingHistoryViews = {};
   var sentHistoryViews = {};
+  var contentUpgradeElementPromise = null;
+  var contentUpgradeInsertionPending = false;
+  var contentUpgradeMemoryBucket = null;
+  var contentUpgradeMemoryAssignmentId = '';
+  var contentUpgradeFallbackPaths = {};
+  var pendingContentUpgradeViews = {};
+  var sentContentUpgradeViews = {};
 
   function clearHistoryInlineLayering() {
     if (document.body) document.body.classList.remove('bw-history-lead-inline-active');
@@ -596,6 +629,7 @@
 
   function historyAssignmentShape(variant, inExperiment, qa, stage, slug) {
     return {
+      experimentId: HISTORY_EXPERIMENT_ID,
       variant: variant,
       inExperiment: Boolean(inExperiment),
       qa: Boolean(qa),
@@ -755,6 +789,288 @@
     });
   }
 
+  /* The transport Pocket Card is inert for normal visitors unless Wix Custom
+   * Code explicitly advances it beyond QA. During safety it runs at 10% only
+   * on the ticket-machine article for 24 hours; pilot then runs 90/10 on the
+   * exact transport inventory below. */
+  function contentUpgradeConfig() {
+    try {
+      var override = window.BW_CONTENT_UPGRADE_EXPERIMENT_CONFIG || {};
+      var stage = String(override.stage || 'qa').toLowerCase();
+      if (['qa', 'safety', 'ramp', 'pilot'].indexOf(stage) === -1) throw new Error('unsupported stage');
+      return {
+        enabled: override.enabled !== false,
+        stage: stage,
+        safetyStartedAt: String(override.safetyStartedAt || ''),
+        rampWeight: Number.isFinite(Number(override.rampWeight)) ? Number(override.rampWeight) : 0.10,
+        pilotWeight: Number.isFinite(Number(override.pilotWeight)) ? Number(override.pilotWeight) : 0.90,
+        invalid: false
+      };
+    } catch (error) {
+      console.warn(LOG, 'content-upgrade config invalid; restored booking control', error && error.message || error);
+      return {
+        enabled: false,
+        stage: 'qa',
+        safetyStartedAt: '',
+        rampWeight: 0,
+        pilotWeight: 0,
+        invalid: true
+      };
+    }
+  }
+
+  function contentUpgradeEffectiveStage(config) {
+    if (config.stage !== 'safety') return config.stage;
+    var startedAt = new Date(config.safetyStartedAt).getTime();
+    if (!Number.isFinite(startedAt) || startedAt > Date.now()) return 'qa';
+    return Date.now() - startedAt >= 24 * 60 * 60 * 1000 ? 'pilot' : 'ramp';
+  }
+
+  function contentUpgradeQueryChoice() {
+    var match = String(location.search || '').match(/[?&]bwDownloadLead=([^&]+)/);
+    if (!match) return '';
+    var value = decodeURIComponent(match[1] || '').toLowerCase();
+    if (value === '0' || value === 'off') return 'off';
+    if (value === 'control') return 'control';
+    if (value === '1' || value === 'on' || value === 'variant') return 'variant';
+    return '';
+  }
+
+  function contentUpgradeAcquisitionCohort(slug) {
+    slug = slug || historySlug();
+    if (slug === CONTENT_UPGRADE_SAFETY_SLUG) return 'transport_ticket_safety';
+    if (CONTENT_UPGRADE_SLUGS[slug]) return 'transport_ticket_pilot';
+    return 'blog_forced_qa';
+  }
+
+  function randomContentUpgradeBucket() {
+    try {
+      if (window.crypto && typeof window.crypto.getRandomValues === 'function') {
+        var values = new Uint32Array(1);
+        window.crypto.getRandomValues(values);
+        return values[0] / 4294967296;
+      }
+    } catch (err) {}
+    return Math.random();
+  }
+
+  function validContentUpgradeAssignmentId(value) {
+    value = String(value || '');
+    return /^cua_[a-f0-9]{32}$/i.test(value) ? value : '';
+  }
+
+  function randomContentUpgradeAssignmentId() {
+    try {
+      if (window.crypto && typeof window.crypto.getRandomValues === 'function') {
+        var values = new Uint32Array(4);
+        window.crypto.getRandomValues(values);
+        return 'cua_' + Array.prototype.map.call(values, function (value) {
+          return Number(value).toString(16).padStart(8, '0');
+        }).join('');
+      }
+    } catch (err) {}
+    var fallback = '';
+    for (var i = 0; i < 4; i++) fallback += Math.floor(Math.random() * 4294967296).toString(16).padStart(8, '0');
+    return 'cua_' + fallback;
+  }
+
+  function readStoredContentUpgradeAssignment() {
+    if (!historyAnalyticsAllowed()) return null;
+    try {
+      var raw = window.localStorage.getItem(CONTENT_UPGRADE_STORAGE_KEY);
+      var parsed = raw ? JSON.parse(raw) : null;
+      if (parsed && parsed.experiment === CONTENT_UPGRADE_EXPERIMENT_ID && typeof parsed.bucket === 'number' && parsed.bucket >= 0 && parsed.bucket < 1) {
+        return {
+          bucket: parsed.bucket,
+          assignmentId: validContentUpgradeAssignmentId(parsed.assignmentId)
+        };
+      }
+    } catch (err) {}
+    return null;
+  }
+
+  function rememberContentUpgradeAssignment() {
+    if (!historyAnalyticsAllowed() || contentUpgradeMemoryBucket === null) return;
+    try {
+      if (!contentUpgradeMemoryAssignmentId) contentUpgradeMemoryAssignmentId = randomContentUpgradeAssignmentId();
+      window.localStorage.setItem(CONTENT_UPGRADE_STORAGE_KEY, JSON.stringify({
+        experiment: CONTENT_UPGRADE_EXPERIMENT_ID,
+        bucket: contentUpgradeMemoryBucket,
+        assignmentId: contentUpgradeMemoryAssignmentId,
+        assignedAt: new Date().toISOString()
+      }));
+    } catch (err) {}
+  }
+
+  function contentUpgradeBucket() {
+    if (contentUpgradeMemoryBucket !== null) {
+      rememberContentUpgradeAssignment();
+      return contentUpgradeMemoryBucket;
+    }
+    var stored = readStoredContentUpgradeAssignment();
+    contentUpgradeMemoryBucket = stored === null ? randomContentUpgradeBucket() : stored.bucket;
+    contentUpgradeMemoryAssignmentId = stored && stored.assignmentId || '';
+    rememberContentUpgradeAssignment();
+    return contentUpgradeMemoryBucket;
+  }
+
+  function contentUpgradeAssignmentId() {
+    if (!historyAnalyticsAllowed()) return '';
+    contentUpgradeBucket();
+    rememberContentUpgradeAssignment();
+    return contentUpgradeMemoryAssignmentId;
+  }
+
+  function contentUpgradeStageEligibility(stage, slug) {
+    if (stage === 'ramp') return slug === CONTENT_UPGRADE_SAFETY_SLUG;
+    if (stage === 'pilot') return Boolean(CONTENT_UPGRADE_SLUGS[slug]);
+    return false;
+  }
+
+  function contentUpgradeStageWeight(config, stage) {
+    stage = stage || contentUpgradeEffectiveStage(config);
+    if (stage === 'ramp') return Math.max(0, Math.min(1, config.rampWeight));
+    if (stage === 'pilot') return Math.max(0, Math.min(1, config.pilotWeight));
+    return 0;
+  }
+
+  function contentUpgradeAssignmentShape(variant, inExperiment, qa, stage, slug) {
+    return {
+      experimentId: CONTENT_UPGRADE_EXPERIMENT_ID,
+      variant: variant,
+      inExperiment: Boolean(inExperiment),
+      qa: Boolean(qa),
+      stage: stage || 'qa',
+      sourceSlug: slug || historySlug(),
+      acquisitionCohort: contentUpgradeAcquisitionCohort(slug),
+      placement: CONTENT_UPGRADE_PLACEMENT,
+      assignmentId: inExperiment ? contentUpgradeAssignmentId() : ''
+    };
+  }
+
+  function contentUpgradeAssignment() {
+    var slug = historySlug();
+    try {
+      var config = contentUpgradeConfig();
+      var stage = contentUpgradeEffectiveStage(config);
+      var choice = contentUpgradeQueryChoice();
+      var globallyDisabled = window.BW_DISABLE_CONTENT_UPGRADE === true || choice === 'off' || !config.enabled || contentUpgradeFallbackPaths[location.pathname];
+      if (globallyDisabled) return contentUpgradeAssignmentShape('control', false, false, stage, slug);
+      if (choice === 'variant') return contentUpgradeAssignmentShape('variant', true, true, 'qa', slug);
+      if (choice === 'control') return contentUpgradeAssignmentShape('control', true, true, 'qa', slug);
+      if (!contentUpgradeStageEligibility(stage, slug)) return contentUpgradeAssignmentShape('control', false, false, stage, slug);
+      return contentUpgradeAssignmentShape(
+        contentUpgradeBucket() < contentUpgradeStageWeight(config, stage) ? 'variant' : 'control',
+        true,
+        false,
+        stage,
+        slug
+      );
+    } catch (error) {
+      console.warn(LOG, 'content-upgrade assignment failed; restored booking control', error && error.message || error);
+      return contentUpgradeAssignmentShape('control', false, false, 'qa', slug);
+    }
+  }
+
+  function contentUpgradeEventUrl() {
+    var url = new URL(CONTENT_UPGRADE_API_BASE, window.location.href);
+    url.searchParams.set('action', 'event');
+    return url.toString();
+  }
+
+  function contentUpgradeEventPayload(eventName, assignment) {
+    if (!historyAnalyticsAllowed()) return false;
+    assignment = assignment || contentUpgradeAssignmentShape('control', false, false, 'qa', historySlug());
+    var assignmentId = contentUpgradeAssignmentId();
+    return {
+      eventName: eventName,
+      occurredAt: new Date().toISOString(),
+      analyticsConsent: true,
+      analyticsConsentAtSubmit: true,
+      assetId: CONTENT_UPGRADE_ASSET_ID,
+      assetVersion: CONTENT_UPGRADE_ASSET_VERSION,
+      sourceSlug: assignment.sourceSlug || historySlug(),
+      pageUrl: safeHistoryUrl(window.location.href),
+      referrer: safeHistoryUrl(document.referrer),
+      experiment: CONTENT_UPGRADE_EXPERIMENT_ID,
+      variant: assignment.variant,
+      acquisitionCohort: assignment.acquisitionCohort || contentUpgradeAcquisitionCohort(assignment.sourceSlug),
+      placement: assignment.placement || CONTENT_UPGRADE_PLACEMENT,
+      assignmentId: assignmentId,
+      utm: historyUtm(),
+      device: {
+        width: Number(window.innerWidth || 0),
+        height: Number(window.innerHeight || 0)
+      },
+      qa: Boolean(assignment.qa)
+    };
+  }
+
+  function sendContentUpgradeEvent(eventName, assignment) {
+    var body = contentUpgradeEventPayload(eventName, assignment);
+    if (!body) return false;
+    try {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: eventName,
+        experiment: CONTENT_UPGRADE_EXPERIMENT_ID,
+        variant: body.variant,
+        acquisition_cohort: body.acquisitionCohort,
+        placement: body.placement,
+        assignment_id: body.assignmentId,
+        asset_id: CONTENT_UPGRADE_ASSET_ID
+      });
+      if (typeof window.gtag === 'function') window.gtag('event', eventName, {
+        experiment: CONTENT_UPGRADE_EXPERIMENT_ID,
+        variant: body.variant,
+        acquisition_cohort: body.acquisitionCohort,
+        placement: body.placement,
+        assignment_id: body.assignmentId,
+        asset_id: CONTENT_UPGRADE_ASSET_ID
+      });
+      fetch(contentUpgradeEventUrl(), {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        keepalive: true,
+        body: JSON.stringify(body)
+      }).catch(function () {});
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  function queueContentUpgradeExperimentView(assignment) {
+    if (!assignment.inExperiment) return;
+    var key = location.pathname + ':' + assignment.variant + ':' + (assignment.qa ? 'qa' : 'live');
+    if (sentContentUpgradeViews[key]) return;
+    pendingContentUpgradeViews[key] = assignment;
+    flushContentUpgradeExperimentViews();
+  }
+
+  function flushContentUpgradeExperimentViews() {
+    rememberContentUpgradeAssignment();
+    if (!historyAnalyticsAllowed()) return;
+    Object.keys(pendingContentUpgradeViews).forEach(function (key) {
+      var assignment = pendingContentUpgradeViews[key];
+      assignment.assignmentId = contentUpgradeAssignmentId();
+      var element = document.querySelector('[' + CONTENT_UPGRADE_MARKER + ']');
+      if (element && assignment.assignmentId) element.setAttribute('assignment-id', assignment.assignmentId);
+      if (sendContentUpgradeEvent('bw_lead_asset_experiment_view', assignment)) {
+        sentContentUpgradeViews[key] = true;
+        delete pendingContentUpgradeViews[key];
+      }
+    });
+  }
+
+  function bindControlContentUpgradeTracking(card, assignment) {
+    if (!assignment.inExperiment) return;
+    card.addEventListener('click', function (event) {
+      var target = event.target.closest('[data-bw-booking-cta],[data-bw-day-index],[data-bw-slot-index],.bw-blog-booking-more');
+      if (target) sendContentUpgradeEvent('bw_lead_asset_control_booking_click', assignment);
+    });
+  }
+
   function loadHistoryElement() {
     if (window.customElements && customElements.get(HISTORY_ELEMENT_TAG)) return Promise.resolve();
     if (historyElementPromise) return historyElementPromise;
@@ -805,6 +1121,56 @@
     return historyElementPromise;
   }
 
+  function loadContentUpgradeElement() {
+    if (window.customElements && customElements.get(CONTENT_UPGRADE_ELEMENT_TAG)) return Promise.resolve();
+    if (contentUpgradeElementPromise) return contentUpgradeElementPromise;
+    contentUpgradeElementPromise = new Promise(function (resolve, reject) {
+      var done = false;
+      var timeout = setTimeout(function () {
+        if (done) return;
+        done = true;
+        reject(new Error('Content-upgrade element timed out'));
+      }, CONTENT_UPGRADE_READY_TIMEOUT_MS);
+
+      function finish() {
+        if (done) return;
+        if (!window.customElements || !customElements.get(CONTENT_UPGRADE_ELEMENT_TAG)) return;
+        done = true;
+        clearTimeout(timeout);
+        resolve();
+      }
+
+      var existing = document.querySelector('script[data-bw-content-upgrade-element]');
+      if (existing) {
+        if (window.customElements && typeof customElements.whenDefined === 'function') customElements.whenDefined(CONTENT_UPGRADE_ELEMENT_TAG).then(finish);
+        existing.addEventListener('error', function () {
+          if (done) return;
+          done = true;
+          clearTimeout(timeout);
+          reject(new Error('Content-upgrade element failed to load'));
+        }, { once: true });
+        return;
+      }
+
+      var script = document.createElement('script');
+      script.src = CONTENT_UPGRADE_ELEMENT_URL;
+      script.async = true;
+      script.setAttribute('data-bw-content-upgrade-element', '1');
+      script.onload = function () {
+        finish();
+        if (!done && window.customElements && typeof customElements.whenDefined === 'function') customElements.whenDefined(CONTENT_UPGRADE_ELEMENT_TAG).then(finish);
+      };
+      script.onerror = function () {
+        if (done) return;
+        done = true;
+        clearTimeout(timeout);
+        reject(new Error('Content-upgrade element failed to load'));
+      };
+      document.head.appendChild(script);
+    });
+    return contentUpgradeElementPromise;
+  }
+
   function currentInsertionAnchor() {
     var body = findPostBody();
     return body ? findInsertionAnchor(body) : null;
@@ -812,10 +1178,18 @@
 
   function insertControl(anchor, assignment) {
     var card = buildBookingCard();
-    bindControlHistoryTracking(card, assignment);
+    if (assignment && assignment.experimentId === CONTENT_UPGRADE_EXPERIMENT_ID) {
+      bindControlContentUpgradeTracking(card, assignment);
+    } else {
+      bindControlHistoryTracking(card, assignment);
+    }
     anchor.parentNode.insertBefore(card, anchor.nextSibling);
     injections += 1;
-    queueHistoryExperimentView(assignment);
+    if (assignment && assignment.experimentId === CONTENT_UPGRADE_EXPERIMENT_ID) {
+      queueContentUpgradeExperimentView(assignment);
+    } else {
+      queueHistoryExperimentView(assignment);
+    }
     console.log(LOG, 'injected attempt', injections, assignment.inExperiment ? 'experiment control' : 'booking card');
     return true;
   }
@@ -891,24 +1265,117 @@
     return true;
   }
 
+  function restoreContentUpgradeBookingControl(requestedPath, assignment, error, element) {
+    contentUpgradeInsertionPending = false;
+    contentUpgradeFallbackPaths[requestedPath] = true;
+    if (element && element.parentNode) element.parentNode.removeChild(element);
+    if (location.pathname !== requestedPath) return false;
+    if (document.querySelector('[' + MARKER + ']')) return true;
+    var anchor = currentInsertionAnchor();
+    if (!anchor) {
+      scheduleInject();
+      return false;
+    }
+    var fallback = contentUpgradeAssignmentShape('control', false, assignment && assignment.qa, assignment && assignment.stage, assignment && assignment.sourceSlug);
+    insertControl(anchor, fallback);
+    console.warn(LOG, 'content-upgrade variant unavailable; restored booking control', error && error.message || error);
+    return true;
+  }
+
+  function bindContentUpgradeElementTracking(element, assignment) {
+    element.addEventListener('bw-content-upgrade-form-start', function () {
+      sendContentUpgradeEvent('bw_lead_asset_form_start', assignment);
+    }, { once: true });
+    element.addEventListener('bw-content-upgrade-submit', function () {
+      sendContentUpgradeEvent('bw_lead_asset_submit', assignment);
+    });
+  }
+
+  function monitorContentUpgradeElement(element, requestedPath, assignment) {
+    var startedAt = Date.now();
+    function checkReady() {
+      if (location.pathname !== requestedPath || !element.parentNode) return;
+      var ready = element.getAttribute('data-bw-content-upgrade-ready');
+      if (ready === 'true') {
+        queueContentUpgradeExperimentView(assignment);
+        sendContentUpgradeEvent('bw_lead_asset_gate_view', assignment);
+        return;
+      }
+      if (ready === 'error' || Date.now() - startedAt >= CONTENT_UPGRADE_READY_TIMEOUT_MS) {
+        restoreContentUpgradeBookingControl(requestedPath, assignment, new Error('Content-upgrade element did not become ready'), element);
+        return;
+      }
+      setTimeout(checkReady, 250);
+    }
+    element.addEventListener('bw-content-upgrade-error', function () {
+      restoreContentUpgradeBookingControl(requestedPath, assignment, new Error('Content-upgrade element render failed'), element);
+    }, { once: true });
+    setTimeout(checkReady, 250);
+  }
+
+  function insertContentUpgradeVariant(assignment) {
+    if (contentUpgradeInsertionPending) return true;
+    contentUpgradeInsertionPending = true;
+    var requestedPath = location.pathname;
+    var insertedElement = null;
+    loadContentUpgradeElement().then(function () {
+      contentUpgradeInsertionPending = false;
+      if (location.pathname !== requestedPath || document.querySelector('[' + MARKER + ']')) return;
+      var anchor = currentInsertionAnchor();
+      if (!anchor) return;
+      var element = document.createElement(CONTENT_UPGRADE_ELEMENT_TAG);
+      insertedElement = element;
+      element.setAttribute(MARKER, '1');
+      element.setAttribute(CONTENT_UPGRADE_MARKER, '1');
+      element.setAttribute('asset-id', CONTENT_UPGRADE_ASSET_ID);
+      element.setAttribute('asset-version', CONTENT_UPGRADE_ASSET_VERSION);
+      element.setAttribute('source-slug', assignment.sourceSlug);
+      element.setAttribute('source-url', safeHistoryUrl(window.location.href));
+      element.setAttribute('experiment', CONTENT_UPGRADE_EXPERIMENT_ID);
+      element.setAttribute('variant', 'variant');
+      element.setAttribute('api-base', CONTENT_UPGRADE_API_BASE);
+      element.setAttribute('acquisition-cohort', assignment.acquisitionCohort);
+      element.setAttribute('placement', assignment.placement);
+      if (assignment.assignmentId) element.setAttribute('assignment-id', assignment.assignmentId);
+      if (assignment.qa) element.setAttribute('qa', 'true');
+      bindContentUpgradeElementTracking(element, assignment);
+      anchor.parentNode.insertBefore(element, anchor.nextSibling);
+      injections += 1;
+      monitorContentUpgradeElement(element, requestedPath, assignment);
+      console.log(LOG, 'injected attempt', injections, 'content-upgrade experiment variant');
+    }).catch(function (error) {
+      restoreContentUpgradeBookingControl(requestedPath, assignment, error, insertedElement);
+    });
+    return true;
+  }
+
+  function slotDecision() {
+    var history = historyAssignment();
+    if (history.inExperiment) return { owner: 'history', assignment: history };
+    var contentUpgrade = contentUpgradeAssignment();
+    if (contentUpgrade.inExperiment) return { owner: 'content-upgrade', assignment: contentUpgrade };
+    return { owner: 'booking', assignment: history };
+  }
+
   function inject() {
     if (!isPostPage()) return false;
     if (document.querySelector('[' + MARKER + ']')) return false;
     if (injections >= MAX_REINJECTS) return false;
-    if (historyInsertionPending) return false;
+    if (historyInsertionPending || contentUpgradeInsertionPending) return false;
 
     var body = findPostBody();
     if (!body) return false;
     var anchor = findInsertionAnchor(body);
     if (!anchor) return false;
 
-    var assignment;
+    var decision;
     try {
-      assignment = historyAssignment();
-      if (assignment.variant === 'variant') return insertHistoryVariant(assignment);
-      return insertControl(anchor, assignment);
+      decision = slotDecision();
+      if (decision.owner === 'history' && decision.assignment.variant === 'variant') return insertHistoryVariant(decision.assignment);
+      if (decision.owner === 'content-upgrade' && decision.assignment.variant === 'variant') return insertContentUpgradeVariant(decision.assignment);
+      return insertControl(anchor, decision.assignment);
     } catch (error) {
-      console.warn(LOG, 'history experiment failed; restored booking control', error && error.message || error);
+      console.warn(LOG, 'slot experiment failed; restored booking control', error && error.message || error);
       return insertControl(anchor, historyAssignmentShape('control', false, false, 'qa', historySlug()));
     }
   }
@@ -930,6 +1397,7 @@
   function bootForCurrentPage() {
     injections = 0;
     historyInsertionPending = false;
+    contentUpgradeInsertionPending = false;
     clearHistoryInlineLayering();
     setTimeout(function () {
       inject();
@@ -951,6 +1419,8 @@
   ['consentPolicyChanged', 'consentPolicyInitialized', 'ucConsentEvent'].forEach(function (name) {
     window.addEventListener(name, flushHistoryExperimentViews);
     document.addEventListener(name, flushHistoryExperimentViews);
+    window.addEventListener(name, flushContentUpgradeExperimentViews);
+    document.addEventListener(name, flushContentUpgradeExperimentViews);
   });
 
   if (window.BW_HISTORY_LEAD_TEST_HOOKS === true) {
@@ -964,6 +1434,22 @@
       resetBucket: function () { historyMemoryBucket = null; historyMemoryAssignmentId = ''; },
       storageKey: HISTORY_STORAGE_KEY,
       placement: HISTORY_INLINE_PLACEMENT
+    };
+  }
+
+  if (window.BW_CONTENT_UPGRADE_TEST_HOOKS === true) {
+    window.__bwContentUpgradeTestHooks = {
+      assignment: contentUpgradeAssignment,
+      effectiveStage: function () { return contentUpgradeEffectiveStage(contentUpgradeConfig()); },
+      eventPayload: contentUpgradeEventPayload,
+      eligible: contentUpgradeStageEligibility,
+      fallbackAssignment: function () { return contentUpgradeAssignmentShape('control', false, false, 'qa', historySlug()); },
+      resetBucket: function () { contentUpgradeMemoryBucket = null; contentUpgradeMemoryAssignmentId = ''; },
+      slotDecision: slotDecision,
+      slugs: Object.keys(CONTENT_UPGRADE_SLUGS),
+      storageKey: CONTENT_UPGRADE_STORAGE_KEY,
+      placement: CONTENT_UPGRADE_PLACEMENT,
+      safetySlug: CONTENT_UPGRADE_SAFETY_SLUG
     };
   }
 

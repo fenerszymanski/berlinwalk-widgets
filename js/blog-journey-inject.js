@@ -1777,14 +1777,10 @@
     'luggage-storage-in-berlin-2026': 1,
     'berlin-hauptbahnhof-guide': 1,
     'berlin-train-stations': 1,
-    'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus': 1,
-    'berlin-ab-abc-ticket-zones': 1,
-    'do-you-really-need-to-validate-your-ticket-on-berlin-trains': 1,
     'taxi-in-berlin': 1,
     'uber-in-berlin': 1,
     'atm-in-berlin': 1,
-    'esim-sim-wifi-berlin-2026': 1,
-    'deutschlandticket-berlin-tourists': 1
+    'esim-sim-wifi-berlin-2026': 1
   };
 
   function fdrBridgeUrl(slug) {
