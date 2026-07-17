@@ -14,6 +14,7 @@
   var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var PRIVACY_URL_DEFAULT = 'https://www.berlinwalk.com/privacy-policy';
   var CONSENT_VERSION = 'history-series-v2-2026-07-17';
+  var INLINE_CONSENT_VERSION = 'history-series-v3-compact-2026-07-17';
   var EXPERIMENT_DEFAULT = 'history_story_lead_v1';
   var EXPERIMENT_STORAGE_KEY = 'bwHistoryLeadExperiment.v1';
   var DIRECT_ASSIGNMENT_STORAGE_KEY = 'bwHistoryLeadDirectAssignment.v1';
@@ -23,6 +24,9 @@
   var INLINE_PLACEMENT = 'blog_inline_booking_slot';
   var PRIVACY_LINK_COPY = 'Read the Privacy Policy.';
   var SERIES_CONSENT_COPY = 'Email me Story 2 now and Story 3 about 48 hours later. These two emails include Berlin history and may also include information about BerlinWalk walking tours. I can unsubscribe at any time. Read the Privacy Policy.';
+  var INLINE_SERIES_CONSENT_COPY = 'Send me Story 2 now and Story 3 in about 48 hours. They may include BerlinWalk tour information.';
+  var NEWSLETTER_CONSENT_VERSION = 'history-newsletter-v1-2026-07-17';
+  var NEWSLETTER_CONSENT_COPY = 'Also send me occasional Berlin history, new articles and walking-tour updates after this series.';
   var directMemoryAssignmentId = '';
   var ALLOWED_LICENSES = {
     'Public Domain': true,
@@ -56,6 +60,9 @@
   var assetManifestUrl = scriptUrl
     ? new URL('assets-manifest.json', scriptUrl).toString()
     : 'assets-manifest.json';
+  var brandMarkUrl = scriptUrl
+    ? new URL('../ultimate-berlin-trip-planner/assets/berlinwalk-logo-rounded.png', scriptUrl).toString()
+    : '../ultimate-berlin-trip-planner/assets/berlinwalk-logo-rounded.png';
 
   var STORIES = {
     monbijou: {
@@ -318,6 +325,9 @@
 
     disconnectedCallback() {
       this._removeConsentListeners();
+      if (this._mode() === 'inline' && document.body && !document.querySelector(TAG + '[mode="inline"]')) {
+        document.body.classList.remove('bw-history-lead-inline-active');
+      }
       this._connected = false;
     }
 
@@ -389,15 +399,23 @@
       var story = STORIES[storyId];
       if (mode === 'full') this._ensureNoIndex();
 
-      this.innerHTML = [
-        '<style>', this._styles(), '</style>',
-        '<section class="bw-history-lead bw-history-lead--' + mode + '" aria-labelledby="bw-history-lead-title-' + storyId + '">',
-        mode === 'full' ? this._renderFullIntro(storyId) : '',
-        this._renderStory(storyId, story, mode),
-        storyId === 'monbijou' ? this._renderGate(mode) : this._renderNextStep(storyId),
-        this._renderCredits(storyId, story),
-        '</section>'
-      ].join('');
+      if (mode === 'inline') {
+        if (document.body) document.body.classList.add('bw-history-lead-inline-active');
+        this.innerHTML = [
+          '<style>', this._styles(), '</style>',
+          this._renderInlineSampler(storyId, story)
+        ].join('');
+      } else {
+        this.innerHTML = [
+          '<style>', this._styles(), '</style>',
+          '<section class="bw-history-lead bw-history-lead--' + mode + '" aria-labelledby="bw-history-lead-title-' + storyId + '">',
+          this._renderFullIntro(storyId),
+          this._renderStory(storyId, story, mode),
+          storyId === 'monbijou' ? this._renderGate(mode) : this._renderNextStep(storyId),
+          this._renderCredits(storyId, story),
+          '</section>'
+        ].join('');
+      }
 
       this.setAttribute('data-bw-history-lead-ready', 'true');
       this.setAttribute('data-bw-history-story', storyId);
@@ -411,6 +429,78 @@
         }
         this._queueTrack('bw_history_lead_story_access', storyId);
       }
+    }
+
+    _renderInlineSampler(storyId, story) {
+      var privacyUrl = this.getAttribute('privacy-url') || PRIVACY_URL_DEFAULT;
+      return [
+        '<section class="bw-history-lead bw-history-lead--inline" aria-labelledby="bw-history-lead-title-' + storyId + '">',
+        '<div class="bw-history-lead__inline-ribbon"><span>Free email story</span><span aria-hidden="true">&bull;</span><span>Not another guide</span></div>',
+        '<div class="bw-history-lead__inline-grid">',
+        this._renderInlineVisual(storyId),
+        '<div class="bw-history-lead__inline-offer">',
+        '<div class="bw-history-lead__inline-title" id="bw-history-lead-title-' + storyId + '" role="heading" aria-level="2">Berlin hides another city.</div>',
+        '<div class="bw-history-lead__inline-intro">Read one place now. I&rsquo;ll send the next two.</div>',
+        '<ol class="bw-history-lead__inline-steps" aria-label="Berlin Before and Now email series">',
+        '<li><span class="bw-history-lead__step-number">01</span><span class="bw-history-lead__step-state">Open</span><span class="bw-history-lead__step-place">Monbijou Palace</span></li>',
+        '<li><span class="bw-history-lead__step-number">02</span><span class="bw-history-lead__step-state">Email now</span><span class="bw-history-lead__step-place">Bethlehemkirchplatz</span></li>',
+        '<li><span class="bw-history-lead__step-number">03</span><span class="bw-history-lead__step-state">48 hours</span><span class="bw-history-lead__step-place">Engelbecken</span></li>',
+        '</ol>',
+        '<form class="bw-history-lead__form bw-history-lead__inline-form" data-bw-history-form novalidate>',
+        '<label class="bw-history-lead__email-label" for="bw-history-email-inline">Email address</label>',
+        '<input class="bw-history-lead__inline-email" id="bw-history-email-inline" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required data-bw-history-email>',
+        '<button class="bw-history-lead__inline-submit" type="submit" data-bw-history-submit>Reveal Story 2</button>',
+        '<div class="bw-history-lead__honeypot" aria-hidden="true"><label>Website<input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>',
+        '<label class="bw-history-lead__consent bw-history-lead__consent--inline">',
+        '<input name="consent" type="checkbox" required data-bw-history-consent>',
+        '<span>' + escapeHtml(INLINE_SERIES_CONSENT_COPY) + '</span>',
+        '</label>',
+        '<label class="bw-history-lead__consent bw-history-lead__consent--inline bw-history-lead__newsletter-consent">',
+        '<input name="newsletterConsent" type="checkbox" data-bw-history-newsletter-consent>',
+        '<span><strong>Optional newsletter</strong>' + escapeHtml(NEWSLETTER_CONSENT_COPY) + '</span>',
+        '</label>',
+        '<div class="bw-history-lead__inline-meta"><span>Unsubscribe anytime</span><span aria-hidden="true">&bull;</span><a href="' + escapeHtml(privacyUrl) + '" target="_top">Privacy Policy</a>',
+        this._renderInlineCredits(storyId, story),
+        '</div>',
+        '<div class="bw-history-lead__status" role="status" aria-live="polite" data-bw-history-status></div>',
+        '</form>',
+        '</div></div></section>'
+      ].join('');
+    }
+
+    _renderInlineVisual(storyId) {
+      var assets = this._storyAsset(storyId);
+      if (!validAssetPair(assets)) {
+        return '<div class="bw-history-lead__inline-visual">' +
+          '<div class="bw-history-lead__photo-pending" data-bw-photo-pending role="note"><strong>Photo comparison unavailable</strong><small>The email series is still available.</small></div>' +
+          '<div class="bw-history-lead__inline-caption">A palace became this park.</div></div>';
+      }
+      return [
+        '<div class="bw-history-lead__inline-visual" data-bw-comparison="' + storyId + '">',
+        '<figure><img src="' + escapeHtml(resolveAssetSrc(assets.archive.src)) + '" alt="' + escapeHtml(assets.archive.alt) + '" loading="lazy" data-bw-history-image><figcaption>Before</figcaption></figure>',
+        '<figure><img src="' + escapeHtml(resolveAssetSrc(assets.current.src)) + '" alt="' + escapeHtml(assets.current.alt) + '" loading="lazy" data-bw-history-image><figcaption>Now</figcaption></figure>',
+        '<img class="bw-history-lead__inline-mark" src="' + escapeHtml(brandMarkUrl) + '" alt="" aria-hidden="true" loading="lazy">',
+        '<div class="bw-history-lead__inline-caption">A palace became this park.</div>',
+        '</div>'
+      ].join('');
+    }
+
+    _renderInlineCredits(storyId, story) {
+      var assets = this._storyAsset(storyId);
+      var imageCredits = '';
+      if (validAssetPair(assets)) {
+        imageCredits = [assets.archive, assets.current].map(function (asset) {
+          return '<li><a href="' + escapeHtml(asset.sourcePage) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(asset.sourceName) + '</a>, ' +
+            escapeHtml(asset.creator) + '. ' + escapeHtml(asset.license) + '.</li>';
+        }).join('');
+      }
+      return [
+        '<details class="bw-history-lead__inline-credits" data-bw-history-credits>',
+        '<summary>Image credits</summary>',
+        '<div><a href="' + escapeHtml(story.sourceUrl) + '" target="_blank" rel="noopener noreferrer">Story source</a>',
+        imageCredits ? '<ul>' + imageCredits + '</ul>' : '',
+        '</div></details>'
+      ].join('');
     }
 
     _renderFullIntro(storyId) {
@@ -626,6 +716,7 @@
       if (this._submitting) return;
       var email = form.querySelector('[name="email"]');
       var consent = form.querySelector('[name="consent"]');
+      var newsletterConsent = form.querySelector('[name="newsletterConsent"]');
       var status = form.querySelector('[data-bw-history-status]');
       var button = form.querySelector('[data-bw-history-submit]');
       if (!email.checkValidity()) {
@@ -647,7 +738,9 @@
       var body = {
         email: String(email.value || '').trim(),
         consent: true,
-        consentVersion: CONSENT_VERSION,
+        consentVersion: mode === 'inline' ? INLINE_CONSENT_VERSION : CONSENT_VERSION,
+        newsletterConsent: Boolean(newsletterConsent && newsletterConsent.checked),
+        newsletterConsentVersion: newsletterConsent && newsletterConsent.checked ? NEWSLETTER_CONSENT_VERSION : '',
         sourceSlug: sourceSlug(),
         sourceUrl: safeUrl(window.location.href),
         experiment: this.getAttribute('experiment') || EXPERIMENT_DEFAULT,
@@ -673,6 +766,7 @@
         form.classList.add('is-complete');
         email.disabled = true;
         consent.disabled = true;
+        if (newsletterConsent) newsletterConsent.disabled = true;
         button.hidden = true;
         status.classList.add('is-success');
         status.textContent = 'Check your inbox. Click the confirmation link to open Story 2.';
@@ -783,12 +877,56 @@
     _styles() {
       return [
         '.bw-history-lead-host{display:block;max-width:100%;min-width:0}',
+        'bw-history-lead-magnet[mode="inline"]{contain:inline-size;display:block;isolation:isolate;position:relative;z-index:9050}',
+        'body.bw-history-lead-inline-active [data-bw-blog-post-body="1"]{z-index:auto!important}',
+        'body.bw-history-lead-inline-active .bw-blog-sidebar{z-index:9000!important}',
         '.bw-history-lead-host,.bw-history-lead-host *{box-sizing:border-box}',
         '.bw-history-lead-host [hidden]{display:none!important}',
         '.bw-history-lead__loading{border:1px solid #d5e5cf;border-radius:14px;color:#31553a;font:700 13px/1.4 Montserrat,Arial,sans-serif;margin:28px 0;padding:24px;text-align:center}',
         '.bw-history-lead__access-note{background:#fff8c7;border:1px solid #d9c400;border-radius:12px;color:#263b2b;font-size:13px;font-weight:750;line-height:1.5;margin:0 0 16px;padding:12px 14px}',
         '.bw-history-lead{--green:#1B5E20;--dark:#102414;--yellow:#FFE600;--cream:#FAFAF5;--soft:#EAF3E2;--muted:#4E5A4E;color:var(--dark);font-family:Montserrat,Arial,sans-serif;max-width:980px;margin:0 auto}',
-        '.bw-history-lead--inline{background:#fff;border:1px solid #cfe4c8;border-radius:16px;box-shadow:0 10px 28px rgba(27,94,32,.09);margin:30px 0;overflow:hidden}',
+        '.bw-history-lead--inline{background:var(--cream);border:1px solid #174b1b;border-radius:13px;box-shadow:0 16px 32px rgba(16,36,20,.18);margin:30px 0;max-width:none;overflow:hidden;width:100%}',
+        '.bw-history-lead__inline-ribbon{align-items:center;background:#0b3b16;color:var(--yellow);display:flex;font-size:12px;font-weight:900;gap:10px;letter-spacing:.18em;min-height:34px;padding:7px 20px;text-transform:uppercase}',
+        '.bw-history-lead__inline-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(420px,.92fr);min-height:452px}',
+        '.bw-history-lead__inline-visual{background:#dce4d6;display:grid;grid-template-columns:1fr 1fr;min-height:452px;overflow:hidden;position:relative}',
+        '.bw-history-lead__inline-visual figure{height:100%;margin:0;min-width:0;overflow:hidden;position:relative}',
+        '.bw-history-lead__inline-visual figure+figure{border-left:1px solid rgba(255,255,255,.7)}',
+        '.bw-history-lead__inline-visual img{display:block;height:100%!important;margin:0!important;max-width:none!important;object-fit:cover;width:100%!important}',
+        '.bw-history-lead__inline-visual figure:nth-child(2) img{object-position:22% center}',
+        '.bw-history-lead__inline-visual figcaption{background:rgba(9,48,19,.92);border-radius:7px;color:#fff;font-size:10px;font-weight:900;letter-spacing:.14em;line-height:1;padding:8px 11px;position:absolute;text-transform:uppercase;top:18px}',
+        '.bw-history-lead__inline-visual figure:first-child figcaption{left:16px}.bw-history-lead__inline-visual figure:nth-child(2) figcaption{right:16px}',
+        '.bw-history-lead__inline-visual .bw-history-lead__inline-mark{background:#0b3b16;border:2px solid #fff;border-radius:50%;box-shadow:none;height:45px!important;left:50%;margin:0!important;object-fit:cover;position:absolute;top:50%;transform:translate(-50%,-50%);width:45px!important;z-index:2}',
+        '.bw-history-lead__inline-caption{background:rgba(8,24,12,.82);bottom:0;color:#fff;font-family:Merriweather,Georgia,serif;font-size:18px;font-weight:800;left:0;line-height:1.25;padding:14px 18px;position:absolute;text-align:center;width:100%;z-index:2}',
+        '.bw-history-lead__inline-offer{background:#fffef8;border-left:1px solid #174b1b;display:flex;flex-direction:column;justify-content:center;min-width:0;padding:27px 32px 23px}',
+        '.bw-history-lead__inline-title{color:#113519!important;font-family:Merriweather,Georgia,serif!important;font-size:clamp(28px,2.6vw,42px)!important;font-weight:800!important;letter-spacing:-.025em!important;line-height:1.05!important;margin:0 0 7px!important}',
+        '.bw-history-lead__inline-intro{color:#263b2b!important;font-family:Montserrat,Arial,sans-serif!important;font-size:14px!important;line-height:1.45!important;margin:0 0 13px!important}',
+        '.bw-history-lead__inline-steps{list-style:none;margin:0 0 13px;padding:0}',
+        '.bw-history-lead__inline-steps li{align-items:baseline;border-bottom:1px solid #bdc7b8;display:grid;gap:10px;grid-template-columns:34px 82px minmax(0,1fr);min-height:34px;padding:7px 0}',
+        '.bw-history-lead__step-number{color:#6ba33e;font-size:13px;font-weight:800}',
+        '.bw-history-lead__step-state{color:var(--green);font-size:11px;font-weight:900;letter-spacing:.02em;text-transform:uppercase}',
+        '.bw-history-lead__step-place{color:#1c251e;font-size:12px;font-weight:750;min-width:0;overflow-wrap:anywhere}',
+        '.bw-history-lead__inline-form{display:flex;flex-direction:column;min-width:0}',
+        '.bw-history-lead__inline-form .bw-history-lead__email-label{height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;clip:rect(0 0 0 0);clip-path:inset(50%)}',
+        '.bw-history-lead__inline-email{appearance:none;background:#fff;border:1px solid #28482e;border-radius:6px;color:var(--dark);font:600 14px/1.2 Montserrat,Arial,sans-serif;min-height:42px;min-width:0;padding:0 12px;width:100%}',
+        '.bw-history-lead__inline-email:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(255,230,0,.7);outline:0}',
+        '.bw-history-lead__inline-submit{appearance:none;background:var(--yellow);border:1px solid #18361d;border-radius:6px;color:var(--dark)!important;cursor:pointer;font:900 16px/1.1 Montserrat,Arial,sans-serif;margin-top:9px;min-height:43px;padding:0 16px;width:100%}',
+        '.bw-history-lead__inline-submit:hover,.bw-history-lead__inline-submit:focus-visible{background:#fff36a;color:var(--dark)!important;outline:3px solid rgba(27,94,32,.25);outline-offset:2px}',
+        '.bw-history-lead__inline-submit:disabled{cursor:wait;opacity:.7}',
+        '.bw-history-lead__consent--inline{color:#243127!important;font-size:11.5px!important;line-height:1.35!important;margin-top:9px!important}',
+        '.bw-history-lead__consent--inline input{accent-color:var(--green)}',
+        '.bw-history-lead__consent--inline a{color:var(--green)!important}',
+        '.bw-history-lead__newsletter-consent{margin-top:7px!important}',
+        '.bw-history-lead__newsletter-consent span{display:flex;flex-direction:column;gap:1px}',
+        '.bw-history-lead__newsletter-consent strong{color:#17251a;font-size:11.5px}',
+        '.bw-history-lead__inline-meta{align-items:center;color:#4e5a4e;display:flex;flex-wrap:wrap;font-size:9.5px;gap:6px;margin-top:8px;position:relative}',
+        '.bw-history-lead__inline-meta>a,.bw-history-lead__inline-credits summary{color:#264c2c!important;text-decoration:underline;text-underline-offset:2px}',
+        '.bw-history-lead__inline-credits{display:inline;position:relative}',
+        '.bw-history-lead__inline-credits summary{cursor:pointer;display:inline;list-style:none}.bw-history-lead__inline-credits summary::-webkit-details-marker{display:none}',
+        '.bw-history-lead__inline-credits>div{background:#fff;border:1px solid #c9d6c5;border-radius:8px;bottom:20px;box-shadow:0 8px 22px rgba(16,36,20,.16);font-size:9px;line-height:1.4;max-width:310px;padding:9px 10px;position:absolute;right:0;width:max-content;z-index:4}',
+        '.bw-history-lead__inline-credits ul{margin:5px 0 0;padding-left:15px}',
+        '.bw-history-lead__inline-credits a{color:var(--green)!important}',
+        '.bw-history-lead__inline-form .bw-history-lead__status{margin:6px 0 0;min-height:0}',
+        '.bw-history-lead__inline-form .bw-history-lead__status:empty{display:none}',
         '.bw-history-lead--full{padding:42px 18px 70px}',
         '.bw-history-lead__hero{background:var(--dark);border-radius:18px;color:#fff;margin:0 0 24px;padding:clamp(28px,5vw,56px)}',
         '.bw-history-lead__hero--compact{padding:18px 24px}',
@@ -858,7 +996,10 @@
         '.bw-history-lead__credits>div{background:#fff;border:1px solid #d5e5cf;border-radius:10px;color:var(--muted);font-size:11px;line-height:1.5;margin-top:7px;max-width:680px;padding:12px 14px}',
         '.bw-history-lead__credits p{font-size:11px!important;line-height:1.5!important;margin:0 0 6px!important}.bw-history-lead__credits p:last-child{margin-bottom:0!important}',
         '.bw-history-lead__credits ul{margin:6px 0 0;padding-left:18px}.bw-history-lead__credits a{color:var(--green)!important}',
-        '@media(max-width:700px){.bw-history-lead--full{padding:24px 10px 52px}.bw-history-lead--inline{margin:24px 0}.bw-history-lead__story{padding:20px 16px}.bw-history-lead__number{font-size:32px}.bw-history-lead__gate{grid-template-columns:1fr;padding:22px 16px}.bw-history-lead__email-row{grid-template-columns:1fr}.bw-history-lead__tour{align-items:flex-start;flex-direction:column}.bw-history-lead__tour a{text-align:center;width:100%}.bw-history-lead__stacked{grid-template-columns:1fr}}',
+        '@media(min-width:1024px) and (max-width:1279px){.bw-history-lead--inline{max-width:none;width:calc(100% + 280px)}}',
+        '@media(min-width:1280px){.bw-history-lead--inline{max-width:none;width:1088px}}',
+        '@media(max-width:899px){bw-history-lead-magnet[mode="inline"]{z-index:auto}.bw-history-lead--inline{margin:24px 0}.bw-history-lead__inline-grid{grid-template-columns:1fr;min-height:0}.bw-history-lead__inline-visual{aspect-ratio:16/10;min-height:0}.bw-history-lead__inline-offer{border-left:0;border-top:1px solid #174b1b;padding:24px 20px 21px}.bw-history-lead__inline-title{font-size:30px!important}.bw-history-lead__inline-credits>div{left:0;right:auto}}',
+        '@media(max-width:700px){.bw-history-lead--full{padding:24px 10px 52px}.bw-history-lead__story{padding:20px 16px}.bw-history-lead__number{font-size:32px}.bw-history-lead__gate{grid-template-columns:1fr;padding:22px 16px}.bw-history-lead__email-row{grid-template-columns:1fr}.bw-history-lead__tour{align-items:flex-start;flex-direction:column}.bw-history-lead__tour a{text-align:center;width:100%}.bw-history-lead__stacked{grid-template-columns:1fr}.bw-history-lead__inline-ribbon{font-size:9.5px;gap:7px;letter-spacing:.12em;padding:7px 12px}.bw-history-lead__inline-caption{font-size:15px;padding:11px 12px}.bw-history-lead__inline-steps li{gap:7px;grid-template-columns:28px 72px minmax(0,1fr)}.bw-history-lead__step-place{font-size:11.5px}}',
         '@media(prefers-reduced-motion:reduce){.bw-history-lead *{scroll-behavior:auto!important;transition:none!important}}'
       ].join('');
     }

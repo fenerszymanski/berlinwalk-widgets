@@ -67,6 +67,10 @@
   var pendingHistoryViews = {};
   var sentHistoryViews = {};
 
+  function clearHistoryInlineLayering() {
+    if (document.body) document.body.classList.remove('bw-history-lead-inline-active');
+  }
+
   function isPostPage() {
     return location.pathname.indexOf('/post/') === 0 ||
       window.BW_ENABLE_BLOG_BOOKING === true ||
@@ -820,6 +824,7 @@
     historyInsertionPending = false;
     historyFallbackPaths[requestedPath] = true;
     if (element && element.parentNode) element.parentNode.removeChild(element);
+    clearHistoryInlineLayering();
     if (location.pathname !== requestedPath) return false;
     if (document.querySelector('[' + MARKER + ']')) return true;
     var anchor = currentInsertionAnchor();
@@ -925,6 +930,7 @@
   function bootForCurrentPage() {
     injections = 0;
     historyInsertionPending = false;
+    clearHistoryInlineLayering();
     setTimeout(function () {
       inject();
       startObserving();
@@ -964,6 +970,7 @@
   setInterval(function () {
     if (location.pathname !== lastPath) {
       lastPath = location.pathname;
+      clearHistoryInlineLayering();
       bootForCurrentPage();
     }
   }, 300);
