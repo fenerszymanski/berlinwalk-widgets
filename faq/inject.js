@@ -219,7 +219,8 @@
   "treptower-park-berlin": "treptower-park-berlin",
   "friedrichshain-berlin": "friedrichshain-berlin",
   "neukolln-berlin": "neukolln-berlin",
-  "berlin-rooftop-bars": "berlin-rooftop-bars"
+  "berlin-rooftop-bars": "berlin-rooftop-bars",
+  "one-day-in-berlin": "one-day-in-berlin"
 };
 
   var SCHEMAS = {
@@ -10649,6 +10650,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "It depends what you want to see. For the classic TV Tower and central Berlin skyline, House of Weekend on Alexanderplatz puts it right in front of you. For a wide western sunset over the city, Klunkerkranich in Neukölln and Monkey Bar in City West are both excellent, with Monkey Bar also looking down into the Zoo. Solar gives the highest, most panoramic window view. For pure sunset mood on a budget, Klunkerkranich is the one I recommend most."
+        }
+      }
+    ]
+  },
+  "one-day-in-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can you see Berlin in one day?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You cannot see all of Berlin in one day, and trying to is the main mistake I see. Berlin is huge and spread out. But you can see the heart of it well by staying on the central historic spine, from Alexanderplatz and the TV Tower, west along Unter den Linden past Museum Island, through the Brandenburg Gate to the Reichstag. Walked slowly, that single line holds the royal city, the divided Cold War city and the rebuilt modern one, which is plenty for one good day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best one-day itinerary for Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start at Alexanderplatz in the morning and walk west, ideally joining a free walking tour that covers the whole central stretch with the story attached. By midday reach the Brandenburg Gate and the Reichstag (book the free dome in advance with ID). In the afternoon pick one deeper stop, such as a single museum on Museum Island, the East Side Gallery, or the Holocaust Memorial. In the evening slow down by the Spree for sunset rather than chasing another sight."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to book anything in advance for one day in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The one thing worth booking before you fly is the Reichstag dome. It is free but requires advance registration with your passport or ID, and in summer the good slots fill weeks ahead. If you want to go up into the glass dome, reserve online through the official Bundestag visitor service first. A museum ticket can usually be bought on the day, and a free walking tour just needs a spot reserved."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are Berlin museums open every day?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Almost every Berlin museum, including the Museum Island museums, is closed on Mondays. The Pergamon Museum is closed for renovation until 2027, but the other four Museum Island museums are open, with the Neues Museum and Nefertiti the highlight. If your one day in Berlin falls on a Monday, plan an outdoor day around the Wall, the gate and the parks instead."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much walking is one day in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Less than people fear, if you stay central. The distance between Alexanderplatz, Museum Island, the Brandenburg Gate and the Reichstag is genuinely walkable, and you see far more on foot than from the U-Bahn. For a single day of central sightseeing, a day ticket for zones AB covers any rides you do want, such as reaching the East Side Gallery, and is better value than single tickets."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if I only have a few hours in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If you are on a layover or arriving late, do not attempt the whole spine. Take the shortest version: Alexanderplatz, a walk down Unter den Linden, and the Brandenburg Gate, then back. That stretch is doable in about three hours including transit and still shows you the core of the city. A dedicated layover plan with the airport connection worked out makes it tighter."
         }
       }
     ]
