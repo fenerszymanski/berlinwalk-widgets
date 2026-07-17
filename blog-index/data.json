@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-07-17T15:20:08.071Z",
+  "updatedAt": "2026-07-17T15:48:14.773Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 225,
+  "totalPosts": 226,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -335,6 +335,23 @@
       "description": "Airport, luggage, tickets, toilets, Sunday rules, and the small practical decisions that shape the first 24 hours.",
       "posts": [
         {
+          "title": "How Many Days Do You Need in Berlin? An Honest Local's Answer (2026)",
+          "slug": "how-many-days-in-berlin",
+          "path": "/post/how-many-days-in-berlin",
+          "url": "https://www.berlinwalk.com/post/how-many-days-in-berlin",
+          "excerpt": "Berlin is big on the map but small where it counts. Here is how many days you actually need, what each extra day unlocks, and when a day trip is worth it.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "first-day",
+          "topicLabel": "First Day in Berlin",
+          "readTime": "6 min read",
+          "publishedDate": "2026-07-17T15:47:25.559Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_4553ac6f0071439db5ef873edec0e8f6~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-berlin-skyline-how-many-days.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_4553ac6f0071439db5ef873edec0e8f6~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-berlin-skyline-how-many-days.jpg",
+          "alt": "Warm high-angle view over central Berlin with the TV Tower rising above Mitte and the River Spree",
+          "relatedToolSlug": "how-many-days-in-berlin"
+        },
+        {
           "title": "Berlin First-Time Visitor Mistakes: 12 Things to Know Before You Go",
           "slug": "berlin-first-time-visitor-mistakes-12-things-to-know-before-you-go",
           "path": "/post/berlin-first-time-visitor-mistakes-12-things-to-know-before-you-go",
@@ -486,23 +503,6 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_86de3ed5448c445bacfed34fee7b31b7~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/doctor-in-berlin-01-doctor-in-berlin-ambulance-cover.jpg",
           "alt": "Berlin ambulance and emergency vehicles on Otto-Braun-Strasse near Alexanderplatz",
           "relatedToolSlug": "berlin-medical-help-router"
-        },
-        {
-          "title": "Can You Drink Alcohol in Public in Berlin? Rules Tourists Should Know",
-          "slug": "drink-alcohol-in-public-berlin",
-          "path": "/post/drink-alcohol-in-public-berlin",
-          "url": "https://www.berlinwalk.com/post/drink-alcohol-in-public-berlin",
-          "excerpt": "A practical Berlin tourist guide to public drinking: parks, Spätis, public transport, beer gardens, youth rules, and the 2026 Zoo/Ostbahnhof station exception.",
-          "category": "Tourist Tips",
-          "categorySlug": "tourist-tips",
-          "topic": "first-day",
-          "topicLabel": "First Day in Berlin",
-          "readTime": "7 min read",
-          "publishedDate": "2026-06-27T06:30:33.886Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_08df2967779745edb1a653ebd530bf12~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/drink-alcohol-in-public-berlin-01-james-simon-park-cover.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_08df2967779745edb1a653ebd530bf12~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/drink-alcohol-in-public-berlin-01-james-simon-park-cover.jpg",
-          "alt": "People sitting on the grass in James-Simon-Park near Museum Island and the Berlin TV Tower",
-          "relatedToolSlug": ""
         }
       ]
     },
@@ -1617,6 +1617,23 @@
   ],
   "latest": [
     {
+      "title": "How Many Days Do You Need in Berlin? An Honest Local's Answer (2026)",
+      "slug": "how-many-days-in-berlin",
+      "path": "/post/how-many-days-in-berlin",
+      "url": "https://www.berlinwalk.com/post/how-many-days-in-berlin",
+      "excerpt": "Berlin is big on the map but small where it counts. Here is how many days you actually need, what each extra day unlocks, and when a day trip is worth it.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-07-17T15:47:25.559Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_4553ac6f0071439db5ef873edec0e8f6~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-berlin-skyline-how-many-days.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_4553ac6f0071439db5ef873edec0e8f6~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-berlin-skyline-how-many-days.jpg",
+      "alt": "Warm high-angle view over central Berlin with the TV Tower rising above Mitte and the River Spree",
+      "relatedToolSlug": "how-many-days-in-berlin"
+    },
+    {
       "title": "Neukölln Berlin: Which Part Is Worth Your Time (2026 Local Guide)",
       "slug": "neukolln-berlin",
       "path": "/post/neukolln-berlin",
@@ -1802,26 +1819,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_f74127293404404d804b214116a442c0~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-german-prices-euro-banknotes.jpg",
       "alt": "Euro banknotes showing the numbers 20 and 50, the printed figures visitors handle every day in Berlin",
       "relatedToolSlug": "berlin-german-numbers"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Weekend in Berlin: A 48-Hour Itinerary That Fits Your Arrival",
-      "slug": "weekend-in-berlin-48-hour-itinerary",
-      "path": "/post/weekend-in-berlin-48-hour-itinerary",
-      "url": "https://www.berlinwalk.com/post/weekend-in-berlin-48-hour-itinerary",
-      "excerpt": "A realistic 48-hour Berlin itinerary for Friday-evening or Saturday-morning arrivals, with one central Saturday line, a slower Sunday and no cross-city race.",
+      "title": "How Many Days Do You Need in Berlin? An Honest Local's Answer (2026)",
+      "slug": "how-many-days-in-berlin",
+      "path": "/post/how-many-days-in-berlin",
+      "url": "https://www.berlinwalk.com/post/how-many-days-in-berlin",
+      "excerpt": "Berlin is big on the map but small where it counts. Here is how many days you actually need, what each extra day unlocks, and when a day trip is worth it.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "first-day",
       "topicLabel": "First Day in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-07-15T14:44:35.980Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_1898c1d5123d42c4b1f3c04744733bf0~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island-tv-tower.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_1898c1d5123d42c4b1f3c04744733bf0~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island-tv-tower.jpg",
-      "alt": "Museum Island and the Berlin TV Tower beside the River Spree",
-      "relatedToolSlug": "ultimate-berlin-trip-planner"
-    }
-  ],
-  "allPosts": [
+      "readTime": "6 min read",
+      "publishedDate": "2026-07-17T15:47:25.559Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_4553ac6f0071439db5ef873edec0e8f6~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-berlin-skyline-how-many-days.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_4553ac6f0071439db5ef873edec0e8f6~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-berlin-skyline-how-many-days.jpg",
+      "alt": "Warm high-angle view over central Berlin with the TV Tower rising above Mitte and the River Spree",
+      "relatedToolSlug": "how-many-days-in-berlin"
+    },
     {
       "title": "Neukölln Berlin: Which Part Is Worth Your Time (2026 Local Guide)",
       "slug": "neukolln-berlin",

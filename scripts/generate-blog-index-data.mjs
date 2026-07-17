@@ -26,6 +26,7 @@ const TOPICS = [
     kicker: 'Start here',
     description: 'Airport, luggage, tickets, toilets, Sunday rules, and the small practical decisions that shape the first 24 hours.',
     slugs: [
+      'how-many-days-in-berlin',
       'berlin-first-time-visitor-mistakes-12-things-to-know-before-you-go',
       'how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way',
       'luggage-storage-in-berlin-2026',
@@ -598,6 +599,7 @@ function relatedToolSlugFor(post) {
   if ((post.slug || '') === 'berlin-rooftop-bars') return 'berlin-rooftop-bars';
   if ((post.slug || '') === 'berlin-then-and-now') return 'mehringplatz-time-layer-viewer';
   if ((post.slug || '') === 'berlin-hop-on-hop-off-bus-worth-it') return 'berlin-hop-on-hop-off-decision';
+  if ((post.slug || '') === 'how-many-days-in-berlin') return 'how-many-days-in-berlin';
   if (/(berlin-layover-guide|layover in berlin|ber layover|spend a layover)/.test(s)) return 'berlin-layover-planner';
   if (/(prenzlauer-berg-berlin|prenzlauer berg)/.test(s)) return 'prenzlauer-berg-walk';
   if (/(buy-berlin-transport-tickets-on-your-phone|tickets on your phone|phone ticket|bvg app)/.test(s)) return 'berlin-phone-ticket-picker';
