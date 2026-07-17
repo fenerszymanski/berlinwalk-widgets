@@ -676,7 +676,7 @@ class BWTheGuideElement extends HTMLElement {
         }
       </style>
 
-      <main class="bw-guide">
+      <article class="bw-guide bw-page-editorial" data-editorial-build="four-page-editorial-20260717">
         <section class="bw-guide-hero" aria-labelledby="bw-guide-title">
           <div class="bw-guide-inner bw-guide-hero-grid">
             <div>
@@ -742,11 +742,11 @@ class BWTheGuideElement extends HTMLElement {
           <div class="bw-guide-inner bw-guide-story-grid">
             <div class="bw-guide-photo-stack" aria-label="BerlinWalk tour moments">
               <figure class="bw-guide-photo bw-guide-photo-large">
-                <img src="${BW_GUIDE_GROUP_IMAGE_URL}" alt="Yusuf with BerlinWalk guests during a walking tour" loading="eager" decoding="async">
+                <img src="${BW_GUIDE_GROUP_IMAGE_URL}" alt="Yusuf with BerlinWalk guests during a walking tour" loading="lazy" decoding="async">
                 <figcaption class="bw-guide-caption">On the route</figcaption>
               </figure>
               <figure class="bw-guide-photo bw-guide-photo-small">
-                <img src="${BW_GUIDE_WORLD_CLOCK_IMAGE_URL}" alt="World Clock at Alexanderplatz, the BerlinWalk meeting point" loading="eager" decoding="async">
+                <img src="${BW_GUIDE_WORLD_CLOCK_IMAGE_URL}" alt="World Clock at Alexanderplatz, the BerlinWalk meeting point" loading="lazy" decoding="async">
                 <figcaption class="bw-guide-caption">Starting point</figcaption>
               </figure>
             </div>
@@ -784,9 +784,9 @@ class BWTheGuideElement extends HTMLElement {
             </header>
 
             <div class="bw-guide-quote-grid">
-              ${this._renderQuote('Yusuf the tour guide was extraordinary. You must take his tour for a thoughtful, funny and well-timed experience.', 'Samyukta V., India')}
-              ${this._renderQuote('This one felt completely different. It is more about the real origins of Berlin, where the city actually started and how much of it disappeared.', 'Michal D., Poland')}
-              ${this._renderQuote('Every stop felt relevant and engaging. Yusuf managed to navigate through centuries of history.', 'Karen Sells Brown, USA')}
+              ${this._renderQuote("Yusuf the tour guide was EXTRAORDINARY. You must take his tour for a thoughtful, funny and well-timed experience. Bonus: he'll show you great photograph spots.", 'Samyukta V., India', true)}
+              ${this._renderQuote("I've done a couple of tours in Berlin before and honestly they all focused on the Wall, Cold War stuff. This one felt completely different. It's more about the real origins of Berlin, where the city actually started and how much of it disappeared.", 'Michal D., Poland')}
+              ${this._renderQuote("Yusuf managed to navigate through centuries of history, from the Red Town Hall and St. Mary's Church to the futuristic skyline of Alexanderplatz. Every stop felt relevant and engaging.", 'Karen S., United Kingdom')}
             </div>
           </div>
         </section>
@@ -796,7 +796,7 @@ class BWTheGuideElement extends HTMLElement {
             <header class="bw-guide-section-head">
               <span class="bw-guide-kicker">Hear it first</span>
               <h2 id="bw-guide-audio-title">Hear it before you walk it.</h2>
-              <p>A short audio teaser of the tour, recorded in my voice. Press play to hear how the first part of the walk actually sounds.</p>
+              <p>A short audio preview written and checked by me. Press play to hear how the first part of the walk is structured.</p>
             </header>
             <div class="bw-guide-audio-slot">
               <bw-audio-tour></bw-audio-tour>
@@ -814,7 +814,7 @@ class BWTheGuideElement extends HTMLElement {
             </div>
           </div>
         </section>
-      </main>
+      </article>
     `;
   }
 
@@ -829,9 +829,9 @@ class BWTheGuideElement extends HTMLElement {
     `;
   }
 
-  _renderQuote(text, author) {
+  _renderQuote(text, author, featured = false) {
     return `
-      <blockquote class="bw-guide-quote">
+      <blockquote class="bw-guide-quote${featured ? ' bw-guide-quote-featured' : ''}">
         <p>${this._escapeHtml(text)}</p>
         <footer>${this._escapeHtml(author)}</footer>
       </blockquote>
