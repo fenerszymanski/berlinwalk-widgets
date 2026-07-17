@@ -448,7 +448,7 @@ select,
   border: 0;
 }
 
-@media (max-width: 820px) {
+@media (max-width: 700px) {
   .viewer-header,
   .evidence-panel {
     grid-template-columns: 1fr;
@@ -490,9 +490,7 @@ select,
   .viewpoint {
     min-height: 0;
   }
-}
 
-@media (max-width: 600px) {
   body {
     padding: 6px;
   }
@@ -501,31 +499,118 @@ select,
     border-radius: 18px;
   }
 
+  .viewer-header {
+    gap: 12px;
+    padding: 18px;
+  }
+
+  .eyebrow {
+    font-size: 0.62rem;
+  }
+
+  .viewer-header h1 {
+    margin-top: 7px;
+    font-size: clamp(1.75rem, 7vw, 2.4rem);
+    line-height: 1;
+  }
+
+  .intro {
+    padding-left: 10px;
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+
+  .timeline {
+    padding: 14px 12px 0;
+  }
+
+  .timeline-heading {
+    margin-bottom: 8px;
+  }
+
+  .viewpoint-note {
+    display: none;
+  }
+
   .year-tabs {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 4px;
+    padding-bottom: 12px;
   }
 
   .year-tab {
-    min-height: 58px;
+    min-height: 44px;
+    padding: 8px 3px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tab-year {
+    font-size: 0.9rem;
+  }
+
+  .tab-label {
+    display: none;
+  }
+
+  .comparison {
+    gap: 8px;
+    padding: 12px;
   }
 
   .photo-meta {
+    display: block;
     min-height: 0;
-    align-items: start;
+    padding: 9px;
   }
 
-  .evidence-badge {
-    max-width: 94px;
-    white-space: normal;
-    text-align: center;
+  .photo-role {
+    font-size: 0.58rem;
+  }
+
+  .photo-meta h2 {
+    margin-top: 4px;
+    font-size: 0.9rem;
+  }
+
+  .evidence-badge,
+  .compare-control p {
+    display: none;
+  }
+
+  .image-stage {
+    height: 130px;
+  }
+
+  .viewpoint {
+    display: none;
+  }
+
+  .compare-control {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 6px;
+  }
+
+  .evidence-panel {
+    display: block;
+    padding: 14px 12px;
+  }
+
+  .evidence-panel > div:first-child {
+    display: none;
   }
 
   .evidence-grid {
     grid-template-columns: 1fr;
+    border-top: 0;
   }
 
-  .evidence-grid article {
-    padding: 18px 0;
+  .evidence-grid article,
+  .evidence-grid article:last-child {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 7px 0;
     border-right: 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.22);
   }
@@ -534,21 +619,76 @@ select,
     border-bottom: 0;
   }
 
+  .evidence-grid span {
+    flex: 0 0 72px;
+    font-size: 0.54rem;
+  }
+
   .evidence-grid h3 {
-    margin-top: 10px;
+    margin: 0;
+    font-size: 0.82rem;
+  }
+
+  .evidence-grid p {
+    display: none;
   }
 
   .viewer-footer {
-    align-items: flex-start;
-    flex-direction: column;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    padding: 12px;
   }
 
+  .viewer-footer p {
+    font-size: 0.68rem;
+    line-height: 1.35;
+  }
+
+  .credits-trigger {
+    padding: 8px 10px;
+    font-size: 0.72rem;
+  }
+}
+
+@media (max-width: 600px) {
   .credits-dialog {
     right: 10px;
     bottom: 10px;
     width: calc(100% - 20px);
     max-height: calc(100% - 20px);
     padding: 20px;
+  }
+}
+
+@media (max-width: 300px) {
+  .viewer-header {
+    padding: 14px 12px;
+  }
+
+  .intro {
+    font-size: 0.72rem;
+  }
+
+  .timeline-heading h2 {
+    font-size: 0.72rem;
+  }
+
+  .year-tab {
+    min-height: 40px;
+  }
+
+  .tab-year {
+    font-size: 0.78rem;
+  }
+
+  .image-stage {
+    height: 110px;
+  }
+
+  .viewer-footer {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
 

@@ -167,6 +167,18 @@ test('element keeps the series consent required and adds a separate optional new
   assert.doesNotMatch(elementSource, /Story 3 arrives 48 hours/);
 });
 
+test('standalone blog iframe can preserve canonical article attribution', () => {
+  assert.match(elementSource, /function getUtm\(element\)/);
+  assert.match(elementSource, /window\.BW_HISTORY_LEAD_EMBED_CONTEXT \|\| \{\}/);
+  assert.match(elementSource, /element && element\.getAttribute\('source-slug'\)/);
+  assert.match(elementSource, /function sourcePageUrl\(element\)/);
+  assert.match(elementSource, /element && element\.getAttribute\('source-url'\)/);
+  assert.match(elementSource, /sourceSlug: sourceSlug\(this\)/);
+  assert.match(elementSource, /sourceUrl: sourcePageUrl\(this\)/);
+  assert.match(elementSource, /pageUrl: sourcePageUrl\(this\)/);
+  assert.match(elementSource, /utm: getUtm\(this\)/);
+});
+
 test('full mode keeps its host-page contrast defenses', () => {
   assert.match(elementSource, /class="bw-history-lead__gate-title" role="heading" aria-level="3"/);
   assert.match(elementSource, /class="bw-history-lead__gate-description"/);

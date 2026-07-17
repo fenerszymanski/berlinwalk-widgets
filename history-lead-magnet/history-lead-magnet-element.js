@@ -236,7 +236,18 @@
     return escapeHtml(prefix) + '<a href="' + escapeHtml(privacyUrl) + '" target="_top">' + escapeHtml(PRIVACY_LINK_COPY) + '</a>';
   }
 
-  function getUtm() {
+  function getUtm(element) {
+    var context = window.BW_HISTORY_LEAD_EMBED_CONTEXT || {};
+    if (context.utm && typeof context.utm === 'object') {
+      return {
+        source: cleanAttribution(context.utm.source),
+        medium: cleanAttribution(context.utm.medium),
+        campaign: cleanAttribution(context.utm.campaign),
+        content: cleanAttribution(context.utm.content),
+        term: cleanAttribution(context.utm.term),
+        id: cleanAttribution(context.utm.id)
+      };
+    }
     var params = new URLSearchParams(window.location.search || '');
     return {
       source: cleanAttribution(params.get('utm_source')),
@@ -248,10 +259,23 @@
     };
   }
 
-  function sourceSlug() {
+  function sourceSlug(element) {
+    var explicit = cleanAttribution(element && element.getAttribute('source-slug'));
+    if (explicit) return explicit;
+    var context = window.BW_HISTORY_LEAD_EMBED_CONTEXT || {};
+    var contextual = cleanAttribution(context.sourceSlug);
+    if (contextual) return contextual;
     var parts = String(window.location.pathname || '').split('/').filter(Boolean);
     try { return decodeURIComponent(parts[parts.length - 1] || 'berlin-before-and-now'); }
     catch (err) { return parts[parts.length - 1] || 'berlin-before-and-now'; }
+  }
+
+  function sourcePageUrl(element) {
+    var explicit = element && element.getAttribute('source-url');
+    if (explicit) return safeUrl(explicit);
+    var context = window.BW_HISTORY_LEAD_EMBED_CONTEXT || {};
+    if (context.sourceUrl) return safeUrl(context.sourceUrl);
+    return safeUrl(window.location.href);
   }
 
   function bookingHref(mode) {
@@ -741,8 +765,8 @@
         consentVersion: mode === 'inline' ? INLINE_CONSENT_VERSION : CONSENT_VERSION,
         newsletterConsent: Boolean(newsletterConsent && newsletterConsent.checked),
         newsletterConsentVersion: newsletterConsent && newsletterConsent.checked ? NEWSLETTER_CONSENT_VERSION : '',
-        sourceSlug: sourceSlug(),
-        sourceUrl: safeUrl(window.location.href),
+        sourceSlug: sourceSlug(this),
+        sourceUrl: sourcePageUrl(this),
         experiment: this.getAttribute('experiment') || EXPERIMENT_DEFAULT,
         variant: this.getAttribute('variant') || (mode === 'inline' ? 'variant' : 'standalone'),
         acquisitionCohort: tracking.acquisitionCohort,
@@ -750,7 +774,7 @@
         assignmentId: tracking.assignmentId,
         analyticsConsentAtSubmit: tracking.analyticsConsentAtSubmit,
         storyId: storyId,
-        utm: getUtm(),
+        utm: getUtm(this),
         website: String(form.querySelector('[name="website"]').value || ''),
         startedAt: this._startedAt,
         submittedAt: new Date().toISOString(),
@@ -817,8 +841,8 @@
         occurredAt: new Date().toISOString(),
         analyticsConsent: true,
         analyticsConsentAtSubmit: tracking.analyticsConsentAtSubmit,
-        sourceSlug: sourceSlug(),
-        pageUrl: safeUrl(window.location.href),
+        sourceSlug: sourceSlug(this),
+        pageUrl: sourcePageUrl(this),
         referrer: safeUrl(document.referrer),
         experiment: this.getAttribute('experiment') || EXPERIMENT_DEFAULT,
         variant: this.getAttribute('variant') || (this._mode() === 'inline' ? 'variant' : 'standalone'),
@@ -826,7 +850,7 @@
         placement: tracking.placement,
         assignmentId: tracking.assignmentId,
         storyId: storyId || '',
-        utm: getUtm(),
+        utm: getUtm(this),
         device: {
           width: Number(window.innerWidth || 0),
           height: Number(window.innerHeight || 0)
