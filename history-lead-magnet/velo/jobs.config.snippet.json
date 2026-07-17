@@ -1,0 +1,8 @@
+{
+  "functionLocation": "/http-functions.js",
+  "functionName": "processHistoryLeadDueEmails",
+  "description": "Send due Berlin Before & Now Story 3 emails and reconcile canonical bookings.",
+  "executionConfig": {
+    "cronExpression": "20 * * * *"
+  }
+}

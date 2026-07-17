@@ -8662,3 +8662,21 @@ Follow-up: created the unpublished Wix Blog draft for the Ultimate SEO article, 
 
 - 2026-07-14 13:15 CEST (Codex): Yusuf'un acil pause talebiyle Wix `BerlinWalk Google Search Landing` embed'i `7baf92b7-20ce-492e-9701-b18de4554eb8` rev3 `enabled:false` yapildi ve site publish edildi. Fresh 390px live check native `/book-berlin-walking-tour` sayfasinin geri dondugunu, custom element/loader olmadigini ve overflowX `0` oldugunu dogruladi. Google Ads kampanyasi `24016010145` API ile PAUSED; readback `status=PAUSED`, `primaryStatus=PAUSED`. Meta hesabindaki iki ACTIVE kampanya (`120245847565860711`, `120244492521130711`) PAUSED yapildi; hesap geneli final readback `62/62 PAUSED`, configured/effective ACTIVE `0`. Kaynak commitleri `c03d651`, `e86cd6e`, `8ce1f59` origin/main'de. Yusuf diger mobil task bittikten sonra acikca devam demeden embed veya kampanyalar yeniden acilmayacak.
 - 2026-07-15 12:04 CEST (Codex): FREE BERLIN AUDIO SAMPLER REFRESH LIVE — `audio-tour/audio-tour-element.js` ve `audio-tour/index.html` approved voice `auq43ws1oslv0tO4BDa7` ile uretilen 8:44 sampler'a gecti; 10 marker senkron, truthful Yusuf-authorship + AI-narration disclosure mevcut, eski media URL/kayit iddialari yok. Audio source commit `7171bcc`; live Tools shell `tools-hub/data.json` lead duzeltmesi `b2d397d`; GitHub Pages deploy runs `29406028764` + `29406028074` success. Raw/main/Pages hashes match; standalone Chromium/WebKit desktop/mobile 4/4 ve real Wix shell 4/4 PASS, overflow 0, chapter jump/play/pause calisiyor. Kapanis taramasinda eski `daily 11:30` CTA da current `Tue-Sat 11:30 and 15:30` programina cekildi; CMS body schedule exact-backup/readback ile ayni gercege uyarlandi. Eski ses silinmedi; rollback Wix CMS backup root workspace `output/qa/audio-sampler-refresh-20260715/cms-before.json`.
+
+## 2026-07-17 — Codex
+
+**Did:**
+- Built and launched the `Berlin Before & Now: 3 Places Hiding Another City` lead magnet, DOI flow, 48-hour Story 3 follow-up, booking-aware CTA branch, and consent-gated blog A/B pilot.
+- Retired the old First-Day Survival Guide capture surfaces without breaking the direct PDF compatibility URL.
+- Completed live desktop/mobile, accessibility, consent, email, security, rollback, and regression QA.
+
+**Changed:**
+- `history-lead-magnet/` — responsive `inline`/`full` Custom Element, licensed image manifest/assets, tests, documentation, and Wix hourly bridge source.
+- `js/lead-form-inject.js`, `blog-index/blog-index-element.js`, `lead-form/index.html` — safety-ramp experiment, old `/blog` form removal, and retirement page.
+- Wix: published `/berlin-before-and-now` as hidden `noindex,follow`; installed page embed `a9200f33-45d3-41fc-911a-aeadd4506e02` rev2 and inline embed `8a6b34d4-b87f-4d3a-b1df-715e11394bf6` rev4; removed the one legacy post embed; hard-retired `/_functions/subscribe` with HTTP 410; installed hourly `processHistoryLeadDueEmails` at `20 * * * *`.
+- Content App: deployed `https://app.berlinwalk.com/api/history-lead`, admin-only `HistoryLeadMagnetLeads` / `HistoryLeadMagnetEvents`, HMAC access/confirmation tokens, Wix Marketing Consent integration, one-click unsubscribe, booking reconciliation, and Story 3 email delivery.
+
+**Opened:** Day-14/day-28 pilot readouts, final legal wording review, and a real Outlook-inbox delivery check before scaling.
+**Closed:** New lead magnet implementation, legacy lead capture retirement, hourly Story 3 delivery, production DOI/resubscribe/unsubscribe loop, and pilot safety rollout.
+
+**Next session should:** Let the safety ramp collect clean traffic. At day 14, check whether 150 variant views were reached; make no scale decision before day 28 and 500 analytics-consented variant views, and keep Alexanderplatz excluded unless the agreed volume and guardrail conditions are met.

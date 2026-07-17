@@ -68,3 +68,14 @@ For the first 24 hours, only the old-town article receives a 10% variant. Once
 24 hours have elapsed, the loader automatically uses a 50/50 split on the
 old-town and wide-streets articles. Alexanderplatz remains excluded. It can be
 added only after the readout with `{stage:'expanded',enableExpansion:true}`.
+
+## Hourly Story 3 job
+
+Vercel Hobby cannot run an hourly cron, so production uses the existing Wix
+hourly scheduler as the primary trigger and keeps the daily Vercel rescue cron
+as a fallback. The canonical bridge is in `velo/historyLeadCron.js`; its live
+export currently lives in `Backend/http-functions.js`. Merge
+`velo/jobs.config.snippet.json` into the live `jobs.config`. Both Wix Secrets
+Manager and Vercel Production must contain the same dedicated
+`HISTORY_LEAD_CRON_SECRET` value. Never place that value in source control or a
+public URL.
