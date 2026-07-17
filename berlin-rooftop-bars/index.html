@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Berlin Rooftop Sunset Planner — when to leave and which roof to pick</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
+    --yellow:#FFE600; --ink:#1c2a1c; --panel:#ffffff; --bone:#f4f9ec;
+    --line:#e3edd6; --stone:#6d7b66; --shadow:0 10px 30px rgba(18,61,24,.14);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .rx{max-width:940px;margin:0 auto;padding:4px}
+  .card{background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+
+  .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:18px 22px 16px}
+  .kick{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:700;margin:0 0 6px;font-family:"IBM Plex Mono",monospace}
+  .head h1{margin:0;font-size:21px;font-weight:800;line-height:1.2}
+  .head p{margin:8px 0 0;font-size:13.5px;color:#e7f3e2;max-width:680px}
+
+  /* date + sky clock */
+  .sky-wrap{padding:16px 16px 4px}
+  .daterow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:12px}
+  .daterow label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);font-weight:700;font-family:"IBM Plex Mono",monospace}
+  .daterow input[type=date]{font-family:Montserrat,sans-serif;font-size:14px;font-weight:600;color:var(--green-deep);border:1.5px solid var(--line);border-radius:10px;padding:7px 10px;background:#fff}
+  .daterow .today{font-size:12px;font-weight:700;color:var(--lime);background:#f0f7e6;border:1px solid var(--line);border-radius:999px;padding:5px 11px;cursor:pointer}
+  .daterow .today:hover{background:#e6f2d6}
+
+  .sunline{font-size:15px;font-weight:700;color:var(--green-deep);margin:2px 0 12px;line-height:1.45}
+  .sunline b{color:#b8860b}
+  .sunline .arrive{color:var(--green)}
+
+  /* the evening sky bar */
+  .sky{position:relative;height:78px;border-radius:14px;overflow:hidden;border:1px solid #e7eee0;margin-bottom:6px}
+  .sky-grad{position:absolute;inset:0}
+  .mark{position:absolute;top:0;bottom:0;width:2px;background:rgba(255,255,255,.9);box-shadow:0 0 0 1px rgba(0,0,0,.18)}
+  .mark.sun{width:0;background:none}
+  .sun-dot{position:absolute;width:20px;height:20px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff6c9,#ffd24a 55%,#f4a11f);box-shadow:0 0 14px 4px rgba(255,196,64,.7);transform:translate(-50%,-50%)}
+  .mtag{position:absolute;top:6px;transform:translateX(-50%);font-size:10px;font-weight:800;font-family:"IBM Plex Mono",monospace;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.5);white-space:nowrap}
+  .mtag.low{top:auto;bottom:6px}
+  .axis{display:flex;justify-content:space-between;font-size:10.5px;color:var(--stone);font-weight:600;font-family:"IBM Plex Mono",monospace;margin:2px 2px 12px}
+
+  .seasonnote{font-size:12.5px;line-height:1.5;color:var(--green-deep);background:#fff8e1;border:1px solid #f3e6a8;border-radius:12px;padding:9px 12px;margin:0 16px 14px;display:none}
+  .seasonnote.show{display:block}
+  .seasonnote b{color:#8a6d00}
+
+  /* rooftop chips */
+  .pick{background:var(--bone);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:13px 16px 12px}
+  .pick .cap{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);font-weight:700;margin:0 0 9px;font-family:"IBM Plex Mono",monospace}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{border:1.5px solid var(--line);background:#fff;color:var(--green-deep);font-family:Montserrat,sans-serif;font-size:13px;font-weight:700;border-radius:999px;padding:8px 13px;cursor:pointer;transition:.14s;display:flex;align-items:center;gap:7px}
+  .chip:hover{border-color:var(--lime);background:#f2f9e8}
+  .chip.on{background:var(--green);border-color:var(--green);color:#fff}
+  .chip .dot{width:9px;height:9px;border-radius:50%;flex:none}
+
+  /* detail panel */
+  .detail{padding:16px}
+  .d-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 12px;margin-bottom:4px}
+  .d-top h2{margin:0;font-size:19px;font-weight:800;color:var(--green-deep)}
+  .facing{font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;font-family:"IBM Plex Mono",monospace;padding:4px 9px;border-radius:999px;color:#fff}
+  .d-lead{font-size:14px;color:var(--ink);margin:6px 0 12px;line-height:1.55}
+  .facts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+  @media(max-width:520px){.facts{grid-template-columns:1fr}}
+  .fact{background:var(--bone);border:1px solid var(--line);border-radius:12px;padding:9px 11px}
+  .fact .k{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);font-weight:700;font-family:"IBM Plex Mono",monospace;margin:0 0 3px}
+  .fact .v{font-size:13.5px;font-weight:600;color:var(--green-deep);line-height:1.4}
+  .fact .v b{color:#b8860b}
+  .callout{font-size:13.5px;line-height:1.55;color:var(--green-deep);background:linear-gradient(180deg,#f2f9e8,#eaf5da);border:1px solid #d8e9c2;border-left:4px solid var(--lime);border-radius:10px;padding:11px 13px;margin-bottom:12px}
+  .callout b{color:var(--green)}
+  .maps{display:inline-flex;align-items:center;gap:7px;background:var(--yellow);color:#123D18;font-weight:800;font-size:13.5px;text-decoration:none;border-radius:11px;padding:9px 15px}
+  .maps:hover{filter:brightness(.96)}
+  .foot{font-size:11.5px;color:var(--stone);padding:0 16px 14px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="rx">
+  <div class="card">
+    <div class="head">
+      <p class="kick">BerlinWalk.com • Rooftop planner</p>
+      <h1>Berlin Rooftop Sunset Planner</h1>
+      <p>A rooftop drink in Berlin is really about the light. Set your date, see tonight's sunset and when to leave, then pick a roof to see which way it faces and how to get there.</p>
+    </div>
+
+    <div class="sky-wrap">
+      <div class="daterow">
+        <label for="d">Your evening</label>
+        <input type="date" id="d" />
+        <span class="today" id="todayBtn">Tonight</span>
+      </div>
+      <p class="sunline" id="sunline"></p>
+      <div class="sky"><div class="sky-grad" id="grad"></div></div>
+      <div class="axis" id="axis"></div>
+    </div>
+
+    <div class="seasonnote" id="season"></div>
+
+    <div class="pick">
+      <p class="cap">Pick a rooftop</p>
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <div class="detail" id="detail"></div>
+
+    <p class="foot">Sunset is calculated for central Berlin (52.52° N, 13.40° E) and is accurate to a minute or two. Opening days, seasons and prices change often, so always check each venue's own site or social media before you set out.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var LAT=52.5200, LNG=13.4050;
+
+  // ---- Berlin timezone offset (handles CET/CEST DST) for a given calendar date ----
+  function berlinOffsetMinutes(y,m,d){
+    var noonUTC=new Date(Date.UTC(y,m-1,d,12,0,0));
+    try{
+      var s=new Intl.DateTimeFormat('en-US',{timeZone:'Europe/Berlin',timeZoneName:'shortOffset'}).format(noonUTC);
+      var mm=s.match(/GMT([+-]\d{1,2})(?::(\d{2}))?/);
+      if(mm){return parseInt(mm[1],10)*60 + (mm[1].charAt(0)==='-'?-1:1)*(mm[2]?parseInt(mm[2],10):0);}
+    }catch(e){}
+    // fallback: last-Sunday DST rule
+    var mar=lastSunday(y,3), oct=lastSunday(y,10);
+    var t=Date.UTC(y,m-1,d);
+    return (t>=mar && t<oct)?120:60;
+  }
+  function lastSunday(y,month){var dt=new Date(Date.UTC(y,month,0));return Date.UTC(y,month-1,dt.getUTCDate()-dt.getUTCDay());}
+
+  function dayOfYear(y,m,d){var n=Math.floor((Date.UTC(y,m-1,d)-Date.UTC(y,0,0))/86400000);return n;}
+
+  // ---- Sunrise/sunset (classic algorithm), returns fractional hours UTC or null ----
+  function sunUTC(y,m,d,rise){
+    var rad=Math.PI/180, deg=180/Math.PI, zenith=90.833;
+    var N=dayOfYear(y,m,d);
+    var lngHour=LNG/15;
+    var t = rise ? N+((6-lngHour)/24) : N+((18-lngHour)/24);
+    var M=(0.9856*t)-3.289;
+    var L=M+(1.916*Math.sin(rad*M))+(0.020*Math.sin(rad*2*M))+282.634; L=((L%360)+360)%360;
+    var RA=deg*Math.atan(0.91764*Math.tan(rad*L)); RA=((RA%360)+360)%360;
+    RA += (Math.floor(L/90)*90 - Math.floor(RA/90)*90); RA/=15;
+    var sinDec=0.39782*Math.sin(rad*L); var cosDec=Math.cos(Math.asin(sinDec));
+    var cosH=(Math.cos(rad*zenith)-(sinDec*Math.sin(rad*LAT)))/(cosDec*Math.cos(rad*LAT));
+    if(cosH>1||cosH<-1) return null;
+    var H = rise ? 360-deg*Math.acos(cosH) : deg*Math.acos(cosH); H/=15;
+    var T=H+RA-(0.06571*t)-6.622;
+    var UT=T-lngHour; UT=((UT%24)+24)%24;
+    return UT;
+  }
+
+  function fmt(mins){
+    mins=((mins%1440)+1440)%1440;
+    var h=Math.floor(mins/60), mm=Math.round(mins%60);
+    if(mm===60){mm=0;h=(h+1)%24;}
+    return (h<10?'0':'')+h+':'+(mm<10?'0':'')+mm;
+  }
+
+  // ---- Rooftops ----
+  var WEST='#e07b39', SKY='#5b6cc7', HIGH='#8a5cb0';
+  var ROOFS=[
+    {id:'klunker',name:'Klunkerkranich',color:WEST,face:'Sunset roof',faceColor:WEST,sunset:true,seasonal:true,
+     lead:'A plant-filled roof garden on the Neukölln Arcaden car park. Cheap-ish, casual and made for watching the sun drop over the western rooftops.',
+     best:'Cheap, casual sunset with music',station:'S+U Neukölln / U7 Rathaus Neukölln',entry:'Free by day, small fee once the evening music starts',season:'Spring to autumn, weather-dependent',
+     maps:'https://www.google.com/maps/search/?api=1&query=Klunkerkranich+Berlin'},
+    {id:'monkey',name:'Monkey Bar',color:SKY,face:'Skyline + west',faceColor:WEST,sunset:true,seasonal:false,
+     lead:'Tenth floor of the 25hours Hotel by the Zoo. The polished choice: proper cocktails and a big view over City West and Tiergarten, looking down into the Zoo.',
+     best:'A smart skyline cocktail',station:'S+U Zoologischer Garten',entry:'Free entry, cocktail prices; reserve on sunny evenings',season:'Open year-round (indoor + terrace)',
+     maps:'https://www.google.com/maps/search/?api=1&query=Monkey+Bar+25hours+Berlin'},
+    {id:'weekend',name:'House of Weekend',color:SKY,face:'TV Tower / night',faceColor:SKY,sunset:false,seasonal:false,
+     lead:'A two-level terrace on Alexanderplatz staring straight at the TV Tower. A club by night; in summer the upper sun-deck opens earlier, often with a small pool.',
+     best:'Central roof that turns into a club',station:'S+U Alexanderplatz',entry:'Daytime sun-deck easygoing; club entry at night',season:'Summer roof opening announced on the day',
+     maps:'https://www.google.com/maps/search/?api=1&query=House+of+Weekend+Alexanderplatz+Berlin'},
+    {id:'deck5',name:'Deck 5',color:WEST,face:'Sunset roof',faceColor:WEST,sunset:true,seasonal:true,
+     lead:'A beach bar on top of the Schönhauser Allee Arcaden car park: real sand, deckchairs, burgers and cheap drinks, with sun from late morning to golden hour.',
+     best:'Barefoot beach-bar afternoon',station:'U+S Schönhauser Allee',entry:'Free, normal bar prices',season:'Late spring to early autumn only',
+     maps:'https://www.google.com/maps/search/?api=1&query=Deck5+Berlin+Schoenhauser+Allee'},
+    {id:'solar',name:'Solar',color:HIGH,face:'High panorama',faceColor:HIGH,sunset:false,seasonal:false,
+     lead:'A sky bar about seventeen floors up near Anhalter Bahnhof, reached by an exposed glass lift. The dressed-up, cocktail-and-dinner, special-evening option.',
+     best:'A grown-up window-view evening',station:'S Anhalter Bahnhof / Potsdamer Platz',entry:'Free entry but a dress code; book a table',season:'Evenings on selected days, year-round',
+     maps:'https://www.google.com/maps/search/?api=1&query=Solar+Berlin+Stresemannstrasse'}
+  ];
+
+  var d=document.getElementById('d'), sunline=document.getElementById('sunline'),
+      grad=document.getElementById('grad'), axis=document.getElementById('axis'),
+      season=document.getElementById('season'), chipsEl=document.getElementById('chips'),
+      detail=document.getElementById('detail');
+  var selected='klunker', state=null;
+
+  function berlinTodayISO(){
+    var s=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Berlin',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+    return s;
+  }
+
+  function compute(iso){
+    var p=iso.split('-'), y=+p[0], m=+p[1], day=+p[2];
+    var off=berlinOffsetMinutes(y,m,day);
+    var setUTC=sunUTC(y,m,day,false), riseUTC=sunUTC(y,m,day,true);
+    if(setUTC===null) return {polar:true,y:y,m:m,day:day};
+    var setLocal=setUTC*60+off, riseLocal=(riseUTC!==null?riseUTC*60+off:null);
+    return {y:y,m:m,day:day,off:off,sunset:setLocal,sunrise:riseLocal,
+            golden:setLocal-40, arrive:setLocal-45, dusk:setLocal+35};
+  }
+
+  function render(){
+    var iso=d.value||berlinTodayISO();
+    state=compute(iso);
+    var mn=['January','February','March','April','May','June','July','August','September','October','November','December'];
+    if(state.polar){sunline.textContent='No standard sunset on this date at this latitude.';grad.style.background='#12203a';axis.innerHTML='';}
+    else{
+      sunline.innerHTML='On '+state.day+' '+mn[state.m-1]+', the sun sets over Berlin at <b>'+fmt(state.sunset)+'</b>. Golden hour starts around '+fmt(state.golden)+'. <span class="arrive">Arrive by about '+fmt(state.arrive)+'</span> to get a drink and a spot before it turns gold.';
+      drawSky();
+    }
+    // season note
+    var mo=state.m;
+    if(mo<=3||mo>=11){
+      season.className='seasonnote show';
+      season.innerHTML='<b>Winter note:</b> the open-air roofs like Deck 5 and Klunkerkranich are mostly closed or reduced now. In the colder months the safer bets are the indoor-and-terrace sky bars (Monkey Bar, Solar) and House of Weekend on its club nights.';
+    }else{season.className='seasonnote';}
+    drawDetail();
+  }
+
+  function drawSky(){
+    // window: sunset-3h to sunset+1.5h
+    var start=state.sunset-180, end=state.sunset+90, span=end-start;
+    function pct(t){return Math.max(0,Math.min(100,((t-start)/span)*100));}
+    var sp=pct(state.sunset);
+    grad.style.background='linear-gradient(90deg,#7db4e6 0%,#a9cbe8 '+Math.max(0,sp-34)+'%,#f4c56b '+Math.max(0,sp-14)+'%,#e8894e '+sp+'%,#7a4a86 '+Math.min(100,sp+16)+'%,#2b2c55 '+Math.min(100,sp+40)+'%,#161a38 100%)';
+    var html='';
+    // golden line (no label), arrive tag on TOP, sunset tag on BOTTOM (kept apart)
+    html+='<div class="mark" style="left:'+pct(state.golden)+'%;opacity:.5"></div>';
+    html+='<div class="mark" style="left:'+pct(state.arrive)+'%;background:#123D18;opacity:.6"></div>';
+    html+='<div class="mtag" style="left:'+Math.max(9,pct(state.arrive))+'%">arrive '+fmt(state.arrive)+'</div>';
+    html+='<div class="sun-dot" style="left:'+sp+'%;top:50%"></div>';
+    html+='<div class="mtag low" style="left:'+Math.min(90,sp)+'%">sunset '+fmt(state.sunset)+'</div>';
+    grad.innerHTML=html;
+    axis.innerHTML='<span>'+fmt(start)+'</span><span>'+fmt(state.sunset)+'</span><span>'+fmt(end)+'</span>';
+  }
+
+  function drawChips(){
+    chipsEl.innerHTML=ROOFS.map(function(r){
+      return '<button class="chip'+(r.id===selected?' on':'')+'" data-id="'+r.id+'"><span class="dot" style="background:'+r.faceColor+'"></span>'+r.name+'</button>';
+    }).join('');
+    Array.prototype.forEach.call(chipsEl.querySelectorAll('.chip'),function(b){
+      b.addEventListener('click',function(){selected=b.getAttribute('data-id');drawChips();drawDetail();});
+    });
+  }
+
+  function drawDetail(){
+    var r=ROOFS.filter(function(x){return x.id===selected;})[0];
+    var arriveLine;
+    if(!state||state.polar){arriveLine='';}
+    else if(r.sunset){
+      arriveLine='<div class="callout">This is a <b>sunset-facing roof</b>. On '+state.day+'/'+state.m+', head out to reach it by about <b>'+fmt(state.arrive)+'</b> so you are settled before the '+fmt(state.sunset)+' sunset.</div>';
+    }else{
+      arriveLine='<div class="callout">This one is less about the exact sunset and <b>great after dark too</b>. You can arrive around sunset ('+fmt(state.sunset)+') or later once the city lights are on.</div>';
+    }
+    detail.innerHTML=
+      '<div class="d-top"><h2>'+r.name+'</h2><span class="facing" style="background:'+r.faceColor+'">'+r.face+'</span></div>'+
+      '<p class="d-lead">'+r.lead+'</p>'+
+      arriveLine+
+      '<div class="facts">'+
+        fact('Best for',r.best)+
+        fact('Nearest station',r.station)+
+        fact('Getting in',r.entry)+
+        fact('Season',r.season)+
+      '</div>'+
+      '<a class="maps" href="'+r.maps+'" target="_blank" rel="noopener">Open in Google Maps →</a>';
+  }
+  function fact(k,v){return '<div class="fact"><p class="k">'+k+'</p><p class="v">'+v+'</p></div>';}
+
+  document.getElementById('todayBtn').addEventListener('click',function(){d.value=berlinTodayISO();render();});
+  d.addEventListener('change',render);
+
+  d.value=berlinTodayISO();
+  drawChips();
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
