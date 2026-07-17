@@ -158,9 +158,12 @@ test('element contains the required consent and success copy without a prechecke
 });
 
 test('host-page typography cannot erase the dark-panel or tour CTA contrast', () => {
-  assert.match(elementSource, /body bw-history-lead-magnet \.bw-history-lead \.bw-history-lead__gate h3\{color:#fff!important/);
-  assert.match(elementSource, /body bw-history-lead-magnet \.bw-history-lead \.bw-history-lead__gate-copy>p:last-child\{color:#d7e7d3!important/);
-  assert.match(elementSource, /body bw-history-lead-magnet \.bw-history-lead \.bw-history-lead__tour a,body bw-history-lead-magnet \.bw-history-lead \.bw-history-lead__tour a:visited\{background:var\(--green\)!important;color:#fff!important/);
+  assert.match(elementSource, /class="bw-history-lead__gate-title" role="heading" aria-level="3"/);
+  assert.match(elementSource, /class="bw-history-lead__gate-description"/);
+  assert.match(elementSource, /class="bw-blog-tool-button"[^>]+data-bw-history-tour/);
+  assert.match(elementSource, /\.bw-history-lead__gate-title\{color:#fff!important/);
+  assert.match(elementSource, /\.bw-history-lead__gate-description\{color:#d7e7d3!important/);
+  assert.match(elementSource, /\.bw-history-lead__tour a\.bw-blog-tool-button,[^}]+\{background:var\(--green\)!important;color:#fff!important/);
 });
 
 test('safety stage uses 10% on every eligible article for the first 24 hours', async (t) => {
