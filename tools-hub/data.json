@@ -4482,6 +4482,38 @@
       "relatedBlog": "/post/do-you-need-a-car-in-berlin",
       "iconStatus": "live-wix-media",
       "cmsItemId": "eaaaf65e-3398-4fee-a925-08ab9bd1ec9b"
+    },
+    {
+      "slug": "is-berlin-walkable",
+      "title": "Berlin Walking Distance Checker",
+      "lead": "Is Berlin walkable? Pick where you are starting and see how many minutes it really takes to walk to every other main sight, with an honest verdict on when to stroll and when to take the U-Bahn.",
+      "category": "Maps",
+      "image": "PENDING_ICON",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/is-berlin-walkable/",
+      "embedHeight": 1900,
+      "hubCategory": "TripPlans",
+      "type": "Planner",
+      "tags": [
+        "Is Berlin walkable",
+        "Walking distance Berlin",
+        "Berlin sights on foot",
+        "Berlin walking map",
+        "Brandenburg Gate to Alexanderplatz walk",
+        "Berlin distances between sights",
+        "Walk Berlin main sights"
+      ],
+      "aliases": [
+        "is berlin walkable",
+        "walking distance berlin",
+        "how far apart are berlin sights",
+        "can you walk around berlin",
+        "berlin on foot",
+        "walk between berlin sights",
+        "brandenburg gate to alexanderplatz walk"
+      ],
+      "relatedBlog": "/post/is-berlin-walkable",
+      "iconStatus": "pending-nonpaid-generation",
+      "cmsItemId": "PENDING_CMS"
     }
   ],
   "hubCategories": [

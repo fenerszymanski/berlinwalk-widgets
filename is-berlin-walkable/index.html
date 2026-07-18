@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Is Berlin Walkable? Walking Distance Between the Main Sights</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='32' r='20' fill='%23FFE600'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
+    --yellow:#FFE600; --amber:#F0A500; --red:#E63946; --ink:#1c2a1c; --panel:#ffffff;
+    --bone:#f4f9ec; --line:#e3edd6; --stone:#6d7b66; --shadow:0 10px 30px rgba(18,61,24,.14);
+  }
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}
+  html,body{margin:0}
+  body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .bx{max-width:940px;margin:0 auto;padding:4px}
+  .card{background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+
+  .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:18px 22px 16px}
+  .head .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:600;margin:0 0 6px}
+  .head h2{margin:0;font-size:20px;font-weight:800;letter-spacing:-.01em}
+  .head p{margin:6px 0 0;font-size:13px;color:#e7f2e3;max-width:660px}
+
+  .body{padding:16px 18px 8px}
+
+  .pick .label{font-size:12.5px;font-weight:700;color:var(--green-deep);margin:0 0 8px;display:flex;align-items:center;gap:7px}
+  .pick .label .n{font-family:'IBM Plex Mono',monospace;font-size:11px;background:var(--soft);color:var(--green-deep);border-radius:6px;padding:2px 7px;font-weight:700}
+  .chips{display:flex;flex-wrap:wrap;gap:7px}
+  .chips button{font-family:inherit;font-size:12.5px;font-weight:600;color:var(--green-deep);
+    background:var(--bone);border:1.5px solid var(--line);border-radius:999px;padding:8px 13px;cursor:pointer;transition:.14s;line-height:1}
+  .chips button:hover{border-color:var(--lime)}
+  .chips button[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff;box-shadow:0 3px 10px rgba(18,61,24,.22)}
+
+  /* Hero result */
+  .hero{margin:16px 0 6px;border-radius:16px;border:1.5px solid var(--line);overflow:hidden;background:#fcfefa}
+  .hero .route{display:flex;align-items:center;gap:10px;padding:14px 16px 8px;flex-wrap:wrap}
+  .hero .pin{display:flex;align-items:center;gap:8px;min-width:0}
+  .hero .dot{width:11px;height:11px;border-radius:50%;flex:0 0 auto}
+  .hero .dot.a{background:var(--green)}
+  .hero .dot.b{background:var(--yellow);border:2px solid var(--green)}
+  .hero .pin b{font-size:13.5px;color:var(--green-deep);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .hero .arrow{color:var(--stone);font-weight:700;flex:0 0 auto}
+  .hero .stat{display:flex;align-items:baseline;gap:14px;padding:2px 16px 4px;flex-wrap:wrap}
+  .hero .big{font-family:'IBM Plex Mono',monospace;font-size:34px;font-weight:700;color:var(--green-deep);line-height:1}
+  .hero .big small{font-size:14px;font-weight:600;color:var(--stone);margin-left:3px}
+  .hero .dist{font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:600;color:var(--stone)}
+  .hero .verdict{margin:8px 16px 0;display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:6px 13px;font-size:12.5px;font-weight:700}
+  .hero .note{margin:10px 16px 15px;font-size:13px;color:var(--ink);line-height:1.5}
+
+  .band-easy{background:#eaf6e0;color:#1B5E20}
+  .band-walk{background:#eef7e2;color:#33691E}
+  .band-long{background:#fdeecd;color:#8a5a00}
+  .band-transit{background:#fde2e4;color:#9b2230}
+  .dot-easy{background:var(--green)} .dot-walk{background:var(--lime)} .dot-long{background:var(--amber)} .dot-transit{background:var(--red)}
+
+  .walkometer{margin:2px 16px 14px}
+  .wtrack{position:relative;height:12px;border-radius:8px;background:#eef2e8;overflow:hidden}
+  .wfill{height:100%;border-radius:8px;transition:width .5s cubic-bezier(.22,1,.36,1)}
+  .wscale{display:flex;justify-content:space-between;font-size:10.5px;color:var(--stone);font-weight:600;margin-top:5px;font-family:'IBM Plex Mono',monospace}
+
+  /* Board */
+  .board-h{display:flex;align-items:center;justify-content:space-between;margin:14px 2px 9px}
+  .board-h b{font-size:13px;color:var(--green-deep);font-weight:800}
+  .board-h span{font-size:11.5px;color:var(--stone);font-weight:600}
+  .board{display:flex;flex-direction:column;gap:7px}
+  .row{display:grid;grid-template-columns:1fr auto;gap:10px 12px;align-items:center;
+    background:#fff;border:1.5px solid var(--line);border-radius:13px;padding:10px 12px;cursor:pointer;transition:.14s;text-align:left;font-family:inherit;width:100%}
+  .row:hover{border-color:var(--lime);background:#fbfdf7}
+  .row[aria-pressed="true"]{border-color:var(--green);background:#f2f9ea;box-shadow:inset 0 0 0 1px var(--green)}
+  .row .name{font-size:13.5px;font-weight:700;color:var(--green-deep);display:flex;align-items:center;gap:8px;min-width:0}
+  .row .name .d{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
+  .row .time{font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:700;color:var(--green-deep);text-align:right;white-space:nowrap}
+  .row .time small{display:block;font-size:10.5px;color:var(--stone);font-weight:600;margin-top:1px}
+  .row .bar{grid-column:1 / -1;height:7px;border-radius:6px;background:#eef2e8;overflow:hidden}
+  .row .bar i{display:block;height:100%;border-radius:6px}
+  .row .tag{grid-column:1 / -1;font-size:11px;font-weight:700;color:var(--stone)}
+
+  .footnote{margin:12px 4px 6px;font-size:11.5px;color:var(--stone);line-height:1.5}
+  .footnote b{color:var(--green-deep)}
+
+  @media (max-width:430px){
+    .head{padding:16px 16px 14px}
+    .body{padding:14px 13px 8px}
+    .hero .big{font-size:30px}
+  }
+</style>
+</head>
+<body>
+<div class="bx">
+  <div class="card">
+    <div class="head">
+      <p class="eyebrow">BerlinWalk.com · Walking Tool</p>
+      <h2>Is Berlin Walkable? Distance Between the Main Sights</h2>
+      <p>Pick where you are starting, and see how long it really takes to walk to Berlin's other big sights, and where you are better off with the U-Bahn.</p>
+    </div>
+    <div class="body">
+      <div class="pick">
+        <p class="label"><span class="n">1</span> Choose your starting sight</p>
+        <div class="chips" id="starts"></div>
+      </div>
+
+      <div class="hero" id="hero">
+        <div class="route">
+          <span class="pin"><span class="dot a"></span><b id="fromName">Brandenburg Gate</b></span>
+          <span class="arrow">→</span>
+          <span class="pin"><span class="dot b"></span><b id="toName">Reichstag</b></span>
+        </div>
+        <div class="stat">
+          <span class="big" id="heroMin">6<small>min walk</small></span>
+          <span class="dist" id="heroDist">~500 m</span>
+        </div>
+        <span class="verdict" id="heroVerdict"><span class="dot" style="width:9px;height:9px;border-radius:50%"></span><span id="heroVerdictText">Quick stroll</span></span>
+        <div class="walkometer">
+          <div class="wtrack"><div class="wfill" id="heroFill"></div></div>
+          <div class="wscale"><span>0</span><span>15 min</span><span>30 min</span><span>60 min+</span></div>
+        </div>
+        <p class="note" id="heroNote"></p>
+      </div>
+
+      <div class="board-h">
+        <b id="boardTitle">From Brandenburg Gate, on foot</b>
+        <span>tap a sight to focus it</span>
+      </div>
+      <div class="board" id="board"></div>
+
+      <p class="footnote"><b>How to read this:</b> times are real-world estimates for an easy pace on Berlin's flat, straight central streets, before photos, crossings and coffee. Anything under about 25 minutes is usually a nicer walk than waiting for a train. For the longer ones, a single AB ticket and the U-Bahn or S-Bahn will save your legs.</p>
+    </div>
+  </div>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function(){
+  // Ten of Berlin's most-searched central sights, with real-world walking
+  // estimates between every pair (metres / minutes at an easy ~4.8 km/h pace,
+  // following actual streets, not straight lines).
+  var SIGHTS = [
+    {id:'gate',       name:'Brandenburg Gate'},
+    {id:'reichstag',  name:'Reichstag'},
+    {id:'memorial',   name:'Holocaust Memorial'},
+    {id:'potsdamer',  name:'Potsdamer Platz'},
+    {id:'checkpoint', name:'Checkpoint Charlie'},
+    {id:'gendarmen',  name:'Gendarmenmarkt'},
+    {id:'museum',     name:'Museum Island'},
+    {id:'alex',       name:'Alexanderplatz (TV Tower)'},
+    {id:'hackescher', name:'Hackescher Markt'},
+    {id:'eastside',   name:'East Side Gallery'}
+  ];
+  // Upper-triangle [i, j, metres, minutes]; symmetrised at runtime.
+  var PAIRS = [
+    [0,1,500,6],[0,2,350,5],[0,3,1200,15],[0,4,1600,20],[0,5,1300,16],[0,6,1900,24],[0,7,2500,31],[0,8,2300,29],[0,9,4800,60],
+    [1,2,800,10],[1,3,1500,19],[1,4,2000,25],[1,5,1700,21],[1,6,2000,25],[1,7,2600,33],[1,8,2200,28],[1,9,5000,62],
+    [2,3,900,11],[2,4,1300,16],[2,5,1200,15],[2,6,1900,24],[2,7,2500,31],[2,8,2200,28],[2,9,4600,57],
+    [3,4,1100,14],[3,5,1300,16],[3,6,2000,25],[3,7,2700,34],[3,8,2500,31],[3,9,4300,54],
+    [4,5,600,8],[4,6,1200,15],[4,7,1600,20],[4,8,1500,19],[4,9,3300,41],
+    [5,6,900,11],[5,7,1500,19],[5,8,1200,15],[5,9,3600,45],
+    [6,7,900,11],[6,8,700,9],[6,9,3000,37],
+    [7,8,900,11],[7,9,2600,33],
+    [8,9,3200,40]
+  ];
+  // Short practical note per ordered pair key "i-j" (added both directions).
+  var NOTES = {
+    'gate-reichstag':"A two-minute stroll across Platz der Republik. You can do both in one stop, so never take a train between them.",
+    'gate-memorial':"Right around the corner, just south of the Gate. Most people walk it without realising they have moved.",
+    'gate-potsdamer':"An easy walk through the edge of Tiergarten. Pleasant on a dry day, and you pass the Sinti and Roma memorial on the way.",
+    'gate-museum':"This is basically the whole Unter den Linden sightseeing walk, past the university, the opera and Bebelplatz. The walking is the point here, not the shortcut.",
+    'gate-alex':"Doable on foot straight down Unter den Linden, but it is a real haul with sightseeing on top. Fine one way, tram or U-Bahn back.",
+    'gate-eastside':"Too far to enjoy on foot. Take the U-Bahn or S-Bahn towards Warschauer Straße or Ostbahnhof instead.",
+    'museum-alex':"A short hop past the Berliner Dom and the TV Tower. You will almost certainly walk this without thinking about it.",
+    'museum-hackescher':"Just over the Spree into the Hackescher Höfe. Five minutes of the nicest bit of central Berlin.",
+    'alex-hackescher':"Quick walk through the streets behind the station. Easy to combine with dinner near the Hackescher Markt.",
+    'checkpoint-gendarmen':"Two minutes apart. Do Checkpoint Charlie, then walk up to the far prettier Gendarmenmarkt.",
+    'checkpoint-museum':"A pleasant walk north through Mitte, past Gendarmenmarkt and the Bebelplatz if you want it.",
+    'potsdamer-checkpoint':"An easy connect along Stresemannstraße and Zimmerstraße, roughly following the old Wall line."
+  };
+
+  var mat = [];
+  for(var a=0;a<SIGHTS.length;a++){ mat[a]=[]; mat[a][a]={m:0,min:0}; }
+  PAIRS.forEach(function(p){ mat[p[0]][p[1]]={m:p[2],min:p[3]}; mat[p[1]][p[0]]={m:p[2],min:p[3]}; });
+
+  function band(min){
+    if(min<=12) return {key:'easy',label:'Quick stroll',cls:'band-easy',dot:'dot-easy',fill:'#1B5E20'};
+    if(min<=25) return {key:'walk',label:'Easy walk',cls:'band-walk',dot:'dot-walk',fill:'#7CB342'};
+    if(min<=40) return {key:'long',label:'Long but doable',cls:'band-long',dot:'dot-long',fill:'#F0A500'};
+    return {key:'transit',label:'Take the U-Bahn',cls:'band-transit',dot:'dot-transit',fill:'#E63946'};
+  }
+  function fmtDist(m){ return m>=1000 ? '~'+(m/1000).toFixed(1).replace(/\.0$/,'')+' km' : '~'+m+' m'; }
+  function pct(min){ return Math.max(4, Math.min(100, Math.round(min/60*100))); }
+  function key(i,j){ return SIGHTS[i].id+'-'+SIGHTS[j].id; }
+  function noteFor(i,j){
+    return NOTES[key(i,j)] || NOTES[key(j,i)] || (
+      band(mat[i][j].min).key==='transit'
+        ? "This one is a proper cross-town distance. On Berlin's flat grid you could walk it, but a single AB ticket and one train will be faster and kinder to your feet."
+        : "A straightforward central-Berlin walk. On these wide, flat streets it is usually more pleasant than working out which line to take."
+    );
+  }
+
+  var from = 0, to = 1;
+
+  var startsEl = document.getElementById('starts');
+  SIGHTS.forEach(function(s,i){
+    var b=document.createElement('button');
+    b.type='button'; b.textContent=s.name; b.setAttribute('aria-pressed', i===from?'true':'false');
+    b.addEventListener('click', function(){
+      from=i;
+      // keep a sensible destination: nearest other sight
+      var best=-1,bestMin=1e9;
+      for(var j=0;j<SIGHTS.length;j++){ if(j!==from && mat[from][j].min<bestMin){bestMin=mat[from][j].min;best=j;} }
+      to=best;
+      render();
+    });
+    startsEl.appendChild(b);
+  });
+
+  var boardEl=document.getElementById('board');
+
+  function render(){
+    Array.prototype.forEach.call(startsEl.children,function(c,i){ c.setAttribute('aria-pressed', i===from?'true':'false'); });
+
+    var d=mat[from][to], bd=band(d.min);
+    document.getElementById('fromName').textContent=SIGHTS[from].name;
+    document.getElementById('toName').textContent=SIGHTS[to].name;
+    document.getElementById('heroMin').innerHTML=d.min+'<small>min walk</small>';
+    document.getElementById('heroDist').textContent=fmtDist(d.m);
+    var v=document.getElementById('heroVerdict'); v.className='verdict '+bd.cls;
+    v.querySelector('.dot').className='dot '+bd.dot;
+    document.getElementById('heroVerdictText').textContent=bd.label;
+    var f=document.getElementById('heroFill'); f.style.width=pct(d.min)+'%'; f.style.background=bd.fill;
+    document.getElementById('heroNote').textContent=noteFor(from,to);
+    document.getElementById('boardTitle').textContent='From '+SIGHTS[from].name+', on foot';
+
+    var others=[];
+    for(var j=0;j<SIGHTS.length;j++){ if(j!==from) others.push(j); }
+    others.sort(function(a,b){ return mat[from][a].min - mat[from][b].min; });
+
+    boardEl.innerHTML='';
+    others.forEach(function(j){
+      var dd=mat[from][j], b2=band(dd.min);
+      var row=document.createElement('button');
+      row.type='button'; row.className='row'; row.setAttribute('aria-pressed', j===to?'true':'false');
+      row.innerHTML=
+        '<span class="name"><span class="d '+b2.dot+'"></span>'+SIGHTS[j].name+'</span>'+
+        '<span class="time">'+dd.min+' min<small>'+fmtDist(dd.m)+'</small></span>'+
+        '<span class="bar"><i style="width:'+pct(dd.min)+'%;background:'+b2.fill+'"></i></span>'+
+        '<span class="tag">'+b2.label+'</span>';
+      row.addEventListener('click', function(){ to=j; render(); });
+      boardEl.appendChild(row);
+    });
+  }
+  render();
+})();
+</script>
+</body>
+</html>
