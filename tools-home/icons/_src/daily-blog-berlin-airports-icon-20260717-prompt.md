@@ -6,10 +6,14 @@ Same fixed 3-layer BerlinTools family as the other `daily-blog-*` icons:
 3. one large centered bright yellow #FFE600 glossy circular medallion disc
 4. ONE clear glossy soft-3D symbolic object resting on the yellow disc
 
-Generate in Yusuf's logged-in ChatGPT (non-paid). Download the raw square, crop
-to canonical 512 + 160 RGBA PNGs, upload the 512 to Wix Media, then wire into
+Generate through the approved non-paid route, with built-in image generation
+first. Save the raw square, crop to canonical 512 + 160 PNGs, upload the 512 to Wix Media, then wire into
 `tools-hub/data.json` (image + cmsItemId + iconStatus), create the BerlinTools
 CMS item for `/tools/berlin-airports`, and commit/push.
+
+Status 2026-07-18: the raw source and local 512/160 PNGs now exist. Wix Media
+upload, `tools-hub/data.json` wiring, BerlinTools CMS creation and live tool-page
+verification still remain; this note does not authorize those external writes.
 
 ## `berlin-airports` (Berlin Airports: what's open + how to reach the city)
 
@@ -34,4 +38,3 @@ Create ONE square 1:1 app icon for BerlinWalk, in a strict fixed style. STRUCTUR
 - `node tools-hub/validate-data.mjs`, then commit/push.
 - This does NOT publish the blog post; the post stays UNPUBLISHED until Yusuf
   approves it.
-```

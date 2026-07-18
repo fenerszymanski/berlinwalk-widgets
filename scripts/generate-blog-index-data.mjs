@@ -27,6 +27,8 @@ const TOPICS = [
     description: 'Airport, luggage, tickets, toilets, Sunday rules, and the small practical decisions that shape the first 24 hours.',
     slugs: [
       'how-many-days-in-berlin',
+      'do-you-need-a-visa-to-visit-berlin',
+      'berlin-airports',
       'berlin-first-time-visitor-mistakes-12-things-to-know-before-you-go',
       'how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way',
       'luggage-storage-in-berlin-2026',
@@ -114,6 +116,7 @@ const TOPICS = [
     description: 'Berlin history, myths, before-and-after stories, and the background that makes the city click.',
     slugs: [
       'why-is-berlin-founding-year-1237',
+      'famous-movies-tv-shows-filmed-in-berlin',
       'where-was-the-berlin-wall-interactive-map',
       'east-side-gallery-berlin-guide',
       'the-ampelmann-how-a-traffic-light-became-berlin-s-most-beloved-symbol',
@@ -136,6 +139,7 @@ const TOPICS = [
     kicker: 'After the walk',
     description: 'Food, coffee, currywurst, clubs, and the useful bits of Berlin culture around eating and going out.',
     slugs: [
+      'halal-food-in-berlin',
       'vegan-berlin-guide-2026',
       'what-is-a-spati-berlin',
       'best-currywurst-places-in-berlin-2026',
@@ -612,6 +616,10 @@ function relatedToolSlugFor(post) {
   if ((post.slug || '') === 'berlin-then-and-now') return 'mehringplatz-time-layer-viewer';
   if ((post.slug || '') === 'berlin-hop-on-hop-off-bus-worth-it') return 'berlin-hop-on-hop-off-decision';
   if ((post.slug || '') === 'how-many-days-in-berlin') return 'how-many-days-in-berlin';
+  if ((post.slug || '') === 'famous-movies-tv-shows-filmed-in-berlin') return 'screen-mood-finder';
+  if ((post.slug || '') === 'do-you-need-a-visa-to-visit-berlin') return 'berlin-entry-requirements';
+  if ((post.slug || '') === 'berlin-airports') return 'berlin-airports';
+  if ((post.slug || '') === 'halal-food-in-berlin') return 'halal-food-in-berlin';
   if (/(berlin-layover-guide|layover in berlin|ber layover|spend a layover)/.test(s)) return 'berlin-layover-planner';
   if (/(prenzlauer-berg-berlin|prenzlauer berg)/.test(s)) return 'prenzlauer-berg-walk';
   if (/(buy-berlin-transport-tickets-on-your-phone|tickets on your phone|phone ticket|bvg app)/.test(s)) return 'berlin-phone-ticket-picker';

@@ -3,76 +3,70 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Berlin Halal Check: is this place halal? Read the signals</title>
+<title>Berlin Halal Verification Checklist</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='32' r='20' fill='%23FFE600'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="../css/brand.css" />
 <style>
   :root{
-    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
-    --yellow:#FFE600; --amber:#F0A500; --ink:#1c2a1c; --panel:#ffffff; --bone:#f4f9ec;
-    --line:#e3edd6; --stone:#6d7b66; --shadow:0 10px 30px rgba(18,61,24,.14);
+    --green:#1B5E20;--green-deep:#123D18;--lime:#7CB342;--yellow:#FFE600;
+    --amber:#F0A500;--ink:#1c2a1c;--panel:#fff;--bone:#f4f9ec;
+    --line:#e3edd6;--stone:#61705c;--shadow:0 10px 30px rgba(18,61,24,.14)
   }
   *{box-sizing:border-box}
+  [hidden]{display:none!important}
   html,body{margin:0}
   body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  button,a{font-family:inherit}
   .bx{max-width:940px;margin:0 auto;padding:4px}
   .card{background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
-
   .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:18px 22px 16px}
-  .kick{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:700;margin:0 0 6px;font-family:"IBM Plex Mono",monospace}
+  .kick{font:700 11px "IBM Plex Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);margin:0 0 6px}
   .head h1{margin:0;font-size:21px;font-weight:800;line-height:1.2}
-  .head p{margin:8px 0 0;font-size:13.5px;color:#e7f3e2;max-width:720px}
-
+  .head p{margin:8px 0 0;font-size:13.5px;color:#e7f3e2;max-width:760px}
   .body{padding:16px 16px 8px}
-  .lab{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);font-weight:700;font-family:"IBM Plex Mono",monospace;margin:0 0 7px}
-  .grp{margin-bottom:14px}
-  .chips{display:flex;flex-wrap:wrap;gap:8px}
-  .chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 13px;font-size:13px;font-weight:700;color:var(--green-deep);cursor:pointer;font-family:Montserrat,sans-serif;line-height:1.15}
-  .chip small{display:block;font-size:10px;font-weight:600;color:var(--stone);letter-spacing:0;text-transform:none;margin-top:1px}
-  .chip[aria-pressed="true"]{background:var(--green);color:#fff;border-color:var(--green)}
-  .chip[aria-pressed="true"] small{color:#d6ecc8}
-
-  /* signal tiles */
+  .intro{margin:0 0 14px;font-size:13px;color:#344331}
+  .lab{font:700 11px "IBM Plex Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);margin:0 0 7px}
   .sig{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  .tile{display:flex;gap:9px;align-items:flex-start;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:10px 11px;cursor:pointer}
-  .tile .bx2{width:20px;height:20px;border-radius:6px;border:2px solid #cdddbd;flex:0 0 auto;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;background:#fff;transition:.15s}
+  .tile{display:flex;gap:10px;align-items:flex-start;min-height:56px;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:10px 11px;cursor:pointer;text-align:left}
+  .tile:hover,.tile:focus-visible{border-color:var(--green);outline:2px solid transparent}
+  .tile .box{width:22px;height:22px;border-radius:6px;border:2px solid #c8d9b8;flex:0 0 auto;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;background:#fff}
   .tile[aria-pressed="true"]{border-color:var(--green);background:#f3f9ea}
-  .tile[aria-pressed="true"] .bx2{background:var(--green);border-color:var(--green)}
-  .tile .tx{font-size:12.5px;font-weight:700;color:var(--green-deep);line-height:1.25}
-  .tile .tx small{display:block;font-weight:600;color:var(--stone);font-size:10.5px;margin-top:1px}
-
-  /* gauge */
-  .gauge{margin:6px 0 2px;text-align:center;position:relative}
-  .gwrap{position:relative;width:230px;max-width:82%;margin:0 auto}
-  .gwrap svg{width:100%;height:auto;display:block}
-  .gnum{position:absolute;left:0;right:0;bottom:6px;font-family:"IBM Plex Mono",monospace}
-  .gnum b{font-size:38px;font-weight:700;color:var(--green-deep);line-height:1;display:block}
-  .gnum span{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);font-weight:700}
-
-  .verdict{margin:6px 0 4px;border:1px solid var(--line);border-left:5px solid var(--lime);border-radius:12px;padding:12px 15px;background:var(--bone)}
-  .verdict .vh{font-size:15.5px;font-weight:800;margin:0 0 3px;color:var(--green-deep)}
+  .tile[aria-pressed="true"] .box{background:var(--green);border-color:var(--green)}
+  .tile .tx{font-size:12.5px;font-weight:800;color:var(--green-deep);line-height:1.25}
+  .tile .tx small{display:block;font-size:10.5px;font-weight:600;color:var(--stone);margin-top:2px}
+  .note{margin:9px 2px 0;font-size:11.5px;color:var(--stone)}
+  .verdict{margin:15px 0 5px;border:1px solid var(--line);border-left:5px solid var(--amber);border-radius:12px;padding:13px 15px;background:var(--bone)}
+  .verdict.confirmed{border-left-color:var(--green)}
+  .verdict .vh{font-size:15.5px;font-weight:800;margin:0 0 4px;color:var(--green-deep)}
   .verdict .vp{font-size:13px;color:#31402f;margin:0}
-  .verdict.hi{border-left-color:var(--green)}
-  .verdict.mid{border-left-color:var(--lime)}
-  .verdict.low{border-left-color:var(--amber)}
-
-  /* phrase card */
-  .say{margin:12px 0 4px;border:1px solid #e0ebd2;border-radius:14px;overflow:hidden}
-  .say .sh{background:#eef5e3;padding:8px 14px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--green-deep);font-family:"IBM Plex Mono",monospace}
-  .say .sb{padding:12px 14px;display:grid;gap:9px}
-  .ph{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
-  .ph b{font-size:15px;color:var(--green-deep);font-weight:800}
-  .ph i{font-style:normal;font-size:12px;color:var(--stone);font-family:"IBM Plex Mono",monospace}
-  .ph .en{font-size:12px;color:#42513f;font-weight:600}
-  .phar{direction:rtl;font-size:17px}
-
-  .foot{font-size:12px;color:var(--stone);margin:14px 2px 4px;line-height:1.5}
-  .foot a{color:var(--green);font-weight:700}
+  .next{margin:9px 0 0;padding-left:19px;color:#31402f;font-size:12px}
+  .next li+li{margin-top:4px}
+  .say{margin:13px 0 4px;border:1px solid #e0ebd2;border-radius:14px;overflow:hidden}
+  .say .sh{background:#eef5e3;padding:8px 14px;font:700 11px "IBM Plex Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--green-deep)}
+  .say .sb{padding:12px 14px;display:grid;gap:10px}
+  .phrase{border-bottom:1px solid #edf2e8;padding-bottom:9px}
+  .phrase:last-child{border-bottom:0;padding-bottom:0}
+  .phrase b{display:block;font-size:14px;color:var(--green-deep);font-weight:800}
+  .phrase span{display:block;font-size:11.5px;color:#42513f;margin-top:2px}
+  .phrase .arabic{direction:rtl;font-size:16px;margin-top:4px;text-align:left}
+  .foot{font-size:12px;color:var(--stone);margin:14px 2px 4px;line-height:1.55}
+  .foot a{color:var(--green);font-weight:800}
+  .credits-row{display:flex;justify-content:flex-end;margin:12px 0 2px}
+  .credits-trigger{min-height:44px;border:1px solid #d5c300;border-radius:999px;background:var(--yellow);color:var(--green-deep);padding:8px 14px;font-weight:800;font-size:12px;cursor:pointer}
+  .credits-trigger:hover,.credits-trigger:focus-visible{background:#f5dc00;outline:2px solid var(--green-deep);outline-offset:2px}
+  .credits-modal{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:18px;background:rgba(8,28,11,.72)}
+  .credits-panel{width:min(610px,100%);max-height:min(78vh,620px);overflow:auto;border:1px solid var(--line);border-radius:16px;background:#fff;padding:18px;box-shadow:0 18px 55px rgba(0,0,0,.34)}
+  .credits-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:10px}
+  .credits-head h2{margin:0;color:var(--green-deep);font-size:18px}
+  .credits-close{border:0;border-radius:999px;background:#e8f1dd;color:var(--green-deep);width:44px;height:44px;font-size:22px;font-weight:800;cursor:pointer}
+  .credits-list{margin:0;padding-left:20px;color:#374734;font-size:12px;line-height:1.55}
+  .credits-list li+li{margin-top:8px}.credits-list a{color:var(--green);font-weight:800}
   @media(max-width:430px){
-    .head h1{font-size:19px}
-    .sig{grid-template-columns:1fr}
+    .head h1{font-size:19px}.sig{grid-template-columns:1fr}.body{padding:14px 12px 8px}
+    .tile{min-height:56px}.credits-panel{padding:15px}
   }
 </style>
 </head>
@@ -80,142 +74,110 @@
 <div class="bx">
   <div class="card">
     <div class="head">
-      <p class="kick">BerlinWalk.com • Halal check</p>
-      <h1>Is this place halal? Read the signals</h1>
-      <p>Standing in front of a Berlin restaurant and not sure? Tell me where you are and what you can see, and I will tell you how confident to be, plus the exact phrase to ask at the counter.</p>
+      <p class="kick">BerlinWalk.com • Verification checklist</p>
+      <h1>Berlin Halal Verification Checklist</h1>
+      <p>Use these questions at the restaurant. This tool does not certify a venue or guess from its neighbourhood, cuisine, staff or customers.</p>
     </div>
     <div class="body">
+      <p class="intro">Tick only what you have confirmed for the exact dish you want. A sign or menu claim can start the conversation, but it does not replace a direct answer or a certificate check.</p>
 
-      <div class="grp">
-        <p class="lab">Where are you?</p>
-        <div class="chips" id="area" role="group" aria-label="Neighbourhood">
-          <button class="chip" data-k="neukolln" aria-pressed="true">Neukölln<small>Sonnenallee / Hermannplatz</small></button>
-          <button class="chip" data-k="kreuzberg">Kreuzberg<small>Kottbusser Tor</small></button>
-          <button class="chip" data-k="wedding">Wedding<small>Gesundbrunnen</small></button>
-          <button class="chip" data-k="centre">Tourist centre<small>Mitte / Alexanderplatz</small></button>
-          <button class="chip" data-k="other">Elsewhere<small>another district</small></button>
-        </div>
+      <p class="lab">What have you checked?</p>
+      <div class="sig" id="checks" role="group" aria-label="Halal verification checklist">
+        <button class="tile" type="button" data-k="dish" aria-pressed="false"><span class="box">✓</span><span class="tx">Exact dish or meat confirmed<small>The venue clearly answered which items are halal</small></span></button>
+        <button class="tile" type="button" data-k="certificate" aria-pressed="false"><span class="box">✓</span><span class="tx">Current certificate checked<small>You checked the issuer and what the certificate covers</small></span></button>
+        <button class="tile" type="button" data-k="prep" aria-pressed="false"><span class="box">✓</span><span class="tx">Shared preparation checked<small>You asked about the grill, fryer, utensils or storage</small></span></button>
+        <button class="tile" type="button" data-k="claim" aria-pressed="false"><span class="box">✓</span><span class="tx">Halal sign or menu claim visible<small>Useful as a venue statement, not independent proof</small></span></button>
       </div>
+      <p class="note">Certification and shared preparation matter differently to different people. Use the checks that match your own standard.</p>
 
-      <div class="grp">
-        <p class="lab">What kind of place is it?</p>
-        <div class="chips" id="cuisine" role="group" aria-label="Cuisine">
-          <button class="chip" data-k="turkish" aria-pressed="true">Turkish grill / döner</button>
-          <button class="chip" data-k="arab">Arab / Levantine</button>
-          <button class="chip" data-k="other">Something else</button>
-        </div>
-      </div>
-
-      <div class="grp">
-        <p class="lab">Tick what you can actually see</p>
-        <div class="sig" id="signals">
-          <button class="tile" data-k="sign" aria-pressed="false"><span class="bx2">✓</span><span class="tx">Green "Halal" sign<small>or حلال in the window</small></span></button>
-          <button class="tile" data-k="nopork" aria-pressed="false"><span class="bx2">✓</span><span class="tx">No pork on the menu<small>no ham, bacon, Schwein</small></span></button>
-          <button class="tile" data-k="noalc" aria-pressed="false"><span class="bx2">✓</span><span class="tx">No alcohol served<small>the place is dry</small></span></button>
-          <button class="tile" data-k="locals" aria-pressed="false"><span class="bx2">✓</span><span class="tx">Family-run and busy<small>with Arab / Turkish locals</small></span></button>
-        </div>
-      </div>
-
-      <div class="gauge">
-        <div class="gwrap">
-          <svg viewBox="0 0 200 116" aria-hidden="true">
-            <path d="M12 108 A88 88 0 0 1 188 108" fill="none" stroke="#eef4e3" stroke-width="16" stroke-linecap="round"/>
-            <path id="arc" d="M12 108 A88 88 0 0 1 188 108" fill="none" stroke="#7CB342" stroke-width="16" stroke-linecap="round" stroke-dasharray="276.5" stroke-dashoffset="276.5" style="transition:stroke-dashoffset .5s cubic-bezier(.2,.8,.2,1),stroke .3s"/>
-          </svg>
-          <div class="gnum"><b id="gpct">0%</b><span>halal confidence</span></div>
-        </div>
-      </div>
-
-      <div class="verdict" id="verdict">
-        <p class="vh" id="vh"></p>
-        <p class="vp" id="vp"></p>
+      <div class="verdict" id="verdict" aria-live="polite">
+        <p class="vh" id="verdictTitle">Ask before ordering.</p>
+        <p class="vp" id="verdictCopy"></p>
+        <ul class="next" id="nextSteps"></ul>
       </div>
 
       <div class="say">
-        <div class="sh">If you want to be sure, just ask</div>
+        <div class="sh">Useful questions at the counter</div>
         <div class="sb">
-          <div class="ph"><b>Ist das Fleisch halal?</b><i>ist das flysh ha-lal</i></div>
-          <div class="ph"><span class="en">"Is the meat halal?" — every counter hears it daily.</span><span class="phar">هل اللحم حلال؟</span></div>
-          <p class="vp" id="tip" style="margin:2px 0 0;font-size:12px;color:#42513f"></p>
+          <div class="phrase"><b>Ist das Fleisch halal?</b><span>Is the meat halal?</span><span class="arabic">هل اللحم حلال؟</span></div>
+          <div class="phrase"><b>Welche Gerichte sind halal?</b><span>Which dishes are halal?</span></div>
+          <div class="phrase"><b>Ist das zertifiziert? Von wem?</b><span>Is it certified? By whom?</span></div>
+          <div class="phrase"><b>Benutzen Sie denselben Grill oder dieselbe Fritteuse?</b><span>Do you use the same grill or fryer?</span></div>
         </div>
       </div>
 
-      <p class="foot">A guide, not a certificate. In Germany, displayed halal certification is less standardised than in the UK or US, so the honest failsafe is always the question above. For where to eat, see my <a href="https://www.berlinwalk.com/post/neukolln-berlin">Neukölln guide</a> and <a href="https://www.berlinwalk.com/post/how-to-order-doner-in-berlin">how to order döner in Berlin</a>.</p>
-
+      <p class="foot">Germany has no single uniform halal standard. The <a href="https://www.verbraucherzentrale.de/wissen/lebensmittel/kennzeichnung-und-inhaltsstoffe/halal-essen-wann-ist-ein-produkt-halal-12283" target="_blank" rel="noopener">Verbraucherzentrale guide</a> explains why labels can use different criteria. For food areas, see my <a href="https://www.berlinwalk.com/post/neukolln-berlin">Neukölln guide</a> and <a href="https://www.berlinwalk.com/post/how-to-order-doner-in-berlin">döner ordering guide</a>.</p>
+      <div class="credits-row"><button class="credits-trigger" id="creditsOpen" type="button" aria-expanded="false" aria-controls="creditsModal">Image credits</button></div>
     </div>
+  </div>
+</div>
+
+<div class="credits-modal" id="creditsModal" hidden role="dialog" aria-modal="true" aria-labelledby="creditsTitle">
+  <div class="credits-panel">
+    <div class="credits-head"><h2 id="creditsTitle">Image credits</h2><button class="credits-close" id="creditsClose" type="button" aria-label="Close image credits">×</button></div>
+    <ul class="credits-list">
+      <li><a href="https://commons.wikimedia.org/wiki/File:Chicken_D%C3%B6ner_in_Berlin.jpg" target="_blank" rel="noopener">Chicken döner in Berlin</a>, Felipe Tofani, <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noopener">CC BY-SA 2.0</a>. Cropped and resized for web.</li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:Sonnenallee_Berlin-Neuk%C3%B6lln_2020-06-26_01.jpg" target="_blank" rel="noopener">Sonnenallee</a>, Leonhard Lenz, <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener">CC0 1.0</a>. Cropped and resized for web.</li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:Berlin_Wochenmarkt_Maybachufer-20241206-RM-152528.jpg" target="_blank" rel="noopener">Maybachufer market</a>, Reinhold Möller, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>. Cropped and resized for web.</li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:%C5%9Eehitlik_mosque_Berlin_by_ZUFAr.jpg" target="_blank" rel="noopener">Şehitlik Mosque</a>, ZUFAr, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>. Cropped and resized for web.</li>
+    </ul>
   </div>
 </div>
 
 <script>
 (function(){
-  var ARC=276.5;
-  var state={ area:'neukolln', cuisine:'turkish', signals:{} };
-
-  var AREA={ neukolln:45, kreuzberg:42, wedding:40, centre:12, other:25 };
-  var CUIS={ turkish:18, arab:20, other:4 };
-  var SIG={ sign:22, nopork:10, noalc:9, locals:8 };
-
-  function score(){
-    var s=(AREA[state.area]||0)+(CUIS[state.cuisine]||0);
-    Object.keys(state.signals).forEach(function(k){ if(state.signals[k]) s+=SIG[k]||0; });
-    return Math.max(0,Math.min(100,Math.round(s)));
-  }
-
-  function tierColor(pct){
-    if(pct>=80) return 'var(--green)';
-    if(pct>=55) return 'var(--lime)';
-    return 'var(--amber)';
-  }
+  var state={dish:false,certificate:false,prep:false,claim:false};
+  var verdict=document.getElementById('verdict');
+  var title=document.getElementById('verdictTitle');
+  var copy=document.getElementById('verdictCopy');
+  var next=document.getElementById('nextSteps');
 
   function render(){
-    var pct=score();
-    document.getElementById('arc').style.strokeDashoffset=(ARC-(ARC*pct/100)).toFixed(1);
-    document.getElementById('arc').style.stroke=tierColor(pct);
-    document.getElementById('gpct').textContent=pct+'%';
-
-    var vbox=document.getElementById('verdict'), vh=document.getElementById('vh'), vp=document.getElementById('vp'), tip=document.getElementById('tip');
-    var hasSign=!!state.signals.sign;
-    if(pct>=80){
-      vbox.className='verdict hi';
-      vh.textContent='Very likely halal.';
-      vp.textContent=hasSign
-        ? 'A halal sign in a Turkish or Arab kitchen in this area is about as sure as it gets in Berlin. Order with confidence.'
-        : 'Everything points the right way: the right neighbourhood, the right kind of kitchen and the signals to match. Order with confidence.';
-      tip.textContent='You almost certainly do not need to ask, but the phrase is there if it puts your mind at rest.';
-    } else if(pct>=55){
-      vbox.className='verdict mid';
-      vh.textContent='Likely halal, worth a quick ask.';
-      vp.textContent='This has the makings of a halal kitchen, but you are missing one or two of the clearest signals. A five-second question at the counter turns likely into certain.';
-      tip.textContent='Ask before you order. Staff will answer plainly and will not mind at all.';
-    } else {
-      vbox.className='verdict low';
-      vh.textContent='Check before you order.';
-      vp.textContent=(state.area==='centre')
-        ? 'Central tourist spots around Mitte and Alexanderplatz are built around pork and rarely halal. Head to Neukölln, Kreuzberg or Wedding, or ask here first and do not assume.'
-        : 'Not enough clear signals yet. Do not assume; ask at the counter, or walk two streets into a Turkish or Arab grill where halal is the default.';
-      tip.textContent='This is exactly the moment to use the question. If the answer is anything but a clear yes, move on.';
+    var steps=[];
+    if(!state.dish){
+      verdict.className='verdict';
+      title.textContent='Ask before ordering.';
+      copy.textContent=state.claim
+        ? 'The sign or menu claim is useful, but it does not tell you which dishes, meats or preparation steps are covered.'
+        : 'No neighbourhood, cuisine or visual clue can answer this for the exact dish. Start with a direct question to the venue.';
+      steps.push('Ask which dishes and meats the venue confirms as halal.');
+    }else{
+      verdict.className='verdict confirmed';
+      title.textContent='Venue confirmed. Check what matters to you.';
+      copy.textContent='You have a direct answer for the dish or meat. Decide whether that answer meets your standard and use the follow-up checks that matter to you.';
     }
+    if(!state.certificate) steps.push('If certification matters, ask to see the current certificate, issuer and scope.');
+    if(!state.prep) steps.push('If shared preparation matters, ask about the grill, fryer, utensils and storage.');
+    if(state.dish&&state.certificate&&state.prep){
+      steps.push('You have checked the main points. Make your decision from the answers, not from the neighbourhood or customer profile.');
+    }
+    next.innerHTML='';
+    steps.forEach(function(item){var li=document.createElement('li');li.textContent=item;next.appendChild(li);});
     if(window.BWResize) window.BWResize();
   }
 
-  function wireChips(id, key){
-    Array.prototype.forEach.call(document.querySelectorAll('#'+id+' .chip'),function(b){
-      b.addEventListener('click',function(){
-        Array.prototype.forEach.call(document.querySelectorAll('#'+id+' .chip'),function(x){x.setAttribute('aria-pressed','false');});
-        b.setAttribute('aria-pressed','true'); state[key]=b.dataset.k; render();
-      });
-    });
-  }
-  wireChips('area','area');
-  wireChips('cuisine','cuisine');
-  Array.prototype.forEach.call(document.querySelectorAll('#signals .tile'),function(b){
-    b.addEventListener('click',function(){
-      var k=b.dataset.k; var on=b.getAttribute('aria-pressed')==='true';
-      b.setAttribute('aria-pressed', on?'false':'true'); state.signals[k]=!on; render();
+  Array.prototype.forEach.call(document.querySelectorAll('#checks .tile'),function(button){
+    button.addEventListener('click',function(){
+      var key=button.dataset.k;
+      state[key]=!state[key];
+      button.setAttribute('aria-pressed',state[key]?'true':'false');
+      render();
     });
   });
-
   render();
+})();
+</script>
+<script>
+(function(){
+  var open=document.getElementById('creditsOpen');
+  var modal=document.getElementById('creditsModal');
+  var close=document.getElementById('creditsClose');
+  function show(){modal.hidden=false;open.setAttribute('aria-expanded','true');close.focus();}
+  function hide(){modal.hidden=true;open.setAttribute('aria-expanded','false');open.focus();}
+  open.addEventListener('click',show);
+  close.addEventListener('click',hide);
+  modal.addEventListener('click',function(event){if(event.target===modal)hide();});
+  document.addEventListener('keydown',function(event){if(event.key==='Escape'&&!modal.hidden)hide();});
 })();
 </script>
 <script src="../js/brand.js"></script>

@@ -10,11 +10,12 @@ Daily blog automation run: 2026-07-17 (Claude).
   what-to-eat, breakfast, Markthalle Neun, beer gardens, vegan. None answers the
   Muslim / halal-observant traveller's real question: where can I reliably eat
   halal, and how do I know a place is actually halal.
-- High tourist intent and a large, underserved audience segment (Muslim
-  travellers are a major visitor group for Berlin). Authentic to Yusuf's Turkish
-  background and to the tour's own neighbourhoods (Neukölln, Kreuzberg).
+- High tourist intent and a practical question for Muslim visitors. Authentic
+  to Yusuf's Turkish background and useful as post-tour guidance for food areas
+  outside the historic-centre walking route.
 - Distinct from the earlier same-day runs; this is a food/neighbourhood
-  practical guide with an honest "how to read a place" angle, not a ranking.
+  practical guide with a careful verification angle, not a ranking or a
+  probability model.
 
 ## SEO plan
 
@@ -27,7 +28,7 @@ Daily blog automation run: 2026-07-17 (Claude).
 
 ## Facts checked 2026-07-17
 
-- visitBerlin "Berlin for Muslim travellers": ~80 restaurants serve halal food
+- visitBerlin "Berlin for Muslim travellers": almost 80 restaurants serve halal food
   (Arab, Turkish, Indonesian, Indian). Neukölln = "Arab Street" (Sonnenallee),
   Arab supermarkets/patisseries. Kreuzberg has many mosques/prayer rooms.
   Hotels doing halal on request: Grand Hyatt, Waldorf Astoria, Ritz-Carlton,
@@ -35,25 +36,28 @@ Daily blog automation run: 2026-07-17 (Claude).
   adjoins the first Islamic cemetery in Germany, 1866), Omar Ibn al-Khattab
   (Kreuzberg). Room of Silence at BER airport for prayer.
   Source: https://www.visitberlin.de/en/berlin-muslim-travellers
-- Neukölln around Sonnenallee and Kottbusser Damm = hub for Turkish and Middle
-  Eastern food; Kreuzberg + Neukölln "practically halal by default."
-- Döner: the vast majority of döner in Berlin uses halal meat, especially in
-  Turkish/Arab neighbourhoods (Kottbusser Tor, Wedding/Gesundbrunnen). Formal
-  displayed certification is less common in Germany than in the UK/US. Look for a
-  green "Halal" / حلال window sticker; if unsure, just ask. German halal
-  certifiers include HALAL CONTROL and HQC.
-  Source: web search visitBerlin döner + checkmyhalal Germany.
-- Honest geography lesson: reliable halal clusters in immigrant
-  neighbourhoods (Neukölln, Kreuzberg, Wedding), NOT in tourist-central German
-  restaurants around Alexanderplatz/Mitte, where pork (Currywurst, Eisbein,
-  Schweinshaxe) is standard.
+- Neukölln around Sonnenallee and Kottbusser Damm has a broad range of Turkish,
+  Arab and other food businesses. Geography is useful for finding options but
+  does not prove that an individual venue or dish is halal.
+- visitBerlin reports more than 1,000 kebab outlets in Berlin but does not give
+  a reliable city-wide share that uses halal meat. The article must not say
+  "most" or infer status from cuisine, owners, staff or customers.
+  Source: https://www.visitberlin.de/en/doner-kebab
+- Verbraucherzentrale: Germany has no single uniform halal standard; the term
+  is not protected in EU food law and labels can use different criteria. A
+  venue sign is a claim unless supported by a current certificate whose issuer
+  and scope can be checked.
+  Source: https://www.verbraucherzentrale.de/wissen/lebensmittel/kennzeichnung-und-inhaltsstoffe/halal-essen-wann-ist-ein-produkt-halal-12283
+- Maybachufer's official public information supports Tuesday/Friday opening and
+  general market groceries, not a claim that its meat is halal.
+  Sources: https://maybachufer.de/ and the Neukölln district market page.
 
 ## Named places used (kept honest, example-level, not a ranking)
 
-- Sonnenallee (Neukölln) — "Arab Street", Levantine restaurants, bakeries,
-  sweet shops; many are alcohol-free, which is a useful halal signal.
-- Kottbusser Damm / Kottbusser Tor (Neukölln/Kreuzberg border) — Turkish grills
-  and döner, essentially halal.
+- Sonnenallee (Neukölln) — "Arab Street", Levantine restaurants, bakeries and
+  sweet shops. Use it for range, then verify the exact venue and dish.
+- Kottbusser Damm / Kottbusser Tor (Neukölln/Kreuzberg border) — useful area
+  for Turkish and Arab food businesses, not proof of halal status.
 - Maybachufer Turkish Market (links to existing post).
 - Şehitlik Mosque, Columbiadamm — prayer + one of the city's most beautiful.
 - BER airport Room of Silence — prayer near arrival/departure.
@@ -63,13 +67,11 @@ unverifiable specifics; guidance is street/area level plus the visitBerlin link.
 ## Widget
 
 - Slug: `halal-food-in-berlin` — "Berlin Halal Check".
-- Original interaction (NOT a reused picker/planner/checker clone): a
-  signal-based confidence reader. Reader picks the neighbourhood they are in and
-  ticks the signals they can actually see in front of a place (green Halal sign,
-  Arab/Turkish crowd, no pork on the menu, no alcohol, cuisine type). A live
-  confidence gauge moves from "Check first" to "Very likely halal", with an
-  honest verdict line and the exact German + Arabic phrase to ask at the counter.
-  Teaches the durable skill of reading a place, not a fixed list.
+- Final interaction: a verification checklist with no percentage, geography,
+  cuisine or demographic scoring. It separates the exact dish/meat, current
+  certificate and issuer, shared preparation and the venue's own sign or menu
+  claim. The result only identifies questions still to ask and provides useful
+  German and Arabic wording.
 
 ## Internal links used
 

@@ -4,6 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Berlin Entry Checker and Schengen 90/180 Day Counter</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='32' r='20' fill='%23FFE600'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -15,6 +16,7 @@
     --bone:#f4f9ec; --line:#e3edd6; --stone:#6d7b66; --shadow:0 10px 30px rgba(18,61,24,.14);
   }
   *{box-sizing:border-box}
+  [hidden]{display:none!important}
   html,body{margin:0}
   body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
   .bx{max-width:940px;margin:0 auto;padding:4px}
@@ -61,6 +63,18 @@
   .field input:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(124,179,66,.18)}
   .field.full{grid-column:1 / -1}
   .hint{font-size:11.5px;color:var(--stone);font-weight:600;margin:5px 0 0}
+  .history{margin-top:14px;border:1px solid var(--line);border-radius:14px;background:var(--bone);padding:13px}
+  .history-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+  .history-head h3{margin:0;color:var(--green-deep);font-size:13.5px;font-weight:800}
+  .history-head p{margin:4px 0 0;color:var(--stone);font-size:11.5px;font-weight:600;line-height:1.45;max-width:650px}
+  .add-stay{flex:none;border:1px solid #d5c300;border-radius:999px;background:var(--yellow);color:var(--green-deep);padding:8px 12px;font:800 11.5px Montserrat,sans-serif;cursor:pointer}
+  .add-stay:hover,.add-stay:focus-visible{background:#f5dc00;outline:2px solid var(--green-deep);outline-offset:2px}
+  .stays{display:grid;gap:9px;margin-top:11px}
+  .stay-row{display:grid;grid-template-columns:1fr 1fr auto;gap:9px;align-items:end;padding:10px;border:1px solid #dce7cf;border-radius:11px;background:#fff}
+  .stay-row .field label{font-size:10.5px}
+  .remove-stay{width:72px;height:42px;border:1px solid #e7c9cc;border-radius:10px;background:#fff6f7;color:#8a1a25;font:800 11.5px Montserrat,sans-serif;cursor:pointer}
+  .remove-stay:hover,.remove-stay:focus-visible{background:#fdeaec;outline:2px solid #8a1a25;outline-offset:2px}
+  .history-error{margin:9px 0 0;color:#8a1a25;font-size:11.5px;font-weight:700;line-height:1.4}
 
   .meterwrap{margin:15px 0 2px;border:1px solid var(--line);border-radius:14px;background:#fff;padding:14px 15px}
   .mnums{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;margin:0 0 9px}
@@ -72,6 +86,9 @@
   .bar .fillTrip{position:absolute;top:0;bottom:0;background:linear-gradient(90deg,var(--lime),var(--green))}
   .bar.over .fillTrip{background:linear-gradient(90deg,#f0a500,var(--red))}
   .barlabels{display:flex;justify-content:space-between;font-size:10.5px;color:var(--stone);font-weight:700;margin-top:6px;font-family:"IBM Plex Mono",monospace}
+  .mlegend{display:flex;flex-wrap:wrap;gap:12px;margin-top:7px;color:var(--stone);font-size:10.5px;font-weight:700}
+  .mlegend span{display:inline-flex;align-items:center;gap:5px}.mlegend i{width:9px;height:9px;border-radius:3px;display:inline-block}
+  .mlegend .prior i{background:#c5d8ac}.mlegend .trip i{background:var(--green)}
   .vline{font-size:13px;font-weight:800;margin:12px 0 0;padding:10px 12px;border-radius:11px;line-height:1.45}
   .vline.ok{background:#e7f4d8;color:var(--green-deep);border:1px solid #d0e6b6}
   .vline.warn{background:#fff7cc;color:#6a5a00;border:1px solid #f0e08a}
@@ -83,10 +100,23 @@
   .disc b{color:var(--green-deep)}
   a.src{color:var(--green);font-weight:700;text-decoration:none;border-bottom:1.5px solid var(--soft)}
   a.src:hover{border-color:var(--green)}
+  .row .rt a,.naNote a{color:var(--green);font-weight:800;text-decoration:underline;text-underline-offset:2px}
+  .credits-row{display:flex;justify-content:flex-end;margin:12px 0 0}
+  .credits-trigger{border:1px solid #d5c300;border-radius:999px;background:var(--yellow);color:var(--green-deep);padding:8px 13px;font:800 12px Montserrat,sans-serif;cursor:pointer}
+  .credits-trigger:hover,.credits-trigger:focus-visible{background:#f5dc00;outline:2px solid var(--green-deep);outline-offset:2px}
+  .credits-modal{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:18px;background:rgba(8,28,11,.72)}
+  .credits-panel{width:min(590px,100%);max-height:min(78vh,620px);overflow:auto;border:1px solid var(--line);border-radius:16px;background:#fff;padding:18px;box-shadow:0 18px 55px rgba(0,0,0,.34)}
+  .credits-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:10px}
+  .credits-head h2{margin:0;color:var(--green-deep);font-size:18px}
+  .credits-close{border:0;border-radius:999px;background:#e8f1dd;color:var(--green-deep);width:34px;height:34px;font-size:20px;font-weight:800;cursor:pointer}
+  .credits-list{margin:0;padding-left:20px;color:#374734;font-size:12px;line-height:1.55}
+  .credits-list li+li{margin-top:7px}.credits-list a{color:var(--green);font-weight:700}
 
   @media(max-width:560px){
     .chips{grid-template-columns:1fr}
     .grid2{grid-template-columns:1fr}
+    .history-head{display:block}.add-stay{margin-top:10px}
+    .stay-row{grid-template-columns:1fr 1fr}.stay-row .remove-stay{grid-column:1 / -1;width:100%;height:36px;font-size:12px}
     .head h1{font-size:19px}
     .mnums .big{font-size:26px}
   }
@@ -98,7 +128,7 @@
     <div class="head">
       <p class="kick">BerlinWalk.com • Berlin entry rules 2026</p>
       <h1>Do you need a visa for Berlin? Check your passport, then count your days</h1>
-      <p>Two quick steps. First see what your passport needs for a Berlin trip in 2026, including the new EES border checks and where ETIAS stands. Then count your stay against the Schengen 90-days-in-180 rule before you book.</p>
+      <p>Two quick steps. First see the usual short-stay starting point for your passport in 2026, including EES and ETIAS. Then add exact previous travel dates and check every day of this trip against the rolling Schengen 90-days-in-180 rule.</p>
     </div>
 
     <!-- STEP 1 -->
@@ -113,14 +143,15 @@
         <button class="chip" data-k="exempt" aria-pressed="false">
           <span class="flag">🛂</span>
           <span class="t">Visa-exempt</span>
-          <span class="s">US, UK, Canada, Australia, Japan, South Korea and ~55 more</span>
+          <span class="s">US, UK, Canada, Australia, Japan, South Korea and other listed passports</span>
         </button>
         <button class="chip" data-k="visa" aria-pressed="false">
           <span class="flag">📄</span>
           <span class="t">Other passport</span>
-          <span class="s">Countries that need a Schengen visa to enter</span>
+          <span class="s">Passports that may need a Schengen visa before travel</span>
         </button>
       </div>
+      <p class="hint">This is a short-stay starting point. A residence permit, long-stay visa, EU-family status or special travel document can change the result, so confirm your case on Germany's <a class="src" href="https://www.auswaertiges-amt.de/en/visa-service/231148-231148" target="_blank" rel="noopener">official visa list</a>.</p>
 
       <div class="verdict" id="verdict" hidden>
         <div class="vhead"><span class="badge" id="vbadge"></span><strong id="vtitle"></strong></div>
@@ -144,35 +175,56 @@
             <label for="dep">Departure</label>
             <input type="date" id="dep" />
           </div>
-          <div class="field full">
-            <label for="prior">Other days already spent in the Schengen Area in the 180 days before you arrive</label>
-            <input type="number" id="prior" min="0" max="90" step="1" value="0" inputmode="numeric" />
-            <p class="hint">Leave this at 0 if this Berlin trip is your only recent Europe travel. Include days in any Schengen country (France, Italy, Spain and so on), not just Germany.</p>
+        </div>
+
+        <div class="history">
+          <div class="history-head">
+            <div>
+              <h3>Previous Schengen stays</h3>
+              <p>Add the exact entry and exit dates for each earlier short stay that could fall within 180 days of this trip. Entry and exit days both count. Leave the row blank if you have no previous stay.</p>
+            </div>
+            <button class="add-stay" id="addStay" type="button">+ Add another stay</button>
           </div>
+          <div class="stays" id="stays"></div>
+          <p class="history-error" id="historyError" role="alert" hidden></p>
         </div>
 
         <div class="meterwrap" id="meterwrap">
           <div class="mnums">
-            <div class="big"><span id="usedN">0</span><small> / 90 days used</small></div>
-            <div class="rlabel"><span id="remN">90</span> days still allowed<br><span id="untilLbl" style="color:var(--green-deep)"></span></div>
+            <div class="big"><span id="usedN">0</span><small> / 90 peak days</small></div>
+            <div class="rlabel"><span id="remN">90</span> days spare at the tightest point<br><span id="untilLbl" style="color:var(--green-deep)"></span></div>
           </div>
           <div class="bar" id="bar">
             <div class="fillPrior" id="fillPrior" style="width:0%"></div>
             <div class="fillTrip" id="fillTrip" style="left:0%;width:0%"></div>
           </div>
           <div class="barlabels"><span>0</span><span>45</span><span>90</span></div>
-          <div class="vline ok" id="vline">Enter your dates to check this trip against the 90/180 limit.</div>
+          <div class="mlegend"><span class="prior"><i></i>Previous stays in the peak window</span><span class="trip"><i></i>This trip in the peak window</span></div>
+          <div class="vline ok" id="vline" role="status" aria-live="polite">Enter your planned arrival and departure. Add exact previous stay dates if you have them.</div>
         </div>
       </div>
 
       <div class="naNote" id="naNote" hidden>
-        With an <b>EU, EEA or Swiss passport</b> the 90/180 rule does not apply to you. You have freedom of movement and can stay in Germany as long as you like, so the day counter is only relevant for the other two passport groups.
+        With an <b>EU, EEA or Swiss passport</b>, the Schengen 90/180 cap does not apply. For a short Berlin visit, bring a valid passport or national ID card. A stay longer than three months can involve residence conditions and local registration, so check the <a href="https://europa.eu/youreurope/citizens/residence/residence-rights/index_en.htm" target="_blank" rel="noopener">official EU residence guidance</a> before a longer move.
       </div>
     </div>
 
     <div class="foot">
-      <p class="disc"><b>How this works:</b> the counter adds your Berlin trip length to any other recent Schengen days and compares the total to the 90-day allowance. The real 180-day window is a rolling one, so if you travel in and out of Europe a lot, treat this as a close guide and check the official source before a long stay. Rules verified July 2026 via the <a class="src" href="https://travel-europe.europa.eu/index_en" target="_blank" rel="noopener">EU travel portal</a>. This tool is guidance, not legal or immigration advice.</p>
+      <p class="disc"><b>How this works:</b> the counter checks every day of your planned stay, looks back 180 days from that day, and counts unique Schengen days from the exact entry and exit periods you add. Do not enter time covered by an EU residence permit or long-stay D visa. If a short-stay visa sticker authorises fewer than 90 days, the sticker controls and this result does not apply. Verify close plans with the <a class="src" href="https://home-affairs.ec.europa.eu/policies/schengen/border-crossing/short-stay-calculator_en" target="_blank" rel="noopener">official EU short-stay calculator</a>. Also check Germany's <a class="src" href="https://www.auswaertiges-amt.de/en/visa-service/231148-231148" target="_blank" rel="noopener">official visa list</a>, the <a class="src" href="https://travel-europe.europa.eu/ees/faq" target="_blank" rel="noopener">EES FAQ</a>, and the <a class="src" href="https://travel-europe.europa.eu/en/etias" target="_blank" rel="noopener">official ETIAS page</a>. Guidance only, not legal or immigration advice.</p>
+      <div class="credits-row"><button class="credits-trigger" id="creditsOpen" type="button" aria-expanded="false" aria-controls="creditsModal">Image credits</button></div>
     </div>
+  </div>
+</div>
+
+<div class="credits-modal" id="creditsModal" hidden role="dialog" aria-modal="true" aria-labelledby="creditsTitle">
+  <div class="credits-panel">
+    <div class="credits-head"><h2 id="creditsTitle">Image credits</h2><button class="credits-close" id="creditsClose" type="button" aria-label="Close image credits">×</button></div>
+    <ul class="credits-list">
+      <li><a href="https://commons.wikimedia.org/wiki/File:Brandenburger_Tor_morgens.jpg" target="_blank" rel="noopener">Brandenburg Gate</a>, <a href="https://www.foto-tw.de/" target="_blank" rel="noopener">Thomas Wolf</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>. Cropped and resized.</li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:At_Valencia_2025_394_-_EES_kiosks.jpg" target="_blank" rel="noopener">EES kiosks</a>, Mike Peel, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>. Cropped and resized.</li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:EU_Passport.jpg" target="_blank" rel="noopener">EU passport</a>, Tatu Kosonen, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>. Cropped and resized.</li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:Blick_von_der_Fischerinsel_auf_Berlin_-_Flickr_-_abbilder.jpg" target="_blank" rel="noopener">Central Berlin at dusk</a>, abbilder, <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener">CC BY 2.0</a>. Cropped and resized.</li>
+    </ul>
   </div>
 </div>
 
@@ -184,8 +236,8 @@
       title:'No visa needed. Watch EES and ETIAS.',
       rows:[
         ['✅','<b>No Schengen visa</b> for a tourist trip. You may stay up to <b>90 days in any 180</b>. Count yours in step 2.'],
-        ['🛂','<b>EES applies at the border.</b> On your first entry a kiosk takes your <b>photo and fingerprints</b> instead of a stamp. Nothing to apply for, nothing to pay. Allow extra time on arrival at BER.'],
-        ['🗓️','<b>ETIAS is not required yet.</b> It is expected in late 2026. When it starts it will cost <b>20 euros</b>, last three years, and be applied for online. Ignore any site charging for it today.'],
+        ['🛂','<b>EES normally applies</b> to non-EU nationals making a short stay, unless an exemption applies. Visa-free travellers register a facial image and, from age 12, normally four fingerprints. There is nothing to apply for or pay.'],
+        ['🗓️','<b>ETIAS is not required yet.</b> It is due to start in the last quarter of 2026, followed by transitional and grace periods lasting at least 12 months in total. The fee will be <b>20 euros</b>. Ignore any site charging today.'],
         ['🛂','<b>Passport check:</b> valid for at least three months beyond departure and issued within the last ten years.']
       ]
     },
@@ -193,20 +245,20 @@
       badge:['act','Schengen visa needed'],
       title:'Apply for a Schengen visa before you travel.',
       rows:[
-        ['📄','You need a <b>Schengen short-stay (type C) visa</b>. Apply at the <b>German embassy or consulate</b> for your region, with an appointment and documents.'],
+        ['📄','You may need a <b>Schengen short-stay (type C) visa</b>. Confirm your passport and document status on Germany\'s <a href="https://www.auswaertiges-amt.de/en/visa-service/231148-231148" target="_blank" rel="noopener">official visa list</a>, then apply through the responsible German mission if required.'],
         ['⏳','<b>Apply early.</b> Appointment slots and processing times vary a lot by country and season. Do not leave it to the last weeks.'],
-        ['🗓️','Your visa sets how long you may stay, within the <b>90-in-180</b> limit. Use step 2 to sense-check the dates.'],
-        ['🛂','<b>EES also applies</b> to visa holders at the border: your photo and fingerprints are recorded on entry. ETIAS is only for visa-exempt travellers, so it will not apply to you.']
+        ['🗓️','Your visa sticker sets the authorised dates and number of days. If it grants fewer than 90 days, <b>do not use step 2 as permission to stay longer</b>.'],
+        ['🛂','<b>EES normally applies</b> to short-stay visa holders unless an exemption applies. EES stores your facial image; fingerprints taken for the visa remain in VIS and are not stored again in EES. ETIAS does not apply to visa holders.']
       ]
     },
     eu: {
       badge:['ok','Freedom of movement'],
-      title:'Nothing to arrange. Just bring valid ID.',
+      title:'For a short visit, bring valid ID.',
       rows:[
-        ['✅','As an <b>EU, EEA or Swiss</b> citizen you have <b>freedom of movement</b>. No visa, no ETIAS, no 90-day limit.'],
-        ['🪪','Carry a <b>valid passport or national ID card</b>. That is all you need to enter and stay.'],
-        ['🛂','<b>EES does not apply to you</b>; it is for non-EU travellers. You keep using the EU/EEA lanes at the border.'],
-        ['🚶','The only real planning question left is how to spend your time. That is the fun part.']
+        ['✅','As an <b>EU, EEA or Swiss</b> citizen, the Schengen 90/180 cap does not apply to you. You do not need a visa or ETIAS.'],
+        ['🪪','For a short visit, carry a <b>valid passport or national ID card</b>.'],
+        ['🏠','For a stay longer than three months, residence conditions and local registration can apply. Check the official EU guidance before a longer move.'],
+        ['🛂','<b>EES does not apply to EU, EEA or Swiss citizens.</b> You continue to use the relevant EU/EEA border lanes.']
       ]
     }
   };
@@ -246,9 +298,12 @@
   });
 
   // ---- 90/180 counter ----
+  var DAY = 86400000;
   var arr = document.getElementById('arr');
   var dep = document.getElementById('dep');
-  var prior = document.getElementById('prior');
+  var stays = document.getElementById('stays');
+  var addStayBtn = document.getElementById('addStay');
+  var historyError = document.getElementById('historyError');
   var usedN = document.getElementById('usedN');
   var remN = document.getElementById('remN');
   var untilLbl = document.getElementById('untilLbl');
@@ -257,71 +312,176 @@
   var bar = document.getElementById('bar');
   var vline = document.getElementById('vline');
 
-  function parseD(s){ if(!s) return null; var p = s.split('-'); return new Date(Date.UTC(+p[0], +p[1]-1, +p[2])); }
+  function parseD(s){
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(s || '')) return null;
+    var p = s.split('-');
+    var d = new Date(Date.UTC(+p[0], +p[1]-1, +p[2]));
+    return isNaN(d.getTime()) ? null : d;
+  }
+  function addDays(d,n){ return new Date(d.getTime() + n * DAY); }
   function fmt(d){
     return d.toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric', timeZone:'UTC'});
   }
-  function clampPrior(){
-    var n = parseInt(prior.value, 10);
-    if(isNaN(n) || n < 0) n = 0;
-    if(n > 90) n = 90;
-    return n;
+
+  function updateStayLabels(){
+    Array.prototype.forEach.call(stays.querySelectorAll('[data-stay-row]'), function(row, index){
+      var number = index + 1;
+      var entryLabel = row.querySelector('.stay-entry-label');
+      var exitLabel = row.querySelector('.stay-exit-label');
+      var entryInput = row.querySelector('.stay-entry');
+      var exitInput = row.querySelector('.stay-exit');
+      entryInput.id = 'stayEntry' + number;
+      exitInput.id = 'stayExit' + number;
+      entryLabel.setAttribute('for', entryInput.id);
+      exitLabel.setAttribute('for', exitInput.id);
+      entryLabel.textContent = 'Previous entry ' + number;
+      exitLabel.textContent = 'Previous exit ' + number;
+      row.querySelector('.remove-stay').setAttribute('aria-label', 'Remove previous stay ' + number);
+    });
+  }
+
+  function addStay(entryValue, exitValue){
+    var row = document.createElement('div');
+    row.className = 'stay-row';
+    row.setAttribute('data-stay-row', '');
+    row.innerHTML = '<div class="field"><label class="stay-entry-label"></label><input class="stay-entry" type="date" /></div>' +
+      '<div class="field"><label class="stay-exit-label"></label><input class="stay-exit" type="date" /></div>' +
+      '<button class="remove-stay" type="button">Remove</button>';
+    row.querySelector('.stay-entry').value = entryValue || '';
+    row.querySelector('.stay-exit').value = exitValue || '';
+    stays.appendChild(row);
+    updateStayLabels();
+  }
+
+  function setHistoryError(message){
+    historyError.textContent = message || '';
+    historyError.hidden = !message;
+  }
+
+  function setMeter(priorDays, peakDays, over){
+    var cappedPrior = Math.min(priorDays, 90);
+    var cappedPeak = Math.min(peakDays, 90);
+    fillPrior.style.width = (cappedPrior / 90 * 100) + '%';
+    fillTrip.style.left = (cappedPrior / 90 * 100) + '%';
+    fillTrip.style.width = (Math.max(0, cappedPeak - cappedPrior) / 90 * 100) + '%';
+    usedN.textContent = peakDays;
+    remN.textContent = Math.max(0, 90 - peakDays);
+    bar.classList.toggle('over', !!over);
+  }
+
+  function resetResult(message, tone){
+    setMeter(0, 0, false);
+    untilLbl.textContent = '';
+    vline.className = 'vline ' + (tone || 'ok');
+    vline.textContent = message;
+    resize();
+  }
+
+  function collectHistory(arrival){
+    var result = new Set();
+    var earliestRelevant = addDays(arrival, -179).getTime();
+    var arrivalTime = arrival.getTime();
+    var rows = stays.querySelectorAll('[data-stay-row]');
+    for(var i=0;i<rows.length;i++){
+      var entryText = rows[i].querySelector('.stay-entry').value;
+      var exitText = rows[i].querySelector('.stay-exit').value;
+      if(!entryText && !exitText) continue;
+      if(!entryText || !exitText){
+        return {error:'Previous stay ' + (i+1) + ' needs both an entry date and an exit date.'};
+      }
+      var entry = parseD(entryText), exitDate = parseD(exitText);
+      if(!entry || !exitDate || exitDate < entry){
+        return {error:'Previous stay ' + (i+1) + ' has an exit before its entry. Check those dates.'};
+      }
+      if(exitDate.getTime() > arrivalTime){
+        return {error:'Previous stay ' + (i+1) + ' must end on or before this trip\'s arrival date.'};
+      }
+      var start = Math.max(entry.getTime(), earliestRelevant);
+      var end = Math.min(exitDate.getTime(), arrivalTime);
+      for(var t=start;t<=end;t+=DAY) result.add(t);
+    }
+    return {days:result};
+  }
+
+  function statsAt(dayTime, allDays, historyDays, tripDays){
+    var start = dayTime - 179 * DAY;
+    var total = 0, prior = 0, trip = 0;
+    allDays.forEach(function(t){
+      if(t < start || t > dayTime) return;
+      total++;
+      if(tripDays.has(t)) trip++;
+      else if(historyDays.has(t)) prior++;
+    });
+    return {total:total, prior:prior, trip:trip};
+  }
+
+  function latestContinuousDay(arrival, historyDays){
+    var days = new Set(historyDays);
+    var lastAllowed = null;
+    for(var i=0;i<=180;i++){
+      var dayTime = addDays(arrival, i).getTime();
+      days.add(dayTime);
+      var start = dayTime - 179 * DAY;
+      var count = 0;
+      days.forEach(function(t){ if(t >= start && t <= dayTime) count++; });
+      if(count > 90) break;
+      lastAllowed = dayTime;
+    }
+    return lastAllowed === null ? null : new Date(lastAllowed);
   }
 
   function compute(){
-    var pr = clampPrior();
     var a = parseD(arr.value), d = parseD(dep.value);
-    var tripDays = 0, valid = true, msg = '';
-    if(a && d){
-      var diff = Math.round((d - a) / 86400000) + 1; // inclusive of arrival & departure day
-      if(diff < 1){ valid = false; msg = 'Your departure date is before your arrival date. Check the dates.'; }
-      else tripDays = diff;
-    } else {
-      valid = false;
+    setHistoryError('');
+    if(!a || !d){
+      resetResult('Enter your planned arrival and departure. Add exact previous stay dates if you have them.', 'ok');
+      return;
+    }
+    if(d < a){
+      resetResult('Your departure date is before your arrival date. Check the dates.', 'warn');
+      return;
     }
 
-    var used = pr + (valid ? tripDays : 0);
-    var rem = 90 - used;
+    var history = collectHistory(a);
+    if(history.error){
+      setHistoryError(history.error);
+      resetResult(history.error, 'warn');
+      return;
+    }
 
-    // meter widths (cap at 100%)
-    var priorPct = Math.min(pr / 90, 1) * 100;
-    var tripPct = Math.min(Math.max(used, pr) / 90, 1) * 100 - priorPct;
-    if(tripPct < 0) tripPct = 0;
-    fillPrior.style.width = priorPct + '%';
-    fillTrip.style.left = priorPct + '%';
-    fillTrip.style.width = tripPct + '%';
+    var tripDays = new Set();
+    var tripTimes = [];
+    for(var tripTime=a.getTime();tripTime<=d.getTime();tripTime+=DAY){
+      tripDays.add(tripTime);
+      tripTimes.push(tripTime);
+    }
+    var allDays = new Set(history.days);
+    tripDays.forEach(function(t){ allDays.add(t); });
 
-    usedN.textContent = valid ? used : pr;
-    remN.textContent = (90 - (valid ? used : pr));
+    var peak = {total:-1, prior:0, trip:0, day:a.getTime()};
+    var firstOver = null;
+    tripTimes.forEach(function(dayTime){
+      var stats = statsAt(dayTime, allDays, history.days, tripDays);
+      if(stats.total > peak.total){ peak = {total:stats.total, prior:stats.prior, trip:stats.trip, day:dayTime}; }
+      if(!firstOver && stats.total > 90){ firstOver = {day:dayTime, total:stats.total}; }
+    });
 
-    bar.classList.toggle('over', used > 90);
+    setMeter(peak.prior, peak.total, !!firstOver);
+    untilLbl.textContent = 'peak on ' + fmt(new Date(peak.day));
 
-    if(!valid){
-      vline.className = 'vline ok';
-      vline.textContent = msg || 'Enter your arrival and departure dates to check this trip against the 90/180 limit.';
-      untilLbl.textContent = '';
+    if(firstOver){
+      vline.className = 'vline over';
+      var lastGood = firstOver.day > a.getTime() ? fmt(new Date(firstOver.day - DAY)) : '';
+      vline.innerHTML = 'This plan breaks the rolling 90/180 rule on <b>'+fmt(new Date(firstOver.day))+'</b>, when that 180-day window contains <b>'+firstOver.total+' Schengen days</b>.' + (lastGood ? ' The last compliant day of this continuous plan is <b>'+lastGood+'</b>.' : ' It is already over the limit on the planned arrival date.');
+      untilLbl.textContent = 'first over on ' + fmt(new Date(firstOver.day));
       resize();
       return;
     }
 
-    // latest possible stay end from arrival, given prior days
-    var allowFromArrival = 90 - pr;
-    if(allowFromArrival < 0) allowFromArrival = 0;
-    var lastDay = new Date(a.getTime() + (allowFromArrival - 1) * 86400000);
-
-    if(used > 90){
-      vline.className = 'vline over';
-      vline.innerHTML = 'This plan uses <b>'+used+' days</b>, which is <b>'+(used-90)+' over</b> the 90-day limit. Shorten the trip, or your last allowed day from this arrival is <b>'+fmt(lastDay)+'</b>.';
-      untilLbl.textContent = 'Over the limit';
-    } else if(rem <= 7){
-      vline.className = 'vline warn';
-      vline.innerHTML = 'This fits, but it is close: <b>'+rem+' day'+(rem===1?'':'s')+' to spare</b>. From this arrival you could stay until <b>'+fmt(lastDay)+'</b> at the latest.';
-      untilLbl.textContent = 'until ' + fmt(lastDay);
-    } else {
-      vline.className = 'vline ok';
-      vline.innerHTML = 'You are well within the limit: <b>'+rem+' days still allowed</b> after this '+tripDays+'-day trip. Plenty of room.';
-      untilLbl.textContent = 'until ' + fmt(lastDay);
-    }
+    var spare = 90 - peak.total;
+    var latest = latestContinuousDay(a, history.days);
+    vline.className = 'vline ' + (spare <= 7 ? 'warn' : 'ok');
+    vline.innerHTML = 'This plan fits. The tightest rolling window contains <b>'+peak.total+' of 90 days</b> on <b>'+fmt(new Date(peak.day))+'</b>, leaving <b>'+spare+' day'+(spare===1?'':'s')+' spare</b>.' + (latest ? ' With the previous stays entered, a continuous stay from this arrival could run through <b>'+fmt(latest)+'</b>, assuming you add no other Schengen trip.' : '');
     resize();
   }
 
@@ -329,13 +489,33 @@
   dep.addEventListener('change', compute);
   arr.addEventListener('input', compute);
   dep.addEventListener('input', compute);
-  prior.addEventListener('input', compute);
-  prior.addEventListener('change', compute);
+  addStayBtn.addEventListener('click', function(){ addStay(); compute(); });
+  stays.addEventListener('input', compute);
+  stays.addEventListener('change', compute);
+  stays.addEventListener('click', function(e){
+    var remove = e.target.closest('.remove-stay');
+    if(!remove) return;
+    remove.closest('[data-stay-row]').remove();
+    if(!stays.querySelector('[data-stay-row]')) addStay();
+    updateStayLabels();
+    compute();
+  });
 
   function resize(){
     if(window.BWBrand && typeof window.BWBrand.postHeight === 'function'){ window.BWBrand.postHeight(); }
   }
+  addStay();
   compute();
+})();
+</script>
+<script>
+(function(){
+  var open=document.getElementById('creditsOpen'), modal=document.getElementById('creditsModal'), close=document.getElementById('creditsClose');
+  function show(){modal.hidden=false;open.setAttribute('aria-expanded','true');close.focus();}
+  function hide(){modal.hidden=true;open.setAttribute('aria-expanded','false');open.focus();}
+  open.addEventListener('click',show);close.addEventListener('click',hide);
+  modal.addEventListener('click',function(e){if(e.target===modal)hide();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!modal.hidden)hide();});
 })();
 </script>
 <script src="../js/brand.js"></script>

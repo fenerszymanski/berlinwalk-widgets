@@ -79,7 +79,51 @@ function validate({ faqData, slugMap, schemas }) {
 }
 
 function buildInject({ slugMap, schemas }) {
-  return `/* Auto-generated from /faq/data.json and /faq/slug-map.json - do not edit by hand. */\n(function () {\n  var SLUG_MAP = ${JSON.stringify(slugMap, null, 2)};\n\n  var SCHEMAS = ${JSON.stringify(schemas, null, 2)};\n\n  function currentSlug() {\n    var parts = window.location.pathname.split('/').filter(Boolean);\n    return parts[parts.length - 1] || '';\n  }\n\n  function injectSchema(schemaKey) {\n    var schema = SCHEMAS[schemaKey];\n    if (!schema || document.getElementById('bw-faq-jsonld')) return;\n    var script = document.createElement('script');\n    script.id = 'bw-faq-jsonld';\n    script.type = 'application/ld+json';\n    script.textContent = JSON.stringify(schema);\n    document.head.appendChild(script);\n  }\n\n  var schemaKey = SLUG_MAP[currentSlug()];\n  if (schemaKey) injectSchema(schemaKey);\n})();\n`;
+  return `/* Auto-generated from /faq/data.json and /faq/slug-map.json - do not edit by hand. */
+(function () {
+  var SLUG_MAP = ${JSON.stringify(slugMap, null, 2)};
+
+  var SCHEMAS = ${JSON.stringify(schemas, null, 2)};
+
+  function currentSlug() {
+    var parts = window.location.pathname.split('/').filter(Boolean);
+    return parts[parts.length - 1] || '';
+  }
+
+  function containsFaqPage(value) {
+    if (!value || typeof value !== 'object') return false;
+    if (Array.isArray(value)) return value.some(containsFaqPage);
+    var type = value['@type'];
+    if (type === 'FAQPage' || (Array.isArray(type) && type.indexOf('FAQPage') !== -1)) return true;
+    return Array.isArray(value['@graph']) && value['@graph'].some(containsFaqPage);
+  }
+
+  function existingFaqSchema() {
+    var scripts = document.querySelectorAll('script[type="application/ld+json"]');
+    for (var i = 0; i < scripts.length; i += 1) {
+      try {
+        if (containsFaqPage(JSON.parse(scripts[i].textContent || 'null'))) return true;
+      } catch (error) {
+        // Ignore unrelated malformed JSON-LD and keep checking the page.
+      }
+    }
+    return false;
+  }
+
+  function injectSchema(schemaKey) {
+    var schema = SCHEMAS[schemaKey];
+    if (!schema || document.getElementById('bw-faq-jsonld') || existingFaqSchema()) return;
+    var script = document.createElement('script');
+    script.id = 'bw-faq-jsonld';
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify(schema);
+    document.head.appendChild(script);
+  }
+
+  var schemaKey = SLUG_MAP[currentSlug()];
+  if (schemaKey) injectSchema(schemaKey);
+})();
+`;
 }
 
 function main() {

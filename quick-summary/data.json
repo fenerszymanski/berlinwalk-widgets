@@ -2689,12 +2689,12 @@
     "icon": "🕌",
     "kicker": "BERLINWALK.COM • TOURIST TIPS",
     "items": [
-      "**Berlin is one of Europe's easiest big cities to eat halal in.** VisitBerlin counts around **80 halal restaurants** across Arab, Turkish, Indonesian and Indian kitchens, plus thousands of döner and kebab stands.",
-      "**The trick is geography, not luck.** Reliable halal clusters in the immigrant neighbourhoods, **Neukölln, Kreuzberg and Wedding**, not the pork-heavy tourist restaurants around Alexanderplatz and Mitte.",
-      "**Most döner in Berlin is halal,** especially in Turkish and Arab areas like Kottbusser Tor, Hermannplatz and Gesundbrunnen. Displayed certification is less common in Germany, so look for a green **Halal** or حلال window sign.",
-      "**Sonnenallee in Neukölln is the one address to remember.** Locals call it Arab Street: Levantine restaurants, bakeries, sweet shops and a great, underrated Arab breakfast, with many places alcohol-free.",
-      "**If you are ever unsure, just ask.** One short question settles it: _Ist das Fleisch halal?_ (is the meat halal?). Staff hear it daily and answer plainly.",
-      "**Prayer and groceries are easy too.** The Şehitlik Mosque on Columbiadamm is one of the city's most beautiful, BER airport has a Room of Silence, and the Maybachufer Turkish market (Tue and Fri) sells halal meat and produce."
+      "**Berlin gives halal-observant visitors plenty of choice, but no neighbourhood proves a venue is halal.** VisitBerlin lists almost **80 restaurants that serve halal food**. Confirm the exact dish and preparation with the restaurant.",
+      "**Use Sonnenallee for choice, not certainty.** The street has Levantine restaurants, bakeries, sweet shops and supermarkets, but each business and dish still needs its own check.",
+      "**Some Berlin döner shops use halal meat; there is no reliable city-wide share.** Ask _Ist das Fleisch halal?_ and then ask which meat or dishes the answer covers.",
+      "**Germany has no single uniform halal standard.** A Halal or حلال sign is the venue’s claim unless a current certificate shows the issuer, scope and criteria.",
+      "**If it matters to your standard, ask about shared preparation.** The same grill, fryer, utensils or storage may be used for other food.",
+      "**For practical stops:** Maybachufer market runs Tuesday and Friday from 11:00 to 18:30 for produce and picnic supplies, and BER Terminal 1 has an official Room of Silence."
     ]
   },
   "berlin-airports": {
@@ -2702,12 +2702,12 @@
     "icon": "✈️",
     "kicker": "BERLINWALK.COM • TOURIST TIPS",
     "items": [
-      "**Berlin has only one airport now: BER.** Berlin Brandenburg Airport (code **BER**), about **18 km southeast** of the centre, has handled every flight to the city since October 2020.",
-      "**One airport, two terminals.** **Terminal 1** is the main building used by most airlines; **Terminal 2** is a smaller low-cost terminal (easyJet and others) a short covered walk away. **Terminal 5**, the old Schönefeld building, is permanently closed.",
-      "**Tegel and Schönefeld are gone.** **Tegel (TXL)** closed in November 2020, **Schönefeld (SXF)** became the now-closed T5. If a booking site still shows **TXL or SXF**, it is out of date.",
-      "**Getting into town is easy.** The **FEX Airport Express** runs about every 15 minutes and reaches **Berlin Hauptbahnhof in around 23 minutes** from the station directly under Terminals 1-2.",
-      "**Buy an ABC ticket.** BER is in **fare zone C**, so any train to or from the airport needs a **Berlin ABC ticket** (**€5.00** single in 2026). Buy it before you board and validate a paper ticket on the platform.",
-      "**The old airports are worth knowing.** **Tempelhof** is now a huge public park you can visit, **Tegel** is a building site that kept its hexagon, and **Schönefeld** is a closed terminal. None will be on your boarding pass."
+      "**Berlin has one airport for scheduled passenger flights: BER.** Berlin's passenger air traffic has been concentrated at **Berlin Brandenburg Airport** since Tegel handled its final flight on **8 November 2020**.",
+      "**One airport, two terminals.** **Terminal 1** is the main building and currently includes easyJet; **Terminal 2** currently includes Ryanair and Wizz Air. They are about a five-minute signed walk apart. Check your booking because assignments can change. **Terminal 5** is permanently closed.",
+      "**Tegel and Schönefeld are former airports.** **Tegel (TXL)** closed on 8 November 2020. **Schönefeld (SXF)** became the now-closed T5; Schönefeld remains a place and an S-Bahn station, not a separate passenger airport.",
+      "**Getting into town is easy.** The **FEX Airport Express** runs about every 15 minutes through most of the day and reaches **Berlin Hauptbahnhof in around 23 minutes** via Südkreuz and Potsdamer Platz. The station is under Terminal 1 on level U2; follow the signed passage from T2.",
+      "**Buy an ABC ticket.** BER is in **fare zone C**, so any train to or from the airport needs a **Berlin ABC ticket** (**€5.00** single in 2026). Validate a paper ticket or activate a digital one before starting the journey.",
+      "**The old airports are worth knowing.** **Tempelhof Airport** closed in 2008 and its field opened as a public park in 2010. **Tegel** is being redeveloped, and the former Schönefeld terminal is closed. None of those old airport codes belongs on a current scheduled passenger booking."
     ]
   },
   "do-you-need-a-visa-to-visit-berlin": {
@@ -2716,10 +2716,11 @@
     "kicker": "BERLINWALK.COM • TOURIST TIPS",
     "items": [
       "**There is no separate \"Berlin visa.\"** Berlin is in Germany, which is in the **Schengen Area**, so Germany's entry rules are your Berlin rules.",
-      "**Most tourists need no visa.** If you hold a **visa-exempt** passport (US, UK, Canada, Australia, Japan, South Korea and around 55 others), you can visit visa-free for up to **90 days**. Other passports need a **Schengen short-stay visa** applied for in advance.",
-      "**The 90/180 rule.** Visa-free stays are capped at **90 days in any rolling 180-day period**, counted **across all Schengen countries**, not just Germany. A normal holiday is nowhere near this limit.",
-      "**EES is now live (since 10 April 2026).** On your first entry a border kiosk records your **photo and fingerprints** instead of a passport stamp. There is **nothing to apply for and nothing to pay**, but it can slow the passport queue, so allow extra time at BER.",
-      "**ETIAS is not required yet.** It is expected in **late 2026**. When it starts it will cost **20 euros**, last three years, and be applied for online. Ignore any site telling you to buy it now.",
+      "**EU, EEA and Swiss visitors:** the Schengen 90/180 cap does not apply. For a short visit, bring a valid passport or national ID card; stays beyond three months can involve residence conditions and registration.",
+      "**Visa status depends on your passport and documents.** Common visa-exempt passports include the US, UK, Canada, Australia, Japan and South Korea; other travellers normally need a **Schengen short-stay visa**. Residence permits, long-stay visas and family status can change the answer.",
+      "**The 90/180 rule is genuinely rolling.** Each day of a visa-free short stay must fit within **90 days in the preceding 180**, across all Schengen countries. The checker below uses exact previous entry and exit dates, not one total.",
+      "**EES is now live (since 10 April 2026).** It covers most non-EU nationals making a short stay, with exemptions. Visa-free travellers normally register a face and four fingerprints; short-stay visa holders have their face stored in EES while their fingerprints remain in VIS.",
+      "**ETIAS is not required yet.** It is due in the **last quarter of 2026**, followed by transitional and grace periods lasting at least 12 months in total. Applications are not open today; the future fee is **20 euros**.",
       "**Check your passport first.** It should be valid for at least **three months beyond departure** and issued within the last **ten years**. That is the most common avoidable problem."
     ]
   }

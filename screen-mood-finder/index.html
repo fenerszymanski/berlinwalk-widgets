@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Berlin Screen Mood Finder | BerlinWalk</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='32' r='20' fill='%23FFE600'/%3E%3Cpath d='M24 20h16v24H24z' fill='%23123D18'/%3E%3Cpath d='M27 24h10M27 32h10M27 40h10' stroke='%23FFE600' stroke-width='3'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="../css/brand.css">
   <script defer src="../js/brand.js"></script>
 </head>
@@ -262,6 +263,78 @@
       padding: 10px 14px;
       white-space: nowrap;
     }
+    #bw-screen-mood [hidden] { display: none !important; }
+    #bw-screen-mood .bw-credits-row {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: flex-end;
+      padding: 0 26px 22px;
+    }
+    #bw-screen-mood .bw-credits-open {
+      appearance: none;
+      border: 1px solid rgba(255, 230, 0, 0.55);
+      border-radius: 999px;
+      background: var(--yellow);
+      color: var(--green-dark);
+      padding: 9px 13px;
+      font: 800 12px/1 Montserrat, Arial, sans-serif;
+      cursor: pointer;
+    }
+    #bw-screen-mood .bw-credits-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      background: rgba(0, 0, 0, 0.72);
+    }
+    #bw-screen-mood .bw-credits-dialog {
+      width: min(680px, 100%);
+      max-height: min(78vh, 680px);
+      overflow: auto;
+      background: var(--cream);
+      color: var(--text);
+      border: 4px solid var(--yellow);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+      padding: 20px;
+    }
+    #bw-screen-mood .bw-credits-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+    #bw-screen-mood .bw-credits-title {
+      margin: 0;
+      color: var(--green-dark);
+      font-size: 22px;
+      line-height: 1.1;
+    }
+    #bw-screen-mood .bw-credits-close {
+      appearance: none;
+      border: 0;
+      background: var(--green-dark);
+      color: var(--white);
+      min-width: 42px;
+      min-height: 42px;
+      font: 800 20px/1 Montserrat, Arial, sans-serif;
+      cursor: pointer;
+    }
+    #bw-screen-mood .bw-credits-list {
+      margin: 0;
+      padding-left: 20px;
+      display: grid;
+      gap: 9px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    #bw-screen-mood .bw-credits-list a {
+      color: var(--green-dark);
+      font-weight: 700;
+    }
     @media (max-width: 780px) {
       #bw-screen-mood .bw-inner { padding: 18px; }
       #bw-screen-mood .bw-stage { grid-template-columns: 1fr; }
@@ -269,6 +342,8 @@
       #bw-screen-mood .bw-panel { min-height: auto; }
       #bw-screen-mood .bw-grid { grid-template-columns: 1fr; }
       #bw-screen-mood .bw-cta a { width: 100%; text-align: center; }
+      #bw-screen-mood .bw-credits-row { padding: 0 18px 18px; }
+      #bw-screen-mood .bw-credits-dialog { padding: 16px; }
     }
   </style>
 
@@ -344,6 +419,29 @@
     </div>
   </div>
 
+  <div class="bw-credits-row">
+    <button class="bw-credits-open" id="bw-screen-credits-open" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="bw-screen-credits-layer">Image credits</button>
+  </div>
+  <div class="bw-credits-layer" id="bw-screen-credits-layer" hidden>
+    <section class="bw-credits-dialog" role="dialog" aria-modal="true" aria-labelledby="bw-screen-credits-title">
+      <div class="bw-credits-head">
+        <h2 class="bw-credits-title" id="bw-screen-credits-title">Image credits</h2>
+        <button class="bw-credits-close" id="bw-screen-credits-close" type="button" aria-label="Close image credits">×</button>
+      </div>
+      <p>Article images were cropped and resized for display.</p>
+      <ul class="bw-credits-list">
+        <li>Oberbaumbrücke by <a href="https://commons.wikimedia.org/wiki/File:Oberbaumbr%C3%BCcke,_Berlin,_Northwest_view_20130725_1.jpg" target="_blank" rel="noopener">DXR</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+        <li>Bahnhof Zoologischer Garten at night by <a href="https://commons.wikimedia.org/wiki/File:Bahnhof_Berlin_Zoologischer_Garten_Nachtaufnahme.jpg" target="_blank" rel="noopener">Jan Künzel</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+        <li>Glienicke Bridge in June 1990 by <a href="https://commons.wikimedia.org/wiki/File:03_470_%C2%BBBr%C3%BCcke_der_Einheit%C2%AB.jpg" target="_blank" rel="noopener">Falk2</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+        <li>Olympiastadion by <a href="https://commons.wikimedia.org/wiki/File:Olympiastadion_Berlin_2015.jpg" target="_blank" rel="noopener">Thomas Wolf</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/de/deed.en" target="_blank" rel="noopener">CC BY-SA 3.0 DE</a>.</li>
+        <li>Kraftwerk Berlin interior by <a href="https://commons.wikimedia.org/wiki/File:KraftwerkBerlin.jpg" target="_blank" rel="noopener">MakeMagazinDE</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+        <li>Rotes Rathaus by <a href="https://commons.wikimedia.org/wiki/File:Rotes_Rathaus_June_2023_02.jpg" target="_blank" rel="noopener">ArildV</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+        <li>Strandbad Wannsee by <a href="https://commons.wikimedia.org/wiki/File:Strandbad_wannsee.jpg" target="_blank" rel="noopener">t-stern</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>.</li>
+        <li>Frankfurter Tor on Karl-Marx-Allee by <a href="https://commons.wikimedia.org/wiki/File:Berlin_Karl-Marx-Allee_Frankfurter_Tor_2.jpg" target="_blank" rel="noopener">Andreas Praefcke</a>, <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0</a>.</li>
+      </ul>
+    </section>
+  </div>
+
   <script>
     (function () {
       const moods = {
@@ -353,7 +451,7 @@
           theme: "Berlin works as a spy city because its history already feels layered with secrets: borders, stations, embassies, coded movements, and people watching people.",
           watch: ["The Bourne Supremacy", "Berlin Station", "Homeland Season 5"],
           notice: ["Crowds that let characters disappear", "Transit hubs as pressure points", "Modern offices beside Cold War memory"],
-          places: ["Alexanderplatz", "Friedrichstrasse", "Government Quarter"],
+          places: ["Alexanderplatz", "Friedrichstraße", "Government Quarter"],
           story: ["Cold War intelligence", "Divided-city geography", "Surveillance culture"],
           cta: "Want the real city behind the spy mood? Walk through the Cold War streets, symbols, and stories that make Berlin feel cinematic."
         },
@@ -363,7 +461,7 @@
           theme: "This is Berlin as glamour under pressure: cabaret light, political crisis, crowded stations, old facades, and a city dancing near the edge.",
           watch: ["Babylon Berlin", "Cabaret", "The Queen's Gambit"],
           notice: ["Grand interiors that feel theatrical", "U-Bahn entrances and old civic buildings", "Elegance mixed with instability"],
-          places: ["Rotes Rathaus", "Rathaus Schoneberg", "Hermannplatz"],
+          places: ["Rotes Rathaus", "Rathaus Schöneberg", "Hermannplatz"],
           story: ["Weimar politics", "1920s nightlife", "The fragile years before dictatorship"],
           cta: "Want to decode the history behind the glamour? Join the walk and see how Berlin's past still shapes its streets."
         },
@@ -393,7 +491,7 @@
           theme: "Berlin at night is freedom with a sharp edge: clubs, empty streets, strangers, dawn, and the feeling that the city might change before sunrise.",
           watch: ["Victoria", "Run Lola Run", "John Wick: Chapter 4"],
           notice: ["Movement instead of monuments", "Neon, bikes, U-Bahn light", "The city as a real-time maze"],
-          places: ["Kreuzberg", "Oberbaumbrucke", "Kraftwerk Berlin"],
+          places: ["Kreuzberg", "Oberbaumbrücke", "Kraftwerk Berlin"],
           story: ["Post-Wall freedom", "Club culture", "The city after midnight"],
           cta: "Berlin's nightlife has roots in history, space, and reinvention. Come hear the daytime version behind the night scenes."
         },
@@ -413,7 +511,7 @@
           theme: "This is the quiet Berlin of memory, angels, libraries, empty lots, ruins, and spaces where history feels almost visible.",
           watch: ["Wings of Desire", "Tár", "Good Bye, Lenin!"],
           notice: ["Silence between landmarks", "Places that changed after the Wall", "Melancholy rather than spectacle"],
-          places: ["Siegessaule", "Potsdamer Platz", "Museum Island"],
+          places: ["Siegessäule", "Potsdamer Platz", "Museum Island"],
           story: ["Divided Berlin", "Memory after destruction", "How cities keep ghosts without becoming museums"],
           cta: "Want the poetic version of Berlin without losing the facts? Join the walk and see how memory lives in the streets."
         }
@@ -459,6 +557,24 @@
 
       root.querySelectorAll(".bw-mood").forEach((button) => {
         button.addEventListener("click", () => setMood(button.dataset.mood));
+      });
+
+      const creditsOpen = root.querySelector("#bw-screen-credits-open");
+      const creditsLayer = root.querySelector("#bw-screen-credits-layer");
+      const creditsClose = root.querySelector("#bw-screen-credits-close");
+      function setCredits(open, restoreFocus) {
+        creditsLayer.hidden = !open;
+        creditsOpen.setAttribute("aria-expanded", open ? "true" : "false");
+        if (open) creditsClose.focus();
+        else if (restoreFocus) creditsOpen.focus();
+      }
+      creditsOpen.addEventListener("click", () => setCredits(true, false));
+      creditsClose.addEventListener("click", () => setCredits(false, true));
+      creditsLayer.addEventListener("click", (event) => {
+        if (event.target === creditsLayer) setCredits(false, true);
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !creditsLayer.hidden) setCredits(false, true);
       });
 
       setMood("spy");

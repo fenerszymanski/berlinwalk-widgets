@@ -3,13 +3,13 @@
 All images sourced from Wikimedia Commons, licensed for reuse. No paid/AI image
 generation used for article images. Contact sheet judged via local thumbnails.
 
-## Selected (5)
+## Selected (4)
 
 1. **cover-berlin-doner-halal.jpg** (cover + döner section)
    - Source: `Chicken Döner in Berlin.jpg` by Felipe Tofani, CC BY-SA 2.0
    - https://commons.wikimedia.org/wiki/File:Chicken_D%C3%B6ner_in_Berlin.jpg
-   - Why: appetizing, verified-Berlin chicken döner; the instantly readable
-     symbol of Berlin halal street food. Strong topic-specific cover.
+   - Why: appetizing, verified-Berlin chicken döner; it introduces the article's
+     central question without claiming that the pictured meat is halal.
 
 2. **sonnenallee-arab-street.jpg** (Sonnenallee / Arab Street section)
    - Source: `Sonnenallee Berlin-Neukölln 2020-06-26 01.jpg` by Leonhard Lenz, CC0
@@ -22,13 +22,7 @@ generation used for article images. Contact sheet judged via local thumbnails.
    - https://commons.wikimedia.org/wiki/File:Berlin_Wochenmarkt_Maybachufer-20241206-RM-152528.jpg
    - Why: vibrant, human Turkish market stall; ties to the Maybachufer post.
 
-4. **turkish-sweets-baklava.jpg** (sweets section)
-   - Source: `Shop with traditional Turkish sweets 03.jpg` by Helen Owl, CC BY-SA 4.0
-   - https://commons.wikimedia.org/wiki/File:Shop_with_traditional_Turkish_sweets_03.jpg
-   - Why: appetizing baklava/Turkish-delight counter. Caption describes the
-     sweets themselves (not asserted as a Berlin location) to stay non-misleading.
-
-5. **sehitlik-mosque-berlin.jpg** (prayer section)
+4. **sehitlik-mosque-berlin.jpg** (prayer section)
    - Source: `Şehitlik mosque Berlin by ZUFAr.jpg` by ZUFAr, CC BY-SA 4.0
    - https://commons.wikimedia.org/wiki/File:%C5%9Eehitlik_mosque_Berlin_by_ZUFAr.jpg
    - Why: clear, beautiful Şehitlik Mosque with the historic cemetery; verified
@@ -45,11 +39,16 @@ generation used for article images. Contact sheet judged via local thumbnails.
   wrong for a halal post.
 - `Sweets on Spice Bazaar in Istanbul 06/08.jpg` — explicitly Istanbul, would be
   misleading for a Berlin guide.
+- `Shop with traditional Turkish sweets 03.jpg` — licensed, but photographed in
+  Turkey rather than Berlin. Removed from the article instead of using a
+  non-Berlin counter as local visual evidence.
 
-## Image Credits block (reader-facing, in body)
+## Compact Image credits disclosure (reader-facing, inside the widget)
 
 - Chicken döner, Berlin, photo by Felipe Tofani, CC BY-SA 2.0, via Wikimedia Commons.
 - Sonnenallee, Neukölln, photo by Leonhard Lenz, CC0, via Wikimedia Commons.
 - Maybachufer market, photo by Reinhold Möller, CC BY-SA 4.0, via Wikimedia Commons.
-- Turkish sweets shop, photo by Helen Owl, CC BY-SA 4.0, via Wikimedia Commons.
 - Şehitlik Mosque, Berlin, photo by ZUFAr, CC BY-SA 4.0, via Wikimedia Commons.
+
+The disclosure links each source file and licence and states that the selected
+images were cropped and resized for web.

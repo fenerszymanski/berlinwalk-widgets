@@ -4,6 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Berlin Airports: what is open and how to reach the city</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='32' r='20' fill='%23FFE600'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -15,6 +16,7 @@
     --bone:#f4f9ec; --line:#e3edd6; --stone:#6d7b66; --shadow:0 10px 30px rgba(18,61,24,.14);
   }
   *{box-sizing:border-box}
+  [hidden]{display:none!important}
   html,body{margin:0}
   body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
   .bx{max-width:940px;margin:0 auto;padding:4px}
@@ -77,16 +79,26 @@
 
   .foot{font-size:12px;color:var(--stone);margin:14px 2px 4px;line-height:1.5}
   .foot a{color:var(--green);font-weight:700}
+  .credits-row{display:flex;justify-content:flex-end;margin:12px 0 2px}
+  .credits-trigger{border:1px solid #d5c300;border-radius:999px;background:var(--yellow);color:var(--green-deep);padding:8px 13px;font:800 12px Montserrat,sans-serif;cursor:pointer}
+  .credits-trigger:hover,.credits-trigger:focus-visible{background:#f5dc00;outline:2px solid var(--green-deep);outline-offset:2px}
+  .credits-modal{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:18px;background:rgba(8,28,11,.72)}
+  .credits-panel{width:min(590px,100%);max-height:min(78vh,620px);overflow:auto;border:1px solid var(--line);border-radius:16px;background:#fff;padding:18px;box-shadow:0 18px 55px rgba(0,0,0,.34)}
+  .credits-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:10px}
+  .credits-head h2{margin:0;color:var(--green-deep);font-size:18px}.credits-close{border:0;border-radius:999px;background:#e8f1dd;color:var(--green-deep);width:34px;height:34px;font-size:20px;font-weight:800;cursor:pointer}
+  .credits-list{margin:0;padding-left:20px;color:#374734;font-size:12px;line-height:1.55}.credits-list li+li{margin-top:7px}.credits-list a{color:var(--green);font-weight:700}
 
   @media(max-width:560px){
     .maprow{grid-template-columns:1fr}
     .brow{grid-template-columns:1.3fr 1fr;grid-row-gap:2px}
     .brow .t{text-align:right}
     .brow.h{display:none}
-    .brow .ev{display:none}
     .brow .to{grid-column:1 / -1;color:#a9c09f;font-size:11.5px}
+    .brow .ev{display:block;grid-column:1 / -1;text-align:right;font-size:11px;color:#dfeed6}
+    .brow .ev::before{content:attr(data-label) ": ";color:#9fb598;font-weight:600}
   }
   @media(max-width:430px){ .head h1{font-size:19px} .tab{font-size:12px} }
+  @media(prefers-reduced-motion:reduce){.pulse{animation:none}}
 </style>
 </head>
 <body>
@@ -95,12 +107,12 @@
     <div class="head">
       <p class="kick">BerlinWalk.com • Airport orientation</p>
       <h1>Berlin airports: what is open, and how to reach the city</h1>
-      <p>Tegel, Schönefeld, Tempelhof, BER. Only one still takes flights. Tap an airport to see what happened to it, then check the fastest way from BER into town.</p>
+      <p>Tegel, Schönefeld, Tempelhof, BER. Only BER handles scheduled passenger flights. Tap an airport to see what happened to it, then check the fastest way from BER into town.</p>
     </div>
 
     <div class="tabs" role="tablist" aria-label="Airport views">
-      <button class="tab" id="t-map" role="tab" aria-selected="true" aria-controls="p-map">The airports<small>what is open</small></button>
-      <button class="tab" id="t-board" role="tab" aria-selected="false" aria-controls="p-board">BER to the centre<small>how to get in</small></button>
+      <button class="tab" id="t-map" role="tab" aria-selected="true" aria-controls="p-map" tabindex="0">The airports<small>what is open</small></button>
+      <button class="tab" id="t-board" role="tab" aria-selected="false" aria-controls="p-board" tabindex="-1">BER to the centre<small>how to get in</small></button>
     </div>
 
     <div class="body">
@@ -154,17 +166,31 @@
       <div class="pane" id="p-board" role="tabpanel" aria-labelledby="t-board" hidden>
         <div class="board">
           <div class="brow h"><span>From BER</span><span>Towards</span><span>Time</span><span>Every</span></div>
-          <div class="brow"><div class="line">FEX<small>Airport Express</small></div><div class="to">Berlin Hauptbahnhof (central)</div><div class="t">~23 min</div><div class="ev">15 min</div></div>
-          <div class="brow"><div class="line">RE7 / RB14 / RB22<small>Regional</small></div><div class="to">Friedrichstr. / Gesundbrunnen</div><div class="t">~30 min</div><div class="ev">30 min</div></div>
-          <div class="brow"><div class="line">S9<small>S-Bahn</small></div><div class="to">Ostkreuz and eastern Berlin</div><div class="t">~45 min</div><div class="ev">20 min</div></div>
-          <div class="brow"><div class="line">Taxi / ride-hail<small>door to door</small></div><div class="to">Anywhere in the centre</div><div class="t">30-45 min</div><div class="ev">~€50-60</div></div>
-          <div class="tk">Rail leaves from <b>Flughafen BER – Terminal 1-2</b>, the station directly under both terminals. BER is in fare zone C, so you need a <b>Berlin ABC ticket</b> (€5.00 single in 2026). Buy it from a BVG/VBB machine or app before boarding, and stamp a paper ticket on the platform.</div>
+          <div class="brow"><div class="line">FEX<small>Airport Express</small></div><div class="to">Hauptbahnhof via Südkreuz and Potsdamer Platz</div><div class="t">~23 min</div><div class="ev" data-label="Every">15 min</div></div>
+          <div class="brow"><div class="line">RE20<small>Regional Express</small></div><div class="to">Hauptbahnhof on the same central corridor</div><div class="t">~23 min</div><div class="ev" data-label="Every">60 min</div></div>
+          <div class="brow"><div class="line">S9<small>S-Bahn</small></div><div class="to">Alexanderplatz and the Stadtbahn</div><div class="t">~40–45 min</div><div class="ev" data-label="Every">20 min</div></div>
+          <div class="brow"><div class="line">Taxi<small>ride-hail price varies</small></div><div class="to">Central Berlin, traffic dependent</div><div class="t">35–45 min</div><div class="ev" data-label="Taxi fare">~€55–65</div></div>
+          <div class="tk">Rail leaves from <b>Flughafen BER – Terminal 1-2</b>, directly under Terminal 1 on level U2. From Terminal 2, follow the signed passage through level E0. BER is in fare zone C, so you need a <b>Berlin ABC ticket</b> (€5.00 single in 2026). Buy it before boarding; validate a paper ticket or activate a digital one before starting the journey.</div>
         </div>
       </div>
 
       <p class="foot">A quick orientation, not a live timetable. Check the board on the day for exact departures. For a full walkthrough see my guides on the <a href="https://www.berlinwalk.com/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way">airport to Alexanderplatz</a> and <a href="https://www.berlinwalk.com/post/tempelhof-airport-berlin">Tempelhof, the airport that became a park</a>.</p>
+      <div class="credits-row"><button class="credits-trigger" id="creditsOpen" type="button" aria-expanded="false" aria-controls="creditsModal">Image credits</button></div>
 
     </div>
+  </div>
+</div>
+
+<div class="credits-modal" id="creditsModal" hidden role="dialog" aria-modal="true" aria-labelledby="creditsTitle">
+  <div class="credits-panel">
+    <div class="credits-head"><h2 id="creditsTitle">Image credits</h2><button class="credits-close" id="creditsClose" type="button" aria-label="Close image credits">×</button></div>
+    <ul class="credits-list">
+      <li><a href="https://commons.wikimedia.org/wiki/File:%282026%29_Flughafen_BER_Terminal_1_panorama.jpg" target="_blank" rel="noopener">BER Terminal 1</a>, <a href="https://commons.wikimedia.org/wiki/User:RoyZuoMedia" target="_blank" rel="noopener">Roy Zuo</a>, cropped; <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:%2820260318%29_BER_Airport_Terminal_2_02.jpg" target="_blank" rel="noopener">BER Terminal 2</a>, <a href="https://commons.wikimedia.org/wiki/User:RoyZuoMedia" target="_blank" rel="noopener">Roy Zuo</a>, cropped; <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:Flughafen-Express_FEX_Berlin_Hauptbahnhof.jpg" target="_blank" rel="noopener">FEX at Berlin Hauptbahnhof</a>, Profpcde, <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener">CC0</a>.</li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:Tempelhofer_Feld_May_2021.jpg" target="_blank" rel="noopener">Tempelhofer Feld</a>, Coooohen, cropped; <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:Flughafen-Berlin-Tegel-Hauptgebaeude-Nebelhalle-Terminal-B-02-2018a.jpg" target="_blank" rel="noopener">Tegel terminal</a>, Gunnar Klack, cropped; <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+    </ul>
   </div>
 </div>
 
@@ -172,16 +198,16 @@
 (function(){
   var DATA={
     ber:{name:'Berlin Brandenburg', code:'BER • Willy Brandt', open:true,
-      d:'The only airport serving Berlin since October 2020, about 18 km southeast of the centre. Two passenger terminals, T1 and T2, a short walk apart, with a train station directly underneath.',
-      you:'This is your airport. Every flight to Berlin lands here.'},
-    txl:{name:'Tegel', code:'TXL • closed Nov 2020', open:false,
-      d:'The much-loved airport in the northwest, famous for its compact hexagon terminal and taxi-to-gate speed. It closed weeks after BER opened. The site is now becoming a research and housing district, but the hexagon still stands.',
+      d:'Berlin\'s scheduled passenger traffic has been concentrated at BER since Tegel handled its final flight on 8 November 2020. T1 and T2 are about a five-minute signed walk apart; the airport station is under T1 on level U2.',
+      you:'Check your booking for T1 or T2 because airline terminal assignments can change.'},
+    txl:{name:'Tegel', code:'TXL • final flight 8 Nov 2020', open:false,
+      d:'The much-loved airport in the northwest was famous for its compact hexagonal terminal and taxi-to-gate speed. It closed after BER opened. The site is becoming a research and housing district, but the terminal still stands.',
       you:''},
     sxf:{name:'Schönefeld', code:'SXF • absorbed into BER', open:false,
-      d:'The old eastern airport became BER Terminal 5 when the new airport opened, then T5 was closed for good. As a separate airport it no longer exists. If an itinerary says Terminal 5, treat it as an error.',
+      d:'The old eastern airport became BER Terminal 5 when the new airport opened, then T5 closed permanently. Schönefeld remains a place and an S-Bahn station, but as a separate passenger airport it no longer exists.',
       you:''},
     thf:{name:'Tempelhof', code:'THF • closed 2008', open:false,
-      d:'Closed back in 2008 and never demolished. It reopened as Tempelhofer Feld, a huge free public park where Berliners cycle and picnic on the old runways. Worth a visit, just not by plane.',
+      d:'The airport closed in 2008, and Tempelhofer Feld opened as a free public park in 2010. Berliners cycle and picnic on the old runways. Worth a visit, just not by plane.',
       you:''}
   };
 
@@ -210,14 +236,37 @@
   // tabs
   var tabs=[document.getElementById('t-map'),document.getElementById('t-board')];
   var panes={'t-map':document.getElementById('p-map'),'t-board':document.getElementById('p-board')};
-  tabs.forEach(function(t){
-    t.addEventListener('click',function(){
-      tabs.forEach(function(x){x.setAttribute('aria-selected','false');});
-      t.setAttribute('aria-selected','true');
-      Object.keys(panes).forEach(function(id){ panes[id].hidden = (id!==t.id); });
+  function activateTab(t,moveFocus){
+      tabs.forEach(function(x){
+        var selected=x===t;
+        x.setAttribute('aria-selected',selected?'true':'false');
+        x.tabIndex=selected?0:-1;
+      });
+      Object.keys(panes).forEach(function(id){panes[id].hidden=(id!==t.id);});
+      if(moveFocus)t.focus();
       if(window.BWResize) window.BWResize();
+  }
+  tabs.forEach(function(t,index){
+    t.addEventListener('click',function(){activateTab(t,false);});
+    t.addEventListener('keydown',function(e){
+      var next=index;
+      if(e.key==='ArrowRight')next=(index+1)%tabs.length;
+      else if(e.key==='ArrowLeft')next=(index-1+tabs.length)%tabs.length;
+      else if(e.key==='Home')next=0;
+      else if(e.key==='End')next=tabs.length-1;
+      else return;
+      e.preventDefault();
+      activateTab(tabs[next],true);
     });
   });
+})();
+</script>
+<script>
+(function(){
+  var open=document.getElementById('creditsOpen'), modal=document.getElementById('creditsModal'), close=document.getElementById('creditsClose');
+  function show(){modal.hidden=false;open.setAttribute('aria-expanded','true');close.focus();}
+  function hide(){modal.hidden=true;open.setAttribute('aria-expanded','false');open.focus();}
+  open.addEventListener('click',show);close.addEventListener('click',hide);modal.addEventListener('click',function(e){if(e.target===modal)hide();});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!modal.hidden)hide();});
 })();
 </script>
 <script src="../js/brand.js"></script>

@@ -195,7 +195,7 @@ No modern series has done more to turn Berlin's past into a cinematic universe t
 
 The series is anchored at **Studio Babelsberg**, where the enormous "Neue Berliner Straße" backlot stands, but it also filmed at real places you can visit: the **Rotes Rathaus** staircases play the police headquarters known as the Rote Burg, with exteriors at **Alexanderplatz**; interiors were shot at **Rathaus Schöneberg**; the 1920s **Hermannplatz U-Bahn station** plays itself; and the Moka Efti club interior is the beautiful silent-film-era **Theater im Delphi** in Weissensee. [visitBerlin's Babylon Berlin page](https://www.visitberlin.de/en/babylon-berlin) collects the highlights.
 
-A useful update for 2026: the fifth and final season wrapped filming in November 2025 and is expected on ARD in 2026, set during the Nazi takeover of early 1933. The production even shot street scenes with period cars on Museum Island and Unter den Linden. If the series brought you to Berlin, this is the year to come.
+A useful update for 2026: the fifth and final season is now [confirmed for September 2026 on Das Erste and ARD Mediathek](https://www.ardmediathek.de/video/babylon-berlin/trailer-babylon-berlin-staffel-5/ard/Y3JpZDovL2FyZC5kZS92aWRlby0xNTcwMQ). It moves into February 1933, when the Nazis took power. The production also shot period street scenes on Museum Island and Unter den Linden. If the series brought you to Berlin, this is the year to return.
 
 ![Rotes Rathaus in Berlin, the red-brick city hall that plays police headquarters in Babylon Berlin](blog-media/movies-tv-berlin/real/rotes-rathaus.jpg)
 ^ Rotes Rathaus, the series' Rote Burg. My tour passes it; the TV Tower stands directly behind.
@@ -206,7 +206,7 @@ A useful update for 2026: the fifth and final season wrapped filming in November
 
 ### Kleo
 
-*Kleo* is the most Berlin-proud thing Netflix has made in years: a former Stasi assassin hunts her old handlers through the collapsing GDR, with wild costumes and real East Berlin locations. The best one is **Kino International** on Karl-Marx-Allee, the GDR's premiere cinema from 1963, whose upstairs bar plays the series' Café International. The timing is good too: the building reopened in February 2026 after a two-year restoration, so you can buy a ticket and stand inside a freshly polished GDR landmark.
+*Kleo* is the most Berlin-proud thing Netflix has made in years: a former Stasi assassin hunts her old handlers through the collapsing GDR, with wild costumes and real East Berlin locations. The best one is **Kino International** on Karl-Marx-Allee, the GDR's premiere cinema from 1963, whose upstairs bar plays the series' Café International. The timing is good too: [the cinema reopened on 26 February 2026](https://www.yorck.de/en/specials/opening-week-marty-supreme-at-kino-international) after an 18-month renovation, so you can buy a ticket and stand inside a restored GDR landmark.
 
 The series also borrows the legend of **Big Eden**, the real Kurfürstendamm club that gave the first episode its name; the club closed in 2006, so treat that one as a story, not a stop. If you only do one thing, walk Karl-Marx-Allee at golden hour and end at Kino International. It is the series' whole aesthetic in one street.
 
@@ -272,8 +272,8 @@ The fun part is how specific the doubling gets. The **Friedrichstadt-Palast** fo
 
 Visit Karl-Marx-Allee and **Frankfurter Tor** first; the long boulevard and monumental towers make the Moscow illusion click instantly.
 
-![Frankfurter Tor towers on Karl-Marx-Allee at sunset with the TV Tower on the horizon](blog-media/movies-tv-berlin/real/frankfurter-tor.jpg)
-^ Frankfurter Tor at sunset. Squint and you understand why Netflix cast this boulevard as Moscow.
+![Frankfurter Tor tower and monumental apartment blocks on Karl-Marx-Allee](berlinwalk-widgets/blog-drafts/friedrichshain-berlin/images/optimized/frankfurter-tor-karl-marx-allee.jpg)
+^ Frankfurter Tor on Karl-Marx-Allee. The monumental architecture explains why Netflix cast this boulevard as Moscow.
 
 **Berlin mood:** elegant, retro, disguised, architectural.
 
@@ -296,7 +296,7 @@ The contrast is the point. Wannsee gives the story air and water; the Kulturforu
 
 The newest entry carries Berlin in its title: *Berlin ER*, originally *KRANK Berlin*, follows an emergency room in the city's roughest corner. The hospital itself was built inside the **SEZ**, the abandoned GDR sport and leisure complex on Landsberger Allee, with street scenes shot around **Kreuzberg** and **Neukölln**.
 
-Here is the very Berlin twist: the SEZ is now being demolished. The series accidentally became the building's last big appearance. If you pass Landsberger Allee while the corner is still recognizable, you are watching a piece of East Berlin leave the city in real time, which is a very *Berlin ER* feeling.
+Here is the very Berlin twist: the SEZ is still caught between preservation arguments and a redevelopment plan. [The borough stopped preliminary demolition work in November 2025](https://www.berlin.de/ba-friedrichshain-kreuzberg/aktuelles/pressemitteilungen/2025/pressemitteilung.1621188.php), while [WBM still presents the site as a future housing quarter](https://www.wbm.de/neubau-berlin/friedrichshain-kreuzberg/sez/). The series may become the building's last major screen appearance, but the exact on-site state can change. If you pass Landsberger Allee, view it from the public pavement rather than treating the closed complex as a film set you can enter.
 
 **Berlin mood:** frantic, raw, contemporary, tender underneath.
 
@@ -364,16 +364,8 @@ That question leads to a much richer day than standing where a camera once stood
 
 ## Want to See the Real Berlin Behind the Screen?
 
-Not every famous scene sits on one route, but the reason Berlin works so well on screen is the same reason it works on foot: every street has layers. On my [Berlin walking tour](https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based) we cross the same ground many of these productions used, from the World Clock where Bourne vanished to the museum facades John Wick borrowed, and I connect them to the real history underneath.
+Not every famous scene sits on one route, but the reason Berlin works so well on screen is the same reason it works on foot: every street has layers. On my [Berlin walking tour](https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based), I cross the same ground many of these productions used, from the World Clock where Bourne vanished to the museum facades John Wick borrowed, and connect them to the real history underneath.
 
 If you want to understand why Berlin looks the way it does on screen, come walk it with me.
 
-## Image Credits
-
-- Oberbaumbrücke: [DXR](https://commons.wikimedia.org/wiki/File:Oberbaumbr%C3%BCcke,_Berlin,_Northwest_view_20130725_1.jpg), CC BY-SA 4.0, via Wikimedia Commons
-- Bahnhof Zoologischer Garten at night: [Jan Künzel](https://commons.wikimedia.org/wiki/File:Bahnhof_Berlin_Zoologischer_Garten_Nachtaufnahme.jpg), CC BY-SA 4.0, via Wikimedia Commons
-- Glienicke Bridge, June 1990: [Falk2](https://commons.wikimedia.org/wiki/File:03_470_%C2%BBBr%C3%BCcke_der_Einheit%C2%AB.jpg), CC BY-SA 4.0, via Wikimedia Commons
-- Olympiastadion: [Thomas Wolf, www.foto-tw.de](https://commons.wikimedia.org/wiki/File:Olympiastadion_Berlin_2015.jpg), CC BY-SA 3.0 DE, via Wikimedia Commons
-- Kraftwerk Berlin interior: [MakeMagazinDE](https://commons.wikimedia.org/wiki/File:KraftwerkBerlin.jpg), CC BY-SA 4.0, via Wikimedia Commons
-- Rotes Rathaus: [ArildV](https://commons.wikimedia.org/wiki/File:Rotes_Rathaus_June_2023_02.jpg), CC BY-SA 4.0, via Wikimedia Commons
-- Strandbad Wannsee: [t-stern](https://commons.wikimedia.org/wiki/File:Strandbad_wannsee.jpg), CC BY-SA 3.0, via Wikimedia Commons
+Photo attribution is available from the compact **Image credits** disclosure inside the Screen Mood Finder above.
