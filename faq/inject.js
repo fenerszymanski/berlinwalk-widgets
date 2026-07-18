@@ -228,7 +228,8 @@
   "berlin-airports": "berlin-airports",
   "famous-movies-tv-shows-filmed-in-berlin": "movies-tv-berlin",
   "do-you-need-a-visa-to-visit-berlin": "do-you-need-a-visa-to-visit-berlin",
-  "do-you-need-a-car-in-berlin": "do-you-need-a-car-in-berlin"
+  "do-you-need-a-car-in-berlin": "do-you-need-a-car-in-berlin",
+  "smoking-in-berlin": "smoking-in-berlin"
 };
 
   var SCHEMAS = {
@@ -11184,6 +11185,68 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "You can, but you usually should not bother. Potsdam and Sanssouci are a short, frequent S-Bahn or regional ride, and Sachsenhausen is a comfortable train rather than a parking hunt. Most day trips visitors actually take are built around the rail network, so a car adds cost and parking stress without saving time. Save the car for places the trains do not reach well."
+        }
+      }
+    ]
+  },
+  "smoking-in-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can you smoke inside bars in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sometimes, and this surprises visitors. Germany bans indoor smoking in restaurants and workplaces, but Berlin runs its own exception. A single-room bar smaller than 75 square metres that serves no hot food and admits no under-18s can allow smoking as a marked Raucherkneipe. Every other bar, and any bar that serves warm food, is smoke-free inside. Look for a smoking-bar sticker on the door, or just ask. If you want a smoke-free evening, choose a bar with a kitchen."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is vaping allowed where smoking is banned?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Treat vaping and e-cigarettes exactly like cigarettes. The non-smoker protection rules and the public-transport ban cover e-cigarettes and heated tobacco the same way as tobacco, so if you cannot smoke somewhere, assume you cannot vape there either. That includes trains, trams, buses and station platforms."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you smoke on U-Bahn and S-Bahn platforms?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, with one narrow exception. Smoking and vaping are banned throughout the U-Bahn and S-Bahn network, including underground platforms. Some open-air platforms have a small marked smoking area, and that is the only place it is allowed. A cigarette on a normal platform can bring an on-the-spot penalty of around 40 euro, so finish it upstairs before you head down."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is cannabis legal in Berlin in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, within limits. Since 1 April 2024, adults aged 18 and over may possess up to 25 grams of cannabis in public and grow a few plants at home. It is decriminalised for personal adult use, not a free-for-all. Public consumption is restricted, driving under the influence is a serious offence, and everything below still applies to where and how you use it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can tourists buy cannabis in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not legally. There are no cannabis shops or coffeeshops in Germany. The only legal source is a non-profit cannabis social club, and those require German residence and a waiting period, so they are closed to short-term visitors. Buying from a street dealer remains illegal and is exactly where the fake and unsafe product is. Being able to possess cannabis and being able to buy it are two different things here."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can you legally smoke cannabis in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Outdoors, and away from children and certain places. Public use is banned within 100 metres of schools, playgrounds, daycare centres and sports grounds, and in pedestrian zones between 07:00 and 20:00. It is also not allowed around minors or on public transport. In practice that means an ordinary park or side street in the evening, well clear of those zones, is the safe answer. Central Berlin is full of playgrounds, so check your surroundings first."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What smoking-related fines should tourists watch for?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The avoidable ones. Smoking on a U-Bahn or S-Bahn platform is around 40 euro. Smoking inside a non-smoking hotel room usually brings a cleaning charge of 100 to 250 euro. For cannabis, the common trap is using it inside a 100-metre buffer zone or in a daytime pedestrian street, both of which are finable. None of this is aimed at catching tourists, but the rules are enforced, so it is worth knowing the line."
         }
       }
     ]

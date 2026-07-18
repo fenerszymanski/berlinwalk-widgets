@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Berlin Smoking Rules Checker</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='32' r='20' fill='%23FFE600'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
+    --yellow:#FFE600; --amber:#F0A500; --red:#E63946; --ink:#1c2a1c; --panel:#ffffff;
+    --bone:#f4f9ec; --line:#e3edd6; --stone:#6d7b66; --shadow:0 10px 30px rgba(18,61,24,.14);
+  }
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}
+  html,body{margin:0}
+  body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .bx{max-width:940px;margin:0 auto;padding:4px}
+  .card{background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+
+  .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:18px 22px 16px}
+  .kick{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:700;margin:0 0 6px;font-family:"IBM Plex Mono",monospace}
+  .head h1{margin:0;font-size:21px;font-weight:800;line-height:1.2}
+  .head p{margin:8px 0 0;font-size:13.5px;color:#e7f3e2;max-width:760px}
+
+  .sect{padding:16px 18px 4px}
+  .step{display:flex;align-items:center;gap:9px;margin:0 0 12px}
+  .step .num{flex:none;width:24px;height:24px;border-radius:999px;background:var(--green);color:#fff;font-weight:800;font-size:13px;display:grid;place-items:center;font-family:"IBM Plex Mono",monospace}
+  .step h2{margin:0;font-size:15.5px;font-weight:800;color:var(--green-deep)}
+
+  .subs{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .chip{border:1.5px solid var(--line);background:#fff;border-radius:13px;padding:12px 12px 13px;cursor:pointer;text-align:left;font-family:Montserrat,sans-serif;transition:border-color .15s,background .15s,transform .05s}
+  .chip:hover{border-color:var(--lime)}
+  .chip:active{transform:translateY(1px)}
+  .chip .flag{font-size:20px;line-height:1;display:block;margin-bottom:6px}
+  .chip .t{font-size:13.5px;font-weight:800;color:var(--green-deep);line-height:1.2}
+  .chip .s{font-size:11.5px;color:var(--stone);font-weight:600;margin-top:3px;line-height:1.3}
+  .chip[aria-pressed="true"]{border-color:var(--green);background:#eef7e2;box-shadow:0 0 0 3px rgba(124,179,66,.18)}
+
+  .places{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+  .places .chip{padding:11px 11px 12px}
+  .places .flag{font-size:19px;margin-bottom:5px}
+  .places .t{font-size:12.5px}
+
+  .cannabis-note{margin:13px 0 2px;border:1px solid #d8c7a0;border-radius:13px;background:#fbf6e9;padding:12px 14px;display:flex;gap:10px;line-height:1.5}
+  .cannabis-note .ic{flex:none;font-size:18px}
+  .cannabis-note .t{font-size:12.5px;color:#5a4a1e;font-weight:600}
+  .cannabis-note .t b{color:#3f3410}
+
+  .verdict{margin:15px 0 4px;border:1px solid var(--line);border-radius:14px;background:var(--bone);overflow:hidden}
+  .verdict .vhead{padding:13px 15px;display:flex;align-items:center;gap:11px;border-bottom:1px solid var(--line)}
+  .badge{flex:none;font-family:"IBM Plex Mono",monospace;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 11px;border-radius:999px}
+  .badge.ok{background:var(--green);color:#fff}
+  .badge.no{background:var(--red);color:#fff}
+  .badge.marked{background:var(--amber);color:#3a2a00}
+  .badge.depends{background:var(--yellow);color:var(--green-deep)}
+  .verdict .vhead strong{font-size:14.5px;color:var(--green-deep);font-weight:800;line-height:1.3}
+  .rows{padding:5px 15px 13px}
+  .row{display:flex;gap:10px;padding:9px 0;border-bottom:1px dashed #dfe9d2}
+  .row:last-child{border-bottom:none}
+  .row .ic{flex:none;width:26px;height:26px;border-radius:8px;background:#e7f4d8;color:var(--green-deep);display:grid;place-items:center;font-size:14px}
+  .row.fine .ic{background:#fde7e9;color:#8a1a25}
+  .row.tip .ic{background:#fff6c9;color:#6a5a00}
+  .row .rt{font-size:13px;color:#2c3a2a;line-height:1.5}
+  .row .rt b{color:var(--green-deep)}
+
+  .placeholder{margin:15px 0 2px;border:1px dashed #cfdcc2;border-radius:13px;background:#f1f6ea;padding:15px;color:var(--stone);font-size:12.5px;font-weight:600;line-height:1.5}
+
+  .reftoggle{margin:16px 0 0;border-top:1px solid var(--line);padding-top:12px}
+  .reftoggle summary{cursor:pointer;font-size:12.5px;font-weight:800;color:var(--green-deep);list-style:none;display:flex;align-items:center;gap:7px}
+  .reftoggle summary::-webkit-details-marker{display:none}
+  .reftoggle summary .caret{transition:transform .15s;font-size:11px}
+  .reftoggle[open] summary .caret{transform:rotate(90deg)}
+  .reftable{width:100%;border-collapse:collapse;margin-top:11px;font-size:11.5px}
+  .reftable th,.reftable td{text-align:left;padding:7px 8px;border-bottom:1px solid #e6efd9;vertical-align:top}
+  .reftable th{color:var(--green-deep);font-weight:800;font-size:10.5px;text-transform:uppercase;letter-spacing:.04em}
+  .reftable td b{font-weight:800}
+  .tag{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:9.5px;font-weight:700;padding:2px 6px;border-radius:6px}
+  .tag.ok{background:#e2f2d3;color:#2c5218}.tag.no{background:#fbdcdf;color:#8a1a25}
+  .tag.marked{background:#fbe6bf;color:#6a4a00}.tag.depends{background:#fff2ad;color:#6a5a00}
+
+  .foot{padding:12px 18px 16px}
+  .disc{font-size:11.5px;color:var(--stone);line-height:1.5;margin:0}
+  .disc b{color:var(--green-deep)}
+  a.src{color:var(--green);font-weight:700;text-decoration:none;border-bottom:1.5px solid var(--soft)}
+  a.src:hover{border-color:var(--green)}
+  .row .rt a{color:var(--green);font-weight:800;text-decoration:underline;text-underline-offset:2px}
+
+  @media(max-width:560px){
+    .places{grid-template-columns:1fr 1fr}
+    .head h1{font-size:19px}
+  }
+  @media(max-width:380px){
+    .subs{grid-template-columns:1fr}
+    .places{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="bx">
+  <div class="card">
+    <div class="head">
+      <p class="kick">BerlinWalk.com • Berlin smoking rules 2026</p>
+      <h1>Can I smoke here? Check the Berlin rule before you light up</h1>
+      <p>Berlin lets you smoke in some places most cities do not, and fines you in a few that feel harmless. Pick what you are using, then pick where you are, and get the exact rule, the likely fine, and one practical move.</p>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="sect">
+      <div class="step"><span class="num">1</span><h2>What are you using?</h2></div>
+      <div class="subs" id="subs">
+        <button class="chip" data-k="cig" aria-pressed="false">
+          <span class="flag">🚬</span>
+          <span class="t">Cigarette or vape</span>
+          <span class="s">Tobacco, roll-ups, e-cigarettes and heated tobacco</span>
+        </button>
+        <button class="chip" data-k="cannabis" aria-pressed="false">
+          <span class="flag">🌿</span>
+          <span class="t">Cannabis</span>
+          <span class="s">Legal to possess for adults since 2024, with limits</span>
+        </button>
+      </div>
+
+      <div class="cannabis-note" id="cannabisNote" hidden>
+        <span class="ic">ℹ️</span>
+        <span class="t"><b>Possession is legal, buying is not for visitors.</b> Adults 18 and over may carry up to 25 g in public, but there are no cannabis shops in Germany. The only legal supply is non-profit cannabis clubs that require German residence, so as a tourist you cannot legally buy it. Street dealers stay illegal.</span>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="sect">
+      <div class="step"><span class="num">2</span><h2>Where are you?</h2></div>
+      <div class="places" id="places">
+        <button class="chip" data-p="restaurant" aria-pressed="false"><span class="flag">🍽️</span><span class="t">Indoor restaurant or café</span></button>
+        <button class="chip" data-p="bar" aria-pressed="false"><span class="flag">🍺</span><span class="t">Indoor bar or Kneipe</span></button>
+        <button class="chip" data-p="hotel" aria-pressed="false"><span class="flag">🏨</span><span class="t">Hotel room</span></button>
+        <button class="chip" data-p="platform" aria-pressed="false"><span class="flag">🚉</span><span class="t">U-Bahn or S-Bahn platform</span></button>
+        <button class="chip" data-p="vehicle" aria-pressed="false"><span class="flag">🚆</span><span class="t">Inside a train, tram or bus</span></button>
+        <button class="chip" data-p="terrace" aria-pressed="false"><span class="flag">☕</span><span class="t">Outdoor café or bar terrace</span></button>
+        <button class="chip" data-p="park" aria-pressed="false"><span class="flag">🌳</span><span class="t">Park, street or sidewalk</span></button>
+        <button class="chip" data-p="school" aria-pressed="false"><span class="flag">🏫</span><span class="t">Near a school or playground</span></button>
+        <button class="chip" data-p="pedzone" aria-pressed="false"><span class="flag">🚶</span><span class="t">Pedestrian zone, daytime</span></button>
+      </div>
+
+      <div class="placeholder" id="placeholder">Pick one option from each step above to see the rule for your exact situation.</div>
+
+      <div class="verdict" id="verdict" hidden>
+        <div class="vhead"><span class="badge" id="vbadge"></span><strong id="vtitle"></strong></div>
+        <div class="rows" id="vrows"></div>
+      </div>
+
+      <details class="reftoggle">
+        <summary><span class="caret">▶</span> See the full rule table at a glance</summary>
+        <div style="overflow-x:auto">
+          <table class="reftable">
+            <thead><tr><th>Where</th><th>Cigarette or vape</th><th>Cannabis</th></tr></thead>
+            <tbody id="refbody"></tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+
+    <div class="foot">
+      <p class="disc"><b>How this works:</b> Germany's non-smoker protection rules cover tobacco and e-cigarettes the same way, and Berlin keeps its own bar exception. Cannabis rules follow the 2024 Cannabis Act (KCanG). This is practical guidance, not legal advice, and local pedestrian-zone hours or club buffer zones can vary. Check the official <a class="src" href="https://www.bundesgesundheitsministerium.de/en/topics/cannabis/faq-cannabis-act" target="_blank" rel="noopener">Cannabis Act FAQ</a> and the <a class="src" href="https://sbahn.berlin/en/plan-a-journey/rail-stations/rules-of-conduct/" target="_blank" rel="noopener">S-Bahn rules of conduct</a> for the current detail.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var DATA = {
+    cig: {
+      restaurant: {b:'no',t:'Not allowed inside.',
+        rule:'Germany bans smoking and vaping in enclosed restaurants and cafés. When hot food is served there is no legal smoking section.',
+        fine:'You can be fined up to about 100 euro.',
+        tip:'Step out to the terrace or the street. Nobody will mind, that is where people smoke.'},
+      bar: {b:'depends',t:'Only in a marked smoking bar.',
+        rule:'Berlin is unusual. A single-room bar under 75 m2 that serves no hot food and admits no under-18s may allow smoking as a marked Raucherkneipe. Every other bar is smoke-free inside.',
+        fine:'Owners risk around 1,000 euro, so most enforce the ban strictly.',
+        tip:'Look for a Raucherkneipe sticker on the door. If the bar serves warm food, assume no smoking inside.'},
+      hotel: {b:'depends',t:'Only in a designated smoking room.',
+        rule:'Almost every Berlin hotel is fully non-smoking. A few keep a small number of designated smoking rooms that you must request when booking.',
+        fine:'Cleaning charges of 100 to 250 euro are common if you smoke in a non-smoking room.',
+        tip:'Use the balcony or the street, and ask reception where smoking is allowed.'},
+      platform: {b:'marked',t:'Only inside a marked smoking zone.',
+        rule:'Smoking and vaping are banned on U-Bahn and S-Bahn platforms, except inside the marked smoking areas painted on some open-air platforms. Underground platforms are fully smoke-free.',
+        fine:'A 40 euro on-the-spot penalty is typical.',
+        tip:'Finish your cigarette upstairs before you head down to the platform.'},
+      vehicle: {b:'no',t:'Not allowed on board.',
+        rule:'No smoking or vaping inside any tram, bus, U-Bahn, S-Bahn or regional and long-distance train.',
+        fine:'You can be fined and told to leave.',
+        tip:'Wait for your stop. Rides in the centre are short.'},
+      terrace: {b:'ok',t:'Allowed. This is the smokers’ home.',
+        rule:'Outdoor café and bar terraces are where smoking still happens freely in Berlin. Smoking and vaping are allowed at most open-air tables.',
+        fine:'',
+        tip:'Be considerate of the next table, and use the ashtray rather than the pavement.'},
+      park: {b:'ok',t:'Allowed outdoors.',
+        rule:'Smoking and vaping are allowed on streets, sidewalks and in most parks.',
+        fine:'',
+        tip:'Take your butts with you. Littering fines exist and Berlin is tightening enforcement.'},
+      school: {b:'ok',t:'Allowed on the street, not on the grounds.',
+        rule:'There is no special cigarette buffer zone around schools, so the public pavement is fine. School and playground grounds themselves are off limits.',
+        fine:'',
+        tip:'The 100 metre buffer people mention is a cannabis rule, not a tobacco one.'},
+      pedzone: {b:'ok',t:'Allowed.',
+        rule:'A daytime pedestrian street carries no special tobacco restriction. Normal outdoor rules apply.',
+        fine:'',
+        tip:'The 07:00 to 20:00 pedestrian-zone ban you may have read about is for cannabis only.'}
+    },
+    cannabis: {
+      restaurant: {b:'no',t:'Not allowed.',
+        rule:'This is a private indoor venue, so the indoor smoking ban applies and businesses do not permit cannabis use.',
+        fine:'You would be asked to leave and could be fined.',
+        tip:'Cannabis is an outdoor-only thing in practice. Save it for later, away from crowds.'},
+      bar: {b:'no',t:'Not allowed.',
+        rule:'Even a smoking bar is private property and is not a legal cannabis space. Indoor consumption is not permitted.',
+        fine:'You would be asked to leave.',
+        tip:'Keep it outdoors and away from other people.'},
+      hotel: {b:'depends',t:'Depends on the house rules.',
+        rule:'Your room is private, but the building’s smoking policy still applies and most hotels ban all smoking indoors.',
+        fine:'Cleaning fees apply, the same as for tobacco.',
+        tip:'Check the house rules first. A balcony away from a playground is the safer option.'},
+      platform: {b:'no',t:'Not allowed.',
+        rule:'Cannabis use is banned in and around public transport, and the smoking ban applies on platforms too.',
+        fine:'You can be fined.',
+        tip:'Wait until you are well clear of the station.'},
+      vehicle: {b:'no',t:'Not allowed on board.',
+        rule:'No cannabis use inside any train, tram or bus. Using it as a driver or passenger in a vehicle is separately prohibited.',
+        fine:'You can be fined and, if driving, face serious penalties.',
+        tip:'Never combine cannabis with driving or cycling.'},
+      terrace: {b:'depends',t:'Treat it as not allowed.',
+        rule:'A terrace is private property within sight of other guests, and often inside a pedestrian zone. It is not a legal consumption spot unless staff clearly allow it.',
+        fine:'You would be asked to leave.',
+        tip:'Assume no unless someone who works there says otherwise.'},
+      park: {b:'ok',t:'Allowed for adults, with limits.',
+        rule:'Adults 18 and over may consume cannabis outdoors, including many parks and streets, as long as no minors are around, you are more than 100 m from any school, playground, daycare or sports ground, and it is not a pedestrian zone between 07:00 and 20:00.',
+        fine:'Breaking a buffer-zone rule is finable.',
+        tip:'An ordinary park or side street in the evening, away from those zones, is the safe answer.'},
+      school: {b:'no',t:'Not allowed within 100 metres.',
+        rule:'Cannabis use is banned within 100 m of schools, playgrounds, daycare centres and sports grounds. This is the most common way visitors get fined without realising it.',
+        fine:'Fines apply for consumption inside a buffer zone.',
+        tip:'Central Berlin is full of playgrounds and schools. Move well away and check your surroundings first.'},
+      pedzone: {b:'no',t:'Not allowed between 07:00 and 20:00.',
+        rule:'Cannabis consumption is banned in pedestrian zones during the day, from 07:00 to 20:00. After 20:00 it is generally allowed, as long as no school or playground is within sight.',
+        fine:'Daytime use in a pedestrian zone is finable.',
+        tip:'Wait until the evening, and step off the main shopping street.'}
+    }
+  };
+
+  var PLACE_LABEL = {
+    restaurant:'Indoor restaurant or café', bar:'Indoor bar or Kneipe', hotel:'Hotel room',
+    platform:'U-Bahn or S-Bahn platform', vehicle:'Inside a train, tram or bus',
+    terrace:'Outdoor terrace', park:'Park, street or sidewalk',
+    school:'Near a school or playground', pedzone:'Pedestrian zone, daytime'
+  };
+  var PLACE_ORDER = ['restaurant','bar','hotel','platform','vehicle','terrace','park','school','pedzone'];
+
+  var subs = document.getElementById('subs');
+  var places = document.getElementById('places');
+  var cannabisNote = document.getElementById('cannabisNote');
+  var verdict = document.getElementById('verdict');
+  var placeholder = document.getElementById('placeholder');
+  var vbadge = document.getElementById('vbadge');
+  var vtitle = document.getElementById('vtitle');
+  var vrows = document.getElementById('vrows');
+  var refbody = document.getElementById('refbody');
+  var sub = null, place = null;
+
+  function press(container, attr, val){
+    Array.prototype.forEach.call(container.querySelectorAll('.chip'), function(c){
+      c.setAttribute('aria-pressed', c.getAttribute(attr) === val ? 'true' : 'false');
+    });
+  }
+
+  function render(){
+    cannabisNote.hidden = (sub !== 'cannabis');
+    if(!sub || !place){
+      verdict.hidden = true;
+      placeholder.hidden = false;
+      resize();
+      return;
+    }
+    var v = DATA[sub][place];
+    placeholder.hidden = true;
+    vbadge.className = 'badge ' + v.b;
+    vbadge.textContent = ({ok:'Allowed',no:'Not allowed',marked:'Marked spots only',depends:'Depends'})[v.b];
+    vtitle.textContent = v.t;
+    var rows = [['📍', v.rule]];
+    if(v.fine) rows.push(['fine','€', v.fine]);
+    if(v.tip) rows.push(['tip','💡', v.tip]);
+    vrows.innerHTML = rows.map(function(r){
+      if(r.length === 3){
+        return '<div class="row '+r[0]+'"><span class="ic">'+r[1]+'</span><span class="rt">'+r[2]+'</span></div>';
+      }
+      return '<div class="row"><span class="ic">'+r[0]+'</span><span class="rt">'+r[1]+'</span></div>';
+    }).join('');
+    verdict.hidden = false;
+    resize();
+  }
+
+  subs.addEventListener('click', function(e){
+    var btn = e.target.closest('.chip'); if(!btn) return;
+    sub = btn.getAttribute('data-k');
+    press(subs, 'data-k', sub);
+    render();
+  });
+  places.addEventListener('click', function(e){
+    var btn = e.target.closest('.chip'); if(!btn) return;
+    place = btn.getAttribute('data-p');
+    press(places, 'data-p', place);
+    render();
+  });
+
+  // reference table
+  var TAGTEXT = {ok:'Allowed',no:'No',marked:'Marked spots',depends:'Depends'};
+  refbody.innerHTML = PLACE_ORDER.map(function(p){
+    var c = DATA.cig[p], k = DATA.cannabis[p];
+    return '<tr><td><b>'+PLACE_LABEL[p]+'</b></td>'+
+      '<td><span class="tag '+c.b+'">'+TAGTEXT[c.b]+'</span></td>'+
+      '<td><span class="tag '+k.b+'">'+TAGTEXT[k.b]+'</span></td></tr>';
+  }).join('');
+
+  document.querySelector('.reftoggle').addEventListener('toggle', resize);
+
+  function resize(){
+    if(window.BWBrand && typeof window.BWBrand.postHeight === 'function'){ window.BWBrand.postHeight(); }
+  }
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
