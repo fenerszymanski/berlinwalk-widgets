@@ -227,7 +227,8 @@
   "halal-food-in-berlin": "halal-food-in-berlin",
   "berlin-airports": "berlin-airports",
   "famous-movies-tv-shows-filmed-in-berlin": "movies-tv-berlin",
-  "do-you-need-a-visa-to-visit-berlin": "do-you-need-a-visa-to-visit-berlin"
+  "do-you-need-a-visa-to-visit-berlin": "do-you-need-a-visa-to-visit-berlin",
+  "do-you-need-a-car-in-berlin": "do-you-need-a-car-in-berlin"
 };
 
   var SCHEMAS = {
@@ -11121,6 +11122,68 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "For a short visit, EU, EEA and Swiss citizens do not need a visa or ETIAS and the Schengen 90/180 cap does not apply. Bring a valid passport or national ID card. EES does not apply to you. If you stay longer than three months, residence conditions and local registration can apply, so check the official EU residence guidance."
+        }
+      }
+    ]
+  },
+  "do-you-need-a-car-in-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do you need a car to visit Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a normal city trip, no. Berlin is flat and built for public transport, and the U-Bahn, S-Bahn, trams and buses reach almost everywhere on a single AB ticket, running late into the night. A car in the centre mostly adds the low-emission zone rules, managed parking and traffic. Rent for a day only if a specific out-of-town trip genuinely needs wheels."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Umweltzone and do I need a sticker?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Everything inside Berlin's S-Bahn ring is an Umweltzone, a low-emission zone, and your car needs a green Umweltplakette sticker on the windscreen to drive there. Since 2025 only the green sticker counts, and there is no tourist or rental exemption. Almost every car hired in Germany, and every car-sharing vehicle, already has it, so check the windscreen. Driving in without one is a 105 euro fine. You can order the sticker online for about 6 euros, or buy it in person for 5."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does parking cost in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Street parking in the central districts runs roughly 1 to 3 euros an hour, and public garages around Mitte are about 2 to 4 euros an hour, often with a daily cap near 24 euros. Central Berlin uses a district-by-district paid-parking system called Parkraumbewirtschaftung, so most streets inside the ring are metered during the day. You pay at the machine or, more easily, through a Handyparken app that bills by the minute."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it better to use public transport or a car in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Public transport wins for almost every visitor. One AB ticket covers the U-Bahn, S-Bahn, trams and buses across the city, the network runs late, and on Friday and Saturday nights the U-Bahn and S-Bahn run through the night. A car faces the low-emission zone, paid parking and shared roads with trams and cyclists. Treat the trains as your car and keep a taxi or ride app for late nights with luggage."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When does renting a car in Berlin actually make sense?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A car earns its place when your plans pull you away from the train lines: the quieter Brandenburg lakes, small villages, the Spreewald canals, or a stretch of the Baltic coast where connections get slow. If your trip is really a regional road trip with a Berlin stop attached, rent for the road-trip part. For the classic day trips, though, Potsdam, Sachsenhausen and Dresden are all easier by train."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is car-sharing in Berlin and is it worth it?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Car-sharing lets you unlock a car from an app and pay by the minute or the day, skipping the rental desk and the multi-day commitment. Free-floating services like Miles, SHARE NOW and Sixt share let you pick up and drop off anywhere in the operating area, while a station-based service like Cambio can be cheaper for a planned out-and-back trip. It is often the right answer for the one afternoon you actually need a car."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I drive to Potsdam or Sachsenhausen from Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can, but you usually should not bother. Potsdam and Sanssouci are a short, frequent S-Bahn or regional ride, and Sachsenhausen is a comfortable train rather than a parking hunt. Most day trips visitors actually take are built around the rail network, so a car adds cost and parking stress without saving time. Save the car for places the trains do not reach well."
         }
       }
     ]
