@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Berlin Entry Checker and Schengen 90/180 Day Counter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
+    --yellow:#FFE600; --amber:#F0A500; --red:#E63946; --ink:#1c2a1c; --panel:#ffffff;
+    --bone:#f4f9ec; --line:#e3edd6; --stone:#6d7b66; --shadow:0 10px 30px rgba(18,61,24,.14);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .bx{max-width:940px;margin:0 auto;padding:4px}
+  .card{background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+
+  .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:18px 22px 16px}
+  .kick{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:700;margin:0 0 6px;font-family:"IBM Plex Mono",monospace}
+  .head h1{margin:0;font-size:21px;font-weight:800;line-height:1.2}
+  .head p{margin:8px 0 0;font-size:13.5px;color:#e7f3e2;max-width:760px}
+
+  .sect{padding:16px 18px 4px}
+  .step{display:flex;align-items:center;gap:9px;margin:0 0 12px}
+  .step .num{flex:none;width:24px;height:24px;border-radius:999px;background:var(--green);color:#fff;font-weight:800;font-size:13px;display:grid;place-items:center;font-family:"IBM Plex Mono",monospace}
+  .step h2{margin:0;font-size:15.5px;font-weight:800;color:var(--green-deep)}
+
+  .chips{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+  .chip{border:1.5px solid var(--line);background:#fff;border-radius:13px;padding:12px 12px 13px;cursor:pointer;text-align:left;font-family:Montserrat,sans-serif;transition:border-color .15s,background .15s,transform .05s}
+  .chip:hover{border-color:var(--lime)}
+  .chip:active{transform:translateY(1px)}
+  .chip .flag{font-size:20px;line-height:1;display:block;margin-bottom:6px}
+  .chip .t{font-size:13.5px;font-weight:800;color:var(--green-deep);line-height:1.2}
+  .chip .s{font-size:11.5px;color:var(--stone);font-weight:600;margin-top:3px;line-height:1.3}
+  .chip[aria-pressed="true"]{border-color:var(--green);background:#eef7e2;box-shadow:0 0 0 3px rgba(124,179,66,.18)}
+
+  .verdict{margin:14px 0 4px;border:1px solid var(--line);border-radius:14px;background:var(--bone);padding:0;overflow:hidden}
+  .verdict .vhead{padding:12px 15px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line)}
+  .badge{flex:none;font-family:"IBM Plex Mono",monospace;font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:5px 10px;border-radius:999px}
+  .badge.ok{background:var(--green);color:#fff}
+  .badge.warn{background:var(--yellow);color:var(--green-deep)}
+  .badge.act{background:var(--amber);color:#3a2a00}
+  .verdict .vhead strong{font-size:14.5px;color:var(--green-deep);font-weight:800}
+  .rows{padding:6px 15px 13px}
+  .row{display:flex;gap:10px;padding:9px 0;border-bottom:1px dashed #dfe9d2}
+  .row:last-child{border-bottom:none}
+  .row .ic{flex:none;width:26px;height:26px;border-radius:8px;background:#e7f4d8;color:var(--green-deep);display:grid;place-items:center;font-size:14px}
+  .row .rt{font-size:13px;color:#2c3a2a;line-height:1.5}
+  .row .rt b{color:var(--green-deep)}
+
+  .divide{height:1px;background:var(--line);margin:16px 18px 0}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .field label{display:block;font-size:11.5px;font-weight:700;color:var(--green-deep);text-transform:uppercase;letter-spacing:.05em;margin:0 0 5px}
+  .field input{width:100%;border:1.5px solid var(--line);border-radius:11px;padding:11px 12px;font-size:14px;font-family:Montserrat,sans-serif;color:var(--ink);background:#fff}
+  .field input:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(124,179,66,.18)}
+  .field.full{grid-column:1 / -1}
+  .hint{font-size:11.5px;color:var(--stone);font-weight:600;margin:5px 0 0}
+
+  .meterwrap{margin:15px 0 2px;border:1px solid var(--line);border-radius:14px;background:#fff;padding:14px 15px}
+  .mnums{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;margin:0 0 9px}
+  .mnums .big{font-size:30px;font-weight:800;line-height:1;color:var(--green-deep);font-family:"IBM Plex Mono",monospace}
+  .mnums .big small{font-size:14px;color:var(--stone);font-weight:700}
+  .mnums .rlabel{font-size:12px;color:var(--stone);font-weight:700;text-align:right;line-height:1.35}
+  .bar{position:relative;height:20px;border-radius:999px;background:#eaf1e0;overflow:hidden;border:1px solid #dbe7cd}
+  .bar .fillPrior{position:absolute;left:0;top:0;bottom:0;background:#c5d8ac}
+  .bar .fillTrip{position:absolute;top:0;bottom:0;background:linear-gradient(90deg,var(--lime),var(--green))}
+  .bar.over .fillTrip{background:linear-gradient(90deg,#f0a500,var(--red))}
+  .barlabels{display:flex;justify-content:space-between;font-size:10.5px;color:var(--stone);font-weight:700;margin-top:6px;font-family:"IBM Plex Mono",monospace}
+  .vline{font-size:13px;font-weight:800;margin:12px 0 0;padding:10px 12px;border-radius:11px;line-height:1.45}
+  .vline.ok{background:#e7f4d8;color:var(--green-deep);border:1px solid #d0e6b6}
+  .vline.warn{background:#fff7cc;color:#6a5a00;border:1px solid #f0e08a}
+  .vline.over{background:#fdeaec;color:#8a1a25;border:1px solid #f4c2c8}
+  .naNote{font-size:12.5px;color:var(--stone);font-weight:600;background:#f1f6ea;border:1px dashed #cfdcc2;border-radius:11px;padding:11px 13px;margin:15px 0 2px;line-height:1.5}
+
+  .foot{padding:12px 18px 16px}
+  .disc{font-size:11.5px;color:var(--stone);line-height:1.5;margin:0}
+  .disc b{color:var(--green-deep)}
+  a.src{color:var(--green);font-weight:700;text-decoration:none;border-bottom:1.5px solid var(--soft)}
+  a.src:hover{border-color:var(--green)}
+
+  @media(max-width:560px){
+    .chips{grid-template-columns:1fr}
+    .grid2{grid-template-columns:1fr}
+    .head h1{font-size:19px}
+    .mnums .big{font-size:26px}
+  }
+</style>
+</head>
+<body>
+<div class="bx">
+  <div class="card">
+    <div class="head">
+      <p class="kick">BerlinWalk.com • Berlin entry rules 2026</p>
+      <h1>Do you need a visa for Berlin? Check your passport, then count your days</h1>
+      <p>Two quick steps. First see what your passport needs for a Berlin trip in 2026, including the new EES border checks and where ETIAS stands. Then count your stay against the Schengen 90-days-in-180 rule before you book.</p>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="sect">
+      <div class="step"><span class="num">1</span><h2>Which passport do you travel on?</h2></div>
+      <div class="chips" id="chips">
+        <button class="chip" data-k="eu" aria-pressed="false">
+          <span class="flag">🇪🇺</span>
+          <span class="t">EU / EEA / Swiss</span>
+          <span class="s">Germany, France, Norway, Iceland, Switzerland and the rest</span>
+        </button>
+        <button class="chip" data-k="exempt" aria-pressed="false">
+          <span class="flag">🛂</span>
+          <span class="t">Visa-exempt</span>
+          <span class="s">US, UK, Canada, Australia, Japan, South Korea and ~55 more</span>
+        </button>
+        <button class="chip" data-k="visa" aria-pressed="false">
+          <span class="flag">📄</span>
+          <span class="t">Other passport</span>
+          <span class="s">Countries that need a Schengen visa to enter</span>
+        </button>
+      </div>
+
+      <div class="verdict" id="verdict" hidden>
+        <div class="vhead"><span class="badge" id="vbadge"></span><strong id="vtitle"></strong></div>
+        <div class="rows" id="vrows"></div>
+      </div>
+    </div>
+
+    <div class="divide"></div>
+
+    <!-- STEP 2 -->
+    <div class="sect">
+      <div class="step"><span class="num">2</span><h2>Count your Schengen days (90 in 180)</h2></div>
+
+      <div id="counter">
+        <div class="grid2">
+          <div class="field">
+            <label for="arr">Arrival in Berlin</label>
+            <input type="date" id="arr" />
+          </div>
+          <div class="field">
+            <label for="dep">Departure</label>
+            <input type="date" id="dep" />
+          </div>
+          <div class="field full">
+            <label for="prior">Other days already spent in the Schengen Area in the 180 days before you arrive</label>
+            <input type="number" id="prior" min="0" max="90" step="1" value="0" inputmode="numeric" />
+            <p class="hint">Leave this at 0 if this Berlin trip is your only recent Europe travel. Include days in any Schengen country (France, Italy, Spain and so on), not just Germany.</p>
+          </div>
+        </div>
+
+        <div class="meterwrap" id="meterwrap">
+          <div class="mnums">
+            <div class="big"><span id="usedN">0</span><small> / 90 days used</small></div>
+            <div class="rlabel"><span id="remN">90</span> days still allowed<br><span id="untilLbl" style="color:var(--green-deep)"></span></div>
+          </div>
+          <div class="bar" id="bar">
+            <div class="fillPrior" id="fillPrior" style="width:0%"></div>
+            <div class="fillTrip" id="fillTrip" style="left:0%;width:0%"></div>
+          </div>
+          <div class="barlabels"><span>0</span><span>45</span><span>90</span></div>
+          <div class="vline ok" id="vline">Enter your dates to check this trip against the 90/180 limit.</div>
+        </div>
+      </div>
+
+      <div class="naNote" id="naNote" hidden>
+        With an <b>EU, EEA or Swiss passport</b> the 90/180 rule does not apply to you. You have freedom of movement and can stay in Germany as long as you like, so the day counter is only relevant for the other two passport groups.
+      </div>
+    </div>
+
+    <div class="foot">
+      <p class="disc"><b>How this works:</b> the counter adds your Berlin trip length to any other recent Schengen days and compares the total to the 90-day allowance. The real 180-day window is a rolling one, so if you travel in and out of Europe a lot, treat this as a close guide and check the official source before a long stay. Rules verified July 2026 via the <a class="src" href="https://travel-europe.europa.eu/index_en" target="_blank" rel="noopener">EU travel portal</a>. This tool is guidance, not legal or immigration advice.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var VERDICTS = {
+    exempt: {
+      badge:['warn','Visa-free for tourism'],
+      title:'No visa needed. Watch EES and ETIAS.',
+      rows:[
+        ['✅','<b>No Schengen visa</b> for a tourist trip. You may stay up to <b>90 days in any 180</b>. Count yours in step 2.'],
+        ['🛂','<b>EES applies at the border.</b> On your first entry a kiosk takes your <b>photo and fingerprints</b> instead of a stamp. Nothing to apply for, nothing to pay. Allow extra time on arrival at BER.'],
+        ['🗓️','<b>ETIAS is not required yet.</b> It is expected in late 2026. When it starts it will cost <b>20 euros</b>, last three years, and be applied for online. Ignore any site charging for it today.'],
+        ['🛂','<b>Passport check:</b> valid for at least three months beyond departure and issued within the last ten years.']
+      ]
+    },
+    visa: {
+      badge:['act','Schengen visa needed'],
+      title:'Apply for a Schengen visa before you travel.',
+      rows:[
+        ['📄','You need a <b>Schengen short-stay (type C) visa</b>. Apply at the <b>German embassy or consulate</b> for your region, with an appointment and documents.'],
+        ['⏳','<b>Apply early.</b> Appointment slots and processing times vary a lot by country and season. Do not leave it to the last weeks.'],
+        ['🗓️','Your visa sets how long you may stay, within the <b>90-in-180</b> limit. Use step 2 to sense-check the dates.'],
+        ['🛂','<b>EES also applies</b> to visa holders at the border: your photo and fingerprints are recorded on entry. ETIAS is only for visa-exempt travellers, so it will not apply to you.']
+      ]
+    },
+    eu: {
+      badge:['ok','Freedom of movement'],
+      title:'Nothing to arrange. Just bring valid ID.',
+      rows:[
+        ['✅','As an <b>EU, EEA or Swiss</b> citizen you have <b>freedom of movement</b>. No visa, no ETIAS, no 90-day limit.'],
+        ['🪪','Carry a <b>valid passport or national ID card</b>. That is all you need to enter and stay.'],
+        ['🛂','<b>EES does not apply to you</b>; it is for non-EU travellers. You keep using the EU/EEA lanes at the border.'],
+        ['🚶','The only real planning question left is how to spend your time. That is the fun part.']
+      ]
+    }
+  };
+
+  var chips = document.getElementById('chips');
+  var verdict = document.getElementById('verdict');
+  var vbadge = document.getElementById('vbadge');
+  var vtitle = document.getElementById('vtitle');
+  var vrows = document.getElementById('vrows');
+  var counter = document.getElementById('counter');
+  var naNote = document.getElementById('naNote');
+  var selected = null;
+
+  function renderVerdict(k){
+    var v = VERDICTS[k];
+    vbadge.className = 'badge ' + v.badge[0];
+    vbadge.textContent = v.badge[1];
+    vtitle.textContent = v.title;
+    vrows.innerHTML = v.rows.map(function(r){
+      return '<div class="row"><span class="ic">'+r[0]+'</span><span class="rt">'+r[1]+'</span></div>';
+    }).join('');
+    verdict.hidden = false;
+    var isEu = (k === 'eu');
+    counter.style.display = isEu ? 'none' : '';
+    naNote.hidden = !isEu;
+  }
+
+  chips.addEventListener('click', function(e){
+    var btn = e.target.closest('.chip');
+    if(!btn) return;
+    selected = btn.getAttribute('data-k');
+    Array.prototype.forEach.call(chips.querySelectorAll('.chip'), function(c){
+      c.setAttribute('aria-pressed', c === btn ? 'true' : 'false');
+    });
+    renderVerdict(selected);
+    resize();
+  });
+
+  // ---- 90/180 counter ----
+  var arr = document.getElementById('arr');
+  var dep = document.getElementById('dep');
+  var prior = document.getElementById('prior');
+  var usedN = document.getElementById('usedN');
+  var remN = document.getElementById('remN');
+  var untilLbl = document.getElementById('untilLbl');
+  var fillPrior = document.getElementById('fillPrior');
+  var fillTrip = document.getElementById('fillTrip');
+  var bar = document.getElementById('bar');
+  var vline = document.getElementById('vline');
+
+  function parseD(s){ if(!s) return null; var p = s.split('-'); return new Date(Date.UTC(+p[0], +p[1]-1, +p[2])); }
+  function fmt(d){
+    return d.toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric', timeZone:'UTC'});
+  }
+  function clampPrior(){
+    var n = parseInt(prior.value, 10);
+    if(isNaN(n) || n < 0) n = 0;
+    if(n > 90) n = 90;
+    return n;
+  }
+
+  function compute(){
+    var pr = clampPrior();
+    var a = parseD(arr.value), d = parseD(dep.value);
+    var tripDays = 0, valid = true, msg = '';
+    if(a && d){
+      var diff = Math.round((d - a) / 86400000) + 1; // inclusive of arrival & departure day
+      if(diff < 1){ valid = false; msg = 'Your departure date is before your arrival date. Check the dates.'; }
+      else tripDays = diff;
+    } else {
+      valid = false;
+    }
+
+    var used = pr + (valid ? tripDays : 0);
+    var rem = 90 - used;
+
+    // meter widths (cap at 100%)
+    var priorPct = Math.min(pr / 90, 1) * 100;
+    var tripPct = Math.min(Math.max(used, pr) / 90, 1) * 100 - priorPct;
+    if(tripPct < 0) tripPct = 0;
+    fillPrior.style.width = priorPct + '%';
+    fillTrip.style.left = priorPct + '%';
+    fillTrip.style.width = tripPct + '%';
+
+    usedN.textContent = valid ? used : pr;
+    remN.textContent = (90 - (valid ? used : pr));
+
+    bar.classList.toggle('over', used > 90);
+
+    if(!valid){
+      vline.className = 'vline ok';
+      vline.textContent = msg || 'Enter your arrival and departure dates to check this trip against the 90/180 limit.';
+      untilLbl.textContent = '';
+      resize();
+      return;
+    }
+
+    // latest possible stay end from arrival, given prior days
+    var allowFromArrival = 90 - pr;
+    if(allowFromArrival < 0) allowFromArrival = 0;
+    var lastDay = new Date(a.getTime() + (allowFromArrival - 1) * 86400000);
+
+    if(used > 90){
+      vline.className = 'vline over';
+      vline.innerHTML = 'This plan uses <b>'+used+' days</b>, which is <b>'+(used-90)+' over</b> the 90-day limit. Shorten the trip, or your last allowed day from this arrival is <b>'+fmt(lastDay)+'</b>.';
+      untilLbl.textContent = 'Over the limit';
+    } else if(rem <= 7){
+      vline.className = 'vline warn';
+      vline.innerHTML = 'This fits, but it is close: <b>'+rem+' day'+(rem===1?'':'s')+' to spare</b>. From this arrival you could stay until <b>'+fmt(lastDay)+'</b> at the latest.';
+      untilLbl.textContent = 'until ' + fmt(lastDay);
+    } else {
+      vline.className = 'vline ok';
+      vline.innerHTML = 'You are well within the limit: <b>'+rem+' days still allowed</b> after this '+tripDays+'-day trip. Plenty of room.';
+      untilLbl.textContent = 'until ' + fmt(lastDay);
+    }
+    resize();
+  }
+
+  arr.addEventListener('change', compute);
+  dep.addEventListener('change', compute);
+  arr.addEventListener('input', compute);
+  dep.addEventListener('input', compute);
+  prior.addEventListener('input', compute);
+  prior.addEventListener('change', compute);
+
+  function resize(){
+    if(window.BWBrand && typeof window.BWBrand.postHeight === 'function'){ window.BWBrand.postHeight(); }
+  }
+  compute();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

@@ -6334,5 +6334,39 @@
         "a": "BER is in fare zone C, so you need a Berlin ABC ticket for any train to or from the airport. In 2026 an ABC single costs 5.00 euros. Buy it from a BVG or VBB ticket machine or the app before you board, and if it is a paper ticket, stamp it in the small validator on the platform. The same ABC ticket covers your onward journey within its time limit."
       }
     ]
+  },
+  "do-you-need-a-visa-to-visit-berlin": {
+    "title": "Do You Need a Visa to Visit Berlin? FAQ",
+    "subtitle": "A local's plain answers on entering Berlin in 2026: who needs a visa, the Schengen 90/180 rule, the new EES border checks, and where ETIAS stands.",
+    "items": [
+      {
+        "q": "Do you need a visa to visit Berlin?",
+        "a": "It depends on your passport. Berlin is in Germany, part of the Schengen Area, so there is no separate Berlin visa. If you hold a visa-exempt passport, such as the US, UK, Canada, Australia, New Zealand, Japan or South Korea, you do not need a visa for a tourist trip and can stay up to 90 days. If your country is not on the visa-exempt list, you need to apply for a Schengen short-stay visa at a German embassy or consulate before you travel."
+      },
+      {
+        "q": "How long can I stay in Berlin without a visa?",
+        "a": "Visa-exempt visitors can stay up to 90 days within any rolling 180-day period. That limit is cumulative across the whole Schengen Area, not just Germany, and the 180-day window keeps rolling, so leaving for a few days does not reset it. For a normal Berlin holiday of a few days or a couple of weeks you will not come close to the limit."
+      },
+      {
+        "q": "What is EES and do I need to do anything for it?",
+        "a": "EES is the EU's Entry/Exit System, a biometric border system for non-EU travellers that has been fully operational since 10 April 2026. On your first entry a self-service kiosk or booth records your facial image and fingerprints along with your passport details, instead of an officer stamping your passport. There is nothing to apply for and nothing to pay. It happens automatically at the border. The only practical effect is that passport queues can be slower, so allow extra time when you land at BER."
+      },
+      {
+        "q": "Do I need ETIAS to visit Berlin in 2026?",
+        "a": "Not yet. As of mid-2026 ETIAS is not in force, so you cannot apply for it and you do not need it for a Berlin trip right now. It is expected to launch in the last quarter of 2026 with a grace period before it becomes mandatory. When it starts, visa-exempt travellers will apply online, pay a 20 euro fee, and receive an authorization valid for three years. Be careful of websites telling you to apply and pay for ETIAS today, because the real system is not open yet."
+      },
+      {
+        "q": "Which countries need a Schengen visa for Germany?",
+        "a": "Travellers whose passport is not on the EU's visa-exempt list need a Schengen short-stay (type C) visa. This includes many countries in Africa, Asia and elsewhere. You apply at the German mission responsible for your region, usually with an appointment, your passport, travel insurance, proof of accommodation and evidence you can support the trip. Apply well ahead, because appointment slots and processing times vary a lot by country and season."
+      },
+      {
+        "q": "Does my passport need to be valid for a certain time?",
+        "a": "Yes. For a Schengen trip your passport should be valid for at least three months beyond your planned departure date and have been issued within the last ten years. Checking this early is the single most common way to avoid a problem, so look at your expiry date before you book anything else."
+      },
+      {
+        "q": "Do EU, EEA or Swiss citizens need anything to visit Berlin?",
+        "a": "No. If you are an EU, EEA or Swiss citizen you have freedom of movement, so there is no visa, no ETIAS and no 90-day limit. You just need a valid passport or national ID card to enter and stay. EES does not apply to you either, and you continue to use the EU/EEA lanes at the border."
+      }
+    ]
   }
 }
