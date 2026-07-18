@@ -51,6 +51,9 @@ const TOPICS = [
     description: 'Clear answers for transport, money, luggage, safety, weather, and planning decisions visitors actually search for.',
     slugs: [
       'neukolln-berlin',
+      'berlin-emergency-numbers',
+      'smoking-in-berlin',
+      'do-you-need-a-car-in-berlin',
       'pharmacy-in-berlin',
       'doctor-in-berlin',
       'berlin-bike-lanes-tourists',
@@ -620,6 +623,9 @@ function relatedToolSlugFor(post) {
   if ((post.slug || '') === 'do-you-need-a-visa-to-visit-berlin') return 'berlin-entry-requirements';
   if ((post.slug || '') === 'berlin-airports') return 'berlin-airports';
   if ((post.slug || '') === 'halal-food-in-berlin') return 'halal-food-in-berlin';
+  if ((post.slug || '') === 'berlin-emergency-numbers') return 'berlin-emergency-numbers';
+  if ((post.slug || '') === 'smoking-in-berlin') return 'berlin-smoking-rules';
+  if ((post.slug || '') === 'do-you-need-a-car-in-berlin') return 'do-you-need-a-car-in-berlin';
   if (/(berlin-layover-guide|layover in berlin|ber layover|spend a layover)/.test(s)) return 'berlin-layover-planner';
   if (/(prenzlauer-berg-berlin|prenzlauer berg)/.test(s)) return 'prenzlauer-berg-walk';
   if (/(buy-berlin-transport-tickets-on-your-phone|tickets on your phone|phone ticket|bvg app)/.test(s)) return 'berlin-phone-ticket-picker';
