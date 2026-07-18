@@ -2731,9 +2731,9 @@
     "items": [
       "**For a normal city trip, no.** Berlin is flat, huge and built for public transport. The U-Bahn, S-Bahn, trams and buses cover almost everywhere on a single AB ticket.",
       "**A car adds three problems in the centre:** the low-emission zone, some of Germany's most managed street parking, and traffic that a bike or train slips straight past.",
-      "**The Umweltzone rule:** everything inside the S-Bahn ring needs a green Umweltplakette sticker. German rental and car-share cars almost always have it; a missing sticker is a 105 euro fine.",
-      "**Parking is a daily project:** roughly 1 to 3 euros an hour on central streets, 2 to 4 in garages with a daily cap near 24 euros, paid at the machine or a Handyparken app.",
-      "**A car earns its place off the train lines:** the Brandenburg lakes, the Spreewald or the Baltic coast. But Potsdam, Sachsenhausen and most classic day trips are easier by train.",
+      "**The Umweltzone rule:** vehicles inside the S-Bahn ring normally need a green Umweltplakette, including foreign registrations unless an official exemption applies. Driving or parking without the required sticker carries a **100 euro fine**.",
+      "**Parking depends on the exact zone:** current managed-street rates are **2, 3 or 4 euros an hour**. Check the sign and official map; garage and hotel prices vary too much for one Berlin-wide figure.",
+      "**A car earns its place for remote multi-stop plans:** rural Brandenburg villages, remote lakes or parts of the coast. Lübbenau and the main Spreewald canals, Potsdam and Sachsenhausen are all reachable by train.",
       "**The smart middle path is car-sharing:** unlock a car from an app for the one afternoon you need it, and skip the rental desk and week-long parking bill.",
       "**Rule of thumb:** rent for a day when a trip truly needs wheels, and let Berlin's trains be your car the rest of the time."
     ]
@@ -2743,13 +2743,13 @@
     "icon": "🚬",
     "kicker": "BERLINWALK.COM • TOURIST TIPS",
     "items": [
-      "**Indoor smoking is banned** in restaurants, cafés and workplaces. But Berlin keeps a real exception: a marked one-room **Raucherkneipe** under 75 m² that serves no hot food and admits no under-18s may still allow smoking.",
-      "**Vaping and e-cigarettes** follow the same rules as tobacco in almost every setting, including the full public-transport ban.",
-      "**Public transport is smoke-free.** No smoking or vaping inside trains, trams and buses, or on U-Bahn and S-Bahn platforms, except the marked smoking zones on some open-air platforms. A platform cigarette can cost about **40 euro**.",
-      "**Outdoor terraces, streets and parks** are where smoking is normal and allowed. If you are unsure, step outside; that is almost always the safe answer.",
-      "**Cannabis has been legal to possess for adults 18+** since 1 April 2024, up to **25 g in public**. But you **cannot legally buy it as a visitor**: there are no shops, and the only legal supply is non-profit clubs that require German residence.",
-      "**Public cannabis use is limited.** It is allowed only away from minors, more than **100 m from schools, playgrounds, daycare and sports grounds**, and **not in a pedestrian zone between 07:00 and 20:00**.",
-      "**The most avoidable fine** is cannabis inside one of those buffer zones or on transport. The checker below gives you the exact rule for where you are standing."
+      "**Main restaurant and café rooms are smoke-free.** Berlin allows narrow exceptions for a fully separated secondary smoking room or a marked one-room **Raucherkneipe** under 75 m² that meets every condition.",
+      "**Vaping is not described identically in every law.** Transport operators explicitly ban it outside designated areas; bars, restaurants and hotels can do the same through house rules. Ask or step outside.",
+      "**Public transport is smoke-free outside marked areas.** No smoking or vaping inside vehicles. Some open-air S-Bahn stations have designated smoking zones; enforcement and penalties depend on the operator.",
+      "**Outdoor tobacco smoking has no blanket citywide ban**, but terraces, schools, playgrounds, events and other sites can set stricter rules. Follow signs and house rules.",
+      "**Adults 18+ may possess up to 25 g of cannabis in public within the Act's limits.** Germany has no general recreational retail shops, and short-term visitors do not meet cultivation-association residence and membership rules.",
+      "**Public cannabis use is limited.** It is prohibited in the immediate presence of minors, in protected facilities and within sight of their entrances, and in or within sight of cultivation associations. Beyond 100 m from the relevant entrance it is no longer considered within sight; pedestrian zones are restricted from 07:00 to 20:00.",
+      "**There is no blanket safe park or side-street rule.** Check minors, entrances, signs, house rules and pedestrian-zone status; if unsure, do not consume in public."
     ]
   },
   "berlin-emergency-numbers": {
@@ -2757,12 +2757,12 @@
     "icon": "🚨",
     "kicker": "BERLINWALK.COM • TOURIST TIPS",
     "items": [
-      "**112 is the number to remember.** It reaches the ambulance and fire brigade for any medical emergency or fire. It is free, works without a German SIM or credit, and works across the whole EU.",
-      "**110 is the police.** Call it for a crime in progress, a theft or assault, a threat to your safety, or a serious traffic accident.",
-      "**Germany does not use 911.** And the numbers do not overlap: 112 will not get police, 110 will not send an ambulance. Match the number to the problem.",
-      "**116117 is for a doctor when it is not life-threatening**, like a fever or a sprain at 9pm on a Sunday. It runs around the clock when normal practices are closed.",
-      "**Emergency pharmacies** cover nights and Sundays on a rotation. Find the nearest one through the official Apothekerkammer Berlin Notdienstfinder; expect a small out-of-hours fee.",
-      "**If cards or a phone are stolen**, block cards on the central hotline **116 116** (from abroad +49 116 116), then file a police loss report (Verlustanzeige) for your insurance.",
+      "**112 is for a medical emergency or fire.** It is free and works across the EU. A foreign SIM is fine, but mobile emergency calls in Germany require an inserted SIM.",
+      "**110 is the police emergency number.** Call for a crime in progress, an assault, an immediate threat or road danger. Report a past theft with no current danger at a station or through the Internetwache.",
+      "**Germany's official numbers are 112 and 110.** Use 112 for medical or fire emergencies and 110 for immediate danger or a crime requiring police; the services coordinate when needed.",
+      "**116117 is for urgent medical help that is not life-threatening** when normal practices are closed. It runs 24/7, but the telephone service is officially German-only.",
+      "**Emergency pharmacies** cover nights, Sundays and public holidays on a rotation. The official emergency-service surcharge is **€2.50** when it applies.",
+      "**If cards are stolen**, use **116 116** for participating issuers or your bank's own emergency route. From abroad try +49 116 116, then +49 30 4050 4050 if needed; file a police Strafanzeige for theft.",
       "**Lost passport:** report it to the police, then contact your embassy in Berlin for an emergency travel document. Photograph your documents before you fly."
     ]
   }

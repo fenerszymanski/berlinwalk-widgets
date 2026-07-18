@@ -18,6 +18,7 @@
   }
   *{box-sizing:border-box}
   [hidden]{display:none!important}
+  .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
   html,body{margin:0}
   body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
   .bx{max-width:940px;margin:0 auto;padding:4px}
@@ -84,6 +85,13 @@
 
   .foot{margin-top:14px;font-size:12px;color:var(--stone);text-align:center;line-height:1.5}
   .foot b{color:var(--red-deep)}
+  details.credits{border-top:1px solid var(--line);margin-top:12px;padding-top:10px;position:relative}
+  details.credits summary{cursor:pointer;font-size:11.5px;color:var(--stone);font-weight:700;list-style:none;text-align:left}
+  details.credits summary::-webkit-details-marker{display:none}
+  details.credits summary::before{content:"▸ ";color:var(--lime)}
+  details.credits[open] summary::before{content:"▾ "}
+  details.credits .cr{position:absolute;z-index:20;left:0;right:0;bottom:calc(100% + 8px);font-size:11px;color:var(--stone);line-height:1.6;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;box-shadow:var(--shadow);max-height:min(300px,60vh);overflow:auto;text-align:left}
+  details.credits .cr a{color:var(--green);font-weight:700}
 
   @media (max-width:560px){
     .head h1{font-size:19px}
@@ -92,6 +100,7 @@
     .dial .num{font-size:36px}
     .result .top{flex-direction:column;align-items:flex-start;gap:9px}
   }
+  @media (prefers-reduced-motion:reduce){.sit{transition:none}}
 </style>
 </head>
 <body>
@@ -100,7 +109,7 @@
     <div class="head">
       <p class="kick">BerlinWalk.com • Berlin Safety</p>
       <h1>Berlin Emergency Number Finder</h1>
-      <p>Two numbers cover almost everything in Berlin. Not sure which? Tap what is happening and get the one number to dial, what to say, and the next step.</p>
+      <p>Use 112 for medical or fire emergencies and 110 for immediate police danger. Tap the situation for a calm first step and follow the operator's questions.</p>
     </div>
 
     <div class="body">
@@ -110,25 +119,36 @@
           <div class="num">112</div>
           <div class="for">Medical emergency or fire</div>
           <div class="desc">Ambulance and fire brigade. Someone collapses, chest pain, a bad injury, a fire.</div>
-          <span class="free">FREE • ANY PHONE • EU-WIDE</span>
+          <span class="free">FREE • MOBILE NEEDS INSERTED SIM • EU-WIDE</span>
         </div>
         <div class="dial police">
           <div class="num">110</div>
           <div class="for">Police</div>
-          <div class="desc">A crime in progress, a theft or assault, a threat to your safety, a serious crash.</div>
-          <span class="free">FREE • ANY PHONE</span>
+          <div class="desc">A crime in progress, an assault, an immediate threat to safety, or road danger.</div>
+          <span class="free">FREE • MOBILE NEEDS INSERTED SIM</span>
         </div>
       </div>
 
-      <div class="note911">Germany does not use <b>911</b>. And the two numbers do not overlap: 112 will not send the police, 110 will not send an ambulance.</div>
+      <div class="note911">Germany's official numbers are <b>112</b> and <b>110</b>, so do not rely on 911. Start with 112 for medical or fire emergencies and 110 for police danger; the services coordinate when needed.</div>
 
       <div class="divider"><span class="l"></span><h2>Not sure? Pick what is happening</h2><span class="l"></span></div>
 
       <div class="sits" id="sits"></div>
 
       <div id="result"></div>
+      <p id="resultStatus" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
 
-      <p class="foot">If you are ever unsure whether life is in danger, call <b>112</b>. It is always the safe first call.</p>
+      <p class="foot">For fire, serious injury or a life-threatening medical emergency, call <b>112</b>. For immediate danger or a crime requiring police, call <b>110</b>.</p>
+      <details class="credits">
+        <summary>Image credits</summary>
+        <div class="cr">
+          <a href="https://commons.wikimedia.org/wiki/File:Rettungswagen_Woelckpromenade_02.jpg" target="_blank" rel="noopener">Berlin ambulance</a>, Geoprofi Lars, CC BY-SA 4.0;
+          <a href="https://commons.wikimedia.org/wiki/File:German-police-berlin-corsa.jpg" target="_blank" rel="noopener">Berlin police car</a>, Wo st 01, CC BY-SA 3.0 DE;
+          <a href="https://commons.wikimedia.org/wiki/File:2022-10-09_Zentrale_Notaufnahme_Charit%C3%A9_Berlin.jpg" target="_blank" rel="noopener">Charité emergency entrance</a>, Bärbel Miemietz, CC BY-SA 4.0;
+          <a href="https://commons.wikimedia.org/wiki/File:Pharmacy_sign_Hamburg_Germany.JPG" target="_blank" rel="noopener">Apotheke sign</a>, Riggwelter, CC BY-SA 4.0;
+          <a href="https://commons.wikimedia.org/wiki/File:Berlin_-_U-Bahnhof_Alexanderplatz_-_Bahnsteig_der_U5_(6904428897).jpg" target="_blank" rel="noopener">Alexanderplatz station</a>, IngolfBLN, CC BY-SA 2.0.
+        </div>
+      </details>
     </div>
   </div>
 </div>
@@ -138,55 +158,55 @@
   var SITS = [
     {
       id:'collapse', em:'🫥', label:'Someone collapsed or is badly hurt',
-      big:'112', bigClass:'red', tone:'red', title:'Call 112 — ambulance',
+      big:'112', bigClass:'red', tone:'red', title:'Call 112: ambulance',
       tags:[['free','Free call']],
       say:'Ambulance, please.', de:'Notarzt, bitte.',
-      step:'Give your exact location first (street, station or nearest big landmark), then what happened. Stay on the line; they may guide you until help arrives.'
+      step:'Clearly say what happened and where you are, then answer the operator\'s questions. Stay on the line; they may guide you until help arrives.'
     },
     {
       id:'breathing', em:'🫁', label:'Chest pain or trouble breathing',
-      big:'112', bigClass:'red', tone:'red', title:'Call 112 — this is an emergency',
+      big:'112', bigClass:'red', tone:'red', title:'Call 112: this is an emergency',
       tags:[['free','Free call']],
       say:'I need an ambulance.', de:'Ich brauche einen Krankenwagen.',
-      step:'Do not wait to see if it passes. Location first, then symptoms. English is fine with Berlin dispatch.'
+      step:'Do not wait to see if it passes. Clearly state the symptoms and where you are, then answer the operator\'s questions. English is often available but not guaranteed; use short sentences and ask a German speaker nearby to help if possible.'
     },
     {
       id:'fire', em:'🔥', label:'There is a fire',
-      big:'112', bigClass:'red', tone:'red', title:'Call 112 — fire brigade',
+      big:'112', bigClass:'red', tone:'red', title:'Call 112: fire brigade',
       tags:[['free','Free call']],
       say:'Fire! I need the fire brigade.', de:'Feuer! Ich brauche die Feuerwehr.',
-      step:'Get out and stay out first. Give the address, then what is burning and whether anyone is still inside.'
+      step:'Get out and stay out first. Clearly state the address, what is burning and whether anyone is still inside, then answer the operator\'s questions.'
     },
     {
       id:'crime', em:'🚨', label:'A crime is happening / I feel threatened',
-      big:'110', bigClass:'', tone:'green', title:'Call 110 — police',
+      big:'110', bigClass:'', tone:'green', title:'Call 110: police',
       tags:[['free','Free call']],
       say:'Police, please. I need help.', de:'Polizei, bitte. Ich brauche Hilfe.',
-      step:'Get to a safe, public, well-lit spot if you can. Location first, then what is happening.'
+      step:'Get to a safe, public, well-lit spot if you can. Clearly state what is happening and where you are, then answer the operator\'s questions.'
     },
     {
       id:'stolen', em:'👛', label:'My wallet, cards or phone were stolen',
       big:'116 116', bigClass:'', bigSmall:true, tone:'green', title:'Block your cards, then report it',
-      tags:[['free','Card hotline'],['online','Police report']],
+      tags:[['online','24/7 card hotline'],['online','Police report']],
       say:'', de:'',
-      step:'Block bank and credit cards now on the central hotline 116 116 (from abroad +49 116 116), or your bank app if faster. Then file a police loss report (Verlustanzeige) at any station or the Berlin police Internetwache online. You need that report number for travel insurance.',
+      step:'Use 116 116 for participating card issuers, or your bank app or issuer number if faster. From outside Germany try +49 116 116; if it does not connect, use +49 30 4050 4050. Then file a police theft report at a station or through the Berlin police Internetwache. Keep the report number for travel insurance.',
       link:['Berlin police Internetwache','https://www.internetwache-polizei-berlin.de/'],
-      note:'A simple theft with no danger does not need a 110 call.'
+      note:'A simple theft with no immediate danger does not need a 110 call. Mobile and international call charges for the blocking hotline can vary.'
     },
     {
       id:'doctor', em:'🤒', label:'I need a doctor, but it is not life-threatening',
-      big:'116117', bigClass:'', tone:'amber', title:'Call 116117 — doctor on call',
+      big:'116117', bigClass:'', tone:'amber', title:'Call 116117: doctor on call',
       tags:[['free','24/7 service']],
       say:'I need a doctor.', de:'Ich brauche einen Arzt.',
-      step:'For a fever, an ear infection, a sprain or similar when practices are closed at night or on weekends. Runs around the clock.',
-      link:['More: seeing a doctor in Berlin','https://www.berlinwalk.com/post/doctor-in-berlin']
+      step:'For a fever, an ear infection, a sprain or similar when practices are closed at night or on weekends. Runs around the clock, but the telephone service is officially German-only.',
+      link:['English information and practice search','https://www.116117.de/de/englisch.php']
     },
     {
       id:'pharmacy', em:'💊', label:'I need a pharmacy at night or on Sunday',
       big:'Notdienst', bigClass:'', bigSmall:true, tone:'amber', title:'Find the emergency pharmacy on rotation',
       tags:[['online','Official finder'],['pay','Small out-of-hours fee']],
       say:'', de:'',
-      step:'There is always an Apotheke open overnight and on Sundays. Use the official Notdienstfinder to find the nearest one. Expect a small emergency fee of a few euro.',
+      step:'There is always an Apotheke on the emergency rota overnight and on Sundays. Use the official Notdienstfinder to find the nearest one. The official out-of-hours surcharge is €2.50 when it applies.',
       link:['Apothekerkammer Berlin Notdienstfinder','https://www.akberlin.de/patientinnen/notdienstfinder']
     },
     {
@@ -194,28 +214,29 @@
       big:'Embassy', bigClass:'', bigSmall:true, tone:'green', title:'Police report, then your embassy',
       tags:[['online','Police report'],['pay','Consular fee']],
       say:'', de:'',
-      step:'Report it lost or stolen to the police and get the loss report. Then contact your own embassy or consulate in Berlin for an emergency travel document. Go on a weekday; consular hours are short.',
+      step:'Report the loss or theft to police promptly. Then contact your own embassy or consulate and follow its emergency-document and appointment instructions; procedures and out-of-hours help vary by country.',
       note:'Tip: photograph your passport and insurance before you fly and save it in your email.'
     },
     {
       id:'poison', em:'☠️', label:'Possible poisoning',
       big:'030 19240', bigClass:'red', bigSmall:true, tone:'red', title:'Poison emergency line (Charité)',
-      tags:[['free','24/7']],
+      tags:[['online','24/7']],
       say:'', de:'',
-      step:'For a swallowed cleaning product, a wrong medication dose or an unknown plant or mushroom. Staffed around the clock. If the person is unconscious or struggling to breathe, call 112 first.'
+      step:'For a swallowed cleaning product, a wrong medication dose or an unknown plant or mushroom. Staffed around the clock; standard phone charges can depend on your provider. If the person is unconscious or struggling to breathe, call 112 first.'
     },
     {
       id:'crisis', em:'💚', label:'A mental-health crisis',
-      big:'Krisendienst', bigClass:'', bigSmall:true, tone:'green', title:'Berliner Krisendienst — free, confidential',
+      big:'Krisendienst', bigClass:'', bigSmall:true, tone:'green', title:'Berliner Krisendienst: free, confidential',
       tags:[['free','Around the clock']],
       say:'', de:'',
-      step:'Free, confidential support with region-based crisis lines reachable at any hour. Their site lists the right number for each part of the city. If there is immediate danger to life, call 112.',
+      step:'Phone help is reachable around the clock and free, anonymous on request. Regional centres provide crisis counselling from 16:00 to 24:00; outside those hours calls route through the central service. If there is immediate danger to life, call 112.',
       link:['Berliner Krisendienst','https://www.berliner-krisendienst.de/en/']
     }
   ];
 
   var sitsEl = document.getElementById('sits');
   var resultEl = document.getElementById('result');
+  var resultStatus = document.getElementById('resultStatus');
   var current = null;
 
   SITS.forEach(function(s){
@@ -238,7 +259,7 @@
     Array.prototype.forEach.call(sitsEl.children, function(btn){
       btn.setAttribute('aria-pressed', btn.getAttribute('data-id')===current ? 'true':'false');
     });
-    if(!current){ resultEl.innerHTML=''; nudge(); return; }
+    if(!current){ resultEl.innerHTML=''; resultStatus.textContent='Selection cleared.'; nudge(); return; }
     render(s);
     nudge();
   }
@@ -265,10 +286,17 @@
         '</div>'+
         '<div class="rows">'+rows+'</div>'+
       '</div>';
+    resultStatus.textContent = s.title + '. ' + s.step;
   }
 
   function nudge(){
     if(window.BWBrand && typeof window.BWBrand.postHeight==='function'){ window.BWBrand.postHeight(); }
+  }
+  var credits = document.querySelector('.credits');
+  if(credits){
+    credits.addEventListener('toggle', nudge);
+    document.addEventListener('click', function(e){ if(credits.open && !credits.contains(e.target)) credits.open=false; });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape' && credits.open){ credits.open=false; credits.querySelector('summary').focus(); } });
   }
 })();
 </script>

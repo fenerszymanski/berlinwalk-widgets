@@ -24,7 +24,7 @@
 
   .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:18px 22px 16px}
   .head .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:600;margin:0 0 6px}
-  .head h2{margin:0;font-size:20px;font-weight:800;letter-spacing:-.01em}
+  .head h1{margin:0;font-size:20px;font-weight:800;letter-spacing:-.01em}
   .head p{margin:6px 0 0;font-size:13px;color:#e7f2e3;max-width:640px}
 
   .body{padding:16px 18px 6px}
@@ -64,29 +64,33 @@
   .meter .mh span:last-child{font-weight:500;color:var(--stone);font-size:11px}
   .track{position:relative;height:22px;border-radius:8px;background:#eef2e8;overflow:hidden;display:flex}
   .fill{height:100%;display:flex;align-items:center;transition:width .5s cubic-bezier(.22,1,.36,1)}
-  .fill.car{background:linear-gradient(90deg,#c98a2e,#e0a83c)}
-  .fill.tr{background:linear-gradient(90deg,#2e7d32,#7CB342)}
+  .fill.car{background:#8A5A00}
+  .fill.tr{background:#1B5E20}
   .fill b{font-family:'IBM Plex Mono',monospace;font-size:10px;color:#fff;padding:0 7px;white-space:nowrap;font-weight:700}
   .mkey{display:flex;gap:16px;font-size:11px;color:var(--stone);font-weight:600;padding:0 18px 4px}
   .mkey i{width:10px;height:10px;border-radius:3px;display:inline-block;margin-right:5px;vertical-align:-1px}
 
   .note{margin:8px 18px 0;background:var(--bone);border:1px solid var(--line);border-left:4px solid var(--lime);border-radius:10px;padding:11px 13px;font-size:12.5px;color:#2b3a29}
   .note b{color:var(--green-deep)}
+  .calc-note{margin:9px 18px 0;font-size:10.8px;color:var(--stone);line-height:1.55}
+  .calc-note a{color:var(--green);font-weight:700}
+  .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 
   .foot{padding:14px 18px 18px}
-  details.credits{border-top:1px solid var(--line);margin-top:4px;padding-top:10px}
+  details.credits{border-top:1px solid var(--line);margin-top:4px;padding-top:10px;position:relative}
   details.credits summary{cursor:pointer;font-size:11.5px;color:var(--stone);font-weight:600;list-style:none}
   details.credits summary::-webkit-details-marker{display:none}
   details.credits summary::before{content:"▸ ";color:var(--lime)}
   details.credits[open] summary::before{content:"▾ "}
-  details.credits .cr{font-size:11px;color:var(--stone);margin-top:8px;line-height:1.55}
+  details.credits .cr{position:absolute;z-index:20;left:0;right:0;bottom:calc(100% + 8px);font-size:11px;color:var(--stone);line-height:1.55;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;box-shadow:var(--shadow);max-height:min(300px,60vh);overflow:auto}
   details.credits .cr a{color:var(--green)}
 
   @media(max-width:560px){
     .cols{grid-template-columns:1fr}
-    .head h2{font-size:18px}
+    .head h1{font-size:18px}
     .seg button{min-width:calc(50% - 4px)}
   }
+  @media(prefers-reduced-motion:reduce){.seg button,.fill{transition:none}}
 </style>
 </head>
 <body>
@@ -94,22 +98,22 @@
   <div class="card">
     <div class="head">
       <p class="eyebrow">BerlinWalk • Car or no car</p>
-      <h2>Do you need a car in Berlin?</h2>
+      <h1>Do you need a car in Berlin?</h1>
       <p>Describe your actual trip. This weighs where you are staying, what you want to do and your day trips, then gives an honest verdict and shows what a car really costs against the trains.</p>
     </div>
 
     <div class="body">
       <div class="qs">
-        <p class="label"><span class="n">1</span> Where are you based?</p>
-        <div class="seg" data-group="base">
+        <p class="label" id="baseLabel"><span class="n">1</span> Where are you based?</p>
+        <div class="seg" data-group="base" role="group" aria-labelledby="baseLabel">
           <button data-val="inside" aria-pressed="true">Inside the S-Bahn ring<span class="sub">Mitte, Kreuzberg, Prenzlauer Berg</span></button>
           <button data-val="outside" aria-pressed="false">Outside the ring<span class="sub">Outer district, easier parking</span></button>
         </div>
       </div>
 
       <div class="qs">
-        <p class="label"><span class="n">2</span> Your Berlin is mostly…</p>
-        <div class="seg" data-group="focus">
+        <p class="label" id="focusLabel"><span class="n">2</span> Your Berlin is mostly…</p>
+        <div class="seg" data-group="focus" role="group" aria-labelledby="focusLabel">
           <button data-val="sights" aria-pressed="true">City sights &amp; museums<span class="sub">Central, walkable, train-friendly</span></button>
           <button data-val="lakes" aria-pressed="false">Lakes &amp; nature<span class="sub">Some spots off the main lines</span></button>
           <button data-val="family" aria-pressed="false">Family + lots of luggage<span class="sub">Kids, bags, strollers</span></button>
@@ -117,19 +121,19 @@
       </div>
 
       <div class="qs">
-        <p class="label"><span class="n">3</span> Out-of-town day trips?</p>
-        <div class="seg" data-group="trips">
+        <p class="label" id="tripsLabel"><span class="n">3</span> Out-of-town day trips?</p>
+        <div class="seg" data-group="trips" role="group" aria-labelledby="tripsLabel">
           <button data-val="none" aria-pressed="true">None<span class="sub">Staying in the city</span></button>
           <button data-val="classic" aria-pressed="false">1–2 classic<span class="sub">Potsdam, Sachsenhausen</span></button>
-          <button data-val="offrail" aria-pressed="false">Off the train lines<span class="sub">Spreewald, Baltic, small villages</span></button>
+          <button data-val="offrail" aria-pressed="false">Remote rural stops<span class="sub">Several villages, remote lakes, coast</span></button>
         </div>
       </div>
 
       <div class="qs">
-        <p class="label"><span class="n">4</span> How many nights in Berlin?</p>
+        <label class="label" for="nights"><span class="n">4</span> How many nights in Berlin?</label>
         <div class="slidewrap">
-          <input type="range" id="nights" min="1" max="10" value="4" />
-          <span class="nights" id="nightsOut">4 nights</span>
+          <input type="range" id="nights" min="1" max="10" value="4" aria-describedby="nightsOut" />
+          <output class="nights" id="nightsOut" for="nights">4 nights</output>
         </div>
       </div>
     </div>
@@ -139,6 +143,7 @@
       <h3 id="vhead">Skip the car</h3>
       <p id="vbody">Berlin's trains reach everything you have described.</p>
     </div>
+    <p id="verdictStatus" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
 
     <div class="cols">
       <div class="col" id="colCar">
@@ -155,17 +160,17 @@
     <div class="meters" id="meters"></div>
 
     <div class="note" id="note"></div>
+    <p class="calc-note">Illustrative comparison only. Car estimate uses €50 per travel day plus assumed parking and excludes fuel, insurance extras and fees. Transit uses current 2026 <a href="https://www.bvg.de/en/subscriptions-and-tickets/all-tickets/24h-tickets/24h-ticket" target="_blank" rel="noopener">BVG AB 24-hour (€11.20)</a> and <a href="https://www.bvg.de/en/subscriptions-and-tickets/subscriptions/deutschland-ticket" target="_blank" rel="noopener">Deutschlandticket (€63)</a> prices. The Deutschlandticket is personal, subscription-based and tied to a calendar month, so check your dates and cancellation terms.</p>
 
     <div class="foot">
       <details class="credits">
         <summary>Image credits</summary>
         <div class="cr" id="creditsBody">
-          Article photos via Wikimedia Commons, reused under their licenses:
-          Berlin Mitte street by Dguendel (CC BY 3.0);
-          Umweltzone sign by Frank M. Rauch (CC BY-SA 3.0 DE);
-          Parkscheinautomat by IgorCalzone1 (CC BY-SA 4.0);
-          car-sharing car by Michal Beim (CC BY-SA 4.0);
-          Spreewald canal by TricksterWildcat (CC BY-SA 4.0).
+          <a href="https://commons.wikimedia.org/wiki/File:Berlin-Mitte,_Behrenstra%C3%9Fe,_western_part.JPG" target="_blank" rel="noopener">Berlin Mitte street</a>, Dguendel, <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0</a>;
+          <a href="https://commons.wikimedia.org/wiki/File:Umweltzone-Berlin.jpg" target="_blank" rel="noopener">Umweltzone sign</a>, Frank M. Rauch, <a href="https://creativecommons.org/licenses/by-sa/3.0/de/deed.en" target="_blank" rel="noopener">CC BY-SA 3.0 DE</a>;
+          <a href="https://commons.wikimedia.org/wiki/File:Parkscheinautomat_Schmiljanstra%C3%9Fe_Berlin.jpg" target="_blank" rel="noopener">parking machine</a>, IgorCalzone1, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>;
+          <a href="https://commons.wikimedia.org/wiki/File:BMW_i3_of_DriveNow_in_Berlin.jpg" target="_blank" rel="noopener">car-sharing car</a>, Michal Beim, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>;
+          <a href="https://commons.wikimedia.org/wiki/File:Kahn_boats_in_L%C3%BCbbenau_canal.jpg" target="_blank" rel="noopener">Spreewald canal</a>, TricksterWildcat, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.
         </div>
       </details>
     </div>
@@ -186,6 +191,7 @@
     });
   });
   var nightsEl=document.getElementById('nights');
+  var verdictStatus=document.getElementById('verdictStatus');
   nightsEl.addEventListener('input',function(){
     state.nights=parseInt(nightsEl.value,10);
     document.getElementById('nightsOut').textContent=state.nights+(state.nights===1?' night':' nights');
@@ -197,13 +203,16 @@
 
   function compute(){
     var n=state.nights;
-    // honest cost model
-    var parkPerDay = state.base==='inside' ? 20 : 8;
-    var rentalPerDay = 48;
-    var carWeek = rentalPerDay*n + parkPerDay*n;           // keep a car the whole stay
-    var abDay = 9.90;
-    var trWeek = n>=5 ? 58 : abDay*n;                      // Deutschlandticket kicks in for longer stays
-    var trLabel = n>=5 ? 'Deutschlandticket month' : 'AB day tickets';
+    var travelDays=n+1;
+    // Illustrative car assumptions; transit uses official 2026 prices.
+    var parkPerDay = state.base==='inside' ? 24 : 8;
+    var rentalPerDay = 50;
+    var carWeek = rentalPerDay*travelDays + parkPerDay*travelDays;
+    var abDay = 11.20;
+    var dayTicketTotal = abDay*travelDays;
+    var useDeutschland = dayTicketTotal>63;
+    var trWeek = useDeutschland ? 63 : dayTicketTotal;
+    var trLabel = useDeutschland ? 'Deutschlandticket, if one calendar month fits' : travelDays+' AB 24-hour ticket'+(travelDays===1?'':'s');
 
     // need-a-car score
     var score=0;
@@ -219,29 +228,29 @@
     var carReach = clamp(state.trips==='offrail'?92 : (state.focus==='lakes'?70:54));
     var trReach = clamp(state.trips==='offrail'?46 : 90 - (state.focus==='family'?8:0));
 
-    return {n:n,carWeek:carWeek,trWeek:trWeek,trLabel:trLabel,score:score,parkPerDay:parkPerDay,
+    return {n:n,travelDays:travelDays,carWeek:carWeek,trWeek:trWeek,trLabel:trLabel,score:score,parkPerDay:parkPerDay,
       m:{Cost:[carCost,trCostM],Hassle:[carHassle,trHassle],Reach:[carReach,trReach]}};
   }
 
   function verdict(c){
     if(state.trips==='offrail'){
       return {tag:'Verdict',head:'Rent a car for the day trips only',
-        body:'Your off-the-map days genuinely need wheels. Rent or car-share for those days, then hand it back. Do not park a car in the city the rest of the week.',winCar:true};
+        body:'Your remote multi-stop days may need wheels. Rent or car-share for those days, then hand it back. Lübbenau and the main Spreewald gateway are still reachable by train.'};
     }
     if(c.score>=2){
       return {tag:'Verdict',head:'Car-share for a day, not a week',
-        body:'A car helps for a slice of this trip. Unlock a shared car from an app for the one afternoon you need it, and let the trains handle the city.',winCar:false};
+        body:'A car helps for a slice of this trip. Unlock a shared car from an app for the one afternoon you need it, and let the trains handle the city.'};
     }
     return {tag:'Verdict',head:'Skip the car',
-      body:'Everything you have described sits on Berlin\'s rail network. A car would mostly add the low-emission zone, paid parking and traffic. Buy the transport ticket instead.',winCar:false};
+      body:'Everything you have described sits on Berlin\'s rail network. A car would mostly add the low-emission zone, paid parking and traffic. Buy the transport ticket instead.'};
   }
 
   function meterRow(label,car,tr){
     return '<div class="meter"><div class="mh"><span>'+label+'</span><span>'+
       (label==='Cost'?'higher = more expensive':label==='Hassle'?'higher = more stress':'higher = reaches more')+
       '</span></div>'+
-      '<div class="track"><div class="fill car" style="width:'+car+'%"><b>'+car+'</b></div></div>'+
-      '<div class="track" style="margin-top:5px"><div class="fill tr" style="width:'+tr+'%"><b>'+tr+'</b></div></div></div>';
+      '<div class="track"><div class="fill car" role="progressbar" aria-label="Car '+label.toLowerCase()+' score '+car+' out of 100" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+car+'" style="width:'+car+'%"><b>'+car+'</b></div></div>'+
+      '<div class="track" style="margin-top:5px"><div class="fill tr" role="progressbar" aria-label="Public transport '+label.toLowerCase()+' score '+tr+' out of 100" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+tr+'" style="width:'+tr+'%"><b>'+tr+'</b></div></div></div>';
   }
 
   function render(){
@@ -249,11 +258,12 @@
     document.getElementById('vtag').textContent=v.tag;
     document.getElementById('vhead').textContent=v.head;
     document.getElementById('vbody').textContent=v.body;
+    verdictStatus.textContent=v.head+'. '+v.body;
 
-    document.getElementById('carCost').innerHTML=eur(c.carWeek)+'<small>rental + '+(state.base==='inside'?'central':'outer')+' parking, '+c.n+(c.n===1?' night':' nights')+'</small>';
+    document.getElementById('carCost').innerHTML=eur(c.carWeek)+'<small>illustrative rental + '+(state.base==='inside'?'central':'outer')+' parking, '+c.travelDays+' travel days</small>';
     document.getElementById('trCost').innerHTML=eur(c.trWeek)+'<small>'+c.trLabel+', all modes</small>';
 
-    // highlight the honest winner column
+    // The full-trip comparison remains train versus keeping a car for every travel day.
     var colCar=document.getElementById('colCar'), colTr=document.getElementById('colTr');
     colCar.classList.toggle('win', false);
     colTr.classList.toggle('win', true);
@@ -262,18 +272,23 @@
     meters.innerHTML=meterRow('Cost',c.m.Cost[0],c.m.Cost[1])+meterRow('Hassle',c.m.Hassle[0],c.m.Hassle[1])+meterRow('Reach',c.m.Reach[0],c.m.Reach[1]);
 
     var note=document.getElementById('note');
-    var park=Math.round(c.parkPerDay*c.n);
     if(state.trips==='offrail'){
-      note.innerHTML='<b>For your off-rail days:</b> a car-share or one-day rental in Germany already carries the green Umweltzone sticker, so the low-emission rule is handled. Just remember a car dropped back inside the ring still lands in a paid parking zone.';
+      note.innerHTML='<b>For your remote days:</b> confirm the green Umweltzone marking with the rental or car-sharing operator. Many free-floating providers include eligible public parking inside their business area, but return zones and 48-hour restrictions differ. Check the app before ending the trip.';
     } else if(c.score>=2){
-      note.innerHTML='<b>The maths on a full-week car:</b> keeping one all '+c.n+' nights adds about <b>'+eur(park)+'</b> in '+(state.base==='inside'?'central':'outer')+' parking alone, on top of rental. A shared car for the hours you actually drive skips most of that.';
+      note.innerHTML='<b>The illustrative full-trip estimate:</b> keeping one for '+c.travelDays+' travel days adds about <b>'+eur(c.parkPerDay*c.travelDays)+'</b> in assumed '+(state.base==='inside'?'central':'outer')+' parking, on top of rental. Verify your hotel, garage or street rate before booking.';
     } else {
-      note.innerHTML='<b>Why the trains win here:</b> one AB ticket covers the U-Bahn, S-Bahn, trams and buses, and the night trains run late. A parked car would cost you roughly <b>'+eur(park)+'</b> in '+(state.base==='inside'?'central':'outer')+' parking across '+c.n+' nights, before fuel or rental.';
+      note.innerHTML='<b>Why the trains win here:</b> one AB ticket covers the U-Bahn, S-Bahn, trams and buses. The car figure is only an illustration, using about <b>'+eur(c.parkPerDay*c.travelDays)+'</b> in '+(state.base==='inside'?'central':'outer')+' parking across '+c.travelDays+' travel days before fuel or extra fees.';
     }
 
     if(window.BWResize) window.BWResize();
   }
 
+  var credits=document.querySelector('.credits');
+  if(credits){
+    credits.addEventListener('toggle',function(){if(window.BWResize) window.BWResize();});
+    document.addEventListener('click',function(e){if(credits.open&&!credits.contains(e.target))credits.open=false;});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&credits.open){credits.open=false;credits.querySelector('summary').focus();}});
+  }
   render();
 })();
 </script>

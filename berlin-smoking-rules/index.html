@@ -17,6 +17,7 @@
   }
   *{box-sizing:border-box}
   [hidden]{display:none!important}
+  .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
   html,body{margin:0}
   body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
   .bx{max-width:940px;margin:0 auto;padding:4px}
@@ -70,14 +71,16 @@
 
   .placeholder{margin:15px 0 2px;border:1px dashed #cfdcc2;border-radius:13px;background:#f1f6ea;padding:15px;color:var(--stone);font-size:12.5px;font-weight:600;line-height:1.5}
 
-  .reftoggle{margin:16px 0 0;border-top:1px solid var(--line);padding-top:12px}
+  .reftoggle{margin:16px 0 0;border-top:1px solid var(--line);padding-top:12px;position:relative}
   .reftoggle summary{cursor:pointer;font-size:12.5px;font-weight:800;color:var(--green-deep);list-style:none;display:flex;align-items:center;gap:7px}
   .reftoggle summary::-webkit-details-marker{display:none}
   .reftoggle summary .caret{transition:transform .15s;font-size:11px}
   .reftoggle[open] summary .caret{transform:rotate(90deg)}
+  .reftoggle>div{position:absolute;z-index:20;left:0;right:0;bottom:calc(100% + 8px);background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px;box-shadow:var(--shadow);max-height:min(430px,65vh);overflow:auto}
   .reftable{width:100%;border-collapse:collapse;margin-top:11px;font-size:11.5px}
   .reftable th,.reftable td{text-align:left;padding:7px 8px;border-bottom:1px solid #e6efd9;vertical-align:top}
   .reftable th{color:var(--green-deep);font-weight:800;font-size:10.5px;text-transform:uppercase;letter-spacing:.04em}
+  .reftable tbody th{text-transform:none;letter-spacing:0;font-size:11px}
   .reftable td b{font-weight:800}
   .tag{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:9.5px;font-weight:700;padding:2px 6px;border-radius:6px}
   .tag.ok{background:#e2f2d3;color:#2c5218}.tag.no{background:#fbdcdf;color:#8a1a25}
@@ -86,6 +89,13 @@
   .foot{padding:12px 18px 16px}
   .disc{font-size:11.5px;color:var(--stone);line-height:1.5;margin:0}
   .disc b{color:var(--green-deep)}
+  details.credits{border-top:1px solid var(--line);margin-top:12px;padding-top:10px;position:relative}
+  details.credits summary{cursor:pointer;font-size:11.5px;color:var(--stone);font-weight:700;list-style:none}
+  details.credits summary::-webkit-details-marker{display:none}
+  details.credits summary::before{content:"▸ ";color:var(--lime)}
+  details.credits[open] summary::before{content:"▾ "}
+  details.credits .cr{position:absolute;z-index:20;left:0;right:0;bottom:calc(100% + 8px);font-size:11px;color:var(--stone);line-height:1.6;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;box-shadow:var(--shadow);max-height:min(300px,60vh);overflow:auto}
+  details.credits .cr a{color:var(--green);font-weight:700}
   a.src{color:var(--green);font-weight:700;text-decoration:none;border-bottom:1.5px solid var(--soft)}
   a.src:hover{border-color:var(--green)}
   .row .rt a{color:var(--green);font-weight:800;text-decoration:underline;text-underline-offset:2px}
@@ -98,6 +108,7 @@
     .subs{grid-template-columns:1fr}
     .places{grid-template-columns:1fr}
   }
+  @media(prefers-reduced-motion:reduce){.chip,.reftoggle summary .caret{transition:none}}
 </style>
 </head>
 <body>
@@ -106,20 +117,20 @@
     <div class="head">
       <p class="kick">BerlinWalk.com • Berlin smoking rules 2026</p>
       <h1>Can I smoke here? Check the Berlin rule before you light up</h1>
-      <p>Berlin lets you smoke in some places most cities do not, and fines you in a few that feel harmless. Pick what you are using, then pick where you are, and get the exact rule, the likely fine, and one practical move.</p>
+      <p>Berlin lets you smoke in some places many visitors do not expect, while transport and cannabis rules stay strict. Pick what you are using and where you are for practical, current guidance.</p>
     </div>
 
     <!-- STEP 1 -->
     <div class="sect">
-      <div class="step"><span class="num">1</span><h2>What are you using?</h2></div>
-      <div class="subs" id="subs">
+      <div class="step"><span class="num">1</span><h2 id="subHeading">What are you using?</h2></div>
+      <div class="subs" id="subs" role="group" aria-labelledby="subHeading">
         <button class="chip" data-k="cig" aria-pressed="false">
-          <span class="flag">🚬</span>
+          <span class="flag" aria-hidden="true">🚬</span>
           <span class="t">Cigarette or vape</span>
           <span class="s">Tobacco, roll-ups, e-cigarettes and heated tobacco</span>
         </button>
         <button class="chip" data-k="cannabis" aria-pressed="false">
-          <span class="flag">🌿</span>
+          <span class="flag" aria-hidden="true">🌿</span>
           <span class="t">Cannabis</span>
           <span class="s">Legal to possess for adults since 2024, with limits</span>
         </button>
@@ -127,37 +138,39 @@
 
       <div class="cannabis-note" id="cannabisNote" hidden>
         <span class="ic">ℹ️</span>
-        <span class="t"><b>Possession is legal, buying is not for visitors.</b> Adults 18 and over may carry up to 25 g in public, but there are no cannabis shops in Germany. The only legal supply is non-profit cannabis clubs that require German residence, so as a tourist you cannot legally buy it. Street dealers stay illegal.</span>
+        <span class="t"><b>Possession and legal supply are different.</b> Adults 18 and over may carry up to 25 g in public, but Germany has no general retail cannabis shops. Cultivation associations require at least six months of German residence and a minimum three-month membership, so short-term visitors cannot use that route. Street sales remain illegal.</span>
       </div>
     </div>
 
     <!-- STEP 2 -->
     <div class="sect">
-      <div class="step"><span class="num">2</span><h2>Where are you?</h2></div>
-      <div class="places" id="places">
-        <button class="chip" data-p="restaurant" aria-pressed="false"><span class="flag">🍽️</span><span class="t">Indoor restaurant or café</span></button>
-        <button class="chip" data-p="bar" aria-pressed="false"><span class="flag">🍺</span><span class="t">Indoor bar or Kneipe</span></button>
-        <button class="chip" data-p="hotel" aria-pressed="false"><span class="flag">🏨</span><span class="t">Hotel room</span></button>
-        <button class="chip" data-p="platform" aria-pressed="false"><span class="flag">🚉</span><span class="t">U-Bahn or S-Bahn platform</span></button>
-        <button class="chip" data-p="vehicle" aria-pressed="false"><span class="flag">🚆</span><span class="t">Inside a train, tram or bus</span></button>
-        <button class="chip" data-p="terrace" aria-pressed="false"><span class="flag">☕</span><span class="t">Outdoor café or bar terrace</span></button>
-        <button class="chip" data-p="park" aria-pressed="false"><span class="flag">🌳</span><span class="t">Park, street or sidewalk</span></button>
-        <button class="chip" data-p="school" aria-pressed="false"><span class="flag">🏫</span><span class="t">Near a school or playground</span></button>
-        <button class="chip" data-p="pedzone" aria-pressed="false"><span class="flag">🚶</span><span class="t">Pedestrian zone, daytime</span></button>
+      <div class="step"><span class="num">2</span><h2 id="placeHeading">Where are you?</h2></div>
+      <div class="places" id="places" role="group" aria-labelledby="placeHeading">
+        <button class="chip" data-p="restaurant" aria-pressed="false"><span class="flag" aria-hidden="true">🍽️</span><span class="t">Indoor restaurant or café</span></button>
+        <button class="chip" data-p="bar" aria-pressed="false"><span class="flag" aria-hidden="true">🍺</span><span class="t">Indoor bar or Kneipe</span></button>
+        <button class="chip" data-p="hotel" aria-pressed="false"><span class="flag" aria-hidden="true">🏨</span><span class="t">Hotel room</span></button>
+        <button class="chip" data-p="platform" aria-pressed="false"><span class="flag" aria-hidden="true">🚉</span><span class="t">U-Bahn or S-Bahn platform</span></button>
+        <button class="chip" data-p="vehicle" aria-pressed="false"><span class="flag" aria-hidden="true">🚆</span><span class="t">Inside a train, tram or bus</span></button>
+        <button class="chip" data-p="terrace" aria-pressed="false"><span class="flag" aria-hidden="true">☕</span><span class="t">Outdoor café or bar terrace</span></button>
+        <button class="chip" data-p="park" aria-pressed="false"><span class="flag" aria-hidden="true">🌳</span><span class="t">Park, street or sidewalk</span></button>
+        <button class="chip" data-p="school" aria-pressed="false"><span class="flag" aria-hidden="true">🏫</span><span class="t">Near a school or playground</span></button>
+        <button class="chip" data-p="pedzone" aria-pressed="false"><span class="flag" aria-hidden="true">🚶</span><span class="t">Pedestrian zone, daytime</span></button>
       </div>
 
-      <div class="placeholder" id="placeholder">Pick one option from each step above to see the rule for your exact situation.</div>
+      <div class="placeholder" id="placeholder">Pick one option from each step above to see cautious guidance for the selected situation.</div>
 
       <div class="verdict" id="verdict" hidden>
         <div class="vhead"><span class="badge" id="vbadge"></span><strong id="vtitle"></strong></div>
         <div class="rows" id="vrows"></div>
       </div>
+      <p id="verdictStatus" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
 
       <details class="reftoggle">
         <summary><span class="caret">▶</span> See the full rule table at a glance</summary>
         <div style="overflow-x:auto">
           <table class="reftable">
-            <thead><tr><th>Where</th><th>Cigarette or vape</th><th>Cannabis</th></tr></thead>
+            <caption class="sr-only">Berlin smoking and cannabis rule summary by place</caption>
+            <thead><tr><th scope="col">Where</th><th scope="col">Cigarette or vape</th><th scope="col">Cannabis</th></tr></thead>
             <tbody id="refbody"></tbody>
           </table>
         </div>
@@ -165,7 +178,17 @@
     </div>
 
     <div class="foot">
-      <p class="disc"><b>How this works:</b> Germany's non-smoker protection rules cover tobacco and e-cigarettes the same way, and Berlin keeps its own bar exception. Cannabis rules follow the 2024 Cannabis Act (KCanG). This is practical guidance, not legal advice, and local pedestrian-zone hours or club buffer zones can vary. Check the official <a class="src" href="https://www.bundesgesundheitsministerium.de/en/topics/cannabis/faq-cannabis-act" target="_blank" rel="noopener">Cannabis Act FAQ</a> and the <a class="src" href="https://sbahn.berlin/en/plan-a-journey/rail-stations/rules-of-conduct/" target="_blank" rel="noopener">S-Bahn rules of conduct</a> for the current detail.</p>
+      <p class="disc"><b>How this works:</b> Berlin's tobacco law, operator rules and private venue policies do not use identical wording, so this checker takes the cautious visitor approach. Cannabis rules follow the federal Cannabis Act. This is practical guidance, not legal advice. Check the official <a class="src" href="https://www.berlin.de/lb/drogen-sucht/gesetze/nichtraucherschutzgesetz/berliner-nichtraucherschutzgesetz/" target="_blank" rel="noopener">Berlin tobacco guidance</a>, <a class="src" href="https://www.bundesgesundheitsministerium.de/en/themen/cannabis/faq-cannabis-act/page" target="_blank" rel="noopener">Cannabis Act FAQ</a> and <a class="src" href="https://sbahn.berlin/en/plan-a-journey/rail-stations/rules-of-conduct/" target="_blank" rel="noopener">S-Bahn rules of conduct</a>.</p>
+      <details class="credits">
+        <summary>Image credits</summary>
+        <div class="cr">
+          <a href="https://commons.wikimedia.org/wiki/File:Berlin_Neuk%C3%B6lln_Eckkneipe.jpg" target="_blank" rel="noopener">Neukölln corner pub</a>, Manfred Heyde, CC BY-SA 3.0;
+          <a href="https://commons.wikimedia.org/wiki/File:Eckkneipe_in_Berlin-Kreuzberg,_2009.jpg" target="_blank" rel="noopener">Kreuzberg corner bar</a>, Sludge G, CC BY-SA 2.0;
+          <a href="https://commons.wikimedia.org/wiki/File:U-Bahnhof_Fehrbelliner_Platz_(33429816743).jpg" target="_blank" rel="noopener">Fehrbelliner Platz station</a>, Paul Horsefield, CC BY-SA 2.0;
+          <a href="https://commons.wikimedia.org/wiki/File:Cannabis_Sativa_Plant.JPG" target="_blank" rel="noopener">Cannabis plant</a>, Cannatraining, CC BY-SA 3.0;
+          <a href="https://commons.wikimedia.org/wiki/File:Keyser_Soze_sidewalk_terrace,_Berlin,_2017.jpg" target="_blank" rel="noopener">Berlin terrace</a>, DimiTalen, CC0.
+        </div>
+      </details>
     </div>
   </div>
 </div>
@@ -174,78 +197,78 @@
 (function(){
   var DATA = {
     cig: {
-      restaurant: {b:'no',t:'Not allowed inside.',
-        rule:'Germany bans smoking and vaping in enclosed restaurants and cafés. When hot food is served there is no legal smoking section.',
-        fine:'You can be fined up to about 100 euro.',
-        tip:'Step out to the terrace or the street. Nobody will mind, that is where people smoke.'},
+      restaurant: {b:'depends',t:'Main rooms are smoke-free.',
+        rule:'Tobacco smoking is banned in the main restaurant or café. A venue with at least two suitable rooms may have one fully enclosed, clearly marked secondary smoking room. Vaping follows the venue house rules.',
+        fine:'A smoker who breaks the Berlin tobacco ban can be fined up to 100 euro.',
+        tip:'Do not assume there is an exception. Ask staff or step outside.'},
       bar: {b:'depends',t:'Only in a marked smoking bar.',
-        rule:'Berlin is unusual. A single-room bar under 75 m2 that serves no hot food and admits no under-18s may allow smoking as a marked Raucherkneipe. Every other bar is smoke-free inside.',
-        fine:'Owners risk around 1,000 euro, so most enforce the ban strictly.',
-        tip:'Look for a Raucherkneipe sticker on the door. If the bar serves warm food, assume no smoking inside.'},
-      hotel: {b:'depends',t:'Only in a designated smoking room.',
-        rule:'Almost every Berlin hotel is fully non-smoking. A few keep a small number of designated smoking rooms that you must request when booking.',
-        fine:'Cleaning charges of 100 to 250 euro are common if you smoke in a non-smoking room.',
-        tip:'Use the balcony or the street, and ask reception where smoking is allowed.'},
+        rule:'A single-room bar under 75 m2, with no separate side room, no food prepared on site and no under-18s, may register as a marked Raucherkneipe. A multi-room venue may instead have one enclosed secondary smoking room.',
+        fine:'A smoker can be fined up to 100 euro and an operator up to 1,000 euro.',
+        tip:'Look for the required sign and ask staff. Any food prepared on site rules out the one-room exception.'},
+      hotel: {b:'depends',t:'Follow the booking and house rules.',
+        rule:'Berlin law does not create one blanket rule for every hotel bedroom. The property decides which rooms and balconies are non-smoking and whether vaping is included.',
+        fine:'A hotel may apply the cleaning or damage fee stated in its terms.',
+        tip:'Check your room description and ask reception before using a balcony.'},
       platform: {b:'marked',t:'Only inside a marked smoking zone.',
         rule:'Smoking and vaping are banned on U-Bahn and S-Bahn platforms, except inside the marked smoking areas painted on some open-air platforms. Underground platforms are fully smoke-free.',
-        fine:'A 40 euro on-the-spot penalty is typical.',
+        fine:'A breach can mean removal and a contractual penalty; the amount depends on the operator and current conditions.',
         tip:'Finish your cigarette upstairs before you head down to the platform.'},
       vehicle: {b:'no',t:'Not allowed on board.',
         rule:'No smoking or vaping inside any tram, bus, U-Bahn, S-Bahn or regional and long-distance train.',
         fine:'You can be fined and told to leave.',
         tip:'Wait for your stop. Rides in the centre are short.'},
-      terrace: {b:'ok',t:'Allowed. This is the smokers’ home.',
-        rule:'Outdoor café and bar terraces are where smoking still happens freely in Berlin. Smoking and vaping are allowed at most open-air tables.',
+      terrace: {b:'depends',t:'Often allowed, but check the venue.',
+        rule:"Berlin's tobacco law does not impose a general ban on open-air terraces, but a venue can make its terrace smoke-free and set its own vaping policy.",
         fine:'',
         tip:'Be considerate of the next table, and use the ashtray rather than the pavement.'},
-      park: {b:'ok',t:'Allowed outdoors.',
-        rule:'Smoking and vaping are allowed on streets, sidewalks and in most parks.',
+      park: {b:'depends',t:'Usually allowed, but check the site.',
+        rule:'Berlin has no blanket citywide ban on outdoor tobacco smoking, but parks, playgrounds, events and private sites can apply stricter rules.',
         fine:'',
-        tip:'Take your butts with you. Littering fines exist and Berlin is tightening enforcement.'},
-      school: {b:'ok',t:'Allowed on the street, not on the grounds.',
-        rule:'There is no special cigarette buffer zone around schools, so the public pavement is fine. School and playground grounds themselves are off limits.',
+        tip:'Take your cigarette ends with you and follow any signs at the site.'},
+      school: {b:'depends',t:'No tobacco buffer, but grounds differ.',
+        rule:'The 100 metre rule belongs to cannabis, not tobacco. Do not smoke on school or daycare grounds, and follow signs and house rules at playgrounds or sports facilities.',
         fine:'',
         tip:'The 100 metre buffer people mention is a cannabis rule, not a tobacco one.'},
-      pedzone: {b:'ok',t:'Allowed.',
-        rule:'A daytime pedestrian street carries no special tobacco restriction. Normal outdoor rules apply.',
+      pedzone: {b:'depends',t:'Usually allowed, but check signs and venue rules.',
+        rule:'Berlin has no special citywide daytime tobacco ban for pedestrian streets. Site, event and venue rules can still be stricter.',
         fine:'',
         tip:'The 07:00 to 20:00 pedestrian-zone ban you may have read about is for cannabis only.'}
     },
     cannabis: {
-      restaurant: {b:'no',t:'Not allowed.',
-        rule:'This is a private indoor venue, so the indoor smoking ban applies and businesses do not permit cannabis use.',
-        fine:'You would be asked to leave and could be fined.',
-        tip:'Cannabis is an outdoor-only thing in practice. Save it for later, away from crowds.'},
-      bar: {b:'no',t:'Not allowed.',
-        rule:'Even a smoking bar is private property and is not a legal cannabis space. Indoor consumption is not permitted.',
-        fine:'You would be asked to leave.',
-        tip:'Keep it outdoors and away from other people.'},
+      restaurant: {b:'depends',t:'Do not use without explicit permission.',
+        rule:'A restaurant is private property and its house rules control cannabis use. The rules on minors, protected entrances and pedestrian zones still apply.',
+        fine:'Staff can require you to stop or leave.',
+        tip:'Assume no and ask staff. Do not treat a tobacco smoking room as automatic cannabis permission.'},
+      bar: {b:'depends',t:'A smoking bar is not automatic permission.',
+        rule:'The Raucherkneipe exception concerns tobacco smoking. Cannabis still depends on the venue house rules and the federal restrictions around minors and protected places.',
+        fine:'Staff can require you to stop or leave.',
+        tip:'Assume no unless staff clearly permit it.'},
       hotel: {b:'depends',t:'Depends on the house rules.',
         rule:'Your room is private, but the building’s smoking policy still applies and most hotels ban all smoking indoors.',
-        fine:'Cleaning fees apply, the same as for tobacco.',
-        tip:'Check the house rules first. A balcony away from a playground is the safer option.'},
+        fine:'The property may apply the cleaning or damage fee stated in its terms.',
+        tip:'Check the house rules. A balcony is not automatic permission.'},
       platform: {b:'no',t:'Not allowed.',
-        rule:'Cannabis use is banned in and around public transport, and the smoking ban applies on platforms too.',
-        fine:'You can be fined.',
-        tip:'Wait until you are well clear of the station.'},
+        rule:'Station house rules prohibit drug use, and smoking or vaping is allowed only in designated smoking areas. A marked tobacco area is not automatic permission for cannabis.',
+        fine:'You can be removed and may face a contractual penalty.',
+        tip:'Do not use cannabis on station premises.'},
       vehicle: {b:'no',t:'Not allowed on board.',
-        rule:'No cannabis use inside any train, tram or bus. Using it as a driver or passenger in a vehicle is separately prohibited.',
-        fine:'You can be fined and, if driving, face serious penalties.',
-        tip:'Never combine cannabis with driving or cycling.'},
+        rule:'Transport operators do not allow cannabis use on board. Driving while over the legal THC limit or impaired carries separate road-traffic penalties.',
+        fine:'You can be removed; a driver may face serious legal consequences.',
+        tip:'Do not use on board, and do not drive or cycle after using cannabis.'},
       terrace: {b:'depends',t:'Treat it as not allowed.',
         rule:'A terrace is private property within sight of other guests, and often inside a pedestrian zone. It is not a legal consumption spot unless staff clearly allow it.',
         fine:'You would be asked to leave.',
         tip:'Assume no unless someone who works there says otherwise.'},
-      park: {b:'ok',t:'Allowed for adults, with limits.',
-        rule:'Adults 18 and over may consume cannabis outdoors, including many parks and streets, as long as no minors are around, you are more than 100 m from any school, playground, daycare or sports ground, and it is not a pedestrian zone between 07:00 and 20:00.',
-        fine:'Breaking a buffer-zone rule is finable.',
-        tip:'An ordinary park or side street in the evening, away from those zones, is the safe answer.'},
-      school: {b:'no',t:'Not allowed within 100 metres.',
-        rule:'Cannabis use is banned within 100 m of schools, playgrounds, daycare centres and sports grounds. This is the most common way visitors get fined without realising it.',
-        fine:'Fines apply for consumption inside a buffer zone.',
-        tip:'Central Berlin is full of playgrounds and schools. Move well away and check your surroundings first.'},
+      park: {b:'depends',t:'Allowed only if every restriction is clear.',
+        rule:'Adults may consume in some outdoor places, but not in the immediate presence of minors, in protected facilities, within sight of their entrances, in or within sight of a cultivation association, or in a pedestrian zone between 07:00 and 20:00. Park rules may also be stricter.',
+        fine:'Breaking a protected-place rule is finable.',
+        tip:'Do not assume a park or side street is automatically legal. Check the surroundings first.'},
+      school: {b:'no',t:'Not allowed in or within sight of the entrance.',
+        rule:'Consumption is prohibited in schools, playgrounds, child and youth facilities and publicly accessible sports grounds, and within sight of their entrances. Beyond 100 m from an entrance, the law no longer treats the place as within sight.',
+        fine:'Fines apply for consumption in a protected place.',
+        tip:'Move well beyond the entrance and make sure no minors are immediately present.'},
       pedzone: {b:'no',t:'Not allowed between 07:00 and 20:00.',
-        rule:'Cannabis consumption is banned in pedestrian zones during the day, from 07:00 to 20:00. After 20:00 it is generally allowed, as long as no school or playground is within sight.',
+        rule:'Cannabis consumption is banned in pedestrian zones from 07:00 to 20:00. Outside those hours, every other federal restriction still applies, including minors, protected facilities and their entrances, plus private-property rules.',
         fine:'Daytime use in a pedestrian zone is finable.',
         tip:'Wait until the evening, and step off the main shopping street.'}
     }
@@ -267,6 +290,7 @@
   var vbadge = document.getElementById('vbadge');
   var vtitle = document.getElementById('vtitle');
   var vrows = document.getElementById('vrows');
+  var verdictStatus = document.getElementById('verdictStatus');
   var refbody = document.getElementById('refbody');
   var sub = null, place = null;
 
@@ -299,6 +323,7 @@
       return '<div class="row"><span class="ic">'+r[0]+'</span><span class="rt">'+r[1]+'</span></div>';
     }).join('');
     verdict.hidden = false;
+    verdictStatus.textContent = vtitle.textContent + ' ' + v.rule;
     resize();
   }
 
@@ -319,12 +344,22 @@
   var TAGTEXT = {ok:'Allowed',no:'No',marked:'Marked spots',depends:'Depends'};
   refbody.innerHTML = PLACE_ORDER.map(function(p){
     var c = DATA.cig[p], k = DATA.cannabis[p];
-    return '<tr><td><b>'+PLACE_LABEL[p]+'</b></td>'+
+    return '<tr><th scope="row">'+PLACE_LABEL[p]+'</th>'+
       '<td><span class="tag '+c.b+'">'+TAGTEXT[c.b]+'</span></td>'+
       '<td><span class="tag '+k.b+'">'+TAGTEXT[k.b]+'</span></td></tr>';
   }).join('');
 
-  document.querySelector('.reftoggle').addEventListener('toggle', resize);
+  var refToggle = document.querySelector('.reftoggle');
+  refToggle.addEventListener('toggle', resize);
+  var credits = document.querySelector('.credits');
+  if(credits){ credits.addEventListener('toggle', resize); }
+  document.addEventListener('click', function(e){
+    [refToggle,credits].forEach(function(el){ if(el && el.open && !el.contains(e.target)) el.open=false; });
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key!=='Escape') return;
+    [refToggle,credits].forEach(function(el){ if(el && el.open){ el.open=false; el.querySelector('summary').focus(); } });
+  });
 
   function resize(){
     if(window.BWBrand && typeof window.BWBrand.postHeight === 'function'){ window.BWBrand.postHeight(); }

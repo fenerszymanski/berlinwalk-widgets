@@ -11145,7 +11145,7 @@
         "name": "What is the Umweltzone and do I need a sticker?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Everything inside Berlin's S-Bahn ring is an Umweltzone, a low-emission zone, and your car needs a green Umweltplakette sticker on the windscreen to drive there. Since 2025 only the green sticker counts, and there is no tourist or rental exemption. Almost every car hired in Germany, and every car-sharing vehicle, already has it, so check the windscreen. Driving in without one is a 105 euro fine. You can order the sticker online for about 6 euros, or buy it in person for 5."
+          "text": "Berlin's low-emission zone lies inside the inner S-Bahn ring. Vehicles normally need a green Umweltplakette on the windscreen, including foreign registrations unless an official exemption applies. Do not assume a rental or shared car is covered: confirm with the operator and check the windscreen or app. Driving or parking in the zone without the required sticker carries a 100 euro fine. Berlin's registration authority charges 5 euros in person or 6 euros for an online order with shipping."
         }
       },
       {
@@ -11153,7 +11153,7 @@
         "name": "How much does parking cost in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Street parking in the central districts runs roughly 1 to 3 euros an hour, and public garages around Mitte are about 2 to 4 euros an hour, often with a daily cap near 24 euros. Central Berlin uses a district-by-district paid-parking system called Parkraumbewirtschaftung, so most streets inside the ring are metered during the day. You pay at the machine or, more easily, through a Handyparken app that bills by the minute."
+          "text": "Managed street-parking zones currently use rates of 2, 3 or 4 euros an hour, depending on the zone. Not every street inside the ring is paid, and hours vary by district, so the sign, meter and official parking map are what count. A supported Handyparken app can bill by the minute. Garage and hotel prices vary too much for one Berlin-wide daily cap."
         }
       },
       {
@@ -11169,7 +11169,7 @@
         "name": "When does renting a car in Berlin actually make sense?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "A car earns its place when your plans pull you away from the train lines: the quieter Brandenburg lakes, small villages, the Spreewald canals, or a stretch of the Baltic coast where connections get slow. If your trip is really a regional road trip with a Berlin stop attached, rent for the road-trip part. For the classic day trips, though, Potsdam, Sachsenhausen and Dresden are all easier by train."
+          "text": "A car earns its place for a remote, multi-stop rural plan: several Brandenburg villages, lakes away from rail stations or a slow coastal itinerary. Do not treat all of the Spreewald as off-rail; Lübben, Lübbenau and Vetschau have regular train connections. For classic day trips such as Potsdam and Sachsenhausen, the train is usually easier."
         }
       },
       {
@@ -11177,7 +11177,7 @@
         "name": "What is car-sharing in Berlin and is it worth it?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Car-sharing lets you unlock a car from an app and pay by the minute or the day, skipping the rental desk and the multi-day commitment. Free-floating services like Miles, SHARE NOW and Sixt share let you pick up and drop off anywhere in the operating area, while a station-based service like Cambio can be cheaper for a planned out-and-back trip. It is often the right answer for the one afternoon you actually need a car."
+          "text": "Car-sharing lets you unlock a car from an app and pay by time, distance or a package, skipping a multi-day rental. Berlin's current official overview includes MILES, Free2Move, SIXT share, Cambio and Flinkster. You may end a free-floating rental only in an eligible spot inside that operator's live business area. Public parking may be included, but return rules and excluded spaces vary, so follow the app."
         }
       },
       {
@@ -11199,7 +11199,7 @@
         "name": "Can you smoke inside bars in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sometimes, and this surprises visitors. Germany bans indoor smoking in restaurants and workplaces, but Berlin runs its own exception. A single-room bar smaller than 75 square metres that serves no hot food and admits no under-18s can allow smoking as a marked Raucherkneipe. Every other bar, and any bar that serves warm food, is smoke-free inside. Look for a smoking-bar sticker on the door, or just ask. If you want a smoke-free evening, choose a bar with a kitchen."
+          "text": "Sometimes. A marked one-room Raucherkneipe must be under 75 square metres, have no separate side room, admit no one under 18, prepare no food on site and be notified to the authority. A multi-room venue may instead have one fully separated, closed and clearly marked secondary smoking room; the main room stays smoke-free. Look for the required sign and ask before lighting up."
         }
       },
       {
@@ -11207,7 +11207,7 @@
         "name": "Is vaping allowed where smoking is banned?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Treat vaping and e-cigarettes exactly like cigarettes. The non-smoker protection rules and the public-transport ban cover e-cigarettes and heated tobacco the same way as tobacco, so if you cannot smoke somewhere, assume you cannot vape there either. That includes trains, trams, buses and station platforms."
+          "text": "Do not assume it is allowed. Berlin's tobacco-smoking law does not describe every e-cigarette situation in identical terms, but transport operators explicitly ban vaping outside designated smoking areas and private venues can ban it through house rules. The practical visitor rule is to ask or step outside."
         }
       },
       {
@@ -11215,7 +11215,7 @@
         "name": "Can you smoke on U-Bahn and S-Bahn platforms?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No, with one narrow exception. Smoking and vaping are banned throughout the U-Bahn and S-Bahn network, including underground platforms. Some open-air platforms have a small marked smoking area, and that is the only place it is allowed. A cigarette on a normal platform can bring an on-the-spot penalty of around 40 euro, so finish it upstairs before you head down."
+          "text": "Smoking and vaping are prohibited on station premises outside designated smoking areas. Some open-air S-Bahn stations have a marked smoking zone; underground platforms are smoke-free. A breach can mean removal and a contractual penalty, and the amount depends on the operator's current conditions."
         }
       },
       {
@@ -11223,7 +11223,7 @@
         "name": "Is cannabis legal in Berlin in 2026?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, within limits. Since 1 April 2024, adults aged 18 and over may possess up to 25 grams of cannabis in public and grow a few plants at home. It is decriminalised for personal adult use, not a free-for-all. Public consumption is restricted, driving under the influence is a serious offence, and everything below still applies to where and how you use it."
+          "text": "Adults aged 18 and over may possess up to 25 grams of cannabis in public within the Cannabis Act's limits. Sale, transfer and many consumption locations remain prohibited. Public consumption is restricted, and visitors should not drive or cycle after using cannabis."
         }
       },
       {
@@ -11231,7 +11231,7 @@
         "name": "Can tourists buy cannabis in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Not legally. There are no cannabis shops or coffeeshops in Germany. The only legal source is a non-profit cannabis social club, and those require German residence and a waiting period, so they are closed to short-term visitors. Buying from a street dealer remains illegal and is exactly where the fake and unsafe product is. Being able to possess cannabis and being able to buy it are two different things here."
+          "text": "Germany has no general recreational retail cannabis shops or coffeeshops. Cultivation associations can supply only eligible members who have lived or ordinarily stayed in Germany for at least six months, and their statutes must require at least three months of membership. A short-term tourist therefore has no lawful retail purchase route, and street sales remain illegal."
         }
       },
       {
@@ -11239,7 +11239,7 @@
         "name": "Where can you legally smoke cannabis in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Outdoors, and away from children and certain places. Public use is banned within 100 metres of schools, playgrounds, daycare centres and sports grounds, and in pedestrian zones between 07:00 and 20:00. It is also not allowed around minors or on public transport. In practice that means an ordinary park or side street in the evening, well clear of those zones, is the safe answer. Central Berlin is full of playgrounds, so check your surroundings first."
+          "text": "There is no blanket safe park or side-street rule. Consumption is prohibited in the immediate presence of minors; in schools, playgrounds, child and youth facilities and publicly accessible sports grounds; and within sight of their entrances. It is also prohibited in and within sight of cultivation associations. Beyond 100 metres from the relevant entrance, the Act no longer treats the place as within sight. Pedestrian zones are restricted from 07:00 to 20:00, and house rules can be stricter."
         }
       },
       {
@@ -11247,7 +11247,7 @@
         "name": "What smoking-related fines should tourists watch for?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The avoidable ones. Smoking on a U-Bahn or S-Bahn platform is around 40 euro. Smoking inside a non-smoking hotel room usually brings a cleaning charge of 100 to 250 euro. For cannabis, the common trap is using it inside a 100-metre buffer zone or in a daytime pedestrian street, both of which are finable. None of this is aimed at catching tourists, but the rules are enforced, so it is worth knowing the line."
+          "text": "Do not present one citywide platform or hotel-room amount: transport penalties depend on the operator, and hotel cleaning or damage fees depend on the property's terms. Under Berlin's tobacco law, an individual smoker can be fined up to 100 euro and an operator up to 1,000 euro. Cannabis consumption in protected places or a daytime pedestrian zone is also finable."
         }
       }
     ]
@@ -11261,7 +11261,7 @@
         "name": "What is the emergency number in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "There are two main ones. Dial 112 for a medical emergency or a fire; it reaches the ambulance and fire brigade. Dial 110 for the police, for a crime, a theft or a threat to your safety. Both are free, both work from any phone without a German SIM or credit, and in Berlin the dispatchers can handle English. 112 is the single European emergency number, so it works the same way across the EU."
+          "text": "Dial 112 for a medical emergency or fire, and 110 when police are needed for immediate danger or a crime in progress. Both are free. A foreign SIM is fine, but mobile emergency calls in Germany require an inserted SIM. Emergency staff often speak English, but Berlin does not guarantee it on every call; clearly state what happened and where, then answer the operator's questions. 112 is the single European emergency number."
         }
       },
       {
@@ -11269,7 +11269,7 @@
         "name": "Is it 112 or 110 in Germany?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "It depends on the problem. Use 112 for anything medical or a fire, such as someone collapsing, chest pain, trouble breathing, a bad injury or a fire. Use 110 for police matters, such as a robbery, an assault or a serious traffic accident. They do not overlap: 112 will not connect you to the police, and 110 will not send an ambulance. Germany does not use 911, so dialling that will not help."
+          "text": "Use 112 for a life-threatening medical problem, serious injury or fire. Use 110 for immediate danger or a crime requiring police. Germany's official numbers are 112 and 110, so do not rely on 911. The services can coordinate when a situation needs more than one response."
         }
       },
       {
@@ -11277,7 +11277,7 @@
         "name": "What number do I call for a doctor in Berlin if it is not an emergency?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Call 116117, the on-call medical service. It is for situations where you genuinely need a doctor but your life is not in danger, like a high fever, an ear infection or a sprain, especially at night or on a weekend when normal practices are shut. It runs around the clock. Save 112 for real emergencies so the line stays free for people in danger."
+          "text": "Call 116117 when normal practices are closed, you need medical help today and the situation is not life-threatening. The service runs 24/7, but the telephone line is officially German-only. If there is a risk to life or permanent injury, call 112."
         }
       },
       {
@@ -11285,7 +11285,7 @@
         "name": "How do I find a pharmacy open at night or on Sunday in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Berlin runs a rotating emergency pharmacy service, so there is always an Apotheke open overnight and on Sundays and public holidays. Find the nearest one through the official Notdienstfinder run by the Apothekerkammer Berlin. Expect a small emergency service fee of a few euro for handovers late at night, on Sundays and on holidays. That fee is normal, not a scam."
+          "text": "Berlin runs a rotating emergency pharmacy service. Find the nearest on-duty Apotheke through the official Notdienstfinder run by the Apothekerkammer Berlin. An on-duty pharmacy may add the official 2.50 euro emergency-service surcharge at night, on Sundays and on public holidays."
         }
       },
       {
@@ -11293,7 +11293,7 @@
         "name": "What should I do if my wallet or phone is stolen in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Do two things quickly. First, block your bank and credit cards on the central German card-blocking hotline 116 116 (from abroad, +49 116 116), or through your own bank if that is faster. Second, file a police loss report, the Verlustanzeige, at any police station or online through the Berlin police Internetwache. You will need that report number for your travel insurance. For a simple theft with no danger, you do not need to call 110."
+          "text": "First, use 116 116 for a participating card issuer or your bank's own app or emergency number. From abroad try +49 116 116; if it does not connect, use +49 30 4050 4050. Then file a criminal report, a Strafanzeige, at a police station or through the Berlin police Internetwache and keep the reference number. Call 110 only if the crime is in progress or there is immediate danger."
         }
       },
       {
@@ -11301,7 +11301,7 @@
         "name": "What do I do if I lose my passport in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Report it lost or stolen to the police and get the loss report, then contact your own country's embassy or consulate in Berlin, which is the only place that can issue an emergency travel document to get you home. Try to go on a weekday, because consular hours are short. Before your trip, photograph your passport and insurance details and store the images in your email so you can reach them without your phone."
+          "text": "Report the loss or theft to police promptly, then contact your country's embassy or consulate and follow its emergency-document and appointment instructions. Procedures and out-of-hours help vary by country, so do not wait for a weekday if your departure is close. Before travelling, keep a secure copy of your passport and insurance details somewhere you can reach without your phone."
         }
       },
       {
@@ -11309,7 +11309,7 @@
         "name": "Is Berlin dangerous for tourists?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No, Berlin is a large, safe and well-run city, and serious emergencies are rare for visitors. The most common problem is pickpocketing in a crowd, such as a packed U-Bahn door or a busy tram, and that is annoying rather than dangerous. The sensible move is simple: save 112 and 116117 in your phone before you go, keep valuables zipped away in crowds, and photograph your documents just in case."
+          "text": "Risk depends on the situation, so a blanket answer is not useful in an emergency guide. Save 112, 110 and 116117 before the trip, keep valuables closed in crowds and know the difference between immediate danger, which needs an emergency call, and a past incident that can be reported at a station or online."
         }
       }
     ]
