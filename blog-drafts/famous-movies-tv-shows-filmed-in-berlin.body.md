@@ -1,4 +1,4 @@
-![Alexanderplatz World Clock in Berlin with a cinematic BerlinWalk-style overlay](blog-media/movies-tv-berlin/processed/hero-berlin-screen-locations.jpg)
+![World Time Clock at Alexanderplatz in Berlin with a film-style graphic overlay](blog-media/movies-tv-berlin/processed/hero-berlin-screen-locations.jpg)
 ^ The World Time Clock at Alexanderplatz: meeting point for my walking tours, and a film location in its own right.
 
 I start my walking tours at the World Time Clock on Alexanderplatz, and almost every week a guest looks around and says the square feels strangely familiar. Usually it is not a history book they are remembering. It is a screen. Jason Bourne met his contact exactly here. Babylon Berlin staged its Weimar chaos a few steps away. The fake TV news in Good Bye, Lenin! was set against these same buildings.
@@ -153,7 +153,7 @@ The franchise came back to Berlin for the prequel, and this time the locations a
 I like this one because guests can test it immediately. My tour route passes the Altes Museum, and once you know it played the Capitol, you cannot unsee it: Schinkel's colonnade was designed to project power, and Hollywood simply agreed.
 
 ![Olympiastadion Berlin, the monumental 1936 stadium used in The Ballad of Songbirds and Snakes](blog-media/movies-tv-berlin/real/olympiastadion.jpg)
-^ The Olympiastadion played the Games arena. The real building needs no set dressing to feel monumental.
+^ The Olympiastadion played the Games arena exterior. The real building needs no set dressing to feel monumental.
 
 **Berlin mood:** monumental, imperial, unsettling.
 
@@ -171,7 +171,7 @@ One honest correction you will not find in most listicles: the orchestra scenes 
 
 ### John Wick: Chapter 4 (2023)
 
-The Berlin chapter of *John Wick 4* is pure architecture flex. The nightclub with the cascading water walls is the interior of **Kraftwerk Berlin**, the decommissioned power station on Köpenicker Straße that normally hosts techno nights and art installations. The waterfalls were built for the film, so the real hall looks rawer, which honestly suits it.
+The Berlin chapter of *John Wick 4* is built almost entirely on real Berlin architecture. The nightclub with the cascading water walls is the interior of **Kraftwerk Berlin**, the decommissioned power station on Köpenicker Straße that normally hosts techno nights and art installations. The waterfalls were built for the film, so the real hall looks rawer, which honestly suits it.
 
 The club's exterior is a Berlin in-joke: it is the **Alte Nationalgalerie** on Museum Island, a neoclassical temple of 19th-century art playing a criminal hideout. The Ruska Roma church scenes were filmed at **Herz-Jesu-Kirche** in Prenzlauer Berg, and the Brandenburg Gate appears in establishing shots.
 
@@ -195,7 +195,7 @@ No modern series has done more to turn Berlin's past into a cinematic universe t
 
 The series is anchored at **Studio Babelsberg**, where the enormous "Neue Berliner Straße" backlot stands, but it also filmed at real places you can visit: the **Rotes Rathaus** staircases play the police headquarters known as the Rote Burg, with exteriors at **Alexanderplatz**; interiors were shot at **Rathaus Schöneberg**; the 1920s **Hermannplatz U-Bahn station** plays itself; and the Moka Efti club interior is the beautiful silent-film-era **Theater im Delphi** in Weissensee. [visitBerlin's Babylon Berlin page](https://www.visitberlin.de/en/babylon-berlin) collects the highlights.
 
-A useful update for 2026: the fifth and final season wrapped filming in November 2025 and is expected on ARD later this year, set during the Nazi takeover of early 1933. The production even shot street scenes with period cars on Museum Island and Unter den Linden. If the series brought you to Berlin, this is the year to come.
+A useful update for 2026: the fifth and final season wrapped filming in November 2025 and is expected on ARD in 2026, set during the Nazi takeover of early 1933. The production even shot street scenes with period cars on Museum Island and Unter den Linden. If the series brought you to Berlin, this is the year to come.
 
 ![Rotes Rathaus in Berlin, the red-brick city hall that plays police headquarters in Babylon Berlin](blog-media/movies-tv-berlin/real/rotes-rathaus.jpg)
 ^ Rotes Rathaus, the series' Rote Burg. My tour passes it; the TV Tower stands directly behind.
@@ -258,7 +258,7 @@ For a real-world mood match, use **Kreuzberg**, **Friedrichshain**, and the club
 
 *Deutschland 83* sends an East German agent into the West, and it pairs perfectly with Berlin's real Cold War sites: the **Stasi Museum**, the **Berlin Wall Memorial at Bernauer Straße**, and the **Tränenpalast**, the former border crossing hall at Friedrichstraße where East and West said goodbye.
 
-The series is less about exact camera positions and more about systems: propaganda, surveillance, and the strange intimacy of a divided country. If you want the physical version, my guide to [where the Berlin Wall stood](https://www.berlinwalk.com/post/the-berlin-wall-where-it-stood-and-what-s-left-in-2026) maps what is actually left.
+The series does not reward chasing scenes. It is about systems: propaganda, surveillance, and the strange intimacy of a divided country. If you want the physical version, my guide to [where the Berlin Wall stood](https://www.berlinwalk.com/post/the-berlin-wall-where-it-stood-and-what-s-left-in-2026) maps what is actually left.
 
 **Berlin mood:** Cold War, 1980s, divided Germany.
 
@@ -266,7 +266,7 @@ The series is less about exact camera positions and more about systems: propagan
 
 ### The Queen's Gambit
 
-*The Queen's Gambit* is the best example of Berlin pretending to be everywhere else. The series is set in America, Paris, and Moscow, but it was mostly filmed in and around Berlin. [Karl-Marx-Allee became Moscow](https://www.visitberlin.de/en/queens-gambit-karl-marx-allee): the Stalinist blocks play Soviet hotel facades, and the Panorama Bar of **Kino International** plays the Moscow hotel restaurant.
+*The Queen's Gambit* is the best example of Berlin pretending to be everywhere else. The series is set in America, Paris, and Moscow, but it was mostly filmed in and around Berlin. [Karl-Marx-Allee became Moscow](https://www.visitberlin.de/en/queens-gambit-karl-marx-allee): the Stalinist blocks play Soviet hotel facades, and the upstairs bar of **Kino International** plays the Moscow hotel restaurant.
 
 The fun part is how specific the doubling gets. The **Friedrichstadt-Palast** foyer plays a hotel in Mexico City. The **Palais am Funkturm** plays a Las Vegas hotel lobby. Three continents, one S-Bahn network.
 
