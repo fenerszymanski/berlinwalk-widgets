@@ -225,7 +225,8 @@
   "berlin-hop-on-hop-off-bus-worth-it": "berlin-hop-on-hop-off-bus-worth-it",
   "how-many-days-in-berlin": "how-many-days-in-berlin",
   "halal-food-in-berlin": "halal-food-in-berlin",
-  "berlin-airports": "berlin-airports"
+  "berlin-airports": "berlin-airports",
+  "famous-movies-tv-shows-filmed-in-berlin": "movies-tv-berlin"
 };
 
   var SCHEMAS = {
@@ -2299,6 +2300,68 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "No. Looking at the TV Tower from Alexanderplatz is free, but going up always costs money. For a free alternative view, book the Reichstag dome or visit a public rooftop such as Klunkerkranich or the upper levels of Galeries Lafayette."
+        }
+      }
+    ]
+  },
+  "movies-tv-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What famous movies were filmed in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Famous movies connected to Berlin include Run Lola Run, Wings of Desire, Christiane F., Good Bye, Lenin!, The Lives of Others, Victoria, The Bourne Supremacy, Bridge of Spies, Tár, John Wick: Chapter 4, and both Berlin-shot Hunger Games films. Some use Berlin as itself; others use Berlin or the Berlin-Brandenburg region as a stand-in for another place."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which TV shows were filmed in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Major series connected to Berlin include Babylon Berlin, Kleo, Dark, Homeland Season 5, Berlin Station, Sense8, Deutschland 83, The Queen's Gambit, Unorthodox, and Berlin ER. In some cases Berlin is the story setting; in others, Berlin and nearby Brandenburg provide architecture, studios, streets, or landscapes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I visit the exact filming locations in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sometimes, but not always. Berlin filming can involve real streets, studio sets, edited-together locations, and places that double for another city. It is better to think in screen moods and neighborhoods: Oberbaumbrücke for Run Lola Run energy, Karl-Marx-Allee for socialist architecture, Bahnhof Zoo for West Berlin memory, and Alexanderplatz for modern transit and spy stories."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was The Hunger Games filmed in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, twice. Mockingjay - Part 2 used Tempelhof Airport for the District 2 base and the parking level under the ICC at Messedamm for the Capitol underground. The Ballad of Songbirds and Snakes used the Altes Museum facade, the Bärensaal in the Altes Stadthaus, the Olympiastadion exterior, and Strausberger Platz on Karl-Marx-Allee."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was John Wick 4 filmed in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The club interior with the water walls is Kraftwerk Berlin, the former power station on Köpenicker Straße (the waterfalls were a temporary set). The club's exterior is the Alte Nationalgalerie on Museum Island, and the church scenes were filmed at Herz-Jesu-Kirche in Prenzlauer Berg."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the best Berlin film locations to visit on a first trip?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start with Alexanderplatz, Museum Island, Karl-Marx-Allee, Oberbaumbrücke, and Bahnhof Zoo. With more time, add Wannsee and Glienicke Bridge on the S7, and Potsdam-Babelsberg for film production history. These places explain why Berlin works so well for stories about surveillance, reinvention, division, nightlife, and escape."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the BerlinWalk tour cover movie locations?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The tour is not a pure film-location tour, but it covers the real city layers that make Berlin so cinematic: Alexanderplatz, historic Mitte, Museum Island, GDR architecture, Cold War memory, and the streets filmmakers keep returning to. It is a strong starting point if you want to see the real Berlin behind the screen image."
         }
       }
     ]
