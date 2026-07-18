@@ -4284,6 +4284,104 @@
       "relatedBlog": "/post/halal-food-in-berlin",
       "iconStatus": "live-wix-media",
       "cmsItemId": "15b03bd3-dd93-42f9-ab1c-193458430ede"
+    },
+    {
+      "slug": "berlin-entry-requirements",
+      "title": "Berlin Entry Checker",
+      "lead": "Pick your passport group for a Berlin short-stay starting point, then enter every relevant previous Schengen arrival and departure so the checker tests each planned day against the true rolling 90-days-in-180 rule.",
+      "category": "Maps",
+      "image": "https://static.wixstatic.com/media/5a08a3_592f298e21644cb880c222b6f7de8ee1~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-entry-requirements/",
+      "embedHeight": 2500,
+      "hubCategory": "TripPlans",
+      "type": "Calculator",
+      "tags": [
+        "Do you need a visa for Berlin",
+        "Berlin entry requirements",
+        "Schengen 90/180 rule",
+        "EES Berlin airport",
+        "ETIAS 2026",
+        "Schengen visa Germany",
+        "Berlin visa free countries",
+        "Germany entry rules"
+      ],
+      "aliases": [
+        "do you need a visa to visit berlin",
+        "berlin visa requirements",
+        "schengen 90 180 calculator",
+        "ees berlin",
+        "etias berlin",
+        "berlin entry requirements 2026",
+        "germany visa tourist"
+      ],
+      "relatedBlog": "/post/do-you-need-a-visa-to-visit-berlin",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "3d0613ce-6cff-4953-afec-df971e5b1fb6"
+    },
+    {
+      "slug": "berlin-airports",
+      "title": "Berlin Airports Explainer",
+      "lead": "Tap BER, Tegel, Schönefeld or Tempelhof to see what each site does now, then compare the current FEX, RE20 and S-Bahn routes from the station under BER Terminal 1.",
+      "category": "Maps",
+      "image": "https://static.wixstatic.com/media/5a08a3_bd27f11af83a4545aeb438b03757833f~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-airports/",
+      "embedHeight": 1250,
+      "hubCategory": "Transport",
+      "type": "Guide",
+      "tags": [
+        "Berlin airports",
+        "BER airport",
+        "Berlin airport to centre",
+        "FEX Berlin",
+        "Tegel Airport",
+        "Schönefeld Airport",
+        "Tempelhof Airport",
+        "BER Terminal 1 Terminal 2"
+      ],
+      "aliases": [
+        "berlin airports",
+        "which berlin airport is open",
+        "ber airport",
+        "tegel airport",
+        "schonefeld airport",
+        "tempelhof airport",
+        "ber to city centre"
+      ],
+      "relatedBlog": "/post/berlin-airports",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "2a86ce08-aebe-47ee-93b2-69ccb4e0ada1"
+    },
+    {
+      "slug": "screen-mood-finder",
+      "title": "Berlin Screen Mood Finder",
+      "lead": "Pick the Berlin screen mood you want, from Weimar noir and Cold War tension to nightlife or dystopia, then get a watch list and real places where that mood still makes sense on foot.",
+      "category": "Discovery",
+      "image": "https://static.wixstatic.com/media/5a08a3_3b4c80ed2a284607beadcfd7a67fe437~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/screen-mood-finder/",
+      "embedHeight": 1700,
+      "hubCategory": "CultureLandmarks",
+      "type": "Quiz",
+      "tags": [
+        "Movies filmed in Berlin",
+        "TV shows filmed in Berlin",
+        "Berlin film locations",
+        "Babylon Berlin locations",
+        "Run Lola Run Berlin",
+        "Cold War films Berlin",
+        "Berlin cinema",
+        "Berlin screen locations"
+      ],
+      "aliases": [
+        "berlin screen mood finder",
+        "berlin movie locations",
+        "films shot in berlin",
+        "tv series berlin locations",
+        "cinematic berlin",
+        "where was babylon berlin filmed"
+      ],
+      "relatedBlog": "/post/famous-movies-tv-shows-filmed-in-berlin",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "62a12128-42bb-49c0-9f98-33a14ba556c3"
     }
   ],
   "hubCategories": [

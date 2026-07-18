@@ -1813,5 +1813,44 @@
     "png160": "tools-home/icons/halal-food-in-berlin-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/halal-food-in-berlin-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_4d20deea0fe543b09c2b4956f638c2d1~mv2.png"
+  },
+  {
+    "slug": "berlin-entry-requirements",
+    "title": "Berlin Entry Checker",
+    "category": "Maps",
+    "source": "codex-built-in-imagegen-20260718",
+    "generatedAt": "2026-07-18",
+    "promptFile": "tools-home/icons/_src/daily-blog-berlin-entry-requirements-icon-20260718-prompt.md",
+    "sourceImage": "tools-home/icons/_src/daily-blog-berlin-entry-requirements-icon-20260718-raw.png",
+    "png512": "tools-home/icons/berlin-entry-requirements.png",
+    "png160": "tools-home/icons/berlin-entry-requirements-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-entry-requirements-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_592f298e21644cb880c222b6f7de8ee1~mv2.png"
+  },
+  {
+    "slug": "berlin-airports",
+    "title": "Berlin Airports Explainer",
+    "category": "Maps",
+    "source": "codex-built-in-imagegen-20260718",
+    "generatedAt": "2026-07-18",
+    "promptFile": "tools-home/icons/_src/daily-blog-berlin-airports-icon-20260717-prompt.md",
+    "sourceImage": "tools-home/icons/_src/daily-blog-berlin-airports-icon-20260718-raw.png",
+    "png512": "tools-home/icons/berlin-airports.png",
+    "png160": "tools-home/icons/berlin-airports-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-airports-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_bd27f11af83a4545aeb438b03757833f~mv2.png"
+  },
+  {
+    "slug": "screen-mood-finder",
+    "title": "Berlin Screen Mood Finder",
+    "category": "Discovery",
+    "source": "codex-built-in-imagegen-20260718",
+    "generatedAt": "2026-07-18",
+    "promptFile": "tools-home/icons/_src/daily-blog-screen-mood-finder-icon-20260718-prompt.md",
+    "sourceImage": "tools-home/icons/_src/daily-blog-screen-mood-finder-icon-20260718-raw.png",
+    "png512": "tools-home/icons/screen-mood-finder.png",
+    "png160": "tools-home/icons/screen-mood-finder-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/screen-mood-finder-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_3b4c80ed2a284607beadcfd7a67fe437~mv2.png"
   }
 ]
