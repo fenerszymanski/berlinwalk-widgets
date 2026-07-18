@@ -1570,5 +1570,44 @@
     "png160": "tools-home/icons/neukolln-kiez-decoder-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/neukolln-kiez-decoder-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_7ade9f263f514cb38f02b70d11595dc6~mv2.png"
+  },
+  {
+    "slug": "berlin-emergency-numbers",
+    "title": "Berlin Emergency Number Finder",
+    "category": "Discovery",
+    "source": "codex-built-in-imagegen-20260718",
+    "generatedAt": "2026-07-18",
+    "promptFile": "tools-home/icons/_src/daily-blog-berlin-emergency-numbers-icon-20260718-prompt.md",
+    "sourceImage": "tools-home/icons/_src/daily-blog-berlin-emergency-numbers-icon-20260718-raw.png",
+    "png512": "tools-home/icons/berlin-emergency-numbers.png",
+    "png160": "tools-home/icons/berlin-emergency-numbers-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-emergency-numbers-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_5786c799c4a549f5a1a7c475c00423ee~mv2.png"
+  },
+  {
+    "slug": "berlin-smoking-rules",
+    "title": "Berlin Smoking Rules Checker",
+    "category": "Discovery",
+    "source": "codex-built-in-imagegen-20260718",
+    "generatedAt": "2026-07-18",
+    "promptFile": "tools-home/icons/_src/daily-blog-berlin-smoking-rules-icon-20260718-prompt.md",
+    "sourceImage": "tools-home/icons/_src/daily-blog-berlin-smoking-rules-icon-20260718-raw.png",
+    "png512": "tools-home/icons/berlin-smoking-rules.png",
+    "png160": "tools-home/icons/berlin-smoking-rules-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-smoking-rules-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_ab963159e1a34a96878e1d754bec5ab4~mv2.png"
+  },
+  {
+    "slug": "do-you-need-a-car-in-berlin",
+    "title": "Berlin Car Decision Tool",
+    "category": "Maps",
+    "source": "codex-built-in-imagegen-20260718",
+    "generatedAt": "2026-07-18",
+    "promptFile": "tools-home/icons/_src/daily-blog-do-you-need-a-car-in-berlin-icon-20260718-prompt.md",
+    "sourceImage": "tools-home/icons/_src/daily-blog-do-you-need-a-car-in-berlin-icon-20260718-raw.png",
+    "png512": "tools-home/icons/do-you-need-a-car-in-berlin.png",
+    "png160": "tools-home/icons/do-you-need-a-car-in-berlin-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/do-you-need-a-car-in-berlin-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_a2ec44898ecf4a66b9120b6d2eda054c~mv2.png"
   }
 ]
