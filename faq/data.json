@@ -6436,5 +6436,39 @@
         "a": "The avoidable ones. Smoking on a U-Bahn or S-Bahn platform is around 40 euro. Smoking inside a non-smoking hotel room usually brings a cleaning charge of 100 to 250 euro. For cannabis, the common trap is using it inside a 100-metre buffer zone or in a daytime pedestrian street, both of which are finable. None of this is aimed at catching tourists, but the rules are enforced, so it is worth knowing the line."
       }
     ]
+  },
+  "berlin-emergency-numbers": {
+    "title": "Berlin Emergency Numbers: FAQ",
+    "subtitle": "A local's plain answers on what to call in Berlin: 112 versus 110, the doctor line when it is not an emergency, pharmacies at night, and what to do if you are robbed or lose your passport.",
+    "items": [
+      {
+        "q": "What is the emergency number in Berlin?",
+        "a": "There are two main ones. Dial 112 for a medical emergency or a fire; it reaches the ambulance and fire brigade. Dial 110 for the police, for a crime, a theft or a threat to your safety. Both are free, both work from any phone without a German SIM or credit, and in Berlin the dispatchers can handle English. 112 is the single European emergency number, so it works the same way across the EU."
+      },
+      {
+        "q": "Is it 112 or 110 in Germany?",
+        "a": "It depends on the problem. Use 112 for anything medical or a fire, such as someone collapsing, chest pain, trouble breathing, a bad injury or a fire. Use 110 for police matters, such as a robbery, an assault or a serious traffic accident. They do not overlap: 112 will not connect you to the police, and 110 will not send an ambulance. Germany does not use 911, so dialling that will not help."
+      },
+      {
+        "q": "What number do I call for a doctor in Berlin if it is not an emergency?",
+        "a": "Call 116117, the on-call medical service. It is for situations where you genuinely need a doctor but your life is not in danger, like a high fever, an ear infection or a sprain, especially at night or on a weekend when normal practices are shut. It runs around the clock. Save 112 for real emergencies so the line stays free for people in danger."
+      },
+      {
+        "q": "How do I find a pharmacy open at night or on Sunday in Berlin?",
+        "a": "Berlin runs a rotating emergency pharmacy service, so there is always an Apotheke open overnight and on Sundays and public holidays. Find the nearest one through the official Notdienstfinder run by the Apothekerkammer Berlin. Expect a small emergency service fee of a few euro for handovers late at night, on Sundays and on holidays. That fee is normal, not a scam."
+      },
+      {
+        "q": "What should I do if my wallet or phone is stolen in Berlin?",
+        "a": "Do two things quickly. First, block your bank and credit cards on the central German card-blocking hotline 116 116 (from abroad, +49 116 116), or through your own bank if that is faster. Second, file a police loss report, the Verlustanzeige, at any police station or online through the Berlin police Internetwache. You will need that report number for your travel insurance. For a simple theft with no danger, you do not need to call 110."
+      },
+      {
+        "q": "What do I do if I lose my passport in Berlin?",
+        "a": "Report it lost or stolen to the police and get the loss report, then contact your own country's embassy or consulate in Berlin, which is the only place that can issue an emergency travel document to get you home. Try to go on a weekday, because consular hours are short. Before your trip, photograph your passport and insurance details and store the images in your email so you can reach them without your phone."
+      },
+      {
+        "q": "Is Berlin dangerous for tourists?",
+        "a": "No, Berlin is a large, safe and well-run city, and serious emergencies are rare for visitors. The most common problem is pickpocketing in a crowd, such as a packed U-Bahn door or a busy tram, and that is annoying rather than dangerous. The sensible move is simple: save 112 and 116117 in your phone before you go, keep valuables zipped away in crowds, and photograph your documents just in case."
+      }
+    ]
   }
 }

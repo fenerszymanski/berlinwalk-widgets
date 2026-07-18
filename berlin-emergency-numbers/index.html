@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Berlin Emergency Number Finder</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='32' r='19' fill='%23E63946'/%3E%3Crect x='28' y='19' width='8' height='26' rx='2' fill='%23fff'/%3E%3Crect x='19' y='28' width='26' height='8' rx='2' fill='%23fff'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
+    --yellow:#FFE600; --amber:#F0A500; --red:#D62839; --red-deep:#a81f2d;
+    --ink:#1c2a1c; --panel:#ffffff; --bone:#f4f9ec; --line:#e3edd6;
+    --stone:#6d7b66; --shadow:0 10px 30px rgba(18,61,24,.14);
+  }
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}
+  html,body{margin:0}
+  body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .bx{max-width:940px;margin:0 auto;padding:4px}
+  .card{background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+
+  .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:18px 22px 17px}
+  .kick{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:700;margin:0 0 6px;font-family:"IBM Plex Mono",monospace}
+  .head h1{margin:0;font-size:21px;font-weight:800;line-height:1.2}
+  .head p{margin:8px 0 0;font-size:13.5px;color:#e7f3e2;max-width:760px}
+
+  .body{padding:16px 18px 18px}
+
+  .lede{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--stone);font-weight:700;font-family:"IBM Plex Mono",monospace;margin:2px 0 10px}
+
+  /* Two headline dial cards */
+  .dials{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+  .dial{border-radius:15px;padding:15px 16px 16px;color:#fff;position:relative;overflow:hidden}
+  .dial.medical{background:linear-gradient(150deg,var(--red) 0%,var(--red-deep) 100%)}
+  .dial.police{background:linear-gradient(150deg,#2e7d32 0%,var(--green-deep) 100%)}
+  .dial .num{font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:40px;line-height:1;letter-spacing:.01em}
+  .dial .for{margin:8px 0 2px;font-size:14px;font-weight:800}
+  .dial .desc{font-size:12.5px;opacity:.94;line-height:1.4}
+  .dial .free{display:inline-block;margin-top:9px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:3px 9px;font-size:10.5px;font-weight:700;letter-spacing:.04em;font-family:"IBM Plex Mono",monospace}
+
+  .note911{margin:12px 0 4px;background:var(--bone);border:1px solid var(--line);border-left:4px solid var(--amber);border-radius:10px;padding:10px 13px;font-size:12.5px;color:var(--green-deep)}
+  .note911 b{color:var(--red-deep)}
+
+  .divider{display:flex;align-items:center;gap:10px;margin:18px 0 12px}
+  .divider .l{flex:1;height:1px;background:var(--line)}
+  .divider h2{margin:0;font-size:14px;font-weight:800;color:var(--green-deep);white-space:nowrap}
+
+  /* Situation chips */
+  .sits{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .sit{border:1.5px solid var(--line);background:#fff;border-radius:13px;padding:11px 12px;cursor:pointer;text-align:left;font-family:Montserrat,sans-serif;display:flex;gap:10px;align-items:center;transition:border-color .15s,background .15s,transform .05s}
+  .sit:hover{border-color:var(--lime);background:#fcfef8}
+  .sit:active{transform:translateY(1px)}
+  .sit[aria-pressed="true"]{border-color:var(--green);background:#eef6e3;box-shadow:0 0 0 2px rgba(27,94,32,.12) inset}
+  .sit .em{font-size:20px;line-height:1;flex:none}
+  .sit .lb{font-size:12.8px;font-weight:700;color:var(--green-deep);line-height:1.25}
+
+  /* Result panel */
+  .result{margin-top:14px;border:1.5px solid var(--line);border-radius:15px;overflow:hidden;background:#fff}
+  .result .top{display:flex;gap:14px;align-items:center;padding:15px 16px;border-bottom:1px solid var(--line)}
+  .result .top.tone-red{background:linear-gradient(135deg,#fde8ea,#fff)}
+  .result .top.tone-green{background:linear-gradient(135deg,#eef6e3,#fff)}
+  .result .top.tone-amber{background:linear-gradient(135deg,#fff5df,#fff)}
+  .result .big{font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:30px;line-height:1.05;color:var(--green-deep);flex:none}
+  .result .big.red{color:var(--red-deep)}
+  .result .big.small{font-size:19px}
+  .result .rt{flex:1;min-width:0}
+  .result .rt h3{margin:0 0 5px;font-size:14px;font-weight:800;color:var(--ink)}
+  .tags{display:flex;flex-wrap:wrap;gap:6px}
+  .tag{font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-family:"IBM Plex Mono",monospace;border-radius:999px;padding:3px 8px}
+  .tag.free{background:#e4f3d8;color:#33691e;border:1px solid #cfe6b7}
+  .tag.pay{background:#fde7cf;color:#8a5a00;border:1px solid #f4d59a}
+  .tag.online{background:#e2eefc;color:#1b4a86;border:1px solid #c4dbf6}
+  .rows{padding:13px 16px 15px;display:grid;gap:11px}
+  .row .rl{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);font-weight:700;font-family:"IBM Plex Mono",monospace;margin:0 0 3px}
+  .row .rv{font-size:13.5px;color:var(--ink);line-height:1.5}
+  .row .say{background:var(--bone);border:1px solid var(--line);border-radius:9px;padding:8px 11px}
+  .row .say .de{font-weight:700;color:var(--green-deep)}
+  .row a{color:var(--green);font-weight:700;text-decoration:none;border-bottom:1.5px solid var(--soft)}
+  .row a:hover{border-bottom-color:var(--green)}
+
+  .foot{margin-top:14px;font-size:12px;color:var(--stone);text-align:center;line-height:1.5}
+  .foot b{color:var(--red-deep)}
+
+  @media (max-width:560px){
+    .head h1{font-size:19px}
+    .dials{grid-template-columns:1fr}
+    .sits{grid-template-columns:1fr}
+    .dial .num{font-size:36px}
+    .result .top{flex-direction:column;align-items:flex-start;gap:9px}
+  }
+</style>
+</head>
+<body>
+<div class="bx">
+  <div class="card">
+    <div class="head">
+      <p class="kick">BerlinWalk.com • Berlin Safety</p>
+      <h1>Berlin Emergency Number Finder</h1>
+      <p>Two numbers cover almost everything in Berlin. Not sure which? Tap what is happening and get the one number to dial, what to say, and the next step.</p>
+    </div>
+
+    <div class="body">
+      <p class="lede">Memorise these two</p>
+      <div class="dials">
+        <div class="dial medical">
+          <div class="num">112</div>
+          <div class="for">Medical emergency or fire</div>
+          <div class="desc">Ambulance and fire brigade. Someone collapses, chest pain, a bad injury, a fire.</div>
+          <span class="free">FREE • ANY PHONE • EU-WIDE</span>
+        </div>
+        <div class="dial police">
+          <div class="num">110</div>
+          <div class="for">Police</div>
+          <div class="desc">A crime in progress, a theft or assault, a threat to your safety, a serious crash.</div>
+          <span class="free">FREE • ANY PHONE</span>
+        </div>
+      </div>
+
+      <div class="note911">Germany does not use <b>911</b>. And the two numbers do not overlap: 112 will not send the police, 110 will not send an ambulance.</div>
+
+      <div class="divider"><span class="l"></span><h2>Not sure? Pick what is happening</h2><span class="l"></span></div>
+
+      <div class="sits" id="sits"></div>
+
+      <div id="result"></div>
+
+      <p class="foot">If you are ever unsure whether life is in danger, call <b>112</b>. It is always the safe first call.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var SITS = [
+    {
+      id:'collapse', em:'🫥', label:'Someone collapsed or is badly hurt',
+      big:'112', bigClass:'red', tone:'red', title:'Call 112 — ambulance',
+      tags:[['free','Free call']],
+      say:'Ambulance, please.', de:'Notarzt, bitte.',
+      step:'Give your exact location first (street, station or nearest big landmark), then what happened. Stay on the line; they may guide you until help arrives.'
+    },
+    {
+      id:'breathing', em:'🫁', label:'Chest pain or trouble breathing',
+      big:'112', bigClass:'red', tone:'red', title:'Call 112 — this is an emergency',
+      tags:[['free','Free call']],
+      say:'I need an ambulance.', de:'Ich brauche einen Krankenwagen.',
+      step:'Do not wait to see if it passes. Location first, then symptoms. English is fine with Berlin dispatch.'
+    },
+    {
+      id:'fire', em:'🔥', label:'There is a fire',
+      big:'112', bigClass:'red', tone:'red', title:'Call 112 — fire brigade',
+      tags:[['free','Free call']],
+      say:'Fire! I need the fire brigade.', de:'Feuer! Ich brauche die Feuerwehr.',
+      step:'Get out and stay out first. Give the address, then what is burning and whether anyone is still inside.'
+    },
+    {
+      id:'crime', em:'🚨', label:'A crime is happening / I feel threatened',
+      big:'110', bigClass:'', tone:'green', title:'Call 110 — police',
+      tags:[['free','Free call']],
+      say:'Police, please. I need help.', de:'Polizei, bitte. Ich brauche Hilfe.',
+      step:'Get to a safe, public, well-lit spot if you can. Location first, then what is happening.'
+    },
+    {
+      id:'stolen', em:'👛', label:'My wallet, cards or phone were stolen',
+      big:'116 116', bigClass:'', bigSmall:true, tone:'green', title:'Block your cards, then report it',
+      tags:[['free','Card hotline'],['online','Police report']],
+      say:'', de:'',
+      step:'Block bank and credit cards now on the central hotline 116 116 (from abroad +49 116 116), or your bank app if faster. Then file a police loss report (Verlustanzeige) at any station or the Berlin police Internetwache online. You need that report number for travel insurance.',
+      link:['Berlin police Internetwache','https://www.internetwache-polizei-berlin.de/'],
+      note:'A simple theft with no danger does not need a 110 call.'
+    },
+    {
+      id:'doctor', em:'🤒', label:'I need a doctor, but it is not life-threatening',
+      big:'116117', bigClass:'', tone:'amber', title:'Call 116117 — doctor on call',
+      tags:[['free','24/7 service']],
+      say:'I need a doctor.', de:'Ich brauche einen Arzt.',
+      step:'For a fever, an ear infection, a sprain or similar when practices are closed at night or on weekends. Runs around the clock.',
+      link:['More: seeing a doctor in Berlin','https://www.berlinwalk.com/post/doctor-in-berlin']
+    },
+    {
+      id:'pharmacy', em:'💊', label:'I need a pharmacy at night or on Sunday',
+      big:'Notdienst', bigClass:'', bigSmall:true, tone:'amber', title:'Find the emergency pharmacy on rotation',
+      tags:[['online','Official finder'],['pay','Small out-of-hours fee']],
+      say:'', de:'',
+      step:'There is always an Apotheke open overnight and on Sundays. Use the official Notdienstfinder to find the nearest one. Expect a small emergency fee of a few euro.',
+      link:['Apothekerkammer Berlin Notdienstfinder','https://www.akberlin.de/patientinnen/notdienstfinder']
+    },
+    {
+      id:'passport', em:'🛂', label:'I lost my passport',
+      big:'Embassy', bigClass:'', bigSmall:true, tone:'green', title:'Police report, then your embassy',
+      tags:[['online','Police report'],['pay','Consular fee']],
+      say:'', de:'',
+      step:'Report it lost or stolen to the police and get the loss report. Then contact your own embassy or consulate in Berlin for an emergency travel document. Go on a weekday; consular hours are short.',
+      note:'Tip: photograph your passport and insurance before you fly and save it in your email.'
+    },
+    {
+      id:'poison', em:'☠️', label:'Possible poisoning',
+      big:'030 19240', bigClass:'red', bigSmall:true, tone:'red', title:'Poison emergency line (Charité)',
+      tags:[['free','24/7']],
+      say:'', de:'',
+      step:'For a swallowed cleaning product, a wrong medication dose or an unknown plant or mushroom. Staffed around the clock. If the person is unconscious or struggling to breathe, call 112 first.'
+    },
+    {
+      id:'crisis', em:'💚', label:'A mental-health crisis',
+      big:'Krisendienst', bigClass:'', bigSmall:true, tone:'green', title:'Berliner Krisendienst — free, confidential',
+      tags:[['free','Around the clock']],
+      say:'', de:'',
+      step:'Free, confidential support with region-based crisis lines reachable at any hour. Their site lists the right number for each part of the city. If there is immediate danger to life, call 112.',
+      link:['Berliner Krisendienst','https://www.berliner-krisendienst.de/en/']
+    }
+  ];
+
+  var sitsEl = document.getElementById('sits');
+  var resultEl = document.getElementById('result');
+  var current = null;
+
+  SITS.forEach(function(s){
+    var b = document.createElement('button');
+    b.className = 'sit';
+    b.type = 'button';
+    b.setAttribute('aria-pressed','false');
+    b.setAttribute('data-id', s.id);
+    b.innerHTML = '<span class="em" aria-hidden="true">'+s.em+'</span><span class="lb">'+s.label+'</span>';
+    b.addEventListener('click', function(){ select(s.id); });
+    sitsEl.appendChild(b);
+  });
+
+  function esc(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function select(id){
+    var s = SITS.filter(function(x){return x.id===id;})[0];
+    if(!s) return;
+    current = (current===id) ? null : id;
+    Array.prototype.forEach.call(sitsEl.children, function(btn){
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-id')===current ? 'true':'false');
+    });
+    if(!current){ resultEl.innerHTML=''; nudge(); return; }
+    render(s);
+    nudge();
+  }
+
+  function render(s){
+    var tags = (s.tags||[]).map(function(t){ return '<span class="tag '+t[0]+'">'+esc(t[1])+'</span>'; }).join('');
+    var rows = '';
+    if(s.say){
+      rows += '<div class="row"><p class="rl">Say this</p><div class="rv say">"'+esc(s.say)+'" <span class="de">'+esc(s.de)+'</span></div></div>';
+    }
+    rows += '<div class="row"><p class="rl">Then</p><div class="rv">'+esc(s.step)+'</div></div>';
+    if(s.note){
+      rows += '<div class="row"><div class="rv" style="color:var(--stone);font-size:12.5px">'+esc(s.note)+'</div></div>';
+    }
+    if(s.link){
+      rows += '<div class="row"><div class="rv"><a href="'+s.link[1]+'" target="_blank" rel="noopener">'+esc(s.link[0])+'</a></div></div>';
+    }
+    var bigCls = 'big'+(s.bigClass?(' '+s.bigClass):'')+(s.bigSmall?' small':'');
+    resultEl.innerHTML =
+      '<div class="result">'+
+        '<div class="top tone-'+s.tone+'">'+
+          '<div class="'+bigCls+'">'+esc(s.big)+'</div>'+
+          '<div class="rt"><h3>'+esc(s.title)+'</h3><div class="tags">'+tags+'</div></div>'+
+        '</div>'+
+        '<div class="rows">'+rows+'</div>'+
+      '</div>';
+  }
+
+  function nudge(){
+    if(window.BWBrand && typeof window.BWBrand.postHeight==='function'){ window.BWBrand.postHeight(); }
+  }
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
