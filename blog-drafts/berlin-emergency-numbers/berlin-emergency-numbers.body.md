@@ -26,7 +26,7 @@ For immediate danger or a crime in progress, the police answer on 110. Report a 
 
 ## When it is serious but not a 112 emergency: 116117
 
-This is the number that saves your evening more often than 112 ever will. **116117 is the on-call medical service** for when you genuinely need a doctor but it is not life-threatening: a high fever, a nasty ear infection, a sprain, a migraine that will not lift. It runs around the clock, including nights and weekends, exactly when normal doctors' practices in Berlin are closed. The telephone service is officially **German-only**, so ask a German speaker to help if you need one; the [116117 English page](https://www.116117.de/de/englisch.php) also explains the service and links to the practice search.
+This is the number many visitors overlook. **116117 is the on-call medical service** for when you genuinely need a doctor but it is not life-threatening: a high fever, a nasty ear infection, a sprain, a migraine that will not lift. It runs around the clock, including nights and weekends when normal practices may be closed. The telephone service is officially **German-only**, so ask a German speaker to help if you need one; the [116117 English page](https://www.116117.de/de/englisch.php) also explains the service and links to the practice search.
 
 Think of it this way. If there is a risk to life or permanent injury, call 112. If you need urgent medical help that is not life-threatening and it is 9pm on a Sunday, call 116117. Do not use an emergency line for routine medical advice. If you are still unsure whether you need a doctor at all, my guide on [seeing a doctor in Berlin as a visitor](/post/doctor-in-berlin) walks through how the system actually works.
 

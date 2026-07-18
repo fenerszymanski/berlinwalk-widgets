@@ -9,7 +9,7 @@ _Central Berlin is built for trains, trams, bikes and feet. A car is usually the
 
 For a normal city visit, you do not need a car in Berlin, and I would actively talk you out of one. Berlin is flat, huge and wired for public transport. The U-Bahn, S-Bahn, trams and buses reach almost everywhere a visitor wants to go, they run late, and one ticket covers all of them.
 
-A car in the centre mostly gives you three new problems: the low-emission zone rules, some of the most managed parking in Germany, and traffic that a bike or a train slips straight past. The money you would spend on rental, fuel, parking and stress buys a lot of tickets, taxis and the occasional day-trip rental for the one day you actually need wheels.
+A car in the centre mostly gives you three new problems: the low-emission zone rules, managed street parking, and traffic that a bike or a train slips straight past. The money you would spend on rental, fuel, parking and stress buys a lot of tickets, taxis and the occasional day-trip rental for the one day you actually need wheels.
 
 There is a real exception, and I will get to it: certain out-of-town day trips are genuinely easier with a car. But that is a reason to rent for a day, not to keep a car parked outside your hotel for a week.
 
@@ -17,7 +17,7 @@ There is a real exception, and I will get to it: certain out-of-town day trips a
 
 ## Why the city works better without a car
 
-Start with the thing a car is supposed to give you, which is reach. In Berlin, the trains already do that. The [public transport network](/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus) covers the whole city on a single AB ticket, the U-Bahn and trams run into the early hours, and on Friday and Saturday nights the U-Bahn and S-Bahn run right through. You are never really stuck.
+Start with the thing a car is supposed to give you, which is reach. In Berlin, the trains already do that. The [public transport network](/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus) covers the whole city on a single AB ticket, the U-Bahn and trams run into the early hours, and on Friday and Saturday nights the U-Bahn and S-Bahn run right through. For most visitor itineraries, that is enough.
 
 Now add what a car takes away. Most of the inner city sits inside the S-Bahn ring, which is one large low-emission zone. Parking in the central districts is metered and permit-controlled street by street. Berlin drivers, cyclists and tram tracks all share the road, and a visitor who does not know the junctions spends the whole time tense. None of that makes for a relaxed holiday.
 
