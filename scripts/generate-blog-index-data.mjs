@@ -50,6 +50,7 @@ const TOPICS = [
     kicker: 'Useful now',
     description: 'Clear answers for transport, money, luggage, safety, weather, and planning decisions visitors actually search for.',
     slugs: [
+      'is-berlin-walkable',
       'neukolln-berlin',
       'berlin-emergency-numbers',
       'smoking-in-berlin',
@@ -118,6 +119,7 @@ const TOPICS = [
     kicker: 'Context',
     description: 'Berlin history, myths, before-and-after stories, and the background that makes the city click.',
     slugs: [
+      'berlin-ghost-stations',
       'why-is-berlin-founding-year-1237',
       'famous-movies-tv-shows-filmed-in-berlin',
       'where-was-the-berlin-wall-interactive-map',

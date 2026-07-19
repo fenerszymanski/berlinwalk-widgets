@@ -187,6 +187,35 @@
     .creditsLayer{padding:8px}
     .creditsDialog{max-height:420px;padding:15px 14px 16px}
   }
+
+  /* Wix Blog narrows rich-content embeds to about 236px on a 390px phone.
+     Use three label rows there so station names stay readable and tappable. */
+  @media (max-width:260px){
+    .map{padding-left:10px;padding-right:10px}
+    .lhead{gap:6px}
+    .lname{font-size:11px}
+    .lnote{font-size:8px;line-height:1.35}
+    .sectorlab{font-size:8px;letter-spacing:.08em}
+    .endcap{font-size:7.5px;letter-spacing:.05em}
+    .stops{height:184px}
+    .stop{width:44px}
+    .stop .nm{font-size:7.5px;line-height:1.15;overflow-wrap:anywhere}
+    .stop:nth-of-type(even) .nm{margin-top:0}
+    .stop:nth-of-type(even)::before{display:none}
+    .stop:nth-of-type(3n+2) .nm{margin-top:34px}
+    .stop:nth-of-type(3n) .nm{margin-top:68px}
+    .stop:nth-of-type(3n+2)::before,
+    .stop:nth-of-type(3n)::before{
+      content:"";display:block;position:absolute;top:17px;left:50%;width:1.5px;
+      transform:translateX(-50%);background:currentColor;opacity:.28
+    }
+    .stop:nth-of-type(3n+2)::before{height:34px}
+    .stop:nth-of-type(3n)::before{height:68px}
+    .map[data-era="then"] .stop:nth-of-type(3n+2)::before,
+    .map[data-era="then"] .stop:nth-of-type(3n)::before{color:#8fa389}
+    .map[data-era="now"] .stop:nth-of-type(3n+2)::before,
+    .map[data-era="now"] .stop:nth-of-type(3n)::before{color:var(--stone)}
+  }
 </style>
 </head>
 <body>

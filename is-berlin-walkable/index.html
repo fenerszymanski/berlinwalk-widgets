@@ -115,6 +115,14 @@
     .creditsLayer{padding:8px}
     .creditsDialog{max-height:420px;padding:15px 14px 16px}
   }
+
+  /* Wix Blog can reduce this iframe to about 236px on a 390px phone. */
+  @media (max-width:260px){
+    .row{grid-template-columns:minmax(0,1fr) auto;gap:6px;padding:9px 8px}
+    .row .name{font-size:11.5px;line-height:1.25;overflow-wrap:anywhere}
+    .row .time{font-size:12px}
+    .row .time small{font-size:9.5px}
+  }
 </style>
 </head>
 <body>

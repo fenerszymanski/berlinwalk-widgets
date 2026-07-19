@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-07-19T02:04:54.572Z",
+  "updatedAt": "2026-07-19T19:25:15.945Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 233,
+  "totalPosts": 235,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -514,6 +514,23 @@
       "description": "Clear answers for transport, money, luggage, safety, weather, and planning decisions visitors actually search for.",
       "posts": [
         {
+          "title": "Is Berlin Walkable? How Far Apart the Main Sights Really Are (2026)",
+          "slug": "is-berlin-walkable",
+          "path": "/post/is-berlin-walkable",
+          "url": "https://www.berlinwalk.com/post/is-berlin-walkable",
+          "excerpt": "Is Berlin walkable? The central sights are far closer than the map suggests, and flat underfoot. Here is how far apart they really are, the one walk to do on foot, and when to take the train instead.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "practical",
+          "topicLabel": "Practical Berlin",
+          "readTime": "5 min read",
+          "publishedDate": "2026-07-19T19:09:58.774Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_990d3877d60548fc998d7689048d8573~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-is-berlin-walkable-cover.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_990d3877d60548fc998d7689048d8573~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-is-berlin-walkable-cover.jpg",
+          "alt": "The Bode Museum dome and the TV Tower rising across the Spree on Berlin's Museum Island, two of the central sights that sit within an easy walk of each other",
+          "relatedToolSlug": "is-berlin-walkable"
+        },
+        {
           "title": "Neukölln Berlin: Which Part Is Worth Your Time (2026 Local Guide)",
           "slug": "neukolln-berlin",
           "path": "/post/neukolln-berlin",
@@ -665,23 +682,6 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_537047bae9694f398e7bf6367fc348e3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/lost-property-berlin-01-berlin-hauptbahnhof-lost-property-cover.jpg",
           "alt": "Berlin Hauptbahnhof exterior with the DB sign and travelers outside the main entrance",
           "relatedToolSlug": "berlin-lost-item-router"
-        },
-        {
-          "title": "Can You Drink Alcohol in Public in Berlin? Rules Tourists Should Know",
-          "slug": "drink-alcohol-in-public-berlin",
-          "path": "/post/drink-alcohol-in-public-berlin",
-          "url": "https://www.berlinwalk.com/post/drink-alcohol-in-public-berlin",
-          "excerpt": "A practical Berlin tourist guide to public drinking: parks, Spätis, public transport, beer gardens, youth rules, and the 2026 Zoo/Ostbahnhof station exception.",
-          "category": "Tourist Tips",
-          "categorySlug": "tourist-tips",
-          "topic": "first-day",
-          "topicLabel": "First Day in Berlin",
-          "readTime": "7 min read",
-          "publishedDate": "2026-06-27T06:30:33.886Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_08df2967779745edb1a653ebd530bf12~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/drink-alcohol-in-public-berlin-01-james-simon-park-cover.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_08df2967779745edb1a653ebd530bf12~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/drink-alcohol-in-public-berlin-01-james-simon-park-cover.jpg",
-          "alt": "People sitting on the grass in James-Simon-Park near Museum Island and the Berlin TV Tower",
-          "relatedToolSlug": ""
         }
       ]
     },
@@ -1051,6 +1051,23 @@
       "description": "Berlin history, myths, before-and-after stories, and the background that makes the city click.",
       "posts": [
         {
+          "title": "Berlin Ghost Stations: The 15 Stops Trains Passed Without Stopping",
+          "slug": "berlin-ghost-stations",
+          "path": "/post/berlin-ghost-stations",
+          "url": "https://www.berlinwalk.com/post/berlin-ghost-stations",
+          "excerpt": "For 28 years West Berlin trains ran through East Berlin without stopping, past 15 sealed and guarded platforms. Here is the full list, what happened at each one, and the only two places where it is still worth getting off today.",
+          "category": "Berlin History",
+          "categorySlug": "berlin-history",
+          "topic": "history-myths",
+          "topicLabel": "Berlin History & Myths",
+          "readTime": "7 min read",
+          "publishedDate": "2026-07-19T19:09:57.775Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_00d7de5001374180a09ddafe932dab79~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-nordbahnhof-mezzanine.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_00d7de5001374180a09ddafe932dab79~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-nordbahnhof-mezzanine.jpg",
+          "alt": "The empty tiled mezzanine level of Nordbahnhof S-Bahn station in Berlin",
+          "relatedToolSlug": "berlin-ghost-stations"
+        },
+        {
           "title": "Why Is Berlin's Founding Year 1237? Cölln, Medieval Berlin and the City Before 1933",
           "slug": "why-is-berlin-founding-year-1237",
           "path": "/post/why-is-berlin-founding-year-1237",
@@ -1202,23 +1219,6 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_42bff55d66fb465eb52d8c5d7e2d8b79~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Kennedy_12_dpa.jpg",
           "alt": "@dpa",
           "relatedToolSlug": ""
-        },
-        {
-          "title": "Sachsenhausen from Berlin: Train, Tickets and How to Visit Respectfully",
-          "slug": "sachsenhausen-from-berlin",
-          "path": "/post/sachsenhausen-from-berlin",
-          "url": "https://www.berlinwalk.com/post/sachsenhausen-from-berlin",
-          "excerpt": "A practical guide to visiting Sachsenhausen from Berlin: train routes, ABC tickets, opening hours, free entry, audio guides, public tours and respectful timing.",
-          "category": "Berlin History",
-          "categorySlug": "berlin-history",
-          "topic": "history-myths",
-          "topicLabel": "Berlin History & Myths",
-          "readTime": "6 min read",
-          "publishedDate": "2026-06-26T03:49:02.920Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_3446c472b6ac429fa4780b19ba7a40ab~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/sachsenhausen-from-berlin-01-sachsenhausen-tower-a-cover.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_3446c472b6ac429fa4780b19ba7a40ab~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/sachsenhausen-from-berlin-01-sachsenhausen-tower-a-cover.jpg",
-          "alt": "Tower A entrance building at Sachsenhausen Memorial in Oranienburg near Berlin",
-          "relatedToolSlug": "sachsenhausen-visit-planner"
         }
       ]
     },
@@ -1617,6 +1617,40 @@
   ],
   "latest": [
     {
+      "title": "Is Berlin Walkable? How Far Apart the Main Sights Really Are (2026)",
+      "slug": "is-berlin-walkable",
+      "path": "/post/is-berlin-walkable",
+      "url": "https://www.berlinwalk.com/post/is-berlin-walkable",
+      "excerpt": "Is Berlin walkable? The central sights are far closer than the map suggests, and flat underfoot. Here is how far apart they really are, the one walk to do on foot, and when to take the train instead.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-07-19T19:09:58.774Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_990d3877d60548fc998d7689048d8573~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-is-berlin-walkable-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_990d3877d60548fc998d7689048d8573~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-is-berlin-walkable-cover.jpg",
+      "alt": "The Bode Museum dome and the TV Tower rising across the Spree on Berlin's Museum Island, two of the central sights that sit within an easy walk of each other",
+      "relatedToolSlug": "is-berlin-walkable"
+    },
+    {
+      "title": "Berlin Ghost Stations: The 15 Stops Trains Passed Without Stopping",
+      "slug": "berlin-ghost-stations",
+      "path": "/post/berlin-ghost-stations",
+      "url": "https://www.berlinwalk.com/post/berlin-ghost-stations",
+      "excerpt": "For 28 years West Berlin trains ran through East Berlin without stopping, past 15 sealed and guarded platforms. Here is the full list, what happened at each one, and the only two places where it is still worth getting off today.",
+      "category": "Berlin History",
+      "categorySlug": "berlin-history",
+      "topic": "history-myths",
+      "topicLabel": "Berlin History & Myths",
+      "readTime": "7 min read",
+      "publishedDate": "2026-07-19T19:09:57.775Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_00d7de5001374180a09ddafe932dab79~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-nordbahnhof-mezzanine.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_00d7de5001374180a09ddafe932dab79~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-nordbahnhof-mezzanine.jpg",
+      "alt": "The empty tiled mezzanine level of Nordbahnhof S-Bahn station in Berlin",
+      "relatedToolSlug": "berlin-ghost-stations"
+    },
+    {
       "title": "Do You Need a Car in Berlin? Driving, Parking and Renting Explained (2026)",
       "slug": "do-you-need-a-car-in-berlin",
       "path": "/post/do-you-need-a-car-in-berlin",
@@ -1785,40 +1819,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_9b41524908a640f3aaa83b83cf030d21~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-big-bus-hop-on-hop-off.jpg",
       "alt": "A Big Bus Berlin red hop-on hop-off double-decker bus waiting at a central Berlin street corner",
       "relatedToolSlug": "berlin-hop-on-hop-off-decision"
-    },
-    {
-      "title": "Berlin Then and Now: How to See the City That Disappeared",
-      "slug": "berlin-then-and-now",
-      "path": "/post/berlin-then-and-now",
-      "url": "https://www.berlinwalk.com/post/berlin-then-and-now",
-      "excerpt": "Berlin rarely preserves an old street whole. It leaves a column, a curve or an empty space. Mehringplatz shows how to connect the clues.",
-      "category": "Berlin History",
-      "categorySlug": "berlin-history",
-      "topic": "history-myths",
-      "topicLabel": "Berlin History & Myths",
-      "readTime": "6 min read",
-      "publishedDate": "2026-07-17T15:17:09.762Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_dea26d70fd4c43e5afa6a660f2fdeea8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/circa-1900-belle-alliance-platz.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_dea26d70fd4c43e5afa6a660f2fdeea8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/circa-1900-belle-alliance-platz.jpg",
-      "alt": "A colour photochrom looking through Hallesches Tor toward Belle-Alliance-Platz around 1900",
-      "relatedToolSlug": "mehringplatz-time-layer-viewer"
-    },
-    {
-      "title": "Best Rooftop Bars in Berlin: Where to Drink With a View (2026)",
-      "slug": "berlin-rooftop-bars",
-      "path": "/post/berlin-rooftop-bars",
-      "url": "https://www.berlinwalk.com/post/berlin-rooftop-bars",
-      "excerpt": "Berlin's best rooftop bars are rarely glossy sky-lounges. Half of them sit on car-park roofs. Here is which rooftop to pick, when to go for sunset, and what it costs.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-07-17T06:10:18.558Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_93163eeb3e8f46acac66b9ab435e410a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-berlin-skyline-golden.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_93163eeb3e8f46acac66b9ab435e410a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-berlin-skyline-golden.jpg",
-      "alt": "Warm golden-hour view over central Berlin with the TV Tower rising above the rooftops",
-      "relatedToolSlug": "berlin-rooftop-bars"
     }
   ]
 }
