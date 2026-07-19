@@ -7,8 +7,26 @@
   const BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   const LANDING_EXPERIMENT_ID = 'tp_lp_value_path_v1';
   const LANDING_EXPERIMENT_VARIANTS = ['control', 'value_first'];
+  const LANDING_EXPERIMENT_STATUS = 'closed_no_winner';
   const LANDING_EXPERIMENT_SESSION_KEY = 'bwTripPlannerLandingExperiment.session.v1';
   const LANDING_EXPERIMENT_LOCAL_KEY = 'bwTripPlannerLandingExperiment.local.v1';
+  // Generated from PlanArtifactV2 golden scenario `ber-morning-tour`.
+  // Keep parity with ultimate-berlin-trip-planner/engine/artifacts/ber-morning-tour.json.
+  const ENGINE_SAMPLE_V2 = Object.freeze({
+    id: 'ber-morning-tour',
+    dateRange: 'Tue 15 Sep – Thu 17 Sep 2026',
+    days: [
+      {
+        title: 'Day 1 · Alexanderplatz & Mitte',
+        stops: [
+          { time: '09:00', label: 'BER Airport → Mitte / Alexanderplatz', art: 'arrival' },
+          { time: '11:30', label: 'World Clock', art: 'history' }
+        ]
+      },
+      { title: 'Day 2 · Wall and East Berlin' },
+      { title: 'Day 3 · Charlottenburg' }
+    ]
+  });
 
   const asset = (path) => new URL(path, BASE_URL).toString();
 
@@ -242,40 +260,20 @@
       }
 
       const carried = carriedExperimentAssignment(params);
-      if (carried) {
-        if (!carried.isQa) this._persistExperimentAssignment(carried);
+      if (carried && carried.isQa) {
         return carried;
       }
 
-      const sessionAssignment = readExperimentStorage(browserStorage('sessionStorage'), LANDING_EXPERIMENT_SESSION_KEY);
-      const mayPersistLocally = functionalConsent() || analyticsConsent();
-      const localAssignment = mayPersistLocally
-        ? readExperimentStorage(browserStorage('localStorage'), LANDING_EXPERIMENT_LOCAL_KEY)
-        : null;
-      const existing = sessionAssignment || localAssignment;
-      if (existing) {
-        this._persistExperimentAssignment(existing);
-        return existing;
-      }
-
-      let coin = Math.random();
-      try {
-        if (window.crypto && typeof window.crypto.getRandomValues === 'function') {
-          const values = new Uint32Array(1);
-          window.crypto.getRandomValues(values);
-          coin = values[0] / 4294967296;
-        }
-      } catch (error) {}
-      const assignment = {
+      // The test closed without a winner. Ignore stale carried/storage
+      // assignments for normal traffic and keep the shorter control path.
+      return {
         experimentId: LANDING_EXPERIMENT_ID,
-        variant: coin < 0.5 ? 'control' : 'value_first',
-        assignmentId: randomExperimentId(),
-        assignmentSource: 'random_50_50',
-        assignedAt: new Date().toISOString(),
+        variant: 'control',
+        assignmentId: 'tpa_closed_control_20260719',
+        assignmentSource: LANDING_EXPERIMENT_STATUS,
+        assignedAt: '2026-07-19T21:30:00+02:00',
         isQa: false
       };
-      this._persistExperimentAssignment(assignment);
-      return assignment;
     }
 
     _persistExperimentAssignment(assignment) {
@@ -287,6 +285,7 @@
 
     _experimentQueryEntries() {
       const assignment = this._experimentAssignment || {};
+      if (assignment.assignmentSource === LANDING_EXPERIMENT_STATUS && !assignment.isQa) return {};
       return {
         tp_lp_experiment_id: assignment.experimentId || LANDING_EXPERIMENT_ID,
         tp_lp_variant: assignment.variant || 'control',
@@ -389,6 +388,14 @@
       const historyArt = asset('ultimate-berlin-trip-planner/assets/day-art/day-oil-history.webp');
       const museumArt = asset('ultimate-berlin-trip-planner/assets/day-art/day-oil-museums.webp');
       const foodArt = asset('ultimate-berlin-trip-planner/assets/day-art/day-oil-food.webp');
+      const sampleArt = { arrival: arrivalArt, history: historyArt, museums: museumArt, food: foodArt };
+      const sampleDay = ENGINE_SAMPLE_V2.days[0];
+      const sampleStops = sampleDay.stops.map((stop) => `
+        <figure>
+          <img src="${sampleArt[stop.art] || arrivalArt}" alt="${stop.label} plan illustration">
+          <figcaption><b>${stop.time}</b>${stop.label}</figcaption>
+        </figure>
+      `).join('');
 
       this.innerHTML = `
         <style>${this._styles()}</style>
@@ -430,29 +437,26 @@
                 </figure>
               </div>
 
-              <aside class="bw-trip-preview" aria-label="Example three-day Berlin plan">
+              <aside class="bw-trip-preview" aria-label="Engine-derived example three-day Berlin plan" data-bw-engine-sample-id="${ENGINE_SAMPLE_V2.id}">
                 <div class="bw-trip-preview-top">
-                  <strong>Sun 26 Jul – Tue 28 Jul 2026</strong>
+                  <strong>${ENGINE_SAMPLE_V2.dateRange}</strong>
                   <span>3 days</span>
                 </div>
                 <figure class="bw-trip-preview-map">
                   <img src="${mapArt}" alt="Illustrated map of central Berlin">
-                  <figcaption>Alexanderplatz · Mitte</figcaption>
+                  <figcaption>BER Airport → Alexanderplatz</figcaption>
                 </figure>
                 <article class="bw-trip-preview-day bw-trip-preview-day-open">
                   <div class="bw-trip-preview-day-head">
-                    <strong>Day 1 · Mitte</strong>
+                    <strong>${sampleDay.title}</strong>
                     <span>Open map</span>
                   </div>
-                  <div class="bw-trip-preview-stops">
-                    <figure><img src="${arrivalArt}" alt="Alexanderplatz illustration"><figcaption>Alexanderplatz</figcaption></figure>
-                    <figure><img src="${museumArt}" alt="Museum Island illustration"><figcaption>Museum Island</figcaption></figure>
-                    <figure><img src="${foodArt}" alt="Hackescher Markt illustration"><figcaption>Hackescher Markt</figcaption></figure>
-                    <figure><img src="${historyArt}" alt="Gendarmenmarkt illustration"><figcaption>Gendarmenmarkt</figcaption></figure>
+                  <div class="bw-trip-preview-stops" style="--preview-stop-count:${sampleDay.stops.length}">
+                    ${sampleStops}
                   </div>
                 </article>
-                <div class="bw-trip-preview-day"><strong>Day 2 · Kreuzberg &amp; Neukölln</strong><span>View</span></div>
-                <div class="bw-trip-preview-day"><strong>Day 3 · Prenzlauer Berg</strong><span>View</span></div>
+                <div class="bw-trip-preview-day"><strong>${ENGINE_SAMPLE_V2.days[1].title}</strong><span>View</span></div>
+                <div class="bw-trip-preview-day"><strong>${ENGINE_SAMPLE_V2.days[2].title}</strong><span>View</span></div>
                 <div class="bw-trip-preview-paid">
                   <div><strong>Full 3-day plan — €7.99</strong><span>Daily stops · Maps · PDF · Opening checks</span></div>
                   <a href="#planner" data-bw-trip-landing-cta="sample_plan">View plan</a>
@@ -1191,7 +1195,7 @@
         .bw-trip-preview-stops {
           display: grid;
           gap: 8px;
-          grid-template-columns: repeat(4, minmax(0, 1fr));
+          grid-template-columns: repeat(var(--preview-stop-count, 4), minmax(0, 1fr));
         }
 
         .bw-trip-preview-stops figure {
@@ -1214,6 +1218,14 @@
           font-weight: 800;
           line-height: 1.25;
           padding: 8px;
+        }
+
+        .bw-trip-preview-stops figcaption b {
+          color: #1B5E20;
+          display: block;
+          font-size: 9px;
+          letter-spacing: .5px;
+          margin-bottom: 3px;
         }
 
         .bw-trip-preview-paid {

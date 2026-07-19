@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactSchemaVersion": "2.0.0",
+  "scenarios": [
+    {
+      "id": "ber-morning-tour",
+      "title": "Tuesday morning BER arrival with the 11:30 tour",
+      "query": "date=2026-09-15&tripLength=3&arrivalTime=morning&arrivalPoint=ber&stayArea=mitte&groupType=solo&firstTime=yes&interests=history%2Cwall&budgetStyle=smart&mustHandle=rain&pace=balanced&tourIntent=considering&weather=off",
+      "expect": {
+        "quality": "pass",
+        "day1PreviewPlaceIds": ["arrival_transfer", "world_clock"],
+        "worldClockOwnersDay1": 1
+      }
+    },
+    {
+      "id": "monday-museum",
+      "title": "Monday museum-heavy one-day plan",
+      "query": "date=2026-09-14&tripLength=1&arrivalTime=morning&arrivalPoint=hotel&stayArea=mitte&groupType=couple&firstTime=yes&interests=museums%2Chistory&budgetStyle=comfort&mustHandle=reservations%2Crain&pace=balanced&tourIntent=maybe&weather=off",
+      "expect": {
+        "quality": "pass",
+        "openingStatusDay1": "monday",
+        "primaryClosed": false
+      }
+    },
+    {
+      "id": "two-rain-days",
+      "title": "Two consecutive rainy forecast days",
+      "query": "date=2026-09-15&tripLength=4&arrivalTime=morning&arrivalPoint=ber&stayArea=mitte&groupType=solo&firstTime=yes&interests=wall%2Cmuseums%2Chistory&budgetStyle=smart&mustHandle=rain&pace=balanced&tourIntent=maybe&weather=off&mockRainDays=2%2C3",
+      "expect": {
+        "quality": "pass",
+        "rainyDays": 2,
+        "noExposedRouteMovedToRain": true
+      }
+    },
+    {
+      "id": "charlottenburg-museum-variant",
+      "title": "Anti-repeat museum variant in Charlottenburg",
+      "query": "date=2026-09-15&tripLength=3&arrivalTime=morning&arrivalPoint=ber&stayArea=mitte&groupType=solo&firstTime=yes&interests=history%2Cwall&budgetStyle=smart&mustHandle=rain&pace=balanced&tourIntent=considering&weather=off",
+      "expect": {
+        "quality": "pass",
+        "charlottenburgHasMuseumIslandText": false,
+        "charlottenburgAreaOnly": true
+      }
+    },
+    {
+      "id": "official-reservation-action",
+      "title": "Reservation-aware central history and museum plan",
+      "query": "date=2026-09-16&tripLength=2&arrivalTime=morning&arrivalPoint=hotel&stayArea=mitte&groupType=couple&firstTime=yes&interests=history%2Cmuseums&budgetStyle=comfort&mustHandle=reservations%2Crain&pace=balanced&tourIntent=maybe&weather=off",
+      "expect": {
+        "quality": "pass",
+        "officialReservationRequired": true
+      }
+    }
+  ]
+}

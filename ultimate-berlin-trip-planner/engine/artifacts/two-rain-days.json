@@ -1,0 +1,902 @@
+{
+  "schemaVersion": "2.0.0",
+  "engineVersion": "2026.07.19-output-v2.1",
+  "scenarioId": "two-rain-days",
+  "input": {
+    "arrivalDate": "2026-09-15",
+    "tripLength": 4,
+    "arrivalTime": "morning",
+    "arrivalPoint": "ber",
+    "stayArea": "mitte",
+    "groupType": "solo",
+    "firstTime": "yes",
+    "interests": [
+      "wall",
+      "museums",
+      "history"
+    ],
+    "budgetStyle": "smart",
+    "mustHandle": [
+      "rain"
+    ],
+    "pace": "balanced",
+    "tourIntent": "maybe",
+    "labels": {
+      "arrivalDate": "Tue, 15 Sept 2026",
+      "tripLength": "4 days",
+      "arrivalTime": "Before 09:00",
+      "arrivalPoint": "BER Airport",
+      "stayArea": "Mitte / Alexanderplatz",
+      "groupType": "Solo",
+      "firstTime": "Yes",
+      "interests": "Berlin Wall / Cold War, Museums, History",
+      "budgetStyle": "Smart spend",
+      "mustHandle": "Rain backup",
+      "pace": "Balanced",
+      "tourIntent": "Maybe later"
+    }
+  },
+  "title": "Build Berlin around the first real orientation day",
+  "summary": "This plan keeps Berlin area-by-area instead of sending you across the city all day. Start with context early, then use the rest of the trip for Wall history, museums, food, neighborhoods, and slower backup time.",
+  "displayDate": "Tue, 15 Sept 2026",
+  "ticket": "ABC first",
+  "tourFit": "Arrival day 11:30",
+  "days": [
+    {
+      "dayId": "day_2026-09-15__route_arrival__world_clock_brandenburg_gate_topography_terror_reichstag",
+      "routeId": "route_arrival__world_clock_brandenburg_gate_topography_terror_reichstag",
+      "dayNumber": 1,
+      "dateKey": "2026-09-15",
+      "title": "Arrival and first Berlin orientation",
+      "theme": "Arrival day",
+      "planKey": "arrival",
+      "areaIds": [
+        "alexanderplatz",
+        "mitte"
+      ],
+      "places": [
+        {
+          "placeId": "world_clock",
+          "label": "World Clock",
+          "area": "Alexanderplatz",
+          "areaId": "alexanderplatz",
+          "type": "central landmark",
+          "lat": 52.521918,
+          "lng": 13.413215,
+          "indoor": false,
+          "closedDays": [],
+          "note": ""
+        },
+        {
+          "placeId": "brandenburg_gate",
+          "label": "Brandenburg Gate",
+          "area": "Mitte",
+          "areaId": "mitte",
+          "type": "landmark",
+          "lat": 52.5163,
+          "lng": 13.3777,
+          "indoor": false,
+          "closedDays": [],
+          "note": ""
+        },
+        {
+          "placeId": "topography_terror",
+          "label": "Topography of Terror",
+          "area": "Mitte / Kreuzberg",
+          "areaId": "mitte",
+          "type": "history",
+          "lat": 52.5066,
+          "lng": 13.3823,
+          "indoor": true,
+          "closedDays": [],
+          "note": "Daily indoor and outdoor history backup; 24/31 Dec and 1 Jan are closure exceptions."
+        },
+        {
+          "placeId": "reichstag",
+          "label": "Reichstag",
+          "area": "Mitte",
+          "areaId": "mitte",
+          "type": "landmark",
+          "lat": 52.5186,
+          "lng": 13.3762,
+          "indoor": true,
+          "closedDays": [],
+          "note": "The dome needs advance registration and can close for security or maintenance."
+        }
+      ],
+      "segments": [
+        {
+          "segmentId": "route_arrival__world_clock_brandenburg_gate_topography_terror_reichstag__01_arrival_arrival_transfer",
+          "routeId": "route_arrival__world_clock_brandenburg_gate_topography_terror_reichstag",
+          "type": "arrival",
+          "timeLabel": "Arrival",
+          "window": "09:00-10:45",
+          "title": "Get central without over-solving Berlin",
+          "copy": "Hop on the ABC train, drop your bags, and head to the BerlinWalk tour. I will meet you at the World Clock.",
+          "primaryPlace": {
+            "placeId": "arrival_transfer",
+            "label": "BER Airport → Mitte / Alexanderplatz",
+            "url": "https://www.google.com/maps/search/?api=1&query=Berlin%20Brandenburg%20Airport"
+          },
+          "mapStopOwner": true,
+          "mapLinks": []
+        },
+        {
+          "segmentId": "route_arrival__world_clock_brandenburg_gate_topography_terror_reichstag__02_tour_world_clock",
+          "routeId": "route_arrival__world_clock_brandenburg_gate_topography_terror_reichstag",
+          "type": "tour",
+          "timeLabel": "BerlinWalk",
+          "window": "11:30-13:30",
+          "title": "Use the walking tour as your first Berlin introduction",
+          "copy": "Join BerlinWalk at 11:30 from the World Clock for context.",
+          "primaryPlace": {
+            "placeId": "world_clock",
+            "label": "World Clock",
+            "url": "https://www.google.com/maps/search/?api=1&query=Weltzeituhr%20Alexanderplatz%20Berlin"
+          },
+          "mapStopOwner": true,
+          "mapLinks": [
+            {
+              "placeId": "world_clock",
+              "label": "World Clock",
+              "url": "https://www.google.com/maps/search/?api=1&query=Weltzeituhr%20Alexanderplatz%20Berlin"
+            }
+          ]
+        },
+        {
+          "segmentId": "route_arrival__world_clock_brandenburg_gate_topography_terror_reichstag__03_meal_curry_61",
+          "routeId": "route_arrival__world_clock_brandenburg_gate_topography_terror_reichstag",
+          "type": "meal",
+          "timeLabel": "Lunch",
+          "window": "13:30-14:30",
+          "title": "Lunch near Hackescher Markt",
+          "copy": "",
+          "primaryPlace": {
+            "placeId": "curry_61",
+            "label": "Curry 61",
+            "url": "https://www.google.com/maps/search/?api=1&query=Curry%2061%20Berlin"
+          },
+          "mapStopOwner": true,
+          "mapLinks": [
+            {
+              "placeId": "curry_61",
+              "label": "Curry 61",
+              "url": "https://www.google.com/maps/search/?api=1&query=Curry%2061%20Berlin"
+            },
+            {
+              "placeId": "shiso_burger",
+              "label": "Shiso Burger",
+              "url": "https://www.google.com/maps/search/?api=1&query=Shiso%20Burger%20Berlin%20Mitte"
+            }
+          ]
+        },
+        {
+          "segmentId": "route_arrival__world_clock_brandenburg_gate_topography_terror_reichstag__04_visit_brandenburg_gate",
+          "routeId": "route_arrival__world_clock_brandenburg_gate_topography_terror_reichstag",
+          "type": "visit",
+          "timeLabel": "Afternoon",
+          "window": "14:30-17:00",
+          "title": "Topography of Terror as the free history stop",
+          "copy": "Stay central and use Topography of Terror as the main stop. If the day feels too heavy, switch to the Brandenburg Gate and memorial walk.",
+          "primaryPlace": {
+            "placeId": "brandenburg_gate",
+            "label": "Brandenburg Gate",
+            "url": "https://www.google.com/maps/search/?api=1&query=Brandenburger%20Tor%20Berlin"
+          },
+          "mapStopOwner": true,
+          "mapLinks": [
+            {
+              "placeId": "brandenburg_gate",
+              "label": "Brandenburg Gate",
+              "url": "https://www.google.com/maps/search/?api=1&query=Brandenburger%20Tor%20Berlin"
+            },
+            {
+              "placeId": "topography_terror",
+              "label": "Topography of Terror",
+              "url": "https://www.google.com/maps/search/?api=1&query=Topography%20of%20Terror%20Berlin"
+            }
+          ]
+        },
+        {
+          "segmentId": "route_arrival__world_clock_brandenburg_gate_topography_terror_reichstag__05_meal_claerchens_ballhaus",
+          "routeId": "route_arrival__world_clock_brandenburg_gate_topography_terror_reichstag",
+          "type": "meal",
+          "timeLabel": "Evening",
+          "window": "After 18:00",
+          "title": "Easy dinner, then stop",
+          "copy": "",
+          "primaryPlace": {
+            "placeId": "claerchens_ballhaus",
+            "label": "Clärchens Ballhaus",
+            "url": "https://www.google.com/maps/search/?api=1&query=Claerchens%20Ballhaus%20Berlin"
+          },
+          "mapStopOwner": true,
+          "mapLinks": [
+            {
+              "placeId": "claerchens_ballhaus",
+              "label": "Clärchens Ballhaus",
+              "url": "https://www.google.com/maps/search/?api=1&query=Claerchens%20Ballhaus%20Berlin"
+            }
+          ]
+        }
+      ],
+      "route": {
+        "url": "https://www.google.com/maps/dir/?api=1&origin=52.521918%2C13.413215&destination=52.5186%2C13.3762&travelmode=walking&waypoints=52.5163%2C13.3777%7C52.5066%2C13.3823",
+        "travelMode": "walking",
+        "totalDistanceKm": 5,
+        "longestSegmentKm": 2.5
+      },
+      "weather": {
+        "mode": "Monthly average",
+        "title": "September average, 20 C high",
+        "cue": "Bring a light rain layer, but keep the day mostly outdoors.",
+        "rainy": false
+      },
+      "opening": {
+        "status": "weekday",
+        "primaryClosed": false,
+        "warning": null
+      },
+      "reservation": {
+        "required": true,
+        "placeId": "reichstag",
+        "label": "Open official registration",
+        "url": "https://www.bundestag.de/en/visittheBundestag/dome/registration-245686",
+        "source": "German Bundestag",
+        "checkedAt": "2026-07-19"
+      },
+      "risks": [],
+      "previewStops": [
+        {
+          "time": "09:00",
+          "placeId": "arrival_transfer",
+          "label": "BER Airport → Mitte / Alexanderplatz",
+          "copy": "Take the FEX or a regional train from BER, make the final connection to Mitte / Alexanderplatz, and leave your bags before sightseeing."
+        },
+        {
+          "time": "11:30",
+          "placeId": "world_clock",
+          "label": "World Clock",
+          "copy": "Start at the World Clock, Alexanderplatz’s classic meeting point. It is a good place to look around before the walk starts."
+        }
+      ],
+      "weatherSwap": null,
+      "openingSwap": null
+    },
+    {
+      "dayId": "day_2026-09-16__route_wall__wall_memorial_east_side_gallery_oberbaum_bridge_raw_gelande",
+      "routeId": "route_wall__wall_memorial_east_side_gallery_oberbaum_bridge_raw_gelande",
+      "dayNumber": 2,
+      "dateKey": "2026-09-16",
+      "title": "Cold War geography",
+      "theme": "Wall and East Berlin",
+      "planKey": "wall",
+      "areaIds": [
+        "wedding",
+        "friedrichshain"
+      ],
+      "places": [
+        {
+          "placeId": "wall_memorial",
+          "label": "Wall Memorial",
+          "area": "Wedding / Mitte",
+          "areaId": "wedding",
+          "type": "history",
+          "lat": 52.5351,
+          "lng": 13.3903,
+          "indoor": false,
+          "closedDays": [],
+          "note": ""
+        },
+        {
+          "placeId": "east_side_gallery",
+          "label": "East Side Gallery",
+          "area": "Friedrichshain",
+          "areaId": "friedrichshain",
+          "type": "wall",
+          "lat": 52.505,
+          "lng": 13.4397,
+          "indoor": false,
+          "closedDays": [],
+          "note": ""
+        },
+        {
+          "placeId": "oberbaum_bridge",
+          "label": "Oberbaum Bridge",
+          "area": "Friedrichshain / Kreuzberg",
+          "areaId": "friedrichshain",
+          "type": "landmark",
+          "lat": 52.5018,
+          "lng": 13.4458,
+          "indoor": false,
+          "closedDays": [],
+          "note": ""
+        },
+        {
+          "placeId": "raw_gelande",
+          "label": "RAW-Gelande",
+          "area": "Friedrichshain",
+          "areaId": "friedrichshain",
+          "type": "nightlife",
+          "lat": 52.5075,
+          "lng": 13.4548,
+          "indoor": false,
+          "closedDays": [],
+          "note": ""
+        }
+      ],
+      "segments": [
+        {
+          "segmentId": "route_wall__wall_memorial_east_side_gallery_oberbaum_bridge_raw_gelande__01_break_wall_memorial",
+          "routeId": "route_wall__wall_memorial_east_side_gallery_oberbaum_bridge_raw_gelande",
+          "type": "break",
+          "timeLabel": "Morning",
+          "window": "09:30-12:00",
+          "title": "Berlin Wall Memorial",
+          "copy": "Start at Bernauer Strasse. It is the clearest place to feel what the Wall did to everyday Berliners.",
+          "primaryPlace": {
+            "placeId": "wall_memorial",
+            "label": "Wall Memorial",
+            "url": "https://www.google.com/maps/search/?api=1&query=Berlin%20Wall%20Memorial%20Bernauer%20Strasse"
+          },
+          "mapStopOwner": true,
+          "mapLinks": [
+            {
+              "placeId": "wall_memorial",
+              "label": "Wall Memorial",
+              "url": "https://www.google.com/maps/search/?api=1&query=Berlin%20Wall%20Memorial%20Bernauer%20Strasse"
+            }
+          ]
+        },
+        {
+          "segmentId": "route_wall__wall_memorial_east_side_gallery_oberbaum_bridge_raw_gelande__02_meal_vegan_1990",
+          "routeId": "route_wall__wall_memorial_east_side_gallery_oberbaum_bridge_raw_gelande",
+          "type": "meal",
+          "timeLabel": "Lunch",
+          "window": "12:00-13:30",
+          "title": "Lunch near the Wall",
+          "copy": "",
+          "primaryPlace": {
+            "placeId": "vegan_1990",
+            "label": "1990 Vegan Living",
+            "url": "https://www.google.com/maps/search/?api=1&query=1990%20Vegan%20Living%20Berlin"
+          },
+          "mapStopOwner": true,
+          "mapLinks": [
+            {
+              "placeId": "vegan_1990",
+              "label": "1990 Vegan Living",
+              "url": "https://www.google.com/maps/search/?api=1&query=1990%20Vegan%20Living%20Berlin"
+            }
+          ]
+        },
+        {
+          "segmentId": "route_wall__wall_memorial_east_side_gallery_oberbaum_bridge_raw_gelande__03_fallback_east_side_gallery",
+          "routeId": "route_wall__wall_memorial_east_side_gallery_oberbaum_bridge_raw_gelande",
+          "type": "fallback",
+          "timeLabel": "Afternoon",
+          "window": "13:30-16:30",
+          "title": "East Side Gallery and Spree edge",
+          "copy": "Walk East Side Gallery slowly, then stay by the Spree and Oberbaum Bridge. If rain wins, make Topography of Terror the backup instead.",
+          "primaryPlace": {
+            "placeId": "east_side_gallery",
+            "label": "East Side Gallery",
+            "url": "https://www.google.com/maps/search/?api=1&query=East%20Side%20Gallery%20Berlin"
+          },
+          "mapStopOwner": true,
+          "mapLinks": [
+            {
+              "placeId": "east_side_gallery",
+              "label": "East Side Gallery",
+              "url": "https://www.google.com/maps/search/?api=1&query=East%20Side%20Gallery%20Berlin"
+            },
+            {
+              "placeId": "oberbaum_bridge",
+              "label": "Oberbaum Bridge",
+              "url": "https://www.google.com/maps/search/?api=1&query=Oberbaumbruecke%20Berlin"
+            }
+          ]
+        },
+        {
+          "segmentId": "route_wall__wall_memorial_east_side_gallery_oberbaum_bridge_raw_gelande__04_meal_nearby_rain_safe_finish",
+          "routeId": "route_wall__wall_memorial_east_side_gallery_oberbaum_bridge_raw_gelande",
+          "type": "meal",
+          "timeLabel": "Nearby option",
+          "window": "30-45 min",
+          "title": "Nearby rain-safe finish",
+          "copy": "After East Side Gallery, keep the backup nearby: a short Spree edge, Oberbaum Bridge, or a cafe/covered stop toward Kreuzberg. No second Wall route.",
+          "primaryPlace": null,
+          "mapStopOwner": false,
+          "mapLinks": []
+        },
+        {
+          "segmentId": "route_wall__wall_memorial_east_side_gallery_oberbaum_bridge_raw_gelande__05_meal_burgermeister_schlesi",
+          "routeId": "route_wall__wall_memorial_east_side_gallery_oberbaum_bridge_raw_gelande",
+          "type": "meal",
+          "timeLabel": "Evening",
+          "window": "After 18:00",
+          "title": "Dinner in Friedrichshain",
+          "copy": "",
+          "primaryPlace": {
+            "placeId": "burgermeister_schlesi",
+            "label": "Burgermeister",
+            "url": "https://www.google.com/maps/search/?api=1&query=Burgermeister%20Schlesisches%20Tor%20Berlin"
+          },
+          "mapStopOwner": true,
+          "mapLinks": [
+            {
+              "placeId": "burgermeister_schlesi",
+              "label": "Burgermeister",
+              "url": "https://www.google.com/maps/search/?api=1&query=Burgermeister%20Schlesisches%20Tor%20Berlin"
+            }
+          ]
+        }
+      ],
+      "route": {
+        "url": "https://www.google.com/maps/dir/?api=1&origin=52.5351%2C13.3903&destination=52.5075%2C13.4548&travelmode=transit&waypoints=52.505%2C13.4397%7C52.5018%2C13.4458",
+        "travelMode": "transit",
+        "totalDistanceKm": 6.2,
+        "longestSegmentKm": 4.7
+      },
+      "weather": {
+        "mode": "Live forecast",
+        "title": "Rain likely, 16 C",
+        "cue": "Use the covered backup and keep shoes rain-ready.",
+        "rainy": true
+      },
+      "opening": {
+        "status": "weekday",
+        "primaryClosed": false,
+        "warning": null
+      },
+      "reservation": null,
+      "risks": [
+        {
+          "key": "rain",
+          "label": "Rain backup",
+          "severity": "medium",
+          "detail": "Keep one museum, cafe, or covered market near the same area."
+        }
+      ],
+      "previewStops": [
+        {
+          "time": "09:30",
+          "placeId": "wall_memorial",
+          "label": "Wall Memorial",
+          "copy": "The Berlin Wall Memorial is the best place to understand how the border divided everyday life. Start at the visitor centre and walk along Bernauer Straße."
+        },
+        {
+          "time": "12:00",
+          "placeId": "vegan_1990",
+          "label": "1990 Vegan Living",
+          "copy": "1990 Vegan Living serves Vietnamese vegan tapas near Boxhagener Platz. Share a few dishes if you want a longer lunch."
+        }
+      ],
+      "weatherSwap": null,
+      "openingSwap": null
+    },
+    {
+      "dayId": "day_2026-09-17__route_museums__charlottenburg_palace_savignyplatz_lietzensee",
+      "routeId": "route_museums__charlottenburg_palace_savignyplatz_lietzensee",
+      "dayNumber": 3,
+      "dateKey": "2026-09-17",
+      "title": "Charlottenburg Palace and west-side calm",
+      "theme": "Museum day without repeating Mitte",
+      "planKey": "museums",
+      "areaIds": [
+        "charlottenburg"
+      ],
+      "places": [
+        {
+          "placeId": "charlottenburg_palace",
+          "label": "Charlottenburg Palace",
+          "area": "Charlottenburg",
+          "areaId": "charlottenburg",
+          "type": "palace",
+          "lat": 52.5209,
+          "lng": 13.2957,
+          "indoor": true,
+          "closedDays": [
+            1
+          ],
+          "note": "Palace rooms close Monday; the gardens are the open daily fallback."
+        },
+        {
+          "placeId": "savignyplatz",
+          "label": "Savignyplatz",
+          "area": "Charlottenburg",
+          "areaId": "charlottenburg",
+          "type": "neighborhood",
+          "lat": 52.5054,
+          "lng": 13.3204,
+          "indoor": false,
+          "closedDays": [],
+          "note": ""
+        },
+        {
+          "placeId": "lietzensee",
+          "label": "Lietzensee",
+          "area": "Charlottenburg",
+          "areaId": "charlottenburg",
+          "type": "park",
+          "lat": 52.5082,
+          "lng": 13.2877,
+          "indoor": false,
+          "closedDays": [],
+          "note": ""
+        }
+      ],
+      "segments": [
+        {
+          "segmentId": "route_museums__charlottenburg_palace_savignyplatz_lietzensee__01_visit_charlottenburg_palace",
+          "routeId": "route_museums__charlottenburg_palace_savignyplatz_lietzensee",
+          "type": "visit",
+          "timeLabel": "Morning",
+          "window": "09:30-12:00",
+          "title": "Charlottenburg Palace",
+          "copy": "Use Charlottenburg Palace as the main stop. If the interior is closed, make the gardens the point and skip the ticket.",
+          "primaryPlace": {
+            "placeId": "charlottenburg_palace",
+            "label": "Charlottenburg Palace",
+            "url": "https://www.google.com/maps/search/?api=1&query=Schloss%20Charlottenburg%20Berlin"
+          },
+          "mapStopOwner": true,
+          "mapLinks": [
+            {
+              "placeId": "charlottenburg_palace",
+              "label": "Charlottenburg Palace",
+              "url": "https://www.google.com/maps/search/?api=1&query=Schloss%20Charlottenburg%20Berlin"
+            }
+          ]
+        },
+        {
+          "segmentId": "route_museums__charlottenburg_palace_savignyplatz_lietzensee__02_meal_dicke_wirtin",
+          "routeId": "route_museums__charlottenburg_palace_savignyplatz_lietzensee",
+          "type": "meal",
+          "timeLabel": "Lunch",
+          "window": "12:00-13:30",
+          "title": "Lunch in Charlottenburg",
+          "copy": "",
+          "primaryPlace": {
+            "placeId": "dicke_wirtin",
+            "label": "Dicke Wirtin",
+            "url": "https://www.google.com/maps/search/?api=1&query=Dicke%20Wirtin%20Berlin"
+          },
+          "mapStopOwner": true,
+          "mapLinks": [
+            {
+              "placeId": "dicke_wirtin",
+              "label": "Dicke Wirtin",
+              "url": "https://www.google.com/maps/search/?api=1&query=Dicke%20Wirtin%20Berlin"
+            }
+          ]
+        },
+        {
+          "segmentId": "route_museums__charlottenburg_palace_savignyplatz_lietzensee__03_meal_savignyplatz",
+          "routeId": "route_museums__charlottenburg_palace_savignyplatz_lietzensee",
+          "type": "meal",
+          "timeLabel": "Afternoon",
+          "window": "13:30-16:30",
+          "title": "Savignyplatz and Lietzensee",
+          "copy": "Stay west for cafes, bookstores, and a quieter lake walk.",
+          "primaryPlace": {
+            "placeId": "savignyplatz",
+            "label": "Savignyplatz",
+            "url": "https://www.google.com/maps/search/?api=1&query=Savignyplatz%20Berlin"
+          },
+          "mapStopOwner": true,
+          "mapLinks": [
+            {
+              "placeId": "savignyplatz",
+              "label": "Savignyplatz",
+              "url": "https://www.google.com/maps/search/?api=1&query=Savignyplatz%20Berlin"
+            },
+            {
+              "placeId": "lietzensee",
+              "label": "Lietzensee",
+              "url": "https://www.google.com/maps/search/?api=1&query=Lietzensee%20Berlin"
+            }
+          ]
+        },
+        {
+          "segmentId": "route_museums__charlottenburg_palace_savignyplatz_lietzensee__04_meal_covered_backup_near_lietzensee",
+          "routeId": "route_museums__charlottenburg_palace_savignyplatz_lietzensee",
+          "type": "meal",
+          "timeLabel": "Nearby option",
+          "window": "30-45 min",
+          "title": "Covered backup near Lietzensee",
+          "copy": "Choose one open museum or cafe near Lietzensee. Do not cross Berlin for a separate museum district.",
+          "primaryPlace": null,
+          "mapStopOwner": false,
+          "mapLinks": []
+        },
+        {
+          "segmentId": "route_museums__charlottenburg_palace_savignyplatz_lietzensee__05_meal_schwarzes_cafe",
+          "routeId": "route_museums__charlottenburg_palace_savignyplatz_lietzensee",
+          "type": "meal",
+          "timeLabel": "Evening",
+          "window": "After 18:00",
+          "title": "Dinner",
+          "copy": "",
+          "primaryPlace": {
+            "placeId": "schwarzes_cafe",
+            "label": "Schwarzes Café",
+            "url": "https://www.google.com/maps/search/?api=1&query=Schwarzes%20Cafe%20Berlin"
+          },
+          "mapStopOwner": true,
+          "mapLinks": [
+            {
+              "placeId": "schwarzes_cafe",
+              "label": "Schwarzes Café",
+              "url": "https://www.google.com/maps/search/?api=1&query=Schwarzes%20Cafe%20Berlin"
+            }
+          ]
+        }
+      ],
+      "route": {
+        "url": "https://www.google.com/maps/dir/?api=1&origin=52.5209%2C13.2957&destination=52.5082%2C13.2877&travelmode=walking&waypoints=52.5054%2C13.3204",
+        "travelMode": "walking",
+        "totalDistanceKm": 4.6,
+        "longestSegmentKm": 2.4
+      },
+      "weather": {
+        "mode": "Live forecast",
+        "title": "Rain likely, 16 C",
+        "cue": "Use the covered backup and keep shoes rain-ready.",
+        "rainy": true
+      },
+      "opening": {
+        "status": "weekday",
+        "primaryClosed": false,
+        "warning": null
+      },
+      "reservation": {
+        "required": false,
+        "placeId": "charlottenburg_palace",
+        "label": "Check official palace entry",
+        "url": "https://www.spsg.de/en/palaces-gardens/object/charlottenburg-palace-old-palace/",
+        "source": "SPSG",
+        "checkedAt": "2026-07-19"
+      },
+      "risks": [
+        {
+          "key": "rain",
+          "label": "Rain backup",
+          "severity": "medium",
+          "detail": "Keep one museum, cafe, or covered market near the same area."
+        },
+        {
+          "key": "booking",
+          "label": "Book ahead",
+          "severity": "low",
+          "detail": "Check timed entries, Reichstag dome, restaurants, or evening plans before arrival."
+        }
+      ],
+      "previewStops": [
+        {
+          "time": "09:30",
+          "placeId": "charlottenburg_palace",
+          "label": "Charlottenburg Palace",
+          "copy": "Charlottenburg Palace is Berlin’s grandest palace. See the gardens even if you skip the rooms inside."
+        },
+        {
+          "time": "12:00",
+          "placeId": "dicke_wirtin",
+          "label": "Dicke Wirtin",
+          "copy": "Dicke Wirtin is an old-style Charlottenburg pub. Go for a filling German meal after walking around Savignyplatz."
+        }
+      ],
+      "weatherSwap": null,
+      "openingSwap": null
+    },
+    {
+      "dayId": "day_2026-09-18__route_history__holocaust_memorial_gendarmenmarkt_nikolaiviertel",
+      "routeId": "route_history__holocaust_memorial_gendarmenmarkt_nikolaiviertel",
+      "dayNumber": 4,
+      "dateKey": "2026-09-18",
+      "title": "Government quarter, memorials, and old Mitte",
+      "theme": "Central history without repeats",
+      "planKey": "history",
+      "areaIds": [
+        "mitte"
+      ],
+      "places": [
+        {
+          "placeId": "holocaust_memorial",
+          "label": "Holocaust Memorial",
+          "area": "Mitte",
+          "areaId": "mitte",
+          "type": "history",
+          "lat": 52.5139,
+          "lng": 13.3787,
+          "indoor": false,
+          "closedDays": [],
+          "note": "The Field of Stelae is open-air and always accessible; the underground information centre closes Mondays."
+        },
+        {
+          "placeId": "gendarmenmarkt",
+          "label": "Gendarmenmarkt",
+          "area": "Mitte",
+          "areaId": "mitte",
+          "type": "landmark",
+          "lat": 52.5138,
+          "lng": 13.3927,
+          "indoor": false,
+          "closedDays": [],
+          "note": ""
+        },
+        {
+          "placeId": "nikolaiviertel",
+          "label": "Nikolaiviertel",
+          "area": "Mitte",
+          "areaId": "mitte",
+          "type": "neighborhood",
+          "lat": 52.5169,
+          "lng": 13.4072,
+          "indoor": false,
+          "closedDays": [],
+          "note": ""
+        }
+      ],
+      "segments": [
+        {
+          "segmentId": "route_history__holocaust_memorial_gendarmenmarkt_nikolaiviertel__01_visit_holocaust_memorial",
+          "routeId": "route_history__holocaust_memorial_gendarmenmarkt_nikolaiviertel",
+          "type": "visit",
+          "timeLabel": "Morning",
+          "window": "09:30-12:00",
+          "title": "Government quarter and Holocaust Memorial",
+          "copy": "Start with the memorials and the government quarter. Keep the morning focused.",
+          "primaryPlace": {
+            "placeId": "holocaust_memorial",
+            "label": "Holocaust Memorial",
+            "url": "https://www.google.com/maps/search/?api=1&query=Memorial%20to%20the%20Murdered%20Jews%20of%20Europe%20Berlin"
+          },
+          "mapStopOwner": true,
+          "mapLinks": [
+            {
+              "placeId": "holocaust_memorial",
+              "label": "Holocaust Memorial",
+              "url": "https://www.google.com/maps/search/?api=1&query=Memorial%20to%20the%20Murdered%20Jews%20of%20Europe%20Berlin"
+            }
+          ]
+        },
+        {
+          "segmentId": "route_history__holocaust_memorial_gendarmenmarkt_nikolaiviertel__02_meal_yamyam",
+          "routeId": "route_history__holocaust_memorial_gendarmenmarkt_nikolaiviertel",
+          "type": "meal",
+          "timeLabel": "Lunch",
+          "window": "12:00-13:30",
+          "title": "Lunch before old Mitte",
+          "copy": "",
+          "primaryPlace": {
+            "placeId": "yamyam",
+            "label": "YamYam",
+            "url": "https://www.google.com/maps/search/?api=1&query=YamYam%20Korean%20Deli%20Berlin"
+          },
+          "mapStopOwner": true,
+          "mapLinks": [
+            {
+              "placeId": "yamyam",
+              "label": "YamYam",
+              "url": "https://www.google.com/maps/search/?api=1&query=YamYam%20Korean%20Deli%20Berlin"
+            }
+          ]
+        },
+        {
+          "segmentId": "route_history__holocaust_memorial_gendarmenmarkt_nikolaiviertel__03_visit_gendarmenmarkt",
+          "routeId": "route_history__holocaust_memorial_gendarmenmarkt_nikolaiviertel",
+          "type": "visit",
+          "timeLabel": "Afternoon",
+          "window": "13:30-16:30",
+          "title": "Gendarmenmarkt to Nikolaiviertel",
+          "copy": "Walk from Gendarmenmarkt to Nikolaiviertel to see Berlin’s older city layer.",
+          "primaryPlace": {
+            "placeId": "gendarmenmarkt",
+            "label": "Gendarmenmarkt",
+            "url": "https://www.google.com/maps/search/?api=1&query=Gendarmenmarkt%20Berlin"
+          },
+          "mapStopOwner": true,
+          "mapLinks": [
+            {
+              "placeId": "gendarmenmarkt",
+              "label": "Gendarmenmarkt",
+              "url": "https://www.google.com/maps/search/?api=1&query=Gendarmenmarkt%20Berlin"
+            },
+            {
+              "placeId": "nikolaiviertel",
+              "label": "Nikolaiviertel",
+              "url": "https://www.google.com/maps/search/?api=1&query=Nikolaiviertel%20Berlin"
+            }
+          ]
+        },
+        {
+          "segmentId": "route_history__holocaust_memorial_gendarmenmarkt_nikolaiviertel__04_visit_keep_it_close",
+          "routeId": "route_history__holocaust_memorial_gendarmenmarkt_nikolaiviertel",
+          "type": "visit",
+          "timeLabel": "Nearby option",
+          "window": "30-45 min",
+          "title": "Keep it close",
+          "copy": "Use this only if you still have energy. Stay near Nikolaiviertel instead of crossing Berlin.",
+          "primaryPlace": null,
+          "mapStopOwner": false,
+          "mapLinks": []
+        },
+        {
+          "segmentId": "route_history__holocaust_memorial_gendarmenmarkt_nikolaiviertel__05_meal_monsieur_vuong",
+          "routeId": "route_history__holocaust_memorial_gendarmenmarkt_nikolaiviertel",
+          "type": "meal",
+          "timeLabel": "Evening",
+          "window": "After 18:00",
+          "title": "Simple central dinner",
+          "copy": "",
+          "primaryPlace": {
+            "placeId": "monsieur_vuong",
+            "label": "Monsieur Vuong",
+            "url": "https://www.google.com/maps/search/?api=1&query=Monsieur%20Vuong%20Berlin"
+          },
+          "mapStopOwner": true,
+          "mapLinks": [
+            {
+              "placeId": "monsieur_vuong",
+              "label": "Monsieur Vuong",
+              "url": "https://www.google.com/maps/search/?api=1&query=Monsieur%20Vuong%20Berlin"
+            }
+          ]
+        }
+      ],
+      "route": {
+        "url": "https://www.google.com/maps/dir/?api=1&origin=52.5139%2C13.3787&destination=52.5169%2C13.4072&travelmode=walking&waypoints=52.5138%2C13.3927",
+        "travelMode": "walking",
+        "totalDistanceKm": 2,
+        "longestSegmentKm": 1
+      },
+      "weather": {
+        "mode": "Monthly average",
+        "title": "September average, 20 C high",
+        "cue": "Bring a light rain layer, but keep the day mostly outdoors.",
+        "rainy": false
+      },
+      "opening": {
+        "status": "weekday",
+        "primaryClosed": false,
+        "warning": null
+      },
+      "reservation": null,
+      "risks": [
+        {
+          "key": "rain",
+          "label": "Rain backup",
+          "severity": "medium",
+          "detail": "Keep one museum, cafe, or covered market near the same area."
+        }
+      ],
+      "previewStops": [
+        {
+          "time": "09:30",
+          "placeId": "holocaust_memorial",
+          "label": "Holocaust Memorial",
+          "copy": "The Memorial to the Murdered Jews of Europe is a field of 2,711 concrete slabs. Walk through it slowly before moving on."
+        },
+        {
+          "time": "12:00",
+          "placeId": "yamyam",
+          "label": "YamYam",
+          "copy": "YamYam is a Korean deli in Mitte. Order bibimbap or Korean street food if you want a quick lunch."
+        }
+      ],
+      "weatherSwap": null,
+      "openingSwap": null
+    }
+  ],
+  "quality": {
+    "status": "pass",
+    "issues": [],
+    "warnings": [],
+    "stats": {
+      "days": 4,
+      "issues": 0,
+      "warnings": 0
+    }
+  }
+}

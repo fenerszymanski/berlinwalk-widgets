@@ -12415,6 +12415,7 @@
   var aiEnhancement = null;
   var aiStatus = 'idle';
   var aiRequestId = 0;
+  var aiPlanSignature = '';
   var tripPlannerTracking = null;
   var landingExperiment = readLandingExperiment();
   var experimentExposureTracked = false;
@@ -13383,7 +13384,11 @@
   }
 
   function isTourBlock(block) {
-    return /berlinwalk|walking tour/i.test(String((block && block.time) || '') + ' ' + String((block && block.title) || '') + ' ' + String((block && block.copy) || ''));
+    // The copy of an arrival block can mention the BerlinWalk tour as the next
+    // move. That does not make the arrival itself a tour segment. Keep segment
+    // ownership tied to the block label/title so the World Clock cannot be
+    // assigned to both the transfer and the actual tour.
+    return /berlinwalk|walking tour|booked tour/i.test(String((block && block.time) || '') + ' ' + String((block && block.title) || ''));
   }
 
   function routeReelHtml(day) {
@@ -13435,7 +13440,40 @@
     return start ? start[0] : String((block && block.time) || 'Next').replace(/\s+/g, ' ');
   }
 
+  function compactArrivalMove() {
+    var labels = selectedLabels();
+    var destination = labels.stayArea || 'your Berlin base';
+    var label = (labels.arrivalPoint || 'Arrival') + ' → ' + destination;
+    var query = labels.arrivalPoint || 'Berlin arrival';
+    var copy = 'Go to ' + destination + ', leave your bags if needed, then start the first Berlin stop.';
+    if (state.arrivalPoint === 'ber') {
+      query = 'Berlin Brandenburg Airport';
+      copy = 'Take the FEX or a regional train from BER, make the final connection to ' + destination + ', and leave your bags before sightseeing.';
+    } else if (state.arrivalPoint === 'hbf') {
+      query = 'Berlin Hauptbahnhof';
+      copy = 'Leave Hauptbahnhof for ' + destination + ', drop your bags, then continue to the first Berlin stop.';
+    } else if (state.arrivalPoint === 'alex') {
+      query = 'Alexanderplatz Berlin';
+      copy = 'You are already at Alexanderplatz. Leave your bags if needed, then use the square as the start of the day.';
+    } else if (state.arrivalPoint === 'hotel') {
+      query = destination + ' Berlin';
+      copy = 'Start at your stay in ' + destination + ', then go directly to the first named stop.';
+    } else if (state.arrivalPoint === 'car') {
+      query = destination + ' Berlin parking';
+      copy = 'Park near ' + destination + ', leave the car there, and use public transport or walk for the central route.';
+    }
+    return {
+      label: label,
+      placeId: 'arrival_transfer',
+      url: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(query),
+      copy: copy
+    };
+  }
+
   function compactPreviewPlace(day, block, index) {
+    if (day && day.dayNumber === 1 && /^arrival$/i.test(String((block && block.time) || ''))) {
+      return compactArrivalMove();
+    }
     var links = blockMapLinks(day, block, index);
     var linked = links[0] || null;
     if (linked && linked.label && !/^open map$/i.test(String(linked.label))) return linked;
@@ -13455,6 +13493,7 @@
 
   function compactPreviewStopCopy(day, block, index) {
     var stop = compactPreviewPlace(day, block, index);
+    if (stop.placeId === 'arrival_transfer' && stop.copy) return stop.copy;
     var primary = stop.label || '';
     var area = compactPreviewArea(day);
     var text = [block && block.time, block && block.title, block && block.copy].join(' ').toLowerCase();
@@ -13539,14 +13578,33 @@
     return '<svg class="bw-compact-benefit-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">' + path + '</svg>';
   }
 
-  function compactPreviewStopsHtml(day) {
-    var items = dayActionBlockItems(day).filter(function (item) {
+  function compactPreviewItems(day) {
+    var candidates = dayActionBlockItems(day).filter(function (item) {
       return !isDayClosingBlock(day, item.block, item.index);
-    }).slice(0, 2);
-    if (!items.length) items = dayActionBlockItems(day).slice(0, 2);
+    });
+    if (!candidates.length) candidates = dayActionBlockItems(day);
+    var seenStops = {};
+    var items = [];
+    candidates.some(function (item) {
+      var map = compactPreviewPlace(day, item.block || {}, item.index);
+      var stopKey = String(map.placeId || map.label || '').toLowerCase();
+      if (!stopKey || seenStops[stopKey]) return false;
+      seenStops[stopKey] = true;
+      items.push({
+        block: item.block || {},
+        index: item.index,
+        map: map
+      });
+      return items.length >= 2;
+    });
+    return items;
+  }
+
+  function compactPreviewStopsHtml(day) {
+    var items = compactPreviewItems(day);
     return items.map(function (item) {
       var block = item.block || {};
-      var map = compactPreviewPlace(day, block, item.index);
+      var map = item.map || compactPreviewPlace(day, block, item.index);
       return '<article class="bw-compact-stop">' +
         '<span class="bw-compact-stop-time">' + escapeHtml(compactPreviewTime(day, block, item.index)) + '</span>' +
         '<div class="bw-compact-stop-copy">' +
@@ -15225,6 +15283,32 @@
     });
   }
 
+  function placeDistanceKm(first, second) {
+    if (!first || !second || !Number.isFinite(first.lat) || !Number.isFinite(first.lng) || !Number.isFinite(second.lat) || !Number.isFinite(second.lng)) return 0;
+    var radius = 6371;
+    var toRadians = function (value) { return value * Math.PI / 180; };
+    var latDelta = toRadians(second.lat - first.lat);
+    var lngDelta = toRadians(second.lng - first.lng);
+    var startLat = toRadians(first.lat);
+    var endLat = toRadians(second.lat);
+    var haversine = Math.sin(latDelta / 2) * Math.sin(latDelta / 2) +
+      Math.cos(startLat) * Math.cos(endLat) * Math.sin(lngDelta / 2) * Math.sin(lngDelta / 2);
+    return radius * 2 * Math.atan2(Math.sqrt(haversine), Math.sqrt(1 - haversine));
+  }
+
+  function dayRouteTravelMode(day) {
+    if (day && /Potsdam|Day trip/i.test((day.theme || '') + ' ' + (day.title || ''))) return 'transit';
+    var places = dayPlaceIds(day).map(placeFor).filter(Boolean);
+    var totalDistance = 0;
+    var longestSegment = 0;
+    for (var index = 1; index < places.length; index += 1) {
+      var segmentDistance = placeDistanceKm(places[index - 1], places[index]);
+      totalDistance += segmentDistance;
+      longestSegment = Math.max(longestSegment, segmentDistance);
+    }
+    return longestSegment > 3 || totalDistance > 6 ? 'transit' : 'walking';
+  }
+
   function dayDirectionsUrl(day) {
     var ids = dayPlaceIds(day).slice(0, 4);
     if (ids.length < 2) return ids.length ? placeSearchUrl(ids[0]) : meetingPointUrl();
@@ -15232,7 +15316,7 @@
     var origin = placeDirectionsQuery(places[0]);
     var destination = placeDirectionsQuery(places[places.length - 1]);
     var waypoints = places.slice(1, -1).map(placeDirectionsQuery).join('|');
-    var mode = day && /Potsdam|Day trip/i.test((day.theme || '') + ' ' + (day.title || '')) ? 'transit' : 'walking';
+    var mode = dayRouteTravelMode(day);
     var url = 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(origin) + '&destination=' + encodeURIComponent(destination) + '&travelmode=' + encodeURIComponent(mode);
     if (waypoints) url += '&waypoints=' + encodeURIComponent(waypoints);
     return url;
@@ -15275,7 +15359,7 @@
 
   function dayMapPackItems(day) {
     var route = dayRouteAction(day);
-    var routeMode = /Potsdam|Day trip/i.test((day && day.theme || '') + ' ' + (day && day.title || '')) ? 'Transit route' : 'Walking route';
+    var routeMode = dayRouteTravelMode(day) === 'transit' ? 'Transit + walking route' : 'Walking route';
     var items = [{
       kind: 'route',
       icon: 'route',
@@ -15451,6 +15535,15 @@
     });
 
     if (found.length > 0) {
+      if (/nearby option|pause/i.test(String(block.time || ''))) {
+        var priorText = normalizedPlaceLabel((day.blocks || []).slice(0, index).map(function (priorBlock) {
+          return String(priorBlock.title || '') + ' ' + String(priorBlock.copy || '');
+        }).join(' '));
+        found = found.filter(function (item) {
+          return priorText.indexOf(normalizedPlaceLabel(item.place.label)) === -1;
+        });
+        if (!found.length) return [];
+      }
       return found.slice(0, 2).map(function (item) {
         return { placeId: item.placeId, label: item.place.label, url: placeSearchUrl(item.placeId), score: 100 };
       });
@@ -17514,6 +17607,45 @@
     '</section>';
   }
 
+  var OFFICIAL_RESERVATION_ACTIONS = {
+    reichstag: {
+      label: 'Open official registration',
+      url: 'https://www.bundestag.de/en/visittheBundestag/dome/registration-245686',
+      source: 'German Bundestag',
+      checkedAt: '2026-07-19'
+    },
+    museum_island: {
+      label: 'Check the official museum page',
+      url: 'https://www.smb.museum/en/museums-institutions/museumsinsel-berlin/plan-your-visit/',
+      source: 'Staatliche Museen zu Berlin',
+      checkedAt: '2026-07-19'
+    },
+    charlottenburg_palace: {
+      label: 'Check official palace entry',
+      url: 'https://www.spsg.de/en/palaces-gardens/object/charlottenburg-palace-old-palace/',
+      source: 'SPSG',
+      checkedAt: '2026-07-19'
+    },
+    sanssouci: {
+      label: 'Check official palace entry',
+      url: 'https://www.spsg.de/en/palaces-gardens/object/sanssouci-palace/',
+      source: 'SPSG',
+      checkedAt: '2026-07-19'
+    }
+  };
+
+  function officialReservationAction(day) {
+    var priority = ['reichstag', 'museum_island', 'charlottenburg_palace', 'sanssouci'];
+    var ids = dayPlaceIds(day);
+    for (var index = 0; index < priority.length; index += 1) {
+      var placeId = priority[index];
+      if (ids.indexOf(placeId) !== -1 && OFFICIAL_RESERVATION_ACTIONS[placeId]) {
+        return Object.assign({ placeId: placeId }, OFFICIAL_RESERVATION_ACTIONS[placeId]);
+      }
+    }
+    return null;
+  }
+
   function reservationRadar(plan) {
     var days = plan.days || [];
     var slot = tourSlotForPlan(plan);
@@ -17548,6 +17680,7 @@
     });
     if (museumDay) {
       var monday = dayStatus(museumDay.dateKey).key === 'monday';
+      var officialAction = officialReservationAction(museumDay);
       add({
         key: 'museum',
         status: monday ? 'Check hours' : 'Timed entry',
@@ -17555,8 +17688,10 @@
         copy: monday ? 'Monday can break museum plans. Confirm one open anchor before arrival.' : 'Pick one museum or Reichstag-style timed anchor before the day gets busy.',
         icon: 'landmark',
         accent: '#F5A623',
-        action: 'Open Day ' + museumDay.dayNumber + ' route',
-        url: dayRouteAction(museumDay).url
+        action: officialAction ? officialAction.label : 'Open Day ' + museumDay.dayNumber + ' route',
+        url: officialAction ? officialAction.url : dayRouteAction(museumDay).url,
+        officialSource: officialAction ? officialAction.source : '',
+        checkedAt: officialAction ? officialAction.checkedAt : ''
       });
     }
 
@@ -19498,10 +19633,21 @@
     }
 
     if (type === 'museums') {
-      addon.title = rainy ? 'Museum Island backup only' : 'One more Museum Island edge';
-      addon.copy = rainy
-        ? 'If weather turns, stay in the same Museum Island cluster and choose one nearby open museum or cafe. Do not add a separate museum district.'
-        : 'If energy is good, add one nearby Museum Island edge, cathedral exterior, or short cafe stop. Keep it in the same cluster.';
+      var museumIslandIds = ['museum_island', 'berlin_cathedral', 'hackescher_markt', 'hackesche_hofe'];
+      var isMuseumIslandCluster = dayPlaceIds(day).some(function (placeId) {
+        return museumIslandIds.indexOf(placeId) !== -1;
+      });
+      if (isMuseumIslandCluster) {
+        addon.title = rainy ? 'Museum Island backup only' : 'One more Museum Island edge';
+        addon.copy = rainy
+          ? 'If weather turns, stay in the same Museum Island cluster and choose one nearby open museum or cafe. Do not add a separate museum district.'
+          : 'If energy is good, add one nearby Museum Island edge, cathedral exterior, or short cafe stop. Keep it in the same cluster.';
+      } else {
+        addon.title = rainy ? 'Covered backup near ' + lastLabel : 'One nearby cultural stop';
+        addon.copy = rainy
+          ? 'Choose one open museum or cafe near ' + lastLabel + '. Do not cross Berlin for a separate museum district.'
+          : 'Add one cultural stop or cafe near ' + lastLabel + '. Keep this day in the same west-side cluster.';
+      }
       return addon;
     }
 
@@ -19691,6 +19837,9 @@
     var bestDistance = Infinity;
     (days || []).forEach(function (day, index) {
       if (index === rainyIndex || !isIndoorHeavyDay(day) || day.weatherSwap || day.openingWarning || day.openingSwap) return;
+      // Moving the exposed route only helps when its new date is genuinely
+      // clearer. Do not claim a rain escape when both dates are rainy.
+      if (isLiveRainyWeather(dayWeatherFor(day))) return;
       if (!weatherSwapIsOpeningSafe(days, rainyIndex, index)) return;
       var distance = Math.abs(index - rainyIndex);
       if (distance < bestDistance) {
@@ -19865,6 +20014,221 @@
       recommendedTourDay: recommendedTourDay(),
       days: days
     };
+  }
+
+  function planRouteSignature(plan) {
+    return (plan && plan.days || []).map(function (day) {
+      return [
+        day.dateKey || '',
+        day.title || '',
+        day.theme || '',
+        day.planKey || '',
+        dayPlaceIds(day).join(',')
+      ].join('|');
+    }).join('::');
+  }
+
+  function routeDistanceSummary(day) {
+    var places = dayPlaceIds(day).map(placeFor).filter(Boolean);
+    var totalDistance = 0;
+    var longestSegment = 0;
+    for (var index = 1; index < places.length; index += 1) {
+      var distance = placeDistanceKm(places[index - 1], places[index]);
+      totalDistance += distance;
+      longestSegment = Math.max(longestSegment, distance);
+    }
+    return {
+      totalDistanceKm: Math.round(totalDistance * 10) / 10,
+      longestSegmentKm: Math.round(longestSegment * 10) / 10
+    };
+  }
+
+  function planArtifactSourceV2(plan, scenarioId) {
+    var labels = selectedLabels();
+    return {
+      engineVersion: '2026.07.19-output-v2.1',
+      scenarioId: scenarioId || '',
+      input: {
+        arrivalDate: state.arrivalDate,
+        tripLength: Number(state.tripLength),
+        arrivalTime: state.arrivalTime,
+        arrivalPoint: state.arrivalPoint,
+        stayArea: state.stayArea,
+        groupType: state.groupType,
+        firstTime: state.firstTime,
+        interests: state.interests.slice(),
+        budgetStyle: state.budgetStyle,
+        mustHandle: state.mustHandle.slice(),
+        pace: state.pace,
+        tourIntent: state.tourIntent,
+        labels: labels
+      },
+      title: plan.title,
+      summary: plan.summary,
+      displayDate: plan.displayDate,
+      ticket: plan.ticket,
+      tourFit: plan.tourFit,
+      days: (plan.days || []).map(function (day) {
+        var distance = routeDistanceSummary(day);
+        var reservation = officialReservationAction(day);
+        var weather = dayWeatherFor(day);
+        var openingRisk = dayOpeningRisk(day);
+        var blocks = (day.blocks || []).map(function (block, index) {
+          var mapLinks = blockMapLinks(day, block, index);
+          var primary = null;
+          if (day.dayNumber === 1 && /^arrival$/i.test(String(block.time || ''))) {
+            primary = compactArrivalMove();
+          } else if (mapLinks.length) {
+            primary = mapLinks[0];
+          }
+          return {
+            time: block.time || '',
+            window: dayBlockWindow(day, block, index) || block.window || '',
+            title: block.title || '',
+            copy: block.copy || '',
+            primaryPlace: primary ? {
+              placeId: primary.placeId || '',
+              label: primary.label || '',
+              url: primary.url || ''
+            } : null,
+            mapLinks: mapLinks.map(function (link) {
+              return { placeId: link.placeId || '', label: link.label || '', url: link.url || '' };
+            })
+          };
+        });
+        return {
+          dayNumber: day.dayNumber,
+          dateKey: day.dateKey,
+          title: day.title,
+          theme: day.theme,
+          planKey: day.planKey || dayVisualType(day),
+          places: dayPlaceIds(day).map(function (placeId) {
+            var place = placeFor(placeId);
+            return {
+              placeId: placeId,
+              label: place.label,
+              area: place.area || '',
+              areaId: normalizedPlaceLabel(String(place.area || '').split(' / ')[0]).replace(/\s+/g, '_'),
+              type: place.type || '',
+              lat: place.lat,
+              lng: place.lng,
+              indoor: place.indoor === true,
+              closedDays: placeClosedDays(place).slice(),
+              note: place.note || ''
+            };
+          }),
+          blocks: blocks,
+          route: Object.assign({
+            url: dayDirectionsUrl(day),
+            travelMode: dayRouteTravelMode(day)
+          }, distance),
+          weather: weather ? {
+            mode: weather.mode || '',
+            title: weather.title || '',
+            cue: weather.cue || '',
+            rainy: isLiveRainyWeather(weather)
+          } : null,
+          opening: {
+            status: dayStatus(day.dateKey).key,
+            primaryClosed: blocks.some(function (block) {
+              return Boolean(block.primaryPlace && block.primaryPlace.placeId && placeClosedOnDate(block.primaryPlace.placeId, day.dateKey));
+            }),
+            warning: openingRisk || null
+          },
+          reservation: reservation ? {
+            required: state.mustHandle.indexOf('reservations') !== -1 || reservation.placeId === 'reichstag',
+            placeId: reservation.placeId,
+            label: reservation.label,
+            url: reservation.url,
+            source: reservation.source,
+            checkedAt: reservation.checkedAt
+          } : null,
+          risks: riskTagsForDay(day).map(function (risk) {
+            return { key: risk.key, label: risk.label, severity: risk.severity, detail: risk.detail || '' };
+          }),
+          previewStops: compactPreviewItems(day).map(function (item) {
+            return {
+              time: compactPreviewTime(day, item.block, item.index),
+              placeId: item.map.placeId || '',
+              label: item.map.label || '',
+              copy: compactPreviewStopCopy(day, item.block, item.index)
+            };
+          }),
+          weatherSwap: day.weatherSwap || null,
+          openingSwap: day.openingSwap || null
+        };
+      })
+    };
+  }
+
+  function planArtifactScenarioSourceV2(scenario) {
+    var previousState = {
+      arrivalDate: state.arrivalDate,
+      tripLength: state.tripLength,
+      arrivalTime: state.arrivalTime,
+      arrivalPoint: state.arrivalPoint,
+      stayArea: state.stayArea,
+      groupType: state.groupType,
+      firstTime: state.firstTime,
+      interests: state.interests.slice(),
+      budgetStyle: state.budgetStyle,
+      mustHandle: state.mustHandle.slice(),
+      pace: state.pace,
+      tourIntent: state.tourIntent
+    };
+    var previousWeather = latestWeather;
+    var previousDailyWeather = latestDailyWeather;
+    try {
+      var overrides = scenario && scenario.input ? scenario.input : {};
+      Object.keys(previousState).forEach(function (key) {
+        if (!Object.prototype.hasOwnProperty.call(overrides, key)) return;
+        state[key] = Array.isArray(previousState[key])
+          ? (Array.isArray(overrides[key]) ? overrides[key].slice() : previousState[key].slice())
+          : overrides[key];
+      });
+      latestWeather = scenario && scenario.weather ? scenario.weather : null;
+      latestDailyWeather = scenario && scenario.dailyWeather ? Object.assign({}, scenario.dailyWeather) : {};
+      return planArtifactSourceV2(buildPlan(), scenario && scenario.id ? scenario.id : 'local_scenario');
+    } finally {
+      Object.keys(previousState).forEach(function (key) {
+        state[key] = Array.isArray(previousState[key]) ? previousState[key].slice() : previousState[key];
+      });
+      latestWeather = previousWeather;
+      latestDailyWeather = previousDailyWeather;
+    }
+  }
+
+  function installPlanArtifactV2QaBridge() {
+    if (!isLocalPreviewSurface() || window.__BW_TP_ENGINE_V2__) return;
+    window.__BW_TP_ENGINE_V2__ = {
+      currentSource: function () { return planArtifactSourceV2(latestPlan || buildPlan(), 'current'); },
+      buildScenarioSource: planArtifactScenarioSourceV2
+    };
+    var script = document.createElement('script');
+    script.src = 'engine/plan-artifact-v2.js';
+    script.async = true;
+    script.onload = function () {
+      if (!window.BWPlanArtifactV2) return;
+      window.__BW_TP_QA__ = window.BWPlanArtifactV2.attach(window.__BW_TP_ENGINE_V2__);
+      document.documentElement.setAttribute('data-bw-plan-artifact-v2', 'ready');
+      try {
+        var params = new URLSearchParams(window.location.search || '');
+        if (params.get('qaArtifact') === '1') {
+          var output = document.getElementById('bw-plan-artifact-v2-output');
+          if (!output) {
+            output = document.createElement('script');
+            output.type = 'application/json';
+            output.id = 'bw-plan-artifact-v2-output';
+            document.body.appendChild(output);
+          }
+          output.textContent = JSON.stringify(window.__BW_TP_QA__.current());
+        }
+      } catch (error) {
+        document.documentElement.setAttribute('data-bw-plan-artifact-v2', 'error');
+      }
+      try { window.dispatchEvent(new CustomEvent('bw-trip-planner-v2-ready')); } catch (error) {}
+    };
+    document.head.appendChild(script);
   }
 
   function renderPlanBoard(plan) {
@@ -20205,6 +20569,7 @@
       planNeedsUpdate = true;
       aiEnhancement = null;
       aiStatus = 'idle';
+      aiPlanSignature = '';
       aiRequestId += 1;
       updatePlanningUi();
       updateUnlockUi();
@@ -20216,6 +20581,7 @@
     latestPlan = null;
     aiEnhancement = null;
     aiStatus = 'idle';
+    aiPlanSignature = '';
     aiRequestId += 1;
     resetExpandedLists();
     var draftPlan = buildPlan();
@@ -20250,6 +20616,7 @@
     latestPlan = null;
     aiEnhancement = null;
     aiStatus = 'idle';
+    aiPlanSignature = '';
     aiRequestId += 1;
     resetExpandedLists();
     renderPlanChrome(buildPlan());
@@ -20528,12 +20895,21 @@
     setText('[data-weather-wind]', summary.metrics[2].value);
     setText('[data-weather-advice]', summary.advice);
     if (latestPlan && planGenerated && unlocked) {
+      var previousRouteSignature = planRouteSignature(latestPlan);
       latestPlan = buildPlan();
+      var routeChanged = previousRouteSignature !== planRouteSignature(latestPlan);
+      if (routeChanged && aiStatus !== 'idle') {
+        aiEnhancement = null;
+        aiStatus = 'idle';
+        aiPlanSignature = '';
+        aiRequestId += 1;
+      }
       ensureDailyWeatherForPlan(latestPlan);
       renderPlanChrome(latestPlan);
       renderUnlockedResultPanels(latestPlan);
       renderPlanBoard(latestPlan);
       renderFullPlan();
+      if (routeChanged) requestAiEnhancement();
     }
   }
 
@@ -20818,21 +21194,24 @@
     if (!isLocalPreviewSurface()) return map || {};
     try {
       var params = new URLSearchParams(window.location.search || '');
-      var value = params.get('mockRainDay');
-      if (!value) return map || {};
+      var rawValues = params.get('mockRainDays') || params.get('mockRainDay') || '';
+      var values = rawValues.split(',').map(function (value) { return value.trim(); }).filter(Boolean);
+      if (!values.length) return map || {};
       var keys = tripDateKeys();
-      var target = /^\d+$/.test(value) ? keys[Math.max(0, Math.min(keys.length - 1, Number(value) - 1))] : value;
-      if (keys.indexOf(target) === -1) return map || {};
       var nextMap = Object.assign({}, map || {});
-      nextMap[target] = dailyWeatherFromForecast(target, {
-        temperature: 16,
-        low: 12,
-        rainProbability: 88,
-        precipitation: 6.4,
-        windSpeed: 18,
-        weatherCode: 63,
-        condition: 'Rain likely'
-      }, 'Live forecast');
+      values.forEach(function (value, valueIndex) {
+        var target = /^\d+$/.test(value) ? keys[Math.max(0, Math.min(keys.length - 1, Number(value) - 1))] : value;
+        if (keys.indexOf(target) === -1) return;
+        nextMap[target] = dailyWeatherFromForecast(target, {
+          temperature: 16,
+          low: 12,
+          rainProbability: Math.max(60, 88 - valueIndex * 8),
+          precipitation: Math.max(2.4, 6.4 - valueIndex * 1.6),
+          windSpeed: 18,
+          weatherCode: 63,
+          condition: 'Rain likely'
+        }, 'Live forecast');
+      });
       return nextMap;
     } catch (error) {
       return map || {};
@@ -22119,6 +22498,7 @@
   function resetAiEnhancement() {
     aiEnhancement = null;
     aiStatus = 'idle';
+    aiPlanSignature = '';
     aiRequestId += 1;
     renderAiEnhancement(latestPlan || buildPlan());
   }
@@ -22198,6 +22578,8 @@
   function requestAiEnhancement() {
     var plan = latestPlan || buildPlan();
     if (!unlocked || !planGenerated || aiStatus === 'loading' || aiStatus === 'ready' || aiStatus === 'quota') return;
+    var requestPlanSignature = planRouteSignature(plan);
+    aiPlanSignature = requestPlanSignature;
     if (forceLocalUnlockForQa() && !forceLocalAiMockForQa() && !forceLocalAiErrorForQa()) {
       aiEnhancement = localGuideFallback(plan, 'local_qa_unlock', {});
       aiStatus = 'quota';
@@ -22218,7 +22600,7 @@
 
     if (forceLocalAiMockForQa()) {
       window.setTimeout(function () {
-        if (requestId !== aiRequestId) return;
+        if (requestId !== aiRequestId || aiPlanSignature !== requestPlanSignature) return;
         aiEnhancement = mockAiEnhancement(plan);
         aiStatus = 'ready';
         revealFullPlanAfterGuide(plan, true);
@@ -22254,7 +22636,7 @@
       if (!response.ok) throw new Error('AI endpoint failed: ' + response.status);
       return response.json().catch(function () { return {}; });
     }).then(function (body) {
-      if (requestId !== aiRequestId) return;
+      if (requestId !== aiRequestId || aiPlanSignature !== requestPlanSignature) return;
       if (body && body.ok !== true && /quota|lead_not_found|email_required/i.test(String(body.reason || body.error || ''))) {
         aiEnhancement = localGuideFallback(plan, body.reason || body.error, body.quota || {});
         aiStatus = 'quota';
@@ -22276,7 +22658,7 @@
         trip_length: state.tripLength
       });
     }).catch(function (error) {
-      if (requestId !== aiRequestId) return;
+      if (requestId !== aiRequestId || aiPlanSignature !== requestPlanSignature) return;
       aiEnhancement = localGuideFallback(plan, 'ai_error', {});
       aiStatus = 'quota';
       revealFullPlanAfterGuide(plan, true);
@@ -25853,6 +26235,7 @@
     updateUnlockUi();
     loadWeather();
     installPlannerFrameSync();
+    installPlanArtifactV2QaBridge();
     openEmailPlanFromLink();
     ensureFdrAddonPanel();
     renderFdrAddon();
