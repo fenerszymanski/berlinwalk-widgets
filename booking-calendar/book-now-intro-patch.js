@@ -3,15 +3,16 @@
   var isBookingService = path.indexOf('/book-berlin-walking-tour/') === 0;
   var isBookingForm = path.indexOf('/booking-form') === 0;
   if (!isBookingService && !isBookingForm) return;
-  var RUNTIME_KEY = '__bwBookNowIntroPatch20260719a';
+  var RUNTIME_KEY = '__bwBookNowIntroPatch20260719b';
   if (window[RUNTIME_KEY]) return;
   window[RUNTIME_KEY] = true;
 
-  var STYLE_ID = 'bw-book-now-intro-patch-css';
+  var STYLE_ID = 'bw-book-now-intro-patch-css-20260719b';
   var NUDGE_ID = 'bw-booking-calendar-next-nudge';
   var FORM_CARD_ID = 'bw-booking-form-trust-card';
   var TERMS_HELPER_ID = 'bw-booking-terms-helper';
-  var INTRO_VERSION = 'booking-service-stage-20260719a';
+  var INTRO_VERSION = 'booking-service-stage-20260719b';
+  var FORM_VERSION = 'booking-form-stage-20260719b';
   var TERMS_LABEL = 'I agree to the free reservation terms listed below.';
   var INTRO_HTML = [
     "<div class='bw-cal-intro' data-bw-booking-intro-version='" + INTRO_VERSION + "'>",
@@ -43,6 +44,14 @@
       'bw-booking-calendar .bw-cal-intro p{color:var(--muted);font-size:15px;font-weight:700;line-height:1.5;margin:0;max-width:640px}',
       'bw-booking-calendar .bw-cal-intro-chips{display:flex;flex-wrap:wrap;gap:7px;min-width:0}',
       'bw-booking-calendar .bw-cal-intro-chip{align-items:center;background:#F8FBF4;border:1px solid #CFE4C8;border-radius:999px;color:var(--green);display:inline-flex;font-size:11px;font-weight:850;line-height:1.15;min-height:30px;padding:7px 10px;white-space:normal}',
+      'bw-booking-calendar .bw-booking-progress{min-width:0}',
+      'bw-booking-calendar .bw-booking-progress ol,#'+FORM_CARD_ID+' .bw-booking-progress ol{display:grid;gap:7px;grid-template-columns:minmax(0,1fr) minmax(0,1fr);list-style:none;margin:0;padding:0}',
+      'bw-booking-calendar .bw-booking-progress li,#'+FORM_CARD_ID+' .bw-booking-progress li{align-items:center;background:#F8FBF4;border:1px solid #CFE4C8;border-radius:7px;color:#4E5A4E;column-gap:4px;display:grid;grid-template-columns:minmax(0,1fr) auto;min-width:0;padding:4px 7px;row-gap:2px}',
+      'bw-booking-calendar .bw-booking-progress li.is-active,#'+FORM_CARD_ID+' .bw-booking-progress li.is-active{background:#FFE600;border-color:#D1B800;color:#123D18}',
+      'bw-booking-calendar .bw-booking-progress li.is-complete,#'+FORM_CARD_ID+' .bw-booking-progress li.is-complete{background:#1B5E20;border-color:#1B5E20;color:#fff}',
+      'bw-booking-calendar .bw-booking-progress .bw-progress-number,#'+FORM_CARD_ID+' .bw-booking-progress .bw-progress-number{font-size:10px;font-weight:900;grid-column:1;grid-row:1;line-height:1;text-transform:uppercase}',
+      'bw-booking-calendar .bw-booking-progress strong,#'+FORM_CARD_ID+' .bw-booking-progress strong{color:inherit;display:block;font-size:11px;font-weight:900;grid-column:1/-1;grid-row:2;line-height:1.15;margin:0}',
+      'bw-booking-calendar .bw-booking-progress .bw-progress-state,#'+FORM_CARD_ID+' .bw-booking-progress .bw-progress-state{font-size:9px;font-weight:800;grid-column:2;grid-row:1;line-height:1.1}',
       'bw-booking-calendar .bw-cal-standalone .bw-cal-cta{font-size:15px!important;height:48px!important}',
       'html.bw-booking-funnel-active .bw-booking-stage-section{background:radial-gradient(circle at 50% 20%,#fff 0,#FAFAF5 58%,#F2F7EE 100%)!important;height:auto!important;min-height:calc(100vh - 143px)!important;min-height:calc(100svh - 143px)!important}',
       'html.bw-booking-funnel-active .bw-booking-stage-inner{align-items:center!important;box-sizing:border-box!important;display:flex!important;justify-content:center!important;min-height:inherit!important;padding:44px 24px!important;width:100%!important}',
@@ -52,12 +61,10 @@
       'html.bw-booking-funnel-active .bw-booking-stage-wrap .bw-cal-cta{background:#FFE600!important;color:#123D18!important;font-weight:900!important}',
       'html.bw-booking-funnel-active .bw-booking-stage-wrap .bw-cal-cta:hover,html.bw-booking-funnel-active .bw-booking-stage-wrap .bw-cal-cta:focus-visible{background:#FFF066!important;color:#123D18!important}',
       'html.bw-booking-form-trust-active [data-hook="form-field-c75b1793-ac5f-4491-a1d6-61cc895c7b94"] p{display:none!important}',
-      '#'+FORM_CARD_ID+'{background:#F8FBF4;border:1px solid #CFE4C8;border-left:5px solid #1B5E20;box-sizing:border-box;color:#212121;font-family:Montserrat,Arial,sans-serif;margin:0 0 18px;padding:14px 15px}',
-      '#'+FORM_CARD_ID+' .bw-form-step{color:#1B5E20;font-size:11px;font-weight:900;letter-spacing:0;text-transform:uppercase}',
-      '#'+FORM_CARD_ID+' strong{color:#1B5E20;display:block;font-size:18px;font-weight:900;line-height:1.18;margin:4px 0 7px}',
-      '#'+FORM_CARD_ID+' p{color:#4E5A4E!important;display:block!important;font-family:Montserrat,Arial,sans-serif!important;font-size:13px!important;font-weight:700!important;line-height:1.45!important;margin:0 0 8px!important}',
-      '#'+FORM_CARD_ID+' .bw-form-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}',
-      '#'+FORM_CARD_ID+' .bw-form-chip{background:#fff;border:1px solid #CFE4C8;color:#1B5E20;font-size:10.5px;font-weight:900;line-height:1.2;padding:6px 8px}',
+      'html body #'+FORM_CARD_ID+'{background:#F8FBF4;border:1px solid #CFE4C8;border-left:5px solid #1B5E20;box-sizing:border-box;color:#212121;font-family:Montserrat,Arial,sans-serif;margin:0 0 14px;padding:12px 13px}',
+      'html body #'+FORM_CARD_ID+'>strong{color:#1B5E20;display:block;font-size:17px;font-weight:900;line-height:1.18;margin:10px 0 5px}',
+      'html body #'+FORM_CARD_ID+' p{color:#4E5A4E!important;display:block!important;font-family:Montserrat,Arial,sans-serif!important;font-size:12px!important;font-weight:700!important;line-height:1.4!important;margin:0!important}',
+      'html body #'+FORM_CARD_ID+' p+p{margin-top:4px!important}',
       'html.bw-booking-form-trust-active .bw-booking-form-stack{margin-bottom:8px!important}',
       'html.bw-booking-form-trust-active .bw-booking-details-stack,html.bw-booking-form-trust-active .bw-booking-submit-stack{margin-top:8px!important}',
       'html.bw-booking-form-trust-active .bw-booking-terms-field{margin-bottom:0!important;padding-bottom:0!important}',
@@ -69,7 +76,7 @@
       '#' + NUDGE_ID + ' span{display:block;font-size:11px;font-weight:750;line-height:1.35;margin-top:2px}',
       '#' + NUDGE_ID + ' button{background:#FFE600;border:0;border-radius:0;color:#1B5E20;cursor:pointer;font-family:Montserrat,Arial,sans-serif;font-size:12px;font-weight:900;margin-left:auto;min-height:42px;padding:10px 13px;text-transform:uppercase}',
       '@media(max-width:750px){html.bw-booking-funnel-active .bw-booking-stage-section{min-height:calc(100svh - 94px)!important}html.bw-booking-funnel-active .bw-booking-stage-inner{padding:20px 0!important}html.bw-booking-funnel-active .bw-booking-stage-wrap{width:100%!important}}',
-      '@media(max-width:640px){bw-booking-calendar .bw-cal-standalone{padding:18px 16px 26px}bw-booking-calendar .bw-cal-intro h1{font-size:30px;line-height:1.05}bw-booking-calendar .bw-cal-intro p{font-size:14px}bw-booking-calendar .bw-cal-intro-chip{font-size:10.5px;min-height:28px;padding:6px 9px}#'+FORM_CARD_ID+'{margin-bottom:16px;padding:13px 13px}#'+FORM_CARD_ID+' strong{font-size:17px}#'+FORM_CARD_ID+' p{font-size:12px!important}#'+TERMS_HELPER_ID+'{font-size:11.5px;margin:7px 0 4px 32px;padding:8px 10px}html.bw-booking-form-trust-active .bw-booking-form-stack{margin-bottom:6px!important}html.bw-booking-form-trust-active .bw-booking-details-stack,html.bw-booking-form-trust-active .bw-booking-submit-stack{margin-top:6px!important}}',
+      '@media(max-width:640px){bw-booking-calendar .bw-cal-standalone{padding:18px 16px 26px}bw-booking-calendar .bw-cal-intro h1{font-size:30px;line-height:1.05}bw-booking-calendar .bw-cal-intro p{font-size:14px}bw-booking-calendar .bw-cal-intro-chip{font-size:10.5px;min-height:28px;padding:6px 9px}bw-booking-calendar .bw-booking-progress ol,#'+FORM_CARD_ID+' .bw-booking-progress ol{gap:5px}bw-booking-calendar .bw-booking-progress li,#'+FORM_CARD_ID+' .bw-booking-progress li{padding:4px 6px}html body #'+FORM_CARD_ID+'{margin-bottom:12px;padding:11px 11px}html body #'+FORM_CARD_ID+'>strong{font-size:16px;margin-top:8px}html body #'+FORM_CARD_ID+' p{font-size:11.5px!important}#'+TERMS_HELPER_ID+'{font-size:11.5px;margin:7px 0 4px 32px;padding:8px 10px}html.bw-booking-form-trust-active .bw-booking-form-stack{margin-bottom:6px!important}html.bw-booking-form-trust-active .bw-booking-details-stack,html.bw-booking-form-trust-active .bw-booking-submit-stack{margin-top:6px!important}}',
       '@media(min-width:641px){#' + NUDGE_ID + '{display:none!important}}',
     ].join('');
     if (isNew) document.head.appendChild(style);
@@ -201,6 +208,19 @@
       title.textContent = 'Choose your date and time';
     }
 
+    var head = calendar.querySelector('.bw-cal-head');
+    if (head) {
+      var oldNote = head.querySelector('.bw-cal-note');
+      if (oldNote) oldNote.remove();
+      var progress = head.querySelector('.bw-booking-progress');
+      if (!progress || progress.getAttribute('data-bw-progress-version') !== INTRO_VERSION) {
+        var progressWrap = document.createElement('div');
+        progressWrap.innerHTML = serviceProgressHtml();
+        if (progress) progress.replaceWith(progressWrap.firstElementChild);
+        else head.appendChild(progressWrap.firstElementChild);
+      }
+    }
+
     calendar.querySelectorAll('.bw-cal-cta').forEach(function (cta) {
       if (cta.textContent.trim() === 'Reserve your spot') {
         cta.textContent = 'Continue to free reservation';
@@ -246,18 +266,33 @@
     return true;
   }
 
+  function progressHtml(firstClass, firstState, secondClass, secondState) {
+    return [
+      '<nav class="bw-booking-progress" data-bw-progress-version="' + INTRO_VERSION + '" aria-label="Reservation progress">',
+      '<ol>',
+      '<li class="' + firstClass + '"' + (firstClass.indexOf('is-active') !== -1 ? ' aria-current="step"' : '') + '>',
+      '<span class="bw-progress-number">Step 1</span><strong>Date &amp; time</strong>',
+      '<span class="bw-progress-state">' + firstState + '</span>',
+      '</li>',
+      '<li class="' + secondClass + '"' + (secondClass.indexOf('is-active') !== -1 ? ' aria-current="step"' : '') + '>',
+      '<span class="bw-progress-number">Step 2</span><strong>Guests &amp; confirm</strong>',
+      '<span class="bw-progress-state">' + secondState + '</span>',
+      '</li>',
+      '</ol>',
+      '</nav>'
+    ].join('');
+  }
+
+  function serviceProgressHtml() {
+    return progressHtml('is-active', 'Choose now', '', 'Next');
+  }
+
   function trustCardHtml() {
     return [
-      '<div class="bw-form-step">Step 2 of 2</div>',
-      '<strong>Your free reservation details</strong>',
-      '<p>Your reservation is free, with no upfront payment. I use your email to send tour details, reminders before the walk, and one review request after the tour.</p>',
-      '<p>Phone is only for tour-day coordination if you are late or cannot find the group.</p>',
-      '<div class="bw-form-chips" aria-label="Reservation details">',
-      '<span class="bw-form-chip">Free reservation</span>',
-      '<span class="bw-form-chip">No payment now</span>',
-      '<span class="bw-form-chip">Email tour details</span>',
-      '<span class="bw-form-chip">Cancel if plans change</span>',
-      '</div>'
+      progressHtml('is-complete', 'Selected', 'is-active', 'Current step'),
+      '<strong>Complete your free reservation</strong>',
+      '<p>Add the guest details below. There is no upfront payment; you tip after the walk.</p>',
+      '<p>I use your email for tour details and reminders. Phone is only for tour-day coordination.</p>'
     ].join('');
   }
 
@@ -311,11 +346,17 @@
     document.documentElement.classList.add('bw-booking-form-trust-active');
 
     var introWrap = document.querySelector('[data-hook="form-field-c75b1793-ac5f-4491-a1d6-61cc895c7b94"]');
-    if (introWrap && !document.getElementById(FORM_CARD_ID)) {
-      var card = document.createElement('div');
-      card.id = FORM_CARD_ID;
-      card.innerHTML = trustCardHtml();
-      introWrap.appendChild(card);
+    if (introWrap) {
+      var card = document.getElementById(FORM_CARD_ID);
+      if (!card) {
+        card = document.createElement('div');
+        card.id = FORM_CARD_ID;
+        introWrap.appendChild(card);
+      }
+      if (card.getAttribute('data-bw-booking-form-version') !== FORM_VERSION) {
+        card.setAttribute('data-bw-booking-form-version', FORM_VERSION);
+        card.innerHTML = trustCardHtml();
+      }
     }
 
     var termsText = findTermsTextNode();

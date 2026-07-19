@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Booking progress QA</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+      * { box-sizing: border-box; }
+      body { background:#FAFAF5; color:#212121; font-family:Montserrat,Arial,sans-serif; margin:0; }
+      #qa-root { margin:0 auto; max-width:1180px; padding:24px; }
+      .form-shell { background:#fff; border:1px solid #DCE3DD; margin:0 auto; max-width:680px; padding:18px; }
+      .mock-field { margin:0 0 16px; }
+      .mock-field > p { color:#4E5A4E; margin:0; }
+      label { align-items:flex-start; display:flex; gap:8px; }
+      .mock-section { border-top:1px solid #DCE3DD; margin-top:12px; padding-top:12px; }
+      @media (max-width:640px) { #qa-root { padding:0; } .form-shell { border-left:0; border-right:0; padding:12px; } }
+    </style>
+  </head>
+  <body>
+    <main id="qa-root"></main>
+    <script>
+      (function () {
+        var params = new URL(window.location.href).searchParams;
+        var mode = params.get('mode') === 'form' ? 'form' : 'service';
+        var root = document.getElementById('qa-root');
+        var qaSearch = new URLSearchParams({ 'b5-preview': '1' });
+        ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id', 'fbclid', 'fbc', 'fbp'].forEach(function (key) {
+          if (params.has(key)) qaSearch.set(key, params.get(key));
+        });
+        if (mode === 'form') {
+          history.replaceState({}, '', '/booking-form?' + qaSearch.toString());
+          root.innerHTML = [
+            '<section class="form-shell" aria-label="Booking form preview">',
+            '<div class="mock-field" data-hook="form-field-c75b1793-ac5f-4491-a1d6-61cc895c7b94"><p>Complete your booking details.</p></div>',
+            '<div class="mock-section"><strong>Booking Details</strong></div>',
+            '<div class="mock-section" data-hook="form-field-terms"><label><input type="checkbox"><span>I agree to terms and conditions.</span></label></div>',
+            '<div class="mock-section">By completing your booking, you agree to the terms. <button type="button">Book Now</button></div>',
+            '</section>'
+          ].join('');
+          var patch = document.createElement('script');
+          patch.src = '/booking-calendar/book-now-intro-patch.js';
+          document.head.appendChild(patch);
+          return;
+        }
+
+        history.replaceState({}, '', '/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?' + qaSearch.toString());
+        root.innerHTML = '<section><div><div><bw-booking-calendar demo navigation-mode="event" default-guests="2" max-guests="8" demo-days="45"></bw-booking-calendar></div></div></section>';
+        var element = document.createElement('script');
+        element.src = '/booking-calendar/booking-calendar-element.js';
+        element.onload = function () {
+          var patch = document.createElement('script');
+          patch.src = '/booking-calendar/book-now-intro-patch.js';
+          document.head.appendChild(patch);
+        };
+        document.head.appendChild(element);
+      }());
+    </script>
+  </body>
+</html>

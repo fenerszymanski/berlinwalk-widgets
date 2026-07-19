@@ -140,8 +140,69 @@ const BW_BOOKING_CALENDAR_STYLES = `
     font-weight: 800;
     letter-spacing: 0;
     line-height: 1.25;
-    padding: 7px 9px;
+    padding: 4px 7px;
     text-transform: uppercase;
+  }
+
+  .bw-booking-progress {
+    min-width: 0;
+  }
+
+  .bw-booking-progress ol {
+    display: grid;
+    gap: 7px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .bw-booking-progress li {
+    align-items: center;
+    background: #F8FBF4;
+    border: 1px solid #CFE4C8;
+    border-radius: 7px;
+    color: var(--muted);
+    column-gap: 4px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    min-width: 0;
+    padding: 7px 9px;
+    row-gap: 2px;
+  }
+
+  .bw-booking-progress li.is-active {
+    background: #FFE600;
+    border-color: #D1B800;
+    color: #123D18;
+  }
+
+  .bw-booking-progress .bw-progress-number {
+    font-size: 10px;
+    font-weight: 900;
+    grid-column: 1;
+    grid-row: 1;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .bw-booking-progress strong {
+    color: inherit;
+    display: block;
+    font-size: 11px;
+    font-weight: 900;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  .bw-booking-progress .bw-progress-state {
+    font-size: 9px;
+    font-weight: 800;
+    grid-column: 2;
+    grid-row: 1;
+    line-height: 1.1;
   }
 
   .bw-cal-body {
@@ -737,7 +798,7 @@ class BWBookingCalendarElement extends HTMLElement {
         <div class="bw-cal-shell">
           <header class="bw-cal-head">
             <div class="bw-cal-title" role="heading" aria-level="3">${this._escape(serviceTitle)}</div>
-            <span class="bw-cal-note">Free reservation. Tip at the end. Phone is only for tour-day coordination.</span>
+            ${showIntro ? this._progressMarkup() : '<span class="bw-cal-note">Free reservation. Tip at the end. Phone is only for tour-day coordination.</span>'}
           </header>
           <div class="bw-cal-body">
             ${loading ? '<div class="bw-cal-message">Loading real tour availability...</div>' : ''}
@@ -810,6 +871,25 @@ class BWBookingCalendarElement extends HTMLElement {
           ${chips.map((chip) => `<span class="bw-cal-intro-chip">${this._escape(chip)}</span>`).join('')}
         </div>
       </div>
+    `;
+  }
+
+  _progressMarkup() {
+    return `
+      <nav class="bw-booking-progress" data-bw-progress-version="booking-service-stage-20260719b" aria-label="Reservation progress">
+        <ol>
+          <li class="is-active" aria-current="step">
+            <span class="bw-progress-number">Step 1</span>
+            <strong>Date &amp; time</strong>
+            <span class="bw-progress-state">Choose now</span>
+          </li>
+          <li>
+            <span class="bw-progress-number">Step 2</span>
+            <strong>Guests &amp; confirm</strong>
+            <span class="bw-progress-state">Next</span>
+          </li>
+        </ol>
+      </nav>
     `;
   }
 
