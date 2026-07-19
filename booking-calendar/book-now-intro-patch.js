@@ -210,11 +210,19 @@
       calendar.addEventListener('click', function (event) {
         var slotButton = event.target && event.target.closest ? event.target.closest('.bw-cal-slot,[data-slot]') : null;
         if (slotButton) {
-          window.setTimeout(function () { showNextNudge(calendar); }, 80);
+          window.setTimeout(function () {
+            applyIntro(calendar);
+            showNextNudge(calendar);
+          }, 80);
           return;
         }
+        var calendarControl = event.target && event.target.closest ? event.target.closest('.bw-cal-day,.bw-cal-date-nav') : null;
+        if (calendarControl) window.setTimeout(function () { applyIntro(calendar); }, 80);
         var cta = event.target && event.target.closest ? event.target.closest('[data-action="continue"],.bw-cal-cta') : null;
         if (cta) hideNextNudge();
+      });
+      calendar.addEventListener('change', function () {
+        window.setTimeout(function () { applyIntro(calendar); }, 80);
       });
     }
     applyServiceStage(calendar);
@@ -344,17 +352,9 @@
 
     patchBookingHref();
 
-    var observer = null;
-    var observedCalendar = null;
     function watch() {
       var calendar = document.querySelector('bw-booking-calendar[navigation-mode="event"]:not([hide-intro])');
       if (!calendar) return false;
-      if (calendar !== observedCalendar) {
-        if (observer) observer.disconnect();
-        observedCalendar = calendar;
-        observer = new MutationObserver(function () { applyIntro(observedCalendar); });
-        observer.observe(calendar, { childList: true, subtree: true });
-      }
       return applyIntro(calendar);
     }
 
@@ -370,9 +370,17 @@
     });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', start, { once: true });
-  } else {
+  function launch() {
+    if (isBookingService) {
+      window.setTimeout(start, 1500);
+      return;
+    }
     start();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', launch, { once: true });
+  } else {
+    launch();
   }
 })();
