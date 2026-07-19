@@ -1,0 +1,100 @@
+<!-- BerlinWalk PageSpeed Phase 2: commercial template CLS reserve and safe origin hints -->
+<link rel="preconnect" href="https://fenerszymanski.github.io" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<style id="bw-pagespeed-phase2-commercial-template-reserve">
+  /* Home desktop: hold the hero track until the synchronous custom element has rendered. */
+  @media (min-width: 769px) {
+    #comp-lktn0mqe:not(:has(.bw-hero-home)),
+    #comp-lktn0mqe:not(:has(.bw-hero-home)) > .comp-lktn0mqe-container,
+    #comp-lktn0mqe:not(:has(.bw-hero-home)) #comp-mpc6zclu,
+    #comp-lktn0mqe:not(:has(.bw-hero-home)) bw-hero-home {
+      box-sizing: border-box !important;
+      min-height: max(620px, calc(100svh - 143px)) !important;
+    }
+  }
+
+  /* Booking service: mirror the final B5 shell geometry before its classes arrive. */
+  #comp-mpw9apqg,
+  #comp-mpw9apqg > .comp-mpw9apqg-container {
+    box-sizing: border-box !important;
+    min-height: calc(100svh - 143px) !important;
+  }
+
+  #comp-mpw9apqg > .comp-mpw9apqg-container {
+    align-items: center !important;
+    display: flex !important;
+    justify-content: center !important;
+    padding: 44px 24px !important;
+  }
+
+  #comp-mpw9b04c {
+    box-sizing: border-box !important;
+    margin-inline: auto !important;
+    max-width: 920px !important;
+    min-height: 650px !important;
+    width: min(920px, 100%) !important;
+  }
+
+  #comp-mpw9b04c > bw-booking-calendar {
+    box-sizing: border-box !important;
+    min-height: 650px !important;
+    width: 100% !important;
+  }
+
+  #comp-mpw9b04c > bw-booking-calendar:not(:has(.bw-cal-standalone)) > .bw-booking-calendar > .bw-cal-shell {
+    position: relative !important;
+    top: 188px !important;
+  }
+
+  @media (max-width: 750px) {
+    #comp-mpw9apqg,
+    #comp-mpw9apqg > .comp-mpw9apqg-container {
+      min-height: calc(100svh - 94px) !important;
+    }
+
+    #comp-mpw9apqg > .comp-mpw9apqg-container {
+      padding: 20px 0 !important;
+    }
+
+    #comp-mpw9b04c,
+    #comp-mpw9b04c > bw-booking-calendar {
+      min-height: 710px !important;
+      width: 100% !important;
+    }
+
+    #comp-mpw9b04c > bw-booking-calendar:not(:has(.bw-cal-standalone)) > .bw-booking-calendar > .bw-cal-shell {
+      top: 262px !important;
+    }
+  }
+
+  /* Product iframe: reserve the measured responsive document height before postMessage resize. */
+  @media (max-width: 430px) {
+    #comp-mr7jtqiv,
+    #comp-mr7jtqiv > .comp-mr7jtqiv-container,
+    #bw-audio-route-products-frame-host,
+    #bw-audio-route-products-frame {
+      box-sizing: border-box !important;
+      min-height: clamp(9460px, calc(13261px - 923vw), 9662px) !important;
+    }
+  }
+
+  @media (min-width: 431px) and (max-width: 768px) {
+    #comp-mr7jtqiv,
+    #comp-mr7jtqiv > .comp-mr7jtqiv-container,
+    #bw-audio-route-products-frame-host,
+    #bw-audio-route-products-frame {
+      box-sizing: border-box !important;
+      min-height: calc(11937px - 601vw) !important;
+    }
+  }
+
+  @media (min-width: 769px) {
+    #comp-mr7jtqiv,
+    #comp-mr7jtqiv > .comp-mr7jtqiv-container,
+    #bw-audio-route-products-frame-host,
+    #bw-audio-route-products-frame {
+      box-sizing: border-box !important;
+      min-height: clamp(6054px, calc(6438px - 30vw), 6210px) !important;
+    }
+  }
+</style>
