@@ -2,7 +2,7 @@
  * Load sitewide via Wix Custom Code, body-end.
  */
 (function () {
-  var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+  var BOOKING_URL = 'https://www.berlinwalk.com/free-berlin-walking-tour';
   var HERO_IMAGE_URL = getImageUrl('hero');
   var SESSION_KEY = 'bw-exit-intent-triggered';
   var DESKTOP_MIN_WIDTH = 1024;
@@ -72,6 +72,7 @@
     return path.indexOf('/tools/') === 0 ||
       path.indexOf('/products/') === 0 ||
       path.indexOf('/book-berlin-walking-tour') === 0 ||
+      path.indexOf('/free-berlin-walking-tour') === 0 ||
       path.indexOf('/berlin-trip-planner') === 0 ||
       path.indexOf('/thank-you') !== -1 ||
       path.indexOf('/thank_you') !== -1 ||

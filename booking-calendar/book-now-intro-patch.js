@@ -8,17 +8,17 @@
   var NUDGE_ID = 'bw-booking-calendar-next-nudge';
   var FORM_CARD_ID = 'bw-booking-form-trust-card';
   var TERMS_HELPER_ID = 'bw-booking-terms-helper';
-  var INTRO_VERSION = 'booking-form-trust-20260701d';
+  var INTRO_VERSION = 'booking-service-stage-20260719a';
   var TERMS_LABEL = 'I agree to the free reservation terms listed below.';
   var INTRO_HTML = [
     "<div class='bw-cal-intro' data-bw-booking-intro-version='" + INTRO_VERSION + "'>",
     "<span class='bw-cal-intro-kicker'>Book the tour</span>",
-    '<h2>Reserve your free spot</h2>',
-    "<p>No upfront payment. My walk is ~2h, tip-based at the end, and starts at the World Clock on Alexanderplatz.</p>",
+    '<h1>Reserve your free spot</h1>',
+    "<p>No upfront payment. My walk takes about 2 hours, is tip-based at the end, and starts at the World Clock on Alexanderplatz.</p>",
     "<div class='bw-cal-intro-chips' aria-label='Tour booking details'>",
     "<span class='bw-cal-intro-chip'>Free reservation</span>",
     "<span class='bw-cal-intro-chip'>No payment now</span>",
-    "<span class='bw-cal-intro-chip'>~2h walk</span>",
+    "<span class='bw-cal-intro-chip'>About 2 hours</span>",
     "<span class='bw-cal-intro-chip'>World Clock meeting point</span>",
     "<span class='bw-cal-intro-chip'>Guided by Yusuf</span>",
     '</div>',
@@ -33,11 +33,18 @@
       'bw-booking-calendar .bw-cal-standalone{box-sizing:border-box;margin:0 auto;max-width:1160px;padding:32px 24px 44px}',
       'bw-booking-calendar .bw-cal-intro{display:grid;gap:10px;margin:0 0 14px;min-width:0}',
       'bw-booking-calendar .bw-cal-intro-kicker{color:var(--green);font-size:11px;font-weight:900;letter-spacing:0;line-height:1;text-transform:uppercase}',
-      'bw-booking-calendar .bw-cal-intro h2{color:var(--green);font-size:36px;font-weight:900;letter-spacing:0!important;line-height:1.02;margin:0}',
+      'bw-booking-calendar .bw-cal-intro h1{color:var(--green);font-size:36px;font-weight:900;letter-spacing:0!important;line-height:1.02;margin:0}',
       'bw-booking-calendar .bw-cal-intro p{color:var(--muted);font-size:15px;font-weight:700;line-height:1.5;margin:0;max-width:640px}',
       'bw-booking-calendar .bw-cal-intro-chips{display:flex;flex-wrap:wrap;gap:7px;min-width:0}',
       'bw-booking-calendar .bw-cal-intro-chip{align-items:center;background:#F8FBF4;border:1px solid #CFE4C8;border-radius:999px;color:var(--green);display:inline-flex;font-size:11px;font-weight:850;line-height:1.15;min-height:30px;padding:7px 10px;white-space:normal}',
       'bw-booking-calendar .bw-cal-standalone .bw-cal-cta{font-size:15px!important;height:48px!important}',
+      'html.bw-booking-funnel-active .bw-booking-stage-section{background:radial-gradient(circle at 50% 20%,#fff 0,#FAFAF5 58%,#F2F7EE 100%)!important;height:auto!important;min-height:calc(100vh - 143px)!important;min-height:calc(100svh - 143px)!important}',
+      'html.bw-booking-funnel-active .bw-booking-stage-inner{align-items:center!important;box-sizing:border-box!important;display:flex!important;justify-content:center!important;min-height:inherit!important;padding:44px 24px!important;width:100%!important}',
+      'html.bw-booking-funnel-active .bw-booking-stage-wrap{display:block!important;height:auto!important;margin:0!important;max-width:920px!important;min-height:0!important;place-self:auto!important;width:min(920px,100%)!important}',
+      'html.bw-booking-funnel-active .bw-booking-stage-wrap>bw-booking-calendar{display:block!important;max-width:none!important;width:100%!important}',
+      'html.bw-booking-funnel-active .bw-booking-stage-wrap .bw-cal-shell{border-radius:12px;box-shadow:0 18px 42px rgba(18,61,24,.12)}',
+      'html.bw-booking-funnel-active .bw-booking-stage-wrap .bw-cal-cta{background:#FFE600!important;color:#123D18!important;font-weight:900!important}',
+      'html.bw-booking-funnel-active .bw-booking-stage-wrap .bw-cal-cta:hover,html.bw-booking-funnel-active .bw-booking-stage-wrap .bw-cal-cta:focus-visible{background:#FFF066!important;color:#123D18!important}',
       'html.bw-booking-form-trust-active [data-hook="form-field-c75b1793-ac5f-4491-a1d6-61cc895c7b94"] p{display:none!important}',
       '#'+FORM_CARD_ID+'{background:#F8FBF4;border:1px solid #CFE4C8;border-left:5px solid #1B5E20;box-sizing:border-box;color:#212121;font-family:Montserrat,Arial,sans-serif;margin:0 0 18px;padding:14px 15px}',
       '#'+FORM_CARD_ID+' .bw-form-step{color:#1B5E20;font-size:11px;font-weight:900;letter-spacing:0;text-transform:uppercase}',
@@ -55,7 +62,8 @@
       '#' + NUDGE_ID + ' strong{color:#FFE600;display:block;font-size:13px;font-weight:900;line-height:1.2}',
       '#' + NUDGE_ID + ' span{display:block;font-size:11px;font-weight:750;line-height:1.35;margin-top:2px}',
       '#' + NUDGE_ID + ' button{background:#FFE600;border:0;border-radius:0;color:#1B5E20;cursor:pointer;font-family:Montserrat,Arial,sans-serif;font-size:12px;font-weight:900;margin-left:auto;min-height:42px;padding:10px 13px;text-transform:uppercase}',
-      '@media(max-width:640px){bw-booking-calendar .bw-cal-standalone{padding:18px 16px 26px}bw-booking-calendar .bw-cal-intro h2{font-size:30px;line-height:1.05}bw-booking-calendar .bw-cal-intro p{font-size:14px}bw-booking-calendar .bw-cal-intro-chip{font-size:10.5px;min-height:28px;padding:6px 9px}#'+FORM_CARD_ID+'{margin-bottom:16px;padding:13px 13px}#'+FORM_CARD_ID+' strong{font-size:17px}#'+FORM_CARD_ID+' p{font-size:12px!important}#'+TERMS_HELPER_ID+'{font-size:11.5px;margin:7px 0 4px 32px;padding:8px 10px}html.bw-booking-form-trust-active .bw-booking-form-stack{margin-bottom:6px!important}html.bw-booking-form-trust-active .bw-booking-details-stack,html.bw-booking-form-trust-active .bw-booking-submit-stack{margin-top:6px!important}}',
+      '@media(max-width:750px){html.bw-booking-funnel-active .bw-booking-stage-section{min-height:calc(100svh - 94px)!important}html.bw-booking-funnel-active .bw-booking-stage-inner{padding:20px 0!important}html.bw-booking-funnel-active .bw-booking-stage-wrap{width:100%!important}}',
+      '@media(max-width:640px){bw-booking-calendar .bw-cal-standalone{padding:18px 16px 26px}bw-booking-calendar .bw-cal-intro h1{font-size:30px;line-height:1.05}bw-booking-calendar .bw-cal-intro p{font-size:14px}bw-booking-calendar .bw-cal-intro-chip{font-size:10.5px;min-height:28px;padding:6px 9px}#'+FORM_CARD_ID+'{margin-bottom:16px;padding:13px 13px}#'+FORM_CARD_ID+' strong{font-size:17px}#'+FORM_CARD_ID+' p{font-size:12px!important}#'+TERMS_HELPER_ID+'{font-size:11.5px;margin:7px 0 4px 32px;padding:8px 10px}html.bw-booking-form-trust-active .bw-booking-form-stack{margin-bottom:6px!important}html.bw-booking-form-trust-active .bw-booking-details-stack,html.bw-booking-form-trust-active .bw-booking-submit-stack{margin-top:6px!important}}',
       '@media(min-width:641px){#' + NUDGE_ID + '{display:none!important}}',
     ].join('');
     document.head.appendChild(style);
@@ -162,9 +170,8 @@
     return true;
   }
 
-  function applyIntro() {
+  function applyIntro(calendar) {
     if (!isBookingService) return false;
-    var calendar = document.querySelector('bw-booking-calendar[navigation-mode="event"]:not([hide-intro])');
     if (!calendar) return false;
     var section = calendar.querySelector('.bw-booking-calendar');
     var shell = calendar.querySelector('.bw-cal-shell');
@@ -207,6 +214,21 @@
         if (cta) hideNextNudge();
       });
     }
+    applyServiceStage(calendar);
+    return true;
+  }
+
+  function applyServiceStage(calendar) {
+    if (!isBookingService || !calendar || !calendar.parentElement) return false;
+    var wrap = calendar.parentElement;
+    var inner = wrap.parentElement;
+    var section = inner && inner.closest ? inner.closest('section') : null;
+    var note = wrap.querySelector('.bw-booking-service-note');
+    if (note) note.remove();
+    wrap.classList.remove('bw-booking-note-row');
+    wrap.classList.add('bw-booking-stage-wrap');
+    if (inner) inner.classList.add('bw-booking-stage-inner');
+    if (section) section.classList.add('bw-booking-stage-section');
     return true;
   }
 
@@ -320,14 +342,17 @@
     patchBookingHref();
 
     var observer = null;
+    var observedCalendar = null;
     function watch() {
       var calendar = document.querySelector('bw-booking-calendar[navigation-mode="event"]:not([hide-intro])');
       if (!calendar) return false;
-      if (!observer) {
-        observer = new MutationObserver(function () { applyIntro(); });
+      if (calendar !== observedCalendar) {
+        if (observer) observer.disconnect();
+        observedCalendar = calendar;
+        observer = new MutationObserver(function () { applyIntro(observedCalendar); });
         observer.observe(calendar, { childList: true, subtree: true });
       }
-      return applyIntro();
+      return applyIntro(calendar);
     }
 
     if (window.customElements && customElements.whenDefined) {
@@ -337,11 +362,9 @@
       }).catch(function () {});
     }
 
-    var tries = 0;
-    var timer = window.setInterval(function () {
-      tries += 1;
-      if (watch() || tries > 80) window.clearInterval(timer);
-    }, 250);
+    [0, 250, 750, 1500, 3000, 6000, 10000, 15000, 22000].forEach(function (delay) {
+      window.setTimeout(watch, delay);
+    });
   }
 
   if (document.readyState === 'loading') {
