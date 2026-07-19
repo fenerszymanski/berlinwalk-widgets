@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Berlin Ghost Stations Map: 1961 vs Today</title>
+<meta name="description" content="Flip the same Berlin tunnel map between 1961 and today. See which 15 stations were sealed while West Berlin trains rolled through without stopping, and what stands there now." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='32' r='13' fill='none' stroke='%23FFE600' stroke-width='6'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
+    --yellow:#FFE600; --ink:#1c2a1c; --panel:#ffffff;
+    --bone:#f4f9ec; --line:#e3edd6; --stone:#6d7b66; --red:#E63946;
+    --u6:#8C6DAB; --u8:#224F86; --sbahn:#00713B;
+    --shadow:0 10px 30px rgba(18,61,24,.14);
+  }
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}
+  html,body{margin:0}
+  body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .bx{max-width:960px;margin:0 auto;padding:4px}
+  .card{background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+
+  /* ---------- header ---------- */
+  .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:18px 22px 16px}
+  .head .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:600;margin:0 0 6px}
+  .head h2{margin:0;font-size:21px;font-weight:800;letter-spacing:-.015em}
+  .head p{margin:8px 0 0;font-size:13px;color:#e7f2e3;max-width:660px}
+
+  /* ---------- era switch ---------- */
+  .switchbar{padding:16px 22px;background:var(--bone);border-bottom:1px solid var(--line);
+    display:flex;flex-wrap:wrap;align-items:center;gap:14px;justify-content:space-between}
+  .switch{display:inline-flex;background:#e4ecd8;border-radius:999px;padding:4px;gap:2px}
+  .switch button{font-family:inherit;font-weight:700;font-size:12.5px;letter-spacing:.02em;
+    border:0;border-radius:999px;padding:9px 16px;cursor:pointer;background:transparent;color:#5e6d58;transition:all .25s}
+  .switch button[aria-pressed="true"]{background:var(--green);color:#fff;box-shadow:0 3px 10px rgba(18,61,24,.22)}
+  .switch button:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+  .tally{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.05em;color:var(--green-deep);font-weight:700;text-align:right}
+  .tally span{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);font-weight:600;margin-bottom:3px}
+
+  /* ---------- map ---------- */
+  .map{padding:20px 22px 6px;transition:background .5s}
+  .map[data-era="then"]{background:#101a12}
+  .map[data-era="now"]{background:#fff}
+
+  .lineblock{margin:0 0 22px}
+  .lhead{display:flex;align-items:center;gap:9px;margin:0 0 12px;flex-wrap:wrap}
+  .lbadge{font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:11.5px;color:#fff;
+    padding:4px 9px;border-radius:6px;letter-spacing:.04em}
+  .lname{font-size:12px;font-weight:700;letter-spacing:.01em;transition:color .5s}
+  .lnote{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;font-weight:600;transition:color .5s}
+  .map[data-era="then"] .lname{color:#e6efe2}
+  .map[data-era="then"] .lnote{color:#8fa389}
+  .map[data-era="now"] .lname{color:var(--ink)}
+  .map[data-era="now"] .lnote{color:var(--stone)}
+
+  .strip{position:relative;padding:34px 0 8px}
+  /* east sector band */
+  .sector{position:absolute;top:22px;bottom:0;border-radius:10px;transition:all .5s}
+  .map[data-era="then"] .sector{background:rgba(230,57,70,.16);border-left:2px dashed rgba(230,57,70,.75);border-right:2px dashed rgba(230,57,70,.75)}
+  .map[data-era="now"] .sector{background:rgba(27,94,32,.05);border-left:2px dashed rgba(109,123,102,.35);border-right:2px dashed rgba(109,123,102,.35)}
+  .sectorlab{position:absolute;top:2px;left:50%;transform:translateX(-50%);white-space:nowrap;
+    font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;transition:color .5s}
+  .map[data-era="then"] .sectorlab{color:#f08b92}
+  .map[data-era="now"] .sectorlab{color:#93a08c}
+
+  .stops{position:relative;height:96px}
+  .track{position:absolute;left:0;right:0;top:42px;height:7px;border-radius:5px;transition:opacity .5s}
+  .stop{position:absolute;top:34px;transform:translateX(-50%);background:none;border:0;padding:0;cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;gap:7px;font-family:inherit;width:74px}
+  .stop .dot{width:17px;height:17px;border-radius:50%;border:3px solid #fff;background:#fff;transition:all .4s;position:relative}
+  .stop .nm{font-size:9.5px;font-weight:700;line-height:1.25;text-align:center;transition:color .4s;
+    overflow-wrap:break-word;hyphens:auto}
+  .stop:focus-visible{outline:3px solid var(--yellow);outline-offset:4px;border-radius:8px}
+
+  /* then-state: sealed */
+  .map[data-era="then"] .stop[data-kind="ghost"] .dot{background:#2b2b2b;border-color:#5c4144;box-shadow:none}
+  .map[data-era="then"] .stop[data-kind="ghost"] .dot::after{content:"";position:absolute;left:50%;top:50%;
+    width:19px;height:2.5px;background:var(--red);transform:translate(-50%,-50%) rotate(45deg);border-radius:2px}
+  .map[data-era="then"] .stop[data-kind="ghost"] .nm{color:#96a291}
+  .map[data-era="then"] .stop[data-kind="border"] .dot{background:var(--yellow);border-color:#fff;box-shadow:0 0 0 5px rgba(255,230,0,.18)}
+  .map[data-era="then"] .stop[data-kind="border"] .nm{color:var(--yellow)}
+  .map[data-era="then"] .stop[data-kind="west"] .dot{background:#fff;border-color:#dfe8d2}
+  .map[data-era="then"] .stop[data-kind="west"] .nm{color:#cfdcc8}
+
+  /* now-state */
+  .map[data-era="now"] .stop .dot{background:#fff;border-color:var(--green)}
+  .map[data-era="now"] .stop .nm{color:var(--ink)}
+  .map[data-era="now"] .stop[data-closed="1"] .dot{background:#efefef;border-color:#b9b9b9}
+  .map[data-era="now"] .stop[data-closed="1"] .dot::after{content:"";position:absolute;left:50%;top:50%;
+    width:19px;height:2.5px;background:#9a9a9a;transform:translate(-50%,-50%) rotate(45deg);border-radius:2px}
+  .map[data-era="now"] .stop[data-closed="1"] .nm{color:#9a9a9a}
+
+  .stop[aria-current="true"] .dot{transform:scale(1.32)}
+  .map[data-era="then"] .stop[aria-current="true"] .dot{box-shadow:0 0 0 6px rgba(255,230,0,.22)}
+  .map[data-era="now"] .stop[aria-current="true"] .dot{background:var(--yellow);box-shadow:0 0 0 6px rgba(27,94,32,.14)}
+
+  .endcap{position:absolute;top:0;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;
+    text-transform:uppercase;font-weight:700;transition:color .5s;white-space:nowrap}
+  .endcap.l{left:0}
+  .endcap.r{right:0}
+  .map[data-era="then"] .endcap{color:#7f8d79}
+  .map[data-era="now"] .endcap{color:#a8b3a2}
+
+  /* ---------- detail ---------- */
+  .detail{padding:18px 22px 22px;border-top:1px solid var(--line);background:var(--bone)}
+  .dtop{display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;margin:0 0 14px}
+  .dname{margin:0;font-size:17px;font-weight:800;letter-spacing:-.01em;color:var(--green-deep)}
+  .dpills{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+  .pill{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.06em;
+    padding:4px 8px;border-radius:5px;color:#fff}
+  .pill.plain{background:#dbe5cd;color:var(--green-deep)}
+
+  .dgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .dbox{background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px 14px}
+  .dbox h4{margin:0 0 7px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.13em;
+    text-transform:uppercase;font-weight:700;color:var(--stone)}
+  .dbox p{margin:0;font-size:13px;line-height:1.55}
+  .dbox.then{border-left:4px solid var(--red)}
+  .dbox.now{border-left:4px solid var(--lime)}
+
+  .verdict{margin:14px 0 0;background:var(--green-deep);color:#eaf3e4;border-radius:12px;padding:13px 15px}
+  .verdict h4{margin:0 0 6px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.13em;
+    text-transform:uppercase;font-weight:700;color:var(--yellow)}
+  .verdict p{margin:0;font-size:13px;line-height:1.55}
+
+  .legend{padding:14px 22px 18px;border-top:1px solid var(--line);display:flex;gap:18px;flex-wrap:wrap}
+  .lg{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--stone);font-weight:600}
+  .lg i{width:13px;height:13px;border-radius:50%;display:inline-block;border:3px solid #fff;box-shadow:0 0 0 1px #cfdcc8}
+  .lg i.ghost{background:#2b2b2b;border-color:#5c4144}
+  .lg i.border{background:var(--yellow);border-color:#e0d36a}
+  .lg i.open{background:#fff;border-color:var(--green)}
+  .lg i.shut{background:#efefef;border-color:#b9b9b9}
+
+  @media (max-width:700px){
+    .bx{padding:2px}
+    .head{padding:16px 16px 14px}
+    .head h2{font-size:18px}
+    .switchbar{padding:14px 16px;gap:10px}
+    .tally{text-align:left}
+    .map{padding:16px 14px 4px}
+    .stops{height:140px}
+    .track{top:46px}
+    .stop{width:54px;top:38px}
+    .stop .nm{font-size:8.5px}
+    /* stagger every second label so neighbouring station names cannot collide */
+    .stop:nth-of-type(even) .nm{margin-top:26px}
+    .stop:nth-of-type(even)::before{content:"";position:absolute;top:17px;left:50%;width:1.5px;height:26px;
+      transform:translateX(-50%);background:currentColor;opacity:.28}
+    .map[data-era="then"] .stop:nth-of-type(even)::before{color:#8fa389}
+    .map[data-era="now"] .stop:nth-of-type(even)::before{color:var(--stone)}
+    /* on narrow screens the West Berlin captions keep their own row above the sector band */
+    .endcap i{display:none}
+    .endcap{font-size:8.5px}
+    .strip{padding-top:30px}
+    .detail{padding:16px 16px 18px}
+    .dgrid{grid-template-columns:1fr}
+    .legend{padding:12px 16px 16px;gap:12px}
+  }
+</style>
+</head>
+<body>
+<div class="bx">
+  <div class="card">
+    <div class="head">
+      <p class="eyebrow">Berlin Ghost Stations</p>
+      <h2>The same tunnels, two completely different cities</h2>
+      <p>For 28 years West Berlin trains rolled straight through stations that were sealed, dimly lit and guarded. Flip the switch and watch the same map change. Tap any station to see what happened there and what is there now.</p>
+    </div>
+
+    <div class="switchbar">
+      <div class="switch" role="group" aria-label="Choose era">
+        <button type="button" id="btnThen" aria-pressed="true">1961 &ndash; 1989</button>
+        <button type="button" id="btnNow" aria-pressed="false">Today</button>
+      </div>
+      <p class="tally" id="tally"><span>Status</span></p>
+    </div>
+
+    <div class="map" id="map" data-era="then"></div>
+
+    <div class="detail" id="detail"></div>
+
+    <div class="legend" id="legend"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var LINES = [
+    {
+      id:'u6', label:'U6', color:'#8C6DAB',
+      name:'U6 north–south under Mitte',
+      noteThen:'West Berlin line, East Berlin middle',
+      noteNow:'Runs normally, one stop missing',
+      westLeft:'Wedding', westRight:'Kreuzberg',
+      stops:[
+        {n:'Schwartzkopff&shy;straße', kind:'ghost',
+         then:'Sealed on 13 August 1961. Trains slowed through the platform without opening a door, because the tunnel geometry forced them to, not out of respect.',
+         now:'An ordinary U6 stop again, a few minutes north of the Naturkundemuseum. Nothing dramatic to see at platform level.'},
+        {n:'Natur&shy;kunde&shy;museum', kind:'ghost',
+         then:'One of the sealed U6 platforms in the East Berlin sector, guarded and closed to passengers on both sides.',
+         now:'Your stop for the Natural History Museum. This is the one ghost station most visitors already use without knowing it.'},
+        {n:'Oranien&shy;burger Tor', kind:'ghost',
+         then:'Sealed. Above it, the street had been cut off from the West Berlin part of the same line.',
+         now:'A normal working station at the top of Friedrichstraße, a short walk from the Oranienburger Straße nightlife strip.'},
+        {n:'Friedrich&shy;straße', kind:'border',
+         then:'The exception. This was the one station inside East Berlin where Western passengers could get out, and only to change trains inside a sealed transfer area. The border control building next door is the Tränenpalast, the Palace of Tears.',
+         now:'A busy interchange and one of the few places where the divided-city story is still told on site, at the Tränenpalast museum right outside.'},
+        {n:'Französische Straße', kind:'ghost', closed:true,
+         then:'Sealed with the rest of the U6 stops in the East Berlin sector.',
+         now:'Closed again, but for an ordinary reason. It shut permanently on 3 December 2020 when the new Unter den Linden station opened one day later as the U5/U6 interchange.'},
+        {n:'Stadtmitte', kind:'ghost',
+         then:'The last sealed U6 platform before the line crossed back into West Berlin at Kochstraße.',
+         now:'A working interchange with the U2, a few minutes from Gendarmenmarkt and Checkpoint Charlie.'}
+      ]
+    },
+    {
+      id:'u8', label:'U8', color:'#224F86',
+      name:'U8 through the northern districts',
+      noteThen:'Five sealed platforms in a row',
+      noteNow:'All five back in service',
+      westLeft:'Wedding', westRight:'Kreuzberg',
+      stops:[
+        {n:'Bernauer Straße', kind:'ghost',
+         then:'Sealed. The street above became one of the most photographed stretches of the Wall, with windows bricked up and people jumping from upper floors in the first days.',
+         now:'The stop for the Berlin Wall Memorial. This is the single best place in the city to understand how the border actually worked.'},
+        {n:'Rosen&shy;thaler Platz', kind:'ghost',
+         then:'Sealed for 28 years. When it was reopened, advertising posters from 1961 were reportedly still on the walls.',
+         now:'A busy Mitte junction surrounded by cafes and bars, and one of the earliest stations to come back, on 22 December 1989.'},
+        {n:'Wein&shy;meister&shy;straße', kind:'ghost',
+         then:'Sealed, guarded, and passed at low speed by West Berlin trains several times an hour.',
+         now:'The stop for the Hackescher Markt courtyards and the streetwear shops around Münzstraße.'},
+        {n:'Alexander&shy;platz (U8)', kind:'ghost',
+         then:'The U8 platform was sealed even though Alexanderplatz above it was the busy centre of East Berlin, served by its own East German lines.',
+         now:'Part of the biggest interchange in the city, and the square where my walking tour starts.'},
+        {n:'Jannowitz&shy;brücke', kind:'ghost',
+         then:'Sealed. Then, on 11 November 1989, two days after the Wall opened, it became the first ghost station to take passengers again.',
+         now:'A normal stop by the Spree with a good view of the river from the bridge above.'}
+      ]
+    },
+    {
+      id:'sbahn', label:'S-Bahn', color:'#00713B',
+      name:'North–south S-Bahn tunnel',
+      noteThen:'Four sealed platforms plus one above ground',
+      noteNow:'All open, one is now a museum',
+      westLeft:'north', westRight:'south',
+      stops:[
+        {n:'Nord&shy;bahnhof', kind:'ghost',
+         then:'Sealed, with barbed wire fitted to stop anyone reaching the track bed from the East Berlin side.',
+         now:'The one ghost station that explains itself. A free permanent exhibition sits on the mezzanine level, and the Berlin Wall Memorial is directly above.'},
+        {n:'Oranien&shy;burger Straße', kind:'ghost',
+         then:'Sealed. The New Synagogue stands a short walk from the entrance that nobody could use.',
+         now:'A working stop in the middle of the Scheunenviertel, useful for the New Synagogue and the surrounding streets.'},
+        {n:'Friedrich&shy;straße', kind:'border',
+         then:'The same border station as on the U6, and the only stop in the tunnel where a Western passenger legally set foot in East Berlin.',
+         now:'A major interchange. The Tränenpalast outside is free to enter and worth twenty minutes.'},
+        {n:'Branden&shy;burger Tor', kind:'ghost',
+         then:'Sealed, directly under the death strip. The gate above it stood in no man’s land, unreachable from either side.',
+         now:'The stop everyone uses for the Brandenburg Gate. The platform is ordinary. What is above it is not.'},
+        {n:'Potsdamer Platz', kind:'ghost',
+         then:'Sealed. The square above was flattened and empty for decades, one of the strangest voids in any European capital.',
+         now:'The last ghost station to come back, on 3 March 1992, after the whole tunnel was rebuilt. Everything above ground is newer than the station.'},
+        {n:'Bornholmer Straße', kind:'ghost',
+         then:'The only ghost station above ground rather than in a tunnel, closed on 13 August 1961 with everything else.',
+         now:'The Bösebrücke above it is where it ended. On the evening of 9 November 1989 the guards here were the first to open a crossing and let people through.'}
+      ]
+    }
+  ];
+
+  var era = 'then';
+  var sel = { line:2, stop:0 };
+  var mapEl = document.getElementById('map');
+  var detailEl = document.getElementById('detail');
+  var legendEl = document.getElementById('legend');
+  var tallyEl = document.getElementById('tally');
+
+  function plain(html){ return String(html).replace(/&shy;/g,'').replace(/&ndash;/g,'–'); }
+
+  function buildMap(){
+    var html = '';
+    LINES.forEach(function(line, li){
+      var n = line.stops.length;
+      // stops sit in the middle band so the West Berlin ends stay visible outside the sealed sector
+      var left = 19, span = 62;
+      var step = span / (n - 1);
+      var secPad = step * 0.62;
+      var secL = left - secPad, secR = left + span + secPad;
+
+      html += '<div class="lineblock">';
+      html += '<div class="lhead">';
+      html += '<span class="lbadge" style="background:' + line.color + '">' + line.label + '</span>';
+      html += '<span class="lname">' + line.name + '</span>';
+      html += '<span class="lnote" data-note-then="' + line.noteThen + '" data-note-now="' + line.noteNow + '"></span>';
+      html += '</div>';
+
+      html += '<div class="strip">';
+      html += '<div class="sector" style="left:' + secL + '%;width:' + (secR - secL) + '%">'
+           +  '<span class="sectorlab" data-sec-then="East Berlin sector" data-sec-now="Formerly East Berlin"></span></div>';
+      html += '<span class="endcap l">West Berlin<i> (' + line.westLeft + ')</i></span>';
+      html += '<span class="endcap r">West Berlin<i> (' + line.westRight + ')</i></span>';
+      html += '<div class="stops">';
+      html += '<div class="track" style="background:' + line.color + '"></div>';
+      line.stops.forEach(function(s, si){
+        var x = left + step * si;
+        html += '<button type="button" class="stop" style="left:' + x + '%" '
+             +  'data-kind="' + s.kind + '" data-closed="' + (s.closed ? '1' : '0') + '" '
+             +  'data-line="' + li + '" data-stop="' + si + '" aria-current="false" '
+             +  'aria-label="' + plain(s.n) + '">'
+             +  '<span class="dot"></span><span class="nm">' + s.n + '</span></button>';
+      });
+      html += '</div></div></div>';
+    });
+    mapEl.innerHTML = html;
+
+    mapEl.querySelectorAll('.stop').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        sel = { line: Number(btn.dataset.line), stop: Number(btn.dataset.stop) };
+        render();
+      });
+    });
+  }
+
+  function buildLegend(){
+    legendEl.innerHTML = era === 'then'
+      ? '<span class="lg"><i class="ghost"></i>Sealed, trains passed through</span>'
+        + '<span class="lg"><i class="border"></i>Border station, one legal stop</span>'
+        + '<span class="lg"><i class="open"></i>West Berlin platform</span>'
+      : '<span class="lg"><i class="open"></i>Open and in normal service</span>'
+        + '<span class="lg"><i class="shut"></i>Closed again since 2020</span>';
+  }
+
+  function render(){
+    mapEl.dataset.era = era;
+    document.getElementById('btnThen').setAttribute('aria-pressed', era === 'then' ? 'true' : 'false');
+    document.getElementById('btnNow').setAttribute('aria-pressed', era === 'now' ? 'true' : 'false');
+
+    tallyEl.innerHTML = era === 'then'
+      ? '<span>13 August 1961 onwards</span>15 stations sealed &middot; 1 border station'
+      : '<span>Berlin in 2026</span>14 back in service &middot; 1 closed again';
+
+    mapEl.querySelectorAll('.lnote').forEach(function(el){
+      el.textContent = era === 'then' ? el.dataset.noteThen : el.dataset.noteNow;
+    });
+    mapEl.querySelectorAll('.sectorlab').forEach(function(el){
+      el.textContent = era === 'then' ? el.dataset.secThen : el.dataset.secNow;
+    });
+    mapEl.querySelectorAll('.stop').forEach(function(btn){
+      var on = Number(btn.dataset.line) === sel.line && Number(btn.dataset.stop) === sel.stop;
+      btn.setAttribute('aria-current', on ? 'true' : 'false');
+    });
+
+    var line = LINES[sel.line];
+    var s = line.stops[sel.stop];
+    var kindPill = s.kind === 'border'
+      ? '<span class="pill" style="background:#8a7a00">Border station</span>'
+      : '<span class="pill" style="background:'
+        + (era === 'then' ? '#7d3b41' : (s.closed ? '#7a7a7a' : '#2e7d32')) + '">'
+        + (era === 'then' ? 'Sealed 1961–1989' : (s.closed ? 'Closed since 2020' : 'Open today')) + '</span>';
+
+    detailEl.innerHTML =
+      '<div class="dtop"><div>'
+      + '<h3 class="dname">' + plain(s.n) + '</h3>'
+      + '<div class="dpills"><span class="pill" style="background:' + line.color + '">' + line.label + '</span>'
+      + kindPill + '</div></div></div>'
+      + '<div class="dgrid">'
+      + '<div class="dbox then"><h4>1961 to 1989</h4><p>' + s.then + '</p></div>'
+      + '<div class="dbox now"><h4>Today</h4><p>' + s.now + '</p></div>'
+      + '</div>'
+      + '<div class="verdict"><h4>Worth a detour?</h4><p>' + verdict(line, s) + '</p></div>';
+
+    buildLegend();
+  }
+
+  function verdict(line, s){
+    var name = plain(s.n);
+    if (name.indexOf('Nordbahnhof') === 0) {
+      return 'Yes, and it is the only one I actively send people to. The exhibition on the mezzanine is free, it takes about twenty minutes, and the Berlin Wall Memorial upstairs turns it into a proper half morning.';
+    }
+    if (name.indexOf('Bernauer') === 0) {
+      return 'Yes. Not for the platform, but for what is above it. If you only have time for one Berlin Wall site, make it this one.';
+    }
+    if (name.indexOf('Friedrich') === 0) {
+      return 'Yes, for the Tränenpalast outside rather than the platform. Free entry, and the actual border hall is still standing.';
+    }
+    if (name.indexOf('Bornholmer') === 0) {
+      return 'Only if you care about 9 November 1989 specifically. It is out of the centre and the bridge itself is plain, but this is where the Wall genuinely gave way first.';
+    }
+    if (s.closed) {
+      return 'You cannot, which is the joke. Get off at Unter den Linden instead and you are standing more or less where this platform used to serve.';
+    }
+    if (name.indexOf('Potsdamer') === 0) {
+      return 'You will pass through it anyway. Spend the time above ground instead, where the empty decades are easier to picture than on the platform.';
+    }
+    return 'Not for its own sake. It is a normal working station now. Use it for what is on the street above and let the history sit in the background.';
+  }
+
+  document.getElementById('btnThen').addEventListener('click', function(){ era = 'then'; render(); });
+  document.getElementById('btnNow').addEventListener('click', function(){ era = 'now'; render(); });
+
+  buildMap();
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
