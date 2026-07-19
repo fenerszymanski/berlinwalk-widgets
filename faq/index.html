@@ -249,15 +249,26 @@
         return;
       }
 
-      function dataUrl() {
+      function versionSuffix() {
         var version = params.get('v') || '';
-        return version ? './data.json?v=' + encodeURIComponent(version) : './data.json';
+        return version ? '?v=' + encodeURIComponent(version) : '';
       }
 
-      fetch(dataUrl())
-        .then(function (r) { if (!r.ok) throw new Error('404'); return r.json(); })
-        .then(function (d) {
-          if (d[slug]) render(d[slug]);
+      function loadConfig() {
+        var shardUrl = './data/' + encodeURIComponent(slug) + '.json' + versionSuffix();
+        return fetch(shardUrl, { cache: 'force-cache' })
+          .then(function (r) { if (!r.ok) throw new Error('shard_not_found'); return r.json(); })
+          .then(function (payload) { return payload && payload.config ? payload.config : payload; })
+          .catch(function () {
+            return fetch('./data.json' + versionSuffix(), { cache: 'force-cache' })
+              .then(function (r) { if (!r.ok) throw new Error('aggregate_not_found'); return r.json(); })
+              .then(function (data) { return data[slug] || null; });
+          });
+      }
+
+      loadConfig()
+        .then(function (config) {
+          if (config) render(config);
           else { bodyEl.innerHTML = '<div class="bw-faq-items"><div class="bw-empty">FAQ not configured for <strong>' + escapeHtml(slug) + '</strong>.</div></div>'; subEl.style.display = 'none'; }
         })
         .catch(function () {

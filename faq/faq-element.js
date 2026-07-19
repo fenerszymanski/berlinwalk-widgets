@@ -1,5 +1,9 @@
-const BW_FAQ_REMOTE_DATA_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/faq/data.json';
-const BW_FAQ_LOCAL_DATA_URL = document.currentScript && document.currentScript.src
+const BW_FAQ_REMOTE_DATA_BASE = 'https://fenerszymanski.github.io/berlinwalk-widgets/faq/data/';
+const BW_FAQ_REMOTE_AGGREGATE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/faq/data.json';
+const BW_FAQ_LOCAL_DATA_BASE = document.currentScript && document.currentScript.src
+  ? new URL('./data/', document.currentScript.src).href
+  : './data/';
+const BW_FAQ_LOCAL_AGGREGATE_URL = document.currentScript && document.currentScript.src
   ? new URL('./data.json', document.currentScript.src).href
   : './data.json';
 
@@ -53,15 +57,31 @@ class BWFAQElement extends HTMLElement {
   }
 
   async _loadData() {
-    const urls = BW_FAQ_LOCAL_DATA_URL !== BW_FAQ_REMOTE_DATA_URL
-      ? [BW_FAQ_LOCAL_DATA_URL, BW_FAQ_REMOTE_DATA_URL]
-      : [BW_FAQ_REMOTE_DATA_URL];
+    const post = this.getAttribute('post') || 'home';
+    const shardName = `${encodeURIComponent(post)}.json`;
+    const shardUrls = [...new Set([
+      `${BW_FAQ_LOCAL_DATA_BASE}${shardName}`,
+      `${BW_FAQ_REMOTE_DATA_BASE}${shardName}`,
+    ])];
 
     let lastError = null;
-    for (const url of urls) {
+    for (const url of shardUrls) {
       try {
-        const res = await fetch(url, { signal: this._controller.signal });
+        const res = await fetch(url, { signal: this._controller.signal, cache: 'force-cache' });
         if (!res.ok) throw new Error(`FAQ data unavailable: ${res.status}`);
+        const payload = await res.json();
+        const config = payload && payload.config ? payload.config : payload;
+        if (config) return { [post]: config };
+      } catch (err) {
+        lastError = err;
+      }
+    }
+
+    const aggregateUrls = [...new Set([BW_FAQ_LOCAL_AGGREGATE_URL, BW_FAQ_REMOTE_AGGREGATE_URL])];
+    for (const url of aggregateUrls) {
+      try {
+        const res = await fetch(url, { signal: this._controller.signal, cache: 'force-cache' });
+        if (!res.ok) throw new Error(`FAQ aggregate unavailable: ${res.status}`);
         return await res.json();
       } catch (err) {
         lastError = err;

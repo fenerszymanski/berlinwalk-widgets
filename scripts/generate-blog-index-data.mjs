@@ -826,6 +826,27 @@ function buildData(posts, popularPosts = []) {
   };
 }
 
+async function writeDataArtifacts(outPath, data) {
+  await fs.writeFile(outPath, `${JSON.stringify(data, null, 2)}\n`, 'utf8');
+  if (path.basename(outPath) !== 'data.json') return [];
+
+  const { allPosts, ...indexData } = data;
+  const archiveData = {
+    updatedAt: data.updatedAt,
+    source: data.source,
+    totalPosts: data.totalPosts,
+    bookingUrl: data.bookingUrl,
+    allPosts,
+  };
+  const indexPath = path.join(path.dirname(outPath), 'index.json');
+  const archivePath = path.join(path.dirname(outPath), 'archive.json');
+  await Promise.all([
+    fs.writeFile(indexPath, `${JSON.stringify(indexData, null, 2)}\n`, 'utf8'),
+    fs.writeFile(archivePath, `${JSON.stringify(archiveData, null, 2)}\n`, 'utf8'),
+  ]);
+  return [indexPath, archivePath];
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -843,8 +864,9 @@ async function main() {
   const data = buildData(posts, popularPosts);
 
   await fs.mkdir(path.dirname(outPath), { recursive: true });
-  await fs.writeFile(outPath, `${JSON.stringify(data, null, 2)}\n`, 'utf8');
+  const companionPaths = await writeDataArtifacts(outPath, data);
   console.log(`Wrote ${path.relative(repoRoot, outPath)} with ${posts.length} posts`);
+  companionPaths.forEach((filePath) => console.log(`Wrote ${path.relative(repoRoot, filePath)}`));
 }
 
 main().catch((error) => {

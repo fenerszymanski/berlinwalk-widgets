@@ -3,7 +3,7 @@
  * Loaded site-wide via Wix Custom Code.
  */
 (function () {
-  var DATA_URL = window.BW_BLOG_DATA_URL || 'https://fenerszymanski.github.io/berlinwalk-widgets/blog-index/data.json';
+  var DATA_URL = window.BW_BLOG_DATA_URL || 'https://fenerszymanski.github.io/berlinwalk-widgets/blog-index/archive.json?v=20260719-phase1';
   var TOOLS_DATA_URL = window.BW_TOOLS_DATA_URL || 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/data.json';
   var STYLE_ID = 'bw-blog-journey-style';
   var STABILITY_STYLE_ID = 'bw-blog-journey-stability-style';
@@ -47,6 +47,22 @@
   var liveJourneyTitle = '';
   var liveJourneyTitleUpdatedAt = 0;
   var LIVE_JOURNEY_TITLE_TTL_MS = 15 * 60 * 1000;
+
+  function fetchJsonOnce(url) {
+    var store = window.__BW_BLOG_DATA_PROMISES || (window.__BW_BLOG_DATA_PROMISES = {});
+    if (!store[url]) {
+      store[url] = fetch(url, { cache: 'force-cache' })
+        .then(function (response) {
+          if (!response.ok) throw new Error('data unavailable');
+          return response.json();
+        })
+        .catch(function (error) {
+          delete store[url];
+          throw error;
+        });
+    }
+    return store[url];
+  }
 
   installDelayedConsentGuard();
   loadBookingNextActionPatch();
@@ -1209,16 +1225,10 @@
     if (dataCache) return Promise.resolve(dataCache);
     if (dataPromise) return dataPromise;
     dataPromise = Promise.all([
-      fetch(DATA_URL, { cache: 'no-cache' }).then(function (response) {
-        if (!response.ok) throw new Error('blog data unavailable');
-        return response.json();
-      }).catch(function () {
+      fetchJsonOnce(DATA_URL).catch(function () {
         return { allPosts: [], tools: [], bookingUrl: BOOKING_URL };
       }),
-      fetch(TOOLS_DATA_URL, { cache: 'no-cache' }).then(function (response) {
-        if (!response.ok) return { tools: [] };
-        return response.json();
-      }).catch(function () { return { tools: [] }; })
+      fetchJsonOnce(TOOLS_DATA_URL).catch(function () { return { tools: [] }; })
     ])
       .then(function (payloads) {
         var data = payloads[0] || {};

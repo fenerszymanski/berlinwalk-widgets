@@ -11,6 +11,7 @@ const repoRoot = path.resolve(__dirname, '..');
 const faqDataPath = path.join(repoRoot, 'faq', 'data.json');
 const slugMapPath = path.join(repoRoot, 'faq', 'slug-map.json');
 const injectPath = path.join(repoRoot, 'faq', 'inject.js');
+const faqShardDir = path.join(repoRoot, 'faq', 'data');
 const blogDraftsDir = path.join(repoRoot, 'blog-drafts');
 const siteBase = 'https://www.berlinwalk.com/post/';
 
@@ -86,16 +87,6 @@ function groupsFor(config) {
     return config.tabs.flatMap((tab) => Array.isArray(tab.items) ? tab.items : []);
   }
   return Array.isArray(config?.items) ? config.items : [];
-}
-
-function parseInjectedObject(varName, source) {
-  const startMarker = `var ${varName} = `;
-  const endMarker = varName === 'SLUG_MAP' ? '\n\n  var SCHEMAS' : '\n\n  function currentSlug';
-  const start = source.indexOf(startMarker);
-  const end = source.indexOf(endMarker, start);
-  if (start === -1 || end === -1) throw new Error(`Could not parse ${varName} from faq/inject.js`);
-  const objectText = source.slice(start + startMarker.length, end).replace(/;\s*$/, '');
-  return Function(`return (${objectText});`)();
 }
 
 function schemaMarkdownLeaks(schemaObject) {
@@ -322,10 +313,12 @@ function renderedChecksViaCli(entries) {
   return { skipped: '', checks };
 }
 
-function renderReport({ faqData, slugMap, injectMap, injectSchemas, leaks, missingRefs, unmappedKeys, coverage, liveChecks, renderedResult }) {
+function renderReport({ faqData, slugMap, injectSchemas, leaks, missingRefs, shardErrors, injectBytes, unmappedKeys, coverage, liveChecks, renderedResult }) {
   const failures = [];
   if (missingRefs.length) failures.push(`${missingRefs.length} missing slug-map references`);
+  if (shardErrors.length) failures.push(`${shardErrors.length} invalid generated shards`);
   if (leaks.boldMarkers || leaks.underlineMarkers || leaks.markdownLinks) failures.push('Markdown remains in generated schema');
+  if (injectBytes > 4096) failures.push(`FAQ loader is too large (${injectBytes} bytes)`);
 
   const coverageSummary = coverage.reduce((acc, row) => {
     acc[row.status] = (acc[row.status] || 0) + 1;
@@ -342,11 +335,12 @@ function renderReport({ faqData, slugMap, injectMap, injectSchemas, leaks, missi
     '',
     `- FAQ data entries: ${Object.keys(faqData).length}`,
     `- Slug mappings: ${Object.keys(slugMap).length}`,
-    `- Injected schema entries: ${Object.keys(injectSchemas).length}`,
+    `- Generated shard schema entries: ${Object.keys(injectSchemas).length}`,
+    `- Lightweight loader size: ${injectBytes} bytes`,
     `- Missing slug-map references: ${missingRefs.length}`,
+    `- Invalid/missing generated shards: ${shardErrors.length}`,
     `- Unmapped FAQ keys: ${unmappedKeys.length}`,
     `- Markdown leaks in schema: bold=${leaks.boldMarkers}, underline=${leaks.underlineMarkers}, links=${leaks.markdownLinks}`,
-    `- Inject map matches source map: ${JSON.stringify(injectMap) === JSON.stringify(slugMap) ? 'yes' : 'no'}`,
     '',
     '## Body Coverage Heuristic',
     '',
@@ -403,6 +397,13 @@ function renderReport({ faqData, slugMap, injectMap, injectSchemas, leaks, missi
     lines.push('');
   }
 
+  if (shardErrors.length) {
+    lines.push('## Generated Shard Errors');
+    lines.push('');
+    shardErrors.forEach((error) => lines.push(`- ${error}`));
+    lines.push('');
+  }
+
   return `${lines.join('\n')}\n`;
 }
 
@@ -411,8 +412,24 @@ async function main() {
   const faqData = readJson(faqDataPath);
   const slugMap = readJson(slugMapPath);
   const injectSource = fs.readFileSync(injectPath, 'utf8');
-  const injectMap = parseInjectedObject('SLUG_MAP', injectSource);
-  const injectSchemas = parseInjectedObject('SCHEMAS', injectSource);
+  const injectSchemas = {};
+  const shardErrors = [];
+  for (const [slug, faqKey] of Object.entries(slugMap)) {
+    const shardPath = path.join(faqShardDir, `${slug}.json`);
+    if (!fs.existsSync(shardPath)) {
+      shardErrors.push(`${slug}: shard missing`);
+      continue;
+    }
+    try {
+      const shard = readJson(shardPath);
+      if (shard.key !== faqKey) shardErrors.push(`${slug}: expected key ${faqKey}, got ${shard.key || '(missing)'}`);
+      if (!shard.config) shardErrors.push(`${slug}: config missing`);
+      if (!shard.schema) shardErrors.push(`${slug}: schema missing`);
+      if (shard.schema && !injectSchemas[faqKey]) injectSchemas[faqKey] = shard.schema;
+    } catch (error) {
+      shardErrors.push(`${slug}: ${error.message}`);
+    }
+  }
   const leaks = schemaMarkdownLeaks(injectSchemas);
   const missingRefs = Object.entries(slugMap)
     .filter(([, faqKey]) => !faqData[faqKey])
@@ -426,10 +443,11 @@ async function main() {
   const report = renderReport({
     faqData,
     slugMap,
-    injectMap,
     injectSchemas,
     leaks,
     missingRefs,
+    shardErrors,
+    injectBytes: Buffer.byteLength(injectSource),
     unmappedKeys,
     coverage,
     liveChecks,
@@ -445,7 +463,7 @@ async function main() {
     process.stdout.write(report);
   }
 
-  if (missingRefs.length || leaks.boldMarkers || leaks.underlineMarkers || leaks.markdownLinks) {
+  if (missingRefs.length || shardErrors.length || Buffer.byteLength(injectSource) > 4096 || leaks.boldMarkers || leaks.underlineMarkers || leaks.markdownLinks) {
     process.exit(1);
   }
 }

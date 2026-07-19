@@ -4,7 +4,23 @@
 (function () {
   var BW_CWV_WIDGET_ORIGIN = 'https://fenerszymanski.github.io';
   var BW_CWV_WIDGET_BASE = BW_CWV_WIDGET_ORIGIN + '/berlinwalk-widgets/';
-  var BW_CWV_BLOG_DATA_URL = BW_CWV_WIDGET_BASE + 'blog-index/data.json?v=20260619b';
+  var BW_CWV_BLOG_DATA_URL = BW_CWV_WIDGET_BASE + 'blog-index/index.json?v=20260719-phase1';
+
+  function bwCwvFetchJsonOnce(url) {
+    var store = window.__BW_BLOG_DATA_PROMISES || (window.__BW_BLOG_DATA_PROMISES = {});
+    if (!store[url]) {
+      store[url] = fetch(url, { cache: 'force-cache' })
+        .then(function (response) {
+          if (!response.ok) throw new Error('blog data unavailable');
+          return response.json();
+        })
+        .catch(function (error) {
+          delete store[url];
+          throw error;
+        });
+    }
+    return store[url];
+  }
 
   function bwCwvHintId(kind, href) {
     return 'bw-cwv-hint-' + (kind + '-' + href).replace(/[^a-zA-Z0-9_-]+/g, '-').slice(0, 150);
@@ -40,8 +56,7 @@
   }
 
   function bwCwvPreloadBlogLeadImage() {
-    fetch(BW_CWV_BLOG_DATA_URL, { cache: 'force-cache' })
-      .then(function (response) { return response.ok ? response.json() : null; })
+    bwCwvFetchJsonOnce(BW_CWV_BLOG_DATA_URL)
       .then(function (data) {
         var image = data && data.hero && data.hero.lead && data.hero.lead.image;
         bwCwvPreloadImage(image);
@@ -72,7 +87,7 @@
       },
       '/blog': {
         scripts: ['blog-index/blog-index-element.js'],
-        fetches: ['blog-index/data.json?v=20260619b'],
+        fetches: ['blog-index/index.json?v=20260719-phase1'],
         blogLeadImage: true
       }
     }[route];

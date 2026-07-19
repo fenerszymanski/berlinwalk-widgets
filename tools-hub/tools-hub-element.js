@@ -3,6 +3,25 @@ const BW_TOOLS_HUB_DATA_VERSION = '2026-07-05-train-stations';
 const BW_TOOLS_HUB_DEFAULT_IMAGE = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/generic-tool.svg';
 const BW_TOOLS_HUB_TYPE_ORDER = ['Planner', 'Calculator', 'Map', 'Guide', 'Audio', 'Quiz', 'Game'];
 
+function bwToolsHubWixIconRendition(rawUrl, size) {
+  if (typeof rawUrl !== 'string' || !rawUrl.trim()) return rawUrl;
+
+  try {
+    const url = new URL(rawUrl);
+    if (url.hostname !== 'static.wixstatic.com' || !url.pathname.startsWith('/media/')) return rawUrl;
+
+    const assetPath = url.pathname.split('/v1/')[0];
+    const sourceName = decodeURIComponent(assetPath.split('/').pop() || 'berlinwalk-tool-icon')
+      .replace(/\.[a-z0-9]+$/i, '')
+      .replace(/[^a-z0-9_-]+/gi, '-');
+    const outputName = encodeURIComponent(`${sourceName || 'berlinwalk-tool-icon'}-${size}.avif`);
+
+    return `${url.origin}${assetPath}/v1/fill/w_${size},h_${size},al_c,q_80,enc_avif,quality_auto/${outputName}`;
+  } catch (error) {
+    return rawUrl;
+  }
+}
+
 class BWToolsHubElement extends HTMLElement {
   constructor() {
     super();
@@ -1088,6 +1107,7 @@ class BWToolsHubElement extends HTMLElement {
       ? this._escapeAttribute(tool.href.trim())
       : `https://www.berlinwalk.com/tools/${this._escapeAttribute(tool.slug || '')}`;
     const image = typeof tool.image === 'string' && tool.image.trim() ? tool.image.trim() : BW_TOOLS_HUB_DEFAULT_IMAGE;
+    const imageAttributes = this._toolIconImageAttributes(image);
     const label = this._escapeHtml(config.label || 'Featured Tool');
     const headline = this._escapeHtml(config.headline || tool.title || 'Featured Berlin tool');
     const body = this._escapeHtml(config.body || tool.lead || 'Open the featured Berlin planning tool.');
@@ -1097,7 +1117,7 @@ class BWToolsHubElement extends HTMLElement {
     root.innerHTML = `
       <section class="bw-spotlight-section" aria-label="Featured Berlin planning tool">
         <a class="bw-spotlight-card" href="${href}" target="_top">
-          <span class="bw-spotlight-icon" aria-hidden="true"><img src="${this._escapeAttribute(image)}" alt="" loading="lazy" decoding="async"></span>
+          <span class="bw-spotlight-icon" aria-hidden="true"><img ${imageAttributes} alt="" loading="lazy" decoding="async" width="160" height="160"></span>
           <span class="bw-spotlight-copy">
             <span class="bw-spotlight-label">${label}</span>
             <h2>${headline}</h2>
@@ -1221,9 +1241,17 @@ class BWToolsHubElement extends HTMLElement {
       : BW_TOOLS_HUB_DEFAULT_IMAGE;
     return `
       <span class="bw-tool-icon" aria-hidden="true">
-        <img src="${this._escapeAttribute(image)}" alt="" loading="lazy" decoding="async">
+        <img ${this._toolIconImageAttributes(image)} alt="" loading="lazy" decoding="async" width="160" height="160">
       </span>
     `;
+  }
+
+  _toolIconImageAttributes(image) {
+    const oneX = bwToolsHubWixIconRendition(image, 160);
+    const twoX = bwToolsHubWixIconRendition(image, 320);
+    const src = this._escapeAttribute(oneX);
+    if (oneX === image || twoX === image) return `src="${src}"`;
+    return `src="${src}" srcset="${src} 1x, ${this._escapeAttribute(twoX)} 2x"`;
   }
 
   _getFilteredTools() {

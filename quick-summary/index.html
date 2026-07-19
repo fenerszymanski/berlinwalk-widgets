@@ -350,20 +350,31 @@
         }).join('');
       }
 
-      function dataUrl() {
+      function versionSuffix() {
         var version = value('v', '');
-        return version ? './data.json?v=' + encodeURIComponent(version) : './data.json';
+        return version ? '?v=' + encodeURIComponent(version) : '';
+      }
+
+      function loadPostConfig() {
+        var shardUrl = './data/' + encodeURIComponent(postSlug) + '.json' + versionSuffix();
+        return fetch(shardUrl, { cache: 'force-cache' })
+          .then(function (response) {
+            if (!response.ok) throw new Error('shard_not_found');
+            return response.json();
+          })
+          .catch(function () {
+            return fetch('./data.json' + versionSuffix(), { cache: 'force-cache' })
+              .then(function (response) {
+                if (!response.ok) throw new Error('aggregate_not_found');
+                return response.json();
+              })
+              .then(function (data) { return data[postSlug] || null; });
+          });
       }
 
       if (postSlug) {
-        fetch(dataUrl())
-          .then(function (response) {
-            if (!response.ok) throw new Error('data_not_found');
-            return response.json();
-          })
-          .then(function (data) {
-            render(data[postSlug]);
-          })
+        loadPostConfig()
+          .then(function (config) { render(config); })
           .catch(function () {
             root.innerHTML = '<div class="bw-empty">Quick summary not found for <strong>' + escapeHtml(postSlug) + '</strong>.</div>';
           });

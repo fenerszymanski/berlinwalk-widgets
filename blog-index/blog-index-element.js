@@ -2,9 +2,28 @@ const BW_BLOG_INDEX_BASE_URL = (() => {
   const script = document.currentScript;
   return script && script.src ? script.src : window.location.href;
 })();
-const BW_BLOG_INDEX_DATA_URL = new URL('./data.json', BW_BLOG_INDEX_BASE_URL).href;
+const BW_BLOG_INDEX_DATA_VERSION = '20260719-phase1';
+const BW_BLOG_INDEX_DATA_URL = `${new URL('./index.json', BW_BLOG_INDEX_BASE_URL).href}?v=${BW_BLOG_INDEX_DATA_VERSION}`;
+const BW_BLOG_INDEX_ARCHIVE_URL = `${new URL('./archive.json', BW_BLOG_INDEX_BASE_URL).href}?v=${BW_BLOG_INDEX_DATA_VERSION}`;
+const BW_BLOG_INDEX_LEGACY_DATA_URL = `${new URL('./data.json', BW_BLOG_INDEX_BASE_URL).href}?v=${BW_BLOG_INDEX_DATA_VERSION}`;
 const BW_BLOG_INDEX_LOGO_URL = `${new URL('./assets/berlin-travel-history-notes-logo.png', BW_BLOG_INDEX_BASE_URL).href}?v=20260529`;
 const BW_BLOG_INDEX_NATIVE_FEED_STYLE_ID = 'bw-blog-index-native-feed-suppressor';
+
+function bwBlogIndexFetchJsonOnce(url) {
+  const store = window.__BW_BLOG_DATA_PROMISES || (window.__BW_BLOG_DATA_PROMISES = {});
+  if (!store[url]) {
+    store[url] = fetch(url, { cache: 'force-cache' })
+      .then((response) => {
+        if (!response.ok) throw new Error(`Blog data unavailable: ${response.status}`);
+        return response.json();
+      })
+      .catch((error) => {
+        delete store[url];
+        throw error;
+      });
+  }
+  return store[url];
+}
 function bwApplyFeaturedPost(data) {
   return {
     ...BW_BLOG_INDEX_FALLBACK,
@@ -56,6 +75,9 @@ class BWBlogIndexElement extends HTMLElement {
     this._query = '';
     this._observer = null;
     this._nativeFeedObserver = null;
+    this._archiveLoaded = false;
+    this._archiveLoading = false;
+    this._archivePromise = null;
   }
 
   connectedCallback() {
@@ -1280,13 +1302,35 @@ class BWBlogIndexElement extends HTMLElement {
 
   async _loadDataAndRender() {
     try {
-      const response = await fetch(BW_BLOG_INDEX_DATA_URL, { cache: 'no-cache' });
-      if (!response.ok) throw new Error('Blog data unavailable');
-      this._data = bwApplyFeaturedPost(await response.json());
+      this._data = bwApplyFeaturedPost(await bwBlogIndexFetchJsonOnce(BW_BLOG_INDEX_DATA_URL));
     } catch (error) {
-      this._data = bwApplyFeaturedPost(BW_BLOG_INDEX_FALLBACK);
+      try {
+        this._data = bwApplyFeaturedPost(await bwBlogIndexFetchJsonOnce(BW_BLOG_INDEX_LEGACY_DATA_URL));
+      } catch (legacyError) {
+        this._data = bwApplyFeaturedPost(BW_BLOG_INDEX_FALLBACK);
+      }
     }
+    this._archiveLoaded = Array.isArray(this._data.allPosts) && this._data.allPosts.length > 0;
     this._rerender();
+  }
+
+  _loadArchive() {
+    if (this._archiveLoaded) return Promise.resolve(this._data.allPosts || []);
+    if (this._archivePromise) return this._archivePromise;
+
+    this._archiveLoading = true;
+    this._archivePromise = bwBlogIndexFetchJsonOnce(BW_BLOG_INDEX_ARCHIVE_URL)
+      .catch(() => bwBlogIndexFetchJsonOnce(BW_BLOG_INDEX_LEGACY_DATA_URL))
+      .then((archive) => {
+        this._data = { ...this._data, allPosts: Array.isArray(archive?.allPosts) ? archive.allPosts : [] };
+        this._archiveLoaded = true;
+        return this._data.allPosts;
+      })
+      .finally(() => {
+        this._archiveLoading = false;
+        this._archivePromise = null;
+      });
+    return this._archivePromise;
   }
 
   _rerender() {
@@ -1373,19 +1417,20 @@ class BWBlogIndexElement extends HTMLElement {
 
   _renderResults() {
     const active = Boolean(this._query);
-    const matches = active ? this._filteredPosts() : [];
+    const loading = active && this._archiveLoading && !this._archiveLoaded;
+    const matches = active && !loading ? this._filteredPosts() : [];
     const posts = matches.slice(0, 12);
     return `
       <section class="bw-results" ${active ? '' : 'hidden'} aria-label="Filtered guides">
         <div class="bw-section-header">
           <div>
-            <span class="bw-card-kicker">${matches.length} matches</span>
+            <span class="bw-card-kicker">${loading ? 'Loading guides' : `${matches.length} matches`}</span>
             <h2>Search results</h2>
           </div>
           <a class="bw-view-link" href="#" data-search-reset>Reset search</a>
         </div>
         <div class="bw-compact-grid">
-          ${posts.map((post) => this._renderCompactLink(post)).join('') || '<p class="bw-section-desc">No matching guide found.</p>'}
+          ${loading ? '<p class="bw-section-desc">Loading the full Berlin guide archive…</p>' : posts.map((post) => this._renderCompactLink(post)).join('') || '<p class="bw-section-desc">No matching guide found.</p>'}
         </div>
       </section>
     `;
@@ -1735,12 +1780,15 @@ class BWBlogIndexElement extends HTMLElement {
     if (input) {
       input.addEventListener('input', () => {
         this._query = input.value.trim();
-        this._rerender();
-        const nextInput = this.querySelector('[data-bw-blog-search]');
-        if (nextInput) {
-          nextInput.focus();
-          nextInput.setSelectionRange(nextInput.value.length, nextInput.value.length);
+        if (this._query && !this._archiveLoaded) {
+          this._loadArchive().then(() => {
+            if (!this.isConnected) return;
+            this._rerender();
+            this._restoreSearchFocus();
+          }).catch(() => {});
         }
+        this._rerender();
+        this._restoreSearchFocus();
       });
     }
 
@@ -1755,6 +1803,13 @@ class BWBlogIndexElement extends HTMLElement {
       });
     });
 
+  }
+
+  _restoreSearchFocus() {
+    const nextInput = this.querySelector('[data-bw-blog-search]');
+    if (!nextInput) return;
+    nextInput.focus();
+    nextInput.setSelectionRange(nextInput.value.length, nextInput.value.length);
   }
 
   _filteredPosts() {
