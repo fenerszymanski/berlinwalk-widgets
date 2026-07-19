@@ -3,6 +3,15 @@
  */
 (function () {
   var BOOKING_URL = 'https://www.berlinwalk.com/free-berlin-walking-tour';
+  var TRACK_ENDPOINT = 'https://app.berlinwalk.com/api/pf-event';
+  var VISITOR_KEY = 'bwVisitorId.v1';
+  var ANALYTICS_SESSION_KEY = 'bwSessionId.v1';
+  var PAID_TRACKING_KEY = 'bwPaidTracking.v1';
+  var EVENT_SENT_PREFIX = 'bwExitPopupEventSent.v1.';
+  var ATTRIBUTION_KEYS = [
+    'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id',
+    'fbclid', 'fbc', 'fbp', 'gclid', 'gbraid', 'wbraid'
+  ];
   var HERO_IMAGE_URL = getImageUrl('hero');
   var SESSION_KEY = 'bw-exit-intent-triggered';
   var DESKTOP_MIN_WIDTH = 1024;
@@ -23,6 +32,7 @@
   var currentStep = 1;
   var closeTracked = false;
   var nextTourSlotRequested = false;
+  var sentEvents = {};
 
   function resolveAdjacentScriptUrl(fileName) {
     try {
@@ -67,6 +77,253 @@
     } catch (err) {}
   }
 
+  function safeStorageRemove(storage, key) {
+    try {
+      storage.removeItem(key);
+    } catch (err) {}
+  }
+
+  function safeStorageGet(storage, key) {
+    try {
+      return storage.getItem(key);
+    } catch (err) {
+      return null;
+    }
+  }
+
+  function currentConsentPolicy() {
+    try {
+      var manager = window.consentPolicyManager;
+      var current = manager && typeof manager.getCurrentConsentPolicy === 'function'
+        ? manager.getCurrentConsentPolicy()
+        : null;
+      current = current && (current.policy || current);
+      if (current && Object.keys(current).length) return current;
+    } catch (err) {}
+    try {
+      var match = document.cookie.match(/(?:^|;\s*)consent-policy=([^;]+)/);
+      return match ? JSON.parse(decodeURIComponent(match[1])) : {};
+    } catch (err) {
+      return {};
+    }
+  }
+
+  function analyticsAllowed() {
+    var policy = currentConsentPolicy();
+    return policy.analytics === true || policy.anl === true || policy.anl === 1;
+  }
+
+  function randomId(prefix) {
+    try {
+      if (window.crypto && typeof window.crypto.getRandomValues === 'function') {
+        var values = new Uint32Array(4);
+        window.crypto.getRandomValues(values);
+        return prefix + '_' + Array.prototype.map.call(values, function (value) {
+          return value.toString(16).padStart(8, '0');
+        }).join('');
+      }
+    } catch (err) {}
+    return prefix + '_' + Math.random().toString(36).slice(2) + '_' + Date.now().toString(36);
+  }
+
+  function safeIdentifier(value) {
+    value = String(value || '').trim();
+    if (!value || value.length > 140 || !/^[A-Za-z0-9._:-]+$/.test(value)) return '';
+    return value;
+  }
+
+  function decodedPathSegment(value) {
+    var result = String(value || '');
+    for (var attempt = 0; attempt < 2; attempt += 1) {
+      try {
+        var next = decodeURIComponent(result);
+        if (next === result) break;
+        result = next;
+      } catch (err) {
+        break;
+      }
+    }
+    return result;
+  }
+
+  function pathSegmentLooksSensitive(segment) {
+    var value = decodedPathSegment(segment).trim();
+    if (!value) return false;
+    if (/\b[^\s/@]+@[^\s/@]+\.[^\s/@]+\b/i.test(value)) return true;
+    if (/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value)) return true;
+    if (/^\+?[0-9][0-9().\s-]{7,}$/.test(value)) return true;
+    if (/^[A-Za-z0-9_]{28,}$/.test(value) && /[A-Za-z]/.test(value) && /[0-9]/.test(value)) return true;
+    return false;
+  }
+
+  function safePath(value) {
+    var raw = String(value || '').trim();
+    if (!raw || /mailto:|[<>\\]/i.test(raw)) return '';
+    try {
+      var parsed = new URL(raw, window.location.origin);
+      var pathname = String(parsed.pathname || '/');
+      if (!pathname || pathname.length > 400 || /[<>\\]/i.test(pathname)) return '';
+      return pathname
+        .split('/')
+        .map(function (segment) { return pathSegmentLooksSensitive(segment) ? '[redacted]' : segment; })
+        .join('/')
+        .replace(/\/{2,}/g, '/');
+    } catch (err) {
+      return '';
+    }
+  }
+
+  function safeAttributionValue(value, maxLength) {
+    value = String(value || '').trim();
+    maxLength = maxLength || 220;
+    if (!value || value.length > maxLength) return '';
+    if (/@|%40|:\/\/|mailto:|[<>\\/]/i.test(value)) return '';
+    if (!/^[A-Za-z0-9][A-Za-z0-9._~:+ -]*$/.test(value)) return '';
+    return value;
+  }
+
+  function readJSON(storage, key) {
+    try {
+      var raw = storage.getItem(key);
+      var parsed = raw ? JSON.parse(raw) : null;
+      return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {};
+    } catch (err) {
+      return {};
+    }
+  }
+
+  function getOrCreateId(storage, key, prefix) {
+    try {
+      var existing = safeIdentifier(storage.getItem(key));
+      if (existing) return existing;
+      var value = randomId(prefix);
+      storage.setItem(key, value);
+      return value;
+    } catch (err) {
+      return randomId(prefix);
+    }
+  }
+
+  function emptyAttribution() {
+    return {
+      utm_source: '',
+      utm_medium: '',
+      utm_campaign: '',
+      utm_content: '',
+      utm_term: '',
+      utm_id: '',
+      fbclid: '',
+      fbc: '',
+      fbp: '',
+      gclid: '',
+      gbraid: '',
+      wbraid: ''
+    };
+  }
+
+  function sanitizeAttribution(source) {
+    var clean = emptyAttribution();
+    source = source || {};
+    ATTRIBUTION_KEYS.forEach(function (key) {
+      var maxLength = /clid$|^(fbc|fbp|gclid|gbraid|wbraid)$/.test(key) ? 260 : 220;
+      clean[key] = safeAttributionValue(source[key], maxLength);
+    });
+    return clean;
+  }
+
+  function currentAttribution() {
+    var values = {};
+    try {
+      var params = new URLSearchParams(window.location.search || '');
+      ATTRIBUTION_KEYS.forEach(function (key) {
+        values[key] = params.get(key) || '';
+      });
+    } catch (err) {}
+    return sanitizeAttribution(values);
+  }
+
+  function storedAttribution(tracking) {
+    tracking = tracking || {};
+    var values = {};
+    ATTRIBUTION_KEYS.forEach(function (key) {
+      values[key] = tracking[key] || '';
+    });
+    return sanitizeAttribution(values);
+  }
+
+  function isPaidAttribution(values) {
+    values = values || {};
+    if (values.fbclid || values.fbc || values.gclid || values.gbraid || values.wbraid) return true;
+    var source = String(values.utm_source || '').toLowerCase();
+    var medium = String(values.utm_medium || '').toLowerCase();
+    var campaign = String(values.utm_campaign || '').toLowerCase();
+    if (/^(cpc|ppc|paid|paid_search|paid_social|display|retargeting)$/.test(medium)) return true;
+    if (/\b(cpc|ppc|paid_search|paid_social|retargeting)\b/.test(medium + ' ' + campaign)) return true;
+    if (/^(meta|facebook|instagram|fb|ig)$/.test(source) && /\b(paid|ads?)\b/.test(medium + ' ' + campaign)) return true;
+    if (source === 'google' && /\b(cpc|ppc|paid|paid_search|display)\b/.test(medium + ' ' + campaign)) return true;
+    return false;
+  }
+
+  function fallbackAttribution() {
+    var fallback = emptyAttribution();
+    fallback.utm_source = 'berlinwalk';
+    fallback.utm_medium = 'exit_popup';
+    fallback.utm_campaign = 'organic_booking';
+    fallback.utm_content = isPreviewForced() ? 'exit_popup_qa' : 'exit_popup';
+    return { values: fallback, mode: 'exit_default' };
+  }
+
+  function resolveAttribution(tracking) {
+    var current = currentAttribution();
+    if (isPaidAttribution(current)) return { values: current, mode: 'current_paid' };
+
+    var stored = storedAttribution(tracking);
+    var storedHasEvidence = ATTRIBUTION_KEYS.some(function (key) { return Boolean(stored[key]); });
+    var storedPaidFlag = tracking && (tracking.isPaid === true || tracking.isPaid === 'true');
+    if (isPaidAttribution(stored) || (storedHasEvidence && storedPaidFlag)) {
+      return { values: stored, mode: 'stored_paid' };
+    }
+
+    return fallbackAttribution();
+  }
+
+  function attributionForLink() {
+    var current = currentAttribution();
+    if (isPaidAttribution(current)) return { values: current, mode: 'current_paid' };
+
+    if (analyticsAllowed()) {
+      return resolveAttribution(readJSON(window.localStorage, PAID_TRACKING_KEY));
+    }
+
+    return fallbackAttribution();
+  }
+
+  function bookingDestination() {
+    var destination = new URL(BOOKING_URL, window.location.origin);
+    var attribution = attributionForLink();
+    ATTRIBUTION_KEYS.forEach(function (key) {
+      if (attribution.values[key]) destination.searchParams.set(key, attribution.values[key]);
+    });
+    return { href: destination.toString(), attributionMode: attribution.mode };
+  }
+
+  function measurementState() {
+    if (!analyticsAllowed()) return null;
+    var tracking = readJSON(window.localStorage, PAID_TRACKING_KEY);
+    var attribution = resolveAttribution(tracking);
+    var visitorId = safeIdentifier(safeStorageGet(window.localStorage, VISITOR_KEY)) || safeIdentifier(tracking.visitorId);
+    var sessionId = safeIdentifier(safeStorageGet(window.sessionStorage, ANALYTICS_SESSION_KEY));
+    if (!visitorId) visitorId = getOrCreateId(window.localStorage, VISITOR_KEY, 'bw_v');
+    if (!sessionId) sessionId = getOrCreateId(window.sessionStorage, ANALYTICS_SESSION_KEY, 'bw_s');
+    return {
+      visitorId: visitorId,
+      sessionId: sessionId,
+      tracking: tracking,
+      attribution: attribution,
+      isPaid: attribution.mode === 'stored_paid' || isPaidAttribution(attribution.values)
+    };
+  }
+
   function isExcludedPage() {
     var path = window.location.pathname.toLowerCase();
     return path.indexOf('/tools/') === 0 ||
@@ -85,7 +342,8 @@
   }
 
   function shouldRun() {
-    return isDesktop() && !isExcludedPage() && !safeSessionGet(SESSION_KEY);
+    var alreadyShown = analyticsAllowed() ? safeSessionGet(SESSION_KEY) : null;
+    return isDesktop() && !isExcludedPage() && !alreadyShown;
   }
 
   function ensureNextTourSlotHelper() {
@@ -98,28 +356,125 @@
     document.head.appendChild(script);
   }
 
-  function trackEvent(name, params) {
-    var data = params || {};
-    data.event_category = 'exit_intent_popup';
-    data.page_path = window.location.pathname;
-    data.page_url = window.location.href;
-    data.popup_step = currentStep;
-    data.preview_mode = isPreviewForced() ? 'true' : 'false';
+  function eventStorageKey(name) {
+    return EVENT_SENT_PREFIX + name;
+  }
 
-    if (window.dataLayer && typeof window.dataLayer.push === 'function') {
-      var layerData = {};
-      for (var key in data) {
-        if (Object.prototype.hasOwnProperty.call(data, key)) {
-          layerData[key] = data[key];
-        }
+  function eventAlreadySent(name) {
+    return Boolean(sentEvents[name] || safeSessionGet(eventStorageKey(name)) === '1');
+  }
+
+  function markEventSent(name) {
+    sentEvents[name] = true;
+    safeSessionSet(eventStorageKey(name), '1');
+  }
+
+  function endpointPayload(name, detail, state) {
+    var values = state.attribution.values;
+    var pagePath = safePath(window.location.pathname) || '/';
+    var firstPage = safePath(state.tracking.firstPage) || pagePath;
+    var landingPage = safePath(state.tracking.landingPage) || firstPage;
+    var now = new Date();
+    return {
+      eventName: name,
+      eventId: randomId('bw_e'),
+      consentGranted: true,
+      analyticsConsent: true,
+      consent: { analytics: true },
+      timestamp: now.toISOString(),
+      eventDate: now.toISOString().slice(0, 10),
+      sessionId: state.sessionId,
+      visitorId: state.visitorId,
+      isPaid: state.isPaid,
+      pagePath: pagePath,
+      referrer: '',
+      landingPage: landingPage,
+      firstPage: firstPage,
+      utmSource: values.utm_source,
+      utmMedium: values.utm_medium,
+      utmCampaign: values.utm_campaign,
+      utmContent: values.utm_content,
+      utmTerm: values.utm_term,
+      utmId: values.utm_id,
+      fbclid: values.fbclid,
+      fbc: values.fbc,
+      fbp: values.fbp,
+      gclid: values.gclid,
+      gbraid: values.gbraid,
+      wbraid: values.wbraid,
+      screenWidth: String(window.screen && window.screen.width || ''),
+      viewportWidth: String(window.innerWidth || ''),
+      payload: {
+        popupStep: currentStep,
+        triggerType: safeAttributionValue(detail.triggerType, 40),
+        closeReason: safeAttributionValue(detail.closeReason, 40),
+        ctaPath: safePath(detail.ctaPath),
+        previewMode: isPreviewForced(),
+        qa: isPreviewForced(),
+        attributionMode: state.attribution.mode
       }
-      layerData.event = name;
-      window.dataLayer.push(layerData);
+    };
+  }
+
+  function sendFirstParty(body) {
+    var serialized = JSON.stringify(body);
+
+    function beaconFallback() {
+      try {
+        if (navigator.sendBeacon) {
+          navigator.sendBeacon(TRACK_ENDPOINT, new Blob([serialized], { type: 'application/json' }));
+        }
+      } catch (err) {}
     }
 
-    if (typeof window.gtag === 'function') {
-      window.gtag('event', name, data);
+    try {
+      if (window.fetch) {
+        window.fetch(TRACK_ENDPOINT, {
+          method: 'POST',
+          mode: 'cors',
+          keepalive: true,
+          headers: { 'Content-Type': 'application/json' },
+          body: serialized
+        }).then(function (response) {
+          if (!response || !response.ok) beaconFallback();
+        }).catch(beaconFallback);
+        return;
+      }
+    } catch (err) {
+      beaconFallback();
+      return;
     }
+    beaconFallback();
+  }
+
+  function trackEvent(name, detail) {
+    if (!analyticsAllowed() || eventAlreadySent(name)) return false;
+    var state = measurementState();
+    if (!state) return false;
+    detail = detail || {};
+
+    markEventSent(name);
+    var data = {
+      event_category: 'exit_intent_popup',
+      page_path: safePath(window.location.pathname) || '/',
+      popup_step: currentStep,
+      trigger_type: safeAttributionValue(detail.triggerType, 40),
+      close_reason: safeAttributionValue(detail.closeReason, 40),
+      cta_path: safePath(detail.ctaPath),
+      preview_mode: isPreviewForced(),
+      qa: isPreviewForced(),
+      attribution_mode: state.attribution.mode
+    };
+
+    try {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(Object.assign({ event: name }, data));
+    } catch (err) {}
+    try {
+      if (typeof window.gtag === 'function') window.gtag('event', name, data);
+    } catch (err) {}
+    sendFirstParty(endpointPayload(name, detail, state));
+    return true;
   }
 
   function berlinParts(date) {
@@ -259,7 +614,7 @@
 
     if (!closeTracked) {
       closeTracked = true;
-      trackEvent('bw_exit_popup_close', { close_reason: reason || 'unknown' });
+      trackEvent('bw_exit_popup_close', { closeReason: reason || 'unknown' });
     }
 
     overlay.classList.remove('bw-exit-visible');
@@ -301,6 +656,7 @@
   function renderPopup() {
     injectStyles();
     var nextLine = nextTourLine();
+    var booking = bookingDestination();
 
     var overlay = document.createElement('div');
     overlay.id = OVERLAY_ID;
@@ -319,7 +675,7 @@
       (nextLine ? '<p class="bw-exit-next">' + nextLine + '</p>' : ''),
       '<p class="bw-exit-copy">Yusuf here! If you want the city to make sense early in your trip, reserve a free spot on my Berlin walk. No upfront payment, tip-based at the end, about 2 hours.</p>',
       '<div class="bw-exit-actions">',
-      '<a class="bw-exit-primary" href="' + BOOKING_URL + '" data-bw-exit-book>Book Walking Tour</a>',
+      '<a class="bw-exit-primary" href="' + booking.href + '" data-bw-exit-book data-bw-exit-attribution="' + booking.attributionMode + '">Book Walking Tour</a>',
       '</div>',
       '</section>',
       '</div>',
@@ -345,7 +701,7 @@
       closePopup('x_button');
     });
     bookButton.addEventListener('click', function () {
-      trackEvent('bw_exit_popup_book_click', { cta_url: BOOKING_URL });
+      trackEvent('bw_exit_popup_book_click', { ctaPath: safePath(BOOKING_URL) });
       closePopup('book_click');
     });
     overlay.addEventListener('click', function (event) {
@@ -360,9 +716,44 @@
 
     popupShown = true;
     closeTracked = false;
-    safeSessionSet(SESSION_KEY, String(Date.now()));
+    if (analyticsAllowed()) safeSessionSet(SESSION_KEY, String(Date.now()));
     renderPopup();
-    trackEvent('bw_exit_popup_view', { trigger_type: isPreviewForced() ? 'preview' : 'exit_intent' });
+    trackEvent('bw_exit_popup_view', { triggerType: isPreviewForced() ? 'preview' : 'exit_intent' });
+  }
+
+  function flushVisiblePopupView() {
+    if (!analyticsAllowed()) return;
+    var overlay = document.getElementById(OVERLAY_ID);
+    if (!popupShown || !overlay || !overlay.classList.contains('bw-exit-visible')) return;
+    safeSessionSet(SESSION_KEY, String(Date.now()));
+    trackEvent('bw_exit_popup_view', { triggerType: isPreviewForced() ? 'preview' : 'exit_intent' });
+  }
+
+  function installConsentListeners() {
+    function clearAnalyticsState() {
+      sentEvents = {};
+      safeStorageRemove(window.localStorage, VISITOR_KEY);
+      safeStorageRemove(window.localStorage, PAID_TRACKING_KEY);
+      safeStorageRemove(window.sessionStorage, ANALYTICS_SESSION_KEY);
+      safeStorageRemove(window.sessionStorage, SESSION_KEY);
+      ['bw_exit_popup_view', 'bw_exit_popup_close', 'bw_exit_popup_book_click'].forEach(function (name) {
+        safeStorageRemove(window.sessionStorage, eventStorageKey(name));
+      });
+    }
+
+    function handleConsentUpdate() {
+      if (!analyticsAllowed()) {
+        clearAnalyticsState();
+        return;
+      }
+      flushVisiblePopupView();
+      window.setTimeout(flushVisiblePopupView, 50);
+      window.setTimeout(flushVisiblePopupView, 250);
+    }
+    ['consentPolicyChanged', 'consentPolicyInitialized', 'ucConsentEvent'].forEach(function (name) {
+      window.addEventListener(name, handleConsentUpdate);
+      document.addEventListener(name, handleConsentUpdate);
+    });
   }
 
   function handleMouseLeave(event) {
@@ -374,6 +765,7 @@
   }
 
   function boot() {
+    installConsentListeners();
     ensureNextTourSlotHelper();
     window.setTimeout(function () {
       dwellReady = true;
@@ -382,6 +774,18 @@
 
     document.addEventListener('mouseleave', handleMouseLeave);
     document.addEventListener('mouseout', handleMouseOut);
+  }
+
+  if (window.BW_EXIT_POPUP_TEST_HOOKS === true) {
+    window.__bwExitPopupTestHooks = {
+      analyticsAllowed: analyticsAllowed,
+      attributionForLink: attributionForLink,
+      bookingDestination: bookingDestination,
+      measurementState: measurementState,
+      safeAttributionValue: safeAttributionValue,
+      safePath: safePath,
+      trackEvent: trackEvent
+    };
   }
 
   if (document.readyState === 'loading') {
