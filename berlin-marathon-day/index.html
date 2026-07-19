@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Marathon Day Berlin: Hour by Hour</title>
+<meta name="description" content="Play through Berlin Marathon Sunday hour by hour. Watch the closures switch on across Mitte, Kreuzberg and Schoneberg, see where the runners are, and find out when your side of the city opens again." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='32' r='16' fill='none' stroke='%23FFE600' stroke-width='5'/%3E%3Cpath d='M32 20 L32 32 L41 37' stroke='%23FFE600' stroke-width='5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
+    --yellow:#FFE600; --ink:#1c2a1c; --panel:#ffffff;
+    --bone:#f4f9ec; --line:#e3edd6; --stone:#6d7b66;
+    --shut:#C62828; --warn:#EF8A17; --clear:#2E7D32;
+    --shadow:0 10px 30px rgba(18,61,24,.14);
+  }
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}
+  html,body{margin:0}
+  body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .bx{max-width:960px;margin:0 auto;padding:4px}
+  .card{background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+
+  /* ---------- header ---------- */
+  .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:18px 22px 16px}
+  .head .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:600;margin:0 0 6px}
+  .head h2{margin:0;font-size:21px;font-weight:800;letter-spacing:-.015em}
+  .head p{margin:8px 0 0;font-size:13px;color:#e7f2e3;max-width:640px}
+
+  /* ---------- clock deck ---------- */
+  .deck{padding:16px 22px 18px;background:var(--bone);border-bottom:1px solid var(--line)}
+  .deckTop{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .clockWrap{display:flex;align-items:baseline;gap:10px}
+  .clock{font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:44px;line-height:1;color:var(--green-deep);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .clockTag{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--stone)}
+  .playBtn{font-family:inherit;font-weight:700;font-size:13px;border:0;border-radius:999px;padding:11px 20px;
+    cursor:pointer;background:var(--green);color:#fff;display:inline-flex;align-items:center;gap:8px;transition:background .2s}
+  .playBtn:hover{background:#256b2a}
+  .playBtn:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+  .playBtn .ico{font-size:11px;line-height:1}
+  .resetBtn{font-family:inherit;font-weight:700;font-size:12px;border:1px solid #cddcbd;border-radius:999px;padding:10px 15px;
+    cursor:pointer;background:#fff;color:#4b5a46}
+  .resetBtn:hover{border-color:var(--lime);color:var(--green)}
+  .resetBtn:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+  .spacer{flex:1 1 auto;min-width:0}
+
+  .scrub{margin:16px 0 0}
+  .scrub input[type=range]{width:100%;margin:0;accent-color:var(--green);height:26px;cursor:pointer}
+  .scrub input[type=range]:focus-visible{outline:3px solid var(--yellow);outline-offset:2px;border-radius:6px}
+  .scrubMarks{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--stone);font-weight:600;margin-top:2px}
+
+  /* ---------- zones ---------- */
+  .sec{padding:18px 22px}
+  .secHead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:0 0 12px}
+  .secHead h3{margin:0;font-size:14px;font-weight:800;letter-spacing:.01em}
+  .secHead span{font-size:12px;color:var(--stone)}
+
+  .zones{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:10px}
+  .zone{border:1px solid var(--line);border-radius:14px;padding:12px 13px;background:#fff;
+    border-left:5px solid #cddcbd;transition:border-color .35s,background .35s}
+  .zone .zName{font-size:13px;font-weight:800;margin:0 0 3px;line-height:1.25}
+  .zone .zWhat{font-size:11.5px;color:var(--stone);margin:0 0 9px;line-height:1.4}
+  .zone .zState{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.08em;
+    text-transform:uppercase;display:inline-block;padding:4px 9px;border-radius:999px}
+  .zone .zNote{font-size:11.5px;margin:8px 0 0;color:#4b5a46;line-height:1.4;font-weight:600}
+
+  .zone[data-state="clear"]{border-left-color:var(--clear)}
+  .zone[data-state="clear"] .zState{background:#e7f3e7;color:#1e5f22}
+  .zone[data-state="soon"]{border-left-color:var(--warn);background:#fffaf1}
+  .zone[data-state="soon"] .zState{background:#fdefd9;color:#8a4d05}
+  .zone[data-state="shut"]{border-left-color:var(--shut);background:#fdf3f3}
+  .zone[data-state="shut"] .zState{background:#fbe0e0;color:#a51f1f}
+  .zone[data-state="done"]{border-left-color:var(--lime);background:#f6faf0}
+  .zone[data-state="done"] .zState{background:#eaf4dc;color:#3f6b16}
+
+  /* ---------- course readout ---------- */
+  .course{margin:0;padding:0}
+  .rail{position:relative;height:34px;background:#eef4e5;border-radius:999px;overflow:hidden;border:1px solid var(--line)}
+  .railFill{position:absolute;inset:0 auto 0 0;width:0;background:linear-gradient(90deg,rgba(124,179,66,.30),rgba(27,94,32,.30));transition:width .25s linear}
+  .runner{position:absolute;top:50%;transform:translate(-50%,-50%);width:15px;height:15px;border-radius:50%;
+    border:2.5px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.28);transition:left .25s linear;z-index:2}
+  .runner.lead{background:var(--yellow)}
+  .runner.mid{background:var(--green)}
+  .runner.back{background:var(--lime)}
+  .railTicks{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--stone);font-weight:600;margin-top:5px}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin:12px 0 0}
+  .legend div{display:flex;align-items:center;gap:7px;font-size:11.5px;color:#4b5a46;font-weight:600}
+  .dot{width:11px;height:11px;border-radius:50%;flex:0 0 auto;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+  .dot.lead{background:var(--yellow)} .dot.mid{background:var(--green)} .dot.back{background:var(--lime)}
+
+  /* ---------- verdict ---------- */
+  .verdict{background:var(--green-deep);color:#fff;padding:18px 22px}
+  .verdict .vTag{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:600;margin:0 0 7px}
+  .verdict .vLine{margin:0;font-size:15px;font-weight:700;line-height:1.45}
+  .verdict .vSub{margin:9px 0 0;font-size:13px;color:#cfe3cd;line-height:1.55}
+
+  /* ---------- log ---------- */
+  .log{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+  .log li{display:flex;gap:14px;padding:9px 22px;border-bottom:1px solid #f0f5e8;font-size:12.5px;align-items:flex-start;
+    color:#8b9686;transition:background .3s,color .3s}
+  .log li .t{font-family:'IBM Plex Mono',monospace;font-weight:700;flex:0 0 52px;font-variant-numeric:tabular-nums}
+  .log li[data-passed="1"]{color:#3d4b39}
+  .log li[data-current="1"]{background:#fffceb;color:var(--green-deep);font-weight:700}
+  .log li[data-current="1"] .t{color:var(--green)}
+
+  .foot{padding:14px 22px 16px;background:var(--bone);border-top:1px solid var(--line);font-size:11.5px;color:var(--stone);line-height:1.55}
+  .foot strong{color:#4b5a46}
+
+  @media (max-width:640px){
+    .head{padding:16px 16px 14px} .head h2{font-size:19px}
+    .deck,.sec,.verdict,.foot{padding-left:16px;padding-right:16px}
+    .log li{padding-left:16px;padding-right:16px}
+    .clock{font-size:36px}
+    .zones{grid-template-columns:1fr 1fr;gap:8px}
+    .zone{padding:11px}
+    .railTicks span:nth-child(even){display:none}
+  }
+  @media (max-width:400px){
+    .zones{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="bx">
+  <div class="card">
+
+    <div class="head">
+      <p class="eyebrow">Sunday 27 September 2026</p>
+      <h2>Marathon day, hour by hour</h2>
+      <p>Press play and watch the day happen to central Berlin. The course goes live district by district, the runners move, and each part of the city hands itself back at a different hour.</p>
+    </div>
+
+    <div class="deck">
+      <div class="deckTop">
+        <div class="clockWrap">
+          <span class="clock" id="clock">05:00</span>
+          <span class="clockTag" id="clockTag">before anything</span>
+        </div>
+        <span class="spacer"></span>
+        <button class="playBtn" id="play" type="button" aria-live="polite"><span class="ico" id="playIco">&#9654;</span><span id="playTxt">Play the day</span></button>
+        <button class="resetBtn" id="reset" type="button">Reset</button>
+      </div>
+      <div class="scrub">
+        <input type="range" id="scrub" min="300" max="1140" step="5" value="300"
+               aria-label="Time of day on Berlin Marathon Sunday" />
+        <div class="scrubMarks"><span>05:00</span><span>08:00</span><span>11:00</span><span>14:00</span><span>17:00</span><span>19:00</span></div>
+      </div>
+    </div>
+
+    <div class="verdict">
+      <p class="vTag">What this means if you are not running</p>
+      <p class="vLine" id="vLine">Nothing is shut yet.</p>
+      <p class="vSub" id="vSub">The barriers are up around Stra&szlig;e des 17. Juni but the rest of the city is behaving normally.</p>
+    </div>
+
+    <div class="sec">
+      <div class="secHead"><h3>Where the runners are</h3><span id="courseNote">Nobody has started.</span></div>
+      <div class="course">
+        <div class="rail">
+          <div class="railFill" id="railFill"></div>
+          <div class="runner lead" id="rLead" title="Race leaders" hidden></div>
+          <div class="runner mid" id="rMid" title="A 4:00 runner" hidden></div>
+          <div class="runner back" id="rBack" title="A 5:30 runner" hidden></div>
+        </div>
+        <div class="railTicks">
+          <span>0 km</span><span>7 km</span><span>14 km</span><span>21 km</span><span>28 km</span><span>35 km</span><span>42.2 km</span>
+        </div>
+        <div class="legend">
+          <div><span class="dot lead"></span>Race leaders</div>
+          <div><span class="dot mid"></span>A 4:00 runner</div>
+          <div><span class="dot back"></span>A 5:30 runner</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec" style="padding-top:0">
+      <div class="secHead"><h3>Your side of the city</h3><span>Six areas, six different reopening times</span></div>
+      <div class="zones" id="zones"></div>
+    </div>
+
+    <ul class="log" id="log"></ul>
+
+    <div class="foot">
+      <strong>How to read this:</strong> the 2026 date, the 09:15 start and the start and finish on Stra&szlig;e des 17. Juni are confirmed by the organiser and by berlin.de. The closing and reopening hours follow the pattern Berlin&rsquo;s traffic centre published for the 2025 race, because the exact 2026 windows are only released in September. Treat them as planning times, not as a timetable.
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  var START = 300;   // 05:00 in minutes
+  var END   = 1140;  // 19:00
+  var RACE_START = 555; // 09:15
+
+  // Pace in minutes per km. Leaders from the 2:02:16 winning time in 2025.
+  var PACE = { lead: 2.899, mid: 5.686, back: 7.820 };
+  // Later waves roll away behind the first one.
+  var WAVE = { lead: 0, mid: 12, back: 32 };
+  var DIST = 42.195;
+
+  var ZONES = [
+    {
+      name: 'Tiergarten &amp; the start',
+      what: 'Stra&szlig;e des 17. Juni, Victory Column, Gro&szlig;er Stern',
+      from: 300, to: 1140, longRun: true,
+      shut: 'Fenced off since mid September. The Victory Column is standing inside a building site.',
+      clear: ''
+    },
+    {
+      name: 'Unter den Linden',
+      what: 'Pariser Platz to Friedrichstra&szlig;e, Brandenburg Gate',
+      from: 360, to: 1140,
+      shut: 'The gate is the finish line. You can reach it on foot, you cannot cross the road here.',
+      clear: 'Open, and quiet in a way it will not be again all day.'
+    },
+    {
+      name: 'Mitte',
+      what: 'Museum Island, Alexanderplatz side, Friedrichstadtpalast',
+      from: 465, to: 1050,
+      shut: 'Cut by the course. Use the U-Bahn to get under it, not across it.',
+      clear: 'Normal. Trams and buses back on their real routes.'
+    },
+    {
+      name: 'Friedrichshain &amp; Kreuzberg',
+      what: 'The eastern loop, roughly km 10 to km 16',
+      from: 480, to: 840,
+      shut: 'Closed, but this is the first side of the city you get back.',
+      clear: 'Open again. Nothing left to work around here.'
+    },
+    {
+      name: 'Sch&ouml;neberg &amp; the south',
+      what: 'Neuk&ouml;lln, Steglitz, the long southern arc',
+      from: 495, to: 990,
+      shut: 'Closed. Long, thin and easy to forget until a bus does not turn up.',
+      clear: 'Open again.'
+    },
+    {
+      name: 'Ku&rsquo;damm &amp; the west',
+      what: 'Kurf&uuml;rstendamm, Tauentzienstra&szlig;e, Memorial Church at km 35',
+      from: 465, to: 1050,
+      shut: 'Closed, and the best late stretch to watch. Crossings at Wittenbergplatz and before Rankestra&szlig;e.',
+      clear: 'Open. Shops here are shut anyway, it is Sunday.'
+    }
+  ];
+
+  var LOG = [
+    { t: 300, s: 'Altonaer Stra&szlig;e closes. The first ordinary street to go.' },
+    { t: 360, s: 'Unter den Linden shuts between Pariser Platz and Friedrichstra&szlig;e.' },
+    { t: 465, s: 'Course closures begin across Mitte and Charlottenburg-Wilmersdorf.' },
+    { t: 480, s: 'Friedrichshain and Kreuzberg go next.' },
+    { t: 495, s: 'Tempelhof-Sch&ouml;neberg follows.' },
+    { t: 530, s: 'Wheelchair racers and handbikes start.' },
+    { t: 555, s: 'First wave of runners leaves Stra&szlig;e des 17. Juni. Three more waves follow.' },
+    { t: 600, s: 'Leaders pass the Reichstag area and head east through Mitte.' },
+    { t: 677, s: 'The winner crosses the line at the Brandenburg Gate, a little after 11:15.' },
+    { t: 690, s: 'Altonaer Stra&szlig;e reopens.' },
+    { t: 807, s: 'A four-hour runner finishes. The finish area is at its fullest.' },
+    { t: 840, s: 'Friedrichshain and Kreuzberg reopen.' },
+    { t: 917, s: 'A five-and-a-half-hour runner finishes.' },
+    { t: 975, s: 'Last participants come through, around a quarter past four.' },
+    { t: 990, s: 'Tempelhof-Sch&ouml;neberg reopens.' },
+    { t: 1050, s: 'Mitte and Charlottenburg-Wilmersdorf reopen.' },
+    { t: 1140, s: 'Unter den Linden reopens. Stra&szlig;e des 17. Juni stays shut for the take-down.' }
+  ];
+
+  function hhmm(m){
+    var h = Math.floor(m/60), mm = m%60;
+    return (h<10?'0':'') + h + ':' + (mm<10?'0':'') + mm;
+  }
+
+  var now = START;
+  var playing = false;
+  var timer = null;
+
+  var elClock = document.getElementById('clock');
+  var elClockTag = document.getElementById('clockTag');
+  var elScrub = document.getElementById('scrub');
+  var elZones = document.getElementById('zones');
+  var elLog = document.getElementById('log');
+  var elVLine = document.getElementById('vLine');
+  var elVSub = document.getElementById('vSub');
+  var elFill = document.getElementById('railFill');
+  var elCourseNote = document.getElementById('courseNote');
+  var runners = { lead: document.getElementById('rLead'), mid: document.getElementById('rMid'), back: document.getElementById('rBack') };
+
+  // ----- build static shells -----
+  ZONES.forEach(function(z, i){
+    var d = document.createElement('div');
+    d.className = 'zone';
+    d.id = 'zone' + i;
+    d.innerHTML = '<p class="zName">' + z.name + '</p>' +
+                  '<p class="zWhat">' + z.what + '</p>' +
+                  '<span class="zState"></span>' +
+                  '<p class="zNote"></p>';
+    elZones.appendChild(d);
+  });
+
+  LOG.forEach(function(e, i){
+    var li = document.createElement('li');
+    li.id = 'log' + i;
+    li.innerHTML = '<span class="t">' + hhmm(e.t) + '</span><span>' + e.s + '</span>';
+    elLog.appendChild(li);
+  });
+
+  function zoneState(z){
+    if (now < z.from - 45) return 'clear';
+    if (now < z.from) return 'soon';
+    if (now < z.to) return 'shut';
+    return 'done';
+  }
+
+  function zoneWords(z, state){
+    if (state === 'shut') return z.shut;
+    if (state === 'soon') return 'Closing at ' + hhmm(z.from) + '. Move now or wait it out.';
+    if (state === 'done') return z.clear || 'Open again.';
+    if (z.longRun) return 'Already fenced. This one never really opens on the day.';
+    return 'Open until ' + hhmm(z.from) + '.';
+  }
+
+  function stateLabel(state){
+    if (state === 'shut') return 'Closed';
+    if (state === 'soon') return 'Closing soon';
+    if (state === 'done') return 'Open again';
+    return 'Still open';
+  }
+
+  function runnerKm(key){
+    var t = now - RACE_START - WAVE[key];
+    if (t <= 0) return null;
+    var km = t / PACE[key];
+    return km >= DIST ? DIST : km;
+  }
+
+  function verdict(){
+    if (now < 360) return ['Nothing is shut yet.', 'The barriers are up around Stra&szlig;e des 17. Juni but the rest of the city is behaving normally. If you have an early train, this is the easy hour.'];
+    if (now < 465) return ['Unter den Linden is gone.', 'Pariser Platz to Friedrichstra&szlig;e is closed, so the Brandenburg Gate is now something you walk to, not something you drive or ride past. Everything else still works.'];
+    if (now < 530) return ['The course is going live around you.', 'Mitte, the west and the south are closing within half an hour of each other. This is the last window to move across the middle of the city on the surface.'];
+    if (now < 555) return ['Wheelchair racers are away.', 'The road is now a race. From here until the afternoon, the U-Bahn and S-Bahn are how you cross the course, not the crossings.'];
+    if (now < 600) return ['The race has started.', 'Four waves leave over roughly the next half hour. If your plan involves getting from one side of the course to the other, take a train that runs under it.'];
+    if (now < 677) return ['Peak disruption, and the best hour to watch.', 'The field is spread across the whole city. Reichstag at km 6.5 and Friedrichstadtpalast at km 8 are dense and easy to reach; the Memorial Church at km 35 comes later and is far less crowded.'];
+    if (now < 807) return ['The winner has finished.', 'The leaders are done a little after 11:15, but the road stays closed. Tens of thousands of runners are still out there and nothing reopens because the front of the race is over.'];
+    if (now < 840) return ['The finish is at its busiest.', 'Most people finish between four and five hours, so the Brandenburg Gate end is packed. If you wanted the gate for a photograph, today is not the day.'];
+    if (now < 990) return ['The east is yours again.', 'Friedrichshain and Kreuzberg reopen from around 14:00. If your afternoon is on that side of the city, it is a normal Sunday there.'];
+    if (now < 1050) return ['The south comes back.', 'Sch&ouml;neberg, Neuk&ouml;lln and the southern arc reopen from about 16:30. Mitte and the west are still holding on.'];
+    if (now < 1140) return ['Mitte reopens.', 'From roughly 17:30 the buses and trams find their real routes again. Unter den Linden is the last central street to come back.'];
+    return ['Back to a normal Sunday, almost.', 'Unter den Linden reopens around 19:00. Stra&szlig;e des 17. Juni stays closed for days afterwards while the finish is taken apart, so the Victory Column stays awkward well into the week.'];
+  }
+
+  function clockTag(){
+    if (now < 530) return 'before the start';
+    if (now < 975) return 'race in progress';
+    return 'after the race';
+  }
+
+  function render(){
+    elClock.textContent = hhmm(now);
+    elClockTag.textContent = clockTag();
+    if (elScrub.value !== String(now)) elScrub.value = now;
+
+    ZONES.forEach(function(z, i){
+      var st = zoneState(z);
+      var d = document.getElementById('zone' + i);
+      d.setAttribute('data-state', st);
+      d.querySelector('.zState').textContent = stateLabel(st);
+      d.querySelector('.zNote').innerHTML = zoneWords(z, st);
+    });
+
+    var lead = runnerKm('lead');
+    var mid = runnerKm('mid');
+    var back = runnerKm('back');
+
+    ['lead','mid','back'].forEach(function(key){
+      var km = key === 'lead' ? lead : (key === 'mid' ? mid : back);
+      var el = runners[key];
+      if (km === null){ el.hidden = true; return; }
+      el.hidden = false;
+      el.style.left = (km / DIST * 100) + '%';
+    });
+
+    elFill.style.width = (lead === null ? 0 : (lead / DIST * 100)) + '%';
+
+    if (lead === null){
+      elCourseNote.textContent = now < RACE_START ? 'Nobody has started.' : 'Warming up on the start straight.';
+    } else if (back !== null && back >= DIST){
+      elCourseNote.textContent = 'Everyone in this readout has finished.';
+    } else {
+      elCourseNote.innerHTML = 'Leaders at ' + (lead >= DIST ? 'the finish' : lead.toFixed(1) + ' km') +
+        (mid !== null ? ', a 4:00 runner at ' + (mid >= DIST ? 'the finish' : mid.toFixed(1) + ' km') : '');
+    }
+
+    var v = verdict();
+    elVLine.innerHTML = v[0];
+    elVSub.innerHTML = v[1];
+
+    if (!playing){
+      document.getElementById('playTxt').textContent = now >= END ? 'Play again' : (now > START ? 'Keep playing' : 'Play the day');
+    }
+
+    var currentIdx = -1;
+    LOG.forEach(function(e, i){ if (e.t <= now) currentIdx = i; });
+    LOG.forEach(function(e, i){
+      var li = document.getElementById('log' + i);
+      li.setAttribute('data-passed', e.t <= now ? '1' : '0');
+      li.setAttribute('data-current', i === currentIdx ? '1' : '0');
+    });
+  }
+
+  function stop(){
+    playing = false;
+    if (timer){ clearInterval(timer); timer = null; }
+    document.getElementById('playIco').innerHTML = '&#9654;';
+    render();
+  }
+
+  function start(){
+    if (now >= END) now = START;
+    playing = true;
+    document.getElementById('playIco').innerHTML = '&#10073;&#10073;';
+    document.getElementById('playTxt').textContent = 'Pause';
+    timer = setInterval(function(){
+      now += 5;
+      if (now >= END){ now = END; render(); stop(); return; }
+      render();
+    }, 90);
+  }
+
+  document.getElementById('play').addEventListener('click', function(){
+    if (playing) stop(); else start();
+  });
+
+  document.getElementById('reset').addEventListener('click', function(){
+    stop();
+    now = START;
+    render();
+  });
+
+  elScrub.addEventListener('input', function(){
+    var picked = parseInt(elScrub.value, 10);
+    playing = false;
+    if (timer){ clearInterval(timer); timer = null; }
+    document.getElementById('playIco').innerHTML = '&#9654;';
+    now = picked;
+    render();
+  });
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
