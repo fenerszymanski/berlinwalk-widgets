@@ -1917,5 +1917,18 @@
     "png160": "tools-home/icons/berlin-ubahn-etiquette-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-ubahn-etiquette-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_30b30f1b246247e183322f6fe80f8e39~mv2.png"
+  },
+  {
+    "slug": "berlin-marathon-day",
+    "title": "Marathon Day Berlin",
+    "category": "Discovery",
+    "source": "chatgpt-browser-imagegen-20260719",
+    "generatedAt": "2026-07-19",
+    "promptFile": "tools-home/icons/_src/daily-blog-berlin-marathon-day-icon-20260719-prompt.md",
+    "sourceImage": "tools-home/icons/_src/daily-blog-berlin-marathon-day-icon-20260719-raw.png",
+    "png512": "tools-home/icons/berlin-marathon-day.png",
+    "png160": "tools-home/icons/berlin-marathon-day-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-marathon-day-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_0ba59650f87440e188256b50d83de9c0~mv2.png"
   }
 ]
