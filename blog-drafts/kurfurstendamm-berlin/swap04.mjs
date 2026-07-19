@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+const UA='BerlinWalkBlogBot/1.0 (https://www.berlinwalk.com; yusuf.ucuz@gmail.com)';
+const NAME='04-kurfurstendamm-berlin-bikini-berlin', FILE='Bikinihaus, Berlin.jpg';
+const u=new URL('https://commons.wikimedia.org/w/api.php');
+u.searchParams.set('action','query');u.searchParams.set('format','json');
+u.searchParams.set('titles','File:'+FILE);u.searchParams.set('prop','imageinfo');
+u.searchParams.set('iiprop','url|size|extmetadata');
+const j=await (await fetch(u,{headers:{'User-Agent':UA}})).json();
+const p=Object.values(j.query.pages)[0]; const ii=p.imageinfo[0]; const m=ii.extmetadata||{};
+const strip=s=>(s||'').replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
+const buf=Buffer.from(await (await fetch(ii.url,{headers:{'User-Agent':UA}})).arrayBuffer());
+const ext=ii.url.split('.').pop().toLowerCase();
+fs.writeFileSync(`images/raw/${NAME}.${ext}`, buf);
+const srcs=JSON.parse(fs.readFileSync('images/sources.json','utf8'));
+const i=srcs.findIndex(r=>r.name===NAME);
+srcs[i]={name:NAME,file:FILE,page:ii.descriptionurl,url:ii.url,artist:strip(m.Artist?.value),license:strip(m.LicenseShortName?.value),licurl:m.LicenseUrl?.value||'',src:`${ii.width}x${ii.height}`,rawfile:`${NAME}.${ext}`};
+fs.writeFileSync('images/sources.json', JSON.stringify(srcs,null,1));
+console.log(srcs[i].license, srcs[i].artist, srcs[i].src);

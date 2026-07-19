@@ -233,7 +233,8 @@
   "berlin-emergency-numbers": "berlin-emergency-numbers",
   "is-berlin-walkable": "is-berlin-walkable",
   "berlin-ubahn-etiquette": "berlin-ubahn-etiquette",
-  "oktoberfest-in-berlin": "oktoberfest-in-berlin"
+  "oktoberfest-in-berlin": "oktoberfest-in-berlin",
+  "kurfurstendamm-berlin": "kurfurstendamm-berlin"
 };
 
   var SCHEMAS = {
@@ -11499,6 +11500,84 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Only at the funfair beer tent, and mostly as costume. Lederhosen and dirndl are traditional southern German dress and are not part of Berlin culture. Wearing them around the city in September will read as fancy dress, not as blending in."
+        }
+      }
+    ]
+  },
+  "kurfurstendamm-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is the Kurfürstendamm worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, but only a short section of it. The stretch around Breitscheidplatz is genuinely worth an hour or two: the Kaiser Wilhelm Memorial Church, Bikini Berlin and its free roof terrace over the zoo, Zoo Berlin itself and the C/O Berlin photography museum all sit within about 300 metres of each other. Walking the full 3.5 km is not worth it. Past Adenauerplatz the boulevard turns into offices, hotels and apartment blocks."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long is the Kurfürstendamm and how long does it take to walk?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Kurfürstendamm itself is 3.5 km long and 53 metres wide, with four rows of plane trees. Added to Tauentzienstraße it makes a continuous axis of about 4.25 km from Wittenbergplatz to Rathenauplatz, which is roughly 55 minutes of walking. The part most visitors actually want is the first 1.4 km, about 18 minutes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where does the Kurfürstendamm start and end?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It starts at Breitscheidplatz, next to the Kaiser Wilhelm Memorial Church, and ends at Rathenauplatz in the southwest, where Wolf Vostell's two concrete Cadillacs stand in the middle of the traffic circle. Those were installed in 1987 for West Berlin's 750th anniversary, when the whole axis was temporarily lined with sculpture."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is KaDeWe on the Kurfürstendamm?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. KaDeWe stands on Tauentzienstraße at Wittenbergplatz, about 750 metres before the Kurfürstendamm begins. Berliners loosely call the whole axis \"Ku'damm\" in conversation, which is where the confusion comes from, but they are two different streets."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I get to the Kurfürstendamm from Alexanderplatz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It takes about 15 to 20 minutes and stays inside zone AB, so a normal Berlin ticket covers it. The S-Bahn Stadtbahn lines S3, S5, S7 and S9 run straight to Zoologischer Garten. On the U-Bahn, U2 also reaches Zoologischer Garten, while U1 and U9 stop at Kurfürstendamm station right at Breitscheidplatz."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What can you do on the Kurfürstendamm for free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Entry to the Kaiser Wilhelm Memorial Church is free, including the memorial hall inside the ruined tower, open Monday to Saturday from 10:00 to 18:00 with shorter Sunday hours. The Bikini Berlin roof terrace is also free and is listed as open daily from 9:00 to 21:00; it looks down into Zoo Berlin's monkey enclosure, so you get a zoo view without a zoo ticket. Walking the boulevard and sitting on Savignyplatz cost nothing either."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Kurfürstendamm better for shopping than Mitte?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends what you are shopping for. The Kurfürstendamm and Tauentzienstraße still hold the big international chains, the luxury boutiques and KaDeWe, so for department stores and brand names the west is stronger. For independent shops, second-hand and design, the streets around Mitte, Prenzlauer Berg and Kreuzberg are better. Do not travel west purely to browse; go for the church and the cluster around it, and treat the shops as a bonus."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does Berlin have two city centres?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Because of the division. When the city was split, the historic centre with its museums, cathedral and old government quarter all fell in the East. West Berlin had no downtown, so it built one on the Kurfürstendamm, which had already been a fashionable shopping and cinema street in the 1920s. For forty years that axis was the shop window of the West. After 1989 the old centre returned and Mitte took most of the visitors back."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is worth seeing at the western end of the Kurfürstendamm?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Two things, and both deserve a trip of their own rather than the end of a long walk. The Schaubühne at Lehniner Platz is one of Germany's most important theatres and often plays with English surtitles; its building is Erich Mendelsohn's Universum cinema from 1928, curved like a ship. At Rathenauplatz, the two concrete Cadillacs mark the end of the street. Reach both by U-Bahn and bus rather than on foot from Breitscheidplatz."
         }
       }
     ]
