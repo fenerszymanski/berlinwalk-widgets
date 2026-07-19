@@ -1,0 +1,2249 @@
+{
+  "kind": "before",
+  "capturedAt": "2026-07-17T12:12:27.210Z",
+  "mode": "dry-run",
+  "requestedRef": "cf479a0457c271f826f93a03eea12cc7785dcd6e",
+  "siteId": "12ee5ea0-70a7-492f-8020-ffb27cbb630f",
+  "draftId": "29816537-5ec8-49f2-ada9-3385ada5daa9",
+  "richContentSha256": "4699fdebda3b80a6da23ea55cc505b9006157e1d5358e054a07d2df28d6ebdb2",
+  "draftPost": {
+    "id": "29816537-5ec8-49f2-ada9-3385ada5daa9",
+    "title": "Berlin Then and Now: How to See the City That Disappeared",
+    "excerpt": "Berlin rarely preserves an old street whole. It leaves a column, a curve or an empty space. Mehringplatz shows how to connect the clues.",
+    "featured": false,
+    "categoryIds": [
+      "5f58da11-347d-43f0-b3c3-2cb1cdeb7a79",
+      "af526c68-60e5-4783-a31b-4e215760626f"
+    ],
+    "memberId": "5a08a3af-4b9b-4403-9de7-3e26eba72dc0",
+    "hashtags": [],
+    "commentingEnabled": false,
+    "minutesToRead": 6,
+    "tagIds": [
+      "0da7a5bc-07e4-4673-8f41-411f434a5aa2",
+      "af5cbfc8-9e6d-408f-bfec-1659327b7434",
+      "cf74a9fa-8f54-4f3a-a890-51930e058020",
+      "e9548781-1cd9-48e1-a958-7c53474f16ca",
+      "79bce5d3-214e-44f5-99f0-827c261ea962",
+      "910d41f1-7a57-4a1b-bfd9-e9ea97e01c8f"
+    ],
+    "relatedPostIds": [],
+    "pricingPlanIds": [],
+    "language": "en",
+    "changeOrigin": "MANUAL_SAVE",
+    "contentId": "6a59f4da9071d306af3e4b62",
+    "editingSessionId": "fc7e914b-7cc4-4f5c-ad9a-8a008641f26a",
+    "richContent": {
+      "nodes": [
+        {
+          "type": "PARAGRAPH",
+          "id": "paragraph_1",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_2",
+              "nodes": [],
+              "textData": {
+                "text": "Berlin then and now can look like two different cities. Stand at Hallesches Tor today and walk north into Mehringplatz. You enter a quiet pedestrian circle framed by postwar housing. Now open a photograph from around 1900. The same direction once led through monumental gatehouses into Belle-Alliance-Platz, busy with trams, carriages and dense blocks of shops and homes.",
+                "decorations": []
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "AUTO",
+              "lineHeight": "1.7"
+            },
+            "indentation": 0
+          }
+        },
+        {
+          "type": "PARAGRAPH",
+          "id": "paragraph_3",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_4",
+              "nodes": [],
+              "textData": {
+                "text": "My advice is not to hunt for a perfect before-and-after match. Berlin rarely gives you one. Look for one object that survived, one street line that still makes sense and one gap that tells you what did not return. Mehringplatz is a good place to learn that method because the old city was almost erased here, but its geometry still shapes the space.",
+                "decorations": []
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "AUTO",
+              "lineHeight": "1.7"
+            },
+            "indentation": 0
+          }
+        },
+        {
+          "type": "HTML",
+          "id": "quick_summary_berlin_then_and_now",
+          "nodes": [],
+          "htmlData": {
+            "containerData": {
+              "width": {
+                "custom": "940"
+              },
+              "alignment": "CENTER",
+              "spoiler": {
+                "enabled": false
+              },
+              "height": {
+                "custom": "660"
+              },
+              "textWrap": true
+            },
+            "url": "https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=berlin-then-and-now&v=b32470b93390e9c0af664a27487cc812c2231d4b",
+            "source": "HTML",
+            "autoHeight": false
+          }
+        },
+        {
+          "type": "IMAGE",
+          "id": "image_5",
+          "nodes": [],
+          "imageData": {
+            "containerData": {
+              "width": {
+                "size": "CONTENT"
+              },
+              "alignment": "CENTER",
+              "textWrap": true
+            },
+            "image": {
+              "src": {
+                "id": "5a08a3_dea26d70fd4c43e5afa6a660f2fdeea8~mv2.jpg"
+              },
+              "width": 1800,
+              "height": 1276
+            },
+            "altText": "A colour photochrom looking through Hallesches Tor toward Belle-Alliance-Platz around 1900"
+          }
+        },
+        {
+          "type": "PARAGRAPH",
+          "id": "caption_6",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_7",
+              "nodes": [],
+              "textData": {
+                "text": "Looking north through Hallesches Tor around 1900. Belle-Alliance-Platz, now Mehringplatz, begins beyond the gatehouses. Image: Unknown creator, Public domain (PD-Detroit; PD-Switzerland-old-unknown; PD-US-expired), Library of Congress, via ",
+                "decorations": [
+                  {
+                    "type": "FONT_SIZE",
+                    "fontSizeData": {
+                      "unit": "PX",
+                      "value": 12
+                    }
+                  },
+                  {
+                    "type": "ITALIC"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "TEXT",
+              "id": "text_8",
+              "nodes": [],
+              "textData": {
+                "text": "Wikimedia Commons",
+                "decorations": [
+                  {
+                    "type": "FONT_SIZE",
+                    "fontSizeData": {
+                      "unit": "PX",
+                      "value": 12
+                    }
+                  },
+                  {
+                    "type": "ITALIC"
+                  },
+                  {
+                    "type": "LINK",
+                    "linkData": {
+                      "link": {
+                        "url": "https://commons.wikimedia.org/wiki/File:Berlin_Belle_Alliance_Platz_um_1900.jpg",
+                        "target": "BLANK"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "TEXT",
+              "id": "text_9",
+              "nodes": [],
+              "textData": {
+                "text": ".",
+                "decorations": [
+                  {
+                    "type": "FONT_SIZE",
+                    "fontSizeData": {
+                      "unit": "PX",
+                      "value": 12
+                    }
+                  },
+                  {
+                    "type": "ITALIC"
+                  }
+                ]
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "CENTER",
+              "lineHeight": "1.45"
+            },
+            "indentation": 0
+          }
+        },
+        {
+          "type": "HEADING",
+          "id": "heading_10",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_11",
+              "nodes": [],
+              "textData": {
+                "text": "Berlin then and now is not a spot-the-difference game",
+                "decorations": []
+              }
+            }
+          ],
+          "headingData": {
+            "level": 2,
+            "textStyle": {
+              "textAlignment": "AUTO"
+            }
+          }
+        },
+        {
+          "type": "PARAGRAPH",
+          "id": "paragraph_12",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_13",
+              "nodes": [],
+              "textData": {
+                "text": "Old photographs are seductive. Put one beside a current image and it is easy to say that everything has changed. That is true, but it is not yet useful. The photographer may have stood on a bridge, a tram platform or an upper floor that no longer exists. The lens changes the apparent distance between buildings. Trees hide edges. A wide modern photograph can make a square look smaller than it did through a narrow historic lens.",
+                "decorations": []
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "AUTO",
+              "lineHeight": "1.7"
+            },
+            "indentation": 0
+          }
+        },
+        {
+          "type": "PARAGRAPH",
+          "id": "paragraph_14",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_15",
+              "nodes": [],
+              "textData": {
+                "text": "The better question is: ",
+                "decorations": []
+              }
+            },
+            {
+              "type": "TEXT",
+              "id": "text_16",
+              "nodes": [],
+              "textData": {
+                "text": "what evidence can still be checked on the street?",
+                "decorations": [
+                  {
+                    "type": "BOLD",
+                    "fontWeightValue": 700
+                  }
+                ]
+              }
+            },
+            {
+              "type": "TEXT",
+              "id": "text_17",
+              "nodes": [],
+              "textData": {
+                "text": " I use four clues.",
+                "decorations": []
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "AUTO",
+              "lineHeight": "1.7"
+            },
+            "indentation": 0
+          }
+        },
+        {
+          "type": "ORDERED_LIST",
+          "id": "ordered_list_18",
+          "nodes": [
+            {
+              "type": "LIST_ITEM",
+              "id": "list_item_19",
+              "nodes": [
+                {
+                  "type": "PARAGRAPH",
+                  "id": "paragraph_20",
+                  "nodes": [
+                    {
+                      "type": "TEXT",
+                      "id": "text_21",
+                      "nodes": [],
+                      "textData": {
+                        "text": "An anchor:",
+                        "decorations": [
+                          {
+                            "type": "BOLD",
+                            "fontWeightValue": 700
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "TEXT",
+                      "id": "text_22",
+                      "nodes": [],
+                      "textData": {
+                        "text": " a column, church tower, bridge or statue that survived.",
+                        "decorations": []
+                      }
+                    }
+                  ],
+                  "paragraphData": {
+                    "textStyle": {
+                      "textAlignment": "AUTO",
+                      "lineHeight": "1.6"
+                    },
+                    "indentation": 0
+                  }
+                }
+              ]
+            },
+            {
+              "type": "LIST_ITEM",
+              "id": "list_item_23",
+              "nodes": [
+                {
+                  "type": "PARAGRAPH",
+                  "id": "paragraph_24",
+                  "nodes": [
+                    {
+                      "type": "TEXT",
+                      "id": "text_25",
+                      "nodes": [],
+                      "textData": {
+                        "text": "Street geometry:",
+                        "decorations": [
+                          {
+                            "type": "BOLD",
+                            "fontWeightValue": 700
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "TEXT",
+                      "id": "text_26",
+                      "nodes": [],
+                      "textData": {
+                        "text": " the curve of a square or the direction in which roads meet.",
+                        "decorations": []
+                      }
+                    }
+                  ],
+                  "paragraphData": {
+                    "textStyle": {
+                      "textAlignment": "AUTO",
+                      "lineHeight": "1.6"
+                    },
+                    "indentation": 0
+                  }
+                }
+              ]
+            },
+            {
+              "type": "LIST_ITEM",
+              "id": "list_item_27",
+              "nodes": [
+                {
+                  "type": "PARAGRAPH",
+                  "id": "paragraph_28",
+                  "nodes": [
+                    {
+                      "type": "TEXT",
+                      "id": "text_29",
+                      "nodes": [],
+                      "textData": {
+                        "text": "Scale and empty space:",
+                        "decorations": [
+                          {
+                            "type": "BOLD",
+                            "fontWeightValue": 700
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "TEXT",
+                      "id": "text_30",
+                      "nodes": [],
+                      "textData": {
+                        "text": " a place where a building line moved, disappeared or returned in another form.",
+                        "decorations": []
+                      }
+                    }
+                  ],
+                  "paragraphData": {
+                    "textStyle": {
+                      "textAlignment": "AUTO",
+                      "lineHeight": "1.6"
+                    },
+                    "indentation": 0
+                  }
+                }
+              ]
+            },
+            {
+              "type": "LIST_ITEM",
+              "id": "list_item_31",
+              "nodes": [
+                {
+                  "type": "PARAGRAPH",
+                  "id": "paragraph_32",
+                  "nodes": [
+                    {
+                      "type": "TEXT",
+                      "id": "text_33",
+                      "nodes": [],
+                      "textData": {
+                        "text": "Reconstruction:",
+                        "decorations": [
+                          {
+                            "type": "BOLD",
+                            "fontWeightValue": 700
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "TEXT",
+                      "id": "text_34",
+                      "nodes": [],
+                      "textData": {
+                        "text": " something that looks old but was rebuilt, moved or reinterpreted later.",
+                        "decorations": []
+                      }
+                    }
+                  ],
+                  "paragraphData": {
+                    "textStyle": {
+                      "textAlignment": "AUTO",
+                      "lineHeight": "1.6"
+                    },
+                    "indentation": 0
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "PARAGRAPH",
+          "id": "paragraph_35",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_36",
+              "nodes": [],
+              "textData": {
+                "text": "These clues stop a historical photograph from becoming decoration. They turn it into a way of reading the present city.",
+                "decorations": []
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "AUTO",
+              "lineHeight": "1.7"
+            },
+            "indentation": 0
+          }
+        },
+        {
+          "type": "HEADING",
+          "id": "heading_37",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_38",
+              "nodes": [],
+              "textData": {
+                "text": "Start with the object that refused to disappear",
+                "decorations": []
+              }
+            }
+          ],
+          "headingData": {
+            "level": 2,
+            "textStyle": {
+              "textAlignment": "AUTO"
+            }
+          }
+        },
+        {
+          "type": "PARAGRAPH",
+          "id": "paragraph_39",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_40",
+              "nodes": [],
+              "textData": {
+                "text": "At Mehringplatz, the easiest anchor is the ",
+                "decorations": []
+              }
+            },
+            {
+              "type": "TEXT",
+              "id": "text_41",
+              "nodes": [],
+              "textData": {
+                "text": "Friedenssäule",
+                "decorations": [
+                  {
+                    "type": "BOLD",
+                    "fontWeightValue": 700
+                  }
+                ]
+              }
+            },
+            {
+              "type": "TEXT",
+              "id": "text_42",
+              "nodes": [],
+              "textData": {
+                "text": ", the Peace Column. The official Berlin monument record dates the column and its crowning figure to 1840 to 1843. It stood in the centre of Belle-Alliance-Platz before the old surrounding buildings were destroyed, and it still gives the present square a centre.",
+                "decorations": []
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "AUTO",
+              "lineHeight": "1.7"
+            },
+            "indentation": 0
+          }
+        },
+        {
+          "type": "IMAGE",
+          "id": "image_43",
+          "nodes": [],
+          "imageData": {
+            "containerData": {
+              "width": {
+                "size": "CONTENT"
+              },
+              "alignment": "CENTER",
+              "textWrap": true
+            },
+            "image": {
+              "src": {
+                "id": "5a08a3_54bd3d830722468e9f2e18a9e1479cd1~mv2.jpg"
+              },
+              "width": 1079,
+              "height": 720
+            },
+            "altText": "The Peace Column standing in the centre of the redesigned Mehringplatz in 2022"
+          }
+        },
+        {
+          "type": "PARAGRAPH",
+          "id": "caption_44",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_45",
+              "nodes": [],
+              "textData": {
+                "text": "The Friedenssäule is the most reliable visual anchor between the old square and the present one. Image: Andreas Achsel, CC BY-SA 4.0, via ",
+                "decorations": [
+                  {
+                    "type": "FONT_SIZE",
+                    "fontSizeData": {
+                      "unit": "PX",
+                      "value": 12
+                    }
+                  },
+                  {
+                    "type": "ITALIC"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "TEXT",
+              "id": "text_46",
+              "nodes": [],
+              "textData": {
+                "text": "Wikimedia Commons",
+                "decorations": [
+                  {
+                    "type": "FONT_SIZE",
+                    "fontSizeData": {
+                      "unit": "PX",
+                      "value": 12
+                    }
+                  },
+                  {
+                    "type": "ITALIC"
+                  },
+                  {
+                    "type": "LINK",
+                    "linkData": {
+                      "link": {
+                        "url": "https://commons.wikimedia.org/wiki/File:Friedenss%C3%A4ule_11.07.2022.jpg",
+                        "target": "BLANK"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "TEXT",
+              "id": "text_47",
+              "nodes": [],
+              "textData": {
+                "text": ".",
+                "decorations": [
+                  {
+                    "type": "FONT_SIZE",
+                    "fontSizeData": {
+                      "unit": "PX",
+                      "value": 12
+                    }
+                  },
+                  {
+                    "type": "ITALIC"
+                  }
+                ]
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "CENTER",
+              "lineHeight": "1.45"
+            },
+            "indentation": 0
+          }
+        },
+        {
+          "type": "PARAGRAPH",
+          "id": "paragraph_48",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_49",
+              "nodes": [],
+              "textData": {
+                "text": "Stand south of the column and face north. In the historic photographs, the winged figure rises between the two gatehouses and the street continues behind it. In the current square, the same column is surrounded by a much lower and more enclosed ring of postwar buildings. The object stayed, but the room around it changed.",
+                "decorations": []
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "AUTO",
+              "lineHeight": "1.7"
+            },
+            "indentation": 0
+          }
+        },
+        {
+          "type": "PARAGRAPH",
+          "id": "paragraph_50",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_51",
+              "nodes": [],
+              "textData": {
+                "text": "That difference matters. A survivor does not prove that everything around it is original. It gives you a fixed point from which to measure the later city.",
+                "decorations": []
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "AUTO",
+              "lineHeight": "1.7"
+            },
+            "indentation": 0
+          }
+        },
+        {
+          "type": "HEADING",
+          "id": "heading_52",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_53",
+              "nodes": [],
+              "textData": {
+                "text": "Follow the street lines, even when the buildings are gone",
+                "decorations": []
+              }
+            }
+          ],
+          "headingData": {
+            "level": 2,
+            "textStyle": {
+              "textAlignment": "AUTO"
+            }
+          }
+        },
+        {
+          "type": "PARAGRAPH",
+          "id": "paragraph_54",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_55",
+              "nodes": [],
+              "textData": {
+                "text": "Mehringplatz began as the Rondell in the 1730s, at the southern end of an extension of Friedrichstadt. Three important streets met here: Wilhelmstraße from the west, Friedrichstraße through the middle and Lindenstraße from the east. The Hallesches Tor stood just beyond the square in Berlin's customs wall.",
+                "decorations": []
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "AUTO",
+              "lineHeight": "1.7"
+            },
+            "indentation": 0
+          }
+        },
+        {
+          "type": "PARAGRAPH",
+          "id": "paragraph_56",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_57",
+              "nodes": [],
+              "textData": {
+                "text": "The name changed to Belle-Alliance-Platz in 1815. During the 19th century, the modest two-storey edges were replaced, the Peace Column arrived and Peter Joseph Lenné shaped the planted square. After the customs wall came down, new gatehouses completed a grand southern entrance to the centre. The elevated railway at Hallesches Tor followed in 1902, with the U-Bahn added beneath the area in the 1920s.",
+                "decorations": []
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "AUTO",
+              "lineHeight": "1.7"
+            },
+            "indentation": 0
+          }
+        },
+        {
+          "type": "IMAGE",
+          "id": "image_58",
+          "nodes": [],
+          "imageData": {
+            "containerData": {
+              "width": {
+                "size": "CONTENT"
+              },
+              "alignment": "CENTER",
+              "textWrap": true
+            },
+            "image": {
+              "src": {
+                "id": "5a08a3_31bd6afd7abf47ac94ef18569e25cf0b~mv2.jpg"
+              },
+              "width": 1800,
+              "height": 1331
+            },
+            "altText": "A busy 1894 view through Hallesches Tor toward Belle-Alliance-Platz and its Peace Column"
+          }
+        },
+        {
+          "type": "PARAGRAPH",
+          "id": "caption_59",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_60",
+              "nodes": [],
+              "textData": {
+                "text": "In 1894, the square was a busy southern gateway. The central column and northward axis are the clearest clues to carry into the present. Image: Robert Prager, Public domain (PD-old), via ",
+                "decorations": [
+                  {
+                    "type": "FONT_SIZE",
+                    "fontSizeData": {
+                      "unit": "PX",
+                      "value": 12
+                    }
+                  },
+                  {
+                    "type": "ITALIC"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "TEXT",
+              "id": "text_61",
+              "nodes": [],
+              "textData": {
+                "text": "Wikimedia Commons",
+                "decorations": [
+                  {
+                    "type": "FONT_SIZE",
+                    "fontSizeData": {
+                      "unit": "PX",
+                      "value": 12
+                    }
+                  },
+                  {
+                    "type": "ITALIC"
+                  },
+                  {
+                    "type": "LINK",
+                    "linkData": {
+                      "link": {
+                        "url": "https://commons.wikimedia.org/wiki/File:Hallesches_Tor,_Berlin_1894.jpg",
+                        "target": "BLANK"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "TEXT",
+              "id": "text_62",
+              "nodes": [],
+              "textData": {
+                "text": ".",
+                "decorations": [
+                  {
+                    "type": "FONT_SIZE",
+                    "fontSizeData": {
+                      "unit": "PX",
+                      "value": 12
+                    }
+                  },
+                  {
+                    "type": "ITALIC"
+                  }
+                ]
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "CENTER",
+              "lineHeight": "1.45"
+            },
+            "indentation": 0
+          }
+        },
+        {
+          "type": "PARAGRAPH",
+          "id": "paragraph_63",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_64",
+              "nodes": [],
+              "textData": {
+                "text": "You cannot recover that scene by standing in one exact modern spot. The old foreground was reorganised, the road system changed and the historic gatehouses disappeared. But the northward pull remains. Walk from Hallesches Tor toward the Peace Column, then continue through the opening in the inner ring. You are following the old central axis of Friedrichstraße, even though the architecture around it belongs to another Berlin.",
+                "decorations": []
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "AUTO",
+              "lineHeight": "1.7"
+            },
+            "indentation": 0
+          }
+        },
+        {
+          "type": "BLOCKQUOTE",
+          "id": "lead_magnet_berlin_before_and_now",
+          "nodes": [
+            {
+              "type": "PARAGRAPH",
+              "id": "lead_eyebrow_65",
+              "nodes": [
+                {
+                  "type": "TEXT",
+                  "id": "text_66",
+                  "nodes": [],
+                  "textData": {
+                    "text": "THREE MORE BERLIN STORIES",
+                    "decorations": [
+                      {
+                        "type": "BOLD",
+                        "fontWeightValue": 700
+                      },
+                      {
+                        "type": "FONT_SIZE",
+                        "fontSizeData": {
+                          "unit": "PX",
+                          "value": 12
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "TEXT",
+                  "id": "4MsNf0hNo",
+                  "nodes": [],
+                  "textData": {
+                    "text": "\n",
+                    "decorations": []
+                  }
+                },
+                {
+                  "type": "TEXT",
+                  "id": "text_68",
+                  "nodes": [],
+                  "textData": {
+                    "text": "See what today's city is hiding.",
+                    "decorations": [
+                      {
+                        "type": "BOLD",
+                        "fontWeightValue": 700
+                      },
+                      {
+                        "type": "FONT_SIZE",
+                        "fontSizeData": {
+                          "unit": "PX",
+                          "value": 24
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "TEXT",
+                  "id": "7W7cXiekT",
+                  "nodes": [],
+                  "textData": {
+                    "text": "\n",
+                    "decorations": []
+                  }
+                },
+                {
+                  "type": "TEXT",
+                  "id": "text_70",
+                  "nodes": [],
+                  "textData": {
+                    "text": "I put together three short before-and-now stories. The first opens immediately; Story 2 and Story 3 arrive by email after confirmation.",
+                    "decorations": []
+                  }
+                },
+                {
+                  "type": "TEXT",
+                  "id": "o3ie2eLli",
+                  "nodes": [],
+                  "textData": {
+                    "text": "\n",
+                    "decorations": []
+                  }
+                },
+                {
+                  "type": "TEXT",
+                  "id": "text_72",
+                  "nodes": [],
+                  "textData": {
+                    "text": "See the first story",
+                    "decorations": [
+                      {
+                        "type": "BOLD",
+                        "fontWeightValue": 700
+                      },
+                      {
+                        "type": "LINK",
+                        "linkData": {
+                          "link": {
+                            "url": "https://www.berlinwalk.com/berlin-before-and-now?utm_source=berlinwalk_blog&utm_medium=organic&utm_campaign=berlin_before_now&utm_content=berlin_then_now_mehringplatz",
+                            "target": "SELF"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "paragraphData": {
+                "textStyle": {
+                  "textAlignment": "AUTO",
+                  "lineHeight": "1.35"
+                },
+                "indentation": 0
+              }
+            }
+          ],
+          "blockquoteData": {
+            "indentation": 1
+          }
+        },
+        {
+          "type": "HEADING",
+          "id": "heading_73",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_74",
+              "nodes": [],
+              "textData": {
+                "text": "Mehringplatz did not simply lose its old buildings",
+                "decorations": []
+              }
+            }
+          ],
+          "headingData": {
+            "level": 2,
+            "textStyle": {
+              "textAlignment": "AUTO"
+            }
+          }
+        },
+        {
+          "type": "PARAGRAPH",
+          "id": "paragraph_75",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_76",
+              "nodes": [],
+              "textData": {
+                "text": "The Second World War is the obvious break, but the postwar story is more interesting than a single line about destruction. The official monument record says this part of the baroque city was heavily damaged and postwar aerial photographs show Mehringplatz cleared. The open ground remained through the 1950s.",
+                "decorations": []
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "AUTO",
+              "lineHeight": "1.7"
+            },
+            "indentation": 0
+          }
+        },
+        {
+          "type": "IMAGE",
+          "id": "image_77",
+          "nodes": [],
+          "imageData": {
+            "containerData": {
+              "width": {
+                "size": "CONTENT"
+              },
+              "alignment": "CENTER",
+              "textWrap": true
+            },
+            "image": {
+              "src": {
+                "id": "5a08a3_a96a323a0a5148138ee2ab351c1735a0~mv2.jpg"
+              },
+              "width": 1157,
+              "height": 746
+            },
+            "altText": "The cleared and still empty Mehringplatz seen from Hallesches Tor station in July 1957"
+          }
+        },
+        {
+          "type": "PARAGRAPH",
+          "id": "caption_78",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_79",
+              "nodes": [],
+              "textData": {
+                "text": "Willy Pragher photographed the cleared square in 1957. The column remains, but the old urban room has vanished. Image: Willy Pragher, CC BY 3.0, via ",
+                "decorations": [
+                  {
+                    "type": "FONT_SIZE",
+                    "fontSizeData": {
+                      "unit": "PX",
+                      "value": 12
+                    }
+                  },
+                  {
+                    "type": "ITALIC"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "TEXT",
+              "id": "text_80",
+              "nodes": [],
+              "textData": {
+                "text": "Wikimedia Commons",
+                "decorations": [
+                  {
+                    "type": "FONT_SIZE",
+                    "fontSizeData": {
+                      "unit": "PX",
+                      "value": 12
+                    }
+                  },
+                  {
+                    "type": "ITALIC"
+                  },
+                  {
+                    "type": "LINK",
+                    "linkData": {
+                      "link": {
+                        "url": "https://commons.wikimedia.org/wiki/File:Berlin_Mehringplatz_049041.jpg",
+                        "target": "BLANK"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "TEXT",
+              "id": "text_81",
+              "nodes": [],
+              "textData": {
+                "text": ".",
+                "decorations": [
+                  {
+                    "type": "FONT_SIZE",
+                    "fontSizeData": {
+                      "unit": "PX",
+                      "value": 12
+                    }
+                  },
+                  {
+                    "type": "ITALIC"
+                  }
+                ]
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "CENTER",
+              "lineHeight": "1.45"
+            },
+            "indentation": 0
+          }
+        },
+        {
+          "type": "PARAGRAPH",
+          "id": "paragraph_82",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_83",
+              "nodes": [],
+              "textData": {
+                "text": "The photograph from 1957 is the crucial middle layer. Without it, the comparison jumps from ornate 19th-century facades straight to postwar housing and suggests a simple replacement. The empty ground shows the missing stage: first the old square was destroyed, then planners had to decide what kind of city should occupy its outline.",
+                "decorations": []
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "AUTO",
+              "lineHeight": "1.7"
+            },
+            "indentation": 0
+          }
+        },
+        {
+          "type": "PARAGRAPH",
+          "id": "paragraph_84",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_85",
+              "nodes": [],
+              "textData": {
+                "text": "Architect Hans Scharoun won a 1962 competition for the area. He kept the idea of the Rondell but diverted car traffic away from it and made the centre pedestrian. This was not a faithful reconstruction. The official record explains that Scharoun reduced the diameter and placed an inner building ring where traffic had previously moved around the square. The result kept the circle but changed its scale and made it feel more private.",
+                "decorations": []
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "AUTO",
+              "lineHeight": "1.7"
+            },
+            "indentation": 0
+          }
+        },
+        {
+          "type": "PARAGRAPH",
+          "id": "paragraph_86",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_87",
+              "nodes": [],
+              "textData": {
+                "text": "Werner Düttmann took over the much larger second phase in 1968. He retained the concentric rings, pulled them farther apart and added homes, shops and taller housing blocks. Construction photographs from the 1970s show the new ring taking shape as an entirely modern piece of Berlin.",
+                "decorations": []
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "AUTO",
+              "lineHeight": "1.7"
+            },
+            "indentation": 0
+          }
+        },
+        {
+          "type": "IMAGE",
+          "id": "image_88",
+          "nodes": [],
+          "imageData": {
+            "containerData": {
+              "width": {
+                "size": "CONTENT"
+              },
+              "alignment": "CENTER",
+              "textWrap": true
+            },
+            "image": {
+              "src": {
+                "id": "5a08a3_f763a6956db6493eb1e73070b19ed1ab~mv2.jpg"
+              },
+              "width": 1800,
+              "height": 1038
+            },
+            "altText": "New ring buildings under construction at Mehringplatz in January 1974"
+          }
+        },
+        {
+          "type": "PARAGRAPH",
+          "id": "caption_89",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_90",
+              "nodes": [],
+              "textData": {
+                "text": "The 1974 building site is not a return to old Belle-Alliance-Platz. It is a new neighbourhood using the old circle as its organising idea. Image: Andreas Schwarzkopf, CC BY-SA 3.0, via ",
+                "decorations": [
+                  {
+                    "type": "FONT_SIZE",
+                    "fontSizeData": {
+                      "unit": "PX",
+                      "value": 12
+                    }
+                  },
+                  {
+                    "type": "ITALIC"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "TEXT",
+              "id": "text_91",
+              "nodes": [],
+              "textData": {
+                "text": "Wikimedia Commons",
+                "decorations": [
+                  {
+                    "type": "FONT_SIZE",
+                    "fontSizeData": {
+                      "unit": "PX",
+                      "value": 12
+                    }
+                  },
+                  {
+                    "type": "ITALIC"
+                  },
+                  {
+                    "type": "LINK",
+                    "linkData": {
+                      "link": {
+                        "url": "https://commons.wikimedia.org/wiki/File:Berlin_Januar_1974,_Neubau_am_Mehringplatz.jpg",
+                        "target": "BLANK"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "TEXT",
+              "id": "text_92",
+              "nodes": [],
+              "textData": {
+                "text": ".",
+                "decorations": [
+                  {
+                    "type": "FONT_SIZE",
+                    "fontSizeData": {
+                      "unit": "PX",
+                      "value": 12
+                    }
+                  },
+                  {
+                    "type": "ITALIC"
+                  }
+                ]
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "CENTER",
+              "lineHeight": "1.45"
+            },
+            "indentation": 0
+          }
+        },
+        {
+          "type": "PARAGRAPH",
+          "id": "paragraph_93",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_94",
+              "nodes": [],
+              "textData": {
+                "text": "That is why I would call Mehringplatz a translation, not a replica. The old plan was remembered through a postwar housing scheme. The Peace Column kept the centre. The north-south axis remained readable. Almost every wall around those clues changed.",
+                "decorations": []
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "AUTO",
+              "lineHeight": "1.7"
+            },
+            "indentation": 0
+          }
+        },
+        {
+          "type": "HTML",
+          "id": "widget_mehringplatz_time_layer_viewer",
+          "nodes": [],
+          "htmlData": {
+            "containerData": {
+              "width": {
+                "custom": "940"
+              },
+              "alignment": "CENTER",
+              "spoiler": {
+                "enabled": false
+              },
+              "height": {
+                "custom": "1480"
+              },
+              "textWrap": true
+            },
+            "url": "https://fenerszymanski.github.io/berlinwalk-widgets/mehringplatz-time-layer-viewer/?v=b32470b93390e9c0af664a27487cc812c2231d4b",
+            "source": "HTML",
+            "autoHeight": false
+          }
+        },
+        {
+          "type": "HEADING",
+          "id": "heading_95",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_96",
+              "nodes": [],
+              "textData": {
+                "text": "How to compare an old Berlin photograph honestly",
+                "decorations": []
+              }
+            }
+          ],
+          "headingData": {
+            "level": 2,
+            "textStyle": {
+              "textAlignment": "AUTO"
+            }
+          }
+        },
+        {
+          "type": "PARAGRAPH",
+          "id": "paragraph_97",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_98",
+              "nodes": [],
+              "textData": {
+                "text": "Use the viewer above as evidence, not as a promise that every image was taken from the same point. The 1894 photograph looks north through the old Hallesches Tor. The 1957 image was made from the elevated station. The 1974 frame looks through a window during construction. The 2024 photograph stands in the redesigned public space. Different positions are part of the story.",
+                "decorations": []
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "AUTO",
+              "lineHeight": "1.7"
+            },
+            "indentation": 0
+          }
+        },
+        {
+          "type": "PARAGRAPH",
+          "id": "paragraph_99",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_100",
+              "nodes": [],
+              "textData": {
+                "text": "When you try this elsewhere in Berlin, use a short routine:",
+                "decorations": []
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "AUTO",
+              "lineHeight": "1.7"
+            },
+            "indentation": 0
+          }
+        },
+        {
+          "type": "BULLETED_LIST",
+          "id": "bulleted_list_101",
+          "nodes": [
+            {
+              "type": "LIST_ITEM",
+              "id": "list_item_102",
+              "nodes": [
+                {
+                  "type": "PARAGRAPH",
+                  "id": "paragraph_103",
+                  "nodes": [
+                    {
+                      "type": "TEXT",
+                      "id": "text_104",
+                      "nodes": [],
+                      "textData": {
+                        "text": "Read the caption first.",
+                        "decorations": [
+                          {
+                            "type": "BOLD",
+                            "fontWeightValue": 700
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "TEXT",
+                      "id": "text_105",
+                      "nodes": [],
+                      "textData": {
+                        "text": " A date and viewpoint can prevent a confident mistake.",
+                        "decorations": []
+                      }
+                    }
+                  ],
+                  "paragraphData": {
+                    "textStyle": {
+                      "textAlignment": "AUTO",
+                      "lineHeight": "1.6"
+                    },
+                    "indentation": 0
+                  }
+                }
+              ]
+            },
+            {
+              "type": "LIST_ITEM",
+              "id": "list_item_106",
+              "nodes": [
+                {
+                  "type": "PARAGRAPH",
+                  "id": "paragraph_107",
+                  "nodes": [
+                    {
+                      "type": "TEXT",
+                      "id": "text_108",
+                      "nodes": [],
+                      "textData": {
+                        "text": "Choose one fixed object.",
+                        "decorations": [
+                          {
+                            "type": "BOLD",
+                            "fontWeightValue": 700
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "TEXT",
+                      "id": "text_109",
+                      "nodes": [],
+                      "textData": {
+                        "text": " Do not align ten uncertain details at once.",
+                        "decorations": []
+                      }
+                    }
+                  ],
+                  "paragraphData": {
+                    "textStyle": {
+                      "textAlignment": "AUTO",
+                      "lineHeight": "1.6"
+                    },
+                    "indentation": 0
+                  }
+                }
+              ]
+            },
+            {
+              "type": "LIST_ITEM",
+              "id": "list_item_110",
+              "nodes": [
+                {
+                  "type": "PARAGRAPH",
+                  "id": "paragraph_111",
+                  "nodes": [
+                    {
+                      "type": "TEXT",
+                      "id": "text_112",
+                      "nodes": [],
+                      "textData": {
+                        "text": "Check the street, not only the skyline.",
+                        "decorations": [
+                          {
+                            "type": "BOLD",
+                            "fontWeightValue": 700
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "TEXT",
+                      "id": "text_113",
+                      "nodes": [],
+                      "textData": {
+                        "text": " Kerbs, bridges and road directions often outlive facades.",
+                        "decorations": []
+                      }
+                    }
+                  ],
+                  "paragraphData": {
+                    "textStyle": {
+                      "textAlignment": "AUTO",
+                      "lineHeight": "1.6"
+                    },
+                    "indentation": 0
+                  }
+                }
+              ]
+            },
+            {
+              "type": "LIST_ITEM",
+              "id": "list_item_114",
+              "nodes": [
+                {
+                  "type": "PARAGRAPH",
+                  "id": "paragraph_115",
+                  "nodes": [
+                    {
+                      "type": "TEXT",
+                      "id": "text_116",
+                      "nodes": [],
+                      "textData": {
+                        "text": "Treat a gap as evidence.",
+                        "decorations": [
+                          {
+                            "type": "BOLD",
+                            "fontWeightValue": 700
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "TEXT",
+                      "id": "text_117",
+                      "nodes": [],
+                      "textData": {
+                        "text": " An open lawn or unusually wide road may mark destruction, clearance or a plan that was never completed.",
+                        "decorations": []
+                      }
+                    }
+                  ],
+                  "paragraphData": {
+                    "textStyle": {
+                      "textAlignment": "AUTO",
+                      "lineHeight": "1.6"
+                    },
+                    "indentation": 0
+                  }
+                }
+              ]
+            },
+            {
+              "type": "LIST_ITEM",
+              "id": "list_item_118",
+              "nodes": [
+                {
+                  "type": "PARAGRAPH",
+                  "id": "paragraph_119",
+                  "nodes": [
+                    {
+                      "type": "TEXT",
+                      "id": "text_120",
+                      "nodes": [],
+                      "textData": {
+                        "text": "Ask whether the old-looking object moved.",
+                        "decorations": [
+                          {
+                            "type": "BOLD",
+                            "fontWeightValue": 700
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "TEXT",
+                      "id": "text_121",
+                      "nodes": [],
+                      "textData": {
+                        "text": " Berlin rebuilt and relocated many monuments after 1945.",
+                        "decorations": []
+                      }
+                    }
+                  ],
+                  "paragraphData": {
+                    "textStyle": {
+                      "textAlignment": "AUTO",
+                      "lineHeight": "1.6"
+                    },
+                    "indentation": 0
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "PARAGRAPH",
+          "id": "paragraph_122",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_123",
+              "nodes": [],
+              "textData": {
+                "text": "I have made the mistake of forcing two photographs to match because the result looked dramatic. Once the viewpoint is wrong, the comparison teaches the wrong lesson. A less spectacular but well-labelled pair is more useful.",
+                "decorations": []
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "AUTO",
+              "lineHeight": "1.7"
+            },
+            "indentation": 0
+          }
+        },
+        {
+          "type": "HEADING",
+          "id": "heading_124",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_125",
+              "nodes": [],
+              "textData": {
+                "text": "Continue through Berlin's other layers",
+                "decorations": []
+              }
+            }
+          ],
+          "headingData": {
+            "level": 2,
+            "textStyle": {
+              "textAlignment": "AUTO"
+            }
+          }
+        },
+        {
+          "type": "PARAGRAPH",
+          "id": "paragraph_126",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_127",
+              "nodes": [],
+              "textData": {
+                "text": "Mehringplatz is only one type of disappearance. At ",
+                "decorations": []
+              }
+            },
+            {
+              "type": "TEXT",
+              "id": "text_128",
+              "nodes": [],
+              "textData": {
+                "text": "Alexanderplatz",
+                "decorations": [
+                  {
+                    "type": "LINK",
+                    "linkData": {
+                      "link": {
+                        "url": "/post/alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos",
+                        "target": "SELF"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "TEXT",
+              "id": "text_129",
+              "nodes": [],
+              "textData": {
+                "text": ", centuries of rebuilding produced a square whose scale changed again and again. The broader reason central Berlin can feel so different from Prague or Vienna is in my guide to ",
+                "decorations": []
+              }
+            },
+            {
+              "type": "TEXT",
+              "id": "text_130",
+              "nodes": [],
+              "textData": {
+                "text": "why Berlin does not have a beautiful old town",
+                "decorations": [
+                  {
+                    "type": "LINK",
+                    "linkData": {
+                      "link": {
+                        "url": "/post/why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point",
+                        "target": "SELF"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "TEXT",
+              "id": "text_131",
+              "nodes": [],
+              "textData": {
+                "text": ".",
+                "decorations": []
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "AUTO",
+              "lineHeight": "1.7"
+            },
+            "indentation": 0
+          }
+        },
+        {
+          "type": "PARAGRAPH",
+          "id": "paragraph_132",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_133",
+              "nodes": [],
+              "textData": {
+                "text": "You can also compare reconstruction choices at ",
+                "decorations": []
+              }
+            },
+            {
+              "type": "TEXT",
+              "id": "text_134",
+              "nodes": [],
+              "textData": {
+                "text": "Museum Island before and after the Second World War",
+                "decorations": [
+                  {
+                    "type": "LINK",
+                    "linkData": {
+                      "link": {
+                        "url": "/post/museum-island-before-and-after-wwii-the-destruction-nobody-expected",
+                        "target": "SELF"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "TEXT",
+              "id": "text_135",
+              "nodes": [],
+              "textData": {
+                "text": ". For a place where renewal returned street life in another form, see ",
+                "decorations": []
+              }
+            },
+            {
+              "type": "TEXT",
+              "id": "text_136",
+              "nodes": [],
+              "textData": {
+                "text": "Hackescher Markt before and after",
+                "decorations": [
+                  {
+                    "type": "LINK",
+                    "linkData": {
+                      "link": {
+                        "url": "/post/hackescher-markt-before-and-after-from-rubble-to-berlin-s-coolest-neighborhood",
+                        "target": "SELF"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "TEXT",
+              "id": "text_137",
+              "nodes": [],
+              "textData": {
+                "text": ". If you prefer details you can find on foot, start with these ",
+                "decorations": []
+              }
+            },
+            {
+              "type": "TEXT",
+              "id": "text_138",
+              "nodes": [],
+              "textData": {
+                "text": "hidden places in central Berlin",
+                "decorations": [
+                  {
+                    "type": "LINK",
+                    "linkData": {
+                      "link": {
+                        "url": "/post/hidden-places-central-berlin",
+                        "target": "SELF"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "TEXT",
+              "id": "text_139",
+              "nodes": [],
+              "textData": {
+                "text": ".",
+                "decorations": []
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "AUTO",
+              "lineHeight": "1.7"
+            },
+            "indentation": 0
+          }
+        },
+        {
+          "type": "PARAGRAPH",
+          "id": "paragraph_140",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_141",
+              "nodes": [],
+              "textData": {
+                "text": "The useful habit is simple: stop asking where old Berlin went as if it disappeared in one night. Look for the surviving object, the inherited street line, the cleared gap and the later decision. At Mehringplatz, all four are visible within a few minutes.",
+                "decorations": []
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "AUTO",
+              "lineHeight": "1.7"
+            },
+            "indentation": 0
+          }
+        },
+        {
+          "type": "HTML",
+          "id": "faq_berlin_then_and_now",
+          "nodes": [],
+          "htmlData": {
+            "containerData": {
+              "width": {
+                "custom": "940"
+              },
+              "alignment": "CENTER",
+              "spoiler": {
+                "enabled": false
+              },
+              "height": {
+                "custom": "900"
+              },
+              "textWrap": true
+            },
+            "url": "https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=berlin-then-and-now&v=b32470b93390e9c0af664a27487cc812c2231d4b",
+            "source": "HTML",
+            "autoHeight": false
+          }
+        },
+        {
+          "type": "HEADING",
+          "id": "heading_142",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_143",
+              "nodes": [],
+              "textData": {
+                "text": "Sources",
+                "decorations": []
+              }
+            }
+          ],
+          "headingData": {
+            "level": 2,
+            "textStyle": {
+              "textAlignment": "AUTO"
+            }
+          }
+        },
+        {
+          "type": "PARAGRAPH",
+          "id": "paragraph_144",
+          "nodes": [
+            {
+              "type": "TEXT",
+              "id": "text_145",
+              "nodes": [],
+              "textData": {
+                "text": "The main historical reference is the ",
+                "decorations": []
+              }
+            },
+            {
+              "type": "TEXT",
+              "id": "text_146",
+              "nodes": [],
+              "textData": {
+                "text": "Landesdenkmalamt Berlin record for Mehringplatz",
+                "decorations": [
+                  {
+                    "type": "LINK",
+                    "linkData": {
+                      "link": {
+                        "url": "https://denkmaldatenbank.berlin.de/daobj.php?obj_dok_nr=09097784%2CT",
+                        "target": "BLANK"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "TEXT",
+              "id": "text_147",
+              "nodes": [],
+              "textData": {
+                "text": ". Images come from Wikimedia Commons under public-domain, CC BY or CC BY-SA terms. Open the compact Image Credits panel in the Mehringplatz viewer for creator, date and licence details for all six article photographs.",
+                "decorations": []
+              }
+            }
+          ],
+          "paragraphData": {
+            "textStyle": {
+              "textAlignment": "AUTO",
+              "lineHeight": "1.7"
+            },
+            "indentation": 0
+          }
+        }
+      ],
+      "metadata": {
+        "version": 1,
+        "createdTimestamp": "2026-07-17T09:24:35.523Z",
+        "updatedTimestamp": "2026-07-17T09:24:35.523Z"
+      },
+      "documentStyle": {
+        "headerOne": {
+          "decorations": [],
+          "lineHeight": "1.12"
+        },
+        "headerTwo": {
+          "decorations": [],
+          "lineHeight": "1.15"
+        },
+        "headerThree": {
+          "decorations": [],
+          "lineHeight": "1.18"
+        },
+        "paragraph": {
+          "decorations": [],
+          "lineHeight": "1.7"
+        }
+      }
+    },
+    "status": "UNPUBLISHED",
+    "mostRecentContributorId": "5a08a3af-4b9b-4403-9de7-3e26eba72dc0",
+    "hasUnpublishedChanges": true,
+    "editedDate": "2026-07-17T09:24:42Z",
+    "seoData": {
+      "tags": [
+        {
+          "type": "title",
+          "children": "Berlin Then and Now: See the City That Disappeared",
+          "custom": false,
+          "disabled": false
+        },
+        {
+          "type": "meta",
+          "props": {
+            "name": "description",
+            "content": "See Berlin then and now through lost streets, surviving monuments and old photographs. Learn how to read the city's hidden layers at Mehringplatz."
+          },
+          "children": "",
+          "custom": false,
+          "disabled": false
+        },
+        {
+          "type": "link",
+          "props": {
+            "rel": "canonical",
+            "href": "https://www.berlinwalk.com/post/berlin-then-and-now"
+          },
+          "children": "",
+          "custom": true,
+          "disabled": false
+        },
+        {
+          "type": "meta",
+          "props": {
+            "name": "robots",
+            "content": "index, follow, max-image-preview:large"
+          },
+          "children": "",
+          "custom": true,
+          "disabled": false
+        },
+        {
+          "type": "meta",
+          "props": {
+            "property": "og:title",
+            "content": "Berlin Then and Now: See the City That Disappeared"
+          },
+          "children": "",
+          "custom": false,
+          "disabled": false
+        },
+        {
+          "type": "meta",
+          "props": {
+            "property": "og:description",
+            "content": "Use old photographs, surviving monuments and street lines to read Berlin's hidden layers at Mehringplatz."
+          },
+          "children": "",
+          "custom": false,
+          "disabled": false
+        },
+        {
+          "type": "meta",
+          "props": {
+            "property": "og:type",
+            "content": "article"
+          },
+          "children": "",
+          "custom": true,
+          "disabled": false
+        },
+        {
+          "type": "meta",
+          "props": {
+            "property": "og:url",
+            "content": "https://www.berlinwalk.com/post/berlin-then-and-now"
+          },
+          "children": "",
+          "custom": true,
+          "disabled": false
+        },
+        {
+          "type": "meta",
+          "props": {
+            "property": "og:image",
+            "content": "https://static.wixstatic.com/media/5a08a3_dea26d70fd4c43e5afa6a660f2fdeea8~mv2.jpg"
+          },
+          "children": "",
+          "custom": true,
+          "disabled": false
+        },
+        {
+          "type": "meta",
+          "props": {
+            "property": "og:image:alt",
+            "content": "A colour photochrom looking through Hallesches Tor toward Belle-Alliance-Platz around 1900"
+          },
+          "children": "",
+          "custom": true,
+          "disabled": false
+        },
+        {
+          "type": "meta",
+          "props": {
+            "name": "twitter:card",
+            "content": "summary_large_image"
+          },
+          "children": "",
+          "custom": true,
+          "disabled": false
+        },
+        {
+          "type": "meta",
+          "props": {
+            "name": "twitter:title",
+            "content": "Berlin Then and Now: See the City That Disappeared"
+          },
+          "children": "",
+          "custom": true,
+          "disabled": false
+        },
+        {
+          "type": "meta",
+          "props": {
+            "name": "twitter:description",
+            "content": "Use old photographs, surviving monuments and street lines to read Berlin's hidden layers at Mehringplatz."
+          },
+          "children": "",
+          "custom": true,
+          "disabled": false
+        },
+        {
+          "type": "meta",
+          "props": {
+            "name": "twitter:image",
+            "content": "https://static.wixstatic.com/media/5a08a3_dea26d70fd4c43e5afa6a660f2fdeea8~mv2.jpg"
+          },
+          "children": "",
+          "custom": true,
+          "disabled": false
+        },
+        {
+          "type": "meta",
+          "props": {
+            "name": "twitter:image:alt",
+            "content": "A colour photochrom looking through Hallesches Tor toward Belle-Alliance-Platz around 1900"
+          },
+          "children": "",
+          "custom": true,
+          "disabled": false
+        },
+        {
+          "type": "script",
+          "props": {
+            "type": "application/ld+json"
+          },
+          "children": "{\"@context\":\"https://schema.org\",\"@type\":\"BlogPosting\",\"headline\":\"Berlin Then and Now: How to See the City That Disappeared\",\"description\":\"See Berlin then and now through lost streets, surviving monuments and old photographs. Learn how to read the city's hidden layers at Mehringplatz.\",\"image\":[\"https://static.wixstatic.com/media/5a08a3_dea26d70fd4c43e5afa6a660f2fdeea8~mv2.jpg\"],\"author\":{\"@type\":\"Person\",\"name\":\"Yusuf Ucuz\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"BerlinWalk\",\"url\":\"https://www.berlinwalk.com\"},\"mainEntityOfPage\":\"https://www.berlinwalk.com/post/berlin-then-and-now\",\"inLanguage\":\"en\"}",
+          "custom": true,
+          "disabled": false
+        },
+        {
+          "type": "script",
+          "props": {
+            "type": "application/ld+json"
+          },
+          "children": "{\"@context\":\"https://schema.org\",\"@type\":\"FAQPage\",\"mainEntity\":[{\"@type\":\"Question\",\"name\":\"Where can you still see old Berlin today?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Nikolaiviertel, Museum Island, Gendarmenmarkt and parts of Spandau contain strong historical references, but not every old-looking surface is original. For a more honest reading of the city, combine intact buildings with places such as Mehringplatz, where a monument and street geometry survive inside a later plan.\"}},{\"@type\":\"Question\",\"name\":\"Why does Berlin have so few intact old streets?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"War damage is central, but it is not the only reason. Berlin expanded quickly, replaced older buildings during the 19th and early 20th centuries, cleared ruins after 1945 and rebuilt under different planning systems in East and West. Later reconstruction added another layer.\"}},{\"@type\":\"Question\",\"name\":\"Is Mehringplatz the former Belle-Alliance-Platz?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Yes. The earlier Rondell was renamed Belle-Alliance-Platz in 1815 and became Mehringplatz just after the Second World War. The present pedestrian square preserves the circular idea and central Peace Column, but its buildings and dimensions come mainly from the postwar redesign.\"}},{\"@type\":\"Question\",\"name\":\"How do you compare an old Berlin photograph with the street today?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Start with the documented viewpoint and one fixed anchor. Then compare road directions, the shape of the public space and gaps in the building line. Do not assume two photographs share the same angle or lens, and check whether a monument was rebuilt or moved.\"}}]}",
+          "custom": true,
+          "disabled": false
+        }
+      ],
+      "settings": {
+        "preventAutoRedirect": false,
+        "keywords": [
+          {
+            "term": "Berlin then and now",
+            "isMain": true
+          },
+          {
+            "term": "old Berlin",
+            "isMain": false
+          },
+          {
+            "term": "Mehringplatz",
+            "isMain": false
+          },
+          {
+            "term": "Belle-Alliance-Platz",
+            "isMain": false
+          },
+          {
+            "term": "Berlin historical photos",
+            "isMain": false
+          }
+        ]
+      }
+    },
+    "slugs": [],
+    "createdDate": "2026-07-17T09:02:07.079Z",
+    "seoSlug": "berlin-then-and-now",
+    "media": {
+      "wixMedia": {
+        "image": {
+          "id": "5a08a3_dea26d70fd4c43e5afa6a660f2fdeea8~mv2.jpg",
+          "url": "https://static.wixstatic.com/media/5a08a3_dea26d70fd4c43e5afa6a660f2fdeea8~mv2.jpg",
+          "height": 1276,
+          "width": 1800,
+          "altText": "A colour photochrom looking through Hallesches Tor toward Belle-Alliance-Platz around 1900",
+          "filename": "circa-1900-belle-alliance-platz.jpg"
+        }
+      },
+      "displayed": true,
+      "custom": false,
+      "altText": "A colour photochrom looking through Hallesches Tor toward Belle-Alliance-Platz around 1900"
+    },
+    "translations": []
+  }
+}
