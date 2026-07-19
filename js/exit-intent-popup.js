@@ -12,13 +12,15 @@
     'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id',
     'fbclid', 'fbc', 'fbp', 'gclid', 'gbraid', 'wbraid'
   ];
-  var HERO_IMAGE_URL = getImageUrl('hero');
+  var HERO_IMAGE_AVIF_560 = getAssetUrl('exit-popup/assets/tour-museum-island-560.avif');
+  var HERO_IMAGE_AVIF_1120 = getAssetUrl('exit-popup/assets/tour-museum-island-1120.avif');
+  var HERO_IMAGE_WEBP_560 = getAssetUrl('exit-popup/assets/tour-museum-island-560.webp');
+  var HERO_IMAGE_WEBP_1120 = getAssetUrl('exit-popup/assets/tour-museum-island-1120.webp');
   var SESSION_KEY = 'bw-exit-intent-triggered';
   var DESKTOP_MIN_WIDTH = 1024;
   var STYLE_ID = 'bw-exit-intent-styles';
   var OVERLAY_ID = 'bw-exit-intent-popup';
   var DWELL_TIME_MS = isPreviewForced() ? 500 : 30000;
-  var NEXT_TOUR_SLOT_URL = resolveAdjacentScriptUrl('next-tour-slot.js');
   var DEFAULT_START_LABELS = ['11:30'];
   var SUMMER_START_LABELS = ['11:30', '15:30'];
   var SAME_DAY_CUTOFF_LEAD_MINUTES = 180;
@@ -31,25 +33,16 @@
   var popupShown = false;
   var currentStep = 1;
   var closeTracked = false;
-  var nextTourSlotRequested = false;
+  var previousFocus = null;
   var sentEvents = {};
 
-  function resolveAdjacentScriptUrl(fileName) {
+  function getAssetUrl(path) {
     try {
       if (document.currentScript && document.currentScript.src) {
-        return new URL(fileName, document.currentScript.src).toString();
+        return new URL('../' + path, document.currentScript.src).toString();
       }
     } catch (err) {}
-    return 'https://fenerszymanski.github.io/berlinwalk-widgets/js/' + fileName;
-  }
-
-  function getImageUrl(type) {
-    var file = 'berlin-trip-planner-hero.jpg';
-
-    if (/^(localhost|127\.0\.0\.1)$/.test(window.location.hostname)) {
-      return 'ultimate-berlin-trip-planner/assets/' + file;
-    }
-    return 'https://fenerszymanski.github.io/berlinwalk-widgets/ultimate-berlin-trip-planner/assets/' + file;
+    return 'https://fenerszymanski.github.io/berlinwalk-widgets/' + path;
   }
 
   function isPreviewForced() {
@@ -346,16 +339,6 @@
     return isDesktop() && !isExcludedPage() && !alreadyShown;
   }
 
-  function ensureNextTourSlotHelper() {
-    if (typeof window.bwNextTourSlot === 'function') return;
-    if (nextTourSlotRequested) return;
-    nextTourSlotRequested = true;
-    var script = document.createElement('script');
-    script.src = NEXT_TOUR_SLOT_URL;
-    script.async = true;
-    document.head.appendChild(script);
-  }
-
   function eventStorageKey(name) {
     return EVENT_SENT_PREFIX + name;
   }
@@ -528,17 +511,11 @@
   function slotsLabelFor(labels) {
     if (!labels.length) return '';
     if (labels.length === 1) return labels[0];
-    return labels[0] + ' and ' + labels[1];
+    return labels[0] + ' + ' + labels[1];
   }
 
   function nextTourLine() {
     try {
-      if (typeof window.bwNextTourSlot === 'function') {
-        var slot = window.bwNextTourSlot();
-        if (slot && slot.relativeLabel && slot.slotsLabel) {
-          return 'Next walk' + (slot.slotCount > 1 ? 's' : '') + ': ' + slot.relativeLabel + ' at ' + slot.slotsLabel + '. Free, tip-based.';
-        }
-      }
       var now = new Date();
       var today = berlinParts(now);
       var tomorrow = berlinParts(new Date(now.getTime() + DAY_MS));
@@ -566,7 +543,7 @@
       var relativeLabel = target.weekdayLabel;
       if (target.dateKey === today.dateKey) relativeLabel = 'Today (' + target.weekdayShort + ')';
       else if (target.dateKey === tomorrow.dateKey) relativeLabel = 'Tomorrow (' + target.weekdayShort + ')';
-      return 'Next walk' + (labels.length > 1 ? 's' : '') + ': ' + relativeLabel + ' at ' + slotsLabel + '. Free, tip-based.';
+      return 'Next: ' + relativeLabel + ' at ' + slotsLabel;
     } catch (err) {
       return '';
     }
@@ -578,31 +555,31 @@
     var style = document.createElement('style');
     style.id = STYLE_ID;
     style.textContent = [
-      '@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&display=swap");',
       '.bw-exit-lock{overflow:hidden!important;}',
-      '.bw-exit-overlay{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;padding:28px;background:rgba(9,18,10,.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-family:Montserrat,Arial,sans-serif;color:#FAFAF5;opacity:0;pointer-events:none;transition:opacity .22s ease;}',
+      '.bw-exit-overlay{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(9,18,10,.48);font-family:Montserrat,Arial,sans-serif;color:#212121;opacity:0;pointer-events:none;transition:opacity .16s ease;}',
       '.bw-exit-overlay.bw-exit-visible{opacity:1;pointer-events:auto;}',
-      '.bw-exit-card{position:relative;width:min(560px,100%);border-radius:8px;border:1px solid rgba(255,230,0,.24);background:rgba(27,94,32,.96);box-shadow:0 30px 80px rgba(0,0,0,.42);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);overflow:hidden;transform:translateY(14px) scale(.98);transition:transform .22s ease;}',
+      '.bw-exit-card{position:relative;width:min(520px,100%);border-radius:12px;border:1px solid rgba(18,61,24,.14);background:#FAFAF5;box-shadow:0 20px 54px rgba(8,24,10,.28);overflow:hidden;transform:translateY(10px);transition:transform .16s ease;}',
       '.bw-exit-overlay.bw-exit-visible .bw-exit-card{transform:translateY(0) scale(1);}',
-      '.bw-exit-card:before{content:"";position:absolute;inset:0 0 auto;height:5px;background:linear-gradient(90deg,#FFE600,#7CB342,#FAFAF5);}',
-      '.bw-exit-media{position:relative;aspect-ratio:16/7;min-height:210px;overflow:hidden;background:#123d16;}',
+      '.bw-exit-media{position:relative;aspect-ratio:7/3;overflow:hidden;background:#123d16;}',
+      '.bw-exit-media picture{display:block;width:100%;height:100%;}',
       '.bw-exit-media img{width:100%;height:100%;display:block;object-fit:cover;}',
-      '.bw-exit-media:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,20,9,0) 28%,rgba(8,20,9,.42) 100%);}',
-      '.bw-exit-badge{position:absolute;left:22px;bottom:18px;z-index:2;max-width:calc(100% - 44px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border-radius:999px;background:rgba(27,94,32,.88);color:#FFE600;border:1px solid rgba(255,230,0,.32);padding:8px 12px;font-size:11px;font-weight:900;letter-spacing:1.3px;text-transform:uppercase;box-shadow:0 10px 24px rgba(0,0,0,.24);}',
-      '.bw-exit-inner{position:relative;padding:28px 38px 34px;text-align:left;}',
-      '.bw-exit-close{position:absolute;top:14px;right:14px;width:36px;height:36px;border:0;border-radius:50%;background:rgba(250,250,245,.1);color:#FAFAF5;font:800 24px/1 Arial,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;transition:background-color .18s ease,transform .18s ease;}',
-      '.bw-exit-close:hover,.bw-exit-close:focus-visible{background:rgba(250,250,245,.18);transform:rotate(90deg);outline:2px solid rgba(255,230,0,.7);outline-offset:2px;}',
+      '.bw-exit-media:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,20,9,0) 42%,rgba(8,20,9,.32) 100%);}',
+      '.bw-exit-badge{position:absolute;left:18px;bottom:16px;z-index:2;max-width:calc(100% - 76px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border-radius:999px;background:#FFE600;color:#123D18;border:1px solid rgba(18,61,24,.12);padding:7px 11px;font-size:10px;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;box-shadow:0 5px 16px rgba(0,0,0,.18);}',
+      '.bw-exit-inner{position:relative;padding:24px 28px 28px;text-align:left;}',
+      '.bw-exit-close{position:absolute;top:12px;right:12px;z-index:3;width:44px;height:44px;border:1px solid rgba(255,255,255,.24);border-radius:50%;background:rgba(18,61,24,.9);color:#FFFFFF;font:800 24px/1 Arial,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;transition:background-color .15s ease,transform .15s ease;}',
+      '.bw-exit-close:hover,.bw-exit-close:focus-visible{background:#1B5E20;transform:scale(1.04);outline:3px solid #FFE600;outline-offset:2px;}',
       '.bw-exit-step{display:none;}',
-      '.bw-exit-step.bw-exit-active{display:block;animation:bwExitIn .18s ease both;}',
-      '@keyframes bwExitIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}',
-      '.bw-exit-kicker{margin:0 0 12px;color:#FFE600;font-size:11px;font-weight:900;letter-spacing:2.1px;text-transform:uppercase;}',
-      '.bw-exit-title{margin:0 44px 12px 0;color:#FFFFFF;font-size:34px;line-height:1.05;font-weight:900;letter-spacing:0;}',
-      '.bw-exit-next{margin:0 0 14px;color:#C5E1A5;font-size:14px;font-weight:800;line-height:1.4;}',
-      '.bw-exit-copy{margin:0 0 24px;color:#FAFAF5;font-size:15px;line-height:1.55;font-weight:500;max-width:39em;}',
+      '.bw-exit-step.bw-exit-active{display:block;animation:bwExitIn .16s ease both;}',
+      '@keyframes bwExitIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}',
+      '.bw-exit-title{margin:0 0 12px;color:#123D18;font-size:30px;line-height:1.08;font-weight:900;letter-spacing:-.3px;}',
+      '.bw-exit-next{margin:0 0 12px;border-left:4px solid #FFE600;padding:3px 0 3px 10px;color:#1B5E20;font-size:14px;font-weight:900;line-height:1.35;}',
+      '.bw-exit-copy{margin:0 0 20px;color:#445246;font-size:14px;line-height:1.5;font-weight:600;max-width:38em;}',
       '.bw-exit-actions{display:grid;gap:12px;}',
       '.bw-exit-primary{font-family:Montserrat,Arial,sans-serif;cursor:pointer;text-decoration:none;}',
-      '.bw-exit-primary{border:0;border-radius:8px;background:#FFE600;color:#1B5E20;font-size:15px;font-weight:900;line-height:1.2;text-align:center;padding:16px 20px;box-shadow:0 10px 24px rgba(255,230,0,.18);transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease;}',
-      '.bw-exit-primary:hover,.bw-exit-primary:focus-visible{background:#fff066;transform:translateY(-1px);box-shadow:0 14px 28px rgba(255,230,0,.26);outline:0;}',
+      '.bw-exit-primary{border:0;border-radius:8px;background:#FFE600;color:#123D18;font-size:15px;font-weight:900;line-height:1.2;text-align:center;padding:15px 20px;box-shadow:none;transition:transform .15s ease,background-color .15s ease;}',
+      '.bw-exit-primary:visited{color:#123D18;}',
+      '.bw-exit-primary:hover,.bw-exit-primary:focus-visible{background:#fff066;color:#123D18;transform:translateY(-1px);outline:3px solid rgba(27,94,32,.22);outline-offset:2px;}',
+      '@media (max-width:620px){.bw-exit-overlay{padding:14px;}.bw-exit-card{max-height:calc(100svh - 28px);overflow:auto;}.bw-exit-inner{padding:20px 20px 22px;}.bw-exit-title{font-size:27px;}.bw-exit-copy{font-size:13px;}}',
       '@media (prefers-reduced-motion:reduce){.bw-exit-overlay,.bw-exit-card,.bw-exit-step,.bw-exit-close,.bw-exit-primary{transition:none!important;animation:none!important;}}'
     ].join('');
     document.head.appendChild(style);
@@ -623,6 +600,8 @@
     document.removeEventListener('keydown', handleKeydown);
     setTimeout(function () {
       if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+      if (previousFocus && previousFocus.isConnected && typeof previousFocus.focus === 'function') previousFocus.focus();
+      previousFocus = null;
     }, 240);
   }
 
@@ -657,6 +636,7 @@
     injectStyles();
     var nextLine = nextTourLine();
     var booking = bookingDestination();
+    previousFocus = document.activeElement && document.activeElement !== document.body ? document.activeElement : null;
 
     var overlay = document.createElement('div');
     overlay.id = OVERLAY_ID;
@@ -665,17 +645,20 @@
       '<div class="bw-exit-card" role="dialog" aria-modal="true" aria-labelledby="bw-exit-title">',
       '<button class="bw-exit-close" type="button" aria-label="Close" data-bw-exit-close>&times;</button>',
       '<div class="bw-exit-media">',
-        '<img src="' + HERO_IMAGE_URL + '" alt="Berlin Cathedral illustration" width="720" height="404">',
-        '<span class="bw-exit-badge">Berlin Walking Tour</span>',
+        '<picture>',
+          '<source type="image/avif" srcset="' + HERO_IMAGE_AVIF_560 + ' 1x, ' + HERO_IMAGE_AVIF_1120 + ' 2x">',
+          '<source type="image/webp" srcset="' + HERO_IMAGE_WEBP_560 + ' 1x, ' + HERO_IMAGE_WEBP_1120 + ' 2x">',
+          '<img src="' + HERO_IMAGE_WEBP_560 + '" srcset="' + HERO_IMAGE_WEBP_560 + ' 1x, ' + HERO_IMAGE_WEBP_1120 + ' 2x" alt="Yusuf guiding a BerlinWalk group on Museum Island" width="560" height="240">',
+        '</picture>',
+        '<span class="bw-exit-badge">Free Berlin walking tour</span>',
       '</div>',
       '<div class="bw-exit-inner">',
       '<section class="bw-exit-step bw-exit-active" data-bw-exit-step="1">',
-      '<p class="bw-exit-kicker">Free, tip-based</p>',
-      '<h2 class="bw-exit-title" id="bw-exit-title">Before you leave, book your Berlin walk.</h2>',
+      '<h2 class="bw-exit-title" id="bw-exit-title">Give me 2 hours. I\'ll make Berlin make sense.</h2>',
       (nextLine ? '<p class="bw-exit-next">' + nextLine + '</p>' : ''),
-      '<p class="bw-exit-copy">Yusuf here! If you want the city to make sense early in your trip, reserve a free spot on my Berlin walk. No upfront payment, tip-based at the end, about 2 hours.</p>',
+      '<p class="bw-exit-copy">Meet me at the World Clock. Reserving is free, and you tip at the end.</p>',
       '<div class="bw-exit-actions">',
-      '<a class="bw-exit-primary" href="' + booking.href + '" data-bw-exit-book data-bw-exit-attribution="' + booking.attributionMode + '">Book Walking Tour</a>',
+      '<a class="bw-exit-primary" href="' + booking.href + '" data-bw-exit-book data-bw-exit-attribution="' + booking.attributionMode + '">Reserve a free spot</a>',
       '</div>',
       '</section>',
       '</div>',
@@ -766,7 +749,6 @@
 
   function boot() {
     installConsentListeners();
-    ensureNextTourSlotHelper();
     window.setTimeout(function () {
       dwellReady = true;
       if (isPreviewForced()) showPopup();

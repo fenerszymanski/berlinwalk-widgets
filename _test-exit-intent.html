@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>BerlinWalk Exit Intent Popup Test</title>
-  <link rel="stylesheet" href="css/brand.css">
   <style>
     :root {
       --green: #1B5E20;
@@ -67,7 +66,7 @@
 
     .test-panel {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 16px;
       margin-top: 34px;
     }
@@ -149,7 +148,7 @@
       <div>
         <p class="test-kicker">Local preview</p>
         <h1>Exit intent popup test page</h1>
-        <p class="test-lead">This page loads the production exit-intent script. On desktop width, wait 30 seconds and move the cursor above the viewport to trigger the popup once per session. Add <strong>?forceExitPreview=1</strong> on localhost for a fast visual preview in a narrow browser panel.</p>
+        <p class="test-lead">This page loads the production exit-intent script. On desktop width, wait 30 seconds and move the cursor above the viewport to trigger the popup once per session. Add <strong>?forceExitPreview=1</strong> on localhost for a fast visual preview of the lightweight real-tour-photo version.</p>
         <button class="test-button" type="button" id="clear-session">Clear popup session flag</button>
         <button class="test-button test-button-secondary" type="button" id="simulate-exit">Simulate top exit</button>
         <div class="test-panel" aria-label="Expected behavior">
@@ -165,6 +164,10 @@
             <strong>One per session</strong>
             <span>After it opens once, sessionStorage prevents repeats.</span>
           </div>
+          <div class="test-card">
+            <strong>Lightweight assets</strong>
+            <span>The popup uses local AVIF/WebP tour photos, the site font stack and no backdrop blur or scheduling helper request.</span>
+          </div>
         </div>
       </div>
     </section>
@@ -172,7 +175,7 @@
     <section class="test-section">
       <h2>Dummy page content</h2>
       <p>Scroll a little, read for half a minute, then move the pointer out through the top edge of the browser window. The production script injects its own dialog only after the exit-intent signal passes all page, device, and session checks.</p>
-      <p>The CTA points to the focused BerlinWalk sales landing page, so local checks should verify that link and the close behavior.</p>
+      <p>The CTA still points to the focused BerlinWalk sales landing page. Local checks should also verify the Museum Island tour photo, dark text on the yellow button, close behavior and the dynamic next-tour line.</p>
     </section>
   </main>
 

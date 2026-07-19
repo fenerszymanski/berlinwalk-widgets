@@ -5,6 +5,32 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 
 const SOURCE = fs.readFileSync(new URL('../js/exit-intent-popup.js', import.meta.url), 'utf8');
+const ASSETS = [
+  ['tour-museum-island-560.avif', 25 * 1024],
+  ['tour-museum-island-560.webp', 35 * 1024],
+  ['tour-museum-island-1120.avif', 60 * 1024],
+  ['tour-museum-island-1120.webp', 100 * 1024],
+];
+
+{
+  assert.match(SOURCE, /Give me 2 hours\. I\\'ll make Berlin make sense\./);
+  assert.match(SOURCE, /Meet me at the World Clock\. Reserving is free, and you tip at the end\./);
+  assert.match(SOURCE, />Reserve a free spot<\/a>/);
+  assert.match(SOURCE, /<picture>/);
+  assert.match(SOURCE, /type="image\/avif"/);
+  assert.match(SOURCE, /type="image\/webp"/);
+  assert.match(SOURCE, /alt="Yusuf guiding a BerlinWalk group on Museum Island"/);
+  assert.equal(SOURCE.includes('fonts.googleapis.com'), false, 'popup must not request Google Fonts');
+  assert.equal(SOURCE.includes('backdrop-filter'), false, 'popup must not use GPU-heavy backdrop blur');
+  assert.equal(SOURCE.includes('next-tour-slot.js'), false, 'popup must not request a second scheduling script');
+
+  for (const [file, maximumBytes] of ASSETS) {
+    const asset = new URL(`../exit-popup/assets/${file}`, import.meta.url);
+    const stat = fs.statSync(asset);
+    assert.ok(stat.size > 0, `${file} must not be empty`);
+    assert.ok(stat.size <= maximumBytes, `${file} must stay under ${maximumBytes} bytes`);
+  }
+}
 
 function storage(initial = {}) {
   const values = new Map(Object.entries(initial));
