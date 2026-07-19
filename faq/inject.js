@@ -231,7 +231,8 @@
   "do-you-need-a-car-in-berlin": "do-you-need-a-car-in-berlin",
   "smoking-in-berlin": "smoking-in-berlin",
   "berlin-emergency-numbers": "berlin-emergency-numbers",
-  "is-berlin-walkable": "is-berlin-walkable"
+  "is-berlin-walkable": "is-berlin-walkable",
+  "berlin-ubahn-etiquette": "berlin-ubahn-etiquette"
 };
 
   var SCHEMAS = {
@@ -11365,6 +11366,68 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "For the central sights, often not for a half day. But a single AB ticket or a day ticket earns its place for the longer hops, like the airport, the East Side Gallery, Charlottenburg or the summer lakes, and for tired legs at the end of a long day. The smart plan is to walk the connected core and ride the gaps."
+        }
+      }
+    ]
+  },
+  "berlin-ubahn-etiquette": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What are the unwritten rules of the Berlin U-Bahn?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Let people off before you board and wait at the sides of the doors, not in the middle. Stand on the right of the escalator and leave the left free for walking. Press the door button when it lights up, keep calls and music quiet, leave priority seats for those who need them, and always carry a valid, validated ticket. None of this is posted on a sign, but locals follow it without thinking."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do Berlin U-Bahn doors open automatically?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Often no. On many U-Bahn and S-Bahn trains you have to open the door yourself by pressing the illuminated button or lifting the handle. The button lights up once the train releases the doors at a stop; press it then. If you stand and wait for the door to slide open on its own, you can watch your stop go by."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which side of the escalator do you stand on in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Stand on the right, single file, and leave the left side clear for people walking up or down. Germans call it \"rechts stehen, links gehen\". At busy, deep stations like Alexanderplatz and Friedrichstraße people take it seriously, and blocking the left lane with a suitcase or standing two-abreast earns you annoyed looks."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you eat and drink on the Berlin U-Bahn?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "There is no formal ban on eating on the BVG, so a pretzel, a coffee or a quick snack is fine. What locals dislike is hot, greasy or strong-smelling food, like an unwrapped döner, in a packed carriage. Alcohol is technically allowed on the U-Bahn and S-Bahn but is not always welcome; a quiet beer heading out at night reads very differently from a loud can at rush hour."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I take a bike on the U-Bahn in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, but every bike needs its own bike ticket in addition to your normal ticket, and you board at the door marked with a bike symbol, where about two bikes fit per area. Bikes are not allowed during weekday rush hours, roughly 6–9am and 2–5pm. A fully folded folding bike counts as hand luggage and travels free."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I really need to validate my ticket in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Berlin U-Bahn and S-Bahn platforms are open with no barriers, but that does not mean tickets go unchecked. Plain-clothes inspectors board trains without warning, and being caught without a valid ticket, or with an unvalidated one that needed stamping, means a 60 euro fine. Buy and validate before you ride."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are Berliners rude on public transport?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not really; they are just quiet and direct. A Berlin carriage is calm by default, so loud phone calls, music on speaker or blocking the doors stands out. Follow the basics here and you will blend in fine. If you want a friendlier read on the local manner, most of it is honesty rather than rudeness."
         }
       }
     ]

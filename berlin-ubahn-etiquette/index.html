@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Berlin U-Bahn Etiquette Cheat Sheet: The Unwritten Rules</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='32' r='20' fill='%23FFE600'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
+    --yellow:#FFE600; --amber:#F0A500; --red:#E63946; --ink:#1c2a1c; --panel:#ffffff;
+    --bone:#f4f9ec; --line:#e3edd6; --stone:#6d7b66; --shadow:0 10px 30px rgba(18,61,24,.14);
+    --do:#2e7d32; --dont:#c62828;
+  }
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}
+  html,body{margin:0}
+  body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .bx{max-width:940px;margin:0 auto;padding:4px}
+  .card{background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+
+  .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:18px 22px 16px}
+  .head .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:600;margin:0 0 6px}
+  .head h2{margin:0;font-size:21px;font-weight:800;letter-spacing:-.01em}
+  .head p{margin:7px 0 0;font-size:13px;color:#e7f2e3;max-width:680px}
+
+  .filterbar{padding:14px 16px 4px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .chip{border:1.5px solid var(--line);background:var(--bone);color:var(--green-deep);font-family:inherit;font-weight:700;font-size:12.5px;
+    padding:7px 13px;border-radius:999px;cursor:pointer;transition:all .12s ease;line-height:1;display:inline-flex;align-items:center;gap:6px}
+  .chip:hover{border-color:var(--lime)}
+  .chip[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+  .chip .ic{font-size:14px}
+
+  .count{padding:6px 16px 0;font-size:12px;color:var(--stone);font-weight:600}
+
+  .grid{padding:12px 16px 6px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media (max-width:640px){ .grid{grid-template-columns:1fr} }
+
+  .rule{border:1px solid var(--line);border-radius:15px;background:#fff;overflow:hidden;display:flex;flex-direction:column;transition:transform .1s ease, box-shadow .1s ease}
+  .rule:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(18,61,24,.10)}
+  .rule .top{display:flex;gap:10px;align-items:flex-start;padding:13px 14px 6px}
+  .rule .emoji{font-size:22px;line-height:1;flex:none;width:38px;height:38px;border-radius:10px;background:var(--bone);display:flex;align-items:center;justify-content:center;border:1px solid var(--line)}
+  .rule h3{margin:0;font-size:15px;font-weight:800;color:var(--green-deep);letter-spacing:-.01em}
+  .rule .tag{display:inline-block;margin-top:3px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);font-weight:600}
+
+  .lines{padding:2px 14px 4px}
+  .ln{display:flex;gap:9px;align-items:flex-start;padding:6px 0;font-size:13.5px}
+  .ln .badge{flex:none;font-weight:800;font-size:10.5px;letter-spacing:.06em;padding:3px 7px;border-radius:6px;margin-top:1px;line-height:1.1}
+  .ln.do .badge{background:#e4f2e4;color:var(--do)}
+  .ln.dont .badge{background:#fbe4e4;color:var(--dont)}
+  .ln .txt{color:#243422}
+  .ln .txt b{color:var(--green-deep)}
+
+  .why{margin:6px 14px 14px;padding:9px 12px;background:var(--bone);border-left:3px solid var(--yellow);border-radius:0 10px 10px 0;font-size:12.5px;color:#3a4a37}
+  .why .de{font-family:'IBM Plex Mono',monospace;font-weight:700;color:var(--green-deep)}
+
+  .foot{margin:6px 16px 4px;padding:14px 16px;background:linear-gradient(135deg,#f3f9ec,#eaf4dd);border:1px solid var(--line);border-radius:14px}
+  .foot p{margin:0;font-size:13px;color:#31402d}
+  .foot a{color:var(--green);font-weight:700;text-decoration:none;border-bottom:2px solid var(--yellow)}
+  .empty{padding:26px 16px;text-align:center;color:var(--stone);font-size:13.5px}
+</style>
+</head>
+<body>
+<div class="bx">
+  <div class="card">
+    <div class="head">
+      <p class="eyebrow">BerlinWalk.com • Tourist Tips</p>
+      <h2>Berlin U-Bahn Etiquette Cheat Sheet</h2>
+      <p>The unwritten rules locals follow without thinking. Filter by situation, and see the one thing to do and the one thing that gets you a Berlin glare.</p>
+    </div>
+
+    <div class="filterbar" id="filters" role="tablist" aria-label="Filter etiquette rules by situation"></div>
+    <div class="count" id="count"></div>
+
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty" hidden>No rules in that group.</div>
+
+    <div class="foot">
+      <p>Ride the connected centre like a local, then meet me above ground. My <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based">free walking tour</a> starts a short ride from most hotels at Alexanderplatz, one of the busiest U-Bahn hubs in the city.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var CATS = [
+    { key:'all',       label:'All rules',       ic:'🚈' },
+    { key:'escalator', label:'Escalators',      ic:'↗' },
+    { key:'boarding',  label:'Boarding & doors',ic:'🚪' },
+    { key:'seats',     label:'Seats & space',   ic:'💺' },
+    { key:'sound',     label:'Sound',           ic:'🔇' },
+    { key:'food',      label:'Food & drink',    ic:'🥨' },
+    { key:'bikes',     label:'Bikes & bags',    ic:'🚲' },
+    { key:'tickets',   label:'Tickets',         ic:'🎫' }
+  ];
+
+  var RULES = [
+    { cat:'escalator', emoji:'↗', title:'Standing on the escalator', tag:'rechts stehen, links gehen',
+      do:'Stand on the <b>right</b>, single file, and leave the left lane clear.',
+      dont:'Stand two-abreast or plant yourself on the left with your suitcase.',
+      why:'At deep stations like Alexanderplatz and Friedrichstraße the left side is a walking lane. Block it and you will hear the sigh. <span class="de">Rechts stehen, links gehen.</span>' },
+
+    { cat:'boarding', emoji:'🚪', title:'Getting on the train', tag:'einsteigen lassen',
+      do:'Step to the <b>side</b> of the doors and let everyone off first.',
+      dont:'Bunch up in the doorway and push in before it clears.',
+      why:'Berliners wait at the edges of the door, not in the middle. Letting people out first is the single most visible tourist tell. <span class="de">Einsteigen lassen.</span>' },
+
+    { cat:'boarding', emoji:'🟢', title:'Opening the door', tag:'press the button',
+      do:'Press the <b>lit button</b> (or lift the handle) the moment it glows.',
+      dont:'Wait for the door to slide open on its own and miss your stop.',
+      why:'Many U-Bahn and S-Bahn doors only open when a passenger presses. The button lights up once the train releases it, then it is yours to push.' },
+
+    { cat:'boarding', emoji:'🎒', title:'Riding a packed carriage', tag:'move through',
+      do:'Move into the <b>middle</b> of the car and take your backpack off.',
+      dont:'Cluster by the doors with a bag on your back blocking three people.',
+      why:'The U8 and U2 fill fast at rush hour. A backpack on your back is a backpack in someone else’s ribs; hold it low by your feet.' },
+
+    { cat:'seats', emoji:'💺', title:'Priority seats', tag:'reserved seating',
+      do:'Leave the <b>marked seats</b> free for the elderly, disabled, pregnant, or people with small children.',
+      dont:'Sprawl across two seats or leave your bag on the seat beside you.',
+      why:'The little icons above certain seats are not decoration. If someone who needs it boards, get up before you are asked.' },
+
+    { cat:'sound', emoji:'🔇', title:'Phone calls and music', tag:'keep it low',
+      do:'Keep calls <b>short and quiet</b>, and use headphones for anything with sound.',
+      dont:'Play video, music, or a speakerphone call out loud for the whole car.',
+      why:'A Berlin carriage is quiet by default. Nobody will say anything; they will just look, and you will feel it.' },
+
+    { cat:'food', emoji:'🥨', title:'Eating on board', tag:'the smell rule',
+      do:'A pretzel, a coffee, or a quick snack is <b>completely fine</b>.',
+      dont:'Unwrap a hot döner or a greasy, strong-smelling meal in a full carriage.',
+      why:'There is no formal food ban on the BVG, but the smell rule is real. Save the döner for a bench on the platform.' },
+
+    { cat:'food', emoji:'🍺', title:'Drinking on the train', tag:'legal, not always welcome',
+      do:'Know that a drink is <b>technically allowed</b> on the U-Bahn and S-Bahn.',
+      dont:'Assume a can at rush hour reads the same as a late Friday beer.',
+      why:'A quiet beer heading out at night is normal Berlin. A loud round on a packed morning train is not. Read the carriage.' },
+
+    { cat:'bikes', emoji:'🚲', title:'Taking a bike on board', tag:'separate bike ticket',
+      do:'Buy a <b>separate bike ticket</b> and board at the door with the bike symbol.',
+      dont:'Bring a bike during weekday rush hours, roughly 6–9am and 2–5pm.',
+      why:'Only about two bikes fit per marked area, so space is tight when it is busy. A fully folded bike counts as luggage and rides free.' },
+
+    { cat:'seats', emoji:'🧳', title:'Suitcases and big bags', tag:'out of the aisle',
+      do:'Keep luggage <b>tight against you</b>, in the door bay or under your seat.',
+      dont:'Park a wheelie case in the middle of the aisle on the airport run.',
+      why:'The FEX and S-Bahn to the airport get busy with commuters too. Keep a clear walking path down the car.' },
+
+    { cat:'tickets', emoji:'🎫', title:'Your ticket', tag:'validate before you ride',
+      do:'Have a <b>valid, validated ticket</b> in hand before you step on.',
+      dont:'Assume open platforms with no barriers mean no checks.',
+      why:'Plain-clothes inspectors board without warning, and riding without a valid ticket costs a 60 euro fine. See the <a href="https://www.berlinwalk.com/post/berlin-u-bahn-fine">U-Bahn fine guide</a>.' }
+  ];
+
+  var current = 'all';
+  var filtersEl = document.getElementById('filters');
+  var gridEl = document.getElementById('grid');
+  var countEl = document.getElementById('count');
+  var emptyEl = document.getElementById('empty');
+
+  CATS.forEach(function(c){
+    var b = document.createElement('button');
+    b.className = 'chip';
+    b.type = 'button';
+    b.setAttribute('role','tab');
+    b.setAttribute('aria-pressed', c.key === current ? 'true' : 'false');
+    b.dataset.key = c.key;
+    b.innerHTML = '<span class="ic">'+c.ic+'</span>'+c.label;
+    b.addEventListener('click', function(){ setCat(c.key); });
+    filtersEl.appendChild(b);
+  });
+
+  function render(){
+    var list = current === 'all' ? RULES : RULES.filter(function(r){ return r.cat === current; });
+    gridEl.innerHTML = '';
+    if(!list.length){ emptyEl.hidden = false; countEl.textContent=''; return; }
+    emptyEl.hidden = true;
+    countEl.textContent = list.length + (list.length === 1 ? ' rule' : ' rules') + (current === 'all' ? ' that keep you off a local’s radar' : '');
+    list.forEach(function(r){
+      var el = document.createElement('div');
+      el.className = 'rule';
+      el.innerHTML =
+        '<div class="top"><div class="emoji">'+r.emoji+'</div>'+
+          '<div><h3>'+r.title+'</h3><span class="tag">'+r.tag+'</span></div></div>'+
+        '<div class="lines">'+
+          '<div class="ln do"><span class="badge">DO</span><span class="txt">'+r.do+'</span></div>'+
+          '<div class="ln dont"><span class="badge">DON’T</span><span class="txt">'+r.dont+'</span></div>'+
+        '</div>'+
+        '<div class="why">'+r.why+'</div>';
+      gridEl.appendChild(el);
+    });
+  }
+
+  function setCat(key){
+    current = key;
+    Array.prototype.forEach.call(filtersEl.children, function(b){
+      b.setAttribute('aria-pressed', b.dataset.key === key ? 'true' : 'false');
+    });
+    render();
+  }
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
