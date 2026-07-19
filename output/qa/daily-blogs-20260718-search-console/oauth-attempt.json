@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "compiledAt": "2026-07-18T11:43:40+02:00",
+  "property": "sc-domain:berlinwalk.com",
+  "operation": "URL Inspection API readback for the exact eight targets",
+  "scope": "https://www.googleapis.com/auth/webmasters.readonly",
+  "result": "invalid_grant",
+  "retried": false,
+  "fallback": "Existing authenticated Chrome Search Console session",
+  "secretsPrinted": false,
+  "piiStored": false
+}

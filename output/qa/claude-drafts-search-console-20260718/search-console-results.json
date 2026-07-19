@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "attemptedAt": "2026-07-18T21:20:00+02:00",
+  "property": "sc-domain:berlinwalk.com",
+  "source": "Google Search Console URL Inspection UI in an existing authenticated browser session",
+  "results": [
+    {
+      "url": "https://www.berlinwalk.com/post/berlin-emergency-numbers",
+      "inspection": "URL is not on Google",
+      "action": "quota_blocked",
+      "confirmation": "Quota exceeded",
+      "detail": "Search Console said the daily request quota had been exceeded and to try again tomorrow."
+    },
+    {
+      "url": "https://www.berlinwalk.com/tools/berlin-emergency-numbers",
+      "action": "not_attempted_due_quota"
+    },
+    {
+      "url": "https://www.berlinwalk.com/post/smoking-in-berlin",
+      "action": "not_attempted_due_quota"
+    },
+    {
+      "url": "https://www.berlinwalk.com/tools/berlin-smoking-rules",
+      "action": "not_attempted_due_quota"
+    },
+    {
+      "url": "https://www.berlinwalk.com/post/do-you-need-a-car-in-berlin",
+      "action": "not_attempted_due_quota"
+    },
+    {
+      "url": "https://www.berlinwalk.com/tools/do-you-need-a-car-in-berlin",
+      "action": "not_attempted_due_quota"
+    }
+  ],
+  "summary": {
+    "targets": 6,
+    "submitted": 0,
+    "alreadyIndexed": 0,
+    "quotaBlocked": 6,
+    "complete": false
+  },
+  "followUp": {
+    "automationId": "berlinwalk-3-blog-3-tool-search-console",
+    "scheduledFor": "2026-07-19T10:30:00+02:00"
+  },
+  "privacy": {
+    "accountEmailStored": false,
+    "profileStored": false,
+    "otpStored": false,
+    "secretStored": false
+  }
+}

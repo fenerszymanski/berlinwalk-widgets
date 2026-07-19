@@ -47,7 +47,7 @@ _Expect novelty beers alongside serious ones, with prices chalked up per 0.2, 0.
 
 This is the one people find when they search for "Oktoberfest Berlin", and it is worth knowing what it really is before you cross the city for it. The Berliner Herbstrummel is **an autumn funfair** on the Zentraler Festplatz at Kurt-Schumacher-Damm 207 in Reinickendorf: rides, sausage stands, claw machines, and a large Bavarian-style beer tent that gets marketed under the Oktoberfest name.
 
-- **Dates for 2026: Friday 25 September to Sunday 25 October**, confirmed by the fairground's own calendar.
+- **Dates for 2026: Friday 25 September to Sunday 25 October**, confirmed by the fairground's own calendar and the [city's event listing](https://www.berlin.de/en/events/6279065-2842498-berliner-herbst-rummel.en.html).
 - **Entry to the grounds is free.** The rides are not, and drinks in the tent are priced like a festival, not like a Späti.
 - **It is not on the U-Bahn.** You get there by bus M21 or X21 to the Zentraler Festplatz stop, which is a real journey from the centre. Budget a good 45 minutes each way from Mitte.
 - It is genuinely fun **if you want a funfair**. If you specifically want the Munich experience, you will be disappointed, and you will have spent an hour and a half on buses to find that out.

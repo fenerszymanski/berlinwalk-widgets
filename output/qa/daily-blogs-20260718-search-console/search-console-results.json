@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "completedAt": "2026-07-18T11:43:40+02:00",
+  "property": "sc-domain:berlinwalk.com",
+  "source": "Google Search Console URL Inspection UI in the existing authenticated Chrome session",
+  "apiReadback": "invalid_grant; not retried",
+  "sitemapFallbackUsed": false,
+  "results": [
+    {
+      "url": "https://www.berlinwalk.com/post/famous-movies-tv-shows-filmed-in-berlin",
+      "inspection": "URL is not on Google",
+      "action": "submitted",
+      "confirmation": "Indexing requested",
+      "queue": "URL was added to a priority crawl queue",
+      "evidenceAt": "2026-07-18T11:26:30+02:00",
+      "screenshot": "01-famous-movies-tv-shows-filmed-in-berlin-indexing-requested.jpg"
+    },
+    {
+      "url": "https://www.berlinwalk.com/tools/screen-mood-finder",
+      "inspection": "URL is not on Google",
+      "action": "submitted",
+      "confirmation": "Indexing requested",
+      "queue": "URL was added to a priority crawl queue",
+      "evidenceAt": "2026-07-18T11:28:14+02:00",
+      "screenshot": "02-screen-mood-finder-indexing-requested.jpg"
+    },
+    {
+      "url": "https://www.berlinwalk.com/post/do-you-need-a-visa-to-visit-berlin",
+      "inspection": "URL is not on Google",
+      "action": "submitted",
+      "confirmation": "Indexing requested",
+      "queue": "URL was added to a priority crawl queue",
+      "evidenceAt": "2026-07-18T11:29:39+02:00",
+      "screenshot": "03-do-you-need-a-visa-to-visit-berlin-indexing-requested.jpg"
+    },
+    {
+      "url": "https://www.berlinwalk.com/tools/berlin-entry-requirements",
+      "inspection": "URL is not on Google",
+      "action": "submitted",
+      "confirmation": "Indexing requested",
+      "queue": "URL was added to a priority crawl queue",
+      "evidenceAt": "2026-07-18T11:30:27+02:00",
+      "screenshot": "04-berlin-entry-requirements-indexing-requested.jpg"
+    },
+    {
+      "url": "https://www.berlinwalk.com/post/berlin-airports",
+      "inspection": "URL is on Google",
+      "pageIndexing": "Page is indexed",
+      "action": "already_indexed",
+      "note": "The initial request flow lost its local confirmation during a browser readback interruption. A fresh inspection found the URL indexed, so no second request was sent.",
+      "evidenceAt": "2026-07-18T11:43:23+02:00",
+      "screenshot": "05-berlin-airports-post-already-indexed.jpg"
+    },
+    {
+      "url": "https://www.berlinwalk.com/tools/berlin-airports",
+      "inspection": "URL is not on Google",
+      "action": "submitted",
+      "confirmation": "Indexing requested",
+      "queue": "URL was added to a priority crawl queue",
+      "evidenceAt": "2026-07-18T11:40:33+02:00",
+      "screenshot": "06-berlin-airports-tool-indexing-requested.jpg"
+    },
+    {
+      "url": "https://www.berlinwalk.com/post/halal-food-in-berlin",
+      "inspection": "URL is not on Google",
+      "action": "submitted",
+      "confirmation": "Indexing requested",
+      "queue": "URL was added to a priority crawl queue",
+      "evidenceAt": "2026-07-18T11:42:12+02:00",
+      "screenshot": "07-halal-food-in-berlin-post-indexing-requested.jpg"
+    },
+    {
+      "url": "https://www.berlinwalk.com/tools/halal-food-in-berlin",
+      "inspection": "URL is on Google",
+      "pageIndexing": "Page is indexed",
+      "action": "already_indexed",
+      "evidenceAt": "2026-07-18T11:42:43+02:00",
+      "screenshot": "08-halal-food-in-berlin-tool-already-indexed.jpg"
+    }
+  ],
+  "summary": {
+    "targets": 8,
+    "submitted": 6,
+    "alreadyIndexed": 2,
+    "blocked": 0,
+    "complete": true
+  },
+  "privacy": {
+    "accountEmailStored": false,
+    "profileStored": false,
+    "otpStored": false,
+    "secretStored": false
+  }
+}

@@ -25,11 +25,30 @@ Image Credits interactions, zero horizontal overflow and zero critical page or
 console errors. GitHub Pages serves the 230-post index with all four own-tool
 mappings (`Last-Modified: Sat, 18 Jul 2026 07:41:14 GMT`).
 
-## Search Console status
+## Search Console status - COMPLETE (2026-07-18)
 
-The eight post/tool URLs above still need URL Inspection -> Request indexing
-in `sc-domain:berlinwalk.com`. No request has been claimed or recorded yet:
-Chrome had no open window, and the browser-control safety rule requires Yusuf's
-explicit permission before opening one. Continue only after that permission,
-then replace this section with the per-URL result (`Indexing requested`, already
-indexed, quota, or login blocker).
+All eight exact URLs above passed a fresh live preflight before Search Console:
+HTTP 200, exact final URL, self-canonical, index/follow, meaningful public
+render, and membership in the current Wix sitemap chain. The local URL
+Inspection API returned `invalid_grant` once and was not retried. The existing
+authenticated Chrome session was then used for URL Inspection in
+`sc-domain:berlinwalk.com`.
+
+| Exact URL | Result |
+|---|---|
+| https://www.berlinwalk.com/post/famous-movies-tv-shows-filmed-in-berlin | `Indexing requested` / priority crawl queue |
+| https://www.berlinwalk.com/tools/screen-mood-finder | `Indexing requested` / priority crawl queue |
+| https://www.berlinwalk.com/post/do-you-need-a-visa-to-visit-berlin | `Indexing requested` / priority crawl queue |
+| https://www.berlinwalk.com/tools/berlin-entry-requirements | `Indexing requested` / priority crawl queue |
+| https://www.berlinwalk.com/post/berlin-airports | Already indexed: `URL is on Google` / `Page is indexed` |
+| https://www.berlinwalk.com/tools/berlin-airports | `Indexing requested` / priority crawl queue |
+| https://www.berlinwalk.com/post/halal-food-in-berlin | `Indexing requested` / priority crawl queue |
+| https://www.berlinwalk.com/tools/halal-food-in-berlin | Already indexed: `URL is on Google` / `Page is indexed` |
+
+Summary: `6 submitted`, `2 already indexed`, `0 blocked`. Sitemap fallback was
+not needed. The Berlin Airports post's first request flow lost its local UI
+confirmation during a controlled browser readback interruption; a fresh URL
+Inspection then showed it indexed, so no second request was sent.
+
+PII/secret-free JSON and cropped per-URL screenshots are under
+`output/qa/daily-blogs-20260718-search-console/`.

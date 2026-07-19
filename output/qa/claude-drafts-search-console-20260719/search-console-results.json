@@ -1,0 +1,123 @@
+{
+  "automationId": "berlinwalk-3-blog-3-tool-search-console",
+  "runAtEuropeBerlin": "2026-07-19T12:35:01+02:00",
+  "scope": "Exact six URLs from 18 July 2026 BerlinWalk blog/tool publication follow-up. Only Search Console Request indexing was allowed as an external mutation.",
+  "summary": {
+    "targets": 6,
+    "submitted": 1,
+    "alreadyIndexed": 5,
+    "quotaBlocked": 0,
+    "failed": 0
+  },
+  "targets": [
+    {
+      "url": "https://www.berlinwalk.com/post/berlin-emergency-numbers",
+      "status": "already_indexed",
+      "searchConsoleVisibleResult": [
+        "URL is on Google",
+        "Page is indexed"
+      ],
+      "action": "no_request_sent",
+      "publicCheck": {
+        "status": 200,
+        "finalUrl": "https://www.berlinwalk.com/post/berlin-emergency-numbers",
+        "canonical": "https://www.berlinwalk.com/post/berlin-emergency-numbers",
+        "robots": "follow, index, max-image-preview:large",
+        "xRobotsTag": null,
+        "eligible": true
+      }
+    },
+    {
+      "url": "https://www.berlinwalk.com/tools/berlin-emergency-numbers",
+      "status": "submitted",
+      "searchConsoleVisibleResult": [
+        "URL is not on Google",
+        "Page is not indexed: URL is unknown to Google",
+        "Indexing requested",
+        "URL was added to a priority crawl queue."
+      ],
+      "action": "request_indexing_sent_once",
+      "publicCheck": {
+        "status": 200,
+        "finalUrl": "https://www.berlinwalk.com/tools/berlin-emergency-numbers",
+        "canonical": "https://www.berlinwalk.com/tools/berlin-emergency-numbers",
+        "robots": "max-image-preview:large",
+        "xRobotsTag": null,
+        "eligible": true
+      }
+    },
+    {
+      "url": "https://www.berlinwalk.com/post/smoking-in-berlin",
+      "status": "already_indexed",
+      "searchConsoleVisibleResult": [
+        "URL is on Google",
+        "Page is indexed"
+      ],
+      "action": "no_request_sent",
+      "publicCheck": {
+        "status": 200,
+        "finalUrl": "https://www.berlinwalk.com/post/smoking-in-berlin",
+        "canonical": "https://www.berlinwalk.com/post/smoking-in-berlin",
+        "robots": "follow, index, max-image-preview:large",
+        "xRobotsTag": null,
+        "eligible": true
+      }
+    },
+    {
+      "url": "https://www.berlinwalk.com/tools/berlin-smoking-rules",
+      "status": "already_indexed",
+      "searchConsoleVisibleResult": [
+        "URL is on Google",
+        "Page is indexed"
+      ],
+      "action": "no_request_sent",
+      "publicCheck": {
+        "status": 200,
+        "finalUrl": "https://www.berlinwalk.com/tools/berlin-smoking-rules",
+        "canonical": "https://www.berlinwalk.com/tools/berlin-smoking-rules",
+        "robots": "max-image-preview:large",
+        "xRobotsTag": null,
+        "eligible": true
+      }
+    },
+    {
+      "url": "https://www.berlinwalk.com/post/do-you-need-a-car-in-berlin",
+      "status": "already_indexed",
+      "searchConsoleVisibleResult": [
+        "URL is on Google",
+        "Page is indexed"
+      ],
+      "action": "no_request_sent",
+      "publicCheck": {
+        "status": 200,
+        "finalUrl": "https://www.berlinwalk.com/post/do-you-need-a-car-in-berlin",
+        "canonical": "https://www.berlinwalk.com/post/do-you-need-a-car-in-berlin",
+        "robots": "follow, index, max-image-preview:large",
+        "xRobotsTag": null,
+        "eligible": true
+      }
+    },
+    {
+      "url": "https://www.berlinwalk.com/tools/do-you-need-a-car-in-berlin",
+      "status": "already_indexed",
+      "searchConsoleVisibleResult": [
+        "URL is on Google",
+        "Page is indexed"
+      ],
+      "action": "no_request_sent",
+      "publicCheck": {
+        "status": 200,
+        "finalUrl": "https://www.berlinwalk.com/tools/do-you-need-a-car-in-berlin",
+        "canonical": "https://www.berlinwalk.com/tools/do-you-need-a-car-in-berlin",
+        "robots": "max-image-preview:large",
+        "xRobotsTag": null,
+        "eligible": true
+      }
+    }
+  ],
+  "notes": [
+    "No CAPTCHA observed.",
+    "No quota block observed.",
+    "No Wix, GitHub, site content, ads, email, social, or Google settings changes were made."
+  ]
+}

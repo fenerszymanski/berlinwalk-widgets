@@ -7,15 +7,15 @@ _Museum Island and the TV Tower: two of the big central sights that sit within a
 
 ## Is Berlin walkable? The honest answer
 
-Yes, central Berlin is very walkable, and it is one of my favourite cities in Europe to explore on foot. The historic core around Mitte is flat, the streets are wide and straight, and the biggest sights sit within about a 25-minute walk of each other. On a dry day you can string the Reichstag, the Brandenburg Gate, Unter den Linden, Museum Island and Alexanderplatz into one easy line without touching a train.
+Yes, central Berlin is very walkable, and it is one of my favourite cities in Europe to explore on foot. The historic core around Mitte is flat, the streets are wide and straight, and the biggest sights sit within about a **25-minute walk** of each other. On a dry day you can string the Reichstag, the Brandenburg Gate, Unter den Linden, Museum Island and Alexanderplatz into one easy line without touching a train.
 
-The honest catch is scale. Berlin is enormous, more than eight times the size of Paris by area, so the sights that look neighbourly on a phone screen are surrounded by a huge city. The rule I give everyone is simple: walk inside a district, and take transit between districts. Get that split right and Berlin feels made for walking. Get it wrong, try to walk from Mitte out to Charlottenburg, and you will be tired and grumpy by lunch.
+The honest catch is scale. Berlin is enormous, more than eight times the size of Paris by area, so the sights that look neighbourly on a phone screen are surrounded by a huge city. The rule I give everyone is simple: **walk inside a district, and take transit between districts**. Get that split right and Berlin feels made for walking. Get it wrong, try to walk from Mitte out to Charlottenburg, and you will be tired and grumpy by lunch.
 
 {{quick-summary}}
 
 ## The central sights are closer than the map makes them look
 
-The thing most first-timers get wrong is overestimating the gaps between the headline sights. The tight central cluster is genuinely tiny. The Brandenburg Gate, the Reichstag and the Holocaust Memorial are all within about five minutes of each other, so if you ever catch yourself checking a train app to get between them, put the phone away and just walk.
+The thing most first-timers get wrong is overestimating the gaps between the headline sights. The tight central cluster is genuinely tiny. The Brandenburg Gate, the Reichstag and the Holocaust Memorial are all within about **five minutes** of each other, so if you ever catch yourself checking a train app to get between them, put the phone away and just walk.
 
 From the Brandenburg Gate, Potsdamer Platz is about a 15-minute walk through the edge of the Tiergarten, Gendarmenmarkt is around 16 minutes, and Museum Island is roughly 25 minutes straight down one boulevard. None of those need a ticket. I have watched plenty of visitors buy a fare, wait for a train, ride one stop and climb back up, when the walk would have been quicker and shown them the city in between.
 
@@ -24,7 +24,7 @@ _The Brandenburg Gate at the head of Unter den Linden. From here the Reichstag a
 
 ## The one walk to do on foot: Unter den Linden
 
-If you only walk one stretch in Berlin, make it Unter den Linden. This is the grand boulevard that runs from the Brandenburg Gate east to Museum Island, and covering it on foot is about 1.9 km, or roughly 25 minutes at an easy pace before you stop for anything. The walking is the point here, not a shortcut.
+If you only walk one stretch in Berlin, make it Unter den Linden. This is the grand boulevard that runs from the Brandenburg Gate east to Museum Island, and covering it on foot is about **1.9 km, or roughly 25 minutes** at an easy pace before you stop for anything. The walking is the point here, not a shortcut.
 
 Along the way you pass Bebelplatz, the Humboldt University, the State Opera and the German Historical Museum, and the street opens out onto the Spree and the [Museum Island](/post/is-museum-island-free-tickets-prices-and-what-to-actually-skip) cluster at the far end. There is no train that improves on this. My advice is to walk it slowly one way in the morning light, see everything in between, and only think about the tram or U-Bahn for the trip back when your legs have had enough.
 
@@ -33,7 +33,7 @@ _Unter den Linden is the walkable spine of central Berlin. Brandenburg Gate to M
 
 ## Where walking stops making sense
 
-Walking is the wrong tool the moment a route crosses the city rather than a district. The clearest example is the [East Side Gallery](/post/east-side-gallery-berlin-guide): from the Brandenburg Gate it is about 4.8 km, close to an hour on foot, and the honest move is to take the S-Bahn or U-Bahn towards Warschauer Straße and save your legs for the Wall itself. The same goes for Charlottenburg Palace, the Olympiastadion and any of the [day trips](/post/best-day-trips-from-berlin) out to Potsdam or the lakes.
+Walking is the wrong tool the moment a route crosses the city rather than a district. The clearest example is the [East Side Gallery](/post/east-side-gallery-berlin-guide): from the Brandenburg Gate it is about **4.8 km, close to an hour** on foot, and the honest move is to take the S-Bahn or U-Bahn towards Warschauer Straße and save your legs for the Wall itself. The same goes for Charlottenburg Palace, the Olympiastadion and any of the [day trips](/post/best-day-trips-from-berlin) out to Potsdam or the lakes.
 
 This is where a single AB ticket earns its place. Berlin's [public transport network](/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus) covers the whole city on one fare, the U-Bahn and trams run late, and the S-Bahn ring will loop you around the edge of the centre far faster than your feet. The tool below does the maths for you: pick where you are starting, and it shows how many minutes it really takes to walk to every other main sight, and where you are better off underground.
 
@@ -43,7 +43,7 @@ This is where a single AB ticket earns its place. Berlin's [public transport net
 
 One thing that genuinely helps here is that Berlin is famously flat. There are no hills to climb in the centre, so the walking is gentle and the distances are the only real effort. That is exactly why they sneak up on you. A day of stringing sights together on foot can quietly add up to 15 km, and cobbles around Museum Island and the rebuilt [old town](/post/nikolaiviertel-rebuilt-old-town) are hard on thin soles.
 
-Two small Berlin details save a lot of pain. First, wear comfortable, sturdy shoes: they matter far more here than any transport pass. Second, watch the red-paved strips beside the pavement, because those are cycle lanes and Berlin cyclists move fast and do not expect a tourist stepping backwards for a photo. Cross where the little [Ampelmann](/post/the-ampelmann-how-a-traffic-light-became-berlin-s-most-beloved-symbol) tells you, and you will fit right in.
+Two small Berlin details save a lot of pain. First, **wear comfortable, sturdy shoes**: they matter far more here than any transport pass. Second, watch the red-paved strips beside the pavement, because those are cycle lanes and Berlin cyclists move fast and do not expect a tourist stepping backwards for a photo. Cross where the little [Ampelmann](/post/the-ampelmann-how-a-traffic-light-became-berlin-s-most-beloved-symbol) tells you, and you will fit right in.
 
 ![People standing on a Berlin pavement waiting to cross the road at a set of traffic lights](blog-drafts/is-berlin-walkable/images/optimized/04-pedestrians-crossing.jpg)
 _Berlin is flat and easy underfoot, but the distances add up over a full day. Comfortable shoes matter more here than a car._
