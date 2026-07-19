@@ -187,13 +187,20 @@ const TOPICS = [
 // guides. Keep this curated because the /blog hero is the first editorial
 // signal visitors see before the Latest shelf.
 const HERO_SLUGS = {
-  lead: 'how-many-days-in-berlin',
+  lead: 'do-you-need-a-car-in-berlin',
   secondary: [
+    'berlin-emergency-numbers',
+    'berlin-airports',
+    'do-you-need-a-visa-to-visit-berlin',
+    'how-many-days-in-berlin',
+    'where-to-watch-2026-world-cup-in-berlin',
+    'smoking-in-berlin',
+    'halal-food-in-berlin',
+    'famous-movies-tv-shows-filmed-in-berlin',
     'berlin-hop-on-hop-off-bus-worth-it',
     'neukolln-berlin',
     'berlin-then-and-now',
     'berlin-rooftop-bars',
-    'where-to-watch-2026-world-cup-in-berlin',
     'one-day-in-berlin',
     'friedrichshain-berlin',
     'how-to-order-doner-in-berlin',
@@ -263,6 +270,13 @@ const REQUIRED_SLUGS = [
   'why-is-berlin-founding-year-1237',
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
+  'do-you-need-a-car-in-berlin',
+  'berlin-emergency-numbers',
+  'berlin-airports',
+  'do-you-need-a-visa-to-visit-berlin',
+  'smoking-in-berlin',
+  'halal-food-in-berlin',
+  'famous-movies-tv-shows-filmed-in-berlin',
   'how-many-days-in-berlin',
   'berlin-hop-on-hop-off-bus-worth-it',
   'neukolln-berlin',
