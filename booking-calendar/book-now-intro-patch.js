@@ -29,9 +29,12 @@
   ].join('');
 
   function installStyles() {
-    if (document.getElementById(STYLE_ID)) return;
-    var style = document.createElement('style');
-    style.id = STYLE_ID;
+    var style = document.getElementById(STYLE_ID);
+    var isNew = !style;
+    if (!style) {
+      style = document.createElement('style');
+      style.id = STYLE_ID;
+    }
     style.textContent = [
       'bw-booking-calendar .bw-cal-standalone{box-sizing:border-box;margin:0 auto;max-width:1160px;padding:32px 24px 44px}',
       'bw-booking-calendar .bw-cal-intro{display:grid;gap:10px;margin:0 0 14px;min-width:0}',
@@ -69,7 +72,7 @@
       '@media(max-width:640px){bw-booking-calendar .bw-cal-standalone{padding:18px 16px 26px}bw-booking-calendar .bw-cal-intro h1{font-size:30px;line-height:1.05}bw-booking-calendar .bw-cal-intro p{font-size:14px}bw-booking-calendar .bw-cal-intro-chip{font-size:10.5px;min-height:28px;padding:6px 9px}#'+FORM_CARD_ID+'{margin-bottom:16px;padding:13px 13px}#'+FORM_CARD_ID+' strong{font-size:17px}#'+FORM_CARD_ID+' p{font-size:12px!important}#'+TERMS_HELPER_ID+'{font-size:11.5px;margin:7px 0 4px 32px;padding:8px 10px}html.bw-booking-form-trust-active .bw-booking-form-stack{margin-bottom:6px!important}html.bw-booking-form-trust-active .bw-booking-details-stack,html.bw-booking-form-trust-active .bw-booking-submit-stack{margin-top:6px!important}}',
       '@media(min-width:641px){#' + NUDGE_ID + '{display:none!important}}',
     ].join('');
-    document.head.appendChild(style);
+    if (isNew) document.head.appendChild(style);
   }
 
   function textOf(el) {
