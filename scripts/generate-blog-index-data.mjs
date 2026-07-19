@@ -619,6 +619,8 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if ((post.slug || '') === 'berlin-ghost-stations') return 'berlin-ghost-stations';
+  if ((post.slug || '') === 'is-berlin-walkable') return 'is-berlin-walkable';
   if ((post.slug || '') === '2-days-in-berlin-itinerary') return 'berlin-two-day-route-map';
   if ((post.slug || '') === 'weekend-in-berlin-48-hour-itinerary') return 'ultimate-berlin-trip-planner';
   if ((post.slug || '') === 'berlin-natural-history-museum') return 'berlin-natural-history-museum';

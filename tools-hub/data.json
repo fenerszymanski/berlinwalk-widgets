@@ -4578,6 +4578,39 @@
       "relatedBlog": "/post/berlin-marathon-2026",
       "iconStatus": "live-wix-media",
       "cmsItemId": "c6d4b470-d7ad-4b53-91af-21b78675552a"
+    },
+    {
+      "slug": "berlin-ghost-stations",
+      "title": "Berlin Ghost Stations Map",
+      "lead": "The 15 Berlin stations that were sealed when the Wall went up. Flip the same tunnel map between 1961 and today, then tap a station to see what happened there and what is there now.",
+      "category": "Maps",
+      "image": "https://static.wixstatic.com/media/5a08a3_e07a24cc30114eaba889fff45621bc99~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-ghost-stations/",
+      "embedHeight": 1620,
+      "hubCategory": "CultureLandmarks",
+      "type": "Map",
+      "tags": [
+        "Berlin ghost stations",
+        "Berlin Wall stations",
+        "Cold War Berlin",
+        "Nordbahnhof",
+        "Friedrichstrasse station",
+        "Berlin U-Bahn history",
+        "Berlin S-Bahn history",
+        "sealed stations Berlin"
+      ],
+      "aliases": [
+        "berlin ghost stations map",
+        "geisterbahnhof berlin",
+        "sealed stations berlin wall",
+        "cold war train stations berlin",
+        "nordbahnhof ghost station",
+        "friedrichstrasse border station",
+        "berlin wall underground stations"
+      ],
+      "relatedBlog": "/post/berlin-ghost-stations",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "3b12dd88-6904-4b68-a232-e5e367f4b3db"
     }
   ],
   "hubCategories": [

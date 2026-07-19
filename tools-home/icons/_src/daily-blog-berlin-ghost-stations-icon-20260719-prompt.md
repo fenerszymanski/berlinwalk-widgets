@@ -30,7 +30,7 @@ Create ONE square 1:1 app icon for BerlinWalk, in a strict fixed style. STRUCTUR
 - Add the tool entry to `tools-hub/data.json` with `image` (Wix media URL),
   `cmsItemId`, and `iconStatus: "live-wix-media"`.
   Fields: slug `berlin-ghost-stations`, title `Berlin Ghost Stations Map`,
-  hubCategory `History` (History/Culture/Landmarks), type `Guide`,
+  hubCategory `CultureLandmarks` (History, Culture & Landmarks), type `Map`,
   legacy category `Maps`, relatedBlog `/post/berlin-ghost-stations`,
   widgetUrl `https://fenerszymanski.github.io/berlinwalk-widgets/berlin-ghost-stations/`,
   embedHeight `1620`.
