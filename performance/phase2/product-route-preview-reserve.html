@@ -1,0 +1,23 @@
+<!-- The deployed product template starts with html.is-embedded-audio-route; its existing runtime removes it for direct app visits. -->
+<style id="bw-product-route-preview-reserve">
+  @media (max-width: 700px) {
+    .route-preview-section:has(.route-preview-loading) {
+      box-sizing: border-box;
+      min-height: clamp(1340px, calc(2040px - 100vw), 1650px);
+    }
+  }
+
+  @media (min-width: 701px) and (max-width: 1080px) {
+    .route-preview-section:has(.route-preview-loading) {
+      box-sizing: border-box;
+      min-height: 1652px;
+    }
+  }
+
+  @media (min-width: 1081px) {
+    .route-preview-section:has(.route-preview-loading) {
+      box-sizing: border-box;
+      min-height: 1175px;
+    }
+  }
+</style>
