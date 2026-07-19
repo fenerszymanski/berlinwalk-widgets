@@ -20,7 +20,7 @@
   html,body{margin:0}
   body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
   .bx{max-width:940px;margin:0 auto;padding:4px}
-  .card{background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+  .card{position:relative;background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
 
   .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:18px 22px 16px}
   .head .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:600;margin:0 0 6px}
@@ -84,10 +84,36 @@
   .footnote{margin:12px 4px 6px;font-size:11.5px;color:var(--stone);line-height:1.5}
   .footnote b{color:var(--green-deep)}
 
+  /* Image credits open over the tool, so the iframe height never changes. */
+  .creditsbar{padding:2px 18px 15px;display:flex;justify-content:flex-end}
+  .creditsTrigger{display:inline-flex;align-items:center;gap:7px;border:1px solid #cddbc3;border-radius:999px;
+    background:#fff;color:var(--green-deep);font:700 11px/1 Montserrat,system-ui,sans-serif;padding:8px 11px;cursor:pointer}
+  .creditsTrigger::before{content:"i";display:grid;place-items:center;width:16px;height:16px;border-radius:50%;
+    background:var(--green-deep);color:#fff;font:700 10px/1 'IBM Plex Mono',monospace}
+  .creditsTrigger:hover{background:var(--bone);border-color:var(--lime)}
+  .creditsTrigger:focus-visible,.creditsClose:focus-visible,.creditsList a:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+  .creditsLayer{position:absolute;z-index:20;inset:0;display:flex;align-items:flex-end;justify-content:center;
+    padding:14px;background:rgba(10,31,14,.52)}
+  .creditsLayer[hidden]{display:none!important}
+  .creditsDialog{width:min(680px,100%);max-height:460px;overflow:auto;overscroll-behavior:contain;
+    background:#fff;border:1px solid #dbe6d1;border-radius:16px;box-shadow:0 18px 48px rgba(10,31,14,.28);padding:17px 18px 18px}
+  .creditsTop{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+  .creditsTop h3{margin:0;color:var(--green-deep);font-size:16px;font-weight:800}
+  .creditsIntro{margin:5px 0 13px;color:var(--stone);font-size:11.5px;line-height:1.5}
+  .creditsClose{flex:0 0 auto;width:32px;height:32px;border:1px solid #cddbc3;border-radius:50%;background:#fff;
+    color:var(--green-deep);font:700 20px/1 Montserrat,system-ui,sans-serif;cursor:pointer}
+  .creditsClose:hover{background:var(--bone)}
+  .creditsList{margin:0;padding-left:20px;color:var(--ink);font-size:11.5px;line-height:1.55}
+  .creditsList li+li{margin-top:8px}
+  .creditsList a{color:var(--green-deep);font-weight:700;text-underline-offset:2px}
+
   @media (max-width:430px){
     .head{padding:16px 16px 14px}
     .body{padding:14px 13px 8px}
     .hero .big{font-size:30px}
+    .creditsbar{padding:2px 13px 13px}
+    .creditsLayer{padding:8px}
+    .creditsDialog{max-height:420px;padding:15px 14px 16px}
   }
 </style>
 </head>
@@ -130,6 +156,29 @@
       <div class="board" id="board"></div>
 
       <p class="footnote"><b>How to read this:</b> times are real-world estimates for an easy pace on Berlin's flat, straight central streets, before photos, crossings and coffee. Anything under about 25 minutes is usually a nicer walk than waiting for a train. For the longer ones, a single AB ticket and the U-Bahn or S-Bahn will save your legs.</p>
+    </div>
+
+    <div class="creditsbar">
+      <button class="creditsTrigger" id="creditsOpen" type="button" aria-expanded="false" aria-controls="imageCredits">Image credits</button>
+    </div>
+
+    <div class="creditsLayer" id="imageCredits" hidden>
+      <section class="creditsDialog" role="dialog" aria-modal="true" aria-labelledby="creditsTitle" tabindex="-1">
+        <div class="creditsTop">
+          <div>
+            <h3 id="creditsTitle">Article image credits</h3>
+            <p class="creditsIntro">Source and licence details for the photographs used in the article.</p>
+          </div>
+          <button class="creditsClose" id="creditsClose" type="button" aria-label="Close image credits">&times;</button>
+        </div>
+        <ul class="creditsList">
+          <li>Museum Island and the TV Tower by Thomas Wolf, www.foto-tw.de, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Berlin_Museumsinsel_Fernsehturm.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.</li>
+          <li>Brandenburg Gate from Unter den Linden by Subaaa, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Brandenburger_Tor_von_Unter_den_Linden.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.</li>
+          <li>Unter den Linden boulevard by Jorge Láscar, <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener noreferrer">CC BY 2.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Lascar_Unter_den_Linden_boulevard_and_the_German_Historical_Museum_(4472180404).jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.</li>
+          <li>Pedestrians at a Berlin crossing by Sascha Kohlmann, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Crossroads_Waiting_(43990780).jpeg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.</li>
+          <li>Gendarmenmarkt by Fred Romero, <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener noreferrer">CC BY 2.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Berlin_-_Konzerthaus_Berlin_%26_Fran%C3%B6sischer_Dom.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.</li>
+        </ul>
+      </section>
     </div>
   </div>
 </div>
@@ -254,6 +303,37 @@
     });
   }
   render();
+
+  var creditsOpen = document.getElementById('creditsOpen');
+  var creditsLayer = document.getElementById('imageCredits');
+  var creditsDialog = creditsLayer.querySelector('.creditsDialog');
+  var creditsClose = document.getElementById('creditsClose');
+  var lastCreditsFocus = null;
+
+  function openCredits(){
+    lastCreditsFocus = document.activeElement;
+    creditsLayer.hidden = false;
+    creditsOpen.setAttribute('aria-expanded','true');
+    creditsClose.focus();
+  }
+  function closeCredits(){
+    creditsLayer.hidden = true;
+    creditsOpen.setAttribute('aria-expanded','false');
+    if(lastCreditsFocus && typeof lastCreditsFocus.focus === 'function') lastCreditsFocus.focus();
+  }
+  creditsOpen.addEventListener('click', openCredits);
+  creditsClose.addEventListener('click', closeCredits);
+  creditsLayer.addEventListener('click', function(event){ if(event.target === creditsLayer) closeCredits(); });
+  document.addEventListener('keydown', function(event){
+    if(creditsLayer.hidden) return;
+    if(event.key === 'Escape'){ event.preventDefault(); closeCredits(); return; }
+    if(event.key !== 'Tab') return;
+    var focusable = Array.prototype.slice.call(creditsDialog.querySelectorAll('button,a[href]'));
+    if(!focusable.length) return;
+    var first = focusable[0], last = focusable[focusable.length - 1];
+    if(event.shiftKey && document.activeElement === first){ event.preventDefault(); last.focus(); }
+    else if(!event.shiftKey && document.activeElement === last){ event.preventDefault(); first.focus(); }
+  });
 })();
 </script>
 </body>
