@@ -15,6 +15,7 @@
   var TOOL_MARKER = 'data-bw-blog-tool-prompt';
   var FDR_BRIDGE_MARKER = 'data-bw-blog-fdr-bridge';
   var JOURNEY_MARKER = 'data-bw-blog-journey';
+  var ENHANCEMENT_MARKER = 'data-bw-blog-enhancement-ready';
   var JOURNEY_LAYOUT_VERSION = 'blog-journey-action-cards-20260709a';
   var SHARE_LAYOUT_VERSION = 'blog-top-share-20260709a';
   var BACK_TOP_MARKER = 'data-bw-blog-back-top';
@@ -37,6 +38,10 @@
   var dataCache = null;
   var dataPromise = null;
   var renderTimer = null;
+  var enhancementTimer = null;
+  var enhancementIdleHandle = null;
+  var bookLinkTimer = null;
+  var lastEnhancementAt = 0;
   var observer = null;
   var lastPath = location.pathname;
   var backTopScrollHandler = null;
@@ -86,7 +91,10 @@
     var script = document.createElement('script');
     script.src = NEXT_TOUR_SLOT_URL;
     script.async = true;
-    script.onload = scheduleRender;
+    script.onload = function () {
+      scheduleRender();
+      scheduleEnhancement(0);
+    };
     script.onerror = function () {};
     document.head.appendChild(script);
   }
@@ -1183,7 +1191,7 @@
       '.bw-blog-back-top:hover{background:#1B5E20;}',
       '.bw-blog-back-top-visible{opacity:1;pointer-events:auto;transform:translateY(0);visibility:visible;}',
       '[' + NATIVE_END_MARKER + '="1"]{display:none!important;}',
-      '@media (max-width:899px){html.bw-blog-mobile-preparing:not(.bw-blog-enhanced-ready):not(.bw-blog-mobile-prep-timeout) [data-hook="post"],html.bw-blog-mobile-preparing:not(.bw-blog-enhanced-ready):not(.bw-blog-mobile-prep-timeout) article{opacity:0!important;pointer-events:none!important;}body.bw-blog-post-enhanced [data-hook="post-page"] *:not(:has(> .bw-blog-mobile-nav)) > [data-hook="post"]{margin-top:270px!important;}body.bw-blog-post-enhanced [data-hook="post-page"] *:has(> .bw-blog-mobile-nav) > [data-hook="post"]{margin-top:0!important;}}',
+      '@media (max-width:899px){body.bw-blog-post-enhanced [data-hook="post-page"] *:not(:has(> .bw-blog-mobile-nav)):has(> [data-hook="post"])::before{content:"";display:block;height:270px;}body.bw-blog-post-enhanced [data-hook="post-page"] *:has(> .bw-blog-mobile-nav) > [data-hook="post"]{margin-top:0!important;}}',
       '@media (min-width:900px){.bw-blog-mobile-nav,.bw-blog-mobile-guide{display:none!important;}}',
       '@media (max-width:899px){body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] [' + WIDGET_BLOCK_MARKER + '="1"]{margin-bottom:28px!important;}.bw-blog-share-bar{display:grid;grid-template-columns:1fr;margin:8px 0 24px;padding:13px 0;}.bw-blog-share-actions{flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px;scrollbar-width:none;}.bw-blog-share-actions::-webkit-scrollbar{display:none;}.bw-blog-share-link,.bw-blog-share-copy{flex:0 0 auto;min-height:36px;}}',
       '@media (max-width:899px){body.bw-blog-post-enhanced [' + POST_TITLE_MARKER + '="1"]{font-size:clamp(32px,8.4vw,35px)!important;line-height:1.06!important;margin-top:18px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] p:not(.bw-blog-mobile-guide-title):not(.bw-blog-journey-intro):not(.bw-blog-tool-copy):not([' + EMPTY_PARAGRAPH_MARKER + ']){font-size:17px!important;line-height:1.68!important;margin-bottom:17px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2{font-size:28px!important;margin-top:34px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h3{font-weight:900!important;}.bw-blog-mobile-nav{background:#FAFAF5;border:0;border-bottom:2px solid #212121;display:block;margin:0 0 28px;padding:24px 0 20px;position:relative;}.bw-blog-mobile-nav:before{background:#1B5E20;content:"";display:block;height:5px;left:0;position:absolute;right:0;top:0;}.bw-blog-mobile-nav:after{background:#212121;content:"";display:block;height:2px;left:0;position:absolute;right:0;top:86px;}.bw-blog-tool-prompt{align-items:start;grid-template-columns:1fr;margin:28px 0;padding:18px;}.bw-blog-tool-button,.bw-tool-bridge-book{justify-self:start;}.bw-blog-journey{margin:32px 0 28px;padding:24px 18px;}.bw-tool-bridge-main,.bw-blog-journey-grid,.bw-blog-related-grid{grid-template-columns:1fr;}.bw-blog-journey h2{font-size:26px!important;}.bw-blog-back-top{bottom:92px;right:14px;width:42px;height:42px;font-size:21px;}}',
@@ -1203,22 +1211,11 @@
 
   function injectStabilityStyle() {
     if (!isPostPage()) return;
-    document.documentElement.classList.add('bw-blog-post-head', 'bw-blog-mobile-preparing');
-    document.documentElement.classList.remove('bw-blog-enhanced-ready', 'bw-blog-mobile-prep-timeout');
-    if (document.body) document.body.classList.remove('bw-blog-enhanced-ready');
-
-    if (!document.getElementById(STABILITY_STYLE_ID)) {
-      var style = document.createElement('style');
-      style.id = STABILITY_STYLE_ID;
-      style.textContent = '@media (max-width:899px){html.bw-blog-mobile-preparing:not(.bw-blog-enhanced-ready):not(.bw-blog-mobile-prep-timeout) [data-hook="post"],html.bw-blog-mobile-preparing:not(.bw-blog-enhanced-ready):not(.bw-blog-mobile-prep-timeout) article{opacity:0!important;pointer-events:none!important;}}';
-      (document.head || document.documentElement).appendChild(style);
-    }
-
-    clearTimeout(readyTimer);
-    readyTimer = setTimeout(function () {
-      document.documentElement.classList.add('bw-blog-mobile-prep-timeout');
-      markBlogReady();
-    }, 2600);
+    document.documentElement.classList.add('bw-blog-post-head');
+    document.documentElement.classList.remove('bw-blog-mobile-preparing', 'bw-blog-mobile-prep-timeout');
+    var oldStyle = document.getElementById(STABILITY_STYLE_ID);
+    if (oldStyle) oldStyle.remove();
+    markBlogReady();
   }
 
   function loadData() {
@@ -1486,13 +1483,34 @@
     }, 1800);
   }
 
+  function placeShareBar(body, bar) {
+    var title = findPostTitle();
+    var header = title && title.closest ? title.closest('header') : null;
+    var article = body && body.closest ? body.closest('article') : null;
+    if (header && article && header.closest('article') === article && header.parentNode) {
+      if (bar.parentNode !== header.parentNode || bar.previousElementSibling !== header) {
+        header.parentNode.insertBefore(bar, header.nextSibling);
+      }
+      return;
+    }
+
+    var first = body.firstElementChild;
+    while (first && first.matches && first.matches('[' + MOBILE_NAV_MARKER + '],[' + MOBILE_MARKER + '],[' + TOOL_MARKER + '],[' + JOURNEY_MARKER + ']')) {
+      first = first.nextElementSibling;
+    }
+    if (bar.parentNode !== body || bar.nextSibling !== first) body.insertBefore(bar, first || null);
+  }
+
   function insertShareBar(body) {
     if (!body) return;
     var url = sharePageUrl();
     var title = sharePageTitle();
     var key = url + '|' + title;
     var old = document.querySelector('[' + SHARE_MARKER + ']');
-    if (old && old.getAttribute('data-bw-blog-share-key') === key) return;
+    if (old && old.getAttribute('data-bw-blog-share-key') === key) {
+      placeShareBar(body, old);
+      return;
+    }
     if (old) old.remove();
 
     var text = title + ' ' + url;
@@ -1531,11 +1549,7 @@
       });
     });
 
-    var first = body.firstElementChild;
-    while (first && first.matches && first.matches('[' + MOBILE_NAV_MARKER + '],[' + MOBILE_MARKER + '],[' + TOOL_MARKER + '],[' + JOURNEY_MARKER + ']')) {
-      first = first.nextElementSibling;
-    }
-    body.insertBefore(bar, first || null);
+    placeShareBar(body, bar);
   }
 
   function normalizeHeadingTypography(body) {
@@ -2652,6 +2666,26 @@
     backTopScrollHandler();
   }
 
+  function renderCritical() {
+    if (!isPostPage() && !isToolPage()) {
+      removeInjected();
+      return;
+    }
+    injectStyle();
+    if (isToolPage()) {
+      scheduleEnhancement(0);
+      return;
+    }
+    var body = findPostBody();
+    if (!body) return;
+    markPostBody(body);
+    insertShareBar(body);
+    insertMobileBlogNav(body, dataCache);
+    markBlogReady();
+    scheduleBookLinkDecoration();
+    if (body.getAttribute(ENHANCEMENT_MARKER) !== '1') scheduleEnhancement(260);
+  }
+
   function render() {
     if (!isPostPage() && !isToolPage()) {
       removeInjected();
@@ -2679,6 +2713,7 @@
     hideNativeEndMatter();
     markBlogReady();
     decorateBlogBookLinks();
+    body.setAttribute(ENHANCEMENT_MARKER, '1');
     loadData().then(function (data) {
       insertMobileBlogNav(body, data);
       insertShareBar(body);
@@ -2711,11 +2746,23 @@
     }
     clearTimeout(readyTimer);
     readyTimer = null;
+    clearTimeout(renderTimer);
+    renderTimer = null;
+    clearTimeout(enhancementTimer);
+    enhancementTimer = null;
+    clearTimeout(bookLinkTimer);
+    bookLinkTimer = null;
+    if (enhancementIdleHandle !== null) {
+      if (typeof window.cancelIdleCallback === 'function') window.cancelIdleCallback(enhancementIdleHandle);
+      clearTimeout(enhancementIdleHandle);
+    }
+    enhancementIdleHandle = null;
     document.documentElement.classList.remove('bw-blog-mobile-preparing', 'bw-blog-enhanced-ready', 'bw-blog-mobile-prep-timeout');
     document.body.classList.remove('bw-blog-post-enhanced');
     document.body.classList.remove('bw-blog-enhanced-ready');
     document.querySelectorAll('[' + POST_BODY_MARKER + ']').forEach(function (oldBody) {
       oldBody.removeAttribute(POST_BODY_MARKER);
+      oldBody.removeAttribute(ENHANCEMENT_MARKER);
     });
     document.querySelectorAll('[' + POST_TITLE_MARKER + ']').forEach(function (oldTitle) {
       oldTitle.removeAttribute(POST_TITLE_MARKER);
@@ -2728,7 +2775,34 @@
 
   function scheduleRender() {
     clearTimeout(renderTimer);
-    renderTimer = setTimeout(render, 80);
+    renderTimer = setTimeout(renderCritical, 40);
+  }
+
+  function scheduleBookLinkDecoration() {
+    if (bookLinkTimer !== null) return;
+    bookLinkTimer = setTimeout(function () {
+      bookLinkTimer = null;
+      decorateBlogBookLinks();
+    }, 0);
+  }
+
+  function scheduleEnhancement(delay) {
+    if (enhancementTimer !== null || enhancementIdleHandle !== null) return;
+    var elapsed = Date.now() - lastEnhancementAt;
+    var wait = Math.max(Number(delay) || 0, elapsed < 900 ? 900 - elapsed : 0);
+    enhancementTimer = setTimeout(function () {
+      enhancementTimer = null;
+      var run = function () {
+        enhancementIdleHandle = null;
+        lastEnhancementAt = Date.now();
+        render();
+      };
+      if (typeof window.requestIdleCallback === 'function') {
+        enhancementIdleHandle = window.requestIdleCallback(run, { timeout: 1400 });
+      } else {
+        enhancementIdleHandle = setTimeout(run, 0);
+      }
+    }, wait);
   }
 
   function boot() {
@@ -2739,35 +2813,27 @@
     } else if (isToolPage()) {
       injectStyle();
     }
-    [0, 80, 220, 520, 1100, 2400, 4200, 7000].forEach(function (delay) {
-      setTimeout(render, delay);
+    [0, 120, 600, 1600].forEach(function (delay) {
+      setTimeout(renderCritical, delay);
     });
     if (observer) observer.disconnect();
     observer = new MutationObserver(function () {
       if (isPostPage()) {
         var body = findPostBody();
-        normalizePostTitleTypography();
-        if (body) normalizePostSpacing(body);
-        if (body) normalizeHeadingTypography(body);
-        hideNativeEndMatter();
-        decorateBlogBookLinks();
         // Gap-free top-nav restore: Wix/React repeatedly wipes nodes it does not
-        // own while the post page hydrates, including our top mobile nav. Restoring
-        // it via scheduleRender() (an 80ms macrotask) let at least one paint happen
-        // with the nav gone, which read as a "blink" on mobile and bounced the post
-        // body by the 270px reserve margin. Re-insert it synchronously here instead:
-        // the observer callback is a microtask that runs before the next paint, so
-        // the removed frame is never shown.
+        // own while the post page hydrates. Keep only the small structural repairs
+        // in this microtask; broad paragraph/heading/end-matter scans run later in
+        // the idle enhancement phase so they cannot hold the H1's first paint.
         if (body && !document.querySelector('[' + MOBILE_NAV_MARKER + ']')) {
+          markPostBody(body);
           insertMobileBlogNav(body, dataCache);
         }
         if (body && !document.querySelector('[' + SHARE_MARKER + ']')) {
           insertShareBar(body);
         }
-        var needsMobileGuide = body && collectHeadings(body).length >= 2;
-        if (!document.querySelector('[' + JOURNEY_MARKER + ']') || !document.querySelector('[' + SHARE_MARKER + ']') || (needsMobileGuide && !document.querySelector('[' + MOBILE_MARKER + ']'))) {
-          scheduleRender();
-        }
+        if (body) markBlogReady();
+        if (!body) scheduleRender();
+        else if (body.getAttribute(ENHANCEMENT_MARKER) !== '1') scheduleEnhancement(260);
         return;
       }
       if (isToolPage() && !document.querySelector('[' + JOURNEY_MARKER + ']')) {
@@ -2775,6 +2841,12 @@
       }
     });
     if (document.body) observer.observe(document.body, { childList: true, subtree: true });
+    if (document.readyState !== 'complete') {
+      window.addEventListener('load', function () {
+        renderCritical();
+        scheduleEnhancement(220);
+      }, { once: true });
+    }
   }
 
   if (isPostPage()) {
