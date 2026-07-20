@@ -375,8 +375,10 @@
       var mins = thingMins(t);
       var note = thingNote(t);
       var chosen = state.on.indexOf(t.id) !== -1;
-      if (!chosen)      { rows.push({ id:t.id, type:'off',   name:t.name, note:note, mins:mins, kind:t.kind }); return; }
+      // Closed beats not-selected: the whole point of the day picker is that you
+      // find out the Zwinger shuts on Monday without having to tap it first.
       if (isShut(t))    { rows.push({ id:t.id, type:'shut',  name:t.name, note:note, mins:mins, kind:t.kind }); return; }
+      if (!chosen)      { rows.push({ id:t.id, type:'off',   name:t.name, note:note, mins:mins, kind:t.kind }); return; }
       if (budget - mins >= reserve) {
         rows.push({ id:t.id, type:'fits', clock:fmtClock(cursor), name:t.name, note:note, mins:mins, kind:t.kind });
         cursor += mins; budget -= mins;
