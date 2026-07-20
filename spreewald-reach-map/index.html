@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Spreewald Reach Map: How Far Each Boat Choice Takes You</title>
+<meta name="description" content="Pick how you get onto the water in Lübbenau: a 2 or 3 hour punt, the long Wotschofska forest punt, a rented kayak, or your own feet. The map shows how deep into the Spreewald that choice really takes you, with 2026 prices." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Cpath d='M10 40 Q22 34 32 40 T54 40' fill='none' stroke='%23FFE600' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M18 30 Q30 24 40 30 T58 30' fill='none' stroke='%237CB342' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
+    --yellow:#FFE600; --ink:#1c2a1c; --cream:#FAFAF5;
+    --water:#8fb8a8; --water-dim:#cfe0d8; --water-on:#1B5E20;
+    --marsh:#eef5e6; --line:#dfe9d4; --stone:#66735f;
+    --shadow:0 10px 30px rgba(18,61,24,.14);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .bx{max-width:960px;margin:0 auto;padding:4px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+
+  .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:18px 22px 16px}
+  .head .kicker{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow);margin:0 0 6px}
+  .head h1{margin:0 0 6px;font-size:clamp(19px,3.4vw,25px);line-height:1.2;font-weight:800}
+  .head p{margin:0;font-size:13.5px;color:#e6f0e2;max-width:640px}
+
+  .mapwrap{background:var(--marsh);padding:10px 8px 2px;position:relative}
+  .mapwrap svg{display:block;width:100%;height:auto}
+  .waterway{fill:none;stroke:var(--water-dim);stroke-width:7;stroke-linecap:round;transition:stroke .35s}
+  .waterway.thin{stroke-width:5}
+  .waterway.on{stroke:var(--water-on)}
+  .flowline{fill:none;stroke:var(--yellow);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:1 12;opacity:0;pointer-events:none;transition:opacity .35s}
+  .flowline.on{opacity:.9;animation:flow 1.4s linear infinite}
+  @keyframes flow{to{stroke-dashoffset:-26}}
+  .rail{fill:none;stroke:#8a958a;stroke-width:3;stroke-dasharray:10 5}
+  .path-walk{fill:none;stroke:#b4885a;stroke-width:3;stroke-dasharray:1 7;stroke-linecap:round;transition:stroke .35s,opacity .35s;opacity:.55}
+  .path-walk.on{stroke:#7a4f21;opacity:1;animation:flow 1.6s linear infinite}
+  .node{fill:#fff;stroke:var(--green);stroke-width:3}
+  .node.dim{stroke:#a9b8a4}
+  .node.hit{fill:var(--yellow);stroke:var(--green-deep)}
+  .lbl{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;fill:var(--ink)}
+  .lbl.dim{fill:#8b9884}
+  .lbl-sub{font-family:Montserrat,sans-serif;font-size:11px;fill:var(--stone)}
+  .legend{font-family:'IBM Plex Mono',monospace;font-size:11px;fill:var(--stone)}
+  .maphint{display:none;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--stone);margin:0;padding:2px 10px 8px}
+
+  .modes{display:flex;flex-wrap:wrap;gap:8px;padding:14px 16px 4px;background:#fff}
+  .mode{appearance:none;border:1.5px solid var(--line);background:var(--cream);color:var(--ink);
+    border-radius:12px;padding:9px 12px;font-family:Montserrat,sans-serif;font-weight:700;font-size:12.5px;
+    cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-height:44px;min-width:132px;flex:1 1 132px;
+    transition:border-color .2s,background .2s,transform .12s}
+  .mode:hover{border-color:var(--lime)}
+  .mode:active{transform:scale(.98)}
+  .mode[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+  .mode small{font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:10.5px;color:var(--stone)}
+  .mode[aria-pressed="true"] small{color:var(--soft)}
+
+  .verdict{padding:12px 16px 16px;background:#fff}
+  .vcard{border:1px solid var(--line);border-left:5px solid var(--lime);border-radius:12px;padding:13px 15px;background:var(--cream)}
+  .vcard .vtitle{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;margin:0 0 6px}
+  .vcard h2{margin:0;font-size:16px;font-weight:800;color:var(--green-deep)}
+  .price{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;background:var(--yellow);color:var(--green-deep);border-radius:7px;padding:2px 8px}
+  .vcard .reach{margin:0 0 8px;font-size:13.5px}
+  .vcard .reach strong{color:var(--green-deep)}
+  .daymath{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#3d4a3a;background:#fff;border:1px dashed var(--line);border-radius:8px;padding:7px 10px;margin:0 0 8px;line-height:1.55}
+  .note{margin:0;font-size:13px;color:#33402f}
+  .note b{color:var(--green-deep)}
+  .foot{padding:0 16px 14px;background:#fff}
+  .foot p{margin:0;font-size:11px;color:var(--stone);line-height:1.5}
+  @media (max-width:480px){
+    .head{padding:15px 14px 13px}
+    .mapwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+    .mapwrap svg{min-width:560px}
+    .maphint{display:block}
+    .modes{padding:12px 10px 2px}
+    .mode{min-width:46%}
+    .verdict{padding:10px 10px 12px}
+    .foot{padding:0 12px 12px}
+  }
+</style>
+</head>
+<body>
+<div class="bx">
+  <div class="card">
+    <div class="head">
+      <p class="kicker">Lübbenau · Spreewald · Season Apr-Oct</p>
+      <h1>How deep into the Spreewald will your choice take you?</h1>
+      <p>Around 300 channels run through the wetland, but a day tripper only ever sees the slice their boat can reach. Pick how you get onto the water at Lübbenau and the map shows what that really covers, at the operators' published 2026 prices.</p>
+    </div>
+
+    <div class="mapwrap">
+      <svg viewBox="0 0 960 430" role="img" aria-label="Stylized map of the Spreewald waterways around Lübbenau, showing which villages each boat or walking choice reaches">
+        <!-- rail from Berlin -->
+        <path class="rail" d="M28 356 L128 356" />
+        <g>
+          <rect x="18" y="344" width="22" height="24" rx="4" fill="#fff" stroke="#8a958a" stroke-width="2.5"/>
+          <text class="lbl" x="14" y="392">RE2 / RE7</text>
+          <text class="lbl-sub" x="14" y="406">from Berlin Ostkreuz, about 1h</text>
+        </g>
+
+        <!-- waterways -->
+        <path id="w-harbor" class="waterway" d="M158 344 C 200 330, 232 316, 262 300" />
+        <path id="w-lehde" class="waterway" d="M262 300 C 320 268, 366 262, 424 268 C 458 272, 480 268, 500 258" />
+        <path id="w-lehde-loop" class="waterway thin" d="M500 258 C 540 240, 566 250, 560 278 C 554 304, 508 302, 500 258" />
+        <path id="w-leipe" class="waterway" d="M560 278 C 630 300, 700 296, 770 272" />
+        <path id="w-wotsch" class="waterway" d="M262 300 C 330 220, 430 170, 540 150 C 610 138, 660 130, 700 116" />
+        <path id="w-hochwald" class="waterway thin" d="M700 116 C 760 96, 820 92, 890 100" />
+        <path id="w-side1" class="waterway thin" d="M424 268 C 440 236, 470 214, 520 200" />
+        <path id="w-side2" class="waterway thin" d="M630 296 C 650 330, 700 348, 760 350" />
+
+        <!-- walking path -->
+        <path id="p-walk" class="path-walk" d="M262 322 C 330 330, 420 320, 492 286" />
+
+        <!-- nodes -->
+        <circle id="n-luebbenau" class="node" cx="262" cy="300" r="11"/>
+        <text class="lbl" x="150" y="252">Lübbenau</text>
+        <text class="lbl-sub" x="150" y="266">Großer Hafen · Gurkenmeile</text>
+
+        <circle id="n-lehde" class="node" cx="500" cy="258" r="10"/>
+        <text class="lbl" x="470" y="238">Lehde</text>
+        <text class="lbl-sub" x="430" y="224">open-air museum · no road access</text>
+
+        <circle id="n-leipe" class="node" cx="770" cy="272" r="9"/>
+        <text class="lbl" x="748" y="252">Leipe</text>
+
+        <circle id="n-wotsch" class="node" cx="700" cy="116" r="9"/>
+        <text class="lbl" x="640" y="96">Wotschofska</text>
+        <text class="lbl-sub" x="640" y="82">forest inn, high woodland</text>
+
+        <circle id="n-hochwald" class="node" cx="890" cy="100" r="7"/>
+        <text class="lbl" x="838" y="126">Hochwald</text>
+
+        <!-- legend -->
+        <text class="legend" x="700" y="396">~ waterway (Fließ)</text>
+        <text class="legend" x="700" y="412">· · walking path (2.6 km)</text>
+      </svg>
+      <p class="maphint">Swipe the map sideways to see the whole network.</p>
+    </div>
+
+    <div class="modes" role="group" aria-label="Choose how you get onto the water">
+      <button class="mode" type="button" data-mode="punt2" aria-pressed="false">Short punt · 2h<small>EUR 17 · from 11:00</small></button>
+      <button class="mode" type="button" data-mode="punt3" aria-pressed="true">Classic punt · 3h<small>EUR 20 · board 10:00-11:30</small></button>
+      <button class="mode" type="button" data-mode="punt55" aria-pressed="false">Wotschofska punt · 5.5h<small>EUR 28 · 10:00, reserve</small></button>
+      <button class="mode" type="button" data-mode="kayakHalf" aria-pressed="false">Kayak · 2-3h<small>~EUR 16-22 rental</small></button>
+      <button class="mode" type="button" data-mode="kayakDay" aria-pressed="false">Kayak · full day<small>~EUR 24-40 rental</small></button>
+      <button class="mode" type="button" data-mode="walk" aria-pressed="false">On foot only<small>free · 2.6 km to Lehde</small></button>
+    </div>
+
+    <div class="verdict">
+      <div class="vcard" id="vcard" aria-live="polite">
+        <div class="vtitle"><h2 id="v-name"></h2><span class="price" id="v-price"></span></div>
+        <p class="reach" id="v-reach"></p>
+        <p class="daymath" id="v-day"></p>
+        <p class="note" id="v-note"></p>
+      </div>
+    </div>
+
+    <div class="foot">
+      <p>Punt prices are the Großer Kahnfährhafen Lübbenau published 2026 rates; kayak ranges cover the Lübbenau rental stations. Boats run roughly April to October. The map is schematic: real distances are longer than they look.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var MODES = {
+    punt2: {
+      name: 'Short punt, 2 hours',
+      price: 'EUR 17 / child 9',
+      water: ['w-harbor','w-lehde','w-lehde-loop'],
+      walk: false,
+      hit: ['n-lehde'],
+      reach: 'You reach <strong>Lehde</strong> and glide back through the same channels. It is the taster: real Spreewald, but only the first slice of it.',
+      day: 'Ostkreuz ~09:00 → Lübbenau ~10:00 → walk 10 min to the Großer Hafen → boat fills and leaves from 11:00 → back on land ~13:30.',
+      note: 'Boats leave when they fill, not on a timetable. On July and August weekends the first punts go fast. <b>My advice: be at the harbor by 10:30 or switch to a weekday.</b>'
+    },
+    punt3: {
+      name: 'Classic punt to Lehde, 3 hours',
+      price: 'EUR 20 / child 11',
+      water: ['w-harbor','w-lehde','w-lehde-loop'],
+      walk: false,
+      hit: ['n-lehde'],
+      reach: 'You reach <strong>Lehde with a proper stop</strong>: time to get out, look at the village and eat something before the boat turns back.',
+      day: 'Ostkreuz ~09:00 → Lübbenau ~10:00 → board between 10:00 and 11:30 → break in Lehde → back ~14:30, pickle stop, train home.',
+      note: 'This is the one I would book as a first-timer. The break in Lehde is the difference: two hours shows you the water, three hours shows you why people live on it.'
+    },
+    punt55: {
+      name: 'Wotschofska forest punt, 5.5 hours',
+      price: 'EUR 28 / child 16',
+      water: ['w-harbor','w-lehde','w-lehde-loop','w-side1','w-wotsch'],
+      walk: false,
+      hit: ['n-lehde','n-wotsch'],
+      reach: 'You reach the <strong>Wotschofska forest inn</strong> deep in the high woodland, past Lehde and the busier loops. This is the quiet, dark-green Spreewald most day trippers never see.',
+      day: 'Ostkreuz ~08:00 → Lübbenau ~09:10 → 10:00 departure (reserve a seat ahead) → forest inn lunch → back ~15:30, still time for the old town.',
+      note: 'It leaves at 10:00, so this is the earliest start of the day. Five and a half hours on a bench suits people who want the landscape, not people traveling with a bored six-year-old.'
+    },
+    kayakHalf: {
+      name: 'Kayak, 2 to 3 hours',
+      price: '~EUR 16-22 rental',
+      water: ['w-harbor','w-lehde','w-lehde-loop','w-side1'],
+      walk: false,
+      hit: ['n-lehde'],
+      reach: 'You reach <strong>Lehde at your own pace</strong>, plus the small side channels punts skip. Paddling there takes 40 to 60 minutes one way.',
+      day: 'Ostkreuz ~09:00 → Lübbenau ~10:00 → rental station by 10:30 → paddle out, tie up in Lehde, paddle back → boat returned by ~14:00.',
+      note: 'The rental stations open around 9:00 and the water is calm and flat, so you do not need experience. You steer, you stop where you want, and you hear the wetland instead of a tour commentary.'
+    },
+    kayakDay: {
+      name: 'Kayak, full day',
+      price: '~EUR 24-40 rental',
+      water: ['w-harbor','w-lehde','w-lehde-loop','w-side1','w-leipe','w-wotsch','w-side2'],
+      walk: false,
+      hit: ['n-lehde','n-leipe','n-wotsch'],
+      reach: 'You reach <strong>Leipe and Wotschofska</strong> on a 14 to 16 km loop. That is most of what a day tripper can honestly cover, and the far channels are nearly empty.',
+      day: 'Ostkreuz ~08:00 → Lübbenau ~09:10 → on the water by 10:00 → lunch in Leipe or at the forest inn → boat back by 17:00, latest returns around 18:00.',
+      note: 'Doable at average fitness with breaks, but it is a real arm day. Take water and a dry bag for your phone. <b>Return times are fixed by the rental station, so check them before you paddle off.</b>'
+    },
+    walk: {
+      name: 'On foot only',
+      price: 'free',
+      water: [],
+      walk: true,
+      hit: ['n-lehde'],
+      reach: 'You reach <strong>Lehde on the 2.6 km path</strong> in 35 to 45 minutes, flat all the way, and the open-air museum is at the end of it.',
+      day: 'Ostkreuz ~09:30 → Lübbenau ~10:30 → old town and harbor → walk to Lehde → museum + lunch → walk back ~16:00.',
+      note: 'Zero boats, zero cost, and honestly still a good day: you see the village and the museum. What you miss is the channel network itself, which is the thing the Spreewald is actually about.'
+    }
+  };
+
+  var buttons = Array.prototype.slice.call(document.querySelectorAll('.mode'));
+  var vName = document.getElementById('v-name');
+  var vPrice = document.getElementById('v-price');
+  var vReach = document.getElementById('v-reach');
+  var vDay = document.getElementById('v-day');
+  var vNote = document.getElementById('v-note');
+  var allWater = Array.prototype.slice.call(document.querySelectorAll('.waterway'));
+  var flowByWater = {};
+  allWater.forEach(function(w){
+    var f = w.cloneNode(false);
+    f.removeAttribute('id');
+    f.setAttribute('class', 'flowline');
+    w.parentNode.insertBefore(f, w.nextSibling);
+    flowByWater[w.id] = f;
+  });
+  var walkPath = document.getElementById('p-walk');
+  var nodes = { 'n-lehde':1, 'n-leipe':1, 'n-wotsch':1, 'n-hochwald':1 };
+
+  function apply(modeKey){
+    var m = MODES[modeKey];
+    if (!m) return;
+    buttons.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.mode === modeKey)); });
+    allWater.forEach(function(w){
+      var on = m.water.indexOf(w.id) !== -1;
+      w.classList.toggle('on', on);
+      flowByWater[w.id].classList.toggle('on', on);
+    });
+    walkPath.classList.toggle('on', m.walk);
+    Object.keys(nodes).forEach(function(nid){
+      var el = document.getElementById(nid);
+      if (!el) return;
+      var hit = m.hit.indexOf(nid) !== -1;
+      el.classList.toggle('hit', hit);
+      el.classList.toggle('dim', !hit);
+    });
+    vName.textContent = m.name;
+    vPrice.textContent = m.price;
+    vReach.innerHTML = m.reach;
+    vDay.textContent = m.day;
+    vNote.innerHTML = m.note;
+  }
+
+  buttons.forEach(function(b){
+    b.addEventListener('click', function(){ apply(b.dataset.mode); });
+  });
+
+  apply('punt3');
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

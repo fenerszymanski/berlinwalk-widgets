@@ -1982,5 +1982,18 @@
     "png160": "tools-home/icons/berliner-unterwelten-tour-board-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berliner-unterwelten-tour-board.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_32d802a8eb3043d6a41cb03e3c8ecdef~mv2.png"
+  },
+  {
+    "slug": "spreewald-reach-map",
+    "title": "Spreewald Reach Map",
+    "category": "Maps",
+    "source": "chatgpt-browser-20260720",
+    "generatedAt": "2026-07-20",
+    "promptFile": "tools-home/icons/_src/daily-blog-spreewald-reach-map-icon-20260720-prompt.md",
+    "sourceImage": "tools-home/icons/_src/daily-blog-spreewald-reach-map-icon-20260720-raw.png",
+    "png512": "tools-home/icons/spreewald-reach-map.png",
+    "png160": "tools-home/icons/spreewald-reach-map-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/spreewald-reach-map.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_37b2072b8e554edf9446a6dbf9b54cb0~mv2.png"
   }
 ]
