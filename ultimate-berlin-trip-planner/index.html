@@ -13153,6 +13153,67 @@
         grid-template-columns: 1fr;
       }
     }
+
+    #bw-trip-planner .bw-artifact-review-banner {
+      align-items: center;
+      background: #FFFCDB;
+      border: 1px solid #E8D978;
+      border-radius: 10px;
+      color: #27422C;
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      margin: 0 0 16px;
+      padding: 12px 15px;
+    }
+
+    #bw-trip-planner .bw-artifact-review-banner[hidden] {
+      display: none;
+    }
+
+    #bw-trip-planner .bw-artifact-review-banner strong,
+    #bw-trip-planner .bw-artifact-review-banner span {
+      display: block;
+    }
+
+    #bw-trip-planner .bw-artifact-review-banner strong {
+      color: #123D18;
+      font-size: 14px;
+      font-weight: 950;
+    }
+
+    #bw-trip-planner .bw-artifact-review-banner span {
+      font-size: 12px;
+      font-weight: 750;
+      margin-top: 2px;
+    }
+
+    #bw-trip-planner .bw-artifact-review-banner b {
+      background: #1B5E20;
+      border-radius: 999px;
+      color: #FFE600;
+      flex: 0 0 auto;
+      font-size: 10px;
+      letter-spacing: 0.8px;
+      padding: 7px 9px;
+      text-transform: uppercase;
+    }
+
+    #bw-trip-planner[data-artifact-review-demo="true"] .bw-head,
+    #bw-trip-planner[data-artifact-review-demo="true"] .bw-control-panel,
+    #bw-trip-planner[data-artifact-review-demo="true"] .bw-mobile-peek,
+    #bw-trip-planner[data-artifact-review-demo="true"] .bw-body {
+      display: none !important;
+    }
+
+    #bw-trip-planner[data-artifact-review-demo="true"] .bw-full-plan {
+      margin-top: 0;
+    }
+
+    #bw-trip-planner[data-artifact-review-demo="true"] [data-copy-plan-link],
+    #bw-trip-planner[data-artifact-review-demo="true"] [data-share-whatsapp] {
+      display: none !important;
+    }
   </style>
 
   <section class="bw-wrap" aria-labelledby="bw-trip-title">
@@ -13486,6 +13547,10 @@
     </div>
 
     <section class="bw-full-plan" data-full-plan hidden>
+      <aside class="bw-artifact-review-banner" data-artifact-review-banner hidden>
+        <span><strong>BerlinWalk V3 review sample</strong><span>This is one fixed example plan. It creates no order and does not unlock a visitor's custom itinerary.</span></span>
+        <b>Demo</b>
+      </aside>
       <div class="bw-full-head">
         <div>
           <h2 class="bw-full-title">Your full Berlin plan</h2>
@@ -13528,6 +13593,19 @@
       var params = new URLSearchParams(window.location.search || '');
       return params.get('source') === 'berlin_trip_planner_page' ||
         params.get('parent_path') === '/berlin-trip-planner';
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function isArtifactReviewDemo() {
+    try {
+      var params = new URLSearchParams(window.location.search || '');
+      var host = String(window.location.hostname || '').toLowerCase();
+      var path = String(window.location.pathname || '');
+      var trustedSurface = host === 'fenerszymanski.github.io' || isLocalPreviewSurface();
+      var exactPlannerPath = /\/ultimate-berlin-trip-planner\/(?:index\.html)?$/i.test(path);
+      return trustedSurface && exactPlannerPath && params.get('review') === 'artifact-v3-sample';
     } catch (error) {
       return false;
     }
@@ -14552,6 +14630,7 @@
   }
 
   function track(event, params) {
+    if (isArtifactReviewDemo()) return;
     var allowAnalytics = analyticsAllowed();
     var allowAdvertising = advertisingAllowed();
     if (!allowAnalytics && !allowAdvertising) return;
@@ -28333,6 +28412,54 @@
     syncInputsFromState();
   }
 
+  function configureArtifactReviewDemo() {
+    if (!isArtifactReviewDemo()) return false;
+    // The owner-review sample stays deterministic so the browser screen and
+    // the published sample PDF can be compared against the same itinerary.
+    state.arrivalDate = '2026-08-03';
+    state.tripLength = 7;
+    state.arrivalTime = 'morning';
+    state.arrivalPoint = 'ber';
+    state.stayArea = 'mitte';
+    state.groupType = 'couple';
+    state.firstTime = 'yes';
+    state.interests = ['history', 'wall', 'museums', 'food', 'potsdam'];
+    state.budgetStyle = 'smart';
+    state.mustHandle = ['rain', 'photos', 'reservations'];
+    state.pace = 'balanced';
+    state.tourIntent = 'considering';
+    syncInputsFromState();
+
+    planningInProgress = false;
+    planGenerated = true;
+    planNeedsUpdate = false;
+    detailsStepStarted = true;
+    dayJumpDay = 1;
+    routeDeckDay = 1;
+    boardLens = 'route';
+    latestDailyWeather = {};
+    latestPlan = buildPlan();
+    ensureDailyWeatherForPlan(latestPlan);
+    latestArtifactV3 = buildPlanArtifactV3(latestPlan);
+    purchasedArtifactV3 = latestArtifactV3;
+    latestWeatherOverlayV1 = buildWeatherOverlayV1(purchasedArtifactV3);
+    entitlementVerified = true;
+    unlocked = true;
+    fdrEligibilityState = { eligible: false, checked: true, reason: 'review_sample' };
+
+    root.setAttribute('data-artifact-review-demo', 'true');
+    var banner = root.querySelector('[data-artifact-review-banner]');
+    if (banner) banner.hidden = false;
+    var robots = document.querySelector('meta[name="robots"]');
+    if (!robots) {
+      robots = document.createElement('meta');
+      robots.setAttribute('name', 'robots');
+      document.head.appendChild(robots);
+    }
+    robots.setAttribute('content', 'noindex,nofollow');
+    return true;
+  }
+
   function openEmailPlanFromLink() {
     if (!shouldOpenEmailPlan()) return;
     planningInProgress = false;
@@ -28783,30 +28910,35 @@
 
     upgradeOptionIcons();
     initFromParams();
+    var artifactReviewDemo = configureArtifactReviewDemo();
     if (quizFlowEnabled) detailsStepStarted = true;
-    renderPlanChrome(buildPlan());
+    if (artifactReviewDemo) renderPlan();
+    else renderPlanChrome(buildPlan());
     updatePlanningUi();
     updateUnlockUi();
     loadWeather();
     installPlannerFrameSync();
     installPlanArtifactV2QaBridge();
-    openEmailPlanFromLink();
+    if (!artifactReviewDemo) openEmailPlanFromLink();
     ensureFdrAddonPanel();
     renderFdrAddon();
-    handleCheckoutReturn();
-    trackLandingExperimentExposure();
-    track('bw_trip_planner_page_view', {
-      context: currentContext(),
-      arrival_date: state.arrivalDate,
-      trip_length: state.tripLength,
-      unlocked: unlocked
-    });
-    track('bw_trip_planner_start', {
-      context: currentContext(),
-      arrival_date: state.arrivalDate,
-      trip_length: state.tripLength,
-      unlocked: unlocked
-    });
+    if (!artifactReviewDemo) handleCheckoutReturn();
+    else setActionStatus('Review sample open. The PDF below is generated from this exact stored example plan.');
+    if (!artifactReviewDemo) {
+      trackLandingExperimentExposure();
+      track('bw_trip_planner_page_view', {
+        context: currentContext(),
+        arrival_date: state.arrivalDate,
+        trip_length: state.tripLength,
+        unlocked: unlocked
+      });
+      track('bw_trip_planner_start', {
+        context: currentContext(),
+        arrival_date: state.arrivalDate,
+        trip_length: state.tripLength,
+        unlocked: unlocked
+      });
+    }
   } catch (error) {
     renderPlannerLoadFailure(error);
   }
