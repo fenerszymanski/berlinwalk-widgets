@@ -1,12 +1,10 @@
 # Daily-blog tool icon — `berlin-beer-season-calendar` — 2026-07-19 prompt (STRICT to match family)
 
-**STATUS: NOT YET GENERATED.** The 2026-07-19 ~12:05 daily-blog run had no
-reachable non-paid image-generation path (no connected Chrome extension browser,
-`Control_Chrome` unresponsive, paid image APIs forbidden for this automation).
-Per the daily-blog standard this is the single flagged handoff item: generate the
-icon and finish the tool page in the next interactive session. Do **not** create
-the `tools-hub/data.json` entry or the BerlinTools CMS item before the icon
-exists, and never ship a placeholder or reused icon.
+**STATUS: GENERATED 2026-07-20.** Built-in Codex image generation produced the
+approved square source at
+`_src/daily-blog-berlin-beer-season-calendar-icon-20260719-raw.png`; canonical
+512 px and 160 px PNGs are in `tools-home/icons/`. Tool/CMS wiring follows in
+the same interactive publish session.
 
 Same fixed 3-layer BerlinTools family as the other `daily-blog-*` icons:
 1. plain cream background

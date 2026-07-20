@@ -1,8 +1,9 @@
 # Visual sources — berlin-ubahn-etiquette
 
 All 5 article images are real photographs from Wikimedia Commons, CC BY / CC BY-SA.
-Reader-facing attribution is required, so a public **Image Credits** block is
-included at the end of the post body. No AI visuals used for the article images.
+Reader-facing attribution is required, so a compact default-closed **Image credits**
+disclosure is included inside the article tool and the body ends with a short pointer.
+No AI visuals used for the article images.
 (AI allowance reserved for the BerlinTools icon only.)
 
 | File (optimized) | Source (Wikimedia Commons) | Author | License |

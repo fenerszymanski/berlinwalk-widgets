@@ -17,6 +17,12 @@ far west is worth it. The symbol is the broken tower of the Kaiser Wilhelm
 Memorial Church, the landmark that marks the start of the street. No text, no
 numbers, no people.
 
+**STATUS: GENERATED 2026-07-20.** Built-in Codex image generation produced the
+approved square source at
+`_src/daily-blog-kurfurstendamm-walk-icon-20260719-raw.png`; canonical 512 px
+and 160 px PNGs are in `tools-home/icons/`. Tool/CMS wiring follows in the same
+interactive publish session.
+
 ## `kurfurstendamm-walk` (Ku'damm Axis Walk)
 
 ```text

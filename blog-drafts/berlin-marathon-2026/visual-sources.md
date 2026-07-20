@@ -11,9 +11,10 @@ gitignored; every raw can be rebuilt from the source URLs below.
 
 No AI-generated visuals were used for this post.
 
-Licence mix: 4 CC0 (no attribution required, credited anyway), 2 CC BY-SA 4.0,
-1 CC BY-SA 3.0. A reader-facing Image Credits block is required for the three
-CC BY-SA files.
+Licence mix: 4 CC0 (no attribution required), 2 CC BY-SA 4.0 and 1 CC BY-SA
+3.0. The three CC BY-SA files are credited in the widget's default-closed
+Image credits disclosure with direct source and licence links plus the
+cropped/resized modification note.
 
 ---
 
@@ -52,7 +53,7 @@ CC BY-SA files.
 - Original 8368x5584 → 1600x1068
 - Shows: two handbikes on a wide, empty Rheinstra&szlig;e with bus-lane markings
   clearly visible, one pedestrian on the far pavement.
-- Used for: the 08:50 wheelchair and handbike start, and the point that a
+- Used for: the 08:20 handbike top-field start, and the point that a
   closed Berlin main road looks genuinely strange.
 
 ### 4. kurfuerstendamm-main-field.jpg
@@ -82,8 +83,8 @@ CC BY-SA files.
 - Original 5451x3634 → 1600x1067
 - Shows: the temporary grandstand and race structures built near the Brandenburg
   Gate for the 2025 race, with the Reichstag and its dome behind.
-- Used for: the point that the start and finish area is a building site for
-  roughly two weeks, not just for race day.
+- Used for: the point that the start and finish event build affects the area
+  well before race day.
 
 ### 7. inline-skating-marathon.jpg
 - Commons: https://commons.wikimedia.org/wiki/File:Berlin_inline_marathon_hohenstaufenstrasse_verfolgergruppe_24.09.2011_16-28-13.jpg
@@ -94,8 +95,8 @@ CC BY-SA files.
   late afternoon light.
 - Used for: the Saturday section, which is the part most visitors do not know
   about and the part that actually collides with a normal sightseeing day.
-- Dated 2011, but the Saturday skating race and its route role are unchanged, and
-  no stronger free image of it exists on Commons.
+- Dated 2011 and used only to show the inline event, not to document the 2026
+  circuit. No stronger free image of the event exists on Commons.
 
 ---
 

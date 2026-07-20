@@ -1,102 +1,121 @@
-Every September I get the same question on the tour, usually somewhere between the World Clock and the TV Tower: "so where is the Oktoberfest here?" People have booked a trip to Germany in autumn, they have seen the photos, and they assume Berlin does the thing with the tents and the long tables and the brass band. It is a completely fair assumption. It is also wrong.
+Every September someone asks me the same question near Alexanderplatz: "where is the Oktoberfest in Berlin?" In 2026 there is a useful twist. Alexanderplatz itself will host an event called Oktoberfest, so the honest answer is no longer "Berlin does not have one".
 
-Oktoberfest is a Munich event. It is Bavarian, it is regional, and Berlin has no equivalent of it. That does not mean there is nothing on, but the honest answer is that if you flew to Berlin expecting the Munich experience, you will not find it here, and no amount of searching will change that.
+The short answer is yes, Berlin has several Oktoberfest-style events. The important second half is that none of them is Munich's Wiesn, the city-defining festival with 14 large tents and millions of visitors. Berlin's versions are smaller, spread across different venues and easy to misunderstand if a search result mixes a beer festival, a funfair and an Oktoberfest tent together.
 
-Here is what Berlin actually does between August and October, what it costs, how to get there, and what I recommend instead when the dates do not line up.
+Here are the confirmed 2026 dates, the locations, what each event actually offers and the simple choice I would make for each kind of trip.
 
 ![Illuminated Prater Garten sign at dusk on Kastanienallee in Prenzlauer Berg, Berlin's oldest beer garden](blog-drafts/oktoberfest-in-berlin/images/optimized/01-oktoberfest-in-berlin-cover.jpg)
 
-_Prater Garten on Kastanienallee has been serving beer in the same courtyard since 1837. This, not a tent, is Berlin's answer to the question._
+_Prater Garten on Kastanienallee is a useful Berlin alternative when the weather allows: long tables under chestnut trees, without pretending to be the Munich Wiesn._
 
 {{quick-summary}}
 
-## Is there an Oktoberfest in Berlin? The short answer
+## Is there an Oktoberfest in Berlin? Yes, but set expectations correctly
 
-No, not in the sense you mean. There is no large, city-defining Oktoberfest in Berlin. The name gets used by a handful of small venue events and by one Bavarian-style beer tent at an autumn funfair, but nothing here operates at the scale of the Munich Wiesn, and no part of Berlin's identity is built around it.
+Berlin has a central Oktoberfest on Alexanderplatz, a larger tent event by Spandau Citadel and several other Bavarian-themed nights. They borrow the beer, music, long tables and dress from southern Germany. They do not take over Berlin in the way the Wiesn takes over Munich.
 
-The reason is simple: **Oktoberfest is Bavarian, and Berlin is about as far from Bavaria as Germany gets**, culturally and geographically. Lederhosen, brass bands, Maß glasses and Weisswurst are southern German. Berlin's own drinking culture grew up around beer gardens, corner pubs and, more recently, the Späti and the park bench. When Berliners want to drink outdoors in autumn, they do not put on a dirndl. They sit under a chestnut tree with a normal glass of Pils.
+That distinction matters when you plan a trip. If you want a convenient evening after sightseeing, choose Alexanderplatz. If the tent and live-band atmosphere is the main point, choose Spandau. If you care more about independent beer than Bavarian imitation, Berlin Beer Week is the stronger match. If you want the original Oktoberfest, build the trip around Munich.
 
 ![Bavarian-style beer tent facade at Oktoberfest in Munich with a banner reading Wegen Überfüllung kein Einlass, meaning no entry due to overcrowding](blog-drafts/oktoberfest-in-berlin/images/optimized/02-oktoberfest-in-berlin-munich-tent-full.jpg)
 
-_This is the thing people picture, and it is 600 km south of Berlin. The banner means "no entry, too full", which is a normal afternoon on the Theresienwiese._
+_Munich's Wiesn is the scale visitors usually picture. The banner says "no entry due to overcrowding", a reminder that the original is a separate trip rather than a casual Berlin evening._
 
-## What Berlin actually runs instead
+## Which Oktoberfest events run in Berlin in 2026?
 
-Two events matter, and they sit at opposite ends of the late-summer calendar. Neither is an Oktoberfest, and one of them is genuinely better than a tent.
+### Oktoberfest on Alexanderplatz, 25 September to 4 October 2026
 
-### Internationales Berliner Bierfestival, 7 to 9 August 2026
+This is the easiest option if you are staying in the centre. The event brings a Paulaner beer garden, live stage entertainment and Bavarian food to Alexanderplatz. Entry is free, so you can look around without committing an entire evening.
 
-This is Berlin's real beer event, and it is a very Berlin idea: instead of building a fairground, the city closes a boulevard. For three days in August, **Karl-Marx-Allee between Strausberger Platz and Frankfurter Tor becomes a 2.2 km beer garden** with something like 300 breweries, a couple of thousand beers and around 18 stages of live music.
+- **Dates:** Friday 25 September to Sunday 4 October 2026.
+- **Place:** Alexanderplatz 3 in Mitte.
+- **Transport:** S-Bahn or U2, U5 and U8 to Alexanderplatz. Trams M2, M4, M5 and M6 also stop around the square.
+- **My advice:** go for an hour after sightseeing, then decide whether the atmosphere is worth staying for. This is the lowest-effort way to answer your own Oktoberfest question.
 
-- **Dates for 2026: Friday 7 to Sunday 9 August.** It is the 30th edition.
-- **Entry is free.** You pay stall by stall for what you actually drink and eat.
-- **Getting there is easy.** The U5 runs directly under the festival: Strausberger Platz, Weberwiese and Frankfurter Tor are all on the strip. Warschauer Straße is about a ten-minute walk from the eastern end.
-- It gets very busy, with hundreds of thousands of people across the weekend, so go earlier in the day if crowds are not your thing.
+Check [Berlin's official event listing](https://www.berlin.de/events/2698409-2229501-oktoberfest-auf-dem-alexanderplatz.html) and the [organizer's programme](https://bergmannevent.de/oktoberfest-alexanderplatz/) before you go.
 
-The setting is half the point. Karl-Marx-Allee is the great socialist showpiece boulevard of East Berlin, all monumental tiled facades and enormous pavements, and drinking a Czech lager in the middle of it is a much more interesting afternoon than a marquee.
+### Oktoberfest at Spandau Citadel, 18 September to 24 October 2026
 
-![Beer stall with a Biere der Welt sign under trees at the Internationales Berliner Bierfestival on Karl-Marx-Allee](blog-drafts/oktoberfest-in-berlin/images/optimized/03-oktoberfest-in-berlin-bierfestival-karl-marx-allee.jpg)
+This is the stronger Berlin choice if you actually want a large tent, long tables and a live band. The tent has more than 2,000 seats, but it does not run every day across the advertised five-week window.
 
-_The Bierfestival is a street, not a fairground. Stalls run down the middle of Karl-Marx-Allee for over two kilometres._
+- **Dates:** Friday 18 September to Saturday 24 October 2026, **Fridays and Saturdays only**.
+- **Place:** the festival tent beside Spandau Citadel.
+- **Transport:** U7 to Zitadelle; the entrance is a short walk from the station. Night bus N7 and bus X33 also serve the area.
+- **My advice:** reserve or buy the current ticket package through the organizer, and treat this as your evening plan rather than something to drop into between museums.
 
-![Price board at the Berlin beer festival listing cannabis-ginger, apple, honey, cranberry and blackcurrant beers with prices in euros](blog-drafts/oktoberfest-in-berlin/images/optimized/04-oktoberfest-in-berlin-beer-list-prices.jpg)
+The [official Berlin listing](https://www.berlin.de/events/3196949-2229501-oktoberfest-berlinbrandenburg-in-spandau.html) gives the date window and transport. The [organizer](https://www.wollenschlaeger-berlin.de/festzelt-der-hauptstadt/) publishes the current Friday and Saturday programme, admission and reservation options.
 
-_Expect novelty beers alongside serious ones, with prices chalked up per 0.2, 0.4 or 1 litre. Nobody is checking whether you are drinking it correctly._
+### Berlin Beer Week, 28 August to 6 September 2026
+
+Berlin Beer Week is not an Oktoberfest, and that is exactly why I would choose it if the beer matters more than the costume. It is a citywide programme rather than one fairground: more than 35 events with over 100 participating breweries, including tap takeovers, tastings and six Brews Cruises.
+
+- **Dates:** Friday 28 August to Sunday 6 September 2026.
+- **Place:** different breweries, bars and boats across Berlin.
+- **Price:** each event has its own ticket or entry arrangement.
+- **My advice:** choose one named event from the programme and book that. Do not travel to a single address expecting a continuous street festival.
+
+The organizer keeps the current programme at [Berlin Beer Week](https://beerweek.de/). Berlin also publishes an [official city overview](https://www.berlin.de/restaurants/food-events/9817765-5146458-berlin-beer-week.html).
 
 ### Berliner Herbstrummel, 25 September to 25 October 2026
 
-This is the one people find when they search for "Oktoberfest Berlin", and it is worth knowing what it really is before you cross the city for it. The Berliner Herbstrummel is **an autumn funfair** on the Zentraler Festplatz at Kurt-Schumacher-Damm 207 in Reinickendorf: rides, sausage stands, claw machines, and a large Bavarian-style beer tent that gets marketed under the Oktoberfest name.
+The Berliner Herbstrummel is a separate autumn funfair on the Zentraler Festplatz. It has rides, games and food stands. It should not be presented as Berlin's Oktoberfest, and it should not be merged with the separate Oktoberfest listing at the same fairground whose 2026 dates are still pending.
 
-- **Dates for 2026: Friday 25 September to Sunday 25 October**, confirmed by the fairground's own calendar and the [city's event listing](https://www.berlin.de/en/events/6279065-2842498-berliner-herbst-rummel.en.html).
-- **Entry to the grounds is free.** The rides are not, and drinks in the tent are priced like a festival, not like a Späti.
-- **It is not on the U-Bahn.** You get there by bus M21 or X21 to the Zentraler Festplatz stop, which is a real journey from the centre. Budget a good 45 minutes each way from Mitte.
-- It is genuinely fun **if you want a funfair**. If you specifically want the Munich experience, you will be disappointed, and you will have spent an hour and a half on buses to find that out.
+- **Dates:** Friday 25 September to Sunday 25 October 2026.
+- **Place:** Zentraler Festplatz, Kurt-Schumacher-Damm 207 in Reinickendorf.
+- **Transport:** bus M21 or X21 to Zentraler Festplatz. Check BVG for the journey from your accommodation.
+- **My advice:** go because you want a funfair. Do not cross the city expecting the Munich Wiesn or a confirmed 2026 Oktoberfest tent.
 
-My honest advice: go if you like fairgrounds, or if you are travelling with kids who would enjoy the rides. Do not go purely to tick off "Oktoberfest".
+Use the [official Herbstrummel listing](https://www.berlin.de/events/6279065-2229501-berliner-herbstrummel.html) for the fair dates. Berlin's separate [Kurt-Schumacher-Damm Oktoberfest page](https://www.berlin.de/en/events/2698447-2842498-oktoberfest-berlin-kurtschumacherdamm.en.html) still shows no confirmed 2026 date, so I would not plan around it yet.
+
+## Why old search results still mention the Karl-Marx-Allee Biermeile
+
+The Internationales Berliner Bierfestival once filled Karl-Marx-Allee with a long line of beer stalls. Its last edition was in 2019, and in February 2020 the organizer announced that it would not continue, a decision recorded in a [Berlin House of Representatives written answer](https://pardok.parlament-berlin.de/starweb/adis/citat/VT/18/SchrAnfr/s18-22586.pdf). Pages that advertise a new 2026 edition with thousands of beers are recycling the old event's format, not describing a confirmed current festival.
+
+The next two photographs are kept as archive context because they explain why the old claim still looks believable. They do not show a current 2026 event or current prices.
+
+![Archive photograph of a Biere der Welt stall at the former Internationales Berliner Bierfestival on Karl-Marx-Allee in 2017](blog-drafts/oktoberfest-in-berlin/images/optimized/03-oktoberfest-in-berlin-bierfestival-karl-marx-allee.jpg)
+
+_Archive photograph from the former Karl-Marx-Allee Biermeile in 2017. The event no longer runs and this is not a 2026 festival scene._
+
+![Archive photograph of a 2017 beer price board at the former Internationales Berliner Bierfestival](blog-drafts/oktoberfest-in-berlin/images/optimized/04-oktoberfest-in-berlin-beer-list-prices.jpg)
+
+_This board shows 2017 products and prices at the discontinued Biermeile. It is historical context, not a guide to what beer costs in Berlin in 2026._
 
 {{widget:berlin-beer-season-calendar}}
 
-## If you want the actual Oktoberfest, it is a separate trip
+The calendar uses your Berlin arrival and departure dates, and it only counts Spandau when a Friday or Saturday falls inside your stay. It also contains a default-closed **Image credits** button with the source, licence and edit details for every photograph in this article.
 
-The Munich Oktoberfest runs from **Saturday 19 September to Sunday 4 October 2026** on the Theresienwiese. That is the real thing, the 191st edition, and it is not something you can fold into a Berlin holiday casually.
+## Munich Oktoberfest, 19 September to 4 October 2026
 
-Munich is roughly four hours from Berlin Hauptbahnhof by ICE. It is doable as an overnight, but during Wiesn weeks the city is full: hotel prices climb hard, and tables in the big tents are reserved months in advance. If Oktoberfest is the actual reason for your trip, book Munich as the destination and treat Berlin as the add-on, not the other way round. If you are just curious, save yourself the trip and read the tent rules on the [official Oktoberfest site](https://www.oktoberfest.de/en) before you commit to anything.
+Munich Oktoberfest runs from **Saturday 19 September to Sunday 4 October 2026** on the Theresienwiese. It is the 191st edition and the only event in this article that is the original Wiesn.
 
-If a train day out from Berlin is what you are really after, [Potsdam and the other day trips](https://www.berlinwalk.com/post/best-day-trips-from-berlin) are a far better use of a spare morning than 8 hours on the ICE.
+The fastest direct trains between Berlin and Munich can take around four hours, but schedules and fares vary. Eight hours on trains makes it a poor spontaneous day trip. If Oktoberfest is the reason for your holiday, sleep in Munich and use the [official Oktoberfest site](https://www.oktoberfest.de/en) to check tent opening times, reservations and the seats kept available without reservations. If you only want a train day out from Berlin, [Potsdam and the other day trips](https://www.berlinwalk.com/post/best-day-trips-from-berlin) are a better use of the day.
 
-## What to drink instead: the Berliner Weisse
+## What to drink in Berlin: Berliner Weisse
 
-If you want one drink that is genuinely local, order a **Berliner Weisse mit Schuss**. It is a sour wheat beer, historically the drink of the city, served with a shot of raspberry syrup (bright red) or woodruff syrup (alarming green). It is low in alcohol, it comes in a wide bowl-shaped glass, and it tastes like a tart shandy rather than anything you would call a beer at Oktoberfest.
+For a drink with a real Berlin connection, order a **Berliner Weisse mit Schuss**. It is a tart wheat beer served with raspberry syrup, which turns it red, or woodruff syrup, which turns it green. It is usually low in alcohol and arrives in a wide bowl-shaped glass.
 
-The history is better than the drink deserves. In the 19th century Berliner Weisse was the most popular alcoholic drink in the city, produced by hundreds of Berlin breweries, and Napoleon's soldiers reportedly called it the champagne of the north. By the end of the 20th century, two breweries were left making it. Ordering one is a small act of local archaeology.
+It is not a substitute for Oktoberfest beer. It is simply a local drink that gives you a better sense of Berlin than ordering a litre of Bavarian lager because you happen to be in Germany in September.
 
 ![Two glasses of Berliner Weisse mit Schuss, one bright red with raspberry syrup and one green with woodruff syrup](blog-drafts/oktoberfest-in-berlin/images/optimized/05-oktoberfest-in-berlin-berliner-weisse.jpg)
 
-_Berliner Weisse mit Schuss: red is raspberry, green is woodruff. Order it by colour if the German is not cooperating._
+_Berliner Weisse mit Schuss: raspberry is red and woodruff is green. Order it by colour if the German is not cooperating._
 
-## Where I actually send people
+## Where I send people outside the event dates
 
-The real answer to "where do I drink beer outdoors in Berlin" has nothing to do with any date on a calendar. These are open through the warm months regardless of what festival is or is not running:
+Berlin's beer gardens are seasonal and weather-dependent, so check the opening hours on the day. These three are practical rather than obscure:
 
-- **Prater Garten**, Kastanienallee 7-9 in Prenzlauer Berg. Berlin's oldest beer garden, in the same courtyard since 1837, 600 seats under chestnut trees. U2 to Eberswalder Straße.
-- **Café am Neuen See** in Tiergarten, on the lake, running since 1896. Rowing boats in season and, if you insist, Bavarian food. Closest to the Brandenburg Gate end of the centre.
-- **Zollpackhof**, near Hauptbahnhof, Augustiner poured from wooden barrels with the Chancellery on the far bank of the Spree. The easiest one to reach if you are arriving or leaving by train.
+- **Prater Garten**, Kastanienallee 7-9 in Prenzlauer Berg. Long benches under chestnut trees; U2 to Eberswalder Straße.
+- **Café am Neuen See**, inside Tiergarten beside the lake. Rowing boats in season and Bavarian food; S-Bahn or U-Bahn to Zoologischer Garten, then walk through the park.
+- **Zollpackhof**, Elisabeth-Abegg-Straße 1 near Hauptbahnhof. Augustiner beer with the Chancellery across the Spree.
 
-I wrote a longer piece on this: [the full Berlin beer gardens guide](https://www.berlinwalk.com/post/berlin-beer-gardens-guide) covers more of them, including the ones that are worth a tram ride. And if the weather turns, [what a Späti is and how to use one](https://www.berlinwalk.com/post/what-is-a-spati-berlin) is the more accurate picture of how Berliners actually drink.
+My [full Berlin beer gardens guide](https://www.berlinwalk.com/post/berlin-beer-gardens-guide) covers more options. If the weather turns, [what a Späti is and how to use one](https://www.berlinwalk.com/post/what-is-a-spati-berlin) is a more useful piece of Berlin drinking culture than chasing an outdoor table in the rain.
 
 ## How this fits a day in the centre
 
-If you are in Berlin in the last week of September or the first week of October, the practical plan is not a fairground. Do the historic centre in the morning while it is quiet, eat somewhere real, then spend the late afternoon in a beer garden. That is the Berlin version of the day you were imagining, and it costs a lot less.
+If your dates overlap the Alexanderplatz event, keep the plan simple: see the historic centre first, then return to the square for the early evening. If you choose Spandau, protect the whole evening for it and check that your date is a Friday or Saturday. For Beer Week, book one event and build the rest of the day around its actual address.
 
-My [free walking tour](https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based) runs about 2 hours through the medieval core and ends at Hackescher Markt, which is a useful place to be at that time of day. From there the tram M1 runs straight up to Eberswalder Straße for Prater Garten, and you have gone from the oldest part of Berlin to the oldest beer garden in Berlin in about twenty minutes. That is a better story than a tent.
+My [free walking tour](https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based) starts at Alexanderplatz, runs about 2 hours through the historic centre of former East Berlin and ends at Hackescher Markt. That gives you a grounded look at the city before you decide whether an Oktoberfest imitation, an independent beer event or a quiet garden is the right evening.
 
-For month-by-month planning around all of this, [Berlin in September](https://www.berlinwalk.com/post/berlin-in-september-2026) and [Berlin in October](https://www.berlinwalk.com/post/berlin-in-october-2026) cover weather, daylight and what else is on.
+For month-by-month planning, [Berlin in September](https://www.berlinwalk.com/post/berlin-in-september-2026) and [Berlin in October](https://www.berlinwalk.com/post/berlin-in-october-2026) cover weather, daylight and what else is on.
 
 {{faq}}
-
-## Image credits
-
-- Prater Garten sign: Superbass, CC BY-SA 3.0, via Wikimedia Commons.
-- Munich beer tent facade: Renardo la vulpo, CC BY-SA 4.0, via Wikimedia Commons.
-- Bierfestival stall and beer price board: Dtuk, CC BY-SA 3.0, via Wikimedia Commons.
-- Berliner Weisse mit Schuss: Jeuwre, CC BY-SA 4.0, via Wikimedia Commons.

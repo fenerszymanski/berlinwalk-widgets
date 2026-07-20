@@ -94,6 +94,7 @@
     }
     .bw-faq-q::-webkit-details-marker { display: none; }
     .bw-faq-q:hover { background: #f9f9f6; }
+    .bw-faq-q:focus-visible { outline: 3px solid #1B5E20; outline-offset: -3px; }
     .bw-faq-icon {
       color: #1B5E20;
       font-size: 18px;
@@ -170,7 +171,15 @@
 
       function attachToggleListeners() {
         bodyEl.querySelectorAll('details.bw-faq-item').forEach(function (d) {
-          d.addEventListener('toggle', postHeight);
+          d.addEventListener('toggle', function () {
+            if (d.open) {
+              var panel = d.closest('.bw-faq-panel') || bodyEl;
+              panel.querySelectorAll('details.bw-faq-item[open]').forEach(function (other) {
+                if (other !== d) other.open = false;
+              });
+            }
+            requestAnimationFrame(postHeight);
+          });
         });
       }
 

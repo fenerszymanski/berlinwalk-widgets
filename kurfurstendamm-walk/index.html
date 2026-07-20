@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Ku'damm Axis Walk: How Far West Is Actually Worth It</title>
-<meta name="description" content="Walk the 4.25 km Tauentzienstrasse and Kurfurstendamm axis stop by stop, with real photos, cumulative distance, the nearest U-Bahn out, and an honest verdict on where to stop." />
+<meta name="description" content="Follow the roughly 4.1 km Tauentzienstraße and Kurfürstendamm axis stop by stop, with real photos, practical transport exits and an honest verdict on where to stop." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Crect x='8' y='29' width='48' height='6' rx='3' fill='%23FFE600'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,7 +19,7 @@
   }
   *{box-sizing:border-box}
   [hidden]{display:none!important}
-  html,body{margin:0}
+  html,body{margin:0;max-width:100%;overflow-x:hidden}
   body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
   .bx{max-width:940px;margin:0 auto;padding:4px}
   .card{background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
@@ -41,8 +41,8 @@
   .rail-fill{position:absolute;left:0;top:11px;height:8px;border-radius:6px;
     background:linear-gradient(90deg,var(--green) 0%,var(--lime) 55%,#cbd6bd 100%);
     transition:width .45s cubic-bezier(.2,.7,.3,1)}
-  .pin{position:absolute;top:0;transform:translateX(-50%);background:none;border:0;padding:0;cursor:pointer;
-    display:flex;flex-direction:column;align-items:center;gap:5px;font-family:inherit}
+  .pin{position:absolute;top:-7px;transform:translateX(-50%);min-width:44px;min-height:44px;background:none;border:0;padding:7px 3px 0;cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:5px;font-family:inherit}
   .pin .dot{width:15px;height:15px;border-radius:50%;background:#fff;border:3px solid #c3d2b3;transition:all .25s}
   .pin .km{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:700;color:#9aa894;letter-spacing:.02em;white-space:nowrap;transition:color .25s}
   .pin[data-state="done"] .dot{border-color:var(--green);background:var(--green)}
@@ -51,8 +51,8 @@
   .pin[data-state="now"] .km{color:var(--green-deep);font-size:10.5px}
   .pin:focus-visible{outline:3px solid var(--green);outline-offset:4px;border-radius:8px}
   .pin .kmshort{display:none}
-  .pin.pin-first{transform:translateX(-14px)}
-  .pin.pin-last{transform:translateX(calc(-100% + 14px))}
+  .pin.pin-first{transform:translateX(-22px)}
+  .pin.pin-last{transform:translateX(calc(-100% + 22px))}
 
   /* ---------- stop panel ---------- */
   .stop{display:block}
@@ -108,8 +108,21 @@
   .btn:disabled{opacity:.35;cursor:default}
   .btn:focus-visible{outline:3px solid var(--green);outline-offset:3px}
 
-  .credits{padding:10px 22px 14px;font-size:10px;line-height:1.5;color:#8b978a;background:var(--panel)}
-  .credits a{color:#8b978a}
+  .credits-row{padding:8px 22px 12px;background:var(--panel);display:flex;justify-content:flex-end}
+  .credits-open,.credits-close{min-height:44px;border:1px solid #b8c8ae;border-radius:999px;background:#fff;color:var(--green-deep);
+    font:700 12px/1 Montserrat,system-ui,sans-serif;padding:0 16px;cursor:pointer}
+  .credits-open:hover,.credits-close:hover{background:var(--bone)}
+  .credits-open:focus-visible,.credits-close:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+  .credits-overlay{position:fixed;inset:0;z-index:40;padding:14px;background:rgba(18,61,24,.72);display:flex;align-items:center;justify-content:center}
+  .credits-dialog{width:min(720px,100%);max-height:calc(100vh - 28px);overflow:auto;background:#fff;border-radius:16px;
+    box-shadow:0 20px 60px rgba(0,0,0,.3);padding:20px;color:var(--ink)}
+  .credits-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 12px}
+  .credits-head h3{margin:0;color:var(--green-deep);font-size:19px}
+  .credits-dialog p{font-size:12px;line-height:1.55;margin:0 0 12px;color:#4f5d4c}
+  .credits-dialog h4{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin:16px 0 7px}
+  .credits-list{margin:0;padding:0 0 0 19px;font-size:11px;line-height:1.55;color:#4f5d4c}
+  .credits-list li{margin:0 0 6px}
+  .credits-list a{color:var(--green-deep);font-weight:700}
 
   @media (max-width:720px){
     .body{grid-template-columns:1fr;gap:18px}
@@ -117,13 +130,13 @@
     .head h2{font-size:19px}
     .rail-wrap{padding:16px 14px 4px}
     .body{padding:17px 16px 19px}
-    .verdict,.nav,.credits{padding-left:16px;padding-right:16px}
+    .verdict,.nav,.credits-row{padding-left:16px;padding-right:16px}
     .pin .km{display:none}
     .pin .kmshort{display:block;font-size:9.5px}
     .pin[data-state="now"] .kmshort{font-size:11px}
     .rail-top{flex-direction:column;align-items:flex-start;gap:3px;margin-bottom:12px}
-    .pin.pin-first{transform:translateX(-9px)}
-    .pin.pin-last{transform:translateX(calc(-100% + 9px))}
+    .pin.pin-first{transform:translateX(-22px)}
+    .pin.pin-last{transform:translateX(calc(-100% + 22px))}
     .rail{height:46px}
     .metrics{gap:8px}
     .metric{padding:8px 9px}
@@ -132,6 +145,51 @@
   @media (max-width:400px){
     .metric .k{font-size:9px;letter-spacing:.05em}
     .meter .b{width:17px}
+  }
+  @media (max-width:300px){
+    .bx{padding:2px}
+    .card{border-radius:13px}
+    .head{padding:12px 12px 11px}
+    .head .eyebrow{font-size:9px;margin-bottom:4px}
+    .head h2{font-size:16.5px;line-height:1.22}
+    .head p{font-size:11px;line-height:1.4;margin-top:5px}
+    .rail-wrap{padding:10px 10px 9px}
+    .rail-top{gap:2px;margin-bottom:8px}
+    .rail-label,.rail-total{font-size:9px}
+    .rail{height:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+    .rail-track,.rail-fill{display:none}
+    .pin,.pin.pin-first,.pin.pin-last{position:relative;left:auto!important;top:auto;transform:none;width:100%;min-width:0;min-height:48px;
+      padding:5px 2px;border:1px solid #cad8be;border-radius:9px;background:#fff;justify-content:center;gap:3px}
+    .pin[data-state="done"]{background:#edf5e5}
+    .pin[data-state="now"]{background:var(--yellow);border-color:var(--green)}
+    .pin[data-state="now"] .dot{box-shadow:none;background:#fff}
+    .pin .kmshort,.pin[data-state="now"] .kmshort{font-size:9px;color:var(--green-deep)}
+    .shot figcaption{padding:18px 10px 7px;font-size:9.5px}
+    .stopno{top:8px;left:8px;font-size:9px;padding:4px 8px}
+    .body{padding:12px 11px 13px;gap:10px}
+    .stopname{font-size:17px}
+    .lines{margin-top:7px;gap:4px}
+    .line-pill{font-size:9px;padding:4px 6px}
+    .metrics{gap:4px;margin-top:9px}
+    .metric{padding:6px 4px;border-radius:8px}
+    .metric .v{font-size:12.5px}
+    .metric .k{font-size:7.5px;line-height:1.2;margin-top:2px}
+    .meter{margin-top:9px;gap:7px}
+    .meter .b{width:15px;height:7px}
+    .meter .lab{font-size:9.5px}
+    .yusuf{margin-top:9px;padding:9px 10px;font-size:11.5px;line-height:1.42}
+    .here-title{margin-bottom:6px;font-size:9px}
+    .here{margin-top:0}
+    .here li{padding-left:16px;margin-bottom:5px;font-size:11.5px;line-height:1.42}
+    .here li::before{left:1px;top:6px;width:6px;height:6px}
+    .verdict{padding:10px 11px;font-size:11.5px;line-height:1.42}
+    .nav{gap:6px;padding:8px 10px 9px}
+    .btn{min-height:44px;padding:7px 5px;font-size:11.5px;border-radius:9px}
+    .credits-row{padding:7px 10px 9px}
+    .credits-open{width:100%}
+    .credits-overlay{padding:7px}
+    .credits-dialog{max-height:calc(100vh - 14px);padding:14px;border-radius:12px}
+    .credits-head h3{font-size:16px}
   }
   @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -142,15 +200,15 @@
     <div class="head">
       <p class="eyebrow">Berlinwalk.com &bull; Ku'damm axis</p>
       <h2>How far west is the Ku'damm actually worth walking?</h2>
-      <p>The Tauentzienstrasse and Kurfurstendamm axis runs 4.25 km west from Wittenbergplatz. Step along it and see what is at each stop, what it costs you in walking minutes, and where the reasons run out.</p>
+      <p>The Tauentzienstraße and Kurfürstendamm axis runs about 4.1 km west from Wittenbergplatz. Step through six stops and see where the useful visitor walk ends.</p>
     </div>
 
     <div class="rail-wrap">
       <div class="rail-top">
         <span class="rail-label">Wittenbergplatz &rarr; Rathenauplatz</span>
-        <span class="rail-total">4.25 km &bull; 6 stops</span>
+        <span class="rail-total">About 4.1 km &bull; 6 stops</span>
       </div>
-      <div class="rail" id="rail">
+      <div class="rail" id="rail" aria-label="Choose a stop on the westbound route">
         <div class="rail-track"></div>
         <div class="rail-fill" id="railFill" style="width:0%"></div>
       </div>
@@ -159,7 +217,7 @@
     <div class="stop">
       <figure class="shot" style="margin:0">
         <span class="stopno" id="stopNo">Stop 1 of 6</span>
-        <img id="shotImg" src="img/stop1-wittenbergplatz.jpg" alt="The entrance hall of Wittenbergplatz U-Bahn station in Berlin" width="880" height="545" />
+        <img id="shotImg" src="img/stop1-wittenbergplatz.jpg" alt="The exterior entrance pavilion of Wittenbergplatz U-Bahn station in Berlin" width="880" height="545" />
         <figcaption id="shotCap"></figcaption>
       </figure>
 
@@ -171,7 +229,7 @@
           <div class="metrics">
             <div class="metric"><div class="v" id="mKm"></div><div class="k">From the start</div></div>
             <div class="metric"><div class="v" id="mMin"></div><div class="k">Walking time</div></div>
-            <div class="metric"><div class="v" id="mLeft"></div><div class="k">Street left</div></div>
+            <div class="metric"><div class="v" id="mLeft"></div><div class="k">Axis left</div></div>
           </div>
 
           <div class="meter">
@@ -192,108 +250,136 @@
     <p class="verdict" id="verdict" style="margin:0" role="status" aria-live="polite"></p>
 
     <div class="nav">
-      <button class="btn ghost" id="btnBack" type="button">&larr; Back a stop</button>
-      <button class="btn go" id="btnNext" type="button">Walk on &rarr;</button>
+      <button class="btn ghost" id="btnBack" type="button">&larr; Back</button>
+      <button class="btn go" id="btnNext" type="button">Next &rarr;</button>
     </div>
 
-    <p class="credits" style="margin:0">Photos, in stop order: Avi1111 dr. avishai teicher (CC BY-SA 4.0), Flocci Nivis (CC BY 4.0), Maksym Kozlenko (CC BY-SA 4.0), Fridolin freudenfett (CC BY-SA 4.0), Andreas Praefcke (CC BY 3.0), Gunnar Klack (CC BY-SA 4.0), via Wikimedia Commons.</p>
+    <div class="credits-row">
+      <button class="credits-open" id="creditsOpen" type="button" aria-expanded="false" aria-controls="creditsOverlay">Image credits</button>
+    </div>
   </div>
+</div>
+
+<div class="credits-overlay" id="creditsOverlay" hidden>
+  <section class="credits-dialog" id="creditsDialog" role="dialog" aria-modal="true" aria-labelledby="creditsTitle" tabindex="-1">
+    <div class="credits-head">
+      <h3 id="creditsTitle">Image credits</h3>
+      <button class="credits-close" id="creditsClose" type="button" aria-label="Close image credits">Close</button>
+    </div>
+    <p>All photographs are from Wikimedia Commons. Article images were resized to a 1600 px long edge; route versions were resized and cropped to 880 × 545 px.</p>
+    <h4>Article photographs</h4>
+    <ul class="credits-list">
+      <li><a href="https://commons.wikimedia.org/wiki/File:20220812_Kaiser-Wilhelm-Ged%C3%A4chtniskirche.jpg" target="_blank" rel="noopener">Kaiser Wilhelm Memorial Church</a> — Flocci Nivis, <a href="https://creativecommons.org/licenses/by/4.0" target="_blank" rel="noopener">CC BY 4.0</a>.</li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:Tauentzienstr_from_KaDeWe.jpg" target="_blank" rel="noopener">Tauentzienstraße from KaDeWe</a> — A.Savin, <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener">CC BY-SA 3.0</a>.</li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:2023-01-23_Kurf%C3%BCrstendamm_(Berlin-Charlottenburg)_3.jpg" target="_blank" rel="noopener">Kurfürstendamm street view</a> — Maksym Kozlenko, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:Bikinihaus,_Berlin.jpg" target="_blank" rel="noopener">Bikini Berlin</a> — Dreas, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:Charlottenburg_Savignyplatz_03.jpg" target="_blank" rel="noopener">Savignyplatz</a> — Fridolin freudenfett, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:Berlin_Schaub%C3%BChne_nachts.jpg" target="_blank" rel="noopener">Schaubühne at night</a> — Andreas Praefcke, <a href="https://creativecommons.org/licenses/by/3.0" target="_blank" rel="noopener">CC BY 3.0</a>.</li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:1978-04-XX_Berlin-Charlottenburg_Tauentzienstra%C3%9Fe_b.jpg" target="_blank" rel="noopener">Tauentzienstraße in 1978</a> — Lothar Weber, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+    </ul>
+    <h4>Additional route photographs</h4>
+    <ul class="credits-list">
+      <li><a href="https://commons.wikimedia.org/wiki/File:U-Bahnhof_Wittenbergplatz,_entrance_building_exterior.jpg" target="_blank" rel="noopener">Wittenbergplatz entrance pavilion</a> — Avi1111 dr. avishai teicher, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:Charlottenburg_Kurf%C3%BCrstendamm_68.jpg" target="_blank" rel="noopener">Kurfürstendamm 68</a> — Fridolin freudenfett, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:Rathenauplatz,_Berlin-Grunewald,_Beton-Cadillacs_Wolf_Vostell_05_2014.jpg" target="_blank" rel="noopener">Beton-Cadillacs at Rathenauplatz</a> — Gunnar Klack, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+    </ul>
+  </section>
 </div>
 
 <script>
 (function(){
-  var TOTAL = 4.25;
+  var TOTAL = 4.1;
 
   var STOPS = [
     {
       name: 'Wittenbergplatz',
       img: 'img/stop1-wittenbergplatz.jpg',
-      alt: 'The 1913 entrance hall of Wittenbergplatz U-Bahn station in Berlin',
-      cap: 'Wittenbergplatz station, opened in 1913, still has its original hall and wooden ticket booths.',
+      alt: 'The exterior entrance pavilion of Wittenbergplatz U-Bahn station in Berlin',
+      cap: 'The listed 1913 entrance pavilion on Wittenbergplatz, seen from the square.',
       lines: ['U1', 'U2', 'U3'],
       km: 0, min: 0, density: 5,
       here: [
-        'KaDeWe, the biggest department store on the European mainland, stands directly on the square. Its sixth-floor food hall is the part worth seeing even if you buy nothing.',
-        'The station hall itself is from 1913 and kept its wooden ticket booths, so it is one of the few Berlin stations people photograph from the inside.',
-        'You are on Tauentzienstrasse. The Kurfurstendamm has not started yet, which is the first thing most visitors get wrong.'
+        'KaDeWe, one of Europe\'s best-known department stores, stands directly on the square. Its sixth-floor food hall is worth seeing even if you buy nothing.',
+        'The photograph shows the exterior of the listed U-Bahn entrance pavilion, which dates from 1913.',
+        'You are on Tauentzienstraße. The Kurfürstendamm has not started yet.'
       ],
-      yusuf: 'Almost everyone who says they are going to the Ku\'damm arrives here, on a different street. Start here anyway. Walking west means the church comes at you head on, and that is the better version of this walk.',
-      verdict: '<b>0.0 km walked.</b> The Kurfurstendamm has not started yet. Everything around you is Tauentzienstrasse.'
+      yusuf: 'Start here anyway. Walking west brings the broken church straight into view, which is the best approach to City West.',
+      verdict: '<b>Start: Wittenbergplatz.</b> The Kurfürstendamm has not started yet. Everything around you is Tauentzienstraße.'
     },
     {
       name: 'Breitscheidplatz',
       img: 'img/stop2-breitscheidplatz.jpg',
       alt: 'The Kaiser Wilhelm Memorial Church and its broken tower on Breitscheidplatz in Berlin',
-      cap: 'Breitscheidplatz, where the Kurfurstendamm officially begins at the Kaiser Wilhelm Memorial Church.',
-      lines: ['U1', 'U9', 'U2 + S-Bahn 300 m'],
-      km: 0.75, min: 10, density: 5,
+      cap: 'Breitscheidplatz, where the Kurfürstendamm officially begins at the Kaiser Wilhelm Memorial Church.',
+      lines: ['U1/U9 • 200 m', 'Zoo • U2/U9/S • 300 m'],
+      km: 0.7, min: 9, density: 5,
       here: [
-        'The Kaiser Wilhelm Memorial Church, bombed in November 1943 and deliberately left broken. Entry is free, and the memorial hall in the old tower is open Monday to Saturday from 10:00 to 18:00.',
-        'Bikini Berlin, the concept mall in the 1950s block behind the church. Its roof terrace is listed as open daily from 9:00 to 21:00 and looks straight into the zoo\'s monkey enclosure, for nothing.',
-        'C/O Berlin, the photography museum in the old Amerika Haus by Zoologischer Garten station, open daily 11:00 to 20:00.'
+        'The Kaiser Wilhelm Memorial Church is free. The new church is normally open daily 10:00 to 18:00; check the current notice before entering the ruined tower\'s Memorial Hall.',
+        'Bikini Berlin\'s free terrace looks across into the zoo. The direct monkey-enclosure view is from the panoramic Monkey Window inside the lower mall.',
+        'C/O Berlin is open daily 11:00 to 20:00: 15 euros, 8 euros reduced, free for visitors aged 18 and under.'
       ],
-      yusuf: 'This square is the real centre of West Berlin, and the Kurfurstendamm officially starts here. If you only have an hour in the west of the city, spend all of it inside these 300 metres and skip the rest of the street.',
-      verdict: '<b>0.75 km walked, about 10 minutes.</b> You are standing at the start of the Kurfurstendamm and, honestly, in the best part of it.'
+      yusuf: 'If you only have an hour in City West, spend it inside this 300-metre cluster. The Kurfürstendamm officially starts here.',
+      verdict: '<b>About 0.7 km and 9 minutes from Wittenbergplatz.</b> You are at the start of the Kurfürstendamm and in its strongest visitor cluster.'
     },
     {
-      name: 'Uhlandstrasse',
+      name: 'Uhlandstraße',
       img: 'img/stop3-uhlandstrasse.jpg',
-      alt: 'Shops and a U-Bahn entrance on the Kurfurstendamm with the Memorial Church tower behind',
-      cap: 'The shopping core of the Kurfurstendamm, with the church tower still visible behind you.',
+      alt: 'Shops and a U-Bahn entrance on the Kurfürstendamm with the Memorial Church tower behind',
+      cap: 'The shopping core of the Kurfürstendamm, with the church tower still visible behind you.',
       lines: ['U1'],
-      km: 1.35, min: 18, density: 4,
+      km: 1.3, min: 18, density: 4,
       here: [
-        'The densest run of shops on the whole street sits between Breitscheidplatz and here, including the Kranzler rotunda with its red and white striped roof, the surviving landmark of West Berlin cafe life.',
-        'Savignyplatz is 400 m north: two leafy squares, restaurants under the S-Bahn arches, and the Bucherbogen bookshops built into the railway vaults.',
-        'U1 ends here, so this is the last stop where the line that runs under the Ku\'damm can take you back east.'
+        'The densest run of shops sits between Breitscheidplatz and here, including the red-and-white Kranzler rotunda.',
+        'Savignyplatz is about 400 m north, with restaurants under the S-Bahn arches and bookshops in the railway vaults.',
+        'U1 terminates here, giving you an easy route back east.'
       ],
-      yusuf: 'This is where I turn off. Savignyplatz on a warm evening, under the arches with a plate of something, beats another kilometre of shop windows every single time. I have walked the rest and I did not need to.',
-      verdict: '<b>1.35 km walked, about 18 minutes.</b> This is where most visitors should stop walking and start sitting down.'
+      yusuf: 'This is where I turn off. Savignyplatz on a warm evening beats another kilometre of shop windows.',
+      verdict: '<b>About 1.3 km and 18 minutes from Wittenbergplatz.</b> This is where most visitors should stop walking and start sitting down.'
     },
     {
       name: 'Adenauerplatz',
       img: 'img/stop4-adenauerplatz.jpg',
-      alt: 'A Wilhelminian apartment building on the western Kurfurstendamm in Berlin',
+      alt: 'A Wilhelminian apartment building on the western Kurfürstendamm in Berlin',
       cap: 'West of the shopping core the Ku\'damm turns into offices, hotels and old apartment blocks.',
       lines: ['U7'],
-      km: 2.45, min: 32, density: 2,
+      km: 2.4, min: 31, density: 2,
       here: [
-        'Offices, hotels, car showrooms and tall Wilhelminian apartment blocks. Real Berlin, but not what anyone came to the Kurfurstendamm to see.',
-        'The U7 crosses here, which makes this the last easy escape before the street gets thin.',
-        'There are still 1.8 km of Kurfurstendamm ahead of you.'
+        'Offices, hotels, car showrooms and Wilhelminian apartment blocks now outnumber visitor sights.',
+        'U7 crosses here, making this the last U-Bahn exit directly on the street.',
+        'About 1.7 km of the combined axis remains.'
       ],
-      yusuf: 'The honest version: the shopping is behind you. Unless you have a specific reason to keep going, take the U7 here and be somewhere else. Nobody gives you a prize for finishing a boulevard.',
-      verdict: '<b>2.45 km walked, about 32 minutes.</b> The street keeps going. The reasons to be on it have mostly run out.'
+      yusuf: 'Unless you have a specific destination farther west, take U7 here. Nobody gives you a prize for finishing a boulevard.',
+      verdict: '<b>About 2.4 km and 31 minutes from Wittenbergplatz.</b> The street keeps going; the general visitor reasons are mostly behind you.'
     },
     {
       name: 'Lehniner Platz',
       img: 'img/stop5-lehniner-platz.jpg',
-      alt: 'The lit Schaubuhne theatre sign on the western Kurfurstendamm at night',
-      cap: 'The Schaubuhne occupies Erich Mendelsohn\'s Universum cinema of 1928.',
-      lines: ['No U-Bahn', 'Buses along Ku\'damm'],
-      km: 3.35, min: 44, density: 2,
+      alt: 'The lit Schaubühne theatre sign on the western Kurfürstendamm at night',
+      cap: 'The Schaubühne occupies Erich Mendelsohn\'s Universum cinema of 1928.',
+      lines: ['M19', 'M29', 'No U-Bahn'],
+      km: 3.2, min: 42, density: 2,
       here: [
-        'The Schaubuhne, one of the most important theatres in Germany, with an English-surtitled programme on many nights.',
-        'Its building is Erich Mendelsohn\'s Universum cinema from 1928, curved like a ship and probably the first modernist cinema anywhere. Mendelsohn\'s line about it was that Buster Keaton did not need a baroque palace.',
-        'The surrounding WOGA complex was designed as one block of flats, shops and a cinema together, which was a new idea in 1928.'
+        'The Schaubühne is one of Germany\'s important theatres. Selected performances have English surtitles; check the current programme first.',
+        'Its home is Erich Mendelsohn\'s curved Universum cinema from 1928, part of the WOGA complex.',
+        'Buses M19 and M29 stop at Lehniner Platz; there is no U-Bahn station here.'
       ],
-      yusuf: 'Come here for a play or for the architecture, on purpose, by U-Bahn and bus. Do not arrive here tired at the end of a shopping walk. It deserves a trip of its own and it is a poor reward for sore feet.',
-      verdict: '<b>3.35 km walked, about 44 minutes.</b> You are out here for architecture now, not for the street.'
+      yusuf: 'Come here on purpose for a play or the architecture, using M19 or M29. Do not treat it as the reward for finishing a shopping walk.',
+      verdict: '<b>About 3.2 km and 42 minutes from Wittenbergplatz.</b> You are here for the Schaubühne now, not for the boulevard in general.'
     },
     {
       name: 'Rathenauplatz',
       img: 'img/stop6-rathenauplatz.jpg',
       alt: 'Wolf Vostell\'s two concrete Cadillacs standing on end at Rathenauplatz in Berlin',
       cap: 'Two Cadillacs set in concrete, left over from West Berlin\'s 750th birthday in 1987.',
-      lines: ['S Halensee ~10 min'],
-      km: 4.25, min: 55, density: 1,
+      lines: ['M19/M29', '143/N43', 'S Halensee • 400 m'],
+      km: 4.1, min: 53, density: 1,
       here: [
-        'Wolf Vostell\'s two concrete Cadillacs stand on end in the middle of the traffic circle, put there in 1987 and still argued about.',
-        'They are what is left of the Skulpturenboulevard, a temporary line of sculptures installed along the whole axis for West Berlin\'s 750th anniversary.',
-        'The Kurfurstendamm ends here. From this point the nearest sensible way back is the Ringbahn at Halensee, about ten minutes on foot.'
+        'Wolf Vostell\'s two concrete Cadillacs have stood in the traffic circle since 1987 and are still argued about.',
+        'They are one of three surviving works from the Skulpturenboulevard project for Berlin\'s 750th anniversary.',
+        'The Kurfürstendamm ends here. S Halensee is about 400 m away; buses M19, M29, 143 and N43 serve the square.'
       ],
-      yusuf: 'Almost nobody walks the whole thing, and that is a fair decision. If you did it, the reward is a strange sculpture and a Ringbahn station. Good story, bad plan. I would not build a Berlin day around it.',
-      verdict: '<b>4.25 km walked, about 55 minutes.</b> The full length. You now know the Kurfurstendamm better than most Berliners do, including the boring part.'
+      yusuf: 'The concrete Cadillacs are a good story, but I would visit them only if the sculpture itself interests you.',
+      verdict: '<b>About 4.1 km and 53 minutes from Wittenbergplatz.</b> You have reached the western end of the Kurfürstendamm.'
     }
   ];
 
@@ -308,6 +394,8 @@
     b.type = 'button';
     b.style.left = (s.km / TOTAL * 100) + '%';
     b.setAttribute('aria-label', 'Go to stop ' + (n + 1) + ', ' + s.name);
+    b.setAttribute('aria-pressed', n === 0 ? 'true' : 'false');
+    b.setAttribute('tabindex', n === 0 ? '0' : '-1');
     b.innerHTML = '<span class="dot"></span><span class="km">' + s.name + '</span>' +
                   '<span class="km kmshort">' + s.km.toFixed(1) + '</span>';
     b.addEventListener('click', function(){ go(n); });
@@ -355,9 +443,9 @@
       lw.appendChild(p);
     });
 
-    $('mKm').textContent = s.km.toFixed(2) + ' km';
+    $('mKm').textContent = s.km === 0 ? 'start' : '≈' + s.km.toFixed(1) + ' km';
     $('mMin').textContent = s.min === 0 ? 'start' : s.min + ' min';
-    $('mLeft').textContent = (TOTAL - s.km).toFixed(2) + ' km';
+    $('mLeft').textContent = s.km === TOTAL ? '0 km' : '≈' + (TOTAL - s.km).toFixed(1) + ' km';
 
     var ul = $('stopHere');
     ul.innerHTML = '';
@@ -378,11 +466,14 @@
     $('railFill').style.width = (s.km / TOTAL * 100) + '%';
     for (var p = 0; p < pins.length; p++) {
       pins[p].setAttribute('data-state', p < i ? 'done' : (p === i ? 'now' : 'ahead'));
+      pins[p].setAttribute('aria-pressed', p === i ? 'true' : 'false');
+      pins[p].setAttribute('tabindex', p === i ? '0' : '-1');
     }
 
     $('btnBack').disabled = (i === 0);
     $('btnNext').disabled = (i === STOPS.length - 1);
-    $('btnNext').textContent = (i === STOPS.length - 1) ? 'End of the street' : 'Walk on →';
+    $('btnNext').textContent = (i === STOPS.length - 1) ? 'Route complete' : 'Next →';
+    requestAnimationFrame(postHeight);
   }
 
   function go(n){
@@ -393,10 +484,61 @@
 
   $('btnBack').addEventListener('click', function(){ go(i - 1); });
   $('btnNext').addEventListener('click', function(){ go(i + 1); });
-  document.addEventListener('keydown', function(e){
-    if (e.key === 'ArrowRight') go(i + 1);
-    if (e.key === 'ArrowLeft') go(i - 1);
+  rail.addEventListener('keydown', function(e){
+    if (!e.target.classList.contains('pin')) return;
+    var target = i;
+    if (e.key === 'ArrowRight') target = Math.min(STOPS.length - 1, i + 1);
+    else if (e.key === 'ArrowLeft') target = Math.max(0, i - 1);
+    else if (e.key === 'Home') target = 0;
+    else if (e.key === 'End') target = STOPS.length - 1;
+    else return;
+    e.preventDefault();
+    go(target);
+    pins[target].focus();
   });
+
+  var creditsOpen = $('creditsOpen');
+  var creditsClose = $('creditsClose');
+  var creditsOverlay = $('creditsOverlay');
+  var creditsDialog = $('creditsDialog');
+
+  function openCredits(){
+    creditsOverlay.removeAttribute('hidden');
+    creditsOpen.setAttribute('aria-expanded', 'true');
+    creditsDialog.focus();
+  }
+
+  function closeCredits(){
+    creditsOverlay.setAttribute('hidden', '');
+    creditsOpen.setAttribute('aria-expanded', 'false');
+    creditsOpen.focus();
+  }
+
+  creditsOpen.addEventListener('click', openCredits);
+  creditsClose.addEventListener('click', closeCredits);
+  creditsOverlay.addEventListener('click', function(e){
+    if (e.target === creditsOverlay) closeCredits();
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && !creditsOverlay.hasAttribute('hidden')) closeCredits();
+  });
+
+  function postHeight(){
+    var msg = {
+      type: 'bw-resize',
+      height: Math.ceil(document.documentElement.getBoundingClientRect().height),
+      src: location.pathname + location.search
+    };
+    try {
+      if (window.top && window.top !== window) window.top.postMessage(msg, '*');
+    } catch (e) {}
+    try {
+      if (window.parent && window.parent !== window && window.parent !== window.top) window.parent.postMessage(msg, '*');
+    } catch (e) {}
+  }
+
+  window.addEventListener('load', postHeight);
+  window.addEventListener('resize', postHeight);
 
   render();
 })();

@@ -2813,13 +2813,11 @@
     "icon": "🛍️",
     "kicker": "BERLINWALK.COM • TOURIST TIPS",
     "items": [
-      "**The Kurfürstendamm is 3.5 km long and starts at Breitscheidplatz**, at the broken Kaiser Wilhelm Memorial Church, and runs southwest to Rathenauplatz. KaDeWe is not on it: that is Tauentzienstraße, the shorter street leading in from Wittenbergplatz.",
-      "**Use Wittenbergplatz to Uhlandstraße as the visitor walk.** The combined 1.3 to 1.4 km axis takes about 18 minutes; only its western section is Kurfürstendamm.",
-      "**Stay around Breitscheidplatz if time is short.** The church, Bikini Berlin, zoo entrance, C/O Berlin and Zoo station sit within about 300 metres.",
-      "**Check current church hours before entering the ruined tower.** The new church is normally open daily 10:00 to 18:00; Memorial Hall days can change. Entry is free.",
-      "**Bikini Berlin's free terrace looks across into the zoo.** For the direct monkey-enclosure view, use the panoramic Monkey Window inside the lower mall.",
-      "**C/O Berlin is open daily 11:00 to 20:00.** Tickets are 15 euros, 8 euros reduced, and free for visitors aged 18 and under.",
-      "**Zone AB covers the route.** From Alexanderplatz, the S-Bahn to Zoologischer Garten is simplest; useful exits include U Kurfürstendamm, U Uhlandstraße and U Adenauerplatz."
+      "**The Ku'damm starts at Breitscheidplatz, not KaDeWe.** KaDeWe is on Tauentzienstraße; the Kurfürstendamm runs 3.5 km west to Rathenauplatz.",
+      "**Walk Wittenbergplatz to Uhlandstraße.** The combined 1.3 to 1.4 km visitor axis takes about 18 minutes; stay around Breitscheidplatz if time is short.",
+      "**The church and Bikini terrace are free.** Check current tower-hall hours. The terrace overlooks the zoo; the direct monkey view is indoors.",
+      "**C/O Berlin opens daily 11:00 to 20:00.** Tickets cost 15 or 8 euros; visitors aged 18 and under enter free.",
+      "**Zone AB covers the route.** From Alexanderplatz take the S-Bahn to Zoo; leave via U Kurfürstendamm, U Uhlandstraße or U Adenauerplatz."
     ]
   },
   "berlin-ghost-stations": {
@@ -2840,14 +2838,12 @@
     "icon": "🏃",
     "kicker": "BERLINWALK.COM • TOURIST TIPS",
     "items": [
-      "**The Berlin Marathon 2026 is on Sunday 27 September 2026.** Handbike and wheelchair starts run from 08:20 to 08:29. Runners then leave Straße des 17. Juni in six waves at 08:45, 09:05, 09:33, 10:02, 10:12 and 10:27.",
-      "**The roads close hours before the runner waves.** In Berlin’s 2025 traffic plan, Altonaer Straße closed at 05:00, Unter den Linden at 06:00, Mitte and the west from around 07:45, Friedrichshain and Kreuzberg from 08:00, and the south from 08:15.",
-      "**The 2025 pattern reopened the east first.** Friedrichshain and Kreuzberg were scheduled from around 14:00, the south around 16:30, Mitte and the west around 17:30, and Unter den Linden at about 19:00. These are planning references, not confirmed 2026 times.",
-      "**A short U-Bahn or S-Bahn journey is usually the practical way past a barrier.** Do not assume every service is normal or that every train runs under the whole course. Check BVG, VBB or S-Bahn live service and use only confirmed surface crossings.",
-      "**Saturday 26 September is affected too.** The 5K starts at 10:00 and the inline skating event from 12:20. Skaters use a multi-lap city circuit, not the runners’ full marathon route; the official Saturday map decides which streets are affected.",
-      "**The Tiergarten event build begins well before race day.** In 2025 Straße des 17. Juni was closed from 13 to 24 September. Use that as a warning to check 2026 access around the Victory Column and central axis, not as this year’s timetable.",
-      "**For watching, go west and later.** The Memorial Church at about km 35 and Potsdamer Platz at km 38.5 are useful late-race options and are usually easier than the Brandenburg Gate finish, though both can still be busy.",
-      "**Exact 2026 closures can change close to the event.** Check the organiser and Berlin traffic map in the week before travel, then check live transport and local barriers again on race morning."
+      "**Race day is Sunday 27 September 2026.** Handbikes and wheelchairs start at 08:20, 08:26 and 08:29; runner waves leave at 08:45, 09:05, 09:33, 10:02, 10:12 and 10:27.",
+      "**Roads close well before the runners.** The 2025 plan began at 05:00, added central sectors from 06:00 to 08:15, and did not finish reopening them until the evening. Use this only as a planning pattern for 2026.",
+      "**Rail is usually the practical crossing.** Check live BVG, VBB or S-Bahn service and use only confirmed surface crossings; do not assume every line or bus is running normally.",
+      "**Saturday is affected too.** The 5K starts at 10:00 and inline skating from 12:20 on a multi-lap city circuit, not the runners’ full marathon route.",
+      "**For watching, go west and later.** The Memorial Church near km 35 and Potsdamer Platz near km 38.5 are useful alternatives to the crowded Brandenburg Gate finish.",
+      "**Check again close to the race.** Use the organiser and Berlin traffic map in the final week, then verify live transport and local barriers on race morning."
     ]
   },
   "berliner-unterwelten": {

@@ -1,10 +1,12 @@
 # Visual sources — kurfurstendamm-berlin
 
 All 7 article images are real photographs from Wikimedia Commons under CC BY or
-CC BY-SA. Reader-facing attribution is required, so a public **Image credits**
-block is included at the end of the post body. No AI visuals were used for
-article images or for the widget; the AI allowance for this post is reserved for
-the BerlinTools icon only.
+CC BY-SA. Reader-facing attribution is available from the default-closed
+**Image credits** overlay in the route widget, with a short pointer at the end of
+the body. The overlay links each Commons file page and licence and records the
+resize/crop changes without altering the iframe height. No AI visuals were used
+for article images or for the widget; the AI allowance for this post is reserved
+for the BerlinTools icon only.
 
 Masters optimized to 1600px long edge, JPEG quality 86, progressive.
 `images/raw/` is gitignored and holds the untouched originals (rebuildable from
@@ -28,7 +30,8 @@ after selection.
 
 Six 880x545 crops live in `../../kurfurstendamm-walk/img/`. Three reuse article
 masters; three come from extra Commons files recorded in
-`images/widget-sources.json`. Credits are printed inside the widget itself.
+`images/widget-sources.json`. Article and route credits share the widget's
+default-closed overlay so they do not push the card or Wix iframe.
 
 | Widget file | Source |
 |---|---|

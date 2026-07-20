@@ -1,63 +1,59 @@
 # Visual sources — oktoberfest-in-berlin
 
-All 5 article images are real photographs from Wikimedia Commons under CC BY-SA.
-Reader-facing attribution is required, so a public **Image credits** block is
-included at the end of the post body. No AI visuals were used for article images;
-the AI allowance for this post is reserved for the BerlinTools icon only.
+All five article images are photographs from Wikimedia Commons under the
+recorded CC BY-SA licences. The public attribution is in the calendar widget's
+default-closed **Image credits** overlay, not in an open article-body block.
 
-Masters optimized to 1600px long edge, JPEG quality 86, progressive.
-`images/raw/` is gitignored and holds the untouched originals (rebuildable from
-the direct URLs below).
+Masters were resized to a 1600px long edge and compressed as progressive JPEGs.
+No image was cropped. `images/raw/` is gitignored and holds the untouched
+originals, which are rebuildable from the URLs in `images/sources.json`.
 
-| File (optimized) | Commons file | Author | License | Source px | Out px | KB |
-|---|---|---|---|---|---|---|
-| 01-...-cover.jpg | File:Pratergarten Berlin Kastanienallee.JPG | Superbass | CC BY-SA 3.0 | 3888x2592 | 1600x1067 | 314 |
-| 02-...-munich-tent-full.jpg | File:München, Oktoberfest 2019, Überfüllung, 1.jpeg | Renardo la vulpo | CC BY-SA 4.0 | 3560x2592 | 1600x1165 | 270 |
-| 03-...-bierfestival-karl-marx-allee.jpg | File:Biermeile-karl-marx-allee 2017 06.jpg | Dtuk | CC BY-SA 3.0 | 6000x4000 | 1600x1067 | 334 |
-| 04-...-beer-list-prices.jpg | File:Biermeile2017start 17.jpg | Dtuk | CC BY-SA 3.0 | 6000x4000 | 1600x1067 | 262 |
-| 05-...-berliner-weisse.jpg | File:Berliner Weisse mit Schuss2.jpg | Jeuwre | CC BY-SA 4.0 | 3521x2347 | 1600x1067 | 212 |
+| File (optimized) | Commons file | Author | License | Source px | Out px | KB | Public use |
+|---|---|---|---|---|---|---|---|
+| 01-...-cover.jpg | File:Pratergarten Berlin Kastanienallee.JPG | Superbass | CC BY-SA 3.0 | 3888x2592 | 1600x1067 | 314 | Current place context |
+| 02-...-munich-tent-full.jpg | File:München, Oktoberfest 2019, Überfüllung, 1.jpeg | Renardo la vulpo | CC BY-SA 4.0 | 3560x2592 | 1600x1165 | 270 | Munich comparison |
+| 03-...-bierfestival-karl-marx-allee.jpg | File:Biermeile-karl-marx-allee 2017 06.jpg | Dtuk | CC BY-SA 3.0 | 6000x4000 | 1600x1067 | 334 | Explicitly historical 2017 context only |
+| 04-...-beer-list-prices.jpg | File:Biermeile2017start 17.jpg | Dtuk | CC BY-SA 3.0 | 6000x4000 | 1600x1067 | 262 | Explicitly historical 2017 price context only |
+| 05-...-berliner-weisse.jpg | File:Berliner Weisse mit Schuss2.jpg | Jeuwre | CC BY-SA 4.0 | 3521x2347 | 1600x1067 | 212 | Current drink context |
 
-Direct file URLs are recorded in `images/sources.json` alongside the Commons
-file-page URLs and license short names.
+## Current editorial judgment
 
-## Contact-sheet judgment
+**Cover: Prater Garten sign.** It remains a sharp Berlin-specific listing image.
+It is not presented as the location of a 2026 Oktoberfest. The body calls it a
+weather-dependent alternative outside event dates.
 
-12 candidates were downloaded at 900px and viewed as a single local contact
-sheet before selection.
+**02 Munich tent facade.** The overcrowding banner gives the scale comparison a
+specific visual anchor. The caption identifies Munich and does not imply that
+the scene is in Berlin.
 
-**Cover — Prater Garten sign (c8).** Chosen over the two Bierfestival street
-shots because it is the only candidate that is instantly readable at
-listing-card crop: glowing yellow lettering against blue dusk, unmistakably
-Berlin, and it *is* the article's answer (Berlin does beer gardens, not tents).
-The Bierfestival shots are informative but read as a generic market stall at
-thumbnail size.
+**03 and 04 former Biermeile archive.** These photographs can no longer support
+a current-event section. They now sit together under a heading that explains
+the Karl-Marx-Allee event last ran in 2019. The image alt text and both captions
+say `archive`, name 2017 and reject any 2026 or current-price interpretation.
 
-**02 Munich tent facade.** The `WEGEN ÜBERFÜLLUNG KEIN EINLASS` banner does the
-"this is the thing you are picturing, and it is full and it is elsewhere" job in
-one frame, and it is sharp and well composed. Preferred over the packed-tent
-interior shot, which is only 1024x768.
+**05 Berliner Weisse.** The colour distinction is useful and the caption gives
+one simple ordering instruction.
 
-**04 beer price board.** Kept because the chalked list of novelty beers with
-per-0.2/0.4/1-litre prices is concrete reader value, not decoration.
+## TASL and changes disclosure
 
-## Rejected
+The public overlay uses the exact Commons file-page URL and licence URL from
+`images/sources.json`. Each line contains:
 
-- `File:Biermeile-karl-marx-allee 2017 08.jpg` — close-up of a Dampfbier brand
-  banner. Reads as an advert for one brewery, no reader information. Rejected.
-- `File:Biermeile2017start 11.jpg` — back-of-house kegs, gas bottles and a red
-  plastic chair. Unattractive and uninformative. Rejected.
-- `File:Fountain Prater Biergarten...jpeg` — dull fountain on empty gravel, most
-  of the frame is ground. Rejected.
-- `File:Berliner Weisse mit Kümmel&Co.jpg` — cluttered table of spirit bottles,
-  the Weisse is not the subject. Rejected.
-- `File:Oktoberfest bierzelt.JPG` — good subject (packed Munich tent) but only
-  1024x768, below the master ceiling. Rejected in favour of 02.
-- `File:Berliner Weisse mit Schuss.JPG` — acceptable but the coupe glasses on a
-  red table are busier than 05 and it duplicates the same beat. Rejected.
+- Title/file name.
+- Author.
+- Linked source.
+- Linked CC BY-SA version.
+- `Changes: resized to a 1600px long edge and compressed as JPEG; no crop.`
 
-## Not found
+This satisfies the source/author/licence/change record without exposing internal
+production workflow in the public article.
 
-No usable free image of the Berliner Herbstrummel / Zentraler Festplatz beer
-tent exists on Commons. Rather than substitute a generic funfair photo from
-another city (which would be misleading), that section runs without an image and
-leans on the widget timeline instead.
+## Rejected / unavailable
+
+- No current, clearly reusable Berlin 2026 Oktoberfest or Beer Week photograph
+  was added in this correction pass.
+- A generic fairground photograph from another city would misrepresent the
+  Herbstrummel, so that section remains text-led.
+- The earlier rejected alternatives remain rejected for the same composition,
+  resolution or advertising reasons recorded in `images/sources.json` and the
+  original contact-sheet review.

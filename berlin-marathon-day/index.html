@@ -38,12 +38,12 @@
   .clock{font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:44px;line-height:1;color:var(--green-deep);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
   .clockTag{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--stone)}
   .playBtn{font-family:inherit;font-weight:700;font-size:13px;border:0;border-radius:999px;padding:11px 20px;
-    cursor:pointer;background:var(--green);color:#fff;display:inline-flex;align-items:center;gap:8px;transition:background .2s}
+    min-height:44px;cursor:pointer;background:var(--green);color:#fff;display:inline-flex;align-items:center;gap:8px;transition:background .2s}
   .playBtn:hover{background:#256b2a}
   .playBtn:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
   .playBtn .ico{font-size:11px;line-height:1}
   .resetBtn{font-family:inherit;font-weight:700;font-size:12px;border:1px solid #cddcbd;border-radius:999px;padding:10px 15px;
-    cursor:pointer;background:#fff;color:#4b5a46}
+    min-height:44px;cursor:pointer;background:#fff;color:#4b5a46}
   .resetBtn:hover{border-color:var(--lime);color:var(--green)}
   .resetBtn:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
   .spacer{flex:1 1 auto;min-width:0}
@@ -100,8 +100,9 @@
 
   /* ---------- log ---------- */
   .log{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
-  .log li{display:flex;gap:14px;padding:9px 22px;border-bottom:1px solid #f0f5e8;font-size:12.5px;align-items:flex-start;
+  .log li{display:none;gap:14px;padding:9px 22px;border-bottom:1px solid #f0f5e8;font-size:12.5px;align-items:flex-start;
     color:#8b9686;transition:background .3s,color .3s}
+  .log li[data-window="1"]{display:flex}
   .log li .t{font-family:'IBM Plex Mono',monospace;font-weight:700;flex:0 0 52px;font-variant-numeric:tabular-nums}
   .log li[data-passed="1"]{color:#3d4b39}
   .log li[data-current="1"]{background:#fffceb;color:var(--green-deep);font-weight:700}
@@ -109,6 +110,27 @@
 
   .foot{padding:14px 22px 16px;background:var(--bone);border-top:1px solid var(--line);font-size:11.5px;color:var(--stone);line-height:1.55}
   .foot strong{color:#4b5a46}
+  .footRow{display:flex;align-items:flex-start;gap:14px}
+  .footCopy{flex:1 1 auto;min-width:0}
+  .creditsBtn{flex:0 0 auto;min-height:44px;border:1px solid #bdcfab;border-radius:999px;padding:8px 13px;
+    background:#fff;color:var(--green-deep);font:700 11.5px Montserrat,system-ui,sans-serif;cursor:pointer;white-space:nowrap}
+  .creditsBtn:hover{border-color:var(--lime);background:#f8fbea}
+  .creditsBtn:focus-visible,.creditsClose:focus-visible,.creditsPanel a:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+
+  /* ---------- default-closed image credits overlay ---------- */
+  body.creditsOpen{overflow:hidden}
+  .creditsOverlay{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;
+    padding:18px;background:rgba(18,61,24,.78)}
+  .creditsPanel{width:min(620px,100%);max-height:calc(100vh - 36px);overflow:auto;background:#fff;border-radius:18px;
+    border:1px solid #dfe9d5;box-shadow:0 24px 70px rgba(0,0,0,.35);padding:20px}
+  .creditsHead{display:flex;align-items:center;gap:12px;margin:0 0 10px}
+  .creditsHead h3{flex:1 1 auto;margin:0;color:var(--green-deep);font-size:17px;line-height:1.25}
+  .creditsClose{flex:0 0 auto;width:44px;height:44px;border:1px solid #cddcbd;border-radius:50%;background:#fff;
+    color:var(--green-deep);font:700 22px/1 Montserrat,system-ui,sans-serif;cursor:pointer}
+  .creditsIntro{margin:0 0 12px;color:#52604d;font-size:12px}
+  .creditList{margin:0;padding-left:20px;color:#354432;font-size:12px;line-height:1.55}
+  .creditList li+li{margin-top:10px}
+  .creditList a{color:#1B5E20;font-weight:700;text-underline-offset:2px}
 
   @media (max-width:640px){
     .head{padding:16px 16px 14px} .head h2{font-size:19px}
@@ -118,9 +140,20 @@
     .zones{grid-template-columns:1fr 1fr;gap:8px}
     .zone{padding:11px}
     .railTicks span:nth-child(even){display:none}
+    .footRow{display:block}
+    .creditsBtn{margin-top:12px;min-height:44px}
   }
   @media (max-width:400px){
-    .zones{grid-template-columns:1fr}
+    .zones{grid-template-columns:1fr 1fr;gap:6px}
+    .zone{padding:8px}
+    .zone .zName{font-size:10.5px;margin:0 0 6px}
+    .zone .zWhat,.zone .zNote{display:none}
+    .zone .zState{font-size:8px;letter-spacing:.03em;padding:3px 5px}
+    .log li{gap:8px;padding-left:12px;padding-right:12px;font-size:11px}
+    .log li .t{flex-basis:42px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
   }
 </style>
 </head>
@@ -131,17 +164,17 @@
     <div class="head">
       <p class="eyebrow">Sunday 27 September 2026</p>
       <h2>Marathon day, hour by hour</h2>
-      <p>Press play and watch the day happen to central Berlin. The course goes live district by district, the runners move, and each part of the city hands itself back at a different hour.</p>
+      <p>Press play to see the confirmed 2026 starts against Berlin&rsquo;s 2025 closure pattern. Use it to understand the day, then check the live 2026 map before you travel.</p>
     </div>
 
     <div class="deck">
       <div class="deckTop">
         <div class="clockWrap">
           <span class="clock" id="clock">05:00</span>
-          <span class="clockTag" id="clockTag">before anything</span>
+          <span class="clockTag" id="clockTag">early closures</span>
         </div>
         <span class="spacer"></span>
-        <button class="playBtn" id="play" type="button" aria-live="polite"><span class="ico" id="playIco">&#9654;</span><span id="playTxt">Play the day</span></button>
+        <button class="playBtn" id="play" type="button" aria-pressed="false"><span class="ico" id="playIco">&#9654;</span><span id="playTxt">Play the day</span></button>
         <button class="resetBtn" id="reset" type="button">Reset</button>
       </div>
       <div class="scrub">
@@ -153,8 +186,8 @@
 
     <div class="verdict">
       <p class="vTag">What this means if you are not running</p>
-      <p class="vLine" id="vLine">Nothing is shut yet.</p>
-      <p class="vSub" id="vSub">The barriers are up around Stra&szlig;e des 17. Juni but the rest of the city is behaving normally.</p>
+      <p class="vLine" id="vLine">The earliest closures have started.</p>
+      <p class="vSub" id="vSub">In the 2025 plan, Altonaer Stra&szlig;e closed at 05:00 and the Tiergarten event build was already in place. Check the live 2026 map before moving.</p>
     </div>
 
     <div class="sec">
@@ -162,30 +195,48 @@
       <div class="course">
         <div class="rail">
           <div class="railFill" id="railFill"></div>
-          <div class="runner lead" id="rLead" title="Race leaders" hidden></div>
-          <div class="runner mid" id="rMid" title="A 4:00 runner" hidden></div>
-          <div class="runner back" id="rBack" title="A 5:30 runner" hidden></div>
+          <div class="runner lead" id="rLead" title="Race leaders" aria-hidden="true" hidden></div>
+          <div class="runner mid" id="rMid" title="Example 4:00 runner from the 09:33 wave" aria-hidden="true" hidden></div>
+          <div class="runner back" id="rBack" title="Example 5:30 runner from the 10:27 wave" aria-hidden="true" hidden></div>
         </div>
         <div class="railTicks">
           <span>0 km</span><span>7 km</span><span>14 km</span><span>21 km</span><span>28 km</span><span>35 km</span><span>42.2 km</span>
         </div>
         <div class="legend">
           <div><span class="dot lead"></span>Race leaders</div>
-          <div><span class="dot mid"></span>A 4:00 runner</div>
-          <div><span class="dot back"></span>A 5:30 runner</div>
+          <div><span class="dot mid"></span>4:00 example, 09:33 wave</div>
+          <div><span class="dot back"></span>5:30 example, 10:27 wave</div>
         </div>
       </div>
     </div>
 
     <div class="sec" style="padding-top:0">
-      <div class="secHead"><h3>Your side of the city</h3><span>Six areas, six different reopening times</span></div>
+      <div class="secHead"><h3>Your side of the city</h3><span>Six areas, different planning windows</span></div>
       <div class="zones" id="zones"></div>
     </div>
 
-    <ul class="log" id="log"></ul>
+    <ul class="log" id="log" aria-label="Events around the selected time" aria-live="polite"></ul>
 
     <div class="foot">
-      <strong>How to read this:</strong> the 2026 date, the 09:15 start and the start and finish on Stra&szlig;e des 17. Juni are confirmed by the organiser and by berlin.de. The closing and reopening hours follow the pattern Berlin&rsquo;s traffic centre published for the 2025 race, because the exact 2026 windows are only released in September. Treat them as planning times, not as a timetable.
+      <div class="footRow">
+        <div class="footCopy"><strong>How to read this:</strong> the six 2026 runner waves from 08:45 to 10:27 and the handbike and wheelchair starts from 08:20 are confirmed by the organiser. The closing and reopening hours follow Berlin&rsquo;s 2025 traffic plan. Treat them as a planning pattern, not a 2026 timetable, and check live transport on race morning.</div>
+        <button class="creditsBtn" id="creditsOpen" type="button" aria-expanded="false" aria-controls="creditsOverlay">Image credits</button>
+      </div>
+    </div>
+
+    <div class="creditsOverlay" id="creditsOverlay" role="dialog" aria-modal="true" aria-labelledby="creditsTitle" aria-describedby="creditsIntro" hidden>
+      <div class="creditsPanel" role="document">
+        <div class="creditsHead">
+          <h3 id="creditsTitle">Image credits</h3>
+          <button class="creditsClose" id="creditsClose" type="button" aria-label="Close image credits">&times;</button>
+        </div>
+        <p class="creditsIntro" id="creditsIntro">Three licensed photographs used in the article. Each was cropped and resized for the page.</p>
+        <ul class="creditList">
+          <li>Finish straight by Mischelbach: <a href="https://commons.wikimedia.org/wiki/File:Berlin-Marathon_-_Ziel_-_Brandenburger_Tor_-_Foto-_H._Milde.jpg" target="_blank" rel="noopener">source file</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>. Cropped and resized.</li>
+          <li>Reichstag grandstand by Raimond Spekking: <a href="https://commons.wikimedia.org/wiki/File:Hall_of_Fame,_Trib%C3%BCbe,_Berlin_Marathon_2025-3874.jpg" target="_blank" rel="noopener">source file</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>. Cropped and resized.</li>
+          <li>Inline skating event by Dirk Ingo Franke: <a href="https://commons.wikimedia.org/wiki/File:Berlin_inline_marathon_hohenstaufenstrasse_verfolgergruppe_24.09.2011_16-28-13.jpg" target="_blank" rel="noopener">source file</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>. Cropped and resized.</li>
+        </ul>
+      </div>
     </div>
 
   </div>
@@ -197,12 +248,13 @@
 
   var START = 300;   // 05:00 in minutes
   var END   = 1140;  // 19:00
-  var RACE_START = 555; // 09:15
+  var RACE_START = 525; // 08:45, first of six confirmed runner waves
+  var OFFICIAL_FINISH_CLOSE = 1020; // 17:00
 
-  // Pace in minutes per km. Leaders from the 2:02:16 winning time in 2025.
-  var PACE = { lead: 2.899, mid: 5.686, back: 7.820 };
-  // Later waves roll away behind the first one.
-  var WAVE = { lead: 0, mid: 12, back: 32 };
+  // Illustrative paces. Leader uses the 2:02:16 winning time from 2025.
+  var PACE = { lead: 2.898, mid: 5.688, back: 7.821 };
+  // Example start waves: elite/first wave, 09:33 and the final 10:27 wave.
+  var WAVE = { lead: 0, mid: 48, back: 102 };
   var DIST = 42.195;
 
   var ZONES = [
@@ -210,64 +262,72 @@
       name: 'Tiergarten &amp; the start',
       what: 'Stra&szlig;e des 17. Juni, Victory Column, Gro&szlig;er Stern',
       from: 300, to: 1140, longRun: true,
-      shut: 'Fenced off since mid September. The Victory Column is standing inside a building site.',
+      shut: 'Inside the event build area. Check the 2026 access notice before visiting the Victory Column.',
       clear: ''
     },
     {
       name: 'Unter den Linden',
       what: 'Pariser Platz to Friedrichstra&szlig;e, Brandenburg Gate',
       from: 360, to: 1140,
-      shut: 'The gate is the finish line. You can reach it on foot, you cannot cross the road here.',
-      clear: 'Open, and quiet in a way it will not be again all day.'
+      shut: 'Runners pass through the gate and finish farther west on Stra&szlig;e des 17. Juni. Current spectator guidance uses Pariser Platz for crossing this area.',
+      clear: 'The 2025 plan reached its reopening time here. Confirm that the barriers have actually moved.'
     },
     {
       name: 'Mitte',
       what: 'Museum Island, Alexanderplatz side, Friedrichstadtpalast',
       from: 465, to: 1050,
-      shut: 'Cut by the course. Use the U-Bahn to get under it, not across it.',
-      clear: 'Normal. Trams and buses back on their real routes.'
+      shut: 'Cut by the course. Use a confirmed rail route or stewarded crossing and check live service.',
+      clear: 'Past the 2025 planned reopening. Local barriers and diverted surface routes may take longer.'
     },
     {
       name: 'Friedrichshain &amp; Kreuzberg',
       what: 'The eastern loop, roughly km 10 to km 16',
       from: 480, to: 840,
-      shut: 'Closed, but this is the first side of the city you get back.',
-      clear: 'Open again. Nothing left to work around here.'
+      shut: 'Inside the closure pattern, but this was the first large section scheduled to return in 2025.',
+      clear: 'Past the 2025 planned reopening. Check local barriers and transport before moving.'
     },
     {
       name: 'Sch&ouml;neberg &amp; the south',
       what: 'Neuk&ouml;lln, Steglitz, the long southern arc',
       from: 495, to: 990,
-      shut: 'Closed. Long, thin and easy to forget until a bus does not turn up.',
-      clear: 'Open again.'
+      shut: 'Inside the closure pattern. Surface transport may divert, shorten or pause.',
+      clear: 'Past the 2025 planned reopening. Confirm your route live.'
     },
     {
       name: 'Ku&rsquo;damm &amp; the west',
       what: 'Kurf&uuml;rstendamm, Tauentzienstra&szlig;e, Memorial Church at km 35',
       from: 465, to: 1050,
-      shut: 'Closed, and the best late stretch to watch. Crossings at Wittenbergplatz and before Rankestra&szlig;e.',
-      clear: 'Open. Shops here are shut anyway, it is Sunday.'
+      shut: 'A useful late-race viewing stretch. Wittenbergplatz and Rankestra&szlig;e were marked crossing areas in 2025; wait for the 2026 map.',
+      clear: 'Past the 2025 planned reopening. Check the street and live transport before setting out.'
     }
   ];
 
   var LOG = [
-    { t: 300, s: 'Altonaer Stra&szlig;e closes. The first ordinary street to go.' },
-    { t: 360, s: 'Unter den Linden shuts between Pariser Platz and Friedrichstra&szlig;e.' },
-    { t: 465, s: 'Course closures begin across Mitte and Charlottenburg-Wilmersdorf.' },
-    { t: 480, s: 'Friedrichshain and Kreuzberg go next.' },
-    { t: 495, s: 'Tempelhof-Sch&ouml;neberg follows.' },
-    { t: 530, s: 'Wheelchair racers and handbikes start.' },
-    { t: 555, s: 'First wave of runners leaves Stra&szlig;e des 17. Juni. Three more waves follow.' },
-    { t: 600, s: 'Leaders pass the Reichstag area and head east through Mitte.' },
-    { t: 677, s: 'The winner crosses the line at the Brandenburg Gate, a little after 11:15.' },
-    { t: 690, s: 'Altonaer Stra&szlig;e reopens.' },
-    { t: 807, s: 'A four-hour runner finishes. The finish area is at its fullest.' },
-    { t: 840, s: 'Friedrichshain and Kreuzberg reopen.' },
-    { t: 917, s: 'A five-and-a-half-hour runner finishes.' },
-    { t: 975, s: 'Last participants come through, around a quarter past four.' },
-    { t: 990, s: 'Tempelhof-Sch&ouml;neberg reopens.' },
-    { t: 1050, s: 'Mitte and Charlottenburg-Wilmersdorf reopen.' },
-    { t: 1140, s: 'Unter den Linden reopens. Stra&szlig;e des 17. Juni stays shut for the take-down.' }
+    { t: 300, s: 'In the 2025 plan, Altonaer Stra&szlig;e closes first.' },
+    { t: 360, s: 'The 2025 plan closes Unter den Linden between Pariser Platz and Friedrichstra&szlig;e.' },
+    { t: 465, s: 'The 2025 course closures begin across Mitte and Charlottenburg-Wilmersdorf.' },
+    { t: 480, s: 'The 2025 plan adds Friedrichshain and Kreuzberg.' },
+    { t: 495, s: 'The 2025 plan adds Tempelhof-Sch&ouml;neberg.' },
+    { t: 500, s: 'The handbike top field starts.' },
+    { t: 506, s: 'Elite wheelchair racers start.' },
+    { t: 509, s: 'The remaining wheelchair and handbike field starts.' },
+    { t: 525, s: 'Runner waves A, B and C leave Stra&szlig;e des 17. Juni.' },
+    { t: 544, s: 'At 2025 winning pace, the leader reaches the Reichstag area around km 6.5.' },
+    { t: 545, s: 'Runner waves D and E start.' },
+    { t: 573, s: 'Runner waves F and G start.' },
+    { t: 602, s: 'Runner wave H starts.' },
+    { t: 612, s: 'Runner wave J starts.' },
+    { t: 627, s: 'Final runner wave K starts.' },
+    { t: 647, s: 'At the 2025 winning pace, the leader finishes at about 10:47.' },
+    { t: 690, s: 'The 2025 plan reopens Altonaer Stra&szlig;e.' },
+    { t: 813, s: 'The example four-hour runner from the 09:33 wave finishes.' },
+    { t: 840, s: 'The 2025 plan reopens Friedrichshain and Kreuzberg.' },
+    { t: 957, s: 'The example five-and-a-half-hour runner from the 10:27 wave finishes.' },
+    { t: 990, s: 'The 2025 plan reopens Tempelhof-Sch&ouml;neberg.' },
+    { t: 1002, s: 'The 6:15 course limit from the final wave reaches 16:42.' },
+    { t: 1020, s: 'The organiser closes the official finish at 17:00.' },
+    { t: 1050, s: 'The 2025 plan reopens Mitte and Charlottenburg-Wilmersdorf.' },
+    { t: 1140, s: 'The 2025 plan reopens Unter den Linden. Stra&szlig;e des 17. Juni remains affected by take-down.' }
   ];
 
   function hhmm(m){
@@ -278,6 +338,7 @@
   var now = START;
   var playing = false;
   var timer = null;
+  var playbackDelay = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 300 : 90;
 
   var elClock = document.getElementById('clock');
   var elClockTag = document.getElementById('clockTag');
@@ -289,6 +350,10 @@
   var elFill = document.getElementById('railFill');
   var elCourseNote = document.getElementById('courseNote');
   var runners = { lead: document.getElementById('rLead'), mid: document.getElementById('rMid'), back: document.getElementById('rBack') };
+  var elPlay = document.getElementById('play');
+  var elCreditsOpen = document.getElementById('creditsOpen');
+  var elCreditsClose = document.getElementById('creditsClose');
+  var elCreditsOverlay = document.getElementById('creditsOverlay');
 
   // ----- build static shells -----
   ZONES.forEach(function(z, i){
@@ -318,17 +383,17 @@
 
   function zoneWords(z, state){
     if (state === 'shut') return z.shut;
-    if (state === 'soon') return 'Closing at ' + hhmm(z.from) + '. Move now or wait it out.';
-    if (state === 'done') return z.clear || 'Open again.';
-    if (z.longRun) return 'Already fenced. This one never really opens on the day.';
-    return 'Open until ' + hhmm(z.from) + '.';
+    if (state === 'soon') return 'The 2025 pattern closes around ' + hhmm(z.from) + '. Check the 2026 map before moving.';
+    if (state === 'done') return z.clear || 'Past the 2025 planned reopening.';
+    if (z.longRun) return 'The event build was already in place in the 2025 pattern.';
+    return 'Outside the 2025 closure window until about ' + hhmm(z.from) + '.';
   }
 
   function stateLabel(state){
-    if (state === 'shut') return 'Closed';
-    if (state === 'soon') return 'Closing soon';
-    if (state === 'done') return 'Open again';
-    return 'Still open';
+    if (state === 'shut') return 'Planned closed';
+    if (state === 'soon') return 'Closing in pattern';
+    if (state === 'done') return 'Past reopening';
+    return 'Outside closure';
   }
 
   function runnerKm(key){
@@ -339,24 +404,26 @@
   }
 
   function verdict(){
-    if (now < 360) return ['Nothing is shut yet.', 'The barriers are up around Stra&szlig;e des 17. Juni but the rest of the city is behaving normally. If you have an early train, this is the easy hour.'];
-    if (now < 465) return ['Unter den Linden is gone.', 'Pariser Platz to Friedrichstra&szlig;e is closed, so the Brandenburg Gate is now something you walk to, not something you drive or ride past. Everything else still works.'];
-    if (now < 530) return ['The course is going live around you.', 'Mitte, the west and the south are closing within half an hour of each other. This is the last window to move across the middle of the city on the surface.'];
-    if (now < 555) return ['Wheelchair racers are away.', 'The road is now a race. From here until the afternoon, the U-Bahn and S-Bahn are how you cross the course, not the crossings.'];
-    if (now < 600) return ['The race has started.', 'Four waves leave over roughly the next half hour. If your plan involves getting from one side of the course to the other, take a train that runs under it.'];
-    if (now < 677) return ['Peak disruption, and the best hour to watch.', 'The field is spread across the whole city. Reichstag at km 6.5 and Friedrichstadtpalast at km 8 are dense and easy to reach; the Memorial Church at km 35 comes later and is far less crowded.'];
-    if (now < 807) return ['The winner has finished.', 'The leaders are done a little after 11:15, but the road stays closed. Tens of thousands of runners are still out there and nothing reopens because the front of the race is over.'];
-    if (now < 840) return ['The finish is at its busiest.', 'Most people finish between four and five hours, so the Brandenburg Gate end is packed. If you wanted the gate for a photograph, today is not the day.'];
-    if (now < 990) return ['The east is yours again.', 'Friedrichshain and Kreuzberg reopen from around 14:00. If your afternoon is on that side of the city, it is a normal Sunday there.'];
-    if (now < 1050) return ['The south comes back.', 'Sch&ouml;neberg, Neuk&ouml;lln and the southern arc reopen from about 16:30. Mitte and the west are still holding on.'];
-    if (now < 1140) return ['Mitte reopens.', 'From roughly 17:30 the buses and trams find their real routes again. Unter den Linden is the last central street to come back.'];
-    return ['Back to a normal Sunday, almost.', 'Unter den Linden reopens around 19:00. Stra&szlig;e des 17. Juni stays closed for days afterwards while the finish is taken apart, so the Victory Column stays awkward well into the week.'];
+    if (now < 360) return ['The earliest closures have started.', 'In the 2025 plan, Altonaer Stra&szlig;e closed at 05:00 and the Tiergarten event build was already in place. Check the live 2026 map before moving.'];
+    if (now < 465) return ['Unter den Linden is inside the closure pattern.', 'Pariser Platz to Friedrichstra&szlig;e closed from 06:00 in 2025. Other course sectors follow from 07:45, so choose your side before leaving.'];
+    if (now < 500) return ['The street course is closing around you.', 'Mitte, the west, Friedrichshain, Kreuzberg and the south enter their 2025 closure windows within half an hour. Use only a confirmed crossing or live rail route.'];
+    if (now < 525) return ['The handbike and wheelchair starts are under way.', 'The first start is 08:20. Check live U-Bahn and S-Bahn service for a short crossing; do not assume every line or surface crossing is available.'];
+    if (now < 627) return ['The six runner waves are leaving.', 'Starts run from 08:45 to 10:27. Avoid a surface transfer across the course unless the 2026 map marks the crossing and a steward has opened it.'];
+    if (now < 647) return ['The race field is spreading across Berlin.', 'The Reichstag at km 6.5 fills early. The Memorial Church at km 35 is a later viewing point, but check how you will reach it without crossing the route.'];
+    if (now < 813) return ['The leader has finished; the streets have not.', 'At the 2025 winning pace the leader reaches the finish around 10:47. Tens of thousands of runners remain on the course, so the closure pattern continues.'];
+    if (now < 840) return ['The later waves are still finishing.', 'The example four-hour runner from the 09:33 wave finishes around 13:33. Do not read the leader finishing as a reopening signal.'];
+    if (now < 990) return ['The 2025 pattern has reopened the east.', 'Friedrichshain and Kreuzberg were scheduled from around 14:00. Confirm local barriers and transit before treating that as true in 2026.'];
+    if (now < 1050) return ['The 2025 pattern has reopened the south.', 'Sch&ouml;neberg, Neuk&ouml;lln and the southern arc were scheduled from about 16:30. Surface transport effects may last longer.'];
+    if (now < 1140) return ['The 2025 pattern has reached Mitte and the west.', 'Their planned reopening was around 17:30. Check the street and live transport; Unter den Linden was the final central section in that plan.'];
+    return ['The 2025 pattern reaches its final central reopening.', 'Unter den Linden was scheduled around 19:00. Stra&szlig;e des 17. Juni remained affected by event take-down, so confirm Tiergarten access separately.'];
   }
 
   function clockTag(){
-    if (now < 530) return 'before the start';
-    if (now < 975) return 'race in progress';
-    return 'after the race';
+    if (now < 500) return 'early closures';
+    if (now < 525) return 'wheelchair starts';
+    if (now < 627) return 'runner waves';
+    if (now < OFFICIAL_FINISH_CLOSE) return 'race in progress';
+    return 'after finish close';
   }
 
   function render(){
@@ -391,8 +458,9 @@
     } else if (back !== null && back >= DIST){
       elCourseNote.textContent = 'Everyone in this readout has finished.';
     } else {
-      elCourseNote.innerHTML = 'Leaders at ' + (lead >= DIST ? 'the finish' : lead.toFixed(1) + ' km') +
-        (mid !== null ? ', a 4:00 runner at ' + (mid >= DIST ? 'the finish' : mid.toFixed(1) + ' km') : '');
+      elCourseNote.textContent = 'Leaders at ' + (lead >= DIST ? 'the finish' : lead.toFixed(1) + ' km') +
+        (mid !== null ? ', the 4:00 example at ' + (mid >= DIST ? 'the finish' : mid.toFixed(1) + ' km') : '') +
+        (back !== null ? ', the 5:30 example at ' + (back >= DIST ? 'the finish' : back.toFixed(1) + ' km') : '') + '.';
     }
 
     var v = verdict();
@@ -409,12 +477,14 @@
       var li = document.getElementById('log' + i);
       li.setAttribute('data-passed', e.t <= now ? '1' : '0');
       li.setAttribute('data-current', i === currentIdx ? '1' : '0');
+      li.setAttribute('data-window', i >= Math.max(0,currentIdx-2) && i <= Math.min(LOG.length-1,currentIdx+2) ? '1' : '0');
     });
   }
 
   function stop(){
     playing = false;
     if (timer){ clearInterval(timer); timer = null; }
+    elPlay.setAttribute('aria-pressed', 'false');
     document.getElementById('playIco').innerHTML = '&#9654;';
     render();
   }
@@ -422,16 +492,17 @@
   function start(){
     if (now >= END) now = START;
     playing = true;
+    elPlay.setAttribute('aria-pressed', 'true');
     document.getElementById('playIco').innerHTML = '&#10073;&#10073;';
     document.getElementById('playTxt').textContent = 'Pause';
     timer = setInterval(function(){
       now += 5;
       if (now >= END){ now = END; render(); stop(); return; }
       render();
-    }, 90);
+    }, playbackDelay);
   }
 
-  document.getElementById('play').addEventListener('click', function(){
+  elPlay.addEventListener('click', function(){
     if (playing) stop(); else start();
   });
 
@@ -445,9 +516,51 @@
     var picked = parseInt(elScrub.value, 10);
     playing = false;
     if (timer){ clearInterval(timer); timer = null; }
+    elPlay.setAttribute('aria-pressed', 'false');
     document.getElementById('playIco').innerHTML = '&#9654;';
     now = picked;
     render();
+  });
+
+  function openCredits(){
+    elCreditsOverlay.hidden = false;
+    elCreditsOpen.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('creditsOpen');
+    elCreditsClose.focus();
+  }
+
+  function closeCredits(){
+    elCreditsOverlay.hidden = true;
+    elCreditsOpen.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('creditsOpen');
+    elCreditsOpen.focus();
+  }
+
+  elCreditsOpen.addEventListener('click', openCredits);
+  elCreditsClose.addEventListener('click', closeCredits);
+  elCreditsOverlay.addEventListener('click', function(event){
+    if (event.target === elCreditsOverlay) closeCredits();
+  });
+
+  document.addEventListener('keydown', function(event){
+    if (elCreditsOverlay.hidden) return;
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      closeCredits();
+      return;
+    }
+    if (event.key !== 'Tab') return;
+    var focusable = Array.prototype.slice.call(elCreditsOverlay.querySelectorAll('button,a[href]'));
+    if (!focusable.length) return;
+    var first = focusable[0];
+    var last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
   });
 
   render();

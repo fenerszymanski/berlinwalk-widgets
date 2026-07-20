@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Berlin Beer Season Calendar: What Is Actually On While You Are Here</title>
+<title>Berlin Beer Season Calendar: 2026 Oktoberfest and Beer Dates</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Crect x='18' y='16' width='28' height='32' rx='5' fill='%23FFE600'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -11,112 +11,169 @@
 <link rel="stylesheet" href="../css/brand.css" />
 <style>
   :root{
-    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
-    --yellow:#FFE600; --amber:#F0A500; --red:#E63946;
-    --ink:#1c2a1c; --stone:#6d7b66; --bone:#f4f9ec; --line:#e3edd6;
+    --green:#1B5E20;--green-deep:#123D18;--lime:#7CB342;--soft:#C5E1A5;
+    --yellow:#FFE600;--amber:#F0A500;--red:#E63946;
+    --ink:#1c2a1c;--stone:#6d7b66;--bone:#f4f9ec;--line:#e3edd6;
     --night:#0f2412;
   }
   *{box-sizing:border-box}
-  [hidden]{display:none!important}
+  [hidden],.creditsLayer[hidden]{display:none!important}
   html,body{margin:0}
   body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
-  .wrap{max-width:940px;margin:0 auto;padding:4px}
+  .wrap{max-width:940px;margin:0 auto;padding:4px;position:relative}
+  .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;
+    overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 
-  /* ---- date bar: the entry point, deliberately narrow and quiet ---- */
-  .dates{background:var(--night);border-radius:18px 18px 0 0;padding:16px 18px 15px;color:#fff}
-  .dates .lbl{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:600;margin:0 0 9px}
+  /* Date controls */
+  .dates{background:var(--night);border-radius:18px 18px 0 0;padding:17px 18px 16px;color:#fff}
+  .dates .kicker{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--yellow);font-weight:600;margin:0 0 5px}
+  .dates h2{margin:0 0 13px;font-size:19px;line-height:1.25;letter-spacing:-.02em;color:#fff}
   .dates .row{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}
-  .fld{display:flex;flex-direction:column;gap:4px;flex:1 1 150px;min-width:0}
+  .fld{display:flex;flex-direction:column;gap:4px;flex:1 1 180px;min-width:0}
   .fld span{font-size:11px;font-weight:700;color:#b9d4b6;letter-spacing:.02em}
   .fld input{font-family:inherit;font-size:14px;font-weight:700;color:var(--green-deep);background:#fff;
-    border:2px solid transparent;border-radius:10px;padding:9px 10px;width:100%;min-width:0}
+    border:2px solid transparent;border-radius:10px;padding:9px 10px;width:100%;min-width:0;min-height:44px}
   .fld input:focus{outline:none;border-color:var(--yellow)}
-  .dates .note{margin:10px 0 0;font-size:11.5px;color:#9dbb9c}
+  .dates .note{margin:10px 0 0;font-size:11.5px;color:#b9cbb7}
 
-  /* ---- the timeline is the interface ---- */
+  /* Timeline */
   .band{background:linear-gradient(180deg,#16341a 0%,#122b16 100%);padding:6px 0 20px;position:relative}
-  .scroller{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;padding:0 18px}
-  .track{position:relative;min-width:620px;height:246px}
-
+  .scroller{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;padding:0 18px;scrollbar-color:#6f8c6d #17341a}
+  .track{position:relative;min-width:740px;height:364px}
   .months{position:absolute;inset:0 0 auto 0;height:26px}
   .mo{position:absolute;top:0;height:26px;border-left:1px solid rgba(197,225,165,.22)}
   .mo b{position:absolute;left:7px;top:5px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;
     letter-spacing:.13em;text-transform:uppercase;color:#a9c7a6;font-weight:600}
-  .weeks{position:absolute;top:26px;bottom:34px;left:0;right:0}
+  .weeks{position:absolute;top:26px;bottom:30px;left:0;right:0}
   .wk{position:absolute;top:0;bottom:0;width:1px;background:rgba(197,225,165,.09)}
-
-  .lane{position:absolute;left:0;right:0;height:46px}
-  .bar{position:absolute;top:9px;height:26px;border-radius:7px;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+  .lane{position:absolute;left:0;right:0;height:54px}
+  .bar{position:absolute;top:34px;height:17px;border-radius:6px;box-shadow:0 3px 10px rgba(0,0,0,.3)}
   .bar.berlin{background:linear-gradient(135deg,#4d8f2f,#8bc34a)}
   .bar.berlin.long{background:linear-gradient(135deg,#2f7d32,#6aae3d)}
-  .bar.elsewhere{background:repeating-linear-gradient(135deg,#585d54,#585d54 7px,#43483f 7px,#43483f 14px);border:1px dashed rgba(255,255,255,.4)}
-  .blabel{position:absolute;top:2px;display:flex;flex-direction:column;gap:1px;white-space:nowrap;pointer-events:none}
-  .blabel.right{padding-left:9px}
-  .blabel.left{padding-right:9px;align-items:flex-end;transform:translateX(-100%)}
-  .blabel b{font-size:12.5px;font-weight:800;color:#fff;letter-spacing:-.01em;line-height:1.25}
-  .blabel i{font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;color:#a9c7a6}
-  .blabel .pin{align-self:flex-start;margin-top:2px;font-size:8.5px;font-family:'IBM Plex Mono',monospace;font-weight:700;
-    letter-spacing:.09em;background:rgba(255,230,0,.16);color:var(--yellow);padding:2px 6px;border-radius:4px}
-  .blabel.left .pin{align-self:flex-end}
+  .bar.weekends{background:repeating-linear-gradient(135deg,#4d8f2f,#4d8f2f 7px,#8bc34a 7px,#8bc34a 13px)}
+  .bar.funfair{background:linear-gradient(135deg,#ad7a00,#f0a500)}
+  .bar.elsewhere{background:repeating-linear-gradient(135deg,#585d54,#585d54 7px,#43483f 7px,#43483f 14px);
+    border:1px dashed rgba(255,255,255,.4)}
+  .blabel{position:absolute;top:0;transform:translateX(-50%);width:236px;max-width:32%;display:flex;flex-direction:column;
+    align-items:center;text-align:center;pointer-events:none;white-space:nowrap}
+  .blabel b{display:flex;align-items:center;justify-content:center;gap:5px;font-size:12px;font-weight:800;color:#fff;
+    letter-spacing:-.01em;line-height:1.25}
+  .blabel i{font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.04em;color:#a9c7a6}
+  .blabel .pin{font-size:7.5px;font-family:'IBM Plex Mono',monospace;font-weight:700;letter-spacing:.07em;
+    background:rgba(255,230,0,.16);color:var(--yellow);padding:2px 4px;border-radius:4px}
   .blabel.away b{color:#e2e6df}
   .blabel.away .pin{background:rgba(240,165,0,.2);color:#f5c46a}
-
-  .trip{position:absolute;top:26px;bottom:34px;background:rgba(255,230,0,.16);
-    border-left:2px solid var(--yellow);border-right:2px solid var(--yellow);pointer-events:none;border-radius:3px}
+  .trip{position:absolute;top:26px;bottom:30px;background:rgba(255,230,0,.16);border-left:2px solid var(--yellow);
+    border-right:2px solid var(--yellow);pointer-events:none;border-radius:3px}
   .trip .cap{position:absolute;top:-2px;left:50%;transform:translateX(-50%);background:var(--yellow);color:var(--green-deep);
-    font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.09em;padding:2px 7px;border-radius:0 0 6px 6px;white-space:nowrap}
-
+    font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.07em;padding:2px 6px;
+    border-radius:0 0 6px 6px;white-space:nowrap}
   .axis{position:absolute;left:0;right:0;bottom:0;height:30px;border-top:1px solid rgba(197,225,165,.22)}
-  .tick{position:absolute;top:5px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#8fae8d;transform:translateX(-50%);white-space:nowrap}
-  .hint{margin:8px 18px 0;font-size:11px;color:#8fae8d;font-family:'IBM Plex Mono',monospace;letter-spacing:.05em}
+  .tick{position:absolute;top:5px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#8fae8d;
+    transform:translateX(-50%);white-space:nowrap}
+  .hint{margin:8px 18px 0;font-size:11px;color:#9bb498;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}
 
-  /* ---- verdict ---- */
+  /* Result */
   .verdict{background:#fff;border:1px solid var(--line);border-top:none;padding:18px}
   .vhead{display:flex;gap:11px;align-items:flex-start;margin:0 0 12px}
-  .vhead .mark{flex:none;width:42px;height:42px;border-radius:12px;background:var(--bone);border:1px solid var(--line);
+  .vhead .mark{flex:none;width:44px;height:44px;border-radius:12px;background:var(--bone);border:1px solid var(--line);
     display:flex;align-items:center;justify-content:center;font-size:21px}
   .vhead h3{margin:0;font-size:16.5px;font-weight:800;color:var(--green-deep);letter-spacing:-.01em}
   .vhead p{margin:4px 0 0;font-size:13px;color:#41533f}
-
   .hits{display:flex;flex-direction:column;gap:9px}
-  .hit{border:1px solid var(--line);border-left:4px solid var(--lime);border-radius:0 12px 12px 0;background:#fbfdf7;padding:11px 13px}
+  .hit{border:1px solid var(--line);border-left:4px solid var(--lime);border-radius:0 12px 12px 0;
+    background:#fbfdf7;padding:11px 13px}
+  .hit summary{list-style:none;cursor:pointer}
+  .hit summary::-webkit-details-marker{display:none}
+  .hit summary:focus-visible{outline:3px solid var(--yellow);outline-offset:4px;border-radius:5px}
   .hit.miss{border-left-color:#c9d3c2;background:#f7f8f6}
   .hit.away{border-left-color:var(--amber);background:#fdfaf1}
   .hit h4{margin:0 0 3px;font-size:14px;font-weight:800;color:var(--green-deep)}
-  .hit .when{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--stone);font-weight:600}
+  .hit .when{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--stone);font-weight:600}
   .hit p{margin:5px 0 0;font-size:13px;color:#3c4c3a}
   .hit p b{color:var(--green-deep)}
-  .hit .go{display:inline-block;margin-top:7px;font-size:12px;font-weight:700;color:var(--green);text-decoration:underline}
+  .hit .go{display:inline-block;margin-top:7px;font-size:12px;font-weight:700;color:var(--green);text-decoration:underline;
+    text-underline-offset:2px}
 
-  /* ---- always-on fallback ---- */
+  /* Practical fallback */
   .always{background:var(--bone);border:1px solid var(--line);border-top:none;border-radius:0 0 18px 18px;padding:16px 18px 18px}
   .always .lbl{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
     color:var(--green);font-weight:600;margin:0 0 4px}
   .always h3{margin:0 0 10px;font-size:15px;font-weight:800;color:var(--green-deep)}
   .gardens{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  @media (max-width:620px){ .gardens{grid-template-columns:1fr} .track{min-width:560px} }
   .gd{background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 13px}
+  .gd summary{list-style:none;cursor:pointer}
+  .gd summary::-webkit-details-marker{display:none}
+  .gd summary:focus-visible{outline:3px solid var(--yellow);outline-offset:4px;border-radius:5px}
   .gd h4{margin:0;font-size:13.5px;font-weight:800;color:var(--green-deep)}
-  .gd .st{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--stone);font-weight:600;display:block;margin-top:2px}
+  .gd .st{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--stone);font-weight:600;display:block;margin-top:2px}
   .gd p{margin:5px 0 0;font-size:12.5px;color:#41533f}
   .foot{margin:12px 0 0;font-size:11.5px;color:var(--stone)}
+  .foot a{color:var(--green-deep);font-weight:700}
+
+  /* Credits overlay does not alter document or iframe height. */
+  .creditsbar{display:flex;justify-content:flex-end;margin-top:12px}
+  .creditsTrigger{display:inline-flex;align-items:center;gap:7px;min-height:44px;border:1px solid #c6d8bb;border-radius:999px;
+    background:var(--yellow);color:var(--green-deep);font:800 11.5px/1 Montserrat,system-ui,sans-serif;padding:10px 14px;cursor:pointer}
+  .creditsTrigger::before{content:"i";display:grid;place-items:center;width:17px;height:17px;border-radius:50%;
+    background:var(--green-deep);color:#fff;font:700 10px/1 'IBM Plex Mono',monospace}
+  .creditsTrigger:hover{background:#f4dc00}
+  .creditsTrigger:focus-visible,.creditsClose:focus-visible,.creditsList a:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+  .creditsLayer{position:absolute;z-index:30;inset:4px;display:flex;align-items:flex-end;justify-content:center;padding:14px;
+    background:rgba(10,31,14,.66);border-radius:18px}
+  .creditsDialog{width:min(720px,100%);max-height:min(560px,calc(100vh - 32px));overflow:auto;overscroll-behavior:contain;
+    background:#fff;border:1px solid #dbe6d1;border-radius:16px;box-shadow:0 18px 48px rgba(10,31,14,.28);padding:17px 18px 18px}
+  .creditsTop{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+  .creditsTop h3{margin:0;color:var(--green-deep);font-size:17px;font-weight:800}
+  .creditsIntro{margin:5px 0 13px;color:var(--stone);font-size:11.5px;line-height:1.5}
+  .creditsClose{flex:0 0 auto;width:44px;height:44px;border:1px solid #cddbc3;border-radius:50%;background:var(--yellow);
+    color:var(--green-deep);font:800 23px/1 Montserrat,system-ui,sans-serif;cursor:pointer}
+  .creditsClose:hover{background:#f4dc00}
+  .creditsList{margin:0;padding-left:20px;color:var(--ink);font-size:11.5px;line-height:1.55}
+  .creditsList li+li{margin-top:10px}
+  .creditsList a{color:var(--green-deep);font-weight:700;text-underline-offset:2px}
+  .change{display:block;color:var(--stone);margin-top:2px}
+
+  @media (max-width:620px){
+    .dates{padding:16px 14px 15px}
+    .dates h2{font-size:17px}
+    .track{min-width:740px}
+    .gardens{grid-template-columns:1fr}
+    .verdict,.always{padding-left:14px;padding-right:14px}
+    .creditsLayer{padding:8px}
+    .creditsDialog{max-height:520px;padding:15px 14px 16px}
+  }
+  @media (max-width:280px){
+    .blabel{width:190px}
+    .vhead{gap:8px}
+    .vhead .mark{width:40px;height:40px}
+    .hit summary{position:relative;padding-right:24px}
+    .hit summary::after{content:'+';position:absolute;right:0;top:0;color:var(--green);font:800 20px/1 Montserrat,sans-serif}
+    .hit[open] summary::after{content:'\2212'}
+    .gd summary{position:relative;padding-right:24px}
+    .gd summary::after{content:'+';position:absolute;right:0;top:0;color:var(--green);font:800 20px/1 Montserrat,sans-serif}
+    .gd[open] summary::after{content:'\2212'}
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
-
-  <div class="dates">
-    <p class="lbl">Berlin beer season 2026</p>
+<main class="wrap">
+  <section class="dates" aria-labelledby="toolTitle">
+    <p class="kicker">Berlin beer season 2026</p>
+    <h2 id="toolTitle">What is on during your Berlin dates?</h2>
     <div class="row">
-      <label class="fld"><span>I arrive in Berlin</span><input type="date" id="from" value="2026-09-26" min="2026-07-01" max="2026-11-30" /></label>
-      <label class="fld"><span>I leave Berlin</span><input type="date" id="to" value="2026-10-01" min="2026-07-01" max="2026-11-30" /></label>
+      <label class="fld"><span>I arrive in Berlin</span><input type="date" id="from" value="2026-09-26" min="2026-07-01" max="2026-11-30" aria-describedby="dateNote" /></label>
+      <label class="fld"><span>I leave Berlin</span><input type="date" id="to" value="2026-10-01" min="2026-07-02" max="2026-12-01" aria-describedby="dateNote" /></label>
     </div>
-    <p class="note">Set your dates and the yellow band shows what your trip actually lands on.</p>
-  </div>
+    <p class="note" id="dateNote">Arrival is counted. Your departure date is not counted as a Berlin day.</p>
+  </section>
 
-  <div class="band">
+  <section class="band" aria-label="2026 event timeline">
     <div class="scroller">
-      <div class="track" id="track">
+      <div class="track" id="track" aria-hidden="true">
         <div class="months" id="months"></div>
         <div class="weeks" id="weeks"></div>
         <div id="lanes"></div>
@@ -124,81 +181,107 @@
         <div class="axis" id="axis"></div>
       </div>
     </div>
-    <p class="hint" id="hint">Scroll the timeline sideways on a small screen.</p>
-  </div>
+    <p class="hint">Scroll sideways on a small screen. Spandau's striped bar means Fridays and Saturdays only.</p>
+    <h3 class="sr-only">Timeline events</h3>
+    <ul class="sr-only" id="timelineSummary"></ul>
+  </section>
 
-  <div class="verdict">
-    <div class="vhead">
-      <div class="mark" id="mark">🍺</div>
+  <section class="verdict" aria-labelledby="vtitle">
+    <div class="vhead" aria-live="polite" aria-atomic="true">
+      <div class="mark" id="mark" aria-hidden="true">🍺</div>
       <div><h3 id="vtitle"></h3><p id="vsub"></p></div>
     </div>
-    <div class="hits" id="hits"></div>
-  </div>
+    <div class="hits" id="hits" role="list" aria-live="polite"></div>
+  </section>
 
-  <div class="always">
-    <p class="lbl">On every single day of the year</p>
-    <h3>Berlin's real beer answer is a garden, not a tent</h3>
+  <section class="always" aria-labelledby="fallbackTitle">
+    <p class="lbl">Outside event dates</p>
+    <h3 id="fallbackTitle">Use a beer garden when the weather and opening hours allow</h3>
     <div class="gardens">
-      <div class="gd">
-        <h4>Prater Garten</h4>
-        <span class="st">Kastanienallee 7-9 · U2 Eberswalder Straße</span>
-        <p>Berlin's oldest beer garden, in the same courtyard since 1837. Chestnut trees, long benches, grilled chicken, no dirndl.</p>
-      </div>
-      <div class="gd">
-        <h4>Café am Neuen See</h4>
-        <span class="st">Tiergarten · S/U Zoologischer Garten</span>
-        <p>Beer garden on the lake inside Tiergarten, running since 1896. Rowing boats in season, Bavarian food if you want it.</p>
-      </div>
-      <div class="gd">
-        <h4>Zollpackhof</h4>
-        <span class="st">Elisabeth-Abegg-Straße 1 · S/U Hauptbahnhof</span>
-        <p>Augustiner from wooden barrels with the Chancellery across the Spree. The easiest one to reach from the main station.</p>
-      </div>
-      <div class="gd">
-        <h4>A Berliner Weisse anywhere</h4>
-        <span class="st">Order it "mit Schuss"</span>
-        <p>Sour wheat beer with raspberry or woodruff syrup. Bright red or alarming green, low alcohol, very much a Berlin thing.</p>
-      </div>
+      <details class="gd" open>
+        <summary><h4>Prater Garten</h4>
+        <span class="st">Kastanienallee 7-9 · U2 Eberswalder Straße</span></summary>
+        <p>Long benches under chestnut trees. Check the same-day opening notice because the garden depends on the weather.</p>
+      </details>
+      <details class="gd" open>
+        <summary><h4>Café am Neuen See</h4>
+        <span class="st">Tiergarten · S/U Zoologischer Garten</span></summary>
+        <p>A lake-side garden inside Tiergarten, with rowing boats in season and Bavarian food on the menu.</p>
+      </details>
+      <details class="gd" open>
+        <summary><h4>Zollpackhof</h4>
+        <span class="st">Elisabeth-Abegg-Straße 1 · S/U Hauptbahnhof</span></summary>
+        <p>Augustiner beer with the Chancellery across the Spree, close to the main station.</p>
+      </details>
+      <details class="gd" open>
+        <summary><h4>Berliner Weisse mit Schuss</h4>
+        <span class="st">Raspberry red · woodruff green</span></summary>
+        <p>A tart, usually low-alcohol Berlin wheat beer. Order the syrup by colour if the German name is difficult.</p>
+      </details>
     </div>
-    <p class="foot">Dates checked July 2026 against berlin.de and the Zentraler Festplatz calendar. Festival dates can move, so confirm before you book a trip around one.</p>
-  </div>
+    <p class="foot">Dates checked 20 July 2026 against the <a href="https://www.berlin.de/events/" target="_blank" rel="noopener noreferrer">Berlin events calendar</a> and the named organizers. Programmes, tickets and opening hours can change, so confirm the exact event before travelling.</p>
+    <div class="creditsbar">
+      <button class="creditsTrigger" id="creditsOpen" type="button" aria-expanded="false" aria-controls="imageCredits" aria-haspopup="dialog">Image credits</button>
+    </div>
+  </section>
 
-</div>
+  <div class="creditsLayer" id="imageCredits" hidden>
+    <section class="creditsDialog" role="dialog" aria-modal="true" aria-labelledby="creditsTitle" tabindex="-1">
+      <div class="creditsTop">
+        <div>
+          <h3 id="creditsTitle">Article image credits</h3>
+          <p class="creditsIntro">Source, creator, licence and edit details for the five photographs used in the article.</p>
+        </div>
+        <button class="creditsClose" id="creditsClose" type="button" aria-label="Close image credits">&times;</button>
+      </div>
+      <ol class="creditsList">
+        <li><a href="https://commons.wikimedia.org/wiki/File%3APratergarten_Berlin_Kastanienallee.JPG" target="_blank" rel="noopener noreferrer">Pratergarten Berlin Kastanienallee.JPG</a>, Superbass, <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>.<span class="change">Changes: resized to a 1600px long edge and compressed as JPEG; no crop.</span></li>
+        <li><a href="https://commons.wikimedia.org/wiki/File%3AM%C3%BCnchen%2C_Oktoberfest_2019%2C_%C3%9Cberf%C3%BCllung%2C_1.jpeg" target="_blank" rel="noopener noreferrer">München, Oktoberfest 2019, Überfüllung, 1.jpeg</a>, Renardo la vulpo, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>.<span class="change">Changes: resized to a 1600px long edge and compressed as JPEG; no crop.</span></li>
+        <li><a href="https://commons.wikimedia.org/wiki/File%3ABiermeile-karl-marx-allee_2017_06.jpg" target="_blank" rel="noopener noreferrer">Biermeile-karl-marx-allee 2017 06.jpg</a>, Dtuk, <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>.<span class="change">Changes: resized to a 1600px long edge and compressed as JPEG; no crop.</span></li>
+        <li><a href="https://commons.wikimedia.org/wiki/File%3ABiermeile2017start_17.jpg" target="_blank" rel="noopener noreferrer">Biermeile2017start 17.jpg</a>, Dtuk, <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>.<span class="change">Changes: resized to a 1600px long edge and compressed as JPEG; no crop.</span></li>
+      </ol>
+    </section>
+  </div>
+</main>
 
 <script>
 (function(){
-  var START = new Date(Date.UTC(2026,6,1));   // 1 Jul 2026
-  var END   = new Date(Date.UTC(2026,10,30)); // 30 Nov 2026
   var DAY = 86400000;
-  var TOTAL = Math.round((END-START)/DAY);
+  var START = new Date(Date.UTC(2026,6,1));
+  var END_EXCLUSIVE = new Date(Date.UTC(2026,11,1));
+  var TOTAL = Math.round((END_EXCLUSIVE - START) / DAY);
 
   var EVENTS = [
-    { key:'bierfestival', lane:0, where:'berlin', cls:'berlin',
-      name:'Internationales Berliner Bierfestival', short:'Berlin Beer Festival',
-      from:'2026-08-07', to:'2026-08-09', pin:'FREE',
-      when:'Fri 7 - Sun 9 August 2026',
-      hit:'This is the one Berlin actually does at scale. <b>2.2 km of Karl-Marx-Allee</b> between Strausberger Platz and Frankfurter Tor turns into a beer street, free to walk in, and you pay stall by stall. U5 drops you straight into it.',
-      miss:'Berlin’s own big beer event runs <b>7-9 August 2026</b> on Karl-Marx-Allee. Free entry, around 300 breweries, U5 the whole way. It is over before Oktoberfest season starts.',
-      link:'https://www.berlin.de/en/events/' },
-    { key:'wiesn', lane:1, where:'munich', cls:'elsewhere',
-      name:'Oktoberfest - Munich, not Berlin', short:'Oktoberfest (Munich)',
-      from:'2026-09-19', to:'2026-10-04', pin:'600 KM AWAY',
-      when:'Sat 19 September - Sun 4 October 2026',
-      hit:'The real thing is on while you are here, but it is on the Theresienwiese in <b>Munich</b>, roughly four hours from Berlin Hauptbahnhof by ICE. Berlin has no equivalent of it. If you want the tent, that is a separate trip, and tables get reserved months ahead.',
-      miss:'The Munich Oktoberfest runs <b>19 September - 4 October 2026</b>. Even in those weeks it is a Munich event, 600 km south, so it changes nothing about your Berlin days.',
-      link:'https://www.oktoberfest.de/en' },
-    { key:'herbstrummel', lane:2, where:'berlin', cls:'berlin long',
-      name:'Berliner Herbstrummel', short:'Berlin autumn funfair',
-      from:'2026-09-25', to:'2026-10-25', pin:'FREE ENTRY',
-      when:'Fri 25 September - Sun 25 October 2026',
-      hit:'This is the closest Berlin gets, and it is honestly a <b>funfair</b>: rides, sausage stands and a big Bavarian-style beer tent on the Zentraler Festplatz at Kurt-Schumacher-Damm 207 in Reinickendorf. Entry is free, the rides are not, and you get there by bus M21 or X21, not U-Bahn.',
-      miss:'Berlin’s autumn funfair with the Oktoberfest-style tent runs <b>25 September - 25 October 2026</b> at Kurt-Schumacher-Damm. Outside those weeks the fairground is closed.',
-      link:'https://www.berlin.de/en/events/6279065-2842498-berliner-herbst-rummel.en.html' }
+    {key:'beerweek',lane:0,where:'berlin',cls:'berlin',name:'Berlin Beer Week',short:'Berlin Beer Week',
+      from:'2026-08-28',to:'2026-09-06',pin:'CITYWIDE',timelineWhen:'28 Aug to 6 Sep',when:'Fri 28 August to Sun 6 September 2026',
+      hit:'A distributed programme is running across Berlin, with breweries, bars, tastings and Brews Cruises. <b>Choose one named event</b> from the programme and travel to that address.',
+      miss:'Berlin Beer Week runs <b>28 August to 6 September 2026</b>. It is a citywide programme, not one continuous street festival.',
+      link:'https://beerweek.de/'},
+    {key:'spandau',lane:1,where:'berlin',cls:'berlin weekends',name:'Oktoberfest at Spandau Citadel',short:'Spandau Oktoberfest',
+      from:'2026-09-18',to:'2026-10-24',activeDays:[5,6],pin:'FRI + SAT ONLY',timelineWhen:'18 Sep to 24 Oct · Fri + Sat',when:'18 September to 24 October 2026, Fridays and Saturdays',
+      hit:'A Friday or Saturday in your stay matches the large tent beside Spandau Citadel. Take <b>U7 to Zitadelle</b> and check current admission or reservation packages before travelling.',
+      miss:'The Spandau tent runs <b>Fridays and Saturdays only</b> from 18 September to 24 October 2026. A weekday inside that broad window does not count as a match.',
+      link:'https://www.wollenschlaeger-berlin.de/festzelt-der-hauptstadt/'},
+    {key:'wiesn',lane:2,where:'munich',cls:'elsewhere',name:'Oktoberfest in Munich',short:'Munich Oktoberfest',
+      from:'2026-09-19',to:'2026-10-04',pin:'MUNICH',timelineWhen:'19 Sep to 4 Oct',when:'Sat 19 September to Sun 4 October 2026',
+      hit:'The original Wiesn is running, but it is on the Theresienwiese in <b>Munich</b>. The fastest direct trains can take around four hours each way, so plan it as a separate trip.',
+      miss:'Munich Oktoberfest runs <b>19 September to 4 October 2026</b>. It is shown for comparison and does not count as a Berlin event.',
+      link:'https://www.oktoberfest.de/en'},
+    {key:'alexanderplatz',lane:3,where:'berlin',cls:'berlin',name:'Oktoberfest on Alexanderplatz',short:'Alexanderplatz Oktoberfest',
+      from:'2026-09-25',to:'2026-10-04',pin:'FREE ENTRY',timelineWhen:'25 Sep to 4 Oct',when:'Fri 25 September to Sun 4 October 2026',
+      hit:'This is the easiest central option: a Paulaner beer garden and live programme on <b>Alexanderplatz</b>. Entry is free, and S-Bahn plus U2, U5 and U8 stop at the square.',
+      miss:'The Alexanderplatz event runs <b>25 September to 4 October 2026</b>. It is the simplest Berlin option for a short visit after sightseeing.',
+      link:'https://www.berlin.de/events/2698409-2229501-oktoberfest-auf-dem-alexanderplatz.html'},
+    {key:'herbstrummel',lane:4,where:'berlin',cls:'funfair long',name:'Berliner Herbstrummel',short:'Herbstrummel funfair',
+      from:'2026-09-25',to:'2026-10-25',pin:'FUNFAIR',timelineWhen:'25 Sep to 25 Oct',when:'Fri 25 September to Sun 25 October 2026',
+      hit:'This is an <b>autumn funfair</b> at Zentraler Festplatz, with rides, games and food. Go for the fair itself; do not treat it as Berlin\'s confirmed Oktoberfest tent.',
+      miss:'Herbstrummel runs <b>25 September to 25 October 2026</b>. It is a separate funfair, not an Oktoberfest.',
+      link:'https://www.berlin.de/events/6279065-2229501-berliner-herbstrummel.html'}
   ];
 
-  var LANE_TOP = [38, 100, 162];
+  var LANE_TOP = [38,96,154,212,270];
   var MONTHS = ['Jul','Aug','Sep','Oct','Nov'];
-
+  var MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   var fromEl = document.getElementById('from');
   var toEl = document.getElementById('to');
   var track = document.getElementById('track');
@@ -206,125 +289,222 @@
   var tripEl = document.getElementById('trip');
   var tripCap = document.getElementById('tripcap');
   var hitsEl = document.getElementById('hits');
+  var lastRange = null;
 
-  function d(s){ var p = s.split('-'); return new Date(Date.UTC(+p[0], +p[1]-1, +p[2])); }
-  function pct(date){ return Math.max(0, Math.min(100, ((date-START)/DAY) / TOTAL * 100)); }
-  function fmt(date){
-    return date.getUTCDate() + ' ' + ['January','February','March','April','May','June','July','August','September','October','November','December'][date.getUTCMonth()];
+  function d(value){
+    var p = value.split('-');
+    return new Date(Date.UTC(Number(p[0]),Number(p[1])-1,Number(p[2])));
+  }
+  function iso(date){ return date.toISOString().slice(0,10); }
+  function plusDays(date,count){ return new Date(date.getTime() + count * DAY); }
+  function pct(date){ return Math.max(0,Math.min(100,((date-START)/DAY)/TOTAL*100)); }
+  function fmt(date){ return date.getUTCDate() + ' ' + MONTH_NAMES[date.getUTCMonth()]; }
+  function staySpan(arrive,depart){
+    var last = plusDays(depart,-1);
+    return arrive.getTime() === last.getTime() ? fmt(arrive) : fmt(arrive) + ' to ' + fmt(last);
   }
 
   function buildScaffold(){
-    var mo = document.getElementById('months');
-    var wk = document.getElementById('weeks');
-    var ax = document.getElementById('axis');
-    for (var m = 6; m <= 10; m++){
-      var s = new Date(Date.UTC(2026, m, 1));
-      var e = new Date(Date.UTC(2026, m+1, 1));
-      var el = document.createElement('div');
-      el.className = 'mo';
-      el.style.left = pct(s) + '%';
-      el.style.width = (pct(e) - pct(s)) + '%';
-      el.innerHTML = '<b>' + MONTHS[m-6] + '</b>';
-      mo.appendChild(el);
-      for (var day = 1; day <= 28; day += 7){
-        var t = document.createElement('div');
-        t.className = 'wk';
-        t.style.left = pct(new Date(Date.UTC(2026, m, day))) + '%';
-        wk.appendChild(t);
+    var months = document.getElementById('months');
+    var weeks = document.getElementById('weeks');
+    var axis = document.getElementById('axis');
+    var summary = document.getElementById('timelineSummary');
+    for(var month=6;month<=10;month++){
+      var start = new Date(Date.UTC(2026,month,1));
+      var end = new Date(Date.UTC(2026,month+1,1));
+      var monthEl = document.createElement('div');
+      monthEl.className = 'mo';
+      monthEl.style.left = pct(start) + '%';
+      monthEl.style.width = (pct(end)-pct(start)) + '%';
+      monthEl.innerHTML = '<b>' + MONTHS[month-6] + '</b>';
+      months.appendChild(monthEl);
+      for(var day=1;day<=28;day+=7){
+        var week = document.createElement('div');
+        week.className = 'wk';
+        week.style.left = pct(new Date(Date.UTC(2026,month,day))) + '%';
+        weeks.appendChild(week);
       }
-      var tk = document.createElement('div');
-      tk.className = 'tick';
-      tk.style.left = pct(new Date(Date.UTC(2026, m, 15))) + '%';
-      tk.textContent = MONTHS[m-6] + ' 2026';
-      ax.appendChild(tk);
+      var tick = document.createElement('div');
+      tick.className = 'tick';
+      tick.style.left = pct(new Date(Date.UTC(2026,month,15))) + '%';
+      tick.textContent = MONTHS[month-6] + ' 2026';
+      axis.appendChild(tick);
     }
-    EVENTS.forEach(function(ev){
+
+    EVENTS.forEach(function(event){
       var lane = document.createElement('div');
       lane.className = 'lane';
-      lane.style.top = LANE_TOP[ev.lane] + 'px';
-      var a = d(ev.from), b = d(ev.to);
-      var left = pct(a), right = pct(new Date(b.getTime() + DAY));
+      lane.style.top = LANE_TOP[event.lane] + 'px';
+      var start = d(event.from);
+      var end = d(event.to);
+      var left = pct(start);
+      var right = pct(plusDays(end,1));
       var bar = document.createElement('div');
-      bar.className = 'bar ' + ev.cls;
+      bar.className = 'bar ' + event.cls;
       bar.style.left = left + '%';
-      bar.style.width = Math.max(1.4, right - left) + '%';
+      bar.style.width = Math.max(1.4,right-left) + '%';
       lane.appendChild(bar);
 
-      // Labels sit outside the bar so a 3-day window stays as readable as a 30-day one.
-      var lab = document.createElement('div');
-      var flip = right > 62;
-      lab.className = 'blabel ' + (flip ? 'left' : 'right') + (ev.where === 'munich' ? ' away' : '');
-      lab.style.left = (flip ? left : right) + '%';
-      lab.innerHTML = '<b>' + ev.short + '</b><i>' + ev.when.replace(' 2026','') + '</i><span class="pin">' + ev.pin + '</span>';
-      lane.appendChild(lab);
+      var label = document.createElement('div');
+      var anchor = Math.max(18,Math.min(82,(left+right)/2));
+      label.className = 'blabel' + (event.where === 'munich' ? ' away' : '');
+      label.style.left = anchor + '%';
+      label.innerHTML = '<b>' + event.short + '<span class="pin">' + event.pin + '</span></b><i>' + event.timelineWhen + '</i>';
+      lane.appendChild(label);
       lanesEl.appendChild(lane);
+
+      var item = document.createElement('li');
+      item.textContent = event.name + ': ' + event.when + (event.where === 'munich' ? ', in Munich rather than Berlin.' : '.');
+      summary.appendChild(item);
     });
   }
 
-  function overlaps(ev, a, b){
-    return d(ev.from) <= b && d(ev.to) >= a;
+  function eventOccursOn(event,date){
+    if(date < d(event.from) || date > d(event.to)) return false;
+    return !event.activeDays || event.activeDays.indexOf(date.getUTCDay()) !== -1;
+  }
+
+  function overlaps(event,arrive,depart){
+    for(var day=new Date(arrive.getTime());day<depart;day=plusDays(day,1)){
+      if(eventOccursOn(event,day)) return true;
+    }
+    return false;
+  }
+
+  function normalizeRange(){
+    var arrive = d(fromEl.value || '2026-09-26');
+    var depart = d(toEl.value || '2026-10-01');
+    if(depart <= arrive){
+      depart = plusDays(arrive,1);
+      toEl.value = iso(depart);
+    }
+    if(depart > END_EXCLUSIVE){
+      depart = new Date(END_EXCLUSIVE.getTime());
+      toEl.value = iso(depart);
+    }
+    return {arrive:arrive,depart:depart};
   }
 
   function render(){
-    var a = d(fromEl.value || '2026-09-26');
-    var b = d(toEl.value || fromEl.value || '2026-10-01');
-    if (b < a) { b = a; toEl.value = fromEl.value; }
+    var range = normalizeRange();
+    var arrive = range.arrive;
+    var depart = range.depart;
+    lastRange = range;
+    tripEl.style.left = pct(arrive) + '%';
+    tripEl.style.width = Math.max(1.2,pct(depart)-pct(arrive)) + '%';
+    tripCap.textContent = 'YOUR BERLIN DAYS';
 
-    tripEl.style.left = pct(a) + '%';
-    tripEl.style.width = Math.max(1.2, pct(new Date(b.getTime() + DAY)) - pct(a)) + '%';
-    tripCap.textContent = 'YOUR TRIP';
-
-    var matched = EVENTS.filter(function(ev){ return overlaps(ev, a, b); });
-    var berlinHits = matched.filter(function(ev){ return ev.where === 'berlin'; });
-
+    var matched = EVENTS.filter(function(event){ return overlaps(event,arrive,depart); });
+    var berlinHits = matched.filter(function(event){ return event.where === 'berlin'; });
     var mark = document.getElementById('mark');
-    var vtitle = document.getElementById('vtitle');
-    var vsub = document.getElementById('vsub');
-    var span = fmt(a) + (a.getTime() === b.getTime() ? '' : ' to ' + fmt(b));
+    var title = document.getElementById('vtitle');
+    var detail = document.getElementById('vsub');
+    var span = staySpan(arrive,depart);
+    var departureNote = ' Departure on ' + fmt(depart) + ' is not counted.';
 
-    if (berlinHits.length){
+    if(berlinHits.length){
       mark.textContent = '🍺';
-      vtitle.textContent = 'Yes, something beer-shaped is on in Berlin';
-      vsub.textContent = span + ' overlaps ' + berlinHits.length + (berlinHits.length === 1 ? ' Berlin event.' : ' Berlin events.') + ' None of it is a Munich-style Oktoberfest, and that is the honest answer.';
-    } else {
+      title.textContent = berlinHits.length === 1 ? 'One listed Berlin event matches your stay' : berlinHits.length + ' listed Berlin events match your stay';
+      detail.textContent = span + ' overlaps ' + berlinHits.map(function(event){ return event.name; }).join(', ') + '. Oktoberfest events, Beer Week and Herbstrummel are different formats, so use the cards below before choosing.' + departureNote;
+    }else{
       mark.textContent = '🌳';
-      vtitle.textContent = 'Nothing beer-festival-shaped is on for your dates';
-      vsub.textContent = span + ' falls outside every Berlin beer event window. That is not a problem: the beer gardens below are open anyway and are what locals actually use.';
+      title.textContent = 'No listed Berlin event matches your stay';
+      detail.textContent = span + ' falls outside the eligible Berlin event days. Check a weather-dependent beer garden or a neighbourhood bar instead.' + departureNote;
     }
 
     hitsEl.innerHTML = '';
-    EVENTS.forEach(function(ev){
-      var on = overlaps(ev, a, b);
-      var el = document.createElement('div');
-      el.className = 'hit' + (on ? (ev.where === 'munich' ? ' away' : '') : ' miss');
-      el.innerHTML =
-        '<h4>' + (on ? '' : 'Not during your trip: ') + ev.name + '</h4>' +
-        '<span class="when">' + ev.when + '</span>' +
-        '<p>' + (on ? ev.hit : ev.miss) + '</p>' +
-        '<a class="go" href="' + ev.link + '" target="_blank" rel="noopener">Official dates and details</a>';
-      hitsEl.appendChild(el);
+    var narrowCards = window.matchMedia && window.matchMedia('(max-width:280px)').matches;
+    var firstOpenIndex = berlinHits.length ? EVENTS.findIndex(function(event){ return event.where === 'berlin' && overlaps(event,arrive,depart); }) : 0;
+    EVENTS.forEach(function(event, index){
+      var on = overlaps(event,arrive,depart);
+      var card = document.createElement('details');
+      card.className = 'hit' + (on ? (event.where === 'munich' ? ' away' : '') : ' miss');
+      card.setAttribute('role','listitem');
+      card.open = !narrowCards || index === firstOpenIndex;
+      card.innerHTML = '<summary><h4>' + (on ? '' : 'Not during your Berlin days: ') + event.name + '</h4>' +
+        '<span class="when">' + event.when + '</span></summary>' +
+        '<p>' + (on ? event.hit : event.miss) + '</p>' +
+        '<a class="go" href="' + event.link + '" target="_blank" rel="noopener noreferrer">Official dates and details</a>';
+      card.addEventListener('toggle',function(){
+        if(!narrowCards || !card.open) return;
+        Array.prototype.forEach.call(hitsEl.querySelectorAll('details[open]'),function(other){
+          if(other !== card) other.open = false;
+        });
+      });
+      hitsEl.appendChild(card);
     });
 
-    centreOnTrip(a, b);
+    window.requestAnimationFrame(function(){ centreOnTrip(arrive,depart); });
   }
 
-  // On narrow screens the timeline scrolls; put the trip band in view instead of
-  // leaving the reader parked on July.
-  function centreOnTrip(a, b){
-    var sc = document.querySelector('.scroller');
-    if (!sc || sc.scrollWidth <= sc.clientWidth + 4) return;
-    var mid = (pct(a) + pct(new Date(b.getTime() + DAY))) / 200;
-    sc.scrollLeft = Math.max(0, mid * track.offsetWidth - sc.clientWidth / 2);
+  function centreOnTrip(arrive,depart){
+    var scroller = document.querySelector('.scroller');
+    if(!scroller || scroller.scrollWidth <= scroller.clientWidth + 4) return;
+    var middle = (pct(arrive)+pct(depart))/200;
+    scroller.scrollLeft = Math.max(0,middle*track.offsetWidth-scroller.clientWidth/2);
   }
 
-  fromEl.addEventListener('change', function(){
-    if (toEl.value && toEl.value < fromEl.value) toEl.value = fromEl.value;
-    render();
+  fromEl.addEventListener('change',render);
+  toEl.addEventListener('change',render);
+  var resizeTimer = null;
+  window.addEventListener('resize',function(){
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(function(){
+      if(lastRange) centreOnTrip(lastRange.arrive,lastRange.depart);
+    },100);
   });
-  toEl.addEventListener('change', render);
 
   buildScaffold();
   render();
+
+  if(window.matchMedia && window.matchMedia('(max-width:280px)').matches){
+    var gardenCards = Array.prototype.slice.call(document.querySelectorAll('.gd'));
+    gardenCards.forEach(function(card,index){
+      card.open = index === 0;
+      card.addEventListener('toggle',function(){
+        if(!card.open) return;
+        gardenCards.forEach(function(other){ if(other !== card) other.open = false; });
+      });
+    });
+  }
+
+  var creditsOpen = document.getElementById('creditsOpen');
+  var creditsLayer = document.getElementById('imageCredits');
+  var creditsDialog = creditsLayer.querySelector('.creditsDialog');
+  var creditsClose = document.getElementById('creditsClose');
+  var previousFocus = null;
+
+  function setCredits(open){
+    if(open){
+      previousFocus = document.activeElement;
+      creditsLayer.hidden = false;
+      creditsOpen.setAttribute('aria-expanded','true');
+      creditsDialog.focus();
+    }else{
+      creditsLayer.hidden = true;
+      creditsOpen.setAttribute('aria-expanded','false');
+      if(previousFocus && typeof previousFocus.focus === 'function') previousFocus.focus();
+    }
+  }
+
+  creditsOpen.addEventListener('click',function(){ setCredits(true); });
+  creditsClose.addEventListener('click',function(){ setCredits(false); });
+  creditsLayer.addEventListener('click',function(event){ if(event.target === creditsLayer) setCredits(false); });
+  document.addEventListener('keydown',function(event){
+    if(creditsLayer.hidden) return;
+    if(event.key === 'Escape'){
+      event.preventDefault();
+      setCredits(false);
+      return;
+    }
+    if(event.key !== 'Tab') return;
+    var focusable = Array.prototype.slice.call(creditsDialog.querySelectorAll('button,a[href]'));
+    if(!focusable.length) return;
+    var first = focusable[0];
+    var last = focusable[focusable.length-1];
+    if(event.shiftKey && document.activeElement === first){ event.preventDefault(); last.focus(); }
+    else if(!event.shiftKey && document.activeElement === last){ event.preventDefault(); first.focus(); }
+  });
 })();
 </script>
 <script src="../js/brand.js"></script>

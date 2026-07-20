@@ -29,33 +29,35 @@ posts, so Berlin History is carried as the balancing second category.
 
 ## Verified facts and sources
 
-- Length 3.5 km, width 53 m, four rows of plane trees, runs Breitscheidplatz to
-  Rathenauplatz through Charlottenburg / Wilmersdorf / Halensee / Grunewald.
-  Boulevard widening from the 1870s on Bismarck's initiative; the date cited as
-  its birthday is 5 May 1886 (Zoologischer Garten–Halensee steam tram).
-  Sources: en.wikipedia.org/wiki/Kurfürstendamm and berlin.de attractions page.
-- Kaiser Wilhelm Memorial Church: free entry; memorial hall in the tower ruin
-  Mon–Sat 10:00–18:00, shorter on Sunday. Source: berlin.de attractions page.
-  The church's own domain returned HTTP 500 during this run, so berlin.de was
-  used as the citation.
+- Berlin's district walking route gives about 4.1 km from Wittenbergplatz to
+  Rathenauplatz and 3.5 km for the Kurfürstendamm itself, which starts at
+  Breitscheidplatz. The visitor recommendation is explicitly a combined axis:
+  Wittenbergplatz to Uhlandstraße is about 1.3 to 1.4 km, but only the section
+  west of Breitscheidplatz is Kurfürstendamm. Source:
+  berlin.de/ba-charlottenburg-wilmersdorf/.../wanderwege/artikel.175350.php.
+- Kaiser Wilhelm Memorial Church: entry is free; the new church normally lists
+  daily 10:00–18:00. The tower Memorial Hall publishes separate opening days,
+  commonly Mon–Sat 10:00–18:00, while current closure notices can override the
+  schedule. The public copy directs readers to the official visitor page on the
+  day: gedaechtniskirche-berlin.de/besuchen.
 - C/O Berlin: Hardenbergstraße 22–24, daily 11:00–20:00, 15 EUR / 8 EUR reduced,
-  free under 18. Source: co-berlin.org visit + tickets pages.
-- Bikini Berlin: mall Mon–Sat 09:00–20:30, shops from 10:00, roof terrace listed
-  daily 09:00–21:00. Source: bikiniberlin.de. The body says "listed as" for the
-  terrace hours and flags that the shops are Mon–Sat, because the site does not
-  state whether terrace access changes on a Sunday.
+  free through age 18 inclusive. Source: co-berlin.org/de/besuch/tickets.
+- Bikini Berlin: shops Mon–Sat 10:00–20:00 and roof terrace listed daily
+  09:00–21:00. The roof looks across into the zoo; the direct monkey-enclosure
+  view is the panoramic Monkey Window inside the lower mall. Sources:
+  bikiniberlin.de opening-hours and official press-kit pages.
 - Schaubühne at Lehniner Platz occupies Mendelsohn's Universum cinema of 1928,
-  part of the WOGA complex; Schaubühne moved in in 1981. Mendelsohn's "no baroque
-  palaces for Buster Keaton" line is quoted from his own text on the cinema.
-  Sources: en.wikipedia.org/wiki/Schaubühne, schaubuehne.de architecture page.
-- Rathenauplatz Beton-Cadillacs: Wolf Vostell, 1987, installed for West Berlin's
-  750th anniversary as part of the temporary Skulpturenboulevard along the axis.
-  Sources: berlin.de Charlottenburg-Wilmersdorf sculpture page, taz.de.
-- Distances used in the widget are rounded segment estimates along the axis
-  (Wittenbergplatz 0.0 / Breitscheidplatz 0.75 / Uhlandstraße 1.35 /
-  Adenauerplatz 2.45 / Lehniner Platz 3.35 / Rathenauplatz 4.25), consistent with
-  the verified 3.5 km published length from Breitscheidplatz to Rathenauplatz.
-  Walking minutes assume roughly 4.7 km/h.
+  part of the WOGA complex; the theatre moved in in 1981. The official page
+  supports the ship-keel form, not the earlier first-modernist-cinema superlative
+  or Buster Keaton line, so both were removed. Selected performances carry
+  English surtitles. Sources: schaubuehne.de architecture and programme pages.
+- Rathenauplatz Beton-Cadillacs: Wolf Vostell, 1987, installed for Berlin's
+  750th anniversary as part of the Skulpturenboulevard. Berlin's district page
+  says three works survive, so the Cadillacs are described as one of those three.
+- Widget distances are deliberately approximate one-decimal route estimates
+  (Wittenbergplatz 0.0 / Breitscheidplatz 0.7 / Uhlandstraße 1.3 /
+  Adenauerplatz 2.4 / Lehniner Platz 3.2 / Rathenauplatz 4.1). They are used for
+  orientation, not survey-level precision; walking minutes assume about 4.7 km/h.
 
 **Deliberately left out:** The Story of Berlin museum at Kurfürstendamm 207–208.
 Sources disagree on whether it is temporarily or permanently closed, so it is
@@ -67,7 +69,7 @@ not mentioned at all rather than guessed at.
 not a picker, calculator, quiz or cheat sheet, and structurally different from
 the 2026-07-19 12:05 date-overlap timeline.
 
-Interaction model: a 4.25 km distance rail with six real station pins fills as
+Interaction model: an approximately 4.1 km distance rail with six real station pins fills as
 you walk; each stop swaps a real photograph, its caption, U-Bahn line pills,
 cumulative distance / walking time / street remaining, three concrete things
 that are actually there, a five-block "reasons to be here" meter that visibly
@@ -75,12 +77,18 @@ drains from 5 to 1 going west, Yusuf's judgment for that stop, and a verdict
 strip. The draining meter is the point: the widget's argument is that the street
 gets worse, and it shows that instead of stating it.
 
-Widget QA: 1280px and 390px, no console errors, no horizontal overflow at either
-width (`scrollWidth - innerWidth = 0`), both images load, forward/back buttons
-disable correctly at the ends, keyboard arrows work, rail pins clickable and
-labelled. Max page height 1450px desktop, 1485px mobile; embed height set to
-1520. On mobile the rail switches from station names to km numbers so the labels
-stop colliding.
+Local browser QA after corrections: no horizontal overflow at 940, 390 or the
+real Wix-critical 236 px width. Widget maximum heights across all six stops were
+1400 / 1423 / 1339 px respectively; its fallback embed height is 1460. Rail
+targets measured at least 44 px (48 px in the 236 px grid), selected state uses
+`aria-pressed` plus roving focus, and arrow keys act only while a rail pin has
+focus. Credits are default-closed, open as a fixed overlay, close by button,
+Escape or outside click, and do not change document height.
+
+Quick Summary measured 555 / 636 / 940 px at 940 / 390 / 236, so its fallback
+height is 980. The shared FAQ now keeps one item open per panel; this package's
+maximum measured heights were 742 / 905 / 1286 px, so its fallback is 1320.
+Both shared surfaces had zero horizontal overflow at every tested width.
 
 ## Package state
 
