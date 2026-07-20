@@ -13,13 +13,13 @@
       {
         id: 'mobile',
         media: '(max-width: 768px)',
-        href: `${base}hero-home-museum-island-800w.avif`
+        href: `${base}hero-home-museum-island-800w.webp`
       },
       {
         id: 'desktop',
         media: '(min-width: 769px)',
-        href: `${base}hero-home-museum-island-800w.avif`,
-        imageSrcset: `${base}hero-home-museum-island-800w.avif 800w, ${base}hero-home-museum-island-1200w.avif 1200w, ${base}hero-home-museum-island-1600w.avif 1600w`
+        href: `${base}hero-home-museum-island-800w.webp`,
+        imageSrcset: `${base}hero-home-museum-island-800w.webp 800w, ${base}hero-home-museum-island-1200w.webp 1200w, ${base}hero-home-museum-island-1600w.webp 1600w`
       }
     ];
 
@@ -29,7 +29,7 @@
       const link = document.createElement('link');
       link.rel = 'preload';
       link.as = 'image';
-      link.type = 'image/avif';
+      link.type = 'image/webp';
       link.href = source.href;
       link.media = source.media;
       link.fetchPriority = 'high';

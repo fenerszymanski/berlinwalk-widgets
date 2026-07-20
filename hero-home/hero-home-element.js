@@ -19,9 +19,9 @@ class BWHeroHomeElement extends HTMLElement {
     link.setAttribute('data-bw-hero-home-preload', 'true');
     link.rel = 'preload';
     link.as = 'image';
-    link.href = `${BW_HERO_HOME_ASSET_BASE}hero-home-museum-island-800w.avif`;
-    link.type = 'image/avif';
-    link.setAttribute('imagesrcset', `${BW_HERO_HOME_ASSET_BASE}hero-home-museum-island-800w.avif 800w, ${BW_HERO_HOME_ASSET_BASE}hero-home-museum-island-1200w.avif 1200w, ${BW_HERO_HOME_ASSET_BASE}hero-home-museum-island-1600w.avif 1600w`);
+    link.href = `${BW_HERO_HOME_ASSET_BASE}hero-home-museum-island-800w.webp`;
+    link.type = 'image/webp';
+    link.setAttribute('imagesrcset', `${BW_HERO_HOME_ASSET_BASE}hero-home-museum-island-800w.webp 800w, ${BW_HERO_HOME_ASSET_BASE}hero-home-museum-island-1200w.webp 1200w, ${BW_HERO_HOME_ASSET_BASE}hero-home-museum-island-1600w.webp 1600w`);
     link.setAttribute('imagesizes', '100vw');
     link.setAttribute('fetchpriority', 'high');
     document.head.appendChild(link);
@@ -455,14 +455,6 @@ class BWHeroHomeElement extends HTMLElement {
 
       <section class="bw-hero-home" aria-labelledby="bw-hero-home-title">
         <picture class="bw-hero-picture">
-          <source
-            media="(max-width: 768px)"
-            type="image/avif"
-            srcset="${BW_HERO_HOME_ASSET_BASE}hero-home-museum-island-800w.avif">
-          <source
-            type="image/avif"
-            srcset="${BW_HERO_HOME_ASSET_BASE}hero-home-museum-island-800w.avif 800w, ${BW_HERO_HOME_ASSET_BASE}hero-home-museum-island-1200w.avif 1200w, ${BW_HERO_HOME_ASSET_BASE}hero-home-museum-island-1600w.avif 1600w"
-            sizes="100vw">
           <source
             media="(max-width: 768px)"
             type="image/webp"
