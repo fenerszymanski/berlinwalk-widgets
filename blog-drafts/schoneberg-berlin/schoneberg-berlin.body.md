@@ -148,7 +148,7 @@ Two routes, depending on which Schöneberg you came for. Do one, not both.
 
 **The memory route.** U Bayerischer Platz, an hour walking the eighty signs of _Orte des Erinnerns_ from the orientation board. Then U4 three stops south to Rathaus Schöneberg for the Kennedy square and _Wir waren Nachbarn_. Any day except Friday, and aim to be at the square for the noon bell.
 
-Both of these are the opposite of the way I work in the centre. On my [free walking tour](/post/what-is-a-free-walking-tour-how-tip-based-tours-actually-work) we cover Berlin's historic core from Alexanderplatz in about 2 hours, because in the middle of the city the stories sit on top of each other and you can walk between them in minutes. Schöneberg is the reverse: spread out, quiet, and mostly written on small signs at head height. It rewards the second or third day of a trip, once you already know what Berlin is, and it is a good argument for staying longer than a weekend.
+Both of these are the opposite of the way I work in the centre. On my [free walking tour](/post/what-is-a-free-walking-tour-how-tip-based-tours-actually-work) I cover Berlin's historic core from Alexanderplatz in about 2 hours, because in the middle of the city the stories sit on top of each other and you can walk between them in minutes. Schöneberg is the reverse: spread out, quiet, and mostly written on small signs at head height. It rewards the second or third day of a trip, once you already know what Berlin is, and it is a good argument for staying longer than a weekend.
 
 {{faq}}
 

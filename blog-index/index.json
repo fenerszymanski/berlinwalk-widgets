@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-07-20T06:13:56.194Z",
+  "updatedAt": "2026-07-20T12:04:06.771Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 239,
+  "totalPosts": 242,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -974,6 +974,23 @@
           "relatedToolSlug": ""
         },
         {
+          "title": "Spreewald Day Trip from Berlin: Punts, Pickles and the Right Train (2026)",
+          "slug": "spreewald-day-trip-from-berlin",
+          "path": "/post/spreewald-day-trip-from-berlin",
+          "url": "https://www.berlinwalk.com/post/spreewald-day-trip-from-berlin",
+          "excerpt": "The Spreewald is Berlin's best nature escape: a UNESCO biosphere reserve of roughly 300 canals, about an hour away by train. Here is the station most guides get wrong, what punts and kayaks cost in 2026, and how to shape the day.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "route-stories",
+          "topicLabel": "Tour Route Stories",
+          "readTime": "6 min read",
+          "publishedDate": "2026-07-20T12:02:00.111Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_36141daf25ac443bb3e65b39b5ce341e~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-spreewald-punt.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_36141daf25ac443bb3e65b39b5ce341e~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-spreewald-punt.jpg",
+          "alt": "Punts full of visitors setting off across the harbor basin in Lübbenau",
+          "relatedToolSlug": "berlin-boat-tour-finder"
+        },
+        {
           "title": "How to Order Döner in Berlin: The Words to Say at the Counter (2026)",
           "slug": "how-to-order-doner-in-berlin",
           "path": "/post/how-to-order-doner-in-berlin",
@@ -1023,23 +1040,6 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_e30dba2ac4b241a18834437e2f9d9595~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/05-alexanderplatz-world-clock.jpg",
           "alt": "The World Clock and TV Tower at Alexanderplatz, where several Berlin audio walks begin or finish.",
           "relatedToolSlug": ""
-        },
-        {
-          "title": "How to Pronounce Berlin Station Names: A Simple Guide for Tourists (2026)",
-          "slug": "how-to-pronounce-berlin-station-names",
-          "path": "/post/how-to-pronounce-berlin-station-names",
-          "url": "https://www.berlinwalk.com/post/how-to-pronounce-berlin-station-names",
-          "excerpt": "German station names can look like someone sat on a keyboard, but they are more predictable than they seem. Here is how to pronounce Berlin station names, built around the stops you will really use, with plain respellings and the sounds that catch visitors out.",
-          "category": "German Language",
-          "categorySlug": "german-language",
-          "topic": "route-stories",
-          "topicLabel": "Tour Route Stories",
-          "readTime": "5 min read",
-          "publishedDate": "2026-07-13T05:57:42.578Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_95f6a44c136747208760c6881797ecfd~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-how-to-pronounce-berlin-station-names-cover.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_95f6a44c136747208760c6881797ecfd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-how-to-pronounce-berlin-station-names-cover.jpg",
-          "alt": "Berlin U-Bahn enamel station sign reading Schönhauser Allee, one of the names this guide helps you say",
-          "relatedToolSlug": "berlin-rail-decoder"
         }
       ]
     },
@@ -1617,6 +1617,57 @@
   ],
   "latest": [
     {
+      "title": "Schöneberg Berlin: Bowie, Kennedy and the District That Whispers (2026)",
+      "slug": "schoneberg-berlin",
+      "path": "/post/schoneberg-berlin",
+      "url": "https://www.berlinwalk.com/post/schoneberg-berlin",
+      "excerpt": "Schöneberg keeps its history at eye level, on plaques screwed to buildings people still live in. Here is what is actually worth the U-Bahn ride: the Saturday market, the Kennedy square, the Bayerisches Viertel memorial, and the honest truth about the Bowie flat.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "history-myths",
+      "topicLabel": "Berlin History & Myths",
+      "readTime": "10 min read",
+      "publishedDate": "2026-07-20T12:02:01.029Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_eeba5aefc2ba4fafb899cac82b8e3091~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-schoneberg-winterfeldtmarkt.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_eeba5aefc2ba4fafb899cac82b8e3091~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-schoneberg-winterfeldtmarkt.jpg",
+      "alt": "A cheese and egg stall at Winterfeldtmarkt with a stallholder serving customers under white awnings, the tower of the Apostel-Paulus-Kirche behind",
+      "relatedToolSlug": ""
+    },
+    {
+      "title": "Spreewald Day Trip from Berlin: Punts, Pickles and the Right Train (2026)",
+      "slug": "spreewald-day-trip-from-berlin",
+      "path": "/post/spreewald-day-trip-from-berlin",
+      "url": "https://www.berlinwalk.com/post/spreewald-day-trip-from-berlin",
+      "excerpt": "The Spreewald is Berlin's best nature escape: a UNESCO biosphere reserve of roughly 300 canals, about an hour away by train. Here is the station most guides get wrong, what punts and kayaks cost in 2026, and how to shape the day.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "route-stories",
+      "topicLabel": "Tour Route Stories",
+      "readTime": "6 min read",
+      "publishedDate": "2026-07-20T12:02:00.111Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_36141daf25ac443bb3e65b39b5ce341e~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-spreewald-punt.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_36141daf25ac443bb3e65b39b5ce341e~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-spreewald-punt.jpg",
+      "alt": "Punts full of visitors setting off across the harbor basin in Lübbenau",
+      "relatedToolSlug": "berlin-boat-tour-finder"
+    },
+    {
+      "title": "Berliner Unterwelten: How to Actually Get Into Berlin's Bunker Tours (2026)",
+      "slug": "berliner-unterwelten",
+      "path": "/post/berliner-unterwelten",
+      "url": "https://www.berlinwalk.com/post/berliner-unterwelten",
+      "excerpt": "Berlin kept most of its twentieth century underground, and the only way in is a guided tour you have to book properly. Here is which of the tours to pick, why they do not all start at Gesundbrunnen, and how the 30 day ticket window works.",
+      "category": "Berlin History",
+      "categorySlug": "berlin-history",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-07-20T12:01:59.035Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_cd8018676fd442ce93f641513f5f1c22~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-humboldthain-flak-tower.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_cd8018676fd442ce93f641513f5f1c22~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-humboldthain-flak-tower.jpg",
+      "alt": "The concrete ruin of the Humboldthain flak tower in Volkspark Humboldthain, Berlin",
+      "relatedToolSlug": ""
+    },
+    {
       "title": "Berlin U-Bahn Etiquette: The Unwritten Rules Tourists Break (2026)",
       "slug": "berlin-ubahn-etiquette",
       "path": "/post/berlin-ubahn-etiquette",
@@ -1768,57 +1819,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_9bf1c93d34364539a42f096530f6247a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-emergency-numbers-cover.jpg",
       "alt": "A Berlin fire brigade ambulance marked with the 112 emergency number on a city street",
       "relatedToolSlug": "berlin-emergency-numbers"
-    },
-    {
-      "title": "Halal Food in Berlin: A Local's Guide to Eating Well (2026)",
-      "slug": "halal-food-in-berlin",
-      "path": "/post/halal-food-in-berlin",
-      "url": "https://www.berlinwalk.com/post/halal-food-in-berlin",
-      "excerpt": "Berlin has many places that serve halal food, but no neighbourhood proves a venue is halal. Find options, then verify the exact dish and preparation.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "food-nightlife",
-      "topicLabel": "Food & Nightlife",
-      "readTime": "5 min read",
-      "publishedDate": "2026-07-18T07:27:26.795Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_ade2844002774b75962f09305ca932cd~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-berlin-doner-halal.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_ade2844002774b75962f09305ca932cd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-berlin-doner-halal.jpg",
-      "alt": "A colourful Berlin chicken döner in fresh flatbread with salad and tomato",
-      "relatedToolSlug": "halal-food-in-berlin"
-    },
-    {
-      "title": "Berlin Airports Explained: Is Tegel Still Open in 2026?",
-      "slug": "berlin-airports",
-      "path": "/post/berlin-airports",
-      "url": "https://www.berlinwalk.com/post/berlin-airports",
-      "excerpt": "Tegel, Schönefeld, BER: which one do you actually fly into? The calm answer is one airport for scheduled passenger flights. Here is what happened to the old ones, and how to get from BER into town.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-07-18T07:27:25.302Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_67f6b476029a4d0e87b23ea537580662~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-airports-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_67f6b476029a4d0e87b23ea537580662~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-airports-cover.jpg",
-      "alt": "The broad entrance plaza and central facade of Berlin Brandenburg Airport Terminal 1",
-      "relatedToolSlug": "berlin-airports"
-    },
-    {
-      "title": "Do You Need a Visa to Visit Berlin? Entry Rules, EES and ETIAS Explained (2026)",
-      "slug": "do-you-need-a-visa-to-visit-berlin",
-      "path": "/post/do-you-need-a-visa-to-visit-berlin",
-      "url": "https://www.berlinwalk.com/post/do-you-need-a-visa-to-visit-berlin",
-      "excerpt": "Do you need a visa, is there a new EU form, and will you get stuck at the border? For most passports the answer is short. Here are Berlin's 2026 entry rules, made calm.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-07-18T07:27:24.182Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_b638ab451e3f4d8eaadaf21abb0778c4~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-do-you-need-a-visa-to-visit-berlin-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_b638ab451e3f4d8eaadaf21abb0778c4~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-do-you-need-a-visa-to-visit-berlin-cover.jpg",
-      "alt": "The Brandenburg Gate in central Berlin, empty in the early morning light",
-      "relatedToolSlug": "berlin-entry-requirements"
     }
   ]
 }
