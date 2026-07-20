@@ -1943,5 +1943,44 @@
     "png160": "tools-home/icons/berlin-ghost-stations-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-ghost-stations-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_e07a24cc30114eaba889fff45621bc99~mv2.png"
+  },
+  {
+    "slug": "kurfurstendamm-walk",
+    "title": "Ku'damm Axis Walk",
+    "category": "Maps",
+    "source": "codex-built-in-imagegen-20260720",
+    "generatedAt": "2026-07-20",
+    "promptFile": "tools-home/icons/_src/daily-blog-kurfurstendamm-walk-icon-20260719-prompt.md",
+    "sourceImage": "tools-home/icons/_src/daily-blog-kurfurstendamm-walk-icon-20260719-raw.png",
+    "png512": "tools-home/icons/kurfurstendamm-walk.png",
+    "png160": "tools-home/icons/kurfurstendamm-walk-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/kurfurstendamm-walk-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_8bc51c052db242d4b4586fd6c9d92e53~mv2.png"
+  },
+  {
+    "slug": "berlin-beer-season-calendar",
+    "title": "Berlin Beer Season Calendar",
+    "category": "Discovery",
+    "source": "codex-built-in-imagegen-20260720",
+    "generatedAt": "2026-07-20",
+    "promptFile": "tools-home/icons/_src/daily-blog-berlin-beer-season-calendar-icon-20260719-prompt.md",
+    "sourceImage": "tools-home/icons/_src/daily-blog-berlin-beer-season-calendar-icon-20260719-raw.png",
+    "png512": "tools-home/icons/berlin-beer-season-calendar.png",
+    "png160": "tools-home/icons/berlin-beer-season-calendar-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-beer-season-calendar-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_e310b1c02a7642ebb1eeafebfb216dbd~mv2.png"
+  },
+  {
+    "slug": "berliner-unterwelten-tour-board",
+    "title": "Berlin Underground Tour Board",
+    "category": "Discovery",
+    "source": "chatgpt-browser-20260720",
+    "generatedAt": "2026-07-20",
+    "promptFile": "tools-home/icons/_src/daily-blog-berliner-unterwelten-tour-board-icon-20260720-prompt.md",
+    "sourceImage": "tools-home/icons/_src/daily-blog-berliner-unterwelten-tour-board-icon-20260720-raw.png",
+    "png512": "tools-home/icons/berliner-unterwelten-tour-board.png",
+    "png160": "tools-home/icons/berliner-unterwelten-tour-board-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berliner-unterwelten-tour-board.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_32d802a8eb3043d6a41cb03e3c8ecdef~mv2.png"
   }
 ]

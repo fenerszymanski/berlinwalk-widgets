@@ -4519,7 +4519,7 @@
     {
       "slug": "berlin-ubahn-etiquette",
       "title": "Berlin U-Bahn Etiquette Cheat Sheet",
-      "lead": "The unwritten rules locals follow on the Berlin U-Bahn without thinking. Filter by situation and see the one thing to do and the one thing that gets you the Berlin glare.",
+      "lead": "Current Berlin transport rules and useful local habits, separated by situation: doors, escalators, seats, food, bikes and tickets.",
       "category": "Discovery",
       "image": "https://static.wixstatic.com/media/5a08a3_30b30f1b246247e183322f6fe80f8e39~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-ubahn-etiquette/",
@@ -4612,6 +4612,38 @@
       "relatedBlog": "/post/berlin-ghost-stations",
       "iconStatus": "live-wix-media",
       "cmsItemId": "3b12dd88-6904-4b68-a232-e5e367f4b3db"
+    },
+    {
+      "slug": "berliner-unterwelten-tour-board",
+      "title": "Berlin Underground Tour Board",
+      "lead": "The Berlin underground bunker tours do not all start at Gesundbrunnen. Set the youngest person in your group and the month you are here, and see which tours you can actually book and which street door each one uses.",
+      "category": "Discovery",
+      "image": "https://static.wixstatic.com/media/5a08a3_32d802a8eb3043d6a41cb03e3c8ecdef~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berliner-unterwelten-tour-board/",
+      "embedHeight": 2500,
+      "hubCategory": "CultureLandmarks",
+      "type": "Planner",
+      "tags": [
+        "Berliner Unterwelten",
+        "Berlin underground tour",
+        "Berlin bunker tour",
+        "Dark Worlds Berlin",
+        "Humboldthain flak tower",
+        "Berlin escape tunnel tour",
+        "Berlin Cold War bunker"
+      ],
+      "aliases": [
+        "berliner unterwelten",
+        "berlin underworlds",
+        "berlin underground tour",
+        "berlin bunker tour",
+        "dark worlds tour berlin",
+        "gesundbrunnen bunker",
+        "berlin flak tower tour"
+      ],
+      "relatedBlog": "/post/berliner-unterwelten",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "cb174baa-e0fe-4633-b491-54ddb043da22"
     }
   ],
   "hubCategories": [

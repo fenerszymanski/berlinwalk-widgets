@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Berliner Unterwelten: Which Door Do You Go To?</title>
+<meta name="description" content="Berliner Unterwelten tours do not all start at Gesundbrunnen. Set the youngest person in your group and your month, and see which underground tours you can actually board, and which street door each one uses." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Crect x='14' y='16' width='36' height='32' rx='4' fill='none' stroke='%23FFE600' stroke-width='5'/%3E%3Cpath d='M14 30 H50' stroke='%23FFE600' stroke-width='4'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
+    --yellow:#FFE600; --ink:#1c2a1c; --panel:#ffffff;
+    --bone:#f4f9ec; --line:#e3edd6; --stone:#6d7b66;
+    --slab:#16241a; --slab-2:#1e3223; --slab-line:#2f4a35;
+    --shut:#C62828; --amber:#EF8A17;
+    --shadow:0 10px 30px rgba(18,61,24,.14);
+  }
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}
+  html,body{margin:0}
+  body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .bx{max-width:960px;margin:0 auto;padding:4px}
+  .card{background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+
+  /* ---------- header ---------- */
+  .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:18px 22px 16px}
+  .head .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:600;margin:0 0 6px}
+  .head h2{margin:0;font-size:21px;font-weight:800;letter-spacing:-.015em}
+  .head p{margin:8px 0 0;font-size:13px;color:#e7f2e3;max-width:660px}
+
+  /* ---------- controls ---------- */
+  .ctrls{padding:15px 22px 16px;background:var(--bone);border-bottom:1px solid var(--line)}
+  .row{display:flex;gap:22px;flex-wrap:wrap}
+  .fld{flex:1 1 260px;min-width:0}
+  .fld > span{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);margin:0 0 8px}
+  .chips{display:flex;gap:7px;flex-wrap:wrap}
+  .chip{font-family:inherit;font-size:12.5px;font-weight:700;border:1.5px solid #cfe0bd;background:#fff;color:var(--green-deep);
+        border-radius:999px;padding:8px 13px;cursor:pointer;line-height:1;transition:background .12s,border-color .12s,color .12s}
+  .chip:hover{border-color:var(--lime)}
+  .chip[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+  .sel{font-family:inherit;font-size:13px;font-weight:600;color:var(--green-deep);background:#fff;
+       border:1.5px solid #cfe0bd;border-radius:10px;padding:9px 11px;width:100%;max-width:230px}
+
+  /* ---------- board ---------- */
+  .boardWrap{background:var(--slab);padding:0 0 6px}
+  .boardTop{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;
+            padding:14px 22px 10px;border-bottom:1px solid var(--slab-line)}
+  .boardTop h3{margin:0;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--yellow)}
+  .tally{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:#b8ccb9;font-variant-numeric:tabular-nums}
+  .tally b{color:#fff}
+
+  .cols{display:grid;grid-template-columns:74px 1fr 168px 96px;gap:12px;
+        padding:9px 22px;border-bottom:1px solid var(--slab-line);
+        font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#7e997f}
+
+  .rowsWrap{padding:0}
+  .trow{border-bottom:1px solid var(--slab-line)}
+  .thead{display:grid;grid-template-columns:74px 1fr 168px 96px;gap:12px;align-items:center;
+         width:100%;text-align:left;background:none;border:0;cursor:pointer;padding:14px 22px;
+         font-family:inherit;color:#fff;transition:background .12s}
+  .thead:hover{background:var(--slab-2)}
+  .thead:focus-visible{outline:2px solid var(--yellow);outline-offset:-3px}
+  .code{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:700;color:var(--yellow);letter-spacing:.04em}
+  .nm{min-width:0}
+  .nm b{display:block;font-size:14.5px;font-weight:700;letter-spacing:-.01em}
+  .nm i{display:block;font-style:normal;font-size:12px;color:#a9c1aa;margin-top:3px}
+  .door{font-size:12px;color:#cfe0cf;line-height:1.35}
+  .door em{font-style:normal;display:block;color:#8fae91;font-size:11px;margin-top:2px}
+  .stat{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-align:right}
+  .stat.open{color:var(--soft)}
+  .stat.blocked{color:#ff8a80}
+
+  .trow.blocked .thead{opacity:.52}
+  .trow.blocked .code{color:#c9a24a}
+
+  .why{padding:0 22px 13px;margin-top:-4px}
+  .why span{display:inline-block;background:rgba(198,40,40,.16);border:1px solid rgba(255,138,128,.4);color:#ffb3ab;
+            font-size:11.5px;font-weight:600;border-radius:8px;padding:6px 10px;line-height:1.35}
+
+  /* ---------- detail ---------- */
+  .detail{background:#fff;color:var(--ink);padding:18px 22px 20px;border-top:2px solid var(--yellow)}
+  .detail h4{margin:0 0 4px;font-size:16px;font-weight:800;letter-spacing:-.01em;color:var(--green-deep)}
+  .detail .sub{margin:0 0 14px;font-size:12.5px;color:var(--stone);font-weight:600}
+  .detail p{margin:0 0 12px;font-size:13.5px}
+  .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:9px;margin:0 0 14px}
+  .fact{background:var(--bone);border:1px solid var(--line);border-radius:11px;padding:9px 11px}
+  .fact span{display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);margin-bottom:3px}
+  .fact b{font-size:13px;font-weight:700;color:var(--green-deep);line-height:1.3}
+  .getting{background:#f0f6e6;border-left:4px solid var(--lime);border-radius:0 11px 11px 0;padding:11px 13px;margin:0 0 13px}
+  .getting b{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:4px}
+  .getting p{margin:0;font-size:13px}
+  .rules{margin:0;padding:0;list-style:none;display:grid;gap:7px}
+  .rules li{font-size:13px;padding-left:22px;position:relative}
+  .rules li::before{content:'';position:absolute;left:6px;top:7px;width:6px;height:6px;border-radius:50%;background:var(--lime)}
+  .rules li.warn::before{background:var(--shut)}
+
+  /* ---------- footer ---------- */
+  .foot{padding:14px 22px 16px;background:var(--bone);border-top:1px solid var(--line)}
+  .foot p{margin:0;font-size:12px;color:var(--stone);line-height:1.5}
+  .foot p + p{margin-top:7px}
+  .foot a{color:var(--green);font-weight:700}
+
+  @media (max-width:720px){
+    .head{padding:16px 15px 14px}
+    .head h2{font-size:19px}
+    .ctrls{padding:14px 15px 15px}
+    .row{gap:14px}
+    .cols{display:none}
+    .boardTop{padding:13px 15px 9px}
+    .thead{grid-template-columns:56px 1fr;gap:10px;padding:13px 15px;row-gap:8px}
+    .door{grid-column:1 / -1;font-size:11.5px}
+    .stat{grid-column:1 / -1;text-align:left}
+    .why{padding:0 15px 12px}
+    .detail{padding:16px 15px 18px}
+    .foot{padding:13px 15px 15px}
+    .nm b{font-size:14px}
+    .chip{padding:15px 15px}
+    .sel{padding:12px 11px;max-width:none}
+  }
+</style>
+</head>
+<body>
+<div class="bx">
+  <div class="card">
+
+    <div class="head">
+      <p class="eyebrow">Berlinwalk.com · Berlin History</p>
+      <h2>Berliner Unterwelten: which door do you actually go to?</h2>
+      <p>People book an underground tour, walk to Gesundbrunnen, and find out their tour starts somewhere else entirely. Two doors are not even in Wedding. Set the youngest person in your group and the month you are here, then read the board.</p>
+    </div>
+
+    <div class="ctrls">
+      <div class="row">
+        <label class="fld">
+          <span>Youngest person coming with you</span>
+          <div class="chips" id="ageChips">
+            <button type="button" class="chip" data-age="5" aria-pressed="false">Under 7</button>
+            <button type="button" class="chip" data-age="9" aria-pressed="false">7 to 13</button>
+            <button type="button" class="chip" data-age="16" aria-pressed="false">14 to 17</button>
+            <button type="button" class="chip" data-age="30" aria-pressed="true">18 or over</button>
+          </div>
+        </label>
+        <label class="fld">
+          <span>Month you are in Berlin</span>
+          <select class="sel" id="monthSel">
+            <option value="1">January</option><option value="2">February</option>
+            <option value="3">March</option><option value="4">April</option>
+            <option value="5">May</option><option value="6">June</option>
+            <option value="7">July</option><option value="8">August</option>
+            <option value="9">September</option><option value="10">October</option>
+            <option value="11">November</option><option value="12">December</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class="boardWrap">
+      <div class="boardTop">
+        <h3>Underground tour board</h3>
+        <p class="tally" id="tally"></p>
+      </div>
+      <div class="cols">
+        <div>Tour</div><div>What is down there</div><div>Street door</div><div style="text-align:right">Status</div>
+      </div>
+      <div class="rowsWrap" id="rows"></div>
+    </div>
+
+    <div class="detail" id="detail"></div>
+
+    <div class="foot">
+      <p>Prices, ages, doors and season taken from the operator's own tour pages. Tickets are sold online only, they appear about 30 days ahead, and there is no ticket desk at the meeting point. Which language runs on which day changes with the season, so the shop calendar is the only real timetable.</p>
+      <p>Full guide: <a href="https://www.berlinwalk.com/post/berliner-unterwelten" target="_blank" rel="noopener">Berliner Unterwelten, explained for visitors</a> · Free daytime walking tour above ground: <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_blank" rel="noopener">berlinwalk.com</a></p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  var TOURS = [
+    {
+      code: 'Tour 1',
+      name: 'Dark Worlds',
+      under: 'A wartime air-raid bunker left as it was, under Gesundbrunnen station',
+      door: 'Brunnenstraße 105, 13355',
+      doorNote: 'Next to the info shop, right at S+U Gesundbrunnen',
+      minAge: 7,
+      months: null,
+      price: '€18 / €13 reduced',
+      minutes: '90 minutes',
+      blurb: 'This is the one most people mean when they say they did the Berlin underground tour. You go through a door beside the shop and into a civilian shelter that was left standing after the war, with the fittings and the objects still in it. The guides use it to explain what an air raid actually did to ordinary Berliners, and they widen it out into about 160 years of what Berliners built under their own streets, from the pneumatic post to the breweries to the first U-Bahn.',
+      getting: 'The easiest door of the six. Come up at S+U Gesundbrunnen, walk out to Brunnenstraße, and the meeting point is beside the shop. If you only have time for one, this is it.',
+      rules: [
+        'Recommended from about 14 up, even though 7 is the hard minimum',
+        'Around 10°C down there all year, so bring a layer even in August'
+      ]
+    },
+    {
+      code: 'Tour 2',
+      name: 'From Flak Towers to Mountains of Debris',
+      under: 'Three of the seven floors inside the Humboldthain flak tower',
+      door: 'Volkspark Humboldthain',
+      doorNote: 'Lower platform of the bunker ruin, follow the blue and white signs',
+      minAge: 18,
+      months: [4,5,6,7,8,9,10],
+      price: '€18 / €13 reduced',
+      minutes: '90 minutes',
+      blurb: 'Not really a tunnel tour. The Humboldthain flak tower is a piece of concrete so large that Berlin gave up trying to demolish it and buried most of it in rubble instead, which is why the park has a hill. You go inside three of its seven floors and look down into the dark of the rest. It is the tour that explains why so much of north Berlin sits on artificial ground.',
+      getting: 'Do not wait at Brunnenstraße 105 for this one. From that address you enter Volkspark Humboldthain by the Badstraßenbrücke and follow the blue and white signs uphill to the lower platform of the ruin. Give it ten minutes and do not leave it to the last two.',
+      rules: [
+        'Hard 18 and over, no exceptions, because of the structure',
+        'April to October only, the tower closes for the winter',
+        'Closed shoes with a solid sole, and you are given a helmet'
+      ]
+    },
+    {
+      code: 'Tour 3',
+      name: 'Subways, Bunkers, Cold War',
+      under: 'A Cold War civil defence facility at Blochplatz',
+      door: 'Badstraße at Böttgerstraße, 13357',
+      doorNote: 'Next to the white entrance building',
+      minAge: 7,
+      months: null,
+      price: '€18 / €13 reduced',
+      minutes: '90 minutes',
+      blurb: 'The Cold War one. West Berlin spent decades quietly preparing for a nuclear attack it could not have survived, and this is where you see what that preparation actually looked like: the models, the exhibits, a scale replica of an atomic bomb, and a rebuilt stretch of the sewer route people used to get out. It goes further than the war years and lands on the East versus West standoff that shaped the city you are walking around above.',
+      getting: 'About eight minutes north along Badstraße from Gesundbrunnen. Look for the white entrance building on the corner of Böttgerstraße. Bus 247 also stops close.',
+      rules: [
+        'Recommended from about 14 up, hard minimum 7',
+        'Several staircases and no lift'
+      ]
+    },
+    {
+      code: 'Tour 4',
+      name: 'Nuclear Bunker Pankstraße',
+      under: 'A 1977 shelter for 3,339 people under Pankstraße U-Bahn station',
+      door: 'Badstraße 50, 13357',
+      doorNote: 'In front of St. Paul’s church, by U Pankstraße',
+      minAge: 7,
+      months: null,
+      price: '€18 / €13 reduced',
+      minutes: '90 minutes',
+      blurb: 'A working U-Bahn station with a shelter built into it, finished in 1977 and meant to hold 3,339 people. You see the blast gates, the diesel generator, the ventilation plant, the kitchen and the metal bunks stacked up ready. The guides use it to ask an uncomfortable and current question, which is what a city actually does now about civil protection, floods, blackouts and attacks on its networks.',
+      getting: 'One U8 stop north of Gesundbrunnen to Pankstraße, or roughly a quarter of an hour on foot up Badstraße. The door is in front of St. Paul’s church.',
+      rules: [
+        'Recommended from about 14 up, hard minimum 7',
+        'The most modern of the sites, and the least ruin-like'
+      ]
+    },
+    {
+      code: 'Tour M',
+      name: 'Under the Berlin Wall',
+      under: 'Brewery cellars at Bernauer Straße and a real escape tunnel',
+      door: 'Brunnenstraße 141, 10115',
+      doorNote: 'Bernauer Straße, not Gesundbrunnen. Different address, same street name.',
+      minAge: 7,
+      months: null,
+      price: '€18 / €13 reduced',
+      minutes: '90 minutes',
+      blurb: 'The escape tunnel tour, and the one with the trap in the address. You go into the vaults of the old Oswald Berliner brewery under Bernauer Straße, where the story of Tunnel 29 and Tunnel 57 is told with the original photographs and full-size reconstructions, and it ends at the only original escape tunnel under the Wall that you can still see. If the Wall is the reason you came to Berlin, this is the tour that will stay with you.',
+      getting: 'Both this and Tour 1 sit on Brunnenstraße, but they are two kilometres apart. Number 141 is down at Bernauer Straße, four U8 stops south of Gesundbrunnen. Pair it with the open-air Berlin Wall Memorial across the road and give the area a proper half day.',
+      rules: [
+        'Check the number on your ticket, 141 is not 105',
+        'Recommended from about 14 up, hard minimum 7'
+      ]
+    },
+    {
+      code: 'Fichte',
+      name: 'The Fichtebunker Kreuzberg',
+      under: 'An 1883 gasometer turned into a wartime mother and child bunker',
+      door: 'Fichtestraße 6, 10967',
+      doorNote: 'Kreuzberg, the other side of the city from the rest',
+      minAge: 7,
+      months: null,
+      price: '€18 / €13 reduced',
+      minutes: '90 minutes',
+      blurb: 'A round brick gasometer from 1883 that the war turned into a shelter for mothers and small children, and that the post-war years turned into housing for refugees and then a store. The building is listed, the shape of it is unlike anything else on this list, and the tour leans on eyewitness accounts and projections rather than on hardware.',
+      getting: 'This one is not in Wedding at all. It is in Kreuzberg, U7 to Südstern and a short walk. Plan it as its own trip, not as a second stop after Gesundbrunnen.',
+      rules: [
+        'Recommended from about 14 up, hard minimum 7',
+        'Under 10°C inside, all year'
+      ]
+    }
+  ];
+
+  var MONTH_NAMES = ['','January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  var age = 30;
+  var month = 7;
+  var openIndex = 0;
+
+  var elRows = document.getElementById('rows');
+  var elDetail = document.getElementById('detail');
+  var elTally = document.getElementById('tally');
+  var elMonth = document.getElementById('monthSel');
+  var elAgeChips = document.getElementById('ageChips');
+
+  function esc(s){
+    return String(s).replace(/[&<>"]/g, function(c){
+      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c];
+    });
+  }
+
+  // Returns null if the tour can be boarded, otherwise the reason it cannot.
+  function blockReason(t){
+    if (age < t.minAge){
+      return t.minAge === 18
+        ? 'Everyone on this tour has to be 18 or over. With a ' + age + ' year old in the group, nobody in the group can go on this one.'
+        : 'Children under 7 are not admitted underground. This is a legal limit, not a house rule.';
+    }
+    if (t.months && t.months.indexOf(month) === -1){
+      return 'Closed in ' + MONTH_NAMES[month] + '. This one runs April to October only and shuts for the winter.';
+    }
+    return null;
+  }
+
+  function render(){
+    var openCount = 0;
+    var html = '';
+
+    for (var i = 0; i < TOURS.length; i++){
+      var t = TOURS[i];
+      var reason = blockReason(t);
+      if (!reason) openCount++;
+
+      html += '<div class="trow' + (reason ? ' blocked' : '') + '">'
+        + '<button type="button" class="thead" data-i="' + i + '" aria-expanded="' + (openIndex === i) + '">'
+          + '<span class="code">' + esc(t.code) + '</span>'
+          + '<span class="nm"><b>' + esc(t.name) + '</b><i>' + esc(t.under) + '</i></span>'
+          + '<span class="door">' + esc(t.door) + '<em>' + esc(t.doorNote) + '</em></span>'
+          + '<span class="stat ' + (reason ? 'blocked' : 'open') + '">' + (reason ? 'Not for you' : 'You can book') + '</span>'
+        + '</button>'
+        + (reason ? '<div class="why"><span>' + esc(reason) + '</span></div>' : '')
+        + '</div>';
+    }
+
+    elRows.innerHTML = html;
+    elTally.innerHTML = '<b>' + openCount + '</b> of ' + TOURS.length + ' bookable in ' + MONTH_NAMES[month];
+    renderDetail();
+  }
+
+  function renderDetail(){
+    var t = TOURS[openIndex];
+    var reason = blockReason(t);
+
+    var rulesHtml = '';
+    for (var i = 0; i < t.rules.length; i++){
+      rulesHtml += '<li>' + esc(t.rules[i]) + '</li>';
+    }
+    rulesHtml += '<li class="warn">No photography or filming anywhere on the tours</li>'
+      + '<li class="warn">Nothing bigger than a handbag or a small backpack</li>'
+      + '<li class="warn">Sturdy shoes, no sandals. Stairs, no lift, no toilets on site</li>';
+
+    elDetail.innerHTML =
+        '<h4>' + esc(t.code) + ': ' + esc(t.name) + '</h4>'
+      + '<p class="sub">' + esc(t.under) + '</p>'
+      + '<div class="facts">'
+        + '<div class="fact"><span>Street door</span><b>' + esc(t.door) + '</b></div>'
+        + '<div class="fact"><span>Runs for</span><b>' + esc(t.minutes) + '</b></div>'
+        + '<div class="fact"><span>Ticket</span><b>' + esc(t.price) + '</b></div>'
+        + '<div class="fact"><span>Minimum age</span><b>' + (t.minAge === 18 ? '18 and over' : '7 and over') + '</b></div>'
+        + '<div class="fact"><span>Season</span><b>' + (t.months ? 'April to October' : 'All year') + '</b></div>'
+        + '<div class="fact"><span>For your group</span><b>' + (reason ? 'Not bookable' : 'Bookable') + '</b></div>'
+      + '</div>'
+      + '<p>' + esc(t.blurb) + '</p>'
+      + '<div class="getting"><b>Finding the door</b><p>' + esc(t.getting) + '</p></div>'
+      + '<ul class="rules">' + rulesHtml + '</ul>';
+  }
+
+  elRows.addEventListener('click', function(e){
+    var btn = e.target.closest ? e.target.closest('.thead') : null;
+    if (!btn) return;
+    openIndex = parseInt(btn.getAttribute('data-i'), 10);
+    render();
+  });
+
+  elAgeChips.addEventListener('click', function(e){
+    var btn = e.target.closest ? e.target.closest('.chip') : null;
+    if (!btn) return;
+    age = parseInt(btn.getAttribute('data-age'), 10);
+    var chips = elAgeChips.querySelectorAll('.chip');
+    for (var i = 0; i < chips.length; i++){
+      chips[i].setAttribute('aria-pressed', chips[i] === btn ? 'true' : 'false');
+    }
+    render();
+  });
+
+  elMonth.addEventListener('change', function(){
+    month = parseInt(elMonth.value, 10);
+    render();
+  });
+
+  elMonth.value = String(month);
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
