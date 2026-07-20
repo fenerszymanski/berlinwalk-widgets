@@ -271,7 +271,7 @@
     var site = { label: 'berlinwalk.com', url: 'https://www.berlinwalk.com/', kind: 'support' };
     return {
       type: 'carry-support',
-      title: 'Carry the same plan on your phone and on paper',
+      title: 'One plan on your phone and on paper',
       beforeYouGo: before,
       carryPack: carry,
       support: site,

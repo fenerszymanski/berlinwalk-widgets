@@ -13207,7 +13207,8 @@
     }
 
     #bw-trip-planner[data-artifact-review-demo="true"] .bw-full-plan {
-      margin-top: 0;
+      margin: 0 auto 20px;
+      width: min(calc(100% - 40px), 980px);
     }
 
     #bw-trip-planner[data-artifact-review-demo="true"] [data-copy-plan-link],
@@ -14118,6 +14119,8 @@
     mustafas_kebap: { label: 'Mustafa\'s Gemüse Kebap', query: 'Mustafas Gemuese Kebap Berlin', area: 'Kreuzberg', type: 'food', lat: 52.4937, lng: 13.3888, why: 'The most famous street food stand in Berlin, known for its legendary chicken Döner.' },
     curry_36: { label: 'Curry 36', query: 'Curry 36 Berlin', area: 'Kreuzberg', type: 'food', lat: 52.4936, lng: 13.3877, why: 'A classic West Berlin street food spot famous for its traditional Currywurst and quick service.' },
     scheers_schnitzel: { label: 'Scheers Schnitzel', query: 'Scheers Schnitzel Berlin', area: 'Friedrichshain', type: 'food', lat: 52.5033, lng: 13.4451, why: 'A simple, popular spot near the Oberbaum Bridge serving fresh, quick, and crispy German schnitzel.' },
+    potsdam_food_search: { label: 'Food around central Potsdam', query: 'restaurants central Potsdam Brandenburg Gate', area: 'Potsdam', type: 'food', lat: 52.4007, lng: 13.0591, why: 'A flexible map search that keeps lunch on the Potsdam route instead of sending you back to Berlin.' },
+    tempelhof_food_search: { label: 'Food around Mehringdamm', query: 'restaurants Mehringdamm Berlin', area: 'Kreuzberg / Tempelhof', type: 'food', lat: 52.4937, lng: 13.3883, why: 'A flexible map search near the north side of Tempelhofer Feld.' },
     shiso_burger: { label: 'Shiso Burger', query: 'Shiso Burger Berlin Mitte', area: 'Mitte', type: 'food', lat: 52.5278, lng: 13.4002, why: 'A highly popular Mitte spot serving unique Asian-fusion burgers in steam buns.' },
     yamyam: { label: 'YamYam', query: 'YamYam Korean Deli Berlin', area: 'Mitte', type: 'food', lat: 52.5275, lng: 13.4063, why: 'A cozy Korean deli serving quick, fresh bibimbap and authentic street food.' },
     curry_61: { label: 'Curry 61', query: 'Curry 61 Berlin', area: 'Mitte', type: 'food', lat: 52.5231, lng: 13.4025, why: 'A famous Mitte currywurst spot serving quick, local, and crispy Berlin street food.' },
@@ -19086,6 +19089,8 @@
     north: ['prater_biergarten', 'konnopkes_imbiss'],
     west: ['dicke_wirtin', 'schwarzes_cafe'],
     kreuzberg: ['markthalle_neun', 'mustafas_kebap', 'curry_36', 'burgermeister_schlesi'],
+    potsdam: ['potsdam_food_search'],
+    tempelhof: ['tempelhof_food_search', 'mustafas_kebap', 'curry_36'],
     cheap: ['curry_61', 'curry_36', 'mustafas_kebap', 'shiso_burger', 'yamyam'],
     potsdam_backup: ['dicke_wirtin', 'schwarzes_cafe', 'maximilians']
   };
@@ -19108,6 +19113,23 @@
     return validFoodIds(Object.keys(FOOD_POOLS).reduce(function (ids, key) {
       return ids.concat(FOOD_POOLS[key]);
     }, []));
+  }
+
+  function explicitMealPlaceIds(day, meal) {
+    var blocks = (day && day.blocks) || [];
+    var text = blocks.filter(function (block, index) {
+      return meal === 'lunch'
+        ? /lunch/i.test(String(block.time || '') + ' ' + String(block.title || ''))
+        : isDayClosingBlock(day, block, index);
+    }).map(function (block) {
+      return String(block.title || '') + ' ' + String(block.copy || '');
+    }).join(' ');
+    var normalizedText = normalizedPlaceLabel(text);
+    return allFoodIds().filter(function (placeId) {
+      var place = placeFor(placeId);
+      var label = place && normalizedPlaceLabel(place.label);
+      return Boolean(label && normalizedText.indexOf(label) !== -1);
+    });
   }
 
   function isHackescherMarketDay(day) {
@@ -19141,11 +19163,20 @@
 
   function areaLockedLunchPool(day) {
     var text = dayFoodContextText(day);
+    var placeIds = (day && day.placeIds) || [];
+    function hasPlace(placeId) { return placeIds.indexOf(placeId) !== -1; }
+    if (hasPlace('potsdam_hbf') || hasPlace('sanssouci')) return FOOD_POOLS.potsdam.slice();
+    if (hasPlace('tempelhofer_feld')) return FOOD_POOLS.tempelhof.slice();
+    if ((day && day.planKey === 'food') || hasPlace('markthalle_neun') || hasPlace('oranienstrasse')) return FOOD_POOLS.kreuzberg.concat(FOOD_POOLS.east);
+    if (hasPlace('wall_memorial') || hasPlace('east_side_gallery') || hasPlace('oberbaum_bridge') || hasPlace('raw_gelande')) return FOOD_POOLS.east.concat(FOOD_POOLS.kreuzberg);
+    if (hasPlace('charlottenburg_palace') || hasPlace('savignyplatz') || hasPlace('lietzensee')) return FOOD_POOLS.west.concat(FOOD_POOLS.mitte_sit);
     if (/hackescher|world_clock/.test(text)) return FOOD_POOLS.hackescher_lunch.slice();
     if (/charlottenburg|savignyplatz|lietzensee|west-side|west side/.test(text)) return FOOD_POOLS.west.concat(FOOD_POOLS.mitte_sit);
-    if (/east_side_gallery|oberbaum|raw_gelande|friedrichshain|oranienstrasse|kreuzberg|wall memorial|bernauer/.test(text)) return FOOD_POOLS.east.concat(FOOD_POOLS.kreuzberg);
+    if (/potsdam|sanssouci/.test(text)) return FOOD_POOLS.potsdam.slice();
+    if (/tempelhofer/.test(text)) return FOOD_POOLS.tempelhof.slice();
+    if (/markthalle|oranienstrasse|kreuzberg/.test(text)) return FOOD_POOLS.kreuzberg.concat(FOOD_POOLS.east);
+    if (/east_side_gallery|oberbaum|raw_gelande|friedrichshain|wall memorial|bernauer/.test(text)) return FOOD_POOLS.east.concat(FOOD_POOLS.kreuzberg);
     if (/kulturbrauerei|kastanienallee|prenzlauer/.test(text)) return FOOD_POOLS.north.concat(FOOD_POOLS.mitte_quick);
-    if (/potsdam|sanssouci/.test(text)) return FOOD_POOLS.potsdam_backup.concat(FOOD_POOLS.west);
     if (/tiergarten|victory_column|tempelhofer|treptower|topography|brandenburg|reichstag|holocaust|gendarmenmarkt|nikolaiviertel|museum_island|berlin_cathedral|mitte|potsdamer/.test(text)) {
       return FOOD_POOLS.mitte_quick.concat(FOOD_POOLS.mitte_sit, FOOD_POOLS.west);
     }
@@ -19153,7 +19184,7 @@
   }
 
   function preferredFoodPool(day, meal) {
-    var type = dayVisualType(day);
+    var type = dayPlanType(day);
     var base = state.stayArea || 'unsure';
     var pool = [];
     if (meal === 'lunch' && dayHasTour(day)) {
@@ -19172,6 +19203,12 @@
     if (meal === 'dinner' && dayHasTour(day)) {
       return FOOD_POOLS.tour_finish_dinner.slice();
     }
+    if (meal === 'dinner' && dayPlaceIds(day).indexOf('tempelhofer_feld') !== -1) {
+      return FOOD_POOLS.tempelhof.slice();
+    }
+    if (meal === 'dinner' && type === 'food') return FOOD_POOLS.kreuzberg.concat(FOOD_POOLS.east);
+    if (meal === 'dinner' && (type === 'wall' || type === 'nightlife')) return FOOD_POOLS.east.concat(FOOD_POOLS.kreuzberg);
+    if (meal === 'dinner' && dayUsesWestSide(day)) return FOOD_POOLS.west.concat(FOOD_POOLS.mitte_sit);
     if (type === 'wall' || type === 'nightlife') pool = FOOD_POOLS.east.concat(FOOD_POOLS.kreuzberg);
     else if (type === 'food') pool = FOOD_POOLS.kreuzberg.concat(FOOD_POOLS.north, FOOD_POOLS.mitte_quick);
     else if (type === 'free') pool = FOOD_POOLS.cheap.concat(FOOD_POOLS.mitte_quick);
@@ -19232,10 +19269,16 @@
     (days || []).forEach(function (day) {
       var mealPlan = {};
       if (dayHasMealBlock(day, 'lunch')) {
-        mealPlan.lunchIds = pickFoodIds(preferredFoodPool(day, 'lunch'), usedFood, dayHasTour(day) ? 2 : 1, !dayHasTour(day));
+        var explicitLunch = explicitMealPlaceIds(day, 'lunch');
+        mealPlan.lunchIds = explicitLunch.length
+          ? pickFoodIds(explicitLunch, usedFood, explicitLunch.length, false)
+          : pickFoodIds(preferredFoodPool(day, 'lunch'), usedFood, dayHasTour(day) ? 2 : 1, !dayHasTour(day));
       }
       if (dayHasMealBlock(day, 'dinner')) {
-        mealPlan.dinnerIds = pickFoodIds(preferredFoodPool(day, 'dinner'), usedFood, 1);
+        var explicitDinner = explicitMealPlaceIds(day, 'dinner');
+        mealPlan.dinnerIds = explicitDinner.length
+          ? pickFoodIds(explicitDinner, usedFood, explicitDinner.length, false)
+          : pickFoodIds(preferredFoodPool(day, 'dinner'), usedFood, 1);
       }
       day.mealPlan = mealPlan;
     });
@@ -19321,7 +19364,7 @@
       return 'Eat properly before the evening plan. ' + options + ' is the practical move here.';
     }
     if (type === 'potsdam') {
-      return 'Keep lunch flexible around the station or palace route. If Potsdam feels too heavy, use ' + options + ' back in Berlin.';
+      return 'Keep lunch on the Potsdam route instead of crossing back to Berlin. ' + options + ' keeps the stop flexible between the centre and palace area.';
     }
     return 'Keep lunch close to today\'s area. Try ' + options + ' before you continue.';
   }
@@ -21014,7 +21057,7 @@
         blocks: [
           { time: 'Morning', title: 'Berlin Wall Memorial', copy: 'Start at Bernauer Strasse. It is the clearest place to feel what the Wall did to everyday Berliners.' },
           { time: 'Lunch', title: 'Lunch near the Wall', copy: '' },
-          { time: 'Afternoon', title: 'East Side Gallery and Spree edge', copy: 'Walk East Side Gallery slowly, then stay by the Spree and Oberbaum Bridge. If rain wins, make Topography of Terror the backup instead.' },
+          { time: 'Afternoon', title: 'East Side Gallery and Spree edge', copy: 'Walk East Side Gallery slowly, then stay by the Spree and Oberbaum Bridge. If rain wins, shorten the painted section and use a cafe or covered stop toward Kreuzberg.' },
           { time: 'Evening', title: 'Dinner in Friedrichshain', copy: '' }
         ],
         placeIds: ['wall_memorial', 'east_side_gallery', 'oberbaum_bridge', 'raw_gelande']
@@ -21563,19 +21606,6 @@
       });
     }
 
-    if (profile.reservations) {
-      var reservationNoteAdded = false;
-      blocks = blocks.map(function (block) {
-        if (!reservationNoteAdded && /museum|reichstag|dome|night|dinner|market/i.test(String(block.title + ' ' + block.copy))) {
-          reservationNoteAdded = true;
-          return Object.assign({}, block, {
-            copy: String(block.copy || '') + " Friendly reminder: double-check if you need a timed-entry ticket! Nobody likes being turned away at the door."
-          });
-        }
-        return block;
-      });
-    }
-
     if (profile.kids && (key === 'free' || key === 'local')) {
       addBlockBeforeClose(blocks, {
         time: 'Break',
@@ -21688,6 +21718,13 @@
     }
 
     if (type === 'free') {
+      if (dayPlaceIds(day).indexOf('tempelhofer_feld') !== -1) {
+        addon.title = rainy ? 'Food around Mehringdamm: a covered cafe break' : 'Cafe or picnic finish near Tempelhofer Feld';
+        addon.copy = rainy
+          ? 'Stay around Mehringdamm for a long covered break instead of crossing Berlin for an unrelated museum.'
+          : 'Stay by Tempelhofer Feld for a cafe, picnic, or short neighborhood walk. Do not add another district.';
+        return addon;
+      }
       addon.title = rainy ? 'Topography of Terror indoor fallback' : 'River or park finish near ' + lastLabel;
       addon.copy = rainy
         ? 'Switch the last outdoor idea to a nearby free museum-style exhibition, station shop, cafe, or covered market.'
@@ -22271,6 +22308,9 @@
       }).filter(Boolean));
     var backup = artifactIndoorBackup(day, [anchor].concat(visibleLabels));
     var type = day.planKey || dayPlanType(day);
+    if (type === 'free' && dayPlaceIds(day).indexOf('tempelhofer_feld') !== -1) {
+      return 'If rain becomes steady, skip the runway loop and take a long cafe break around Bergmannstrasse or Mehringdamm; do not cross Berlin just to fill the day.';
+    }
     if (type === 'free' && dayPlaceIds(day).length === 1) {
       return 'If rain becomes steady, replace the ' + anchor + ' outdoor loop with ' + backup + '; check the opening details before leaving.';
     }
