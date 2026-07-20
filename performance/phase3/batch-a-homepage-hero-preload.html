@@ -1,0 +1,44 @@
+<!--
+  Phase 3A: homepage-only critical image discovery hint.
+  This intentionally contains no CSS, layout reserve, custom-element execution,
+  observer, timer, or body mutation. The old safe-mode embeds remain disabled.
+-->
+<script>
+  (() => {
+    const path = location.pathname.replace(/\/+$/, '') || '/';
+    if (path !== '/' && path !== '/home') return;
+
+    const base = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/';
+    const sources = [
+      {
+        id: 'mobile',
+        media: '(max-width: 768px)',
+        href: `${base}hero-home-museum-island-800w.avif`
+      },
+      {
+        id: 'desktop',
+        media: '(min-width: 769px)',
+        href: `${base}hero-home-museum-island-800w.avif`,
+        imageSrcset: `${base}hero-home-museum-island-800w.avif 800w, ${base}hero-home-museum-island-1200w.avif 1200w, ${base}hero-home-museum-island-1600w.avif 1600w`
+      }
+    ];
+
+    for (const source of sources) {
+      const marker = `phase3-home-hero-${source.id}`;
+      if (document.head.querySelector(`link[data-bw-pagespeed-phase3="${marker}"]`)) continue;
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.type = 'image/avif';
+      link.href = source.href;
+      link.media = source.media;
+      link.fetchPriority = 'high';
+      link.setAttribute('data-bw-pagespeed-phase3', marker);
+      if (source.imageSrcset) {
+        link.setAttribute('imagesrcset', source.imageSrcset);
+        link.setAttribute('imagesizes', '100vw');
+      }
+      document.head.appendChild(link);
+    }
+  })();
+</script>
