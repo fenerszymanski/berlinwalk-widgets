@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-07-20T12:04:06.771Z",
+  "updatedAt": "2026-07-20T21:47:50.867Z",
   "source": "Wix Blog API",
-  "totalPosts": 242,
+  "totalPosts": 243,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Stolpersteine in Berlin: How to Read the Brass Stones Under Your Feet (2026)",
+      "slug": "stolpersteine-berlin",
+      "path": "/post/stolpersteine-berlin",
+      "url": "https://www.berlinwalk.com/post/stolpersteine-berlin",
+      "excerpt": "Berlin’s pavements hold more than 11,000 small brass memorials, and most visitors walk over them without seeing one. The text on every stone follows the same compact formula. Learn it once, in about ten minutes, and the city never looks the same.",
+      "category": "Berlin History",
+      "categorySlug": "berlin-history",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-07-20T21:45:09.418Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_ec6b4612f521499282b397c9e9eac16a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-stolpersteine-salinger-family.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_ec6b4612f521499282b397c9e9eac16a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-stolpersteine-salinger-family.jpg",
+      "alt": "Four brass Stolpersteine for the Salinger family set into dark cobblestones in a Berlin pavement",
+      "relatedToolSlug": "stolperstein-reader"
+    },
     {
       "title": "Schöneberg Berlin: Bowie, Kennedy and the District That Whispers (2026)",
       "slug": "schoneberg-berlin",

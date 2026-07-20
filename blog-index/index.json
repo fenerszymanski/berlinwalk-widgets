@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-07-20T12:04:06.771Z",
+  "updatedAt": "2026-07-20T21:47:50.867Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 242,
+  "totalPosts": 243,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1617,6 +1617,23 @@
   ],
   "latest": [
     {
+      "title": "Stolpersteine in Berlin: How to Read the Brass Stones Under Your Feet (2026)",
+      "slug": "stolpersteine-berlin",
+      "path": "/post/stolpersteine-berlin",
+      "url": "https://www.berlinwalk.com/post/stolpersteine-berlin",
+      "excerpt": "Berlin’s pavements hold more than 11,000 small brass memorials, and most visitors walk over them without seeing one. The text on every stone follows the same compact formula. Learn it once, in about ten minutes, and the city never looks the same.",
+      "category": "Berlin History",
+      "categorySlug": "berlin-history",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-07-20T21:45:09.418Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_ec6b4612f521499282b397c9e9eac16a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-stolpersteine-salinger-family.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_ec6b4612f521499282b397c9e9eac16a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-stolpersteine-salinger-family.jpg",
+      "alt": "Four brass Stolpersteine for the Salinger family set into dark cobblestones in a Berlin pavement",
+      "relatedToolSlug": "stolperstein-reader"
+    },
+    {
       "title": "Schöneberg Berlin: Bowie, Kennedy and the District That Whispers (2026)",
       "slug": "schoneberg-berlin",
       "path": "/post/schoneberg-berlin",
@@ -1802,23 +1819,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_4bff355bd9d847a8bab0033dbdb74139~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-smoking-in-berlin-cover.jpg",
       "alt": "A classic Berlin corner pub, the kind of small Kneipe where indoor smoking is sometimes still allowed",
       "relatedToolSlug": "berlin-smoking-rules"
-    },
-    {
-      "title": "Berlin Emergency Numbers: 112, 110 and What to Do in an Emergency (2026)",
-      "slug": "berlin-emergency-numbers",
-      "path": "/post/berlin-emergency-numbers",
-      "url": "https://www.berlinwalk.com/post/berlin-emergency-numbers",
-      "excerpt": "Which number do you call in Berlin? 112 for an ambulance or fire, 110 for police. Here is the full list, plus the doctor line, night pharmacies and stolen wallets.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-07-18T19:09:06.569Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_9bf1c93d34364539a42f096530f6247a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-emergency-numbers-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_9bf1c93d34364539a42f096530f6247a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-emergency-numbers-cover.jpg",
-      "alt": "A Berlin fire brigade ambulance marked with the 112 emergency number on a city street",
-      "relatedToolSlug": "berlin-emergency-numbers"
     }
   ]
 }

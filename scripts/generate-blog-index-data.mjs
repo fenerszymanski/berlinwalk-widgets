@@ -638,6 +638,7 @@ function relatedToolSlugFor(post) {
   if ((post.slug || '') === 'how-to-order-doner-in-berlin') return 'berlin-doner-order-builder';
   if ((post.slug || '') === 'stasi-museum-berlin') return 'stasi-surveillance-scale';
   if ((post.slug || '') === 'treptower-park-berlin') return 'treptower-memorial-walk';
+  if ((post.slug || '') === 'stolpersteine-berlin') return 'stolperstein-reader';
   if ((post.slug || '') === 'friedrichshain-berlin') return 'friedrichshain-kiez-loop';
   if ((post.slug || '') === 'neukolln-berlin') return 'neukolln-kiez-decoder';
   if ((post.slug || '') === 'one-day-in-berlin') return 'one-day-berlin-planner';
