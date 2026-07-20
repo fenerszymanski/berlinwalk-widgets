@@ -6858,5 +6858,35 @@
         "a": "No, and this catches people out. The IC on this route runs via Berlin Ostkreuz and Berlin Brandenburg Airport, reversing direction at the airport, and it does not call at Berlin Hauptbahnhof at all. From Ostkreuz it takes about two hours. If you are staying in the east of the city it can be convenient, but do not stand at Hauptbahnhof waiting for it."
       }
     ]
+  },
+  "stolpersteine-berlin": {
+    "title": "Stolpersteine in Berlin: FAQ",
+    "subtitle": "Straight answers on what the brass stones are, what the German text means, whether you may step on them, and how to look up the person by name.",
+    "items": [
+      {
+        "q": "What are the brass stones in Berlin's sidewalks?",
+        "a": "They are Stolpersteine, \"stumbling stones\": small brass plates set into the pavement, each one hand-made and each one for a single person persecuted by the Nazis. A stone is placed in front of the person's last freely chosen home, not where they died. Berlin has more than 11,000, and the project, started by artist Gunter Demnig, counts more than 126,000 stones in 31 countries as of May 2026, which makes it the world's largest decentralized memorial."
+      },
+      {
+        "q": "What does the writing on a Stolperstein mean?",
+        "a": "Almost every stone follows the same formula. HIER WOHNTE means \"here lived\". Then comes the name, then JG. with the year of birth (short for Jahrgang). The last lines give the fate: DEPORTIERT with a date and destination such as Riga or Auschwitz, ERMORDET meaning murdered, or FLUCHT IN DEN TOD, the project's chosen words for a person who took their own life under persecution. GEB. before a second surname is the birth name of a married woman."
+      },
+      {
+        "q": "Is it disrespectful to step on Stolpersteine?",
+        "a": "No. The project's own position is that walking over the stones is fine; the artist compares them to the grave slabs in cathedral floors that centuries of feet have polished. Footsteps actually keep the brass bright. What reads as disrespectful is standing on a stone for a posed photo or blocking a doorway for a long photo session while residents are trying to get in."
+      },
+      {
+        "q": "Where do I find Stolpersteine in Berlin?",
+        "a": "In front of ordinary front doors, which is the point. Mitte has about 2,200 stones, including one at the entrance to the Hackesche Höfe at Rosenthaler Straße 40/41. Berlin's first stones from 1996 are in Oranienstraße in Kreuzberg, and the Bayerisches Viertel in Schöneberg has nearly a thousand. You can search any name or street on the official database at stolpersteine-berlin.de, and the free Stolpersteine Berlin app shows the stones around you on a map."
+      },
+      {
+        "q": "Can I sponsor a new stone?",
+        "a": "Yes, anyone can. A stone costs EUR 120, or EUR 132 if you order from outside Germany, which covers the hand-made plate, the installation and the database entry. The real work is the research: the person's full name, birth date, the stations of their persecution and their last freely chosen address. Applications in Berlin go through district initiatives, and in busy districts such as Mitte, Charlottenburg-Wilmersdorf and Tempelhof-Schöneberg the wait runs up to four years."
+      },
+      {
+        "q": "Why do the stones look shiny in some streets and dark in others?",
+        "a": "Brass darkens unless it is walked on or polished. Busy pavements keep stones bright on their own; quiet streets depend on neighbors. Every 9 November, the anniversary of the 1938 pogrom night, Berliners polish the stones in their streets, often leaving candles and white roses. If you want to help, the official method is ordinary metal polish on a cloth, then water; never use a wire brush."
+      }
+    ]
   }
 }

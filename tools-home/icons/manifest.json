@@ -2021,5 +2021,18 @@
     "png160": "tools-home/icons/dresden-day-clock-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/dresden-day-clock.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_9f9984f3303344f4aa02ba713ad3c789~mv2.png"
+  },
+  {
+    "slug": "stolperstein-reader",
+    "title": "Stolperstein Reader",
+    "category": "Discovery",
+    "source": "chatgpt-browser-20260720",
+    "generatedAt": "2026-07-20",
+    "promptFile": "tools-home/icons/_src/daily-blog-stolperstein-reader-icon-20260720-prompt.md",
+    "sourceImage": "tools-home/icons/_src/daily-blog-stolperstein-reader-icon-20260720-raw.png",
+    "png512": "tools-home/icons/stolperstein-reader.png",
+    "png160": "tools-home/icons/stolperstein-reader-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/stolperstein-reader.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_6bf8a3a83dd1427a9258bd4a8db3a8f4~mv2.png"
   }
 ]
