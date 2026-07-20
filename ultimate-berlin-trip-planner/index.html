@@ -11622,6 +11622,1537 @@
         animation: none;
       }
     }
+
+    /* Artifact Reveal result — one stored plan, previewed in browser and PDF. */
+    #bw-trip-planner .bw-result {
+      background: #FFFDF8;
+      border: 1px solid #E1E5DA;
+      border-radius: 18px;
+      box-shadow: 0 20px 52px rgba(18, 61, 24, 0.12);
+      max-width: 1120px;
+    }
+
+    #bw-trip-planner .bw-body {
+      max-width: 1120px;
+    }
+
+    #bw-trip-planner .bw-compact-preview {
+      background: #FFFDF8;
+      gap: 22px;
+      padding: 28px 28px 18px;
+    }
+
+    #bw-trip-planner .bw-artifact-icon {
+      display: block;
+      flex: 0 0 auto;
+      height: 1.15em;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.9;
+      width: 1.15em;
+    }
+
+    #bw-trip-planner .bw-artifact-receipt {
+      background: #FFFFFF;
+      border: 1px solid #DDDCCD;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    #bw-trip-planner .bw-artifact-receipt-button {
+      align-items: center;
+      background: transparent;
+      border: 0;
+      color: #20211E;
+      cursor: pointer;
+      display: flex;
+      font: inherit;
+      gap: 18px;
+      justify-content: space-between;
+      min-height: 58px;
+      padding: 14px 20px;
+      text-align: left;
+      width: 100%;
+    }
+
+    #bw-trip-planner .bw-artifact-receipt-button span {
+      font-size: 13px;
+      font-weight: 750;
+      line-height: 1.4;
+    }
+
+    #bw-trip-planner .bw-artifact-receipt-button strong {
+      color: var(--bw-green);
+      flex: 0 0 auto;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    #bw-trip-planner .bw-artifact-receipt-button:focus-visible,
+    #bw-trip-planner [data-artifact-day]:focus-visible,
+    #bw-trip-planner [data-artifact-scroll-phone]:focus-visible,
+    #bw-trip-planner [data-artifact-pdf-preview]:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.95);
+      outline-offset: 2px;
+    }
+
+    #bw-trip-planner .bw-artifact-receipt-details {
+      border-top: 1px solid #E6E8DF;
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      padding: 13px 20px 15px;
+    }
+
+    #bw-trip-planner .bw-artifact-receipt-details[hidden] {
+      display: none !important;
+    }
+
+    #bw-trip-planner .bw-artifact-receipt-details > div {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    #bw-trip-planner .bw-artifact-receipt-details span {
+      background: #F2F6EC;
+      border: 1px solid #DDE8D5;
+      border-radius: 999px;
+      color: #344934;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 6px 9px;
+    }
+
+    #bw-trip-planner .bw-artifact-receipt-details button {
+      align-self: center;
+      background: transparent;
+      border: 0;
+      color: var(--bw-green);
+      cursor: pointer;
+      flex: 0 0 auto;
+      font: inherit;
+      font-size: 10px;
+      font-weight: 900;
+      padding: 7px 0;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    #bw-trip-planner .bw-artifact-intro {
+      display: grid;
+      gap: 12px;
+      padding: 2px 8px 0;
+    }
+
+    #bw-trip-planner .bw-artifact-intro h2 {
+      color: #123D18;
+      font-family: Merriweather, Georgia, serif;
+      font-size: clamp(31px, 4.2vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.045em;
+      line-height: 1.08;
+      margin: 0;
+      max-width: 940px;
+    }
+
+    #bw-trip-planner .bw-artifact-intro > div {
+      align-items: center;
+      display: grid;
+      gap: 14px;
+      grid-template-columns: 54px minmax(0, 1fr);
+    }
+
+    #bw-trip-planner .bw-artifact-intro img {
+      border: 2px solid #2F6B3B;
+      border-radius: 50%;
+      height: 54px;
+      object-fit: cover;
+      object-position: 50% 28%;
+      width: 54px;
+    }
+
+    #bw-trip-planner .bw-artifact-intro p {
+      color: #30352F;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.55;
+      margin: 0;
+      max-width: 900px;
+    }
+
+    #bw-trip-planner .bw-artifact-intro p strong {
+      color: #1F2920;
+      font-weight: 950;
+    }
+
+    #bw-trip-planner .bw-artifact-weather {
+      align-items: center;
+      background: #FFFFFF;
+      border: 1px solid #DDDCCD;
+      border-radius: 10px;
+      display: grid;
+      gap: 16px;
+      grid-template-columns: 58px minmax(0, 1fr);
+      padding: 17px 20px;
+    }
+
+    #bw-trip-planner .bw-artifact-weather-icon {
+      align-items: center;
+      color: #345A7C;
+      display: flex;
+      justify-content: center;
+    }
+
+    #bw-trip-planner .bw-artifact-weather-icon .bw-artifact-icon {
+      height: 40px;
+      width: 40px;
+    }
+
+    #bw-trip-planner .bw-artifact-weather-body {
+      min-width: 0;
+    }
+
+    #bw-trip-planner .bw-artifact-weather-head {
+      align-items: baseline;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px 20px;
+    }
+
+    #bw-trip-planner .bw-artifact-weather-head strong,
+    #bw-trip-planner .bw-artifact-weather-head b {
+      color: #123D18;
+      font-size: 12px;
+      font-weight: 950;
+    }
+
+    #bw-trip-planner .bw-artifact-weather-head span {
+      color: #263326;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    #bw-trip-planner .bw-artifact-weather-head small {
+      color: #687368;
+      font-size: 10px;
+      font-weight: 750;
+      margin-left: auto;
+    }
+
+    #bw-trip-planner .bw-artifact-weather p,
+    #bw-trip-planner .bw-artifact-weather em {
+      display: block;
+      font-style: normal;
+      line-height: 1.42;
+      margin: 5px 0 0;
+    }
+
+    #bw-trip-planner .bw-artifact-weather p {
+      color: #263326;
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    #bw-trip-planner .bw-artifact-weather em {
+      color: #687368;
+      font-size: 10px;
+      font-weight: 650;
+    }
+
+    #bw-trip-planner .bw-artifact-day-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @media (min-width: 901px) {
+      #bw-trip-planner .bw-artifact-day-grid[data-day-count="7"] {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      #bw-trip-planner .bw-artifact-day-grid[data-day-count="7"] .bw-artifact-day-proof {
+        min-height: 318px;
+      }
+    }
+
+    #bw-trip-planner .bw-artifact-day-tabs-mobile {
+      display: none;
+    }
+
+    #bw-trip-planner .bw-artifact-day-proof {
+      align-content: start;
+      background: #FFFFFF;
+      border: 1px solid #DDDCCD;
+      border-radius: 10px;
+      color: #20211E;
+      cursor: pointer;
+      display: grid;
+      font: inherit;
+      gap: 10px;
+      min-height: 252px;
+      padding: 16px 18px 14px;
+      text-align: left;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+    }
+
+    #bw-trip-planner .bw-artifact-day-proof:hover,
+    #bw-trip-planner .bw-artifact-day-proof.is-active {
+      border-color: var(--artifact-day-accent, #1B5E20);
+      box-shadow: 0 10px 24px rgba(18, 61, 24, 0.1);
+      transform: translateY(-2px);
+    }
+
+    #bw-trip-planner .bw-artifact-day-head {
+      align-items: center;
+      display: flex;
+      gap: 8px;
+    }
+
+    #bw-trip-planner .bw-artifact-day-head b {
+      align-items: center;
+      background: var(--bw-green);
+      border-radius: 999px;
+      color: #FFFFFF;
+      display: inline-flex;
+      font-size: 11px;
+      font-weight: 950;
+      height: 31px;
+      justify-content: center;
+      width: 31px;
+    }
+
+    #bw-trip-planner .bw-artifact-day-head strong {
+      color: #173F1D;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    #bw-trip-planner .bw-artifact-route-icons {
+      align-items: center;
+      color: #131813;
+      display: flex;
+      gap: 17px;
+      min-height: 34px;
+      padding: 2px 3px;
+    }
+
+    #bw-trip-planner .bw-artifact-route-icons .bw-artifact-icon {
+      height: 27px;
+      width: 27px;
+    }
+
+    #bw-trip-planner .bw-artifact-day-route {
+      color: #20211E;
+      font-size: 15px;
+      font-weight: 950;
+      line-height: 1.3;
+    }
+
+    #bw-trip-planner .bw-artifact-day-stops {
+      display: grid;
+      gap: 4px;
+    }
+
+    #bw-trip-planner .bw-artifact-day-stops span {
+      color: #343B34;
+      font-size: 11px;
+      font-weight: 650;
+      line-height: 1.35;
+      padding-left: 11px;
+      position: relative;
+    }
+
+    #bw-trip-planner .bw-artifact-day-stops span::before {
+      background: #20211E;
+      border-radius: 50%;
+      content: '';
+      height: 3px;
+      left: 1px;
+      position: absolute;
+      top: 6px;
+      width: 3px;
+    }
+
+    #bw-trip-planner .bw-artifact-day-proof > small {
+      align-self: end;
+      color: #687368;
+      font-size: 10px;
+      font-weight: 750;
+      text-align: center;
+    }
+
+    #bw-trip-planner .bw-artifact-delivery {
+      align-items: center;
+      background: linear-gradient(110deg, #F3F4E8 0%, #FFFDF7 62%, #F4F2D8 100%);
+      border: 1px solid #E2E1CF;
+      border-radius: 10px;
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(210px, 1.25fr) minmax(180px, 1fr) minmax(180px, 1fr) 92px;
+      padding: 17px 20px;
+    }
+
+    #bw-trip-planner .bw-artifact-delivery > strong {
+      color: #123D18;
+      font-family: Merriweather, Georgia, serif;
+      font-size: 20px;
+      line-height: 1.25;
+    }
+
+    #bw-trip-planner .bw-artifact-inline-offer {
+      align-items: center;
+      background: #123D18;
+      border-radius: 9px;
+      display: grid;
+      gap: 14px;
+      grid-template-columns: minmax(0, 1fr) minmax(250px, 0.8fr);
+      padding: 15px 17px;
+    }
+
+    #bw-trip-planner .bw-artifact-inline-offer strong,
+    #bw-trip-planner .bw-artifact-inline-offer span {
+      display: block;
+    }
+
+    #bw-trip-planner .bw-artifact-inline-offer strong {
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 950;
+    }
+
+    #bw-trip-planner .bw-artifact-inline-offer span {
+      color: #DDEFC7;
+      font-size: 10px;
+      font-weight: 650;
+      line-height: 1.4;
+      margin-top: 3px;
+    }
+
+    #bw-trip-planner .bw-artifact-inline-offer button {
+      background: var(--bw-yellow);
+      border: 0;
+      border-radius: 6px;
+      color: #123D18;
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 950;
+      min-height: 44px;
+      padding: 10px 14px;
+    }
+
+    #bw-trip-planner .bw-artifact-delivery button {
+      align-items: center;
+      background: transparent;
+      border: 0;
+      color: #123D18;
+      cursor: pointer;
+      display: grid;
+      font: inherit;
+      gap: 10px;
+      grid-template-columns: 32px minmax(0, 1fr);
+      padding: 6px;
+      text-align: left;
+    }
+
+    #bw-trip-planner .bw-artifact-delivery button .bw-artifact-icon {
+      height: 30px;
+      width: 30px;
+    }
+
+    #bw-trip-planner .bw-artifact-delivery button b,
+    #bw-trip-planner .bw-artifact-delivery button small {
+      display: block;
+    }
+
+    #bw-trip-planner .bw-artifact-delivery button b {
+      color: #172217;
+      font-size: 12px;
+      font-weight: 950;
+    }
+
+    #bw-trip-planner .bw-artifact-delivery button small {
+      color: #354035;
+      font-size: 10px;
+      font-weight: 650;
+      line-height: 1.35;
+      margin-top: 2px;
+    }
+
+    #bw-trip-planner .bw-artifact-same-badge {
+      align-items: center;
+      aspect-ratio: 1;
+      background: var(--bw-yellow);
+      border-radius: 50%;
+      color: #123D18;
+      display: flex;
+      font-size: 13px;
+      font-weight: 950;
+      justify-content: center;
+      line-height: 1.05;
+      text-align: center;
+    }
+
+    #bw-trip-planner .bw-artifact-product-preview {
+      align-items: start;
+      display: grid;
+      gap: 24px;
+      grid-template-columns: minmax(250px, 0.72fr) minmax(0, 1.58fr);
+      padding: 0 4px;
+    }
+
+    #bw-trip-planner .bw-artifact-product-preview > div > h3 {
+      color: #1C251C;
+      font-size: 14px;
+      font-weight: 950;
+      margin: 0 0 10px;
+      text-align: center;
+    }
+
+    #bw-trip-planner .bw-artifact-phone {
+      background: #F8F8F3;
+      border: 7px solid #111511;
+      border-radius: 28px;
+      box-shadow: 0 12px 24px rgba(18, 31, 19, 0.16);
+      margin: 0 auto;
+      max-width: 300px;
+      overflow: hidden;
+      padding: 6px;
+    }
+
+    #bw-trip-planner .bw-artifact-phone-top {
+      background: var(--bw-green);
+      border-radius: 15px 15px 6px 6px;
+      color: #FFFFFF;
+      display: grid;
+      gap: 3px;
+      padding: 13px 11px 12px;
+    }
+
+    #bw-trip-planner .bw-artifact-phone-top strong {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 950;
+      letter-spacing: 0.03em;
+    }
+
+    #bw-trip-planner .bw-artifact-phone-top span {
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    #bw-trip-planner .bw-artifact-phone-day {
+      background: #FFFFFF;
+      border: 1px solid #E4E7DE;
+      border-radius: 8px;
+      margin-top: 7px;
+      overflow: hidden;
+    }
+
+    #bw-trip-planner .bw-artifact-phone-day-head,
+    #bw-trip-planner .bw-artifact-pdf-day-head {
+      align-items: start;
+      display: grid;
+      gap: 7px;
+      grid-template-columns: 27px minmax(0, 1fr);
+      padding: 9px;
+    }
+
+    #bw-trip-planner .bw-artifact-phone-day-head > b,
+    #bw-trip-planner .bw-artifact-pdf-day-head > b {
+      align-items: center;
+      background: var(--bw-green);
+      border-radius: 999px;
+      color: #FFFFFF;
+      display: flex;
+      font-size: 9px;
+      height: 25px;
+      justify-content: center;
+      width: 25px;
+    }
+
+    #bw-trip-planner .bw-artifact-phone-day-head > strong,
+    #bw-trip-planner .bw-artifact-pdf-day-head > strong {
+      color: #123D18;
+      font-size: 9px;
+      font-weight: 950;
+      line-height: 1.25;
+    }
+
+    #bw-trip-planner .bw-artifact-phone-day-head small,
+    #bw-trip-planner .bw-artifact-pdf-day-head small {
+      color: #263326;
+      display: block;
+      font-size: 8px;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    #bw-trip-planner .bw-artifact-timeline {
+      display: grid;
+      padding: 4px 10px 10px;
+    }
+
+    #bw-trip-planner .bw-artifact-time-row {
+      align-items: start;
+      display: grid;
+      gap: 7px;
+      grid-template-columns: 37px 19px minmax(0, 1fr);
+      min-height: 43px;
+      position: relative;
+    }
+
+    #bw-trip-planner .bw-artifact-time-row time {
+      color: #20211E;
+      font-size: 8px;
+      font-weight: 950;
+      padding-top: 4px;
+    }
+
+    #bw-trip-planner .bw-artifact-time-icon {
+      color: #1D2D1E;
+      padding-top: 2px;
+      position: relative;
+      z-index: 1;
+    }
+
+    #bw-trip-planner .bw-artifact-time-icon .bw-artifact-icon {
+      height: 16px;
+      width: 16px;
+    }
+
+    #bw-trip-planner .bw-artifact-time-row > i {
+      background: #C8D4C7;
+      height: 22px;
+      left: 46px;
+      position: absolute;
+      top: 19px;
+      width: 1px;
+    }
+
+    #bw-trip-planner .bw-artifact-time-row strong {
+      color: #20211E;
+      display: block;
+      font-size: 8.5px;
+      font-weight: 850;
+      line-height: 1.3;
+      overflow-wrap: anywhere;
+    }
+
+    #bw-trip-planner .bw-artifact-time-row p {
+      color: #556156;
+      font-size: 8px;
+      line-height: 1.35;
+      margin: 2px 0 0;
+    }
+
+    #bw-trip-planner .bw-artifact-phone-tabs {
+      display: grid;
+      gap: 5px;
+      padding: 0 5px 7px;
+    }
+
+    #bw-trip-planner .bw-artifact-phone-tabs button {
+      align-items: center;
+      background: #FFFFFF;
+      border: 1px solid #DDE4D8;
+      border-radius: 7px;
+      color: #123D18;
+      cursor: pointer;
+      display: grid;
+      font: inherit;
+      gap: 6px;
+      grid-template-columns: 27px minmax(0, 1fr) auto;
+      min-height: 38px;
+      padding: 5px 7px;
+      text-align: left;
+    }
+
+    #bw-trip-planner .bw-artifact-phone-tabs button.is-active {
+      background: #EDF5E7;
+      border-color: #9DBD94;
+    }
+
+    #bw-trip-planner .bw-artifact-phone-tabs button b {
+      align-items: center;
+      background: var(--bw-green);
+      border-radius: 999px;
+      color: #FFFFFF;
+      display: flex;
+      font-size: 8px;
+      height: 25px;
+      justify-content: center;
+      width: 25px;
+    }
+
+    #bw-trip-planner .bw-artifact-phone-tabs button span,
+    #bw-trip-planner .bw-artifact-phone-tabs button em {
+      font-size: 8px;
+      font-style: normal;
+      font-weight: 800;
+    }
+
+    #bw-trip-planner .bw-artifact-phone-actions {
+      display: grid;
+      gap: 4px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    #bw-trip-planner .bw-artifact-phone-actions span {
+      align-items: center;
+      background: #EFF2E8;
+      border-radius: 7px;
+      color: #123D18;
+      display: flex;
+      font-size: 8px;
+      font-weight: 900;
+      gap: 3px;
+      justify-content: center;
+      min-height: 32px;
+    }
+
+    #bw-trip-planner .bw-artifact-phone-actions .bw-artifact-icon {
+      height: 12px;
+      width: 12px;
+    }
+
+    #bw-trip-planner #bw-artifact-pdf-preview > div {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-trip-planner .bw-artifact-pdf-mini {
+      background: #FFFFFF;
+      border: 1px solid #DDDCCD;
+      border-radius: 8px;
+      box-shadow: 0 8px 18px rgba(18, 61, 24, 0.06);
+      min-height: 448px;
+      overflow: hidden;
+      padding: 12px;
+    }
+
+    #bw-trip-planner .bw-artifact-pdf-mini > header {
+      align-items: center;
+      border-bottom: 1px solid #E7E8E0;
+      display: grid;
+      gap: 6px;
+      grid-template-columns: 26px minmax(0, 1fr) auto;
+      padding-bottom: 8px;
+    }
+
+    #bw-trip-planner .bw-artifact-pdf-mini > header img {
+      height: 25px;
+      object-fit: contain;
+      width: 25px;
+    }
+
+    #bw-trip-planner .bw-artifact-pdf-mini > header strong {
+      color: #123D18;
+      font-family: Merriweather, Georgia, serif;
+      font-size: 11px;
+    }
+
+    #bw-trip-planner .bw-artifact-pdf-mini > header small {
+      color: #687368;
+      font-size: 8px;
+      font-weight: 800;
+    }
+
+    #bw-trip-planner .bw-artifact-pdf-photo {
+      border-radius: 5px;
+      display: block;
+      height: 84px;
+      margin: 9px 0 3px;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    #bw-trip-planner .bw-artifact-pdf-plan-b {
+      background: #F4F5ED;
+      border: 1px solid #E2E4D7;
+      border-radius: 6px;
+      display: grid;
+      gap: 3px;
+      margin-top: 5px;
+      padding: 8px;
+    }
+
+    #bw-trip-planner .bw-artifact-pdf-plan-b strong {
+      color: #123D18;
+      font-size: 9px;
+      font-weight: 950;
+    }
+
+    #bw-trip-planner .bw-artifact-pdf-plan-b span {
+      color: #3E4A3E;
+      font-size: 8px;
+      font-weight: 650;
+      line-height: 1.35;
+    }
+
+    #bw-trip-planner .bw-artifact-comparison {
+      border: 1px solid #D9DED4;
+      border-radius: 9px;
+      overflow: hidden;
+    }
+
+    #bw-trip-planner .bw-artifact-comparison > div,
+    #bw-trip-planner .bw-artifact-comparison > p {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin: 0;
+    }
+
+    #bw-trip-planner .bw-artifact-comparison > div strong {
+      background: #F3F4EA;
+      color: #173F1D;
+      font-size: 12px;
+      font-weight: 950;
+      padding: 11px 15px;
+      text-align: center;
+    }
+
+    #bw-trip-planner .bw-artifact-comparison > div strong:last-child {
+      background: var(--bw-green);
+      color: #FFFFFF;
+    }
+
+    #bw-trip-planner .bw-artifact-comparison > p + p {
+      border-top: 1px solid #E5E8E1;
+    }
+
+    #bw-trip-planner .bw-artifact-comparison > p span {
+      align-items: center;
+      color: #263326;
+      display: flex;
+      font-size: 11px;
+      font-weight: 750;
+      gap: 8px;
+      line-height: 1.35;
+      padding: 10px 15px;
+    }
+
+    #bw-trip-planner .bw-artifact-comparison > p span + span {
+      border-left: 1px solid #E5E8E1;
+    }
+
+    #bw-trip-planner .bw-artifact-comparison .bw-artifact-icon {
+      color: var(--bw-green);
+      height: 15px;
+      width: 15px;
+    }
+
+    #bw-trip-planner .bw-result .bw-pro-offer-panel {
+      background: #FFFDF8;
+      gap: 8px;
+      padding: 0 28px 26px;
+    }
+
+    #bw-trip-planner .bw-result .bw-pro-cta {
+      border-radius: 6px;
+      box-shadow: 0 9px 18px rgba(127, 112, 0, 0.14);
+      font-size: 15px;
+      min-height: 52px;
+      width: min(100%, 760px);
+    }
+
+    #bw-trip-planner .bw-result .bw-pro-note {
+      margin-top: 2px;
+    }
+
+    #bw-trip-planner .bw-full-plan {
+      max-width: 980px;
+    }
+
+    #bw-trip-planner .bw-artifact-full-intro {
+      align-items: center;
+      background: #FFFDF8;
+      border: 1px solid #DDE4D9;
+      border-radius: 12px;
+      display: grid;
+      gap: 22px;
+      grid-template-columns: minmax(0, 1fr) 76px;
+      margin: 0 0 14px;
+      padding: 20px 22px;
+    }
+
+    #bw-trip-planner .bw-artifact-full-intro span {
+      color: var(--bw-green);
+      display: block;
+      font-size: 10px;
+      font-weight: 950;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    #bw-trip-planner .bw-artifact-full-intro h2 {
+      color: #123D18;
+      font-family: Merriweather, Georgia, serif;
+      font-size: 25px;
+      letter-spacing: -0.035em;
+      line-height: 1.15;
+      margin: 5px 0 0;
+    }
+
+    #bw-trip-planner .bw-artifact-full-intro p {
+      color: #465246;
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1.5;
+      margin: 8px 0 0;
+    }
+
+    #bw-trip-planner .bw-artifact-full-intro img {
+      border: 2px solid #2F6B3B;
+      border-radius: 50%;
+      height: 74px;
+      object-fit: cover;
+      object-position: 50% 28%;
+      width: 74px;
+    }
+
+    #bw-trip-planner .bw-artifact-full-jumps {
+      display: grid;
+      gap: 7px;
+      grid-template-columns: repeat(auto-fit, minmax(92px, 1fr));
+      margin: 0 0 14px;
+    }
+
+    #bw-trip-planner .bw-artifact-full-jumps button {
+      align-items: center;
+      background: #F4F7EF;
+      border: 1px solid #D8E4D3;
+      border-radius: 8px;
+      color: #123D18;
+      cursor: pointer;
+      display: grid;
+      font: inherit;
+      gap: 6px;
+      grid-template-columns: 28px minmax(0, 1fr);
+      min-height: 42px;
+      padding: 6px 9px;
+      text-align: left;
+    }
+
+    #bw-trip-planner .bw-artifact-full-jumps button:hover,
+    #bw-trip-planner .bw-artifact-full-jumps button:focus-visible {
+      background: #EAF3E4;
+      border-color: #7EAE79;
+    }
+
+    #bw-trip-planner .bw-artifact-full-jumps b {
+      align-items: center;
+      background: var(--bw-green);
+      border-radius: 999px;
+      color: #FFFFFF;
+      display: flex;
+      font-size: 9px;
+      height: 26px;
+      justify-content: center;
+      width: 26px;
+    }
+
+    #bw-trip-planner .bw-artifact-full-jumps span {
+      font-size: 9px;
+      font-weight: 850;
+    }
+
+    #bw-trip-planner .bw-artifact-full-day {
+      background: #FFFFFF;
+      border: 1px solid #DCE4D8;
+      border-radius: 12px;
+      box-shadow: 0 10px 26px rgba(18, 61, 24, 0.07);
+      margin: 0 0 16px;
+      overflow: hidden;
+      scroll-margin-top: 18px;
+    }
+
+    #bw-trip-planner .bw-artifact-full-day-hero {
+      align-items: end;
+      display: grid;
+      min-height: 196px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #bw-trip-planner .bw-artifact-full-day-hero::after {
+      background: linear-gradient(180deg, rgba(8, 30, 14, 0.04) 18%, rgba(8, 30, 14, 0.9) 100%);
+      content: '';
+      inset: 0;
+      position: absolute;
+    }
+
+    #bw-trip-planner .bw-artifact-full-day-hero img {
+      height: 100%;
+      inset: 0;
+      object-fit: cover;
+      position: absolute;
+      width: 100%;
+    }
+
+    #bw-trip-planner .bw-artifact-full-day-hero > div {
+      color: #FFFFFF;
+      padding: 22px;
+      position: relative;
+      z-index: 1;
+    }
+
+    #bw-trip-planner .bw-artifact-full-day-hero span {
+      color: var(--bw-yellow);
+      display: block;
+      font-size: 10px;
+      font-weight: 950;
+      letter-spacing: 0.08em;
+    }
+
+    #bw-trip-planner .bw-artifact-full-day-hero h3 {
+      color: #FFFFFF;
+      font-family: Merriweather, Georgia, serif;
+      font-size: 25px;
+      line-height: 1.15;
+      margin: 6px 0 0;
+    }
+
+    #bw-trip-planner .bw-artifact-full-day-hero p {
+      color: #E7F0E4;
+      font-size: 11px;
+      font-weight: 750;
+      margin: 6px 0 0;
+    }
+
+    #bw-trip-planner .bw-artifact-full-day-body {
+      display: grid;
+      gap: 14px;
+      padding: 18px 22px 22px;
+    }
+
+    #bw-trip-planner .bw-artifact-full-decision {
+      background: #F3F6EE;
+      border-left: 4px solid var(--day-accent, #1B5E20);
+      border-radius: 6px;
+      display: grid;
+      gap: 4px;
+      margin: 0;
+      padding: 11px 12px;
+    }
+
+    #bw-trip-planner .bw-artifact-full-decision strong,
+    #bw-trip-planner .bw-artifact-full-decision span {
+      display: block;
+    }
+
+    #bw-trip-planner .bw-artifact-full-decision strong {
+      color: #123D18;
+      font-size: 10px;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    #bw-trip-planner .bw-artifact-full-decision span {
+      color: #465246;
+      font-size: 11px;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+
+    #bw-trip-planner .bw-artifact-full-weather {
+      align-items: center;
+      background: #F7F8F3;
+      border: 1px solid #E2E5DC;
+      border-radius: 7px;
+      color: #315478;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 25px minmax(0, 1fr);
+      padding: 9px 11px;
+    }
+
+    #bw-trip-planner .bw-artifact-full-weather .bw-artifact-icon {
+      height: 24px;
+      width: 24px;
+    }
+
+    #bw-trip-planner .bw-artifact-full-weather strong,
+    #bw-trip-planner .bw-artifact-full-weather small {
+      display: block;
+    }
+
+    #bw-trip-planner .bw-artifact-full-weather strong {
+      color: #123D18;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    #bw-trip-planner .bw-artifact-full-weather small {
+      color: #5C675C;
+      font-size: 9px;
+      font-weight: 650;
+      line-height: 1.35;
+      margin-top: 2px;
+    }
+
+    #bw-trip-planner .bw-artifact-full-timeline {
+      display: grid;
+      gap: 0;
+    }
+
+    #bw-trip-planner .bw-artifact-full-block {
+      align-items: start;
+      border-top: 1px solid #E8ECE5;
+      display: grid;
+      gap: 11px;
+      grid-template-columns: 90px 28px minmax(0, 1fr);
+      padding: 13px 2px;
+    }
+
+    #bw-trip-planner .bw-artifact-full-block:first-child {
+      border-top: 0;
+    }
+
+    #bw-trip-planner .bw-artifact-full-block time {
+      color: #123D18;
+      font-size: 10px;
+      font-weight: 950;
+      line-height: 1.35;
+      padding-top: 3px;
+    }
+
+    #bw-trip-planner .bw-artifact-full-block-icon {
+      align-items: center;
+      background: #EEF4E9;
+      border-radius: 999px;
+      color: #123D18;
+      display: flex;
+      height: 26px;
+      justify-content: center;
+      width: 26px;
+    }
+
+    #bw-trip-planner .bw-artifact-full-block-icon .bw-artifact-icon {
+      height: 14px;
+      width: 14px;
+    }
+
+    #bw-trip-planner .bw-artifact-full-block > div > strong {
+      color: #20211E;
+      display: block;
+      font-size: 13px;
+      font-weight: 950;
+      line-height: 1.35;
+    }
+
+    #bw-trip-planner .bw-artifact-full-block p {
+      color: #4D594D;
+      font-size: 11px;
+      font-weight: 650;
+      line-height: 1.48;
+      margin: 4px 0 0;
+    }
+
+    #bw-trip-planner .bw-artifact-full-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 7px;
+    }
+
+    #bw-trip-planner .bw-artifact-full-links a,
+    #bw-trip-planner .bw-artifact-full-route-row a {
+      align-items: center;
+      background: #EDF5E9;
+      border: 1px solid #D5E5D0;
+      border-radius: 6px;
+      color: #123D18;
+      display: inline-flex;
+      font-size: 9px;
+      font-weight: 850;
+      gap: 5px;
+      min-height: 31px;
+      padding: 6px 8px;
+      text-decoration: none;
+    }
+
+    #bw-trip-planner .bw-artifact-full-links .bw-artifact-icon,
+    #bw-trip-planner .bw-artifact-full-route-row .bw-artifact-icon {
+      height: 13px;
+      width: 13px;
+    }
+
+    #bw-trip-planner .bw-artifact-full-route-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    #bw-trip-planner .bw-artifact-full-route-row > a:first-child {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+      color: #FFFFFF;
+    }
+
+    #bw-trip-planner .bw-artifact-full-reservation span strong,
+    #bw-trip-planner .bw-artifact-full-reservation span small {
+      display: block;
+    }
+
+    #bw-trip-planner .bw-artifact-full-reservation span small {
+      color: #526052;
+      font-size: 8px;
+      margin-top: 1px;
+    }
+
+    #bw-trip-planner .bw-artifact-full-plan-b {
+      background: #FFFBE2;
+      border: 1px solid #EEE5A6;
+      border-radius: 7px;
+      display: grid;
+      gap: 4px;
+      padding: 11px 12px;
+    }
+
+    #bw-trip-planner .bw-artifact-full-plan-b strong {
+      color: #123D18;
+      font-size: 11px;
+      font-weight: 950;
+    }
+
+    #bw-trip-planner .bw-artifact-full-plan-b span {
+      color: #514D35;
+      font-size: 10px;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+
+    #bw-trip-planner .bw-artifact-full-resources {
+      margin: 22px 0 0;
+    }
+
+    #bw-trip-planner .bw-artifact-full-resources h3 {
+      color: #123D18;
+      font-family: Merriweather, Georgia, serif;
+      font-size: 20px;
+      margin: 0 0 10px;
+    }
+
+    #bw-trip-planner .bw-artifact-full-resources > div {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-trip-planner .bw-artifact-full-resources a,
+    #bw-trip-planner .bw-artifact-full-resources > div > div {
+      align-items: start;
+      background: #FFFFFF;
+      border: 1px solid #DDE4D9;
+      border-radius: 8px;
+      color: #20211E;
+      display: grid;
+      gap: 9px;
+      grid-template-columns: 30px minmax(0, 1fr);
+      padding: 11px;
+      text-decoration: none;
+    }
+
+    #bw-trip-planner .bw-artifact-full-resource-icon {
+      align-items: center;
+      background: #EDF5E9;
+      border-radius: 999px;
+      color: #123D18;
+      display: flex;
+      height: 29px;
+      justify-content: center;
+      width: 29px;
+    }
+
+    #bw-trip-planner .bw-artifact-full-resource-icon .bw-artifact-icon {
+      height: 15px;
+      width: 15px;
+    }
+
+    #bw-trip-planner .bw-artifact-full-resources strong,
+    #bw-trip-planner .bw-artifact-full-resources small {
+      display: block;
+    }
+
+    #bw-trip-planner .bw-artifact-full-resources strong {
+      color: #123D18;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    #bw-trip-planner .bw-artifact-full-resources small {
+      color: #526052;
+      font-size: 9px;
+      font-weight: 650;
+      line-height: 1.4;
+      margin-top: 2px;
+    }
+
+    @media (max-width: 900px) {
+      #bw-trip-planner .bw-artifact-day-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      #bw-trip-planner .bw-artifact-delivery {
+        grid-template-columns: minmax(0, 1.2fr) repeat(2, minmax(150px, 1fr));
+      }
+
+      #bw-trip-planner .bw-artifact-delivery > strong {
+        grid-column: 1 / -1;
+      }
+
+      #bw-trip-planner .bw-artifact-inline-offer {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-trip-planner .bw-artifact-same-badge {
+        height: 76px;
+        justify-self: end;
+        width: 76px;
+      }
+
+      #bw-trip-planner .bw-artifact-product-preview {
+        grid-template-columns: minmax(230px, 0.8fr) minmax(0, 1.2fr);
+      }
+
+      #bw-trip-planner #bw-artifact-pdf-preview > div {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-trip-planner .bw-artifact-pdf-mini:nth-child(2) {
+        display: none;
+      }
+    }
+
+    @media (max-width: 620px) {
+      #bw-trip-planner .bw-result {
+        border-radius: 13px;
+      }
+
+      #bw-trip-planner .bw-compact-preview {
+        gap: 16px;
+        padding: 16px 12px 12px;
+      }
+
+      #bw-trip-planner .bw-artifact-receipt-button {
+        align-items: flex-start;
+        gap: 10px;
+        padding: 12px;
+      }
+
+      #bw-trip-planner .bw-artifact-receipt-button span {
+        font-size: 11px;
+      }
+
+      #bw-trip-planner .bw-artifact-receipt-details {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 11px 12px 13px;
+      }
+
+      #bw-trip-planner .bw-artifact-intro {
+        padding-inline: 2px;
+      }
+
+      #bw-trip-planner .bw-artifact-intro h2 {
+        font-size: 31px;
+      }
+
+      #bw-trip-planner .bw-artifact-intro > div {
+        align-items: start;
+        grid-template-columns: 46px minmax(0, 1fr);
+      }
+
+      #bw-trip-planner .bw-artifact-intro img {
+        height: 46px;
+        width: 46px;
+      }
+
+      #bw-trip-planner .bw-artifact-intro p {
+        font-size: 12px;
+      }
+
+      #bw-trip-planner .bw-artifact-weather {
+        align-items: start;
+        gap: 10px;
+        grid-template-columns: 34px minmax(0, 1fr);
+        padding: 13px;
+      }
+
+      #bw-trip-planner .bw-artifact-weather-icon .bw-artifact-icon {
+        height: 30px;
+        width: 30px;
+      }
+
+      #bw-trip-planner .bw-artifact-weather-head {
+        gap: 5px 10px;
+      }
+
+      #bw-trip-planner .bw-artifact-weather-head small {
+        margin-left: 0;
+        width: 100%;
+      }
+
+      #bw-trip-planner .bw-artifact-day-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-trip-planner .bw-artifact-day-tabs-mobile {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      #bw-trip-planner .bw-artifact-day-tabs-mobile button {
+        align-items: center;
+        background: #F4F7EF;
+        border: 1px solid #D8E4D3;
+        border-radius: 7px;
+        color: #123D18;
+        cursor: pointer;
+        display: grid;
+        flex: 1 1 80px;
+        font: inherit;
+        gap: 2px;
+        justify-items: center;
+        min-height: 44px;
+        padding: 6px 4px;
+      }
+
+      #bw-trip-planner .bw-artifact-day-tabs-mobile button.is-active {
+        background: var(--bw-green);
+        border-color: var(--bw-green);
+        color: #FFFFFF;
+      }
+
+      #bw-trip-planner .bw-artifact-day-tabs-mobile b {
+        font-size: 10px;
+        font-weight: 950;
+      }
+
+      #bw-trip-planner .bw-artifact-day-tabs-mobile span {
+        font-size: 8px;
+        font-weight: 750;
+      }
+
+      #bw-trip-planner .bw-artifact-day-proof:not(.is-active) {
+        display: none;
+      }
+
+      #bw-trip-planner .bw-artifact-day-proof {
+        min-height: 0;
+        padding: 14px;
+      }
+
+      #bw-trip-planner .bw-artifact-day-proof:not(.is-active) .bw-artifact-day-stops span:nth-child(n + 3) {
+        display: none;
+      }
+
+      #bw-trip-planner .bw-artifact-delivery {
+        gap: 11px;
+        grid-template-columns: 1fr 72px;
+        padding: 14px;
+      }
+
+      #bw-trip-planner .bw-artifact-delivery > strong {
+        font-size: 18px;
+        grid-column: 1 / -1;
+      }
+
+      #bw-trip-planner .bw-artifact-delivery button {
+        background: rgba(255, 255, 255, 0.58);
+        border: 1px solid rgba(27, 94, 32, 0.12);
+        border-radius: 7px;
+        grid-column: 1;
+        padding: 9px;
+      }
+
+      #bw-trip-planner .bw-artifact-same-badge {
+        grid-column: 2;
+        grid-row: 2 / span 2;
+        height: 68px;
+        justify-self: center;
+        width: 68px;
+      }
+
+      #bw-trip-planner .bw-artifact-product-preview {
+        grid-template-columns: 1fr;
+        padding-inline: 0;
+      }
+
+      #bw-trip-planner .bw-artifact-phone {
+        max-width: 286px;
+      }
+
+      #bw-trip-planner #bw-artifact-pdf-preview > div {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-trip-planner .bw-artifact-pdf-mini {
+        margin-inline: auto;
+        max-width: 310px;
+        min-height: 420px;
+      }
+
+      #bw-trip-planner .bw-artifact-comparison > div strong,
+      #bw-trip-planner .bw-artifact-comparison > p span {
+        font-size: 9px;
+        padding: 9px 8px;
+      }
+
+      #bw-trip-planner .bw-result .bw-pro-offer-panel {
+        padding: 0 12px 20px;
+      }
+
+      #bw-trip-planner .bw-result .bw-pro-cta {
+        font-size: 13px;
+      }
+
+      #bw-trip-planner .bw-artifact-full-intro {
+        gap: 12px;
+        grid-template-columns: minmax(0, 1fr) 56px;
+        padding: 15px;
+      }
+
+      #bw-trip-planner .bw-artifact-full-intro h2 {
+        font-size: 20px;
+      }
+
+      #bw-trip-planner .bw-artifact-full-intro img {
+        height: 54px;
+        width: 54px;
+      }
+
+      #bw-trip-planner .bw-artifact-full-jumps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      #bw-trip-planner .bw-artifact-full-day-hero {
+        min-height: 164px;
+      }
+
+      #bw-trip-planner .bw-artifact-full-day-hero > div,
+      #bw-trip-planner .bw-artifact-full-day-body {
+        padding: 15px;
+      }
+
+      #bw-trip-planner .bw-artifact-full-day-hero h3 {
+        font-size: 21px;
+      }
+
+      #bw-trip-planner .bw-artifact-full-block {
+        gap: 8px;
+        grid-template-columns: 70px 25px minmax(0, 1fr);
+      }
+
+      #bw-trip-planner .bw-artifact-full-resources > div {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 
   <section class="bw-wrap" aria-labelledby="bw-trip-title">
@@ -11917,7 +13448,7 @@
             <p class="bw-pro-offer-copy">The free preview shows the shape of the trip. The detailed plan gives each selected day its stops, maps, timing and one practical backup.</p>
             <div class="bw-pro-offer-grid" aria-label="Trip Pack Pro includes">
               <div class="bw-pro-offer-item"><b>Detailed days</b><span>Stops kept in the same area</span></div>
-              <div class="bw-pro-offer-item"><b>Phone-ready</b><span>Map links, PDF, print and share</span></div>
+              <div class="bw-pro-offer-item"><b>Phone-ready</b><span>Map links, browser access and PDF</span></div>
               <div class="bw-pro-offer-item"><b>Useful checks</b><span>Weather, Sundays, Mondays and arrival</span></div>
             </div>
             <div class="bw-pro-offer-actions">
@@ -11985,6 +13516,8 @@
   </section>
 </div>
 
+<script src="engine/plan-artifact-v3.js"></script>
+<script src="engine/plan-artifact-v3-pdf.js"></script>
 <script>
 (function () {
   var root = document.getElementById('bw-trip-planner');
@@ -12005,7 +13538,8 @@
   var WEATHER_API_URL = 'https://api.open-meteo.com/v1/forecast';
   var COORDS = { latitude: 52.521918, longitude: 13.413215 };
   var TIMEZONE = 'Europe/Berlin';
-  var FORECAST_MAX_DAYS = 15;
+  var LIVE_FORECAST_MAX_OFFSET_DAYS = 14;
+  var OPEN_METEO_FORECAST_DAYS = 15;
   var WEATHER_TIMEOUT_MS = 6500;
   var BOOKING_ROUTE_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var BOOKING_URL = plannerBookingUrl('tour_day_card');
@@ -12039,6 +13573,7 @@
   var UNLOCK_MS = 30 * 24 * 60 * 60 * 1000;
   var BRANDED_PLANNER_URL = 'https://www.berlinwalk.com/berlin-trip-planner';
   var TRIP_PLANNER_PRO_API_URL = 'https://berlinwalk-content-app.vercel.app/api/trip-planner-pro';
+  var PLAN_ARTIFACT_CLIENT_CONTRACT_VERSION = 'plan_artifact_v3';
   var PRO_OFFER_VARIANT = 'trip_planner_detailed_7_99';
   var PRO_PRICE_EUR = 7.99;
   var FDR_OFFER_VARIANT = 'fdr_addon_2_99';
@@ -12398,6 +13933,10 @@
   var latestPlan = null;
   var latestWeather = null;
   var latestDailyWeather = {};
+  var latestArtifactV3 = null;
+  var purchasedArtifactV3 = null;
+  var latestWeatherOverlayV1 = null;
+  var artifactRevealDay = 1;
   var planGenerated = false;
   var planNeedsUpdate = false;
   var planningInProgress = false;
@@ -13430,6 +14969,34 @@
     return areas[0] || String((day && day.theme) || 'Berlin').replace(/^Tour \+ /, '');
   }
 
+  function artifactAreaForDay(day) {
+    var placeIds = dayPlaceIds(day);
+    var areas = placeIds.map(function (placeId) {
+      var place = placeFor(placeId);
+      var area = place && place.area ? String(place.area).split(' / ')[0].trim() : '';
+      return area === 'Neukoelln' ? 'Neukölln' : area;
+    }).filter(function (area, index, all) {
+      return area && all.indexOf(area) === index;
+    });
+    if (day && day.dayNumber === 1) {
+      return selectedLabels().stayArea || areas[0] || compactPreviewArea(day);
+    }
+    if (placeIds.indexOf('wall_memorial') !== -1 && placeIds.indexOf('east_side_gallery') !== -1) {
+      return 'Bernauer Straße → Friedrichshain';
+    }
+    if (placeIds.indexOf('east_side_gallery') !== -1 && placeIds.indexOf('oberbaum_bridge') !== -1) {
+      return 'Friedrichshain → Kreuzberg';
+    }
+    if (placeIds.indexOf('potsdam_hbf') !== -1 || placeIds.indexOf('sanssouci') !== -1) {
+      return 'Potsdam';
+    }
+    if (placeIds.indexOf('world_clock') !== -1 && (day && day.isTourFramework)) {
+      return 'Alexanderplatz → historic centre';
+    }
+    if (areas.length > 1) return areas[0] + ' → ' + areas[areas.length - 1];
+    return areas[0] || compactPreviewArea(day);
+  }
+
   function compactPreviewDayTitle(day) {
     return compactPreviewArea(day);
   }
@@ -13578,6 +15145,11 @@
     return '<svg class="bw-compact-benefit-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">' + path + '</svg>';
   }
 
+  function artifactIconSvg(name) {
+    var path = ICON_PATHS[name] || ICON_PATHS.map;
+    return '<svg class="bw-artifact-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">' + path + '</svg>';
+  }
+
   function compactPreviewItems(day) {
     var candidates = dayActionBlockItems(day).filter(function (item) {
       return !isDayClosingBlock(day, item.block, item.index);
@@ -13651,11 +15223,364 @@
       '<div class="bw-compact-day-list">' + dayCards + '</div>';
   }
 
+  function artifactFormatCheckedAt(value) {
+    if (!value) return '';
+    try {
+      return new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', timeZone: TIMEZONE }).format(new Date(value));
+    } catch (error) {
+      return '';
+    }
+  }
+
+  function artifactAnswerReceiptHtml(view) {
+    var input = view.input || {};
+    var labels = input.labels || {};
+    var summary = [
+      view.days.length + (view.days.length === 1 ? ' day' : ' days'),
+      view.trip.dateRange || view.trip.displayDate,
+      labels.arrivalPoint || input.arrivalPoint,
+      labels.stayArea || view.trip.stayArea
+    ].filter(Boolean).join(' · ');
+    var chips = [
+      labels.tripLength || (view.days.length + ' days'),
+      labels.arrivalTime || input.arrivalTime,
+      labels.arrivalPoint || input.arrivalPoint,
+      labels.stayArea || view.trip.stayArea,
+      labels.pace || view.trip.pace,
+      labels.mustHandle || (input.mustHandle || []).join(', ')
+    ].filter(Boolean);
+    return '<section class="bw-artifact-receipt" data-artifact-receipt>' +
+      '<button class="bw-artifact-receipt-button" type="button" data-artifact-receipt-toggle aria-expanded="false">' +
+        '<span>' + escapeHtml(summary) + '</span>' +
+        '<strong>Edit details</strong>' +
+      '</button>' +
+      '<div class="bw-artifact-receipt-details" data-artifact-receipt-details hidden>' +
+        '<div>' + chips.map(function (chip) { return '<span>' + escapeHtml(chip) + '</span>'; }).join('') + '</div>' +
+        '<button type="button" data-change-my-answers>Change these answers</button>' +
+      '</div>' +
+    '</section>';
+  }
+
+  function artifactWeatherHtml(view) {
+    var overlay = view.weather || { mode: 'typical', days: [] };
+    var activeWeather = (view.days.find(function (day) { return day.dayNumber === artifactRevealDay; }) || view.days[0] || {}).weather || overlay.days[0] || null;
+    if (!activeWeather) return '';
+    var liveDays = overlay.days.filter(function (day) { return day.kind === 'live'; }).map(function (day) {
+      var match = view.days.find(function (candidate) { return candidate.dateKey === day.dateKey; });
+      return match ? match.dayNumber : null;
+    }).filter(Boolean);
+    var typicalDays = overlay.days.filter(function (day) { return day.kind === 'typical'; }).map(function (day) {
+      var match = view.days.find(function (candidate) { return candidate.dateKey === day.dateKey; });
+      return match ? match.dayNumber : null;
+    }).filter(Boolean);
+    var climateMonth = MONTH_CLIMATE[dateParts(activeWeather.dateKey).month - 1];
+    var title = activeWeather.kind === 'live' ? 'Live forecast' : 'Typical ' + (climateMonth ? climateMonth.name : 'Berlin') + ' conditions';
+    var status = activeWeather.kind === 'live'
+      ? (activeWeather.title || 'Live Berlin weather')
+      : (activeWeather.title || title).replace(/^Typical\s+/i, '');
+    var checked = activeWeather.kind === 'live' ? artifactFormatCheckedAt(activeWeather.checkedAt || overlay.generatedAt) : 'Climate guide';
+    var typicalDayLabel = typicalDays.length === 1
+      ? 'Day ' + typicalDays[0] + ' uses'
+      : 'Days ' + typicalDays[0] + '–' + typicalDays[typicalDays.length - 1] + ' use';
+    var liveDayLabel = liveDays.length === 1
+      ? 'Day ' + liveDays[0]
+      : 'Days ' + liveDays[0] + '–' + liveDays[liveDays.length - 1];
+    var truth = overlay.mode === 'mixed'
+      ? 'Live forecast for ' + liveDayLabel + ' · ' + typicalDayLabel + ' typical conditions, not a forecast.'
+      : activeWeather.kind === 'live'
+        ? 'The route keeps its stored Plan B nearby. More than 14 days away, I show typical conditions instead of pretending there is a forecast.'
+        : 'This is not a forecast. Use it for packing, then check live weather closer to arrival.';
+    var cue = String(activeWeather.cue || '').trim();
+    var showCue = Boolean(cue) && !(activeWeather.kind === 'typical' && /^(this is )?not a forecast\b/i.test(cue));
+    return '<section class="bw-artifact-weather is-' + escapeHtml(activeWeather.kind) + '" aria-live="polite">' +
+      '<span class="bw-artifact-weather-icon">' + artifactIconSvg(activeWeather.kind === 'live' ? weatherIconName(weatherVisual(activeWeather.weatherCode, { windSpeed: activeWeather.windKmh }).icon) : 'umbrella') + '</span>' +
+      '<div class="bw-artifact-weather-body">' +
+        '<div class="bw-artifact-weather-head"><strong>' + escapeHtml(title) + '</strong><span>' + escapeHtml(formatDisplayDate(activeWeather.dateKey)) + '</span><b>' + escapeHtml(status) + '</b><small>' + escapeHtml(checked) + '</small></div>' +
+        (showCue ? '<p>' + escapeHtml(cue) + '</p>' : '') +
+        '<em>' + escapeHtml(truth) + '</em>' +
+      '</div>' +
+    '</section>';
+  }
+
+  function artifactHeadlineKey(value) {
+    return String(value || '')
+      .toLowerCase()
+      .normalize('NFKD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, ' ')
+      .trim();
+  }
+
+  function artifactHeadlineTokens(value) {
+    var ignored = {
+      a: true, an: true, and: true, at: true, day: true, for: true, from: true,
+      in: true, of: true, on: true, the: true, then: true, to: true, with: true
+    };
+    return artifactHeadlineKey(value).split(' ').filter(function (token) {
+      return token && !ignored[token];
+    });
+  }
+
+  function artifactHeadlineIsDistinct(candidate, stepKeys, anchorKeys) {
+    var key = artifactHeadlineKey(candidate);
+    if (!key || stepKeys.indexOf(key) !== -1) return false;
+    if (/[→>]/.test(String(candidate || ''))) return false;
+    if (anchorKeys.length > 1 && anchorKeys.every(function (anchorKey) { return key.indexOf(anchorKey) !== -1; })) {
+      return false;
+    }
+    var candidateTokens = artifactHeadlineTokens(candidate);
+    var thematicTokens = {
+      after: true, before: true, beyond: true, geography: true, layers: true,
+      one: true, rhythm: true, save: true, slower: true, through: true,
+      traces: true, without: true
+    };
+    var hasThematicMove = candidateTokens.some(function (token) { return thematicTokens[token]; });
+    var matchedStepKeys = {};
+    stepKeys.forEach(function (stepKey) {
+      var stepTokens = artifactHeadlineTokens(stepKey);
+      if (stepTokens.length && stepTokens.every(function (token) { return candidateTokens.indexOf(token) !== -1; })) {
+        matchedStepKeys[stepKey] = true;
+      }
+    });
+    if (Object.keys(matchedStepKeys).length >= 2) return false;
+    return !stepKeys.some(function (stepKey) {
+      var stepTokens = artifactHeadlineTokens(stepKey);
+      if (!stepTokens.length || !candidateTokens.length) return false;
+      var shared = candidateTokens.filter(function (token) { return stepTokens.indexOf(token) !== -1; });
+      var coverage = shared.length / Math.max(candidateTokens.length, stepTokens.length);
+      var oneWordExtension = shared.length === Math.min(candidateTokens.length, stepTokens.length) &&
+        Math.abs(candidateTokens.length - stepTokens.length) <= 1;
+      var containsFullStop = stepTokens.length >= 2 && stepTokens.every(function (token) { return candidateTokens.indexOf(token) !== -1; });
+      return (coverage >= 0.85 && Math.abs(candidateTokens.length - stepTokens.length) <= 1) ||
+        oneWordExtension ||
+        (containsFullStop && !hasThematicMove);
+    });
+  }
+
+  function artifactDayPromise(day, blocks) {
+    var dayOneLabel = day.dayNumber === 1 && state.arrivalPoint === 'ber'
+      ? 'BER → ' + (selectedLabels().stayArea || day.area || 'central Berlin')
+      : '';
+    if (window.BWPlanArtifactV3 && typeof window.BWPlanArtifactV3.dayPromise === 'function') {
+      return window.BWPlanArtifactV3.dayPromise(day, blocks, { dayOneLabel: dayOneLabel });
+    }
+    if (dayOneLabel) return dayOneLabel;
+    var stepKeys = (blocks || []).map(function (block) { return artifactHeadlineKey(block.title); }).filter(Boolean);
+    var anchorKeys = (day.anchors || []).slice(0, 3).map(function (anchor) { return artifactHeadlineKey(anchor.label); }).filter(Boolean);
+    var candidates = [day.title, day.theme].filter(Boolean);
+    var distinct = candidates.find(function (candidate) { return artifactHeadlineIsDistinct(candidate, stepKeys, anchorKeys); });
+    if (distinct) return distinct;
+    var context = artifactHeadlineKey([day.title, day.theme, day.area].join(' '));
+    if (/wall|cold war|divid/.test(context)) return 'Divided Berlin: border traces to the Spree';
+    if (/museum/.test(context)) return 'One museum, then the river';
+    if (/potsdam|palace/.test(context)) return 'Palaces and park paths in Potsdam';
+    if (/food|market/.test(context)) return 'Neighbourhoods through food';
+    if (/night|club/.test(context)) return 'Save energy for Berlin after dark';
+    if (/free|budget/.test(context)) return 'Serious history without a ticket';
+    if (/history|memorial|prussia/.test(context)) return 'Prussian Berlin to the 20th century';
+    if (/charlottenburg|west berlin/.test(context)) return 'West Berlin beyond the historic centre';
+    if (/park|garden|nature/.test(context)) return (day.area || 'Berlin') + ': parks at a slower pace';
+    return (day.area || 'Berlin') + ': one connected day';
+  }
+
+  function artifactDayProofHtml(day, active) {
+    var blocks = (day.blocks || []).slice(0, active ? 4 : 2);
+    var routeTitle = artifactDayPromise(day, blocks);
+    return '<button class="bw-artifact-day-proof' + (active ? ' is-active' : '') + '" type="button" data-artifact-day="' + day.dayNumber + '" aria-pressed="' + (active ? 'true' : 'false') + '" style="--artifact-day-accent:' + escapeHtml(day.accent) + '">' +
+      '<span class="bw-artifact-day-head"><b>D' + day.dayNumber + '</b><strong>' + escapeHtml(compactPreviewDate(day.dateKey)) + '</strong></span>' +
+      '<span class="bw-artifact-route-icons" aria-hidden="true">' + artifactIconSvg(dayIconName({ theme: day.theme, title: day.title, planKey: day.theme })) + artifactIconSvg('pin') + artifactIconSvg(day.route.travelMode === 'transit' ? 'train' : 'route') + '</span>' +
+      '<strong class="bw-artifact-day-route">' + escapeHtml(routeTitle) + '</strong>' +
+      '<span class="bw-artifact-day-stops">' + blocks.map(function (block) { return '<span>' + escapeHtml(block.title) + '</span>'; }).join('') + '</span>' +
+      '<small>' + escapeHtml(day.movement || 'Walk') + '</small>' +
+    '</button>';
+  }
+
+  function artifactDayTabsMobileHtml(view, activeDay) {
+    return '<nav class="bw-artifact-day-tabs-mobile" aria-label="Choose a preview day">' + view.days.map(function (day) {
+      return '<button type="button" data-artifact-day="' + day.dayNumber + '" class="' + (day.dayNumber === activeDay.dayNumber ? 'is-active' : '') + '" aria-pressed="' + (day.dayNumber === activeDay.dayNumber ? 'true' : 'false') + '"><b>Day ' + day.dayNumber + '</b><span>' + escapeHtml(compactPreviewDate(day.dateKey)) + '</span></button>';
+    }).join('') + '</nav>';
+  }
+
+  function artifactTimelineHtml(day, compact) {
+    return '<div class="bw-artifact-timeline' + (compact ? ' is-compact' : '') + '">' + (day.blocks || []).slice(0, compact ? 5 : 8).map(function (block, index, all) {
+      return '<div class="bw-artifact-time-row">' +
+        '<time>' + escapeHtml(block.time) + '</time>' +
+        '<span class="bw-artifact-time-icon">' + artifactIconSvg(index === 0 ? dayIconName({ theme: day.theme, title: day.title }) : (block.links && block.links.length ? 'pin' : 'route')) + '</span>' +
+        '<div><strong>' + escapeHtml(block.title) + '</strong>' + (compact ? '' : '<p>' + escapeHtml(block.detail) + '</p>') + '</div>' +
+        (index < all.length - 1 ? '<i aria-hidden="true"></i>' : '') +
+      '</div>';
+    }).join('') + '</div>';
+  }
+
+  function artifactPhonePreviewHtml(view, activeDay) {
+    return '<section class="bw-artifact-phone" id="bw-artifact-phone-preview" aria-label="Complete plan phone preview">' +
+      '<div class="bw-artifact-phone-top"><strong>YOUR FULL BERLIN PLAN</strong><span>' + escapeHtml(view.days.length + (view.days.length === 1 ? ' day' : ' days') + ' from ' + view.trip.displayDate) + '</span></div>' +
+      '<div class="bw-artifact-phone-day"><div class="bw-artifact-phone-day-head"><b>D' + activeDay.dayNumber + '</b><strong>' + escapeHtml(formatDisplayDate(activeDay.dateKey)) + '<small>' + escapeHtml(activeDay.title) + '</small></strong></div>' + artifactTimelineHtml(activeDay, true) + '</div>' +
+      '<div class="bw-artifact-phone-tabs">' + view.days.map(function (day) {
+        return '<button type="button" data-artifact-day="' + day.dayNumber + '" class="' + (day.dayNumber === activeDay.dayNumber ? 'is-active' : '') + '" aria-pressed="' + (day.dayNumber === activeDay.dayNumber ? 'true' : 'false') + '"><b>D' + day.dayNumber + '</b><span>' + escapeHtml(compactPreviewDate(day.dateKey)) + '</span><em>' + (day.dayNumber === activeDay.dayNumber ? 'Open' : 'View') + '</em></button>';
+      }).join('') + '</div>' +
+      '<div class="bw-artifact-phone-actions"><span>' + artifactIconSvg('pin') + ' Map</span><span>' + artifactIconSvg('calendar') + ' Times</span><span>' + artifactIconSvg('umbrella') + ' Plan B</span></div>' +
+    '</section>';
+  }
+
+  function artifactPdfMiniPageHtml(view, day, pageNumber) {
+    return '<article class="bw-artifact-pdf-mini">' +
+      '<header><img src="assets/berlinwalk-logo-rounded.png" alt=""><strong>BerlinWalk</strong><small>' + pageNumber + '/' + view.delivery.pdfPageCount + '</small></header>' +
+      '<img class="bw-artifact-pdf-photo" src="' + escapeHtml(day.photo.src) + '" alt="' + escapeHtml(day.photo.alt) + '">' +
+      '<div class="bw-artifact-pdf-day-head"><b>D' + day.dayNumber + '</b><strong>' + escapeHtml(formatDisplayDate(day.dateKey)) + '<small>' + escapeHtml(day.title) + '</small></strong></div>' +
+      artifactTimelineHtml(day, true) +
+      '<div class="bw-artifact-pdf-plan-b"><strong>Plan B</strong><span>' + escapeHtml(day.planB) + '</span></div>' +
+    '</article>';
+  }
+
+  function artifactDeliveryBandHtml(view) {
+    return '<section class="bw-artifact-delivery">' +
+      '<strong>Same plan, two ways to use it</strong>' +
+      '<button type="button" data-artifact-scroll-phone>' + artifactIconSvg('map') + '<span><b>On your phone</b><small>Full schedule, maps and practical links</small></span></button>' +
+      '<button type="button" data-artifact-pdf-preview>' + artifactIconSvg('download') + '<span><b>PDF backup</b><small>' + view.delivery.pdfPageCount + ' pages for print and offline use</small></span></button>' +
+      '<span class="bw-artifact-same-badge">SAME<br>PLAN</span>' +
+    '</section>';
+  }
+
+  function artifactInlineOfferHtml(view) {
+    return '<section class="bw-artifact-inline-offer">' +
+      '<div><strong>Your exact ' + view.days.length + '-day itinerary is ready to unlock.</strong><span>One-time payment · instant browser access · ' + view.delivery.pdfPageCount + '-page PDF backup</span></div>' +
+      '<button type="button" data-pro-cta>Unlock this plan — €7.99</button>' +
+    '</section>';
+  }
+
+  function artifactComparisonHtml(view) {
+    return '<section class="bw-artifact-comparison">' +
+      '<div><strong>Free now: route proof</strong><strong>Complete plan: ready to use</strong></div>' +
+      '<p><span>' + artifactIconSvg('check') + 'Trip shape + day decisions</span><span>' + artifactIconSvg('check') + 'Every time block + route links</span></p>' +
+      '<p><span>' + artifactIconSvg('check') + 'One visible Plan B</span><span>' + artifactIconSvg('check') + 'One Plan B for every day</span></p>' +
+      '<p><span>' + artifactIconSvg('check') + 'Phone/PDF product preview</span><span>' + artifactIconSvg('check') + 'Phone view + ' + view.delivery.pdfPageCount + '-page PDF</span></p>' +
+    '</section>';
+  }
+
+  function activePaidArtifactV3() {
+    if (purchasedArtifactV3) return purchasedArtifactV3;
+    return forceLocalUnlockForQa() ? latestArtifactV3 : null;
+  }
+
+  function artifactFullLinksHtml(links) {
+    var safeLinks = (links || []).filter(function (link) { return link && link.url; }).slice(0, 4);
+    if (!safeLinks.length) return '';
+    return '<div class="bw-artifact-full-links">' + safeLinks.map(function (link) {
+      return '<a href="' + escapeHtml(link.url) + '" target="_blank" rel="noopener">' + artifactIconSvg(link.kind === 'reservation' ? 'ticket' : 'pin') + '<span>' + escapeHtml(link.label || 'Open link') + '</span></a>';
+    }).join('') + '</div>';
+  }
+
+  function artifactFullWeatherHtml(weather) {
+    if (!weather) return '';
+    var visualName = weather.kind === 'live'
+      ? weatherIconName(weatherVisual(weather.weatherCode, { windSpeed: weather.windKmh }).icon)
+      : 'umbrella';
+    var truth = weather.kind === 'live' ? 'Live forecast' : 'Typical conditions, not a forecast';
+    return '<div class="bw-artifact-full-weather">' + artifactIconSvg(visualName) + '<span><strong>' + escapeHtml(weather.title || truth) + '</strong><small>' + escapeHtml(truth + (weather.cue ? ' · ' + weather.cue : '')) + '</small></span></div>';
+  }
+
+  function artifactFullDayHtml(day) {
+    var blocks = (day.blocks || []).map(function (block) {
+      return '<article class="bw-artifact-full-block">' +
+        '<time>' + escapeHtml(block.window || block.time) + '</time>' +
+        '<span class="bw-artifact-full-block-icon">' + artifactIconSvg(block.links && block.links.length ? 'pin' : 'route') + '</span>' +
+        '<div><strong>' + escapeHtml(block.title) + '</strong>' + (block.detail ? '<p>' + escapeHtml(block.detail) + '</p>' : '') + artifactFullLinksHtml(block.links) + '</div>' +
+      '</article>';
+    }).join('');
+    var reservation = day.reservation && day.reservation.url
+      ? '<a class="bw-artifact-full-reservation" href="' + escapeHtml(day.reservation.url) + '" target="_blank" rel="noopener">' + artifactIconSvg('ticket') + '<span><strong>' + escapeHtml(day.reservation.label || 'Official reservation') + '</strong><small>Open the official page</small></span></a>'
+      : '';
+    return '<article class="bw-artifact-full-day bw-day" data-day-card="' + day.dayNumber + '" style="--day-accent:' + escapeHtml(day.accent) + '">' +
+      '<div class="bw-artifact-full-day-hero">' +
+        '<img src="' + escapeHtml(day.photo.src) + '" alt="' + escapeHtml(day.photo.alt) + '" loading="lazy" decoding="async">' +
+        '<div><span>DAY ' + day.dayNumber + ' · ' + escapeHtml(formatDisplayDate(day.dateKey)) + '</span><h3>' + escapeHtml(day.title) + '</h3><p>' + escapeHtml(day.area + ' · ' + day.movement) + '</p></div>' +
+      '</div>' +
+      '<div class="bw-artifact-full-day-body">' +
+        (day.decision ? '<p class="bw-artifact-full-decision"><strong>Why this day is here</strong><span>' + escapeHtml(day.decision) + '</span></p>' : '') +
+        artifactFullWeatherHtml(day.weather) +
+        '<div class="bw-artifact-full-timeline">' + blocks + '</div>' +
+        '<div class="bw-artifact-full-route-row"><a href="' + escapeHtml(day.route.url) + '" target="_blank" rel="noopener">' + artifactIconSvg('map') + '<span>' + escapeHtml(day.route.label || 'Open the complete day route') + '</span></a>' + reservation + '</div>' +
+        '<div class="bw-artifact-full-plan-b"><strong>Plan B</strong><span>' + escapeHtml(day.planB) + '</span></div>' +
+      '</div>' +
+    '</article>';
+  }
+
+  function artifactFullResourceSection(title, items, iconName) {
+    var cards = (items || []).map(function (item) {
+      var body = '<span class="bw-artifact-full-resource-icon">' + artifactIconSvg(iconName) + '</span><span><strong>' + escapeHtml(item.title) + '</strong><small>' + escapeHtml(item.detail) + '</small></span>';
+      return item.link && item.link.url
+        ? '<a href="' + escapeHtml(item.link.url) + '" target="_blank" rel="noopener">' + body + '</a>'
+        : '<div>' + body + '</div>';
+    }).join('');
+    return cards ? '<section class="bw-artifact-full-resources"><h3>' + escapeHtml(title) + '</h3><div>' + cards + '</div></section>' : '';
+  }
+
+  function renderFullPlanArtifactV3(view) {
+    var daysEl = root.querySelector('[data-full-days]');
+    var routeBrief = root.querySelector('[data-full-route-brief]');
+    var jumpBar = root.querySelector('[data-day-jump-bar]');
+    var aiPanel = root.querySelector('[data-ai-polish-panel]');
+    var copyLinkButton = root.querySelector('[data-copy-plan-link]');
+    var whatsappLink = root.querySelector('[data-share-whatsapp]');
+    var printButton = root.querySelector('[data-print-plan]');
+    if (!view || !daysEl) return;
+    setText('[data-full-sub]', view.days.length + (view.days.length === 1 ? ' day' : ' days') + ' from ' + view.trip.displayDate + '. The phone view and PDF use this same stored itinerary.');
+    if (aiPanel) aiPanel.innerHTML = '';
+    if (routeBrief) {
+      routeBrief.innerHTML = '<section class="bw-artifact-full-intro"><div><span>Your stored plan</span><h2>' + escapeHtml(view.decisionReceipt.headline) + '</h2><p>' + escapeHtml(view.decisionReceipt.guideNote) + '</p></div><img src="' + escapeHtml(YUSUF_GUIDE_PHOTO_URL) + '" alt="Yusuf, BerlinWalk guide" loading="eager" decoding="async"></section>';
+    }
+    if (jumpBar) {
+      jumpBar.innerHTML = '<nav class="bw-artifact-full-jumps" aria-label="Open a day in your itinerary">' + view.days.map(function (day) {
+        return '<button type="button" data-artifact-full-day="' + day.dayNumber + '"><b>D' + day.dayNumber + '</b><span>' + escapeHtml(compactPreviewDate(day.dateKey)) + '</span></button>';
+      }).join('') + '</nav>';
+    }
+    if (copyLinkButton) copyLinkButton.textContent = 'Copy trip-input link';
+    if (whatsappLink) whatsappLink.setAttribute('aria-label', 'Share these Berlin trip inputs on WhatsApp');
+    if (printButton) {
+      printButton.hidden = true;
+      printButton.disabled = true;
+    }
+    daysEl.innerHTML = view.days.map(artifactFullDayHtml).join('') +
+      artifactFullResourceSection('Before you go', view.beforeYouGo, 'ticket') +
+      artifactFullResourceSection('Carry on your phone', view.carryPack, 'download');
+    ['[data-after-itinerary-divider]', '[data-transport-maps-panel]', '[data-shopping-panel]', '[data-essentials-panel]'].forEach(function (selector) {
+      var target = root.querySelector(selector);
+      if (target) target.innerHTML = '';
+    });
+    renderPlanTourBookingCta(null);
+  }
+
+  function artifactRevealHtml(plan) {
+    var view = currentArtifactViewModel(plan);
+    if (!view || !view.days.length) return compactPreviewHtml(plan);
+    var activeDay = view.days.find(function (day) { return day.dayNumber === artifactRevealDay; }) || view.days[0];
+    artifactRevealDay = activeDay.dayNumber;
+    var secondaryPdfDay = view.days.length > 1 ? (activeDay.dayNumber === 1 ? view.days[1] : activeDay) : null;
+    var pdfMiniPages = artifactPdfMiniPageHtml(view, view.days[0], 3) + (secondaryPdfDay ? artifactPdfMiniPageHtml(view, secondaryPdfDay, Math.min(view.delivery.pdfPageCount, secondaryPdfDay.dayNumber + 2)) : '');
+    return artifactAnswerReceiptHtml(view) +
+      '<section class="bw-artifact-intro"><h2>' + escapeHtml(view.decisionReceipt.headline) + '</h2><div><img src="' + escapeHtml(YUSUF_GUIDE_PHOTO_URL) + '" alt="Yusuf, BerlinWalk guide"><p><strong>Hi, I’m Yusuf.</strong> ' + escapeHtml(view.decisionReceipt.guideNote) + '</p></div></section>' +
+      artifactWeatherHtml(view) +
+      artifactDayTabsMobileHtml(view, activeDay) +
+      '<section class="bw-artifact-day-grid" data-day-count="' + view.days.length + '" aria-label="Your Berlin day structure">' + view.days.map(function (day) { return artifactDayProofHtml(day, day.dayNumber === activeDay.dayNumber); }).join('') + '</section>' +
+      artifactDeliveryBandHtml(view) +
+      artifactInlineOfferHtml(view) +
+      '<section class="bw-artifact-product-preview">' +
+        '<div><h3>On your phone</h3>' + artifactPhonePreviewHtml(view, activeDay) + '</div>' +
+        '<div id="bw-artifact-pdf-preview"><h3>As a PDF (' + view.delivery.pdfPageCount + ' pages)</h3><div>' + pdfMiniPages + '</div></div>' +
+      '</section>' +
+      artifactComparisonHtml(view);
+  }
+
   function updateCompactOfferCopy(plan) {
     var days = ((plan && plan.days) || []).length || Number(state.tripLength) || 1;
-    var cta = root.querySelector('[data-pro-cta]');
+    var ctas = root.querySelectorAll('[data-pro-cta]');
     var note = root.querySelector('[data-pro-note]');
-    if (cta) cta.textContent = 'Full ' + days + '-day plan — €7.99';
+    ctas.forEach(function (cta) {
+      cta.textContent = cta.closest('.bw-artifact-inline-offer')
+        ? 'Unlock this ' + days + '-day plan — €7.99'
+        : 'Full ' + days + '-day plan — €7.99';
+    });
     if (note) note.textContent = 'Included in your ' + days + '-day plan:';
     root.querySelectorAll('[data-compact-benefit-icon]').forEach(function (target) {
       target.innerHTML = compactBenefitIcon(target.getAttribute('data-compact-benefit-icon'));
@@ -13666,7 +15591,7 @@
     var preview = root.querySelector('[data-compact-preview]');
     if (!preview) return;
     preview.hidden = unlocked || !planGenerated;
-    preview.innerHTML = (!unlocked && planGenerated) ? compactPreviewHtml(plan) : '';
+    preview.innerHTML = (!unlocked && planGenerated) ? artifactRevealHtml(plan) : '';
     updateCompactOfferCopy(plan);
   }
 
@@ -14930,6 +16855,11 @@
   }
 
   function applyTripPreset(key) {
+    if (entitlementVerified && purchasedArtifactV3) {
+      syncInputsFromState();
+      setActionStatus('Your purchased itinerary stays fixed. Open a fresh planner session to build a different trip.');
+      return;
+    }
     var preset = TRIP_PRESETS.find(function (item) {
       return item.key === key;
     });
@@ -18848,7 +20778,7 @@
       if (state.arrivalTime === 'evening') return "Take the ABC train straight to your base. Do not attempt sightseeing tonight. Just sleep. The city isn't going anywhere.";
       if (state.arrivalTime === 'afternoon') return "Ride the train in, drop your bags, and keep your exploring strictly within a 15-minute walking radius.";
       if (arrivalDayTourEligible()) return "Hop on the ABC train, drop your bags, and head to the BerlinWalk tour. I will meet you at the World Clock.";
-      return "Catch the train, dump the luggage, and take a super relaxed stroll near your bed.";
+      return 'Take the train to your base, leave your luggage, then keep the first walk close to where you are staying.';
     }
     if (state.arrivalPoint === 'hbf') {
       if (state.arrivalTime === 'evening') return "Arrive at Hauptbahnhof and head directly to your hotel. Keep tonight extremely lazy.";
@@ -19024,17 +20954,17 @@
         placeIds: ['museum_island', 'brandenburg_gate', 'reichstag']
       },
       food: {
-        title: 'Food and neighborhoods',
-        theme: 'Local flavors',
+        title: 'Kreuzberg through food',
+        theme: 'Markets and local food',
         accent: '#D94D5C',
         bg: '#FFF0F3',
         blocks: [
-          { time: 'Morning', title: 'Prenzlauer Berg coffee walk', copy: 'Start with Kastanienallee and a proper coffee pause. This is the better food day rhythm before the city gets busy.' },
-          { time: 'Lunch', title: 'Lunch nearby', copy: '' },
-          { time: 'Afternoon', title: 'Hackesche Hofe courtyards', copy: 'Use Hackesche Hofe as the afternoon anchor. If rain wins, stay inside the courtyards and make the cafe stop longer.' },
-          { time: 'Evening', title: 'Dinner', copy: '' }
+          { time: 'Morning', title: 'Markthalle Neun and the Kreuzberg streets', copy: 'Start at Markthalle Neun, then walk the nearby Kreuzberg streets before lunch.' },
+          { time: 'Lunch', title: 'Lunch at Markthalle Neun', copy: '' },
+          { time: 'Afternoon', title: 'Oranienstraße food and cafe stop', copy: 'Use Oranienstraße for the afternoon food layer. If rain wins, stay inside a cafe instead of adding another district.' },
+          { time: 'Evening', title: 'Dinner on Oranienstraße', copy: '' }
         ],
-        placeIds: ['markthalle_neun', 'hackesche_hofe', 'kastanienallee']
+        placeIds: ['markthalle_neun', 'oranienstrasse']
       },
       free: {
         title: 'Low-budget day',
@@ -19056,24 +20986,24 @@
         bg: '#F5F0FF',
         blocks: [
           { time: 'Morning', title: 'Sleep in and keep the morning light', copy: 'Protect the morning. The biggest mistake before a Berlin night is trying to win the step-count competition.' },
-          { time: 'Lunch', title: 'Lunch nearby', copy: '' },
+          { time: 'Lunch', title: 'Lunch on Oranienstraße', copy: '' },
           { time: 'Afternoon', title: 'Rest and pick one night area', copy: 'Use the afternoon for food, rest, and one clear night area. If energy drops, keep the evening to Friedrichshain bars instead of clubs.' },
           { time: 'Evening', title: 'Drinks and clubs', copy: '' }
         ],
         placeIds: ['raw_gelande', 'oranienstrasse', 'simon_dach_strasse']
       },
       local: {
-        title: 'Neighborhood day',
-        theme: 'Local rhythm',
+        title: 'West Berlin at a slower pace',
+        theme: 'Charlottenburg local rhythm',
         accent: '#6D7278',
         bg: '#F1F3F4',
         blocks: [
-          { time: 'Morning', title: 'Kulturbrauerei and Prenzlauer Berg', copy: 'Start around Kulturbrauerei and keep the pace slow. This is a neighborhood day, not a checklist day.' },
-          { time: 'Lunch', title: 'Lunch nearby', copy: '' },
-          { time: 'Afternoon', title: 'Lietzensee slow hour', copy: 'Use Lietzensee as the quiet afternoon anchor. If you are staying north, switch this to a longer Kulturbrauerei loop.' },
-          { time: 'Evening', title: 'Dinner near base', copy: '' }
+          { time: 'Morning', title: 'Savignyplatz bookshops and cafes', copy: 'Start at Savignyplatz and keep the pace slow around the bookshops and side streets.' },
+          { time: 'Lunch', title: 'Lunch around Savignyplatz', copy: '' },
+          { time: 'Afternoon', title: 'Lietzensee slow hour', copy: 'Use Lietzensee as the quiet afternoon anchor and walk only as much of the lake path as feels useful.' },
+          { time: 'Evening', title: 'Dinner in Charlottenburg', copy: '' }
         ],
-        placeIds: ['kulturbrauerei', 'savignyplatz', 'lietzensee']
+        placeIds: ['savignyplatz', 'lietzensee']
       },
       potsdam: {
         title: 'Potsdam palace day',
@@ -19086,7 +21016,7 @@
           { time: 'Afternoon', title: 'Sanssouci Palace gardens', copy: 'Use Sanssouci as the main anchor and keep the park walk unhurried. If the palace is closed, make the park the point and skip the indoor ticket.' },
           { time: 'Evening', title: 'Dinner near base', copy: '' }
         ],
-        placeIds: ['potsdam_hbf', 'sanssouci', 'charlottenburg_palace']
+        placeIds: ['potsdam_hbf', 'sanssouci']
       }
     };
     return templates[key] || templates.local;
@@ -19393,6 +21323,15 @@
     return output.slice(0, 4);
   }
 
+  function coherentTemplatePlaceIds(placeIds) {
+    var seen = {};
+    return (placeIds || []).filter(function (placeId) {
+      if (!placeId || seen[placeId] || !placeFor(placeId)) return false;
+      seen[placeId] = true;
+      return true;
+    }).slice(0, 4);
+  }
+
   function templateVariant(template, data) {
     var clone = cloneDayTemplate(template);
     Object.keys(data || {}).forEach(function (key) {
@@ -19426,14 +21365,16 @@
     if (template && template.isTourFramework) {
       variant = cloneDayTemplate(template);
       variant.isTourFramework = true;
-      variant.placeIds = uniqueTourPlaceIdsForDay(variant.placeIds, usedIds, fallbacks[key] || []);
+      // Keep the route anchors attached to the copy that was written for them.
+      // Replacing used places without rewriting the blocks creates false maps.
+      variant.placeIds = coherentTemplatePlaceIds(variant.placeIds);
       return variant;
     }
 
     if (repeated && key === 'history') {
       variant = templateVariant(template, {
-        title: 'Government quarter, memorials, and old Mitte',
-        theme: 'Central history without repeats',
+        title: 'Three layers of central Berlin',
+        theme: 'Government, memory, and old Mitte',
         blocks: [
           { time: 'Morning', title: 'Government quarter and Holocaust Memorial', copy: 'Start with the memorials and the government quarter. Keep the morning focused.' },
           { time: 'Lunch', title: 'Lunch before old Mitte', copy: '' },
@@ -19444,8 +21385,8 @@
       });
     } else if (repeated && key === 'wall') {
       variant = templateVariant(template, {
-        title: 'East Side Gallery and the Spree edge',
-        theme: 'Wall / Cold War without repeat stops',
+        title: 'The Wall’s eastern afterlife',
+        theme: 'Cold War traces by the Spree',
         blocks: [
           { time: 'Morning', title: 'East Side Gallery', copy: 'Walk the painted Wall section slowly. Start at the quieter end if it is busy.' },
           { time: 'Lunch', title: 'Lunch near the Spree', copy: '' },
@@ -19456,20 +21397,20 @@
       });
     } else if (repeated && key === 'free') {
       variant = templateVariant(template, {
-        title: 'Free Berlin away from the repeat anchors',
-        theme: 'Parks, open space, and cheap food',
+        title: 'One open-air day in former Tempelhof',
+        theme: 'Tempelhofer Feld without a ticket',
         blocks: [
           { time: 'Morning', title: 'Tempelhofer Feld', copy: 'Use Tempelhofer Feld as the main free outdoor space instead of adding more central monuments.' },
-          { time: 'Lunch', title: 'Cheap lunch nearby', copy: '' },
-          { time: 'Afternoon', title: 'Treptower Park riverside walk', copy: 'Add Treptower Park only if the day still feels easy. If rain wins, shorten this to a cafe and station-shop stop.' },
-          { time: 'Evening', title: 'Cheap food close by', copy: '' }
+          { time: 'Lunch', title: 'Lunch near Tempelhofer Feld', copy: '' },
+          { time: 'Afternoon', title: 'Tempelhofer Feld runway and picnic side', copy: 'Return to the field from a different entrance, or sit on the grass instead of crossing Berlin for another free sight.' },
+          { time: 'Evening', title: 'Dinner around Mehringdamm', copy: '' }
         ],
-        placeIds: ['tempelhofer_feld', 'treptower_park', 'victory_column']
+        placeIds: ['tempelhofer_feld']
       });
     } else if (repeated && key === 'museums') {
       variant = templateVariant(template, {
-        title: 'Charlottenburg Palace and west-side calm',
-        theme: 'Museum day without repeating Mitte',
+        title: 'Royal West Berlin at a slower pace',
+        theme: 'Charlottenburg palace and lake',
         blocks: [
           { time: 'Morning', title: 'Charlottenburg Palace', copy: 'Use Charlottenburg Palace as the main stop. If the interior is closed, make the gardens the point and skip the ticket.' },
           { time: 'Lunch', title: 'Lunch in Charlottenburg', copy: '' },
@@ -19481,7 +21422,7 @@
     }
 
     variant = cloneDayTemplate(variant);
-    variant.placeIds = uniquePlaceIdsForDay(variant.placeIds, usedIds, fallbacks[key] || []);
+    variant.placeIds = coherentTemplatePlaceIds(variant.placeIds);
     return variant;
   }
 
@@ -19620,7 +21561,7 @@
     var addon = {
       time: profile.slow ? 'Pause' : 'Nearby option',
       window: '30-45 min',
-      title: 'Keep it close',
+      title: 'Optional stop near ' + lastLabel,
       copy: 'Use this only if you still have energy. Stay near ' + lastLabel + ' instead of crossing Berlin.'
     };
 
@@ -19652,7 +21593,7 @@
     }
 
     if (type === 'wall') {
-      addon.title = rainy ? 'Nearby rain-safe finish' : 'Oberbaum Bridge or Spree edge';
+      addon.title = rainy ? 'Oberbaum Bridge or a covered Kreuzberg stop' : 'Oberbaum Bridge or Spree edge';
       addon.copy = rainy
         ? 'After East Side Gallery, keep the backup nearby: a short Spree edge, Oberbaum Bridge, or a cafe/covered stop toward Kreuzberg. No second Wall route.'
         : 'After East Side Gallery, use Oberbaum Bridge or the Spree edge for 20-40 minutes. It is a close finish, not a new route.';
@@ -19660,7 +21601,7 @@
     }
 
     if (type === 'food') {
-      addon.title = 'One cafe or courtyard nearby';
+      addon.title = 'Cafe or courtyard near ' + lastLabel;
       addon.copy = rainy
         ? 'Use a covered market, cafe, or courtyard near ' + lastLabel + '. Keep the food day in one area.'
         : 'Add one cafe, courtyard, or dessert stop near ' + lastLabel + '. Do not turn dinner into a transfer.';
@@ -19668,7 +21609,7 @@
     }
 
     if (type === 'free') {
-      addon.title = rainy ? 'Covered free/cheap fallback' : 'Short outdoor finish nearby';
+      addon.title = rainy ? 'Topography of Terror indoor fallback' : 'River or park finish near ' + lastLabel;
       addon.copy = rainy
         ? 'Switch the last outdoor idea to a nearby free museum-style exhibition, station shop, cafe, or covered market.'
         : 'Use one short nearby park, bridge, river edge, or exterior photo stop. Keep it free and close.';
@@ -19682,7 +21623,7 @@
     }
 
     if (type === 'local') {
-      addon.title = 'Cafe or local pause nearby';
+      addon.title = 'Cafe or park pause near ' + lastLabel;
       addon.copy = 'Add one cafe, bookshop, park bench, or small local stop near ' + lastLabel + '. Stay in the neighborhood.';
       return addon;
     }
@@ -19839,7 +21780,8 @@
       if (index === rainyIndex || !isIndoorHeavyDay(day) || day.weatherSwap || day.openingWarning || day.openingSwap) return;
       // Moving the exposed route only helps when its new date is genuinely
       // clearer. Do not claim a rain escape when both dates are rainy.
-      if (isLiveRainyWeather(dayWeatherFor(day))) return;
+      var candidateWeather = dayWeatherFor(day);
+      if (!candidateWeather || candidateWeather.kind !== 'live' || isLiveRainyWeather(candidateWeather)) return;
       if (!weatherSwapIsOpeningSafe(days, rainyIndex, index)) return;
       var distance = Math.abs(index - rainyIndex);
       if (distance < bestDistance) {
@@ -20161,6 +22103,300 @@
     };
   }
 
+  function artifactDecisionReceipt(plan) {
+    var labels = selectedLabels();
+    var first = (plan.days || [])[0] || {};
+    var reasons = [];
+    var arrivalLabel = labels.arrivalPoint || 'your arrival point';
+    var stayLabel = labels.stayArea || 'your Berlin base';
+    var earlyArrival = ['early', 'morning', 'lateMorning'].indexOf(state.arrivalTime) !== -1;
+    if (state.arrivalPoint === 'ber') {
+      reasons.push('BER comes first: the airport train and bag drop happen before sightseeing.');
+    } else {
+      reasons.push(arrivalLabel + ' is treated as the real start, then the route moves toward ' + stayLabel + '.');
+    }
+    reasons.push((earlyArrival ? 'Day 1 stays compact after arrival' : 'The late arrival keeps Day 1 intentionally short') + ' around ' + compactPreviewArea(first) + '.');
+    var mondayDay = (plan.days || []).find(function (day) { return dayStatus(day.dateKey).key === 'monday'; });
+    if (mondayDay) reasons.push('Day ' + mondayDay.dayNumber + ' carries a Monday opening check before any museum door.');
+    var tourSlot = tourSlotForPlan(plan);
+    if (tourSlot && tourSlot.insideTrip) reasons.push('The ' + tourSlot.startLabel + ' BerlinWalk from the World Clock anchors ' + tourSlot.dayLabel + '.');
+    if (state.mustHandle.indexOf('rain') !== -1) reasons.push('Each relevant day keeps one named covered backup close to its route.');
+    if (state.groupType === 'family') reasons.push('Family pace protects a real break instead of filling every hour.');
+    var note = state.arrivalPoint === 'ber'
+      ? 'I kept the first day around ' + compactPreviewArea(first) + ' after the BER transfer, so you can leave your bags and learn the area without crossing Berlin again.'
+      : 'I kept the first day around ' + compactPreviewArea(first) + ' after ' + arrivalLabel + ', so the first afternoon feels like an arrival, not a checklist.';
+    return {
+      headline: 'I have shaped your ' + plan.days.length + (plan.days.length === 1 ? ' day' : ' days') + ' in Berlin',
+      guideNote: note,
+      reasons: reasons.slice(0, 6)
+    };
+  }
+
+  function artifactIndoorBackup(day, excludedLabels) {
+    var type = dayPlanType(day);
+    var area = artifactAreaForDay(day);
+    var candidates = {
+      wall: ['the Tränenpalast exhibition at Friedrichstraße', 'Topography of Terror'],
+      potsdam: ['Museum Barberini in Potsdam', 'the covered Potsdam Hauptbahnhof concourse'],
+      food: ['Markthalle Neun in Kreuzberg', 'Berlinische Galerie in Kreuzberg'],
+      local: area.indexOf('Charlottenburg') !== -1
+        ? ['Museum Berggruen in Charlottenburg', 'Bikini Berlin']
+        : ['the Museum in der Kulturbrauerei', 'the Humboldt Forum foyer'],
+      nightlife: ['the covered Kulturbrauerei complex', 'the Hackesche Höfe courtyards'],
+      free: ['the Humboldt Forum foyer and exhibitions', 'Topography of Terror'],
+      museums: ['Museum Berggruen in Charlottenburg', 'the Humboldt Forum exhibitions', 'Topography of Terror'],
+      history: ['Topography of Terror', 'the Humboldt Forum exhibitions']
+    }[type] || ['Topography of Terror', 'the Humboldt Forum foyer'];
+    var excluded = (excludedLabels || []).map(function (label) { return artifactHeadlineKey(label); });
+    return candidates.find(function (candidate) {
+      var key = artifactHeadlineKey(candidate);
+      return !excluded.some(function (excludedKey) {
+        return excludedKey && (key.indexOf(excludedKey) !== -1 || excludedKey.indexOf(key) !== -1);
+      });
+    }) || 'the Humboldt Forum foyer';
+  }
+
+  function artifactArrivalIndoorBackup() {
+    return {
+      mitte: 'the Humboldt Forum foyer',
+      east: 'Markthalle Neun',
+      north: 'the Museum in der Kulturbrauerei',
+      west: 'Bikini Berlin',
+      unsure: 'the Humboldt Forum foyer'
+    }[state.stayArea] || 'the Humboldt Forum foyer';
+  }
+
+  function artifactPlanBForDay(day) {
+    var area = artifactAreaForDay(day);
+    var warning = day.openingSwap || day.openingWarning || (day.opening && day.opening.warning) || null;
+    if (warning) {
+      return cleanAiText(
+        warning.copy || warning.detail || warning.title,
+        'If the main indoor stop is closed, start at Topography of Terror and keep the rest of the route in ' + area + '.',
+        560
+      );
+    }
+    if (day.weatherSwap) {
+      var weatherBackup = artifactIndoorBackup(day, compactPreviewItems(day).map(function (item) { return item.map && item.map.label; }).filter(Boolean));
+      return cleanAiText(day.weatherSwap.copy || day.weatherSwap.action, 'Use ' + weatherBackup + ' and keep the rest of the route in ' + area + '.', 560);
+    }
+    var firstAnchor = compactPreviewItems(day)[0];
+    var anchor = firstAnchor && firstAnchor.map && firstAnchor.map.label ? firstAnchor.map.label : area;
+    if (day.dayNumber === 1) {
+      return 'If rain is steady after check-in, skip the outdoor loop and use ' + artifactArrivalIndoorBackup() + '; keep the rest of Day 1 close to ' + area + '.';
+    }
+    var visibleLabels = compactPreviewItems(day).map(function (item) { return item.map && item.map.label; }).filter(Boolean)
+      .concat(dayPlaceIds(day).map(function (placeId) {
+        var place = placeFor(placeId);
+        return place && place.label;
+      }).filter(Boolean));
+    var backup = artifactIndoorBackup(day, [anchor].concat(visibleLabels));
+    var type = day.planKey || dayPlanType(day);
+    if (type === 'free' && dayPlaceIds(day).length === 1) {
+      return 'If rain becomes steady, replace the ' + anchor + ' outdoor loop with ' + backup + '; check the opening details before leaving.';
+    }
+    var continuation = type === 'wall'
+      ? 'before continuing toward East Side Gallery and the Spree.'
+      : type === 'potsdam'
+        ? 'before continuing through Sanssouci Park.'
+        : 'before continuing with the route around ' + area + '.';
+    return 'If rain becomes steady, shorten the outdoor time at ' + anchor + ' and use ' + backup + ' ' + continuation;
+  }
+
+  function artifactDecisionForDay(day, index, plan) {
+    var labels = selectedLabels();
+    var dayNumber = Number(day.dayNumber || index + 1);
+    var area = artifactAreaForDay(day);
+    if (index === 0) {
+      if (state.arrivalPoint === 'ber') {
+        return 'The BER transfer and bag drop come before sightseeing; the first walk stays close to ' + area + '.';
+      }
+      return (labels.arrivalPoint || 'Your arrival point') + ' is the real start; after the bags are handled, Day 1 stays close to ' + area + '.';
+    }
+
+    var tourSlot = tourSlotForPlan(plan);
+    if (tourSlot && tourSlot.insideTrip && dayNumber === tourSlot.offset + 1) {
+      return 'The ' + tourSlot.startLabel + ' BerlinWalk at the World Clock anchors Day ' + dayNumber + '; the next stop stays in the historic centre.';
+    }
+
+    var actions = (day.blocks || []).filter(function (block, blockIndex) {
+      var time = String(block.time || '');
+      return !isTourBlock(block) &&
+        !isDayClosingBlock(day, block, blockIndex) &&
+        !/^(lunch|pause|nearby option|opening backup)$/i.test(time);
+    }).map(function (block) { return String(block.title || '').trim(); }).filter(Boolean);
+    var first = actions[0] || '';
+    var second = actions[1] || '';
+    var distance = routeDistanceSummary(day);
+    var firstKey = artifactHeadlineKey(first);
+    var secondKey = artifactHeadlineKey(second);
+    var sameAnchor = firstKey && secondKey && (firstKey.indexOf(secondKey) !== -1 || secondKey.indexOf(firstKey) !== -1);
+    var decision = first && second
+      ? (sameAnchor
+        ? 'Day ' + dayNumber + ' stays around ' + area + '; ' + first + ' is the anchor and the second block extends the same place.'
+        : distance.longestSegmentKm >= 2.2 || area.indexOf('→') !== -1
+          ? 'Day ' + dayNumber + ' uses public transport for the longer move: ' + first + '; then ' + second + '.'
+          : 'Day ' + dayNumber + ' stays around ' + area + ': ' + first + ' first; then ' + second + '.')
+      : first
+        ? 'Day ' + dayNumber + ' makes ' + first + ' the main anchor and keeps the rest of the route nearby.'
+        : 'Day ' + dayNumber + ' keeps its stops connected around ' + area + '.';
+    var hasIndoorStop = dayPlaceIds(day).some(function (placeId) {
+      var place = placeFor(placeId);
+      return Boolean(place && place.indoor);
+    });
+    if (dayStatus(day.dateKey).key === 'monday' && (hasIndoorStop || /museum|palace|gallery|exhibition/i.test(actions.join(' ')))) {
+      decision += ' Monday opening risk is checked before any museum visit.';
+    }
+    return decision;
+  }
+
+  function artifactMovementForDay(day) {
+    var route = dayRouteAction(day);
+    var distance = routeDistanceSummary(day);
+    var mode = dayRouteTravelMode(day);
+    if (mode === 'transit') return 'Public transport + walk';
+    if (distance.longestSegmentKm >= 2.2) return 'Walk + public transport';
+    return 'Walk';
+  }
+
+  function artifactBeforeYouGo(plan) {
+    var items = [{ title: 'Arrival ticket', detail: ticketNudge() }];
+    var slot = tourSlotForPlan(plan);
+    if (slot && slot.insideTrip) {
+      items.push({
+        title: 'World Clock meeting point',
+        detail: slot.dayLabel + ' at ' + slot.startLabel + '. Arrive 10–15 minutes early.',
+        url: plannerBookingUrl('artifact_before_you_go')
+      });
+    }
+    (plan.days || []).forEach(function (day) {
+      var reservation = officialReservationAction(day);
+      if (!reservation || items.length >= 8) return;
+      items.push({ title: reservation.label, detail: 'Use the official booking page before Day ' + day.dayNumber + '.', url: reservation.url });
+    });
+    items.push({ title: 'Final opening check', detail: 'Recheck the exact indoor stops 48 hours before each day.' });
+    return items;
+  }
+
+  function artifactCarryPack(plan) {
+    var items = (plan.days || []).map(function (day) {
+      return {
+        title: 'Day ' + day.dayNumber + ' route',
+        detail: artifactAreaForDay(day) + ' · ' + artifactMovementForDay(day),
+        url: dayDirectionsUrl(day)
+      };
+    });
+    items.push({ title: 'BerlinWalk meeting point', detail: 'World Clock, Alexanderplatz.', url: plannerBookingUrl('artifact_carry_pack') });
+    items.push({ title: 'Offline PDF backup', detail: 'Download the same itinerary before leaving Wi-Fi.' });
+    return items.slice(0, 10);
+  }
+
+  function planArtifactSourceV3(plan) {
+    var sourceV2 = planArtifactSourceV2(plan, 'current');
+    var labels = selectedLabels();
+    var decisionReceipt = artifactDecisionReceipt(plan);
+    return {
+      engineVersion: '2026.07.20-artifact-v3.0',
+      createdAt: new Date().toISOString(),
+      quality: { status: 'pass', validatorVersion: 'plan-artifact-v3-browser-1' },
+      input: sourceV2.input,
+      decisionReceipt: decisionReceipt,
+      trip: {
+        title: plan.title,
+        summary: plan.summary,
+        displayDate: plan.displayDate,
+        dateRange: compactPreviewDateRange(plan),
+        stayArea: labels.stayArea,
+        pace: labels.pace,
+        ticket: plan.ticket,
+        tourFit: plan.tourFit
+      },
+      days: (sourceV2.days || []).map(function (daySource, index) {
+        var day = plan.days[index];
+        var photo = dayPhotoForType(dayVisualType(day));
+        var area = artifactAreaForDay(day);
+        var anchors = (daySource.places || []).slice(0, 5);
+        var title = artifactDayPromise({
+          dayNumber: daySource.dayNumber,
+          title: daySource.title,
+          theme: daySource.theme,
+          area: area,
+          anchors: anchors
+        }, daySource.blocks || []);
+        return Object.assign({}, daySource, {
+          title: title,
+          area: area,
+          movement: artifactMovementForDay(day),
+          accent: day.accent || '#1B5E20',
+          background: day.bg || '#F2F8E8',
+          photo: { src: photo.src, alt: photo.alt },
+          route: Object.assign({}, daySource.route, { label: 'Open the complete Day ' + day.dayNumber + ' route' }),
+          anchors: anchors,
+          planB: artifactPlanBForDay(day),
+          decision: artifactDecisionForDay(day, index, plan)
+        });
+      }),
+      beforeYouGo: artifactBeforeYouGo(plan),
+      carryPack: artifactCarryPack(plan),
+      delivery: {
+        browser: true,
+        pdf: true,
+        rendererVersion: 'artifact-v3-browser-pdf-1'
+      }
+    };
+  }
+
+  function buildPlanArtifactV3(plan) {
+    if (!window.BWPlanArtifactV3) return null;
+    var artifact = window.BWPlanArtifactV3.normalizeArtifact(planArtifactSourceV3(plan));
+    var errors = window.BWPlanArtifactV3.validateArtifact(artifact);
+    if (errors.length) throw new Error('PlanArtifactV3 validation failed: ' + errors.join(','));
+    return artifact;
+  }
+
+  function weatherOverlaySourceV1(plan) {
+    return {
+      generatedAt: new Date().toISOString(),
+      timezone: TIMEZONE,
+      source: 'open-meteo',
+      days: (plan.days || []).map(function (day) {
+        var weather = dayWeatherFor(day) || climateWeatherForDate(day.dateKey, 'live_unavailable');
+        return {
+          dateKey: day.dateKey,
+          kind: weather.kind || (weather.mode === 'Live forecast' ? 'live' : 'typical'),
+          isForecast: weather.isForecast === true,
+          source: weather.source || (weather.mode === 'Live forecast' ? 'open-meteo' : 'berlin-monthly-climate'),
+          checkedAt: weather.checkedAt || '',
+          reason: weather.reason || '',
+          highC: weather.highC,
+          lowC: weather.lowC,
+          rainProbability: weather.rainProbability,
+          precipitationMm: weather.precipitationMm,
+          windKmh: weather.windKmh,
+          weatherCode: weather.weatherCode,
+          title: weather.title,
+          cue: weather.cue
+        };
+      })
+    };
+  }
+
+  function buildWeatherOverlayV1(plan) {
+    if (!window.BWPlanArtifactV3) return null;
+    return window.BWPlanArtifactV3.normalizeWeatherOverlay(weatherOverlaySourceV1(plan));
+  }
+
+  function currentArtifactViewModel(plan) {
+    if (!window.BWPlanArtifactV3) return null;
+    try {
+      var artifact = purchasedArtifactV3 || latestArtifactV3 || buildPlanArtifactV3(plan);
+      var overlay = latestWeatherOverlayV1 || buildWeatherOverlayV1(purchasedArtifactV3 || plan);
+      return artifact ? window.BWPlanArtifactV3.createViewModel(artifact, overlay || {}) : null;
+    } catch (error) {
+      return null;
+    }
+  }
+
   function planArtifactScenarioSourceV2(scenario) {
     var previousState = {
       arrivalDate: state.arrivalDate,
@@ -20210,7 +22446,26 @@
     script.onload = function () {
       if (!window.BWPlanArtifactV2) return;
       window.__BW_TP_QA__ = window.BWPlanArtifactV2.attach(window.__BW_TP_ENGINE_V2__);
+      window.__BW_TP_V3_QA__ = Object.freeze({
+        currentArtifact: function () {
+          var artifact = latestArtifactV3 || buildPlanArtifactV3(latestPlan || buildPlan());
+          return artifact ? JSON.parse(JSON.stringify(artifact)) : null;
+        },
+        currentWeather: function () {
+          var overlay = latestWeatherOverlayV1 || buildWeatherOverlayV1(latestPlan || buildPlan());
+          return overlay ? JSON.parse(JSON.stringify(overlay)) : null;
+        },
+        checkoutContract: function () {
+          var artifact = latestArtifactV3 || buildPlanArtifactV3(latestPlan || buildPlan());
+          return {
+            clientContractVersion: PLAN_ARTIFACT_CLIENT_CONTRACT_VERSION,
+            planId: planIdentity(),
+            planArtifact: artifact ? JSON.parse(JSON.stringify(artifact)) : null
+          };
+        }
+      });
       document.documentElement.setAttribute('data-bw-plan-artifact-v2', 'ready');
+      document.documentElement.setAttribute('data-bw-plan-artifact-v3', 'ready');
       try {
         var params = new URLSearchParams(window.location.search || '');
         if (params.get('qaArtifact') === '1') {
@@ -20222,6 +22477,19 @@
             document.body.appendChild(output);
           }
           output.textContent = JSON.stringify(window.__BW_TP_QA__.current());
+        }
+        if (params.get('qaArtifactV3') === '1') {
+          var outputV3 = document.getElementById('bw-plan-artifact-v3-output');
+          if (!outputV3) {
+            outputV3 = document.createElement('script');
+            outputV3.type = 'application/json';
+            outputV3.id = 'bw-plan-artifact-v3-output';
+            document.body.appendChild(outputV3);
+          }
+          outputV3.textContent = JSON.stringify({
+            checkoutContract: window.__BW_TP_V3_QA__.checkoutContract(),
+            weather: window.__BW_TP_V3_QA__.currentWeather()
+          });
         }
       } catch (error) {
         document.documentElement.setAttribute('data-bw-plan-artifact-v2', 'error');
@@ -20579,6 +22847,9 @@
     planNeedsUpdate = false;
     planGenerated = false;
     latestPlan = null;
+    latestArtifactV3 = null;
+    purchasedArtifactV3 = null;
+    latestWeatherOverlayV1 = null;
     aiEnhancement = null;
     aiStatus = 'idle';
     aiPlanSignature = '';
@@ -20593,6 +22864,12 @@
 
   function startPlanning() {
     if (planningInProgress) return;
+    if (entitlementVerified && purchasedArtifactV3) {
+      syncInputsFromState();
+      setActionStatus('Your purchased itinerary stays fixed. Its weather layer can still refresh without changing the route.');
+      syncPlannerFrame(root.querySelector('[data-full-plan]'), true);
+      return;
+    }
     if (!detailsStepStarted && !planGenerated) {
       showPlanDetailsStep();
       return;
@@ -20613,7 +22890,11 @@
     planGenerated = false;
     planNeedsUpdate = false;
     compactPreviewDay = 1;
+    artifactRevealDay = 1;
     latestPlan = null;
+    latestArtifactV3 = null;
+    purchasedArtifactV3 = null;
+    latestWeatherOverlayV1 = null;
     aiEnhancement = null;
     aiStatus = 'idle';
     aiPlanSignature = '';
@@ -20653,6 +22934,13 @@
     var plan = buildPlan();
     latestPlan = plan;
     ensureDailyWeatherForPlan(plan);
+    try {
+      latestArtifactV3 = buildPlanArtifactV3(plan);
+    } catch (artifactError) {
+      latestArtifactV3 = null;
+      track('bw_trip_planner_artifact_error', { stage: 'preview_build', reason: String(artifactError && artifactError.message || artifactError).slice(0, 120) });
+    }
+    latestWeatherOverlayV1 = buildWeatherOverlayV1(plan);
     renderPlanChrome(plan);
     setText('[data-result-date]', plan.displayDate);
     setText('[data-result-title]', plan.title);
@@ -20688,7 +22976,7 @@
       lockBox.innerHTML = unlocked ? '' : lockedPlanPreviewHtml(plan);
     }
 
-    if (unlocked) requestAiEnhancement();
+    if (unlocked && !activePaidArtifactV3()) requestAiEnhancement();
     renderFullPlan();
     updateLeadPanelText(plan);
     planNeedsUpdate = false;
@@ -20703,7 +22991,7 @@
   }
 
   function fullPlanContentReady() {
-    return Boolean(unlocked && planGenerated && (aiStatus === 'ready' || aiStatus === 'quota' || aiStatus === 'error'));
+    return Boolean(unlocked && planGenerated && (activePaidArtifactV3() || aiStatus === 'ready' || aiStatus === 'quota' || aiStatus === 'error'));
   }
 
   function revealFullPlanAfterGuide(plan, shouldScroll) {
@@ -20734,6 +23022,20 @@
       renderEssentials(plan);
       return;
     }
+    var paidArtifact = activePaidArtifactV3();
+    if (paidArtifact) {
+      var paidOverlay = latestWeatherOverlayV1 || buildWeatherOverlayV1(paidArtifact);
+      var paidView = window.BWPlanArtifactV3.createViewModel(paidArtifact, paidOverlay || {});
+      renderFullPlanArtifactV3(paidView);
+      if (fullActions) fullActions.hidden = false;
+      return;
+    }
+    var legacyCopyLinkButton = root.querySelector('[data-copy-plan-link]');
+    var legacyWhatsappLink = root.querySelector('[data-share-whatsapp]');
+    var legacyPrintButton = root.querySelector('[data-print-plan]');
+    if (legacyCopyLinkButton) legacyCopyLinkButton.textContent = 'Copy plan link to share';
+    if (legacyWhatsappLink) legacyWhatsappLink.setAttribute('aria-label', 'Share this Berlin plan on WhatsApp');
+    if (legacyPrintButton) legacyPrintButton.hidden = false;
     var slot = tourSlotForPlan(plan);
     var tourLine = slot && !slot.booked
       ? ' Recommended BerlinWalk: ' + (slot.insideTrip ? slot.dayLabel + ' at ' + slot.startLabel : slot.dayLabel + ' at ' + slot.startLabel) + '.'
@@ -20841,7 +23143,8 @@
     var proOfferPanel = root.querySelector('[data-pro-offer-panel]');
     if (proOfferPanel) proOfferPanel.hidden = unlocked || !planGenerated;
     var dashboard = root.querySelector('[data-unlocked-result-panels]');
-    if (dashboard) dashboard.hidden = !fullPlanContentReady();
+    if (dashboard) dashboard.hidden = Boolean(activePaidArtifactV3()) || !fullPlanContentReady();
+    if (activePaidArtifactV3()) clearUnlockedResultPanels();
     if (!unlocked || !planGenerated) clearUnlockedResultPanels();
     if (planGenerated && !unlocked && !gateViewTracked) {
       gateViewTracked = true;
@@ -20863,7 +23166,10 @@
     var pdf = root.querySelector('[data-download-pdf]');
     var print = root.querySelector('[data-print-plan]');
     if (pdf) pdf.disabled = !fullPlanContentReady();
-    if (print) print.disabled = !fullPlanContentReady();
+    if (print) {
+      print.disabled = !fullPlanContentReady();
+      print.hidden = Boolean(activePaidArtifactV3());
+    }
     var unlockButton = root.querySelector('[data-unlock-plan]');
     if (unlockButton) {
       unlockButton.disabled = Boolean(planNeedsUpdate);
@@ -20894,7 +23200,13 @@
     setText('[data-weather-label-three]', summary.metrics[2].label);
     setText('[data-weather-wind]', summary.metrics[2].value);
     setText('[data-weather-advice]', summary.advice);
-    if (latestPlan && planGenerated && unlocked) {
+    if (latestPlan && planGenerated && unlocked && purchasedArtifactV3) {
+      ensureDailyWeatherForPlan({ days: purchasedArtifactV3.days || [] });
+      latestWeatherOverlayV1 = buildWeatherOverlayV1(purchasedArtifactV3);
+      renderFullPlan();
+      return;
+    }
+    if (latestPlan && planGenerated) {
       var previousRouteSignature = planRouteSignature(latestPlan);
       latestPlan = buildPlan();
       var routeChanged = previousRouteSignature !== planRouteSignature(latestPlan);
@@ -20905,11 +23217,22 @@
         aiRequestId += 1;
       }
       ensureDailyWeatherForPlan(latestPlan);
+      try {
+        latestArtifactV3 = buildPlanArtifactV3(latestPlan);
+      } catch (artifactError) {
+        latestArtifactV3 = null;
+        track('bw_trip_planner_artifact_error', { stage: 'weather_refresh', reason: String(artifactError && artifactError.message || artifactError).slice(0, 120) });
+      }
+      latestWeatherOverlayV1 = buildWeatherOverlayV1(latestPlan);
       renderPlanChrome(latestPlan);
-      renderUnlockedResultPanels(latestPlan);
-      renderPlanBoard(latestPlan);
-      renderFullPlan();
-      if (routeChanged) requestAiEnhancement();
+      if (unlocked) {
+        renderUnlockedResultPanels(latestPlan);
+        renderPlanBoard(latestPlan);
+        renderFullPlan();
+        if (routeChanged) requestAiEnhancement();
+      } else {
+        renderCompactPlanPreview(latestPlan);
+      }
     }
   }
 
@@ -20918,7 +23241,7 @@
       latitude: String(COORDS.latitude),
       longitude: String(COORDS.longitude),
       timezone: TIMEZONE,
-      forecast_days: '16',
+      forecast_days: String(OPEN_METEO_FORECAST_DAYS),
       temperature_unit: 'celsius',
       wind_speed_unit: 'kmh',
       precipitation_unit: 'mm',
@@ -21124,13 +23447,25 @@
     return 'Good walking rhythm: one light layer is usually enough.';
   }
 
-  function dailyWeatherFromForecast(dateKey, forecast, mode) {
+  function dailyWeatherFromForecast(dateKey, forecast, mode, reason) {
     var visual = weatherVisual(forecast.weatherCode, forecast);
     var tempLabel = Number.isFinite(forecast.temperature) ? Math.round(forecast.temperature) + ' C' : 'Check temp';
     var rainLabel = Number.isFinite(forecast.rainProbability) ? Math.round(forecast.rainProbability) + '% rain' : 'rain check';
+    var live = (mode || 'Live forecast') === 'Live forecast';
     return {
       dateKey: dateKey,
       mode: mode || 'Live forecast',
+      kind: live ? 'live' : 'typical',
+      isForecast: live,
+      source: live ? 'open-meteo' : 'berlin-monthly-climate',
+      checkedAt: live ? new Date().toISOString() : '',
+      reason: reason || (live ? 'inside_live_window' : 'outside_live_window'),
+      highC: Number.isFinite(forecast.temperature) ? Math.round(forecast.temperature) : null,
+      lowC: Number.isFinite(forecast.low) ? Math.round(forecast.low) : null,
+      rainProbability: Number.isFinite(forecast.rainProbability) ? Math.round(forecast.rainProbability) : null,
+      precipitationMm: Number.isFinite(forecast.precipitation) ? round(forecast.precipitation, 1) : null,
+      windKmh: Number.isFinite(forecast.windSpeed) ? Math.round(forecast.windSpeed) : null,
+      weatherCode: Number.isFinite(forecast.weatherCode) ? Number(forecast.weatherCode) : null,
       theme: visual.theme,
       icon: visual.icon,
       title: forecast.condition + ', ' + tempLabel,
@@ -21139,7 +23474,7 @@
     };
   }
 
-  function climateWeatherForDate(dateKey) {
+  function climateWeatherForDate(dateKey, reason) {
     var month = MONTH_CLIMATE[dateParts(dateKey).month - 1];
     var rainDayCount = parseInt(String(month.rainDays), 10);
     var rainProbability = Number.isFinite(rainDayCount) ? Math.round((rainDayCount / 30) * 100) : 0;
@@ -21147,16 +23482,27 @@
     return {
       dateKey: dateKey,
       mode: 'Monthly average',
+      kind: 'typical',
+      isForecast: false,
+      source: 'berlin-monthly-climate',
+      checkedAt: '',
+      reason: reason || 'outside_live_window',
+      highC: month.hi,
+      lowC: month.lo,
+      rainProbability: rainProbability,
+      precipitationMm: null,
+      windKmh: null,
+      weatherCode: null,
       theme: 'climate',
       icon: 'AVG',
-      title: month.name + ' average, ' + month.hi + ' C high',
+      title: 'Typical ' + month.name + ' conditions, ' + month.hi + ' C high',
       meta: month.lo + ' C low / ' + month.rainDays + ' rainy days',
-      cue: dailyWeatherCue({ temperature: avgTemp, rainProbability: rainProbability, windSpeed: 0, weatherCode: null }, 'Monthly average')
+      cue: 'Not a forecast. Use this for packing, then check live weather closer to arrival.'
     };
   }
 
   function fallbackWeatherForDate(dateKey) {
-    return climateWeatherForDate(dateKey);
+    return climateWeatherForDate(dateKey, 'live_unavailable');
   }
 
   function setDailyWeatherMap(map) {
@@ -21166,10 +23512,12 @@
   function liveDailyWeatherMap(data) {
     var map = {};
     tripDateKeys().forEach(function (dateKey) {
-      var forecast = extractDailyForecast(data, dateKey);
+      var offset = daysFromToday(dateKey);
+      var inLiveWindow = offset >= 0 && offset <= LIVE_FORECAST_MAX_OFFSET_DAYS;
+      var forecast = inLiveWindow ? extractDailyForecast(data, dateKey) : null;
       map[dateKey] = forecast
-        ? dailyWeatherFromForecast(dateKey, forecast, 'Live forecast')
-        : climateWeatherForDate(dateKey);
+        ? dailyWeatherFromForecast(dateKey, forecast, 'Live forecast', 'inside_live_window')
+        : climateWeatherForDate(dateKey, inLiveWindow ? 'live_unavailable' : 'outside_live_window');
     });
     return map;
   }
@@ -21177,7 +23525,7 @@
   function climateDailyWeatherMap() {
     var map = {};
     tripDateKeys().forEach(function (dateKey) {
-      map[dateKey] = climateWeatherForDate(dateKey);
+      map[dateKey] = climateWeatherForDate(dateKey, 'outside_live_window');
     });
     return map;
   }
@@ -21328,7 +23676,7 @@
       return;
     }
     var dayDiff = daysFromToday(state.arrivalDate);
-    if (dayDiff > FORECAST_MAX_DAYS || dayDiff < 0) {
+    if (dayDiff > LIVE_FORECAST_MAX_OFFSET_DAYS || dayDiff < 0) {
       setDailyWeatherMap(localMockRainDayMap(climateDailyWeatherMap()));
       renderClimateWeather();
       return;
@@ -21617,11 +23965,13 @@
       var raw = window.sessionStorage && window.sessionStorage.getItem(UNLOCK_KEY);
       if (!raw) return null;
       var parsed = JSON.parse(raw);
+      var artifactHash = String(parsed && parsed.artifactHash || '');
       if (
         parsed &&
         /^[a-z0-9_:-]{8,140}$/i.test(String(parsed.orderId || '')) &&
         /^[a-f0-9]{64}$/i.test(String(parsed.planIdHash || '')) &&
         String(parsed.entitlementToken || '').length > 24 &&
+        (!artifactHash || /^[a-f0-9]{64}$/i.test(artifactHash)) &&
         Number(parsed.expiresAt) > Date.now()
       ) return parsed;
       window.sessionStorage.removeItem(UNLOCK_KEY);
@@ -21644,10 +23994,88 @@
         orderId: String(record.orderId || '').slice(0, 140),
         planIdHash: String(record.planIdHash || '').toLowerCase().slice(0, 64),
         entitlementToken: String(record.entitlementToken || '').slice(0, 1200),
+        clientContractVersion: record.clientContractVersion === PLAN_ARTIFACT_CLIENT_CONTRACT_VERSION ? PLAN_ARTIFACT_CLIENT_CONTRACT_VERSION : '',
+        artifactHash: String(record.artifactHash || '').toLowerCase().slice(0, 64),
+        artifactSchemaVersion: String(record.artifactSchemaVersion || '').slice(0, 40),
+        artifactEngineVersion: String(record.artifactEngineVersion || '').slice(0, 120),
         // The server remains the authority on expiry, refund and plan match.
         expiresAt: Number(record.expiresAt) || (Date.now() + UNLOCK_MS)
       }));
     } catch (error) {}
+  }
+
+  function verifiedArtifactEnvelope(body) {
+    var envelope = body && body.planArtifact;
+    return envelope && typeof envelope === 'object' && envelope.artifact && typeof envelope.artifact === 'object' ? envelope : null;
+  }
+
+  function entitlementWithArtifact(record, envelope) {
+    if (!envelope) return Object.assign({}, record || {});
+    return Object.assign({}, record || {}, {
+      clientContractVersion: PLAN_ARTIFACT_CLIENT_CONTRACT_VERSION,
+      artifactHash: String(envelope.artifactHash || '').toLowerCase(),
+      artifactSchemaVersion: String(envelope.artifactSchemaVersion || ''),
+      artifactEngineVersion: String(envelope.artifactEngineVersion || '')
+    });
+  }
+
+  async function browserSha256Hex(value) {
+    if (!window.crypto || !window.crypto.subtle || typeof TextEncoder !== 'function') return '';
+    var digest = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(String(value || '')));
+    return Array.prototype.map.call(new Uint8Array(digest), function (byte) {
+      return byte.toString(16).padStart(2, '0');
+    }).join('');
+  }
+
+  function syncStateFromPurchasedArtifact(artifact) {
+    var input = artifact && artifact.input;
+    if (!input) return;
+    ['arrivalDate', 'arrivalTime', 'arrivalPoint', 'stayArea', 'groupType', 'firstTime', 'budgetStyle', 'pace', 'tourIntent'].forEach(function (key) {
+      if (typeof input[key] === 'string' && input[key]) state[key] = input[key];
+    });
+    state.tripLength = Math.max(1, Math.min(7, Number(input.tripLength) || (artifact.days || []).length || 1));
+    state.interests = Array.isArray(input.interests) && input.interests.length ? input.interests.slice() : ['history'];
+    state.mustHandle = Array.isArray(input.mustHandle) && input.mustHandle.length ? input.mustHandle.slice() : ['rain'];
+    syncInputsFromState();
+  }
+
+  async function installVerifiedPlanArtifact(body, record) {
+    var responseBody = body || {};
+    var envelope = verifiedArtifactEnvelope(responseBody);
+    if (!envelope && record && record.artifactHash) {
+      responseBody = await postTripPlannerPro({
+        action: 'get-artifact',
+        orderId: record.orderId,
+        token: record.entitlementToken,
+        planIdHash: record.planIdHash
+      });
+      envelope = verifiedArtifactEnvelope(responseBody);
+    }
+    if (!envelope) return entitlementWithArtifact(record, null);
+    if (!window.BWPlanArtifactV3) throw new Error('artifact_runtime_unavailable');
+    var hash = String(envelope.artifactHash || '').toLowerCase();
+    var schemaVersion = String(envelope.artifactSchemaVersion || '');
+    var engineVersion = String(envelope.artifactEngineVersion || '');
+    if (!/^[a-f0-9]{64}$/.test(hash) || schemaVersion !== window.BWPlanArtifactV3.SCHEMA_VERSION) {
+      throw new Error('artifact_envelope_invalid');
+    }
+    if (record && record.artifactHash && record.artifactHash !== hash) throw new Error('artifact_entitlement_mismatch');
+    var artifact = window.BWPlanArtifactV3.normalizeArtifact(envelope.artifact);
+    var errors = window.BWPlanArtifactV3.validateArtifact(artifact);
+    if (errors.length || artifact.engineVersion !== engineVersion) throw new Error('artifact_validation_failed');
+    var computedHash = await browserSha256Hex(window.BWPlanArtifactV3.stableStringify(artifact));
+    if (computedHash && computedHash !== hash) throw new Error('artifact_hash_mismatch');
+    var nextRecord = entitlementWithArtifact(record, envelope);
+    rememberEntitlement(nextRecord);
+    purchasedArtifactV3 = artifact;
+    latestArtifactV3 = artifact;
+    latestDailyWeather = {};
+    artifact.days.forEach(function (day) {
+      latestDailyWeather[day.dateKey] = climateWeatherForDate(day.dateKey, 'artifact_restore_pending_live_check');
+    });
+    latestWeatherOverlayV1 = buildWeatherOverlayV1(artifact);
+    syncStateFromPurchasedArtifact(artifact);
+    return nextRecord;
   }
 
   function resetLocalUnlockForQa() {
@@ -21903,12 +24331,13 @@
       updateUnlockUi();
       renderFullPlan();
     }
-    setActionStatus('Your Pro access is verified. The full trip plan is now open.');
+    setActionStatus(purchasedArtifactV3 ? 'Your purchased itinerary is verified. The phone view and PDF now use the same stored plan.' : 'Your Pro access is verified. The full trip plan is now open.');
     track('bw_trip_planner_pro_access_open', {
       offer_variant: PRO_OFFER_VARIANT,
       order_id: record.orderId,
       source: source || 'entitlement_restore'
     });
+    if (purchasedArtifactV3) loadWeather();
     refreshFdrEligibility();
   }
 
@@ -21929,8 +24358,15 @@
       planIdHash: record.planIdHash
     }).then(function (body) {
       if (body.entitled !== true) throw new Error('invalid_entitlement');
-      activateVerifiedPro(record, source);
-      return true;
+      var envelope = verifiedArtifactEnvelope(body);
+      var verifiedRecord = entitlementWithArtifact(Object.assign({}, record, {
+        expiresAt: Number(body.expiresAt) || record.expiresAt
+      }), envelope);
+      rememberEntitlement(verifiedRecord);
+      return installVerifiedPlanArtifact(body, verifiedRecord).then(function (installedRecord) {
+        activateVerifiedPro(installedRecord, source);
+        return true;
+      });
     }).catch(function () {
       entitlementVerified = false;
       unlocked = false;
@@ -21969,6 +24405,7 @@
         planIdHash: body.planIdHash,
         expiresAt: Date.now() + UNLOCK_MS
       };
+      record = entitlementWithArtifact(record, verifiedArtifactEnvelope(body));
       rememberEntitlement(record);
       fireVerifiedBrowserMetaPurchase(body.metaPurchase);
       track('bw_trip_planner_pro_purchase', { offer_variant: PRO_OFFER_VARIANT, order_id: record.orderId });
@@ -22049,6 +24486,14 @@
   }
 
   function whatsappShareText(plan) {
+    if (activePaidArtifactV3()) {
+      return [
+        'My Berlin trip inputs from BerlinWalk',
+        'Arrival: ' + plan.displayDate,
+        'Length: ' + selectedLabels().tripLength,
+        'Open the planner with these choices: ' + planShareUrl()
+      ].join('\n');
+    }
     return [
       'My Berlin plan from BerlinWalk',
       'Arrival: ' + plan.displayDate,
@@ -22420,7 +24865,7 @@
       return "Take a deep breath at " + first + ". It’s mind-blowing to see how the Berlin Wall just sliced through people's backyards. Take your time digesting that, then continue to " + second + " for the bigger Cold War picture without burning out.";
     }
     if (type === 'museums') {
-      return "Museum Island is a marathon, not a sprint. Sinking deep into " + first + " is a million times better than running through five galleries just to buy the gift shop magnets. Trust me, your feet (and your brain) will thank me.";
+      return 'Museum Island works best when you choose one collection. Give ' + first + ' the main part of the day, then use the river and ' + second + ' as a lighter finish.';
     }
     if (type === 'history') {
       return "Today is the heavy stuff: classic Berlin history. I would start at " + first + ", then continue toward " + second + " after enough coffee to see how royal Prussia became the restless capital Berlin is today.";
@@ -22681,20 +25126,32 @@
   }
 
   function handleProCheckout() {
-    var button = root.querySelector('[data-pro-cta]');
+    var buttons = root.querySelectorAll('[data-pro-cta]');
     var note = root.querySelector('[data-pro-note]');
     var tracking = tripPlannerTracking || initTripPlannerTracking() || {};
+    var checkoutArtifact = latestArtifactV3;
+    if (!checkoutArtifact && latestPlan && !planNeedsUpdate) {
+      try { checkoutArtifact = buildPlanArtifactV3(latestPlan); } catch (artifactError) { checkoutArtifact = null; }
+    }
+    if (!checkoutArtifact || planNeedsUpdate) {
+      if (note) note.textContent = 'I could not seal this exact itinerary yet. Update the preview and try again; no payment was started.';
+      setActionStatus('This itinerary is not ready for secure checkout yet. No payment was started.', true);
+      track('bw_trip_planner_pro_checkout_error', { reason: 'artifact_not_ready', fail_closed: true });
+      return;
+    }
     track('bw_trip_planner_pro_checkout_click', { offer_variant: PRO_OFFER_VARIANT, price_eur: PRO_PRICE_EUR });
-    if (button) {
+    buttons.forEach(function (button) {
       button.disabled = true;
       button.textContent = 'Opening secure checkout…';
-    }
+    });
     if (note) note.textContent = 'Opening a secure checkout for this exact plan…';
 
     var payload = {
       action: 'create-checkout',
+      clientContractVersion: PLAN_ARTIFACT_CLIENT_CONTRACT_VERSION,
       sessionId: tracking.sessionId || checkoutSessionId(),
       planId: planIdentity(),
+      planArtifact: checkoutArtifact,
       arrivalDate: state.arrivalDate,
       tripLength: state.tripLength,
       successUrl: plannerCheckoutReturnUrl(),
@@ -22736,10 +25193,8 @@
       track('bw_trip_planner_pro_checkout_error', { reason: String(error && error.message || error).slice(0, 100), fail_closed: true });
       if (note) note.textContent = 'Secure checkout is not available yet. Your free preview is still here and nothing was charged.';
       setActionStatus('Detailed-plan checkout is not available yet. No payment was started.', true);
-      if (button) {
-        button.disabled = false;
-        updateCompactOfferCopy(latestPlan || buildPlan());
-      }
+      buttons.forEach(function (button) { button.disabled = false; });
+      updateCompactOfferCopy(latestPlan || buildPlan());
     });
   }
 
@@ -23109,6 +25564,24 @@
 
   async function downloadPolishedPdf(Api) {
     setPdfDebug('start', '');
+    var storedArtifact = activePaidArtifactV3();
+    if (storedArtifact) {
+      if (!window.BWPlanArtifactPdfV3 || typeof window.BWPlanArtifactPdfV3.renderPdf !== 'function') {
+        throw new Error('PlanArtifactV3 PDF renderer is unavailable.');
+      }
+      setPdfDebug('artifact-v3-page-plan', '');
+      var storedOverlay = latestWeatherOverlayV1 || buildWeatherOverlayV1(storedArtifact);
+      var storedPdf = window.BWPlanArtifactPdfV3.renderPdf(Api, storedArtifact, storedOverlay || {}, { save: true });
+      setPdfDebug('artifact-v3-saved', 'pages=' + storedPdf.pageCount);
+      setActionStatus('PDF downloaded. It uses the same stored itinerary as your phone view.');
+      track('bw_trip_planner_pdf_download', {
+        success: true,
+        format: 'plan_artifact_v3',
+        trip_length: storedPdf.pagePlan.dayCount,
+        page_count: storedPdf.pageCount
+      });
+      return storedPdf;
+    }
     var plan = latestPlan || buildPlan();
     ensureDailyWeatherForPlan(plan);
     var labels = selectedLabels();
@@ -23689,7 +26162,7 @@
     setActionStatus('Loading PDF engine...');
     var api = await ensurePdfEngine();
     if (!api) {
-      setActionStatus('PDF engine did not load. Use Print plan instead.');
+      setActionStatus(activePaidArtifactV3() ? 'PDF engine did not load. Try again or keep using the browser plan.' : 'PDF engine did not load. Use Print plan instead.');
       track('bw_trip_planner_pdf_download', { success: false, reason: 'jspdf_unavailable' });
       return;
     }
@@ -25626,7 +28099,7 @@
     } catch (error) {
       setPdfDebug(window.__tripPlannerPdfStage || 'unknown', 'legacy stage=' + String(window.__tripPlannerPdfStage || 'unknown') + ' error=' + String(error && (error.stack || error.message || error.name) || error || 'empty error'));
       console.error('tripPlanner PDF failed', error);
-      setActionStatus('PDF had a layout hiccup. Use Print plan while I fix this view.');
+      setActionStatus(activePaidArtifactV3() ? 'PDF had a layout hiccup. Try again or keep using the browser plan.' : 'PDF had a layout hiccup. Use Print plan while I fix this view.');
       track('bw_trip_planner_pdf_download', { success: false, reason: 'pdf_exception' });
     }
   }
@@ -25654,7 +28127,7 @@
     setPdfDebug('engine', '');
     var api = await ensurePdfEngine();
     if (!api) {
-      setActionStatus('PDF engine did not load. Use Print plan instead.');
+      setActionStatus(activePaidArtifactV3() ? 'PDF engine did not load. Try again or keep using the browser plan.' : 'PDF engine did not load. Use Print plan instead.');
       track('bw_trip_planner_pdf_download', { success: false, reason: 'jspdf_unavailable' });
       return;
     }
@@ -25671,7 +28144,7 @@
       var detail = 'stage=' + String(window.__tripPlannerPdfStage || 'unknown') + ' | ' + pdfErrorDetail(error);
       setPdfDebug(window.__tripPlannerPdfStage || 'unknown', detail);
       console.error('tripPlanner PDF failed', detail, error);
-      setActionStatus('PDF had a layout hiccup. Use Print plan while I fix this view.');
+      setActionStatus(activePaidArtifactV3() ? 'PDF had a layout hiccup. Try again or keep using the browser plan.' : 'PDF had a layout hiccup. Use Print plan while I fix this view.');
       track('bw_trip_planner_pdf_download', { success: false, reason: 'pdf_exception', stage: window.__tripPlannerPdfStage || 'unknown' });
     }
   }
@@ -25902,6 +28375,11 @@
   root.addEventListener('click', function (event) {
     var option = event.target.closest('.bw-option');
     if (option) {
+      if (entitlementVerified && purchasedArtifactV3) {
+        syncInputsFromState();
+        setActionStatus('Your purchased itinerary stays fixed. Open a fresh planner session to build a different trip.');
+        return;
+      }
       var group = option.closest('[data-group]');
       var key = group && group.getAttribute('data-group');
       if (!key) return;
@@ -26037,6 +28515,77 @@
         arrival_date: state.arrivalDate,
         trip_length: state.tripLength,
         day_number: compactPreviewDay
+      });
+      return;
+    }
+
+    var artifactFullDayButton = event.target.closest('[data-artifact-full-day]');
+    if (artifactFullDayButton) {
+      var fullDayNumber = Number(artifactFullDayButton.getAttribute('data-artifact-full-day')) || 1;
+      var fullDayCard = root.querySelector('[data-day-card="' + fullDayNumber + '"]');
+      if (fullDayCard && fullDayCard.scrollIntoView) {
+        var reduceFullMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        fullDayCard.scrollIntoView({ behavior: reduceFullMotion ? 'auto' : 'smooth', block: 'start' });
+      }
+      track('bw_trip_planner_paid_day_jump', {
+        arrival_date: state.arrivalDate,
+        trip_length: state.tripLength,
+        day_number: fullDayNumber
+      });
+      return;
+    }
+
+    var artifactReceiptToggle = event.target.closest('[data-artifact-receipt-toggle]');
+    if (artifactReceiptToggle) {
+      var receipt = artifactReceiptToggle.closest('[data-artifact-receipt]');
+      var details = receipt && receipt.querySelector('[data-artifact-receipt-details]');
+      var expanded = artifactReceiptToggle.getAttribute('aria-expanded') === 'true';
+      artifactReceiptToggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      var receiptAction = artifactReceiptToggle.querySelector('strong');
+      if (receiptAction) receiptAction.textContent = expanded ? 'Edit details' : 'Close details';
+      if (details) details.hidden = expanded;
+      track('bw_trip_planner_artifact_receipt_toggle', {
+        arrival_date: state.arrivalDate,
+        trip_length: state.tripLength,
+        expanded: !expanded
+      });
+      reportPlannerHeight();
+      return;
+    }
+
+    var artifactDayButton = event.target.closest('[data-artifact-day]');
+    if (artifactDayButton) {
+      artifactRevealDay = Number(artifactDayButton.getAttribute('data-artifact-day')) || 1;
+      var artifactFocusSelector = artifactDayButton.classList.contains('bw-artifact-day-proof')
+        ? '.bw-artifact-day-proof[data-artifact-day="' + artifactRevealDay + '"]'
+        : (artifactDayButton.closest('.bw-artifact-phone-tabs')
+          ? '.bw-artifact-phone-tabs [data-artifact-day="' + artifactRevealDay + '"]'
+          : '.bw-artifact-day-tabs-mobile [data-artifact-day="' + artifactRevealDay + '"]');
+      renderCompactPlanPreview(latestPlan || buildPlan());
+      var restoredArtifactFocus = root.querySelector(artifactFocusSelector);
+      if (restoredArtifactFocus && restoredArtifactFocus.focus) restoredArtifactFocus.focus({ preventScroll: true });
+      track('bw_trip_planner_artifact_day_open', {
+        arrival_date: state.arrivalDate,
+        trip_length: state.tripLength,
+        day_number: artifactRevealDay
+      });
+      reportPlannerHeight();
+      return;
+    }
+
+    var artifactPreviewJump = event.target.closest('[data-artifact-scroll-phone], [data-artifact-pdf-preview]');
+    if (artifactPreviewJump) {
+      var artifactTarget = artifactPreviewJump.hasAttribute('data-artifact-pdf-preview')
+        ? root.querySelector('#bw-artifact-pdf-preview')
+        : root.querySelector('#bw-artifact-phone-preview');
+      if (artifactTarget && artifactTarget.scrollIntoView) {
+        var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        artifactTarget.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+      }
+      track('bw_trip_planner_artifact_product_preview_click', {
+        arrival_date: state.arrivalDate,
+        trip_length: state.tripLength,
+        preview: artifactPreviewJump.hasAttribute('data-artifact-pdf-preview') ? 'pdf' : 'phone'
       });
       return;
     }
@@ -26210,6 +28759,11 @@
 
   root.addEventListener('change', function (event) {
     if (event.target && event.target.matches('[data-arrival-date]')) {
+      if (entitlementVerified && purchasedArtifactV3) {
+        event.target.value = state.arrivalDate;
+        setActionStatus('Your purchased itinerary stays fixed. Open a fresh planner session to build a different trip.');
+        return;
+      }
       trackFormStart('arrivalDate');
       state.arrivalDate = /^\d{4}-\d{2}-\d{2}$/.test(event.target.value || '') ? event.target.value : addDays(berlinTodayKey(), 14);
       event.target.value = state.arrivalDate;
