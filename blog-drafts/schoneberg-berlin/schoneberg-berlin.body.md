@@ -16,8 +16,8 @@ This is the single most useful thing to understand before you go. Schöneberg is
 
 There are four of them:
 
-- **Nollendorfplatz and Winterfeldtplatz** in the north: the market, the bars, the oldest gay quarter in Europe.
-- **The Akazienkiez**, around Akazienstraße and Eisenacher Straße: no chains, no department stores, and the part of Schöneberg that is simply a good place to live.
+- **Nollendorfplatz and Winterfeldtplatz** in the north: the market, the bars, and one of Berlin's oldest queer neighbourhoods.
+- **The Akazienkiez**, around Akazienstraße and Eisenacher Straße: independent shops and cafes rather than department stores, and the part of Schöneberg that is simply a good place to live.
 - **The Bayerisches Viertel**, around Bayerischer Platz: quiet, well-off, and carrying the most unusual memorial in Berlin.
 - **Rathaus Schöneberg and the Rote Insel** in the south: Kennedy's square, and the street where Marlene Dietrich was born.
 
@@ -45,11 +45,11 @@ The Wednesday market is a smaller, quieter thing that winds up in the early afte
 
 My advice: go on Saturday, go before 11:00, and eat there rather than planning lunch somewhere else. Then walk fifteen minutes south to Akazienstraße and keep going. That is the whole morning, and it is better than any three sights stitched together.
 
-One warning that catches people out: on public holidays there is no market at all, and **German shops do not open on Sundays**, which turns the Akazienkiez into a nice but very closed street. If markets are your thing generally, [Berlin's flea markets](/post/berlin-flea-markets) run on a different rhythm and fill the Sunday gap.
+One warning that catches people out: on public holidays there is no market at all, and **most German shops do not open on Sundays**, which turns the Akazienkiez into a nice but very quiet street. If markets are your thing generally, [Berlin's flea markets](/post/berlin-flea-markets) run on a different rhythm and fill the Sunday gap.
 
 ## Hauptstraße 155: Bowie's Berlin is a doorway
 
-Between 1976 and 1978, David Bowie lived on the first floor of Hauptstraße 155 and made _Low_, _"Heroes"_ and _Lodger_ here. Iggy Pop came with him and later moved into the rear building of the same address. It is, by a distance, the most requested Schöneberg address.
+Between 1976 and 1978, David Bowie lived on the first floor of Hauptstraße 155 during the Berlin years of _Low_, _"Heroes"_ and _Lodger_. Iggy Pop came with him and later moved into the rear building of the same address. It is, by a distance, the most requested Schöneberg address.
 
 ![The Berliner Gedenktafel for David Bowie mounted on the wall at Hauptstraße 155](blog-drafts/schoneberg-berlin/images/optimized/02-schoneberg-bowie-plaque-hauptstrasse-155.jpg)
 
@@ -57,7 +57,7 @@ The plaque went up in 2016. The first one was stolen within weeks and replaced w
 
 Here is the honest version of the visit. **It is an ordinary lived-in apartment house.** People come home with their shopping while you photograph the wall. The plaque, unveiled in August 2016 and quoting the Berlin trilogy, is everything there is to see, and it takes about four minutes.
 
-What makes the trip worth it is next door. **Café Neues Ufer at Hauptstraße 157** opened in 1977 as Anderes Ufer, one of the first gay cafés in Europe to put its life behind a plain street window instead of a curtain. Bowie drank here. Unlike the plaque, you can sit down in it, which turns a photograph of a doorway into an actual hour of your day. Nearest station is U Kleistpark on the U7.
+What makes the trip worth it is next door. **Café Neues Ufer at Hauptstraße 157** opened in 1977 as Anderes Ufer, one of West Berlin's early openly gay cafés, with its life visible through a plain street window rather than behind a curtain. Bowie drank here. Unlike the plaque, you can sit down in it, which turns a photograph of a doorway into an actual hour of your day. Nearest station is U Kleistpark on the U7.
 
 ## Nollendorfplatz, and a memorial from 1989
 
@@ -91,7 +91,7 @@ There is no entrance, no ticket and no building. You walk from one lamp post to 
 
 ## Rathaus Schöneberg: the square where Kennedy said it
 
-On **26 June 1963**, John F. Kennedy stood in front of [this building](https://www.berlin.de/en/attractions-and-sights/3560314-3104052-schoeneberg-town-hall.en.html) and told a crowd of several hundred thousand people "Ich bin ein Berliner". West Berlin had no city hall of its own after the division, so this district town hall served as the seat of West Berlin's government, which is why the most famous sentence of the Cold War was spoken in a suburban square rather than beside the Brandenburg Gate.
+On **26 June 1963**, John F. Kennedy stood in front of [this building](https://www.berlin.de/en/attractions-and-sights/3560314-3104052-schoeneberg-town-hall.en.html) and told a crowd of several hundred thousand people "Ich bin ein Berliner". With the Rotes Rathaus in East Berlin after the division, this district town hall became the seat of West Berlin's government, which is why the most famous sentence of the Cold War was spoken in a suburban square rather than beside the Brandenburg Gate.
 
 ![Rathaus Schöneberg seen from John-F-Kennedy-Platz, with its tall bell tower](blog-drafts/schoneberg-berlin/images/optimized/05-schoneberg-rathaus-schoneberg.jpg)
 
@@ -152,4 +152,4 @@ Both of these are the opposite of the way I work in the centre. On my [free walk
 
 {{faq}}
 
-**Image credits:** Winterfeldtmarkt, [pink triangle memorial](https://commons.wikimedia.org/wiki/File:Gedenktafel_Rosa_Winkel_Nollendorfplatz.jpg) and [Orte des Erinnerns sign](https://commons.wikimedia.org/wiki/File:Bayerisches_Viertel_Erinnern_Schulweg.jpg) photos by [Manfred Brueckels](https://commons.wikimedia.org/wiki/File:Berlin_Winterfeldplatz_1.jpg); the signs themselves are the artwork _Orte des Erinnerns im Bayerischen Viertel_ by Renata Stih and Frieder Schnock. [Bowie plaque](https://commons.wikimedia.org/wiki/File:Berliner_Gedenktafel_Hauptstr_155_%28Sch%C3%B6n%29_David_Bowie.jpg) photo by OTFW, Berlin. [Rathaus Schöneberg](https://commons.wikimedia.org/wiki/File:Berlin%2C_Rathaus_Sch%C3%B6neberg.jpg) and [Königskolonnaden](https://commons.wikimedia.org/wiki/File:Berlin%2C_K%C3%B6nigskolonnaden.jpg) photos by Palickap. [Marlene Dietrich grave](https://commons.wikimedia.org/wiki/File:Marlene_dietrich_grab_2020-04-23.png) photo by Babewyn. All via Wikimedia Commons under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) or [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+Image credits for this article are available from the compact **Image credits** button inside the plaque check above.

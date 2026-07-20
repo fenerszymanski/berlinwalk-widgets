@@ -1,4 +1,4 @@
-Every July I get the same question at the end of my walking tour: the city is great, but where do you go when you want one day of water and green without organizing a car? My answer has not changed in years. You take a regional train for about an hour, and you are in the Spreewald, a UNESCO biosphere reserve where the river Spree splits into roughly 300 small channels, the villages grew up without roads, and people still deliver things by flat wooden boat.
+Every July I get the same question at the end of my walking tour: the city is great, but where do you go when you want one day of water and green without organizing a car? My answer has not changed in years. You take a regional train for about an hour, and you are in the Spreewald, a UNESCO biosphere reserve where the river Spree splits into roughly 300 small channels and the flat wooden punt is still part of the landscape's working story.
 
 A Spreewald day trip from Berlin is genuinely easy. It is also easy to get wrong in two specific ways: people wait for the train at the wrong station, and they arrive at the harbor after the morning boats have filled up. This guide fixes both, with the 2026 prices and times checked directly against the operators.
 
@@ -10,7 +10,7 @@ Morning at the Großer Hafen in Lübbenau. There is no timetable: each punt load
 
 ## The train mistake: it does not leave from Hauptbahnhof
 
-Here is the detail most guides skip, and the one that costs people the most time. The two direct lines to the Spreewald, RE2 and RE7, do not stop at Berlin Hauptbahnhof, Friedrichstraße or Alexanderplatz. RE2 runs through Spandau, Jungfernheide, Gesundbrunnen, Ostkreuz and Schöneweide. RE7 starts at Ostbahnhof and also calls at Ostkreuz. If you stand under the big departure boards at Hauptbahnhof looking for Lübbenau, you are in the wrong building.
+Here is the detail most guides skip, and the one that costs people the most time. On the current 2026 timetable, the practical direct-train anchors are Ostkreuz and, for RE7, Ostbahnhof rather than Berlin Hauptbahnhof, Friedrichstraße or Alexanderplatz. The summer Citybahn closure changes regional routes, so check DB Navigator for your date instead of assuming a direct departure from the centre.
 
 **Make Ostkreuz your departure station.** Both lines stop there, which usually means two direct trains an hour, and the ride to Lübbenau (Spreewald) takes about an hour. From Alexanderplatz, any eastbound S-Bahn reaches Ostkreuz in under ten minutes. I have watched guests lose half a morning to this one wrong assumption, so I now say it on the tour before anyone asks.
 
@@ -48,7 +48,7 @@ At the Großer Kahnfährhafen, Lübbenau's main harbor, the published 2026 price
 
 A rented kayak costs roughly 16 to 22 euros for two hours or 24 to 40 euros for the day, depending on boat and station, and the rental points open around 9:00 in season. The water is flat, slow and beginner-friendly. You lose the ferryman's commentary; you gain silence, your own pace, and the small side channels the big punts skip.
 
-My honest advice, after sending years of tour guests there: **first visit with limited time, take the three hour punt. If you like being on the water at all, take the kayak.** The two hour punt is fine but it is a taster, and the difference between two and three hours is the difference between seeing Lehde from the boat and actually standing in it.
+My honest advice, after sending years of tour guests there: **first visit with limited time, take the three hour punt. If you like being on the water at all, take the kayak.** The two hour punt is fine but it is a taster; the three-hour trip gives you a longer, less rushed stop in Lehde.
 
 ![Punts moored at the Lehde museum stop while kayakers paddle past](blog-drafts/spreewald-day-trip-from-berlin/images/optimized/punts-and-kayaks-lehde.jpg)
 
@@ -60,13 +60,13 @@ Use the map below to see what each option really covers before you commit.
 
 ## Lehde: the village with no road
 
-Lehde is the reason the short tours all point the same direction. It is a tiny protected village where the houses face the water, cars cannot reach the historic core, and the post really does arrive by boat in summer. You can get there three ways: on a punt, in your own kayak, or on foot along a flat, signposted 2.6 km path from Lübbenau that takes about 40 minutes.
+Lehde is the reason the short tours all point the same direction. It is a tiny protected village where the houses face the water and footpaths matter more than car roads. The yellow Postkahn is part of its local story: Deutsche Post traces boat delivery here back to 1897. You can get there three ways: on a punt, in your own kayak, or on foot along a flat, signposted 2.6 km path from Lübbenau that takes about 40 minutes.
 
 In the village, the [Freilandmuseum Lehde](https://museums-entdecker.de/home/oeffnungszeiten-eintritt/) is worth the stop: a preserved set of Spreewald farmsteads showing how families actually lived on these islands. In 2026 it is open daily from 28 March to 30 September, 10:00 to 18:00, then to 17:00 in October before the winter closure. **Entry costs 8 euros, and children up to 14 enter free**, which quietly makes Lehde one of the cheapest family stops in Brandenburg.
 
 ![Deutsche Post mail carrier poling a yellow punt under a wooden footbridge in Lehde](blog-drafts/spreewald-day-trip-from-berlin/images/optimized/lehde-post-punt.jpg)
 
-No roads means the mail comes by punt. Deutsche Post has delivered Lehde's letters this way since 1897.
+Lehde's Postkahn. Deutsche Post traces boat delivery here back to 1897.
 
 ## A realistic day, hour by hour
 
@@ -96,4 +96,4 @@ Toward Wotschofska the forest closes over the water. The long punt tour and full
 
 {{faq}}
 
-**Image credits:** Station underpass photo by [JoachimKohlerBremen](https://commons.wikimedia.org/wiki/File:Unterf%C3%BChrung_im_Bahnhof_L%C3%BCbbenau-Spreewald_20160414.jpg), [gherkin jar](https://commons.wikimedia.org/wiki/File:Spreewald_Cucumb..jpg) and [Lehde punt stop](https://commons.wikimedia.org/wiki/File:Lehde_2012.JPG) photos by MOs810, post punt photo by [JoachimKohler-HB](https://commons.wikimedia.org/wiki/File:Post-Kahn_in_Lehde_%28Spreewald%29.jpg), forest channel photo by [Jan-Herm Janßen](https://commons.wikimedia.org/wiki/File:Spreewald_Eschenfliess_02.jpg), all via Wikimedia Commons under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) or [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
+Image credits for this article are available from the compact **Image credits** button inside the reach map above.

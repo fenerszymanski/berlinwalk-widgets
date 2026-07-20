@@ -34,7 +34,7 @@ This is the single most useful thing I can tell you, and it is the thing the tic
 
 People hear "Berliner Unterwelten" and picture one entrance. There are several, spread across Wedding and beyond, and two of the most popular tours do not start at Gesundbrunnen at all.
 
-**The trap is Brunnenstraße.** Tour 1 meets at Brunnenstraße 105, right at S+U Gesundbrunnen, next to the info shop. The escape tunnel tour meets at Brunnenstraße 141, which is down at Bernauer Straße, roughly two kilometres and four U8 stops south. Same street name, completely different part of the city. If you read the number quickly, you will get this wrong.
+**The trap is Brunnenstraße.** Tour 1 meets at Brunnenstraße 105, right at S+U Gesundbrunnen, next to the info shop. The escape tunnel tour meets at Brunnenstraße 141, near Bernauer Straße. Same street name, completely different meeting point. If you read the number quickly, you will get this wrong.
 
 The Fichtebunker is not even in the north. It is in Kreuzberg, on Fichtestraße, and it belongs to its own afternoon rather than to a Wedding double-header.
 
@@ -43,7 +43,7 @@ Set your group and your month on the board below and it will tell you which of t
 {{widget:berliner-unterwelten-tour-board}}
 
 ![Enamel street number plate reading Brunnenstraße 105, Berliner Unterwelten e.V., on a brick wall](blog-drafts/berliner-unterwelten/images/optimized/brunnenstrasse-105-street-number.jpg)
-_Brunnenstraße 105. Read the number on your ticket before you set off, because the escape tunnel tour uses 141 and that is two kilometres away._
+_Brunnenstraße 105. Read the number on your ticket before you set off, because the escape tunnel tour uses 141 near Bernauer Straße._
 
 ![The Berliner Unterwelten information and ticket shop at Gesundbrunnen, with large yellow lettering above the doors](blog-drafts/berliner-unterwelten/images/optimized/unterwelten-info-and-ticket-shop.jpg)
 _The info and ticket shop at Gesundbrunnen. Tour 1 meets on the street beside it, and it is the landmark to aim for when you come out of the station._
@@ -107,15 +107,8 @@ One honest note on sequencing. These tours are 90 minutes of concentrated, fairl
 
 I run a free walking tour through the historic centre, and it does not go to Wedding. Different city, different subject. What the two do together is useful: above ground I can show you the shape of Berlin and the decisions that made it look like this, and Berliner Unterwelten shows you the part that had to be built out of sight.
 
-If you are putting a few days together, the sensible order is the centre first, so you have the map in your head, then the underground, so you know what you are looking at. My route runs from Alexanderplatz through the medieval core and finishes at Hackescher Markt, which is four S-Bahn minutes from Gesundbrunnen if you want to do both in one day.
+If you are putting a few days together, the sensible order is the centre first, so you have the map in your head, then the underground, so you know what you are looking at. My route runs from Alexanderplatz through the medieval core and finishes at Hackescher Markt; from there, a direct S-Bahn takes you on to Gesundbrunnen if you want to do both in one day.
 
-## Image credits
-
-- Humboldthain flak tower ruin: [Kasa Fue](https://commons.wikimedia.org/wiki/File:Flakturm_Volkspark_Humboldthain_Juli_2021_1.jpg), CC BY-SA 4.0
-- Tour tickets sign: [Chris Alban Hansen](https://commons.wikimedia.org/wiki/File:Berliner_Unterwelten.jpg), CC BY-SA 2.0
-- Brunnenstraße 105 street number: [Billie Grace Ward](https://commons.wikimedia.org/wiki/File:Berliner_Unterwelten_%2839900975650%29.jpg), CC BY 2.0
-- Info and ticket shop: [F. Wüstenberg](https://commons.wikimedia.org/wiki/File:Ticketshop_Berliner_Unterwelten.jpg), CC BY-SA 4.0
-- Shelter interior with blast doors: [SP2011](https://commons.wikimedia.org/wiki/File:Berliner_Unterwelten_%282%29.jpg), CC BY-SA 3.0
-- Fichtebunker, Kreuzberg: [Jörg Zägel](https://commons.wikimedia.org/wiki/File:Berlin,_Kreuzberg,_Fichtestrasse_4,_12,_Fichtebunker.jpg), CC BY-SA 3.0
+Image credits for this article are available from the compact **Image credits** button inside the tour board above.
 
 {{faq}}

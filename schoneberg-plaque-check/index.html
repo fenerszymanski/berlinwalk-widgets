@@ -19,10 +19,11 @@
     --shadow:0 10px 30px rgba(18,61,24,.14);
   }
   *{box-sizing:border-box}
+  [hidden]{display:none!important}
   html,body{margin:0}
   body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
   .bx{max-width:960px;margin:0 auto;padding:4px}
-  .card{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+  .card{position:relative;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
 
   .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:18px 22px 16px}
   .head .kicker{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow);margin:0 0 6px}
@@ -82,6 +83,20 @@
 
   .foot{padding:12px 18px 16px;background:var(--cream);border-top:1px solid var(--line);font-size:12px;color:var(--stone);line-height:1.5}
   .foot b{color:var(--ink)}
+  .creditsbar{display:flex;justify-content:flex-end;padding:0 18px 16px;background:var(--cream)}
+  .creditsTrigger{border:1px solid #d5c300;border-radius:999px;background:var(--yellow);color:var(--green-deep);padding:8px 13px;font:800 12px Montserrat,sans-serif;cursor:pointer}
+  .creditsTrigger:hover{background:#f5dc00}
+  .creditsTrigger:focus-visible,.creditsClose:focus-visible,.creditsList a:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+  .creditsLayer{position:absolute;z-index:20;inset:0;display:flex;align-items:flex-end;justify-content:center;padding:10px;background:rgba(8,28,11,.66)}
+  .creditsLayer[hidden]{display:none!important}
+  .creditsDialog{width:min(680px,100%);max-height:430px;overflow:auto;overscroll-behavior:contain;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 18px 55px rgba(0,0,0,.32)}
+  .creditsTop{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+  .creditsTop h3{margin:0;color:var(--green-deep);font-size:17px;font-weight:800}
+  .creditsIntro{margin:5px 0 12px;color:var(--stone);font-size:11.5px;line-height:1.5}
+  .creditsClose{flex:0 0 auto;width:32px;height:32px;border:1px solid var(--line);border-radius:50%;background:var(--cream);color:var(--green-deep);font:800 20px/1 Montserrat,sans-serif;cursor:pointer}
+  .creditsList{margin:0;padding-left:20px;color:var(--ink);font-size:11.5px;line-height:1.55}
+  .creditsList li+li{margin-top:8px}
+  .creditsList a,.creditsList a:visited{color:var(--green-deep);font-weight:700;text-underline-offset:2px}
 
   .swipehint{display:none;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--stone);margin:0;padding:6px 10px 2px;text-align:center}
   @media (max-width:480px){
@@ -132,6 +147,21 @@
     <div class="board" id="board"></div>
 
     <div class="foot" id="foot"></div>
+    <div class="creditsbar"><button class="creditsTrigger" id="creditsOpen" type="button" aria-expanded="false" aria-controls="imageCredits">Image credits</button></div>
+    <div class="creditsLayer" id="imageCredits" hidden>
+      <section class="creditsDialog" role="dialog" aria-modal="true" aria-labelledby="creditsTitle" tabindex="-1">
+        <div class="creditsTop"><div><h3 id="creditsTitle">Article image credits</h3><p class="creditsIntro">Source and licence details for the seven photographs used in the article.</p></div><button class="creditsClose" id="creditsClose" type="button" aria-label="Close image credits">&times;</button></div>
+        <ul class="creditsList">
+          <li><a href="https://commons.wikimedia.org/wiki/File:Berlin_Winterfeldplatz_1.jpg" target="_blank" rel="noopener">Winterfeldtmarkt cover</a>: Manfred Brueckels, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>.</li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:Berliner_Gedenktafel_Hauptstr_155_%28Sch%C3%B6n%29_David_Bowie.jpg" target="_blank" rel="noopener">David Bowie plaque</a>: OTFW, Berlin, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>.</li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:Gedenktafel_Rosa_Winkel_Nollendorfplatz.jpg" target="_blank" rel="noopener">Pink triangle memorial</a>: Manfred Brueckels, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>.</li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:Bayerisches_Viertel_Erinnern_Schulweg.jpg" target="_blank" rel="noopener">Orte des Erinnerns sign</a>: Manfred Brueckels, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>. The photographed work is by Renata Stih and Frieder Schnock.</li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:Berlin%2C_Rathaus_Sch%C3%B6neberg.jpg" target="_blank" rel="noopener">Rathaus Schöneberg</a>: Palickap, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:Berlin%2C_K%C3%B6nigskolonnaden.jpg" target="_blank" rel="noopener">Königskolonnaden</a>: Palickap, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:Marlene_dietrich_grab_2020-04-23.png" target="_blank" rel="noopener">Marlene Dietrich grave</a>: Babewyn, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+        </ul>
+      </section>
+    </div>
   </div>
 </div>
 
@@ -204,8 +234,8 @@
       name:'Akazienstraße',
       short:'A shopping street. It is somewhere to be, not something to study.',
       walk:'at the station',
-      why:'The everyday spine of the Akazienkiez. <b>No chains and no department stores</b>: bakeries, delis, wine shops, small boutiques and cafés, with more on Eisenacher Straße one block over.',
-      shutTag:'Sunday', shut:'<b>German shops do not open on Sundays.</b> Cafés generally do, so the street is not dead, but the independent shops that are the whole point of Akazienstraße are shut behind their shutters.'
+      why:'The everyday spine of the Akazienkiez: <b>independent shops and cafés rather than department stores</b>, with bakeries, delis, wine shops and small boutiques on Eisenacher Straße one block over.',
+      shutTag:'Sunday', shut:'<b>Most German shops do not open on Sundays.</b> Cafés generally do, so the street is not dead, but the independent shops that are the whole point of Akazienstraße are shut behind their shutters.'
     },
     {
       stop:'U Bayerischer Platz · U4, U7',
@@ -332,7 +362,7 @@
     } else if (day === 4) {
       line = 'Friday is the weak day. <b>Wir waren Nachbarn is closed</b>, and it is the only curated exhibition on this list.';
     } else if (day === 6) {
-      line = 'Sunday shuts the shops on Akazienstraße and there is no market. <b>Sunday Schöneberg is plaques, the park and the cemetery</b>, which is a real afternoon but a quiet one.';
+      line = 'Sunday closes most shops on Akazienstraße and there is no market. <b>Sunday Schöneberg is plaques, the park and the cemetery</b>, which is a real afternoon but a quiet one.';
     } else {
       line = 'No market today. <b>Winterfeldtmarkt runs Wednesday and Saturday only</b>, so if the market is the reason you are coming, move the day rather than the plan.';
     }
@@ -340,6 +370,16 @@
   }
 
   render();
+})();
+</script>
+<script>
+(function(){
+  var open = document.getElementById('creditsOpen'), layer = document.getElementById('imageCredits'), dialog = layer.querySelector('.creditsDialog'), close = document.getElementById('creditsClose');
+  function show(){ layer.hidden=false; open.setAttribute('aria-expanded','true'); close.focus(); }
+  function hide(returnFocus){ layer.hidden=true; open.setAttribute('aria-expanded','false'); if(returnFocus) open.focus(); }
+  open.addEventListener('click', show); close.addEventListener('click', function(){ hide(true); });
+  layer.addEventListener('click', function(e){ if(e.target===layer) hide(true); });
+  document.addEventListener('keydown', function(e){ if(layer.hidden) return; if(e.key==='Escape'){ e.preventDefault(); hide(true); return; } if(e.key!=='Tab') return; var f=Array.prototype.slice.call(dialog.querySelectorAll('button,a[href]')); if(!f.length) return; var first=f[0], last=f[f.length-1]; if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); } else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); } });
 })();
 </script>
 <script src="../js/brand.js"></script>

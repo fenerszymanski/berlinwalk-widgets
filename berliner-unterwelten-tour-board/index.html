@@ -24,7 +24,7 @@
   html,body{margin:0}
   body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
   .bx{max-width:960px;margin:0 auto;padding:4px}
-  .card{background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+  .card{position:relative;background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
 
   /* ---------- header ---------- */
   .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:18px 22px 16px}
@@ -103,6 +103,20 @@
   .foot p{margin:0;font-size:12px;color:var(--stone);line-height:1.5}
   .foot p + p{margin-top:7px}
   .foot a{color:var(--green);font-weight:700}
+  .creditsbar{display:flex;justify-content:flex-end;padding:10px 22px 16px;background:var(--bone)}
+  .creditsTrigger{border:1px solid #d5c300;border-radius:999px;background:var(--yellow);color:var(--green-deep);padding:8px 13px;font:800 12px Montserrat,sans-serif;cursor:pointer}
+  .creditsTrigger:hover{background:#f5dc00}
+  .creditsTrigger:focus-visible,.creditsClose:focus-visible,.creditsList a:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+  .creditsLayer{position:absolute;z-index:20;inset:0;display:flex;align-items:flex-end;justify-content:center;padding:10px;background:rgba(8,28,11,.66)}
+  .creditsLayer[hidden]{display:none!important}
+  .creditsDialog{width:min(680px,100%);max-height:430px;overflow:auto;overscroll-behavior:contain;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 18px 55px rgba(0,0,0,.32)}
+  .creditsTop{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+  .creditsTop h3{margin:0;color:var(--green-deep);font-size:17px;font-weight:800}
+  .creditsIntro{margin:5px 0 12px;color:var(--stone);font-size:11.5px;line-height:1.5}
+  .creditsClose{flex:0 0 auto;width:32px;height:32px;border:1px solid var(--line);border-radius:50%;background:var(--bone);color:var(--green-deep);font:800 20px/1 Montserrat,sans-serif;cursor:pointer}
+  .creditsList{margin:0;padding-left:20px;color:var(--ink);font-size:11.5px;line-height:1.55}
+  .creditsList li+li{margin-top:8px}
+  .creditsList a,.creditsList a:visited{color:var(--green-deep);font-weight:700;text-underline-offset:2px}
 
   @media (max-width:720px){
     .head{padding:16px 15px 14px}
@@ -174,6 +188,20 @@
     <div class="foot">
       <p>Prices, ages, doors and season taken from the operator's own tour pages. Tickets are sold online only, they appear about 30 days ahead, and there is no ticket desk at the meeting point. Which language runs on which day changes with the season, so the shop calendar is the only real timetable.</p>
       <p>Full guide: <a href="https://www.berlinwalk.com/post/berliner-unterwelten" target="_blank" rel="noopener">Berliner Unterwelten, explained for visitors</a> · Free daytime walking tour above ground: <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_blank" rel="noopener">berlinwalk.com</a></p>
+    </div>
+    <div class="creditsbar"><button class="creditsTrigger" id="creditsOpen" type="button" aria-expanded="false" aria-controls="imageCredits">Image credits</button></div>
+    <div class="creditsLayer" id="imageCredits" hidden>
+      <section class="creditsDialog" role="dialog" aria-modal="true" aria-labelledby="creditsTitle" tabindex="-1">
+        <div class="creditsTop"><div><h3 id="creditsTitle">Article image credits</h3><p class="creditsIntro">Source and licence details for the six photographs used in the article.</p></div><button class="creditsClose" id="creditsClose" type="button" aria-label="Close image credits">&times;</button></div>
+        <ul class="creditsList">
+          <li><a href="https://commons.wikimedia.org/wiki/File:Flakturm_Volkspark_Humboldthain_Juli_2021_1.jpg" target="_blank" rel="noopener">Humboldthain flak tower</a>: Kasa Fue, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:Berliner_Unterwelten_(39900975650).jpg" target="_blank" rel="noopener">Brunnenstraße 105 street number</a>: Billie Grace Ward, <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener">CC BY 2.0</a>.</li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:Ticketshop_Berliner_Unterwelten.jpg" target="_blank" rel="noopener">Info and ticket shop</a>: F. Wüstenberg, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:Berliner_Unterwelten.jpg" target="_blank" rel="noopener">Tour tickets sign</a>: Chris Alban Hansen, <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noopener">CC BY-SA 2.0</a>.</li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:Berliner_Unterwelten_(2).jpg" target="_blank" rel="noopener">Shelter interior</a>: SP2011, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>.</li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:Berlin,_Kreuzberg,_Fichtestrasse_4,_12,_Fichtebunker.jpg" target="_blank" rel="noopener">Fichtebunker</a>: Jörg Zägel, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>.</li>
+        </ul>
+      </section>
     </div>
 
   </div>
@@ -398,6 +426,16 @@
 
   elMonth.value = String(month);
   render();
+})();
+</script>
+<script>
+(function(){
+  var open = document.getElementById('creditsOpen'), layer = document.getElementById('imageCredits'), dialog = layer.querySelector('.creditsDialog'), close = document.getElementById('creditsClose');
+  function show(){ layer.hidden=false; open.setAttribute('aria-expanded','true'); close.focus(); }
+  function hide(returnFocus){ layer.hidden=true; open.setAttribute('aria-expanded','false'); if(returnFocus) open.focus(); }
+  open.addEventListener('click', show); close.addEventListener('click', function(){ hide(true); });
+  layer.addEventListener('click', function(e){ if(e.target===layer) hide(true); });
+  document.addEventListener('keydown', function(e){ if(layer.hidden) return; if(e.key==='Escape'){ e.preventDefault(); hide(true); return; } if(e.key!=='Tab') return; var f=Array.prototype.slice.call(dialog.querySelectorAll('button,a[href]')); if(!f.length) return; var first=f[0], last=f[f.length-1]; if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); } else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); } });
 })();
 </script>
 <script src="../js/brand.js"></script>
