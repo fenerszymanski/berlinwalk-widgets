@@ -72,7 +72,7 @@ Alexanderplatz is where U2, U5 and U8 meet, and where my walking tour starts abo
 
 Berlin's U-Bahn and S-Bahn platforms have no ticket gates, but inspectors still check passengers. If you travel without a valid ticket, or without validating a paper ticket that requires stamping, BVG can issue a **€60 increased transport charge**, known as an EBE.
 
-You receive an EBE receipt from the inspector and use its number to handle payment; it is misleading to describe this as a fine that must always be paid on the spot. The official [BVG ticket-control page](https://www.bvg.de/en/subscriptions-and-tickets/ticket-control) explains the process. My guides to [the U-Bahn fine](https://www.berlinwalk.com/post/berlin-u-bahn-fine), [buying transport tickets on your phone](https://www.berlinwalk.com/post/buy-berlin-transport-tickets-on-your-phone) and [the difference between the U-Bahn and S-Bahn](https://www.berlinwalk.com/post/u-bahn-vs-s-bahn-berlin) cover the visitor side step by step.
+You receive an EBE receipt from the inspector and use its number to handle payment; it is misleading to describe this as an immediate cash payment. The official [BVG ticket-control page](https://www.bvg.de/en/subscriptions-and-tickets/ticket-control) explains the process. My guides to [the U-Bahn fine](https://www.berlinwalk.com/post/berlin-u-bahn-fine), [buying transport tickets on your phone](https://www.berlinwalk.com/post/buy-berlin-transport-tickets-on-your-phone) and [the difference between the U-Bahn and S-Bahn](https://www.berlinwalk.com/post/u-bahn-vs-s-bahn-berlin) cover the visitor side step by step.
 
 ## Ride the train well, then see the city on foot
 

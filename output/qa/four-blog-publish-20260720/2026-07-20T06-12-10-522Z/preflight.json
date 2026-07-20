@@ -1,0 +1,215 @@
+{
+  "checkedAt": "2026-07-20T06:12:10.525Z",
+  "mode": "publish-approved-by-yusuf",
+  "exactDraftCount": 4,
+  "posts": [
+    {
+      "id": "5c70c028-99f1-40cb-9eb6-b5a42654d630",
+      "slug": "berlin-marathon-2026",
+      "title": "Berlin Marathon 2026: What Closes, Where to Watch and How to Cross the City",
+      "expectedCategories": [
+        "6da64e22-3360-42ec-a558-e906e4deeb19",
+        "f9b304de-4490-4535-b9e9-64b8f2ff63b0"
+      ],
+      "expectedImages": 7,
+      "expectedEmbeds": [
+        [
+          "https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=berlin-marathon-2026&v=20260720berlinmarathon2026b",
+          "1400"
+        ],
+        [
+          "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-marathon-day/?v=20260720berlinmarathon2026b",
+          "2200"
+        ],
+        [
+          "https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=berlin-marathon-2026&v=20260720berlinmarathon2026b",
+          "2050"
+        ]
+      ],
+      "draft": {
+        "id": "5c70c028-99f1-40cb-9eb6-b5a42654d630",
+        "title": "Berlin Marathon 2026: What Closes, Where to Watch and How to Cross the City",
+        "status": "UNPUBLISHED",
+        "hasUnpublishedChanges": true,
+        "slug": "berlin-marathon-2026",
+        "imageCount": 7,
+        "imagesWithAlt": 7,
+        "captionCount": 7,
+        "htmlCount": 3,
+        "h1Count": 0,
+        "categoryIds": [
+          "6da64e22-3360-42ec-a558-e906e4deeb19",
+          "f9b304de-4490-4535-b9e9-64b8f2ff63b0"
+        ],
+        "tagCount": 3,
+        "seoTagCount": 16,
+        "richContentSha256": "82caf8e0c886f89c5712da10c84abad1b183b61bd9dc4a9668099912091f7086",
+        "seoSha256": "45bdd0b6b6cc7d4412a99464269cebec7942b0e6a467fa4fa8ed0d197266fd29"
+      },
+      "publicToolUrl": "https://www.berlinwalk.com/tools/berlin-marathon-day",
+      "pagesWidgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-marathon-day/",
+      "cmsItemId": "c6d4b470-d7ad-4b53-91af-21b78675552a",
+      "toolsHub": {
+        "slug": "berlin-marathon-day",
+        "embedHeight": 2200,
+        "image": "https://static.wixstatic.com/media/5a08a3_0ba59650f87440e188256b50d83de9c0~mv2.png",
+        "cmsItemId": "c6d4b470-d7ad-4b53-91af-21b78675552a"
+      }
+    },
+    {
+      "id": "e337d19f-4800-434a-b81e-d4c614c40cea",
+      "slug": "kurfurstendamm-berlin",
+      "title": "Kurfürstendamm Berlin: A Local Guide to City West",
+      "expectedCategories": [
+        "6da64e22-3360-42ec-a558-e906e4deeb19",
+        "5f58da11-347d-43f0-b3c3-2cb1cdeb7a79"
+      ],
+      "expectedImages": 7,
+      "expectedEmbeds": [
+        [
+          "https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=kurfurstendamm-berlin&v=20260720kurfurstendammberlin2",
+          "980"
+        ],
+        [
+          "https://fenerszymanski.github.io/berlinwalk-widgets/kurfurstendamm-walk/?v=20260720kurfurstendammberlin2",
+          "1460"
+        ],
+        [
+          "https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=kurfurstendamm-berlin&v=20260720kurfurstendammberlin2",
+          "1320"
+        ]
+      ],
+      "draft": {
+        "id": "e337d19f-4800-434a-b81e-d4c614c40cea",
+        "title": "Kurfürstendamm Berlin: A Local Guide to City West",
+        "status": "UNPUBLISHED",
+        "hasUnpublishedChanges": true,
+        "slug": "kurfurstendamm-berlin",
+        "imageCount": 7,
+        "imagesWithAlt": 7,
+        "captionCount": 7,
+        "htmlCount": 3,
+        "h1Count": 0,
+        "categoryIds": [
+          "6da64e22-3360-42ec-a558-e906e4deeb19",
+          "5f58da11-347d-43f0-b3c3-2cb1cdeb7a79"
+        ],
+        "tagCount": 3,
+        "seoTagCount": 16,
+        "richContentSha256": "1be22a8049bec1eca9bad2cd8d9a4fc15fdc62562098fc4946ca69bfe5ae2aa0",
+        "seoSha256": "b8a0f75c1c5344531565480d9c5a2947da568edfba2ecb8e4371f20afaadd407"
+      },
+      "publicToolUrl": "https://www.berlinwalk.com/tools/kurfurstendamm-walk",
+      "pagesWidgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/kurfurstendamm-walk/",
+      "cmsItemId": "8336962c-6968-4f6d-b174-4b5793643879",
+      "toolsHub": {
+        "slug": "kurfurstendamm-walk",
+        "embedHeight": 1460,
+        "image": "https://static.wixstatic.com/media/5a08a3_8bc51c052db242d4b4586fd6c9d92e53~mv2.png",
+        "cmsItemId": "8336962c-6968-4f6d-b174-4b5793643879"
+      }
+    },
+    {
+      "id": "1dbcc70f-b16a-42b2-bd2b-2594f756f6b6",
+      "slug": "oktoberfest-in-berlin",
+      "title": "Oktoberfest in Berlin 2026: What Is Actually On",
+      "expectedCategories": [
+        "97df9d0a-4e2e-49fc-bbc8-12f48f5bf671"
+      ],
+      "expectedImages": 5,
+      "expectedEmbeds": [
+        [
+          "https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=oktoberfest-in-berlin&v=20260720oktoberfestberlin2",
+          "1700"
+        ],
+        [
+          "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-beer-season-calendar/?v=20260720oktoberfestberlin2",
+          "3300"
+        ],
+        [
+          "https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=oktoberfest-in-berlin&v=20260720oktoberfestberlin2",
+          "1760"
+        ]
+      ],
+      "draft": {
+        "id": "1dbcc70f-b16a-42b2-bd2b-2594f756f6b6",
+        "title": "Oktoberfest in Berlin 2026: What Is Actually On",
+        "status": "UNPUBLISHED",
+        "hasUnpublishedChanges": true,
+        "slug": "oktoberfest-in-berlin",
+        "imageCount": 5,
+        "imagesWithAlt": 5,
+        "captionCount": 5,
+        "htmlCount": 3,
+        "h1Count": 0,
+        "categoryIds": [
+          "97df9d0a-4e2e-49fc-bbc8-12f48f5bf671"
+        ],
+        "tagCount": 3,
+        "seoTagCount": 16,
+        "richContentSha256": "f8f08755d3281f0453ee5611301e44e3b02a0a84012e751226ac0af4f6b5a2a8",
+        "seoSha256": "46183850c776e1ad72aeb20f2829bbd707264bb76a670be0532f962b4084a3b7"
+      },
+      "publicToolUrl": "https://www.berlinwalk.com/tools/berlin-beer-season-calendar",
+      "pagesWidgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-beer-season-calendar/",
+      "cmsItemId": "753a585e-2334-49d2-8ded-22887271692d",
+      "toolsHub": {
+        "slug": "berlin-beer-season-calendar",
+        "embedHeight": 3300,
+        "image": "https://static.wixstatic.com/media/5a08a3_e310b1c02a7642ebb1eeafebfb216dbd~mv2.png",
+        "cmsItemId": "753a585e-2334-49d2-8ded-22887271692d"
+      }
+    },
+    {
+      "id": "d1b958b3-9e55-4690-8c47-7be2a49ed50e",
+      "slug": "berlin-ubahn-etiquette",
+      "title": "Berlin U-Bahn Etiquette: The Unwritten Rules Tourists Break (2026)",
+      "expectedCategories": [
+        "6da64e22-3360-42ec-a558-e906e4deeb19"
+      ],
+      "expectedImages": 5,
+      "expectedEmbeds": [
+        [
+          "https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=berlin-ubahn-etiquette&v=20260720ubahnetiquette2",
+          "1500"
+        ],
+        [
+          "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-ubahn-etiquette/?v=20260720ubahnetiquette2",
+          "2200"
+        ],
+        [
+          "https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=berlin-ubahn-etiquette&v=20260720ubahnetiquette2",
+          "1860"
+        ]
+      ],
+      "draft": {
+        "id": "d1b958b3-9e55-4690-8c47-7be2a49ed50e",
+        "title": "Berlin U-Bahn Etiquette: The Unwritten Rules Tourists Break (2026)",
+        "status": "UNPUBLISHED",
+        "hasUnpublishedChanges": true,
+        "slug": "berlin-ubahn-etiquette",
+        "imageCount": 5,
+        "imagesWithAlt": 5,
+        "captionCount": 5,
+        "htmlCount": 3,
+        "h1Count": 0,
+        "categoryIds": [
+          "6da64e22-3360-42ec-a558-e906e4deeb19"
+        ],
+        "tagCount": 3,
+        "seoTagCount": 16,
+        "richContentSha256": "cfea32c63eb0cd19fadd125dc11a232a4b4e38692c3b16b76240cd31e47275ef",
+        "seoSha256": "d09098ea6450c9e385c266bce8f68fc8124359a069bd5503eb0449e321e87b39"
+      },
+      "publicToolUrl": "https://www.berlinwalk.com/tools/berlin-ubahn-etiquette",
+      "pagesWidgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-ubahn-etiquette/",
+      "cmsItemId": "33c93175-47f4-489d-9c40-220c4396e9c6",
+      "toolsHub": {
+        "slug": "berlin-ubahn-etiquette",
+        "embedHeight": 2200,
+        "image": "https://static.wixstatic.com/media/5a08a3_30b30f1b246247e183322f6fe80f8e39~mv2.png",
+        "cmsItemId": "33c93175-47f4-489d-9c40-220c4396e9c6"
+      }
+    }
+  ]
+}
