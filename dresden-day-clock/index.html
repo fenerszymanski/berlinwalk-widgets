@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dresden Day Clock: How Much Dresden Do You Actually Get?</title>
+<meta name="description" content="A Dresden day trip from Berlin is an hours problem, not a distance problem. Pick your train, your departure and your return, and see how much time is really left once the journey and the walk in from the station are paid for." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='32' r='15' fill='%23FFE600'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
+    --yellow:#FFE600; --ink:#1c2a1c; --cream:#FAFAF5;
+    --line:#dfe9d4; --stone:#66735f; --dim:#9aa694;
+    --rail:#2e6da4; --rail-soft:#dce9f5; --rail-ink:#1d3f5e;
+    --shadow:0 10px 30px rgba(18,61,24,.14);
+  }
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}
+  html,body{margin:0}
+  body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .bx{max-width:960px;margin:0 auto;padding:4px}
+  .card{position:relative;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+
+  .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:18px 22px 16px}
+  .head .kicker{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow);margin:0 0 6px}
+  .head h1{margin:0 0 6px;font-size:clamp(19px,3.4vw,25px);line-height:1.2;font-weight:800}
+  .head p{margin:0;font-size:13.5px;color:#e6f0e2;max-width:660px}
+
+  .controls{padding:16px 18px 6px;background:var(--cream);border-bottom:1px solid var(--line)}
+  .ctl{margin-bottom:14px}
+  .lab{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);margin:0 0 7px;display:block}
+  .bar{display:flex;gap:6px;flex-wrap:wrap}
+
+  .mode{flex:1 1 210px;min-height:44px;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:9px 11px;cursor:pointer;text-align:left;font-family:inherit;color:var(--ink);transition:.18s}
+  .mode b{font-size:12.5px;font-weight:700;display:block;line-height:1.25}
+  .mode em{font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--rail-ink);display:block;margin-top:3px}
+  .mode span{font-size:10.5px;color:var(--stone);display:block;margin-top:3px;line-height:1.35}
+  .mode[aria-pressed="true"]{border-color:var(--green);background:#f2f8ee;box-shadow:0 0 0 2px rgba(27,94,32,.12)}
+
+  .chip{min-height:44px;border:1.5px solid var(--line);background:#fff;border-radius:11px;padding:5px 10px;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600;color:var(--ink);transition:.16s;text-align:center;line-height:1.25}
+  .chip small{display:block;font-family:Montserrat,sans-serif;font-size:9px;letter-spacing:.05em;text-transform:uppercase;color:var(--stone);font-weight:600;margin-top:1px}
+  .chip[aria-pressed="true"]{border-color:var(--green);background:var(--green);color:#fff}
+  .chip[aria-pressed="true"] small{color:var(--yellow)}
+  .chip.day{min-width:46px;font-size:12px}
+
+  .ribbonWrap{padding:18px 18px 6px}
+  .ribbonTop{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+  .groundBig{font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:clamp(26px,5.6vw,38px);line-height:1;color:var(--green)}
+  .groundBig small{display:block;font-family:Montserrat,sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);font-weight:600;margin-top:5px}
+  .spanNote{font-size:11px;color:var(--stone);text-align:right;font-family:'IBM Plex Mono',monospace;line-height:1.6}
+
+  .ribbon{display:flex;height:54px;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#eef2ea}
+  .seg{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;overflow:hidden;transition:flex-grow .35s ease}
+  .seg b{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;white-space:nowrap}
+  .seg span{font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;opacity:.85;margin-top:2px}
+  .seg.travel{background:var(--rail-soft);color:var(--rail-ink)}
+  .seg.ground{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff}
+  .seg.ground span{color:var(--yellow);opacity:1}
+  .ticks{display:flex;margin-top:6px;padding:0 1px}
+  .tick{flex:1 1 0;font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--dim);border-left:1px solid var(--line);padding-left:3px;min-width:0;overflow:hidden;white-space:nowrap}
+
+  .verdict{margin:14px 0 2px;padding:12px 14px;border-radius:12px;font-size:13.5px;line-height:1.5;border:1px solid var(--line);background:#f6f9f3}
+  .verdict b{color:var(--green-deep)}
+  .verdict.tight{background:#fff6e5;border-color:#f0dcb4}
+  .verdict.bad{background:#fdeeee;border-color:#f1cccc}
+
+  .packWrap{padding:6px 18px 18px}
+  .packHead{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:14px 0 9px;flex-wrap:wrap}
+  .packHead h2{margin:0;font-size:14px;font-weight:800;color:var(--green-deep)}
+  .packHead .hint{font-size:11px;color:var(--stone)}
+
+  .row{display:flex;align-items:flex-start;gap:10px;padding:9px 11px;border:1px solid var(--line);border-radius:11px;margin-bottom:6px;background:#fff;transition:.2s}
+  .row .clock{font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:700;color:var(--green);min-width:42px;padding-top:1px}
+  .row .body{flex:1 1 auto;min-width:0}
+  .row .body b{display:block;font-size:13px;font-weight:700;line-height:1.3}
+  .row .body span{display:block;font-size:11.5px;color:var(--stone);line-height:1.4;margin-top:2px}
+  .row .mins{font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;color:var(--stone);white-space:nowrap;padding-top:1px}
+  .row.fits{border-left:4px solid var(--lime)}
+  .row.overhead{background:var(--rail-soft);border-color:#c9dcee;border-left:4px solid var(--rail)}
+  .row.overhead .clock{color:var(--rail-ink)}
+  .row.out{background:#fbfbf9;border-style:dashed;opacity:.74}
+  .row.out .clock{color:var(--dim)}
+  .row.out .body b{color:var(--stone);font-weight:600}
+  .row.pick{cursor:pointer;font-family:inherit;text-align:left;width:100%}
+  .row.pick:hover{border-color:var(--lime)}
+  .tagline{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;padding:2px 6px;border-radius:5px;background:#eef2ea;color:var(--stone);margin-top:5px}
+  .tagline.paid{background:#fff3cd;color:#6b5300}
+  .tagline.shut{background:#fdeeee;color:#8f2f2f}
+
+  .foot{padding:13px 18px;background:var(--cream);border-top:1px solid var(--line);font-size:11.5px;color:var(--stone);line-height:1.55}
+  .foot a{color:var(--green);font-weight:700}
+  .foot p{margin:0 0 6px}
+  .foot p:last-child{margin:0}
+
+  @media (max-width:520px){
+    .head{padding:15px 15px 13px}
+    .controls,.ribbonWrap,.packWrap{padding-left:13px;padding-right:13px}
+    .foot{padding:12px 13px}
+    .chip{padding:5px 8px;font-size:12px}
+    .ribbonTop{gap:6px}
+    .spanNote{text-align:left}
+    .seg span{display:none}
+    .tick:nth-child(even){color:transparent}
+  }
+</style>
+</head>
+<body>
+<div class="bx">
+<div class="card">
+
+  <div class="head">
+    <p class="kicker">Berlinwalk.com &bull; Day trip planner</p>
+    <h1>Dresden Day Clock</h1>
+    <p>A Dresden day trip from Berlin is not a distance problem, it is an hours problem. Pick your train and your two end points, and see how much of Dresden is actually left once the journey and the walk in from the station are paid for.</p>
+  </div>
+
+  <div class="controls">
+    <div class="ctl">
+      <span class="lab">1 &mdash; Which train</span>
+      <div class="bar" id="modeBar"></div>
+    </div>
+    <div class="ctl">
+      <span class="lab" id="depLab">2 &mdash; Leave Berlin Hbf</span>
+      <div class="bar" id="depBar"></div>
+    </div>
+    <div class="ctl">
+      <span class="lab" id="retLab">3 &mdash; Train back</span>
+      <div class="bar" id="retBar"></div>
+    </div>
+    <div class="ctl">
+      <span class="lab">4 &mdash; Day of the week</span>
+      <div class="bar" id="dayBar"></div>
+    </div>
+  </div>
+
+  <div class="ribbonWrap">
+    <div class="ribbonTop">
+      <div class="groundBig" id="groundBig">&mdash;<small>On the ground in Dresden</small></div>
+      <div class="spanNote" id="spanNote"></div>
+    </div>
+    <div class="ribbon" id="ribbon"></div>
+    <div class="ticks" id="ticks"></div>
+    <div class="verdict" id="verdict"></div>
+  </div>
+
+  <div class="packWrap">
+    <div class="packHead">
+      <h2>What actually fits</h2>
+      <span class="hint">Tap anything to add it or drop it</span>
+    </div>
+    <div id="pack"></div>
+  </div>
+
+  <div class="foot">
+    <p id="footDay"></p>
+    <p id="footMode"></p>
+    <p>Timetable pattern checked against Deutsche Bahn on 20 July 2026. Trains change, and both the Berlin and Dresden lines have engineering work running through 2026, so confirm your exact date in DB Navigator before you buy.</p>
+    <p><a href="https://www.berlinwalk.com/post/dresden-day-trip-from-berlin" target="_blank" rel="noopener">Read the full Dresden day trip guide &rarr;</a></p>
+  </div>
+
+</div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ---------------------------------------------------------------
+     Data checked against Deutsche Bahn on 2026-07-20.
+     The two routes are genuinely different products, not two speeds
+     of the same thing: the fast Railjet lands at Dresden Hbf, the
+     Deutschlandticket route lands across the river at Dresden-Neustadt
+     while the Dresden Hbf crossing works run (9 Feb - 15 Nov 2026).
+     --------------------------------------------------------------- */
+
+  var MODES = {
+    fast: {
+      id:'fast',
+      label:'Direct Railjet',
+      time:'About 1 h 40, no change',
+      note:'Roughly every two hours from Berlin Hbf. Not covered by the Deutschlandticket.',
+      from:'Berlin Hbf', to:'Dresden Hbf',
+      walkIn:20,
+      walkInName:'Walk Dresden Hbf to the Altstadt',
+      walkInNote:'Straight up Prager Strasse to the Altmarkt and the Neumarkt. It is about 1.6 km, so allow the full 20 minutes.',
+      walkOutName:'Walk back to Dresden Hbf',
+      walkOutNote:'Leave this in. With trains every two hours, missing one is an expensive mistake.',
+      out:[
+        {dep:372, arr:487, label:'06:12', sub:'1h55'},
+        {dep:448, arr:547, label:'07:28', sub:'1h39'},
+        {dep:568, arr:667, label:'09:28', sub:'1h39'},
+        {dep:688, arr:787, label:'11:28', sub:'1h39'}
+      ],
+      back:[
+        {dep:893,  arr:989,  label:'14:53', sub:'1h36'},
+        {dep:1013, arr:1109, label:'16:53', sub:'1h36'},
+        {dep:1133, arr:1229, label:'18:53', sub:'1h36'},
+        {dep:1253, arr:1347, label:'20:53', sub:'1h34', caveat:true}
+      ]
+    },
+    regional: {
+      id:'regional',
+      label:'Regional, Deutschlandticket',
+      time:'About 3 h, one change',
+      note:'RE 8 to Elsterwerda, then RB 31. Covered by the Deutschlandticket, but it costs you real daylight.',
+      from:'Berlin Hbf', to:'Dresden-Neustadt',
+      walkIn:20,
+      walkInName:'Cross from Dresden-Neustadt to the Altstadt',
+      walkInNote:'The regional train stops on the Neustadt side, not at the main station. It is about 1.6 km over the Augustusbrücke to the Frauenkirche.',
+      walkOutName:'Walk back to Dresden-Neustadt',
+      walkOutNote:'Back over the river. The regional service is only every two hours, so do not cut this fine.',
+      out:[
+        {dep:343, arr:527, label:'05:43', sub:'3h04'},
+        {dep:463, arr:647, label:'07:43', sub:'3h04'},
+        {dep:821, arr:1007, label:'13:41', sub:'3h06'}
+      ],
+      back:[
+        {dep:845,  arr:1033, label:'14:05', sub:'3h08'},
+        {dep:965,  arr:1153, label:'16:05', sub:'3h08'},
+        {dep:1085, arr:1273, label:'18:05', sub:'3h08'}
+      ]
+    }
+  };
+
+  var DAYS = [
+    {id:1,short:'Mon'},{id:2,short:'Tue'},{id:3,short:'Wed'},{id:4,short:'Thu'},
+    {id:5,short:'Fri'},{id:6,short:'Sat'},{id:0,short:'Sun'}
+  ];
+
+  /* closed = weekday numbers when the place is shut (0 = Sunday).
+     Times are realistic minimums, not rushed ones. */
+  var THINGS = [
+    { id:'neumarkt', name:'Neumarkt and the Fürstenzug', mins:30, kind:'free',
+      note:'The rebuilt baroque square, then about 102 metres of Meissen porcelain along the Stallhof wall. Free, outdoors, always there.' },
+    { id:'frauen', name:'Frauenkirche interior', mins:20, kind:'free',
+      note:'Free to go in, and the bright interior is the surprise. Opening times shift daily around services and rehearsals, so check the calendar.' },
+    { id:'terrasse', name:'Brühlsche Terrasse', mins:20, kind:'free',
+      note:'The terrace above the Elbe. This is the view people actually remember.' },
+    { id:'zwinger', name:'Zwinger courtyard', mins:25, kind:'free',
+      note:'The courtyard, the Kronentor and the Nymphenbad cost nothing. Only the museums inside are ticketed.' },
+    { id:'theater', name:'Theaterplatz and the Semperoper outside', mins:15, kind:'free',
+      note:'About 130 metres from the Zwinger. Worth the detour even if you never go inside.' },
+    { id:'lunch', name:'Sit down and eat properly', mins:45, kind:'free',
+      note:'My advice: build this in. A day trip that skips lunch is how Dresden turns into a tired blur.' },
+    { id:'dome', name:'Frauenkirche dome climb', mins:45, kind:'paid',
+      note:'12 euros, entrance at stair tower G. March to October it runs Mon to Sat from 10:00 and Sunday from 13:00.' },
+    { id:'galerie', name:'Gemäldegalerie Alte Meister', mins:90, kind:'paid', closed:[1],
+      note:'18 euros, and the same ticket covers three more Zwinger museums. Closed on Mondays.' },
+    { id:'gewoelbe', name:'Historic Green Vault', mins:60, kind:'paid', closed:[2],
+      note:'18 euros on a timed slot with limited capacity. Book before you leave Berlin or do not count on getting in. Closed on Tuesdays.' },
+    { id:'semper', name:'Semperoper guided tour', mins:45, kind:'paid',
+      note:'16 euros, 45 minutes, nearly every day. Numbers are limited and rehearsals can cancel it, so book ahead.' },
+    { id:'neustadt', name:'The Neustadt and the Kunsthofpassage', mins:90, kind:'free',
+      note:'The scruffier, younger side of the river, including the five themed courtyards off Alaunstrasse.' }
+  ];
+
+  var DEFAULT_ON = ['neumarkt','frauen','terrasse','zwinger','theater','lunch'];
+
+  var state = { mode:'fast', outIdx:1, backIdx:2, day:6, on:DEFAULT_ON.slice() };
+
+  function el(id){ return document.getElementById(id); }
+  function M(){ return MODES[state.mode]; }
+  function fmtMins(m){
+    if (m <= 0) return '0 min';
+    var h = Math.floor(m/60), mm = Math.round(m%60);
+    if (!h) return mm + ' min';
+    if (!mm) return h + ' h';
+    return h + ' h ' + (mm < 10 ? '0'+mm : mm);
+  }
+  function fmtClock(mins){
+    var h = Math.floor(mins/60) % 24, m = Math.round(mins%60);
+    return (h<10?'0':'')+h + ':' + (m<10?'0':'')+m;
+  }
+  function isShut(t){ return !!(t.closed && t.closed.indexOf(state.day) !== -1); }
+
+  /* The Neustadt is a different proposition depending on where your
+     train drops you. On the regional route you are already there. */
+  function thingMins(t){
+    if (t.id === 'neustadt' && state.mode === 'regional') return 45;
+    return t.mins;
+  }
+  function thingNote(t){
+    if (t.id === 'neustadt' && state.mode === 'regional') {
+      return 'Your regional train already lands you on this side of the river, so the Neustadt costs you far less time than it would from Dresden Hbf.';
+    }
+    if (t.id === 'neustadt') {
+      return 'The scruffier, younger side of the river. It is about 2.2 km from the Frauenkirche, so budget the walk both ways.';
+    }
+    return t.note;
+  }
+
+  function clampIdx(){
+    var m = M();
+    if (state.outIdx >= m.out.length) state.outIdx = m.out.length - 1;
+    if (state.backIdx >= m.back.length) state.backIdx = m.back.length - 1;
+    // never allow a return before you have arrived
+    while (state.backIdx < m.back.length - 1 && m.back[state.backIdx].dep <= m.out[state.outIdx].arr) state.backIdx++;
+  }
+
+  function buildControls(){
+    var m = M();
+
+    var mb = el('modeBar'); mb.innerHTML = '';
+    ['fast','regional'].forEach(function(k){
+      var mm = MODES[k];
+      var b = document.createElement('button');
+      b.type='button'; b.className='mode';
+      b.setAttribute('aria-pressed', state.mode===k ? 'true':'false');
+      b.innerHTML = '<b>'+mm.label+'</b><em>'+mm.from+' &rarr; '+mm.to+'</em><span>'+mm.note+'</span>';
+      b.addEventListener('click', function(){ state.mode = k; state.outIdx = Math.min(state.outIdx, MODES[k].out.length-1); state.backIdx = MODES[k].back.length-1; render(); });
+      mb.appendChild(b);
+    });
+
+    el('depLab').innerHTML = '2 &mdash; Leave ' + m.from;
+    var db = el('depBar'); db.innerHTML = '';
+    m.out.forEach(function(o,i){
+      var b = document.createElement('button');
+      b.type='button'; b.className='chip';
+      b.setAttribute('aria-pressed', state.outIdx===i ? 'true':'false');
+      b.innerHTML = o.label + '<small>' + o.sub + '</small>';
+      b.addEventListener('click', function(){ state.outIdx=i; render(); });
+      db.appendChild(b);
+    });
+
+    el('retLab').innerHTML = '3 &mdash; Train back from ' + m.to;
+    var rb = el('retBar'); rb.innerHTML = '';
+    m.back.forEach(function(o,i){
+      var b = document.createElement('button');
+      b.type='button'; b.className='chip';
+      b.setAttribute('aria-pressed', state.backIdx===i ? 'true':'false');
+      b.innerHTML = o.label + '<small>' + (o.caveat ? 'late ICE' : o.sub) + '</small>';
+      b.addEventListener('click', function(){ state.backIdx=i; render(); });
+      rb.appendChild(b);
+    });
+
+    var yb = el('dayBar'); yb.innerHTML = '';
+    DAYS.forEach(function(d){
+      var b = document.createElement('button');
+      b.type='button'; b.className='chip day';
+      b.setAttribute('aria-pressed', state.day===d.id ? 'true':'false');
+      b.textContent = d.short;
+      b.addEventListener('click', function(){ state.day=d.id; render(); });
+      yb.appendChild(b);
+    });
+  }
+
+  function compute(){
+    var m = M();
+    var o = m.out[state.outIdx], b = m.back[state.backIdx];
+    return {
+      m:m, o:o, b:b,
+      outMins: o.arr - o.dep,
+      backMins: b.arr - b.dep,
+      ground: b.dep - o.arr,
+      span: b.arr - o.dep
+    };
+  }
+
+  function pack(c){
+    var rows = [];
+    var budget = c.ground;
+    var cursor = c.o.arr;
+    var m = c.m;
+    if (budget <= 0) return { rows:rows, spare:budget };
+
+    rows.push({ type:'overhead', clock:fmtClock(cursor), name:m.walkInName, note:m.walkInNote, mins:m.walkIn });
+    cursor += m.walkIn; budget -= m.walkIn;
+    var reserve = m.walkIn;
+
+    THINGS.forEach(function(t){
+      var mins = thingMins(t);
+      var note = thingNote(t);
+      var chosen = state.on.indexOf(t.id) !== -1;
+      if (!chosen)      { rows.push({ id:t.id, type:'off',   name:t.name, note:note, mins:mins, kind:t.kind }); return; }
+      if (isShut(t))    { rows.push({ id:t.id, type:'shut',  name:t.name, note:note, mins:mins, kind:t.kind }); return; }
+      if (budget - mins >= reserve) {
+        rows.push({ id:t.id, type:'fits', clock:fmtClock(cursor), name:t.name, note:note, mins:mins, kind:t.kind });
+        cursor += mins; budget -= mins;
+      } else {
+        rows.push({ id:t.id, type:'nofit', name:t.name, note:note, mins:mins, kind:t.kind });
+      }
+    });
+
+    rows.push({ type:'overhead', clock:fmtClock(c.b.dep - m.walkIn), name:m.walkOutName, note:m.walkOutNote, mins:m.walkIn });
+    budget -= m.walkIn;
+    return { rows:rows, spare:budget };
+  }
+
+  function renderRibbon(c){
+    var r = el('ribbon'); r.innerHTML = '';
+    var total = Math.max(c.span, 1);
+    [
+      { cls:'travel', mins:c.outMins,  top:fmtMins(c.outMins),  sub:'To Dresden' },
+      { cls:'ground', mins:Math.max(c.ground,0), top:fmtMins(Math.max(c.ground,0)), sub:'In Dresden' },
+      { cls:'travel', mins:c.backMins, top:fmtMins(c.backMins), sub:'Back to Berlin' }
+    ].forEach(function(p){
+      var d = document.createElement('div');
+      d.className = 'seg ' + p.cls;
+      d.style.flex = (Math.max(p.mins,0)/total) + ' 1 0';
+      d.innerHTML = '<b>'+p.top+'</b><span>'+p.sub+'</span>';
+      r.appendChild(d);
+    });
+
+    var t = el('ticks'); t.innerHTML = '';
+    var hours = Math.max(1, Math.round(c.span/60));
+    for (var i=0;i<hours;i++){
+      var d = document.createElement('div');
+      d.className='tick';
+      d.textContent = fmtClock(c.o.dep + i*60);
+      t.appendChild(d);
+    }
+
+    el('groundBig').innerHTML = (c.ground > 0 ? fmtMins(c.ground) : 'None')
+      + '<small>Between the two trains</small>';
+    el('spanNote').innerHTML =
+        fmtClock(c.o.dep) + ' leave ' + c.m.from + '<br>'
+      + fmtClock(c.o.arr) + ' reach ' + c.m.to + '<br>'
+      + fmtClock(c.b.dep) + ' train back<br>'
+      + fmtClock(c.b.arr) + ' back in Berlin';
+  }
+
+  function renderVerdict(c, packed){
+    var v = el('verdict');
+    var real = c.ground - (c.m.walkIn * 2);
+    var cls = '', html;
+
+    if (c.ground <= 0) {
+      cls='bad';
+      html = '<b>That is not a day trip, that is a train ride.</b> This return leaves before you arrive. Pick a later train back.';
+    } else if (real < 150) {
+      cls='bad';
+      html = '<b>' + fmtMins(real) + ' of actual Dresden</b> once both station walks are paid for. That is the Altstadt loop at walking pace and nothing indoors. My advice: move one of your two end points, or accept that this is a look rather than a visit.';
+    } else if (real < 300) {
+      cls='tight';
+      html = '<b>' + fmtMins(real) + ' of actual Dresden.</b> That is a real half day: the outdoor Altstadt loop, one ticketed thing, and a proper lunch. Do not try to add a museum and the Neustadt on top of it.';
+    } else {
+      html = '<b>' + fmtMins(real) + ' of actual Dresden.</b> That is enough for the Altstadt, a museum, and still crossing the river. This is the version of the trip worth getting up early for.';
+    }
+    if (packed && packed.spare > 25 && c.ground > 0) {
+      html += ' You still have around ' + fmtMins(Math.round(packed.spare/5)*5) + ' unspent, so add something below.';
+    }
+    if (c.b.caveat) {
+      html += ' <b>One warning:</b> that last train is the late ICE, and it does not run on every date.';
+    }
+    v.className = 'verdict' + (cls ? ' '+cls : '');
+    v.innerHTML = html;
+  }
+
+  function renderPack(packed){
+    var p = el('pack'); p.innerHTML = '';
+    packed.rows.forEach(function(r){
+      if (r.type === 'overhead') {
+        var d = document.createElement('div');
+        d.className = 'row overhead';
+        d.innerHTML = '<span class="clock">'+r.clock+'</span>'
+          + '<span class="body"><b>'+r.name+'</b><span>'+r.note+'</span></span>'
+          + '<span class="mins">'+r.mins+' min</span>';
+        p.appendChild(d);
+        return;
+      }
+      var tag = '';
+      if (r.type === 'shut')       tag = '<span class="tagline shut">Closed on this day</span>';
+      else if (r.type === 'nofit') tag = '<span class="tagline">Does not fit your hours</span>';
+      else if (r.type === 'off')   tag = '<span class="tagline">Not selected</span>';
+      else if (r.kind === 'paid')  tag = '<span class="tagline paid">Ticket needed</span>';
+
+      var b = document.createElement('button');
+      b.type='button';
+      b.className = 'row pick ' + (r.type === 'fits' ? 'fits' : 'out');
+      b.innerHTML = '<span class="clock">'+(r.clock || '&mdash;')+'</span>'
+        + '<span class="body"><b>'+r.name+'</b><span>'+r.note+'</span>'+tag+'</span>'
+        + '<span class="mins">'+r.mins+' min</span>';
+      b.addEventListener('click', function(){
+        var i = state.on.indexOf(r.id);
+        if (i === -1) state.on.push(r.id); else state.on.splice(i,1);
+        render();
+      });
+      p.appendChild(b);
+    });
+  }
+
+  function renderFoot(){
+    var msg;
+    if (state.day === 1) {
+      msg = 'Monday closes the Zwinger picture gallery, so a Monday Dresden trip should lean on the outdoor Altstadt, the Frauenkirche and the Green Vault.';
+    } else if (state.day === 2) {
+      msg = 'Tuesday is the Green Vault and Residenzschloss closing day. The Zwinger museums are open, which is the opposite of Monday.';
+    } else if (state.day === 0) {
+      msg = 'Sunday works well: the museums are open, and the dome climb starts at 13:00 rather than 10:00.';
+    } else if (state.day === 6) {
+      msg = 'Saturday is the busiest day on the Brühlsche Terrasse and at the Frauenkirche. Go indoors early and take the terrace later.';
+    } else {
+      msg = 'A weekday is the easy version: both museum groups open, shorter queues, and emptier trains back to Berlin.';
+    }
+    el('footDay').textContent = msg;
+
+    el('footMode').textContent = state.mode === 'regional'
+      ? 'The Deutschlandticket covers this route and Dresden’s trams once you arrive, but it does not cover the fast direct train, which runs as a Railjet.'
+      : 'The direct train is a Railjet, so a Deutschlandticket is not valid on it. Book an advance fare rather than buying at the station.';
+  }
+
+  function resize(){
+    if (window.parent === window) return;
+    try { window.parent.postMessage({ type:'bw-resize', height: document.body.scrollHeight }, '*'); } catch(e){}
+  }
+
+  function render(){
+    clampIdx();
+    buildControls();
+    var c = compute();
+    var packed = pack(c);
+    renderRibbon(c);
+    renderPack(packed);
+    renderVerdict(c, packed);
+    renderFoot();
+    resize();
+  }
+
+  render();
+  window.addEventListener('resize', resize);
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

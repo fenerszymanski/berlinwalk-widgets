@@ -6820,5 +6820,43 @@
         "a": "Take the U2 from Alexanderplatz or Potsdamer Platz to Nollendorfplatz, about 10 to 12 minutes from Alexanderplatz. Nollendorfplatz is served by four U-Bahn lines, U1, U2, U3 and U4, and the U7 crosses the district at Kleistpark, Eisenacher Straße and Bayerischer Platz. A normal AB ticket covers all of it."
       }
     ]
+  },
+  "dresden-day-trip-from-berlin": {
+    "title": "Dresden Day Trip From Berlin: FAQ",
+    "subtitle": "Straight answers on which train to take, what the Deutschlandticket really covers in 2026, how long the walk from the station is, and which museums are shut on which day.",
+    "items": [
+      {
+        "q": "How long does the train from Berlin to Dresden take?",
+        "a": "The fast direct train takes about 1 hour 40 minutes from Berlin Hauptbahnhof to Dresden Hauptbahnhof. The important detail is the frequency: it runs roughly every two hours, not hourly, so missing one costs you a lot more than it would on a busier route. The regional route with a change at Elsterwerda takes about three hours each way."
+      },
+      {
+        "q": "Can I use my Deutschlandticket to get to Dresden?",
+        "a": "Only on the slow route. Since the December 2025 timetable change the direct Berlin to Dresden trains run as Railjet services, and Railjet is named on the official Deutschlandticket exclusion list alongside ICE, IC and EC. The ticket does cover the regional train to Elsterwerda and the connection onward, plus every tram and bus in Dresden once you arrive. Older advice about using a regional ticket on the IC is out of date: Deutsche Bahn ended that arrangement on 13 December 2025."
+      },
+      {
+        "q": "Is a Dresden day trip from Berlin actually worth it?",
+        "a": "Yes, and more so than most German day trips, because the sights are stacked rather than spread out. The core of the old town fits inside about a 500 metre circle, so nine or ten hours on the ground is genuinely enough for the outdoor loop, one or two museums, the dome climb and a proper lunch. Stay overnight only if you want the Neustadt in the evening, you are continuing towards Saxon Switzerland or Prague, or you want three or more museums."
+      },
+      {
+        "q": "How far is the Frauenkirche from Dresden Hauptbahnhof?",
+        "a": "About 1.6 kilometres, straight up Prager Straße, which takes a normal person around 20 minutes. A lot of sites claim it is a 10 minute walk and that is simply not true. Allow 20 minutes each way, or take a tram if the weather is bad. Your Deutschlandticket covers Dresden trams if you have one."
+      },
+      {
+        "q": "Which day should I not go to Dresden?",
+        "a": "There is no single bad day, but there is a trap: the two headline museums close on different days. The Gemäldegalerie Alte Meister at the Zwinger is closed on Mondays, and the Residenzschloss with the Green Vault is closed on Tuesdays. So Monday is a Green Vault day, Tuesday is a Zwinger day, and any other weekday gives you both. The outdoor city, including the Zwinger courtyard, the Fürstenzug and the Brühlsche Terrasse, is free and open whatever day you come."
+      },
+      {
+        "q": "Do I need to book anything in advance for Dresden?",
+        "a": "Two things. The Historic Green Vault runs on timed tickets with limited capacity, so book it before you leave Berlin or accept that you may not get in. The Semperoper guided tour, at 16 euros for 45 minutes, also has limited numbers and can be cancelled by rehearsals. Everything else, including the Frauenkirche dome climb at 12 euros, is normally fine to buy on the day."
+      },
+      {
+        "q": "How much does the train to Dresden cost?",
+        "a": "Deutsche Bahn advance fares start at 6.99 euros one way on the cheapest tier and 21.99 euros on the standard advance tier, both second class. On a route this short you can usually find something in the low teens booking a week or two ahead. Walk-up flexible fares cost several times that, so book early. The catch is that cheap fares are tied to a specific train, and on a two-hourly service that is a real commitment, so choose your return before you book."
+      },
+      {
+        "q": "Does the IC from Berlin to Dresden leave from Berlin Hauptbahnhof?",
+        "a": "No, and this catches people out. The IC on this route runs via Berlin Ostkreuz and Berlin Brandenburg Airport, reversing direction at the airport, and it does not call at Berlin Hauptbahnhof at all. From Ostkreuz it takes about two hours. If you are staying in the east of the city it can be convenient, but do not stand at Hauptbahnhof waiting for it."
+      }
+    ]
   }
 }

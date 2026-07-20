@@ -2008,5 +2008,18 @@
     "png160": "tools-home/icons/schoneberg-plaque-check-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/schoneberg-plaque-check.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_9bf55771fa264bb0b584d85e99af1b8f~mv2.png"
+  },
+  {
+    "slug": "dresden-day-clock",
+    "title": "Dresden Day Clock",
+    "category": "Transport",
+    "source": "chatgpt-browser-20260720",
+    "generatedAt": "2026-07-20",
+    "promptFile": "tools-home/icons/_src/daily-blog-dresden-day-clock-icon-20260720-prompt.md",
+    "sourceImage": "tools-home/icons/_src/daily-blog-dresden-day-clock-icon-20260720-raw.png",
+    "png512": "tools-home/icons/dresden-day-clock.png",
+    "png160": "tools-home/icons/dresden-day-clock-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/dresden-day-clock.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_9f9984f3303344f4aa02ba713ad3c789~mv2.png"
   }
 ]
