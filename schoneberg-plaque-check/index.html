@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Schöneberg Plaque Check: What Is Actually There When You Arrive</title>
+<meta name="description" content="Most of Schöneberg's famous addresses are a plaque on a private building. Set your own bar, from anything at all to a proper exhibition, pick your day, and see which Schöneberg sites clear it and which ones are a wasted trip." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Crect x='16' y='20' width='32' height='24' rx='3' fill='%23FFE600'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
+    --yellow:#FFE600; --ink:#1c2a1c; --cream:#FAFAF5;
+    --line:#dfe9d4; --stone:#66735f; --dim:#9aa694;
+    --enamel:#1d4f7c;
+    --shadow:0 10px 30px rgba(18,61,24,.14);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .bx{max-width:960px;margin:0 auto;padding:4px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+
+  .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:18px 22px 16px}
+  .head .kicker{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow);margin:0 0 6px}
+  .head h1{margin:0 0 6px;font-size:clamp(19px,3.4vw,25px);line-height:1.2;font-weight:800}
+  .head p{margin:0;font-size:13.5px;color:#e6f0e2;max-width:640px}
+
+  /* ---- controls ---- */
+  .controls{padding:16px 18px 4px;background:var(--cream);border-bottom:1px solid var(--line)}
+  .ctl{margin-bottom:14px}
+  .ctl > .lab{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);margin:0 0 7px;display:block}
+  .bar{display:flex;gap:6px;flex-wrap:wrap}
+  .step{flex:1 1 0;min-width:132px;min-height:44px;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:8px 10px;cursor:pointer;text-align:left;font-family:inherit;color:var(--ink);transition:.18s;display:flex;flex-direction:column;justify-content:center}
+  .step b{font-size:12.5px;font-weight:700;line-height:1.25;display:block}
+  .step span{font-size:10.5px;color:var(--stone);line-height:1.3;display:block;margin-top:2px}
+  .step:hover{border-color:var(--lime)}
+  .step[aria-pressed="true"]{background:var(--green);border-color:var(--green-deep);color:#fff}
+  .step[aria-pressed="true"] span{color:#cde3c6}
+
+  .days{display:flex;gap:5px;flex-wrap:wrap}
+  .day{min-width:44px;min-height:44px;flex:1 1 44px;border:1.5px solid var(--line);background:#fff;border-radius:11px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600;color:var(--ink);cursor:pointer;transition:.18s}
+  .day:hover{border-color:var(--lime)}
+  .day[aria-pressed="true"]{background:var(--yellow);border-color:var(--green-deep);color:var(--green-deep)}
+
+  /* ---- verdict ---- */
+  .verdict{padding:14px 18px;background:var(--green-deep);color:#fff;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .verdict .n{font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:700;color:var(--yellow);line-height:1}
+  .verdict .t{font-size:13.5px;color:#dbe8d6}
+  .verdict .t b{color:#fff}
+
+  /* ---- board ---- */
+  .board{padding:6px 12px 14px}
+  .grp{margin-top:14px}
+  .grp > .gh{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);margin:0 0 8px;padding:0 4px;display:flex;align-items:center;gap:8px}
+  .grp > .gh:after{content:"";flex:1;height:1px;background:var(--line)}
+
+  .site{display:grid;grid-template-columns:52px 1fr;gap:12px;padding:11px 10px;border-radius:14px;border:1px solid var(--line);background:#fff;margin-bottom:7px;transition:.25s;align-items:start}
+  .site.out{background:#f6f7f4;border-color:#e9ede4;opacity:.72;grid-template-columns:1fr;padding:8px 12px}
+  .site.out .tile{display:none}
+
+  .tile{width:52px;height:52px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--enamel);color:#fff;border:2px solid #fff;box-shadow:0 0 0 1.5px var(--enamel);flex:none}
+  .tile .num{font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:700;line-height:1}
+  .tile .st{font-size:7.5px;letter-spacing:.04em;text-transform:uppercase;margin-top:2px;opacity:.85;text-align:center;line-height:1.1;padding:0 2px}
+  .site.out .tile{background:#9aa694;box-shadow:0 0 0 1.5px #9aa694}
+
+  .nm{margin:0;font-size:14.5px;font-weight:700;line-height:1.25}
+  .site.out .nm{color:#6d7a68}
+  .meta{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--stone);margin:3px 0 0;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+  .meta .sep{color:var(--dim)}
+  .why{margin:6px 0 0;font-size:12.5px;line-height:1.45;color:#3d4a3a}
+  .site.out .why{color:#6d7a68}
+  .why b{color:var(--green)}
+  .site.out .why b{color:#5d6a58}
+
+  .tag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border-radius:5px;background:var(--soft);color:var(--green-deep);font-weight:600}
+  .tag.no{background:#ece7d8;color:#7a6a45}
+  .tag.shut{background:#f3dcdc;color:#8c3a3a}
+
+  .foot{padding:12px 18px 16px;background:var(--cream);border-top:1px solid var(--line);font-size:12px;color:var(--stone);line-height:1.5}
+  .foot b{color:var(--ink)}
+
+  .swipehint{display:none;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--stone);margin:0;padding:6px 10px 2px;text-align:center}
+  @media (max-width:480px){
+    .bx{min-width:360px}
+    .swipehint{display:block}
+  }
+  @media (max-width:560px){
+    .head{padding:15px 15px 13px}
+    .controls{padding:14px 13px 2px}
+    .board{padding:4px 8px 12px}
+    .step{min-width:calc(50% - 3px)}
+    .site{grid-template-columns:44px 1fr;gap:10px;padding:10px 8px}
+    .tile{width:44px;height:44px}
+    .tile .num{font-size:14px}
+    .verdict{padding:12px 14px}
+    .foot{padding:11px 14px 14px}
+  }
+</style>
+</head>
+<body>
+<div class="bx">
+  <div class="card">
+    <div class="head">
+      <p class="kicker">BerlinWalk • Schöneberg</p>
+      <h1>What is actually there when you arrive?</h1>
+      <p>Schöneberg keeps its history on small plaques screwed to buildings people still live in. Set the bar you personally care about, pick your day, and see which addresses are worth the U-Bahn ride.</p>
+    </div>
+
+    <div class="controls">
+      <div class="ctl">
+        <span class="lab">How much do you need to find there?</span>
+        <div class="bar" id="bar" role="group" aria-label="Minimum level of what is visible on site"></div>
+      </div>
+      <div class="ctl">
+        <span class="lab">Which day are you going?</span>
+        <div class="days" id="days" role="group" aria-label="Day of the week"></div>
+      </div>
+    </div>
+
+    <div class="verdict">
+      <span class="n" id="vn">0</span>
+      <span class="t" id="vt"></span>
+    </div>
+
+    <p class="swipehint">Swipe sideways to see the full board.</p>
+    <div class="board" id="board"></div>
+
+    <div class="foot" id="foot"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* DATA_BLOCK_START — every entry checked against an official source on 20 July 2026 */
+  var LEVELS = [
+    { n:1, label:'Just a plaque',        sub:'A screwed-on sign is fine' },
+    { n:2, label:'A building to look at', sub:'Something real above ground' },
+    { n:3, label:'Somewhere to walk into', sub:'A place I can spend time' },
+    { n:4, label:'Something to read',     sub:'Curated, with actual texts' }
+  ];
+  var DAYS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+
+  var SITES = [
+    {
+      stop:'U Nollendorfplatz — U1, U2, U3, U4',
+      num:'U', street:'Nollendorf', level:1,
+      name:'The pink triangle memorial',
+      short:'A plaque on a station wall. Real, moving, and over in two minutes.',
+      walk:'on the station itself',
+      why:'A red granite triangle from June 1989, <b>the first memorial in German public space to the homosexual victims of the Nazis</b>, with a 1993 panel explaining the camp marking. It is a plaque on a working station, at the Motzstraße end. Two minutes.'
+    },
+    {
+      stop:'U Nollendorfplatz — U1, U2, U3, U4',
+      num:'17', street:'Nollendorf', level:1,
+      name:'Christopher Isherwood’s room, Nollendorfstraße 17',
+      short:'A bronze plaque on a private building. Nothing to enter, and the dates on it are wrong.',
+      walk:'3 minutes',
+      why:'He rented a room from Meta Thurau, who became Fräulein Schroeder in <i>Goodbye to Berlin</i>, the book behind <i>Cabaret</i>. <b>Researchers point out the 1985 plaque has the dates wrong</b>: December 1930 to May 1933. Private building, so the plaque is the visit.'
+    },
+    {
+      stop:'U Nollendorfplatz — U1, U2, U3, U4',
+      num:'W', street:'Winterfeldt', level:3, days:[2,5],
+      name:'Winterfeldtmarkt',
+      short:'A market square. Worth a detour on the right day, nothing to see on the wrong one.',
+      walk:'5 minutes',
+      why:'Berlin’s biggest weekly market: <b>around 250 stalls over roughly 5,000 square metres on a Saturday</b>, 8:00 to 16:00, and a crowd that mostly lives here. Wednesday is a smaller morning market.',
+      shutTag:'No market', shut:'<b>The square is empty.</b> Winterfeldtmarkt only runs Wednesday and Saturday. On any other day this is a normal square with parked cars, and the single best reason to come to Schöneberg is not happening.'
+    },
+    {
+      stop:'U Kleistpark — U7',
+      num:'155', street:'Hauptstr', level:1,
+      name:'David Bowie’s flat, Hauptstraße 155',
+      short:'Plaque only. People live here, the ground floor is a practice, and there is no Bowie anything inside.',
+      walk:'6 minutes',
+      why:'Bowie lived on the first floor from 1976 to 1978 and made <i>Low</i>, <i>"Heroes"</i> and <i>Lodger</i> here; Iggy Pop later took the rear building. <b>It is an ordinary lived-in apartment house</b>, and the plaque by the door is everything there is. Next door at 157, Café Neues Ufer opened in 1977 as one of the first gay cafés in Europe to sit behind a plain street window, and it is still somewhere you can sit down.'
+    },
+    {
+      stop:'U Kleistpark — U7',
+      num:'K', street:'Kleistpark', level:3,
+      name:'The Königskolonnaden',
+      short:'Open colonnades and a park. Lovely, but there is nothing curated to read here.',
+      walk:'at the station',
+      why:'Gontard’s colonnades from 1777, built near Alexanderplatz and <b>moved out here in 1910</b> to escape the traffic. Free, open, the best photograph in Schöneberg, and they lead straight into the park.'
+    },
+    {
+      stop:'U Kleistpark — U7',
+      num:'K', street:'Kleistpark', level:2,
+      name:'The Kammergericht building',
+      short:'A facade with security at the door. You look at it from the park; you do not tour it.',
+      walk:'2 minutes, through the park',
+      why:'Freisler’s Volksgerichtshof staged the trials of the 20 July 1944 plotters here, and the Allied Control Council sat here afterwards; the Four Power Agreement was signed in the plenary hall in 1971. <b>It is a working court with security at the door</b>, so treat it as a facade.'
+    },
+    {
+      stop:'U Eisenacher Straße — U7',
+      num:'A', street:'Akazien', level:3, days:[0,1,2,3,4,5],
+      name:'Akazienstraße',
+      short:'A shopping street. It is somewhere to be, not something to study.',
+      walk:'at the station',
+      why:'The everyday spine of the Akazienkiez. <b>No chains and no department stores</b>: bakeries, delis, wine shops, small boutiques and cafés, with more on Eisenacher Straße one block over.',
+      shutTag:'Sunday', shut:'<b>German shops do not open on Sundays.</b> Cafés generally do, so the street is not dead, but the independent shops that are the whole point of Akazienstraße are shut behind their shutters.'
+    },
+    {
+      stop:'U Bayerischer Platz — U4, U7',
+      num:'80', street:'signs', level:4,
+      name:'Orte des Erinnerns, the Bayerisches Viertel',
+      walk:'spread across the whole quarter',
+      why:'Eighty double-sided signs by Renata Stih and Frieder Schnock, installed in 1993 on ordinary lamp posts. One side an image, the other <b>the text of a real anti-Jewish law</b>: shopping hours, park benches, swimming pools. Orientation boards at Bayerischer Platz and Rathaus Schöneberg map all eighty.'
+    },
+    {
+      stop:'U Rathaus Schöneberg — U4',
+      num:'1', street:'JFK-Platz', level:4, days:[0,1,2,3,5,6],
+      name:'Rathaus Schöneberg and Wir waren Nachbarn',
+      walk:'4 minutes',
+      why:'Kennedy said "Ich bin ein Berliner" here on <b>26 June 1963</b>, and the Freedom Bell in the tower still rings at noon for two minutes. Inside, right of the main entrance, the free exhibition <i>Wir waren Nachbarn</i> tells the stories of Jewish neighbours from this district. <b>The tower is guided tours only.</b>',
+      shutTag:'Closed Fri', shut:'<b>Wir waren Nachbarn is closed on Fridays.</b> The square, the building and the noon bell are all still there, but the one room in this list with something curated to read is locked.'
+    },
+    {
+      stop:'S Julius-Leber-Brücke — S1',
+      num:'65', street:'Leberstr', level:1,
+      name:'Marlene Dietrich’s birthplace, Leberstraße 65',
+      short:'Two plaques by a residential door on the Rote Insel. That is the whole thing.',
+      walk:'5 minutes, on the Rote Insel',
+      why:'She was born here and lived on the first floor until she was three. Two markers by the door: a 1992 portrait relief ringed with her film titles, and a Gedenktafel from 2008. <b>A residential street on the Rote Insel</b>, and the plaques are the whole visit.'
+    },
+    {
+      stop:'Friedhof Stubenrauchstraße, Friedenau',
+      num:'43', street:'Stubenrauch', level:3,
+      name:'Marlene Dietrich’s grave',
+      short:'A cemetery you walk into. Quiet and free, but there is no exhibition attached.',
+      walk:'a separate trip, south of Schöneberg',
+      why:'A plain stone that says only <b>"Marlene"</b>, beside her mother, made a Berlin Ehrengrab in December 1992. Helmut Newton is in the same cemetery. Free, but <b>the gates close around dusk and hours shift by season</b>, so go in the afternoon.'
+    },
+    {
+      stop:'EUREF-Campus, south Schöneberg',
+      num:'G', street:'EUREF', level:2,
+      name:'The Schöneberg Gasometer',
+      short:'A frame around an office block. The roof terrace is private event hire, so there is no view to go up for.',
+      walk:'a separate trip, its own campus',
+      why:'The listed 1910 gas holder frame now wraps a glass office building finished in 2024. There is a roof terrace at about 66 metres, but <b>it is private event space: no tickets, no opening hours, no walking up</b>. Anyone calling it a viewpoint is describing a venue hire.'
+    }
+  ];
+  /* DATA_BLOCK_END */
+
+  var state = { level:2, day:5 };
+
+  var bar = document.getElementById('bar');
+  var days = document.getElementById('days');
+  var board = document.getElementById('board');
+  var vn = document.getElementById('vn');
+  var vt = document.getElementById('vt');
+  var foot = document.getElementById('foot');
+
+  LEVELS.forEach(function(l){
+    var b = document.createElement('button');
+    b.type='button'; b.className='step'; b.dataset.level=l.n;
+    b.innerHTML = '<b>'+l.label+'</b><span>'+l.sub+'</span>';
+    b.addEventListener('click', function(){ state.level=l.n; render(); });
+    bar.appendChild(b);
+  });
+  DAYS.forEach(function(d,i){
+    var b = document.createElement('button');
+    b.type='button'; b.className='day'; b.dataset.day=i; b.textContent=d;
+    b.addEventListener('click', function(){ state.day=i; render(); });
+    days.appendChild(b);
+  });
+
+  function openToday(s){ return !s.days || s.days.indexOf(state.day) !== -1; }
+  function passes(s){ return s.level >= state.level && openToday(s); }
+
+  function render(){
+    Array.prototype.forEach.call(bar.children, function(b){
+      b.setAttribute('aria-pressed', Number(b.dataset.level) === state.level ? 'true':'false');
+    });
+    Array.prototype.forEach.call(days.children, function(b){
+      b.setAttribute('aria-pressed', Number(b.dataset.day) === state.day ? 'true':'false');
+    });
+
+    var groups = {};
+    var order = [];
+    SITES.forEach(function(s){
+      if(!groups[s.stop]){ groups[s.stop]=[]; order.push(s.stop); }
+      groups[s.stop].push(s);
+    });
+
+    board.innerHTML = '';
+    var pass = 0;
+    order.forEach(function(stop){
+      var g = document.createElement('div'); g.className='grp';
+      var h = document.createElement('p'); h.className='gh'; h.textContent = stop;
+      g.appendChild(h);
+      groups[stop].forEach(function(s){
+        var ok = passes(s);
+        if(ok) pass++;
+        var shut = !openToday(s);
+        var el = document.createElement('div');
+        el.className = 'site' + (ok ? '' : ' out');
+        el.innerHTML =
+          '<div class="tile"><span class="num">'+s.num+'</span><span class="st">'+s.street+'</span></div>'+
+          '<div>'+
+            '<p class="nm">'+s.name+'</p>'+
+            '<p class="meta"><span class="'+(shut?'tag shut':(ok?'tag':'tag no'))+'">'+(shut ? s.shutTag : LEVELS[s.level-1].label)+'</span>'+
+            '<span class="sep">•</span><span>'+s.walk+'</span></p>'+
+            '<p class="why">'+(shut ? s.shut : (ok ? s.why : (s.short || s.why)))+'</p>'+
+          '</div>';
+        g.appendChild(el);
+      });
+      board.appendChild(g);
+    });
+
+    vn.textContent = pass;
+    var lv = LEVELS[state.level-1];
+    vt.innerHTML = 'of '+SITES.length+' Schöneberg stops clear <b>'+lv.label.toLowerCase()+'</b> on a '+fullDay(state.day)+'.';
+    foot.innerHTML = footNote(pass);
+  }
+
+  function fullDay(i){
+    return ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'][i];
+  }
+  function footNote(pass){
+    var day = state.day;
+    var line;
+    if (day === 2 || day === 5) {
+      line = 'You picked the right day. <b>Winterfeldtmarkt only happens on Wednesday and Saturday</b>, and it is the one thing here that is worth planning a morning around.';
+    } else if (day === 4) {
+      line = 'Friday is the weak day. <b>Wir waren Nachbarn is closed</b>, and it is the only curated exhibition on this list.';
+    } else if (day === 6) {
+      line = 'Sunday shuts the shops on Akazienstraße and there is no market. <b>Sunday Schöneberg is plaques, the park and the cemetery</b>, which is a real afternoon but a quiet one.';
+    } else {
+      line = 'No market today. <b>Winterfeldtmarkt runs Wednesday and Saturday only</b>, so if the market is the reason you are coming, move the day rather than the plan.';
+    }
+    return line + ' <br><br>These sit at <b>eight different stations</b>. Schöneberg is not one walk, and trying to chain all of it in an afternoon is how people end up photographing doorways in the rain. Pick one stop, do it properly, and come back for the rest.';
+  }
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
