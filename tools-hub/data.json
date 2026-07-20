@@ -1328,7 +1328,6 @@
       "hubCategory": "WeatherOutdoor",
       "type": "Map",
       "priority": 22,
-      "featured": true,
       "seasonal": true,
       "seasonStart": "2026-05-01",
       "seasonEnd": "2026-09-30",
@@ -4493,6 +4492,8 @@
       "embedHeight": 1900,
       "hubCategory": "TripPlans",
       "type": "Planner",
+      "priority": 4,
+      "featured": true,
       "tags": [
         "Is Berlin walkable",
         "Walking distance Berlin",
