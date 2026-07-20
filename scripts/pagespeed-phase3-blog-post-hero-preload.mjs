@@ -23,6 +23,7 @@ function parseArgs(argv) {
     if (arg === '--dry-run') options.mode = 'dry-run';
     else if (arg === '--stage') options.mode = 'stage';
     else if (arg === '--publish-only') options.mode = 'publish-only';
+    else if (arg === '--unstage') options.mode = 'unstage';
     else if (arg === '--rollback') options.mode = 'rollback';
     else if (arg === '--self-test') options.mode = 'self-test';
     else if (arg.startsWith('--slug=')) options.slug = arg.slice('--slug='.length).trim();
@@ -32,8 +33,8 @@ function parseArgs(argv) {
     else throw new Error(`Unknown argument: ${arg}`);
   }
 
-  if (!options.mode) throw new Error('Choose exactly one mode: --dry-run, --stage, --publish-only, --rollback, or --self-test.');
-  const modeFlags = argv.filter((arg) => ['--dry-run', '--stage', '--publish-only', '--rollback', '--self-test'].includes(arg));
+  if (!options.mode) throw new Error('Choose exactly one mode: --dry-run, --stage, --publish-only, --unstage, --rollback, or --self-test.');
+  const modeFlags = argv.filter((arg) => ['--dry-run', '--stage', '--publish-only', '--unstage', '--rollback', '--self-test'].includes(arg));
   if (modeFlags.length !== 1) throw new Error('Choose exactly one execution mode.');
   if (!['self-test', 'help'].includes(options.mode) && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(options.slug)) {
     throw new Error('A lowercase URL slug is required with --slug=<slug>.');
@@ -57,6 +58,7 @@ function usage() {
   node scripts/pagespeed-phase3-blog-post-hero-preload.mjs --slug=<slug> --dry-run
   node scripts/pagespeed-phase3-blog-post-hero-preload.mjs --slug=<slug> --stage
   node scripts/pagespeed-phase3-blog-post-hero-preload.mjs --slug=<slug> --publish-only
+  node scripts/pagespeed-phase3-blog-post-hero-preload.mjs --slug=<slug> --unstage
   node scripts/pagespeed-phase3-blog-post-hero-preload.mjs --slug=<slug> --rollback
 
 The live release is intentionally split into stage and publish-only gates.
@@ -394,6 +396,29 @@ async function main() {
   const backup = await readJson(options.backup);
   if (backup.id !== draft.id || backup.slug !== options.slug || backup.siteId !== SITE_ID) {
     throw new Error('Backup identity does not match the requested post.');
+  }
+
+  if (options.mode === 'unstage') {
+    if (sha256(protectedSnapshot(draft)) !== backup.protectedHash) {
+      throw new Error('Protected post content drifted since backup. Refusing automatic unstage.');
+    }
+    await patchSeoData(draft.id, backup.seoData);
+    const restoredDraft = await getDraft(draft.id);
+    assertProtectedUnchanged(draft, restoredDraft, 'Unstage readback');
+    if (!same(restoredDraft.seoData, backup.seoData)) throw new Error('Unstage seoData mismatch.');
+    console.log(JSON.stringify({
+      ok: true,
+      mode: options.mode,
+      unstaged: true,
+      published: false,
+      id: draft.id,
+      slug: options.slug,
+      hasUnpublishedChanges: restoredDraft.hasUnpublishedChanges,
+      note: restoredDraft.hasUnpublishedChanges
+        ? 'The draft now equals the backup, but Wix still flags unpublished changes. Do not publish without a separate decision.'
+        : 'The draft matches the live backup and Wix cleared the unpublished-change flag.',
+    }, null, 2));
+    return;
   }
 
   if (options.mode === 'rollback') {
