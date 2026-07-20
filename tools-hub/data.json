@@ -4551,11 +4551,11 @@
     {
       "slug": "berlin-marathon-day",
       "title": "Marathon Day Berlin",
-      "lead": "Berlin Marathon Sunday, played out hour by hour. See when each side of the city closes, when it opens again, and where the runners are while you are trying to get somewhere.",
+      "lead": "Play Berlin Marathon Sunday hour by hour. Compare the confirmed 2026 starts with the 2025 closure pattern, then check live transport before you cross the city.",
       "category": "Discovery",
       "image": "https://static.wixstatic.com/media/5a08a3_0ba59650f87440e188256b50d83de9c0~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-marathon-day/",
-      "embedHeight": 1900,
+      "embedHeight": 2200,
       "hubCategory": "EventsSports",
       "type": "Planner",
       "tags": [
@@ -4612,6 +4612,70 @@
       "relatedBlog": "/post/berlin-ghost-stations",
       "iconStatus": "live-wix-media",
       "cmsItemId": "3b12dd88-6904-4b68-a232-e5e367f4b3db"
+    },
+    {
+      "slug": "kurfurstendamm-walk",
+      "title": "Ku'damm Axis Walk",
+      "lead": "Choose a stop on the 1.3 to 1.4 km visitor axis from Wittenbergplatz to Uhlandstraße and see what is worth your time before you keep walking west.",
+      "category": "Maps",
+      "image": "https://static.wixstatic.com/media/5a08a3_8bc51c052db242d4b4586fd6c9d92e53~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/kurfurstendamm-walk/",
+      "embedHeight": 1460,
+      "hubCategory": "CultureLandmarks",
+      "type": "Guide",
+      "tags": [
+        "Kurfürstendamm walk",
+        "Ku'damm Berlin",
+        "City West Berlin",
+        "Breitscheidplatz",
+        "Wittenbergplatz to Uhlandstraße",
+        "Kaiser Wilhelm Memorial Church",
+        "Savignyplatz"
+      ],
+      "aliases": [
+        "kurfurstendamm walk",
+        "kudamm walk",
+        "ku damm guide",
+        "west berlin walk",
+        "city west berlin",
+        "how far to walk kurfurstendamm",
+        "what to see on kudamm"
+      ],
+      "relatedBlog": "/post/kurfurstendamm-berlin",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "8336962c-6968-4f6d-b174-4b5793643879"
+    },
+    {
+      "slug": "berlin-beer-season-calendar",
+      "title": "Berlin Beer Season Calendar",
+      "lead": "Enter your arrival and departure dates to see which confirmed 2026 Berlin beer and Oktoberfest events overlap your stay, then compare them with Munich.",
+      "category": "Discovery",
+      "image": "https://static.wixstatic.com/media/5a08a3_e310b1c02a7642ebb1eeafebfb216dbd~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-beer-season-calendar/",
+      "embedHeight": 3300,
+      "hubCategory": "EventsSports",
+      "type": "Planner",
+      "tags": [
+        "Oktoberfest in Berlin 2026",
+        "Berlin beer events 2026",
+        "Berlin Beer Week",
+        "Spandau Oktoberfest",
+        "Alexanderplatz Oktoberfest",
+        "Munich Oktoberfest dates",
+        "Berlin autumn events"
+      ],
+      "aliases": [
+        "berlin oktoberfest calendar",
+        "beer events berlin",
+        "oktoberfest berlin dates",
+        "berlin beer week dates",
+        "spandau oktoberfest dates",
+        "alexanderplatz oktoberfest",
+        "oktoberfest during my berlin trip"
+      ],
+      "relatedBlog": "/post/oktoberfest-in-berlin",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "753a585e-2334-49d2-8ded-22887271692d"
     },
     {
       "slug": "berliner-unterwelten-tour-board",

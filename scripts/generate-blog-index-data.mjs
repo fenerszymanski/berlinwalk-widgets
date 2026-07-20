@@ -625,6 +625,10 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if ((post.slug || '') === 'berlin-marathon-2026') return 'berlin-marathon-day';
+  if ((post.slug || '') === 'kurfurstendamm-berlin') return 'kurfurstendamm-walk';
+  if ((post.slug || '') === 'oktoberfest-in-berlin') return 'berlin-beer-season-calendar';
+  if ((post.slug || '') === 'berlin-ubahn-etiquette') return 'berlin-ubahn-etiquette';
   if ((post.slug || '') === 'berlin-ghost-stations') return 'berlin-ghost-stations';
   if ((post.slug || '') === 'is-berlin-walkable') return 'is-berlin-walkable';
   if ((post.slug || '') === '2-days-in-berlin-itinerary') return 'berlin-two-day-route-map';
