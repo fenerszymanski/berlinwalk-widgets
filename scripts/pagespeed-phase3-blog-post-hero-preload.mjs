@@ -67,8 +67,16 @@ function sha256(value) {
   return crypto.createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
 }
 
+function canonicalize(value) {
+  if (Array.isArray(value)) return value.map(canonicalize);
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(Object.keys(value).sort().map((key) => [key, canonicalize(value[key])]));
+  }
+  return value;
+}
+
 function same(a, b) {
-  return JSON.stringify(a) === JSON.stringify(b);
+  return JSON.stringify(canonicalize(a)) === JSON.stringify(canonicalize(b));
 }
 
 function authHeaders() {
@@ -316,8 +324,37 @@ async function main() {
   }
 
   if (options.mode === 'stage') {
-    if (draft.status !== 'PUBLISHED' || draft.hasUnpublishedChanges) {
-      throw new Error(`Stage requires PUBLISHED with hasUnpublishedChanges=false; got ${draft.status}/${draft.hasUnpublishedChanges}.`);
+    if (draft.status !== 'PUBLISHED') {
+      throw new Error(`Stage requires PUBLISHED; got ${draft.status}.`);
+    }
+    if (draft.hasUnpublishedChanges) {
+      const existingBackup = await readJson(options.backup);
+      if (existingBackup.id !== draft.id || existingBackup.slug !== options.slug || existingBackup.siteId !== SITE_ID) {
+        throw new Error('Existing staged backup identity does not match the requested post.');
+      }
+      if (sha256(protectedSnapshot(draft)) !== existingBackup.protectedHash) {
+        throw new Error('Existing staged protected content does not match its backup.');
+      }
+      if (!same(draft.seoData, plannedSeoData) || phase3Tags(draft.seoData).length !== 1) {
+        throw new Error('Post already has unrelated unpublished changes. Refusing to adopt the stage.');
+      }
+      const adoptedReceipt = {
+        schemaVersion: 1,
+        stagedAt: new Date().toISOString(),
+        siteId: SITE_ID,
+        id: draft.id,
+        slug: options.slug,
+        publicUrl,
+        backup: options.backup,
+        protectedHash: sha256(protectedSnapshot(draft)),
+        seoDataHash: sha256(draft.seoData),
+        preload: phase3Tags(draft.seoData)[0],
+        published: false,
+        adoptedAfterWixNormalization: true,
+      };
+      await writeJson(options.receipt, adoptedReceipt);
+      console.log(JSON.stringify({ ok: true, mode: options.mode, staged: true, published: false, adoptedAfterWixNormalization: true, backup: options.backup, receipt: options.receipt, preload: adoptedReceipt.preload }, null, 2));
+      return;
     }
     const backup = {
       schemaVersion: 1,
