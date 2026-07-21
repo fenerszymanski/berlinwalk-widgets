@@ -635,6 +635,8 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if ((post.slug || '') === 'berlin-wall-trail') return 'berlin-wall-trail-sections';
+  if ((post.slug || '') === 'leaving-berlin-by-train') return 'berlin-train-gateways-2026';
   if ((post.slug || '') === 'wannsee-berlin') return 'wannsee-shore-planner';
   if ((post.slug || '') === 'football-match-in-berlin') return 'berlin-matchday-board';
   if ((post.slug || '') === 'dresden-day-trip-from-berlin') return 'dresden-day-clock';
