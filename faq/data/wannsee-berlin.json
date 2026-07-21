@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "slug": "wannsee-berlin",
+  "key": "wannsee-berlin",
+  "config": {
+    "title": "Wannsee: FAQ",
+    "subtitle": "Getting to the lake, what the beach costs, how Pfaueninsel works, and whether the Conference House needs booking.",
+    "items": [
+      {
+        "q": "How do I get to Wannsee from central Berlin?",
+        "a": "Take the S1 via Friedrichstrasse or the S7 via Alexanderplatz and Hackescher Markt, about half an hour. Wannsee and Nikolassee are both in fare zone B, so the normal Berlin AB fare applies on the S-Bahn, buses and F10 ferry. A single ticket covers one journey in one direction for 120 minutes; use another valid ticket for the return or choose a 24-hour ticket for several journeys."
+      },
+      {
+        "q": "Which station is closest to Strandbad Wannsee?",
+        "a": "S Nikolassee, not S Wannsee. The beach is about a 10 minute walk from Nikolassee station. S Wannsee is the right stop for the ferry pier, bus 114 to the Liebermann-Villa and the House of the Wannsee Conference, and bus 218 to Pfaueninsel."
+      },
+      {
+        "q": "How much does Strandbad Wannsee cost in 2026?",
+        "a": "A day ticket costs 6.50 EUR, reduced 3.80 EUR. The 12 EUR Badespass ticket covers three people with at least one adult and one child; extra children aged 5 or older cost 1.50 EUR each, up to six people in total and no more than two adults. Children under 5 are free, and buying online in advance can be up to 20 percent cheaper. In high summer the beach is open daily from 9:00 to 20:00. Bring photo ID if you are 14 or older."
+      },
+      {
+        "q": "Is the House of the Wannsee Conference free to visit?",
+        "a": "Yes. The memorial site in the villa at Am Grossen Wannsee 56-58 is free, normally open daily 10:00 to 18:00 apart from its listed annual closure dates, and individuals do not need to book. Bus 114 from S Wannsee stops directly outside, and the audio guide costs 3 EUR."
+      },
+      {
+        "q": "Can you visit the castle on Pfaueninsel?",
+        "a": "Yes, but only on a guided tour in German, Tuesday to Sunday, for 8 EUR on top of the ferry ticket. The 6 EUR ferry ticket includes access to the island itself, where peacocks roam free. In summer the ferry normally runs every 20 minutes from 10:00 to 18:00; SPSG currently lists no visitor ferry on 21, 27, 30 and 31 July 2026."
+      },
+      {
+        "q": "Do I need a special ticket for the F10 ferry to Kladow?",
+        "a": "No. The F10 from the pier below S Wannsee to Alt-Kladow is normal BVG public transport, so an AB single ticket covers one crossing. It leaves once an hour and takes about 20 minutes. The short-trip ticket is not valid, and round trips are not permitted, so get off in Kladow and use another valid ticket or a 24-hour ticket when you return on a later boat."
+      },
+      {
+        "q": "Is Wannsee worth visiting?",
+        "a": "Yes, if you pick a clear plan instead of trying to see everything. The strongest pairings are the beach plus the F10 crossing on a hot day, the Liebermann-Villa plus the Conference House on a cooler day, or Pfaueninsel in the morning with a swim in the late afternoon on a full summer day."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I get to Wannsee from central Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Take the S1 via Friedrichstrasse or the S7 via Alexanderplatz and Hackescher Markt, about half an hour. Wannsee and Nikolassee are both in fare zone B, so the normal Berlin AB fare applies on the S-Bahn, buses and F10 ferry. A single ticket covers one journey in one direction for 120 minutes; use another valid ticket for the return or choose a 24-hour ticket for several journeys."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which station is closest to Strandbad Wannsee?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "S Nikolassee, not S Wannsee. The beach is about a 10 minute walk from Nikolassee station. S Wannsee is the right stop for the ferry pier, bus 114 to the Liebermann-Villa and the House of the Wannsee Conference, and bus 218 to Pfaueninsel."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does Strandbad Wannsee cost in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A day ticket costs 6.50 EUR, reduced 3.80 EUR. The 12 EUR Badespass ticket covers three people with at least one adult and one child; extra children aged 5 or older cost 1.50 EUR each, up to six people in total and no more than two adults. Children under 5 are free, and buying online in advance can be up to 20 percent cheaper. In high summer the beach is open daily from 9:00 to 20:00. Bring photo ID if you are 14 or older."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the House of the Wannsee Conference free to visit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The memorial site in the villa at Am Grossen Wannsee 56-58 is free, normally open daily 10:00 to 18:00 apart from its listed annual closure dates, and individuals do not need to book. Bus 114 from S Wannsee stops directly outside, and the audio guide costs 3 EUR."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you visit the castle on Pfaueninsel?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, but only on a guided tour in German, Tuesday to Sunday, for 8 EUR on top of the ferry ticket. The 6 EUR ferry ticket includes access to the island itself, where peacocks roam free. In summer the ferry normally runs every 20 minutes from 10:00 to 18:00; SPSG currently lists no visitor ferry on 21, 27, 30 and 31 July 2026."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need a special ticket for the F10 ferry to Kladow?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The F10 from the pier below S Wannsee to Alt-Kladow is normal BVG public transport, so an AB single ticket covers one crossing. It leaves once an hour and takes about 20 minutes. The short-trip ticket is not valid, and round trips are not permitted, so get off in Kladow and use another valid ticket or a 24-hour ticket when you return on a later boat."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Wannsee worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, if you pick a clear plan instead of trying to see everything. The strongest pairings are the beach plus the F10 crossing on a hot day, the Liebermann-Villa plus the Conference House on a cooler day, or Pfaueninsel in the morning with a swim in the late afternoon on a full summer day."
+        }
+      }
+    ]
+  }
+}

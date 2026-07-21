@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Wannsee Shore Planner — BerlinWalk</title>
+<meta name="description" content="Pick what you want from Wannsee — the beach, Peacock Island, the villa shore museums or the Kladow ferry — and get a realistic order with the right station, bus and boat for each stop." />
+<link rel="icon" href="data:," />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root {
+    --bw-green: #1B5E20;
+    --bw-green-dark: #123D18;
+    --bw-yellow: #FFE600;
+    --bw-lime: #7CB342;
+    --bw-light: #C5E1A5;
+    --bw-cream: #FAFAF5;
+    --bw-ink: #212121;
+    --bw-red: #E63946;
+    --water: #A8CADF;
+    --water-deep: #8FB8D2;
+    --land: #EDE9D8;
+    --land-green: #D7E4C0;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bw-cream);
+    color: var(--bw-ink);
+  }
+  .wsp { max-width: 860px; margin: 0 auto; padding: 18px 14px 26px; }
+  .wsp-kicker {
+    font-size: 11px; letter-spacing: 0.14em; font-weight: 700;
+    color: var(--bw-green); text-transform: uppercase; margin: 0 0 6px;
+  }
+  .wsp h1 { font-size: 24px; line-height: 1.2; margin: 0 0 8px; color: var(--bw-green-dark); }
+  .wsp-lead { font-size: 14.5px; line-height: 1.55; margin: 0 0 16px; max-width: 68ch; }
+
+  .wsp-step-label {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--bw-green); margin: 18px 0 8px;
+  }
+  .wsp-step-label .num {
+    background: var(--bw-yellow); color: var(--bw-green-dark);
+    width: 20px; height: 20px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 11px; flex: none;
+  }
+
+  .wsp-anchors { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  @media (max-width: 640px) { .wsp-anchors { grid-template-columns: repeat(2, 1fr); } }
+  .wsp-anchor {
+    border: 2px solid #d9d4c2; border-radius: 12px; background: #fff;
+    padding: 10px 10px 9px; text-align: left; cursor: pointer;
+    font-family: inherit; font-size: 13px; line-height: 1.35; color: var(--bw-ink);
+    min-height: 74px; position: relative; transition: border-color .15s, background .15s;
+  }
+  .wsp-anchor .dot {
+    width: 11px; height: 11px; border-radius: 50%; display: inline-block;
+    margin-right: 6px; vertical-align: -1px; border: 2px solid rgba(0,0,0,0.18);
+  }
+  .wsp-anchor b { display: inline; font-size: 13px; }
+  .wsp-anchor .sub { display: block; font-size: 11.5px; color: #5c5c52; margin-top: 3px; }
+  .wsp-anchor[aria-pressed="true"] { border-color: var(--bw-green); background: #F1F7E8; }
+  .wsp-anchor[aria-pressed="true"]::after {
+    content: '✓'; position: absolute; top: 6px; right: 8px;
+    background: var(--bw-green); color: #fff; width: 18px; height: 18px;
+    border-radius: 50%; font-size: 11px; display: flex; align-items: center; justify-content: center;
+  }
+
+  .wsp-controls { display: flex; flex-wrap: wrap; gap: 14px 22px; }
+  .wsp-seg { display: flex; flex-wrap: wrap; gap: 6px; }
+  .wsp-seg button {
+    font-family: inherit; font-size: 12.5px; font-weight: 600;
+    border: 2px solid #d9d4c2; background: #fff; color: var(--bw-ink);
+    border-radius: 999px; padding: 7px 13px; cursor: pointer; min-height: 34px;
+  }
+  .wsp-seg button[aria-pressed="true"] {
+    background: var(--bw-green); border-color: var(--bw-green); color: #fff;
+  }
+
+  .wsp-map-wrap {
+    margin-top: 16px; border-radius: 14px; overflow: hidden;
+    border: 2px solid #d9d4c2; background: var(--water);
+  }
+  .wsp-map-wrap svg { display: block; width: 100%; height: auto; }
+  .m-label { font-size: 13px; font-weight: 600; fill: #3d3d35; }
+  .m-water-label { font-size: 13px; font-style: italic; fill: #4a748e; }
+  .m-marker { cursor: pointer; }
+  .m-marker circle.core { stroke: #fff; stroke-width: 2; }
+  .m-marker.off circle.core { fill-opacity: 0.35; }
+  .m-marker text.order {
+    font-size: 12px; font-weight: 800; fill: var(--bw-green-dark);
+  }
+  .m-route { fill: none; stroke: var(--bw-green); stroke-width: 3; stroke-dasharray: 7 5; opacity: 0.85; }
+  .m-route.boat { stroke: #2b6a8f; }
+  .m-sbahn { fill: none; stroke: #7a7668; stroke-width: 3; }
+  @media (max-width: 480px) {
+    .m-label { font-size: 17px; }
+    .m-water-label { font-size: 16px; }
+    .m-marker text.order { font-size: 15px; }
+  }
+
+  .wsp-plan { margin-top: 16px; }
+  .wsp-plan-head {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
+    flex-wrap: wrap; margin-bottom: 8px;
+  }
+  .wsp-plan-head h2 { font-size: 17px; margin: 0; color: var(--bw-green-dark); }
+  .wsp-total { font-size: 13px; font-weight: 700; }
+  .wsp-total .over { color: var(--bw-red); }
+  .wsp-total .ok { color: var(--bw-green); }
+  .wsp-leg {
+    display: flex; gap: 10px; padding: 10px 12px; border-radius: 12px;
+    background: #fff; border: 1.5px solid #e3decd; margin-bottom: 8px;
+  }
+  .wsp-leg.skip { background: #f4f2ea; opacity: 0.85; border-style: dashed; }
+  .wsp-leg .badge {
+    flex: none; width: 26px; height: 26px; border-radius: 50%;
+    background: var(--bw-yellow); color: var(--bw-green-dark);
+    font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center;
+    margin-top: 2px;
+  }
+  .wsp-leg.skip .badge { background: #d8d4c4; color: #6a675c; }
+  .wsp-leg .body { font-size: 13px; line-height: 1.45; }
+  .wsp-leg .body b { font-size: 13.5px; }
+  .wsp-leg .go { display: block; font-size: 12px; color: #40603f; margin-top: 3px; }
+  .wsp-leg .go .mode { font-weight: 700; color: var(--bw-green); }
+  .wsp-leg .why { display: block; font-size: 12px; color: #8c5b4a; margin-top: 3px; }
+  .wsp-leg .mins { flex: none; margin-left: auto; font-size: 12px; font-weight: 700; color: #5c5c52; white-space: nowrap; padding-top: 3px; }
+
+  .wsp-notes { margin-top: 12px; }
+  .wsp-note {
+    font-size: 12.5px; line-height: 1.5; background: #FFFBE0; border: 1.5px solid #EAD97A;
+    border-radius: 10px; padding: 9px 12px; margin-bottom: 7px;
+  }
+  .wsp-note.alert { background: #FBEDEA; border-color: #E5B4AC; }
+  .wsp-empty {
+    font-size: 13.5px; line-height: 1.5; background: #fff; border: 1.5px dashed #cfc9b4;
+    border-radius: 12px; padding: 14px; color: #5c5c52;
+  }
+  .wsp-foot { margin-top: 14px; font-size: 11.5px; color: #7a766a; line-height: 1.5; }
+  [hidden] { display: none !important; }
+  .wsp-credits-row { margin-top: 10px; }
+  .wsp-credits-trigger {
+    appearance: none; border: 1.5px solid #bfd8b7; border-radius: 999px;
+    background: #fff; color: var(--bw-green-dark); cursor: pointer;
+    font: 800 11px/1 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    padding: 8px 12px;
+  }
+  .wsp-credits-trigger:hover { background: #f1f7e8; border-color: var(--bw-green); }
+  .wsp-credits-trigger:focus-visible,
+  .wsp-credits-close:focus-visible { outline: 3px solid var(--bw-yellow); outline-offset: 2px; }
+  .wsp-credits-backdrop {
+    position: fixed; inset: 0; z-index: 100; background: rgba(18, 61, 24, .48);
+  }
+  .wsp-credits-panel {
+    position: fixed; z-index: 101; inset: 50% auto auto 50%;
+    transform: translate(-50%, -50%); width: min(640px, calc(100% - 28px));
+    max-height: calc(100% - 28px); overflow: auto; background: #fff;
+    border: 2px solid var(--bw-green); border-radius: 16px;
+    box-shadow: 0 18px 50px rgba(18, 61, 24, .28); padding: 18px;
+  }
+  .wsp-credits-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .wsp-credits-panel h2 { color: var(--bw-green-dark); font-size: 18px; margin: 0; }
+  .wsp-credits-panel ul { margin: 14px 0 0; padding-left: 20px; }
+  .wsp-credits-panel li { color: #4f514a; font-size: 11.5px; line-height: 1.55; margin-bottom: 7px; }
+  .wsp-credits-panel a { color: var(--bw-green-dark); font-weight: 700; }
+  .wsp-credits-close {
+    appearance: none; border: 0; border-radius: 999px; background: var(--bw-yellow);
+    color: var(--bw-green-dark); cursor: pointer; flex: none;
+    font: 800 12px/1 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    padding: 9px 12px;
+  }
+</style>
+</head>
+<body>
+<div class="wsp">
+  <p class="wsp-kicker">Berlinwalk · Wannsee</p>
+  <h1>Wannsee Shore Planner</h1>
+  <p class="wsp-lead">Wannsee is one name for four different days: a sand beach, an island of peacocks, a villa shore with heavy history, and a ferry across the Havel. They sit on different corners of the lake, and two of them do not even start at Wannsee station. Pick what you want, and I will put it in an order that works on the ground.</p>
+
+  <div class="wsp-step-label"><span class="num">1</span> What do you want from the lake?</div>
+  <div class="wsp-anchors" id="anchors" role="group" aria-label="Choose Wannsee stops"></div>
+
+  <div class="wsp-step-label"><span class="num">2</span> How much time, and which day?</div>
+  <div class="wsp-controls">
+    <div class="wsp-seg" id="budgetSeg" role="group" aria-label="Time budget"></div>
+    <div class="wsp-seg" id="daySeg" role="group" aria-label="Day of week"></div>
+  </div>
+
+  <div class="wsp-map-wrap" aria-hidden="false">
+    <svg id="map" viewBox="0 0 720 560" role="img" aria-label="Stylized map of the Wannsee area with the selected stops in visiting order">
+      <!-- water base: Havel (left) + Grosser Wannsee bay (centre-right) -->
+      <rect x="0" y="0" width="720" height="560" fill="var(--water)"/>
+      <!-- Kladow: west bank of the Havel -->
+      <path d="M0,0 L140,0 C150,110 140,240 115,360 C95,450 60,520 0,555 Z" fill="var(--land-green)" stroke="#c9c3ab" stroke-width="2"/>
+      <!-- Peninsula with the villa road, between Havel and the bay -->
+      <path d="M310,560 C300,450 305,340 335,255 C350,210 375,175 410,150 C435,170 448,215 447,265 C445,340 448,420 460,480 C430,505 395,530 370,560 Z" fill="var(--land-green)" stroke="#c9c3ab" stroke-width="2"/>
+      <!-- East land: Nikolassee side with the Strandbad shore -->
+      <path d="M720,0 L555,0 C550,70 558,140 585,195 C615,255 665,300 720,325 Z" fill="var(--land)" stroke="#c9c3ab" stroke-width="2"/>
+      <!-- South land: Wannsee town and the bridge -->
+      <path d="M370,560 L720,560 L720,325 C655,312 600,328 560,362 C528,392 508,422 498,452 C478,488 445,520 415,540 C400,550 385,555 370,560 Z" fill="var(--land)" stroke="#c9c3ab" stroke-width="2"/>
+      <!-- Kleiner Wannsee, the small lake below the bridge -->
+      <path d="M520,470 C545,480 565,505 570,535 C555,552 530,558 510,552 C498,525 502,492 520,470 Z" fill="var(--water-deep)"/>
+      <!-- Pfaueninsel in the Havel -->
+      <ellipse cx="190" cy="430" rx="48" ry="27" fill="var(--land-green)" stroke="#c9c3ab" stroke-width="2" transform="rotate(-18 190 430)"/>
+      <!-- water labels -->
+      <text class="m-water-label" x="520" y="310" text-anchor="middle">Grosser Wannsee</text>
+      <text class="m-water-label" x="225" y="95" text-anchor="middle">Havel</text>
+      <text class="m-water-label" x="622" y="547" text-anchor="middle" font-size="10.5">Kleiner Wannsee</text>
+      <!-- S-Bahn line hint -->
+      <path class="m-sbahn" d="M720,228 C690,220 668,210 655,205 C650,240 655,275 668,302 C650,315 620,325 600,332 C570,342 545,360 530,385 C518,405 510,428 508,448"/>
+      <g id="routes"></g>
+      <g id="markers"></g>
+    </svg>
+  </div>
+
+  <div class="wsp-plan" id="plan"></div>
+
+  <p class="wsp-foot" id="foot"></p>
+  <div class="wsp-credits-row">
+    <button class="wsp-credits-trigger" id="creditsTrigger" type="button" aria-expanded="false" aria-controls="creditsPanel">Image credits</button>
+  </div>
+</div>
+<div class="wsp-credits-backdrop" id="creditsBackdrop" hidden></div>
+<section class="wsp-credits-panel" id="creditsPanel" role="dialog" aria-modal="true" aria-labelledby="creditsTitle" hidden>
+  <div class="wsp-credits-head">
+    <h2 id="creditsTitle">Image credits</h2>
+    <button class="wsp-credits-close" id="creditsClose" type="button">Close</button>
+  </div>
+  <ul>
+    <li>Beach chairs at Strandbad Wannsee: <a href="https://commons.wikimedia.org/wiki/File:Strandk%C3%B6rbe_im_Strandbad_Wannsee_%2813932250353%29.jpg" target="_blank" rel="noopener">Steffen Zahn</a>, <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener">CC BY 2.0</a>.</li>
+    <li>Sailing on the Wannsee: <a href="https://commons.wikimedia.org/wiki/File:Segeln_auf_dem_Wannsee.jpg" target="_blank" rel="noopener">Asif Masimov</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+    <li>House of the Wannsee Conference: <a href="https://commons.wikimedia.org/wiki/File:Haus_der_Wannsee-Konferenz.jpg" target="_blank" rel="noopener">Cederskjold</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>.</li>
+    <li>Pfaueninsel castle: <a href="https://commons.wikimedia.org/wiki/File:Pfaueninsel_Schloss.jpg" target="_blank" rel="noopener">E-W</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>.</li>
+    <li>Peacock on Pfaueninsel: <a href="https://commons.wikimedia.org/wiki/File:Pfaueninsel-7723.jpg" target="_blank" rel="noopener">Rainer Halama</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+    <li>F10 ferry at Wannsee: <a href="https://commons.wikimedia.org/wiki/File:2018-08-07_DE_Berlin-Steglitz-Zehlendorf,_Gro%C3%9Fer_Wannsee_%40_Ronnebypromenade,_Wannsee_04810960_Linie_F10_%2849716829158%29.jpg" target="_blank" rel="noopener">Paul Korecky</a>, <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noopener">CC BY-SA 2.0</a>.</li>
+  </ul>
+</section>
+<script>
+(function () {
+  'use strict';
+  /* All opening data below was checked against official sources in July 2026.
+     Seasonal hours change: the footer tells readers to confirm before a special trip. */
+  var ANCHORS = [
+    {
+      id: 'strandbad', name: 'Strandbad Wannsee', dot: '#F2C14E',
+      sub: 'The sand beach and the wicker chairs',
+      mins: 150, x: 615, y: 168, lx: 604, ly: 220, lanchor: 'end',
+      go: 'S-Bahn to <span class="mode">S Nikolassee</span>, not S Wannsee, then about 10 minutes on foot down Wannseebadweg.'
+    },
+    {
+      id: 'conference', name: 'Wannsee Conference House', dot: '#7B8FA3',
+      sub: 'Free memorial site in the villa itself',
+      mins: 90, x: 420, y: 185, lx: 404, lanchor: 'end',
+      go: 'Bus <span class="mode">114</span> from S Wannsee to Haus der Wannsee-Konferenz, about 8 minutes.'
+    },
+    {
+      id: 'liebermann', name: 'Liebermann-Villa', dot: '#7CB342',
+      sub: 'The painter’s garden and lake terrace',
+      mins: 75, x: 437, y: 262,
+      go: 'Bus <span class="mode">114</span> to Am Grossen Wannsee, or a short walk from the Conference House.'
+    },
+    {
+      id: 'pfaueninsel', name: 'Pfaueninsel', dot: '#3E7C59',
+      sub: 'Peacock Island, castle and its own little ferry',
+      mins: 165, x: 190, y: 430,
+      go: 'Bus <span class="mode">218</span> from S Wannsee (frequency varies by day and time), then the little ferry, normally every 20 minutes from 10:00.'
+    },
+    {
+      id: 'kladow', name: 'F10 ferry to Alt-Kladow', dot: '#2B6A8F',
+      sub: 'A lake crossing on a normal BVG ticket',
+      mins: 105, x: 105, y: 190, lx: 121, ly: 222, lanchor: 'start',
+      go: 'Walk down from <span class="mode">S Wannsee</span> to the pier; the F10 leaves once an hour.'
+    },
+    {
+      id: 'kleist', name: 'Kleist grave', dot: '#9C8AA5',
+      sub: 'A quiet literary spot above the small lake',
+      mins: 25, x: 498, y: 502, lx: 514, ly: 520, lanchor: 'start',
+      go: 'On foot from <span class="mode">S Wannsee</span>, about 5 minutes along Bismarckstrasse.'
+    }
+  ];
+  var ORDER = ['kleist', 'conference', 'liebermann', 'pfaueninsel', 'kladow', 'strandbad'];
+  var BUDGETS = [
+    { id: 'half', label: 'Afternoon (about 4h)', mins: 240 },
+    { id: 'six', label: 'Most of a day (about 6h)', mins: 360 },
+    { id: 'full', label: 'Full day (about 8h)', mins: 480 }
+  ];
+  var DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+  var state = { selected: {}, budget: 'six', day: 'Sat' };
+
+  var anchorsEl = document.getElementById('anchors');
+  var budgetSeg = document.getElementById('budgetSeg');
+  var daySeg = document.getElementById('daySeg');
+  var planEl = document.getElementById('plan');
+  var routesEl = document.getElementById('routes');
+  var markersEl = document.getElementById('markers');
+  var footEl = document.getElementById('foot');
+  var creditsTrigger = document.getElementById('creditsTrigger');
+  var creditsBackdrop = document.getElementById('creditsBackdrop');
+  var creditsPanel = document.getElementById('creditsPanel');
+  var creditsClose = document.getElementById('creditsClose');
+
+  function openCredits() {
+    creditsBackdrop.hidden = false;
+    creditsPanel.hidden = false;
+    creditsTrigger.setAttribute('aria-expanded', 'true');
+    creditsClose.focus();
+  }
+
+  function closeCredits() {
+    creditsBackdrop.hidden = true;
+    creditsPanel.hidden = true;
+    creditsTrigger.setAttribute('aria-expanded', 'false');
+    creditsTrigger.focus();
+  }
+
+  creditsTrigger.addEventListener('click', openCredits);
+  creditsClose.addEventListener('click', closeCredits);
+  creditsBackdrop.addEventListener('click', closeCredits);
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && !creditsPanel.hidden) closeCredits();
+  });
+
+  function anchor(id) { for (var i = 0; i < ANCHORS.length; i++) if (ANCHORS[i].id === id) return ANCHORS[i]; return null; }
+
+  function closedReason(a, day) {
+    if (a.id === 'liebermann' && day === 'Tue') {
+      return 'The Liebermann-Villa is closed on Tuesdays. Every other day it is open from 10:00.';
+    }
+    return null;
+  }
+
+  function effectiveMins(id, fittedIds) {
+    var a = anchor(id);
+    if (id === 'liebermann' && fittedIds.indexOf('conference') !== -1) return 55; /* same bus corridor, short walk between them */
+    return a.mins;
+  }
+
+  function buildPlan() {
+    var day = state.day;
+    var budget = null;
+    for (var i = 0; i < BUDGETS.length; i++) if (BUDGETS[i].id === state.budget) budget = BUDGETS[i];
+    var selectedIds = ORDER.filter(function (id) { return state.selected[id]; });
+    var legs = [];
+    var total = 0;
+    var fitted = [];
+    selectedIds.forEach(function (id) {
+      var a = anchor(id);
+      var closed = closedReason(a, day);
+      var mins = effectiveMins(id, fitted);
+      if (closed) { legs.push({ a: a, mins: 0, skip: true, why: closed }); return; }
+      if (total + mins > budget.mins) {
+        legs.push({ a: a, mins: mins, skip: true, why: overReason(a, mins, budget) });
+        return;
+      }
+      total += mins;
+      fitted.push(id);
+      legs.push({ a: a, mins: mins, skip: false });
+    });
+    return { legs: legs, total: total, budget: budget, selectedIds: selectedIds };
+  }
+
+  function overReason(a, mins, budget) {
+    return 'Does not fit: this stop needs about ' + fmt(mins) + ' on top of what is already planned. Drop something above it or take the ' + (budget.id === 'full' ? 'earliest train out' : 'longer time option') + '.';
+  }
+
+  function fmt(mins) {
+    var h = Math.floor(mins / 60); var m = mins % 60;
+    if (!h) return m + ' min';
+    return h + 'h' + (m ? ' ' + ('0' + m).slice(-2) : '');
+  }
+
+  function renderAnchors() {
+    anchorsEl.innerHTML = '';
+    ANCHORS.forEach(function (a) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'wsp-anchor';
+      b.setAttribute('aria-pressed', state.selected[a.id] ? 'true' : 'false');
+      b.innerHTML = '<span class="dot" style="background:' + a.dot + '"></span><b>' + a.name + '</b><span class="sub">' + a.sub + '</span>';
+      b.addEventListener('click', function () {
+        state.selected[a.id] = !state.selected[a.id];
+        render();
+      });
+      anchorsEl.appendChild(b);
+    });
+  }
+
+  function renderSeg(el, items, activeId, onPick, labelFn) {
+    el.innerHTML = '';
+    items.forEach(function (it) {
+      var id = typeof it === 'string' ? it : it.id;
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = labelFn ? labelFn(it) : it;
+      b.setAttribute('aria-pressed', id === activeId ? 'true' : 'false');
+      b.addEventListener('click', function () { onPick(id); render(); });
+      el.appendChild(b);
+    });
+  }
+
+  function renderMap(plan) {
+    markersEl.innerHTML = '';
+    routesEl.innerHTML = '';
+    var orderNum = 0;
+    var active = [];
+    plan.legs.forEach(function (leg) { if (!leg.skip) { orderNum += 1; leg.order = orderNum; active.push(leg); } });
+    /* route lines between consecutive active stops (via S Wannsee hub at 455,425) */
+    var hub = { x: 498, y: 436 };
+    for (var i = 0; i < active.length - 1; i++) {
+      var a = active[i].a, b = active[i + 1].a;
+      var p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      var boat = (b.id === 'kladow' || b.id === 'pfaueninsel' || a.id === 'kladow' || a.id === 'pfaueninsel');
+      p.setAttribute('class', 'm-route' + (boat ? ' boat' : ''));
+      p.setAttribute('d', 'M' + a.x + ',' + a.y + ' Q' + hub.x + ',' + hub.y + ' ' + b.x + ',' + b.y);
+      routesEl.appendChild(p);
+    }
+    ANCHORS.forEach(function (a) {
+      var leg = null;
+      plan.legs.forEach(function (l) { if (l.a.id === a.id) leg = l; });
+      var g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      g.setAttribute('class', 'm-marker' + (leg && !leg.skip ? '' : ' off'));
+      var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      c.setAttribute('class', 'core');
+      c.setAttribute('cx', a.x); c.setAttribute('cy', a.y);
+      c.setAttribute('r', leg && !leg.skip ? 13 : 8);
+      c.setAttribute('fill', a.dot);
+      g.appendChild(c);
+      if (leg && !leg.skip) {
+        var t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        t.setAttribute('class', 'order');
+        t.setAttribute('x', a.x); t.setAttribute('y', a.y + 4.5);
+        t.setAttribute('text-anchor', 'middle');
+        t.textContent = String(leg.order);
+        g.appendChild(t);
+      }
+      var lbl = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      lbl.setAttribute('class', 'm-label');
+      lbl.setAttribute('x', a.lx != null ? a.lx : a.x + (a.x > 560 ? -16 : 16));
+      lbl.setAttribute('y', a.ly != null ? a.ly : a.y - 14);
+      lbl.setAttribute('text-anchor', a.lanchor || (a.x > 560 ? 'end' : 'start'));
+      lbl.textContent = a.name;
+      g.appendChild(lbl);
+      g.addEventListener('click', function () { state.selected[a.id] = !state.selected[a.id]; render(); });
+      markersEl.appendChild(g);
+    });
+    /* S-Bahn station dots */
+    [{ x: 655, y: 205, n: 'S Nikolassee' }, { x: 508, y: 448, n: 'S Wannsee' }].forEach(function (s) {
+      var g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      var r = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      r.setAttribute('x', s.x - 9); r.setAttribute('y', s.y - 9);
+      r.setAttribute('width', 18); r.setAttribute('height', 18);
+      r.setAttribute('rx', 4); r.setAttribute('fill', '#3d7f3f');
+      g.appendChild(r);
+      var t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      t.setAttribute('x', s.x); t.setAttribute('y', s.y + 4);
+      t.setAttribute('text-anchor', 'middle');
+      t.setAttribute('font-size', '11'); t.setAttribute('font-weight', '800'); t.setAttribute('fill', '#fff');
+      t.textContent = 'S';
+      g.appendChild(t);
+      var lbl = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      lbl.setAttribute('class', 'm-label');
+      lbl.setAttribute('x', s.x); lbl.setAttribute('y', s.y + 30);
+      lbl.setAttribute('text-anchor', 'middle');
+      lbl.textContent = s.n;
+      g.appendChild(lbl);
+      markersEl.appendChild(g);
+    });
+  }
+
+  function renderPlan(plan) {
+    if (!plan.selectedIds.length) {
+      planEl.innerHTML = '<div class="wsp-empty">Nothing picked yet. Choose at least one stop above. If it is a hot day and you only take one thing, take the beach: S-Bahn to Nikolassee, 10 minutes on foot, and you are on sand.</div>';
+      return;
+    }
+    var html = '<div class="wsp-plan-head"><h2>Your shore plan</h2>' +
+      '<span class="wsp-total">On the ground: <span class="' + (plan.total > plan.budget.mins ? 'over' : 'ok') + '">' + fmt(plan.total) + '</span> of ' + fmt(plan.budget.mins) + ' (plus about 40 min each way from central Berlin)</span></div>';
+    var n = 0;
+    plan.legs.forEach(function (leg) {
+      if (!leg.skip) n += 1;
+      html += '<div class="wsp-leg' + (leg.skip ? ' skip' : '') + '">' +
+        '<span class="badge">' + (leg.skip ? '–' : n) + '</span>' +
+        '<span class="body"><b>' + leg.a.name + '</b>' +
+        (leg.skip ? '<span class="why">' + leg.why + '</span>' : '<span class="go">' + leg.a.go + '</span>') +
+        '</span>' +
+        (leg.skip ? '' : '<span class="mins">~' + fmt(leg.mins) + '</span>') +
+        '</div>';
+    });
+    html += '<div class="wsp-notes">' + advisories(plan).map(function (t, i) {
+      return '<div class="wsp-note' + (t.alert ? ' alert' : '') + '">' + t.text + '</div>';
+    }).join('') + '</div>';
+    planEl.innerHTML = html;
+  }
+
+  function advisories(plan) {
+    var out = [];
+    var sel = [];
+    plan.legs.forEach(function (l) { if (!l.skip) sel.push(l.a.id); });
+    var day = state.day;
+    if (sel.indexOf('strandbad') !== -1) {
+      out.push({ text: 'The beach goes last on purpose: swim at the end, walk up to S Nikolassee dry-ish, and ride home. Nikolassee is one stop closer to the city than Wannsee.' });
+      if (day === 'Sat' || day === 'Sun') {
+        out.push({ alert: true, text: 'Summer weekend: Strandbad Wannsee fills up fast on hot ' + (day === 'Sat' ? 'Saturdays' : 'Sundays') + '. If sand space matters to you, flip the plan and swim before 11:00 instead.' });
+      }
+    }
+    if (sel.indexOf('pfaueninsel') !== -1 && sel.indexOf('kladow') !== -1) {
+      out.push({ text: 'Pfaueninsel and the F10 are both boat rides. Doing both in one day means a lot of waiting at piers. My advice: keep Pfaueninsel, save the F10 crossing for another afternoon.' });
+    }
+    if (sel.indexOf('pfaueninsel') !== -1 && day === 'Mon') {
+      out.push({ text: 'On Mondays the little castle interior on Pfaueninsel stays closed. The island, the gardens and the peacocks are open as normal, and they are the main event anyway.' });
+    }
+    if (sel.indexOf('pfaueninsel') !== -1) {
+      out.push({ alert: true, text: 'SPSG currently lists no visitor ferry on 21, 27, 30 and 31 July 2026. Check the official SPSG page before making Pfaueninsel the anchor of your day.' });
+    }
+    if (sel.indexOf('conference') !== -1 && sel.indexOf('strandbad') !== -1) {
+      out.push({ text: 'The Conference House and the beach sit strangely close together. That contrast is part of what Wannsee is. Do the house first, take the lake path for a few quiet minutes after, then go to the sand.' });
+    }
+    return out;
+  }
+
+  function renderFoot() {
+    footEl.innerHTML = 'Times include the usual bus and ferry waits, checked July 2026. Seasonal hours shift: before a special trip, confirm on the official pages for the Strandbad, the Conference House, the Liebermann-Villa and Pfaueninsel. Getting here: S1 or S7, Wannsee and Nikolassee are both inside the normal Berlin AB fare zone.';
+  }
+
+  function render() {
+    renderAnchors();
+    renderSeg(budgetSeg, BUDGETS, state.budget, function (id) { state.budget = id; }, function (b) { return b.label; });
+    renderSeg(daySeg, DAYS, state.day, function (id) { state.day = id; });
+    var plan = buildPlan();
+    renderMap(plan);
+    renderPlan(plan);
+    renderFoot();
+  }
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "checkedAt": "2026-07-21T10:06:00+02:00",
+  "desktop": {
+    "viewport": "1280x900",
+    "horizontalOverflow": false,
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "creditsDefaultClosed": true,
+    "creditsOpenIsFixed": true,
+    "creditsOpenChangedDocumentHeight": false,
+    "creditsCloseButtonFocusedOnOpen": true,
+    "creditsEscapeClose": true,
+    "yellowSurfaceTextColor": "rgb(18, 61, 24)"
+  },
+  "mobile": {
+    "viewport": "390x844",
+    "horizontalOverflow": false,
+    "tuesdayClosureRendered": true
+  },
+  "plannerMatrix": {
+    "nonEmptySelectionSets": 63,
+    "timeBudgets": 3,
+    "weekdays": 7,
+    "combinationsChecked": 1323,
+    "mismatches": 0
+  },
+  "contract": "pass"
+}
