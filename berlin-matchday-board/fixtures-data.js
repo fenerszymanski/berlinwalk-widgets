@@ -56,7 +56,7 @@ window.BW_MATCHDAY = {
       tone: 'hertha',
       access: 'easy',
       accessLine: 'Member presale first, then a normal general sale. For most fixtures you can still buy in the days before.',
-      priceFrom: '17 EUR standing, 27 EUR and up seated',
+      priceFrom: '30 to 75 EUR for the Heidenheim home opener; later fixtures vary',
       buyAt: 'herthabsc.com',
       warning: 'Official resale runs through the club Clubsale only.',
     },
@@ -94,7 +94,7 @@ window.BW_MATCHDAY = {
 
     // --- Hertha BSC, 2. Bundesliga home matches ---
     { team: 'hertha', md: 2, from: '2026-08-15', to: '2026-08-15', time: '13:00', day: 'Sat', opp: '1. FC Heidenheim 1846' },
-    { team: 'hertha', md: 4, from: '2026-09-04', to: '2026-09-06', opp: '1. FC Magdeburg' },
+    { team: 'hertha', md: 4, from: '2026-09-06', to: '2026-09-06', time: '13:30', day: 'Sun', opp: '1. FC Magdeburg' },
     { team: 'hertha', md: 7, from: '2026-10-09', to: '2026-10-11', opp: 'SpVgg Greuther Fürth' },
     { team: 'hertha', md: 9, from: '2026-10-23', to: '2026-10-25', opp: 'DSC Arminia Bielefeld' },
     { team: 'hertha', md: 11, from: '2026-11-06', to: '2026-11-08', opp: 'VfL Wolfsburg' },
@@ -111,8 +111,20 @@ window.BW_MATCHDAY = {
     { team: 'hertha', md: 31, from: '2027-04-23', to: '2027-04-25', opp: 'Hannover 96' },
     { team: 'hertha', md: 33, from: '2027-05-14', to: '2027-05-16', opp: 'FC St. Pauli' },
 
-    // --- Union Berlin Frauen, Frauen-Bundesliga home opener ---
-    { team: 'frauen', md: 1, from: '2026-08-21', to: '2026-08-21', time: '18:20', day: 'Fri', opp: 'FC Bayern München', note: 'The first competitive football of the season in Berlin.' },
+    // --- Union Berlin Frauen, Frauen-Bundesliga home matches ---
+    { team: 'frauen', md: 1, from: '2026-08-21', to: '2026-08-21', time: '18:20', day: 'Fri', opp: 'FC Bayern München', note: "Berlin's first top-flight league match of the season." },
+    { team: 'frauen', md: 3, from: '2026-09-04', to: '2026-09-06', opp: 'Eintracht Frankfurt' },
+    { team: 'frauen', md: 5, from: '2026-09-18', to: '2026-09-20', opp: 'RB Leipzig' },
+    { team: 'frauen', md: 7, from: '2026-10-16', to: '2026-10-18', opp: '1. FC Nürnberg' },
+    { team: 'frauen', md: 9, from: '2026-11-06', to: '2026-11-08', opp: 'TSG 1899 Hoffenheim' },
+    { team: 'frauen', md: 11, from: '2026-11-20', to: '2026-11-22', opp: 'Bayer 04 Leverkusen' },
+    { team: 'frauen', md: 12, from: '2026-12-11', to: '2026-12-13', opp: '1. FSV Mainz 05' },
+    { team: 'frauen', md: 15, from: '2027-01-22', to: '2027-01-24', opp: 'SC Freiburg' },
+    { team: 'frauen', md: 17, from: '2027-02-05', to: '2027-02-07', opp: '1. FC Köln' },
+    { team: 'frauen', md: 19, from: '2027-02-19', to: '2027-02-21', opp: 'VfB Stuttgart' },
+    { team: 'frauen', md: 21, from: '2027-03-19', to: '2027-03-21', opp: 'Hamburger SV' },
+    { team: 'frauen', md: 23, from: '2027-04-09', to: '2027-04-11', opp: 'SV Werder Bremen' },
+    { team: 'frauen', md: 26, from: '2027-05-21', to: '2027-05-23', opp: 'VfL Wolfsburg' },
   ],
   // Not a match, but the fullest the ground gets all year.
   singing: { date: '2026-12-23', title: 'Weihnachtssingen', ground: 'foersterei' },

@@ -1,6 +1,6 @@
 Dresden is the day trip Berlin visitors are told is easy. Under two hours on the train, a baroque old town you can walk across in ten minutes, and back in time for dinner. Most of that is true. What nobody tells you is that the whole thing is decided by two numbers: the train you leave on and the train you come back on.
 
-My advice: do not plan a Dresden day trip from Berlin around what you want to see. Plan it around the two trains, then fill the gap between them. I have done it the other way, arrived with a list, and spent the afternoon watching the clock instead of the city.
+My advice: do not plan a Dresden day trip from Berlin around what you want to see. Plan it around the two trains, then fill the gap between them. Do it the other way and the afternoon becomes a clock-watching exercise instead of a visit to the city.
 
 {{quick-summary}}
 
@@ -75,7 +75,7 @@ Once you are there, Dresden repays you fast. The core is genuinely tiny.
 
 The whole circuit of Neumarkt, the Fürstenzug, Schlossplatz, the Hofkirche, Theaterplatz, the Zwinger and the Brühlsche Terrasse is well under two kilometres of walking. **You can see the outside of everything famous in Dresden in about ninety minutes**, without hurrying and without paying for anything.
 
-That is why Dresden works as a day trip when cities like Hamburg or Leipzig do not. The sights are not spread out. They are stacked.
+That is why Dresden works as a day trip. The sights are not spread out. They are stacked.
 
 ![The Fürstenzug in Dresden, a long mural of Saxon rulers made from Meissen porcelain tiles](blog-drafts/dresden-day-trip-from-berlin/images/optimized/03-dresden-fuerstenzug.jpg)
 _The Fürstenzug, about 102 metres of Meissen porcelain along the Stallhof wall. Free, outdoors, and there whatever day you turn up._
@@ -89,11 +89,11 @@ If you take one thing from this guide, take this one.
 - The **Zwinger** picture gallery, the Gemäldegalerie Alte Meister, is closed on **Mondays**.
 - The **Residenzschloss** and the **Green Vault** are closed on **Tuesdays**.
 
-There is no single day of the week when both are shut, and there is no day when you are safe without checking. I have watched people plan "the museums" for a Monday and lose half the reason they came.
+There is no single day of the week when both are shut, and there is no day when you are safe without checking. Plan "the museums" for a Monday without checking and you lose half the reason you came.
 
 The upside is that this is easy to work with once you know. Monday is a Green Vault day. Tuesday is a Zwinger day. Any other weekday gives you both.
 
-And on either day the outdoor city is untouched: the Zwinger courtyard, the Fürstenzug, the Brühlsche Terrasse and the Neumarkt cost nothing and never close.
+And on either day the outdoor city still works: the Zwinger courtyard, the Fürstenzug, the Brühlsche Terrasse and the Neumarkt cost nothing and do not depend on the museum closing day. The Zwinger courtyard itself has opening hours, currently 06:00 to 22:00 through August 2026.
 
 ![The courtyard of the Zwinger in Dresden with its formal garden and fountains](blog-drafts/dresden-day-trip-from-berlin/images/optimized/04-dresden-zwinger-courtyard.jpg)
 _The Zwinger courtyard. Walking in costs nothing. Only the museums around it are ticketed._
@@ -150,11 +150,3 @@ That is the same reasoning behind my [free walking tour](https://www.berlinwalk.
 _Inside the Frauenkirche. The exterior gives no hint of this, which is exactly why it is worth the twenty minutes._
 
 {{faq}}
-
-## Image credits
-
-- Dresden Hauptbahnhof platform hall: Lukas Beck, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0), via [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:15-08-2022_Dresden_Hauptbahnhof_01.jpg)
-- Fürstenzug: Dennis G. Jarvis, [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0), via [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Germany-04237_-_Procession_of_Princes_%2830047622460%29.jpg)
-- Zwinger courtyard: WoodChuckNorris, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0), via [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Dresden_Zwinger_Innenhof.JPG)
-- Frauenkirche interior: CEphoto, Uwe Aranas, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0), via [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Dresden_Germany_Interior-of-Frauenkirche-08.jpg)
-- Brühlsche Terrasse: Andreas Praefcke, [CC BY 3.0](https://creativecommons.org/licenses/by/3.0), via [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Dresden_Br%C3%BChlsche_Terrassen_Freitreppe_2012.jpg)

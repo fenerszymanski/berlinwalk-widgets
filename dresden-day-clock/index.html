@@ -95,6 +95,18 @@
   .foot a{color:var(--green);font-weight:700}
   .foot p{margin:0 0 6px}
   .foot p:last-child{margin:0}
+  .ddc-credits-row{margin-top:10px}
+  .ddc-credits-trigger{appearance:none;border:1.5px solid #bfd8b7;border-radius:999px;background:#fff;color:var(--green-deep);cursor:pointer;font:800 11px/1 Montserrat,system-ui,sans-serif;padding:8px 12px}
+  .ddc-credits-trigger:hover{background:#f1f7e8;border-color:var(--green)}
+  .ddc-credits-trigger:focus-visible,.ddc-credits-close:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+  .ddc-credits-backdrop{position:fixed;inset:0;z-index:100;background:rgba(18,61,24,.48)}
+  .ddc-credits-panel{position:fixed;z-index:101;inset:50% auto auto 50%;transform:translate(-50%,-50%);width:min(640px,calc(100% - 28px));max-height:calc(100% - 28px);overflow:auto;background:#fff;border:2px solid var(--green);border-radius:16px;box-shadow:0 18px 50px rgba(18,61,24,.28);padding:18px}
+  .ddc-credits-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .ddc-credits-panel h2{color:var(--green-deep);font-size:18px;margin:0}
+  .ddc-credits-panel ul{margin:14px 0 0;padding-left:20px}
+  .ddc-credits-panel li{color:#4f514a;font-size:11.5px;line-height:1.55;margin-bottom:7px}
+  .ddc-credits-panel a{color:var(--green-deep);font-weight:700}
+  .ddc-credits-close{appearance:none;border:0;border-radius:999px;background:var(--yellow);color:var(--green-deep);cursor:pointer;flex:none;font:800 12px/1 Montserrat,system-ui,sans-serif;padding:9px 12px}
 
   @media (max-width:520px){
     .head{padding:15px 15px 13px}
@@ -158,19 +170,61 @@
   <div class="foot">
     <p id="footDay"></p>
     <p id="footMode"></p>
-    <p>Timetable pattern checked against Deutsche Bahn on 20 July 2026. Trains change, and both the Berlin and Dresden lines have engineering work running through 2026, so confirm your exact date in DB Navigator before you buy.</p>
+    <p>Timetable pattern checked against Deutsche Bahn on 21 July 2026. Trains change, and both the Berlin and Dresden lines have engineering work running through 2026, so confirm your exact date in DB Navigator before you buy.</p>
     <p><a href="https://www.berlinwalk.com/post/dresden-day-trip-from-berlin" target="_blank" rel="noopener">Read the full Dresden day trip guide &rarr;</a></p>
+    <div class="ddc-credits-row"><button class="ddc-credits-trigger" id="creditsTrigger" type="button" aria-expanded="false" aria-controls="creditsPanel">Image credits</button></div>
   </div>
 
 </div>
 </div>
 
+<div class="ddc-credits-backdrop" id="creditsBackdrop" hidden></div>
+<section class="ddc-credits-panel" id="creditsPanel" role="dialog" aria-modal="true" aria-labelledby="creditsTitle" hidden>
+  <div class="ddc-credits-head">
+    <h2 id="creditsTitle">Image credits</h2>
+    <button class="ddc-credits-close" id="creditsClose" type="button">Close</button>
+  </div>
+  <ul>
+    <li>Dresden Hauptbahnhof platform hall: <a href="https://commons.wikimedia.org/wiki/File:15-08-2022_Dresden_Hauptbahnhof_01.jpg" target="_blank" rel="noopener">Lukas Beck</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+    <li>Fürstenzug: <a href="https://commons.wikimedia.org/wiki/File:Germany-04237_-_Procession_of_Princes_%2830047622460%29.jpg" target="_blank" rel="noopener">Dennis G. Jarvis</a>, <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noopener">CC BY-SA 2.0</a>.</li>
+    <li>Zwinger courtyard: <a href="https://commons.wikimedia.org/wiki/File:Dresden_Zwinger_Innenhof.JPG" target="_blank" rel="noopener">WoodChuckNorris</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>.</li>
+    <li>Frauenkirche interior: <a href="https://commons.wikimedia.org/wiki/File:Dresden_Germany_Interior-of-Frauenkirche-08.jpg" target="_blank" rel="noopener">CEphoto, Uwe Aranas</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>.</li>
+    <li>Brühlsche Terrasse: <a href="https://commons.wikimedia.org/wiki/File:Dresden_Br%C3%BChlsche_Terrassen_Freitreppe_2012.jpg" target="_blank" rel="noopener">Andreas Praefcke</a>, <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0</a>.</li>
+  </ul>
+</section>
+
 <script>
 (function(){
   'use strict';
 
+  var creditsTrigger = document.getElementById('creditsTrigger');
+  var creditsBackdrop = document.getElementById('creditsBackdrop');
+  var creditsPanel = document.getElementById('creditsPanel');
+  var creditsClose = document.getElementById('creditsClose');
+
+  function openCredits(){
+    creditsBackdrop.hidden = false;
+    creditsPanel.hidden = false;
+    creditsTrigger.setAttribute('aria-expanded', 'true');
+    creditsClose.focus();
+  }
+
+  function closeCredits(){
+    creditsBackdrop.hidden = true;
+    creditsPanel.hidden = true;
+    creditsTrigger.setAttribute('aria-expanded', 'false');
+    creditsTrigger.focus();
+  }
+
+  creditsTrigger.addEventListener('click', openCredits);
+  creditsClose.addEventListener('click', closeCredits);
+  creditsBackdrop.addEventListener('click', closeCredits);
+  document.addEventListener('keydown', function(event){
+    if (event.key === 'Escape' && !creditsPanel.hidden) closeCredits();
+  });
+
   /* ---------------------------------------------------------------
-     Data checked against Deutsche Bahn on 2026-07-20.
+     Data checked against Deutsche Bahn on 2026-07-21.
      The two routes are genuinely different products, not two speeds
      of the same thing: the fast Railjet lands at Dresden Hbf, the
      Deutschlandticket route lands across the river at Dresden-Neustadt

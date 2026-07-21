@@ -109,6 +109,18 @@
 
   .foot{padding:11px 18px 15px;border-top:1px solid var(--line);background:var(--cream);font-size:11px;color:var(--stone);line-height:1.6}
   .foot b{color:var(--green-deep)}
+  .fm-credits-row{margin-top:10px}
+  .fm-credits-trigger{appearance:none;border:1.5px solid #bfd8b7;border-radius:999px;background:#fff;color:var(--green-deep);cursor:pointer;font:800 11px/1 Montserrat,system-ui,sans-serif;padding:8px 12px}
+  .fm-credits-trigger:hover{background:#f1f7e8;border-color:var(--green)}
+  .fm-credits-trigger:focus-visible,.fm-credits-close:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+  .fm-credits-backdrop{position:fixed;inset:0;z-index:100;background:rgba(18,61,24,.48)}
+  .fm-credits-panel{position:fixed;z-index:101;inset:50% auto auto 50%;transform:translate(-50%,-50%);width:min(680px,calc(100% - 28px));max-height:calc(100% - 28px);overflow:auto;background:#fff;border:2px solid var(--green);border-radius:16px;box-shadow:0 18px 50px rgba(18,61,24,.28);padding:18px}
+  .fm-credits-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .fm-credits-panel h2{color:var(--green-deep);font-size:18px;margin:0}
+  .fm-credits-panel ul{margin:14px 0 0;padding-left:20px}
+  .fm-credits-panel li{color:#4f514a;font-size:11.5px;line-height:1.55;margin-bottom:7px}
+  .fm-credits-panel a{color:var(--green-deep);font-weight:700}
+  .fm-credits-close{appearance:none;border:0;border-radius:999px;background:var(--yellow);color:var(--green-deep);cursor:pointer;flex:none;font:800 12px/1 Montserrat,system-ui,sans-serif;padding:9px 12px}
 
   @media (max-width:520px){
     .head{padding:15px 15px 13px}
@@ -164,9 +176,29 @@
 
     <div class="foot">
       Fixture dates from the official league fixture lists published on <b>2 July 2026</b>, plus the clubs' own confirmed kickoff times. Board updated <b>21 July 2026</b>. Kickoff times move: check the club site before you book anything around a game.
+      <div class="fm-credits-row"><button class="fm-credits-trigger" id="creditsTrigger" type="button" aria-expanded="false" aria-controls="creditsPanel">Image credits</button></div>
     </div>
   </div>
 </div>
+
+<div class="fm-credits-backdrop" id="creditsBackdrop" hidden></div>
+<section class="fm-credits-panel" id="creditsPanel" role="dialog" aria-modal="true" aria-labelledby="creditsTitle" hidden>
+  <div class="fm-credits-head">
+    <h2 id="creditsTitle">Image credits</h2>
+    <button class="fm-credits-close" id="creditsClose" type="button">Close</button>
+  </div>
+  <ul>
+    <li>Olympiastadion supporters' display: <a href="https://commons.wikimedia.org/wiki/File:Hertha_BSC_Olympiastadion_Choreo_2013.jpg" target="_blank" rel="noopener">Frankinho</a>, <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener">CC BY 2.0</a>.</li>
+    <li>Alte Försterei aerial view: <a href="https://commons.wikimedia.org/wiki/File:Berlin_alte_f%C3%B6rsterei.jpg" target="_blank" rel="noopener">Arne Müseler</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/de/deed.en" target="_blank" rel="noopener">CC BY-SA 3.0 DE</a>.</li>
+    <li>Alte Försterei stadium sign: <a href="https://commons.wikimedia.org/wiki/File:Alte_F%C3%B6rsterei.jpg" target="_blank" rel="noopener">Berlinschneid</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+    <li>Alte Försterei floodlight and fence: <a href="https://commons.wikimedia.org/wiki/File:Altef%C3%B6rsterei_-_1.jpeg" target="_blank" rel="noopener">Z thomas</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>.</li>
+    <li>Alte Försterei terrace: <a href="https://commons.wikimedia.org/wiki/File:Altef%C3%B6rsterei_-_6.jpeg" target="_blank" rel="noopener">Z thomas</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>.</li>
+    <li>Olympiastadion interior: <a href="https://commons.wikimedia.org/wiki/File:Olympic_stadium_football_field.JPG" target="_blank" rel="noopener">Times</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>.</li>
+    <li>Olympia-Stadion U-Bahn platform: <a href="https://commons.wikimedia.org/wiki/File:U-Bahnhof_Olympia-Stadion_Bahnsteig.jpg" target="_blank" rel="noopener">Alexrk2</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>.</li>
+    <li>Union supporters' display: <a href="https://commons.wikimedia.org/wiki/File:Alte_F%C3%B6rsterei_Fanchoreografie_Union_Berlin.jpg" target="_blank" rel="noopener">Chivista</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+    <li>Rathaus Köpenick departure board: <a href="https://commons.wikimedia.org/wiki/File:Stra%C3%9Fenbahn_Haltestelle_Rathaus_K%C3%B6penick-1.jpg" target="_blank" rel="noopener">GodeNehler</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+  </ul>
+</section>
 
 <script src="fixtures-data.js"></script>
 <script>
@@ -180,6 +212,31 @@
   var elLanes = document.getElementById('lanes');
   var elRail = document.getElementById('rail');
   var elOut = document.getElementById('out');
+  var creditsTrigger = document.getElementById('creditsTrigger');
+  var creditsBackdrop = document.getElementById('creditsBackdrop');
+  var creditsPanel = document.getElementById('creditsPanel');
+  var creditsClose = document.getElementById('creditsClose');
+
+  function openCredits() {
+    creditsBackdrop.hidden = false;
+    creditsPanel.hidden = false;
+    creditsTrigger.setAttribute('aria-expanded', 'true');
+    creditsClose.focus();
+  }
+
+  function closeCredits() {
+    creditsBackdrop.hidden = true;
+    creditsPanel.hidden = true;
+    creditsTrigger.setAttribute('aria-expanded', 'false');
+    creditsTrigger.focus();
+  }
+
+  creditsTrigger.addEventListener('click', openCredits);
+  creditsClose.addEventListener('click', closeCredits);
+  creditsBackdrop.addEventListener('click', closeCredits);
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && !creditsPanel.hidden) closeCredits();
+  });
 
   function d(s) { return new Date(s + 'T12:00:00'); }
   function pct(s) {
@@ -322,20 +379,22 @@
     } else {
       var fixed = hits.filter(function (f) { return f.time; }).length;
       var easy = hits.filter(function (f) { return D.teams[f.team].access === 'easy'; }).length;
+      var whole = (a <= SEASON_START && b >= SEASON_END);
       var line;
-      if (easy) {
+      if (whole) {
+        line = 'The rail above is the complete season. Narrow the dates or tap a square to open the ticket and transport details for one match window.';
+      } else if (easy) {
         line = easy === hits.length
           ? 'Every game in your window is one you can realistically buy a ticket for.'
           : 'At least one of these is a game you can realistically walk up to, and at least one is not.';
       } else {
         line = 'Everything in your window is a Union home game, which is the hardest ticket in the city. Plan for the public sale rather than assuming you will find something on the day.';
       }
-      var whole = (a <= SEASON_START && b >= SEASON_END);
       v.innerHTML = '<b>' + hits.length + (hits.length === 1 ? ' home game' : ' home games')
         + (whole ? ' across the season.' : ' while you are here.') + '</b>'
         + '<span>' + line + ' ' + fixed + ' of ' + hits.length + ' ' + (fixed === 1 ? 'has' : 'have') + ' a confirmed kickoff time so far.</span>';
       elOut.appendChild(v);
-      hits.forEach(function (f) { elOut.appendChild(gameCard(f)); });
+      if (!whole) hits.forEach(function (f) { elOut.appendChild(gameCard(f)); });
     }
 
     // Weihnachtssingen falls inside the window

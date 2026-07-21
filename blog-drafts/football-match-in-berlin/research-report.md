@@ -31,7 +31,10 @@ Confirmed exact kickoff times (the only ones written as times anywhere):
 - **Union vs Schalke 04, Fri 11 September 2026, 20:30** (same announcement).
 - **Union vs Borussia Mönchengladbach, Sat 22 May 2027, 15:30** (final matchday, in the DFL PDF).
 - **Hertha vs 1. FC Heidenheim, Sat 15 August 2026, 13:00** (DFL matchday 1 to 2 PDF; cross-checked against the club's own "Heimauftakt gegen Heidenheim" article).
+- **Hertha vs 1. FC Magdeburg, Sun 6 September 2026, 13:30** (club announcement of matchdays 3 to 6, 15 July 2026).
 - **Union Frauen vs FC Bayern München, Fri 21 August 2026, 18:20**, Alte Försterei, opening match of the Frauen-Bundesliga season.
+
+The remaining 12 Union Frauen home weekends were added from the club's official 2026/27 schedule published in July 2026. The club labels them `Rahmentermin`, so the widget keeps them as Friday-to-Sunday windows until exact kickoff times are confirmed.
 
 Everything else is a fixed weekend with no fixed time. The widget shows the weekend and says so.
 
@@ -43,7 +46,7 @@ Note on time zones: several fetched club pages render kickoff times in UTC. `18:
 
 ### Ticketing
 - **Union:** members-only window, then a second member phase, then public sale. Tickets personalised and non-transferable. Club states that tickets bought on resale platforms lose validity. Official resale only via the club Ticketbörse. Standing from about 15 EUR.
-- **Hertha:** member presale then general sale. Official resale via Clubsale. Standing 17 EUR, seated 27/35/42/47/57 EUR across three opponent categories. Children up to 13 minus 40 percent, Kids4Free lets one adult bring up to two children free. Ostkurve season tickets sold out; seated season tickets still available in June 2026, which is the signal that day tickets stay obtainable.
+- **Hertha:** member presale then general sale. Official resale via Clubsale. A fresh club notice published 20 July 2026 lists the 15 August home opener against Heidenheim at 30 to 75 EUR, with general sale from 24 July and Kids4Free valid for that match. Prices and family offers vary by fixture, so the public copy no longer presents the older 17/27/35/42/47/57 table as a season-wide promise.
 
 ### Matchday rules
 - Bags: nothing over A4 at either ground; Union ban backpacks entirely; Hertha allow A4 with 15 cm depth. Left luggage 4 EUR at Union, 5 EUR at Hertha.

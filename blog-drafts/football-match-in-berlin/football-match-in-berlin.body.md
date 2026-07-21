@@ -17,7 +17,7 @@ For the 2026/27 season the split is simple and it is the opposite of what most p
 
 So the equation is not "which club is better known". It is: 22,012 places against demand from a whole Bundesliga city, versus 74,000 places against second-division demand. Everything else follows from that.
 
-One more thing worth knowing before you plan around dates. Both German leagues started late in 2026 because of the World Cup summer. **The 2. Bundesliga began on 7 August 2026 and the Bundesliga only on 28 August**, so an early-August trip catches Hertha but no Union league football at all.
+One more thing worth knowing before you plan around dates. Both German leagues start late in 2026 because of the World Cup summer. **The 2. Bundesliga begins on 7 August 2026 and the Bundesliga only on 28 August**, so an early-August trip can catch Hertha but no Union league football at all.
 
 ## Union Berlin: the hardest ticket in the city, and the last season at the old ground
 
@@ -49,7 +49,7 @@ _Most of this ground is terrace. It is also the part that disappears when the re
 
 Hertha is the honest answer for most visitors, and I do not mean that as a consolation prize.
 
-Tickets go through a member presale and then a normal general sale on the [Hertha BSC ticket pages](https://www.herthabsc.com/de/tickets/tickets). For most fixtures you can still buy in the days before the game, and sometimes on the day. **Standing costs 17 EUR. Seated tickets run from 27 EUR up to about 57 EUR** depending on where you sit and how attractive the opponent is. Children up to 13 get 40 percent off, and one adult can bring up to two children in free under the club's Kids4Free scheme.
+Tickets go through a member presale and then a normal general sale on the [Hertha BSC ticket pages](https://www.herthabsc.com/de/tickets/tickets). For most fixtures you can still buy in the days before the game, and sometimes on the day. Prices change with the opponent and the section. **For the home opener against Heidenheim on 15 August 2026, Hertha lists tickets from 30 to 75 EUR**, with general sale starting on 24 July. Kids4Free applies to that match, but check the individual sale notice rather than assuming the same offer and price for every fixture.
 
 The football is second division. The building is not. You are watching a league game in the stadium that hosted the 1936 Olympics, the 2006 World Cup final and the Euro 2024 final, and on a normal matchday you can have a standing place in it for less than a museum ticket.
 
@@ -66,7 +66,7 @@ Here is the tip I give people whose dates do not line up with anything else.
 
 **Union Berlin's women's team play in the Frauen-Bundesliga, and they play at the Alte Försterei.** Same ground, same terraces, top-flight football, and nothing like the same scramble for a ticket.
 
-Their 2026/27 season opens at home against Bayern Munich on **Friday 21 August 2026 at 18:20**, which makes it the first competitive football of the season in Berlin, a week before the men's Bundesliga even starts. If you are in Berlin in late August and you want to stand on that terrace, this is the easiest way to do it.
+Their 2026/27 season opens at home against Bayern Munich on **Friday 21 August 2026 at 18:20**, which makes it Berlin's first top-flight league match of the season, a week before the men's Bundesliga starts. If you are in Berlin in late August and you want to stand on that terrace, this is the easiest way to do it.
 
 {{widget:berlin-matchday-board}}
 
@@ -131,13 +131,5 @@ If you want to see how the rest of your days could fit together, my guide to [wh
 
 ![The floodlight and scoreboard at Stadion An der Alten Försterei seen from behind the fence at pitch level](blog-drafts/football-match-in-berlin/images/optimized/alte-foersterei-floodlight-fence.jpg)
 _One floodlight, a small scoreboard and four low stands. Union's ground is the opposite of a modern arena, which is most of the point._
-
-## Image credits
-
-- Olympiastadion supporters' display: photo by Frankinho from Berlin, Germany, [CC BY 2.0](https://creativecommons.org/licenses/by/2.0), via Wikimedia Commons.
-- Alte Försterei from the air: photo by Arne Müseler, [CC BY-SA 3.0 DE](https://creativecommons.org/licenses/by-sa/3.0/de/deed.en), via Wikimedia Commons.
-- Alte Försterei terrace and stadium sign: photos by Z thomas and Berlinschneid, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) and [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0), via Wikimedia Commons.
-- Olympiastadion interior: photo by Times, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0), via Wikimedia Commons.
-- Rathaus Köpenick departure board: photo by GodeNehler, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0), via Wikimedia Commons.
 
 {{faq}}

@@ -82,7 +82,7 @@ Raw originals live in `images/raw/` and are gitignored; every source URL below a
 
 ## Attribution
 
-Seven of the nine used images carry CC BY or CC BY-SA licences that require credit, so the post carries a reader-facing Image Credits block. That block exists for third-party licence compliance only.
+All nine used images carry CC BY or CC BY-SA licences that require credit. The embedded matchday board therefore carries a compact, default-closed reader-facing `Image credits` control naming all nine sources. It exists for third-party licence compliance only.
 
 ## Contact sheets
 

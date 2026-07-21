@@ -27,7 +27,8 @@ Commons file page below.
 | `optimized/07-dresden-bruehlsche-terrasse.jpg` | The Freitreppe steps up to the Brühlsche Terrasse with visitors | CC BY 3.0 | Andreas Praefcke | https://commons.wikimedia.org/wiki/File:Dresden_Br%C3%BChlsche_Terrassen_Freitreppe_2012.jpg |
 
 Two of the seven are public domain and need no attribution. **Five are CC BY or
-CC BY-SA, so the post carries an Image Credits block** naming those five only.
+CC BY-SA, so the embedded day clock carries a compact, default-closed `Image
+credits` control** naming those five only.
 
 Note for the body: the Fürstenzug Commons URL contains parentheses, which the
 blog markdown parser truncates, so it is percent-encoded as `%28...%29` in the
