@@ -10,7 +10,7 @@
   'use strict';
 
   var PDF_SCHEMA_VERSION = '3.0.0';
-  var RENDERER_VERSION = 'plan-artifact-v3-pdf-3.1.0';
+  var RENDERER_VERSION = 'plan-artifact-v3-pdf-3.3.0-phase2';
   var PAGE_WIDTH = 595.28;
   var PAGE_HEIGHT = 841.89;
   var MARGIN = 40;
@@ -174,12 +174,23 @@
 
   function openingSummary(day) {
     var parts = [];
-    if (day && day.opening && day.opening.status) parts.push(day.opening.status);
-    if (day && day.opening && day.opening.warning) parts.push(day.opening.warning);
-    if (day && day.reservation && day.reservation.required) parts.push('Official reservation action: ' + day.reservation.label);
-    if (!parts.length) parts.push('No live opening status is stored.');
-    parts.push('Planning note only; verify the exact place on its official site before leaving');
-    return cleanText(parts.join('. '), 500);
+    var status = cleanText(day && day.opening && day.opening.status || '', 160);
+    var statusKey = status.toLowerCase();
+    if (statusKey === 'monday') parts.push('Check Monday opening hours before you leave');
+    else if (statusKey === 'sunday') parts.push('Most shops are closed on Sunday. Check each stop before you leave');
+    else if (statusKey === 'weekday') parts.push('Check opening hours on the official website before you leave');
+    else if (status) parts.push(status);
+    var warning = day && day.opening && day.opening.warning;
+    var warningText = typeof warning === 'string'
+      ? warning
+      : warning && (warning.detail || warning.label || warning.title);
+    if (warningText) parts.push(cleanText(warningText, 240));
+    if (day && day.reservation && day.reservation.required) parts.push('Book or check: ' + day.reservation.label);
+    if (!parts.length) parts.push('Check opening hours on the official website before you leave');
+    var copy = parts.map(function (part) {
+      return cleanText(part, 240).replace(/[.!?]+$/, '');
+    }).filter(Boolean).join('. ');
+    return cleanText(copy + '.', 500);
   }
 
   function dayLinks(day) {
@@ -188,6 +199,20 @@
     if (!route) throw new Error('Day ' + (day && day.dayNumber || '?') + ' has no valid HTTPS route URL.');
     links.push(route);
     (day.blocks || []).forEach(function (block) {
+      var transfer = block && block.transferFromPrevious;
+      var transferLink = transfer && safeLink({
+        label: 'Open transfer: ' + transfer.fromLabel + ' to ' + transfer.toLabel,
+        url: transfer.url,
+        kind: 'transfer'
+      }, 'Open transfer');
+      if (transferLink && !links.some(function (item) { return item.url === transferLink.url; })) links.push(transferLink);
+      var segment = block && block.transferSegment;
+      var segmentLink = segment && safeLink({
+        label: 'Open journey: ' + segment.fromLabel + ' to ' + segment.toLabel,
+        url: segment.url,
+        kind: 'transfer'
+      }, 'Open journey');
+      if (segmentLink && !links.some(function (item) { return item.url === segmentLink.url; })) links.push(segmentLink);
       (block.links || []).forEach(function (link) {
         var valid = safeLink(link, 'Open map');
         if (valid && !links.some(function (item) { return item.url === valid.url; })) links.push(valid);
@@ -250,13 +275,33 @@
       route: links[0],
       blocks: (day.blocks || []).map(function (block) {
         var link = (block.links || []).map(function (item) { return safeLink(item, 'Open map'); }).filter(Boolean)[0] || null;
+        var transfer = block.transferFromPrevious || null;
+        var segment = block.transferSegment || null;
+        function transferData(value, label) {
+          if (!value) return null;
+          return {
+            fromPlaceId: cleanText(value.fromPlaceId, 100),
+            fromLabel: cleanText(value.fromLabel, 160),
+            toPlaceId: cleanText(value.toPlaceId, 100),
+            toLabel: cleanText(value.toLabel, 160),
+            mode: cleanText(value.mode, 20),
+            minutes: Number(value.minutes) || 0,
+            bufferMinutes: Number(value.bufferMinutes) || 0,
+            totalMinutes: Number(value.totalMinutes) || 0,
+            instruction: cleanText(value.instruction, 360),
+            link: safeLink({ label: label, url: value.url, kind: 'transfer' }, label)
+          };
+        }
         return {
+          kind: cleanText(block.kind || 'activity', 20),
           time: cleanText(block.window || block.time || 'Next', 80),
           window: cleanText(block.window, 80),
           title: cleanText(block.title, 180),
           detail: cleanText(block.detail, 700),
           placeId: cleanText(block.placeId, 100),
-          link: link
+          link: link,
+          transfer: transferData(transfer, 'Open transfer'),
+          segment: transferData(segment, 'Open journey')
         };
       }),
       links: links
@@ -304,7 +349,7 @@
     var site = { label: 'berlinwalk.com', url: 'https://www.berlinwalk.com/', kind: 'support' };
     return {
       type: 'carry-support',
-      title: 'One plan on your phone and on paper',
+      title: 'Save your plan on your phone and as a PDF',
       beforeYouGo: before,
       carryPack: carry,
       support: site,
@@ -343,10 +388,48 @@
         return;
       }
       var actualBlocks = (page.blocks || []).map(function (block, blockIndex) {
-        return { order: blockIndex + 1, window: block.window || block.time, title: block.title, placeId: block.placeId };
+        return {
+          order: blockIndex + 1,
+          kind: block.kind,
+          window: block.window || block.time,
+          title: block.title,
+          placeId: block.placeId,
+          transfer: block.transfer ? {
+            fromPlaceId: block.transfer.fromPlaceId,
+            toPlaceId: block.transfer.toPlaceId,
+            mode: block.transfer.mode,
+            totalMinutes: block.transfer.totalMinutes
+          } : null,
+          segment: block.segment ? {
+            fromPlaceId: block.segment.fromPlaceId,
+            toPlaceId: block.segment.toPlaceId,
+            mode: block.segment.mode,
+            totalMinutes: block.segment.totalMinutes
+          } : null
+        };
       });
       var expectedBlocks = (expected.blocks || []).map(function (block) {
-        return { order: block.order, window: block.window, title: block.title, placeId: block.placeId };
+        var transfer = block.transferFromPrevious || null;
+        var segment = block.transferSegment || null;
+        return {
+          order: block.order,
+          kind: block.kind,
+          window: block.window,
+          title: block.title,
+          placeId: block.placeId,
+          transfer: transfer ? {
+            fromPlaceId: transfer.fromPlaceId,
+            toPlaceId: transfer.toPlaceId,
+            mode: transfer.mode,
+            totalMinutes: transfer.totalMinutes
+          } : null,
+          segment: segment ? {
+            fromPlaceId: segment.fromPlaceId,
+            toPlaceId: segment.toPlaceId,
+            mode: segment.mode,
+            totalMinutes: segment.totalMinutes
+          } : null
+        };
       });
       if (JSON.stringify(actualBlocks) !== JSON.stringify(expectedBlocks)) errors.push('delivery_snapshot_blocks_' + (index + 1));
     });
@@ -468,139 +551,181 @@
   function drawLink(doc, link, x, y, width, options) {
     options = options || {};
     if (!link || !validateExternalUrl(link.url)) return;
-    var label = cleanText(options.prefix || '', 60) + cleanText(link.label, 140);
+    var prefix = cleanText(options.prefix || '', 60);
+    var label = (prefix ? prefix + ' ' : '') + cleanText(link.label, 140);
     var size = options.size || 7.5;
     var lines = fitLines(doc, label, width, size, 'bold', 1);
     setFont(doc, size, 'bold', options.color || COLORS.blue);
-    if (typeof doc.textWithLink === 'function') doc.textWithLink(lines[0], x, y, { url: link.url });
-    else doc.text(lines[0], x, y);
+    doc.text(lines[0], x, y);
+    if (typeof doc.link === 'function') {
+      var measuredWidth = typeof doc.getTextWidth === 'function' ? doc.getTextWidth(lines[0]) : width;
+      var linkWidth = Math.max(1, Math.min(width, Number(measuredWidth) || width));
+      // Use jsPDF's standard top-left link box. Negative-height rectangles can
+      // turn into opaque annotation bands in PDFium on link-heavy pages.
+      doc.link(x, y - size, linkWidth, size + 3, { url: link.url });
+    }
   }
 
-  function drawHeader(doc, kicker, title, subtitle) {
+  function drawHeader(doc, kicker, title, subtitle, options) {
+    options = options || {};
     fillRect(doc, 0, 0, PAGE_WIDTH, 8, COLORS.yellow);
-    setFont(doc, 8, 'bold', COLORS.green);
+    setFont(doc, 9, 'bold', COLORS.green);
     doc.text(cleanText(kicker, 80).toUpperCase(), MARGIN, 40);
-    drawText(doc, title, MARGIN, 68, PAGE_WIDTH - MARGIN * 2, 23, 'bold', COLORS.darkGreen, 2);
-    if (subtitle) drawText(doc, subtitle, MARGIN, 98, PAGE_WIDTH - MARGIN * 2, 8.5, 'normal', COLORS.muted, 2);
+    var titleSize = 25;
+    if (options.singleLineTitle) {
+      var cleanTitle = cleanText(title, 240);
+      while (titleSize > 18) {
+        setFont(doc, titleSize, 'bold', COLORS.darkGreen);
+        if (doc.splitTextToSize(cleanTitle, PAGE_WIDTH - MARGIN * 2).length <= 1) break;
+        titleSize -= 1;
+      }
+    }
+    drawText(doc, title, MARGIN, 70, PAGE_WIDTH - MARGIN * 2, titleSize, 'bold', COLORS.darkGreen, options.singleLineTitle ? 1 : 2);
+    if (subtitle) drawText(doc, subtitle, MARGIN, 102, PAGE_WIDTH - MARGIN * 2, 10, 'normal', COLORS.muted, 2);
   }
 
   function drawFooter(doc, pageNumber, pageCount) {
     setColor(doc, 'setDrawColor', COLORS.border);
     doc.line(MARGIN, FOOTER_Y - 12, PAGE_WIDTH - MARGIN, FOOTER_Y - 12);
-    setFont(doc, 7.5, 'bold', COLORS.green);
+    setFont(doc, 8.2, 'bold', COLORS.green);
     doc.text('berlinwalk.com | @berlinwalkingtour', MARGIN, FOOTER_Y + 4);
     doc.text('Page ' + pageNumber + ' / ' + pageCount, PAGE_WIDTH - MARGIN, FOOTER_Y + 4, { align: 'right' });
   }
 
-  function drawCover(doc, page) {
-    fillRect(doc, 0, 0, PAGE_WIDTH, 255, COLORS.green);
-    fillRect(doc, 0, 251, PAGE_WIDTH, 4, COLORS.yellow);
-    fillRect(doc, MARGIN, 34, 52, 52, COLORS.yellow, 26, COLORS.yellow);
-    setFont(doc, 18, 'bold', COLORS.darkGreen);
-    doc.text('BW', MARGIN + 26, 68, { align: 'center' });
-    setFont(doc, 9, 'bold', COLORS.yellow);
-    doc.text('BERLINWALK PERSONAL TRIP PLAN', MARGIN + 68, 48);
-    drawText(doc, page.title, MARGIN, 118, PAGE_WIDTH - MARGIN * 2, 29, 'bold', COLORS.white, 2);
+  function drawCover(doc, page, options) {
+    options = options || {};
+    fillRect(doc, 0, 0, PAGE_WIDTH, 272, COLORS.green);
+    fillRect(doc, 0, 268, PAGE_WIDTH, 4, COLORS.yellow);
+    if (options.logoDataUrl && typeof doc.addImage === 'function') {
+      doc.addImage(options.logoDataUrl, 'PNG', MARGIN, 28, 166, 69.2);
+    } else {
+      fillRect(doc, MARGIN, 28, 166, 69, COLORS.yellow, 6, COLORS.yellow);
+      setFont(doc, 18, 'bold', COLORS.darkGreen);
+      doc.text('BerlinWalk.com', MARGIN + 83, 69, { align: 'center' });
+    }
+    setFont(doc, 9.5, 'bold', COLORS.yellow);
+    doc.text('PERSONAL TRIP PLAN', MARGIN + 184, 61);
+    drawText(doc, page.title, MARGIN, 134, PAGE_WIDTH - MARGIN * 2, 31, 'bold', COLORS.white, 2);
     var facts = page.tripLength + (page.tripLength === 1 ? ' day' : ' days');
     if (page.dateRange) facts += ' | ' + page.dateRange;
     if (page.stayArea) facts += ' | Base: ' + page.stayArea;
-    drawText(doc, facts, MARGIN, 203, PAGE_WIDTH - MARGIN * 2, 10, 'normal', COLORS.white, 2);
+    drawText(doc, facts, MARGIN, 224, PAGE_WIDTH - MARGIN * 2, 11, 'normal', COLORS.white, 2);
 
-    fillRect(doc, MARGIN, 286, PAGE_WIDTH - MARGIN * 2, 210, COLORS.white, 12, COLORS.border);
-    setFont(doc, 8, 'bold', COLORS.green);
-    doc.text('WHY THIS PLAN FITS', MARGIN + 20, 316);
-    drawText(doc, page.guideNote || page.summary, MARGIN + 20, 352, PAGE_WIDTH - MARGIN * 2 - 40, 13, 'bold', COLORS.darkGreen, 5);
-    var compact = page.summary && page.summary !== page.guideNote ? page.summary : '';
-    if (compact) drawText(doc, compact, MARGIN + 20, 438, PAGE_WIDTH - MARGIN * 2 - 40, 9, 'normal', COLORS.muted, 3);
-
-    fillRect(doc, MARGIN, 526, PAGE_WIDTH - MARGIN * 2, 100, COLORS.soft, 12, COLORS.border);
+    fillRect(doc, MARGIN, 304, PAGE_WIDTH - MARGIN * 2, 190, COLORS.white, 12, COLORS.border);
     setFont(doc, 9, 'bold', COLORS.green);
-    doc.text('SAME PLAN, TWO WAYS TO USE IT', MARGIN + 20, 555);
-    fillRect(doc, MARGIN + 20, 572, 205, 36, COLORS.white, 8, COLORS.border);
-    fillRect(doc, MARGIN + 238, 572, 237, 36, COLORS.white, 8, COLORS.border);
-    setFont(doc, 9, 'bold', COLORS.darkGreen);
-    doc.text('Phone plan: maps and daily timing', MARGIN + 33, 594);
-    doc.text('PDF: saved itinerary works offline', MARGIN + 251, 594);
+    doc.text('HOW TO USE THIS PLAN', MARGIN + 20, 333);
+    drawText(doc, page.guideNote || page.summary, MARGIN + 20, 367, PAGE_WIDTH - MARGIN * 2 - 40, 15, 'bold', COLORS.darkGreen, 4);
+    var compact = page.summary && page.summary !== page.guideNote ? page.summary : '';
+    if (compact) drawText(doc, compact, MARGIN + 20, 444, PAGE_WIDTH - MARGIN * 2 - 40, 10.2, 'normal', COLORS.muted, 3);
 
-    fillRect(doc, MARGIN, 660, PAGE_WIDTH - MARGIN * 2, 78, COLORS.yellow, 10, COLORS.yellow);
-    setFont(doc, 8, 'bold', COLORS.darkGreen);
+    fillRect(doc, MARGIN, 522, PAGE_WIDTH - MARGIN * 2, 104, COLORS.soft, 12, COLORS.border);
+    setFont(doc, 9, 'bold', COLORS.green);
+    doc.text('USE THE SAME PLAN ON YOUR PHONE OR AS A PDF', MARGIN + 20, 552);
+    fillRect(doc, MARGIN + 20, 570, 205, 40, COLORS.white, 8, COLORS.border);
+    fillRect(doc, MARGIN + 238, 570, 237, 40, COLORS.white, 8, COLORS.border);
+    setFont(doc, 10.2, 'bold', COLORS.darkGreen);
+    doc.text('Phone: maps and times', MARGIN + 33, 595);
+    doc.text('PDF: your plan works offline', MARGIN + 251, 595);
+
+    fillRect(doc, MARGIN, 658, PAGE_WIDTH - MARGIN * 2, 92, COLORS.yellow, 10, COLORS.yellow);
+    setFont(doc, 9, 'bold', COLORS.darkGreen);
     doc.text('START HERE', MARGIN + 18, 684);
-    drawText(doc, 'Read the overview, then use one day page at a time. Weather, opening checks and every Plan B are grouped near the end.', MARGIN + 18, 705, PAGE_WIDTH - MARGIN * 2 - 36, 10, 'bold', COLORS.darkGreen, 3);
+    drawText(doc, 'Read the overview first. Then use one day page at a time. Weather, opening checks and Plan B are near the end.', MARGIN + 18, 708, PAGE_WIDTH - MARGIN * 2 - 36, 11.5, 'bold', COLORS.darkGreen, 3);
   }
 
   function drawOverview(doc, page) {
-    drawHeader(doc, 'Your route logic', page.title, page.headline);
-    fillRect(doc, MARGIN, 122, PAGE_WIDTH - MARGIN * 2, 94, COLORS.soft, 10, COLORS.border);
-    setFont(doc, 8, 'bold', COLORS.green);
-    doc.text('WHY THESE DAYS ARE IN THIS ORDER', MARGIN + 16, 145);
-    var reasons = page.reasons.length ? page.reasons : ['The route keeps each day geographically focused.'];
+    drawHeader(doc, 'Your plan', page.title, page.headline);
+    fillRect(doc, MARGIN, 126, PAGE_WIDTH - MARGIN * 2, 110, COLORS.soft, 10, COLORS.border);
+    setFont(doc, 9.2, 'bold', COLORS.green);
+    doc.text('WHY THIS ORDER', MARGIN + 16, 151);
+    var reasons = page.reasons.length ? page.reasons : ['Each day covers one part of Berlin.'];
     reasons.slice(0, 4).forEach(function (reason, index) {
-      setFont(doc, 7.8, 'bold', COLORS.darkGreen);
-      doc.text(String(index + 1), MARGIN + 18, 168 + index * 12);
-      drawText(doc, reason, MARGIN + 34, 168 + index * 12, PAGE_WIDTH - MARGIN * 2 - 50, 7.8, 'normal', COLORS.muted, 1);
+      setFont(doc, 9.2, 'bold', COLORS.darkGreen);
+      doc.text(String(index + 1), MARGIN + 18, 177 + index * 15);
+      drawText(doc, reason, MARGIN + 36, 177 + index * 15, PAGE_WIDTH - MARGIN * 2 - 52, 9.2, 'normal', COLORS.muted, 1);
     });
 
-    var top = 232;
-    var gap = 7;
-    var available = 408;
-    var rowHeight = Math.min(53, Math.floor((available - Math.max(0, page.days.length - 1) * gap) / page.days.length));
+    var top = 252;
+    var gap = 6;
+    var available = 394;
+    var rowHeight = Math.min(52, Math.floor((available - Math.max(0, page.days.length - 1) * gap) / page.days.length));
     page.days.forEach(function (day, index) {
       var y = top + index * (rowHeight + gap);
       fillRect(doc, MARGIN, y, PAGE_WIDTH - MARGIN * 2, rowHeight, COLORS.white, 8, COLORS.border);
       fillRect(doc, MARGIN, y, 46, rowHeight, index % 2 ? COLORS.green : COLORS.darkGreen, 8, index % 2 ? COLORS.green : COLORS.darkGreen);
-      setFont(doc, 7, 'bold', COLORS.yellow);
+      setFont(doc, 7.8, 'bold', COLORS.yellow);
       doc.text('DAY', MARGIN + 23, y + 17, { align: 'center' });
-      setFont(doc, 13, 'bold', COLORS.white);
-      doc.text(String(day.dayNumber), MARGIN + 23, y + 35, { align: 'center' });
-      drawText(doc, day.title, MARGIN + 60, y + 17, 244, 8.8, 'bold', COLORS.darkGreen, 1);
-      drawText(doc, [day.date, day.area, day.movement].filter(Boolean).join(' | '), MARGIN + 60, y + 34, 290, 7, 'normal', COLORS.muted, 1);
-      drawLink(doc, day.route, PAGE_WIDTH - MARGIN - 118, y + rowHeight / 2 + 3, 104, { prefix: 'Map: ', size: 7.2 });
+      setFont(doc, 14.5, 'bold', COLORS.white);
+      doc.text(String(day.dayNumber), MARGIN + 23, y + 36, { align: 'center' });
+      drawText(doc, day.title, MARGIN + 60, y + 18, 252, 10, 'bold', COLORS.darkGreen, 1);
+      drawText(doc, [day.date, day.area, day.movement].filter(Boolean).join(' | '), MARGIN + 60, y + 36, 305, 8.2, 'normal', COLORS.muted, 1);
+      drawLink(doc, day.route, PAGE_WIDTH - MARGIN - 118, y + rowHeight / 2 + 3, 104, { prefix: 'Map: ', size: 7.8 });
     });
 
-    var noteY = 660;
+    var noteY = 668;
     var colWidth = (PAGE_WIDTH - MARGIN * 2 - 10) / 2;
     fillRect(doc, MARGIN, noteY, colWidth, 112, COLORS.lightBlue, 9, COLORS.border);
     fillRect(doc, MARGIN + colWidth + 10, noteY, colWidth, 112, COLORS.lightAmber, 9, COLORS.border);
-    setFont(doc, 8, 'bold', COLORS.blue);
+    setFont(doc, 9, 'bold', COLORS.blue);
     doc.text('TRANSPORT NOTE', MARGIN + 14, noteY + 23);
-    drawText(doc, page.ticket || 'Use the ticket note shown in your phone plan before the first ride.', MARGIN + 14, noteY + 45, colWidth - 28, 8, 'normal', COLORS.muted, 4);
-    setFont(doc, 8, 'bold', COLORS.amber);
-    doc.text('TOUR FIT', MARGIN + colWidth + 24, noteY + 23);
-    drawText(doc, page.tourFit || 'The plan keeps the historic centre together without forcing a cross-city detour.', MARGIN + colWidth + 24, noteY + 45, colWidth - 28, 8, 'normal', COLORS.muted, 4);
+    drawText(doc, page.ticket || 'Use the ticket note shown in your phone plan before the first ride.', MARGIN + 14, noteY + 47, colWidth - 28, 8.8, 'normal', COLORS.muted, 4);
+    setFont(doc, 9, 'bold', COLORS.amber);
+    doc.text('TOUR TIME', MARGIN + colWidth + 24, noteY + 23);
+    drawText(doc, page.tourFit || 'Visit the historic centre on one day. This avoids an extra trip across Berlin.', MARGIN + colWidth + 24, noteY + 47, colWidth - 28, 8.8, 'normal', COLORS.muted, 4);
   }
 
   function drawDay(doc, page) {
-    drawHeader(doc, 'Day ' + page.dayNumber + ' of your plan', page.title, [page.date, page.area, page.movement].filter(Boolean).join(' | '));
-    fillRect(doc, MARGIN, 122, PAGE_WIDTH - MARGIN * 2, 58, COLORS.lightBlue, 9, COLORS.border);
-    setFont(doc, 7.5, 'bold', COLORS.blue);
-    doc.text('WEATHER READ', MARGIN + 14, 143);
-    drawText(doc, page.weather, MARGIN + 14, 162, PAGE_WIDTH - MARGIN * 2 - 148, 7.7, 'normal', COLORS.muted, 2);
-    drawLink(doc, page.route, PAGE_WIDTH - MARGIN - 126, 151, 112, { prefix: 'Route: ', size: 7.2 });
+    drawHeader(doc, 'Day ' + page.dayNumber + ' of your plan', page.title, [page.date, page.area, page.movement].filter(Boolean).join(' | '), { singleLineTitle: true });
+    fillRect(doc, MARGIN, 126, PAGE_WIDTH - MARGIN * 2, 66, COLORS.lightBlue, 9, COLORS.border);
+    setFont(doc, 8.5, 'bold', COLORS.blue);
+    doc.text('WEATHER', MARGIN + 14, 149);
+    drawText(doc, page.weather, MARGIN + 14, 171, PAGE_WIDTH - MARGIN * 2 - 154, 9, 'normal', COLORS.muted, 2);
+    drawLink(doc, page.route, PAGE_WIDTH - MARGIN - 132, 158, 118, { prefix: 'Route: ', size: 8 });
 
     if (page.decision) {
-      fillRect(doc, MARGIN, 190, PAGE_WIDTH - MARGIN * 2, 42, COLORS.soft, 8, COLORS.border);
-      setFont(doc, 7, 'bold', COLORS.green);
-      doc.text('DAY LOGIC', MARGIN + 12, 207);
-      drawText(doc, page.decision, MARGIN + 86, 207, PAGE_WIDTH - MARGIN * 2 - 98, 7.6, 'normal', COLORS.muted, 2);
+      fillRect(doc, MARGIN, 202, PAGE_WIDTH - MARGIN * 2, 50, COLORS.soft, 8, COLORS.border);
+      setFont(doc, 8.2, 'bold', COLORS.green);
+      doc.text('WHY THIS DAY', MARGIN + 12, 222);
+      drawText(doc, page.decision, MARGIN + 92, 222, PAGE_WIDTH - MARGIN * 2 - 106, 9, 'normal', COLORS.muted, 2);
     }
 
-    var startY = page.decision ? 246 : 200;
+    var startY = page.decision ? 266 : 208;
     var endY = 777;
     var blocks = page.blocks;
-    var gap = blocks.length > 8 ? 3 : 6;
+    var dense = blocks.length > 8;
+    var gap = dense ? 3 : 8;
     var available = endY - startY - Math.max(0, blocks.length - 1) * gap;
-    var rowHeight = Math.max(38, Math.min(90, Math.floor(available / Math.max(1, blocks.length))));
+    var rowHeight = Math.max(38, Math.min(110, Math.floor(available / Math.max(1, blocks.length))));
     var detailLines = rowHeight >= 72 ? 3 : (rowHeight >= 52 ? 2 : 1);
+    var timeSize = dense ? 7.2 : 8.4;
+    var titleSize = dense ? 7.8 : 10.2;
+    var detailSize = dense ? 6.8 : 9;
+    var linkSize = dense ? 6.2 : 7.7;
+    var transferSize = dense ? 6.1 : 7.3;
     blocks.forEach(function (block, index) {
       var y = startY + index * (rowHeight + gap);
       fillRect(doc, MARGIN, y, PAGE_WIDTH - MARGIN * 2, rowHeight, index % 2 ? COLORS.white : COLORS.cream, 8, COLORS.border);
-      fillRect(doc, MARGIN + 10, y + 9, 66, Math.min(28, rowHeight - 16), COLORS.green, 6, COLORS.green);
-      setFont(doc, 7.2, 'bold', COLORS.yellow);
+      fillRect(doc, MARGIN + 10, y + 9, 66, Math.min(28, rowHeight - 16), block.kind === 'transfer' ? COLORS.blue : COLORS.green, 6, block.kind === 'transfer' ? COLORS.blue : COLORS.green);
+      setFont(doc, timeSize, 'bold', COLORS.yellow);
       doc.text(cleanText(block.time, 20).toUpperCase(), MARGIN + 43, y + Math.min(27, rowHeight / 2 + 3), { align: 'center' });
       var textX = MARGIN + 90;
-      drawText(doc, block.title, textX, y + 18, 275, 8.4, 'bold', COLORS.darkGreen, 1);
-      if (block.detail) drawText(doc, block.detail, textX, y + 34, 340, 7.2, 'normal', COLORS.muted, detailLines);
-      if (block.link && rowHeight >= 48) drawLink(doc, block.link, PAGE_WIDTH - MARGIN - 116, y + 18, 102, { prefix: 'Map: ', size: 6.8 });
+      drawText(doc, block.title, textX, y + 19, 278, titleSize, 'bold', COLORS.darkGreen, 1);
+      var blockDetailLines = (block.transfer || block.segment) && rowHeight < 82 ? 1 : detailLines;
+      if (block.detail) drawText(doc, block.detail, textX, y + 38, 340, detailSize, 'normal', COLORS.muted, blockDetailLines);
+      if (block.link && rowHeight >= 48) drawLink(doc, block.link, PAGE_WIDTH - MARGIN - 116, y + 19, 102, { prefix: 'Map: ', size: linkSize });
+      var primaryTransfer = block.segment || block.transfer;
+      if (primaryTransfer && rowHeight >= 58) {
+        var transferMode = primaryTransfer.mode === 'walking' ? 'WALK' : 'TRANSIT';
+        var transferPrefix = block.segment ? 'JOURNEY' : 'TRAVEL';
+        var transferText = transferPrefix + ': ' + transferMode + ' ' + primaryTransfer.minutes + ' MIN + ' + primaryTransfer.bufferMinutes + ' MIN BUFFER | ' + primaryTransfer.fromLabel + ' -> ' + primaryTransfer.toLabel;
+        drawText(doc, transferText, textX, y + rowHeight - 11, 330, transferSize, 'bold', COLORS.blue, 1);
+        if (primaryTransfer.link) drawLink(doc, primaryTransfer.link, PAGE_WIDTH - MARGIN - 92, y + rowHeight - 11, 78, { prefix: '', size: dense ? 5.9 : 7, color: COLORS.blue });
+      }
+      if (block.segment && block.transfer && rowHeight >= 68) {
+        var accessMode = block.transfer.mode === 'walking' ? 'WALK' : 'TRANSIT';
+        var accessText = 'GET THERE: ' + accessMode + ' ' + block.transfer.minutes + ' MIN + ' + block.transfer.bufferMinutes + ' MIN BUFFER | ' + block.transfer.fromLabel + ' -> ' + block.transfer.toLabel;
+        drawText(doc, accessText, textX, y + rowHeight - 24, 408, dense ? 5.9 : 7, 'bold', COLORS.blue, 1);
+      }
     });
   }
 
@@ -614,30 +739,30 @@
       ? 'Weather source checked ' + page.checkedAt + '. ' + truth
       : truth;
     drawHeader(doc, 'Practical checks', page.title, sourceLine);
-    var top = 128;
+    var top = 130;
     var gap = 7;
-    var available = 642;
-    var rowHeight = Math.min(86, Math.floor((available - Math.max(0, page.days.length - 1) * gap) / page.days.length));
+    var available = 638;
+    var rowHeight = Math.min(88, Math.floor((available - Math.max(0, page.days.length - 1) * gap) / page.days.length));
     var planLines = rowHeight >= 78 ? 2 : 1;
     page.days.forEach(function (day, index) {
       var y = top + index * (rowHeight + gap);
       fillRect(doc, MARGIN, y, PAGE_WIDTH - MARGIN * 2, rowHeight, COLORS.white, 8, COLORS.border);
       fillRect(doc, MARGIN, y, 50, rowHeight, day.weatherKind === 'live' ? COLORS.blue : COLORS.green, 8, day.weatherKind === 'live' ? COLORS.blue : COLORS.green);
-      setFont(doc, 7, 'bold', COLORS.white);
+      setFont(doc, 7.8, 'bold', COLORS.white);
       doc.text('DAY ' + day.dayNumber, MARGIN + 25, y + 21, { align: 'center' });
-      setFont(doc, 6.5, 'bold', COLORS.white);
+      setFont(doc, 7.2, 'bold', COLORS.white);
       doc.text(day.weatherKind === 'live' ? 'FORECAST' : 'TYPICAL', MARGIN + 25, y + 38, { align: 'center' });
       var x = MARGIN + 64;
-      drawText(doc, day.date + ' | ' + day.title, x, y + 17, 360, 7.8, 'bold', COLORS.darkGreen, 1);
-      drawText(doc, day.weather, x, y + 32, 330, 6.8, 'normal', COLORS.muted, 1);
-      drawText(doc, 'Opening: ' + day.opening, x, y + 46, 390, 6.8, 'normal', COLORS.muted, 1);
-      drawText(doc, 'Plan B: ' + day.planB, x, y + 61, 410, 6.8, 'bold', COLORS.darkGreen, planLines);
-      if (day.reservation) drawLink(doc, day.reservation, PAGE_WIDTH - MARGIN - 100, y + 17, 86, { size: 6.6 });
+      drawText(doc, day.date + ' | ' + day.title, x, y + 18, 360, 9.2, 'bold', COLORS.darkGreen, 1);
+      drawText(doc, day.weather, x, y + 35, 330, 7.8, 'normal', COLORS.muted, 1);
+      drawText(doc, 'Opening: ' + day.opening, x, y + 51, 390, 7.8, 'normal', COLORS.muted, 1);
+      drawText(doc, 'Plan B: ' + day.planB, x, y + 68, 410, 8.2, 'bold', COLORS.darkGreen, planLines);
+      if (day.reservation) drawLink(doc, day.reservation, PAGE_WIDTH - MARGIN - 100, y + 18, 86, { size: 7.2 });
     });
   }
 
   function drawCardColumn(doc, title, items, x, y, width, height, accent) {
-    setFont(doc, 9, 'bold', accent);
+    setFont(doc, 10, 'bold', accent);
     doc.text(title.toUpperCase(), x, y);
     var top = y + 18;
     var gap = 5;
@@ -647,41 +772,41 @@
       var cardY = top + index * (cardHeight + gap);
       fillRect(doc, x, cardY, width, cardHeight, COLORS.white, 7, COLORS.border);
       fillRect(doc, x, cardY, 5, cardHeight, accent, 3, accent);
-      drawText(doc, item.title, x + 14, cardY + 16, width - 28, 7.7, 'bold', COLORS.darkGreen, 1);
+      drawText(doc, item.title, x + 14, cardY + 17, width - 28, items.length > 8 ? 8 : 9.2, 'bold', COLORS.darkGreen, 1);
       if (cardHeight >= 40) {
-        drawText(doc, item.detail, x + 14, cardY + 31, item.link ? width - 110 : width - 28, 6.8, 'normal', COLORS.muted, 1);
+        drawText(doc, item.detail, x + 14, cardY + 34, item.link ? width - 110 : width - 28, items.length > 8 ? 7.2 : 8.2, 'normal', COLORS.muted, 1);
       }
-      if (item.link) drawLink(doc, item.link, x + width - 82, cardY + cardHeight - 8, 68, { size: 6.2 });
+      if (item.link) drawLink(doc, item.link, x + width - 82, cardY + cardHeight - 9, 68, { size: 7 });
     });
     if (!items.length) {
       fillRect(doc, x, top, width, 54, COLORS.white, 7, COLORS.border);
-      drawText(doc, 'No extra action is needed here.', x + 14, top + 28, width - 28, 7.5, 'normal', COLORS.muted, 1);
+      drawText(doc, 'No extra action is needed here.', x + 14, top + 30, width - 28, 8.5, 'normal', COLORS.muted, 1);
     }
   }
 
   function drawCarry(doc, page) {
-    drawHeader(doc, 'Save and carry', page.title, 'The browser plan and this PDF use the same locked itinerary.');
+    drawHeader(doc, 'Save your plan', 'Use your plan on your phone or as a PDF', 'The phone plan and this PDF show the same stops in the same order.', { singleLineTitle: true });
     fillRect(doc, MARGIN, 122, PAGE_WIDTH - MARGIN * 2, 70, COLORS.yellow, 10, COLORS.yellow);
-    setFont(doc, 8, 'bold', COLORS.darkGreen);
+    setFont(doc, 9, 'bold', COLORS.darkGreen);
     doc.text('SAME PLAN, TWO WAYS TO USE IT', MARGIN + 16, 146);
-    drawText(doc, 'Phone: map links and quick actions. PDF: the saved itinerary works offline; map links still need data.', MARGIN + 16, 170, PAGE_WIDTH - MARGIN * 2 - 32, 10, 'bold', COLORS.darkGreen, 2);
+    drawText(doc, 'Phone: map links and times. PDF: the plan works offline; map links still need data.', MARGIN + 16, 171, PAGE_WIDTH - MARGIN * 2 - 32, 11, 'bold', COLORS.darkGreen, 2);
 
     var gap = 12;
     var width = (PAGE_WIDTH - MARGIN * 2 - gap) / 2;
     drawCardColumn(doc, 'Before you go', page.beforeYouGo, MARGIN, 225, width, 450, COLORS.green);
-    drawCardColumn(doc, 'Carry pack', page.carryPack, MARGIN + width + gap, 225, width, 450, COLORS.blue);
+    drawCardColumn(doc, 'On your phone', page.carryPack, MARGIN + width + gap, 225, width, 450, COLORS.blue);
 
     fillRect(doc, MARGIN, 706, PAGE_WIDTH - MARGIN * 2, 66, COLORS.darkGreen, 10, COLORS.darkGreen);
-    setFont(doc, 8, 'bold', COLORS.yellow);
+    setFont(doc, 9, 'bold', COLORS.yellow);
     doc.text('BERLINWALK SUPPORT', MARGIN + 16, 730);
-    drawText(doc, 'Keep the exact plan link with this PDF. For BerlinWalk information, use the official website.', MARGIN + 16, 751, 370, 8, 'normal', COLORS.white, 2);
-    drawLink(doc, page.support, PAGE_WIDTH - MARGIN - 116, 745, 102, { size: 8, color: COLORS.yellow });
+    drawText(doc, 'Keep the exact plan link with this PDF. For BerlinWalk information, use the official website.', MARGIN + 16, 752, 370, 9, 'normal', COLORS.white, 2);
+    drawLink(doc, page.support, PAGE_WIDTH - MARGIN - 116, 746, 102, { size: 8.5, color: COLORS.yellow });
   }
 
-  function drawPage(doc, page) {
+  function drawPage(doc, page, options) {
     setColor(doc, 'setFillColor', COLORS.cream);
     doc.rect(0, 0, PAGE_WIDTH, PAGE_HEIGHT, 'F');
-    if (page.type === 'cover') drawCover(doc, page);
+    if (page.type === 'cover') drawCover(doc, page, options);
     else if (page.type === 'overview') drawOverview(doc, page);
     else if (page.type === 'day') drawDay(doc, page);
     else if (page.type === 'weather-plan-b') drawWeatherPlanB(doc, page);
@@ -705,7 +830,7 @@
     }
     pagePlan.pages.forEach(function (page, index) {
       if (index > 0) doc.addPage('a4', 'portrait');
-      drawPage(doc, page);
+      drawPage(doc, page, options);
       drawFooter(doc, page.pageNumber, pagePlan.pageCount);
     });
     var actualPages = typeof doc.getNumberOfPages === 'function' ? doc.getNumberOfPages() : pagePlan.pageCount;

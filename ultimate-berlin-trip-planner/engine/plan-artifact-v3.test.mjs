@@ -213,8 +213,132 @@ test('route contract rejects hidden, reordered and truncated place IDs', () => {
   assert.throws(() => V3.normalizeArtifact(truncated), /day_route_place_ids_mismatch_1/);
 
   const overLimit = source(1);
-  overLimit.days[0].route.placeIds = Array.from({ length: 9 }, (_, index) => `visible_stop_${index + 1}`);
+  overLimit.days[0].route.placeIds = Array.from({ length: 13 }, (_, index) => `visible_stop_${index + 1}`);
   assert.throws(() => V3.normalizeArtifact(overLimit), /day_route_place_ids_1/);
+});
+
+test('route-aware artifacts preserve transfer detail, return routes and required time gaps', () => {
+  const routeAware = source(1);
+  routeAware.quality.routeLogicVersion = 'trip-planner-route-logic-v1';
+  routeAware.days[0].blocks = [
+    {
+      kind: 'transfer',
+      time: 'Outbound',
+      window: '09:00-10:00',
+      title: 'Berlin Hbf to Potsdam Hbf',
+      placeIds: ['berlin_hbf', 'potsdam_hbf'],
+      primaryPlace: {
+        placeId: 'berlin_hbf',
+        label: 'Berlin Hbf',
+        url: 'https://www.google.com/maps/search/?api=1&query=Berlin+Hbf',
+      },
+      mapLinks: [{
+        placeId: 'potsdam_hbf',
+        label: 'Potsdam Hbf',
+        url: 'https://www.google.com/maps/search/?api=1&query=Potsdam+Hbf',
+      }],
+      transferSegment: {
+        fromPlaceId: 'berlin_hbf',
+        fromLabel: 'Berlin Hbf',
+        toPlaceId: 'potsdam_hbf',
+        toLabel: 'Potsdam Hbf',
+        mode: 'transit',
+        minutes: 35,
+        bufferMinutes: 10,
+        totalMinutes: 45,
+        distanceKm: 25.3,
+        instruction: 'Take a regional train from Berlin Hbf to Potsdam Hbf.',
+        url: 'https://www.google.com/maps/dir/?api=1&origin=Berlin+Hbf&destination=Potsdam+Hbf&travelmode=transit',
+      },
+    },
+    {
+      kind: 'activity',
+      time: 'Morning',
+      window: '10:15-11:30',
+      title: 'Potsdam old centre',
+      primaryPlace: {
+        placeId: 'potsdam_old_market',
+        label: 'Alter Markt',
+        url: 'https://www.google.com/maps/search/?api=1&query=Alter+Markt+Potsdam',
+      },
+      transferFromPrevious: {
+        fromPlaceId: 'potsdam_hbf',
+        fromLabel: 'Potsdam Hbf',
+        toPlaceId: 'potsdam_old_market',
+        toLabel: 'Alter Markt',
+        mode: 'walking',
+        minutes: 10,
+        bufferMinutes: 5,
+        totalMinutes: 15,
+        distanceKm: 0.9,
+        instruction: 'Walk from Potsdam Hbf to Alter Markt.',
+        url: 'https://www.google.com/maps/dir/?api=1&origin=Potsdam+Hbf&destination=Alter+Markt+Potsdam&travelmode=walking',
+      },
+    },
+    {
+      kind: 'transfer',
+      time: 'Return',
+      window: '17:30-18:30',
+      title: 'Potsdam Hbf to Berlin Hbf',
+      placeIds: ['potsdam_hbf', 'berlin_hbf'],
+      primaryPlace: {
+        placeId: 'potsdam_hbf',
+        label: 'Potsdam Hbf',
+        url: 'https://www.google.com/maps/search/?api=1&query=Potsdam+Hbf',
+      },
+      mapLinks: [{
+        placeId: 'berlin_hbf',
+        label: 'Berlin Hbf',
+        url: 'https://www.google.com/maps/search/?api=1&query=Berlin+Hbf',
+      }],
+      transferSegment: {
+        fromPlaceId: 'potsdam_hbf',
+        fromLabel: 'Potsdam Hbf',
+        toPlaceId: 'berlin_hbf',
+        toLabel: 'Berlin Hbf',
+        mode: 'transit',
+        minutes: 35,
+        bufferMinutes: 10,
+        totalMinutes: 45,
+        distanceKm: 25.3,
+        instruction: 'Take a regional train from Potsdam Hbf to Berlin Hbf.',
+        url: 'https://www.google.com/maps/dir/?api=1&origin=Potsdam+Hbf&destination=Berlin+Hbf&travelmode=transit',
+      },
+      transferFromPrevious: {
+        fromPlaceId: 'potsdam_old_market',
+        fromLabel: 'Alter Markt',
+        toPlaceId: 'potsdam_hbf',
+        toLabel: 'Potsdam Hbf',
+        mode: 'walking',
+        minutes: 10,
+        bufferMinutes: 5,
+        totalMinutes: 15,
+        distanceKm: 0.9,
+        instruction: 'Walk from Alter Markt to Potsdam Hbf.',
+        url: 'https://www.google.com/maps/dir/?api=1&origin=Alter+Markt+Potsdam&destination=Potsdam+Hbf&travelmode=walking',
+      },
+    },
+  ];
+  routeAware.days[0].route.placeIds = ['berlin_hbf', 'potsdam_hbf', 'potsdam_old_market', 'potsdam_hbf', 'berlin_hbf'];
+
+  const artifact = V3.normalizeArtifact(routeAware);
+  assert.deepEqual(artifact.days[0].route.placeIds, routeAware.days[0].route.placeIds);
+  assert.equal(artifact.days[0].blocks[0].transferSegment.totalMinutes, 45);
+  assert.equal(artifact.days[0].blocks[1].transferFromPrevious.totalMinutes, 15);
+  assert.equal(V3.deliverySnapshot(artifact).pdf[0].blocks[2].transferSegment.mode, 'transit');
+  assert.equal(V3.deliverySnapshot(artifact).browser[0].blocks[1].transferFromPrevious.mode, 'walking');
+
+  const missing = structuredClone(routeAware);
+  delete missing.days[0].blocks[1].transferFromPrevious;
+  assert.throws(() => V3.normalizeArtifact(missing), /day_transfer_missing_1_2/);
+
+  const impossibleGap = structuredClone(routeAware);
+  impossibleGap.days[0].blocks[1].window = '10:05-11:20';
+  assert.throws(() => V3.normalizeArtifact(impossibleGap), /day_transfer_gap_1_2/);
+
+  const missingSegment = structuredClone(routeAware);
+  delete missingSegment.days[0].blocks[0].transferSegment;
+  assert.throws(() => V3.normalizeArtifact(missingSegment), /day_transfer_segment_missing_1_1/);
 });
 
 test('block place IDs cannot hide a fallback that has no visible link', () => {
@@ -322,7 +446,7 @@ test('day heading rejects a route made by joining the visible anchors', () => {
     { title: 'East Side Gallery' },
     { title: 'Oberbaum Bridge' },
   ]);
-  assert.equal(heading, 'Divided Berlin: border traces to the Spree');
+  assert.equal(heading, 'The Wall from Bernauer Straße to the Spree');
 });
 
 test('day heading rejects two complete visible steps even with thematic connector words', () => {

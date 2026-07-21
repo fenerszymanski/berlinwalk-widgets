@@ -124,9 +124,12 @@ class FakePdf {
     this.pages = 1;
     this.currentPage = 1;
     this.links = [];
+    this.linkRects = [];
     this.textCalls = [];
     this.shapes = [];
+    this.images = [];
     this.savedAs = '';
+    this.textWithLinkCalls = 0;
     this.internal = {
       pageSize: {
         getWidth: () => 595.28,
@@ -150,6 +153,10 @@ class FakePdf {
   roundedRect(x, y, width, height) { this.shapes.push({ page: this.currentPage, x, y, width, height }); return this; }
   line() { return this; }
   circle() { return this; }
+  addImage(data, format, x, y, width, height) {
+    this.images.push({ page: this.currentPage, data, format, x, y, width, height });
+    return this;
+  }
   getTextWidth(value) { return String(value || '').length * 4; }
   splitTextToSize(value, width) {
     const text = String(value || '');
@@ -174,11 +181,16 @@ class FakePdf {
     return this;
   }
   textWithLink(value, x, y, options) {
+    this.textWithLinkCalls += 1;
     this.text(value, x, y);
     this.links.push(options.url);
     return this;
   }
-  link(x, y, width, height, options) { this.links.push(options.url); return this; }
+  link(x, y, width, height, options) {
+    this.links.push(options.url);
+    this.linkRects.push({ x, y, width, height });
+    return this;
+  }
   save(name) { this.savedAs = name; return this; }
 }
 
@@ -216,7 +228,9 @@ test('weather page keeps forecast and typical-condition truth labels separate', 
   assert.doesNotMatch(page.days[2].weather, /Typical August conditions[^.]*\. Typical August conditions/i);
   assert.match(page.days[0].planB, /Hackescher Markt/);
   assert.match(page.days[1].opening, /Open in the planned window/);
-  assert.match(page.days[1].opening, /Planning note only; verify the exact place on its official site before leaving/);
+  assert.match(page.days[1].opening, /Check the official museum slot on the day/);
+  assert.match(page.days[1].opening, /Book or check: Official museum reservation/);
+  assert.doesNotMatch(page.days[1].opening, /Planning note|\[object Object\]|\.\./);
   assert.match(page.checkedAt, /20 Jul 2026/);
   assert.equal(page.source, 'open-meteo');
 });
@@ -228,6 +242,8 @@ test('PDF day pages use real ranges and preserve browser, PDF and email route or
   assert.deepEqual(parity.browser, parity.pdf);
   assert.deepEqual(parity.browser, parity.email);
   assert.deepEqual(parity.browser[0].routePlaceIds, ['alexanderplatz', 'museum-island']);
+  assert.equal(parity.browser[0].decision, artifact.days[0].decision);
+  assert.equal(parity.browser[0].blocks[0].detail, artifact.days[0].blocks[0].detail);
   assert.deepEqual(
     parity.browser[0].blocks.map((block) => block.placeIds),
     [['alexanderplatz'], ['museum-island']],
@@ -268,7 +284,7 @@ test('Plan B remains a separate weather-page field and offline language is hones
 
   const rendered = PdfV3.renderPagePlan(FakePdf, plan, { save: false });
   const text = rendered.doc.textCalls.flatMap((call) => Array.isArray(call.value) ? call.value : [call.value]).join(' ');
-  assert.match(text, /saved itinerary works offline/i);
+  assert.match(text, /plan works offline/i);
   assert.match(text, /map links still need data/i);
 });
 
@@ -302,12 +318,41 @@ test('renders exact pages from both a jsPDF constructor and a fresh instance', (
   assert.equal(fromConstructor.pageCount, 9);
   assert.equal(fromConstructor.doc.getNumberOfPages(), 9);
   assert.equal(fromConstructor.doc.links.every(PdfV3.validateExternalUrl), true);
+  assert.equal(fromConstructor.doc.textWithLinkCalls, 0);
+  assert.equal(fromConstructor.doc.linkRects.every((rect) => rect.height > 0), true);
 
   const instance = new FakePdf();
   const view = V3.createViewModel(source, weather);
   const fromInstance = PdfV3.renderPdf(instance, view, { save: true, fileName: 'berlinwalk-test-plan.pdf' });
   assert.equal(fromInstance.pageCount, 9);
   assert.equal(instance.savedAs, 'berlinwalk-test-plan.pdf');
+});
+
+test('cover uses the supplied original BerlinWalk logo asset', () => {
+  const plan = PdfV3.createPagePlan(artifactSource(1), weatherSource(1));
+  const logoDataUrl = 'data:image/png;base64,BERLINWALK_LOGO_TEST';
+  const rendered = PdfV3.renderPagePlan(FakePdf, plan, { save: false, logoDataUrl });
+  assert.equal(rendered.doc.images.length, 1);
+  assert.equal(rendered.doc.images[0].page, 1);
+  assert.equal(rendered.doc.images[0].data, logoDataUrl);
+  assert.equal(rendered.doc.images[0].format, 'PNG');
+  const coverText = rendered.doc.textCalls
+    .filter((call) => call.page === 1)
+    .flatMap((call) => Array.isArray(call.value) ? call.value : [call.value])
+    .join(' ');
+  assert.doesNotMatch(coverText, /\bBW\b/);
+  assert.match(coverText, /PERSONAL TRIP PLAN/);
+});
+
+test('PDF labels keep readable spacing and the final header stays on one line', () => {
+  const plan = PdfV3.createPagePlan(artifactSource(3), weatherSource(3));
+  const rendered = PdfV3.renderPagePlan(FakePdf, plan, { save: false });
+  const text = rendered.doc.textCalls
+    .flatMap((call) => Array.isArray(call.value) ? call.value : [call.value])
+    .join(' ');
+  assert.match(text, /Map: Open/);
+  assert.doesNotMatch(text, /Map:Open/);
+  assert.match(text, /Use your plan on your phone or as a PDF/);
 });
 
 test('renderer keeps all drawing inside the A4 content boundary and uses ASCII hyphens', () => {

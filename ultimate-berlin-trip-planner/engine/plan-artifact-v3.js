@@ -10,6 +10,7 @@
   var MAX_ARTIFACT_BYTES = 128 * 1024;
   var MAX_DAYS = 7;
   var MAX_BLOCKS_PER_DAY = 12;
+  var MAX_ROUTE_PLACES = 12;
   var ALLOWED_URL_HOSTS = {
     'berlinwalk.com': true,
     'www.berlinwalk.com': true,
@@ -103,14 +104,21 @@
   function routePlaceIdsFromBlocks(blocks) {
     var routeIds = [];
     (Array.isArray(blocks) ? blocks : []).forEach(function (block) {
-      var mealAlternatives = /^(Lunch|Evening|Dinner|Later)$/i.test(String(block && block.time || '').trim());
+      var mealAlternatives = /^(Lunch|Evening|Dinner|Later)$/i.test(String(block && block.time || '').trim()) && block && block.kind !== 'transfer';
       var candidates = mealAlternatives ? [block && block.placeId] : (block && block.placeIds || []);
       candidates.forEach(function (candidate) {
         var value = placeId(candidate);
-        if (value && value !== 'arrival_transfer' && routeIds.indexOf(value) === -1) routeIds.push(value);
+        if (value && value !== 'arrival_transfer' && routeIds[routeIds.length - 1] !== value) routeIds.push(value);
       });
     });
     return routeIds;
+  }
+
+  function blockRoutePlaceIds(block) {
+    if (!block) return [];
+    var mealAlternatives = /^(Lunch|Evening|Dinner|Later)$/i.test(String(block.time || '').trim()) && block.kind !== 'transfer';
+    var candidates = mealAlternatives ? [block.placeId] : (block.placeIds || []);
+    return candidates.map(placeId).filter(function (value) { return value && value !== 'arrival_transfer'; });
   }
 
   function parsedWindow(value) {
@@ -130,6 +138,24 @@
       url: href,
       kind: text(source.kind || '', 40),
       placeId: placeId(source.placeId || '')
+    };
+  }
+
+  function normalizeTransfer(source) {
+    source = source || {};
+    if (!source.fromPlaceId || !source.toPlaceId) return null;
+    return {
+      fromPlaceId: placeId(source.fromPlaceId),
+      fromLabel: text(source.fromLabel || '', 160),
+      toPlaceId: placeId(source.toPlaceId),
+      toLabel: text(source.toLabel || '', 160),
+      mode: text(source.mode || '', 20),
+      minutes: number(source.minutes, 0),
+      bufferMinutes: number(source.bufferMinutes, 0),
+      totalMinutes: number(source.totalMinutes, 0),
+      distanceKm: number(source.distanceKm, 0),
+      instruction: text(source.instruction || '', 360),
+      url: url(source.url)
     };
   }
 
@@ -154,6 +180,7 @@
       : uniquePlaceIds([ownerPlaceId].concat(links.map(function (link) { return link.placeId; })));
     return {
       order: index + 1,
+      kind: source.kind === 'transfer' ? 'transfer' : 'activity',
       time: text(source.time || 'Next', 40),
       window: text(source.window || '', 80),
       title: text(source.title || 'Berlin stop', 180),
@@ -161,7 +188,9 @@
       placeId: ownerPlaceId,
       placeIds: blockPlaceIds,
       placeLabel: text(source.placeLabel || (source.primaryPlace && source.primaryPlace.label) || '', 160),
-      links: links
+      links: links,
+      transferFromPrevious: normalizeTransfer(source.transferFromPrevious),
+      transferSegment: normalizeTransfer(source.transferSegment)
     };
   }
 
@@ -275,7 +304,8 @@
       createdAt: createdAt,
       quality: {
         status: text(source.quality && source.quality.status || '', 20),
-        validatorVersion: text(source.quality && source.quality.validatorVersion || '', 80)
+        validatorVersion: text(source.quality && source.quality.validatorVersion || '', 80),
+        routeLogicVersion: text(source.quality && source.quality.routeLogicVersion || '', 80)
       },
       input: input,
       decisionReceipt: {
@@ -387,6 +417,32 @@
         if (!placeIdsEqual(block.placeIds, expectedBlockPlaceIds)) {
           errors.push('day_block_place_ids_mismatch_' + (index + 1) + '_' + blockNumber);
         }
+        var transfer = block.transferFromPrevious;
+        if (transfer) {
+          if (!/^[A-Za-z0-9][A-Za-z0-9._:-]*$/.test(transfer.fromPlaceId) || !/^[A-Za-z0-9][A-Za-z0-9._:-]*$/.test(transfer.toPlaceId)) {
+            errors.push('day_transfer_place_id_' + (index + 1) + '_' + blockNumber);
+          }
+          if (['walking', 'transit'].indexOf(transfer.mode) === -1) errors.push('day_transfer_mode_' + (index + 1) + '_' + blockNumber);
+          if (!(transfer.minutes > 0) || transfer.bufferMinutes < 0 || transfer.totalMinutes !== transfer.minutes + transfer.bufferMinutes) {
+            errors.push('day_transfer_minutes_' + (index + 1) + '_' + blockNumber);
+          }
+          if (!transfer.fromLabel || !transfer.toLabel || !transfer.instruction || !transfer.url) {
+            errors.push('day_transfer_detail_' + (index + 1) + '_' + blockNumber);
+          }
+        }
+        var segment = block.transferSegment;
+        if (segment) {
+          if (!/^[A-Za-z0-9][A-Za-z0-9._:-]*$/.test(segment.fromPlaceId) || !/^[A-Za-z0-9][A-Za-z0-9._:-]*$/.test(segment.toPlaceId)) {
+            errors.push('day_transfer_segment_place_id_' + (index + 1) + '_' + blockNumber);
+          }
+          if (['walking', 'transit'].indexOf(segment.mode) === -1) errors.push('day_transfer_segment_mode_' + (index + 1) + '_' + blockNumber);
+          if (!(segment.minutes > 0) || segment.bufferMinutes < 0 || segment.totalMinutes !== segment.minutes + segment.bufferMinutes) {
+            errors.push('day_transfer_segment_minutes_' + (index + 1) + '_' + blockNumber);
+          }
+          if (!segment.fromLabel || !segment.toLabel || !segment.instruction || !segment.url) {
+            errors.push('day_transfer_segment_detail_' + (index + 1) + '_' + blockNumber);
+          }
+        }
       });
       timedBlocks.sort(function (first, second) { return first.window.start - second.window.start; });
       for (var timedIndex = 1; timedIndex < timedBlocks.length; timedIndex += 1) {
@@ -394,12 +450,57 @@
           errors.push('day_block_overlap_' + (index + 1) + '_' + (timedBlocks[timedIndex].index + 1));
         }
       }
+      if (artifact && artifact.quality && artifact.quality.routeLogicVersion) {
+        day.blocks.forEach(function (block, blockIndex) {
+          var routeIds = blockRoutePlaceIds(block);
+          if (block.kind === 'transfer') {
+            var segment = block.transferSegment;
+            if (!segment) {
+              errors.push('day_transfer_segment_missing_' + (index + 1) + '_' + (blockIndex + 1));
+            } else if (segment.fromPlaceId !== routeIds[0] || segment.toPlaceId !== routeIds[routeIds.length - 1]) {
+              errors.push('day_transfer_segment_order_' + (index + 1) + '_' + (blockIndex + 1));
+            }
+          } else if (block.transferSegment) {
+            errors.push('day_transfer_segment_unexpected_' + (index + 1) + '_' + (blockIndex + 1));
+          }
+        });
+        for (var blockIndex = 1; blockIndex < day.blocks.length; blockIndex += 1) {
+          var previousBlock = day.blocks[blockIndex - 1];
+          var currentBlock = day.blocks[blockIndex];
+          var previousIds = blockRoutePlaceIds(previousBlock);
+          var currentIds = blockRoutePlaceIds(currentBlock);
+          var expectedFrom = previousIds[previousIds.length - 1] || '';
+          var expectedTo = currentIds[0] || '';
+          var needsTransfer = expectedFrom && expectedTo && expectedFrom !== expectedTo;
+          var currentTransfer = currentBlock.transferFromPrevious;
+          if (needsTransfer && !currentTransfer) {
+            errors.push('day_transfer_missing_' + (index + 1) + '_' + (blockIndex + 1));
+            continue;
+          }
+          if (!needsTransfer && currentTransfer) {
+            errors.push('day_transfer_unexpected_' + (index + 1) + '_' + (blockIndex + 1));
+            continue;
+          }
+          if (currentTransfer) {
+            if (currentTransfer.fromPlaceId !== expectedFrom || currentTransfer.toPlaceId !== expectedTo) {
+              errors.push('day_transfer_order_' + (index + 1) + '_' + (blockIndex + 1));
+            }
+            var previousWindow = parsedWindow(previousBlock.window);
+            var currentWindow = parsedWindow(currentBlock.window);
+            if (previousWindow && currentWindow && currentWindow.start < previousWindow.end + currentTransfer.totalMinutes) {
+              errors.push('day_transfer_gap_' + (index + 1) + '_' + (blockIndex + 1));
+            }
+          }
+        }
+      }
       var routePlaceIds = day.route && Array.isArray(day.route.placeIds) ? day.route.placeIds : [];
-      if (routePlaceIds.length < 1 || routePlaceIds.length > 8) errors.push('day_route_place_ids_' + (index + 1));
+      if (routePlaceIds.length < 1 || routePlaceIds.length > MAX_ROUTE_PLACES) errors.push('day_route_place_ids_' + (index + 1));
       if (routePlaceIds.some(function (value) { return !/^[A-Za-z0-9][A-Za-z0-9._:-]*$/.test(value); })) {
         errors.push('day_route_place_id_format_' + (index + 1));
       }
-      if (uniquePlaceIds(routePlaceIds).length !== routePlaceIds.length) errors.push('day_route_place_id_duplicate_' + (index + 1));
+      if (routePlaceIds.some(function (value, routeIndex) { return routeIndex > 0 && routePlaceIds[routeIndex - 1] === value; })) {
+        errors.push('day_route_place_id_consecutive_duplicate_' + (index + 1));
+      }
       var expectedRoutePlaceIds = routePlaceIdsFromBlocks(day.blocks);
       if (!placeIdsEqual(routePlaceIds, expectedRoutePlaceIds)) errors.push('day_route_place_ids_mismatch_' + (index + 1));
       var stepKeys = day.blocks.map(function (block) { return headlineKey(block && block.title); }).filter(Boolean);
@@ -475,17 +576,22 @@
         dayNumber: day.dayNumber,
         dateKey: day.dateKey,
         title: day.title,
+        decision: day.decision,
         routeUrl: day.route.url,
         routePlaceIds: day.route.placeIds.slice(),
         planB: day.planB,
         blocks: day.blocks.map(function (block) {
           return {
             order: block.order,
+            kind: block.kind,
             window: block.window || block.time,
             title: block.title,
+            detail: block.detail,
             placeId: block.placeId,
             placeIds: block.placeIds.slice(),
-            links: block.links.map(function (link) { return { placeId: link.placeId, url: link.url }; })
+            links: block.links.map(function (link) { return { placeId: link.placeId, url: link.url }; }),
+            transferFromPrevious: block.transferFromPrevious ? Object.assign({}, block.transferFromPrevious) : null,
+            transferSegment: block.transferSegment ? Object.assign({}, block.transferSegment) : null
           };
         })
       };
@@ -562,22 +668,23 @@
     var distinct = candidates.find(function (candidate) { return headlineIsDistinct(candidate, stepKeys, anchorKeys); });
     if (distinct) return text(distinct, 180);
     var context = headlineKey([day.title, day.theme, day.area].join(' '));
-    if (/wall|cold war|divid/.test(context)) return 'Divided Berlin: border traces to the Spree';
-    if (/museum/.test(context)) return 'One museum, then the river';
-    if (/potsdam|palace/.test(context)) return 'Palaces and park paths in Potsdam';
-    if (/food|market/.test(context)) return 'Neighbourhoods through food';
-    if (/night|club/.test(context)) return 'Save energy for Berlin after dark';
-    if (/free|budget/.test(context)) return 'Serious history without a ticket';
-    if (/history|memorial|prussia/.test(context)) return 'Prussian Berlin to the 20th century';
-    if (/charlottenburg|west berlin/.test(context)) return 'West Berlin beyond the historic centre';
-    if (/park|garden|nature/.test(context)) return text((day.area || 'Berlin') + ': parks at a slower pace', 180);
-    return text((day.area || 'Berlin') + ': one connected day', 180);
+    if (/wall|cold war|divid/.test(context)) return 'The Wall from Bernauer Straße to the Spree';
+    if (/museum/.test(context)) return 'Museum Island and the Spree';
+    if (/potsdam|palace/.test(context)) return 'Potsdam and Sanssouci';
+    if (/food|market/.test(context)) return 'Markets and food in Kreuzberg';
+    if (/night|club/.test(context)) return 'Friedrichshain in the evening';
+    if (/free|budget/.test(context)) return 'Free places in central Berlin';
+    if (/history|memorial|prussia/.test(context)) return 'Brandenburg Gate and 20th-century history';
+    if (/charlottenburg|west berlin/.test(context)) return 'Charlottenburg: palace, square and lake';
+    if (/park|garden|nature/.test(context)) return text((day.area || 'Berlin') + ' parks', 180);
+    return text((day.area || 'Berlin') + ' route', 180);
   }
 
   return {
     SCHEMA_VERSION: SCHEMA_VERSION,
     WEATHER_SCHEMA_VERSION: WEATHER_SCHEMA_VERSION,
     MAX_ARTIFACT_BYTES: MAX_ARTIFACT_BYTES,
+    MAX_ROUTE_PLACES: MAX_ROUTE_PLACES,
     normalizeArtifact: normalizeArtifact,
     normalizeWeatherOverlay: normalizeWeatherOverlay,
     createViewModel: createViewModel,
