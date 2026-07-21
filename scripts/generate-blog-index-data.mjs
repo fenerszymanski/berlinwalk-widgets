@@ -635,6 +635,9 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if ((post.slug || '') === 'wannsee-berlin') return 'wannsee-shore-planner';
+  if ((post.slug || '') === 'football-match-in-berlin') return 'berlin-matchday-board';
+  if ((post.slug || '') === 'dresden-day-trip-from-berlin') return 'dresden-day-clock';
   if ((post.slug || '') === 'berliner-unterwelten') return 'berliner-unterwelten-tour-board';
   if ((post.slug || '') === 'spreewald-day-trip-from-berlin') return 'spreewald-reach-map';
   if ((post.slug || '') === 'schoneberg-berlin') return 'schoneberg-plaque-check';
