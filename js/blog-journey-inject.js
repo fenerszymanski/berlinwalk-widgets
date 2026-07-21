@@ -3,8 +3,8 @@
  * Loaded site-wide via Wix Custom Code.
  */
 (function () {
-  var DATA_URL = window.BW_BLOG_DATA_URL || 'https://fenerszymanski.github.io/berlinwalk-widgets/blog-index/archive.json?v=20260719-phase1';
-  var TOOLS_DATA_URL = window.BW_TOOLS_DATA_URL || 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/data.json';
+  var DATA_URL = window.BW_BLOG_DATA_URL || 'https://fenerszymanski.github.io/berlinwalk-widgets/blog-index/archive.json?v=20260721-two-blog-publish';
+  var TOOLS_DATA_URL = window.BW_TOOLS_DATA_URL || 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/data.json?v=20260721-two-blog-publish';
   var STYLE_ID = 'bw-blog-journey-style';
   var STABILITY_STYLE_ID = 'bw-blog-journey-stability-style';
   var POST_BODY_MARKER = 'data-bw-blog-post-body';
