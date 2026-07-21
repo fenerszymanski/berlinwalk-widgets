@@ -28,6 +28,9 @@
     var max = 0;
     for (var i = 0; i < body.children.length; i++) {
       var child = body.children[i];
+      // Fixed overlays such as modal-style image credits must not influence
+      // the iframe's reported content height when they are opened.
+      if (child.hasAttribute && child.hasAttribute('data-bw-resize-ignore')) continue;
       var rect = child.getBoundingClientRect();
       // getBoundingClientRect ignores margins — add them so iframe doesn't clip
       var cs = window.getComputedStyle ? window.getComputedStyle(child) : null;
