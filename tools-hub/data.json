@@ -4909,6 +4909,37 @@
       "relatedBlog": "/post/wannsee-berlin",
       "iconStatus": "live-wix-media",
       "cmsItemId": "91d1ffb4-8cfa-4a3e-96a7-610106446b2a"
+    },
+    {
+      "slug": "berlin-wall-trail-sections",
+      "title": "Berlin Wall Trail Section Finder",
+      "lead": "The Berliner Mauerweg is 160 km, but the surviving Wall sits in about 19 km of it. See the whole loop drawn to scale and shaded by how much border history is still standing, set your time and whether you are walking or cycling, and get the section that actually fits with both end stations and what survives on it.",
+      "category": "Discovery",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-wall-trail-sections/",
+      "embedHeight": 1900,
+      "hubCategory": "CultureLandmarks",
+      "type": "Planner",
+      "tags": [
+        "Berlin Wall Trail",
+        "Berliner Mauerweg",
+        "Bernauer Strasse",
+        "East Side Gallery",
+        "Schlesischer Busch",
+        "watchtower",
+        "cycling",
+        "Kolonnenweg"
+      ],
+      "aliases": [
+        "berlin wall trail",
+        "mauerweg",
+        "berliner mauerweg",
+        "wall trail",
+        "cycle the berlin wall",
+        "walk the berlin wall",
+        "wall trail sections"
+      ],
+      "relatedBlog": "/post/berlin-wall-trail",
+      "iconStatus": "pending"
     }
   ],
   "hubCategories": [

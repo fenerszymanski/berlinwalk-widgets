@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Berlin Wall Trail Section Finder — BerlinWalk</title>
+<meta name="description" content="The Berlin Wall Trail is 160 km, but the surviving Wall sits in about 19 km of it. See the whole loop drawn to scale, shaded by how much history actually survives, then find the section that fits your time." />
+<link rel="icon" href="data:," />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root {
+    --bw-green: #1B5E20;
+    --bw-green-dark: #123D18;
+    --bw-yellow: #FFE600;
+    --bw-lime: #7CB342;
+    --bw-light: #C5E1A5;
+    --bw-cream: #FAFAF5;
+    --bw-ink: #212121;
+    --bw-red: #E63946;
+    --d0: #E8E4D4;
+    --d1: #C9DBA8;
+    --d2: #7FA950;
+    --d3: #1B5E20;
+    --rule: #DAD5C2;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bw-cream);
+    color: var(--bw-ink);
+    -webkit-text-size-adjust: 100%;
+  }
+  .wt { max-width: 900px; margin: 0 auto; padding: 18px 14px 26px; }
+  .wt-kicker {
+    font-size: 11px; letter-spacing: .14em; font-weight: 700;
+    color: var(--bw-green); text-transform: uppercase; margin: 0 0 6px;
+  }
+  .wt h1 { font-size: 23px; line-height: 1.2; margin: 0 0 8px; color: var(--bw-green-dark); }
+  .wt-lead { font-size: 14.5px; line-height: 1.55; margin: 0 0 4px; max-width: 68ch; }
+
+  /* ---------- the scale bar ---------- */
+  .wt-scalewrap { margin: 20px 0 0; }
+  .wt-scalehead {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 10px; margin: 0 0 7px; flex-wrap: wrap;
+  }
+  .wt-scaletitle {
+    font-size: 11.5px; font-weight: 700; letter-spacing: .09em;
+    text-transform: uppercase; color: var(--bw-green);
+  }
+  .wt-legend { display: flex; align-items: center; gap: 9px; font-size: 10.5px; color: #5d5a4e; flex-wrap: wrap; }
+  .wt-legend b { font-weight: 700; color: #3d3a31; }
+  .wt-swatch { display: inline-flex; align-items: center; gap: 4px; }
+  .wt-swatch i { width: 13px; height: 11px; border-radius: 2px; display: block; border: 1px solid rgba(0,0,0,.13); }
+
+  .wt-zones { display: flex; height: 15px; margin: 0 0 3px; }
+  .wt-zone {
+    font-size: 9.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+    color: #6b6759; display: flex; align-items: center; justify-content: center;
+    border-left: 1px solid var(--rule); border-right: 1px solid var(--rule);
+    border-top: 1px solid var(--rule); border-radius: 4px 4px 0 0;
+    min-width: 0; overflow: hidden; white-space: nowrap;
+  }
+
+  .wt-ribbon {
+    display: flex; width: 100%; height: 74px;
+    border-radius: 6px; overflow: hidden;
+    border: 1px solid rgba(0,0,0,.16);
+    background: #fff;
+  }
+  .wt-band {
+    position: relative; min-width: 0; padding: 0; margin: 0;
+    border: 0; border-right: 1px solid rgba(255,255,255,.6);
+    cursor: pointer; font-family: inherit; display: block;
+    transition: filter .15s, opacity .15s;
+    outline-offset: -3px;
+  }
+  .wt-band:last-child { border-right: 0; }
+  .wt-band[data-d="0"] { background: var(--d0); }
+  .wt-band[data-d="1"] { background: var(--d1); }
+  .wt-band[data-d="2"] { background: var(--d2); }
+  .wt-band[data-d="3"] { background: var(--d3); }
+  .wt-band .wt-num {
+    position: absolute; top: 5px; left: 0; right: 0;
+    font-size: 10px; font-weight: 700; text-align: center;
+    color: #3d3a31; pointer-events: none;
+  }
+  .wt-band[data-d="2"] .wt-num, .wt-band[data-d="3"] .wt-num { color: #fff; }
+  /* "does not fit your time" is shown as a hatch, never by fading the colour:
+     the density shading is the point of the ribbon and must stay readable. */
+  .wt-band.is-out::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: repeating-linear-gradient(
+      135deg,
+      rgba(255,255,255,.42) 0 2px,
+      rgba(255,255,255,0) 2px 9px
+    );
+  }
+  .wt-band.is-fit::after {
+    content: ""; position: absolute; left: 3px; right: 3px; bottom: 5px; height: 4px;
+    background: var(--bw-yellow); border-radius: 2px;
+  }
+  .wt-band.is-sel { filter: none; box-shadow: inset 0 0 0 3px var(--bw-yellow); opacity: 1; }
+  .wt-band:hover { filter: brightness(1.08); }
+  .wt-band:focus-visible { outline: 3px solid var(--bw-green-dark); }
+
+  .wt-axis { position: relative; height: 17px; margin-top: 3px; }
+  .wt-tick {
+    position: absolute; top: 0; font-size: 9.5px; color: #7a7668;
+    transform: translateX(-50%); white-space: nowrap;
+  }
+  .wt-tick::before {
+    content: ""; position: absolute; top: -3px; left: 50%; width: 1px; height: 4px;
+    background: var(--rule);
+  }
+  .wt-hint { font-size: 11.5px; color: #6b6759; margin: 9px 0 0; line-height: 1.45; }
+
+  /* ---------- controls ---------- */
+  .wt-controls { margin: 22px 0 0; }
+  .wt-ctrl + .wt-ctrl { margin-top: 14px; }
+  .wt-label {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--bw-green); margin: 0 0 8px;
+  }
+  .wt-label .num {
+    background: var(--bw-yellow); color: var(--bw-green-dark);
+    width: 20px; height: 20px; border-radius: 50%; flex: none;
+    display: inline-flex; align-items: center; justify-content: center; font-size: 11px;
+  }
+  .wt-opts { display: flex; gap: 7px; flex-wrap: wrap; }
+  .wt-opt {
+    border: 2px solid var(--rule); border-radius: 999px; background: #fff;
+    padding: 7px 14px; cursor: pointer; font-family: inherit;
+    font-size: 12.5px; font-weight: 600; color: var(--bw-ink);
+    transition: border-color .15s, background .15s;
+  }
+  .wt-opt:hover { border-color: var(--bw-lime); }
+  .wt-opt[aria-pressed="true"] {
+    background: var(--bw-green); border-color: var(--bw-green); color: #fff;
+  }
+  .wt-opt:focus-visible { outline: 3px solid var(--bw-green-dark); outline-offset: 2px; }
+
+  /* ---------- verdict ---------- */
+  .wt-verdict {
+    margin: 20px 0 0; padding: 13px 15px;
+    background: #fff; border: 2px solid var(--bw-green); border-radius: 12px;
+    font-size: 14px; line-height: 1.55;
+  }
+  .wt-verdict strong { color: var(--bw-green-dark); }
+
+  /* ---------- shortcuts ---------- */
+  .wt-shorts { margin: 16px 0 0; display: grid; gap: 10px; }
+  .wt-short {
+    border: 2px solid var(--rule); border-radius: 12px; background: #fff;
+    padding: 12px 14px;
+  }
+  .wt-short h3 {
+    margin: 0 0 4px; font-size: 14.5px; color: var(--bw-green-dark); line-height: 1.3;
+  }
+  .wt-short .wt-meta {
+    font-size: 11.5px; color: #6b6759; margin: 0 0 7px; line-height: 1.45;
+  }
+  .wt-short p { margin: 0; font-size: 13px; line-height: 1.55; }
+  .wt-short.is-pick { border-color: var(--bw-green); }
+  .wt-pickflag {
+    display: inline-block; background: var(--bw-yellow); color: var(--bw-green-dark);
+    font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 999px; margin: 0 0 6px;
+  }
+
+  /* ---------- detail ---------- */
+  .wt-detail {
+    margin: 20px 0 0; border: 2px solid var(--rule); border-radius: 14px;
+    background: #fff; padding: 15px 16px 16px;
+  }
+  .wt-detail-top { display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap; margin: 0 0 3px; }
+  .wt-stagenum {
+    font-size: 10.5px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--bw-green); flex: none;
+  }
+  .wt-detail h2 { margin: 0; font-size: 17px; line-height: 1.25; color: var(--bw-green-dark); }
+  .wt-facts {
+    display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0 0;
+  }
+  .wt-fact {
+    background: #F3F1E4; border-radius: 8px; padding: 7px 10px; min-width: 0;
+    font-size: 11.5px; line-height: 1.35; color: #4a4739;
+  }
+  .wt-fact b { display: block; font-size: 13px; color: var(--bw-green-dark); }
+
+  .wt-ends { margin: 13px 0 0; display: grid; gap: 8px; }
+  @media (min-width: 560px) { .wt-ends { grid-template-columns: 1fr 1fr; } }
+  .wt-end {
+    border: 1px solid var(--rule); border-radius: 10px; padding: 9px 11px; min-width: 0;
+  }
+  .wt-end .wt-endlab {
+    font-size: 10px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+    color: #7a7668; margin: 0 0 3px;
+  }
+  .wt-end .wt-station { font-size: 13.5px; font-weight: 700; color: var(--bw-green-dark); line-height: 1.3; overflow-wrap: anywhere; }
+  .wt-lines { display: flex; gap: 4px; flex-wrap: wrap; margin: 6px 0 0; }
+  .wt-line {
+    font-size: 10.5px; font-weight: 700; padding: 2px 6px; border-radius: 4px;
+    background: var(--bw-light); color: var(--bw-green-dark);
+  }
+  .wt-line.is-thin { background: #F6D9D9; color: #8E2C33; }
+
+  .wt-block { margin: 14px 0 0; }
+  .wt-block h4 {
+    margin: 0 0 6px; font-size: 11px; font-weight: 700; letter-spacing: .09em;
+    text-transform: uppercase; color: var(--bw-green);
+  }
+  .wt-block ul { margin: 0; padding-left: 18px; }
+  .wt-block li { font-size: 13px; line-height: 1.55; margin: 0 0 4px; }
+  .wt-block p { margin: 0; font-size: 13.5px; line-height: 1.6; }
+
+  .wt-flag {
+    margin: 13px 0 0; padding: 10px 12px; border-radius: 10px;
+    background: #FFF6E0; border: 1px solid #E8C86A;
+    font-size: 12.5px; line-height: 1.55; color: #6B5310;
+  }
+  .wt-flag b { color: #4E3C06; }
+
+  .wt-foot {
+    margin: 20px 0 0; padding-top: 13px; border-top: 1px solid var(--rule);
+    font-size: 11.5px; line-height: 1.6; color: #6b6759;
+  }
+  .wt-foot a { color: var(--bw-green); }
+  .wt-sr {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+
+  @media (max-width: 470px) {
+    .wt h1 { font-size: 20px; }
+    .wt-ribbon { height: 62px; }
+    .wt-band .wt-num { font-size: 9px; }
+    .wt-opt { padding: 6px 11px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="wt">
+  <p class="wt-kicker">BerlinWalk • Free Berlin tool</p>
+  <h1>Berlin Wall Trail: which section is actually worth your time</h1>
+  <p class="wt-lead">The Berliner Mauerweg is 160 km. The Wall you came to see survives in a small part of it. Below is the whole loop drawn to scale and shaded by how much border history is still standing, so you can see the problem before you plan around it.</p>
+
+  <div class="wt-scalewrap">
+    <div class="wt-scalehead">
+      <span class="wt-scaletitle">The full loop, to scale</span>
+      <span class="wt-legend">
+        <b>Wall left to see:</b>
+        <span class="wt-swatch"><i style="background:var(--d0)"></i>none</span>
+        <span class="wt-swatch"><i style="background:var(--d1)"></i>traces</span>
+        <span class="wt-swatch"><i style="background:var(--d2)"></i>real</span>
+        <span class="wt-swatch"><i style="background:var(--d3)"></i>dense</span>
+      </span>
+    </div>
+    <div class="wt-zones" id="wtZones" aria-hidden="true"></div>
+    <div class="wt-ribbon" id="wtRibbon" role="group" aria-label="The 14 sections of the Berlin Wall Trail, drawn to scale"></div>
+    <div class="wt-axis" id="wtAxis" aria-hidden="true"></div>
+    <p class="wt-hint">Each block is one of the Senate's 14 sections, sized by its real length. Tap a block for its stations, surface and what survives. Once you set your time below, a yellow bar marks the sections that fit and a fine hatch covers the ones that do not.</p>
+  </div>
+
+  <div class="wt-controls">
+    <div class="wt-ctrl">
+      <div class="wt-label"><span class="num">1</span> How long have you got?</div>
+      <div class="wt-opts" id="wtTime" role="group" aria-label="Time available"></div>
+    </div>
+    <div class="wt-ctrl">
+      <div class="wt-label"><span class="num">2</span> On foot or on a bike?</div>
+      <div class="wt-opts" id="wtMode" role="group" aria-label="Walking or cycling"></div>
+    </div>
+  </div>
+
+  <div class="wt-verdict" id="wtVerdict" role="status" aria-live="polite"></div>
+
+  <div class="wt-shorts" id="wtShorts"></div>
+
+  <div class="wt-detail" id="wtDetail" tabindex="-1"></div>
+
+  <p class="wt-foot">
+    Section names and lengths follow the Berlin Senate's official Mauerweg breakdown; the current route flyers and GPS tracks are published by the
+    <a href="https://www.berlin.de/sen/uvk/mobilitaet-und-verkehr/verkehrsplanung/radverkehr/radverkehrsnetz/radrouten/flyer/" target="_blank" rel="noopener">Senate mobility department</a>.
+    Times assume 4.5 km/h walking and 13 km/h cycling plus travel to and from the ends, and are planning estimates, not timetable promises.
+    Checked 21 July 2026.
+  </p>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var L = {
+    s1: ["S1"], s2: ["S2"], s25: ["S25"], s26: ["S26"], s85: ["S85"]
+  };
+
+  // density: 0 none, 1 traces, 2 real, 3 dense
+  var STAGES = [
+    {
+      n: 1, name: "Hermsdorf to Wollankstrasse", km: 15, d: 1, zone: "outer",
+      start: { st: "S Hermsdorf", lines: ["S1", "S85"], acc: 35 },
+      end: { st: "S Wollankstrasse", lines: ["S1", "S25", "S85"], acc: 20 },
+      surface: "Mixed. The customs road along the Nordgraben to Klemkestrasse is still in its original state, which is the closest thing to an untouched patrol road inside the city.",
+      sees: [
+        "The Zollweg along the Nordgraben, still in original condition",
+        "Allotment gardens and the northern green belt where the strip ran",
+        "Victim steles at intervals, but no standing Wall"
+      ],
+      verdict: "A long suburban walk with one genuinely original stretch of surface. Worth it if you care about the ground itself rather than the concrete."
+    },
+    {
+      n: 2, name: "Wollankstrasse to Nordbahnhof", km: 5, d: 3, zone: "city",
+      start: { st: "S Wollankstrasse", lines: ["S1", "S25", "S85"], acc: 20 },
+      end: { st: "S Nordbahnhof", lines: ["S1", "S2", "S25", "S26", "M10"], acc: 12 },
+      surface: "City park and pavement the whole way. Any bike is fine.",
+      sees: [
+        "Mauerpark, the former death strip that is now the Sunday flea market and karaoke bowl",
+        "The Bernauer Strasse memorial, 1.4 km long",
+        "The only surviving full-depth border strip in Berlin, about 70 m of it",
+        "The Chapel of Reconciliation and the surviving watchtower"
+      ],
+      verdict: "The shortest official section and by far the richest. If you only do one, do this one."
+    },
+    {
+      n: 3, name: "Nordbahnhof to Potsdamer Platz", km: 7, d: 3, zone: "city",
+      start: { st: "S Nordbahnhof", lines: ["S1", "S2", "S25", "S26", "M10"], acc: 12 },
+      end: { st: "S+U Potsdamer Platz", lines: ["S1", "S2", "S25", "S26", "U2"], acc: 12 },
+      surface: "Pavement and paving stones. Central, busy, easy underfoot.",
+      sees: [
+        "The double row of cobblestones marking the Wall's course through the centre",
+        "The Reichstag and the river bend where the border ran down the Spree",
+        "The Brandenburg Gate",
+        "Victim memorials along the Spree bank"
+      ],
+      verdict: "This is sightseeing Berlin with the border line drawn under your feet. Very little standing Wall, but the route makes the centre legible."
+    },
+    {
+      n: 4, name: "Potsdamer Platz to Warschauer Strasse", km: 7, d: 3, zone: "city",
+      start: { st: "S+U Potsdamer Platz", lines: ["S1", "S2", "S25", "S26", "U2"], acc: 12 },
+      end: { st: "S+U Warschauer Strasse", lines: ["S3", "S5", "S7", "S9", "U1", "U3", "M10"], acc: 12 },
+      surface: "Pavement throughout, with heavy foot traffic at Checkpoint Charlie and the East Side Gallery.",
+      sees: [
+        "About 200 m of original Wall at the Topography of Terror on Niederkirchnerstrasse",
+        "The Peter Fechter memorial on Zimmerstrasse",
+        "Checkpoint Charlie",
+        "The East Side Gallery, 1,316 m and the longest surviving stretch anywhere",
+        "The Oberbaumbruecke, a pedestrian border crossing during the division"
+      ],
+      verdict: "The most Wall per kilometre of any section, and the most crowded. Start early if you want the East Side Gallery without a wall of phones."
+    },
+    {
+      n: 5, name: "Warschauer Strasse to Schoeneweide", km: 13, d: 2, zone: "city",
+      start: { st: "S+U Warschauer Strasse", lines: ["S3", "S5", "S7", "S9", "U1", "U3", "M10"], acc: 12 },
+      end: { st: "S Schoeneweide", lines: ["S8", "S9", "S85", "S41", "S42", "S46", "S47"], acc: 30 },
+      surface: "Canal path and park paths, then a long green corridor. Comfortable on any bike.",
+      sees: [
+        "The Schlesischer Busch command tower, a four-storey concrete post that ran 18 watchtowers",
+        "The listed slab wall section standing next to that tower",
+        "The rebuilt 1.1 km Flutgraben stretch with the new Corten steel info steles, the best-signed part of the whole trail",
+        "The cherry-lined bank path to the Lohmuehlenbruecke",
+        "Then the Heidekampgraben green corridor, which is a park and nothing more"
+      ],
+      verdict: "Real border infrastructure without the Checkpoint Charlie crowds. The first 3 km carry the section; after Treptower Park it turns into a pleasant green ride."
+    },
+    {
+      n: 6, name: "Schoeneweide to Schoenefeld", km: 6, d: 1, zone: "outer",
+      start: { st: "S Schoeneweide", lines: ["S8", "S9", "S85", "S41", "S42", "S46", "S47"], acc: 30 },
+      end: { st: "S Schoenefeld", lines: ["S9", "S85", "RB24"], acc: 40 },
+      surface: "Suburban streets and field edges.",
+      sees: [
+        "Suburban Altglienicke, where a few wall remnants are marked",
+        "Victim steles",
+        "Airport approach traffic overhead"
+      ],
+      verdict: "A connector. Nobody comes to Berlin for this section."
+    },
+    {
+      n: 7, name: "Schoenefeld to Lichtenrade", km: 16, d: 1, zone: "outer",
+      start: { st: "Flughafen BER", lines: ["S9", "S85", "FEX", "RB24"], acc: 45 },
+      end: { st: "S Lichtenrade", lines: ["S2"], acc: 40, thin: true },
+      surface: "The Mauerweg here follows the old Kolonnenweg the GDR border troops built for their patrol drives, plus new asphalt on the approach to Gropiusstadt.",
+      sees: [
+        "A genuinely labelled stretch of former Kolonnenweg near Rudow",
+        "The Chris Gueffroy stele at the Britzer Zweigkanal, for the last person shot at the Wall in February 1989",
+        "Pioneer scrub that has reclaimed the border strip"
+      ],
+      verdict: "Long, flat and mostly empty, but the Gueffroy stele is one of the most affecting stops on the whole loop. Note the ending: Lichtenrade is on the S2 and nothing else."
+    },
+    {
+      n: 8, name: "Lichtenrade to Lichterfelde Sued", km: 12, d: 1, zone: "outer",
+      start: { st: "S Lichtenrade", lines: ["S2"], acc: 40, thin: true },
+      end: { st: "S Lichterfelde Sued", lines: ["S25", "S26"], acc: 45 },
+      surface: "Consolidated but not asphalted south of Drusenheimer Weg, then asphalt again in the green belt.",
+      sees: [
+        "The Buckow field landscape, open farmland where people fly kites in autumn",
+        "The cherry tree avenue along Lichterfelder Allee",
+        "Border stones being reinstalled along the rebuilt section"
+      ],
+      verdict: "This is a countryside ride that happens to trace a border. Lovely in blossom season, thin on history."
+    },
+    {
+      n: 9, name: "Lichterfelde Sued to Griebnitzsee", km: 15, d: 1, zone: "outer",
+      start: { st: "S Lichterfelde Sued", lines: ["S25", "S26"], acc: 45 },
+      end: { st: "S Griebnitzsee", lines: ["S1", "S7", "RB21", "RB22"], acc: 50 },
+      surface: "Mixed. The reed-lined border path along the Buschgraben reopened in July 2025.",
+      sees: [
+        "Teltow and Kleinmachnow, where the border cut a working town in half",
+        "The Grenzweg am Buschgraben between the reeds",
+        "Victim steles at the canal crossings"
+      ],
+      verdict: "A quiet Brandenburg edge. Remember you have left zone B, so the fare and the bike ticket are both ABC now."
+    },
+    {
+      n: 10, name: "Griebnitzsee to Wannsee", km: 12, d: 2, zone: "outer",
+      start: { st: "S Griebnitzsee", lines: ["S1", "S7", "RB21", "RB22"], acc: 50 },
+      end: { st: "S Wannsee", lines: ["S1", "S7", "RE1", "RB21"], acc: 40 },
+      surface: "Lakeshore path, road detours where the shore is blocked, then park paths through Klein Glienicke.",
+      sees: [
+        "The Glienicker Bruecke, where the border ran down the centre line and Abel was swapped for Powers in 1962",
+        "Preserved Wall remnants on the Griebnitzsee shore, under monument protection",
+        "The Potsdam Conference villas of 1945 above the lake",
+        "The three-palace view across the water"
+      ],
+      verdict: "Strong history, awkward access. Parts of the lakeshore path are blocked by residents in a long-running legal dispute, and Potsdam signs walkers onto the streets instead. Treat this as a half day in Potsdam, not a quick Wall trip.",
+      flag: "The Griebnitzsee shore path is not continuously open. The city of Potsdam currently routes walkers via Rudolf-Breitscheid-Strasse, Karl-Marx-Strasse and Virchowstrasse. Separately, the Stadtbahn closure from 14 June to 12 December 2026 disrupts the RE1 out here, so use the S7 or S1."
+    },
+    {
+      n: 11, name: "Wannsee to Staaken", km: 21, d: 0, zone: "outer",
+      start: { st: "S Wannsee", lines: ["S1", "S7", "RE1", "RB21"], acc: 40 },
+      end: { st: "Staaken Bhf", lines: ["RB21", "RE4"], acc: 60, thin: true },
+      surface: "Forest floor, sand and gravel through the Gatow sewage fields, cobbles in Alt-Staaken. This is the section a share bike will punish you for.",
+      sees: [
+        "The Gatower Rieselfelder, former sewage fields now full of birds",
+        "Gross Glienicker See, where young forest has grown over the death strip",
+        "Almost no built border remains"
+      ],
+      verdict: "The longest section and the emptiest. Also the hardest to leave: Staaken has no S-Bahn at all, only the RB21 and RE4, so plan the exit before you start.",
+      flag: "The lakeshore path at Gross Glienicker See is currently interrupted, and the Hahneberg stretch in Spandau is still closed while the rebuild is finished. If you get stuck, S+U Rathaus Spandau is the nearest real interchange."
+    },
+    {
+      n: 12, name: "Staaken to Hennigsdorf", km: 20, d: 0, zone: "outer",
+      start: { st: "Staaken Bhf", lines: ["RB21", "RE4"], acc: 60, thin: true },
+      end: { st: "S Hennigsdorf", lines: ["S25", "RB20", "RE6"], acc: 55 },
+      surface: "A shaded path winding through the Spandauer Forst. Forest floor for long stretches.",
+      sees: [
+        "The Spandauer Forst, where the strip is now simply woodland",
+        "The Havel crossing towards Hennigsdorf",
+        "Almost nothing built"
+      ],
+      verdict: "A forest ride. Good on a hot day, irrelevant if you came for the Wall."
+    },
+    {
+      n: 13, name: "Hennigsdorf to Hohen Neuendorf", km: 10, d: 2, zone: "outer",
+      start: { st: "S Hennigsdorf", lines: ["S25", "RB20", "RE6"], acc: 55 },
+      end: { st: "S Hohen Neuendorf", lines: ["S1", "S8"], acc: 45 },
+      surface: "You turn onto the Kolonnenweg after Stolpe, so expect the old concrete slabs.",
+      sees: [
+        "The Nieder Neuendorf border tower, converted into a free four-level museum, open Tuesday to Sunday 10:00 to 18:00",
+        "A second tower used since 1990 by a youth forest group, visible from the path but not open",
+        "Original patrol road surface after Stolpe"
+      ],
+      verdict: "The best surviving watchtower on the outer loop, and the only one you can walk into for free without a weekend-only window. The catch is that the tower itself is reached by bus 136, not by train.",
+      flag: "The Nieder Neuendorf tower is closed on Mondays, and you are outside Berlin here, so this is an ABC journey."
+    },
+    {
+      n: 14, name: "Hohen Neuendorf to Hermsdorf", km: 6, d: 1, zone: "outer",
+      start: { st: "S Hohen Neuendorf", lines: ["S1", "S8"], acc: 45 },
+      end: { st: "S Hermsdorf", lines: ["S1", "S85"], acc: 35 },
+      surface: "Forest and green belt paths.",
+      sees: [
+        "A watchtower stele marking a tower that no longer stands",
+        "The northern forest edge where Berlin ends"
+      ],
+      verdict: "A short, calm closing section. It joins the loop back up, which is its main purpose."
+    }
+  ];
+
+  var SHORTS = [
+    {
+      id: "mitte",
+      name: "Nordbahnhof to Mauerpark",
+      inside: "inside section 2",
+      km: 2, walkMin: 28, stopMin: 90, accMin: 24,
+      ends: "S Nordbahnhof (S1, S2, S25, S26, tram M10) to U Eberswalder Strasse (U2, M1, M10)",
+      text: "The 1.4 km Bernauer Strasse memorial, the only place in Berlin where the full depth of the border system still stands, and then Mauerpark at the end of it. Everything here is free and the outdoor grounds are open 08:00 to 22:00 daily, which no other Wall site offers. If you have one afternoon, this is the answer."
+    },
+    {
+      id: "kreuzberg",
+      name: "Schlesisches Tor to Treptower Park",
+      inside: "inside section 5",
+      km: 3, walkMin: 40, stopMin: 45, accMin: 24,
+      ends: "U Schlesisches Tor (U1, U3) to S Treptower Park (S8, S9, S41, S42, S85)",
+      text: "Real border machinery without the crowds: the Oberbaumbruecke crossing, the Schlesischer Busch command tower with a monument-listed slab wall beside it, and the newly rebuilt Flutgraben stretch with its four info steles. This is the best-signed kilometre on the entire 160 km, because it is the part the rebuild has already reached."
+    },
+    {
+      id: "centre",
+      name: "Brandenburg Gate to the East Side Gallery",
+      inside: "sections 3 and 4",
+      km: 8, walkMin: 105, stopMin: 75, accMin: 24,
+      ends: "S+U Brandenburger Tor (S1, S2, S25, U5) to S+U Warschauer Strasse (S3, S5, S7, S9, U1, U3)",
+      text: "The classic centre line: cobblestones through the government quarter, 200 m of original Wall at the Topography of Terror, the Peter Fechter memorial, Checkpoint Charlie, then 1,316 m of painted Wall at the East Side Gallery. Busy all day, so start before 10:00 if you want photographs without crowds."
+    }
+  ];
+
+  var TIMES = [
+    { id: "short", label: "2 to 3 hours", min: 180 },
+    { id: "half", label: "Half a day", min: 300 },
+    { id: "full", label: "A full day", min: 540 },
+    { id: "more", label: "More than a day", min: 100000 }
+  ];
+  var MODES = [
+    { id: "walk", label: "Walking", kmh: 4.5 },
+    { id: "bike", label: "Cycling", kmh: 13 }
+  ];
+
+  var state = { time: "short", mode: "walk", sel: 2 };
+
+  var TOTAL = STAGES.reduce(function (a, s) { return a + s.km; }, 0);
+
+  function stopMinutes(d) {
+    return d === 3 ? 90 : d === 2 ? 45 : d === 1 ? 20 : 10;
+  }
+
+  function needed(stage, modeId) {
+    var mode = MODES.filter(function (m) { return m.id === modeId; })[0];
+    var move = Math.round((stage.km / mode.kmh) * 60);
+    var acc = stage.start.acc + stage.end.acc;
+    return { move: move, acc: acc, stop: stopMinutes(stage.d), total: move + acc + stopMinutes(stage.d) };
+  }
+
+  function budget() {
+    return TIMES.filter(function (t) { return t.id === state.time; })[0].min;
+  }
+
+  function fits(stage) {
+    return needed(stage, state.mode).total <= budget();
+  }
+
+  function fmtMin(m) {
+    if (m < 60) return m + " min";
+    var h = Math.floor(m / 60), r = m % 60;
+    return r ? h + " h " + r + " min" : h + " h";
+  }
+
+  var elRibbon = document.getElementById("wtRibbon");
+  var elZones = document.getElementById("wtZones");
+  var elAxis = document.getElementById("wtAxis");
+  var elTime = document.getElementById("wtTime");
+  var elMode = document.getElementById("wtMode");
+  var elVerdict = document.getElementById("wtVerdict");
+  var elShorts = document.getElementById("wtShorts");
+  var elDetail = document.getElementById("wtDetail");
+
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  function buildRibbon() {
+    elRibbon.innerHTML = "";
+    STAGES.forEach(function (s) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "wt-band";
+      b.style.flex = s.km + " 1 0";
+      b.setAttribute("data-d", s.d);
+      b.setAttribute("data-n", s.n);
+      b.setAttribute("aria-label",
+        "Section " + s.n + ", " + s.name + ", " + s.km + " kilometres. " +
+        (s.d === 3 ? "Dense surviving Wall." : s.d === 2 ? "Real surviving border sites." : s.d === 1 ? "Traces only." : "Nothing built left."));
+      b.innerHTML = '<span class="wt-num">' + s.n + "</span>";
+      b.addEventListener("click", function () { state.sel = s.n; render(); elDetail.focus(); });
+      elRibbon.appendChild(b);
+    });
+
+    // zone header
+    var cityKm = STAGES.filter(function (s) { return s.zone === "city"; }).reduce(function (a, s) { return a + s.km; }, 0);
+    var pre = STAGES[0].km;
+    elZones.innerHTML = "";
+    var z1 = document.createElement("div");
+    z1.className = "wt-zone"; z1.style.flex = pre + " 1 0"; z1.textContent = "";
+    var z2 = document.createElement("div");
+    z2.className = "wt-zone"; z2.style.flex = cityKm + " 1 0"; z2.textContent = "City";
+    var z3 = document.createElement("div");
+    z3.className = "wt-zone"; z3.style.flex = (TOTAL - pre - cityKm) + " 1 0"; z3.textContent = "Outer loop";
+    elZones.appendChild(z1); elZones.appendChild(z2); elZones.appendChild(z3);
+
+    // axis
+    elAxis.innerHTML = "";
+    var marks = [0, 40, 80, 120, 160];
+    marks.forEach(function (km, i) {
+      var t = document.createElement("span");
+      t.className = "wt-tick";
+      t.textContent = km + " km";
+      if (i === 0) {
+        // keep the end labels inside the box instead of hanging off the edge
+        t.style.left = "0"; t.style.transform = "none";
+      } else if (i === marks.length - 1) {
+        t.style.right = "0"; t.style.transform = "none";
+      } else {
+        t.style.left = ((km / TOTAL) * 100) + "%";
+      }
+      elAxis.appendChild(t);
+    });
+  }
+
+  function buildOpts(el, list, key) {
+    el.innerHTML = "";
+    list.forEach(function (o) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "wt-opt";
+      b.textContent = o.label;
+      b.setAttribute("aria-pressed", String(state[key] === o.id));
+      b.addEventListener("click", function () { state[key] = o.id; render(); });
+      el.appendChild(b);
+    });
+  }
+
+  function renderVerdict() {
+    var fitting = STAGES.filter(fits);
+    var withWall = fitting.filter(function (s) { return s.d >= 2; });
+    var modeWord = state.mode === "walk" ? "on foot" : "by bike";
+    var timeWord = TIMES.filter(function (t) { return t.id === state.time; })[0].label.toLowerCase();
+
+    if (state.time === "more") {
+      elVerdict.innerHTML = "<strong>With more than a day, the whole loop is open to you.</strong> " +
+        "Almost everyone who rides the full 160 km splits it over two or three days and sleeps somewhere on the ring. " +
+        "The honest warning still applies: about 110 km of it is forest, lake, field and suburb. Ride it for the ride, not for the Wall.";
+      return;
+    }
+
+    if (!fitting.length) {
+      elVerdict.innerHTML = "<strong>No full official section fits into " + esc(timeWord) + " " + modeWord + ".</strong> " +
+        "That is not a failure of planning. The Senate's sections were drawn for cyclists doing the ring, not for a visitor with an afternoon. " +
+        "Use one of the short stretches below instead. They sit inside the official sections and they are where the Wall actually is.";
+      return;
+    }
+
+    var names = fitting.map(function (s) { return "section " + s.n; }).join(", ");
+    elVerdict.innerHTML = "<strong>" + fitting.length + " of the 14 official sections fit into " + esc(timeWord) + " " + modeWord + "</strong> " +
+      "(" + esc(names) + "), once you count getting there and back. " +
+      (withWall.length
+        ? "Of those, " + withWall.length + " actually still ha" + (withWall.length === 1 ? "s" : "ve") + " standing Wall or a surviving tower to look at."
+        : "None of them still has standing Wall or a surviving tower, which is the whole problem with planning this trail by distance.") +
+      " The short stretches below are the higher-value option if history is what you came for.";
+  }
+
+  function renderShorts() {
+    var b = budget();
+    var mode = MODES.filter(function (m) { return m.id === state.mode; })[0];
+    var cards = SHORTS.map(function (s) {
+      var move = Math.round((s.km / mode.kmh) * 60);
+      var total = move + s.stopMin + s.accMin;
+      return { s: s, move: move, total: total, ok: total <= b };
+    });
+    var best = cards.filter(function (c) { return c.ok; }).sort(function (a, b2) { return b2.s.km - a.s.km; })[0];
+
+    elShorts.innerHTML = '<div class="wt-label" style="margin-bottom:2px"><span class="num">3</span> The stretches that actually pay off</div>' +
+      cards.map(function (c) {
+        var isPick = best && best.s.id === c.s.id;
+        return '<div class="wt-short' + (isPick ? " is-pick" : "") + '">' +
+          (isPick ? '<span class="wt-pickflag">Best fit for your time</span>' : "") +
+          "<h3>" + esc(c.s.name) + "</h3>" +
+          '<p class="wt-meta">' + esc(c.s.km) + " km, " + esc(c.s.inside) + " &middot; " +
+          esc(fmtMin(c.move)) + " moving plus about " + esc(fmtMin(c.s.stopMin)) + " stopping &middot; " +
+          (c.ok ? "fits your time" : "needs about " + esc(fmtMin(c.total)) + " in total") + "<br>" +
+          esc(c.s.ends) + "</p>" +
+          "<p>" + esc(c.s.text) + "</p>" +
+          "</div>";
+      }).join("");
+  }
+
+  function renderDetail() {
+    var s = STAGES.filter(function (x) { return x.n === state.sel; })[0];
+    var nd = needed(s, state.mode);
+    var dLabel = s.d === 3 ? "Dense" : s.d === 2 ? "Real" : s.d === 1 ? "Traces" : "Nothing built";
+
+    function endBlock(lab, e) {
+      return '<div class="wt-end"><div class="wt-endlab">' + lab + '</div>' +
+        '<div class="wt-station">' + esc(e.st) + "</div>" +
+        '<div class="wt-lines">' + e.lines.map(function (l) {
+          return '<span class="wt-line' + (e.thin ? " is-thin" : "") + '">' + esc(l) + "</span>";
+        }).join("") + "</div></div>";
+    }
+
+    elDetail.innerHTML =
+      '<div class="wt-detail-top"><span class="wt-stagenum">Section ' + s.n + " of 14</span></div>" +
+      "<h2>" + esc(s.name) + "</h2>" +
+      '<div class="wt-facts">' +
+        '<div class="wt-fact"><b>' + s.km + " km</b>official length</div>" +
+        '<div class="wt-fact"><b>' + esc(fmtMin(nd.move)) + "</b>" + (state.mode === "walk" ? "walking" : "cycling") + "</div>" +
+        '<div class="wt-fact"><b>' + esc(fmtMin(nd.acc)) + "</b>getting there and back</div>" +
+        '<div class="wt-fact"><b>' + esc(dLabel) + "</b>Wall left to see</div>" +
+      "</div>" +
+      '<div class="wt-ends">' + endBlock("Start", s.start) + endBlock("End", s.end) + "</div>" +
+      '<div class="wt-block"><h4>What you actually see</h4><ul>' +
+        s.sees.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") +
+      "</ul></div>" +
+      '<div class="wt-block"><h4>Underfoot</h4><p>' + esc(s.surface) + "</p></div>" +
+      '<div class="wt-block"><h4>My honest read</h4><p>' + esc(s.verdict) + "</p></div>" +
+      (s.flag ? '<div class="wt-flag"><b>Before you go.</b> ' + esc(s.flag) + "</div>" : "") +
+      (s.end.thin || s.start.thin
+        ? '<div class="wt-flag"><b>Thin exit.</b> The station marked in red is served by very few lines. Check the departure before you commit to walking towards it.</div>'
+        : "");
+  }
+
+  function render() {
+    buildOpts(elTime, TIMES, "time");
+    buildOpts(elMode, MODES, "mode");
+
+    Array.prototype.forEach.call(elRibbon.children, function (b) {
+      var n = Number(b.getAttribute("data-n"));
+      var s = STAGES.filter(function (x) { return x.n === n; })[0];
+      var ok = fits(s);
+      b.classList.toggle("is-out", !ok);
+      b.classList.toggle("is-fit", ok && state.time !== "more");
+      b.classList.toggle("is-sel", n === state.sel);
+    });
+
+    renderVerdict();
+    renderShorts();
+    renderDetail();
+  }
+
+  buildRibbon();
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
