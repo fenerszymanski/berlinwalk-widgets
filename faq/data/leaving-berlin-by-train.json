@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "slug": "leaving-berlin-by-train",
+  "key": "leaving-berlin-by-train",
+  "config": {
+    "title": "Leaving Berlin by Train: FAQ",
+    "subtitle": "Which station your train really leaves from in 2026, which fare to buy, and what the Deutschlandticket does and does not cover.",
+    "items": [
+      {
+        "q": "Which Berlin station do long-distance trains leave from in 2026?",
+        "a": "Mostly Berlin Hauptbahnhof, but the lower level rather than the glass hall upstairs. The Stadtbahn between Charlottenburg and Ostbahnhof is closed to regional and long-distance trains from 14 June to 12 December 2026, so trains use the deep north-south tunnel instead. Some services start elsewhere: ICE trains to North Rhine-Westphalia and Frankfurt from Berlin-Charlottenburg, Düsseldorf and Köln services via Südkreuz, Eurocity trains to Poland via Gesundbrunnen and Lichtenberg from 25 August, and the Dresden to Rostock Intercity via Ostkreuz. The station printed on your ticket is the one that counts."
+      },
+      {
+        "q": "Can I still catch a long-distance train at Zoologischer Garten or Ostbahnhof?",
+        "a": "No. Both lose their long-distance stop for the whole six-month closure. Ostbahnhof still works as an eastern terminus for the regional RE1 and RE7, which start and end there rather than crossing the city, but no ICE calls at either station until 12 December 2026. If you are staying near Kurfürstendamm, Berlin-Charlottenburg is the practical replacement for Zoo."
+      },
+      {
+        "q": "Is the S-Bahn affected by the Stadtbahn closure?",
+        "a": "Barely. The closure applies to regional and long-distance trains only. The S-Bahn keeps running the Stadtbahn normally through Zoologischer Garten, Hauptbahnhof, Friedrichstrasse and Alexanderplatz, apart from a small number of construction weekends when replacement buses run between Friedrichstrasse and Tiergarten. Check the VBB closure page for the current weekend dates before you plan around them."
+      },
+      {
+        "q": "What is the difference between Super Sparpreis, Sparpreis and Flexpreis?",
+        "a": "Flexibility. Super Sparpreis starts at 6.99 euros and is bound to the exact train on your ticket, with rebooking, exchange and cancellation all excluded, so a missed train means a lost ticket. Sparpreis starts at 21.99 euros, is also train-bound, and can be changed or cancelled until the day before travel for a 10 euro fee. Flexpreis costs more and lets you take any train on that route on your booked day, break the journey, and cancel free until the day before or for 30 euros from the first day of validity. Flexpreis also includes the City-Ticket for local transport in participating cities; the two cheaper fares make you buy it separately."
+      },
+      {
+        "q": "Is the Deutschlandticket valid on ICE trains from Berlin?",
+        "a": "No, and it never has been. The 63 euro monthly Deutschlandticket covers regional trains, meaning RE, RB and IRE, plus every S-Bahn, U-Bahn, tram and bus. It is not valid on ICE, IC or EC. Since the 14 December 2025 timetable change it is also no longer accepted on DB long-distance trains anywhere in Berlin and Brandenburg, which ended the old arrangement that let regional tickets be used on the Intercity towards Elsterwerda and Cottbus and the ICE towards Prenzlau. Guides still recommending that shortcut are out of date, and using it now means travelling without a valid ticket."
+      },
+      {
+        "q": "How much does the Deutschlandticket cost in 2026?",
+        "a": "63 euros a month, up from 58 euros, since January 2026. For a longer Berlin stay it is excellent value because it covers all local transport in the city plus every regional train out of it, including lines to Brandenburg's lakes, Lutherstadt Wittenberg, Frankfurt an der Oder and the Baltic coast."
+      },
+      {
+        "q": "Do I need a seat reservation on a German train?",
+        "a": "No. Reservations are optional in Germany, unlike some neighbouring countries where they are compulsory on high-speed services. A single second-class reservation costs 5.50 euros and is not included in any second-class fare, Flexpreis included; only first-class Flexpreis includes one. On a busy long route with luggage it is usually worth the money."
+      },
+      {
+        "q": "Can I take a regional train instead of paying for an ICE?",
+        "a": "Often, yes, and if you already hold a Deutschlandticket the regional train costs nothing extra. The catch during the 2026 closure is that no RE or RB runs between Charlottenburg and Ostbahnhof, so most lines start or finish at one edge of the city and you take the S-Bahn to reach them. That is usually 20 to 30 minutes of extra travel, not a lost day."
+      },
+      {
+        "q": "How far in advance should I book a cheap train ticket from Berlin?",
+        "a": "As early as you can if you want Super Sparpreis. The cheap seats are a fixed quota per train rather than a general discount, so they sell out first, and they disappear fastest on Friday and Sunday departures. If your plans might still move, the saving is not worth it: a Super Sparpreis ticket cannot be rebooked or refunded at all."
+      }
+    ]
+  }
+}

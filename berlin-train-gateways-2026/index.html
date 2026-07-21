@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Berlin Train Gateways 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root {
+    --green: #1B5E20;
+    --green-deep: #123D18;
+    --green-night: #0E2E12;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --light-green: #C5E1A5;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --red: #E63946;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: Montserrat, system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 18px 16px 26px; }
+
+  .head { margin-bottom: 16px; }
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--green); font-weight: 600; margin: 0 0 6px;
+  }
+  h1 { font-size: 25px; line-height: 1.18; margin: 0 0 8px; color: var(--green-deep); font-weight: 800; }
+  .lead { font-size: 15px; line-height: 1.55; margin: 0; color: #3a3a3a; max-width: 66ch; }
+
+  .modes { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 12px; }
+  .mode {
+    flex: 1 1 210px; min-width: 0; cursor: pointer;
+    border: 2px solid var(--green); border-radius: 12px;
+    background: #fff; color: var(--green-deep);
+    padding: 10px 12px; text-align: left;
+    font-family: inherit; font-size: 13px; font-weight: 600; line-height: 1.3;
+    transition: background .15s, border-color .15s, transform .1s;
+  }
+  .mode small { display: block; font-weight: 500; font-size: 11.5px; opacity: .75; margin-top: 3px; }
+  .mode:hover { background: #F1F7EE; }
+  .mode[aria-pressed="true"] { background: var(--yellow); border-color: var(--green-deep); color: var(--green-deep); }
+  .mode:focus-visible { outline: 3px solid var(--lime); outline-offset: 2px; }
+
+  .banner {
+    border-left: 5px solid var(--yellow);
+    background: #fff; border-radius: 0 10px 10px 0;
+    padding: 11px 14px; margin: 0 0 14px;
+    font-size: 13.5px; line-height: 1.5; color: #2c2c2c;
+  }
+  .banner b { color: var(--green-deep); }
+
+  .board {
+    background: var(--green-night);
+    border-radius: 16px; padding: 12px 10px 6px;
+    box-shadow: 0 10px 30px rgba(14,46,18,.22);
+  }
+  .board-top {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 10px; padding: 2px 8px 10px; flex-wrap: wrap;
+  }
+  .board-title {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    color: var(--yellow); font-size: 12px; letter-spacing: .12em;
+    text-transform: uppercase; font-weight: 600;
+  }
+  .board-dates {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    color: var(--light-green); font-size: 11.5px; letter-spacing: .06em;
+  }
+  .map-scroll { overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; }
+  svg.map { display: block; width: 100%; height: auto; }
+  .swipe-hint { display: none; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 10px 10px; margin: 0; }
+  .chips li { list-style: none; }
+  .chip {
+    cursor: pointer; border: 1.5px solid transparent; border-radius: 999px;
+    padding: 6px 11px; font-family: Montserrat, sans-serif; font-size: 12px;
+    font-weight: 600; line-height: 1.2; background: #2A4A2D; color: #DCEFC6;
+  }
+  .chip[aria-pressed="true"] { outline: 2px solid var(--yellow); outline-offset: 1px; }
+  .chip:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+  .chip.r-primary { background: var(--yellow); color: var(--green-deep); }
+  .chip.r-temp, .chip.r-partial { background: var(--light-green); color: var(--green-deep); }
+  .chip.r-some { background: #8FA98A; color: var(--green-night); }
+  .chip.r-shut { background: #3d4a3a; color: #9fb09a; border-color: #E63946; }
+
+  .n-hit { cursor: pointer; }
+  .n-hit:focus-visible rect.n-focus { stroke: var(--yellow); stroke-width: 3; }
+  rect.n-focus { fill: transparent; stroke: none; }
+
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 12px 18px;
+    padding: 8px 10px 10px; margin: 0;
+  }
+  .legend li { list-style: none; display: flex; align-items: center; gap: 7px;
+    font-size: 11.5px; color: var(--light-green); font-family: "IBM Plex Mono", monospace; letter-spacing: .04em; }
+  .swatch { width: 13px; height: 13px; border-radius: 4px; display: inline-block; flex: none; }
+
+  .panel {
+    margin-top: 16px; background: #fff; border-radius: 14px;
+    border: 1px solid #E2E8DD; padding: 16px 17px 17px;
+  }
+  .panel-kicker {
+    font-family: "IBM Plex Mono", monospace; font-size: 11px;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--lime); font-weight: 600;
+  }
+  .panel h2 { font-size: 19px; margin: 5px 0 3px; color: var(--green-deep); line-height: 1.2; }
+  .panel .sub { font-size: 12.5px; color: #6b6b6b; margin: 0 0 12px; font-family: "IBM Plex Mono", monospace; }
+  .status {
+    display: inline-block; border-radius: 999px; padding: 4px 11px;
+    font-size: 11.5px; font-weight: 700; letter-spacing: .04em; margin-bottom: 11px;
+  }
+  .s-open { background: var(--yellow); color: var(--green-deep); }
+  .s-temp { background: var(--light-green); color: var(--green-deep); }
+  .s-shut { background: #F3D6D8; color: #8A2A32; }
+  .s-local { background: #E7EFE2; color: var(--green-deep); }
+  .panel p { font-size: 14.5px; line-height: 1.6; margin: 0 0 11px; color: #2e2e2e; }
+  .panel p:last-child { margin-bottom: 0; }
+  .rows { margin: 0 0 12px; padding: 0; }
+  .rows li {
+    list-style: none; display: flex; gap: 10px; align-items: flex-start;
+    padding: 7px 0; border-bottom: 1px dashed #E4EADF; font-size: 13.5px; line-height: 1.45;
+  }
+  .rows li:last-child { border-bottom: 0; }
+  .tag {
+    flex: none; font-family: "IBM Plex Mono", monospace; font-size: 10.5px; font-weight: 600;
+    background: var(--green); color: #fff; border-radius: 5px; padding: 3px 6px; margin-top: 1px;
+    letter-spacing: .04em; min-width: 52px; text-align: center;
+  }
+  .tag.reg { background: var(--lime); color: var(--green-deep); }
+  .reach {
+    background: #F4F8F1; border-radius: 10px; padding: 10px 12px;
+    font-size: 13px; line-height: 1.5; color: #2e2e2e;
+  }
+  .reach b { color: var(--green-deep); }
+
+  .foot {
+    margin-top: 14px; font-size: 12.5px; line-height: 1.55; color: #5d5d5d;
+  }
+  .foot a { color: var(--green); font-weight: 600; }
+
+  @media (max-width: 760px) {
+    svg.map { min-width: 720px; }
+    .swipe-hint {
+      display: block; padding: 0 10px 6px; margin: 0;
+      font-family: "IBM Plex Mono", monospace; font-size: 10.5px;
+      color: #8FA98A; letter-spacing: .06em;
+    }
+  }
+
+  @media (max-width: 560px) {
+    h1 { font-size: 21px; }
+    .lead { font-size: 14px; }
+    .mode { flex: 1 1 100%; }
+    .wrap { padding: 14px 12px 22px; }
+    .board { padding: 10px 6px 4px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="head">
+    <p class="eyebrow">BerlinWalk · Berlin Tools</p>
+    <h1>Berlin Train Gateways 2026</h1>
+    <p class="lead">Between 14 June and 12 December 2026 the Stadtbahn, the elevated line that carries trains straight across the middle of Berlin, is closed to regional and long-distance trains. Departures moved. Tap a station to see what it does now, and switch the ticket you are holding to see which gateways it actually opens.</p>
+  </div>
+
+  <div class="modes" role="group" aria-label="Which ticket are you travelling on">
+    <button class="mode" type="button" data-mode="long" aria-pressed="true">
+      Long-distance ticket
+      <small>ICE, IC or EC booked on bahn.de</small>
+    </button>
+    <button class="mode" type="button" data-mode="regional" aria-pressed="false">
+      Regional ticket
+      <small>RE and RB trains out of Berlin</small>
+    </button>
+    <button class="mode" type="button" data-mode="dticket" aria-pressed="false">
+      Deutschlandticket
+      <small>The 63 euro monthly pass</small>
+    </button>
+  </div>
+
+  <p class="banner" id="banner"></p>
+
+  <div class="board">
+    <div class="board-top">
+      <span class="board-title">Berlin rail gateways</span>
+      <span class="board-dates">STADTBAHN CLOSED 14 JUN &rarr; 12 DEC 2026</span>
+    </div>
+
+    <p class="swipe-hint">Swipe the map sideways, or use the station buttons below.</p>
+    <div class="map-scroll">
+    <svg class="map" viewBox="0 0 900 580" role="img" aria-label="Schematic map of Berlin's rail gateway stations during the 2026 Stadtbahn closure">
+
+      <!-- Hauptbahnhof: one building, two levels. Labels sit either side of the
+           tunnel line so the track never paints over the text. -->
+      <g id="hbf-box">
+        <rect x="400" y="236" width="180" height="190" rx="14" fill="#17401C" stroke="#3E6B42" stroke-width="2" />
+        <text x="412" y="257" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="600" fill="#FFE600" letter-spacing="1.1" stroke="#17401C" stroke-width="3.5" paint-order="stroke">HAUPTBAHNHOF</text>
+        <text x="412" y="295" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#B7D3A8" stroke="#17401C" stroke-width="3" paint-order="stroke">upper</text>
+        <text x="515" y="295" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#B7D3A8" stroke="#17401C" stroke-width="3" paint-order="stroke">Stadtbahn</text>
+        <text x="412" y="367" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#B7D3A8" stroke="#17401C" stroke-width="3" paint-order="stroke">lower</text>
+        <text x="519" y="367" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#B7D3A8" stroke="#17401C" stroke-width="3" paint-order="stroke">tief</text>
+      </g>
+
+      <!-- north-south tunnel: Gesundbrunnen - Hauptbahnhof (lower) - Suedkreuz -->
+      <path id="line-ns" d="M 490 100 L 490 362 L 470 490" fill="none" stroke="#7CB342" stroke-width="9" stroke-linecap="round" opacity=".95" />
+      <!-- outer diversion arc: Gesundbrunnen - Lichtenberg - Ostkreuz -->
+      <path id="line-ring" d="M 490 100 Q 730 108 800 168 Q 855 240 815 365" fill="none" stroke="#7CB342" stroke-width="7" stroke-linecap="round" opacity=".8" />
+      <!-- western link: Charlottenburg - Suedkreuz -->
+      <path id="line-west" d="M 200 290 Q 165 430 470 490" fill="none" stroke="#7CB342" stroke-width="7" stroke-linecap="round" opacity=".8" />
+      <!-- Stadtbahn corridor -->
+      <path id="line-sb-open-w" d="M 75 290 L 200 290" fill="none" stroke="#C5E1A5" stroke-width="8" stroke-linecap="round" opacity=".85" />
+      <path id="line-sb-closed" d="M 200 290 L 690 290" fill="none" stroke="#6f7a6b" stroke-width="8" stroke-linecap="round" stroke-dasharray="14 11" opacity=".9" />
+      <path id="line-sb-open-e" d="M 690 290 L 815 365" fill="none" stroke="#C5E1A5" stroke-width="7" stroke-linecap="round" opacity=".7" />
+
+      <!-- closure label on the dead corridor -->
+      <g id="closure-flag">
+        <rect x="527" y="196" width="190" height="27" rx="7" fill="#E63946" />
+        <text x="622" y="214" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12.5" font-weight="600" fill="#fff" letter-spacing="1.2">STADTBAHN CLOSED</text>
+        <line x1="622" y1="223" x2="622" y2="280" stroke="#E63946" stroke-width="2.5" stroke-dasharray="4 4" />
+      </g>
+
+      <g id="nodes"></g>
+    </svg>
+    </div>
+
+    <ul class="chips" id="chips"></ul>
+
+    <ul class="legend">
+      <li><span class="swatch" style="background:#FFE600"></span> Use this station</li>
+      <li><span class="swatch" style="background:#C5E1A5"></span> Works, but not your main option</li>
+      <li><span class="swatch" style="background:#8FA98A"></span> Reachable, but no departure for you</li>
+      <li><span class="swatch" style="background:#3d4a3a;border:2px solid #E63946"></span> Closed to your train</li>
+      <li><span class="swatch" style="background:#E63946"></span> The closed Stadtbahn corridor</li>
+    </ul>
+  </div>
+
+  <div class="panel" id="panel" aria-live="polite"></div>
+
+  <p class="foot">Construction plans move. Check your exact date on <a href="https://www.bahn.de/en" target="_blank" rel="noopener">bahn.de</a> for long-distance trains and on <a href="https://www.vbb.de/unterwegs-im-vbb/baustellen-bei-regional-und-s-bahn/stadtbahnsperrung-2026/" target="_blank" rel="noopener">the VBB closure page</a> for regional ones, and take the departure station printed on your ticket over anything else.</p>
+
+</div>
+
+<script>
+(function () {
+  var STATIONS = [
+    {
+      id: 'hbf-tief', name: 'Hauptbahnhof', sub: 'Lower level, platforms 1 to 8', x: 490, y: 362, pos: 'inbox',
+      big: true,
+      role: { long: 'primary', regional: 'some', dticket: 'some' },
+      status: {
+        long: ['s-open', 'Your most likely departure'],
+        regional: ['s-local', 'A few regional trains only'],
+        dticket: ['s-local', 'Covered for the regional trains that call here']
+      },
+      lines: [
+        ['ICE / IC', 'Most long-distance trains through Berlin use the deep north-south platforms during the closure, not the Stadtbahn level upstairs.'],
+        ['ICE', 'Berlin to Düsseldorf and Köln runs via Südkreuz and this lower level.'],
+        ['RB10', 'Daytime services are cancelled until October. Only a night service, roughly midnight to 04:00, runs from here to Nauen.']
+      ],
+      note: 'Hauptbahnhof is really two stations stacked on top of each other, and in 2026 that difference decides whether you catch your train. The upper platforms run east to west along the Stadtbahn and are the closed ones. The lower platforms run north to south in a tunnel, and that tunnel is doing almost all of the work this summer. Allow extra minutes: it is four levels and a long escalator run from the street to the deep platforms.',
+      reach: 'S3, S5, S7 and S9 stop upstairs. U5 comes in from Alexanderplatz and Unter den Linden. Tram M5, M8 and M10 stop at the north entrance.'
+    },
+    {
+      id: 'hbf-hoch', name: 'Hauptbahnhof', sub: 'Upper level, the Stadtbahn platforms', x: 490, y: 290, pos: 'inbox',
+      role: { long: 'shut', regional: 'shut', dticket: 'local' },
+      status: {
+        long: ['s-shut', 'No long-distance trains'],
+        regional: ['s-shut', 'No regional trains'],
+        dticket: ['s-local', 'S-Bahn only, and that still works']
+      },
+      lines: [
+        ['CLOSED', 'No regional or long-distance train crosses the city on these platforms until 12 December 2026.'],
+        ['S-Bahn', 'The S-Bahn keeps running the Stadtbahn normally, apart from a handful of construction weekends with replacement buses between Friedrichstrasse and Tiergarten.']
+      ],
+      note: 'This is the level most visitors picture when they think of Berlin Hauptbahnhof, the glass hall with trains crossing above your head. Through 2026 those tracks carry S-Bahn trains and nothing else. If your ticket says Hauptbahnhof, go down, not up.',
+      reach: 'You are already here. The lower platforms are the same building, four levels down.'
+    },
+    {
+      id: 'zoo', name: 'Zoologischer Garten', sub: 'West Berlin’s old main station', x: 320, y: 290, pos: 'below',
+      role: { long: 'shut', regional: 'shut', dticket: 'local' },
+      status: {
+        long: ['s-shut', 'No long-distance stop'],
+        regional: ['s-shut', 'No regional trains'],
+        dticket: ['s-local', 'S-Bahn and U-Bahn only']
+      },
+      lines: [
+        ['CLOSED', 'Zoo loses its long-distance and regional stop for the whole six months.']
+      ],
+      note: 'Zoo was the main station of West Berlin and it still feels like one, which is exactly why people get caught out. Plenty of hotel staff and older guidebooks will send you here for a train west. During the closure nothing long-distance stops. If you are staying around Kurfürstendamm, your station is Charlottenburg, two S-Bahn stops further west.',
+      reach: 'S3, S5, S7, S9, U2 and U9, plus Bus 100 and 200 towards Mitte.'
+    },
+    {
+      id: 'charlottenburg', name: 'Berlin-Charlottenburg', sub: 'Temporary western gateway', x: 200, y: 290, pos: 'above',
+      role: { long: 'temp', regional: 'primary', dticket: 'primary' },
+      status: {
+        long: ['s-temp', 'Some long-distance trains start here'],
+        regional: ['s-open', 'Western terminus for regional trains'],
+        dticket: ['s-open', 'Fully covered, and useful']
+      },
+      lines: [
+        ['ICE', 'Direct trains to North Rhine-Westphalia and Frankfurt am Main depart from here from 14 June.'],
+        ['RE1 / RE7', 'Both lines start and end here instead of running across the city.'],
+        ['RB14', 'Terminates here.'],
+        ['RB21', 'Runs to and from here instead of Gesundbrunnen.']
+      ],
+      note: 'A quiet suburban station that has been handed a much bigger job for six months. If you are staying in the west of the city, this is usually your fastest way out of Berlin in 2026, and it is far less stressful than fighting through Hauptbahnhof. Get there earlier than you think: it is small, the signage is modest, and the platforms fill up.',
+      reach: 'S3, S5, S7 and S9 stop here, two stops west of Zoologischer Garten. U7 at Wilmersdorfer Strasse is a short walk.'
+    },
+    {
+      id: 'spandau', name: 'Berlin-Spandau', sub: 'The far western exit', x: 75, y: 290, pos: 'below',
+      role: { long: 'partial', regional: 'some', dticket: 'some' },
+      status: {
+        long: ['s-temp', 'Open, but Hamburg trains skip it'],
+        regional: ['s-local', 'Regional trains still call'],
+        dticket: ['s-local', 'Covered for regional trains']
+      },
+      lines: [
+        ['ICE / IC', 'Hamburg trains cannot stop at Spandau during the closure. Do not plan a Hamburg departure from here.'],
+        ['RE / RB', 'Regional services still use the station.']
+      ],
+      note: 'Spandau is normally the sensible western stop for anyone heading towards Hamburg, which makes the 2026 exception genuinely expensive if you miss it. Check the departure station on your booking rather than assuming Spandau still works for your train.',
+      reach: 'S3 and S9, plus U7 from Kreuzberg and Neukölln. Roughly 30 minutes from Zoologischer Garten on the S-Bahn.'
+    },
+    {
+      id: 'gesundbrunnen', name: 'Berlin Gesundbrunnen', sub: 'Northern gateway', x: 490, y: 100, pos: 'above',
+      role: { long: 'primary', regional: 'primary', dticket: 'primary' },
+      status: {
+        long: ['s-open', 'Departures to Poland from 25 August'],
+        regional: ['s-open', 'Diverted regional trains call here'],
+        dticket: ['s-open', 'Fully covered for RE and RB']
+      },
+      lines: [
+        ['EC', 'Eurocity trains between Berlin and Poland run via Gesundbrunnen and Lichtenberg from 25 August.'],
+        ['RE2', 'Diverted this way, then on via Ostkreuz and Schöneweide.'],
+        ['RB21', 'No longer runs here. It uses Charlottenburg instead.']
+      ],
+      note: 'Gesundbrunnen sits on the northern ring and on the north-south tunnel at the same time, which is why so much traffic gets pushed here when the middle of the city is shut. If you are going to Poznań or Warsaw after 25 August, this is your station, not Hauptbahnhof and definitely not Ostbahnhof.',
+      reach: 'S1, S2, S25, S41 and S42 on the Ringbahn, plus U8 straight up from Alexanderplatz and Kottbusser Tor.'
+    },
+    {
+      id: 'lichtenberg', name: 'Berlin-Lichtenberg', sub: 'Eastern gateway', x: 800, y: 168, pos: 'above',
+      role: { long: 'temp', regional: 'some', dticket: 'some' },
+      status: {
+        long: ['s-temp', 'On the Poland diversion'],
+        regional: ['s-local', 'Regional services call here'],
+        dticket: ['s-local', 'Covered for regional trains']
+      },
+      lines: [
+        ['EC', 'Berlin to Poland trains are routed through Lichtenberg from 25 August.']
+      ],
+      note: 'Lichtenberg spent the GDR years as East Berlin’s long-distance station and it is quietly getting some of that role back for half of 2026. It is a plain, functional place with few reasons to arrive early, so time your journey to the departure rather than the atmosphere.',
+      reach: 'S5, S7, S75 and U5, plus several tram lines. Around 15 minutes from Alexanderplatz.'
+    },
+    {
+      id: 'ostkreuz', name: 'Ostkreuz', sub: 'Where the diversions cross', x: 815, y: 365, pos: 'below',
+      role: { long: 'temp', regional: 'primary', dticket: 'primary' },
+      status: {
+        long: ['s-temp', 'Dresden and Rostock trains pass here'],
+        regional: ['s-open', 'Key diversion point'],
+        dticket: ['s-open', 'Fully covered']
+      },
+      lines: [
+        ['IC', 'The Dresden to Berlin to Rostock line is diverted via Ostkreuz.'],
+        ['RE2', 'Runs Gesundbrunnen, Ostkreuz, Schöneweide during the closure.']
+      ],
+      note: 'Ostkreuz is the busiest interchange in the city and it is doing even more than usual this year. Useful if you are staying in Friedrichshain: you can often join a diverted train here rather than travelling across town to Hauptbahnhof first.',
+      reach: 'S3, S5, S7, S75, S8, S85, S41 and S42 all meet here. No U-Bahn.'
+    },
+    {
+      id: 'ostbahnhof', name: 'Berlin Ostbahnhof', sub: 'Eastern terminus only', x: 690, y: 290, pos: 'below',
+      role: { long: 'shut', regional: 'partial', dticket: 'partial' },
+      status: {
+        long: ['s-shut', 'No long-distance stop'],
+        regional: ['s-temp', 'Terminus, not a through station'],
+        dticket: ['s-temp', 'Covered, but trains end here']
+      },
+      lines: [
+        ['CLOSED', 'Ostbahnhof loses its long-distance stop for the whole closure.'],
+        ['RE1 / RE7', 'Start and end here rather than continuing west across the city.']
+      ],
+      note: 'This one catches people out more than any other station, because Ostbahnhof still reads like a main station on a map and it is walking distance from the East Side Gallery. For six months it is an eastern terminus. Trains from Frankfurt an der Oder stop here and go no further, and no ICE calls at all.',
+      reach: 'S3, S5, S7, S75 and S9. Tram M10 from Warschauer Strasse. No U-Bahn.'
+    },
+    {
+      id: 'suedkreuz', name: 'Berlin Südkreuz', sub: 'Southern gateway', x: 470, y: 490, pos: 'below',
+      role: { long: 'primary', regional: 'some', dticket: 'some' },
+      status: {
+        long: ['s-open', 'Rhineland departures'],
+        regional: ['s-local', 'Regional services call here'],
+        dticket: ['s-local', 'Covered for regional trains']
+      },
+      lines: [
+        ['ICE', 'Berlin to Düsseldorf and Köln runs from and to Südkreuz, via the lower level of Hauptbahnhof.'],
+        ['IC / EC', 'Südkreuz is one of the replacement stops for Ostbahnhof and Zoologischer Garten.']
+      ],
+      note: 'Südkreuz is the southern end of the north-south tunnel, so it stays fully connected while the east-west line is shut. If you are staying in Schöneberg or Kreuzberg and heading for the Rhineland, boarding here rather than at Hauptbahnhof saves a change and usually a crowd.',
+      reach: 'S2, S25, S26, S41, S42, S45 and S46. No U-Bahn, but Bus M46 and 106 reach it.'
+    }
+  ];
+
+  var BANNERS = {
+    long: 'You are holding an <b>ICE, IC or EC ticket</b>. The departure station printed on it matters more than usual this year, because Zoologischer Garten and Ostbahnhof have no long-distance stop at all until 12 December.',
+    regional: 'You are taking a <b>regional train</b>. No RE or RB runs between Charlottenburg and Ostbahnhof, so most lines now start or finish at one end of the city and you use the S-Bahn to reach them.',
+    dticket: 'Your <b>63 euro Deutschlandticket</b> covers every S-Bahn, U-Bahn, tram and bus in this map, and every RE and RB out of Berlin. It covers no ICE, IC or EC. Since 14 December 2025 it is not accepted on DB long-distance trains anywhere in Berlin and Brandenburg, so the old trick of riding an IC to Elsterwerda or Cottbus on a regional ticket is gone.'
+  };
+
+  var COLORS = {
+    primary: { fill: '#FFE600', text: '#123D18', ring: '#FFF9A8' },
+    temp:    { fill: '#C5E1A5', text: '#123D18', ring: '#DCEFC6' },
+    some:    { fill: '#8FA98A', text: '#0E2E12', ring: 'none' },
+    partial: { fill: '#C5E1A5', text: '#123D18', ring: 'none' },
+    local:   { fill: '#6f7a6b', text: '#E8F0E4', ring: 'none' },
+    shut:    { fill: '#5a655700', text: '#9fb09a', ring: 'none' }
+  };
+
+  var mode = 'long';
+  var selected = 'hbf-tief';
+
+  var nodesG = document.getElementById('nodes');
+  var chipsEl = document.getElementById('chips');
+  var panel = document.getElementById('panel');
+  var banner = document.getElementById('banner');
+  var svgNS = 'http://www.w3.org/2000/svg';
+
+  function el(name, attrs) {
+    var node = document.createElementNS(svgNS, name);
+    for (var k in attrs) { if (attrs[k] !== null && attrs[k] !== undefined) node.setAttribute(k, attrs[k]); }
+    return node;
+  }
+
+  function roleOf(st) { return st.role[mode] || 'local'; }
+
+  function drawNodes() {
+    while (nodesG.firstChild) nodesG.removeChild(nodesG.firstChild);
+
+    STATIONS.forEach(function (st) {
+      var role = roleOf(st);
+      var isShut = role === 'shut';
+      var c = COLORS[role] || COLORS.local;
+      var r = st.big ? 17 : 13;
+      var isSel = st.id === selected;
+
+      var g = el('g', {
+        'class': 'n-hit', tabindex: '0', role: 'button',
+        'aria-label': st.name + ', ' + st.sub + '. ' + st.status[mode][1]
+      });
+
+      // generous invisible focus/tap target
+      g.appendChild(el('rect', { 'class': 'n-focus', x: st.x - 30, y: st.y - 26, width: 60, height: 52, rx: 10 }));
+
+      if (isSel) {
+        g.appendChild(el('circle', { cx: st.x, cy: st.y, r: r + 9, fill: 'none', stroke: '#FFE600', 'stroke-width': 2.5, opacity: '.9' }));
+      }
+
+      if (isShut) {
+        g.appendChild(el('circle', { cx: st.x, cy: st.y, r: r, fill: '#3d4a3a', stroke: '#8b9a86', 'stroke-width': 2.5 }));
+        var d = r * 0.62;
+        g.appendChild(el('line', { x1: st.x - d, y1: st.y - d, x2: st.x + d, y2: st.y + d, stroke: '#E63946', 'stroke-width': 3, 'stroke-linecap': 'round' }));
+        g.appendChild(el('line', { x1: st.x + d, y1: st.y - d, x2: st.x - d, y2: st.y + d, stroke: '#E63946', 'stroke-width': 3, 'stroke-linecap': 'round' }));
+      } else {
+        g.appendChild(el('circle', { cx: st.x, cy: st.y, r: r, fill: c.fill, stroke: '#0E2E12', 'stroke-width': 2.5 }));
+      }
+
+      // Hauptbahnhof's two levels are labelled by the box they sit in, so they
+      // get no floating text of their own.
+      if (st.pos !== 'inbox') {
+        var nameY = st.pos === 'above' ? st.y - r - 24 : st.y + r + 18;
+        var subY = st.pos === 'above' ? st.y - r - 11 : st.y + r + 32;
+
+        var t = el('text', {
+          x: st.x, y: nameY, 'text-anchor': 'middle',
+          'font-family': 'Montserrat, sans-serif', 'font-size': '13.5',
+          'font-weight': isShut ? '500' : '700',
+          fill: isShut ? '#93a48e' : '#FAFAF5',
+          stroke: '#0E2E12', 'stroke-width': '4', 'paint-order': 'stroke',
+          'pointer-events': 'none'
+        });
+        t.textContent = st.name;
+        g.appendChild(t);
+
+        var t2 = el('text', {
+          x: st.x, y: subY, 'text-anchor': 'middle',
+          'font-family': 'IBM Plex Mono, monospace', 'font-size': '10.5',
+          fill: isShut ? '#7f8f7a' : '#B7D3A8',
+          stroke: '#0E2E12', 'stroke-width': '3.5', 'paint-order': 'stroke',
+          'pointer-events': 'none'
+        });
+        t2.textContent = st.sub;
+        g.appendChild(t2);
+      }
+
+      function pick() { selected = st.id; render(); }
+      g.addEventListener('click', pick);
+      g.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); }
+      });
+
+      nodesG.appendChild(g);
+    });
+  }
+
+  function drawPanel() {
+    var st = null;
+    for (var i = 0; i < STATIONS.length; i++) { if (STATIONS[i].id === selected) st = STATIONS[i]; }
+    if (!st) return;
+
+    var s = st.status[mode];
+    var html = '';
+    html += '<p class="panel-kicker">Selected gateway</p>';
+    html += '<h2>' + st.name + '</h2>';
+    html += '<p class="sub">' + st.sub + '</p>';
+    html += '<span class="status ' + s[0] + '">' + s[1] + '</span>';
+    html += '<ul class="rows">';
+    st.lines.forEach(function (row) {
+      var cls = /^(RE|RB)/.test(row[0]) ? 'tag reg' : 'tag';
+      html += '<li><span class="' + cls + '">' + row[0] + '</span><span>' + row[1] + '</span></li>';
+    });
+    html += '</ul>';
+    html += '<p>' + st.note + '</p>';
+    html += '<p class="reach"><b>Getting there:</b> ' + st.reach + '</p>';
+    panel.innerHTML = html;
+  }
+
+  function drawChips() {
+    while (chipsEl.firstChild) chipsEl.removeChild(chipsEl.firstChild);
+    STATIONS.forEach(function (st) {
+      var li = document.createElement('li');
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'chip r-' + roleOf(st);
+      b.setAttribute('aria-pressed', String(st.id === selected));
+      b.textContent = st.id === 'hbf-tief' ? 'Hauptbahnhof lower'
+        : st.id === 'hbf-hoch' ? 'Hauptbahnhof upper'
+        : st.name;
+      b.addEventListener('click', function () { selected = st.id; render(); });
+      li.appendChild(b);
+      chipsEl.appendChild(li);
+    });
+  }
+
+  function render() {
+    banner.innerHTML = BANNERS[mode];
+    drawNodes();
+    drawChips();
+    drawPanel();
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('.mode'), function (btn) {
+    btn.addEventListener('click', function () {
+      mode = btn.getAttribute('data-mode');
+      Array.prototype.forEach.call(document.querySelectorAll('.mode'), function (b) {
+        b.setAttribute('aria-pressed', String(b === btn));
+      });
+      render();
+    });
+  });
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
