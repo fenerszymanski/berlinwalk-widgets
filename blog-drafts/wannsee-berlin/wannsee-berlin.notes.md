@@ -74,6 +74,10 @@ destinations -> geographic sequencing with per-leg transport on a lake map.
 - Tool: `wannsee-shore-planner`; BerlinTools CMS item
   `91d1ffb4-8cfa-4a3e-96a7-610106446b2a` with live Wix Media icon
   `5a08a3_34182a8f028a4d6d8dcb8f178ef639c8~mv2.png`.
+- While this article is unpublished, the live tool's related-blog card points
+  to the already-live `/post/berlin-lakes-guide-2026`, avoiding a public 404.
+  The CMS helper checks the matching Wannsee public URL and switches the card
+  to `/post/wannsee-berlin` automatically after that post returns HTTP 200.
 - Planner verification: all 63 non-empty stop selections x 3 time budgets x
   7 weekdays = 1,323 combinations, zero mismatches. Desktop 1280 and mobile
   390 checks pass with no horizontal overflow. Image credits are default
