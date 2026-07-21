@@ -1,8 +1,17 @@
 # Trip Planner 3.1 release runbook
 
-Status: local implementation only. No production release, Stripe mutation,
-promotion schedule, Meta upload, or spend is authorised before the approval
-gates below.
+Status: approval gate 2 completed on 2026-07-21 at 09:30 CEST. The production
+product and exact 30-day EUR 3.99 offer are live. Approval gate 3 is not
+authorised; no Meta upload, activation, or spend change was made.
+
+Release record: widget product commit
+`69b0150318732fa783ace091e07171a2c9b5aa84`, production backend
+`dpl_9qzZ8ZNU8yqrKgWQAkFvYmRhjrwm`, launch-off rollback
+`dpl_GjddvExbqimnDiRSSNMUPGqLuBnq`. The active window is
+`2026-07-21T07:30:00.000Z` through `2026-08-20T07:30:00.000Z`. The default
+production environment flag was restored to offer-off after promotion so a
+future accidental deployment fails closed to EUR 7.99; the promoted snapshot
+remains offer-on for the approved window.
 
 This runbook supersedes the paid-product, AI, and pricing instructions in the
 older `LAUNCH_RUNBOOK.md` and `PLANNER_NEXT_LEVEL_PLAN.md`. Those files remain
@@ -61,6 +70,12 @@ deploy the backend, create a live Stripe coupon, change Wix collection fields,
 activate a promotion, or change Meta.
 
 ## Approval gate 2: production release
+
+Completed. Schema readback, launch-off deployment, isolated Stripe test
+purchase/refund, live coupon, exact-window activation, public alias readback,
+live unpaid checkout smoke, desktop/mobile product QA, PDF QA, rollback capture
+and cleanup all passed. The first delivery email passed SPF, DKIM and DMARC but
+landed in Spam, so inbox placement remains a monitoring item.
 
 After approval gate 1:
 
