@@ -12484,28 +12484,13 @@
       padding: 24px 26px;
     }
 
-    #bw-trip-planner .bw-artifact-full-brand {
-      align-items: center;
-      display: flex;
-      gap: 11px;
-      margin: 0 0 12px;
-    }
-
-    #bw-trip-planner .bw-artifact-full-brand img {
-      background: var(--bw-yellow);
-      border: 0;
-      border-radius: 5px;
-      height: auto;
-      object-fit: contain;
-      width: 118px;
-    }
-
-    #bw-trip-planner .bw-artifact-full-brand span {
+    #bw-trip-planner .bw-artifact-full-kicker {
       color: var(--bw-green);
       display: block;
       font-size: 11px;
       font-weight: 950;
       letter-spacing: 0.08em;
+      margin: 0 0 12px;
       text-transform: uppercase;
     }
 
@@ -13224,17 +13209,6 @@
         width: 58px;
       }
 
-      #bw-trip-planner .bw-artifact-full-brand {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 7px;
-      }
-
-      #bw-trip-planner .bw-artifact-full-brand img {
-        height: auto;
-        width: 106px;
-      }
-
       #bw-trip-planner .bw-artifact-full-jumps {
         display: flex;
         gap: 7px;
@@ -13755,7 +13729,7 @@
 <script src="engine/trip-planner-plain-copy-v1.js?v=20260721-phase1c"></script>
 <script src="engine/trip-planner-runtime-v3-1.js"></script>
 <script src="engine/plan-artifact-v3.js?v=20260721-phase1b"></script>
-<script src="engine/plan-artifact-v3-pdf.js?v=20260721-phase2a"></script>
+<script src="engine/plan-artifact-v3-pdf.js?v=20260721-readable-routes"></script>
 <script>
 (function () {
   var root = document.getElementById('bw-trip-planner');
@@ -13806,7 +13780,7 @@
   var TOUR_LOCATION = 'World Clock, Alexanderplatz, Berlin';
   var PDF_ENGINE_URL = 'https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js';
   var BW_LOGO_URL = 'assets/berlinwalk-logo-rounded.png';
-  var BW_LOGO_WIDE_URL = 'assets/berlinwalk-logo-wide.png';
+  var BW_PDF_WORDMARK_URL = '../assets/berlinwalk-wordmark-yellow.png';
   var BW_LOGO_ASPECT_RATIO = 1;
   var YUSUF_GUIDE_PHOTO_URL = 'assets/yusuf-local-guide.jpg';
   var LEAD_API_URL = 'https://www.berlinwalk.com/_functions/tripPlannerLead';
@@ -13870,8 +13844,8 @@
   };
   var bwLogoDataUrl = '';
   var bwLogoPromise = null;
-  var bwWideLogoDataUrl = '';
-  var bwWideLogoPromise = null;
+  var bwPdfWordmarkDataUrl = '';
+  var bwPdfWordmarkPromise = null;
   var imageDataUrlCache = {};
   var imageDataUrlPromises = {};
   var pdfEnginePromise = null;
@@ -15731,9 +15705,20 @@
     '</section>';
   }
 
+  function artifactPdfPageCount(view) {
+    var fallback = Math.max(1, Number(view && view.delivery && view.delivery.pdfPageCount) || ((view && view.days && view.days.length) || 1) + 4);
+    try {
+      if (window.BWPlanArtifactPdfV3 && typeof window.BWPlanArtifactPdfV3.createPagePlan === 'function' && view && view.artifact) {
+        return window.BWPlanArtifactPdfV3.createPagePlan(view.artifact, view.weather || {}).pageCount;
+      }
+    } catch (error) {}
+    return fallback;
+  }
+
   function artifactPdfMiniPageHtml(view, day, pageNumber) {
+    var pdfPageCount = artifactPdfPageCount(view);
     return '<article class="bw-artifact-pdf-mini">' +
-      '<header><img src="assets/berlinwalk-logo-rounded.png" alt=""><strong>BerlinWalk</strong><small>' + pageNumber + '/' + view.delivery.pdfPageCount + '</small></header>' +
+      '<header><img src="assets/berlinwalk-logo-rounded.png" alt=""><strong>BerlinWalk</strong><small>' + pageNumber + '/' + pdfPageCount + '</small></header>' +
       '<img class="bw-artifact-pdf-photo" src="' + escapeHtml(day.photo.src) + '" alt="' + escapeHtml(day.photo.alt) + '">' +
       '<div class="bw-artifact-pdf-day-head"><b>D' + day.dayNumber + '</b><strong>' + escapeHtml(formatDisplayDate(day.dateKey)) + '<small>' + escapeHtml(day.title) + '</small></strong></div>' +
       artifactTimelineHtml(day, true) +
@@ -15742,27 +15727,30 @@
   }
 
   function artifactDeliveryBandHtml(view) {
+    var pdfPageCount = artifactPdfPageCount(view);
     return '<section class="bw-artifact-delivery">' +
       '<strong>Same plan, two ways to use it</strong>' +
       '<button type="button" data-artifact-scroll-phone>' + artifactIconSvg('map') + '<span><b>On your phone</b><small>Full schedule, maps and practical links</small></span></button>' +
-      '<button type="button" data-artifact-pdf-preview>' + artifactIconSvg('download') + '<span><b>PDF backup</b><small>' + view.delivery.pdfPageCount + ' saved pages work offline; map links need data</small></span></button>' +
+      '<button type="button" data-artifact-pdf-preview>' + artifactIconSvg('download') + '<span><b>PDF backup</b><small>' + pdfPageCount + ' saved pages work offline; map links need data</small></span></button>' +
       '<span class="bw-artifact-same-badge">SAME<br>PLAN</span>' +
     '</section>';
   }
 
   function artifactInlineOfferHtml(view) {
+    var pdfPageCount = artifactPdfPageCount(view);
     return '<section class="bw-artifact-inline-offer">' +
-      '<div><strong>Your full ' + view.days.length + '-day plan is ready.</strong><span>One-time payment · instant browser access · ' + view.delivery.pdfPageCount + '-page PDF backup</span></div>' +
+      '<div><strong>Your full ' + view.days.length + '-day plan is ready.</strong><span>One-time payment · instant browser access · ' + pdfPageCount + '-page PDF backup</span></div>' +
       '<button type="button" data-pro-cta>Unlock this plan for €7.99</button>' +
     '</section>';
   }
 
   function artifactComparisonHtml(view) {
+    var pdfPageCount = artifactPdfPageCount(view);
     return '<section class="bw-artifact-comparison">' +
       '<div><strong>Free preview</strong><strong>Full plan</strong></div>' +
       '<p><span>' + artifactIconSvg('check') + 'Day-by-day outline</span><span>' + artifactIconSvg('check') + 'Times and map links</span></p>' +
       '<p><span>' + artifactIconSvg('check') + 'One Plan B example</span><span>' + artifactIconSvg('check') + 'Plan B for every day</span></p>' +
-      '<p><span>' + artifactIconSvg('check') + 'Phone and PDF preview</span><span>' + artifactIconSvg('check') + 'Phone view and ' + view.delivery.pdfPageCount + '-page PDF</span></p>' +
+      '<p><span>' + artifactIconSvg('check') + 'Phone and PDF preview</span><span>' + artifactIconSvg('check') + 'Phone view and ' + pdfPageCount + '-page PDF</span></p>' +
     '</section>';
   }
 
@@ -15851,7 +15839,7 @@
     if (!view || !daysEl) return;
     setText('[data-full-sub]', view.days.length + (view.days.length === 1 ? ' day' : ' days') + ' from ' + view.trip.displayDate + '. The phone view and PDF show the same stops in the same order.');
     if (routeBrief) {
-      routeBrief.innerHTML = '<section class="bw-artifact-full-intro"><div><div class="bw-artifact-full-brand"><img src="' + escapeHtml(BW_LOGO_WIDE_URL) + '" alt="BerlinWalk" loading="eager" decoding="async"><span>Personal trip plan</span></div><h2>' + escapeHtml(view.decisionReceipt.headline) + '</h2><p>' + escapeHtml(view.decisionReceipt.guideNote) + '</p></div><img src="' + escapeHtml(YUSUF_GUIDE_PHOTO_URL) + '" alt="Yusuf, BerlinWalk guide" loading="eager" decoding="async"></section>';
+      routeBrief.innerHTML = '<section class="bw-artifact-full-intro"><div><div class="bw-artifact-full-kicker">Personal trip plan</div><h2>' + escapeHtml(view.decisionReceipt.headline) + '</h2><p>' + escapeHtml(view.decisionReceipt.guideNote) + '</p></div><img src="' + escapeHtml(YUSUF_GUIDE_PHOTO_URL) + '" alt="Yusuf, BerlinWalk guide" loading="eager" decoding="async"></section>';
     }
     if (jumpBar) {
       jumpBar.innerHTML = '<nav class="bw-artifact-full-jumps" aria-label="Open a day in your itinerary">' + view.days.map(function (day) {
@@ -15880,8 +15868,9 @@
     if (!view || !view.days.length) return compactPreviewHtml(plan);
     var activeDay = view.days.find(function (day) { return day.dayNumber === artifactRevealDay; }) || view.days[0];
     artifactRevealDay = activeDay.dayNumber;
+    var pdfPageCount = artifactPdfPageCount(view);
     var secondaryPdfDay = view.days.length > 1 ? (activeDay.dayNumber === 1 ? view.days[1] : activeDay) : null;
-    var pdfMiniPages = artifactPdfMiniPageHtml(view, view.days[0], 3) + (secondaryPdfDay ? artifactPdfMiniPageHtml(view, secondaryPdfDay, Math.min(view.delivery.pdfPageCount, secondaryPdfDay.dayNumber + 2)) : '');
+    var pdfMiniPages = artifactPdfMiniPageHtml(view, view.days[0], 3) + (secondaryPdfDay ? artifactPdfMiniPageHtml(view, secondaryPdfDay, Math.min(pdfPageCount, secondaryPdfDay.dayNumber + 2)) : '');
     return artifactAnswerReceiptHtml(view) +
       '<section class="bw-artifact-intro"><h2>' + escapeHtml(view.decisionReceipt.headline) + '</h2><div><img src="' + escapeHtml(YUSUF_GUIDE_PHOTO_URL) + '" alt="Yusuf, BerlinWalk guide"><p><strong>Hi, I’m Yusuf.</strong> ' + escapeHtml(view.decisionReceipt.guideNote) + '</p></div></section>' +
       artifactWeatherHtml(view) +
@@ -15891,7 +15880,7 @@
       artifactInlineOfferHtml(view) +
       '<section class="bw-artifact-product-preview">' +
         '<div><h3>On your phone</h3>' + artifactPhonePreviewHtml(view, activeDay) + '</div>' +
-        '<div id="bw-artifact-pdf-preview"><h3>As a PDF (' + view.delivery.pdfPageCount + ' pages)</h3><div>' + pdfMiniPages + '</div></div>' +
+        '<div id="bw-artifact-pdf-preview"><h3>As a PDF (' + pdfPageCount + ' pages)</h3><div>' + pdfMiniPages + '</div></div>' +
       '</section>' +
       artifactComparisonHtml(view);
   }
@@ -24386,10 +24375,10 @@
     return bwLogoPromise;
   }
 
-  function loadBwWideLogoDataUrl() {
-    if (bwWideLogoDataUrl) return Promise.resolve(bwWideLogoDataUrl);
-    if (bwWideLogoPromise) return bwWideLogoPromise;
-    bwWideLogoPromise = new Promise(function (resolve) {
+  function loadBwPdfWordmarkDataUrl() {
+    if (bwPdfWordmarkDataUrl) return Promise.resolve(bwPdfWordmarkDataUrl);
+    if (bwPdfWordmarkPromise) return bwPdfWordmarkPromise;
+    bwPdfWordmarkPromise = new Promise(function (resolve) {
       var settled = false;
       function done(value) {
         if (settled) return;
@@ -24405,8 +24394,8 @@
           canvas.height = image.naturalHeight || image.height;
           var context = canvas.getContext('2d');
           context.drawImage(image, 0, 0);
-          bwWideLogoDataUrl = canvas.toDataURL('image/png');
-          done(bwWideLogoDataUrl);
+          bwPdfWordmarkDataUrl = canvas.toDataURL('image/png');
+          done(bwPdfWordmarkDataUrl);
         } catch (error) {
           done('');
         }
@@ -24414,12 +24403,12 @@
       image.onerror = function () {
         done('');
       };
-      image.src = BW_LOGO_WIDE_URL;
+      image.src = BW_PDF_WORDMARK_URL;
       window.setTimeout(function () {
         done('');
       }, 3000);
     });
-    return bwWideLogoPromise;
+    return bwPdfWordmarkPromise;
   }
 
   function loadImageDataUrl(src, cacheKey, timeoutMs) {
@@ -25701,11 +25690,11 @@
       }
       setPdfDebug('artifact-v3-page-plan', '');
       var storedOverlay = latestWeatherOverlayV1 || buildWeatherOverlayV1(storedArtifact);
-      var storedWideLogo = await loadBwWideLogoDataUrl();
-      if (!storedWideLogo) throw new Error('The original BerlinWalk logo could not be loaded for the PDF.');
+      var storedPdfWordmark = await loadBwPdfWordmarkDataUrl();
+      if (!storedPdfWordmark) throw new Error('The BerlinWalk wordmark could not be loaded for the PDF.');
       var storedPdf = window.BWPlanArtifactPdfV3.renderPdf(Api, storedArtifact, storedOverlay || {}, {
         save: true,
-        logoDataUrl: storedWideLogo
+        logoDataUrl: storedPdfWordmark
       });
       setPdfDebug('artifact-v3-saved', 'pages=' + storedPdf.pageCount);
       setActionStatus('PDF downloaded. It uses the same stored itinerary as your phone view.');

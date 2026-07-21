@@ -130,6 +130,7 @@ class FakePdf {
     this.images = [];
     this.savedAs = '';
     this.textWithLinkCalls = 0;
+    this.fontSize = 0;
     this.internal = {
       pageSize: {
         getWidth: () => 595.28,
@@ -143,7 +144,7 @@ class FakePdf {
   getNumberOfPages() { return this.pages; }
   setPage(page) { this.currentPage = page; return this; }
   setFont() { return this; }
-  setFontSize() { return this; }
+  setFontSize(size) { this.fontSize = Number(size) || 0; return this; }
   setTextColor() { return this; }
   setFillColor() { return this; }
   setDrawColor() { return this; }
@@ -177,7 +178,7 @@ class FakePdf {
     return lines;
   }
   text(value, x, y) {
-    this.textCalls.push({ page: this.currentPage, value, x, y });
+    this.textCalls.push({ page: this.currentPage, value, x, y, fontSize: this.fontSize });
     return this;
   }
   textWithLink(value, x, y, options) {
@@ -215,6 +216,7 @@ test('page planning is deterministic for the same artifact and weather overlay',
   const second = PdfV3.createPagePlan(artifactSource(3), weatherSource(3));
   assert.deepEqual(second, first);
   assert.equal(first.fileName, 'berlinwalk-plan-2026-08-03-3-days.pdf');
+  assert.equal(PdfV3.createPagePlan(artifactSource(1), weatherSource(1)).fileName, 'berlinwalk-plan-2026-08-03-1-day.pdf');
 });
 
 test('weather page keeps forecast and typical-condition truth labels separate', () => {
@@ -336,6 +338,7 @@ test('cover uses the supplied original BerlinWalk logo asset', () => {
   assert.equal(rendered.doc.images[0].page, 1);
   assert.equal(rendered.doc.images[0].data, logoDataUrl);
   assert.equal(rendered.doc.images[0].format, 'PNG');
+  assert.ok(rendered.doc.images[0].width / rendered.doc.images[0].height > 4.7);
   const coverText = rendered.doc.textCalls
     .filter((call) => call.page === 1)
     .flatMap((call) => Array.isArray(call.value) ? call.value : [call.value])
@@ -370,7 +373,7 @@ test('renderer keeps all drawing inside the A4 content boundary and uses ASCII h
   assert.match(allText, /Bernauer Straße -> Friedrichshain/);
 });
 
-test('dense seven-day input still stays within one fixed A4 page per section', () => {
+test('dense seven-day input adds continuation pages instead of shrinking route copy', () => {
   const source = artifactSource(7);
   source.days.forEach((day) => {
     day.title = 'One connected Berlin layer';
@@ -397,7 +400,20 @@ test('dense seven-day input still stays within one fixed A4 page per section', (
   }));
 
   const result = PdfV3.renderPdf(FakePdf, source, weatherSource(7), { save: false });
-  assert.equal(result.pageCount, 11);
+  assert.equal(result.pageCount, 25);
+  assert.equal(result.pagePlan.dayPageCount, 21);
+  const routeTitles = result.doc.textCalls.filter((call) => {
+    const value = Array.isArray(call.value) ? call.value.join(' ') : String(call.value || '');
+    return /^Berlin stop \d+/.test(value);
+  });
+  const routeDetails = result.doc.textCalls.filter((call) => {
+    const value = Array.isArray(call.value) ? call.value.join(' ') : String(call.value || '');
+    return /deliberately long practical description/.test(value);
+  });
+  assert.equal(routeTitles.length, 84);
+  assert.equal(routeDetails.length, 84);
+  assert.equal(routeTitles.every((call) => call.fontSize >= 12.5), true);
+  assert.equal(routeDetails.every((call) => call.fontSize >= 10.5), true);
   result.doc.shapes.forEach((shape) => {
     assert.ok(shape.x >= 0);
     assert.ok(shape.y >= 0);

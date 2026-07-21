@@ -1116,12 +1116,14 @@ function run() {
     'Artifact PDF page geometry is bounded',
     /var\s+PAGE_HEIGHT\s*=\s*841\.89/.test(artifactV3PdfSource) &&
       /function\s+validatePagePlan/.test(artifactV3PdfSource) &&
-      /function\s+drawDay\(doc,\s*page\)/.test(artifactV3PdfSource) &&
+    /function\s+drawDay\(doc,\s*page\)/.test(artifactV3PdfSource) &&
+      /MAX_DAY_BLOCKS_PER_PAGE\s*=\s*5/.test(artifactV3PdfSource) &&
+      /function\s+buildDayPages/.test(artifactV3PdfSource) &&
       /pageCount:\s*pages\.length/.test(artifactV3PdfSource) &&
       /actualPages\s*!==\s*pagePlan\.pageCount/.test(artifactV3PdfSource) &&
-      /plan-artifact-v3-pdf-3\.1\.0/.test(artifactV3PdfSource) &&
+      /plan-artifact-v3-pdf-3\.4\.0-readable-routes/.test(artifactV3PdfSource) &&
       /BWPlanArtifactPdfV3\.renderPdf/.test(indexHtml),
-    'Expected the shared artifact renderer to validate fixed A4 pages and fail closed on page-count mismatches.'
+    'Expected the shared artifact renderer to keep A4 geometry, add continuation pages for dense days, and fail closed on page-count mismatches.'
   );
   block(
     'Trip style presets reduce form friction',
