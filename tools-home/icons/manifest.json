@@ -2060,5 +2060,31 @@
     "png160": "tools-home/icons/wannsee-shore-planner-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/wannsee-shore-planner.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_34182a8f028a4d6d8dcb8f178ef639c8~mv2.png"
+  },
+  {
+    "slug": "berlin-wall-trail-sections",
+    "title": "Berlin Wall Trail Section Finder",
+    "category": "Discovery",
+    "source": "chatgpt-browser-20260721",
+    "generatedAt": "2026-07-21",
+    "promptFile": "tools-home/icons/_src/daily-blog-berlin-wall-trail-sections-icon-20260721-prompt.md",
+    "sourceImage": "tools-home/icons/_src/daily-blog-berlin-wall-trail-sections-icon-20260721-raw.png",
+    "png512": "tools-home/icons/berlin-wall-trail-sections.png",
+    "png160": "tools-home/icons/berlin-wall-trail-sections-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-wall-trail-sections-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_4071757705694b0cbf71ba33a3f7dca1~mv2.png"
+  },
+  {
+    "slug": "berlin-train-gateways-2026",
+    "title": "Berlin Train Gateways 2026",
+    "category": "Transport",
+    "source": "codex-built-in-imagegen-20260721",
+    "generatedAt": "2026-07-21",
+    "promptFile": "tools-home/icons/_src/daily-blog-berlin-train-gateways-2026-icon-20260721-prompt.md",
+    "sourceImage": "tools-home/icons/_src/daily-blog-berlin-train-gateways-2026-icon-20260721-raw.png",
+    "png512": "tools-home/icons/berlin-train-gateways-2026.png",
+    "png160": "tools-home/icons/berlin-train-gateways-2026-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-train-gateways-2026-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_e1a7aa81ba3d4256ba607ed01dcbea50~mv2.png"
   }
 ]

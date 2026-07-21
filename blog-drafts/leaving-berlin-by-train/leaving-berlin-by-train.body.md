@@ -26,7 +26,7 @@ The closure pushed traffic onto two things that still work: the north-south tunn
 
 The lower level, platforms 1 to 8. If your ticket says Berlin Hauptbahnhof this year, this is almost certainly where you need to be.
 
-**Berlin-Charlottenburg.** A quiet suburban station handed a much bigger job. Direct ICE trains to North Rhine-Westphalia and Frankfurt am Main depart from here from 14 June, and the regional RE1 and RE7 lines start and end here instead of running across the city. If you are staying anywhere around Kurfürstendamm, this is usually your fastest way out of Berlin right now.
+**Berlin-Charlottenburg.** A quiet suburban station handed a much bigger job. Some ICE trains to North Rhine-Westphalia and Frankfurt am Main start or finish here from 14 June, and the regional RE1 and RE7 lines start and end here instead of running across the city. If you are staying anywhere around Kurfürstendamm, this is usually your fastest way out of Berlin right now.
 
 ![The brick corner of Berlin-Charlottenburg station with the green Berlin-Charlottenburg lettering and the green S-Bahn roundel, framed by red autumn leaves](blog-drafts/leaving-berlin-by-train/images/optimized/charlottenburg.jpg)
 
@@ -38,7 +38,7 @@ Berlin-Charlottenburg, two S-Bahn stops west of Zoologischer Garten. Small, easy
 
 **Ostkreuz and Lichtenberg.** The eastern diversions. Intercity trains on the Dresden to Berlin to Rostock line are routed via Ostkreuz.
 
-Two traps worth naming, because both cost people trains. Hamburg services **cannot stop at Spandau** during the closure, so the usual western shortcut is gone. And the Eurocity trains that normally run Hamburg to Prague now start and end in Berlin, which means anyone going on to Dresden or Prague has to change here rather than sit still.
+Two traps are worth naming because both cost people trains. Hamburg services **cannot stop at Spandau** during the closure, so the usual western shortcut is gone. The other trap is assuming a familiar route still means a familiar Berlin station: use the station and platform printed on your ticket, even if last year's journey left from somewhere else.
 
 ![The glass frontage of Berlin Ostbahnhof with the station name in large lettering above the entrance doors](blog-drafts/leaving-berlin-by-train/images/optimized/ostbahnhof.jpg)
 
@@ -50,7 +50,7 @@ Ostbahnhof still looks like a main station and sits walking distance from the Ea
 
 Deutsche Bahn sells long-distance travel at three price levels, and the gap between them is not really about money. It is about how much your plans might change.
 
-**Super Sparpreis** starts at **6.99 euros** and is the cheapest thing on the network. It is also the strictest. You are bound to the exact train printed on your ticket, and rebooking, exchange and cancellation are all excluded. If you miss that train, you have bought nothing.
+**Super Sparpreis** normally starts at **17.99 euros** in second class. Selected short domestic journeys can start at 6.99 euros, and DB is also running a limited 2026 Last Minute offer at that price. It is the strictest fare: you are bound to the long-distance train printed on your ticket. Outside DB's three-hour immediate-cancellation window, ordinary exchange and cancellation are excluded. If you miss it for a reason on your side, you normally cannot use the ticket on a later long-distance train; DB disruption and passenger-rights rules are separate. The current conditions are on [DB's Super Sparpreis FAQ](https://www.bahn.de/faq/pk/angebot/sparpreis/super-sparpreis).
 
 **Sparpreis** starts at **21.99 euros**. Same train binding, but you can change or cancel until the day before travel for a 10 euro fee.
 
@@ -66,7 +66,7 @@ My advice: match the fare to how certain you are, not to how cheap you want to f
 
 The Deutschlandticket costs **63 euros a month** since January 2026, and it is superb value for what it actually covers: every regional train in Germany, meaning RE, RB and IRE, plus every S-Bahn, U-Bahn, tram and bus. If you are in Berlin for a longer stay, one ticket covers all your local travel and a genuine amount of the surrounding countryside.
 
-What it does not cover is any ICE, IC or EC. That part has always been true.
+As a national rule, it does not cover ICE, IC or EC. Berlin and Brandenburg used to have a few local exceptions, which is why the next detail matters.
 
 Here is the part that changed and that a lot of advice online has not caught up with. Until the timetable change on **14 December 2025**, VBB regional tickets and the Deutschlandticket were accepted on certain DB long-distance trains inside Berlin and Brandenburg. That was the old local trick: take an Intercity towards Elsterwerda or Cottbus, or an ICE towards Prenzlau, and ride it on your regional ticket because the region had a deal with DB. DB Fernverkehr ended that contract, and since December 2025 the acceptance is gone across the region.
 
@@ -97,6 +97,4 @@ Official sources move faster than any guide. Check long-distance departures on [
 
 {{faq}}
 
-## Image credits
-
-Berlin Hauptbahnhof upper level: Paul Korecky, CC BY-SA 2.0. Stadtbahn viaduct: Mirkone, CC BY-SA 4.0. Hauptbahnhof lower level: Arne Müseler, CC BY-SA 3.0 DE. Berlin-Charlottenburg: Michael.F.H.Barth, CC BY-SA 4.0. Berlin Ostbahnhof: Tony Webster, CC BY-SA 4.0. ICE 4 at Berlin Hauptbahnhof: rail fox, CC BY-SA 4.0. All via Wikimedia Commons.
+Image credits for this article are available from the closed **Image credits** button inside the train-gateway tool above.

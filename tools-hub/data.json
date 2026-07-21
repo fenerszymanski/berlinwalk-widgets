@@ -4913,7 +4913,7 @@
     {
       "slug": "berlin-wall-trail-sections",
       "title": "Berlin Wall Trail Section Finder",
-      "lead": "The Berliner Mauerweg is 160 km, but the surviving Wall sits in about 19 km of it. See the whole loop drawn to scale and shaded by how much border history is still standing, set your time and whether you are walking or cycling, and get the section that actually fits with both end stations and what survives on it.",
+      "lead": "The Berliner Mauerweg is 160 km, but the Wall is not continuous. See the loop drawn to scale and shaded by how much border history survives, set your time and whether you are walking or cycling, and get the section that actually fits with both end stations and what remains on it.",
       "category": "Discovery",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-wall-trail-sections/",
       "embedHeight": 1980,
@@ -4942,6 +4942,37 @@
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_4071757705694b0cbf71ba33a3f7dca1~mv2.png",
       "cmsItemId": "5d5b4030-de4f-4744-97d9-e3c15040a539"
+    },
+    {
+      "slug": "berlin-train-gateways-2026",
+      "title": "Berlin Train Gateways 2026",
+      "lead": "The Stadtbahn is closed to regional and long-distance trains until 12 December 2026. Choose your ticket, tap a station, and see which Berlin gateway actually works for your journey now.",
+      "category": "Maps",
+      "image": "https://static.wixstatic.com/media/5a08a3_e1a7aa81ba3d4256ba607ed01dcbea50~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-train-gateways-2026/",
+      "embedHeight": 1760,
+      "hubCategory": "Transport",
+      "type": "Planner",
+      "tags": [
+        "Berlin trains",
+        "Hauptbahnhof",
+        "Stadtbahn closure",
+        "Deutsche Bahn",
+        "Deutschlandticket",
+        "Charlottenburg",
+        "Südkreuz",
+        "Gesundbrunnen"
+      ],
+      "aliases": [
+        "leaving Berlin by train",
+        "Berlin train stations 2026",
+        "Berlin Hauptbahnhof lower level",
+        "Berlin rail closure",
+        "which Berlin station"
+      ],
+      "relatedBlog": "/post/berlin-hauptbahnhof-guide",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "c4318ef8-a7c9-490a-93a6-13a8bc56d7e1"
     }
   ],
   "hubCategories": [

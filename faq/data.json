@@ -6995,7 +6995,7 @@
       },
       {
         "q": "Where are the surviving watchtowers on the Berlin Wall Trail?",
-        "a": "Four are worth knowing. The Schlesischer Busch command post on Puschkinallee in Treptow is a four-storey concrete tower that once controlled 18 watchtowers, with a monument-listed slab wall beside it. The Guenter Litfin memorial tower at Kieler Strasse 2 is free but opens only at weekends from 11:00 to 17:00 between 1 May and 5 October, with a limit of 15 people and no children under 8. The Nieder Neuendorf tower near Hennigsdorf is a free four-level museum open Tuesday to Sunday, 10:00 to 18:00, reached by bus 136 rather than by train. A fourth tower stands inside the Bernauer Strasse memorial grounds."
+        "a": "Four are worth knowing. The Schlesischer Busch command post on Puschkinallee in Treptow is a four-storey concrete tower that once controlled 18 watchtowers, with a monument-listed slab wall beside it. The Guenter Litfin memorial tower at Kieler Strasse 2 opens only at weekends from 11:00 to 17:00, from 1 May to 31 October. The Nieder Neuendorf tower near Hennigsdorf is a free four-level museum; in 2026 it opens 4 April to 3 October, Tuesday to Sunday and public holidays, 10:00 to 18:00, and is reached on bus X36 to Am Oberjaegerweg. A fourth tower stands inside the Bernauer Strasse memorial grounds."
       },
       {
         "q": "Is the Berlin Wall Trail well signposted?",
@@ -7007,7 +7007,7 @@
       },
       {
         "q": "Is any part of the Berlin Wall Trail closed in 2026?",
-        "a": "A few stretches. The Hahneberg section in Spandau is still shut while the rebuild is finished, with completion expected during 2026. The shore path at Gross Glienicker See is currently interrupted. The lakeside path at Griebnitzsee is partly blocked by residents in a long-running legal dispute, and the city of Potsdam routes walkers via Rudolf-Breitscheid-Strasse, Karl-Marx-Strasse and Virchowstrasse instead. Separately, the Stadtbahn closure from 14 June to 12 December 2026 disrupts regional trains including the RE1 towards Potsdam, though the S-Bahn runs normally, so use the S7 or S1 for Griebnitzsee."
+        "a": "A few stretches. Hahneberg in Spandau was still under construction in Grün Berlin's 29 June 2026 update, so check the project ticker for the current diversion. The shore path at Gross Glienicker See is interrupted. The lakeside path at Griebnitzsee is partly blocked by residents in a long-running legal dispute, and the city of Potsdam routes walkers via Rudolf-Breitscheid-Strasse, Karl-Marx-Strasse and Virchowstrasse instead. Separately, the Stadtbahn closure from 14 June to 12 December 2026 disrupts regional trains including the RE1 towards Potsdam, though the S-Bahn runs normally, so use the S7 or S1 for Griebnitzsee."
       },
       {
         "q": "Where does the Berlin Wall Trail start?",
@@ -7021,7 +7021,7 @@
     "items": [
       {
         "q": "Which Berlin station do long-distance trains leave from in 2026?",
-        "a": "Mostly Berlin Hauptbahnhof, but the lower level rather than the glass hall upstairs. The Stadtbahn between Charlottenburg and Ostbahnhof is closed to regional and long-distance trains from 14 June to 12 December 2026, so trains use the deep north-south tunnel instead. Some services start elsewhere: ICE trains to North Rhine-Westphalia and Frankfurt from Berlin-Charlottenburg, Düsseldorf and Köln services via Südkreuz, Eurocity trains to Poland via Gesundbrunnen and Lichtenberg from 25 August, and the Dresden to Rostock Intercity via Ostkreuz. The station printed on your ticket is the one that counts."
+        "a": "Mostly Berlin Hauptbahnhof, but the lower level rather than the glass hall upstairs. The Stadtbahn between Charlottenburg and Ostbahnhof is closed to regional and long-distance trains from 14 June to 12 December 2026, so trains use the deep north-south tunnel instead. Some services start elsewhere: some ICE trains to North Rhine-Westphalia and Frankfurt start or finish at Berlin-Charlottenburg, Düsseldorf and Köln services run via Südkreuz, Eurocity trains to Poland use Gesundbrunnen and Lichtenberg from 25 August, and the Dresden to Rostock Intercity runs via Ostkreuz. The station printed on your ticket is the one that counts."
       },
       {
         "q": "Can I still catch a long-distance train at Zoologischer Garten or Ostbahnhof?",
@@ -7033,11 +7033,11 @@
       },
       {
         "q": "What is the difference between Super Sparpreis, Sparpreis and Flexpreis?",
-        "a": "Flexibility. Super Sparpreis starts at 6.99 euros and is bound to the exact train on your ticket, with rebooking, exchange and cancellation all excluded, so a missed train means a lost ticket. Sparpreis starts at 21.99 euros, is also train-bound, and can be changed or cancelled until the day before travel for a 10 euro fee. Flexpreis costs more and lets you take any train on that route on your booked day, break the journey, and cancel free until the day before or for 30 euros from the first day of validity. Flexpreis also includes the City-Ticket for local transport in participating cities; the two cheaper fares make you buy it separately."
+        "a": "Flexibility. Super Sparpreis normally starts at 17.99 euros in second class, while selected short domestic journeys can start at 6.99 euros. It is bound to the booked long-distance train and, outside DB's three-hour immediate-cancellation window, ordinary exchange and cancellation are excluded. If you miss it for a reason on your side, you normally cannot use it on a later long-distance train; disruption and passenger-rights rules are separate. Sparpreis starts at 21.99 euros, is also train-bound, and can be cancelled until the day before travel for a 10 euro fee. Flexpreis costs more and lets you take any train on that route on your booked day, break the journey, and cancel free until the day before or for 30 euros from the first day of validity. Flexpreis also includes the City-Ticket for local transport in participating cities; with the two cheaper fares it is a paid addition depending on the connection."
       },
       {
         "q": "Is the Deutschlandticket valid on ICE trains from Berlin?",
-        "a": "No, and it never has been. The 63 euro monthly Deutschlandticket covers regional trains, meaning RE, RB and IRE, plus every S-Bahn, U-Bahn, tram and bus. It is not valid on ICE, IC or EC. Since the 14 December 2025 timetable change it is also no longer accepted on DB long-distance trains anywhere in Berlin and Brandenburg, which ended the old arrangement that let regional tickets be used on the Intercity towards Elsterwerda and Cottbus and the ICE towards Prenzlau. Guides still recommending that shortcut are out of date, and using it now means travelling without a valid ticket."
+        "a": "Not under the national rule. The 63 euro monthly Deutschlandticket covers regional trains, meaning RE, RB and IRE, plus every S-Bahn, U-Bahn, tram and bus, but not ordinary ICE, IC or EC journeys. Berlin and Brandenburg used to have a few local long-distance exceptions. Those ended with the 14 December 2025 timetable change, so the former Intercity shortcuts towards Elsterwerda and Cottbus and the ICE exception towards Prenzlau no longer work. Guides still recommending them are out of date, and using them now means travelling without a valid ticket."
       },
       {
         "q": "How much does the Deutschlandticket cost in 2026?",

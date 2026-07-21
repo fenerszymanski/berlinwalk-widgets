@@ -25,9 +25,11 @@ this package is the BerlinTools icon (see
 | IMAGE_4 | `06-nieder-neuendorf-tower.jpg` | Commons, `06-nieder-neuendorf-a.jpg` | CC BY-SA 4.0 | Leonhard Lenz |
 | IMAGE_5 | `07-mauerweg-signpost.jpg` | [Commons](https://commons.wikimedia.org/wiki/File:Berliner_Mauerweg_20140611_53.jpg) | CC BY-SA 3.0 | Sebastian Rittau |
 
-All seven licenses require attribution, so a reader-facing `Image credits`
-section is included at the end of the article body. That block exists only for
-license compliance and carries no production or workflow detail.
+All seven licenses require attribution, so the section-finder tool carries a
+compact, default-closed `Image credits` disclosure naming the author, licence
+and source for every photograph. The article points readers to that control.
+The disclosure exists only for license compliance and carries no production or
+workflow detail.
 
 ## Rejected, and why
 

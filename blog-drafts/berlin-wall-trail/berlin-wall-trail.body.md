@@ -1,6 +1,6 @@
 Every few weeks someone on my tour tells me they are going to walk the Berlin Wall Trail. Then they ask which end to start from, and I have to say the thing nobody wants to hear: the trail is 160 kilometres long, and the Wall is not on most of it.
 
-That is not a reason to skip it. It is a reason to pick properly. The Berliner Mauerweg rings the whole of former West Berlin, so about 50 kilometres runs through the city and roughly 110 kilometres passes through forest, lakes, farmland and quiet outer suburbs. Standing Wall survives in maybe 19 kilometres of the entire loop.
+That is not a reason to skip it. It is a reason to pick properly. The Berliner Mauerweg rings the whole of former West Berlin, so about 50 kilometres runs through the city and roughly 110 kilometres passes through forest, lakes, farmland and quiet outer suburbs. The three official sections with the highest concentration of surviving Wall and border sites total about 19 kilometres. That is section length, not 19 continuous kilometres of concrete.
 
 My advice: do not plan this by distance. I have watched people spend an afternoon on a beautiful, completely empty stretch of the outer ring because it looked convenient on a map, then run out of daylight before reaching anything built. Pick the section by what is still standing on it, then work out the trains.
 
@@ -25,7 +25,7 @@ Here is the whole loop, sized by real length and shaded by how much border histo
 
 {{widget:berlin-wall-trail-sections}}
 
-The shape of that picture is the whole point. Three sections in the middle carry almost everything, and they add up to 19 kilometres out of 160.
+The shape of that picture is the whole point. Three central sections carry the highest concentration of surviving Wall and border sites, and those sections add up to 19 kilometres out of 160. The concrete itself survives only at points within them.
 
 ![The preserved full depth of the Berlin Wall border strip at Bernauer Strasse, with the outer wall in front and a watchtower behind](blog-drafts/berlin-wall-trail/images/optimized/02-border-strip-watchtower.jpg)
 _The only place in Berlin where the whole border system still stands together: outer wall, death strip and watchtower in one view._
@@ -82,12 +82,12 @@ _The Mauerweg through Suedpark. Pleasant, easy riding, and a fair picture of wha
 It is just not a history trip. Two exceptions are worth naming:
 
 - **The Chris Gueffroy stele** at the Britzer Zweigkanal, for the last person shot dead at the Wall, in February 1989, nine months before it opened. It sits on a quiet stretch of the southern route and it lands harder for that.
-- **The Nieder Neuendorf tower** near Hennigsdorf, a GDR border tower converted into a free four-level museum, open Tuesday to Sunday, 10:00 to 18:00. Note that [the town's own page](https://www.hennigsdorf.de/Stadtleben/Kunst-und-Kultur/Grenzturm-Nieder-Neuendorf/) directs you there by bus 136 from Spandau, not by train.
+- **The Nieder Neuendorf tower** near Hennigsdorf, a GDR border tower converted into a free four-level museum. In 2026 it opens from 4 April to 3 October, Tuesday to Sunday and public holidays, 10:00 to 18:00. [The town's own page](https://www.hennigsdorf.de/Stadtleben/Kunst-und-Kultur/Grenzturm-Nieder-Neuendorf/) directs you there on bus X36 to Am Oberjägerweg, not by train.
 
-There is a third surviving tower closer in, the Günter Litfin memorial at Kieler Strasse 2, but check the calendar before you walk over: it opens **only at weekends, 11:00 to 17:00, and only between 1 May and 5 October**, with a limit of 15 people at a time and no children under 8.
+There is a third surviving tower closer in, the Günter Litfin memorial at Kieler Strasse 2, but check the calendar before you walk over: it opens **only at weekends, 11:00 to 17:00, from 1 May to 31 October**.
 
 ![The former East German border watchtower at Nieder Neuendorf seen across the water from the Havel](blog-drafts/berlin-wall-trail/images/optimized/06-nieder-neuendorf-tower.jpg)
-_The Nieder Neuendorf tower on the Havel, now a free museum. Open Tuesday to Sunday, and reached by bus 136 rather than by train._
+_The Nieder Neuendorf tower on the Havel, now a free seasonal museum. In 2026 it opens 4 April to 3 October and is reached on bus X36._
 
 ## What the Senate says about riding it, and why it matters
 
@@ -117,7 +117,7 @@ Two things, and they are both easy to get wrong.
 
 The trail is in the middle of a rebuild programme running to 2027, and as of mid-2026 a bit more than half of it is done. That leaves a few things to plan around, and the [Grün Berlin project ticker](https://gruen-berlin.de/projekte/infrastruktur/berliner-mauerweg/projekt-ticker) is where the current state is published.
 
-- **Hahneberg, in Spandau**, is still closed while the rebuild is finished. Completion is expected during 2026.
+- **Hahneberg, in Spandau**, was still under construction in Grün Berlin's 29 June 2026 update. Check the project ticker for the current diversion before committing to this stretch.
 - **The shore path at Groß Glienicker See is interrupted**, as the current official flyer states directly.
 - **The Griebnitzsee lakeside path is partly blocked by residents**, in a legal dispute that has run for years. The city of Potsdam [routes walkers](https://www.potsdam.de/de/uferweg-griebnitzsee) via Rudolf-Breitscheid-Strasse, Karl-Marx-Strasse and Virchowstrasse instead. This is the main reason I would treat Griebnitzsee as a [Potsdam day trip](https://www.berlinwalk.com/post/potsdam-from-berlin-day-trip) rather than a Wall walk, even though the Glienicker Brücke and the preserved wall remnants on that shore are genuinely worth seeing.
 - **Getting to Griebnitzsee changed this summer.** The Stadtbahn between Charlottenburg and Ostbahnhof is [closed to regional and long-distance trains from 14 June to 12 December 2026](https://www.vbb.de/unterwegs-im-vbb/baustellen-bei-regional-und-s-bahn/stadtbahnsperrung-2026/), which disrupts the RE1 out that way. The S-Bahn is not affected, so take the S7 or S1.
@@ -142,14 +142,6 @@ The tour runs about 2 hours through the medieval core and the East German city t
 
 If you only have one Berlin day and you are choosing, do the centre first. The Wall is easier to understand once you know what it was cutting through.
 
-## Image credits
-
-- Bernauer Strasse wall section: Ansgar Koreng, [CC BY 3.0 DE](https://creativecommons.org/licenses/by/3.0/de/deed.en), via Wikimedia Commons.
-- Bernauer Strasse border strip and watchtower: Gerd Danigel, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0), via Wikimedia Commons.
-- Schlesischer Busch command post: Georg Slickers, [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0), via Wikimedia Commons.
-- East Side Gallery: Michielverbeek, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0), via Wikimedia Commons.
-- Mauerweg in Suedpark: Lukas Beck, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0), via Wikimedia Commons.
-- Nieder Neuendorf watchtower: Leonhard Lenz, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0), via Wikimedia Commons.
-- Berliner Mauerweg waymarker: Sebastian Rittau, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0), via Wikimedia Commons.
+Image credits for this article are available from the closed **Image credits** button inside the section finder above.
 
 {{faq}}
