@@ -13698,8 +13698,8 @@
       </aside>
       <div class="bw-full-head">
         <div>
-          <h2 class="bw-full-title">Your full Berlin plan</h2>
-          <p class="bw-full-sub" data-full-sub>Your full plan appears here.</p>
+          <h2 class="bw-full-title">Berlin Trip Planner</h2>
+          <p class="bw-full-sub" data-full-sub>Your day-by-day itinerary appears here.</p>
         </div>
       </div>
       <div data-full-route-brief></div>
@@ -15695,8 +15695,8 @@
   }
 
   function artifactPhonePreviewHtml(view, activeDay) {
-    return '<section class="bw-artifact-phone" id="bw-artifact-phone-preview" aria-label="Complete plan phone preview">' +
-      '<div class="bw-artifact-phone-top"><strong>YOUR FULL BERLIN PLAN</strong><span>' + escapeHtml(view.days.length + (view.days.length === 1 ? ' day' : ' days') + ' from ' + view.trip.displayDate) + '</span></div>' +
+    return '<section class="bw-artifact-phone" id="bw-artifact-phone-preview" aria-label="Berlin Trip Planner phone preview">' +
+      '<div class="bw-artifact-phone-top"><strong>BERLIN TRIP PLANNER</strong><span>' + escapeHtml(view.days.length + '-day itinerary · routes, times, maps and Plan B') + '</span></div>' +
       '<div class="bw-artifact-phone-day"><div class="bw-artifact-phone-day-head"><b>D' + activeDay.dayNumber + '</b><strong>' + escapeHtml(formatDisplayDate(activeDay.dateKey)) + '<small>' + escapeHtml(activeDay.title) + '</small></strong></div>' + artifactTimelineHtml(activeDay, true) + '</div>' +
       '<div class="bw-artifact-phone-tabs">' + view.days.map(function (day) {
         return '<button type="button" data-artifact-day="' + day.dayNumber + '" class="' + (day.dayNumber === activeDay.dayNumber ? 'is-active' : '') + '" aria-pressed="' + (day.dayNumber === activeDay.dayNumber ? 'true' : 'false') + '"><b>D' + day.dayNumber + '</b><span>' + escapeHtml(compactPreviewDate(day.dateKey)) + '</span><em>' + (day.dayNumber === activeDay.dayNumber ? 'Open' : 'View') + '</em></button>';
