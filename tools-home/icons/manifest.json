@@ -2034,5 +2034,18 @@
     "png160": "tools-home/icons/stolperstein-reader-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/stolperstein-reader.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_6bf8a3a83dd1427a9258bd4a8db3a8f4~mv2.png"
+  },
+  {
+    "slug": "berlin-matchday-board",
+    "title": "Berlin Matchday Board",
+    "category": "Discovery",
+    "source": "chatgpt-browser-20260721",
+    "generatedAt": "2026-07-21",
+    "promptFile": "tools-home/icons/_src/daily-blog-berlin-matchday-board-icon-20260721-prompt.md",
+    "sourceImage": "tools-home/icons/_src/daily-blog-berlin-matchday-board-icon-20260721-raw.png",
+    "png512": "tools-home/icons/berlin-matchday-board.png",
+    "png160": "tools-home/icons/berlin-matchday-board-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-matchday-board.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_02cda2e07e9547eda3882d17a2fe0489~mv2.png"
   }
 ]
