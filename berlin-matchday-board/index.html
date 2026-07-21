@@ -59,7 +59,8 @@
   .lanes{position:relative;padding:6px 0 10px}
   .laneBlock{margin:0 0 6px}
   .laneBlock:last-child{margin-bottom:0}
-  .laneName{display:block;margin:0 0 2px 10px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--stone);font-weight:600}
+  /* Sits above the travel-window band so the band lines do not cut the label text. */
+  .laneName{position:relative;z-index:2;display:inline-block;margin:0 0 2px 10px;padding:0 4px;background:#f6f9f2;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--stone);font-weight:600}
   .lane{position:relative;height:34px}
   /* The pip stays small so the season stays readable, but its tap area fills the
      lane height. Horizontally it is capped by how close two matchdays sit. */
