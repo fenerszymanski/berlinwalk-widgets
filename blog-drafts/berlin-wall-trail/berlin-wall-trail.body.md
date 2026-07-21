@@ -142,6 +142,6 @@ The tour runs about 2 hours through the medieval core and the East German city t
 
 If you only have one Berlin day and you are choosing, do the centre first. The Wall is easier to understand once you know what it was cutting through.
 
-Image credits for this article are available from the closed **Image credits** button inside the section finder above.
-
 {{faq}}
+
+{{article-image-credits}}

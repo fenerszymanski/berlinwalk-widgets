@@ -77,7 +77,7 @@ Optimisation: every master resized to 1600px on the long edge at JPEG quality
 
 ## Credit block
 
-CC BY-SA requires attribution, so the train-gateway tool carries a compact,
+CC BY-SA requires attribution, so the article itself carries a compact,
 default-closed `Image credits` disclosure naming the author, licence and source
-for all six photographs. The article points readers to that control. The
-disclosure is rights attribution only and carries no process or tooling notes.
+for all six photographs. The disclosure is rights attribution only and carries
+no process or tooling notes.

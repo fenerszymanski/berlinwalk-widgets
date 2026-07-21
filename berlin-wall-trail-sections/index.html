@@ -228,39 +228,6 @@
     font-size: 11.5px; line-height: 1.6; color: #6b6759;
   }
   .wt-foot a { color: var(--bw-green); }
-  /* Credits open over the tool, so the iframe height and footer stay fixed. */
-  [hidden] { display: none !important; }
-  .wt-credits-row { display: flex; justify-content: flex-end; margin-top: 12px; }
-  .wt-credits-open {
-    border: 1.5px solid #c9d8bd; border-radius: 999px; background: #fff;
-    color: var(--bw-green-dark); cursor: pointer; padding: 8px 12px;
-    font: 700 11px/1 Montserrat, system-ui, sans-serif;
-  }
-  .wt-credits-open:hover { background: #f4f7ee; border-color: var(--bw-lime); }
-  .wt-credits-open:focus-visible, .wt-credits-close:focus-visible, .wt-credits-list a:focus-visible {
-    outline: 3px solid var(--bw-yellow); outline-offset: 3px;
-  }
-  .wt-credits-layer {
-    position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center;
-    justify-content: center; padding: 14px; background: rgba(11,36,16,.64);
-  }
-  .wt-credits-dialog {
-    width: min(720px, 100%); max-height: min(600px, calc(100vh - 28px)); overflow: auto;
-    overscroll-behavior: contain; background: #fff; border: 1px solid #dbe6d1;
-    border-radius: 16px; box-shadow: 0 18px 48px rgba(11,36,16,.34); padding: 17px 18px 18px;
-  }
-  .wt-credits-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
-  .wt-credits-top h2 { margin: 0; color: var(--bw-green-dark); font-size: 17px; line-height: 1.25; }
-  .wt-credits-intro { margin: 5px 0 13px; color: #6b6759; font-size: 11.5px; line-height: 1.5; }
-  .wt-credits-close {
-    flex: 0 0 auto; width: 32px; height: 32px; border: 1px solid #c9d8bd;
-    border-radius: 50%; background: #fff; color: var(--bw-green-dark); cursor: pointer;
-    font: 700 20px/1 Montserrat, system-ui, sans-serif;
-  }
-  .wt-credits-close:hover { background: #f4f7ee; }
-  .wt-credits-list { margin: 0; padding-left: 20px; color: var(--bw-ink); font-size: 11.5px; line-height: 1.55; }
-  .wt-credits-list li + li { margin-top: 8px; }
-  .wt-credits-list a { color: var(--bw-green-dark); font-weight: 700; text-underline-offset: 2px; }
   .wt-sr {
     position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
     overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
@@ -271,8 +238,6 @@
     .wt-ribbon { height: 62px; }
     .wt-band .wt-num { font-size: 9px; }
     .wt-opt { padding: 6px 11px; font-size: 12px; }
-    .wt-credits-layer { padding: 8px; }
-    .wt-credits-dialog { max-height: calc(100vh - 16px); padding: 15px 14px 16px; }
   }
 </style>
 </head>
@@ -323,30 +288,6 @@
     Checked 21 July 2026.
   </p>
 
-  <div class="wt-credits-row">
-    <button class="wt-credits-open" id="wtCreditsOpen" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="wtCreditsLayer">Image credits</button>
-  </div>
-</div>
-
-<div class="wt-credits-layer" id="wtCreditsLayer" data-bw-resize-ignore hidden>
-  <section class="wt-credits-dialog" role="dialog" aria-modal="true" aria-labelledby="wtCreditsTitle" tabindex="-1">
-    <div class="wt-credits-top">
-      <div>
-        <h2 id="wtCreditsTitle">Article image credits</h2>
-        <p class="wt-credits-intro">Source and licence details for the seven photographs used in the article.</p>
-      </div>
-      <button class="wt-credits-close" id="wtCreditsClose" type="button" aria-label="Close image credits">&times;</button>
-    </div>
-    <ul class="wt-credits-list">
-      <li>Bernauer Strasse Wall section by Ansgar Koreng, <a href="https://creativecommons.org/licenses/by/3.0/de/deed.en" target="_blank" rel="noopener noreferrer">CC BY 3.0 DE</a>, via <a href="https://commons.wikimedia.org/wiki/File:Berliner_Mauer,_Bernauer_Stra%C3%9Fe,_Berlin-Mitte,_160326,_ako.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.</li>
-      <li>Bernauer Strasse border strip and watchtower by Gerd Danigel, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Berlin_Gedenkst%C3%A4tte_Berliner_Mauer_2009.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.</li>
-      <li>Schlesischer Busch command post by Georg Slickers, <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 2.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Wachturm_schlesischer_busch.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.</li>
-      <li>East Side Gallery by Michielverbeek, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Berlin-Friedrichshain,_achterkant_van_de_East_Side_Gallery_(voormalige_Berlijnse_Muur)_Dm09040271_bij_hotel_Berliner_Mauer_IMG_5489_2024-09-05_17.43.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.</li>
-      <li>Mauerweg in Suedpark by Lukas Beck, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Berlin_S%C3%BCdpark_lub_2023-05-03_img01_Mauerweg.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.</li>
-      <li>Nieder Neuendorf watchtower by Leonhard Lenz, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Watchtower_in_Nieder_Neuendorf_01.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.</li>
-      <li>Berliner Mauerweg waymarker by Sebastian Rittau, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Berliner_Mauerweg_20140611_53.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.</li>
-    </ul>
-  </section>
 </div>
 
 <script>
@@ -788,48 +729,6 @@
   buildRibbon();
   render();
 
-  var creditsOpen = document.getElementById("wtCreditsOpen");
-  var creditsLayer = document.getElementById("wtCreditsLayer");
-  var creditsDialog = creditsLayer.querySelector(".wt-credits-dialog");
-  var creditsClose = document.getElementById("wtCreditsClose");
-  var lastCreditsFocus = null;
-
-  function openCredits() {
-    lastCreditsFocus = document.activeElement;
-    creditsLayer.hidden = false;
-    creditsOpen.setAttribute("aria-expanded", "true");
-    creditsClose.focus();
-  }
-  function closeCredits() {
-    creditsLayer.hidden = true;
-    creditsOpen.setAttribute("aria-expanded", "false");
-    if (lastCreditsFocus && typeof lastCreditsFocus.focus === "function") lastCreditsFocus.focus();
-  }
-  creditsOpen.addEventListener("click", openCredits);
-  creditsClose.addEventListener("click", closeCredits);
-  creditsLayer.addEventListener("click", function (event) {
-    if (event.target === creditsLayer) closeCredits();
-  });
-  document.addEventListener("keydown", function (event) {
-    if (creditsLayer.hidden) return;
-    if (event.key === "Escape") {
-      event.preventDefault();
-      closeCredits();
-      return;
-    }
-    if (event.key !== "Tab") return;
-    var focusable = Array.prototype.slice.call(creditsDialog.querySelectorAll("button,a[href]"));
-    if (!focusable.length) return;
-    var first = focusable[0];
-    var last = focusable[focusable.length - 1];
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
-    }
-  });
 })();
 </script>
 <script src="../js/brand.js?v=20260721creditsheight"></script>

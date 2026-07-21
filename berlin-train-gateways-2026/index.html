@@ -152,40 +152,6 @@
   }
   .foot a { color: var(--green); font-weight: 600; }
 
-  /* Credits stay over the tool so opening them never changes iframe height. */
-  [hidden] { display: none !important; }
-  .tg-credits-row { display: flex; justify-content: flex-end; margin-top: 12px; }
-  .tg-credits-open {
-    border: 1.5px solid #bfd8b7; border-radius: 999px; background: #fff;
-    color: var(--green-deep); cursor: pointer; padding: 8px 12px;
-    font: 700 11px/1 Montserrat, system-ui, sans-serif;
-  }
-  .tg-credits-open:hover { background: #F1F7EE; border-color: var(--green); }
-  .tg-credits-open:focus-visible, .tg-credits-close:focus-visible, .tg-credits-list a:focus-visible {
-    outline: 3px solid var(--yellow); outline-offset: 3px;
-  }
-  .tg-credits-layer {
-    position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center;
-    justify-content: center; padding: 14px; background: rgba(10,31,14,.62);
-  }
-  .tg-credits-dialog {
-    width: min(720px, 100%); max-height: min(560px, calc(100vh - 28px)); overflow: auto;
-    overscroll-behavior: contain; background: #fff; border: 1px solid #dbe6d1;
-    border-radius: 16px; box-shadow: 0 18px 48px rgba(10,31,14,.32); padding: 17px 18px 18px;
-  }
-  .tg-credits-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
-  .tg-credits-top h2 { margin: 0; color: var(--green-deep); font-size: 17px; line-height: 1.25; }
-  .tg-credits-intro { margin: 5px 0 13px; color: #5d5d5d; font-size: 11.5px; line-height: 1.5; }
-  .tg-credits-close {
-    flex: 0 0 auto; width: 32px; height: 32px; border: 1px solid #cddbc3;
-    border-radius: 50%; background: #fff; color: var(--green-deep); cursor: pointer;
-    font: 700 20px/1 Montserrat, system-ui, sans-serif;
-  }
-  .tg-credits-close:hover { background: #F1F7EE; }
-  .tg-credits-list { margin: 0; padding-left: 20px; color: var(--ink); font-size: 11.5px; line-height: 1.55; }
-  .tg-credits-list li + li { margin-top: 8px; }
-  .tg-credits-list a { color: var(--green-deep); font-weight: 700; text-underline-offset: 2px; }
-
   @media (max-width: 760px) {
     svg.map { min-width: 720px; }
     .swipe-hint {
@@ -201,8 +167,6 @@
     .mode { flex: 1 1 100%; }
     .wrap { padding: 14px 12px 22px; }
     .board { padding: 10px 6px 4px; }
-    .tg-credits-layer { padding: 8px; }
-    .tg-credits-dialog { max-height: calc(100vh - 16px); padding: 15px 14px 16px; }
   }
 </style>
 </head>
@@ -290,30 +254,6 @@
 
   <p class="foot">Construction plans move. Check your exact date on <a href="https://www.bahn.de/en" target="_blank" rel="noopener">bahn.de</a> for long-distance trains and on <a href="https://www.vbb.de/unterwegs-im-vbb/baustellen-bei-regional-und-s-bahn/stadtbahnsperrung-2026/" target="_blank" rel="noopener">the VBB closure page</a> for regional ones, and take the departure station printed on your ticket over anything else.</p>
 
-  <div class="tg-credits-row">
-    <button class="tg-credits-open" id="tgCreditsOpen" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="tgCreditsLayer">Image credits</button>
-  </div>
-
-</div>
-
-<div class="tg-credits-layer" id="tgCreditsLayer" data-bw-resize-ignore hidden>
-  <section class="tg-credits-dialog" role="dialog" aria-modal="true" aria-labelledby="tgCreditsTitle" tabindex="-1">
-    <div class="tg-credits-top">
-      <div>
-        <h2 id="tgCreditsTitle">Article image credits</h2>
-        <p class="tg-credits-intro">Source and licence details for the six photographs used in the article.</p>
-      </div>
-      <button class="tg-credits-close" id="tgCreditsClose" type="button" aria-label="Close image credits">&times;</button>
-    </div>
-    <ul class="tg-credits-list">
-      <li>Berlin Hauptbahnhof upper level by Paul Korecky, <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 2.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:2018-08-08_DE_Berlin-Mitte,_Berlin_Hauptbahnhof_(49814284187).jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.</li>
-      <li>Stadtbahn viaduct by Mirkone, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Alstom_Coradia_iLint_auf_der_Berliner_Stadtbahn.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.</li>
-      <li>Hauptbahnhof lower level by Arne Müseler, <a href="https://creativecommons.org/licenses/by-sa/3.0/de/deed.en" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0 DE</a>, via <a href="https://commons.wikimedia.org/wiki/File:Hauptbahnhof_berlin_tief_2.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.</li>
-      <li>Berlin-Charlottenburg by Michael.F.H.Barth, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Berlin_S-Bahn_Bhf_Charlottenburg_(S03_0520).jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.</li>
-      <li>Berlin Ostbahnhof by Tony Webster, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Berlin_Ostbahnhof_(Berlin_East_railway_station)_Exterior,_Berlin,_Germany_15139022463.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.</li>
-      <li>ICE 4 at Berlin Hauptbahnhof by rail fox, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:ICE_4_Berlin_Hbf.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.</li>
-    </ul>
-  </section>
 </div>
 
 <script>
@@ -633,48 +573,6 @@
 
   render();
 
-  var creditsOpen = document.getElementById('tgCreditsOpen');
-  var creditsLayer = document.getElementById('tgCreditsLayer');
-  var creditsDialog = creditsLayer.querySelector('.tg-credits-dialog');
-  var creditsClose = document.getElementById('tgCreditsClose');
-  var lastCreditsFocus = null;
-
-  function openCredits() {
-    lastCreditsFocus = document.activeElement;
-    creditsLayer.hidden = false;
-    creditsOpen.setAttribute('aria-expanded', 'true');
-    creditsClose.focus();
-  }
-  function closeCredits() {
-    creditsLayer.hidden = true;
-    creditsOpen.setAttribute('aria-expanded', 'false');
-    if (lastCreditsFocus && typeof lastCreditsFocus.focus === 'function') lastCreditsFocus.focus();
-  }
-  creditsOpen.addEventListener('click', openCredits);
-  creditsClose.addEventListener('click', closeCredits);
-  creditsLayer.addEventListener('click', function (event) {
-    if (event.target === creditsLayer) closeCredits();
-  });
-  document.addEventListener('keydown', function (event) {
-    if (creditsLayer.hidden) return;
-    if (event.key === 'Escape') {
-      event.preventDefault();
-      closeCredits();
-      return;
-    }
-    if (event.key !== 'Tab') return;
-    var focusable = Array.prototype.slice.call(creditsDialog.querySelectorAll('button,a[href]'));
-    if (!focusable.length) return;
-    var first = focusable[0];
-    var last = focusable[focusable.length - 1];
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
-    }
-  });
 })();
 </script>
 <script src="../js/brand.js?v=20260721creditsheight"></script>

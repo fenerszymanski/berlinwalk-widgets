@@ -97,4 +97,4 @@ Official sources move faster than any guide. Check long-distance departures on [
 
 {{faq}}
 
-Image credits for this article are available from the closed **Image credits** button inside the train-gateway tool above.
+{{article-image-credits}}
