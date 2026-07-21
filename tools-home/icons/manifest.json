@@ -2086,5 +2086,18 @@
     "png160": "tools-home/icons/berlin-train-gateways-2026-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-train-gateways-2026-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_e1a7aa81ba3d4256ba607ed01dcbea50~mv2.png"
+  },
+  {
+    "slug": "spandau-old-town-loop",
+    "title": "Spandau Loop Builder",
+    "category": "CultureLandmarks",
+    "source": "chatgpt-browser-share-link-20260722",
+    "generatedAt": "2026-07-22",
+    "promptFile": "tools-home/icons/_src/daily-blog-spandau-old-town-loop-icon-20260722-prompt.md",
+    "sourceImage": "tools-home/icons/_src/spandau-old-town-loop-raw-20260722.png",
+    "png512": "tools-home/icons/spandau-old-town-loop.png",
+    "png160": "tools-home/icons/spandau-old-town-loop-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/spandau-old-town-loop-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_66317362510749d9962a7173a5f30d09~mv2.png"
   }
 ]
