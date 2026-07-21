@@ -10,7 +10,7 @@
   'use strict';
 
   var PDF_SCHEMA_VERSION = '3.0.0';
-  var RENDERER_VERSION = 'plan-artifact-v3-pdf-1.0.0';
+  var RENDERER_VERSION = 'plan-artifact-v3-pdf-3.1.0';
   var PAGE_WIDTH = 595.28;
   var PAGE_HEIGHT = 841.89;
   var MARGIN = 40;
@@ -131,15 +131,44 @@
     }
   }
 
+  function formatCheckedAt(value) {
+    var clean = cleanText(value, 40);
+    var parsed = new Date(clean);
+    if (!clean || Number.isNaN(parsed.getTime())) return '';
+    try {
+      return new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Europe/Berlin',
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+        timeZoneName: 'short'
+      }).format(parsed);
+    } catch (error) {
+      return clean;
+    }
+  }
+
   function weatherSummary(day) {
     var weather = day && day.weather;
     if (!weather) return 'Weather data is not available for this date yet.';
-    var prefix = weather.kind === 'live' ? 'Live forecast' : 'Typical conditions, not a forecast';
+    var checked = formatCheckedAt(weather.checkedAt);
+    var typicalTitle = cleanText(weather.title, 120).match(/^Typical\s+([A-Za-z]+)\s+conditions\b/i);
+    var prefix = weather.kind === 'live'
+      ? 'Live forecast' + (checked ? ' from Open-Meteo, checked ' + checked : ' from Open-Meteo')
+      : (typicalTitle ? 'Typical ' + typicalTitle[1] + ' conditions, not a forecast' : 'Typical seasonal conditions, not a forecast');
     var measures = [];
     if (Number.isFinite(weather.highC)) measures.push('high ' + Math.round(weather.highC) + ' C');
     if (Number.isFinite(weather.lowC)) measures.push('low ' + Math.round(weather.lowC) + ' C');
     if (Number.isFinite(weather.rainProbability)) measures.push(Math.round(weather.rainProbability) + '% rain');
-    var detail = cleanText(weather.title || weather.cue, 240);
+    // Temperatures and rain are already rendered from the structured values above.
+    // Prefer the action cue here so the same numbers are not repeated in prose.
+    var detail = cleanText(weather.cue, 240);
+    if (weather.kind !== 'live') {
+      detail = detail.replace(/\b(?:this is )?not a forecast[.!]?\s*/ig, '').trim();
+    }
     return cleanText(prefix + (measures.length ? ': ' + measures.join(', ') : '') + (detail ? '. ' + detail : ''), 420);
   }
 
@@ -147,8 +176,9 @@
     var parts = [];
     if (day && day.opening && day.opening.status) parts.push(day.opening.status);
     if (day && day.opening && day.opening.warning) parts.push(day.opening.warning);
-    if (day && day.reservation && day.reservation.required) parts.push('Reservation required: ' + day.reservation.label);
-    if (!parts.length) parts.push('Check official opening hours before leaving your hotel.');
+    if (day && day.reservation && day.reservation.required) parts.push('Official reservation action: ' + day.reservation.label);
+    if (!parts.length) parts.push('No live opening status is stored.');
+    parts.push('Planning note only; verify the exact place on its official site before leaving');
     return cleanText(parts.join('. '), 500);
   }
 
@@ -221,10 +251,11 @@
       blocks: (day.blocks || []).map(function (block) {
         var link = (block.links || []).map(function (item) { return safeLink(item, 'Open map'); }).filter(Boolean)[0] || null;
         return {
-          time: cleanText(block.time || block.window || 'Next', 80),
+          time: cleanText(block.window || block.time || 'Next', 80),
           window: cleanText(block.window, 80),
           title: cleanText(block.title, 180),
           detail: cleanText(block.detail, 700),
+          placeId: cleanText(block.placeId, 100),
           link: link
         };
       }),
@@ -250,6 +281,8 @@
       type: 'weather-plan-b',
       title: 'Weather, openings and Plan B',
       generatedAt: cleanText(view.weather && view.weather.generatedAt, 40),
+      checkedAt: formatCheckedAt(view.weather && view.weather.generatedAt),
+      source: cleanText(view.weather && view.weather.source || '', 80),
       mode: cleanText(view.weather && view.weather.mode || 'typical', 20),
       days: rows,
       links: rows.map(function (row) { return row.reservation; }).filter(Boolean)
@@ -301,6 +334,22 @@
     if (dayPages.length !== dayCount) errors.push('day_pages');
     if (!pages[dayCount + 2] || pages[dayCount + 2].type !== 'weather-plan-b') errors.push('weather_page');
     if (!pages[dayCount + 3] || pages[dayCount + 3].type !== 'carry-support') errors.push('carry_page');
+    var snapshot = pagePlan && Array.isArray(pagePlan.deliverySnapshot) ? pagePlan.deliverySnapshot : [];
+    if (snapshot.length !== dayCount) errors.push('delivery_snapshot_count');
+    dayPages.forEach(function (page, index) {
+      var expected = snapshot[index];
+      if (!expected || expected.dayNumber !== page.dayNumber || expected.title !== page.title || expected.routeUrl !== (page.route && page.route.url)) {
+        errors.push('delivery_snapshot_day_' + (index + 1));
+        return;
+      }
+      var actualBlocks = (page.blocks || []).map(function (block, blockIndex) {
+        return { order: blockIndex + 1, window: block.window || block.time, title: block.title, placeId: block.placeId };
+      });
+      var expectedBlocks = (expected.blocks || []).map(function (block) {
+        return { order: block.order, window: block.window, title: block.title, placeId: block.placeId };
+      });
+      if (JSON.stringify(actualBlocks) !== JSON.stringify(expectedBlocks)) errors.push('delivery_snapshot_blocks_' + (index + 1));
+    });
     pages.forEach(function (page, index) {
       if (page.pageNumber !== index + 1) errors.push('page_sequence_' + (index + 1));
       (page.links || []).forEach(function (link) {
@@ -331,6 +380,18 @@
       artifactEngineVersion: cleanText(view.artifact.engineVersion, 100),
       artifactCreatedAt: cleanText(view.artifact.createdAt, 40),
       weatherGeneratedAt: cleanText(view.weather && view.weather.generatedAt, 40),
+      deliverySnapshot: ArtifactV3.deliverySnapshot(view.artifact).pdf.map(function (day) {
+        return Object.assign({}, day, {
+          title: cleanText(day.title, 180),
+          blocks: day.blocks.map(function (block) {
+            return Object.assign({}, block, {
+              window: cleanText(block.window, 80),
+              title: cleanText(block.title, 180),
+              placeId: cleanText(block.placeId, 100)
+            });
+          })
+        });
+      }),
       dayCount: view.days.length,
       pageCount: pages.length,
       fileName: fileNameFor(view),
@@ -459,7 +520,7 @@
     fillRect(doc, MARGIN + 238, 572, 237, 36, COLORS.white, 8, COLORS.border);
     setFont(doc, 9, 'bold', COLORS.darkGreen);
     doc.text('Phone plan: maps and daily timing', MARGIN + 33, 594);
-    doc.text('PDF plan: printable and offline', MARGIN + 251, 594);
+    doc.text('PDF: saved itinerary works offline', MARGIN + 251, 594);
 
     fillRect(doc, MARGIN, 660, PAGE_WIDTH - MARGIN * 2, 78, COLORS.yellow, 10, COLORS.yellow);
     setFont(doc, 8, 'bold', COLORS.darkGreen);
@@ -549,7 +610,10 @@
       : page.mode === 'mixed'
         ? 'Some dates use a live forecast. Later dates show typical conditions and are not forecasts.'
         : 'These are typical seasonal conditions, not a forecast.';
-    drawHeader(doc, 'Practical checks', page.title, truth);
+    var sourceLine = page.checkedAt
+      ? 'Weather source checked ' + page.checkedAt + '. ' + truth
+      : truth;
+    drawHeader(doc, 'Practical checks', page.title, sourceLine);
     var top = 128;
     var gap = 7;
     var available = 642;
@@ -584,7 +648,9 @@
       fillRect(doc, x, cardY, width, cardHeight, COLORS.white, 7, COLORS.border);
       fillRect(doc, x, cardY, 5, cardHeight, accent, 3, accent);
       drawText(doc, item.title, x + 14, cardY + 16, width - 28, 7.7, 'bold', COLORS.darkGreen, 1);
-      if (cardHeight >= 44) drawText(doc, item.detail, x + 14, cardY + 31, width - 28, 6.8, 'normal', COLORS.muted, 1);
+      if (cardHeight >= 40) {
+        drawText(doc, item.detail, x + 14, cardY + 31, item.link ? width - 110 : width - 28, 6.8, 'normal', COLORS.muted, 1);
+      }
       if (item.link) drawLink(doc, item.link, x + width - 82, cardY + cardHeight - 8, 68, { size: 6.2 });
     });
     if (!items.length) {
@@ -598,7 +664,7 @@
     fillRect(doc, MARGIN, 122, PAGE_WIDTH - MARGIN * 2, 70, COLORS.yellow, 10, COLORS.yellow);
     setFont(doc, 8, 'bold', COLORS.darkGreen);
     doc.text('SAME PLAN, TWO WAYS TO USE IT', MARGIN + 16, 146);
-    drawText(doc, 'Phone: live map links and quick actions. PDF: a clean offline copy you can print or save.', MARGIN + 16, 170, PAGE_WIDTH - MARGIN * 2 - 32, 10, 'bold', COLORS.darkGreen, 2);
+    drawText(doc, 'Phone: map links and quick actions. PDF: the saved itinerary works offline; map links still need data.', MARGIN + 16, 170, PAGE_WIDTH - MARGIN * 2 - 32, 10, 'bold', COLORS.darkGreen, 2);
 
     var gap = 12;
     var width = (PAGE_WIDTH - MARGIN * 2 - gap) / 2;

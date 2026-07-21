@@ -7,7 +7,6 @@ import { fileURLToPath } from 'node:url';
 const SITE_ID = '12ee5ea0-70a7-492f-8020-ffb27cbb630f';
 const API_ROOT = 'https://www.wixapis.com';
 const COLLECTION_ID = 'TripPlannerLeads';
-const AI_BUDGET_COLLECTION_ID = 'TripPlannerAiBudget';
 const OUTPUT_DIR = 'output/qa/ultimate-trip-planner-prepublish-gate';
 const CRITICAL_COLLECTION_FIELDS = [
   'leadKey',
@@ -23,20 +22,7 @@ const CRITICAL_COLLECTION_FIELDS = [
   'conversionNextAction',
   'conversionReasons',
   'bookingStatus',
-  'bookedAt',
-  'aiRequestCount',
-  'aiLastRequestedAt',
-  'aiLimitReachedAt'
-];
-const CRITICAL_AI_BUDGET_FIELDS = [
-  'periodKey',
-  'periodType',
-  'periodLabel',
-  'requestCount',
-  'limit',
-  'createdAt',
-  'updatedAt',
-  'limitReachedAt'
+  'bookedAt'
 ];
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
@@ -45,6 +31,7 @@ const manifestPath = path.join(widgetRoot, 'email/paste-ready/manifest.json');
 const defaultIdsPath = path.join(widgetRoot, 'email/paste-ready/message-ids.local.json');
 const funnelPath = path.join(scriptDir, 'tripPlannerFunnel.js');
 const httpFunctionsPath = path.join(scriptDir, 'http-functions.js');
+const widgetPath = path.join(widgetRoot, 'index.html');
 const jobsConfigPath = path.join(scriptDir, 'jobs.config');
 const emailMarketingSubscriptionPath = path.join(scriptDir, 'emailMarketingSubscription.js');
 
@@ -168,24 +155,22 @@ function inspectIds(idsPath) {
 function inspectSource() {
   const funnel = fs.readFileSync(funnelPath, 'utf8');
   const httpFunctions = fs.readFileSync(httpFunctionsPath, 'utf8');
+  const widget = fs.readFileSync(widgetPath, 'utf8');
   const jobsConfig = fs.readFileSync(jobsConfigPath, 'utf8');
   const emailMarketingSubscription = fs.existsSync(emailMarketingSubscriptionPath)
     ? fs.readFileSync(emailMarketingSubscriptionPath, 'utf8')
     : '';
   const todos = [...new Set([...funnel.matchAll(/TODO_TRIP_PLANNER_[A-Z0-9_]+/g)].map((match) => match[0]))].sort();
-  const aiPayloadValidatorStart = funnel.indexOf('function validateAiEnhancementPayload');
-  const aiPayloadValidatorEnd = funnel.indexOf('async function readFirstSecret', aiPayloadValidatorStart);
-  const aiPayloadValidator = aiPayloadValidatorStart >= 0 && aiPayloadValidatorEnd > aiPayloadValidatorStart
-    ? funnel.slice(aiPayloadValidatorStart, aiPayloadValidatorEnd)
-    : '';
-
   return {
     todos,
     hasLeadEndpoint: /export\s+async\s+function\s+post_tripPlannerLead/.test(httpFunctions) &&
       /export\s+function\s+options_tripPlannerLead/.test(httpFunctions),
-    hasAiEndpoint: /export\s+async\s+function\s+post_tripPlannerAi/.test(httpFunctions) &&
+    legacyAiDisabled: /export\s+async\s+function\s+post_tripPlannerAi/.test(httpFunctions) &&
       /export\s+function\s+options_tripPlannerAi/.test(httpFunctions) &&
-      /enhanceTripPlannerPlan/.test(httpFunctions),
+      /status:\s*410/.test(httpFunctions) &&
+      /ai_disabled/.test(httpFunctions) &&
+      /enhanceTripPlannerPlan/.test(funnel) &&
+      /enhanceTripPlannerPlan[\s\S]*?ai_disabled/.test(funnel),
     hasBookingEndpoint: /export\s+async\s+function\s+post_tripPlannerBooking/.test(httpFunctions) &&
       /export\s+function\s+options_tripPlannerBooking/.test(httpFunctions),
     hasEmailMarketingSubscription: /import\s+\{\s*subscribeEmailMarketing\s*\}\s+from\s+['"]backend\/emailMarketingSubscription['"]/.test(funnel) &&
@@ -195,31 +180,8 @@ function inspectSource() {
       /export\s+async\s+function\s+subscribeEmailMarketing/.test(emailMarketingSubscription) &&
       /email-marketing\/v1\/email-subscriptions/.test(emailMarketingSubscription) &&
       /subscriptionStatus:\s*'SUBSCRIBED'/.test(emailMarketingSubscription),
-    hasGeminiBackend: /export\s+async\s+function\s+enhanceTripPlannerPlan/.test(funnel) &&
-      /GEMINI_API_KEY/.test(funnel) &&
-      /gemini-2\.5-flash/.test(funnel) &&
-      /responseJsonSchema/.test(funnel) &&
-      /maxOutputTokens:\s*1200/.test(funnel) &&
-      /thinkingBudget:\s*0/.test(funnel) &&
-      /missing_api_key/.test(funnel) &&
-      /AI_DAILY_GENERATION_LIMIT\s*=\s*5000/.test(funnel) &&
-      /AI_MONTHLY_GENERATION_LIMIT\s*=\s*AI_DAILY_GENERATION_LIMIT\s*\*\s*30/.test(funnel),
-    hasAiPrivacyScrub: /PRIVATE_TEXT_PATTERN/.test(funnel) &&
-      /cleanPublicPlannerText/.test(funnel) &&
-      /cleanPublicPlannerRecord/.test(aiPayloadValidator) &&
-      /cleanPublicPlannerList/.test(aiPayloadValidator),
-    aiPayloadAvoidsEmail: Boolean(aiPayloadValidator) && !/\bemail\b/i.test(aiPayloadValidator),
-    hasAiQuotaGuard: /AI_GENERATION_LIMIT\s*=\s*2/.test(funnel) &&
-      /AI_BUDGET_COLLECTION\s*=\s*'TripPlannerAiBudget'/.test(funnel) &&
-      /function\s+checkAiLeadQuota/.test(funnel) &&
-      /function\s+claimAiLeadQuota/.test(funnel) &&
-      /function\s+claimAiBudget/.test(funnel) &&
-      /aiRequestCount/.test(funnel) &&
-      /aiLastRequestedAt/.test(funnel) &&
-      /aiLimitReachedAt/.test(funnel) &&
-      /ai_budget_daily_limit/.test(funnel) &&
-      /ai_budget_monthly_limit/.test(funnel) &&
-      /quotaEmail/.test(funnel),
+    zeroAiRuntime: !/_functions\/tripPlannerAi|generativelanguage|requestAiEnhancement|bw_trip_planner_ai_/i.test(widget) &&
+      !/generativelanguage|wix-fetch|wix-secrets-backend|getSecret\(|generateContent|TripPlannerAiBudget|AI_GENERATION_LIMIT|quotaEmail/i.test(funnel),
     hasScheduler: /processTripPlannerDueEmails/.test(jobsConfig) &&
       /"cronExpression"\s*:\s*"0 \* \* \* \*"/.test(jobsConfig),
     bookedSuppression: /shouldSuppressUltimateReminder/.test(funnel) &&
@@ -240,7 +202,6 @@ async function readBody(response) {
 
 function criticalFieldsFor(collectionId) {
   if (collectionId === COLLECTION_ID) return CRITICAL_COLLECTION_FIELDS;
-  if (collectionId === AI_BUDGET_COLLECTION_ID) return CRITICAL_AI_BUDGET_FIELDS;
   return [];
 }
 
@@ -326,18 +287,14 @@ async function main() {
     check('No TODO_TRIP_PLANNER placeholders remain', sourceState.todos.length === 0, sourceState.todos.length ? sourceState.todos.join(', ') : 'no placeholders found'),
     check('Velo HTTP endpoints are present', sourceState.hasLeadEndpoint && sourceState.hasBookingEndpoint, 'tripPlannerLead and tripPlannerBooking handlers'),
     check('Email Marketing subscription helper is wired', sourceState.hasEmailMarketingSubscription, 'consenting leads call subscribeEmailMarketing and expose subscriptionDebug'),
-    check('Velo AI polish endpoint is present', sourceState.hasAiEndpoint, 'tripPlannerAi options/post handlers call enhanceTripPlannerPlan'),
-    check('Gemini backend is fail-soft and bounded', sourceState.hasGeminiBackend, 'Gemini 2.5 Flash, backend-only secret names, responseJsonSchema, maxOutputTokens 1200, thinkingBudget 0, missing-key fallback'),
-    check('AI enhancement payload is privacy-scrubbed', sourceState.hasAiPrivacyScrub, 'Gemini-bound text fields drop private-looking text before prompt assembly'),
-    check('AI enhancement payload avoids email', sourceState.aiPayloadAvoidsEmail, 'validateAiEnhancementPayload should not accept or forward email/PII to Gemini'),
-    check('AI quota guard is backend-enforced', sourceState.hasAiQuotaGuard, 'email + arrival date max 2 Gemini generations before quota fallback'),
+    check('Legacy AI endpoint fails closed', sourceState.legacyAiDisabled, 'tripPlannerAi remains compatible but returns HTTP 410 ai_disabled'),
+    check('Customer runtime makes zero AI requests', sourceState.zeroAiRuntime, 'widget and product backend contain no AI provider, budget, quota-email, or generation path'),
     check('Hourly scheduler is present', sourceState.hasScheduler, 'processTripPlannerDueEmails hourly job'),
     check('Booked leads suppress Ultimate reminders', sourceState.bookedSuppression, 'existing Wix booking sequence owns booked-guest prep')
   ];
 
   const apiKey = String(process.env.WIX_API_KEY || '').trim();
   let collection = null;
-  let aiBudgetCollection = null;
   if (!apiKey) {
     checks.push(check('WIX_API_KEY is loaded for remote collection gate', false, 'Run: source ../scripts/load-api-keys.sh'));
   } else {
@@ -346,12 +303,6 @@ async function main() {
       'TripPlannerLeads critical fields pass remote gate',
       collection.schemaOk,
       collection.schemaOk ? `${collection.fieldCount} fields visible; critical fields verified` : `HTTP ${collection.status}; missing ${collection.missingCriticalFields.join(', ') || '(unknown)'}`
-    ));
-    aiBudgetCollection = await fetchCollection(apiKey, AI_BUDGET_COLLECTION_ID);
-    checks.push(check(
-      'TripPlannerAiBudget critical fields pass remote gate',
-      aiBudgetCollection.schemaOk,
-      aiBudgetCollection.schemaOk ? `${aiBudgetCollection.fieldCount} fields visible; critical fields verified` : `HTTP ${aiBudgetCollection.status}; missing ${aiBudgetCollection.missingCriticalFields.join(', ') || '(unknown)'}`
     ));
   }
 
@@ -367,7 +318,6 @@ async function main() {
     idState,
     sourceState,
     collection,
-    aiBudgetCollection,
     checks,
     summary
   };

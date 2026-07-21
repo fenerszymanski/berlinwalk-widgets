@@ -10,8 +10,8 @@ Source handoff for the widget lead gate and pre-booking planner sequence.
 - `build-velo-install-kit.mjs` - regenerates the local copy/paste install kit.
 - `create-trip-planner-leads-collection.mjs` - dry-run-first setup helper for
   `TripPlannerLeads`.
-- `create-trip-planner-ai-budget-collection.mjs` - dry-run-first setup helper
-  for the daily/monthly Gemini budget counters.
+- `ai-privacy-fixture.mjs` - static release check that proves the customer
+  runtime has no AI provider, quota-email, or AI budget dependency.
 - `install-kit.html` - local admin page with copy buttons for the Velo paste
   points.
 
@@ -38,19 +38,18 @@ node ultimate-berlin-trip-planner/velo/prepublish-gate.mjs
 It writes evidence under `output/qa/ultimate-trip-planner-prepublish-gate/` and
 exits non-zero until IDs are valid/applied, no `TODO_TRIP_PLANNER_*`
 placeholders remain, the endpoint/scheduler source is present, booked leads
-suppress future Ultimate reminders, and the live `TripPlannerLeads` plus
-`TripPlannerAiBudget` critical fields pass.
+suppress future Ultimate reminders, runtime AI is absent, the legacy AI route
+fails closed, and the live `TripPlannerLeads` critical fields pass.
 
-For the optional Gemini layer, also run the local privacy/fail-soft fixture:
+Run the zero-AI release fixture too:
 
 ```bash
 node ultimate-berlin-trip-planner/velo/ai-privacy-fixture.mjs
 ```
 
-It executes the Velo source in a mocked Wix backend, proves `missing_api_key`
-returns fail-soft, and verifies email-like text is scrubbed before Gemini prompt
-assembly. It also proves the global daily cap blocks Gemini before a fetch and
-does not consume the lead-level AI quota.
+It proves the widget and product backend make no model request, use no AI
+budget collection or quota email, and keep the legacy endpoint only as an HTTP
+`410 ai_disabled` compatibility response.
 
 ## Endpoints
 
@@ -63,35 +62,16 @@ POST https://www.berlinwalk.com/_functions/tripPlannerLead
 The widget sends email, consent, arrival date, trip length, trip profile, plan title,
 recommended tour day, ticket note, weather summary, source, and page URL.
 
-Optional AI polish endpoint after publish:
+Legacy compatibility endpoint after publish:
 
 ```text
 POST https://www.berlinwalk.com/_functions/tripPlannerAi
 ```
 
-This endpoint adds a short "local second look" after the deterministic full plan
-is unlocked. The widget sends `quotaEmail` only so the backend can enforce the
-email + arrival-date Gemini limit; `quotaEmail` is not included in the
-Gemini-bound prompt input. Gemini receives only sanitized trip inputs,
-weather/tour-slot labels, and the already-built day skeleton. If Gemini is
-unavailable, missing a key, quota-limited, or returns a bad response, the
-frontend falls back calmly and the deterministic plan/PDF/print flow continues
-normally.
-
-Hard caps:
-
-- Lead cap: `2` Gemini generations per `email|arrivalDate` lead.
-- Daily global cap: `5000` Gemini generations per Berlin calendar day.
-- Monthly global cap: `150000` Gemini generations per Berlin calendar month.
-
-The daily/monthly counters live in `TripPlannerAiBudget`. If that collection is
-missing, the AI endpoint fails closed and the planner keeps using the
-deterministic fallback.
-
-Add the Gemini API key in Wix Secrets Manager as `GEMINI_API_KEY`. Accepted
-fallback secret names are `GOOGLE_AI_API_KEY` and `GOOGLE_GEMINI_API_KEY`.
-The default model is `gemini-2.5-flash`; optionally override it with
-`TRIP_PLANNER_GEMINI_MODEL` or `GEMINI_MODEL`.
+The customer runtime never calls this endpoint. It exists so old clients fail
+predictably with HTTP `410` and `{ "error": "ai_disabled" }`. Trip Planner 3.1
+needs no AI provider key, AI budget collection, model quota, or visitor email
+for plan generation.
 
 Booking-aware helper endpoint:
 
@@ -122,17 +102,16 @@ dry-run-first smoke helper:
 ```bash
 node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --email you@example.com
 node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email you@example.com
-node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email you@example.com --ai-only
-node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email you@example.com --ai
+node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --ai-only
 node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email you@example.com --booking
 ```
 
 The first command writes the exact lead/booking payloads without touching Wix.
-The `--ai-only` command tests `/_functions/tripPlannerAi` against an existing
-lead without creating a new lead or sending the instant plan email. The other live commands call
-`/_functions/tripPlannerLead` and, with `--ai` or `--booking`, also test
-`/_functions/tripPlannerAi` or `/_functions/tripPlannerBooking`, then save the
-response JSON under `output/qa/ultimate-trip-planner-live-smoke/`.
+The `--ai-only` command sends no lead or email data. It only verifies the
+expected HTTP `410 ai_disabled` compatibility response. The other live commands
+call `/_functions/tripPlannerLead` and, with `--booking`, also test
+`/_functions/tripPlannerBooking`, then save the response JSON under
+`output/qa/ultimate-trip-planner-live-smoke/`.
 
 ## Email Sequence Simulator
 
@@ -191,42 +170,15 @@ source ../scripts/load-api-keys.sh
 node ultimate-berlin-trip-planner/velo/create-trip-planner-leads-collection.mjs
 node ultimate-berlin-trip-planner/velo/create-trip-planner-leads-collection.mjs --live
 node ultimate-berlin-trip-planner/velo/create-trip-planner-leads-collection.mjs --live --sync-fields
-node ultimate-berlin-trip-planner/velo/create-trip-planner-ai-budget-collection.mjs
-node ultimate-berlin-trip-planner/velo/create-trip-planner-ai-budget-collection.mjs --live
-node ultimate-berlin-trip-planner/velo/create-trip-planner-ai-budget-collection.mjs --live --sync-fields
 ```
 
-Both scripts are dry-run by default. Live mode creates the collection only if it
+The script is dry-run by default. Live mode creates the collection only if it
 is missing, then verifies the expected field keys and types. Add `--sync-fields`
 only when the collection already exists and the helper reports missing fields;
 it creates those missing field definitions through Wix Data `create-field`, then
 verifies again. The lead helper still keeps a `patch-field` fallback function
 available for future existing-field edits, but missing-field sync must use
 `create-field`.
-
-## AI Budget Collection
-
-Create a Wix Data collection with ID:
-
-```text
-TripPlannerAiBudget
-```
-
-Recommended permissions: backend/admin writes only; no public read. This
-collection stores counters only, not visitor email or lead data.
-
-Fields:
-
-| Field key | Type | Notes |
-|---|---|---|
-| `periodKey` | Text | `day|YYYY-MM-DD` or `month|YYYY-MM` |
-| `periodType` | Text | `day` or `month` |
-| `periodLabel` | Text | Human-readable period key |
-| `requestCount` | Number | Claimed Gemini generations in that period |
-| `limit` | Number | Current configured cap |
-| `createdAt` | Date/Time | First counter creation |
-| `updatedAt` | Date/Time | Last counter update |
-| `limitReachedAt` | Date/Time | Set when the period cap is hit |
 
 ## Wix Data Collection
 
@@ -463,5 +415,5 @@ and the scheduled reminder on the same day.
 6. Merge `jobs.config`.
 7. Publish Wix.
 8. Test `POST /_functions/tripPlannerLead` with a real email.
-9. Test `POST /_functions/tripPlannerAi` with `--ai-only` first, then optionally with `--ai`, and confirm `enhancement.routeIntro` and `enhancement.dayStories` return.
+9. Run `--live --ai-only` and confirm the legacy endpoint returns HTTP `410 ai_disabled` without lead or email data.
 10. Test `POST /_functions/tripPlannerBooking` with the same email and confirm future Ultimate reminders are suppressed.

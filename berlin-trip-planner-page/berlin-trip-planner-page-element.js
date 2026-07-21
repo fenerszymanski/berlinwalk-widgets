@@ -5,6 +5,15 @@
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
   const WIDGET_PATH = 'ultimate-berlin-trip-planner/';
   const BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+  const OFFER_API_URL = 'https://berlinwalk-content-app.vercel.app/api/trip-planner-pro?action=offer';
+  const OFFER_PRODUCT_KEY = 'trip_planner_detailed';
+  const OFFER_STANDARD_ID = 'tp_standard_799';
+  const OFFER_LAUNCH_ID = 'tp_v31_launch_50';
+  const OFFER_STANDARD_CENTS = 799;
+  const OFFER_LAUNCH_CENTS = 399;
+  const OFFER_DISCOUNT_CENTS = 400;
+  const OFFER_FETCH_TIMEOUT_MS = 6500;
+  const PURCHASE_CONTENT_ID = 'trip_planner_detailed';
   const LANDING_EXPERIMENT_ID = 'tp_lp_value_path_v1';
   const LANDING_EXPERIMENT_VARIANTS = ['control', 'value_first'];
   const LANDING_EXPERIMENT_STATUS = 'closed_no_winner';
@@ -81,6 +90,9 @@
   function plannerParentUrl() {
     try {
       const url = new URL(window.location.href);
+      // Owner-only landing review state must never enter the planner or any
+      // checkout context. It changes this local shell's presentation only.
+      url.searchParams.delete('tp_offer_review');
       if (!advertisingConsent()) ['fbclid', 'fbc', 'fbp'].forEach((key) => url.searchParams.delete(key));
       return url.toString();
     } catch (error) {
@@ -217,6 +229,8 @@
       ensureFont();
       this._plannerFrameReady = false;
       this._queuedPlannerCommand = null;
+      this._offerRequestId = (this._offerRequestId || 0) + 1;
+      this._offerState = null;
       this._experimentAssignment = this._resolveExperimentAssignment();
       this.dataset.bwTpExperiment = this._experimentAssignment.experimentId;
       this.dataset.bwTpVariant = this._experimentAssignment.variant;
@@ -225,6 +239,7 @@
       this._bind();
       this._setupPlannerResize();
       this._setupWixTopGapGuard();
+      this._loadOffer(this._offerRequestId);
     }
 
     disconnectedCallback() {
@@ -249,6 +264,10 @@
       }
       if (this._gapResizeObserver) this._gapResizeObserver.disconnect();
       if (this._gapRaf) window.cancelAnimationFrame(this._gapRaf);
+      if (this._offerAbortController) this._offerAbortController.abort();
+      if (this._offerFetchTimer) window.clearTimeout(this._offerFetchTimer);
+      if (this._offerCountdownTimer) window.clearTimeout(this._offerCountdownTimer);
+      this._removeOfferSchema();
     }
 
     _resolveExperimentAssignment() {
@@ -349,6 +368,335 @@
       return url.toString();
     }
 
+    _localOfferReviewMode() {
+      let isLocal = false;
+      try {
+        const hostname = String(window.location.hostname || '').toLowerCase();
+        isLocal = window.location.protocol === 'file:' || hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '[::1]';
+      } catch (error) {}
+      if (!isLocal) return '';
+      try {
+        const mode = String(new URLSearchParams(window.location.search || '').get('tp_offer_review') || '').toLowerCase();
+        return ['launch', 'standard', 'expired', 'fail'].includes(mode) ? mode : '';
+      } catch (error) {
+        return '';
+      }
+    }
+
+    _localOfferReviewPayload(mode) {
+      const standard = {
+        ok: true,
+        productKey: OFFER_PRODUCT_KEY,
+        currency: 'eur',
+        serverNow: '2026-07-21T08:00:00.000Z',
+        offer: {
+          offerId: OFFER_STANDARD_ID,
+          campaignId: '',
+          status: mode === 'expired' ? 'expired' : 'inactive',
+          active: false,
+          listAmountEurCents: OFFER_STANDARD_CENTS,
+          discountAmountEurCents: 0,
+          netAmountEurCents: OFFER_STANDARD_CENTS,
+          startsAt: '',
+          endsAt: '',
+          priceLockMinutes: 30
+        }
+      };
+      if (mode !== 'launch') return standard;
+      return {
+        ok: true,
+        productKey: OFFER_PRODUCT_KEY,
+        currency: 'eur',
+        serverNow: '2026-07-21T08:00:00.000Z',
+        offer: {
+          offerId: OFFER_LAUNCH_ID,
+          campaignId: OFFER_LAUNCH_ID,
+          status: 'active',
+          active: true,
+          listAmountEurCents: OFFER_STANDARD_CENTS,
+          discountAmountEurCents: OFFER_DISCOUNT_CENTS,
+          netAmountEurCents: OFFER_LAUNCH_CENTS,
+          startsAt: '2026-07-21T08:00:00.000Z',
+          endsAt: '2026-08-20T08:00:00.000Z',
+          priceLockMinutes: 30
+        }
+      };
+    }
+
+    _loadOffer(requestId) {
+      const reviewMode = this._localOfferReviewMode();
+      if (reviewMode === 'fail') {
+        this._applyOfferUnavailable();
+        return;
+      }
+      if (reviewMode) {
+        this._applyOfferPayload(this._localOfferReviewPayload(reviewMode), true);
+        return;
+      }
+      if (typeof window.fetch !== 'function') {
+        this._applyOfferUnavailable();
+        return;
+      }
+
+      if (this._offerAbortController) this._offerAbortController.abort();
+      this._offerAbortController = typeof AbortController === 'function' ? new AbortController() : null;
+      const options = {
+        method: 'GET',
+        headers: { Accept: 'application/json' },
+        cache: 'no-store',
+        credentials: 'omit'
+      };
+      if (this._offerAbortController) options.signal = this._offerAbortController.signal;
+      if (this._offerFetchTimer) window.clearTimeout(this._offerFetchTimer);
+      this._offerFetchTimer = window.setTimeout(() => {
+        if (this._offerAbortController) this._offerAbortController.abort();
+      }, OFFER_FETCH_TIMEOUT_MS);
+
+      window.fetch(OFFER_API_URL, options).then((response) => {
+        return response.json().catch(() => ({})).then((body) => {
+          if (!response.ok) throw new Error('offer_unavailable');
+          return body;
+        });
+      }).then((body) => {
+        if (!this.isConnected || requestId !== this._offerRequestId) return;
+        this._applyOfferPayload(body, false);
+      }).catch(() => {
+        if (!this.isConnected || requestId !== this._offerRequestId) return;
+        this._applyOfferUnavailable();
+      }).finally(() => {
+        if (this._offerFetchTimer) window.clearTimeout(this._offerFetchTimer);
+        this._offerFetchTimer = null;
+      });
+    }
+
+    _validatedOfferState(payload, isLocalReview) {
+      if (!payload || payload.ok !== true || payload.productKey !== OFFER_PRODUCT_KEY || payload.currency !== 'eur') return null;
+      const offer = payload.offer;
+      const serverNowMs = Date.parse(String(payload.serverNow || ''));
+      if (!offer || !Number.isFinite(serverNowMs) || Number(offer.priceLockMinutes) !== 30) return null;
+      if (!/^[a-z0-9_-]{3,80}$/i.test(String(offer.offerId || ''))) return null;
+      if (!['inactive', 'scheduled', 'active', 'expired'].includes(String(offer.status || ''))) return null;
+
+      const base = {
+        active: false,
+        isLocalReview: Boolean(isLocalReview),
+        offerId: String(offer.offerId || ''),
+        campaignId: String(offer.campaignId || '').slice(0, 100),
+        status: String(offer.status || ''),
+        serverNow: String(payload.serverNow || ''),
+        serverNowMs,
+        serverSkewMs: serverNowMs - Date.now(),
+        listCents: Number(offer.listAmountEurCents),
+        discountCents: Number(offer.discountAmountEurCents),
+        netCents: Number(offer.netAmountEurCents),
+        startsAt: String(offer.startsAt || ''),
+        endsAt: String(offer.endsAt || '')
+      };
+
+      if (offer.active === true) {
+        const startsAtMs = Date.parse(base.startsAt);
+        const endsAtMs = Date.parse(base.endsAt);
+        if (
+          base.offerId !== OFFER_LAUNCH_ID ||
+          base.campaignId !== OFFER_LAUNCH_ID ||
+          base.status !== 'active' ||
+          base.listCents !== OFFER_STANDARD_CENTS ||
+          base.discountCents !== OFFER_DISCOUNT_CENTS ||
+          base.netCents !== OFFER_LAUNCH_CENTS ||
+          !Number.isFinite(startsAtMs) ||
+          !Number.isFinite(endsAtMs) ||
+          startsAtMs >= endsAtMs ||
+          serverNowMs < startsAtMs ||
+          serverNowMs >= endsAtMs
+        ) return null;
+        base.active = true;
+        base.startsAtMs = startsAtMs;
+        base.endsAtMs = endsAtMs;
+        return base;
+      }
+
+      if (
+        offer.active !== false ||
+        base.offerId !== OFFER_STANDARD_ID ||
+        !['', OFFER_LAUNCH_ID].includes(base.campaignId) ||
+        base.status === 'active' ||
+        base.listCents !== OFFER_STANDARD_CENTS ||
+        base.discountCents !== 0 ||
+        base.netCents !== OFFER_STANDARD_CENTS
+      ) return null;
+      return base;
+    }
+
+    _applyOfferPayload(payload, isLocalReview) {
+      const state = this._validatedOfferState(payload, isLocalReview);
+      if (!state) {
+        this._applyOfferUnavailable();
+        return;
+      }
+      this._offerState = state;
+      if (state.active) this._applyActiveOffer(state);
+      else this._applyStandardOffer(state);
+    }
+
+    _money(cents) {
+      return `€${(Number(cents) / 100).toFixed(2)}`;
+    }
+
+    _formatOfferEnd(iso) {
+      const date = new Date(iso);
+      if (!Number.isFinite(date.getTime())) return '';
+      const day = new Intl.DateTimeFormat('en-GB', {
+        day: 'numeric',
+        month: 'long',
+        timeZone: 'Europe/Berlin',
+        year: 'numeric'
+      }).format(date);
+      const time = new Intl.DateTimeFormat('en-GB', {
+        hour: '2-digit',
+        hour12: false,
+        minute: '2-digit',
+        timeZone: 'Europe/Berlin',
+        timeZoneName: 'short'
+      }).format(date);
+      return `${day} at ${time}`;
+    }
+
+    _setText(selector, value) {
+      const node = this.querySelector(selector);
+      if (node) node.textContent = value === null || value === undefined ? '' : String(value);
+      return node;
+    }
+
+    _setPriceSurfaces(cents) {
+      const price = this._money(cents);
+      this.querySelectorAll('[data-bw-offer-result-price]').forEach((node) => {
+        node.textContent = `Full Berlin plan ${price}`;
+      });
+      this.querySelectorAll('[data-bw-offer-inline-price]').forEach((node) => {
+        node.textContent = price;
+        node.hidden = false;
+      });
+    }
+
+    _clearPriceSurfaces() {
+      this.querySelectorAll('[data-bw-offer-result-price]').forEach((node) => {
+        node.textContent = 'Full Berlin plan';
+      });
+      this.querySelectorAll('[data-bw-offer-inline-price]').forEach((node) => {
+        node.textContent = '';
+        node.hidden = true;
+      });
+    }
+
+    _setPromoVisible(visible) {
+      const promo = this.querySelector('[data-bw-launch-offer]');
+      if (!promo) return;
+      promo.hidden = !visible;
+      promo.setAttribute('aria-hidden', visible ? 'false' : 'true');
+    }
+
+    _applyOfferUnavailable() {
+      this._offerState = null;
+      this.dataset.bwOfferState = 'unavailable';
+      this.dataset.bwOfferSource = 'server';
+      if (this._offerCountdownTimer) window.clearTimeout(this._offerCountdownTimer);
+      this._offerCountdownTimer = null;
+      this._setPromoVisible(false);
+      this._clearPriceSurfaces();
+      this._removeOfferSchema();
+    }
+
+    _applyStandardOffer(state) {
+      if (this._offerCountdownTimer) window.clearTimeout(this._offerCountdownTimer);
+      this._offerCountdownTimer = null;
+      this._offerState = Object.assign({}, state, {
+        active: false,
+        offerId: OFFER_STANDARD_ID,
+        status: state && state.status === 'active' ? 'expired' : state.status,
+        discountCents: 0,
+        netCents: OFFER_STANDARD_CENTS
+      });
+      this.dataset.bwOfferState = 'standard';
+      this.dataset.bwOfferSource = state.isLocalReview ? 'local_review' : 'server';
+      this._setPromoVisible(false);
+      this._setPriceSurfaces(OFFER_STANDARD_CENTS);
+      this._updateOfferSchema(this._offerState);
+    }
+
+    _applyActiveOffer(state) {
+      const endLabel = this._formatOfferEnd(state.endsAt);
+      if (!endLabel) {
+        this._applyOfferUnavailable();
+        return;
+      }
+      this.dataset.bwOfferState = 'active';
+      this.dataset.bwOfferSource = state.isLocalReview ? 'local_review' : 'server';
+      this._setText('[data-bw-offer-kicker]', '30-DAY LAUNCH OFFER · 50% OFF');
+      this._setText('[data-bw-offer-price]', `Launch price ${this._money(state.netCents)}`);
+      this._setText('[data-bw-offer-regular]', `Normally ${this._money(state.listCents)} · offer ends ${endLabel}`);
+      this._setText('[data-bw-offer-saving]', `Save ${this._money(state.discountCents)}`);
+      this._setText('[data-bw-offer-static-date]', `The launch offer ends ${endLabel}. The regular price is ${this._money(state.listCents)} after that time.`);
+      const reviewNote = this.querySelector('[data-bw-offer-review-note]');
+      if (reviewNote) reviewNote.hidden = !state.isLocalReview;
+      this._setPromoVisible(true);
+      this._setPriceSurfaces(state.netCents);
+      this._updateOfferSchema(state);
+      this._updateOfferCountdown();
+    }
+
+    _updateOfferCountdown() {
+      if (this._offerCountdownTimer) window.clearTimeout(this._offerCountdownTimer);
+      const state = this._offerState;
+      if (!state || !state.active) return;
+      const remainingMs = state.endsAtMs - (Date.now() + state.serverSkewMs);
+      if (remainingMs <= 0) {
+        this._applyStandardOffer(state);
+        return;
+      }
+      const totalMinutes = Math.max(0, Math.ceil(remainingMs / 60000));
+      const days = Math.floor(totalMinutes / 1440);
+      const hours = Math.floor((totalMinutes % 1440) / 60);
+      const minutes = totalMinutes % 60;
+      this._setText('[data-bw-countdown-days]', days);
+      this._setText('[data-bw-countdown-hours]', hours);
+      this._setText('[data-bw-countdown-minutes]', minutes);
+      const nextMinuteBoundary = remainingMs % 60000;
+      const delay = Math.min(60000, Math.max(1000, nextMinuteBoundary + 80));
+      this._offerCountdownTimer = window.setTimeout(() => this._updateOfferCountdown(), delay);
+    }
+
+    _updateOfferSchema(state) {
+      this._removeOfferSchema();
+      if (!state || ![OFFER_STANDARD_CENTS, OFFER_LAUNCH_CENTS].includes(Number(state.netCents))) return;
+      const offer = {
+        '@type': 'Offer',
+        availability: 'https://schema.org/InStock',
+        price: (Number(state.netCents) / 100).toFixed(2),
+        priceCurrency: 'EUR',
+        url: 'https://www.berlinwalk.com/berlin-trip-planner'
+      };
+      if (state.active && state.endsAt) offer.priceValidUntil = state.endsAt.slice(0, 10);
+      const schema = {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        '@id': 'https://www.berlinwalk.com/berlin-trip-planner#full-plan',
+        name: 'Berlin Trip Planner Full Plan',
+        brand: { '@type': 'Brand', name: 'BerlinWalk' },
+        description: 'A date-based Berlin itinerary for phone use and PDF backup.',
+        offers: offer
+      };
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.dataset.bwTripOfferSchema = 'true';
+      script.textContent = JSON.stringify(schema);
+      this.appendChild(script);
+    }
+
+    _removeOfferSchema() {
+      const script = this.querySelector('script[data-bw-trip-offer-schema]');
+      if (script) script.remove();
+    }
+
     _valueFirstCard() {
       if (!this._experimentAssignment || this._experimentAssignment.variant !== 'value_first') return '';
       return `
@@ -369,7 +717,7 @@
               <li>Weather &amp; opening checks</li>
             </ul>
             <div class="bw-trip-value-action">
-              <span><strong>€7.99</strong><small>The free preview still comes first.</small></span>
+              <span><strong data-bw-offer-inline-price hidden></strong><small>The free preview still comes first.</small></span>
               <a class="bw-trip-value-cta" href="#planner" data-bw-trip-landing-cta="value_first_card">Build my free preview</a>
             </div>
           </div>
@@ -403,9 +751,26 @@
           <section class="bw-trip-launch" aria-labelledby="bw-trip-page-title">
             <div class="bw-trip-inner bw-trip-launch-inner">
               <header class="bw-trip-intro">
-                <p class="bw-trip-kicker">My trip. My Berlin.</p>
-                <h1 id="bw-trip-page-title">A Berlin plan built around the days you actually have.</h1>
-                <p class="bw-trip-intro-copy">I check the route, weather, and opening hours so you don&rsquo;t have to.</p>
+                <div class="bw-trip-intro-message">
+                  <p class="bw-trip-kicker">My trip. My Berlin.</p>
+                  <h1 id="bw-trip-page-title">A Berlin plan built around the days you actually have.</h1>
+                  <p class="bw-trip-intro-copy">I check the route, weather, and opening hours so you don&rsquo;t have to.</p>
+                </div>
+                <aside class="bw-trip-launch-offer" data-bw-launch-offer aria-hidden="true" aria-labelledby="bw-trip-launch-offer-title" hidden>
+                  <p class="bw-trip-launch-offer-kicker" data-bw-offer-kicker></p>
+                  <p class="bw-trip-launch-offer-price" id="bw-trip-launch-offer-title" data-bw-offer-price></p>
+                  <p class="bw-trip-launch-offer-regular" data-bw-offer-regular></p>
+                  <p class="bw-trip-launch-offer-saving" data-bw-offer-saving></p>
+                  <div class="bw-trip-offer-countdown" aria-hidden="true">
+                    <span><b data-bw-countdown-days>0</b><small>days</small></span>
+                    <span><b data-bw-countdown-hours>0</b><small>hours</small></span>
+                    <span><b data-bw-countdown-minutes>0</b><small>minutes</small></span>
+                  </div>
+                  <p class="bw-trip-sr-only" data-bw-offer-static-date></p>
+                  <a class="bw-trip-offer-cta" href="#planner" data-bw-trip-landing-cta="launch_offer">Build my free preview</a>
+                  <span class="bw-trip-offer-proof-line">See Day 1 before you pay</span>
+                  <small class="bw-trip-offer-review-note" data-bw-offer-review-note hidden>Local offer review only. Checkout pricing remains server-controlled.</small>
+                </aside>
               </header>
 
               ${this._valueFirstCard()}
@@ -426,18 +791,38 @@
             </div>
           </section>
 
+          <section class="bw-trip-section bw-trip-delivery-proof" aria-labelledby="bw-trip-delivery-title">
+            <div class="bw-trip-inner bw-trip-delivery-inner">
+              <div class="bw-trip-delivery-heading">
+                <p class="bw-trip-section-kicker">One itinerary, two useful formats</p>
+                <h2 id="bw-trip-delivery-title">Same plan on your phone and in your PDF.</h2>
+              </div>
+              <div class="bw-trip-delivery-grid">
+                <article>
+                  <img src="${proofPlanIcon}" alt="" aria-hidden="true">
+                  <span><strong>Mobile itinerary</strong><small>Your schedule, map links, opening checks, and Plan B together.</small></span>
+                </article>
+                <div class="bw-trip-same-plan" aria-label="The mobile and PDF itineraries use the same plan">SAME PLAN</div>
+                <article>
+                  <img src="${proofGuideIcon}" alt="" aria-hidden="true">
+                  <span><strong>PDF itinerary</strong><small>The same route arranged for print and offline backup.</small></span>
+                </article>
+              </div>
+            </div>
+          </section>
+
           <section class="bw-trip-section bw-trip-sample" aria-labelledby="bw-trip-sample-title">
             <div class="bw-trip-inner bw-trip-sample-grid">
               <div class="bw-trip-sample-copy">
-                <p class="bw-trip-section-kicker">See the shape first</p>
-                <h2 id="bw-trip-sample-title">Your days stay close together.</h2>
-                <p>I group each day by area, then check the route against arrival time, weather, and opening days. You see the free plan shape before deciding whether the detailed version is useful.</p>
+                <p class="bw-trip-section-kicker">Your free result proof</p>
+                <h2 id="bw-trip-sample-title">See Day 1 before you pay</h2>
+                <p>I group each day by area, then check the route against arrival time, weather, and opening days. Your free preview shows the shape of the trip and a real Day 1 before you decide.</p>
                 <figure class="bw-trip-sample-art">
                   <img src="${heroImage}" alt="Illustrated summer view of Museum Island and the Berlin TV Tower">
                 </figure>
               </div>
 
-              <aside class="bw-trip-preview" aria-label="Engine-derived example three-day Berlin plan" data-bw-engine-sample-id="${ENGINE_SAMPLE_V2.id}">
+              <aside class="bw-trip-preview" aria-label="Engine-derived example three-day Berlin plan" data-bw-engine-sample-id="${ENGINE_SAMPLE_V2.id}" data-bw-result-proof>
                 <div class="bw-trip-preview-top">
                   <strong>${ENGINE_SAMPLE_V2.dateRange}</strong>
                   <span>3 days</span>
@@ -458,8 +843,8 @@
                 <div class="bw-trip-preview-day"><strong>${ENGINE_SAMPLE_V2.days[1].title}</strong><span>View</span></div>
                 <div class="bw-trip-preview-day"><strong>${ENGINE_SAMPLE_V2.days[2].title}</strong><span>View</span></div>
                 <div class="bw-trip-preview-paid">
-                  <div><strong>Full 3-day plan — €7.99</strong><span>Daily stops · Maps · PDF · Opening checks</span></div>
-                  <a href="#planner" data-bw-trip-landing-cta="sample_plan">View plan</a>
+                  <div><strong data-bw-offer-result-price>Full Berlin plan</strong><span>Daily stops · Maps · PDF · Opening checks</span></div>
+                  <a href="#planner" data-bw-trip-landing-cta="sample_plan">Build my free preview</a>
                 </div>
               </aside>
             </div>
@@ -487,7 +872,7 @@
                 <p>Choose your arrival date and trip length. The first preview is free.</p>
               </div>
               <div class="bw-trip-actions">
-                <a class="bw-trip-btn bw-trip-btn-primary" href="#planner" data-bw-trip-landing-cta="final_cta">Build my Berlin plan</a>
+                <a class="bw-trip-btn bw-trip-btn-primary" href="#planner" data-bw-trip-landing-cta="final_cta">Build my free preview</a>
               </div>
             </div>
           </section>
@@ -504,7 +889,8 @@
           const scrollTarget = target.id === 'planner'
             ? target.querySelector('.bw-trip-widget-shell') || target
             : target;
-          scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          scrollTarget.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
           const landingSurface = link.getAttribute('data-bw-trip-landing-cta');
           if (landingSurface) this._sendPlannerLandingCta(landingSurface);
         });
@@ -665,9 +1051,10 @@
       const scrollToPlannerOffset = (top) => {
         const frameBox = frame.getBoundingClientRect();
         const absoluteTop = window.scrollY + frameBox.top + top - 10;
+        const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         window.scrollTo({
           top: Math.max(0, Math.round(absoluteTop)),
-          behavior: 'smooth'
+          behavior: reduceMotion ? 'auto' : 'smooth'
         });
       };
 
@@ -715,15 +1102,19 @@
       const pushPlannerMetaPurchase = (purchase) => {
         if (!advertisingConsent() || !purchase || typeof window.fbq !== 'function') return;
         const orderId = String(purchase.eventId || '');
+        const amountEurCents = Number(purchase.amountEurCents);
+        const actualValue = amountEurCents / 100;
         if (!/^tppo_[A-Za-z0-9_-]{12,}$/.test(orderId)) return;
         if (
+          purchase.serverVerified !== true ||
           purchase.eventName !== 'Purchase' ||
-          Number(purchase.value) !== 7.99 ||
+          ![OFFER_LAUNCH_CENTS, OFFER_STANDARD_CENTS].includes(amountEurCents) ||
+          Number(purchase.value) !== actualValue ||
           String(purchase.currency || '').toUpperCase() !== 'EUR' ||
           purchase.contentType !== 'product' ||
           !Array.isArray(purchase.contentIds) ||
           purchase.contentIds.length !== 1 ||
-          purchase.contentIds[0] !== 'trip_planner_detailed_7_99'
+          purchase.contentIds[0] !== PURCHASE_CONTENT_ID
         ) return;
         const storageKey = `bwTripPlannerMetaPurchase.v1:${orderId}`;
         this._metaPurchaseOrderIds = this._metaPurchaseOrderIds || new Set();
@@ -737,9 +1128,9 @@
           if (this._metaPurchaseOrderIds.has(orderId)) return;
         }
         window.fbq('track', 'Purchase', {
-          value: 7.99,
+          value: actualValue,
           currency: 'EUR',
-          content_ids: ['trip_planner_detailed_7_99'],
+          content_ids: [PURCHASE_CONTENT_ID],
           content_type: 'product'
         }, { eventID: orderId });
         this._metaPurchaseOrderIds.add(orderId);
@@ -812,8 +1203,15 @@
         }
       };
       frame.addEventListener('load', this._plannerFrameLoadHandler);
-      this._plannerFrameStyleObserver = new MutationObserver(enforceFrameHeight);
-      this._plannerFrameStyleObserver.observe(frame, { attributes: true, attributeFilter: ['style'] });
+      if (typeof MutationObserver === 'function') {
+        try {
+          this._plannerFrameStyleObserver = new MutationObserver(enforceFrameHeight);
+          this._plannerFrameStyleObserver.observe(frame, { attributes: true, attributeFilter: ['style'] });
+        } catch (error) {
+          if (this._plannerFrameStyleObserver) this._plannerFrameStyleObserver.disconnect();
+          this._plannerFrameStyleObserver = null;
+        }
+      }
       this._plannerResizeHandler = () => {
         scheduleHeightChecks();
         requestFrameMeasure();
@@ -955,6 +1353,23 @@
         .bw-trip-page *::before,
         .bw-trip-page *::after {
           box-sizing: border-box;
+        }
+
+        .bw-trip-page [hidden] {
+          display: none !important;
+        }
+
+        .bw-trip-sr-only {
+          border: 0;
+          clip: rect(0 0 0 0);
+          clip-path: inset(50%);
+          height: 1px;
+          margin: -1px;
+          overflow: hidden;
+          padding: 0;
+          position: absolute;
+          white-space: nowrap;
+          width: 1px;
         }
 
         .bw-trip-page h1,
@@ -1641,6 +2056,160 @@
           max-width: 660px;
         }
 
+        .bw-trip-intro-message {
+          min-width: 0;
+        }
+
+        bw-berlin-trip-planner-page[data-bw-offer-state="active"] .bw-trip-intro {
+          align-items: center;
+          display: grid;
+          gap: 28px;
+          grid-template-columns: minmax(0, 1fr) minmax(300px, 348px);
+          max-width: 920px;
+          text-align: left;
+        }
+
+        bw-berlin-trip-planner-page[data-bw-offer-state="active"] .bw-trip-intro h1 {
+          font-size: clamp(38px, 4.2vw, 58px);
+          letter-spacing: -1.7px;
+          margin-inline: 0;
+        }
+
+        bw-berlin-trip-planner-page[data-bw-offer-state="active"] .bw-trip-intro-copy {
+          margin-inline: 0;
+        }
+
+        .bw-trip-launch-offer {
+          background:
+            radial-gradient(circle at 100% 0%, rgba(197, 225, 165, 0.2), transparent 38%),
+            linear-gradient(145deg, #123D18, #1B5E20);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 18px;
+          box-shadow: 0 20px 42px rgba(18, 61, 24, 0.18);
+          color: #FFFFFF;
+          min-width: 0;
+          padding: 20px;
+          text-align: left;
+        }
+
+        .bw-trip-launch-offer-kicker {
+          color: var(--yellow);
+          font-size: 10px;
+          font-weight: 900;
+          letter-spacing: 1.15px;
+          line-height: 1.35;
+          margin-bottom: 8px;
+          text-transform: uppercase;
+        }
+
+        .bw-trip-launch-offer-price {
+          color: #FFFFFF;
+          font-family: Merriweather, Georgia, serif;
+          font-size: clamp(25px, 2.4vw, 31px);
+          font-weight: 700;
+          letter-spacing: -0.5px;
+          line-height: 1.12;
+          margin-bottom: 8px;
+        }
+
+        .bw-trip-launch-offer-regular {
+          color: rgba(255, 255, 255, 0.82);
+          font-size: 11px;
+          font-weight: 600;
+          line-height: 1.45;
+          margin-bottom: 8px;
+        }
+
+        .bw-trip-launch-offer-saving {
+          background: #F4F8EC;
+          border-radius: 999px;
+          color: var(--green-dark);
+          display: inline-flex;
+          font-size: 11px;
+          font-weight: 900;
+          line-height: 1.2;
+          margin-bottom: 13px;
+          padding: 7px 10px;
+        }
+
+        .bw-trip-offer-countdown {
+          display: grid;
+          gap: 7px;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          margin-bottom: 13px;
+        }
+
+        .bw-trip-offer-countdown span {
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.18);
+          border-radius: 9px;
+          display: grid;
+          gap: 1px;
+          min-width: 0;
+          padding: 7px 4px;
+          text-align: center;
+        }
+
+        .bw-trip-offer-countdown b {
+          color: var(--yellow);
+          font-size: 18px;
+          line-height: 1;
+        }
+
+        .bw-trip-offer-countdown small {
+          color: rgba(255, 255, 255, 0.78);
+          font-size: 8px;
+          font-weight: 800;
+          letter-spacing: 0.45px;
+          text-transform: uppercase;
+        }
+
+        .bw-trip-page .bw-trip-offer-cta,
+        .bw-trip-page .bw-trip-offer-cta:visited {
+          align-items: center;
+          background: var(--yellow);
+          border-radius: 9px;
+          color: var(--green-dark);
+          display: flex;
+          font-size: 13px;
+          font-weight: 900;
+          justify-content: center;
+          min-height: 48px;
+          padding: 12px 16px;
+          text-align: center;
+          text-decoration: none;
+        }
+
+        .bw-trip-page .bw-trip-offer-cta:hover,
+        .bw-trip-page .bw-trip-offer-cta:focus-visible {
+          background: #FFF04A;
+          color: var(--green-dark);
+          outline: 3px solid var(--lime);
+          outline-offset: 3px;
+        }
+
+        .bw-trip-offer-proof-line {
+          color: rgba(255, 255, 255, 0.82);
+          display: block;
+          font-size: 10px;
+          font-weight: 700;
+          margin-top: 8px;
+          text-align: center;
+        }
+
+        .bw-trip-offer-review-note {
+          background: #FFFFFF;
+          border-radius: 7px;
+          color: #7A3000;
+          display: block;
+          font-size: 9px;
+          font-weight: 800;
+          line-height: 1.35;
+          margin-top: 10px;
+          padding: 7px 8px;
+          text-align: center;
+        }
+
         .bw-trip-value-first {
           background: #FFFFFF;
           border: 1px solid rgba(27, 94, 32, 0.38);
@@ -1888,6 +2457,97 @@
           line-height: 1.45;
         }
 
+        .bw-trip-delivery-proof {
+          background: #FFFFFF;
+          border-bottom: 1px solid var(--line);
+          padding: 44px 0;
+        }
+
+        .bw-trip-delivery-inner {
+          align-items: center;
+          display: grid;
+          gap: 34px;
+          grid-template-columns: minmax(240px, 0.72fr) minmax(0, 1.28fr);
+          max-width: 1000px;
+        }
+
+        .bw-trip-delivery-heading .bw-trip-section-kicker {
+          margin-bottom: 8px;
+        }
+
+        .bw-trip-delivery-heading h2 {
+          color: var(--green-dark);
+          font-family: Merriweather, Georgia, serif;
+          font-size: clamp(28px, 3.2vw, 40px);
+          letter-spacing: -0.8px;
+          line-height: 1.12;
+          margin-bottom: 0;
+        }
+
+        .bw-trip-delivery-grid {
+          align-items: center;
+          display: grid;
+          gap: 12px;
+          grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+          min-width: 0;
+        }
+
+        .bw-trip-delivery-grid article {
+          align-items: center;
+          background: #F7FAF1;
+          border: 1px solid #DCE8C8;
+          border-radius: 14px;
+          display: grid;
+          gap: 10px;
+          justify-items: center;
+          min-height: 174px;
+          min-width: 0;
+          padding: 18px 14px;
+          text-align: center;
+        }
+
+        .bw-trip-delivery-grid article img {
+          height: 62px;
+          object-fit: contain;
+          width: 62px;
+        }
+
+        .bw-trip-delivery-grid article span {
+          display: grid;
+          gap: 5px;
+        }
+
+        .bw-trip-delivery-grid article strong {
+          color: #243024;
+          font-size: 14px;
+          line-height: 1.25;
+        }
+
+        .bw-trip-delivery-grid article small {
+          color: #596459;
+          font-size: 11px;
+          font-weight: 500;
+          line-height: 1.45;
+        }
+
+        .bw-trip-same-plan {
+          align-items: center;
+          background: var(--yellow);
+          border: 2px solid #E5CF00;
+          border-radius: 999px;
+          color: var(--green-dark);
+          display: flex;
+          font-size: 10px;
+          font-weight: 900;
+          height: 76px;
+          justify-content: center;
+          letter-spacing: 0.6px;
+          line-height: 1.05;
+          padding: 10px;
+          text-align: center;
+          width: 76px;
+        }
+
         .bw-trip-sample {
           background: #F2F6EA;
           border-bottom: 1px solid var(--line);
@@ -1938,6 +2598,14 @@
         }
 
         @media (max-width: 1040px) {
+          .bw-trip-delivery-inner {
+            grid-template-columns: 1fr;
+          }
+
+          .bw-trip-delivery-heading {
+            max-width: 720px;
+          }
+
           .bw-trip-sample-grid {
             grid-template-columns: 1fr;
           }
@@ -1968,6 +2636,17 @@
             padding-inline: 8px;
           }
 
+          bw-berlin-trip-planner-page[data-bw-offer-state="active"] .bw-trip-intro {
+            gap: 16px;
+            grid-template-columns: 1fr;
+            text-align: center;
+          }
+
+          bw-berlin-trip-planner-page[data-bw-offer-state="active"] .bw-trip-intro h1,
+          bw-berlin-trip-planner-page[data-bw-offer-state="active"] .bw-trip-intro-copy {
+            margin-inline: auto;
+          }
+
           .bw-trip-intro .bw-trip-kicker {
             font-size: 11px;
             letter-spacing: 1.8px;
@@ -1984,6 +2663,17 @@
             font-size: 15px;
             line-height: 1.5;
             margin-top: 12px;
+          }
+
+          .bw-trip-launch-offer {
+            margin-inline: auto;
+            max-width: 430px;
+            padding: 17px;
+            width: 100%;
+          }
+
+          .bw-trip-launch-offer-price {
+            font-size: 25px;
           }
 
           .bw-trip-value-first {
@@ -2050,6 +2740,42 @@
           .bw-trip-proof-item img {
             height: 42px;
             width: 42px;
+          }
+
+          .bw-trip-delivery-proof {
+            padding: 34px 0;
+          }
+
+          .bw-trip-delivery-inner {
+            gap: 22px;
+          }
+
+          .bw-trip-delivery-heading {
+            text-align: center;
+          }
+
+          .bw-trip-delivery-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .bw-trip-delivery-grid article {
+            gap: 14px;
+            grid-template-columns: 58px minmax(0, 1fr);
+            justify-items: start;
+            min-height: 118px;
+            padding: 16px 18px;
+            text-align: left;
+          }
+
+          .bw-trip-delivery-grid article img {
+            height: 54px;
+            width: 54px;
+          }
+
+          .bw-trip-same-plan {
+            height: 62px;
+            justify-self: center;
+            width: 62px;
           }
 
           .bw-trip-sample-grid {

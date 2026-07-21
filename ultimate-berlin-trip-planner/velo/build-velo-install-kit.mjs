@@ -31,7 +31,7 @@ const SOURCES = [
     badge: 'Merge exports',
     source: 'http-functions.js',
     target: 'Merge into the existing live Backend/http-functions.js file.',
-    note: 'Keep existing live endpoints. Add the imports plus tripPlannerLead, tripPlannerAi, and tripPlannerBooking handlers from this source.'
+    note: 'Keep existing live endpoints. Add tripPlannerLead and tripPlannerBooking; keep the legacy tripPlannerAi handler only as the HTTP 410 ai_disabled compatibility response.'
   },
   {
     id: 'jobs',
@@ -100,10 +100,10 @@ function checklistHtml(todoCount) {
       <li>Run the pre-publish gate commands below from <code>berlinwalk-widgets/</code>.</li>
       ${idWarning}
       <li>Confirm <code>TripPlannerLeads</code> passes remote preflight with all critical fields verified.</li>
-      <li>Add <code>GEMINI_API_KEY</code> in Wix Secrets Manager if the optional AI polish endpoint should run live.</li>
+      <li>No AI provider key or AI budget collection is required for Trip Planner 3.1.</li>
       <li>Create <code>Backend/emailMarketingSubscription.js</code> if missing, then paste the helper source below.</li>
       <li>Create <code>Backend/tripPlannerFunnel.js</code> in Wix and paste the full source below.</li>
-      <li>Merge the <code>tripPlannerLead</code>, <code>tripPlannerAi</code>, and <code>tripPlannerBooking</code> handlers into live <code>Backend/http-functions.js</code>.</li>
+      <li>Merge <code>tripPlannerLead</code> and <code>tripPlannerBooking</code>. Keep <code>tripPlannerAi</code> only as the HTTP 410 <code>ai_disabled</code> compatibility handler.</li>
       <li>Merge the hourly <code>processTripPlannerDueEmails</code> entry into <code>jobs.config</code>.</li>
       <li>Publish Wix, then run remote preflight and the live smoke helper with a real test inbox.</li>
     </ol>`;

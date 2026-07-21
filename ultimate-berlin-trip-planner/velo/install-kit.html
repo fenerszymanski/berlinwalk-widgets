@@ -325,7 +325,7 @@
       <aside class="bw-status">
         <div>
           <p class="bw-kicker">Generated</p>
-          <p><strong>2026-07-04 19:14:12</strong></p>
+          <p><strong>2026-07-20 22:31:31</strong></p>
           <p class="bw-footer-note">Source folder: <code>ultimate-berlin-trip-planner/velo/</code></p>
         </div>
         <div class="bw-alert is-good">
@@ -342,10 +342,10 @@
       <li>Run the pre-publish gate commands below from <code>berlinwalk-widgets/</code>.</li>
       <li class="is-good">Triggered Email placeholders are gone in the generated source.</li>
       <li>Confirm <code>TripPlannerLeads</code> passes remote preflight with all critical fields verified.</li>
-      <li>Add <code>GEMINI_API_KEY</code> in Wix Secrets Manager if the optional AI polish endpoint should run live.</li>
+      <li>No AI provider key or AI budget collection is required for Trip Planner 3.1.</li>
       <li>Create <code>Backend/emailMarketingSubscription.js</code> if missing, then paste the helper source below.</li>
       <li>Create <code>Backend/tripPlannerFunnel.js</code> in Wix and paste the full source below.</li>
-      <li>Merge the <code>tripPlannerLead</code>, <code>tripPlannerAi</code>, and <code>tripPlannerBooking</code> handlers into live <code>Backend/http-functions.js</code>.</li>
+      <li>Merge <code>tripPlannerLead</code> and <code>tripPlannerBooking</code>. Keep <code>tripPlannerAi</code> only as the HTTP 410 <code>ai_disabled</code> compatibility handler.</li>
       <li>Merge the hourly <code>processTripPlannerDueEmails</code> entry into <code>jobs.config</code>.</li>
       <li>Publish Wix, then run remote preflight and the live smoke helper with a real test inbox.</li>
     </ol>
@@ -512,31 +512,20 @@ export async function subscribeEmailMarketing(email) {
       <p class="bw-target">Create this backend file in Wix Developer Tools.</p>
       <p class="bw-note">Paste the full source into a new Backend file named tripPlannerFunnel.js.</p>
       <div class="bw-meta">
-        <span>1192 lines</span>
-        <span>38.6 KB</span>
+        <span>640 lines</span>
+        <span>21.0 KB</span>
         <span>tripPlannerFunnel.js</span>
       </div>
       <textarea id="source-funnel" readonly spellcheck="false">import wixData from 'wix-data';
 import { contacts, triggeredEmails } from 'wix-crm-backend';
-import { getSecret } from 'wix-secrets-backend';
-import { fetch } from 'wix-fetch';
 import { subscribeEmailMarketing } from 'backend/emailMarketingSubscription';
 
 const COLLECTION = 'TripPlannerLeads';
-const AI_BUDGET_COLLECTION = 'TripPlannerAiBudget';
 const CONTACT_LABEL = 'Ultimate Berlin Trip Planner Lead';
 const TIMEZONE = 'Europe/Berlin';
 const BOOKING_SHORT_URL = 'https://www.berlinwalk.com/book';
 const BRANDED_PLANNER_URL = 'https://www.berlinwalk.com/berlin-trip-planner';
 const DUE_QUERY_PAGE_SIZE = 100;
-const GEMINI_API_ROOT = 'https://generativelanguage.googleapis.com/v1beta/models';
-const GEMINI_DEFAULT_MODEL = 'gemini-2.5-flash';
-const GEMINI_API_KEY_SECRET_NAMES = ['GEMINI_API_KEY', 'GOOGLE_AI_API_KEY', 'GOOGLE_GEMINI_API_KEY'];
-const GEMINI_MODEL_SECRET_NAMES = ['TRIP_PLANNER_GEMINI_MODEL', 'GEMINI_MODEL'];
-const AI_GENERATION_LIMIT = 2;
-const AI_DAILY_GENERATION_LIMIT = 5000;
-const AI_MONTHLY_GENERATION_LIMIT = AI_DAILY_GENERATION_LIMIT * 30;
-const PRIVATE_TEXT_PATTERN = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i;
 
 const STAGES = [
   {
@@ -674,549 +663,8 @@ function validateBookingPayload(payload) {
   };
 }
 
-function cleanList(values, maxItems = 12, maxLength = 140) {
-  if (!Array.isArray(values)) return [];
-  return values
-    .map(value =&gt; cleanText(value, '', maxLength))
-    .filter(Boolean)
-    .slice(0, maxItems);
-}
-
-function cleanRecord(source, fields, maxLength = 220) {
-  const item = {};
-  fields.forEach(field =&gt; {
-    const value = cleanText(source &amp;&amp; source[field], '', maxLength);
-    if (value) item[field] = value;
-  });
-  return item;
-}
-
-function cleanPublicPlannerText(value, fallback = '', maxLength = 800) {
-  const text = cleanText(value, fallback, maxLength);
-  if (PRIVATE_TEXT_PATTERN.test(text)) return '';
-  return text;
-}
-
-function cleanPublicPlannerList(values, maxItems = 12, maxLength = 140) {
-  if (!Array.isArray(values)) return [];
-  return values
-    .map(value =&gt; cleanPublicPlannerText(value, '', maxLength))
-    .filter(Boolean)
-    .slice(0, maxItems);
-}
-
-function cleanPublicPlannerRecord(source, fields, maxLength = 220) {
-  const item = {};
-  fields.forEach(field =&gt; {
-    const value = cleanPublicPlannerText(source &amp;&amp; source[field], '', maxLength);
-    if (value) item[field] = value;
-  });
-  return item;
-}
-
-function validateAiEnhancementPayload(payload) {
-  const plan = payload &amp;&amp; payload.plan;
-  const days = Array.isArray(plan &amp;&amp; plan.days) ? plan.days : [];
-  if (!plan || !days.length) throw invalidPayload('plan.days are required');
-
-  return {
-    inputs: cleanPublicPlannerRecord(payload &amp;&amp; payload.inputs, [
-      'arrivalDate',
-      'tripLength',
-      'arrivalTime',
-      'arrivalPoint',
-      'stayArea',
-      'groupType',
-      'firstTime',
-      'interests',
-      'budgetStyle',
-      'mustHandle',
-      'pace',
-      'tourIntent'
-    ]),
-    weather: cleanPublicPlannerRecord(payload &amp;&amp; payload.weather, ['title', 'mode', 'copy', 'advice', 'tripSummary']),
-    tourSlot: cleanPublicPlannerRecord(payload &amp;&amp; payload.tourSlot, ['dayLabel', 'dateLabel', 'timeLabel', 'booked']),
-    plan: {
-      title: cleanPublicPlannerText(plan.title, 'Ultimate Berlin Trip Plan', 180),
-      summary: cleanPublicPlannerText(plan.summary, '', 650),
-      ticket: cleanPublicPlannerText(plan.ticket, '', 160),
-      tourFit: cleanPublicPlannerText(plan.tourFit, '', 160),
-      arrivalStatus: cleanPublicPlannerText(plan.arrivalStatus, '', 160),
-      days: days.slice(0, 7).map(day =&gt; ({
-        dayNumber: cleanNumber(day &amp;&amp; day.dayNumber, 1, 1, 7),
-        date: cleanPublicPlannerText(day &amp;&amp; day.date, '', 80),
-        title: cleanPublicPlannerText(day &amp;&amp; day.title, '', 180),
-        theme: cleanPublicPlannerText(day &amp;&amp; day.theme, '', 160),
-        places: cleanPublicPlannerList(day &amp;&amp; day.places, 6, 120),
-        blocks: Array.isArray(day &amp;&amp; day.blocks)
-          ? day.blocks.slice(0, 6).map(block =&gt; ({
-            time: cleanPublicPlannerText(block &amp;&amp; block.time, '', 80),
-            title: cleanPublicPlannerText(block &amp;&amp; block.title, '', 180),
-            copy: cleanPublicPlannerText(block &amp;&amp; block.copy, '', 280)
-          }))
-          : [],
-        risks: cleanPublicPlannerList(day &amp;&amp; day.risks, 6, 80)
-      }))
-    }
-  };
-}
-
-async function readFirstSecret(names) {
-  for (const name of names) {
-    try {
-      const value = cleanText(await getSecret(name), '', 2000);
-      if (value) return value;
-    } catch (error) {
-      // Missing secrets throw in Wix; try the next accepted name.
-    }
-  }
-  return '';
-}
-
-function geminiResponseSchema() {
-  return {
-    type: 'object',
-    properties: {
-      noteTitle: { type: 'string' },
-      routeIntro: { type: 'string' },
-      dayStories: {
-        type: 'array',
-        items: {
-          type: 'object',
-          properties: {
-            dayNumber: { type: 'number' },
-            text: { type: 'string' }
-          },
-          required: ['dayNumber', 'text']
-        }
-      },
-      weatherSentence: { type: 'string' },
-      tourSentence: { type: 'string' },
-      chips: {
-        type: 'array',
-        items: {
-          type: 'object',
-          properties: {
-            label: { type: 'string' },
-            value: { type: 'string' }
-          },
-          required: ['label', 'value']
-        }
-      }
-    },
-    required: ['noteTitle', 'routeIntro', 'dayStories', 'weatherSentence', 'tourSentence', 'chips']
-  };
-}
-
-function geminiPrompt(input) {
-  return [
-    'You are Yusuf from BerlinWalk, writing a warm, friendly, and personal note to someone who just planned a Berlin trip.',
-    'Your voice must sound like a welcoming local guide: speak directly to the guest, be conversational, slightly humorous/witty, and enthusiastic.',
-    'GRAMMAR &amp; VOICE: Write in a natural, friendly, and active guide voice. Always use first-person singular (&quot;I&quot;, &quot;my&quot;, &quot;me&quot;) rather than &quot;we&quot; or &quot;our&quot; when referring to yourself as the guide or creator of this plan. Write naturally and idiomatically without forcing first-person pronouns into every sentence, and avoid awkward robotic phrasing like &quot;I start you&quot;.',
-    'Explain the logic and reasoning (the &quot;why&quot;) behind the routing and sequence of stops in this itinerary (e.g., why a light start on Day 1, why to see X before Y, why Potsdam is placed on a specific day, or why Mitte stays central).',
-    'The route is fixed. Do not change the day order, dates, times, tour slot, places, or map stops.',
-    'Do not invent restaurants, attractions, neighborhoods, warnings, ticket rules, or booking advice.',
-    'Apart from those route facts, write freely in friendly simple English.',
-    'Mention a few real places from the itinerary and explain, in normal guide language, why they make sense in that order.',
-    'Do not list the raw interest labels. Turn them into normal travel language.',
-    'Avoid planner/software words such as framework, route logic, anchor, layer, cluster, optimize, constraints, matrix.',
-    'No hype, no sales voice, no generic AI itinerary language.',
-    'If you refer to &quot;next day&quot; or &quot;after that&quot;, check the actual day order in the input first.',
-    'noteTitle must be short, natural, and friendly.',
-    'routeIntro must be one friendly paragraph, 70-120 words, using real places or days from the itinerary, explaining the plan\'s overall reasoning.',
-    'dayStories must include exactly one item for every input.plan.days item. Each text should be 25-55 words, one or two natural sentences, explaining the &quot;why&quot; of that specific day\'s stop order/rhythm in Yusuf\'s personal guide voice.',
-    'weatherSentence must be one short practical sentence.',
-    'If input.tourSlot has a date/time and is not booked, tourSentence should mention it naturally. If booked, use meeting-point/prep language.',
-    'chips may be an empty array. If used, keep them short, human, and fun.',
-    '',
-    'Return valid JSON only matching the requested schema. Do not use markdown.',
-    '',
-    'Planner input:',
-    JSON.stringify(input)
-  ].join('\n');
-}
-
-function extractGeminiText(parsed) {
-  const candidates = parsed &amp;&amp; parsed.candidates;
-  const parts = candidates &amp;&amp; candidates[0] &amp;&amp; candidates[0].content &amp;&amp; candidates[0].content.parts;
-  if (!Array.isArray(parts)) return '';
-  return parts.map(part =&gt; cleanText(part &amp;&amp; part.text, '', 5000)).filter(Boolean).join('\n');
-}
-
-function parseJsonText(text) {
-  const raw = cleanText(text, '', 12000);
-  if (!raw) return {};
-  try {
-    return JSON.parse(raw);
-  } catch (error) {
-    const match = raw.match(/\{[\s\S]*\}/);
-    if (!match) throw error;
-    return JSON.parse(match[0]);
-  }
-}
-
-function sanitizeAiEnhancement(data, input, model, usage) {
-  const validDays = {};
-  input.plan.days.forEach(day =&gt; {
-    validDays[day.dayNumber] = true;
-  });
-
-  const dayStories = Array.isArray(data &amp;&amp; data.dayStories)
-    ? data.dayStories.map(item =&gt; ({
-      dayNumber: cleanNumber(item &amp;&amp; item.dayNumber, 0, 0, 7),
-      text: cleanText(item &amp;&amp; item.text, '', 360)
-    })).filter(item =&gt; validDays[item.dayNumber] &amp;&amp; item.text).slice(0, input.plan.days.length)
-    : [];
-
-  return {
-    provider: 'gemini',
-    model,
-    noteTitle: cleanText(data &amp;&amp; (data.noteTitle || data.headline), 'Yusuf guide read', 90),
-    routeIntro: cleanText(data &amp;&amp; (data.routeIntro || data.guideNote || data.localRead), '', 620),
-    dayStories,
-    weatherSentence: cleanText(data &amp;&amp; data.weatherSentence, '', 220),
-    tourSentence: cleanText(data &amp;&amp; (data.tourSentence || data.tourNote), '', 220),
-    chips: Array.isArray(data &amp;&amp; data.chips)
-      ? data.chips.map(item =&gt; ({
-        label: cleanText(item &amp;&amp; item.label, '', 34),
-        value: cleanText(item &amp;&amp; item.value, '', 90)
-      })).filter(item =&gt; item.label &amp;&amp; item.value).slice(0, 3)
-      : [],
-    headline: cleanText(data &amp;&amp; data.headline, 'Local guide read', 90),
-    localRead: cleanText(data &amp;&amp; data.localRead, '', 420),
-    watchOut: cleanText(data &amp;&amp; data.watchOut, '', 280),
-    tourNote: cleanText(data &amp;&amp; data.tourNote, '', 220),
-    usage: {
-      promptTokens: cleanNumber(usage &amp;&amp; usage.promptTokenCount, 0, 0, 100000),
-      outputTokens: cleanNumber(usage &amp;&amp; usage.candidatesTokenCount, 0, 0, 100000),
-      totalTokens: cleanNumber(usage &amp;&amp; usage.totalTokenCount, 0, 0, 100000)
-    }
-  };
-}
-
-function aiQuotaIdentity(payload, input) {
-  const email = normalizeEmail(payload &amp;&amp; (payload.quotaEmail || payload.email));
-  const arrivalDate = cleanText(input &amp;&amp; input.inputs &amp;&amp; input.inputs.arrivalDate);
-  if (!validEmail(email) || !/^\d{4}-\d{2}-\d{2}$/.test(arrivalDate)) {
-    return { ok: false, email: '', arrivalDate: '', leadKey: '' };
-  }
-  return {
-    ok: true,
-    email,
-    arrivalDate,
-    leadKey: leadKey(email, arrivalDate)
-  };
-}
-
-function leadQuotaState(used) {
-  return {
-    limit: AI_GENERATION_LIMIT,
-    used,
-    remaining: Math.max(0, AI_GENERATION_LIMIT - used)
-  };
-}
-
-async function checkAiLeadQuota(payload, input, now) {
-  const identity = aiQuotaIdentity(payload, input);
-  if (!identity.ok) {
-    return {
-      ok: false,
-      reason: 'ai_quota_email_required',
-      quota: leadQuotaState(0)
-    };
-  }
-
-  const existing = await findExistingLead(identity.leadKey);
-  if (!existing) {
-    return {
-      ok: false,
-      reason: 'ai_quota_lead_not_found',
-      quota: leadQuotaState(0)
-    };
-  }
-
-  const used = cleanNumber(existing.aiRequestCount, 0, 0, 1000);
-  if (used &gt;= AI_GENERATION_LIMIT) {
-    if (!existing.aiLimitReachedAt) {
-      await wixData.update(
-        COLLECTION,
-        Object.assign({}, existing, { aiLimitReachedAt: now, updatedAt: now }),
-        { suppressAuth: true }
-      );
-    }
-    return {
-      ok: false,
-      reason: 'ai_quota_limit',
-      quota: leadQuotaState(used)
-    };
-  }
-
-  return {
-    ok: true,
-    lead: existing,
-    used,
-    quota: leadQuotaState(used)
-  };
-}
-
-async function claimAiLeadQuota(lead, used, now) {
-  const nextUsed = used + 1;
-  await wixData.update(
-    COLLECTION,
-    Object.assign({}, lead, {
-      aiRequestCount: nextUsed,
-      aiLastRequestedAt: now,
-      updatedAt: now
-    }),
-    { suppressAuth: true }
-  );
-
-  return {
-    ok: true,
-    quota: leadQuotaState(nextUsed)
-  };
-}
-
-function aiBudgetPeriods(now) {
-  const dayKey = berlinDateKeyFrom(now);
-  const monthKey = dayKey.slice(0, 7);
-  return [
-    {
-      type: 'day',
-      periodKey: `day|${dayKey}`,
-      periodLabel: dayKey,
-      limit: AI_DAILY_GENERATION_LIMIT
-    },
-    {
-      type: 'month',
-      periodKey: `month|${monthKey}`,
-      periodLabel: monthKey,
-      limit: AI_MONTHLY_GENERATION_LIMIT
-    }
-  ];
-}
-
-function budgetState(period, used) {
-  return {
-    periodKey: period.periodKey,
-    periodType: period.type,
-    periodLabel: period.periodLabel,
-    limit: period.limit,
-    used,
-    remaining: Math.max(0, period.limit - used)
-  };
-}
-
-function budgetSummary(states) {
-  return states.reduce((acc, state) =&gt; {
-    acc[state.periodType === 'day' ? 'daily' : 'monthly'] = state;
-    return acc;
-  }, {});
-}
-
-async function findAiBudgetCounter(periodKey) {
-  const results = await wixData.query(AI_BUDGET_COLLECTION)
-    .eq('periodKey', periodKey)
-    .limit(1)
-    .find({ suppressAuth: true });
-
-  return results.items &amp;&amp; results.items.length ? results.items[0] : null;
-}
-
-async function saveAiBudgetCounter(period, existing, nextUsed, now) {
-  const item = Object.assign({}, existing || {}, {
-    periodKey: period.periodKey,
-    periodType: period.type,
-    periodLabel: period.periodLabel,
-    requestCount: nextUsed,
-    limit: period.limit,
-    updatedAt: now
-  });
-
-  if (existing &amp;&amp; existing._id) {
-    return await wixData.update(AI_BUDGET_COLLECTION, item, { suppressAuth: true });
-  }
-
-  return await wixData.insert(
-    AI_BUDGET_COLLECTION,
-    Object.assign({}, item, { createdAt: now }),
-    { suppressAuth: true }
-  );
-}
-
-async function markAiBudgetLimitReached(period, existing, now) {
-  if (!existing || existing.limitReachedAt) return;
-  await wixData.update(
-    AI_BUDGET_COLLECTION,
-    Object.assign({}, existing, {
-      periodType: period.type,
-      periodLabel: period.periodLabel,
-      limit: period.limit,
-      limitReachedAt: now,
-      updatedAt: now
-    }),
-    { suppressAuth: true }
-  );
-}
-
-async function claimAiBudget(now) {
-  const periods = aiBudgetPeriods(now);
-  const snapshots = [];
-
-  for (const period of periods) {
-    const existing = await findAiBudgetCounter(period.periodKey);
-    const used = cleanNumber(existing &amp;&amp; existing.requestCount, 0, 0, 1000000000);
-    if (used &gt;= period.limit) {
-      await markAiBudgetLimitReached(period, existing, now);
-      return {
-        ok: false,
-        reason: period.type === 'day' ? 'ai_budget_daily_limit' : 'ai_budget_monthly_limit',
-        budget: budgetSummary([budgetState(period, used)])
-      };
-    }
-    snapshots.push({ period, existing, used });
-  }
-
-  const states = [];
-  for (const snapshot of snapshots) {
-    const nextUsed = snapshot.used + 1;
-    await saveAiBudgetCounter(snapshot.period, snapshot.existing, nextUsed, now);
-    states.push(budgetState(snapshot.period, nextUsed));
-  }
-
-  return {
-    ok: true,
-    budget: budgetSummary(states)
-  };
-}
-
-export async function enhanceTripPlannerPlan(payload) {
-  const input = validateAiEnhancementPayload(payload);
-  const apiKey = await readFirstSecret(GEMINI_API_KEY_SECRET_NAMES);
-  if (!apiKey) {
-    return { ok: false, reason: 'missing_api_key' };
-  }
-
-  const now = new Date();
-  let leadQuota;
-  try {
-    leadQuota = await checkAiLeadQuota(payload, input, now);
-  } catch (error) {
-    return {
-      ok: false,
-      reason: 'ai_quota_guard_error',
-      message: cleanText(error &amp;&amp; error.message ? error.message : error, '', 500)
-    };
-  }
-  if (!leadQuota.ok) {
-    return {
-      ok: false,
-      reason: leadQuota.reason,
-      quota: leadQuota.quota
-    };
-  }
-
-  let budget;
-  try {
-    budget = await claimAiBudget(now);
-  } catch (error) {
-    return {
-      ok: false,
-      reason: 'ai_budget_guard_error',
-      quota: leadQuota.quota,
-      message: cleanText(error &amp;&amp; error.message ? error.message : error, '', 500)
-    };
-  }
-  if (!budget.ok) {
-    return {
-      ok: false,
-      reason: budget.reason,
-      quota: leadQuota.quota,
-      budget: budget.budget
-    };
-  }
-
-  let quota;
-  try {
-    quota = await claimAiLeadQuota(leadQuota.lead, leadQuota.used, now);
-  } catch (error) {
-    return {
-      ok: false,
-      reason: 'ai_quota_guard_error',
-      budget: budget.budget,
-      message: cleanText(error &amp;&amp; error.message ? error.message : error, '', 500)
-    };
-  }
-
-  const requestedModel = await readFirstSecret(GEMINI_MODEL_SECRET_NAMES);
-  const model = requestedModel || GEMINI_DEFAULT_MODEL;
-  const url = `${GEMINI_API_ROOT}/${encodeURIComponent(model)}:generateContent`;
-
-  try {
-    const geminiResponse = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-goog-api-key': apiKey
-      },
-      body: JSON.stringify({
-        systemInstruction: {
-          parts: [{
-            text: 'You improve traveler-facing copy for BerlinWalk while preserving deterministic itinerary logic exactly.'
-          }]
-        },
-        contents: [{
-          role: 'user',
-          parts: [{ text: geminiPrompt(input) }]
-        }],
-        generationConfig: {
-          temperature: 0.35,
-          maxOutputTokens: 1200,
-          thinkingConfig: {
-            thinkingBudget: 0
-          },
-          responseMimeType: 'application/json',
-          responseJsonSchema: geminiResponseSchema()
-        }
-      })
-    });
-
-    const text = await geminiResponse.text();
-    let parsed = {};
-    try {
-      parsed = text ? JSON.parse(text) : {};
-    } catch (error) {
-      parsed = {};
-    }
-
-    if (!geminiResponse.ok) {
-      return {
-        ok: false,
-        reason: 'api_error',
-        status: geminiResponse.status,
-        message: cleanText(parsed &amp;&amp; (parsed.error &amp;&amp; parsed.error.message || parsed.message) || text, '', 500)
-      };
-    }
-
-    const modelText = extractGeminiText(parsed);
-    const enhancement = sanitizeAiEnhancement(parseJsonText(modelText), input, model, parsed.usageMetadata || {});
-    if (!enhancement.routeIntro &amp;&amp; !enhancement.dayStories.length) {
-      return { ok: false, reason: 'empty_ai_result', model };
-    }
-
-    return {
-      ok: true,
-      enhancement,
-      quota: quota.quota,
-      budget: budget.budget
-    };
-  } catch (error) {
-    return {
-      ok: false,
-      reason: 'network_or_parse_error',
-      message: cleanText(error &amp;&amp; error.message ? error.message : error, '', 500)
-    };
-  }
+export async function enhanceTripPlannerPlan() {
+  return { ok: false, error: 'ai_disabled', reason: 'ai_disabled' };
 }
 
 function dateFromKey(dateKey) {
@@ -1719,14 +1167,14 @@ export async function markTripPlannerLeadBooked(payload) {
         <button class="bw-copy" type="button" data-copy-target="source-http">Copy source</button>
       </div>
       <p class="bw-target">Merge into the existing live Backend/http-functions.js file.</p>
-      <p class="bw-note">Keep existing live endpoints. Add the imports plus tripPlannerLead, tripPlannerAi, and tripPlannerBooking handlers from this source.</p>
+      <p class="bw-note">Keep existing live endpoints. Add tripPlannerLead and tripPlannerBooking; keep the legacy tripPlannerAi handler only as the HTTP 410 ai_disabled compatibility response.</p>
       <div class="bw-meta">
-        <span>145 lines</span>
-        <span>3.5 KB</span>
+        <span>119 lines</span>
+        <span>2.8 KB</span>
         <span>http-functions.js</span>
       </div>
       <textarea id="source-http" readonly spellcheck="false">import { ok, badRequest, serverError, response } from 'wix-http-functions';
-import { saveTripPlannerLead, markTripPlannerLeadBooked, enhanceTripPlannerPlan } from 'backend/tripPlannerFunnel';
+import { saveTripPlannerLead, markTripPlannerLeadBooked } from 'backend/tripPlannerFunnel';
 
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
@@ -1792,37 +1240,11 @@ export function options_tripPlannerAi(request) {
 }
 
 export async function post_tripPlannerAi(request) {
-  let payload;
-  try {
-    payload = await request.body.json();
-  } catch (error) {
-    return badRequest({
-      headers: CORS_HEADERS,
-      body: { ok: false, error: 'invalid_json' }
-    });
-  }
-
-  try {
-    const result = await enhanceTripPlannerPlan(payload);
-    return ok({
-      headers: CORS_HEADERS,
-      body: result
-    });
-  } catch (error) {
-    const code = error &amp;&amp; error.code ? error.code : 'server_error';
-    if (code === 'invalid_payload') {
-      return badRequest({
-        headers: CORS_HEADERS,
-        body: { ok: false, error: code, details: error.message }
-      });
-    }
-
-    console.error('tripPlannerAi failed', error);
-    return serverError({
-      headers: CORS_HEADERS,
-      body: { ok: false, error: code }
-    });
-  }
+  return response({
+    status: 410,
+    headers: CORS_HEADERS,
+    body: { ok: false, error: 'ai_disabled', reason: 'ai_disabled' }
+  });
 }
 
 export function options_tripPlannerBooking(request) {

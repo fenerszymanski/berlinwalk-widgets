@@ -1,5 +1,9 @@
 # Ultimate Planner Gemini Canliya Alma
 
+> **TARIHSEL DOSYA - UYGULAMA.** Trip Planner 3.1 musteri runtime'inda AI
+> tamamen kapalidir. Gemini secret'i ekleme, AI endpoint'ini acma veya AI smoke
+> yapma. Guncel release kapilari `TRIP_PLANNER_31_RELEASE_RUNBOOK.md` dosyasinda.
+
 Bu dosya sadece son Wix adimi icin kisa checklist. Kod tarafinda local gate
 temiz: `149 pass, 1 warn, 0 block`. Kalan uyari, Wix'te `tripPlannerAi`
 endpoint'i henuz publish edilmedigi icin var.

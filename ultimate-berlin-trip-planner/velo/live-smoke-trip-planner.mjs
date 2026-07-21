@@ -6,21 +6,13 @@ import path from 'node:path';
 const DEFAULT_BASE_URL = 'https://www.berlinwalk.com';
 const BRANDED_PLANNER_URL = 'https://www.berlinwalk.com/berlin-trip-planner';
 const OUTPUT_DIR = 'output/qa/ultimate-trip-planner-live-smoke';
-const GEMINI_FLASH_PRICING = {
-  model: 'gemini-2.5-flash',
-  inputUsdPerMillionTokens: 0.30,
-  outputUsdPerMillionTokens: 2.50,
-  checkedAt: '2026-06-02',
-  source: 'https://ai.google.dev/gemini-api/docs/pricing'
-};
 
 function usage() {
   console.log(`Usage:
   node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --email you@example.com
   node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email you@example.com
   node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email you@example.com --booking
-  node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email you@example.com --ai
-  node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email you@example.com --ai-only
+  node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --ai-only
 
 Defaults to dry-run. It prints and records the payloads but does not call Wix
 unless --live is present.
@@ -31,8 +23,8 @@ Options:
   --tripLength N     1-7. Defaults to 3.
   --base URL         Defaults to https://www.berlinwalk.com.
   --booking          Also POST /_functions/tripPlannerBooking after lead.
-  --ai               Also POST /_functions/tripPlannerAi after lead.
-  --ai-only          Only POST /_functions/tripPlannerAi; no new lead/email call. Requires an existing lead for the email + arrival.
+  --ai               Also verify that the legacy /_functions/tripPlannerAi endpoint returns 410 ai_disabled.
+  --ai-only          Only verify the legacy AI-disabled response; no lead, email, or booking write.
   --live             Actually call the live endpoints.
   --out FILE         Optional result JSON path.
 `);
@@ -107,34 +99,6 @@ function validEmail(email) {
 
 function safeJson(value) {
   return JSON.stringify(value, null, 2);
-}
-
-function cleanNumber(value) {
-  const number = Number(value);
-  return Number.isFinite(number) && number >= 0 ? number : 0;
-}
-
-function estimateGeminiCost(response) {
-  const enhancement = response?.body?.enhancement;
-  const usage = enhancement?.usage || {};
-  const promptTokens = cleanNumber(usage.promptTokens);
-  const outputTokens = cleanNumber(usage.outputTokens);
-  const totalTokens = cleanNumber(usage.totalTokens || promptTokens + outputTokens);
-  const estimatedUsd = (promptTokens / 1_000_000 * GEMINI_FLASH_PRICING.inputUsdPerMillionTokens) +
-    (outputTokens / 1_000_000 * GEMINI_FLASH_PRICING.outputUsdPerMillionTokens);
-
-  if (!promptTokens && !outputTokens && !totalTokens) return null;
-
-  return {
-    provider: enhancement?.provider || 'gemini',
-    model: enhancement?.model || GEMINI_FLASH_PRICING.model,
-    promptTokens,
-    outputTokens,
-    totalTokens,
-    estimatedUsd: Number(estimatedUsd.toFixed(6)),
-    estimatedCents: Number((estimatedUsd * 100).toFixed(4)),
-    pricing: GEMINI_FLASH_PRICING
-  };
 }
 
 function buildPlannerPageUrl(options, arrivalDate, tripLength) {
@@ -227,154 +191,6 @@ function buildBookingPayload(leadPayload) {
   };
 }
 
-function buildAiPayload(leadPayload) {
-  const arrivalDate = leadPayload.arrivalDate;
-  const day2Date = leadPayload.recommendedTourDate || arrivalDate;
-  const day3Date = dateKey(addDays(new Date(`${arrivalDate}T12:00:00Z`), 2));
-
-  return {
-    quotaEmail: leadPayload.email,
-    inputs: {
-      arrivalDate,
-      tripLength: String(leadPayload.tripLength),
-      arrivalTime: leadPayload.arrivalTime,
-      arrivalPoint: leadPayload.arrivalPoint,
-      stayArea: leadPayload.stayArea,
-      groupType: leadPayload.groupType,
-      firstTime: leadPayload.firstTime,
-      interests: leadPayload.interests,
-      budgetStyle: leadPayload.budgetStyle,
-      mustHandle: leadPayload.mustHandle,
-      pace: leadPayload.pace,
-      tourIntent: leadPayload.tourIntent
-    },
-    weather: {
-      title: leadPayload.weatherTitle,
-      mode: 'Smoke test fallback',
-      copy: 'Use weather notes as a light planning check, not a full forecast.',
-      advice: leadPayload.weatherStrategy,
-      tripSummary: 'Mild Berlin fallback: keep one rain-safe indoor option and re-check weather close to arrival.'
-    },
-    tourSlot: {
-      dayLabel: 'Day 2',
-      dateLabel: day2Date,
-      timeLabel: leadPayload.recommendedTourTime,
-      booked: 'no'
-    },
-    plan: {
-      title: leadPayload.planTitle,
-      summary: 'Smoke test plan with arrival, BerlinWalk tour framework, Wall / Cold War layer, and one museum anchor.',
-      ticket: leadPayload.ticket,
-      tourFit: leadPayload.recommendedTourDay,
-      arrivalStatus: 'Weekday rules apply',
-      days: [
-        {
-          dayNumber: 1,
-          date: arrivalDate,
-          title: 'Arrival and first Berlin orientation',
-          theme: 'Arrival day',
-          places: ['World Clock', 'Museum Island', 'Hackescher Markt'],
-          blocks: [
-            {
-              time: '09:00-10:45',
-              title: 'Get central without over-solving Berlin',
-              copy: 'Use ABC from BER, drop bags if needed, then keep the first walk central.'
-            }
-          ],
-          risks: ['Arrival logistics']
-        },
-        {
-          dayNumber: 2,
-          date: day2Date,
-          title: 'BerlinWalk tour, then one Wall / Cold War layer',
-          theme: 'Tour + Wall / Cold War',
-          places: ['World Clock', 'Berlin Wall Memorial', 'Topography of Terror'],
-          blocks: [
-            {
-              time: '11:30-13:30',
-              title: 'BerlinWalk at 11:30 from the World Clock',
-              copy: 'Use the 2-hour walk as the main city framework.'
-            },
-            {
-              time: '14:00-16:30',
-              title: 'Add one Wall / Cold War stop',
-              copy: 'After lunch, choose one serious Wall or Cold War stop.'
-            }
-          ],
-          risks: ['Do not overfill the day']
-        },
-        {
-          dayNumber: 3,
-          date: day3Date,
-          title: 'Museum Island without museum overload',
-          theme: 'Museums and royal Berlin',
-          places: ['Museum Island', 'Brandenburg Gate', 'Reichstag'],
-          blocks: [
-            {
-              time: '10:30-12:30',
-              title: 'Pick one museum anchor',
-              copy: 'One checked-open museum beats four rushed ones.'
-            }
-          ],
-          risks: ['Check timed entry']
-        }
-      ].slice(0, leadPayload.tripLength)
-    }
-  };
-}
-
-function collectStrings(value, pathName = '$', rows = []) {
-  if (typeof value === 'string') {
-    rows.push({ path: pathName, value });
-    return rows;
-  }
-  if (Array.isArray(value)) {
-    value.forEach((item, index) => collectStrings(item, `${pathName}[${index}]`, rows));
-    return rows;
-  }
-  if (value && typeof value === 'object') {
-    for (const [key, item] of Object.entries(value)) {
-      collectStrings(item, `${pathName}.${key}`, rows);
-    }
-  }
-  return rows;
-}
-
-function assertAiPayloadPrivacy(aiPayload, leadPayload) {
-  const quotaEmail = String(aiPayload && aiPayload.quotaEmail || '').trim().toLowerCase();
-  const geminiBoundPayload = Object.assign({}, aiPayload);
-  delete geminiBoundPayload.quotaEmail;
-  const strings = collectStrings(geminiBoundPayload);
-  const email = String(leadPayload.email || '').trim().toLowerCase();
-  const leakedEmail = email
-    ? strings.find((row) => row.value.toLowerCase().includes(email))
-    : null;
-  const emailLike = strings.find((row) => /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i.test(row.value));
-  const emailKey = JSON.stringify(geminiBoundPayload).match(/"[^"]*email[^"]*"\s*:/i);
-
-  if (leakedEmail) {
-    throw new Error(`Gemini-bound AI payload includes lead email at ${leakedEmail.path}`);
-  }
-  if (emailLike) {
-    throw new Error(`Gemini-bound AI payload includes email-like text at ${emailLike.path}`);
-  }
-  if (emailKey) {
-    throw new Error('Gemini-bound AI payload includes an email-shaped key');
-  }
-  if (email && quotaEmail !== email) {
-    throw new Error('AI quotaEmail must match the smoke-test lead email for backend quota lookup.');
-  }
-
-  return {
-    checked: true,
-    stringCount: strings.length,
-    quotaEmailPresent: Boolean(quotaEmail),
-    geminiBoundEmailKey: false,
-    geminiBoundEmailLikeText: false,
-    geminiBoundLeadEmailIncluded: false
-  };
-}
-
 async function postJson(url, payload) {
   const response = await fetch(url, {
     method: 'POST',
@@ -443,8 +259,8 @@ async function main() {
     return;
   }
 
-  if (options.live && !validEmail(options.email)) {
-    console.error('--live requires a real --email address so the lead/AI quota lookup can be checked.');
+  if (options.live && !options.aiOnly && !validEmail(options.email)) {
+    console.error('--live requires a real --email address unless --ai-only is used.');
     process.exitCode = 1;
     return;
   }
@@ -457,8 +273,13 @@ async function main() {
 
   const leadPayload = buildLeadPayload(options);
   const bookingPayload = buildBookingPayload(leadPayload);
-  const aiPayload = buildAiPayload(leadPayload);
-  const aiPrivacy = options.ai ? assertAiPayloadPrivacy(aiPayload, leadPayload) : null;
+  const aiPayload = options.ai ? { compatibilityCheck: 'trip_planner_3_1_ai_disabled' } : null;
+  const aiPrivacy = options.ai ? {
+    checked: true,
+    piiIncluded: false,
+    quotaEmailIncluded: false,
+    runtimeAiDisabled: true
+  } : null;
   const baseUrl = String(options.baseUrl || DEFAULT_BASE_URL).replace(/\/$/, '');
   const result = {
     mode: options.live ? 'live' : 'dry-run',
@@ -503,18 +324,14 @@ async function main() {
 
   if (options.ai) {
     result.responses.ai = await postJson(`${baseUrl}/_functions/tripPlannerAi`, aiPayload);
-    assertResult('tripPlannerAi', result.responses.ai, (body) => {
-      if (!body.enhancement || !body.enhancement.routeIntro) throw new Error('tripPlannerAi response missing enhancement.routeIntro');
-      if (!Array.isArray(body.enhancement.dayStories)) throw new Error('tripPlannerAi response missing enhancement.dayStories');
-    });
-    result.aiCost = estimateGeminiCost(result.responses.ai);
+    if (result.responses.ai.status !== 410 || result.responses.ai.body?.error !== 'ai_disabled') {
+      throw new Error(`tripPlannerAi expected HTTP 410 ai_disabled, received HTTP ${result.responses.ai.status}`);
+    }
   }
 
   const outPath = writeResult(options, result);
   console.log(`LIVE OK: ${options.aiOnly ? 'tripPlannerAi only' : `tripPlannerLead${options.booking ? ' + tripPlannerBooking' : ''}${options.ai ? ' + tripPlannerAi' : ''}`}`);
-  if (result.aiCost) {
-    console.log(`Gemini usage: ${result.aiCost.promptTokens} input + ${result.aiCost.outputTokens} output tokens; estimated $${result.aiCost.estimatedUsd}`);
-  }
+  if (options.ai) console.log('Legacy AI endpoint: HTTP 410 ai_disabled (expected).');
   console.log(`Result written to ${path.relative(process.cwd(), outPath)}`);
 }
 

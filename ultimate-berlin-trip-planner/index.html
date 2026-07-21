@@ -1354,6 +1354,11 @@
       margin-top: 2px;
     }
 
+    #bw-trip-planner .bw-input-chip .bw-input-chip-icon {
+      color: var(--bw-green);
+      margin-top: 0;
+    }
+
     #bw-trip-planner .bw-trip-presets {
       background: var(--bw-white);
       border: 1px solid var(--bw-border);
@@ -13514,8 +13519,8 @@
               <div class="bw-pro-offer-item"><b>Useful checks</b><span>Weather, Sundays, Mondays and arrival</span></div>
             </div>
             <div class="bw-pro-offer-actions">
-              <span class="bw-pro-price">€7.99</span>
-              <button class="bw-pro-cta" type="button" data-pro-cta>Get my detailed Berlin plan — €7.99</button>
+              <span class="bw-pro-price" data-pro-price>€7.99</span>
+              <button class="bw-pro-cta" type="button" data-pro-cta>Get my detailed Berlin plan for €7.99</button>
             </div>
             <p class="bw-pro-offer-note" data-pro-note>Included in your detailed plan:</p>
             <div class="bw-compact-benefits" aria-label="Included in your detailed plan">
@@ -13558,7 +13563,6 @@
           <p class="bw-full-sub" data-full-sub>Your full plan appears here.</p>
         </div>
       </div>
-      <div data-ai-polish-panel></div>
       <div data-full-route-brief></div>
       <div data-day-jump-bar></div>
       <div class="bw-days" data-full-days></div>
@@ -13582,6 +13586,7 @@
   </section>
 </div>
 
+<script src="engine/trip-planner-runtime-v3-1.js"></script>
 <script src="engine/plan-artifact-v3.js"></script>
 <script src="engine/plan-artifact-v3-pdf.js"></script>
 <script>
@@ -13637,7 +13642,6 @@
   var BW_LOGO_ASPECT_RATIO = 1;
   var YUSUF_GUIDE_PHOTO_URL = 'assets/yusuf-local-guide.jpg';
   var LEAD_API_URL = 'https://www.berlinwalk.com/_functions/tripPlannerLead';
-  var AI_API_URL = 'https://www.berlinwalk.com/_functions/tripPlannerAi';
   var TRACK_EVENT_URL = 'https://berlinwalk-content-app.vercel.app/api/tp-event';
   var RESCUE_FACTS_API_URL = 'https://app.berlinwalk.com/api/rescue-plan';
   var TRACK_STORAGE_KEY = 'bwTripPlannerTracking.v1';
@@ -13645,7 +13649,6 @@
   var TRACK_SESSION_KEY = 'bwTripPlannerSessionId.v1';
   var CHECKOUT_SESSION_KEY = 'bwTripPlannerCheckoutSession.v1';
   var META_PURCHASE_GUARD_PREFIX = 'bwTripPlannerMetaPurchase.v1:';
-  var AI_GENERATION_LIMIT = 2;
   var LEGACY_UNLOCK_KEY = 'bw_trip_planner_unlock';
   var UNLOCK_KEY = 'bw_trip_planner_pro_entitlement_v1';
   var LITE_LEAD_KEY = 'bw_trip_planner_lite_lead_v1';
@@ -13653,8 +13656,17 @@
   var BRANDED_PLANNER_URL = 'https://www.berlinwalk.com/berlin-trip-planner';
   var TRIP_PLANNER_PRO_API_URL = 'https://berlinwalk-content-app.vercel.app/api/trip-planner-pro';
   var PLAN_ARTIFACT_CLIENT_CONTRACT_VERSION = 'plan_artifact_v3';
-  var PRO_OFFER_VARIANT = 'trip_planner_detailed_7_99';
-  var PRO_PRICE_EUR = 7.99;
+  var PRO_PRODUCT_KEY = window.BWTripPlannerRuntimeV31 ? window.BWTripPlannerRuntimeV31.PRODUCT_KEY : 'trip_planner_detailed';
+  var PRO_STANDARD_OFFER_ID = window.BWTripPlannerRuntimeV31 ? window.BWTripPlannerRuntimeV31.STANDARD_OFFER_ID : 'tp_standard_799';
+  var proOfferState = window.BWTripPlannerRuntimeV31 ? window.BWTripPlannerRuntimeV31.standardOffer() : {
+    offerId: PRO_STANDARD_OFFER_ID,
+    netAmountEurCents: 799,
+    listAmountEurCents: 799,
+    discountAmountEurCents: 0,
+    active: false,
+    trusted: false
+  };
+  var proOfferRequest = null;
   var FDR_OFFER_VARIANT = 'fdr_addon_2_99';
   var FDR_PRICE_EUR = 2.99;
   var LANDING_EXPERIMENT_ID = 'tp_lp_value_path_v1';
@@ -13682,7 +13694,7 @@
     food: { src: 'assets/day-art/day-oil-food.webp', alt: 'Oil painting style Berlin market and cafe neighborhood day' },
     free: { src: 'assets/day-art/day-oil-free.webp', alt: 'Oil painting style Berlin park and low budget day' },
     nightlife: { src: 'assets/day-art/day-oil-nightlife.webp', alt: 'Oil painting style Berlin evening and nightlife street' },
-    local: { src: 'assets/day-art/day-oil-local.webp', alt: 'Oil painting style Berlin local street and cafe' },
+    local: { src: 'assets/day-art/day-oil-local.webp', alt: 'Illustrated Berlin street and cafe' },
     potsdam: { src: 'assets/day-art/day-oil-potsdam.webp', alt: 'Oil painting style Potsdam palace and day trip' }
   };
   var BERLIN_ONE_OFF_HOLIDAYS = {
@@ -14030,10 +14042,6 @@
   var rescueFactsData = null;
   var rescueFactsKey = '';
   var rescueFactsRequestId = 0;
-  var aiEnhancement = null;
-  var aiStatus = 'idle';
-  var aiRequestId = 0;
-  var aiPlanSignature = '';
   var tripPlannerTracking = null;
   var landingExperiment = readLandingExperiment();
   var experimentExposureTracked = false;
@@ -14088,14 +14096,15 @@
     holocaust_memorial: { label: 'Holocaust Memorial', query: 'Memorial to the Murdered Jews of Europe Berlin', area: 'Mitte', type: 'history', lat: 52.5139, lng: 13.3787, closedDays: [], indoor: false, note: 'The Field of Stelae is open-air and always accessible; the underground information centre closes Mondays.', why: 'A moving labyrinth of 2,711 concrete slabs near the government quarter, built for quiet reflection and walking through.' },
     reichstag: { label: 'Reichstag', query: 'Reichstag Building Berlin', area: 'Mitte', type: 'landmark', lat: 52.5186, lng: 13.3762, closedDays: [], indoor: true, note: 'The dome needs advance registration and can close for security or maintenance.', why: 'The historic parliament building. The modern glass dome offers beautiful 360-degree views if you book ahead.' },
     gendarmenmarkt: { label: 'Gendarmenmarkt', query: 'Gendarmenmarkt Berlin', area: 'Mitte', type: 'landmark', lat: 52.5138, lng: 13.3927, why: 'Often called Berlin\'s most beautiful historic square, famous for its twin cathedrals and the grand Concert Hall.' },
-    nikolaiviertel: { label: 'Nikolaiviertel', query: 'Nikolaiviertel Berlin', area: 'Mitte', type: 'neighborhood', lat: 52.5169, lng: 13.4072, why: 'A reconstructed medieval quarter on the Spree. It has narrow cobblestone streets, making it perfect for a quiet stroll.' },
+    nikolaiviertel: { label: 'Nikolaiviertel', query: 'Nikolaiviertel Berlin', area: 'Mitte', type: 'neighborhood', lat: 52.5169, lng: 13.4072, why: 'A reconstructed historic quarter beside the Spree with narrow streets and small squares.' },
     berlin_cathedral: { label: 'Berlin Cathedral', query: 'Berliner Dom Berlin', area: 'Museum Island', type: 'landmark', lat: 52.5191, lng: 13.4011, closedDays: [], indoor: true, note: 'Visits usually run daily, but Sunday starts later and services can interrupt access.', why: 'A massive 19th-century Protestant cathedral with a giant green dome, offering beautiful views from the Lustgarten lawn.' },
     hackesche_hofe: { label: 'Hackesche Hofe', query: 'Hackesche Hoefe Berlin', area: 'Mitte', type: 'courtyards', lat: 52.5234, lng: 13.4022, why: 'A famous maze of eight connected courtyards filled with unique shops, art galleries, and historic tile facades.' },
     kastanienallee: { label: 'Kastanienallee', query: 'Kastanienallee Berlin', area: 'Prenzlauer Berg', type: 'neighborhood', lat: 52.5352, lng: 13.4102, why: 'A lovely street in Prenzlauer Berg lined with local boutiques, cozy cafes, and great spots for people-watching.' },
     topography_terror: { label: 'Topography of Terror', query: 'Topography of Terror Berlin', area: 'Mitte / Kreuzberg', type: 'history', lat: 52.5066, lng: 13.3823, closedDays: [], indoor: true, note: 'Daily indoor and outdoor history backup; 24/31 Dec and 1 Jan are closure exceptions.', why: 'A free, deep-dive historical exhibition built on the former Gestapo and SS headquarters site.' },
-    tiergarten: { label: 'Tiergarten', query: 'Tiergarten Berlin', area: 'Mitte / West', type: 'park', lat: 52.5145, lng: 13.3501, why: 'A massive central park with quiet forest paths, lakes, and hidden beer gardens. Perfect for escaping the city noise.' },
+    tiergarten: { label: 'Tiergarten', query: 'Tiergarten Berlin', area: 'Mitte / West', type: 'park', lat: 52.5145, lng: 13.3501, why: 'A large central park with wooded paths, lakes, and beer gardens.' },
     victory_column: { label: 'Victory Column', query: 'Siegessaeule Berlin', area: 'Tiergarten', type: 'landmark', lat: 52.5145, lng: 13.3501, why: 'A golden monument in the center of Tiergarten. Climbing the stairs offers a beautiful view down the main avenues.' },
     tempelhofer_feld: { label: 'Tempelhofer Feld', query: 'Tempelhofer Feld Berlin', area: 'Neukoelln / Tempelhof', type: 'park', lat: 52.473, lng: 13.4036, why: 'A massive former airport runways-turned-park where Berliners skate, cycle, and enjoy the sunset on the grass.' },
+    viktoriapark: { label: 'Viktoriapark', query: 'Viktoriapark Kreuzbergstrasse 15 Berlin', area: 'Kreuzberg', type: 'park', lat: 52.4887, lng: 13.3813, why: 'A hillside park in Kreuzberg near Bergmannstrasse, with paths leading up to the National Monument.' },
     treptower_park: { label: 'Treptower Park', query: 'Treptower Park Berlin', area: 'Treptow', type: 'park', lat: 52.4862, lng: 13.4691, why: 'A scenic riverside park featuring a hidden, monumental Soviet War Memorial that has to be seen to be believed.' },
     raw_gelande: { label: 'RAW-Gelande', query: 'RAW-Gelaende Berlin', area: 'Friedrichshain', type: 'nightlife', lat: 52.5075, lng: 13.4548, why: 'A gritty former railway yard covered in graffiti, now home to alternative clubs, food stalls, and creative spaces.' },
     oranienstrasse: { label: 'Oranienstrasse', query: 'Oranienstrasse Berlin', area: 'Kreuzberg', type: 'nightlife', lat: 52.5021, lng: 13.4219, why: 'The heart of Kreuzberg\'s alternative scene, packed with old-school punk bars, food spots, and local bookshops.' },
@@ -14121,6 +14130,7 @@
     scheers_schnitzel: { label: 'Scheers Schnitzel', query: 'Scheers Schnitzel Berlin', area: 'Friedrichshain', type: 'food', lat: 52.5033, lng: 13.4451, why: 'A simple, popular spot near the Oberbaum Bridge serving fresh, quick, and crispy German schnitzel.' },
     potsdam_food_search: { label: 'Food around central Potsdam', query: 'restaurants central Potsdam Brandenburg Gate', area: 'Potsdam', type: 'food', lat: 52.4007, lng: 13.0591, why: 'A flexible map search that keeps lunch on the Potsdam route instead of sending you back to Berlin.' },
     tempelhof_food_search: { label: 'Food around Mehringdamm', query: 'restaurants Mehringdamm Berlin', area: 'Kreuzberg / Tempelhof', type: 'food', lat: 52.4937, lng: 13.3883, why: 'A flexible map search near the north side of Tempelhofer Feld.' },
+    bergmannkiez_food_search: { label: 'Food around Bergmannkiez', query: 'restaurants Bergmannstrasse Berlin', area: 'Kreuzberg', type: 'food', lat: 52.4894, lng: 13.3912, why: 'A flexible dinner search close to Viktoriapark and Bergmannstrasse.' },
     shiso_burger: { label: 'Shiso Burger', query: 'Shiso Burger Berlin Mitte', area: 'Mitte', type: 'food', lat: 52.5278, lng: 13.4002, why: 'A highly popular Mitte spot serving unique Asian-fusion burgers in steam buns.' },
     yamyam: { label: 'YamYam', query: 'YamYam Korean Deli Berlin', area: 'Mitte', type: 'food', lat: 52.5275, lng: 13.4063, why: 'A cozy Korean deli serving quick, fresh bibimbap and authentic street food.' },
     curry_61: { label: 'Curry 61', query: 'Curry 61 Berlin', area: 'Mitte', type: 'food', lat: 52.5231, lng: 13.4025, why: 'A famous Mitte currywurst spot serving quick, local, and crispy Berlin street food.' },
@@ -14321,16 +14331,15 @@
   }
 
   function fireVerifiedBrowserMetaPurchase(purchase) {
-    if (!advertisingAllowed() || !purchase || purchase.eventName !== 'Purchase') return false;
-    var orderId = String(purchase.eventId || '');
+    if (!advertisingAllowed() || !window.BWTripPlannerRuntimeV31) return false;
+    var canonical = window.BWTripPlannerRuntimeV31.canonicalPurchase(purchase);
+    if (!canonical) return false;
+    var orderId = canonical.eventId;
     if (!/^tppo_[A-Za-z0-9_-]{12,}$/.test(orderId) || metaPurchaseAlreadyFired(orderId)) return false;
-    if (Number(purchase.value) !== PRO_PRICE_EUR || String(purchase.currency || '').toUpperCase() !== 'EUR') return false;
-    var contentIds = Array.isArray(purchase.contentIds) ? purchase.contentIds : [];
-    if (contentIds.length !== 1 || contentIds[0] !== PRO_OFFER_VARIANT || purchase.contentType !== 'product') return false;
     var parameters = {
-      value: PRO_PRICE_EUR,
+      value: canonical.value,
       currency: 'EUR',
-      content_ids: [PRO_OFFER_VARIANT],
+      content_ids: [PRO_PRODUCT_KEY],
       content_type: 'product'
     };
     var delivered = false;
@@ -14344,9 +14353,9 @@
           purchase: {
             eventName: 'Purchase',
             eventId: orderId,
-            value: PRO_PRICE_EUR,
+            value: canonical.value,
             currency: 'EUR',
-            contentIds: [PRO_OFFER_VARIANT],
+            contentIds: [PRO_PRODUCT_KEY],
             contentType: 'product'
           }
         }, parentTrackingOrigin());
@@ -14684,6 +14693,14 @@
     });
   }
 
+  function cleanPlannerText(value, fallback, maxLength) {
+    var text = String(value == null ? (fallback || '') : value)
+      .replace(/[\u0000-\u001f\u007f]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+    return text.slice(0, Number(maxLength) || 800);
+  }
+
   var ICON_PATHS = {
     bed: '<path d="M3 11V6a2 2 0 0 1 2-2h5v7"/><path d="M10 7h7a4 4 0 0 1 4 4v7"/><path d="M3 18h18"/><path d="M3 18v-7h18"/>',
     book: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/>',
@@ -14890,7 +14907,7 @@
 
     if (firstDay && index === 0) {
       if (state.arrivalTime === 'morning') return '09:00-10:45';
-      if (state.arrivalTime === 'lateMorning') return arrivalDayTourEligible() ? '09:00-10:00' : 'Arrive, settle first';
+      if (state.arrivalTime === 'lateMorning') return arrivalDayTourEligible() ? '09:00-10:00' : '11:00-12:30';
       if (state.arrivalTime === 'midday') return '12:30-14:00';
       if (state.arrivalTime === 'afternoon') return '15:30-17:00';
       return '18:30-19:45';
@@ -14901,7 +14918,7 @@
       if (arrivalSlot) return arrivalSlot.timeLabel;
       var slot = tourSlotForPlan();
       if (slot && slot.insideTrip) return slot.dayLabel + ' at ' + slot.startLabel;
-      return 'Next 11:30';
+      return '11:30-13:30';
     }
 
     if (firstDay && label.indexOf('afternoon') !== -1) {
@@ -14909,7 +14926,7 @@
       if (state.arrivalTime === 'lateMorning') return '14:00-16:30';
       if (state.arrivalTime === 'midday') return '15:00-17:00';
       if (state.arrivalTime === 'afternoon') return '17:00-18:30';
-      return 'Tonight';
+      return '19:30-21:00';
     }
 
     if (/berlinwalk|walking tour/i.test(String((block && block.title) || '') + ' ' + String((block && block.copy) || ''))) {
@@ -14921,14 +14938,14 @@
       if (state.arrivalTime === 'lateMorning') return '13:00-16:00';
       if (state.arrivalTime === 'midday') return '15:00-17:30';
       if (state.arrivalTime === 'afternoon') return '17:00-19:00';
-      return 'Tonight';
+      return '19:30-21:00';
     }
 
     if (close) {
-      if (firstDay && state.arrivalTime === 'evening') return label.indexOf('dinner') !== -1 ? '19:30 onward' : 'Tonight';
-      if (type === 'nightlife') return 'Late';
-      if (type === 'potsdam') return 'Back by 19:00';
-      return 'After 18:00';
+      if (firstDay && state.arrivalTime === 'evening') return '19:30-21:00';
+      if (type === 'nightlife') return '21:00-23:30';
+      if (type === 'potsdam') return '18:30-20:00';
+      return '18:30-20:00';
     }
 
     if (label.indexOf('lunch') !== -1) {
@@ -14941,7 +14958,7 @@
 
     if (label.indexOf('dinner') !== -1) {
       if (firstDay && state.arrivalTime === 'afternoon') return '18:00-20:00';
-      return 'After 18:00';
+      return '18:30-20:00';
     }
 
     if (label.indexOf('morning') !== -1) {
@@ -15051,8 +15068,10 @@
     return areas[0] || String((day && day.theme) || 'Berlin').replace(/^Tour \+ /, '');
   }
 
-  function artifactAreaForDay(day) {
-    var placeIds = dayPlaceIds(day);
+  function artifactAreaForDay(day, visiblePlaceIds) {
+    var placeIds = Array.isArray(visiblePlaceIds)
+      ? visiblePlaceIds.filter(function (placeId) { return Boolean(placeFor(placeId)); })
+      : dayPlaceIds(day);
     var areas = placeIds.map(function (placeId) {
       var place = placeFor(placeId);
       var area = place && place.area ? String(place.area).split(' / ')[0].trim() : '';
@@ -15111,10 +15130,15 @@
       query = destination + ' Berlin parking';
       copy = 'Park near ' + destination + ', leave the car there, and use public transport or walk for the central route.';
     }
+    var url = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(query);
+    if (state.arrivalPoint === 'ber' || state.arrivalPoint === 'hbf') {
+      url = 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(query) +
+        '&destination=' + encodeURIComponent(destination + ' Berlin') + '&travelmode=transit';
+    }
     return {
       label: label,
       placeId: 'arrival_transfer',
-      url: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(query),
+      url: url,
       copy: copy
     };
   }
@@ -15308,7 +15332,16 @@
   function artifactFormatCheckedAt(value) {
     if (!value) return '';
     try {
-      return new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', timeZone: TIMEZONE }).format(new Date(value));
+      return new Intl.DateTimeFormat('en-GB', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+        timeZone: TIMEZONE,
+        timeZoneName: 'short'
+      }).format(new Date(value));
     } catch (error) {
       return '';
     }
@@ -15360,7 +15393,9 @@
     var status = activeWeather.kind === 'live'
       ? (activeWeather.title || 'Live Berlin weather')
       : (activeWeather.title || title).replace(/^Typical\s+/i, '');
-    var checked = activeWeather.kind === 'live' ? artifactFormatCheckedAt(activeWeather.checkedAt || overlay.generatedAt) : 'Climate guide';
+    var checked = activeWeather.kind === 'live'
+      ? 'Open-Meteo · checked ' + artifactFormatCheckedAt(activeWeather.checkedAt || overlay.generatedAt)
+      : 'Berlin monthly climate guide';
     var typicalDayLabel = typicalDays.length === 1
       ? 'Day ' + typicalDays[0] + ' uses'
       : 'Days ' + typicalDays[0] + '–' + typicalDays[typicalDays.length - 1] + ' use';
@@ -15486,7 +15521,7 @@
   function artifactTimelineHtml(day, compact) {
     return '<div class="bw-artifact-timeline' + (compact ? ' is-compact' : '') + '">' + (day.blocks || []).slice(0, compact ? 5 : 8).map(function (block, index, all) {
       return '<div class="bw-artifact-time-row">' +
-        '<time>' + escapeHtml(block.time) + '</time>' +
+        '<time>' + escapeHtml(block.window || block.time) + '</time>' +
         '<span class="bw-artifact-time-icon">' + artifactIconSvg(index === 0 ? dayIconName({ theme: day.theme, title: day.title }) : (block.links && block.links.length ? 'pin' : 'route')) + '</span>' +
         '<div><strong>' + escapeHtml(block.title) + '</strong>' + (compact ? '' : '<p>' + escapeHtml(block.detail) + '</p>') + '</div>' +
         (index < all.length - 1 ? '<i aria-hidden="true"></i>' : '') +
@@ -15519,7 +15554,7 @@
     return '<section class="bw-artifact-delivery">' +
       '<strong>Same plan, two ways to use it</strong>' +
       '<button type="button" data-artifact-scroll-phone>' + artifactIconSvg('map') + '<span><b>On your phone</b><small>Full schedule, maps and practical links</small></span></button>' +
-      '<button type="button" data-artifact-pdf-preview>' + artifactIconSvg('download') + '<span><b>PDF backup</b><small>' + view.delivery.pdfPageCount + ' pages for print and offline use</small></span></button>' +
+      '<button type="button" data-artifact-pdf-preview>' + artifactIconSvg('download') + '<span><b>PDF backup</b><small>' + view.delivery.pdfPageCount + ' saved pages work offline; map links need data</small></span></button>' +
       '<span class="bw-artifact-same-badge">SAME<br>PLAN</span>' +
     '</section>';
   }
@@ -15527,7 +15562,7 @@
   function artifactInlineOfferHtml(view) {
     return '<section class="bw-artifact-inline-offer">' +
       '<div><strong>Your exact ' + view.days.length + '-day itinerary is ready to unlock.</strong><span>One-time payment · instant browser access · ' + view.delivery.pdfPageCount + '-page PDF backup</span></div>' +
-      '<button type="button" data-pro-cta>Unlock this plan — €7.99</button>' +
+      '<button type="button" data-pro-cta>Unlock this plan for €7.99</button>' +
     '</section>';
   }
 
@@ -15558,8 +15593,14 @@
     var visualName = weather.kind === 'live'
       ? weatherIconName(weatherVisual(weather.weatherCode, { windSpeed: weather.windKmh }).icon)
       : 'umbrella';
-    var truth = weather.kind === 'live' ? 'Live forecast' : 'Typical conditions, not a forecast';
-    return '<div class="bw-artifact-full-weather">' + artifactIconSvg(visualName) + '<span><strong>' + escapeHtml(weather.title || truth) + '</strong><small>' + escapeHtml(truth + (weather.cue ? ' · ' + weather.cue : '')) + '</small></span></div>';
+    var truth = weather.kind === 'live'
+      ? 'Live forecast from Open-Meteo · checked ' + artifactFormatCheckedAt(weather.checkedAt)
+      : 'Typical seasonal conditions, not a forecast';
+    var cue = String(weather.cue || '');
+    if (weather.kind !== 'live') {
+      cue = cue.replace(/\b(?:this is )?not a forecast[.!]?\s*/ig, '').trim();
+    }
+    return '<div class="bw-artifact-full-weather">' + artifactIconSvg(visualName) + '<span><strong>' + escapeHtml(weather.title || truth) + '</strong><small>' + escapeHtml(truth + (cue ? ' · ' + cue : '')) + '</small></span></div>';
   }
 
   function artifactFullDayHtml(day) {
@@ -15602,13 +15643,11 @@
     var daysEl = root.querySelector('[data-full-days]');
     var routeBrief = root.querySelector('[data-full-route-brief]');
     var jumpBar = root.querySelector('[data-day-jump-bar]');
-    var aiPanel = root.querySelector('[data-ai-polish-panel]');
     var copyLinkButton = root.querySelector('[data-copy-plan-link]');
     var whatsappLink = root.querySelector('[data-share-whatsapp]');
     var printButton = root.querySelector('[data-print-plan]');
     if (!view || !daysEl) return;
     setText('[data-full-sub]', view.days.length + (view.days.length === 1 ? ' day' : ' days') + ' from ' + view.trip.displayDate + '. The phone view and PDF use this same stored itinerary.');
-    if (aiPanel) aiPanel.innerHTML = '';
     if (routeBrief) {
       routeBrief.innerHTML = '<section class="bw-artifact-full-intro"><div><span>Your stored plan</span><h2>' + escapeHtml(view.decisionReceipt.headline) + '</h2><p>' + escapeHtml(view.decisionReceipt.guideNote) + '</p></div><img src="' + escapeHtml(YUSUF_GUIDE_PHOTO_URL) + '" alt="Yusuf, BerlinWalk guide" loading="eager" decoding="async"></section>';
     }
@@ -15656,17 +15695,85 @@
 
   function updateCompactOfferCopy(plan) {
     var days = ((plan && plan.days) || []).length || Number(state.tripLength) || 1;
+    var visualOffer = displayedProOffer();
+    var price = window.BWTripPlannerRuntimeV31
+      ? window.BWTripPlannerRuntimeV31.formatPrice(visualOffer.netAmountEurCents)
+      : '€7.99';
     var ctas = root.querySelectorAll('[data-pro-cta]');
     var note = root.querySelector('[data-pro-note]');
+    root.querySelectorAll('[data-pro-price]').forEach(function (target) { target.textContent = price; });
     ctas.forEach(function (cta) {
       cta.textContent = cta.closest('.bw-artifact-inline-offer')
-        ? 'Unlock this ' + days + '-day plan — €7.99'
-        : 'Full ' + days + '-day plan — €7.99';
+        ? 'Unlock this ' + days + '-day plan for ' + price
+        : 'Full ' + days + '-day plan for ' + price;
     });
-    if (note) note.textContent = 'Included in your ' + days + '-day plan:';
+    if (note) note.textContent = visualOffer.active
+      ? 'Launch offer: 50% off this exact plan. Price is checked again before checkout.'
+      : 'Included in your ' + days + '-day plan:';
     root.querySelectorAll('[data-compact-benefit-icon]').forEach(function (target) {
       target.innerHTML = compactBenefitIcon(target.getAttribute('data-compact-benefit-icon'));
     });
+  }
+
+  function localVisualOfferOverride() {
+    try {
+      var params = new URLSearchParams(window.location.search || '');
+      if (!(isLocalPreviewSurface() || isArtifactReviewDemo()) || params.get('qaOffer') !== 'launch') return null;
+      return {
+        productKey: PRO_PRODUCT_KEY,
+        offerId: 'tp_v31_launch_50',
+        status: 'active',
+        active: true,
+        listAmountEurCents: 799,
+        discountAmountEurCents: 400,
+        netAmountEurCents: 399,
+        trusted: false,
+        visualOnly: true
+      };
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function displayedProOffer() {
+    return localVisualOfferOverride() || proOfferState;
+  }
+
+  function proOfferTrackingContext() {
+    return {
+      product_key: PRO_PRODUCT_KEY,
+      offer_id: proOfferState.offerId || PRO_STANDARD_OFFER_ID,
+      price_eur: Number(proOfferState.netAmountEurCents || 799) / 100
+    };
+  }
+
+  function fetchProOffer(force) {
+    if (!window.BWTripPlannerRuntimeV31 || typeof window.fetch !== 'function') return Promise.resolve(proOfferState);
+    if (localVisualOfferOverride() && isLocalPreviewSurface()) {
+      updateCompactOfferCopy(latestPlan || buildPlan());
+      return Promise.resolve(proOfferState);
+    }
+    if (proOfferRequest && !force) return proOfferRequest;
+    var url;
+    try {
+      url = new URL(TRIP_PLANNER_PRO_API_URL);
+      url.searchParams.set('action', 'offer');
+    } catch (error) {
+      return Promise.resolve(proOfferState);
+    }
+    proOfferRequest = window.fetch(url.toString(), { method: 'GET', headers: { Accept: 'application/json' } })
+      .then(function (response) { return response.ok ? response.json() : null; })
+      .then(function (body) {
+        proOfferState = window.BWTripPlannerRuntimeV31.normalizeOfferResponse(body);
+        updateCompactOfferCopy(latestPlan || buildPlan());
+        return proOfferState;
+      })
+      .catch(function () {
+        proOfferState = window.BWTripPlannerRuntimeV31.standardOffer();
+        updateCompactOfferCopy(latestPlan || buildPlan());
+        return proOfferState;
+      }).finally(function () { proOfferRequest = null; });
+    return proOfferRequest;
   }
 
   function renderCompactPlanPreview(plan) {
@@ -15731,7 +15838,7 @@
     if (isTourBlock(block)) {
       return 'Use BerlinWalk from the World Clock as the first context layer, then keep the next stop nearby.';
     }
-    return cleanAiText(rawCopy, '', 112)
+    return cleanPlannerText(rawCopy, '', 112)
       .replace(/\bour walking tour\b/ig, 'the BerlinWalk tour')
       .replace(/\bour tour\b/ig, 'the BerlinWalk tour')
       .replace(/\bwe are\b/ig, 'I am')
@@ -15758,10 +15865,10 @@
       ? slot.timeLabel + ' BerlinWalk becomes the context anchor; the rest of the day stays nearby.'
       : 'The first day stays around ' + routeCopy + ', so arrival does not turn into a checklist.';
     var weatherDetail = weather
-      ? cleanAiText(weather.cue, 'Keep one covered backup close to the same area.', 118)
+      ? cleanPlannerText(weather.cue, 'Keep one covered backup close to the same area.', 118)
       : 'Keep one covered backup close to the same area instead of crossing town.';
     var riskDetail = risk
-      ? cleanAiText(risk.detail, 'One practical guardrail is already built into this day.', 118)
+      ? cleanPlannerText(risk.detail, 'One practical guardrail is already built into this day.', 118)
       : 'One practical guardrail is already built into this day, so the route stays realistic.';
 
     return '<div class="bw-preview-proof" aria-label="Why this Day 1 works">' +
@@ -16338,7 +16445,6 @@
     var params = new URLSearchParams(window.location.search);
     return isLocalPreviewSurface() && (
       params.get('qaUnlock') === '1' ||
-      params.get('mockAi') === '1' ||
       params.get('resetUnlock') === '1'
     );
   }
@@ -16556,25 +16662,34 @@
     return (day && (day.planKey || dayVisualType(day))) || '';
   }
 
-  function museumMondayRisk(day) {
-    if (!day || dayStatus(day.dateKey).key !== 'monday') return false;
-    var context = [day.title, day.theme, dayPlanType(day), (day.placeIds || []).join(' ')].join(' ');
-    return /museum|royal|palace/i.test(context) || dayPlaceIds(day).indexOf('museum_island') !== -1;
+  function visiblePlaceIdsForDay(day, overridePlaceIds) {
+    return Array.isArray(overridePlaceIds)
+      ? overridePlaceIds.filter(function (placeId) { return Boolean(placeFor(placeId)); })
+      : dayPlaceIds(day);
   }
 
-  function dayClosedPlaces(day) {
+  function museumMondayRisk(day, overridePlaceIds) {
+    if (!day || dayStatus(day.dateKey).key !== 'monday') return false;
+    var ids = visiblePlaceIdsForDay(day, overridePlaceIds);
+    return ids.some(function (placeId) {
+      var place = placeFor(placeId);
+      return placeId === 'museum_island' || Boolean(place && /museum|palace/i.test(String(place.type || '') + ' ' + String(place.label || '')));
+    });
+  }
+
+  function dayClosedPlaces(day, overridePlaceIds) {
     if (!day || !day.dateKey) return [];
-    return dayPlaceIds(day).filter(function (placeId) {
+    return visiblePlaceIdsForDay(day, overridePlaceIds).filter(function (placeId) {
       return placeClosedOnDate(placeId, day.dateKey);
     }).map(function (placeId) {
       return placeFor(placeId);
     }).filter(Boolean);
   }
 
-  function dayOpeningRisk(day) {
+  function dayOpeningRisk(day, overridePlaceIds) {
     if (!day || !day.dateKey) return null;
     var status = dayStatus(day.dateKey);
-    var closedPlaces = dayClosedPlaces(day);
+    var closedPlaces = dayClosedPlaces(day, overridePlaceIds);
     if (closedPlaces.length) {
       var closedNames = closedPlaces.map(function (place) { return place.label; }).join(', ');
       return {
@@ -16585,7 +16700,7 @@
         action: 'I moved the day where a safer swap was available.'
       };
     }
-    if (museumMondayRisk(day)) {
+    if (museumMondayRisk(day, overridePlaceIds)) {
       return {
         key: 'monday-museum',
         severity: 'high',
@@ -17486,6 +17601,9 @@
   function normalizedPlaceLabel(value) {
     return String(value || '')
       .toLowerCase()
+      .normalize('NFKD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/ß/g, 'ss')
       .replace(/[^a-z0-9]+/g, ' ')
       .trim();
   }
@@ -17541,8 +17659,9 @@
       var place = PLACE_CATALOG[placeId];
       if (placeId === 'world_clock') return;
       var normLabel = normalizedPlaceLabel(place.label);
-      if (normLabel && text.indexOf(normLabel) !== -1) {
-        found.push({ placeId: placeId, place: place });
+      var position = normLabel ? text.indexOf(normLabel) : -1;
+      if (position !== -1) {
+        found.push({ placeId: placeId, place: place, position: position });
       }
     });
 
@@ -17556,28 +17675,19 @@
         });
         if (!found.length) return [];
       }
-      return found.slice(0, 2).map(function (item) {
+      found.sort(function (a, b) { return a.position - b.position; });
+      return found.slice(0, 4).map(function (item) {
         return { placeId: item.placeId, label: item.place.label, url: placeSearchUrl(item.placeId), score: 100 };
       });
     }
-    var ids = dayPlaceIds(day);
-    if (!ids.length) return [];
     if (isTourBlock(block)) {
-      return ids.indexOf('world_clock') !== -1
+      return dayPlaceIds(day).indexOf('world_clock') !== -1
         ? [{ placeId: 'world_clock', label: 'World Clock', url: placeSearchUrl('world_clock'), score: 100 }]
         : [];
     }
-    var scored = ids.map(function (placeId) {
-      return { placeId: placeId, place: placeFor(placeId), score: blockPlaceMatchScore(placeFor(placeId), text) };
-    }).filter(function (item) {
-      return item.place && item.placeId !== 'world_clock';
-    }).sort(function (a, b) {
-      return b.score - a.score;
-    });
-    var picked = scored.filter(function (item) { return item.score > 0; }).slice(0, 2);
-    return picked.slice(0, 2).map(function (item) {
-      return { placeId: item.placeId, label: item.place.label, url: placeSearchUrl(item.placeId), score: item.score };
-    });
+    // A map link is created only for a place named in this visible block.
+    // Raw day IDs must never become hidden stops in the paid route.
+    return [];
   }
 
   function blockMapLinksHtml(day, block, index) {
@@ -17607,6 +17717,7 @@
     tiergarten: 'Tiergarten gives the plan open space between heavier history stops.',
     victory_column: 'Victory Column gives you a classic Tiergarten landmark and a strong photo point.',
     tempelhofer_feld: 'Tempelhofer Feld is a huge former airport, now one of Berlin’s best free spaces.',
+    viktoriapark: 'Viktoriapark adds a compact Kreuzberg park stop close to Bergmannkiez.',
     treptower_park: 'Treptower Park adds a riverside walk and a major Soviet memorial.',
     raw_gelande: 'RAW-Gelande is the rougher Friedrichshain nightlife and street-art layer.',
     oranienstrasse: 'Oranienstrasse gives you Kreuzberg food, bars, and a more local street feel.',
@@ -18283,7 +18394,7 @@
       var photo = dayPhotoForType(type);
       var anchors = dayMapLinks(day).slice(0, 3).map(function (link) { return link.label; }).join(' / ');
       var tourPill = tourSlot ? '<span class="bw-plan-index-tour">Tour ' + escapeHtml(tourSlot.startLabel) + '</span>' : '';
-      var story = cleanAiText(storyByDay && storyByDay[day.dayNumber], '', 230);
+      var story = cleanPlannerText(storyByDay && storyByDay[day.dayNumber], '', 230);
       return '<button class="bw-plan-index-card' + (active ? ' is-active' : '') + '" type="button" data-day-jump-day="' + day.dayNumber + '" aria-pressed="' + (active ? 'true' : 'false') + '" style="--index-accent:' + escapeHtml(day.accent || '#7CB342') + ';--index-bg:' + escapeHtml(day.bg || '#F2F8E8') + '">' +
         '<span class="bw-plan-index-photo"><img src="' + escapeHtml(assetUrl(photo.src)) + '" alt="' + escapeHtml(photo.alt) + '" loading="eager" decoding="async"><span class="bw-plan-index-badge">D' + day.dayNumber + '</span></span>' +
         '<span class="bw-plan-index-copy"><strong>' + escapeHtml(day.theme || day.title) + '</strong><span>' + escapeHtml(formatDisplayDate(day.dateKey)) + '</span><em>' + escapeHtml(anchors || dayVisualDetail(day, type)) + '</em>' + (story ? '<span class="bw-plan-index-note">' + escapeHtml(story) + '</span>' : '') + tourPill + '</span>' +
@@ -19045,15 +19156,16 @@
     });
   }
 
-  function riskTagsForDay(day) {
+  function riskTagsForDay(day, overridePlaceIds) {
     var status = dayStatus(day.dateKey);
     var tags = [];
     if (status.key === 'holiday') tags.push({ key: 'holiday', label: 'Public holiday', severity: 'high', detail: status.note });
     if (status.key === 'sunday') tags.push({ key: 'sunday', label: 'Sunday shops', severity: 'medium', detail: status.note });
-    if (status.key === 'monday') tags.push({ key: 'monday', label: 'Museum caution', severity: 'medium', detail: status.note });
+    if (status.key === 'monday' && museumMondayRisk(day, overridePlaceIds)) tags.push({ key: 'monday', label: 'Museum caution', severity: 'medium', detail: status.note });
     if (day && day.weatherSwap) tags.push({ key: 'rain', label: 'Rain swap', severity: 'medium', detail: day.weatherSwap.copy || 'Route order was adjusted for the live rainy forecast.' });
     if (state.mustHandle.indexOf('rain') !== -1 && day.theme !== 'Arrival day') tags.push({ key: 'rain', label: 'Rain backup', severity: 'medium', detail: 'Keep one museum, cafe, or covered market near the same area.' });
-    if (state.mustHandle.indexOf('reservations') !== -1 || /Reichstag|museum|Museum|night/i.test(day.title + ' ' + day.theme)) tags.push({ key: 'booking', label: 'Book ahead', severity: state.mustHandle.indexOf('reservations') !== -1 ? 'medium' : 'low', detail: 'Check timed entries, Reichstag dome, restaurants, or evening plans before arrival.' });
+    var officialAction = officialReservationAction(day, overridePlaceIds);
+    if (officialAction) tags.push({ key: 'booking', label: 'Official booking check', severity: 'medium', detail: officialAction.label + ' before arrival.' });
     if (state.mustHandle.indexOf('kids') !== -1 || state.groupType === 'family' || state.groupType === 'slow' || state.pace === 'gentle') tags.push({ key: 'breaks', label: 'Break needed', severity: 'low', detail: 'Protect one cafe, park, playground, or hotel reset before evening.' });
     if (/night/i.test(day.title + ' ' + day.theme)) tags.push({ key: 'energy', label: 'Save energy', severity: 'low', detail: 'Keep the day compact if you want a real Berlin night.' });
     return uniqueRiskTags(tags);
@@ -19090,7 +19202,7 @@
     west: ['dicke_wirtin', 'schwarzes_cafe'],
     kreuzberg: ['markthalle_neun', 'mustafas_kebap', 'curry_36', 'burgermeister_schlesi'],
     potsdam: ['potsdam_food_search'],
-    tempelhof: ['tempelhof_food_search', 'mustafas_kebap', 'curry_36'],
+    tempelhof: ['tempelhof_food_search', 'bergmannkiez_food_search', 'mustafas_kebap', 'curry_36'],
     cheap: ['curry_61', 'curry_36', 'mustafas_kebap', 'shiso_burger', 'yamyam'],
     potsdam_backup: ['dicke_wirtin', 'schwarzes_cafe', 'maximilians']
   };
@@ -19125,10 +19237,13 @@
       return String(block.title || '') + ' ' + String(block.copy || '');
     }).join(' ');
     var normalizedText = normalizedPlaceLabel(text);
-    return allFoodIds().filter(function (placeId) {
+    return Object.keys(PLACE_CATALOG).filter(function (placeId) {
       var place = placeFor(placeId);
+      if (!place || place.type !== 'food') return false;
       var label = place && normalizedPlaceLabel(place.label);
-      return Boolean(label && normalizedText.indexOf(label) !== -1);
+      return Boolean(label && [' at ', ' on ', ' in '].some(function (joiner) {
+        return (' ' + normalizedText + ' ').indexOf(joiner + label + ' ') !== -1;
+      }));
     });
   }
 
@@ -19268,18 +19383,22 @@
     var usedFood = {};
     (days || []).forEach(function (day) {
       var mealPlan = {};
+      var explicitLunch = [];
+      var explicitDinner = [];
       if (dayHasMealBlock(day, 'lunch')) {
-        var explicitLunch = explicitMealPlaceIds(day, 'lunch');
+        explicitLunch = explicitMealPlaceIds(day, 'lunch');
         mealPlan.lunchIds = explicitLunch.length
-          ? pickFoodIds(explicitLunch, usedFood, explicitLunch.length, false)
+          ? explicitLunch.slice()
           : pickFoodIds(preferredFoodPool(day, 'lunch'), usedFood, dayHasTour(day) ? 2 : 1, !dayHasTour(day));
+        explicitLunch.forEach(function (placeId) { usedFood[placeId] = true; });
       }
       if (dayHasMealBlock(day, 'dinner')) {
-        var explicitDinner = explicitMealPlaceIds(day, 'dinner');
+        explicitDinner = explicitMealPlaceIds(day, 'dinner');
         mealPlan.dinnerIds = explicitDinner.length
-          ? pickFoodIds(explicitDinner, usedFood, explicitDinner.length, false)
+          ? explicitDinner.slice()
           : pickFoodIds(preferredFoodPool(day, 'dinner'), usedFood, 1);
       }
+      explicitDinner.forEach(function (placeId) { usedFood[placeId] = true; });
       day.mealPlan = mealPlan;
     });
   }
@@ -19299,7 +19418,7 @@
   }
 
   function dayDiningCopy(day) {
-    var type = dayVisualType(day);
+    var type = dayPlanType(day);
     var ids = mealIdsForDay(day, 'dinner');
     var options = foodOptionText(ids);
     if (day.dayNumber === 1 && state.arrivalTime === 'evening') {
@@ -19321,6 +19440,9 @@
       return 'Keep dinner on the west side. ' + options + ' is a calm finish.';
     }
     if (type === 'free') {
+      if (dayPlaceIds(day).indexOf('tempelhofer_feld') !== -1) {
+        return 'Stay around Bergmannkiez or Mehringdamm for dinner. ' + options + ' is the selected option.';
+      }
       return 'Keep the low-budget day simple at night too. ' + options + ' is a clear dinner choice.';
     }
     if (type === 'potsdam') {
@@ -19330,12 +19452,12 @@
   }
 
   function dayLunchCopy(day) {
-    var type = dayVisualType(day);
+    var type = dayPlanType(day);
     var ids = mealIdsForDay(day, 'lunch');
     var options = foodOptionText(ids);
     if (dayHasTour(day)) {
       if (ids.indexOf('hackescher_markt_market') !== -1) {
-        return 'After the walk, stay near Hackescher Markt for lunch. Use the market stands if they are running, or keep ' + foodOptionText(ids.filter(function (id) { return id !== 'hackescher_markt_market'; })) + ' as the easy backup.';
+        return 'After the walk, stay near Hackescher Markt for lunch. Use the market stands if they are running, or choose ' + foodOptionText(ids.filter(function (id) { return id !== 'hackescher_markt_market'; })) + ' instead.';
       }
       return 'After the walk, eat around Hackescher Markt before you continue. Try ' + options + '.';
     }
@@ -19352,12 +19474,18 @@
       return 'Use lunch as the museum break. ' + options + ' gives you time before the next stop.';
     }
     if (type === 'wall') {
-      return 'Eat near the Wall route before you move on. Try ' + options + '.';
+      if (dayPlaceIds(day).indexOf('wall_memorial') !== -1 && dayPlaceIds(day).indexOf('east_side_gallery') !== -1) {
+        return 'After Bernauer Strasse, take public transport to Friedrichshain. Eat at ' + options + ' before East Side Gallery.';
+      }
+      return 'Eat near the Spree before you continue. Try ' + options + '.';
     }
     if (type === 'food') {
       return 'This is the day to sit down properly. Start with ' + options + ', then let the afternoon stay in the same neighborhood.';
     }
     if (type === 'free') {
+      if (dayPlaceIds(day).indexOf('tempelhofer_feld') !== -1) {
+        return 'After Tempelhofer Feld, take lunch around Mehringdamm. ' + options + ' is the selected stop.';
+      }
       return 'Keep lunch cheap and practical. ' + options + ' works before the park or the next free stop.';
     }
     if (type === 'nightlife') {
@@ -19434,7 +19562,7 @@
       free: { label: 'Cheap food', icon: 'coin' },
       nightlife: { label: 'Ride home saved', icon: 'train' },
       local: { label: 'Short ride home', icon: 'train' },
-      potsdam: { label: 'No second mission', icon: 'shield' }
+      potsdam: { label: 'Return without another major stop', icon: 'shield' }
     }[type] || { label: 'Stop early', icon: 'leaf' };
     var personal = personalizedCloseChip(day, type);
     if (!personal || personal.label === base.label) personal = fallback;
@@ -19686,9 +19814,9 @@
     }
   };
 
-  function officialReservationAction(day) {
+  function officialReservationAction(day, overridePlaceIds) {
     var priority = ['reichstag', 'museum_island', 'charlottenburg_palace', 'sanssouci'];
-    var ids = dayPlaceIds(day);
+    var ids = visiblePlaceIdsForDay(day, overridePlaceIds);
     for (var index = 0; index < priority.length; index += 1) {
       var placeId = priority[index];
       if (ids.indexOf(placeId) !== -1 && OFFICIAL_RESERVATION_ACTIONS[placeId]) {
@@ -19733,6 +19861,11 @@
     if (museumDay) {
       var monday = dayStatus(museumDay.dateKey).key === 'monday';
       var officialAction = officialReservationAction(museumDay);
+      if (!officialAction) museumDay = null;
+    }
+    if (museumDay) {
+      var monday = dayStatus(museumDay.dateKey).key === 'monday';
+      var officialAction = officialReservationAction(museumDay);
       add({
         key: 'museum',
         status: monday ? 'Check hours' : 'Timed entry',
@@ -19740,10 +19873,10 @@
         copy: monday ? 'Monday can break museum plans. Confirm one open anchor before arrival.' : 'Pick one museum or Reichstag-style timed anchor before the day gets busy.',
         icon: 'landmark',
         accent: '#F5A623',
-        action: officialAction ? officialAction.label : 'Open Day ' + museumDay.dayNumber + ' route',
-        url: officialAction ? officialAction.url : dayRouteAction(museumDay).url,
-        officialSource: officialAction ? officialAction.source : '',
-        checkedAt: officialAction ? officialAction.checkedAt : ''
+        action: officialAction.label,
+        url: officialAction.url,
+        officialSource: officialAction.source,
+        checkedAt: officialAction.checkedAt
       });
     }
 
@@ -20760,27 +20893,27 @@
       mitte: {
         time: 'Afternoon',
         title: 'Settle into Mitte',
-        copy: "Start with a spin around Alexanderplatz. It’s chaotic, it’s loud, and it’s the perfect wake-up call to let you know you've arrived."
+        copy: 'Start at Alexanderplatz to get your bearings and check the nearby transport connections.'
       },
       east: {
         time: 'Afternoon',
         title: 'Settle into the East',
-        copy: "Stroll through Friedrichshain. It’s gritty, cool, and the best place to instantly feel like a Berlin local."
+        copy: 'Walk through Friedrichshain and keep the first afternoon around the streets near your stay.'
       },
       north: {
         time: 'Afternoon',
         title: 'Settle into Prenzlauer Berg',
-        copy: "Explore Kollwitzkiez. I designed today around finding a quiet bakery, grabbing a coffee, and just breathing."
+        copy: 'Walk through Kollwitzkiez and stop at one bakery or cafe.'
       },
       west: {
         time: 'Afternoon',
         title: 'Settle into Charlottenburg',
-        copy: "Walk around Savignyplatz. It’s elegant and a perfect, quiet escape from the madness of the city center."
+        copy: 'Walk around Savignyplatz and use the nearby side streets for a quiet first afternoon.'
       },
       unsure: {
         time: 'Afternoon',
         title: 'Explore your neighborhood',
-        copy: "Just explore your immediate neighborhood today. Drop the bags, find the nearest supermarket, and settle in."
+        copy: 'Stay in the immediate neighborhood. Leave your bags, find the nearest supermarket, and settle in.'
       }
     };
     return moves[state.stayArea] || moves.unsure;
@@ -20835,15 +20968,15 @@
         time: compact ? 'History stop' : 'Afternoon',
         title: compact ? 'Use Topography of Terror as the free history stop' : 'Topography of Terror as the free history stop',
         copy: compact
-          ? 'Stay central and use Topography of Terror as the main stop. If the day feels too heavy, switch to the Brandenburg Gate and memorial walk.'
-          : 'Stay central and use Topography of Terror as the main stop. If the day feels too heavy, switch to the Brandenburg Gate and memorial walk.'
+          ? 'Use Topography of Terror as the main stop, then continue to Brandenburg Gate and the nearby memorials.'
+          : 'Use Topography of Terror as the main stop, then continue to Brandenburg Gate and the nearby memorials.'
       },
       museums: {
         time: compact ? 'One strong stop' : 'Afternoon',
         title: compact ? 'Use Museum Island as the museum anchor' : 'Museum Island as the museum anchor',
         copy: compact
-          ? 'Use one checked-open Museum Island museum as the main paid stop. If tickets are awkward, stay outside with Berlin Cathedral and the Lustgarten.'
-          : 'Use one checked-open Museum Island museum as the main paid stop. If tickets are awkward, stay outside with Berlin Cathedral and the Lustgarten.'
+          ? 'Choose one checked-open Museum Island museum and use the full visit window for it.'
+          : 'Choose one checked-open Museum Island museum and use the full visit window for it.'
       },
       wall: {
         time: compact ? 'One strong stop' : 'Afternoon',
@@ -20856,8 +20989,8 @@
         time: compact ? 'Food stop' : 'Afternoon',
         title: compact ? 'Keep food close to Hackescher Markt' : 'Hackescher Markt courtyards and food stop',
         copy: compact
-          ? 'Use Hackescher Markt and the courtyards as the food layer. If rain wins, stay under cover in Hackesche Hofe.'
-          : 'Use Hackescher Markt and the courtyards as the food layer. If rain wins, stay under cover in Hackesche Hofe.'
+          ? 'Use Hackescher Markt and Hackesche Hofe for the food stops and covered courtyards.'
+          : 'Use Hackescher Markt and Hackesche Hofe for the food stops and courtyards.'
       },
       free: {
         time: compact ? 'Free stop' : 'Afternoon',
@@ -20895,25 +21028,24 @@
   }
 
   function firstDayArrivalCopy() {
-    var base = baseCampProfile();
     if (state.arrivalPoint === 'ber') {
-      if (state.arrivalTime === 'evening') return "Take the ABC train straight to your base. Do not attempt sightseeing tonight. Just sleep. The city isn't going anywhere.";
-      if (state.arrivalTime === 'afternoon') return "Ride the train in, drop your bags, and keep your exploring strictly within a 15-minute walking radius.";
-      if (arrivalDayTourEligible()) return "Hop on the ABC train, drop your bags, and head to the BerlinWalk tour. I will meet you at the World Clock.";
+      if (state.arrivalTime === 'evening') return 'Take an ABC train to your base, check in, and leave sightseeing for tomorrow.';
+      if (state.arrivalTime === 'afternoon') return 'Take the train into Berlin, leave your bags, and stay within a short walk of your base.';
+      if (arrivalDayTourEligible()) return 'Take an ABC train into Berlin, leave your bags, and go to the World Clock for the BerlinWalk tour.';
       return 'Take the train to your base, leave your luggage, then keep the first walk close to where you are staying.';
     }
     if (state.arrivalPoint === 'hbf') {
-      if (state.arrivalTime === 'evening') return "Arrive at Hauptbahnhof and head directly to your hotel. Keep tonight extremely lazy.";
-      if (state.arrivalTime === 'afternoon') return "Once you navigate the maze that is Hauptbahnhof, drop your bags and keep your first walk highly local.";
+      if (state.arrivalTime === 'evening') return 'Leave Hauptbahnhof, go to your hotel, and keep the evening free.';
+      if (state.arrivalTime === 'afternoon') return 'Leave your bags, then keep the first walk close to your base.';
       return arrivalDayTourEligible()
-        ? "Stash your bags in a locker at Hauptbahnhof and jump on the train to Alexanderplatz - it is tour time."
-        : "Arrive at the main station, drop your bags, and go find a local park to stretch your legs.";
+        ? 'Leave your bags at your stay or in a station locker, then take the train to Alexanderplatz for the tour.'
+        : 'Leave your bags, then use a nearby park or short neighborhood walk.';
     }
-    if (state.arrivalTime === 'evening') return "Check in, find the closest decent restaurant, and call it a night. Keep it tiny.";
-    if (state.arrivalTime === 'afternoon') return "Get to your stay, check in, and keep your orbit very small today.";
-    if (state.arrivalPoint === 'alex') return "You're already in the eye of the storm! Just step outside and let the Alexanderplatz chaos welcome you.";
-    if (state.arrivalPoint === 'car') return "Ditch the car immediately. Driving in central Berlin is a trap. Public transit is your best friend now.";
-    return "Check in, head outside, and keep your very first walk simple, relaxed, and strictly local.";
+    if (state.arrivalTime === 'evening') return 'Check in, eat near your stay, and leave sightseeing for tomorrow.';
+    if (state.arrivalTime === 'afternoon') return 'Check in and keep the first walk close to your stay.';
+    if (state.arrivalPoint === 'alex') return 'Start at Alexanderplatz and use the square to get your bearings.';
+    if (state.arrivalPoint === 'car') return 'Park once, then use public transport or walk for the central sights.';
+    return 'Check in, then take one short walk in the surrounding neighborhood.';
   }
 
   function firstDayPlaceIds() {
@@ -21042,9 +21174,9 @@
         accent: '#1B5E20',
         bg: '#F2F8E8',
         blocks: [
-          { time: 'Morning', title: 'Brandenburg Gate and memorials', copy: 'Start at the Brandenburg Gate early before the selfie-stick crowds arrive, then take a peaceful walk through the memorials.' },
+          { time: 'Morning', title: 'Brandenburg Gate and memorials', copy: 'Start at Brandenburg Gate early, then walk through the nearby memorials before the area becomes busier.' },
           { time: 'Lunch', title: 'Lunch in Mitte', copy: '' },
-          { time: 'Afternoon', title: 'Topography of Terror', copy: 'Use Topography of Terror as the serious indoor history anchor. If the mood feels too heavy, switch to the Reichstag exterior and keep the day outside.' },
+          { time: 'Afternoon', title: 'Topography of Terror', copy: 'Use Topography of Terror as the main history stop. Use the Reichstag exterior if you prefer to stay outside.' },
           { time: 'Evening', title: 'Dinner in Mitte', copy: '' }
         ],
         placeIds: ['brandenburg_gate', 'topography_terror', 'reichstag']
@@ -21055,9 +21187,9 @@
         accent: '#2F80ED',
         bg: '#EAF4FF',
         blocks: [
-          { time: 'Morning', title: 'Berlin Wall Memorial', copy: 'Start at Bernauer Strasse. It is the clearest place to feel what the Wall did to everyday Berliners.' },
-          { time: 'Lunch', title: 'Lunch near the Wall', copy: '' },
-          { time: 'Afternoon', title: 'East Side Gallery and Spree edge', copy: 'Walk East Side Gallery slowly, then stay by the Spree and Oberbaum Bridge. If rain wins, shorten the painted section and use a cafe or covered stop toward Kreuzberg.' },
+          { time: 'Morning', title: 'Berlin Wall Memorial', copy: 'Start at Bernauer Strasse. The preserved border area shows how the Wall divided a residential street.' },
+          { time: 'Lunch', title: 'Transfer to Friedrichshain, then lunch', copy: '' },
+          { time: 'Afternoon', title: 'East Side Gallery and Oberbaum Bridge', copy: 'Walk East Side Gallery, then continue beside the Spree to Oberbaum Bridge.' },
           { time: 'Evening', title: 'Dinner in Friedrichshain', copy: '' }
         ],
         placeIds: ['wall_memorial', 'east_side_gallery', 'oberbaum_bridge', 'raw_gelande']
@@ -21068,7 +21200,7 @@
         accent: '#F5A623',
         bg: '#FFF3D7',
         blocks: [
-          { time: 'Morning', title: 'Museum Island as the museum anchor', copy: 'Use one checked-open Museum Island museum as the main paid stop. If tickets are awkward, stay outside with Berlin Cathedral and the Lustgarten.' },
+          { time: 'Morning', title: 'Museum Island as the museum anchor', copy: 'Choose one checked-open Museum Island museum and use the full visit window for it.' },
           { time: 'Lunch', title: 'Lunch in Mitte', copy: '' },
           { time: 'Afternoon', title: 'Berlin Cathedral and river edge', copy: 'After the museum, keep the afternoon light around Berlin Cathedral, the Spree, and the government-quarter edge.' },
           { time: 'Evening', title: 'Dinner in Mitte', copy: '' }
@@ -21083,7 +21215,7 @@
         blocks: [
           { time: 'Morning', title: 'Markthalle Neun and the Kreuzberg streets', copy: 'Start at Markthalle Neun, then walk the nearby Kreuzberg streets before lunch.' },
           { time: 'Lunch', title: 'Lunch at Markthalle Neun', copy: '' },
-          { time: 'Afternoon', title: 'Oranienstraße food and cafe stop', copy: 'Use Oranienstraße for the afternoon food layer. If rain wins, stay inside a cafe instead of adding another district.' },
+          { time: 'Afternoon', title: 'Oranienstraße food and cafe stop', copy: 'Continue along Oranienstraße and choose one cafe or food stop in the same neighborhood.' },
           { time: 'Evening', title: 'Dinner on Oranienstraße', copy: '' }
         ],
         placeIds: ['markthalle_neun', 'oranienstrasse']
@@ -21096,10 +21228,10 @@
         blocks: [
           { time: 'Morning', title: 'Topography of Terror', copy: 'Start with Topography of Terror because it is free, serious, and weather-safe. It gives the low-budget day real substance.' },
           { time: 'Lunch', title: 'Lunch before the park', copy: '' },
-          { time: 'Afternoon', title: 'Tiergarten and Victory Column', copy: 'Head into Tiergarten after lunch. If the weather turns ugly, shorten the park and use a nearby station/cafe break.' },
+          { time: 'Afternoon', title: 'Tiergarten and Victory Column', copy: 'Walk through Tiergarten after lunch and finish at the Victory Column.' },
           { time: 'Evening', title: 'Dinner near base', copy: '' }
         ],
-        placeIds: ['topography_terror', 'tiergarten', 'tempelhofer_feld']
+        placeIds: ['topography_terror', 'tiergarten', 'victory_column']
       },
       nightlife: {
         title: 'Nightlife without burnout',
@@ -21107,9 +21239,9 @@
         accent: '#8E6BBE',
         bg: '#F5F0FF',
         blocks: [
-          { time: 'Morning', title: 'Sleep in and keep the morning light', copy: 'Protect the morning. The biggest mistake before a Berlin night is trying to win the step-count competition.' },
+          { time: 'Morning', title: 'Sleep in and keep the morning light', copy: 'Start later and keep the morning short if you plan to stay out at night.' },
           { time: 'Lunch', title: 'Lunch on Oranienstraße', copy: '' },
-          { time: 'Afternoon', title: 'Rest and pick one night area', copy: 'Use the afternoon for food, rest, and one clear night area. If energy drops, keep the evening to Friedrichshain bars instead of clubs.' },
+          { time: 'Afternoon', title: 'Rest and pick one night area', copy: 'Use the afternoon for food and rest. Choose Friedrichshain bars instead of clubs if you want a shorter evening.' },
           { time: 'Evening', title: 'Drinks and clubs', copy: '' }
         ],
         placeIds: ['raw_gelande', 'oranienstrasse', 'simon_dach_strasse']
@@ -21133,9 +21265,9 @@
         accent: '#1B5E20',
         bg: '#F2F8E8',
         blocks: [
-          { time: 'Morning', title: 'Train ride to Potsdam Hbf', copy: 'Take the regional train to Potsdam after the rush and keep Charlottenburg Palace as the lower-energy Berlin fallback.' },
+          { time: 'Morning', title: 'Train ride to Potsdam Hbf', copy: 'Take a regional train to Potsdam after the morning rush.' },
           { time: 'Lunch', title: 'Lunch in Potsdam', copy: '' },
-          { time: 'Afternoon', title: 'Sanssouci Palace gardens', copy: 'Use Sanssouci as the main anchor and keep the park walk unhurried. If the palace is closed, make the park the point and skip the indoor ticket.' },
+          { time: 'Afternoon', title: 'Sanssouci Palace gardens', copy: 'Make Sanssouci the main stop and walk through the palace gardens. Check the exact palace entry before leaving.' },
           { time: 'Evening', title: 'Dinner near base', copy: '' }
         ],
         placeIds: ['potsdam_hbf', 'sanssouci']
@@ -21160,7 +21292,7 @@
         theme: 'Tour + central history',
         title: 'BerlinWalk tour, then free central history',
         afternoonTitle: 'Topography of Terror after the tour',
-        afternoonCopy: 'Use Topography of Terror as the one serious follow-up. If the day feels too heavy, switch to the Brandenburg Gate and memorial walk.',
+        afternoonCopy: 'Use Topography of Terror as the main follow-up, then continue to Brandenburg Gate and the nearby memorials.',
         eveningTitle: 'Simple central dinner',
         eveningCopy: 'Eat close to your base tonight. History is heavy, and the plan works better when the evening stays simple.',
         placeIds: ['world_clock', 'brandenburg_gate', 'topography_terror', 'reichstag'],
@@ -21171,7 +21303,7 @@
         theme: 'Tour + museums',
         title: 'BerlinWalk tour, then Museum Island',
         afternoonTitle: 'Museum Island as the museum anchor',
-        afternoonCopy: 'Use one checked-open Museum Island museum as the main paid stop. If tickets are awkward, stay outside with Berlin Cathedral and the Lustgarten.',
+        afternoonCopy: 'Choose one checked-open Museum Island museum and use the full visit window for it.',
         eveningTitle: 'Central dinner, no second queue',
         eveningCopy: 'Have a relaxed dinner in Mitte and do not add a second queue.',
         placeIds: ['world_clock', 'museum_island', 'brandenburg_gate', 'hackescher_markt'],
@@ -21197,10 +21329,10 @@
         theme: 'Tour + food',
         title: 'BerlinWalk tour, then courtyards and food',
         afternoonTitle: 'Stay around Hackescher Markt',
-        afternoonCopy: 'Use Hackescher Markt and Hackesche Hofe as the food layer. If rain wins, stay under cover in the courtyards.',
+        afternoonCopy: 'Use Hackescher Markt and Hackesche Hofe for the food stops and covered courtyards.',
         eveningTitle: 'One-area dinner',
-        eveningCopy: 'Dinner near Hackescher Markt tonight. Keep the flavor high and the transfer low.',
-        placeIds: ['world_clock', 'hackesche_hofe', 'hackescher_markt', 'markthalle_neun'],
+        eveningCopy: 'Have dinner near Hackescher Markt and avoid another transfer.',
+        placeIds: ['world_clock', 'hackesche_hofe', 'hackescher_markt'],
         accent: '#D94D5C',
         bg: '#FFF0F3'
       },
@@ -21519,22 +21651,22 @@
       });
     } else if (repeated && key === 'free') {
       variant = templateVariant(template, {
-        title: 'One open-air day in former Tempelhof',
-        theme: 'Tempelhofer Feld without a ticket',
+        title: 'Tempelhofer Feld and Kreuzberg',
+        theme: 'Open-air Berlin',
         blocks: [
-          { time: 'Morning', title: 'Tempelhofer Feld', copy: 'Use Tempelhofer Feld as the main free outdoor space instead of adding more central monuments.' },
-          { time: 'Lunch', title: 'Lunch near Tempelhofer Feld', copy: '' },
-          { time: 'Afternoon', title: 'Tempelhofer Feld runway and picnic side', copy: 'Return to the field from a different entrance, or sit on the grass instead of crossing Berlin for another free sight.' },
-          { time: 'Evening', title: 'Dinner around Mehringdamm', copy: '' }
+          { time: 'Morning', title: 'Tempelhofer Feld', copy: 'Enter Tempelhofer Feld and spend the morning on the former runway and the open grass.' },
+          { time: 'Lunch', title: 'Lunch around Mehringdamm', copy: '' },
+          { time: 'Afternoon', title: 'Viktoriapark and Bergmannkiez', copy: 'Walk through Viktoriapark, then continue into Bergmannkiez for the neighborhood streets and cafes.' },
+          { time: 'Evening', title: 'Dinner around Bergmannkiez', copy: '' }
         ],
-        placeIds: ['tempelhofer_feld']
+        placeIds: ['tempelhofer_feld', 'tempelhof_food_search', 'viktoriapark']
       });
     } else if (repeated && key === 'museums') {
       variant = templateVariant(template, {
         title: 'Royal West Berlin at a slower pace',
         theme: 'Charlottenburg palace and lake',
         blocks: [
-          { time: 'Morning', title: 'Charlottenburg Palace', copy: 'Use Charlottenburg Palace as the main stop. If the interior is closed, make the gardens the point and skip the ticket.' },
+          { time: 'Morning', title: 'Charlottenburg Palace', copy: 'Use Charlottenburg Palace as the main stop. Check the room opening times before choosing an interior ticket.' },
           { time: 'Lunch', title: 'Lunch in Charlottenburg', copy: '' },
           { time: 'Afternoon', title: 'Savignyplatz and Lietzensee', copy: 'Stay west for cafes, bookstores, and a quieter lake walk.' },
           { time: 'Evening', title: 'Dinner', copy: '' }
@@ -21566,14 +21698,14 @@
     if (profile.slow) {
       var slowNoteAdded = false;
       var slowNotes = {
-        history: "Take it nice and slow. The history here is heavy, and you need time to process it over a good cup of coffee.",
-        wall: "Just one major Wall site today, please. Trying to see it all just dilutes the emotional impact. Quality over quantity.",
-        museums: "I promise you, taking your time in one museum is infinitely better than panic-walking through three.",
-        food: "Sit down and truly enjoy your meal. In Berlin, rushing a good dinner is practically a crime.",
-        free: "Use the parks to actually sit and breathe, not just as a shortcut to the next monument.",
-        nightlife: "Conserve your energy like a battery. You're going to need 100% for the dance floor tonight.",
-        local: "This is your neighborhood day. Your only mission is to find a cozy cafe and watch the world go by.",
-        potsdam: "Keep Potsdam on standby. If it feels like too much effort today, stay in Berlin and be delightfully lazy."
+        history: 'Leave enough time for the main history stop and take a cafe break before continuing.',
+        wall: 'Use one major Wall site as the main stop and give it enough time.',
+        museums: 'Choose one museum and see it properly instead of adding several short visits.',
+        food: 'Allow time to sit down for the main meal.',
+        free: 'Use the park as a real break, not only as a route between sights.',
+        nightlife: 'Keep the daytime plan short if you want to stay out at night.',
+        local: 'Choose one cafe and spend the rest of the day in the same neighborhood.',
+        potsdam: 'If the Potsdam journey feels too long, use the listed Berlin alternative.'
       };
       blocks = blocks.map(function (block) {
         if (!slowNoteAdded && /^(morning|afternoon)$/i.test(String(block.time || ''))) {
@@ -21593,13 +21725,13 @@
         if (!paidNoteAdded && key === 'museums' && /museum|dome|entry/i.test(String(block.title + ' ' + block.copy))) {
           paidNoteAdded = true;
           return Object.assign({}, block, {
-            copy: String(block.copy || '') + " Stick to just one paid ticket today. The city is literally an open-air museum, so free history is everywhere."
+            copy: String(block.copy || '') + ' Buy one paid ticket at most and keep the other stops free.'
           });
         }
         if (!foodNoteAdded && key === 'food' && /food|dinner|market/i.test(String(block.title + ' ' + block.copy))) {
           foodNoteAdded = true;
           return Object.assign({}, block, {
-            copy: String(block.copy || '') + " Skip the fancy reservations. The best food in Berlin is often handed to you over a counter in a paper tray anyway!"
+            copy: String(block.copy || '') + ' Use a counter-service option if you want to keep the cost low.'
           });
         }
         return block;
@@ -21610,13 +21742,13 @@
       addBlockBeforeClose(blocks, {
         time: 'Break',
         title: 'Build in a real pause',
-        copy: "Find a playground or a park bench ASAP. The kids (and you) desperately need a timeout before dinner."
+        copy: 'Use a nearby playground, park bench, or cafe for a proper break before dinner.'
       });
     }
 
     if (profile.comfort && key === 'potsdam') {
       blocks[0] = Object.assign({}, blocks[0], {
-        copy: String(blocks[0].copy || '') + ' For a comfort version, make Charlottenburg Palace the Berlin fallback and avoid the extra train leg.'
+        copy: String(blocks[0].copy || '') + ' Allow extra time for the train and reduce the number of palace stops if needed.'
       });
     }
 
@@ -21661,6 +21793,10 @@
     var type = day.planKey || dayVisualType(day);
     if (type === 'potsdam') return null;
 
+    // Rain and opening alternatives belong in the dedicated Plan B section.
+    // Do not add backup-only steps to the main itinerary.
+    if (hasRainConcern() || type === 'wall' || type === 'free') return null;
+
     var wantsAddon = Boolean(day.prefersNearbyAddon || hasRainConcern() || isLongDaylight(day.dateKey) || profile.slow);
     if (!wantsAddon) return null;
 
@@ -21669,7 +21805,7 @@
     var rainy = hasRainConcern();
     var addon = {
       time: profile.slow ? 'Pause' : 'Nearby option',
-      window: '30-45 min',
+      window: '16:30-17:15',
       title: 'Optional stop near ' + lastLabel,
       copy: 'Use this only if you still have energy. Stay near ' + lastLabel + ' instead of crossing Berlin.'
     };
@@ -21947,27 +22083,8 @@
       placeIds: (day.placeIds || []).slice()
     });
     clone.openingWarning = risk;
-    if (risk.key === 'monday-museum' || risk.key === 'closed-place') {
-      var fallbackIds = ['topography_terror', 'brandenburg_gate', 'holocaust_memorial'];
-      var mergedIds = [];
-      fallbackIds.concat(clone.placeIds || []).forEach(function (placeId) {
-        if (placeFor(placeId) && mergedIds.indexOf(placeId) === -1) mergedIds.push(placeId);
-      });
-      clone.placeIds = mergedIds.slice(0, 4);
-      var alreadyHasBackup = clone.blocks.some(function (block) {
-        return /opening backup/i.test(String(block.time || '') + ' ' + String(block.title || ''));
-      });
-      if (!alreadyHasBackup) {
-        clone.blocks.unshift({
-          time: 'Opening backup',
-          window: 'Start here first',
-          title: risk.key === 'monday-museum' ? 'Use open-air history before any museum door' : 'Start with the open-air backup',
-          copy: risk.key === 'monday-museum'
-            ? 'Monday is risky for museum interiors. Start with Topography of Terror, Brandenburg Gate, or the memorials, then check one exact museum before going inside.'
-            : 'This anchor has an opening risk on your date. Start with Topography of Terror, Brandenburg Gate, or the memorials before committing to an indoor ticket.'
-        });
-      }
-    }
+    // Keep the purchased main route immutable. The opening alternative is
+    // rendered in Plan B instead of being inserted as a hidden first stop.
     return clone;
   }
 
@@ -22101,6 +22218,140 @@
     };
   }
 
+  function artifactMergeWindows(first, second) {
+    if (window.BWTripPlannerRuntimeV31 && typeof window.BWTripPlannerRuntimeV31.mergeTimeWindows === 'function') {
+      return window.BWTripPlannerRuntimeV31.mergeTimeWindows(first, second);
+    }
+    var matches = [String(first || ''), String(second || '')].map(function (value) {
+      var times = value.match(/\b\d{1,2}:\d{2}\b/g) || [];
+      return times.length ? { start: times[0], end: times[times.length - 1] } : null;
+    }).filter(Boolean);
+    if (matches.length < 2) return first || second || '';
+    function minutes(value) {
+      var parts = value.split(':').map(Number);
+      return parts[0] * 60 + parts[1];
+    }
+    var start = matches.reduce(function (best, item) { return minutes(item.start) < minutes(best) ? item.start : best; }, matches[0].start);
+    var end = matches.reduce(function (best, item) { return minutes(item.end) > minutes(best) ? item.end : best; }, matches[0].end);
+    return start + '-' + end;
+  }
+
+  function artifactConcreteWindow(day, block, index, previousEnd) {
+    var candidate = dayBlockWindow(day, block, index) || (block && block.window) || '';
+    var parsed = parseTimeWindowMinutes(candidate);
+    if (parsed && (previousEnd == null || parsed.start >= previousEnd)) {
+      return { label: formatTimeWindowMinutes(parsed.start, parsed.duration), end: parsed.end };
+    }
+    var label = String((block && block.time) || '').toLowerCase();
+    var start = label.indexOf('arrival') !== -1 ? 9 * 60
+      : label.indexOf('morning') !== -1 ? 9 * 60 + 30
+        : label.indexOf('lunch') !== -1 ? 12 * 60
+          : label.indexOf('afternoon') !== -1 ? 14 * 60
+            : label.indexOf('break') !== -1 || label.indexOf('pause') !== -1 || label.indexOf('nearby') !== -1 ? 16 * 60 + 30
+              : 18 * 60 + 30;
+    if (previousEnd != null) start = Math.max(start, previousEnd);
+    var duration = label.indexOf('lunch') !== -1 || label.indexOf('dinner') !== -1 || label.indexOf('evening') !== -1 ? 90
+      : label.indexOf('break') !== -1 || label.indexOf('pause') !== -1 || label.indexOf('nearby') !== -1 ? 45
+        : 120;
+    if (start + duration > (23 * 60 + 59)) {
+      start = Math.max(previousEnd || 0, (23 * 60 + 59) - duration);
+    }
+    return { label: formatTimeWindowMinutes(start, duration), end: start + duration };
+  }
+
+  function artifactBlocksForDay(day) {
+    var output = [];
+    var previousEnd = null;
+    (day.blocks || []).forEach(function (block, index) {
+      var mapLinks = blockMapLinks(day, block, index);
+      var concreteWindow = artifactConcreteWindow(day, block, index, previousEnd);
+      previousEnd = concreteWindow.end;
+      var primary = null;
+      if (day.dayNumber === 1 && /^arrival$/i.test(String(block.time || ''))) primary = compactArrivalMove();
+      else if (mapLinks.length) primary = mapLinks[0];
+      var visiblePlaceIds = mapLinks.map(function (link) { return link.placeId; }).filter(function (placeId, placeIndex, all) {
+        return placeId && placeFor(placeId) && all.indexOf(placeId) === placeIndex;
+      });
+      if (primary && primary.placeId && visiblePlaceIds.indexOf(primary.placeId) === -1) visiblePlaceIds.unshift(primary.placeId);
+      var normalized = {
+        time: block.time || '',
+        window: concreteWindow.label,
+        title: block.title || '',
+        copy: block.time === 'Lunch' ? dayLunchCopy(day) : (isDayClosingBlock(day, block, index) ? dayDiningCopy(day) : (block.copy || '')),
+        primaryPlace: primary ? { placeId: primary.placeId || '', label: primary.label || '', url: primary.url || '' } : null,
+        placeIds: visiblePlaceIds,
+        mapLinks: mapLinks.map(function (link) {
+          return { placeId: link.placeId || '', label: link.label || '', url: link.url || '' };
+        })
+      };
+      var explicitLunchIds = block.time === 'Lunch' && window.BWTripPlannerRuntimeV31 && window.BWTripPlannerRuntimeV31.isExplicitLunchTitle(block.title)
+        ? explicitMealPlaceIds(day, 'lunch')
+        : [];
+      if (explicitLunchIds.length) {
+        var previous = null;
+        for (var priorIndex = output.length - 1; priorIndex >= 0; priorIndex -= 1) {
+          var prior = output[priorIndex];
+          var priorIds = (prior.mapLinks || []).map(function (link) { return link.placeId; });
+          if (prior.primaryPlace && prior.primaryPlace.placeId) priorIds.unshift(prior.primaryPlace.placeId);
+          if (window.BWTripPlannerRuntimeV31.shouldCoalesceLunch(block.title, explicitLunchIds, priorIds)) {
+            previous = prior;
+            break;
+          }
+        }
+        if (previous) {
+          previous.window = artifactMergeWindows(previous.window, normalized.window);
+          previous.time = previous.time + ' + lunch';
+          var mealName = explicitLunchIds.map(foodPlaceName).filter(Boolean).join(' or ');
+          previous.copy = [previous.copy, 'Have lunch at ' + mealName + ' here before continuing.'].filter(Boolean).join(' ');
+          normalized.mapLinks.forEach(function (link) {
+            if (!(previous.mapLinks || []).some(function (item) { return item.url === link.url; })) previous.mapLinks.push(link);
+          });
+          normalized.placeIds.forEach(function (placeId) {
+            if (previous.placeIds.indexOf(placeId) === -1) previous.placeIds.push(placeId);
+          });
+          return;
+        }
+      }
+      output.push(normalized);
+    });
+    return output;
+  }
+
+  function artifactRouteForDay(day, blocks) {
+    var ids = [];
+    (blocks || []).forEach(function (block) {
+      var blockIds = (block.placeIds || []).slice();
+      if (/^lunch$/i.test(String(block.time || '')) || /^(evening|dinner|later)$/i.test(String(block.time || ''))) blockIds = blockIds.slice(0, 1);
+      blockIds.forEach(function (placeId) {
+        if (placeId && placeId !== 'arrival_transfer' && placeFor(placeId) && ids.indexOf(placeId) === -1) ids.push(placeId);
+      });
+    });
+    var places = ids.map(placeFor).filter(Boolean);
+    var totalDistance = 0;
+    var longestSegment = 0;
+    for (var index = 1; index < places.length; index += 1) {
+      var distance = placeDistanceKm(places[index - 1], places[index]);
+      totalDistance += distance;
+      longestSegment = Math.max(longestSegment, distance);
+    }
+    var travelMode = /Potsdam|Day trip/i.test((day.theme || '') + ' ' + (day.title || '')) || longestSegment > 3 || totalDistance > 6 ? 'transit' : 'walking';
+    var url = ids.length < 2 ? (ids.length ? placeSearchUrl(ids[0]) : meetingPointUrl()) : (function () {
+      var origin = placeDirectionsQuery(places[0]);
+      var destination = placeDirectionsQuery(places[places.length - 1]);
+      var waypoints = places.slice(1, -1).map(placeDirectionsQuery).join('|');
+      var value = 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(origin) + '&destination=' + encodeURIComponent(destination) + '&travelmode=' + encodeURIComponent(travelMode);
+      if (waypoints) value += '&waypoints=' + encodeURIComponent(waypoints);
+      return value;
+    })();
+    return {
+      placeIds: ids,
+      url: url,
+      travelMode: travelMode,
+      totalDistanceKm: Math.round(totalDistance * 10) / 10,
+      longestSegmentKm: Math.round(longestSegment * 10) / 10
+    };
+  }
+
   function planArtifactSourceV2(plan, scenarioId) {
     var labels = selectedLabels();
     return {
@@ -22127,40 +22378,18 @@
       ticket: plan.ticket,
       tourFit: plan.tourFit,
       days: (plan.days || []).map(function (day) {
-        var distance = routeDistanceSummary(day);
-        var reservation = officialReservationAction(day);
         var weather = dayWeatherFor(day);
-        var openingRisk = dayOpeningRisk(day);
-        var blocks = (day.blocks || []).map(function (block, index) {
-          var mapLinks = blockMapLinks(day, block, index);
-          var primary = null;
-          if (day.dayNumber === 1 && /^arrival$/i.test(String(block.time || ''))) {
-            primary = compactArrivalMove();
-          } else if (mapLinks.length) {
-            primary = mapLinks[0];
-          }
-          return {
-            time: block.time || '',
-            window: dayBlockWindow(day, block, index) || block.window || '',
-            title: block.title || '',
-            copy: block.copy || '',
-            primaryPlace: primary ? {
-              placeId: primary.placeId || '',
-              label: primary.label || '',
-              url: primary.url || ''
-            } : null,
-            mapLinks: mapLinks.map(function (link) {
-              return { placeId: link.placeId || '', label: link.label || '', url: link.url || '' };
-            })
-          };
-        });
+        var blocks = artifactBlocksForDay(day);
+        var route = artifactRouteForDay(day, blocks);
+        var reservation = officialReservationAction(day, route.placeIds);
+        var openingRisk = dayOpeningRisk(day, route.placeIds);
         return {
           dayNumber: day.dayNumber,
           dateKey: day.dateKey,
           title: day.title,
           theme: day.theme,
           planKey: day.planKey || dayVisualType(day),
-          places: dayPlaceIds(day).map(function (placeId) {
+          places: route.placeIds.map(function (placeId) {
             var place = placeFor(placeId);
             return {
               placeId: placeId,
@@ -22176,10 +22405,7 @@
             };
           }),
           blocks: blocks,
-          route: Object.assign({
-            url: dayDirectionsUrl(day),
-            travelMode: dayRouteTravelMode(day)
-          }, distance),
+          route: route,
           weather: weather ? {
             mode: weather.mode || '',
             title: weather.title || '',
@@ -22188,9 +22414,7 @@
           } : null,
           opening: {
             status: dayStatus(day.dateKey).key,
-            primaryClosed: blocks.some(function (block) {
-              return Boolean(block.primaryPlace && block.primaryPlace.placeId && placeClosedOnDate(block.primaryPlace.placeId, day.dateKey));
-            }),
+            primaryClosed: route.placeIds.some(function (placeId) { return placeClosedOnDate(placeId, day.dateKey); }),
             warning: openingRisk || null
           },
           reservation: reservation ? {
@@ -22201,7 +22425,7 @@
             source: reservation.source,
             checkedAt: reservation.checkedAt
           } : null,
-          risks: riskTagsForDay(day).map(function (risk) {
+          risks: riskTagsForDay(day, route.placeIds).map(function (risk) {
             return { key: risk.key, label: risk.label, severity: risk.severity, detail: risk.detail || '' };
           }),
           previewStops: compactPreviewItems(day).map(function (item) {
@@ -22219,9 +22443,11 @@
     };
   }
 
-  function artifactDecisionReceipt(plan) {
+  function artifactDecisionReceipt(plan, artifactDays) {
     var labels = selectedLabels();
     var first = (plan.days || [])[0] || {};
+    var firstArtifactDay = (artifactDays || [])[0] || {};
+    var firstArea = firstArtifactDay.area || compactPreviewArea(first);
     var reasons = [];
     var arrivalLabel = labels.arrivalPoint || 'your arrival point';
     var stayLabel = labels.stayArea || 'your Berlin base';
@@ -22231,16 +22457,18 @@
     } else {
       reasons.push(arrivalLabel + ' is treated as the real start, then the route moves toward ' + stayLabel + '.');
     }
-    reasons.push((earlyArrival ? 'Day 1 stays compact after arrival' : 'The late arrival keeps Day 1 intentionally short') + ' around ' + compactPreviewArea(first) + '.');
-    var mondayDay = (plan.days || []).find(function (day) { return dayStatus(day.dateKey).key === 'monday'; });
-    if (mondayDay) reasons.push('Day ' + mondayDay.dayNumber + ' carries a Monday opening check before any museum door.');
+    reasons.push((earlyArrival ? 'Day 1 stays compact after arrival' : 'The late arrival keeps Day 1 intentionally short') + ' around ' + firstArea + '.');
+    var mondayDay = (artifactDays || []).find(function (day) {
+      return day.opening && day.opening.status === 'monday' && (day.opening.warning || day.reservation);
+    });
+    if (mondayDay) reasons.push('Day ' + mondayDay.dayNumber + ' includes the relevant Monday opening check.');
     var tourSlot = tourSlotForPlan(plan);
     if (tourSlot && tourSlot.insideTrip) reasons.push('The ' + tourSlot.startLabel + ' BerlinWalk from the World Clock anchors ' + tourSlot.dayLabel + '.');
     if (state.mustHandle.indexOf('rain') !== -1) reasons.push('Each relevant day keeps one named covered backup close to its route.');
     if (state.groupType === 'family') reasons.push('Family pace protects a real break instead of filling every hour.');
     var note = state.arrivalPoint === 'ber'
-      ? 'I kept the first day around ' + compactPreviewArea(first) + ' after the BER transfer, so you can leave your bags and learn the area without crossing Berlin again.'
-      : 'I kept the first day around ' + compactPreviewArea(first) + ' after ' + arrivalLabel + ', so the first afternoon feels like an arrival, not a checklist.';
+      ? 'I kept the first day around ' + firstArea + ' after the BER transfer, so you can leave your bags before the first stop.'
+      : 'I kept the first day around ' + firstArea + ' after ' + arrivalLabel + ', so the first walk stays close to your base.';
     return {
       headline: 'I have shaped your ' + plan.days.length + (plan.days.length === 1 ? ' day' : ' days') + ' in Berlin',
       guideNote: note,
@@ -22248,9 +22476,9 @@
     };
   }
 
-  function artifactIndoorBackup(day, excludedLabels) {
+  function artifactIndoorBackup(day, excludedLabels, visiblePlaceIds) {
     var type = dayPlanType(day);
-    var area = artifactAreaForDay(day);
+    var area = artifactAreaForDay(day, visiblePlaceIds);
     var candidates = {
       wall: ['the Tränenpalast exhibition at Friedrichstraße', 'Topography of Terror'],
       potsdam: ['Museum Barberini in Potsdam', 'the covered Potsdam Hauptbahnhof concourse'],
@@ -22282,37 +22510,47 @@
     }[state.stayArea] || 'the Humboldt Forum foyer';
   }
 
-  function artifactPlanBForDay(day) {
-    var area = artifactAreaForDay(day);
-    var warning = day.openingSwap || day.openingWarning || (day.opening && day.opening.warning) || null;
+  function artifactPlanBForDay(day, visiblePlaceIds, blocks, openingWarning) {
+    var ids = visiblePlaceIdsForDay(day, visiblePlaceIds);
+    var area = artifactAreaForDay(day, ids);
+    var warning = openingWarning || day.openingSwap || null;
     if (warning) {
-      return cleanAiText(
+      return cleanPlannerText(
         warning.copy || warning.detail || warning.title,
         'If the main indoor stop is closed, start at Topography of Terror and keep the rest of the route in ' + area + '.',
         560
       );
     }
     if (day.weatherSwap) {
-      var weatherBackup = artifactIndoorBackup(day, compactPreviewItems(day).map(function (item) { return item.map && item.map.label; }).filter(Boolean));
-      return cleanAiText(day.weatherSwap.copy || day.weatherSwap.action, 'Use ' + weatherBackup + ' and keep the rest of the route in ' + area + '.', 560);
+      var weatherBackup = artifactIndoorBackup(day, (blocks || []).reduce(function (labels, block) {
+        return labels.concat((block.mapLinks || []).map(function (link) { return link.label; }));
+      }, []), ids);
+      return cleanPlannerText(day.weatherSwap.copy || day.weatherSwap.action, 'Use ' + weatherBackup + ' and keep the rest of the route in ' + area + '.', 560);
     }
-    var firstAnchor = compactPreviewItems(day)[0];
-    var anchor = firstAnchor && firstAnchor.map && firstAnchor.map.label ? firstAnchor.map.label : area;
+    var anchorPlace = ids.map(placeFor).find(function (place) {
+      return place && !/station|food|transport/i.test(String(place.type || ''));
+    }) || (ids.length ? placeFor(ids[0]) : null);
+    var anchor = anchorPlace ? anchorPlace.label : area;
     if (day.dayNumber === 1) {
       return 'If rain is steady after check-in, skip the outdoor loop and use ' + artifactArrivalIndoorBackup() + '; keep the rest of Day 1 close to ' + area + '.';
     }
-    var visibleLabels = compactPreviewItems(day).map(function (item) { return item.map && item.map.label; }).filter(Boolean)
-      .concat(dayPlaceIds(day).map(function (placeId) {
-        var place = placeFor(placeId);
-        return place && place.label;
-      }).filter(Boolean));
-    var backup = artifactIndoorBackup(day, [anchor].concat(visibleLabels));
+    var visibleLabels = ids.map(function (placeId) {
+      var place = placeFor(placeId);
+      return place && place.label;
+    }).filter(Boolean);
+    var backup = artifactIndoorBackup(day, [anchor].concat(visibleLabels), ids);
     var type = day.planKey || dayPlanType(day);
-    if (type === 'free' && dayPlaceIds(day).indexOf('tempelhofer_feld') !== -1) {
+    if (type === 'free' && ids.indexOf('tempelhofer_feld') !== -1) {
       return 'If rain becomes steady, skip the runway loop and take a long cafe break around Bergmannstrasse or Mehringdamm; do not cross Berlin just to fill the day.';
     }
-    if (type === 'free' && dayPlaceIds(day).length === 1) {
+    if (type === 'free' && ids.length === 1) {
       return 'If rain becomes steady, replace the ' + anchor + ' outdoor loop with ' + backup + '; check the opening details before leaving.';
+    }
+    if (type === 'potsdam') {
+      return 'If rain becomes steady, start at Museum Barberini in central Potsdam. Continue to Sanssouci Park only if the weather improves.';
+    }
+    if (anchorPlace && anchorPlace.indoor) {
+      return 'If rain becomes steady, stay with ' + anchor + ' and use ' + backup + ' as the next indoor stop. Keep the route within ' + area + '.';
     }
     var continuation = type === 'wall'
       ? 'before continuing toward East Side Gallery and the Spree.'
@@ -22322,44 +22560,42 @@
     return 'If rain becomes steady, shorten the outdoor time at ' + anchor + ' and use ' + backup + ' ' + continuation;
   }
 
-  function artifactDecisionForDay(day, index, plan) {
+  function artifactDecisionForDay(day, index, plan, route, artifactBlocks) {
     var labels = selectedLabels();
     var dayNumber = Number(day.dayNumber || index + 1);
-    var area = artifactAreaForDay(day);
+    var visibleIds = route && Array.isArray(route.placeIds) ? route.placeIds : [];
+    var area = artifactAreaForDay(day, visibleIds);
     if (index === 0) {
       if (state.arrivalPoint === 'ber') {
-        return 'The BER transfer and bag drop come before sightseeing; the first walk stays close to ' + area + '.';
+        return 'Handle BER and your bags first. Then stay in ' + area + '.';
       }
-      return (labels.arrivalPoint || 'Your arrival point') + ' is the real start; after the bags are handled, Day 1 stays close to ' + area + '.';
+      return 'Handle ' + (labels.arrivalPoint || 'your arrival') + ' and your bags first. Then stay in ' + area + '.';
     }
 
     var tourSlot = tourSlotForPlan(plan);
     if (tourSlot && tourSlot.insideTrip && dayNumber === tourSlot.offset + 1) {
-      return 'The ' + tourSlot.startLabel + ' BerlinWalk at the World Clock anchors Day ' + dayNumber + '; the next stop stays in the historic centre.';
+      return 'Start at the World Clock for the ' + tourSlot.startLabel + ' BerlinWalk. Lunch and the next stop stay central.';
     }
 
-    var actions = (day.blocks || []).filter(function (block, blockIndex) {
+    var decisionBlocks = artifactBlocks || day.blocks || [];
+    var actions = decisionBlocks.filter(function (block, blockIndex) {
       var time = String(block.time || '');
       return !isTourBlock(block) &&
-        !isDayClosingBlock(day, block, blockIndex) &&
+        !/^(evening|dinner|later)$/i.test(time) &&
         !/^(lunch|pause|nearby option|opening backup)$/i.test(time);
     }).map(function (block) { return String(block.title || '').trim(); }).filter(Boolean);
     var first = actions[0] || '';
     var second = actions[1] || '';
-    var distance = routeDistanceSummary(day);
-    var firstKey = artifactHeadlineKey(first);
-    var secondKey = artifactHeadlineKey(second);
-    var sameAnchor = firstKey && secondKey && (firstKey.indexOf(secondKey) !== -1 || secondKey.indexOf(firstKey) !== -1);
+    var firstNatural = first.replace(/^Train ride to\s+/i, 'the train to ');
+    var distance = route || { totalDistanceKm: 0, longestSegmentKm: 0, travelMode: 'walking' };
     var decision = first && second
-      ? (sameAnchor
-        ? 'Day ' + dayNumber + ' stays around ' + area + '; ' + first + ' is the anchor and the second block extends the same place.'
-        : distance.longestSegmentKm >= 2.2 || area.indexOf('→') !== -1
-          ? 'Day ' + dayNumber + ' uses public transport for the longer move: ' + first + '; then ' + second + '.'
-          : 'Day ' + dayNumber + ' stays around ' + area + ': ' + first + ' first; then ' + second + '.')
+      ? (distance.travelMode === 'transit'
+        ? 'Start with ' + firstNatural + '. Take public transport to ' + second + '.'
+        : 'Start with ' + firstNatural + '. Then continue to ' + second + ' in ' + area + '.')
       : first
-        ? 'Day ' + dayNumber + ' makes ' + first + ' the main anchor and keeps the rest of the route nearby.'
-        : 'Day ' + dayNumber + ' keeps its stops connected around ' + area + '.';
-    var hasIndoorStop = dayPlaceIds(day).some(function (placeId) {
+        ? 'Make ' + firstNatural + ' the main stop today.'
+        : 'Use ' + area + ' as today\'s base.';
+    var hasIndoorStop = visibleIds.some(function (placeId) {
       var place = placeFor(placeId);
       return Boolean(place && place.indoor);
     });
@@ -22378,7 +22614,7 @@
     return 'Walk';
   }
 
-  function artifactBeforeYouGo(plan) {
+  function artifactBeforeYouGo(plan, artifactDays) {
     var items = [{ title: 'Arrival ticket', detail: ticketNudge() }];
     var slot = tourSlotForPlan(plan);
     if (slot && slot.insideTrip) {
@@ -22388,8 +22624,8 @@
         url: plannerBookingUrl('artifact_before_you_go')
       });
     }
-    (plan.days || []).forEach(function (day) {
-      var reservation = officialReservationAction(day);
+    (artifactDays || []).forEach(function (day) {
+      var reservation = day && day.reservation;
       if (!reservation || items.length >= 8) return;
       items.push({ title: reservation.label, detail: 'Use the official booking page before Day ' + day.dayNumber + '.', url: reservation.url });
     });
@@ -22397,27 +22633,57 @@
     return items;
   }
 
-  function artifactCarryPack(plan) {
+  function artifactCarryPack(plan, artifactDays) {
     var items = (plan.days || []).map(function (day) {
+      var artifactDay = (artifactDays || []).find(function (candidate) { return candidate.dayNumber === day.dayNumber; });
       return {
         title: 'Day ' + day.dayNumber + ' route',
-        detail: artifactAreaForDay(day) + ' · ' + artifactMovementForDay(day),
-        url: dayDirectionsUrl(day)
+        detail: (artifactDay && artifactDay.area ? artifactDay.area : artifactAreaForDay(day)) + ' · ' + (artifactDay && artifactDay.movement ? artifactDay.movement : artifactMovementForDay(day)),
+        url: artifactDay && artifactDay.route ? artifactDay.route.url : dayDirectionsUrl(day)
       };
     });
     items.push({ title: 'BerlinWalk meeting point', detail: 'World Clock, Alexanderplatz.', url: plannerBookingUrl('artifact_carry_pack') });
-    items.push({ title: 'Offline PDF backup', detail: 'Download the same itinerary before leaving Wi-Fi.' });
+    items.push({ title: 'Offline PDF backup', detail: 'The saved itinerary works offline. Map links need mobile data.' });
     return items.slice(0, 10);
   }
 
   function planArtifactSourceV3(plan) {
     var sourceV2 = planArtifactSourceV2(plan, 'current');
     var labels = selectedLabels();
-    var decisionReceipt = artifactDecisionReceipt(plan);
+    var decisionReceipt = artifactDecisionReceipt(plan, sourceV2.days);
+    var artifactDays = (sourceV2.days || []).map(function (daySource, index) {
+      var day = plan.days[index];
+      var photo = dayPhotoForType(dayVisualType(day));
+      var area = artifactAreaForDay(day, daySource.route.placeIds);
+      var anchors = (daySource.places || []).slice(0, 5);
+      var title = artifactDayPromise({
+        dayNumber: daySource.dayNumber,
+        title: daySource.title,
+        theme: daySource.theme,
+        area: area,
+        anchors: anchors
+      }, daySource.blocks || []);
+      return Object.assign({}, daySource, {
+        title: title,
+        area: area,
+        movement: day.dayNumber === 1 && state.arrivalPoint === 'ber'
+          ? 'Train + walk'
+          : (daySource.route.travelMode === 'transit' ? 'Public transport + walk' : 'Walk'),
+        accent: day.accent || '#1B5E20',
+        background: day.bg || '#F2F8E8',
+        photo: { src: photo.src, alt: photo.alt },
+        route: Object.assign({}, daySource.route, {
+          label: day.dayNumber === 1 ? 'Open the Day 1 walk after arrival' : 'Open the complete Day ' + day.dayNumber + ' route'
+        }),
+        anchors: anchors,
+        planB: artifactPlanBForDay(day, daySource.route.placeIds, daySource.blocks, daySource.opening && daySource.opening.warning),
+        decision: artifactDecisionForDay(day, index, plan, daySource.route, daySource.blocks)
+      });
+    });
     return {
-      engineVersion: '2026.07.20-artifact-v3.0',
+      engineVersion: '2026.07.20-artifact-v3.1',
       createdAt: new Date().toISOString(),
-      quality: { status: 'pass', validatorVersion: 'plan-artifact-v3-browser-1' },
+      quality: { status: 'pass', validatorVersion: 'plan-artifact-v3-browser-3.1' },
       input: sourceV2.input,
       decisionReceipt: decisionReceipt,
       trip: {
@@ -22430,37 +22696,13 @@
         ticket: plan.ticket,
         tourFit: plan.tourFit
       },
-      days: (sourceV2.days || []).map(function (daySource, index) {
-        var day = plan.days[index];
-        var photo = dayPhotoForType(dayVisualType(day));
-        var area = artifactAreaForDay(day);
-        var anchors = (daySource.places || []).slice(0, 5);
-        var title = artifactDayPromise({
-          dayNumber: daySource.dayNumber,
-          title: daySource.title,
-          theme: daySource.theme,
-          area: area,
-          anchors: anchors
-        }, daySource.blocks || []);
-        return Object.assign({}, daySource, {
-          title: title,
-          area: area,
-          movement: artifactMovementForDay(day),
-          accent: day.accent || '#1B5E20',
-          background: day.bg || '#F2F8E8',
-          photo: { src: photo.src, alt: photo.alt },
-          route: Object.assign({}, daySource.route, { label: 'Open the complete Day ' + day.dayNumber + ' route' }),
-          anchors: anchors,
-          planB: artifactPlanBForDay(day),
-          decision: artifactDecisionForDay(day, index, plan)
-        });
-      }),
-      beforeYouGo: artifactBeforeYouGo(plan),
-      carryPack: artifactCarryPack(plan),
+      days: artifactDays,
+      beforeYouGo: artifactBeforeYouGo(plan, artifactDays),
+      carryPack: artifactCarryPack(plan, artifactDays),
       delivery: {
         browser: true,
         pdf: true,
-        rendererVersion: 'artifact-v3-browser-pdf-1'
+        rendererVersion: 'artifact-v3-browser-pdf-3.1'
       }
     };
   }
@@ -22553,6 +22795,43 @@
     }
   }
 
+  function planArtifactScenarioV3(scenario) {
+    var previousState = {
+      arrivalDate: state.arrivalDate,
+      tripLength: state.tripLength,
+      arrivalTime: state.arrivalTime,
+      arrivalPoint: state.arrivalPoint,
+      stayArea: state.stayArea,
+      groupType: state.groupType,
+      firstTime: state.firstTime,
+      interests: state.interests.slice(),
+      budgetStyle: state.budgetStyle,
+      mustHandle: state.mustHandle.slice(),
+      pace: state.pace,
+      tourIntent: state.tourIntent
+    };
+    var previousWeather = latestWeather;
+    var previousDailyWeather = latestDailyWeather;
+    try {
+      var overrides = scenario && scenario.input ? scenario.input : {};
+      Object.keys(previousState).forEach(function (key) {
+        if (!Object.prototype.hasOwnProperty.call(overrides, key)) return;
+        state[key] = Array.isArray(previousState[key])
+          ? (Array.isArray(overrides[key]) ? overrides[key].slice() : previousState[key].slice())
+          : overrides[key];
+      });
+      latestWeather = scenario && scenario.weather ? scenario.weather : null;
+      latestDailyWeather = scenario && scenario.dailyWeather ? Object.assign({}, scenario.dailyWeather) : {};
+      return buildPlanArtifactV3(buildPlan());
+    } finally {
+      Object.keys(previousState).forEach(function (key) {
+        state[key] = Array.isArray(previousState[key]) ? previousState[key].slice() : previousState[key];
+      });
+      latestWeather = previousWeather;
+      latestDailyWeather = previousDailyWeather;
+    }
+  }
+
   function installPlanArtifactV2QaBridge() {
     if (!isLocalPreviewSurface() || window.__BW_TP_ENGINE_V2__) return;
     window.__BW_TP_ENGINE_V2__ = {
@@ -22573,6 +22852,13 @@
         currentWeather: function () {
           var overlay = latestWeatherOverlayV1 || buildWeatherOverlayV1(latestPlan || buildPlan());
           return overlay ? JSON.parse(JSON.stringify(overlay)) : null;
+        },
+        buildScenarioArtifact: function (scenario) {
+          var artifact = planArtifactScenarioV3(scenario || {});
+          return artifact ? JSON.parse(JSON.stringify(artifact)) : null;
+        },
+        deliverySnapshot: function (artifact) {
+          return window.BWPlanArtifactV3.deliverySnapshot(artifact || latestArtifactV3 || buildPlanArtifactV3(latestPlan || buildPlan()));
         },
         checkoutContract: function () {
           var artifact = latestArtifactV3 || buildPlanArtifactV3(latestPlan || buildPlan());
@@ -22954,10 +23240,6 @@
     planningInProgress = false;
     if (planGenerated) {
       planNeedsUpdate = true;
-      aiEnhancement = null;
-      aiStatus = 'idle';
-      aiPlanSignature = '';
-      aiRequestId += 1;
       updatePlanningUi();
       updateUnlockUi();
       if (!options || !options.keepStatus) setActionStatus('');
@@ -22969,10 +23251,6 @@
     latestArtifactV3 = null;
     purchasedArtifactV3 = null;
     latestWeatherOverlayV1 = null;
-    aiEnhancement = null;
-    aiStatus = 'idle';
-    aiPlanSignature = '';
-    aiRequestId += 1;
     resetExpandedLists();
     var draftPlan = buildPlan();
     renderPlanChrome(draftPlan);
@@ -23014,10 +23292,6 @@
     latestArtifactV3 = null;
     purchasedArtifactV3 = null;
     latestWeatherOverlayV1 = null;
-    aiEnhancement = null;
-    aiStatus = 'idle';
-    aiPlanSignature = '';
-    aiRequestId += 1;
     resetExpandedLists();
     renderPlanChrome(buildPlan());
     updatePlanningUi();
@@ -23095,7 +23369,6 @@
       lockBox.innerHTML = unlocked ? '' : lockedPlanPreviewHtml(plan);
     }
 
-    if (unlocked && !activePaidArtifactV3()) requestAiEnhancement();
     renderFullPlan();
     updateLeadPanelText(plan);
     planNeedsUpdate = false;
@@ -23110,7 +23383,7 @@
   }
 
   function fullPlanContentReady() {
-    return Boolean(unlocked && planGenerated && (activePaidArtifactV3() || aiStatus === 'ready' || aiStatus === 'quota' || aiStatus === 'error'));
+    return Boolean(unlocked && planGenerated && activePaidArtifactV3());
   }
 
   function revealFullPlanAfterGuide(plan, shouldScroll) {
@@ -23130,7 +23403,6 @@
     full.hidden = !unlocked || !planGenerated;
     if (fullActions) fullActions.hidden = !fullPlanContentReady();
     if (!unlocked || !planGenerated) {
-      renderAiEnhancement(plan);
       if (routeBrief) routeBrief.innerHTML = '';
       if (jumpBar) jumpBar.innerHTML = '';
       daysEl.innerHTML = '';
@@ -23160,7 +23432,6 @@
       ? ' Recommended BerlinWalk: ' + (slot.insideTrip ? slot.dayLabel + ' at ' + slot.startLabel : slot.dayLabel + ' at ' + slot.startLabel) + '.'
       : '';
     setText('[data-full-sub]', state.tripLength + (state.tripLength === 1 ? ' day' : ' days') + ' from ' + plan.displayDate + '. Built around daily areas, maps, and Berlin essentials.' + tourLine);
-    renderAiEnhancement(plan);
     if (!fullPlanContentReady()) {
       if (routeBrief) routeBrief.innerHTML = '';
       if (jumpBar) jumpBar.innerHTML = '';
@@ -23271,10 +23542,7 @@
     }
     if (planGenerated && !unlocked && !proOfferTracked) {
       proOfferTracked = true;
-      track('bw_trip_planner_pro_offer_view', {
-        offer_variant: PRO_OFFER_VARIANT,
-        price_eur: PRO_PRICE_EUR
-      });
+      track('bw_trip_planner_pro_offer_view', proOfferTrackingContext());
     }
     renderCompactPlanPreview(latestPlan || buildPlan());
     var preview = root.querySelector('[data-preview-days]');
@@ -23329,12 +23597,6 @@
       var previousRouteSignature = planRouteSignature(latestPlan);
       latestPlan = buildPlan();
       var routeChanged = previousRouteSignature !== planRouteSignature(latestPlan);
-      if (routeChanged && aiStatus !== 'idle') {
-        aiEnhancement = null;
-        aiStatus = 'idle';
-        aiPlanSignature = '';
-        aiRequestId += 1;
-      }
       ensureDailyWeatherForPlan(latestPlan);
       try {
         latestArtifactV3 = buildPlanArtifactV3(latestPlan);
@@ -23348,7 +23610,6 @@
         renderUnlockedResultPanels(latestPlan);
         renderPlanBoard(latestPlan);
         renderFullPlan();
-        if (routeChanged) requestAiEnhancement();
       } else {
         renderCompactPlanPreview(latestPlan);
       }
@@ -24102,10 +24363,6 @@
     return Boolean(entitlementVerified && unlockRecord());
   }
 
-  function unlockEmailForQuota() {
-    return liteLeadEmail();
-  }
-
   function rememberEntitlement(record) {
     try {
       if (!window.sessionStorage) return;
@@ -24161,7 +24418,7 @@
   async function installVerifiedPlanArtifact(body, record) {
     var responseBody = body || {};
     var envelope = verifiedArtifactEnvelope(responseBody);
-    if (!envelope && record && record.artifactHash) {
+    if (!envelope && record && record.orderId && record.entitlementToken && record.planIdHash) {
       responseBody = await postTripPlannerPro({
         action: 'get-artifact',
         orderId: record.orderId,
@@ -24170,7 +24427,7 @@
       });
       envelope = verifiedArtifactEnvelope(responseBody);
     }
-    if (!envelope) return entitlementWithArtifact(record, null);
+    if (!envelope) throw new Error('artifact_missing');
     if (!window.BWPlanArtifactV3) throw new Error('artifact_runtime_unavailable');
     var hash = String(envelope.artifactHash || '').toLowerCase();
     var schemaVersion = String(envelope.artifactSchemaVersion || '');
@@ -24218,24 +24475,6 @@
 
   function isLocalPreviewSurface() {
     return window.location.protocol === 'file:' || /^(localhost|127\.0\.0\.1|\[::1\])$/i.test(window.location.hostname);
-  }
-
-  function forceLocalAiErrorForQa() {
-    try {
-      var params = new URLSearchParams(window.location.search);
-      return isLocalPreviewSurface() && params.get('forceAiError') === '1';
-    } catch (error) {
-      return false;
-    }
-  }
-
-  function forceLocalAiMockForQa() {
-    try {
-      var params = new URLSearchParams(window.location.search);
-      return isLocalPreviewSurface() && params.get('mockAi') === '1';
-    } catch (error) {
-      return false;
-    }
   }
 
   function forceLocalUnlockForQa() {
@@ -24301,6 +24540,8 @@
       url.searchParams.delete('trip_planner_session_id');
       url.searchParams.delete('trip_planner_order');
       url.searchParams.delete('trip_planner_checkout');
+      url.searchParams.delete('trip_planner_plan_hash');
+      url.searchParams.delete('trip_planner_access');
       return url.toString();
     } catch (error) {
       return parentPageUrlParam() || window.location.href;
@@ -24318,7 +24559,9 @@
       return response.json().catch(function () { return {}; }).then(function (body) {
         if (!response.ok || !body || body.ok !== true) {
           var error = new Error(body && (body.error || body.code) || 'secure_checkout_unavailable');
-          error.code = body && body.code || '';
+          error.code = body && (body.code || body.error) || '';
+          error.status = response.status;
+          error.body = body;
           throw error;
         }
         return body;
@@ -24329,7 +24572,7 @@
   function removeCheckoutParams() {
     try {
       var url = new URL(window.location.href);
-      ['trip_planner_session_id', 'trip_planner_order', 'trip_planner_checkout'].forEach(function (key) { url.searchParams.delete(key); });
+      ['trip_planner_session_id', 'trip_planner_order', 'trip_planner_checkout', 'trip_planner_plan_hash', 'trip_planner_access'].forEach(function (key) { url.searchParams.delete(key); });
       window.history.replaceState({}, document.title, url.toString());
     } catch (error) {}
     try {
@@ -24452,7 +24695,8 @@
     }
     setActionStatus(purchasedArtifactV3 ? 'Your purchased itinerary is verified. The phone view and PDF now use the same stored plan.' : 'Your Pro access is verified. The full trip plan is now open.');
     track('bw_trip_planner_pro_access_open', {
-      offer_variant: PRO_OFFER_VARIANT,
+      product_key: PRO_PRODUCT_KEY,
+      offer_id: proOfferState.offerId || PRO_STANDARD_OFFER_ID,
       order_id: record.orderId,
       source: source || 'entitlement_restore'
     });
@@ -24476,7 +24720,9 @@
       token: record.entitlementToken,
       planIdHash: record.planIdHash
     }).then(function (body) {
-      if (body.entitled !== true) throw new Error('invalid_entitlement');
+      if (!window.BWTripPlannerRuntimeV31 || !window.BWTripPlannerRuntimeV31.entitlementAllowsAccess(body)) {
+        throw new Error('invalid_entitlement');
+      }
       var envelope = verifiedArtifactEnvelope(body);
       var verifiedRecord = entitlementWithArtifact(Object.assign({}, record, {
         expiresAt: Number(body.expiresAt) || record.expiresAt
@@ -24502,6 +24748,21 @@
   function handleCheckoutReturn() {
     var params;
     try { params = new URLSearchParams(window.location.search || ''); } catch (error) { params = new URLSearchParams(); }
+    var hasAccessParams = params.has('trip_planner_plan_hash') || params.has('trip_planner_access');
+    var emailAccess = window.BWTripPlannerRuntimeV31
+      ? window.BWTripPlannerRuntimeV31.parseEmailAccess(window.location.search || '')
+      : null;
+    if (hasAccessParams) removeCheckoutParams();
+    if (emailAccess) {
+      rememberEntitlement({
+        orderId: emailAccess.orderId,
+        entitlementToken: emailAccess.entitlementToken,
+        planIdHash: emailAccess.planIdHash,
+        expiresAt: Date.now() + UNLOCK_MS
+      });
+      setActionStatus('Checking your secure plan access…');
+      return verifyStoredEntitlement('email_access_link');
+    }
     var orderId = String(params.get('trip_planner_order') || '');
     var sessionId = String(params.get('trip_planner_session_id') || '');
     if (!orderId || !sessionId) return verifyStoredEntitlement('return_restore');
@@ -24527,7 +24788,7 @@
       record = entitlementWithArtifact(record, verifiedArtifactEnvelope(body));
       rememberEntitlement(record);
       fireVerifiedBrowserMetaPurchase(body.metaPurchase);
-      track('bw_trip_planner_pro_purchase', { offer_variant: PRO_OFFER_VARIANT, order_id: record.orderId });
+      track('bw_trip_planner_pro_purchase', { product_key: PRO_PRODUCT_KEY, offer_id: proOfferState.offerId || PRO_STANDARD_OFFER_ID, order_id: record.orderId });
       return verifyStoredEntitlement('verified_payment_return');
     }).catch(function () {
       setActionStatus('Payment was not verified, so Pro access remains locked. Please return to the checkout if you completed payment.', true);
@@ -24722,519 +24983,8 @@
     };
   }
 
-  function aiDayPayload(day) {
-    var blocks = dayActionBlockItems(day).map(function (item) {
-      var block = item.block;
-      return {
-        time: block.time || '',
-        title: block.title || '',
-        copy: dayBlockCopy(day, block, item.index) || ''
-      };
-    });
-    return {
-      dayNumber: day.dayNumber,
-      date: formatDisplayDate(day.dateKey),
-      title: day.title,
-      theme: day.theme,
-      places: dayMapLinks(day).slice(0, 6).map(function (link) { return link.label; }),
-      blocks: blocks,
-      risks: riskTagsForDay(day).map(function (tag) { return tag.label; })
-    };
-  }
-
-  function aiEnhancementPayload(plan) {
-    var labels = selectedLabels();
-    var slot = tourSlotForPlan(plan);
-    return {
-      quotaEmail: unlockEmailForQuota(),
-      inputs: {
-        arrivalDate: state.arrivalDate,
-        tripLength: labels.tripLength,
-        arrivalTime: labels.arrivalTime,
-        arrivalPoint: labels.arrivalPoint,
-        stayArea: labels.stayArea,
-        groupType: labels.groupType,
-        firstTime: labels.firstTime,
-        interests: labels.interests,
-        budgetStyle: labels.budgetStyle,
-        mustHandle: labels.mustHandle,
-        pace: labels.pace,
-        tourIntent: labels.tourIntent
-      },
-      weather: latestWeather ? {
-        title: latestWeather.title,
-        mode: latestWeather.mode,
-        copy: latestWeather.copy,
-        advice: latestWeather.advice,
-        tripSummary: tripWeatherSummary(plan)
-      } : {},
-      tourSlot: {
-        dayLabel: slot.dayLabel || '',
-        dateLabel: slot.dateLabel || '',
-        timeLabel: slot.timeLabel || '',
-        booked: slot.booked ? 'yes' : 'no'
-      },
-      plan: {
-        title: plan.title,
-        summary: plan.summary,
-        ticket: plan.ticket,
-        tourFit: plan.tourFit,
-        arrivalStatus: plan.arrivalStatus.short,
-        days: (plan.days || []).slice(0, 7).map(aiDayPayload)
-      }
-    };
-  }
-
-  function cleanAiText(value, fallback, maxLength) {
-    var text = String(value == null ? (fallback || '') : value).trim();
-    if (maxLength && text.length > maxLength) {
-      text = text.slice(0, maxLength).replace(/\s+\S*$/, '').replace(/[\s,;:]+$/, '');
-      if (text && !/[.!?]$/.test(text)) text += '.';
-    }
-    return text;
-  }
-
-  function cleanGuidePublicText(value, fallback, maxLength) {
-    var text = cleanAiText(value, fallback, maxLength)
-      .replace(/[—–]/g, ' - ')
-      .replace(/\bWe['’]re\s+kicking things off\b/g, 'I would start')
-      .replace(/\bwe['’]re\s+kicking things off\b/g, 'I would start')
-      .replace(/\bWe['’]ll\s+start\b/g, 'I would start')
-      .replace(/\bwe['’]ll\s+start\b/g, 'I would start')
-      .replace(/\bWe['’]ll\b/g, 'I would')
-      .replace(/\bwe['’]ll\b/g, 'I would')
-      .replace(/\bWe will\b/g, 'I would')
-      .replace(/\bwe will\b/g, 'I would')
-      .replace(/\bWe['’]re\b/g, 'I am')
-      .replace(/\bwe['’]re\b/g, 'I am')
-      .replace(/\bWe are\b/g, 'I am')
-      .replace(/\bwe are\b/g, 'I am')
-      .replace(/\bWe['’]ve\b/g, 'I have')
-      .replace(/\bwe['’]ve\b/g, 'I have')
-      .replace(/\bWe have\b/g, 'I have')
-      .replace(/\bwe have\b/g, 'I have')
-      .replace(/\bOur\b/g, 'My')
-      .replace(/\bour\b/g, 'my')
-      .replace(/\bUs\b/g, 'Me')
-      .replace(/\bus\b/g, 'me')
-      .replace(/\bWe\b/g, 'I')
-      .replace(/\bwe\b/g, 'I')
-      .replace(/\s+-\s+/g, ' - ')
-      .replace(/\s{2,}/g, ' ')
-      .trim();
-    return cleanAiText(text, '', maxLength);
-  }
-
-  function normalizeAiEnhancement(raw, plan) {
-    var validDays = {};
-    var planDays = plan.days || [];
-    planDays.forEach(function (day) {
-      validDays[day.dayNumber] = true;
-    });
-    var rawDayStories = Array.isArray(raw && raw.dayStories) ? raw.dayStories : [];
-    if (!rawDayStories.length && Array.isArray(raw && raw.dayNotes)) {
-      rawDayStories = raw.dayNotes.map(function (item) {
-        return {
-          dayNumber: item && item.dayNumber,
-          text: item && (item.text || item.note || item.nextMove || item.headline)
-        };
-      });
-    }
-    var storyByDay = {};
-    rawDayStories.map(function (item) {
-      return {
-        dayNumber: Number(item && item.dayNumber) || 0,
-        text: cleanGuidePublicText(item && item.text, '', 360)
-      };
-    }).filter(function (item) {
-      return validDays[item.dayNumber] && item.text;
-    }).forEach(function (item) {
-      if (!storyByDay[item.dayNumber]) storyByDay[item.dayNumber] = item.text;
-    });
-    var slotForStories = tourSlotForPlan(plan);
-    var dayStories = planDays.map(function (day) {
-      return {
-        dayNumber: day.dayNumber,
-        text: cleanGuidePublicText(storyByDay[day.dayNumber] || mockDayStory(day, slotForStories), '', 360)
-      };
-    }).filter(function (item) {
-      return item.text;
-    });
-    var dayNotes = Array.isArray(raw && raw.dayNotes) ? raw.dayNotes.map(function (item) {
-      return {
-        dayNumber: Number(item && item.dayNumber) || 0,
-        headline: cleanAiText(item && item.headline, '', 80),
-        note: cleanGuidePublicText(item && item.note, '', 240),
-        nextMove: cleanGuidePublicText(item && item.nextMove, '', 160)
-      };
-    }).filter(function (item) {
-      return validDays[item.dayNumber] && item.headline && item.note;
-    }).slice(0, plan.days.length) : [];
-    return {
-      provider: cleanAiText(raw && raw.provider, 'gemini', 40),
-      model: cleanAiText(raw && raw.model, 'gemini-2.5-flash', 80),
-      noteTitle: cleanAiText(raw && (raw.noteTitle || raw.headline), 'Yusuf guide read', 90),
-      routeIntro: cleanGuidePublicText(raw && (raw.routeIntro || raw.guideNote || raw.localRead), '', 680),
-      guideNote: cleanGuidePublicText(raw && (raw.guideNote || raw.localRead), '', 620),
-      weatherSentence: cleanGuidePublicText(raw && raw.weatherSentence, '', 220),
-      tourSentence: cleanGuidePublicText(raw && (raw.tourSentence || raw.tourNote), '', 220),
-      quotaMessage: cleanAiText(raw && raw.quotaMessage, '', 180),
-      chips: Array.isArray(raw && raw.chips) ? raw.chips.map(function (item) {
-        return {
-          label: cleanAiText(item && item.label, '', 34),
-          value: cleanGuidePublicText(item && item.value, '', 90)
-        };
-      }).filter(function (item) {
-        return item.label && item.value;
-      }).slice(0, 3) : [],
-      headline: cleanAiText(raw && raw.headline, 'Local guide read', 90),
-      localRead: cleanGuidePublicText(raw && raw.localRead, '', 420),
-      watchOut: cleanGuidePublicText(raw && raw.watchOut, '', 280),
-      tourNote: cleanGuidePublicText(raw && raw.tourNote, '', 220),
-      dayStories: dayStories,
-      dayNotes: dayNotes
-    };
-  }
-
-  function humanList(items) {
-    var list = (items || []).filter(Boolean);
-    if (!list.length) return '';
-    if (list.length === 1) return list[0];
-    if (list.length === 2) return list[0] + ' and ' + list[1];
-    return list.slice(0, -1).join(', ') + ', and ' + list[list.length - 1];
-  }
-
-  function guideAnchorLabels(day, limit) {
-    return dayMapLinks(day).slice(0, limit || 3).map(function (link) { return link.label; }).filter(Boolean);
-  }
-
-  function guideAnchorPhrase(day, limit) {
-    return humanList(guideAnchorLabels(day, limit || 2)) || day.theme || day.title || 'this day';
-  }
-
-  function naturalGuidePhrase(value) {
-    return String(value || '')
-      .replace(/\s*\/\s*/g, ' and ')
-      .replace(/\bHbf\b/g, 'station')
-      .replace(/\bPotsdam station\b/gi, 'Potsdam')
-      .replace(/\bFree and low budget\b/gi, 'free and low-cost Berlin')
-      .replace(/\bBerlin Wall and Cold War\b/gi, 'Wall history')
-      .trim();
-  }
-
-  function guideTopicPhrase(labels) {
-    return humanList((labels || []).map(naturalGuidePhrase).filter(Boolean)) || 'Berlin';
-  }
-
-  function guideFocusPhrase(labels) {
-    var text = (labels || []).join(' ').toLowerCase();
-    if (/history/.test(text) && /wall|cold/.test(text) && /free|budget/.test(text)) return 'history and Wall days';
-    if (/history/.test(text) && /wall|cold/.test(text)) return 'history and Wall days';
-    if (/museum/.test(text) && /history/.test(text)) return 'museum and history time';
-    if (/food/.test(text) && /night/.test(text)) return 'food and evening time';
-    if (/free|budget/.test(text)) return 'low-cost Berlin';
-    if (/museum/.test(text)) return 'museum time';
-    if (/food/.test(text)) return 'food and neighborhood time';
-    return 'Berlin';
-  }
-
-  function guideAnchorNaturalPhrase(day, limit) {
-    return naturalGuidePhrase(guideAnchorPhrase(day, limit || 2));
-  }
-
-  function guideBlockTitle(day, match) {
-    var blocks = dayActionBlockItems(day).map(function (item) { return item.block; });
-    var found = blocks.find(function (block) {
-      return match.test(String(block.time || '') + ' ' + String(block.title || '') + ' ' + String(block.copy || ''));
-    });
-    return found ? found.title : '';
-  }
-
-  function mockRouteIntro(plan, mainFocus, slot) {
-    var days = plan.days || [];
-    var first = days[0] ? guideAnchorNaturalPhrase(days[0], 2) : 'your first Berlin bearings';
-    var nextDayIndex = slot && slot.insideTrip ? slot.offset + 1 : 1;
-    var nextProperDay = days[nextDayIndex] || days[1] || null;
-    var nextProperDayPhrase = nextProperDay ? guideAnchorNaturalPhrase(nextProperDay, 2) : '';
-    var tourDay = slot && slot.insideTrip
-      ? ' I recommend joining me for BerlinWalk on ' + slot.dayLabel + ' at ' + slot.startLabel + '. I suggest eating near Hackescher Markt right after, so you stay central without exhausting yourself.'
-      : '';
-    var focusSubject = mainFocus && mainFocus !== 'Berlin'
-      ? (/days$/i.test(mainFocus) ? mainFocus : mainFocus + ' days')
-      : 'sightseeing days';
-    var secondLine = nextProperDayPhrase ? ' After that, I move the route smoothly into ' + nextProperDayPhrase + ' so you do not force too much on arrival day.' : '';
-    return "Welcome to Berlin! I’m Yusuf, your personal local guide and unofficial time-saver. I built this plan so you don't ruin your first day wandering aimlessly with heavy bags. Drop your luggage, grab a quick bite, and take a lazy stroll around " + first + ". I keep the heavy " + focusSubject + " stuff for later because nobody appreciates history when they are jet-lagged and hangry." + tourDay + secondLine;
-  }
-
-  function mockDayStory(day, slot) {
-    var type = day.planKey || dayVisualType(day);
-    var anchors = guideAnchorLabels(day, 3);
-    var first = naturalGuidePhrase(anchors[0] || day.theme || 'the main stop');
-    var second = naturalGuidePhrase(anchors[1] || guideBlockTitle(day, /afternoon|museum|wall|food|park|neighborhood/i) || 'the next stop');
-    var third = naturalGuidePhrase(anchors[2] || guideBlockTitle(day, /evening|dinner|pause|break/i) || '');
-    var isTourDay = slot && slot.insideTrip && day.dayNumber === slot.offset + 1;
-
-    if (day.dayNumber === 1) {
-      return "Day 1 is your grace period. Please, do not try to conquer Berlin today. Berlin always wins. Drop your bags, grab a warm pretzel or a Döner, and wander around " + first + " to make sure your legs still work.";
-    }
-    if (isTourDay) {
-      return "Showtime. I would start with my BerlinWalk tour at " + slot.startLabel + " by the World Clock. I'll do the talking, you do the walking. Afterward, reward yourself around Hackescher Markt with a long lunch. You have earned it.";
-    }
-    if (type === 'wall') {
-      return "Take a deep breath at " + first + ". It’s mind-blowing to see how the Berlin Wall just sliced through people's backyards. Take your time digesting that, then continue to " + second + " for the bigger Cold War picture without burning out.";
-    }
-    if (type === 'museums') {
-      return 'Museum Island works best when you choose one collection. Give ' + first + ' the main part of the day, then use the river and ' + second + ' as a lighter finish.';
-    }
-    if (type === 'history') {
-      return "Today is the heavy stuff: classic Berlin history. I would start at " + first + ", then continue toward " + second + " after enough coffee to see how royal Prussia became the restless capital Berlin is today.";
-    }
-    if (type === 'food') {
-      return "Throw the itinerary out the window today. Start near " + first + " and just eat your way through the neighborhood. Dieting in Berlin is illegal anyway. Drift toward " + second + " at a food-coma pace.";
-    }
-    if (type === 'free') {
-      return "Berlin can be surprisingly cheap if you know where to look. Start at " + first + " for that unbeatable open-air vibe. Keep your wallet safe in your pocket, and add " + second + " only if it is not pouring rain.";
-    }
-    if (type === 'nightlife') {
-      return "If you want to survive a Berlin club night, you need tactical laziness today. Keep the daytime extremely breezy so you aren't falling asleep in the queue for " + (third || second) + " at 2 AM.";
-    }
-    if (type === 'potsdam') {
-      return "Make Potsdam the main mission today. Start with the train to Potsdam Hbf, keep Sanssouci as the anchor, and use Charlottenburg Palace only as the low-energy Berlin fallback.";
-    }
-    return "Think of today as your half-time break. Start with a slow, aimless stroll around " + first + ", and make " + second + " your only other must-do today. Chill mode activated.";
-  }
-
-  function mockAiEnhancement(plan) {
-    var slot = tourSlotForPlan(plan);
-    var dayCount = (plan.days || []).length;
-    var focusLabels = (state.interests || []).map(function (key) { return labelFor('interests', key); }).slice(0, 3);
-    var mainFocus = guideFocusPhrase(focusLabels);
-    var tourSentence = slot && slot.insideTrip
-      ? 'BerlinWalk fits best on ' + slot.dayLabel + ' at ' + slot.startLabel + ' from the World Clock. Keep the next move nearby.'
-      : slot && !slot.booked
-        ? 'The tour does not land cleanly inside this plan, so I would not force it into a bad arrival day.'
-        : 'Since the tour is already booked, keep the World Clock meeting point saved and arrive 5 minutes early.';
-    return normalizeAiEnhancement({
-      provider: 'gemini',
-      model: 'gemini-2.5-flash-mock',
-      noteTitle: 'My quick read',
-      routeIntro: mockRouteIntro(plan, mainFocus, slot),
-      weatherSentence: tripWeatherSummary(plan),
-      tourSentence: tourSentence,
-      chips: [],
-      dayStories: (plan.days || []).slice(0, 7).map(function (day) {
-        return {
-          dayNumber: day.dayNumber,
-          text: mockDayStory(day, slot)
-        };
-      })
-    }, plan);
-  }
-
-  function localGuideFallback(plan, reason, quota) {
-    var slot = tourSlotForPlan(plan);
-    var days = (plan.days || []).length;
-    var firstDay = plan.days && plan.days[0];
-    var firstAnchors = firstDay ? dayMapLinks(firstDay).slice(0, 2).map(function (link) { return link.label; }).join(' and ') : 'your first Berlin area';
-    var quotaMessage = reason === 'ai_quota_limit'
-      ? 'AI guide note limit reached for this email and arrival date.'
-      : 'AI guide note is using the local fallback for this update.';
-    return normalizeAiEnhancement({
-      provider: 'local',
-      model: 'deterministic-fallback',
-      noteTitle: 'A note from Yusuf',
-      routeIntro: "Hey there! Yusuf here. For this " + days + "-day plan, ease into it around " + naturalGuidePhrase(firstAnchors) + ". Grab some food, figure out which way is north, and let Berlin's energy sink in before the heavy sightseeing starts.",
-      weatherSentence: tripWeatherSummary(plan),
-      tourSentence: slot && slot.insideTrip
-        ? 'I recommend joining me for BerlinWalk on ' + slot.dayLabel + ' at ' + slot.startLabel + ' from the World Clock.'
-        : 'If you still want to join BerlinWalk, use the next clean Tue-Sat slot rather than forcing it into a bad day.',
-      quotaMessage: quotaMessage,
-      chips: [],
-      dayStories: (plan.days || []).slice(0, 7).map(function (day) {
-        return {
-          dayNumber: day.dayNumber,
-          text: mockDayStory(day, slot)
-        };
-      })
-    }, plan);
-  }
-
-  function resetAiEnhancement() {
-    aiEnhancement = null;
-    aiStatus = 'idle';
-    aiPlanSignature = '';
-    aiRequestId += 1;
-    renderAiEnhancement(latestPlan || buildPlan());
-  }
-
-  function aiAvatarHtml() {
-    return '<span class="bw-ai-avatar" aria-hidden="true"><img src="' + escapeHtml(assetUrl(YUSUF_GUIDE_PHOTO_URL)) + '" alt="" loading="eager" decoding="async"></span>';
-  }
-
-  function aiVisibleDayStories(plan, storyByDay) {
-    return (plan.days || []).filter(function (day) {
-      return storyByDay[day.dayNumber];
-    });
-  }
-
-  function aiEnhancementHtml(plan) {
-    if (!unlocked || !planGenerated) return '';
-    if (aiStatus === 'loading') {
-      return '<section class="bw-ai-panel is-loading" aria-label="Local guide polish loading">' +
-        '<div class="bw-ai-head"><div class="bw-ai-title">' + aiAvatarHtml() + '<div><strong>Your Berlin plan at a glance</strong><span>Building Yusuf\'s quick read of each day. The route and times stay unchanged.</span></div></div><span class="bw-ai-pill">Yusuf note</span></div>' +
-        '<div class="bw-ai-body" style="margin-top:14px;padding:8px 0">' +
-          '<div class="bw-ai-skeleton-title"></div>' +
-          '<div class="bw-ai-skeleton-text line-1"></div>' +
-          '<div class="bw-ai-skeleton-text line-2"></div>' +
-          '<div class="bw-ai-skeleton-text line-3"></div>' +
-          '<div class="bw-ai-skeleton-days">' +
-            '<div class="bw-ai-skeleton-day"></div>' +
-            '<div class="bw-ai-skeleton-day"></div>' +
-          '</div>' +
-        '</div>' +
-      '</section>';
-    }
-    if (aiStatus === 'error') {
-      if (!isLocalPreviewSurface()) return '';
-      return '<section class="bw-ai-panel" aria-label="Local guide polish unavailable">' +
-        '<div class="bw-ai-head"><div class="bw-ai-title">' + aiAvatarHtml() + '<div><strong>Your Berlin plan at a glance</strong><span>Gemini is backend-only. Use localhost/live, or add mockAi=1 for local visual QA.</span></div></div><span class="bw-ai-pill">Preview</span></div>' +
-      '</section>';
-    }
-    if (!aiEnhancement || (aiStatus !== 'ready' && aiStatus !== 'quota')) return '';
-    var noteTitle = cleanAiText(aiEnhancement.noteTitle || aiEnhancement.headline || 'Yusuf guide read', '', 90);
-    var routeIntro = cleanAiText(aiEnhancement.routeIntro || aiEnhancement.guideNote || aiEnhancement.localRead || plan.summary, '', 620);
-    var weatherSentence = cleanAiText(aiEnhancement.weatherSentence, '', 150);
-    var tourSentence = cleanAiText(aiEnhancement.tourSentence || aiEnhancement.tourNote, '', 150);
-    var chips = Array.isArray(aiEnhancement.chips) ? aiEnhancement.chips.slice(0, 3) : [];
-    var storyByDay = {};
-    (aiEnhancement.dayStories || []).forEach(function (item) {
-      storyByDay[item.dayNumber] = item.text;
-    });
-    var glanceHtml = guidePlanGlanceHtml(plan, storyByDay);
-    var asideHtml = [
-      weatherSentence ? { label: 'Weather', value: weatherSentence } : null,
-      tourSentence ? { label: 'Tour', value: tourSentence } : null
-    ].filter(Boolean).map(function (item) {
-      return '<span class="bw-ai-aside"><b>' + escapeHtml(item.label) + '</b><span>' + escapeHtml(item.value) + '</span></span>';
-    }).join('');
-    var chipHtml = chips.length ? '<div class="bw-ai-chips">' + chips.map(function (chip) {
-      return '<span><b>' + escapeHtml(chip.label) + '</b><em>' + escapeHtml(chip.value) + '</em></span>';
-    }).join('') + '</div>' : '';
-    return '<section class="bw-ai-panel" aria-label="Local guide polish">' +
-      '<div class="bw-ai-head"><div class="bw-ai-title">' + aiAvatarHtml() + '<div><strong>Your Berlin plan at a glance</strong><span>Yusuf\'s route read, daily cards, maps, and tour fit in one place.</span></div></div><span class="bw-ai-pill">Yusuf note</span></div>' +
-      '<div class="bw-ai-body">' +
-        '<div class="bw-ai-copy"><strong>' + escapeHtml(noteTitle) + '</strong>' +
-          (routeIntro ? '<span>' + escapeHtml(routeIntro) + '</span>' : '') +
-        '</div>' +
-        glanceHtml +
-        (asideHtml ? '<div class="bw-ai-asides">' + asideHtml + '</div>' : '') +
-        chipHtml +
-      '</div>' +
-    '</section>';
-  }
-
-  function renderAiEnhancement(plan) {
-    var target = root.querySelector('[data-ai-polish-panel]');
-    if (!target) return;
-    target.innerHTML = aiEnhancementHtml(plan || latestPlan || buildPlan());
-  }
-
-  function requestAiEnhancement() {
-    var plan = latestPlan || buildPlan();
-    if (!unlocked || !planGenerated || aiStatus === 'loading' || aiStatus === 'ready' || aiStatus === 'quota') return;
-    var requestPlanSignature = planRouteSignature(plan);
-    aiPlanSignature = requestPlanSignature;
-    if (forceLocalUnlockForQa() && !forceLocalAiMockForQa() && !forceLocalAiErrorForQa()) {
-      aiEnhancement = localGuideFallback(plan, 'local_qa_unlock', {});
-      aiStatus = 'quota';
-      revealFullPlanAfterGuide(plan, true);
-      return;
-    }
-    var requestId = aiRequestId + 1;
-    aiRequestId = requestId;
-    aiStatus = 'loading';
-    aiEnhancement = null;
-    renderFullPlan();
-
-    track('bw_trip_planner_ai_request', {
-      arrival_date: state.arrivalDate,
-      trip_length: state.tripLength,
-      provider: 'gemini'
-    });
-
-    if (forceLocalAiMockForQa()) {
-      window.setTimeout(function () {
-        if (requestId !== aiRequestId || aiPlanSignature !== requestPlanSignature) return;
-        aiEnhancement = mockAiEnhancement(plan);
-        aiStatus = 'ready';
-        revealFullPlanAfterGuide(plan, true);
-        track('bw_trip_planner_ai_success', { provider: 'gemini_mock', trip_length: state.tripLength });
-      }, 500);
-      return;
-    }
-
-    if (window.location.protocol === 'file:') {
-      aiEnhancement = localGuideFallback(plan, 'file_preview_backend_only', {});
-      aiStatus = 'quota';
-      revealFullPlanAfterGuide(plan, true);
-      track('bw_trip_planner_ai_error', { provider: 'gemini', reason: 'file_preview_backend_only', fail_soft: true });
-      return;
-    }
-
-    if (forceLocalAiErrorForQa() || typeof fetch !== 'function') {
-      aiEnhancement = localGuideFallback(plan, 'forced_or_fetch_unavailable', {});
-      aiStatus = 'quota';
-      revealFullPlanAfterGuide(plan, true);
-      track('bw_trip_planner_ai_error', { provider: 'gemini', reason: 'forced_or_fetch_unavailable', fail_soft: true });
-      return;
-    }
-
-    var controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
-    var timeout = controller ? window.setTimeout(function () { controller.abort(); }, 9000) : null;
-    fetch(AI_API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(aiEnhancementPayload(plan)),
-      signal: controller ? controller.signal : undefined
-    }).then(function (response) {
-      if (!response.ok) throw new Error('AI endpoint failed: ' + response.status);
-      return response.json().catch(function () { return {}; });
-    }).then(function (body) {
-      if (requestId !== aiRequestId || aiPlanSignature !== requestPlanSignature) return;
-      if (body && body.ok !== true && /quota|lead_not_found|email_required/i.test(String(body.reason || body.error || ''))) {
-        aiEnhancement = localGuideFallback(plan, body.reason || body.error, body.quota || {});
-        aiStatus = 'quota';
-        revealFullPlanAfterGuide(plan, true);
-        track('bw_trip_planner_ai_quota_fallback', {
-          provider: 'local',
-          reason: String(body.reason || body.error || '').slice(0, 80),
-          trip_length: state.tripLength
-        });
-        return;
-      }
-      if (!body || body.ok !== true || !body.enhancement) throw new Error(body && (body.reason || body.error) || 'empty_ai_response');
-      aiEnhancement = normalizeAiEnhancement(body.enhancement, plan);
-      aiStatus = 'ready';
-      revealFullPlanAfterGuide(plan, true);
-      track('bw_trip_planner_ai_success', {
-        provider: aiEnhancement.provider,
-        model: aiEnhancement.model,
-        trip_length: state.tripLength
-      });
-    }).catch(function (error) {
-      if (requestId !== aiRequestId || aiPlanSignature !== requestPlanSignature) return;
-      aiEnhancement = localGuideFallback(plan, 'ai_error', {});
-      aiStatus = 'quota';
-      revealFullPlanAfterGuide(plan, true);
-      track('bw_trip_planner_ai_error', {
-        provider: 'gemini',
-        reason: String(error && error.message || error).slice(0, 80),
-        fail_soft: true
-      });
-    }).finally(function () {
-      if (timeout) window.clearTimeout(timeout);
-    });
-  }
+  // Runtime AI is intentionally disabled. The deterministic PlanArtifactV3.1
+  // is the only source for browser, PDF and email-ready itinerary output.
 
   function captureLiteLead(email) {
     rememberLiteLead(email);
@@ -25258,7 +25008,7 @@
       track('bw_trip_planner_pro_checkout_error', { reason: 'artifact_not_ready', fail_closed: true });
       return;
     }
-    track('bw_trip_planner_pro_checkout_click', { offer_variant: PRO_OFFER_VARIANT, price_eur: PRO_PRICE_EUR });
+    track('bw_trip_planner_pro_checkout_click', proOfferTrackingContext());
     buttons.forEach(function (button) {
       button.disabled = true;
       button.textContent = 'Opening secure checkout…';
@@ -25267,6 +25017,8 @@
 
     var payload = {
       action: 'create-checkout',
+      productKey: PRO_PRODUCT_KEY,
+      expectedOfferId: proOfferState.offerId || PRO_STANDARD_OFFER_ID,
       clientContractVersion: PLAN_ARTIFACT_CLIENT_CONTRACT_VERSION,
       sessionId: tracking.sessionId || checkoutSessionId(),
       planId: planIdentity(),
@@ -25288,27 +25040,21 @@
     Object.assign(payload, landingExperimentCheckoutContext());
     Object.assign(payload, metaCheckoutContext());
 
-    var request = typeof fetch === 'function'
-      ? fetch(TRIP_PLANNER_PRO_API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      })
-      : Promise.reject(new Error('Fetch unavailable'));
-
-    request.then(function (response) {
-      return response.json().catch(function () { return {}; }).then(function (body) {
-        if (!response.ok || !body || body.ok !== true || !body.checkoutUrl) {
-          throw new Error(body && (body.error || body.code) || 'secure_checkout_unavailable');
-        }
-        return body;
-      });
-    }).then(function (body) {
-      track('bw_trip_planner_pro_payment_started', { offer_variant: PRO_OFFER_VARIANT, order_id: body.orderId || '' });
+    postTripPlannerPro(payload).then(function (body) {
+      if (!body.checkoutUrl) throw new Error('secure_checkout_unavailable');
+      track('bw_trip_planner_pro_payment_started', Object.assign({ order_id: body.orderId || '' }, proOfferTrackingContext()));
       setActionStatus('Secure checkout is ready.');
       var target = window.top || window;
       target.location.href = body.checkoutUrl;
     }).catch(function (error) {
+      if (window.BWTripPlannerRuntimeV31 && window.BWTripPlannerRuntimeV31.isOfferChangedConflict(error && error.status, error && error.code)) {
+        return fetchProOffer(true).then(function () {
+          if (note) note.textContent = 'The offer changed before checkout. I refreshed the price; review it and tap again.';
+          setActionStatus('The price changed before payment. The offer has been refreshed and no checkout was opened.', true);
+          buttons.forEach(function (button) { button.disabled = false; });
+          updateCompactOfferCopy(latestPlan || buildPlan());
+        });
+      }
       track('bw_trip_planner_pro_checkout_error', { reason: String(error && error.message || error).slice(0, 100), fail_closed: true });
       if (note) note.textContent = 'Secure checkout is not available yet. Your free preview is still here and nothing was charged.';
       setActionStatus('Detailed-plan checkout is not available yet. No payment was started.', true);
@@ -25705,7 +25451,7 @@
     ensureDailyWeatherForPlan(plan);
     var labels = selectedLabels();
     var slot = tourSlotForPlan(plan);
-    var guide = aiEnhancement || localGuideFallback(plan, 'pdf_fallback', {});
+    var guide = { dayStories: [] };
     var storyByDay = {};
     (guide.dayStories || []).forEach(function (item) {
       storyByDay[item.dayNumber] = item.text;
@@ -28624,7 +28370,6 @@
       var selectedJump = selectedDayByNumber(planForJump, dayJumpDay);
       if (selectedJump) dayJumpDay = selectedJump.dayNumber;
       routeDeckDay = dayJumpDay;
-      renderAiEnhancement(planForJump);
       renderDayJumpBar(planForJump);
       renderRouteDeck(planForJump);
       focusDayCard(dayJumpDay, true);
@@ -28643,7 +28388,6 @@
       dayJumpDay = jumpDay;
       routeDeckDay = jumpDay;
       var routeJumpPlan = latestPlan || buildPlan();
-      renderAiEnhancement(routeJumpPlan);
       renderDayJumpBar(routeJumpPlan);
       focusDayCard(dayJumpDay, true);
       track('bw_trip_planner_route_deck_jump', {
@@ -28962,6 +28706,7 @@
     if (!artifactReviewDemo) openEmailPlanFromLink();
     ensureFdrAddonPanel();
     renderFdrAddon();
+    fetchProOffer();
     if (!artifactReviewDemo) handleCheckoutReturn();
     else setActionStatus('Review sample open. The PDF below is generated from this exact stored example plan.');
     if (!artifactReviewDemo) {

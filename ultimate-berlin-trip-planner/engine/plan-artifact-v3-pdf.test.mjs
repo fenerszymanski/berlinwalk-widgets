@@ -21,11 +21,13 @@ function artifactSource(dayCount = 3) {
       travelMode: 'walking',
       totalDistanceKm: 3.1,
       longestSegmentKm: 1.2,
+      placeIds: ['alexanderplatz', 'museum-island'],
     },
     anchors: [{ placeId: 'alexanderplatz', label: 'Alexanderplatz', area: 'Mitte' }],
     blocks: [
       {
-        time: '09:30',
+        time: 'Morning',
+        window: '09:30-10:45',
         title: 'Alexanderplatz',
         copy: 'Start at the World Clock and look around the square.',
         primaryPlace: {
@@ -35,7 +37,8 @@ function artifactSource(dayCount = 3) {
         },
       },
       {
-        time: '11:00',
+        time: 'Late morning',
+        window: '11:00-12:30',
         title: 'Museum Island',
         copy: 'Cross the Spree and keep the museums together in one compact section.',
         primaryPlace: {
@@ -207,11 +210,66 @@ test('weather page keeps forecast and typical-condition truth labels separate', 
   const page = plan.pages.find((item) => item.type === 'weather-plan-b');
   assert.equal(page.mode, 'mixed');
   assert.equal(page.days[0].weatherKind, 'live');
-  assert.match(page.days[0].weather, /^Live forecast:/);
+  assert.match(page.days[0].weather, /^Live forecast from Open-Meteo, checked /);
   assert.equal(page.days[2].weatherKind, 'typical');
-  assert.match(page.days[2].weather, /^Typical conditions, not a forecast:/);
+  assert.match(page.days[2].weather, /^Typical August conditions, not a forecast:/);
+  assert.doesNotMatch(page.days[2].weather, /Typical August conditions[^.]*\. Typical August conditions/i);
   assert.match(page.days[0].planB, /Hackescher Markt/);
   assert.match(page.days[1].opening, /Open in the planned window/);
+  assert.match(page.days[1].opening, /Planning note only; verify the exact place on its official site before leaving/);
+  assert.match(page.checkedAt, /20 Jul 2026/);
+  assert.equal(page.source, 'open-meteo');
+});
+
+test('PDF day pages use real ranges and preserve browser, PDF and email route order', () => {
+  const source = artifactSource(3);
+  const artifact = V3.normalizeArtifact(source);
+  const parity = V3.deliverySnapshot(artifact);
+  assert.deepEqual(parity.browser, parity.pdf);
+  assert.deepEqual(parity.browser, parity.email);
+  assert.deepEqual(parity.browser[0].routePlaceIds, ['alexanderplatz', 'museum-island']);
+  assert.deepEqual(
+    parity.browser[0].blocks.map((block) => block.placeIds),
+    [['alexanderplatz'], ['museum-island']],
+  );
+  assert.equal(parity.browser[0].blocks[0].links[0].placeId, 'alexanderplatz');
+
+  const plan = PdfV3.createPagePlan(artifact, weatherSource(3));
+  const dayPages = plan.pages.filter((page) => page.type === 'day');
+  assert.equal(dayPages[0].blocks[0].time, '09:30-10:45');
+  assert.equal(dayPages[0].blocks[1].time, '11:00-12:30');
+  assert.deepEqual(
+    dayPages.map((day) => ({
+      dayNumber: day.dayNumber,
+      title: day.title,
+      routeUrl: day.route.url,
+      blocks: day.blocks.map((block, index) => ({
+        order: index + 1,
+        window: block.window || block.time,
+        title: block.title,
+        placeId: block.placeId,
+      })),
+    })),
+    plan.deliverySnapshot.map((day) => ({
+      dayNumber: day.dayNumber,
+      title: day.title,
+      routeUrl: day.routeUrl,
+      blocks: day.blocks.map(({ order, window, title, placeId }) => ({ order, window, title, placeId })),
+    })),
+  );
+});
+
+test('Plan B remains a separate weather-page field and offline language is honest', () => {
+  const plan = PdfV3.createPagePlan(artifactSource(1), weatherSource(1));
+  const dayPage = plan.pages.find((page) => page.type === 'day');
+  const weatherPage = plan.pages.find((page) => page.type === 'weather-plan-b');
+  assert.equal(dayPage.blocks.some((block) => /plan b/i.test(block.title)), false);
+  assert.match(weatherPage.days[0].planB, /Hackescher Markt/);
+
+  const rendered = PdfV3.renderPagePlan(FakePdf, plan, { save: false });
+  const text = rendered.doc.textCalls.flatMap((call) => Array.isArray(call.value) ? call.value : [call.value]).join(' ');
+  assert.match(text, /saved itinerary works offline/i);
+  assert.match(text, /map links still need data/i);
 });
 
 test('only approved real HTTPS URLs enter the page plan', () => {
@@ -271,11 +329,14 @@ test('dense seven-day input still stays within one fixed A4 page per section', (
   const source = artifactSource(7);
   source.days.forEach((day) => {
     day.title = 'One connected Berlin layer';
+    day.route.placeIds = ['alexanderplatz'];
     day.blocks = Array.from({ length: 12 }, (_, index) => ({
       time: `${String(8 + index).padStart(2, '0')}:00`,
+      window: `${String(8 + index).padStart(2, '0')}:00-${String(9 + index).padStart(2, '0')}:00`,
       title: `Berlin stop ${index + 1}`,
       copy: 'A deliberately long practical description that must be clipped inside the fixed daily timeline row without creating another PDF page.',
       primaryPlace: {
+        placeId: 'alexanderplatz',
         label: `Stop ${index + 1} map`,
         url: `https://www.google.com/maps/search/?api=1&query=Berlin+stop+${index + 1}`,
       },

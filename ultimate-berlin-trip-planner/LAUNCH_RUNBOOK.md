@@ -1,5 +1,10 @@
 # Ultimate Berlin Trip Planner Launch Runbook
 
+> **Superseded for the current paid Trip Planner 3.1 release.** Read
+> `TRIP_PLANNER_31_RELEASE_RUNBOOK.md` first. The AI/Gemini, free lead-gen and
+> legacy price instructions below are historical and must not be used to ship
+> the current customer product.
+
 Use this runbook only after the local launch audit is clean enough to proceed.
 The tool stays hidden from public shortcut surfaces until the live smoke tests
 pass.

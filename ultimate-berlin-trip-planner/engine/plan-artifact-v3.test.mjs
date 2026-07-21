@@ -20,11 +20,13 @@ function source(dayCount = 3) {
       travelMode: 'walking',
       totalDistanceKm: 3.1,
       longestSegmentKm: 1.2,
+      placeIds: ['alexanderplatz'],
     },
     anchors: [{ placeId: 'alexanderplatz', label: 'Alexanderplatz', area: 'Mitte' }],
     blocks: [
       {
         time: '09:30',
+        window: '09:30-10:45',
         title: 'Alexanderplatz',
         copy: 'Start at the World Clock and look around the square.',
         primaryPlace: {
@@ -141,6 +143,114 @@ test('normalized artifacts remain idempotent and keep resource links', () => {
   assert.match(second.carryPack[0].link.url, /^https:\/\/www\.google\.com\/maps\/dir\//);
 });
 
+test('preserves visible link place IDs while only the first meal choice owns the route', () => {
+  for (const time of ['Lunch', 'Evening', 'Dinner', 'Later']) {
+    const meal = source(1);
+    meal.days[0].blocks[0].time = time;
+    meal.days[0].blocks[0].mapLinks = [{
+      placeId: 'alexanderplatz',
+      label: 'Alexanderplatz',
+      url: 'https://www.google.com/maps/search/?api=1&query=Alexanderplatz+Berlin',
+    }, {
+      placeId: 'museum_island',
+      label: 'Museum Island alternative',
+      url: 'https://www.google.com/maps/search/?api=1&query=Museum+Island+Berlin',
+    }];
+    const artifact = V3.normalizeArtifact(meal);
+    assert.deepEqual(artifact.days[0].blocks[0].placeIds, ['alexanderplatz', 'museum_island']);
+    assert.deepEqual(artifact.days[0].blocks[0].links.map((link) => link.placeId), ['alexanderplatz', 'museum_island']);
+    assert.deepEqual(artifact.days[0].route.placeIds, ['alexanderplatz']);
+  }
+});
+
+test('non-meal blocks route every visible ordered place ID', () => {
+  const route = source(1);
+  route.days[0].blocks[0].mapLinks = [{
+    placeId: 'alexanderplatz',
+    label: 'Alexanderplatz',
+    url: 'https://www.google.com/maps/search/?api=1&query=Alexanderplatz+Berlin',
+  }, {
+    placeId: 'museum_island',
+    label: 'Museum Island',
+    url: 'https://www.google.com/maps/search/?api=1&query=Museum+Island+Berlin',
+  }];
+  route.days[0].route.placeIds = ['alexanderplatz', 'museum_island'];
+  const artifact = V3.normalizeArtifact(route);
+  assert.deepEqual(artifact.days[0].route.placeIds, ['alexanderplatz', 'museum_island']);
+});
+
+test('route contract rejects hidden, reordered and truncated place IDs', () => {
+  const hidden = source(1);
+  hidden.days[0].route.placeIds.push('hackescher_markt');
+  assert.throws(() => V3.normalizeArtifact(hidden), /day_route_place_ids_mismatch_1/);
+
+  const reordered = source(1);
+  reordered.days[0].blocks.push({
+    time: '11:00',
+    window: '11:00-12:00',
+    title: 'Hackescher Markt',
+    primaryPlace: {
+      placeId: 'hackescher_markt',
+      label: 'Hackescher Markt',
+      url: 'https://www.google.com/maps/search/?api=1&query=Hackescher+Markt+Berlin',
+    },
+  });
+  reordered.days[0].route.placeIds = ['hackescher_markt', 'alexanderplatz'];
+  assert.throws(() => V3.normalizeArtifact(reordered), /day_route_place_ids_mismatch_1/);
+
+  const truncated = source(1);
+  truncated.days[0].blocks = Array.from({ length: 9 }, (_, index) => ({
+    time: `Stop ${index + 1}`,
+    window: `${String(8 + index).padStart(2, '0')}:00-${String(9 + index).padStart(2, '0')}:00`,
+    title: `Visible stop ${index + 1}`,
+    primaryPlace: {
+      placeId: `visible_stop_${index + 1}`,
+      label: `Visible stop ${index + 1}`,
+      url: `https://www.google.com/maps/search/?api=1&query=Visible+stop+${index + 1}+Berlin`,
+    },
+  }));
+  truncated.days[0].route.placeIds = Array.from({ length: 8 }, (_, index) => `visible_stop_${index + 1}`);
+  assert.throws(() => V3.normalizeArtifact(truncated), /day_route_place_ids_mismatch_1/);
+
+  const overLimit = source(1);
+  overLimit.days[0].route.placeIds = Array.from({ length: 9 }, (_, index) => `visible_stop_${index + 1}`);
+  assert.throws(() => V3.normalizeArtifact(overLimit), /day_route_place_ids_1/);
+});
+
+test('block place IDs cannot hide a fallback that has no visible link', () => {
+  const hidden = V3.normalizeArtifact(source(1));
+  hidden.days[0].blocks[0].placeIds.push('hidden_fallback');
+  assert.throws(() => V3.normalizeArtifact(hidden), /day_block_place_ids_mismatch_1_1/);
+
+  const missing = V3.normalizeArtifact(source(1));
+  missing.days[0].blocks[0].placeId = '';
+  missing.days[0].blocks[0].placeIds = [];
+  missing.days[0].blocks[0].links.forEach((link) => { link.placeId = ''; });
+  assert.throws(() => V3.normalizeArtifact(missing), /day_block_place_ids_1_1/);
+});
+
+test('every block requires a canonical non-overlapping HH:MM-HH:MM range', () => {
+  for (const invalidWindow of ['', 'After 18:00', '9:00-10:00', '09:00–10:00', '10:00-09:00']) {
+    const invalid = source(1);
+    invalid.days[0].blocks[0].window = invalidWindow;
+    assert.throws(() => V3.normalizeArtifact(invalid), /day_block_window_1_1/);
+  }
+
+  const overlap = source(1);
+  overlap.days[0].blocks.push({
+    time: 'Late morning',
+    window: '10:30-11:30',
+    title: 'Hackescher Markt',
+    primaryPlace: {
+      placeId: 'hackescher_markt',
+      label: 'Hackescher Markt',
+      url: 'https://www.google.com/maps/search/?api=1&query=Hackescher+Markt+Berlin',
+    },
+  });
+  overlap.days[0].route.placeIds.push('hackescher_markt');
+  assert.throws(() => V3.normalizeArtifact(overlap), /day_block_overlap_1_2/);
+});
+
 test('typical weather preserves unknown numeric values as null', () => {
   const overlay = V3.normalizeWeatherOverlay({
     days: [{
@@ -249,6 +359,7 @@ test('artifact validation fails closed when a stored day title repeats its visib
   joined.days[0].anchors.push({ placeId: 'hackescher_markt', label: 'Hackescher Markt', area: 'Mitte' });
   joined.days[0].blocks.push({
     time: '11:00',
+    window: '11:00-12:00',
     title: 'Hackescher Markt',
     primaryPlace: {
       placeId: 'hackescher_markt',
@@ -256,12 +367,14 @@ test('artifact validation fails closed when a stored day title repeats its visib
       url: 'https://www.google.com/maps/search/?api=1&query=Hackescher+Markt+Berlin',
     },
   });
+  joined.days[0].route.placeIds.push('hackescher_markt');
   joined.days[0].title = 'Alexanderplatz → Hackescher Markt';
   assert.throws(() => V3.normalizeArtifact(joined), /day_title_repeats_step_1/);
 
   const thematicJoined = source(1);
   thematicJoined.days[0].blocks.push({
     time: '11:00',
+    window: '11:00-12:00',
     title: 'Hackescher Markt courtyards',
     primaryPlace: {
       placeId: 'hackescher_markt',
@@ -269,6 +382,7 @@ test('artifact validation fails closed when a stored day title repeats its visib
       url: 'https://www.google.com/maps/search/?api=1&query=Hackescher+Markt+Berlin',
     },
   });
+  thematicJoined.days[0].route.placeIds.push('hackescher_markt');
   thematicJoined.days[0].title = 'Alexanderplatz through Hackescher Markt courtyards';
   assert.throws(() => V3.normalizeArtifact(thematicJoined), /day_title_repeats_step_1/);
 });
@@ -282,6 +396,17 @@ test('artifact validation permits a Day 1 arrival transfer heading without treat
     label: 'BER Airport → Mitte / Alexanderplatz',
     url: 'https://www.google.com/maps/search/?api=1&query=Berlin+Brandenburg+Airport',
   };
+  arrival.days[0].blocks.push({
+    time: 'Orientation',
+    window: '11:00-12:00',
+    title: 'World Clock orientation',
+    primaryPlace: {
+      placeId: 'world_clock',
+      label: 'World Clock',
+      url: 'https://www.google.com/maps/search/?api=1&query=World+Clock+Berlin',
+    },
+  });
+  arrival.days[0].route.placeIds = ['world_clock'];
   assert.equal(V3.normalizeArtifact(arrival).days[0].title, 'BER → Mitte / Alexanderplatz');
 });
 
@@ -296,6 +421,7 @@ test('Day 1 arrival-transfer exception cannot hide a title assembled from later 
   };
   arrival.days[0].blocks.push({
     time: '11:30',
+    window: '11:30-13:00',
     title: 'Use the walking tour as your first Berlin introduction',
     primaryPlace: {
       placeId: 'world_clock',
@@ -304,6 +430,7 @@ test('Day 1 arrival-transfer exception cannot hide a title assembled from later 
     },
   }, {
     time: '14:00',
+    window: '14:00-15:00',
     title: 'Lunch near Hackescher Markt',
     primaryPlace: {
       placeId: 'hackescher_markt',
@@ -311,6 +438,7 @@ test('Day 1 arrival-transfer exception cannot hide a title assembled from later 
       url: 'https://www.google.com/maps/search/?api=1&query=Hackescher+Markt+Berlin',
     },
   });
+  arrival.days[0].route.placeIds = ['world_clock', 'hackescher_markt'];
   arrival.days[0].title = 'Use the walking tour as your first Berlin introduction and Lunch near Hackescher Markt';
   assert.throws(() => V3.normalizeArtifact(arrival), /day_title_repeats_step_1/);
 });

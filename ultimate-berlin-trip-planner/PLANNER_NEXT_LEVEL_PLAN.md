@@ -1,5 +1,10 @@
 # Trip Planner — Next Level Plan (Codex execution spec)
 
+> **Historical plan.** The current paid Trip Planner 3.1 product and release
+> gates are defined in `TRIP_PLANNER_31_RELEASE_RUNBOOK.md`. In particular, the
+> current customer runtime is AI-off and the old "no paid planner tier" rule
+> below no longer describes the live product direction.
+
 Written 2026-07-05 by Claude after a full logic + live-output review. Yusuf approved
 the direction: the planner stays **free lead-gen** and becomes the top-of-funnel for
 the €9 First-Day Rescue Plan. No paid planner tier until Yusuf explicitly decides

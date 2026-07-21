@@ -73,28 +73,18 @@ function latestLiveSmoke() {
   return leadOk && bookingOk ? latest : null;
 }
 
-function latestAiSmoke() {
-  const latest = latestJsonIn('output/qa/ultimate-trip-planner-live-smoke', /^live-.*\.json$/);
-  if (!latest) return null;
-  const result = latest.json;
-  const aiOk = result?.mode === 'live' &&
-    result?.responses?.ai?.ok === true &&
-    result?.responses?.ai?.body?.ok === true &&
-    result?.responses?.ai?.body?.enhancement;
-  return aiOk ? latest : null;
-}
-
-function aiCostSummary(aiSmoke) {
-  const cost = aiSmoke?.json?.aiCost;
-  if (!cost || !Number.isFinite(Number(cost.estimatedUsd))) return null;
-  const input = Number(cost.promptTokens || 0);
-  const output = Number(cost.outputTokens || 0);
+function aiDisabledReleaseState(preflight) {
+  const indexHtml = read('index.html');
+  const funnel = read('velo/tripPlannerFunnel.js');
+  const httpFunctions = read('velo/http-functions.js');
+  const staticOk = !/_functions\/tripPlannerAi|generativelanguage|requestAiEnhancement|bw_trip_planner_ai_/i.test(indexHtml) &&
+    !/generativelanguage|wix-fetch|wix-secrets-backend|getSecret\(|generateContent|TripPlannerAiBudget|AI_GENERATION_LIMIT|quotaEmail/i.test(funnel) &&
+    /post_tripPlannerAi[\s\S]*?status:\s*410[\s\S]*?ai_disabled/.test(httpFunctions);
+  const check = preflight?.json?.checks?.aiDisabled;
   return {
-    model: cost.model || 'gemini-2.5-flash',
-    promptTokens: input,
-    outputTokens: output,
-    estimatedUsd: Number(cost.estimatedUsd),
-    summary: `${cost.model || 'gemini-2.5-flash'}: ${input} input + ${output} output tokens, est. $${Number(cost.estimatedUsd).toFixed(6)}`
+    staticOk,
+    remoteOk: check?.status === 410 && check?.body?.error === 'ai_disabled',
+    remoteStatus: check?.status || null
   };
 }
 
@@ -182,8 +172,7 @@ function collectState() {
   const todos = unique([...funnel.matchAll(/TODO_TRIP_PLANNER_[A-Z0-9_]+/g)].map((match) => match[0]));
   const preflight = latestJsonIn('output/qa/ultimate-trip-planner-remote-preflight', /^remote-preflight-.*\.json$/);
   const smoke = latestLiveSmoke();
-  const aiSmoke = latestAiSmoke();
-  const aiCost = aiCostSummary(aiSmoke);
+  const aiDisabled = aiDisabledReleaseState(preflight);
   const checks = preflight?.json?.checks || {};
   const audit = runAudit();
   const visibility = toolVisibility();
@@ -210,8 +199,8 @@ function collectState() {
     {
       id: 'velo_endpoints',
       label: 'Velo endpoints',
-      status: checks.leadOptions?.status === 204 && checks.aiOptions?.status === 204 && checks.bookingOptions?.status === 204 ? 'pass' : 'warn',
-      detail: `lead OPTIONS ${checks.leadOptions?.status || 'unknown'}, ai OPTIONS ${checks.aiOptions?.status || 'unknown'}, booking OPTIONS ${checks.bookingOptions?.status || 'unknown'}.`
+      status: checks.leadOptions?.status === 204 && checks.aiOptions?.status === 204 && checks.bookingOptions?.status === 204 && aiDisabled.remoteOk ? 'pass' : 'warn',
+      detail: `lead OPTIONS ${checks.leadOptions?.status || 'unknown'}, legacy AI ${aiDisabled.remoteStatus || 'unknown'}, booking OPTIONS ${checks.bookingOptions?.status || 'unknown'}.`
     },
     {
       id: 'live_smoke',
@@ -220,10 +209,10 @@ function collectState() {
       detail: smoke ? smoke.relative : 'No passing live smoke evidence found.'
     },
     {
-      id: 'ai_smoke',
-      label: 'Gemini AI polish smoke',
-      status: aiSmoke ? 'pass' : 'warn',
-      detail: aiSmoke ? aiSmoke.relative : 'No passing tripPlannerAi smoke evidence found.'
+      id: 'ai_disabled',
+      label: 'Zero customer-runtime AI',
+      status: aiDisabled.staticOk ? 'pass' : 'block',
+      detail: aiDisabled.staticOk ? 'Static release checks prove no provider/runtime AI path; legacy endpoint is HTTP 410 ai_disabled.' : 'Runtime AI or provider dependency is still present.'
     },
     {
       id: 'tool_page',
@@ -311,12 +300,7 @@ function collectState() {
           file: smoke.relative
         }
       : null,
-    aiSmoke: aiSmoke
-      ? {
-          file: aiSmoke.relative,
-          cost: aiCost
-        }
-      : null,
+    aiDisabled,
     visibility,
     blog,
     uxRevision,
@@ -329,7 +313,7 @@ function nextActions({ blockers, warnings, holds, audit }) {
   if (Number(audit.summary?.block || 0) > 0) {
     return [
       'Fix the launch-audit BLOCK items first, especially the lead gate, compact day copy, and public-listing/icon issues.',
-      'After those pass, publish the updated Velo including tripPlannerAi and run remote preflight plus --ai-only live smoke.'
+      'After those pass, publish the updated Velo with the legacy HTTP 410 ai_disabled handler, then run remote preflight plus --ai-only compatibility smoke.'
     ];
   }
 
@@ -357,7 +341,7 @@ function nextActions({ blockers, warnings, holds, audit }) {
   if (warnings.some((gate) => gate.id === 'velo_endpoints')) {
     return [
       'Publish Backend/tripPlannerFunnel.js, http-functions.js handlers, and jobs.config in Wix.',
-      'Run launch-remote-preflight.mjs until lead, AI, and booking Velo OPTIONS handlers are live.'
+      'Run launch-remote-preflight.mjs until lead/booking OPTIONS and the legacy HTTP 410 ai_disabled contract are live.'
     ];
   }
 
@@ -365,13 +349,6 @@ function nextActions({ blockers, warnings, holds, audit }) {
     return [
       'Run live-smoke-trip-planner.mjs --live with a real test email.',
       'Run live-smoke-trip-planner.mjs --live --booking to prove booked-branch behavior.'
-    ];
-  }
-
-  if (warnings.some((gate) => gate.id === 'ai_smoke')) {
-    return [
-      'Add GEMINI_API_KEY in Wix Secrets Manager if it is not already present.',
-      'Publish the updated tripPlannerAi Velo endpoint, then run live-smoke-trip-planner.mjs --live --ai-only.'
     ];
   }
 
@@ -447,8 +424,8 @@ function markdown(state) {
     '',
     `- Latest remote preflight: ${state.preflight ? `\`${state.preflight.file}\`` : 'missing'}`,
     `- Latest passing live smoke: ${state.smoke ? `\`${state.smoke.file}\`` : 'missing'}`,
-    `- Latest passing Gemini AI smoke: ${state.aiSmoke ? `\`${state.aiSmoke.file}\`` : 'missing'}`,
-    `- Latest Gemini cost estimate: ${state.aiSmoke?.cost ? state.aiSmoke.cost.summary : 'missing until live AI smoke passes'}`,
+    `- Customer-runtime AI: ${state.aiDisabled.staticOk ? 'disabled by static release checks' : 'release check failed'}`,
+    `- Legacy AI endpoint: ${state.aiDisabled.remoteOk ? 'HTTP 410 ai_disabled verified remotely' : `remote status ${state.aiDisabled.remoteStatus || 'not checked'}`}`,
     `- Visibility: ${state.visibility.publicVisible ? 'public' : 'draft/protected'}, homepage shortcut ${state.visibility.inHome ? 'enabled' : 'not enabled'}`,
     `- Widget URL: ${state.visibility.widgetUrl || 'missing'}`,
     `- Blog package: ${state.blog.bodyExists ? 'body draft exists' : 'missing'}; widget near top ${state.blog.widgetNearTop ? 'yes' : 'no'}; quick summary ${state.blog.quickSummary ? 'yes' : 'no'}; FAQ ${state.blog.faq ? 'yes' : 'no'}`,

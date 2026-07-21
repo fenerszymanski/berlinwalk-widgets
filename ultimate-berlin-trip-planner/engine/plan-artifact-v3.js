@@ -82,6 +82,45 @@
     return Array.isArray(value) ? value.slice(0, max || 30) : [];
   }
 
+  function placeId(value) {
+    return text(value, 100);
+  }
+
+  function uniquePlaceIds(values) {
+    var seen = {};
+    return (Array.isArray(values) ? values : []).map(placeId).filter(function (value) {
+      if (!value || seen[value]) return false;
+      seen[value] = true;
+      return true;
+    });
+  }
+
+  function placeIdsEqual(first, second) {
+    if (!Array.isArray(first) || !Array.isArray(second) || first.length !== second.length) return false;
+    return first.every(function (value, index) { return value === second[index]; });
+  }
+
+  function routePlaceIdsFromBlocks(blocks) {
+    var routeIds = [];
+    (Array.isArray(blocks) ? blocks : []).forEach(function (block) {
+      var mealAlternatives = /^(Lunch|Evening|Dinner|Later)$/i.test(String(block && block.time || '').trim());
+      var candidates = mealAlternatives ? [block && block.placeId] : (block && block.placeIds || []);
+      candidates.forEach(function (candidate) {
+        var value = placeId(candidate);
+        if (value && value !== 'arrival_transfer' && routeIds.indexOf(value) === -1) routeIds.push(value);
+      });
+    });
+    return routeIds;
+  }
+
+  function parsedWindow(value) {
+    var match = /^([01]\d|2[0-3]):([0-5]\d)-([01]\d|2[0-3]):([0-5]\d)$/.exec(String(value || ''));
+    if (!match) return null;
+    var start = Number(match[1]) * 60 + Number(match[2]);
+    var end = Number(match[3]) * 60 + Number(match[4]);
+    return end > start ? { start: start, end: end } : null;
+  }
+
   function normalizeLink(source) {
     source = source || {};
     var href = url(source.url || source.href);
@@ -89,22 +128,38 @@
     return {
       label: text(source.label || source.title || 'Open link', 120),
       url: href,
-      kind: text(source.kind || '', 40)
+      kind: text(source.kind || '', 40),
+      placeId: placeId(source.placeId || '')
     };
   }
 
   function normalizeBlock(source, index) {
     source = source || {};
-    var links = list(source.mapLinks || source.links, 4).map(normalizeLink).filter(Boolean);
+    var linkSources = Array.isArray(source.mapLinks || source.links) ? (source.mapLinks || source.links) : [];
+    var links = linkSources.map(normalizeLink).filter(Boolean);
     var primary = normalizeLink(source.primaryPlace || source.primaryLink || null);
-    if (primary && !links.some(function (link) { return link.url === primary.url; })) links.unshift(primary);
+    var matchingPrimary = primary && links.find(function (link) { return link.url === primary.url; });
+    if (primary && !matchingPrimary) links.unshift(primary);
+    else if (matchingPrimary && !matchingPrimary.placeId && primary.placeId) matchingPrimary.placeId = primary.placeId;
+    var ownerPlaceId = placeId(
+      source.placeId ||
+      (source.primaryPlace && source.primaryPlace.placeId) ||
+      (source.primaryLink && source.primaryLink.placeId) ||
+      (Array.isArray(source.placeIds) && source.placeIds[0]) ||
+      (links[0] && links[0].placeId) ||
+      ''
+    );
+    var blockPlaceIds = Array.isArray(source.placeIds)
+      ? source.placeIds.map(placeId)
+      : uniquePlaceIds([ownerPlaceId].concat(links.map(function (link) { return link.placeId; })));
     return {
       order: index + 1,
       time: text(source.time || 'Next', 40),
       window: text(source.window || '', 80),
       title: text(source.title || 'Berlin stop', 180),
       detail: text(source.detail || source.copy || '', 700),
-      placeId: text(source.placeId || (source.primaryPlace && source.primaryPlace.placeId) || '', 100),
+      placeId: ownerPlaceId,
+      placeIds: blockPlaceIds,
       placeLabel: text(source.placeLabel || (source.primaryPlace && source.primaryPlace.label) || '', 160),
       links: links
     };
@@ -151,7 +206,10 @@
         url: url(source.route && source.route.url || source.routeUrl),
         travelMode: text(source.route && source.route.travelMode || '', 30),
         totalDistanceKm: number(source.route && source.route.totalDistanceKm, 0),
-        longestSegmentKm: number(source.route && source.route.longestSegmentKm, 0)
+        longestSegmentKm: number(source.route && source.route.longestSegmentKm, 0),
+        placeIds: source.route && Array.isArray(source.route.placeIds)
+          ? source.route.placeIds.map(placeId)
+          : []
       },
       anchors: list(source.anchors || source.places, 8).map(function (item) {
         return typeof item === 'string'
@@ -307,6 +365,43 @@
       if (seenDates[day.dateKey]) errors.push('duplicate_date_' + day.dateKey);
       seenDates[day.dateKey] = true;
       if (!day.blocks.length || day.blocks.length > MAX_BLOCKS_PER_DAY) errors.push('day_blocks_' + (index + 1));
+      var timedBlocks = [];
+      day.blocks.forEach(function (block, blockIndex) {
+        var blockNumber = blockIndex + 1;
+        if (!parsedWindow(block.window)) errors.push('day_block_window_' + (index + 1) + '_' + blockNumber);
+        else timedBlocks.push({ index: blockIndex, window: parsedWindow(block.window) });
+        if (!Array.isArray(block.placeIds) || block.placeIds.length < 1 || block.placeIds.length > 8) {
+          errors.push('day_block_place_ids_' + (index + 1) + '_' + blockNumber);
+          return;
+        }
+        if (!Array.isArray(block.links) || block.links.length > 8) {
+          errors.push('day_block_links_' + (index + 1) + '_' + blockNumber);
+        }
+        if (block.placeIds.some(function (value) { return !/^[A-Za-z0-9][A-Za-z0-9._:-]*$/.test(value); })) {
+          errors.push('day_block_place_id_format_' + (index + 1) + '_' + blockNumber);
+        }
+        if (uniquePlaceIds(block.placeIds).length !== block.placeIds.length) {
+          errors.push('day_block_place_id_duplicate_' + (index + 1) + '_' + blockNumber);
+        }
+        var expectedBlockPlaceIds = uniquePlaceIds([block.placeId].concat(block.links.map(function (link) { return link.placeId; })));
+        if (!placeIdsEqual(block.placeIds, expectedBlockPlaceIds)) {
+          errors.push('day_block_place_ids_mismatch_' + (index + 1) + '_' + blockNumber);
+        }
+      });
+      timedBlocks.sort(function (first, second) { return first.window.start - second.window.start; });
+      for (var timedIndex = 1; timedIndex < timedBlocks.length; timedIndex += 1) {
+        if (timedBlocks[timedIndex].window.start < timedBlocks[timedIndex - 1].window.end) {
+          errors.push('day_block_overlap_' + (index + 1) + '_' + (timedBlocks[timedIndex].index + 1));
+        }
+      }
+      var routePlaceIds = day.route && Array.isArray(day.route.placeIds) ? day.route.placeIds : [];
+      if (routePlaceIds.length < 1 || routePlaceIds.length > 8) errors.push('day_route_place_ids_' + (index + 1));
+      if (routePlaceIds.some(function (value) { return !/^[A-Za-z0-9][A-Za-z0-9._:-]*$/.test(value); })) {
+        errors.push('day_route_place_id_format_' + (index + 1));
+      }
+      if (uniquePlaceIds(routePlaceIds).length !== routePlaceIds.length) errors.push('day_route_place_id_duplicate_' + (index + 1));
+      var expectedRoutePlaceIds = routePlaceIdsFromBlocks(day.blocks);
+      if (!placeIdsEqual(routePlaceIds, expectedRoutePlaceIds)) errors.push('day_route_place_ids_mismatch_' + (index + 1));
       var stepKeys = day.blocks.map(function (block) { return headlineKey(block && block.title); }).filter(Boolean);
       var anchorKeys = day.anchors.map(function (anchor) { return headlineKey(anchor && anchor.label); }).filter(Boolean);
       var expectedArrivalTitle = artifact && artifact.input && artifact.input.arrivalPoint === 'ber' &&
@@ -371,6 +466,35 @@
   function weatherModeForOffset(offset) {
     var value = Number(offset);
     return Number.isFinite(value) && value >= 0 && value <= 14 ? 'live' : 'typical';
+  }
+
+  function deliverySnapshot(source) {
+    var artifact = normalizeArtifact(source);
+    var days = artifact.days.map(function (day) {
+      return {
+        dayNumber: day.dayNumber,
+        dateKey: day.dateKey,
+        title: day.title,
+        routeUrl: day.route.url,
+        routePlaceIds: day.route.placeIds.slice(),
+        planB: day.planB,
+        blocks: day.blocks.map(function (block) {
+          return {
+            order: block.order,
+            window: block.window || block.time,
+            title: block.title,
+            placeId: block.placeId,
+            placeIds: block.placeIds.slice(),
+            links: block.links.map(function (link) { return { placeId: link.placeId, url: link.url }; })
+          };
+        })
+      };
+    });
+    return {
+      browser: JSON.parse(JSON.stringify(days)),
+      pdf: JSON.parse(JSON.stringify(days)),
+      email: JSON.parse(JSON.stringify(days))
+    };
   }
 
   function headlineKey(value) {
@@ -460,6 +584,7 @@
     validateArtifact: validateArtifact,
     stableStringify: stableStringify,
     weatherModeForOffset: weatherModeForOffset,
+    deliverySnapshot: deliverySnapshot,
     dayPromise: dayPromise
   };
 });

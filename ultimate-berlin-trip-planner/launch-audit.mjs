@@ -107,30 +107,6 @@ function liveSmokeEvidence() {
   return null;
 }
 
-function aiLiveSmokeEvidence() {
-  const smokeDir = filePath('output/qa/ultimate-trip-planner-live-smoke');
-  if (!fs.existsSync(smokeDir)) return null;
-
-  const candidates = fs.readdirSync(smokeDir)
-    .filter((name) => /^live-.*\.json$/.test(name))
-    .sort()
-    .reverse();
-
-  for (const candidate of candidates) {
-    const absolute = path.join(smokeDir, candidate);
-    try {
-      const result = JSON.parse(fs.readFileSync(absolute, 'utf8'));
-      const aiOk = result && result.mode === 'live' && result.responses && result.responses.ai && result.responses.ai.ok === true;
-      const enhancementOk = aiOk && result.responses.ai.body && result.responses.ai.body.ok === true && result.responses.ai.body.enhancement;
-      if (enhancementOk) return rel(absolute);
-    } catch (error) {
-      // Keep scanning older smoke files.
-    }
-  }
-
-  return null;
-}
-
 function latestRemotePreflightEvidence() {
   const preflightDir = filePath('output/qa/ultimate-trip-planner-remote-preflight');
   if (!fs.existsSync(preflightDir)) return null;
@@ -146,10 +122,12 @@ function latestRemotePreflightEvidence() {
       const result = JSON.parse(fs.readFileSync(absolute, 'utf8'));
       const liveToolPageOk = result && result.checks && result.checks.liveToolPage && result.checks.liveToolPage.status === 200;
       const leadOptionsOk = result && result.checks && result.checks.leadOptions && result.checks.leadOptions.ok === true;
-      const aiOptionsOk = result && result.checks && result.checks.aiOptions && result.checks.aiOptions.ok === true;
+      const aiOptionsOk = result && result.checks && result.checks.aiOptions && result.checks.aiOptions.status === 204;
+      const aiDisabledOk = result && result.checks && result.checks.aiDisabled && result.checks.aiDisabled.status === 410 &&
+        result.checks.aiDisabled.body && result.checks.aiDisabled.body.error === 'ai_disabled';
       const bookingOptionsOk = result && result.checks && result.checks.bookingOptions && result.checks.bookingOptions.ok === true;
       const collectionOk = result && result.checks && result.checks.tripPlannerCollection && result.checks.tripPlannerCollection.schemaOk === true;
-      if (liveToolPageOk && leadOptionsOk && aiOptionsOk && bookingOptionsOk && collectionOk) return rel(absolute);
+      if (liveToolPageOk && leadOptionsOk && aiOptionsOk && aiDisabledOk && bookingOptionsOk && collectionOk) return rel(absolute);
     } catch (error) {
       // Keep scanning older preflight files.
     }
@@ -161,6 +139,12 @@ function latestRemotePreflightEvidence() {
 function run() {
   const requiredFiles = [
     'ultimate-berlin-trip-planner/index.html',
+    'ultimate-berlin-trip-planner/engine/trip-planner-runtime-v3-1.js',
+    'ultimate-berlin-trip-planner/engine/trip-planner-runtime-v3-1.test.mjs',
+    'ultimate-berlin-trip-planner/engine/plan-artifact-v3.js',
+    'ultimate-berlin-trip-planner/engine/plan-artifact-v3.test.mjs',
+    'ultimate-berlin-trip-planner/engine/plan-artifact-v3-pdf.js',
+    'ultimate-berlin-trip-planner/engine/plan-artifact-v3-pdf.test.mjs',
     'ultimate-berlin-trip-planner/build-launch-control-room.mjs',
     'ultimate-berlin-trip-planner/LAUNCH_CONTROL_ROOM.html',
     'ultimate-berlin-trip-planner/build-launch-status-report.mjs',
@@ -218,6 +202,9 @@ function run() {
   }
 
   const indexHtml = read('ultimate-berlin-trip-planner/index.html');
+  const runtimeV31Source = read('ultimate-berlin-trip-planner/engine/trip-planner-runtime-v3-1.js');
+  const artifactV3Source = read('ultimate-berlin-trip-planner/engine/plan-artifact-v3.js');
+  const artifactV3PdfSource = read('ultimate-berlin-trip-planner/engine/plan-artifact-v3-pdf.js');
   const launchStatusMd = read('ultimate-berlin-trip-planner/LAUNCH_STATUS.md');
   const launchStatusJson = readJson('ultimate-berlin-trip-planner/LAUNCH_STATUS.json');
   const wixEmailSetupTr = read('ultimate-berlin-trip-planner/WIX_EMAIL_SETUP_TR.md');
@@ -603,6 +590,9 @@ function run() {
       /conversionReasons/.test(remotePreflightSource) &&
       /tripStyle/.test(remotePreflightSource) &&
       /aiOptions/.test(remotePreflightSource) &&
+      /aiDisabled/.test(remotePreflightSource) &&
+      /status === 410/.test(remotePreflightSource) &&
+      /ai_disabled/.test(remotePreflightSource) &&
       /missingCriticalFields/.test(remotePreflightSource) &&
       /schemaOk/.test(remotePreflightSource) &&
       /Missing critical fields/.test(launchStatusBuilder) &&
@@ -640,7 +630,8 @@ function run() {
       /processTripPlannerDueEmails/.test(veloInstallKit) &&
       /tripPlannerLead/.test(veloInstallKit) &&
       /tripPlannerAi/.test(veloInstallKit) &&
-      /GEMINI_API_KEY/.test(veloInstallKit) &&
+      /ai_disabled/.test(veloInstallKit) &&
+      !/GEMINI_API_KEY/.test(veloInstallKit) &&
       /tripPlannerBooking/.test(veloInstallKit),
     'install-kit.html should include copyable pre-publish gates, Velo source panels, endpoint handlers, and the scheduled job.'
   );
@@ -649,18 +640,14 @@ function run() {
     /readyForVeloPaste/.test(prepublishGate) &&
       /message-ids\.local\.json/.test(prepublishGate) &&
       /CRITICAL_COLLECTION_FIELDS/.test(prepublishGate) &&
-      /CRITICAL_AI_BUDGET_FIELDS/.test(prepublishGate) &&
       /tripStyle/.test(prepublishGate) &&
-      /hasAiEndpoint/.test(prepublishGate) &&
-      /hasGeminiBackend/.test(prepublishGate) &&
-      /hasAiPrivacyScrub/.test(prepublishGate) &&
-      /aiPayloadAvoidsEmail/.test(prepublishGate) &&
-      /hasAiQuotaGuard/.test(prepublishGate) &&
-      /AI quota guard is backend-enforced/.test(prepublishGate) &&
+      /legacyAiDisabled/.test(prepublishGate) &&
+      /zeroAiRuntime/.test(prepublishGate) &&
+      /Customer runtime makes zero AI requests/.test(prepublishGate) &&
       /TripPlannerLeads critical fields pass remote gate/.test(prepublishGate) &&
-      /TripPlannerAiBudget critical fields pass remote gate/.test(prepublishGate) &&
+      !/TripPlannerAiBudget critical fields pass remote gate/.test(prepublishGate) &&
       /TODO_TRIP_PLANNER/.test(prepublishGate),
-    'Expected a one-command gate that refuses Velo paste until IDs are applied, AI endpoint safeguards/privacy scrub/quota/budget caps exist, and the live collection schemas pass.'
+    'Expected a one-command gate that refuses Velo paste until IDs are applied, runtime AI is absent, the legacy endpoint is safely disabled, and the live lead schema passes.'
   );
 
   block(
@@ -670,61 +657,39 @@ function run() {
     'Expected post/options handlers for /_functions/tripPlannerLead.'
   );
   block(
-    'Velo AI polish endpoint exports are present',
+    'Customer-runtime AI is disabled',
     /export\s+async\s+function\s+post_tripPlannerAi/.test(httpFunctions) &&
       /export\s+function\s+options_tripPlannerAi/.test(httpFunctions) &&
       /enhanceTripPlannerPlan/.test(funnel) &&
-      /GEMINI_API_KEY/.test(funnel) &&
-      /gemini-2\.5-flash/.test(funnel) &&
-      /responseJsonSchema/.test(funnel) &&
-      /routeIntro/.test(funnel) &&
-      /dayStories/.test(funnel) &&
-      /weatherSentence/.test(funnel) &&
-      /AI_GENERATION_LIMIT\s*=\s*2/.test(funnel) &&
-      /AI_DAILY_GENERATION_LIMIT\s*=\s*5000/.test(funnel) &&
-      /AI_MONTHLY_GENERATION_LIMIT\s*=\s*AI_DAILY_GENERATION_LIMIT\s*\*\s*30/.test(funnel) &&
-      /AI_BUDGET_COLLECTION\s*=\s*'TripPlannerAiBudget'/.test(funnel) &&
-      /function\s+checkAiLeadQuota/.test(funnel) &&
-      /function\s+claimAiLeadQuota/.test(funnel) &&
-      /function\s+claimAiBudget/.test(funnel) &&
-      /ai_quota_limit/.test(funnel) &&
-      /ai_budget_daily_limit/.test(funnel) &&
-      /ai_budget_monthly_limit/.test(funnel) &&
-      /thinkingBudget:\s*0/.test(funnel) &&
-      /PRIVATE_TEXT_PATTERN/.test(funnel) &&
-      /cleanPublicPlannerText/.test(funnel) &&
-      /cleanPublicPlannerRecord/.test(funnel) &&
-      /cleanPublicPlannerList/.test(funnel),
-    'Expected fail-soft /_functions/tripPlannerAi handlers backed by Gemini 2.5 Flash, backend-only secrets, and privacy-scrubbed prompt inputs.'
+      /status:\s*410/.test(httpFunctions) &&
+      /ai_disabled/.test(httpFunctions) &&
+      /enhanceTripPlannerPlan[\s\S]*?ai_disabled/.test(funnel) &&
+      !/_functions\/tripPlannerAi|generativelanguage|requestAiEnhancement|bw_trip_planner_ai_/i.test(indexHtml) &&
+      !/GEMINI_API_KEY|generativelanguage|TripPlannerAiBudget|AI_GENERATION_LIMIT|quotaEmail/i.test(funnel),
+    'Expected zero browser/provider AI calls, no AI budget or quota-email dependency, and an HTTP 410 ai_disabled compatibility endpoint.'
   );
   block(
-    'Live smoke helper can test AI polish',
+    'Live smoke helper accepts ai_disabled',
     /--ai/.test(liveSmokeSource) &&
       /--ai-only/.test(liveSmokeSource) &&
       /aiOnly/.test(liveSmokeSource) &&
-      /buildAiPayload/.test(liveSmokeSource) &&
-      /assertAiPayloadPrivacy/.test(liveSmokeSource) &&
+      /compatibilityCheck:\s*'trip_planner_3_1_ai_disabled'/.test(liveSmokeSource) &&
       /aiPrivacy/.test(liveSmokeSource) &&
-      /estimateGeminiCost/.test(liveSmokeSource) &&
-      /aiCost/.test(liveSmokeSource) &&
-      /quotaEmail:\s*leadPayload\.email/.test(liveSmokeSource) &&
       /tripPlannerAi/.test(liveSmokeSource) &&
-      /enhancement\.routeIntro/.test(liveSmokeSource) &&
-      /enhancement\.dayStories/.test(liveSmokeSource),
-    'live-smoke-trip-planner.mjs should dry-run/live-test the optional AI endpoint, including AI-only smoke without new lead/email writes and usage/cost reporting.'
+      /status !== 410/.test(liveSmokeSource) &&
+      /error !== 'ai_disabled'/.test(liveSmokeSource) &&
+      /piiIncluded:\s*false/.test(liveSmokeSource),
+    'live-smoke-trip-planner.mjs should verify the legacy 410 ai_disabled contract without lead, email, booking, or provider writes.'
   );
   block(
-    'AI privacy fixture covers Gemini fail-soft',
-    /ai-privacy-fixture/.test(aiPrivacyFixture) &&
-      /missing_api_key/.test(aiPrivacyFixture) &&
-      /validateAiEnhancementPayload/.test(aiPrivacyFixture) &&
-      /assertNoPrivateText/.test(aiPrivacyFixture) &&
-      /thinkingBudget/.test(aiPrivacyFixture) &&
-      /responseJsonSchema/.test(aiPrivacyFixture) &&
-      /ai_budget_daily_limit/.test(aiPrivacyFixture) &&
-      /dailyLimit/.test(aiPrivacyFixture) &&
+    'Zero-AI privacy fixture covers the release path',
+    /assert\.doesNotMatch\(indexHtml/.test(aiPrivacyFixture) &&
+      /runtimeAi:\s*'disabled'/.test(aiPrivacyFixture) &&
+      /browserAiRequests:\s*0/.test(aiPrivacyFixture) &&
+      /modelNetworkCalls:\s*0/.test(aiPrivacyFixture) &&
+      /legacyEndpoint:\s*'410 ai_disabled'/.test(aiPrivacyFixture) &&
       /ai-privacy-fixture\.mjs/.test(veloReadme),
-    'Expected a local mocked-Wix fixture proving missing Gemini key is fail-soft, private-looking text is scrubbed before prompt assembly, and global AI caps block Gemini before fetch.'
+    'Expected a static release fixture proving zero browser/provider AI calls and the safe legacy endpoint response.'
   );
   block(
     'Lead report summarizes funnel segments',
@@ -792,22 +757,10 @@ function run() {
     'Expected a dry-run-first collection setup helper with admin-only permissions, schema verification, and missing-field sync.'
   );
   block(
-    'TripPlannerAiBudget setup helper exists',
-    /COLLECTION_ID\s*=\s*'TripPlannerAiBudget'/.test(aiBudgetCollectionScript) &&
-      /permissions:\s*\{[\s\S]*insert:\s*'ADMIN'[\s\S]*read:\s*'ADMIN'/.test(aiBudgetCollectionScript) &&
-      /\['periodKey',\s*'Period Key',\s*'TEXT'\]/.test(aiBudgetCollectionScript) &&
-      /\['periodType',\s*'Period Type',\s*'TEXT'\]/.test(aiBudgetCollectionScript) &&
-      /\['periodLabel',\s*'Period Label',\s*'TEXT'\]/.test(aiBudgetCollectionScript) &&
-      /\['requestCount',\s*'Request Count',\s*'NUMBER'\]/.test(aiBudgetCollectionScript) &&
-      /\['limit',\s*'Limit',\s*'NUMBER'\]/.test(aiBudgetCollectionScript) &&
-      /\['limitReachedAt',\s*'Limit Reached At',\s*'DATETIME'\]/.test(aiBudgetCollectionScript) &&
-      /verifyCollection/.test(aiBudgetCollectionScript) &&
-      /createCollectionField/.test(aiBudgetCollectionScript) &&
-      /\/create-field/.test(aiBudgetCollectionScript) &&
-      /--sync-fields/.test(aiBudgetCollectionScript) &&
-      /--live/.test(aiBudgetCollectionScript) &&
-      /create-trip-planner-ai-budget-collection\.mjs/.test(launchRunbook),
-    'Expected a dry-run-first AI budget collection helper for daily/monthly Gemini hard caps.'
+    'AI budget collection is not a release dependency',
+    !/TripPlannerAiBudget|AI_BUDGET_COLLECTION|AI_GENERATION_LIMIT|quotaEmail/.test(funnel + remotePreflightSource) &&
+      !/const\s+AI_BUDGET_COLLECTION|CRITICAL_AI_BUDGET_FIELDS|AI_BUDGET_COLLECTION_ID/.test(prepublishGate),
+    'Trip Planner 3.1 should not require an AI budget collection, generation quota, or quota email.'
   );
   block(
     'Hourly scheduled processor is configured',
@@ -992,15 +945,13 @@ function run() {
     /function\s+dayBlockWindow/.test(indexHtml) &&
       /function\s+dayBlockTimeHtml/.test(indexHtml) &&
       /bw-block-time-main/.test(indexHtml) &&
-      /Later days, map links, PDF, and arrival reminders continue after email\./.test(indexHtml) &&
-      /function\s+previewDayProofHtml/.test(indexHtml) &&
-      /function\s+lockedPlanPreviewHtml/.test(indexHtml) &&
-      /Why this Day 1 works/.test(indexHtml) &&
-      /Email me my full plan/.test(indexHtml) &&
+      /function\s+artifactTimelineHtml/.test(indexHtml) &&
+      /class="bw-artifact-time-row"/.test(indexHtml) &&
       /dayBlockWindow\(day,\s*block,\s*index\)/.test(indexHtml) &&
+      /block\.window\s*\|\|\s*block\.time/.test(artifactV3PdfSource) &&
       /09:30-12:00/.test(indexHtml) &&
-      /Next 11:30/.test(indexHtml),
-    'Expected Day 1 to show useful preview proof, email-to-self gate copy, and deterministic time windows in unlocked itinerary/print/PDF/text export.'
+      /09:00-10:45/.test(indexHtml),
+    'Expected deterministic real time ranges to reach the browser artifact and the shared PDF renderer.'
   );
   block(
     'Trip calendar export is available',
@@ -1034,18 +985,15 @@ function run() {
     'Expected the PDF cover to introduce the document structure before the photo/radar/pass sections.'
   );
   block(
-    'Merged Plan at a glance index replaces duplicate preview/index',
+    'Artifact day navigation stays compact and singular',
     /data-day-jump-bar/.test(indexHtml) &&
-      /function\s+dayJumpBarHtml/.test(indexHtml) &&
-      /Plan at a glance/.test(indexHtml) &&
-      /Tap a day to jump to the full itinerary/.test(indexHtml) &&
-      /bw-plan-index-grid/.test(indexHtml) &&
-      /bw-plan-index-photo/.test(indexHtml) &&
-      /dayPhotoForType/.test(indexHtml) &&
-      !/data-itinerary-overview/.test(indexHtml) &&
-      !/Your first preview/.test(indexHtml) &&
-      !/Full plan index/.test(indexHtml),
-    'Expected one photo-led unlocked day index, not separate preview and full-plan index modules.'
+      /function\s+artifactDayTabsMobileHtml/.test(indexHtml) &&
+      /function\s+artifactPhonePreviewHtml/.test(indexHtml) &&
+      /function\s+renderFullPlanArtifactV3/.test(indexHtml) &&
+      /data-artifact-full-day/.test(indexHtml) &&
+      /Open a day in your itinerary/.test(indexHtml) &&
+      /bw-artifact-full-jumps/.test(indexHtml),
+    'Expected one compact day switcher in the product preview and one day navigation row in the purchased itinerary.'
   );
   block(
     'Trip load map summarizes daily intensity visually',
@@ -1123,31 +1071,15 @@ function run() {
     'Expected locked results to show only a Day 1 preview; after unlock the preview clears and PDF/share actions wait until the guide note/full plan is ready.'
   );
   block(
-    'Frontend AI guide gate is fail-soft',
-      /function\s+aiEnhancementPayload/.test(indexHtml) &&
-      /function\s+unlockEmailForQuota/.test(indexHtml) &&
-      /quotaEmail:\s*unlockEmailForQuota\(\)/.test(aiPayloadSource) &&
-      /Your Local Guide Yusuf\\'s Note|Your Local Guide Yusuf's Note/.test(aiHtmlSource) &&
-      /YUSUF_GUIDE_PHOTO_URL/.test(indexHtml) &&
-      /routeIntro/.test(aiHtmlSource) &&
-      /dayStories/.test(aiHtmlSource) &&
-      /weatherSentence/.test(aiHtmlSource) &&
-      /tourSentence/.test(aiHtmlSource) &&
-      /localGuideFallback/.test(aiRequestSource + indexHtml) &&
-      /aiStatus\s*=\s*'quota'/.test(aiRequestSource) &&
-      /body:\s*JSON\.stringify\(aiEnhancementPayload\(plan\)\)/.test(aiRequestSource) &&
-      /forceLocalAiErrorForQa\(\)/.test(aiRequestSource) &&
-      /aiEnhancement\s*=\s*localGuideFallback\(plan,\s*'ai_error'/.test(aiRequestSource) &&
-      /fail_soft:\s*true/.test(aiRequestSource) &&
-      /if\s*\(!aiEnhancement\s*\|\|\s*\(aiStatus\s*!==\s*'ready'\s*&&\s*aiStatus\s*!==\s*'quota'\)\)\s*return\s*''/.test(aiHtmlSource) &&
-      /function\s+fullPlanContentReady\(\)\s*\{[\s\S]*aiStatus\s*===\s*'ready'[\s\S]*aiStatus\s*===\s*'quota'/.test(indexHtml) &&
-      /revealFullPlanAfterGuide\(plan,\s*true\)/.test(aiRequestSource) &&
+    'Deterministic artifact gate replaces frontend AI',
+      /function\s+fullPlanContentReady\(\)\s*\{[\s\S]*activePaidArtifactV3\(\)/.test(indexHtml) &&
       /full\.hidden\s*=\s*!unlocked\s*\|\|\s*!planGenerated/.test(renderFullPlanSource) &&
       /if\s*\(!fullPlanContentReady\(\)\)\s*\{[\s\S]*daysEl\.innerHTML\s*=\s*''/.test(renderFullPlanSource) &&
-      /dashboard\.hidden\s*=\s*!fullPlanContentReady\(\)/.test(updateUnlockUiSource) &&
+      /dashboard\.hidden\s*=\s*Boolean\(activePaidArtifactV3\(\)\)\s*\|\|\s*!fullPlanContentReady\(\)/.test(updateUnlockUiSource) &&
       /pdf\.disabled\s*=\s*!fullPlanContentReady\(\)/.test(updateUnlockUiSource) &&
-      /print\.disabled\s*=\s*!fullPlanContentReady\(\)/.test(updateUnlockUiSource),
-    'Expected the guide note to gate the full itinerary, fall back locally if Gemini fails, and use email only for backend quota lookup.'
+      /print\.disabled\s*=\s*!fullPlanContentReady\(\)/.test(updateUnlockUiSource) &&
+      !/requestAiEnhancement|_functions\/tripPlannerAi|quotaEmail|bw_trip_planner_ai_/i.test(indexHtml),
+    'Expected the full product to open only from a verified stored artifact, with no frontend AI request or quota-email gate.'
   );
   block(
     'Daily weather chips appear inside each full day',
@@ -1155,10 +1087,10 @@ function run() {
       /bw-day-weather/.test(indexHtml) &&
       /dayWeatherFor\(day\)/.test(indexHtml) &&
       /tripWeatherSummary\(plan\)/.test(indexHtml) &&
-      /setDailyWeatherMap\(liveDailyWeatherMap\(data\)\)/.test(indexHtml) &&
-      /setDailyWeatherMap\(climateDailyWeatherMap\(\)\)/.test(indexHtml) &&
-      /setDailyWeatherMap\(fallbackDailyWeatherMap\(\)\)/.test(indexHtml),
-    'Expected each unlocked day card to include a concise live/fallback weather cue and the AI payload to receive only a short trip weather summary.'
+      /setDailyWeatherMap\(localMockRainDayMap\(liveDailyWeatherMap\(data\)\)\)/.test(indexHtml) &&
+      /setDailyWeatherMap\(localMockRainDayMap\(climateDailyWeatherMap\(\)\)\)/.test(indexHtml) &&
+      /setDailyWeatherMap\(localMockRainDayMap\(fallbackDailyWeatherMap\(\)\)\)/.test(indexHtml),
+    'Expected each unlocked day card to include a concise live/fallback weather cue from deterministic weather data.'
   );
   block(
     'Full plan includes transport maps and shopping feature',
@@ -1181,17 +1113,15 @@ function run() {
     'Expected full-plan UI, PDF, print, and text export to include transport PDFs plus shopping/outlet guidance.'
   );
   block(
-    'PDF logo and day headers avoid overlap',
-    /var\s+logoW\s*=\s*140/.test(downloadSimplePdfSource) &&
-      /logoY\s*=\s*24/.test(downloadSimplePdfSource) &&
-      /var\s+imageH\s*=\s*imageW\s*\*\s*450\s*\/\s*1080/.test(downloadSimplePdfSource) &&
-      /logoY\s*\+\s*\(logoH\s*-\s*imageH\)\s*\/\s*2/.test(downloadSimplePdfSource) &&
-      /var\s+titleLines\s*=\s*doc\.splitTextToSize\(day\.title/.test(downloadSimplePdfSource) &&
-      /var\s+headerH\s*=\s*Math\.max\(58,\s*32\s*\+\s*titleLines\.length\s*\*\s*15\)/.test(downloadSimplePdfSource) &&
-      /function\s+drawBrandLogo/.test(downloadPolishedPdfSource) &&
-      /function\s+drawDay\(day\)/.test(downloadPolishedPdfSource) &&
-      /doc\.text\(split\(day\.title/.test(downloadPolishedPdfSource),
-    'Expected the fallback simple PDF and active polished PDF to size logo/title areas instead of overlapping text.'
+    'Artifact PDF page geometry is bounded',
+    /var\s+PAGE_HEIGHT\s*=\s*841\.89/.test(artifactV3PdfSource) &&
+      /function\s+validatePagePlan/.test(artifactV3PdfSource) &&
+      /function\s+drawDay\(doc,\s*page\)/.test(artifactV3PdfSource) &&
+      /pageCount:\s*pages\.length/.test(artifactV3PdfSource) &&
+      /actualPages\s*!==\s*pagePlan\.pageCount/.test(artifactV3PdfSource) &&
+      /plan-artifact-v3-pdf-3\.1\.0/.test(artifactV3PdfSource) &&
+      /BWPlanArtifactPdfV3\.renderPdf/.test(indexHtml),
+    'Expected the shared artifact renderer to validate fixed A4 pages and fail closed on page-count mismatches.'
   );
   block(
     'Trip style presets reduce form friction',
@@ -1515,19 +1445,17 @@ function run() {
   );
 
   const smokeEvidence = liveSmokeEvidence();
-  const aiSmokeEvidence = aiLiveSmokeEvidence();
   warn(
     'Live Wix smoke test evidence is recorded',
     Boolean(smokeEvidence),
     'No live-*.json result with successful tripPlannerLead response found under output/qa/ultimate-trip-planner-live-smoke/.'
   );
   if (smokeEvidence) pass('Latest live smoke evidence file', smokeEvidence);
-  warn(
-    'Gemini AI polish live smoke evidence is recorded',
-    Boolean(aiSmokeEvidence),
-    'No live-*.json result with successful tripPlannerAi response found under output/qa/ultimate-trip-planner-live-smoke/. Add GEMINI_API_KEY in Wix Secrets, publish Velo, then run the smoke helper with --ai.'
+  block(
+    'Zero customer-runtime AI release evidence is present',
+    /runtimeAi:\s*'disabled'/.test(aiPrivacyFixture) && /browserAiRequests:\s*0/.test(aiPrivacyFixture) && /modelNetworkCalls:\s*0/.test(aiPrivacyFixture),
+    'Run velo/ai-privacy-fixture.mjs and keep the zero-request assertions in the release gate.'
   );
-  if (aiSmokeEvidence) pass('Latest Gemini AI smoke evidence file', aiSmokeEvidence);
 }
 
 run();
