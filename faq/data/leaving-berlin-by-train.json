@@ -8,7 +8,7 @@
     "items": [
       {
         "q": "Which Berlin station do long-distance trains leave from in 2026?",
-        "a": "Mostly Berlin Hauptbahnhof, but the lower level rather than the glass hall upstairs. The Stadtbahn between Charlottenburg and Ostbahnhof is closed to regional and long-distance trains from 14 June to 12 December 2026, so trains use the deep north-south tunnel instead. Some services start elsewhere: ICE trains to North Rhine-Westphalia and Frankfurt from Berlin-Charlottenburg, Düsseldorf and Köln services via Südkreuz, Eurocity trains to Poland via Gesundbrunnen and Lichtenberg from 25 August, and the Dresden to Rostock Intercity via Ostkreuz. The station printed on your ticket is the one that counts."
+        "a": "Mostly Berlin Hauptbahnhof, but the lower level rather than the glass hall upstairs. The Stadtbahn between Charlottenburg and Ostbahnhof is closed to regional and long-distance trains from 14 June to 12 December 2026, so trains use the deep north-south tunnel instead. Some services start elsewhere: some ICE trains to North Rhine-Westphalia and Frankfurt start or finish at Berlin-Charlottenburg, Düsseldorf and Köln services run via Südkreuz, Eurocity trains to Poland use Gesundbrunnen and Lichtenberg from 25 August, and the Dresden to Rostock Intercity runs via Ostkreuz. The station printed on your ticket is the one that counts."
       },
       {
         "q": "Can I still catch a long-distance train at Zoologischer Garten or Ostbahnhof?",
@@ -20,11 +20,11 @@
       },
       {
         "q": "What is the difference between Super Sparpreis, Sparpreis and Flexpreis?",
-        "a": "Flexibility. Super Sparpreis starts at 6.99 euros and is bound to the exact train on your ticket, with rebooking, exchange and cancellation all excluded, so a missed train means a lost ticket. Sparpreis starts at 21.99 euros, is also train-bound, and can be changed or cancelled until the day before travel for a 10 euro fee. Flexpreis costs more and lets you take any train on that route on your booked day, break the journey, and cancel free until the day before or for 30 euros from the first day of validity. Flexpreis also includes the City-Ticket for local transport in participating cities; the two cheaper fares make you buy it separately."
+        "a": "Flexibility. Super Sparpreis normally starts at 17.99 euros in second class, while selected short domestic journeys can start at 6.99 euros. It is bound to the booked long-distance train and, outside DB's three-hour immediate-cancellation window, ordinary exchange and cancellation are excluded. If you miss it for a reason on your side, you normally cannot use it on a later long-distance train; disruption and passenger-rights rules are separate. Sparpreis starts at 21.99 euros, is also train-bound, and can be cancelled until the day before travel for a 10 euro fee. Flexpreis costs more and lets you take any train on that route on your booked day, break the journey, and cancel free until the day before or for 30 euros from the first day of validity. Flexpreis also includes the City-Ticket for local transport in participating cities; with the two cheaper fares it is a paid addition depending on the connection."
       },
       {
         "q": "Is the Deutschlandticket valid on ICE trains from Berlin?",
-        "a": "No, and it never has been. The 63 euro monthly Deutschlandticket covers regional trains, meaning RE, RB and IRE, plus every S-Bahn, U-Bahn, tram and bus. It is not valid on ICE, IC or EC. Since the 14 December 2025 timetable change it is also no longer accepted on DB long-distance trains anywhere in Berlin and Brandenburg, which ended the old arrangement that let regional tickets be used on the Intercity towards Elsterwerda and Cottbus and the ICE towards Prenzlau. Guides still recommending that shortcut are out of date, and using it now means travelling without a valid ticket."
+        "a": "Not under the national rule. The 63 euro monthly Deutschlandticket covers regional trains, meaning RE, RB and IRE, plus every S-Bahn, U-Bahn, tram and bus, but not ordinary ICE, IC or EC journeys. Berlin and Brandenburg used to have a few local long-distance exceptions. Those ended with the 14 December 2025 timetable change, so the former Intercity shortcuts towards Elsterwerda and Cottbus and the ICE exception towards Prenzlau no longer work. Guides still recommending them are out of date, and using them now means travelling without a valid ticket."
       },
       {
         "q": "How much does the Deutschlandticket cost in 2026?",
@@ -40,7 +40,7 @@
       },
       {
         "q": "How far in advance should I book a cheap train ticket from Berlin?",
-        "a": "As early as you can if you want Super Sparpreis. The cheap seats are a fixed quota per train rather than a general discount, so they sell out first, and they disappear fastest on Friday and Sunday departures. If your plans might still move, the saving is not worth it: a Super Sparpreis ticket cannot be rebooked or refunded at all."
+        "a": "As early as you can if you want Super Sparpreis. The cheap seats are a fixed quota per train rather than a general discount, so they sell out first, and they disappear fastest on Friday and Sunday departures. If your plans might still move, the saving may not be worth it: outside DB's three-hour immediate-cancellation window, ordinary exchange and cancellation are excluded."
       }
     ]
   }
