@@ -189,13 +189,18 @@ const TOPICS = [
 // guides. Keep this curated because the /blog hero is the first editorial
 // signal visitors see before the Latest shelf.
 const HERO_SLUGS = {
-  lead: 'is-berlin-walkable',
+  lead: 'stolpersteine-berlin',
   secondary: [
-    'berlin-ghost-stations',
+    'is-berlin-walkable',
+    'spreewald-day-trip-from-berlin',
+    'berliner-unterwelten',
+    'berlin-ubahn-etiquette',
+    'where-to-watch-2026-world-cup-in-berlin',
     'do-you-need-a-car-in-berlin',
+    'berlin-ghost-stations',
+    'schoneberg-berlin',
     'berlin-emergency-numbers',
     'berlin-airports',
-    'where-to-watch-2026-world-cup-in-berlin',
     'do-you-need-a-visa-to-visit-berlin',
     'how-many-days-in-berlin',
     'smoking-in-berlin',
@@ -274,8 +279,13 @@ const REQUIRED_SLUGS = [
   'why-is-berlin-founding-year-1237',
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
+  'stolpersteine-berlin',
   'is-berlin-walkable',
+  'spreewald-day-trip-from-berlin',
+  'berliner-unterwelten',
+  'berlin-ubahn-etiquette',
   'berlin-ghost-stations',
+  'schoneberg-berlin',
   'do-you-need-a-car-in-berlin',
   'berlin-emergency-numbers',
   'berlin-airports',
@@ -625,6 +635,9 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if ((post.slug || '') === 'berliner-unterwelten') return 'berliner-unterwelten-tour-board';
+  if ((post.slug || '') === 'spreewald-day-trip-from-berlin') return 'spreewald-reach-map';
+  if ((post.slug || '') === 'schoneberg-berlin') return 'schoneberg-plaque-check';
   if ((post.slug || '') === 'berlin-marathon-2026') return 'berlin-marathon-day';
   if ((post.slug || '') === 'kurfurstendamm-berlin') return 'kurfurstendamm-walk';
   if ((post.slug || '') === 'oktoberfest-in-berlin') return 'berlin-beer-season-calendar';
