@@ -1204,6 +1204,39 @@
       "cmsItemId": "184334ba-3de6-42dd-8132-7a5adb009fd6"
     },
     {
+      "slug": "technikmuseum-train-builder",
+      "title": "Technikmuseum Train Builder",
+      "lead": "Plan the giant Deutsches Technikmuseum like a dispatcher: pick a time budget, couple the halls you want as wagons, and get a walking order across both entrances with the real hour traps.",
+      "category": "Museums",
+      "image": "https://static.wixstatic.com/media/5a08a3_016c09dd852d4bc9b0aa72a8bb435333~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/technikmuseum-train-builder/",
+      "embedHeight": 1500,
+      "hubCategory": "CultureLandmarks",
+      "type": "Planner",
+      "tags": [
+        "technikmuseum",
+        "technology museum",
+        "museum",
+        "kids",
+        "rainy day",
+        "kreuzberg",
+        "aviation",
+        "trains",
+        "spectrum",
+        "family"
+      ],
+      "aliases": [
+        "german museum of technology",
+        "deutsches technikmuseum",
+        "technology museum berlin",
+        "technik museum berlin"
+      ],
+      "relatedBlog": "/post/berlin-natural-history-museum",
+      "iconStatus": "live-wix-media",
+      "published": true,
+      "cmsItemId": "96f8f35a-1956-4df6-bb31-dfc216f8f876"
+    },
+    {
       "slug": "karl-marx-allee-spotter",
       "title": "Karl-Marx-Allee Facade Spotter",
       "lead": "East Berlin’s showpiece boulevard, decoded on real photos. Pick a U5 stop, tap the pins on the facades and learn what the tiles, tower domes and the Sputnik actually meant.",
