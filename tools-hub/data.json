@@ -1171,6 +1171,37 @@
       "cmsItemId": "0ba718f9-5d78-4b7e-9ac9-77e77fa753a6"
     },
     {
+      "slug": "karl-marx-allee-spotter",
+      "title": "Karl-Marx-Allee Facade Spotter",
+      "lead": "East Berlin’s showpiece boulevard, decoded on real photos. Pick a U5 stop, tap the pins on the facades and learn what the tiles, tower domes and the Sputnik actually meant.",
+      "category": "Discovery",
+      "image": "https://static.wixstatic.com/media/5a08a3_27db5cbf51204160b85a50a86c514bfe~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/karl-marx-allee-spotter/",
+      "embedHeight": 1450,
+      "hubCategory": "CultureLandmarks",
+      "type": "Guide",
+      "tags": [
+        "Karl-Marx-Allee",
+        "Stalinallee",
+        "East Berlin",
+        "Frankfurter Tor",
+        "Kino International",
+        "U5",
+        "GDR architecture"
+      ],
+      "aliases": [
+        "karl marx allee",
+        "stalinallee",
+        "frankfurter tor",
+        "east berlin boulevard",
+        "kino international",
+        "socialist architecture berlin"
+      ],
+      "relatedBlog": "/post/berlin-wall-trail",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "cafd63a4-9784-4293-ad2a-e04d8614a09e"
+    },
+    {
       "slug": "whats-open-in-berlin-today",
       "title": "What's Open in Berlin Today",
       "lead": "Live daily check: today's date, public holidays, what's open and closed across Berlin — supermarkets, museums, transport, banks.",
