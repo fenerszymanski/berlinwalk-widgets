@@ -2099,5 +2099,18 @@
     "png160": "tools-home/icons/spandau-old-town-loop-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/spandau-old-town-loop-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_66317362510749d9962a7173a5f30d09~mv2.png"
+  },
+  {
+    "slug": "leipzig-day-trip-planner",
+    "title": "Leipzig Day Trip Planner",
+    "category": "TripPlans",
+    "source": "chatgpt-browser-clipboard-bridge-20260722",
+    "generatedAt": "2026-07-22",
+    "promptFile": "tools-home/icons/_src/daily-blog-leipzig-day-trip-planner-icon-20260722-prompt.md",
+    "sourceImage": "tools-home/icons/_src/leipzig-day-trip-planner-raw-20260722.png",
+    "png512": "tools-home/icons/leipzig-day-trip-planner.png",
+    "png160": "tools-home/icons/leipzig-day-trip-planner-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/leipzig-day-trip-planner-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_2023fc259c764d478b472f643568704e~mv2.png"
   }
 ]
