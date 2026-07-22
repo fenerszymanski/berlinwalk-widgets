@@ -189,13 +189,16 @@ const TOPICS = [
 // guides. Keep this curated because the /blog hero is the first editorial
 // signal visitors see before the Latest shelf.
 const HERO_SLUGS = {
-  lead: 'stolpersteine-berlin',
+  lead: 'leaving-berlin-by-train',
   secondary: [
+    'berlin-wall-trail',
+    'stolpersteine-berlin',
     'is-berlin-walkable',
     'spreewald-day-trip-from-berlin',
+    'where-to-watch-2026-world-cup-in-berlin',
+    'football-match-in-berlin',
     'berliner-unterwelten',
     'berlin-ubahn-etiquette',
-    'where-to-watch-2026-world-cup-in-berlin',
     'do-you-need-a-car-in-berlin',
     'berlin-ghost-stations',
     'schoneberg-berlin',
@@ -279,9 +282,13 @@ const REQUIRED_SLUGS = [
   'why-is-berlin-founding-year-1237',
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
+  'leaving-berlin-by-train',
+  'berlin-wall-trail',
   'stolpersteine-berlin',
   'is-berlin-walkable',
   'spreewald-day-trip-from-berlin',
+  'where-to-watch-2026-world-cup-in-berlin',
+  'football-match-in-berlin',
   'berliner-unterwelten',
   'berlin-ubahn-etiquette',
   'berlin-ghost-stations',
