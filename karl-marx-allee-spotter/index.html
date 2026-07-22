@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karl-Marx-Allee Facade Spotter | BerlinWalk</title>
+<meta name="description" content="Tap through the real facades of Karl-Marx-Allee: the tiles, the tower domes, the Sputnik and the details most people walk straight past.">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root{
+    --green:#1B5E20; --deep:#123D18; --yellow:#FFE600; --lime:#7CB342;
+    --lightgreen:#C5E1A5; --cream:#FAFAF5; --ink:#212121; --red:#E63946;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:Montserrat,-apple-system,'Segoe UI',sans-serif;background:var(--cream);color:var(--ink);}
+  .kms{max-width:860px;margin:0 auto;padding:14px 12px 20px;}
+  .kms-head{background:linear-gradient(135deg,var(--deep),var(--green));border-radius:14px;padding:18px 16px 16px;color:var(--cream);}
+  .kms-kicker{display:inline-block;background:var(--yellow);color:var(--deep);font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;border-radius:999px;padding:4px 10px;}
+  .kms-head h1{font-size:clamp(19px,4.2vw,26px);line-height:1.2;margin:10px 0 8px;}
+  .kms-head p{font-size:13.5px;line-height:1.55;color:#E9F2E4;max-width:640px;}
+  /* U5 line selector */
+  .kms-line{margin:16px 2px 6px;}
+  .kms-line-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin:0 0 8px 2px;}
+  .kms-stops{display:flex;gap:6px;position:relative;padding-top:14px;}
+  .kms-stops::before{content:"";position:absolute;left:4%;right:4%;top:5px;height:5px;border-radius:3px;background:var(--green);}
+  .kms-stop{flex:1;min-width:0;border:0;background:none;cursor:pointer;text-align:center;position:relative;padding:6px 2px 8px;border-radius:10px;font-family:inherit;}
+  .kms-stop::before{content:"";position:absolute;top:-13px;left:50%;transform:translateX(-50%);width:13px;height:13px;border-radius:50%;background:var(--cream);border:3px solid var(--green);}
+  .kms-stop .n{display:block;font-size:12px;font-weight:700;color:var(--deep);line-height:1.25;}
+  .kms-stop .u{display:block;font-size:10px;color:#5c6b58;margin-top:2px;line-height:1.2;}
+  .kms-stop[aria-pressed="true"]{background:var(--lightgreen);}
+  .kms-stop[aria-pressed="true"]::before{background:var(--yellow);border-color:var(--deep);}
+  .kms-stop:focus-visible{outline:3px solid var(--lime);outline-offset:2px;}
+  .kms-stop .done{display:inline-block;font-size:9.5px;font-weight:700;color:var(--green);}
+  /* stage */
+  .kms-stage{margin-top:10px;background:var(--deep);border-radius:14px;padding:10px;}
+  .kms-stagehead{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;padding:2px 4px 8px;}
+  .kms-stagehead h2{color:var(--cream);font-size:16px;}
+  .kms-stagehead .addr{color:var(--lightgreen);font-size:11.5px;}
+  .kms-imgwrap{position:relative;margin:0 auto;max-width:100%;}
+  .kms-imgwrap img{display:block;width:100%;height:100%;object-fit:cover;border-radius:8px;}
+  .kms-pin{position:absolute;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;border:2px solid var(--deep);background:var(--yellow);color:var(--deep);font-weight:800;font-size:14px;cursor:pointer;font-family:inherit;box-shadow:0 2px 8px rgba(0,0,0,.45);transition:transform .15s;}
+  .kms-pin::after{content:"";position:absolute;inset:-7px;border-radius:50%;}
+  .kms-pin:hover{transform:translate(-50%,-50%) scale(1.12);}
+  .kms-pin:focus-visible{outline:3px solid var(--yellow);outline-offset:2px;}
+  .kms-pin.found{background:var(--green);color:var(--cream);border-color:var(--cream);}
+  .kms-pin[aria-expanded="true"]{background:var(--cream);color:var(--deep);}
+  /* detail card overlay */
+  .kms-card{position:absolute;left:8px;right:8px;bottom:8px;background:var(--cream);border-radius:10px;padding:12px 40px 12px 14px;box-shadow:0 6px 24px rgba(0,0,0,.5);border-left:6px solid var(--yellow);z-index:6;}
+  .kms-card[hidden]{display:none !important;}
+  .kms-card h3{font-size:14px;color:var(--deep);margin-bottom:4px;}
+  .kms-card p{font-size:12.5px;line-height:1.5;}
+  .kms-card .stand{margin-top:6px;font-size:11.5px;font-weight:700;color:var(--green);}
+  .kms-card .close{position:absolute;top:6px;right:6px;width:30px;height:30px;border-radius:50%;border:0;background:var(--deep);color:var(--cream);font-size:15px;cursor:pointer;line-height:1;}
+  .kms-card .close:focus-visible{outline:3px solid var(--lime);}
+  /* progress + plan */
+  .kms-progress{display:flex;align-items:center;gap:10px;margin:14px 2px 0;}
+  .kms-bar{flex:1;height:10px;border-radius:5px;background:#E3E8DC;overflow:hidden;}
+  .kms-bar span{display:block;height:100%;background:linear-gradient(90deg,var(--lime),var(--green));width:0%;transition:width .3s;}
+  .kms-count{font-size:12px;font-weight:700;color:var(--deep);white-space:nowrap;}
+  .kms-plan{margin-top:14px;background:var(--lightgreen);border-radius:12px;padding:14px;}
+  .kms-plan h2{font-size:14px;color:var(--deep);margin-bottom:6px;}
+  .kms-plan p{font-size:12.5px;line-height:1.55;}
+  .kms-plan a{color:var(--deep);font-weight:700;}
+  .kms-foot{display:flex;justify-content:flex-end;margin-top:10px;}
+  .kms-credits-btn{border:1px solid #cfd6c8;background:#fff;color:#5c6b58;font-size:10.5px;border-radius:999px;padding:4px 10px;cursor:pointer;font-family:inherit;}
+  .kms-credits-btn:focus-visible{outline:2px solid var(--lime);}
+  /* credits modal */
+  .kms-modal{position:fixed;inset:0;background:rgba(18,61,24,.55);display:flex;align-items:center;justify-content:center;padding:16px;z-index:50;}
+  .kms-modal[hidden]{display:none !important;}
+  .kms-modal-box{background:var(--cream);border-radius:12px;max-width:520px;width:100%;max-height:80vh;overflow:auto;padding:16px 16px 14px;position:relative;}
+  .kms-modal-box h2{font-size:14px;color:var(--deep);margin-bottom:8px;}
+  .kms-modal-box ul{list-style:none;}
+  .kms-modal-box li{font-size:11.5px;line-height:1.5;padding:5px 0;border-bottom:1px solid #e6eadf;}
+  .kms-modal-box a{color:var(--green);}
+  .kms-modal-close{position:absolute;top:8px;right:8px;width:32px;height:32px;border-radius:50%;border:0;background:var(--deep);color:var(--cream);font-size:16px;cursor:pointer;}
+  @media (max-width:520px){
+    .kms-imgwrap{width:100% !important;}
+    .kms-stops{gap:3px;}
+    .kms-stop{padding:6px 3px 8px;}
+    .kms-stop .n{font-size:10px;hyphens:auto;}
+    .kms-stop .u{display:none;}
+    .kms-pin{width:44px;height:44px;font-size:15px;}
+    .kms-card{left:4px;right:4px;bottom:4px;}
+  }
+</style>
+</head>
+<body>
+<div class="kms">
+  <header class="kms-head">
+    <span class="kms-kicker">Karl-Marx-Allee</span>
+    <h1>Karl-Marx-Allee Facade Spotter</h1>
+    <p>East Berlin built this boulevard to be read like a poster, and most people walk it without reading a single line. Pick a stop on the U5, then tap the numbered pins on the real facades. I have marked the details I point out when friends visit.</p>
+  </header>
+
+  <nav class="kms-line" aria-label="Stops along Karl-Marx-Allee">
+    <p class="kms-line-label">West to east along the U5</p>
+    <div class="kms-stops" id="stops"></div>
+  </nav>
+
+  <section class="kms-stage">
+    <div class="kms-stagehead">
+      <h2 id="stageTitle"></h2>
+      <span class="addr" id="stageAddr"></span>
+    </div>
+    <div class="kms-imgwrap" id="imgWrap">
+      <img id="stageImg" src="" alt="">
+      <div class="kms-card" id="detailCard" hidden role="region" aria-live="polite">
+        <button class="close" id="cardClose" aria-label="Close detail">×</button>
+        <h3 id="cardTitle"></h3>
+        <p id="cardText"></p>
+        <p class="stand" id="cardStand"></p>
+      </div>
+    </div>
+  </section>
+
+  <div class="kms-progress">
+    <div class="kms-bar"><span id="barFill"></span></div>
+    <span class="kms-count" id="countLabel">0 of 15 details spotted</span>
+  </div>
+
+  <section class="kms-plan">
+    <h2>How I would walk it</h2>
+    <p>Take the U5 to Strausberger Platz and walk east to Frankfurter Tor. That is the 1950s showpiece stretch, about 20 minutes without stops and 45 with them. Kino International and Café Moskau sit on the newer western half near U Schillingstraße, so see them first or last with a one-stop U5 hop. Full boulevard, Alexanderplatz to Frankfurter Tor, is 2.3 km. Read the full guide at <a href="https://www.berlinwalk.com/post/karl-marx-allee-berlin" target="_blank" rel="noopener">berlinwalk.com/post/karl-marx-allee-berlin</a>.</p>
+  </section>
+
+  <div class="kms-foot">
+    <button class="kms-credits-btn" id="creditsBtn" aria-expanded="false" aria-controls="creditsModal">Tool visual credits</button>
+  </div>
+</div>
+
+<div class="kms-modal" id="creditsModal" hidden role="dialog" aria-modal="true" aria-label="Tool visual credits">
+  <div class="kms-modal-box">
+    <button class="kms-modal-close" id="creditsClose" aria-label="Close credits">×</button>
+    <h2>Tool visual credits</h2>
+    <ul>
+      <li>Kino International: <a href="https://commons.wikimedia.org/wiki/File:Kino_International,_Berlin-msu-2021-3439-.jpg" target="_blank" rel="noopener">photo</a> by Matthias Süßen, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a>, resized.</li>
+      <li>Café Moskau: <a href="https://commons.wikimedia.org/wiki/File:Caf%C3%A9_Moskau_%28Berlin%29-3991-n-.jpg" target="_blank" rel="noopener">photo</a> by Matthias Süßen, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a>, resized.</li>
+      <li>Strausberger Platz: <a href="https://commons.wikimedia.org/wiki/File:Strausberger_Platz_HeGro.jpg" target="_blank" rel="noopener">photo</a> by Henning Grope, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a>, resized.</li>
+      <li>Karl-Marx-Allee 81 portal: <a href="https://commons.wikimedia.org/wiki/File:Portal_Karl-Marx-Allee_81_in_Berlin.jpg" target="_blank" rel="noopener">photo</a> by JoachimKohler-HB, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a>, resized.</li>
+      <li>Frankfurter Tor: <a href="https://commons.wikimedia.org/wiki/File:Berlin-Friedrichshain,_de_noordelijke_Frankfurter_Tor_Dm09085171_IMG_5345_2024-09-05_09.00.jpg" target="_blank" rel="noopener">photo</a> by Michielverbeek, <a href="https://creativecommons.org/licenses/by/4.0" target="_blank" rel="noopener">CC BY 4.0</a>, resized.</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var STOPS=[
+    {id:'kino',name:'Kino International',u:'U Schillingstraße',addr:'Karl-Marx-Allee 33',img:'img/kino-international.jpg',ar:'1280/775',
+     alt:'Front of Kino International in Berlin, a 1960s cinema with a glass foyer floating above the entrance',
+     pins:[
+      {x:50,y:47,t:'The floating glass foyer',d:'The whole upper floor is one glass box pushed out over the entrance with no columns under the front edge. This was the GDR premiere cinema, opened in 1963, and it reopened in February 2026 after an 18 month renovation. Buy a ticket and you can stand inside the glass.',s:'Stand back on the plaza so the overhang reads as one floating slab.'},
+      {x:22,y:30,t:'The gold lettering',d:'The KINO INTERNATIONAL letters are original 1960s aluminium type. The building was designed by Josef Kaiser as a showcase, so even the sign was treated as architecture, not advertising.',s:'Look up from the ticket doors, left of the film poster.'},
+      {x:52,y:74,t:'The premiere doors',d:'On 9 November 1989 the cinema premiered Coming Out, the first GDR film with a gay lead. While the credits ran, the Berlin Wall was opening a few kilometres north. The audience walked out into a different city.',s:'The row of doors under the program boards.'}
+     ]},
+    {id:'moskau',name:'Café Moskau',u:'U Schillingstraße',addr:'Karl-Marx-Allee 34',img:'img/cafe-moskau.jpg',ar:'1280/911',
+     alt:'Café Moskau pavilion at night with its Sputnik model on a mast and glowing upper floor',
+     pins:[
+      {x:48,y:17,t:'A real Sputnik model',d:'The metal sphere on the mast is a Sputnik replica, a Soviet gift from the early 1960s. The pavilion opened in 1964 as the showcase restaurant for Soviet food and drink on the modern half of the boulevard.',s:'Visible from anywhere on the plaza, best against open sky.'},
+      {x:56,y:44,t:'MOCKBA in two alphabets',d:'The roof carries the city name in both Latin and Cyrillic letters. Every nationality restaurant on this stretch advertised a friendly socialist capital. Moskau is the one that survived with its signage intact.',s:'Walk the Schillingstraße side to catch both spellings in one line.'},
+      {x:50,y:80,t:'The mosaic, and a warning',d:'The band at the entrance is a glass mosaic of life in the Soviet republics. One practical note from me: this is a rented event venue today, not a public café, so do not plan your coffee break here. Café Sibylle further east is the working café.',s:'The mosaic wraps the entrance pillar at street level.'}
+     ]},
+    {id:'strausberger',name:'Strausberger Platz',u:'U Strausberger Platz',addr:'Strausberger Platz',img:'img/strausberger-platz.jpg',ar:'1280/855',
+     alt:'Strausberger Platz fountain with sculpted copper panels, 1950s tower buildings and the TV Tower behind',
+     pins:[
+      {x:47,y:52,t:'The Floating Ring fountain',d:'The copper panels above the water are the Schwebender Ring by metal artist Fritz Kühn. The square itself is a huge oval roundabout, so the fountain island is calmer than anything around it.',s:'Cross to the fountain island for the full circle of jets.'},
+      {x:14,y:40,t:'Henselmann tower houses',d:'The stepped corner towers framing the square are by Hermann Henselmann, the lead architect of the boulevard. They mark the gate between the 1950s stone half and the 1960s modern half of the Allee.',s:'Stand on the fountain island and turn once around.'},
+      {x:66,y:34,t:'The TV Tower sightline',d:'Look west and the Fernsehturm lines up straight down the boulevard. The whole street was drawn as one axis pointing at the centre of the capital, and this is where the axis becomes obvious.',s:'Look west, down the middle of the Allee.'}
+     ]},
+    {id:'portal',name:'Workers’ palace portal',u:'U Weberwiese',addr:'Karl-Marx-Allee 81',img:'img/portal-kma-81.jpg',ar:'1280/853',
+     alt:'Monumental columned portal of Karl-Marx-Allee 81 with ceramic tiled facade and a relief above the entrance',
+     pins:[
+      {x:50,y:16,t:'The 1952 building programme relief',d:'The plaque above the portal celebrates the Nationales Aufbauprogramm of 1952, the national rebuilding programme that raised these blocks. Ordinary flats were dressed like palaces because the street was propaganda you could live in.',s:'Step back to the lawn to read the relief over the cornice.'},
+      {x:85,y:8,t:'Meissen ceramic tiles',d:'The facades are clad in ceramic tiles from Meissen, the porcelain town. In later GDR decades tiles kept dropping off, and the nets and renovations became a running Berlin joke. Look closely and you can spot replaced patches.',s:'Any facade stretch between Strausberger Platz and Frankfurter Tor.'},
+      {x:32,y:52,t:'Columns for ordinary flats',d:'A full colonnade guards what is simply house number 81. Upstairs were normal apartments, awarded as prizes for model workers when the street opened. The 1953 uprising began on this street when the same workers had their quotas raised.',s:'Portal at Karl-Marx-Allee 81, two minutes from U Weberwiese.'}
+     ]},
+    {id:'tor',name:'Frankfurter Tor',u:'U Frankfurter Tor',addr:'Frankfurter Tor',img:'img/frankfurter-tor.jpg',ar:'780/1280',
+     alt:'North tower of Frankfurter Tor with its green dome above a tiled 1950s residential block',
+     pins:[
+      {x:39,y:15,t:'Domes borrowed from Gendarmenmarkt',d:'Henselmann topped the twin towers with domes quoting the two cathedral towers on Gendarmenmarkt. East Berlin was claiming the Prussian skyline for itself, in a residential building with a supermarket downstairs.',s:'Best seen from the middle islands of the Allee, west of the towers.'},
+      {x:42,y:29,t:'The colonnade lantern',d:'Under each dome sits an open colonnade ring, pure stage set with no function. The pair works as a city gate: this is where Karl-Marx-Allee officially ends and Frankfurter Allee begins.',s:'Look up from the tram stop at Frankfurter Tor.'},
+      {x:80,y:80,t:'Arcades made for parading',d:'The ground floors run as covered arcades with shops. The boulevard was designed for mass parades and evening promenades, so the shopping was built into the stage. Today the M10 tram starts here, a direct line to the Berlin Wall Memorial.',s:'Walk the arcade on either side of the towers.'}
+     ]}
+  ];
+  var TOTAL=0; STOPS.forEach(function(s){TOTAL+=s.pins.length;});
+  var found={}; var current=0; var openPin=null;
+
+  var stopsEl=document.getElementById('stops');
+  var img=document.getElementById('stageImg');
+  var wrap=document.getElementById('imgWrap');
+  var card=document.getElementById('detailCard');
+
+  function foundCount(){var n=0;Object.keys(found).forEach(function(k){if(found[k])n++;});return n;}
+  function stopFound(i){var n=0;STOPS[i].pins.forEach(function(p,j){if(found[i+'-'+j])n++;});return n;}
+
+  function renderStops(){
+    stopsEl.innerHTML='';
+    STOPS.forEach(function(s,i){
+      var b=document.createElement('button');
+      b.className='kms-stop';
+      b.setAttribute('aria-pressed',i===current?'true':'false');
+      b.innerHTML='<span class="n">'+s.name+'</span><span class="u">'+s.u+'</span><span class="done">'+stopFound(i)+'/'+s.pins.length+'</span>';
+      b.addEventListener('click',function(){current=i;openPin=null;render();});
+      stopsEl.appendChild(b);
+    });
+  }
+  function renderStage(){
+    var s=STOPS[current];
+    document.getElementById('stageTitle').textContent=s.name;
+    document.getElementById('stageAddr').textContent=s.addr+' · '+s.u;
+    var parts=s.ar.split('/');var ar=parts[0]/parts[1];
+    wrap.style.aspectRatio=s.ar;
+    wrap.style.width='min(100%, calc(min(560px, 78vw) * '+ar+'))';
+    img.src=s.img; img.alt=s.alt;
+    Array.prototype.slice.call(wrap.querySelectorAll('.kms-pin')).forEach(function(p){p.remove();});
+    s.pins.forEach(function(p,j){
+      var key=current+'-'+j;
+      var b=document.createElement('button');
+      b.className='kms-pin'+(found[key]?' found':'');
+      b.style.left=p.x+'%'; b.style.top=p.y+'%';
+      b.setAttribute('aria-expanded',openPin===j?'true':'false');
+      b.setAttribute('aria-label','Detail '+(j+1)+': '+p.t);
+      b.textContent=found[key]?'✓':(j+1);
+      b.addEventListener('click',function(){
+        found[key]=true;
+        openPin=(openPin===j?null:j);
+        render();
+      });
+      wrap.appendChild(b);
+    });
+    if(openPin!==null){
+      var p=s.pins[openPin];
+      document.getElementById('cardTitle').textContent=p.t;
+      document.getElementById('cardText').textContent=p.d;
+      document.getElementById('cardStand').textContent='Where: '+p.s;
+      card.hidden=false;
+    } else { card.hidden=true; }
+  }
+  function renderProgress(){
+    var n=foundCount();
+    document.getElementById('barFill').style.width=Math.round(n/TOTAL*100)+'%';
+    document.getElementById('countLabel').textContent=n+' of '+TOTAL+' details spotted';
+  }
+  function render(){renderStops();renderStage();renderProgress();}
+
+  document.getElementById('cardClose').addEventListener('click',function(){openPin=null;render();});
+
+  var modal=document.getElementById('creditsModal');
+  var creditsBtn=document.getElementById('creditsBtn');
+  function setModal(open){
+    modal.hidden=!open;
+    creditsBtn.setAttribute('aria-expanded',open?'true':'false');
+    if(open) document.getElementById('creditsClose').focus();
+  }
+  creditsBtn.addEventListener('click',function(){setModal(true);});
+  document.getElementById('creditsClose').addEventListener('click',function(){setModal(false);});
+  modal.addEventListener('click',function(e){if(e.target===modal)setModal(false);});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){
+      if(!modal.hidden){setModal(false);}
+      else if(openPin!==null){openPin=null;render();}
+    }
+  });
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
