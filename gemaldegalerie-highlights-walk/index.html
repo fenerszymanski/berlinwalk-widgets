@@ -163,7 +163,7 @@
       var n=picked.indexOf(p.id)!==-1?orderOf(p.id):0;
       html+='<button type="button" class="gg-card" data-id="'+p.id+'" aria-expanded="'+(openId===p.id)+'">'
         +(n?'<span class="gg-badge" aria-hidden="true">'+n+'</span>':'')
-        +'<figure><span class="gg-frame"><img src="'+p.img+'" alt="'+p.title.replace(/"/g,'&quot;')+', '+p.artist.replace(/"/g,'&quot;')+'" loading="lazy"></span>'
+        +'<figure><span class="gg-frame"><img src="'+p.img+'" alt="'+p.title.replace(/"/g,'&quot;')+', '+p.artist.replace(/"/g,'&quot;')+'" decoding="async"></span>'
         +'<figcaption><b>'+p.title+'</b>'+p.artist+'</figcaption></figure></button>';
       if(i===insertAfter&&openId){html+=labelHtml(byId(openId));}
     });
