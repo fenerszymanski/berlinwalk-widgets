@@ -1,6 +1,6 @@
 Stand at Strausberger Platz on the U5 and look east. The street in front of you is 90 metres wide, dead straight, and lined for more than a kilometre with tiled palaces that look like Moscow decided to move to Berlin. Guests on my tour ask about this street more often than you would expect, usually in the form of one confused question: what is this place, and why does nobody talk about it?
 
-That street is Karl-Marx-Allee, East Berlin's showpiece boulevard, and it is one of the best free history walks in the city. It is also easy to do badly, because the boulevard is 2.3 km long and only part of it is the part you came for. This guide is the version I give friends: which stretch to walk, what to look for on the facades, and what is actually open along the way in 2026.
+That street is Karl-Marx-Allee, East Berlin's showpiece boulevard, and it is one of the best free history walks in the city. It is also easy to do badly, because the boulevard is 2.3 km long and only part of it is the part you came for. This guide is the version I give friends: which stretch to walk, what to look for on the facades, and what is actually open along the way.
 
 ![The twin towers of Frankfurter Tor with Karl-Marx-Allee running between them under a blue sky](blog-drafts/karl-marx-allee-berlin/images/optimized/01-cover-frankfurter-tor.jpg)
 
@@ -62,7 +62,7 @@ An ear of the vanished Stalin monument, photographed in the Allee history exhibi
 
 If this period grabs you, my guide to [how Berlin was divided](https://www.berlinwalk.com/post/how-berlin-was-divided-a-simple-guide-to-east-vs-west) gives the wider frame, and the [Stolpersteine guide](https://www.berlinwalk.com/post/stolpersteine-berlin) covers the earlier, darker layer of memory you will also cross on these pavements.
 
-## What is actually open on the boulevard in 2026
+## What is actually open on the boulevard
 
 **Kino International reopened in February 2026**, and that is the single best piece of news this street has had in years. The GDR's premiere cinema at Karl-Marx-Allee 33, built in 1963 with a glass foyer floating over the entrance, closed in April 2024 for a full renovation and [reopened at the end of February 2026](https://www.berlin.de/landesdenkmalamt/aktivitaeten/kurzmeldungen/2026/artikel.1641631.php) with restored interiors, new projection and proper accessibility for the first time. On 9 November 1989 this cinema was premiering Coming Out, the GDR's first film with a gay lead, while the Wall opened a few kilometres north. Today [Yorck Kinos runs the program](https://www.yorck.de/en/cinemas/kino-international), and many screenings are marked OmU or OmeU, original language with subtitles, so a film here is a realistic visitor evening, not just a photo stop.
 

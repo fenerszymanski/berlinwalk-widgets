@@ -72,7 +72,7 @@ Everyone arrives with a different amount of time and energy, and the honest trad
 
 {{widget:spandau-old-town-loop}}
 
-## Getting there in 2026, and the weekend trap
+## Getting there, and the weekend trap
 
 For most of 2026 the simple advice is: **take the U7**. Spandau has three useful stations on that line. Zitadelle drops you at the fortress, Altstadt Spandau puts you under the old town, and Rathaus Spandau is the terminus next to the big mainline station. From Mitte, the S-Bahn is usually faster: the **S3 or S9** runs from Alexanderplatz and Hauptbahnhof straight to Berlin-Spandau station in about half an hour, and the whole trip is inside [zone B on a normal AB ticket](https://www.berlinwalk.com/post/berlin-ab-abc-ticket-zones).
 
