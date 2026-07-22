@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tropical Islands Cost Planner — what your group really pays | BerlinWalk</title>
+<meta name="description" content="Build your group on an editable receipt and see what a Tropical Islands day from Berlin really costs: online vs door prices, sauna and evening tickets, the Family ticket crossover and the cheapest train option.">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20; --green-dark: #123D18; --yellow: #FFE600; --lime: #7CB342;
+    --light-green: #C5E1A5; --cream: #FAFAF5; --ink: #212121; --paper: #FFFDF6;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .ti-wrap { max-width: 680px; margin: 0 auto; padding: 18px 14px 30px; }
+  .ti-head { text-align: center; margin-bottom: 14px; }
+  .ti-kicker { display: inline-block; font-size: 11px; letter-spacing: 2px; font-weight: 700; color: var(--green); text-transform: uppercase; margin-bottom: 6px; }
+  .ti-title { font-size: 26px; line-height: 1.2; margin: 0 0 8px; color: var(--green-dark); font-weight: 800; }
+  .ti-sub { font-size: 14px; line-height: 1.55; margin: 0 auto; max-width: 560px; color: #4a4a4a; }
+
+  .ti-modes { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 16px 0 14px; }
+  .ti-seg { display: flex; border: 2px solid var(--green); border-radius: 999px; overflow: hidden; background: #fff; }
+  .ti-seg button { border: 0; background: transparent; color: var(--green-dark); font: inherit; font-size: 12.5px; font-weight: 700; padding: 8px 13px; cursor: pointer; }
+  .ti-seg button[aria-pressed="true"] { background: var(--green); color: #fff; }
+  .ti-seg button:focus-visible { outline: 3px solid var(--lime); outline-offset: -3px; }
+
+  /* Receipt paper */
+  .ti-receipt {
+    position: relative; max-width: 480px; margin: 0 auto; background: var(--paper);
+    box-shadow: 0 10px 30px rgba(18,61,24,.18);
+    padding: 26px 22px 30px; font-variant-numeric: tabular-nums;
+    background-image: repeating-linear-gradient(180deg, rgba(27,94,32,.025) 0 2px, transparent 2px 5px);
+  }
+  .ti-receipt::before, .ti-receipt::after {
+    content: ""; position: absolute; left: 0; right: 0; height: 12px;
+    background: linear-gradient(-45deg, var(--cream) 8px, transparent 0), linear-gradient(45deg, var(--cream) 8px, transparent 0);
+    background-size: 16px 12px; background-repeat: repeat-x;
+  }
+  .ti-receipt::before { top: -1px; }
+  .ti-receipt::after { bottom: -1px; transform: scaleY(-1); }
+  .ti-mono { font-family: 'IBM Plex Mono', 'Menlo', 'Courier New', monospace; }
+  .ti-r-head { text-align: center; border-bottom: 2px dashed #b9c7b3; padding-bottom: 12px; margin-bottom: 12px; }
+  .ti-r-shop { font-weight: 800; letter-spacing: 3px; font-size: 15px; color: var(--green-dark); }
+  .ti-r-meta { font-size: 11.5px; color: #5d6b58; margin-top: 4px; line-height: 1.6; }
+  .ti-section-label { font-size: 10.5px; letter-spacing: 1.8px; font-weight: 700; color: var(--green); text-transform: uppercase; margin: 14px 0 6px; }
+
+  .ti-row { display: flex; align-items: center; gap: 8px; padding: 6px 0; font-size: 13.5px; }
+  .ti-row .lbl { flex: 1 1 auto; min-width: 0; }
+  .ti-row .lbl small { display: block; color: #77826f; font-size: 10.5px; letter-spacing: .3px; }
+  .ti-stepper { display: flex; align-items: center; gap: 6px; }
+  .ti-stepper button {
+    width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--green);
+    background: #fff; color: var(--green-dark); font-size: 15px; font-weight: 800; line-height: 1;
+    cursor: pointer; padding: 0;
+  }
+  .ti-stepper button:disabled { opacity: .3; cursor: default; }
+  .ti-stepper button:focus-visible { outline: 3px solid var(--lime); }
+  .ti-qty { min-width: 18px; text-align: center; font-weight: 800; font-size: 14px; }
+  .ti-amt { min-width: 86px; text-align: right; font-size: 13px; color: var(--green-dark); font-weight: 700; }
+  .ti-amt .from { color: #77826f; font-weight: 600; font-size: 10.5px; margin-right: 2px; }
+
+  .ti-travel-tabs { display: flex; gap: 6px; margin: 4px 0 8px; flex-wrap: wrap; }
+  .ti-travel-tabs button {
+    border: 2px solid var(--green); background: #fff; color: var(--green-dark);
+    border-radius: 8px; font: inherit; font-size: 11.5px; font-weight: 700; padding: 6px 9px; cursor: pointer;
+  }
+  .ti-travel-tabs button[aria-pressed="true"] { background: var(--light-green); }
+  .ti-travel-tabs button:focus-visible { outline: 3px solid var(--lime); }
+  .ti-travel-note { font-size: 11.5px; color: #5d6b58; line-height: 1.55; }
+
+  .ti-totals { border-top: 2px dashed #b9c7b3; margin-top: 14px; padding-top: 12px; }
+  .ti-total-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 13.5px; padding: 3px 0; }
+  .ti-total-row.grand { font-size: 19px; font-weight: 800; color: var(--green-dark); }
+  .ti-total-row.grand .ti-mono { font-size: 21px; }
+  .ti-perhead { font-size: 12px; color: #5d6b58; text-align: right; }
+
+  .ti-flags { margin: 14px 0 0; padding: 0; list-style: none; }
+  .ti-flags li { display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; line-height: 1.55; padding: 7px 9px; border-radius: 8px; margin-bottom: 6px; }
+  .ti-flags .f-save { background: var(--light-green); color: var(--green-dark); }
+  .ti-flags .f-family { background: var(--yellow); color: var(--green-dark); font-weight: 600; }
+  .ti-flags .f-warn { background: #fdeaea; color: #7a2020; }
+  .ti-flags .f-info { background: #eef3ea; color: #3c4a38; }
+  .ti-flags .dot { flex: 0 0 auto; font-weight: 800; }
+
+  .ti-stars { text-align: center; letter-spacing: 6px; color: #9aa892; margin-top: 16px; font-size: 12px; }
+  .ti-smallprint { font-size: 11px; color: #77826f; line-height: 1.6; text-align: center; margin: 14px auto 0; max-width: 460px; }
+  .ti-smallprint a { color: var(--green); }
+
+  @media (max-width: 420px) {
+    .ti-title { font-size: 22px; }
+    .ti-receipt { padding: 22px 14px 26px; }
+    .ti-amt { min-width: 74px; }
+  }
+</style>
+</head>
+<body>
+<div class="ti-wrap">
+  <header class="ti-head">
+    <span class="ti-kicker">BerlinWalk · Day-trip money check</span>
+    <h1 class="ti-title">Tropical Islands Cost Planner</h1>
+    <p class="ti-sub">Build your group on the receipt below. It reprints itself with the official from-prices, warns you when the door price stings, and catches the Family-ticket and train-ticket crossovers.</p>
+  </header>
+
+  <div class="ti-modes" role="group" aria-label="Ticket and booking choices">
+    <div class="ti-seg" role="group" aria-label="Ticket type">
+      <button type="button" data-layer="pure" aria-pressed="true">Full day</button>
+      <button type="button" data-layer="sauna" aria-pressed="false">Day + Sauna</button>
+      <button type="button" data-layer="evening" aria-pressed="false">After 18:00</button>
+    </div>
+    <div class="ti-seg" role="group" aria-label="Booking style" id="bookingSeg">
+      <button type="button" data-booking="online" aria-pressed="true">Book online</button>
+      <button type="button" data-booking="walkin" aria-pressed="false">Pay at the door</button>
+    </div>
+  </div>
+
+  <div class="ti-receipt" id="receipt">
+    <div class="ti-r-head">
+      <div class="ti-r-shop ti-mono">TROPICAL ISLANDS</div>
+      <div class="ti-r-meta ti-mono">BERLIN OSTKREUZ → BRAND (RE2/RB24)<br>DOME OPEN 08:00–23:30 · 26°C INSIDE</div>
+    </div>
+
+    <div class="ti-section-label">Your group</div>
+    <div id="groupRows"></div>
+
+    <div class="ti-section-label">Getting there from Berlin</div>
+    <div class="ti-travel-tabs" role="group" aria-label="Travel option">
+      <button type="button" data-travel="dticket" aria-pressed="true">Deutschlandticket</button>
+      <button type="button" data-travel="bbticket" aria-pressed="false">Brandenburg-Berlin-Ticket</button>
+      <button type="button" data-travel="car" aria-pressed="false">Car + parking</button>
+    </div>
+    <div class="ti-row" id="travelRow">
+      <span class="lbl" id="travelLabel"></span>
+      <span class="ti-amt ti-mono" id="travelAmt"></span>
+    </div>
+    <p class="ti-travel-note" id="travelNote"></p>
+
+    <div class="ti-totals">
+      <div class="ti-total-row"><span>Entry subtotal</span><span class="ti-mono" id="entrySub"></span></div>
+      <div class="ti-total-row grand"><span>Day total</span><span class="ti-mono" id="grandTotal"></span></div>
+      <div class="ti-perhead" id="perHead"></div>
+    </div>
+
+    <ul class="ti-flags" id="flags"></ul>
+    <div class="ti-stars ti-mono">* * * DANKE · BIS BALD * * *</div>
+  </div>
+
+  <p class="ti-smallprint">Prices are the official from-prices on <a href="https://www.tropical-islands.de/en/preise-oeffnungszeiten/preise" target="_blank" rel="noopener">tropical-islands.de</a>; the final price depends on the date you pick. Children up to three enter free. Single VBB tickets also work for the train — check the exact fare in the VBB app.</p>
+</div>
+
+<script src="pricing.js"></script>
+<script>
+(function () {
+  var state = { adults: 2, teens: 0, kids: 0, babies: 0, layer: 'pure', booking: 'online', travel: 'dticket' };
+  var GROUPS = [
+    { key: 'adults', label: 'Adult (18+)' },
+    { key: 'teens', label: 'Teen (13–17)' },
+    { key: 'kids', label: 'Child (4–12)' },
+    { key: 'babies', label: 'Under 4', hint: 'free entry' }
+  ];
+  var euro = function (x) { return '€' + x.toFixed(2); };
+
+  function renderGroupRows(result) {
+    var host = document.getElementById('groupRows');
+    host.innerHTML = '';
+    GROUPS.forEach(function (g) {
+      var row = document.createElement('div'); row.className = 'ti-row';
+      var lbl = document.createElement('span'); lbl.className = 'lbl';
+      lbl.innerHTML = g.label + (g.hint ? '<small>' + g.hint + '</small>' : '');
+      var stepper = document.createElement('span'); stepper.className = 'ti-stepper';
+      var minus = document.createElement('button'); minus.type = 'button'; minus.textContent = '−';
+      minus.setAttribute('aria-label', 'Remove one ' + g.label);
+      minus.disabled = state[g.key] === 0;
+      var qty = document.createElement('span'); qty.className = 'ti-qty ti-mono'; qty.textContent = state[g.key];
+      var plus = document.createElement('button'); plus.type = 'button'; plus.textContent = '+';
+      plus.setAttribute('aria-label', 'Add one ' + g.label);
+      plus.disabled = state[g.key] >= 9;
+      minus.addEventListener('click', function () { if (state[g.key] > 0) { state[g.key]--; render(); } });
+      plus.addEventListener('click', function () { if (state[g.key] < 9) { state[g.key]++; render(); } });
+      stepper.appendChild(minus); stepper.appendChild(qty); stepper.appendChild(plus);
+      var amt = document.createElement('span'); amt.className = 'ti-amt ti-mono';
+      var line = null;
+      result.lines.forEach(function (l) { if (l.label === g.label) line = l; });
+      if (state[g.key] === 0) amt.innerHTML = '·';
+      else if (g.key === 'babies') amt.innerHTML = '€0.00';
+      else amt.innerHTML = '<span class="from">from</span>' + euro(line ? line.sum : 0);
+      row.appendChild(lbl); row.appendChild(stepper); row.appendChild(amt);
+      host.appendChild(row);
+    });
+  }
+
+  function render() {
+    var r = TICostPlanner.compute(state);
+    renderGroupRows(r);
+
+    document.querySelectorAll('[data-layer]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.layer === state.layer));
+    });
+    document.querySelectorAll('[data-booking]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.booking === r.booking));
+      b.disabled = (state.layer === 'evening');
+    });
+    document.querySelectorAll('[data-travel]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.travel === state.travel));
+    });
+
+    document.getElementById('travelLabel').textContent = r.travel.label;
+    document.getElementById('travelAmt').textContent =
+      r.travel.range ? '€' + r.travel.range[0].toFixed(2) + '–' + r.travel.range[1].toFixed(2)
+                     : (r.travel.sum === 0 ? '€0.00' : euro(r.travel.sum));
+    document.getElementById('travelNote').textContent = r.travel.note;
+    document.getElementById('entrySub').innerHTML = (r.entry > 0 ? 'from ' : '') + euro(r.entry);
+    document.getElementById('grandTotal').innerHTML = (r.total > 0 ? 'from ' : '') + euro(r.total);
+    document.getElementById('perHead').textContent = r.people > 0
+      ? '≈ ' + euro(r.perPerson) + ' per paying person' : 'Add at least one person above';
+
+    var flags = document.getElementById('flags'); flags.innerHTML = '';
+    r.flags.forEach(function (f) {
+      var li = document.createElement('li'); li.className = 'f-' + f.kind;
+      var dot = document.createElement('span'); dot.className = 'dot';
+      dot.textContent = f.kind === 'warn' ? '!' : (f.kind === 'family' ? '★' : '✓');
+      var tx = document.createElement('span'); tx.textContent = f.text;
+      li.appendChild(dot); li.appendChild(tx); flags.appendChild(li);
+    });
+    if (window.bwPostHeight) window.bwPostHeight();
+  }
+
+  document.querySelectorAll('[data-layer]').forEach(function (b) {
+    b.addEventListener('click', function () { state.layer = b.dataset.layer; render(); });
+  });
+  document.querySelectorAll('[data-booking]').forEach(function (b) {
+    b.addEventListener('click', function () { state.booking = b.dataset.booking; render(); });
+  });
+  document.querySelectorAll('[data-travel]').forEach(function (b) {
+    b.addEventListener('click', function () { state.travel = b.dataset.travel; render(); });
+  });
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
