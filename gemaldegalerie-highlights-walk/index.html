@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gemäldegalerie Highlights Walk | BerlinWalk</title>
+<meta name="description" content="Pick up to five masterpieces from the Gemäldegalerie's wall, and get them back as a walk in room order, with the one detail to look for in front of each painting.">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root{
+    --green:#1B5E20; --deep:#123D18; --yellow:#FFE600; --lime:#7CB342;
+    --lightgreen:#C5E1A5; --cream:#FAFAF5; --ink:#212121; --gold:#C9A227;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:Montserrat,-apple-system,'Segoe UI',sans-serif;background:var(--cream);color:var(--ink);}
+  .gg{max-width:880px;margin:0 auto;padding:14px 12px 20px;}
+  .gg-head{background:linear-gradient(135deg,var(--deep),var(--green));border-radius:14px;padding:18px 16px 16px;color:var(--cream);}
+  .gg-kicker{display:inline-block;background:var(--yellow);color:var(--deep);font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;border-radius:999px;padding:4px 10px;}
+  .gg-head h1{font-size:clamp(19px,4.2vw,26px);line-height:1.2;margin:10px 0 8px;}
+  .gg-head p{font-size:13.5px;line-height:1.55;color:#E9F2E4;max-width:660px;}
+  .gg-counter{display:inline-block;margin-top:10px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:var(--cream);border-radius:999px;padding:4px 12px;font-size:12px;font-weight:700;}
+  /* gallery wall */
+  .gg-wall{margin-top:12px;background:linear-gradient(160deg,#15290F,#1C3A16 55%,#15290F);border-radius:14px;padding:16px 12px 14px;}
+  .gg-wall-label{color:#BCd6A8;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin:0 4px 12px;}
+  .gg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:14px;}
+  .gg-card{position:relative;border:0;background:none;cursor:pointer;font-family:inherit;text-align:center;padding:0;}
+  .gg-frame{height:170px;background:#241f15;border:6px solid var(--gold);border-radius:3px;box-shadow:0 3px 10px rgba(0,0,0,.45), inset 0 0 0 2px #8a6d1c;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:transform .15s ease;}
+  .gg-card:hover .gg-frame,.gg-card:focus-visible .gg-frame{transform:translateY(-3px);}
+  .gg-card:focus-visible{outline:3px solid var(--lime);outline-offset:3px;border-radius:6px;}
+  .gg-frame img{max-width:100%;max-height:100%;display:block;}
+  .gg-card figcaption{color:#D9E8CC;font-size:11px;line-height:1.35;margin-top:7px;}
+  .gg-card figcaption b{display:block;color:#F4F9EE;font-size:11.5px;}
+  .gg-card[aria-expanded="true"] .gg-frame{box-shadow:0 0 0 3px var(--yellow),0 3px 10px rgba(0,0,0,.45);}
+  .gg-badge{position:absolute;top:-9px;right:-7px;z-index:2;width:26px;height:26px;border-radius:50%;background:var(--yellow);color:var(--deep);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.4);}
+  /* museum label: rendered inside the grid, full row, under the tapped painting */
+  .gg-label{grid-column:1/-1;background:#FFFFFF;border:1px solid #E3E0D2;border-left:6px solid var(--gold);border-radius:12px;padding:16px 16px 14px;}
+  .gg-label .t{font-family:Merriweather,Georgia,serif;font-style:italic;font-size:18px;color:var(--deep);}
+  .gg-label .a{font-size:12.5px;font-weight:700;color:#5c6b58;margin-top:3px;letter-spacing:.03em;}
+  .gg-label .where{display:inline-block;margin-top:9px;background:var(--lightgreen);color:var(--deep);font-size:11.5px;font-weight:700;border-radius:999px;padding:4px 10px;}
+  .gg-label .why{font-size:13.5px;line-height:1.6;margin-top:10px;}
+  .gg-label .look{font-size:13px;line-height:1.55;margin-top:8px;background:var(--bw-lime-soft,#F2F8E8);border-radius:8px;padding:9px 11px;}
+  .gg-label .look b{color:var(--green);}
+  .gg-label-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+  .gg-add{border:0;cursor:pointer;font-family:inherit;font-weight:800;font-size:13px;border-radius:999px;padding:10px 18px;background:var(--yellow);color:var(--deep);}
+  .gg-add:hover{background:#f5dc00;}
+  .gg-add[data-mode="remove"]{background:#EDE9DA;color:var(--ink);}
+  .gg-add:focus-visible,.gg-close:focus-visible{outline:3px solid var(--lime);outline-offset:2px;}
+  .gg-add[disabled]{background:#E5E2D5;color:#8a887d;cursor:not-allowed;}
+  .gg-close{border:1px solid #D7D3C2;background:#fff;cursor:pointer;font-family:inherit;font-weight:700;font-size:12.5px;border-radius:999px;padding:9px 16px;color:var(--ink);}
+  /* plan */
+  .gg-plan{margin-top:14px;background:#fff;border:1px solid #E3E0D2;border-radius:12px;padding:16px;}
+  .gg-plan h2{font-size:16px;color:var(--deep);}
+  .gg-plan .empty{font-size:13px;color:#6b6a60;line-height:1.55;margin-top:8px;}
+  .gg-stops{list-style:none;margin-top:10px;}
+  .gg-stops li{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-top:1px dashed #E0DCCB;}
+  .gg-stops li:first-child{border-top:0;}
+  .gg-stops .num{flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:var(--green);color:#fff;font-size:12.5px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+  .gg-stops .st{font-size:13.5px;line-height:1.45;}
+  .gg-stops .st b{font-family:Merriweather,Georgia,serif;font-style:italic;font-weight:700;}
+  .gg-stops .st span{display:block;font-size:11.5px;color:#5c6b58;margin-top:2px;}
+  .gg-time{margin-top:11px;background:var(--deep);color:var(--cream);border-radius:10px;padding:11px 13px;font-size:13px;line-height:1.55;}
+  .gg-time b{color:var(--yellow);}
+  .gg-note{margin-top:9px;font-size:11.5px;line-height:1.5;color:#6b6a60;}
+  .gg-reset{margin-top:10px;border:0;background:none;cursor:pointer;font-family:inherit;font-size:12px;font-weight:700;color:var(--green);text-decoration:underline;padding:4px 2px;}
+  @media (max-width:420px){
+    .gg-grid{grid-template-columns:repeat(2,1fr);gap:12px;}
+    .gg-frame{height:150px;}
+  }
+</style>
+</head>
+<body>
+<div class="gg">
+  <header class="gg-head">
+    <span class="gg-kicker">Free Berlin Tool</span>
+    <h1>Build Your Gemäldegalerie Highlights Walk</h1>
+    <p>The Gemäldegalerie has 72 rooms of old masters and most visitors have no plan for them. Pick up to five paintings from this wall. I will put them in the order the rooms actually run, so you walk one clean loop instead of criss-crossing the building.</p>
+    <span class="gg-counter" id="ggCounter">0 of 5 picked</span>
+  </header>
+
+  <section class="gg-wall" aria-label="Gallery wall with ten highlight paintings">
+    <p class="gg-wall-label">Tap a painting to read its label</p>
+    <div class="gg-grid" id="ggGrid"></div>
+  </section>
+
+  <section class="gg-plan" id="ggPlan">
+    <h2>Your walk</h2>
+    <div id="ggPlanBody"></div>
+  </section>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var PAINTINGS=[
+    {id:'durer',seq:1,img:'img/durer-holzschuher.jpg',title:'Portrait of Hieronymus Holzschuher',artist:'Albrecht Dürer, 1526',area:'German rooms, start of the circuit',
+     why:'A Nuremberg city councillor painted with almost uncomfortable precision. This is the German Renaissance portrait at full power, and it opens the circuit of main rooms.',
+     look:'Stand a little to the side. The eyes keep tracking you, and the fur collar is painted almost hair by hair.'},
+    {id:'cranach',seq:2,img:'img/cranach-fountain.jpg',title:'The Fountain of Youth',artist:'Lucas Cranach the Elder, 1546',area:'German rooms',
+     why:'A swimming pool that turns old people young. Cranach painted a whole medieval spa fantasy three years before he turned 74, and the crowd in front of it is always smiling.',
+     look:'Only women get in the water. They enter old on the left, climb out young on the right, and the men just wait at the party tables.'},
+    {id:'holbein',seq:3,img:'img/holbein-gisze.jpg',title:'The Merchant Georg Gisze',artist:'Hans Holbein the Younger, 1532',area:'German rooms',
+     why:'A Hanseatic merchant in his London office, surrounded by his own paperwork. Holbein painted it as a job advert for the English court, and it worked: he became painter to Henry VIII.',
+     look:'Everything on the desk means something. The carnations point to his engagement, and the letters carry real readable addresses.'},
+    {id:'vaneyck',seq:4,img:'img/van-eyck-madonna.jpg',title:'Madonna in the Church',artist:'Jan van Eyck, around 1440',area:'Early Netherlandish rooms',
+     why:'A panel barely bigger than a paperback that people fly to Berlin for. Van Eyck painted a full Gothic cathedral interior with light you can almost touch.',
+     look:'Mary is taller than the church arcade behind her. The scale is deliberately impossible: this is a vision, not a portrait of a building.'},
+    {id:'bruegel',seq:5,img:'img/bruegel-proverbs.jpg',title:'The Dutch Proverbs',artist:'Pieter Bruegel the Elder, 1559',area:'Netherlandish rooms',
+     why:'An entire village acting out more than a hundred sayings at once. You can stand in front of this one painting for twenty minutes and keep finding new scenes.',
+     look:'Find the woman hanging a blue cloak on her husband in the centre: it means she is cheating on him. Then find the man banging his head against the wall.'},
+    {id:'helmet',seq:6,img:'img/golden-helmet.jpg',title:'The Man with the Golden Helmet',artist:'Circle of Rembrandt, around 1650',area:'Hall X, the Rembrandt hall at the centre',
+     why:'For decades this was Berlin’s most famous Rembrandt. Research in the 1980s moved it to his circle, and the crowds thinned overnight. The painting did not get any worse.',
+     look:'The helmet is painted in thick ridges of gold paint that catch real light. Step left and right and watch it flash.'},
+    {id:'vermeer',seq:7,img:'img/vermeer-pearl-necklace.jpg',title:'Young Woman with a Pearl Necklace',artist:'Johannes Vermeer, around 1662',area:'Dutch cabinets beside the Rembrandt hall',
+     why:'One of two Vermeers in Berlin, and nobody is queueing for it. A girl, a mirror, a necklace, and that quiet Vermeer window light.',
+     look:'Follow her eyes to the mirror by the window. The whole painting is the half second before she decides what she thinks.'},
+    {id:'caravaggio',seq:8,img:'img/caravaggio-amor.jpg',title:'Amor Vincit Omnia',artist:'Caravaggio, around 1602',area:'Italian Baroque rooms, south side',
+     why:'Caravaggio’s grinning street kid as the god of love, trampling music, armour and power. It scandalised Rome and it still owns its wall here.',
+     look:'Check what is under his feet: instruments, armour, a crown and a manuscript. Love wins over all of them, hence the title.'},
+    {id:'raphael',seq:9,img:'img/raphael-terranuova.jpg',title:'Madonna Terranuova',artist:'Raphael, around 1505',area:'Italian Renaissance halls, far end of the circuit',
+     why:'Berlin quietly owns a row of Raphael Madonnas. This round one shows the young Raphael absorbing Leonardo and getting calmer and better at once.',
+     look:'The tondo format is the trick: follow how the arc of Mary’s shoulders repeats the circle of the frame.'},
+    {id:'botticelli',seq:10,img:'img/botticelli-venus.jpg',title:'Venus',artist:'Attributed to Sandro Botticelli, around 1490',area:'Italian Renaissance halls, far end of the circuit',
+     why:'The Birth of Venus without the seashell and without the Uffizi queue. The same goddess, alone on black, one metre from your nose.',
+     look:'Her hair is the show: gilded strands painted one by one, floating as if the sea wind from the Florence painting never stopped.'}
+  ];
+  var MAX=5;
+  var picked=[];
+  var openId=null;
+  var grid=document.getElementById('ggGrid');
+  var planBody=document.getElementById('ggPlanBody');
+  var counter=document.getElementById('ggCounter');
+
+  function orderOf(id){
+    var sorted=picked.slice().sort(function(a,b){return seqOf(a)-seqOf(b);});
+    return sorted.indexOf(id)+1;
+  }
+  function seqOf(id){for(var i=0;i<PAINTINGS.length;i++){if(PAINTINGS[i].id===id)return PAINTINGS[i].seq;}return 99;}
+  function byId(id){for(var i=0;i<PAINTINGS.length;i++){if(PAINTINGS[i].id===id)return PAINTINGS[i];}return null;}
+
+  function labelHtml(p){
+    var isPicked=picked.indexOf(p.id)!==-1;
+    var full=!isPicked&&picked.length>=MAX;
+    return '<div class="gg-label" role="group" aria-label="Museum label for '+p.title.replace(/"/g,'&quot;')+'">'
+      +'<div class="t">'+p.title+'</div>'
+      +'<div class="a">'+p.artist+'</div>'
+      +'<span class="where">Where: '+p.area+'</span>'
+      +'<p class="why">'+p.why+'</p>'
+      +'<p class="look"><b>Look for:</b> '+p.look+'</p>'
+      +'<div class="gg-label-actions">'
+      +'<button type="button" class="gg-add" id="ggAdd" data-mode="'+(isPicked?'remove':'add')+'"'+(full?' disabled':'')+'>'
+      +(isPicked?'Remove from my walk':(full?'Walk is full (5 max)':'Add to my walk'))+'</button>'
+      +'<button type="button" class="gg-close" id="ggClose">Close label</button>'
+      +'</div></div>';
+  }
+
+  function renderGrid(){
+    var html='';
+    var cols=colCount();
+    var openIndex=-1;
+    PAINTINGS.forEach(function(p,i){if(p.id===openId)openIndex=i;});
+    var insertAfter=openIndex===-1?-1:Math.min(PAINTINGS.length-1,Math.floor(openIndex/cols)*cols+cols-1);
+    PAINTINGS.forEach(function(p,i){
+      var n=picked.indexOf(p.id)!==-1?orderOf(p.id):0;
+      html+='<button type="button" class="gg-card" data-id="'+p.id+'" aria-expanded="'+(openId===p.id)+'">'
+        +(n?'<span class="gg-badge" aria-hidden="true">'+n+'</span>':'')
+        +'<figure><span class="gg-frame"><img src="'+p.img+'" alt="'+p.title.replace(/"/g,'&quot;')+', '+p.artist.replace(/"/g,'&quot;')+'" loading="lazy"></span>'
+        +'<figcaption><b>'+p.title+'</b>'+p.artist+'</figcaption></figure></button>';
+      if(i===insertAfter&&openId){html+=labelHtml(byId(openId));}
+    });
+    grid.innerHTML=html;
+    var add=document.getElementById('ggAdd');
+    if(add){add.addEventListener('click',function(){
+      var p=byId(openId);
+      if(!p)return;
+      if(picked.indexOf(p.id)!==-1){picked=picked.filter(function(x){return x!==p.id;});}
+      else if(picked.length<MAX){picked.push(p.id);}
+      renderAll();
+    });}
+    var close=document.getElementById('ggClose');
+    if(close){close.addEventListener('click',function(){openId=null;renderAll();});}
+  }
+
+  function colCount(){
+    var w=grid.clientWidth||grid.getBoundingClientRect().width||600;
+    var min=window.matchMedia&&window.matchMedia('(max-width:420px)').matches?0:148;
+    if(min===0)return 2;
+    return Math.max(1,Math.floor((w+14)/(148+14)));
+  }
+
+  function renderPlan(){
+    counter.textContent=picked.length+' of '+MAX+' picked';
+    if(!picked.length){
+      planBody.innerHTML='<p class="empty">No paintings picked yet. Tap a frame above, read the label, and add the ones you actually want to stand in front of. Two or three make a relaxed hour; five is a full art afternoon.</p>';
+      return;
+    }
+    var sorted=picked.slice().sort(function(a,b){return seqOf(a)-seqOf(b);});
+    var html='<ol class="gg-stops">';
+    sorted.forEach(function(id,i){
+      var p=byId(id);
+      html+='<li><span class="num">'+(i+1)+'</span><span class="st"><b>'+p.title+'</b> · '+p.artist+'<span>'+p.area+'</span></span></li>';
+    });
+    html+='</ol>';
+    var mins=25+sorted.length*15;
+    html+='<div class="gg-time">Plan for about <b>'+mins+' minutes</b>: room finding, your '+sorted.length+' stop'+(sorted.length>1?'s':'')+', and the detours you will not resist. The main rooms run in one numbered sequence, so follow your list top to bottom and you only walk the loop once.</div>';
+    html+='<p class="gg-note">Reality check: closed on Mondays, 14 euros for adults, free under 18. Grab the free floor plan at the entrance; the hang shifts occasionally, and staff can point you to any painting on this list.</p>';
+    html+='<button type="button" class="gg-reset" id="ggReset">Clear my walk</button>';
+    planBody.innerHTML=html;
+    var reset=document.getElementById('ggReset');
+    if(reset){reset.addEventListener('click',function(){picked=[];renderAll();});}
+  }
+
+  function renderAll(){renderGrid();renderPlan();}
+  var resizeTimer=null;
+  window.addEventListener('resize',function(){
+    if(!openId)return;
+    clearTimeout(resizeTimer);
+    resizeTimer=setTimeout(renderAll,150);
+  });
+
+  grid.addEventListener('click',function(e){
+    var card=e.target.closest('.gg-card');
+    if(!card)return;
+    var id=card.getAttribute('data-id');
+    openId=(openId===id)?null:id;
+    renderAll();
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&openId){openId=null;renderAll();}
+  });
+
+  renderAll();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
