@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Köpenick Waterside Route | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+<div id="bw-koep-route">
+  <style>
+    #bw-koep-route {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #123D18;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-water: #2D6E8E;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-cream: #FAFAF5;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+    #bw-koep-route * { box-sizing: border-box; }
+    #bw-koep-route .kr-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    }
+    #bw-koep-route .kr-head {
+      background: linear-gradient(120deg, var(--bw-green) 0%, #17531d 55%, var(--bw-water) 130%);
+      padding: 16px 20px 14px;
+    }
+    #bw-koep-route .kr-kicker {
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+    #bw-koep-route .kr-title {
+      color: #fff;
+      font-size: 20px;
+      font-weight: 800;
+      margin: 4px 0 2px;
+      line-height: 1.25;
+    }
+    #bw-koep-route .kr-sub {
+      color: #D9EAD3;
+      font-size: 13px;
+      line-height: 1.5;
+      margin: 0;
+    }
+    #bw-koep-route .kr-controls {
+      background: var(--bw-cream);
+      border-bottom: 1px solid var(--bw-border);
+      padding: 14px 16px 12px;
+    }
+    #bw-koep-route .kr-label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      color: var(--bw-muted);
+      margin: 0 0 8px;
+    }
+    #bw-koep-route .kr-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    #bw-koep-route .kr-chip {
+      border: 2px solid var(--bw-green);
+      background: #fff;
+      color: var(--bw-green);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 8px 14px;
+      cursor: pointer;
+      transition: background .15s, color .15s;
+    }
+    #bw-koep-route .kr-chip[aria-pressed="true"] {
+      background: var(--bw-green);
+      color: #fff;
+    }
+    #bw-koep-route .kr-toggles { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 12px; }
+    #bw-koep-route .kr-toggle {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 13px; color: var(--bw-text); cursor: pointer;
+      user-select: none;
+    }
+    #bw-koep-route .kr-toggle input { width: 16px; height: 16px; accent-color: var(--bw-green); cursor: pointer; }
+    #bw-koep-route .kr-toggle.kr-off { opacity: .45; }
+    #bw-koep-route #kr-map {
+      height: 360px;
+      width: 100%;
+      background: #E8EFE3;
+      z-index: 0;
+    }
+    #bw-koep-route .kr-mapnote {
+      font-size: 11px;
+      color: var(--bw-muted);
+      padding: 6px 16px;
+      background: var(--bw-cream);
+      border-bottom: 1px solid var(--bw-border);
+      margin: 0;
+    }
+    #bw-koep-route .kr-total {
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+      padding: 12px 16px;
+      background: var(--bw-yellow);
+      color: var(--bw-green-dark);
+      font-size: 14px;
+      font-weight: 800;
+    }
+    #bw-koep-route .kr-total .kr-fit {
+      font-size: 12px;
+      font-weight: 700;
+      background: var(--bw-green-dark);
+      color: #fff;
+      border-radius: 999px;
+      padding: 4px 10px;
+    }
+    #bw-koep-route .kr-legs { list-style: none; margin: 0; padding: 8px 0 4px; }
+    #bw-koep-route .kr-leg {
+      display: flex; gap: 12px;
+      padding: 10px 16px;
+      border-bottom: 1px dashed var(--bw-border);
+      cursor: pointer;
+    }
+    #bw-koep-route .kr-leg:last-child { border-bottom: 0; }
+    #bw-koep-route .kr-leg:hover { background: var(--bw-cream); }
+    #bw-koep-route .kr-mode {
+      flex: 0 0 auto;
+      width: 58px;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      border-radius: 8px;
+      padding: 6px 4px;
+      height: fit-content;
+      color: #fff;
+    }
+    #bw-koep-route .kr-mode.m-sbahn { background: #2E7D32; }
+    #bw-koep-route .kr-mode.m-tram { background: var(--bw-lime); color: var(--bw-green-dark); }
+    #bw-koep-route .kr-mode.m-walk { background: var(--bw-green-dark); }
+    #bw-koep-route .kr-mode.m-ferry { background: var(--bw-water); }
+    #bw-koep-route .kr-mode.m-visit { background: #fff; color: var(--bw-green); border: 2px solid var(--bw-green); }
+    #bw-koep-route .kr-leg-main { flex: 1 1 auto; min-width: 0; }
+    #bw-koep-route .kr-leg-title { font-size: 14px; font-weight: 700; margin: 0 0 2px; }
+    #bw-koep-route .kr-leg-text { font-size: 13px; color: var(--bw-muted); line-height: 1.5; margin: 0; }
+    #bw-koep-route .kr-leg-min {
+      flex: 0 0 auto;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--bw-green);
+      white-space: nowrap;
+    }
+    #bw-koep-route .kr-foot {
+      padding: 10px 16px 14px;
+      font-size: 12px;
+      color: var(--bw-muted);
+      line-height: 1.55;
+      background: var(--bw-cream);
+      border-top: 1px solid var(--bw-border);
+    }
+    @media (max-width: 480px) {
+      #bw-koep-route #kr-map { height: 300px; }
+      #bw-koep-route .kr-title { font-size: 17px; }
+      #bw-koep-route .kr-mode { width: 50px; }
+    }
+  </style>
+
+  <div class="kr-wrap">
+    <div class="kr-head">
+      <div class="kr-kicker">BERLINWALK.COM &bull; KÖPENICK</div>
+      <h2 class="kr-title">Köpenick Waterside Route</h2>
+      <p class="kr-sub">Pick how much time you have. The map builds your loop through the old town island and shows how far down the water it is worth going.</p>
+    </div>
+    <div class="kr-controls">
+      <p class="kr-label">How much time do you have?</p>
+      <div class="kr-chips" role="group" aria-label="Time budget">
+        <button type="button" class="kr-chip" data-budget="short" aria-pressed="true">About 2 hours</button>
+        <button type="button" class="kr-chip" data-budget="half" aria-pressed="false">Half a day</button>
+        <button type="button" class="kr-chip" data-budget="full" aria-pressed="false">Full water day</button>
+      </div>
+      <div class="kr-toggles">
+        <label class="kr-toggle" id="kr-palace-wrap"><input type="checkbox" id="kr-palace"> Go inside Schloss Köpenick (+1 h, closed Mon &amp; Tue)</label>
+        <label class="kr-toggle" id="kr-turm-wrap"><input type="checkbox" id="kr-turm"> Add the Müggelturm forest climb (+1.5 h)</label>
+      </div>
+    </div>
+    <div id="kr-map" role="img" aria-label="Map of the Köpenick waterside route"></div>
+    <p class="kr-mapnote">Lines are schematic connections between real stops, not turn-by-turn navigation. Tap a stop for details.</p>
+    <div class="kr-total"><span id="kr-total-text"></span><span class="kr-fit" id="kr-fit"></span></div>
+    <ol class="kr-legs" id="kr-legs"></ol>
+    <div class="kr-foot">
+      One normal Berlin AB ticket covers everything here: the S3, the trams and even the little F12 ferry across the Dahme. Schloss Köpenick interior: 8 euros, summer Wed-Fri 11:00-17:00 and Sat-Sun 11:00-18:00. Müggelturm: 6 euros, short opening hours, check before you hike.
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+  (function () {
+    var STOPS = {
+      sbf: { name: 'S Köpenick', lat: 52.45823, lon: 13.58295, text: 'Your arrival station on the S3, about 20 minutes from Alexanderplatz. Hop on tram 62 or 68 towards the old town, or walk down Bahnhofstraße in about 20 minutes.' },
+      schlossplatz: { name: 'Schloßplatz tram stop', lat: 52.44421, lon: 13.57574, text: 'The tram drops you at the edge of the old town island. From here everything is 2 to 5 minutes on foot.' },
+      rathaus: { name: 'Rathaus Köpenick', lat: 52.44542, lon: 13.57523, text: 'The brick town hall a fake captain robbed in 1906. The bronze captain waits on the steps, and the memorial plaque is right by the entrance.' },
+      luisenhain: { name: 'Luisenhain waterfront', lat: 52.44601, lon: 13.57371, text: 'A small riverside park on the Dahme behind the town hall. Watch the boats, then follow the water south towards the palace.' },
+      schloss: { name: 'Schloss Köpenick', lat: 52.44386, lon: 13.57273, text: 'A Dutch Baroque palace from the 1680s on its own island. The garden is free; inside is the Kunstgewerbemuseum for 8 euros, closed Monday and Tuesday.' },
+      kietz: { name: 'The Kietz', lat: 52.44260, lon: 13.57683, text: 'The old fishermen’s lane, a quiet row of low houses that feels like a Brandenburg village inside Berlin. Walk it slowly, it is short.' },
+      wenden: { name: 'Wendenschloß pier (F12)', lat: 52.41850, lon: 13.58600, text: 'Take tram 62 to its leafy Wendenschloß end and walk a few minutes to the little pier. The F12 ferry is a regular BVG line.' },
+      gruenau: { name: 'Grünau pier (F12)', lat: 52.41702, lon: 13.58149, text: 'Two minutes across the Dahme and you are in Grünau, on the old rowing-regatta bank. Tram 68 by the pier takes you back to the old town.' },
+      friedrichshagen: { name: 'S Friedrichshagen', lat: 52.45626, lon: 13.62527, text: 'One S3 stop east of Köpenick. Bölschestraße runs straight from the station to the lake, full of bakeries and small shops for picnic supplies.' },
+      mueggelpark: { name: 'Müggelpark and the Müggelsee', lat: 52.44488, lon: 13.62702, text: 'Berlin’s largest lake opens up here, about 7.3 square kilometres of water. A pedestrian tunnel under the river takes you to the wooded south bank.' },
+      turm: { name: 'Müggelturm', lat: 52.41729, lon: 13.62508, text: 'A 30-metre tower on a forested hill. 126 steps, 6 euros, and on a clear day you see from the lake all the way to the TV Tower.' }
+    };
+
+    var LEGS = [
+      { mode: 'sbahn', min: 20, from: null, to: 'sbf', tier: 1, title: 'S3 from Alexanderplatz', text: 'Direct S-Bahn, around 20 minutes. Sit on the right side for the first Spree views.' },
+      { mode: 'tram', min: 8, from: 'sbf', to: 'schlossplatz', tier: 1, title: 'Tram 62 or 68 to Schloßplatz', text: 'A few stops down Bahnhofstraße into the old town.' },
+      { mode: 'visit', min: 25, from: 'schlossplatz', to: 'rathaus', tier: 1, title: 'Rathaus and the fake captain', text: 'The 1906 Köpenickiade site: statue, plaque and the town hall itself.' },
+      { mode: 'walk', min: 5, from: 'rathaus', to: 'luisenhain', tier: 1, title: 'Walk to the Luisenhain', text: 'Around the corner to the waterside park.' },
+      { mode: 'visit', min: 15, from: null, to: 'luisenhain', tier: 1, title: 'Dahme waterfront pause', text: 'Boats, benches and both church towers over the water.' },
+      { mode: 'walk', min: 8, from: 'luisenhain', to: 'schloss', tier: 1, title: 'Walk to the palace island', text: 'Over the little bridge onto the Schlossinsel.' },
+      { mode: 'visit', min: 30, from: null, to: 'schloss', tier: 1, title: 'Palace island and free garden', text: 'Circle the Baroque palace and the lawns by the water.' },
+      { mode: 'visit', min: 60, from: null, to: 'schloss', tier: 1, optional: 'palace', title: 'Inside: Kunstgewerbemuseum', text: 'Renaissance and Baroque rooms, 8 euros, closed Mon and Tue.' },
+      { mode: 'walk', min: 7, from: 'schloss', to: 'kietz', tier: 1, title: 'Walk to the Kietz', text: 'Cross Müggelheimer Straße into the fishermen’s lane.' },
+      { mode: 'visit', min: 15, from: null, to: 'kietz', tier: 1, title: 'The Kietz lane', text: 'Low houses, roses, river ends of the gardens.' },
+      { mode: 'tram', min: 12, from: 'kietz', to: 'wenden', tier: 2, title: 'Tram 62 to Wendenschloß', text: 'From Schloßplatz through the villa streets to the tram’s end.' },
+      { mode: 'walk', min: 8, from: null, to: 'wenden', tier: 2, title: 'Walk to the pier', text: 'A short residential walk down to the Dahme.' },
+      { mode: 'ferry', min: 2, from: 'wenden', to: 'gruenau', tier: 2, title: 'F12 ferry across the Dahme', text: 'Berlin’s shortest boat trip, included in your AB ticket.' },
+      { mode: 'tram', min: 15, from: 'gruenau', to: 'schlossplatz', tier: 2, title: 'Tram 68 back to the old town', text: 'Along the west bank back to Schloßplatz.' },
+      { mode: 'sbahn', min: 5, from: 'sbf', to: 'friedrichshagen', tier: 3, title: 'S3 one stop to Friedrichshagen', text: 'Back to the station, one stop east.' },
+      { mode: 'walk', min: 20, from: 'friedrichshagen', to: 'mueggelpark', tier: 3, title: 'Bölschestraße to the lake', text: 'Straight down the old brewery street to the Müggelsee shore.' },
+      { mode: 'visit', min: 60, from: null, to: 'mueggelpark', tier: 3, title: 'Müggelsee shore time', text: 'Lakeside benches, boats, and the pedestrian tunnel under the river.' },
+      { mode: 'walk', min: 55, from: 'mueggelpark', to: 'turm', tier: 3, optional: 'turm', title: 'Forest walk to the Müggelturm', text: 'Through the tunnel and up the wooded Müggelberge.' },
+      { mode: 'visit', min: 35, from: null, to: 'turm', tier: 3, optional: 'turm', title: 'Climb the tower', text: '126 steps for the lake-to-skyline view.' }
+    ];
+
+    var BUDGETS = { short: { tier: 1, label: 'About 2 hours in Köpenick' }, half: { tier: 2, label: 'Half a day by the water' }, full: { tier: 3, label: 'A full Müggelsee day' } };
+
+    var root = document.getElementById('bw-koep-route');
+    var state = { budget: 'short', palace: false, turm: false };
+
+    var map = L.map('kr-map', { scrollWheelZoom: false, tap: true }).setView([52.4435, 13.5850], 13);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var routeLayer = L.layerGroup().addTo(map);
+    var markerByStop = {};
+
+    var MODE_COLORS = { sbahn: '#2E7D32', tram: '#7CB342', walk: '#123D18', ferry: '#2D6E8E', visit: null };
+    var MODE_LABEL = { sbahn: 'S-Bahn', tram: 'Tram', walk: 'Walk', ferry: 'Ferry', visit: 'See' };
+
+    function activeLegs() {
+      var tier = BUDGETS[state.budget].tier;
+      return LEGS.filter(function (l) {
+        if (l.tier > tier) return false;
+        if (l.optional === 'palace' && !state.palace) return false;
+        if (l.optional === 'turm' && !(state.turm && tier >= 3)) return false;
+        return true;
+      });
+    }
+
+    function fmt(min) {
+      var h = Math.floor(min / 60), m = min % 60;
+      if (!h) return m + ' min';
+      return h + ' h' + (m ? ' ' + (m < 10 ? '0' : '') + m + ' min' : '');
+    }
+
+    function render() {
+      var legs = activeLegs();
+      var tier = BUDGETS[state.budget].tier;
+
+      var turmWrap = document.getElementById('kr-turm-wrap');
+      turmWrap.classList.toggle('kr-off', tier < 3);
+      turmWrap.querySelector('input').disabled = tier < 3;
+
+      routeLayer.clearLayers();
+      markerByStop = {};
+      var seen = [];
+      legs.forEach(function (l) { if (l.to && seen.indexOf(l.to) === -1) seen.push(l.to); });
+
+      var lineStops = [];
+      legs.forEach(function (l) {
+        if (l.from && l.to && STOPS[l.from] && STOPS[l.to]) {
+          var a = STOPS[l.from], b = STOPS[l.to];
+          L.polyline([[a.lat, a.lon], [b.lat, b.lon]], {
+            color: MODE_COLORS[l.mode] || '#1B5E20',
+            weight: 4,
+            opacity: 0.85,
+            dashArray: l.mode === 'walk' ? '6 6' : (l.mode === 'ferry' ? '2 6' : null)
+          }).addTo(routeLayer);
+        }
+      });
+
+      seen.forEach(function (id, i) {
+        var s = STOPS[id];
+        var marker = L.marker([s.lat, s.lon], {
+          icon: L.divIcon({
+            className: '',
+            html: '<div style="background:#1B5E20;color:#FFE600;border:2px solid #fff;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font:800 12px Montserrat,Arial,sans-serif;box-shadow:0 1px 4px rgba(0,0,0,.4)">' + (i + 1) + '</div>',
+            iconSize: [26, 26],
+            iconAnchor: [13, 13]
+          })
+        }).addTo(routeLayer);
+        marker.bindPopup('<strong style="font:800 13px Montserrat,Arial,sans-serif">' + s.name + '</strong><br><span style="font:400 12px/1.5 Montserrat,Arial,sans-serif">' + s.text + '</span>', { maxWidth: 240 });
+        markerByStop[id] = marker;
+        lineStops.push([s.lat, s.lon]);
+      });
+
+      if (lineStops.length) {
+        try { map.fitBounds(L.latLngBounds(lineStops).pad(0.18), { maxZoom: 15 }); } catch (e) {}
+      }
+
+      var list = document.getElementById('kr-legs');
+      list.innerHTML = '';
+      var total = 0;
+      legs.forEach(function (l) {
+        total += l.min;
+        var li = document.createElement('li');
+        li.className = 'kr-leg';
+        li.innerHTML = '<span class="kr-mode m-' + l.mode + '">' + MODE_LABEL[l.mode] + '</span>' +
+          '<span class="kr-leg-main"><p class="kr-leg-title">' + l.title + '</p><p class="kr-leg-text">' + l.text + '</p></span>' +
+          '<span class="kr-leg-min">' + fmt(l.min) + '</span>';
+        li.addEventListener('click', function () {
+          var target = l.to && markerByStop[l.to];
+          if (target) { map.panTo(target.getLatLng()); target.openPopup(); }
+        });
+        list.appendChild(li);
+      });
+
+      document.getElementById('kr-total-text').textContent = BUDGETS[state.budget].label + ': about ' + fmt(total) + ' including the ride out from Alexanderplatz';
+      document.getElementById('kr-fit').textContent = seen.length + ' stops';
+    }
+
+    root.querySelectorAll('.kr-chip').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        state.budget = chip.getAttribute('data-budget');
+        root.querySelectorAll('.kr-chip').forEach(function (c) { c.setAttribute('aria-pressed', String(c === chip)); });
+        render();
+      });
+    });
+    document.getElementById('kr-palace').addEventListener('change', function (e) { state.palace = e.target.checked; render(); });
+    document.getElementById('kr-turm').addEventListener('change', function (e) { state.turm = e.target.checked; render(); });
+
+    function refit() {
+      map.invalidateSize();
+      var legs = activeLegs();
+      var pts = [];
+      legs.forEach(function (l) { if (l.to && STOPS[l.to]) pts.push([STOPS[l.to].lat, STOPS[l.to].lon]); });
+      if (pts.length && map.getSize().x > 0) {
+        try { map.fitBounds(L.latLngBounds(pts).pad(0.18), { maxZoom: 15, animate: false }); } catch (e) {}
+      }
+    }
+    render();
+    setTimeout(refit, 350);
+    window.addEventListener('load', function () { setTimeout(refit, 150); });
+    window.addEventListener('resize', function () { setTimeout(refit, 150); });
+    if (typeof ResizeObserver !== 'undefined') {
+      var lastW = 0;
+      try {
+        new ResizeObserver(function () {
+          var w = document.getElementById('kr-map').offsetWidth;
+          if (w !== lastW) { lastW = w; refit(); }
+        }).observe(document.getElementById('kr-map'));
+      } catch (e) {}
+    }
+  })();
+  </script>
+</div>
+</body>
+</html>

@@ -5164,6 +5164,40 @@
       "relatedBlog": "/post/why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point",
       "iconStatus": "live-wix-media",
       "cmsItemId": "15a65001-1af2-4ee9-ac14-6e2b9e96a578"
+    },
+    {
+      "slug": "koepenick-waterside-route",
+      "title": "Köpenick Waterside Route",
+      "lead": "Build your Köpenick loop on a real map: pick your time budget and see how the old town island, the palace, the F12 ferry and the Müggelsee fit together, leg by leg.",
+      "category": "Maps",
+      "image": "https://static.wixstatic.com/media/5a08a3_c4bc074d97df442b95aaf1fb20dd50d4~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/koepenick-waterside-route/",
+      "embedHeight": 1550,
+      "hubCategory": "TripPlans",
+      "type": "Map",
+      "tags": [
+        "koepenick",
+        "köpenick",
+        "old town",
+        "müggelsee",
+        "lake",
+        "palace",
+        "ferry",
+        "day plan",
+        "southeast berlin",
+        "s3"
+      ],
+      "aliases": [
+        "koepenick planner",
+        "köpenick route",
+        "koepenick map",
+        "mueggelsee day",
+        "koepenick old town"
+      ],
+      "relatedBlog": "/post/berlin-lakes-guide-2026",
+      "iconStatus": "live-wix-media",
+      "published": true,
+      "cmsItemId": "5bf02ca3-333f-41e4-8324-d6fad1ec0994"
     }
   ],
   "hubCategories": [
