@@ -48,9 +48,9 @@ spandau-berlin is yesterday's still-unpublished draft).
   (older Tripadvisor reviews say Tuesday — the official page says Wednesday;
   published Wednesday + "pauses in summer").
 - berlin modern (Museum des 20. Jahrhunderts): Herzog & de Meuron, under
-  construction between NNG and Philharmonie, opening now expected around 2030
-  (was 2026/2027 earlier): de.wikipedia Museum des 20. Jahrhunderts +
-  preussischer-kulturbesitz.de. Published as "currently expected around 2030".
+  construction between NNG and Philharmonie. The official project pages checked
+  2026-07-23 do not state a public opening date, so the prior "around 2030" line
+  was removed rather than relying on a secondary estimate.
 - Collection/building: opened 1830 Altes Museum, Bode expansion, 1904 Kaiser
   Friedrich Museum, 1998 Kulturforum building (Hilmer & Sattler); 72 rooms,
   ~2 km, ~1,250 paintings main floor + ~400 study gallery; 18 main halls in
@@ -99,6 +99,15 @@ Widget slug: `gemaldegalerie-highlights-walk`, title `Gemäldegalerie
 Highlights Walk`, hubCategory CultureLandmarks, type Planner. All 10 widget
 images are public-domain painting reproductions (PD-Art), so the widget needs
 NO tool-visual-credit UI. No article-credit UI or pointer in the widget.
+
+## Independent review corrections (2026-07-23)
+
+- Replaced the title and social copy claiming "No Queue" / "Emptiest" with the
+  supportable, evergreen framing "The Old Masters Gallery Most Visitors Miss".
+- Removed the article year from title/SEO/FAQ while keeping July 2026 beside the
+  time-sensitive ticket facts.
+- Replaced categorical walk-up/no-queue language with the museum's official
+  recommendation to book online if the visitor wants to avoid counter waiting.
 
 ## Internal links plan (used in body)
 

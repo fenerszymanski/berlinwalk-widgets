@@ -1,4 +1,4 @@
-Berlin keeps a strange answer to a broken weather forecast about an hour south of the city: a tropical beach held at 26 degrees, a real rainforest with around 50,000 plants and a 200 metre stretch of sand, all inside the biggest free-standing hall on the planet. On a grey morning you can spot exactly who is going there. Families with beach bags and pool noodles gather on the regional platforms at Ostkreuz, looking far too optimistic for the weather outside.
+Berlin keeps a strange answer to a broken weather forecast about an hour south of the city: a tropical beach held at 26 degrees, a real rainforest with around 50,000 plants and a 200 metre stretch of sand, all inside one of the largest free-standing halls in the world. On a grey morning you can spot exactly who is going there. Families with beach bags and pool noodles gather on the regional platforms at Ostkreuz, looking far too optimistic for the weather outside.
 
 Tropical Islands is easy to dismiss as a theme park and just as easy to overrate as a paradise. It is neither. It is a very German piece of engineering optimism that failed as an airship factory and succeeded as a swimming pool. Whether it deserves one of your Berlin days depends mostly on your group, the season and how you handle the tickets. Here is how I would decide, and how the money and the trains actually work.
 
@@ -59,7 +59,7 @@ The Tropical Sea is calm, shallow and clearly built for families rather than swi
 
 _The 27 metre slide tower in the evening, when day-ticket holders still have hours left on the clock._
 
-Food and drink inside are resort-priced, and the payment system is cash-free: your wristband collects what you spend and you settle it on the way out. Budget for it the way you would budget for an airport day.
+Food and drink inside are resort-priced. Purchases are recorded on an electronic chip wristband and settled on the way out, so budget for it the way you would budget for an airport day.
 
 ![Thatched Bali pavilion by the water inside the tropical village](blog-drafts/tropical-islands-from-berlin/images/optimized/bali-pavilion.jpg)
 
@@ -67,7 +67,7 @@ _The tropical village borrows its architecture from Bali, Borneo, Thailand and S
 
 ## The airship story behind the hall
 
-The building is the best part of the story. In the late 1990s a company called CargoLifter raised hundreds of millions to build giant airships that would carry factory turbines across continents, and in 2000 it finished the world's largest free-standing hall on a former Soviet military airfield to build them in. The airships never came. CargoLifter went insolvent in 2002 with little more than a test balloon to show, and the empty hall stood in the forest like a beached whale.
+The building is the best part of the story. In the late 1990s a company called CargoLifter raised hundreds of millions to build giant airships that would carry factory turbines across continents, and in 2000 it finished one of the world's largest free-standing halls on a former Soviet military airfield to build them in. The airships never came. CargoLifter went insolvent in 2002 with little more than a test balloon to show, and the empty hall stood in the forest like a beached whale.
 
 ![CargoLifter test airship parked inside the giant hangar in 2002](blog-drafts/tropical-islands-from-berlin/images/optimized/cargolifter-airship-2002.jpg)
 

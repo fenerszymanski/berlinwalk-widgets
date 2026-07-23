@@ -14,18 +14,18 @@ INTERNAL ONLY. Never part of the publish body.
   and a time-budget judgment. Cannot fit a SERP box.
 
 ## Verified facts + sources (checked 2026-07-22)
-- ICE/IC Berlin–Leipzig ~1h07–1h15, ~25 direct trains/day.
-  https://www.thetrainline.com/en-us/train-times/berlin-to-leipzig-hbf ,
-  https://www.omio.com/trains/berlin/leipzig
+- ICE/IC Berlin–Leipzig ~1h07–1h15 with frequent direct service. The prior
+  third-party estimate of ~25 direct trains/day was removed from the public body
+  because the exact count was not independently confirmed in this review.
 - During Stadtbahn closure (14 Jun–12 Dec 2026) Berlin–Leipzig trains are NOT affected in
   routing substance: they use the north-south tunnel (Hauptbahnhof tief) + Südkreuz.
   Cross-checked with our own leaving-berlin-by-train research (viz.berlin, VBB).
 - Anhalter Bahn (Berlin–Halle/Leipzig line) had its Generalsanierung 24 Sep–13 Dec **2025**
   (~100 km track renewed). Finished; 2026 runs on renewed infrastructure. Do NOT present the
   closure as current. https://halle.de/verwaltung-stadtrat/presseportal/nachrichten/nachricht/bauarbeiten-auf-der-bahnstrecke-halle-leipzig-berlin-vom-24-september-bis-13-dezember-2025
-- Fares (verified 2026-07-21 from bahn.de for the train post, reused): Super Sparpreis from
-  17.99 EUR (selected short journeys/Last Minute from 6.99), Sparpreis from 21.99 (10 EUR
-  change fee), Flexpreis any-train-that-day + City-Ticket, seat reservation 5.50 EUR optional.
+- Fares (rechecked 2026-07-23 on official DB pages): Super Sparpreis is advertised from
+  6.99 EUR nationwide but the exact Berlin-Leipzig fare varies by train/date; Sparpreis starts
+  at 21.99 EUR and can be cancelled before travel for a 10 EUR fee; seat reservation 5.50 EUR.
   Deutschlandticket 63 EUR/month, NOT valid on ICE/IC/EC anywhere, and the old Berlin-region
   long-distance acceptance ended 14 Dec 2025.
 - Deutschlandticket route: RE3 Berlin (Hbf tief/Südkreuz) → Lutherstadt Wittenberg Hbf
@@ -42,12 +42,14 @@ INTERNAL ONLY. Never part of the publish body.
   https://europeforvisitors.com/germany/leipzig/leipzig-monday-demonstrations-1989.htm
 - Thomaskirche: open daily ~9/10–18, free entry; Bach's grave in the chancel (since 1950);
   Motette Fri 18:00 + Sat 15:00, ~3 EUR. https://english.leipzig.de/leisure-culture-and-tourism/tourism/leipzigs-tourist-attractions/st-thomas-church
-- Bach Museum: Tue–Sun 10–18, closed Mon, 10 EUR, free 1st Tuesday, under-18 free.
+- Bach Museum: Tue–Sun 10–18, closed Mon, 14 EUR from 1 March 2026, free 1st Tuesday,
+  under-18 free.
   https://www.bachmuseumleipzig.de/en/bach-museum/your-visit
 - Zeitgeschichtliches Forum: FREE, closed Mon; Tue–Fri 9–18, Sat/Sun 10–18.
   https://www.hdg.de/en/zeitgeschichtliches-forum-leipzig/visitor-information
-- Museum der bildenden Künste: closed Mon; Tue/Thu–Sun 10–18, Wed 12–20; full 14 EUR.
-  https://mdbk.de/en/visit/
+- Museum der bildenden Künste: closed Mon; Tue/Thu–Sun 10–18, Wed 12–20;
+  permanent collection free, current combined special-exhibition ticket 12/6 EUR.
+  https://mdbk.de/en/information/
 - Runde Ecke (Stasi museum): daily 10–18, 5 EUR (4 reduced) incl. audio guide.
   https://www.runde-ecke-leipzig.de/index.php?L=2&id=230&type=98
 - Völkerschlachtdenkmal + FORUM 1813: Apr–Oct daily 10–18 (Nov–Mar 10–16), adults 12 EUR

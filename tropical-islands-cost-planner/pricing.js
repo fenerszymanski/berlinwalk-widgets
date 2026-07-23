@@ -63,6 +63,12 @@
       travel.note = 'RE2/RB24 to Brand Tropical Islands are regional trains, fully covered by the €63/month Deutschlandticket.';
     }
 
+    if (people === 0) {
+      travel.sum = 0;
+      travel.range = null;
+      travel.note = 'Add at least one paying traveller to calculate transport.';
+    }
+
     var total = round2(entry + travel.sum);
     var flags = [];
 

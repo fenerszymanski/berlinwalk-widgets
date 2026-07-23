@@ -65,8 +65,9 @@ Getting there (official /en/planen-sie-ihren-besuch/relevante-informationen/anfa
   NOT printed as exact fact — article says check VBB app).
 
 Hall/history (Wikipedia Tropical_Islands_Resort + CargoLifter + Brand-Briesen Airfield):
-- Aerium: 360 m long, 210 m wide, 107 m high, largest free-standing hall in the
-  world; built 2000 by CargoLifter AG (founded 1996) for airship production on
+- Aerium: 360 m long, 210 m wide, 107 m high, one of the largest free-standing
+  halls in the world according to the resort's current company profile; built
+  2000 by CargoLifter AG (founded 1996) for airship production on
   the former Soviet Brand-Briesen airfield; CargoLifter insolvent 2002; hall
   sold to Malaysian Tanjong group for EUR 17.5M; resort opened 19 Dec 2004;
   owned by Parques Reunidos since Dec 2018 (EUR 226M).
@@ -81,6 +82,7 @@ Hall/history (Wikipedia Tropical_Islands_Resort + CargoLifter + Brand-Briesen Ai
 - https://www.tropical-islands.de/preise-oeffnungszeiten/preise
 - https://www.tropical-islands.de/en/planen-sie-ihren-besuch/relevante-informationen/anfahrt
 - https://www.tropical-islands.de/en/entdecke-die-tropen/unsere-attraktionen/sauna-und-spa
+- https://company.tropical-islands.de/en/press/company-profile/
 - https://en.wikipedia.org/wiki/Tropical_Islands_Resort
 - https://en.wikipedia.org/wiki/CargoLifter
 - https://en.wikipedia.org/wiki/Brand_Tropical_Islands_station
@@ -96,6 +98,8 @@ Hall/history (Wikipedia Tropical_Islands_Resort + CargoLifter + Brand-Briesen Ai
 - Towel/bathrobe/locker rental prices (not found on official price page today).
 - Exact shuttle timetable times (PDF is versioned; article links the site).
 - Annual visitor numbers (only a cost-effectiveness figure on Wikipedia).
+- The categorical "world's largest free-standing hall" claim; the official
+  current company profile supports only "one of the largest".
 
 ## Widget plan
 
