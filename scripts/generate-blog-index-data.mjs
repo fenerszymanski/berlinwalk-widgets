@@ -655,6 +655,10 @@ function relatedToolSlugFor(post) {
   if ((post.slug || '') === 'leipzig-day-trip-from-berlin') return 'leipzig-day-trip-planner';
   if ((post.slug || '') === 'gemaldegalerie-berlin') return 'gemaldegalerie-highlights-walk';
   if ((post.slug || '') === 'tropical-islands-from-berlin') return 'tropical-islands-cost-planner';
+  if ((post.slug || '') === 'spandau-berlin') return 'spandau-old-town-loop';
+  if ((post.slug || '') === 'karl-marx-allee-berlin') return 'karl-marx-allee-spotter';
+  if ((post.slug || '') === 'deutsches-technikmuseum-berlin') return 'technikmuseum-train-builder';
+  if ((post.slug || '') === 'koepenick-berlin') return 'koepenick-waterside-route';
   if ((post.slug || '') === 'berliner-unterwelten') return 'berliner-unterwelten-tour-board';
   if ((post.slug || '') === 'spreewald-day-trip-from-berlin') return 'spreewald-reach-map';
   if ((post.slug || '') === 'schoneberg-berlin') return 'schoneberg-plaque-check';
