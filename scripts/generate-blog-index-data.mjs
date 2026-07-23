@@ -647,6 +647,9 @@ function relatedToolSlugFor(post) {
   if ((post.slug || '') === 'wannsee-berlin') return 'wannsee-shore-planner';
   if ((post.slug || '') === 'football-match-in-berlin') return 'berlin-matchday-board';
   if ((post.slug || '') === 'dresden-day-trip-from-berlin') return 'dresden-day-clock';
+  if ((post.slug || '') === 'leipzig-day-trip-from-berlin') return 'leipzig-day-trip-planner';
+  if ((post.slug || '') === 'gemaldegalerie-berlin') return 'gemaldegalerie-highlights-walk';
+  if ((post.slug || '') === 'tropical-islands-from-berlin') return 'tropical-islands-cost-planner';
   if ((post.slug || '') === 'berliner-unterwelten') return 'berliner-unterwelten-tour-board';
   if ((post.slug || '') === 'spreewald-day-trip-from-berlin') return 'spreewald-reach-map';
   if ((post.slug || '') === 'schoneberg-berlin') return 'schoneberg-plaque-check';
