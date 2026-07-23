@@ -111,7 +111,7 @@
       }
       if (day.id === 'fri') {
         warnings.push({ id: 'freefriday', level: 'tip',
-          text: 'On the first Friday of the month entry is free for everyone from 13:00 (book the free ticket online). Expect bigger crowds that afternoon.' });
+          text: 'The museum lists bookable free Friday-afternoon admission from 13:00, but its current pages disagree on whether that means every Friday or only the first Friday of the month. Confirm your date in the official ticket shop.' });
       }
       if (picked.some(function (w) { return w.outdoor; })) {
         warnings.push({ id: 'outdoor', level: 'info',

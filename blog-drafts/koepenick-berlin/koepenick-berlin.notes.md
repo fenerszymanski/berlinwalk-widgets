@@ -58,15 +58,24 @@ Technikmuseum package existed earlier today).
   adult EUR 6 / reduced EUR 3, hours listed 10:00-16:00 (short; advise
   checking ahead). Source: https://www.berlin.de/en/attractions-and-sights/3560054-3104052-mueggelturm.en.html
 - Ferry F12: BVG ferry Grünau-Wendenschloß across the Dahme, ~2 minute
-  crossing, year-round, normal BVG ticket. Tram 62 serves the Wendenschloß
-  side, tram 68 stops by the Grünau pier (Wassersportallee) and also stops
-  at Schloßplatz Köpenick. Sources:
+  crossing, year-round, normal BVG ticket. Tram 68 connects Schloßplatz with
+  the Wendenschloß terminus and also serves Wassersportallee on the Grünau
+  side, so the same line closes the ferry loop. Tram 62 does not serve
+  Wendenschloß. Sources:
   https://www.berlin.de/en/public-transportation/ferries/1826182-7322324-ferry-f12.en.html ,
   https://www.bvg.de/en/connections/route-overview/f12 ,
   https://www.bvg.de/en/connections/station-overview/schlossplatz-koepenick ,
-  https://www.bvg.de/en/connections/route-overview/68
+  https://www.bvg.de/en/connections/route-overview/68 ,
+  https://www.bvg.de/en/connections/route-overview/62
+- Arrival from S Köpenick: bus 164 serves Schloßplatz Köpenick directly in
+  about nine minutes. Neither tram 62 nor tram 68 connects S Köpenick station
+  to Schloßplatz. Source:
+  https://www.bvg.de/en/connections/route-overview/164
 - S3 status July 2026: S3 serves Berlin-Köpenick station; only Hirschgarten
   is skipped 10 Jul 22:00 - 10 Aug 04:00, 2026 (bus S3H Hirschgarten-Köpenick).
+  In the normal stopping pattern Friedrichshagen is two stops east of
+  Köpenick, with Hirschgarten between them. The evergreen public copy avoids
+  a stop count because the temporary closure changes it.
   Köpenick station is being rebuilt into a regional station; DB currently
   targets December 2027 for regional trains to stop there.
   Sources: https://www.entwicklungsstadt.de/s-bahnhof-hirschgarten-deutsche-bahn-kuendigt-neue-sperrungen-an/ ,
@@ -78,11 +87,12 @@ Technikmuseum package existed earlier today).
 
 ## Deliberately not published
 
-- Exact S3 journey minutes beyond "about 20 minutes" (timetable-dependent).
+- Exact S3 journey minutes beyond "about 20 minutes" and a Köpenick-to-
+  Friedrichshagen stop count (timetable/construction-dependent).
 - Strandbad/renovation status of individual Müggelsee lidos (fluid).
 - Specific boat-cruise operator times from Luisenhain (seasonal).
 - Tram 60/61 routings (not independently verified today; article uses
-  S3 + tram 62/68 + F12 only).
+  S3 + bus 164 + tram 68 + F12 only).
 - Hirschgarten closure dates (temporary works, would stale the evergreen body).
 
 ## Widget decision

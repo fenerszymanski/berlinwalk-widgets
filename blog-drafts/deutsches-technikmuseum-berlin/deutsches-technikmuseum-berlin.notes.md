@@ -30,9 +30,16 @@ official site on 2026-07-23.
 - Prices: adult EUR 15 online / EUR 17 at the door (EUR 2 service fee);
   reduced EUR 9 online / EUR 11 door; groups of 5+ eligible people EUR 6 pp
   online; under-18 free (a 0-euro ticket is still required); annual ticket
-  EUR 55 / EUR 30 reduced; Museum Pass Berlin accepted. Free for everyone on
-  the first Friday of each month from 13:00, online booking required.
+  EUR 55 / EUR 30 reduced; Museum Pass Berlin accepted.
   Source: https://technikmuseum.berlin/en/visit/prices/
+- Free-Friday conflict, independently rechecked before publication on
+  2026-07-23: the current visitor/prices page says the first Friday of each
+  month from 13:00, while the museum's 26 Feb 2026 launch announcement says
+  every Friday from 13:00. The public article, Quick Summary, FAQ and tool
+  therefore state the conflict and tell readers to confirm their date in the
+  official ticket shop instead of asserting either frequency.
+  Sources: https://technikmuseum.berlin/en/visit/prices/ and
+  https://technikmuseum.berlin/pressemitteilung/frei-tag-im-deutschen-technikmuseum/
 - One ticket covers both the Technikmuseum and the Science Center Spectrum on
   the same day. Source: https://technikmuseum.berlin/en/visit/faq/
 - Average visit ~2.5 hours per official FAQ; lockers in main building and at
@@ -41,9 +48,12 @@ official site on 2026-07-23.
 - Addresses: main building Trebbiner Straße 9, 10963 Berlin; Ladestraße and
   Science Center Spectrum entrance Möckernstraße 26, 10963 Berlin.
   Transit: U Möckernbrücke (U1/U3/U7), U Gleisdreieck (U1/U2/U3),
-  S Anhalter Bahnhof (S1/S2/S25/S26). Parking very limited, fees apply from
-  1 Aug 2026; museum recommends transit.
-  Source: https://technikmuseum.berlin/en/visit/getting-here/
+  S Anhalter Bahnhof (S1/S2/S25/S26). The directions page says limited
+  parking becomes paid from 1 Aug 2026, while the current visitor FAQ still
+  describes 67 free Trebbiner Straße spaces. Public copy states this conflict
+  and recommends transit rather than promising free parking.
+  Sources: https://technikmuseum.berlin/en/visit/getting-here/ and
+  https://technikmuseum.berlin/en/visit/faq/
 - Aviation: New Building, "From Ballooning to the Berlin Airlift", 40+
   aircraft. Douglas C-47 Skytrain (Rosinenbomber) mounted over the roof
   terrace in May 1999, symbol of the 1948/49 Berlin Airlift. Jeannin
@@ -94,8 +104,8 @@ official site on 2026-07-23.
    day / full day), then couple hall "wagons" onto the train. Each wagon
    carries minutes + building + kid appeal. Live coupling strip shows
    capacity; overload warns; result = ordered two-site route with day-aware
-   warnings (Monday closed, weekday vs weekend hours, first-Friday free from
-   13:00, last entry 17:00).
+   warnings (Monday closed, weekday vs weekend hours, Friday free-admission
+   source conflict from 13:00, last entry 17:00).
 2. Two-entrance decision map (Trebbiner vs Möckernstraße) — too thin alone.
 3. "Kid energy meter" planner scoring halls by hands-on level — generic
    picker/scoring pattern, rejected for freshness.

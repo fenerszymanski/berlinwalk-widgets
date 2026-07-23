@@ -26,7 +26,7 @@ The numbers are simple, but three details catch people. All of this is from the 
 - **Everyone under 18 enters free.** You still need to book a free 0-euro ticket for each child, which surprises people at the scanner.
 - **One ticket covers two museums.** The same day ticket includes both the Technikmuseum and the Science Center Spectrum around the corner. Skipping Spectrum with kids in your group is leaving value on the table.
 
-The three traps: the museum is **closed on Mondays**, like most Berlin museums. **Last admission is 17:00**, which matters because Tuesday to Friday hours are 9:00 to 17:30, and weekends run 10:00 to 18:00, so a late-afternoon start is barely worth the ticket. And on the **first Friday of every month, entry is free for everyone from 13:00**, online booking required, which is either a gift or a crowd warning depending on how you feel about school groups.
+The three traps: the museum is **closed on Mondays**, like most Berlin museums. **Last admission is 17:00**, which matters because Tuesday to Friday hours are 9:00 to 17:30, and weekends run 10:00 to 18:00, so a late-afternoon start is barely worth the ticket. The museum also lists bookable free Friday-afternoon admission from 13:00, but its current visitor page and its 2026 launch announcement disagree on whether that means every Friday or only the first Friday of the month. Confirm your date in the official ticket shop before you plan around it.
 
 The museum is also covered by the Museum Pass Berlin. If you are stacking museum days, my [museum pass breakdown](/post/berlin-museum-pass-vs-single-tickets-which-one-saves-you-money) shows when the pass beats single tickets, and this place is one of the tickets that helps the pass pay for itself.
 
@@ -84,7 +84,7 @@ The museum has two addresses, and picking the right one saves a confused ten-min
 
 - **U-Bahn:** Möckernbrücke on the U1, U3 and U7, or Gleisdreieck on the U1, U2 and U3. Both are a short walk, and the ride in on the elevated U1 is the best approach because you pass the rooftop plane.
 - **S-Bahn:** Anhalter Bahnhof on the S1, S2, S25 and S26, one stop from Potsdamer Platz. The station name is the last trace of the great terminus this freight yard once served, a story I tell in my [ghost stations guide](/post/berlin-ghost-stations).
-- **Car:** do not bother. The museum's own [directions page](https://technikmuseum.berlin/en/visit/getting-here/) says parking nearby is very limited, and fees apply from 1 August 2026.
+- **Car:** do not bother. The museum's official pages currently disagree: its [directions page](https://technikmuseum.berlin/en/visit/getting-here/) says limited nearby parking becomes paid from 1 August 2026, while its [visitor FAQ](https://technikmuseum.berlin/en/visit/faq/) still describes 67 free spaces at Trebbiner Straße. Use transit rather than relying on a free space.
 
 The location folds neatly into a bigger day: [Potsdamer Platz](/post/potsdamer-platz-berlin) is one S-Bahn stop or a 15-minute walk away, and the Topography of Terror documentation centre sits between the two. Indoors here, history outdoors there, and dinner back toward the centre.
 

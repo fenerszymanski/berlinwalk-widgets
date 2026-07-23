@@ -16,13 +16,13 @@ It stayed its own town until 1920, when Greater Berlin swallowed it whole, and t
 
 ## Getting to Köpenick from central Berlin
 
-**Take the S3.** It runs from the central Stadtbahn stations through Ostkreuz straight to Köpenick station, about 20 minutes from Alexanderplatz. From the station you have two good options: tram 62 or 68 a few stops down Bahnhofstraße to Schloßplatz, which drops you at the edge of the old town, or a flat 20-minute walk down the same street. The station itself is a construction site with a purpose: it is being rebuilt so that regional trains can stop here too, currently planned for the end of 2027.
+**Take the S3.** It runs from the central Stadtbahn stations through Ostkreuz straight to Köpenick station, about 20 minutes from Alexanderplatz. From the station you have two good options: bus 164 takes about nine minutes to Schloßplatz at the edge of the old town, or you can make the flat 20-minute walk down Bahnhofstraße. The station itself is a construction site with a purpose: it is being rebuilt so that regional trains can stop here too, currently planned for the end of 2027.
 
 ![Yellow tram crossing Schloßplatz at the entrance to the Köpenick old town](blog-drafts/koepenick-berlin/images/optimized/tram-schlossplatz-altstadt.jpg)
 
-_The tram delivers you straight into the old town at Schloßplatz. From here everything is two to five minutes on foot._
+_A yellow tram crossing Schloßplatz at the edge of the old town. From here everything is two to five minutes on foot._
 
-**One normal AB ticket covers the entire day out here**, including the S-Bahn, the trams and even the F12 ferry you will meet later in this guide. Köpenick sits comfortably inside zone B, so there is no ticket puzzle to solve; if zones are new to you, my [AB and ABC ticket guide](/post/berlin-ab-abc-ticket-zones) settles it in two minutes, and my [tram guide](/post/berlin-trams-guide) explains why the southeast is tram country in the first place.
+**One normal AB ticket covers the entire day out here**, including the S-Bahn, bus 164, the trams and even the F12 ferry you will meet later in this guide. Köpenick sits comfortably inside zone B, so there is no ticket puzzle to solve; if zones are new to you, my [AB and ABC ticket guide](/post/berlin-ab-abc-ticket-zones) settles it in two minutes, and my [tram guide](/post/berlin-trams-guide) explains why the southeast is tram country in the first place.
 
 ## The town hall and the fake captain
 
@@ -64,13 +64,13 @@ From here the question is how much water you want. I built the map below the way
 
 Two extensions turn Köpenick from a sightseeing stop into a proper day out.
 
-**The F12 ferry loop is Berlin's shortest boat trip and its best transit secret.** Take tram 62 from the old town to its leafy terminus at Wendenschloß, walk a few minutes down to the Dahme, and the little F12 ferry crosses to Grünau in about two minutes, on a normal BVG ticket. On the Grünau side, tram 68 by the pier runs you back to Schloßplatz along the west bank. The whole loop takes about an hour and gives you the district from the water without booking anything.
+**The F12 ferry loop is Berlin's shortest boat trip and its best transit secret.** Take tram 68 from Schloßplatz to its leafy Wendenschloß terminus, walk a few minutes down to the Dahme, and the little F12 ferry crosses to Grünau in about two minutes, on a normal BVG ticket. On the Grünau side, tram 68 from Wassersportallee runs you back to Schloßplatz. The whole loop takes about an hour and gives you the district from the water without booking anything.
 
 ![Luisenhain waterfront promenade on the Dahme with the towers of Köpenick behind](blog-drafts/koepenick-berlin/images/optimized/luisenhain-waterfront.jpg)
 
 _The Luisenhain promenade behind the town hall. Excursion boats tie up here in season, and the whole old town is water-edged like this._
 
-**The Müggelsee, Berlin's largest lake, is one S-Bahn stop away.** Ride the S3 from Köpenick to Friedrichshagen, then walk Bölschestraße, the old brewery town's main street, about 20 minutes down to the lakeside Müggelpark. The lake is about 7.3 square kilometres of open water with official bathing beaches around its shore, and a pedestrian tunnel under the river connects the park to the wooded south bank. If lakes are the reason you came to Berlin in summer, my [Berlin lakes guide](/post/berlin-lakes-guide-2026) ranks this one against the rest of the field.
+**The Müggelsee, Berlin's largest lake, is a short S-Bahn ride away.** Continue east on the S3 from Köpenick to Friedrichshagen, then walk Bölschestraße, the old brewery town's main street, about 20 minutes down to the lakeside Müggelpark. The lake is about 7.3 square kilometres of open water with official bathing beaches around its shore, and a pedestrian tunnel under the river connects the park to the wooded south bank. If lakes are the reason you came to Berlin in summer, my [Berlin lakes guide](/post/berlin-lakes-guide-2026) ranks this one against the rest of the field.
 
 Energetic visitors can keep going: from the tunnel, a forest walk of about an hour climbs the Müggelberge to the [Müggelturm](https://www.berlin.de/en/attractions-and-sights/3560054-3104052-mueggelturm.en.html), a 30-metre tower with 126 steps and a view from the lake all the way back to the TV Tower. **It costs 6 euros and its opening hours are short, so check before you commit to the hike.**
 
