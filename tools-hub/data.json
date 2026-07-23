@@ -5198,6 +5198,39 @@
       "iconStatus": "live-wix-media",
       "published": true,
       "cmsItemId": "5bf02ca3-333f-41e4-8324-d6fad1ec0994"
+    },
+    {
+      "slug": "baltic-beach-day-planner",
+      "title": "Baltic Beach Day Planner",
+      "lead": "Race Warnemünde, Usedom and Binz against each other for one day by the sea. Pick your departure, ticket and return deadline and see how much real beach time each coast pays out.",
+      "category": "Discovery",
+      "hubCategory": "TripPlans",
+      "type": "Planner",
+      "tags": [
+        "baltic sea",
+        "beach",
+        "day trip",
+        "Warnemünde",
+        "Usedom",
+        "Binz",
+        "Rügen",
+        "Deutschlandticket",
+        "trains"
+      ],
+      "aliases": [
+        "baltic sea day trip",
+        "beach day planner",
+        "warnemunde from berlin",
+        "usedom from berlin",
+        "binz from berlin",
+        "beach near berlin"
+      ],
+      "image": "https://static.wixstatic.com/media/5a08a3_51af2914e7c94b3496c32983c1fabb9d~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/baltic-beach-day-planner/",
+      "embedHeight": 1650,
+      "relatedBlog": "/post/best-day-trips-from-berlin",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "e7c14eca-0c0e-4006-af9f-4bce60e82f64"
     }
   ],
   "hubCategories": [

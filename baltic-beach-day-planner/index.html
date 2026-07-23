@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Baltic Beach Day Planner: Which Coast Pays Out the Most Sand?</title>
+<meta name="description" content="Race Warnemünde, the Usedom resorts and Binz against each other for one day by the sea from Berlin. Pick your departure, ticket and return deadline and see how much real beach time each coast pays out." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Cpath d='M8 40h48v6c-8 0-8 4-16 4s-8-4-16-4-8 4-16 4z' fill='%23C5E1A5'/%3E%3Ccircle cx='44' cy='22' r='9' fill='%23FFE600'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root {
+    --green: #1B5E20;
+    --green-dark: #123D18;
+    --lime: #7CB342;
+    --light: #C5E1A5;
+    --yellow: #FFE600;
+    --cream: #FAFAF5;
+    --ink: #212121;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Montserrat', -apple-system, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    padding: 14px 14px 24px;
+  }
+  .bbp { max-width: 860px; margin: 0 auto; }
+
+  .bbp-head {
+    background: linear-gradient(160deg, var(--green-dark) 0%, var(--green) 55%, #2e7d32 100%);
+    border-radius: 18px 18px 0 0;
+    color: #fff;
+    padding: 22px 20px 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .bbp-head h1 { font-size: 21px; font-weight: 800; line-height: 1.25; max-width: 30ch; }
+  .bbp-head p { font-size: 13px; line-height: 1.55; margin-top: 8px; max-width: 58ch; color: #E8F5E9; }
+  .bbp-kicker {
+    display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em;
+    color: var(--green-dark); background: var(--yellow); border-radius: 999px;
+    padding: 4px 10px; margin-bottom: 10px;
+  }
+  .bbp-waves { display: block; width: 100%; height: 34px; margin-top: 16px; }
+
+  .bbp-controls {
+    background: #fff; border: 1px solid #E3E8DC; border-top: none;
+    padding: 16px 20px 18px; border-radius: 0 0 18px 18px;
+  }
+  .bbp-group { margin-top: 12px; }
+  .bbp-group:first-child { margin-top: 0; }
+  .bbp-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-bottom: 7px; }
+  .bbp-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .bbp-chip {
+    font-family: inherit; font-size: 13px; font-weight: 600; color: var(--green-dark);
+    background: #F1F5EC; border: 1.5px solid #D9E3CF; border-radius: 999px;
+    padding: 8px 14px; cursor: pointer; transition: background 0.15s, border-color 0.15s;
+  }
+  .bbp-chip:hover { border-color: var(--lime); }
+  .bbp-chip[aria-pressed="true"] {
+    background: var(--yellow); border-color: var(--green); color: var(--green-dark);
+  }
+  .bbp-chip small { display: block; font-size: 10.5px; font-weight: 500; color: #4E5A48; }
+  .bbp-chip[aria-pressed="true"] small { color: var(--green-dark); }
+
+  .bbp-lanes { margin-top: 18px; display: grid; gap: 14px; }
+  .bbp-lane {
+    background: #fff; border: 1px solid #E3E8DC; border-radius: 16px;
+    padding: 16px 16px 18px; position: relative;
+  }
+  .bbp-lane.bbp-winner { border: 2px solid var(--green); box-shadow: 0 4px 18px rgba(27, 94, 32, 0.13); }
+  .bbp-lane-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .bbp-lane-head h2 { font-size: 16.5px; font-weight: 800; color: var(--green-dark); }
+  .bbp-badge {
+    font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    background: var(--yellow); color: var(--green-dark); border-radius: 999px; padding: 3px 10px;
+  }
+  .bbp-strap { font-size: 12.5px; color: #4E5A48; line-height: 1.5; margin-top: 4px; }
+
+  .bbp-sand { font-size: 26px; font-weight: 800; color: var(--green); margin-top: 12px; }
+  .bbp-sand span { font-size: 13px; font-weight: 600; color: #4E5A48; }
+  .bbp-sand.bbp-sand-no { color: #9AA394; }
+  .bbp-verdict { font-size: 12.5px; font-weight: 600; margin-top: 2px; color: var(--ink); }
+
+  .bbp-ribbon-wrap { margin-top: 12px; }
+  .bbp-ribbon {
+    position: relative; height: 44px; border-radius: 10px; overflow: hidden;
+    background: repeating-linear-gradient(90deg, #F4F7F0 0 60px, #EDF2E7 60px 120px);
+    border: 1px solid #E3E8DC;
+  }
+  .bbp-seg { position: absolute; top: 0; bottom: 0; display: flex; align-items: center; justify-content: center; font-size: 10.5px; font-weight: 700; white-space: nowrap; overflow: hidden; }
+  .bbp-seg-train { background: var(--green); color: #fff; }
+  .bbp-seg-beach {
+    background: repeating-linear-gradient(135deg, var(--yellow) 0 14px, #F5DC00 14px 28px);
+    color: var(--green-dark);
+  }
+  .bbp-seg-beach::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 7px;
+    background: repeating-linear-gradient(90deg, var(--light) 0 12px, #B7D796 12px 24px);
+  }
+  .bbp-scale { display: flex; justify-content: space-between; font-size: 10px; color: #8B937F; margin-top: 4px; padding: 0 2px; }
+  .bbp-legs { margin-top: 10px; display: grid; gap: 4px; }
+  .bbp-leg { font-size: 12px; color: var(--ink); line-height: 1.5; }
+  .bbp-leg b { color: var(--green-dark); }
+  .bbp-leg-note { font-size: 11px; color: #71796A; }
+  .bbp-ic-note { font-size: 11px; font-weight: 600; color: #8a5a00; margin-top: 6px; }
+
+  .bbp-foot {
+    margin-top: 16px; background: #F1F5EC; border-radius: 12px; padding: 12px 14px;
+    font-size: 11.5px; color: #4E5A48; line-height: 1.6;
+  }
+  .bbp-foot a { color: var(--green); font-weight: 700; }
+  @media (max-width: 480px) {
+    body { padding: 8px 8px 18px; }
+    .bbp-head h1 { font-size: 18px; }
+    .bbp-chip { padding: 7px 11px; font-size: 12px; }
+    .bbp-sand { font-size: 22px; }
+    .bbp-seg { font-size: 9px; }
+  }
+</style>
+</head>
+<body>
+<div class="bbp">
+  <header class="bbp-head">
+    <span class="bbp-kicker">BERLINWALK.COM &bull; BALTIC DAY TRIP</span>
+    <h1>Baltic Beach Day Planner</h1>
+    <p>Three coasts race for your one sea day from Berlin: Warnemünde, the Usedom imperial resorts and Binz on Rügen. Set when you can leave, how you ride and when you must be back. The sand pays out below.</p>
+    <svg class="bbp-waves" viewBox="0 0 860 34" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 20 Q 54 6 108 20 T 216 20 T 324 20 T 432 20 T 540 20 T 648 20 T 756 20 T 864 20 V 34 H 0 Z" fill="#FAFAF5" opacity="0.35"/>
+      <path d="M0 26 Q 54 12 108 26 T 216 26 T 324 26 T 432 26 T 540 26 T 648 26 T 756 26 T 864 26 V 34 H 0 Z" fill="#FAFAF5"/>
+    </svg>
+  </header>
+
+  <section class="bbp-controls" aria-label="Trip settings">
+    <div class="bbp-group">
+      <div class="bbp-label">When can you leave Berlin Hbf?</div>
+      <div class="bbp-chips" id="bbpLeave" role="group" aria-label="Earliest departure"></div>
+    </div>
+    <div class="bbp-group">
+      <div class="bbp-label">How do you want to ride?</div>
+      <div class="bbp-chips" id="bbpTicket" role="group" aria-label="Ticket mode"></div>
+    </div>
+    <div class="bbp-group">
+      <div class="bbp-label">Back in Berlin by</div>
+      <div class="bbp-chips" id="bbpBack" role="group" aria-label="Return deadline"></div>
+    </div>
+  </section>
+
+  <section class="bbp-lanes" id="bbpLanes" aria-live="polite"></section>
+
+  <div class="bbp-foot">
+    Times follow the typical summer Saturday pattern, checked against the DB planner in July 2026. Individual days shift by a few minutes and construction happens, so confirm your exact trains at <a href="https://int.bahn.de/en" target="_blank" rel="noopener">bahn.de</a> before you commit. Regional options run on the Deutschlandticket; IC and ICE legs need their own ticket. Full logic and the three-town comparison: <a href="https://www.berlinwalk.com/post/baltic-sea-day-trip-from-berlin" target="_blank" rel="noopener">the Baltic day trip guide</a>.
+  </div>
+</div>
+
+<script src="engine.js"></script>
+<script>
+(function () {
+  const E = window.BWBalticEngine;
+  const state = { leave: E.hm('06:30'), ticket: 'dticket', back: E.hm('23:45') };
+
+  const LEAVE = [
+    { v: '05:15', label: '05:15', note: 'the serious plan' },
+    { v: '06:30', label: '06:30', note: 'early but human' },
+    { v: '08:00', label: '08:00', note: 'after breakfast' },
+    { v: '09:30', label: '09:30', note: 'slow morning' },
+  ];
+  const TICKET = [
+    { v: 'dticket', label: 'Deutschlandticket only', note: 'regional trains, no extra cost' },
+    { v: 'any', label: 'Fastest, IC/ICE allowed', note: 'separate DB ticket for fast legs' },
+  ];
+  const BACK = [
+    { v: '21:30', label: '21:30', note: 'dinner in Berlin' },
+    { v: '23:45', label: '23:45', note: 'full sea day' },
+    { v: '25:00', label: 'After midnight', note: 'last trains accepted' },
+  ];
+
+  function chips(el, options, key, current) {
+    el.innerHTML = '';
+    options.forEach((opt) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'bbp-chip';
+      b.innerHTML = opt.label + (opt.note ? '<small>' + opt.note + '</small>' : '');
+      const val = key === 'ticket' ? opt.v : (opt.v === '25:00' ? 1500 : E.hm(opt.v));
+      b.setAttribute('aria-pressed', String(val === current));
+      b.addEventListener('click', () => {
+        state[key] = val;
+        render();
+      });
+      el.appendChild(b);
+    });
+  }
+
+  function seg(cls, fromMin, toMin, text, min, max) {
+    const span = max - min;
+    const left = ((fromMin - min) / span) * 100;
+    const width = ((toMin - fromMin) / span) * 100;
+    return '<div class="bbp-seg ' + cls + '" style="left:' + left.toFixed(2) + '%;width:' + width.toFixed(2) + '%">' + (width > 9 ? text : '') + '</div>';
+  }
+
+  function laneHtml(result, isWinner) {
+    const d = result.dest;
+    const v = E.verdict(result);
+    const MIN = E.hm('05:00');
+    const MAX = 1500; /* 01:00 next day */
+    let ribbon = '';
+    let legs = '';
+    let icNote = '';
+    if (result.feasible) {
+      const o = result.out, r = result.ret;
+      ribbon =
+        seg('bbp-seg-train', o.dep, o.arr, E.fmt(o.dep) + ' train ' + E.fmt(o.arr), MIN, MAX) +
+        seg('bbp-seg-beach', result.beachStart, result.beachEnd, Math.floor(result.beachMin / 60) + 'h' + String(result.beachMin % 60).padStart(2, '0') + ' by the sea', MIN, MAX) +
+        seg('bbp-seg-train', r.dep, r.arr, E.fmt(r.dep) + ' train ' + E.fmt(r.arr), MIN, MAX);
+      legs =
+        '<div class="bbp-leg"><b>Out:</b> ' + E.fmt(o.dep) + ' &rarr; ' + E.fmt(o.arr) + ' &middot; ' + o.label + ' &middot; ' + (o.chg === 0 ? 'direct' : o.chg + (o.chg === 1 ? ' change' : ' changes')) + '</div>' +
+        '<div class="bbp-leg"><b>Back:</b> ' + E.fmt(r.dep) + ' &rarr; ' + E.fmt(r.arr) + ' &middot; ' + r.label + ' &middot; ' + (r.chg === 0 ? 'direct' : r.chg + (r.chg === 1 ? ' change' : ' changes')) + '</div>' +
+        '<div class="bbp-leg bbp-leg-note">Beach window includes the walk, ' + d.walkNote + '.</div>';
+      if (!o.dticket || !r.dticket) icNote = '<div class="bbp-ic-note">This plan uses an IC/ICE leg: buy a normal DB ticket for it, the Deutschlandticket is not enough.</div>';
+    } else {
+      ribbon = '<div class="bbp-seg" style="left:0;width:100%;color:#8B937F;background:#F4F7F0">no workable window with these settings</div>';
+      legs = '<div class="bbp-leg bbp-leg-note">Try an earlier departure, a later return, or allow IC/ICE.</div>';
+    }
+    return (
+      '<article class="bbp-lane' + (isWinner ? ' bbp-winner' : '') + '">' +
+        '<div class="bbp-lane-head"><h2>' + d.name + '</h2>' + (isWinner ? '<span class="bbp-badge">Most sand time</span>' : '') + '</div>' +
+        '<p class="bbp-strap">' + d.strap + '</p>' +
+        '<div class="bbp-sand' + (result.feasible ? '' : ' bbp-sand-no') + '">' +
+          (result.feasible ? Math.floor(result.beachMin / 60) + 'h ' + String(result.beachMin % 60).padStart(2, '0') + 'm <span>by the water</span>' : '0h <span>by the water</span>') +
+        '</div>' +
+        '<div class="bbp-verdict">' + v.text + '</div>' +
+        '<div class="bbp-ribbon-wrap">' +
+          '<div class="bbp-ribbon">' + ribbon + '</div>' +
+          '<div class="bbp-scale"><span>05:00</span><span>09:00</span><span>13:00</span><span>17:00</span><span>21:00</span><span>01:00</span></div>' +
+        '</div>' +
+        '<div class="bbp-legs">' + legs + '</div>' + icNote +
+      '</article>'
+    );
+  }
+
+  function render() {
+    chips(document.getElementById('bbpLeave'), LEAVE, 'leave', state.leave);
+    chips(document.getElementById('bbpTicket'), TICKET, 'ticket', state.ticket);
+    chips(document.getElementById('bbpBack'), BACK, 'back', state.back);
+    const { results, winnerKey } = E.race(state.leave, state.back, state.ticket);
+    document.getElementById('bbpLanes').innerHTML = results
+      .map((r) => laneHtml(r, r.dest.key === winnerKey))
+      .join('');
+    if (window.bwRequestResize) window.bwRequestResize();
+  }
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
