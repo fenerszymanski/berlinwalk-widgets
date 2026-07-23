@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Berlin Bakery Counter: Rehearse Your Order in German</title>
+<meta name="description" content="Walk through a real Berlin bakery order step by step: what the person behind the counter says, the German words for Schrippe, Pfannkuchen and Brezel, and the full sentence to say back." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Cpath d='M20 30c0-7 6-12 12-12s12 5 12 12l-4 16H24z' fill='%23F2C879'/%3E%3Ccircle cx='32' cy='24' r='4' fill='%23FFE600'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root {
+    --green: #1B5E20;
+    --green-dark: #123D18;
+    --lime: #7CB342;
+    --light: #C5E1A5;
+    --yellow: #FFE600;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --crust: #C8873F;
+    --line: #E3E8DC;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    padding: 14px 14px 26px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .bbc { max-width: 720px; margin: 0 auto; }
+
+  /* Header */
+  .bbc-head {
+    background: linear-gradient(155deg, var(--green-dark) 0%, var(--green) 60%, #2e7d32 100%);
+    border-radius: 18px 18px 0 0;
+    color: #fff;
+    padding: 20px 20px 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .bbc-kicker {
+    display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em;
+    color: var(--green-dark); background: var(--yellow); border-radius: 999px;
+    padding: 4px 11px; margin-bottom: 11px; text-transform: uppercase;
+  }
+  .bbc-head h1 { font-size: 21px; font-weight: 800; line-height: 1.25; max-width: 24ch; }
+  .bbc-head p { font-size: 13px; line-height: 1.55; margin-top: 8px; max-width: 54ch; color: #E8F5E9; }
+
+  /* Progress rail */
+  .bbc-steps { display: flex; gap: 6px; margin-top: 16px; }
+  .bbc-step-dot { flex: 1; height: 5px; border-radius: 999px; background: rgba(255,255,255,0.22); transition: background 0.2s; }
+  .bbc-step-dot.done { background: var(--yellow); }
+  .bbc-step-dot.active { background: #fff; }
+
+  /* Body card */
+  .bbc-body {
+    background: #fff; border: 1px solid var(--line); border-top: none;
+    border-radius: 0 0 18px 18px; padding: 18px 18px 20px;
+  }
+
+  .bbc-stage-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-bottom: 10px; }
+
+  /* Speech bubble from the counter */
+  .bbc-says {
+    display: flex; gap: 11px; align-items: flex-start;
+    background: #F1F5EC; border: 1px solid #DDE7D2; border-radius: 14px;
+    padding: 13px 14px; margin-bottom: 15px;
+  }
+  .bbc-says .avatar {
+    flex: 0 0 auto; width: 38px; height: 38px; border-radius: 50%;
+    background: var(--green); color: #fff; font-size: 19px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .bbc-says .lines { min-width: 0; }
+  .bbc-says .de { font-size: 15.5px; font-weight: 700; color: var(--green-dark); line-height: 1.35; }
+  .bbc-says .en { font-size: 12.5px; color: #4a5347; margin-top: 3px; line-height: 1.4; }
+
+  /* Your reply prompt */
+  .bbc-you-label { font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 9px; }
+  .bbc-you-label span { color: var(--green); }
+
+  /* Menu of items (order stage) */
+  .bbc-menu { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+  .bbc-item {
+    text-align: left; font-family: inherit; cursor: pointer;
+    background: #FCFDFB; border: 1.5px solid #DCE6D2; border-radius: 13px;
+    padding: 11px 12px; transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .bbc-item:hover { border-color: var(--lime); }
+  .bbc-item.picked { border-color: var(--green); background: #F3F9EC; box-shadow: 0 0 0 2px rgba(27,94,32,0.12); }
+  .bbc-item .ico { font-size: 22px; line-height: 1; flex: 0 0 auto; }
+  .bbc-item .txt { min-width: 0; display: block; }
+  .bbc-item .name { display: block; font-size: 14px; font-weight: 700; color: var(--green-dark); }
+  .bbc-item .say { display: block; font-size: 11px; color: #7a8471; margin-top: 1px; }
+  .bbc-item .gloss { display: block; font-size: 11.5px; color: #556050; margin-top: 4px; line-height: 1.35; }
+  .bbc-qty {
+    margin-top: 9px; display: flex; align-items: center; gap: 0;
+    border: 1.5px solid var(--green); border-radius: 999px; overflow: hidden; width: fit-content;
+  }
+  .bbc-qty button {
+    font-family: inherit; font-size: 15px; font-weight: 800; line-height: 1;
+    width: 30px; height: 28px; border: none; background: #fff; color: var(--green-dark); cursor: pointer;
+  }
+  .bbc-qty button:hover { background: #EAF3E1; }
+  .bbc-qty .n { min-width: 26px; text-align: center; font-size: 13.5px; font-weight: 800; color: var(--green-dark); }
+
+  /* Reply option buttons (yes/no, eat-in/takeaway, pay) */
+  .bbc-options { display: flex; flex-wrap: wrap; gap: 9px; }
+  .bbc-option {
+    font-family: inherit; cursor: pointer; text-align: left;
+    background: #fff; border: 1.5px solid #D4DFC8; border-radius: 12px;
+    padding: 11px 14px; transition: border-color 0.15s, background 0.15s; flex: 1 1 220px;
+  }
+  .bbc-option:hover { border-color: var(--green); background: #F5FAEF; }
+  .bbc-option.picked-opt { border-color: var(--green); background: #EEF6E4; box-shadow: 0 0 0 2px rgba(27,94,32,0.12); }
+  .bbc-option .de { font-size: 14.5px; font-weight: 700; color: var(--green-dark); }
+  .bbc-option .say { font-size: 11px; color: #7a8471; margin-top: 2px; }
+  .bbc-option .en { font-size: 12px; color: #556050; margin-top: 3px; }
+
+  /* Order-so-far ticket */
+  .bbc-ticket {
+    background: #FFFDF3; border: 1.5px dashed var(--crust); border-radius: 12px;
+    padding: 12px 14px; margin: 4px 0 15px;
+  }
+  .bbc-ticket .cap { font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--crust); margin-bottom: 6px; }
+  .bbc-ticket .de { font-size: 15px; font-weight: 700; color: var(--green-dark); line-height: 1.4; }
+  .bbc-ticket .en { font-size: 12px; color: #6b6252; margin-top: 4px; line-height: 1.4; }
+  .bbc-ticket.empty .de { color: #b3ab97; font-weight: 600; font-size: 13.5px; }
+
+  /* Primary / secondary buttons */
+  .bbc-actions { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+  .bbc-btn {
+    font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer;
+    border-radius: 999px; padding: 11px 20px; border: 2px solid var(--green);
+    transition: transform 0.08s, background 0.15s, opacity 0.15s;
+  }
+  .bbc-btn:active { transform: translateY(1px); }
+  .bbc-btn.primary { background: var(--yellow); color: var(--green-dark); border-color: var(--yellow); }
+  .bbc-btn.primary:hover { background: #ffe94d; }
+  .bbc-btn.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+  .bbc-btn.ghost { background: #fff; color: var(--green); }
+  .bbc-btn.ghost:hover { background: #F1F5EC; }
+
+  /* Final receipt */
+  .bbc-final { text-align: center; padding: 4px 2px 2px; }
+  .bbc-final .win { font-size: 30px; }
+  .bbc-final h2 { font-size: 18px; font-weight: 800; color: var(--green-dark); margin: 8px 0 4px; }
+  .bbc-final p.sub { font-size: 12.5px; color: #556050; line-height: 1.5; max-width: 44ch; margin: 0 auto 14px; }
+  .bbc-script {
+    text-align: left; background: #F1F5EC; border: 1px solid #DDE7D2; border-radius: 14px;
+    padding: 14px 15px; margin: 0 auto;
+  }
+  .bbc-script .row { padding: 8px 0; border-bottom: 1px solid #E1E9D6; }
+  .bbc-script .row:last-child { border-bottom: none; }
+  .bbc-script .who { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); }
+  .bbc-script .who.you { color: var(--crust); }
+  .bbc-script .de { font-size: 14.5px; font-weight: 700; color: var(--green-dark); line-height: 1.4; margin-top: 2px; }
+  .bbc-script .say { font-size: 11px; color: #7a8471; margin-top: 2px; }
+
+  .bbc-note {
+    font-size: 11.5px; color: #6b7563; line-height: 1.5; margin-top: 14px;
+    background: #F7F9F3; border-left: 3px solid var(--lime); border-radius: 0 8px 8px 0; padding: 9px 12px;
+  }
+  .bbc-note strong { color: var(--green-dark); }
+
+  @media (max-width: 440px) {
+    .bbc-menu { grid-template-columns: 1fr; }
+    .bbc-head h1 { font-size: 19px; }
+    .bbc-option { flex-basis: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="bbc">
+  <div class="bbc-head">
+    <span class="bbc-kicker">BerlinWalk.com · German Language</span>
+    <h1>The Berlin Bakery Counter</h1>
+    <p>Someone behind the glass just said "Der Nächste, bitte!" and it is your turn. Walk the whole exchange once here, and the real counter stops being scary.</p>
+    <div class="bbc-steps" id="bbcSteps" aria-hidden="true"></div>
+  </div>
+  <div class="bbc-body" id="bbcBody"></div>
+</div>
+
+<script src="engine.js"></script>
+<script>
+(function () {
+  'use strict';
+  var E = window.BakeryEngine;
+
+  // Stages of a real counter order. Each has what the counter says + how you reply.
+  var STAGES = ['greeting', 'order', 'more', 'where', 'pay', 'done'];
+  var state = { stage: 0, order: {}, eatIn: null, payWith: null };
+
+  var stepsEl = document.getElementById('bbcSteps');
+  var bodyEl = document.getElementById('bbcBody');
+
+  function orderList() {
+    return Object.keys(state.order)
+      .map(function (k) { return { key: k, qty: state.order[k] }; })
+      .filter(function (o) { return o.qty > 0; });
+  }
+
+  function renderSteps() {
+    stepsEl.innerHTML = STAGES.slice(0, 5).map(function (_, i) {
+      var cls = 'bbc-step-dot';
+      if (i < state.stage) cls += ' done';
+      else if (i === state.stage) cls += ' active';
+      return '<span class="' + cls + '"></span>';
+    }).join('');
+  }
+
+  function saysBlock(de, en) {
+    return '<div class="bbc-says">' +
+      '<div class="avatar">🧑‍🍳</div>' +
+      '<div class="lines"><div class="de">' + de + '</div><div class="en">' + en + '</div></div>' +
+    '</div>';
+  }
+
+  function ticketBlock() {
+    var built = E.buildOrder(orderList());
+    if (!built.sentence) {
+      return '<div class="bbc-ticket empty"><div class="cap">Your order so far</div><div class="de">Nothing picked yet. Tap a few things below.</div></div>';
+    }
+    return '<div class="bbc-ticket"><div class="cap">Your order so far</div>' +
+      '<div class="de">' + built.sentence + '</div>' +
+      '<div class="en">' + built.english + '</div></div>';
+  }
+
+  function nextStage() { state.stage = Math.min(state.stage + 1, STAGES.length - 1); render(); }
+  function restart() { state = { stage: 0, order: {}, eatIn: null, payWith: null }; render(); }
+
+  function bump(key, delta) {
+    var cur = state.order[key] || 0;
+    var next = Math.max(0, Math.min(9, cur + delta));
+    if (next === 0) delete state.order[key]; else state.order[key] = next;
+    render();
+  }
+
+  function renderGreeting() {
+    return '<div class="bbc-stage-tag">Step 1 · Saying hello</div>' +
+      saysBlock('Hallo! / Guten Morgen!', 'Hello! / Good morning! Germans greet before they order, and it is expected, not optional.') +
+      '<div class="bbc-you-label">You say <span>"Hallo"</span> or, before noon, <span>"Guten Morgen"</span>. That is the whole first move.</div>' +
+      '<div class="bbc-note"><strong>Why it matters:</strong> skipping the greeting reads as rude in Germany. A quick "Hallo" sets a friendly tone before you fumble any German.</div>' +
+      '<div class="bbc-actions"><button class="bbc-btn primary" id="bbcNext">I said hello →</button></div>';
+  }
+
+  function renderOrder() {
+    var menu = E.ITEMS.map(function (it) {
+      var qty = state.order[it.key] || 0;
+      var picked = qty > 0 ? ' picked' : '';
+      var qtyCtrl = qty > 0
+        ? '<div class="bbc-qty"><button data-dec="' + it.key + '" aria-label="one fewer">&minus;</button><span class="n">' + qty + '</span><button data-inc="' + it.key + '" aria-label="one more">+</button></div>'
+        : '';
+      return '<div class="bbc-item' + picked + '" data-add="' + it.key + '" role="button" tabindex="0">' +
+        '<span class="ico">' + it.emoji + '</span>' +
+        '<span class="txt"><span class="name">' + it.singular.replace('belegtes ', 'belegtes&nbsp;') + '</span>' +
+        '<span class="say">say: ' + it.say + '</span>' +
+        '<span class="gloss">' + it.en + '</span>' + qtyCtrl + '</span>' +
+      '</div>';
+    }).join('');
+    var built = E.buildOrder(orderList());
+    return '<div class="bbc-stage-tag">Step 2 · Placing the order</div>' +
+      saysBlock('Der Nächste, bitte! Was darf es sein?', 'Next, please! What would you like? Open with "Ich hätte gern…" (I would like…).') +
+      ticketBlock() +
+      '<div class="bbc-you-label">Tap what you want. Each tap adds it to your German sentence:</div>' +
+      '<div class="bbc-menu">' + menu + '</div>' +
+      '<div class="bbc-actions"><button class="bbc-btn primary" id="bbcNext"' + (built.totalItems ? '' : ' disabled') + '>That is my order →</button></div>';
+  }
+
+  function renderMore() {
+    return '<div class="bbc-stage-tag">Step 3 · "Anything else?"</div>' +
+      saysBlock('Noch etwas? / Sonst noch etwas?', 'Anything else? They almost always ask this. Two words close it.') +
+      ticketBlock() +
+      '<div class="bbc-you-label">Answer:</div>' +
+      '<div class="bbc-options">' +
+        '<button class="bbc-option" data-more="add"><div class="de">Ja, außerdem…</div><div class="say">ya, OWS-er-dem</div><div class="en">Yes, also… (go back and add more)</div></button>' +
+        '<button class="bbc-option" data-more="done"><div class="de">Nein, danke. Das ist alles.</div><div class="say">nine, DAHN-kuh. das ist AL-es</div><div class="en">No thanks. That is everything.</div></button>' +
+      '</div>';
+  }
+
+  function renderWhere() {
+    var opt = function (val, de, say, en) {
+      var sel = state.eatIn === val ? ' picked-opt' : '';
+      return '<button class="bbc-option' + sel + '" data-where="' + val + '"><div class="de">' + de + '</div><div class="say">' + say + '</div><div class="en">' + en + '</div></button>';
+    };
+    return '<div class="bbc-stage-tag">Step 4 · Eat in or take away</div>' +
+      saysBlock('Zum Hieressen oder zum Mitnehmen?', 'To eat here or to take away? A standard question the moment there are tables.') +
+      '<div class="bbc-you-label">Pick one:</div>' +
+      '<div class="bbc-options">' +
+        opt('in', 'Zum Hieressen, bitte.', 'tsoom HEER-ess-un', 'To eat in, please.') +
+        opt('out', 'Zum Mitnehmen, bitte.', 'tsoom MIT-nay-mun', 'To take away, please.') +
+      '</div>' +
+      '<div class="bbc-note"><strong>Small catch:</strong> take-away often means a paper bag and, in some cafés, a slightly different price. Eat-in usually gets you a plate.</div>';
+  }
+
+  function renderPay() {
+    var opt = function (val, de, say, en) {
+      var sel = state.payWith === val ? ' picked-opt' : '';
+      return '<button class="bbc-option' + sel + '" data-pay="' + val + '"><div class="de">' + de + '</div><div class="say">' + say + '</div><div class="en">' + en + '</div></button>';
+    };
+    return '<div class="bbc-stage-tag">Step 5 · Paying</div>' +
+      saysBlock('Das macht 4,80. Bar oder Karte?', 'That is 4.80. Cash or card? Small bakeries may still be cash-only, so check for a card sign first.') +
+      '<div class="bbc-you-label">Tell them how you pay:</div>' +
+      '<div class="bbc-options">' +
+        opt('karte', 'Mit Karte, bitte.', 'mit KAR-tuh', 'By card, please.') +
+        opt('bar', 'Bar, bitte.', 'bar', 'Cash, please.') +
+      '</div>' +
+      '<div class="bbc-actions"><button class="bbc-btn primary" id="bbcNext"' + (state.payWith ? '' : ' disabled') + '>Finish the order →</button></div>';
+  }
+
+  function renderDone() {
+    var built = E.buildOrder(orderList());
+    var where = state.eatIn === 'in'
+      ? { de: 'Zum Hieressen, bitte.', say: 'tsoom HEER-ess-un' }
+      : { de: 'Zum Mitnehmen, bitte.', say: 'tsoom MIT-nay-mun' };
+    var pay = state.payWith === 'bar'
+      ? { de: 'Bar, bitte.', say: 'bar' }
+      : { de: 'Mit Karte, bitte.', say: 'mit KAR-tuh' };
+    function row(who, youClass, de, say) {
+      return '<div class="row"><div class="who' + youClass + '">' + who + '</div><div class="de">' + de + '</div>' +
+        (say ? '<div class="say">' + say + '</div>' : '') + '</div>';
+    }
+    var script =
+      row('Counter', '', 'Hallo!', '') +
+      row('You', ' you', 'Hallo. ' + (built.sentence || 'Ich hätte gern eine Schrippe, bitte.'),
+        'ish HET-uh gairn…') +
+      row('Counter', '', 'Noch etwas?', '') +
+      row('You', ' you', 'Nein, danke. Das ist alles.', 'nine, DAHN-kuh. das ist AL-es') +
+      row('Counter', '', 'Zum Hieressen oder zum Mitnehmen?', '') +
+      row('You', ' you', where.de, where.say) +
+      row('Counter', '', 'Bar oder Karte?', '') +
+      row('You', ' you', pay.de, pay.say) +
+      row('You', ' you', 'Danke, tschüss!', 'DAHN-kuh, chuess');
+    return '<div class="bbc-final">' +
+      '<div class="win">🥐</div>' +
+      '<h2>That is the whole order, start to finish.</h2>' +
+      '<p class="sub">Read it aloud once now. At the real counter you will only need the first line. The rest is just yes, where, and how you pay.</p>' +
+      '<div class="bbc-script">' + script + '</div>' +
+      '<div class="bbc-actions" style="justify-content:center"><button class="bbc-btn ghost" id="bbcRestart">Practise another order</button></div>' +
+      '</div>' +
+      '<div class="bbc-note"><strong>One honest tip:</strong> if the German deserts you mid-sentence, just point and say the number. "Einmal das, bitte" (EYE-mal das, one of those, please) gets you served everywhere in Berlin.</div>';
+  }
+
+  function render() {
+    renderSteps();
+    var stage = STAGES[state.stage];
+    var html = '';
+    if (stage === 'greeting') html = renderGreeting();
+    else if (stage === 'order') html = renderOrder();
+    else if (stage === 'more') html = renderMore();
+    else if (stage === 'where') html = renderWhere();
+    else if (stage === 'pay') html = renderPay();
+    else html = renderDone();
+    bodyEl.innerHTML = html;
+    wire();
+    if (window.bwRequestResize) window.bwRequestResize();
+  }
+
+  function wire() {
+    var next = document.getElementById('bbcNext');
+    if (next) next.addEventListener('click', nextStage);
+    var restartBtn = document.getElementById('bbcRestart');
+    if (restartBtn) restartBtn.addEventListener('click', restart);
+
+    bodyEl.querySelectorAll('[data-add]').forEach(function (b) {
+      b.addEventListener('click', function (ev) {
+        if (ev.target.closest('.bbc-qty')) return; // handled by +/- below
+        var key = b.getAttribute('data-add');
+        if (!state.order[key]) bump(key, 1);
+      });
+    });
+    bodyEl.querySelectorAll('[data-inc]').forEach(function (b) {
+      b.addEventListener('click', function (ev) { ev.stopPropagation(); bump(b.getAttribute('data-inc'), 1); });
+    });
+    bodyEl.querySelectorAll('[data-dec]').forEach(function (b) {
+      b.addEventListener('click', function (ev) { ev.stopPropagation(); bump(b.getAttribute('data-dec'), -1); });
+    });
+    bodyEl.querySelectorAll('[data-more]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        if (b.getAttribute('data-more') === 'add') { state.stage = 1; render(); }
+        else nextStage();
+      });
+    });
+    bodyEl.querySelectorAll('[data-where]').forEach(function (b) {
+      b.addEventListener('click', function () { state.eatIn = b.getAttribute('data-where'); nextStage(); });
+    });
+    bodyEl.querySelectorAll('[data-pay]').forEach(function (b) {
+      b.addEventListener('click', function () { state.payWith = b.getAttribute('data-pay'); render(); });
+    });
+  }
+
+  // Optional self-test surface for QA (?selftest=1).
+  try {
+    if (new URLSearchParams(location.search).get('selftest') === '1') {
+      var r = E.selfTest();
+      var bad = r.filter(function (x) { return !x.ok; });
+      var pre = document.createElement('pre');
+      pre.style.cssText = 'font-size:11px;padding:10px;background:#eef;white-space:pre-wrap';
+      pre.textContent = (bad.length ? 'FAIL ' + bad.length : 'PASS ' + r.length) + '\n' + JSON.stringify(r, null, 1);
+      document.body.appendChild(pre);
+    }
+  } catch (e) { /* noop */ }
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
