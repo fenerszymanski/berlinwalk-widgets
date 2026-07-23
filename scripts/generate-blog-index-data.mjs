@@ -191,11 +191,13 @@ const TOPICS = [
 const HERO_SLUGS = {
   lead: 'leaving-berlin-by-train',
   secondary: [
+    'tropical-islands-from-berlin',
+    'leipzig-day-trip-from-berlin',
+    'gemaldegalerie-berlin',
     'berlin-wall-trail',
-    'stolpersteine-berlin',
     'is-berlin-walkable',
+    'stolpersteine-berlin',
     'spreewald-day-trip-from-berlin',
-    'where-to-watch-2026-world-cup-in-berlin',
     'football-match-in-berlin',
     'berliner-unterwelten',
     'berlin-ubahn-etiquette',
@@ -283,6 +285,9 @@ const REQUIRED_SLUGS = [
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
   'leaving-berlin-by-train',
+  'tropical-islands-from-berlin',
+  'leipzig-day-trip-from-berlin',
+  'gemaldegalerie-berlin',
   'berlin-wall-trail',
   'stolpersteine-berlin',
   'is-berlin-walkable',
