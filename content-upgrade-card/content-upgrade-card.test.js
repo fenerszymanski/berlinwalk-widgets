@@ -133,11 +133,21 @@ test('component keeps one explicit bundled disclosure and no checkbox', () => {
   assert.match(elementSource, /consent:\s*true/);
   assert.doesNotMatch(elementSource, /type=["']checkbox["']/i);
   assert.doesNotMatch(elementSource, /newsletterConsent/);
-  assert.match(elementSource, /Email me the ticket card/);
+  assert.match(elementSource, /Email me the pocket card/);
   assert.match(elementSource, /https:\/\/app\.berlinwalk\.com\/api\/download-lead/);
   assert.match(elementSource, /url\.searchParams\.set\('action', 'submit'\)/);
   assert.match(elementSource, /Check your inbox\./);
-  assert.match(elementSource, /Confirm your email to open the ticket card\./);
+  assert.match(elementSource, /your pocket card opens/);
+});
+
+test('component shows a locked card preview that teases the gated value', () => {
+  assert.match(elementSource, /pocket-card-preview\.jpg/);
+  assert.match(elementSource, /loading="lazy"/);
+  assert.match(elementSource, /unlock when you confirm/);
+  // The preview must resolve next to the served script so it works in the
+  // standalone preview and when injected from GitHub Pages onto berlinwalk.com.
+  assert.match(elementSource, /document\.currentScript/);
+  assert.match(elementSource, /alt="Preview of the Berlin Transport Ticket Pocket Card[^"]+"/);
 });
 
 test('component is compact, accessible and has no inner scrolling surface', () => {

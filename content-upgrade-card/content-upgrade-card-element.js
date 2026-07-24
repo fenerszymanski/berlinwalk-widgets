@@ -9,6 +9,15 @@
   var CONSENT_TEXT = 'By requesting this card, I agree to receive the Berlin Transport Ticket Pocket Card and occasional BerlinWalk emails about Berlin travel tips, new guides, products and walking tours. I can unsubscribe at any time. Read the Privacy Policy.';
   var PRIVACY_URL = 'https://www.berlinwalk.com/privacy-policy';
 
+  // Resolve the locked card preview relative to this script so it loads both in
+  // the standalone/local preview and when the script is served from GitHub Pages
+  // and injected into a berlinwalk.com page.
+  var SCRIPT_SRC = (document.currentScript && document.currentScript.src) || '';
+  var ASSET_BASE = SCRIPT_SRC
+    ? SCRIPT_SRC.replace(/[^/]*$/, '')
+    : 'https://fenerszymanski.github.io/berlinwalk-widgets/content-upgrade-card/';
+  var PREVIEW_URL = ASSET_BASE + 'pocket-card-preview.jpg';
+
   if (!window.customElements || window.customElements.get(TAG)) return;
 
   function cleanText(value, max) {
@@ -112,14 +121,18 @@
           .bar{align-items:center;background:#123d18;border-radius:15px 15px 0 0;color:#fff;display:flex;gap:10px;padding:10px 16px}
           .bar-icon{font-size:21px;line-height:1}
           .bar-copy{color:#ffe600;font-size:11px;font-weight:900;letter-spacing:.12em;line-height:1.2;text-transform:uppercase}
-          .body{display:grid;gap:16px;grid-template-columns:minmax(0,1fr) minmax(250px,.9fr);padding:18px}
+          .body{display:grid;gap:18px;grid-template-columns:minmax(210px,.82fr) minmax(0,1.08fr);padding:18px}
+          .preview{margin:0;min-width:0}
+          .preview img{background:#eef3ea;border:1px solid #cddfc6;border-radius:12px;box-shadow:0 10px 22px rgba(18,61,24,.14);display:block;width:100%;height:auto}
+          .lock{align-items:baseline;color:#1b5e20;display:flex;font-size:11px;font-weight:800;gap:5px;line-height:1.4;margin:9px 2px 0}
+          .lock-icon{font-size:12px;line-height:1}
           .offer{min-width:0}
           .eyebrow{color:#1b5e20;font-size:11px;font-weight:900;letter-spacing:.08em;margin:0 0 5px;text-transform:uppercase}
           h2{color:#172319;font-size:22px;font-weight:900;letter-spacing:-.02em;line-height:1.12;margin:0}
           .description{color:#48564a;font-size:13px;line-height:1.55;margin:8px 0 0}
           .contents{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 0;padding:0}
           .contents li{background:#f2f7ef;border:1px solid #d5e4cf;border-radius:999px;color:#24472a;font-size:11px;font-weight:800;line-height:1.25;list-style:none;padding:6px 9px}
-          form{background:#f8faf6;border:1px solid #dbe7d6;border-radius:12px;display:flex;flex-direction:column;gap:9px;min-width:0;padding:13px}
+          form{background:#f8faf6;border:1px solid #dbe7d6;border-radius:12px;display:flex;flex-direction:column;gap:9px;margin:14px 0 0;min-width:0;padding:13px}
           label{color:#243127;font-size:12px;font-weight:900;line-height:1.3}
           input[type="email"]{appearance:none;background:#fff;border:1.5px solid #9fbb98;border-radius:9px;color:#172319;font:600 16px/1.2 Montserrat,Arial,sans-serif;min-height:46px;min-width:0;padding:0 12px;width:100%}
           input[type="email"]::placeholder{color:#748076;font-weight:500}
@@ -131,37 +144,43 @@
           button:hover,button:active,button:visited{background:#ffe600;color:#123d18!important}
           button:focus-visible{color:#123d18!important;outline:3px solid #123d18;outline-offset:2px}
           button[disabled]{cursor:wait;opacity:.72}
+          .reassure{color:#5a6a5d;font-size:10.5px;line-height:1.4;margin:0;text-align:center}
           .status{color:#8b2525;font-size:12px;font-weight:700;line-height:1.4;margin:0;min-height:0}
-          .success{align-items:flex-start;background:#f2f7ef;border:1px solid #bed4b7;border-radius:12px;display:none;flex-direction:column;gap:5px;justify-content:center;min-height:100%;padding:16px}
+          .success{align-items:flex-start;background:#f2f7ef;border:1px solid #bed4b7;border-radius:12px;display:none;flex-direction:column;gap:5px;justify-content:center;margin:14px 0 0;padding:16px}
           .success[aria-hidden="false"]{display:flex}
           .success strong{color:#123d18;font-size:17px;line-height:1.2}
           .success p{color:#435346;font-size:12.5px;line-height:1.5;margin:0}
           .honeypot{height:1px;left:-10000px;overflow:hidden;position:absolute;top:auto;width:1px}
-          @media(max-width:720px){:host{margin:24px 0}.body{grid-template-columns:1fr;padding:15px}.bar{padding:9px 14px}h2{font-size:20px}.contents{margin-top:10px}form{padding:12px}}
+          @media(max-width:720px){:host{margin:24px 0}.body{grid-template-columns:1fr;padding:15px}.bar{padding:9px 14px}h2{font-size:20px}.preview{max-width:250px;margin-inline:auto}.lock{justify-content:center;text-align:center}.contents{margin-top:10px}form{padding:12px}}
           @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
         </style>
         <section class="card" role="region" aria-labelledby="bw-content-upgrade-title">
           <div class="bar"><span class="bar-icon" aria-hidden="true">🎟️</span><span class="bar-copy">Free pocket card</span></div>
           <div class="body">
+            <figure class="preview">
+              <img src="${PREVIEW_URL}" width="640" height="699" loading="lazy" decoding="async" alt="Preview of the Berlin Transport Ticket Pocket Card, with the ticket prices, validation steps and the four mistakes hidden until you confirm.">
+              <figcaption class="lock"><span class="lock-icon" aria-hidden="true">🔒</span><span>Prices, validation and the 4 fine traps unlock when you confirm.</span></figcaption>
+            </figure>
             <div class="offer">
-              <p class="eyebrow">Berlin transport, simplified</p>
-              <h2 id="bw-content-upgrade-title">Berlin Transport Ticket Pocket Card</h2>
-              <p class="description">Keep Berlin&rsquo;s AB/ABC zones, validation rules and the ticket mistakes that lead to fines on one phone-sized card.</p>
+              <p class="eyebrow">Keep it on your phone</p>
+              <h2 id="bw-content-upgrade-title">The Berlin ticket card I keep on my phone</h2>
+              <p class="description">One screenshot and you have the zones, the right price and how to validate, right there at the machine. It is the card I would keep in my own pocket to dodge the 60 euro fine.</p>
               <ul class="contents" aria-label="Included on the card">
-                <li>AB or ABC?</li><li>Validate or activate?</li><li>Four costly mistakes</li>
+                <li>All ticket prices</li><li>Validate the right way</li><li>The 4 fine traps</li>
               </ul>
-            </div>
-            <form novalidate>
-              <label for="bw-content-upgrade-email">Where should I send it?</label>
-              <input id="bw-content-upgrade-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="none" spellcheck="false" placeholder="you@example.com" required aria-describedby="bw-content-upgrade-disclosure bw-content-upgrade-status">
-              <div class="honeypot" hidden aria-hidden="true"><label>Website<input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
-              <p class="disclosure" id="bw-content-upgrade-disclosure">By requesting this card, I agree to receive the Berlin Transport Ticket Pocket Card and occasional BerlinWalk emails about Berlin travel tips, new guides, products and walking tours. I can unsubscribe at any time. <a href="${PRIVACY_URL}" target="_top">Read the Privacy Policy.</a></p>
-              <button type="submit">Email me the ticket card</button>
-              <p class="status" id="bw-content-upgrade-status" role="status" aria-live="polite"></p>
-            </form>
-            <div class="success" aria-hidden="true" role="status" aria-live="polite">
-              <strong>Check your inbox.</strong>
-              <p>Confirm your email to open the ticket card.</p>
+              <form novalidate>
+                <label for="bw-content-upgrade-email">Where should I send it?</label>
+                <input id="bw-content-upgrade-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="none" spellcheck="false" placeholder="you@example.com" required aria-describedby="bw-content-upgrade-disclosure bw-content-upgrade-status">
+                <div class="honeypot" hidden aria-hidden="true"><label>Website<input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
+                <p class="disclosure" id="bw-content-upgrade-disclosure">By requesting this card, I agree to receive the Berlin Transport Ticket Pocket Card and occasional BerlinWalk emails about Berlin travel tips, new guides, products and walking tours. I can unsubscribe at any time. <a href="${PRIVACY_URL}" target="_top">Read the Privacy Policy.</a></p>
+                <button type="submit">Email me the pocket card</button>
+                <p class="reassure">One tap in your inbox opens the card. It arrives within a minute.</p>
+                <p class="status" id="bw-content-upgrade-status" role="status" aria-live="polite"></p>
+              </form>
+              <div class="success" aria-hidden="true" role="status" aria-live="polite">
+                <strong>Check your inbox.</strong>
+                <p>Tap the confirm link and your pocket card opens. Give it about a minute to arrive.</p>
+              </div>
             </div>
           </div>
         </section>`;
