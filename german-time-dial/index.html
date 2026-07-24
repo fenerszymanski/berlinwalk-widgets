@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>German Time Dial: Turn the Clock, See How Berlin Says It</title>
+<meta name="description" content="Move the minute hand and read the time the way Berlin says it out loud. See where halb, viertel and dreiviertel jump you into the next hour, and what the same time looks like on a 24-hour board." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23123D18'/%3E%3Ccircle cx='32' cy='32' r='21' fill='%23FAFAF5'/%3E%3Ccircle cx='32' cy='32' r='21' fill='none' stroke='%237CB342' stroke-width='2.5'/%3E%3Crect x='30.6' y='17' width='2.8' height='16' rx='1.4' fill='%23212121'/%3E%3Crect x='32' y='30.6' width='14' height='2.8' rx='1.4' fill='%23C0392B'/%3E%3Ccircle cx='32' cy='32' r='3' fill='%23FFE600'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root {
+    --green: #1B5E20;
+    --green-dark: #123D18;
+    --green-mid: #2E7D32;
+    --lime: #7CB342;
+    --light: #C5E1A5;
+    --yellow: #FFE600;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --line: #E3E8DC;
+    --panel: #F4F7F0;
+    --muted: #5A6152;
+    --red: #C0392B;
+    --board: #10160F;
+    --board-line: #2B3A29;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    padding: 14px 14px 26px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .gt { max-width: 760px; margin: 0 auto; }
+
+  /* ---------- Header ---------- */
+  .gt-head {
+    background: linear-gradient(150deg, var(--green-dark) 0%, var(--green) 60%, var(--green-mid) 100%);
+    border-radius: 18px 18px 0 0;
+    color: #fff;
+    padding: 19px 20px 21px;
+    position: relative;
+    overflow: hidden;
+  }
+  .gt-head::after {
+    content: ""; position: absolute; right: -34px; top: -40px;
+    width: 158px; height: 158px; border-radius: 50%;
+    background: radial-gradient(circle at 50% 50%, rgba(124,179,66,0.30), transparent 66%);
+  }
+  .gt-kicker {
+    display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em;
+    color: var(--green-dark); background: var(--yellow); border-radius: 999px;
+    padding: 4px 11px; margin-bottom: 11px; text-transform: uppercase;
+  }
+  .gt-head h1 { font-size: 21px; font-weight: 800; line-height: 1.24; max-width: 25ch; position: relative; z-index: 1; }
+  .gt-head p { font-size: 12.5px; line-height: 1.55; margin-top: 9px; max-width: 54ch; color: #E8F5E9; position: relative; z-index: 1; }
+
+  /* ---------- Shell ---------- */
+  .gt-body {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-top: none;
+    border-radius: 0 0 18px 18px;
+    padding: 16px 16px 18px;
+  }
+  .gt-stage { display: grid; grid-template-columns: minmax(0,260px) minmax(0,1fr); gap: 16px; align-items: start; }
+
+  /* ---------- Dial ---------- */
+  .dialwrap { position: relative; }
+  .dial {
+    width: 100%; display: block; touch-action: none; cursor: grab;
+    border-radius: 16px; background: linear-gradient(160deg, #16210F 0%, #0E170D 100%);
+    box-shadow: inset 0 0 0 1px rgba(197,225,165,0.16);
+  }
+  .dial:active { cursor: grabbing; }
+  .dial:focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; }
+  .hint {
+    margin-top: 8px; font-size: 11px; line-height: 1.5; color: var(--muted); text-align: center;
+  }
+  .hint b { color: var(--green-dark); }
+
+  .nudge { display: flex; gap: 6px; margin-top: 9px; }
+  .nudge button {
+    flex: 1 1 0; font-family: inherit; font-size: 11.5px; font-weight: 700;
+    background: var(--panel); color: var(--green-dark); border: 1px solid var(--line);
+    border-radius: 9px; padding: 9px 4px; cursor: pointer; min-height: 44px;
+  }
+  .nudge button:hover { background: var(--light); border-color: var(--lime); }
+  .nudge button:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+
+  /* ---------- Board readout ---------- */
+  .board {
+    background: var(--board); border-radius: 14px; padding: 14px 15px 15px;
+    border: 1px solid var(--board-line);
+  }
+  .board-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+  .board-label { font-size: 9.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #7E9478; }
+  .board-24 {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 700;
+    font-size: 30px; color: var(--yellow); letter-spacing: 0.02em; line-height: 1;
+  }
+  .board-12 {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 500;
+    color: #9DB596; white-space: nowrap;
+  }
+  .board-said {
+    margin-top: 13px; padding-top: 12px; border-top: 1px dashed var(--board-line);
+  }
+  .board-said .said {
+    font-size: 25px; font-weight: 800; color: #fff; line-height: 1.18; letter-spacing: -0.01em;
+  }
+  .board-said .spoken {
+    margin-top: 6px; font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 11.5px; color: var(--light);
+  }
+
+  /* ---------- Alt / east forms ---------- */
+  .alts { margin-top: 11px; display: grid; gap: 7px; }
+  .alt {
+    display: grid; grid-template-columns: auto minmax(0,1fr); gap: 9px; align-items: start;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 11px; padding: 9px 11px;
+  }
+  .alt-tag {
+    font-size: 9px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+    background: var(--green-dark); color: #fff; border-radius: 5px; padding: 4px 6px; white-space: nowrap;
+  }
+  .alt.east .alt-tag { background: var(--lime); color: var(--green-dark); }
+  .alt-text { font-size: 12.5px; line-height: 1.5; }
+  .alt-text b { color: var(--green-dark); }
+  .alt-note { display: block; color: var(--muted); font-size: 11.5px; margin-top: 2px; }
+
+  /* ---------- Trap strip ---------- */
+  .trap {
+    margin-top: 11px; background: var(--yellow); border-radius: 11px;
+    padding: 10px 12px; display: none;
+  }
+  .trap.on { display: block; }
+  .trap-h {
+    font-size: 9.5px; font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase;
+    color: var(--green-dark); margin-bottom: 3px;
+  }
+  .trap-t { font-size: 12.5px; line-height: 1.5; color: #212121; font-weight: 600; }
+
+  /* ---------- Presets ---------- */
+  .presets { margin-top: 16px; border-top: 1px solid var(--line); padding-top: 14px; }
+  .presets h2 { font-size: 11px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green-dark); margin-bottom: 9px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 7px; }
+  .chip {
+    font-family: inherit; font-size: 12px; font-weight: 700; cursor: pointer;
+    background: #fff; color: var(--green-dark); border: 1.5px solid var(--line);
+    border-radius: 999px; padding: 9px 13px; min-height: 44px;
+  }
+  .chip:hover { border-color: var(--lime); background: var(--panel); }
+  .chip.on { background: var(--green-dark); border-color: var(--green-dark); color: #fff; }
+  .chip:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+  .chip .cw { display: block; font-size: 9.5px; font-weight: 600; letter-spacing: 0.06em; opacity: 0.72; margin-top: 1px; }
+
+  /* ---------- Daypart switch ---------- */
+  .daypart { display: flex; gap: 6px; margin-top: 14px; background: var(--panel); border: 1px solid var(--line); border-radius: 11px; padding: 4px; }
+  .daypart button {
+    flex: 1 1 0; font-family: inherit; font-size: 11.5px; font-weight: 700; cursor: pointer;
+    background: transparent; border: none; border-radius: 8px; padding: 9px 6px; color: var(--muted); min-height: 42px;
+  }
+  .daypart button.on { background: var(--green-dark); color: #fff; }
+  .daypart button:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+
+  .footnote {
+    margin-top: 15px; font-size: 11.5px; line-height: 1.6; color: var(--muted);
+    border-top: 1px solid var(--line); padding-top: 12px;
+  }
+  .footnote b { color: var(--green-dark); }
+
+  @media (max-width: 620px) {
+    body { padding: 10px 10px 22px; }
+    .gt-stage { grid-template-columns: 1fr; gap: 14px; }
+    .dialwrap { max-width: 300px; margin: 0 auto; width: 100%; }
+    .gt-head h1 { font-size: 19px; }
+    .board-24 { font-size: 27px; }
+    .board-said .said { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+<div class="gt">
+  <div class="gt-head">
+    <span class="gt-kicker">BerlinWalk.com &bull; German Language</span>
+    <h1>Turn the dial, hear how Berlin says the time</h1>
+    <p>Move the minute hand. The board shows the time the way it is written in Berlin, and the line below shows what somebody would actually say to you.</p>
+  </div>
+
+  <div class="gt-body">
+    <div class="gt-stage">
+      <div class="dialwrap">
+        <svg class="dial" id="dial" viewBox="0 0 240 240" role="slider" tabindex="0"
+             aria-label="Clock dial. Drag the minute hand, or use the arrow keys, to change the time."
+             aria-valuemin="0" aria-valuemax="1439" aria-valuenow="450" aria-valuetext="7:30, halb acht">
+          <circle cx="120" cy="120" r="112" fill="none" stroke="#2B3A29" stroke-width="1.5"/>
+          <circle cx="120" cy="120" r="103" fill="none" stroke="#3C5138" stroke-width="1"/>
+          <g id="ticks"></g>
+          <g id="quarters"></g>
+          <g id="numerals"></g>
+          <line id="hourHand" x1="120" y1="120" x2="120" y2="64" stroke="#FAFAF5" stroke-width="7" stroke-linecap="round"/>
+          <line id="minHand" x1="120" y1="120" x2="120" y2="34" stroke="#C0392B" stroke-width="4.5" stroke-linecap="round"/>
+          <circle id="knob" cx="120" cy="34" r="9.5" fill="#FFE600" stroke="#123D18" stroke-width="2"/>
+          <circle cx="120" cy="120" r="6.5" fill="#FAFAF5"/>
+          <circle cx="120" cy="120" r="2.5" fill="#123D18"/>
+        </svg>
+        <p class="hint">Drag the <b>yellow knob</b> around the dial. Yellow marks are where German jumps to the next hour.</p>
+        <div class="nudge">
+          <button type="button" id="m5back" aria-label="Five minutes earlier">&minus;5 min</button>
+          <button type="button" id="m5fwd" aria-label="Five minutes later">+5 min</button>
+          <button type="button" id="h1" aria-label="One hour later">+1 h</button>
+        </div>
+      </div>
+
+      <div class="readout">
+        <div class="board">
+          <div class="board-top">
+            <div>
+              <div class="board-label">On a board or a door</div>
+              <div class="board-24" id="t24">19:30</div>
+            </div>
+            <div class="board-12" id="t12">7:30&nbsp;pm</div>
+          </div>
+          <div class="board-said">
+            <div class="board-label">What you hear</div>
+            <div class="said" id="said">halb acht</div>
+            <div class="spoken" id="spoken">neunzehn Uhr drei&szlig;ig</div>
+          </div>
+        </div>
+
+        <div class="trap" id="trap">
+          <div class="trap-h">Careful</div>
+          <div class="trap-t" id="trapText"></div>
+        </div>
+
+        <div class="alts" id="alts"></div>
+
+        <div class="daypart" role="group" aria-label="Morning or evening">
+          <button type="button" id="dpAm">Morning &middot; 7:30</button>
+          <button type="button" id="dpPm" class="on">Evening &middot; 19:30</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="presets">
+      <h2>The ones that catch people out</h2>
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <p class="footnote"><b>Written German time is a 24-hour clock.</b> A door that says <b>bis 18 Uhr</b> closes at 6 pm, and a ticket for <b>20:15</b> is a quarter past eight in the evening. Spoken German switches back to twelve, which is where <b>halb</b> starts costing people an hour.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var HOUR_W = ['null', 'ein', 'zwei', 'drei', 'vier', 'fünf', 'sechs', 'sieben', 'acht', 'neun', 'zehn',
+                'elf', 'zwölf', 'dreizehn', 'vierzehn', 'fünfzehn', 'sechzehn', 'siebzehn', 'achtzehn',
+                'neunzehn', 'zwanzig', 'einundzwanzig', 'zweiundzwanzig', 'dreiundzwanzig'];
+
+  var MIN_W = {
+    0: '', 5: 'fünf', 10: 'zehn', 15: 'fünfzehn', 20: 'zwanzig', 25: 'fünfundzwanzig',
+    30: 'dreißig', 35: 'fünfunddreißig', 40: 'vierzig', 45: 'fünfundvierzig',
+    50: 'fünfzig', 55: 'fünfundfünfzig'
+  };
+
+  // Colloquial 12-hour clock names. cur = this hour's word, nxt = the coming hour's word.
+  var FORMS = {
+    0:  { main: '{cur} Uhr',            also: 'Punkt {cur}',                 trap: 0 },
+    5:  { main: 'fünf nach {cur}',                                      trap: 0 },
+    10: { main: 'zehn nach {cur}',                                           trap: 0 },
+    15: { main: 'viertel nach {cur}',   east: 'viertel {nxt}',               trap: 1 },
+    20: { main: 'zwanzig nach {cur}',   east: 'zehn vor halb {nxt}',         trap: 1 },
+    25: { main: 'fünf vor halb {nxt}', also: 'fünfundzwanzig nach {cur}', trap: 2 },
+    30: { main: 'halb {nxt}',                                                trap: 2 },
+    35: { main: 'fünf nach halb {nxt}', also: 'fünfundzwanzig vor {nxt}', trap: 2 },
+    40: { main: 'zwanzig vor {nxt}',    east: 'zehn nach halb {nxt}',        trap: 1 },
+    45: { main: 'viertel vor {nxt}',    east: 'dreiviertel {nxt}',           trap: 1 },
+    50: { main: 'zehn vor {nxt}',                                            trap: 0 },
+    55: { main: 'fünf vor {nxt}',                                       trap: 0 }
+  };
+
+  var PRESETS = [
+    { label: 'halb acht',           en: '= 19:30', h: 19, m: 30 },
+    { label: 'halb eins',           en: '= 12:30', h: 12, m: 30 },
+    { label: 'dreiviertel neun',    en: '= 20:45', h: 20, m: 45 },
+    { label: 'viertel neun',        en: '= 20:15', h: 20, m: 15 },
+    { label: 'fünf vor halb sechs', en: '= 17:25', h: 17, m: 25 },
+    { label: 'zehn vor halb acht',  en: '= 19:20', h: 19, m: 20 }
+  ];
+
+  var dial = document.getElementById('dial');
+  var hourHand = document.getElementById('hourHand');
+  var minHand = document.getElementById('minHand');
+  var knob = document.getElementById('knob');
+  var t24 = document.getElementById('t24');
+  var t12 = document.getElementById('t12');
+  var saidEl = document.getElementById('said');
+  var spokenEl = document.getElementById('spoken');
+  var trapEl = document.getElementById('trap');
+  var trapText = document.getElementById('trapText');
+  var altsEl = document.getElementById('alts');
+  var chipsEl = document.getElementById('chips');
+  var dpAm = document.getElementById('dpAm');
+  var dpPm = document.getElementById('dpPm');
+
+  var hour24 = 19;   // 0..23
+  var minute = 30;   // multiples of 5
+
+  // ---------- dial furniture ----------
+  function polar(deg, r) {
+    var rad = (deg - 90) * Math.PI / 180;
+    return { x: 120 + r * Math.cos(rad), y: 120 + r * Math.sin(rad) };
+  }
+
+  (function buildDial() {
+    var ticks = document.getElementById('ticks');
+    var quarters = document.getElementById('quarters');
+    var numerals = document.getElementById('numerals');
+    var i, a, p1, p2, el;
+
+    for (i = 0; i < 60; i++) {
+      a = i * 6;
+      var isHour = i % 5 === 0;
+      p1 = polar(a, isHour ? 94 : 99);
+      p2 = polar(a, 103);
+      el = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      el.setAttribute('x1', p1.x.toFixed(1)); el.setAttribute('y1', p1.y.toFixed(1));
+      el.setAttribute('x2', p2.x.toFixed(1)); el.setAttribute('y2', p2.y.toFixed(1));
+      el.setAttribute('stroke', isHour ? '#C5E1A5' : '#4A6145');
+      el.setAttribute('stroke-width', isHour ? '2.4' : '1');
+      ticks.appendChild(el);
+    }
+
+    // Yellow markers, on the outer ring, where German counts into the next hour.
+    [15, 20, 30, 40, 45].forEach(function (m) {
+      var pt = polar(m * 6, 107.5);
+      var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      c.setAttribute('cx', pt.x.toFixed(1)); c.setAttribute('cy', pt.y.toFixed(1));
+      c.setAttribute('r', m === 30 ? '4' : '2.8');
+      c.setAttribute('fill', '#FFE600');
+      c.setAttribute('opacity', m === 30 ? '1' : '0.72');
+      quarters.appendChild(c);
+    });
+
+    for (i = 1; i <= 12; i++) {
+      var pt = polar(i * 30, 62);
+      var tx = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      tx.setAttribute('x', pt.x.toFixed(1));
+      tx.setAttribute('y', (pt.y + 5).toFixed(1));
+      tx.setAttribute('text-anchor', 'middle');
+      tx.setAttribute('fill', '#FAFAF5');
+      tx.setAttribute('font-size', '15');
+      tx.setAttribute('font-weight', '700');
+      tx.setAttribute('font-family', "'IBM Plex Mono', monospace");
+      tx.textContent = String(i);
+      numerals.appendChild(tx);
+    }
+  })();
+
+  // ---------- language ----------
+  function h12(h) { var v = h % 12; return v === 0 ? 12 : v; }
+
+  function phrase(tpl, h) {
+    var cur = HOUR_W[h12(h)];
+    var nxt = HOUR_W[h12(h + 1)];
+    // "ein Uhr" is right for 1:00, but the bare colloquial hour name is "eins".
+    return tpl
+      .replace('{cur} Uhr', cur + ' Uhr')
+      .replace('{cur}', cur === 'ein' ? 'eins' : cur)
+      .replace('{nxt}', nxt === 'ein' ? 'eins' : nxt);
+  }
+
+  function official(h, m) {
+    var w = MIN_W[m];
+    return HOUR_W[h] + ' Uhr' + (w ? ' ' + w : '');
+  }
+
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+
+  function ampm(h, m) {
+    var suffix = h < 12 ? 'am' : 'pm';
+    return h12(h) + ':' + pad(m) + ' ' + suffix;
+  }
+
+  // ---------- render ----------
+  function render() {
+    var f = FORMS[minute];
+    var main = phrase(f.main, hour24);
+
+    t24.textContent = pad(hour24) + ':' + pad(minute);
+    t12.innerHTML = ampm(hour24, minute);
+    saidEl.textContent = main;
+    spokenEl.textContent = official(hour24, minute);
+
+    // Rotate hands. The hour hand creeps forward with the minutes, like a real clock.
+    var minDeg = minute * 6;
+    var hourDeg = (hour24 % 12) * 30 + minute * 0.5;
+    minHand.setAttribute('transform', 'rotate(' + minDeg + ' 120 120)');
+    knob.setAttribute('transform', 'rotate(' + minDeg + ' 120 120)');
+    hourHand.setAttribute('transform', 'rotate(' + hourDeg + ' 120 120)');
+
+    dial.setAttribute('aria-valuenow', String(hour24 * 60 + minute));
+    dial.setAttribute('aria-valuetext', pad(hour24) + ':' + pad(minute) + ', ' + main);
+
+    // Trap strip
+    if (f.trap === 2) {
+      trapEl.classList.add('on');
+      trapText.textContent = 'This one names the hour that has not arrived yet. "' + main +
+        '" sounds like ' + h12(hour24 + 1) + ' o’clock, but the time is ' + h12(hour24) + ':' + pad(minute) + '.';
+    } else if (f.trap === 1 && f.east) {
+      trapEl.classList.add('on');
+      trapText.textContent = 'Safe everywhere: "' + main + '". Around Berlin you may also hear "' +
+        phrase(f.east, hour24) + '", which counts towards ' + h12(hour24 + 1) + ' instead of back from it.';
+    } else {
+      trapEl.classList.remove('on');
+      trapText.textContent = '';
+    }
+
+    // Alternative wordings
+    var rows = [];
+    if (f.also) {
+      rows.push({ cls: '', tag: 'Also', text: phrase(f.also, hour24), note: 'Same time, different habit. Both are normal German.' });
+    }
+    if (f.east) {
+      rows.push({
+        cls: 'east', tag: 'Also heard here', text: phrase(f.east, hour24),
+        note: 'Counting from the half hour, or up towards the next one, is normal in eastern Germany including Brandenburg around Berlin. If it confuses you, repeat the time back as a plain number.'
+      });
+    }
+    rows.push({
+      cls: '', tag: 'Formal', text: official(hour24, minute),
+      note: 'What a station announcement, an airport screen or a ticket desk uses.'
+    });
+
+    altsEl.innerHTML = '';
+    rows.forEach(function (r) {
+      var d = document.createElement('div');
+      d.className = 'alt ' + r.cls;
+      var tag = document.createElement('span');
+      tag.className = 'alt-tag';
+      tag.textContent = r.tag;
+      var body = document.createElement('div');
+      body.className = 'alt-text';
+      var b = document.createElement('b');
+      b.textContent = r.text;
+      var note = document.createElement('span');
+      note.className = 'alt-note';
+      note.textContent = r.note;
+      body.appendChild(b);
+      body.appendChild(note);
+      d.appendChild(tag);
+      d.appendChild(body);
+      altsEl.appendChild(d);
+    });
+
+    dpAm.classList.toggle('on', hour24 < 12);
+    dpPm.classList.toggle('on', hour24 >= 12);
+
+    Array.prototype.forEach.call(chipsEl.children, function (btn) {
+      var on = Number(btn.dataset.h) === hour24 && Number(btn.dataset.m) === minute;
+      btn.classList.toggle('on', on);
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  }
+
+  function setTime(h, m) {
+    hour24 = ((h % 24) + 24) % 24;
+    minute = ((m % 60) + 60) % 60;
+    minute = Math.round(minute / 5) * 5 % 60;
+    render();
+  }
+
+  function stepMinutes(delta) {
+    var total = hour24 * 60 + minute + delta;
+    total = ((total % 1440) + 1440) % 1440;
+    setTime(Math.floor(total / 60), total % 60);
+  }
+
+  // ---------- dragging ----------
+  var dragging = false;
+
+  function minuteFromEvent(ev) {
+    var box = dial.getBoundingClientRect();
+    var cx = box.left + box.width / 2;
+    var cy = box.top + box.height / 2;
+    var deg = Math.atan2(ev.clientX - cx, cy - ev.clientY) * 180 / Math.PI;
+    if (deg < 0) deg += 360;
+    return Math.round(deg / 6 / 5) * 5 % 60;
+  }
+
+  function applyDrag(ev) {
+    var m = minuteFromEvent(ev);
+    if (m === minute) return;
+    // Crossing 12 moves the hour, the way a real minute hand does.
+    var wrapUp = minute >= 45 && m <= 15;
+    var wrapDown = minute <= 15 && m >= 45;
+    var h = hour24 + (wrapUp ? 1 : 0) - (wrapDown ? 1 : 0);
+    setTime(h, m);
+  }
+
+  dial.addEventListener('pointerdown', function (ev) {
+    dragging = true;
+    dial.setPointerCapture(ev.pointerId);
+    applyDrag(ev);
+    ev.preventDefault();
+  });
+  dial.addEventListener('pointermove', function (ev) {
+    if (dragging) applyDrag(ev);
+  });
+  dial.addEventListener('pointerup', function (ev) {
+    dragging = false;
+    if (dial.hasPointerCapture(ev.pointerId)) dial.releasePointerCapture(ev.pointerId);
+  });
+  dial.addEventListener('pointercancel', function () { dragging = false; });
+
+  dial.addEventListener('keydown', function (ev) {
+    var k = ev.key;
+    if (k === 'ArrowRight' || k === 'ArrowUp') { stepMinutes(5); ev.preventDefault(); }
+    else if (k === 'ArrowLeft' || k === 'ArrowDown') { stepMinutes(-5); ev.preventDefault(); }
+    else if (k === 'PageUp') { stepMinutes(60); ev.preventDefault(); }
+    else if (k === 'PageDown') { stepMinutes(-60); ev.preventDefault(); }
+  });
+
+  document.getElementById('m5back').addEventListener('click', function () { stepMinutes(-5); });
+  document.getElementById('m5fwd').addEventListener('click', function () { stepMinutes(5); });
+  document.getElementById('h1').addEventListener('click', function () { stepMinutes(60); });
+
+  dpAm.addEventListener('click', function () { if (hour24 >= 12) setTime(hour24 - 12, minute); });
+  dpPm.addEventListener('click', function () { if (hour24 < 12) setTime(hour24 + 12, minute); });
+
+  PRESETS.forEach(function (p) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'chip';
+    b.dataset.h = p.h;
+    b.dataset.m = p.m;
+    b.innerHTML = '';
+    b.appendChild(document.createTextNode(p.label));
+    var cw = document.createElement('span');
+    cw.className = 'cw';
+    cw.textContent = p.en;
+    b.appendChild(cw);
+    b.addEventListener('click', function () { setTime(p.h, p.m); });
+    chipsEl.appendChild(b);
+  });
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
