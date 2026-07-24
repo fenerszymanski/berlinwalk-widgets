@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cross the Oberbaumbrücke: Walk Berlin's Old East-West Border</title>
+<meta name="description" content="Walk across the Oberbaumbrücke step by step. Move from the Kreuzberg bank to the Friedrichshain bank and see what each spot was during the divided years and what is there now, plus where to stand for the best photo." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Cpath d='M8 40h48v4H8z' fill='%23C8873F'/%3E%3Cpath d='M18 20c0-4 3-7 3-7s3 3 3 7v20h-6z' fill='%23C8873F'/%3E%3Cpath d='M40 20c0-4 3-7 3-7s3 3 3 7v20h-6z' fill='%23C8873F'/%3E%3Crect x='30' y='30' width='4' height='4' fill='%23FFE600'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root {
+    --green: #1B5E20;
+    --green-dark: #123D18;
+    --lime: #7CB342;
+    --light: #C5E1A5;
+    --yellow: #FFE600;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --brick: #B25330;
+    --brick-dark: #8A3C21;
+    --line: #E3E8DC;
+    --west: #E8F0FA;
+    --east: #FBECE6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    padding: 14px 14px 26px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .obc { max-width: 720px; margin: 0 auto; }
+
+  /* Header */
+  .obc-head {
+    background: linear-gradient(155deg, var(--green-dark) 0%, var(--green) 62%, #2e7d32 100%);
+    border-radius: 18px 18px 0 0;
+    color: #fff;
+    padding: 20px 20px 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .obc-kicker {
+    display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em;
+    color: var(--green-dark); background: var(--yellow); border-radius: 999px;
+    padding: 4px 11px; margin-bottom: 11px; text-transform: uppercase;
+  }
+  .obc-head h1 { font-size: 22px; font-weight: 800; line-height: 1.22; max-width: 22ch; }
+  .obc-head p { font-size: 13px; line-height: 1.55; margin-top: 9px; max-width: 52ch; color: #E8F5E9; }
+
+  /* Body */
+  .obc-body {
+    background: #fff; border: 1px solid var(--line); border-top: none;
+    border-radius: 0 0 18px 18px; padding: 18px 16px 20px;
+  }
+
+  /* Direction toggle */
+  .obc-dir { display: flex; gap: 8px; margin-bottom: 16px; }
+  .obc-dir button {
+    flex: 1; font-family: inherit; font-size: 12px; font-weight: 700; cursor: pointer;
+    border: 1.5px solid var(--line); background: #fff; color: #4a5347;
+    border-radius: 11px; padding: 10px 8px; line-height: 1.3; transition: all 0.15s;
+  }
+  .obc-dir button .sub { display: block; font-size: 10px; font-weight: 600; color: #8a9384; margin-top: 2px; }
+  .obc-dir button[aria-pressed="true"] {
+    border-color: var(--green); background: var(--green); color: #fff;
+  }
+  .obc-dir button[aria-pressed="true"] .sub { color: #C5E1A5; }
+
+  /* Bank labels */
+  .obc-banks { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 6px; }
+  .obc-bank { font-size: 11px; font-weight: 700; line-height: 1.25; }
+  .obc-bank .kiez { font-size: 13.5px; color: var(--green-dark); }
+  .obc-bank .side { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #9aa392; }
+  .obc-bank.right { text-align: right; }
+
+  /* Crossing track */
+  .obc-track-wrap { position: relative; padding: 20px 12px 8px; border-radius: 14px; overflow: hidden;
+    background: linear-gradient(90deg, var(--west) 0%, var(--west) 42%, #f6f3ee 50%, var(--east) 58%, var(--east) 100%); }
+  .obc-river { position: absolute; left: 0; right: 0; bottom: 0; height: 26px; background: linear-gradient(180deg, rgba(120,160,180,0.18), rgba(120,160,180,0.30)); }
+  .obc-border-mark { position: absolute; top: 6px; bottom: 6px; left: 50%; width: 0; border-left: 2px dashed rgba(138,60,33,0.55); transform: translateX(-50%); }
+  .obc-border-label { position: absolute; top: 2px; left: 50%; transform: translateX(-50%); font-size: 8.5px; font-weight: 700; letter-spacing: 0.06em; color: var(--brick-dark); text-transform: uppercase; white-space: nowrap; }
+
+  .obc-track { position: relative; height: 46px; margin-top: 12px; }
+  .obc-rail { position: absolute; top: 22px; left: 4px; right: 4px; height: 8px; border-radius: 6px;
+    background: repeating-linear-gradient(90deg, var(--brick) 0 10px, var(--brick-dark) 10px 12px); }
+  .obc-tower { position: absolute; top: 4px; width: 12px; height: 44px; background: var(--brick-dark); border-radius: 3px 3px 0 0; }
+  .obc-tower::after { content: ''; position: absolute; top: -7px; left: 3px; width: 6px; height: 8px; background: var(--brick-dark); border-radius: 2px 2px 0 0; }
+  .obc-tower.t-left { left: 15%; }
+  .obc-tower.t-right { right: 15%; }
+
+  .obc-dots { position: absolute; top: 0; left: 4px; right: 4px; height: 46px; }
+  .obc-dot {
+    position: absolute; top: 14px; width: 24px; height: 24px; margin-left: -12px;
+    border-radius: 50%; background: #fff; border: 2.5px solid #b9c3ac; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: #7a8570;
+    transition: transform 0.12s, border-color 0.12s, background 0.12s; z-index: 2;
+  }
+  .obc-dot:hover { transform: scale(1.12); }
+  .obc-dot.done { border-color: var(--lime); color: var(--green-dark); }
+  .obc-dot.active { background: var(--yellow); border-color: var(--green-dark); color: var(--green-dark); transform: scale(1.22); box-shadow: 0 3px 9px rgba(18,61,24,0.25); z-index: 3; }
+
+  .obc-slider { position: absolute; left: 4px; right: 4px; top: 12px; width: calc(100% - 8px); height: 28px; margin: 0; opacity: 0; cursor: grab; z-index: 4; }
+  .obc-slider:active { cursor: grabbing; }
+  .obc-slider:focus-visible + .obc-focus-ring { outline: 3px solid var(--green); }
+
+  /* Panel */
+  .obc-panel { margin-top: 16px; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  .obc-panel-top { background: #F1F5EC; padding: 13px 15px; border-bottom: 1px solid #E1E9D6; }
+  .obc-step-no { font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); }
+  .obc-panel-top h2 { font-size: 17.5px; font-weight: 800; color: var(--green-dark); line-height: 1.25; margin-top: 3px; }
+  .obc-sidepill { display: inline-block; margin-top: 8px; font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
+  .obc-sidepill.west { background: #DCE9F8; color: #1f4e79; }
+  .obc-sidepill.east { background: #F6DED2; color: #8A3C21; }
+
+  .obc-panel-body { padding: 14px 15px 15px; }
+  .obc-row { display: flex; gap: 10px; margin-bottom: 11px; }
+  .obc-row:last-child { margin-bottom: 0; }
+  .obc-tag { flex: 0 0 auto; width: 52px; font-size: 9.5px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; padding-top: 2px; }
+  .obc-tag.then { color: #8A3C21; }
+  .obc-tag.now { color: var(--green); }
+  .obc-row p { font-size: 13.5px; line-height: 1.5; color: #33402f; }
+
+  .obc-move { margin-top: 13px; background: var(--yellow); border-radius: 12px; padding: 12px 14px; }
+  .obc-move .lab { font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green-dark); }
+  .obc-move p { font-size: 13.5px; line-height: 1.5; color: #123D18; font-weight: 600; margin-top: 3px; }
+
+  /* Prev/next */
+  .obc-nav { display: flex; gap: 10px; margin-top: 14px; }
+  .obc-nav button {
+    flex: 1; font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+    border: 1.5px solid var(--green); background: #fff; color: var(--green-dark);
+    border-radius: 11px; padding: 11px 8px; transition: all 0.15s;
+  }
+  .obc-nav button:hover:not(:disabled) { background: var(--green); color: #fff; }
+  .obc-nav button:disabled { opacity: 0.4; cursor: default; }
+
+  /* Facts strip */
+  .obc-facts { margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .obc-fact { background: #F7FAF3; border: 1px solid #E4EDD8; border-radius: 11px; padding: 10px 12px; }
+  .obc-fact .k { font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #8a9384; }
+  .obc-fact .v { font-size: 12.5px; font-weight: 700; color: var(--green-dark); margin-top: 2px; line-height: 1.35; }
+
+  @media (max-width: 430px) {
+    .obc-head h1 { font-size: 19.5px; }
+    .obc-facts { grid-template-columns: 1fr; }
+    .obc-dir button { font-size: 11px; }
+    .obc-bank .kiez { font-size: 12px; }
+    .obc-tag { width: 46px; }
+  }
+</style>
+</head>
+<body>
+<div class="obc">
+  <div class="obc-head">
+    <span class="obc-kicker">Berlinwalk.com · Berlin History</span>
+    <h1>Cross the Oberbaumbrücke</h1>
+    <p>Walk the bridge one spot at a time. Each stop shows what it was during the divided years and what is there now, plus where to stand for the photo. The old East-West border ran right across the water in the middle.</p>
+  </div>
+
+  <div class="obc-body">
+    <div class="obc-dir" role="group" aria-label="Choose your walking direction">
+      <button type="button" data-dir="wte" aria-pressed="true">Walk West → East<span class="sub">Kreuzberg to Friedrichshain</span></button>
+      <button type="button" data-dir="etw" aria-pressed="false">Walk East → West<span class="sub">Friedrichshain to Kreuzberg</span></button>
+    </div>
+
+    <div class="obc-banks">
+      <div class="obc-bank left"><span class="side" id="obc-side-l">West · American sector</span><br><span class="kiez" id="obc-kiez-l">Kreuzberg</span></div>
+      <div class="obc-bank right"><span class="side" id="obc-side-r">East · Soviet sector</span><br><span class="kiez" id="obc-kiez-r">Friedrichshain</span></div>
+    </div>
+
+    <div class="obc-track-wrap">
+      <span class="obc-border-label">1961–1989 border</span>
+      <div class="obc-border-mark"></div>
+      <div class="obc-track">
+        <div class="obc-rail"></div>
+        <div class="obc-tower t-left"></div>
+        <div class="obc-tower t-right"></div>
+        <div class="obc-dots" id="obc-dots"></div>
+        <input type="range" class="obc-slider" id="obc-slider" min="0" max="5" step="1" value="0" aria-label="Position on the bridge" />
+      </div>
+      <div class="obc-river"></div>
+    </div>
+
+    <div class="obc-panel">
+      <div class="obc-panel-top">
+        <div class="obc-step-no" id="obc-stepno">Stop 1 of 6</div>
+        <h2 id="obc-title">—</h2>
+        <span class="obc-sidepill west" id="obc-sidepill">West bank</span>
+      </div>
+      <div class="obc-panel-body">
+        <div class="obc-row"><div class="obc-tag then">Then</div><p id="obc-then">—</p></div>
+        <div class="obc-row"><div class="obc-tag now">Now</div><p id="obc-now">—</p></div>
+        <div class="obc-move"><span class="lab">Your move</span><p id="obc-move">—</p></div>
+      </div>
+    </div>
+
+    <div class="obc-nav">
+      <button type="button" id="obc-prev">← Back a step</button>
+      <button type="button" id="obc-next">Next step →</button>
+    </div>
+
+    <div class="obc-facts">
+      <div class="obc-fact"><div class="k">Stations</div><div class="v">Schlesisches Tor (U1) west · Warschauer Straße (U1, U3, S-Bahn, M10) east</div></div>
+      <div class="obc-fact"><div class="k">Best light</div><div class="v">Late afternoon into dusk, when the neon and the brick both glow</div></div>
+      <div class="obc-fact"><div class="k">Cost &amp; time</div><div class="v">Free to walk · about 10 minutes across if you stop for photos</div></div>
+      <div class="obc-fact"><div class="k">Look for</div><div class="v">A yellow U-Bahn overhead and the Molecule Man upstream through the arches</div></div>
+    </div>
+  </div>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  // West-to-east order. Each stop is a real point on or beside the bridge.
+  var STOPS = [
+    {
+      name: 'Schlesisches Tor, Kreuzberg',
+      side: 'west',
+      then: 'The western edge of West Berlin. The U1 stopped here and the sealed bridge was the end of the line.',
+      now: 'A four-minute walk down Oberbaumstraße through Wrangelkiez brings you to the bridge.',
+      move: 'Coming from the west, start here. Grab a coffee in Wrangelkiez, then follow the crowd toward the river.'
+    },
+    {
+      name: 'The west towers',
+      side: 'west',
+      then: 'The brick towers look medieval, but they went up in 1896, modelled on an old Brandenburg city gate.',
+      now: 'Two 34-metre neo-Gothic towers mark the entrance to the bridge over the Spree.',
+      move: 'Step onto the lower deck on the south (downstream) side, not the road side, for the open river view.'
+    },
+    {
+      name: 'Under the U-Bahn',
+      side: 'mid',
+      then: 'Cars and pedestrians crossed below while the elevated railway ran above, the same two-level plan as today.',
+      now: 'The road and footpaths run underneath; the U1 and U3 rattle across the upper deck over your head.',
+      move: 'Wait for a yellow train overhead for the classic shot, then look upstream to spot the Molecule Man in the water.'
+    },
+    {
+      name: 'The steel middle',
+      side: 'mid',
+      then: 'The Wehrmacht blew up the middle span in April 1945, and for the border years the frontier ran across the water right here.',
+      now: 'A steel section by Santiago Calatrava fills the gap. From dusk, a neon "Stone, Paper, Scissors" game plays overhead until about 1am.',
+      move: 'You are standing on the old East-West line. The bridge reopened on 9 November 1994, five years to the day after the Wall fell.'
+    },
+    {
+      name: 'The east towers',
+      side: 'east',
+      then: 'From December 1963 this was a foot crossing, and only West Berlin residents were allowed through it.',
+      now: 'The towers on this bank drop you into Friedrichshain, on the east side of the old line.',
+      move: 'Pause under the last arch. Behind you is Kreuzberg and the West; ahead is the East and the river path.'
+    },
+    {
+      name: 'Warschauer Straße & the East Side Gallery',
+      side: 'east',
+      then: 'The riverbank ahead was the death strip. The wall that ran along it is now the painted East Side Gallery.',
+      now: 'The East Side Gallery runs along Mühlenstraße to the bridge; Warschauer Straße and the RAW yard are a short walk on.',
+      move: 'Turn along Mühlenstraße for the murals, or head to Warschauer Straße for the U1, U3, M10 tram and S-Bahn.'
+    }
+  ];
+
+  var slider = document.getElementById('obc-slider');
+  var dotsWrap = document.getElementById('obc-dots');
+  var elStepNo = document.getElementById('obc-stepno');
+  var elTitle = document.getElementById('obc-title');
+  var elSidePill = document.getElementById('obc-sidepill');
+  var elThen = document.getElementById('obc-then');
+  var elNow = document.getElementById('obc-now');
+  var elMove = document.getElementById('obc-move');
+  var prevBtn = document.getElementById('obc-prev');
+  var nextBtn = document.getElementById('obc-next');
+  var dirBtns = Array.prototype.slice.call(document.querySelectorAll('.obc-dir button'));
+  var sideL = document.getElementById('obc-side-l');
+  var kiezL = document.getElementById('obc-kiez-l');
+  var sideR = document.getElementById('obc-side-r');
+  var kiezR = document.getElementById('obc-kiez-r');
+
+  var dir = 'wte';        // west-to-east or east-to-west
+  var pos = 0;            // index into the displayed order
+
+  function order() { return dir === 'wte' ? STOPS.slice() : STOPS.slice().reverse(); }
+
+  function sidePill(side) {
+    if (side === 'west') return { cls: 'west', label: 'West bank · Kreuzberg' };
+    if (side === 'east') return { cls: 'east', label: 'East bank · Friedrichshain' };
+    return { cls: 'west', label: 'Over the river' };
+  }
+
+  function buildDots() {
+    dotsWrap.innerHTML = '';
+    var seq = order();
+    seq.forEach(function (stop, i) {
+      var d = document.createElement('button');
+      d.type = 'button';
+      d.className = 'obc-dot';
+      d.style.left = (seq.length === 1 ? 50 : (i / (seq.length - 1)) * 100) + '%';
+      d.textContent = String(i + 1);
+      d.setAttribute('aria-label', 'Stop ' + (i + 1) + ': ' + stop.name);
+      d.addEventListener('click', function () { pos = i; render(); });
+      dotsWrap.appendChild(d);
+    });
+  }
+
+  function render() {
+    var seq = order();
+    var stop = seq[pos];
+    slider.value = String(pos);
+    elStepNo.textContent = 'Stop ' + (pos + 1) + ' of ' + seq.length;
+    elTitle.textContent = stop.name;
+    var sp = sidePill(stop.side);
+    elSidePill.className = 'obc-sidepill ' + sp.cls;
+    elSidePill.textContent = sp.label;
+    elThen.textContent = stop.then;
+    elNow.textContent = stop.now;
+    elMove.textContent = stop.move;
+    prevBtn.disabled = pos === 0;
+    nextBtn.disabled = pos === seq.length - 1;
+
+    Array.prototype.slice.call(dotsWrap.children).forEach(function (d, i) {
+      d.classList.toggle('active', i === pos);
+      d.classList.toggle('done', i < pos);
+    });
+  }
+
+  function applyDir() {
+    // Bank labels always describe the physical banks (west left, east right).
+    // The direction toggle only changes the order you walk the stops.
+    sideL.textContent = 'West · American sector';
+    kiezL.textContent = 'Kreuzberg';
+    sideR.textContent = 'East · Soviet sector';
+    kiezR.textContent = 'Friedrichshain';
+    buildDots();
+    pos = 0;
+    render();
+  }
+
+  slider.addEventListener('input', function () { pos = parseInt(slider.value, 10) || 0; render(); });
+  prevBtn.addEventListener('click', function () { if (pos > 0) { pos--; render(); } });
+  nextBtn.addEventListener('click', function () { if (pos < order().length - 1) { pos++; render(); } });
+  dirBtns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      dir = b.getAttribute('data-dir');
+      dirBtns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      applyDir();
+    });
+  });
+
+  applyDir();
+})();
+</script>
+</body>
+</html>
