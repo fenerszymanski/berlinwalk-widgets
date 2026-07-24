@@ -8,7 +8,7 @@
 (function () {
   'use strict';
 
-  var VERSION = 'berlintools-shell-v2-20260710b';
+  var VERSION = 'berlintools-shell-v2-20260724a';
   var ENABLE_ALL = true;
   var PILOT_SLUGS = [
     'berlin-first-day-planner',
@@ -68,6 +68,21 @@
     }
   };
 
+  var SEO_MAP = {
+    'baltic-beach-day-planner': {
+      title: 'Baltic Beach Day Planner from Berlin | BerlinWalk',
+      description: 'Free planner for a Baltic Sea day trip from Berlin. Compare Warnemünde, the Usedom piers and Binz on Rügen by real train times, Deutschlandticket coverage and actual beach hours.',
+      image: 'https://static.wixstatic.com/media/5a08a3_51af2914e7c94b3496c32983c1fabb9d~mv2.png',
+      imageAlt: 'BerlinWalk Baltic Beach Day Planner icon'
+    },
+    'berlin-bakery-counter': {
+      title: 'Berlin Bakery Counter: Order in German | BerlinWalk',
+      description: 'Free trainer for ordering at a Berlin bakery in German. Build a real order, learn the words for Schrippe, Pfannkuchen and Brezel, and rehearse the questions the counter asks back.',
+      image: 'https://static.wixstatic.com/media/5a08a3_d8a7250b42544578aefc35723649019b~mv2.png',
+      imageAlt: 'BerlinWalk Berlin Bakery Counter icon'
+    }
+  };
+
   function normalizedPath() {
     return String(window.location.pathname || '').toLowerCase().replace(/\/{2,}/g, '/');
   }
@@ -105,6 +120,50 @@
 
   function cleanText(value) {
     return String(value || '').replace(/\s+/g, ' ').trim();
+  }
+
+  function upsertMeta(attribute, key, content) {
+    var selector = 'meta[' + attribute + '="' + key + '"]';
+    var node = document.head.querySelector(selector);
+    if (!node) {
+      node = document.createElement('meta');
+      node.setAttribute(attribute, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute('content', content);
+  }
+
+  function upsertLink(rel, href) {
+    var node = document.head.querySelector('link[rel="' + rel + '"]');
+    if (!node) {
+      node = document.createElement('link');
+      node.setAttribute('rel', rel);
+      document.head.appendChild(node);
+    }
+    node.setAttribute('href', href);
+  }
+
+  function applyScopedSeo() {
+    var record = SEO_MAP[state.slug];
+    if (!record) return;
+    var canonical = 'https://www.berlinwalk.com/tools/' + state.slug;
+    document.title = record.title;
+    upsertLink('canonical', canonical);
+    upsertMeta('name', 'description', record.description);
+    upsertMeta('name', 'robots', 'index, follow, max-image-preview:large');
+    upsertMeta('property', 'og:type', 'website');
+    upsertMeta('property', 'og:url', canonical);
+    upsertMeta('property', 'og:title', record.title);
+    upsertMeta('property', 'og:description', record.description);
+    upsertMeta('property', 'og:image', record.image);
+    upsertMeta('property', 'og:image:width', '512');
+    upsertMeta('property', 'og:image:height', '512');
+    upsertMeta('property', 'og:image:alt', record.imageAlt);
+    upsertMeta('name', 'twitter:card', 'summary_large_image');
+    upsertMeta('name', 'twitter:title', record.title);
+    upsertMeta('name', 'twitter:description', record.description);
+    upsertMeta('name', 'twitter:image', record.image);
+    upsertMeta('name', 'twitter:image:alt', record.imageAlt);
   }
 
   function escapeHtml(value) {
@@ -443,6 +502,7 @@
   }
 
   function decorate() {
+    applyScopedSeo();
     state.decorated = decorateOuterShell() || state.decorated;
     groupRichContent();
     hideDuplicateCtas();
@@ -460,6 +520,7 @@
   function start() {
     if (state.booted) return;
     state.booted = true;
+    applyScopedSeo();
     decorate();
     fetchCatalog().then(function (record) {
       applyCatalog(record);
