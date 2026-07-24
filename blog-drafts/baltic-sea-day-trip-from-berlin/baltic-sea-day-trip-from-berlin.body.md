@@ -28,7 +28,7 @@ If you just want the sea with the least logistics, this is the answer. Take the 
 
 _The Rostock S-Bahn at Warnemünde station. From this platform you can be barefoot in the sand within ten minutes._
 
-The beach is the widest I know on the German Baltic, a huge apron of pale sand backed by the old lighthouse from 1898 and the Teepott, a curved GDR-era shell roof that looks like a seagull mid-landing. **Climb the [lighthouse](https://warnemuende-leuchtturm.de/) for 2 euros** if it is open, daily 10:00 to 18:30 in season; the view sorts the whole coastline out for you in five minutes.
+The beach is the widest I know on the German Baltic, a huge apron of pale sand backed by the old lighthouse from 1898 and the Teepott, a curved GDR-era shell roof that looks like a seagull mid-landing. **Climb the [lighthouse](https://warnemuende-leuchtturm.de/) for 3 euros** if it is open, daily 10:00 to 18:30 in season; the view sorts the whole coastline out for you in five minutes.
 
 Between station and beach runs the Alter Strom, the old harbour channel, and this is where the food plan writes itself: fishing boats and kiosks sell Fischbrötchen, the north German fish roll, and eating one on the harbour edge is the whole ritual. **A beach chair, the hooded wicker Strandkorb, rents for about 15 euros a day** and is worth every cent on a windy day, which on the Baltic is most days. Warnemünde also charges day visitors a small beach fee of 2.25 euros, collected at machines and kiosks along the promenade.
 
@@ -56,11 +56,11 @@ Two piers anchor the day. **The Ahlbeck Seebrücke from 1898 is the oldest in Ge
 
 _The Heringsdorf pier runs 508 metres out into the water. The sea air here was once prescribed as medicine._
 
-The bonus nobody expects: keep walking east from Ahlbeck along the beach promenade and in about half an hour you cross into Świnoujście, Poland, on foot, mid-beach, with nothing but a marker stone to announce it. A sea day that includes strolling into another country is a very Usedom trick. Day visitors pay a small spa fee here too, around 3 euros depending on the resort and season.
+The bonus nobody expects: keep walking east from Ahlbeck along the beach promenade and in about half an hour you cross into Świnoujście, Poland, on foot, mid-beach, with nothing but a marker stone to announce it. A sea day that includes strolling into another country is a very Usedom trick. Day visitors in the Kaiserbäder pay a spa fee too: 3.70 euros in the 2026 main season.
 
 ## Binz on Rügen: the grand one, at the limit
 
-Binz is the postcard: a long white beach, the huge Kurhaus hotel, streets of carved resort villas, and the chalk-cliff island of Rügen behind it. It is also the hardest to justify in one day. The fastest regional connections need around four hours with changes in Stralsund, and on the typical summer Saturday there is one direct InterCity leaving Berlin just after 08:00 that arrives around noon, which needs a separate ticket on top of any Deutschlandticket.
+Binz is the postcard: a long white beach, the huge Kurhaus hotel, streets of carved resort villas, and the chalk-cliff island of Rügen behind it. It is also the hardest to justify in one day. The fastest regional connections need around four hours with changes. The 2026 summer timetable also has direct ICE services from Berlin, including a morning train that can reach Binz around 12:42; those need a separate ticket on top of any Deutschlandticket.
 
 ![Binz beach in summer with swimmers, beach chairs and the white Kurhaus behind the promenade](blog-drafts/baltic-sea-day-trip-from-berlin/images/optimized/binz-kurhaus-beach.jpg)
 
@@ -70,7 +70,7 @@ My honest verdict: **do Binz as a day trip only if the day is long, the forecast
 
 ## Trains, tickets and the return you must not miss
 
-The ticket logic is simple once you see it. **Every regional connection above runs on the Deutschlandticket, 63 euros a month in 2026**, which is why it is the default answer for Baltic days; my [Deutschlandticket guide for tourists](/post/deutschlandticket-berlin-tourists) covers where to buy it and when it pays off. InterCity and ICE trains, like the fast morning IC to Rostock and Binz, need a normal DB ticket instead, and an advance Sparpreis fare often costs less than people expect. Check exact times for your specific day in the [DB journey planner](https://int.bahn.de/en), because summer weekends and construction can shift individual trains.
+The ticket logic is simple once you see it. **Every regional connection above runs on the Deutschlandticket, 63 euros a month in 2026**, which is why it is the default answer for Baltic days; my [Deutschlandticket guide for tourists](/post/deutschlandticket-berlin-tourists) covers where to buy it and when it pays off. InterCity and ICE trains need a normal DB ticket instead, and an advance Sparpreis fare often costs less than people expect. Check exact times for your specific day in the [DB journey planner](https://int.bahn.de/en), because summer weekends and construction can shift individual trains.
 
 The return train is where day trips die, so I plan it before I leave. The pattern worth memorising on the current summer timetable:
 

@@ -12,13 +12,13 @@ The glass case does most of the work. If a word deserts you, you can always poin
 
 Berlin has two kinds of bakery, and knowing which one you walked into changes how you order.
 
-The first is the traditional counter Bäckerei: someone serves you from behind a glass case, you say what you want, and they hand it over. The second is the chain or self-service style, names like Kamps, Back-Factory or the bakery counter inside a supermarket, where you sometimes take a tray and tongs and help yourself before paying at a till. **Most tourist-heavy corners in Mitte have both within a block.** The counter version is where the German matters, so that is the one worth rehearsing.
+The first is the traditional counter Bäckerei: someone serves you from behind a glass case, you say what you want, and they hand it over. The second is the chain or self-service style, names like Kamps, Back-Factory or the bakery counter inside a supermarket, where you sometimes take a tray and tongs and help yourself before paying at a till. In Mitte you will often find both styles close together. The counter version is where the German matters, so that is the one worth rehearsing.
 
 ![A Bäckerei and café on a Berlin-Kreuzberg street corner](blog-drafts/how-to-order-at-a-berlin-bakery/images/optimized/baeckerei-shopfront.jpg)
 
 A classic Berlin corner Bäckerei with a café. The blackboard usually lists the day's specials in German only.
 
-One habit to get right before you say anything about bread: **greet first.** A quick "Hallo" or, before midday, "Guten Morgen" is expected, not optional. Walking up and launching straight into an order reads as abrupt here. It costs you one word and it changes the whole tone of the exchange.
+One habit to get right before you say anything about bread: **greet first.** A quick "Hallo" or, before midday, "Guten Morgen" is the normal courteous start. Walking up and launching straight into an order can read as abrupt here. It costs you one word and it changes the whole tone of the exchange.
 
 ## The words for what is in the case
 
@@ -64,13 +64,13 @@ The widget below lets you build a real order and hear the shape of it before you
 
 ## The questions they will ask back
 
-This is the part that surprises people. You say your line, and then the person behind the counter asks you something, and the pressure jumps. There are only three questions, and they are almost always the same:
+This is the part that surprises people. You say your line, and then the person behind the counter asks you something, and the pressure jumps. Most replies fit one of these three questions:
 
 - **"Noch etwas?"** or "Sonst noch etwas?" means "Anything else?" Answer with "Nein, danke, das ist alles" (no thanks, that is everything), or just name the next thing.
 - **"Zum Hieressen oder zum Mitnehmen?"** means "To eat in or take away?" You will hear this the moment the bakery has tables. Say "zum Mitnehmen" (to take away) or "zum Hieressen" (to eat in). **Take-away sometimes changes the price slightly**, and in a sit-down café it can mean a plate versus a paper bag.
 - **"Bar oder Karte?"** means "Cash or card?" Answer "Karte" or "bar".
 
-That last one matters more than you would think. **Plenty of small, traditional bakeries in Berlin are still cash-only, or set a card minimum of a few euros.** The chains and café-bakeries almost always take cards, but a tiny neighbourhood Bäckerei might not. Glance for a card symbol on the door or the till before you commit, and keep a few coins on you for exactly this. If you want the wider picture on paying in the city, I wrote a full guide to [using cards and cash in Berlin](/post/can-you-use-credit-cards-in-berlin-a-tourist-s-guide-to-paying-in-germany).
+That last one matters more than you would think. **Some small bakeries in Berlin are still cash-only or set a card minimum.** Many chains and café-bakeries take cards, but payment still varies by branch. Glance for a card symbol on the door or the till before you commit, and keep a little cash as a backup. If you want the wider picture on paying in the city, I wrote a full guide to [using cards and cash in Berlin](/post/can-you-use-credit-cards-in-berlin-a-tourist-s-guide-to-paying-in-germany).
 
 ## If your German runs out mid-sentence
 

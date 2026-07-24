@@ -13,10 +13,10 @@ const QS = {
   kicker: 'BERLINWALK.COM • GERMAN LANGUAGE',
   items: [
     '**Every bakery order follows the same short pattern**, so you only need one opening line: "Ich hätte gern..." (I would like...), then name what you want and finish with "bitte".',
-    '**Greet before you order.** A quick "Hallo" or "Guten Morgen" is expected in Germany; skipping it reads as abrupt.',
+    '**Greet before you order.** A quick "Hallo" or "Guten Morgen" is the normal courteous start; skipping it can read as abrupt.',
     '**Learn the two Berlin words that phrasebooks miss**: a bread roll is a *Schrippe* here (a *Brötchen* elsewhere), and the jam doughnut is a *Pfannkuchen*, not a *Berliner*.',
     '**They will ask you two or three things back**: "Noch etwas?" (anything else?), "Zum Hieressen oder zum Mitnehmen?" (eat in or take away?) and "Bar oder Karte?" (cash or card?).',
-    '**Carry a little cash.** Plenty of small traditional bakeries are still cash-only or set a card minimum; chains and café-bakeries almost always take cards.',
+    '**Carry a little cash.** Some small bakeries are cash-only or set a card minimum; many chains and café-bakeries take cards. Check the till sign and keep a backup.',
     '**If the German runs out, point.** "Einmal das, bitte" (one of those, please) at the glass case gets you served anywhere in Berlin.',
   ],
 };
@@ -43,7 +43,7 @@ const FAQ = {
     },
     {
       q: 'Do Berlin bakeries take card?',
-      a: 'The chains and café-bakeries almost always take cards, but plenty of small, traditional neighbourhood bakeries are still cash-only or set a card minimum of a few euros. Glance for a card symbol at the till and keep some coins on you just in case.',
+      a: 'Many chains and café-bakeries take cards, but some small neighbourhood bakeries are cash-only or set a card minimum. Glance for a card symbol at the till and keep a little cash as a backup.',
     },
     {
       q: 'What if I do not know the German word for what I want?',

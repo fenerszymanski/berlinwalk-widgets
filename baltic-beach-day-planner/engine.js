@@ -1,5 +1,5 @@
 /* Baltic Beach Day Planner engine.
-   Typical summer Saturday pattern, checked against the DB planner in July 2026.
+   Regular 2026 summer pattern, rechecked against DB timetable sources on 24 July 2026.
    Times are minutes after midnight; returns arriving past midnight use >1440. */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory();
@@ -30,7 +30,6 @@
       out: [
         leg('05:46', '08:58', 'RE5 + RE50 + S1, change Neustrelitz and Rostock', 2, true),
         leg('06:46', '09:58', 'RE5 to Rostock, then S-Bahn S1', 1, true),
-        leg('08:15', '10:48', 'IC to Rostock, then S-Bahn S1', 1, false),
         leg('08:46', '11:58', 'RE5 to Rostock, then S-Bahn S1', 1, true),
         leg('10:46', '13:58', 'RE5 to Rostock, then S-Bahn S1', 1, true),
       ],
@@ -74,11 +73,13 @@
         leg('05:46', '09:54', 'RE5 to Stralsund, then RE9', 2, true),
         leg('06:46', '10:56', 'RE5 + RE51 + RE9 via Neustrelitz', 2, true),
         leg('07:46', '11:54', 'RE5 to Stralsund, then RE9', 2, true),
-        leg('08:15', '12:12', 'Direct IC from Berlin Hbf', 0, false),
+        leg('08:58', '12:42', 'Direct ICE from Berlin Hbf', 0, false),
       ],
       ret: [
+        leg('15:24', '19:01', 'Direct ICE to Berlin Hbf', 0, false),
         leg('15:59', '20:11', 'RE9 to Stralsund, then RE5', 2, true),
         leg('17:04', '21:29', 'RE9 + RE30 + RE3 via Angermünde', 2, true),
+        leg('17:15', '20:54', 'Direct ICE to Berlin Gesundbrunnen', 0, false),
         leg('17:59', '22:19', 'RE9 + RE5 + S-Bahn into Berlin', 3, true),
         leg('18:59', '23:33', 'RE9 + RE30 + RE3 via Angermünde', 3, true),
         leg('19:59', '00:19', 'RE9 + RE5 + S-Bahn, the last sane train', 3, true),

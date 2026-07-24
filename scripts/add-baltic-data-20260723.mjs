@@ -31,7 +31,7 @@ qs[SLUG] = {
     '**Three towns cover almost every version of the trip**: Warnemünde for speed and the widest beach, the Usedom imperial resorts Heringsdorf and Ahlbeck for piers and villa architecture, Binz on Rügen for grandeur at the very edge of day-trip range.',
     '**Every regional connection runs on the Deutschlandticket** (63 euros a month in 2026), including the Usedom resort railway and the Rostock S-Bahn. Fast IC and ICE trains need a separate DB ticket.',
     '**Plan the return before you leave.** The last comfortable trains leave Warnemünde around 21:00, Heringsdorf around 19:33 and Binz between 16:00 and 18:00; later options arrive in Berlin well past midnight.',
-    '**Small beach costs are real but tiny**: day spa fees of roughly 2 to 3 euros, beach chair rental around 15 euros a day, and the water in high summer sits between 17 and 20 degrees.',
+    '**Small beach costs are real but manageable**: Warnemünde charges day visitors 2.25 euros, the Usedom Kaiserbäder charge 3.70 euros in the 2026 main season, and resort fees vary elsewhere. Beach chairs rent separately.',
     '**The 2026 Stadtbahn closure does not block the coast**: trains north leave from the low-level platforms at Hauptbahnhof and stop at Gesundbrunnen as normal.',
   ],
 };
@@ -54,11 +54,11 @@ faq[SLUG] = {
     },
     {
       q: 'Can you do Rügen and Binz as a day trip from Berlin?',
-      a: 'Barely. Regional connections take around four hours each way, and the one direct morning InterCity arrives around noon. It works on a long summer day with a perfect forecast, but arriving at noon and leaving by early evening shortchanges the place. If Rügen is the goal, stay a night.',
+      a: 'Barely. Regional connections take around four hours each way. The 2026 summer timetable also has direct ICE services, including a morning train that can reach Binz around 12:42, but arriving around midday still shortchanges the place. If Rügen is the goal, stay a night.',
     },
     {
       q: 'Do I need to book the trains in advance?',
-      a: 'Regional trains have no seat reservations and no booking requirement; with a Deutschlandticket you simply board. On sunny summer weekends they fill up, so board at Hauptbahnhof or Gesundbrunnen early. For the fast IC to Rostock or Binz, an advance Sparpreis fare is usually cheaper than buying on the day.',
+      a: 'Regional trains have no seat reservations and no booking requirement; with a Deutschlandticket you simply board. On sunny summer weekends they fill up, so board at Hauptbahnhof or Gesundbrunnen early. For IC or ICE services, an advance Sparpreis fare is usually cheaper than buying on the day.',
     },
     {
       q: 'Is the Baltic warm enough to swim in?',
@@ -66,7 +66,7 @@ faq[SLUG] = {
     },
     {
       q: 'Are the beaches free?',
-      a: 'The sand is public, but German resort towns charge a small day spa fee: 2.25 euros in Warnemünde and around 3 euros in the Usedom and Rügen resorts, paid at machines or kiosks on the promenade. Beach chairs rent separately for about 15 euros a day.',
+      a: 'The sand is public, but resort towns charge a day spa fee. Warnemünde charges day visitors 2.25 euros, while the Usedom Kaiserbäder charge 3.70 euros in the 2026 main season; rates vary elsewhere. Beach chairs rent separately.',
     },
   ],
 };
