@@ -1,20 +1,20 @@
 # E2 - 3 Days Before Arrival
 
-Subject: 🎫 Ticket checks for your Berlin pack
+Subject: 🎫 Berlin tickets and opening days
 
-Preheader: A few boring checks that make the ${tripPackLabel} easier to use.
+Preheader: Check your airport ticket, opening days, and first journey.
 
 Hi,
 
-Three days before Berlin, keep things simple. Check tickets, opening days, and your first ride from the airport.
+You arrive in Berlin in three days. Check your transport tickets, opening days, and first journey from the airport.
 
-Your pack ticket note:
+Ticket note from your plan:
 
 **${ticket}**
 
-A simple rule: if you land at BER, your first ride usually needs ABC because the airport is in Zone C. Most central Berlin sightseeing is usually AB.
+If you arrive at BER, you normally need a ticket for zones ABC. The airport is in Zone C. Most journeys within central Berlin need zones AB.
 
-For tickets, visitors normally use the BVG app, a ticket machine, or a station shop. If you buy a paper ticket, validate it before boarding. Digital tickets are easier, but only if your phone battery is not living dangerously.
+You can buy tickets in the BVG app, from a ticket machine, or at a station shop. If you buy a paper ticket, validate it before boarding. If you use a digital ticket, make sure your phone has enough battery.
 
 Useful links:
 
@@ -23,9 +23,9 @@ Useful links:
 - Official VBB ticket page: [vbb.de tickets](https://www.vbb.de/en/tickets/)
 - Opening-day check: ${whatsOpenUrl}
 
-If your ${tripPackLabel} touches museums, Reichstag, or a Sunday/Monday, check opening days once. Berlin is not hard, but it does punish assumptions.
+If your ${tripPackLabel} includes museums or the Reichstag, check the opening hours again. Also check places planned for Sunday or Monday because schedules can change.
 
-Your pack is here:
+Your plan is here:
 
 ${planUrl}
 

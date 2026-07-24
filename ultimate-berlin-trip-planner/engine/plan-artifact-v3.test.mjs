@@ -73,11 +73,11 @@ function source(dayCount = 3) {
   };
 }
 
-test('normalizes a three-day artifact and fixes the PDF count at N + 4', () => {
+test('defers a new artifact PDF count to the content-aware renderer', () => {
   const artifact = V3.normalizeArtifact(source(3));
   assert.equal(artifact.schemaVersion, '3.0.0');
   assert.equal(artifact.days.length, 3);
-  assert.equal(artifact.delivery.pdfPageCount, 7);
+  assert.equal(artifact.delivery.pdfPageCount, 0);
   assert.deepEqual(V3.validateArtifact(artifact), []);
 });
 
@@ -85,8 +85,16 @@ test('supports every production trip length from one to seven days', () => {
   for (let count = 1; count <= 7; count += 1) {
     const artifact = V3.normalizeArtifact(source(count));
     assert.equal(artifact.days.length, count);
-    assert.equal(artifact.delivery.pdfPageCount, count + 4);
+    assert.equal(artifact.delivery.pdfPageCount, 0);
   }
+});
+
+test('preserves a legacy stored PDF count for existing artifact hashes', () => {
+  const legacy = source(3);
+  legacy.delivery.pdfPageCount = 7;
+  const artifact = V3.normalizeArtifact(legacy);
+  assert.equal(artifact.delivery.pdfPageCount, 7);
+  assert.deepEqual(V3.validateArtifact(artifact), []);
 });
 
 test('live weather ends at offset 14 and offset 15 is typical', () => {
@@ -161,6 +169,28 @@ test('preserves visible link place IDs while only the first meal choice owns the
     assert.deepEqual(artifact.days[0].blocks[0].links.map((link) => link.placeId), ['alexanderplatz', 'museum_island']);
     assert.deepEqual(artifact.days[0].route.placeIds, ['alexanderplatz']);
   }
+});
+
+test('coalesced activity and lunch keeps three meal choices visible but off the route', () => {
+  const meal = source(1);
+  meal.days[0].blocks[0].time = 'Morning + lunch';
+  meal.days[0].blocks[0].mapLinks = [{
+    placeId: 'alexanderplatz',
+    label: 'Alexanderplatz',
+    url: 'https://www.google.com/maps/search/?api=1&query=Alexanderplatz+Berlin',
+  }, ...['meal_one', 'meal_two', 'meal_three'].map((placeId, index) => ({
+    placeId,
+    label: `Meal option ${index + 1}`,
+    kind: 'meal_option',
+    url: `https://www.google.com/maps/search/?api=1&query=Meal+option+${index + 1}+Berlin`,
+  }))];
+
+  const artifact = V3.normalizeArtifact(meal);
+  assert.deepEqual(artifact.days[0].blocks[0].placeIds, [
+    'alexanderplatz', 'meal_one', 'meal_two', 'meal_three',
+  ]);
+  assert.deepEqual(artifact.days[0].route.placeIds, ['alexanderplatz']);
+  assert.equal(artifact.days[0].blocks[0].links.filter((link) => link.kind === 'meal_option').length, 3);
 });
 
 test('non-meal blocks route every visible ordered place ID', () => {
@@ -339,6 +369,61 @@ test('route-aware artifacts preserve transfer detail, return routes and required
   const missingSegment = structuredClone(routeAware);
   delete missingSegment.days[0].blocks[0].transferSegment;
   assert.throws(() => V3.normalizeArtifact(missingSegment), /day_transfer_segment_missing_1_1/);
+});
+
+test('route-aware Day 1 requires the stay-to-first-stop transfer after arrival', () => {
+  const arrival = source(1);
+  arrival.quality.routeLogicVersion = '1.1.0';
+  arrival.days[0].blocks = [{
+    kind: 'activity',
+    time: 'Arrival',
+    window: '09:00-10:45',
+    title: 'Train from BER and leave your bags',
+    primaryPlace: {
+      placeId: 'arrival_transfer',
+      label: 'BER to your stay',
+      url: 'https://www.google.com/maps/dir/?api=1&origin=BER&destination=Berlin&travelmode=transit',
+    },
+  }, {
+    kind: 'activity',
+    time: 'Morning',
+    window: '11:20-13:20',
+    title: 'World Clock',
+    primaryPlace: {
+      placeId: 'world_clock',
+      label: 'World Clock',
+      url: 'https://www.google.com/maps/search/?api=1&query=World+Clock+Berlin',
+    },
+    transferFromPrevious: {
+      fromPlaceId: 'arrival_transfer',
+      fromLabel: 'Your stay in Mitte',
+      toPlaceId: 'world_clock',
+      toLabel: 'World Clock',
+      mode: 'transit',
+      minutes: 25,
+      bufferMinutes: 10,
+      totalMinutes: 35,
+      distanceKm: 0,
+      instruction: 'After check-in, start from your exact address and use public transport to World Clock.',
+      url: 'https://www.google.com/maps/dir/?api=1&destination=World+Clock+Berlin&travelmode=transit',
+    },
+  }];
+  arrival.days[0].route.placeIds = ['world_clock'];
+
+  const artifact = V3.normalizeArtifact(arrival);
+  assert.equal(artifact.days[0].blocks[1].transferFromPrevious.fromPlaceId, 'arrival_transfer');
+
+  const missing = structuredClone(arrival);
+  delete missing.days[0].blocks[1].transferFromPrevious;
+  assert.throws(() => V3.normalizeArtifact(missing), /day_transfer_missing_1_2/);
+
+  const wrongTarget = structuredClone(arrival);
+  wrongTarget.days[0].blocks[1].transferFromPrevious.toPlaceId = 'alexanderplatz';
+  assert.throws(() => V3.normalizeArtifact(wrongTarget), /day_transfer_order_1_2/);
+
+  const shortGap = structuredClone(arrival);
+  shortGap.days[0].blocks[1].window = '11:10-13:10';
+  assert.throws(() => V3.normalizeArtifact(shortGap), /day_transfer_gap_1_2/);
 });
 
 test('block place IDs cannot hide a fallback that has no visible link', () => {
