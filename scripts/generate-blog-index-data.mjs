@@ -188,13 +188,22 @@ const TOPICS = [
 // Mix: current/timely topics, proven-popular posts, and the newest practical
 // guides. Keep this curated because the /blog hero is the first editorial
 // signal visitors see before the Latest shelf.
+const DISPLAY_TITLE_OVERRIDES = {
+  'leaving-berlin-by-train': 'Leaving Berlin by Train: Which Station, Which Ticket, and When the Slow Train Wins',
+};
+
 const HERO_SLUGS = {
-  lead: 'leaving-berlin-by-train',
+  lead: 'koepenick-berlin',
   secondary: [
+    'berlin-pride-csd-2026',
+    'deutsches-technikmuseum-berlin',
+    'leaving-berlin-by-train',
+    'karl-marx-allee-berlin',
+    'berlin-wall-trail',
+    'spandau-berlin',
     'tropical-islands-from-berlin',
     'leipzig-day-trip-from-berlin',
     'gemaldegalerie-berlin',
-    'berlin-wall-trail',
     'is-berlin-walkable',
     'stolpersteine-berlin',
     'spreewald-day-trip-from-berlin',
@@ -284,7 +293,12 @@ const REQUIRED_SLUGS = [
   'why-is-berlin-founding-year-1237',
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
+  'koepenick-berlin',
+  'berlin-pride-csd-2026',
+  'deutsches-technikmuseum-berlin',
   'leaving-berlin-by-train',
+  'karl-marx-allee-berlin',
+  'spandau-berlin',
   'tropical-islands-from-berlin',
   'leipzig-day-trip-from-berlin',
   'gemaldegalerie-berlin',
@@ -792,8 +806,9 @@ function normalizePost(post, categories) {
   const topic = topicFor(post);
   const image = post.media?.wixMedia?.image || post.coverMedia?.image || null;
   const path = post.url?.path || `/post/${post.slug}`;
+  const title = DISPLAY_TITLE_OVERRIDES[post.slug] || cleanText(post.title);
   return {
-    title: cleanText(post.title),
+    title,
     slug: post.slug,
     path,
     url: `${BLOG_BASE}${path}`,
@@ -806,7 +821,7 @@ function normalizePost(post, categories) {
     publishedDate: post.firstPublishedDate || post.publishedDate || '',
     image: imageUrl(image, 980, 650),
     thumb: imageUrl(image, 520, 360),
-    alt: cleanText(image?.altText || post.title),
+    alt: cleanText(image?.altText || title),
     relatedToolSlug: relatedToolSlugFor(post),
   };
 }
