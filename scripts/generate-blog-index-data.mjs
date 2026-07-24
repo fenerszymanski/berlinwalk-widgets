@@ -192,6 +192,18 @@ const DISPLAY_TITLE_OVERRIDES = {
   'leaving-berlin-by-train': 'Leaving Berlin by Train: Which Station, Which Ticket, and When the Slow Train Wins',
 };
 
+const YEAR_REQUIRED_TITLE_SLUGS = new Set([
+  'berlin-pride-csd-2026',
+  'where-to-watch-2026-world-cup-in-berlin',
+  'football-match-in-berlin',
+  'oktoberfest-in-berlin',
+  'berlin-marathon-2026',
+  'berlin-public-holidays-2026',
+  'best-christmas-markets-berlin-2026',
+  'festival-of-lights-berlin-2026',
+  'fiba-womens-basketball-world-cup-2026-berlin',
+]);
+
 const HERO_SLUGS = {
   lead: 'koepenick-berlin',
   secondary: [
@@ -633,6 +645,31 @@ function cleanText(value) {
   return String(value || '').replace(/\s+/g, ' ').trim();
 }
 
+function titleNeedsYear(slug) {
+  const value = slug || '';
+  return YEAR_REQUIRED_TITLE_SLUGS.has(value) || /^berlin-in-\w+-20\d{2}$/.test(value);
+}
+
+function stripGratuitousListingYear(title) {
+  return cleanText(
+    title
+      .replace(/\s*\(2026(?:\s+Local\s+Guide|\s+Guide)?\)\s*$/i, '')
+      .replace(/\bAn Honest 2026 Guide\b/gi, 'An Honest Guide')
+      .replace(/\b2026 Local Guide\b/gi, 'Local Guide')
+      .replace(/\b2026 Guide\b/gi, 'Guide')
+      .replace(/\s+in\s+2026(?=[:?]|\s*\(|$)/gi, '')
+      .replace(/\s+for\s+2026(?=[:?]|\s*\(|$)/gi, '')
+      .replace(/\s+2026(?=:)/g, '')
+  );
+}
+
+function displayTitleFor(post) {
+  const slug = post.slug || '';
+  const title = DISPLAY_TITLE_OVERRIDES[slug] || cleanText(post.title);
+  if (titleNeedsYear(slug)) return title;
+  return stripGratuitousListingYear(title);
+}
+
 function stripHtml(value) {
   return cleanText(String(value || '').replace(/<[^>]+>/g, ' '));
 }
@@ -806,7 +843,7 @@ function normalizePost(post, categories) {
   const topic = topicFor(post);
   const image = post.media?.wixMedia?.image || post.coverMedia?.image || null;
   const path = post.url?.path || `/post/${post.slug}`;
-  const title = DISPLAY_TITLE_OVERRIDES[post.slug] || cleanText(post.title);
+  const title = displayTitleFor(post);
   return {
     title,
     slug: post.slug,
