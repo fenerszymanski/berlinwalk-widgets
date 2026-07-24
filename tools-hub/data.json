@@ -5333,6 +5333,38 @@
       "relatedBlog": "/post/best-day-trips-from-berlin",
       "iconStatus": "live-wix-media",
       "cmsItemId": "823f19de-f48a-4ba6-b468-35f016c6e24c"
+    },
+    {
+      "slug": "berlin-courtyard-walk",
+      "title": "Berlin Courtyard Walk",
+      "lead": "Berlin hides its best corners in inner courtyards, the Höfe. This map walks you through the connected ones around Hackescher Markt in order, showing what each is, the walk from the last, and your running time and distance.",
+      "category": "Maps",
+      "hubCategory": "CultureLandmarks",
+      "type": "Map",
+      "tags": [
+        "courtyards",
+        "hoefe",
+        "hackesche hoefe",
+        "hackescher markt",
+        "mitte",
+        "street art",
+        "walk",
+        "map"
+      ],
+      "aliases": [
+        "berlin courtyards",
+        "hackesche hoefe",
+        "hidden berlin courtyards",
+        "hoefe walk",
+        "haus schwarzenberg",
+        "scheunenviertel"
+      ],
+      "image": "https://static.wixstatic.com/media/5a08a3_0e13aa459a2c4d68958e779af0e96f0a~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-courtyard-walk/",
+      "embedHeight": 1650,
+      "relatedBlog": "/post/what-to-do-near-hackescher-markt-after-walking-tour",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "1680d0bc-fe93-437a-8a66-05001f93d807"
     }
   ],
   "hubCategories": [
