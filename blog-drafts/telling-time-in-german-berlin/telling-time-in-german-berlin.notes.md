@@ -96,3 +96,17 @@ there is no tool visual credit to carry.
   behave, minimum control height 42px, brand badge injected.
 - Yellow contrast: kicker `rgb(255,230,0)` on `rgb(18,61,24)` text; warning
   strip `rgb(255,230,0)` on `rgb(33,33,33)` text. No white on yellow.
+- Quick Summary and FAQ embeds checked at 740px and 390px: overflow 0, 6 items,
+  6 questions, 0 literal asterisks. The Quick Summary renderer only converts
+  `**bold**`, so the first draft's single-asterisk italics rendered as literal
+  asterisks and were rewritten with bold and plain text.
+- Measured content heights used to set the widget embed height: 939px at 740
+  wide, 1454px at 390 wide, so the fallback iframe height is 1500 and
+  `brand.js` shrinks it on desktop.
+- Iframe auto-resize could not be observed in this browser environment: a local
+  harness received a manually dispatched `bw-resize` message but never one from
+  `brand.js`. A control run of the existing production
+  `reichstag-read-the-building` widget in the same harness behaved identically,
+  so this is a harness/browser artefact rather than a widget defect. This widget
+  loads the unmodified shared `../js/brand.js` exactly as every other widget
+  does.
