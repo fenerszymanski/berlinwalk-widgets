@@ -7431,5 +7431,35 @@
         "a": "Morning is best if you want them quiet, before tour groups and shoppers fill the Hackesche Höfe. If you want the Bonbonmacherei candy workshop in the Heckmann-Höfe, check its days first: it opens only a few days a week and usually takes a summer break, though the courtyard itself stays open."
       }
     ]
+  },
+  "reichstag-before-and-after": {
+    "title": "The Reichstag, Before & After: FAQ",
+    "subtitle": "One building across the German 20th century: the fire, the ruin, the graffiti, and how to visit the dome today.",
+    "items": [
+      {
+        "q": "What is the Reichstag building?",
+        "a": "The Reichstag is Berlin's parliament building, home to the German Bundestag. It was built between 1884 and 1894 to plans by Paul Wallot as the parliament of the new German Empire, and its heavy stone front carries the whole 20th century: the 1933 fire, the 1945 Battle of Berlin, thirty years as a domeless ruin beside the Wall, and its rebuild in the 1990s as a working parliament with a public glass dome."
+      },
+      {
+        "q": "What was the Reichstag fire of 1933?",
+        "a": "On the night of 27 February 1933 the Reichstag caught fire and the plenary chamber and the original dome were gutted. Hitler, who had been chancellor for four weeks, used the fire to push through the Reichstag Fire Decree, which suspended civil liberties and became one of the first steps toward dictatorship. The fire itself left no scar you can point to today, because the burned original dome was later removed."
+      },
+      {
+        "q": "Can you still see war damage on the Reichstag?",
+        "a": "Yes. When Norman Foster rebuilt the interior in the 1990s, the old outer walls and their marks were deliberately kept. You can still see shrapnel and bullet scars in the west facade stone, and inside, on a dome visit, the Cyrillic graffiti that Soviet soldiers scrawled on the walls in May 1945 was preserved rather than cleaned off."
+      },
+      {
+        "q": "How do you visit the Reichstag dome, and is it free?",
+        "a": "The glass dome and roof terrace are free, but you must register in advance at bundestag.de. You give the full name and date of birth of everyone in your group, and each visitor aged 16 or over shows the matching passport or ID card on the day. The dome is open daily from 8:00 until midnight, with last admission at 21:45. If you did not book ahead, you can try the Visitors' Service centre near the building, but slots fill fast in summer, so booking early is the safe move."
+      },
+      {
+        "q": "What happened to the Reichstag after World War II?",
+        "a": "After the war the shell sat in West Berlin with its dome gone. A plain restoration by Paul Baumgarten between 1961 and 1971 left it flat-roofed and barely used, because the real parliament met in Bonn and the Berlin Wall ran right behind the building. In 1995 the artists Christo and Jeanne-Claude wrapped the whole Reichstag in silver fabric for two weeks, drawing about five million visitors just before the rebuild began."
+      },
+      {
+        "q": "Who designed the Reichstag's glass dome?",
+        "a": "The British architect Norman Foster designed the reconstruction, carried out between 1994 and 1999. He kept the old scarred walls but added a walk-up glass dome directly over the debating chamber, so visitors literally stand above the politicians below. The Bundestag sat in the rebuilt Reichstag again for the first time on 19 April 1999."
+      }
+    ]
   }
 }

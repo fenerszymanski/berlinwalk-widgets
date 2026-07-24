@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Read the Reichstag: What Each Era Left on the Building</title>
+<meta name="description" content="Stand in front of the Reichstag and read its history off the stone. Tap each era to see what happened, whether a trace still survives today, and exactly what to look for." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Crect x='12' y='30' width='40' height='22' rx='2' fill='%23C9CBD1'/%3E%3Crect x='16' y='34' width='4' height='18' fill='%23FAFAF5'/%3E%3Crect x='24' y='34' width='4' height='18' fill='%23FAFAF5'/%3E%3Crect x='32' y='34' width='4' height='18' fill='%23FAFAF5'/%3E%3Crect x='40' y='34' width='4' height='18' fill='%23FAFAF5'/%3E%3Cpath d='M20 30 L32 20 L44 30 Z' fill='%23B9873F'/%3E%3Cellipse cx='32' cy='17' rx='8' ry='7' fill='none' stroke='%237CB342' stroke-width='2.4'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root {
+    --green: #1B5E20;
+    --green-dark: #123D18;
+    --green-mid: #2E7D32;
+    --lime: #7CB342;
+    --light: #C5E1A5;
+    --yellow: #FFE600;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --line: #E3E8DC;
+    --panel: #F4F7F0;
+    --muted: #5A6152;
+    --stone: #9AA0A6;
+    --red: #C0392B;
+    /* era accents */
+    --e-imperial: #B9873F;
+    --e-inscription: #7A5C2E;
+    --e-fire: #C0392B;
+    --e-battle: #6B7079;
+    --e-divided: #4A5560;
+    --e-wrap: #A9AEB6;
+    --e-dome: #2E7D32;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    padding: 14px 14px 26px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .rb { max-width: 780px; margin: 0 auto; }
+
+  /* Header */
+  .rb-head {
+    background: linear-gradient(155deg, var(--green-dark) 0%, var(--green) 62%, var(--green-mid) 100%);
+    border-radius: 18px 18px 0 0;
+    color: #fff;
+    padding: 20px 20px 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .rb-head::after {
+    content: ""; position: absolute; right: -30px; bottom: -34px;
+    width: 150px; height: 150px; border-radius: 50%;
+    background: radial-gradient(circle at 50% 50%, rgba(124,179,66,0.28), transparent 66%);
+  }
+  .rb-kicker {
+    display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em;
+    color: var(--green-dark); background: var(--yellow); border-radius: 999px;
+    padding: 4px 11px; margin-bottom: 11px; text-transform: uppercase;
+  }
+  .rb-head h1 { font-size: 21px; font-weight: 800; line-height: 1.24; max-width: 24ch; position: relative; z-index: 1; }
+  .rb-head p { font-size: 12.5px; line-height: 1.55; margin-top: 9px; max-width: 56ch; color: #E8F5E9; position: relative; z-index: 1; }
+
+  /* Body */
+  .rb-body {
+    background: #fff; border: 1px solid var(--line); border-top: none;
+    border-radius: 0 0 18px 18px; padding: 16px 16px 20px;
+  }
+
+  .rb-layout { display: grid; grid-template-columns: 168px 1fr; gap: 16px; align-items: start; }
+
+  /* Strata column */
+  .rb-strata-wrap { position: sticky; top: 12px; }
+  .rb-strata-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); margin: 0 0 8px 2px;
+  }
+  .rb-strata {
+    display: flex; flex-direction: column; gap: 4px;
+    border-radius: 12px; overflow: hidden; border: 1px solid var(--line);
+    background: var(--panel);
+  }
+  .rb-band {
+    position: relative; text-align: left; cursor: pointer; border: none;
+    color: #fff; padding: 9px 11px; font-family: inherit; width: 100%;
+    display: flex; align-items: baseline; gap: 7px; transition: transform 0.12s ease, filter 0.12s ease;
+    border-left: 4px solid transparent;
+  }
+  .rb-band:hover { filter: brightness(1.06); }
+  .rb-band .yr { font-size: 13px; font-weight: 800; letter-spacing: 0.01em; }
+  .rb-band .lbl { font-size: 10.5px; font-weight: 600; opacity: 0.92; line-height: 1.2; }
+  .rb-band .tick {
+    position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+    width: 15px; height: 15px; border-radius: 50%; background: rgba(255,255,255,0.22);
+    display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800;
+    opacity: 0; transition: opacity 0.15s ease;
+  }
+  .rb-band.seen .tick { opacity: 1; background: var(--yellow); color: var(--green-dark); }
+  .rb-band.active { border-left-color: var(--yellow); }
+  .rb-band.active::before {
+    content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: 3px; background: var(--yellow);
+  }
+
+  /* Detail panel */
+  .rb-detail { min-height: 260px; }
+  .rb-card { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: #fff; }
+  .rb-card-head { padding: 14px 15px 13px; color: #fff; position: relative; }
+  .rb-card-era { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.9; }
+  .rb-card-head h2 { font-size: 17px; font-weight: 800; line-height: 1.22; margin-top: 3px; }
+  .rb-card-body { padding: 14px 15px 16px; }
+  .rb-story { font-size: 13px; line-height: 1.62; color: #33372F; }
+  .rb-story strong { color: var(--ink); }
+
+  .rb-status { margin-top: 13px; border-radius: 11px; padding: 12px 13px; border: 1px solid var(--line); }
+  .rb-status.here { background: #F1F7EC; border-color: #D3E6C2; }
+  .rb-status.gone { background: #F5F5F2; border-color: #E3E3DD; }
+  .rb-status-tag {
+    display: inline-flex; align-items: center; gap: 6px; font-size: 10.5px; font-weight: 800;
+    letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px;
+  }
+  .rb-status.here .rb-status-tag { background: var(--green); color: #fff; }
+  .rb-status.gone .rb-status-tag { background: #C9CBD1; color: #3B3F37; }
+  .rb-zone {
+    display: inline-block; font-size: 10.5px; font-weight: 700; color: var(--green-dark);
+    background: var(--light); border-radius: 6px; padding: 2px 8px; margin: 9px 0 6px;
+  }
+  .rb-look { font-size: 12.5px; line-height: 1.55; color: #33372F; }
+  .rb-look strong { color: var(--ink); }
+
+  .rb-mark {
+    margin-top: 12px; width: 100%; border: none; cursor: pointer; font-family: inherit;
+    background: var(--yellow); color: var(--green-dark); font-weight: 800; font-size: 13px;
+    padding: 11px 14px; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 8px;
+    transition: filter 0.12s ease;
+  }
+  .rb-mark:hover { filter: brightness(0.96); }
+  .rb-mark.done { background: var(--green); color: #fff; }
+  .rb-mark.done:hover { filter: brightness(1.05); }
+
+  /* Progress + footer */
+  .rb-progress { margin-top: 16px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 14px 15px; }
+  .rb-progress-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .rb-progress-top .t { font-size: 12.5px; font-weight: 700; color: var(--ink); }
+  .rb-progress-top .n { font-size: 12.5px; font-weight: 800; color: var(--green); }
+  .rb-meter { height: 9px; background: #E6EADF; border-radius: 999px; margin-top: 10px; overflow: hidden; }
+  .rb-meter-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--lime), var(--green)); border-radius: 999px; transition: width 0.35s ease; }
+  .rb-payoff { font-size: 12.5px; line-height: 1.55; color: var(--green-dark); margin-top: 11px; font-weight: 600; display: none; }
+  .rb-payoff.show { display: block; }
+
+  .rb-foot { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 9px; }
+  .rb-btn {
+    flex: 1 1 auto; text-align: center; text-decoration: none; font-weight: 700; font-size: 12.5px;
+    padding: 11px 13px; border-radius: 10px; border: 1px solid var(--line); color: var(--green-dark); background: #fff;
+    transition: background 0.12s ease;
+  }
+  .rb-btn:hover { background: var(--panel); }
+  .rb-btn.solid { background: var(--green); color: #fff; border-color: var(--green); }
+  .rb-btn.solid:hover { background: var(--green-mid); }
+  .rb-note { font-size: 11.5px; line-height: 1.5; color: var(--muted); margin-top: 11px; }
+  .rb-note a { color: var(--green); font-weight: 700; }
+
+  @media (max-width: 560px) {
+    .rb-layout { grid-template-columns: 1fr; gap: 14px; }
+    .rb-strata-wrap { position: static; }
+    .rb-strata { flex-direction: row; flex-wrap: wrap; gap: 5px; background: transparent; border: none; }
+    .rb-band { flex: 1 1 30%; border-radius: 9px; border-left: none; flex-direction: column; align-items: flex-start; gap: 1px; padding: 8px 9px; min-width: 92px; }
+    .rb-band.active { outline: 2px solid var(--yellow); outline-offset: -2px; border-left: none; }
+    .rb-band.active::before { display: none; }
+    .rb-band .tick { top: 7px; right: 7px; transform: none; }
+    .rb-head h1 { font-size: 19px; }
+  }
+</style>
+</head>
+<body>
+<div class="rb">
+  <div class="rb-head">
+    <span class="rb-kicker">Before &amp; After • Berlin</span>
+    <h1>Read the Reichstag off its own stone</h1>
+    <p>One building carries every chapter of modern German history. Tap an era to see what happened, whether a trace still survives, and exactly what to look for when you stand there.</p>
+  </div>
+  <div class="rb-body">
+    <div class="rb-layout">
+      <div class="rb-strata-wrap">
+        <p class="rb-strata-label">The layers, oldest at the top</p>
+        <div class="rb-strata" id="strata" role="tablist" aria-label="Reichstag eras"></div>
+      </div>
+      <div class="rb-detail">
+        <div class="rb-card" id="card"></div>
+        <div class="rb-progress">
+          <div class="rb-progress-top">
+            <span class="t">Traces you can still find today</span>
+            <span class="n" id="count">0 / 4</span>
+          </div>
+          <div class="rb-meter"><div class="rb-meter-fill" id="fill"></div></div>
+          <p class="rb-payoff" id="payoff">That is the whole trick of the Reichstag: four visible layers, from imperial stone to a democratic glass dome, standing in one facade. Now you know where to look.</p>
+        </div>
+        <div class="rb-foot">
+          <a class="rb-btn" id="mapsBtn" href="https://www.google.com/maps/search/?api=1&query=Reichstag+Building+Berlin" target="_blank" rel="noopener">Open the Reichstag in Maps</a>
+          <a class="rb-btn solid" href="https://www.berlinwalk.com/post/how-to-visit-the-reichstag-dome-for-free-and-why-you-should-book-now" target="_blank" rel="noopener">How to visit the dome, free</a>
+        </div>
+        <p class="rb-note">The dome and roof terrace are free but need a booking in advance at <a href="https://www.bundestag.de/en/visittheBundestag" target="_blank" rel="noopener">bundestag.de</a>. Bring the passport or ID you registered with.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var ERAS = [
+    {
+      id: 'imperial', year: '1894', label: 'Imperial stone', accent: 'var(--e-imperial)',
+      title: 'Built to look like an empire',
+      story: 'The Reichstag went up between 1884 and 1894 to plans by Paul Wallot, and Kaiser Wilhelm II laid the final stone on 5 December 1894. The heavy stone front and the four squat corner towers were meant to project the power of the new German Empire, not the modest parliament that actually met inside.',
+      here: true, zone: 'From the lawn, west (front) side',
+      look: 'The whole grey sandstone facade and the <strong>four square corner towers</strong>. This is the original 1890s shell, and everything that came later was added to or carved out of it.'
+    },
+    {
+      id: 'inscription', year: '1916', label: 'The four words', accent: 'var(--e-inscription)',
+      title: 'DEM DEUTSCHEN VOLKE',
+      story: 'The bronze letters over the main entrance, <strong>“Dem Deutschen Volke”</strong> (“To the German People”), were only fixed in place in 1916, more than twenty years after the building opened. The pediment had stood empty that whole time because the wording, dedicating the house to the people rather than the Kaiser, was politically awkward.',
+      here: true, zone: 'At the west portico, above the columns',
+      look: 'The <strong>four big bronze words</strong> across the top of the entrance. The lettering was designed in 1916 by Peter Behrens. Look up as you face the main steps.'
+    },
+    {
+      id: 'fire', year: '1933', label: 'The fire', accent: 'var(--e-fire)',
+      title: 'The night that helped Hitler',
+      story: 'On the night of 27 February 1933 the Reichstag burned. The plenary chamber and the original dome were gutted. Hitler, chancellor for four weeks, used the fire to push through the Reichstag Fire Decree, which suspended civil liberties and cleared the way for dictatorship.',
+      here: false, gone: 'The fire left nothing you can point to. The burned original dome was removed decades later, so the dome above you now is not the one that burned. What the fire really destroyed was German democracy, for twelve years.'
+    },
+    {
+      id: 'battle', year: '1945', label: 'The battle', accent: 'var(--e-battle)',
+      title: 'A target in the Battle of Berlin',
+      story: 'By 1945 the Reichstag was barely used, but the Red Army made it the symbolic prize of the Battle of Berlin. Soviet soldiers raised a flag over the ruin, an image staged for Yevgeny Khaldei’s famous photograph on 2 May 1945, and scrawled their names across the inner walls.',
+      here: true, zone: 'West facade stone, plus inside on a dome visit',
+      look: 'Run your eye over the lower west facade for <strong>shrapnel and bullet scars</strong> still in the stone. If you go up on a dome visit, the <strong>Cyrillic graffiti</strong> Soviet soldiers left in May 1945 was deliberately kept during the 1990s rebuild and is visible inside.'
+    },
+    {
+      id: 'divided', year: '1961–90', label: 'Divided city', accent: 'var(--e-divided)',
+      title: 'A ruin on the edge of the Wall',
+      story: 'After the war the shell sat in West Berlin with its dome gone. A plain 1961–71 restoration by Paul Baumgarten left it flat-roofed and half-empty, because the real parliament sat in Bonn and the <strong>Berlin Wall ran right behind the building</strong>. For thirty years this was a monument on a dead-end street.',
+      here: false, gone: 'No single object marks this, but the geography does: walk around to the east (back) side and you are standing almost on the line where the Wall once cut the city in two, a few steps from the Brandenburg Gate.'
+    },
+    {
+      id: 'wrap', year: '1995', label: 'Wrapped', accent: 'var(--e-wrap)',
+      title: 'Two weeks in silver fabric',
+      story: 'For two weeks in the summer of 1995, the artists Christo and Jeanne-Claude wrapped the entire Reichstag in shimmering silver fabric. About five million people came to see it. The wrapping marked the line between the empty Cold War ruin and the working parliament it was about to become.',
+      here: false, gone: 'It was always temporary, so there is nothing to find. But every photo of the wrapped Reichstag was taken from the same lawns where you are standing, just before the rebuild began.'
+    },
+    {
+      id: 'dome', year: '1999', label: 'Glass dome', accent: 'var(--e-dome)',
+      title: 'A democracy you can walk over',
+      story: 'Norman Foster’s reconstruction, from 1994 to 1999, kept the old scarred walls but crowned them with a walk-up glass dome. The Bundestag sat here again for the first time on 19 April 1999. The clear dome, sitting directly over the debating chamber, is the whole point: citizens literally stand above their politicians.',
+      here: true, zone: 'On top; free timed entry from the roof',
+      look: 'The <strong>glass dome</strong> itself, obvious from the lawn. Better still, book a free slot and walk the <strong>spiral ramp</strong> inside for a 360-degree view over Berlin. It is the modern layer laid straight onto the imperial stone.'
+    }
+  ];
+
+  var VISIBLE_TOTAL = ERAS.filter(function (e) { return e.here; }).length;
+  var seen = {};
+  var activeId = ERAS[0].id;
+
+  var strataEl = document.getElementById('strata');
+  var cardEl = document.getElementById('card');
+  var countEl = document.getElementById('count');
+  var fillEl = document.getElementById('fill');
+  var payoffEl = document.getElementById('payoff');
+
+  function buildStrata() {
+    strataEl.innerHTML = '';
+    ERAS.forEach(function (era) {
+      var b = document.createElement('button');
+      b.className = 'rb-band';
+      b.style.background = era.accent;
+      b.setAttribute('role', 'tab');
+      b.setAttribute('data-id', era.id);
+      b.innerHTML =
+        '<span class="yr">' + era.year + '</span>' +
+        '<span class="lbl">' + era.label + '</span>' +
+        '<span class="tick" aria-hidden="true">✓</span>';
+      b.addEventListener('click', function () { select(era.id); });
+      strataEl.appendChild(b);
+    });
+  }
+
+  function renderCard(era) {
+    var status;
+    if (era.here) {
+      var done = !!seen[era.id];
+      status =
+        '<div class="rb-status here">' +
+          '<span class="rb-status-tag">◆ Still here today</span>' +
+          '<div class="rb-zone">Find it: ' + era.zone + '</div>' +
+          '<div class="rb-look">' + era.look + '</div>' +
+          '<button class="rb-mark' + (done ? ' done' : '') + '" id="markBtn">' +
+            (done ? '✓ Spotted' : 'Mark as spotted') +
+          '</button>' +
+        '</div>';
+    } else {
+      status =
+        '<div class="rb-status gone">' +
+          '<span class="rb-status-tag">✕ Not visible now</span>' +
+          '<div class="rb-look" style="margin-top:9px">' + era.gone + '</div>' +
+        '</div>';
+    }
+    cardEl.innerHTML =
+      '<div class="rb-card-head" style="background:' + era.accent + '">' +
+        '<div class="rb-card-era">' + era.year + ' • ' + era.label + '</div>' +
+        '<h2>' + era.title + '</h2>' +
+      '</div>' +
+      '<div class="rb-card-body">' +
+        '<div class="rb-story">' + era.story + '</div>' +
+        status +
+      '</div>';
+    if (era.here) {
+      document.getElementById('markBtn').addEventListener('click', function () {
+        seen[era.id] = !seen[era.id];
+        updateProgress();
+        renderCard(era);
+        markStrata();
+      });
+    }
+  }
+
+  function markStrata() {
+    Array.prototype.forEach.call(strataEl.children, function (b) {
+      var idv = b.getAttribute('data-id');
+      b.classList.toggle('seen', !!seen[idv]);
+      b.classList.toggle('active', idv === activeId);
+      b.setAttribute('aria-selected', idv === activeId ? 'true' : 'false');
+    });
+  }
+
+  function updateProgress() {
+    var n = Object.keys(seen).filter(function (k) { return seen[k]; }).length;
+    countEl.textContent = n + ' / ' + VISIBLE_TOTAL;
+    fillEl.style.width = (n / VISIBLE_TOTAL * 100) + '%';
+    payoffEl.classList.toggle('show', n === VISIBLE_TOTAL);
+  }
+
+  function select(id) {
+    activeId = id;
+    var era = ERAS.filter(function (e) { return e.id === id; })[0];
+    renderCard(era);
+    markStrata();
+  }
+
+  buildStrata();
+  select(activeId);
+  updateProgress();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
