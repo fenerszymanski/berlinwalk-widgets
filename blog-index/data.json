@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-07-24T04:49:45.148Z",
+  "updatedAt": "2026-07-24T04:56:24.287Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 255,
+  "totalPosts": 257,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1617,6 +1617,40 @@
   ],
   "latest": [
     {
+      "title": "How to Order at a Berlin Bakery: The German Words and Habits That Get You Served",
+      "slug": "how-to-order-at-a-berlin-bakery",
+      "path": "/post/how-to-order-at-a-berlin-bakery",
+      "url": "https://www.berlinwalk.com/post/how-to-order-at-a-berlin-bakery",
+      "excerpt": "A German bakery order is short and follows the same pattern every time. Here is the one sentence that starts it, the Berlin words phrasebooks miss, the questions they ask back, and what to do when your German runs out.",
+      "category": "German Language",
+      "categorySlug": "german-language",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-07-24T04:51:04.979Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_03c85e6733f4445f93729d067c269bab~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-bakery.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_03c85e6733f4445f93729d067c269bab~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-bakery.jpg",
+      "alt": "A glass bakery counter in Berlin filled with croissants and filled rolls",
+      "relatedToolSlug": "berlin-bakery-counter"
+    },
+    {
+      "title": "Baltic Sea Day Trip from Berlin: Which Beach to Pick and How the Trains Work",
+      "slug": "baltic-sea-day-trip-from-berlin",
+      "path": "/post/baltic-sea-day-trip-from-berlin",
+      "url": "https://www.berlinwalk.com/post/baltic-sea-day-trip-from-berlin",
+      "excerpt": "The Baltic coast starts less than three hours north of Berlin by train. Here is how Warnemünde, the Usedom imperial resorts and Binz on Rügen compare for one sea day, which trains run on the Deutschlandticket, and the returns you must not miss.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-07-24T04:51:03.300Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_8d6e7b2115ee4ecaad82c1499a08c4a3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-warnemuende-lighthouse.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_8d6e7b2115ee4ecaad82c1499a08c4a3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-warnemuende-lighthouse.jpg",
+      "alt": "Rows of beach chairs on Warnemünde beach with the 1898 lighthouse and the curved Teepott roof behind",
+      "relatedToolSlug": "baltic-beach-day-planner"
+    },
+    {
       "title": "Köpenick Berlin: The Palace, the Lake and the Fake Captain Who Fooled Prussia",
       "slug": "koepenick-berlin",
       "path": "/post/koepenick-berlin",
@@ -1785,43 +1819,43 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_98d314f3bd7a4ff0957d8139b013ae34~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-dresden-neumarkt-frauenkirche.jpg",
       "alt": "The Neumarkt in Dresden with the rebuilt Frauenkirche in the centre and baroque townhouses around the square",
       "relatedToolSlug": "dresden-day-clock"
+    }
+  ],
+  "allPosts": [
+    {
+      "title": "How to Order at a Berlin Bakery: The German Words and Habits That Get You Served",
+      "slug": "how-to-order-at-a-berlin-bakery",
+      "path": "/post/how-to-order-at-a-berlin-bakery",
+      "url": "https://www.berlinwalk.com/post/how-to-order-at-a-berlin-bakery",
+      "excerpt": "A German bakery order is short and follows the same pattern every time. Here is the one sentence that starts it, the Berlin words phrasebooks miss, the questions they ask back, and what to do when your German runs out.",
+      "category": "German Language",
+      "categorySlug": "german-language",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-07-24T04:51:04.979Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_03c85e6733f4445f93729d067c269bab~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-bakery.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_03c85e6733f4445f93729d067c269bab~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-bakery.jpg",
+      "alt": "A glass bakery counter in Berlin filled with croissants and filled rolls",
+      "relatedToolSlug": "berlin-bakery-counter"
     },
     {
-      "title": "How to See a Football Match in Berlin: Union, Hertha and the Tickets You Can Actually Get (2026/27)",
-      "slug": "football-match-in-berlin",
-      "path": "/post/football-match-in-berlin",
-      "url": "https://www.berlinwalk.com/post/football-match-in-berlin",
-      "excerpt": "Most visitors search for Bundesliga tickets, land on Hertha BSC, and only then find out that Hertha are in the second division and the Bundesliga club is the one out in the woods in Köpenick. Here is which Berlin game you can actually get into, what it costs, and how to read a fixture list that only fixes the weekend.",
+      "title": "Baltic Sea Day Trip from Berlin: Which Beach to Pick and How the Trains Work",
+      "slug": "baltic-sea-day-trip-from-berlin",
+      "path": "/post/baltic-sea-day-trip-from-berlin",
+      "url": "https://www.berlinwalk.com/post/baltic-sea-day-trip-from-berlin",
+      "excerpt": "The Baltic coast starts less than three hours north of Berlin by train. Here is how Warnemünde, the Usedom imperial resorts and Binz on Rügen compare for one sea day, which trains run on the Deutschlandticket, and the returns you must not miss.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "first-day",
       "topicLabel": "First Day in Berlin",
-      "readTime": "9 min read",
-      "publishedDate": "2026-07-21T09:24:56.494Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_1ba567f32e0c487ab7a82d201ad42ba5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-olympiastadion-hertha-crowd.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_1ba567f32e0c487ab7a82d201ad42ba5~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-olympiastadion-hertha-crowd.jpg",
-      "alt": "A packed Olympiastadion in Berlin during a Hertha BSC home match, with a full blue and white supporters' display filling the stand behind the goal",
-      "relatedToolSlug": "berlin-matchday-board"
-    },
-    {
-      "title": "Wannsee Berlin: The Beach, the Peacocks and the Villa Shore",
-      "slug": "wannsee-berlin",
-      "path": "/post/wannsee-berlin",
-      "url": "https://www.berlinwalk.com/post/wannsee-berlin",
-      "excerpt": "Everyone on the summer S7 says they are going to Wannsee, and they are all going to different places: a 1907 sand beach, an island of free-roaming peacocks, a villa shore that carries the heaviest history in Berlin, and a lake ferry that runs on a normal BVG fare. Here is how the geography actually works, and how I would combine it.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "free-budget",
-      "topicLabel": "Free & Budget",
       "readTime": "7 min read",
-      "publishedDate": "2026-07-21T09:22:18.850Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_6770d8e1ecbc4313937f77e3c032e91f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-strandbad-wannsee.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_6770d8e1ecbc4313937f77e3c032e91f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-strandbad-wannsee.jpg",
-      "alt": "Rows of blue and white striped wicker beach chairs on the sand at Strandbad Wannsee",
-      "relatedToolSlug": "wannsee-shore-planner"
-    }
-  ],
-  "allPosts": [
+      "publishedDate": "2026-07-24T04:51:03.300Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_8d6e7b2115ee4ecaad82c1499a08c4a3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-warnemuende-lighthouse.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_8d6e7b2115ee4ecaad82c1499a08c4a3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-warnemuende-lighthouse.jpg",
+      "alt": "Rows of beach chairs on Warnemünde beach with the 1898 lighthouse and the curved Teepott roof behind",
+      "relatedToolSlug": "baltic-beach-day-planner"
+    },
     {
       "title": "Köpenick Berlin: The Palace, the Lake and the Fake Captain Who Fooled Prussia",
       "slug": "koepenick-berlin",

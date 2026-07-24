@@ -698,6 +698,8 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if ((post.slug || '') === 'baltic-sea-day-trip-from-berlin') return 'baltic-beach-day-planner';
+  if ((post.slug || '') === 'how-to-order-at-a-berlin-bakery') return 'berlin-bakery-counter';
   if ((post.slug || '') === 'berlin-wall-trail') return 'berlin-wall-trail-sections';
   if ((post.slug || '') === 'leaving-berlin-by-train') return 'berlin-train-gateways-2026';
   if ((post.slug || '') === 'wannsee-berlin') return 'wannsee-shore-planner';
