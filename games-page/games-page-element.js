@@ -3,7 +3,7 @@
   const BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
     ? new URL('../', SCRIPT_URL).toString()
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-  const ASSET_VERSION = 'games-page-pulse-20260708b';
+  const ASSET_VERSION = 'games-page-where-cover-20260724';
   const GAMES = [
     {
       id: 'where-in-berlin',
@@ -14,7 +14,7 @@
       duration: 'Under 2 min',
       difficulty: '6 situation calls',
       player: 'Your city rhythm',
-      image: 'where-in-berlin/assets/social/where-in-berlin-social-1200x630.png',
+      image: 'where-in-berlin/assets/social/where-in-berlin-social-1200x630.jpg',
       href: 'https://www.berlinwalk.com/games/where-in-berlin',
       button: 'Find your borough',
       accent: 'district'
