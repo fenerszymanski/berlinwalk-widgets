@@ -40,7 +40,7 @@ Here is the version nobody warns visitors about. In a broad band of Germany that
 
 The dialect maps at the [Atlas zur deutschen Alltagssprache](https://www.atlas-alltagssprache.de/uhrzeit/) show this clearly, and the old inner-German border is still visible on the current data. Berlin sits inside that eastern zone, so *dreiviertel neun* is completely normal here even though somebody from Hamburg might have to think about it. You will also hear the half hour used as an anchor: **zehn vor halb neun** is 8:20, and **zehn nach halb neun** is 8:40.
 
-The practical rule: **if a German time gives you a bare hour with no *nach* or *vor*, it is counting up to that hour, so go back from it.** *Viertel neun* is fifteen minutes into the eighth hour. *Dreiviertel neun* is forty-five minutes into it.
+The practical rule: **if a German time gives you a bare hour with no *nach* or *vor*, it is counting up to that hour, so go back from it.** *Viertel neun* is a quarter of the way through the hour that ends at nine. *Dreiviertel neun* is three quarters of the way through it.
 
 Turn the dial below to any time and you can see all of this at once: the written form, the spoken form, the eastern alternative where one exists, and a warning whenever the German names an hour that has not happened yet.
 
