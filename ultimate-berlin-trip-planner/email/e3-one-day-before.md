@@ -2,7 +2,7 @@
 
 Subject: 🌦️ Berlin tomorrow
 
-Preheader: Weather, shoes, meeting point, and your saved pack.
+Preheader: Weather, shoes, meeting point, and your saved plan.
 
 Hi,
 
@@ -12,11 +12,11 @@ Your weather note:
 
 **${weatherTitle}**
 
-For the first day, keep it easy: arrive, eat, take one short walk, then stop before you get too tired.
+For the first day, reach your accommodation, eat, take one short walk, and rest.
 
-Berlin looks smaller on a map than it feels on foot. There are station stairs, cobbles, big crossings, river wind, and more walking than expected. Pack comfortable shoes somewhere easy to reach.
+Berlin involves more walking than many visitors expect. You may need to use station stairs, walk over cobbles, cross wide roads, and deal with wind near the river. Keep comfortable shoes where you can reach them easily.
 
-If tomorrow still feels too loose, open your paid plan before you leave. The €2.99 First-Day Rescue add-on uses your landing point, luggage, weather and first stop to build one arrival decision sheet.
+If you need more help with arrival day, open your paid plan before you leave. The €2.99 First-Day Rescue add-on uses your arrival point, luggage, weather, and first stop to create a short arrival plan.
 
 Save these before you travel:
 
@@ -28,7 +28,7 @@ If you still want to join BerlinWalk, last-minute spots are here:
 
 ${bookingUrl}
 
-If you do not join the walk, the advice is the same: keep the first day gentle. Berlin has enough edges; arrival day does not need to become one of them.
+If you do not join the walk, keep the first day light. You can follow the full plan after you have rested.
 
 Yusuf  
 BerlinWalk  

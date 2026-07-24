@@ -2,17 +2,15 @@
 
 Subject: 👋 Welcome to Berlin
 
-Preheader: Reach your base, eat something, and keep the pack simple today.
+Preheader: Reach your accommodation, eat something, and keep today simple.
 
 Welcome to Berlin.
 
-Today is not the day to prove anything.
+First, go to your accommodation and leave your bags if you can. Eat before you get too tired. One short orientation walk is enough today.
 
-Reach your base, drop bags if you need to, eat before you are tired, and keep the first walk simple. One good orientation walk is enough today.
+When you travel from BER, follow the platform signs carefully and check the destination on the train display.
 
-If you came from BER, do not worry if the first transfer felt clunky. Most people meet Berlin through a platform sign, a ticket machine, or a station that makes less sense than it should.
-
-One last practical thing: BER is Zone C. Central Berlin is usually AB. And if you have a paper ticket, validate it before you ride.
+BER is in Zone C. Most journeys within central Berlin need zones AB. If you have a paper ticket, validate it before you board.
 
 Your ${tripPackLabel} is here:
 
@@ -26,7 +24,7 @@ Last-minute reservation link:
 
 ${bookingUrl}
 
-Have a calm first day. Berlin gets much better when you stop trying to understand all of it immediately.
+Have a calm first day. You do not need to visit several neighbourhoods today.
 
 Yusuf  
 BerlinWalk  

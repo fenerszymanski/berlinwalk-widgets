@@ -104,7 +104,10 @@
   function routePlaceIdsFromBlocks(blocks) {
     var routeIds = [];
     (Array.isArray(blocks) ? blocks : []).forEach(function (block) {
-      var mealAlternatives = /^(Lunch|Evening|Dinner|Later)$/i.test(String(block && block.time || '').trim()) && block && block.kind !== 'transfer';
+      var mealAlternatives = block && block.kind !== 'transfer' && (
+        /^(Lunch|Evening|Dinner|Later)$/i.test(String(block.time || '').trim()) ||
+        (block.links || []).some(function (link) { return link && link.kind === 'meal_option'; })
+      );
       var candidates = mealAlternatives ? [block && block.placeId] : (block && block.placeIds || []);
       candidates.forEach(function (candidate) {
         var value = placeId(candidate);
@@ -116,7 +119,10 @@
 
   function blockRoutePlaceIds(block) {
     if (!block) return [];
-    var mealAlternatives = /^(Lunch|Evening|Dinner|Later)$/i.test(String(block.time || '').trim()) && block.kind !== 'transfer';
+    var mealAlternatives = block.kind !== 'transfer' && (
+      /^(Lunch|Evening|Dinner|Later)$/i.test(String(block.time || '').trim()) ||
+      (block.links || []).some(function (link) { return link && link.kind === 'meal_option'; })
+    );
     var candidates = mealAlternatives ? [block.placeId] : (block.placeIds || []);
     return candidates.map(placeId).filter(function (value) { return value && value !== 'arrival_transfer'; });
   }
@@ -330,7 +336,10 @@
       delivery: {
         browser: delivery.browser !== false,
         pdf: delivery.pdf !== false,
-        pdfPageCount: days.length + 4,
+        // The PDF renderer paginates by real content density. Keep an older
+        // stored value for hash compatibility, but never invent a new count
+        // from the number of trip days.
+        pdfPageCount: Math.max(0, Math.floor(number(delivery.pdfPageCount, 0) || 0)),
         rendererVersion: text(delivery.rendererVersion || 'artifact-v3', 80)
       }
     };
@@ -469,7 +478,10 @@
           var currentBlock = day.blocks[blockIndex];
           var previousIds = blockRoutePlaceIds(previousBlock);
           var currentIds = blockRoutePlaceIds(currentBlock);
-          var expectedFrom = previousIds[previousIds.length - 1] || '';
+          var arrivalAdjacency = day.dayNumber === 1 &&
+            previousBlock && previousBlock.placeId === 'arrival_transfer' &&
+            !previousIds.length && currentIds.length;
+          var expectedFrom = arrivalAdjacency ? 'arrival_transfer' : (previousIds[previousIds.length - 1] || '');
           var expectedTo = currentIds[0] || '';
           var needsTransfer = expectedFrom && expectedTo && expectedFrom !== expectedTo;
           var currentTransfer = currentBlock.transferFromPrevious;
@@ -517,7 +529,9 @@
       if (!day.route.url) errors.push('day_route_' + (index + 1));
       if (!day.planB) errors.push('day_plan_b_' + (index + 1));
     });
-    if (artifact && artifact.delivery && artifact.delivery.pdfPageCount !== days.length + 4) errors.push('pdf_page_count');
+    if (artifact && artifact.delivery && (!Number.isInteger(artifact.delivery.pdfPageCount) || artifact.delivery.pdfPageCount < 0)) {
+      errors.push('pdf_page_count');
+    }
     var bytes = byteLength(stableStringify(artifact));
     if (bytes > MAX_ARTIFACT_BYTES) errors.push('artifact_too_large');
     return Array.from(new Set(errors));
@@ -589,7 +603,14 @@
             detail: block.detail,
             placeId: block.placeId,
             placeIds: block.placeIds.slice(),
-            links: block.links.map(function (link) { return { placeId: link.placeId, url: link.url }; }),
+            links: block.links.map(function (link) {
+              return {
+                kind: link.kind,
+                label: link.label,
+                placeId: link.placeId,
+                url: link.url
+              };
+            }),
             transferFromPrevious: block.transferFromPrevious ? Object.assign({}, block.transferFromPrevious) : null,
             transferSegment: block.transferSegment ? Object.assign({}, block.transferSegment) : null
           };

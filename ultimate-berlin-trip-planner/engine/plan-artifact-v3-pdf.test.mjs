@@ -41,6 +41,18 @@ function artifactSource(dayCount = 3) {
         window: '11:00-12:30',
         title: 'Museum Island',
         copy: 'Cross the Spree and keep the museums together in one compact section.',
+        transferFromPrevious: {
+          fromPlaceId: 'alexanderplatz',
+          fromLabel: 'Alexanderplatz',
+          toPlaceId: 'museum-island',
+          toLabel: 'Museum Island',
+          mode: 'walking',
+          minutes: 14,
+          bufferMinutes: 4,
+          totalMinutes: 18,
+          instruction: 'Walk west along Karl-Liebknecht-Strasse, cross the Spree and continue to Museum Island.',
+          url: 'https://www.google.com/maps/dir/?api=1&origin=Alexanderplatz+Berlin&destination=Museum+Island+Berlin&travelmode=walking',
+        },
         primaryPlace: {
           placeId: 'museum-island',
           label: 'Museum Island map',
@@ -131,6 +143,16 @@ class FakePdf {
     this.savedAs = '';
     this.textWithLinkCalls = 0;
     this.fontSize = 0;
+    this.language = '';
+    this.viewerPreferenceValues = null;
+    this.metadataValues = [];
+    this.outlineItems = [];
+    this.outline = {
+      add: (_parent, title, options) => {
+        this.outlineItems.push({ title, options });
+        return { title, options };
+      },
+    };
     this.internal = {
       pageSize: {
         getWidth: () => 595.28,
@@ -150,6 +172,9 @@ class FakePdf {
   setDrawColor() { return this; }
   setLineWidth() { return this; }
   setProperties(value) { this.properties = value; return this; }
+  setLanguage(value) { this.language = value; return this; }
+  viewerPreferences(value) { this.viewerPreferenceValues = value; return this; }
+  addMetadata(value, namespace) { this.metadataValues.push({ value, namespace }); return this; }
   rect(x, y, width, height) { this.shapes.push({ page: this.currentPage, x, y, width, height }); return this; }
   roundedRect(x, y, width, height) { this.shapes.push({ page: this.currentPage, x, y, width, height }); return this; }
   line() { return this; }
@@ -195,18 +220,17 @@ class FakePdf {
   save(name) { this.savedAs = name; return this; }
 }
 
-test('creates the exact N + 4 page sequence for every supported trip length', () => {
+test('creates a complete ordered page sequence with continuation capacity for every trip length', () => {
   for (let count = 1; count <= 7; count += 1) {
     const plan = PdfV3.createPagePlan(artifactSource(count), weatherSource(count));
-    assert.equal(plan.pageCount, count + 4);
-    assert.equal(plan.pages.length, count + 4);
-    assert.deepEqual(plan.pages.map((page) => page.type), [
-      'cover',
-      'overview',
-      ...Array.from({ length: count }, () => 'day'),
-      'weather-plan-b',
-      'carry-support',
-    ]);
+    assert.equal(plan.pageCount, plan.pages.length);
+    assert.equal(plan.pages[0].type, 'cover');
+    assert.equal(plan.pages[1].type, 'overview');
+    assert.ok(plan.pages.some((page) => page.type === 'overview-days'));
+    assert.ok(plan.pages.some((page) => page.type === 'overview-notes'));
+    assert.ok(plan.pages.filter((page) => page.type === 'day').length >= count);
+    assert.ok(plan.pages.some((page) => page.type === 'weather-plan-b'));
+    assert.equal(plan.pages.at(-1).type, 'carry-support');
     assert.deepEqual(PdfV3.validatePagePlan(plan), []);
   }
 });
@@ -317,8 +341,8 @@ test('renders exact pages from both a jsPDF constructor and a fresh instance', (
   const source = artifactSource(5);
   const weather = weatherSource(5);
   const fromConstructor = PdfV3.renderPdf(FakePdf, source, weather, { save: false });
-  assert.equal(fromConstructor.pageCount, 9);
-  assert.equal(fromConstructor.doc.getNumberOfPages(), 9);
+  assert.equal(fromConstructor.pageCount, fromConstructor.pagePlan.pageCount);
+  assert.equal(fromConstructor.doc.getNumberOfPages(), fromConstructor.pagePlan.pageCount);
   assert.equal(fromConstructor.doc.links.every(PdfV3.validateExternalUrl), true);
   assert.equal(fromConstructor.doc.textWithLinkCalls, 0);
   assert.equal(fromConstructor.doc.linkRects.every((rect) => rect.height > 0), true);
@@ -326,7 +350,7 @@ test('renders exact pages from both a jsPDF constructor and a fresh instance', (
   const instance = new FakePdf();
   const view = V3.createViewModel(source, weather);
   const fromInstance = PdfV3.renderPdf(instance, view, { save: true, fileName: 'berlinwalk-test-plan.pdf' });
-  assert.equal(fromInstance.pageCount, 9);
+  assert.equal(fromInstance.pageCount, fromInstance.pagePlan.pageCount);
   assert.equal(instance.savedAs, 'berlinwalk-test-plan.pdf');
 });
 
@@ -347,6 +371,35 @@ test('cover uses the supplied original BerlinWalk logo asset', () => {
   assert.match(coverText, /PERSONAL TRIP PLAN/);
 });
 
+test('cover accepts the approved Berlin photo separately from the original logo', () => {
+  const plan = PdfV3.createPagePlan(artifactSource(1), weatherSource(1));
+  const rendered = PdfV3.renderPagePlan(FakePdf, plan, {
+    save: false,
+    logoDataUrl: 'data:image/png;base64,BERLINWALK_WORDMARK_TEST',
+    coverImageDataUrl: 'data:image/jpeg;base64,BERLIN_HERO_TEST',
+  });
+  assert.equal(rendered.doc.images.length, 2);
+  assert.equal(rendered.doc.images[0].format, 'PNG');
+  assert.equal(rendered.doc.images[1].format, 'JPEG');
+});
+
+test('sets English document metadata, viewer preferences and page-order bookmarks', () => {
+  const source = artifactSource(3);
+  source.trip.title = 'Berlin & Potsdam plan';
+  const result = PdfV3.renderPdf(FakePdf, source, weatherSource(3), { save: false });
+  assert.equal(result.doc.language, 'en-GB');
+  assert.equal(result.doc.viewerPreferenceValues.DisplayDocTitle, true);
+  assert.equal(result.doc.viewerPreferenceValues.Direction, 'L2R');
+  assert.equal(result.doc.metadataValues.length, 1);
+  assert.match(result.doc.metadataValues[0].value, /<dc:language>en-GB<\/dc:language>/);
+  assert.match(result.doc.metadataValues[0].value, /Berlin &amp; Potsdam plan/);
+  assert.equal(result.doc.outlineItems.length, result.pageCount);
+  assert.equal(result.accessibility.language, 'en-GB');
+  assert.equal(result.accessibility.bookmarkCount, result.pageCount);
+  assert.equal(result.accessibility.tagged, false);
+  assert.match(result.accessibility.limitation, /does not expose a tagged-PDF structure-tree API/);
+});
+
 test('PDF labels keep readable spacing and the final header stays on one line', () => {
   const plan = PdfV3.createPagePlan(artifactSource(3), weatherSource(3));
   const rendered = PdfV3.renderPagePlan(FakePdf, plan, { save: false });
@@ -356,6 +409,81 @@ test('PDF labels keep readable spacing and the final header stays on one line', 
   assert.match(text, /Map: Open/);
   assert.doesNotMatch(text, /Map:Open/);
   assert.match(text, /Use your plan on your phone or as a PDF/);
+  assert.match(text, /Walk west along Karl-Liebknecht-Strasse/);
+  assert.match(text, /Open this walk in Google Maps/);
+});
+
+test('PDF renders all three meal categories without adding the alternatives to the route', () => {
+  const source = artifactSource(1);
+  const day = source.days[0];
+  day.route.placeIds.push('lunch-anchor');
+  day.blocks.push({
+    time: 'Lunch',
+    window: '13:00-14:00',
+    title: 'Lunch near Museum Island',
+    copy: 'Choose one of these three lunch options.',
+    placeId: 'lunch-anchor',
+    placeIds: ['lunch-anchor', 'meal-local', 'meal-plant', 'meal-cafe'],
+    links: [
+      { kind: 'meal_option', placeId: 'meal-local', label: 'German: Venue One', url: 'https://www.google.com/maps/search/?api=1&query=Venue+One+Berlin' },
+      { kind: 'meal_option', placeId: 'meal-plant', label: 'Vegetarian: Venue Two', url: 'https://www.google.com/maps/search/?api=1&query=Venue+Two+Berlin' },
+      { kind: 'meal_option', placeId: 'meal-cafe', label: 'Cafe: Venue Three', url: 'https://www.google.com/maps/search/?api=1&query=Venue+Three+Berlin' },
+    ],
+    transferFromPrevious: {
+      fromPlaceId: 'museum-island',
+      fromLabel: 'Museum Island',
+      toPlaceId: 'lunch-anchor',
+      toLabel: 'Lunch near Museum Island',
+      mode: 'walking',
+      minutes: 8,
+      bufferMinutes: 5,
+      totalMinutes: 13,
+      instruction: 'Walk from Museum Island to your lunch stop.',
+      url: 'https://www.google.com/maps/dir/?api=1&origin=Museum+Island+Berlin&destination=Lunch+Berlin&travelmode=walking',
+    },
+  });
+  const artifact = V3.normalizeArtifact(source);
+  const plan = PdfV3.createPagePlan(artifact, weatherSource(1));
+  const rendered = PdfV3.renderPagePlan(FakePdf, plan, { save: false });
+  const text = rendered.doc.textCalls
+    .flatMap((call) => Array.isArray(call.value) ? call.value : [call.value])
+    .join(' ');
+  assert.match(text, /Option 1:/);
+  assert.match(text, /Option 2:/);
+  assert.match(text, /Option 3:/);
+  assert.match(text, /German: Venue One/);
+  assert.match(text, /Vegetarian: Venue Two/);
+  assert.match(text, /Cafe: Venue Three/);
+  assert.deepEqual(artifact.days[0].route.placeIds, ['alexanderplatz', 'museum-island', 'lunch-anchor']);
+});
+
+test('PDF draws travel guidance before the destination activity', () => {
+  const plan = PdfV3.createPagePlan(artifactSource(1), weatherSource(1));
+  const dayPage = plan.pages.find((page) => page.type === 'day' && page.blocks.some((block) => block.title === 'Museum Island'));
+  assert.ok(dayPage);
+  const rendered = PdfV3.renderPagePlan(FakePdf, plan, { save: false });
+  const calls = rendered.doc.textCalls.filter((call) => call.page === dayPage.pageNumber);
+  const valueOf = (call) => (Array.isArray(call.value) ? call.value.join(' ') : String(call.value || '')).trim();
+  const travelIndex = calls.findIndex((call) => valueOf(call) === 'TRAVEL FROM THE PREVIOUS STOP');
+  const activityIndex = calls.findIndex((call) => valueOf(call) === 'Museum Island');
+  assert.ok(travelIndex >= 0);
+  assert.ok(activityIndex >= 0);
+  assert.ok(travelIndex < activityIndex);
+  assert.ok(calls[travelIndex].y < calls[activityIndex].y);
+});
+
+test('never adds ellipses and never renders helper copy below 9.5pt', () => {
+  const source = artifactSource(7);
+  source.days.forEach((day) => {
+    day.planB = 'If the weather changes, visit the covered courtyards at Hackescher Markt, check the official opening time and keep the outdoor stops for later.';
+  });
+  const result = PdfV3.renderPdf(FakePdf, source, weatherSource(7), { save: false });
+  const text = result.doc.textCalls
+    .flatMap((call) => Array.isArray(call.value) ? call.value : [call.value])
+    .join(' ');
+  assert.doesNotMatch(text, /\.\.\./);
+  assert.match(text, /covered courtyards at Hackescher Markt/);
+  assert.equal(result.doc.textCalls.every((call) => call.fontSize >= PdfV3.MIN_HELPER_FONT_SIZE), true);
 });
 
 test('renderer keeps all drawing inside the A4 content boundary and uses ASCII hyphens', () => {
@@ -400,8 +528,8 @@ test('dense seven-day input adds continuation pages instead of shrinking route c
   }));
 
   const result = PdfV3.renderPdf(FakePdf, source, weatherSource(7), { save: false });
-  assert.equal(result.pageCount, 25);
-  assert.equal(result.pagePlan.dayPageCount, 21);
+  assert.ok(result.pageCount > 25);
+  assert.ok(result.pagePlan.dayPageCount > 21);
   const routeTitles = result.doc.textCalls.filter((call) => {
     const value = Array.isArray(call.value) ? call.value.join(' ') : String(call.value || '');
     return /^Berlin stop \d+/.test(value);
@@ -422,4 +550,68 @@ test('dense seven-day input adds continuation pages instead of shrinking route c
   });
   const yValues = result.doc.textCalls.map((call) => call.y).filter(Number.isFinite);
   assert.ok(Math.max(...yValues) <= 817);
+});
+
+test('transfer-heavy days split early enough for real browser font metrics', () => {
+  const source = artifactSource(1);
+  const placeIds = Array.from({ length: 5 }, (_, index) => `route-stop-${index + 1}`);
+  source.days[0].route.placeIds = placeIds.slice();
+  source.days[0].anchors = placeIds.map((placeId, index) => ({
+    placeId,
+    label: `Route stop ${index + 1}`,
+    area: 'Berlin',
+  }));
+  source.days[0].blocks = placeIds.map((placeId, index) => ({
+    time: index === 0 ? 'Arrival' : `Stop ${index + 1}`,
+    window: `${String(9 + index * 2).padStart(2, '0')}:00-${String(10 + index * 2).padStart(2, '0')}:30`,
+    title: index === 2 ? 'Topography of Terror and Brandenburg Gate' : `Berlin route stop ${index + 1}`,
+    copy: 'Visit this stop, read the practical note and leave enough time before the next part of the route.',
+    primaryPlace: {
+      placeId,
+      label: `Route stop ${index + 1} map`,
+      url: `https://www.google.com/maps/search/?api=1&query=Berlin+route+stop+${index + 1}`,
+    },
+    transferFromPrevious: index === 0 ? null : {
+      fromPlaceId: placeIds[index - 1],
+      fromLabel: `Route stop ${index}`,
+      toPlaceId: placeId,
+      toLabel: `Route stop ${index + 1}`,
+      mode: index === 2 ? 'transit' : 'walking',
+      minutes: index === 2 ? 24 : 14,
+      bufferMinutes: 6,
+      totalMinutes: index === 2 ? 30 : 20,
+      instruction: index === 2
+        ? 'Use public transport to the next stop. Check the live connection before leaving and allow time to find the correct platform.'
+        : 'Walk to the next stop and follow the saved map link at street level.',
+      url: `https://www.google.com/maps/dir/?api=1&origin=Berlin+route+stop+${index}&destination=Berlin+route+stop+${index + 1}`,
+    },
+  }));
+
+  const pagePlan = PdfV3.createPagePlan(source, weatherSource(1));
+  const dayPages = pagePlan.pages.filter((page) => page.type === 'day');
+  assert.ok(dayPages.length >= 3);
+  assert.equal(dayPages.flatMap((page) => page.blocks).length, 5);
+  assert.ok(dayPages.every((page) => page.blocks.length <= 2));
+  assert.doesNotThrow(() => PdfV3.renderPagePlan(FakePdf, pagePlan, { save: false }));
+});
+
+test('long carry packs reserve space for section labels and the support card', () => {
+  const source = artifactSource(6);
+  source.beforeYouGo = Array.from({ length: 4 }, (_, index) => ({
+    title: `Preparation item ${index + 1}`,
+    detail: 'Check this practical item before leaving the hotel and keep the current information saved on your phone.',
+    url: `https://www.berlinwalk.com/?before=${index + 1}`,
+  }));
+  source.carryPack = Array.from({ length: 8 }, (_, index) => ({
+    title: index < 6 ? `Day ${index + 1} route` : `Phone item ${index + 1}`,
+    detail: 'Keep this route or practical note on your phone. The PDF text works offline, but live map links still need data.',
+    url: `https://www.google.com/maps/search/?api=1&query=Berlin+carry+item+${index + 1}`,
+  }));
+
+  const pagePlan = PdfV3.createPagePlan(source, weatherSource(6));
+  const carryPages = pagePlan.pages.filter((page) => page.type === 'carry-support');
+  assert.ok(carryPages.length >= 2);
+  assert.equal(carryPages.at(-1).isLastPart, true);
+  assert.equal(carryPages.flatMap((page) => page.items).length, 12);
+  assert.doesNotThrow(() => PdfV3.renderPagePlan(FakePdf, pagePlan, { save: false }));
 });
