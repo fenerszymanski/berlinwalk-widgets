@@ -7401,5 +7401,35 @@
         "a": "The city centre and the harbour are each walkable, but the hop between the harbour and the Alster lakes is a U-Bahn ride or a ferry, not a comfortable walk. A single HVV day ticket covers the U-Bahn, S-Bahn, buses and the harbour ferries."
       }
     ]
+  },
+  "berlin-courtyards-hoefe": {
+    "title": "Berlin Courtyards: FAQ",
+    "subtitle": "The Höfe around Hackescher Markt: what they are, the walk, and when to go.",
+    "items": [
+      {
+        "q": "What are the Höfe in Berlin?",
+        "a": "A Hof is a courtyard. When Berlin grew fast in the late 1800s, developers built deep, filling blocks behind the street with chains of inner courtyards packed with workshops and flats. Most were plain, but a handful, especially the cluster around Hackescher Markt, were built or later restored to be genuinely beautiful and are free to walk through in the daytime."
+      },
+      {
+        "q": "Are the Hackesche Höfe free to enter?",
+        "a": "Yes. The courtyards are private property that the public is allowed to walk through, and there is no entry fee during the day. The shops, cafés, cinema and theatre inside keep their own hours, roughly late morning to early evening. The residential courtyards are calmest before mid-morning."
+      },
+      {
+        "q": "How long does the courtyard walk take?",
+        "a": "From S Hackescher Markt to the Heckmann-Höfe is about 1.2 kilometres across five courtyard stops. You could rush it in half an hour, but the point is to slow down, so a relaxed morning or an easy afternoon suits it better."
+      },
+      {
+        "q": "What is Haus Schwarzenberg?",
+        "a": "Haus Schwarzenberg, at Rosenthaler Straße 39 next to the Hackesche Höfe, is a deliberately unrestored courtyard kept by an artists' association, its passage covered in constantly changing street art. The same building holds the Anne Frank Zentrum and the Museum Otto Weidt's Workshop for the Blind. You can walk the passage for free."
+      },
+      {
+        "q": "How do I get to the Hackesche Höfe?",
+        "a": "Take the S-Bahn to S Hackescher Markt, served by the S3, S5, S7 and S9, plus the M1, M4, M5 and M6 trams. There is no U-Bahn at Hackescher Markt itself; the nearest is Weinmeisterstraße on the U8, about five minutes' walk away."
+      },
+      {
+        "q": "When is the best time to visit the courtyards?",
+        "a": "Morning is best if you want them quiet, before tour groups and shoppers fill the Hackesche Höfe. If you want the Bonbonmacherei candy workshop in the Heckmann-Höfe, check its days first: it opens only a few days a week and usually takes a summer break, though the courtyard itself stays open."
+      }
+    ]
   }
 }
