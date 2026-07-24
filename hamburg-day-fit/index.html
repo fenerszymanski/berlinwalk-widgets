@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hamburg in a Day: Does Your Plan Actually Fit?</title>
+<meta name="description" content="A Hamburg day trip from Berlin is a time problem. Set when your train gets you in and out, tick the sights you want, and see honestly whether the day fits or whether you should commit to one zone." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Crect x='10' y='34' width='44' height='8' rx='4' fill='%23C5E1A5'/%3E%3Crect x='10' y='34' width='27' height='8' rx='4' fill='%23FFE600'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root {
+    --green: #1B5E20;
+    --green-dark: #123D18;
+    --lime: #7CB342;
+    --light: #C5E1A5;
+    --yellow: #FFE600;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --red: #C0392B;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Montserrat', -apple-system, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    padding: 14px 14px 24px;
+  }
+  .hdf { max-width: 860px; margin: 0 auto; }
+
+  .hdf-head {
+    background: linear-gradient(160deg, var(--green-dark) 0%, var(--green) 60%, #2e7d32 100%);
+    border-radius: 18px 18px 0 0;
+    color: #fff;
+    padding: 22px 20px 20px;
+  }
+  .hdf-kicker {
+    display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em;
+    color: var(--green-dark); background: var(--yellow); border-radius: 999px;
+    padding: 4px 10px; margin-bottom: 11px; text-transform: uppercase;
+  }
+  .hdf-head h1 { font-size: 21px; font-weight: 800; line-height: 1.25; max-width: 26ch; }
+  .hdf-head p { font-size: 13px; line-height: 1.55; margin-top: 8px; max-width: 60ch; color: #E8F5E9; }
+
+  .hdf-controls {
+    background: #fff; border: 1px solid #E3E8DC; border-top: none;
+    padding: 16px 20px 20px;
+  }
+  .hdf-group { margin-top: 15px; }
+  .hdf-group:first-child { margin-top: 0; }
+  .hdf-label { font-size: 11px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--green); margin-bottom: 8px; }
+  .hdf-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .hdf-chip {
+    font-family: inherit; font-size: 12.5px; font-weight: 600; color: var(--green-dark);
+    background: #F1F5EC; border: 1.5px solid #D9E3CF; border-radius: 12px;
+    padding: 8px 12px; cursor: pointer; transition: background 0.15s, border-color 0.15s, color 0.15s;
+    text-align: left; line-height: 1.25;
+  }
+  .hdf-chip small { display: block; font-size: 10.5px; font-weight: 600; color: #6C7A63; margin-top: 2px; }
+  .hdf-chip:hover { border-color: var(--lime); }
+  .hdf-chip[aria-pressed="true"] {
+    background: var(--green); border-color: var(--green); color: #fff;
+  }
+  .hdf-chip[aria-pressed="true"] small { color: #C5E1A5; }
+
+  .hdf-exp { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .hdf-exp .hdf-chip { position: relative; padding-right: 34px; }
+  .hdf-exp .hdf-chip .hdf-cost {
+    position: absolute; top: 8px; right: 10px; font-size: 10.5px; font-weight: 700;
+    color: #6C7A63;
+  }
+  .hdf-exp .hdf-chip[aria-pressed="true"] .hdf-cost { color: var(--yellow); }
+  .hdf-exp .hdf-chip .hdf-book-flag { display: block; width: fit-content; font-size: 10px; font-weight: 700; color: var(--green-dark) !important; background: var(--yellow); border-radius: 5px; padding: 1px 6px; margin-top: 5px; }
+
+  /* Result */
+  .hdf-result {
+    background: #fff; border: 1px solid #E3E8DC; border-top: none;
+    border-radius: 0 0 18px 18px; padding: 4px 20px 20px;
+  }
+  .hdf-verdict {
+    border-radius: 14px; padding: 15px 16px; margin-top: 14px;
+    border: 2px solid transparent;
+  }
+  .hdf-verdict.fit { background: #F1F8E9; border-color: #AED581; }
+  .hdf-verdict.over { background: #FDECEA; border-color: #E6A9A1; }
+  .hdf-verdict h2 { font-size: 16px; font-weight: 800; color: var(--green-dark); line-height: 1.3; }
+  .hdf-verdict.over h2 { color: #922B21; }
+  .hdf-verdict p { font-size: 12.5px; line-height: 1.55; margin-top: 6px; color: #3a4636; }
+
+  .hdf-bar-wrap { margin-top: 16px; }
+  .hdf-bar-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+  .hdf-bar-top .lab { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--green); }
+  .hdf-bar-top .win { font-size: 12.5px; font-weight: 700; color: var(--ink); }
+  .hdf-bar {
+    display: flex; width: 100%; height: 30px; border-radius: 9px; overflow: hidden;
+    background: #EEF2E8; border: 1px solid #DDE5D2;
+  }
+  .hdf-seg { height: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden;
+    font-size: 10px; font-weight: 700; color: #fff; white-space: nowrap; min-width: 0; }
+  .hdf-seg.base { background: #90A4AE; }
+  .hdf-seg.exp1 { background: var(--green); }
+  .hdf-seg.exp2 { background: var(--lime); }
+  .hdf-seg.free { background: transparent; color: #8B937F; }
+  .hdf-seg.over { background: var(--red); }
+  .hdf-scale { display: flex; justify-content: space-between; margin-top: 5px; font-size: 10px; color: #8B937F; font-weight: 600; }
+
+  .hdf-flow { margin-top: 16px; }
+  .hdf-flow h3 { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); margin-bottom: 9px; }
+  .hdf-step { display: flex; gap: 10px; padding: 8px 0; border-top: 1px dashed #E3E8DC; }
+  .hdf-step:first-of-type { border-top: none; }
+  .hdf-step .dot { flex: 0 0 auto; width: 9px; height: 9px; border-radius: 50%; background: var(--green); margin-top: 5px; }
+  .hdf-step .txt { flex: 1; font-size: 12.5px; line-height: 1.45; }
+  .hdf-step .txt b { color: var(--green-dark); }
+  .hdf-step .txt span { display: block; font-size: 11.5px; color: #6C7A63; margin-top: 1px; }
+  .hdf-step .mins { flex: 0 0 auto; font-size: 11px; font-weight: 700; color: #6C7A63; margin-top: 1px; }
+
+  .hdf-note {
+    margin-top: 14px; font-size: 11.5px; line-height: 1.55; color: #4a5544;
+    background: #F7FAF3; border-left: 3px solid var(--lime); border-radius: 0 8px 8px 0; padding: 10px 12px;
+  }
+  .hdf-note b { color: var(--green-dark); }
+
+  .hdf-foot { margin-top: 14px; font-size: 10.5px; color: #8B937F; line-height: 1.5; text-align: center; }
+  .hdf-foot a { color: var(--green); font-weight: 700; text-decoration: none; }
+
+  .hdf-empty { margin-top: 16px; font-size: 12.5px; color: #6C7A63; line-height: 1.5; text-align: center; padding: 18px 10px; border: 1px dashed #DDE5D2; border-radius: 12px; }
+
+  @media (max-width: 430px) {
+    body { padding: 10px 10px 20px; }
+    .hdf-head h1 { font-size: 19px; }
+    .hdf-exp { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="hdf">
+  <div class="hdf-head">
+    <span class="hdf-kicker">BerlinWalk • Hamburg day trip</span>
+    <h1>Hamburg in a day: does your plan actually fit?</h1>
+    <p>The fast train gets you to Hamburg in about two hours, but the sights are strung out along the water. Set your train times, tick what you want to see, and I will tell you honestly whether the day fits or whether it is time to commit to one zone.</p>
+  </div>
+
+  <div class="hdf-controls">
+    <div class="hdf-group">
+      <div class="hdf-label">When your train gets you in</div>
+      <div class="hdf-chips" id="hdfLeave"></div>
+    </div>
+    <div class="hdf-group">
+      <div class="hdf-label">When you head back to the station</div>
+      <div class="hdf-chips" id="hdfBack"></div>
+    </div>
+    <div class="hdf-group">
+      <div class="hdf-label">What you want to do (tap to add)</div>
+      <div class="hdf-exp" id="hdfExp"></div>
+    </div>
+  </div>
+
+  <div class="hdf-result" id="hdfResult"></div>
+</div>
+
+<script src="engine.js"></script>
+<script>
+(function () {
+  var E = window.HDF;
+  var state = { leave: 'mid', back: 'evening', selected: ['speicherstadt', 'elbphi', 'harbour', 'lunch'] };
+
+  function chipRow(el, list, group) {
+    el.innerHTML = list.map(function (o) {
+      var on = state[group] === o.key;
+      return '<button class="hdf-chip" role="radio" aria-pressed="' + on + '" data-group="' + group + '" data-key="' + o.key + '">' +
+        o.label + '<small>' + o.sub + '</small></button>';
+    }).join('');
+  }
+
+  function expRow() {
+    document.getElementById('hdfExp').innerHTML = E.EXPERIENCES.map(function (x) {
+      var on = state.selected.indexOf(x.key) !== -1;
+      return '<button class="hdf-chip" aria-pressed="' + on + '" data-exp="' + x.key + '">' +
+        x.label +
+        '<span class="hdf-cost">' + E.fmt(x.cost) + '</span>' +
+        (x.book ? '<small class="hdf-book-flag">book ahead</small>' : '') +
+        '</button>';
+    }).join('');
+  }
+
+  function flowOrder(picks) {
+    // Present the day in a sensible geographic order: centre first if chosen,
+    // then the harbour spine, then St. Pauli, with the food stop woven in.
+    var order = ['alster', 'speicherstadt', 'wunderland', 'elbphi', 'harbour', 'reeperbahn', 'lunch'];
+    return order.map(function (k) {
+      return picks.filter(function (p) { return p.key === k; })[0];
+    }).filter(Boolean);
+  }
+
+  function segments(r) {
+    var total = r.windowMin;
+    var segs = [];
+    segs.push({ cls: 'base', min: r.baseMin, label: 'settle in' });
+    r.picks.forEach(function (p, i) {
+      segs.push({ cls: i % 2 === 0 ? 'exp1' : 'exp2', min: p.cost, label: p.label });
+    });
+    var used = r.usedMin;
+    if (r.fits) {
+      if (r.spareMin > 0) segs.push({ cls: 'free', min: r.spareMin, label: 'spare' });
+      // widths against the window
+      return segs.map(function (s) { return seg(s, total); }).join('');
+    }
+    // Over: scale everything to the used total so the red overflow shows past the window mark.
+    var scale = used;
+    var html = segs.map(function (s) { return seg(s, scale); }).join('');
+    var overMin = r.usedMin - r.windowMin;
+    html += seg({ cls: 'over', min: overMin, label: 'over by ' + E.fmt(overMin) }, scale);
+    return html;
+  }
+
+  function seg(s, total) {
+    var pct = Math.max(0, (s.min / total) * 100);
+    var show = pct > 12 ? (s.cls === 'over' ? 'over ' + E.fmt(s.min) : E.fmt(s.min)) : '';
+    return '<div class="hdf-seg ' + s.cls + '" style="width:' + pct + '%" title="' + s.label + '">' + show + '</div>';
+  }
+
+  function render() {
+    chipRow(document.getElementById('hdfLeave'), E.LEAVE, 'leave');
+    chipRow(document.getElementById('hdfBack'), E.BACK, 'back');
+    expRow();
+
+    var r = E.compute(state.leave, state.back, state.selected);
+    var out = document.getElementById('hdfResult');
+
+    if (r.picks.length === 0) {
+      out.innerHTML = '<div class="hdf-empty">Tap a few things above and I will build the day around your ' +
+        E.fmt(r.windowMin) + ' in the city.</div>' + footer();
+      return;
+    }
+
+    var verdictClass = r.fits ? 'fit' : 'over';
+    var head, body;
+    if (r.fits) {
+      head = 'This fits, with ' + E.fmt(r.spareMin) + ' to spare';
+      body = 'A realistic ' + E.fmt(r.windowMin) + ' on the ground covers this without running. The spare time is your buffer for a slow coffee, a wrong turn, or a longer lunch by the water.';
+      if (r.spareMin < 45) body = 'This just fits into your ' + E.fmt(r.windowMin) + ', but only just. With under an hour of slack, one long queue at the Elbphilharmonie or Miniatur Wunderland will put you behind. Keep moving, or drop one stop.';
+    } else {
+      head = 'This is over by ' + E.fmt(r.usedMin - r.windowMin);
+      body = 'Your ' + E.fmt(r.windowMin) + ' in Hamburg cannot absorb all of this without a march. Hamburg’s sights sit apart along the water, so my honest advice is to commit to one zone. The harbour spine, Speicherstadt into the Elbphilharmonie and down to the Landungsbrücken, is the strongest single choice and keeps the walking short.';
+    }
+    if (r.zoneCount >= 2 && r.fits && r.spareMin < 90) {
+      body += ' You are also crossing between the harbour and the city centre, which adds tram or U-Bahn time on top; a tighter, one-zone day usually feels better.';
+    }
+
+    var flowHtml = flowOrder(r.picks).map(function (p) {
+      return '<div class="hdf-step"><span class="dot"></span><div class="txt"><b>' + p.label + '</b>' +
+        '<span>' + p.note + '</span></div><div class="mins">' + E.fmt(p.cost) + '</div></div>';
+    }).join('');
+
+    var bookNote = r.needBooking
+      ? '<div class="hdf-note"><b>Book the timed slots before you travel.</b> Miniatur Wunderland can mean a two-hour queue without a ticket, and the free Elbphilharmonie Plaza runs on timed entry that sells out on busy days. Both are quick to reserve online.</div>'
+      : '';
+
+    out.innerHTML =
+      '<div class="hdf-verdict ' + verdictClass + '"><h2>' + head + '</h2><p>' + body + '</p></div>' +
+      '<div class="hdf-bar-wrap">' +
+        '<div class="hdf-bar-top"><span class="lab">Your day, hour by hour</span><span class="win">' + E.fmt(r.windowMin) + ' in the city</span></div>' +
+        '<div class="hdf-bar">' + segments(r) + '</div>' +
+        '<div class="hdf-scale"><span>arrive</span><span>' + (r.fits ? 'spare time' : 'window ends') + '</span></div>' +
+      '</div>' +
+      '<div class="hdf-flow"><h3>How the day would run</h3>' + flowHtml + '</div>' +
+      bookNote +
+      footer();
+  }
+
+  function footer() {
+    return '<div class="hdf-foot">Times are realistic planning estimates including the hop between zones, not a live timetable. Check your exact trains in the <a href="https://int.bahn.de/en" target="_blank" rel="noopener">DB journey planner</a>.</div>';
+  }
+
+  document.addEventListener('click', function (e) {
+    var chip = e.target.closest('.hdf-chip');
+    if (!chip) return;
+    if (chip.dataset.group) {
+      state[chip.dataset.group] = chip.dataset.key;
+      render();
+    } else if (chip.dataset.exp) {
+      var k = chip.dataset.exp;
+      var i = state.selected.indexOf(k);
+      if (i === -1) state.selected.push(k); else state.selected.splice(i, 1);
+      render();
+    }
+  });
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
