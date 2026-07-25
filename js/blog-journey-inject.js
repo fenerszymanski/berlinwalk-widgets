@@ -50,6 +50,7 @@
   var nextTourSlotRequested = false;
   var lateCommentsWatched = false;
   var lateCommentsScrollHandler = null;
+  var lateCommentsObserver = null;
   var lateCommentsPasses = 0;
   var liveJourneyTitlePromise = null;
   var liveJourneyTitle = '';
@@ -2593,6 +2594,25 @@
     /Comments?/gi
   ];
 
+  // Cheap trigger check for the observer. These are the hooks/classes Wix's
+  // comments component ships today (`section[data-hook="wc-root ..."]`,
+  // `div.wc-app-desktop`, `[data-hook="wc-header-title"]`,
+  // `[data-hook="top-level-comment-list"]`). Matching one of them means the module
+  // is on the page; the actual decision is still made by the text-based pass, so a
+  // renamed hook only costs us the fast path, not the fix.
+  var COMMENT_SURFACE_SELECTOR = '[data-hook^="wc-root"],[data-hook="wc-header"],[data-hook="wc-header-title"],[data-hook="top-level-comment-list"],[class*="wc-comments"],[class*="wc-app-"]';
+
+  function commentSurfaceNeedsHiding() {
+    try {
+      var nodes = document.querySelectorAll(COMMENT_SURFACE_SELECTOR);
+      for (var i = 0; i < nodes.length; i++) {
+        if (nodes[i].closest('.bw-site-footer, #bw-site-footer-restore')) continue;
+        if (!nodes[i].closest('[' + NATIVE_END_MARKER + '="1"]')) return true;
+      }
+    } catch (err) {}
+    return false;
+  }
+
   function commentResidue(text) {
     var rest = cleanText(text);
     for (var i = 0; i < COMMENT_PHRASES.length; i++) {
@@ -2889,12 +2909,35 @@
   // Wix mounts the native comments module lazily, often only when the end of the
   // article is scrolled near, so the passes above can run before it exists.
   function watchLateNativeComments() {
-    [1500, 4000, 8000, 15000].forEach(function (delay) {
+    // Wix loads the comments module as a late TPA component; on live pages it has
+    // appeared well after 15s, so timed passes alone lose the race. The observer
+    // below is the reliable trigger and the timers are the fallback for a future
+    // Wix hook rename that the cheap selector would not recognise.
+    [1500, 4000, 8000, 15000, 25000, 40000].forEach(function (delay) {
       window.setTimeout(hideNativeComments, delay);
     });
     lateCommentsPasses = 0;
     if (lateCommentsWatched) return;
     lateCommentsWatched = true;
+
+    if (typeof window.MutationObserver === 'function') {
+      var settleTimer = null;
+      lateCommentsObserver = new window.MutationObserver(function () {
+        if (settleTimer) return;
+        settleTimer = window.setTimeout(function () {
+          settleTimer = null;
+          if (!isPostPage()) return;
+          if (!commentSurfaceNeedsHiding()) return;
+          hideNativeComments();
+        }, 250);
+      });
+      try {
+        lateCommentsObserver.observe(document.body, { childList: true, subtree: true });
+      } catch (err) {
+        lateCommentsObserver = null;
+      }
+    }
+
     var timer = null;
     lateCommentsScrollHandler = function () {
       if (timer) return;
@@ -2902,7 +2945,10 @@
         timer = null;
         lateCommentsPasses += 1;
         hideNativeComments();
-        if (lateCommentsPasses >= 10) removeLateNativeCommentsWatcher();
+        if (lateCommentsPasses >= 20) {
+          window.removeEventListener('scroll', lateCommentsScrollHandler);
+          lateCommentsScrollHandler = null;
+        }
       }, 350);
     };
     try {
@@ -2913,9 +2959,16 @@
   }
 
   function removeLateNativeCommentsWatcher() {
-    if (!lateCommentsScrollHandler) return;
-    window.removeEventListener('scroll', lateCommentsScrollHandler);
-    lateCommentsScrollHandler = null;
+    if (lateCommentsObserver) {
+      try {
+        lateCommentsObserver.disconnect();
+      } catch (err) {}
+      lateCommentsObserver = null;
+    }
+    if (lateCommentsScrollHandler) {
+      window.removeEventListener('scroll', lateCommentsScrollHandler);
+      lateCommentsScrollHandler = null;
+    }
     lateCommentsWatched = false;
   }
 

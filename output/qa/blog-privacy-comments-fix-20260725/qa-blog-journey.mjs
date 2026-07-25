@@ -4,7 +4,7 @@ import { JSDOM } from 'jsdom';
 import { readFileSync } from 'node:fs';
 
 const SCRIPT = readFileSync(
-  process.env.BW_SCRIPT || '/Users/yusufucuz/Documents/New project/berlinwalk-widgets/_worktrees/blogfix-20260725/js/blog-journey-inject.js',
+  process.env.BW_SCRIPT || '/Users/yusufucuz/Documents/New project/berlinwalk-widgets/_worktrees/blogfix2-20260725/js/blog-journey-inject.js',
   'utf8',
 );
 
@@ -231,6 +231,38 @@ const text = (el) => (el?.textContent || '').replace(/\s+/g, ' ').trim();
   // always reports as 0, so it cannot be asserted here. The share code path is
   // byte-identical to the live pinned build (verified by diff).
   check('regression: our own share bar not hidden', !doc.querySelector('[data-bw-blog-share-bar][data-bw-native-blog-end-hidden]'));
+  dom.window.close();
+}
+
+
+// ---------------------------------------------------------------- scenario 7
+// The real live failure: Wix mounts the comments module as a late TPA component
+// with no scroll event afterwards. Only the MutationObserver can catch that.
+{
+  const dom = await boot(postPageHtml({ withComments: false }), 'https://www.berlinwalk.com/post/koepenick-berlin');
+  const doc = dom.window.document;
+  check('observer: nothing hidden before the module mounts', doc.querySelectorAll('[data-bw-native-blog-end-hidden]').length === 0);
+  // exact structure of Wix's live comments component (captured from Chrome)
+  doc.querySelector('footer[data-hook="post-footer"]').insertAdjacentHTML('beforeend', `
+    <div class="bJvaPf">
+      <div data-hook="tpa-components-provider">
+        <section data-hook="wc-root 6a61a9586ed1567a596f3b78 is-locked" class="A2Zb5X wc-comments-root">
+          <div class="sDEEz_J wc-app-desktop">
+            <div data-hook="wc-header" class="ssE_RA1"><div class="sJ3gBWt"><h2 data-hook="wc-header-title" class="soWLxd8">Comments</h2></div></div>
+            <div class="sHcP042"><hr class="st59Yj5"><div class="sDyq0m5"><div class="sQKLLu_"><span>Commenting on this post isn't available anymore. Contact the site owner for more info.</span></div></div></div>
+            <div data-hook="top-level-comment-list" class="svx_d5J"><div class="sHU1mEw"></div></div>
+          </div>
+        </section>
+      </div>
+    </div>`);
+  // no scroll, no timer left: the observer is the only thing that can react
+  await new Promise((r) => setTimeout(r, 900));
+  const mod = doc.querySelector('.bJvaPf');
+  check('observer: late-mounted Wix comments module hidden without any scroll', hidden(mod),
+    mod ? 'marker=' + mod.getAttribute('data-bw-native-blog-end-hidden') : 'missing');
+  check('observer: outermost wrapper is the hidden node', hidden(mod) && !hidden(doc.querySelector('[data-hook="wc-header"]')));
+  check('observer: tags/views row untouched', !hidden(doc.querySelector('.PKQ95p')));
+  check('observer: post footer untouched', !hidden(doc.querySelector('footer[data-hook="post-footer"]')));
   dom.window.close();
 }
 
