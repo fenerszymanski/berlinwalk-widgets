@@ -1,0 +1,61 @@
+PASS  post: exactly one privacy control — found 1
+PASS  post: privacy control lives in the site footer — bw-footer-bottom-links
+PASS  post: no privacy control inside post-footer
+PASS  post: native comments wrapper hidden — <div class="wix-comments-wrapper" data-bw-native-blog-end-hi
+PASS  post: tags/views row still visible — Tags:Tourist TipsTour Route 66 views0 commentsPost
+PASS  post: post-footer itself not hidden
+PASS  post: post body untouched
+PASS  post: site footer not hidden
+PASS  post: site-footer privacy button not treated as comments
+TypeError: Cannot read properties of null (reading '_location')
+    at get location (/private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/node_modules/jsdom/lib/jsdom/browser/Window.js:380:79)
+    at isPostPage (eval at boot (file:///private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/qa-blog-journey.mjs:93:10), <anonymous>:1079:5)
+    at MutationObserver.eval (eval at boot (file:///private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/qa-blog-journey.mjs:93:10), <anonymous>:3016:11)
+    at MutationObserver.invokeTheCallbackFunction (/private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/node_modules/jsdom/lib/generated/idl/MutationCallback.js:19:26)
+    at notifyMutationObservers (/private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/node_modules/jsdom/lib/jsdom/living/helpers/mutation-observers.js:160:22)
+    at /private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/node_modules/jsdom/lib/jsdom/living/helpers/mutation-observers.js:133:5
+PASS  late-footer post: no stray privacy button anywhere in article — 0 found
+PASS  late-footer post: comments still hidden
+PASS  late-footer post: control added to site footer after scroll — ok
+PASS  late-footer post: still nothing inside post-footer
+TypeError: Cannot read properties of null (reading '_location')
+    at get location (/private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/node_modules/jsdom/lib/jsdom/browser/Window.js:380:79)
+    at isPostPage (eval at boot (file:///private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/qa-blog-journey.mjs:93:10), <anonymous>:1079:5)
+    at MutationObserver.eval (eval at boot (file:///private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/qa-blog-journey.mjs:93:10), <anonymous>:3016:11)
+    at MutationObserver.invokeTheCallbackFunction (/private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/node_modules/jsdom/lib/generated/idl/MutationCallback.js:19:26)
+    at notifyMutationObservers (/private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/node_modules/jsdom/lib/jsdom/living/helpers/mutation-observers.js:160:22)
+    at /private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/node_modules/jsdom/lib/jsdom/living/helpers/mutation-observers.js:133:5
+PASS  blog index: no privacy button in the CTA band
+PASS  blog index: no stray privacy button at all
+PASS  blog index: control lands in site footer once mounted
+PASS  blog index: CTA band still clean
+TypeError: Cannot read properties of null (reading '_location')
+    at get location (/private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/node_modules/jsdom/lib/jsdom/browser/Window.js:380:79)
+    at isPostPage (eval at boot (file:///private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/qa-blog-journey.mjs:93:10), <anonymous>:1079:5)
+    at MutationObserver.eval (eval at boot (file:///private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/qa-blog-journey.mjs:93:10), <anonymous>:3016:11)
+    at MutationObserver.invokeTheCallbackFunction (/private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/node_modules/jsdom/lib/generated/idl/MutationCallback.js:19:26)
+    at notifyMutationObservers (/private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/node_modules/jsdom/lib/jsdom/living/helpers/mutation-observers.js:160:22)
+    at /private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/node_modules/jsdom/lib/jsdom/living/helpers/mutation-observers.js:133:5
+PASS  real comments: only the bare "Comments" heading block may hide, not the thread — wrapper visible
+PASS  real comments: reader comment text still present
+TypeError: Cannot read properties of null (reading '_location')
+    at get location (/private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/node_modules/jsdom/lib/jsdom/browser/Window.js:380:79)
+    at isPostPage (eval at boot (file:///private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/qa-blog-journey.mjs:93:10), <anonymous>:1079:5)
+    at MutationObserver.eval (eval at boot (file:///private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/qa-blog-journey.mjs:93:10), <anonymous>:3016:11)
+    at MutationObserver.invokeTheCallbackFunction (/private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/node_modules/jsdom/lib/generated/idl/MutationCallback.js:19:26)
+    at notifyMutationObservers (/private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/node_modules/jsdom/lib/jsdom/living/helpers/mutation-observers.js:160:22)
+    at /private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/node_modules/jsdom/lib/jsdom/living/helpers/mutation-observers.js:133:5
+PASS  lazy comments: nothing hidden before the module exists
+PASS  lazy comments: hidden after scroll pass
+PASS  lazy comments: tags row untouched
+TypeError: Cannot read properties of null (reading '_location')
+    at get location (/private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/node_modules/jsdom/lib/jsdom/browser/Window.js:380:79)
+    at isPostPage (eval at boot (file:///private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/qa-blog-journey.mjs:93:10), <anonymous>:1079:5)
+    at MutationObserver.eval (eval at boot (file:///private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/qa-blog-journey.mjs:93:10), <anonymous>:3016:11)
+    at MutationObserver.invokeTheCallbackFunction (/private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/node_modules/jsdom/lib/generated/idl/MutationCallback.js:19:26)
+    at notifyMutationObservers (/private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/node_modules/jsdom/lib/jsdom/living/helpers/mutation-observers.js:160:22)
+    at /private/tmp/claude-501/-Users-yusufucuz-Documents-New-project/c487e795-b3fd-4ebd-86ef-93ba459c4e17/scratchpad/node_modules/jsdom/lib/jsdom/living/helpers/mutation-observers.js:133:5
+PASS  regression: Related Posts still hidden — section hidden
+PASS  regression: our own share bar not hidden
+
+24/24 checks passed
