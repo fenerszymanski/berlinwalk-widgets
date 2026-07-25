@@ -28,7 +28,7 @@
   var EXPERIENCES = [
     { key: 'speicherstadt', label: 'Speicherstadt canals', cost: 60, zone: 'harbour', note: 'The red-brick warehouse district, free to wander. The natural anchor of the day.' },
     { key: 'wunderland', label: 'Miniatur Wunderland', cost: 130, zone: 'harbour', book: true, note: 'Inside Speicherstadt. Book a timed slot ahead or the queue alone can eat two hours.' },
-    { key: 'elbphi', label: 'Elbphilharmonie Plaza', cost: 50, zone: 'harbour', note: 'The free 37-metre viewing level. Grab the timed Plaza ticket; walk-up slots sell out.' },
+    { key: 'elbphi', label: 'Elbphilharmonie Plaza', cost: 50, zone: 'harbour', note: 'The public 37-metre viewing level. Check the official site for the current access fee and reserve a timed Plaza ticket; walk-up slots can sell out.' },
     { key: 'harbour', label: 'Harbour and Landungsbrücken', cost: 90, zone: 'harbour', note: 'The floating piers, the cranes, and a short ferry or boat tour on the Elbe.' },
     { key: 'alster', label: 'Alster lakes and Rathaus', cost: 80, zone: 'centre', note: 'The city-centre lakes, Jungfernstieg and the grand town hall. A different Hamburg from the harbour.' },
     { key: 'reeperbahn', label: 'Reeperbahn by day', cost: 45, zone: 'stpauli', note: 'St. Pauli is tame in daylight. A walk-through, unless you are staying into the night.' },

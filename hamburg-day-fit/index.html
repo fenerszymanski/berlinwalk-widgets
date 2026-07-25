@@ -246,7 +246,7 @@
       body = 'Your ' + E.fmt(r.windowMin) + ' in Hamburg cannot absorb all of this without a march. Hamburg’s sights sit apart along the water, so my honest advice is to commit to one zone. The harbour spine, Speicherstadt into the Elbphilharmonie and down to the Landungsbrücken, is the strongest single choice and keeps the walking short.';
     }
     if (r.zoneCount >= 2 && r.fits && r.spareMin < 90) {
-      body += ' You are also crossing between the harbour and the city centre, which adds tram or U-Bahn time on top; a tighter, one-zone day usually feels better.';
+      body += ' You are also crossing between the harbour and the city centre, which adds walking or U-Bahn time on top; a tighter, one-zone day usually feels better.';
     }
 
     var flowHtml = flowOrder(r.picks).map(function (p) {
@@ -255,7 +255,7 @@
     }).join('');
 
     var bookNote = r.needBooking
-      ? '<div class="hdf-note"><b>Book the timed slots before you travel.</b> Miniatur Wunderland can mean a two-hour queue without a ticket, and the free Elbphilharmonie Plaza runs on timed entry that sells out on busy days. Both are quick to reserve online.</div>'
+      ? '<div class="hdf-note"><b>Book the timed slots before you travel.</b> Miniatur Wunderland can mean a two-hour queue without a ticket, and Elbphilharmonie Plaza access uses timed entry that can sell out on busy days. Check the official sites for current availability and fees.</div>'
       : '';
 
     out.innerHTML =
