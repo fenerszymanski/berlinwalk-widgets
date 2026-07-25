@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Berlin Club Night Clock: When to Actually Show Up</title>
+<meta name="description" content="Drag across a Berlin club night to see when the floors actually fill, when the peak is, and the realistic hour to arrive at Berghain, Sisyphos, Tresor and other clubs. Pick a club type for honest door and timing advice." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='32' r='18' fill='none' stroke='%23E8E4D8' stroke-width='4'/%3E%3Crect x='30' y='18' width='4' height='16' rx='2' fill='%23FFE600'/%3E%3Crect x='31' y='31' width='13' height='4' rx='2' fill='%23FFE600' transform='rotate(35 32 32)'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-dark:#123D18; --green-mid:#2E7D32;
+    --lime:#7CB342; --light:#C5E1A5; --yellow:#FFE600;
+    --cream:#FAFAF5; --ink:#212121; --line:#E3E8DC; --panel:#F4F7F0;
+    --night:#0e1220; --dawn:#243b55;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    font-family:'Montserrat',system-ui,sans-serif;
+    color:var(--ink); background:transparent; line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:680px;margin:0 auto;padding:4px 4px 8px}
+  .card{
+    background:var(--cream); border:1px solid var(--line);
+    border-radius:18px; overflow:hidden;
+    box-shadow:0 10px 30px rgba(18,61,24,.10);
+  }
+  .head{
+    background:linear-gradient(135deg,var(--green) 0%,var(--green-mid) 100%);
+    color:#fff; padding:16px 18px 14px;
+  }
+  .kicker{
+    display:inline-block; font-size:11px; font-weight:800; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--green-dark);
+    background:var(--yellow); padding:3px 9px; border-radius:999px;
+  }
+  .head h2{margin:9px 0 3px; font-size:19px; font-weight:800; line-height:1.2}
+  .head p{margin:0; font-size:13px; color:#DDECD5}
+
+  /* Club-type chips */
+  .chips{display:flex; gap:8px; padding:12px 14px 2px; flex-wrap:wrap}
+  .chip{
+    flex:1 1 46%; min-width:150px; cursor:pointer;
+    border:1.5px solid var(--line); background:#fff; border-radius:12px;
+    padding:9px 11px; text-align:left; font-family:inherit; transition:.15s;
+  }
+  .chip:hover{border-color:var(--lime)}
+  .chip.active{border-color:var(--green); background:#F1F7EC; box-shadow:0 3px 10px rgba(27,94,32,.12)}
+  .chip .nm{display:block; font-size:13px; font-weight:800; color:var(--green); letter-spacing:.01em}
+  .chip .ex{display:block; font-size:11.5px; font-weight:600; color:#4b584b; margin-top:1px}
+
+  /* Night stage */
+  .stage-wrap{padding:10px 14px 2px}
+  .stage{
+    position:relative; border-radius:14px; overflow:hidden; color:#fff;
+    background:linear-gradient(90deg,var(--night) 0%,#12203a 55%,var(--dawn) 100%);
+    padding:14px 15px 12px; user-select:none;
+  }
+  .stagetop{display:flex; justify-content:space-between; align-items:baseline; gap:10px}
+  .clockread{font-size:30px; font-weight:800; letter-spacing:.01em; line-height:1}
+  .clockread small{font-size:13px; font-weight:700; color:#b9c6e0; margin-left:6px}
+  .statepill{
+    font-size:11px; font-weight:800; letter-spacing:.05em; text-transform:uppercase;
+    padding:5px 11px; border-radius:999px; white-space:nowrap;
+  }
+  .sceneline{margin:10px 0 2px; font-size:13.5px; line-height:1.5; color:#eef2fb; min-height:40px}
+  .sceneline b{color:#fff}
+
+  /* Timeline band */
+  .band{position:relative; height:16px; margin:12px 0 4px; border-radius:999px; overflow:hidden; background:#0a0f1c}
+  .band .seg{position:absolute; top:0; bottom:0}
+  .marks{display:flex; justify-content:space-between; font-size:10.5px; font-weight:700; color:#9fb0d0; margin-top:3px; letter-spacing:.02em}
+
+  input[type=range]{
+    -webkit-appearance:none; appearance:none; width:100%; height:8px; margin:12px 0 0;
+    background:linear-gradient(90deg,#3a3f52,var(--lime)); border-radius:999px; cursor:pointer;
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none; width:28px; height:28px; border-radius:50%;
+    background:var(--yellow); border:3px solid #fff; box-shadow:0 2px 8px rgba(0,0,0,.45); cursor:pointer;
+  }
+  input[type=range]::-moz-range-thumb{
+    width:28px; height:28px; border-radius:50%; background:var(--yellow);
+    border:3px solid #fff; box-shadow:0 2px 8px rgba(0,0,0,.45); cursor:pointer;
+  }
+  .draghint{text-align:center; font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:#8FA0BE; margin-top:6px; transition:opacity .25s}
+  .draghint.gone{opacity:0}
+
+  /* My move callout */
+  .move{
+    display:flex; gap:10px; align-items:flex-start; margin:12px 14px 4px;
+    background:var(--yellow); border-radius:12px; padding:11px 13px;
+  }
+  .move svg{flex:0 0 auto; width:20px; height:20px; fill:var(--green-dark); margin-top:1px}
+  .move b{color:var(--green-dark)}
+  .move span{font-size:13px; color:var(--green-dark); font-weight:600; line-height:1.45}
+
+  /* Door reading */
+  .door{margin:10px 14px 4px; display:grid; grid-template-columns:1fr 1fr; gap:10px}
+  .dcol{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:11px 12px}
+  .dcol h4{margin:0 0 7px; font-size:12px; font-weight:800; letter-spacing:.04em; text-transform:uppercase}
+  .dcol.yes h4{color:var(--green)} .dcol.no h4{color:#b23b32}
+  .dcol ul{margin:0; padding:0; list-style:none}
+  .dcol li{position:relative; padding-left:18px; font-size:12.5px; color:#2b3a2b; margin-bottom:6px; line-height:1.4}
+  .dcol li:last-child{margin-bottom:0}
+  .dcol.yes li::before{content:"✓"; position:absolute; left:0; color:var(--green); font-weight:800}
+  .dcol.no li::before{content:"✕"; position:absolute; left:0; color:#b23b32; font-weight:800}
+
+  .foot{padding:8px 16px 14px; font-size:12px; color:#5c6b5c}
+  .foot a{color:var(--green); font-weight:700; text-decoration:none}
+  .foot a:hover{text-decoration:underline}
+
+  @media (max-width:430px){
+    .clockread{font-size:26px}
+    .door{grid-template-columns:1fr; gap:8px}
+    .chip{flex:1 1 100%; padding:7px 11px}
+    .chips{gap:6px; padding:10px 12px 0}
+    .stage-wrap{padding:8px 12px 2px}
+    .stage{padding:12px 13px 11px}
+    .sceneline{min-height:0; margin:9px 0 2px}
+    .move{margin:10px 12px 4px}
+    .door{margin:8px 12px 4px}
+    .dcol{padding:10px 11px}
+    .dcol li{margin-bottom:5px}
+    .foot{padding:8px 14px 12px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="head">
+      <span class="kicker">BerlinWalk.com • Nightlife</span>
+      <h2>The Berlin Club Night Clock</h2>
+      <p>Berlin clubs run on a different clock. Drag across the night to see when to actually show up.</p>
+    </div>
+
+    <div class="chips" id="chips">
+      <button class="chip active" data-type="big"><span class="nm">Big techno</span><span class="ex">Berghain, Tresor, RSO</span></button>
+      <button class="chip" data-type="openair"><span class="nm">Open-air &amp; easier door</span><span class="ex">Sisyphos, Kater Blau</span></button>
+      <button class="chip" data-type="queer"><span class="nm">Queer &amp; mixed</span><span class="ex">://about blank, SchwuZ</span></button>
+      <button class="chip" data-type="first"><span class="nm">My first club night</span><span class="ex">Friendlier, lower stakes</span></button>
+    </div>
+
+    <div class="stage-wrap">
+      <div class="stage">
+        <div class="stagetop">
+          <div class="clockread"><span id="clock">01:00</span><small id="dayLabel">Sat → Sun</small></div>
+          <div class="statepill" id="statePill">Sweet spot</div>
+        </div>
+        <div class="sceneline" id="scene"></div>
+        <div class="band"><div class="seg" id="segFill"></div></div>
+        <input type="range" id="range" min="0" max="14" step="1" value="3" aria-label="Hour of the night" />
+        <div class="marks"><span>22:00</span><span>02:00</span><span>06:00</span><span>10:00</span><span>12:00</span></div>
+        <div class="draghint" id="draghint">Drag the slider across the night</div>
+      </div>
+    </div>
+
+    <div class="move">
+      <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 00-4 12.7V17a1 1 0 001 1h6a1 1 0 001-1v-2.3A7 7 0 0012 2zm-2 19a1 1 0 001 1h2a1 1 0 001-1v-1h-4v1z"/></svg>
+      <span id="move"></span>
+    </div>
+
+    <div class="door">
+      <div class="dcol yes">
+        <h4>Helps at the door</h4>
+        <ul id="doYes"></ul>
+      </div>
+      <div class="dcol no">
+        <h4>Gets you turned away</h4>
+        <ul id="doNo"></ul>
+      </div>
+    </div>
+
+    <div class="foot" id="foot"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // Night runs from 22:00 (index 0) to 12:00 next day (index 14).
+  var HOURS = ["22:00","23:00","00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00","10:00","11:00","12:00"];
+
+  // Band colours across the night: too-early -> warming -> sweet -> peak -> afterhours -> sunday
+  var BANDS = [
+    {to:1,  col:"#3a3f52", label:"Too early"},     // 22-23
+    {to:3,  col:"#4a5a86", label:"Warming up"},    // 00-01
+    {to:5,  col:"#2E7D32", label:"Sweet spot"},    // 01-03 (arrive)
+    {to:9,  col:"#1B5E20", label:"Peak"},          // 03-07
+    {to:12, col:"#7CB342", label:"Afterhours"},    // 07-10
+    {to:14, col:"#FFE600", label:"Sunday session"} // 10-12
+  ];
+
+  function stateAt(i){
+    for(var b=0;b<BANDS.length;b++){ if(i<BANDS[b].to) return BANDS[b]; }
+    return BANDS[BANDS.length-1];
+  }
+
+  var TYPES = {
+    big: {
+      name:"Big techno (Berghain, Tresor, RSO)",
+      scene:[
+        "Almost empty. The queue may already be forming outside, but inside the floors are bare. Turning up now mostly means standing in line for a room that is not going yet.",
+        "Still slow. Locals are having a drink somewhere else first. The door is warming up, not the dancefloor.",
+        "This is the honest window to arrive. The rooms are filling, the door is fully open, and you have the whole night ahead of you.",
+        "Right in the middle of it. Every floor is going and the sound system is doing what it was built for. This is why people come to Berlin.",
+        "The peak keeps rolling. Berghain and the big rooms do not stop, and the crowd that stayed is deep in it.",
+        "Afterhours. The light changes, the mood softens, and the people left are here for the long haul. A very Berlin hour.",
+        "Sunday session. Yes, still open. The big clubs run through Sunday into Monday morning, and the daytime crowd has its own calm energy."
+      ],
+      sweet:"01:00 to 04:00",
+      move:{
+        early:"For Berghain and the big techno rooms, do not arrive at 22:00. Aim for after 01:00. Coming early just means a long line for an empty floor.",
+        good:"This is the window. Arrive now, go in small and calm, and you have the whole night and the Sunday session ahead of you.",
+        peak:"You are in the peak. If you have not gone in yet, the queue is longest now; be patient and quiet in line.",
+        late:"It is late, but the big clubs run for two more days. An afterhours or Sunday-daytime arrival is a real, less crowded option."
+      },
+      yes:["Come in a small group of two or three, or alone","Dark, plain, practical clothes and calm energy","Know who is playing that night","Some cash for the cloakroom, and patience in the queue"],
+      no:["Big loud groups, stag or hen parties","Visibly drunk or arguing in line","Filming or photographing the queue or inside","Treating it like a photo stop, not a dancefloor"]
+    },
+    openair: {
+      name:"Open-air and easier door (Sisyphos, Kater Blau)",
+      scene:[
+        "Quiet. These places have gardens and river terraces, so early on it feels more like a bar than a club. Pleasant, but not going yet.",
+        "Filling slowly. In summer the outdoor areas start to get a nice buzz around now.",
+        "A good time to arrive. The door here is friendlier than the big techno clubs, and the gardens are coming alive.",
+        "Full and happy. Sisyphos in particular feels like a small festival, with several floors and outdoor stages all at once.",
+        "Deep into the night. The crowd is warm, the music is broad, and nobody is watching the clock.",
+        "Afterhours in the garden. As the sun comes up the open-air spaces are the best part of these clubs.",
+        "Sunday session. These are the clubs people spend the whole Sunday at, dancing outside in daylight. Bring sunglasses."
+      ],
+      sweet:"00:00 to 03:00",
+      move:{
+        early:"Sisyphos and Kater Blau are friendlier and more festival-like. You can arrive a bit earlier, but the gardens still peak deep in the night.",
+        good:"Good time to go. The door is more relaxed here, so this is a smart place to start a Berlin club night.",
+        peak:"Right in it. In summer, head for the outdoor floors; that is the whole point of these clubs.",
+        late:"Afterhours and Sunday daytime are the best hours for these open-air clubs. Arriving late here is not a problem."
+      },
+      yes:["Relaxed, come as you are in a smaller group","Cash and a phone that stays in your pocket","Weekend and summer for the outdoor floors","An open plan; you may stay far longer than expected"],
+      no:["Turning up expecting an early-evening scene","Loud tourist-group energy","Filming the crowd or the outdoor stages","Assuming any door is guaranteed, even a friendly one"]
+    },
+    queer: {
+      name:"Queer and mixed (://about blank, SchwuZ)",
+      scene:[
+        "Not started. These are party-led clubs, so the night depends on which event is on. Early on, the room is empty.",
+        "Warming up. Check the specific party name and its start time; some queer nights begin later than you expect.",
+        "A fair time to arrive for most nights. The crowd is mixed, political and friendly, and the door cares about attitude more than looks.",
+        "Full and going. ://about blank has a garden and two floors; the energy is inclusive and serious about the music.",
+        "Peak. This is a scene rooted in Berlin's queer club history, so read the room and respect the space.",
+        "Afterhours. The garden and the softer floor carry the last hours well.",
+        "Sunday. Some parties run long; others are one-night events. Always check the specific line-up before you plan."
+      ],
+      sweet:"00:00 to 03:00",
+      move:{
+        early:"://about blank and SchwuZ are night-by-night. Check the exact party and its start; some queer nights open later than the big clubs.",
+        good:"Good window for most nights. These doors reward respect and genuine interest in the party over any dress formula.",
+        peak:"In the peak. This is a queer-rooted scene; come as a guest of the space, not a spectator.",
+        late:"Depends on the party. Some run into Sunday, some are single events; check the line-up so you are not caught out."
+      },
+      yes:["Read the specific party and its values first","Come open, respectful and there for the music","Small groups or solo, friendly energy","Cash and an ID"],
+      no:["Treating a queer party as a tourist curiosity","Filming people without consent","Big rowdy groups","Assuming it runs like the 24-hour techno clubs"]
+    },
+    first: {
+      name:"My first club night (lower stakes)",
+      scene:[
+        "Too early for any Berlin club. Use this hour for a drink at a bar or a Späti by the Spree instead, and go later.",
+        "Still early. If it is your first Berlin night, do not spend it queueing; the clubs are only just starting.",
+        "Now you can head out. For a first night, pick a friendlier club rather than gambling everything on Berghain.",
+        "Clubs are full and going. A first-timer has a much better night at Sisyphos, Kater Blau or ://about blank than in the Berghain line.",
+        "Peak hours. Plenty of time left; there is no rush and no early last-order to beat.",
+        "Afterhours. If you are still going, you are officially doing Berlin properly. Pace yourself.",
+        "Sunday session. A gentle daytime arrival at an open-air club is a lovely, low-pressure way to see the scene."
+      ],
+      sweet:"00:30 to 03:00",
+      move:{
+        early:"On a first Berlin night, do not queue at 22:00 and do not make Berghain your only plan. Start with a bar, then a friendlier club after midnight.",
+        good:"Good time to go. Choose Sisyphos, Kater Blau or ://about blank for a first night; save Berghain for when you know the scene.",
+        peak:"You are in the peak with plenty of time. No closing time means no rush, so relax and enjoy it.",
+        late:"Afterhours and the Sunday open-air sessions are the easiest, lowest-pressure way to feel the Berlin club scene."
+      },
+      yes:["Pick a friendlier club for the first attempt","Go after midnight, not at opening","Carry cash and keep your phone away","Have a backup club in case of a no"],
+      no:["Making Berghain your only plan","Arriving early and burning the night in a queue","A big group and lots of photos","Arguing if a door says no; it is normal, move on"]
+    }
+  };
+
+  var chips=document.getElementById('chips');
+  var range=document.getElementById('range');
+  var clock=document.getElementById('clock');
+  var dayLabel=document.getElementById('dayLabel');
+  var statePill=document.getElementById('statePill');
+  var scene=document.getElementById('scene');
+  var segFill=document.getElementById('segFill');
+  var moveEl=document.getElementById('move');
+  var doYes=document.getElementById('doYes');
+  var doNo=document.getElementById('doNo');
+  var foot=document.getElementById('foot');
+  var draghint=document.getElementById('draghint');
+
+  var current='big';
+
+  // Map a slider index to a "phase" 0..6 used by the type scene/move arrays.
+  function phaseAt(i){
+    if(i<1) return 0;      // too early
+    if(i<3) return 1;      // warming
+    if(i<5) return 2;      // sweet
+    if(i<7) return 3;      // peak-early
+    if(i<9) return 4;      // peak-late
+    if(i<12) return 5;     // afterhours
+    return 6;              // sunday
+  }
+  function moveKey(i){
+    if(i<3) return 'early';
+    if(i<5) return 'good';
+    if(i<9) return 'peak';
+    return 'late';
+  }
+
+  function renderList(el, items){
+    el.innerHTML='';
+    items.forEach(function(t){ var li=document.createElement('li'); li.textContent=t; el.appendChild(li); });
+  }
+
+  function paintBand(){
+    var html='';
+    var prev=0;
+    BANDS.forEach(function(b){
+      var left=(prev/14)*100, w=((b.to-prev)/14)*100;
+      html+='<div class="seg" style="left:'+left+'%;width:'+w+'%;background:'+b.col+'"></div>';
+      prev=b.to;
+    });
+    document.querySelector('.band').innerHTML=html;
+  }
+
+  function pillColour(state){
+    // dark text on light/yellow, white on dark
+    if(state.col==='#FFE600'){ statePill.style.background='#FFE600'; statePill.style.color='#123D18'; }
+    else if(state.col==='#7CB342'){ statePill.style.background='#C5E1A5'; statePill.style.color='#123D18'; }
+    else { statePill.style.background=state.col; statePill.style.color='#fff'; }
+  }
+
+  function render(){
+    var i=parseInt(range.value,10);
+    var t=TYPES[current];
+    var state=stateAt(i);
+    clock.textContent=HOURS[i];
+    dayLabel.textContent = i>=2 ? "Sat → Sun" : "Saturday";
+    statePill.textContent=state.label;
+    pillColour(state);
+    scene.innerHTML='<b>'+t.name+'.</b> '+t.scene[phaseAt(i)];
+    moveEl.innerHTML='<b>My move:</b> '+t.move[moveKey(i)]+' <b>Sweet spot to arrive: '+t.sweet+'.</b>';
+    renderList(doYes, t.yes);
+    renderList(doNo, t.no);
+  }
+
+  chips.addEventListener('click', function(e){
+    var btn=e.target.closest('.chip'); if(!btn) return;
+    current=btn.getAttribute('data-type');
+    Array.prototype.forEach.call(chips.querySelectorAll('.chip'), function(c){ c.classList.toggle('active', c===btn); });
+    render();
+  });
+  range.addEventListener('input', function(){ draghint.classList.add('gone'); render(); });
+
+  foot.innerHTML='No Berlin club has a closing time, so there is no early last order to beat and no reason to arrive at 22:00. Doors are never guaranteed; a no is normal, so always have a second club in mind. Planning the day before the night? <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based">See the free walking tour</a>.';
+
+  paintBand();
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
