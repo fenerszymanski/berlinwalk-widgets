@@ -85,13 +85,58 @@ scroll pass. Result — replica went `display: block` → `display: none`, heigh
 stayed `display: flex`; post footer and article body untouched. The replica was
 removed afterwards (client-side only, no site mutation).
 
-## Open note
+## Round two: the real mount timing (same day, Chrome)
 
-The native comments module could not be reproduced as an anonymous visitor:
-5 posts (both `commentingEnabled: true` and `false`), 390 / 800 / 1512 px, hard
-load and SPA navigation, all consent categories granted, and no comments network
-request fired at all. Across the 262 published posts, `metrics.comments` is 0 and
-80 posts still have `commentingEnabled: true`. Most likely the module only renders
-for a logged-in Wix session, which is how the screenshot was taken. The hardened
-pass hides it whenever it does appear; if Yusuf wants it gone at the source, the
-Comments element has to be removed from the Wix Blog post page in the editor.
+Yusuf asked for the source-level removal to be done from his own browser, which
+finally gave a real reproduction. Findings from Chrome:
+
+- The comments module is a lazily mounted Wix TPA component. On
+  `/post/koepenick-berlin` it was **absent from the DOM at t=12.7s with
+  `scrollY: 0`**, and mounted only after the end of the article was scrolled near
+  (present at t=26.6s). It never mounted at all in the in-app Claude browser, which
+  is why it could not be reproduced there.
+- So `c7cd4b94` was not enough: its timed passes (1.5/4/8/15s) ran before the mount
+  and the capped scroll passes were already spent, leaving the box visible on a
+  real first view. The *logic* was correct - replaying it by hand against the live
+  DOM picked `div.bJvaPf` (the outermost wrapper) with empty residue at every level.
+
+`e2cb8d38` fixes the trigger:
+
+- A debounced (250ms) `MutationObserver` on `document.body` runs the hide pass,
+  gated by a cheap check for Wix's current comment hooks
+  (`[data-hook^="wc-root"]`, `[data-hook="wc-header-title"]`,
+  `[data-hook="top-level-comment-list"]`, `.wc-comments*`, `.wc-app-*`), so the
+  expensive text scan only runs when the module is actually on the page.
+- Timed passes extended to 40s and the scroll cap raised to 20, as fallbacks if Wix
+  ever renames those hooks. The observer is disconnected on SPA navigation away.
+
+Embed repinned again: revision 27 -> 28, pin `c7cd4b94` -> `e2cb8d38`.
+
+### Live Chrome QA on `e2cb8d38`
+
+| Check | Result |
+|---|---|
+| `/post/koepenick-berlin` (`commentingEnabled: false`, the reported variant) | module mounts at ~26s on scroll, hidden the same moment: `display: none`, height 0, marker `1`; no visible comment text; post footer 66px, tags/views intact |
+| `/post/berlin-public-transport-...` (`commentingEnabled: true`) | `wc-root` and `wc-app-desktop` both inside a hidden wrapper, height 0, no visible comment text |
+| `/blog` | CTA band clean, 0 stray buttons, 1 control in the site footer, `overflowX` 0 |
+
+Local harness: 29/29 with a new scenario that mounts Wix's exact live comments
+markup after every timer, with no scroll, so only the observer can react.
+
+## Source-level change: global Comments toggle OFF
+
+Wix Dashboard -> Blog -> Blog settings -> `Comments and ratings` has a global
+**Comments** toggle ("Let readers leave comments under your posts"). It was ON; it
+is now **OFF** (2026-07-25). Ratings was already off and `Who can leave comments`
+was not touched. This is a settings change, so no site publish was needed, and no
+comments were lost: `metrics.comments` is 0 across all 262 published posts.
+
+Caveat: the public site serves a cached blog-settings snapshot, so posts can still
+render the previous comment-box variant for a while after the toggle. The script
+layer hides both variants, so nothing is visible either way. Revert by switching
+the same toggle back on.
+
+Removing the component from the page entirely would still be Wix Studio editor work
+on the Blog Post page, which was deliberately not attempted: the available Chrome
+control channel is JavaScript only, with no real mouse or keyboard, and synthetic
+events on the editor canvas are not a safe way to edit a live site layout.
