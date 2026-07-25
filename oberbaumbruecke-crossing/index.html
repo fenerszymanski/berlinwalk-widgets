@@ -63,7 +63,7 @@
   .obc-dir button {
     flex: 1; font-family: inherit; font-size: 12px; font-weight: 700; cursor: pointer;
     border: 1.5px solid var(--line); background: #fff; color: #4a5347;
-    border-radius: 11px; padding: 10px 8px; line-height: 1.3; transition: all 0.15s;
+    border-radius: 11px; padding: 10px 8px; line-height: 1.3; transition: all 0.15s; min-height: 44px;
   }
   .obc-dir button .sub { display: block; font-size: 10px; font-weight: 600; color: #8a9384; margin-top: 2px; }
   .obc-dir button[aria-pressed="true"] {
@@ -95,16 +95,16 @@
 
   .obc-dots { position: absolute; top: 0; left: 4px; right: 4px; height: 46px; }
   .obc-dot {
-    position: absolute; top: 14px; width: 24px; height: 24px; margin-left: -12px;
+    position: absolute; top: 1px; width: 44px; height: 44px; margin-left: -22px;
     border-radius: 50%; background: #fff; border: 2.5px solid #b9c3ac; cursor: pointer;
-    display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: #7a8570;
+    display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #7a8570;
     transition: transform 0.12s, border-color 0.12s, background 0.12s; z-index: 2;
   }
   .obc-dot:hover { transform: scale(1.12); }
   .obc-dot.done { border-color: var(--lime); color: var(--green-dark); }
   .obc-dot.active { background: var(--yellow); border-color: var(--green-dark); color: var(--green-dark); transform: scale(1.22); box-shadow: 0 3px 9px rgba(18,61,24,0.25); z-index: 3; }
 
-  .obc-slider { position: absolute; left: 4px; right: 4px; top: 12px; width: calc(100% - 8px); height: 28px; margin: 0; opacity: 0; cursor: grab; z-index: 4; }
+  .obc-slider { position: absolute; left: 4px; right: 4px; top: 1px; width: calc(100% - 8px); height: 44px; margin: 0; opacity: 0; cursor: grab; z-index: 1; }
   .obc-slider:active { cursor: grabbing; }
   .obc-slider:focus-visible + .obc-focus-ring { outline: 3px solid var(--green); }
 
@@ -134,7 +134,7 @@
   .obc-nav button {
     flex: 1; font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
     border: 1.5px solid var(--green); background: #fff; color: var(--green-dark);
-    border-radius: 11px; padding: 11px 8px; transition: all 0.15s;
+    border-radius: 11px; padding: 11px 8px; transition: all 0.15s; min-height: 44px;
   }
   .obc-nav button:hover:not(:disabled) { background: var(--green); color: #fff; }
   .obc-nav button:disabled { opacity: 0.4; cursor: default; }
@@ -205,7 +205,7 @@
     </div>
 
     <div class="obc-facts">
-      <div class="obc-fact"><div class="k">Stations</div><div class="v">Schlesisches Tor (U1) west · Warschauer Straße (U1, U3, S-Bahn, M10) east</div></div>
+      <div class="obc-fact"><div class="k">Stations</div><div class="v">Schlesisches Tor (U1, U3) west · Warschauer Straße (U1, U3, S-Bahn, M10) east</div></div>
       <div class="obc-fact"><div class="k">Best light</div><div class="v">Late afternoon into dusk, when the neon and the brick both glow</div></div>
       <div class="obc-fact"><div class="k">Cost &amp; time</div><div class="v">Free to walk · about 10 minutes across if you stop for photos</div></div>
       <div class="obc-fact"><div class="k">Look for</div><div class="v">A yellow U-Bahn overhead and the Molecule Man upstream through the arches</div></div>
@@ -228,7 +228,7 @@
     {
       name: 'The west towers',
       side: 'west',
-      then: 'The brick towers look medieval, but they went up in 1896, modelled on an old Brandenburg city gate.',
+      then: 'The brick towers look medieval, but they went up in 1896 and echo historic brick gate towers in Prenzlau and Stendal.',
       now: 'Two 34-metre neo-Gothic towers mark the entrance to the bridge over the Spree.',
       move: 'Step onto the lower deck on the south (downstream) side, not the road side, for the open river view.'
     },
@@ -243,7 +243,7 @@
       name: 'The steel middle',
       side: 'mid',
       then: 'The Wehrmacht blew up the middle span in April 1945, and for the border years the frontier ran across the water right here.',
-      now: 'A steel section by Santiago Calatrava fills the gap. From dusk, a neon "Stone, Paper, Scissors" game plays overhead until about 1am.',
+      now: 'A steel section by Santiago Calatrava fills the gap. After dark, Thorsten Goldberg’s "Stone, Paper, Scissors" neon installation recalls the old confrontation between the two sides.',
       move: 'You are standing on the old East-West line. The bridge reopened on 9 November 1994, five years to the day after the Wall fell.'
     },
     {
@@ -296,7 +296,8 @@
       var d = document.createElement('button');
       d.type = 'button';
       d.className = 'obc-dot';
-      d.style.left = (seq.length === 1 ? 50 : (i / (seq.length - 1)) * 100) + '%';
+      var physicalIndex = dir === 'wte' ? i : (seq.length - 1 - i);
+      d.style.left = (seq.length === 1 ? 50 : (physicalIndex / (seq.length - 1)) * 100) + '%';
       d.textContent = String(i + 1);
       d.setAttribute('aria-label', 'Stop ' + (i + 1) + ': ' + stop.name);
       d.addEventListener('click', function () { pos = i; render(); });
@@ -308,6 +309,7 @@
     var seq = order();
     var stop = seq[pos];
     slider.value = String(pos);
+    slider.setAttribute('aria-valuetext', 'Stop ' + (pos + 1) + ' of ' + seq.length + ': ' + stop.name);
     elStepNo.textContent = 'Stop ' + (pos + 1) + ' of ' + seq.length;
     elTitle.textContent = stop.name;
     var sp = sidePill(stop.side);
@@ -332,6 +334,7 @@
     kiezL.textContent = 'Kreuzberg';
     sideR.textContent = 'East · Soviet sector';
     kiezR.textContent = 'Friedrichshain';
+    slider.dir = dir === 'etw' ? 'rtl' : 'ltr';
     buildDots();
     pos = 0;
     render();

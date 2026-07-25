@@ -89,7 +89,7 @@
     position: relative; text-align: left; cursor: pointer; border: none;
     color: #fff; padding: 9px 11px; font-family: inherit; width: 100%;
     display: flex; align-items: baseline; gap: 7px; transition: transform 0.12s ease, filter 0.12s ease;
-    border-left: 4px solid transparent;
+    border-left: 4px solid transparent; min-height: 44px;
   }
   .rb-band:hover { filter: brightness(1.06); }
   .rb-band .yr { font-size: 13px; font-weight: 800; letter-spacing: 0.01em; }
@@ -136,7 +136,7 @@
     margin-top: 12px; width: 100%; border: none; cursor: pointer; font-family: inherit;
     background: var(--yellow); color: var(--green-dark); font-weight: 800; font-size: 13px;
     padding: 11px 14px; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 8px;
-    transition: filter 0.12s ease;
+    transition: filter 0.12s ease; min-height: 44px;
   }
   .rb-mark:hover { filter: brightness(0.96); }
   .rb-mark.done { background: var(--green); color: #fff; }
@@ -156,7 +156,7 @@
   .rb-btn {
     flex: 1 1 auto; text-align: center; text-decoration: none; font-weight: 700; font-size: 12.5px;
     padding: 11px 13px; border-radius: 10px; border: 1px solid var(--line); color: var(--green-dark); background: #fff;
-    transition: background 0.12s ease;
+    transition: background 0.12s ease; min-height: 44px; display: inline-flex; align-items: center; justify-content: center;
   }
   .rb-btn:hover { background: var(--panel); }
   .rb-btn.solid { background: var(--green); color: #fff; border-color: var(--green); }
