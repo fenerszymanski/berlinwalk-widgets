@@ -698,6 +698,11 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if ((post.slug || '') === 'telling-time-in-german-berlin') return 'german-time-dial';
+  if ((post.slug || '') === 'reichstag-before-and-after') return 'reichstag-read-the-building';
+  if ((post.slug || '') === 'berlin-courtyards-hoefe') return 'berlin-courtyard-walk';
+  if ((post.slug || '') === 'hamburg-day-trip-from-berlin') return 'hamburg-day-fit';
+  if ((post.slug || '') === 'oberbaumbruecke-berlin') return 'oberbaumbruecke-crossing';
   if ((post.slug || '') === 'baltic-sea-day-trip-from-berlin') return 'baltic-beach-day-planner';
   if ((post.slug || '') === 'how-to-order-at-a-berlin-bakery') return 'berlin-bakery-counter';
   if ((post.slug || '') === 'berlin-wall-trail') return 'berlin-wall-trail-sections';
