@@ -374,6 +374,7 @@
       "hubCategory": "EventsSports",
       "type": "Map",
       "priority": 15,
+      "featured": true,
       "seasonal": true,
       "seasonStart": "2026-07-18",
       "seasonEnd": "2026-07-26",
@@ -4007,7 +4008,6 @@
       "hubCategory": "TripPlans",
       "type": "Planner",
       "priority": 3,
-      "featured": true,
       "tags": [
         "2 days",
         "two day itinerary",

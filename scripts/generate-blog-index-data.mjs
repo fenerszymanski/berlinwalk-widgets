@@ -205,9 +205,15 @@ const YEAR_REQUIRED_TITLE_SLUGS = new Set([
 ]);
 
 const HERO_SLUGS = {
-  lead: 'koepenick-berlin',
+  lead: 'berlin-pride-csd-2026',
   secondary: [
-    'berlin-pride-csd-2026',
+    'hamburg-day-trip-from-berlin',
+    'berlin-courtyards-hoefe',
+    'reichstag-before-and-after',
+    'telling-time-in-german-berlin',
+    'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
+    'oberbaumbruecke-berlin',
+    'koepenick-berlin',
     'deutsches-technikmuseum-berlin',
     'leaving-berlin-by-train',
     'karl-marx-allee-berlin',
@@ -305,8 +311,13 @@ const REQUIRED_SLUGS = [
   'why-is-berlin-founding-year-1237',
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
-  'koepenick-berlin',
   'berlin-pride-csd-2026',
+  'hamburg-day-trip-from-berlin',
+  'berlin-courtyards-hoefe',
+  'reichstag-before-and-after',
+  'telling-time-in-german-berlin',
+  'oberbaumbruecke-berlin',
+  'koepenick-berlin',
   'deutsches-technikmuseum-berlin',
   'leaving-berlin-by-train',
   'karl-marx-allee-berlin',
