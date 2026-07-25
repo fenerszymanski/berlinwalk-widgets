@@ -6,13 +6,13 @@ My advice is the same one I give guests about Berlin itself: do not try to see e
 
 ![The Elbphilharmonie concert hall in Hamburg, its wavy glass top rising above the red-brick Kaispeicher base on the harbour](blog-drafts/hamburg-day-trip-from-berlin/images/optimized/cover-elbphilharmonie.jpg)
 
-_The Elbphilharmonie, Hamburg's glass-topped concert hall on the old harbour. The free viewing Plaza sits where the glass meets the brick._
+_The Elbphilharmonie, Hamburg's glass-topped concert hall on the old harbour. Its public viewing Plaza sits where the glass meets the brick._
 
 ## The honest truth about a Hamburg day trip from Berlin
 
 A Hamburg day trip is a time problem before it is anything else. The fast train covers the roughly 290 kilometres in about two hours, which sounds generous until you subtract it twice. Leave Berlin mid-morning and come back after dinner, and you have something like seven hours actually on the ground. That is a good day, but it is not enough for all of Hamburg.
 
-The reason is geography. Hamburg grew up around its port and its lakes, so the headline sights sit in separate pockets: the warehouse district and the Elbphilharmonie down on the water, the grand town hall and the Alster lakes up in the centre, the Reeperbahn off to the west. The old town core is walkable, but hopping between the harbour and the lakes eats twenty minutes of tram or U-Bahn each way, and those hops add up faster than anyone expects.
+The reason is geography. Hamburg grew up around its port and its lakes, so the headline sights sit in separate pockets: the warehouse district and the Elbphilharmonie down on the water, the grand town hall and the Alster lakes up in the centre, the Reeperbahn off to the west. The old town core is walkable, but hopping between the harbour and the lakes eats time on foot or by U-Bahn, and those transfers add up faster than anyone expects.
 
 So the winning move is not a longer list. It is choosing one zone and going deep. For a first Hamburg day from Berlin, that zone is the harbour.
 
@@ -26,19 +26,19 @@ _Hamburg Hauptbahnhof. The board shows the same line in reverse: the fast trains
 
 One thing to get right before you buy: **this is not a Deutschlandticket trip.** The 63-euro monthly ticket that covers Berlin's regional trains does not cover the ICE or InterCity, and the regional-only route to Hamburg takes far too long for a day out. You need a normal Deutsche Bahn long-distance ticket.
 
-The good news is that booking ahead is cheap. A **Sparpreis saver fare** for the Berlin to Hamburg ICE often starts around 15 to 22 euros one way if you commit to a specific train a week or two out. The fully flexible Flexpreis, the walk-up fare you pay when you buy on the day, can be 80 euros or more. For a planned day trip, book the exact trains early and save the difference for a fish roll. FlixTrain also runs the route as a budget alternative if you want to compare.
+The useful rule is to compare early. A **Sparpreis saver fare** ties you to a specific train and can be much cheaper than the flexible fare, but the exact price changes with the date, demand and how early you book. Check the live Deutsche Bahn journey planner rather than planning around a fixed number. FlixTrain also runs the route as a budget alternative on some dates.
 
 ## The harbour spine: one zone, done properly
 
 If you take one thing from this guide, take this route. Everything below sits within a short walk or one quick ferry hop, so you get the best of Hamburg without spending the day in transit.
 
-Start in the **Speicherstadt**, the red-brick warehouse district built on oak piles over the canals. It became a UNESCO World Heritage Site in 2015, and it is free to simply walk. Cross the little bridges, look down the water at the rows of neo-Gothic gables, and you understand Hamburg's whole trading past in about fifteen minutes. It is a ten-minute walk from Hauptbahnhof through the centre, so you can start here almost as soon as you arrive.
+Start in the **Speicherstadt**, the red-brick warehouse district built on oak piles over the canals. It became a UNESCO World Heritage Site in 2015, and it is free to simply walk. Cross the little bridges, look down the water at the rows of neo-Gothic gables, and you understand Hamburg's whole trading past in about fifteen minutes. From Hauptbahnhof, allow roughly 15 to 20 minutes on foot to reach the northern edge, or use the U-Bahn if you want to save your legs.
 
 ![A canal running between the tall red-brick warehouses of Hamburg's Speicherstadt district](blog-drafts/hamburg-day-trip-from-berlin/images/optimized/speicherstadt.jpg)
 
 _The Speicherstadt canals. This is the single most Hamburg thing you can see, and it costs nothing to walk._
 
-From the warehouses it is a few minutes on to the **Elbphilharmonie**, the wave-topped concert hall that has become the city's symbol. You do not need a concert ticket for the best part: the **Plaza, the open viewing level where the glass tower meets the brick base, is free.** You do need a timed Plaza ticket, and on busy days the walk-up slots run out, so it is worth reserving one online before you travel.
+From the warehouses it is a few minutes on to the **Elbphilharmonie**, the wave-topped concert hall that has become the city's symbol. You do not need a concert ticket for the **Plaza**, the public viewing level where the glass tower meets the brick base. Until **4 October 2026**, spontaneous admission is free when capacity allows, while a timed reservation that guarantees entry costs €3. From **5 October 2026**, admission costs €5 (€3 reduced). Check the official Plaza page and reserve if this view matters to your day.
 
 Then walk the water west to the **Landungsbrücken**, the floating landing piers where Hamburg's harbour opens up in front of you: cranes, container ships, ferries and harbour tour boats. This is where you feel the port as a working place rather than a postcard.
 
@@ -64,7 +64,7 @@ A few Hamburg names carry more weight in guidebooks than they earn on a short da
 
 - **The Reeperbahn by day.** St. Pauli's famous nightlife strip is tame and a little bleak in daylight. It comes alive after dark, which is a different trip. On a day visit it is a walk-through, not a destination.
 - **The Fischmarkt.** The historic Altona fish market is a genuine Hamburg experience, but it runs **Sunday mornings only, roughly 05:00 to 09:30 in summer.** Unless you take a very early Sunday train, you will arrive to find it packed up and hosed down.
-- **Miniatur Wunderland**, the vast model-railway world inside the Speicherstadt, is one of Germany's most popular attractions and genuinely delightful. But it is an indoor visit of two hours or more, and **without a pre-booked timed ticket the queue alone can run to two hours.** Book ahead if it is a must, or accept that it can swallow your whole day.
+- **Miniatur Wunderland**, the vast model-railway world inside the Speicherstadt, is one of Germany's most popular attractions and genuinely delightful. The venue recommends about half a day, and its own forecast can show waits of two hours or more on busy dates without a pre-booked timed ticket. Book ahead if it is a must, or accept that it can swallow your whole day.
 
 I built the planner below to make this trade-off visible before you are standing on a Hamburg platform deciding in a panic. Set when your train gets you in and out, tick the things you want to do, and it shows honestly whether the day fits or whether it is time to commit to one zone.
 
@@ -78,7 +78,7 @@ The return train is where day trips die, so I decide mine before I leave Berlin.
 
 A few last practical notes for a smooth day:
 
-- **Book the timed slots in advance** for anything you truly want inside: the free Elbphilharmonie Plaza and, especially, Miniatur Wunderland.
+- **Book the timed slots in advance** for anything you truly want inside: the Elbphilharmonie Plaza and, especially, Miniatur Wunderland.
 - **Central Hamburg is walkable**, but the harbour-to-Alster hop is not; let the U-Bahn or a ferry do that work rather than your feet.
 - **Bring a light layer.** Hamburg is a northern port and the wind off the Elbe is real, even on a warm Berlin morning.
 - **A fish roll by the water** is the whole ritual. Build in the stop rather than treating lunch as a delay.

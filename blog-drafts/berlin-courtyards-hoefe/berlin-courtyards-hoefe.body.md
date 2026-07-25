@@ -34,7 +34,7 @@ _Each courtyard is numbered. Following the signs from Hof I to Hof VIII is the w
 
 ## 2. Haus Schwarzenberg: the opposite, one door away
 
-Step back onto Rosenthaler Straße, look one door south to number 39, and you find the exact opposite of the polished Höfe. [Haus Schwarzenberg](https://haus-schwarzenberg.org/en/das-haus/) was kept deliberately unrestored by an artists' association, and its narrow passage is coated top to bottom in paste-ups, stickers and spray paint that changes month to month. After the tidy Hackesche Höfe, the contrast is the point.
+Step back onto Rosenthaler Straße, look one door south to number 39, and you find the exact opposite of the polished Höfe. [Haus Schwarzenberg](https://haus-schwarzenberg.org/das-haus/) was kept deliberately unrestored by an artists' association, and its narrow passage is coated top to bottom in paste-ups, stickers and spray paint that changes month to month. After the tidy Hackesche Höfe, the contrast is the point.
 
 It is not only a photo wall. The same building holds two serious museums: the [Anne Frank Zentrum](https://www.annefrank.de/en/exhibition-berlin/your-visit/), and the Museum Otto Weidt's Workshop for the Blind, which tells how a small brush-and-broom workshop hid its Jewish employees during the war. **You can walk the passage for free**, and the museums are a short, powerful stop if you have the time. I have sent people in for the street art who came out having spent an hour with the history.
 
@@ -58,6 +58,12 @@ The **Sophie-Gips-Höfe**, a former sewing-machine factory, is the elegant one h
 
 ![A quiet, sunlit residential courtyard off Sophienstraße in Berlin with cafe tables and a passage back to the street.](blog-drafts/berlin-courtyards-hoefe/images/optimized/sophienstrasse-courtyard.jpg)
 _The courtyards off Sophienstraße are where the walk turns from an attraction into a plain, calm corner of the city._
+
+## 5. Heckmann-Höfe: finish with the candy workshop
+
+Continue west to **Oranienburger Straße 32** and step into the Heckmann-Höfe for the final stop. This restored 19th-century courtyard run is lined with small shops and cafés, but the reason people remember it is the **Bonbonmacherei**, where sweets are still boiled and shaped by hand behind a glass kitchen.
+
+Treat the workshop as a bonus, not a promise: its opening days are limited and it usually takes a summer break. Check the current schedule before making a special trip. Even when the workshop is closed, the courtyard gives the walk a calm finish and leaves you close to Oranienburger Straße transport.
 
 ## When to go, and how to walk it well
 

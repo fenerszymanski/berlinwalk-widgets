@@ -3,13 +3,13 @@ Walk east along the river from the East Side Gallery and you reach a red-brick b
 Most people take the photo and move on. The bridge deserves a minute more, because almost nothing about it is what it seems. It looks medieval but is younger than the U-Bahn. It looks purely decorative but was one of the hardest places in divided Berlin to cross. For twenty-eight years, the border between East and West ran straight across the water beneath these arches.
 
 ![The Oberbaumbrücke carrying a U-Bahn over the Spree between Kreuzberg and Friedrichshain](blog-drafts/oberbaumbruecke-berlin/images/optimized/cover-oberbaumbruecke.jpg)
-_The Oberbaumbrücke carries the U1 across the Spree. The road and walkways run below, the trains run above._
+_The Oberbaumbrücke carries the U1 and U3 across the Spree. The road and walkways run below, the trains run above._
 
 {{quick-summary}}
 
 ## A bridge that pretends to be older than it is
 
-The towers are the trick. They look like a medieval city gate, and that is exactly the point. The Oberbaum was once a real customs barrier here: a spiked tree trunk, a _Baum_, was floated across the river at night to stop boats slipping past without paying. When Berlin replaced the old wooden bridge, the architect Otto Stahn finished the present one in **1896** and dressed it in North German brick-Gothic, with two 34-metre towers modelled on an old gate tower in Brandenburg.
+The towers are the trick. They look like a medieval city gate, and that is exactly the point. The Oberbaum was once a real customs barrier here: a spiked tree trunk, a _Baum_, was floated across the river at night to stop boats slipping past without paying. When Berlin replaced the old wooden bridge, the architect Otto Stahn finished the present one in **1896** and dressed it in North German brick-Gothic. Its two 34-metre towers echo several medieval landmarks, including the Mitteltor tower in Prenzlau and the Uenglinger Gate in Stendal.
 
 So the "medieval" look is late-19th-century theatre. The bridge is younger than the electric tram and only a little older than the U-Bahn it carries. Once you know that, the details start to read differently: the crests, the pointed caps, the arcades are all Victorian-era brickwork doing an impression of something much older.
 

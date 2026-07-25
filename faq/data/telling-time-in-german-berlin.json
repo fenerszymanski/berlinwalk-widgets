@@ -1,1 +1,89 @@
-{"version":1,"slug":"telling-time-in-german-berlin","key":"telling-time-in-german-berlin","config":{"title":"Telling Time in German: FAQ","subtitle":"Halb acht, the 24-hour clock, the day codes on the door and the clock change.","items":[{"q":"What does halb acht mean in German?","a":"Halb acht means 7:30, not 8:30. German counts the half hour forward to the hour that is coming, so halb acht is half an hour before eight. The same pattern gives halb eins for 12:30 and halb zwei for 1:30. If somebody names a meeting time with halb in it, the safest reply is to repeat the time back as a number."},{"q":"How do you say 8:15 and 8:45 in German?","a":"Viertel nach acht for 8:15 and viertel vor neun for 8:45 are understood everywhere in the German-speaking world. Around Berlin and across eastern Germany you will also hear viertel neun for 8:15 and dreiviertel neun for 8:45, which count up towards nine instead of back from it. Both are normal German; only the region changes."},{"q":"Does Germany use the 24-hour clock?","a":"In writing, yes. Shop doors, museum pages, tickets, timetables and event listings use forms like 10:00 - 18:00 Uhr, bis 22 Uhr or 20:15. Spoken German usually drops back to a twelve-hour clock and adds words like morgens, nachmittags or abends when it is not obvious, which is why the written and the spoken time can look like two different systems."},{"q":"What do Mo, Di, Mi, Do, Fr, Sa and So mean on a Berlin opening-hours sign?","a":"They are the German weekdays: Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag, Sonntag. The two that catch English speakers are Di, which is Tuesday and not Thursday, and Do, which is Thursday. The Neues Museum on Museum Island lists Mo geschlossen and Di 10:00 - 18:00 Uhr, and most of Berlin’s state museums keep that same Monday closure."},{"q":"What is the difference between Einlass, Beginn and letzter Einlass?","a":"Einlass is when you are allowed in, Beginn is when the thing itself starts, and letzter Einlass is last admission. At most Berlin sights last admission falls 30 to 60 minutes before closing, so a door that says bis 18 Uhr will often not let you in at 17:55, and some are stricter still: the Reichstag dome is open until midnight but stops admitting visitors at 21:45. When a listing shows both Einlass and Beginn, plan around the Einlass time."},{"q":"When do the clocks change in Germany?","a":"Germany moves to summer time on the last Sunday in March and back on the last Sunday in October. In 2026 that is 29 March, when 02:00 becomes 03:00, and 25 October, when 03:00 becomes 02:00. Berlin runs on CET in winter and CEST in summer, one and two hours ahead of UTC."}]},"schema":{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does halb acht mean in German?","acceptedAnswer":{"@type":"Answer","text":"Halb acht means 7:30, not 8:30. German counts the half hour forward to the hour that is coming, so halb acht is half an hour before eight. The same pattern gives halb eins for 12:30 and halb zwei for 1:30. If somebody names a meeting time with halb in it, the safest reply is to repeat the time back as a number."}},{"@type":"Question","name":"How do you say 8:15 and 8:45 in German?","acceptedAnswer":{"@type":"Answer","text":"Viertel nach acht for 8:15 and viertel vor neun for 8:45 are understood everywhere in the German-speaking world. Around Berlin and across eastern Germany you will also hear viertel neun for 8:15 and dreiviertel neun for 8:45, which count up towards nine instead of back from it. Both are normal German; only the region changes."}},{"@type":"Question","name":"Does Germany use the 24-hour clock?","acceptedAnswer":{"@type":"Answer","text":"In writing, yes. Shop doors, museum pages, tickets, timetables and event listings use forms like 10:00 - 18:00 Uhr, bis 22 Uhr or 20:15. Spoken German usually drops back to a twelve-hour clock and adds words like morgens, nachmittags or abends when it is not obvious, which is why the written and the spoken time can look like two different systems."}},{"@type":"Question","name":"What do Mo, Di, Mi, Do, Fr, Sa and So mean on a Berlin opening-hours sign?","acceptedAnswer":{"@type":"Answer","text":"They are the German weekdays: Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag, Sonntag. The two that catch English speakers are Di, which is Tuesday and not Thursday, and Do, which is Thursday. The Neues Museum on Museum Island lists Mo geschlossen and Di 10:00 - 18:00 Uhr, and most of Berlin’s state museums keep that same Monday closure."}},{"@type":"Question","name":"What is the difference between Einlass, Beginn and letzter Einlass?","acceptedAnswer":{"@type":"Answer","text":"Einlass is when you are allowed in, Beginn is when the thing itself starts, and letzter Einlass is last admission. At most Berlin sights last admission falls 30 to 60 minutes before closing, so a door that says bis 18 Uhr will often not let you in at 17:55, and some are stricter still: the Reichstag dome is open until midnight but stops admitting visitors at 21:45. When a listing shows both Einlass and Beginn, plan around the Einlass time."}},{"@type":"Question","name":"When do the clocks change in Germany?","acceptedAnswer":{"@type":"Answer","text":"Germany moves to summer time on the last Sunday in March and back on the last Sunday in October. In 2026 that is 29 March, when 02:00 becomes 03:00, and 25 October, when 03:00 becomes 02:00. Berlin runs on CET in winter and CEST in summer, one and two hours ahead of UTC."}}]}}
+{
+  "version": 1,
+  "slug": "telling-time-in-german-berlin",
+  "key": "telling-time-in-german-berlin",
+  "config": {
+    "title": "Telling Time in German: FAQ",
+    "subtitle": "Halb acht, the 24-hour clock, the day codes on the door and the clock change.",
+    "items": [
+      {
+        "q": "What does halb acht mean in German?",
+        "a": "Halb acht means 7:30, not 8:30. German counts the half hour forward to the hour that is coming, so halb acht is half an hour before eight. The same pattern gives halb eins for 12:30 and halb zwei for 1:30. If somebody names a meeting time with halb in it, the safest reply is to repeat the time back as a number."
+      },
+      {
+        "q": "How do you say 8:15 and 8:45 in German?",
+        "a": "Viertel nach acht for 8:15 and viertel vor neun for 8:45 are understood everywhere in the German-speaking world. Around Berlin and across eastern Germany you will also hear viertel neun for 8:15 and dreiviertel neun for 8:45, which count up towards nine instead of back from it. Both are normal German; only the region changes."
+      },
+      {
+        "q": "Does Germany use the 24-hour clock?",
+        "a": "In writing, yes. Shop doors, museum pages, tickets, timetables and event listings use forms like 10:00 - 18:00 Uhr, bis 22 Uhr or 20:15. Spoken German usually drops back to a twelve-hour clock and adds words like morgens, nachmittags or abends when it is not obvious, which is why the written and the spoken time can look like two different systems."
+      },
+      {
+        "q": "What do Mo, Di, Mi, Do, Fr, Sa and So mean on a Berlin opening-hours sign?",
+        "a": "They are the German weekdays: Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag, Sonntag. The two that catch English speakers are Di, which is Tuesday and not Thursday, and Do, which is Thursday. The Neues Museum on Museum Island lists Mo geschlossen and Di 10:00 - 18:00 Uhr, and most of Berlin’s state museums keep that same Monday closure."
+      },
+      {
+        "q": "What is the difference between Einlass, Beginn and letzter Einlass?",
+        "a": "Einlass is when you are allowed in, Beginn is when the thing itself starts, and letzter Einlass is last admission. Many Berlin sights stop admitting visitors before closing, but the gap is not standard, so check the exact venue rather than treating bis 18 Uhr as an arrival time. The Reichstag is an unusually clear example: last admission is 21:45 even though the roof terrace stays open later."
+      },
+      {
+        "q": "When do the clocks change in Germany?",
+        "a": "Germany moves to summer time on the last Sunday in March and back on the last Sunday in October. In 2026 that is 29 March, when 02:00 becomes 03:00, and 25 October, when 03:00 becomes 02:00. Berlin runs on CET in winter and CEST in summer, one and two hours ahead of UTC."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What does halb acht mean in German?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Halb acht means 7:30, not 8:30. German counts the half hour forward to the hour that is coming, so halb acht is half an hour before eight. The same pattern gives halb eins for 12:30 and halb zwei for 1:30. If somebody names a meeting time with halb in it, the safest reply is to repeat the time back as a number."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you say 8:15 and 8:45 in German?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Viertel nach acht for 8:15 and viertel vor neun for 8:45 are understood everywhere in the German-speaking world. Around Berlin and across eastern Germany you will also hear viertel neun for 8:15 and dreiviertel neun for 8:45, which count up towards nine instead of back from it. Both are normal German; only the region changes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Germany use the 24-hour clock?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In writing, yes. Shop doors, museum pages, tickets, timetables and event listings use forms like 10:00 - 18:00 Uhr, bis 22 Uhr or 20:15. Spoken German usually drops back to a twelve-hour clock and adds words like morgens, nachmittags or abends when it is not obvious, which is why the written and the spoken time can look like two different systems."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What do Mo, Di, Mi, Do, Fr, Sa and So mean on a Berlin opening-hours sign?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "They are the German weekdays: Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag, Sonntag. The two that catch English speakers are Di, which is Tuesday and not Thursday, and Do, which is Thursday. The Neues Museum on Museum Island lists Mo geschlossen and Di 10:00 - 18:00 Uhr, and most of Berlin’s state museums keep that same Monday closure."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between Einlass, Beginn and letzter Einlass?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Einlass is when you are allowed in, Beginn is when the thing itself starts, and letzter Einlass is last admission. Many Berlin sights stop admitting visitors before closing, but the gap is not standard, so check the exact venue rather than treating bis 18 Uhr as an arrival time. The Reichstag is an unusually clear example: last admission is 21:45 even though the roof terrace stays open later."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When do the clocks change in Germany?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Germany moves to summer time on the last Sunday in March and back on the last Sunday in October. In 2026 that is 29 March, when 02:00 becomes 03:00, and 25 October, when 03:00 becomes 02:00. Berlin runs on CET in winter and CEST in summer, one and two hours ahead of UTC."
+        }
+      }
+    ]
+  }
+}

@@ -19,7 +19,7 @@ const forbidden = [
   { name: 'generation workflow leak', pattern: /\b(browser|manual|visual|image|icon)\s+workflow\b/i },
   { name: 'source prompt or output leak', pattern: /\b(source\s+prompt|source\s+output|prompt\/output|prompts\/files)\b/i },
   { name: 'local visual source file leak', pattern: /\bvisual-sources\.md\b/i },
-  { name: 'internal automation or tooling leak', pattern: /\b(Codex|Claude|automation|local draft package|unpublished Wix draft workflow)\b/i },
+  { name: 'internal automation or tooling leak', pattern: /\b(Codex|(?<!Jeanne-)Claude|automation|local draft package|unpublished Wix draft workflow)\b/i },
   { name: 'handoff note leak', pattern: /\bhandoff notes?\b/i },
 ];
 

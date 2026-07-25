@@ -45,7 +45,7 @@ function expectedShard(kind, slug, config) {
   const envelope = current && Object.hasOwn(current, 'config')
     ? { ...current, version: current.version || 1, slug, key: slug, config }
     : { version: 1, slug, key: slug, config };
-  if (current && Object.hasOwn(current, 'schema')) envelope.schema = faqSchema(config);
+  envelope.schema = faqSchema(config);
   return envelope;
 }
 

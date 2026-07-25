@@ -92,7 +92,7 @@ These four words decide whether you actually get in, so they matter more than an
 
 - **Einlass** is when you are allowed in. A concert listing showing *Einlass 19:00, Beginn 20:00* means doors at seven, music at eight.
 - **Beginn** is when the thing itself starts.
-- **letzter Einlass** is last admission, and at most Berlin sights it falls **30 to 60 minutes before closing time**. Some are far stricter: the Reichstag dome stays open until midnight but stops letting people in at 21:45.
+- **letzter Einlass** is last admission, and many Berlin sights stop admitting visitors before the building closes. The gap is not standard, so check the exact venue rather than assuming. The Reichstag is an unusually clear example: its last admission is 21:45 even though the roof terrace stays open later.
 - **ab** means from, **bis** means until. *Ab 20 Uhr* is from eight in the evening onwards. *Bis 18 Uhr* is until six.
 
 The trap is that *bis 18 Uhr* is a closing time, not an arrival time. My rule is blunt: **never treat a *bis* time as an arrival time, and look up the *letzter Einlass* line before you build an afternoon around it.** Public holidays change these numbers too, which is why the [Berlin public holidays list](/post/berlin-public-holidays-2026) is worth a glance before a trip.
