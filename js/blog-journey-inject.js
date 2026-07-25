@@ -48,6 +48,9 @@
   var bootAt = Date.now();
   var readyTimer = null;
   var nextTourSlotRequested = false;
+  var lateCommentsWatched = false;
+  var lateCommentsScrollHandler = null;
+  var lateCommentsPasses = 0;
   var liveJourneyTitlePromise = null;
   var liveJourneyTitle = '';
   var liveJourneyTitleUpdatedAt = 0;
@@ -896,18 +899,58 @@
       } catch (err) {}
     }
 
+    // The privacy control belongs to the global site footer only. A generic
+    // `footer` fallback used to win the race against the restored site footer
+    // and appended the button into the first `footer` in the document, which on
+    // blog posts is Wix's `footer[data-hook="post-footer"]` and on /blog is the
+    // blog index CTA band. Both produced a stray `Privacy Settings` line inside
+    // the page content.
+    var SITE_FOOTER_SCOPE = '.bw-site-footer, #bw-site-footer-restore';
+    var LINK_HOST_SELECTORS = [
+      '.bw-site-footer .bw-footer-bottom-links',
+      '#bw-site-footer-restore .bw-footer-bottom-links',
+      '.bw-site-footer footer',
+      '.bw-site-footer',
+      '#bw-site-footer-restore'
+    ];
+    var CONTENT_SCOPE = '[data-hook="post-footer"], [data-hook="post"], article, main, .bw-blog-index, .bw-footer-band, .bw-blog-index-root';
+
+    function isInsideSiteFooter(el) {
+      if (!el || !el.closest) return false;
+      if (el.closest(CONTENT_SCOPE)) return false;
+      return !!el.closest(SITE_FOOTER_SCOPE);
+    }
+
+    function findLinkHost() {
+      for (var i = 0; i < LINK_HOST_SELECTORS.length; i++) {
+        var host = document.querySelector(LINK_HOST_SELECTORS[i]);
+        if (host && isInsideSiteFooter(host)) return host;
+      }
+      return null;
+    }
+
+    function removeMisplacedFooterLinks() {
+      try {
+        var strays = document.querySelectorAll('button.bw-privacy-settings-link[' + LINK_MARKER + ']');
+        Array.prototype.forEach.call(strays, function (button) {
+          if (!isInsideSiteFooter(button)) button.remove();
+        });
+      } catch (err) {}
+    }
+
     function addFooterLink() {
       try {
+        removeMisplacedFooterLinks();
         if (!document.querySelector('[' + LINK_MARKER + ']')) {
-          var footerLinks = document.querySelector('.bw-site-footer .bw-footer-bottom-links');
-          var footer = footerLinks || document.querySelector('.bw-site-footer footer, .bw-site-footer, footer');
-          if (!footer) return;
-          var button = document.createElement('button');
-          button.type = 'button';
-          button.className = 'bw-privacy-settings-link';
-          button.setAttribute(LINK_MARKER, 'true');
-          button.textContent = 'Privacy Settings';
-          footer.appendChild(button);
+          var host = findLinkHost();
+          if (host) {
+            var button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'bw-privacy-settings-link';
+            button.setAttribute(LINK_MARKER, 'true');
+            button.textContent = 'Privacy Settings';
+            host.appendChild(button);
+          }
         }
         ensureFooterHandlers();
       } catch (err) {}
@@ -929,6 +972,26 @@
     [250, 1000, 3000, 7000, 12000].forEach(function (delay) {
       window.setTimeout(run, delay);
     });
+
+    // Long pages (blog index, long posts) mount the site footer only once it is
+    // scrolled near, which can be well after the last timed pass above. Re-run a
+    // few times on scroll so the footer control is wired and no stray survives.
+    var scrollPasses = 0;
+    var scrollPassTimer = null;
+    function scheduleScrollPass() {
+      if (scrollPassTimer) return;
+      scrollPassTimer = window.setTimeout(function () {
+        scrollPassTimer = null;
+        scrollPasses += 1;
+        run();
+        if (scrollPasses >= 6) window.removeEventListener('scroll', scheduleScrollPass);
+      }, 400);
+    }
+    try {
+      window.addEventListener('scroll', scheduleScrollPass, { passive: true });
+    } catch (err) {
+      window.addEventListener('scroll', scheduleScrollPass);
+    }
   }
 
   var BLOG_CATEGORIES = [
@@ -2392,7 +2455,11 @@
   }
 
   function hideNativeEndMatter() {
-    var labels = ['Related Posts', 'Comments'];
+    // Comments are handled by hideNativeComments() below. Keeping them out of
+    // this fuzzy pass matters: Wix now renders the comments module inside
+    // `footer[data-hook="post-footer"]`, and the container heuristic here would
+    // swallow the whole footer (tags, view count, like) along with it.
+    var labels = ['Related Posts'];
     var candidates = document.querySelectorAll('h1,h2,h3,h4,[role="heading"],p,span,div');
     var postBody = document.querySelector('[' + POST_BODY_MARKER + '="1"]');
 
@@ -2414,8 +2481,7 @@
         if (isUnsafeEndMatterContainer(parent)) break;
         var text = cleanText(parent.textContent);
         var hasRelatedShape = label === 'Related Posts' && text.indexOf('Related Posts') !== -1 && parent.querySelectorAll('a,img').length >= 2 && text.length < 1200;
-        var hasCommentsShape = label === 'Comments' && (text.indexOf('Comments') !== -1 || text.indexOf("Commenting on this post") !== -1) && text.length < 700;
-        if (hasRelatedShape || hasCommentsShape) return parent;
+        if (hasRelatedShape) return parent;
       }
       return node;
     }
@@ -2486,10 +2552,9 @@
 
     for (var i = 0; i < candidates.length; i++) {
       var text = cleanText(candidates[i].textContent);
-      var isCommentUnavailable = text.indexOf("Commenting on this post") !== -1 && text.length < 220;
-      if (labels.indexOf(text) === -1 && !isCommentUnavailable) continue;
+      if (labels.indexOf(text) === -1) continue;
       if (candidates[i].closest('[' + JOURNEY_MARKER + '], [' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + FDR_BRIDGE_MARKER + ']')) continue;
-      var label = text.indexOf('Related Posts') !== -1 ? 'Related Posts' : 'Comments';
+      var label = 'Related Posts';
       var container = chooseContainer(candidates[i], label);
       if (container && !isUnsafeEndMatterContainer(container)) {
         container.setAttribute(NATIVE_END_MARKER, '1');
@@ -2498,6 +2563,101 @@
     }
 
     hideNativeShareBlocks();
+    hideNativeComments();
+  }
+
+  // Wix's native comments module can mount late (after our early passes) and now
+  // sits inside `footer[data-hook="post-footer"]`, so the generic end-matter pass
+  // above can miss it. This pass is deliberately narrow: it only hides a wrapper
+  // whose entire text is comments UI, so the Wix tags/views/like row is never
+  // touched.
+  var COMMENT_SEEDS = [
+    /^Comments$/,
+    /^Commenting on this post/i,
+    /^Write a comment\.{0,3}$/i,
+    /^Be the first to (write a )?comment\.?$/i,
+    /^Share Your Thoughts$/i
+  ];
+
+  var COMMENT_PHRASES = [
+    /Commenting on this post is ?n['’]?t available anymore\.?/gi,
+    /Comments? (are|is) (closed|disabled|turned off)\.?/gi,
+    /Contact the site owner for more info\.?/gi,
+    /Be the first to (write a )?comment\.?/gi,
+    /Share Your Thoughts/gi,
+    /Write a comment\.{0,3}/gi,
+    /(Log ?in|Sign ?up) to (leave a comment|comment)\.?/gi,
+    /Sort by:?/gi,
+    /(Newest|Oldest|Most Reactions|Most Liked)( First)?/gi,
+    /\d+\s*comments?/gi,
+    /Comments?/gi
+  ];
+
+  function commentResidue(text) {
+    var rest = cleanText(text);
+    for (var i = 0; i < COMMENT_PHRASES.length; i++) {
+      rest = rest.replace(COMMENT_PHRASES[i], ' ');
+    }
+    return rest.replace(/[\s.,:;!?()[\]{}<>|/\\\-–—‘’“”"'*+]/g, '').replace(/\d+/g, '');
+  }
+
+  function isCommentSeed(el) {
+    if (!el || el.children.length) return false;
+    var text = cleanText(el.textContent);
+    if (!text || text.length > 240) return false;
+    for (var i = 0; i < COMMENT_SEEDS.length; i++) {
+      if (COMMENT_SEEDS[i].test(text)) return true;
+    }
+    return false;
+  }
+
+  function hideNativeComments() {
+    if (!isPostPage()) return;
+    var postBody = document.querySelector('[' + POST_BODY_MARKER + '="1"]');
+
+    function isUnsafeCommentContainer(el) {
+      if (!el || el === document.body || el === document.documentElement) return true;
+      var tag = (el.tagName || '').toUpperCase();
+      if (tag === 'MAIN' || tag === 'ARTICLE' || tag === 'HEADER') return true;
+      if (el.hasAttribute(POST_BODY_MARKER) || el.hasAttribute(JOURNEY_MARKER)) return true;
+      if (el.matches('[data-hook="post"], [data-hook="post-footer"], [data-hook="post-description"]')) return true;
+      if (postBody && el.contains(postBody)) return true;
+      if (el.querySelector && el.querySelector('[' + POST_BODY_MARKER + '], [' + JOURNEY_MARKER + ']')) return true;
+      if (el.closest('.bw-site-footer, #bw-site-footer-restore')) return true;
+      return false;
+    }
+
+    var seeds = document.querySelectorAll('h1,h2,h3,h4,h5,h6,[role="heading"],p,span,div,li');
+    for (var i = 0; i < seeds.length; i++) {
+      var seed = seeds[i];
+      if (!isCommentSeed(seed)) continue;
+      if (seed.closest('[' + JOURNEY_MARKER + '], [' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + FDR_BRIDGE_MARKER + '], [' + SHARE_MARKER + ']')) continue;
+      if (seed.closest('.bw-site-footer, #bw-site-footer-restore')) continue;
+
+      // Walk up while the whole subtree is still nothing but comments UI.
+      var target = null;
+      var node = seed;
+      var holdsRealComments = false;
+      for (var depth = 0; depth < 6 && node.parentElement; depth++) {
+        var parent = node.parentElement;
+        if (isUnsafeCommentContainer(parent)) break;
+        var parentText = cleanText(parent.textContent);
+        if (parentText.length > 1200 || commentResidue(parentText) !== '') {
+          // Stopping on real content inside a comments-looking wrapper means the
+          // module carries actual reader comments. Never hide those.
+          if (/comment/i.test(parentText)) holdsRealComments = true;
+          break;
+        }
+        target = parent;
+        node = parent;
+      }
+      if (holdsRealComments) continue;
+
+      var hide = target || (commentResidue(cleanText(seed.textContent)) === '' ? seed : null);
+      if (!hide || isUnsafeCommentContainer(hide)) continue;
+      hide.setAttribute(NATIVE_END_MARKER, '1');
+      hide.setAttribute('aria-hidden', 'true');
+    }
   }
 
   function currentConsentPolicy() {
@@ -2723,6 +2883,40 @@
       hideNativeEndMatter();
       decorateBlogBookLinks();
     });
+    watchLateNativeComments();
+  }
+
+  // Wix mounts the native comments module lazily, often only when the end of the
+  // article is scrolled near, so the passes above can run before it exists.
+  function watchLateNativeComments() {
+    [1500, 4000, 8000, 15000].forEach(function (delay) {
+      window.setTimeout(hideNativeComments, delay);
+    });
+    lateCommentsPasses = 0;
+    if (lateCommentsWatched) return;
+    lateCommentsWatched = true;
+    var timer = null;
+    lateCommentsScrollHandler = function () {
+      if (timer) return;
+      timer = window.setTimeout(function () {
+        timer = null;
+        lateCommentsPasses += 1;
+        hideNativeComments();
+        if (lateCommentsPasses >= 10) removeLateNativeCommentsWatcher();
+      }, 350);
+    };
+    try {
+      window.addEventListener('scroll', lateCommentsScrollHandler, { passive: true });
+    } catch (err) {
+      window.addEventListener('scroll', lateCommentsScrollHandler);
+    }
+  }
+
+  function removeLateNativeCommentsWatcher() {
+    if (!lateCommentsScrollHandler) return;
+    window.removeEventListener('scroll', lateCommentsScrollHandler);
+    lateCommentsScrollHandler = null;
+    lateCommentsWatched = false;
   }
 
   function removeInjected() {
@@ -2744,6 +2938,7 @@
       window.removeEventListener('scroll', backTopScrollHandler);
       backTopScrollHandler = null;
     }
+    removeLateNativeCommentsWatcher();
     clearTimeout(readyTimer);
     readyTimer = null;
     clearTimeout(renderTimer);
