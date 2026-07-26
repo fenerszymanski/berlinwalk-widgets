@@ -7641,5 +7641,31 @@
         "a": "Conditions change by block and hour, so avoid blanket promises. Keep your phone and bag close, wait in visible places and use the live journey planner instead of improvising a long walk through an unfamiliar park. If a place feels wrong, leave and take a night bus, train or licensed taxi."
       }
     ]
+  },
+  "which-berlin-pass-is-worth-it": {
+    "title": "Which Berlin Pass Is Worth It? - FAQ",
+    "subtitle": "Straight answers on the Berlin WelcomeCard, CityTourCard, Museum Pass Berlin and plain tickets: what each covers, what it costs in 2026, and which one fits your trip.",
+    "items": [
+      {
+        "q": "Which Berlin pass is worth it for a first-time visitor?",
+        "a": "It depends on the shape of your trip, not on one card being best. If you are staying central and mostly walking, skip the passes and buy single tickets (€4.00 AB) with a €11.20 day ticket on any heavy-transport day. If your trip is built around museums, the Museum Pass Berlin (€32 for 30+ museums over three days) is the strongest value. If you will ride a lot and use partner discounts, a WelcomeCard earns its keep. Decide by counting the museums you will enter and how much you will really ride."
+      },
+      {
+        "q": "What is the difference between the WelcomeCard and the CityTourCard?",
+        "a": "Both give unlimited AB or ABC public transport for a set number of days plus a folder of discounts. The WelcomeCard (from €28.50 for 48 hours, around €34 for 72 hours in zone AB) has the widest discount network, up to 50% off at more than 170 partners. The CityTourCard (€35.60 for 72 hours AB) has shallower discounts, up to about 30% at roughly 30 partners, but can be cheaper on longer durations. If you will use the discounts, the WelcomeCard usually wins; if you only want transport, price them against each other for your exact number of days."
+      },
+      {
+        "q": "Does the Museum Pass Berlin include public transport?",
+        "a": "No. The Museum Pass Berlin (€32) covers free entry to more than 30 museums over three consecutive days, including all five Museum Island houses, the Jewish Museum, the German Museum of Technology and the Natural History Museum, but it gives you no rides at all. You will still need day tickets, single fares, or your own feet to get between museums. Most of the central museums are a short walk from Alexanderplatz and Hackescher Markt, so walking often covers a lot of it."
+      },
+      {
+        "q": "Is a Berlin transport card cheaper than buying tickets?",
+        "a": "Not always. A 24-hour AB day ticket is €11.20, and a 72-hour CityTourCard (€35.60) is about €11.87 a day, so the card costs roughly the same as buying a day ticket each morning. What you really pay for with a transport card is the bundle of partner discounts and not having to think about tickets. For a compact, walkable trip where you ride only now and then, single tickets or a day ticket on your busiest day can come out cheaper than any card."
+      },
+      {
+        "q": "Should tourists buy the Deutschlandticket for Berlin?",
+        "a": "Usually not for a short trip. The Deutschlandticket is €63 a month and is a subscription rather than a holiday ticket, with a cancellation deadline to manage. It makes sense only for long stays or very transport-heavy plans that include regional day trips, the airport and lots of riding. For a normal two- or three-day Berlin visit, ordinary Berlin tickets or a tourist card are simpler."
+      }
+    ]
   }
 }
