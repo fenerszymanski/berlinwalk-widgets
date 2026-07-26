@@ -139,16 +139,16 @@
   // durable: neighbourhood, nearest station, what it is known for, a price band,
   // and one honest line. No per-dish prices that could go stale.
   var V = {
-    vuong:   {name:'Monsieur Vuong', area:'Mitte', stn:'U Weinmeisterstraße', price:'€€', veg:true, cash:false,
+    vuong:   {name:'Monsieur Vuong', area:'Mitte', stn:'U Weinmeisterstraße', price:'€€', veg:false, cash:false,
               blurb:'A long-running Mitte restaurant founded in 1999. Its current site accepts reservations and also keeps space for walk-ins.',
               order:'Check the changing menu, then consider pho or the daily special.'},
-    mot:     {name:'District Mot', area:'Mitte', stn:'U Rosenthaler Platz', price:'€€', veg:true, cash:false,
+    mot:     {name:'District Mot', area:'Mitte', stn:'U Rosenthaler Platz', price:'€€', veg:false, cash:false,
               blurb:'A colourful Saigon street-food setting with compact seating. Check the current menu and hours before going.',
               order:'Consider bun, or choose one sharing dish from the current menu.'},
-    ngo:     {name:'Madame Ngo', area:'Charlottenburg · Kantstraße', stn:'S Savignyplatz', price:'€€€', veg:true, cash:false,
+    ngo:     {name:'Madame Ngo', area:'Charlottenburg · Kantstraße', stn:'S Savignyplatz', price:'€€€', veg:false, cash:false,
               blurb:'A Hanoi-style brasserie on Kantstraße, Berlin\'s unofficial Asian food street. This is the one for a calm, proper dinner rather than a fast bowl.',
               order:'The pho bo (beef pho) is the house signature.'},
-    ben:     {name:'Ben Thanh', area:'Charlottenburg · Kantstraße', stn:'U Wilmersdorfer Straße', price:'€€', veg:true, cash:false,
+    ben:     {name:'Ben Thanh', area:'Charlottenburg · Kantstraße', stn:'U Wilmersdorfer Straße', price:'€€', veg:false, cash:false,
               blurb:'Named after Saigon\'s market, a relaxed sit-down spot on the same west-side food street. Fair prices for the quality.',
               order:'Choose from the current menu rather than travelling for one remembered dish.'},
     gmv:     {name:'Good Morning Vietnam', area:'Kreuzberg', stn:'U Gneisenaustraße', price:'€€', veg:true, cash:false,
@@ -157,7 +157,7 @@
     saigon:  {name:'Miss Saigon', area:'Kreuzberg', stn:'U Görlitzer Bahnhof', price:'€', veg:true, cash:false,
               blurb:'A South-Vietnamese restaurant whose current menu includes vegetarian and vegan choices alongside meat dishes.',
               order:'Compare the current bun, curry and meat-free choices.'},
-    dongxuan:{name:'Dong Xuan Center food halls', area:'Lichtenberg (East Berlin)', stn:'Tram M8 to Herzbergstr./Dong-Xuan', price:'€', veg:true, cash:false,
+    dongxuan:{name:'Dong Xuan Center food halls', area:'Lichtenberg (East Berlin)', stn:'Tram M8 to Herzbergstr./Dong-Xuan', price:'€', veg:false, cash:false,
               blurb:'A large wholesale and retail complex with salons, trade, services and several places to eat. Individual hours and payment methods vary.',
               order:'Walk the halls first, then choose one open kitchen. Carry a card plus some cash.'}
   };
@@ -167,20 +167,21 @@
       say:'Stay in Mitte. You get a genuinely good bowl without a detour, in the part of town where most visitors already are.'},
     west: {lab:'Your match: Kantstraße, west side', pick:['ngo','ben'],
       say:'Head to Charlottenburg. Kantstraße is Berlin\'s Asian food street, and it is the right call when you want to sit down and eat properly rather than grab and go.'},
-    kreuz: {lab:'Your match: Kreuzberg, veg-friendly choices', pick:['gmv','saigon'],
-      say:'Kreuzberg gives you a fully vegan restaurant and a mixed-menu option close to the U7 and U8. Check both current menus before choosing.'},
-    east: {lab:'Your match: the Dong Xuan world', pick:['dongxuan','saigon'],
+    kreuz: {lab:'Your match: Kreuzberg, verified veg-first choices', pick:['gmv','saigon'],
+      say:'The clearest verified vegan-first pair in this small finder is in Kreuzberg. Check the journey before deciding; if you must stay in Mitte, verify a current menu there.'},
+    east: {lab:'Your match: the Dong Xuan world', pick:['dongxuan'],
       say:'Ride the M8 to Herzbergstr./Dong-Xuan for a daytime market visit. The published center hours are 10:00–20:00 from Wednesday to Monday, with Tuesday closed; individual businesses vary.'}
   };
 
   function esc(s){return String(s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
 
   function decide(mood, diet, reach){
+    // Dietary need wins: only the Kreuzberg pair is independently verified here.
+    if(diet==='veg') return 'kreuz';
     // Adventure + willing to travel = the market world.
     if(mood==='adventure') return reach==='far' ? 'east' : 'kreuz';
     if(mood==='sitdown') return reach==='far' ? 'west' : 'central';
     // quick bowl
-    if(diet==='veg') return reach==='far' ? 'kreuz' : 'central';
     return reach==='far' ? 'kreuz' : 'central';
   }
 
@@ -206,8 +207,6 @@
     var mood=quiz.mood.value, diet=quiz.diet.value, reach=quiz.reach.value;
     var w=WORLDS[decide(mood,diet,reach)];
     var picks=w.pick.slice();
-    // For veg diet, make sure a clearly veg-friendly place leads in central match.
-    if(diet==='veg' && picks[0]==='vuong'){ picks=['gmv','saigon']; }
     var html='<div class="vf-verdict"><p class="lab">'+esc(w.lab.split(':')[0])+'</p><h3>'+esc(w.lab.split(':').slice(1).join(':').trim())+'</h3><p>'+esc(w.say)+'</p></div>';
     picks.forEach(function(k){ html+=venueCard(k,diet); });
     // Always offer the deep-dive unless it is already the match.
