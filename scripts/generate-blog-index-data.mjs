@@ -709,6 +709,8 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if ((post.slug || '') === 'where-to-eat-late-at-night-in-berlin') return 'berlin-late-night-food';
+  if ((post.slug || '') === 'vietnamese-food-in-berlin') return 'berlin-vietnamese-food-finder';
   if ((post.slug || '') === 'how-to-spend-a-sunday-in-berlin') return 'berlin-sunday-planner';
   if ((post.slug || '') === 'brandenburg-gate-before-after') return 'brandenburg-gate-before-after';
   if ((post.slug || '') === 'how-to-get-into-berghain') return 'berlin-club-night-clock';
