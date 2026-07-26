@@ -41,7 +41,7 @@
   /* night toggle */
   .ln-night{display:flex;align-items:center;gap:9px;margin:0 0 15px;font-size:.82rem;font-weight:700;color:#40513a;flex-wrap:wrap}
   .ln-seg{display:inline-flex;border:1.5px solid #cdd8c4;border-radius:999px;overflow:hidden}
-  .ln-seg button{border:0;background:#f6f9f0;color:#5a6a54;font-family:inherit;font-weight:700;font-size:.78rem;padding:7px 13px;cursor:pointer;transition:all .14s}
+  .ln-seg button{min-height:44px;border:0;background:#f6f9f0;color:#5a6a54;font-family:inherit;font-weight:700;font-size:.78rem;padding:10px 14px;cursor:pointer;transition:all .14s}
   .ln-seg button[aria-pressed="true"]{background:var(--led);color:#3a3600}
   .ln-seg button:focus-visible{outline:3px solid var(--green);outline-offset:-3px}
 
@@ -99,7 +99,7 @@
   </div>
 
   <div class="ln-reality">
-    <b>One rule that saves the night:</b> after midnight, stop looking for a proper restaurant and walk toward the nearest U-Bahn hub instead. In Berlin, late food follows the stations, not the guidebook streets.
+    <b>One rule that saves the night:</b> after midnight, compare several current options around your nearest well-connected stop before moving. In Berlin, late food often follows transport hubs, but one old listing is never a promise.
   </div>
 </div>
 
@@ -232,7 +232,7 @@
     html += row('', sp.spati.s, 'Späti (snacks & drinks)', spatiText(sp));
     html += row('', 'off', 'Sit-down kitchen', 'Many restaurant kitchens stop hot food around <b>22:00 or 23:00</b>, even if the bar stays open. Check the venue before travelling; after midnight, counters are the safer plan.');
     html += row('home', state.weekend ? 'ok' : 'warn', 'Getting home', homeText(sp));
-    html += '<p class="board-note">Times drift by day and season, so treat these as a realistic picture, not a promise. When in doubt, follow the crowd toward the station.</p>';
+    html += '<p class="board-note">Times drift by day and season, so treat these as a starting point, not a promise. Confirm the venue and the live BVG trip before moving.</p>';
 
     boardBody.innerHTML = html;
   }
