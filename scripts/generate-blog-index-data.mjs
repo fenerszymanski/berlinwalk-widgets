@@ -709,6 +709,9 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if ((post.slug || '') === 'how-to-spend-a-sunday-in-berlin') return 'berlin-sunday-planner';
+  if ((post.slug || '') === 'brandenburg-gate-before-after') return 'brandenburg-gate-before-after';
+  if ((post.slug || '') === 'how-to-get-into-berghain') return 'berlin-club-night-clock';
   if ((post.slug || '') === 'telling-time-in-german-berlin') return 'german-time-dial';
   if ((post.slug || '') === 'reichstag-before-and-after') return 'reichstag-read-the-building';
   if ((post.slug || '') === 'berlin-courtyards-hoefe') return 'berlin-courtyard-walk';
