@@ -10,17 +10,17 @@ _A normal Berlin Sunday: flea market stalls at Mauerpark, the TV Tower on the ho
 
 ## Why everything looks closed on a Sunday in Berlin
 
-Germany has a shop closing law, the Ladenschlussgesetz, that dates back to 1956. In practice it means normal shops, supermarkets, and most chemists stay shut all day on Sundays and public holidays. It is not a Berlin quirk, it is national, and it is one of the last things that still feels genuinely old-fashioned about this otherwise very unbuttoned city.
+Berlin's Sunday shopping rules come from the **Berlin Shop Opening Act**. In practice, normal shops, supermarkets, and most chemists stay shut on Sundays and public holidays, with specific exceptions for places such as railway stations, emergency pharmacies, and certain limited product ranges. The [official Berlin service page](https://service.berlin.de/dienstleistung/327974/en/) explains the current rules and exceptions.
 
 There are only a handful of exceptions, and they are the ones that save your day:
 
 - **Train station supermarkets.** The Rewe and Edeka inside Hauptbahnhof, Ostbahnhof, Friedrichstraße and a few other big stations are open on Sundays. This is where locals go when they forget something.
-- **Spätis.** These little corner shops are a Berlin institution and many open on Sundays for drinks, snacks, and basics. They are your backup for water, a SIM top-up, or a cold beer in the park.
+- **Spätis.** These little corner shops are a Berlin institution and many open on Sundays for drinks and snacks, although Sunday trading rules still apply. Treat them as a backup, not as a full supermarket.
 - **Restaurants, cafés, bakeries, and bars.** Hospitality is exempt, so eating and drinking out is completely normal on a Sunday. Brunch, in fact, is a whole Berlin ritual.
 - **Pharmacies on emergency duty.** A rotating Notdienst pharmacy is always open. Any closed chemist has a sign in the window pointing to the nearest one.
 - **Museums, galleries, and tourist attractions.** These generally run their normal Sunday hours. The risky day for museum closures in Berlin is Monday, not Sunday.
 
-The only regular shops that open are on the two designated shopping Sundays the city grants each year. For 2026 those city-wide dates are **6 December and 20 December**, in the run-up to Christmas, usually from 1pm to 8pm. If you want the full breakdown of what does and does not open, I wrote a separate guide on whether [shops are open on Sunday in Berlin](/post/are-shops-open-on-sunday-in-berlin-what-you-need-to-know), and the live [Berlin Sunday shopping tool](/tools/berlin-sunday-shopping) tracks the next open dates.
+For the second half of 2026, Berlin has authorised city-wide shopping on **6 December and 20 December**, from 1pm to 8pm. That permission does not force every shop to open, and event-based exceptions can also exist, so check the exact store before travelling across town. If you want the full breakdown, I wrote a separate guide on whether [shops are open on Sunday in Berlin](/post/are-shops-open-on-sunday-in-berlin-what-you-need-to-know), and the live [Berlin Sunday shopping tool](/tools/berlin-sunday-shopping) tracks the announced dates.
 
 My advice: stop hunting for shops. On a Sunday, Berlin moves its whole social life into markets, parks, and cafés. Go where the city actually is.
 
@@ -28,10 +28,10 @@ My advice: stop hunting for shops. On a Sunday, Berlin moves its whole social li
 
 The Berlin Sunday really begins at a Flohmarkt. These are not tourist antique fairs, they are where the city sells its old records, jackets, cameras, and furniture to itself, and they are free to wander. A few worth building a morning around:
 
-- **Flohmarkt am Mauerpark**, Prenzlauer Berg. The big, loud, famous one, open Sundays from around 9am to 6pm. Records, vintage clothes, street food, and buskers, right on the old death strip of the Berlin Wall.
+- **Flohmarkt am Mauerpark**, Prenzlauer Berg. The big, loud, famous one, open Sundays from 10am to 6pm. Records, vintage clothes, street food, and buskers, right on the former border strip.
 - **Boxhagener Platz**, Friedrichshain. Sundays 10am to 6pm. Smaller and better for it, heavy on books and records, ringed by cafés for the coffee afterwards.
-- **Arkonaplatz**, Prenzlauer Berg. Sundays, year-round. Cosy and design-led, strong on mid-century furniture and vintage.
-- **Nowkoelln Flowmarkt**, on the Maybachufer canal in Neukölln. Only the first and third Sunday of the month, roughly April to November, 10am to 5pm. Young designers and private sellers with the water right behind the stalls.
+- **Arkonaplatz**, Prenzlauer Berg. Sundays, year-round, normally 10am to 5pm in summer and to 4pm in winter. Cosy and design-led, strong on mid-century furniture and vintage.
+- **Nowkoelln Flowmarkt**, on the Maybachufer canal in Neukölln. It runs on selected Sundays, usually every two weeks on its published season dates, from 10am to 5pm. Check the [official Nowkoelln calendar](https://nowkoelln.de/anmeldung-info/) before building your morning around it.
 
 ![A busy aisle at the Mauerpark flea market with clothing rails and browsers on a Sunday](blog-drafts/how-to-spend-a-sunday-in-berlin/images/optimized/mauerpark-flohmarkt-stall.jpg)
 
@@ -55,7 +55,7 @@ Grab something from the flea-market food stalls or a Späti on Bernauer Straße,
 
 Here is the piece most visitors get backwards. In Berlin, Sunday is a great museum day and **Monday is the one to avoid**, because many museums close on Mondays. On a grey or rainy Sunday, this is your plan.
 
-Museum Island alone can fill an afternoon: the Neues Museum with Nefertiti, the Alte Nationalgalerie, the Altes Museum, and the Bode. The one thing to know is that the Pergamon Museum is closed for a long renovation, so do not build your day around it. If you are weighing tickets, I compared the [Berlin museum pass against single tickets](/post/berlin-museum-pass-vs-single-tickets-which-one-saves-you-money), and there is a full list of [which Berlin museums are actually free](/post/which-berlin-museums-are-free-2026) if you want to keep the day cheap.
+Museum Island alone can fill an afternoon: the Neues Museum with Nefertiti, the Alte Nationalgalerie, the Altes Museum, and the Bode. The Pergamonmuseum is fully closed now; the museum's [current visitor information](https://www.smb.museum/en/museums-institutions/pergamonmuseum/plan-your-visit/) says a large part will reopen on **4 June 2027**, so do not build a 2026 Sunday around it. If you are weighing tickets, I compared the [Berlin museum pass against single tickets](/post/berlin-museum-pass-vs-single-tickets-which-one-saves-you-money), and there is a full list of [which Berlin museums are actually free](/post/which-berlin-museums-are-free-2026) if you want to keep the day cheap.
 
 ![The Altes Museum and the Lustgarten lawn on Museum Island with visitors on a bright day](blog-drafts/how-to-spend-a-sunday-in-berlin/images/optimized/museum-island-lustgarten.jpg)
 

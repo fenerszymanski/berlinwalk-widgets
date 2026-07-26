@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>The Berlin Club Night Clock: When to Actually Show Up</title>
-<meta name="description" content="Drag across a Berlin club night to see when the floors actually fill, when the peak is, and the realistic hour to arrive at Berghain, Sisyphos, Tresor and other clubs. Pick a club type for honest door and timing advice." />
+<title>Berlin Club Night Timing Checker</title>
+<meta name="description" content="Compare your planned arrival with the published format for a Berghain Klubnacht, Friday event, ticketed show, or another Berlin club night. This tool does not predict admission." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='32' r='18' fill='none' stroke='%23E8E4D8' stroke-width='4'/%3E%3Crect x='30' y='18' width='4' height='16' rx='2' fill='%23FFE600'/%3E%3Crect x='31' y='31' width='13' height='4' rx='2' fill='%23FFE600' transform='rotate(35 32 32)'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -136,26 +136,26 @@
   <div class="card">
     <div class="head">
       <span class="kicker">BerlinWalk.com • Nightlife</span>
-      <h2>The Berlin Club Night Clock</h2>
-      <p>Berlin clubs run on a different clock. Drag across the night to see when to actually show up.</p>
+      <h2>Berlin Club Night Timing Checker</h2>
+      <p>Match your arrival plan to the official event listing. This tool never predicts the door.</p>
     </div>
 
     <div class="chips" id="chips">
-      <button class="chip active" data-type="big"><span class="nm">Big techno</span><span class="ex">Berghain, Tresor, RSO</span></button>
-      <button class="chip" data-type="openair"><span class="nm">Open-air &amp; easier door</span><span class="ex">Sisyphos, Kater Blau</span></button>
-      <button class="chip" data-type="queer"><span class="nm">Queer &amp; mixed</span><span class="ex">://about blank, SchwuZ</span></button>
-      <button class="chip" data-type="first"><span class="nm">My first club night</span><span class="ex">Friendlier, lower stakes</span></button>
+      <button class="chip active" data-type="klubnacht"><span class="nm">Saturday Klubnacht</span><span class="ex">Often listed at 23:59</span></button>
+      <button class="chip" data-type="friday"><span class="nm">Friday club event</span><span class="ex">Often a separate format</span></button>
+      <button class="chip" data-type="ticketed"><span class="nm">Ticketed show</span><span class="ex">Follow doors + start time</span></button>
+      <button class="chip" data-type="other"><span class="nm">Another Berlin club</span><span class="ex">Use that venue's listing</span></button>
     </div>
 
     <div class="stage-wrap">
       <div class="stage">
         <div class="stagetop">
           <div class="clockread"><span id="clock">01:00</span><small id="dayLabel">Sat → Sun</small></div>
-          <div class="statepill" id="statePill">Sweet spot</div>
+          <div class="statepill" id="statePill">00:00–02:00</div>
         </div>
         <div class="sceneline" id="scene"></div>
         <div class="band"><div class="seg" id="segFill"></div></div>
-        <input type="range" id="range" min="0" max="14" step="1" value="3" aria-label="Hour of the night" />
+        <input type="range" id="range" min="0" max="14" step="1" value="3" aria-label="Planned arrival hour" />
         <div class="marks"><span>22:00</span><span>02:00</span><span>06:00</span><span>10:00</span><span>12:00</span></div>
         <div class="draghint" id="draghint">Drag the slider across the night</div>
       </div>
@@ -168,11 +168,11 @@
 
     <div class="door">
       <div class="dcol yes">
-        <h4>Helps at the door</h4>
+        <h4>Check before you go</h4>
         <ul id="doYes"></ul>
       </div>
       <div class="dcol no">
-        <h4>Gets you turned away</h4>
+        <h4>Do not treat as a rule</h4>
         <ul id="doNo"></ul>
       </div>
     </div>
@@ -186,14 +186,14 @@
   // Night runs from 22:00 (index 0) to 12:00 next day (index 14).
   var HOURS = ["22:00","23:00","00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00","10:00","11:00","12:00"];
 
-  // Band colours across the night: too-early -> warming -> sweet -> peak -> afterhours -> sunday
+  // Neutral time bands. They describe the clock only, never the queue, crowd, or admission odds.
   var BANDS = [
-    {to:1,  col:"#3a3f52", label:"Too early"},     // 22-23
-    {to:3,  col:"#4a5a86", label:"Warming up"},    // 00-01
-    {to:5,  col:"#2E7D32", label:"Sweet spot"},    // 01-03 (arrive)
-    {to:9,  col:"#1B5E20", label:"Peak"},          // 03-07
-    {to:12, col:"#7CB342", label:"Afterhours"},    // 07-10
-    {to:14, col:"#FFE600", label:"Sunday session"} // 10-12
+    {to:2,  col:"#3a3f52", label:"Before midnight"},
+    {to:4,  col:"#4a5a86", label:"00:00–02:00"},
+    {to:7,  col:"#2E7D32", label:"02:00–05:00"},
+    {to:10, col:"#1B5E20", label:"05:00–08:00"},
+    {to:13, col:"#7CB342", label:"08:00–11:00"},
+    {to:14, col:"#FFE600", label:"12:00"}
   ];
 
   function stateAt(i){
@@ -202,89 +202,89 @@
   }
 
   var TYPES = {
-    big: {
-      name:"Big techno (Berghain, Tresor, RSO)",
+    klubnacht: {
+      name:"Saturday Klubnacht",
       scene:[
-        "Almost empty. The queue may already be forming outside, but inside the floors are bare. Turning up now mostly means standing in line for a room that is not going yet.",
-        "Still slow. Locals are having a drink somewhere else first. The door is warming up, not the dancefloor.",
-        "This is the honest window to arrive. The rooms are filling, the door is fully open, and you have the whole night ahead of you.",
-        "Right in the middle of it. Every floor is going and the sound system is doing what it was built for. This is why people come to Berlin.",
-        "The peak keeps rolling. Berghain and the big rooms do not stop, and the crowd that stayed is deep in it.",
-        "Afterhours. The light changes, the mood softens, and the people left are here for the long haul. A very Berlin hour.",
-        "Sunday session. Yes, still open. The big clubs run through Sunday into Monday morning, and the daytime crowd has its own calm energy."
+        "Recent 2026 listings commonly show a 23:59 start. If your date says the same, this hour is before the published start. Check the exact event page.",
+        "You are close to the common 23:59 start shown on recent listings. Confirm the date, rooms, and running order before leaving.",
+        "If your listing says 23:59, the event is under way. This says nothing about queue length, crowd level, or admission.",
+        "Use the running order to see which artists are playing. Do not use the clock as a claim about door odds.",
+        "A Klubnacht running order can continue through Sunday. Eat, rest, hydrate, and choose an exit plan instead of chasing a supposed peak.",
+        "Check the live running order. Some editions are still active at this hour, but the exact event page is the only reliable schedule.",
+        "Sunday daytime can appear in a Klubnacht running order. Confirm your date and transport before travelling."
       ],
-      sweet:"01:00 to 04:00",
+      sweet:"the official event page and running order",
       move:{
-        early:"For Berghain and the big techno rooms, do not arrive at 22:00. Aim for after 01:00. Coming early just means a long line for an empty floor.",
-        good:"This is the window. Arrive now, go in small and calm, and you have the whole night and the Sunday session ahead of you.",
-        peak:"You are in the peak. If you have not gone in yet, the queue is longest now; be patient and quiet in line.",
-        late:"It is late, but the big clubs run for two more days. An afterhours or Sunday-daytime arrival is a real, less crowded option."
+        early:"Open the official listing. If it shows 23:59, do not join a queue before the event starts just because an old guide told you to.",
+        good:"Match this hour to the artist schedule you actually want. Admission remains subjective at every hour.",
+        peak:"Take care of rest, food, water, and the people you came with. The clock does not predict the door.",
+        late:"Check whether your exact running order is still active and how you will get home. Keep a second event or a simple exit plan."
       },
-      yes:["Come in a small group of two or three, or alone","Dark, plain, practical clothes and calm energy","Know who is playing that night","Some cash for the cloakroom, and patience in the queue"],
-      no:["Big loud groups, stag or hen parties","Visibly drunk or arguing in line","Filming or photographing the queue or inside","Treating it like a photo stop, not a dancefloor"]
+      yes:["Exact event name, date, start time and running order","Physical photo ID and the event's current age rule","A rested plan, route home and current payment options","A backup that does not depend on admission"],
+      no:["Any hour as a guarantee of entry","An old price or cash-only claim","Black clothes as a universal dress rule","Filming strangers or arguing at the door"]
     },
-    openair: {
-      name:"Open-air and easier door (Sisyphos, Kater Blau)",
+    friday: {
+      name:"Friday club event",
       scene:[
-        "Quiet. These places have gardens and river terraces, so early on it feels more like a bar than a club. Pleasant, but not going yet.",
-        "Filling slowly. In summer the outdoor areas start to get a nice buzz around now.",
-        "A good time to arrive. The door here is friendlier than the big techno clubs, and the gardens are coming alive.",
-        "Full and happy. Sisyphos in particular feels like a small festival, with several floors and outdoor stages all at once.",
-        "Deep into the night. The crowd is warm, the music is broad, and nobody is watching the clock.",
-        "Afterhours in the garden. As the sun comes up the open-air spaces are the best part of these clubs.",
-        "Sunday session. These are the clubs people spend the whole Sunday at, dancing outside in daylight. Bring sunglasses."
+        "Friday events are separate formats, not smaller copies of Klubnacht. Recent listings can start at 22:00, but your exact page controls.",
+        "If the listing says 22:00, the event has started. Read the rooms and artist schedule before choosing this hour.",
+        "The event may be running, but timing varies by format. Check the official page rather than applying a Saturday rule.",
+        "Use the published running order. This tool does not estimate the crowd, queue, or admission decision.",
+        "Confirm that the event is still running and that the artist you want has not finished.",
+        "Some Friday formats finish before a long Saturday Klubnacht would. Check before crossing the city.",
+        "Do not assume a Friday event continues through Sunday. The exact listing decides."
       ],
-      sweet:"00:00 to 03:00",
+      sweet:"the Friday event's own start time and running order",
       move:{
-        early:"Sisyphos and Kater Blau are friendlier and more festival-like. You can arrive a bit earlier, but the gardens still peak deep in the night.",
-        good:"Good time to go. The door is more relaxed here, so this is a smart place to start a Berlin club night.",
-        peak:"Right in it. In summer, head for the outdoor floors; that is the whole point of these clubs.",
-        late:"Afterhours and Sunday daytime are the best hours for these open-air clubs. Arriving late here is not a problem."
+        early:"Check whether the listing says 22:00, 23:00, or another time. Friday is event-led.",
+        good:"Use the current running order and plan transport. The time does not change admission into a guarantee.",
+        peak:"Check which room and artist you want, not a generic club-night peak.",
+        late:"Verify that the event is still running before travelling and keep a backup."
       },
-      yes:["Relaxed, come as you are in a smaller group","Cash and a phone that stays in your pocket","Weekend and summer for the outdoor floors","An open plan; you may stay far longer than expected"],
-      no:["Turning up expecting an early-evening scene","Loud tourist-group energy","Filming the crowd or the outdoor stages","Assuming any door is guaranteed, even a friendly one"]
+      yes:["The exact Friday event page","Start time, rooms and artist order","Physical ID and event-specific notes","A live route and backup plan"],
+      no:["Klubnacht timing copied onto Friday","A claimed best hour for the door","Old payment or price information","A venue name without checking the event"]
     },
-    queer: {
-      name:"Queer and mixed (://about blank, SchwuZ)",
+    ticketed: {
+      name:"Ticketed show or concert",
       scene:[
-        "Not started. These are party-led clubs, so the night depends on which event is on. Early on, the room is empty.",
-        "Warming up. Check the specific party name and its start time; some queer nights begin later than you expect.",
-        "A fair time to arrive for most nights. The crowd is mixed, political and friendly, and the door cares about attitude more than looks.",
-        "Full and going. ://about blank has a garden and two floors; the energy is inclusive and serious about the music.",
-        "Peak. This is a scene rooted in Berlin's queer club history, so read the room and respect the space.",
-        "Afterhours. The garden and the softer floor carry the last hours well.",
-        "Sunday. Some parties run long; others are one-night events. Always check the specific line-up before you plan."
+        "Ticketed shows often publish separate door and performance times. Follow both, not the normal club-night mythology.",
+        "Check your ticket and event page now. A missed door or start time cannot be repaired by a generic nightlife rule.",
+        "If the show has started, the ticket terms and late-entry policy matter. Read the organiser's instructions.",
+        "This may already be well into the performance. Check the actual schedule before setting out.",
+        "Most ticketed shows are not all-weekend events. Do not assume the venue is still admitting for this programme.",
+        "Verify the event status. A club building can host formats with completely different end times.",
+        "A daytime arrival only makes sense if the listing explicitly schedules it."
       ],
-      sweet:"00:00 to 03:00",
+      sweet:"the doors time printed on your ticket",
       move:{
-        early:"://about blank and SchwuZ are night-by-night. Check the exact party and its start; some queer nights open later than the big clubs.",
-        good:"Good window for most nights. These doors reward respect and genuine interest in the party over any dress formula.",
-        peak:"In the peak. This is a queer-rooted scene; come as a guest of the space, not a spectator.",
-        late:"Depends on the party. Some run into Sunday, some are single events; check the line-up so you are not caught out."
+        early:"Read the ticket for doors, start time, age rule, and entry conditions.",
+        good:"Follow the ticket and organiser instructions. Do not substitute advice for a different event.",
+        peak:"Confirm late-entry rules before travelling.",
+        late:"Assume nothing. Check whether the ticketed programme is still active."
       },
-      yes:["Read the specific party and its values first","Come open, respectful and there for the music","Small groups or solo, friendly energy","Cash and an ID"],
-      no:["Treating a queer party as a tourist curiosity","Filming people without consent","Big rowdy groups","Assuming it runs like the 24-hour techno clubs"]
+      yes:["Valid ticket or the stated box-office plan","Doors time and show start","Photo ID if the listing requires it","Organiser updates and transport"],
+      no:["Klubnacht timing for a concert","A door rumour over ticket conditions","Assuming late entry is allowed","Ignoring an event cancellation or change"]
     },
-    first: {
-      name:"My first club night (lower stakes)",
+    other: {
+      name:"Another Berlin club or party",
       scene:[
-        "Too early for any Berlin club. Use this hour for a drink at a bar or a Späti by the Spree instead, and go later.",
-        "Still early. If it is your first Berlin night, do not spend it queueing; the clubs are only just starting.",
-        "Now you can head out. For a first night, pick a friendlier club rather than gambling everything on Berghain.",
-        "Clubs are full and going. A first-timer has a much better night at Sisyphos, Kater Blau or ://about blank than in the Berghain line.",
-        "Peak hours. Plenty of time left; there is no rush and no early last-order to beat.",
-        "Afterhours. If you are still going, you are officially doing Berlin properly. Pace yourself.",
-        "Sunday session. A gentle daytime arrival at an open-air club is a lovely, low-pressure way to see the scene."
+        "There is no city-wide opening rule. Use the venue's official calendar and the exact party page.",
+        "Check the published start before leaving. A venue can host very different formats on different nights.",
+        "The party may be running, but this tool cannot know its crowd, queue, capacity, or admission decision.",
+        "Read the running order if one exists and confirm the address. Berlin venue information changes quickly.",
+        "Do not assume every club runs into the morning. Verify the event's own schedule.",
+        "Some parties continue; others have finished. Only the organiser can answer that for your date.",
+        "A daytime arrival is valid only when the event listing says so."
       ],
-      sweet:"00:30 to 03:00",
+      sweet:"that venue's official event listing",
       move:{
-        early:"On a first Berlin night, do not queue at 22:00 and do not make Berghain your only plan. Start with a bar, then a friendlier club after midnight.",
-        good:"Good time to go. Choose Sisyphos, Kater Blau or ://about blank for a first night; save Berghain for when you know the scene.",
-        peak:"You are in the peak with plenty of time. No closing time means no rush, so relax and enjoy it.",
-        late:"Afterhours and the Sunday open-air sessions are the easiest, lowest-pressure way to feel the Berlin club scene."
+        early:"Find the exact party, not just the venue name. Check start time, address, rules, and ticket status.",
+        good:"Match your arrival to the published programme and keep a backup.",
+        peak:"Do not infer a peak or easier door from the clock.",
+        late:"Verify the event is still active before crossing the city."
       },
-      yes:["Pick a friendlier club for the first attempt","Go after midnight, not at opening","Carry cash and keep your phone away","Have a backup club in case of a no"],
-      no:["Making Berghain your only plan","Arriving early and burning the night in a queue","A big group and lots of photos","Arguing if a door says no; it is normal, move on"]
+      yes:["Official venue and party pages","Current address, start time and ticket status","Event-specific dress or conduct rules","A backup and a live route home"],
+      no:["A single Berlin-wide club timetable","Claims of an easier or guaranteed door","An old listicle as current evidence","Filming people without consent"]
     }
   };
 
@@ -301,17 +301,17 @@
   var foot=document.getElementById('foot');
   var draghint=document.getElementById('draghint');
 
-  var current='big';
+  var current='klubnacht';
 
-  // Map a slider index to a "phase" 0..6 used by the type scene/move arrays.
+  // Map a slider index to a neutral time phase used by the selected event format.
   function phaseAt(i){
-    if(i<1) return 0;      // too early
-    if(i<3) return 1;      // warming
-    if(i<5) return 2;      // sweet
-    if(i<7) return 3;      // peak-early
-    if(i<9) return 4;      // peak-late
-    if(i<12) return 5;     // afterhours
-    return 6;              // sunday
+    if(i<1) return 0;
+    if(i<3) return 1;
+    if(i<5) return 2;
+    if(i<7) return 3;
+    if(i<9) return 4;
+    if(i<12) return 5;
+    return 6;
   }
   function moveKey(i){
     if(i<3) return 'early';
@@ -352,7 +352,7 @@
     statePill.textContent=state.label;
     pillColour(state);
     scene.innerHTML='<b>'+t.name+'.</b> '+t.scene[phaseAt(i)];
-    moveEl.innerHTML='<b>My move:</b> '+t.move[moveKey(i)]+' <b>Sweet spot to arrive: '+t.sweet+'.</b>';
+    moveEl.innerHTML='<b>My move:</b> '+t.move[moveKey(i)]+' <b>Planning anchor: '+t.sweet+'.</b>';
     renderList(doYes, t.yes);
     renderList(doNo, t.no);
   }
@@ -365,7 +365,7 @@
   });
   range.addEventListener('input', function(){ draghint.classList.add('gone'); render(); });
 
-  foot.innerHTML='No Berlin club has a closing time, so there is no early last order to beat and no reason to arrive at 22:00. Doors are never guaranteed; a no is normal, so always have a second club in mind. Planning the day before the night? <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based">See the free walking tour</a>.';
+  foot.innerHTML='This checker never predicts admission, queue length, crowd level, or a guaranteed best hour. Verify your exact date on the <a href="https://www.berghain.berlin/en/program/" target="_blank" rel="noopener">official Berghain programme</a>. Planning the day before the night? <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based">See the free walking tour</a>.';
 
   paintBand();
   render();

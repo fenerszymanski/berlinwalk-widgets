@@ -2284,7 +2284,7 @@
   },
   {
     "slug": "berlin-club-night-clock",
-    "title": "Berlin Club Night Clock",
+    "title": "Berlin Club Timing Checker",
     "category": "Discovery",
     "model": "ChatGPT browser image generation",
     "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
@@ -2294,5 +2294,18 @@
     "png160": "/Users/yusufucuz/Documents/New project/_worktrees/berghain-20260725/tools-home/icons/berlin-club-night-clock-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-club-night-clock-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_f5aab7f4bc1943048eddc72745f0fcde~mv2.png"
+  },
+  {
+    "slug": "berlin-sunday-planner",
+    "title": "Berlin Sunday Planner",
+    "category": "Discovery",
+    "model": "Codex built-in image generation",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "sourceSheet": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/berlin-sunday-planner-raw-20260726.png",
+    "sourceCell": 1,
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-sunday-planner.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-sunday-planner-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-sunday-planner-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_02783a59d3864e4489a43612ce1aa662~mv2.png"
   }
 ]

@@ -4,6 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Your Berlin Sunday: A Real Plan for the Day the Shops Are Shut</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='32' r='21' fill='%23FFE600'/%3E%3Cpath d='M18 20h28v27H18z' fill='%23FAFAF5'/%3E%3Cpath d='M22 25c7 1 9 15 20 16' fill='none' stroke='%23123D18' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -71,7 +72,7 @@
   <div class="head">
     <p class="kick">BerlinWalk • Sunday Planner</p>
     <h1>Build your Berlin Sunday</h1>
-    <p>The shops are shut, but Sunday is Berlin's best day if you know the rhythm. Tell me three things and I will lay out a real plan, with the places, the hours, and the Sunday traps.</p>
+    <p>Most normal shops are shut, but Sunday is Berlin's best day if you know the rhythm. Tell me three things and I will lay out a real plan, with the places, the hours, and the Sunday traps.</p>
   </div>
 
   <div class="controls">
@@ -102,7 +103,7 @@
 
   <div class="rulebar">
     <span class="ico">🛒</span>
-    <span><b>Sunday rule:</b> supermarkets, shops and normal chemists are shut all day. Grab water, snacks and any picnic supplies from a Späti or a station supermarket before you settle in a park.</span>
+    <span><b>Sunday rule:</b> most normal supermarkets, shops and chemists close. Grab water, snacks and picnic supplies from an open station supermarket or a Späti before you settle in a park, and check the exact place first.</span>
   </div>
 
   <div class="plan">
@@ -126,9 +127,9 @@
 
   // Morning flea market nearest each base.
   var MARKET = {
-    mitte:  { t:"09:30", title:"Flohmarkt am Mauerpark", desc:"A short hop north lands you at Berlin's biggest Sunday flea market on the old Wall strip. Records, vintage, street food and buskers.", open:"Flea market, ~9:00–18:00", trip:"~15 min · U8 to Bernauer Str.", cash:true },
-    pberg:  { t:"09:30", title:"Flohmarkt am Mauerpark", desc:"Your local Sunday institution. Come early for the good stuff and space to move before the midday crowd.", open:"Flea market, ~9:00–18:00", trip:"~10 min on foot / U2 Eberswalder Str.", cash:true },
-    xberg:  { t:"10:00", title:"Nowkoelln Flowmarkt (Maybachufer)", desc:"Young designers and private sellers along the canal in Neukölln. On the off weeks, just walk the Maybachufer and Landwehrkanal instead.", open:"1st & 3rd Sun only, ~10:00–17:00", trip:"~10 min on foot / U8 Schönleinstr.", cash:true },
+    mitte:  { t:"10:15", title:"Flohmarkt am Mauerpark", desc:"A short hop north lands you at Berlin's biggest Sunday flea market on the former border strip. Records, vintage, street food and buskers.", open:"Flea market, 10:00–18:00", trip:"~15 min · U8 to Bernauer Str.", cash:true },
+    pberg:  { t:"10:15", title:"Flohmarkt am Mauerpark", desc:"Your local Sunday institution. Arrive soon after opening for more space before the midday crowd.", open:"Flea market, 10:00–18:00", trip:"~10 min on foot / U2 Eberswalder Str.", cash:true },
+    xberg:  { t:"10:00", title:"Nowkoelln Flowmarkt (Maybachufer)", desc:"Young designers and private sellers along the canal in Neukölln. It runs on selected published Sundays, usually every two weeks in season. On an off week, walk the Maybachufer and Landwehrkanal instead.", open:"Selected dates, 10:00–17:00", trip:"~10 min on foot / U8 Schönleinstr.", cash:true },
     fhain:  { t:"10:00", title:"Boxhagener Platz flea market", desc:"Smaller and better for it: heavy on records and books, ringed by cafés for the coffee afterwards.", open:"Flea market, ~10:00–18:00", trip:"~8 min on foot", cash:true }
   };
   var BRUNCH = {
@@ -146,7 +147,7 @@
   };
   // Grey-day museum nearest each base.
   var GREY_PM = {
-    mitte:  { t:"14:00", title:"Museum Island", desc:"On a wet Sunday the museums win. Nefertiti at the Neues Museum, the Alte Nationalgalerie, the Bode. The Pergamon stays shut for renovation.", open:"Normal Sunday hours (Mon is the closed day)", trip:"~5 min on foot" },
+    mitte:  { t:"14:00", title:"Museum Island", desc:"On a wet Sunday the museums win. Nefertiti at the Neues Museum, the Alte Nationalgalerie, the Bode. The Pergamonmuseum remains fully closed until its partial reopening on 4 June 2027.", open:"Check each museum's Sunday hours", trip:"~5 min on foot" },
     pberg:  { t:"14:00", title:"Museum in der Kulturbrauerei", desc:"Free museum of everyday life in East Germany, inside the old brewery. Half an hour well spent, then Museum Island by tram M1 if you want more.", open:"Free · Tue–Sun", trip:"~10 min on foot" },
     xberg:  { t:"14:00", title:"Jewish Museum Berlin", desc:"Daniel Libeskind's building is as much the point as the collection. A strong, sheltered Sunday afternoon.", open:"Open daily · normal Sunday hours", trip:"~10 min · U1/U3 Hallesches Tor" },
     fhain:  { t:"14:00", title:"Museum Island", desc:"Hop west to the island for the big names. In Berlin the museums close on Mondays, not Sundays, so a wet Sunday is ideal.", open:"Normal Sunday hours (Mon is the closed day)", trip:"~15 min · U5 to Museumsinsel" }
@@ -217,7 +218,7 @@
     document.getElementById("planSub").textContent = "from "+baseName+" · "+(p==="full"?"full day":"easy day");
 
     var notes=[];
-    if(b==="xberg") notes.push("The Nowkoelln Flowmarkt only runs on the first and third Sunday of the month, April to November.");
+    if(b==="xberg") notes.push("The Nowkoelln Flowmarkt runs on selected published Sundays, usually every two weeks in season. Check its official calendar first.");
     notes.push("Bearpit Karaoke and the lake beaches are summer-season, roughly May to October, and weather dependent.");
     document.getElementById("seasonNote").textContent = "Good to know: " + notes.join(" ");
   }

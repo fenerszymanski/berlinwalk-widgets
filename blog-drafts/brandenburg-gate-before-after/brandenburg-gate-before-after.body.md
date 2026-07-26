@@ -20,9 +20,9 @@ In **1806** Napoleon marched into Berlin, and he liked the Quadriga enough to ta
 
 When the Prussians reached Paris in **1814** they took it straight back. On its return the architect Karl Friedrich Schinkel added an **iron cross and a Prussian eagle** to the goddess's staff, quietly turning her into a figure of victory. That is the version standing up there today, which means the statue you are looking at has already done a return trip across Europe and come home.
 
-## After the war: the only thing left standing
+## After the war: a landmark left among the ruins
 
-Skip forward to **1945**. The bombing raids and the final Battle of Berlin turned Pariser Platz into rubble. The hotels, the embassies, the Adlon, all of it gone or gutted. The Brandenburg Gate was badly damaged and shell-pocked, but it stayed up, and for a while it was **the only recognisable structure left in the square**. Soviet and Allied soldiers posed under it. The Quadriga was wrecked, and only a single horse's head survived, which you can still see today in the Märkisches Museum.
+Skip forward to **1945**. The bombing raids and the final Battle of Berlin turned Pariser Platz into rubble. The hotels, the embassies, the Adlon, all of it gone or gutted. The Brandenburg Gate was badly damaged and shell-pocked, but it stayed up as one of the few recognisable structures in the ruined square. Soviet and Allied soldiers posed under it. The Quadriga was wrecked, and only a single horse's head survived. That original fragment belongs to the Stadtmuseum Berlin collection and is currently shown in the **BerlinZEIT** exhibition at Museum Ephraim-Palais, not in the closed Märkisches Museum.
 
 What happened next is a small miracle of a divided city cooperating. In **1956 to 1958**, East and West Berlin restored the Gate together and recast the Quadriga from old moulds, even though the Cold War was already freezing everything else between them.
 
