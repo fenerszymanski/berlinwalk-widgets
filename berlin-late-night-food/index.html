@@ -80,7 +80,7 @@
 </head>
 <body>
 <div class="ln">
-  <p class="ln-lede">It is late in Berlin and you are hungry. The honest truth: <b>most restaurant kitchens stop hot food by 22:00 to 23:00</b>, but the city's kebab counters, spätis and a few round-the-clock spots keep going. Tell me where you are and I will show you what is realistically open near you, and how to get home after.</p>
+  <p class="ln-lede">It is late in Berlin and you are hungry. <b>Many restaurant kitchens stop hot food around 22:00 or 23:00</b>, while counter and Späti hours vary. Pick your area and night to compare the next places to check and the transport plan home.</p>
 
   <div class="ln-ask"><span class="pin">📍</span><span>Where are you right now?</span></div>
   <div class="ln-spots" id="spots" role="group" aria-label="Choose your location"></div>
@@ -110,51 +110,51 @@
   // Metro lines are durable orientation facts; "home" text is filled per night.
   var SPOTS = [
     { id:'kotti', name:'Kottbusser Tor', area:'Kreuzberg', metro:'U8', chip:'Kottbusser Tor',
-      zone:{s:'ok', k:"You're standing in it", v:"<b>Kottbusser Tor (“Kotti”) is Berlin's late-food core.</b> Kebab, falafel and grill counters ring the station and several run into the early hours."},
-      best:{s:'ok', v:"A döner or falafel wrap from the counters right at the U8 exits. This is where locals end a night out hungry."},
-      spati:{s:'ok', v:"Spätis are all around the square for drinks, water and snacks."},
+      zone:{s:'ok', k:"Several checks in one place", v:"<b>Kottbusser Tor (“Kotti”)</b> puts several kebab, falafel and grill counters close to the U8 exits."},
+      best:{s:'ok', v:"Compare the current opening signs around the station before choosing a döner or falafel counter."},
+      spati:{s:'ok', v:"Search the square for the exact shop and check today's opening hours."},
       home:'U8'
     },
     { id:'schlesi', name:'Schlesisches Tor', area:'Kreuzberg', metro:'U1/U3', chip:'Schlesisches Tor',
-      zone:{s:'ok', k:"Strong late cluster", v:"Around <b>Schlesisches Tor</b> you have grills, late bars and the famous burger spot in the old public toilet under the U1 tracks."},
-      best:{s:'ok', v:"The under-the-station burger institution, or a kebab a few steps toward Schlesische Straße. Both run well past midnight on weekends."},
-      spati:{s:'ok', v:"Several spätis along Schlesische Straße and Falckensteinstraße."},
+      zone:{s:'ok', k:"Several checks in one place", v:"Around <b>Schlesisches Tor</b>, grills and takeaway counters sit close to the elevated U-Bahn line."},
+      best:{s:'ok', v:"Check the counters below the station and along Schlesische Straße; do not travel for one remembered opening time."},
+      spati:{s:'ok', v:"Search Schlesische Straße and Falckensteinstraße, then confirm the exact shop hours."},
       home:'U1/U3'
     },
     { id:'hermann', name:'Hermannplatz', area:'Neukölln', metro:'U7/U8', chip:'Hermannplatz',
-      zone:{s:'ok', k:"Neukölln's late hub", v:"<b>Hermannplatz</b> and the streets up toward Sonnenallee are dense with Turkish and Arab grills, bakeries and 24-hour-ish spots."},
-      best:{s:'ok', v:"Walk a little down Sonnenallee for kebab, manakish or a late Arab sweet. It is one of the most reliable late-eating strips in the city."},
-      spati:{s:'ok', v:"Sonnenallee has spätis and late shops end to end."},
+      zone:{s:'ok', k:"Neukölln's late hub", v:"<b>Hermannplatz</b> and the streets toward Sonnenallee put several Turkish and Arab grills, bakeries and sweet shops close together."},
+      best:{s:'ok', v:"Walk a short section of Sonnenallee and compare the current signs for kebab, manakish or an Arab sweet."},
+      spati:{s:'ok', v:"Search the exact Sonnenallee shop and check today's hours."},
       home:'U7/U8'
     },
     { id:'warschauer', name:'Warschauer Str.', area:'Friedrichshain', metro:'U1/U3 + S', chip:'Warschauer Str.',
       zone:{s:'ok', k:"Club-land food", v:"By <b>Warschauer Straße</b> and the RAW grounds you are in Berlin's club belt, so food follows the crowds late."},
-      best:{s:'ok', v:"Kebab and imbiss counters cluster around the station and Revaler Straße. A well-known veggie-kebab spot near here draws long queues on weekend nights."},
-      spati:{s:'ok', v:"Plenty of spätis around the station and along Simon-Dach-Straße."},
+      best:{s:'ok', v:"Compare the counters around the station and Revaler Straße, then choose the one that is visibly serving."},
+      spati:{s:'ok', v:"Search the station area and Simon-Dach-Straße, then confirm the exact shop hours."},
       home:'U1/U3 + S-Bahn'
     },
     { id:'alex', name:'Alexanderplatz', area:'Mitte', metro:'U2/U5/U8 + S', chip:'Alexanderplatz',
-      zone:{s:'warn', k:"Thinner than Kreuzberg", v:"Central <b>Alexanderplatz</b> has fast food and a few round-the-clock kebab spots, but the tourist middle empties out faster than Kreuzberg or Neukölln."},
-      best:{s:'warn', v:"A 24-hour-style kebab or the station fast-food outlets. For anything better, ride two stops on the U8 south to Kottbusser Tor."},
-      spati:{s:'ok', v:"Spätis around Rosa-Luxemburg-Platz and toward Hackescher Markt."},
+      zone:{s:'warn', k:"Check before moving", v:"Central <b>Alexanderplatz</b> has several takeaway and station options, but late opening varies by venue and weekday."},
+      best:{s:'warn', v:"Compare current signs around the station before crossing town. If nothing works, check live listings around Kottbusser Tor before boarding the U8."},
+      spati:{s:'ok', v:"Search toward Rosa-Luxemburg-Platz and Hackescher Markt, then confirm the exact shop hours."},
       home:'U2/U5/U8 + S-Bahn'
     },
     { id:'zoo', name:'Zoo / City West', area:'Charlottenburg', metro:'U2/U9 + S', chip:'Zoo / City West'
       ,zone:{s:'warn', k:"Quiet after midnight", v:"The <b>Zoologischer Garten</b> and Ku'damm side of town is calmer late. Station food and a few kebab spots stay open, but the buzz is on the east side."},
-      best:{s:'warn', v:"Kebab or fast food near Bahnhof Zoo, or a late bite on Kantstraße. Do not expect a Kreuzberg-style late crowd here."},
-      spati:{s:'warn', v:"Fewer spätis than the east; look near the station."},
+      best:{s:'warn', v:"Check the station and its immediate streets before making a longer trip. Late openings vary by venue."},
+      spati:{s:'warn', v:"Search near the station and confirm the exact shop hours."},
       home:'U2/U9 + S-Bahn'
     },
     { id:'hbf', name:'Hauptbahnhof', area:'arriving late', metro:'S + U5', chip:'Hauptbahnhof',
-      zone:{s:'warn', k:"Just landed?", v:"<b>Berlin Hauptbahnhof</b> keeps a handful of shops and fast-food counters running for late trains, but it is a transit hub, not a food street."},
-      best:{s:'warn', v:"Grab something at the station now if you are hungry, then head to your district. Do not plan a real meal here at 1am."},
+      zone:{s:'warn', k:"Just arrived?", v:"<b>Berlin Hauptbahnhof</b> is a transport hub, not a food street. Check the station's live directory and current signs before leaving the building."},
+      best:{s:'warn', v:"If one station counter is visibly serving, use it. Otherwise check live options in your destination district before boarding."},
       spati:{s:'warn', v:"Station kiosks over spätis; the classic späti scene is in the residential districts."},
       home:'S-Bahn + U5'
     },
     { id:'quiet', name:'A quiet area', area:'residential / hotel', metro:null, chip:'Somewhere quiet',
       zone:{s:'off', k:"Not near a cluster", v:"If your hotel is on a calm residential street, the late-food options right outside you are thin. This is the normal Berlin situation, not a problem with your area."},
-      best:{s:'warn', v:"Find your nearest späti for a snack now, or take the U-Bahn a few stops to <b>Kottbusser Tor</b>, <b>Hermannplatz</b> or <b>Schlesisches Tor</b>, where the real late food is."},
-      spati:{s:'warn', v:"There is almost always a späti within a few blocks, even in quiet districts (Mon–Sat)."},
+      best:{s:'warn', v:"Search your current area first. Cross the city only after you have confirmed several current options around <b>Kottbusser Tor</b>, <b>Hermannplatz</b> or <b>Schlesisches Tor</b>."},
+      spati:{s:'warn', v:"Search the exact shop and check today's hours; quiet districts do not guarantee a late-open späti."},
       home:null
     }
   ];
@@ -197,19 +197,19 @@
 
   function homeText(sp){
     if(state.weekend){
-      if(!sp.metro) return "On <b>Fri and Sat nights the U-Bahn and S-Bahn run all night</b> (about every 15 minutes), so getting back to a central hub is easy. From there, walk or grab a short night bus.";
-      return "It's the weekend, so your <b>" + sp.metro + "</b> and the whole U-Bahn/S-Bahn network <b>run all night</b> (roughly every 15 minutes). No need to rush the last train.";
+      if(!sp.metro) return "On <b>Fri and Sat nights and before public holidays</b>, the U-Bahn and S-Bahn run through the night. Typical intervals are about 15 minutes for U-Bahn and 30 minutes for S-Bahn, but check the live BVG journey planner.";
+      return "On weekend nights, the <b>" + sp.metro + "</b> network runs through the night. Typical intervals are about 15 minutes for U-Bahn and 30 minutes for S-Bahn, so check the live BVG journey planner for this stop.";
     }
     // weeknight
-    if(!sp.metro) return "On <b>Sun to Thu nights, trains stop around 00:30–01:30</b>. After that it's the night buses (the N lines) and some trams. Check the BVG app for the N line at your nearest stop before you settle in.";
-    return "It's a weeknight, so the <b>" + sp.metro + "</b> stops around <b>00:30–01:30</b>. After that, night buses (N lines) and trams take over on the same routes, so check the BVG app for your N line home.";
+    if(!sp.metro) return "On <b>Sun to Thu nights</b>, U-Bahn service normally ends around 01:00 and S-Bahn service around 01:00–01:30. N1–N9 buses roughly follow the corresponding U-Bahn lines, and Metrotram routes continue overnight. Check BVG for the exact trip.";
+    return "On a weeknight, <b>" + sp.metro + "</b> service may end around <b>01:00–01:30</b>. N1–N9 buses roughly follow the corresponding U-Bahn lines, while Metrotram routes continue overnight. Check BVG for the exact connection.";
   }
 
   function spatiText(sp){
     var base = sp.spati.v;
     // Späti Sunday caveat only matters into Sunday
     if(state.weekend){
-      return base + " One catch: on <b>Saturday nights into Sunday</b>, many spätis technically have to close, so the small hours before dawn get leaner.";
+      return base + " One catch: <b>Sunday opening is not guaranteed</b>. Berlin allows only narrow shop-law exceptions, so check this exact shop rather than relying on the Späti label.";
     }
     return base;
   }
@@ -228,9 +228,9 @@
     html += '<div class="board-top"><span class="ttl">Late-Night Food Board</span>' +
             '<span class="loc">' + sp.name + '<small>' + sp.area + (sp.metro ? ' · ' + sp.metro : '') + '</small></span></div>';
     html += row('', sp.zone.s, sp.zone.k || 'Late-food zone', sp.zone.v);
-    html += row('', sp.best.s, 'Best bet right now', sp.best.v);
+    html += row('', sp.best.s, 'Practical next check', sp.best.v);
     html += row('', sp.spati.s, 'Späti (snacks & drinks)', spatiText(sp));
-    html += row('', 'off', 'Sit-down kitchen', 'Most restaurant kitchens are <b>already closed</b> for hot food by now. A bar may still pour drinks, but the plate you want is a kebab or a späti snack.');
+    html += row('', 'off', 'Sit-down kitchen', 'Many restaurant kitchens stop hot food around <b>22:00 or 23:00</b>, even if the bar stays open. Check the venue before travelling; after midnight, counters are the safer plan.');
     html += row('home', state.weekend ? 'ok' : 'warn', 'Getting home', homeText(sp));
     html += '<p class="board-note">Times drift by day and season, so treat these as a realistic picture, not a promise. When in doubt, follow the crowd toward the station.</p>';
 

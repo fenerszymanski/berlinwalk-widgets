@@ -2320,5 +2320,20 @@
     "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-late-night-food-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-late-night-food-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_d8bcc37336f84658a7bf40a2a63070ea~mv2.png"
+  },
+  {
+    "slug": "berlin-vietnamese-food-finder",
+    "title": "Berlin Vietnamese Food Finder",
+    "category": "Discovery",
+    "model": "Codex built-in image generation",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "generatedAt": "2026-07-26",
+    "promptFile": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/codex-built-in-imagegen-20260726/berlin-vietnamese-food-finder/PROMPT.md",
+    "sourceSheet": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/codex-built-in-imagegen-20260726/berlin-vietnamese-food-finder/source.png",
+    "sourceCell": 1,
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-vietnamese-food-finder.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-vietnamese-food-finder-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-vietnamese-food-finder-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_25fa9eaff4bf4d01912f9bedfcb2e755~mv2.png"
   }
 ]

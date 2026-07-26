@@ -5532,7 +5532,7 @@
     {
       "slug": "berlin-late-night-food",
       "title": "Berlin Late-Night Food Board",
-      "lead": "Hungry late in Berlin? Tell the board where you are and which night it is, and it shows what is realistically open near you (kebab, spätis, 24-hour spots) and how to get home. Times drift, so treat it as a realistic picture, not a promise.",
+      "lead": "Hungry late in Berlin? Tell the board where you are and which night it is. It shows nearby counter and Späti possibilities, plus the right transport check for getting home. Confirm the exact venue before travelling.",
       "category": "Discovery",
       "hubCategory": "FoodNightlife",
       "type": "Guide",
@@ -5561,6 +5561,35 @@
       "iconStatus": "live-wix-media",
       "cmsItemId": "f8c0a401-1cd0-4ff1-a2a5-9c086d2eff81",
       "relatedBlog": "/post/what-is-a-spati-berlin"
+    },
+    {
+      "slug": "berlin-vietnamese-food-finder",
+      "title": "Berlin Vietnamese Food Finder",
+      "lead": "Choose the evening you want, your diet and how far you will travel. The finder gives you a current Berlin area and venue pair, plus one dish to consider and the nearest station.",
+      "category": "Discovery",
+      "hubCategory": "FoodNightlife",
+      "type": "Guide",
+      "tags": [
+        "vietnamese food berlin",
+        "pho berlin",
+        "dong xuan center",
+        "kantstrasse restaurants",
+        "vegan vietnamese berlin",
+        "berlin food"
+      ],
+      "aliases": [
+        "vietnamese restaurant berlin",
+        "berlin pho finder",
+        "dong xuan food",
+        "vietnamese berlin",
+        "where to eat vietnamese berlin"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-vietnamese-food-finder/",
+      "embedHeight": 1180,
+      "image": "https://static.wixstatic.com/media/5a08a3_25fa9eaff4bf4d01912f9bedfcb2e755~mv2.png",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "d73e3625-c2b4-4214-9b5a-6ac0809cafb2",
+      "relatedBlog": "/post/what-to-eat-in-berlin-12-must-try-local-foods"
     }
   ],
   "hubCategories": [
