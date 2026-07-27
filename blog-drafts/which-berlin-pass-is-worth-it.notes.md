@@ -22,27 +22,34 @@ Status: UNPUBLISHED draft package
   comparison plus a calculator. SERP-proof.
 - This is a hub post that internal-links to the three existing single-card posts.
 
-## Verified prices (checked 2026-07-26, Europe/Berlin)
+## Verified prices (rechecked 2026-07-27, Europe/Berlin)
 - BVG single ticket AB: EUR 4.00 (reduced EUR 2.50). Short trip / Kurzstrecke EUR 2.80.
 - 24-hour day ticket AB: EUR 11.20 (reduced EUR 7.40). Still exists in 2026.
 - 4-trip ticket AB: EUR 12.40 (EUR 3.10 per trip).
-- Berlin WelcomeCard AB: from EUR 28.50 (48h); 72h AB ~EUR 34;
-  WelcomeCard Museum Island 72h AB ~EUR 62 (transport + Museum Island museums once/day).
-- Berlin CityTourCard 72h AB: EUR 35.60 (transport + up to ~30 partner discounts).
+- Berlin WelcomeCard AB: EUR 28.50 (48h); EUR 39.50 (72h);
+  WelcomeCard Museum Island 72h AB EUR 62 (transport + one daily entry to
+  Museum Island museums that are open).
+- Berlin CityTourCard 72h AB: EUR 35.60 (transport + discounts at 30+ partners,
+  advertised up to 40%).
 - Museum Pass Berlin: EUR 32, 3 consecutive days, 30+ museums incl. all Museum Island
-  venues, Jewish Museum, Technikmuseum, Natural History. NO public transport.
+  venues that are open, Technikmuseum and Natural History. NO public transport.
+  Pergamonmuseum is currently closed.
 - Deutschlandticket: EUR 63 / month subscription (own post already covers it).
 
 Sources:
-- BVG WelcomeCard: https://www.bvg.de/en/tourists/welcomecard (from EUR 28.50; Museum Island from EUR 62)
-- berlin.de pass comparison: https://www.berlin.de/en/tourism/insider-tips/2727374-5766508-berlin-tourist-pass-comparison.en.html (WelcomeCard 72h ~EUR 34; CityTourCard 72h EUR 35.60)
+- S-Bahn Berlin ticket prices: https://sbahn.berlin/tickets/alle-tickets/alle-tickets-preise/
+  (WelcomeCard AB EUR 28.50 / EUR 39.50; Museum Island AB EUR 62;
+  CityTourCard 72h AB EUR 35.60)
+- BVG CityTourCard: https://www.bvg.de/en/subscriptions-and-tickets/all-tickets/tourists/citytourcard-72h
+  (72h AB EUR 35.60; 30+ partners)
 - Museum Pass Berlin (visitBerlin): https://www.visitberlin.de/en/museum-pass-berlin (EUR 32, 30+ museums, 3 days)
 - berlin.de fares: https://www.berlin.de/en/public-transportation/1772016-2913840-tickets-fares-and-route-maps.en.html (single AB EUR 4.00; 24h AB EUR 11.20; short trip EUR 2.80)
 - VBB 2026 fares: https://www.vbb.de/news/neue-fahrpreise-im-vbb-ab-1-januar-2026/
 
-Note: WelcomeCard 72h AB figure varies EUR 34-39.50 across resellers; present as
-"around EUR 34" and tell readers to check the current price. The article's value is
-the comparison logic, not cent precision.
+Correction made by the 2026-07-27 independent publish audit: the initial draft
+used a stale EUR 34 WelcomeCard 72h figure. Current official transport listings
+show EUR 39.50. The article, FAQ, Quick Summary, widget model and CMS tool copy
+were aligned before publication.
 
 ## Internal links (existing published posts)
 - /post/is-the-berlin-welcomecard-worth-it-in-2026-an-honest-breakdown

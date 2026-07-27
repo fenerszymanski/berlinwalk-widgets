@@ -180,7 +180,7 @@
     a.href = badgeUrl(slug);
     a.target = target || '_blank';
     a.rel = 'noopener';
-    a.setAttribute('aria-label', 'Made by BerlinWalk — open berlinwalk.com');
+    a.setAttribute('aria-label', 'Made by BerlinWalk. Open berlinwalk.com');
     a.innerHTML =
       '<img class="bw-attr-logo" alt="" style="width:18px;height:18px;border-radius:50%;object-fit:cover;display:block;flex:0 0 18px" src="https://static.wixstatic.com/media/5a08a3_4d96e164d26241fd9eb009843ec2084a~mv2.png" loading="lazy" decoding="async">' +
       '<span class="bw-attr-text">by <strong>berlinwalk.com</strong></span>' +
