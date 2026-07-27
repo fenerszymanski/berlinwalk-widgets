@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-07-26T14:39:54.347Z",
+  "updatedAt": "2026-07-27T01:37:20.608Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 267,
+  "totalPosts": 268,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1617,6 +1617,23 @@
   ],
   "latest": [
     {
+      "title": "Which Berlin Pass Is Worth It? WelcomeCard vs CityTourCard vs Museum Pass",
+      "slug": "which-berlin-pass-is-worth-it",
+      "path": "/post/which-berlin-pass-is-worth-it",
+      "url": "https://www.berlinwalk.com/post/which-berlin-pass-is-worth-it",
+      "excerpt": "WelcomeCard, CityTourCard, Museum Pass or no pass at all? The right Berlin travel card depends on how much you ride and how many museums you enter. Here is the honest comparison, plus a calculator.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-07-27T01:34:48.946Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_b0326b2096aa4099ac5c9928a9131374~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island-berlin-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_b0326b2096aa4099ac5c9928a9131374~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island-berlin-cover.jpg",
+      "alt": "Visitors on Museum Island in Berlin with the Berliner Dom behind",
+      "relatedToolSlug": "berlin-pass-cost-comparison"
+    },
+    {
       "title": "Vietnamese Food in Berlin: Where to Eat and What to Order",
       "slug": "vietnamese-food-in-berlin",
       "path": "/post/vietnamese-food-in-berlin",
@@ -1802,26 +1819,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_03c85e6733f4445f93729d067c269bab~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-bakery.jpg",
       "alt": "A glass bakery counter in Berlin filled with croissants and filled rolls",
       "relatedToolSlug": "berlin-bakery-counter"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Baltic Sea Day Trip from Berlin: Which Beach to Pick and How the Trains Work",
-      "slug": "baltic-sea-day-trip-from-berlin",
-      "path": "/post/baltic-sea-day-trip-from-berlin",
-      "url": "https://www.berlinwalk.com/post/baltic-sea-day-trip-from-berlin",
-      "excerpt": "The Baltic coast starts less than three hours north of Berlin by train. Here is how Warnemünde, the Usedom imperial resorts and Binz on Rügen compare for one sea day, which trains run on the Deutschlandticket, and the returns you must not miss.",
+      "title": "Which Berlin Pass Is Worth It? WelcomeCard vs CityTourCard vs Museum Pass",
+      "slug": "which-berlin-pass-is-worth-it",
+      "path": "/post/which-berlin-pass-is-worth-it",
+      "url": "https://www.berlinwalk.com/post/which-berlin-pass-is-worth-it",
+      "excerpt": "WelcomeCard, CityTourCard, Museum Pass or no pass at all? The right Berlin travel card depends on how much you ride and how many museums you enter. Here is the honest comparison, plus a calculator.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "first-day",
       "topicLabel": "First Day in Berlin",
       "readTime": "7 min read",
-      "publishedDate": "2026-07-24T04:51:03.300Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_8d6e7b2115ee4ecaad82c1499a08c4a3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-warnemuende-lighthouse.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_8d6e7b2115ee4ecaad82c1499a08c4a3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-warnemuende-lighthouse.jpg",
-      "alt": "Rows of beach chairs on Warnemünde beach with the 1898 lighthouse and the curved Teepott roof behind",
-      "relatedToolSlug": "baltic-beach-day-planner"
-    }
-  ],
-  "allPosts": [
+      "publishedDate": "2026-07-27T01:34:48.946Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_b0326b2096aa4099ac5c9928a9131374~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island-berlin-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_b0326b2096aa4099ac5c9928a9131374~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island-berlin-cover.jpg",
+      "alt": "Visitors on Museum Island in Berlin with the Berliner Dom behind",
+      "relatedToolSlug": "berlin-pass-cost-comparison"
+    },
     {
       "title": "Vietnamese Food in Berlin: Where to Eat and What to Order",
       "slug": "vietnamese-food-in-berlin",

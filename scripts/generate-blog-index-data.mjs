@@ -709,6 +709,7 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if ((post.slug || '') === 'which-berlin-pass-is-worth-it') return 'berlin-pass-cost-comparison';
   if ((post.slug || '') === 'where-to-eat-late-at-night-in-berlin') return 'berlin-late-night-food';
   if ((post.slug || '') === 'vietnamese-food-in-berlin') return 'berlin-vietnamese-food-finder';
   if ((post.slug || '') === 'how-to-spend-a-sunday-in-berlin') return 'berlin-sunday-planner';
