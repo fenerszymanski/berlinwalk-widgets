@@ -205,13 +205,16 @@ const YEAR_REQUIRED_TITLE_SLUGS = new Set([
 ]);
 
 const HERO_SLUGS = {
-  lead: 'berlin-pride-csd-2026',
+  lead: 'which-berlin-pass-is-worth-it',
   secondary: [
+    'vietnamese-food-in-berlin',
     'hamburg-day-trip-from-berlin',
     'berlin-courtyards-hoefe',
+    'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
+    'where-was-the-berlin-wall-interactive-map',
+    'where-to-eat-late-at-night-in-berlin',
     'reichstag-before-and-after',
     'telling-time-in-german-berlin',
-    'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
     'oberbaumbruecke-berlin',
     'koepenick-berlin',
     'deutsches-technikmuseum-berlin',
@@ -311,7 +314,12 @@ const REQUIRED_SLUGS = [
   'why-is-berlin-founding-year-1237',
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
-  'berlin-pride-csd-2026',
+  'which-berlin-pass-is-worth-it',
+  'vietnamese-food-in-berlin',
+  'where-to-eat-late-at-night-in-berlin',
+  'how-to-get-into-berghain',
+  'brandenburg-gate-before-after',
+  'how-to-spend-a-sunday-in-berlin',
   'hamburg-day-trip-from-berlin',
   'berlin-courtyards-hoefe',
   'reichstag-before-and-after',
@@ -435,6 +443,14 @@ const REQUIRED_SLUGS = [
   'visiting-berlin-in-june',
   '5-best-döner-kebab-spots-in-berlin-you-need-to-try-in-2026',
 ];
+
+// Lifetime views keep expired event guides at the top of the popularity rail.
+// They remain in the archive, but should not be presented as current visitor
+// decisions after their fixed 2026 event windows have ended.
+const EXCLUDED_POPULAR_SLUGS = new Set([
+  'berlin-pride-csd-2026',
+  'where-to-watch-2026-world-cup-in-berlin',
+]);
 
 const START_HERE_LINKS = [
   {
@@ -921,7 +937,7 @@ function buildData(posts, popularPosts = []) {
   const popular = [];
   const seenPopular = new Set();
   for (const post of popularPosts) {
-    if (post?.slug && !seenPopular.has(post.slug)) {
+    if (post?.slug && !EXCLUDED_POPULAR_SLUGS.has(post.slug) && !seenPopular.has(post.slug)) {
       popular.push(post);
       seenPopular.add(post.slug);
     }

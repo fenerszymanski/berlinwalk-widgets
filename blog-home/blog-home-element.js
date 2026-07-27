@@ -1,73 +1,73 @@
 const BW_BLOG_HOME_DATA_URL = (() => {
   const script = document.currentScript;
   const base = script && script.src ? script.src : window.location.href;
-  return new URL('./data.json?v=20260619b', base).href;
+  return new URL('./data.json?v=20260727-featured-listings', base).href;
 })();
 
 const BW_BLOG_HOME_FALLBACK = {
   featured: {
-    title: 'Too Hot in Berlin? How to Plan a Smart Berlin Heatwave Day',
-    url: 'https://www.berlinwalk.com/post/berlin-heatwave-day-plan',
+    title: 'Which Berlin Pass Is Worth It? WelcomeCard vs CityTourCard vs Museum Pass',
+    url: 'https://www.berlinwalk.com/post/which-berlin-pass-is-worth-it',
     category: 'Tourist Tips',
-    readTime: '6 min read',
-    label: 'Summer guide',
-    summary: 'When to walk, where to cool down, what to expect from public transport air conditioning, and how to use Berlin water, lake and pool tools.',
-    image: 'https://static.wixstatic.com/media/5a08a3_6b63df7b04fa4d10849bfdf9e260f6d5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-heatwave-day-plan-01-alexanderplatz-world-clock-hot-day.jpg',
-    alt: 'The World Clock at Alexanderplatz in bright sun, a useful early start for a Berlin heatwave day'
+    readTime: '7 min read',
+    label: 'New: compare before you buy',
+    summary: 'WelcomeCard, CityTourCard, Museum Pass or no pass at all? The right Berlin travel card depends on how much you ride and how many museums you enter. Here is the honest comparison, plus a calculator.',
+    image: 'https://static.wixstatic.com/media/5a08a3_b0326b2096aa4099ac5c9928a9131374~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island-berlin-cover.jpg',
+    alt: 'Visitors on Museum Island in Berlin with the Berliner Dom behind'
   },
   miniPosts: [
     {
-      title: 'Berlin Hauptbahnhof Arrival Guide',
-      url: 'https://www.berlinwalk.com/post/berlin-hauptbahnhof-guide',
+      title: 'Vietnamese Food in Berlin: Where to Eat and What to Order',
+      url: 'https://www.berlinwalk.com/post/vietnamese-food-in-berlin',
       category: 'Tourist Tips',
+      readTime: '5 min read'
+    },
+    {
+      title: 'Where to Eat Late at Night in Berlin: What Is Actually Open',
+      url: 'https://www.berlinwalk.com/post/where-to-eat-late-at-night-in-berlin',
+      category: 'Tourist Tips',
+      readTime: '5 min read'
+    },
+    {
+      title: 'The Hidden Courtyards of Berlin: A Walk Through the Höfe Around Hackescher Markt',
+      url: 'https://www.berlinwalk.com/post/berlin-courtyards-hoefe',
+      category: 'Tour Route',
       readTime: '6 min read'
     },
     {
-      title: 'Berlin Public Holidays 2026',
-      url: 'https://www.berlinwalk.com/post/berlin-public-holidays-2026',
-      category: 'Tourist Tips',
-      readTime: '7 min read'
-    },
-    {
-      title: 'Berlin Public Transport Tourist Guide',
-      url: 'https://www.berlinwalk.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
-      category: 'Tourist Tips',
-      readTime: '7 min read'
-    },
-    {
-      title: 'Taxi in Berlin: Uber, Airport Rides and Fares',
-      url: 'https://www.berlinwalk.com/post/taxi-in-berlin',
-      category: 'Tourist Tips',
-      readTime: '6 min read'
+      title: 'Telling Time in German: Why Halb Acht Is 7:30 and How Berlin Says the Rest',
+      url: 'https://www.berlinwalk.com/post/telling-time-in-german-berlin',
+      category: 'German Language',
+      readTime: '9 min read'
     }
   ],
   posts: [
     {
-      title: 'Berlin Night Transport: How to Get Around After Midnight',
-      url: 'https://www.berlinwalk.com/post/berlin-night-transport',
-      category: 'Tourist Tips',
-      readTime: '6 min read',
-      summary: 'Weekday vs weekend service, night buses, tickets, safety habits, taxi fallbacks and a simple visual timeline for late arrivals.',
-      image: 'https://static.wixstatic.com/media/5a08a3_aa1dd493aaa845de858903fd1bb4b666~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-night-transport-01-berlin-night-transport-alexanderplatz-tram.jpg',
-      alt: 'Alexanderplatz at night with U-Bahn sign, TV Tower and blurred tram, showing Berlin night transport'
-    },
-    {
-      title: 'Tax Free Shopping in Berlin: VAT Refunds Explained for Tourists',
-      url: 'https://www.berlinwalk.com/post/tax-free-shopping-berlin-vat-refund',
-      category: 'Tourist Tips',
-      readTime: '8 min read',
-      summary: 'Who is eligible, what counts, how much VAT is inside the price, what to ask at the shop, and what to do at BER Airport.',
-      image: 'https://static.wixstatic.com/media/5a08a3_e8191b9f07f645b39ec46c09b18a309f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/tax-free-shopping-berlin-01-tax-free-shopping-berlin-kadewe-cover.jpg',
-      alt: 'The KaDeWe department store in Berlin, a classic shopping landmark where non-EU visitors may ask about Tax Free shopping'
-    },
-    {
-      title: 'Berlin with Kids: What to Do, Where to Stay and How to Plan an Easy Family Day',
-      url: 'https://www.berlinwalk.com/post/berlin-with-kids',
+      title: 'Berlin Public Transport for Tourists: Tickets, Zones, Prices and Validation',
+      url: 'https://www.berlinwalk.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
       category: 'Tourist Tips',
       readTime: '7 min read',
-      summary: 'Age-based planning advice, kid-friendly museums, parks, public transport rules, rainy-day backups and a family day planner.',
-      image: 'https://static.wixstatic.com/media/5a08a3_f480e636a6124ac9a34483c59b5003cb~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-with-kids-01-berlin-with-kids-family-alexanderplatz-cover.jpg',
-      alt: 'A family walking through Alexanderplatz at golden hour with the Berlin TV Tower above them'
+      summary: 'Berlin public transport uses one shared ticket system for U-Bahn, S-Bahn, tram and bus. This local guide covers zones, prices, validation, BER airport trips, and the EUR 60 fine.',
+      image: 'https://static.wixstatic.com/media/5a08a3_09bdf461857549d291c3769973fe3a9b~mv2.png/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_8c97b9e50ab54e0b9a53b8d3982f4ce4~mv2.jpg',
+      alt: 'Yellow train speeding through Konstanzer Strasse station. The wall has bold stripes and text. Ceiling lights illuminate the platform.'
+    },
+    {
+      title: 'Where Was the Berlin Wall? An Interactive Map of East and West in 1989',
+      url: 'https://www.berlinwalk.com/post/where-was-the-berlin-wall-interactive-map',
+      category: 'Berlin History',
+      readTime: '7 min read',
+      summary: 'The Berlin Wall ran 155 kilometers around West Berlin. Tap any point on this interactive map to see exactly where it stood and which side an address was on in 1989.',
+      image: 'https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_6f4f6d714c71713574696f~mv2.jpg',
+      alt: 'Where Was the Berlin Wall? An Interactive Map of East and West in 1989'
+    },
+    {
+      title: "How Many Days Do You Need in Berlin? An Honest Local's Answer",
+      url: 'https://www.berlinwalk.com/post/how-many-days-in-berlin',
+      category: 'Tourist Tips',
+      readTime: '6 min read',
+      summary: 'Berlin is big on the map but small where it counts. Here is how many days you actually need, what each extra day unlocks, and when a day trip is worth it.',
+      image: 'https://static.wixstatic.com/media/5a08a3_4553ac6f0071439db5ef873edec0e8f6~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-berlin-skyline-how-many-days.jpg',
+      alt: 'Warm high-angle view over central Berlin with the TV Tower rising above Mitte and the River Spree'
     }
   ]
 };

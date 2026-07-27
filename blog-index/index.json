@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-27T01:37:20.608Z",
+  "updatedAt": "2026-07-27T02:13:58.790Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 268,
@@ -43,23 +43,40 @@
   ],
   "hero": {
     "lead": {
-      "title": "Berlin Pride 2026 (CSD): The Parade, the Whole Week, and the History Behind It",
-      "slug": "berlin-pride-csd-2026",
-      "path": "/post/berlin-pride-csd-2026",
-      "url": "https://www.berlinwalk.com/post/berlin-pride-csd-2026",
-      "excerpt": "Berlin Pride 2026 (CSD) holds its main parade on July 25. A local guide to the route, the whole Pride week, where to watch, and the history that makes Berlin a queer capital.",
+      "title": "Which Berlin Pass Is Worth It? WelcomeCard vs CityTourCard vs Museum Pass",
+      "slug": "which-berlin-pass-is-worth-it",
+      "path": "/post/which-berlin-pass-is-worth-it",
+      "url": "https://www.berlinwalk.com/post/which-berlin-pass-is-worth-it",
+      "excerpt": "WelcomeCard, CityTourCard, Museum Pass or no pass at all? The right Berlin travel card depends on how much you ride and how many museums you enter. Here is the honest comparison, plus a calculator.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
-      "topic": "route-stories",
-      "topicLabel": "Tour Route Stories",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
       "readTime": "7 min read",
-      "publishedDate": "2026-06-05T16:07:41Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_c2dbe2e682b94caf857dcc811ab5f7d6~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/CSD_Berlin_2007.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_c2dbe2e682b94caf857dcc811ab5f7d6~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/CSD_Berlin_2007.jpg",
-      "alt": "Feathered dancers and a rainbow-flag truck at a crowded pride parade near the Brandenburg Gate under a bright blue sky",
-      "relatedToolSlug": ""
+      "publishedDate": "2026-07-27T01:34:48.946Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_b0326b2096aa4099ac5c9928a9131374~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island-berlin-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_b0326b2096aa4099ac5c9928a9131374~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island-berlin-cover.jpg",
+      "alt": "Visitors on Museum Island in Berlin with the Berliner Dom behind",
+      "relatedToolSlug": "berlin-pass-cost-comparison"
     },
     "secondary": [
+      {
+        "title": "Vietnamese Food in Berlin: Where to Eat and What to Order",
+        "slug": "vietnamese-food-in-berlin",
+        "path": "/post/vietnamese-food-in-berlin",
+        "url": "https://www.berlinwalk.com/post/vietnamese-food-in-berlin",
+        "excerpt": "Vietnamese food is part of everyday Berlin. Choose Mitte for minimum travel, Kantstrasse for a restaurant comparison, Kreuzberg for vegan options, or Dong Xuan for a daytime market trip.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "food-nightlife",
+        "topicLabel": "Food & Nightlife",
+        "readTime": "5 min read",
+        "publishedDate": "2026-07-26T14:37:09.478Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_db5f44fcc49344e183c30fca2b67bda2~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-pho-cover.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_db5f44fcc49344e183c30fca2b67bda2~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-pho-cover.jpg",
+        "alt": "A bowl of beef pho, the Vietnamese noodle soup you will find on almost every Berlin Vietnamese menu",
+        "relatedToolSlug": "berlin-vietnamese-food-finder"
+      },
       {
         "title": "Hamburg Day Trip from Berlin: Which Zone to Pick and How the Train Works",
         "slug": "hamburg-day-trip-from-berlin",
@@ -95,40 +112,6 @@
         "relatedToolSlug": "berlin-courtyard-walk"
       },
       {
-        "title": "The Reichstag, Before and After: How One Building Holds Germany’s Whole Century",
-        "slug": "reichstag-before-and-after",
-        "path": "/post/reichstag-before-and-after",
-        "url": "https://www.berlinwalk.com/post/reichstag-before-and-after",
-        "excerpt": "From the front the Reichstag looks like one stern old parliament with a modern glass hat. It is actually the most rebuilt, refought-over building in Germany: imperial showpiece, burnt-out shell, 1945 battlefield, Cold War dead end, and finally a working democracy. Here is the building before and after, the traces you can still find on the stone, and how to get inside the dome for free.",
-        "category": "Before & After",
-        "categorySlug": "before-after",
-        "topic": "free-budget",
-        "topicLabel": "Free & Budget",
-        "readTime": "6 min read",
-        "publishedDate": "2026-07-25T01:51:34.311Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_4303d7d2474a404281d823dbe6d7abe2~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-reichstag-sunset.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_4303d7d2474a404281d823dbe6d7abe2~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-reichstag-sunset.jpg",
-        "alt": "The Reichstag in Berlin at sunset, its stone facade lit warm gold beneath the modern glass dome, with the German flag flying.",
-        "relatedToolSlug": "reichstag-read-the-building"
-      },
-      {
-        "title": "Telling Time in German: Why Halb Acht Is 7:30 and How Berlin Says the Rest",
-        "slug": "telling-time-in-german-berlin",
-        "path": "/post/telling-time-in-german-berlin",
-        "url": "https://www.berlinwalk.com/post/telling-time-in-german-berlin",
-        "excerpt": "Somebody says halb acht, you arrive at half past eight, and the table is gone. Berlin runs two clocks at once: everything written uses 24 hours, and almost everything spoken drops back to twelve and then counts towards the hour that has not arrived yet. Here is the one shift that makes German time make sense, the eastern viertel and dreiviertel forms you will hear around Berlin, the day codes on a museum door, and a dial you can turn to test all of it.",
-        "category": "German Language",
-        "categorySlug": "german-language",
-        "topic": "history-myths",
-        "topicLabel": "Berlin History & Myths",
-        "readTime": "9 min read",
-        "publishedDate": "2026-07-25T01:51:32.865Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_61a8ac54a8d947a0938965d17ee084dc~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-weltzeituhr-alexanderplatz.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_61a8ac54a8d947a0938965d17ee084dc~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-weltzeituhr-alexanderplatz.jpg",
-        "alt": "The Urania World Clock on Alexanderplatz in Berlin, its metal cylinder marked with world cities above a lit band of hour numbers running past 12, 13, 14 and 15.",
-        "relatedToolSlug": "german-time-dial"
-      },
-      {
         "title": "Berlin Public Transport for Tourists: Tickets, Zones, Prices and Validation",
         "slug": "berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus",
         "path": "/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus",
@@ -144,6 +127,23 @@
         "thumb": "https://static.wixstatic.com/media/5a08a3_09bdf461857549d291c3769973fe3a9b~mv2.png/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_8c97b9e50ab54e0b9a53b8d3982f4ce4~mv2.jpg",
         "alt": "Yellow train speeding through Konstanzer Strasse station. The wall has bold stripes and text. Ceiling lights illuminate the platform.",
         "relatedToolSlug": "transport-ticket-calculator"
+      },
+      {
+        "title": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
+        "slug": "where-was-the-berlin-wall-interactive-map",
+        "path": "/post/where-was-the-berlin-wall-interactive-map",
+        "url": "https://www.berlinwalk.com/post/where-was-the-berlin-wall-interactive-map",
+        "excerpt": "The Berlin Wall ran 155 kilometers around West Berlin. Tap any point on this interactive map to see exactly where it stood and which side an address was on in 1989.",
+        "category": "Berlin History",
+        "categorySlug": "berlin-history",
+        "topic": "history-myths",
+        "topicLabel": "Berlin History & Myths",
+        "readTime": "7 min read",
+        "publishedDate": "2026-05-05T09:32:22.821Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_6f4f6d714c71713574696f~mv2.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_6f4f6d714c71713574696f~mv2.jpg",
+        "alt": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
+        "relatedToolSlug": "east-or-west-1989"
       }
     ]
   },
@@ -206,23 +206,6 @@
     }
   ],
   "popular": [
-    {
-      "title": "Where to Watch the 2026 World Cup in Berlin (No, There's No Brandenburg Gate Fan Mile This Year)",
-      "slug": "where-to-watch-2026-world-cup-in-berlin",
-      "path": "/post/where-to-watch-2026-world-cup-in-berlin",
-      "url": "https://www.berlinwalk.com/post/where-to-watch-2026-world-cup-in-berlin",
-      "excerpt": "The 2026 World Cup is in North America, and Berlin has no Brandenburg Gate fan mile this year. Here is where to actually watch: free screens, beer gardens and bars, with every kick-off in Berlin time.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "4 min read",
-      "publishedDate": "2026-06-03T15:51:27Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_fef2d645c235423dab6035f42558e352~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_fef2d645c235423dab6035f42558e352~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
-      "alt": "A summer evening football public viewing in Berlin with a relaxed crowd, outdoor screen and TV Tower skyline",
-      "relatedToolSlug": "watch-world-cup-2026-berlin"
-    },
     {
       "title": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
       "slug": "where-was-the-berlin-wall-interactive-map",
@@ -324,6 +307,23 @@
       "thumb": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
       "alt": "sbahn berlin",
       "relatedToolSlug": "berlin-landmarks-map"
+    },
+    {
+      "title": "Are Shops Open on Sunday in Berlin? What Is Actually Open",
+      "slug": "are-shops-open-on-sunday-in-berlin-what-you-need-to-know",
+      "path": "/post/are-shops-open-on-sunday-in-berlin-what-you-need-to-know",
+      "url": "https://www.berlinwalk.com/post/are-shops-open-on-sunday-in-berlin-what-you-need-to-know",
+      "excerpt": "Most shops in Berlin are closed on Sunday, including supermarkets and malls. This guide shows what is actually open and how visitors should plan around it.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-03-05T12:39:41.104Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_9b9fff4d69024b908f3f93226623d70d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Are%20Shops%20Open%20on%20Sunday%20in%20Berlin_%20What%20You%20Need%20to%20Know.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_9b9fff4d69024b908f3f93226623d70d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Are%20Shops%20Open%20on%20Sunday%20in%20Berlin_%20What%20You%20Need%20to%20Know.jpg",
+      "alt": "Berlin walking tour group exploring historic city centre near Berlin Cathedral with local guide",
+      "relatedToolSlug": "berlin-shopping-areas"
     }
   ],
   "shelves": [
