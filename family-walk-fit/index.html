@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Will the 2-Hour Walk Work With Your Kids? | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-family-fit">
+  <style>
+    #bw-family-fit{
+      --bw-green:#1B5E20; --bw-green-dark:#164a1a; --bw-yellow:#FFE600;
+      --bw-lime:#7CB342; --bw-border:#DCE8C8; --bw-text:#212121;
+      --bw-muted:#4E5A4E; --bw-white:#FFFFFF; --bw-lime-soft:#F2F8E8; --bw-red:#E63946;
+      color:var(--bw-text);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      max-width:720px; margin:0 auto; padding:2px;
+    }
+    #bw-family-fit *{box-sizing:border-box;}
+    .ff-card{border:1px solid var(--bw-border); border-radius:16px; background:var(--bw-white);
+      overflow:hidden; box-shadow:0 1px 2px rgba(20,74,26,.05);}
+    .ff-head{background:var(--bw-green); color:var(--bw-white); padding:16px 18px;}
+    .ff-head h2{margin:0; font-size:1.12rem; line-height:1.25;}
+    .ff-head p{margin:5px 0 0; font-size:.86rem; color:#dCE8CF;}
+    .ff-body{padding:16px;}
+    .ff-label{font-size:.78rem; font-weight:800; letter-spacing:.5px; text-transform:uppercase;
+      color:var(--bw-muted); margin:0 0 8px;}
+    .ff-row{display:flex; gap:7px; flex-wrap:wrap; margin-bottom:16px;}
+    .ff-chip{border:1.5px solid var(--bw-border); background:var(--bw-white); color:var(--bw-text);
+      border-radius:999px; padding:8px 14px; font-size:.86rem; font-weight:700; cursor:pointer; font-family:inherit;
+      transition:border-color .12s, background .12s;}
+    .ff-chip:hover{border-color:var(--bw-lime); background:var(--bw-lime-soft);}
+    .ff-chip[aria-pressed="true"]{background:var(--bw-green); color:var(--bw-white); border-color:var(--bw-green);}
+
+    .ff-out{border:1px solid var(--bw-border); border-radius:14px; padding:15px; background:var(--bw-lime-soft);}
+    .ff-badge{font-size:.74rem; font-weight:800; letter-spacing:.6px; text-transform:uppercase;
+      border-radius:6px; padding:3px 8px; display:inline-block; color:var(--bw-green); background:var(--bw-yellow);}
+    .ff-badge.warn{background:var(--bw-red); color:var(--bw-white);}
+    .ff-verdict{margin:10px 0 4px; font-size:1.1rem; font-weight:800; line-height:1.25;}
+    .ff-why{font-size:.94rem; line-height:1.55; margin:0 0 11px;}
+    .ff-list{margin:0; padding-left:18px;}
+    .ff-list li{font-size:.9rem; line-height:1.5; margin-bottom:5px;}
+    .ff-note{border-top:1px solid var(--bw-border); margin-top:11px; padding-top:10px;
+      font-size:.85rem; line-height:1.5; color:var(--bw-muted);}
+    .ff-note strong{color:var(--bw-text);}
+    .ff-foot{padding:12px 16px 15px; font-size:.8rem; color:var(--bw-muted); border-top:1px solid var(--bw-border);}
+    .ff-foot a{color:var(--bw-green); font-weight:700; text-decoration:none;}
+    .ff-foot a:hover{text-decoration:underline;}
+    @media (max-width:420px){ .ff-head h2{font-size:1.02rem;} .ff-verdict{font-size:1rem;} }
+  </style>
+
+  <div class="ff-card">
+    <div class="ff-head">
+      <h2>Will the two-hour walk work with your kids?</h2>
+      <p>It is two hours outdoors on mostly flat ground, thirteen stops, no museum interiors. That suits some ages and not others. Tell me who is coming and I will be honest about it.</p>
+    </div>
+
+    <div class="ff-body">
+      <p class="ff-label">Youngest child</p>
+      <div class="ff-row" id="ff-age" role="group" aria-label="Youngest child age"></div>
+
+      <p class="ff-label">Are you bringing a pushchair?</p>
+      <div class="ff-row" id="ff-buggy" role="group" aria-label="Pushchair"></div>
+
+      <p class="ff-label">When does the nap or the meltdown usually land?</p>
+      <div class="ff-row" id="ff-nap" role="group" aria-label="Nap window"></div>
+
+      <div class="ff-out">
+        <span class="ff-badge" id="ff-badge"></span>
+        <div class="ff-verdict" id="ff-verdict"></div>
+        <p class="ff-why" id="ff-why"></p>
+        <ul class="ff-list" id="ff-list"></ul>
+        <div class="ff-note" id="ff-note"></div>
+      </div>
+    </div>
+
+    <div class="ff-foot" id="ff-foot"></div>
+  </div>
+
+  <script>
+  (function(){
+    // Tour facts from the published BerlinWalk guides: about 2 hours, roughly 3 km,
+    // 13 stops, mostly flat, entirely outdoors, no museum interiors, Alexanderplatz to
+    // Hackescher Markt. Family guidance from the Berlin with kids guide: plan at child
+    // speed, and under 6 travel free on public transport with 6 to 14 at reduced fare.
+    var AGES=[
+      {k:'baby', l:'Under 2', fit:'good'},
+      {k:'toddler', l:'2 to 4', fit:'hard'},
+      {k:'young', l:'5 to 7', fit:'mixed'},
+      {k:'older', l:'8 to 12', fit:'good'},
+      {k:'teen', l:'13 and up', fit:'good'}
+    ];
+    var BUGGY=[{k:'yes', l:'Yes'},{k:'no', l:'No'}];
+    var NAP=[{k:'morning', l:'Late morning'},{k:'afternoon', l:'Early afternoon'},{k:'none', l:'No fixed window'}];
+    var state={age:'young', buggy:'no', nap:'none'};
+    function el(id){ return document.getElementById(id); }
+
+    function render(){
+      var age=AGES.filter(function(a){return a.k===state.age;})[0];
+      var badge=el('ff-badge'), verdict=el('ff-verdict'), why=el('ff-why'), list=el('ff-list'), note=el('ff-note');
+      list.innerHTML='';
+      var add=function(t){ var li=document.createElement('li'); li.textContent=t; list.appendChild(li); };
+
+      if(age.k==='toddler'){
+        badge.textContent='Probably not'; badge.className='ff-badge warn';
+        verdict.textContent='Two hours outdoors is a lot to ask of a two to four year old.';
+        why.textContent='This is the age the walk suits least. It is two hours with thirteen stops where the interesting part is a story rather than something to climb on, and a child that age will be done long before the end. I would rather tell you that now than have you leave halfway.';
+        add('If you still want the history, one parent walks and the other takes the children somewhere with space to run.');
+        add('Plan at child speed instead: one main attraction, one food stop, one movement break, one optional extra.');
+        add('The Natural History Museum works far better at this age than any walking tour.');
+      } else if(age.k==='young'){
+        badge.textContent='Doable with planning'; badge.className='ff-badge';
+        verdict.textContent='Five to seven can manage it, if the day is built around it.';
+        why.textContent='Two hours, roughly 3 km, mostly flat, and entirely outdoors. Children this age usually cope with the walking and lose interest in the talking, so the trick is giving them something to look for rather than expecting them to listen.';
+        add('Come rested. Do not stack the walk on top of a museum morning.');
+        add('Bring water and a snack. There is nowhere to sit for long stretches and we do not go indoors.');
+        add('Give them a job: spot the Ampelmann, count the cobblestone line where it crosses the route.');
+      } else if(age.k==='baby'){
+        badge.textContent='Usually fine'; badge.className='ff-badge';
+        verdict.textContent='A baby who sleeps or rides usually does well on this.';
+        why.textContent='Under two is easier than a toddler, because the child is carried or pushed rather than negotiating with you about walking. The route is mostly flat and the pace is comfortable, so a pram works.';
+        add('Feeding and changing is the real constraint. There are no facilities on the route itself.');
+        add('Dress the child for standing still, not for walking. Adults warm up, passengers do not.');
+      } else {
+        badge.textContent='Good fit'; badge.className='ff-badge';
+        verdict.textContent= age.k==='teen' ? 'Teenagers usually get more out of this than adults expect.'
+          : 'Eight to twelve is the age this walk lands best.';
+        why.textContent= age.k==='teen'
+          ? 'The Cold War material is the part that hooks them. The route runs through the former East, and standing where the Wall crossed the street does more than any classroom did.'
+          : 'Old enough to walk two hours comfortably and old enough for the stories to stick. This is the age group I see enjoying it most.';
+        add('Two hours, about 3 km, mostly flat, entirely outdoors.');
+        add('We walk the edges of Museum Island rather than going into the galleries, so nobody is dragged around exhibits.');
+      }
+
+      if(state.buggy==='yes'){
+        add('With a pushchair: the route is flat and manageable, but there are cobbles in places and the group moves off the moment a stop ends.');
+      }
+      if(state.nap==='morning'){
+        add('Late morning nap: a walk that starts before it will collide with it. Pick a later start or accept the child sleeps through part of the route.');
+      } else if(state.nap==='afternoon'){
+        add('Early afternoon dip: a late morning start finishes before the worst of it, which is the better side of the problem to be on.');
+      }
+
+      note.innerHTML='<strong>The honest limit:</strong> this is a two hour outdoor walk with no indoor breaks and no fixed toilet stops built in, so plan those before you start. On public transport, children under 6 travel free and 6 to 14 pay reduced fare.';
+    }
+
+    function chips(id, items, key){
+      var wrap=el(id);
+      items.forEach(function(it){
+        var b=document.createElement('button');
+        b.type='button'; b.className='ff-chip'; b.textContent=it.l;
+        b.setAttribute('aria-pressed', String(state[key]===it.k));
+        b.addEventListener('click', function(){
+          state[key]=it.k;
+          Array.prototype.forEach.call(wrap.children,function(c){c.setAttribute('aria-pressed','false');});
+          b.setAttribute('aria-pressed','true');
+          render();
+        });
+        wrap.appendChild(b);
+      });
+    }
+    chips('ff-age', AGES, 'age');
+    chips('ff-buggy', BUGGY, 'buggy');
+    chips('ff-nap', NAP, 'nap');
+
+    el('ff-foot').innerHTML='If the walk is not the right call this trip, the family guide has the alternatives. '+
+      '<a href="https://www.berlinwalk.com/post/berlin-with-kids" target="_blank" rel="noopener">Berlin with kids ›</a>';
+
+    render();
+  })();
+  </script>
+</div>
+</body>
+</html>

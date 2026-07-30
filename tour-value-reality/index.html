@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What Does a Tip-Based Walking Tour Actually Cost? | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-tour-value">
+  <style>
+    #bw-tour-value{
+      --bw-green:#1B5E20; --bw-green-dark:#164a1a; --bw-yellow:#FFE600;
+      --bw-lime:#7CB342; --bw-border:#DCE8C8; --bw-text:#212121;
+      --bw-muted:#4E5A4E; --bw-white:#FFFFFF; --bw-lime-soft:#F2F8E8;
+      color:var(--bw-text);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      max-width:720px; margin:0 auto; padding:2px;
+    }
+    #bw-tour-value *{box-sizing:border-box;}
+    .tv-card{border:1px solid var(--bw-border); border-radius:16px; background:var(--bw-white);
+      overflow:hidden; box-shadow:0 1px 2px rgba(20,74,26,.05);}
+    .tv-head{background:var(--bw-green); color:var(--bw-white); padding:16px 18px;}
+    .tv-head h2{margin:0; font-size:1.12rem; line-height:1.25;}
+    .tv-head p{margin:5px 0 0; font-size:.86rem; color:#dCE8CF;}
+    .tv-body{padding:16px;}
+    .tv-label{font-size:.78rem; font-weight:800; letter-spacing:.5px; text-transform:uppercase;
+      color:var(--bw-muted); margin:0 0 8px;}
+    .tv-row{display:flex; gap:7px; flex-wrap:wrap; margin-bottom:16px;}
+    .tv-chip{border:1.5px solid var(--bw-border); background:var(--bw-white); color:var(--bw-text);
+      border-radius:999px; padding:8px 14px; font-size:.86rem; font-weight:700; cursor:pointer; font-family:inherit;
+      transition:border-color .12s, background .12s;}
+    .tv-chip:hover{border-color:var(--bw-lime); background:var(--bw-lime-soft);}
+    .tv-chip[aria-pressed="true"]{background:var(--bw-green); color:var(--bw-white); border-color:var(--bw-green);}
+
+    .tv-total{border:1px solid var(--bw-border); border-radius:14px; background:var(--bw-lime-soft);
+      padding:16px; text-align:center; margin-bottom:14px;}
+    .tv-big{font-size:2.1rem; font-weight:800; color:var(--bw-green); line-height:1;}
+    .tv-cap{font-size:.86rem; color:var(--bw-muted); margin-top:6px;}
+
+    .tv-compare{border:1px solid var(--bw-border); border-radius:14px; overflow:hidden;}
+    .tv-line{display:flex; align-items:baseline; gap:10px; padding:11px 14px; border-top:1px solid var(--bw-border); font-size:.9rem;}
+    .tv-line:first-child{border-top:none;}
+    .tv-line.you{background:var(--bw-lime-soft);}
+    .tv-what{flex:1; line-height:1.4;}
+    .tv-cost{font-weight:800; color:var(--bw-green); white-space:nowrap;}
+    .tv-note{font-size:.85rem; line-height:1.55; color:var(--bw-muted); margin:13px 0 0;}
+    .tv-note strong{color:var(--bw-text);}
+    .tv-foot{padding:12px 16px 15px; font-size:.8rem; color:var(--bw-muted); border-top:1px solid var(--bw-border);}
+    .tv-foot a{color:var(--bw-green); font-weight:700; text-decoration:none;}
+    .tv-foot a:hover{text-decoration:underline;}
+    @media (max-width:420px){ .tv-head h2{font-size:1.02rem;} .tv-big{font-size:1.8rem;} }
+  </style>
+
+  <div class="tv-card">
+    <div class="tv-head">
+      <h2>What does a tip-based walking tour actually cost?</h2>
+      <p>The booking is free and nobody announces a figure, which is exactly what makes people uneasy. Here are the real numbers, and what the same afternoon costs the paid way.</p>
+    </div>
+
+    <div class="tv-body">
+      <p class="tv-label">How many of you?</p>
+      <div class="tv-row" id="tv-people" role="group" aria-label="Group size"></div>
+
+      <p class="tv-label">If the walk was worth it, what would you give per person?</p>
+      <div class="tv-row" id="tv-level" role="group" aria-label="Tip level"></div>
+
+      <div class="tv-total">
+        <div class="tv-big" id="tv-big"></div>
+        <div class="tv-cap" id="tv-cap"></div>
+      </div>
+
+      <p class="tv-label">The same afternoon, paid</p>
+      <div class="tv-compare" id="tv-compare"></div>
+
+      <p class="tv-note" id="tv-note"></p>
+    </div>
+
+    <div class="tv-foot" id="tv-foot"></div>
+  </div>
+
+  <script>
+  (function(){
+    // Tip bands are the practical guidance from the published BerlinWalk tipping guide.
+    // Comparison prices come from the published hop-on hop-off guide: roughly EUR 30 to
+    // 45 per adult for a 24 hour sightseeing bus pass, against a BVG day ticket at
+    // EUR 11.20. The walk itself is about 2 hours, 13 stops, Alexanderplatz to
+    // Hackescher Markt.
+    var LEVELS=[
+      {k:'modest', v:5,  l:'EUR 5',      d:'a modest thank-you'},
+      {k:'common', v:10, l:'EUR 10',     d:'a solid, common tip'},
+      {k:'generous', v:17, l:'EUR 15 to 20', d:'generous, for a guide who made the city click'},
+      {k:'nothing', v:0, l:'Nothing',    d:'you can walk away, and some do'}
+    ];
+    var SIZES=[{v:1,l:'Just me'},{v:2,l:'Two'},{v:3,l:'Three'},{v:4,l:'Four'},{v:5,l:'Five or more'}];
+    var state={people:2, level:'common'};
+
+    function el(id){ return document.getElementById(id); }
+    function money(n){ return 'EUR ' + (Math.round(n*100)/100).toString().replace(/\.00$/,''); }
+
+    function render(){
+      var lv=LEVELS.filter(function(x){return x.k===state.level;})[0];
+      var total=lv.v*state.people;
+      var big=el('tv-big'), cap=el('tv-cap');
+
+      if(lv.k==='nothing'){
+        big.textContent='EUR 0';
+        cap.textContent='No ticket, no obligation. That is genuinely how the model works.';
+      } else if(lv.k==='generous'){
+        big.textContent='EUR '+(15*state.people)+' to '+(20*state.people);
+        cap.textContent=state.people===1 ? 'Generous for one person, about 2 hours of guiding.'
+          : 'For '+state.people+' people, thinking per person then adjusting for budget.';
+      } else {
+        big.textContent=money(total);
+        cap.textContent=state.people===1 ? lv.d.charAt(0).toUpperCase()+lv.d.slice(1)+', for about 2 hours.'
+          : lv.l+' each for '+state.people+', which is how families and groups usually think about it.';
+      }
+
+      var busLow=30*state.people, busHigh=45*state.people, bvg=11.20*state.people;
+      var rows=[
+        {w:'This walk, tipped at your level', c: lv.k==='generous' ? 'EUR '+(15*state.people)+' to '+(20*state.people) : money(total), you:true},
+        {w:'Hop-on hop-off bus, 24 hour pass', c:'EUR '+busLow+' to '+busHigh},
+        {w:'BVG day ticket, and walk it yourself', c:money(bvg)},
+        {w:'Bus 100 or 200 on that day ticket', c:'included'}
+      ];
+      var box=el('tv-compare'); box.innerHTML='';
+      rows.forEach(function(r){
+        var d=document.createElement('div'); d.className='tv-line'+(r.you?' you':'');
+        var w=document.createElement('div'); w.className='tv-what'; w.textContent=r.w;
+        var c=document.createElement('div'); c.className='tv-cost'; c.textContent=r.c;
+        d.appendChild(w); d.appendChild(c); box.appendChild(d);
+      });
+
+      el('tv-note').innerHTML = lv.k==='nothing'
+        ? '<strong>Nobody will stop you, and nothing is announced to the group.</strong> The honest version is that the guide is paid only by what the group decides, so a walk everyone enjoyed and nobody paid for is a walk that does not happen again. Tip what it was worth to you, including nothing if it was not.'
+        : '<strong>The sightseeing bus stops running around 18:00</strong> and thins out in winter, so a 24 hour pass is really a daytime pass. The walk is about 2 hours on foot with 13 stops, from the World Clock at Alexanderplatz to Hackescher Markt. Cash is easiest at the end, though card works.';
+    }
+
+    function chips(id, items, key, valueOf){
+      var wrap=el(id);
+      items.forEach(function(it){
+        var b=document.createElement('button');
+        b.type='button'; b.className='tv-chip'; b.textContent=it.l;
+        var val=valueOf(it);
+        b.setAttribute('aria-pressed', String(state[key]===val));
+        b.addEventListener('click', function(){
+          state[key]=val;
+          Array.prototype.forEach.call(wrap.children,function(c){c.setAttribute('aria-pressed','false');});
+          b.setAttribute('aria-pressed','true');
+          render();
+        });
+        wrap.appendChild(b);
+      });
+    }
+    chips('tv-people', SIZES, 'people', function(it){return it.v;});
+    chips('tv-level', LEVELS, 'level', function(it){return it.k;});
+
+    el('tv-foot').innerHTML='There is no set figure and nothing is announced on the walk. '+
+      '<a href="https://www.berlinwalk.com/post/tipping-in-berlin" target="_blank" rel="noopener">How tipping works across Berlin ›</a>';
+
+    render();
+  })();
+  </script>
+</div>
+</body>
+</html>
