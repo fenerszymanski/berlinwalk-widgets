@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Which Berlin Wall Site Is Worth Your Time | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-wall-hour">
+  <style>
+    #bw-wall-hour{
+      --bw-green:#1B5E20; --bw-green-dark:#164a1a; --bw-yellow:#FFE600;
+      --bw-lime:#7CB342; --bw-border:#DCE8C8; --bw-text:#212121;
+      --bw-muted:#4E5A4E; --bw-white:#FFFFFF; --bw-lime-soft:#F2F8E8;
+      color:var(--bw-text);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      max-width:720px; margin:0 auto; padding:2px;
+    }
+    #bw-wall-hour *{box-sizing:border-box;}
+    .wh-card{border:1px solid var(--bw-border); border-radius:16px; background:var(--bw-white);
+      overflow:hidden; box-shadow:0 1px 2px rgba(20,74,26,.05);}
+    .wh-head{background:var(--bw-green); color:var(--bw-white); padding:16px 18px;}
+    .wh-head h2{margin:0; font-size:1.12rem; line-height:1.25;}
+    .wh-head p{margin:5px 0 0; font-size:.86rem; color:#dCE8CF;}
+    .wh-body{padding:16px;}
+
+    .wh-label{font-size:.78rem; font-weight:800; letter-spacing:.5px; text-transform:uppercase;
+      color:var(--bw-muted); margin:0 0 8px;}
+    .wh-row{display:flex; flex-wrap:wrap; gap:7px; margin-bottom:16px;}
+    .wh-chip{border:1.5px solid var(--bw-border); background:var(--bw-white); color:var(--bw-text);
+      border-radius:999px; padding:8px 14px; font-size:.86rem; font-weight:700; cursor:pointer;
+      font-family:inherit; transition:border-color .12s, background .12s;}
+    .wh-chip:hover{border-color:var(--bw-lime); background:var(--bw-lime-soft);}
+    .wh-chip[aria-pressed="true"]{background:var(--bw-green); color:var(--bw-white); border-color:var(--bw-green);}
+
+    .wh-out{border:1px solid var(--bw-border); border-radius:14px; background:var(--bw-lime-soft); padding:15px;}
+    .wh-verdict{font-size:.74rem; font-weight:800; letter-spacing:.6px; text-transform:uppercase;
+      color:var(--bw-green); background:var(--bw-yellow); border-radius:6px; padding:3px 8px; display:inline-block;}
+    .wh-name{margin:9px 0 3px; font-size:1.2rem; font-weight:800; line-height:1.2;}
+    .wh-sub{font-size:.83rem; color:var(--bw-muted); font-weight:600; margin-bottom:9px;}
+    .wh-why{font-size:.95rem; line-height:1.55; margin:0 0 11px;}
+    .wh-facts{display:grid; grid-template-columns:auto 1fr; gap:5px 10px; font-size:.86rem; margin-bottom:11px;}
+    .wh-facts dt{font-weight:800; color:var(--bw-green);}
+    .wh-facts dd{margin:0;}
+    .wh-alt{border-top:1px solid var(--bw-border); padding-top:10px; font-size:.86rem; line-height:1.5; color:var(--bw-muted);}
+    .wh-alt strong{color:var(--bw-text);}
+    .wh-foot{padding:12px 16px 15px; font-size:.8rem; color:var(--bw-muted); border-top:1px solid var(--bw-border);}
+    .wh-foot a{color:var(--bw-green); font-weight:700; text-decoration:none;}
+    .wh-foot a:hover{text-decoration:underline;}
+    @media (max-width:420px){ .wh-head h2{font-size:1.02rem;} .wh-name{font-size:1.08rem;} }
+  </style>
+
+  <div class="wh-card">
+    <div class="wh-head">
+      <h2>You have one hour. Which Berlin Wall site is worth it?</h2>
+      <p>Less than 3 km of original Wall survives in the whole city, and the famous stop is a replica. Tell me your time and where you are, and I will tell you where to go.</p>
+    </div>
+
+    <div class="wh-body">
+      <p class="wh-label">How long do you have?</p>
+      <div class="wh-row" id="wh-time" role="group" aria-label="Time available"></div>
+
+      <p class="wh-label">What are you actually after?</p>
+      <div class="wh-row" id="wh-want" role="group" aria-label="What you want"></div>
+
+      <div class="wh-out">
+        <span class="wh-verdict">Go here</span>
+        <div class="wh-name" id="wh-name"></div>
+        <div class="wh-sub" id="wh-sub"></div>
+        <p class="wh-why" id="wh-why"></p>
+        <dl class="wh-facts" id="wh-facts"></dl>
+        <div class="wh-alt" id="wh-alt"></div>
+      </div>
+    </div>
+
+    <div class="wh-foot" id="wh-foot"></div>
+  </div>
+
+  <script>
+  (function(){
+    // All figures below come from the published BerlinWalk Wall guides.
+    var SITES = {
+      bernauer:{
+        n:'Berlin Wall Memorial, Bernauer Strasse',
+        sub:'The only place you see the whole border, not just a wall',
+        why:'An 80 metre section is kept intact between two steel walls: the outer wall, the raked sand death strip, the patrol road and the watchtower line. Nowhere else in Berlin shows the full depth of the border. The grounds are free and outdoors, and the ghost-station exhibition inside Nordbahnhof is part of the story.',
+        facts:{'Cost':'Free','Time':'About an hour','Open':'Grounds daily 08:00 to 22:00. Documentation Center, Visitor Center and viewing tower Tuesday to Sunday, 10:00 to 18:00','Get there':'S1, S2, S25 or S26 to Nordbahnhof, tram M10, U8 Bernauer Strasse or U6 Naturkundemuseum','Route':'Nordbahnhof, Visitor Center, preserved strip, viewing tower, Window of Remembrance, Chapel of Reconciliation'}
+      },
+      eastside:{
+        n:'East Side Gallery',
+        sub:'The longest surviving stretch, 1,316 metres of it',
+        why:'Painted by 118 artists from 21 countries in 1990, and the longest piece of Wall left anywhere. It is art rather than border machinery: the paintings you see are 2009 repaints of the 1990 originals, and it is a protected memorial, so do not add your own graffiti. The famous ones are the Brezhnev and Honecker kiss and the Trabant bursting through.',
+        facts:{'Cost':'Free','Time':'About 45 minutes to walk the full length','Open':'Outdoors, day and night, nothing to book','Get there':'S-Bahn to Ostbahnhof, or S and U-Bahn to Warschauer Strasse','Note':'This is the art. Bernauer Strasse is where you understand the border'}
+      },
+      topography:{
+        n:'Topography of Terror',
+        sub:'200 metres of original Wall on the former Gestapo site',
+        why:'Built on the ground where the Gestapo and SS had their headquarters, with one of the best free museums in Berlin attached. The 200 metre Wall section runs along Niederkirchnerstrasse. If you want the perpetrators rather than the border, this is the stop, and it pairs well with a short walk to Potsdamer Platz.',
+        facts:{'Cost':'Free','Time':'About an hour, longer if you go inside','Open':'Outdoor exhibition and Wall section accessible, indoor museum free','Get there':'Central, walkable from Potsdamer Platz','Note':'Best free museum on this list'}
+      },
+      schlesischer:{
+        n:'Schlesischer Busch command tower',
+        sub:'Real border machinery, without the crowds',
+        why:'A four-storey concrete command post that once controlled 18 watchtowers, standing in a park most visitors never reach. If you have already done the famous stops, or you want the Wall without a single tour group in the frame, this is the one I send people to.',
+        facts:{'Cost':'Free from outside','Time':'About 30 to 40 minutes','Get there':'U1 or U3 to Schlesisches Tor, then walk','Note':'Also the best-signed kilometre of the whole Berlin Wall Trail'}
+      },
+      centre:{
+        n:'The cobblestone line in the centre',
+        sub:'The Wall under your feet, where you already are',
+        why:'A double row of cobblestones marks the former course right through the middle of Berlin, with bronze plaques at intervals. If your hour is already committed to the centre, you do not need to travel at all: the border crosses the classic sightseeing route more than once, including in front of the Brandenburg Gate, which stood on East Berlin territory inside the death strip.',
+        facts:{'Cost':'Free','Time':'As long as your walk takes','Open':'Always','Get there':'You are probably standing on it','Note':'Less than 3 km of original concrete survives citywide, so most of the centre is trace, not wall'}
+      }
+    };
+
+    var TIMES=[{k:'30',l:'About 30 minutes'},{k:'60',l:'About an hour'},{k:'half',l:'Half a day'}];
+    var WANTS=[{k:'real',l:'The real border, explained honestly'},{k:'art',l:'The painted Wall and photos'},{k:'nazi',l:'The Nazi and Gestapo story'},{k:'quiet',l:'Somewhere without crowds'},{k:'stay',l:'I am staying in the centre'}];
+    var state={time:'60', want:'real'};
+
+    function pick(){
+      var t=state.time, w=state.want;
+      if(w==='stay') return {key:'centre', alt:'If you can spare an hour and a train ride, <strong>Bernauer Strasse</strong> is the one site that shows the full border rather than its outline.'};
+      if(w==='art') return {key:'eastside', alt:'Worth knowing: the East Side Gallery is the art. For the border itself, <strong>Bernauer Strasse</strong> is the honest one.'};
+      if(w==='nazi') return {key:'topography', alt:'Pair it with the cobblestone line toward Potsdamer Platz, which is a five minute walk away.'};
+      if(w==='quiet') return {key:'schlesischer', alt:'If you would rather not travel that far out, <strong>Topography of Terror</strong> is central and still far quieter than Checkpoint Charlie.'};
+      if(t==='30') return {key:'centre', alt:'Thirty minutes is not enough for Bernauer Strasse done properly. If you can stretch to an hour, go there instead.'};
+      if(t==='half') return {key:'bernauer', alt:'With half a day, add the walk from Nordbahnhof to Mauerpark: about 2 km, roughly 30 minutes of walking and 90 minutes of stopping.'};
+      return {key:'bernauer', alt:'If you want the painted Wall as well, the <strong>East Side Gallery</strong> is a separate trip in Friedrichshain, about 45 minutes to walk.'};
+    }
+
+    function render(){
+      var r=pick(), s=SITES[r.key];
+      document.getElementById('wh-name').textContent=s.n;
+      document.getElementById('wh-sub').textContent=s.sub;
+      document.getElementById('wh-why').textContent=s.why;
+      var dl=document.getElementById('wh-facts'); dl.innerHTML='';
+      Object.keys(s.facts).forEach(function(k){
+        var dt=document.createElement('dt'); dt.textContent=k;
+        var dd=document.createElement('dd'); dd.textContent=s.facts[k];
+        dl.appendChild(dt); dl.appendChild(dd);
+      });
+      document.getElementById('wh-alt').innerHTML=r.alt;
+    }
+    function buildRow(id, items, key){
+      var wrap=document.getElementById(id);
+      items.forEach(function(it){
+        var b=document.createElement('button');
+        b.type='button'; b.className='wh-chip'; b.textContent=it.l;
+        b.setAttribute('aria-pressed', String(state[key]===it.k));
+        b.addEventListener('click', function(){
+          state[key]=it.k;
+          Array.prototype.forEach.call(wrap.children,function(c){ c.setAttribute('aria-pressed','false'); });
+          b.setAttribute('aria-pressed','true');
+          render();
+        });
+        wrap.appendChild(b);
+      });
+    }
+    buildRow('wh-time',TIMES,'time');
+    buildRow('wh-want',WANTS,'want');
+
+    document.getElementById('wh-foot').innerHTML =
+      'Checkpoint Charlie is the famous one and the guardhouse is a replica. The free outdoor boards there tell the story; skip the paid museum. ' +
+      '<a href="https://www.stiftung-berliner-mauer.de/en" target="_blank" rel="noopener">Berlin Wall Foundation, official site ›</a>';
+
+    render();
+  })();
+  </script>
+</div>
+</body>
+</html>
