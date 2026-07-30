@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "slug": "what-happens-on-a-berlin-free-walking-tour",
+  "key": "what-happens-on-a-berlin-free-walking-tour",
+  "config": {
+    "title": "What Happens on a Berlin Free Walking Tour: FAQ",
+    "items": [
+      {
+        "q": "Is a Berlin free walking tour really free?",
+        "a": "You join without paying up front and there is no ticket, so there is no cost to turn up. At the end you tip the guide what the two hours were worth to you, in cash or by card. That is the whole tip-based model: no fixed price and no obligation to pay a set amount."
+      },
+      {
+        "q": "How long is the tour and how far do you walk?",
+        "a": "About two hours on foot, covering roughly a kilometre and a half from the World Clock at Alexanderplatz to Hackescher Markt, across thirteen stops. The route is mostly flat and the pace is built for looking rather than marching."
+      },
+      {
+        "q": "What do you actually see on the walk?",
+        "a": "The historic core of the former East Berlin: the World Clock and TV Tower at Alexanderplatz, the Rotes Rathaus, St. Mary's Church, the Marx-Engels-Forum, Museum Island and the Berliner Dom, ending in the courtyards around Hackescher Markt. You can scrub through every stop on the timeline in this post before you book."
+      },
+      {
+        "q": "How much should I tip on a free walking tour in Berlin?",
+        "a": "Tip what the two hours of a guide's work and local knowledge were worth to you. There is no set figure and nothing is announced to the group. If you want a sense of the normal range beforehand, the tipping-in-Berlin guide covers it honestly."
+      },
+      {
+        "q": "Where does the Berlin free walking tour meet?",
+        "a": "At the World Clock (Weltzeituhr) on Alexanderplatz, one of the easiest landmarks in the city to find, reachable by U-Bahn, S-Bahn, tram and bus. The exact spot is on the meeting point page, and current dates are on the booking page."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is a Berlin free walking tour really free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You join without paying up front and there is no ticket, so there is no cost to turn up. At the end you tip the guide what the two hours were worth to you, in cash or by card. That is the whole tip-based model: no fixed price and no obligation to pay a set amount."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long is the tour and how far do you walk?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "About two hours on foot, covering roughly a kilometre and a half from the World Clock at Alexanderplatz to Hackescher Markt, across thirteen stops. The route is mostly flat and the pace is built for looking rather than marching."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What do you actually see on the walk?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The historic core of the former East Berlin: the World Clock and TV Tower at Alexanderplatz, the Rotes Rathaus, St. Mary's Church, the Marx-Engels-Forum, Museum Island and the Berliner Dom, ending in the courtyards around Hackescher Markt. You can scrub through every stop on the timeline in this post before you book."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much should I tip on a free walking tour in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tip what the two hours of a guide's work and local knowledge were worth to you. There is no set figure and nothing is announced to the group. If you want a sense of the normal range beforehand, the tipping-in-Berlin guide covers it honestly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where does the Berlin free walking tour meet?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "At the World Clock (Weltzeituhr) on Alexanderplatz, one of the easiest landmarks in the city to find, reachable by U-Bahn, S-Bahn, tram and bus. The exact spot is on the meeting point page, and current dates are on the booking page."
+        }
+      }
+    ]
+  }
+}
