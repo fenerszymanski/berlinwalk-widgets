@@ -2403,5 +2403,49 @@
     "png512": "tools-home/icons/lights-route-order.png",
     "png160": "tools-home/icons/lights-route-order-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_5c4e01218dbe43f1aa0189039c5462bf~mv2.png"
+  },
+  {
+    "slug": "east-west-street-tells",
+    "title": "East or West Berlin? Read the Street",
+    "category": "Discovery",
+    "model": "Google Flow (Nano Banana Pro)",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "sourceSheet": "tools-home/icons/_src/google-flow-20260730/east-west-street-tells/source-1k.jpeg",
+    "png512": "tools-home/icons/east-west-street-tells.png",
+    "png160": "tools-home/icons/east-west-street-tells-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_9f43448e63f74f05b063a5fbaaff5cfd~mv2.png"
+  },
+  {
+    "slug": "death-strip-layers",
+    "title": "The Death Strip, Layer by Layer",
+    "category": "Discovery",
+    "model": "Google Flow (Nano Banana Pro)",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "sourceSheet": "tools-home/icons/_src/google-flow-20260730/death-strip-layers/source-1k.jpeg",
+    "png512": "tools-home/icons/death-strip-layers.png",
+    "png160": "tools-home/icons/death-strip-layers-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_9f4c28c33a7c4a65b0f7176854270d50~mv2.png"
+  },
+  {
+    "slug": "tour-value-reality",
+    "title": "What Does a Tip-Based Walking Tour Cost?",
+    "category": "Money",
+    "model": "Google Flow (Nano Banana Pro)",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "sourceSheet": "tools-home/icons/_src/google-flow-20260730/tour-value-reality/source-1k.jpeg",
+    "png512": "tools-home/icons/tour-value-reality.png",
+    "png160": "tools-home/icons/tour-value-reality-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_baea1292e8f54d9e98f1d7478bd95d56~mv2.png"
+  },
+  {
+    "slug": "family-walk-fit",
+    "title": "Will the Walking Tour Work With Your Kids?",
+    "category": "Discovery",
+    "model": "Google Flow (Nano Banana Pro)",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "sourceSheet": "tools-home/icons/_src/google-flow-20260730/family-walk-fit/source-1k.jpeg",
+    "png512": "tools-home/icons/family-walk-fit.png",
+    "png160": "tools-home/icons/family-walk-fit-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_c370dd507c604d98aaea89af0afec663~mv2.png"
   }
 ]
