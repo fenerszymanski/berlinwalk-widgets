@@ -2348,5 +2348,38 @@
     "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-pass-cost-comparison-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-pass-cost-comparison-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_9a5c32069aef4ee294ca0f76c64f3351~mv2.png"
+  },
+  {
+    "slug": "tour-two-hours-scrub",
+    "title": "The Berlin Tour, Minute by Minute",
+    "category": "Discovery",
+    "model": "Google Flow (Nano Banana Pro)",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "sourceSheet": "tools-home/icons/_src/google-flow-20260730/tour-two-hours-scrub/source-1k.jpeg",
+    "png512": "tools-home/icons/tour-two-hours-scrub.png",
+    "png160": "tools-home/icons/tour-two-hours-scrub-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_a8692c47a97b43b5b9d70586ba0abc76~mv2.png"
+  },
+  {
+    "slug": "museum-island-one-pick",
+    "title": "Museum Island: Pick One",
+    "category": "Discovery",
+    "model": "Google Flow (Nano Banana Pro)",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "sourceSheet": "tools-home/icons/_src/google-flow-20260730/museum-island-one-pick/source-1k.jpeg",
+    "png512": "tools-home/icons/museum-island-one-pick.png",
+    "png160": "tools-home/icons/museum-island-one-pick-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_17b7cb39ae34450289a50deb74517877~mv2.png"
+  },
+  {
+    "slug": "wall-site-one-hour",
+    "title": "Which Berlin Wall Site Is Worth Your Time",
+    "category": "Discovery",
+    "model": "Google Flow (Nano Banana Pro)",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "sourceSheet": "tools-home/icons/_src/google-flow-20260730/wall-site-one-hour/source-1k.jpeg",
+    "png512": "tools-home/icons/wall-site-one-hour.png",
+    "png160": "tools-home/icons/wall-site-one-hour-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_9c95beb6e9174cc18ddeb7e92967d401~mv2.png"
   }
 ]
