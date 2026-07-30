@@ -97,7 +97,11 @@
     var state={people:2, level:'common'};
 
     function el(id){ return document.getElementById(id); }
-    function money(n){ return 'EUR ' + (Math.round(n*100)/100).toString().replace(/\.00$/,''); }
+    function money(n){
+      // whole euros stay clean, part-euros always keep both decimals (22.4 reads wrong)
+      var v=Math.round(n*100)/100;
+      return 'EUR ' + (v % 1 === 0 ? String(v) : v.toFixed(2));
+    }
 
     function render(){
       var lv=LEVELS.filter(function(x){return x.k===state.level;})[0];
