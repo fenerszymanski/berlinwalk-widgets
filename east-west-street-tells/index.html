@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>East or West Berlin? Read the Street | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-street-tells">
+  <style>
+    #bw-street-tells{
+      --bw-green:#1B5E20; --bw-green-dark:#164a1a; --bw-yellow:#FFE600;
+      --bw-lime:#7CB342; --bw-border:#DCE8C8; --bw-text:#212121;
+      --bw-muted:#4E5A4E; --bw-white:#FFFFFF; --bw-lime-soft:#F2F8E8; --bw-red:#E63946;
+      color:var(--bw-text);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      max-width:720px; margin:0 auto; padding:2px;
+    }
+    #bw-street-tells *{box-sizing:border-box;}
+    .st-card{border:1px solid var(--bw-border); border-radius:16px; background:var(--bw-white);
+      overflow:hidden; box-shadow:0 1px 2px rgba(20,74,26,.05);}
+    .st-head{background:var(--bw-green); color:var(--bw-white); padding:16px 18px;}
+    .st-head h2{margin:0; font-size:1.12rem; line-height:1.25;}
+    .st-head p{margin:5px 0 0; font-size:.86rem; color:#dCE8CF;}
+    .st-body{padding:16px;}
+    .st-label{font-size:.78rem; font-weight:800; letter-spacing:.5px; text-transform:uppercase;
+      color:var(--bw-muted); margin:0 0 10px;}
+
+    .st-tell{display:flex; gap:11px; align-items:flex-start; padding:11px 12px; margin-bottom:8px;
+      border:1.5px solid var(--bw-border); border-radius:13px; cursor:pointer; background:var(--bw-white);
+      transition:border-color .12s, background .12s;}
+    .st-tell:hover{border-color:var(--bw-lime); background:var(--bw-lime-soft);}
+    .st-tell[aria-pressed="true"]{border-color:var(--bw-green); background:var(--bw-lime-soft);}
+    .st-box{flex:0 0 20px; height:20px; margin-top:1px; border-radius:6px; border:2px solid var(--bw-border);
+      background:var(--bw-white); position:relative;}
+    .st-tell[aria-pressed="true"] .st-box{background:var(--bw-green); border-color:var(--bw-green);}
+    .st-tell[aria-pressed="true"] .st-box::after{content:''; position:absolute; left:6px; top:2px;
+      width:5px; height:10px; border:solid var(--bw-white); border-width:0 2.5px 2.5px 0; transform:rotate(45deg);}
+    .st-txt{flex:1;}
+    .st-t{font-weight:800; font-size:.95rem; line-height:1.3;}
+    .st-d{font-size:.84rem; color:var(--bw-muted); line-height:1.45; margin-top:2px;}
+
+    .st-out{border:1px solid var(--bw-border); border-radius:14px; padding:15px; background:var(--bw-lime-soft); margin-top:14px;}
+    .st-badge{font-size:.74rem; font-weight:800; letter-spacing:.6px; text-transform:uppercase;
+      border-radius:6px; padding:3px 8px; display:inline-block; color:var(--bw-green); background:var(--bw-yellow);}
+    .st-verdict{margin:10px 0 4px; font-size:1.16rem; font-weight:800; line-height:1.2;}
+    .st-why{font-size:.94rem; line-height:1.55; margin:0 0 10px;}
+    .st-bar{height:8px; border-radius:8px; background:var(--bw-border); overflow:hidden; margin:0 0 6px;}
+    .st-fill{height:100%; background:var(--bw-lime); width:0; transition:width .18s ease;}
+    .st-scale{display:flex; justify-content:space-between; font-size:.74rem; color:var(--bw-muted); font-weight:700; margin-bottom:11px;}
+    .st-note{border-top:1px solid var(--bw-border); padding-top:10px; font-size:.85rem; line-height:1.5; color:var(--bw-muted);}
+    .st-note strong{color:var(--bw-text);}
+    .st-foot{padding:12px 16px 15px; font-size:.8rem; color:var(--bw-muted); border-top:1px solid var(--bw-border);}
+    .st-foot a{color:var(--bw-green); font-weight:700; text-decoration:none;}
+    .st-foot a:hover{text-decoration:underline;}
+    @media (max-width:420px){ .st-head h2{font-size:1.02rem;} .st-verdict{font-size:1.04rem;} }
+  </style>
+
+  <div class="st-card">
+    <div class="st-head">
+      <h2>East or West Berlin? Read the street you are standing on</h2>
+      <p>Street names do not change at the old border and nothing announces it. Tick what you can actually see around you and I will tell you which side you are probably on.</p>
+    </div>
+
+    <div class="st-body">
+      <p class="st-label">What can you see from where you are standing?</p>
+      <div id="st-list"></div>
+
+      <div class="st-out">
+        <span class="st-badge" id="st-badge">No signals yet</span>
+        <div class="st-verdict" id="st-verdict">Tick anything you can see.</div>
+        <div class="st-bar"><div class="st-fill" id="st-fill"></div></div>
+        <div class="st-scale"><span>Former West</span><span>Unclear</span><span>Former East</span></div>
+        <p class="st-why" id="st-why"></p>
+        <div class="st-note" id="st-note"></div>
+      </div>
+    </div>
+
+    <div class="st-foot" id="st-foot"></div>
+  </div>
+
+  <script>
+  (function(){
+    // Each tell and its weight comes from the published BerlinWalk East/West and Wall
+    // guides. Weight is how much the signal moves the verdict: positive means East.
+    var TELLS=[
+      {k:'ampel', w:3, t:'The crossing figure wears a hat',
+       d:'The Ampelmann with the hat is the East German design and still stands in the former East. The plain walking figure is the western one. This is the most reliable everyday tell.'},
+      {k:'cobble', w:0, t:'A double row of cobblestones runs across the road',
+       d:'That is the Wall line itself, often with bronze plaques reading Berliner Mauer 1961 to 1989. It means you are standing on the border, so the answer depends on which side of the line you step.'},
+      {k:'centre', w:3, t:'Alexanderplatz, the TV Tower, Museum Island or the Berliner Dom is in sight',
+       d:'The historic centre was in the Soviet sector. If the classic sightseeing skyline is around you, you are in the former East.'},
+      {k:'linden', w:2, t:'You are on Unter den Linden or at the Brandenburg Gate',
+       d:'Unter den Linden was East Berlin. The Gate stood on East territory too, but inside the death strip, so it was unreachable from either side until 1989.'},
+      {k:'kudamm', w:-3, t:'Kurfürstendamm, Zoo Station or the Kaiser Wilhelm Memorial Church is nearby',
+       d:'These were the centre of West Berlin. The West built its own downtown here precisely because the historic one was on the other side.'},
+      {k:'tempelhof', w:-2, t:'You are at Tempelhof airfield',
+       d:'Tempelhof sat inside West Berlin and became the symbol of the airlift, when the enclave was supplied from the air.'},
+      {k:'plattenbau', w:1, t:'Long prefabricated concrete apartment blocks line the street',
+       d:'A softer signal. The GDR built Plattenbau housing at scale in the East, though the West built system housing too, so treat this as a hint rather than proof.'},
+      {k:'boulevard', w:1, t:'An unusually wide socialist boulevard with monumental facades',
+       d:'Another soft one. Karl-Marx-Allee is the clearest example of the GDR showcase style, but width alone is not decisive in a city this rebuilt.'}
+    ];
+
+    var picked={};
+    var list=document.getElementById('st-list');
+    TELLS.forEach(function(x){
+      var b=document.createElement('button');
+      b.type='button'; b.className='st-tell'; b.setAttribute('aria-pressed','false');
+      b.innerHTML='<span class="st-box"></span><span class="st-txt"><span class="st-t"></span><span class="st-d"></span></span>';
+      b.querySelector('.st-t').textContent=x.t;
+      b.querySelector('.st-d').textContent=x.d;
+      b.addEventListener('click', function(){
+        picked[x.k]=!picked[x.k];
+        b.setAttribute('aria-pressed', String(!!picked[x.k]));
+        render();
+      });
+      list.appendChild(b);
+    });
+
+    function render(){
+      var score=0, n=0, onLine=false;
+      TELLS.forEach(function(x){ if(picked[x.k]){ n++; score+=x.w; if(x.k==='cobble') onLine=true; } });
+      var badge=document.getElementById('st-badge'), verdict=document.getElementById('st-verdict'),
+          why=document.getElementById('st-why'), fill=document.getElementById('st-fill'), note=document.getElementById('st-note');
+
+      // map score roughly -6..+6 onto 0..100
+      var pct=Math.max(0, Math.min(100, ((score+6)/12)*100));
+      fill.style.width=pct+'%';
+
+      if(n===0){
+        badge.textContent='No signals yet'; verdict.textContent='Tick anything you can see.';
+        why.textContent='Every signal below is something you can check from the pavement without an app.';
+        note.innerHTML='<strong>The honest limit:</strong> these are signals, not proof. Berlin has been rebuilt heavily on both sides, so a single soft tell can mislead. For a definite answer, use the interactive map that reads the actual 1989 survey line.';
+        return;
+      }
+      if(onLine && Math.abs(score)<=1){
+        badge.textContent='On the line'; verdict.textContent='You are standing on the border itself.';
+        why.textContent='The cobblestone line marks the course of the outer Wall. One side of that line was East Berlin, the other was West. Step across it and the answer flips, which is exactly why it is worth looking down.';
+      } else if(score>=3){
+        badge.textContent='Former East'; verdict.textContent='You are almost certainly in the former East.';
+        why.textContent='Several strong signals agree. This was the Soviet sector, and it held most of what visitors come to see: Alexanderplatz, the TV Tower, Museum Island and Unter den Linden.';
+      } else if(score>0){
+        badge.textContent='Probably East'; verdict.textContent='The signals lean East, but softly.';
+        why.textContent='What you have ticked points East without settling it. Look for the crossing figure or the cobblestone line before you trust it.';
+      } else if(score<=-3){
+        badge.textContent='Former West'; verdict.textContent='You are almost certainly in the former West.';
+        why.textContent='These are West Berlin markers. Remember the shape of the thing: West Berlin was an island inside East Germany, not the western half of a normal city.';
+      } else if(score<0){
+        badge.textContent='Probably West'; verdict.textContent='The signals lean West, but softly.';
+        why.textContent='Nothing here is decisive yet. The crossing figure is the quickest check if there is a junction nearby.';
+      } else {
+        badge.textContent='Unclear'; verdict.textContent='The signals cancel out.';
+        why.textContent='You have a mix, which happens near the old border and in the rebuilt centre. Look down for cobblestones and up at the next crossing light.';
+      }
+      note.innerHTML='<strong>The honest limit:</strong> these are signals, not proof. Berlin was rebuilt heavily on both sides, so soft tells like housing type can mislead. For a definite answer, use the interactive map that reads the actual 1989 survey line, accurate to within a few metres.';
+    }
+
+    document.getElementById('st-foot').innerHTML=
+      'The Wall ran 155 kilometres around West Berlin, so the border is a loop rather than a line down the middle. '+
+      '<a href="https://www.berlinwalk.com/post/where-was-the-berlin-wall-interactive-map" target="_blank" rel="noopener">Check any address on the map ›</a>';
+
+    render();
+  })();
+  </script>
+</div>
+</body>
+</html>
