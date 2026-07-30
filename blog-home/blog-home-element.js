@@ -1,7 +1,7 @@
 const BW_BLOG_HOME_DATA_URL = (() => {
   const script = document.currentScript;
   const base = script && script.src ? script.src : window.location.href;
-  return new URL('./data.json?v=20260727-featured-listings', base).href;
+  return new URL('./data.json?v=20260730-featured-listings', base).href;
 })();
 
 const BW_BLOG_HOME_FALLBACK = {
@@ -55,7 +55,7 @@ const BW_BLOG_HOME_FALLBACK = {
       title: 'Where Was the Berlin Wall? An Interactive Map of East and West in 1989',
       url: 'https://www.berlinwalk.com/post/where-was-the-berlin-wall-interactive-map',
       category: 'Berlin History',
-      readTime: '7 min read',
+      readTime: '8 min read',
       summary: 'The Berlin Wall ran 155 kilometers around West Berlin. Tap any point on this interactive map to see exactly where it stood and which side an address was on in 1989.',
       image: 'https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_6f4f6d714c71713574696f~mv2.jpg',
       alt: 'Where Was the Berlin Wall? An Interactive Map of East and West in 1989'
