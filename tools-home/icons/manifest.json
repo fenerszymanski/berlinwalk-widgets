@@ -2392,5 +2392,16 @@
     "png512": "tools-home/icons/reichstag-slot-window.png",
     "png160": "tools-home/icons/reichstag-slot-window-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_1aa39963e463458ca47c0030445d3597~mv2.png"
+  },
+  {
+    "slug": "lights-route-order",
+    "title": "Festival of Lights: How Far Will You Get?",
+    "category": "Discovery",
+    "model": "Google Flow (Nano Banana Pro)",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "sourceSheet": "tools-home/icons/_src/google-flow-20260730/lights-route-order/source-1k.jpeg",
+    "png512": "tools-home/icons/lights-route-order.png",
+    "png160": "tools-home/icons/lights-route-order-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_5c4e01218dbe43f1aa0189039c5462bf~mv2.png"
   }
 ]
