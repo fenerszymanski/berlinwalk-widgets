@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Festival of Lights Berlin: How Far Will You Get? | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-lights-route">
+  <style>
+    #bw-lights-route{
+      --bw-green:#1B5E20; --bw-green-dark:#164a1a; --bw-yellow:#FFE600;
+      --bw-lime:#7CB342; --bw-border:#DCE8C8; --bw-text:#212121;
+      --bw-muted:#4E5A4E; --bw-white:#FFFFFF; --bw-lime-soft:#F2F8E8; --bw-red:#E63946;
+      color:var(--bw-text);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      max-width:720px; margin:0 auto; padding:2px;
+    }
+    #bw-lights-route *{box-sizing:border-box;}
+    .lr-card{border:1px solid var(--bw-border); border-radius:16px; background:var(--bw-white);
+      overflow:hidden; box-shadow:0 1px 2px rgba(20,74,26,.05);}
+    .lr-head{background:var(--bw-green); color:var(--bw-white); padding:16px 18px;}
+    .lr-head h2{margin:0; font-size:1.12rem; line-height:1.25;}
+    .lr-head p{margin:5px 0 0; font-size:.86rem; color:#dCE8CF;}
+    .lr-body{padding:16px;}
+
+    .lr-label{font-size:.78rem; font-weight:800; letter-spacing:.5px; text-transform:uppercase;
+      color:var(--bw-muted); margin:0 0 8px;}
+    .lr-row{display:flex; gap:7px; flex-wrap:wrap; margin-bottom:16px;}
+    .lr-chip{border:1.5px solid var(--bw-border); background:var(--bw-white); color:var(--bw-text);
+      border-radius:999px; padding:8px 13px; font-size:.85rem; font-weight:700; cursor:pointer;
+      font-family:inherit; transition:border-color .12s, background .12s;}
+    .lr-chip:hover{border-color:var(--bw-lime); background:var(--bw-lime-soft);}
+    .lr-chip[aria-pressed="true"]{background:var(--bw-green); color:var(--bw-white); border-color:var(--bw-green);}
+
+    .lr-summary{border:1px solid var(--bw-border); border-radius:14px; background:var(--bw-lime-soft);
+      padding:13px 14px; margin-bottom:14px;}
+    .lr-verdict{font-size:.74rem; font-weight:800; letter-spacing:.6px; text-transform:uppercase;
+      border-radius:6px; padding:3px 8px; display:inline-block; color:var(--bw-green); background:var(--bw-yellow);}
+    .lr-verdict.warn{background:var(--bw-red); color:var(--bw-white);}
+    .lr-headline{margin:9px 0 3px; font-size:1.06rem; font-weight:800; line-height:1.25;}
+    .lr-sub{font-size:.9rem; line-height:1.5; margin:0; color:var(--bw-text);}
+
+    .lr-stops{list-style:none; margin:0; padding:0;}
+    .lr-stop{display:flex; gap:12px; padding:11px 0; border-top:1px solid var(--bw-border);}
+    .lr-stop:first-child{border-top:none;}
+    .lr-time{flex:0 0 62px; font-variant-numeric:tabular-nums; font-weight:800; color:var(--bw-green); font-size:.95rem;}
+    .lr-what{flex:1;}
+    .lr-name{font-weight:800; font-size:.98rem; line-height:1.25;}
+    .lr-detail{font-size:.86rem; color:var(--bw-muted); line-height:1.45; margin-top:2px;}
+    .lr-stop.cut .lr-time, .lr-stop.cut .lr-name{color:var(--bw-muted); text-decoration:line-through;}
+    .lr-stop.cut .lr-detail{color:var(--bw-red); text-decoration:none;}
+
+    .lr-tip{border-top:1px solid var(--bw-border); margin-top:12px; padding-top:11px;
+      font-size:.86rem; line-height:1.5; color:var(--bw-muted);}
+    .lr-tip strong{color:var(--bw-text);}
+    .lr-foot{padding:12px 16px 15px; font-size:.8rem; color:var(--bw-muted); border-top:1px solid var(--bw-border);}
+    .lr-foot a{color:var(--bw-green); font-weight:700; text-decoration:none;}
+    .lr-foot a:hover{text-decoration:underline;}
+    @media (max-width:420px){ .lr-head h2{font-size:1.02rem;} .lr-time{flex-basis:54px; font-size:.88rem;} }
+  </style>
+
+  <div class="lr-card">
+    <div class="lr-head">
+      <h2>Festival of Lights: how far along the route will you actually get?</h2>
+      <p>The lights run 19:00 to 23:00, and the good walk is about 5 km. Set when you start and how long you want to be out, and see where the evening ends.</p>
+    </div>
+
+    <div class="lr-body">
+      <p class="lr-label">What time do you start?</p>
+      <div class="lr-row" id="lr-start" role="group" aria-label="Start time"></div>
+
+      <p class="lr-label">How long do you want to be out?</p>
+      <div class="lr-row" id="lr-budget" role="group" aria-label="Time available"></div>
+
+      <div class="lr-summary">
+        <span class="lr-verdict" id="lr-verdict"></span>
+        <div class="lr-headline" id="lr-headline"></div>
+        <p class="lr-sub" id="lr-sub"></p>
+      </div>
+
+      <ul class="lr-stops" id="lr-stops"></ul>
+      <div class="lr-tip" id="lr-tip"></div>
+    </div>
+
+    <div class="lr-foot" id="lr-foot"></div>
+  </div>
+
+  <script>
+  (function(){
+    // Route, timings and locations come from the published BerlinWalk Festival of
+    // Lights guide, which sources the official festival programme preview and
+    // visitBerlin. Individual artworks and the final map can still change.
+    var LIGHTS_END = 23*60; // 23:00, the standard end of the lighting window
+    var STOPS = [
+      {n:'Alexanderplatz: TV Tower and St. Mary\'s Church', walk:0,  dwell:15,
+       d:'Easy to reach and right next to the first confirmed locations. St. Mary\'s is one of the oldest surviving churches in the city.'},
+      {n:'Nikolai Quarter', walk:8, dwell:10,
+       d:'The reconstructed old town East Berlin rebuilt in the 1980s. Quick stop, then keep moving west.'},
+      {n:'Berlin Cathedral and Museum Island', walk:8, dwell:15,
+       d:'Usually the most satisfying photo stop: big, detailed and visible across the open Lustgarten. Slow down properly here.'},
+      {n:'Bebelplatz cluster', walk:10, dwell:20,
+       d:'Humboldt University, the State Opera, Saint Hedwig\'s Cathedral, Hotel de Rome and Behren Palais. Projections work from several angles.'},
+      {n:'Brandenburg Gate', walk:15, dwell:15,
+       d:'The classic, and where the crowds get serious. Better as a reward after the calmer eastern half than as a start.'},
+      {n:'Potsdamer Platz', walk:12, dwell:20,
+       d:'P5, The Ritz-Carlton, Kollhoff Tower and Forum Tower sit close together. Modern Berlin, a different mood from the old centre.'}
+    ];
+    var STARTS=[{v:19*60,l:'19:00'},{v:19*60+15,l:'19:15'},{v:19*60+30,l:'19:30'},{v:20*60,l:'20:00'},{v:20*60+30,l:'20:30'},{v:21*60,l:'21:00'}];
+    var BUDGETS=[{v:60,l:'About an hour'},{v:90,l:'90 minutes'},{v:150,l:'The whole walk'}];
+    var state={start:19*60+15, budget:150};
+
+    function hhmm(m){ var h=Math.floor(m/60), x=m%60; return h+':'+(x<10?'0':'')+x; }
+    function el(id){ return document.getElementById(id); }
+
+    function build(){
+      var t=state.start, out=[], reached=0;
+      var limit = Math.min(state.start + state.budget, LIGHTS_END);
+      for(var i=0;i<STOPS.length;i++){
+        var s=STOPS[i];
+        t += s.walk;
+        var arrive=t;
+        var leave=t+s.dwell;
+        var fits = leave <= limit;
+        out.push({s:s, arrive:arrive, leave:leave, fits:fits});
+        if(fits) reached=i+1;
+        t = leave;
+      }
+      return {out:out, reached:reached, limit:limit, endsAt:out[out.length-1].leave};
+    }
+
+    function render(){
+      var r=build();
+      var list=el('lr-stops'); list.innerHTML='';
+      r.out.forEach(function(row){
+        var li=document.createElement('li');
+        li.className='lr-stop'+(row.fits?'':' cut');
+        var time=document.createElement('div'); time.className='lr-time'; time.textContent=hhmm(row.arrive);
+        var what=document.createElement('div'); what.className='lr-what';
+        var name=document.createElement('div'); name.className='lr-name'; name.textContent=row.s.n;
+        var det=document.createElement('div'); det.className='lr-detail';
+        det.textContent = row.fits ? row.s.d
+          : (row.arrive >= LIGHTS_END ? 'The lights are off by the time you would arrive.' : 'Past the time you said you have. Save this one for another night.');
+        what.appendChild(name); what.appendChild(det);
+        li.appendChild(time); li.appendChild(what); list.appendChild(li);
+      });
+
+      var v=el('lr-verdict'), h=el('lr-headline'), sub=el('lr-sub'), tip=el('lr-tip');
+      var last = r.out[r.reached-1];
+      if(r.reached === STOPS.length){
+        v.textContent='Whole route'; v.className='lr-verdict';
+        h.textContent='You get the full walk, finishing around '+hhmm(r.endsAt)+'.';
+        sub.textContent='About 4.5 to 5 km with the stops, which is the pace the route is built for. Starting between 19:15 and 19:45 avoids the switch-on crush and still leaves room before the lights go off at 23:00.';
+      } else if(r.reached === 0){
+        v.textContent='Too late'; v.className='lr-verdict warn';
+        h.textContent='There is not enough light time left for the walk.';
+        sub.textContent='The lighting window ends at 23:00. Pick an earlier start, or treat tonight as one or two stops rather than a route.';
+      } else {
+        v.textContent='Partial route'; v.className='lr-verdict warn';
+        h.textContent='You reach '+last.s.n.replace(/:.*/,'')+', around '+hhmm(last.leave)+'.';
+        sub.textContent='That is '+r.reached+' of '+STOPS.length+' clusters. The route is designed to be cut from the end, so this still works as an evening. Do not rush it into a checklist.';
+      }
+
+      var tips=[];
+      if(r.reached < STOPS.length && r.reached > 0){
+        tips.push('<strong>If you want the west end anyway:</strong> take the U5 from Alexanderplatz to Unter den Linden and start at the Bebelplatz cluster instead, or walk the Brandenburg Gate to Potsdamer Platz leg by U-Bahn or S-Bahn when your legs go.');
+      }
+      if(state.start <= 19*60){
+        tips.push('<strong>19:00 is the switch-on crush.</strong> I would start 19:15 to 19:45 instead: the lights have settled and the first wave has moved on.');
+      }
+      tips.push('<strong>Pick your night.</strong> Sunday to Thursday is noticeably calmer. Friday and Saturday get heavy around the Gate, Bebelplatz and Potsdamer Platz.');
+      tip.innerHTML = tips.join(' ');
+    }
+
+    function chips(id, items, key){
+      var wrap=el(id);
+      items.forEach(function(it){
+        var b=document.createElement('button');
+        b.type='button'; b.className='lr-chip'; b.textContent=it.l;
+        b.setAttribute('aria-pressed', String(state[key]===it.v));
+        b.addEventListener('click', function(){
+          state[key]=it.v;
+          Array.prototype.forEach.call(wrap.children,function(c){c.setAttribute('aria-pressed','false');});
+          b.setAttribute('aria-pressed','true');
+          render();
+        });
+        wrap.appendChild(b);
+      });
+    }
+    chips('lr-start', STARTS, 'start');
+    chips('lr-budget', BUDGETS, 'budget');
+
+    el('lr-foot').innerHTML='Festival of Lights runs 9 to 18 October 2026, normally 19:00 to 23:00, though individual illuminations vary and the final map can still change. '+
+      '<a href="https://festival-of-lights.de/en/" target="_blank" rel="noopener">Check the official programme ›</a>';
+
+    render();
+  })();
+  </script>
+</div>
+</body>
+</html>
