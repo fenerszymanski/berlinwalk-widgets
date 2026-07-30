@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "slug": "berlin-sights-near-alexanderplatz-walking-distance",
+  "key": "berlin-sights-near-alexanderplatz-walking-distance",
+  "config": {
+    "title": "Sights Near Alexanderplatz: FAQ",
+    "items": [
+      {
+        "q": "What is within walking distance of Alexanderplatz?",
+        "a": "Almost the entire historic core of central Berlin. Within five minutes are the World Clock, the TV Tower, St. Mary's Church and the Rotes Rathaus. Within fifteen minutes are Museum Island, the Berliner Dom and the Spree. Within twenty five minutes are Unter den Linden, the Brandenburg Gate and the Reichstag."
+      },
+      {
+        "q": "How far is the Brandenburg Gate from Alexanderplatz on foot?",
+        "a": "About 2 to 2.5 kilometres, or 30 to 40 minutes of steady walking, and closer to two or three hours if you stop and look at things. The route is flat the whole way and passes most of the central sights, so the walk itself is part of the sightseeing."
+      },
+      {
+        "q": "Is Alexanderplatz a good area to stay in Berlin?",
+        "a": "As a walking base, yes. It is a major transport hub so you can arrive and leave from anywhere, and it sits at the edge of the historic centre, so almost everything a first-time visitor wants to see is a short walk west. The square itself is functional rather than charming, but the walk out only gets prettier."
+      },
+      {
+        "q": "Do I need public transport to see central Berlin from Alexanderplatz?",
+        "a": "No. You can reach the World Clock, the TV Tower, Museum Island, Unter den Linden and the Brandenburg Gate entirely on foot in an afternoon, on flat ground with benches and cafés along the way. Public transport is only worth it for sights outside the central core."
+      },
+      {
+        "q": "Was Alexanderplatz in East or West Berlin?",
+        "a": "East Berlin. Alexanderplatz was in the Soviet sector and became a showcase square of the German Democratic Republic, which is why the World Clock and the TV Tower stand there. Most of the historic sights within walking distance were also on the East side of the divide."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is within walking distance of Alexanderplatz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Almost the entire historic core of central Berlin. Within five minutes are the World Clock, the TV Tower, St. Mary's Church and the Rotes Rathaus. Within fifteen minutes are Museum Island, the Berliner Dom and the Spree. Within twenty five minutes are Unter den Linden, the Brandenburg Gate and the Reichstag."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How far is the Brandenburg Gate from Alexanderplatz on foot?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "About 2 to 2.5 kilometres, or 30 to 40 minutes of steady walking, and closer to two or three hours if you stop and look at things. The route is flat the whole way and passes most of the central sights, so the walk itself is part of the sightseeing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Alexanderplatz a good area to stay in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "As a walking base, yes. It is a major transport hub so you can arrive and leave from anywhere, and it sits at the edge of the historic centre, so almost everything a first-time visitor wants to see is a short walk west. The square itself is functional rather than charming, but the walk out only gets prettier."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need public transport to see central Berlin from Alexanderplatz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. You can reach the World Clock, the TV Tower, Museum Island, Unter den Linden and the Brandenburg Gate entirely on foot in an afternoon, on flat ground with benches and cafés along the way. Public transport is only worth it for sights outside the central core."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was Alexanderplatz in East or West Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "East Berlin. Alexanderplatz was in the Soviet sector and became a showcase square of the German Democratic Republic, which is why the World Clock and the TV Tower stand there. Most of the historic sights within walking distance were also on the East side of the divide."
+        }
+      }
+    ]
+  }
+}

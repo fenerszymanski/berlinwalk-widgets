@@ -3237,5 +3237,46 @@
       "**The Wall geometry comes from the Berlin Open Data Portal,** the city's own surveying records, so it is accurate to within a few metres.",
       "**The path is still readable on the ground.** A 1.3 kilometre double row of cobblestones marks the outer Wall line through the central city."
     ]
+  },
+  "berlin-wall-in-mitte-city-centre": {
+    "title": "The Berlin Wall in Mitte: Quick Summary",
+    "icon": "🧱",
+    "kicker": "BERLINWALK.COM • DIVIDED BERLIN",
+    "items": [
+      "**The Wall runs straight through central Berlin,** not just through Bernauer Strasse or the East Side Gallery, but almost nobody notices it.",
+      "**What survives in the centre is the trace, not the Wall:** a 1.3 kilometre double row of cobblestones with bronze plaques reading Berliner Mauer 1961 to 1989.",
+      "**The line crosses places you already visit:** near the Reichstag and the Spree, at the Brandenburg Gate, at Potsdamer Platz and Checkpoint Charlie.",
+      "**The Brandenburg Gate stood in East Berlin but inside the death strip,** unreachable from either side from 1961 to 1989.",
+      "**The centre lost its Wall fast** because the land became the most valuable in the city; the cobblestone line was laid later so the course would not be lost.",
+      "**For the real thing, go north to Bernauer Strasse,** the one place a full section of the border system still stands.",
+      "**My move: pair a short line-spotting walk in Mitte with one proper stop at the Bernauer memorial** for the most honest picture on foot."
+    ]
+  },
+  "berlin-wall-map-overlay-where-you-are-standing": {
+    "title": "Berlin Wall Map Overlay: Quick Summary",
+    "icon": "🗺️",
+    "kicker": "BERLINWALK.COM • DIVIDED BERLIN",
+    "items": [
+      "**An overlay puts the 1989 border line on top of the present-day city** so you can read any spot in seconds.",
+      "**A good overlay tells you three things:** which side a point was on, how far it sat from the fortification, and whether it counts as on the Wall itself.",
+      "**Tap your location, read the side, check the distance to the line.** A point 400 metres away felt normal; a point 20 metres away lived with a wall at the end of the street.",
+      "**Anything within 25 metres of the line reads as on the Wall itself,** because at that range the boundary and the real fortification overlap.",
+      "**There is no Berlin Wall Street View** because the Wall is gone in almost every central spot; the overlay tells you where to point your own eyes instead.",
+      "**My move: check your hotel before you arrive.** If it comes back West, your daily walk into the centre crosses a border that did not exist for 28 years."
+    ]
+  },
+  "berlin-sights-near-alexanderplatz-walking-distance": {
+    "title": "Sights Near Alexanderplatz: Quick Summary",
+    "icon": "🧭",
+    "kicker": "BERLINWALK.COM • BERLIN ON FOOT",
+    "items": [
+      "**Alexanderplatz is not pretty, but it is the best base for a first walk,** because the historic core sits within a short walk to the west.",
+      "**Five minutes away:** the World Clock, the TV Tower, St. Mary's Church and the Rotes Rathaus.",
+      "**Fifteen minutes away:** Museum Island and the Berliner Dom, the Spree riverbank, and the Nikolaiviertel old town.",
+      "**Twenty five minutes away:** Unter den Linden, the Brandenburg Gate and the Reichstag dome.",
+      "**Alexanderplatz to the Brandenburg Gate is about 2 to 2.5 kilometres,** 30 to 40 minutes of walking, flat the whole way, with benches, cafés and toilets.",
+      "**The Brandenburg Gate stood in East Berlin,** which surprises almost everyone.",
+      "**My move: do not try to enter everything.** Walk the free route first and see what you actually want to go back into."
+    ]
   }
 }

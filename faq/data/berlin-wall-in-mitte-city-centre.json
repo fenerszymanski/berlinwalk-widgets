@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "slug": "berlin-wall-in-mitte-city-centre",
+  "key": "berlin-wall-in-mitte-city-centre",
+  "config": {
+    "title": "The Berlin Wall in Mitte: FAQ",
+    "items": [
+      {
+        "q": "Can you still see the Berlin Wall in the city centre?",
+        "a": "Very little of the Wall itself still stands in the centre. What you can see is its course, marked by a 1.3 kilometre double row of cobblestones set into the streets, with bronze plaques reading Berliner Mauer 1961 to 1989. For a full standing section you need to go north to the Bernauer Strasse memorial."
+      },
+      {
+        "q": "Where does the Berlin Wall line cross central Berlin?",
+        "a": "Walking north to south through Mitte, the border touches Bernauer Strasse and Nordbahnhof, the Spree near the Reichstag, the Brandenburg Gate, Potsdamer Platz, and Checkpoint Charlie. Most of these are already on a normal sightseeing route through the centre."
+      },
+      {
+        "q": "Was the Brandenburg Gate in East or West Berlin?",
+        "a": "The Brandenburg Gate stood on East Berlin territory, but the Wall ran in front of it on the western side. From 1961 to 1989 the Gate sat inside the death strip and could not be reached from either side."
+      },
+      {
+        "q": "Why is so little of the Wall left in the centre?",
+        "a": "The demolition in 1990 and 1991 was fast and thorough because the land the Wall sat on, right between the two rejoining halves of the city, suddenly became the most valuable in Berlin. The cobblestone line was laid deliberately afterwards so the course would not be lost."
+      },
+      {
+        "q": "How do I know which side of the Wall a spot in Mitte was on?",
+        "a": "Use an interactive Berlin Wall map. Tap any point and it returns East Berlin, West Berlin, or on the Wall itself, along with the distance to the former fortification line, using the city's own survey records."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can you still see the Berlin Wall in the city centre?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Very little of the Wall itself still stands in the centre. What you can see is its course, marked by a 1.3 kilometre double row of cobblestones set into the streets, with bronze plaques reading Berliner Mauer 1961 to 1989. For a full standing section you need to go north to the Bernauer Strasse memorial."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where does the Berlin Wall line cross central Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Walking north to south through Mitte, the border touches Bernauer Strasse and Nordbahnhof, the Spree near the Reichstag, the Brandenburg Gate, Potsdamer Platz, and Checkpoint Charlie. Most of these are already on a normal sightseeing route through the centre."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was the Brandenburg Gate in East or West Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Brandenburg Gate stood on East Berlin territory, but the Wall ran in front of it on the western side. From 1961 to 1989 the Gate sat inside the death strip and could not be reached from either side."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is so little of the Wall left in the centre?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The demolition in 1990 and 1991 was fast and thorough because the land the Wall sat on, right between the two rejoining halves of the city, suddenly became the most valuable in Berlin. The cobblestone line was laid deliberately afterwards so the course would not be lost."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I know which side of the Wall a spot in Mitte was on?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use an interactive Berlin Wall map. Tap any point and it returns East Berlin, West Berlin, or on the Wall itself, along with the distance to the former fortification line, using the city's own survey records."
+        }
+      }
+    ]
+  }
+}

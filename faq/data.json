@@ -7679,5 +7679,76 @@
         "a": "Usually not for a short trip. The Deutschlandticket is €63 a month and is a subscription rather than a holiday ticket, with a cancellation deadline to manage. It makes sense only for long stays or very transport-heavy plans that include regional day trips, the airport and lots of riding. For a normal two- or three-day Berlin visit, ordinary Berlin tickets or a tourist card are simpler."
       }
     ]
+  },
+  "berlin-wall-in-mitte-city-centre": {
+    "title": "The Berlin Wall in Mitte: FAQ",
+    "items": [
+      {
+        "q": "Can you still see the Berlin Wall in the city centre?",
+        "a": "Very little of the Wall itself still stands in the centre. What you can see is its course, marked by a 1.3 kilometre double row of cobblestones set into the streets, with bronze plaques reading Berliner Mauer 1961 to 1989. For a full standing section you need to go north to the Bernauer Strasse memorial."
+      },
+      {
+        "q": "Where does the Berlin Wall line cross central Berlin?",
+        "a": "Walking north to south through Mitte, the border touches Bernauer Strasse and Nordbahnhof, the Spree near the Reichstag, the Brandenburg Gate, Potsdamer Platz, and Checkpoint Charlie. Most of these are already on a normal sightseeing route through the centre."
+      },
+      {
+        "q": "Was the Brandenburg Gate in East or West Berlin?",
+        "a": "The Brandenburg Gate stood on East Berlin territory, but the Wall ran in front of it on the western side. From 1961 to 1989 the Gate sat inside the death strip and could not be reached from either side."
+      },
+      {
+        "q": "Why is so little of the Wall left in the centre?",
+        "a": "The demolition in 1990 and 1991 was fast and thorough because the land the Wall sat on, right between the two rejoining halves of the city, suddenly became the most valuable in Berlin. The cobblestone line was laid deliberately afterwards so the course would not be lost."
+      },
+      {
+        "q": "How do I know which side of the Wall a spot in Mitte was on?",
+        "a": "Use an interactive Berlin Wall map. Tap any point and it returns East Berlin, West Berlin, or on the Wall itself, along with the distance to the former fortification line, using the city's own survey records."
+      }
+    ]
+  },
+  "berlin-wall-map-overlay-where-you-are-standing": {
+    "title": "Berlin Wall Map Overlay: FAQ",
+    "items": [
+      {
+        "q": "What does a Berlin Wall map overlay show?",
+        "a": "It places the 1989 border line on top of the present-day map. A good overlay tells you which side of the Wall a specific point was on, East, West, or on the border itself, and how far that point sat from the actual fortification, accurate to within a few metres using the city's survey records."
+      },
+      {
+        "q": "Is there a Berlin Wall Google Street View?",
+        "a": "No, because the Wall is gone in almost every central location, so there is nothing standing to see in a street view. An overlay is more useful for a visit: it tells you where the line was so you can stand on the spot and look for the cobblestone trace and bronze plaques yourself."
+      },
+      {
+        "q": "How do I use the overlay while walking in Berlin?",
+        "a": "Tap your current location or type a street, read whether it was East or West, check the distance to the line, and watch for the on the Wall itself result within 25 metres of the border. It takes about ten seconds per spot and turns the map from a picture into a tool."
+      },
+      {
+        "q": "How accurate are these Wall overlays?",
+        "a": "The reliable ones build the border line from the city's own surveying records rather than drawing it by hand, so they are accurate to within a few metres. That is why they can flag any point within 25 metres of the line as on the Wall itself, where the boundary and the real fortification overlap."
+      }
+    ]
+  },
+  "berlin-sights-near-alexanderplatz-walking-distance": {
+    "title": "Sights Near Alexanderplatz: FAQ",
+    "items": [
+      {
+        "q": "What is within walking distance of Alexanderplatz?",
+        "a": "Almost the entire historic core of central Berlin. Within five minutes are the World Clock, the TV Tower, St. Mary's Church and the Rotes Rathaus. Within fifteen minutes are Museum Island, the Berliner Dom and the Spree. Within twenty five minutes are Unter den Linden, the Brandenburg Gate and the Reichstag."
+      },
+      {
+        "q": "How far is the Brandenburg Gate from Alexanderplatz on foot?",
+        "a": "About 2 to 2.5 kilometres, or 30 to 40 minutes of steady walking, and closer to two or three hours if you stop and look at things. The route is flat the whole way and passes most of the central sights, so the walk itself is part of the sightseeing."
+      },
+      {
+        "q": "Is Alexanderplatz a good area to stay in Berlin?",
+        "a": "As a walking base, yes. It is a major transport hub so you can arrive and leave from anywhere, and it sits at the edge of the historic centre, so almost everything a first-time visitor wants to see is a short walk west. The square itself is functional rather than charming, but the walk out only gets prettier."
+      },
+      {
+        "q": "Do I need public transport to see central Berlin from Alexanderplatz?",
+        "a": "No. You can reach the World Clock, the TV Tower, Museum Island, Unter den Linden and the Brandenburg Gate entirely on foot in an afternoon, on flat ground with benches and cafés along the way. Public transport is only worth it for sights outside the central core."
+      },
+      {
+        "q": "Was Alexanderplatz in East or West Berlin?",
+        "a": "East Berlin. Alexanderplatz was in the Soviet sector and became a showcase square of the German Democratic Republic, which is why the World Clock and the TV Tower stand there. Most of the historic sights within walking distance were also on the East side of the divide."
+      }
+    ]
   }
 }
