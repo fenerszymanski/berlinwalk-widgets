@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Berlin Tour, Minute by Minute | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-tour-scrub">
+  <style>
+    #bw-tour-scrub{
+      --bw-green:#1B5E20; --bw-green-dark:#164a1a; --bw-yellow:#FFE600;
+      --bw-lime:#7CB342; --bw-border:#DCE8C8; --bw-text:#212121;
+      --bw-muted:#4E5A4E; --bw-white:#FFFFFF; --bw-lime-soft:#F2F8E8;
+      color:var(--bw-text);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      max-width:720px; margin:0 auto; padding:2px;
+    }
+    #bw-tour-scrub *{box-sizing:border-box;}
+    .ts-card{
+      border:1px solid var(--bw-border); border-radius:16px; background:var(--bw-white);
+      overflow:hidden; box-shadow:0 1px 2px rgba(20,74,26,.05);
+    }
+    .ts-head{background:var(--bw-green); color:var(--bw-white); padding:16px 18px;}
+    .ts-head h2{margin:0; font-size:1.12rem; line-height:1.25; letter-spacing:.1px;}
+    .ts-head p{margin:5px 0 0; font-size:.86rem; color:#dCE8CF;}
+    .ts-body{padding:16px 16px 6px;}
+
+    /* clock + progress */
+    .ts-clockrow{display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-bottom:12px;}
+    .ts-clock{font-variant-numeric:tabular-nums; font-weight:800; font-size:1.7rem; color:var(--bw-green); line-height:1;}
+    .ts-clock small{font-size:.9rem; color:var(--bw-muted); font-weight:600;}
+    .ts-of{font-size:.82rem; color:var(--bw-muted); font-weight:600;}
+
+    /* route ribbon */
+    .ts-ribbon{position:relative; height:38px; margin:2px 4px 6px;}
+    .ts-track{position:absolute; top:17px; left:0; right:0; height:4px; border-radius:4px; background:var(--bw-border);}
+    .ts-fill{position:absolute; top:17px; left:0; height:4px; border-radius:4px; background:var(--bw-lime); width:0;}
+    .ts-dots{position:absolute; inset:0; display:flex; justify-content:space-between; align-items:center;}
+    .ts-dot{width:11px; height:11px; border-radius:50%; background:var(--bw-white);
+      border:2.5px solid var(--bw-border); transition:transform .12s ease, border-color .12s ease, background .12s ease; cursor:pointer;}
+    .ts-dot.done{border-color:var(--bw-lime); background:var(--bw-lime);}
+    .ts-dot.active{border-color:var(--bw-green); background:var(--bw-yellow); transform:scale(1.7);}
+
+    /* slider */
+    .ts-slider{width:100%; margin:2px 0 4px; -webkit-appearance:none; appearance:none;
+      height:26px; background:transparent; cursor:pointer;}
+    .ts-slider:focus{outline:none;}
+    .ts-slider::-webkit-slider-runnable-track{height:6px; border-radius:6px;
+      background:linear-gradient(90deg,var(--bw-lime) var(--fillpct,0%),var(--bw-border) var(--fillpct,0%));}
+    .ts-slider::-moz-range-track{height:6px; border-radius:6px; background:var(--bw-border);}
+    .ts-slider::-moz-range-progress{height:6px; border-radius:6px; background:var(--bw-lime);}
+    .ts-slider::-webkit-slider-thumb{-webkit-appearance:none; appearance:none; margin-top:-9px;
+      width:24px; height:24px; border-radius:50%; background:var(--bw-green);
+      border:3px solid var(--bw-white); box-shadow:0 1px 4px rgba(0,0,0,.28);}
+    .ts-slider::-moz-range-thumb{width:22px; height:22px; border-radius:50%; background:var(--bw-green);
+      border:3px solid var(--bw-white); box-shadow:0 1px 4px rgba(0,0,0,.28);}
+
+    /* controls */
+    .ts-ctrls{display:flex; gap:8px; align-items:center; margin:8px 0 12px;}
+    .ts-btn{border:1.5px solid var(--bw-border); background:var(--bw-white); color:var(--bw-green);
+      border-radius:999px; padding:8px 14px; font-size:.86rem; font-weight:700; cursor:pointer; white-space:nowrap;}
+    .ts-btn:hover{border-color:var(--bw-lime); background:var(--bw-lime-soft);}
+    .ts-btn.primary{background:var(--bw-green); color:var(--bw-white); border-color:var(--bw-green);}
+    .ts-btn.primary:hover{background:var(--bw-green-dark);}
+    .ts-hint{font-size:.78rem; color:var(--bw-muted); margin-left:auto;}
+
+    /* stop card */
+    .ts-stop{border:1px solid var(--bw-border); border-radius:14px; background:var(--bw-lime-soft); padding:14px 15px;}
+    .ts-stopnum{display:inline-block; font-size:.72rem; font-weight:800; letter-spacing:.6px; text-transform:uppercase;
+      color:var(--bw-green); background:var(--bw-yellow); border-radius:6px; padding:3px 8px;}
+    .ts-stopname{margin:9px 0 2px; font-size:1.12rem; font-weight:800; color:var(--bw-text); line-height:1.2;}
+    .ts-stopwhere{font-size:.82rem; color:var(--bw-muted); font-weight:600; margin-bottom:8px;}
+    .ts-stophook{font-size:.95rem; line-height:1.55; margin:0;}
+
+    .ts-foot{padding:12px 16px 15px; font-size:.82rem; color:var(--bw-muted); border-top:1px solid var(--bw-border);}
+    .ts-foot a{color:var(--bw-green); font-weight:700; text-decoration:none;}
+    .ts-foot a:hover{text-decoration:underline;}
+
+    @media (max-width:420px){
+      .ts-head h2{font-size:1.02rem;}
+      .ts-clock{font-size:1.45rem;}
+      .ts-dot{width:9px; height:9px; border-width:2px;}
+      .ts-stopname{font-size:1.02rem;}
+    }
+  </style>
+
+  <div class="ts-card">
+    <div class="ts-head">
+      <h2>The Berlin free walking tour, minute by minute</h2>
+      <p>Drag the slider to walk the whole 2-hour route before you book. 13 stops, Alexanderplatz to Hackescher Markt.</p>
+    </div>
+
+    <div class="ts-body">
+      <div class="ts-clockrow">
+        <div class="ts-clock" id="ts-clock">0:00 <small>into the walk</small></div>
+        <div class="ts-of">of about 2 hours</div>
+      </div>
+
+      <div class="ts-ribbon">
+        <div class="ts-track"></div>
+        <div class="ts-fill" id="ts-fill"></div>
+        <div class="ts-dots" id="ts-dots"></div>
+      </div>
+
+      <input class="ts-slider" id="ts-slider" type="range" min="0" max="120" value="0" step="1"
+        aria-label="Minutes into the walking tour">
+
+      <div class="ts-ctrls">
+        <button class="ts-btn primary" id="ts-play" type="button">▶ Play the walk</button>
+        <button class="ts-btn" id="ts-prev" type="button" aria-label="Previous stop">‹ Prev stop</button>
+        <button class="ts-btn" id="ts-next" type="button" aria-label="Next stop">Next stop ›</button>
+        <span class="ts-hint" id="ts-hint">Stop 1 of 13</span>
+      </div>
+
+      <div class="ts-stop">
+        <span class="ts-stopnum" id="ts-num">Stop 0</span>
+        <div class="ts-stopname" id="ts-name">Alexanderplatz</div>
+        <div class="ts-stopwhere" id="ts-where">The World Clock, where we meet</div>
+        <p class="ts-stophook" id="ts-hook"></p>
+      </div>
+    </div>
+
+    <div class="ts-foot" id="ts-foot"></div>
+  </div>
+
+  <script>
+  (function(){
+    var STOPS = [
+      {m:0,   n:"Alexanderplatz", where:"The World Clock, where we meet",
+       hook:"We gather at the World Clock. I explain how a tip-based walk actually works, then we start where East Berlin's showcase square sits right on top of the medieval city."},
+      {m:12,  n:"Rotes Rathaus", where:"Berlin's red-brick city hall",
+       hook:"The red has nothing to do with communism. I show you where Berlin actually began, about 20 metres from here, in a place most visitors walk straight past."},
+      {m:22,  n:"Neptune Fountain and TV Tower", where:"Under the Fernsehturm",
+       hook:"365 metres of socialist ambition, finished in 1969. On a sunny day a cross-shaped reflection lands on the dome, which West Berliners nicknamed the Pope's revenge."},
+      {m:32,  n:"St. Mary's Church", where:"Marienkirche, 700 years old",
+       hook:"One of the oldest buildings in the city, standing in the shadow of the tower. Inside, a medieval painted dance of death has survived every war Berlin threw at it."},
+      {m:42,  n:"Marienviertel", where:"Berlin's oldest quarter",
+       hook:"This is where the real old town was. I explain why Berlin never rebuilt the pretty fairytale version other cities have, and why that is the whole point."},
+      {m:52,  n:"Marx-Engels-Forum", where:"Marx seated, Engels standing",
+       hook:"Berlin argued for years about removing these two after 1990. They are still here. I tell you what was decided, and why the statues now face a different way."},
+      {m:62,  n:"Liebknecht Bridge", where:"The best view on the route",
+       hook:"Almost nobody stops here, and it is the finest view of the walk. The whole of Museum Island opens up in front of you across the Spree."},
+      {m:72,  n:"Humboldt Forum", where:"The rebuilt Prussian palace",
+       hook:"A reconstructed royal palace wrapped around a modern museum. It is the most argued-over building in Berlin, and I think it earns the argument."},
+      {m:82,  n:"Berliner Dom", where:"The Protestant cathedral",
+       hook:"Kaiser Wilhelm's Protestant answer to Rome. It sat as a war ruin for decades under East Germany. Inside, the ceiling holds around 7 million mosaic tiles."},
+      {m:92,  n:"Altes Museum", where:"Neoclassical Museum Island",
+       hook:"The building that turned Berlin into a museum city, and one of the cleanest pieces of neoclassical design anywhere in Europe."},
+      {m:102, n:"Alte Nationalgalerie and Neues Museum", where:"The heart of Museum Island",
+       hook:"Nefertiti lives next door. We walk the edges of the island rather than going in, and I tell you exactly what is worth coming back for on another day."},
+      {m:110, n:"Friedrichsbrücke", where:"A quiet bridge over the Spree",
+       hook:"A calm crossing where the river tells Berlin's whole story, from royal capital to divided city to the place you are standing in now."},
+      {m:120, n:"Hackescher Markt", where:"Where the walk ends",
+       hook:"Where the tour ends and your Berlin begins, in the courtyards and cafés of the coolest corner of the former East. I leave you with a short list of what to do next."}
+    ];
+    var LAST = STOPS.length - 1;
+    var slider = document.getElementById('ts-slider');
+    var fill = document.getElementById('ts-fill');
+    var dotsWrap = document.getElementById('ts-dots');
+    var clock = document.getElementById('ts-clock');
+    var elNum = document.getElementById('ts-num');
+    var elName = document.getElementById('ts-name');
+    var elWhere = document.getElementById('ts-where');
+    var elHook = document.getElementById('ts-hook');
+    var elHint = document.getElementById('ts-hint');
+    var foot = document.getElementById('ts-foot');
+    var playBtn = document.getElementById('ts-play');
+    var prevBtn = document.getElementById('ts-prev');
+    var nextBtn = document.getElementById('ts-next');
+
+    // build dots
+    STOPS.forEach(function(s, i){
+      var d = document.createElement('div');
+      d.className = 'ts-dot';
+      d.setAttribute('role','button');
+      d.setAttribute('tabindex','0');
+      d.setAttribute('aria-label','Stop ' + i + ', ' + s.n);
+      d.addEventListener('click', function(){ goToStop(i); });
+      d.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); goToStop(i); }});
+      dotsWrap.appendChild(d);
+    });
+    var dotEls = Array.prototype.slice.call(dotsWrap.children);
+
+    function currentIndex(min){
+      var idx = 0;
+      for (var i=0;i<STOPS.length;i++){ if (min >= STOPS[i].m) idx = i; }
+      return idx;
+    }
+    function fmt(min){
+      var h = Math.floor(min/60), m = min%60;
+      return h + ':' + (m<10?'0':'') + m;
+    }
+    function render(min){
+      var pct = (min/120)*100;
+      fill.style.width = pct + '%';
+      slider.style.setProperty('--fillpct', pct + '%');
+      clock.innerHTML = fmt(min) + ' <small>into the walk</small>';
+      var idx = currentIndex(min);
+      var s = STOPS[idx];
+      elNum.textContent = 'Stop ' + idx;
+      elName.textContent = s.n;
+      elWhere.textContent = s.where;
+      elHook.textContent = s.hook;
+      elHint.textContent = 'Stop ' + (idx+1) + ' of ' + STOPS.length;
+      dotEls.forEach(function(d,i){
+        d.classList.toggle('active', i===idx);
+        d.classList.toggle('done', i<idx);
+      });
+    }
+    function goToStop(i){
+      stop();
+      slider.value = STOPS[i].m;
+      render(STOPS[i].m);
+    }
+
+    slider.addEventListener('input', function(){ stop(); render(parseInt(slider.value,10)); });
+    prevBtn.addEventListener('click', function(){ goToStop(Math.max(0, currentIndex(parseInt(slider.value,10))-1)); });
+    nextBtn.addEventListener('click', function(){ goToStop(Math.min(LAST, currentIndex(parseInt(slider.value,10))+1)); });
+
+    // play: advance stop to stop, pausing on each
+    var timer = null;
+    function stop(){ if(timer){ clearTimeout(timer); timer=null; playBtn.textContent='▶ Play the walk'; playBtn.classList.add('primary'); } }
+    function play(){
+      playBtn.textContent = '❚❚ Pause';
+      playBtn.classList.remove('primary');
+      function step(){
+        var idx = currentIndex(parseInt(slider.value,10));
+        if (idx >= LAST){ stop(); return; }
+        var next = STOPS[idx+1].m;
+        slider.value = next;
+        render(next);
+        timer = setTimeout(step, 2600);
+      }
+      // if at the end, restart from 0
+      if (currentIndex(parseInt(slider.value,10)) >= LAST){ slider.value = 0; render(0); }
+      timer = setTimeout(step, 900);
+    }
+    playBtn.addEventListener('click', function(){ if(timer) stop(); else play(); });
+
+    foot.innerHTML = 'That is the whole route. Nothing to book blind. ' +
+      '<a href="https://www.berlinwalk.com/free-berlin-walking-tour" target="_blank" rel="noopener">See the next available walk ›</a>';
+
+    render(0);
+  })();
+  </script>
+</div>
+</body>
+</html>
