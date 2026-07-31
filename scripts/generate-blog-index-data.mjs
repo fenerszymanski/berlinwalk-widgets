@@ -207,11 +207,12 @@ const YEAR_REQUIRED_TITLE_SLUGS = new Set([
 const HERO_SLUGS = {
   lead: 'which-berlin-pass-is-worth-it',
   secondary: [
+    'berlin-sights-near-alexanderplatz-walking-distance',
     'vietnamese-food-in-berlin',
     'hamburg-day-trip-from-berlin',
-    'berlin-courtyards-hoefe',
     'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
     'where-was-the-berlin-wall-interactive-map',
+    'berlin-courtyards-hoefe',
     'where-to-eat-late-at-night-in-berlin',
     'reichstag-before-and-after',
     'telling-time-in-german-berlin',
@@ -315,6 +316,7 @@ const REQUIRED_SLUGS = [
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
   'which-berlin-pass-is-worth-it',
+  'berlin-sights-near-alexanderplatz-walking-distance',
   'vietnamese-food-in-berlin',
   'where-to-eat-late-at-night-in-berlin',
   'how-to-get-into-berghain',

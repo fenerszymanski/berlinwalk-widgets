@@ -1,30 +1,36 @@
 const BW_BLOG_HOME_DATA_URL = (() => {
   const script = document.currentScript;
   const base = script && script.src ? script.src : window.location.href;
-  return new URL('./data.json?v=20260730-featured-listings', base).href;
+  return new URL('./data.json?v=20260731-featured-listings', base).href;
 })();
 
 const BW_BLOG_HOME_FALLBACK = {
   featured: {
-    title: 'Which Berlin Pass Is Worth It? WelcomeCard vs CityTourCard vs Museum Pass',
-    url: 'https://www.berlinwalk.com/post/which-berlin-pass-is-worth-it',
-    category: 'Tourist Tips',
-    readTime: '7 min read',
-    label: 'New: compare before you buy',
-    summary: 'WelcomeCard, CityTourCard, Museum Pass or no pass at all? The right Berlin travel card depends on how much you ride and how many museums you enter. Here is the honest comparison, plus a calculator.',
-    image: 'https://static.wixstatic.com/media/5a08a3_b0326b2096aa4099ac5c9928a9131374~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island-berlin-cover.jpg',
-    alt: 'Visitors on Museum Island in Berlin with the Berliner Dom behind'
+    title: 'Berlin Sights Within Walking Distance of Alexanderplatz',
+    url: 'https://www.berlinwalk.com/post/berlin-sights-near-alexanderplatz-walking-distance',
+    category: 'Tour Route',
+    readTime: '3 min read',
+    label: 'New: start near Alexanderplatz',
+    summary: 'Almost the entire historic core of Berlin is a short walk west of Alexanderplatz. Here is what you can reach on foot from the World Clock, sorted by how far you have to walk.',
+    image: 'https://static.wixstatic.com/media/5a08a3_0c1a3060152c463697c671fa4288a9a5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/03-alexanderplatz-ubahn.jpg',
+    alt: 'Alexanderplatz station, where most visitors arrive before walking into central Berlin.'
   },
   miniPosts: [
     {
-      title: 'Vietnamese Food in Berlin: Where to Eat and What to Order',
-      url: 'https://www.berlinwalk.com/post/vietnamese-food-in-berlin',
+      title: 'Which Berlin Pass Is Worth It? WelcomeCard vs CityTourCard vs Museum Pass',
+      url: 'https://www.berlinwalk.com/post/which-berlin-pass-is-worth-it',
       category: 'Tourist Tips',
-      readTime: '5 min read'
+      readTime: '7 min read'
     },
     {
-      title: 'Where to Eat Late at Night in Berlin: What Is Actually Open',
-      url: 'https://www.berlinwalk.com/post/where-to-eat-late-at-night-in-berlin',
+      title: 'What Happens on a Berlin Free Walking Tour',
+      url: 'https://www.berlinwalk.com/post/what-happens-on-a-berlin-free-walking-tour',
+      category: 'Tour Route',
+      readTime: '3 min read'
+    },
+    {
+      title: 'Vietnamese Food in Berlin: Where to Eat and What to Order',
+      url: 'https://www.berlinwalk.com/post/vietnamese-food-in-berlin',
       category: 'Tourist Tips',
       readTime: '5 min read'
     },
@@ -33,12 +39,6 @@ const BW_BLOG_HOME_FALLBACK = {
       url: 'https://www.berlinwalk.com/post/berlin-courtyards-hoefe',
       category: 'Tour Route',
       readTime: '6 min read'
-    },
-    {
-      title: 'Telling Time in German: Why Halb Acht Is 7:30 and How Berlin Says the Rest',
-      url: 'https://www.berlinwalk.com/post/telling-time-in-german-berlin',
-      category: 'German Language',
-      readTime: '9 min read'
     }
   ],
   posts: [
