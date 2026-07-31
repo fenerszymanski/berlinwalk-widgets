@@ -59,7 +59,7 @@
       border:3px solid var(--bw-white); box-shadow:0 1px 4px rgba(0,0,0,.28);}
 
     /* controls */
-    .ts-ctrls{display:flex; gap:8px; align-items:center; margin:8px 0 12px;}
+    .ts-ctrls{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:8px 0 12px;}
     .ts-btn{border:1.5px solid var(--bw-border); background:var(--bw-white); color:var(--bw-green);
       border-radius:999px; padding:8px 14px; font-size:.86rem; font-weight:700; cursor:pointer; white-space:nowrap;}
     .ts-btn:hover{border-color:var(--bw-lime); background:var(--bw-lime-soft);}
@@ -90,7 +90,7 @@
   <div class="ts-card">
     <div class="ts-head">
       <h2>The Berlin free walking tour, minute by minute</h2>
-      <p>Drag the slider to walk the whole 2-hour route before you book. 13 stops, Alexanderplatz to Hackescher Markt.</p>
+      <p>Drag the slider to walk the whole 2-hour route before you book. I stop 11 times and talk about 16 places, Alexanderplatz to Hackescher Markt.</p>
     </div>
 
     <div class="ts-body">
@@ -112,13 +112,13 @@
         <button class="ts-btn primary" id="ts-play" type="button">▶ Play the walk</button>
         <button class="ts-btn" id="ts-prev" type="button" aria-label="Previous stop">‹ Prev stop</button>
         <button class="ts-btn" id="ts-next" type="button" aria-label="Next stop">Next stop ›</button>
-        <span class="ts-hint" id="ts-hint">Stop 1 of 13</span>
+        <span class="ts-hint" id="ts-hint">Stop 1 of 11</span>
       </div>
 
       <div class="ts-stop">
         <span class="ts-stopnum" id="ts-num">Stop 0</span>
-        <div class="ts-stopname" id="ts-name">Alexanderplatz</div>
-        <div class="ts-stopwhere" id="ts-where">The World Clock, where we meet</div>
+        <div class="ts-stopname" id="ts-name">World Clock, Alexanderplatz</div>
+        <div class="ts-stopwhere" id="ts-where">Where we meet</div>
         <p class="ts-stophook" id="ts-hook"></p>
       </div>
     </div>
@@ -128,31 +128,31 @@
 
   <script>
   (function(){
+    // Route confirmed by Yusuf on 2026-07-31: 11 stops covering 16 places.
+    // Earlier versions listed 13 stops and included Marienviertel and Liebknecht
+    // Bridge, which are not stops on the walk. Minute marks are evenly spread over
+    // the two hours; they are the shape of the walk, not a timetable.
     var STOPS = [
-      {m:0,   n:"Alexanderplatz", where:"The World Clock, where we meet",
+      {m:0,   n:"World Clock, Alexanderplatz", where:"Where we meet",
        hook:"We gather at the World Clock. I explain how a tip-based walk actually works, then we start where East Berlin's showcase square sits right on top of the medieval city."},
-      {m:12,  n:"Rotes Rathaus", where:"Berlin's red-brick city hall",
-       hook:"The red has nothing to do with communism. I show you where Berlin actually began, about 20 metres from here, in a place most visitors walk straight past."},
-      {m:22,  n:"Neptune Fountain and TV Tower", where:"Under the Fernsehturm",
+      {m:12,  n:"TV Tower", where:"Under the Fernsehturm",
        hook:"365 metres of socialist ambition, finished in 1969. On a sunny day a cross-shaped reflection lands on the dome, which West Berliners nicknamed the Pope's revenge."},
-      {m:32,  n:"St. Mary's Church", where:"Marienkirche, 700 years old",
+      {m:24,  n:"Rotes Rathaus and Neptune Fountain", where:"Berlin's red-brick city hall",
+       hook:"The red has nothing to do with communism. I show you where Berlin actually began, about 20 metres from here, in a place most visitors walk straight past. The fountain in front of it once stood at the royal palace."},
+      {m:36,  n:"Marienkirche", where:"St. Mary's Church, 700 years old",
        hook:"One of the oldest buildings in the city, standing in the shadow of the tower. Inside, a medieval painted dance of death has survived every war Berlin threw at it."},
-      {m:42,  n:"Marienviertel", where:"Berlin's oldest quarter",
-       hook:"This is where the real old town was. I explain why Berlin never rebuilt the pretty fairytale version other cities have, and why that is the whole point."},
-      {m:52,  n:"Marx-Engels-Forum", where:"Marx seated, Engels standing",
+      {m:48,  n:"Marx-Engels-Forum", where:"Marx seated, Engels standing",
        hook:"Berlin argued for years about removing these two after 1990. They are still here. I tell you what was decided, and why the statues now face a different way."},
-      {m:62,  n:"Liebknecht Bridge", where:"The best view on the route",
-       hook:"Almost nobody stops here, and it is the finest view of the walk. The whole of Museum Island opens up in front of you across the Spree."},
+      {m:60,  n:"The Sanchi Gate", where:"On the Lustgarten side of the Humboldt Forum",
+       hook:"Almost 10 metres of red Main sandstone, a full-size copy of a Buddhist gateway from Sanchi in India, carved in part by stone sculptors from India. Most visitors walk past it without looking up. The reliefs tell stories from the life of the Buddha, and the reason it stands here at all is the argument this whole square is having with itself."},
       {m:72,  n:"Humboldt Forum", where:"The rebuilt Prussian palace",
        hook:"A reconstructed royal palace wrapped around a modern museum. It is the most argued-over building in Berlin, and I think it earns the argument."},
-      {m:82,  n:"Berliner Dom", where:"The Protestant cathedral",
-       hook:"Kaiser Wilhelm's Protestant answer to Rome. It sat as a war ruin for decades under East Germany. Inside, the ceiling holds around 7 million mosaic tiles."},
-      {m:92,  n:"Altes Museum", where:"Neoclassical Museum Island",
-       hook:"The building that turned Berlin into a museum city, and one of the cleanest pieces of neoclassical design anywhere in Europe."},
-      {m:102, n:"Alte Nationalgalerie and Neues Museum", where:"The heart of Museum Island",
-       hook:"Nefertiti lives next door. We walk the edges of the island rather than going in, and I tell you exactly what is worth coming back for on another day."},
-      {m:110, n:"Friedrichsbrücke", where:"A quiet bridge over the Spree",
-       hook:"A calm crossing where the river tells Berlin's whole story, from royal capital to divided city to the place you are standing in now."},
+      {m:84,  n:"Lustgarten, Berliner Dom and Altes Museum", where:"Three things in one square",
+       hook:"Kaiser Wilhelm's Protestant answer to Rome, facing the building that turned Berlin into a museum city, across a lawn that has been a kitchen garden, a parade ground and a Nazi rally space. The Dom sat as a war ruin for decades under East Germany. Its ceiling holds around 7 million mosaic tiles."},
+      {m:96,  n:"Neues Museum, Alte Nationalgalerie and Pergamonmuseum", where:"The heart of Museum Island",
+       hook:"Nefertiti lives here. We walk the edges of the island rather than going in, and I tell you exactly what is worth coming back for. One warning while you plan: the Pergamonmuseum is completely closed for construction, so you see it from the outside only."},
+      {m:108, n:"Friedrichsbrücke", where:"A quiet bridge over the Spree",
+       hook:"A calm crossing where the river tells Berlin's whole story, from royal capital to divided city to the place you are standing in now, with Museum Island opening up beside you."},
       {m:120, n:"Hackescher Markt", where:"Where the walk ends",
        hook:"Where the tour ends and your Berlin begins, in the courtyards and cafés of the coolest corner of the former East. I leave you with a short list of what to do next."}
     ];

@@ -11,7 +11,7 @@
       },
       {
         "q": "How long is the tour and how far do you walk?",
-        "a": "About two hours on foot, covering roughly a kilometre and a half from the World Clock at Alexanderplatz to Hackescher Markt, across thirteen stops. The route is mostly flat and the pace is built for looking rather than marching."
+        "a": "About two hours on foot, covering roughly three kilometres from the World Clock at Alexanderplatz to Hackescher Markt, across eleven stops. The route is mostly flat and the pace is built for looking rather than marching."
       },
       {
         "q": "What do you actually see on the walk?",
@@ -44,7 +44,7 @@
         "name": "How long is the tour and how far do you walk?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "About two hours on foot, covering roughly a kilometre and a half from the World Clock at Alexanderplatz to Hackescher Markt, across thirteen stops. The route is mostly flat and the pace is built for looking rather than marching."
+          "text": "About two hours on foot, covering roughly three kilometres from the World Clock at Alexanderplatz to Hackescher Markt, across eleven stops. The route is mostly flat and the pace is built for looking rather than marching."
         }
       },
       {
