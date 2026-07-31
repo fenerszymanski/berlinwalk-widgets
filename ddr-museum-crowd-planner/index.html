@@ -81,7 +81,7 @@
     </div>
 
     <div class="bw-chart-wrap">
-      <div class="bw-chart-cap"><span>Quiet</span><span>How busy, hour by hour</span><span>Packed</span></div>
+      <div class="bw-chart-cap"><span>Quiet</span><span>How busy it gets, hour by hour</span><span>Packed</span></div>
       <div class="bw-chart" id="bwChart"></div>
       <div class="bw-hours" id="bwHours"></div>
     </div>
@@ -102,7 +102,8 @@
       <span class="bw-fact price">Adult €13.90 · reduced €8.50</span>
       <span class="bw-fact">Allow about 1–1.5 hours</span>
     </div>
-    <p class="bw-note"><b>Book online before you go.</b> It skips the ticket-desk queue, though the real crush is inside the small rooms, not at the till. The DDR Museum is privately run, so a Museum Island ticket or the Museum Pass Berlin does <b>not</b> cover it. Times are typical patterns, not live data.</p>
+    <p class="bw-note"><b>Book online before you go.</b> It skips the ticket-desk queue, though the real crush is inside the small rooms, not at the till. The DDR Museum is privately run, so a Museum Island ticket or the Museum Pass Berlin does <b>not</b> cover it.</p>
+    <p class="bw-note"><b>Where this shape comes from.</b> Nobody publishes hour-by-hour visitor counts for Berlin museums, so this is not measured data and I will not pretend it is. It is my own read of the day from walking this part of Mitte several times a week: when the coaches unload, when the school groups arrive, when the rain pushes everyone indoors. Treat it as a guide's estimate, not a live queue counter.</p>
   </div>
 </div>
 
@@ -140,17 +141,13 @@
 
   function level(v) { return v < 38 ? 'calm' : (v <= 66 ? 'mod' : 'busy'); }
 
-  // Pick the two calmest hours, but only from the opening band (<=11) and evening band (>=18)
-  // so the "check" marks land on the windows I actually recommend.
+  // The two calmest hours in the model, taken from the whole opening window with no
+  // pre-filtering. If the model ever disagrees with the written advice below, the marks
+  // must move, not be pinned to the answer I already wanted.
   function pickWindows(vals) {
-    var picks = [];
-    var open = HOURS.filter(function (h) { return h <= 10; });
-    var eve = HOURS.filter(function (h) { return h >= 19; });
-    open.sort(function (a, b) { return vals[a] - vals[b]; });
-    eve.sort(function (a, b) { return vals[a] - vals[b]; });
-    if (open.length) picks.push(open[0]);
-    if (eve.length) picks.push(eve[0]);
-    return picks;
+    return HOURS.slice()
+      .sort(function (a, b) { return vals[a] - vals[b] || a - b; })
+      .slice(0, 2);
   }
 
   function render() {
