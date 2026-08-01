@@ -3,16 +3,16 @@
   var isBookingService = path.indexOf('/book-berlin-walking-tour/') === 0;
   var isBookingForm = path.indexOf('/booking-form') === 0;
   if (!isBookingService && !isBookingForm) return;
-  var RUNTIME_KEY = '__bwBookNowIntroPatch20260719b';
+  var RUNTIME_KEY = '__bwBookNowIntroPatch20260801a';
   if (window[RUNTIME_KEY]) return;
   window[RUNTIME_KEY] = true;
 
-  var STYLE_ID = 'bw-book-now-intro-patch-css-20260719b';
+  var STYLE_ID = 'bw-book-now-intro-patch-css-20260801a';
   var NUDGE_ID = 'bw-booking-calendar-next-nudge';
   var FORM_CARD_ID = 'bw-booking-form-trust-card';
   var TERMS_HELPER_ID = 'bw-booking-terms-helper';
-  var INTRO_VERSION = 'booking-service-stage-20260719b';
-  var FORM_VERSION = 'booking-form-stage-20260719b';
+  var INTRO_VERSION = 'booking-service-stage-20260801a';
+  var FORM_VERSION = 'booking-form-stage-20260801a';
   var TERMS_LABEL = 'I agree to the free reservation terms listed below.';
   var INTRO_HTML = [
     "<div class='bw-cal-intro' data-bw-booking-intro-version='" + INTRO_VERSION + "'>",
@@ -25,6 +25,10 @@
     "<span class='bw-cal-intro-chip'>About 2 hours</span>",
     "<span class='bw-cal-intro-chip'>World Clock meeting point</span>",
     "<span class='bw-cal-intro-chip'>Guided by Yusuf</span>",
+    '</div>',
+    "<div class='bw-cal-booking-help' role='note'>",
+    "<p>Already booked? Check your confirmation email to change or cancel your booking.</p>",
+    "<p>Need a different date? Change your existing booking from the confirmation email instead of making a second reservation.</p>",
     '</div>',
     '</div>',
   ].join('');
@@ -44,6 +48,9 @@
       'bw-booking-calendar .bw-cal-intro p{color:var(--muted);font-size:15px;font-weight:700;line-height:1.5;margin:0;max-width:640px}',
       'bw-booking-calendar .bw-cal-intro-chips{display:flex;flex-wrap:wrap;gap:7px;min-width:0}',
       'bw-booking-calendar .bw-cal-intro-chip{align-items:center;background:#F8FBF4;border:1px solid #CFE4C8;border-radius:999px;color:var(--green);display:inline-flex;font-size:11px;font-weight:850;line-height:1.15;min-height:30px;padding:7px 10px;white-space:normal}',
+      'bw-booking-calendar .bw-cal-booking-help{background:#F8FBF4;border-left:4px solid #1B5E20;color:#4E5A4E;display:grid;gap:5px;margin:2px 0 4px;max-width:720px;padding:10px 12px}',
+      'bw-booking-calendar .bw-cal-booking-help p{color:inherit;font-size:12px;font-weight:750;line-height:1.45;margin:0}',
+      'bw-booking-calendar .bw-cal-booking-help p+p{border-top:1px solid #DCE8C8;padding-top:5px}',
       'bw-booking-calendar .bw-booking-progress{min-width:0}',
       'bw-booking-calendar .bw-booking-progress ol,#'+FORM_CARD_ID+' .bw-booking-progress ol{display:grid;gap:7px;grid-template-columns:minmax(0,1fr) minmax(0,1fr);list-style:none;margin:0;padding:0}',
       'bw-booking-calendar .bw-booking-progress li,#'+FORM_CARD_ID+' .bw-booking-progress li{align-items:center;background:#F8FBF4;border:1px solid #CFE4C8;border-radius:7px;color:#4E5A4E;column-gap:4px;display:grid;grid-template-columns:minmax(0,1fr) auto;min-width:0;padding:4px 7px;row-gap:2px}',
@@ -76,7 +83,7 @@
       '#' + NUDGE_ID + ' span{display:block;font-size:11px;font-weight:750;line-height:1.35;margin-top:2px}',
       '#' + NUDGE_ID + ' button{background:#FFE600;border:0;border-radius:0;color:#1B5E20;cursor:pointer;font-family:Montserrat,Arial,sans-serif;font-size:12px;font-weight:900;margin-left:auto;min-height:42px;padding:10px 13px;text-transform:uppercase}',
       '@media(max-width:750px){html.bw-booking-funnel-active .bw-booking-stage-section{min-height:calc(100svh - 94px)!important}html.bw-booking-funnel-active .bw-booking-stage-inner{padding:20px 0!important}html.bw-booking-funnel-active .bw-booking-stage-wrap{width:100%!important}}',
-      '@media(max-width:640px){bw-booking-calendar .bw-cal-standalone{padding:18px 16px 26px}bw-booking-calendar .bw-cal-intro h1{font-size:30px;line-height:1.05}bw-booking-calendar .bw-cal-intro p{font-size:14px}bw-booking-calendar .bw-cal-intro-chip{font-size:10.5px;min-height:28px;padding:6px 9px}bw-booking-calendar .bw-booking-progress ol,#'+FORM_CARD_ID+' .bw-booking-progress ol{gap:5px}bw-booking-calendar .bw-booking-progress li,#'+FORM_CARD_ID+' .bw-booking-progress li{padding:4px 6px}html body #'+FORM_CARD_ID+'{margin-bottom:12px;padding:11px 11px}html body #'+FORM_CARD_ID+'>strong{font-size:16px;margin-top:8px}html body #'+FORM_CARD_ID+' p{font-size:11.5px!important}#'+TERMS_HELPER_ID+'{font-size:11.5px;margin:7px 0 4px 32px;padding:8px 10px}html.bw-booking-form-trust-active .bw-booking-form-stack{margin-bottom:6px!important}html.bw-booking-form-trust-active .bw-booking-details-stack,html.bw-booking-form-trust-active .bw-booking-submit-stack{margin-top:6px!important}}',
+      '@media(max-width:640px){bw-booking-calendar .bw-cal-standalone{padding:18px 16px 26px}bw-booking-calendar .bw-cal-intro h1{font-size:30px;line-height:1.05}bw-booking-calendar .bw-cal-intro p{font-size:14px}bw-booking-calendar .bw-cal-intro-chip{font-size:10.5px;min-height:28px;padding:6px 9px}bw-booking-calendar .bw-cal-booking-help{padding:9px 10px}bw-booking-calendar .bw-cal-booking-help p{font-size:11.5px}bw-booking-calendar .bw-booking-progress ol,#'+FORM_CARD_ID+' .bw-booking-progress ol{gap:5px}bw-booking-calendar .bw-booking-progress li,#'+FORM_CARD_ID+' .bw-booking-progress li{padding:4px 6px}html body #'+FORM_CARD_ID+'{margin-bottom:12px;padding:11px 11px}html body #'+FORM_CARD_ID+'>strong{font-size:16px;margin-top:8px}html body #'+FORM_CARD_ID+' p{font-size:11.5px!important}#'+TERMS_HELPER_ID+'{font-size:11.5px;margin:7px 0 4px 32px;padding:8px 10px}html.bw-booking-form-trust-active .bw-booking-form-stack{margin-bottom:6px!important}html.bw-booking-form-trust-active .bw-booking-details-stack,html.bw-booking-form-trust-active .bw-booking-submit-stack{margin-top:6px!important}}',
       '@media(min-width:641px){#' + NUDGE_ID + '{display:none!important}}',
     ].join('');
     if (isNew) document.head.appendChild(style);

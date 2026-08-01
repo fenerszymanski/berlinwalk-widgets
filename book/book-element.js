@@ -827,6 +827,10 @@ class BWBookDetailsElement extends HTMLElement {
                 <summary>How much should I tip?</summary>
                 <p>Whatever the walk was worth to you. For a good 2-hour walk, 10€ per adult is the fair minimum thank-you, 15€ is strong, and 20€+ is generous. Cash is easiest, card works too.</p>
               </details>
+              <details>
+                <summary>Can I change or cancel my booking?</summary>
+                <p>Yes. Open your confirmation email and use the &lsquo;Change my date or time&rsquo; or &lsquo;Cancel my booking&rsquo; button. No account is required. If you cannot find the email, contact us on WhatsApp with your name and booking date.</p>
+              </details>
             </div>
           </div>
         </div>
