@@ -14,7 +14,7 @@
   var FAQ_ID = 'bw-booking-management-faq';
   var INTRO_VERSION = 'booking-service-stage-20260801b';
   var FORM_VERSION = 'booking-form-stage-20260801b';
-  var FAQ_VERSION = 'booking-management-faq-20260801b';
+  var FAQ_VERSION = 'booking-management-faq-20260801c';
   var TERMS_LABEL = 'I agree to the free reservation terms listed below.';
   var INTRO_HTML = [
     "<div class='bw-cal-intro' data-bw-booking-intro-version='" + INTRO_VERSION + "'>",
@@ -41,7 +41,7 @@
     "<h2 id='bw-booking-management-faq-title'>Frequently asked</h2>",
     "<details>",
     "<summary>Can I change or cancel my booking?</summary>",
-    "<p>Yes. Open your confirmation email and use the &#39;Change my date or time&#39; or &#39;Cancel my booking&#39; button. No account is required. If you cannot find the email, contact us on WhatsApp with your name and booking date.</p>",
+    "<p>Yes. Open your confirmation email and use the &#x2018;Change my date or time&#x2019; or &#x2018;Cancel my booking&#x2019; button. No account is required. If you cannot find the email, contact us on WhatsApp with your name and booking date.</p>",
     "</details>",
     "</div>",
     "</section>",
