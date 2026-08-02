@@ -144,8 +144,9 @@ test("Wix height guard collapses the component section and preserves dynamic gri
     visualViewport: null
   };
   let naturalGridRows = "143px 7279.95px 651px";
+  let naturalInnerGridRows = "7279.95px";
   const getComputedStyle = (node) => ({
-    gridTemplateRows: node === grid ? (node.style.gridTemplateRows || naturalGridRows) : "none",
+    gridTemplateRows: node === grid ? (node.style.gridTemplateRows || naturalGridRows) : node === container ? (node.style.gridTemplateRows || naturalInnerGridRows) : "none",
     gridRowStart: node === section ? "2" : "auto"
   });
   class FakeResizeObserver {
@@ -181,16 +182,22 @@ test("Wix height guard collapses the component section and preserves dynamic gri
   assert.equal(host.style.height, "auto");
   assert.equal(container.style.height, "auto");
   assert.equal(section.style.minHeight, "0px");
+  assert.equal(container.style.gridTemplateRows, "auto");
+  assert.equal(container.style.gridAutoRows, "auto");
   assert.equal(grid.style.gridTemplateRows, "143px auto 651px");
   assert.equal(grid.style.height, "auto");
   assert.ok(observed.includes(guardInstance));
   assert.ok(observed.includes(native));
   assert.equal(typeof listeners.get("resize"), "function");
   naturalGridRows = "95px 5090px 1647px";
+  naturalInnerGridRows = "5090px";
   listeners.get("resize")();
+  assert.equal(container.style.gridTemplateRows, "auto");
   assert.equal(grid.style.gridTemplateRows, "95px auto 1647px");
   naturalGridRows = "143px 7279.95px 651px";
+  naturalInnerGridRows = "7279.95px";
   listeners.get("resize")();
+  assert.equal(container.style.gridTemplateRows, "auto");
   assert.equal(grid.style.gridTemplateRows, "143px auto 651px");
 });
 

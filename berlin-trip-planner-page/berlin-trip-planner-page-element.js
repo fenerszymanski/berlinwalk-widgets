@@ -471,6 +471,7 @@
       };
       let ownedGrid = null;
       let ownedGridRows = "";
+      const ownedInnerGridRows = new Map();
       const sync = () => {
         const native = this.querySelector(".bw-v4-native");
         const { host, nodes } = layoutChain();
@@ -491,6 +492,19 @@
         nodes.slice(0, 4).forEach(reset);
         const section = nodes.find((node) => node.tagName === "SECTION" && (node.id.startsWith("comp-") || String(node.className || "").includes("wixui-section")));
         const grid = nodes.find((node) => String(node.className || "").includes("pidtg-container") || node.id === "pidtg");
+        for (const [innerGrid, ownedRows] of ownedInnerGridRows) {
+          if (innerGrid.style.gridTemplateRows === ownedRows) innerGrid.style.gridTemplateRows = "";
+        }
+        ownedInnerGridRows.clear();
+        const innerGrids = nodes.filter((node) => node !== grid && String(node.className || "").includes("max-width-container"));
+        for (const innerGrid of innerGrids) {
+          innerGrid.style.gridAutoRows = "auto";
+          innerGrid.style.height = "auto";
+          innerGrid.style.minHeight = "0px";
+          innerGrid.style.maxHeight = "none";
+          innerGrid.style.gridTemplateRows = "auto";
+          ownedInnerGridRows.set(innerGrid, "auto");
+        }
         if (section) {
           section.style.height = "auto";
           section.style.minHeight = "0px";
