@@ -217,6 +217,8 @@
         if (window.visualViewport) window.visualViewport.removeEventListener("resize", this._gapResizeHandler);
       }
       if (this._gapResizeObserver) this._gapResizeObserver.disconnect();
+      if (this._gapLoadHandler) window.removeEventListener("load", this._gapLoadHandler);
+      if (this._gapFontsHandler && document.fonts) document.fonts.removeEventListener("loadingdone", this._gapFontsHandler);
       if (this._gapTimers) this._gapTimers.forEach((timer) => window.clearTimeout(timer));
     }
 
@@ -439,26 +441,82 @@
     }
 
     _setupWixTopGapGuard() {
-      const sync = () => {
-        const wrapper = this.parentElement;
-        const container = wrapper && wrapper.parentElement;
-        if (wrapper) {
-          wrapper.style.alignSelf = "start";
-          wrapper.style.justifySelf = "stretch";
-          wrapper.style.width = "100%";
-          wrapper.style.maxWidth = "100%";
-          wrapper.style.minWidth = "0";
-          wrapper.style.height = "auto";
-          wrapper.style.overflowX = "clip";
+      const splitGridTracks = (value) => {
+        const tracks = [];
+        let depth = 0;
+        let start = 0;
+        for (let index = 0; index < value.length; index += 1) {
+          const character = value[index];
+          if (character === "(") depth += 1;
+          if (character === ")") depth = Math.max(0, depth - 1);
+          if (/\s/.test(character) && depth === 0) {
+            if (value.slice(start, index).trim()) tracks.push(value.slice(start, index).trim());
+            start = index + 1;
+          }
         }
-        if (container) {
-          container.style.alignItems = "start";
-          container.style.justifyItems = "stretch";
-          container.style.width = "100%";
-          container.style.maxWidth = "100%";
-          container.style.minWidth = "0";
-          container.style.height = "auto";
-          container.style.overflowX = "clip";
+        if (value.slice(start).trim()) tracks.push(value.slice(start).trim());
+        return tracks;
+      };
+      const layoutChain = () => {
+        const component = document.getElementById("comp-mq1axvyp");
+        const host = component && (component === this || component.contains?.(this)) ? component : this;
+        const nodes = [this];
+        if (host !== this) nodes.push(host);
+        let node = host.parentElement;
+        for (let depth = 0; node && depth < 7 && node !== document.body && node !== document.documentElement; depth += 1, node = node.parentElement) {
+          nodes.push(node);
+          if (node.classList?.contains("pidtg-container") || node.id === "pidtg") break;
+        }
+        return { host, nodes };
+      };
+      let ownedGrid = null;
+      let ownedGridRows = "";
+      const sync = () => {
+        const native = this.querySelector(".bw-v4-native");
+        const { host, nodes } = layoutChain();
+        const reset = (node) => {
+          if (!node || node === document.body || node === document.documentElement) return;
+          node.style.alignSelf = "start";
+          node.style.justifySelf = "stretch";
+          node.style.alignItems = "start";
+          node.style.justifyItems = "stretch";
+          node.style.width = "100%";
+          node.style.maxWidth = "100%";
+          node.style.minWidth = "0";
+          node.style.minHeight = "0px";
+          node.style.maxHeight = "none";
+          node.style.height = "auto";
+          node.style.overflowX = "clip";
+        };
+        nodes.slice(0, 4).forEach(reset);
+        const section = nodes.find((node) => node.tagName === "SECTION" && (node.id.startsWith("comp-") || String(node.className || "").includes("wixui-section")));
+        const grid = nodes.find((node) => String(node.className || "").includes("pidtg-container") || node.id === "pidtg");
+        if (section) {
+          section.style.height = "auto";
+          section.style.minHeight = "0px";
+          section.style.maxHeight = "none";
+        }
+        if (grid) {
+          if (ownedGrid === grid && grid.style.gridTemplateRows === ownedGridRows) {
+            grid.style.gridTemplateRows = "";
+          }
+          const computed = getComputedStyle(grid);
+          const tracks = splitGridTracks(computed.gridTemplateRows);
+          const sectionRow = section ? Number.parseInt(getComputedStyle(section).gridRowStart, 10) - 1 : -1;
+          if (tracks.length && sectionRow >= 0 && sectionRow < tracks.length) {
+            tracks[sectionRow] = "auto";
+            ownedGridRows = tracks.join(" ");
+            ownedGrid = grid;
+            grid.style.gridTemplateRows = ownedGridRows;
+          }
+          grid.style.gridAutoRows = "auto";
+          grid.style.height = "auto";
+          grid.style.minHeight = "0px";
+          grid.style.maxHeight = "none";
+        }
+        if (native && host) {
+          const nativeHeight = Math.ceil(native.getBoundingClientRect().height);
+          if (nativeHeight > 0) host.style.minHeight = "0px";
         }
       };
       sync();
@@ -467,21 +525,29 @@
       if (typeof ResizeObserver === "function") {
         this._gapResizeObserver = new ResizeObserver(sync);
         this._gapResizeObserver.observe(this);
+        const native = this.querySelector(".bw-v4-native");
+        if (native) this._gapResizeObserver.observe(native);
       }
+      this._gapLoadHandler = sync;
+      window.addEventListener("load", this._gapLoadHandler);
+      this._gapFontsHandler = sync;
+      if (document.fonts && typeof document.fonts.addEventListener === "function") document.fonts.addEventListener("loadingdone", this._gapFontsHandler);
     }
 
     _styles() {
       return `
-        bw-berlin-trip-planner-page { display:block; width:100%; max-width:100%; min-width:0; overflow-x:clip; color:#212121; background:#FAFAF5; font-family:Montserrat,Arial,sans-serif; }
+        bw-berlin-trip-planner-page { display:block; width:100%; max-width:100%; min-width:0; overflow-x:clip; color:#212121; background:#FAFAF5; font-family:Montserrat,Arial,sans-serif; font-size:16px; line-height:1.5; }
         .bw-v4-native, .bw-v4-native *, .bw-v4-native *::before, .bw-v4-native *::after { box-sizing:border-box; }
-        .bw-v4-native { width:100%; max-width:1440px; margin:0 auto; overflow:hidden; background:#FAFAF5; }
+        .bw-v4-native { width:100%; max-width:1440px; margin:0 auto; overflow:hidden; background:#FAFAF5; font-size:16px; line-height:1.5; }
+        .bw-v4-native button, .bw-v4-native input, .bw-v4-native textarea, .bw-v4-native select { font:inherit; }
+        .bw-v4-native small { font-size:14px; line-height:1.4; }
         .bw-v4-header { display:flex; align-items:center; justify-content:flex-end; gap:24px; padding:18px clamp(18px,4vw,64px); background:#103B16; }
         .bw-v4-header nav { display:flex; gap:20px; }
         .bw-v4-header a, .bw-v4-footer a { color:#FFE600; text-decoration:none; font-weight:700; }
         .bw-v4-native .bw-v4-header a:focus-visible, .bw-v4-native .bw-v4-footer a:focus-visible, .bw-v4-native .bw-v4-primary:focus-visible, .bw-v4-native .bw-v4-secondary:focus-visible, .bw-v4-native .bw-v4-price-cta:focus-visible, .bw-v4-native .bw-v4-date-skip:focus-visible, .bw-v4-native summary:focus-visible { outline:3px solid #FFE600; outline-offset:3px; }
         .bw-v4-hero { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr); gap:clamp(24px,5vw,72px); padding:clamp(42px,7vw,100px) clamp(18px,7vw,96px); background-image:linear-gradient(90deg,rgba(16,59,22,.92) 0%,rgba(16,59,22,.7) 48%,rgba(16,59,22,.12) 100%),var(--bw-v4-hero); background-size:cover; background-position:center; color:#FAFAF5; }
         .bw-v4-hero-copy { max-width:680px; }
-        .bw-v4-eyebrow, .bw-v4-card-kicker { color:#FFE600; text-transform:uppercase; letter-spacing:.12em; font-size:12px; font-weight:800; }
+        .bw-v4-eyebrow, .bw-v4-card-kicker { color:#FFE600; text-transform:uppercase; letter-spacing:.12em; font-size:14px; font-weight:800; }
         .bw-v4-hero h1, .bw-v4-section h2 { margin:10px 0 14px; font-family:Georgia,serif; line-height:1.05; }
         .bw-v4-hero h1 { font-size:clamp(38px,6vw,78px); }
         .bw-v4-hero p { max-width:620px; font-size:clamp(17px,2vw,21px); line-height:1.55; }
@@ -490,10 +556,10 @@
         .bw-v4-primary { background:#FFE600; color:#103B16; }
         .bw-v4-secondary { border:1px solid #FFE600; color:#FFE600; }
         .bw-v4-date-entry { display:flex; flex-wrap:wrap; gap:12px; margin-top:20px; }
-        .bw-v4-date-entry label { display:grid; gap:5px; font-size:13px; font-weight:700; }
+        .bw-v4-date-entry label { display:grid; gap:5px; font-size:14px; font-weight:700; }
         .bw-v4-date-entry input { min-height:44px; border-radius:8px; border:1px solid #FAFAF5; padding:8px; font:inherit; color:#212121; }
         .bw-v4-date-skip { margin-top:12px; border:0; padding:0; background:none; color:#FFE600; text-decoration:underline; font:inherit; cursor:pointer; }
-        .bw-v4-trust { font-size:13px !important; margin-top:22px; }
+        .bw-v4-trust { font-size:14px !important; margin-top:22px; }
         .bw-v4-mini-plan { align-self:center; padding:24px; border-radius:18px; background:#FFE600; color:#103B16; box-shadow:0 18px 40px rgba(0,0,0,.2); }
         .bw-v4-mini-plan strong { display:block; margin:10px 0 18px; font-family:Georgia,serif; font-size:24px; }
         .bw-v4-mini-plan div { display:grid; grid-template-columns:58px 1fr; gap:8px; padding:12px 0; border-top:1px solid rgba(16,59,22,.28); }
@@ -505,7 +571,7 @@
         .bw-v4-steps { background:#f1f3e8; }
         .bw-v4-steps ol { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; margin:0; padding:0; list-style:none; counter-reset:bw-step; }
         .bw-v4-steps li { display:grid; gap:8px; min-height:132px; padding:20px; border:1px solid #c9d1bf; border-radius:14px; background:#fffdf7; counter-increment:bw-step; }
-        .bw-v4-steps li::before { content:counter(bw-step, decimal-leading-zero); color:#103B16; font:700 12px/1 Montserrat,Arial,sans-serif; letter-spacing:.1em; }
+        .bw-v4-steps li::before { content:counter(bw-step, decimal-leading-zero); color:#103B16; font:700 13px/1 Montserrat,Arial,sans-serif; letter-spacing:.1em; }
         .bw-v4-steps strong { color:#103B16; }
         .bw-v4-steps li span { line-height:1.45; }
         .bw-v4-proof-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
@@ -537,7 +603,7 @@
         .bw-v4-faq p { max-width:780px; line-height:1.55; }
         .bw-v4-footer { display:grid; grid-template-columns:1fr auto; gap:14px 24px; padding:28px clamp(18px,7vw,96px); background:#103B16; color:#FAFAF5; }
         .bw-v4-footer > div { display:flex; flex-wrap:wrap; gap:16px; }
-        .bw-v4-footer details { grid-column:1/-1; font-size:12px; }
+        .bw-v4-footer details { grid-column:1/-1; font-size:14px; }
         .bw-v4-footer summary { color:#FFE600; cursor:pointer; }
         .bw-v4-footer p { max-width:720px; }
         .bw-v4-credits { display:grid; gap:4px; margin-top:10px; }
@@ -545,7 +611,7 @@
         .bw-v4-credits a { color:#FFE600; text-decoration:underline; }
         @media (max-width:760px) {
           .bw-v4-header { padding:14px 16px; gap:12px; }
-          .bw-v4-header nav { gap:10px; font-size:13px; }
+          .bw-v4-header nav { gap:10px; font-size:15px; }
           .bw-v4-hero { grid-template-columns:1fr; padding:48px 18px 42px; background-image:linear-gradient(180deg,rgba(16,59,22,.85),rgba(16,59,22,.45)),var(--bw-v4-hero); }
           .bw-v4-hero h1 { font-size:46px; }
           .bw-v4-mini-plan { max-width:100%; }

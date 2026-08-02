@@ -91,6 +91,109 @@ test("native SEO/schema and public credits are exact and scoped", () => {
   assert.doesNotMatch(landingSource, /#bw-v4-form/);
 });
 
+test("native typography has explicit readable floors independent of Wix base CSS", () => {
+  assert.match(landingSource, /bw-berlin-trip-planner-page \{[^}]*font-size:16px; line-height:1\.5/);
+  assert.match(landingSource, /\.bw-v4-native \{[^}]*font-size:16px; line-height:1\.5/);
+  assert.match(landingSource, /\.bw-v4-native small \{ font-size:14px; line-height:1\.4; \}/);
+  assert.match(landingSource, /\.bw-v4-eyebrow, \.bw-v4-card-kicker \{[^}]*font-size:14px/);
+  assert.match(landingSource, /\.bw-v4-date-entry label \{[^}]*font-size:14px/);
+  assert.match(landingSource, /\.bw-v4-footer details \{[^}]*font-size:14px/);
+  assert.match(landingSource, /\.bw-v4-header nav \{ gap:10px; font-size:15px; \}/);
+  assert.doesNotMatch(landingSource, /font-size:10px|font-size:8\.33px/);
+});
+
+test("Wix height guard collapses the component section and preserves dynamic grid rows", () => {
+  const observed = [];
+  const listeners = new Map();
+  class FakeNode {
+    constructor(tagName, id = "", className = "", height = 0) {
+      this.tagName = tagName.toUpperCase();
+      this.id = id;
+      this.className = className;
+      this.style = {};
+      this.parentElement = null;
+      this.children = [];
+      this._height = height;
+    }
+    contains(node) { return this === node || this.children.some((child) => child === node || child.contains?.(node)); }
+    appendChild(node) { this.children.push(node); node.parentElement = this; return node; }
+    querySelector(selector) { return selector === ".bw-v4-native" ? this.children.find((child) => child.className === "bw-v4-native") || null : null; }
+    getBoundingClientRect() { return { height: this._height, top: 0, bottom: this._height, width: 1418 }; }
+    get classList() { return { contains: (name) => this.className.split(/\s+/).includes(name) }; }
+  }
+  const host = new FakeNode("div", "comp-mq1axvyp", "DURcgf comp-mq1axvyp", 6645);
+  const native = new FakeNode("main", "bw-v4-top", "bw-v4-native", 4795);
+  const container = new FakeNode("div", "", "comp-mq1axexj-container max-width-container", 7280);
+  const section = new FakeNode("section", "comp-mq1axexj", "ke5pl1 comp-mq1axexj wixui-section", 7280);
+  const grid = new FakeNode("div", "pidtg", "pidtg-container", 8074);
+  const instance = new FakeNode("bw-berlin-trip-planner-page", "", "", 6645);
+  instance.appendChild(native);
+  host.appendChild(instance);
+  container.appendChild(host);
+  section.appendChild(container);
+  grid.appendChild(section);
+  const document = {
+    body: new FakeNode("body"),
+    documentElement: new FakeNode("html"),
+    fonts: { addEventListener() {}, removeEventListener() {} },
+    getElementById(id) { return id === "comp-mq1axvyp" ? host : null; }
+  };
+  const window = {
+    addEventListener(name, callback) { listeners.set(name, callback); },
+    removeEventListener() {},
+    visualViewport: null
+  };
+  let naturalGridRows = "143px 7279.95px 651px";
+  const getComputedStyle = (node) => ({
+    gridTemplateRows: node === grid ? (node.style.gridTemplateRows || naturalGridRows) : "none",
+    gridRowStart: node === section ? "2" : "auto"
+  });
+  class FakeResizeObserver {
+    constructor(callback) { this.callback = callback; }
+    observe(node) { observed.push(node); }
+    disconnect() {}
+  }
+  const customElements = { define(_name, constructor) { this.constructor = constructor; }, get() { return null; } };
+  vm.runInNewContext(landingSource, {
+    document,
+    window,
+    customElements,
+    HTMLElement: class {},
+    ResizeObserver: FakeResizeObserver,
+    URL,
+    URLSearchParams,
+    JSON,
+    Set,
+    Map,
+    Array,
+    String,
+    Number,
+    Object,
+    console,
+    getComputedStyle
+  });
+  const guardInstance = Object.create(customElements.constructor.prototype);
+  guardInstance.parentElement = host;
+  guardInstance.style = {};
+  guardInstance.querySelector = (selector) => selector === ".bw-v4-native" ? native : null;
+  guardInstance._setupWixTopGapGuard();
+  assert.equal(host.style.minHeight, "0px");
+  assert.equal(host.style.height, "auto");
+  assert.equal(container.style.height, "auto");
+  assert.equal(section.style.minHeight, "0px");
+  assert.equal(grid.style.gridTemplateRows, "143px auto 651px");
+  assert.equal(grid.style.height, "auto");
+  assert.ok(observed.includes(guardInstance));
+  assert.ok(observed.includes(native));
+  assert.equal(typeof listeners.get("resize"), "function");
+  naturalGridRows = "95px 5090px 1647px";
+  listeners.get("resize")();
+  assert.equal(grid.style.gridTemplateRows, "95px auto 1647px");
+  naturalGridRows = "143px 7279.95px 651px";
+  listeners.get("resize")();
+  assert.equal(grid.style.gridTemplateRows, "143px auto 651px");
+});
+
 test("consent and QA override guard persistence and measurement", () => {
   const assignmentStart = landingSource.indexOf("function resolveAssignment()");
   const assignmentEnd = landingSource.indexOf("function analyticsConsent()", assignmentStart);
