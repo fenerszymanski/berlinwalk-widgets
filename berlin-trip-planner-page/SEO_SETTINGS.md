@@ -62,6 +62,6 @@ Add this to the page body:
 
 ## Local schema cleanup / rollback readback
 
-The current custom element performs an idempotent, bounded cleanup on the page head. It removes only the planner's old `WebApplication`/`Product` markers (including the legacy `#full-plan` identity), preserves any canonical `WebPage` graph entry, and maintains one `bw-trip-planner-webapp-jsonld` script with the current three-band `AggregateOffer` (EUR 7.99 / 11.99 / 15.99). A `MutationObserver` plus a 12-second bounded recheck window covers Wix's repeated head-application behavior; it is disconnected when the element is removed.
+The Wix SEO HEAD embed is the sole ongoing owner of `bw-trip-planner-webapp-jsonld`; it performs the repeated head cleanup and maintains the current three-band `AggregateOffer` (EUR 7.99 / 11.99 / 15.99). The native element makes no observer or timer and returns immediately when that exact script already exists, so it cannot compete with the HEAD writer. In a standalone page with no HEAD-owned script, the native element may create the schema once as a fallback.
 
 This is a local package only. Before a Wix cutover, save the existing custom-code/body revision and raw-head readback. Rollback is the Wix revision restore of that saved body/head revision, followed by a fresh canonical/head/schema readback. No Wix revision or live head was changed in this task.

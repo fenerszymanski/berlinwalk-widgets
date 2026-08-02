@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
+import vm from "node:vm";
 
 const landingSource = await readFile(
   new URL("./berlin-trip-planner-page-element.js", import.meta.url),
@@ -70,14 +71,14 @@ test("native SEO/schema and public credits are exact and scoped", () => {
   assert.match(landingSource, /typeIncludes\(entry, "WebPage"\)/);
   assert.match(landingSource, /isAccessibleForFree: false/);
   assert.doesNotMatch(landingSource, /isAccessibleForFree: true/);
-  assert.match(landingSource, /MutationObserver/);
-  assert.match(landingSource, /length: 24/);
-  assert.match(landingSource, /index === 23/);
-  assert.match(landingSource, /_canonicalSchemaObserver\.disconnect\(\)/);
-  assert.match(landingSource, /_canonicalSchemaTimers = null/);
+  assert.doesNotMatch(landingSource, /new MutationObserver/);
+  assert.doesNotMatch(landingSource, /_canonicalSchemaObserver/);
+  assert.doesNotMatch(landingSource, /_canonicalSchemaTimers/);
+  assert.match(landingSource, /Build a practical 1–7 day Berlin itinerary around your dates, pace, interests, food preferences and fixed plans\. One price for the whole trip\./);
   assert.match(landingSource, /document\.addEventListener\("consentPolicyChanged"/);
   assert.match(landingSource, /document\.removeEventListener\("consentPolicyChanged"/);
   assert.match(landingSource, /document\.getElementById\(CANONICAL_SCHEMA_ID\)/);
+  assert.match(landingSource, /if \(document\.getElementById\(CANONICAL_SCHEMA_ID\)\) return;/);
   assert.match(landingSource, /typeIncludes\(entry, "WebPage"\)/);
   assert.doesNotMatch(landingSource, /entry\["@type"\] === "Product" && \(name\.includes/);
   assert.match(landingSource, /Guido from Berlin, CC BY 2\.0/);
@@ -114,4 +115,136 @@ test("schema cleanup keeps mixed-graph context while replacing only exact planne
   assert.match(landingSource, /name === "berlin trip planner full plan"/);
   assert.doesNotMatch(landingSource, /raw\.includes\(staleTripPrice\)/);
   assert.match(landingSource, /isAccessibleForFree: false/);
+});
+
+test("live-like Wix head/native schema reconciliation stays responsive with one owner", async () => {
+  const nodes = [];
+  let nativeMutationObservers = 0;
+  let nativeOwnedTimers = 0;
+  class FakeNode {
+    constructor(tagName) {
+      this.tagName = tagName.toUpperCase();
+      this.id = "";
+      this.type = "";
+      this.textContent = "";
+      this.parentNode = null;
+      this.dataset = {};
+      this.attributes = {};
+    }
+    setAttribute(name, value) { this.attributes[name] = String(value); }
+    getAttribute(name) { return this.attributes[name] ?? null; }
+    appendChild(node) {
+      if (!this.children) this.children = [];
+      if (!this.children.includes(node)) this.children.push(node);
+      node.parentNode = this;
+      return node;
+    }
+    remove() {
+      const siblings = this.parentNode?.children || [];
+      const index = siblings.indexOf(this);
+      if (index >= 0) siblings.splice(index, 1);
+      this.parentNode = null;
+    }
+  }
+  const head = new FakeNode("head");
+  head.children = nodes;
+  const document = {
+    currentScript: { src: "https://cdn.example.test/berlin-trip-planner-page-element.js" },
+    head,
+    body: new FakeNode("body"),
+    documentElement: { clientWidth: 390, scrollWidth: 390, setAttribute() {} },
+    getElementById(id) { return nodes.find((node) => node.id === id) || null; },
+    createElement(tagName) {
+      const node = new FakeNode(tagName);
+      nodes.push(node);
+      return node;
+    },
+    querySelectorAll(selector) {
+      return selector.includes("application/ld+json") ? nodes.filter((node) => node.type === "application/ld+json") : [];
+    },
+    addEventListener() {},
+    removeEventListener() {},
+    cookie: "",
+  };
+  let registeredConstructor = null;
+  const customElements = {
+    define(_name, constructor) { registeredConstructor = constructor; },
+    get() { return registeredConstructor; },
+  };
+  const window = {
+    location: { pathname: "/berlin-trip-planner", search: "", protocol: "https:" },
+    crypto: { randomUUID: () => "00000000-0000-4000-8000-000000000000" },
+    localStorage: { getItem: () => "", setItem() {} },
+    setTimeout(callback, delay) { nativeOwnedTimers += 1; return setTimeout(callback, delay); },
+    clearTimeout,
+    addEventListener() {},
+    removeEventListener() {},
+    visualViewport: null,
+    dataLayer: [],
+    consentPolicyManager: null,
+  };
+  class FakeHTMLElement {}
+  class FakeMutationObserver { constructor() { nativeMutationObservers += 1; } observe() {} disconnect() {} }
+  vm.runInNewContext(landingSource, {
+    document,
+    window,
+    customElements,
+    HTMLElement: FakeHTMLElement,
+    MutationObserver: FakeMutationObserver,
+    URL,
+    URLSearchParams,
+    JSON,
+    Set,
+    Map,
+    Array,
+    String,
+    Number,
+    Object,
+    console,
+  });
+  assert.equal(typeof registeredConstructor, "function");
+
+  const canonical = "https://www.berlinwalk.com/berlin-trip-planner";
+  const description = "Build a practical 1–7 day Berlin itinerary around your dates, pace, interests, food preferences and fixed plans. One price for the whole trip.";
+  const external = document.createElement("script");
+  external.type = "application/ld+json";
+  external.textContent = JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "WebPage", "@id": `${canonical}#webpage`, url: canonical },
+      { "@type": "Product", "@id": `${canonical}#full-plan`, name: "Berlin Trip Planner Full Plan", offers: { price: "3.99" } },
+      { "@type": "BreadcrumbList", "@id": `${canonical}#crumbs` }
+    ]
+  });
+  head.appendChild(external);
+
+  const headReconcile = () => {
+    const own = document.getElementById("bw-trip-planner-webapp-jsonld") || document.createElement("script");
+    own.id = "bw-trip-planner-webapp-jsonld";
+    own.type = "application/ld+json";
+    own.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        { "@type": "WebPage", "@id": `${canonical}#webpage`, url: canonical },
+        { "@type": "BreadcrumbList", "@id": `${canonical}#crumbs` },
+        { "@type": "WebApplication", "@id": `${canonical}#webapp`, name: "Berlin Trip Planner", url: canonical, description }
+      ]
+    });
+    head.appendChild(own);
+  };
+  headReconcile();
+  const beforeNative = document.getElementById("bw-trip-planner-webapp-jsonld").textContent;
+  const instance = Object.create(registeredConstructor.prototype);
+  instance._syncCanonicalSchema();
+  assert.equal(document.getElementById("bw-trip-planner-webapp-jsonld").textContent, beforeNative);
+  headReconcile();
+  await new Promise((resolve) => setTimeout(resolve, 10));
+  const own = document.getElementById("bw-trip-planner-webapp-jsonld");
+  const graph = JSON.parse(own.textContent)["@graph"];
+  assert.equal(graph.filter((entry) => entry["@type"] === "WebPage").length, 1);
+  assert.equal(graph.filter((entry) => entry["@type"] === "WebApplication").length, 1);
+  assert.equal(graph.filter((entry) => entry["@type"] === "Product").length, 0);
+  assert.equal(nativeMutationObservers, 0);
+  assert.equal(nativeOwnedTimers, 0);
+  assert.equal(document.documentElement.scrollWidth, document.documentElement.clientWidth);
 });

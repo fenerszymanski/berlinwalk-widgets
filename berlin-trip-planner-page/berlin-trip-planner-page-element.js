@@ -212,8 +212,6 @@
         document.removeEventListener("consentPolicyChanged", this._consentHandler);
         document.removeEventListener("consentPolicyInitialized", this._consentHandler);
       }
-      if (this._canonicalSchemaObserver) this._canonicalSchemaObserver.disconnect();
-      if (this._canonicalSchemaTimers) this._canonicalSchemaTimers.forEach((timer) => window.clearTimeout(timer));
       if (this._gapResizeHandler) {
         window.removeEventListener("resize", this._gapResizeHandler);
         if (window.visualViewport) window.visualViewport.removeEventListener("resize", this._gapResizeHandler);
@@ -230,6 +228,10 @@
     }
 
     _syncCanonicalSchema() {
+      // Wix SEO HEAD owns this exact script in the published page. Never rewrite
+      // an existing owner from the native element: two writers would ping-pong
+      // textContent through their observers and starve the page event loop.
+      if (document.getElementById(CANONICAL_SCHEMA_ID)) return;
       const canonicalUrl = "https://www.berlinwalk.com/berlin-trip-planner";
       const webAppId = `${canonicalUrl}#webapp`;
       const fullPlanId = `${canonicalUrl}#full-plan`;
@@ -264,7 +266,7 @@
         }
         addUnique(webPages, entry);
       };
-      let ownScript = document.getElementById(CANONICAL_SCHEMA_ID);
+      let ownScript = null;
       const scripts = Array.from(document.querySelectorAll("head script[type='application/ld+json'], body script[type='application/ld+json']"));
       scripts.forEach((script) => {
         let parsed = null;
@@ -303,7 +305,7 @@
         applicationCategory: "TravelApplication",
         operatingSystem: "Web",
         isAccessibleForFree: false,
-        description: "A Berlin-specific trip planner that builds a 1 to 7 day itinerary around arrival date, opening-day logic and map links.",
+        description: "Build a practical 1–7 day Berlin itinerary around your dates, pace, interests, food preferences and fixed plans. One price for the whole trip.",
         publisher: { "@type": "Organization", name: "BerlinWalk", url: "https://www.berlinwalk.com" },
         offers: {
           "@type": "AggregateOffer",
@@ -322,26 +324,6 @@
       const schemaText = JSON.stringify({ "@context": "https://schema.org", "@graph": [...canonicalWebPages, ...unrelatedEntries, webApplication] });
       if (ownScript.textContent !== schemaText) ownScript.textContent = schemaText;
       if (ownScript.parentNode !== document.head) document.head.appendChild(ownScript);
-      if (!this._canonicalSchemaObserver && typeof MutationObserver === "function") {
-        this._canonicalSchemaObserver = new MutationObserver(() => {
-          if (this._canonicalSchemaBusy) return;
-          this._canonicalSchemaBusy = true;
-          try { this._syncCanonicalSchema(); } finally { this._canonicalSchemaBusy = false; }
-        });
-        this._canonicalSchemaObserver.observe(document.head, { childList: true, subtree: true });
-      }
-      if (!this._canonicalSchemaTimers) {
-        this._canonicalSchemaTimers = Array.from({ length: 24 }, (_, index) => window.setTimeout(() => {
-          this._syncCanonicalSchema();
-          if (index === 23) {
-            if (this._canonicalSchemaObserver) {
-              this._canonicalSchemaObserver.disconnect();
-              this._canonicalSchemaObserver = null;
-            }
-            this._canonicalSchemaTimers = null;
-          }
-        }, (index + 1) * 500));
-      }
     }
 
     _render() {
