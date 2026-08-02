@@ -44,7 +44,7 @@ You do not need ten browser tabs. You need three checks.
 
 First, look at the organiser's latest update. Second, enter your actual destination and time into a live public-transport planner. Third, look at the weather and pack for it rather than for the postcard version of Berlin in August.
 
-![A shaded path in Tiergarten near the parade corridor](blog-drafts/rave-the-planet-berlin-2026/images/optimized/03-tiergarten-break.jpg)
+![A shaded walking path in Tiergarten near the Rave The Planet corridor](blog-drafts/rave-the-planet-berlin-2026/images/optimized/03-tiergarten-path.jpg)
 _Tiergarten is beside the route, so it is a useful place to pause when you need shade, water or a quieter five minutes._
 
 Bring water, sun protection and a charged phone. If rain is forecast, a light rain layer is more useful than a complicated backup itinerary. [visitBerlin's event guidance](https://www.visitberlin.de/en/event/rave-planet) also recommends water, sun protection and breaks in Tiergarten.

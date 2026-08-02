@@ -1,1 +1,317 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>IFA After-Show Evening | BerlinWalk</title><link rel="stylesheet" href="../css/brand.css"><style>:root{--dark:#10272a;--teal:#1d7874;--mint:#dff6e8;--signal:#ffb300;--paper:#fbfbf7}*{box-sizing:border-box}body{margin:0;font-family:Montserrat,Arial,sans-serif;color:var(--dark)}.tool{max-width:1040px;margin:auto;border-radius:14px;overflow:hidden;border:1px solid #cde0dd;background:var(--paper)}.head{min-height:300px;display:grid;align-content:end;padding:31px;color:#fff;background:linear-gradient(90deg,#10272af0,#10272a88 51%,#10272a12),url('assets/hero-messe.jpg') center/cover}.tag{color:#ffcc57;font-size:12px;font-weight:900;letter-spacing:.13em;text-transform:uppercase}.head h1{max-width:640px;margin:8px 0;font-size:clamp(30px,5vw,48px);line-height:1.04}.head p{max-width:600px;margin:0;color:#edf9f6;line-height:1.55}.content{padding:24px}.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.choices label{padding:13px;border-radius:10px;background:#e8f3f1;display:grid;gap:7px;font-size:12px;font-weight:900;text-transform:uppercase}.choices select{padding:10px;border-radius:7px;border:1px solid #b6d4cf;background:#fff;color:var(--dark);font:700 14px Montserrat}.board{margin-top:20px;padding:18px;border-radius:12px;background:var(--dark);color:#fff}.board h2{margin:0;font-size:26px}.board>p{margin:8px 0 16px;color:#cfe6e1;line-height:1.55}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}.card{padding:14px;border-radius:9px;background:#ffffff11;border:1px solid #ffffff22}.card b{font-size:12px;color:#ffcc57}.card h3{margin:7px 0;font-size:18px}.card p{margin:0;color:#e6f1ef;font-size:13px;line-height:1.5}.foot{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:18px}.foot small{max-width:680px;color:#425a5c;line-height:1.5}.cta{border-radius:8px;background:var(--signal);padding:12px 15px;color:#172525!important;text-decoration:none;font-weight:900}.credits{margin-top:14px;font-size:12px}.credits button{border:0;background:none;color:var(--dark);padding:0;text-decoration:underline;cursor:pointer;font:inherit}.credits div{margin-top:8px;padding:9px;border-radius:7px;background:var(--mint)}[hidden]{display:none!important}@media(max-width:680px){.head,.content{padding:20px}.choices,.cards{grid-template-columns:1fr}}</style></head><body><main class="tool"><section class="head"><span class="tag">Berlin event decision tool</span><h1>IFA After-Show Evening</h1><p>IFA can fill a whole day before you notice you have no plan for the evening. Build a gentle finish around your exit time, energy and the side of Berlin where you are sleeping.</p></section><section class="content"><div class="choices"><label>When you leave<select id="time"><option value="late">Close to the end of the day</option><option value="mid">Mid-afternoon</option><option value="early">I am only visiting briefly</option></select></label><label>Your energy<select id="energy"><option value="low">My brain is full</option><option value="mid">I can still walk and eat</option><option value="high">I want a Berlin evening</option></select></label><label>Where you sleep<select id="hotel"><option value="west">West / near Messe</option><option value="centre">Mitte / central</option><option value="east">East / Friedrichshain side</option></select></label></div><section class="board" aria-live="polite"><h2 id="title">Make the exit from Messe Berlin your first decision.</h2><p id="lead"></p><div class="cards"><article class="card"><b>01 · RESET</b><h3 id="a"></h3><p id="acopy"></p></article><article class="card"><b>02 · EAT</b><h3 id="b"></h3><p id="bcopy"></p></article><article class="card"><b>03 · BERLIN MOMENT</b><h3 id="c"></h3><p id="ccopy"></p></article></div></section><div class="foot"><small>IFA visitor entry and access conditions are set by the organiser. Check your ticket, the official venue instructions and your live route before choosing an exit.</small><a class="cta" target="_blank" href="https://www.ifa-berlin.com/visit">Open IFA visitor info</a></div><div class="credits"><button aria-expanded="false" aria-controls="credit">Widget visual credit</button><div id="credit" hidden>Hero image: Messe Berlin / IFA venue, Wikimedia Commons. Licence and source are listed in the article Image credits.</div></div></section></main><script src="../js/brand.js"></script><script>const q=s=>document.querySelector(s);function draw(){let t=q('#time').value,e=q('#energy').value,h=q('#hotel').value;let area=h==='west'?'Stay on the west side first.':h==='centre'?'Make one clean move to the centre.':'Do not force an east-side evening if your energy is already gone.';q('#title').textContent=e==='low'?'The right after-show plan is shorter than you think.':'Make the exit from Messe Berlin your first decision.';q('#lead').textContent=area+' Give the day one transition before you ask it for a meal or a sight.';q('#a').textContent=e==='low'?'Sit down before you decide':'Choose the direct route';q('#acopy').textContent=t==='late'?'Open your live journey before the crowds leave and keep your first stop close to that route.':'Use the earlier finish to step outside the exhibition rhythm for fifteen quiet minutes.';q('#b').textContent=e==='high'?'Dinner with one good area':'One uncomplicated meal';q('#bcopy').textContent=h==='west'?'Charlottenburg works when you need low-friction food after Messe Berlin.':'Choose food in the area you will actually spend the next hour, not the place that looked best online this morning.';q('#c').textContent=e==='high'?'One Berlin view or bar':'A short walk, then home';q('#ccopy').textContent=e==='high'?'Add one small city moment after dinner. Keep the final destination optional so the fair does not turn into an endurance test.':'The useful win is keeping enough energy for tomorrow, not maximising a single September evening.'}document.querySelectorAll('select').forEach(e=>e.onchange=draw);q('.credits button').onclick=e=>{let x=q('#credit');x.hidden=!x.hidden;e.currentTarget.setAttribute('aria-expanded',String(!x.hidden))};draw()</script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>IFA After-Show Evening | BerlinWalk</title>
+    <link rel="stylesheet" href="../css/brand.css" />
+    <style>
+      :root {
+        --dark: #10272a;
+        --teal: #1d7874;
+        --mint: #dff6e8;
+        --signal: #ffb300;
+        --paper: #fbfbf7;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Montserrat, Arial, sans-serif;
+        color: var(--dark);
+      }
+      .tool {
+        max-width: 1040px;
+        margin: auto;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid #cde0dd;
+        background: var(--paper);
+      }
+      .head {
+        min-height: 300px;
+        display: grid;
+        align-content: end;
+        padding: 31px;
+        color: #fff;
+        background:
+          linear-gradient(90deg, #10272af0, #10272a88 51%, #10272a12),
+          url("assets/hero-messe.jpg") center/cover;
+      }
+      .tag {
+        color: #ffcc57;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+      .head h1 {
+        max-width: 640px;
+        margin: 8px 0;
+        font-size: clamp(30px, 5vw, 48px);
+        line-height: 1.04;
+      }
+      .head p {
+        max-width: 600px;
+        margin: 0;
+        color: #edf9f6;
+        line-height: 1.55;
+      }
+      .content {
+        padding: 24px;
+      }
+      .choices {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      .choices label {
+        padding: 13px;
+        border-radius: 10px;
+        background: #e8f3f1;
+        display: grid;
+        gap: 7px;
+        font-size: 12px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+      .choices select {
+        padding: 10px;
+        border-radius: 7px;
+        border: 1px solid #b6d4cf;
+        background: #fff;
+        color: var(--dark);
+        font: 700 14px Montserrat;
+      }
+      .board {
+        margin-top: 20px;
+        padding: 18px;
+        border-radius: 12px;
+        background: var(--dark);
+        color: #fff;
+      }
+      .board h2 {
+        margin: 0;
+        font-size: 26px;
+      }
+      .board > p {
+        margin: 8px 0 16px;
+        color: #cfe6e1;
+        line-height: 1.55;
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 11px;
+      }
+      .card {
+        padding: 14px;
+        border-radius: 9px;
+        background: #ffffff11;
+        border: 1px solid #ffffff22;
+      }
+      .card b {
+        font-size: 12px;
+        color: #ffcc57;
+      }
+      .card h3 {
+        margin: 7px 0;
+        font-size: 18px;
+      }
+      .card p {
+        margin: 0;
+        color: #e6f1ef;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .foot {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-top: 18px;
+      }
+      .foot small {
+        max-width: 680px;
+        color: #425a5c;
+        line-height: 1.5;
+      }
+      .cta {
+        border-radius: 8px;
+        background: var(--signal);
+        padding: 12px 15px;
+        color: #172525 !important;
+        text-decoration: none;
+        font-weight: 900;
+      }
+      .credits {
+        margin-top: 14px;
+        font-size: 12px;
+      }
+      .credits button {
+        border: 0;
+        background: none;
+        color: var(--dark);
+        padding: 0;
+        text-decoration: underline;
+        cursor: pointer;
+        font: inherit;
+      }
+      .credits div {
+        margin-top: 8px;
+        padding: 9px;
+        border-radius: 7px;
+        background: var(--mint);
+      }
+      [hidden] {
+        display: none !important;
+      }
+      @media (max-width: 680px) {
+        .head,
+        .content {
+          padding: 20px;
+        }
+        .choices,
+        .cards {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="tool">
+      <section class="head">
+        <span class="tag">Berlin event decision tool</span>
+        <h1>IFA After-Show Evening</h1>
+        <p>
+          IFA can fill a whole day before you notice you have no plan for the
+          evening. Build a gentle finish around your exit time, energy and the
+          side of Berlin where you are sleeping.
+        </p>
+      </section>
+      <section class="content">
+        <div class="choices">
+          <label
+            >When you leave<select id="time">
+              <option value="late">Close to the end of the day</option>
+              <option value="mid">Mid-afternoon</option>
+              <option value="early">I am only visiting briefly</option>
+            </select></label
+          ><label
+            >Your energy<select id="energy">
+              <option value="low">My brain is full</option>
+              <option value="mid">I can still walk and eat</option>
+              <option value="high">I want a Berlin evening</option>
+            </select></label
+          ><label
+            >Where you sleep<select id="hotel">
+              <option value="west">West / near Messe</option>
+              <option value="centre">Mitte / central</option>
+              <option value="east">East / Friedrichshain side</option>
+            </select></label
+          >
+        </div>
+        <section class="board" aria-live="polite">
+          <h2 id="title">
+            Make the exit from Messe Berlin your first decision.
+          </h2>
+          <p id="lead"></p>
+          <div class="cards">
+            <article class="card">
+              <b>01 · RESET</b>
+              <h3 id="a"></h3>
+              <p id="acopy"></p>
+            </article>
+            <article class="card">
+              <b>02 · EAT</b>
+              <h3 id="b"></h3>
+              <p id="bcopy"></p>
+            </article>
+            <article class="card">
+              <b>03 · BERLIN MOMENT</b>
+              <h3 id="c"></h3>
+              <p id="ccopy"></p>
+            </article>
+          </div>
+        </section>
+        <div class="foot">
+          <small
+            >IFA visitor entry and access conditions are set by the organiser.
+            Check your ticket, the official venue instructions and your live
+            route before choosing an exit.</small
+          ><a
+            class="cta"
+            target="_blank"
+            href="https://www.ifa-berlin.com/visit"
+            >Open IFA visitor info</a
+          >
+        </div>
+        <div class="credits">
+          <button aria-expanded="false" aria-controls="credit">
+            Widget visual credit
+          </button>
+          <div id="credit" hidden>
+            Tool hero image: IFA at Messe Berlin in 2015 by dambranslv,
+            <a
+              href="https://commons.wikimedia.org/wiki/File:Messe_Berlin_-_IFA_2015.jpg"
+              target="_blank"
+              rel="noopener"
+              >Wikimedia Commons</a
+            >, CC BY 2.0.
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="../js/brand.js"></script>
+    <script>
+      const q = (s) => document.querySelector(s);
+      function draw() {
+        let t = q("#time").value,
+          e = q("#energy").value,
+          h = q("#hotel").value;
+        let area =
+          h === "west"
+            ? "Stay on the west side first."
+            : h === "centre"
+              ? "Make one clean move to the centre."
+              : "Do not force an east-side evening if your energy is already gone.";
+        q("#title").textContent =
+          e === "low"
+            ? "The right after-show plan is shorter than you think."
+            : "Make the exit from Messe Berlin your first decision.";
+        q("#lead").textContent =
+          area +
+          " Give the day one transition before you ask it for a meal or a sight.";
+        q("#a").textContent =
+          e === "low"
+            ? "Sit down before you decide"
+            : "Choose the direct route";
+        q("#acopy").textContent =
+          t === "late"
+            ? "Open your live journey before the crowds leave and keep your first stop close to that route."
+            : "Use the earlier finish to step outside the exhibition rhythm for fifteen quiet minutes.";
+        q("#b").textContent =
+          e === "high" ? "Dinner with one good area" : "One uncomplicated meal";
+        q("#bcopy").textContent =
+          h === "west"
+            ? "Charlottenburg works when you need low-friction food after Messe Berlin."
+            : "Choose food in the area you will actually spend the next hour, not the place that looked best online this morning.";
+        q("#c").textContent =
+          e === "high" ? "One Berlin view or bar" : "A short walk, then home";
+        q("#ccopy").textContent =
+          e === "high"
+            ? "Add one small city moment after dinner. Keep the final destination optional so the fair does not turn into an endurance test."
+            : "The useful win is keeping enough energy for tomorrow, not maximising a single September evening.";
+      }
+      document.querySelectorAll("select").forEach((e) => (e.onchange = draw));
+      q(".credits button").onclick = (e) => {
+        let x = q("#credit");
+        x.hidden = !x.hidden;
+        e.currentTarget.setAttribute("aria-expanded", String(!x.hidden));
+      };
+      draw();
+    </script>
+  </body>
+</html>

@@ -31,10 +31,10 @@ The tool asks how you are leaving the fair, what time you have and what kind of 
 
 IFA lists Messe Nord/ICC and Charlottenburg on the S-Bahn side, and Kaiserdamm and Theodor-Heuss-Platz on the U2 side, as useful approaches to the venue. Which one is best depends on the entrance and your live journey.
 
-![The approach to Messe Süd](blog-drafts/ifa-berlin-2026/images/optimized/02-messe-transport-context.jpg)
-_Check your actual IFA entrance and the live journey before leaving your hotel. Messe Berlin is too large for a last-minute guess._
+![Messe Süd entrance during a previous IFA edition in Berlin](blog-drafts/ifa-berlin-2026/images/optimized/02-ifa-messe-sued-historic.jpg)
+_This historic IFA view shows Messe Süd, but your 2026 entrance may be different. Check the current venue map and live journey before leaving your hotel._
 
-Put `Messe Berlin` and your chosen entrance into BVG or VBB on the morning. Then check it again when you leave. My [Berlin public transport guide](https://www.berlinwalk.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus) is useful for tickets and basic network logic, but the official IFA app and live journey planner own the event-day route.
+Put `Messe Berlin` and your chosen entrance into BVG or VBB on the morning. Then check it again when you leave. My [Berlin public transport guide](https://www.berlinwalk.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus) is useful for tickets and basic network logic, but the official IFA visitor information and live journey planner own the event-day route.
 
 ## Friday is not the same as the weekend
 
@@ -51,7 +51,7 @@ IFA itself advises comfortable shoes because the site is large. That is practica
 ![Messe Berlin during an event day](blog-drafts/ifa-berlin-2026/images/optimized/03-charlottenburg-evening.jpg)
 _Charlottenburg is often the better after-show choice when the fair has already taken your walking energy._
 
-Bring a water bottle and a power bank. Use the IFA app for programme and venue information. Do not expect your IFA ticket to cover your U-Bahn or S-Bahn ride.
+Bring a water bottle and a power bank. Use the official visitor site, and the IFA app once the public version is available, for programme and venue information. Do not expect your IFA ticket to cover your U-Bahn or S-Bahn ride.
 
 ## If you are in Berlin for business, keep one part of the trip unbooked
 

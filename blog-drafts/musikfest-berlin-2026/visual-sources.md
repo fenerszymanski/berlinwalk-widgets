@@ -4,7 +4,7 @@ All four files were downloaded from Wikimedia Commons, resized locally to a 1600
 
 | File | Caption / placement | Source and licence |
 | --- | --- | --- |
-| `philharmonie-blue-hour.jpg` | Cover: Berliner Philharmonie at blue hour | [Ansgar Koreng, Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Berliner_Philharmonie,_170517,_ako.jpg) — verify exact licence during Wix credit insertion |
-| `konzerthaus.jpg` | Konzerthaus Berlin entrance | [Ansgar Koreng, Wikimedia Commons](https://commons.wikimedia.org/wiki/File:150418_Konzerthaus_Berlin.jpg) — verify exact licence during Wix credit insertion |
+| `philharmonie-blue-hour.jpg` | Cover: Berliner Philharmonie at blue hour | [Ansgar Koreng, Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Berliner_Philharmonie,_170517,_ako.jpg) — CC BY-SA 4.0 |
+| `konzerthaus.jpg` | Konzerthaus Berlin entrance | [Ansgar Koreng, Wikimedia Commons](https://commons.wikimedia.org/wiki/File:150418_Konzerthaus_Berlin.jpg) — CC BY 3.0 DE |
 | `deutsche-oper.jpg` | Deutsche Oper Berlin exterior | [Manfred Brückels, Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Deutsche_Oper_Berlin,_Blick_von_Osten.jpg) — CC BY-SA 3.0 |
 | `haus-festspiele.jpg` | Haus der Berliner Festspiele | [A.Savin, Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Haus_der_Berliner_Festspiele_02-2014.jpg) — CC BY-SA 3.0 |

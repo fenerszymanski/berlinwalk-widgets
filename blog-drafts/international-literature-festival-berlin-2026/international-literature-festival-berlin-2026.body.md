@@ -35,7 +35,7 @@ The day-shape tool begins with your actual event venue and time. It then gives o
 
 **Berliner Philharmonie** belongs to Kulturforum and Potsdamer Platz. Use the afternoon in that area, then arrive early enough to find the correct entrance and settle. My [Potsdamer Platz guide](https://www.berlinwalk.com/post/potsdamer-platz-berlin) gives the surrounding district more shape than a quick transfer does.
 
-![Literaturhaus Berlin in Charlottenburg](blog-drafts/international-literature-festival-berlin-2026/images/optimized/02-humboldt-forum-context.jpg)
+![Humboldt Forum and Berlin Cathedral at blue hour beside the Spree](blog-drafts/international-literature-festival-berlin-2026/images/optimized/02-humboldt-forum-venue.jpg)
 _Humboldt Forum is in the historic centre, so a festival event there fits naturally with Museum Island and the Spree rather than a cross-city dash._
 
 For the other festival venues, check the exact programme page first. One ticket can be a good reason to explore a different part of Berlin. It is not a reason to make an invented route from memory.
@@ -46,8 +46,8 @@ The temptation at a festival is obvious: buy a 17:00 talk, a 19:30 reading and a
 
 My practical rule is **one fixed literary event per evening** unless the organiser's schedule makes the second connection clearly easy. Leave the rest as food, a walk or a museum area you can shorten without losing money.
 
-![Collegium Hungaricum Berlin in Mitte](blog-drafts/international-literature-festival-berlin-2026/images/optimized/03-literary-evening-context.jpg)
-_A good festival night needs space for the reading itself, not just the journey between programme listings._
+![Berliner Philharmonie at blue hour in Berlin's Kulturforum](blog-drafts/international-literature-festival-berlin-2026/images/optimized/03-berliner-philharmonie-venue.jpg)
+_Berliner Philharmonie is one of the listed 2026 venues. Confirm the exact hall and start time on your event ticket._
 
 If tickets, U-Bahn and S-Bahn lines are new to you, use my [Berlin public transport guide](https://www.berlinwalk.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus) for the basics and a live BVG or VBB route for the actual journey. My [Berlin in September guide](https://www.berlinwalk.com/post/berlin-in-september-2026) is useful for the broader culture calendar and the cooler evening weather around the festival.
 
@@ -57,7 +57,7 @@ A reading is not an interruption to sightseeing. It can be the part of the day t
 
 That is the realistic International Literature Festival Berlin plan: one event you care about, one part of the city around it, and no imaginary cross-city masterpiece held together by wishful thinking.
 
-![Silent Green, a Berlin cultural venue](blog-drafts/international-literature-festival-berlin-2026/images/optimized/04-cultural-venue-context.jpg)
-_The festival uses several venues, so the official listing is the reliable source for the exact location and time of each event._
+![Deutschlandhaus in Berlin, home of the Documentation Centre for Displacement, Expulsion, Reconciliation](blog-drafts/international-literature-festival-berlin-2026/images/optimized/04-documentation-centre-venue.jpg)
+_The Documentation Centre for Displacement, Expulsion, Reconciliation is another listed 2026 venue. Use the individual event page for the exact location and time._
 
 {{faq}}

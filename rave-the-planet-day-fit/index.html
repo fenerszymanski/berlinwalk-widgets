@@ -1,13 +1,355 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Rave the Planet Day Fit | BerlinWalk</title>
-  <meta name="description" content="Shape a flexible Rave the Planet day around your arrival, crowd appetite and evening energy.">
-  <link rel="stylesheet" href="../css/brand.css">
-  <style>
-    :root{--ink:#10151e;--night:#172033;--violet:#6e3ff2;--lime:#d9ff4b;--paper:#f7f6f2;--muted:#a8b3c7}*{box-sizing:border-box}body{margin:0;background:transparent;color:var(--ink);font-family:Montserrat,Arial,sans-serif}.tool{max-width:1040px;margin:auto;overflow:hidden;border-radius:14px;background:var(--paper);box-shadow:0 18px 50px #11182728}.hero{min-height:302px;padding:32px;display:grid;align-content:end;background:linear-gradient(90deg,#10151ef2 0%,#10151ecc 42%,#10151e22),url('assets/hero-rave.jpg') center/cover;color:#fff}.eyebrow{color:var(--lime);font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.hero h1{max-width:620px;margin:8px 0;font-size:clamp(30px,5vw,48px);line-height:1.04}.hero p{max-width:620px;margin:0;color:#e8edfa;line-height:1.55}.body{padding:24px;display:grid;gap:22px}.controls{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.field{border:1px solid #d9dfea;border-radius:10px;background:#fff;padding:14px}.field label{display:block;margin-bottom:8px;color:#34405b;font-size:12px;font-weight:900;text-transform:uppercase}.field select{width:100%;border:0;background:#f3f5f8;border-radius:7px;padding:11px;color:var(--ink);font:inherit;font-weight:700}.pulse{display:grid;grid-template-columns:180px 1fr;gap:18px;padding:18px;border-radius:12px;background:var(--night);color:#fff}.meter{display:grid;place-items:center;min-height:160px;border-radius:10px;background:radial-gradient(circle,#6e3ff2 0 29%,#172033 30%);text-align:center}.meter b{font-size:38px;color:var(--lime)}.result{display:grid;gap:12px}.result h2{margin:0;font-size:25px}.result p{margin:0;color:#dce5f6;line-height:1.55}.moves{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.move{border-left:3px solid var(--lime);padding:10px 12px;background:#ffffff0d}.move b{display:block;color:var(--lime);font-size:12px;text-transform:uppercase}.move span{display:block;margin-top:5px;line-height:1.45}.bottom{display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}.small{margin:0;color:#556276;font-size:13px;line-height:1.5}.cta{display:inline-block;border-radius:8px;background:var(--lime);padding:13px 17px;color:#172033!important;font-weight:900;text-decoration:none}.credits button{border:0;background:none;padding:0;color:#34405b;text-decoration:underline;cursor:pointer;font:inherit;font-size:12px}.credits div{margin-top:8px;padding:10px;border-radius:8px;background:#eef1f4;font-size:12px;line-height:1.45}[hidden]{display:none!important}@media(max-width:680px){.hero{min-height:340px;padding:24px}.controls,.moves{grid-template-columns:1fr}.pulse{grid-template-columns:1fr}.meter{min-height:100px}.body{padding:16px}}
-  </style>
-</head>
-<body><main class="tool"><section class="hero"><span class="eyebrow">Berlin event decision tool</span><h1>Rave the Planet Day Fit</h1><p>Make one flexible plan for a long August afternoon: when to arrive, when to step away and whether an evening add-on will actually suit you.</p></section><section class="body"><div class="controls"><div class="field"><label for="arrival">Your Berlin day</label><select id="arrival"><option value="early">I am free before lunch</option><option value="mid">I arrive around the afternoon</option><option value="late">I only want a shorter visit</option></select></div><div class="field"><label for="crowd">Crowd appetite</label><select id="crowd"><option value="high">I want the full atmosphere</option><option value="medium">I like energy with breathing room</option><option value="low">I want a calm edge, not a crush</option></select></div><div class="field"><label for="energy">Evening energy</label><select id="energy"><option value="go">Keep going after the event</option><option value="food">One proper meal is enough</option><option value="home">I need an easy finish</option></select></div></div><section class="pulse" aria-live="polite"><div class="meter"><div><b id="score">78</b><br><span>day-fit score</span></div></div><div class="result"><h2 id="headline">Build a two-part day, not one long push.</h2><p id="summary"></p><div class="moves"><div class="move"><b>Arrive</b><span id="arrive"></span></div><div class="move"><b>Reset</b><span id="reset"></span></div><div class="move"><b>Finish</b><span id="finish"></span></div></div></div></section><div class="bottom"><p class="small">The route and access conditions can change. Recheck the organiser’s update and BVG journey planner on the day; this tool is for shaping your time, not promising a particular crossing or timetable.</p><a class="cta" href="https://www.berlinwalk.com/book-free-berlin-walking-tour" target="_top">Book my 2-hour Berlin walk</a></div><div class="credits"><button aria-expanded="false" aria-controls="credit-panel">Widget visual credit</button><div id="credit-panel" hidden>Hero image: Rave the Planet Berlin, Wikimedia Commons. Licence and source are listed in the article’s Image credits disclosure.</div></div></section></main><script src="../js/brand.js"></script><script>const $=s=>document.querySelector(s);function draw(){let a=$('#arrival').value,c=$('#crowd').value,e=$('#energy').value,score=78;if(a==='late')score-=14;if(c==='low')score-=9;if(e==='home')score-=7;$('#score').textContent=score;const start=a==='early'?'Use the morning for a proper sit-down breakfast or a quiet Museum Island walk, then arrive with water and a charged phone.':a==='mid'?'Make the parade your main afternoon item. Eat before you enter the busy corridor rather than relying on a late decision.':'Choose one recognisable stretch near the Tiergarten edge and give yourself permission to leave after one good hour.';const reset=c==='high'?'Stay for the moving energy, then step into Tiergarten before your attention turns into fatigue.':c==='medium'?'Watch a focused section, then use Tiergarten as a real reset rather than squeezing through the densest point.':'Treat the event as a look-in: stand at the outside edge, keep a clear exit direction and make the green space your base.';const end=e==='go'?'Plan only one later stop and make it close to a direct night journey; do not make the parade and a cross-city club plan compete.':e==='food'?'Book or choose one dinner area before you go. A finished plan beats a hungry, overloaded search at 22:00.':'Leave while the day still feels good, eat near your accommodation and save the next morning for the historic centre.';$('#headline').textContent=score>70?'Build a two-part day, not one long push.':'Give the event a clear window, then protect the rest of your Berlin day.';$('#summary').textContent='Your answers point to a plan with a deliberate entry, a deliberate pause and a finish that matches your energy.';$('#arrive').textContent=start;$('#reset').textContent=reset;$('#finish').textContent=end}document.querySelectorAll('select').forEach(x=>x.addEventListener('change',draw));document.querySelector('.credits button').addEventListener('click',e=>{let p=$('#credit-panel'),open=!p.hidden;p.hidden=open;e.currentTarget.setAttribute('aria-expanded',String(!open))});draw();</script></body></html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rave the Planet Day Fit | BerlinWalk</title>
+    <meta
+      name="description"
+      content="Shape a flexible Rave the Planet day around your arrival, crowd appetite and evening energy."
+    />
+    <link rel="stylesheet" href="../css/brand.css" />
+    <style>
+      :root {
+        --ink: #10151e;
+        --night: #172033;
+        --violet: #6e3ff2;
+        --lime: #d9ff4b;
+        --paper: #f7f6f2;
+        --muted: #a8b3c7;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: transparent;
+        color: var(--ink);
+        font-family: Montserrat, Arial, sans-serif;
+      }
+      .tool {
+        max-width: 1040px;
+        margin: auto;
+        overflow: hidden;
+        border-radius: 14px;
+        background: var(--paper);
+        box-shadow: 0 18px 50px #11182728;
+      }
+      .hero {
+        min-height: 302px;
+        padding: 32px;
+        display: grid;
+        align-content: end;
+        background:
+          linear-gradient(90deg, #10151ef2 0%, #10151ecc 42%, #10151e22),
+          url("assets/hero-rave.jpg") center/cover;
+        color: #fff;
+      }
+      .eyebrow {
+        color: var(--lime);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .hero h1 {
+        max-width: 620px;
+        margin: 8px 0;
+        font-size: clamp(30px, 5vw, 48px);
+        line-height: 1.04;
+      }
+      .hero p {
+        max-width: 620px;
+        margin: 0;
+        color: #e8edfa;
+        line-height: 1.55;
+      }
+      .body {
+        padding: 24px;
+        display: grid;
+        gap: 22px;
+      }
+      .controls {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      .field {
+        border: 1px solid #d9dfea;
+        border-radius: 10px;
+        background: #fff;
+        padding: 14px;
+      }
+      .field label {
+        display: block;
+        margin-bottom: 8px;
+        color: #34405b;
+        font-size: 12px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+      .field select {
+        width: 100%;
+        border: 0;
+        background: #f3f5f8;
+        border-radius: 7px;
+        padding: 11px;
+        color: var(--ink);
+        font: inherit;
+        font-weight: 700;
+      }
+      .pulse {
+        display: grid;
+        grid-template-columns: 180px 1fr;
+        gap: 18px;
+        padding: 18px;
+        border-radius: 12px;
+        background: var(--night);
+        color: #fff;
+      }
+      .meter {
+        display: grid;
+        place-items: center;
+        min-height: 160px;
+        border-radius: 10px;
+        background: radial-gradient(circle, #6e3ff2 0 29%, #172033 30%);
+        text-align: center;
+      }
+      .meter b {
+        font-size: 38px;
+        color: var(--lime);
+      }
+      .result {
+        display: grid;
+        gap: 12px;
+      }
+      .result h2 {
+        margin: 0;
+        font-size: 25px;
+      }
+      .result p {
+        margin: 0;
+        color: #dce5f6;
+        line-height: 1.55;
+      }
+      .moves {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+      .move {
+        border-left: 3px solid var(--lime);
+        padding: 10px 12px;
+        background: #ffffff0d;
+      }
+      .move b {
+        display: block;
+        color: var(--lime);
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+      .move span {
+        display: block;
+        margin-top: 5px;
+        line-height: 1.45;
+      }
+      .bottom {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .small {
+        margin: 0;
+        color: #556276;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .cta {
+        display: inline-block;
+        border-radius: 8px;
+        background: var(--lime);
+        padding: 13px 17px;
+        color: #172033 !important;
+        font-weight: 900;
+        text-decoration: none;
+      }
+      .credits button {
+        border: 0;
+        background: none;
+        padding: 0;
+        color: #34405b;
+        text-decoration: underline;
+        cursor: pointer;
+        font: inherit;
+        font-size: 12px;
+      }
+      .credits div {
+        margin-top: 8px;
+        padding: 10px;
+        border-radius: 8px;
+        background: #eef1f4;
+        font-size: 12px;
+        line-height: 1.45;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      @media (max-width: 680px) {
+        .hero {
+          min-height: 340px;
+          padding: 24px;
+        }
+        .controls,
+        .moves {
+          grid-template-columns: 1fr;
+        }
+        .pulse {
+          grid-template-columns: 1fr;
+        }
+        .meter {
+          min-height: 100px;
+        }
+        .body {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="tool">
+      <section class="hero">
+        <span class="eyebrow">Berlin event decision tool</span>
+        <h1>Rave the Planet Day Fit</h1>
+        <p>
+          Make one flexible plan for a long August afternoon: when to arrive,
+          when to step away and whether an evening add-on will actually suit
+          you.
+        </p>
+      </section>
+      <section class="body">
+        <div class="controls">
+          <div class="field">
+            <label for="arrival">Your Berlin day</label
+            ><select id="arrival">
+              <option value="early">I am free before lunch</option>
+              <option value="mid">I arrive around the afternoon</option>
+              <option value="late">I only want a shorter visit</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="crowd">Crowd appetite</label
+            ><select id="crowd">
+              <option value="high">I want the full atmosphere</option>
+              <option value="medium">I like energy with breathing room</option>
+              <option value="low">I want a calm edge, not a crush</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="energy">Evening energy</label
+            ><select id="energy">
+              <option value="go">Keep going after the event</option>
+              <option value="food">One proper meal is enough</option>
+              <option value="home">I need an easy finish</option>
+            </select>
+          </div>
+        </div>
+        <section class="pulse" aria-live="polite">
+          <div class="meter">
+            <div><b id="score">78</b><br /><span>day-fit score</span></div>
+          </div>
+          <div class="result">
+            <h2 id="headline">Build a two-part day, not one long push.</h2>
+            <p id="summary"></p>
+            <div class="moves">
+              <div class="move"><b>Arrive</b><span id="arrive"></span></div>
+              <div class="move"><b>Reset</b><span id="reset"></span></div>
+              <div class="move"><b>Finish</b><span id="finish"></span></div>
+            </div>
+          </div>
+        </section>
+        <div class="bottom">
+          <p class="small">
+            The route and access conditions can change. Recheck the organiser’s
+            update and BVG journey planner on the day; this tool is for shaping
+            your time, not promising a particular crossing or timetable.
+          </p>
+          <a
+            class="cta"
+            href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based"
+            target="_top"
+            >Book my 2-hour Berlin walk</a
+          >
+        </div>
+        <div class="credits">
+          <button aria-expanded="false" aria-controls="credit-panel">
+            Widget visual credit
+          </button>
+          <div id="credit-panel" hidden>
+            Tool hero image: Rave The Planet Berlin 2023 by Leonhard Lenz,
+            <a
+              href="https://commons.wikimedia.org/wiki/File:Rave_the_Planet_Berlin_2023-07-08_151.jpg"
+              target="_blank"
+              rel="noopener"
+              >Wikimedia Commons</a
+            >, CC0.
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="../js/brand.js"></script>
+    <script>
+      const $ = (s) => document.querySelector(s);
+      function draw() {
+        let a = $("#arrival").value,
+          c = $("#crowd").value,
+          e = $("#energy").value,
+          score = 78;
+        if (a === "late") score -= 14;
+        if (c === "low") score -= 9;
+        if (e === "home") score -= 7;
+        $("#score").textContent = score;
+        const start =
+          a === "early"
+            ? "Use the morning for a proper sit-down breakfast or a quiet Museum Island walk, then arrive with water and a charged phone."
+            : a === "mid"
+              ? "Make the parade your main afternoon item. Eat before you enter the busy corridor rather than relying on a late decision."
+              : "Choose one recognisable stretch near the Tiergarten edge and give yourself permission to leave after one good hour.";
+        const reset =
+          c === "high"
+            ? "Stay for the moving energy, then step into Tiergarten before your attention turns into fatigue."
+            : c === "medium"
+              ? "Watch a focused section, then use Tiergarten as a real reset rather than squeezing through the densest point."
+              : "Treat the event as a look-in: stand at the outside edge, keep a clear exit direction and make the green space your base.";
+        const end =
+          e === "go"
+            ? "Plan only one later stop and make it close to a direct night journey; do not make the parade and a cross-city club plan compete."
+            : e === "food"
+              ? "Book or choose one dinner area before you go. A finished plan beats a hungry, overloaded search at 22:00."
+              : "Leave while the day still feels good, eat near your accommodation and save the next morning for the historic centre.";
+        $("#headline").textContent =
+          score > 70
+            ? "Build a two-part day, not one long push."
+            : "Give the event a clear window, then protect the rest of your Berlin day.";
+        $("#summary").textContent =
+          "Your answers point to a plan with a deliberate entry, a deliberate pause and a finish that matches your energy.";
+        $("#arrive").textContent = start;
+        $("#reset").textContent = reset;
+        $("#finish").textContent = end;
+      }
+      document
+        .querySelectorAll("select")
+        .forEach((x) => x.addEventListener("change", draw));
+      document
+        .querySelector(".credits button")
+        .addEventListener("click", (e) => {
+          let p = $("#credit-panel"),
+            open = !p.hidden;
+          p.hidden = open;
+          e.currentTarget.setAttribute("aria-expanded", String(!open));
+        });
+      draw();
+    </script>
+  </body>
+</html>

@@ -4,16 +4,16 @@ My advice: choose **three real stops and one flexible extra**, not a museum mara
 
 {{quick-summary}}
 
-![The west facade of Neues Museum on Museum Island](blog-drafts/long-night-of-museums-berlin-2026/images/optimized/01-museum-night-cover.jpg)
-_The Long Night works best when the museums you choose belong to a realistic route, not just an impressive list._
+![Bode Museum illuminated at night on Berlin's Museum Island](blog-drafts/long-night-of-museums-berlin-2026/images/optimized/01-bode-museum-night-cover.jpg)
+_Bode Museum after dark captures the point of the Long Night: choose a few places you want to experience properly, not an impossible list._
 
 ## Long Night of Museums Berlin 2026: what one ticket actually gives you
 
-The [Long Night of Museums](https://langenachtdermuseen.berlin/en/faq/) takes place on **Saturday 29 August 2026**, from **18:00 to 02:00**. The organiser advertises 75 museums, 750 events and one ticket. The ticket covers participating museums and the official shuttle service.
+The [Long Night of Museums](https://langenachtdermuseen.berlin/en/faq/) takes place on **Saturday 29 August 2026**, from **18:00 to 02:00**. One ticket covers all participating museums and the official shuttle service, which the organiser says will include buses and historical S-Bahn trains in 2026.
 
 That does not mean every museum has the same opening hours or that every event has the same language, capacity or queue. Some places have different hours, and the organiser says its website will carry event-day waiting information for selected Mitte museums. Check the [official programme and My Route page](https://langenachtdermuseen.berlin/en/) after choosing the kind of night you want.
 
-The current official ticket schedule has an early period from 3 to 16 August, then a higher regular price afterwards. Recheck the price and the children's-ticket rules before buying, because event ticketing is the sort of fact that changes at the worst possible moment.
+The current official ticket schedule lists **€15 regular / €12 reduced from 3 to 16 August**, then **€23 regular / €17 reduced from 17 August**. Children up to 12 enter free but still need a free children's ticket. Recheck the official ticket page before buying in case the organiser updates the conditions.
 
 ## Start with one anchor, not a citywide wish list
 
@@ -40,12 +40,12 @@ If your normal Berlin list is already full of paid attractions, my guide to [fre
 
 ## Moving between museums without losing the night
 
-The official FAQ says U-Bahn, S-Bahn, trams and many buses will run through the night, and that a shuttle connects museums outside the centre. That is useful, but it is not a reason to make every journey a transfer puzzle.
+The official FAQ says U-Bahn, S-Bahn, trams and many buses will run through the night, and that a shuttle connects museums outside the centre. Regular Berlin public transport is separate from the event ticket; the organiser currently recommends a 24-hour AB ticket if you do not already have a valid pass. That is useful, but it is not a reason to make every journey a transfer puzzle.
 
 Put your final destination into the live BVG or VBB planner before leaving each museum. If the next connection is awkward, stay longer where you are or use your flexible stop. My [Berlin public transport guide](https://www.berlinwalk.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus) explains the system; the live planner decides the night.
 
 ![Neues Museum exterior on Museum Island](blog-drafts/long-night-of-museums-berlin-2026/images/optimized/03-late-night-transport.jpg)
-_The official shuttle is useful for some outer museums, but a compact route normally gives you more museum time and less waiting._
+_Museum Island shows the advantage of a compact route: several cultural stops sit close together, leaving more time inside and less time in transit._
 
 Bring a small bag. The organiser notes that many museums require large rucksacks to go into a cloakroom or locker. That is not a dramatic obstacle, but it is another good reason not to arrive five minutes before an event starts.
 
