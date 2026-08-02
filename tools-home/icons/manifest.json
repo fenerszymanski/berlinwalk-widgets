@@ -2447,5 +2447,60 @@
     "png512": "tools-home/icons/family-walk-fit.png",
     "png160": "tools-home/icons/family-walk-fit-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_c370dd507c604d98aaea89af0afec663~mv2.png"
+  },
+  {
+    "slug": "rave-the-planet-day-fit",
+    "title": "Rave the Planet Day Fit",
+    "category": "Discovery",
+    "model": "ImageGen",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-08-02",
+    "sourceSheet": "tools-home/icons/generated-2026-08-02",
+    "png512": "tools-home/icons/rave-the-planet-day-fit.png",
+    "png160": "tools-home/icons/rave-the-planet-day-fit-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_4e93d91addf048cda838185bb2e0ff4d~mv2.png"
+  },
+  {
+    "slug": "museum-night-route-shaper",
+    "title": "Museum Night Route Shaper",
+    "category": "Discovery",
+    "model": "ImageGen",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-08-02",
+    "sourceSheet": "tools-home/icons/generated-2026-08-02",
+    "png512": "tools-home/icons/museum-night-route-shaper.png",
+    "png160": "tools-home/icons/museum-night-route-shaper-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_77f40eb585a04950ab4f2d464fd0bfa5~mv2.png"
+  },
+  {
+    "slug": "musikfest-evening-shape",
+    "title": "Musikfest Evening Shape",
+    "category": "Discovery",
+    "model": "ImageGen",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-08-02",
+    "sourceSheet": "tools-home/icons/generated-2026-08-02",
+    "png512": "tools-home/icons/musikfest-evening-shape.png",
+    "png160": "tools-home/icons/musikfest-evening-shape-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_220b323fed114246844441d3dd48c87f~mv2.png"
+  },
+  {
+    "slug": "ifa-after-show-evening",
+    "title": "IFA After-Show Evening",
+    "category": "Discovery",
+    "model": "ImageGen",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-08-02",
+    "sourceSheet": "tools-home/icons/generated-2026-08-02",
+    "png512": "tools-home/icons/ifa-after-show-evening.png",
+    "png160": "tools-home/icons/ifa-after-show-evening-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_02cb1f0da2d44f949ed378622782ced0~mv2.png"
+  },
+  {
+    "slug": "ilb-day-shape",
+    "title": "ILB Day Shape",
+    "category": "Discovery",
+    "model": "ImageGen",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-08-02",
+    "sourceSheet": "tools-home/icons/generated-2026-08-02",
+    "png512": "tools-home/icons/ilb-day-shape.png",
+    "png160": "tools-home/icons/ilb-day-shape-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_cb2ce70b179d4ad784a3f1f952eb9192~mv2.png"
   }
 ]
