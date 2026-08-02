@@ -367,7 +367,6 @@
         <style>${this._styles()}</style>
         <main id="bw-v4-top" class="bw-v4-native" data-bw-v4-variant="${variant}" aria-labelledby="bw-v4-title">
           <header class="bw-v4-header">
-            <a href="#bw-v4-top" class="bw-v4-logo" aria-label="BerlinWalk Trip Planner"><img src="${logo}" alt="BerlinWalk" width="190" height="48"></a>
             <nav aria-label="Plan information"><a href="#bw-v4-includes">What it includes</a><a href="#bw-v4-pricing">Pricing</a></nav>
           </header>
           <section class="bw-v4-hero" style="--bw-v4-hero:url('${hero}')">
@@ -476,8 +475,7 @@
         bw-berlin-trip-planner-page { display:block; width:100%; max-width:100%; min-width:0; overflow-x:clip; color:#212121; background:#FAFAF5; font-family:Montserrat,Arial,sans-serif; }
         .bw-v4-native, .bw-v4-native *, .bw-v4-native *::before, .bw-v4-native *::after { box-sizing:border-box; }
         .bw-v4-native { width:100%; max-width:1440px; margin:0 auto; overflow:hidden; background:#FAFAF5; }
-        .bw-v4-header { display:flex; align-items:center; justify-content:space-between; gap:24px; padding:18px clamp(18px,4vw,64px); background:#103B16; }
-        .bw-v4-logo img { display:block; width:170px; height:auto; }
+        .bw-v4-header { display:flex; align-items:center; justify-content:flex-end; gap:24px; padding:18px clamp(18px,4vw,64px); background:#103B16; }
         .bw-v4-header nav { display:flex; gap:20px; }
         .bw-v4-header a, .bw-v4-footer a { color:#FFE600; text-decoration:none; font-weight:700; }
         .bw-v4-native .bw-v4-header a:focus-visible, .bw-v4-native .bw-v4-footer a:focus-visible, .bw-v4-native .bw-v4-primary:focus-visible, .bw-v4-native .bw-v4-secondary:focus-visible, .bw-v4-native .bw-v4-price-cta:focus-visible, .bw-v4-native .bw-v4-date-skip:focus-visible, .bw-v4-native summary:focus-visible { outline:3px solid #FFE600; outline-offset:3px; }
@@ -547,7 +545,6 @@
         .bw-v4-credits a { color:#FFE600; text-decoration:underline; }
         @media (max-width:760px) {
           .bw-v4-header { padding:14px 16px; gap:12px; }
-          .bw-v4-logo img { width:145px; }
           .bw-v4-header nav { gap:10px; font-size:13px; }
           .bw-v4-hero { grid-template-columns:1fr; padding:48px 18px 42px; background-image:linear-gradient(180deg,rgba(16,59,22,.85),rgba(16,59,22,.45)),var(--bw-v4-hero); }
           .bw-v4-hero h1 { font-size:46px; }

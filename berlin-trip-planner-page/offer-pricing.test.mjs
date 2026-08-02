@@ -17,8 +17,10 @@ test("native Wix layer contains the V4 LP, no legacy iframe, and safe top-level 
   assert.match(landingSource, /planner-dates=/);
   assert.match(landingSource, /landing_variant/);
   assert.match(landingSource, /entry\", \"start\"/);
-  assert.match(landingSource, /#bw-v4-top/);
-  assert.doesNotMatch(landingSource, /class="bw-v4-logo"[^>]+data-bw-v4-start/);
+  assert.match(landingSource, /<main id="bw-v4-top"/);
+  assert.doesNotMatch(landingSource, /class="bw-v4-logo"/);
+  assert.match(landingSource, /href="#bw-v4-includes"/);
+  assert.match(landingSource, /href="#bw-v4-pricing"/);
   assert.match(landingSource, /Planner LP Impression/);
   assert.match(landingSource, /Planner LP Start/);
   assert.match(landingSource, /analyticsConsent\(\)/);
