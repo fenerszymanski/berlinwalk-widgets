@@ -12,6 +12,8 @@ const seoSource = await readFile(new URL("./SEO_SETTINGS.md", import.meta.url), 
 test("native Wix layer contains the V4 LP, no legacy iframe, and safe top-level handoff", () => {
   assert.doesNotMatch(landingSource, /<iframe\b/i);
   assert.doesNotMatch(landingSource, /ultimate-berlin-trip-planner/i);
+  assert.match(landingSource, /V4_ORIGIN = "https:\/\/planner\.berlinwalk\.com"/);
+  assert.doesNotMatch(landingSource, /berlinwalk-trip-planner-v4-lab-fenerszymanskis-projects\.vercel\.app/);
   assert.match(landingSource, /window\.location\.assign\(safePlannerUrl/);
   assert.match(landingSource, /data-bw-v4-start/);
   assert.match(landingSource, /planner-dates=/);
@@ -43,6 +45,9 @@ test("native LP preserves the exact V4 pricing bands, proof, photos, icons and F
   assert.match(landingSource, /pricing_1_2/);
   assert.match(landingSource, /pricing_3_4/);
   assert.match(landingSource, /pricing_5_7/);
+  assert.equal((landingSource.match(/Choose my dates/g) || []).length, 1);
+  assert.equal((landingSource.match(/startButton\("Choose my dates"/g) || []).length, 1);
+  assert.doesNotMatch(landingSource, /Start with \$\{days\}/);
   assert.match(landingSource, /WebApplication/);
   assert.match(landingSource, /AggregateOffer/);
   assert.match(seoSource, /lowPrice.*7\.99/);
