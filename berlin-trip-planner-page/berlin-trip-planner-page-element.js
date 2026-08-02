@@ -496,7 +496,11 @@
           if (innerGrid.style.gridTemplateRows === ownedRows) innerGrid.style.gridTemplateRows = "";
         }
         ownedInnerGridRows.clear();
-        const innerGrids = nodes.filter((node) => node !== grid && String(node.className || "").includes("max-width-container"));
+        const innerGrids = nodes.filter((node) => {
+          if (node === grid || node === section) return false;
+          const className = String(node.className || "");
+          return className.includes("max-width-container") || (className.includes("wixui-box") && className.includes("-container"));
+        });
         for (const innerGrid of innerGrids) {
           innerGrid.style.gridAutoRows = "auto";
           innerGrid.style.height = "auto";

@@ -123,13 +123,15 @@ test("Wix height guard collapses the component section and preserves dynamic gri
   }
   const host = new FakeNode("div", "comp-mq1axvyp", "DURcgf comp-mq1axvyp", 6645);
   const native = new FakeNode("main", "bw-v4-top", "bw-v4-native", 4795);
+  const intermediate = new FakeNode("div", "comp-mscayd1a", "HFEOE3 comp-mscayd1a-container comp-mscayd1a wixui-box", 7361.41);
   const container = new FakeNode("div", "", "comp-mq1axexj-container max-width-container", 7280);
   const section = new FakeNode("section", "comp-mq1axexj", "ke5pl1 comp-mq1axexj wixui-section", 7280);
   const grid = new FakeNode("div", "pidtg", "pidtg-container", 8074);
   const instance = new FakeNode("bw-berlin-trip-planner-page", "", "", 6645);
   instance.appendChild(native);
   host.appendChild(instance);
-  container.appendChild(host);
+  intermediate.appendChild(host);
+  container.appendChild(intermediate);
   section.appendChild(container);
   grid.appendChild(section);
   const document = {
@@ -144,9 +146,10 @@ test("Wix height guard collapses the component section and preserves dynamic gri
     visualViewport: null
   };
   let naturalGridRows = "143px 7279.95px 651px";
+  let naturalIntermediateGridRows = "7361.41px";
   let naturalInnerGridRows = "7279.95px";
   const getComputedStyle = (node) => ({
-    gridTemplateRows: node === grid ? (node.style.gridTemplateRows || naturalGridRows) : node === container ? (node.style.gridTemplateRows || naturalInnerGridRows) : "none",
+    gridTemplateRows: node === grid ? (node.style.gridTemplateRows || naturalGridRows) : node === intermediate ? (node.style.gridTemplateRows || naturalIntermediateGridRows) : node === container ? (node.style.gridTemplateRows || naturalInnerGridRows) : "none",
     gridRowStart: node === section ? "2" : "auto"
   });
   class FakeResizeObserver {
@@ -180,6 +183,9 @@ test("Wix height guard collapses the component section and preserves dynamic gri
   guardInstance._setupWixTopGapGuard();
   assert.equal(host.style.minHeight, "0px");
   assert.equal(host.style.height, "auto");
+  assert.equal(intermediate.style.height, "auto");
+  assert.equal(intermediate.style.gridTemplateRows, "auto");
+  assert.equal(intermediate.style.gridAutoRows, "auto");
   assert.equal(container.style.height, "auto");
   assert.equal(section.style.minHeight, "0px");
   assert.equal(container.style.gridTemplateRows, "auto");
@@ -190,11 +196,13 @@ test("Wix height guard collapses the component section and preserves dynamic gri
   assert.ok(observed.includes(native));
   assert.equal(typeof listeners.get("resize"), "function");
   naturalGridRows = "95px 5090px 1647px";
+  naturalIntermediateGridRows = "5090px";
   naturalInnerGridRows = "5090px";
   listeners.get("resize")();
   assert.equal(container.style.gridTemplateRows, "auto");
   assert.equal(grid.style.gridTemplateRows, "95px auto 1647px");
   naturalGridRows = "143px 7279.95px 651px";
+  naturalIntermediateGridRows = "7361.41px";
   naturalInnerGridRows = "7279.95px";
   listeners.get("resize")();
   assert.equal(container.style.gridTemplateRows, "auto");
