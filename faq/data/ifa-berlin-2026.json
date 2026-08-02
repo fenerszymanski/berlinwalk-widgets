@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "slug": "ifa-berlin-2026",
+  "key": "ifa-berlin-2026",
+  "config": {
+    "title": "IFA Berlin 2026 - FAQ",
+    "subtitle": "",
+    "items": [
+      {
+        "q": "When is IFA Berlin 2026?",
+        "a": "IFA Berlin takes place from 4 to 8 September 2026 at Messe Berlin, Messedamm 22."
+      },
+      {
+        "q": "What are the IFA 2026 hours for private visitors?",
+        "a": "Private visitors can enter from 12:00 to 18:00 on Friday 4 September, and from 10:00 to 18:00 on Saturday to Tuesday. Trade visitors have different access times."
+      },
+      {
+        "q": "Does an IFA ticket include Berlin public transport?",
+        "a": "No. The official IFA FAQ says admission tickets and exhibitor passes do not include U-Bahn, S-Bahn, bus or tram travel."
+      },
+      {
+        "q": "Which stations are useful for Messe Berlin?",
+        "a": "IFA lists Messe Nord/ICC, Charlottenburg, Kaiserdamm and Theodor-Heuss-Platz as useful approaches. Check your exact entrance and a live route on the day."
+      },
+      {
+        "q": "What should I do after IFA closes?",
+        "a": "Choose one realistic area rather than crossing the whole city. Charlottenburg suits a low-energy evening, while Kulturforum/Potsdamer Platz or Mitte work when you still have time and energy."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "When is IFA Berlin 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "IFA Berlin takes place from 4 to 8 September 2026 at Messe Berlin, Messedamm 22."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the IFA 2026 hours for private visitors?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Private visitors can enter from 12:00 to 18:00 on Friday 4 September, and from 10:00 to 18:00 on Saturday to Tuesday. Trade visitors have different access times."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does an IFA ticket include Berlin public transport?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The official IFA FAQ says admission tickets and exhibitor passes do not include U-Bahn, S-Bahn, bus or tram travel."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which stations are useful for Messe Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "IFA lists Messe Nord/ICC, Charlottenburg, Kaiserdamm and Theodor-Heuss-Platz as useful approaches. Check your exact entrance and a live route on the day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I do after IFA closes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Choose one realistic area rather than crossing the whole city. Charlottenburg suits a low-energy evening, while Kulturforum/Potsdamer Platz or Mitte work when you still have time and energy."
+        }
+      }
+    ]
+  }
+}

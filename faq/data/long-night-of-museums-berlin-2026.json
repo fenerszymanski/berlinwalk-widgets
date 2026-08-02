@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "slug": "long-night-of-museums-berlin-2026",
+  "key": "long-night-of-museums-berlin-2026",
+  "config": {
+    "title": "Long Night of Museums Berlin 2026 - FAQ",
+    "subtitle": "",
+    "items": [
+      {
+        "q": "When is Long Night of Museums Berlin 2026?",
+        "a": "The event takes place on Saturday 29 August 2026. Most participating museums are open from 18:00 to 02:00, although some listed museums have different hours."
+      },
+      {
+        "q": "How many museums should I visit?",
+        "a": "The organiser recommends no more than four or five museums. A route of three carefully chosen stops plus one flexible extra is usually more realistic."
+      },
+      {
+        "q": "Does the ticket include transport?",
+        "a": "The official FAQ says the Long Night ticket includes participating museums and the official shuttle service. Check the current shuttle overview and use BVG or VBB for the rest of your route."
+      },
+      {
+        "q": "Are there English-language events?",
+        "a": "Some museums offer English tours and some performances or workshops are language-independent, but the language depends on the individual event. Check the official programme before you commit."
+      },
+      {
+        "q": "Can I bring a backpack?",
+        "a": "Many museums require large bags and rucksacks to be deposited in a cloakroom or locker. A small bag makes a multi-museum route easier."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "When is Long Night of Museums Berlin 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The event takes place on Saturday 29 August 2026. Most participating museums are open from 18:00 to 02:00, although some listed museums have different hours."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many museums should I visit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The organiser recommends no more than four or five museums. A route of three carefully chosen stops plus one flexible extra is usually more realistic."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the ticket include transport?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The official FAQ says the Long Night ticket includes participating museums and the official shuttle service. Check the current shuttle overview and use BVG or VBB for the rest of your route."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are there English-language events?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Some museums offer English tours and some performances or workshops are language-independent, but the language depends on the individual event. Check the official programme before you commit."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I bring a backpack?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Many museums require large bags and rucksacks to be deposited in a cloakroom or locker. A small bag makes a multi-museum route easier."
+        }
+      }
+    ]
+  }
+}
