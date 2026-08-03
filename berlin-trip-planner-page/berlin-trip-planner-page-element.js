@@ -141,7 +141,7 @@
   function safePlannerUrl(variant, dates) {
     const url = new URL("/planner-v4", V4_ORIGIN);
     url.searchParams.set("landing_variant", variant === "b" ? "b" : "a");
-    url.searchParams.set("entry", "start");
+    url.searchParams.set("entry", "form");
     url.searchParams.set("source", "wix_native_berlin_trip_planner");
     if (analyticsConsent()) {
       try {
