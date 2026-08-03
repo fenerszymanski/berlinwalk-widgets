@@ -9,7 +9,7 @@
   const V4_ASSIGNMENT_STORAGE = "bw_planner_landing_v2";
   const WIX_CANONICAL_ORIGIN = "https://www.berlinwalk.com";
   const MAX_AGE_SECONDS = 60 * 60 * 24 * 180;
-  const CTA_LOCATIONS = new Set(["hero", "hero_dates", "hero_no_dates", "pricing_1_2", "pricing_3_4", "pricing_5_7"]);
+  const CTA_LOCATIONS = new Set(["hero", "hero_dates", "hero_no_dates", "pricing_1_2", "pricing_3_4", "pricing_5_7", "deliverable", "how_it_works"]);
   const CANONICAL_SCHEMA_ID = "bw-trip-planner-webapp-jsonld";
   const impressionTrackedElements = new WeakSet();
 
@@ -330,10 +330,10 @@
 
     _render() {
       const variant = this._assignment.variant;
-      const webProof = asset("assets/planner-proof-web-top.png");
-      const pdfProof = asset("assets/planner-proof-pdf-page-01.png");
+      const webProof = pageAsset("berlin-trip-planner-page/assets/planner-proof-web-itinerary.png");
+      const pdfProofDayOne = pageAsset("berlin-trip-planner-page/assets/planner-proof-pdf-page-02.png");
+      const pdfProofDayTwo = pageAsset("berlin-trip-planner-page/assets/planner-proof-pdf-page-04.png");
       const hero = asset("assets/berlin-spree-sunset-hero.jpg");
-      const logo = asset("assets/berlinwalk-wordmark-yellow.png");
       const photos = [
         [asset("assets/planner-lp-brandenburg-gate.jpg"), "Brandenburg Gate in quiet morning light", "The historic centre", "Brandenburg Gate gives a first day its clearest Berlin anchor."],
         [asset("assets/planner-lp-oranienstrasse.jpg"), "Street art and everyday life on Oranienstraße in Kreuzberg", "A neighbourhood with texture", "Oranienstraße shows the street-level Berlin that a route can make room for."],
@@ -392,10 +392,43 @@
               <small>Web plan + same-itinerary PDF</small>
             </aside>
           </section>
-          <section class="bw-v4-section bw-v4-steps" aria-labelledby="bw-v4-steps-title"><div class="bw-v4-section-heading"><span class="bw-v4-eyebrow">How it works</span><h2 id="bw-v4-steps-title">Four short steps. Optional details can stay optional.</h2></div><ol><li><strong>Dates and logistics</strong><span>Arrival, departure and the practical edges of your trip.</span></li><li><strong>Travellers and pace</strong><span>People, walking comfort and the rhythm you want.</span></li><li><strong>Priorities</strong><span>First-visit essentials, interests and fixed plans.</span></li><li><strong>Food and finish</strong><span>Meals, preferences and a useful last day.</span></li></ol></section>
-          <section class="bw-v4-section" id="bw-v4-proof" aria-labelledby="bw-v4-proof-title">
-            <div class="bw-v4-section-heading"><span class="bw-v4-eyebrow">One itinerary, two useful formats</span><h2 id="bw-v4-proof-title">The same plan on your phone and in your PDF.</h2></div>
-            <div class="bw-v4-proof-grid"><figure><img src="${webProof}" alt="Example Berlin itinerary Web plan"><figcaption>Private Web plan</figcaption></figure><figure><img src="${pdfProof}" alt="Example Berlin itinerary PDF page"><figcaption>Readable PDF from the same itinerary</figcaption></figure></div>
+          <section class="bw-v4-how" id="bw-v4-how" aria-labelledby="bw-v4-how-title">
+            <div class="bw-v4-how-intro">
+              <span class="bw-v4-eyebrow">HOW IT WORKS</span>
+              <h2 id="bw-v4-how-title" aria-label="Tell me four things. I’ll build the route.">Tell me<br>four things.<br>I’ll build<br>the route.</h2>
+              <p>It takes about two minutes, and optional details can stay optional.</p>
+              ${startButton("Start my Berlin plan", variant === "b" ? "dates" : "cta", "bw-v4-how-cta", "how_it_works")}
+            </div>
+            <div class="bw-v4-how-rail">
+              <ol class="bw-v4-how-list" aria-label="Four short steps">
+                <li><span class="bw-v4-how-dot" aria-hidden="true"></span><span class="bw-v4-how-number">01</span><div><h3>When are you in Berlin?</h3><p>Add arrival, departure and your stay area.</p></div></li>
+                <li><span class="bw-v4-how-dot" aria-hidden="true"></span><span class="bw-v4-how-number">02</span><div><h3>Who is coming?</h3><p>Choose the number of travellers and a comfortable pace.</p></div></li>
+                <li><span class="bw-v4-how-dot" aria-hidden="true"></span><span class="bw-v4-how-number">03</span><div><h3>What matters most?</h3><p>Add interests, must-sees and fixed plans.</p></div></li>
+                <li><span class="bw-v4-how-dot" aria-hidden="true"></span><span class="bw-v4-how-number">04</span><div><h3>What do you like to eat?</h3><p>Choose breakfast, cuisines, diet and spending style.</p></div></li>
+              </ol>
+              <div class="bw-v4-how-result"><strong>Then I turn your answers into one practical Web plan + matching PDF.</strong></div>
+            </div>
+          </section>
+          <section class="bw-v4-deliverable" id="bw-v4-proof" aria-labelledby="bw-v4-proof-title">
+            <div class="bw-v4-deliverable-copy">
+              <span class="bw-v4-deliverable-eyebrow">THE DELIVERABLE</span>
+              <h2 id="bw-v4-proof-title">Your route in your pocket. Your plan on paper.</h2>
+              <p class="bw-v4-deliverable-intro">Use the private Web plan as you move through Berlin, then keep the same itinerary as a clean, printable PDF.</p>
+              <div class="bw-v4-deliverable-formats" aria-label="Two matching itinerary formats">
+                <div><strong>Use now —</strong><span>private Web plan</span></div>
+                <div><strong>Keep later —</strong><span>matching PDF</span></div>
+              </div>
+              <p class="bw-v4-deliverable-proof">Same places · Same timing · Same useful details</p>
+              ${startButton("Plan my Berlin trip", "cta", "bw-v4-deliverable-cta", "deliverable")}
+            </div>
+            <div class="bw-v4-deliverable-visuals" aria-label="Same itinerary shown as Web plan and PDF pages">
+              <figure class="bw-v4-deliverable-web"><img src="${webProof}" alt="Private Berlin itinerary Web plan showing the daily itinerary" loading="lazy"><figcaption>Private Web plan</figcaption></figure>
+              <div class="bw-v4-deliverable-pdf-stack">
+                <figure class="bw-v4-deliverable-pdf bw-v4-deliverable-pdf-back"><img src="${pdfProofDayOne}" alt="Matching Berlin itinerary PDF page for day one" loading="lazy"><figcaption>Matching PDF · Day 1</figcaption></figure>
+                <figure class="bw-v4-deliverable-pdf bw-v4-deliverable-pdf-front"><img src="${pdfProofDayTwo}" alt="Matching Berlin itinerary PDF page for day two" loading="lazy"><figcaption>Matching PDF · Day 2</figcaption></figure>
+                <span class="bw-v4-deliverable-connector" aria-hidden="true"><span>ONE ITINERARY</span></span>
+              </div>
+            </div>
           </section>
           <section class="bw-v4-section" id="bw-v4-includes" aria-labelledby="bw-v4-includes-title"><div class="bw-v4-section-heading"><span class="bw-v4-eyebrow">What it includes</span><h2 id="bw-v4-includes-title">A useful plan, not another list of tabs.</h2></div><div class="bw-v4-benefit-grid">${benefits.map(([name, title, copy]) => `<article><span class="bw-v4-icon-box">${icon(name)}</span><h3>${title}</h3><p>${copy}</p></article>`).join("")}</div></section>
           <section class="bw-v4-section bw-v4-photo-section" aria-labelledby="bw-v4-photo-title"><div class="bw-v4-section-heading"><span class="bw-v4-eyebrow">Berlin, with room to choose</span><h2 id="bw-v4-photo-title">A plan should leave space for the city itself.</h2></div><div class="bw-v4-photo-grid">${photos.map(([src, alt, title, copy]) => `<figure><img src="${src}" alt="${escapeAttribute(alt)}" loading="lazy"><figcaption><strong>${title}</strong><span>${copy}</span></figcaption></figure>`).join("")}</div></section>
@@ -586,16 +619,49 @@
         .bw-v4-section-heading { max-width:760px; margin-bottom:28px; }
         .bw-v4-section h2 { font-size:clamp(32px,4vw,56px); color:#103B16; }
         .bw-v4-section-heading p { font-size:17px; }
-        .bw-v4-steps { background:#f1f3e8; }
-        .bw-v4-steps ol { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; margin:0; padding:0; list-style:none; counter-reset:bw-step; }
-        .bw-v4-steps li { display:grid; gap:8px; min-height:132px; padding:20px; border:1px solid #c9d1bf; border-radius:14px; background:#fffdf7; counter-increment:bw-step; }
-        .bw-v4-steps li::before { content:counter(bw-step, decimal-leading-zero); color:#103B16; font:700 13px/1 Montserrat,Arial,sans-serif; letter-spacing:.1em; }
-        .bw-v4-steps strong { color:#103B16; }
-        .bw-v4-steps li span { line-height:1.45; }
-        .bw-v4-proof-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
-        .bw-v4-proof-grid figure, .bw-v4-photo-grid figure { margin:0; }
-        .bw-v4-proof-grid img { display:block; width:100%; max-height:560px; object-fit:cover; object-position:top; border:1px solid #d7d7c9; border-radius:14px; background:#fff; }
-        .bw-v4-proof-grid figcaption { margin-top:10px; font-weight:800; color:#103B16; }
+        .bw-v4-how { display:grid; grid-template-columns:minmax(390px,.78fr) minmax(0,1.22fr); min-height:720px; }
+        .bw-v4-how-intro { display:flex; flex-direction:column; justify-content:center; padding:clamp(56px,8vw,108px) clamp(28px,3vw,48px); background:#103B16; color:#FAFAF5; }
+        .bw-v4-how-intro h2 { max-width:420px; margin:20px 0 24px; color:#FAFAF5; font-family:Georgia,serif; font-size:clamp(44px,4.6vw,68px); line-height:.98; }
+        .bw-v4-how-intro p { max-width:430px; margin:0; color:#FAFAF5; font-size:clamp(17px,1.8vw,22px); line-height:1.45; }
+        .bw-v4-how-cta { width:min(100%,360px); min-height:62px; display:inline-flex; align-items:center; justify-content:center; margin-top:34px; padding:18px 28px; border-radius:8px; background:#FFE600; color:#103B16; font-size:18px; font-weight:800; text-decoration:none; }
+        .bw-v4-how-cta:focus-visible { outline:3px solid #FAFAF5; outline-offset:4px; }
+        .bw-v4-how-rail { position:relative; display:flex; flex-direction:column; justify-content:center; padding:clamp(56px,8vw,108px) clamp(28px,7vw,96px); background:#FAFAF5; color:#103B16; }
+        .bw-v4-how-list { position:relative; list-style:none; margin:0; padding:0; }
+        .bw-v4-how-list::before { content:""; position:absolute; z-index:0; top:13px; bottom:13px; left:164px; width:2px; background:#103B16; }
+        .bw-v4-how-list li { position:relative; z-index:1; display:grid; grid-template-columns:120px 44px minmax(0,1fr); gap:22px; padding:0 0 28px 0; border-bottom:1px solid #d5d0be; }
+        .bw-v4-how-list li + li { padding-top:28px; }
+        .bw-v4-how-list li:last-child { padding-bottom:0; border-bottom:0; }
+        .bw-v4-how-dot { grid-column:2; grid-row:1; align-self:start; justify-self:center; width:14px; height:14px; margin-top:13px; border:2px solid #103B16; border-radius:50%; background:#FFE600; }
+        .bw-v4-how-number { color:#E63946; font-family:Georgia,serif; font-size:clamp(52px,5vw,72px); line-height:.88; }
+        .bw-v4-how-list > li > .bw-v4-how-number { grid-column:1; grid-row:1; }
+        .bw-v4-how-list > li > div { grid-column:3; grid-row:1; }
+        .bw-v4-how-list h3 { margin:0 0 9px; color:#103B16; font-family:Georgia,serif; font-size:clamp(24px,2.6vw,40px); line-height:1.05; }
+        .bw-v4-how-list p { max-width:520px; margin:0; color:#103B16; font-size:18px; line-height:1.4; }
+        .bw-v4-how-result { display:flex; align-items:center; gap:18px; margin-top:34px; padding:20px 24px; border-radius:10px; background:#FFE600; color:#103B16; }
+        .bw-v4-how-result strong { font-size:clamp(18px,2vw,24px); line-height:1.2; }
+        .bw-v4-deliverable { display:grid; grid-template-columns:minmax(500px,520px) minmax(0,1fr); gap:40px; align-items:center; padding:60px clamp(18px,4vw,64px) 64px; overflow:hidden; background:#103B16; color:#FAFAF5; }
+        .bw-v4-deliverable-copy { max-width:520px; }
+        .bw-v4-deliverable-eyebrow { display:block; color:#FFE600; font-size:14px; font-weight:800; letter-spacing:.16em; }
+        .bw-v4-deliverable h2 { max-width:520px; margin:18px 0 24px; color:#FAFAF5; font-family:Georgia,serif; font-size:clamp(42px,4.7vw,70px); line-height:.98; }
+        .bw-v4-deliverable-intro { max-width:540px; margin:0; color:#FAFAF5; font-size:clamp(17px,1.8vw,22px); line-height:1.45; }
+        .bw-v4-deliverable-formats { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; max-width:520px; margin:42px 0 28px; }
+        .bw-v4-deliverable-formats > div { display:grid; gap:3px; padding:7px 0 7px 18px; border-left:1px solid rgba(255,230,0,.62); }
+        .bw-v4-deliverable-formats strong { font-size:17px; font-weight:800; }
+        .bw-v4-deliverable-formats span { font-size:17px; }
+        .bw-v4-deliverable-proof { max-width:520px; margin:0 0 32px; color:#FFE600; font-size:16px; font-weight:800; letter-spacing:.02em; }
+        .bw-v4-deliverable-cta { width:min(100%,300px); min-height:62px; display:inline-flex; align-items:center; justify-content:center; padding:18px 28px; border-radius:8px; background:#FFE600; color:#103B16; font-size:18px; font-weight:800; text-decoration:none; }
+        .bw-v4-deliverable-cta:focus-visible { outline:3px solid #FAFAF5; outline-offset:4px; }
+        .bw-v4-deliverable-visuals { position:relative; min-height:620px; }
+        .bw-v4-deliverable-visuals figure { margin:0; }
+        .bw-v4-deliverable-web { position:absolute; z-index:1; top:7%; left:0; width:min(86%,760px); transform:rotate(-2deg); }
+        .bw-v4-deliverable-web img { display:block; width:100%; height:auto; border:1px solid rgba(16,59,22,.22); border-radius:16px; background:#fff; box-shadow:0 22px 55px rgba(0,0,0,.3); }
+        .bw-v4-deliverable-web figcaption, .bw-v4-deliverable-pdf figcaption { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+        .bw-v4-deliverable-pdf-stack { position:absolute; top:14%; right:0; width:min(32%,260px); min-width:180px; height:82%; }
+        .bw-v4-deliverable-pdf { position:absolute; width:100%; }
+        .bw-v4-deliverable-pdf img { display:block; width:100%; height:auto; border:1px solid rgba(16,59,22,.22); border-radius:2px; background:#fff; box-shadow:0 17px 36px rgba(0,0,0,.25); }
+        .bw-v4-deliverable-pdf-back { top:2%; right:-4%; transform:rotate(5deg); }
+        .bw-v4-deliverable-pdf-front { top:15%; right:13%; z-index:2; transform:rotate(8deg); }
+        .bw-v4-deliverable-connector { position:absolute; z-index:3; top:-15%; right:0; display:flex; align-items:flex-start; justify-content:flex-end; width:190px; height:28px; color:#FFE600; font-size:13px; font-weight:800; letter-spacing:.16em; text-align:right; }
         .bw-v4-benefit-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
         .bw-v4-benefit-grid article { padding:22px; border:1px solid #c9d1bf; border-radius:14px; background:#fffdf7; }
         .bw-v4-icon-box { display:grid; place-items:center; width:44px; height:44px; border:1px solid #a8bd9c; border-radius:12px; background:#fff2a3; }
@@ -627,14 +693,43 @@
         .bw-v4-credits { display:grid; gap:4px; margin-top:10px; }
         .bw-v4-credits p { margin:0; }
         .bw-v4-credits a { color:#FFE600; text-decoration:underline; }
+        @media (max-width:960px) {
+          .bw-v4-how { grid-template-columns:1fr; }
+          .bw-v4-how-intro { padding:72px clamp(28px,7vw,72px) 64px; }
+          .bw-v4-how-rail { padding:64px clamp(28px,7vw,72px) 72px; }
+          .bw-v4-deliverable { grid-template-columns:1fr; gap:48px; }
+          .bw-v4-deliverable-copy { max-width:520px; }
+          .bw-v4-deliverable-visuals { min-height:620px; }
+        }
         @media (max-width:760px) {
           .bw-v4-header { padding:14px 16px; gap:12px; }
           .bw-v4-header nav { gap:10px; font-size:15px; }
           .bw-v4-hero { grid-template-columns:1fr; padding:48px 18px 42px; background-image:linear-gradient(180deg,rgba(16,59,22,.85),rgba(16,59,22,.45)),var(--bw-v4-hero); }
           .bw-v4-hero h1 { font-size:46px; }
           .bw-v4-mini-plan { max-width:100%; }
-          .bw-v4-steps ol { grid-template-columns:1fr 1fr; }
-          .bw-v4-proof-grid, .bw-v4-benefit-grid, .bw-v4-price-grid { grid-template-columns:1fr; }
+          .bw-v4-how-intro { padding:56px 18px 48px; }
+          .bw-v4-how-intro h2 { font-size:clamp(42px,12vw,62px); }
+          .bw-v4-how-cta { width:100%; max-width:360px; }
+          .bw-v4-how-rail { padding:56px 18px 60px; }
+          .bw-v4-how-list { padding-left:0; }
+          .bw-v4-how-list::before { left:92px; }
+          .bw-v4-how-list li { grid-template-columns:64px 28px minmax(0,1fr); gap:14px; }
+          .bw-v4-how-dot { margin-top:10px; }
+          .bw-v4-how-number { font-size:42px; }
+          .bw-v4-how-list h3 { font-size:24px; }
+          .bw-v4-how-list p { font-size:16px; }
+          .bw-v4-how-result { align-items:flex-start; padding:18px; }
+          .bw-v4-deliverable { grid-template-columns:1fr; gap:42px; padding:56px 18px 64px; }
+          .bw-v4-deliverable h2 { font-size:clamp(42px,12vw,62px); }
+          .bw-v4-deliverable-formats { gap:12px; margin-top:32px; }
+          .bw-v4-deliverable-formats strong, .bw-v4-deliverable-formats span { font-size:15px; }
+          .bw-v4-deliverable-proof { font-size:14px; }
+          .bw-v4-deliverable-visuals { min-height:480px; margin:0 -2px; }
+          .bw-v4-deliverable-web { top:6%; width:78%; }
+          .bw-v4-deliverable-pdf-stack { top:14%; width:42%; min-width:142px; height:78%; }
+          .bw-v4-deliverable-cta { width:100%; max-width:300px; }
+          .bw-v4-deliverable-connector { top:-12%; right:0; width:150px; height:24px; font-size:13px; }
+          .bw-v4-benefit-grid, .bw-v4-price-grid { grid-template-columns:1fr; }
           .bw-v4-photo-grid { grid-template-columns:1fr; }
           .bw-v4-footer { grid-template-columns:1fr; }
           .bw-v4-footer > div { gap:12px; }
