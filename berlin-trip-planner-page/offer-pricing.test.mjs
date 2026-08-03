@@ -35,13 +35,14 @@ test("native Wix layer contains the V4 LP, no legacy iframe, and safe top-level 
 
 test("native LP preserves the exact V4 pricing bands, proof, photos, icons and FAQ", () => {
   for (const price of ["€7.99", "€11.99", "€15.99"]) assert.match(landingSource, new RegExp(price.replace("€", "€")));
-  assert.match(landingSource, /planner-proof-web-top/);
-  assert.match(landingSource, /planner-proof-pdf-page-01/);
+  assert.match(landingSource, /planner-proof-web-itinerary/);
+  assert.match(landingSource, /planner-proof-pdf-page-02/);
+  assert.match(landingSource, /planner-proof-pdf-page-04/);
   assert.equal((landingSource.match(/planner-lp-/g) || []).length >= 3, true);
   assert.match(landingSource, /data-icon-family="lucide"/);
   for (const iconName of ["map", "train", "calendar", "food", "files", "euro"]) assert.match(landingSource, new RegExp(`${iconName}:`));
   assert.match(landingSource, /A few clear answers/);
-  assert.match(landingSource, /Four short steps/);
+  assert.match(landingSource, /Tell me four things\. I’ll build the route\./);
   assert.match(landingSource, /pricing_1_2/);
   assert.match(landingSource, /pricing_3_4/);
   assert.match(landingSource, /pricing_5_7/);
@@ -57,11 +58,75 @@ test("native LP preserves the exact V4 pricing bands, proof, photos, icons and F
   assert.doesNotMatch(`${landingSource}\n${seoSource}`, /3\.99|priceValidUntil/);
 });
 
+test("editorial deliverable reveal preserves exact copy, CTA seam and distinct real PDF pages", async () => {
+  assert.match(landingSource, /class="bw-v4-deliverable"/);
+  assert.match(landingSource, /THE DELIVERABLE/);
+  assert.match(landingSource, /Your route in your pocket\. Your plan on paper\./);
+  assert.match(landingSource, /Use the private Web plan as you move through Berlin, then keep the same itinerary as a clean, printable PDF\./);
+  assert.match(landingSource, /Use now —<\/strong><span>private Web plan/);
+  assert.match(landingSource, /Keep later —<\/strong><span>matching PDF/);
+  assert.match(landingSource, /Same places · Same timing · Same useful details/);
+  assert.match(landingSource, /startButton\("Plan my Berlin trip", "cta", "bw-v4-deliverable-cta", "deliverable"\)/);
+  assert.match(landingSource, /CTA_LOCATIONS = new Set\(\[[^\]]*deliverable/);
+  assert.doesNotMatch(landingSource, /The same plan on your phone and in your PDF\./);
+  assert.doesNotMatch(landingSource, /One itinerary, two useful formats<\/span>/);
+  assert.match(landingSource, /class="bw-v4-deliverable-web"/);
+  assert.doesNotMatch(landingSource, /planner-proof-web-top\.png/);
+  assert.match(landingSource, /showing the daily itinerary/);
+  assert.match(landingSource, /class="bw-v4-deliverable-pdf-stack"/);
+  assert.match(landingSource, /class="[^"]*bw-v4-deliverable-pdf-back/);
+  assert.match(landingSource, /class="[^"]*bw-v4-deliverable-pdf-front/);
+  const [webPlan, pdfDayOne, pdfDayTwo] = await Promise.all([
+    readFile(new URL("./assets/planner-proof-web-itinerary.png", import.meta.url)),
+    readFile(new URL("./assets/planner-proof-pdf-page-02.png", import.meta.url)),
+    readFile(new URL("./assets/planner-proof-pdf-page-04.png", import.meta.url))
+  ]);
+  assert.ok(webPlan.length > 100_000);
+  assert.ok(pdfDayOne.length > 100_000);
+  assert.ok(pdfDayTwo.length > 100_000);
+  assert.notDeepEqual(pdfDayOne, pdfDayTwo);
+});
+
+test("editorial deliverable reveal keeps the dark-green/cream/yellow responsive contract", () => {
+  assert.match(landingSource, /\.bw-v4-deliverable \{[^}]*background:#103B16;[^}]*color:#FAFAF5/);
+  assert.match(landingSource, /\.bw-v4-deliverable h2 \{[^}]*color:#FAFAF5/);
+  assert.match(landingSource, /\.bw-v4-deliverable-cta \{[^}]*background:#FFE600; color:#103B16/);
+  assert.match(landingSource, /\.bw-v4-deliverable-cta \{[^}]*width:min\(100%,300px\); min-height:62px/);
+  assert.match(landingSource, /grid-template-columns:minmax\(500px,520px\) minmax\(0,1fr\); gap:40px;[^}]*padding:60px clamp\(18px,4vw,64px\) 64px/);
+  assert.doesNotMatch(landingSource, /bw-v4-deliverable-brand/);
+  assert.match(landingSource, /\.bw-v4-deliverable h2 \{[^}]*max-width:520px[^}]*font-size:clamp\(38px,3.4vw,52px\)[^}]*line-height:1\.02/);
+  assert.match(landingSource, /\.bw-v4-deliverable-intro \{[^}]*font-size:clamp\(16px,1.35vw,19px\)/);
+  assert.match(landingSource, /\.bw-v4-deliverable \{[^}]*border-top:32px solid #FAFAF5/);
+  assert.match(landingSource, /\.bw-v4-deliverable-web \{[^}]*width:min\(86%,760px\)/);
+  assert.match(landingSource, /\.bw-v4-deliverable-pdf-stack \{[^}]*width:min\(32%,260px\); min-width:180px/);
+  assert.match(landingSource, /\.bw-v4-deliverable-visuals \{[^}]*min-height:620px/);
+  assert.match(landingSource, /@media \(max-width:960px\) \{[\s\S]*?\.bw-v4-deliverable \{ grid-template-columns:1fr; gap:48px; \}[\s\S]*?\.bw-v4-deliverable-visuals \{ min-height:620px; \}/);
+  assert.match(landingSource, /@media \(max-width:760px\)[\s\S]*?\.bw-v4-deliverable \{ grid-template-columns:1fr/);
+  assert.match(landingSource, /@media \(max-width:760px\)[\s\S]*?\.bw-v4-deliverable-visuals \{ min-height:480px/);
+  assert.match(landingSource, /\.bw-v4-deliverable-connector \{[^}]*top:-15%;[^}]*height:28px/);
+  assert.doesNotMatch(landingSource, /\.bw-v4-deliverable-connector::(?:before|after)/);
+  assert.match(landingSource, /aria-hidden="true"/);
+});
+
+test("How and Deliverable use content hierarchy sizes with a cream transition", () => {
+  assert.match(landingSource, /\.bw-v4-how-intro h2 \{[^}]*font-size:clamp\(38px,3\.2vw,52px\); line-height:1\.02/);
+  assert.match(landingSource, /\.bw-v4-how-intro p \{[^}]*font-size:clamp\(16px,1\.35vw,19px\)/);
+  assert.match(landingSource, /\.bw-v4-how-number \{[^}]*font-size:clamp\(44px,4vw,60px\)/);
+  assert.match(landingSource, /\.bw-v4-how-list h3 \{[^}]*font-size:clamp\(22px,1\.9vw,30px\)/);
+  assert.match(landingSource, /\.bw-v4-how-list p \{[^}]*font-size:16px/);
+  assert.match(landingSource, /\.bw-v4-how-result strong \{[^}]*font-size:clamp\(17px,1\.5vw,20px\)/);
+  assert.match(landingSource, /@media \(max-width:760px\)[\s\S]*?\.bw-v4-how-intro h2 \{ font-size:clamp\(36px,9\.5vw,42px\); \}/);
+  assert.match(landingSource, /@media \(max-width:760px\)[\s\S]*?\.bw-v4-how-number \{ font-size:38px; \}/);
+  assert.match(landingSource, /@media \(max-width:760px\)[\s\S]*?\.bw-v4-how-list h3 \{ font-size:22px; \}/);
+  assert.match(landingSource, /@media \(max-width:760px\)[\s\S]*?\.bw-v4-deliverable h2 \{ font-size:clamp\(36px,9\.5vw,42px\); \}/);
+  assert.match(landingSource, /@media \(max-width:760px\)[\s\S]*?\.bw-v4-deliverable \{[^}]*border-top-width:16px/);
+});
+
 test("A/B and date handoff remain PII-free", () => {
   assert.match(landingSource, /V4_EXPERIMENT_KEY = "planner_landing_dates_v2"/);
   assert.match(landingSource, /V4_ASSIGNMENT_COOKIE = "bw_planner_landing_v2"/);
   assert.match(landingSource, /location: link\.getAttribute\("data-location"\)/);
-  for (const location of ["hero", "hero_dates", "hero_no_dates", "pricing_1_2", "pricing_3_4", "pricing_5_7"]) assert.match(landingSource, new RegExp(location));
+  for (const location of ["hero", "hero_dates", "hero_no_dates", "pricing_1_2", "pricing_3_4", "pricing_5_7", "how_it_works"]) assert.match(landingSource, new RegExp(location));
   assert.match(landingSource, /CTA_LOCATIONS/);
   assert.match(landingSource, /if \(!this\._assignment\.isQa\)/);
   assert.doesNotMatch(landingSource, /parent_url|parent_location|requestId|session_id/);
@@ -94,6 +159,39 @@ test("native SEO/schema and public credits are exact and scoped", () => {
   assert.match(landingSource, /Orderinchaos, CC BY-SA 4\.0/);
   assert.doesNotMatch(landingSource, /licensed source recorded by BerlinWalk/);
   assert.doesNotMatch(landingSource, /#bw-v4-form/);
+});
+
+test("How it works uses the approved rail composition and the same safe CTA seam", () => {
+  assert.match(landingSource, /class="bw-v4-how" id="bw-v4-how"/);
+  assert.match(landingSource, /HOW IT WORKS/);
+  assert.match(landingSource, /Tell me four things\. I’ll build the route\./);
+  assert.match(landingSource, /Tell me<br>four things\.<br>I’ll build<br>the route\./);
+  assert.match(landingSource, /It takes about two minutes, and optional details can stay optional\./);
+  assert.match(landingSource, /startButton\("Start my Berlin plan", variant === "b" \? "dates" : "cta", "bw-v4-how-cta", "how_it_works"\)/);
+  assert.match(landingSource, /class="bw-v4-how-list" aria-label="Four short steps"/);
+  assert.match(landingSource, /<ol class="bw-v4-how-list" aria-label="Four short steps">\s*<li>/);
+  assert.doesNotMatch(landingSource, /<ol class="bw-v4-how-list"[^>]*>\s*<(?:span|div)/);
+  for (const step of [
+    ["01", "When are you in Berlin\\?", "Add arrival, departure and your stay area\\."],
+    ["02", "Who is coming\\?", "Choose the number of travellers and a comfortable pace\\."],
+    ["03", "What matters most\\?", "Add interests, must-sees and fixed plans\\."],
+    ["04", "What do you like to eat\\?", "Choose breakfast, cuisines, diet and spending style\\."],
+  ]) {
+    assert.match(landingSource, new RegExp(`${step[0]}[\\s\\S]*${step[1]}[\\s\\S]*${step[2]}`));
+  }
+  assert.equal((landingSource.match(/class="bw-v4-how-dot"/g) || []).length, 4);
+  assert.match(landingSource, /Then I turn your answers into one practical Web plan \+ matching PDF\./);
+  assert.match(landingSource, /\.bw-v4-how \{[^}]*grid-template-columns:minmax\(390px,.78fr\) minmax\(0,1\.22fr\)/);
+  assert.match(landingSource, /\.bw-v4-how-list::before \{[^}]*background:#103B16/);
+  assert.match(landingSource, /\.bw-v4-how-dot \{[^}]*background:#FFE600/);
+  assert.match(landingSource, /\.bw-v4-how-number \{[^}]*color:#E63946/);
+  assert.match(landingSource, /\.bw-v4-how-result \{[^}]*background:#FFE600; color:#103B16/);
+  assert.match(landingSource, /\.bw-v4-how-cta:focus-visible \{[^}]*outline:3px solid #FAFAF5/);
+  assert.doesNotMatch(landingSource, /check:/);
+  assert.doesNotMatch(landingSource, /class="bw-v4-how-result">\$\{icon/);
+  assert.doesNotMatch(landingSource, /class="bw-v4-how-track"/);
+  assert.doesNotMatch(landingSource, /class="bw-v4-steps"|Four short steps\. Optional details can stay optional\./);
+  assert.match(landingSource, /CTA_LOCATIONS = new Set\(\[[^\]]*how_it_works/);
 });
 
 test("native typography has explicit readable floors independent of Wix base CSS", () => {

@@ -621,8 +621,8 @@
         .bw-v4-section-heading p { font-size:17px; }
         .bw-v4-how { display:grid; grid-template-columns:minmax(390px,.78fr) minmax(0,1.22fr); min-height:720px; }
         .bw-v4-how-intro { display:flex; flex-direction:column; justify-content:center; padding:clamp(56px,8vw,108px) clamp(28px,3vw,48px); background:#103B16; color:#FAFAF5; }
-        .bw-v4-how-intro h2 { max-width:420px; margin:20px 0 24px; color:#FAFAF5; font-family:Georgia,serif; font-size:clamp(44px,4.6vw,68px); line-height:.98; }
-        .bw-v4-how-intro p { max-width:430px; margin:0; color:#FAFAF5; font-size:clamp(17px,1.8vw,22px); line-height:1.45; }
+        .bw-v4-how-intro h2 { max-width:420px; margin:20px 0 24px; color:#FAFAF5; font-family:Georgia,serif; font-size:clamp(38px,3.2vw,52px); line-height:1.02; }
+        .bw-v4-how-intro p { max-width:430px; margin:0; color:#FAFAF5; font-size:clamp(16px,1.35vw,19px); line-height:1.45; }
         .bw-v4-how-cta { width:min(100%,360px); min-height:62px; display:inline-flex; align-items:center; justify-content:center; margin-top:34px; padding:18px 28px; border-radius:8px; background:#FFE600; color:#103B16; font-size:18px; font-weight:800; text-decoration:none; }
         .bw-v4-how-cta:focus-visible { outline:3px solid #FAFAF5; outline-offset:4px; }
         .bw-v4-how-rail { position:relative; display:flex; flex-direction:column; justify-content:center; padding:clamp(56px,8vw,108px) clamp(28px,7vw,96px); background:#FAFAF5; color:#103B16; }
@@ -632,18 +632,18 @@
         .bw-v4-how-list li + li { padding-top:28px; }
         .bw-v4-how-list li:last-child { padding-bottom:0; border-bottom:0; }
         .bw-v4-how-dot { grid-column:2; grid-row:1; align-self:start; justify-self:center; width:14px; height:14px; margin-top:13px; border:2px solid #103B16; border-radius:50%; background:#FFE600; }
-        .bw-v4-how-number { color:#E63946; font-family:Georgia,serif; font-size:clamp(52px,5vw,72px); line-height:.88; }
+        .bw-v4-how-number { color:#E63946; font-family:Georgia,serif; font-size:clamp(44px,4vw,60px); line-height:.88; }
         .bw-v4-how-list > li > .bw-v4-how-number { grid-column:1; grid-row:1; }
         .bw-v4-how-list > li > div { grid-column:3; grid-row:1; }
-        .bw-v4-how-list h3 { margin:0 0 9px; color:#103B16; font-family:Georgia,serif; font-size:clamp(24px,2.6vw,40px); line-height:1.05; }
-        .bw-v4-how-list p { max-width:520px; margin:0; color:#103B16; font-size:18px; line-height:1.4; }
+        .bw-v4-how-list h3 { margin:0 0 9px; color:#103B16; font-family:Georgia,serif; font-size:clamp(22px,1.9vw,30px); line-height:1.05; }
+        .bw-v4-how-list p { max-width:520px; margin:0; color:#103B16; font-size:16px; line-height:1.4; }
         .bw-v4-how-result { display:flex; align-items:center; gap:18px; margin-top:34px; padding:20px 24px; border-radius:10px; background:#FFE600; color:#103B16; }
-        .bw-v4-how-result strong { font-size:clamp(18px,2vw,24px); line-height:1.2; }
-        .bw-v4-deliverable { display:grid; grid-template-columns:minmax(500px,520px) minmax(0,1fr); gap:40px; align-items:center; padding:60px clamp(18px,4vw,64px) 64px; overflow:hidden; background:#103B16; color:#FAFAF5; }
+        .bw-v4-how-result strong { font-size:clamp(17px,1.5vw,20px); line-height:1.2; }
+        .bw-v4-deliverable { display:grid; grid-template-columns:minmax(500px,520px) minmax(0,1fr); gap:40px; align-items:center; padding:60px clamp(18px,4vw,64px) 64px; border-top:32px solid #FAFAF5; overflow:hidden; background:#103B16; color:#FAFAF5; }
         .bw-v4-deliverable-copy { max-width:520px; }
         .bw-v4-deliverable-eyebrow { display:block; color:#FFE600; font-size:14px; font-weight:800; letter-spacing:.16em; }
-        .bw-v4-deliverable h2 { max-width:520px; margin:18px 0 24px; color:#FAFAF5; font-family:Georgia,serif; font-size:clamp(42px,4.7vw,70px); line-height:.98; }
-        .bw-v4-deliverable-intro { max-width:540px; margin:0; color:#FAFAF5; font-size:clamp(17px,1.8vw,22px); line-height:1.45; }
+        .bw-v4-deliverable h2 { max-width:520px; margin:18px 0 24px; color:#FAFAF5; font-family:Georgia,serif; font-size:clamp(38px,3.4vw,52px); line-height:1.02; }
+        .bw-v4-deliverable-intro { max-width:540px; margin:0; color:#FAFAF5; font-size:clamp(16px,1.35vw,19px); line-height:1.45; }
         .bw-v4-deliverable-formats { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; max-width:520px; margin:42px 0 28px; }
         .bw-v4-deliverable-formats > div { display:grid; gap:3px; padding:7px 0 7px 18px; border-left:1px solid rgba(255,230,0,.62); }
         .bw-v4-deliverable-formats strong { font-size:17px; font-weight:800; }
@@ -708,19 +708,19 @@
           .bw-v4-hero h1 { font-size:46px; }
           .bw-v4-mini-plan { max-width:100%; }
           .bw-v4-how-intro { padding:56px 18px 48px; }
-          .bw-v4-how-intro h2 { font-size:clamp(42px,12vw,62px); }
+          .bw-v4-how-intro h2 { font-size:clamp(36px,9.5vw,42px); }
           .bw-v4-how-cta { width:100%; max-width:360px; }
           .bw-v4-how-rail { padding:56px 18px 60px; }
           .bw-v4-how-list { padding-left:0; }
           .bw-v4-how-list::before { left:92px; }
           .bw-v4-how-list li { grid-template-columns:64px 28px minmax(0,1fr); gap:14px; }
           .bw-v4-how-dot { margin-top:10px; }
-          .bw-v4-how-number { font-size:42px; }
-          .bw-v4-how-list h3 { font-size:24px; }
+          .bw-v4-how-number { font-size:38px; }
+          .bw-v4-how-list h3 { font-size:22px; }
           .bw-v4-how-list p { font-size:16px; }
           .bw-v4-how-result { align-items:flex-start; padding:18px; }
-          .bw-v4-deliverable { grid-template-columns:1fr; gap:42px; padding:56px 18px 64px; }
-          .bw-v4-deliverable h2 { font-size:clamp(42px,12vw,62px); }
+          .bw-v4-deliverable { grid-template-columns:1fr; gap:42px; padding:56px 18px 64px; border-top-width:16px; }
+          .bw-v4-deliverable h2 { font-size:clamp(36px,9.5vw,42px); }
           .bw-v4-deliverable-formats { gap:12px; margin-top:32px; }
           .bw-v4-deliverable-formats strong, .bw-v4-deliverable-formats span { font-size:15px; }
           .bw-v4-deliverable-proof { font-size:14px; }
