@@ -109,6 +109,15 @@ test("editorial deliverable reveal keeps the dark-green/cream/yellow responsive 
 });
 
 test("How and Deliverable use content hierarchy sizes with a cream transition", () => {
+  assert.match(landingSource, /\.bw-v4-how-intro \{[^}]*background:#C5E1A5; color:#103B16/);
+  assert.match(landingSource, /\.bw-v4-how-intro h2 \{[^}]*color:#103B16/);
+  assert.match(landingSource, /\.bw-v4-how-intro p \{[^}]*color:#103B16/);
+  assert.match(landingSource, /\.bw-v4-how-intro \.bw-v4-eyebrow \{ color:#103B16; \}/);
+  assert.doesNotMatch(landingSource, /\.bw-v4-how-intro \{[^}]*background:#103B16; color:#FAFAF5/);
+  assert.doesNotMatch(landingSource, /\.bw-v4-how-intro h2 \{[^}]*color:#FAFAF5/);
+  assert.doesNotMatch(landingSource, /\.bw-v4-how-intro p \{[^}]*color:#FAFAF5/);
+  assert.match(landingSource, /\.bw-v4-how-cta \{[^}]*background:#FFE600; color:#103B16/);
+  assert.match(landingSource, /\.bw-v4-how-cta:focus-visible \{[^}]*outline:3px solid #103B16/);
   assert.match(landingSource, /\.bw-v4-how-intro h2 \{[^}]*font-size:clamp\(38px,3\.2vw,52px\); line-height:1\.02/);
   assert.match(landingSource, /\.bw-v4-how-intro p \{[^}]*font-size:clamp\(16px,1\.35vw,19px\)/);
   assert.match(landingSource, /\.bw-v4-how-number \{[^}]*font-size:clamp\(44px,4vw,60px\)/);
@@ -186,7 +195,7 @@ test("How it works uses the approved rail composition and the same safe CTA seam
   assert.match(landingSource, /\.bw-v4-how-dot \{[^}]*background:#FFE600/);
   assert.match(landingSource, /\.bw-v4-how-number \{[^}]*color:#E63946/);
   assert.match(landingSource, /\.bw-v4-how-result \{[^}]*background:#FFE600; color:#103B16/);
-  assert.match(landingSource, /\.bw-v4-how-cta:focus-visible \{[^}]*outline:3px solid #FAFAF5/);
+  assert.match(landingSource, /\.bw-v4-how-cta:focus-visible \{[^}]*outline:3px solid #103B16/);
   assert.doesNotMatch(landingSource, /check:/);
   assert.doesNotMatch(landingSource, /class="bw-v4-how-result">\$\{icon/);
   assert.doesNotMatch(landingSource, /class="bw-v4-how-track"/);

@@ -620,11 +620,12 @@
         .bw-v4-section h2 { font-size:clamp(32px,4vw,56px); color:#103B16; }
         .bw-v4-section-heading p { font-size:17px; }
         .bw-v4-how { display:grid; grid-template-columns:minmax(390px,.78fr) minmax(0,1.22fr); min-height:720px; }
-        .bw-v4-how-intro { display:flex; flex-direction:column; justify-content:center; padding:clamp(56px,8vw,108px) clamp(28px,3vw,48px); background:#103B16; color:#FAFAF5; }
-        .bw-v4-how-intro h2 { max-width:420px; margin:20px 0 24px; color:#FAFAF5; font-family:Georgia,serif; font-size:clamp(38px,3.2vw,52px); line-height:1.02; }
-        .bw-v4-how-intro p { max-width:430px; margin:0; color:#FAFAF5; font-size:clamp(16px,1.35vw,19px); line-height:1.45; }
+        .bw-v4-how-intro { display:flex; flex-direction:column; justify-content:center; padding:clamp(56px,8vw,108px) clamp(28px,3vw,48px); background:#C5E1A5; color:#103B16; }
+        .bw-v4-how-intro .bw-v4-eyebrow { color:#103B16; }
+        .bw-v4-how-intro h2 { max-width:420px; margin:20px 0 24px; color:#103B16; font-family:Georgia,serif; font-size:clamp(38px,3.2vw,52px); line-height:1.02; }
+        .bw-v4-how-intro p { max-width:430px; margin:0; color:#103B16; font-size:clamp(16px,1.35vw,19px); line-height:1.45; }
         .bw-v4-how-cta { width:min(100%,360px); min-height:62px; display:inline-flex; align-items:center; justify-content:center; margin-top:34px; padding:18px 28px; border-radius:8px; background:#FFE600; color:#103B16; font-size:18px; font-weight:800; text-decoration:none; }
-        .bw-v4-how-cta:focus-visible { outline:3px solid #FAFAF5; outline-offset:4px; }
+        .bw-v4-how-cta:focus-visible { outline:3px solid #103B16; outline-offset:4px; }
         .bw-v4-how-rail { position:relative; display:flex; flex-direction:column; justify-content:center; padding:clamp(56px,8vw,108px) clamp(28px,7vw,96px); background:#FAFAF5; color:#103B16; }
         .bw-v4-how-list { position:relative; list-style:none; margin:0; padding:0; }
         .bw-v4-how-list::before { content:""; position:absolute; z-index:0; top:13px; bottom:13px; left:164px; width:2px; background:#103B16; }
