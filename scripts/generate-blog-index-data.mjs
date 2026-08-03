@@ -205,11 +205,14 @@ const YEAR_REQUIRED_TITLE_SLUGS = new Set([
 ]);
 
 const HERO_SLUGS = {
-  lead: 'which-berlin-pass-is-worth-it',
+  // 3 Aug 2026: the upcoming Long Night of Museums is the strongest
+  // broad tourist-useful timely lead; keep the rail mixed rather than
+  // turning the featured block into a pure event-news shelf.
+  lead: 'long-night-of-museums-berlin-2026',
   secondary: [
+    'international-literature-festival-berlin-2026',
+    'what-happens-on-a-berlin-free-walking-tour',
     'berlin-sights-near-alexanderplatz-walking-distance',
-    'vietnamese-food-in-berlin',
-    'hamburg-day-trip-from-berlin',
     'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
     'where-was-the-berlin-wall-interactive-map',
     'berlin-courtyards-hoefe',
@@ -315,6 +318,9 @@ const REQUIRED_SLUGS = [
   'why-is-berlin-founding-year-1237',
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
+  'long-night-of-museums-berlin-2026',
+  'international-literature-festival-berlin-2026',
+  'what-happens-on-a-berlin-free-walking-tour',
   'which-berlin-pass-is-worth-it',
   'berlin-sights-near-alexanderplatz-walking-distance',
   'vietnamese-food-in-berlin',
