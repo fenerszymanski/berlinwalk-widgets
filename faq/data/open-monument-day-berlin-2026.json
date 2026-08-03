@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "slug": "open-monument-day-berlin-2026",
+  "key": "open-monument-day-berlin-2026",
+  "config": {
+    "title": "Open Monument Day Berlin 2026 - FAQ",
+    "subtitle": "",
+    "items": [
+      {
+        "q": "When is Open Monument Day Berlin 2026?",
+        "a": "Open Monument Day takes place in Berlin on 12 and 13 September 2026."
+      },
+      {
+        "q": "Are Open Monument Day visits free in Berlin?",
+        "a": "Berlin's heritage authority says visitors can generally choose free offers. Check each official programme entry because access, registration and practical conditions can vary."
+      },
+      {
+        "q": "Do I need to book Open Monument Day events?",
+        "a": "Some entries require registration or run at fixed times. Start with the official search, read the individual listing, and keep a no-registration back-up in the same district."
+      },
+      {
+        "q": "How do I find English-language Open Monument Day events?",
+        "a": "Use the official programme search's language filter and the English programme overview, then check the individual entry for its date, time and registration instructions."
+      },
+      {
+        "q": "How many sites should I plan in one day?",
+        "a": "Plan one priority interior or tour plus one nearby back-up. The programme is spread across Berlin, so a long cross-city list is less reliable than a district-based plan."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "When is Open Monument Day Berlin 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Open Monument Day takes place in Berlin on 12 and 13 September 2026."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are Open Monument Day visits free in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin's heritage authority says visitors can generally choose free offers. Check each official programme entry because access, registration and practical conditions can vary."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to book Open Monument Day events?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Some entries require registration or run at fixed times. Start with the official search, read the individual listing, and keep a no-registration back-up in the same district."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I find English-language Open Monument Day events?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use the official programme search's language filter and the English programme overview, then check the individual entry for its date, time and registration instructions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many sites should I plan in one day?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Plan one priority interior or tour plus one nearby back-up. The programme is spread across Berlin, so a long cross-city list is less reliable than a district-based plan."
+        }
+      }
+    ]
+  }
+}

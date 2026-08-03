@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "slug": "berlin-art-week-2026",
+  "key": "berlin-art-week-2026",
+  "config": {
+    "title": "Berlin Art Week 2026 - FAQ",
+    "subtitle": "",
+    "items": [
+      {
+        "q": "When is Berlin Art Week 2026?",
+        "a": "Berlin Art Week runs from 9 to 13 September 2026."
+      },
+      {
+        "q": "What happens during Berlin Art Week?",
+        "a": "The official programme includes exhibitions, performances, film screenings and talks across Berlin. Its daily outline includes openings, the Positions Berlin Art Fair, gallery events, independent spaces, Open Houses, collection visits, talks and tours."
+      },
+      {
+        "q": "Do I need to book Berlin Art Week events?",
+        "a": "Some access can be limited. The official programme says Saturday Open Houses do not need advance registration, while Discovering Collections! tours have limited places. Always check the live programme for the event you want."
+      },
+      {
+        "q": "Which area is best for Berlin Art Week?",
+        "a": "Choose the area that fits the day. Kulturforum works for a focused cultural afternoon, Tempelhof for a fair visit, and Mitte for a route that can include the historic centre. Do not try to cross all three in one day."
+      },
+      {
+        "q": "Can I combine Berlin Art Week with central sightseeing?",
+        "a": "Yes, but give the two activities separate blocks. Use Mitte for an art-and-historic-centre day, or book a 2-hour central walking tour on a morning that is free from timed Art Week events."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "When is Berlin Art Week 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin Art Week runs from 9 to 13 September 2026."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens during Berlin Art Week?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The official programme includes exhibitions, performances, film screenings and talks across Berlin. Its daily outline includes openings, the Positions Berlin Art Fair, gallery events, independent spaces, Open Houses, collection visits, talks and tours."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to book Berlin Art Week events?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Some access can be limited. The official programme says Saturday Open Houses do not need advance registration, while Discovering Collections! tours have limited places. Always check the live programme for the event you want."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which area is best for Berlin Art Week?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Choose the area that fits the day. Kulturforum works for a focused cultural afternoon, Tempelhof for a fair visit, and Mitte for a route that can include the historic centre. Do not try to cross all three in one day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I combine Berlin Art Week with central sightseeing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, but give the two activities separate blocks. Use Mitte for an art-and-historic-centre day, or book a 2-hour central walking tour on a morning that is free from timed Art Week events."
+        }
+      }
+    ]
+  }
+}

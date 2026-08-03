@@ -5940,6 +5940,148 @@
       "iconStatus": "live-wix-media",
       "cmsItemId": "d3de4d6d-254a-45f7-83d7-c9358e019a8e",
       "relatedBlog": "/post/international-literature-festival-berlin-2026"
+    },
+    {
+      "slug": "berlin-art-week-route-builder",
+      "title": "Berlin Art Week Route Builder",
+      "lead": "Choose one Berlin Art Week district, a real time window and your pace, then keep the day to three coherent stops.",
+      "category": "Discovery",
+      "hubCategory": "EventsSports",
+      "type": "Planner",
+      "priority": 16,
+      "tags": [
+        "berlin art week",
+        "art week 2026",
+        "gallery route",
+        "berlin events",
+        "trip planning"
+      ],
+      "aliases": [
+        "berlin art week route",
+        "berlin art week planner",
+        "art week berlin 2026"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-art-week-route-builder/",
+      "embedHeight": 1280,
+      "image": "https://static.wixstatic.com/media/5a08a3_f21e305adaed4bc0b4cfa24b43c63e93~mv2.png",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "d6547fb5-02e4-48e0-87d3-3d6531d93bb8",
+      "seasonal": true,
+      "seasonStart": "2026-09-01",
+      "seasonEnd": "2026-09-14",
+      "seasonLabel": "Berlin Art Week 2026"
+    },
+    {
+      "slug": "open-monument-day-shortlist",
+      "title": "Open Monument Day Shortlist",
+      "lead": "Put up to three official Open Monument Day picks in one board, then spot time, district and registration clashes before the weekend.",
+      "category": "Discovery",
+      "hubCategory": "EventsSports",
+      "type": "Planner",
+      "priority": 15,
+      "tags": [
+        "open monument day",
+        "tag des offenen denkmals",
+        "berlin heritage",
+        "berlin events",
+        "registration"
+      ],
+      "aliases": [
+        "open monument day berlin",
+        "tag des offenen denkmals berlin",
+        "berlin heritage weekend"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/open-monument-day-shortlist/",
+      "embedHeight": 1280,
+      "image": "https://static.wixstatic.com/media/5a08a3_aa10732b841947419adb140540d05139~mv2.png",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "93f80060-d98e-4f7c-b7c2-7c5af885bba6",
+      "seasonal": true,
+      "seasonStart": "2026-09-07",
+      "seasonEnd": "2026-09-14",
+      "seasonLabel": "Open Monument Day 2026"
+    },
+    {
+      "slug": "innotrans-three-evening-board",
+      "title": "InnoTrans Three-Evening Board",
+      "lead": "Turn a Messe Berlin exit into three realistic evenings based on the fair day, your hotel side, energy and networking plans.",
+      "category": "Discovery",
+      "hubCategory": "EventsSports",
+      "type": "Planner",
+      "priority": 15,
+      "tags": [
+        "innotrans",
+        "messe berlin",
+        "business travel",
+        "berlin events",
+        "evening plan"
+      ],
+      "aliases": [
+        "innotrans berlin evenings",
+        "messe berlin evening plan",
+        "innotrans visitor guide"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/innotrans-three-evening-board/",
+      "embedHeight": 1280,
+      "image": "https://static.wixstatic.com/media/5a08a3_9c35fe09fd034c59a25fc975cd452a8e~mv2.png",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "457e7b40-b3d4-4c5b-a4da-d9377cde1f15",
+      "seasonal": true,
+      "seasonStart": "2026-09-15",
+      "seasonEnd": "2026-09-30",
+      "seasonLabel": "InnoTrans 2026"
+    },
+    {
+      "slug": "dinner-neighbourhood-picker",
+      "title": "Dinner Neighbourhood Picker",
+      "lead": "Choose your hotel side, dinner mood and walking energy, then give each Berlin night one compact dining neighbourhood.",
+      "category": "Discovery",
+      "hubCategory": "FoodNightlife",
+      "type": "Planner",
+      "priority": 21,
+      "tags": [
+        "where to eat berlin",
+        "berlin dinner",
+        "food neighbourhood",
+        "restaurant planning",
+        "berlin nightlife"
+      ],
+      "aliases": [
+        "where to eat in berlin by neighbourhood",
+        "berlin dinner planner",
+        "berlin food area"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/dinner-neighbourhood-picker/",
+      "embedHeight": 1280,
+      "image": "https://static.wixstatic.com/media/5a08a3_b283387e213345389058464b84b85827~mv2.png",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "92ed472f-7bae-4b78-b9c8-590b44f2171e"
+    },
+    {
+      "slug": "berlin-museum-three-slot-builder",
+      "title": "Berlin Museum Three-Slot Builder",
+      "lead": "Spread three Berlin museum visits across a first trip by interest, time, cost and pace instead of cramming them into one day.",
+      "category": "Discovery",
+      "hubCategory": "CultureLandmarks",
+      "type": "Planner",
+      "priority": 19,
+      "tags": [
+        "berlin museums",
+        "first time berlin",
+        "museum itinerary",
+        "museum island",
+        "trip planning"
+      ],
+      "aliases": [
+        "best museums in berlin",
+        "berlin museum planner",
+        "first time berlin museums"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-museum-three-slot-builder/",
+      "embedHeight": 1280,
+      "image": "https://static.wixstatic.com/media/5a08a3_bfe515c114a44415bd8873d33a1951b2~mv2.png",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "e6815e45-83d2-4896-9a8b-2029ab9e8e28"
     }
   ],
   "hubCategories": [
