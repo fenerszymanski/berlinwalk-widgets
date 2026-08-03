@@ -64,6 +64,6 @@ Put the Neues Museum on a historic-centre day. Put Jewish Museum Berlin on a Kre
 
 If you want an outdoor introduction to the historic centre, a [Berlin walking tour](https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based) is a separate two-hour activity when its live availability fits. It gives you street-level context around former East Berlin; it does not replace a museum visit or trace the route of the Berlin Wall.
 
-For the wider decision — museums alongside arrival times, food, hotel location and other bookings — use the [Berlin trip planner](https://www.berlinwalk.com/berlin-trip-planner) before you lock in time slots. Leave each museum day with one unplanned block. Berlin is much better when one good collection changes the rest of the day, rather than ending it.
+For the wider decision, museums alongside arrival times, food, hotel location and other bookings, use the [Berlin trip planner](https://www.berlinwalk.com/berlin-trip-planner) before you lock in time slots. Leave each museum day with one unplanned block. Berlin is much better when one good collection changes the rest of the day, rather than ending it.
 
 {{faq}}
