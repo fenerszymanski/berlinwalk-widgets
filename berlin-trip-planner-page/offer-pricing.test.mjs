@@ -50,6 +50,8 @@ test("native LP preserves the exact V4 pricing bands, proof, photos, icons and F
   assert.equal((landingSource.match(/Choose my dates/g) || []).length, 1);
   assert.equal((landingSource.match(/startButton\("Choose my dates"/g) || []).length, 1);
   assert.doesNotMatch(landingSource, /Start with \$\{days\}/);
+  assert.match(landingSource, /EXAMPLE PLAN · NOT YOUR PLAN/);
+  assert.match(landingSource, /\.bw-v4-secondary \{[^}]*background:transparent;[^}]*color:#FAFAF5/);
   assert.match(landingSource, /WebApplication/);
   assert.match(landingSource, /AggregateOffer/);
   assert.match(seoSource, /lowPrice.*7\.99/);
@@ -136,7 +138,8 @@ test("A/B and date handoff remain PII-free", () => {
   assert.match(landingSource, /V4_EXPERIMENT_KEY = "planner_landing_dates_v2"/);
   assert.match(landingSource, /V4_ASSIGNMENT_COOKIE = "bw_planner_landing_v2"/);
   assert.match(landingSource, /location: link\.getAttribute\("data-location"\)/);
-  for (const location of ["hero", "hero_dates", "hero_no_dates", "pricing_1_2", "pricing_3_4", "pricing_5_7", "how_it_works"]) assert.match(landingSource, new RegExp(location));
+  for (const location of ["hero", "hero_dates", "pricing_1_2", "pricing_3_4", "pricing_5_7", "how_it_works"]) assert.match(landingSource, new RegExp(location));
+  assert.doesNotMatch(landingSource, /hero_no_dates|no_dates|Dates not fixed yet\? Start without dates|date-skip/);
   assert.match(landingSource, /CTA_LOCATIONS/);
   assert.match(landingSource, /if \(!this\._assignment\.isQa\)/);
   assert.doesNotMatch(landingSource, /parent_url|parent_location|requestId|session_id/);
@@ -209,10 +212,34 @@ test("native typography has explicit readable floors independent of Wix base CSS
   assert.match(landingSource, /\.bw-v4-native \{[^}]*font-size:16px; line-height:1\.5/);
   assert.match(landingSource, /\.bw-v4-native small \{ font-size:14px; line-height:1\.4; \}/);
   assert.match(landingSource, /\.bw-v4-eyebrow, \.bw-v4-card-kicker \{[^}]*font-size:14px/);
-  assert.match(landingSource, /\.bw-v4-date-entry label \{[^}]*font-size:14px/);
+  assert.match(landingSource, /\.bw-v4-date-field \{[^}]*font-size:14px/);
   assert.match(landingSource, /\.bw-v4-footer details \{[^}]*font-size:14px/);
   assert.match(landingSource, /\.bw-v4-header nav \{ gap:10px; font-size:15px; \}/);
   assert.doesNotMatch(landingSource, /font-size:10px|font-size:8\.33px/);
+});
+
+test("variant B date controls keep native inputs accessible while presenting the empty-state shell", () => {
+  assert.match(landingSource, /class="bw-v4-date-entry" role="group" aria-label="Optional trip dates"/);
+  assert.equal((landingSource.match(/class="bw-v4-date-control"/g) || []).length, 2);
+  assert.equal((landingSource.match(/data-bw-v4-date-placeholder="(?:arrival|departure)"/g) || []).length, 2);
+  assert.equal((landingSource.match(/type="date"/g) || []).length, 2);
+  assert.match(landingSource, /aria-hidden="true">\$\{icon\("calendar"\)\}<span>Select date<\/span>/);
+  assert.match(landingSource, /_syncDateControls\(\)/);
+  assert.match(landingSource, /input\.addEventListener\("input", sync\)/);
+  assert.match(landingSource, /input\.addEventListener\("change", sync\)/);
+  assert.match(landingSource, /\.bw-v4-date-control\.is-empty input \{[^}]*color:transparent/);
+  assert.match(landingSource, /\.bw-v4-date-control:focus-within \{[^}]*outline:3px solid #FFE600/);
+  assert.match(landingSource, /\.bw-v4-date-placeholder\[hidden\] \{ display:none !important; \}/);
+  assert.match(landingSource, /\.bw-v4-mini-plan \.bw-v4-card-kicker \{[^}]*color:#103B16/);
+  assert.match(landingSource, /@media \(max-width:540px\)[\s\S]*?\.bw-v4-date-entry \{ display:grid; grid-template-columns:1fr; \}[\s\S]*?\.bw-v4-date-field, \.bw-v4-date-control \{ width:100%; \}/);
+});
+
+test("variant B primary CTA keeps form entry and makes the date hash optional", () => {
+  assert.match(landingSource, /startButton\("Start my Berlin plan", variant === "b" \? "dates" : "cta", "bw-v4-primary", variant === "b" \? "hero_dates" : "hero"\)/);
+  assert.match(landingSource, /url\.searchParams\.set\("entry", "form"\)/);
+  assert.match(landingSource, /if \(!arrival && !departure\) return "";/);
+  assert.match(landingSource, /this\._navigateToPlanner\(entry === "dates"\)/);
+  assert.match(landingSource, /const dates = includeDates[\s\S]*?safePlannerUrl\(this\._assignment\.variant, dates\)/);
 });
 
 test("Wix height guard collapses the component section and preserves dynamic grid rows", () => {

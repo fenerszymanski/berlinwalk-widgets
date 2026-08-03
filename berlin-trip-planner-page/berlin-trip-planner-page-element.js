@@ -9,7 +9,7 @@
   const V4_ASSIGNMENT_STORAGE = "bw_planner_landing_v2";
   const WIX_CANONICAL_ORIGIN = "https://www.berlinwalk.com";
   const MAX_AGE_SECONDS = 60 * 60 * 24 * 180;
-  const CTA_LOCATIONS = new Set(["hero", "hero_dates", "hero_no_dates", "pricing_1_2", "pricing_3_4", "pricing_5_7", "deliverable", "how_it_works"]);
+  const CTA_LOCATIONS = new Set(["hero", "hero_dates", "pricing_1_2", "pricing_3_4", "pricing_5_7", "deliverable", "how_it_works"]);
   const CANONICAL_SCHEMA_ID = "bw-trip-planner-webapp-jsonld";
   const impressionTrackedElements = new WeakSet();
 
@@ -163,7 +163,7 @@
       experiment: V4_EXPERIMENT_KEY,
       variant: detail.variant === "b" ? "b" : "a",
       ...(eventName === "Planner LP Start" ? {
-        entry: ["cta", "dates", "no_dates"].includes(detail.entry) ? detail.entry : "cta",
+        entry: ["cta", "dates"].includes(detail.entry) ? detail.entry : "cta",
         location: CTA_LOCATIONS.has(detail.location) ? detail.location : "hero"
       } : {})
     };
@@ -359,9 +359,21 @@
         ["What is the optional BerlinWalk choice?", "It is an optional recommendation, not a booking. Recheck official details and availability before travel."]
       ];
       const dateEntry = variant === "b" ? `
-        <div class="bw-v4-date-entry" aria-label="Optional trip dates">
-          <label><span>Arrival date</span><input data-bw-v4-arrival type="date" autocomplete="off"></label>
-          <label><span>Departure date</span><input data-bw-v4-departure type="date" autocomplete="off"></label>
+        <div class="bw-v4-date-entry" role="group" aria-label="Optional trip dates">
+          <label class="bw-v4-date-field">
+            <span>Arrival date</span>
+            <span class="bw-v4-date-control">
+              <span class="bw-v4-date-placeholder" data-bw-v4-date-placeholder="arrival" aria-hidden="true">${icon("calendar")}<span>Select date</span></span>
+              <input data-bw-v4-arrival type="date" autocomplete="off" aria-label="Arrival date">
+            </span>
+          </label>
+          <label class="bw-v4-date-field">
+            <span>Departure date</span>
+            <span class="bw-v4-date-control">
+              <span class="bw-v4-date-placeholder" data-bw-v4-date-placeholder="departure" aria-hidden="true">${icon("calendar")}<span>Select date</span></span>
+              <input data-bw-v4-departure type="date" autocomplete="off" aria-label="Departure date">
+            </span>
+          </label>
         </div>` : "";
       const startButton = (label, entry, className, location = "hero") => `<a class="${className}" data-bw-v4-start data-entry="${entry}" data-location="${location}" href="${safePlannerUrl(variant, {})}">${label}</a>`;
 
@@ -381,11 +393,10 @@
                 ${startButton("Start my Berlin plan", variant === "b" ? "dates" : "cta", "bw-v4-primary", variant === "b" ? "hero_dates" : "hero")}
                 <a class="bw-v4-secondary" href="#bw-v4-includes">See what a plan includes</a>
               </div>
-              ${variant === "b" ? `<button type="button" class="bw-v4-date-skip" data-bw-v4-no-dates data-location="hero_no_dates">Dates not fixed yet? Start without dates</button>` : ""}
               <p class="bw-v4-trust">Made by Yusuf, the guide behind BerlinWalk. I keep the route useful, the timing realistic and the claims easy to check.</p>
             </div>
             <aside class="bw-v4-mini-plan" aria-label="Example plan preview">
-              <span class="bw-v4-card-kicker">Example plan</span><strong>13–18 August · 6 calendar days</strong>
+              <span class="bw-v4-card-kicker">EXAMPLE PLAN · NOT YOUR PLAN</span><strong>13–18 August · 6 calendar days</strong>
               <div><b>Day 1</b><span>Arrival → Mitte · Museum Island edge</span></div>
               <div><b>Day 2</b><span>Brandenburg Gate · Government Quarter</span></div>
               <div><b>Day 3</b><span>Berlin Wall Memorial · East Side Gallery</span></div>
@@ -437,6 +448,19 @@
           <footer class="bw-v4-footer"><span>BerlinWalk · practical Berlin planning by Yusuf</span><div><a href="https://berlinwalk.com" target="_blank" rel="noopener noreferrer">berlinwalk.com</a><a href="https://www.instagram.com/berlinwalkingtour/" target="_blank" rel="noopener noreferrer">@berlinwalkingtour</a></div><details><summary>Image credits</summary><div class="bw-v4-credits"><p>Hero: <a href="https://commons.wikimedia.org/wiki/File:-Sunset_on_Oberbaumbr%C3%BCcke-_(43668194515).jpg" target="_blank" rel="noopener noreferrer">Oberbaumbrücke sunset</a> by Guido from Berlin, CC BY 2.0.</p><p>Historic centre: <a href="https://commons.wikimedia.org/wiki/File:Brandenburger_Tor_morgens.jpg" target="_blank" rel="noopener noreferrer">Brandenburg Gate</a> by Thomas Wolf, CC BY-SA 3.0.</p><p>Neighbourhood: <a href="https://commons.wikimedia.org/wiki/File:Mural_Nature_Morte_ROA_Oranienstra%C3%9Fe_Berlin-Kreuzberg.jpg" target="_blank" rel="noopener noreferrer">Oranienstraße mural</a> by Singlespeedfahrer, CC0.</p><p>Food: <a href="https://commons.wikimedia.org/wiki/File:Maybachufer_Turkish_market_2.jpg" target="_blank" rel="noopener noreferrer">Maybachufer Turkish market</a> by Orderinchaos, CC BY-SA 4.0.</p></div></details></footer>
         </main>
       `;
+      this._syncDateControls();
+    }
+
+    _syncDateControls() {
+      ["arrival", "departure"].forEach((name) => {
+        const input = this.querySelector(`[data-bw-v4-${name}]`);
+        const placeholder = this.querySelector(`[data-bw-v4-date-placeholder="${name}"]`);
+        const control = input?.closest(".bw-v4-date-control");
+        if (!input || !placeholder || !control) return;
+        const isEmpty = !input.value;
+        control.classList.toggle("is-empty", isEmpty);
+        placeholder.hidden = !isEmpty;
+      });
     }
 
     _syncPlannerLinks() {
@@ -447,7 +471,14 @@
     }
 
     _bind() {
-      this.querySelectorAll("[data-bw-v4-arrival], [data-bw-v4-departure]").forEach((input) => input.addEventListener("input", () => this._syncPlannerLinks()));
+      this.querySelectorAll("[data-bw-v4-arrival], [data-bw-v4-departure]").forEach((input) => {
+        const sync = () => {
+          this._syncDateControls();
+          this._syncPlannerLinks();
+        };
+        input.addEventListener("input", sync);
+        input.addEventListener("change", sync);
+      });
       this.querySelectorAll("[data-bw-v4-start]").forEach((link) => link.addEventListener("click", (event) => {
         event.preventDefault();
         const entry = link.getAttribute("data-entry") || "cta";
@@ -458,11 +489,7 @@
         });
         this._navigateToPlanner(entry === "dates");
       }));
-      const noDates = this.querySelector("[data-bw-v4-no-dates]");
-      if (noDates) noDates.addEventListener("click", () => {
-        if (!this._assignment.isQa) trackNativeEvent("Planner LP Start", { variant: this._assignment.variant, entry: "no_dates", location: noDates.getAttribute("data-location") || "hero_no_dates" });
-        this._navigateToPlanner(false);
-      });
+      this._syncDateControls();
       this._syncPlannerLinks();
     }
 
@@ -595,7 +622,7 @@
         .bw-v4-header { display:flex; align-items:center; justify-content:flex-end; gap:24px; padding:18px clamp(18px,4vw,64px); background:#103B16; }
         .bw-v4-header nav { display:flex; gap:20px; }
         .bw-v4-header a, .bw-v4-footer a { color:#FFE600; text-decoration:none; font-weight:700; }
-        .bw-v4-native .bw-v4-header a:focus-visible, .bw-v4-native .bw-v4-footer a:focus-visible, .bw-v4-native .bw-v4-primary:focus-visible, .bw-v4-native .bw-v4-secondary:focus-visible, .bw-v4-native .bw-v4-price-cta:focus-visible, .bw-v4-native .bw-v4-date-skip:focus-visible, .bw-v4-native summary:focus-visible { outline:3px solid #FFE600; outline-offset:3px; }
+        .bw-v4-native .bw-v4-header a:focus-visible, .bw-v4-native .bw-v4-footer a:focus-visible, .bw-v4-native .bw-v4-primary:focus-visible, .bw-v4-native .bw-v4-secondary:focus-visible, .bw-v4-native .bw-v4-price-cta:focus-visible, .bw-v4-native summary:focus-visible { outline:3px solid #FFE600; outline-offset:3px; }
         .bw-v4-hero { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr); gap:clamp(24px,5vw,72px); padding:clamp(42px,7vw,100px) clamp(18px,7vw,96px); background-image:linear-gradient(90deg,rgba(16,59,22,.92) 0%,rgba(16,59,22,.7) 48%,rgba(16,59,22,.12) 100%),var(--bw-v4-hero); background-size:cover; background-position:center; color:#FAFAF5; }
         .bw-v4-hero-copy { max-width:680px; }
         .bw-v4-eyebrow, .bw-v4-card-kicker { color:#FFE600; text-transform:uppercase; letter-spacing:.12em; font-size:14px; font-weight:800; }
@@ -605,13 +632,21 @@
         .bw-v4-actions { display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-top:26px; }
         .bw-v4-primary, .bw-v4-secondary, .bw-v4-price-cta { min-height:46px; display:inline-flex; align-items:center; justify-content:center; padding:12px 18px; border-radius:999px; font-weight:800; text-decoration:none; }
         .bw-v4-primary { background:#FFE600; color:#103B16; }
-        .bw-v4-secondary { border:1px solid #FFE600; color:#FFE600; }
+        .bw-v4-secondary { border:1px solid rgba(250,250,245,.6); background:transparent; color:#FAFAF5; font-weight:700; }
         .bw-v4-date-entry { display:flex; flex-wrap:wrap; gap:12px; margin-top:20px; }
-        .bw-v4-date-entry label { display:grid; gap:5px; font-size:14px; font-weight:700; }
-        .bw-v4-date-entry input { min-height:44px; border-radius:8px; border:1px solid #FAFAF5; padding:8px; font:inherit; color:#212121; }
-        .bw-v4-date-skip { margin-top:12px; border:0; padding:0; background:none; color:#FFE600; text-decoration:underline; font:inherit; cursor:pointer; }
+        .bw-v4-date-field { flex:1 1 220px; min-width:0; display:grid; gap:5px; font-size:14px; font-weight:700; }
+        .bw-v4-date-control { position:relative; display:block; width:100%; min-height:44px; overflow:hidden; border:1px solid #FAFAF5; border-radius:8px; background:#fff; }
+        .bw-v4-date-control:focus-within { outline:3px solid #FFE600; outline-offset:3px; }
+        .bw-v4-date-control input { position:relative; z-index:1; display:block; width:100%; min-height:44px; border:0; padding:8px 10px; background:transparent; color:#212121; cursor:pointer; }
+        .bw-v4-date-control.is-empty input { color:transparent; }
+        .bw-v4-date-control.is-empty input::-webkit-datetime-edit, .bw-v4-date-control.is-empty input::-webkit-datetime-edit-fields-wrapper, .bw-v4-date-control.is-empty input::-webkit-datetime-edit-text, .bw-v4-date-control.is-empty input::-webkit-datetime-edit-month-field, .bw-v4-date-control.is-empty input::-webkit-datetime-edit-day-field, .bw-v4-date-control.is-empty input::-webkit-datetime-edit-year-field { color:transparent; }
+        .bw-v4-date-control.is-empty input::-webkit-calendar-picker-indicator { opacity:0; }
+        .bw-v4-date-placeholder { position:absolute; inset:0; z-index:0; display:flex; align-items:center; gap:8px; padding:8px 10px; color:#103B16; font-weight:700; pointer-events:none; }
+        .bw-v4-date-placeholder[hidden] { display:none !important; }
+        .bw-v4-date-placeholder .bw-v4-icon { flex:0 0 auto; width:20px; height:20px; }
         .bw-v4-trust { font-size:14px !important; margin-top:22px; }
         .bw-v4-mini-plan { align-self:center; padding:24px; border-radius:18px; background:#FFE600; color:#103B16; box-shadow:0 18px 40px rgba(0,0,0,.2); }
+        .bw-v4-mini-plan .bw-v4-card-kicker { color:#103B16; }
         .bw-v4-mini-plan strong { display:block; margin:10px 0 18px; font-family:Georgia,serif; font-size:24px; }
         .bw-v4-mini-plan div { display:grid; grid-template-columns:58px 1fr; gap:8px; padding:12px 0; border-top:1px solid rgba(16,59,22,.28); }
         .bw-v4-mini-plan small { display:block; margin-top:18px; font-weight:700; }
@@ -734,6 +769,10 @@
           .bw-v4-photo-grid { grid-template-columns:1fr; }
           .bw-v4-footer { grid-template-columns:1fr; }
           .bw-v4-footer > div { gap:12px; }
+        }
+        @media (max-width:540px) {
+          .bw-v4-date-entry { display:grid; grid-template-columns:1fr; }
+          .bw-v4-date-field, .bw-v4-date-control { width:100%; }
         }
         @media (prefers-reduced-motion: reduce) { .bw-v4-native, .bw-v4-native *, .bw-v4-native *::before, .bw-v4-native *::after { scroll-behavior:auto !important; transition-duration:0.01ms !important; } }
       `;
