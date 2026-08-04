@@ -61,6 +61,30 @@
     });
   }
 
+  var lastViewportWidth = window.innerWidth;
+  var widthResize100;
+  var widthResize350;
+
+  function reportAfterWidthChange() {
+    // A Wix HtmlComponent can become narrower when the page changes breakpoints
+    // after the widget has loaded. Its body box can keep the old iframe height
+    // while its children wrap lower. Ignore height-only iframe resizes so a
+    // parent height update cannot create a resize feedback loop.
+    var width = window.innerWidth;
+    if (!width || Math.abs(width - lastViewportWidth) < 1) return;
+    lastViewportWidth = width;
+
+    reportThrottled();
+    clearTimeout(widthResize100);
+    clearTimeout(widthResize350);
+    widthResize100 = setTimeout(reportThrottled, 100);
+    widthResize350 = setTimeout(reportThrottled, 350);
+  }
+
+  // Used by the late first-party CTA runtime below after it changes the body's
+  // direct-child content height.
+  window.__bwRequestEmbedResize = reportThrottled;
+
   // Initial reports
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', reportThrottled);
@@ -88,6 +112,10 @@
       });
     } catch (e) {}
   }
+
+  // Unlike a content mutation, a width-only responsive change can make the
+  // existing controls wrap without changing the body's own observed box.
+  window.addEventListener('resize', reportAfterWidthChange);
 
   // Re-measure after user interactions (calculator buttons, accordion, etc.)
   document.addEventListener('click', function () {
@@ -202,10 +230,20 @@
     return a;
   }
 
+  function requestContentReflow() {
+    // The resize reporter lives in the first runtime block above. Explicitly
+    // notify it after this late footer changes document height; this is more
+    // reliable than relying only on body observation in embedded Wix frames.
+    if (typeof window.__bwRequestEmbedResize === 'function') {
+      window.__bwRequestEmbedResize();
+    }
+  }
+
   function injectBadgeOnly() {
     if (document.querySelector('.bw-attr-badge')) return;
     var slug = widgetSlug();
     document.body.appendChild(badgeNode(slug));
+    requestContentReflow();
   }
 
   function readNextTourSlot() {
@@ -258,6 +296,7 @@
     if (existing) {
       var existingText = existing.querySelector('.bw-tour-cta-text');
       if (existingText && existingText.textContent !== text) existingText.textContent = text;
+      requestContentReflow();
       return;
     }
     var row = document.createElement('div');
@@ -268,6 +307,7 @@
       </a>';
     row.appendChild(badgeNode(slug, 'bw-attr-badge-inline', '_top'));
     document.body.appendChild(row);
+    requestContentReflow();
   }
 
   function updateFirstPartyTourCtaFromLiveAvailability() {
@@ -276,7 +316,10 @@
       window.bwLiveNextTourSlot({ days: 60 }).then(function (liveSlot) {
         var text = tourCtaText(liveSlot);
         var textNode = text && document.querySelector('.bw-tour-cta-row .bw-tour-cta-text');
-        if (textNode && textNode.textContent !== text) textNode.textContent = text;
+        if (textNode && textNode.textContent !== text) {
+          textNode.textContent = text;
+          requestContentReflow();
+        }
       });
     } catch (e) {}
   }
