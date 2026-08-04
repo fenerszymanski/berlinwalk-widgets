@@ -1,26 +1,26 @@
 # E0 - Instant Plan
 
-Subject: 🗺️ Your ${tripPackLabel} is ready
+Subject: 🗺️ Your Berlin plan is ready
 
-Preheader: Routes, maps, opening checks, and PDF in one place.
+Preheader: Open your plan, check each day, and download the PDF.
 
 Hi,
 
 Your `${tripPackLabel}` for `${arrivalDate}` is ready.
 
-Your pack is here:
+Your plan is here:
 
 ${planUrl}
 
-Use it as a starting point, not as a strict schedule. Berlin is easier when each day has one main idea, one real area, and a little space between stops.
+Use it as a starting point, not as a strict schedule. Each day groups nearby places in a practical order and leaves time between stops.
 
-Inside the pack, keep an eye on the route windows, day-by-day map links, Berlin essentials, transport maps, and weather/opening guardrails.
+Before each day, check the times, map links, transport notes, weather, and opening hours. Opening hours and transport can change.
 
-If you want a print version, open the pack and tap **Download PDF** inside the planner. I am not attaching a PDF file to this email.
+To save a print version, open the plan and select **Download PDF**. The PDF is not attached to this email.
 
-One note for Day 1: if your arrival is 1–3 days away, open the paid plan and check the arrival add-on. For €2.99, First-Day Rescue turns your landing point, luggage, weather and first stop into one arrival decision sheet.
+If your arrival is 1–3 days away, open the paid plan and check the arrival add-on. First-Day Rescue costs €2.99. It uses your arrival point, luggage, weather, and first stop to create a short arrival plan.
 
-The main thing I would protect is the first real city context. For your dates, the BerlinWalk timing to keep in mind is:
+On my free walking tour, I explain how the main places in Berlin's historic centre fit together. For your dates, I recommend:
 
 **${recommendedTourDay}**
 
@@ -28,7 +28,7 @@ You can reserve a free spot here:
 
 ${bookingUrl}
 
-Over the next few days, I will send a few short Berlin prep notes around this pack: what to book ahead, how tickets work, what to check before you arrive, and how to keep the first day simple.
+Before you arrive, I will send a few short notes about advance bookings, transport tickets, opening hours, and your first day.
 
 Yusuf  
 BerlinWalk  

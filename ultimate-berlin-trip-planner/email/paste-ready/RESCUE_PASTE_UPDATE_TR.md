@@ -1,17 +1,15 @@
-# Trip Planner Rescue e-posta güncellemesi
+# Trip Planner P4 e-posta güncellemesi
 
-Bu güncellemede sadece iki Triggered Email HTML body değişir. Message ID aynı kalır, otomasyon kurulmaz, lead payload/CMS şeması değişmez.
+Bu güncellemede beş Triggered Email'in metni sadeleştirildi. Message ID'ler aynı kalır, otomasyon kurulmaz, lead payload/CMS şeması değişmez.
 
-## 1. Instant plan email (`VLDqhLM`)
+Her şablonda subject, preheader ve HTML body'yi `ultimate-berlin-trip-planner/email/paste-ready/copy-kit.html` içindeki ilgili karttan güncelle, sonra kaydet.
 
-Şimdi bunu yap: Wix'te `VLDqhLM` Triggered Email şablonunu aç, mevcut HTML body'yi `ultimate-berlin-trip-planner/email/paste-ready/e0-instant-plan.html` içindeki `HTML BLOCK START` ve `HTML BLOCK END` arasındaki blokla değiştir, sonra kaydet.
+## Güncellenecek şablonlar
 
-Subject ve preheader aynı kalır.
+- Instant plan: `VLDqhLM`
+- 7 days before: `VLDvLj8`
+- 3 days before: `VLDvnng`
+- 1 day before: `VLDwKUu`
+- Arrival day: `VLDwjZc`
 
-## 2. One-day-before email (`VLDwKUu`)
-
-Şimdi bunu yap: Wix'te `VLDwKUu` Triggered Email şablonunu aç, mevcut HTML body'yi `ultimate-berlin-trip-planner/email/paste-ready/e3-one-day-before.html` içindeki `HTML BLOCK START` ve `HTML BLOCK END` arasındaki blokla değiştir, sonra kaydet.
-
-Subject ve preheader aynı kalır.
-
-Diğer üç email'e dokunma: `VLDvLj8`, `VLDvnng`, `VLDwjZc`.
+Bu dosya yalnızca Wix'e elle yapılacak sonraki güncelleme için nottur. Yerel dosyaları hazırlamak Wix'teki canlı şablonları değiştirmez.

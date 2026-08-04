@@ -5,7 +5,7 @@
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   'use strict';
 
-  var VERSION = '1.0.0';
+  var VERSION = '1.2.0';
   var MAX_ROUTE_PLACES = 12;
 
   var TRANSFER_OVERRIDES = {
@@ -71,7 +71,9 @@
 
   function canonicalPlaceIds(block) {
     block = block || {};
-    var ids = Array.isArray(block.placeIds) ? block.placeIds.slice() : [];
+    var ids = Array.isArray(block.routePlaceIds) && block.routePlaceIds.length
+      ? block.routePlaceIds.slice()
+      : (Array.isArray(block.placeIds) ? block.placeIds.slice() : []);
     var primaryId = cleanText(block.placeId || block.primaryPlace && block.primaryPlace.placeId, 100);
     if (primaryId && ids.indexOf(primaryId) === -1) ids.unshift(primaryId);
     ids = ids.map(function (value) { return cleanText(value, 100); }).filter(Boolean);
@@ -100,6 +102,39 @@
     return 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(query(first)) +
       '&destination=' + encodeURIComponent(query(second)) +
       '&travelmode=' + encodeURIComponent(mode === 'walking' ? 'walking' : 'transit');
+  }
+
+  function destinationOnlyDirectionsUrl(place, mode) {
+    var query = place && Number.isFinite(place.lat) && Number.isFinite(place.lng)
+      ? place.lat + ',' + place.lng
+      : cleanText(place && (place.query || place.label), 220);
+    return 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(query) +
+      '&travelmode=' + encodeURIComponent(mode === 'walking' ? 'walking' : 'transit');
+  }
+
+  function createArrivalTransfer(toPlaceId, catalog, source) {
+    source = source || {};
+    var toId = cleanText(toPlaceId, 100);
+    var to = placeFor(catalog, toId);
+    if (!toId || !to) return null;
+    var mode = source.mode === 'walking' ? 'walking' : 'transit';
+    var minutes = Math.max(5, roundUpFive(source.minutes || 30));
+    var bufferMinutes = Math.max(0, roundUpFive(source.bufferMinutes || 0));
+    var toLabel = cleanText(to.label || toId, 160);
+    var prefix = cleanText(source.instructionPrefix || 'After check-in, use public transport to ', 220);
+    return {
+      fromPlaceId: 'arrival_transfer',
+      fromLabel: cleanText(source.fromLabel || 'Your Berlin stay', 160),
+      toPlaceId: toId,
+      toLabel: toLabel,
+      mode: mode,
+      minutes: minutes,
+      bufferMinutes: bufferMinutes,
+      totalMinutes: minutes + bufferMinutes,
+      distanceKm: 0,
+      instruction: cleanText(prefix + ' ' + toLabel + '. Check the live connection before leaving.', 360),
+      url: destinationOnlyDirectionsUrl(to, mode)
+    };
   }
 
   function createTransfer(fromPlaceId, toPlaceId, catalog) {
@@ -136,8 +171,74 @@
       totalMinutes: minutes + bufferMinutes,
       distanceKm: Math.round(distance * 10) / 10,
       instruction: instruction,
+      linkLabel: '',
       url: directionsUrl(from, to, mode)
     };
+  }
+
+  function mealRoleForBlock(block) {
+    block = block || {};
+    var explicit = cleanText(block.mealRole, 20).toLowerCase();
+    if (['breakfast', 'lunch', 'dinner'].indexOf(explicit) !== -1) return explicit;
+    var time = cleanText(block.time, 40).toLowerCase();
+    if (time === 'breakfast') return 'breakfast';
+    if (time === 'lunch') return 'lunch';
+    if (/^(evening|dinner|later)$/.test(time)) return 'dinner';
+    return '';
+  }
+
+  function mealLocationSuffix(block, role) {
+    var title = cleanText(block && block.title, 180);
+    if (!title || !role) return '';
+    var rest = title.replace(new RegExp('^' + role + '\\b', 'i'), '').trim();
+    if (/^option\s*:/i.test(rest)) return '';
+    return /^(?:at|around|by|in|near|on)\b/i.test(rest) ? rest : '';
+  }
+
+  function capitalized(value) {
+    value = cleanText(value, 40);
+    return value ? value.charAt(0).toUpperCase() + value.slice(1) : '';
+  }
+
+  function sentenceInternalLabel(value) {
+    value = cleanText(value, 160);
+    return value.replace(/^Your\b/, 'your');
+  }
+
+  function publicMealTransfer(transfer, fromBlock, toBlock) {
+    if (!transfer) return transfer;
+    var fromRole = mealRoleForBlock(fromBlock);
+    var toRole = mealRoleForBlock(toBlock);
+    if (!fromRole && !toRole) return transfer;
+
+    var fromLabel = transfer.fromLabel;
+    var toLabel = transfer.toLabel;
+    var instructionFrom = sentenceInternalLabel(fromLabel);
+    var instructionTo = toLabel;
+    var linkLabel = '';
+
+    if (fromRole) {
+      fromLabel = capitalized(fromRole) + ' stop';
+      instructionFrom = 'your ' + fromRole + ' stop';
+      linkLabel = 'Open the route after ' + fromRole + ' in Google Maps';
+    }
+    if (toRole) {
+      var suffix = mealLocationSuffix(toBlock, toRole);
+      toLabel = capitalized(toRole) + (suffix ? ' ' + suffix : ' stop');
+      instructionTo = 'your ' + toRole + ' stop' + (suffix ? ' ' + suffix : '');
+      linkLabel = 'Open the route to ' + toRole + ' in Google Maps';
+    }
+
+    var instruction = transfer.mode === 'walking'
+      ? 'Walk from ' + instructionFrom + ' to ' + instructionTo + '.'
+      : 'Use public transport from ' + instructionFrom + ' to ' + instructionTo + '. Check the live connection before leaving.';
+
+    return Object.assign({}, transfer, {
+      fromLabel: cleanText(fromLabel, 160),
+      toLabel: cleanText(toLabel, 160),
+      instruction: cleanText(instruction, 360),
+      linkLabel: cleanText(linkLabel, 220)
+    });
   }
 
   function routeStats(placeIds, catalog) {
@@ -186,12 +287,14 @@
     var blocks = (Array.isArray(options.blocks) ? options.blocks : []).map(function (block) {
       return Object.assign({}, block, {
         placeIds: Array.isArray(block && block.placeIds) ? block.placeIds.slice() : [],
+        routePlaceIds: Array.isArray(block && block.routePlaceIds) ? block.routePlaceIds.slice() : [],
         mapLinks: Array.isArray(block && block.mapLinks) ? block.mapLinks.slice() : []
       });
     });
     var issues = [];
     var previousWindow = null;
     var previousRouteIds = [];
+    var previousBlock = null;
 
     blocks.forEach(function (block, index) {
       var parsed = parseWindow(block.window);
@@ -202,7 +305,12 @@
       var routeIds = canonicalPlaceIds(block);
       var fromId = previousRouteIds.length ? previousRouteIds[previousRouteIds.length - 1] : '';
       var toId = routeIds.length ? routeIds[0] : '';
-      var transfer = previousWindow ? createTransfer(fromId, toId, catalog) : null;
+      var transfer = previousWindow
+        ? (fromId === 'arrival_transfer' && options.arrivalConnection
+          ? createArrivalTransfer(toId, catalog, options.arrivalConnection)
+          : createTransfer(fromId, toId, catalog))
+        : null;
+      transfer = publicMealTransfer(transfer, previousBlock, block);
       var transferSegment = block.kind === 'transfer' && routeIds.length >= 2
         ? createTransfer(routeIds[0], routeIds[routeIds.length - 1], catalog)
         : null;
@@ -218,6 +326,7 @@
       block.transferSegment = transferSegment;
       previousWindow = { start: start, end: end, duration: parsed.duration };
       previousRouteIds = routeIds;
+      previousBlock = block;
 
       if (block.kind === 'transfer') {
         if (!transferSegment) issues.push({ code: 'transfer_segment_missing', blockIndex: index });
@@ -258,6 +367,9 @@
     canonicalPlaceIds: canonicalPlaceIds,
     routePlaceIdsForBlocks: routePlaceIdsForBlocks,
     createTransfer: createTransfer,
+    createArrivalTransfer: createArrivalTransfer,
+    mealRoleForBlock: mealRoleForBlock,
+    publicMealTransfer: publicMealTransfer,
     immediateBacktracks: immediateBacktracks,
     planDay: planDay
   };

@@ -1116,9 +1116,14 @@ function run() {
     'Artifact PDF page geometry is bounded',
     /var\s+PAGE_HEIGHT\s*=\s*841\.89/.test(artifactV3PdfSource) &&
       /function\s+validatePagePlan/.test(artifactV3PdfSource) &&
-    /function\s+drawDay\(doc,\s*page\)/.test(artifactV3PdfSource) &&
-      /MAX_DAY_BLOCKS_PER_PAGE\s*=\s*5/.test(artifactV3PdfSource) &&
+      /function\s+drawDay\(doc,\s*page\)/.test(artifactV3PdfSource) &&
+      /function\s+estimatedBlockHeight/.test(artifactV3PdfSource) &&
+      /paginateByHeight\(blocks,/.test(artifactV3PdfSource) &&
+      /function\s+blockCardHeight/.test(artifactV3PdfSource) &&
+      /assertContentFits\(y,\s*'day\s*'/.test(artifactV3PdfSource) &&
       /function\s+buildDayPages/.test(artifactV3PdfSource) &&
+      /partNumber:\s*index\s*\+\s*1/.test(artifactV3PdfSource) &&
+      /partCount:\s*groups\.length/.test(artifactV3PdfSource) &&
       /pageCount:\s*pages\.length/.test(artifactV3PdfSource) &&
       /actualPages\s*!==\s*pagePlan\.pageCount/.test(artifactV3PdfSource) &&
       /plan-artifact-v3-pdf-3\.4\.0-readable-routes/.test(artifactV3PdfSource) &&

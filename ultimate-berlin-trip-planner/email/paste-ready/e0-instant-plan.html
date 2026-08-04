@@ -8,8 +8,8 @@ Path: sales
 Stage: instant
 Velo message ID placeholder: TODO_TRIP_PLANNER_INSTANT
 
-Subject: 🗺️ Your ${tripPackLabel} is ready
-Preheader: Routes, maps, opening checks, and PDF in one place.
+Subject: 🗺️ Your Berlin plan is ready
+Preheader: Open your plan, check each day, and download the PDF.
 
 In Wix Developer Tools -> Triggered Emails, create/open the template and copy
 everything between HTML BLOCK START and HTML BLOCK END into the HTML block.
@@ -19,7 +19,7 @@ TODO_TRIP_PLANNER_INSTANT in velo/tripPlannerFunnel.js.
 -->
 
 <!-- HTML BLOCK START -->
-<div style="display: none; max-height: 0; overflow: hidden; opacity: 0; color: transparent; line-height: 1px; font-size: 1px;">Routes, maps, opening checks, and PDF in one place.</div>
+<div style="display: none; max-height: 0; overflow: hidden; opacity: 0; color: transparent; line-height: 1px; font-size: 1px;">Open your plan, check each day, and download the PDF.</div>
 <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%; max-width: 640px; margin: 0 auto; background: #FAFAF5; border-collapse: collapse; table-layout: fixed;">
   <tr>
     <td style="background: #FAFAF5; padding: 22px 24px 18px; text-align: center;">
@@ -33,8 +33,8 @@ TODO_TRIP_PLANNER_INSTANT in velo/tripPlannerFunnel.js.
         <tr>
           <td style="background: #1B5E20; padding: 30px 28px 28px;">
             <p style="margin: 0 0 10px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: #FFE600;">Your plan</p>
-            <h1 style="margin: 0 0 14px; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 28px; line-height: 1.18; font-weight: 700; color: #FFFFFF;">🗺️ Your ${tripPackLabel} is ready</h1>
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.65; color: #EAF3DE;">Routes, maps, opening checks, and PDF in one place.</p>
+            <h1 style="margin: 0 0 14px; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 28px; line-height: 1.18; font-weight: 700; color: #FFFFFF;">🗺️ Your Berlin plan is ready</h1>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.65; color: #EAF3DE;">Open your plan, check each day, and download the PDF.</p>
           </td>
         </tr>
 
@@ -54,7 +54,7 @@ TODO_TRIP_PLANNER_INSTANT in velo/tripPlannerFunnel.js.
         </tr>
         <tr>
           <td style="padding: 10px 28px 8px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Your pack is here</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Your plan is here</p>
           </td>
         </tr>
         <tr>
@@ -62,7 +62,7 @@ TODO_TRIP_PLANNER_INSTANT in velo/tripPlannerFunnel.js.
             <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse: collapse;">
               <tr>
                 <td style="background: #1B5E20; text-align: center;">
-                  <a href="${planUrl}" style="display: block; padding: 16px 18px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; line-height: 1.3; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: #FFE600; text-decoration: none;">Open your Berlin pack</a>
+                  <a href="${planUrl}" style="display: block; padding: 16px 18px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; line-height: 1.3; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: #FFE600; text-decoration: none;">Open your Berlin plan</a>
                 </td>
               </tr>
             </table>
@@ -70,27 +70,27 @@ TODO_TRIP_PLANNER_INSTANT in velo/tripPlannerFunnel.js.
         </tr>
         <tr>
           <td style="padding: 0 28px 18px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">Use it as a starting point, not as a strict schedule. Berlin is easier when each day has one main idea, one real area, and a little space between stops.</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">Use it as a starting point, not as a strict schedule. Each day groups nearby places in a practical order and leaves time between stops.</p>
           </td>
         </tr>
         <tr>
           <td style="padding: 0 28px 18px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">Inside the pack, keep an eye on the route windows, day-by-day map links, Berlin essentials, transport maps, and weather/opening guardrails.</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">Before each day, check the times, map links, transport notes, weather, and opening hours. Opening hours and transport can change.</p>
           </td>
         </tr>
         <tr>
           <td style="padding: 0 28px 18px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">If you want a print version, open the pack and tap <strong style="color: #1B5E20;">Download PDF</strong> inside the planner. I am not attaching a PDF file to this email.</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">To save a print version, open the plan and select <strong style="color: #1B5E20;">Download PDF</strong>. The PDF is not attached to this email.</p>
           </td>
         </tr>
         <tr>
           <td style="padding: 0 28px 18px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">One note for Day 1: if your arrival is 1–3 days away, open the paid plan and check the arrival add-on. For €2.99, First-Day Rescue turns your landing point, luggage, weather and first stop into one arrival decision sheet.</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">If your arrival is 1–3 days away, open the paid plan and check the arrival add-on. First-Day Rescue costs €2.99. It uses your arrival point, luggage, weather, and first stop to create a short arrival plan.</p>
           </td>
         </tr>
         <tr>
           <td style="padding: 0 28px 18px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">The main thing I would protect is the first real city context. For your dates, the BerlinWalk timing to keep in mind is:</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">On my free walking tour, I explain how the main places in Berlin's historic centre fit together. For your dates, I recommend:</p>
           </td>
         </tr>
         <tr>
@@ -122,7 +122,7 @@ TODO_TRIP_PLANNER_INSTANT in velo/tripPlannerFunnel.js.
         </tr>
         <tr>
           <td style="padding: 0 28px 18px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">Over the next few days, I will send a few short Berlin prep notes around this pack: what to book ahead, how tickets work, what to check before you arrive, and how to keep the first day simple.</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">Before you arrive, I will send a few short notes about advance bookings, transport tickets, opening hours, and your first day.</p>
           </td>
         </tr>
 
@@ -141,7 +141,7 @@ TODO_TRIP_PLANNER_INSTANT in velo/tripPlannerFunnel.js.
               <span style="color: #7CB342;">&nbsp;|&nbsp;</span>
               <a href="https://www.instagram.com/berlinwalkingtour" style="color: #FFE600; text-decoration: none; font-weight: 700;">@berlinwalkingtour</a>
             </p>
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.5; color: #C5E1A5;">You are receiving this because you asked BerlinWalk to send your Berlin trip pack.</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.5; color: #C5E1A5;">You are receiving this because you asked me to send your Berlin plan.</p>
           </td>
         </tr>
       </table>
