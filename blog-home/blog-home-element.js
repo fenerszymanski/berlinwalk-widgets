@@ -1,27 +1,21 @@
 const BW_BLOG_HOME_DATA_URL = (() => {
   const script = document.currentScript;
   const base = script && script.src ? script.src : window.location.href;
-  return new URL('./data.json?v=20260803-featured-listings', base).href;
+  return new URL('./data.json?v=20260804-featured-listings', base).href;
 })();
 
 const BW_BLOG_HOME_FALLBACK = {
   featured: {
-    title: 'Berlin Sights Within Walking Distance of Alexanderplatz',
-    url: 'https://www.berlinwalk.com/post/berlin-sights-near-alexanderplatz-walking-distance',
-    category: 'Tour Route',
-    readTime: '3 min read',
-    label: 'New: start near Alexanderplatz',
-    summary: 'Almost the entire historic core of Berlin is a short walk west of Alexanderplatz. Here is what you can reach on foot from the World Clock, sorted by how far you have to walk.',
-    image: 'https://static.wixstatic.com/media/5a08a3_0c1a3060152c463697c671fa4288a9a5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/03-alexanderplatz-ubahn.jpg',
-    alt: 'Alexanderplatz station, where most visitors arrive before walking into central Berlin.'
+    title: 'Best Museums in Berlin for First-Time Visitors: Pick Three, Not Thirty',
+    url: 'https://www.berlinwalk.com/post/best-museums-in-berlin-first-time-visitors',
+    category: 'Tourist Tips',
+    readTime: '4 min read',
+    label: 'New: pick three museums',
+    summary: 'The best museums in Berlin for first-time visitors are three different slots, not thirty pins: Neues Museum, Jewish Museum Berlin and Topography of Terror.',
+    image: 'https://static.wixstatic.com/media/5a08a3_717947ab3eff4a4584fd9a6c71735cc7~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island.jpg',
+    alt: 'Museum Island and Berlin Cathedral beside the Spree'
   },
   miniPosts: [
-    {
-      title: 'Which Berlin Pass Is Worth It? WelcomeCard vs CityTourCard vs Museum Pass',
-      url: 'https://www.berlinwalk.com/post/which-berlin-pass-is-worth-it',
-      category: 'Tourist Tips',
-      readTime: '7 min read'
-    },
     {
       title: 'What Happens on a Berlin Free Walking Tour',
       url: 'https://www.berlinwalk.com/post/what-happens-on-a-berlin-free-walking-tour',
@@ -29,16 +23,22 @@ const BW_BLOG_HOME_FALLBACK = {
       readTime: '3 min read'
     },
     {
-      title: 'Vietnamese Food in Berlin: Where to Eat and What to Order',
-      url: 'https://www.berlinwalk.com/post/vietnamese-food-in-berlin',
-      category: 'Tourist Tips',
-      readTime: '5 min read'
+      title: 'Berlin Sights Within Walking Distance of Alexanderplatz',
+      url: 'https://www.berlinwalk.com/post/berlin-sights-near-alexanderplatz-walking-distance',
+      category: 'Tour Route',
+      readTime: '3 min read'
     },
     {
-      title: 'The Hidden Courtyards of Berlin: A Walk Through the Höfe Around Hackescher Markt',
-      url: 'https://www.berlinwalk.com/post/berlin-courtyards-hoefe',
-      category: 'Tour Route',
-      readTime: '6 min read'
+      title: 'Which Berlin Pass Is Worth It? WelcomeCard vs CityTourCard vs Museum Pass',
+      url: 'https://www.berlinwalk.com/post/which-berlin-pass-is-worth-it',
+      category: 'Tourist Tips',
+      readTime: '7 min read'
+    },
+    {
+      title: 'Where to Eat in Berlin by Neighbourhood: A Three-Night Dinner Plan',
+      url: 'https://www.berlinwalk.com/post/where-to-eat-berlin-by-neighbourhood',
+      category: 'Tourist Tips',
+      readTime: '5 min read'
     }
   ],
   posts: [

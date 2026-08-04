@@ -36,6 +36,7 @@ const TOPICS = [
       'are-shops-open-on-sunday-in-berlin',
       'what-is-a-spati-berlin',
       'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
+      'best-museums-in-berlin-first-time-visitors',
       'grocery-shopping-in-berlin',
       'lost-property-berlin',
       'doctor-in-berlin',
@@ -93,6 +94,9 @@ const TOPICS = [
       'the-myth-of-cheap-berlin-what-changed-and-why-it-still-matters-for-tourists',
       'is-museum-island-free-tickets-prices-and-what-to-actually-skip',
       'pfand-in-germany',
+      'wannsee-berlin',
+      'reichstag-before-and-after',
+      'tropical-islands-from-berlin',
     ],
     match: /(free|budget|cheap|save|pfand|deposit|bottle return|refund|museum pass|welcomecard|single tickets|bus 100|reichstag)/i,
   },
@@ -109,6 +113,10 @@ const TOPICS = [
       '7-things-most-tourists-dont-know-about-the-berliner-dom',
       'humboldt-forum-berlin-free-entry-big-controversy-is-it-worth-visiting',
       'hackescher-markt-where-our-tour-ends-and-your-berlin-adventure-begins',
+      'karl-marx-allee-berlin',
+      'berlin-art-week-2026',
+      'musikfest-berlin-2026',
+      'long-night-of-museums-berlin-2026',
     ],
     match: /(tour|route|alexanderplatz|world clock|weltzeituhr|berliner dom|humboldt|museum island|hackescher|lustgarten|rotes rathaus|marx|engels|neptune|spree)/i,
   },
@@ -205,12 +213,12 @@ const YEAR_REQUIRED_TITLE_SLUGS = new Set([
 ]);
 
 const HERO_SLUGS = {
-  // 3 Aug 2026: the upcoming Long Night of Museums is the strongest
-  // broad tourist-useful timely lead; keep the rail mixed rather than
-  // turning the featured block into a pure event-news shelf.
-  lead: 'long-night-of-museums-berlin-2026',
+  // 4 Aug 2026: the new first-time visitor museum guide is the strongest
+  // broad practical lead; keep the rail mixed with one timely event and
+  // proven practical/history evergreen posts.
+  lead: 'best-museums-in-berlin-first-time-visitors',
   secondary: [
-    'international-literature-festival-berlin-2026',
+    'long-night-of-museums-berlin-2026',
     'what-happens-on-a-berlin-free-walking-tour',
     'berlin-sights-near-alexanderplatz-walking-distance',
     'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
@@ -318,6 +326,7 @@ const REQUIRED_SLUGS = [
   'why-is-berlin-founding-year-1237',
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
+  'best-museums-in-berlin-first-time-visitors',
   'long-night-of-museums-berlin-2026',
   'international-literature-festival-berlin-2026',
   'what-happens-on-a-berlin-free-walking-tour',
