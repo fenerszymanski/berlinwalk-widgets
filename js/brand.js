@@ -77,13 +77,19 @@
     reportThrottled();
     clearTimeout(widthResize100);
     clearTimeout(widthResize350);
-    widthResize100 = setTimeout(reportThrottled, 100);
-    widthResize350 = setTimeout(reportThrottled, 350);
+    // A browser can defer requestAnimationFrame for an iframe that is below
+    // the fold. These bounded direct checks still repair the height before a
+    // reader reaches it, while lastReported suppresses duplicate messages.
+    widthResize100 = setTimeout(reportNow, 100);
+    widthResize350 = setTimeout(reportNow, 350);
   }
 
   // Used by the late first-party CTA runtime below after it changes the body's
   // direct-child content height.
-  window.__bwRequestEmbedResize = reportThrottled;
+  window.__bwRequestEmbedResize = function () {
+    reportNow();
+    setTimeout(reportNow, 100);
+  };
 
   // Initial reports
   if (document.readyState === 'loading') {
