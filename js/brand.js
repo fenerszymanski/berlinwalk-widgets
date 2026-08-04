@@ -75,6 +75,20 @@
     try { new ResizeObserver(reportThrottled).observe(document.body); } catch (e) {}
   }
 
+  // Some first-party helpers append a tour CTA or attribution row after the
+  // initial load and after the body's own box has already matched the iframe.
+  // ResizeObserver on body does not reliably fire for that overflow, so watch
+  // DOM additions as well and report the direct-child bottom edge again.
+  if (typeof MutationObserver !== 'undefined') {
+    try {
+      new MutationObserver(reportThrottled).observe(document.body, {
+        childList: true,
+        subtree: true,
+        characterData: true
+      });
+    } catch (e) {}
+  }
+
   // Re-measure after user interactions (calculator buttons, accordion, etc.)
   document.addEventListener('click', function () {
     setTimeout(reportThrottled, 50);
