@@ -6,7 +6,7 @@
     <title>Rave the Planet Day Fit | BerlinWalk</title>
     <meta
       name="description"
-      content="Shape a flexible Rave the Planet day around your arrival, crowd appetite and evening energy."
+      content="Decide whether Rave the Planet is your main event, a focused visit or a short look-in, then protect the rest of your Berlin day."
     />
     <link rel="stylesheet" href="../css/brand.css" />
     <style>
@@ -116,8 +116,22 @@
         text-align: center;
       }
       .meter b {
-        font-size: 38px;
+        display: block;
+        max-width: 128px;
+        font-size: 22px;
+        line-height: 1.05;
         color: var(--lime);
+        text-transform: uppercase;
+      }
+      .meter span {
+        display: block;
+        max-width: 128px;
+        margin-top: 8px;
+        color: #e8edfa;
+        font-size: 11px;
+        font-weight: 800;
+        line-height: 1.35;
+        text-transform: uppercase;
       }
       .result {
         display: grid;
@@ -196,6 +210,11 @@
       [hidden] {
         display: none !important;
       }
+      @media (min-width: 681px) and (max-width: 980px) {
+        .controls {
+          grid-template-columns: 1fr;
+        }
+      }
       @media (max-width: 680px) {
         .hero {
           min-height: 340px;
@@ -223,27 +242,27 @@
         <span class="eyebrow">Berlin event decision tool</span>
         <h1>Rave the Planet Day Fit</h1>
         <p>
-          Make one flexible plan for a long August afternoon: when to arrive,
-          when to step away and whether an evening add-on will actually suit
-          you.
+          Decide whether the parade is the main plan, one focused Berlin
+          moment or a short look-in, then give the rest of the day a real
+          place to go.
         </p>
       </section>
       <section class="body">
         <div class="controls">
           <div class="field">
-            <label for="arrival">Your Berlin day</label
-            ><select id="arrival">
-              <option value="early">I am free before lunch</option>
-              <option value="mid">I arrive around the afternoon</option>
-              <option value="late">I only want a shorter visit</option>
+            <label for="role">Parade role</label
+            ><select id="role">
+              <option value="main">It is my main event</option>
+              <option value="focused">I want one focused stretch</option>
+              <option value="short">I only want a short look-in</option>
             </select>
           </div>
           <div class="field">
-            <label for="crowd">Crowd appetite</label
-            ><select id="crowd">
-              <option value="high">I want the full atmosphere</option>
-              <option value="medium">I like energy with breathing room</option>
-              <option value="low">I want a calm edge, not a crush</option>
+            <label for="commitment">Hard stop later</label
+            ><select id="commitment">
+              <option value="none">Nothing fixed afterwards</option>
+              <option value="dinner">I have dinner or a booking</option>
+              <option value="travel">I need to cross the city / travel on</option>
             </select>
           </div>
           <div class="field">
@@ -257,7 +276,10 @@
         </div>
         <section class="pulse" aria-live="polite">
           <div class="meter">
-            <div><b id="score">78</b><br /><span>day-fit score</span></div>
+            <div>
+              <b id="plan-kind">Focused visit</b>
+              <span id="plan-window">One good stretch, then a reset</span>
+            </div>
           </div>
           <div class="result">
             <h2 id="headline">Build a two-part day, not one long push.</h2>
@@ -271,15 +293,22 @@
         </section>
         <div class="bottom">
           <p class="small">
-            The route and access conditions can change. Recheck the organiser’s
-            update and BVG journey planner on the day; this tool is for shaping
-            your time, not promising a particular crossing or timetable.
+            Rave the Planet is planned for 14:00–22:00 on Saturday 15 August.
+            The route and access conditions can change: recheck the organiser’s
+            update and BVG journey planner on the day. This tool shapes time;
+            it does not promise a particular crossing or timetable.
           </p>
           <a
             class="cta"
             href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based"
             target="_top"
             >Book my 2-hour Berlin walk</a
+          >
+          <a
+            class="cta"
+            href="https://www.berlinwalk.com/berlin-trip-planner"
+            target="_top"
+            >Plan the rest of my Berlin days</a
           >
         </div>
         <div class="credits">
@@ -302,38 +331,54 @@
     <script>
       const $ = (s) => document.querySelector(s);
       function draw() {
-        let a = $("#arrival").value,
-          c = $("#crowd").value,
-          e = $("#energy").value,
-          score = 78;
-        if (a === "late") score -= 14;
-        if (c === "low") score -= 9;
-        if (e === "home") score -= 7;
-        $("#score").textContent = score;
+        let r = $("#role").value,
+          c = $("#commitment").value,
+          e = $("#energy").value;
+        const plan =
+          r === "short"
+            ? {
+                kind: "Short look-in",
+                window: "One hour, then leave happy.",
+                headline: "Treat the parade as one Berlin moment, not your whole day.",
+              }
+            : r === "main" && c === "none" && e === "go"
+              ? {
+                  kind: "Main event",
+                  window: "Afternoon first; one optional late stop.",
+                  headline: "Make the parade the main event, then protect your night.",
+                }
+              : {
+                  kind: "Focused visit",
+                  window: "Ninety minutes, then reset.",
+                  headline: "Build a two-part day, not one long push.",
+                };
         const start =
-          a === "early"
-            ? "Use the morning for a proper sit-down breakfast or a quiet Museum Island walk, then arrive with water and a charged phone."
-            : a === "mid"
-              ? "Make the parade your main afternoon item. Eat before you enter the busy corridor rather than relying on a late decision."
-              : "Choose one recognisable stretch near the Tiergarten edge and give yourself permission to leave after one good hour.";
+          r === "main"
+            ? "Use the morning for breakfast or one indoor sight, then arrive at the Straße des 17. Juni corridor with water, a charged phone and no competing afternoon plan."
+            : r === "focused"
+              ? "Eat before you enter and choose your 90-minute window in advance. The parade should be the afternoon item, not a gap between two unrelated sights."
+              : "Choose one recognisable stretch near the Tiergarten edge and arrive only when you are ready to give it a full hour.";
         const reset =
-          c === "high"
-            ? "Stay for the moving energy, then step into Tiergarten before your attention turns into fatigue."
-            : c === "medium"
-              ? "Watch a focused section, then use Tiergarten as a real reset rather than squeezing through the densest point."
-              : "Treat the event as a look-in: stand at the outside edge, keep a clear exit direction and make the green space your base.";
+          c === "dinner"
+            ? "Set an alarm 75 minutes before your booking. Use Tiergarten as the reset point and start the journey before the exit crowd decides it for you."
+            : c === "travel"
+              ? "Treat your departure time as fixed, not aspirational. Leave the parade with a generous buffer and check the live route before moving on."
+              : "Stay for the energy you came for, then use Tiergarten for a real reset before deciding whether the evening still needs one more plan.";
         const end =
           e === "go"
-            ? "Plan only one later stop and make it close to a direct night journey; do not make the parade and a cross-city club plan compete."
+            ? c === "none"
+              ? "Choose one later stop on a direct night route. Do not make a cross-city club plan compete with a full parade afternoon."
+              : "Let the fixed plan win. If there is spare time, turn it into a short drink or walk near that commitment rather than another cross-city move."
             : e === "food"
-              ? "Book or choose one dinner area before you go. A finished plan beats a hungry, overloaded search at 22:00."
-              : "Leave while the day still feels good, eat near your accommodation and save the next morning for the historic centre.";
-        $("#headline").textContent =
-          score > 70
-            ? "Build a two-part day, not one long push."
-            : "Give the event a clear window, then protect the rest of your Berlin day.";
+              ? c === "dinner"
+                ? "Keep the booking and make the parade fit it. A finished dinner plan beats a hungry search after a long outdoor afternoon."
+                : "Choose one dinner area before you go. A finished plan beats a hungry search at 22:00 after a long outdoor afternoon."
+              : "Leave while the day still feels good, eat near your accommodation and save the historic centre for the next morning.";
+        $("#plan-kind").textContent = plan.kind;
+        $("#plan-window").textContent = plan.window;
+        $("#headline").textContent = plan.headline;
         $("#summary").textContent =
-          "Your answers point to a plan with a deliberate entry, a deliberate pause and a finish that matches your energy.";
+          "This is a day-shape decision, not a score. Your answers set a clear entry, a reset point and a finish that matches your actual energy.";
         $("#arrive").textContent = start;
         $("#reset").textContent = reset;
         $("#finish").textContent = end;

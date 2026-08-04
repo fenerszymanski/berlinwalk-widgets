@@ -45,6 +45,8 @@
       .m3__sheet-head h2 { margin: 0; color: var(--m3-forest); font-size: 21px; letter-spacing: -.02em; }
       .m3__sheet-head p { max-width: 510px; margin: 0; color: #566159; font-size: 12px; line-height: 1.5; text-align: right; }
       .m3__slots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 13px; margin-top: 16px; }
+      .m3__slots[data-count="1"] { grid-template-columns: minmax(0, 1fr); }
+      .m3__slots[data-count="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .m3__slot { min-height: 320px; padding: 16px; border: 1px solid var(--m3-line); background: #fffef9; display: grid; align-content: start; }
       .m3__slot:nth-child(2) { background: #f6f9ef; }
       .m3__slot:nth-child(3) { background: #f1f6f7; }
@@ -162,47 +164,125 @@
           return ['neues', 'topography', 'national', 'jewish'];
         }
 
-        function labelsFor() {
-          if (days.value === '2') {
-            return monday.value === 'yes'
-              ? ['Day 1 morning', 'Day 2 morning', 'Day 2 late afternoon']
-              : ['Day 1 morning', 'Day 1 late afternoon', 'Day 2 morning'];
+        function tripLength() {
+          return days.value === '4' ? 4 : Number(days.value);
+        }
+
+        function freeHalfDays() {
+          return Math.min(Number(halves.value), tripLength() * 2);
+        }
+
+        function syncHalfDayChoices() {
+          var maxHalfDays = tripLength() * 2;
+          Array.prototype.forEach.call(halves.options, function (option) {
+            var available = Number(option.value) <= maxHalfDays;
+            option.disabled = !available;
+            option.hidden = !available;
+          });
+          if (Number(halves.value) > maxHalfDays) halves.value = String(maxHalfDays);
+        }
+
+        function slotCount() {
+          var reserve = pace.value === 'light' ? 2 : 1;
+          var count = Math.max(1, Math.min(3, freeHalfDays() - reserve));
+          if (pace.value === 'light' || pace.value === 'deep') count = Math.min(count, tripLength());
+          return count;
+        }
+
+        function labelFor(dayNumber, half) {
+          if (days.value === '4' && dayNumber === 4) return 'Later-trip ' + half;
+          return 'Day ' + dayNumber + ' ' + half;
+        }
+
+        function spacedDays(count) {
+          var total = tripLength();
+          if (count === 1) return [monday.value === 'yes' ? 1 : Math.min(2, total)];
+          if (count === 2) return [1, total];
+          return total === 3 ? [1, 2, 3] : [1, 3, total];
+        }
+
+        function labelsFor(count) {
+          var total = tripLength();
+          if (pace.value === 'light' || pace.value === 'deep') {
+            return spacedDays(count).map(function (dayNumber, index) {
+              var half = index === 0 && monday.value === 'yes' ? 'morning' : index === 1 ? 'afternoon' : 'morning';
+              return labelFor(dayNumber, half);
+            });
           }
-          if (days.value === '3') return monday.value === 'yes' ? ['Day 1 morning', 'Day 2 afternoon', 'Day 3 morning'] : ['Day 1 afternoon', 'Day 2 morning', 'Day 3 afternoon'];
-          return monday.value === 'yes' ? ['Day 1 morning', 'Day 3 afternoon', 'Last full day morning'] : ['Day 1 afternoon', 'Day 3 morning', 'Last full day afternoon'];
+          if (total === 2) {
+            return (monday.value === 'yes'
+              ? ['Day 1 morning', 'Day 2 morning', 'Day 2 late afternoon']
+              : ['Day 1 morning', 'Day 1 late afternoon', 'Day 2 morning']).slice(0, count);
+          }
+          if (total === 3) {
+            return (monday.value === 'yes'
+              ? ['Day 1 morning', 'Day 2 afternoon', 'Day 3 morning']
+              : ['Day 1 afternoon', 'Day 2 morning', 'Day 3 afternoon']).slice(0, count);
+          }
+          return (monday.value === 'yes'
+            ? ['Day 1 morning', 'Day 3 afternoon', 'Later-trip morning']
+            : ['Day 1 afternoon', 'Day 3 morning', 'Later-trip afternoon']).slice(0, count);
         }
 
         function paceLine(museum) {
-          if (pace.value === 'light') return 'Keep the rest of this half-day outdoors. ' + museum.duration;
-          if (pace.value === 'deep') return 'Do not put a second collection beside it. ' + museum.duration;
+          if (pace.value === 'light') return 'Keep this as the day’s only collection and leave the rest outdoors. ' + museum.duration;
+          if (pace.value === 'deep') return 'Protect this full half-day for the collection. Do not add a second collection to this slot. ' + museum.duration;
           return 'Pair it only with its own nearby streets or park. ' + museum.duration;
         }
 
-        function arrange(keys) {
-          var primary = keys.slice(0, 3);
-          var alternate = keys[3];
-          if (monday.value !== 'yes') return { primary: primary, alternate: alternate };
-          var safe = primary.filter(function (key) { return !museums[key].monday; });
-          var restricted = primary.filter(function (key) { return museums[key].monday; });
-          if (safe.length === 0) {
-            var mondayFallback = !museums[alternate].monday ? alternate : 'topography';
-            safe.push(mondayFallback);
-            alternate = restricted.pop();
+        function arrange(keys, count) {
+          var candidates = keys.slice();
+          var primary = [];
+          var alternate;
+          var safeIndex;
+          var index;
+          if (monday.value === 'yes') {
+            if (candidates.indexOf('topography') === -1) candidates.push('topography');
+            safeIndex = -1;
+            for (index = 0; index < candidates.length; index += 1) {
+              if (!museums[candidates[index]].monday) {
+                safeIndex = index;
+                break;
+              }
+            }
+            primary.push(candidates.splice(safeIndex, 1)[0]);
           }
-          return { primary: safe.concat(restricted), alternate: alternate };
+          primary = primary.concat(candidates.slice(0, count - primary.length));
+          for (index = 0; index < candidates.length; index += 1) {
+            if (primary.indexOf(candidates[index]) === -1) {
+              alternate = candidates[index];
+              break;
+            }
+          }
+          if (!alternate) {
+            Object.keys(museums).some(function (key) {
+              if (primary.indexOf(key) === -1) {
+                alternate = key;
+                return true;
+              }
+              return false;
+            });
+          }
+          return { primary: primary, alternate: alternate };
         }
 
         function draw() {
-          var arranged = arrange(basePlan());
-          var slotLabels = labelsFor();
-          title.textContent = 'Three museum slots across ' + (days.value === '4' ? 'a longer Berlin trip' : days.value + ' days');
-          subtitle.textContent = 'You marked ' + halves.value + ' free half-days. This plan uses exactly three and keeps at least one half-day for the city outside.';
+          syncHalfDayChoices();
+          var count = slotCount();
+          var arranged = arrange(basePlan(), count);
+          var slotLabels = labelsFor(count);
+          var halfDayLabel = halves.options[halves.selectedIndex].textContent;
+          var spareHalfDays = freeHalfDays() - count;
+          var spareLabel = halves.value === '5' ? 'at least ' + spareHalfDays : spareHalfDays;
+          title.textContent = (count === 1 ? 'One museum slot' : count === 3 ? 'Three museum slots' : count + ' museum slots') + ' across ' + (days.value === '4' ? 'a longer Berlin trip' : days.value + ' days');
+          subtitle.textContent = 'You marked ' + halfDayLabel + '. This plan uses ' + count + (count === 1 ? ' protected half-day' : ' protected half-days') + ' and keeps ' + spareLabel + (spareHalfDays === 1 ? ' half-day' : ' half-days') + ' for the city outside.';
           if (monday.value === 'yes') {
-            note.innerHTML = '<div class="m3__brief-mark" aria-hidden="true">!</div><p><strong>Monday needs a deliberate swap.</strong> Neues Museum and Jewish Museum Berlin are normally closed on Mondays, and other museum calendars can differ too. I put a Monday-safe anchor first where possible; move a restricted museum to the next non-Monday slot and confirm each museum’s own calendar before booking.</p>';
+            note.innerHTML = '<div class="m3__brief-mark" aria-hidden="true">!</div><p><strong>Monday needs a deliberate swap.</strong> Neues Museum and Jewish Museum Berlin are normally closed on Mondays, and other museum calendars can differ too. I put a Monday-safe anchor in the Day 1 slot; any restricted collection stays on a later-day slot. Confirm each museum’s own calendar before booking.</p>';
           } else {
             note.innerHTML = '<div class="m3__brief-mark" aria-hidden="true">✓</div><p><strong>Keep one day light.</strong> Three museum slots are enough for a first Berlin visit. The goal is not to tick off a collection at every turn, but to leave room for the streets around it.</p>';
           }
           slots.innerHTML = '';
+          slots.dataset.count = String(count);
           arranged.primary.forEach(function (key, index) {
             var museum = museums[key];
             var card = document.createElement('article');

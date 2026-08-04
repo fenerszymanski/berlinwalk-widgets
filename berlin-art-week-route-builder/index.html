@@ -290,7 +290,7 @@
       <div class="aw-layout">
         <form class="aw-controls" id="route-form">
           <h2>Set the shape of your day</h2>
-          <p>These choices create a district logic, not a live event timetable.</p>
+          <p>Start with one official listing. These choices turn it into a district ticket, not a made-up live timetable.</p>
 
           <label class="aw-field" for="day">
             <span>Day</span>
@@ -304,12 +304,21 @@
           </label>
 
           <label class="aw-field" for="district">
-            <span>Starting district</span>
+            <span>Anchor district</span>
             <select id="district" name="district">
               <option value="kulturforum">Kulturforum</option>
               <option value="tempelhof">Tempelhof</option>
               <option value="mitte">Mitte</option>
               <option value="hamburger">Hamburger Bahnhof</option>
+            </select>
+          </label>
+
+          <label class="aw-field" for="anchor">
+            <span>Official anchor</span>
+            <select id="anchor" name="anchor">
+              <option value="confirmed">I have one confirmed listing</option>
+              <option value="shortlist">I have two listings to compare</option>
+              <option value="finding">I still need to choose an anchor</option>
             </select>
           </label>
 
@@ -357,6 +366,7 @@
             <a
               class="aw-link"
               href="https://www.berlinwalk.com/berlin-trip-planner"
+              target="_top"
               >Build the rest of your Berlin days →</a>
           </div>
         </section>
@@ -370,6 +380,7 @@
           day: document.getElementById('day'),
           district: document.getElementById('district'),
           time: document.getElementById('time'),
+          anchor: document.getElementById('anchor'),
           pace: document.getElementById('pace'),
           registration: document.getElementById('registration')
         };
@@ -458,6 +469,7 @@
           var day = fields.day.value;
           var district = fields.district.value;
           var time = fields.time.value;
+          var anchor = fields.anchor.value;
           var pace = fields.pace.value;
           var registration = fields.registration.value;
           var area = areas[district];
@@ -474,12 +486,29 @@
             ? 'For the evening, choose only a confirmed late item in ' + area.nearby + '. If the programme does not clearly show one, end after two stops.'
             : area.finish;
 
+          if (anchor === 'finding') {
+            document.getElementById('route-kicker').textContent = titles.day + ' · choose anchor first';
+            document.getElementById('route-title').textContent = 'Do not build the route until one official listing earns the day.';
+            document.getElementById('route-lead').textContent = 'A district is not an anchor. Open the programme, choose one named event with an exact time or entry condition, then return here to decide what belongs around it.';
+            stops.replaceChildren(
+              makeStop('1', 'Choose one district', 'Filter the official programme to ' + titles.district + ' and save only listings you could realistically reach.'),
+              makeStop('2', 'Name the anchor', 'Pick one listing with a clear start, finish and access rule. It becomes the thing you would regret missing.'),
+              makeStop('3', 'Build the rest', 'Return with that anchor confirmed. Only then decide whether there is room for a nearby second choice or a finish.')
+            );
+            document.getElementById('route-rule').textContent = 'Stop rule: do not cross Berlin for a vague possibility. A live programme listing with its exact entry condition comes before every route decision.';
+            return;
+          }
+
+          if (anchor === 'shortlist') {
+            middle = 'Compare the two official listings before you leave. Choose the one with the clearer time and access rule as your anchor; keep the other as the same-district back-up.';
+          }
+
           document.getElementById('route-kicker').textContent = titles.day + ' · ' + titles.district + ' · ' + titles.time;
           document.getElementById('route-title').textContent = area.title;
-          document.getElementById('route-lead').textContent = 'This is a ' + (pace === 'slow' ? 'two-stop-first' : 'three-stop-maximum') + ' route. The programme decides the precise places; your district decision keeps the day usable.';
+          document.getElementById('route-lead').textContent = (anchor === 'confirmed' ? 'Your confirmed listing is the punch on this district ticket. ' : 'Choose one of your two listings as the punch before you travel. ') + 'This is a ' + (pace === 'slow' ? 'two-stop-first' : 'three-stop-maximum') + ' route. The programme decides the precise places; your district decision keeps the day usable.';
           stops.replaceChildren(
-            makeStop('1', 'Anchor', area.arrival),
-            makeStop('2', pace === 'slow' ? 'Breathing room' : 'Neighbour step', middle),
+            makeStop('1', anchor === 'confirmed' ? 'Confirmed anchor' : 'Choose your anchor', area.arrival),
+            makeStop('2', anchor === 'shortlist' ? 'Keep one as back-up' : (pace === 'slow' ? 'Breathing room' : 'Neighbour step'), middle),
             makeStop('3', 'Finish', finish)
           );
           document.getElementById('route-rule').textContent = registrationRule(registration) + ' ' + dayRule(day, time);

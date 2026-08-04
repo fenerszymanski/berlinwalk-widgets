@@ -169,7 +169,7 @@
             </select>
           </label>
           <hr class="itb__rule" />
-          <p class="itb__control-note">This is a post-fair decision board, not a live timetable. Recheck the organiser’s instructions, your ticket and public transport before you leave the grounds.</p>
+          <p class="itb__control-note">The selected day changes the recovery and travel strategy, not the published fair timetable. Recheck the organiser’s instructions, your ticket and public transport before you leave the grounds.</p>
         </section>
 
         <section class="itb__board" aria-live="polite">
@@ -224,11 +224,55 @@
           }
         };
 
-        function timeFor(step) {
-          var early = day.value === 'fri';
-          if (step === 0) return early ? '16:15' : '18:15';
-          if (step === 1) return early ? '17:15' : '19:15';
-          return early ? '19:00' : '21:00';
+        var dayProfiles = {
+          tue: {
+            name: 'Tuesday',
+            finish: '18:00',
+            times: ['18:15', '19:15', '20:45'],
+            title: 'Treat Tuesday as a landing night.',
+            lead: 'Tuesday is the first full fair evening. Keep one district and learn what a full day at the fair actually leaves you for.',
+            leave: 'Use the first 45 minutes to leave the fair edge, open your live route and make no second-district commitment yet.',
+            eat: 'Make dinner the only fixed social move tonight.',
+            close: 'Finish with a short local close so Wednesday starts without a late-night recovery bill.',
+            labels: ['Leave', 'Eat', 'Close early']
+          },
+          wed: {
+            name: 'Wednesday',
+            finish: '18:00',
+            times: ['18:15', '19:15', '20:45'],
+            title: 'Keep Wednesday compact and local.',
+            lead: 'By Wednesday, reduce choices rather than adding a second district. A straightforward meal and direct route back protects the next fair day.',
+            leave: 'Use the first 45 minutes to leave the fair edge, then take the simplest route toward your hotel side.',
+            eat: 'Put any useful catch-up inside one meal area rather than turning it into a separate cross-city stop.',
+            close: 'Make the final block optional and keep the return route obvious before the evening gets late.',
+            labels: ['Leave', 'Catch up', 'Return-ready close']
+          },
+          thu: {
+            name: 'Thursday',
+            finish: '18:00',
+            times: ['18:15', '19:15', '20:45'],
+            title: 'Use Thursday to make Friday easier.',
+            lead: 'Thursday is the last 18:00 fair finish before Friday’s earlier close. Keep the final block optional and leave room for a simple reset.',
+            leave: 'Use the first 45 minutes to leave the fair edge and decide whether the evening needs food, a short walk or simply a direct return.',
+            eat: 'Keep the meal near the route you will want to use again tomorrow, not in a second district for its own sake.',
+            close: 'Use the last block for one local close or a practical reset, rather than trying to make Thursday the biggest night.',
+            labels: ['Leave', 'Eat nearby', 'Reset']
+          },
+          fri: {
+            name: 'Friday',
+            finish: '16:00',
+            times: ['16:15', '17:15', '19:00'],
+            title: 'Use Friday’s early finish for one longer move.',
+            lead: 'Friday’s published 16:00 finish gives you an earlier departure. Use the extra daylight for one district, not a city-wide catch-up.',
+            leave: 'Leave the fair edge while there is still daylight, open your live route and make the cross-city move only once.',
+            eat: 'Take an earlier meal in the district you chose, then decide whether a longer walk still feels useful.',
+            close: 'Use the final block as the one proper Berlin close for the week, without adding another district afterwards.',
+            labels: ['Leave in daylight', 'Eat earlier', 'One longer close']
+          }
+        };
+
+        function timeFor(profile, step) {
+          return profile.times[step];
         }
 
         function networkLine(area) {
@@ -245,21 +289,21 @@
 
         function draw() {
           var route = routes[hotel.value];
-          var finishTime = day.value === 'fri' ? '16:00' : '18:00';
-          finish.textContent = 'Published finish: ' + finishTime;
-          title.textContent = route.title;
-          lead.textContent = route.travel + ' The board below gives the evening three blocks, not a list of places to chase.';
+          var profile = dayProfiles[day.value];
+          finish.textContent = profile.name + ' published finish: ' + profile.finish;
+          title.textContent = profile.title + ' ' + route.title;
+          lead.textContent = profile.lead + ' ' + route.travel + ' The board below gives the evening three blocks, not a list of places to chase.';
           var blocks = [
-            { label: 'Leave', heading: route.anchor, text: 'Use the first 45 minutes to leave the fair edge, open your live route and reset before you decide on dinner.' },
-            { label: 'Eat', heading: route.dinner, text: networkLine(route.dinner) + ' This is a dining area, not a restaurant ranking.' },
-            { label: 'Close', heading: route.close, text: energyLine(route) }
+            { label: profile.labels[0], heading: route.anchor, text: profile.leave },
+            { label: profile.labels[1], heading: route.dinner, text: profile.eat + ' ' + networkLine(route.dinner) + ' This is a dining area, not a restaurant ranking.' },
+            { label: profile.labels[2], heading: route.close, text: profile.close + ' ' + energyLine(route) }
           ];
           tracks.innerHTML = '';
           blocks.forEach(function (block, index) {
             var row = document.createElement('article');
             row.className = 'itb__stop';
             row.innerHTML = '<div class="itb__time"></div><div class="itb__carriage"><small></small><h3></h3><p></p></div>';
-            row.querySelector('.itb__time').textContent = timeFor(index);
+            row.querySelector('.itb__time').textContent = timeFor(profile, index);
             row.querySelector('small').textContent = 'Block ' + (index + 1) + ' · ' + block.label;
             row.querySelector('h3').textContent = block.heading;
             row.querySelector('p').textContent = block.text;

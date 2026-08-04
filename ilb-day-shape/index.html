@@ -157,6 +157,16 @@
         text-decoration: none;
         font-weight: 900;
       }
+      .cta.secondary {
+        background: var(--plum);
+        color: #fff !important;
+      }
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
       .credits {
         margin-top: 15px;
         font-size: 12px;
@@ -178,6 +188,21 @@
       }
       [hidden] {
         display: none !important;
+      }
+      @media (max-width: 980px) {
+        .selectors label {
+          min-width: 0;
+        }
+        .selectors select {
+          width: 100%;
+          max-width: 100%;
+          min-width: 0;
+        }
+      }
+      @media (min-width: 681px) and (max-width: 980px) {
+        .selectors {
+          grid-template-columns: minmax(0, 1fr);
+        }
       }
       @media (max-width: 680px) {
         .hero {
@@ -209,8 +234,9 @@
           <h1>ILB Day Shape</h1>
           <p>
             A reading can be the centre of a Berlin day rather than an
-            appointment squeezed between unrelated sights. Choose the kind of
-            programme, your energy and how much travel you actually want.
+            appointment squeezed between unrelated sights. Start with the
+            address and time on your ticket, then give one nearby part of the
+            city a real role before or after it.
           </p>
         </div>
         <div class="image"></div>
@@ -218,29 +244,31 @@
       <section class="body">
         <div class="selectors">
           <label
-            >Programme pull<select id="program">
-              <option value="talk">One author talk matters most</option>
-              <option value="young">
-                I am building around the Young Program
+            >Venue on your confirmed ticket<select id="venue">
+              <option value="festspiele">Haus der Berliner Festspiele</option>
+              <option value="humboldt">Humboldt Forum</option>
+              <option value="philharmonie">Berliner Philharmonie</option>
+              <option value="documentation">
+                Documentation Centre, Anhalter Bahnhof
               </option>
-              <option value="browse">I want to browse the programme</option>
+              <option value="bookinista">Bookinista, Fasanenplatz</option>
             </select></label
           ><label
-            >Day energy<select id="energy">
-              <option value="slow">Slow, reflective day</option>
-              <option value="normal">One reading plus the city</option>
-              <option value="full">I want a fuller schedule</option>
+            >Start time on your ticket<select id="timing">
+              <option value="afternoon">Before 17:30</option>
+              <option value="evening">17:30 to 19:00</option>
+              <option value="late">After 19:00</option>
             </select></label
           ><label
-            >Travel tolerance<select id="travel">
-              <option value="low">Keep it compact</option>
-              <option value="mid">One cross-city move is fine</option>
-              <option value="high">I will follow the best event</option>
+            >One thing you want around it<select id="priority">
+              <option value="history">A short history stop</option>
+              <option value="food">Food in the same district</option>
+              <option value="quiet">A quiet break outdoors</option>
             </select></label
           >
         </div>
         <section class="map" aria-live="polite">
-          <h2 id="title">Let the reading give the day its rhythm.</h2>
+          <h2 id="title">One venue area, one cultural event, one buffer.</h2>
           <p id="lead"></p>
           <div class="path">
             <article class="place">
@@ -267,13 +295,22 @@
             >Individual authors, venues, times, languages and ticket
             availability belong to the current official programme. This tool
             helps you reserve the right amount of Berlin around one good
-            cultural event.</small
-          ><a
-            class="cta"
-            target="_blank"
-            href="https://literaturfestival.com/en/"
-            >Open ILB programme</a
-          >
+            cultural event. If your confirmed event uses another address,
+            follow that event page rather than adapting this route.</small
+          ><div class="actions">
+            <a
+              class="cta"
+              target="_blank"
+              rel="noopener"
+              href="https://literaturfestival.com/en/"
+              >Open ILB programme</a
+            ><a
+              class="cta secondary"
+              target="_top"
+              href="https://www.berlinwalk.com/berlin-trip-planner"
+              >Place this reading in my trip</a
+            >
+          </div>
         </div>
         <div class="credits">
           <button aria-expanded="false" aria-controls="credit">
@@ -294,40 +331,191 @@
     <script src="../js/brand.js"></script>
     <script>
       const q = (s) => document.querySelector(s);
+      const venues = {
+        festspiele: {
+          name: "Haus der Berliner Festspiele",
+          district: "Wilmersdorf",
+          choices: {
+            history: {
+              name: "Kaiser Wilhelm Memorial Church",
+              copy:
+                "Use the church exterior and Breitscheidplatz as a compact west-Berlin history edge before you turn back toward Schaperstraße.",
+            },
+            food: {
+              name: "Fasanenplatz or Savignyplatz",
+              copy:
+                "Choose one Wilmersdorf food area and keep the meal close to the venue instead of trying to cross the city before the reading.",
+            },
+            quiet: {
+              name: "Fasanenplatz",
+              copy:
+                "Use the square for a short reset and leave enough time to walk back toward the venue without checking the clock every minute.",
+            },
+          },
+          after: {
+            history:
+              "Afterwards, keep the west-Berlin walk short rather than heading to Museum Island simply because the evening is still open.",
+            food:
+              "Afterwards, stay in Wilmersdorf for dinner or a final drink instead of starting a second dinner search elsewhere.",
+            quiet:
+              "Afterwards, let the venue area be the final part of the day and return when the reading ends.",
+          },
+        },
+        humboldt: {
+          name: "Humboldt Forum",
+          district: "the historic centre",
+          choices: {
+            history: {
+              name: "Bebelplatz and Neue Wache",
+              copy:
+                "Take the short Unter den Linden history line, then turn back east toward the Forum. Both stops work from the street, so they do not depend on another ticket.",
+            },
+            food: {
+              name: "Hackescher Markt",
+              copy:
+                "Use Hackescher Markt as the food district, then make one clean move back through the centre for the event.",
+            },
+            quiet: {
+              name: "Lustgarten and the Spree",
+              copy:
+                "Use the riverside edge beside Museum Island for a quiet pause, then return toward the Forum before the start time takes over.",
+            },
+          },
+          after: {
+            history:
+              "Afterwards, keep the historic-centre line intact: one short walk on Unter den Linden is enough.",
+            food:
+              "Afterwards, keep your dinner in the centre instead of adding a late west-Berlin transfer.",
+            quiet:
+              "Afterwards, a short Spree-side walk is the finish. Do not turn the calm part into a cross-city detour.",
+          },
+        },
+        philharmonie: {
+          name: "Berliner Philharmonie",
+          district: "Kulturforum and Potsdamer Platz",
+          choices: {
+            history: {
+              name: "Potsdamer Platz and the former Wall line",
+              copy:
+                "Use the visible city layers around Potsdamer Platz as the short history stop, then stay on the Kulturforum side for the event.",
+            },
+            food: {
+              name: "Potsdamer Platz",
+              copy:
+                "Choose food around Potsdamer Platz so that the Philharmonie stays the final fixed destination, not a late dash from another district.",
+            },
+            quiet: {
+              name: "The Tiergarten edge",
+              copy:
+                "Take a brief quiet walk on the Tiergarten side of Kulturforum, then come back toward the venue with time in hand.",
+            },
+          },
+          after: {
+            history:
+              "Afterwards, one more short look around Potsdamer Platz is enough. Save the historic centre for another day.",
+            food:
+              "Afterwards, eat nearby or return. A late search across Berlin weakens a good Kulturforum evening.",
+            quiet:
+              "Afterwards, let the Tiergarten edge be a short exit, then take the route home.",
+          },
+        },
+        documentation: {
+          name: "Documentation Centre for Displacement, Expulsion, Reconciliation",
+          district: "Anhalter Bahnhof and Stresemannstraße",
+          choices: {
+            history: {
+              name: "Topography of Terror exterior",
+              copy:
+                "Use the outdoor history line at Topography of Terror before the event, then keep the remaining walk south toward Anhalter Bahnhof compact.",
+            },
+            food: {
+              name: "Potsdamer Platz",
+              copy:
+                "Use Potsdamer Platz for the meal, then leave a proper travel margin for the walk or live route toward Stresemannstraße.",
+            },
+            quiet: {
+              name: "Park am Gleisdreieck",
+              copy:
+                "Use the park as a quiet early stop only if the time on your ticket leaves you room to come back toward Anhalter Bahnhof calmly.",
+            },
+          },
+          after: {
+            history:
+              "Afterwards, keep the history thread local instead of jumping from one heavy subject to a far-away attraction.",
+            food:
+              "Afterwards, a simple meal in the Anhalter Bahnhof or Potsdamer Platz area is the realistic finish.",
+            quiet:
+              "Afterwards, return rather than adding another timed cultural stop to a serious evening.",
+          },
+        },
+        bookinista: {
+          name: "Bookinista at Fasanenplatz",
+          district: "Fasanenplatz and Wilmersdorf",
+          choices: {
+            history: {
+              name: "Kaiser Wilhelm Memorial Church",
+              copy:
+                "Use the church exterior as a short, place-based history stop, then keep the rest of the evening near Fasanenplatz.",
+            },
+            food: {
+              name: "Fasanenplatz",
+              copy:
+                "Pick the food stop close to Fasanenplatz. A bookshop event works better with one local table than an unnecessary central transfer.",
+            },
+            quiet: {
+              name: "Fasanenplatz",
+              copy:
+                "Use the square for a slow coffee or a few pages before the event, then let the reading be the real focus of the evening.",
+            },
+          },
+          after: {
+            history:
+              "Afterwards, stay in the west-Berlin area or return. Do not force a late Museum Island run.",
+            food:
+              "Afterwards, have dinner locally if you still want it, rather than turning a small literary evening into a city-crossing plan.",
+            quiet:
+              "Afterwards, return when the event ends. The point was a quiet literary evening, not a second itinerary.",
+          },
+        },
+      };
+      const timeShapes = {
+        afternoon: {
+          arrival: "Aim to be at the venue 30 minutes before the listed start.",
+          before:
+            "An afternoon event leaves room for one compact nearby stop before it, then one small same-district finish afterwards.",
+          after: "You can still keep a light evening in the same district.",
+        },
+        evening: {
+          arrival: "Aim to be at the venue 45 minutes before the listed start.",
+          before:
+            "Use the chosen stop before the event, then make the venue your final move before the reading starts.",
+          after: "After the event, keep the finish short and local.",
+        },
+        late: {
+          arrival: "Aim to be at the venue 45 minutes before the listed start.",
+          before:
+            "Keep the chosen stop to a short early meal or walk. The event is the final fixed item of the night.",
+          after: "",
+        },
+      };
+
       function draw() {
-        let p = q("#program").value,
-          e = q("#energy").value,
-          t = q("#travel").value;
-        q("#title").textContent =
-          e === "slow"
-            ? "Protect a slow day around one reading."
-            : "Let the reading give the day its rhythm.";
-        q("#lead").textContent =
-          t === "low"
-            ? "Choose one venue area and make every other decision nearby."
-            : "Leave enough room around the event that a different venue does not break the day.";
-        q("#one").textContent =
-          e === "slow"
-            ? "A quiet café or short park walk"
-            : "A small nearby Berlin stop";
-        q("#onecopy").textContent =
-          "Arrive early enough to find the venue without turning the first pages into a rush.";
-        q("#two").textContent =
-          p === "young"
-            ? "Young Program anchor"
-            : p === "browse"
-              ? "One discovery slot"
-              : "The author talk you chose";
-        q("#twocopy").textContent =
-          "Keep the official listing open for language, location and ticket details; the format matters as much as the name.";
+        const venue = venues[q("#venue").value];
+        const timing = timeShapes[q("#timing").value];
+        const priority = q("#priority").value;
+        const choice = venue.choices[priority];
+
+        q("#title").textContent = `Your ${venue.district} reading plan.`;
+        q("#lead").textContent = `${venue.name} is the anchor. ${timing.before}`;
+        q("#one").textContent = `Before: ${choice.name}`;
+        q("#onecopy").textContent = choice.copy;
+        q("#two").textContent = venue.name;
+        q("#twocopy").textContent = `${timing.arrival} This is a travel and arrival buffer, not a promise about queues, ticket availability or event language.`;
         q("#three").textContent =
-          e === "full"
-            ? "One second, nearby cultural choice"
-            : "A note-taking walk or dinner";
-        q("#threecopy").textContent =
-          e === "slow"
-            ? "Do not add a second ticket just because the city is full of options. Let the reading linger."
-            : "Use the event as your topic for the evening rather than changing districts solely to tick another sight.";
+          q("#timing").value === "late"
+            ? "After: return from the venue"
+            : `After: stay in ${venue.district}`;
+        q("#threecopy").textContent = `${venue.after[priority]} ${timing.after}`;
       }
       document.querySelectorAll("select").forEach((e) => (e.onchange = draw));
       q(".credits button").onclick = (e) => {

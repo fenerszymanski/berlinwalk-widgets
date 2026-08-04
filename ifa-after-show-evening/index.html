@@ -63,7 +63,7 @@
       }
       .choices {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 12px;
       }
       .choices label {
@@ -146,6 +146,16 @@
         text-decoration: none;
         font-weight: 900;
       }
+      .cta.secondary {
+        background: #dff6e8;
+        color: var(--dark) !important;
+      }
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
       .credits {
         margin-top: 14px;
         font-size: 12px;
@@ -168,6 +178,21 @@
       [hidden] {
         display: none !important;
       }
+      @media (max-width: 980px) {
+        .choices label {
+          min-width: 0;
+        }
+        .choices select {
+          width: 100%;
+          max-width: 100%;
+          min-width: 0;
+        }
+      }
+      @media (min-width: 681px) and (max-width: 980px) {
+        .choices {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
       @media (max-width: 680px) {
         .head,
         .content {
@@ -186,51 +211,58 @@
         <span class="tag">Berlin event decision tool</span>
         <h1>IFA After-Show Evening</h1>
         <p>
-          IFA can fill a whole day before you notice you have no plan for the
-          evening. Build a gentle finish around your exit time, energy and the
-          side of Berlin where you are sleeping.
+          IFA can fill a whole day before you notice you have no evening left.
+          Pick one realistic Berlin area before you leave Messe Berlin, rather
+          than trying to turn the exit into a second full itinerary.
         </p>
       </section>
       <section class="content">
         <div class="choices">
           <label
-            >When you leave<select id="time">
-              <option value="late">Close to the end of the day</option>
-              <option value="mid">Mid-afternoon</option>
-              <option value="early">I am only visiting briefly</option>
+            >IFA exit time<select id="exit">
+              <option value="close">Leaving when the halls close</option>
+              <option value="mid">Leaving in mid-afternoon</option>
+              <option value="early">Leaving early with time to spare</option>
             </select></label
           ><label
-            >Your energy<select id="energy">
-              <option value="low">My brain is full</option>
-              <option value="mid">I can still walk and eat</option>
-              <option value="high">I want a Berlin evening</option>
+            >Fixed evening commitment<select id="commitment">
+              <option value="none">Nothing fixed after IFA</option>
+              <option value="west">A west-Berlin table or meeting</option>
+              <option value="central">A central table, show or meeting</option>
+              <option value="return">I need an early return to my hotel</option>
+            </select></label
+          ><label
+            >Energy left<select id="energy">
+              <option value="low">I need a short, quiet finish</option>
+              <option value="mid">Dinner and one area is enough</option>
+              <option value="high">I still want a proper city evening</option>
             </select></label
           ><label
             >Where you sleep<select id="hotel">
-              <option value="west">West / near Messe</option>
-              <option value="centre">Mitte / central</option>
+              <option value="west">West / near Messe Berlin</option>
+              <option value="centre">Mitte / central Berlin</option>
               <option value="east">East / Friedrichshain side</option>
             </select></label
           >
         </div>
         <section class="board" aria-live="polite">
           <h2 id="title">
-            Make the exit from Messe Berlin your first decision.
+            Give IFA one exit margin, then one area.
           </h2>
           <p id="lead"></p>
           <div class="cards">
             <article class="card">
-              <b>01 · RESET</b>
+              <b>01 · EXIT MARGIN</b>
               <h3 id="a"></h3>
               <p id="acopy"></p>
             </article>
             <article class="card">
-              <b>02 · EAT</b>
+              <b>02 · TONIGHT'S AREA</b>
               <h3 id="b"></h3>
               <p id="bcopy"></p>
             </article>
             <article class="card">
-              <b>03 · BERLIN MOMENT</b>
+              <b>03 · END THE NIGHT</b>
               <h3 id="c"></h3>
               <p id="ccopy"></p>
             </article>
@@ -240,13 +272,22 @@
           <small
             >IFA visitor entry and access conditions are set by the organiser.
             Check your ticket, the official venue instructions and your live
-            route before choosing an exit.</small
-          ><a
-            class="cta"
-            target="_blank"
-            href="https://www.ifa-berlin.com/visit"
-            >Open IFA visitor info</a
-          >
+            route before choosing an exit. The margin below is a planning
+            buffer, not a prediction of queues or trains.</small
+          ><div class="actions">
+            <a
+              class="cta"
+              target="_blank"
+              rel="noopener"
+              href="https://www.ifa-berlin.com/visit"
+              >Open IFA visitor info</a
+            ><a
+              class="cta secondary"
+              target="_top"
+              href="https://www.berlinwalk.com/berlin-trip-planner"
+              >Place IFA in my trip</a
+            >
+          </div>
         </div>
         <div class="credits">
           <button aria-expanded="false" aria-controls="credit">
@@ -267,43 +308,108 @@
     <script src="../js/brand.js"></script>
     <script>
       const q = (s) => document.querySelector(s);
+      const exitPlans = {
+        early: {
+          title: "Keep 20 minutes for the actual exit",
+          copy:
+            "An early finish gives you room for one deliberate move. Use the time for a single district, not another list of sights.",
+        },
+        mid: {
+          title: "Keep 30 minutes before your next decision",
+          copy:
+            "Give yourself time to leave the hall, find the correct gate and open a live route before you head across Berlin.",
+        },
+        close: {
+          title: "Treat closing time as the start of your exit",
+          copy:
+            "Set aside 30 to 45 minutes for the hall exit, toilets, the crowd and your live route. Do not book the next thing for the minute IFA ends.",
+        },
+      };
+      const hotelEnds = {
+        west: "Finish toward your west-Berlin hotel after the one area you chose.",
+        centre:
+          "Finish toward your central hotel after the one area you chose, not by adding a second district.",
+        east:
+          "If you are sleeping east, make the return your last move rather than squeezing in another stop on the way.",
+      };
+      const destinations = {
+        reset: {
+          title: "Hotel reset",
+          lead:
+            "The fair already owns the day. A proper meal near your hotel and a quiet reset is the useful plan, not the fallback.",
+          area: "Your hotel side",
+          areaCopy:
+            "Use the live route to get back, eat close by and protect tomorrow's energy. Do not force a cross-city evening because you are in Berlin.",
+          end: "One meal, then stop",
+        },
+        west: {
+          title: "Charlottenburg",
+          lead:
+            "Stay near Messe Berlin and make a west-Berlin evening of it. This keeps the fair from turning into a long transfer before dinner.",
+          area: "Savignyplatz, Kurfürstendamm or the Memorial Church",
+          areaCopy:
+            "Choose one of these Charlottenburg landmarks or streets, then eat nearby. They are a better fit than a rushed historic-centre dash after a hall day.",
+          end: "West Berlin, then your hotel",
+        },
+        kulturforum: {
+          title: "Kulturforum and Potsdamer Platz",
+          lead:
+            "Make one central move for an evening block, then stay there. It works when you still have energy but do not want to improvise three neighbourhoods.",
+          area: "Kulturforum or Potsdamer Platz",
+          areaCopy:
+            "Use the Kulturforum and Potsdamer Platz area for one walk, meal or confirmed plan. Check the live route when you leave Messe Berlin, especially if your commitment has a hard start time.",
+          end: "One central block, then home",
+        },
+        historic: {
+          title: "Historic centre",
+          lead:
+            "Make Mitte the point of the evening only when you have an early exit and enough energy for the longer move. It is a choice, not the automatic next stop after IFA.",
+          area: "Museum Island, Unter den Linden or Hackescher Markt",
+          areaCopy:
+            "Pick one historic-centre line and let it hold the evening. The Spree, Museum Island and Hackescher Markt work better as one real area than as a late checklist.",
+          end: "Historic centre, then a direct return",
+        },
+      };
+
+      function chooseDestination(exit, commitment, energy, hotel) {
+        if (commitment === "return") return "reset";
+        if (commitment === "west") return "west";
+        if (commitment === "central") return "kulturforum";
+        if (exit === "close" && energy === "low") return "reset";
+        if (energy === "low") return hotel === "west" ? "west" : "reset";
+        if (energy === "high" && exit === "early" && hotel !== "west") {
+          return "historic";
+        }
+        if (hotel === "west") return "west";
+        if (energy === "high" && hotel === "east" && exit !== "close") {
+          return "historic";
+        }
+        return "kulturforum";
+      }
+
       function draw() {
-        let t = q("#time").value,
-          e = q("#energy").value,
-          h = q("#hotel").value;
-        let area =
-          h === "west"
-            ? "Stay on the west side first."
-            : h === "centre"
-              ? "Make one clean move to the centre."
-              : "Do not force an east-side evening if your energy is already gone.";
-        q("#title").textContent =
-          e === "low"
-            ? "The right after-show plan is shorter than you think."
-            : "Make the exit from Messe Berlin your first decision.";
-        q("#lead").textContent =
-          area +
-          " Give the day one transition before you ask it for a meal or a sight.";
-        q("#a").textContent =
-          e === "low"
-            ? "Sit down before you decide"
-            : "Choose the direct route";
-        q("#acopy").textContent =
-          t === "late"
-            ? "Open your live journey before the crowds leave and keep your first stop close to that route."
-            : "Use the earlier finish to step outside the exhibition rhythm for fifteen quiet minutes.";
-        q("#b").textContent =
-          e === "high" ? "Dinner with one good area" : "One uncomplicated meal";
-        q("#bcopy").textContent =
-          h === "west"
-            ? "Charlottenburg works when you need low-friction food after Messe Berlin."
-            : "Choose food in the area you will actually spend the next hour, not the place that looked best online this morning.";
-        q("#c").textContent =
-          e === "high" ? "One Berlin view or bar" : "A short walk, then home";
-        q("#ccopy").textContent =
-          e === "high"
-            ? "Add one small city moment after dinner. Keep the final destination optional so the fair does not turn into an endurance test."
-            : "The useful win is keeping enough energy for tomorrow, not maximising a single September evening.";
+        const exit = q("#exit").value;
+        const commitment = q("#commitment").value;
+        const energy = q("#energy").value;
+        const hotel = q("#hotel").value;
+        const destination = destinations[
+          chooseDestination(exit, commitment, energy, hotel)
+        ];
+        const commitmentNote =
+          commitment === "none"
+            ? "With nothing fixed, the selected area is the whole plan."
+            : commitment === "return"
+              ? "Your early return is the commitment, so keep every decision small."
+              : "Your fixed commitment is the anchor. Do not add a stop on the other side of Berlin before it.";
+
+        q("#title").textContent = `Tonight: ${destination.title}`;
+        q("#lead").textContent = `${destination.lead} ${commitmentNote}`;
+        q("#a").textContent = exitPlans[exit].title;
+        q("#acopy").textContent = exitPlans[exit].copy;
+        q("#b").textContent = destination.area;
+        q("#bcopy").textContent = destination.areaCopy;
+        q("#c").textContent = destination.end;
+        q("#ccopy").textContent = hotelEnds[hotel];
       }
       document.querySelectorAll("select").forEach((e) => (e.onchange = draw));
       q(".credits button").onclick = (e) => {
