@@ -741,6 +741,43 @@
       text-align: center;
     }
 
+    #bw-first-day-planner .bw-trip-planner-cta[hidden] { display: none; }
+
+    #bw-first-day-planner .bw-trip-planner-cta {
+      background: #FFF7B8;
+      border: 1px solid var(--bw-green);
+      border-radius: 8px;
+      margin-top: 14px;
+      padding: 12px;
+    }
+
+    #bw-first-day-planner .bw-trip-planner-cta p {
+      color: #123D18;
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.45;
+      margin: 0 0 10px;
+    }
+
+    #bw-first-day-planner .bw-trip-planner-cta a {
+      background: #FFE600;
+      border: 2px solid #123D18;
+      border-radius: 6px;
+      color: #123D18;
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1.2;
+      padding: 10px 12px;
+      text-decoration: none;
+    }
+
+    #bw-first-day-planner .bw-trip-planner-cta a:hover,
+    #bw-first-day-planner .bw-trip-planner-cta a:focus-visible {
+      background: #123D18;
+      color: #FFE600;
+    }
+
     #bw-first-day-planner .bw-lead-panel[hidden] {
       display: none;
     }
@@ -1156,6 +1193,10 @@
                 <div class="bw-lead-message" data-lead-message aria-live="polite"></div>
               </form>
             </div>
+          </div>
+          <div class="bw-trip-planner-cta" data-bw-trip-planner-cta data-surface="tool_first_day_result_v1" hidden>
+            <p>Your first day is shaped. If you want the same logic across the whole stay, I can build your arrival, departure and fixed bookings into one private Web plan and matching PDF.</p>
+            <a href="https://www.berlinwalk.com/berlin-trip-planner?bw_internal_campaign=tp_first_sale_aug2026&amp;bw_internal_content=tool_first_day_result_v1" target="_top" rel="noopener" data-trip-planner-link>Build the rest of my Berlin trip</a>
           </div>
         </div>
       </aside>
@@ -1594,6 +1635,8 @@
       }).join('');
     }
     if (alertEl) alertEl.textContent = plan.alert;
+    var distributionCta = root.querySelector('[data-bw-trip-planner-cta]');
+    if (distributionCta) distributionCta.hidden = false;
 
     latestPlanText = [
       'Berlin First-Day Planner',
@@ -2666,6 +2709,27 @@
     });
   }
 
+  function preserveExternalTripPlannerAttribution() {
+    var link = root.querySelector('[data-trip-planner-link]');
+    if (!link || link.dataset.attributionBound === 'true') return;
+    link.dataset.attributionBound = 'true';
+    link.addEventListener('click', function () {
+      try {
+        var current = new URLSearchParams(window.location.search || '');
+        var target = new URL(link.href);
+        var utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+        var externalKeys = utmKeys.concat(['fbclid', 'fbc', 'fbp']);
+        var hasExternal = externalKeys.some(function (key) { return current.get(key); });
+        if (!hasExternal) return;
+        externalKeys.forEach(function (key) {
+          var value = String(current.get(key) || '').slice(0, 120);
+          if (value) target.searchParams.set(key, value);
+        });
+        link.href = target.toString();
+      } catch (error) {}
+    });
+  }
+
   root.addEventListener('click', function (event) {
     var option = event.target.closest('.bw-option');
     if (option) {
@@ -2712,6 +2776,7 @@
 
   initDateInput();
   renderPlan();
+  preserveExternalTripPlannerAttribution();
   weatherRequested = true;
   loadWeather();
   track('bw_first_day_start', { context: new URLSearchParams(window.location.search).get('context') || 'tool', date: state.date });

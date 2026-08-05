@@ -80,6 +80,11 @@
 
   .foot{font-size:12px;color:var(--stone);margin:14px 2px 4px;line-height:1.5}
   .foot a{color:var(--green);font-weight:700}
+  .trip-planner-cta[hidden]{display:none}
+  .trip-planner-cta{background:#FFF7B8;border:1px solid var(--green);border-radius:12px;margin:14px 2px 4px;padding:12px 13px}
+  .trip-planner-cta p{color:#123D18;font-size:12px;font-weight:750;line-height:1.45;margin:0 0 10px}
+  .trip-planner-cta a{background:#FFE600;border:2px solid #123D18;border-radius:6px;color:#123D18;display:inline-block;font-size:11px;font-weight:900;line-height:1.2;padding:10px 12px;text-decoration:none}
+  .trip-planner-cta a:hover,.trip-planner-cta a:focus-visible{background:#123D18;color:#FFE600}
   @media(max-width:430px){
     .head h1{font-size:19px}
     .dnum b{font-size:40px}
@@ -142,6 +147,11 @@
 
       <div class="stackh">Your day-by-day shape</div>
       <div class="stack" id="stack"></div>
+
+      <div class="trip-planner-cta" data-bw-trip-planner-cta data-surface="tool_trip_length_result_v1" hidden>
+        <p>You have chosen the trip length. Now turn your exact dates, hours and fixed bookings into the full route.</p>
+        <a href="https://www.berlinwalk.com/berlin-trip-planner?bw_internal_campaign=tp_first_sale_aug2026&amp;bw_internal_content=tool_trip_length_result_v1" target="_top" rel="noopener" data-trip-planner-link>Build my date-specific Berlin plan</a>
+      </div>
 
       <p class="foot">This is a planning guide, not a fixed schedule. For a real hour-by-hour version, see my <a href="https://www.berlinwalk.com/post/berlin-in-3-days-the-perfect-itinerary-from-a-local-guide">Berlin in 3 days itinerary</a>, and start any trip with the free <a href="https://www.berlinwalk.com/berlin-walking-tour-route">walking tour route</a>.</p>
 
@@ -241,6 +251,8 @@
         '<div class="dc"><h4>'+m.t+'</h4><p>'+m.p+'</p><span class="tag '+tg.c+'">'+tg.l+'</span></div>';
       stack.appendChild(el);
     });
+    var distributionCta = document.querySelector('[data-bw-trip-planner-cta]');
+    if (distributionCta) distributionCta.hidden = stack.children.length === 0;
     // ghost: what one more day adds
     if(state.days<MAX){
       var nextSeq=buildSeq(state.days+1);
@@ -255,6 +267,27 @@
       }
     }
     if(window.BWResize) window.BWResize();
+  }
+
+  function preserveExternalTripPlannerAttribution() {
+    var link = document.querySelector('[data-trip-planner-link]');
+    if (!link || link.dataset.attributionBound === 'true') return;
+    link.dataset.attributionBound = 'true';
+    link.addEventListener('click', function () {
+      try {
+        var current = new URLSearchParams(window.location.search || '');
+        var target = new URL(link.href);
+        var utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+        var externalKeys = utmKeys.concat(['fbclid', 'fbc', 'fbp']);
+        var hasExternal = externalKeys.some(function (key) { return current.get(key); });
+        if (!hasExternal) return;
+        externalKeys.forEach(function (key) {
+          var value = String(current.get(key) || '').slice(0, 120);
+          if (value) target.searchParams.set(key, value);
+        });
+        link.href = target.toString();
+      } catch (error) {}
+    });
   }
 
   document.getElementById('minus').addEventListener('click',function(){ if(state.days>MIN){state.days--;render();} });
@@ -279,6 +312,7 @@
   });
 
   render();
+  preserveExternalTripPlannerAttribution();
 })();
 </script>
 <script src="../js/brand.js"></script>

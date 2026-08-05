@@ -224,6 +224,43 @@
       font-weight: 900;
     }
 
+    #bw-luggage-map .bw-trip-planner-cta[hidden] { display: none; }
+
+    #bw-luggage-map .bw-trip-planner-cta {
+      background: #FFF7B8;
+      border: 1px solid var(--bw-green);
+      border-radius: 8px;
+      margin-top: 12px;
+      padding: 12px;
+    }
+
+    #bw-luggage-map .bw-trip-planner-cta p {
+      color: #123D18;
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.45;
+      margin: 0 0 10px;
+    }
+
+    #bw-luggage-map .bw-trip-planner-cta a {
+      background: #FFE600;
+      border: 2px solid #123D18;
+      border-radius: 6px;
+      color: #123D18;
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1.2;
+      padding: 10px 12px;
+      text-decoration: none;
+    }
+
+    #bw-luggage-map .bw-trip-planner-cta a:hover,
+    #bw-luggage-map .bw-trip-planner-cta a:focus-visible {
+      background: #123D18;
+      color: #FFE600;
+    }
+
     #bw-luggage-map .bw-footer {
       padding: 10px 18px;
       background: var(--bw-white);
@@ -279,6 +316,10 @@
         <div class="bw-map" id="bw-luggage-map-canvas"></div>
       </div>
       <p class="bw-count"><strong data-count>0</strong> Berlin luggage storage options mapped</p>
+      <div class="bw-trip-planner-cta" data-bw-trip-planner-cta data-surface="tool_luggage_result_v1" hidden>
+        <p>Found where to leave your bags? I can build the before-check-in hours and the rest of your stay into one route.</p>
+        <a href="https://www.berlinwalk.com/berlin-trip-planner?bw_internal_campaign=tp_first_sale_aug2026&amp;bw_internal_content=tool_luggage_result_v1" target="_top" rel="noopener" data-trip-planner-link>Plan my Berlin stay around check-in</a>
+      </div>
     </div>
     <div class="bw-footer">Prices and hours change. Check the operator's website before going. App zones show neighbourhoods with many partner shops, not single locations.</div>
   </div>
@@ -471,6 +512,29 @@
           }).addTo(markerLayer);
         });
         if (countEl) countEl.textContent = String(visible.length);
+        var distributionCta = root.querySelector('[data-bw-trip-planner-cta]');
+        if (distributionCta) distributionCta.hidden = visible.length === 0;
+      }
+
+      function preserveExternalTripPlannerAttribution() {
+        var link = root.querySelector('[data-trip-planner-link]');
+        if (!link || link.dataset.attributionBound === 'true') return;
+        link.dataset.attributionBound = 'true';
+        link.addEventListener('click', function () {
+          try {
+            var current = new URLSearchParams(window.location.search || '');
+            var target = new URL(link.href);
+            var utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+            var externalKeys = utmKeys.concat(['fbclid', 'fbc', 'fbp']);
+            var hasExternal = externalKeys.some(function (key) { return current.get(key); });
+            if (!hasExternal) return;
+            externalKeys.forEach(function (key) {
+              var value = String(current.get(key) || '').slice(0, 120);
+              if (value) target.searchParams.set(key, value);
+            });
+            link.href = target.toString();
+          } catch (error) {}
+        });
       }
 
       root.querySelectorAll('.bw-filter').forEach(function (button) {
@@ -484,6 +548,7 @@
       });
 
       render('all');
+      preserveExternalTripPlannerAttribution();
       setTimeout(function () { map.invalidateSize(); }, 250);
     })();
   </script>
