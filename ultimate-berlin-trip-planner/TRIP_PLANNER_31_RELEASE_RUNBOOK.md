@@ -21,8 +21,8 @@ historical context only where they conflict with this document.
 
 - Customer-facing plan generation is deterministic. No Gemini, OpenAI, or
   other generative AI request may run in the customer path.
-- The free preview, paid browser view, email access and PDF are views of the
-  same immutable Plan Artifact V3 object.
+- The non-purchasable route-outline QA view, paid one-payment browser view,
+  email access and PDF are views of the same immutable Plan Artifact V3 object.
 - Main-route stops remain in their generated order. Plan B content is visibly
   separate and never inserted into the main route.
 - The PDF includes real time ranges. Weather, opening-hours and offline copy
@@ -54,8 +54,8 @@ historical context only where they conflict with this document.
 
 Before asking Yusuf to approve a live release, provide all of the following:
 
-1. A payment-free local result URL showing the revised free preview and the
-   complete paid-plan sample.
+1. A local route-outline QA URL, clearly marked non-purchasable, plus the
+   truthful paid one-payment product sample.
 2. The matching generated PDF file.
 3. Desktop 1280 px and mobile 390 px evidence with no horizontal overflow,
    internal scroll trap, layout shift, hidden CTA, or white text on yellow.
