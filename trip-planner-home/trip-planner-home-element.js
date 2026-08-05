@@ -398,17 +398,17 @@ class BWTripPlannerHomeElement extends HTMLElement {
 
       <section class="bw-trip-planner-home" aria-labelledby="bw-trip-planner-home-title">
         <div class="bw-trip-planner-bg" aria-hidden="true">
-          <img src="${heroImage}" alt="Berlin trip planner preview with route cards and map details" loading="lazy">
+          <img src="${heroImage}" alt="Berlin trip planner route cards and map details" loading="lazy">
         </div>
 
         <div class="bw-trip-planner-inner">
           <div class="bw-trip-planner-copy">
             <span class="bw-trip-planner-kicker">BerlinWalk local planner</span>
             <h2 id="bw-trip-planner-home-title" class="bw-trip-planner-title">Berlin Trip Planner</h2>
-            <p class="bw-trip-planner-lead">Build a realistic 1 to 7 day Berlin plan around your arrival date, first day, weather, map links, and the best BerlinWalk tour slot.</p>
+            <p class="bw-trip-planner-lead">Build a realistic 1 to 7 day Berlin plan around your arrival date, stay area, pace and interests.</p>
             <div class="bw-trip-planner-actions">
               <a class="bw-trip-planner-btn bw-trip-planner-btn-primary" href="${BW_TRIP_PLANNER_HOME_URL}" target="_top">Build my plan</a>
-              <span class="bw-trip-planner-note">Free preview first. Email unlocks the full phone-ready plan.</span>
+              <span class="bw-trip-planner-note">Private Web plan + matching PDF · one payment from €7.99 for the whole trip.</span>
             </div>
           </div>
 

@@ -10754,7 +10754,7 @@
       }
     }
 
-    /* Compact Lite result: the free value is the trip shape and Day 1, not an email form. */
+    /* Compact result: the route outline is the trip shape and Day 1, not an email form. */
     #bw-trip-planner .bw-result {
       border: 0;
       border-radius: 22px;
@@ -13367,10 +13367,10 @@
         <p class="bw-kicker">BerlinWalk trip planner</p>
         <h1 id="bw-trip-title" class="bw-title">Tell me the shape of your days in Berlin.</h1>
         <p class="bw-sub">I will put the first day in the right place, then keep the rest of the trip close together.</p>
-        <p class="bw-head-note">Four short steps. See the free plan shape before you decide on the detailed version.</p>
+        <p class="bw-head-note">Four short steps. I shape your dates, pace and priorities into a private Web plan with a matching PDF, from €7.99 for the whole trip in one payment.</p>
       </div>
       <img class="bw-form-logo" src="assets/berlinwalk-logo-rounded.png" alt="BerlinWalk" loading="eager" decoding="async">
-      <figure class="bw-head-media" aria-label="Berlin trip planner preview">
+      <figure class="bw-head-media" aria-label="Berlin trip planner route outline">
         <img src="assets/berlin-trip-planner-hero.jpg" alt="Illustrated Berlin river view with Berlin Cathedral, TV Tower, and city route feeling" loading="eager" decoding="async">
         <figcaption class="bw-head-caption">
           <strong>One area at a time</strong>
@@ -13548,11 +13548,11 @@
 
         <section class="bw-build-card" aria-label="Build full Berlin trip plan">
           <div class="bw-build-copy">
-            <strong>See the free shape of my Berlin days</strong>
-            <span>You will see the route order and first day before you decide whether you need the detailed plan.</span>
+            <strong>See the route shape of my Berlin days</strong>
+            <span>I shape your dates, pace and priorities into the private Web plan with matching PDF, from €7.99 for the whole trip in one payment.</span>
           </div>
-          <button class="bw-build-button" type="button" data-build-plan><span data-build-plan-label>Show my free preview</span></button>
-          <p class="bw-build-note" data-build-note>No email needed to see the first day and the shape of your trip.</p>
+          <button class="bw-build-button" type="button" data-build-plan><span data-build-plan-label>Build my route outline</span></button>
+          <p class="bw-build-note" data-build-note>Set your dates to see the route outline. The private Web plan + matching PDF is one payment from €7.99 for the whole trip.</p>
         </section>
           </div>
         </section>
@@ -13580,9 +13580,9 @@
         <div class="bw-planning-status"><span data-planning-status>Reading your arrival details</span><strong data-planning-count>1 of 4</strong></div>
       </section>
 
-      <aside class="bw-result" aria-live="polite" aria-label="Your Berlin trip plan preview" hidden>
+      <aside class="bw-result" aria-live="polite" aria-label="Your Berlin trip plan" hidden>
         <div class="bw-result-head">
-          <span class="bw-result-tag">Your trip preview - <span data-result-date></span></span>
+          <span class="bw-result-tag">Your route outline - <span data-result-date></span></span>
           <h2 class="bw-result-title" data-result-title>Your Berlin plan</h2>
         </div>
         <div class="bw-result-body">
@@ -13614,14 +13614,14 @@
           <div class="bw-preview-fade bw-locked-only" data-lock-box>
             <div class="bw-preview-fade-row">
               <span class="bw-preview-fade-icon" aria-hidden="true">📋</span>
-              <span class="bw-preview-fade-copy"><b>Save your Berlin Trip Pack</b><strong>Routes, maps, PDF, and opening checks</strong><span>Your Day 1 preview is free here. Email sends the travel-ready pack.</span></span>
+              <span class="bw-preview-fade-copy"><b>Save your Berlin Trip Pack</b><strong>Routes, maps, PDF, and opening checks</strong><span>Your route outline is shown here. The private Web plan + matching PDF gives you the travel-ready pack.</span></span>
             </div>
           </div>
 
           <div class="bw-lead-panel bw-locked-only" data-lead-panel>
             <div>
               <h3 class="bw-lead-title" data-pack-title>Save your Berlin Trip Pack</h3>
-              <p class="bw-lead-copy">Your Day 1 preview is ready below. Email yourself the travel-ready pack if you want routes, map links, PDF, and opening checks.</p>
+              <p class="bw-lead-copy">Your route outline is ready below. The private Web plan + matching PDF gives you routes, map links, PDF and opening checks.</p>
             </div>
             <input class="bw-lead-input" data-lead-email type="email" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com" aria-label="Email address" required>
             <button class="bw-lead-submit" type="button" data-unlock-plan>Send my Berlin Trip Pack</button>
@@ -13651,7 +13651,7 @@
           <section class="bw-pro-offer-panel bw-locked-only" data-pro-offer-panel hidden aria-labelledby="bw-pro-offer-title">
             <p class="bw-pro-offer-kicker">Detailed Berlin plan</p>
             <h3 class="bw-pro-offer-title" id="bw-pro-offer-title">Keep the useful details for the days you actually have.</h3>
-            <p class="bw-pro-offer-copy">The free preview shows the shape of the trip. The detailed plan gives each selected day its stops, maps, timing and one practical backup.</p>
+            <p class="bw-pro-offer-copy">The route outline shows the shape of the trip. The private Web plan + matching PDF gives each selected day its stops, maps, timing and one practical backup.</p>
             <div class="bw-pro-offer-grid" aria-label="Trip Pack Pro includes">
               <div class="bw-pro-offer-item"><b>Detailed days</b><span>Stops kept in the same area</span></div>
               <div class="bw-pro-offer-item"><b>Phone-ready</b><span>Map links, browser access and PDF</span></div>
@@ -13980,7 +13980,7 @@
       keys: ['arrivalDate', 'tripLength'],
       selector: '[data-arrival-date]',
       title: 'Tell me when you arrive.',
-      subtitle: 'The free preview starts with your real dates. You can change every answer before the plan is built.',
+      subtitle: 'Start with your real dates. I build the route outline around them before you choose the private Web plan + matching PDF.',
       next: 'Next: arrival and base'
     },
     {
@@ -15185,7 +15185,7 @@
   function routeReelHtml(day) {
     var items = dayActionBlockItems(day).slice(0, 3);
     if (!items.length) return '';
-    return '<div class="bw-route-reel" style="--route-reel-count:' + items.length + '" aria-label="Day ' + escapeHtml(day.dayNumber) + ' route preview">' +
+    return '<div class="bw-route-reel" style="--route-reel-count:' + items.length + '" aria-label="Day ' + escapeHtml(day.dayNumber) + ' route outline">' +
       items.map(function (item) {
         var block = item.block;
         var index = item.index;
@@ -15678,7 +15678,7 @@
   }
 
   function artifactDayTabsMobileHtml(view, activeDay) {
-    return '<nav class="bw-artifact-day-tabs-mobile" aria-label="Choose a preview day">' + view.days.map(function (day) {
+    return '<nav class="bw-artifact-day-tabs-mobile" aria-label="Choose a route day">' + view.days.map(function (day) {
       return '<button type="button" data-artifact-day="' + day.dayNumber + '" class="' + (day.dayNumber === activeDay.dayNumber ? 'is-active' : '') + '" aria-pressed="' + (day.dayNumber === activeDay.dayNumber ? 'true' : 'false') + '"><b>Day ' + day.dayNumber + '</b><span>' + escapeHtml(compactPreviewDate(day.dateKey)) + '</span></button>';
     }).join('') + '</nav>';
   }
@@ -15695,7 +15695,7 @@
   }
 
   function artifactPhonePreviewHtml(view, activeDay) {
-    return '<section class="bw-artifact-phone" id="bw-artifact-phone-preview" aria-label="Berlin Trip Planner phone preview">' +
+    return '<section class="bw-artifact-phone" id="bw-artifact-phone-preview" aria-label="Berlin Trip Planner phone view">' +
       '<div class="bw-artifact-phone-top"><strong>BERLIN TRIP PLANNER</strong><span>' + escapeHtml(view.days.length + '-day itinerary · routes, times, maps and Plan B') + '</span></div>' +
       '<div class="bw-artifact-phone-day"><div class="bw-artifact-phone-day-head"><b>D' + activeDay.dayNumber + '</b><strong>' + escapeHtml(formatDisplayDate(activeDay.dateKey)) + '<small>' + escapeHtml(activeDay.title) + '</small></strong></div>' + artifactTimelineHtml(activeDay, true) + '</div>' +
       '<div class="bw-artifact-phone-tabs">' + view.days.map(function (day) {
@@ -15747,10 +15747,10 @@
   function artifactComparisonHtml(view) {
     var pdfPageCount = artifactPdfPageCount(view);
     return '<section class="bw-artifact-comparison">' +
-      '<div><strong>Free preview</strong><strong>Full plan</strong></div>' +
+      '<div><strong>Route outline</strong><strong>Private Web + PDF</strong></div>' +
       '<p><span>' + artifactIconSvg('check') + 'Day-by-day outline</span><span>' + artifactIconSvg('check') + 'Times and map links</span></p>' +
       '<p><span>' + artifactIconSvg('check') + 'One Plan B example</span><span>' + artifactIconSvg('check') + 'Plan B for every day</span></p>' +
-      '<p><span>' + artifactIconSvg('check') + 'Phone and PDF preview</span><span>' + artifactIconSvg('check') + 'Phone view and ' + pdfPageCount + '-page PDF</span></p>' +
+      '<p><span>' + artifactIconSvg('check') + 'Route shape on phone</span><span>' + artifactIconSvg('check') + 'Phone view and ' + pdfPageCount + '-page PDF</span></p>' +
     '</section>';
   }
 
@@ -16008,7 +16008,7 @@
     if (slot && !arrivalDayTourEligible() && !slot.insideTrip && state.tourIntent !== 'booked') {
       tourCopy = 'There is no Tuesday-to-Saturday tour during these dates. The tour is not included in the daily plan.';
     }
-    return '<div class="bw-preview-flow" aria-label="Day ' + escapeHtml(day.dayNumber) + ' simple preview">' +
+    return '<div class="bw-preview-flow" aria-label="Day ' + escapeHtml(day.dayNumber) + ' simple route outline">' +
       '<div class="bw-preview-flow-item">' +
         '<span class="bw-preview-flow-icon" aria-hidden="true">' + iconSvg('pin') + '</span><span class="bw-preview-flow-copy"><b>Day 1 route</b><span>' + escapeHtml(anchorCopy) + '</span></span>' +
       '</div>' +
@@ -16123,8 +16123,8 @@
 
     return '<div class="bw-preview-teaser">' +
       '<div class="bw-preview-teaser-head">' +
-        '<strong>Day 1 preview: ' + escapeHtml(routeText) + '</strong>' +
-        '<span>Free preview</span>' +
+        '<strong>Day 1 route outline: ' + escapeHtml(routeText) + '</strong>' +
+        '<span>Route outline</span>' +
       '</div>' +
       (blockHtml ? '<div class="bw-preview-blocks">' + blockHtml + '</div>' : '') +
       previewDayFlowHtml(day, plan) +
@@ -17110,9 +17110,9 @@
     var progress = QUIZ_STEPS.length ? Math.round(((quizCurrentStep + 1) / QUIZ_STEPS.length) * 100) : 100;
     var isLastStep = quizCurrentStep >= QUIZ_STEPS.length - 1;
     setText('[data-quiz-title]', step ? step.title : 'Build your Berlin plan');
-    setText('[data-quiz-subtitle]', planNeedsUpdate ? 'Changes are ready for a fresh preview.' : (step ? step.subtitle : 'Answer one thing at a time.'));
+    setText('[data-quiz-subtitle]', planNeedsUpdate ? 'Changes are ready for a fresh route outline.' : (step ? step.subtitle : 'Answer one thing at a time.'));
     setText('[data-quiz-count]', 'Step ' + (quizCurrentStep + 1) + ' of ' + QUIZ_STEPS.length);
-    setText('[data-quiz-preview]', quizPreviewText() + (planNeedsUpdate ? ' Preview needs update.' : ''));
+    setText('[data-quiz-preview]', quizPreviewText() + (planNeedsUpdate ? ' Route outline needs update.' : ''));
     var progressBar = root.querySelector('[data-quiz-progress]');
     if (progressBar) progressBar.style.width = progress + '%';
     var back = root.querySelector('[data-quiz-back]');
@@ -17124,7 +17124,7 @@
       next.hidden = startCardVisible;
       next.disabled = planningInProgress || (isLastStep && planGenerated && !planNeedsUpdate);
       next.textContent = isLastStep
-        ? (planGenerated ? (planNeedsUpdate ? 'Update preview' : 'Preview is current') : 'Build my Berlin plan')
+        ? (planGenerated ? (planNeedsUpdate ? 'Update route outline' : 'Route outline is current') : 'Build my Berlin plan')
         : (step && step.next ? step.next : 'Next question');
     }
     trackQuizStepView(step);
@@ -17265,7 +17265,7 @@
       trip_length: state.tripLength
     });
     markPlanDirty({ keepStatus: true });
-    setActionStatus(preset.title + ' applied. Generate the preview when you are ready.');
+    setActionStatus(preset.title + ' applied. Build the route outline when you are ready.');
   }
 
   function ticketNudge() {
@@ -17781,7 +17781,7 @@
     ] : (Array.isArray(rescueFactsData.items) ? rescueFactsData.items : []).slice(0, 3);
     if (!items.length) return '';
     return '<aside class="bw-rescue-facts" aria-label="Live first-hour facts" data-rescue-facts>' +
-      '<div class="bw-rescue-facts-head"><em>Live Day 1 check</em><strong>' + escapeHtml(loading ? 'Checking the first-hour facts' : (rescueFactsData.title || 'Live first-hour check')) + '</strong><span>' + escapeHtml(loading ? 'I am checking route, ticket, and weather basics for the first move.' : (rescueFactsData.summary || 'The free planner confirms the shape; the paid Rescue Plan still handles exact decisions.')) + '</span></div>' +
+      '<div class="bw-rescue-facts-head"><em>Live Day 1 check</em><strong>' + escapeHtml(loading ? 'Checking the first-hour facts' : (rescueFactsData.title || 'Live first-hour check')) + '</strong><span>' + escapeHtml(loading ? 'I am checking route, ticket, and weather basics for the first move.' : (rescueFactsData.summary || 'The route outline confirms the shape; the private Web plan + matching PDF handles the detailed decisions.')) + '</span></div>' +
       '<div class="bw-rescue-facts-grid">' + items.map(function (item) {
         return '<article class="bw-rescue-fact"><b>' + escapeHtml(item.label || 'Check') + '</b><strong>' + escapeHtml(item.value || 'Ready') + '</strong><span>' + escapeHtml(item.detail || '') + '</span></article>';
       }).join('') + '</div>' +
@@ -20911,7 +20911,7 @@
           '<span>' + iconSvg('route') + '<em>Plan</em></span>' +
         '</a>' +
         '<div class="bw-mobile-peek-copy">' +
-          '<b>Phone-ready preview</b>' +
+          '<b>Phone-ready route</b>' +
           '<strong>' + escapeHtml(plan.title) + '</strong>' +
           '<span>' + escapeHtml(plan.displayDate + ' | ' + state.tripLength + (state.tripLength === 1 ? ' day' : ' days') + ' | ' + plan.tourFit) + '</span>' +
         '</div>' +
@@ -23441,11 +23441,11 @@
     if (control) control.hidden = !planGenerated;
     if (mobile) mobile.hidden = !planGenerated;
     if (buildButton) buildButton.disabled = planningInProgress;
-    if (buildLabel) buildLabel.textContent = planningInProgress ? 'Putting your days in order…' : (planGenerated ? 'Update my preview' : 'Show my free preview');
+    if (buildLabel) buildLabel.textContent = planningInProgress ? 'Putting your days in order…' : (planGenerated ? 'Update my route outline' : 'Build my route outline');
     if (buildNote) {
       buildNote.textContent = planningInProgress
         ? 'This takes about 7 seconds. I am checking arrival timing, nearby areas, weather, and the useful trip details.'
-        : (planGenerated ? 'Change any required detail above, then update the preview.' : 'All required details are visible here. Change anything that does not match your trip.');
+        : (planGenerated ? 'Change any required detail above, then update the route outline.' : 'All required details are visible here. Change anything that does not match your trip.');
     }
     updateQuizUi();
   }
@@ -23737,7 +23737,7 @@
     setText('[data-pack-title]', 'Email your ' + packLabel);
     setText('[data-pack-route-chip-title]', routeChipLabel);
     setText('[data-pack-route-chip-copy]', days >= 5 ? 'Routes and times for each day' : 'Times for the first days');
-    copyEl.innerHTML = 'Your Day 1 preview is below. Enter your email to receive the full <strong>' + escapeHtml(days) + '-day plan</strong>. It includes times, <strong>Google Maps links</strong> for ' + (days * 3) + '+ stops, transport maps, the offline PDF, weather notes and opening checks.';
+    copyEl.innerHTML = 'Your route outline is below. The private Web plan + matching PDF includes the full <strong>' + escapeHtml(days) + '-day plan</strong>, with times, <strong>Google Maps links</strong> for ' + (days * 3) + '+ stops, transport maps, the offline PDF, weather notes and opening checks.';
   }
 
   function updateUnlockUi() {
@@ -23778,7 +23778,7 @@
     var unlockButton = root.querySelector('[data-unlock-plan]');
     if (unlockButton) {
       unlockButton.disabled = Boolean(planNeedsUpdate);
-      unlockButton.textContent = planNeedsUpdate ? 'Update preview first' : 'Send my ' + packLabelForTripLength(state.tripLength);
+      unlockButton.textContent = planNeedsUpdate ? 'Update route outline first' : 'Send my ' + packLabelForTripLength(state.tripLength);
     }
     updateCompactOfferCopy(latestPlan || buildPlan());
     renderFullPlan();
@@ -25244,7 +25244,7 @@
     rememberLiteLead(email);
     updateUnlockUi();
     setLeadMessage('', false);
-    setActionStatus('Your free Lite preview is saved. Pro keeps the complete route, maps, PDF and opening checks together.');
+    setActionStatus('Your route outline is saved. The private Web plan + matching PDF keeps the complete route, maps and opening checks together.');
     syncPlannerFrame(root.querySelector('[data-pro-offer-panel]'), true);
   }
 
@@ -25257,7 +25257,7 @@
       try { checkoutArtifact = buildPlanArtifactV3(latestPlan); } catch (artifactError) { checkoutArtifact = null; }
     }
     if (!checkoutArtifact || planNeedsUpdate) {
-      if (note) note.textContent = 'I could not seal this exact itinerary yet. Update the preview and try again; no payment was started.';
+      if (note) note.textContent = 'I could not seal this exact itinerary yet. Update the route outline and try again; no payment was started.';
       setActionStatus('This itinerary is not ready for secure checkout yet. No payment was started.', true);
       track('bw_trip_planner_pro_checkout_error', { reason: 'artifact_not_ready', fail_closed: true });
       return;
@@ -25310,7 +25310,7 @@
         });
       }
       track('bw_trip_planner_pro_checkout_error', { reason: String(error && error.message || error).slice(0, 100), fail_closed: true });
-      if (note) note.textContent = 'Secure checkout is not available yet. Your free preview is still here and nothing was charged.';
+      if (note) note.textContent = 'Secure checkout is not available yet. Your route outline is still here and nothing was charged.';
       setActionStatus('Detailed-plan checkout is not available yet. No payment was started.', true);
       buttons.forEach(function (button) { button.disabled = false; });
       updateCompactOfferCopy(latestPlan || buildPlan());
@@ -25322,7 +25322,7 @@
     var button = root.querySelector('[data-unlock-plan]');
     var email = input ? input.value.trim() : '';
     if (planNeedsUpdate) {
-      setLeadMessage('Update the preview first so the saved pack matches your latest answers.', true);
+      setLeadMessage('Update the route outline first so the saved pack matches your latest answers.', true);
       syncPlannerFrame(root.querySelector('[data-quiz-nav]') || root.querySelector('[data-quiz-shell]'), true);
       return;
     }
@@ -28516,7 +28516,7 @@
     renderPlan();
     updatePlanningUi();
     updateUnlockUi();
-    setActionStatus('Your saved Lite preview is open. Full plan access requires a verified Pro purchase.');
+    setActionStatus('Your saved route outline is open. The private Web plan requires a verified purchase.');
     track('bw_trip_planner_email_plan_open', {
       arrival_date: state.arrivalDate,
       trip_length: state.tripLength

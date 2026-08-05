@@ -1937,7 +1937,7 @@
       '<div>' +
         '<span class="bw-blog-tool-kicker">Arriving in Berlin soon?</span>' +
         '<strong>Berlin Trip Planner</strong>' +
-        '<p class="bw-blog-tool-copy">Enter your dates and where you are staying. I build your Berlin days area by area, with weather and opening-day checks. The preview is free.</p>' +
+        '<p class="bw-blog-tool-copy">Enter your dates and where you are staying. I build a private Web plan with a matching PDF, from €7.99 for the whole trip in one payment.</p>' +
       '</div>' +
       '<a class="bw-blog-tool-button" href="' + escapeAttr(fdrBridgeUrl(slug)) + '" target="_top" data-bw-blog-fdr-click="1">Build my Berlin plan</a>';
 
