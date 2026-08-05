@@ -273,6 +273,14 @@
         .aw-masthead::after { right: -61px; bottom: -62px; }
         .aw-controls, .aw-route { padding: 23px 18px; }
       }
+
+      /* Wix gives this embed a very narrow inner column on some phones. */
+      @media (max-width: 260px) {
+        .aw-field select {
+          padding-right: 32px;
+          font-size: 13px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -316,9 +324,9 @@
           <label class="aw-field" for="anchor">
             <span>Official anchor</span>
             <select id="anchor" name="anchor">
-              <option value="confirmed">I have one confirmed listing</option>
-              <option value="shortlist">I have two listings to compare</option>
-              <option value="finding">I still need to choose an anchor</option>
+              <option value="confirmed">Confirmed listing</option>
+              <option value="shortlist">Compare listings</option>
+              <option value="finding">Choose an anchor</option>
             </select>
           </label>
 
@@ -333,8 +341,8 @@
           <label class="aw-field" for="pace">
             <span>Pace</span>
             <select id="pace" name="pace">
-              <option value="slow">Unhurried, with time to look</option>
-              <option value="focused">Focused, I can make three stops</option>
+              <option value="slow">Slow, time to look</option>
+              <option value="focused">Focused: 3 stops</option>
             </select>
           </label>
 
@@ -342,8 +350,8 @@
             <span>Registration tolerance</span>
             <select id="registration" name="registration">
               <option value="walkin">Walk-in only</option>
-              <option value="book">I can book ahead</option>
-              <option value="either">Either, if it is worthwhile</option>
+              <option value="book">Book ahead</option>
+              <option value="either">Either is fine</option>
             </select>
           </label>
 
