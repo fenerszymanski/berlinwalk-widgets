@@ -70,11 +70,14 @@
         .dnp__stub { padding: 15px 12px; }
       }
       @media (max-width: 480px) {
-        .dnp__intro, .dnp__controlbar { grid-template-columns: 1fr; }
+        .dnp__intro, .dnp__controlbar { grid-template-columns: minmax(0, 1fr); }
         .dnp__rule { grid-column: auto; }
         .dnp__night { grid-template-columns: 1fr; }
         .dnp__night::before { display: none; }
         .dnp__stub { min-height: 102px; }
+      }
+      @media (max-width: 260px) {
+        .dnp h1 { font-size: 24px; }
       }
     </style>
   </head>
