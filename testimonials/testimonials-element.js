@@ -30,8 +30,6 @@ class BWTestimonialsElement extends HTMLElement {
     if (this._observer) this._observer.disconnect();
     if (this._autoRotateTimer) window.clearInterval(this._autoRotateTimer);
     if (this._resumeTimer) window.clearTimeout(this._resumeTimer);
-    if (this._resizeRelockHandler) window.removeEventListener('resize', this._resizeRelockHandler);
-    if (this._resizeRelockTimer) window.clearTimeout(this._resizeRelockTimer);
     if (this._controller) this._controller.abort();
   }
 
@@ -173,12 +171,52 @@ class BWTestimonialsElement extends HTMLElement {
 
         .bw-testimonials .bw-review-quote {
           color: #212121;
+          display: -webkit-box;
           font-family: var(--serif);
           font-size: 22px;
           font-style: italic;
           line-height: 1.55;
           margin: 0 auto;
           max-width: 720px;
+          overflow: hidden;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 4;
+        }
+
+        .bw-testimonials .bw-review-slide.is-expanded .bw-review-quote {
+          display: block;
+          overflow: visible;
+          -webkit-line-clamp: unset;
+        }
+
+        .bw-testimonials .bw-review-more {
+          appearance: none;
+          background: transparent;
+          border: 0;
+          color: #1B5E20;
+          cursor: pointer;
+          display: block;
+          font: inherit;
+          font-size: 14px;
+          font-weight: 800;
+          letter-spacing: 0.2px;
+          margin: 14px auto 0;
+          padding: 4px 8px;
+          text-decoration: underline;
+          text-underline-offset: 3px;
+        }
+
+        .bw-testimonials .bw-review-more[hidden] {
+          display: none;
+        }
+
+        .bw-testimonials .bw-review-more:hover {
+          color: #123D18;
+        }
+
+        .bw-testimonials .bw-review-more:focus-visible {
+          outline: 3px solid rgba(27, 94, 32, 0.3);
+          outline-offset: 3px;
         }
 
         .bw-testimonials .bw-review-stars {
@@ -598,39 +636,7 @@ class BWTestimonialsElement extends HTMLElement {
     this._renderDots();
     this._renderTrustStrip(data.links || {}, data.stats || {});
     this._renderReview(0, false);
-    this._lockShellHeight();
-    this._setupResizeRelock();
     this._startAutoRotate();
-  }
-
-  _lockShellHeight() {
-    const shell = this.querySelector('.bw-carousel-shell');
-    if (!shell || !this._testimonials.length) return;
-    const savedIndex = this._currentIndex || 0;
-    shell.style.minHeight = '';
-    let max = 0;
-    for (let i = 0; i < this._testimonials.length; i++) {
-      this._renderReview(i, false);
-      // Force layout
-      const h = shell.offsetHeight;
-      if (h > max) max = h;
-    }
-    if (max > 0) shell.style.minHeight = max + 'px';
-    this._currentIndex = savedIndex;
-    this._renderReview(savedIndex, false);
-  }
-
-  _setupResizeRelock() {
-    if (this._resizeRelockHandler) return;
-    let raf = 0;
-    this._resizeRelockHandler = () => {
-      if (raf) window.cancelAnimationFrame(raf);
-      raf = window.requestAnimationFrame(() => {
-        clearTimeout(this._resizeRelockTimer);
-        this._resizeRelockTimer = window.setTimeout(() => this._lockShellHeight(), 120);
-      });
-    };
-    window.addEventListener('resize', this._resizeRelockHandler);
   }
 
   _renderReview(index, animate) {
@@ -640,6 +646,8 @@ class BWTestimonialsElement extends HTMLElement {
     const review = this._testimonials[index];
     const rating = Number(review.rating || 5);
     const source = (review.source || '').trim();
+    const quote = review.quote || '';
+    const quoteId = `bw-review-quote-${index}`;
     const slide = document.createElement('article');
     slide.className = 'bw-review-slide';
     slide.setAttribute('aria-roledescription', 'slide');
@@ -648,7 +656,8 @@ class BWTestimonialsElement extends HTMLElement {
     if (animate && !this._reduceMotion) slide.classList.add('is-entering');
     const countryLine = `${review.country || ''} ${review.flag || ''}`.trim();
     slide.innerHTML = `
-      <p class="bw-review-quote">${this._escapeHtml(review.quote || '')}</p>
+      <p id="${quoteId}" class="bw-review-quote">${this._escapeHtml(quote)}</p>
+      <button class="bw-review-more" type="button" aria-controls="${quoteId}" aria-expanded="false" hidden>Read more</button>
       ${this._renderStars(rating)}
       <div class="bw-review-author">
         <span class="bw-review-name">${this._escapeHtml(review.author || '')}</span>
@@ -658,6 +667,7 @@ class BWTestimonialsElement extends HTMLElement {
     `;
 
     region.replaceChildren(slide);
+    this._syncReadMoreControl(slide);
 
     if (animate && !this._reduceMotion) {
       slide.getBoundingClientRect();
@@ -665,6 +675,19 @@ class BWTestimonialsElement extends HTMLElement {
     }
 
     this._updateDots();
+  }
+
+  _syncReadMoreControl(slide) {
+    const quote = slide && slide.querySelector('.bw-review-quote');
+    const control = slide && slide.querySelector('.bw-review-more');
+    if (!quote || !control) return;
+
+    if (slide.classList.contains('is-expanded')) {
+      control.hidden = false;
+      return;
+    }
+
+    control.hidden = quote.scrollHeight <= quote.clientHeight + 1;
   }
 
   _renderStars(rating) {
@@ -716,6 +739,16 @@ class BWTestimonialsElement extends HTMLElement {
     const signal = this._controller.signal;
 
     this.addEventListener('click', (event) => {
+      const readMore = event.target.closest('.bw-review-more');
+      if (readMore) {
+        const slide = readMore.closest('.bw-review-slide');
+        const expanded = slide ? slide.classList.toggle('is-expanded') : false;
+        readMore.setAttribute('aria-expanded', String(expanded));
+        readMore.textContent = expanded ? 'Show less' : 'Read more';
+        this._markInteraction();
+        return;
+      }
+
       const dot = event.target.closest('.bw-carousel-dot');
       if (!dot) return;
       this._goToReview(Number(dot.dataset.reviewIndex || 0), true);
@@ -758,6 +791,14 @@ class BWTestimonialsElement extends HTMLElement {
       const deltaY = event.clientY - this._pointerStartY;
       if (Math.abs(deltaX) < 50 || Math.abs(deltaX) < Math.abs(deltaY)) return;
       this._goToReview(this._currentIndex + (deltaX < 0 ? 1 : -1), true);
+    }, { signal });
+
+    let resizeFrame = 0;
+    window.addEventListener('resize', () => {
+      if (resizeFrame) window.cancelAnimationFrame(resizeFrame);
+      resizeFrame = window.requestAnimationFrame(() => {
+        this._syncReadMoreControl(this.querySelector('.bw-review-slide'));
+      });
     }, { signal });
   }
 
