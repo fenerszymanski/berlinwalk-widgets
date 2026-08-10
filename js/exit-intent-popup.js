@@ -26,6 +26,8 @@
   var SAME_DAY_CUTOFF_LEAD_MINUTES = 180;
   var DOUBLE_SLOT_START_MONTH_DAY = 703;
   var DOUBLE_SLOT_END_MONTH_DAY = 930;
+  var LIVE_AVAILABILITY_URL = 'https://berlinwalk-content-app.vercel.app/api/booking-calendar-availability';
+  var LIVE_AVAILABILITY_DAYS = 60;
   var DAY_MS = 24 * 60 * 60 * 1000;
   var TOUR_DAYS = { Tue: true, Wed: true, Thu: true, Fri: true, Sat: true };
 
@@ -35,6 +37,7 @@
   var closeTracked = false;
   var previousFocus = null;
   var sentEvents = {};
+  var liveAvailabilityPromise = null;
 
   function getAssetUrl(path) {
     try {
@@ -549,6 +552,88 @@
     }
   }
 
+  function liveNextTourLineFromAvailability(availability, now) {
+    if (!availability || !Array.isArray(availability.slots)) return '';
+
+    now = now || new Date();
+    var today = berlinParts(now);
+    var tomorrow = berlinParts(new Date(now.getTime() + DAY_MS));
+    var entries = availability.slots
+      .map(function (slot) {
+        if (!slot || slot.bookable === false) return null;
+        var openSpots = Number(slot.openSpots);
+        if (Number.isFinite(openSpots) && openSpots <= 0) return null;
+        var startDate = new Date(slot.startDate || slot.start || slot.localStartDate || '');
+        if (Number.isNaN(startDate.getTime()) || startDate.getTime() <= now.getTime()) return null;
+        var parts = berlinParts(startDate);
+        return {
+          dateKey: parts.dateKey,
+          weekdayShort: parts.weekdayShort,
+          weekdayLabel: parts.weekdayLabel,
+          startLabel: String(parts.hour).padStart(2, '0') + ':' + String(parts.minute).padStart(2, '0'),
+          startTime: startDate.getTime()
+        };
+      })
+      .filter(Boolean)
+      .sort(function (left, right) { return left.startTime - right.startTime; });
+
+    if (!entries.length) return '';
+
+    var first = entries[0];
+    var labels = [first.startLabel];
+    for (var index = 1; index < entries.length; index += 1) {
+      if (entries[index].dateKey !== first.dateKey) break;
+      labels.push(entries[index].startLabel);
+    }
+
+    var relativeLabel = first.weekdayLabel;
+    if (first.dateKey === today.dateKey) relativeLabel = 'Today (' + first.weekdayShort + ')';
+    else if (first.dateKey === tomorrow.dateKey) relativeLabel = 'Tomorrow (' + first.weekdayShort + ')';
+    return 'Next: ' + relativeLabel + ' at ' + slotsLabelFor(labels);
+  }
+
+  function fetchLiveAvailability() {
+    if (typeof window.fetch !== 'function') return Promise.resolve(null);
+    if (!liveAvailabilityPromise) {
+      var endpoint = LIVE_AVAILABILITY_URL + '?days=' + encodeURIComponent(LIVE_AVAILABILITY_DAYS) + '&guests=1';
+      liveAvailabilityPromise = window.fetch(endpoint, {
+        mode: 'cors',
+        credentials: 'omit',
+        cache: 'no-store'
+      }).then(function (response) {
+        if (!response || !response.ok) throw new Error('availability request failed');
+        return response.json();
+      }).catch(function () {
+        return null;
+      });
+    }
+    return liveAvailabilityPromise;
+  }
+
+  function refreshLiveNextTourLine(overlay) {
+    fetchLiveAvailability().then(function (availability) {
+      if (!availability || !Array.isArray(availability.slots)) return;
+
+      var liveLine = liveNextTourLineFromAvailability(availability);
+      var line = overlay && overlay.querySelector('[data-bw-exit-next]');
+      if (!liveLine) {
+        if (line && line.parentNode) line.parentNode.removeChild(line);
+        return;
+      }
+
+      if (!line) {
+        var copy = overlay && overlay.querySelector('.bw-exit-copy');
+        if (!copy || !copy.parentNode) return;
+        line = document.createElement('p');
+        line.className = 'bw-exit-next';
+        line.setAttribute('data-bw-exit-next', '');
+        copy.parentNode.insertBefore(line, copy);
+      }
+      line.setAttribute('data-bw-exit-next-source', 'live');
+      line.textContent = liveLine;
+    });
+  }
+
   function injectStyles() {
     if (document.getElementById(STYLE_ID)) return;
 
@@ -655,7 +740,7 @@
       '<div class="bw-exit-inner">',
       '<section class="bw-exit-step bw-exit-active" data-bw-exit-step="1">',
       '<h2 class="bw-exit-title" id="bw-exit-title">Give me 2 hours. I\'ll make Berlin make sense.</h2>',
-      (nextLine ? '<p class="bw-exit-next">' + nextLine + '</p>' : ''),
+      (nextLine ? '<p class="bw-exit-next" data-bw-exit-next data-bw-exit-next-source="fallback">' + nextLine + '</p>' : ''),
       '<p class="bw-exit-copy">Meet me at the World Clock. Reserving is free, and you tip at the end.</p>',
       '<div class="bw-exit-actions">',
       '<a class="bw-exit-primary" href="' + booking.href + '" data-bw-exit-book data-bw-exit-attribution="' + booking.attributionMode + '">Reserve a free spot</a>',
@@ -667,6 +752,7 @@
 
     document.body.appendChild(overlay);
     bindPopupEvents(overlay);
+    refreshLiveNextTourLine(overlay);
     document.documentElement.classList.add('bw-exit-lock');
     document.body.classList.add('bw-exit-lock');
     window.requestAnimationFrame(function () {
@@ -763,6 +849,7 @@
       analyticsAllowed: analyticsAllowed,
       attributionForLink: attributionForLink,
       bookingDestination: bookingDestination,
+      liveNextTourLineFromAvailability: liveNextTourLineFromAvailability,
       measurementState: measurementState,
       safeAttributionValue: safeAttributionValue,
       safePath: safePath,

@@ -22,6 +22,7 @@ const ASSETS = [
   assert.match(SOURCE, /alt="Yusuf guiding a BerlinWalk group on Museum Island"/);
   assert.equal(SOURCE.includes('fonts.googleapis.com'), false, 'popup must not request Google Fonts');
   assert.equal(SOURCE.includes('backdrop-filter'), false, 'popup must not use GPU-heavy backdrop blur');
+  assert.match(SOURCE, /booking-calendar-availability/);
   assert.equal(SOURCE.includes('next-tour-slot.js'), false, 'popup must not request a second scheduling script');
 
   for (const [file, maximumBytes] of ASSETS) {
@@ -322,6 +323,20 @@ function harness({
   assert.equal(body.payload.qa, true);
   assert.equal(body.payload.previewMode, true);
   assert.equal(body.payload.closeReason, 'x_button');
+}
+
+{
+  const test = harness({ analytics: false });
+  const now = new Date('2026-08-10T10:00:00+02:00');
+  const line = test.hooks.liveNextTourLineFromAvailability({
+    slots: [
+      { startDate: '2026-08-11T11:30:00+02:00', bookable: true, openSpots: 0 },
+      { startDate: '2026-08-12T15:30:00+02:00', bookable: true, openSpots: 4 },
+      { startDate: '2026-08-12T11:30:00+02:00', bookable: true, openSpots: 8 },
+    ],
+  }, now);
+  assert.equal(line, 'Next: Wednesday at 11:30 + 15:30');
+  assert.equal(test.hooks.liveNextTourLineFromAvailability({ slots: [] }, now), '');
 }
 
 console.log('PASS exit-intent-popup consent, attribution, PII and per-session event contract');
