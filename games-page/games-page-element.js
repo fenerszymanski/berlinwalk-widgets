@@ -3,8 +3,22 @@
   const BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
     ? new URL('../', SCRIPT_URL).toString()
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-  const ASSET_VERSION = 'games-page-where-cover-20260724';
+  const ASSET_VERSION = 'games-page-time-detective-20260811';
   const GAMES = [
+    {
+      id: 'berlin-time-detective',
+      kicker: 'History case game',
+      title: 'Berlin Time Detective',
+      lead: 'Solve five short visual cases across 13 central Berlin places, from Alexanderplatz to Hackescher Markt.',
+      how: 'Read one clue at a time, make a choice, collect the field note and continue through the next case.',
+      duration: '5 short cases',
+      difficulty: 'History clues',
+      player: 'Curious explorer',
+      image: 'berlin-time-detective/release/berlin-time-detective/assets/social/berlin-time-detective-social-1200x630.jpg',
+      href: 'https://www.berlinwalk.com/games/berlin-time-detective',
+      button: 'Open the case',
+      accent: 'archive'
+    },
     {
       id: 'where-in-berlin',
       kicker: 'District match',

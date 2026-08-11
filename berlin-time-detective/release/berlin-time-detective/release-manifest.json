@@ -1,0 +1,441 @@
+{
+  "schemaVersion": 1,
+  "status": "UNPUBLISHED",
+  "generatedAt": "2026-08-11T18:56:39.783Z",
+  "runtimeEntrypoint": "index.html",
+  "sourceToRelease": {
+    "byteEqualCount": 45,
+    "intentionalTransformCount": 1,
+    "intentionalTransforms": [
+      {
+        "path": "js/app.js",
+        "transformation": "Production package only: removed the qa=2|3 window.__phase2Test development export block; runtime gameplay modules otherwise remain unchanged."
+      }
+    ]
+  },
+  "entries": [
+    {
+      "path": "README.md",
+      "sourcePath": null,
+      "bytes": 498,
+      "sha256": "5288c0d47ca5633ae264ee562b5b4727ba9eb687f4b86ad010e5c91664d113e9",
+      "sourceSha256": null,
+      "sourceMatchesRelease": null,
+      "transformation": null
+    },
+    {
+      "path": "assets/berlin-mitte-osm-map.png",
+      "sourcePath": "assets/berlin-mitte-osm-map.png",
+      "bytes": 507734,
+      "sha256": "dab9e78aadf25729fccba46bb9a8aaeaf26eae09b8e4b58fea3980fb2dedef01",
+      "sourceSha256": "dab9e78aadf25729fccba46bb9a8aaeaf26eae09b8e4b58fea3980fb2dedef01",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "assets/berlinwalk-wordmark-01-brand-green.png",
+      "sourcePath": "assets/berlinwalk-wordmark-01-brand-green.png",
+      "bytes": 123664,
+      "sha256": "d7d60218b3275ef7481cad74b249e0105488c70b9c67b58dd667b1bb6a1c71cc",
+      "sourceSha256": "d7d60218b3275ef7481cad74b249e0105488c70b9c67b58dd667b1bb6a1c71cc",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "assets/fonts/Fraunces-Variable.ttf",
+      "sourcePath": "assets/fonts/Fraunces-Variable.ttf",
+      "bytes": 360440,
+      "sha256": "177ff6c0f14e5550a3c624247cd1189611d4eb65d000b14944c63d967958abbb",
+      "sourceSha256": "177ff6c0f14e5550a3c624247cd1189611d4eb65d000b14944c63d967958abbb",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "assets/fonts/IBMPlexMono-Regular.ttf",
+      "sourcePath": "assets/fonts/IBMPlexMono-Regular.ttf",
+      "bytes": 135580,
+      "sha256": "6a3412f058c7d8dfd9170c41e85ade48e5156ecb89356110ca57a0a27734af46",
+      "sourceSha256": "6a3412f058c7d8dfd9170c41e85ade48e5156ecb89356110ca57a0a27734af46",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "assets/fonts/OFL-Fraunces.txt",
+      "sourcePath": "assets/fonts/OFL-Fraunces.txt",
+      "bytes": 4391,
+      "sha256": "bdf4c22802eaf804f998195871c6b8938aac2ac14b2d78a8bd66a6f1eced833b",
+      "sourceSha256": "bdf4c22802eaf804f998195871c6b8938aac2ac14b2d78a8bd66a6f1eced833b",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "assets/fonts/OFL-IBM-Plex.txt",
+      "sourcePath": "assets/fonts/OFL-IBM-Plex.txt",
+      "bytes": 4456,
+      "sha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da",
+      "sourceSha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "assets/fonts/OFL-Space-Grotesk.txt",
+      "sourcePath": "assets/fonts/OFL-Space-Grotesk.txt",
+      "bytes": 4495,
+      "sha256": "564ce565c371c5e5bbf286006565a7c9aa55a9f56e7ca58d56e05d649dd61a72",
+      "sourceSha256": "564ce565c371c5e5bbf286006565a7c9aa55a9f56e7ca58d56e05d649dd61a72",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "assets/fonts/SpaceGrotesk-Variable.ttf",
+      "sourcePath": "assets/fonts/SpaceGrotesk-Variable.ttf",
+      "bytes": 136676,
+      "sha256": "acad6de1fc93436f5c0f1f4137751ef04f1aea3063e7036535970ffcfbd79f72",
+      "sourceSha256": "acad6de1fc93436f5c0f1f4137751ef04f1aea3063e7036535970ffcfbd79f72",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "assets/mission-1/mission-1-current.webp",
+      "sourcePath": "assets/mission-1/mission-1-current.webp",
+      "bytes": 148020,
+      "sha256": "4e7bb8932f472d5ab845f99286fdc704ab395175846a2b3ee3c7159551906fb4",
+      "sourceSha256": "4e7bb8932f472d5ab845f99286fdc704ab395175846a2b3ee3c7159551906fb4",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "assets/mission-1/mission-1-historical.webp",
+      "sourcePath": "assets/mission-1/mission-1-historical.webp",
+      "bytes": 195004,
+      "sha256": "82f3e216147f43ded752f5a76fe107301e47a3208ac74cd23d1b948b90c8f515",
+      "sourceSha256": "82f3e216147f43ded752f5a76fe107301e47a3208ac74cd23d1b948b90c8f515",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "assets/mission-1/time-gear.png",
+      "sourcePath": "assets/mission-1/time-gear.png",
+      "bytes": 861210,
+      "sha256": "d9841705ade5fd6c62adb884dbdebdcc262e49e31ec41b7341912f04cb78d6a1",
+      "sourceSha256": "d9841705ade5fd6c62adb884dbdebdcc262e49e31ec41b7341912f04cb78d6a1",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "assets/mission-2/evidence-a.webp",
+      "sourcePath": "assets/mission-2/evidence-a.webp",
+      "bytes": 130698,
+      "sha256": "ffd5d3a6ea7321416c5eb17a319a28c279935712093c8033ae25bfcdb813f539",
+      "sourceSha256": "ffd5d3a6ea7321416c5eb17a319a28c279935712093c8033ae25bfcdb813f539",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "assets/mission-2/evidence-b.webp",
+      "sourcePath": "assets/mission-2/evidence-b.webp",
+      "bytes": 300066,
+      "sha256": "567fd9f4a062ae2710c0ee921ec2891e773cfbc45c01976c964676b4af27ba50",
+      "sourceSha256": "567fd9f4a062ae2710c0ee921ec2891e773cfbc45c01976c964676b4af27ba50",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "assets/mission-2/mission-2-plan-neutral.webp",
+      "sourcePath": "assets/mission-2/mission-2-plan-neutral.webp",
+      "bytes": 323876,
+      "sha256": "3842e90015cbc442568886bcc2b9e724e1a56fc21ff3964bed969c050f678fb5",
+      "sourceSha256": "3842e90015cbc442568886bcc2b9e724e1a56fc21ff3964bed969c050f678fb5",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "assets/mission-2/mission-2-reveal.webp",
+      "sourcePath": "assets/mission-2/mission-2-reveal.webp",
+      "bytes": 231810,
+      "sha256": "8a4f5ca3bda1cc547ded3837ce98f952e0b54b38bf59b749047b0afaaef30ec4",
+      "sourceSha256": "8a4f5ca3bda1cc547ded3837ce98f952e0b54b38bf59b749047b0afaaef30ec4",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "assets/mission-2/street-key.png",
+      "sourcePath": "assets/mission-2/street-key.png",
+      "bytes": 159629,
+      "sha256": "31e25abf4f3172704991f1e22343f9a4237a1ed1700ed65d4d75440b21fe9cae",
+      "sourceSha256": "31e25abf4f3172704991f1e22343f9a4237a1ed1700ed65d4d75440b21fe9cae",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "assets/mission-3/evidence-a.webp",
+      "sourcePath": "assets/mission-3/evidence-a.webp",
+      "bytes": 197338,
+      "sha256": "607fa1c151bfb98175a62cb88f904716250a960b1b82aaa191a335acb8ba9a04",
+      "sourceSha256": "607fa1c151bfb98175a62cb88f904716250a960b1b82aaa191a335acb8ba9a04",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "assets/mission-3/evidence-b.webp",
+      "sourcePath": "assets/mission-3/evidence-b.webp",
+      "bytes": 134128,
+      "sha256": "bad94ea7dd3adb9d416c45c189e4fe79efe5daad9ed4e8dfbd2d63e2aef73891",
+      "sourceSha256": "bad94ea7dd3adb9d416c45c189e4fe79efe5daad9ed4e8dfbd2d63e2aef73891",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "assets/mission-3/evidence-c.webp",
+      "sourcePath": "assets/mission-3/evidence-c.webp",
+      "bytes": 132086,
+      "sha256": "0e94188108c6ab4c9879f7ec5349b8e956ae9fca17f74a38fe0cad8927d75b96",
+      "sourceSha256": "0e94188108c6ab4c9879f7ec5349b8e956ae9fca17f74a38fe0cad8927d75b96",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "assets/mission-3/spree-keystone.png",
+      "sourcePath": "assets/mission-3/spree-keystone.png",
+      "bytes": 478463,
+      "sha256": "8bddcf05eae00789bc5a9a3a9fa1d6211eb91db5120216ec19f1e6482ff59b91",
+      "sourceSha256": "8bddcf05eae00789bc5a9a3a9fa1d6211eb91db5120216ec19f1e6482ff59b91",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "assets/mission-4/detail-lens.png",
+      "sourcePath": "assets/mission-4/detail-lens.png",
+      "bytes": 184037,
+      "sha256": "d909022cf303256998d5e643ad05d23a611b46e073397700f49379310c77743d",
+      "sourceSha256": "d909022cf303256998d5e643ad05d23a611b46e073397700f49379310c77743d",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "assets/mission-4/mission-4-repair.webp",
+      "sourcePath": "assets/mission-4/mission-4-repair.webp",
+      "bytes": 151428,
+      "sha256": "7256e9c19850c0787f9a895b015006b9b4ab92be617632ce2ada588deed9e612",
+      "sourceSha256": "7256e9c19850c0787f9a895b015006b9b4ab92be617632ce2ada588deed9e612",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "assets/mission-5/courtyard-key.png",
+      "sourcePath": "assets/mission-5/courtyard-key.png",
+      "bytes": 170030,
+      "sha256": "94504d4b7d72fc6068bad58d144169ab197f4566b38e1a01db0f912b2663cf97",
+      "sourceSha256": "94504d4b7d72fc6068bad58d144169ab197f4566b38e1a01db0f912b2663cf97",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "assets/mission-5/source-hackesche-plan-ccby.png",
+      "sourcePath": "assets/mission-5/source-hackesche-plan-ccby.png",
+      "bytes": 62422,
+      "sha256": "bf6fe9756d80de6836714ac0fe1d2897628eb47e689c1e082895bed72483f880",
+      "sourceSha256": "bf6fe9756d80de6836714ac0fe1d2897628eb47e689c1e082895bed72483f880",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "css/app.css",
+      "sourcePath": "css/app.css",
+      "bytes": 20092,
+      "sha256": "09ffc16ed77d021dba0bf76163c16b6eea12323965c56543c084dddca0d14aa4",
+      "sourceSha256": "09ffc16ed77d021dba0bf76163c16b6eea12323965c56543c084dddca0d14aa4",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "css/mission-1.css",
+      "sourcePath": "css/mission-1.css",
+      "bytes": 16688,
+      "sha256": "df813a0e195c8850333df8de3ec3798e7694dfd4560c9e14e4bcb4198ffa197b",
+      "sourceSha256": "df813a0e195c8850333df8de3ec3798e7694dfd4560c9e14e4bcb4198ffa197b",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "css/tokens.css",
+      "sourcePath": "css/tokens.css",
+      "bytes": 5073,
+      "sha256": "6d6294c40aacf3972a9a0173b727620f21477902d3b39c3ca54393aaf117f14d",
+      "sourceSha256": "6d6294c40aacf3972a9a0173b727620f21477902d3b39c3ca54393aaf117f14d",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "index.html",
+      "sourcePath": "index.html",
+      "bytes": 12060,
+      "sha256": "1ba8ea00683f391bbf6171adc00190928501bb8188d90aa28aed8d567d6eccf6",
+      "sourceSha256": "1ba8ea00683f391bbf6171adc00190928501bb8188d90aa28aed8d567d6eccf6",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "js/app.js",
+      "sourcePath": "js/app.js",
+      "bytes": 23301,
+      "sha256": "e1cf556eab619bef510c4fc7983973722e96b428089fc3e8ac90c602602a22eb",
+      "sourceSha256": "364d5c09803e58d487c2970284c22afb4dba85c36d48a640b4b8124bd1d7aade",
+      "sourceMatchesRelease": false,
+      "transformation": "Production package only: removed the qa=2|3 window.__phase2Test development export block; runtime gameplay modules otherwise remain unchanged."
+    },
+    {
+      "path": "js/audio.js",
+      "sourcePath": "js/audio.js",
+      "bytes": 1934,
+      "sha256": "fd1bb5eb91aa8cb4244d28c66fc2dea503ea20ec945106b3de5bc828bffb85cc",
+      "sourceSha256": "fd1bb5eb91aa8cb4244d28c66fc2dea503ea20ec945106b3de5bc828bffb85cc",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "js/dialog.js",
+      "sourcePath": "js/dialog.js",
+      "bytes": 4509,
+      "sha256": "65fd940e055840f0b353ac5908c9831dfc5b0847fcc860059c7d9dab89d1ea0f",
+      "sourceSha256": "65fd940e055840f0b353ac5908c9831dfc5b0847fcc860059c7d9dab89d1ea0f",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "js/game-state.js",
+      "sourcePath": "js/game-state.js",
+      "bytes": 19298,
+      "sha256": "8cec0c25b9f780f868670fe28640f40608ee9beb1bf56d06336dc7b12c330a34",
+      "sourceSha256": "8cec0c25b9f780f868670fe28640f40608ee9beb1bf56d06336dc7b12c330a34",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "js/map-view.js",
+      "sourcePath": "js/map-view.js",
+      "bytes": 4459,
+      "sha256": "0ce772f18351f176e9bedf88f72591b3d659ad503826910febac713b82ae6318",
+      "sourceSha256": "0ce772f18351f176e9bedf88f72591b3d659ad503826910febac713b82ae6318",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "js/measurement.js",
+      "sourcePath": "js/measurement.js",
+      "bytes": 6553,
+      "sha256": "93ae7850de930f5af938c6290f0ad57d709f6631ae9c7e4a1fc71dae4c24c95c",
+      "sourceSha256": "93ae7850de930f5af938c6290f0ad57d709f6631ae9c7e4a1fc71dae4c24c95c",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "js/mission-registry.js",
+      "sourcePath": "js/mission-registry.js",
+      "bytes": 2407,
+      "sha256": "e472f1f011073465015f731d52c0b8074c32ffb8ce6fb70cef7cbc94385d4ac1",
+      "sourceSha256": "e472f1f011073465015f731d52c0b8074c32ffb8ce6fb70cef7cbc94385d4ac1",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "js/mission-runner.js",
+      "sourcePath": "js/mission-runner.js",
+      "bytes": 1725,
+      "sha256": "19f1949a625b394d0d9650ac4dcc66a43148cb2dd842d0b59acf36db9ff0f07b",
+      "sourceSha256": "19f1949a625b394d0d9650ac4dcc66a43148cb2dd842d0b59acf36db9ff0f07b",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "js/missions/mission-1.js",
+      "sourcePath": "js/missions/mission-1.js",
+      "bytes": 10025,
+      "sha256": "5cc3e8988bb78ddd7d991b6aae43452ab253d9c7c81069beaf5ad7a4540a9ec8",
+      "sourceSha256": "5cc3e8988bb78ddd7d991b6aae43452ab253d9c7c81069beaf5ad7a4540a9ec8",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "js/missions/mission-2.js",
+      "sourcePath": "js/missions/mission-2.js",
+      "bytes": 9292,
+      "sha256": "9cf836a8f7c7bb6d4f672b80e96c96c8e9310aad8696a9d86d42f22ab148fdb4",
+      "sourceSha256": "9cf836a8f7c7bb6d4f672b80e96c96c8e9310aad8696a9d86d42f22ab148fdb4",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "js/missions/mission-3.js",
+      "sourcePath": "js/missions/mission-3.js",
+      "bytes": 9184,
+      "sha256": "89e9ae5759043266f222db8ccbf4b6d19c7dd0307386cb2dca43001123572703",
+      "sourceSha256": "89e9ae5759043266f222db8ccbf4b6d19c7dd0307386cb2dca43001123572703",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "js/missions/mission-4.js",
+      "sourcePath": "js/missions/mission-4.js",
+      "bytes": 9502,
+      "sha256": "d9be3cc022d9c74a6156a9c83d8bddf30c8d524d63b55216f1d973b68337b0ee",
+      "sourceSha256": "d9be3cc022d9c74a6156a9c83d8bddf30c8d524d63b55216f1d973b68337b0ee",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "js/missions/mission-5.js",
+      "sourcePath": "js/missions/mission-5.js",
+      "bytes": 10794,
+      "sha256": "19ff2481799b8635b2a512028d9916f8d9e6e4c3e93572030a55b5281ade7768",
+      "sourceSha256": "19ff2481799b8635b2a512028d9916f8d9e6e4c3e93572030a55b5281ade7768",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "js/missions/shared.js",
+      "sourcePath": "js/missions/shared.js",
+      "bytes": 4669,
+      "sha256": "1d9682a36a3f0bebfc70ebadf508f6a6d76fb4a66682128ba079db3cf82aecca",
+      "sourceSha256": "1d9682a36a3f0bebfc70ebadf508f6a6d76fb4a66682128ba079db3cf82aecca",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "js/passport-view.js",
+      "sourcePath": "js/passport-view.js",
+      "bytes": 2029,
+      "sha256": "70e8692217c6ed468e4b7024a50f318e8ec948635ced317bafc20ef0c2bbcaa9",
+      "sourceSha256": "70e8692217c6ed468e4b7024a50f318e8ec948635ced317bafc20ef0c2bbcaa9",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "js/persistence.js",
+      "sourcePath": "js/persistence.js",
+      "bytes": 6861,
+      "sha256": "82a515ea2dd796f7cc32ba1cd1a7f78ee4b96875aac383e57660b5f148e9c083",
+      "sourceSha256": "82a515ea2dd796f7cc32ba1cd1a7f78ee4b96875aac383e57660b5f148e9c083",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "js/route-data.js",
+      "sourcePath": "js/route-data.js",
+      "bytes": 2986,
+      "sha256": "cf6ae7ddce0617bbf6df56a02a521a43c41b38b29e72ced156508983b94f1c44",
+      "sourceSha256": "cf6ae7ddce0617bbf6df56a02a521a43c41b38b29e72ced156508983b94f1c44",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    },
+    {
+      "path": "assets/social/berlin-time-detective-social-1200x630.jpg",
+      "sourcePath": "assets/social/berlin-time-detective-social-1200x630.jpg",
+      "bytes": 159853,
+      "sha256": "e075c94b1d9d2fb0f710b7155341cdcf0864db4518797748485ab81d8b67a4bc",
+      "sourceSha256": "e075c94b1d9d2fb0f710b7155341cdcf0864db4518797748485ab81d8b67a4bc",
+      "sourceMatchesRelease": true,
+      "transformation": null
+    }
+  ]
+}
