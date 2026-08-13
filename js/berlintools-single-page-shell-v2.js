@@ -21,7 +21,9 @@
     'berlin-booking-deadline-planner',
     'vegan-berlin-map',
     'berlin-weather-by-month',
-    'berlin-marathon-day'
+    'berlin-marathon-day',
+    'alex-mistakes',
+    'baltic-beach-day-planner'
   ];
   var CATALOG_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/data.json';
   var ROUTE_RE = /^\/tools\/([^/]+)\/?$/i;

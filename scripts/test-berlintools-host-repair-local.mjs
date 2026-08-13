@@ -25,6 +25,8 @@ const PILOTS = [
   'vegan-berlin-map',
   'berlin-weather-by-month',
   'berlin-marathon-day',
+  'alex-mistakes',
+  'baltic-beach-day-planner',
 ];
 const VIEWPORTS = [1018, 390, 358];
 
