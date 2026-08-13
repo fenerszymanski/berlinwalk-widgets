@@ -2562,5 +2562,17 @@
     "png160": "tools-home/icons/berlin-museum-three-slot-builder-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-museum-three-slot-builder-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_bfe515c114a44415bd8873d33a1951b2~mv2.png"
+  },
+  {
+    "slug": "berlin-tour-time-window",
+    "title": "Berlin Tour Time Window",
+    "category": "Discovery",
+    "model": "Built-in ImageGen",
+    "style": "BerlinWalk green tile and yellow disc icon family 2026-08-03",
+    "sourceSheet": "tools-home/icons/_src/daily-blog-berlin-tour-time-window-icon-20260813-raw.png",
+    "promptSource": "tools-home/icons/_src/daily-blog-berlin-tour-time-window-icon-20260813-prompt.md",
+    "png512": "tools-home/icons/berlin-tour-time-window.png",
+    "png160": "tools-home/icons/berlin-tour-time-window-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-tour-time-window-160.png"
   }
 ]

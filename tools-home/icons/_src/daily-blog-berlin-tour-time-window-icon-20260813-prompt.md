@@ -1,0 +1,5 @@
+# Berlin Tour Time Window icon prompt
+
+Create one square 512x512 app icon for BerlinWalk's “Berlin Tour Time Window” tool. Match the established BerlinWalk visual family: a glossy deep-green rounded-square tile, one large bright-yellow circular medallion, dimensional 3D toy-like materials, crisp studio lighting, clean cream outer corners, symmetrical and legible at 160px. On the yellow medallion, place a simple cream analogue clock face with two distinct dark-green time-window arcs, one on the late-morning side and one on the mid-afternoon side, joined by a small green route line with two circular handles. The metaphor should read as choosing a time window, not an alarm clock or generic calendar. Use deep green, dark green, brand yellow and warm cream. No words, letters, numbers, logos, watermark, skyline, people, map pins, tiny details, black background or vignette. Keep all important shapes inside the rounded tile with generous margins.
+
+Internal production note: generated with the built-in image-generation tool. Do not expose provider, workflow or prompt details in public copy or credits.
