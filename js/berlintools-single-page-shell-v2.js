@@ -8,7 +8,7 @@
 (function () {
   'use strict';
 
-  var VERSION = 'berlintools-shell-v2-20260813-host-repair-pilot';
+  var VERSION = 'berlintools-shell-v2-20260813-host-repair-rollout';
   var ENABLE_ALL = true;
   var PILOT_SLUGS = [
     'berlin-first-day-planner',
@@ -16,37 +16,16 @@
     'berlin-luggage-storage'
   ];
   var HOST_REPAIR_MODE = 'pilot';
-  var HOST_REPAIR_PILOTS = [
-    'reichstag-slot-window',
-    'berlin-booking-deadline-planner',
-    'vegan-berlin-map',
-    'berlin-weather-by-month',
-    'berlin-marathon-day',
-    'alex-mistakes',
-    'baltic-beach-day-planner',
-    'jewish-museum-visit-sequence',
-    'east-side-gallery-murals',
-    'watch-world-cup-2026-berlin',
-    'transport-ticket-calculator',
-    'schoneberg-plaque-check',
-    'berlin-transport-backup-planner',
-    'berlin-club-picker',
-    'berlin-sign-decoder',
-    'dresden-day-clock',
-    'berlin-crosswalk-standoff',
-    'berlin-daylight-hours',
-    'museum-island-one-pick',
-    'are-you-ready-for-berlin-quiz',
-    'berlin-pools',
-    'berlin-lakes',
-    'berlin-landmarks-map',
-    'berlin-first-day-planner',
-    'berlin-city-tax-calculator',
-    'berlin-viewpoint-finder',
-    'berlin-ticket-machine-simulator',
-    'berlin-connectivity-picker',
-    'connectivity-picker',
-    'berlin-3-day-itinerary'
+  // Keep the proven pilot selector/lifecycle. Six near-native-fit routes do not
+  // need the repair; Open Monument has a separate pre-existing mount failure.
+  var HOST_REPAIR_EXCLUSIONS = [
+    'berlin-family-day-planner',
+    'berlin-lost-item-router',
+    'berlin-museum-three-slot-builder',
+    'berlin-umweltzone-sticker-checker',
+    'holocaust-memorial-visit-planner',
+    'karl-marx-allee-spotter',
+    'open-monument-day-shortlist'
   ];
   var CATALOG_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/data.json';
   var ROUTE_RE = /^\/tools\/([^/]+)\/?$/i;
@@ -135,7 +114,7 @@
   if (!ENABLE_ALL && PILOT_SLUGS.indexOf(state.slug) === -1 && !preview) return;
 
   var hostRepairEnabled = HOST_REPAIR_MODE === 'all' ||
-    (HOST_REPAIR_MODE === 'pilot' && HOST_REPAIR_PILOTS.indexOf(state.slug) !== -1);
+    (HOST_REPAIR_MODE === 'pilot' && HOST_REPAIR_EXCLUSIONS.indexOf(state.slug) === -1);
   var html = document.documentElement;
   html.classList.add('bw-tools-shell-v2');
   html.setAttribute('data-bw-tools-shell-v2', VERSION);
@@ -151,7 +130,7 @@
     pilots: PILOT_SLUGS.slice(),
     enabled: true,
     hostRepairMode: hostRepairEnabled ? HOST_REPAIR_MODE : 'off',
-    hostRepairPilots: HOST_REPAIR_PILOTS.slice(),
+    hostRepairExclusions: HOST_REPAIR_EXCLUSIONS.slice(),
     hostRepairEnabled: hostRepairEnabled
   };
 

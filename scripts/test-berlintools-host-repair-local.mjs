@@ -19,37 +19,14 @@ const shellSourcePath = path.join(WIDGET_ROOT, 'js/berlintools-single-page-shell
 const shellCssPath = path.join(WIDGET_ROOT, 'css/berlintools-single-page-shell-v2.css');
 const EXPECTED_REV18_SHA256 =
   'abbdc1af034c55cd4f8198c24d8c8b93643dd19ae0af99e51db5aa8f34e9de05';
-const PILOTS = [
-  'reichstag-slot-window',
-  'berlin-booking-deadline-planner',
-  'vegan-berlin-map',
-  'berlin-weather-by-month',
-  'berlin-marathon-day',
-  'alex-mistakes',
-  'baltic-beach-day-planner',
-  'jewish-museum-visit-sequence',
-  'east-side-gallery-murals',
-  'watch-world-cup-2026-berlin',
-  'transport-ticket-calculator',
-  'schoneberg-plaque-check',
-  'berlin-transport-backup-planner',
-  'berlin-club-picker',
-  'berlin-sign-decoder',
-  'dresden-day-clock',
-  'berlin-crosswalk-standoff',
-  'berlin-daylight-hours',
-  'museum-island-one-pick',
-  'are-you-ready-for-berlin-quiz',
-  'berlin-pools',
-  'berlin-lakes',
-  'berlin-landmarks-map',
-  'berlin-first-day-planner',
-  'berlin-city-tax-calculator',
-  'berlin-viewpoint-finder',
-  'berlin-ticket-machine-simulator',
-  'berlin-connectivity-picker',
-  'connectivity-picker',
-  'berlin-3-day-itinerary',
+const EXCLUSIONS = [
+  'berlin-family-day-planner',
+  'berlin-lost-item-router',
+  'berlin-museum-three-slot-builder',
+  'berlin-umweltzone-sticker-checker',
+  'holocaust-memorial-visit-planner',
+  'karl-marx-allee-spotter',
+  'open-monument-day-shortlist',
 ];
 const VIEWPORTS = [1018, 390, 358];
 
@@ -87,12 +64,14 @@ assert.equal(
 compile('shell JS', shellSource);
 
 assert.match(shellSource, /var HOST_REPAIR_MODE = 'pilot'/);
-for (const slug of PILOTS) {
+for (const slug of EXCLUSIONS) {
   assert.ok(
     shellSource.includes("'" + slug + "'") || shellSource.includes('"' + slug + '"'),
-    'missing pilot slug: ' + slug,
+    'missing host-repair exclusion: ' + slug,
   );
 }
+assert.doesNotMatch(shellSource, /HOST_REPAIR_PILOTS/);
+assert.match(shellSource, /HOST_REPAIR_EXCLUSIONS\.indexOf\(state\.slug\) === -1/);
 assert.match(shellSource, /data-bw-host-repair/);
 assert.match(shellSource, /bw-host-repair-/);
 assert.doesNotMatch(shellSource, /function markHostRepairChain/);
@@ -231,8 +210,9 @@ try {
   browser = await chromium.launch({ headless: true });
   for (const viewportWidth of VIEWPORTS) {
     for (const routeAndMode of [
-      ['/tools/host-repair-control', 'off'],
+      ['/tools/open-monument-day-shortlist', 'off'],
       ['/tools/reichstag-slot-window', 'pilot'],
+      ['/tools/alexanderplatz-parking-map', 'pilot'],
     ]) {
       const route = routeAndMode[0];
       const expectedMode = routeAndMode[1];
@@ -389,7 +369,7 @@ const receipt = {
     sha256: sha256(resizeSourceText),
     expectedRev18Sha256: EXPECTED_REV18_SHA256,
   },
-  pilotSlugs: PILOTS,
+  excludedSlugs: EXCLUSIONS,
   viewports: VIEWPORTS,
   fixture: {
     activeOverlayRules:
