@@ -8,7 +8,7 @@
 (function () {
   'use strict';
 
-  var VERSION = 'berlintools-shell-v2-20260813-host-repair-rollout';
+  var VERSION = 'berlintools-shell-v2-20260813-host-repair-complete';
   var ENABLE_ALL = true;
   var PILOT_SLUGS = [
     'berlin-first-day-planner',
@@ -17,15 +17,14 @@
   ];
   var HOST_REPAIR_MODE = 'pilot';
   // Keep the proven pilot selector/lifecycle. Six near-native-fit routes do not
-  // need the repair; Open Monument has a separate pre-existing mount failure.
+  // need the repair; all other mounted tool-detail routes use the repaired host.
   var HOST_REPAIR_EXCLUSIONS = [
     'berlin-family-day-planner',
     'berlin-lost-item-router',
     'berlin-museum-three-slot-builder',
     'berlin-umweltzone-sticker-checker',
     'holocaust-memorial-visit-planner',
-    'karl-marx-allee-spotter',
-    'open-monument-day-shortlist'
+    'karl-marx-allee-spotter'
   ];
   var CATALOG_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/data.json';
   var ROUTE_RE = /^\/tools\/([^/]+)\/?$/i;

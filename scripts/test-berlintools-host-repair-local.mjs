@@ -26,7 +26,6 @@ const EXCLUSIONS = [
   'berlin-umweltzone-sticker-checker',
   'holocaust-memorial-visit-planner',
   'karl-marx-allee-spotter',
-  'open-monument-day-shortlist',
 ];
 const VIEWPORTS = [1018, 390, 358];
 
@@ -210,7 +209,8 @@ try {
   browser = await chromium.launch({ headless: true });
   for (const viewportWidth of VIEWPORTS) {
     for (const routeAndMode of [
-      ['/tools/open-monument-day-shortlist', 'off'],
+      ['/tools/berlin-family-day-planner', 'off'],
+      ['/tools/open-monument-day-shortlist', 'pilot'],
       ['/tools/reichstag-slot-window', 'pilot'],
       ['/tools/alexanderplatz-parking-map', 'pilot'],
     ]) {
@@ -335,7 +335,7 @@ try {
 
       const screenshotPath = path.join(
         OUTPUT_ROOT,
-        expectedMode + '-' + viewportWidth + '.png',
+        route.split('/').pop() + '-' + expectedMode + '-' + viewportWidth + '.png',
       );
       await page.screenshot({ path: screenshotPath, fullPage: false });
       screenshots.push(screenshotPath);
