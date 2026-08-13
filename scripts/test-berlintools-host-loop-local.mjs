@@ -78,12 +78,12 @@ const ROUTES = [
 ];
 
 const ROUTE_SCHEMA = {
-  version: 'host-loop-v4-all-routes',
+  version: 'host-loop-v3-five-pilot',
   slugs: ROUTES.map((route) => route.slug),
   viewports: VIEWPORTS,
   expectedScenarioCount: ROUTES.length * VIEWPORTS.length,
   expectedComparisonScenarioCount: ROUTES.length * VIEWPORTS.length * 2,
-  expectedRepresentativeRouteCount: 5,
+  expectedPilotCount: 5,
 };
 
 const [resizeSource, candidateShellSource, candidateShellCss, templateSource, testRunnerSource] =
@@ -529,8 +529,8 @@ function fixtureMarkup(route, css, resizeScript, source) {
 ${source ? '<script id="berlintools-shell-js">' + source + '</script>' : ''}</body></html>`;
 }
 
-function repairSelectors(mode) {
-  const root = 'html[data-bw-host-repair="' + mode + '"].bw-host-repair-' + mode + ' body ';
+function repairSelectors() {
+  const root = 'html[data-bw-host-repair="pilot"].bw-host-repair-pilot body ';
   const host = root + '#comp-mozco5et';
   const wrapperRoot = host + ' > div:has(iframe)';
   const privateSelectors = [
@@ -592,8 +592,7 @@ async function runScenario({ browser, serverPort, route, viewportWidth, variant,
   });
   try {
     await page.goto('http://127.0.0.1:' + serverPort + '/tools/' + route.slug, { waitUntil: 'domcontentloaded' });
-    const expectedRepairMode = variant.label === 'candidate-host-repair' ? 'all' : 'pilot';
-    await page.waitForFunction((mode) => document.documentElement.getAttribute('data-bw-host-repair') === mode, expectedRepairMode);
+    await page.waitForFunction(() => document.documentElement.getAttribute('data-bw-host-repair') === 'pilot');
     await page.locator('#comp-mozco5et iframe').scrollIntoViewIfNeeded();
     await page.evaluate(() => window.scrollTo(0, 0));
     await page.waitForTimeout(3300);
@@ -709,7 +708,7 @@ async function runScenario({ browser, serverPort, route, viewportWidth, variant,
         rootHeight: document.documentElement.style.height,
         rootMinHeight: document.documentElement.style.minHeight,
       };
-    }, repairSelectors(expectedRepairMode));
+    }, repairSelectors());
 
     const initial = await capture();
 
@@ -979,7 +978,7 @@ function buildComparison({ runId, startedAt, completedAt, baselineReceipt, candi
     passedScenarios: candidateBoundedScenarios.length,
     totalScenarios: candidateReceipt.results.length,
     namedPredicateResults: candidatePredicateResults,
-    liveOnlyGate: 'next-section external gap was coordinator-verified on the five representative live Chrome routes before all-mode rollout',
+    liveOnlyGate: 'next-section external gap requires coordinator-owned five-tool live Chrome pilot measurement',
   };
   return {
     runId,
@@ -1078,7 +1077,7 @@ function buildComparison({ runId, startedAt, completedAt, baselineReceipt, candi
     },
     liveOnlyGates: [
       'next-section external gap remains LIVE_ONLY_GATE_NOT_USED_FOR_LOCAL_PASS',
-      'fresh live Chrome sampling after the all-mode publish remains coordinator-owned',
+      'fresh clean Chrome desktop/mobile five-tool pilot remains coordinator-owned',
     ],
     receipts: {
       baseline: 'baseline-cbdddc-receipt.json',

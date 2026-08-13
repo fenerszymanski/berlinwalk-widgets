@@ -61,7 +61,7 @@ assert.equal(
 );
 compile('shell JS', shellSource);
 
-assert.match(shellSource, /var HOST_REPAIR_MODE = 'all'/);
+assert.match(shellSource, /var HOST_REPAIR_MODE = 'pilot'/);
 for (const slug of PILOTS) {
   assert.ok(
     shellSource.includes("'" + slug + "'") || shellSource.includes('"' + slug + '"'),
@@ -86,7 +86,7 @@ assert.match(toolsRuntime, /requestAnimationFrame/);
 assert.match(toolsRuntime, /Math\.abs\(pendingHeight - lastHeight\) <= 2/);
 assert.match(resizeSourceText, /event\.data\.height \+ 4/);
 
-const repairMarker = '/*\n * Host repair.';
+const repairMarker = '/*\n * Host repair pilot.';
 const repairCssStart = shellCss.indexOf(repairMarker);
 assert.ok(repairCssStart >= 0, 'host repair CSS marker missing');
 const repairCss = shellCss.slice(repairCssStart);
@@ -190,7 +190,7 @@ let browser;
 
 try {
   server = http.createServer((request, response) => {
-    if (!request.url || !/^\/(?:tools|control)\//.test(request.url)) {
+    if (!request.url || !request.url.startsWith('/tools/')) {
       response.writeHead(404);
       response.end('not found');
       return;
@@ -206,9 +206,8 @@ try {
   browser = await chromium.launch({ headless: true });
   for (const viewportWidth of VIEWPORTS) {
     for (const routeAndMode of [
-      ['/control/host-repair-control', 'off'],
-      ['/tools/reichstag-slot-window', 'all'],
-      ['/tools/non-pilot-catalog-route', 'all'],
+      ['/tools/host-repair-control', 'off'],
+      ['/tools/reichstag-slot-window', 'pilot'],
     ]) {
       const route = routeAndMode[0];
       const expectedMode = routeAndMode[1];
@@ -219,9 +218,7 @@ try {
       page.on('pageerror', (error) => pageErrors.push(error.message));
       await page.goto('http://127.0.0.1:' + port + route, { waitUntil: 'domcontentloaded' });
       await page.addScriptTag({ content: shellSource });
-      if (expectedMode !== 'off') {
-        await page.waitForFunction(() => document.documentElement.hasAttribute('data-bw-host-repair'));
-      }
+      await page.waitForFunction(() => document.documentElement.hasAttribute('data-bw-host-repair'));
       await page.waitForTimeout(80);
 
       const metrics = await page.evaluate(() => {
@@ -251,8 +248,8 @@ try {
           };
         };
         return {
-          mode: root.getAttribute('data-bw-host-repair') || 'off',
-          hostRepairClass: root.classList.contains('bw-host-repair-all'),
+          mode: root.getAttribute('data-bw-host-repair'),
+          hostRepairClass: root.classList.contains('bw-host-repair-pilot'),
           hostMarker: host.getAttribute('data-bw-host-repair-host'),
           privateMarker: privateShell.getAttribute('data-bw-host-repair-private'),
           frameMarker: frame.getAttribute('data-bw-host-repair-frame'),
@@ -264,7 +261,7 @@ try {
       });
 
       assert.equal(metrics.mode, expectedMode, route + ' mode at ' + viewportWidth);
-      if (expectedMode === 'all') {
+      if (expectedMode === 'pilot') {
         assert.equal(metrics.hostRepairClass, true);
         assert.equal(metrics.hostMarker, null);
         assert.equal(metrics.privateMarker, null);
@@ -274,7 +271,7 @@ try {
         assert.equal(metrics.host.overflow, 'visible');
         assert.match(metrics.host.aspectRatio, /^auto/);
         assert.equal(metrics.host.backgroundColor, 'rgb(250, 250, 245)');
-        assert.ok(Math.abs(metrics.host.height - 420) <= 4, 'all-mode host height ' + metrics.host.height);
+        assert.ok(Math.abs(metrics.host.height - 420) <= 4, 'pilot host height ' + metrics.host.height);
         assert.equal(metrics.privateChain.length, 3);
         assert.ok(metrics.privateChain.every((node) => Math.abs(node.height - 420) <= 4));
         assert.ok(Math.abs(metrics.frame.height - 420) <= 4);
@@ -284,13 +281,13 @@ try {
         assert.ok(controlMetrics, 'missing equivalent pre-repair control at ' + viewportWidth);
         assert.ok(
           Math.abs(metrics.host.width - controlMetrics.host.width) <= 0.5,
-          'all-mode/control host width parity ' + metrics.host.width + '/' + controlMetrics.host.width,
+          'pilot/control host width parity ' + metrics.host.width + '/' + controlMetrics.host.width,
         );
         assert.equal(controlMetrics.privateChain.length, 3);
         for (let index = 0; index < metrics.privateChain.length; index += 1) {
           assert.ok(
             Math.abs(metrics.privateChain[index].width - controlMetrics.privateChain[index].width) <= 0.5,
-            'all-mode/control private width parity at wrapper ' + index + ' ' +
+            'pilot/control private width parity at wrapper ' + index + ' ' +
               metrics.privateChain[index].width +
               '/' +
               controlMetrics.privateChain[index].width,
@@ -304,11 +301,11 @@ try {
           Number.parseFloat(metrics.host.borderBottomWidth);
         assert.ok(
           Math.abs(metrics.host.width - metrics.privateChain[0].width - hostBorderX) <= 0.5,
-          'all-mode host/private width delta only intentional host border',
+          'pilot host/private width delta only intentional host border',
         );
         assert.ok(
           Math.abs(metrics.host.height - metrics.privateChain[0].height - hostBorderY) <= 0.5,
-          'all-mode host/private height delta only intentional host border',
+          'pilot host/private height delta only intentional host border',
         );
         assert.ok(Math.abs(metrics.frame.width - metrics.privateChain[2].width) <= 0.5);
         assert.ok(Math.abs(metrics.frame.height - metrics.privateChain[2].height) <= 0.5);
@@ -367,18 +364,17 @@ const receipt = {
     sha256: sha256(resizeSourceText),
     expectedRev18Sha256: EXPECTED_REV18_SHA256,
   },
-  formerPilotSlugs: PILOTS,
+  pilotSlugs: PILOTS,
   viewports: VIEWPORTS,
   fixture: {
     activeOverlayRules:
       'simulated desktop width:min(100% - 72px,1020px)/max-width:1020px and mobile width:min(100% - 32px,700px)/max-width:700px, plus aspect, absolute positioning, fixed height, clipping and white canvas',
     assertions: [
-      'all-mode route data flag/class is produced by shell JS',
-      'all-mode CSS wins over conflicting overlay rules',
-      'an arbitrary catalog route receives the same host repair',
-      'non-tools control remains on conflicting overlay geometry',
-      'all-mode host/private iframe chain is normal flow/cream and keeps width parity with the equivalent pre-repair control',
-      'all-mode host/private width and height deltas account only for the computed intentional host border',
+      'pilot route data flag/class is produced by shell JS',
+      'pilot CSS wins over conflicting overlay rules',
+      'non-pilot route remains on conflicting overlay geometry',
+      'pilot host/private iframe chain is normal flow/cream and keeps width parity with the equivalent pre-repair control',
+      'pilot host/private width and height deltas account only for the computed intentional host border',
       'iframe computed border is read back without guessing or changing it to border:0',
       'tools branch has no +4px while legacy non-tools +4px remains',
       'no host-repair CSS selector targets section/page-grid geometry',
