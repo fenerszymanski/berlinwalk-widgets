@@ -111,24 +111,47 @@
 
   var hostRepairEnabled = HOST_REPAIR_MODE === 'all' ||
     (HOST_REPAIR_MODE === 'pilot' && HOST_REPAIR_PILOTS.indexOf(state.slug) !== -1);
+  var hostRepairActive = false;
+  var hostRepairAttempt = 0;
   var html = document.documentElement;
   html.classList.add('bw-tools-shell-v2');
   html.setAttribute('data-bw-tools-shell-v2', VERSION);
   html.setAttribute('data-bw-tools-shell-v2-mode', ENABLE_ALL ? 'all' : 'pilot');
   html.setAttribute('data-bw-tools-slug', state.slug);
-  html.setAttribute('data-bw-host-repair', hostRepairEnabled ? HOST_REPAIR_MODE : 'off');
+  html.setAttribute('data-bw-host-repair', hostRepairEnabled ? 'pending' : 'off');
   html.setAttribute('data-bw-host-repair-slug', state.slug);
-  if (hostRepairEnabled) html.classList.add('bw-host-repair-' + HOST_REPAIR_MODE);
 
   window.BWToolsShellV2 = {
     version: VERSION,
     slug: state.slug,
     pilots: PILOT_SLUGS.slice(),
     enabled: true,
-    hostRepairMode: hostRepairEnabled ? HOST_REPAIR_MODE : 'off',
+    hostRepairMode: hostRepairEnabled ? 'pending' : 'off',
+    hostRepairTargetMode: hostRepairEnabled ? HOST_REPAIR_MODE : 'off',
     hostRepairPilots: HOST_REPAIR_PILOTS.slice(),
-    hostRepairEnabled: hostRepairEnabled
+    hostRepairEnabled: hostRepairEnabled,
+    hostRepairActive: false
   };
+
+  function activateHostRepair() {
+    if (!hostRepairEnabled || hostRepairActive) return hostRepairActive;
+    var host = document.getElementById('comp-mozco5et');
+    if (!host || !host.querySelector('iframe')) return false;
+    hostRepairActive = true;
+    html.setAttribute('data-bw-host-repair', HOST_REPAIR_MODE);
+    html.classList.add('bw-host-repair-' + HOST_REPAIR_MODE);
+    window.BWToolsShellV2.hostRepairMode = HOST_REPAIR_MODE;
+    window.BWToolsShellV2.hostRepairActive = true;
+    return true;
+  }
+
+  function armHostRepair() {
+    if (!hostRepairEnabled || activateHostRepair()) return;
+    hostRepairAttempt += 1;
+    if (hostRepairAttempt < 80) window.setTimeout(armHostRepair, 250);
+  }
+
+  armHostRepair();
 
   function byId(id) {
     return document.getElementById(id);
@@ -232,6 +255,10 @@
       summaryTitle: 'A clearer next step',
       steps: ['Choose what matters today', 'Use Berlin rules, not guesswork', 'Leave with a plan you can follow']
     };
+  }
+
+  function catalogCopyReady() {
+    return Boolean(COPY_MAP[state.slug] || state.record);
   }
 
   function catalogRecord(data) {
@@ -450,10 +477,12 @@
     if (related) related.classList.add('bw-tools-shell-v2-related');
     if (secondary) secondary.classList.add('bw-tools-shell-v2-secondary-copy');
 
-    injectHeroCopy(heading, lead);
-    injectHeroMeta(hero, heading, lead);
-    injectEditorialNote(hero, lead);
-    injectSummaryCard(hero, heading);
+    if (catalogCopyReady()) {
+      injectHeroCopy(heading, lead);
+      injectHeroMeta(hero, heading, lead);
+      injectEditorialNote(hero, lead);
+      injectSummaryCard(hero, heading);
+    }
     setHeroOrder(hero, heading, lead, widget, secondary);
     injectLocalNote(introSection, intro, secondary);
     return Boolean(body);
@@ -547,7 +576,7 @@
     window.setTimeout(decorate, 3000);
     if (typeof MutationObserver === 'function' && document.body) {
       var observer = new MutationObserver(function () {
-        if (!state.decorated || !document.querySelector('[data-bw-shell-v2-summary]')) decorate();
+        if (!state.decorated || (catalogCopyReady() && !document.querySelector('[data-bw-shell-v2-summary]'))) decorate();
       });
       observer.observe(document.body, { childList: true, subtree: true });
     }
