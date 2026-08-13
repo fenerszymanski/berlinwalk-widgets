@@ -3,7 +3,7 @@
   const BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
     ? new URL('../', SCRIPT_URL).toString()
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-  const ASSET_VERSION = 'games-page-time-detective-20260811';
+  const ASSET_VERSION = 'games-page-time-detective-cover-20260813';
   const GAMES = [
     {
       id: 'berlin-time-detective',
@@ -14,7 +14,9 @@
       duration: '5 short cases',
       difficulty: 'History clues',
       player: 'Curious explorer',
-      image: 'berlin-time-detective/release/berlin-time-detective/assets/social/berlin-time-detective-social-1200x630.jpg',
+      image: 'games-page/assets/covers/berlin-time-detective-hub-cover-1200x750.jpg',
+      imageWidth: 1200,
+      imageHeight: 750,
       href: 'https://www.berlinwalk.com/games/berlin-time-detective',
       button: 'Open the case',
       accent: 'archive'
@@ -203,7 +205,7 @@
       return `
         <article class="bw-game-card bw-game-card-${game.accent}" style="--delay:${index * 90}ms">
           <a class="bw-game-card-image" href="${gameUrl(game, 'card_image_' + game.id)}" aria-label="${this._escapeAttribute('Play ' + game.title)}">
-            <img src="${asset(game.image)}" alt="${this._escapeAttribute(game.title + ' cover art')}" width="1200" height="630" loading="lazy" decoding="async">
+            <img src="${asset(game.image)}" alt="${this._escapeAttribute(game.title + ' cover art')}" width="${game.imageWidth || 1200}" height="${game.imageHeight || 630}" loading="lazy" decoding="async">
           </a>
           <div class="bw-game-card-body">
             <p class="bw-game-kicker">${this._escapeHtml(game.kicker)}</p>
