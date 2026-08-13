@@ -6087,6 +6087,33 @@
       "iconStatus": "live-wix-media",
       "cmsItemId": "e6815e45-83d2-4896-9a8b-2029ab9e8e28",
       "relatedBlog": "/post/best-museums-in-berlin-first-time-visitors"
+    },
+    {
+      "slug": "berlin-tour-time-window",
+      "title": "Berlin Tour Time Window",
+      "lead": "Set the earliest time you can reach the World Clock and the latest time you must be free near Hackescher Markt. See whether the current 11:30 or 15:30 planning window fits without rushing the rest of your Berlin day.",
+      "category": "Discovery",
+      "hubCategory": "TripPlans",
+      "type": "Planner",
+      "priority": 16,
+      "tags": [
+        "berlin walking tour",
+        "morning walking tour",
+        "afternoon walking tour",
+        "alexanderplatz",
+        "tour planning"
+      ],
+      "aliases": [
+        "berlin walking tour morning or afternoon",
+        "what time walking tour berlin",
+        "berlin free walking tour time",
+        "world clock tour"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-tour-time-window/",
+      "embedHeight": 1950,
+      "image": "https://static.wixstatic.com/media/5a08a3_c4b967dd5fac4ae4ba7432ffd5bfaeba~mv2.png",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "b81198b6-c3e0-43df-99ab-c64ac76b8d33"
     }
   ],
   "hubCategories": [
