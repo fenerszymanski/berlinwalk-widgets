@@ -50,7 +50,6 @@ const PILOTS = [
   'berlin-connectivity-picker',
   'connectivity-picker',
   'berlin-3-day-itinerary',
-  'open-monument-day-shortlist',
 ];
 const VIEWPORTS = [1018, 390, 358];
 

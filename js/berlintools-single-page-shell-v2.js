@@ -46,8 +46,7 @@
     'berlin-ticket-machine-simulator',
     'berlin-connectivity-picker',
     'connectivity-picker',
-    'berlin-3-day-itinerary',
-    'open-monument-day-shortlist'
+    'berlin-3-day-itinerary'
   ];
   var CATALOG_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/data.json';
   var ROUTE_RE = /^\/tools\/([^/]+)\/?$/i;
