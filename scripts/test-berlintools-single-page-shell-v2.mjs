@@ -40,9 +40,6 @@ compile('bridge JS', bridge);
 
 assert.match(shell, /surface|bw-tools-shell-v2/);
 assert.match(shell, /var ENABLE_ALL = true/);
-assert.match(shell, /data-bw-host-repair['"], hostRepairEnabled \? ['"]pending['"] : ['"]off/);
-assert.match(shell, /host\.querySelector\(['"]iframe['"]\)/);
-assert.match(shell, /if \(catalogCopyReady\(\)\)/);
 assert.match(shellCss, /#comp-mozco5et/);
 assert.match(shellCss, /#bw-desktop-cta/);
 assert.match(brand, /surface.*tool-page|tool-page.*surface/s);

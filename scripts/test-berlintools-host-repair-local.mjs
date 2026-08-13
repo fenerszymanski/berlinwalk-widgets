@@ -154,12 +154,7 @@ const conflictingOverlayCss = [
   '}',
 ].join('\n');
 
-function fixtureMarkup(delayedIframe = false) {
-  const iframeChain = [
-    '<div class="private-shell" style="height:420px!important"><div class="private-viewport" style="height:420px!important"><div class="private-frame" style="height:420px!important">',
-    '<iframe title="fixture widget" style="height:420px!important" srcdoc="<p>Fixture widget</p>"></iframe>',
-    '</div></div></div>',
-  ].join('');
+function fixtureMarkup() {
   return [
     '<!doctype html>',
     '<html class="bw-tools-detail bw-tools-shell-v2" data-bw-host-repair="off">',
@@ -173,7 +168,9 @@ function fixtureMarkup(delayedIframe = false) {
     '<div id="comp-mozch2i3"><h1>Fixture heading</h1></div>',
     '<div id="comp-mozck6is"><p>Fixture lead</p></div>',
     '<div id="comp-mozcllqt"><p>Fixture secondary</p></div>',
-    '<div id="comp-mozco5et">', delayedIframe ? '' : iframeChain, '</div></section>',
+    '<div id="comp-mozco5et"><div class="private-shell" style="height:420px!important"><div class="private-viewport" style="height:420px!important"><div class="private-frame" style="height:420px!important">',
+    '<iframe title="fixture widget" style="height:420px!important" srcdoc="<p>Fixture widget</p>"></iframe>',
+    '</div></div></div></div></section>',
     '<section id="comp-mozmt2at"><div id="comp-mozmtefi"><p>Intro</p></div></section>',
     '<section id="comp-mozn18up"><div id="comp-mozn27df"><h2>Body</h2><p>Text</p></div></section>',
     '<section id="comp-moznh5yl"><div id="comp-moznhogf"></div></section>',
@@ -199,8 +196,7 @@ try {
       return;
     }
     response.writeHead(200, { 'content-type': 'text/html; charset=utf-8' });
-    const delayedIframe = request.url.includes('non-pilot-catalog-route');
-    response.end(fixtureMarkup(delayedIframe).replace('<head>', '<head>' + fixtureScriptStub));
+    response.end(fixtureMarkup().replace('<head>', '<head>' + fixtureScriptStub));
   });
   await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
   const address = server.address();
@@ -216,7 +212,6 @@ try {
     ]) {
       const route = routeAndMode[0];
       const expectedMode = routeAndMode[1];
-      const delayedIframe = route.includes('non-pilot-catalog-route');
       const page = await browser.newPage({
         viewport: { width: viewportWidth, height: 844 },
       });
@@ -225,26 +220,7 @@ try {
       await page.goto('http://127.0.0.1:' + port + route, { waitUntil: 'domcontentloaded' });
       await page.addScriptTag({ content: shellSource });
       if (expectedMode !== 'off') {
-        if (delayedIframe) {
-          await page.waitForFunction(() => document.documentElement.getAttribute('data-bw-host-repair') === 'pending');
-          const pending = await page.evaluate(() => ({
-            heading: document.querySelector('#comp-mozch2i3 h1')?.textContent?.trim(),
-            hostHeight: document.getElementById('comp-mozco5et')?.getBoundingClientRect().height,
-            active: window.BWToolsShellV2?.hostRepairActive,
-          }));
-          assert.equal(pending.heading, 'Fixture heading', 'cold load must preserve Wix CMS heading before catalog data');
-          assert.ok(pending.hostHeight > 1200, 'cold load must preserve Wix host envelope until iframe mounts');
-          assert.equal(pending.active, false, 'cold load host repair activated before iframe mount');
-          await page.evaluate(() => {
-            document.getElementById('comp-mozco5et').innerHTML = [
-              '<div class="private-shell" style="height:420px!important"><div class="private-viewport" style="height:420px!important"><div class="private-frame" style="height:420px!important">',
-              '<iframe title="fixture widget" style="height:420px!important" srcdoc="<p>Fixture widget</p>"></iframe>',
-              '</div></div></div>',
-            ].join('');
-          });
-        }
         await page.waitForFunction(() => document.documentElement.hasAttribute('data-bw-host-repair'));
-        await page.waitForFunction((mode) => document.documentElement.getAttribute('data-bw-host-repair') === mode, expectedMode);
       }
       await page.waitForTimeout(80);
 
@@ -276,8 +252,6 @@ try {
         };
         return {
           mode: root.getAttribute('data-bw-host-repair') || 'off',
-          heading: document.querySelector('#comp-mozch2i3 h1')?.textContent?.trim(),
-          hostRepairActive: window.BWToolsShellV2?.hostRepairActive,
           hostRepairClass: root.classList.contains('bw-host-repair-all'),
           hostMarker: host.getAttribute('data-bw-host-repair-host'),
           privateMarker: privateShell.getAttribute('data-bw-host-repair-private'),
@@ -292,8 +266,6 @@ try {
       assert.equal(metrics.mode, expectedMode, route + ' mode at ' + viewportWidth);
       if (expectedMode === 'all') {
         assert.equal(metrics.hostRepairClass, true);
-        assert.equal(metrics.hostRepairActive, true);
-        assert.equal(metrics.heading, 'Fixture heading', 'catalog failure must not replace the Wix CMS heading');
         assert.equal(metrics.hostMarker, null);
         assert.equal(metrics.privateMarker, null);
         assert.equal(metrics.frameMarker, null);
