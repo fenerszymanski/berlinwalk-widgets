@@ -345,6 +345,7 @@
   var elScrub = document.getElementById('scrub');
   var elZones = document.getElementById('zones');
   var elLog = document.getElementById('log');
+  var elBox = document.querySelector('.bx');
   var elVLine = document.getElementById('vLine');
   var elVSub = document.getElementById('vSub');
   var elFill = document.getElementById('railFill');
@@ -563,6 +564,259 @@
     }
   });
 
+  var measurementRoot = null;
+  var measurementRefs = null;
+  var reservedBoxHeight = 0;
+  var resizeMeasureTimer = null;
+  var phaseBQa = false;
+  try {
+    phaseBQa = new URLSearchParams(window.location.search).get('qa') === 'phase-b-local';
+  } catch (error) {}
+
+  if (phaseBQa) window.__bwMarathonReserveMetrics = [];
+
+  function createMeasurementRoot(){
+    // This probe is appended before brand.js starts observing the body. It is
+    // off-flow and hidden, so measuring it cannot flash, grow the body, or
+    // produce an embed resize message.
+    measurementRoot = elBox.cloneNode(true);
+    measurementRoot.setAttribute('aria-hidden', 'true');
+    measurementRoot.setAttribute('data-bw-resize-ignore', 'true');
+    measurementRoot.style.position = 'absolute';
+    measurementRoot.style.left = '-100000px';
+    measurementRoot.style.top = '0';
+    measurementRoot.style.width = '0px';
+    measurementRoot.style.height = 'auto';
+    measurementRoot.style.minHeight = '0px';
+    measurementRoot.style.maxHeight = 'none';
+    measurementRoot.style.overflow = 'visible';
+    measurementRoot.style.visibility = 'hidden';
+    measurementRoot.style.pointerEvents = 'none';
+    measurementRoot.style.userSelect = 'none';
+    measurementRefs = {
+      clock: measurementRoot.querySelector('.clock'),
+      clockTag: measurementRoot.querySelector('.clockTag'),
+      scrub: measurementRoot.querySelector('.scrub input[type=range]'),
+      zones: Array.prototype.slice.call(measurementRoot.querySelectorAll('.zone')),
+      courseNote: measurementRoot.querySelector('#courseNote'),
+      railFill: measurementRoot.querySelector('#railFill'),
+      runners: {
+        lead: measurementRoot.querySelector('#rLead'),
+        mid: measurementRoot.querySelector('#rMid'),
+        back: measurementRoot.querySelector('#rBack')
+      },
+      verdictLine: measurementRoot.querySelector('#vLine'),
+      verdictSub: measurementRoot.querySelector('#vSub'),
+      playText: measurementRoot.querySelector('#playTxt'),
+      playButton: measurementRoot.querySelector('#play'),
+      deckTop: measurementRoot.querySelector('.deckTop'),
+      logItems: Array.prototype.slice.call(measurementRoot.querySelectorAll('.log > li'))
+    };
+    Array.prototype.forEach.call(measurementRoot.querySelectorAll('[id]'), function(node){
+      node.removeAttribute('id');
+    });
+    document.body.appendChild(measurementRoot);
+  }
+
+  function addMeasurementTransition(candidates, value, includePostTick, includePreTick){
+    if (!isFinite(value)) return;
+    var at = Math.max(START, Math.min(END, value));
+    var before = Math.max(START, Math.min(END, value - 0.001));
+    var post = Math.max(START, Math.min(END, value + 0.001));
+    [includePreTick ? before : null, at, includePostTick ? post : null].forEach(function(sampleNow){
+      if (sampleNow === null) return;
+      candidates[sampleNow.toFixed(3)] = Number(sampleNow.toFixed(3));
+    });
+  }
+
+  function measurementCandidates(){
+    var candidates = {};
+    addMeasurementTransition(candidates, START, false);
+    addMeasurementTransition(candidates, END, false);
+
+    // Every LOG transition covers the preceding and following five-row window.
+    LOG.forEach(function(entry){ addMeasurementTransition(candidates, entry.t, false); });
+
+    // Zone copy changes at the boundary and during its forty-five-minute lead-in.
+    ZONES.forEach(function(zone){
+      addMeasurementTransition(candidates, zone.from - 45, false);
+      addMeasurementTransition(candidates, zone.from, false);
+      addMeasurementTransition(candidates, zone.to, false);
+    });
+    [RACE_START, OFFICIAL_FINISH_CLOSE, 360, 465, 500, 525, 627, 647, 813, 840, 990, 1050, 1140].forEach(function(value){
+      addMeasurementTransition(candidates, value, false);
+    });
+
+    // Runner labels/visibility change at each wave and finish transition.
+    Object.keys(WAVE).forEach(function(key){
+      var runnerStart = RACE_START + WAVE[key];
+      addMeasurementTransition(candidates, runnerStart, true, false);
+      addMeasurementTransition(candidates, runnerStart + DIST * PACE[key], false, true);
+    });
+
+    return Object.keys(candidates).map(Number).sort(function(a, b){ return a - b; });
+  }
+
+  function distinctPlayLabels(readRect){
+    var labels = ['Play the day', 'Pause', 'Keep playing', 'Play again'];
+    var signatures = {};
+    var distinct = [];
+    labels.forEach(function(playText){
+      applyMeasurementState(START, playText);
+      var buttonRect = readRect(measurementRefs.playButton);
+      var deckRect = readRect(measurementRefs.deckTop);
+      // Width-only differences do not alter layout; keep only labels that can
+      // produce a different wrapped button/deck height at this viewport.
+      var signature = buttonRect.height.toFixed(2) + '|' + deckRect.height.toFixed(2);
+      if (signatures[signature]) return;
+      signatures[signature] = true;
+      distinct.push(playText);
+    });
+    return distinct;
+  }
+
+  function applyMeasurementState(sampleNow, playText){
+    var previousNow = now;
+    now = sampleNow;
+    try {
+      measurementRefs.clock.textContent = hhmm(now);
+      measurementRefs.clockTag.textContent = clockTag();
+      measurementRefs.scrub.value = String(now);
+
+      measurementRefs.zones.forEach(function(zone, i){
+        var st = zoneState(ZONES[i]);
+        zone.setAttribute('data-state', st);
+        zone.querySelector('.zState').textContent = stateLabel(st);
+        zone.querySelector('.zNote').innerHTML = zoneWords(ZONES[i], st);
+      });
+
+      var lead = runnerKm('lead');
+      var mid = runnerKm('mid');
+      var back = runnerKm('back');
+      var runnerValues = { lead: lead, mid: mid, back: back };
+      Object.keys(runnerValues).forEach(function(key){
+        var value = runnerValues[key];
+        var runner = measurementRefs.runners[key];
+        if (value === null){ runner.hidden = true; return; }
+        runner.hidden = false;
+        runner.style.left = (value / DIST * 100) + '%';
+      });
+      measurementRefs.railFill.style.width = (lead === null ? 0 : (lead / DIST * 100)) + '%';
+
+      if (lead === null){
+        measurementRefs.courseNote.textContent = now < RACE_START ? 'Nobody has started.' : 'Warming up on the start straight.';
+      } else if (back !== null && back >= DIST){
+        measurementRefs.courseNote.textContent = 'Everyone in this readout has finished.';
+      } else {
+        measurementRefs.courseNote.textContent = 'Leaders at ' + (lead >= DIST ? 'the finish' : lead.toFixed(1) + ' km') +
+          (mid !== null ? ', the 4:00 example at ' + (mid >= DIST ? 'the finish' : mid.toFixed(1) + ' km') : '') +
+          (back !== null ? ', the 5:30 example at ' + (back >= DIST ? 'the finish' : back.toFixed(1) + ' km') : '') + '.';
+      }
+
+      var v = verdict();
+      measurementRefs.verdictLine.innerHTML = v[0];
+      measurementRefs.verdictSub.innerHTML = v[1];
+      measurementRefs.playText.textContent = playText;
+
+      var currentIdx = -1;
+      LOG.forEach(function(entry, i){ if (entry.t <= now) currentIdx = i; });
+      measurementRefs.logItems.forEach(function(li, i){
+        li.setAttribute('data-passed', LOG[i].t <= now ? '1' : '0');
+        li.setAttribute('data-current', i === currentIdx ? '1' : '0');
+        li.setAttribute('data-window', i >= Math.max(0,currentIdx-2) && i <= Math.min(LOG.length-1,currentIdx+2) ? '1' : '0');
+      });
+    } finally {
+      now = previousNow;
+    }
+  }
+
+  function reserveBoxHeight(preserveFloor, reason){
+    if (!measurementRoot) return;
+    var startedAt = window.performance && typeof window.performance.now === 'function' ? window.performance.now() : Date.now();
+    var layoutReads = 0;
+    function readRect(node){
+      layoutReads += 1;
+      return node.getBoundingClientRect();
+    }
+
+    var boxWidth = readRect(elBox).width;
+    if (!boxWidth) return;
+    measurementRoot.style.width = boxWidth + 'px';
+
+    var candidates = measurementCandidates();
+    var playTexts = distinctPlayLabels(readRect);
+    var initialPlayText = playTexts[0] || 'Play the day';
+    applyMeasurementState(START, initialPlayText);
+    var initialNaturalHeight = readRect(measurementRoot).height;
+    var maxHeight = initialNaturalHeight;
+    var maxSampleNow = START;
+    var maxPlayText = initialPlayText;
+    var combinationCount = 0;
+    candidates.forEach(function(sampleNow){
+      playTexts.forEach(function(playText){
+        applyMeasurementState(sampleNow, playText);
+        var naturalHeight = readRect(measurementRoot).height;
+        combinationCount += 1;
+        if (naturalHeight > maxHeight){
+          maxHeight = naturalHeight;
+          maxSampleNow = sampleNow;
+          maxPlayText = playText;
+        }
+      });
+    });
+
+    var nextHeight = Math.ceil(maxHeight);
+    if (preserveFloor) nextHeight = Math.max(reservedBoxHeight, nextHeight);
+    if (nextHeight && nextHeight !== reservedBoxHeight){
+      reservedBoxHeight = nextHeight;
+      elBox.style.minHeight = nextHeight + 'px';
+    }
+
+    var elapsedMs = (window.performance && typeof window.performance.now === 'function' ? window.performance.now() : Date.now()) - startedAt;
+    var longTaskEntries = 0;
+    try { longTaskEntries = window.performance.getEntriesByType('longtask').length; } catch (error) {}
+    if (phaseBQa){
+      window.__bwMarathonReserveMetrics.push({
+        reason: reason || 'unspecified',
+        width: boxWidth,
+        elapsedMs: Number(elapsedMs.toFixed(3)),
+        layoutReads: layoutReads,
+        candidateCount: candidates.length,
+        playLabelCount: playTexts.length,
+        combinationCount: combinationCount,
+        initialNaturalHeight: Number(initialNaturalHeight.toFixed(3)),
+        maxNaturalHeight: Number(maxHeight.toFixed(3)),
+        maxSampleNow: maxSampleNow,
+        maxPlayText: maxPlayText,
+        reservedHeight: reservedBoxHeight,
+        initialBlankDelta: Number((reservedBoxHeight - initialNaturalHeight).toFixed(3)),
+        reserveDelta: Number((reservedBoxHeight - maxHeight).toFixed(3)),
+        longTaskEntries: longTaskEntries
+      });
+    }
+  }
+
+  function reserveAfterFontsSettle(){
+    if (!document.fonts || !document.fonts.ready) return;
+    document.fonts.ready.then(function(){
+      window.requestAnimationFrame(function(){
+        window.requestAnimationFrame(function(){
+          reserveBoxHeight(true, 'font-settled');
+        });
+      });
+    }).catch(function(){});
+  }
+
+  window.addEventListener('resize', function(){
+    clearTimeout(resizeMeasureTimer);
+    resizeMeasureTimer = setTimeout(function(){
+      reserveBoxHeight(false, 'width');
+    }, 120);
+  });
+
+  createMeasurementRoot();
+  reserveBoxHeight(false, 'initial');
+  reserveAfterFontsSettle();
   render();
 })();
 </script>

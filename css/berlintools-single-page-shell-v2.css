@@ -667,3 +667,51 @@ html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozp3f25 {
     grid-template-rows: max-content minmax(168px, max-content) minmax(168px, max-content) !important;
   }
 }
+
+/*
+ * Host repair pilot.
+ *
+ * The route flag is set by the shell JS, not by the Wix host runtime. Keep
+ * this contract limited to the primary HTML component and its private iframe
+ * chain: no section, responsive-container or page-grid sizing is written here.
+ * Inline height/min-height from the existing rev18 runtime remains authoritative
+ * on the iframe/private shells; these rules only restore normal flow and remove
+ * Wix's aspect/clipping envelope. Host width is intentionally not declared here:
+ * the existing template/Wix desktop and mobile width rules remain authoritative.
+ */
+html.bw-tools-shell-v2[data-bw-host-repair="pilot"].bw-host-repair-pilot body #comp-mozco5et,
+html.bw-tools-shell-v2[data-bw-host-repair="all"].bw-host-repair-all body #comp-mozco5et {
+  aspect-ratio: auto !important;
+  background: #FAFAF5 !important;
+  box-sizing: border-box !important;
+  display: block !important;
+  height: auto !important;
+  inset: auto !important;
+  max-height: none !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  padding: 0 !important;
+  position: relative !important;
+}
+
+html.bw-tools-shell-v2[data-bw-host-repair="pilot"].bw-host-repair-pilot body #comp-mozco5et iframe,
+html.bw-tools-shell-v2[data-bw-host-repair="all"].bw-host-repair-all body #comp-mozco5et iframe,
+html.bw-tools-shell-v2[data-bw-host-repair="pilot"].bw-host-repair-pilot body #comp-mozco5et [data-bw-host-repair-private="1"],
+html.bw-tools-shell-v2[data-bw-host-repair="all"].bw-host-repair-all body #comp-mozco5et [data-bw-host-repair-private="1"] {
+  aspect-ratio: auto !important;
+  box-sizing: border-box !important;
+  display: block !important;
+  inset: auto !important;
+  max-height: none !important;
+  max-width: 100% !important;
+  min-height: 0 !important;
+  min-width: 0 !important;
+  overflow: visible !important;
+  position: relative !important;
+  width: 100% !important;
+}
+
+html.bw-tools-shell-v2[data-bw-host-repair="pilot"].bw-host-repair-pilot body #comp-mozco5et [data-bw-host-repair-private="1"],
+html.bw-tools-shell-v2[data-bw-host-repair="all"].bw-host-repair-all body #comp-mozco5et [data-bw-host-repair-private="1"] {
+  height: auto !important;
+}

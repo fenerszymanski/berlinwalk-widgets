@@ -37,6 +37,48 @@ jobs:
           mkdir -p _site/blog-drafts/images/berlin-ab-abc-ticket-zones/assets
           cp -R blog-drafts/images/berlin-ab-abc-ticket-zones/assets/optimized \
             _site/blog-drafts/images/berlin-ab-abc-ticket-zones/assets/
+
+          expected=(
+            'blog-drafts/images/holocaust-memorial-berlin/assets/optimized/01-holocaust-memorial-berlin-cover.jpg'
+            'blog-drafts/images/holocaust-memorial-berlin/assets/optimized/04-holocaust-memorial-berlin-human-scale.jpg'
+            'blog-drafts/images/holocaust-memorial-berlin/assets/optimized/05-brandenburg-gate-nearby.jpg'
+            'blog-drafts/images/tempelhof-airport-berlin/assets/optimized/tempelhof-airport-berlin-01-sunrise-runway-cover.jpg'
+            'blog-drafts/images/tempelhof-airport-berlin/assets/optimized/tempelhof-airport-berlin-03-terminal-exterior.jpg'
+            'blog-drafts/images/tempelhof-airport-berlin/assets/optimized/tempelhof-airport-berlin-02-terminal-hall.jpg'
+            'blog-drafts/images/tempelhof-airport-berlin/assets/optimized/tempelhof-airport-berlin-05-airlift-memorial.jpg'
+            'blog-drafts/images/tempelhof-airport-berlin/assets/optimized/tempelhof-airport-berlin-04-open-runway.jpg'
+            'blog-drafts/images/tempelhof-airport-berlin/assets/optimized/tempelhof-airport-berlin-06-spring-runway.jpg'
+          )
+          before_manifest="$(mktemp)"
+          after_manifest="$(mktemp)"
+          added_manifest="$(mktemp)"
+          removed_manifest="$(mktemp)"
+          expected_manifest="$(mktemp)"
+          baseline_manifest="$(mktemp)"
+          trap 'rm -f "$before_manifest" "$after_manifest" "$added_manifest" "$removed_manifest" "$expected_manifest" "$baseline_manifest"' EXIT
+
+          find _site/blog-drafts -type f -print 2>/dev/null \
+            | sed 's#^_site/##' \
+            | sort > "$before_manifest"
+          find blog-drafts/images/berlin-ab-abc-ticket-zones/assets/optimized \
+            -type f -print | sort > "$baseline_manifest"
+          diff -u "$baseline_manifest" "$before_manifest"
+
+          for asset_path in "${expected[@]}"; do
+            test -s "$asset_path"
+            mkdir -p "_site/$(dirname "$asset_path")"
+            cp "$asset_path" "_site/$asset_path"
+          done
+
+          find _site/blog-drafts -type f -print \
+            | sed 's#^_site/##' \
+            | sort > "$after_manifest"
+          comm -13 "$before_manifest" "$after_manifest" > "$added_manifest"
+          comm -23 "$before_manifest" "$after_manifest" > "$removed_manifest"
+          printf '%s\n' "${expected[@]}" | sort > "$expected_manifest"
+          diff -u "$expected_manifest" "$added_manifest"
+          test ! -s "$removed_manifest"
+          echo "Pages artifact manifest: exactly nine expected blog-drafts images added; no other blog-drafts files entered _site."
           touch _site/.nojekyll
           du -sh _site
 

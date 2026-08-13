@@ -8,12 +8,20 @@
 (function () {
   'use strict';
 
-  var VERSION = 'berlintools-shell-v2-20260724a';
+  var VERSION = 'berlintools-shell-v2-20260813-host-repair-pilot';
   var ENABLE_ALL = true;
   var PILOT_SLUGS = [
     'berlin-first-day-planner',
     'transport-ticket-calculator',
     'berlin-luggage-storage'
+  ];
+  var HOST_REPAIR_MODE = 'pilot';
+  var HOST_REPAIR_PILOTS = [
+    'reichstag-slot-window',
+    'berlin-booking-deadline-planner',
+    'vegan-berlin-map',
+    'berlin-weather-by-month',
+    'berlin-marathon-day'
   ];
   var CATALOG_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/data.json';
   var ROUTE_RE = /^\/tools\/([^/]+)\/?$/i;
@@ -101,17 +109,25 @@
   } catch (e) {}
   if (!ENABLE_ALL && PILOT_SLUGS.indexOf(state.slug) === -1 && !preview) return;
 
+  var hostRepairEnabled = HOST_REPAIR_MODE === 'all' ||
+    (HOST_REPAIR_MODE === 'pilot' && HOST_REPAIR_PILOTS.indexOf(state.slug) !== -1);
   var html = document.documentElement;
   html.classList.add('bw-tools-shell-v2');
   html.setAttribute('data-bw-tools-shell-v2', VERSION);
   html.setAttribute('data-bw-tools-shell-v2-mode', ENABLE_ALL ? 'all' : 'pilot');
   html.setAttribute('data-bw-tools-slug', state.slug);
+  html.setAttribute('data-bw-host-repair', hostRepairEnabled ? HOST_REPAIR_MODE : 'off');
+  html.setAttribute('data-bw-host-repair-slug', state.slug);
+  if (hostRepairEnabled) html.classList.add('bw-host-repair-' + HOST_REPAIR_MODE);
 
   window.BWToolsShellV2 = {
     version: VERSION,
     slug: state.slug,
     pilots: PILOT_SLUGS.slice(),
-    enabled: true
+    enabled: true,
+    hostRepairMode: hostRepairEnabled ? HOST_REPAIR_MODE : 'off',
+    hostRepairPilots: HOST_REPAIR_PILOTS.slice(),
+    hostRepairEnabled: hostRepairEnabled
   };
 
   function byId(id) {
@@ -193,6 +209,23 @@
     ['height', 'min-height', 'margin-top', 'padding-top'].forEach(function (property) {
       node.style.removeProperty(property);
     });
+  }
+
+  function markHostRepairChain(widget) {
+    if (!hostRepairEnabled || !widget) return;
+    widget.setAttribute('data-bw-host-repair-host', '1');
+    var frames = widget.querySelectorAll('iframe');
+    for (var i = 0; i < frames.length; i += 1) {
+      var frame = frames[i];
+      frame.setAttribute('data-bw-host-repair-frame', '1');
+      var node = frame.parentElement;
+      var depth = 0;
+      while (node && node !== widget && depth < 8) {
+        node.setAttribute('data-bw-host-repair-private', '1');
+        node = node.parentElement;
+        depth += 1;
+      }
+    }
   }
 
   function catalogImage(record) {
@@ -412,6 +445,7 @@
     var related = byId('comp-mozp1zlv');
 
     if (!hero || !heading || !widget) return false;
+    markHostRepairChain(widget);
     [hero, heading, lead, secondary, introSection, bodySection, secondarySection, related, nativeCta].forEach(clearSectionSizing);
     [hero, introSection, bodySection, related].forEach(function (section) {
       if (!section) return;
@@ -531,6 +565,7 @@
     window.setTimeout(decorate, 3000);
     if (typeof MutationObserver === 'function' && document.body) {
       var observer = new MutationObserver(function () {
+        if (hostRepairEnabled) markHostRepairChain(byId('comp-mozco5et'));
         if (!state.decorated || !document.querySelector('[data-bw-shell-v2-summary]')) decorate();
       });
       observer.observe(document.body, { childList: true, subtree: true });

@@ -341,7 +341,8 @@
         }
 
         function render() {
-          var day = form.querySelector('input[name="day"]:checked').value;
+          var dayInput = form.querySelector('input[name="day"]:checked') || form.querySelector('input[name="day"]');
+          var day = dayInput ? dayInput.value : 'Saturday';
           var picks = getPicks();
           planDate.textContent = day + ' · ' + (picks.length ? picks.length + (picks.length === 1 ? ' saved listing' : ' saved listings') : 'add one official listing to begin.');
           agenda.replaceChildren();
