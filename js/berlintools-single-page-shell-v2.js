@@ -23,7 +23,31 @@
     'berlin-weather-by-month',
     'berlin-marathon-day',
     'alex-mistakes',
-    'baltic-beach-day-planner'
+    'baltic-beach-day-planner',
+    'jewish-museum-visit-sequence',
+    'east-side-gallery-murals',
+    'watch-world-cup-2026-berlin',
+    'transport-ticket-calculator',
+    'schoneberg-plaque-check',
+    'berlin-transport-backup-planner',
+    'berlin-club-picker',
+    'berlin-sign-decoder',
+    'dresden-day-clock',
+    'berlin-crosswalk-standoff',
+    'berlin-daylight-hours',
+    'museum-island-one-pick',
+    'are-you-ready-for-berlin-quiz',
+    'berlin-pools',
+    'berlin-lakes',
+    'berlin-landmarks-map',
+    'berlin-first-day-planner',
+    'berlin-city-tax-calculator',
+    'berlin-viewpoint-finder',
+    'berlin-ticket-machine-simulator',
+    'berlin-connectivity-picker',
+    'connectivity-picker',
+    'berlin-3-day-itinerary',
+    'open-monument-day-shortlist'
   ];
   var CATALOG_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/data.json';
   var ROUTE_RE = /^\/tools\/([^/]+)\/?$/i;
