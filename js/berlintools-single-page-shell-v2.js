@@ -8,14 +8,14 @@
 (function () {
   'use strict';
 
-  var VERSION = 'berlintools-shell-v2-20260813-host-repair-pilot';
+  var VERSION = 'berlintools-shell-v2-20260813-host-repair-all';
   var ENABLE_ALL = true;
   var PILOT_SLUGS = [
     'berlin-first-day-planner',
     'transport-ticket-calculator',
     'berlin-luggage-storage'
   ];
-  var HOST_REPAIR_MODE = 'pilot';
+  var HOST_REPAIR_MODE = 'all';
   var HOST_REPAIR_PILOTS = [
     'reichstag-slot-window',
     'berlin-booking-deadline-planner',

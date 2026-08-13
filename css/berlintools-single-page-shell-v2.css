@@ -669,7 +669,7 @@ html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozp3f25 {
 }
 
 /*
- * Host repair pilot.
+ * Host repair.
  *
  * The route flag is set by the shell JS, not by the Wix host runtime. Keep
  * this contract limited to the primary HTML component and its private iframe
