@@ -211,23 +211,6 @@
     });
   }
 
-  function markHostRepairChain(widget) {
-    if (!hostRepairEnabled || !widget) return;
-    widget.setAttribute('data-bw-host-repair-host', '1');
-    var frames = widget.querySelectorAll('iframe');
-    for (var i = 0; i < frames.length; i += 1) {
-      var frame = frames[i];
-      frame.setAttribute('data-bw-host-repair-frame', '1');
-      var node = frame.parentElement;
-      var depth = 0;
-      while (node && node !== widget && depth < 8) {
-        node.setAttribute('data-bw-host-repair-private', '1');
-        node = node.parentElement;
-        depth += 1;
-      }
-    }
-  }
-
   function catalogImage(record) {
     var image = record && record.image;
     if (!image) return '';
@@ -445,7 +428,6 @@
     var related = byId('comp-mozp1zlv');
 
     if (!hero || !heading || !widget) return false;
-    markHostRepairChain(widget);
     [hero, heading, lead, secondary, introSection, bodySection, secondarySection, related, nativeCta].forEach(clearSectionSizing);
     [hero, introSection, bodySection, related].forEach(function (section) {
       if (!section) return;
@@ -565,7 +547,6 @@
     window.setTimeout(decorate, 3000);
     if (typeof MutationObserver === 'function' && document.body) {
       var observer = new MutationObserver(function () {
-        if (hostRepairEnabled) markHostRepairChain(byId('comp-mozco5et'));
         if (!state.decorated || !document.querySelector('[data-bw-shell-v2-summary]')) decorate();
       });
       observer.observe(document.body, { childList: true, subtree: true });

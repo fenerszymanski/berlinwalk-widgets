@@ -70,8 +70,9 @@ for (const slug of PILOTS) {
 }
 assert.match(shellSource, /data-bw-host-repair/);
 assert.match(shellSource, /bw-host-repair-/);
-const hostMarkerFunction = between(shellSource, 'function markHostRepairChain', 'function catalogImage');
-assert.doesNotMatch(hostMarkerFunction, /\.style\.setProperty\(\s*['"](?:height|min-height)['"]/);
+assert.doesNotMatch(shellSource, /function markHostRepairChain/);
+assert.doesNotMatch(shellSource, /data-bw-host-repair-(?:host|frame|private)/);
+assert.doesNotMatch(shellSource, /setAttribute\(\s*['"]data-bw-host-repair-(?:host|frame|private)/);
 
 const toolsRuntime = between(
   resizeSourceText,
@@ -99,6 +100,9 @@ for (const marker of [
   'position: relative !important',
   'inset: auto !important',
   'width: 100% !important',
+  '@layer bw-host-repair',
+  '> div:has(iframe)',
+  '> div:has(iframe) > div:has(iframe) > div:has(iframe)',
 ]) {
   assert.ok(repairCss.includes(marker), 'missing CSS marker: ' + marker);
 }
@@ -107,12 +111,14 @@ assert.doesNotMatch(
   /max-width:\s*1120px\s*!important/,
   'host repair must not broaden the existing host width contract',
 );
+assert.match(repairCss, /body #comp-mozco5et(?:,|\s)/);
+assert.doesNotMatch(repairCss, /data-bw-host-repair-private/);
 assert.doesNotMatch(repairCss, /#comp-moz(?:c935g3|mt2at|n18up|nh5yl|p1zlv)|PAGES_CONTAINER|SITE_PAGES/);
 assert.doesNotMatch(repairCss, /#comp-mozco5et[^{}]*\{[^}]*height:\s*\d+px/);
 
 const baseCss = shellCss.slice(0, repairCssStart);
 const conflictingOverlayCss = [
-  'html.bw-tools-detail body #comp-mozco5et {',
+  'html.bw-tools-detail body #comp-mozc935g3 #comp-mozco5et {',
   '  aspect-ratio: 1 / 1.18796 !important;',
   '  background: #FFFFFF !important;',
   '  height: 1211.71px !important;',
@@ -125,14 +131,16 @@ const conflictingOverlayCss = [
   '  max-width: 1020px !important;',
   '  width: min(100% - 72px, 1020px) !important;',
   '}',
-  'html.bw-tools-detail body #comp-mozco5et .private-shell {',
+  'html.bw-tools-detail body #comp-mozc935g3 #comp-mozco5et > .private-shell,',
+  'html.bw-tools-detail body #comp-mozc935g3 #comp-mozco5et > .private-shell > .private-viewport,',
+  'html.bw-tools-detail body #comp-mozc935g3 #comp-mozco5et > .private-shell > .private-viewport > .private-frame {',
   '  height: 420px !important;',
   '  inset: 0 !important;',
   '  overflow: hidden !important;',
   '  position: absolute !important;',
   '  width: 100% !important;',
   '}',
-  'html body #comp-mozco5et iframe {',
+  'html.bw-tools-detail body #comp-mozc935g3 #comp-mozco5et iframe {',
   '  height: 420px !important;',
   '  inset: 0 !important;',
   '  position: absolute !important;',
@@ -160,9 +168,9 @@ function fixtureMarkup() {
     '<div id="comp-mozch2i3"><h1>Fixture heading</h1></div>',
     '<div id="comp-mozck6is"><p>Fixture lead</p></div>',
     '<div id="comp-mozcllqt"><p>Fixture secondary</p></div>',
-    '<div id="comp-mozco5et"><div class="private-shell" style="height:420px!important">',
+    '<div id="comp-mozco5et"><div class="private-shell" style="height:420px!important"><div class="private-viewport" style="height:420px!important"><div class="private-frame" style="height:420px!important">',
     '<iframe title="fixture widget" style="height:420px!important" srcdoc="<p>Fixture widget</p>"></iframe>',
-    '</div></div></div></section>',
+    '</div></div></div></div></section>',
     '<section id="comp-mozmt2at"><div id="comp-mozmtefi"><p>Intro</p></div></section>',
     '<section id="comp-mozn18up"><div id="comp-mozn27df"><h2>Body</h2><p>Text</p></div></section>',
     '<section id="comp-moznh5yl"><div id="comp-moznhogf"></div></section>',
@@ -216,8 +224,9 @@ try {
       const metrics = await page.evaluate(() => {
         const root = document.documentElement;
         const host = document.getElementById('comp-mozco5et');
-        const privateShell = host.querySelector('.private-shell');
-        const frame = host.querySelector('iframe');
+        const privateChain = Array.from(host.querySelectorAll(':scope > .private-shell, :scope > .private-shell > .private-viewport, :scope > .private-shell > .private-viewport > .private-frame'));
+        const privateShell = privateChain[0];
+        const frame = host.querySelector(':scope > .private-shell > .private-viewport > .private-frame iframe');
         const read = (node) => {
           const style = getComputedStyle(node);
           const rect = node.getBoundingClientRect();
@@ -246,6 +255,7 @@ try {
           frameMarker: frame.getAttribute('data-bw-host-repair-frame'),
           host: read(host),
           privateShell: read(privateShell),
+          privateChain: privateChain.map(read),
           frame: read(frame),
         };
       });
@@ -253,18 +263,19 @@ try {
       assert.equal(metrics.mode, expectedMode, route + ' mode at ' + viewportWidth);
       if (expectedMode === 'pilot') {
         assert.equal(metrics.hostRepairClass, true);
-        assert.equal(metrics.hostMarker, '1');
-        assert.equal(metrics.privateMarker, '1');
-        assert.equal(metrics.frameMarker, '1');
+        assert.equal(metrics.hostMarker, null);
+        assert.equal(metrics.privateMarker, null);
+        assert.equal(metrics.frameMarker, null);
         assert.equal(metrics.host.position, 'relative');
         assert.ok(metrics.host.inset === 'auto' || metrics.host.inset === '0px');
         assert.equal(metrics.host.overflow, 'visible');
         assert.match(metrics.host.aspectRatio, /^auto/);
         assert.equal(metrics.host.backgroundColor, 'rgb(250, 250, 245)');
         assert.ok(Math.abs(metrics.host.height - 420) <= 4, 'pilot host height ' + metrics.host.height);
-        assert.ok(Math.abs(metrics.privateShell.height - 420) <= 4);
+        assert.equal(metrics.privateChain.length, 3);
+        assert.ok(metrics.privateChain.every((node) => Math.abs(node.height - 420) <= 4));
         assert.ok(Math.abs(metrics.frame.height - 420) <= 4);
-        assert.equal(metrics.privateShell.position, 'relative');
+        assert.ok(metrics.privateChain.every((node) => node.position === 'relative' && node.overflow === 'visible'));
         assert.equal(metrics.frame.position, 'relative');
         const controlMetrics = controlMetricsByViewport.get(viewportWidth);
         assert.ok(controlMetrics, 'missing equivalent pre-repair control at ' + viewportWidth);
@@ -272,13 +283,16 @@ try {
           Math.abs(metrics.host.width - controlMetrics.host.width) <= 0.5,
           'pilot/control host width parity ' + metrics.host.width + '/' + controlMetrics.host.width,
         );
-        assert.ok(
-          Math.abs(metrics.privateShell.width - controlMetrics.privateShell.width) <= 0.5,
-          'pilot/control private width parity ' +
-            metrics.privateShell.width +
-            '/' +
-            controlMetrics.privateShell.width,
-        );
+        assert.equal(controlMetrics.privateChain.length, 3);
+        for (let index = 0; index < metrics.privateChain.length; index += 1) {
+          assert.ok(
+            Math.abs(metrics.privateChain[index].width - controlMetrics.privateChain[index].width) <= 0.5,
+            'pilot/control private width parity at wrapper ' + index + ' ' +
+              metrics.privateChain[index].width +
+              '/' +
+              controlMetrics.privateChain[index].width,
+          );
+        }
         const hostBorderX =
           Number.parseFloat(metrics.host.borderLeftWidth) +
           Number.parseFloat(metrics.host.borderRightWidth);
@@ -286,15 +300,15 @@ try {
           Number.parseFloat(metrics.host.borderTopWidth) +
           Number.parseFloat(metrics.host.borderBottomWidth);
         assert.ok(
-          Math.abs(metrics.host.width - metrics.privateShell.width - hostBorderX) <= 0.5,
+          Math.abs(metrics.host.width - metrics.privateChain[0].width - hostBorderX) <= 0.5,
           'pilot host/private width delta only intentional host border',
         );
         assert.ok(
-          Math.abs(metrics.host.height - metrics.privateShell.height - hostBorderY) <= 0.5,
+          Math.abs(metrics.host.height - metrics.privateChain[0].height - hostBorderY) <= 0.5,
           'pilot host/private height delta only intentional host border',
         );
-        assert.ok(Math.abs(metrics.frame.width - metrics.privateShell.width) <= 0.5);
-        assert.ok(Math.abs(metrics.frame.height - metrics.privateShell.height) <= 0.5);
+        assert.ok(Math.abs(metrics.frame.width - metrics.privateChain[2].width) <= 0.5);
+        assert.ok(Math.abs(metrics.frame.height - metrics.privateChain[2].height) <= 0.5);
       } else {
         assert.equal(metrics.hostRepairClass, false);
         assert.equal(metrics.hostMarker, null);
@@ -306,7 +320,8 @@ try {
         assert.doesNotMatch(metrics.host.aspectRatio, /^auto/);
         assert.equal(metrics.host.backgroundColor, 'rgb(255, 255, 255)');
         assert.ok(metrics.host.height > 1200, 'control host height ' + metrics.host.height);
-        assert.equal(metrics.privateShell.position, 'absolute');
+        assert.equal(metrics.privateChain.length, 3);
+        assert.ok(metrics.privateChain.every((node) => node.position === 'absolute'));
         assert.equal(metrics.frame.position, 'absolute');
         assert.ok(metrics.host.width < viewportWidth, 'control width ' + metrics.host.width);
         controlMetricsByViewport.set(viewportWidth, metrics);
