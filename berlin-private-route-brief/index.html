@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Berlin Private Route Brief | BerlinWalk</title>
-  <meta name="description" content="Tap three real Berlin places and see whether a fixed public walk or a private route fits your group day better.">
+  <meta name="description" content="See the real BerlinWalk route of 11 stops across 16 places, then pick the version of the walk your group needs before you enquire.">
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../css/brand.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -30,58 +30,64 @@
     .route-shell { overflow: hidden; border: 1px solid var(--route-line); border-radius: 22px; background: var(--route-paper); box-shadow: 0 20px 55px rgba(18, 61, 24, .13); }
     .route-head { padding: 25px 28px 22px; color: #fff; background: var(--route-green); }
     .route-kicker { margin: 0 0 9px; color: var(--route-yellow); font-size: .69rem; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
-    .route-head h1 { max-width: 760px; margin: 0; font-family: Merriweather, Georgia, serif; font-size: clamp(1.55rem, 4vw, 2.7rem); line-height: 1.08; letter-spacing: -.035em; }
+    .route-head h1 { max-width: 760px; margin: 0; font-family: Merriweather, Georgia, serif; font-size: clamp(1.5rem, 3.8vw, 2.5rem); line-height: 1.1; letter-spacing: -.035em; }
     .route-head p { max-width: 730px; margin: 11px 0 0; color: #e8f2e7; font-size: .92rem; line-height: 1.58; }
+    .route-facts { display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0 0; padding: 0; list-style: none; }
+    .route-facts li { padding: 6px 10px; border: 1px solid rgba(255, 230, 0, .45); color: #fff; font-size: .69rem; font-weight: 800; letter-spacing: .02em; }
+    .route-facts li b { color: var(--route-yellow); font-weight: 900; }
     .route-body { padding: 21px; }
-    .route-instruction { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-bottom: 13px; }
-    .route-instruction h2 { margin: 0; color: var(--route-green); font-size: 1.18rem; line-height: 1.15; }
-    .route-instruction p { max-width: 490px; margin: 0; color: var(--route-muted); font-size: .77rem; line-height: 1.5; text-align: right; }
+    .route-instruction { margin-bottom: 13px; }
+    .route-instruction h2 { margin: 0; color: var(--route-green); font-size: 1.15rem; line-height: 1.2; }
+    .route-instruction p { max-width: 640px; margin: 7px 0 0; color: var(--route-muted); font-size: .79rem; line-height: 1.55; }
+    .route-versions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-bottom: 16px; }
+    .route-version { padding: 11px 11px 10px; border: 1px solid #bed0b7; background: #f6f9ef; color: var(--route-green); font-size: .78rem; font-weight: 800; line-height: 1.25; text-align: left; cursor: pointer; transition: transform .15s ease, background .15s ease, border-color .15s ease; }
+    .route-version:hover, .route-version:focus-visible { transform: translateY(-2px); border-color: var(--route-green); background: #fff; outline: 2px solid var(--route-green); outline-offset: 2px; }
+    .route-version[aria-pressed="true"] { border-color: var(--route-green); background: var(--route-yellow); color: var(--route-green); }
+    .route-version small { display: block; margin-top: 4px; color: #5c6b5c; font-size: .64rem; font-weight: 600; line-height: 1.35; }
+    .route-version[aria-pressed="true"] small { color: #2d5433; }
     .route-map-wrap { position: relative; overflow: hidden; border: 1px solid #bdcdb8; background: #dfe8dc; }
-    #route-map { width: 100%; height: 450px; }
-    .route-map-note { position: absolute; z-index: 500; left: 12px; bottom: 12px; max-width: 290px; padding: 8px 10px; border: 1px solid rgba(18, 61, 24, .2); background: rgba(255, 253, 241, .94); color: #405143; font-size: .68rem; line-height: 1.4; box-shadow: 0 4px 14px rgba(0, 0, 0, .1); }
+    #route-map { width: 100%; height: 460px; }
+    .route-map-note { position: absolute; z-index: 500; left: 12px; bottom: 12px; max-width: 300px; padding: 8px 10px; border: 1px solid rgba(18, 61, 24, .2); background: rgba(255, 253, 241, .94); color: #405143; font-size: .67rem; line-height: 1.45; box-shadow: 0 4px 14px rgba(0, 0, 0, .1); }
     .route-map-note strong { color: var(--route-green); }
-    .route-map .leaflet-control-attribution { font-size: 9px; }
-    .route-marker { display: grid; place-items: center; width: 31px; height: 31px; border: 3px solid #fff; border-radius: 50%; background: var(--route-mid); color: #fff; font-size: 11px; font-weight: 900; box-shadow: 0 3px 10px rgba(18, 61, 24, .35); }
-    .route-marker.selected { background: var(--route-yellow); color: var(--route-green); box-shadow: 0 0 0 5px rgba(255, 230, 0, .28), 0 4px 12px rgba(18, 61, 24, .35); }
-    .route-places { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
-    .route-place { min-height: 58px; padding: 9px 8px; border: 1px solid #bed0b7; background: #f6f9ef; color: var(--route-green); font-size: .71rem; font-weight: 800; line-height: 1.25; text-align: left; cursor: pointer; transition: transform .15s ease, background .15s ease, border-color .15s ease; }
-    .route-place:hover, .route-place:focus-visible { transform: translateY(-2px); border-color: var(--route-green); background: #fff; outline: 2px solid var(--route-green); outline-offset: 2px; }
-    .route-place[aria-pressed="true"] { border-color: var(--route-green); background: var(--route-yellow); color: var(--route-green); }
-    .route-place small { display: block; margin-top: 4px; color: #5c6b5c; font-size: .61rem; font-weight: 600; }
-    .route-place[aria-pressed="true"] small { color: #315b35; }
-    .route-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 13px; }
-    .route-count { margin: 0; color: var(--route-muted); font-size: .76rem; line-height: 1.4; }
-    .route-reset { padding: 9px 12px; border: 1px solid #9bb398; background: transparent; color: var(--route-green); font-size: .72rem; font-weight: 900; cursor: pointer; }
-    .route-reset:hover, .route-reset:focus-visible { background: #eef5e8; outline: 2px solid var(--route-green); outline-offset: 2px; }
+    .leaflet-control-attribution { font-size: 9px; }
+    .route-marker { display: grid; place-items: center; width: 27px; height: 27px; border: 3px solid #fff; border-radius: 50%; background: var(--route-mid); color: #fff; font-size: 11px; font-weight: 900; box-shadow: 0 3px 10px rgba(18, 61, 24, .35); transition: opacity .15s ease; }
+    .route-marker.kept { background: var(--route-yellow); color: var(--route-green); box-shadow: 0 0 0 5px rgba(255, 230, 0, .3), 0 4px 12px rgba(18, 61, 24, .35); }
+    .route-marker.dropped { opacity: .38; }
+    .route-stops { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; margin-top: 12px; padding: 0; list-style: none; }
+    .route-stops li { display: flex; gap: 9px; align-items: flex-start; padding: 8px 9px; border: 1px solid #dfe6d6; background: #fbfdf6; color: #3d4c3f; font-size: .74rem; line-height: 1.35; transition: opacity .15s ease, border-color .15s ease, background .15s ease; }
+    .route-stops li b { display: grid; place-items: center; flex: 0 0 auto; width: 21px; height: 21px; border-radius: 50%; background: var(--route-mid); color: #fff; font-size: .64rem; font-weight: 900; }
+    .route-stops li.kept { border-color: #cbb800; background: #fffce0; color: var(--route-green); font-weight: 700; }
+    .route-stops li.kept b { background: var(--route-yellow); color: var(--route-green); }
+    .route-stops li.dropped { opacity: .5; }
     .route-brief { margin-top: 18px; padding: 18px; border-top: 6px solid var(--route-yellow); background: var(--route-cream); }
-    .route-brief h2 { margin: 0; color: var(--route-green); font-size: 1.1rem; }
-    .route-sequence { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 12px 0; color: var(--route-green); font-size: .78rem; font-weight: 900; }
-    .route-sequence span { padding: 5px 8px; border: 1px solid #b7c9af; background: #fff; }
-    .route-sequence i { color: #6d7b6d; font-style: normal; }
-    .route-brief p { margin: 8px 0 0; color: #445347; font-size: .81rem; line-height: 1.58; }
+    .route-brief h2 { margin: 0; color: var(--route-green); font-size: 1.08rem; }
+    .route-brief h3 { margin: 15px 0 5px; color: var(--route-green); font-size: .72rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+    .route-brief p { margin: 6px 0 0; color: #445347; font-size: .82rem; line-height: 1.6; }
     .route-brief strong { color: var(--route-green); }
-    .route-cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
-    .route-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 10px 13px; background: var(--route-yellow); color: #123d18 !important; font-size: .72rem; font-weight: 900; text-decoration: none; }
+    .route-verdict { margin-top: 11px; padding: 12px 14px; border-left: 4px solid var(--route-mid); background: #fff; }
+    .route-cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+    .route-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 10px 14px; background: var(--route-yellow); color: #123d18 !important; font-size: .73rem; font-weight: 900; text-decoration: none; }
     .route-cta:hover, .route-cta:focus-visible { background: #f4da00; color: #123d18 !important; outline: 3px solid #123d18; outline-offset: 2px; }
     .route-cta.secondary { border: 1px solid #8faa87; background: transparent; color: var(--route-green) !important; }
     .route-cta.secondary:hover, .route-cta.secondary:focus-visible { background: #eef5e8; color: var(--route-green) !important; }
+    .route-limit { margin-top: 16px; padding: 13px 15px; border: 1px dashed #9fb69a; background: #f4f8ee; }
+    .route-limit h3 { margin: 0 0 5px; color: var(--route-green); font-size: .72rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+    .route-limit p { margin: 0; color: #445347; font-size: .78rem; line-height: 1.6; }
     .route-footnote { margin: 14px 0 0; color: #667266; font-size: .67rem; line-height: 1.5; }
     @media (max-width: 760px) {
       .route-head { padding: 21px 20px 19px; }
       .route-body { padding: 16px; }
-      .route-instruction { display: block; }
-      .route-instruction p { margin-top: 8px; text-align: left; }
-      #route-map { height: 390px; }
-      .route-places { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .route-versions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      #route-map { height: 400px; }
+      .route-stops { grid-template-columns: minmax(0, 1fr); }
     }
     @media (max-width: 480px) {
       #bw-private-route-brief { padding: 0; }
       .route-shell { border-radius: 0; }
-      .route-head h1 { font-size: 1.65rem; }
-      #route-map { height: 330px; }
-      .route-places { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .route-place { min-height: 54px; }
-      .route-actions { align-items: flex-start; flex-direction: column; }
+      .route-head h1 { font-size: 1.55rem; }
+      .route-versions { grid-template-columns: minmax(0, 1fr); }
+      #route-map { height: 340px; }
+      .route-map-note { position: static; max-width: none; border: 0; border-top: 1px solid #bdcdb8; background: #f4f8ee; box-shadow: none; }
     }
   </style>
 </head>
@@ -90,111 +96,190 @@
     <section class="route-shell">
       <header class="route-head">
         <p class="route-kicker">Berlin Private Route Brief</p>
-        <h1>Connect the three places your group actually cares about.</h1>
-        <p>Tap three real Berlin places on the map. The route brief helps you see whether a fixed central walk is enough or whether a private route deserves the enquiry.</p>
+        <h1>The walk I actually lead, shaped around your group.</h1>
+        <p>A private walk does not become a different city. It is the same historic centre line from the World Clock at Alexanderplatz to Hackescher Markt, on your date, with only your group. What changes is where the time goes. Pick the version your group needs and see which stops keep it.</p>
+        <ul class="route-facts">
+          <li><b>11</b> stops</li>
+          <li><b>16</b> places</li>
+          <li><b>3 km</b> on foot</li>
+          <li><b>~2 h</b> at a normal pace</li>
+        </ul>
       </header>
       <div class="route-body">
         <div class="route-instruction">
-          <h2>Step 1: tap up to three anchors</h2>
-          <p>Place order matters. Start with the place that would make the day feel most successful.</p>
+          <h2>Step 1: pick the version your group needs</h2>
+          <p>These are the six directions people actually ask me for. Choose one and the map shows which stops keep the time and which ones I let go.</p>
+        </div>
+        <div class="route-versions" aria-label="Private walk versions">
+          <button class="route-version" type="button" data-version="classic" aria-pressed="false">The classic centre<small>A thousand years, the full line</small></button>
+          <button class="route-version" type="button" data-version="children" aria-pressed="false">With children<small>Shorter, with things to walk around</small></button>
+          <button class="route-version" type="button" data-version="stepfree" aria-pressed="false">Step-free and slow<small>Short legs, real sitting points</small></button>
+          <button class="route-version" type="button" data-version="twentieth" aria-pressed="false">The 20th century<small>The GDR centre and what the war took</small></button>
+          <button class="route-version" type="button" data-version="museum" aria-pressed="false">Museum Island focus<small>The context before you go in</small></button>
+          <button class="route-version" type="button" data-version="highlights" aria-pressed="false">Just the highlights<small>One tight loop when time is short</small></button>
         </div>
         <div class="route-map-wrap">
-          <div id="route-map" role="application" aria-label="Interactive map of five Berlin places"></div>
-          <p class="route-map-note"><strong>Planning signal:</strong> the yellow line connects your chosen coordinates. It is not walking distance or turn-by-turn navigation.</p>
+          <div id="route-map" role="application" aria-label="Map of the eleven-stop BerlinWalk route from Alexanderplatz to Hackescher Markt"></div>
+          <p class="route-map-note"><strong>Route order, not navigation.</strong> The line shows the walking order of the eleven stops. I confirm the final order and the meeting point with you before the walk.</p>
         </div>
-        <div class="route-places" aria-label="Berlin place choices">
-          <button class="route-place" type="button" data-place="alexanderplatz" aria-pressed="false">Alexanderplatz<small>central east</small></button>
-          <button class="route-place" type="button" data-place="museum-island" aria-pressed="false">Museum Island<small>history and museums</small></button>
-          <button class="route-place" type="button" data-place="brandenburg-gate" aria-pressed="false">Brandenburg Gate<small>central west</small></button>
-          <button class="route-place" type="button" data-place="east-side-gallery" aria-pressed="false">East Side Gallery<small>east and Wall history</small></button>
-          <button class="route-place" type="button" data-place="charlottenburg-palace" aria-pressed="false">Charlottenburg Palace<small>west Berlin</small></button>
-        </div>
-        <div class="route-actions">
-          <p class="route-count" id="route-count" aria-live="polite">Choose one place to begin.</p>
-          <button class="route-reset" id="route-reset" type="button">Clear route</button>
-        </div>
+        <ol class="route-stops" id="route-stops" aria-label="The eleven stops in walking order"></ol>
         <section class="route-brief" id="route-brief" hidden aria-live="polite">
-          <h2>Your route brief</h2>
-          <div class="route-sequence" id="route-sequence"></div>
-          <p id="route-recommendation"></p>
+          <h2 id="route-brief-title">Your route brief</h2>
+          <div class="route-verdict"><p id="route-verdict"></p></div>
+          <h3>What keeps the time</h3>
+          <p id="route-keeps"></p>
+          <h3>What I let go</h3>
+          <p id="route-drops"></p>
           <div class="route-cta-row">
-            <a class="route-cta" href="https://www.berlinwalk.com/private-tour" target="_blank" rel="noopener">Ask about a private route</a>
+            <a class="route-cta" href="https://www.berlinwalk.com/private-tour" target="_blank" rel="noopener">Tell me your dates</a>
             <a class="route-cta secondary" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_blank" rel="noopener">Check the free tour calendar</a>
           </div>
-          <p class="route-footnote">A route brief is a conversation starter. Confirm current opening hours, tickets, access needs and live transport before fixing the day.</p>
         </section>
+        <div class="route-limit">
+          <h3>What a private walk does not change</h3>
+          <p>The route stays in the historic centre. I do not stitch Charlottenburg Palace, the East Side Gallery and Mitte into the same two hours, because that day is mostly transport and the walk stops being a walk. If your group wants places that far apart, book the centre properly and keep the rest of the day separate.</p>
+        </div>
+        <p class="route-footnote">The free tip-based walk keeps running on its fixed days with a mixed group. A private walk is the same route on your own date, for your group only. Check opening hours, tickets and access needs separately before you fix the day.</p>
       </div>
     </section>
   </main>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
     (function () {
-      var places = {
-        'alexanderplatz': { name: 'Alexanderplatz', area: 'central east', lat: 52.5219, lng: 13.4132 },
-        'museum-island': { name: 'Museum Island', area: 'history and museums', lat: 52.5190, lng: 13.4010 },
-        'brandenburg-gate': { name: 'Brandenburg Gate', area: 'central west', lat: 52.5163, lng: 13.3777 },
-        'east-side-gallery': { name: 'East Side Gallery', area: 'east and Wall history', lat: 52.5050, lng: 13.4397 },
-        'charlottenburg-palace': { name: 'Charlottenburg Palace', area: 'west Berlin', lat: 52.5207, lng: 13.2957 }
+      var stops = [
+        { n: 1, name: 'World Clock', area: 'Alexanderplatz', lat: 52.52116, lng: 13.41331 },
+        { n: 2, name: 'TV Tower', area: 'Alexanderplatz', lat: 52.52083, lng: 13.40942 },
+        { n: 3, name: 'Rotes Rathaus and Neptunbrunnen', area: 'Rathausforum', lat: 52.51900, lng: 13.40740 },
+        { n: 4, name: 'Marienkirche', area: 'Karl-Liebknecht-Strasse', lat: 52.52055, lng: 13.40718 },
+        { n: 5, name: 'Marx-Engels-Forum', area: 'Spree bank', lat: 52.51850, lng: 13.40477 },
+        { n: 6, name: 'Sanchi Gate', area: 'Lustgarten side of the Humboldt Forum', lat: 52.51824, lng: 13.40161 },
+        { n: 7, name: 'Humboldt Forum', area: 'Schlossplatz', lat: 52.51703, lng: 13.40123 },
+        { n: 8, name: 'Lustgarten, Berliner Dom, Altes Museum', area: 'Museum Island', lat: 52.51895, lng: 13.39970 },
+        { n: 9, name: 'Neues Museum, Alte Nationalgalerie, Pergamon', area: 'Museum Island', lat: 52.52050, lng: 13.39800 },
+        { n: 10, name: 'Friedrichsbrücke', area: 'Spree crossing', lat: 52.52047, lng: 13.40016 },
+        { n: 11, name: 'Hackescher Markt', area: 'Finish', lat: 52.52268, lng: 13.40234 }
+      ];
+
+      var linePoints = [
+        [52.52116, 13.41331], [52.52140, 13.41200], [52.52165, 13.41080], [52.52120, 13.41000],
+        [52.52083, 13.40942], [52.52010, 13.40860], [52.51940, 13.40790], [52.51900, 13.40740],
+        [52.51827, 13.40783], [52.51900, 13.40720], [52.51960, 13.40684], [52.52020, 13.40700],
+        [52.52055, 13.40718], [52.51990, 13.40680], [52.51930, 13.40620], [52.51880, 13.40540],
+        [52.51850, 13.40477], [52.51835, 13.40380], [52.51830, 13.40260], [52.51824, 13.40161],
+        [52.51780, 13.40130], [52.51730, 13.40125], [52.51703, 13.40123], [52.51740, 13.40040],
+        [52.51800, 13.39980], [52.51860, 13.39960], [52.51895, 13.39970], [52.51960, 13.39900],
+        [52.52010, 13.39830], [52.52050, 13.39800], [52.52060, 13.39900], [52.52047, 13.40016],
+        [52.52120, 13.40090], [52.52200, 13.40180], [52.52268, 13.40234]
+      ];
+
+      var versions = {
+        classic: {
+          label: 'The classic centre',
+          keep: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+          verdict: '<strong>Nothing gets cut.</strong> This is the full line, in order, at a normal walking pace. It is the version most groups should take the first time, because the point is not the individual stops. It is that Alexanderplatz, the medieval core, the GDR centre and Museum Island stop being separate sights by the end.',
+          keeps: 'All eleven stops, about three kilometres, about two hours.',
+          drops: 'Nothing, which means no single stop gets a long stay. If one place matters more than the rest, tell me in the form and pick a different version.'
+        },
+        children: {
+          label: 'With children',
+          keep: [1, 2, 3, 5, 6, 8, 11],
+          verdict: '<strong>Children hold attention at things they can walk around.</strong> The Neptunbrunnen and the Sanchi Gate do more for a seven year old than another facade. I keep the same line, stop more often and finish earlier, and I would rather cut three stops than march a tired family through all eleven.',
+          keeps: 'World Clock, TV Tower, Rotes Rathaus and Neptunbrunnen, Marx-Engels-Forum, Sanchi Gate, the Lustgarten, then food and a station at Hackescher Markt.',
+          drops: 'The Marienkirche interior and the detail on the museum row. Both are worth your time without children in the group.'
+        },
+        stepfree: {
+          label: 'Step-free and slow',
+          keep: [1, 2, 3, 5, 7, 8, 10],
+          verdict: '<strong>This ground is flat, so the real problem is distance, not stairs.</strong> I shorten the legs, plan actual sitting points at the Neptunbrunnen and in the Lustgarten, and drop the stops that only pay off if you stand for a while. If two hours is too much, we finish at Museum Island and you are next to trams and buses.',
+          keeps: 'World Clock, TV Tower, Rotes Rathaus and Neptunbrunnen, Marx-Engels-Forum, Humboldt Forum, the Lustgarten, Friedrichsbrücke.',
+          drops: 'The Marienkirche and the Sanchi Gate, and the walk up to the northern museums if the group has had enough by the Lustgarten.'
+        },
+        twentieth: {
+          label: 'The 20th century',
+          keep: [1, 2, 3, 5, 7, 8, 9, 10],
+          verdict: '<strong>The Wall did not run along this route, and I will not pretend it did.</strong> What this ground gives you is the GDR centre built on a cleared old city, what the bombing took from Museum Island, and what was rebuilt to make a political point. If the Wall itself is the reason for the day, say so in the form and I will tell you honestly whether this route is the right shape for it.',
+          keeps: 'World Clock, TV Tower, Rotes Rathaus, Marx-Engels-Forum, Humboldt Forum, the Lustgarten, the museum row and the view from Friedrichsbrücke.',
+          drops: 'The medieval layer at the Marienkirche and the Sanchi Gate, which belong to other centuries.'
+        },
+        museum: {
+          label: 'Museum Island focus',
+          keep: [5, 6, 7, 8, 9, 10],
+          verdict: '<strong>The context before you go in.</strong> I keep the first half short and give the island the time, so the collections make sense when you buy the ticket. I do not go inside the museums with you, and that is deliberate. You will get more out of an hour in the Pergamon after this walk than after a queue.',
+          keeps: 'Marx-Engels-Forum, Sanchi Gate, Humboldt Forum, the Lustgarten with the Dom and the Altes Museum, the northern museums, Friedrichsbrücke.',
+          drops: 'Most of the Alexanderplatz opening. We still meet at the World Clock unless another start suits you better, then walk west without stopping long.'
+        },
+        highlights: {
+          label: 'Just the highlights',
+          keep: [1, 2, 3, 7, 8, 11],
+          verdict: '<strong>One tight loop when your time is short.</strong> Same start, same finish, fewer stops and longer legs between them. Take this version when the group has a train, a booking or a dinner at the other end of the day, not when you simply want to see more in the same two hours.',
+          keeps: 'World Clock, TV Tower, Rotes Rathaus and Neptunbrunnen, Humboldt Forum, the Lustgarten, Hackescher Markt.',
+          drops: 'The Marienkirche, the Marx-Engels-Forum, the Sanchi Gate and the northern museum row.'
+        }
       };
-      var selected = [];
+
+      var current = null;
       var markers = {};
-      var line = null;
-      var map = L.map('route-map', { center: [52.517, 13.378], zoom: 12, scrollWheelZoom: false, tap: true });
+      var map = L.map('route-map', { center: [52.5197, 13.4055], zoom: 15, scrollWheelZoom: false, tap: true });
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>',
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>',
         maxZoom: 18
       }).addTo(map);
-      var markerIcon = function (number) {
-        return L.divIcon({ className: '', html: '<div class="route-marker' + (number ? ' selected' : '') + '">' + (number || '•') + '</div>', iconSize: [31, 31], iconAnchor: [15, 15] });
-      };
-      Object.keys(places).forEach(function (key) {
-        var place = places[key];
-        var marker = L.marker([place.lat, place.lng], { icon: markerIcon('') }).addTo(map);
-        marker.bindTooltip(place.name, { direction: 'top', offset: [0, -15] });
-        marker.on('click', function () { toggle(key); });
-        markers[key] = marker;
+
+      L.polyline(linePoints, { color: '#ffffff', weight: 9, opacity: .85 }).addTo(map);
+      L.polyline(linePoints, { color: '#1b5e20', weight: 5, opacity: .95 }).addTo(map);
+
+      function markerIcon(state, number) {
+        return L.divIcon({
+          className: '',
+          html: '<div class="route-marker ' + state + '">' + number + '</div>',
+          iconSize: [27, 27],
+          iconAnchor: [13, 13]
+        });
+      }
+
+      var stopList = document.getElementById('route-stops');
+      stops.forEach(function (stop) {
+        var marker = L.marker([stop.lat, stop.lng], { icon: markerIcon('', stop.n), title: stop.name }).addTo(map);
+        marker.bindTooltip(stop.n + '. ' + stop.name, { direction: 'top', offset: [0, -14] });
+        markers[stop.n] = marker;
+        var item = document.createElement('li');
+        item.setAttribute('data-stop', String(stop.n));
+        item.innerHTML = '<b>' + stop.n + '</b><span>' + stop.name + '</span>';
+        stopList.appendChild(item);
       });
-      function updateMarker(key) {
-        var position = selected.indexOf(key);
-        markers[key].setIcon(markerIcon(position === -1 ? '' : String(position + 1)));
-      }
-      function recommendation() {
-        var picked = selected.map(function (key) { return places[key]; });
-        if (picked.length === 1) return '<strong>One anchor is a good start.</strong> Keep the rest of the day flexible around ' + picked[0].name + ', then add a second place only if it sits naturally on the same side of the city.';
-        var hasWest = selected.indexOf('charlottenburg-palace') !== -1;
-        var hasFarEast = selected.indexOf('east-side-gallery') !== -1;
-        var hasCentral = selected.some(function (key) { return key === 'alexanderplatz' || key === 'museum-island' || key === 'brandenburg-gate'; });
-        if (picked.length === 3 && hasWest && (hasFarEast || hasCentral)) return '<strong>Private route earns its keep.</strong> Your three places cross a wide east-west spread. A tailored start, order and pause can protect the group from a generic cross-city checklist.';
-        if (picked.length === 3) return '<strong>A fixed central walk may be enough.</strong> These three anchors can form a clear Berlin introduction if the group is happy with the live meeting time and a public route. Keep tickets and meal timing flexible.';
-        return '<strong>You have a workable conversation.</strong> Decide which place is least flexible, then check whether the second place belongs in the same area before adding a third.';
-      }
+
+      map.fitBounds(L.latLngBounds(linePoints), { padding: [34, 34] });
+
       function render() {
-        var count = document.getElementById('route-count');
+        var version = current ? versions[current] : null;
+        stops.forEach(function (stop) {
+          var state = '';
+          if (version) state = version.keep.indexOf(stop.n) !== -1 ? 'kept' : 'dropped';
+          markers[stop.n].setIcon(markerIcon(state, stop.n));
+          var item = stopList.querySelector('[data-stop="' + stop.n + '"]');
+          item.className = state;
+        });
+        document.querySelectorAll('.route-version').forEach(function (button) {
+          button.setAttribute('aria-pressed', button.getAttribute('data-version') === current ? 'true' : 'false');
+        });
         var brief = document.getElementById('route-brief');
-        var sequence = document.getElementById('route-sequence');
-        if (!selected.length) {
-          count.textContent = 'Choose one place to begin.';
-          brief.hidden = true;
-        } else {
-          count.textContent = selected.length + ' of 3 places selected.' + (selected.length === 3 ? ' Your route brief is ready.' : ' Add ' + (3 - selected.length) + ' more.');
-          sequence.innerHTML = selected.map(function (key, index) { return '<span>' + (index + 1) + '. ' + places[key].name + '</span>' + (index < selected.length - 1 ? '<i aria-hidden="true">→</i>' : ''); }).join('');
-          document.getElementById('route-recommendation').innerHTML = recommendation();
-          brief.hidden = false;
-        }
-        Object.keys(markers).forEach(function (key) { updateMarker(key); });
-        if (line) map.removeLayer(line);
-        if (selected.length > 1) line = L.polyline(selected.map(function (key) { return [places[key].lat, places[key].lng]; }), { color: '#1b5e20', weight: 5, opacity: .9, dashArray: '9 7' }).addTo(map);
-        document.querySelectorAll('.route-place').forEach(function (button) { button.setAttribute('aria-pressed', selected.indexOf(button.getAttribute('data-place')) !== -1 ? 'true' : 'false'); });
+        if (!version) { brief.hidden = true; return; }
+        document.getElementById('route-brief-title').textContent = version.label + ': your route brief';
+        document.getElementById('route-verdict').innerHTML = version.verdict;
+        document.getElementById('route-keeps').textContent = version.keeps;
+        document.getElementById('route-drops').textContent = version.drops;
+        brief.hidden = false;
       }
-      function toggle(key) {
-        var current = selected.indexOf(key);
-        if (current !== -1) selected.splice(current, 1);
-        else if (selected.length < 3) selected.push(key);
-        render();
-      }
-      document.querySelectorAll('.route-place').forEach(function (button) { button.addEventListener('click', function () { toggle(button.getAttribute('data-place')); }); });
-      document.getElementById('route-reset').addEventListener('click', function () { selected = []; render(); });
-      setTimeout(function () { map.invalidateSize(); }, 200);
+
+      document.querySelectorAll('.route-version').forEach(function (button) {
+        button.addEventListener('click', function () {
+          var key = button.getAttribute('data-version');
+          current = current === key ? null : key;
+          render();
+        });
+      });
+
+      setTimeout(function () { map.invalidateSize(); map.fitBounds(L.latLngBounds(linePoints), { padding: [34, 34] }); }, 200);
       render();
     })();
   </script>

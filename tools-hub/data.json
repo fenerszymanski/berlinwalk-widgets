@@ -6173,7 +6173,7 @@
     {
       "slug": "berlin-private-route-brief",
       "title": "Berlin Private Route Brief",
-      "lead": "Tap three real Berlin places and see whether a fixed central walk or a private route fits your group day better.",
+      "lead": "See the real 11-stop BerlinWalk route across 16 places, then pick the version of the walk your group needs before you enquire.",
       "category": "Discovery",
       "hubCategory": "TripPlans",
       "type": "Map",
@@ -6188,11 +6188,11 @@
       "aliases": [
         "private Berlin group tour",
         "Berlin group route",
-        "connect Berlin places",
-        "custom Berlin walking route"
+        "BerlinWalk route stops",
+        "private walking tour Berlin centre"
       ],
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-private-route-brief/",
-      "embedHeight": 2100,
+      "embedHeight": 1980,
       "image": "https://static.wixstatic.com/media/5a08a3_a222059114674c0aab990c7b2e31006e~mv2.png",
       "iconStatus": "live-wix-media",
       "cmsItemId": "e86f6dd4-b21b-4a64-90a3-ad57365c7cea"
