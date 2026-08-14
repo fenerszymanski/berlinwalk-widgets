@@ -21,6 +21,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/blog-drafts/
+            !/output/
+            !/.playwright-cli/
+            /blog-drafts/images/berlin-ab-abc-ticket-zones/assets/optimized/
+            /blog-drafts/images/holocaust-memorial-berlin/assets/optimized/
+            /blog-drafts/images/tempelhof-airport-berlin/assets/optimized/
 
       - name: Build filtered Pages artifact
         run: |
