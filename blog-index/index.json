@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-08-14T02:08:44.787Z",
+  "updatedAt": "2026-08-14T07:28:13.110Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 282,
+  "totalPosts": 283,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1617,6 +1617,23 @@
   ],
   "latest": [
     {
+      "title": "Morning or Afternoon Walking Tour in Berlin: Which Time Fits Your Day?",
+      "slug": "morning-or-afternoon-walking-tour-berlin",
+      "path": "/post/morning-or-afternoon-walking-tour-berlin",
+      "url": "https://www.berlinwalk.com/post/morning-or-afternoon-walking-tour-berlin",
+      "excerpt": "Morning is not automatically better, and afternoon is not a second-best slot. Use the time you can really reach the World Clock, the time you must be free near Hackescher Markt and the plan that matters afterwards.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "free-budget",
+      "topicLabel": "Free & Budget",
+      "readTime": "6 min read",
+      "publishedDate": "2026-08-14T07:16:31.600Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_1e9adaf4d31548a2b0b67f47501c3c40~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-world-clock-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_1e9adaf4d31548a2b0b67f47501c3c40~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-world-clock-cover.jpg",
+      "alt": "Alexanderplatz World Clock under a blue sky, the BerlinWalk tour meeting point",
+      "relatedToolSlug": "berlin-tour-time-window"
+    },
+    {
       "title": "Best Museums in Berlin for First-Time Visitors: Pick Three, Not Thirty",
       "slug": "best-museums-in-berlin-first-time-visitors",
       "path": "/post/best-museums-in-berlin-first-time-visitors",
@@ -1802,23 +1819,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_2ba54013e5c1450fb569794b3b665f62~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-alexanderplatz-world-clock.jpg",
       "alt": "The World Clock at Alexanderplatz, the meeting point where the Berlin free walking tour begins.",
       "relatedToolSlug": ""
-    },
-    {
-      "title": "Berlin Sights Within Walking Distance of Alexanderplatz",
-      "slug": "berlin-sights-near-alexanderplatz-walking-distance",
-      "path": "/post/berlin-sights-near-alexanderplatz-walking-distance",
-      "url": "https://www.berlinwalk.com/post/berlin-sights-near-alexanderplatz-walking-distance",
-      "excerpt": "Almost the entire historic core of Berlin is a short walk west of Alexanderplatz. Here is what you can reach on foot from the World Clock, sorted by how far you have to walk.",
-      "category": "Tour Route",
-      "categorySlug": "tour-route",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "3 min read",
-      "publishedDate": "2026-07-30T07:11:20.131Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_0c1a3060152c463697c671fa4288a9a5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/03-alexanderplatz-ubahn.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_0c1a3060152c463697c671fa4288a9a5~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/03-alexanderplatz-ubahn.jpg",
-      "alt": "Alexanderplatz station, where most visitors arrive before walking into central Berlin.",
-      "relatedToolSlug": "berlin-landmarks-map"
     }
   ]
 }
