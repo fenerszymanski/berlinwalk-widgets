@@ -322,7 +322,9 @@
 
   function isExcludedPage() {
     var path = window.location.pathname.toLowerCase();
-    return path.indexOf('/tools/') === 0 ||
+    var normalizedPath = path.replace(/\/+$/, '') || '/';
+    return normalizedPath === '/private-tour' ||
+      path.indexOf('/tools/') === 0 ||
       path.indexOf('/products/') === 0 ||
       path.indexOf('/book-berlin-walking-tour') === 0 ||
       path.indexOf('/free-berlin-walking-tour') === 0 ||
