@@ -213,12 +213,12 @@ const YEAR_REQUIRED_TITLE_SLUGS = new Set([
 ]);
 
 const HERO_SLUGS = {
-  // 4 Aug 2026: the new first-time visitor museum guide is the strongest
-  // broad practical lead; keep the rail mixed with one timely event and
-  // proven practical/history evergreen posts.
-  lead: 'best-museums-in-berlin-first-time-visitors',
+  // 14 Aug 2026: Long Night of Museums is the strongest current, dated
+  // visitor-useful lead; keep the rail mixed with the newest broad practical
+  // guide, route context, transport help, and a proven history evergreen.
+  lead: 'long-night-of-museums-berlin-2026',
   secondary: [
-    'long-night-of-museums-berlin-2026',
+    'best-museums-in-berlin-first-time-visitors',
     'what-happens-on-a-berlin-free-walking-tour',
     'berlin-sights-near-alexanderplatz-walking-distance',
     'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
