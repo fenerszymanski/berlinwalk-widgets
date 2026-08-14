@@ -100,10 +100,19 @@ All Velo HTTP functions live in `backend/http-functions.js` on the Wix site (not
   is mandatory for every AI-generated public text too, including captions,
   alt text, social/email copy, and product/UI microcopy.
 - **Brand guide source:** `BerlinWalk_Brand_Guide_v1_2_revised.pdf` (Yusuf's downloads — not in repo)
-- **Daily blog publishing approval:** Daily blog automation may complete the
-  full package, deploy required widget/data/icon assets, and QA the Wix draft,
-  but it must not publish the Wix Blog post without Yusuf's explicit approval
-  for that specific draft.
+- **Daily blog publishing approval:** Normal/manual work still needs Yusuf's
+  exact-draft approval. The `berlinwalk-daily-blog-draft` exact-run exception
+  may publish only its own one-manifest package after one consolidated Sol
+  pre-publish check passes. The visible flow is: plan one package; check the
+  Wix draft and live tool/assets; make one journalled publish call plus GET
+  readback; add the exact CMS link, refresh `/blog --limit 300`, and run live
+  desktop/mobile QA; then record the exact post/tool Search Console outcomes.
+  Sol normally owns the full run. Luna Max is optional for genuinely heavy,
+  bounded mechanical work and never publishes or self-approves. Parallel runs
+  must reserve distinct packages; shared writes take the short mutation lease
+  only during write/readback. An unresolved identity, quality, deploy, or
+  collision failure stays `BLOCKED_UNPUBLISHED`; unfinished post-publish work is
+  `PUBLISHED_PARTIAL`.
 - **Daily blog widget originality:** New daily-blog widgets must not start by
   copying an existing BerlinWalk widget's visual or interaction style. Design
   the interaction from the article's specific reader problem, and do not ship
