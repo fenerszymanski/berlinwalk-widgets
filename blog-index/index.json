@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-08-14T15:54:53.925Z",
+  "updatedAt": "2026-08-14T18:46:02.518Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 285,
+  "totalPosts": 286,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1617,6 +1617,23 @@
   ],
   "latest": [
     {
+      "title": "Private Berlin Tour for Groups: Build the Right Berlin Day",
+      "slug": "private-berlin-tour-for-groups",
+      "path": "/post/private-berlin-tour-for-groups",
+      "url": "https://www.berlinwalk.com/post/private-berlin-tour-for-groups",
+      "excerpt": "A group does not need more Berlin pins. Start with three real places, then choose a fixed central walk or a private route that fits the day.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "route-stories",
+      "topicLabel": "Tour Route Stories",
+      "readTime": "4 min read",
+      "publishedDate": "2026-08-14T18:44:09.193Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_e02189b723b1481389f23f9dd8ff703d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-altes-museum-guide-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_e02189b723b1481389f23f9dd8ff703d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-altes-museum-guide-cover.jpg",
+      "alt": "BerlinWalk guide speaking with guests outside the Altes Museum on Museum Island",
+      "relatedToolSlug": ""
+    },
+    {
       "title": "Berlin Itinerary for Couples: Build One Day Around Two Different Interests",
       "slug": "berlin-itinerary-for-couples",
       "path": "/post/berlin-itinerary-for-couples",
@@ -1801,23 +1818,6 @@
       "image": "https://static.wixstatic.com/media/5a08a3_6f2acf6aec2b49c18727bd3e2e3e4ea9~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-philharmonie-cover.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_6f2acf6aec2b49c18727bd3e2e3e4ea9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-philharmonie-cover.jpg",
       "alt": "The Philharmonie Berlin in the evening light",
-      "relatedToolSlug": ""
-    },
-    {
-      "title": "Long Night of Museums Berlin: How to Build a Route That Works",
-      "slug": "long-night-of-museums-berlin-2026",
-      "path": "/post/long-night-of-museums-berlin-2026",
-      "url": "https://www.berlinwalk.com/post/long-night-of-museums-berlin-2026",
-      "excerpt": "How to build a realistic Long Night of Museums route in Berlin, with the confirmed 2026 timing and practical queue advice.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "route-stories",
-      "topicLabel": "Tour Route Stories",
-      "readTime": "4 min read",
-      "publishedDate": "2026-08-02T12:01:56.907Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_8e322674b4ce4bffa822de5812164c06~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-bode-museum-night-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_8e322674b4ce4bffa822de5812164c06~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-bode-museum-night-cover.jpg",
-      "alt": "Bode Museum illuminated at night on Berlin's Museum Island",
       "relatedToolSlug": ""
     }
   ]

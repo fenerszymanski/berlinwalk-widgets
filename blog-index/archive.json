@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-08-14T15:54:53.925Z",
+  "updatedAt": "2026-08-14T18:46:02.518Z",
   "source": "Wix Blog API",
-  "totalPosts": 285,
+  "totalPosts": 286,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Private Berlin Tour for Groups: Build the Right Berlin Day",
+      "slug": "private-berlin-tour-for-groups",
+      "path": "/post/private-berlin-tour-for-groups",
+      "url": "https://www.berlinwalk.com/post/private-berlin-tour-for-groups",
+      "excerpt": "A group does not need more Berlin pins. Start with three real places, then choose a fixed central walk or a private route that fits the day.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "route-stories",
+      "topicLabel": "Tour Route Stories",
+      "readTime": "4 min read",
+      "publishedDate": "2026-08-14T18:44:09.193Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_e02189b723b1481389f23f9dd8ff703d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-altes-museum-guide-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_e02189b723b1481389f23f9dd8ff703d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-altes-museum-guide-cover.jpg",
+      "alt": "BerlinWalk guide speaking with guests outside the Altes Museum on Museum Island",
+      "relatedToolSlug": ""
+    },
     {
       "title": "Berlin Itinerary for Couples: Build One Day Around Two Different Interests",
       "slug": "berlin-itinerary-for-couples",
