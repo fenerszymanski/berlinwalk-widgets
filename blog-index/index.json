@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-08-14T07:28:13.110Z",
+  "updatedAt": "2026-08-14T10:51:21.978Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 283,
+  "totalPosts": 284,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1617,6 +1617,23 @@
   ],
   "latest": [
     {
+      "title": "Guided vs Self-Guided Berlin Walking Tour: Which Should Come First?",
+      "slug": "guided-vs-self-guided-berlin-walking-tour",
+      "path": "/post/guided-vs-self-guided-berlin-walking-tour",
+      "url": "https://www.berlinwalk.com/post/guided-vs-self-guided-berlin-walking-tour",
+      "excerpt": "A guided walk gives you orientation and live questions. A self-guided route gives you timing and pace control. Use the first format to solve today’s problem, then make the second walk more focused.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "route-stories",
+      "topicLabel": "Tour Route Stories",
+      "readTime": "7 min read",
+      "publishedDate": "2026-08-14T10:49:40.252Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_041e2b57cd5142088a79b73c2e3b506f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-guided-walk-altes-museum-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_041e2b57cd5142088a79b73c2e3b506f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-guided-walk-altes-museum-cover.jpg",
+      "alt": "BerlinWalk guide Yusuf leading guests outside the Altes Museum on Museum Island",
+      "relatedToolSlug": "berlin-first-walk-lens"
+    },
+    {
       "title": "Morning or Afternoon Walking Tour in Berlin: Which Time Fits Your Day?",
       "slug": "morning-or-afternoon-walking-tour-berlin",
       "path": "/post/morning-or-afternoon-walking-tour-berlin",
@@ -1801,23 +1818,6 @@
       "image": "https://static.wixstatic.com/media/5a08a3_010f5024b8e443aa87bfde0f93072849~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-rave-the-planet-cover.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_010f5024b8e443aa87bfde0f93072849~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-rave-the-planet-cover.jpg",
       "alt": "A Rave The Planet crowd and float on Straße des 17. Juni in Berlin",
-      "relatedToolSlug": ""
-    },
-    {
-      "title": "What Happens on a Berlin Free Walking Tour",
-      "slug": "what-happens-on-a-berlin-free-walking-tour",
-      "path": "/post/what-happens-on-a-berlin-free-walking-tour",
-      "url": "https://www.berlinwalk.com/post/what-happens-on-a-berlin-free-walking-tour",
-      "excerpt": "The thing that stops most people booking a free walking tour is not knowing what happens. Here is the whole two-hour route, stop by stop, and how the tip-based model really works.",
-      "category": "Tour Route",
-      "categorySlug": "tour-route",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "3 min read",
-      "publishedDate": "2026-07-30T12:44:00.784Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_2ba54013e5c1450fb569794b3b665f62~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-alexanderplatz-world-clock.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_2ba54013e5c1450fb569794b3b665f62~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-alexanderplatz-world-clock.jpg",
-      "alt": "The World Clock at Alexanderplatz, the meeting point where the Berlin free walking tour begins.",
       "relatedToolSlug": ""
     }
   ]
