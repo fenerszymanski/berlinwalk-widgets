@@ -7,7 +7,7 @@ My advice: **choose from your hard time limits first, then use weather and dayli
 ![Alexanderplatz World Clock under a blue sky, the BerlinWalk tour meeting point](blog-drafts/morning-or-afternoon-walking-tour-berlin/images/optimized/01-world-clock-cover.jpg)
 _Both tour windows begin at the World Clock on Alexanderplatz. Start by deciding when you can realistically stand here, not when your plane or train is scheduled to arrive._
 
-## The short answer: morning or afternoon?
+## Berlin walking tour morning or afternoon: the short answer
 
 Choose the **morning tour** when you are already in Berlin, can reach Alexanderplatz calmly, and want the afternoon free for one substantial plan. It works especially well when your afternoon contains a museum reservation, the Reichstag dome, a long lunch, or a second neighbourhood that deserves more than a rushed hour.
 

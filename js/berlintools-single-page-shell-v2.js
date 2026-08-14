@@ -8,7 +8,7 @@
 (function () {
   'use strict';
 
-  var VERSION = 'berlintools-shell-v2-20260813-host-repair-complete';
+  var VERSION = 'berlintools-shell-v2-20260814-tour-time-repair';
   var ENABLE_ALL = true;
   var PILOT_SLUGS = [
     'berlin-first-day-planner',
@@ -76,6 +76,19 @@
         'Compare lockers and staffed options',
         'Drop the bags and keep moving'
       ]
+    },
+    'berlin-tour-time-window': {
+      title: 'Berlin Tour Time Window: Morning or Afternoon?',
+      lead: 'Set the earliest time you can reach the World Clock and the latest time you must be free near Hackescher Markt. See whether the current 11:30 or 15:30 planning window fits without rushing the rest of your Berlin day.',
+      trust: 'Free to use · No sign-up · Built for Berlin',
+      note: 'Set your World Clock arrival and Hackescher Markt finish first. Use weather only when both windows fit.',
+      summaryKicker: 'Tour time planner',
+      summaryTitle: 'Find the window that fits',
+      steps: [
+        'Set your earliest World Clock arrival',
+        'Protect your next fixed commitment',
+        'Check the live calendar for your date'
+      ]
     }
   };
 
@@ -91,6 +104,12 @@
       description: 'Free trainer for ordering at a Berlin bakery in German. Build a real order, learn the words for Schrippe, Pfannkuchen and Brezel, and rehearse the questions the counter asks back.',
       image: 'https://static.wixstatic.com/media/5a08a3_d8a7250b42544578aefc35723649019b~mv2.png',
       imageAlt: 'BerlinWalk Berlin Bakery Counter icon'
+    },
+    'berlin-tour-time-window': {
+      title: 'Berlin Tour Time Window: Morning or Afternoon? | BerlinWalk',
+      description: 'Set your real arrival at the World Clock and finish near Hackescher Markt. See whether the morning or afternoon Berlin walking-tour window fits.',
+      image: 'https://static.wixstatic.com/media/5a08a3_c4b967dd5fac4ae4ba7432ffd5bfaeba~mv2.png',
+      imageAlt: 'BerlinWalk Berlin Tour Time Window icon'
     }
   };
 
