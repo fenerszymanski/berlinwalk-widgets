@@ -2601,5 +2601,18 @@
     "png160": "tools-home/icons/berlin-day-duet-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-day-duet-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_6ba11f97c226409886e032958dc37179~mv2.png"
+  },
+  {
+    "slug": "berlin-private-route-brief",
+    "title": "Berlin Private Route Brief",
+    "category": "Discovery",
+    "model": "Built-in ImageGen",
+    "style": "BerlinWalk green tile and yellow route-map icon family 2026-08-14",
+    "sourceSheet": "tools-home/icons/_src/daily-blog-berlin-private-route-brief-20260814/berlin-private-route-brief-raw.png",
+    "promptSource": "tools-home/icons/_src/daily-blog-berlin-private-route-brief-20260814/PROMPT.md",
+    "png512": "tools-home/icons/berlin-private-route-brief.png",
+    "png160": "tools-home/icons/berlin-private-route-brief-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-private-route-brief-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_a222059114674c0aab990c7b2e31006e~mv2.png"
   }
 ]

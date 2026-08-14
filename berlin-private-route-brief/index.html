@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Private Route Brief | BerlinWalk</title>
+  <meta name="description" content="Tap three real Berlin places and see whether a fixed public walk or a private route fits your group day better.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script defer src="../js/brand.js"></script>
+  <style>
+    :root {
+      --route-green: #123d18;
+      --route-mid: #1b5e20;
+      --route-yellow: #ffe600;
+      --route-paper: #fffdf1;
+      --route-cream: #f3eddc;
+      --route-ink: #212121;
+      --route-muted: #536052;
+      --route-line: #d4dec8;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: transparent; }
+    body { color: var(--route-ink); font-family: Montserrat, Arial, sans-serif; }
+    #bw-private-route-brief { max-width: 980px; margin: 0 auto; padding: 4px; }
+    #bw-private-route-brief button,
+    #bw-private-route-brief a { font: inherit; }
+    #bw-private-route-brief [hidden] { display: none !important; }
+    .route-shell { overflow: hidden; border: 1px solid var(--route-line); border-radius: 22px; background: var(--route-paper); box-shadow: 0 20px 55px rgba(18, 61, 24, .13); }
+    .route-head { padding: 25px 28px 22px; color: #fff; background: var(--route-green); }
+    .route-kicker { margin: 0 0 9px; color: var(--route-yellow); font-size: .69rem; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
+    .route-head h1 { max-width: 760px; margin: 0; font-family: Merriweather, Georgia, serif; font-size: clamp(1.55rem, 4vw, 2.7rem); line-height: 1.08; letter-spacing: -.035em; }
+    .route-head p { max-width: 730px; margin: 11px 0 0; color: #e8f2e7; font-size: .92rem; line-height: 1.58; }
+    .route-body { padding: 21px; }
+    .route-instruction { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-bottom: 13px; }
+    .route-instruction h2 { margin: 0; color: var(--route-green); font-size: 1.18rem; line-height: 1.15; }
+    .route-instruction p { max-width: 490px; margin: 0; color: var(--route-muted); font-size: .77rem; line-height: 1.5; text-align: right; }
+    .route-map-wrap { position: relative; overflow: hidden; border: 1px solid #bdcdb8; background: #dfe8dc; }
+    #route-map { width: 100%; height: 450px; }
+    .route-map-note { position: absolute; z-index: 500; left: 12px; bottom: 12px; max-width: 290px; padding: 8px 10px; border: 1px solid rgba(18, 61, 24, .2); background: rgba(255, 253, 241, .94); color: #405143; font-size: .68rem; line-height: 1.4; box-shadow: 0 4px 14px rgba(0, 0, 0, .1); }
+    .route-map-note strong { color: var(--route-green); }
+    .route-map .leaflet-control-attribution { font-size: 9px; }
+    .route-marker { display: grid; place-items: center; width: 31px; height: 31px; border: 3px solid #fff; border-radius: 50%; background: var(--route-mid); color: #fff; font-size: 11px; font-weight: 900; box-shadow: 0 3px 10px rgba(18, 61, 24, .35); }
+    .route-marker.selected { background: var(--route-yellow); color: var(--route-green); box-shadow: 0 0 0 5px rgba(255, 230, 0, .28), 0 4px 12px rgba(18, 61, 24, .35); }
+    .route-places { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+    .route-place { min-height: 58px; padding: 9px 8px; border: 1px solid #bed0b7; background: #f6f9ef; color: var(--route-green); font-size: .71rem; font-weight: 800; line-height: 1.25; text-align: left; cursor: pointer; transition: transform .15s ease, background .15s ease, border-color .15s ease; }
+    .route-place:hover, .route-place:focus-visible { transform: translateY(-2px); border-color: var(--route-green); background: #fff; outline: 2px solid var(--route-green); outline-offset: 2px; }
+    .route-place[aria-pressed="true"] { border-color: var(--route-green); background: var(--route-yellow); color: var(--route-green); }
+    .route-place small { display: block; margin-top: 4px; color: #5c6b5c; font-size: .61rem; font-weight: 600; }
+    .route-place[aria-pressed="true"] small { color: #315b35; }
+    .route-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 13px; }
+    .route-count { margin: 0; color: var(--route-muted); font-size: .76rem; line-height: 1.4; }
+    .route-reset { padding: 9px 12px; border: 1px solid #9bb398; background: transparent; color: var(--route-green); font-size: .72rem; font-weight: 900; cursor: pointer; }
+    .route-reset:hover, .route-reset:focus-visible { background: #eef5e8; outline: 2px solid var(--route-green); outline-offset: 2px; }
+    .route-brief { margin-top: 18px; padding: 18px; border-top: 6px solid var(--route-yellow); background: var(--route-cream); }
+    .route-brief h2 { margin: 0; color: var(--route-green); font-size: 1.1rem; }
+    .route-sequence { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 12px 0; color: var(--route-green); font-size: .78rem; font-weight: 900; }
+    .route-sequence span { padding: 5px 8px; border: 1px solid #b7c9af; background: #fff; }
+    .route-sequence i { color: #6d7b6d; font-style: normal; }
+    .route-brief p { margin: 8px 0 0; color: #445347; font-size: .81rem; line-height: 1.58; }
+    .route-brief strong { color: var(--route-green); }
+    .route-cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .route-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 10px 13px; background: var(--route-yellow); color: #123d18 !important; font-size: .72rem; font-weight: 900; text-decoration: none; }
+    .route-cta:hover, .route-cta:focus-visible { background: #f4da00; color: #123d18 !important; outline: 3px solid #123d18; outline-offset: 2px; }
+    .route-cta.secondary { border: 1px solid #8faa87; background: transparent; color: var(--route-green) !important; }
+    .route-cta.secondary:hover, .route-cta.secondary:focus-visible { background: #eef5e8; color: var(--route-green) !important; }
+    .route-footnote { margin: 14px 0 0; color: #667266; font-size: .67rem; line-height: 1.5; }
+    @media (max-width: 760px) {
+      .route-head { padding: 21px 20px 19px; }
+      .route-body { padding: 16px; }
+      .route-instruction { display: block; }
+      .route-instruction p { margin-top: 8px; text-align: left; }
+      #route-map { height: 390px; }
+      .route-places { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 480px) {
+      #bw-private-route-brief { padding: 0; }
+      .route-shell { border-radius: 0; }
+      .route-head h1 { font-size: 1.65rem; }
+      #route-map { height: 330px; }
+      .route-places { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .route-place { min-height: 54px; }
+      .route-actions { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <main id="bw-private-route-brief">
+    <section class="route-shell">
+      <header class="route-head">
+        <p class="route-kicker">Berlin Private Route Brief</p>
+        <h1>Connect the three places your group actually cares about.</h1>
+        <p>Tap three real Berlin places on the map. The route brief helps you see whether a fixed central walk is enough or whether a private route deserves the enquiry.</p>
+      </header>
+      <div class="route-body">
+        <div class="route-instruction">
+          <h2>Step 1: tap up to three anchors</h2>
+          <p>Place order matters. Start with the place that would make the day feel most successful.</p>
+        </div>
+        <div class="route-map-wrap">
+          <div id="route-map" role="application" aria-label="Interactive map of five Berlin places"></div>
+          <p class="route-map-note"><strong>Planning signal:</strong> the yellow line connects your chosen coordinates. It is not walking distance or turn-by-turn navigation.</p>
+        </div>
+        <div class="route-places" aria-label="Berlin place choices">
+          <button class="route-place" type="button" data-place="alexanderplatz" aria-pressed="false">Alexanderplatz<small>central east</small></button>
+          <button class="route-place" type="button" data-place="museum-island" aria-pressed="false">Museum Island<small>history and museums</small></button>
+          <button class="route-place" type="button" data-place="brandenburg-gate" aria-pressed="false">Brandenburg Gate<small>central west</small></button>
+          <button class="route-place" type="button" data-place="east-side-gallery" aria-pressed="false">East Side Gallery<small>east and Wall history</small></button>
+          <button class="route-place" type="button" data-place="charlottenburg-palace" aria-pressed="false">Charlottenburg Palace<small>west Berlin</small></button>
+        </div>
+        <div class="route-actions">
+          <p class="route-count" id="route-count" aria-live="polite">Choose one place to begin.</p>
+          <button class="route-reset" id="route-reset" type="button">Clear route</button>
+        </div>
+        <section class="route-brief" id="route-brief" hidden aria-live="polite">
+          <h2>Your route brief</h2>
+          <div class="route-sequence" id="route-sequence"></div>
+          <p id="route-recommendation"></p>
+          <div class="route-cta-row">
+            <a class="route-cta" href="https://www.berlinwalk.com/private-tour" target="_blank" rel="noopener">Ask about a private route</a>
+            <a class="route-cta secondary" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_blank" rel="noopener">Check the free tour calendar</a>
+          </div>
+          <p class="route-footnote">A route brief is a conversation starter. Confirm current opening hours, tickets, access needs and live transport before fixing the day.</p>
+        </section>
+      </div>
+    </section>
+  </main>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function () {
+      var places = {
+        'alexanderplatz': { name: 'Alexanderplatz', area: 'central east', lat: 52.5219, lng: 13.4132 },
+        'museum-island': { name: 'Museum Island', area: 'history and museums', lat: 52.5190, lng: 13.4010 },
+        'brandenburg-gate': { name: 'Brandenburg Gate', area: 'central west', lat: 52.5163, lng: 13.3777 },
+        'east-side-gallery': { name: 'East Side Gallery', area: 'east and Wall history', lat: 52.5050, lng: 13.4397 },
+        'charlottenburg-palace': { name: 'Charlottenburg Palace', area: 'west Berlin', lat: 52.5207, lng: 13.2957 }
+      };
+      var selected = [];
+      var markers = {};
+      var line = null;
+      var map = L.map('route-map', { center: [52.517, 13.378], zoom: 12, scrollWheelZoom: false, tap: true });
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>',
+        maxZoom: 18
+      }).addTo(map);
+      var markerIcon = function (number) {
+        return L.divIcon({ className: '', html: '<div class="route-marker' + (number ? ' selected' : '') + '">' + (number || '•') + '</div>', iconSize: [31, 31], iconAnchor: [15, 15] });
+      };
+      Object.keys(places).forEach(function (key) {
+        var place = places[key];
+        var marker = L.marker([place.lat, place.lng], { icon: markerIcon('') }).addTo(map);
+        marker.bindTooltip(place.name, { direction: 'top', offset: [0, -15] });
+        marker.on('click', function () { toggle(key); });
+        markers[key] = marker;
+      });
+      function updateMarker(key) {
+        var position = selected.indexOf(key);
+        markers[key].setIcon(markerIcon(position === -1 ? '' : String(position + 1)));
+      }
+      function recommendation() {
+        var picked = selected.map(function (key) { return places[key]; });
+        if (picked.length === 1) return '<strong>One anchor is a good start.</strong> Keep the rest of the day flexible around ' + picked[0].name + ', then add a second place only if it sits naturally on the same side of the city.';
+        var hasWest = selected.indexOf('charlottenburg-palace') !== -1;
+        var hasFarEast = selected.indexOf('east-side-gallery') !== -1;
+        var hasCentral = selected.some(function (key) { return key === 'alexanderplatz' || key === 'museum-island' || key === 'brandenburg-gate'; });
+        if (picked.length === 3 && hasWest && (hasFarEast || hasCentral)) return '<strong>Private route earns its keep.</strong> Your three places cross a wide east-west spread. A tailored start, order and pause can protect the group from a generic cross-city checklist.';
+        if (picked.length === 3) return '<strong>A fixed central walk may be enough.</strong> These three anchors can form a clear Berlin introduction if the group is happy with the live meeting time and a public route. Keep tickets and meal timing flexible.';
+        return '<strong>You have a workable conversation.</strong> Decide which place is least flexible, then check whether the second place belongs in the same area before adding a third.';
+      }
+      function render() {
+        var count = document.getElementById('route-count');
+        var brief = document.getElementById('route-brief');
+        var sequence = document.getElementById('route-sequence');
+        if (!selected.length) {
+          count.textContent = 'Choose one place to begin.';
+          brief.hidden = true;
+        } else {
+          count.textContent = selected.length + ' of 3 places selected.' + (selected.length === 3 ? ' Your route brief is ready.' : ' Add ' + (3 - selected.length) + ' more.');
+          sequence.innerHTML = selected.map(function (key, index) { return '<span>' + (index + 1) + '. ' + places[key].name + '</span>' + (index < selected.length - 1 ? '<i aria-hidden="true">→</i>' : ''); }).join('');
+          document.getElementById('route-recommendation').innerHTML = recommendation();
+          brief.hidden = false;
+        }
+        Object.keys(markers).forEach(function (key) { updateMarker(key); });
+        if (line) map.removeLayer(line);
+        if (selected.length > 1) line = L.polyline(selected.map(function (key) { return [places[key].lat, places[key].lng]; }), { color: '#1b5e20', weight: 5, opacity: .9, dashArray: '9 7' }).addTo(map);
+        document.querySelectorAll('.route-place').forEach(function (button) { button.setAttribute('aria-pressed', selected.indexOf(button.getAttribute('data-place')) !== -1 ? 'true' : 'false'); });
+      }
+      function toggle(key) {
+        var current = selected.indexOf(key);
+        if (current !== -1) selected.splice(current, 1);
+        else if (selected.length < 3) selected.push(key);
+        render();
+      }
+      document.querySelectorAll('.route-place').forEach(function (button) { button.addEventListener('click', function () { toggle(button.getAttribute('data-place')); }); });
+      document.getElementById('route-reset').addEventListener('click', function () { selected = []; render(); });
+      setTimeout(function () { map.invalidateSize(); }, 200);
+      render();
+    })();
+  </script>
+</body>
+</html>

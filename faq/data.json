@@ -8113,5 +8113,31 @@
         "a": "The Berlin Trip Planner builds a 1-to-7-day plan around the dates, pace, interests, food needs and fixed plans you enter. It helps place one balanced couple's day inside the rest of the trip instead of forcing every priority into it."
       }
     ]
+  },
+  "private-berlin-tour-for-groups": {
+    "title": "Private Berlin Tour for Groups - FAQ",
+    "subtitle": "Straight answers for choosing a private or public Berlin walking format.",
+    "items": [
+      {
+        "q": "When is a private Berlin tour better for a group?",
+        "a": "Choose private when the group has a specific route, mixed interests, a useful start or end point, or a pace that does not fit a fixed public walk. A private format earns its keep when the route needs to belong to the group rather than to a standard itinerary."
+      },
+      {
+        "q": "Is a free Berlin walking tour enough for a first visit?",
+        "a": "Often, yes. A public walk is a good fit when the group wants a central introduction, can meet at the advertised time and is happy to follow the fixed route. BerlinWalk lasts about 2 hours from the World Clock on Alexanderplatz towards Hackescher Markt; check the live calendar for the date."
+      },
+      {
+        "q": "How many places should a private Berlin tour connect?",
+        "a": "Start with three real priorities. Three places are enough to reveal whether the day is naturally central, split between east and west, or better served by one main area plus a flexible second stop. More pins usually create a list, not a usable route."
+      },
+      {
+        "q": "Can a private Berlin tour start somewhere other than Alexanderplatz?",
+        "a": "That is one of the useful reasons to ask about a private format. Share the group size, date, preferred start, must-see places and any pace or access needs through the enquiry form so the route can be assessed before booking."
+      },
+      {
+        "q": "How do I choose between a private tour and BerlinWalk's free tour?",
+        "a": "Choose the free tour when a fixed central introduction solves the main problem. Choose private when the group needs a tailored route, a particular start or end, or more control over the balance between history, landmarks, museums and neighbourhood time."
+      }
+    ]
   }
 }

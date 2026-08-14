@@ -6169,6 +6169,33 @@
       "iconStatus": "live-wix-media",
       "cmsItemId": "236b5839-161c-47f7-9770-2e82918ce4e6",
       "relatedBlog": "/post/berlin-itinerary-for-couples"
+    },
+    {
+      "slug": "berlin-private-route-brief",
+      "title": "Berlin Private Route Brief",
+      "lead": "Tap three real Berlin places and see whether a fixed central walk or a private route fits your group day better.",
+      "category": "Discovery",
+      "hubCategory": "TripPlans",
+      "type": "Map",
+      "priority": 17,
+      "tags": [
+        "private Berlin tour",
+        "Berlin tour for groups",
+        "Berlin route planner",
+        "Berlin walking tour",
+        "Berlin itinerary"
+      ],
+      "aliases": [
+        "private Berlin group tour",
+        "Berlin group route",
+        "connect Berlin places",
+        "custom Berlin walking route"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-private-route-brief/",
+      "embedHeight": 2100,
+      "image": "https://static.wixstatic.com/media/5a08a3_a222059114674c0aab990c7b2e31006e~mv2.png",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "e86f6dd4-b21b-4a64-90a3-ad57365c7cea"
     }
   ],
   "hubCategories": [
