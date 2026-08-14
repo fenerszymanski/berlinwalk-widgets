@@ -1650,5 +1650,18 @@
     "png160": "tools-home/icons/berlin-tour-time-window-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-tour-time-window-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_c4b967dd5fac4ae4ba7432ffd5bfaeba~mv2.png"
+  },
+  {
+    "slug": "berlin-first-walk-lens",
+    "title": "Berlin First Walk Lens",
+    "category": "Discovery",
+    "model": "Built-in ImageGen",
+    "style": "BerlinWalk green tile and yellow lens icon family 2026-08-14",
+    "sourceSheet": "tools-home/icons/_src/daily-blog-berlin-first-walk-lens-20260814-raw.png",
+    "promptSource": "tools-home/icons/_src/daily-blog-berlin-first-walk-lens-20260814.prompt.txt",
+    "png512": "tools-home/icons/berlin-first-walk-lens.png",
+    "png160": "tools-home/icons/berlin-first-walk-lens-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-first-walk-lens-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_3533b4ff847c4a4ab591c5b69bd45dad~mv2.png"
   }
 ]
