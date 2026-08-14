@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "slug": "berlin-itinerary-for-couples",
+  "key": "berlin-itinerary-for-couples",
+  "config": {
+    "title": "Berlin Itinerary for Couples - FAQ",
+    "subtitle": "Straight answers for planning one Berlin day around two different interests.",
+    "items": [
+      {
+        "q": "How should couples plan a Berlin itinerary with different interests?",
+        "a": "Each person should choose one must-do. Put the less flexible choice into the day first, keep the other choice in the nearest sensible area, and connect them with one simple shared hinge such as a park, market, cafe or riverside walk."
+      },
+      {
+        "q": "Should couples split up for part of a Berlin trip?",
+        "a": "They can, but it is not the only solution. One person can lead the first half and the other the second, with a shared pause between them. Split up only when both priorities require long separate visits and meeting again is genuinely easier."
+      },
+      {
+        "q": "Which Berlin areas combine museums, food and outdoor time?",
+        "a": "Museum Island, Hackescher Markt and Monbijoupark make a compact Mitte combination. East Side Gallery, Oberbaumbrücke and Kreuzberg combine history, public art and food. Tiergarten works with the central west when green space matters."
+      },
+      {
+        "q": "How many fixed bookings should a couple put in one Berlin day?",
+        "a": "One fixed anchor is usually enough. Two distant reservations create a fragile day, so keep the second priority flexible unless both bookings are essential and there is a generous travel block between them."
+      },
+      {
+        "q": "How does the Berlin Trip Planner help couples?",
+        "a": "The Berlin Trip Planner builds a 1-to-7-day plan around the dates, pace, interests, food needs and fixed plans you enter. It helps place one balanced couple's day inside the rest of the trip instead of forcing every priority into it."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How should couples plan a Berlin itinerary with different interests?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Each person should choose one must-do. Put the less flexible choice into the day first, keep the other choice in the nearest sensible area, and connect them with one simple shared hinge such as a park, market, cafe or riverside walk."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should couples split up for part of a Berlin trip?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "They can, but it is not the only solution. One person can lead the first half and the other the second, with a shared pause between them. Split up only when both priorities require long separate visits and meeting again is genuinely easier."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Berlin areas combine museums, food and outdoor time?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Museum Island, Hackescher Markt and Monbijoupark make a compact Mitte combination. East Side Gallery, Oberbaumbrücke and Kreuzberg combine history, public art and food. Tiergarten works with the central west when green space matters."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many fixed bookings should a couple put in one Berlin day?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "One fixed anchor is usually enough. Two distant reservations create a fragile day, so keep the second priority flexible unless both bookings are essential and there is a generous travel block between them."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the Berlin Trip Planner help couples?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Berlin Trip Planner builds a 1-to-7-day plan around the dates, pace, interests, food needs and fixed plans you enter. It helps place one balanced couple's day inside the rest of the trip instead of forcing every priority into it."
+        }
+      }
+    ]
+  }
+}
