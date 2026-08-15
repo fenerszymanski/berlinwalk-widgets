@@ -10,7 +10,7 @@ If you have only a small window, choose two places and give each one proper atte
 
 The matching [Berlin Memorial Reading Order tool](/tools/berlin-memorial-reading-order) lets you change the order and see the first two, three or four places in your version. It is a reading order, not a walking-time calculator. Check each institution's current opening information before you leave.
 
-![The concrete stelae of the Memorial to the Murdered Jews of Europe in Berlin](images/optimized/01-memorial-stelae-detail.jpg)
+![The concrete stelae of the Memorial to the Murdered Jews of Europe in Berlin](blog-drafts/free-berlin-memorials/images/optimized/01-memorial-stelae-detail.jpg)
 _The field of stelae changes as you move through it; there is no single viewpoint that explains the whole place._
 
 ## 1. Memorial to the Murdered Jews of Europe: start with memory
@@ -19,7 +19,7 @@ Begin at Cora-Berliner-Straße 1, just south of the Brandenburg Gate. The field 
 
 I would not begin by trying to photograph the whole field from its edge. Walk into it, notice how the ground falls and rises, and then decide whether you want the names, biographies and family stories in the Information Centre. The point is not to finish the site quickly. The point is to let the scale become personal before moving on to the institutions that made the crimes possible.
 
-![A view down a path between the stelae at the Memorial to the Murdered Jews of Europe](images/optimized/02-memorial-field.jpg)
+![A view down a path between the stelae at the Memorial to the Murdered Jews of Europe](blog-drafts/free-berlin-memorials/images/optimized/02-memorial-field.jpg)
 _The field is open 24 hours; the Information Centre below it follows separate visiting hours._
 
 ## 2. Topography of Terror: read the machinery
@@ -28,7 +28,7 @@ Next, use the Topography of Terror at Niederkirchnerstraße 8. The documentation
 
 This is the place I would choose when a visitor says, “I know what happened, but I do not understand how.” The displays are about organisations, offices, responsibilities and decisions. Read one section carefully instead of treating the centre as a fast list of dates. The exposed remains and the gravel outside also matter: the site connects the paperwork of terror to the streets of present-day Berlin.
 
-![The Topography of Terror documentation centre beside the former Gestapo site](images/optimized/03-topography-of-terror.jpg)
+![The Topography of Terror documentation centre beside the former Gestapo site](blog-drafts/free-berlin-memorials/images/optimized/03-topography-of-terror.jpg)
 _Topography of Terror is a documentation centre, not a conventional scenic landmark; give its evidence time._
 
 ## 3. Berlin Wall Memorial: see a divided city in the ground
@@ -37,7 +37,7 @@ The Berlin Wall Memorial on Bernauer Straße is the right third stop when your q
 
 Bernauer Straße makes the Wall legible because the border did not pass through an empty field. Buildings, windows, churches, pavements and escape attempts were part of the same street. Use the outdoor grounds first, then go inside if the documents and personal accounts are what you need. If you want a longer explanation of the memorial itself, I have also written a [practical Berlin Wall Memorial guide](/post/berlin-wall-memorial-bernauer-strasse).
 
-![The Berlin Wall Memorial grounds in Bernauer Straße in the morning light](images/optimized/04-berlin-wall-memorial.jpg)
+![The Berlin Wall Memorial grounds in Bernauer Straße in the morning light](blog-drafts/free-berlin-memorials/images/optimized/04-berlin-wall-memorial.jpg)
 _At Bernauer Straße, the former border is read through the surviving landscape and the buildings around it._
 
 ## 4. Tränenpalast: finish at a human threshold
@@ -46,7 +46,7 @@ Tränenpalast, at Reichstagufer 17 by Friedrichstraße station, was a former bor
 
 The building is smaller and more intimate than the Wall Memorial. That is why I like it at the end of this sequence. After the field, the documentation and the border landscape, the crossing brings the story back to people carrying bags, saying goodbye and making a decision at a checkpoint. You do not need a long visit to understand the room. You do need to let it be more than a backdrop.
 
-![The former Tränenpalast border crossing at Friedrichstraße in Berlin](images/optimized/05-traenenpalast.jpg)
+![The former Tränenpalast border crossing at Friedrichstraße in Berlin](blog-drafts/free-berlin-memorials/images/optimized/05-traenenpalast.jpg)
 _Tränenpalast preserves a border-crossing building where divided-city history became an immediate personal decision._
 
 ## How I would choose the right number of stops
