@@ -10,6 +10,8 @@ For a Berlin walking tour, shoes are the decision that matters most. A clean, su
 
 The [Berlin Walking Kit](/tools/berlin-walking-kit) turns that decision into a small packing rail: choose your walking setting, then add a shoe, a layer and one sensible thing to carry. It is a planning aid, not a weather forecast or a promise about walking time.
 
+{{widget:berlin-walking-kit}}
+
 ![People crossing Alexanderplatz with the TV Tower behind them, a typical starting point for a Berlin walking day](blog-drafts/what-to-wear-for-a-berlin-walking-tour/images/optimized/01-people-alexanderplatz.jpg)
 
 _Alexanderplatz gives you a clear landmark and several ways to change direction, but the day still begins with comfortable shoes._
@@ -81,8 +83,6 @@ That is why I built the [Berlin Walking Kit](/tools/berlin-walking-kit). It give
 Clothing is not the only thing that makes a first Berlin walk easier. Sometimes the missing layer is context. My [Berlin free walking tour](/post/what-happens-on-a-berlin-free-walking-tour) starts at the World Clock on Alexanderplatz and lasts about 2 hours through the historic centre of former East Berlin. It connects the divided-city story to the places around you; it does not follow the full Berlin Wall line.
 
 If that is the right first move for your trip, [check the live BerlinWalk calendar](https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based). Then keep the rest of the day light. One good walk, comfortable shoes and an evening you can still enjoy are a better Berlin plan than a suitcase-perfect outfit and four rushed neighbourhoods.
-
-{{widget:berlin-walking-kit}}
 
 ## Frequently asked questions
 

@@ -57,6 +57,8 @@ _Tränenpalast preserves a border-crossing building where divided-city history b
 
 The [Berlin Memorial Reading Order](/tools/berlin-memorial-reading-order) is useful when your available day changes. Drag the places into the order that matches your question, then take only the first two, three or four. Do not treat the output as a guaranteed route or a promise that every site will be open when you arrive.
 
+{{widget:berlin-memorial-reading-order}}
+
 ## A respectful way to visit free memorials in Berlin
 
 The fact that a place costs nothing does not mean it deserves a quick stop. Put your phone away for a few minutes, read one panel all the way through and leave room for a pause. Memorials are not interchangeable attractions, and a strong day may contain only two of them.
@@ -68,7 +70,5 @@ If you want a wider first orientation before visiting the memorials alone, I run
 For a broader first-day history frame, you can also read my guide to [the twelve stops through Berlin's ancient core](/post/12-stops-through-berlin-s-ancient-core-what-you-ll-see-on-our-free-walking-tour). The useful move is simple: choose one question, choose two or three places, and read them slowly.
 
 {{article-image-credits}}
-
-{{widget:berlin-memorial-reading-order}}
 
 {{faq}}
