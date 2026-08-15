@@ -56,30 +56,70 @@
   ].forEach(function (slug) { HISTORY_RELEVANT_ROLLOUT_SLUGS[slug] = true; });
   var CONTENT_UPGRADE_ELEMENT_TAG = 'bw-content-upgrade-card';
   var CONTENT_UPGRADE_MARKER = 'data-bw-content-upgrade';
-  var CONTENT_UPGRADE_EXPERIMENT_ID = 'transport_ticket_pocket_card_v1';
-  var CONTENT_UPGRADE_STORAGE_KEY = 'bwContentUpgrade.transportTicket.v1';
-  var CONTENT_UPGRADE_API_BASE = window.BW_DOWNLOAD_LEAD_API_BASE || 'https://app.berlinwalk.com/api/download-lead';
-  var CONTENT_UPGRADE_ELEMENT_URL = window.BW_CONTENT_UPGRADE_ELEMENT_URL || 'https://fenerszymanski.github.io/berlinwalk-widgets/content-upgrade-card/content-upgrade-card-element.js';
-  var CONTENT_UPGRADE_ASSET_ID = 'berlin-transport-ticket-pocket-card';
-  var CONTENT_UPGRADE_ASSET_VERSION = '2026-07-v1';
+  var CONTENT_UPGRADE_DEFAULT_API_BASE = window.BW_DOWNLOAD_LEAD_API_BASE || 'https://app.berlinwalk.com/api/download-lead';
+  var CONTENT_UPGRADE_DEFAULT_ELEMENT_URL = window.BW_CONTENT_UPGRADE_ELEMENT_URL || 'https://fenerszymanski.github.io/berlinwalk-widgets/content-upgrade-card/content-upgrade-card-element.js?v=20260816-magnet1';
   var CONTENT_UPGRADE_PLACEMENT = 'blog_inline_booking_slot';
-  var CONTENT_UPGRADE_SAFETY_SLUG = 'berlin-ticket-machines';
   var CONTENT_UPGRADE_READY_TIMEOUT_MS = 7000;
-  var CONTENT_UPGRADE_SLUGS = {};
-  [
-    'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
-    'berlin-ticket-machines',
-    'buy-berlin-transport-tickets-on-your-phone',
-    'berlin-ab-abc-ticket-zones',
-    'do-you-really-need-to-validate-your-ticket-on-berlin-trains',
-    'berlin-u-bahn-fine',
-    'deutschlandticket-berlin-tourists',
-    'u-bahn-vs-s-bahn-berlin',
-    'berlin-trams-guide',
-    'berlin-night-transport',
-    'bus-100-berlin-the-4-sightseeing-tour-locals-don-t-want-you-to-know-about',
-    'berlin-public-transport-ferries'
-  ].forEach(function (slug) { CONTENT_UPGRADE_SLUGS[slug] = true; });
+  var CONTENT_UPGRADE_MAGNETS = [{
+    experimentId: 'berlin_skip_list_v1',
+    assetId: 'berlin-skip-list',
+    assetVersion: '2026-08-v1',
+    storageKey: 'bwContentUpgrade.berlinSkipList.v1',
+    apiBase: CONTENT_UPGRADE_DEFAULT_API_BASE,
+    elementUrl: CONTENT_UPGRADE_DEFAULT_ELEMENT_URL,
+    placement: CONTENT_UPGRADE_PLACEMENT,
+    controlType: 'private-tour',
+    controlUrl: 'https://www.berlinwalk.com/private-tour',
+    acquisitionCohort: 'berlin_skip_list_pilot',
+    slugs: [
+      'how-many-days-in-berlin',
+      'one-day-in-berlin',
+      'weekend-in-berlin-48-hour-itinerary',
+      '2-days-in-berlin-itinerary',
+      'berlin-in-3-days-the-perfect-itinerary-from-a-local-guide',
+      'berlin-first-time-visitor-mistakes-12-things-to-know-before-you-go',
+      'best-museums-in-berlin-first-time-visitors',
+      'is-berlin-walkable',
+      'berlin-with-kids',
+      'berlin-accessibility',
+      'berlin-itinerary-for-couples',
+      'travelling-alone-in-berlin-day-plan'
+    ],
+    component: {
+      barCopy: 'FREE SAVE-TO-PHONE GUIDE',
+      eyebrow: 'Central Berlin, edited',
+      title: 'The Berlin Skip List',
+      description: 'Nine things I would skip in central Berlin, and what the hours buy you instead.',
+      gateCopy: 'That is three of nine. Want all nine as a card you can keep on your phone while you walk? I will email it.',
+      submitLabel: 'Email me the Skip List',
+      consentVersion: 'berlin-skip-list-v1-2026-08-15',
+      consentText: 'By requesting this list, I agree to receive it by email plus occasional BerlinWalk emails about planning a Berlin trip. I can unsubscribe anytime. Privacy Policy.',
+      successCopy: 'Check your inbox to confirm your email and open The Berlin Skip List.',
+      arrivalLabel: 'When are you planning to arrive?',
+      arrivalOptions: [
+        { value: 'this-month', label: 'This month' },
+        { value: 'next-month', label: 'Next month' },
+        { value: 'in-2-3-months', label: 'In 2-3 months' },
+        { value: 'not-booked-yet', label: 'Not booked yet' }
+      ],
+      teasers: [
+        { number: 1, title: 'Skip the ride up the TV Tower.', body: 'You queue for a timed slot, and the one view missing from the top is the tower itself. I would rather walk you along the Spree from Museum Island.' },
+        { number: 2, title: 'Skip Checkpoint Charlie.', body: 'It is a rebuilt booth ringed by fast food and men in costume. The border that mattered is a short ride north at Bernauer Straße, where a preserved stretch of the death strip still stands.' },
+        { number: 7, title: 'Skip the Reichstag dome if you have not registered.', body: 'It is free, but you cannot walk in and the slots go before you arrive. Register with the Bundestag visitor service well ahead, or spend the time on the lawn out front.' }
+      ],
+      items: [
+        { number: 1, skip: 'TV Tower ride', why: 'A timed attraction can eat a short day.', instead: 'Walk the Spree from Museum Island.' },
+        { number: 2, skip: 'Checkpoint Charlie', why: 'The booth is a reconstruction, not the full story.', instead: 'Go to the Berlin Wall Memorial.' },
+        { number: 3, skip: 'Berlin Dungeon and Madame Tussauds', why: 'The format travels better than the Berlin context.', instead: 'Choose the Topography of Terror.' },
+        { number: 4, skip: 'Eating at Alexanderplatz', why: 'Convenience is not the same as a good Berlin meal.', instead: 'Walk to Rosa-Luxemburg-Platz.' },
+        { number: 5, skip: 'The hop-on-hop-off bus', why: 'A fixed timetable keeps you above the streets.', instead: 'Take BVG 100 or 200 toward Alexanderplatz.' },
+        { number: 6, skip: 'Several Museum Island museums', why: 'One day of museums can become a tired checklist.', instead: 'Choose one museum, then walk Lustgarten.' },
+        { number: 7, skip: 'The Reichstag dome without a booking', why: 'Free does not mean walk-in is guaranteed.', instead: 'Register through the Bundestag visitor service.' },
+        { number: 8, skip: 'A day trip with only two Berlin days', why: 'A day trip removes one whole Berlin day.', instead: 'Keep the centre for this visit.' },
+        { number: 9, skip: 'Treating Potsdamer Platz as a full attraction', why: 'The square is a crossing point, not a whole afternoon.', instead: 'See the Wall fragments, then Niederkirchnerstraße.' }
+      ]
+    }
+  }];
 
   var injections = 0;
   var reinjectTimer = null;
@@ -94,8 +134,7 @@
   var sentHistoryViews = {};
   var contentUpgradeElementPromise = null;
   var contentUpgradeInsertionPending = false;
-  var contentUpgradeMemoryBucket = null;
-  var contentUpgradeMemoryAssignmentId = '';
+  var contentUpgradeStates = {};
   var contentUpgradeFallbackPaths = {};
   var pendingContentUpgradeViews = {};
   var sentContentUpgradeViews = {};
@@ -218,6 +257,14 @@
       '.bw-blog-booking-cta{display:block;margin-top:2px;}',
       '.bw-blog-booking-cta a{align-items:center;background:#FFE600;border-radius:999px;color:#1B5E20!important;display:flex;font-size:14px;font-weight:900;justify-content:center;min-height:44px;padding:0 16px;text-decoration:none!important;width:100%;}',
       '.bw-blog-booking-cta a:hover,.bw-blog-booking-cta a:focus-visible{outline:2px solid #1B5E20;outline-offset:2px;}',
+      '.bw-private-tour-control-card{box-sizing:border-box;display:block;margin:30px 0;max-width:100%;padding:22px 24px;border:1px solid #CFE4C8;border-radius:14px;background:#1B5E20;color:#fff;box-shadow:0 8px 22px rgba(27,94,32,.12);font-family:Montserrat,Arial,sans-serif;}',
+      '.bw-private-tour-control-card *{box-sizing:border-box;}',
+      '.bw-private-tour-control-card .bw-private-tour-kicker{margin:0 0 8px;color:#FFE600;font-size:10px;font-weight:900;letter-spacing:.12em;line-height:1.3;text-transform:uppercase;}',
+      '.bw-private-tour-control-card h2{margin:0 0 8px;color:#fff;font-size:22px;line-height:1.12;}',
+      '.bw-private-tour-control-card p{margin:0 0 16px;color:#fff;font-size:14px;line-height:1.5;}',
+      '.bw-private-tour-control-card a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 16px;border-radius:999px;background:#FFE600;color:#123D18!important;font-size:14px;font-weight:900;text-decoration:none!important;}',
+      '.bw-private-tour-control-card a:hover,.bw-private-tour-control-card a:focus-visible{outline:2px solid #FFE600;outline-offset:3px;}',
+      '@media(max-width:640px){.bw-private-tour-control-card{margin:24px 0;padding:20px;}.bw-private-tour-control-card h2{font-size:20px;}.bw-private-tour-control-card a{width:100%;}}',
       '@media(max-width:640px){.bw-blog-booking-card{margin:24px 0;}.bw-blog-booking-strip{font-size:9px;letter-spacing:.1em;}.bw-blog-booking-inner{display:block;padding:12px;}.bw-blog-booking-media{float:left;width:92px;flex:none;margin:0 10px 4px 0;}.bw-blog-booking-media img{width:92px;height:92px;}.bw-blog-booking-body{display:block;padding:0;}.bw-blog-booking-title{font-size:16px!important;margin:0 0 6px!important;}.bw-blog-booking-facts{font-size:11.5px;}.bw-blog-booking-dates{clear:both;margin-top:10px;}.bw-blog-booking-day{margin-top:8px;}.bw-blog-booking-cta{margin-top:8px;}}'
     ].join('');
     document.head.appendChild(style);
@@ -447,6 +494,25 @@
     ].join('');
 
     loadDates(wrapper);
+    return wrapper;
+  }
+
+  function buildPrivateTourControlCard(assignment) {
+    ensureStyles();
+    var wrapper = document.createElement('aside');
+    wrapper.setAttribute(MARKER, '1');
+    wrapper.setAttribute('data-bw-private-tour-control', '1');
+    wrapper.className = 'bw-private-tour-control-card';
+    wrapper.setAttribute('aria-label', 'BerlinWalk private walks');
+    var magnet = contentUpgradeMagnetById(assignment && assignment.assetId);
+    var copy = magnet && magnet.component || {};
+    var href = contentUpgradeControlUrl(assignment);
+    wrapper.innerHTML = [
+      '<p class="bw-private-tour-kicker">BERLINWALK PRIVATE WALK</p>',
+      '<h2>', escapeHtml(copy.controlTitle || 'Want Berlin planned around your group?'), '</h2>',
+      '<p>', escapeHtml(copy.controlDescription || 'I can build a private walk around your date and pace.'), '</p>',
+      '<a href="', escapeHtml(href), '" target="_top" data-bw-private-tour-cta>See private walks</a>'
+    ].join('');
     return wrapper;
   }
 
@@ -789,10 +855,18 @@
     });
   }
 
-  /* The transport Pocket Card is inert for normal visitors unless Wix Custom
-   * Code explicitly advances it beyond QA. During safety it runs at 10% only
-   * on the ticket-machine article for 24 hours; pilot then runs 90/10 on the
-   * exact transport inventory below. */
+  function contentUpgradeMagnetForSlug(slug) {
+    var matches = CONTENT_UPGRADE_MAGNETS.filter(function (magnet) {
+      return magnet.slugs.indexOf(String(slug || '')) !== -1;
+    });
+    if (matches.length > 1) throw new Error('lead magnet slug collision');
+    return matches[0] || null;
+  }
+
+  function contentUpgradeMagnetById(assetId) {
+    return CONTENT_UPGRADE_MAGNETS.find(function (magnet) { return magnet.assetId === assetId; }) || null;
+  }
+
   function contentUpgradeConfig() {
     try {
       var override = window.BW_CONTENT_UPGRADE_EXPERIMENT_CONFIG || {};
@@ -803,7 +877,7 @@
         stage: stage,
         safetyStartedAt: String(override.safetyStartedAt || ''),
         rampWeight: Number.isFinite(Number(override.rampWeight)) ? Number(override.rampWeight) : 0.10,
-        pilotWeight: Number.isFinite(Number(override.pilotWeight)) ? Number(override.pilotWeight) : 0.90,
+        pilotWeight: Number.isFinite(Number(override.pilotWeight)) ? Number(override.pilotWeight) : 0.50,
         invalid: false
       };
     } catch (error) {
@@ -836,10 +910,10 @@
     return '';
   }
 
-  function contentUpgradeAcquisitionCohort(slug) {
+  function contentUpgradeAcquisitionCohort(magnet, slug) {
     slug = slug || historySlug();
-    if (slug === CONTENT_UPGRADE_SAFETY_SLUG) return 'transport_ticket_safety';
-    if (CONTENT_UPGRADE_SLUGS[slug]) return 'transport_ticket_pilot';
+    if (magnet && magnet.slugs.indexOf(slug) !== -1) return magnet.acquisitionCohort;
+    if (magnet) return magnet.experimentId + '_qa';
     return 'blog_forced_qa';
   }
 
@@ -874,12 +948,27 @@
     return 'cua_' + fallback;
   }
 
-  function readStoredContentUpgradeAssignment() {
+  function contentUpgradeState(magnet) {
+    var key = magnet && magnet.experimentId;
+    if (!key) return null;
+    if (!contentUpgradeStates[key]) {
+      contentUpgradeStates[key] = {
+        bucket: null,
+        assignmentId: '',
+        fallbackPaths: {},
+      };
+    }
+    return contentUpgradeStates[key];
+  }
+
+  function readStoredContentUpgradeAssignment(magnet) {
+    var state = contentUpgradeState(magnet);
     if (!historyAnalyticsAllowed()) return null;
     try {
-      var raw = window.localStorage.getItem(CONTENT_UPGRADE_STORAGE_KEY);
+      var raw = window.localStorage.getItem(magnet.storageKey);
       var parsed = raw ? JSON.parse(raw) : null;
-      if (parsed && parsed.experiment === CONTENT_UPGRADE_EXPERIMENT_ID && typeof parsed.bucket === 'number' && parsed.bucket >= 0 && parsed.bucket < 1) {
+      if (parsed && parsed.experiment === magnet.experimentId && typeof parsed.bucket === 'number' && parsed.bucket >= 0 && parsed.bucket < 1) {
+        if (state) state.assignmentId = validContentUpgradeAssignmentId(parsed.assignmentId);
         return {
           bucket: parsed.bucket,
           assignmentId: validContentUpgradeAssignmentId(parsed.assignmentId)
@@ -889,41 +978,47 @@
     return null;
   }
 
-  function rememberContentUpgradeAssignment() {
-    if (!historyAnalyticsAllowed() || contentUpgradeMemoryBucket === null) return;
+  function rememberContentUpgradeAssignment(magnet) {
+    var state = contentUpgradeState(magnet);
+    if (!magnet || !state || !historyAnalyticsAllowed() || state.bucket === null) return;
     try {
-      if (!contentUpgradeMemoryAssignmentId) contentUpgradeMemoryAssignmentId = randomContentUpgradeAssignmentId();
-      window.localStorage.setItem(CONTENT_UPGRADE_STORAGE_KEY, JSON.stringify({
-        experiment: CONTENT_UPGRADE_EXPERIMENT_ID,
-        bucket: contentUpgradeMemoryBucket,
-        assignmentId: contentUpgradeMemoryAssignmentId,
+      if (!state.assignmentId) state.assignmentId = randomContentUpgradeAssignmentId();
+      window.localStorage.setItem(magnet.storageKey, JSON.stringify({
+        experiment: magnet.experimentId,
+        bucket: state.bucket,
+        assignmentId: state.assignmentId,
         assignedAt: new Date().toISOString()
       }));
     } catch (err) {}
   }
 
-  function contentUpgradeBucket() {
-    if (contentUpgradeMemoryBucket !== null) {
-      rememberContentUpgradeAssignment();
-      return contentUpgradeMemoryBucket;
+  function contentUpgradeBucket(magnet) {
+    var state = contentUpgradeState(magnet);
+    if (!magnet || !state) return 1;
+    if (state.bucket !== null) {
+      rememberContentUpgradeAssignment(magnet);
+      return state.bucket;
     }
-    var stored = readStoredContentUpgradeAssignment();
-    contentUpgradeMemoryBucket = stored === null ? randomContentUpgradeBucket() : stored.bucket;
-    contentUpgradeMemoryAssignmentId = stored && stored.assignmentId || '';
-    rememberContentUpgradeAssignment();
-    return contentUpgradeMemoryBucket;
+    var stored = readStoredContentUpgradeAssignment(magnet);
+    state.bucket = stored === null ? randomContentUpgradeBucket() : stored.bucket;
+    state.assignmentId = stored && stored.assignmentId || state.assignmentId || '';
+    rememberContentUpgradeAssignment(magnet);
+    return state.bucket;
   }
 
-  function contentUpgradeAssignmentId() {
+  function contentUpgradeAssignmentId(magnet) {
     if (!historyAnalyticsAllowed()) return '';
-    contentUpgradeBucket();
-    rememberContentUpgradeAssignment();
-    return contentUpgradeMemoryAssignmentId;
+    contentUpgradeBucket(magnet);
+    rememberContentUpgradeAssignment(magnet);
+    var state = contentUpgradeState(magnet);
+    return state ? state.assignmentId : '';
   }
 
-  function contentUpgradeStageEligibility(stage, slug) {
-    if (stage === 'ramp') return slug === CONTENT_UPGRADE_SAFETY_SLUG;
-    if (stage === 'pilot') return Boolean(CONTENT_UPGRADE_SLUGS[slug]);
+  function contentUpgradeStageEligibility(stage, slug, magnet) {
+    magnet = magnet || contentUpgradeMagnetForSlug(slug);
+    if (!magnet) return false;
+    if (stage === 'ramp') return Boolean(magnet.rampSlug && slug === magnet.rampSlug);
+    if (stage === 'pilot') return magnet.slugs.indexOf(slug) !== -1;
     return false;
   }
 
@@ -934,18 +1029,40 @@
     return 0;
   }
 
-  function contentUpgradeAssignmentShape(variant, inExperiment, qa, stage, slug) {
+  function contentUpgradeAssignmentShape(magnet, variant, inExperiment, qa, stage, slug) {
     return {
-      experimentId: CONTENT_UPGRADE_EXPERIMENT_ID,
+      experimentId: magnet ? magnet.experimentId : '',
+      assetId: magnet ? magnet.assetId : '',
+      assetVersion: magnet ? magnet.assetVersion : '',
+      storageKey: magnet ? magnet.storageKey : '',
+      apiBase: magnet ? magnet.apiBase : CONTENT_UPGRADE_DEFAULT_API_BASE,
+      elementUrl: magnet ? magnet.elementUrl : CONTENT_UPGRADE_DEFAULT_ELEMENT_URL,
       variant: variant,
       inExperiment: Boolean(inExperiment),
       qa: Boolean(qa),
       stage: stage || 'qa',
       sourceSlug: slug || historySlug(),
-      acquisitionCohort: contentUpgradeAcquisitionCohort(slug),
-      placement: CONTENT_UPGRADE_PLACEMENT,
-      assignmentId: inExperiment ? contentUpgradeAssignmentId() : ''
+      acquisitionCohort: contentUpgradeAcquisitionCohort(magnet, slug),
+      placement: magnet ? magnet.placement : CONTENT_UPGRADE_PLACEMENT,
+      controlType: magnet ? magnet.controlType : '',
+      controlUrl: magnet ? magnet.controlUrl : '',
+      magnetId: magnet ? magnet.assetId : '',
+      assignmentId: inExperiment ? contentUpgradeAssignmentId(magnet) : ''
     };
+  }
+
+  function contentUpgradeControlUrl(assignment) {
+    if (!assignment || !assignment.controlUrl) return '';
+    try {
+      var url = new URL(assignment.controlUrl, window.location.href);
+      url.searchParams.set('utm_source', 'berlinwalk');
+      url.searchParams.set('utm_medium', 'blog');
+      url.searchParams.set('utm_campaign', assignment.experimentId || 'lead_asset');
+      url.searchParams.set('utm_content', assignment.sourceSlug || 'blog_post');
+      return url.toString();
+    } catch (err) {
+      return assignment.controlUrl;
+    }
   }
 
   function contentUpgradeAssignment() {
@@ -954,13 +1071,17 @@
       var config = contentUpgradeConfig();
       var stage = contentUpgradeEffectiveStage(config);
       var choice = contentUpgradeQueryChoice();
+      var magnet = contentUpgradeMagnetForSlug(slug);
+      if (!magnet && (choice === 'variant' || choice === 'control')) magnet = CONTENT_UPGRADE_MAGNETS[0];
       var globallyDisabled = window.BW_DISABLE_CONTENT_UPGRADE === true || choice === 'off' || !config.enabled || contentUpgradeFallbackPaths[location.pathname];
-      if (globallyDisabled) return contentUpgradeAssignmentShape('control', false, false, stage, slug);
-      if (choice === 'variant') return contentUpgradeAssignmentShape('variant', true, true, 'qa', slug);
-      if (choice === 'control') return contentUpgradeAssignmentShape('control', true, true, 'qa', slug);
-      if (!contentUpgradeStageEligibility(stage, slug)) return contentUpgradeAssignmentShape('control', false, false, stage, slug);
+      if (!magnet) return contentUpgradeAssignmentShape(null, 'control', false, false, stage, slug);
+      if (globallyDisabled) return contentUpgradeAssignmentShape(magnet, 'control', false, false, stage, slug);
+      if (choice === 'variant') return contentUpgradeAssignmentShape(magnet, 'variant', true, true, 'qa', slug);
+      if (choice === 'control') return contentUpgradeAssignmentShape(magnet, 'control', true, true, 'qa', slug);
+      if (!contentUpgradeStageEligibility(stage, slug, magnet)) return contentUpgradeAssignmentShape(magnet, 'control', false, false, stage, slug);
       return contentUpgradeAssignmentShape(
-        contentUpgradeBucket() < contentUpgradeStageWeight(config, stage) ? 'variant' : 'control',
+        magnet,
+        contentUpgradeBucket(magnet) < contentUpgradeStageWeight(config, stage) ? 'variant' : 'control',
         true,
         false,
         stage,
@@ -968,34 +1089,37 @@
       );
     } catch (error) {
       console.warn(LOG, 'content-upgrade assignment failed; restored booking control', error && error.message || error);
-      return contentUpgradeAssignmentShape('control', false, false, 'qa', slug);
+      return contentUpgradeAssignmentShape(null, 'control', false, false, 'qa', slug);
     }
   }
 
-  function contentUpgradeEventUrl() {
-    var url = new URL(CONTENT_UPGRADE_API_BASE, window.location.href);
+  function contentUpgradeEventUrl(assignment) {
+    var url = new URL(assignment && assignment.apiBase || CONTENT_UPGRADE_DEFAULT_API_BASE, window.location.href);
     url.searchParams.set('action', 'event');
     return url.toString();
   }
 
   function contentUpgradeEventPayload(eventName, assignment) {
     if (!historyAnalyticsAllowed()) return false;
-    assignment = assignment || contentUpgradeAssignmentShape('control', false, false, 'qa', historySlug());
-    var assignmentId = contentUpgradeAssignmentId();
+    assignment = assignment || contentUpgradeAssignmentShape(null, 'control', false, false, 'qa', historySlug());
+    var magnet = contentUpgradeMagnetById(assignment.assetId);
+    var assignmentId = assignment.assignmentId || (magnet ? contentUpgradeAssignmentId(magnet) : '');
     return {
       eventName: eventName,
       occurredAt: new Date().toISOString(),
       analyticsConsent: true,
       analyticsConsentAtSubmit: true,
-      assetId: CONTENT_UPGRADE_ASSET_ID,
-      assetVersion: CONTENT_UPGRADE_ASSET_VERSION,
+      assetId: assignment.assetId,
+      assetVersion: assignment.assetVersion,
       sourceSlug: assignment.sourceSlug || historySlug(),
       pageUrl: safeHistoryUrl(window.location.href),
       referrer: safeHistoryUrl(document.referrer),
-      experiment: CONTENT_UPGRADE_EXPERIMENT_ID,
+      experiment: assignment.experimentId,
       variant: assignment.variant,
-      acquisitionCohort: assignment.acquisitionCohort || contentUpgradeAcquisitionCohort(assignment.sourceSlug),
+      acquisitionCohort: assignment.acquisitionCohort || contentUpgradeAcquisitionCohort(magnet, assignment.sourceSlug),
       placement: assignment.placement || CONTENT_UPGRADE_PLACEMENT,
+      controlType: assignment.controlType || '',
+      controlUrl: assignment.controlType === 'private-tour' ? contentUpgradeControlUrl(assignment) : '',
       assignmentId: assignmentId,
       utm: historyUtm(),
       device: {
@@ -1013,22 +1137,26 @@
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         event: eventName,
-        experiment: CONTENT_UPGRADE_EXPERIMENT_ID,
+        experiment: body.experiment,
         variant: body.variant,
         acquisition_cohort: body.acquisitionCohort,
         placement: body.placement,
         assignment_id: body.assignmentId,
-        asset_id: CONTENT_UPGRADE_ASSET_ID
+        asset_id: body.assetId,
+        control_type: body.controlType,
+        control_url: body.controlUrl
       });
       if (typeof window.gtag === 'function') window.gtag('event', eventName, {
-        experiment: CONTENT_UPGRADE_EXPERIMENT_ID,
+        experiment: body.experiment,
         variant: body.variant,
         acquisition_cohort: body.acquisitionCohort,
         placement: body.placement,
         assignment_id: body.assignmentId,
-        asset_id: CONTENT_UPGRADE_ASSET_ID
+        asset_id: body.assetId,
+        control_type: body.controlType,
+        control_url: body.controlUrl
       });
-      fetch(contentUpgradeEventUrl(), {
+      fetch(contentUpgradeEventUrl(assignment), {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         keepalive: true,
@@ -1042,18 +1170,19 @@
 
   function queueContentUpgradeExperimentView(assignment) {
     if (!assignment.inExperiment) return;
-    var key = location.pathname + ':' + assignment.variant + ':' + (assignment.qa ? 'qa' : 'live');
+    var key = assignment.experimentId + ':' + location.pathname + ':' + assignment.variant + ':' + (assignment.qa ? 'qa' : 'live');
     if (sentContentUpgradeViews[key]) return;
     pendingContentUpgradeViews[key] = assignment;
     flushContentUpgradeExperimentViews();
   }
 
   function flushContentUpgradeExperimentViews() {
-    rememberContentUpgradeAssignment();
     if (!historyAnalyticsAllowed()) return;
     Object.keys(pendingContentUpgradeViews).forEach(function (key) {
       var assignment = pendingContentUpgradeViews[key];
-      assignment.assignmentId = contentUpgradeAssignmentId();
+      var magnet = contentUpgradeMagnetById(assignment.assetId);
+      rememberContentUpgradeAssignment(magnet);
+      assignment.assignmentId = assignment.assignmentId || contentUpgradeAssignmentId(magnet);
       var element = document.querySelector('[' + CONTENT_UPGRADE_MARKER + ']');
       if (element && assignment.assignmentId) element.setAttribute('assignment-id', assignment.assignmentId);
       if (sendContentUpgradeEvent('bw_lead_asset_experiment_view', assignment)) {
@@ -1066,7 +1195,7 @@
   function bindControlContentUpgradeTracking(card, assignment) {
     if (!assignment.inExperiment) return;
     card.addEventListener('click', function (event) {
-      var target = event.target.closest('[data-bw-booking-cta],[data-bw-day-index],[data-bw-slot-index],.bw-blog-booking-more');
+      var target = event.target.closest('[data-bw-private-tour-cta],[data-bw-booking-cta],[data-bw-day-index],[data-bw-slot-index],.bw-blog-booking-more');
       if (target) sendContentUpgradeEvent('bw_lead_asset_control_booking_click', assignment);
     });
   }
@@ -1121,7 +1250,7 @@
     return historyElementPromise;
   }
 
-  function loadContentUpgradeElement() {
+  function loadContentUpgradeElement(magnet) {
     if (window.customElements && customElements.get(CONTENT_UPGRADE_ELEMENT_TAG)) return Promise.resolve();
     if (contentUpgradeElementPromise) return contentUpgradeElementPromise;
     contentUpgradeElementPromise = new Promise(function (resolve, reject) {
@@ -1153,7 +1282,7 @@
       }
 
       var script = document.createElement('script');
-      script.src = CONTENT_UPGRADE_ELEMENT_URL;
+      script.src = magnet && magnet.elementUrl || CONTENT_UPGRADE_DEFAULT_ELEMENT_URL;
       script.async = true;
       script.setAttribute('data-bw-content-upgrade-element', '1');
       script.onload = function () {
@@ -1177,15 +1306,18 @@
   }
 
   function insertControl(anchor, assignment) {
-    var card = buildBookingCard();
-    if (assignment && assignment.experimentId === CONTENT_UPGRADE_EXPERIMENT_ID) {
+    var isContentControl = Boolean(assignment && assignment.inExperiment && assignment.magnetId && assignment.experimentId);
+    var card = isContentControl && assignment.controlType === 'private-tour'
+      ? buildPrivateTourControlCard(assignment)
+      : buildBookingCard();
+    if (isContentControl) {
       bindControlContentUpgradeTracking(card, assignment);
     } else {
       bindControlHistoryTracking(card, assignment);
     }
     anchor.parentNode.insertBefore(card, anchor.nextSibling);
     injections += 1;
-    if (assignment && assignment.experimentId === CONTENT_UPGRADE_EXPERIMENT_ID) {
+    if (isContentControl) {
       queueContentUpgradeExperimentView(assignment);
     } else {
       queueHistoryExperimentView(assignment);
@@ -1276,7 +1408,7 @@
       scheduleInject();
       return false;
     }
-    var fallback = contentUpgradeAssignmentShape('control', false, assignment && assignment.qa, assignment && assignment.stage, assignment && assignment.sourceSlug);
+    var fallback = historyAssignmentShape('control', false, assignment && assignment.qa, assignment && assignment.stage, assignment && assignment.sourceSlug);
     insertControl(anchor, fallback);
     console.warn(LOG, 'content-upgrade variant unavailable; restored booking control', error && error.message || error);
     return true;
@@ -1318,7 +1450,8 @@
     contentUpgradeInsertionPending = true;
     var requestedPath = location.pathname;
     var insertedElement = null;
-    loadContentUpgradeElement().then(function () {
+    var magnet = contentUpgradeMagnetById(assignment && assignment.assetId);
+    loadContentUpgradeElement(magnet).then(function () {
       contentUpgradeInsertionPending = false;
       if (location.pathname !== requestedPath || document.querySelector('[' + MARKER + ']')) return;
       var anchor = currentInsertionAnchor();
@@ -1327,17 +1460,33 @@
       insertedElement = element;
       element.setAttribute(MARKER, '1');
       element.setAttribute(CONTENT_UPGRADE_MARKER, '1');
-      element.setAttribute('asset-id', CONTENT_UPGRADE_ASSET_ID);
-      element.setAttribute('asset-version', CONTENT_UPGRADE_ASSET_VERSION);
+      element.setAttribute('asset-id', assignment.assetId);
+      element.setAttribute('asset-version', assignment.assetVersion);
       element.setAttribute('source-slug', assignment.sourceSlug);
       element.setAttribute('source-url', safeHistoryUrl(window.location.href));
-      element.setAttribute('experiment', CONTENT_UPGRADE_EXPERIMENT_ID);
+      element.setAttribute('experiment', assignment.experimentId);
       element.setAttribute('variant', 'variant');
-      element.setAttribute('api-base', CONTENT_UPGRADE_API_BASE);
+      element.setAttribute('api-base', assignment.apiBase);
       element.setAttribute('acquisition-cohort', assignment.acquisitionCohort);
       element.setAttribute('placement', assignment.placement);
       if (assignment.assignmentId) element.setAttribute('assignment-id', assignment.assignmentId);
       if (assignment.qa) element.setAttribute('qa', 'true');
+      if (magnet && magnet.component) {
+        var copy = magnet.component;
+        element.setAttribute('bar-copy', copy.barCopy);
+        element.setAttribute('eyebrow', copy.eyebrow);
+        element.setAttribute('title', copy.title);
+        element.setAttribute('description', copy.description);
+        element.setAttribute('gate-copy', copy.gateCopy);
+        element.setAttribute('submit-label', copy.submitLabel);
+        element.setAttribute('consent-version', copy.consentVersion);
+        element.setAttribute('consent-text', copy.consentText);
+        element.setAttribute('success-copy', copy.successCopy);
+        element.setAttribute('arrival-label', copy.arrivalLabel);
+        element.setAttribute('arrival-options', JSON.stringify(copy.arrivalOptions));
+        element.setAttribute('teaser-items', JSON.stringify(copy.teasers));
+        element.setAttribute('content-items', JSON.stringify(copy.items));
+      }
       bindContentUpgradeElementTracking(element, assignment);
       anchor.parentNode.insertBefore(element, anchor.nextSibling);
       injections += 1;
@@ -1443,13 +1592,27 @@
       effectiveStage: function () { return contentUpgradeEffectiveStage(contentUpgradeConfig()); },
       eventPayload: contentUpgradeEventPayload,
       eligible: contentUpgradeStageEligibility,
-      fallbackAssignment: function () { return contentUpgradeAssignmentShape('control', false, false, 'qa', historySlug()); },
-      resetBucket: function () { contentUpgradeMemoryBucket = null; contentUpgradeMemoryAssignmentId = ''; },
+      fallbackAssignment: function () { return contentUpgradeAssignmentShape(null, 'control', false, false, 'qa', historySlug()); },
+      resetBucket: function () { contentUpgradeStates = {}; },
       slotDecision: slotDecision,
-      slugs: Object.keys(CONTENT_UPGRADE_SLUGS),
-      storageKey: CONTENT_UPGRADE_STORAGE_KEY,
-      placement: CONTENT_UPGRADE_PLACEMENT,
-      safetySlug: CONTENT_UPGRADE_SAFETY_SLUG
+      slugs: CONTENT_UPGRADE_MAGNETS[0].slugs.slice(),
+      storageKey: CONTENT_UPGRADE_MAGNETS[0].storageKey,
+      placement: CONTENT_UPGRADE_MAGNETS[0].placement,
+      safetySlug: '',
+      magnetConfigs: CONTENT_UPGRADE_MAGNETS.map(function (magnet) {
+        return {
+          experimentId: magnet.experimentId,
+          assetId: magnet.assetId,
+          assetVersion: magnet.assetVersion,
+          storageKey: magnet.storageKey,
+          apiBase: magnet.apiBase,
+          elementUrl: magnet.elementUrl,
+          placement: magnet.placement,
+          controlType: magnet.controlType,
+          controlUrl: magnet.controlUrl,
+          slugs: magnet.slugs.slice()
+        };
+      })
     };
   }
 

@@ -12,20 +12,27 @@ const elementSource = fs.readFileSync(elementPath, 'utf8');
 const injectorSource = fs.readFileSync(injectorPath, 'utf8');
 const journeySource = fs.readFileSync(journeyPath, 'utf8');
 
-const exactConsentCopy = 'By requesting this card, I agree to receive the Berlin Transport Ticket Pocket Card and occasional BerlinWalk emails about Berlin travel tips, new guides, products and walking tours. I can unsubscribe at any time. Read the Privacy Policy.';
-const transportSlugs = [
-  'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
-  'berlin-ticket-machines',
-  'buy-berlin-transport-tickets-on-your-phone',
-  'berlin-ab-abc-ticket-zones',
-  'do-you-really-need-to-validate-your-ticket-on-berlin-trains',
-  'berlin-u-bahn-fine',
-  'deutschlandticket-berlin-tourists',
-  'u-bahn-vs-s-bahn-berlin',
-  'berlin-trams-guide',
-  'berlin-night-transport',
-  'bus-100-berlin-the-4-sightseeing-tour-locals-don-t-want-you-to-know-about',
-  'berlin-public-transport-ferries',
+const skipSlugs = [
+  'how-many-days-in-berlin',
+  'one-day-in-berlin',
+  'weekend-in-berlin-48-hour-itinerary',
+  '2-days-in-berlin-itinerary',
+  'berlin-in-3-days-the-perfect-itinerary-from-a-local-guide',
+  'berlin-first-time-visitor-mistakes-12-things-to-know-before-you-go',
+  'best-museums-in-berlin-first-time-visitors',
+  'is-berlin-walkable',
+  'berlin-with-kids',
+  'berlin-accessibility',
+  'berlin-itinerary-for-couples',
+  'travelling-alone-in-berlin-day-plan',
+];
+const secondarySlugs = [
+  'is-berlin-safe-for-solo-travelers-an-honest-local-perspective',
+  'how-to-spend-a-sunday-in-berlin',
+  'are-shops-open-on-sunday-in-berlin-what-you-need-to-know',
+  'berlin-on-a-monday',
+  'berlin-heatwave-day-plan',
+  'vegan-berlin-guide-2026',
 ];
 const historySlugs = [
   'why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point',
@@ -86,7 +93,7 @@ function makeInjectorContext(options = {}) {
     innerWidth: 390,
     innerHeight: 844,
   };
-  const pathname = options.pathname || '/post/berlin-ticket-machines';
+  const pathname = options.pathname || '/post/how-many-days-in-berlin';
   const location = {
     pathname,
     search: options.search || '',
@@ -127,17 +134,26 @@ function makeInjectorContext(options = {}) {
   };
 }
 
-test('component keeps one explicit bundled disclosure and no checkbox', () => {
-  assert.equal(elementSource.includes(exactConsentCopy), true);
-  assert.match(elementSource, /transport-ticket-pocket-card-bundled-v1-2026-07-18/);
+test('component leads with three full Skip List judgements and keeps arrival timing second', () => {
+  assert.match(elementSource, /berlin-skip-list-v1-2026-08-15/);
+  assert.match(elementSource, /By requesting this list, I agree to receive it by email/);
   assert.match(elementSource, /consent:\s*true/);
   assert.doesNotMatch(elementSource, /type=["']checkbox["']/i);
   assert.doesNotMatch(elementSource, /newsletterConsent/);
-  assert.match(elementSource, /Email me the ticket card/);
-  assert.match(elementSource, /https:\/\/app\.berlinwalk\.com\/api\/download-lead/);
+  assert.match(elementSource, /Email me the Skip List/);
+  assert.match(elementSource, /name="arrivalTiming"/);
+  assert.match(elementSource, /arrival-options/);
+  assert.match(elementSource, /That is three of nine\. Want all nine as a card you can keep on your phone while you walk\? I will email it\./);
+  assert.match(elementSource, /Skip the ride up the TV Tower\.[\s\S]+You queue for a timed slot/);
+  assert.match(elementSource, /Skip Checkpoint Charlie\.[\s\S]+It is a rebuilt booth ringed by fast food/);
+  assert.match(elementSource, /Skip the Reichstag dome if you have not registered\.[\s\S]+It is free, but you cannot walk in/);
+  assert.match(elementSource, /teaser-items/);
+  assert.doesNotMatch(elementSource, /<select[^>]+required/i);
+  assert.match(elementSource, /arrivalOnly:\s*true/);
+  assert.match(elementSource, /content-items/);
+  assert.doesNotMatch(elementSource, /berlin-transport-ticket-pocket-card/);
   assert.match(elementSource, /url\.searchParams\.set\('action', 'submit'\)/);
   assert.match(elementSource, /Check your inbox\./);
-  assert.match(elementSource, /Confirm your email to open the ticket card\./);
 });
 
 test('component is compact, accessible and has no inner scrolling surface', () => {
@@ -155,23 +171,54 @@ test('component is compact, accessible and has no inner scrolling surface', () =
   assert.match(elementSource, /bw-content-upgrade-error/);
 });
 
-test('orchestrator owns the exact 12 transport slugs with no history overlap', () => {
+test('orchestrator owns exactly the 12 primary Skip List slugs', () => {
   const ctx = makeInjectorContext({ config: { stage: 'pilot' } });
-  assert.deepEqual(Array.from(ctx.hooks.slugs).sort(), [...transportSlugs].sort());
-  assert.deepEqual(transportSlugs.filter((slug) => historySlugs.includes(slug)), []);
-  assert.equal(ctx.hooks.safetySlug, 'berlin-ticket-machines');
+  assert.deepEqual(Array.from(ctx.hooks.slugs).sort(), [...skipSlugs].sort());
+  assert.deepEqual(skipSlugs.filter((slug) => historySlugs.includes(slug)), []);
+  assert.deepEqual(skipSlugs.filter((slug) => secondarySlugs.includes(slug)), []);
+  assert.equal(ctx.hooks.safetySlug, '');
   assert.equal(ctx.hooks.placement, 'blog_inline_booking_slot');
+  assert.equal(ctx.hooks.magnetConfigs.length, 1);
+  assert.deepEqual(JSON.parse(JSON.stringify(ctx.hooks.magnetConfigs[0])), {
+    experimentId: 'berlin_skip_list_v1',
+    assetId: 'berlin-skip-list',
+    assetVersion: '2026-08-v1',
+    storageKey: 'bwContentUpgrade.berlinSkipList.v1',
+    apiBase: 'https://app.berlinwalk.com/api/download-lead',
+    elementUrl: 'https://fenerszymanski.github.io/berlinwalk-widgets/content-upgrade-card/content-upgrade-card-element.js?v=20260816-magnet1',
+    placement: 'blog_inline_booking_slot',
+    controlType: 'private-tour',
+    controlUrl: 'https://www.berlinwalk.com/private-tour',
+    slugs: [...skipSlugs],
+  });
   assert.match(injectorSource, /if \(history\.inExperiment\) return \{ owner: 'history'/);
   assert.match(injectorSource, /if \(contentUpgrade\.inExperiment\) return \{ owner: 'content-upgrade'/);
-  assert.match(injectorSource, /document\.querySelector\('\[' \+ MARKER \+ '\]'\)/);
-  assert.match(injectorSource, /element\.setAttribute\(MARKER, '1'\)/);
+  assert.match(injectorSource, /data-bw-private-tour-cta/);
+  assert.doesNotMatch(injectorSource, /transport_ticket_pocket_card_v1/);
+  assert.doesNotMatch(injectorSource, /berlin-ticket-machines/);
 });
 
-test('normal traffic remains booking-only while forced query choices are deterministic', () => {
-  const normal = makeInjectorContext({ pathname: '/post/berlin-ticket-machines' });
+test('pilot uses a 50/50 Skip List gate and keeps unrelated posts on booking', () => {
+  const normal = makeInjectorContext({ pathname: '/post/how-many-days-in-berlin' });
   assert.equal(normal.hooks.assignment().inExperiment, false);
   assert.equal(normal.hooks.slotDecision().owner, 'booking');
 
+  const variant = makeInjectorContext({ pathname: '/post/how-many-days-in-berlin', random: 0.49, config: { stage: 'pilot' } });
+  assert.equal(variant.hooks.assignment().variant, 'variant');
+  assert.equal(variant.hooks.assignment().inExperiment, true);
+  assert.equal(variant.hooks.assignment().assetId, 'berlin-skip-list');
+
+  const control = makeInjectorContext({ pathname: '/post/how-many-days-in-berlin', random: 0.51, config: { stage: 'pilot' } });
+  assert.equal(control.hooks.assignment().variant, 'control');
+  assert.equal(control.hooks.assignment().inExperiment, true);
+  assert.equal(control.hooks.assignment().controlType, 'private-tour');
+
+  const unrelated = makeInjectorContext({ pathname: '/post/unrelated', config: { stage: 'pilot' } });
+  assert.equal(unrelated.hooks.assignment().inExperiment, false);
+  assert.equal(unrelated.hooks.slotDecision().owner, 'booking');
+});
+
+test('forced QA choices are deterministic and history keeps slot priority', () => {
   const variant = makeInjectorContext({ pathname: '/post/unrelated', search: '?bwDownloadLead=variant' });
   assert.equal(variant.hooks.assignment().variant, 'variant');
   assert.equal(variant.hooks.assignment().inExperiment, true);
@@ -183,79 +230,28 @@ test('normal traffic remains booking-only while forced query choices are determi
   assert.equal(control.hooks.assignment().inExperiment, true);
   assert.equal(control.hooks.slotDecision().owner, 'content-upgrade');
 
-  const killed = makeInjectorContext({ pathname: '/post/berlin-ticket-machines', search: '?bwDownloadLead=0', config: { stage: 'pilot' } });
-  assert.equal(killed.hooks.assignment().inExperiment, false);
-  assert.equal(killed.hooks.slotDecision().owner, 'booking');
-});
-
-test('history retains strict slot priority when both products are forced', () => {
-  const ctx = makeInjectorContext({
+  const both = makeInjectorContext({
     pathname: '/post/unrelated',
     search: '?bwHistoryLead=variant&bwDownloadLead=variant',
   });
-  assert.equal(ctx.historyHooks.assignment().inExperiment, true);
-  assert.equal(ctx.hooks.assignment().inExperiment, true);
-  assert.equal(ctx.hooks.slotDecision().owner, 'history');
-  assert.equal(ctx.hooks.slotDecision().assignment.variant, 'variant');
+  assert.equal(both.historyHooks.assignment().inExperiment, true);
+  assert.equal(both.hooks.slotDecision().owner, 'history');
 });
 
-test('24-hour safety is 10% only on berlin-ticket-machines', () => {
-  const startedAt = new Date(Date.now() - 60 * 60 * 1000).toISOString();
-  const variant = makeInjectorContext({
-    pathname: '/post/berlin-ticket-machines',
-    random: 0.05,
-    config: { stage: 'safety', safetyStartedAt: startedAt },
-  });
-  assert.equal(variant.hooks.effectiveStage(), 'ramp');
-  assert.equal(variant.hooks.assignment().variant, 'variant');
-  assert.equal(variant.hooks.assignment().inExperiment, true);
-
-  const control = makeInjectorContext({
-    pathname: '/post/berlin-ticket-machines',
-    random: 0.15,
-    config: { stage: 'safety', safetyStartedAt: startedAt },
-  });
-  assert.equal(control.hooks.assignment().variant, 'control');
-  assert.equal(control.hooks.assignment().inExperiment, true);
-
-  const other = makeInjectorContext({
-    pathname: '/post/berlin-ab-abc-ticket-zones',
-    random: 0.05,
-    config: { stage: 'safety', safetyStartedAt: startedAt },
-  });
-  assert.equal(other.hooks.assignment().inExperiment, false);
-});
-
-test('safety advances after 24 hours to 90/10 pilot on all 12 slugs', async (t) => {
-  const startedAt = new Date(Date.now() - 25 * 60 * 60 * 1000).toISOString();
-  for (const slug of transportSlugs) {
-    await t.test(slug, () => {
-      const variant = makeInjectorContext({
-        pathname: `/post/${slug}`,
-        random: 0.89,
-        config: { stage: 'safety', safetyStartedAt: startedAt },
-      });
-      assert.equal(variant.hooks.effectiveStage(), 'pilot');
-      assert.equal(variant.hooks.assignment().variant, 'variant');
-      assert.equal(variant.hooks.assignment().inExperiment, true);
-
-      const control = makeInjectorContext({
-        pathname: `/post/${slug}`,
-        random: 0.95,
-        config: { stage: 'safety', safetyStartedAt: startedAt },
-      });
-      assert.equal(control.hooks.assignment().variant, 'control');
-      assert.equal(control.hooks.assignment().inExperiment, true);
-    });
+test('all 12 primary slugs are eligible only in pilot', () => {
+  for (const slug of skipSlugs) {
+    const ctx = makeInjectorContext({ pathname: `/post/${slug}`, config: { stage: 'pilot' }, random: 0.49 });
+    assert.equal(ctx.hooks.assignment().inExperiment, true, slug);
+    assert.equal(ctx.hooks.assignment().variant, 'variant', slug);
+  }
+  for (const slug of secondarySlugs) {
+    const ctx = makeInjectorContext({ pathname: `/post/${slug}`, config: { stage: 'pilot' }, random: 0.49 });
+    assert.equal(ctx.hooks.assignment().inExperiment, false, slug);
   }
 });
 
 test('stable assignment is persisted only after analytics consent', () => {
-  const ctx = makeInjectorContext({
-    analytics: false,
-    random: 0.05,
-    config: { stage: 'pilot' },
-  });
+  const ctx = makeInjectorContext({ analytics: false, random: 0.05, config: { stage: 'pilot' } });
   const before = ctx.hooks.assignment();
   assert.equal(before.variant, 'variant');
   assert.equal(before.assignmentId, '');
@@ -284,7 +280,7 @@ test('invalid config and element failure paths restore the existing booking cont
   assert.match(injectorSource, /content-upgrade variant unavailable; restored booking control/);
 });
 
-test('all four transport collisions are absent from the global FDR bridge map', () => {
+test('transport collisions are absent from the global FDR bridge map', () => {
   const start = journeySource.indexOf('  var FDR_BRIDGE_SLUGS = {');
   const end = journeySource.indexOf('\n  };', start);
   assert.notEqual(start, -1);
@@ -299,13 +295,13 @@ test('all four transport collisions are absent from the global FDR bridge map', 
   assert.equal(bridgeMap.includes('how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way'), true);
 });
 
-test('orchestrator and component agree on the canonical asset version', () => {
-  assert.match(elementSource, /DEFAULT_ASSET_VERSION = '2026-07-v1'/);
-  assert.match(injectorSource, /CONTENT_UPGRADE_ASSET_VERSION = '2026-07-v1'/);
-  assert.match(injectorSource, /element\.setAttribute\('asset-version', CONTENT_UPGRADE_ASSET_VERSION\)/);
+test('orchestrator and component agree on the canonical Skip List version', () => {
+  assert.match(elementSource, /DEFAULT_ASSET_VERSION = '2026-08-v1'/);
+  assert.match(injectorSource, /assetVersion: '2026-08-v1'/);
+  assert.match(injectorSource, /element\.setAttribute\('asset-version', assignment\.assetVersion\)/);
 });
 
-test('orchestrator uses the backend lead-asset event contract without PII', () => {
+test('orchestrator sends the lead-asset contract without PII and records the private-tour control', () => {
   [
     'bw_lead_asset_experiment_view',
     'bw_lead_asset_gate_view',
@@ -318,8 +314,11 @@ test('orchestrator uses the backend lead-asset event contract without PII', () =
   const ctx = makeInjectorContext({ analytics: true, config: { stage: 'pilot' } });
   const assignment = ctx.hooks.assignment();
   const payload = ctx.hooks.eventPayload('bw_lead_asset_experiment_view', assignment);
-  assert.equal(payload.assetId, 'berlin-transport-ticket-pocket-card');
-  assert.equal(payload.assetVersion, '2026-07-v1');
+  assert.equal(payload.assetId, 'berlin-skip-list');
+  assert.equal(payload.assetVersion, '2026-08-v1');
+  assert.equal(payload.experiment, 'berlin_skip_list_v1');
+  assert.equal(payload.controlType, 'private-tour');
+  assert.match(payload.controlUrl, /www\.berlinwalk\.com\/private-tour/);
   assert.equal(payload.analyticsConsent, true);
   assert.match(payload.assignmentId, /^cua_[a-f0-9]{32}$/);
   assert.equal(JSON.stringify(payload).includes('@'), false);
