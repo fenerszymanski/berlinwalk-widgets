@@ -2653,5 +2653,18 @@
     "png160": "tools-home/icons/berlin-memorial-reading-order-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-memorial-reading-order-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_3aa6fb1fd6cc404580e01dbb711ec92f~mv2.png"
+  },
+  {
+    "slug": "berlin-bauhaus-lineage-map",
+    "title": "Berlin Bauhaus Lineage Map",
+    "category": "Discovery",
+    "model": "Built-in ImageGen",
+    "style": "BerlinWalk glossy green tile, yellow map pin and modernist roof icon family 2026-08-15",
+    "sourceSheet": "tools-home/icons/_src/daily-blog-berlin-bauhaus-lineage-map-20260815/raw.png",
+    "promptSource": "tools-home/icons/_src/daily-blog-berlin-bauhaus-lineage-map-20260815/PROMPT.md",
+    "png512": "tools-home/icons/berlin-bauhaus-lineage-map.png",
+    "png160": "tools-home/icons/berlin-bauhaus-lineage-map-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-bauhaus-lineage-map-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_a4ec81b1719648d898ca02a0261e33b8~mv2.png"
   }
 ]

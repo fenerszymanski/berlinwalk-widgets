@@ -6283,6 +6283,35 @@
       "relatedBlogSlug": "free-berlin-memorials",
       "iconStatus": "live-wix-media",
       "cmsItemId": "d6bab72b-4caa-4a67-8690-526afc7c7c12"
+    },
+    {
+      "slug": "berlin-bauhaus-lineage-map",
+      "title": "Berlin Bauhaus Lineage Map",
+      "lead": "Read the temporary Bauhaus-Archiv, Haus Lemke and the Neue Nationalgalerie as an archive, a house and a public hall instead of treating Berlin modernism as a checklist.",
+      "category": "Discovery",
+      "hubCategory": "CultureLandmarks",
+      "type": "Map",
+      "priority": 21,
+      "tags": [
+        "Bauhaus in Berlin",
+        "Bauhaus Archiv Berlin",
+        "Mies van der Rohe Berlin",
+        "Neue Nationalgalerie",
+        "Berlin modern architecture",
+        "Haus Lemke"
+      ],
+      "aliases": [
+        "Bauhaus Berlin map",
+        "Bauhaus sites in Berlin",
+        "Mies van der Rohe buildings Berlin",
+        "Berlin modernism map"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-bauhaus-lineage-map/",
+      "embedHeight": 2300,
+      "image": "https://static.wixstatic.com/media/5a08a3_a4ec81b1719648d898ca02a0261e33b8~mv2.png",
+      "relatedBlogSlug": "bauhaus-in-berlin-modernism",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "5eef80be-8ec3-4e62-bbdc-3011d963e931"
     }
   ],
   "hubCategories": [
