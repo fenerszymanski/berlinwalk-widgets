@@ -14,7 +14,7 @@
   var FAQ_ID = 'bw-booking-management-faq';
   var INTRO_VERSION = 'booking-service-stage-20260801b';
   var FORM_VERSION = 'booking-form-stage-20260801b';
-  var FAQ_VERSION = 'booking-management-faq-20260801c';
+  var FAQ_VERSION = 'booking-management-faq-20260815a';
   var TERMS_LABEL = 'I agree to the free reservation terms listed below.';
   var INTRO_HTML = [
     "<div class='bw-cal-intro' data-bw-booking-intro-version='" + INTRO_VERSION + "'>",
@@ -42,6 +42,10 @@
     "<details>",
     "<summary>Can I change or cancel my booking?</summary>",
     "<p>Yes. Open your confirmation email and use the &#x2018;Change my date or time&#x2019; or &#x2018;Cancel my booking&#x2019; button. No account is required. If you cannot find the email, contact us on WhatsApp with your name and booking date.</p>",
+    "</details>",
+    "<details>",
+    "<summary>Coming as a group? Can I book a private walk?</summary>",
+    "<p>Yes. I also walk this same centre route privately, on your own date and at your pace. It suits families and small groups who would rather keep the walk to themselves. <a href='https://www.berlinwalk.com/private-tour'>See private tours</a>.</p>",
     "</details>",
     "</div>",
     "</section>",
@@ -72,6 +76,7 @@
       'html.bw-booking-funnel-active .bw-booking-management-faq details{border-top:1px solid #DCE3DD;margin:0;padding-top:12px}',
       'html.bw-booking-funnel-active .bw-booking-management-faq summary{color:#212121;cursor:pointer;font-size:15px;font-weight:850;line-height:1.35}',
       'html.bw-booking-funnel-active .bw-booking-management-faq details p{color:#4E5A4E;font-size:13px;font-weight:650;line-height:1.55;margin:10px 0 0}',
+      'html.bw-booking-funnel-active .bw-booking-management-faq details p a{color:#1B5E20;font-weight:850;text-decoration:underline;text-underline-offset:2px}',
       'bw-booking-calendar .bw-booking-progress{min-width:0}',
       'bw-booking-calendar .bw-booking-progress ol,#'+FORM_CARD_ID+' .bw-booking-progress ol{display:grid;gap:7px;grid-template-columns:minmax(0,1fr) minmax(0,1fr);list-style:none;margin:0;padding:0}',
       'bw-booking-calendar .bw-booking-progress li,#'+FORM_CARD_ID+' .bw-booking-progress li{align-items:center;background:#F8FBF4;border:1px solid #CFE4C8;border-radius:7px;color:#4E5A4E;column-gap:4px;display:grid;grid-template-columns:minmax(0,1fr) auto;min-width:0;padding:4px 7px;row-gap:2px}',
