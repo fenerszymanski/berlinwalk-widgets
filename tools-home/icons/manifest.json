@@ -2640,5 +2640,18 @@
     "png160": "tools-home/icons/berlin-walking-kit-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-walking-kit-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_d47c7de7711447ffa6c9a8198413fda4~mv2.png"
+  },
+  {
+    "slug": "berlin-memorial-reading-order",
+    "title": "Berlin Memorial Reading Order",
+    "category": "Discovery",
+    "model": "Built-in ImageGen",
+    "style": "BerlinWalk green archive tabs and stone marker icon family 2026-08-15",
+    "sourceSheet": "tools-home/icons/_src/daily-blog-berlin-memorial-reading-order-20260815/berlin-memorial-reading-order-raw.png",
+    "promptSource": "tools-home/icons/_src/daily-blog-berlin-memorial-reading-order-20260815/PROMPT.md",
+    "png512": "tools-home/icons/berlin-memorial-reading-order.png",
+    "png160": "tools-home/icons/berlin-memorial-reading-order-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-memorial-reading-order-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_3aa6fb1fd6cc404580e01dbb711ec92f~mv2.png"
   }
 ]

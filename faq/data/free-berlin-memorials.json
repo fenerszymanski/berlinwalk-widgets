@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "slug": "free-berlin-memorials",
+  "key": "free-berlin-memorials",
+  "config": {
+    "title": "Free Berlin Memorials - FAQ",
+    "subtitle": "Straight answers for choosing a respectful, free memorial visit in Berlin.",
+    "items": [
+      { "q": "What are the best free memorials to visit in Berlin?", "a": "Start with the Memorial to the Murdered Jews of Europe, Topography of Terror, the Berlin Wall Memorial and Tränenpalast. They answer different questions: memory, organised persecution, divided-city landscape and the personal experience of crossing a border. Check each institution's current page before visiting." },
+      { "q": "Is the Memorial to the Murdered Jews of Europe free?", "a": "Yes. The field is open around the clock and the underground Information Centre is free as well, with separate visiting hours. The official visitor page currently lists the Information Centre Tuesday to Sunday from 10:00 to 18:00." },
+      { "q": "Is Topography of Terror free to visit?", "a": "Yes. The Topography of Terror documentation centre lists free admission and daily opening from 10:00 to 20:00. Confirm the current hours on the official page before you set a fixed plan." },
+      { "q": "Can I visit the Berlin Wall Memorial and Tränenpalast on the same day?", "a": "You can treat them as two separate chapters, but do not assume a simple walking route or fixed travel time. The Berlin Wall Memorial explains the border in the street and landscape; Tränenpalast focuses on a former crossing at Friedrichstraße. Check both official pages and current BVG connections shortly before moving." },
+      { "q": "Does the BerlinWalk free walking tour visit all four memorials?", "a": "No. BerlinWalk starts at the World Clock on Alexanderplatz and lasts about 2 hours through the historic centre of former East Berlin; it does not follow the Berlin Wall line or promise these four memorial stops. Use the live calendar for the current tour option and this guide for a separate memorial visit." }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What are the best free memorials to visit in Berlin?", "acceptedAnswer": { "@type": "Answer", "text": "Start with the Memorial to the Murdered Jews of Europe, Topography of Terror, the Berlin Wall Memorial and Tränenpalast. They answer different questions: memory, organised persecution, divided-city landscape and the personal experience of crossing a border. Check each institution's current page before visiting." } },
+      { "@type": "Question", "name": "Is the Memorial to the Murdered Jews of Europe free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The field is open around the clock and the underground Information Centre is free as well, with separate visiting hours. The official visitor page currently lists the Information Centre Tuesday to Sunday from 10:00 to 18:00." } },
+      { "@type": "Question", "name": "Is Topography of Terror free to visit?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The Topography of Terror documentation centre lists free admission and daily opening from 10:00 to 20:00. Confirm the current hours on the official page before you set a fixed plan." } },
+      { "@type": "Question", "name": "Can I visit the Berlin Wall Memorial and Tränenpalast on the same day?", "acceptedAnswer": { "@type": "Answer", "text": "You can treat them as two separate chapters, but do not assume a simple walking route or fixed travel time. The Berlin Wall Memorial explains the border in the street and landscape; Tränenpalast focuses on a former crossing at Friedrichstraße. Check both official pages and current BVG connections shortly before moving." } },
+      { "@type": "Question", "name": "Does the BerlinWalk free walking tour visit all four memorials?", "acceptedAnswer": { "@type": "Answer", "text": "No. BerlinWalk starts at the World Clock on Alexanderplatz and lasts about 2 hours through the historic centre of former East Berlin; it does not follow the Berlin Wall line or promise these four memorial stops. Use the live calendar for the current tour option and this guide for a separate memorial visit." } }
+    ]
+  }
+}

@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Memorial Reading Order | BerlinWalk</title>
+  <meta name="description" content="Arrange four free Berlin memorials into a respectful reading order, then choose a two-, three- or four-stop visit.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <style>
+    :root {
+      --memory-green: #123d18;
+      --memory-mid: #1b5e20;
+      --memory-yellow: #ffe600;
+      --memory-cream: #fffdf1;
+      --memory-paper: #f5efdf;
+      --memory-ink: #212121;
+      --memory-muted: #536052;
+      --memory-line: #d2ddc9;
+      --memory-red: #9f3f35;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: transparent; }
+    body { color: var(--memory-ink); font-family: Montserrat, Arial, sans-serif; }
+    button, a { font: inherit; }
+    #bw-memory-order { max-width: 980px; margin: 0 auto; padding: 4px; }
+    #bw-memory-order [hidden] { display: none !important; }
+    .memory-shell { position: relative; overflow: hidden; border: 1px solid var(--memory-line); border-radius: 22px; background: var(--memory-cream); box-shadow: 0 20px 55px rgba(18, 61, 24, .14); }
+    .memory-head { padding: 25px 28px 22px; color: #fff; background: var(--memory-green); }
+    .memory-kicker { margin: 0 0 9px; color: var(--memory-yellow); font-size: .68rem; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
+    .memory-head h1 { max-width: 760px; margin: 0; font-family: Merriweather, Georgia, serif; font-size: clamp(1.55rem, 4vw, 2.65rem); line-height: 1.08; letter-spacing: -.04em; }
+    .memory-head p { max-width: 730px; margin: 11px 0 0; color: #e7f0e4; font-size: .9rem; line-height: 1.58; }
+    .memory-facts { display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0 0; padding: 0; list-style: none; }
+    .memory-facts li { padding: 6px 9px; border: 1px solid rgba(255, 230, 0, .45); color: #fff; font-size: .68rem; font-weight: 800; }
+    .memory-facts b { color: var(--memory-yellow); }
+    .memory-body { padding: 23px; }
+    .memory-intro { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; align-items: end; padding-bottom: 18px; border-bottom: 1px solid var(--memory-line); }
+    .memory-intro h2 { margin: 0; color: var(--memory-green); font-family: Merriweather, Georgia, serif; font-size: 1.35rem; line-height: 1.2; }
+    .memory-intro p { max-width: 650px; margin: 8px 0 0; color: var(--memory-muted); font-size: .8rem; line-height: 1.58; }
+    .memory-stamp { padding: 10px 12px; border: 1px solid #c9a93c; background: #fff7bd; color: var(--memory-green); font-size: .65rem; font-weight: 900; letter-spacing: .06em; text-align: center; text-transform: uppercase; }
+    .memory-section-label { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; margin: 21px 0 9px; }
+    .memory-section-label h2 { margin: 0; color: var(--memory-green); font-family: Merriweather, Georgia, serif; font-size: 1.18rem; }
+    .memory-section-label span { color: var(--memory-red); font-size: .66rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+    .memory-depths { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 0 0 16px; }
+    .memory-depth { min-height: 67px; padding: 10px 11px; border: 1px solid #b7ccb3; background: #f6f9ef; color: var(--memory-green); cursor: pointer; text-align: left; transition: transform .15s ease, background .15s ease, border-color .15s ease; }
+    .memory-depth:hover, .memory-depth:focus-visible { border-color: var(--memory-green); background: #fff; outline: 3px solid rgba(18, 61, 24, .18); outline-offset: 2px; transform: translateY(-2px); }
+    .memory-depth[aria-pressed="true"] { border-color: var(--memory-green); background: var(--memory-yellow); color: var(--memory-green); }
+    .memory-depth strong { display: block; font-size: .78rem; line-height: 1.25; }
+    .memory-depth small { display: block; margin-top: 4px; color: #5d6b5d; font-size: .64rem; line-height: 1.35; }
+    .memory-depth[aria-pressed="true"] small { color: #315431; }
+    .memory-rule { margin: 0 0 13px; padding: 11px 13px; border-left: 4px solid var(--memory-red); background: var(--memory-paper); color: #465346; font-size: .75rem; line-height: 1.55; }
+    .memory-list { display: grid; gap: 9px; margin: 0; padding: 0; list-style: none; counter-reset: memory-step; }
+    .memory-place { display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; gap: 13px; align-items: center; min-width: 0; padding: 10px; border: 1px solid #cbd8c3; background: #fff; cursor: grab; transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease; }
+    .memory-place:active { cursor: grabbing; }
+    .memory-place.dragging { opacity: .55; border-style: dashed; }
+    .memory-place:focus-within, .memory-place:hover { border-color: var(--memory-green); box-shadow: 0 5px 18px rgba(18, 61, 24, .1); }
+    .memory-thumb { width: 48px; height: 48px; object-fit: cover; border: 1px solid #c5d1bd; }
+    .memory-place-main { min-width: 0; }
+    .memory-place-top { display: flex; flex-wrap: wrap; gap: 6px 9px; align-items: baseline; }
+    .memory-place-top strong { color: var(--memory-green); font-family: Merriweather, Georgia, serif; font-size: .9rem; line-height: 1.22; }
+    .memory-place-top small { color: var(--memory-red); font-size: .62rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .memory-place-main p { margin: 4px 0 0; color: var(--memory-muted); font-size: .7rem; line-height: 1.42; }
+    .memory-move { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 5px; }
+    .memory-move button { min-width: 32px; min-height: 32px; border: 1px solid #a9bea5; background: #f5f9ef; color: var(--memory-green); cursor: pointer; font-size: .72rem; font-weight: 900; }
+    .memory-move button:hover, .memory-move button:focus-visible { background: var(--memory-yellow); outline: 2px solid var(--memory-green); outline-offset: 2px; }
+    .memory-place.drag-over { border-color: var(--memory-red); box-shadow: 0 0 0 3px rgba(159, 63, 53, .16); }
+    .memory-result { margin-top: 20px; padding: 19px; border-top: 7px solid var(--memory-yellow); background: var(--memory-paper); }
+    .memory-result h2 { margin: 0; color: var(--memory-green); font-family: Merriweather, Georgia, serif; font-size: 1.34rem; line-height: 1.2; }
+    .memory-result > p { max-width: 720px; margin: 8px 0 0; color: #465346; font-size: .78rem; line-height: 1.56; }
+    .memory-output { display: grid; gap: 7px; margin: 15px 0 0; padding: 0; list-style: none; counter-reset: output-step; }
+    .memory-output li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 10px; align-items: start; padding: 10px; border: 1px solid #ccd7c4; background: rgba(255, 253, 241, .86); }
+    .memory-output li::before { counter-increment: output-step; content: counter(output-step); display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--memory-green); color: #fff; font-size: .68rem; font-weight: 900; }
+    .memory-output strong { color: var(--memory-green); font-family: Merriweather, Georgia, serif; font-size: .82rem; line-height: 1.25; }
+    .memory-output span { display: block; margin-top: 3px; color: var(--memory-muted); font-size: .7rem; line-height: 1.45; }
+    .memory-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 16px; }
+    .memory-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 10px 14px; background: var(--memory-yellow); color: #123d18 !important; font-size: .72rem; font-weight: 900; text-decoration: none; }
+    .memory-cta:hover, .memory-cta:focus-visible { background: #f2d900; color: #123d18 !important; outline: 3px solid var(--memory-green); outline-offset: 2px; }
+    .memory-cta.secondary { border: 1px solid #9db49a; background: transparent; color: var(--memory-green) !important; }
+    .memory-cta.secondary:hover, .memory-cta.secondary:focus-visible { background: #eef5e8; color: var(--memory-green) !important; }
+    .memory-note { margin: 16px 0 0; color: #647064; font-size: .66rem; line-height: 1.5; }
+    .memory-credit-toggle { position: absolute; right: 20px; bottom: 17px; z-index: 10; border: 1px solid #9eb49a; background: rgba(255, 253, 241, .97); color: var(--memory-green); cursor: pointer; font-size: .65rem; font-weight: 900; }
+    .memory-credit-toggle:hover, .memory-credit-toggle:focus-visible { background: var(--memory-yellow); outline: 2px solid var(--memory-green); outline-offset: 2px; }
+    .memory-credits { position: absolute; right: 20px; bottom: 57px; left: 20px; z-index: 9; max-height: 230px; overflow: auto; padding: 15px 16px 16px; border: 1px solid #9eb49a; background: rgba(255, 253, 241, .99); box-shadow: 0 18px 36px rgba(18, 61, 24, .17); }
+    .memory-credits h2 { margin: 0; color: var(--memory-green); font-family: Merriweather, Georgia, serif; font-size: 1rem; }
+    .memory-credits p { margin: 8px 0 0; color: var(--memory-muted); font-size: .68rem; line-height: 1.52; }
+    .memory-credits a { color: var(--memory-green); font-weight: 800; }
+    .memory-credit-close { float: right; min-width: 30px; min-height: 28px; border: 1px solid #a9bea5; background: #f5f9ef; color: var(--memory-green); cursor: pointer; font-weight: 900; }
+    @media (max-width: 680px) {
+      .memory-head { padding: 21px 20px 19px; }
+      .memory-body { padding: 17px; }
+      .memory-intro { grid-template-columns: 1fr; align-items: start; }
+      .memory-stamp { justify-self: start; }
+      .memory-place { grid-template-columns: 44px minmax(0, 1fr); gap: 10px; }
+      .memory-thumb { width: 44px; height: 44px; }
+      .memory-move { grid-column: 2; justify-content: flex-start; }
+    }
+    @media (max-width: 480px) {
+      #bw-memory-order { padding: 0; }
+      .memory-shell { border-radius: 0; }
+      .memory-head h1 { font-size: 1.55rem; }
+      .memory-depths { grid-template-columns: 1fr; }
+      .memory-place-top strong { font-size: .82rem; }
+      .memory-credits { right: 12px; bottom: 57px; left: 12px; }
+      .memory-credit-toggle { right: 12px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .memory-depth, .memory-place { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <main id="bw-memory-order">
+    <section class="memory-shell">
+      <header class="memory-head">
+        <p class="memory-kicker">Berlin Memorial Reading Order</p>
+        <h1>Four free places. One order that lets you read them.</h1>
+        <p>Arrange four Berlin memorial sites by the question you want to carry from one place to the next. This is a reading sequence, not a navigation promise or a race between addresses.</p>
+        <ul class="memory-facts" aria-label="Tool facts">
+          <li><b>4</b> real places</li>
+          <li><b>2–4</b> stops</li>
+          <li><b>€0</b> entrance</li>
+        </ul>
+      </header>
+      <div class="memory-body">
+        <section class="memory-intro" aria-labelledby="memory-intro-title">
+          <div>
+            <h2 id="memory-intro-title">Build a reading sequence, not a checklist</h2>
+            <p>I would begin with the Memorial to the Murdered Jews of Europe, move to the evidence at Topography of Terror, then decide whether the Berlin Wall Memorial or Tränenpalast answers the question you still have. Drag a tile or use the arrow controls.</p>
+          </div>
+          <div class="memory-stamp">Respect the pause</div>
+        </section>
+
+        <div class="memory-section-label">
+          <h2>How many places can you actually read?</h2>
+          <span id="memory-status" aria-live="polite">3-stop reading</span>
+        </div>
+        <div class="memory-depths" role="group" aria-label="Choose number of stops">
+          <button class="memory-depth" type="button" data-depth="2" aria-pressed="false"><strong>Two stops</strong><small>A focused first encounter</small></button>
+          <button class="memory-depth" type="button" data-depth="3" aria-pressed="true"><strong>Three stops</strong><small>Context with breathing room</small></button>
+          <button class="memory-depth" type="button" data-depth="4" aria-pressed="false"><strong>Four stops</strong><small>The complete sequence</small></button>
+        </div>
+        <p class="memory-rule"><strong>Try this order first:</strong> individual memory → organised persecution → divided-city evidence → a personal border crossing. Keep the order if it gives you a useful question; change it when your day needs a different beginning.</p>
+
+        <ol class="memory-list" id="memory-list" aria-label="Drag to arrange the memorials">
+          <li class="memory-place" draggable="true" data-id="holocaust" tabindex="0">
+            <img class="memory-thumb" src="images/memorial-field.jpg" alt="Concrete stelae at the Memorial to the Murdered Jews of Europe" width="48" height="48">
+            <div class="memory-place-main"><div class="memory-place-top"><strong>Memorial to the Murdered Jews of Europe</strong><small>Start with memory</small></div><p>Cora-Berliner-Straße 1 · field open 24 hours; Information Centre Tue–Sun 10:00–18:00 · free</p></div>
+            <div class="memory-move"><button type="button" data-move="up" aria-label="Move Memorial to the Murdered Jews of Europe earlier">↑</button><button type="button" data-move="down" aria-label="Move Memorial to the Murdered Jews of Europe later">↓</button></div>
+          </li>
+          <li class="memory-place" draggable="true" data-id="topography" tabindex="0">
+            <img class="memory-thumb" src="images/topography-of-terror.jpg" alt="Topography of Terror documentation centre in Berlin" width="48" height="48">
+            <div class="memory-place-main"><div class="memory-place-top"><strong>Topography of Terror</strong><small>Read the evidence</small></div><p>Niederkirchnerstraße 8 · daily 10:00–20:00 · free exhibitions</p></div>
+            <div class="memory-move"><button type="button" data-move="up" aria-label="Move Topography of Terror earlier">↑</button><button type="button" data-move="down" aria-label="Move Topography of Terror later">↓</button></div>
+          </li>
+          <li class="memory-place" draggable="true" data-id="wall" tabindex="0">
+            <img class="memory-thumb" src="images/berlin-wall-memorial.jpg" alt="Berlin Wall Memorial grounds in warm morning light" width="48" height="48">
+            <div class="memory-place-main"><div class="memory-place-top"><strong>Berlin Wall Memorial</strong><small>See the division</small></div><p>Bernauer Straße 111/119 · open-air grounds 08:00–22:00; centre Tue–Sun 10:00–18:00 · free</p></div>
+            <div class="memory-move"><button type="button" data-move="up" aria-label="Move Berlin Wall Memorial earlier">↑</button><button type="button" data-move="down" aria-label="Move Berlin Wall Memorial later">↓</button></div>
+          </li>
+          <li class="memory-place" draggable="true" data-id="traenenpalast" tabindex="0">
+            <img class="memory-thumb" src="images/traenenpalast.jpg" alt="Tränenpalast former border crossing at Friedrichstraße" width="48" height="48">
+            <div class="memory-place-main"><div class="memory-place-top"><strong>Tränenpalast</strong><small>End with a decision</small></div><p>Reichstagufer 17 · Tue–Fri 09:00–18:00; Sat–Sun 10:00–18:00; closed Monday · free</p></div>
+            <div class="memory-move"><button type="button" data-move="up" aria-label="Move Tränenpalast earlier">↑</button><button type="button" data-move="down" aria-label="Move Tränenpalast later">↓</button></div>
+          </li>
+        </ol>
+
+        <section class="memory-result" id="memory-result" aria-live="polite">
+          <h2 id="memory-result-title">Your three-stop reading order</h2>
+          <p id="memory-result-copy">Start with a place that asks you to slow down, add the documentation that explains how power worked, then choose the physical site that answers your remaining question.</p>
+          <ol class="memory-output" id="memory-output"></ol>
+          <div class="memory-actions">
+            <a class="memory-cta" href="https://www.berlinwalk.com/post/free-berlin-memorials" target="_blank" rel="noopener">Read the full memorial guide</a>
+            <a class="memory-cta secondary" href="https://www.topographie.de/en/your-visit/directions-opening-hours" target="_blank" rel="noopener">Check official details</a>
+          </div>
+          <p class="memory-note"><strong>Important:</strong> The order is for attention and context, not turn-by-turn directions. Check every institution’s current page before you leave, especially around Mondays and public holidays.</p>
+        </section>
+      </div>
+      <button class="memory-credit-toggle" id="memory-credit-toggle" type="button" aria-expanded="false" aria-controls="memory-credits">Tool visual credits</button>
+      <section class="memory-credits" id="memory-credits" hidden>
+        <button class="memory-credit-close" id="memory-credit-close" type="button" aria-label="Close tool visual credits">×</button>
+        <h2>Tool visual credits</h2>
+        <p>Photos shown in this tool: <a href="https://commons.wikimedia.org/wiki/File:Memorial_to_the_Murdered_Jews_of_Europe_Berlin_02.JPG" target="_blank" rel="noopener">Memorial field</a> by Superchilum (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Topography_of_Terror,_Berlin_(2015)_-_2.JPG" target="_blank" rel="noopener">Topography of Terror</a> by Another Believer (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Gedenkst%C3%A4tte_Berliner_Mauer,_170514,_ako.jpg" target="_blank" rel="noopener">Berlin Wall Memorial</a> by Ansgar Koreng (CC BY-SA 4.0); <a href="https://commons.wikimedia.org/wiki/File:Berlin_Tr%C3%A4nenpalast_asv2023-10_img1.jpg" target="_blank" rel="noopener">Tränenpalast</a> by A.Savin (Free Art License).</p>
+      </section>
+    </section>
+  </main>
+  <script>
+    (function () {
+      'use strict';
+      var list = document.getElementById('memory-list');
+      var output = document.getElementById('memory-output');
+      var resultTitle = document.getElementById('memory-result-title');
+      var resultCopy = document.getElementById('memory-result-copy');
+      var status = document.getElementById('memory-status');
+      var dragged = null;
+      var depth = 3;
+      var places = {
+        holocaust: { title: 'Memorial to the Murdered Jews of Europe', action: 'Stand inside the field of stelae, then use the Information Centre if you want the names and stories behind the scale.', why: 'It begins with the people who were murdered, before moving into the machinery and geography of persecution.' },
+        topography: { title: 'Topography of Terror', action: 'Read one display slowly at Niederkirchnerstraße instead of trying to finish the whole exhibition in one pass.', why: 'The documentation turns a general feeling of evil into institutions, offices and decisions.' },
+        wall: { title: 'Berlin Wall Memorial', action: 'Use the open-air grounds and the documentation centre to see how a border cut through Bernauer Straße.', why: 'The landscape makes division physical: walls, homes, escape routes and the city left around them.' },
+        traenenpalast: { title: 'Tränenpalast', action: 'Look closely at the former Friedrichstraße border crossing and the choices people faced there.', why: 'It ends with a human threshold rather than an abstract line on a map.' }
+      };
+
+      function rows() { return Array.prototype.slice.call(list.querySelectorAll('.memory-place')); }
+
+      function updateOrder() {
+        var current = rows().map(function (row) { return row.getAttribute('data-id'); });
+        var selected = current.slice(0, depth);
+        status.textContent = depth + '-stop reading · ' + selected.map(function (id) { return places[id].title; }).join(' → ');
+        resultTitle.textContent = 'Your ' + depth + '-stop reading order';
+        resultCopy.textContent = depth === 2
+          ? 'Keep the first encounter tight: begin with individual memory, then read how persecution was organised. This is enough for a serious two-stop morning.'
+          : depth === 3
+            ? 'Start with a place that asks you to slow down, add the documentation that explains how power worked, then choose the physical site that answers your remaining question.'
+            : 'Four places make a complete arc from individual memory to organised persecution, divided-city evidence and the personal decisions made at a border crossing.';
+        output.innerHTML = '';
+        selected.forEach(function (id) {
+          var item = document.createElement('li');
+          var copy = document.createElement('div');
+          var title = document.createElement('strong');
+          var action = document.createElement('span');
+          title.textContent = places[id].title;
+          action.textContent = places[id].action;
+          copy.appendChild(title);
+          copy.appendChild(action);
+          item.appendChild(copy);
+          output.appendChild(item);
+        });
+      }
+
+      function move(row, direction) {
+        var sibling = direction === 'up' ? row.previousElementSibling : row.nextElementSibling;
+        if (!sibling) return;
+        if (direction === 'up') list.insertBefore(row, sibling);
+        else list.insertBefore(sibling, row);
+        updateOrder();
+        row.focus();
+      }
+
+      Array.prototype.forEach.call(document.querySelectorAll('.memory-depth'), function (button) {
+        button.addEventListener('click', function () {
+          depth = Number(button.getAttribute('data-depth'));
+          Array.prototype.forEach.call(document.querySelectorAll('.memory-depth'), function (other) { other.setAttribute('aria-pressed', other === button ? 'true' : 'false'); });
+          updateOrder();
+        });
+      });
+      list.addEventListener('click', function (event) {
+        var button = event.target.closest('button[data-move]');
+        if (!button) return;
+        var row = button.closest('.memory-place');
+        move(row, button.getAttribute('data-move'));
+      });
+      list.addEventListener('dragstart', function (event) {
+        var row = event.target.closest('.memory-place');
+        if (!row) return;
+        dragged = row;
+        row.classList.add('dragging');
+        event.dataTransfer.effectAllowed = 'move';
+        event.dataTransfer.setData('text/plain', row.getAttribute('data-id'));
+      });
+      list.addEventListener('dragend', function () {
+        if (dragged) dragged.classList.remove('dragging');
+        Array.prototype.forEach.call(rows(), function (row) { row.classList.remove('drag-over'); });
+        dragged = null;
+      });
+      list.addEventListener('dragover', function (event) {
+        event.preventDefault();
+        var row = event.target.closest('.memory-place');
+        if (!row || row === dragged) return;
+        Array.prototype.forEach.call(rows(), function (item) { item.classList.toggle('drag-over', item === row); });
+        var bounds = row.getBoundingClientRect();
+        if (event.clientY < bounds.top + bounds.height / 2) list.insertBefore(dragged, row);
+        else list.insertBefore(dragged, row.nextSibling);
+      });
+      list.addEventListener('drop', function (event) { event.preventDefault(); updateOrder(); });
+      list.addEventListener('keydown', function (event) {
+        var row = event.target.closest('.memory-place');
+        if (!row || event.target !== row) return;
+        if (event.key === 'ArrowUp') { event.preventDefault(); move(row, 'up'); }
+        if (event.key === 'ArrowDown') { event.preventDefault(); move(row, 'down'); }
+      });
+
+      var toggle = document.getElementById('memory-credit-toggle');
+      var credits = document.getElementById('memory-credits');
+      var close = document.getElementById('memory-credit-close');
+      function closeCredits() { credits.hidden = true; toggle.setAttribute('aria-expanded', 'false'); }
+      toggle.addEventListener('click', function () { var open = credits.hidden; credits.hidden = !open; toggle.setAttribute('aria-expanded', open ? 'true' : 'false'); if (open) close.focus(); });
+      close.addEventListener('click', closeCredits);
+      document.addEventListener('keydown', function (event) { if (event.key === 'Escape' && !credits.hidden) { closeCredits(); toggle.focus(); } });
+      document.addEventListener('click', function (event) { if (!credits.hidden && !credits.contains(event.target) && event.target !== toggle) closeCredits(); });
+      updateOrder();
+    }());
+  </script>
+</body>
+</html>

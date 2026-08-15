@@ -6254,6 +6254,35 @@
       "image": "https://static.wixstatic.com/media/5a08a3_d47c7de7711447ffa6c9a8198413fda4~mv2.png",
       "iconStatus": "live-wix-media",
       "cmsItemId": "77c0542e-85d8-47c9-96e9-c8b6447dad30"
+    },
+    {
+      "slug": "berlin-memorial-reading-order",
+      "title": "Berlin Memorial Reading Order",
+      "lead": "Arrange four free Berlin memorials into a respectful two-, three- or four-stop reading sequence, then keep the places that answer your question.",
+      "category": "Discovery",
+      "hubCategory": "CultureLandmarks",
+      "type": "Guide",
+      "priority": 20,
+      "tags": [
+        "free Berlin memorials",
+        "Berlin history places",
+        "Berlin Wall Memorial",
+        "Topography of Terror",
+        "Tränenpalast",
+        "Berlin memorial visit"
+      ],
+      "aliases": [
+        "Berlin memorial guide",
+        "free memorials in Berlin",
+        "Berlin history reading order",
+        "Berlin memorial itinerary"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-memorial-reading-order/",
+      "embedHeight": 1900,
+      "image": "https://static.wixstatic.com/media/5a08a3_3aa6fb1fd6cc404580e01dbb711ec92f~mv2.png",
+      "relatedBlogSlug": "free-berlin-memorials",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "d6bab72b-4caa-4a67-8690-526afc7c7c12"
     }
   ],
   "hubCategories": [
