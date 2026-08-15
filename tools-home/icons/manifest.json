@@ -2614,5 +2614,18 @@
     "png160": "tools-home/icons/berlin-private-route-brief-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-private-route-brief-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_a222059114674c0aab990c7b2e31006e~mv2.png"
+  },
+  {
+    "slug": "berlin-solo-day-path",
+    "title": "Berlin Solo Day Path",
+    "category": "Discovery",
+    "model": "Built-in ImageGen",
+    "style": "BerlinWalk green tile and yellow three-waypoint path icon family 2026-08-15",
+    "sourceSheet": "tools-home/icons/_src/daily-blog-berlin-solo-day-path-20260815/berlin-solo-day-path-raw.png",
+    "promptSource": "tools-home/icons/_src/daily-blog-berlin-solo-day-path-20260815/PROMPT.md",
+    "png512": "tools-home/icons/berlin-solo-day-path.png",
+    "png160": "tools-home/icons/berlin-solo-day-path-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-solo-day-path-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_88d67e4474dc4f22a74b02a7af0c7d00~mv2.png"
   }
 ]

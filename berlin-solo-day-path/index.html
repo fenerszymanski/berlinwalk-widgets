@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Solo Day Path | BerlinWalk</title>
+  <meta name="description" content="Choose one Berlin anchor, one middle hinge and one finish mood. Build a realistic solo day around real places, not a list of pins.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <style>
+    :root {
+      --solo-green: #123d18;
+      --solo-mid: #1b5e20;
+      --solo-yellow: #ffe600;
+      --solo-paper: #fffdf4;
+      --solo-cream: #f3eddb;
+      --solo-ink: #212121;
+      --solo-muted: #536052;
+      --solo-line: #d8e2cf;
+      --solo-red: #a2442b;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: transparent; }
+    body { overflow-x: hidden; color: var(--solo-ink); font-family: Montserrat, Arial, sans-serif; }
+    a { color: var(--solo-green); }
+    button { font: inherit; }
+    #bw-solo-day-path { max-width: 880px; margin: 0 auto; padding: 4px; }
+    #bw-solo-day-path [hidden] { display: none !important; }
+    .solo-shell { overflow: hidden; border: 1px solid var(--solo-line); border-radius: 24px; background: var(--solo-paper); box-shadow: 0 20px 50px rgba(18, 61, 24, .13); }
+    .solo-hero { position: relative; min-height: 320px; background: var(--solo-green); }
+    .solo-hero img { display: block; width: 100%; height: 320px; object-fit: cover; }
+    .solo-hero::after { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18, 61, 24, .08), rgba(18, 61, 24, .82)); content: ''; pointer-events: none; }
+    .solo-hero-copy { position: absolute; z-index: 1; right: 24px; bottom: 24px; left: 24px; color: #fff; }
+    .solo-kicker { margin: 0 0 8px; color: var(--solo-yellow); font-size: .7rem; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+    .solo-hero h1 { max-width: 670px; margin: 0; font-family: Merriweather, Georgia, serif; font-size: clamp(1.65rem, 4vw, 2.75rem); line-height: 1.08; letter-spacing: -.035em; }
+    .solo-hero-copy p { max-width: 690px; margin: 10px 0 0; color: #eef5e8; font-size: .9rem; line-height: 1.55; }
+    .solo-body { padding: 24px; }
+    .solo-intro { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; align-items: end; padding-bottom: 22px; border-bottom: 1px solid var(--solo-line); }
+    .solo-intro h2 { margin: 0; color: var(--solo-green); font-size: 1.25rem; line-height: 1.2; }
+    .solo-intro p { max-width: 610px; margin: 8px 0 0; color: var(--solo-muted); font-size: .82rem; line-height: 1.6; }
+    .solo-facts { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; margin: 0; padding: 0; list-style: none; }
+    .solo-facts li { padding: 7px 9px; border: 1px solid #b8cdb2; color: var(--solo-green); font-size: .66rem; font-weight: 900; letter-spacing: .03em; white-space: nowrap; }
+    .path-ribbon { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; margin: 24px 0 22px; }
+    .path-ribbon::before { position: absolute; top: 20px; right: 10%; left: 10%; height: 3px; background: #c7d7bd; content: ''; }
+    .path-node { position: relative; z-index: 1; min-width: 0; padding: 0 5px; text-align: center; }
+    .path-dot { display: grid; place-items: center; width: 41px; height: 41px; margin: 0 auto 7px; border: 3px solid var(--solo-paper); border-radius: 50%; background: #d9e5d4; color: #61705f; box-shadow: 0 0 0 2px #b6cbb0; font-size: .78rem; font-weight: 900; }
+    .path-node.complete .path-dot { background: var(--solo-yellow); color: var(--solo-green); box-shadow: 0 0 0 2px var(--solo-green); }
+    .path-node.current .path-dot { background: var(--solo-green); color: #fff; box-shadow: 0 0 0 3px rgba(18, 61, 24, .15); }
+    .path-node strong { display: block; overflow: hidden; color: var(--solo-green); font-size: .72rem; line-height: 1.25; text-overflow: ellipsis; white-space: nowrap; }
+    .path-node span { display: block; margin-top: 3px; overflow: hidden; color: var(--solo-muted); font-size: .63rem; line-height: 1.25; text-overflow: ellipsis; white-space: nowrap; }
+    .choice-stage { padding: 19px; border: 1px solid var(--solo-line); background: #f8fbf3; }
+    .choice-stage h2 { margin: 0; color: var(--solo-green); font-family: Merriweather, Georgia, serif; font-size: 1.33rem; line-height: 1.2; }
+    .choice-stage > p { max-width: 660px; margin: 8px 0 16px; color: var(--solo-muted); font-size: .82rem; line-height: 1.58; }
+    .choice-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
+    .choice { min-height: 105px; padding: 13px 13px 12px; border: 1px solid #bad0b4; background: #fff; color: var(--solo-green); cursor: pointer; text-align: left; transition: transform .15s ease, border-color .15s ease, background .15s ease; }
+    .choice:hover, .choice:focus-visible { border-color: var(--solo-green); background: #fefef8; outline: 3px solid rgba(18, 61, 24, .17); outline-offset: 2px; transform: translateY(-2px); }
+    .choice strong { display: block; font-size: .82rem; line-height: 1.25; }
+    .choice span { display: block; margin-top: 6px; color: var(--solo-muted); font-size: .7rem; font-weight: 600; line-height: 1.45; }
+    .choice b { display: inline-block; margin-bottom: 8px; color: var(--solo-red); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; }
+    .route-output { margin-top: 21px; padding: 20px; border-top: 7px solid var(--solo-yellow); background: var(--solo-cream); }
+    .route-output h2 { margin: 0; color: var(--solo-green); font-family: Merriweather, Georgia, serif; font-size: 1.45rem; line-height: 1.2; }
+    .route-output > p { max-width: 700px; margin: 9px 0 0; color: #445347; font-size: .82rem; line-height: 1.6; }
+    .route-stops { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 17px 0 0; padding: 0; list-style: none; }
+    .route-stops li { min-width: 0; padding: 12px; border: 1px solid #c9d4bd; background: #fffef8; }
+    .route-stops small { display: block; margin-bottom: 5px; color: var(--solo-red); font-size: .62rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+    .route-stops strong { display: block; color: var(--solo-green); font-size: .82rem; line-height: 1.3; }
+    .route-stops span { display: block; margin-top: 5px; color: #5b685d; font-size: .7rem; line-height: 1.4; }
+    .route-note { margin-top: 13px; padding: 11px 13px; border-left: 4px solid var(--solo-mid); background: #fffef8; color: #445347; font-size: .77rem; line-height: 1.55; }
+    .solo-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 17px; }
+    .solo-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 10px 14px; background: var(--solo-yellow); color: var(--solo-green) !important; font-size: .72rem; font-weight: 900; text-decoration: none; }
+    .solo-cta:hover, .solo-cta:focus-visible { background: #f1d900; color: var(--solo-green) !important; outline: 3px solid var(--solo-green); outline-offset: 2px; }
+    .solo-cta.secondary { border: 1px solid #9bb495; background: transparent; color: var(--solo-green) !important; }
+    .solo-cta.secondary:hover, .solo-cta.secondary:focus-visible { background: #eef5e8; }
+    .solo-reset { margin-top: 15px; border: 0; background: transparent; color: var(--solo-green); cursor: pointer; font-size: .7rem; font-weight: 800; text-decoration: underline; }
+    .solo-reset:focus-visible { outline: 3px solid var(--solo-green); outline-offset: 3px; }
+    .solo-limit { margin-top: 21px; padding: 13px 15px; border: 1px dashed #a7bea0; background: #f3f8ed; color: #536052; font-size: .72rem; line-height: 1.55; }
+    .solo-limit strong { color: var(--solo-green); }
+    .credits-row { display: flex; justify-content: flex-end; margin-top: 16px; }
+    .credits-toggle { border: 1px solid #a8bca3; border-radius: 999px; background: #fff; color: var(--solo-green); cursor: pointer; font-size: .68rem; font-weight: 800; padding: 8px 12px; }
+    .credits-toggle:hover, .credits-toggle:focus-visible { background: #f0f7eb; outline: 3px solid rgba(18, 61, 24, .18); outline-offset: 2px; }
+    .credits-panel { position: relative; margin-top: 10px; padding: 15px 42px 15px 15px; border: 1px solid #b9cbb5; background: #f6f9f0; color: #536052; font-size: .68rem; line-height: 1.55; }
+    .credits-panel button { position: absolute; top: 9px; right: 10px; border: 0; background: transparent; color: var(--solo-green); cursor: pointer; font-size: 1.1rem; font-weight: 900; line-height: 1; }
+    .credits-panel button:focus-visible { outline: 3px solid var(--solo-green); outline-offset: 2px; }
+    @media (max-width: 700px) {
+      .solo-intro { grid-template-columns: minmax(0, 1fr); }
+      .solo-facts { justify-content: flex-start; }
+      .choice-list { grid-template-columns: minmax(0, 1fr); }
+      .choice { min-height: 0; }
+    }
+    @media (max-width: 520px) {
+      #bw-solo-day-path { padding: 0; }
+      .solo-shell { border-radius: 0; }
+      .solo-hero, .solo-hero img { min-height: 285px; height: 285px; }
+      .solo-hero-copy { right: 18px; bottom: 18px; left: 18px; }
+      .solo-body { padding: 17px; }
+      .path-ribbon { gap: 2px; }
+      .path-ribbon::before { right: 9%; left: 9%; }
+      .path-node strong { font-size: .66rem; }
+      .path-node span { font-size: .58rem; }
+      .route-stops { grid-template-columns: minmax(0, 1fr); }
+      .route-output { padding: 16px; }
+      .solo-actions { flex-direction: column; }
+      .solo-cta { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <main id="bw-solo-day-path">
+    <section class="solo-shell">
+      <header class="solo-hero">
+        <img src="assets/alexanderplatz-night-tram.jpg" alt="Alexanderplatz at night with a moving tram and the TV Tower in Berlin">
+        <div class="solo-hero-copy">
+          <p class="solo-kicker">Berlin Solo Day Path</p>
+          <h1>Build a day around one good Berlin anchor.</h1>
+          <p>Choose the mood, add a real middle stop, and leave the finish flexible. Three decisions give a solo day enough shape without turning it into a timetable.</p>
+        </div>
+      </header>
+      <div class="solo-body">
+        <div class="solo-intro">
+          <div>
+            <h2>Make one decision at a time</h2>
+            <p>This path is a planning aid, not turn-by-turn navigation. I use real Berlin places so the output gives you somewhere to stand, pause or eat before you check the live connection.</p>
+          </div>
+          <ul class="solo-facts" aria-label="Tool facts">
+            <li>3 real places</li>
+            <li>1 flexible finish</li>
+          </ul>
+        </div>
+
+        <div class="path-ribbon" aria-label="Day path progress">
+          <div class="path-node current" data-path-node="0"><div class="path-dot">1</div><strong>Anchor</strong><span>your mood</span></div>
+          <div class="path-node" data-path-node="1"><div class="path-dot">2</div><strong>Hinge</strong><span>your middle</span></div>
+          <div class="path-node" data-path-node="2"><div class="path-dot">3</div><strong>Finish</strong><span>your energy</span></div>
+        </div>
+
+        <section class="choice-stage" id="choice-stage" aria-live="polite">
+          <h2 id="choice-title">What should your first anchor do?</h2>
+          <p id="choice-copy">Pick the thing you want Berlin to give you first. There is no correct tourist answer, only a better starting mood for today.</p>
+          <div class="choice-list" id="choice-list"></div>
+        </section>
+
+        <section class="route-output" id="route-output" hidden aria-live="polite">
+          <h2 id="route-title">Your solo Berlin day shape</h2>
+          <p id="route-copy"></p>
+          <ol class="route-stops" id="route-stops"></ol>
+          <div class="route-note" id="route-note"></div>
+          <div class="solo-actions">
+            <a class="solo-cta" id="route-primary" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_blank" rel="noopener">Check the BerlinWalk calendar</a>
+            <a class="solo-cta secondary" href="https://www.bvg.de/en/connections" target="_blank" rel="noopener">Check the live BVG connection</a>
+          </div>
+          <button class="solo-reset" type="button" id="reset-path">Start a different day</button>
+        </section>
+
+        <div class="solo-limit"><strong>Keep the promise small.</strong> Opening hours, transport disruptions, tickets and the right finish can change. Check the live source shortly before you move, and stay with a good place when the day is already working.</div>
+
+        <div class="credits-row">
+          <button class="credits-toggle" type="button" id="credits-toggle" aria-expanded="false" aria-controls="credits-panel">Tool visual credits</button>
+        </div>
+        <div class="credits-panel" id="credits-panel" hidden>
+          <button type="button" id="credits-close" aria-label="Close tool visual credits">×</button>
+          Header photo: <a href="https://commons.wikimedia.org/wiki/File:Alexanderplatz_at_night_with_blurred_moving_tram.jpg" target="_blank" rel="noopener">Alexanderplatz at night with blurred moving tram</a> by domdomegg via Wikimedia Commons, CC BY 4.0.
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+    (function () {
+      var state = { anchor: null, hinge: null, finish: null, step: 0 };
+      var stage = document.getElementById('choice-stage');
+      var title = document.getElementById('choice-title');
+      var copy = document.getElementById('choice-copy');
+      var list = document.getElementById('choice-list');
+      var output = document.getElementById('route-output');
+      var routeTitle = document.getElementById('route-title');
+      var routeCopy = document.getElementById('route-copy');
+      var routeStops = document.getElementById('route-stops');
+      var routeNote = document.getElementById('route-note');
+      var primary = document.getElementById('route-primary');
+      var nodeEls = Array.prototype.slice.call(document.querySelectorAll('[data-path-node]'));
+
+      var stages = [
+        {
+          title: 'What should your first anchor do?',
+          copy: 'Pick the thing you want Berlin to give you first. There is no correct tourist answer, only a better starting mood for today.',
+          choices: [
+            { key: 'history', label: 'Explain the city', detail: 'Start where Berlin history is close together, with people around you.', tag: 'History' },
+            { key: 'quiet', label: 'Give me room', detail: 'Begin with trees, air and one clear pause before the next decision.', tag: 'Quiet' },
+            { key: 'neighbourhood', label: 'Let me enter a neighbourhood', detail: 'Choose street life, food and time to read the area without rushing.', tag: 'Neighbourhood' }
+          ]
+        },
+        {
+          title: 'What should hold the middle?',
+          copy: 'Choose the hinge that makes the day feel intentional. The hinge is where you stop collecting places and stay for a while.',
+          choices: [
+            { key: 'museum', label: 'A museum edge', detail: 'Use architecture and one museum area as the day’s deep breath.', tag: 'Museum edge' },
+            { key: 'park', label: 'A proper pause', detail: 'Give yourself a bench, a path or a meal before the next move.', tag: 'Proper pause' },
+            { key: 'food', label: 'A definite food stop', detail: 'Let the current opening information decide whether the day continues.', tag: 'Food stop' }
+          ]
+        },
+        {
+          title: 'How much energy is left after 16:00?',
+          copy: 'Pick the finish that sounds kind to the version of you who will actually be there later.',
+          choices: [
+            { key: 'social', label: 'Give me people', detail: 'Keep one conversation or a public walk in the shape.', tag: 'Social finish' },
+            { key: 'gentle', label: 'One gentle finish', detail: 'Stop after the good part and let the evening stay easy.', tag: 'Gentle finish' },
+            { key: 'view', label: 'One more view', detail: 'Use the last energy for one deliberate look, not a second checklist.', tag: 'One more view' }
+          ]
+        }
+      ];
+
+      var anchorPlaces = {
+        history: ['Alexanderplatz', 'Museum Island', 'Hackescher Markt'],
+        quiet: ['Großer Tiergarten', 'Brandenburg Gate', 'a café near Potsdamer Platz'],
+        neighbourhood: ['Kottbusser Tor', 'Oranienstraße', 'Markthalle Neun']
+      };
+      var anchorReasons = {
+        history: 'Keep the historic centre compact. If conversation is the missing piece, the BerlinWalk free tour can be the first anchor before you continue alone.',
+        quiet: 'Do not turn the park into a crossing point. Let the pause count, then check the next connection only when you are ready.',
+        neighbourhood: 'Read one area properly in daylight. Markthalle Neun is a possible food hinge only when its current programme and opening information fit.'
+      };
+      var hingeReasons = {
+        museum: 'The middle becomes about looking closely, not adding another district.',
+        park: 'The middle becomes a reset, so the finish can stay flexible.',
+        food: 'The middle becomes a definite stop, so you can stop searching for dinner.'
+      };
+      var finishReasons = {
+        social: 'Leave room for a public walk, a café conversation or a table where other people are around.',
+        gentle: 'Finish near the place that already feels good. A solo day does not need a dramatic final sight.',
+        view: 'Choose one last view and then go home or eat. One deliberate ending is better than a late cross-city chase.'
+      };
+
+      function updateRibbon() {
+        nodeEls.forEach(function (node, index) {
+          node.classList.toggle('complete', index < state.step);
+          node.classList.toggle('current', index === state.step && state.step < 3);
+          var value = index === 0 ? state.anchor : index === 1 ? state.hinge : state.finish;
+          var span = node.querySelector('span');
+          if (value) span.textContent = value === 'history' ? 'history' : value === 'quiet' ? 'quiet' : value === 'neighbourhood' ? 'neighbourhood' : value === 'museum' ? 'museum edge' : value === 'park' ? 'pause' : value === 'food' ? 'food stop' : value === 'social' ? 'people' : value === 'gentle' ? 'gentle' : 'view';
+        });
+      }
+
+      function renderStage() {
+        updateRibbon();
+        if (state.step >= stages.length) { renderOutput(); return; }
+        var current = stages[state.step];
+        title.textContent = current.title;
+        copy.textContent = current.copy;
+        list.innerHTML = '';
+        current.choices.forEach(function (choice) {
+          var button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'choice';
+          button.innerHTML = '<b>' + choice.tag + '</b><strong>' + choice.label + '</strong><span>' + choice.detail + '</span>';
+          button.addEventListener('click', function () {
+            if (state.step === 0) state.anchor = choice.key;
+            if (state.step === 1) state.hinge = choice.key;
+            if (state.step === 2) state.finish = choice.key;
+            state.step += 1;
+            renderStage();
+          });
+          list.appendChild(button);
+        });
+        stage.hidden = false;
+        output.hidden = true;
+      }
+
+      function renderOutput() {
+        var places = anchorPlaces[state.anchor];
+        routeTitle.textContent = 'Your ' + (state.anchor === 'history' ? 'history-led' : state.anchor === 'quiet' ? 'quieter' : 'neighbourhood-led') + ' Berlin day';
+        routeCopy.textContent = 'Your path is ' + places.join(' → ') + '. ' + anchorReasons[state.anchor] + ' ' + hingeReasons[state.hinge] + ' ' + finishReasons[state.finish];
+        routeStops.innerHTML = '';
+        places.forEach(function (place, index) {
+          var li = document.createElement('li');
+          var role = index === 0 ? 'Anchor' : index === 1 ? 'Hinge' : 'Finish';
+          var note = index === 0 ? 'Start here' : index === 1 ? state.hinge === 'food' ? 'Stay for food' : state.hinge === 'park' ? 'Take the pause' : 'Look closely' : state.finish === 'social' ? 'Keep people nearby' : state.finish === 'gentle' ? 'Stop while it is good' : 'Choose one final view';
+          li.innerHTML = '<small>' + role + '</small><strong>' + place + '</strong><span>' + note + '</span>';
+          routeStops.appendChild(li);
+        });
+        routeNote.innerHTML = '<strong>Next move:</strong> check the <a href="https://www.bvg.de/en/connections" target="_blank" rel="noopener">live BVG connection</a> only when you are ready to leave. The path is a useful shape, not a promise about hours, tickets or walking time.';
+        primary.textContent = state.anchor === 'history' && state.finish === 'social' ? 'Check the BerlinWalk calendar' : 'Read the free tour guide';
+        primary.href = state.anchor === 'history' && state.finish === 'social' ? 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based' : 'https://www.berlinwalk.com/post/what-happens-on-a-berlin-free-walking-tour';
+        stage.hidden = true;
+        output.hidden = false;
+      }
+
+      document.getElementById('reset-path').addEventListener('click', function () {
+        state = { anchor: null, hinge: null, finish: null, step: 0 };
+        renderStage();
+        document.getElementById('choice-stage').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+
+      var creditsToggle = document.getElementById('credits-toggle');
+      var creditsPanel = document.getElementById('credits-panel');
+      function closeCredits() { creditsPanel.hidden = true; creditsToggle.setAttribute('aria-expanded', 'false'); }
+      creditsToggle.addEventListener('click', function () { var open = creditsPanel.hidden; creditsPanel.hidden = !open; creditsToggle.setAttribute('aria-expanded', String(open)); });
+      document.getElementById('credits-close').addEventListener('click', closeCredits);
+      document.addEventListener('keydown', function (event) { if (event.key === 'Escape') closeCredits(); });
+      document.addEventListener('click', function (event) { if (!creditsPanel.hidden && !creditsPanel.contains(event.target) && event.target !== creditsToggle) closeCredits(); });
+
+      renderStage();
+    }());
+  </script>
+</body>
+</html>

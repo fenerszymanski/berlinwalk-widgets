@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "slug": "travelling-alone-in-berlin-day-plan",
+  "key": "travelling-alone-in-berlin-day-plan",
+  "config": {
+    "title": "Travelling Alone in Berlin - FAQ",
+    "subtitle": "Straight answers for giving a solo Berlin day enough shape without over-planning it.",
+    "items": [
+      {
+        "q": "How should I plan one day alone in Berlin?",
+        "a": "Choose one anchor, one nearby hinge and one flexible finish. Use Alexanderplatz and Museum Island for a history-led day, Tiergarten for a quieter day, or Kottbusser Tor and Markthalle Neun for a neighbourhood-led day when the current schedule fits."
+      },
+      {
+        "q": "Is Museum Island a good solo Berlin anchor?",
+        "a": "Yes, when you want architecture, museum context and a compact central area. Check the individual museum's current opening hours, admission and access information before fixing a ticket or time slot."
+      },
+      {
+        "q": "Is a Berlin free walking tour good for solo travellers?",
+        "a": "It can be a useful first anchor when conversation and historic context are what you are missing. BerlinWalk starts at the World Clock on Alexanderplatz and lasts about 2 hours through the historic centre of former East Berlin, then you can continue alone."
+      },
+      {
+        "q": "Should I combine Tiergarten with Museum Island in one day?",
+        "a": "Treat them as two different day shapes first. If one place is giving you a good pace, stay with it instead of crossing the city to complete a list. Check the live BVG connection search before moving."
+      },
+      {
+        "q": "How do I use Berlin public transport while travelling alone?",
+        "a": "Use the BVG connection search shortly before leaving each anchor, check disruptions and the return journey, and avoid adding a long cross-city move just because a saved pin is technically reachable."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How should I plan one day alone in Berlin?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Choose one anchor, one nearby hinge and one flexible finish. Use Alexanderplatz and Museum Island for a history-led day, Tiergarten for a quieter day, or Kottbusser Tor and Markthalle Neun for a neighbourhood-led day when the current schedule fits." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Museum Island a good solo Berlin anchor?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, when you want architecture, museum context and a compact central area. Check the individual museum's current opening hours, admission and access information before fixing a ticket or time slot." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is a Berlin free walking tour good for solo travellers?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It can be a useful first anchor when conversation and historic context are what you are missing. BerlinWalk starts at the World Clock on Alexanderplatz and lasts about 2 hours through the historic centre of former East Berlin, then you can continue alone." }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I combine Tiergarten with Museum Island in one day?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Treat them as two different day shapes first. If one place is giving you a good pace, stay with it instead of crossing the city to complete a list. Check the live BVG connection search before moving." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I use Berlin public transport while travelling alone?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Use the BVG connection search shortly before leaving each anchor, check disruptions and the return journey, and avoid adding a long cross-city move just because a saved pin is technically reachable." }
+      }
+    ]
+  }
+}
