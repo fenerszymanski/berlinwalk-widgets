@@ -558,7 +558,7 @@
 
       const renderGrounds = () => {
         groundGrid.innerHTML = Object.entries(grounds).map(([id, ground]) =>
-          `<button class="ground-choice ${state.ground === id ? 'selected' : ''}" type="button" data-ground="${id}"><span class="ground-photo"><img src="assets/places/${ground.photo}.jpg" alt="${ground.photoAlt}" loading="lazy" decoding="async" width="720" height="405"><span class="choice-mark">${ground.marker}</span></span><span class="ground-body"><strong>${ground.label}</strong><span>${ground.note}</span><span class="choice-window">Window ${ground.windowLabel}</span></span></button>`).join('');
+          `<button class="ground-choice ${state.ground === id ? 'selected' : ''}" type="button" data-ground="${id}"><span class="ground-photo"><img src="assets/places/${ground.photo}.jpg" alt="${ground.photoAlt}" decoding="async" width="720" height="405"><span class="choice-mark">${ground.marker}</span></span><span class="ground-body"><strong>${ground.label}</strong><span>${ground.note}</span><span class="choice-window">Window ${ground.windowLabel}</span></span></button>`).join('');
         groundGrid.querySelectorAll('[data-ground]').forEach((button) => button.addEventListener('click', () => {
           state.ground = button.dataset.ground;
           state.shoe = null; state.layer = null; state.carry = null;
@@ -632,7 +632,7 @@
         }
 
         document.getElementById('result-places').innerHTML = ground.places.map((place, index) =>
-          `<li><img src="assets/places/${place.photo}.jpg" alt="${place.alt}" loading="lazy" decoding="async" width="720" height="405"><span class="place-body"><small>Stop 0${index + 1}</small><strong>${place.name}</strong><p>${place.note}</p></span></li>`).join('');
+          `<li><img src="assets/places/${place.photo}.jpg" alt="${place.alt}" decoding="async" width="720" height="405"><span class="place-body"><small>Stop 0${index + 1}</small><strong>${place.name}</strong><p>${place.note}</p></span></li>`).join('');
       };
 
       const render = () => {
