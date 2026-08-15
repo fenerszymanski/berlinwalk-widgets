@@ -746,6 +746,7 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if ((post.slug || '') === 'free-berlin-memorials') return 'berlin-memorial-reading-order';
   if ((post.slug || '') === 'berlin-itinerary-for-couples') return 'berlin-day-duet';
   if ((post.slug || '') === 'guided-vs-self-guided-berlin-walking-tour') return 'berlin-first-walk-lens';
   if ((post.slug || '') === 'morning-or-afternoon-walking-tour-berlin') return 'berlin-tour-time-window';

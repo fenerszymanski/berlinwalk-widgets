@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-08-15T10:50:11.811Z",
+  "updatedAt": "2026-08-15T15:49:50.458Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 288,
+  "totalPosts": 289,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1617,6 +1617,23 @@
   ],
   "latest": [
     {
+      "title": "Free Berlin Memorials: Four Powerful Places That Are Easy to Visit",
+      "slug": "free-berlin-memorials",
+      "path": "/post/free-berlin-memorials",
+      "url": "https://www.berlinwalk.com/post/free-berlin-memorials",
+      "excerpt": "Berlin’s most important memorials are free, but four places can become a rushed checklist. Here is the reading order I use: memory, evidence, division and the human border crossing.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "free-budget",
+      "topicLabel": "Free & Budget",
+      "readTime": "5 min read",
+      "publishedDate": "2026-08-15T15:43:42.323Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_f2af2e72c11942cda3a5db5c5e2bd8d3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-memorial-stelae-detail.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_f2af2e72c11942cda3a5db5c5e2bd8d3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-memorial-stelae-detail.jpg",
+      "alt": "The concrete stelae of the Memorial to the Murdered Jews of Europe in Berlin",
+      "relatedToolSlug": "berlin-memorial-reading-order"
+    },
+    {
       "title": "What to Wear for a Berlin Walking Tour: Shoes, Layers and Rain",
       "slug": "what-to-wear-for-a-berlin-walking-tour",
       "path": "/post/what-to-wear-for-a-berlin-walking-tour",
@@ -1802,26 +1819,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_4bc7697f4d4543a5957f10411a756b5d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-neue-nationalgalerie.jpg",
       "alt": "Neue Nationalgalerie at the Kulturforum in Berlin",
       "relatedToolSlug": ""
-    },
-    {
-      "title": "International Literature Festival Berlin: English-Friendly Events and a Realistic City Plan",
-      "slug": "international-literature-festival-berlin-2026",
-      "path": "/post/international-literature-festival-berlin-2026",
-      "url": "https://www.berlinwalk.com/post/international-literature-festival-berlin-2026",
-      "excerpt": "Plan an International Literature Festival Berlin day around the right venue, the programme language and your available time.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "4 min read",
-      "publishedDate": "2026-08-02T12:02:07.802Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_331842548a144b0a8294e681737705dc~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-haus-der-berliner-festspiele-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_331842548a144b0a8294e681737705dc~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-haus-der-berliner-festspiele-cover.jpg",
-      "alt": "Haus der Berliner Festspiele in Wilmersdorf",
-      "relatedToolSlug": ""
     }
   ],
   "allPosts": [
+    {
+      "title": "Free Berlin Memorials: Four Powerful Places That Are Easy to Visit",
+      "slug": "free-berlin-memorials",
+      "path": "/post/free-berlin-memorials",
+      "url": "https://www.berlinwalk.com/post/free-berlin-memorials",
+      "excerpt": "Berlin’s most important memorials are free, but four places can become a rushed checklist. Here is the reading order I use: memory, evidence, division and the human border crossing.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "free-budget",
+      "topicLabel": "Free & Budget",
+      "readTime": "5 min read",
+      "publishedDate": "2026-08-15T15:43:42.323Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_f2af2e72c11942cda3a5db5c5e2bd8d3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-memorial-stelae-detail.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_f2af2e72c11942cda3a5db5c5e2bd8d3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-memorial-stelae-detail.jpg",
+      "alt": "The concrete stelae of the Memorial to the Murdered Jews of Europe in Berlin",
+      "relatedToolSlug": "berlin-memorial-reading-order"
+    },
     {
       "title": "What to Wear for a Berlin Walking Tour: Shoes, Layers and Rain",
       "slug": "what-to-wear-for-a-berlin-walking-tour",
