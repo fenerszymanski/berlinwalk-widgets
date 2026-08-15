@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "slug": "bauhaus-in-berlin-modernism",
+  "key": "bauhaus-in-berlin-modernism",
+  "config": {
+    "title": "Bauhaus in Berlin - FAQ",
+    "subtitle": "Straight answers for choosing a useful Bauhaus and Mies van der Rohe visit in Berlin.",
+    "items": [
+      {
+        "q": "Where can I see Bauhaus in Berlin?",
+        "a": "Start with the temporary Bauhaus-Archiv / Museum für Gestaltung at Knesebeckstraße 1 in Charlottenburg when you want the movement's ideas and objects. Haus Lemke and the Neue Nationalgalerie add two Mies van der Rohe connections at very different scales. Check the official visitor page for each place before travelling."
+      },
+      {
+        "q": "Is the Neue Nationalgalerie a Bauhaus building?",
+        "a": "No. The Neue Nationalgalerie is not a Bauhaus school building. It belongs in a Bauhaus-in-Berlin discussion because Ludwig Mies van der Rohe designed it later, in the 1960s, as a major public modernist building."
+      },
+      {
+        "q": "Why is the Bauhaus-Archiv at Knesebeckstraße 1?",
+        "a": "The museum is using a temporary venue at Knesebeckstraße 1 while its original building on Klingelhöferstraße is being renovated. Use the official Bauhaus-Archiv visitor page rather than an old guidebook for the current exhibition and entry details."
+      },
+      {
+        "q": "Is Haus Lemke worth the trip from central Berlin?",
+        "a": "It is worth the trip when you want to understand Mies van der Rohe at the scale of a house, garden and threshold rather than another large gallery. The Mies van der Rohe Haus is in Alt-Hohenschönhausen, so give it its own reason for the journey and check current visitor information first."
+      },
+      {
+        "q": "Can I visit all three Bauhaus and Mies places in one day?",
+        "a": "You can, but it is a cross-city day and not automatically the best choice. Pick the archive, house or public hall that answers your main question, then add another only if you have time and the current opening information works. The Berlin Bauhaus Lineage Map helps you see the geographic relationship without pretending it is a guaranteed route."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where can I see Bauhaus in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start with the temporary Bauhaus-Archiv / Museum für Gestaltung at Knesebeckstraße 1 in Charlottenburg when you want the movement's ideas and objects. Haus Lemke and the Neue Nationalgalerie add two Mies van der Rohe connections at very different scales. Check the official visitor page for each place before travelling."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Neue Nationalgalerie a Bauhaus building?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The Neue Nationalgalerie is not a Bauhaus school building. It belongs in a Bauhaus-in-Berlin discussion because Ludwig Mies van der Rohe designed it later, in the 1960s, as a major public modernist building."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is the Bauhaus-Archiv at Knesebeckstraße 1?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The museum is using a temporary venue at Knesebeckstraße 1 while its original building on Klingelhöferstraße is being renovated. Use the official Bauhaus-Archiv visitor page rather than an old guidebook for the current exhibition and entry details."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Haus Lemke worth the trip from central Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It is worth the trip when you want to understand Mies van der Rohe at the scale of a house, garden and threshold rather than another large gallery. The Mies van der Rohe Haus is in Alt-Hohenschönhausen, so give it its own reason for the journey and check current visitor information first."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I visit all three Bauhaus and Mies places in one day?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can, but it is a cross-city day and not automatically the best choice. Pick the archive, house or public hall that answers your main question, then add another only if you have time and the current opening information works. The Berlin Bauhaus Lineage Map helps you see the geographic relationship without pretending it is a guaranteed route."
+        }
+      }
+    ]
+  }
+}
