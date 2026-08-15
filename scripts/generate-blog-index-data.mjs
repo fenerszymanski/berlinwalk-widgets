@@ -139,6 +139,7 @@ const TOPICS = [
       'did-jfk-really-call-himself-a-jelly-donut-the-ich-bin-ein-berliner-myth',
       'sachsenhausen-from-berlin',
       'charlottenburg-palace-berlin',
+      'bauhaus-in-berlin-modernism',
       'traenenpalast-berlin',
       'topography-of-terror-berlin',
       'tempelhof-airport-berlin',
@@ -746,6 +747,7 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if ((post.slug || '') === 'bauhaus-in-berlin-modernism') return 'berlin-bauhaus-lineage-map';
   if ((post.slug || '') === 'free-berlin-memorials') return 'berlin-memorial-reading-order';
   if ((post.slug || '') === 'berlin-itinerary-for-couples') return 'berlin-day-duet';
   if ((post.slug || '') === 'guided-vs-self-guided-berlin-walking-tour') return 'berlin-first-walk-lens';
