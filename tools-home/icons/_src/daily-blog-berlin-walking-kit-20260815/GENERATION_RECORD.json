@@ -1,0 +1,18 @@
+{
+  "asset": "berlin-walking-kit",
+  "runId": "2026-08-15-1217-Europe-Berlin",
+  "route": "built-in Codex image generation",
+  "sourceOutput": "/Users/yusufucuz/.codex/generated_images/01a004e2-817c-76e3-a94a-47466bad9e25/exec-29ad9306-3d25-4fdd-95b8-2ec153588dec.png",
+  "rawCopy": "tools-home/icons/_src/daily-blog-berlin-walking-kit-20260815/berlin-walking-kit-raw.png",
+  "derivatives": [
+    "tools-home/icons/berlin-walking-kit.png",
+    "tools-home/icons/berlin-walking-kit-160.png"
+  ],
+  "dimensions": {
+    "raw": "1254x1254",
+    "png512": "512x512",
+    "png160": "160x160"
+  },
+  "review": "PASS: glossy green/yellow kit icon, no visible text, logo or watermark; readable at 160px.",
+  "recordedAt": "2026-08-15T12:19:00+02:00"
+}

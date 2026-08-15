@@ -6224,6 +6224,36 @@
         "one day alone in Berlin",
         "Berlin solo day planner"
       ]
+    },
+    {
+      "slug": "berlin-walking-kit",
+      "title": "Berlin Walking Kit",
+      "lead": "Assemble a practical Berlin walking kit by ground, shoe, layer and carry choice, then see what to wear, carry and leave behind.",
+      "category": "Weather",
+      "hubCategory": "WeatherOutdoor",
+      "type": "Guide",
+      "priority": 19,
+      "tags": [
+        "what to wear for a Berlin walking tour",
+        "Berlin walking shoes",
+        "Berlin rain clothes",
+        "Berlin packing tips",
+        "Berlin walking tour",
+        "Alexanderplatz",
+        "Tiergarten"
+      ],
+      "aliases": [
+        "Berlin walking tour outfit",
+        "Berlin walking kit",
+        "what to wear walking in Berlin",
+        "Berlin walking tour shoes",
+        "Berlin rain walking clothes"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-walking-kit/",
+      "embedHeight": 2200,
+      "image": "https://static.wixstatic.com/media/5a08a3_d47c7de7711447ffa6c9a8198413fda4~mv2.png",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "77c0542e-85d8-47c9-96e9-c8b6447dad30"
     }
   ],
   "hubCategories": [

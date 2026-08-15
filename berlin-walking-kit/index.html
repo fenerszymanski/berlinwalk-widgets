@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Walking Kit | BerlinWalk</title>
+  <meta name="description" content="Assemble a practical Berlin walking kit by ground, shoe, layer and carry choice, then see what to wear, carry and leave behind.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <style>
+    :root {
+      --kit-green: #123d18;
+      --kit-mid: #1b5e20;
+      --kit-yellow: #ffe600;
+      --kit-paper: #fffdf4;
+      --kit-cream: #f1ead7;
+      --kit-ink: #212121;
+      --kit-muted: #566257;
+      --kit-line: #cddcc7;
+      --kit-blue: #dce9eb;
+      --kit-red: #9a412c;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: transparent; }
+    body { overflow-x: hidden; color: var(--kit-ink); font-family: Montserrat, Arial, sans-serif; }
+    a { color: var(--kit-green); }
+    button { font: inherit; }
+    [hidden] { display: none !important; }
+    #bw-berlin-walking-kit { max-width: 900px; margin: 0 auto; padding: 4px; }
+    .kit-shell { overflow: hidden; border: 1px solid var(--kit-line); border-radius: 26px; background: var(--kit-paper); box-shadow: 0 22px 55px rgba(18, 61, 24, .14); }
+    .kit-hero { position: relative; min-height: 320px; background: var(--kit-green); }
+    .kit-hero img { display: block; width: 100%; height: 320px; object-fit: cover; }
+    .kit-hero::after { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18, 61, 24, .06), rgba(18, 61, 24, .84)); content: ''; pointer-events: none; }
+    .kit-hero-copy { position: absolute; z-index: 1; right: 26px; bottom: 25px; left: 26px; color: #fff; }
+    .kit-kicker { margin: 0 0 8px; color: var(--kit-yellow); font-size: .7rem; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+    .kit-hero h1 { max-width: 720px; margin: 0; font-family: Merriweather, Georgia, serif; font-size: clamp(1.7rem, 4vw, 2.8rem); line-height: 1.07; letter-spacing: -.04em; }
+    .kit-hero-copy p:last-child { max-width: 680px; margin: 10px 0 0; color: #eef5e8; font-size: .9rem; line-height: 1.55; }
+    .kit-body { padding: 25px; }
+    .kit-intro { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; align-items: end; padding-bottom: 21px; border-bottom: 1px solid var(--kit-line); }
+    .kit-intro h2 { margin: 0; color: var(--kit-green); font-family: Merriweather, Georgia, serif; font-size: 1.35rem; line-height: 1.2; }
+    .kit-intro p { max-width: 660px; margin: 8px 0 0; color: var(--kit-muted); font-size: .82rem; line-height: 1.6; }
+    .kit-facts { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; margin: 0; padding: 0; list-style: none; }
+    .kit-facts li { padding: 7px 9px; border: 1px solid #aec6aa; color: var(--kit-green); font-size: .65rem; font-weight: 900; white-space: nowrap; }
+    .kit-progress { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; margin: 22px 0 19px; }
+    .kit-step { position: relative; min-width: 0; padding: 10px 8px 9px; border-top: 4px solid #ccd9c8; background: #f8faf2; color: #708071; text-align: center; }
+    .kit-step.active { border-top-color: var(--kit-yellow); background: #f3f8eb; color: var(--kit-green); }
+    .kit-step.done { border-top-color: var(--kit-mid); color: var(--kit-green); }
+    .kit-step strong { display: block; font-size: .7rem; line-height: 1.2; }
+    .kit-step span { display: block; margin-top: 4px; font-size: .61rem; line-height: 1.25; }
+    .kit-stage { padding: 20px; border: 1px solid var(--kit-line); background: #f8fbf3; }
+    .kit-stage h2 { margin: 0; color: var(--kit-green); font-family: Merriweather, Georgia, serif; font-size: 1.45rem; line-height: 1.2; }
+    .kit-stage > p { max-width: 710px; margin: 8px 0 16px; color: var(--kit-muted); font-size: .82rem; line-height: 1.58; }
+    .ground-grid, .item-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+    .ground-choice, .item-choice { min-width: 0; min-height: 128px; padding: 14px; border: 1px solid #b6ccb2; background: #fff; color: var(--kit-green); cursor: pointer; text-align: left; transition: transform .15s ease, border-color .15s ease, background .15s ease; }
+    .ground-choice:hover, .ground-choice:focus-visible, .item-choice:hover, .item-choice:focus-visible { border-color: var(--kit-green); background: #fefef8; outline: 3px solid rgba(18, 61, 24, .18); outline-offset: 2px; transform: translateY(-2px); }
+    .ground-choice.selected, .item-choice.selected { border-color: var(--kit-green); background: #f0f7e8; box-shadow: inset 0 -5px 0 var(--kit-yellow); }
+    .choice-mark { display: inline-grid; place-items: center; width: 30px; height: 30px; margin-bottom: 12px; border-radius: 50%; background: var(--kit-cream); color: var(--kit-green); font-size: .95rem; font-weight: 900; }
+    .ground-choice strong, .item-choice strong { display: block; font-size: .83rem; line-height: 1.25; }
+    .ground-choice span, .item-choice span { display: block; margin-top: 6px; color: var(--kit-muted); font-size: .7rem; line-height: 1.45; }
+    .kit-rail { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 17px 0 0; padding: 10px; border: 1px dashed #8ca98a; background: #f5efdc; }
+    .rail-slot { min-height: 67px; padding: 10px; border: 1px solid #d6d6ba; background: rgba(255, 253, 244, .78); }
+    .rail-slot small { display: block; color: var(--kit-red); font-size: .59rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+    .rail-slot strong { display: block; margin-top: 5px; color: var(--kit-green); font-size: .74rem; line-height: 1.25; }
+    .rail-slot.empty strong { color: #879287; font-weight: 600; }
+    .kit-note { margin: 17px 0 0; padding: 12px 14px; border-left: 4px solid var(--kit-mid); background: #fffef8; color: var(--kit-muted); font-size: .75rem; line-height: 1.55; }
+    .kit-result { margin-top: 22px; padding: 21px; border-top: 7px solid var(--kit-yellow); background: var(--kit-cream); }
+    .kit-result h2 { margin: 0; color: var(--kit-green); font-family: Merriweather, Georgia, serif; font-size: 1.55rem; line-height: 1.17; }
+    .kit-result > p { max-width: 730px; margin: 9px 0 0; color: #465346; font-size: .82rem; line-height: 1.6; }
+    .kit-output-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; margin-top: 17px; }
+    .kit-output { min-width: 0; padding: 14px; border: 1px solid #c6d1bd; background: #fffef8; }
+    .kit-output small { display: block; margin-bottom: 6px; color: var(--kit-red); font-size: .61rem; font-weight: 900; letter-spacing: .11em; text-transform: uppercase; }
+    .kit-output strong { display: block; color: var(--kit-green); font-size: .84rem; line-height: 1.25; }
+    .kit-output p { margin: 7px 0 0; color: #566257; font-size: .71rem; line-height: 1.5; }
+    .kit-places { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 16px 0 0; padding: 0; list-style: none; }
+    .kit-places li { padding: 11px; border: 1px solid #c6d1bd; background: rgba(255, 254, 248, .78); }
+    .kit-places small { display: block; color: var(--kit-red); font-size: .59rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+    .kit-places strong { display: block; margin-top: 5px; color: var(--kit-green); font-size: .77rem; line-height: 1.3; }
+    .kit-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 18px; }
+    .kit-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 43px; padding: 10px 14px; background: var(--kit-yellow); color: var(--kit-green) !important; font-size: .72rem; font-weight: 900; text-decoration: none; }
+    .kit-cta:hover, .kit-cta:focus-visible { background: #f1d900; color: var(--kit-green) !important; outline: 3px solid var(--kit-green); outline-offset: 2px; }
+    .kit-cta.secondary { border: 1px solid #9bb495; background: transparent; color: var(--kit-green) !important; }
+    .kit-cta.secondary:hover, .kit-cta.secondary:focus-visible { background: #eef5e8; }
+    .kit-reset { margin-top: 15px; border: 0; background: transparent; color: var(--kit-green); cursor: pointer; font-size: .7rem; font-weight: 800; text-decoration: underline; }
+    .kit-reset:focus-visible { outline: 3px solid var(--kit-green); outline-offset: 3px; }
+    .kit-disclaimer { margin-top: 20px; padding: 13px 15px; border: 1px solid #c6d9be; background: #f4f8ed; color: var(--kit-muted); font-size: .72rem; line-height: 1.55; }
+    .kit-disclaimer strong { color: var(--kit-green); }
+    .credits-row { display: flex; justify-content: flex-end; margin-top: 17px; }
+    .credits-toggle { border: 1px solid #a8bca3; border-radius: 999px; padding: 8px 12px; background: #fff; color: var(--kit-green); cursor: pointer; font-size: .67rem; font-weight: 800; }
+    .credits-toggle:hover, .credits-toggle:focus-visible { background: #f0f7eb; outline: 3px solid rgba(18, 61, 24, .18); outline-offset: 2px; }
+    .credits-panel { position: relative; margin-top: 10px; padding: 15px 43px 15px 15px; border: 1px solid #b9cbb5; background: #f6f9f0; color: var(--kit-muted); font-size: .68rem; line-height: 1.55; }
+    .credits-panel button { position: absolute; top: 9px; right: 10px; border: 0; background: transparent; color: var(--kit-green); cursor: pointer; font-size: 1.1rem; font-weight: 900; line-height: 1; }
+    .credits-panel button:focus-visible { outline: 3px solid var(--kit-green); outline-offset: 2px; }
+    @media (max-width: 720px) {
+      .kit-intro { grid-template-columns: minmax(0, 1fr); }
+      .kit-facts { justify-content: flex-start; }
+      .ground-grid, .item-grid { grid-template-columns: minmax(0, 1fr); }
+      .ground-choice, .item-choice { min-height: 0; }
+    }
+    @media (max-width: 520px) {
+      #bw-berlin-walking-kit { padding: 0; }
+      .kit-shell { border-radius: 0; }
+      .kit-hero, .kit-hero img { min-height: 285px; height: 285px; }
+      .kit-hero-copy { right: 18px; bottom: 18px; left: 18px; }
+      .kit-body { padding: 17px; }
+      .kit-progress { gap: 3px; }
+      .kit-step { padding: 9px 4px; }
+      .kit-step strong { font-size: .63rem; }
+      .kit-step span { font-size: .55rem; }
+      .kit-stage, .kit-result { padding: 16px; }
+      .kit-rail, .kit-output-grid, .kit-places { grid-template-columns: minmax(0, 1fr); }
+      .kit-actions { flex-direction: column; }
+      .kit-cta { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <main id="bw-berlin-walking-kit">
+    <section class="kit-shell">
+      <header class="kit-hero">
+        <img src="assets/alexanderplatz.jpg" alt="People walking across Alexanderplatz in Berlin with the TV Tower behind them">
+        <div class="kit-hero-copy">
+          <p class="kit-kicker">Berlin Walking Kit</p>
+          <h1>Assemble the outfit for the Berlin day you are actually taking.</h1>
+          <p>Choose the ground, fill three small rail slots, and see what to wear, carry and leave behind.</p>
+        </div>
+      </header>
+      <div class="kit-body">
+        <div class="kit-intro">
+          <div>
+            <h2>Make the practical choices in order</h2>
+            <p>This is a packing aid, not a forecast. I built it around the way a Berlin day changes between pavement, park paths, transport shelter and indoor stops.</p>
+          </div>
+          <ul class="kit-facts" aria-label="Tool facts">
+            <li>3 kit slots</li>
+            <li>3 real places</li>
+          </ul>
+        </div>
+
+        <div class="kit-progress" aria-label="Walking kit progress">
+          <div class="kit-step active" data-step="ground"><strong>Ground</strong><span>choose the day</span></div>
+          <div class="kit-step" data-step="shoe"><strong>Shoes</strong><span>start here</span></div>
+          <div class="kit-step" data-step="layer"><strong>Layer</strong><span>adjust outside</span></div>
+          <div class="kit-step" data-step="carry"><strong>Carry</strong><span>keep it light</span></div>
+        </div>
+
+        <section class="kit-stage" id="kit-stage" aria-live="polite">
+          <h2 id="stage-title">What kind of Berlin ground will you take today?</h2>
+          <p id="stage-copy">Start with the places, not the forecast. Your choice changes the practical emphasis in the final kit.</p>
+          <div class="ground-grid" id="ground-grid"></div>
+          <div class="item-grid" id="item-grid" hidden></div>
+          <div class="kit-rail" id="kit-rail" hidden aria-label="Your walking kit">
+            <div class="rail-slot" data-rail="shoe"><small>Shoes</small><strong>Not chosen yet</strong></div>
+            <div class="rail-slot" data-rail="layer"><small>Layer</small><strong>Not chosen yet</strong></div>
+            <div class="rail-slot" data-rail="carry"><small>Carry</small><strong>Not chosen yet</strong></div>
+          </div>
+        </section>
+
+        <section class="kit-result" id="kit-result" hidden aria-live="polite">
+          <h2 id="result-title">Your Berlin walking kit</h2>
+          <p id="result-copy"></p>
+          <div class="kit-output-grid">
+            <article class="kit-output"><small>Wear</small><strong id="result-wear"></strong><p id="result-wear-note"></p></article>
+            <article class="kit-output"><small>Carry</small><strong id="result-carry"></strong><p id="result-carry-note"></p></article>
+            <article class="kit-output"><small>Leave</small><strong id="result-leave"></strong><p id="result-leave-note"></p></article>
+          </div>
+          <ol class="kit-places" id="result-places"></ol>
+          <div class="kit-actions">
+            <a class="kit-cta" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_blank" rel="noopener">Check the BerlinWalk calendar</a>
+            <a class="kit-cta secondary" href="https://www.bvg.de/en/connections" target="_blank" rel="noopener">Check the live BVG connection</a>
+          </div>
+          <button class="kit-reset" type="button" id="kit-reset">Assemble a different kit</button>
+        </section>
+
+        <div class="kit-disclaimer"><strong>Keep the promise small.</strong> Forecasts, transport and opening information change. Check the live source shortly before you leave, and adjust the kit when the day itself gives you better information.</div>
+
+        <div class="credits-row">
+          <button class="credits-toggle" type="button" id="credits-toggle" aria-expanded="false" aria-controls="credits-panel">Tool visual credits</button>
+        </div>
+        <div class="credits-panel" id="credits-panel" hidden>
+          <button type="button" id="credits-close" aria-label="Close tool visual credits">×</button>
+          Hero photograph: <a href="https://commons.wikimedia.org/wiki/File:People_On_Alexanderplatz_(51955324).jpeg" target="_blank" rel="noopener">People On Alexanderplatz</a> by Sascha Kohlmann, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>.
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+    (() => {
+      const grounds = {
+        centre: {
+          label: 'Historic centre',
+          marker: '01',
+          note: 'Firm pavement, frequent stops and indoor moments around Alexanderplatz, Museum Island and Hackescher Markt.',
+          places: ['Alexanderplatz', 'Museum Island', 'Hackescher Markt']
+        },
+        park: {
+          label: 'Park + museum',
+          marker: '02',
+          note: 'A slower day through the Großer Tiergarten, then a clear indoor anchor near the Brandenburg Gate or Kulturforum.',
+          places: ['Großer Tiergarten', 'Brandenburg Gate', 'Kulturforum']
+        },
+        neighbourhood: {
+          label: 'Neighbourhood evening',
+          marker: '03',
+          note: 'Shorter walks, more standing and a layer that still works after sunset around Kottbusser Tor and Oranienstraße.',
+          places: ['Kottbusser Tor', 'Oranienstraße', 'Markthalle Neun']
+        }
+      };
+      const options = {
+        shoe: [
+          { id: 'trainer', label: 'Supportive trainers', note: 'Good for firm city pavement and long standing pauses.' },
+          { id: 'weatherproof', label: 'Weatherproof walking shoes', note: 'A sensible choice when rain or damp ground is part of the plan.' },
+          { id: 'boot', label: 'Light boots with grip', note: 'Useful when you want a warmer ankle and a steadier sole.' }
+        ],
+        layer: [
+          { id: 'overshirt', label: 'Light overshirt', note: 'Easy to remove when the afternoon gets warmer.' },
+          { id: 'shell', label: 'Compact rain shell', note: 'A practical outer layer for an unsettled day.' },
+          { id: 'warm', label: 'Warm middle layer', note: 'Adds comfort when the day includes shade and a cooler evening.' }
+        ],
+        carry: [
+          { id: 'water', label: 'Water + small bag', note: 'The useful default when the day is dry and settled.' },
+          { id: 'umbrella', label: 'Small umbrella', note: 'Worth carrying when light rain is possible and a hood is not enough.' },
+          { id: 'power', label: 'Water + power bank', note: 'Useful when the phone is doing photos and live route checks.' }
+        ]
+      };
+      const stageLabels = { shoe: 'What will keep your feet happy?', layer: 'What can you remove when the day changes?', carry: 'What earns space in the small bag?' };
+      const stageCopies = { shoe: 'Choose one pair you would genuinely wear for several hours. The right answer is comfort and grip, not a technical label.', layer: 'Add the layer that solves today’s likely change. A removable piece is usually more useful than a heavy coat you carry indoors.', carry: 'Choose one small solution. Water, rain cover or phone power — the best bag is the one that stays light.' };
+      const state = { ground: null, shoe: null, layer: null, carry: null };
+      const stageOrder = ['shoe', 'layer', 'carry'];
+      const groundGrid = document.getElementById('ground-grid');
+      const itemGrid = document.getElementById('item-grid');
+      const rail = document.getElementById('kit-rail');
+      const result = document.getElementById('kit-result');
+      const stageTitle = document.getElementById('stage-title');
+      const stageCopy = document.getElementById('stage-copy');
+      const activeStage = () => {
+        if (!state.ground) return 'ground';
+        return stageOrder.find((key) => !state[key]) || 'result';
+      };
+      const setProgress = () => {
+        const current = activeStage();
+        document.querySelectorAll('.kit-step').forEach((el) => {
+          const key = el.dataset.step;
+          el.classList.toggle('active', key === current);
+          el.classList.toggle('done', key !== 'ground' && state[key] !== null || key === 'ground' && state.ground !== null);
+        });
+      };
+      const renderGrounds = () => {
+        groundGrid.innerHTML = Object.entries(grounds).map(([id, ground]) => `<button class="ground-choice ${state.ground === id ? 'selected' : ''}" type="button" data-ground="${id}"><span class="choice-mark">${ground.marker}</span><strong>${ground.label}</strong><span>${ground.note}</span></button>`).join('');
+        groundGrid.querySelectorAll('[data-ground]').forEach((button) => button.addEventListener('click', () => {
+          state.ground = button.dataset.ground;
+          state.shoe = null; state.layer = null; state.carry = null;
+          render();
+        }));
+      };
+      const renderItems = (key) => {
+        itemGrid.innerHTML = options[key].map((item, index) => `<button class="item-choice ${state[key] === item.id ? 'selected' : ''}" type="button" data-item="${item.id}"><span class="choice-mark">0${index + 1}</span><strong>${item.label}</strong><span>${item.note}</span></button>`).join('');
+        itemGrid.querySelectorAll('[data-item]').forEach((button) => button.addEventListener('click', () => {
+          state[key] = button.dataset.item;
+          render();
+        }));
+      };
+      const selectedLabel = (key) => options[key].find((item) => item.id === state[key])?.label || 'Not chosen yet';
+      const renderRail = () => {
+        rail.querySelectorAll('[data-rail]').forEach((slot) => {
+          const key = slot.dataset.rail;
+          slot.querySelector('strong').textContent = selectedLabel(key);
+          slot.classList.toggle('empty', !state[key]);
+        });
+      };
+      const resultText = () => {
+        const ground = grounds[state.ground];
+        const shoe = selectedLabel('shoe');
+        const layer = selectedLabel('layer');
+        const carry = selectedLabel('carry');
+        const wear = `${shoe} + ${layer}`;
+        const carryText = carry;
+        const leave = state.ground === 'park' ? 'The second pair of shoes' : state.ground === 'neighbourhood' ? 'The heavy coat you will carry indoors' : 'A second outfit';
+        const leaveNote = state.ground === 'park' ? 'One reliable pair is enough unless you already know the path will be muddy.' : state.ground === 'neighbourhood' ? 'Keep the evening layer on your body or in the small bag; do not turn it into luggage.' : 'Let the removable layer do the work instead of carrying a backup wardrobe.';
+        document.getElementById('result-title').textContent = `${ground.label}: your walking kit`;
+        document.getElementById('result-copy').textContent = `${ground.note} Your assembled rail keeps the answer small enough to use before you leave.`;
+        document.getElementById('result-wear').textContent = wear;
+        document.getElementById('result-wear-note').textContent = 'Put these on before you set off. Comfort comes first.';
+        document.getElementById('result-carry').textContent = carryText;
+        document.getElementById('result-carry-note').textContent = 'Check the live forecast and connection shortly before moving.';
+        document.getElementById('result-leave').textContent = leave;
+        document.getElementById('result-leave-note').textContent = leaveNote;
+        document.getElementById('result-places').innerHTML = ground.places.map((place, index) => `<li><small>Stop 0${index + 1}</small><strong>${place}</strong></li>`).join('');
+      };
+      const render = () => {
+        const current = activeStage();
+        setProgress();
+        groundGrid.hidden = Boolean(state.ground);
+        itemGrid.hidden = !state.ground || current === 'result';
+        rail.hidden = !state.ground;
+        result.hidden = current !== 'result';
+        if (!state.ground) {
+          stageTitle.textContent = 'What kind of Berlin ground will you take today?';
+          stageCopy.textContent = 'Start with the places, not the forecast. Your choice changes the practical emphasis in the final kit.';
+          renderGrounds();
+        } else if (current !== 'result') {
+          stageTitle.textContent = stageLabels[current];
+          stageCopy.textContent = stageCopies[current];
+          renderItems(current);
+        } else {
+          stageTitle.textContent = 'Your rail is complete';
+          stageCopy.textContent = 'Read the arrangement below, then check the live conditions before leaving.';
+        }
+        if (state.ground) renderRail();
+        if (current === 'result') resultText();
+      };
+      document.getElementById('kit-reset').addEventListener('click', () => { state.ground = null; state.shoe = null; state.layer = null; state.carry = null; render(); window.scrollTo({ top: document.getElementById('kit-stage').offsetTop - 18, behavior: 'smooth' }); });
+      const toggle = document.getElementById('credits-toggle');
+      const panel = document.getElementById('credits-panel');
+      const close = () => { panel.hidden = true; toggle.setAttribute('aria-expanded', 'false'); };
+      toggle.addEventListener('click', () => { panel.hidden = !panel.hidden; toggle.setAttribute('aria-expanded', String(!panel.hidden)); if (!panel.hidden) panel.querySelector('a')?.focus(); });
+      document.getElementById('credits-close').addEventListener('click', close);
+      document.addEventListener('keydown', (event) => { if (event.key === 'Escape') close(); });
+      document.addEventListener('click', (event) => { if (!panel.hidden && !panel.contains(event.target) && event.target !== toggle) close(); });
+      render();
+    })();
+  </script>
+</body>
+</html>

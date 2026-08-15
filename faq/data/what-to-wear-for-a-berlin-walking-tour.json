@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "slug": "what-to-wear-for-a-berlin-walking-tour",
+  "key": "what-to-wear-for-a-berlin-walking-tour",
+  "config": {
+    "title": "What to Wear for a Berlin Walking Tour - FAQ",
+    "subtitle": "Straight answers for shoes, layers, rain and a lighter walking-tour bag.",
+    "items": [
+      {
+        "q": "What shoes should I wear for a Berlin walking tour?",
+        "a": "Wear supportive trainers or walking shoes with a stable, grippy sole. Central Berlin uses hard pavement and includes standing, so comfort matters more than a dressy look. Do not debut a new pair on the tour."
+      },
+      {
+        "q": "What should I wear for Berlin walking in the rain?",
+        "a": "Use a removable rain layer, shoes with grip and a small bag that keeps your phone dry. Check the current forecast and the BVG connection search shortly before leaving, then shorten an exposed stretch if needed."
+      },
+      {
+        "q": "How many layers do I need for a Berlin walking tour?",
+        "a": "A breathable base and one removable outer layer cover most changeable days. Add a warmer middle layer in colder months, and choose pieces you can put into a small bag when the afternoon changes."
+      },
+      {
+        "q": "Should I wear different clothes for a Berlin walking tour and a museum day?",
+        "a": "Use the same comfortable shoes, then add a layer that looks fine indoors. A day around Alexanderplatz and Museum Island moves between pavement, cafés, transport and museum rooms, so adjustable clothing works better than one heavy outfit."
+      },
+      {
+        "q": "Is a Berlin free walking tour a good first activity?",
+        "a": "It can be useful when you want historic context and conversation before exploring alone. BerlinWalk starts at the World Clock on Alexanderplatz and lasts about 2 hours through the historic centre of former East Berlin; check the live calendar for the current tour option."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What shoes should I wear for a Berlin walking tour?", "acceptedAnswer": { "@type": "Answer", "text": "Wear supportive trainers or walking shoes with a stable, grippy sole. Central Berlin uses hard pavement and includes standing, so comfort matters more than a dressy look. Do not debut a new pair on the tour." } },
+      { "@type": "Question", "name": "What should I wear for Berlin walking in the rain?", "acceptedAnswer": { "@type": "Answer", "text": "Use a removable rain layer, shoes with grip and a small bag that keeps your phone dry. Check the current forecast and the BVG connection search shortly before leaving, then shorten an exposed stretch if needed." } },
+      { "@type": "Question", "name": "How many layers do I need for a Berlin walking tour?", "acceptedAnswer": { "@type": "Answer", "text": "A breathable base and one removable outer layer cover most changeable days. Add a warmer middle layer in colder months, and choose pieces you can put into a small bag when the afternoon changes." } },
+      { "@type": "Question", "name": "Should I wear different clothes for a Berlin walking tour and a museum day?", "acceptedAnswer": { "@type": "Answer", "text": "Use the same comfortable shoes, then add a layer that looks fine indoors. A day around Alexanderplatz and Museum Island moves between pavement, cafés, transport and museum rooms, so adjustable clothing works better than one heavy outfit." } },
+      { "@type": "Question", "name": "Is a Berlin free walking tour a good first activity?", "acceptedAnswer": { "@type": "Answer", "text": "It can be useful when you want historic context and conversation before exploring alone. BerlinWalk starts at the World Clock on Alexanderplatz and lasts about 2 hours through the historic centre of former East Berlin; check the live calendar for the current tour option." } }
+    ]
+  }
+}

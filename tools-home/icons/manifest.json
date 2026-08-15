@@ -2627,5 +2627,18 @@
     "png160": "tools-home/icons/berlin-solo-day-path-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-solo-day-path-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_88d67e4474dc4f22a74b02a7af0c7d00~mv2.png"
+  },
+  {
+    "slug": "berlin-walking-kit",
+    "title": "Berlin Walking Kit",
+    "category": "Weather",
+    "model": "Built-in ImageGen",
+    "style": "BerlinWalk green tile and yellow walking-kit rail icon family 2026-08-15",
+    "sourceSheet": "tools-home/icons/_src/daily-blog-berlin-walking-kit-20260815/berlin-walking-kit-raw.png",
+    "promptSource": "tools-home/icons/_src/daily-blog-berlin-walking-kit-20260815/PROMPT.md",
+    "png512": "tools-home/icons/berlin-walking-kit.png",
+    "png160": "tools-home/icons/berlin-walking-kit-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-walking-kit-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_d47c7de7711447ffa6c9a8198413fda4~mv2.png"
   }
 ]
