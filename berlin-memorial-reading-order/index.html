@@ -70,7 +70,7 @@
     .memory-result > p { max-width: 720px; margin: 8px 0 0; color: #465346; font-size: .78rem; line-height: 1.56; }
     .memory-output { display: grid; gap: 7px; margin: 15px 0 0; padding: 0; list-style: none; counter-reset: output-step; }
     .memory-output li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 10px; align-items: start; padding: 10px; border: 1px solid #ccd7c4; background: rgba(255, 253, 241, .86); }
-    .memory-output li::before { counter-increment: output-step; content: counter(output-step); display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--memory-green); color: #fff; font-size: .68rem; font-weight: 900; }
+    .memory-output li::before { counter-increment: output-step; content: counter(output-step); display: flex; align-items: center; justify-content: center; align-self: start; width: 26px; height: 26px; padding: 0; border-radius: 50%; background: var(--memory-green); color: #fff; font-size: .68rem; font-weight: 900; line-height: 1; text-align: center; font-variant-numeric: tabular-nums; }
     .memory-output strong { color: var(--memory-green); font-family: Merriweather, Georgia, serif; font-size: .82rem; line-height: 1.25; }
     .memory-output span { display: block; margin-top: 3px; color: var(--memory-muted); font-size: .7rem; line-height: 1.45; }
     .memory-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 16px; }
