@@ -6121,7 +6121,7 @@
       "lead": "Open three questions in a real Humboldt Forum scene. See whether a guided or self-guided Berlin walk should come first, then take one practical next step.",
       "category": "Discovery",
       "hubCategory": "TripPlans",
-      "type": "Lens",
+      "type": "Quiz",
       "priority": 16,
       "tags": [
         "guided walking tour",
@@ -6148,7 +6148,7 @@
       "lead": "Two travellers privately choose two real Berlin postcards each, then reveal one shared hinge and a workable shape for the day.",
       "category": "Discovery",
       "hubCategory": "TripPlans",
-      "type": "Matcher",
+      "type": "Planner",
       "priority": 16,
       "tags": [
         "berlin itinerary for couples",
