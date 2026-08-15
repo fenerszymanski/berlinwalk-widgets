@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Berlin Walking Kit | BerlinWalk</title>
-  <meta name="description" content="Assemble a practical Berlin walking kit by ground, shoe, layer and carry choice, then see what to wear, carry and leave behind.">
+  <meta name="description" content="Pick the Berlin ground you will cover, read the live forecast for exactly those hours, and get a clear answer on what to wear, carry and leave behind.">
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../css/brand.css">
   <script defer src="../js/brand.js"></script>
@@ -36,6 +36,21 @@
     .kit-kicker { margin: 0 0 8px; color: var(--kit-yellow); font-size: .7rem; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
     .kit-hero h1 { max-width: 720px; margin: 0; font-family: Merriweather, Georgia, serif; font-size: clamp(1.7rem, 4vw, 2.8rem); line-height: 1.07; letter-spacing: -.04em; }
     .kit-hero-copy p:last-child { max-width: 680px; margin: 10px 0 0; color: #eef5e8; font-size: .9rem; line-height: 1.55; }
+
+    .kit-forecast { display: grid; gap: 11px; padding: 15px 25px 17px; border-bottom: 1px solid var(--kit-line); background: #f2f7ea; }
+    .fc-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 9px; }
+    .fc-label { margin: 0; color: var(--kit-green); font-size: .66rem; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
+    .fc-days { display: flex; flex-wrap: wrap; gap: 5px; }
+    .fc-day { padding: 7px 11px; border: 1px solid #b6ccb2; background: #fff; color: var(--kit-green); cursor: pointer; font-size: .68rem; font-weight: 800; }
+    .fc-day[aria-pressed="true"] { border-color: var(--kit-green); background: var(--kit-green); color: #fff; }
+    .fc-day:focus-visible { outline: 3px solid rgba(18, 61, 24, .3); outline-offset: 2px; }
+    .fc-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; }
+    .fc-metric { min-width: 0; padding: 9px 10px; border: 1px solid #c6d9be; background: #fff; }
+    .fc-metric small { display: block; color: var(--kit-red); font-size: .57rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+    .fc-metric strong { display: block; margin-top: 4px; color: var(--kit-green); font-size: .82rem; line-height: 1.2; }
+    .fc-metric span { display: block; margin-top: 3px; color: var(--kit-muted); font-size: .62rem; line-height: 1.35; }
+    .fc-note { margin: 0; color: var(--kit-muted); font-size: .7rem; line-height: 1.5; }
+
     .kit-body { padding: 25px; }
     .kit-intro { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; align-items: end; padding-bottom: 21px; border-bottom: 1px solid var(--kit-line); }
     .kit-intro h2 { margin: 0; color: var(--kit-green); font-family: Merriweather, Georgia, serif; font-size: 1.35rem; line-height: 1.2; }
@@ -43,21 +58,30 @@
     .kit-facts { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; margin: 0; padding: 0; list-style: none; }
     .kit-facts li { padding: 7px 9px; border: 1px solid #aec6aa; color: var(--kit-green); font-size: .65rem; font-weight: 900; white-space: nowrap; }
     .kit-progress { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; margin: 22px 0 19px; }
-    .kit-step { position: relative; min-width: 0; padding: 10px 8px 9px; border-top: 4px solid #ccd9c8; background: #f8faf2; color: #708071; text-align: center; }
+    .kit-step { position: relative; min-width: 0; width: 100%; padding: 10px 8px 9px; border: 0; border-top: 4px solid #ccd9c8; background: #f8faf2; color: #708071; cursor: default; text-align: center; }
     .kit-step.active { border-top-color: var(--kit-yellow); background: #f3f8eb; color: var(--kit-green); }
     .kit-step.done { border-top-color: var(--kit-mid); color: var(--kit-green); }
+    .kit-step.reachable { cursor: pointer; }
+    .kit-step.reachable:hover { background: #eef5e6; }
+    .kit-step:focus-visible { outline: 3px solid rgba(18, 61, 24, .3); outline-offset: 2px; }
     .kit-step strong { display: block; font-size: .7rem; line-height: 1.2; }
     .kit-step span { display: block; margin-top: 4px; font-size: .61rem; line-height: 1.25; }
     .kit-stage { padding: 20px; border: 1px solid var(--kit-line); background: #f8fbf3; }
     .kit-stage h2 { margin: 0; color: var(--kit-green); font-family: Merriweather, Georgia, serif; font-size: 1.45rem; line-height: 1.2; }
     .kit-stage > p { max-width: 710px; margin: 8px 0 16px; color: var(--kit-muted); font-size: .82rem; line-height: 1.58; }
     .ground-grid, .item-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-    .ground-choice, .item-choice { min-width: 0; min-height: 128px; padding: 14px; border: 1px solid #b6ccb2; background: #fff; color: var(--kit-green); cursor: pointer; text-align: left; transition: transform .15s ease, border-color .15s ease, background .15s ease; }
+    .ground-choice, .item-choice { position: relative; min-width: 0; min-height: 128px; padding: 14px; border: 1px solid #b6ccb2; background: #fff; color: var(--kit-green); cursor: pointer; text-align: left; transition: transform .15s ease, border-color .15s ease, background .15s ease; }
     .ground-choice:hover, .ground-choice:focus-visible, .item-choice:hover, .item-choice:focus-visible { border-color: var(--kit-green); background: #fefef8; outline: 3px solid rgba(18, 61, 24, .18); outline-offset: 2px; transform: translateY(-2px); }
     .ground-choice.selected, .item-choice.selected { border-color: var(--kit-green); background: #f0f7e8; box-shadow: inset 0 -5px 0 var(--kit-yellow); }
     .choice-mark { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 30px; width: 30px; height: 30px; margin: 0 0 12px; padding: 0; border-radius: 50%; background: var(--kit-cream); color: var(--kit-green); font-size: .78rem; font-weight: 900; line-height: 1; letter-spacing: 0; text-align: center; font-variant-numeric: tabular-nums; }
     .ground-choice strong, .item-choice strong { display: block; font-size: .83rem; line-height: 1.25; }
     .ground-choice span, .item-choice span { display: block; margin-top: 6px; color: var(--kit-muted); font-size: .7rem; line-height: 1.45; }
+    .ground-choice .choice-window { margin-top: 8px; color: var(--kit-green); font-size: .64rem; font-weight: 800; letter-spacing: .04em; }
+    .kit-stage-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0 0; }
+    .kit-ghost { padding: 9px 12px; border: 1px solid #9bb495; background: transparent; color: var(--kit-green); cursor: pointer; font-size: .69rem; font-weight: 800; }
+    .kit-ghost:hover, .kit-ghost:focus-visible { background: #eef5e8; outline: 3px solid rgba(18, 61, 24, .18); outline-offset: 2px; }
+    .kit-ghost.strong { border-color: var(--kit-green); background: var(--kit-green); color: #fff; }
+    .kit-ghost.strong:hover, .kit-ghost.strong:focus-visible { background: var(--kit-mid); }
     .kit-rail { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 17px 0 0; padding: 10px; border: 1px dashed #8ca98a; background: #f5efdc; }
     .rail-slot { min-height: 67px; padding: 10px; border: 1px solid #d6d6ba; background: rgba(255, 253, 244, .78); }
     .rail-slot small { display: block; color: var(--kit-red); font-size: .59rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
@@ -67,20 +91,30 @@
     .kit-result { margin-top: 22px; padding: 21px; border-top: 7px solid var(--kit-yellow); background: var(--kit-cream); }
     .kit-result h2 { margin: 0; color: var(--kit-green); font-family: Merriweather, Georgia, serif; font-size: 1.55rem; line-height: 1.17; }
     .kit-result > p { max-width: 730px; margin: 9px 0 0; color: #465346; font-size: .82rem; line-height: 1.6; }
-    .kit-output-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; margin-top: 17px; }
+    .kit-window-line { margin: 13px 0 0; padding: 10px 12px; border: 1px solid #c6d1bd; background: rgba(255, 254, 248, .8); color: var(--kit-green); font-size: .72rem; font-weight: 800; line-height: 1.45; }
+    .kit-output-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; margin-top: 13px; }
     .kit-output { min-width: 0; padding: 14px; border: 1px solid #c6d1bd; background: #fffef8; }
     .kit-output small { display: block; margin-bottom: 6px; color: var(--kit-red); font-size: .61rem; font-weight: 900; letter-spacing: .11em; text-transform: uppercase; }
     .kit-output strong { display: block; color: var(--kit-green); font-size: .84rem; line-height: 1.25; }
     .kit-output p { margin: 7px 0 0; color: #566257; font-size: .71rem; line-height: 1.5; }
+    .kit-call { margin-top: 15px; padding: 15px 16px; border: 1px solid #c6d1bd; border-left: 6px solid var(--kit-yellow); background: #fffef8; }
+    .kit-call small { display: block; color: var(--kit-red); font-size: .61rem; font-weight: 900; letter-spacing: .11em; text-transform: uppercase; }
+    .kit-call p { margin: 7px 0 0; color: #3d493d; font-size: .78rem; line-height: 1.6; }
+    .kit-swaps { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+    .kit-swap { padding: 9px 12px; border: 1px solid var(--kit-green); background: #fff; color: var(--kit-green); cursor: pointer; font-size: .69rem; font-weight: 800; text-align: left; }
+    .kit-swap:hover, .kit-swap:focus-visible { background: #eef5e8; outline: 3px solid rgba(18, 61, 24, .18); outline-offset: 2px; }
     .kit-places { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 16px 0 0; padding: 0; list-style: none; }
     .kit-places li { padding: 11px; border: 1px solid #c6d1bd; background: rgba(255, 254, 248, .78); }
     .kit-places small { display: block; color: var(--kit-red); font-size: .59rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
     .kit-places strong { display: block; margin-top: 5px; color: var(--kit-green); font-size: .77rem; line-height: 1.3; }
+    .kit-places p { margin: 5px 0 0; color: var(--kit-muted); font-size: .66rem; line-height: 1.45; }
     .kit-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 18px; }
-    .kit-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 43px; padding: 10px 14px; background: var(--kit-yellow); color: var(--kit-green) !important; font-size: .72rem; font-weight: 900; text-decoration: none; }
+    .kit-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 43px; padding: 10px 14px; border: 0; background: var(--kit-yellow); color: var(--kit-green) !important; cursor: pointer; font-size: .72rem; font-weight: 900; text-decoration: none; }
     .kit-cta:hover, .kit-cta:focus-visible { background: #f1d900; color: var(--kit-green) !important; outline: 3px solid var(--kit-green); outline-offset: 2px; }
     .kit-cta.secondary { border: 1px solid #9bb495; background: transparent; color: var(--kit-green) !important; }
     .kit-cta.secondary:hover, .kit-cta.secondary:focus-visible { background: #eef5e8; }
+    .kit-copy-status { margin: 9px 0 0; color: var(--kit-green); font-size: .68rem; font-weight: 800; }
+    .kit-copy-box { display: block; width: 100%; margin-top: 8px; padding: 11px; border: 1px solid #c6d1bd; background: #fffef8; color: var(--kit-green); font-family: Montserrat, Arial, sans-serif; font-size: .7rem; line-height: 1.5; resize: vertical; }
     .kit-reset { margin-top: 15px; border: 0; background: transparent; color: var(--kit-green); cursor: pointer; font-size: .7rem; font-weight: 800; text-decoration: underline; }
     .kit-reset:focus-visible { outline: 3px solid var(--kit-green); outline-offset: 3px; }
     .kit-disclaimer { margin-top: 20px; padding: 13px 15px; border: 1px solid #c6d9be; background: #f4f8ed; color: var(--kit-muted); font-size: .72rem; line-height: 1.55; }
@@ -96,12 +130,14 @@
       .kit-facts { justify-content: flex-start; }
       .ground-grid, .item-grid { grid-template-columns: minmax(0, 1fr); }
       .ground-choice, .item-choice { min-height: 0; }
+      .fc-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 520px) {
       #bw-berlin-walking-kit { padding: 0; }
       .kit-shell { border-radius: 0; }
       .kit-hero, .kit-hero img { min-height: 285px; height: 285px; }
       .kit-hero-copy { right: 18px; bottom: 18px; left: 18px; }
+      .kit-forecast { padding: 14px 17px 15px; }
       .kit-body { padding: 17px; }
       .kit-progress { gap: 3px; }
       .kit-step { padding: 9px 4px; }
@@ -111,6 +147,7 @@
       .kit-rail, .kit-output-grid, .kit-places { grid-template-columns: minmax(0, 1fr); }
       .kit-actions { flex-direction: column; }
       .kit-cta { width: 100%; }
+      .kit-stage-actions .kit-ghost { width: 100%; }
     }
   </style>
 </head>
@@ -122,33 +159,53 @@
         <div class="kit-hero-copy">
           <p class="kit-kicker">Berlin Walking Kit</p>
           <h1>Assemble the outfit for the Berlin day you are actually taking.</h1>
-          <p>Choose the ground, fill three small rail slots, and see what to wear, carry and leave behind.</p>
+          <p>Tell me which ground you will cover. I read the live Berlin forecast for exactly those hours and give you one clear answer on what to wear, carry and leave behind.</p>
         </div>
       </header>
+
+      <div class="kit-forecast" id="kit-forecast">
+        <div class="fc-top">
+          <p class="fc-label" id="fc-label">Berlin forecast</p>
+          <div class="fc-days" id="fc-days" role="group" aria-label="Choose the day"></div>
+        </div>
+        <div class="fc-metrics" id="fc-metrics">
+          <div class="fc-metric"><small>Feels like</small><strong>Reading</strong><span>live Berlin data</span></div>
+          <div class="fc-metric"><small>Rain</small><strong>Reading</strong><span>hour by hour</span></div>
+          <div class="fc-metric"><small>Wind</small><strong>Reading</strong><span>gusts decide the umbrella</span></div>
+          <div class="fc-metric"><small>Your window</small><strong>Reading</strong><span>set by the ground you pick</span></div>
+        </div>
+        <p class="fc-note" id="fc-note">Loading the Open-Meteo forecast for Berlin Mitte.</p>
+      </div>
+
       <div class="kit-body">
         <div class="kit-intro">
           <div>
-            <h2>Make the practical choices in order</h2>
-            <p>This is a packing aid, not a forecast. I built it around the way a Berlin day changes between pavement, park paths, transport shelter and indoor stops.</p>
+            <h2>Built on the hours you are actually outside</h2>
+            <p>Most weather advice covers the whole day, and a Berlin day is rarely one thing. It can be dry at Alexanderplatz at noon and wet by the time you cross the Friedrichsbrücke at four. This tool only reads the hours your chosen ground puts you outside, then makes the call.</p>
           </div>
           <ul class="kit-facts" aria-label="Tool facts">
+            <li>Live forecast</li>
             <li>3 kit slots</li>
             <li>3 real places</li>
           </ul>
         </div>
 
-        <div class="kit-progress" aria-label="Walking kit progress">
-          <div class="kit-step active" data-step="ground"><strong>Ground</strong><span>choose the day</span></div>
-          <div class="kit-step" data-step="shoe"><strong>Shoes</strong><span>start here</span></div>
-          <div class="kit-step" data-step="layer"><strong>Layer</strong><span>adjust outside</span></div>
-          <div class="kit-step" data-step="carry"><strong>Carry</strong><span>keep it light</span></div>
+        <div class="kit-progress" id="kit-progress" aria-label="Walking kit progress">
+          <button class="kit-step active" type="button" data-step="ground"><strong>Ground</strong><span>choose the day</span></button>
+          <button class="kit-step" type="button" data-step="shoe"><strong>Shoes</strong><span>start here</span></button>
+          <button class="kit-step" type="button" data-step="layer"><strong>Layer</strong><span>adjust outside</span></button>
+          <button class="kit-step" type="button" data-step="carry"><strong>Carry</strong><span>keep it light</span></button>
         </div>
 
         <section class="kit-stage" id="kit-stage" aria-live="polite">
           <h2 id="stage-title">What kind of Berlin ground will you take today?</h2>
-          <p id="stage-copy">Start with the places, not the forecast. Your choice changes the practical emphasis in the final kit.</p>
+          <p id="stage-copy">Each option sets a different window of hours, and the forecast above follows your choice.</p>
           <div class="ground-grid" id="ground-grid"></div>
           <div class="item-grid" id="item-grid" hidden></div>
+          <div class="kit-stage-actions" id="kit-stage-actions" hidden>
+            <button class="kit-ghost strong" type="button" id="kit-auto">Not sure? Pack it for me</button>
+            <button class="kit-ghost" type="button" id="kit-back">Back</button>
+          </div>
           <div class="kit-rail" id="kit-rail" hidden aria-label="Your walking kit">
             <div class="rail-slot" data-rail="shoe"><small>Shoes</small><strong>Not chosen yet</strong></div>
             <div class="rail-slot" data-rail="layer"><small>Layer</small><strong>Not chosen yet</strong></div>
@@ -159,53 +216,94 @@
         <section class="kit-result" id="kit-result" hidden aria-live="polite">
           <h2 id="result-title">Your Berlin walking kit</h2>
           <p id="result-copy"></p>
+          <p class="kit-window-line" id="result-window"></p>
           <div class="kit-output-grid">
             <article class="kit-output"><small>Wear</small><strong id="result-wear"></strong><p id="result-wear-note"></p></article>
             <article class="kit-output"><small>Carry</small><strong id="result-carry"></strong><p id="result-carry-note"></p></article>
             <article class="kit-output"><small>Leave</small><strong id="result-leave"></strong><p id="result-leave-note"></p></article>
           </div>
+          <div class="kit-call" id="kit-call">
+            <small>My call</small>
+            <p id="call-copy"></p>
+            <div class="kit-swaps" id="call-swaps"></div>
+          </div>
           <ol class="kit-places" id="result-places"></ol>
           <div class="kit-actions">
+            <button class="kit-cta secondary" type="button" id="kit-copy">Copy the kit as a note</button>
             <a class="kit-cta" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_blank" rel="noopener">Check the BerlinWalk calendar</a>
             <a class="kit-cta secondary" href="https://www.bvg.de/en/connections" target="_blank" rel="noopener">Check the live BVG connection</a>
           </div>
+          <p class="kit-copy-status" id="kit-copy-status" hidden></p>
+          <textarea class="kit-copy-box" id="kit-copy-box" rows="7" readonly hidden aria-label="Your kit as plain text"></textarea>
           <button class="kit-reset" type="button" id="kit-reset">Assemble a different kit</button>
         </section>
 
-        <div class="kit-disclaimer"><strong>Keep the promise small.</strong> Forecasts, transport and opening information change. Check the live source shortly before you leave, and adjust the kit when the day itself gives you better information.</div>
+        <div class="kit-disclaimer"><strong>Keep the promise small.</strong> The forecast comes from Open-Meteo and moves through the day, especially the rain probability. Read it again shortly before you leave, and trust what you see out of the window over what you read here.</div>
 
         <div class="credits-row">
           <button class="credits-toggle" type="button" id="credits-toggle" aria-expanded="false" aria-controls="credits-panel">Tool visual credits</button>
         </div>
         <div class="credits-panel" id="credits-panel" hidden>
           <button type="button" id="credits-close" aria-label="Close tool visual credits">×</button>
-          Hero photograph: <a href="https://commons.wikimedia.org/wiki/File:People_On_Alexanderplatz_(51955324).jpeg" target="_blank" rel="noopener">People On Alexanderplatz</a> by Sascha Kohlmann, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>.
+          Hero photograph: <a href="https://commons.wikimedia.org/wiki/File:People_On_Alexanderplatz_(51955324).jpeg" target="_blank" rel="noopener">People On Alexanderplatz</a> by Sascha Kohlmann, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>. Forecast data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>, CC BY 4.0.
         </div>
       </div>
     </section>
   </main>
   <script>
     (() => {
+      const FORECAST_URL = 'https://api.open-meteo.com/v1/forecast?latitude=52.5219&longitude=13.4132'
+        + '&hourly=temperature_2m,apparent_temperature,precipitation_probability,precipitation,wind_speed_10m'
+        + '&current=temperature_2m,apparent_temperature,precipitation,wind_speed_10m'
+        + '&timezone=Europe%2FBerlin&forecast_days=3';
+
+      const DEFAULT_WINDOW = [9, 20];
+
       const grounds = {
         centre: {
           label: 'Historic centre',
           marker: '01',
+          window: [10, 17],
+          windowLabel: '10:00 to 17:00',
           note: 'Firm pavement, frequent stops and indoor moments around Alexanderplatz, Museum Island and Hackescher Markt.',
-          places: ['Alexanderplatz', 'Museum Island', 'Hackescher Markt']
+          wetLine: 'the granite crossings around Hackescher Markt hold water long after the shower has passed',
+          dryLine: 'three hours of firm pavement between Alexanderplatz and Museum Island',
+          places: [
+            { name: 'Alexanderplatz', note: 'The square is open on every side, so wind reaches you here before it reaches the side streets.' },
+            { name: 'Museum Island', note: 'Museum cloakrooms take anything larger than a small day bag, and that queue costs you twice.' },
+            { name: 'Hackescher Markt', note: 'Cobbles and tram rails. This is where thin soles start to complain.' }
+          ]
         },
         park: {
           label: 'Park + museum',
           marker: '02',
+          window: [11, 17],
+          windowLabel: '11:00 to 17:00',
           note: 'A slower day through the Großer Tiergarten, then a clear indoor anchor near the Brandenburg Gate or Kulturforum.',
-          places: ['Großer Tiergarten', 'Brandenburg Gate', 'Kulturforum']
+          wetLine: 'the Tiergarten paths are gravel and packed dirt, so they stay soft for hours after the rain stops',
+          dryLine: 'the long flat loop through the Tiergarten',
+          places: [
+            { name: 'Großer Tiergarten', note: 'Gravel and packed dirt underfoot, and very little shelter once you are deep in the park.' },
+            { name: 'Brandenburg Gate', note: 'No cover on the square itself. The nearest dry wait is the S-Bahn entrance at Brandenburger Tor.' },
+            { name: 'Kulturforum', note: 'The rooms run warm. Pick the layer you can carry in one hand for an hour.' }
+          ]
         },
         neighbourhood: {
           label: 'Neighbourhood evening',
           marker: '03',
+          window: [17, 23],
+          windowLabel: '17:00 to 23:00',
           note: 'Shorter walks, more standing and a layer that still works after sunset around Kottbusser Tor and Oranienstraße.',
-          places: ['Kottbusser Tor', 'Oranienstraße', 'Markthalle Neun']
+          wetLine: 'the pavement around Kottbusser Tor drains slowly and you will be standing in it more than walking',
+          dryLine: 'an evening where you stand as much as you walk',
+          places: [
+            { name: 'Kottbusser Tor', note: 'You stand more than you walk here, and standing gets cold well before walking does.' },
+            { name: 'Oranienstraße', note: 'Tables stay outside late. Heaters are a bonus, not a guarantee.' },
+            { name: 'Markthalle Neun', note: 'Warm, loud and busy inside. A coat you are not wearing becomes luggage.' }
+          ]
         }
       };
+
       const options = {
         shoe: [
           { id: 'trainer', label: 'Supportive trainers', note: 'Good for firm city pavement and long standing pauses.' },
@@ -223,44 +321,230 @@
           { id: 'power', label: 'Water + power bank', note: 'Useful when the phone is doing photos and live route checks.' }
         ]
       };
+
       const stageLabels = { shoe: 'What will keep your feet happy?', layer: 'What can you remove when the day changes?', carry: 'What earns space in the small bag?' };
-      const stageCopies = { shoe: 'Choose one pair you would genuinely wear for several hours. The right answer is comfort and grip, not a technical label.', layer: 'Add the layer that solves today’s likely change. A removable piece is usually more useful than a heavy coat you carry indoors.', carry: 'Choose one small solution. Water, rain cover or phone power — the best bag is the one that stays light.' };
-      const state = { ground: null, shoe: null, layer: null, carry: null };
+      const stageCopies = {
+        shoe: 'Choose one pair you would genuinely wear for several hours. The right answer is comfort and grip, not a technical label.',
+        layer: 'Add the layer that solves the change in your window. A removable piece beats a heavy coat you end up carrying indoors.',
+        carry: 'Choose one small solution. Water, rain cover or phone power. The best bag is the one that stays light.'
+      };
+
+      const CLIMATE = {
+        1: { max: 3, min: -2, pop: 40 }, 2: { max: 5, min: -1, pop: 35 }, 3: { max: 9, min: 1, pop: 33 },
+        4: { max: 15, min: 4, pop: 32 }, 5: { max: 20, min: 9, pop: 33 }, 6: { max: 23, min: 12, pop: 35 },
+        7: { max: 25, min: 14, pop: 37 }, 8: { max: 25, min: 14, pop: 35 }, 9: { max: 20, min: 11, pop: 32 },
+        10: { max: 14, min: 7, pop: 32 }, 11: { max: 8, min: 3, pop: 38 }, 12: { max: 4, min: 0, pop: 42 }
+      };
+
+      const state = { ground: null, shoe: null, layer: null, carry: null, day: 0 };
       const stageOrder = ['shoe', 'layer', 'carry'];
+      const forecast = { status: 'loading', days: [], nowHour: null, nowDate: null, nowFeels: null, autoAdvanced: false };
+
       const groundGrid = document.getElementById('ground-grid');
       const itemGrid = document.getElementById('item-grid');
+      const stageActions = document.getElementById('kit-stage-actions');
       const rail = document.getElementById('kit-rail');
       const result = document.getElementById('kit-result');
       const stageTitle = document.getElementById('stage-title');
       const stageCopy = document.getElementById('stage-copy');
+      const fcDays = document.getElementById('fc-days');
+      const fcMetrics = document.getElementById('fc-metrics');
+      const fcNote = document.getElementById('fc-note');
+      const fcLabel = document.getElementById('fc-label');
+      const copyStatus = document.getElementById('kit-copy-status');
+      const copyBox = document.getElementById('kit-copy-box');
+
+      const pad = (n) => String(n).padStart(2, '0');
+      const toF = (c) => Math.round(c * 9 / 5 + 32);
+      const temp = (c) => `${Math.round(c)}°C (${toF(c)}°F)`;
+      const tempRange = (min, max) => `${Math.round(min)} to ${Math.round(max)}°C (${toF(min)} to ${toF(max)}°F)`;
       const activeStage = () => {
         if (!state.ground) return 'ground';
         return stageOrder.find((key) => !state[key]) || 'result';
       };
-      const setProgress = () => {
-        const current = activeStage();
-        document.querySelectorAll('.kit-step').forEach((el) => {
-          const key = el.dataset.step;
-          el.classList.toggle('active', key === current);
-          el.classList.toggle('done', key !== 'ground' && state[key] !== null || key === 'ground' && state.ground !== null);
+      const optionLabel = (key, id) => options[key].find((item) => item.id === id)?.label || 'Not chosen yet';
+      const selectedLabel = (key) => optionLabel(key, state[key]);
+
+      /* ---------- forecast ---------- */
+
+      const parseForecast = (data) => {
+        const times = data.hourly.time;
+        const byDate = new Map();
+        times.forEach((stamp, i) => {
+          const date = stamp.slice(0, 10);
+          if (!byDate.has(date)) byDate.set(date, []);
+          byDate.get(date).push({
+            hour: Number(stamp.slice(11, 13)),
+            feels: data.hourly.apparent_temperature[i],
+            pop: data.hourly.precipitation_probability[i] ?? 0,
+            mm: data.hourly.precipitation[i] ?? 0,
+            wind: data.hourly.wind_speed_10m[i] ?? 0
+          });
         });
+        forecast.days = [...byDate.entries()].map(([date, hours]) => ({ date, hours })).slice(0, 3);
+        const nowStamp = data.current?.time || times[0];
+        forecast.nowDate = nowStamp.slice(0, 10);
+        forecast.nowHour = Number(nowStamp.slice(11, 13));
+        forecast.nowFeels = data.current?.apparent_temperature ?? null;
+        forecast.status = 'live';
       };
+
+      const dayLabel = (index) => {
+        if (index === 0) return 'Today';
+        if (index === 1) return 'Tomorrow';
+        const day = forecast.days[index];
+        if (!day) return 'Later';
+        return new Date(`${day.date}T12:00:00`).toLocaleDateString('en-GB', { weekday: 'long' });
+      };
+
+      const windowFor = (dayIndex, groundKey) => {
+        const range = groundKey ? grounds[groundKey].window : DEFAULT_WINDOW;
+        const plannedLabel = groundKey ? grounds[groundKey].windowLabel : `${pad(range[0])}:00 to ${pad(range[1])}:00`;
+        if (forecast.status !== 'live' || !forecast.days[dayIndex]) {
+          const month = new Date().getMonth() + 1;
+          const climate = CLIMATE[month];
+          return {
+            live: false, dayIndex, plannedLabel, label: plannedLabel, shortened: false,
+            feelsMin: climate.min + 2, feelsMax: climate.max - 1, rainPeak: climate.pop, rainMm: climate.pop >= 38 ? 1 : 0.2,
+            windMax: 16, wettest: null, hours: range[1] - range[0], endsAfterDark: range[1] >= 20
+          };
+        }
+        const day = forecast.days[dayIndex];
+        const isToday = dayIndex === 0 && day.date === forecast.nowDate;
+        let start = range[0];
+        let shortened = false;
+        if (isToday && forecast.nowHour > start) { start = forecast.nowHour; shortened = true; }
+        let slice = day.hours.filter((h) => h.hour >= start && h.hour <= range[1]);
+        let passed = false;
+        if (!slice.length) {
+          passed = true;
+          slice = day.hours.filter((h) => h.hour >= (isToday ? forecast.nowHour : range[0]));
+          if (!slice.length) slice = day.hours.slice(-3);
+        }
+        const feels = slice.map((h) => h.feels);
+        const wettest = slice.reduce((best, h) => (h.pop > best.pop ? h : best), slice[0]);
+        return {
+          live: true,
+          dayIndex,
+          plannedLabel,
+          label: passed ? `what is left of ${pad(slice[0].hour)}:00 to ${pad(slice[slice.length - 1].hour)}:00` : `${pad(slice[0].hour)}:00 to ${pad(slice[slice.length - 1].hour)}:00`,
+          shortened: shortened || passed,
+          passed,
+          feelsMin: Math.min(...feels),
+          feelsMax: Math.max(...feels),
+          rainPeak: Math.max(...slice.map((h) => h.pop)),
+          rainMm: slice.reduce((sum, h) => sum + h.mm, 0),
+          windMax: Math.max(...slice.map((h) => h.wind)),
+          wettest: wettest && wettest.pop >= 20 ? `${pad(wettest.hour)}:00` : null,
+          hours: slice.length,
+          endsAfterDark: slice[slice.length - 1].hour >= 20
+        };
+      };
+
+      const currentWindow = () => windowFor(state.day, state.ground);
+
+      const renderForecast = () => {
+        const w = currentWindow();
+        fcLabel.textContent = forecast.status === 'live' ? 'Berlin forecast' : 'Berlin, typical values';
+        fcDays.innerHTML = (forecast.status === 'live' ? forecast.days : [0]).map((_, index) =>
+          `<button class="fc-day" type="button" data-day="${index}" aria-pressed="${state.day === index}">${dayLabel(index)}</button>`).join('');
+        fcDays.querySelectorAll('[data-day]').forEach((button) => button.addEventListener('click', () => {
+          state.day = Number(button.dataset.day);
+          render();
+        }));
+        const rainDetail = w.rainMm >= 0.2 ? `${w.rainMm.toFixed(1)} mm expected` : 'nothing measurable';
+        fcMetrics.innerHTML = [
+          { label: 'Feels like', value: tempRange(w.feelsMin, w.feelsMax), note: 'in your window, not the whole day' },
+          { label: 'Rain', value: `${Math.round(w.rainPeak)}% peak`, note: w.wettest ? `wettest around ${w.wettest}, ${rainDetail}` : rainDetail },
+          { label: 'Wind', value: `${Math.round(w.windMax)} km/h`, note: w.windMax >= 24 ? 'too much for an umbrella' : 'an umbrella survives this' },
+          { label: 'Your window', value: w.label, note: state.ground ? grounds[state.ground].label : 'pick a ground to narrow this' }
+        ].map((m) => `<div class="fc-metric"><small>${m.label}</small><strong>${m.value}</strong><span>${m.note}</span></div>`).join('');
+
+        if (forecast.status === 'loading') {
+          fcNote.textContent = 'Loading the Open-Meteo forecast for Berlin Mitte.';
+        } else if (forecast.status === 'offline') {
+          fcNote.textContent = 'The live forecast did not load, so these are typical Berlin values for this month. Check a forecast before you leave and the kit advice still holds.';
+        } else if (w.passed) {
+          fcNote.textContent = 'Those hours have already passed today, so this reads the rest of the day. Switch to tomorrow for the full window.';
+        } else if (forecast.autoAdvanced && state.day === 1) {
+          fcNote.textContent = 'The walking hours have already gone in Berlin today, so this starts on tomorrow. Switch back to today for what is left of tonight.';
+        } else if (w.shortened) {
+          fcNote.textContent = 'This starts from the current hour in Berlin, because part of your window has already gone.';
+        } else if (forecast.nowFeels !== null && state.day === 0) {
+          fcNote.textContent = `It feels like ${temp(forecast.nowFeels)} in Berlin Mitte right now.`;
+        } else {
+          fcNote.textContent = 'Hourly data for Berlin Mitte, narrowed to the hours your ground puts you outside.';
+        }
+      };
+
+      /* ---------- the actual judgement ---------- */
+
+      const recommend = (w) => {
+        const wet = w.rainMm >= 0.6 || w.rainPeak >= 55;
+        const damp = !wet && (w.rainPeak >= 40 || w.rainMm >= 0.3);
+        const shoe = wet ? 'weatherproof' : (w.feelsMax <= 8 ? 'boot' : 'trainer');
+        const layer = (wet || damp) ? 'shell' : (w.feelsMin <= 12 ? 'warm' : 'overshirt');
+        const carry = (wet || damp) && w.windMax < 24 ? 'umbrella'
+          : (w.endsAfterDark || w.hours >= 6) ? 'power' : 'water';
+        return { shoe, layer, carry, wet, damp };
+      };
+
+      const reasonFor = (slot, pick, w, rec) => {
+        const ground = grounds[state.ground];
+        const rainAt = w.wettest ? ` around ${w.wettest}` : '';
+        if (slot === 'shoe') {
+          if (pick === 'weatherproof') return `Rain peaks at ${Math.round(w.rainPeak)}%${rainAt}, and ${ground.wetLine}. Wet trainers stay wet for the rest of the day.`;
+          if (pick === 'boot') return `It only reaches ${temp(w.feelsMax)} in your window. A warmer ankle is worth more than a lighter sole once you stop moving.`;
+          return `Nothing in your window needs a waterproof sole. For ${ground.dryLine}, the shoe you have already broken in wins over the technical one.`;
+        }
+        if (slot === 'layer') {
+          if (pick === 'shell') return `Rain probability reaches ${Math.round(w.rainPeak)}%${rainAt}. A shell with a hood folds into the bag when it holds off, which a coat does not.`;
+          if (pick === 'warm') return `It drops to ${temp(w.feelsMin)} inside your window. The U-Bahn and any indoor stop run much warmer, so keep the layer removable.`;
+          return `It sits at ${tempRange(w.feelsMin, w.feelsMax)}. The trains and the indoor rooms are the warm part of a Berlin day, so take the thing you can pull off in ten seconds.`;
+        }
+        if (pick === 'umbrella') return `${Math.round(w.rainPeak)}% rain and only ${Math.round(w.windMax)} km/h wind. An umbrella actually survives that, and it keeps your camera dry too.`;
+        if (pick === 'power') return `Your window runs ${w.hours} hours${w.endsAfterDark ? ' and ends after dark' : ''}. Photos and live BVG checks empty a phone faster than anything else on a walking day.`;
+        if (rec.wet || rec.damp) return `Rain is possible, but wind hits ${Math.round(w.windMax)} km/h. On the open crossings at Alexanderplatz an umbrella turns inside out, so use the hood and keep both hands free.`;
+        return `The window is settled, so the bag only needs water. Berlin runs free drinking fountains from spring to autumn, and refilling beats carrying two bottles.`;
+      };
+
+      const yourPickNote = (slot, rec) => `This is your pick, not mine. I would take the ${optionLabel(slot, rec[slot]).toLowerCase()} for these hours, and the reason is right below.`;
+
+      const wearNote = (w, rec) => {
+        if (state.layer === rec.layer) return reasonFor('layer', state.layer, w, rec);
+        if (state.shoe === rec.shoe) return reasonFor('shoe', state.shoe, w, rec);
+        return `This is your pick, not mine. For these hours I would wear the ${optionLabel('shoe', rec.shoe).toLowerCase()} with the ${optionLabel('layer', rec.layer).toLowerCase()}, and the reason is right below.`;
+      };
+
+      const leaveFor = (w, rec) => {
+        const ground = state.ground;
+        if (rec.wet) return { item: 'The cotton hoodie', note: 'Cotton takes on the weather and keeps it. Once it is wet in Berlin it stays wet until your hotel radiator gets it.' };
+        if (ground !== 'neighbourhood') return { item: 'The big backpack', note: 'Museum cloakrooms take anything larger than a small day bag, so a big pack costs you the queue on the way in and on the way out.' };
+        if (w.feelsMin >= 16) return { item: 'The second layer', note: 'It stays above ' + temp(w.feelsMin) + ' all evening. A spare layer here is something you carry, not something you wear.' };
+        return { item: 'The heavy coat', note: 'Markthalle Neun and the bars on Oranienstraße are warm inside. Keep the layer on your body or in the small bag, not over your arm all night.' };
+      };
+
+      /* ---------- rendering ---------- */
+
       const renderGrounds = () => {
-        groundGrid.innerHTML = Object.entries(grounds).map(([id, ground]) => `<button class="ground-choice ${state.ground === id ? 'selected' : ''}" type="button" data-ground="${id}"><span class="choice-mark">${ground.marker}</span><strong>${ground.label}</strong><span>${ground.note}</span></button>`).join('');
+        groundGrid.innerHTML = Object.entries(grounds).map(([id, ground]) =>
+          `<button class="ground-choice ${state.ground === id ? 'selected' : ''}" type="button" data-ground="${id}"><span class="choice-mark">${ground.marker}</span><strong>${ground.label}</strong><span>${ground.note}</span><span class="choice-window">Window ${ground.windowLabel}</span></button>`).join('');
         groundGrid.querySelectorAll('[data-ground]').forEach((button) => button.addEventListener('click', () => {
           state.ground = button.dataset.ground;
           state.shoe = null; state.layer = null; state.carry = null;
           render();
         }));
       };
+
       const renderItems = (key) => {
-        itemGrid.innerHTML = options[key].map((item, index) => `<button class="item-choice ${state[key] === item.id ? 'selected' : ''}" type="button" data-item="${item.id}"><span class="choice-mark">0${index + 1}</span><strong>${item.label}</strong><span>${item.note}</span></button>`).join('');
+        itemGrid.innerHTML = options[key].map((item, index) =>
+          `<button class="item-choice ${state[key] === item.id ? 'selected' : ''}" type="button" data-item="${item.id}"><span class="choice-mark">0${index + 1}</span><strong>${item.label}</strong><span>${item.note}</span></button>`).join('');
         itemGrid.querySelectorAll('[data-item]').forEach((button) => button.addEventListener('click', () => {
           state[key] = button.dataset.item;
           render();
         }));
       };
-      const selectedLabel = (key) => options[key].find((item) => item.id === state[key])?.label || 'Not chosen yet';
+
       const renderRail = () => {
         rail.querySelectorAll('[data-rail]').forEach((slot) => {
           const key = slot.dataset.rail;
@@ -268,35 +552,73 @@
           slot.classList.toggle('empty', !state[key]);
         });
       };
-      const resultText = () => {
-        const ground = grounds[state.ground];
-        const shoe = selectedLabel('shoe');
-        const layer = selectedLabel('layer');
-        const carry = selectedLabel('carry');
-        const wear = `${shoe} + ${layer}`;
-        const carryText = carry;
-        const leave = state.ground === 'park' ? 'The second pair of shoes' : state.ground === 'neighbourhood' ? 'The heavy coat you will carry indoors' : 'A second outfit';
-        const leaveNote = state.ground === 'park' ? 'One reliable pair is enough unless you already know the path will be muddy.' : state.ground === 'neighbourhood' ? 'Keep the evening layer on your body or in the small bag; do not turn it into luggage.' : 'Let the removable layer do the work instead of carrying a backup wardrobe.';
-        document.getElementById('result-title').textContent = `${ground.label}: your walking kit`;
-        document.getElementById('result-copy').textContent = `${ground.note} Your assembled rail keeps the answer small enough to use before you leave.`;
-        document.getElementById('result-wear').textContent = wear;
-        document.getElementById('result-wear-note').textContent = 'Put these on before you set off. Comfort comes first.';
-        document.getElementById('result-carry').textContent = carryText;
-        document.getElementById('result-carry-note').textContent = 'Check the live forecast and connection shortly before moving.';
-        document.getElementById('result-leave').textContent = leave;
-        document.getElementById('result-leave-note').textContent = leaveNote;
-        document.getElementById('result-places').innerHTML = ground.places.map((place, index) => `<li><small>Stop 0${index + 1}</small><strong>${place}</strong></li>`).join('');
+
+      const setProgress = () => {
+        const current = activeStage();
+        document.querySelectorAll('.kit-step').forEach((el) => {
+          const key = el.dataset.step;
+          const done = key === 'ground' ? state.ground !== null : state[key] !== null;
+          el.classList.toggle('active', key === current);
+          el.classList.toggle('done', done);
+          el.classList.toggle('reachable', done);
+        });
       };
+
+      const renderResult = () => {
+        const ground = grounds[state.ground];
+        const w = currentWindow();
+        const rec = recommend(w);
+        const leave = leaveFor(w, rec);
+        const mismatches = ['shoe', 'layer', 'carry'].filter((slot) => state[slot] !== rec[slot]);
+
+        document.getElementById('result-title').textContent = `${ground.label}: your walking kit`;
+        document.getElementById('result-copy').textContent = `${ground.note} Everything below is read against the hours you will actually be out there.`;
+        document.getElementById('result-window').textContent = `${dayLabel(state.day)}, ${w.label}: feels like ${tempRange(w.feelsMin, w.feelsMax)}, rain peaks at ${Math.round(w.rainPeak)}%${w.wettest ? ` around ${w.wettest}` : ''}, wind up to ${Math.round(w.windMax)} km/h.${w.live ? '' : ' Typical values for the month, not a live reading.'}`;
+        document.getElementById('result-wear').textContent = `${selectedLabel('shoe')} + ${selectedLabel('layer')}`;
+        document.getElementById('result-wear-note').textContent = wearNote(w, rec);
+        document.getElementById('result-carry').textContent = selectedLabel('carry');
+        document.getElementById('result-carry-note').textContent = state.carry === rec.carry
+          ? reasonFor('carry', state.carry, w, rec)
+          : yourPickNote('carry', rec);
+        document.getElementById('result-leave').textContent = leave.item;
+        document.getElementById('result-leave-note').textContent = leave.note;
+
+        const callCopy = document.getElementById('call-copy');
+        const callSwaps = document.getElementById('call-swaps');
+        if (!mismatches.length) {
+          callCopy.textContent = `I would walk out with exactly this kit ${state.day === 0 ? 'today' : 'on that day'}. ${reasonFor('shoe', state.shoe, w, rec)}`;
+          callSwaps.innerHTML = '';
+        } else {
+          const first = mismatches[0];
+          const slotWord = { shoe: 'shoes', layer: 'layer', carry: 'bag' }[first];
+          callCopy.textContent = `Your kit works, but I would change the ${slotWord}. ${reasonFor(first, rec[first], w, rec)}`;
+          callSwaps.innerHTML = mismatches.map((slot) =>
+            `<button class="kit-swap" type="button" data-swap="${slot}">Swap to ${optionLabel(slot, rec[slot]).toLowerCase()}</button>`).join('');
+          callSwaps.querySelectorAll('[data-swap]').forEach((button) => button.addEventListener('click', () => {
+            const slot = button.dataset.swap;
+            state[slot] = rec[slot];
+            render();
+          }));
+        }
+
+        document.getElementById('result-places').innerHTML = ground.places.map((place, index) =>
+          `<li><small>Stop 0${index + 1}</small><strong>${place.name}</strong><p>${place.note}</p></li>`).join('');
+      };
+
       const render = () => {
         const current = activeStage();
         setProgress();
+        renderForecast();
         groundGrid.hidden = Boolean(state.ground);
         itemGrid.hidden = !state.ground || current === 'result';
+        stageActions.hidden = !state.ground || current === 'result';
         rail.hidden = !state.ground;
         result.hidden = current !== 'result';
+        copyStatus.hidden = true;
+        copyBox.hidden = true;
         if (!state.ground) {
           stageTitle.textContent = 'What kind of Berlin ground will you take today?';
-          stageCopy.textContent = 'Start with the places, not the forecast. Your choice changes the practical emphasis in the final kit.';
+          stageCopy.textContent = 'Each option sets a different window of hours, and the forecast above follows your choice.';
           renderGrounds();
         } else if (current !== 'result') {
           stageTitle.textContent = stageLabels[current];
@@ -304,12 +626,80 @@
           renderItems(current);
         } else {
           stageTitle.textContent = 'Your rail is complete';
-          stageCopy.textContent = 'Read the arrangement below, then check the live conditions before leaving.';
+          stageCopy.textContent = 'Read the kit below, then check the live conditions again before you leave.';
         }
         if (state.ground) renderRail();
-        if (current === 'result') resultText();
+        if (current === 'result') renderResult();
       };
-      document.getElementById('kit-reset').addEventListener('click', () => { state.ground = null; state.shoe = null; state.layer = null; state.carry = null; render(); window.scrollTo({ top: document.getElementById('kit-stage').offsetTop - 18, behavior: 'smooth' }); });
+
+      /* ---------- actions ---------- */
+
+      document.getElementById('kit-auto').addEventListener('click', () => {
+        const rec = recommend(currentWindow());
+        stageOrder.forEach((slot) => { state[slot] = rec[slot]; });
+        render();
+      });
+
+      document.getElementById('kit-back').addEventListener('click', () => {
+        const current = activeStage();
+        const index = stageOrder.indexOf(current);
+        if (current === 'shoe' || index === 0) {
+          state.ground = null; state.shoe = null; state.layer = null; state.carry = null;
+        } else {
+          state[stageOrder[index - 1]] = null;
+        }
+        render();
+      });
+
+      document.getElementById('kit-progress').addEventListener('click', (event) => {
+        const step = event.target.closest('.kit-step');
+        if (!step || !step.classList.contains('reachable')) return;
+        const key = step.dataset.step;
+        if (key === 'ground') { state.ground = null; state.shoe = null; state.layer = null; state.carry = null; }
+        else { const index = stageOrder.indexOf(key); stageOrder.slice(index).forEach((slot) => { state[slot] = null; }); }
+        render();
+      });
+
+      document.getElementById('kit-copy').addEventListener('click', async () => {
+        const ground = grounds[state.ground];
+        const w = currentWindow();
+        const rec = recommend(w);
+        const leave = leaveFor(w, rec);
+        const text = [
+          `Berlin walking kit, ${ground.label}`,
+          `${dayLabel(state.day)} ${w.label}: feels like ${Math.round(w.feelsMin)} to ${Math.round(w.feelsMax)}C, rain peak ${Math.round(w.rainPeak)}%, wind ${Math.round(w.windMax)} km/h`,
+          `Wear: ${selectedLabel('shoe')} + ${selectedLabel('layer')}`,
+          `Carry: ${selectedLabel('carry')}`,
+          `Leave: ${leave.item}`,
+          `Stops: ${ground.places.map((p) => p.name).join(', ')}`,
+          'berlinwalk.com/tools/berlin-walking-kit'
+        ].join('\n');
+        copyBox.value = text;
+        let copied = false;
+        try {
+          await navigator.clipboard.writeText(text);
+          copied = true;
+        } catch (error) {
+          // Some embeds block the async clipboard API. Try the older path, then fall back to showing the text.
+          try {
+            copyBox.hidden = false;
+            copyBox.select();
+            copied = document.execCommand('copy');
+          } catch (legacyError) { copied = false; }
+        }
+        copyStatus.textContent = copied
+          ? 'Copied. Paste it into your notes before you leave the hotel.'
+          : 'This embed blocks copying, so here is the kit as text. Select it and copy it by hand.';
+        copyBox.hidden = copied;
+        copyStatus.hidden = false;
+      });
+
+      document.getElementById('kit-reset').addEventListener('click', () => {
+        state.ground = null; state.shoe = null; state.layer = null; state.carry = null;
+        render();
+        window.scrollTo({ top: document.getElementById('kit-stage').offsetTop - 18, behavior: 'smooth' });
+      });
+
       const toggle = document.getElementById('credits-toggle');
       const panel = document.getElementById('credits-panel');
       const close = () => { panel.hidden = true; toggle.setAttribute('aria-expanded', 'false'); };
@@ -317,7 +707,25 @@
       document.getElementById('credits-close').addEventListener('click', close);
       document.addEventListener('keydown', (event) => { if (event.key === 'Escape') close(); });
       document.addEventListener('click', (event) => { if (!panel.hidden && !panel.contains(event.target) && event.target !== toggle) close(); });
+
       render();
+
+      // ?forecast=off exercises the seasonal fallback without waiting for a real outage.
+      const forecastDisabled = (() => {
+        try { return new URLSearchParams(window.location.search).get('forecast') === 'off'; } catch (error) { return false; }
+      })();
+
+      (forecastDisabled ? Promise.reject(new Error('disabled')) : fetch(FORECAST_URL))
+        .then((response) => { if (!response.ok) throw new Error('forecast'); return response.json(); })
+        .then((data) => {
+          parseForecast(data);
+          if (forecast.days.length > 1) {
+            const rest = windowFor(0, state.ground);
+            if (rest.passed || rest.hours <= 2) { state.day = 1; forecast.autoAdvanced = true; }
+          }
+          render();
+        })
+        .catch(() => { forecast.status = 'offline'; render(); });
     })();
   </script>
 </body>
