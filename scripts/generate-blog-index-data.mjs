@@ -213,16 +213,18 @@ const YEAR_REQUIRED_TITLE_SLUGS = new Set([
 ]);
 
 const HERO_SLUGS = {
-  // 14 Aug 2026: Long Night of Museums is the strongest current, dated
+  // 15 Aug 2026: Long Night of Museums remains the strongest current, dated
   // visitor-useful lead; keep the rail mixed with the newest broad practical
   // guide, route context, transport help, and a proven history evergreen.
   lead: 'long-night-of-museums-berlin-2026',
   secondary: [
+    'morning-or-afternoon-walking-tour-berlin',
+    'guided-vs-self-guided-berlin-walking-tour',
     'best-museums-in-berlin-first-time-visitors',
-    'what-happens-on-a-berlin-free-walking-tour',
-    'berlin-sights-near-alexanderplatz-walking-distance',
     'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
     'where-was-the-berlin-wall-interactive-map',
+    'what-happens-on-a-berlin-free-walking-tour',
+    'berlin-sights-near-alexanderplatz-walking-distance',
     'berlin-courtyards-hoefe',
     'where-to-eat-late-at-night-in-berlin',
     'reichstag-before-and-after',
@@ -328,6 +330,8 @@ const REQUIRED_SLUGS = [
   // default window so the curated hero/rail survives a regen.
   'best-museums-in-berlin-first-time-visitors',
   'long-night-of-museums-berlin-2026',
+  'morning-or-afternoon-walking-tour-berlin',
+  'guided-vs-self-guided-berlin-walking-tour',
   'international-literature-festival-berlin-2026',
   'what-happens-on-a-berlin-free-walking-tour',
   'which-berlin-pass-is-worth-it',
