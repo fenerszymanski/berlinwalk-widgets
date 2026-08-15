@@ -1,5 +1,6 @@
 const BW_BOOK_ANCHOR_ID = 'book';
 const BW_BOOK_MEETING_POINT_URL = 'https://www.berlinwalk.com/meeting-point';
+const BW_BOOK_PRIVATE_TOUR_URL = 'https://www.berlinwalk.com/private-tour';
 const BW_BOOK_THE_GUIDE_URL = 'https://www.berlinwalk.com/the-guide';
 const BW_BOOK_REVIEWS_URL = 'https://www.berlinwalk.com/reviews';
 const BW_BOOK_WORLD_CLOCK_IMAGE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/06-1200w.webp';
@@ -696,6 +697,31 @@ class BWBookDetailsElement extends HTMLElement {
           max-width: 560px;
         }
 
+        .bw-book .bw-book-private {
+          border-top: 1px solid rgba(255, 255, 255, 0.28);
+          color: rgba(255, 255, 255, 0.86);
+          font-family: var(--serif);
+          font-size: 16px;
+          line-height: 1.6;
+          margin: 30px auto 0;
+          max-width: 560px;
+          padding-top: 22px;
+        }
+
+        .bw-book .bw-book-private a {
+          color: #FFE600;
+          font-family: Montserrat, Arial, sans-serif;
+          font-weight: 700;
+          text-decoration: underline;
+          text-underline-offset: 3px;
+          white-space: nowrap;
+        }
+
+        .bw-book .bw-book-private a:hover,
+        .bw-book .bw-book-private a:focus-visible {
+          color: #FFFFFF;
+        }
+
         @media (max-width: 880px) {
           .bw-book .bw-book-section {
             padding: 44px 0;
@@ -840,6 +866,7 @@ class BWBookDetailsElement extends HTMLElement {
             <h2>Ready to walk Berlin with a local?</h2>
             <p>Free to book. Tip-based at the end. Just pick a date and meet at the World Clock.</p>
             <a class="bw-book-btn bw-book-btn-yellow" href="#${BW_BOOK_ANCHOR_ID}">Pick your date ↑</a>
+            <p class="bw-book-private">Coming with your own group? I also walk this route privately, on your date and at your pace. <a href="${BW_BOOK_PRIVATE_TOUR_URL}">See private tours</a></p>
           </div>
         </div>
       </section>

@@ -3,12 +3,14 @@ const BW_HEADER_LOGO_URL = new URL('../assets/berlinwalk-wordmark-green.png', BW
 const BW_HEADER_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
 const BW_HEADER_LINKS = {
   home: 'https://www.berlinwalk.com/',
+  privateTour: 'https://www.berlinwalk.com/private-tour',
   route: 'https://www.berlinwalk.com/berlin-walking-tour-route',
   guide: 'https://www.berlinwalk.com/the-guide',
   reviews: 'https://www.berlinwalk.com/reviews',
   meetingPoint: 'https://www.berlinwalk.com/meeting-point',
   plan: 'https://www.berlinwalk.com/berlin-tools',
   planner: 'https://www.berlinwalk.com/berlin-trip-planner',
+  landmarksGuide: 'https://www.berlinwalk.com/products/berlin-landmarks-guide',
   audioTours: 'https://www.berlinwalk.com/audio-tours',
   photoMissions: 'https://www.berlinwalk.com/products/hidden-berlin-photo-missions',
   games: 'https://www.berlinwalk.com/games',
@@ -1066,6 +1068,7 @@ class BWHeaderElement extends HTMLElement {
                     Tour <span class="bw-header-caret" aria-hidden="true">⌄</span>
                   </button>
                   <ul id="${this._tourMenuId}" class="bw-header-submenu">
+                    <li><a href="${BW_HEADER_LINKS.privateTour}">Private Tours</a></li>
                     <li><a href="${BW_HEADER_LINKS.route}">Tour Route</a></li>
                     <li><a href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a></li>
                     <li><a href="${BW_HEADER_LINKS.reviews}">Reviews</a></li>
@@ -1078,6 +1081,7 @@ class BWHeaderElement extends HTMLElement {
                   </button>
                   <ul id="${this._productsMenuId}" class="bw-header-submenu">
                     <li><a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner</a></li>
+                    <li><a href="${BW_HEADER_LINKS.landmarksGuide}">Berlin Landmarks Guide · €2.99</a></li>
                     <li><a href="${BW_HEADER_LINKS.audioTours}">Audio Tours</a></li>
                     <li><a href="${BW_HEADER_LINKS.firstDayRescue}">First-Day Rescue Plan</a></li>
                     <li><a href="${BW_HEADER_LINKS.photoMissions}">Photo Missions</a></li>
@@ -1112,6 +1116,7 @@ class BWHeaderElement extends HTMLElement {
             <nav class="bw-header-mobile-nav" aria-label="Mobile primary">
               <details class="bw-header-mobile-section">
                 <summary class="bw-header-mobile-section-label">Tour</summary>
+                <a href="${BW_HEADER_LINKS.privateTour}">Private Tours</a>
                 <a href="${BW_HEADER_LINKS.route}">Tour Route</a>
                 <a href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a>
                 <a href="${BW_HEADER_LINKS.reviews}">Reviews</a>
@@ -1121,6 +1126,7 @@ class BWHeaderElement extends HTMLElement {
               <details class="bw-header-mobile-section">
                 <summary class="bw-header-mobile-section-label">Products</summary>
                 <a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner</a>
+                <a href="${BW_HEADER_LINKS.landmarksGuide}">Berlin Landmarks Guide · €2.99</a>
                 <a href="${BW_HEADER_LINKS.audioTours}">Audio Tours</a>
                 <a href="${BW_HEADER_LINKS.firstDayRescue}">First-Day Rescue Plan</a>
                 <a href="${BW_HEADER_LINKS.photoMissions}">Photo Missions</a>

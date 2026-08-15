@@ -1,5 +1,5 @@
 const BW_HERO_HOME_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
-const BW_HERO_HOME_MEETING_URL = 'https://www.berlinwalk.com/meeting-point';
+const BW_HERO_HOME_PRIVATE_TOUR_URL = 'https://www.berlinwalk.com/private-tour';
 
 const BW_HERO_HOME_ASSET_BASE = (() => {
   const script = document.currentScript;
@@ -478,13 +478,13 @@ class BWHeroHomeElement extends HTMLElement {
 
         <div class="bw-hero-inner">
           <div class="bw-hero-content">
-            <span class="bw-hero-kicker">Tip based · 12 stops · ~2h</span>
+            <span class="bw-hero-kicker">Tip based · 11 stops · ~2h</span>
             <h1 id="bw-hero-home-title" class="bw-hero-title">Free Berlin <span class="bw-hero-title-mark">Walking Tour</span>.</h1>
             <p class="bw-hero-lead">Berlin was founded in 1237, but most tours skip straight to 1933. In about 2 hours, walk the medieval core from Alexanderplatz to Hackescher Markt with Yusuf, and see the city the way a Berliner reads it: oldest streets first.</p>
 
             <div class="bw-hero-actions">
               <a class="bw-hero-btn bw-hero-btn-primary" href="${BW_HERO_HOME_BOOKING_URL}" target="_top">Book your free spot</a>
-              <a class="bw-hero-btn bw-hero-btn-secondary" href="${BW_HERO_HOME_MEETING_URL}" target="_top">Meeting point</a>
+              <a class="bw-hero-btn bw-hero-btn-secondary" href="${BW_HERO_HOME_PRIVATE_TOUR_URL}" target="_top">Private tour</a>
             </div>
 
             <div class="bw-hero-proof" aria-label="Tour highlights">
@@ -493,7 +493,7 @@ class BWHeroHomeElement extends HTMLElement {
                 <span>On Freetour</span>
               </div>
               <div class="bw-hero-proof-item">
-                <strong>12</strong>
+                <strong>11</strong>
                 <span>Story stops</span>
               </div>
               <div class="bw-hero-proof-item">
