@@ -71,6 +71,12 @@
     .kit-stage > p { max-width: 710px; margin: 8px 0 16px; color: var(--kit-muted); font-size: .82rem; line-height: 1.58; }
     .ground-grid, .item-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
     .ground-choice, .item-choice { position: relative; min-width: 0; min-height: 128px; padding: 14px; border: 1px solid #b6ccb2; background: #fff; color: var(--kit-green); cursor: pointer; text-align: left; transition: transform .15s ease, border-color .15s ease, background .15s ease; }
+    .ground-choice { overflow: hidden; padding: 0; }
+    .ground-photo { position: relative; display: block; overflow: hidden; height: 122px; background: #dfe8da; }
+    .ground-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .ground-photo::after { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18, 61, 24, .32), rgba(18, 61, 24, .05) 55%, rgba(18, 61, 24, .3)); content: ''; }
+    .ground-photo .choice-mark { position: absolute; z-index: 1; top: 10px; left: 10px; margin: 0; box-shadow: 0 2px 8px rgba(18, 61, 24, .35); }
+    .ground-body { padding: 13px 14px 14px; }
     .ground-choice:hover, .ground-choice:focus-visible, .item-choice:hover, .item-choice:focus-visible { border-color: var(--kit-green); background: #fefef8; outline: 3px solid rgba(18, 61, 24, .18); outline-offset: 2px; transform: translateY(-2px); }
     .ground-choice.selected, .item-choice.selected { border-color: var(--kit-green); background: #f0f7e8; box-shadow: inset 0 -5px 0 var(--kit-yellow); }
     .choice-mark { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 30px; width: 30px; height: 30px; margin: 0 0 12px; padding: 0; border-radius: 50%; background: var(--kit-cream); color: var(--kit-green); font-size: .78rem; font-weight: 900; line-height: 1; letter-spacing: 0; text-align: center; font-variant-numeric: tabular-nums; }
@@ -104,10 +110,14 @@
     .kit-swap { padding: 9px 12px; border: 1px solid var(--kit-green); background: #fff; color: var(--kit-green); cursor: pointer; font-size: .69rem; font-weight: 800; text-align: left; }
     .kit-swap:hover, .kit-swap:focus-visible { background: #eef5e8; outline: 3px solid rgba(18, 61, 24, .18); outline-offset: 2px; }
     .kit-places { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 16px 0 0; padding: 0; list-style: none; }
-    .kit-places li { padding: 11px; border: 1px solid #c6d1bd; background: rgba(255, 254, 248, .78); }
+    .kit-places li { overflow: hidden; padding: 0; border: 1px solid #c6d1bd; background: rgba(255, 254, 248, .78); }
+    .kit-places img { display: block; width: 100%; height: 104px; background: #dfe8da; object-fit: cover; }
+    .place-body { padding: 11px; }
     .kit-places small { display: block; color: var(--kit-red); font-size: .59rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
     .kit-places strong { display: block; margin-top: 5px; color: var(--kit-green); font-size: .77rem; line-height: 1.3; }
     .kit-places p { margin: 5px 0 0; color: var(--kit-muted); font-size: .66rem; line-height: 1.45; }
+    .credits-panel ul { margin: 9px 0 0; padding: 0 0 0 16px; }
+    .credits-panel li { margin-bottom: 4px; }
     .kit-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 18px; }
     .kit-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 43px; padding: 10px 14px; border: 0; background: var(--kit-yellow); color: var(--kit-green) !important; cursor: pointer; font-size: .72rem; font-weight: 900; text-decoration: none; }
     .kit-cta:hover, .kit-cta:focus-visible { background: #f1d900; color: var(--kit-green) !important; outline: 3px solid var(--kit-green); outline-offset: 2px; }
@@ -130,6 +140,7 @@
       .kit-facts { justify-content: flex-start; }
       .ground-grid, .item-grid { grid-template-columns: minmax(0, 1fr); }
       .ground-choice, .item-choice { min-height: 0; }
+      .ground-photo { height: 168px; }
       .fc-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 520px) {
@@ -145,6 +156,7 @@
       .kit-step span { font-size: .55rem; }
       .kit-stage, .kit-result { padding: 16px; }
       .kit-rail, .kit-output-grid, .kit-places { grid-template-columns: minmax(0, 1fr); }
+      .kit-places img { height: 150px; }
       .kit-actions { flex-direction: column; }
       .kit-cta { width: 100%; }
       .kit-stage-actions .kit-ghost { width: 100%; }
@@ -245,7 +257,19 @@
         </div>
         <div class="credits-panel" id="credits-panel" hidden>
           <button type="button" id="credits-close" aria-label="Close tool visual credits">×</button>
-          Hero photograph: <a href="https://commons.wikimedia.org/wiki/File:People_On_Alexanderplatz_(51955324).jpeg" target="_blank" rel="noopener">People On Alexanderplatz</a> by Sascha Kohlmann, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>. Forecast data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>, CC BY 4.0.
+          Hero photograph: <a href="https://commons.wikimedia.org/wiki/File:People_On_Alexanderplatz_(51955324).jpeg" target="_blank" rel="noopener">People On Alexanderplatz</a> by Sascha Kohlmann, <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener">CC BY-SA 3.0</a>. Place photographs, all from Wikimedia Commons:
+          <ul>
+            <li>Alexanderplatz world clock: <a href="https://commons.wikimedia.org/wiki/File:Weltzeituhr_and_Fernsehturm_at_Alexanderplatz_(15186345718).jpg" target="_blank" rel="noopener">Weltzeituhr and Fernsehturm at Alexanderplatz</a> by Tony Webster, <a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener">CC BY 2.0</a>.</li>
+            <li>Museum Island: <a href="https://commons.wikimedia.org/wiki/File:Museumsinsel_(74209).jpg" target="_blank" rel="noopener">Museumsinsel (74209)</a> by Jochen Sievert, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+            <li>Hackescher Markt: <a href="https://commons.wikimedia.org/wiki/File:M4_Hackescher_Markt_Stra%C3%9Fenbahn_Tram_at_Alexanderplatz_Berlin_Germany_15288395514.jpg" target="_blank" rel="noopener">M4 Hackescher Markt Straßenbahn Tram</a> by Tony Webster, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+            <li>Großer Tiergarten: <a href="https://commons.wikimedia.org/wiki/File:Autumn_-_Gro%C3%9Fer_Tiergarten,_Berlin,_Germany_-_DSC09465.JPG" target="_blank" rel="noopener">Autumn, Großer Tiergarten</a> by Daderot, <a href="https://creativecommons.org/publicdomain/zero/1.0" target="_blank" rel="noopener">CC0</a>.</li>
+            <li>Brandenburg Gate: <a href="https://commons.wikimedia.org/wiki/File:Brandenburger_Tor_morgens.jpg" target="_blank" rel="noopener">Brandenburger Tor morgens</a> by Thomas Wolf, <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener">CC BY-SA 3.0</a>.</li>
+            <li>Kulturforum: <a href="https://commons.wikimedia.org/wiki/File:Kammermusiksaal-Kulturforum-Berlin-Tiergarten-Juni-2016.jpg" target="_blank" rel="noopener">Kammermusiksaal Kulturforum</a> by Gunnar Klack, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+            <li>Kottbusser Tor: <a href="https://commons.wikimedia.org/wiki/File:Kottbusser_Tor_in_Berlin_at_night.jpg" target="_blank" rel="noopener">Kottbusser Tor in Berlin at night</a> by GillyBerlin, <a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener">CC BY 2.0</a>.</li>
+            <li>Oranienstraße: <a href="https://commons.wikimedia.org/wiki/File:Berlin-kreuzberg_oranienstrasse_20051019_316.jpg" target="_blank" rel="noopener">Berlin Kreuzberg Oranienstrasse</a> by Georg Slickers, <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener">CC BY-SA 3.0</a>.</li>
+            <li>Markthalle Neun: <a href="https://commons.wikimedia.org/wiki/File:Markthalle_Neun_08.02.2015_16-21-31.JPG" target="_blank" rel="noopener">Markthalle Neun</a> by Dirk Ingo Franke, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+          </ul>
+          Forecast data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>, CC BY 4.0.
         </div>
       </div>
     </section>
@@ -268,10 +292,12 @@
           note: 'Firm pavement, frequent stops and indoor moments around Alexanderplatz, Museum Island and Hackescher Markt.',
           wetLine: 'the granite crossings around Hackescher Markt hold water long after the shower has passed',
           dryLine: 'three hours of firm pavement between Alexanderplatz and Museum Island',
+          photo: 'alexanderplatz',
+          photoAlt: 'The world clock on Alexanderplatz with the TV Tower behind it',
           places: [
-            { name: 'Alexanderplatz', note: 'The square is open on every side, so wind reaches you here before it reaches the side streets.' },
-            { name: 'Museum Island', note: 'Museum cloakrooms take anything larger than a small day bag, and that queue costs you twice.' },
-            { name: 'Hackescher Markt', note: 'Cobbles and tram rails. This is where thin soles start to complain.' }
+            { name: 'Alexanderplatz', photo: 'alexanderplatz', alt: 'The world clock on Alexanderplatz with the TV Tower behind it', note: 'The square is open on every side, so wind reaches you here before it reaches the side streets.' },
+            { name: 'Museum Island', photo: 'museum-island', alt: 'The Bode Museum at the tip of Museum Island with the TV Tower behind it', note: 'Museum cloakrooms take anything larger than a small day bag, and that queue costs you twice.' },
+            { name: 'Hackescher Markt', photo: 'hackescher-markt', alt: 'A yellow Berlin tram passing the station arches at Hackescher Markt', note: 'Cobbles and tram rails. This is where thin soles start to complain.' }
           ]
         },
         park: {
@@ -282,10 +308,12 @@
           note: 'A slower day through the Großer Tiergarten, then a clear indoor anchor near the Brandenburg Gate or Kulturforum.',
           wetLine: 'the Tiergarten paths are gravel and packed dirt, so they stay soft for hours after the rain stops',
           dryLine: 'the long flat loop through the Tiergarten',
+          photo: 'tiergarten',
+          photoAlt: 'A leaf covered lawn and benches under the trees in the Großer Tiergarten',
           places: [
-            { name: 'Großer Tiergarten', note: 'Gravel and packed dirt underfoot, and very little shelter once you are deep in the park.' },
-            { name: 'Brandenburg Gate', note: 'No cover on the square itself. The nearest dry wait is the S-Bahn entrance at Brandenburger Tor.' },
-            { name: 'Kulturforum', note: 'The rooms run warm. Pick the layer you can carry in one hand for an hour.' }
+            { name: 'Großer Tiergarten', photo: 'tiergarten', alt: 'A leaf covered lawn and benches under the trees in the Großer Tiergarten', note: 'Gravel and packed dirt underfoot, and very little shelter once you are deep in the park.' },
+            { name: 'Brandenburg Gate', photo: 'brandenburg-gate', alt: 'The Brandenburg Gate seen across an empty Pariser Platz in the morning', note: 'No cover on the square itself. The nearest dry wait is the S-Bahn entrance at Brandenburger Tor.' },
+            { name: 'Kulturforum', photo: 'kulturforum', alt: 'The yellow chamber music hall and Philharmonie at the Kulturforum', note: 'The rooms run warm. Pick the layer you can carry in one hand for an hour.' }
           ]
         },
         neighbourhood: {
@@ -296,10 +324,12 @@
           note: 'Shorter walks, more standing and a layer that still works after sunset around Kottbusser Tor and Oranienstraße.',
           wetLine: 'the pavement around Kottbusser Tor drains slowly and you will be standing in it more than walking',
           dryLine: 'an evening where you stand as much as you walk',
+          photo: 'kottbusser-tor',
+          photoAlt: 'Kottbusser Tor lit up at night with the elevated U-Bahn line crossing it',
           places: [
-            { name: 'Kottbusser Tor', note: 'You stand more than you walk here, and standing gets cold well before walking does.' },
-            { name: 'Oranienstraße', note: 'Tables stay outside late. Heaters are a bonus, not a guarantee.' },
-            { name: 'Markthalle Neun', note: 'Warm, loud and busy inside. A coat you are not wearing becomes luggage.' }
+            { name: 'Kottbusser Tor', photo: 'kottbusser-tor', alt: 'Kottbusser Tor lit up at night with the elevated U-Bahn line crossing it', note: 'You stand more than you walk here, and standing gets cold well before walking does.' },
+            { name: 'Oranienstraße', photo: 'oranienstrasse', alt: 'Shops, a bus and parked cars along Oranienstraße in Kreuzberg', note: 'Tables stay outside late. Heaters are a bonus, not a guarantee.' },
+            { name: 'Markthalle Neun', photo: 'markthalle-neun', alt: 'Food stalls and hanging signs inside Markthalle Neun', note: 'Warm, loud and busy inside. A coat you are not wearing becomes luggage.' }
           ]
         }
       };
@@ -528,7 +558,7 @@
 
       const renderGrounds = () => {
         groundGrid.innerHTML = Object.entries(grounds).map(([id, ground]) =>
-          `<button class="ground-choice ${state.ground === id ? 'selected' : ''}" type="button" data-ground="${id}"><span class="choice-mark">${ground.marker}</span><strong>${ground.label}</strong><span>${ground.note}</span><span class="choice-window">Window ${ground.windowLabel}</span></button>`).join('');
+          `<button class="ground-choice ${state.ground === id ? 'selected' : ''}" type="button" data-ground="${id}"><span class="ground-photo"><img src="assets/places/${ground.photo}.jpg" alt="${ground.photoAlt}" loading="lazy" decoding="async" width="720" height="405"><span class="choice-mark">${ground.marker}</span></span><span class="ground-body"><strong>${ground.label}</strong><span>${ground.note}</span><span class="choice-window">Window ${ground.windowLabel}</span></span></button>`).join('');
         groundGrid.querySelectorAll('[data-ground]').forEach((button) => button.addEventListener('click', () => {
           state.ground = button.dataset.ground;
           state.shoe = null; state.layer = null; state.carry = null;
@@ -602,7 +632,7 @@
         }
 
         document.getElementById('result-places').innerHTML = ground.places.map((place, index) =>
-          `<li><small>Stop 0${index + 1}</small><strong>${place.name}</strong><p>${place.note}</p></li>`).join('');
+          `<li><img src="assets/places/${place.photo}.jpg" alt="${place.alt}" loading="lazy" decoding="async" width="720" height="405"><span class="place-body"><small>Stop 0${index + 1}</small><strong>${place.name}</strong><p>${place.note}</p></span></li>`).join('');
       };
 
       const render = () => {
