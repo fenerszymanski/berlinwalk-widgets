@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-08-16T05:58:21.262Z",
+  "updatedAt": "2026-08-16T11:04:21.722Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 291,
+  "totalPosts": 292,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1617,6 +1617,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin Weekend with a Friday Night Arrival: A Plan That Starts Small",
+      "slug": "berlin-weekend-friday-night-arrival",
+      "path": "/post/berlin-weekend-friday-night-arrival",
+      "url": "https://www.berlinwalk.com/post/berlin-weekend-friday-night-arrival",
+      "excerpt": "Arriving in Berlin on Friday night? Use a small first-night plan for BER or Hauptbahnhof that protects Saturday instead of forcing a rushed checklist.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "4 min read",
+      "publishedDate": "2026-08-16T10:58:45.247Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_8124c1065ff349a690b2df2692ea0b5d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ber-airport-night.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_8124c1065ff349a690b2df2692ea0b5d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ber-airport-night.jpg",
+      "alt": "Terminal 1 at Berlin Brandenburg Airport lit at dusk",
+      "relatedToolSlug": "berlin-weekend-first-night"
+    },
+    {
       "title": "Berlin Landmarks in 2 Hours: Choose an East or West Start",
       "slug": "berlin-landmarks-in-two-hours",
       "path": "/post/berlin-landmarks-in-two-hours",
@@ -1801,23 +1818,6 @@
       "image": "https://static.wixstatic.com/media/5a08a3_ce1ca92c04304dc6831172e3bcea71fa~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-markthalle-neun.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_ce1ca92c04304dc6831172e3bcea71fa~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-markthalle-neun.jpg",
       "alt": "A food counter inside Markthalle Neun in Kreuzberg",
-      "relatedToolSlug": ""
-    },
-    {
-      "title": "InnoTrans Berlin: A Business Visitor's Guide to Messe Berlin and Three Free Evenings",
-      "slug": "innotrans-berlin-2026",
-      "path": "/post/innotrans-berlin-2026",
-      "url": "https://www.berlinwalk.com/post/innotrans-berlin-2026",
-      "excerpt": "A realistic InnoTrans Berlin 2026 plan: official fair facts, Messe Berlin logistics and three evening choices that fit a long trade-fair day.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "free-budget",
-      "topicLabel": "Free & Budget",
-      "readTime": "4 min read",
-      "publishedDate": "2026-08-03T06:50:47.125Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_178c66ebfd684ed1b021fa0f640eeb5a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-innotrans-train.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_178c66ebfd684ed1b021fa0f640eeb5a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-innotrans-train.jpg",
-      "alt": "A train on display at InnoTrans 2024 in Berlin",
       "relatedToolSlug": ""
     }
   ]
