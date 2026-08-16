@@ -1,0 +1,3 @@
+# Internal source prompt
+
+Create a premium glossy 3D rounded-square app icon for a Berlin travel tool called Berlin Landmark Window. Deep BerlinWalk forest-green glass tile with transparent outer background. Show a realistic miniature Brandenburg Gate on the left, Berliner Dom on the right, a subtle Reichstag dome and TV Tower in the distance. A bright translucent yellow rectangular time-window frame sits in front, with a thin cream walking path passing through the landmarks. Sophisticated, legible at 160px, no text, letters, numerals, logos, watermark, flags, people, black vignette, or flat vector/cartoon style.

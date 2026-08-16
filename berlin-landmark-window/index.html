@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Choose a focused east or west two-hour landmark window in central Berlin.">
+  <title>Berlin Landmark Window | BerlinWalk</title>
+  <link rel="icon" href="data:,">
+</head>
+<body>
+  <main id="bw-landmark-window">
+    <section class="shell" aria-labelledby="tool-title">
+      <header class="hero">
+        <img class="hero-image" src="assets/03-berliner-dom.jpg" alt="The Berliner Dom beside the Spree in Berlin">
+        <div class="hero-shade"></div>
+        <div class="hero-copy">
+          <p class="eyebrow">Central Berlin · one honest frame</p>
+          <h1 id="tool-title">Berlin Landmark Window</h1>
+          <p>Place a two-hour frame around the side of central Berlin where you already are. Keep one interior or keep the whole thing outdoors.</p>
+          <div class="scope-pills" aria-label="Tool scope"><span>East or west</span><span>One interior max</span><span>Real landmarks</span></div>
+        </div>
+      </header>
+
+      <section class="orientation" aria-labelledby="orientation-title">
+        <div>
+          <p class="section-kicker">How this works</p>
+          <h2 id="orientation-title">Move the frame, not the whole city</h2>
+        </div>
+        <p>Tap the side closest to you, then decide whether a current ticket or registration deserves the one indoor commitment. The yellow frame shows the landmarks I would keep in view, not a live navigation estimate.</p>
+      </section>
+
+      <section class="window-board" aria-label="Two-hour Berlin landmark window">
+        <div class="board-toolbar">
+          <div>
+            <p class="section-kicker">1. Choose your edge</p>
+            <h2>Where are you standing?</h2>
+          </div>
+          <span id="window-status" class="window-status" aria-live="polite">East window selected</span>
+        </div>
+        <div class="side-controls" role="group" aria-label="Choose an east or west start">
+          <button class="side-button is-active" type="button" data-side="east" aria-pressed="true">
+            <span class="button-number">E</span><span><strong>East start</strong><small>Alexanderplatz · Museum Island</small></span>
+          </button>
+          <button class="side-button" type="button" data-side="west" aria-pressed="false">
+            <span class="button-number">W</span><span><strong>West start</strong><small>Brandenburg Gate · Reichstag</small></span>
+          </button>
+        </div>
+
+        <div class="landmark-stage" aria-label="Photographic landmark strip">
+          <div class="stage-caption">
+            <p class="section-kicker">2. Set your yellow frame</p>
+            <p id="stage-copy">Museum Island and the cathedral stay in the east frame. Choose a card to make the landmark your visual anchor.</p>
+          </div>
+          <div class="photo-strip">
+            <button class="landmark-card is-visible is-anchor" type="button" data-card="museum" data-side="east" aria-pressed="true">
+              <img src="assets/04-neues-museum-staircase.jpg" alt="The grand staircase inside the Neues Museum">
+              <span class="card-frame" aria-hidden="true"></span>
+              <span class="card-copy"><strong>Museum Island</strong><small>One reason to go inside</small></span>
+            </button>
+            <button class="landmark-card is-visible" type="button" data-card="dom" data-side="east" aria-pressed="false">
+              <img src="assets/03-berliner-dom.jpg" alt="The Berliner Dom beside the Spree">
+              <span class="card-frame" aria-hidden="true"></span>
+              <span class="card-copy"><strong>Berliner Dom</strong><small>River and dome</small></span>
+            </button>
+            <button class="landmark-card" type="button" data-card="gate" data-side="west" aria-pressed="false">
+              <img src="assets/01-brandenburg-gate.jpg" alt="The Brandenburg Gate at blue hour">
+              <span class="card-frame" aria-hidden="true"></span>
+              <span class="card-copy"><strong>Brandenburg Gate</strong><small>Pariser Platz threshold</small></span>
+            </button>
+            <button class="landmark-card" type="button" data-card="reichstag" data-side="west" aria-pressed="false">
+              <img src="assets/02-reichstag.jpg" alt="The Reichstag building at sunset">
+              <span class="card-frame" aria-hidden="true"></span>
+              <span class="card-copy"><strong>Reichstag</strong><small>Exterior or registration</small></span>
+            </button>
+          </div>
+          <p class="stage-note">The photos are a way to choose scale and direction. They are not a ticket, opening-hours or access promise.</p>
+        </div>
+
+        <div class="commitment-row">
+          <div>
+            <p class="section-kicker">3. Keep the pressure off</p>
+            <h2>What do you do with interiors?</h2>
+          </div>
+          <div class="mode-controls" role="group" aria-label="Choose an outdoor or one-interior window">
+            <button class="mode-button is-active" type="button" data-mode="outdoor" aria-pressed="true">Stay outside</button>
+            <button class="mode-button" type="button" data-mode="interior" aria-pressed="false">Reserve one interior</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="result" aria-labelledby="result-title" aria-live="polite">
+        <div class="result-heading">
+          <div>
+            <p class="section-kicker">Your two-hour window</p>
+            <h2 id="result-title">East window: Museum Island at street level</h2>
+          </div>
+          <span id="anchor-label" class="anchor-label">Anchor: Museum Island</span>
+        </div>
+        <div id="timeline" class="timeline" aria-label="Suggested two-hour landmark sequence"></div>
+        <div class="result-bottom">
+          <div class="do-not-add">
+            <p class="avoid-label">Do not add this</p>
+            <p id="avoid-copy">A second museum ticket. The island is still worth seeing when the walk stays outdoors.</p>
+          </div>
+          <a id="official-link" class="official-link" href="https://www.smb.museum/en/museums-institutions/neues-museum/plan-your-visit/" target="_blank" rel="noopener">Check the current official page <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+      <section class="honest-note" aria-label="Practical boundary">
+        <strong>Use this as a decision board, not a timed route.</strong>
+        <span>Check current access, queues, registrations and live directions only after you have chosen the side and the one place that matters.</span>
+      </section>
+
+      <footer class="tool-footer">
+        <a class="back-link" href="https://www.berlinwalk.com/post/berlin-landmarks-in-two-hours">Read the full Berlin landmarks guide <span aria-hidden="true">→</span></a>
+        <button id="credits-toggle" type="button" class="credits-toggle" aria-haspopup="dialog" aria-expanded="false">Tool visual credits</button>
+      </footer>
+    </section>
+
+    <dialog id="credits-dialog" aria-labelledby="credits-title">
+      <div class="dialog-top">
+        <div>
+          <p class="section-kicker">Four photographs rendered in this tool</p>
+          <h2 id="credits-title">Tool visual credits</h2>
+        </div>
+        <button id="credits-close" type="button" class="dialog-close" aria-label="Close tool visual credits">×</button>
+      </div>
+      <ul>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Brandenburger_Tor_abends.jpg" target="_blank" rel="noopener">Brandenburg Gate at dusk</a> by Thomas Wolf, www.foto-tw.de, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>, via Wikimedia Commons.</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Reichstagsgeb%C3%A4ude_bei_Sonnenuntergang,_170325,_ako.jpg" target="_blank" rel="noopener">Reichstag at sunset</a> by Ansgar Koreng, <a href="https://creativecommons.org/licenses/by-sa/3.0/de/deed.en" target="_blank" rel="noopener">CC BY-SA 3.0 DE</a>, via Wikimedia Commons.</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Berlin,_Berliner_Dom_--_2013_--_4512-4.jpg" target="_blank" rel="noopener">Berliner Dom beside the Spree</a> by Dietmar Rabich, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>, via Wikimedia Commons.</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Grand_staircase_Hall.jpg" target="_blank" rel="noopener">Grand staircase hall, Neues Museum</a> by Yair Haklai, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>, via Wikimedia Commons.</li>
+      </ul>
+    </dialog>
+  </main>
+
+  <style>
+    #bw-landmark-window {
+      --green: #123D18;
+      --green-2: #1B5E20;
+      --yellow: #FFE600;
+      --paper: #F4F6ED;
+      --cream: #FAFAF5;
+      --ink: #212121;
+      --muted: #526050;
+      --line: rgba(18, 61, 24, .17);
+      width: min(100%, 1120px);
+      margin: 0 auto;
+      padding: 16px;
+      color: var(--ink);
+      font-family: Montserrat, Arial, sans-serif;
+      line-height: 1.5;
+      box-sizing: border-box;
+    }
+    #bw-landmark-window * { box-sizing: border-box; }
+    #bw-landmark-window .shell { overflow: hidden; border: 1px solid var(--line); border-radius: 22px; background: #fff; box-shadow: 0 22px 54px rgba(18,61,24,.14); }
+    #bw-landmark-window .hero { position: relative; display: grid; align-items: end; min-height: 335px; overflow: hidden; background: var(--green); isolation: isolate; }
+    #bw-landmark-window .hero-image, #bw-landmark-window .hero-shade { position: absolute; inset: 0; width: 100%; height: 100%; }
+    #bw-landmark-window .hero-image { object-fit: cover; object-position: center 49%; }
+    #bw-landmark-window .hero-shade { z-index: 1; background: linear-gradient(96deg, rgba(10,45,17,.96) 0%, rgba(12,58,20,.87) 43%, rgba(12,58,20,.24) 100%); }
+    #bw-landmark-window .hero-copy { position: relative; z-index: 2; max-width: 720px; padding: 34px; color: #fff; }
+    #bw-landmark-window .eyebrow, #bw-landmark-window .section-kicker, #bw-landmark-window .avoid-label { margin: 0; font-size: 10px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+    #bw-landmark-window .eyebrow { color: var(--yellow); }
+    #bw-landmark-window h1, #bw-landmark-window h2, #bw-landmark-window p { margin-top: 0; }
+    #bw-landmark-window h1 { margin: 5px 0 11px; color: #fff; font-size: clamp(34px, 5.5vw, 58px); line-height: 1.02; letter-spacing: -.045em; }
+    #bw-landmark-window .hero-copy > p:not(.eyebrow) { max-width: 620px; margin-bottom: 0; color: rgba(255,255,255,.92); font-size: 16px; }
+    #bw-landmark-window .scope-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 19px; }
+    #bw-landmark-window .scope-pills span { border: 1px solid rgba(255,255,255,.37); border-radius: 999px; padding: 5px 10px; background: rgba(255,255,255,.1); color: #fff; font-size: 11px; font-weight: 850; }
+    #bw-landmark-window .orientation { display: grid; grid-template-columns: minmax(240px,.75fr) minmax(0,1.25fr); gap: 24px; padding: 25px 32px; border-bottom: 1px solid var(--line); background: var(--cream); }
+    #bw-landmark-window .section-kicker, #bw-landmark-window .avoid-label { color: var(--green-2); }
+    #bw-landmark-window .orientation h2, #bw-landmark-window .board-toolbar h2, #bw-landmark-window .commitment-row h2, #bw-landmark-window .result h2, #credits-dialog h2 { margin: 3px 0 0; color: var(--green); font-size: clamp(22px,3vw,30px); line-height: 1.12; letter-spacing: -.025em; }
+    #bw-landmark-window .orientation > p { max-width: 660px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+    #bw-landmark-window .window-board { padding: 29px 32px 32px; background: #fff; }
+    #bw-landmark-window .board-toolbar, #bw-landmark-window .commitment-row, #bw-landmark-window .result-heading, #bw-landmark-window .result-bottom { display: flex; align-items: end; justify-content: space-between; gap: 20px; }
+    #bw-landmark-window .window-status, #bw-landmark-window .anchor-label { flex: 0 0 auto; border-radius: 999px; padding: 7px 11px; background: var(--paper); color: var(--green); font-size: 11px; font-weight: 900; }
+    #bw-landmark-window .side-controls { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; margin-top: 17px; }
+    #bw-landmark-window button { font: inherit; }
+    #bw-landmark-window .side-button { display: grid; grid-template-columns: 34px minmax(0,1fr); gap: 10px; align-items: center; min-height: 82px; border: 1px solid var(--line); border-radius: 15px; padding: 13px; background: #fff; color: var(--ink); text-align: left; cursor: pointer; transition: transform .16s ease, background .16s ease, border-color .16s ease, box-shadow .16s ease; }
+    #bw-landmark-window .side-button:hover { transform: translateY(-1px); border-color: rgba(18,61,24,.48); box-shadow: 0 9px 20px rgba(18,61,24,.08); }
+    #bw-landmark-window .button-number { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--paper); color: var(--green); font-size: 12px; font-weight: 950; }
+    #bw-landmark-window .side-button strong, #bw-landmark-window .side-button small { display: block; }
+    #bw-landmark-window .side-button strong { font-size: 14px; }
+    #bw-landmark-window .side-button small { margin-top: 3px; color: var(--muted); font-size: 11px; font-weight: 700; }
+    #bw-landmark-window .side-button.is-active { border-color: var(--green); background: var(--green); color: #fff; box-shadow: inset 4px 0 0 var(--yellow); }
+    #bw-landmark-window .side-button.is-active .button-number { background: var(--yellow); color: var(--green); }
+    #bw-landmark-window .side-button.is-active small { color: rgba(255,255,255,.78); }
+    #bw-landmark-window .landmark-stage { margin-top: 24px; border: 1px solid var(--line); border-radius: 18px; padding: 19px; background: linear-gradient(180deg, var(--paper) 0%, #fff 100%); }
+    #bw-landmark-window .stage-caption { display: flex; align-items: end; justify-content: space-between; gap: 18px; }
+    #bw-landmark-window .stage-caption > p:last-child { max-width: 575px; margin: 0; color: var(--muted); font-size: 13px; text-align: right; }
+    #bw-landmark-window .photo-strip { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; margin-top: 15px; }
+    #bw-landmark-window .landmark-card { position: relative; display: none; min-height: 242px; overflow: hidden; border: 0; border-radius: 14px; padding: 0; background: var(--green); color: #fff; cursor: pointer; text-align: left; isolation: isolate; }
+    #bw-landmark-window .landmark-card.is-visible { display: block; }
+    #bw-landmark-window .landmark-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .28s ease; }
+    #bw-landmark-window .landmark-card::after { position: absolute; inset: 0; z-index: 1; content: ''; background: linear-gradient(180deg, rgba(8,38,13,.04) 27%, rgba(8,38,13,.9) 100%); }
+    #bw-landmark-window .landmark-card:hover img { transform: scale(1.035); }
+    #bw-landmark-window .card-frame { position: absolute; z-index: 2; top: 14px; right: 14px; bottom: 14px; left: 14px; border: 3px solid transparent; border-radius: 9px; pointer-events: none; transition: border-color .16s ease, box-shadow .16s ease; }
+    #bw-landmark-window .landmark-card.is-anchor .card-frame { border-color: var(--yellow); box-shadow: 0 0 0 2px rgba(18,61,24,.66), inset 0 0 0 1px rgba(255,255,255,.8); }
+    #bw-landmark-window .card-copy { position: absolute; z-index: 3; right: 24px; bottom: 23px; left: 24px; }
+    #bw-landmark-window .card-copy strong, #bw-landmark-window .card-copy small { display: block; }
+    #bw-landmark-window .card-copy strong { color: #fff; font-size: 22px; line-height: 1.08; letter-spacing: -.02em; }
+    #bw-landmark-window .card-copy small { margin-top: 4px; color: rgba(255,255,255,.86); font-size: 11px; font-weight: 800; }
+    #bw-landmark-window .stage-note { margin: 12px 2px 0; color: var(--muted); font-size: 11px; }
+    #bw-landmark-window .commitment-row { align-items: center; margin-top: 24px; padding-top: 23px; border-top: 1px solid var(--line); }
+    #bw-landmark-window .mode-controls { display: flex; flex-wrap: wrap; gap: 8px; }
+    #bw-landmark-window .mode-button { border: 1px solid var(--green); border-radius: 9px; padding: 10px 12px; background: #fff; color: var(--green); font-size: 12px; font-weight: 900; cursor: pointer; }
+    #bw-landmark-window .mode-button.is-active, #bw-landmark-window .mode-button:hover { background: var(--yellow); color: var(--green); }
+    #bw-landmark-window .side-button:focus-visible, #bw-landmark-window .landmark-card:focus-visible, #bw-landmark-window .mode-button:focus-visible, #bw-landmark-window .official-link:focus-visible, #bw-landmark-window .back-link:focus-visible, #bw-landmark-window .credits-toggle:focus-visible, #credits-dialog button:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+    #bw-landmark-window .result { padding: 31px 32px 34px; border-top: 1px solid var(--line); background: #fff; }
+    #bw-landmark-window .timeline { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; margin-top: 19px; }
+    #bw-landmark-window .timeline-step { position: relative; min-height: 152px; border-top: 4px solid var(--green); padding: 12px 12px 0 0; }
+    #bw-landmark-window .timeline-step::after { position: absolute; top: -2px; right: -6px; width: 12px; height: 12px; border-radius: 50%; background: var(--yellow); content: ''; }
+    #bw-landmark-window .timeline-time { margin: 0; color: var(--green-2); font-size: 11px; font-weight: 950; letter-spacing: .04em; }
+    #bw-landmark-window .timeline-step h3 { margin: 5px 0; color: var(--ink); font-size: 16px; line-height: 1.14; }
+    #bw-landmark-window .timeline-step p:last-child { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.48; }
+    #bw-landmark-window .result-bottom { align-items: center; gap: 26px; margin-top: 22px; border-top: 1px solid var(--line); padding-top: 19px; }
+    #bw-landmark-window .do-not-add { max-width: 600px; border-left: 4px solid var(--yellow); padding-left: 12px; }
+    #bw-landmark-window .do-not-add p { margin-bottom: 0; }
+    #bw-landmark-window #avoid-copy { color: var(--muted); font-size: 13px; }
+    #bw-landmark-window .official-link { display: inline-flex; align-items: center; gap: 6px; flex: 0 0 auto; border-radius: 9px; padding: 11px 13px; background: var(--yellow); color: var(--green); font-size: 12px; font-weight: 900; text-decoration: none; }
+    #bw-landmark-window .official-link:hover { text-decoration: underline; }
+    #bw-landmark-window .honest-note { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 12px; padding: 16px 32px; background: var(--paper); color: var(--muted); font-size: 12px; }
+    #bw-landmark-window .honest-note strong { color: var(--green); }
+    #bw-landmark-window .tool-footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 23px 32px; background: var(--green); }
+    #bw-landmark-window .back-link { color: #fff; font-size: 13px; font-weight: 900; text-decoration: none; }
+    #bw-landmark-window .back-link:hover { text-decoration: underline; }
+    #bw-landmark-window .credits-toggle { border: 1px solid rgba(255,255,255,.45); border-radius: 9px; padding: 9px 11px; background: transparent; color: #fff; font-size: 12px; font-weight: 850; cursor: pointer; }
+    #bw-landmark-window .credits-toggle:hover { border-color: var(--yellow); color: var(--yellow); }
+    #credits-dialog { width: min(620px, calc(100vw - 28px)); border: 0; border-radius: 16px; padding: 0; color: #212121; font-family: Montserrat, Arial, sans-serif; box-shadow: 0 28px 74px rgba(0,0,0,.3); }
+    #credits-dialog::backdrop { background: rgba(7,37,14,.65); }
+    #credits-dialog .dialog-top { display: flex; justify-content: space-between; gap: 16px; padding: 24px 24px 15px; border-bottom: 1px solid rgba(18,61,24,.15); }
+    #credits-dialog .section-kicker { margin: 0; color: #1B5E20; font-size: 10px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    #credits-dialog h2 { margin: 3px 0 0; color: #123D18; font-size: 22px; }
+    #credits-dialog .dialog-close { display: grid; place-items: center; flex: 0 0 auto; width: 34px; height: 34px; border: 1px solid rgba(18,61,24,.2); border-radius: 50%; background: #FAFAF5; color: #123D18; font-size: 25px; line-height: 1; cursor: pointer; }
+    #credits-dialog ul { display: grid; gap: 12px; margin: 0; padding: 19px 25px 25px 43px; color: #526050; font-size: 13px; line-height: 1.48; }
+    #credits-dialog a { color: #1B5E20; font-weight: 750; }
+    @media (max-width: 720px) {
+      #bw-landmark-window { padding: 8px; }
+      #bw-landmark-window .shell { border-radius: 16px; }
+      #bw-landmark-window .hero { min-height: 355px; }
+      #bw-landmark-window .hero-shade { background: linear-gradient(180deg, rgba(10,45,17,.52) 0%, rgba(10,45,17,.96) 73%); }
+      #bw-landmark-window .hero-copy { padding: 23px; }
+      #bw-landmark-window h1 { font-size: 38px; }
+      #bw-landmark-window .orientation { grid-template-columns: 1fr; gap: 12px; padding: 21px 20px; }
+      #bw-landmark-window .window-board, #bw-landmark-window .result { padding: 23px 20px; }
+      #bw-landmark-window .board-toolbar, #bw-landmark-window .result-heading, #bw-landmark-window .result-bottom { align-items: flex-start; flex-direction: column; }
+      #bw-landmark-window .side-controls { grid-template-columns: 1fr; }
+      #bw-landmark-window .side-button { min-height: 72px; }
+      #bw-landmark-window .landmark-stage { padding: 14px; }
+      #bw-landmark-window .stage-caption { align-items: flex-start; flex-direction: column; gap: 6px; }
+      #bw-landmark-window .stage-caption > p:last-child { text-align: left; }
+      #bw-landmark-window .photo-strip { grid-template-columns: 1fr; }
+      #bw-landmark-window .landmark-card { min-height: 218px; }
+      #bw-landmark-window .commitment-row { align-items: flex-start; flex-direction: column; gap: 13px; }
+      #bw-landmark-window .timeline { grid-template-columns: 1fr; gap: 0; }
+      #bw-landmark-window .timeline-step { min-height: auto; padding: 12px 25px 17px 0; }
+      #bw-landmark-window .timeline-step::after { right: 0; }
+      #bw-landmark-window .result-bottom { gap: 16px; }
+      #bw-landmark-window .official-link { width: 100%; justify-content: center; }
+      #bw-landmark-window .honest-note { grid-template-columns: 1fr; gap: 5px; padding: 15px 20px; }
+      #bw-landmark-window .tool-footer { align-items: flex-start; flex-direction: column; padding: 20px; }
+    }
+  </style>
+
+  <script>
+    (function () {
+      var state = { side: 'east', mode: 'outdoor', anchor: 'museum' };
+      var plans = {
+        east: {
+          outdoor: {
+            title: 'East window: Museum Island at street level',
+            status: 'East window selected',
+            stage: 'Museum Island and the cathedral stay in the east frame. Choose a card to make the landmark your visual anchor.',
+            avoid: 'A second museum ticket. The island is still worth seeing when the walk stays outdoors.',
+            official: 'https://whc.unesco.org/en/list/896',
+            officialLabel: 'Check Museum Island context',
+            steps: [
+              ['00:00', 'Start from Alexanderplatz', 'Walk toward the river with Museum Island as the destination, not a list of five entrances.'],
+              ['00:30', 'Lustgarten and the riverside', 'Take the exterior sequence slowly enough to see the cathedral, bridges and museum facades together.'],
+              ['01:20', 'Choose one resting view', 'Keep the last stretch flexible around the Spree instead of converting it into a queue.']
+            ]
+          },
+          interior: {
+            title: 'East window: one interior with room around it',
+            status: 'East window · one interior reserved',
+            stage: 'The yellow frame protects one genuine inside reason. Your other east-side landmark stays outside.',
+            avoid: 'A cathedral interior plus a museum interior. Give the chosen visit enough time to be the point.',
+            official: 'https://www.smb.museum/en/museums-institutions/neues-museum/plan-your-visit/',
+            officialLabel: 'Check Neues Museum access',
+            steps: [
+              ['00:00', 'Arrive with a ticket reason', 'Use the current official page before you travel, especially for a dated or timed entry.'],
+              ['00:25', 'Keep one interior', 'Make the museum or cathedral the decision, then let the surrounding landmark view stay outdoors.'],
+              ['01:30', 'Return to the river edge', 'End around Lustgarten or the Spree instead of adding another entrance.']
+            ]
+          }
+        },
+        west: {
+          outdoor: {
+            title: 'West window: gate, parliament, boulevard',
+            status: 'West window selected',
+            stage: 'The Brandenburg Gate and Reichstag stay in the west frame. Choose a card to decide where your attention begins.',
+            avoid: 'A cross-city jump back to Museum Island. Let the government quarter hold this short visit together.',
+            official: 'https://www.berlin.de/en/attractions-and-sights/3560266-3104052-brandenburg-gate.en.html',
+            officialLabel: 'Check Brandenburg Gate details',
+            steps: [
+              ['00:00', 'Begin at Pariser Platz', 'Look through the gate toward the Tiergarten before treating it as a quick photograph.'],
+              ['00:25', 'Read the Reichstag outside', 'Walk the exterior and the civic space around it without assuming a dome visit.'],
+              ['01:15', 'Choose one westward finish', 'Use the Tiergarten edge or Unter den Linden, depending on where the next part of your day actually starts.']
+            ]
+          },
+          interior: {
+            title: 'West window: registration earns the interior',
+            status: 'West window · one interior reserved',
+            stage: 'The yellow frame stays west. A confirmed Reichstag option replaces, rather than joins, another long interior.',
+            avoid: 'Treating the Reichstag dome as a walk-in or adding a second booked attraction on the same two-hour clock.',
+            official: 'https://visite.bundestag.de/BAPWeb/?lang=en',
+            officialLabel: 'Check Bundestag registration',
+            steps: [
+              ['00:00', 'Confirm before you walk', 'Use the official visitor service for the current registration and access arrangement.'],
+              ['00:30', 'Give the visit its own space', 'Keep the Brandenburg Gate as the outdoor threshold, then let the registered interior be the main commitment.'],
+              ['01:35', 'End beside the gate or parliament', 'Do not turn a confirmed visit into a race toward a second side of central Berlin.']
+            ]
+          }
+        }
+      };
+      var sideButtons = Array.prototype.slice.call(document.querySelectorAll('.side-button'));
+      var modeButtons = Array.prototype.slice.call(document.querySelectorAll('.mode-button'));
+      var cards = Array.prototype.slice.call(document.querySelectorAll('.landmark-card'));
+      var status = document.getElementById('window-status');
+      var stageCopy = document.getElementById('stage-copy');
+      var title = document.getElementById('result-title');
+      var anchor = document.getElementById('anchor-label');
+      var timeline = document.getElementById('timeline');
+      var avoid = document.getElementById('avoid-copy');
+      var official = document.getElementById('official-link');
+      var names = { museum: 'Museum Island', dom: 'Berliner Dom', gate: 'Brandenburg Gate', reichstag: 'Reichstag' };
+
+      function render() {
+        var plan = plans[state.side][state.mode];
+        status.textContent = plan.status;
+        stageCopy.textContent = plan.stage;
+        title.textContent = plan.title;
+        anchor.textContent = 'Anchor: ' + names[state.anchor];
+        avoid.textContent = plan.avoid;
+        official.href = plan.official;
+        official.innerHTML = plan.officialLabel + ' <span aria-hidden="true">↗</span>';
+        timeline.innerHTML = plan.steps.map(function (step) {
+          return '<article class="timeline-step"><p class="timeline-time">' + step[0] + '</p><h3>' + step[1] + '</h3><p>' + step[2] + '</p></article>';
+        }).join('');
+        sideButtons.forEach(function (button) {
+          var active = button.getAttribute('data-side') === state.side;
+          button.classList.toggle('is-active', active);
+          button.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+        modeButtons.forEach(function (button) {
+          var active = button.getAttribute('data-mode') === state.mode;
+          button.classList.toggle('is-active', active);
+          button.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+        cards.forEach(function (card) {
+          var visible = card.getAttribute('data-side') === state.side;
+          var chosen = card.getAttribute('data-card') === state.anchor;
+          card.classList.toggle('is-visible', visible);
+          card.classList.toggle('is-anchor', chosen);
+          card.setAttribute('aria-pressed', chosen ? 'true' : 'false');
+        });
+        postHeight();
+      }
+
+      sideButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          state.side = button.getAttribute('data-side');
+          state.anchor = state.side === 'east' ? 'museum' : 'gate';
+          render();
+        });
+      });
+      modeButtons.forEach(function (button) {
+        button.addEventListener('click', function () { state.mode = button.getAttribute('data-mode'); render(); });
+      });
+      cards.forEach(function (card) {
+        card.addEventListener('click', function () {
+          state.side = card.getAttribute('data-side');
+          state.anchor = card.getAttribute('data-card');
+          render();
+        });
+      });
+
+      var dialog = document.getElementById('credits-dialog');
+      var creditsToggle = document.getElementById('credits-toggle');
+      var closeButton = document.getElementById('credits-close');
+      function closeDialog() { if (dialog.open) dialog.close(); creditsToggle.setAttribute('aria-expanded', 'false'); }
+      creditsToggle.addEventListener('click', function () { dialog.showModal(); creditsToggle.setAttribute('aria-expanded', 'true'); });
+      closeButton.addEventListener('click', closeDialog);
+      dialog.addEventListener('click', function (event) { if (event.target === dialog) closeDialog(); });
+      dialog.addEventListener('close', function () { creditsToggle.setAttribute('aria-expanded', 'false'); });
+
+      function postHeight() {
+        var height = Math.ceil(document.documentElement.getBoundingClientRect().height);
+        var message = { type: 'bw-resize', height: height, src: location.pathname + location.search };
+        try { if (window.top && window.top !== window) window.top.postMessage(message, '*'); } catch (error) {}
+        try { if (window.parent && window.parent !== window && window.parent !== window.top) window.parent.postMessage(message, '*'); } catch (error) {}
+      }
+      window.addEventListener('load', postHeight);
+      window.addEventListener('resize', postHeight);
+      render();
+    }());
+  </script>
+</body>
+</html>
