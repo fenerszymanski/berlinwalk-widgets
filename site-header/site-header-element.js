@@ -1080,11 +1080,11 @@ class BWHeaderElement extends HTMLElement {
                     Products <span class="bw-header-caret" aria-hidden="true">⌄</span>
                   </button>
                   <ul id="${this._productsMenuId}" class="bw-header-submenu">
-                    <li><a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner</a></li>
+                    <li><a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner · from €7.99</a></li>
                     <li><a href="${BW_HEADER_LINKS.landmarksGuide}">Berlin Landmarks Guide · €2.99</a></li>
-                    <li><a href="${BW_HEADER_LINKS.audioTours}">Audio Tours</a></li>
-                    <li><a href="${BW_HEADER_LINKS.firstDayRescue}">First-Day Rescue Plan</a></li>
-                    <li><a href="${BW_HEADER_LINKS.photoMissions}">Photo Missions</a></li>
+                    <li><a href="${BW_HEADER_LINKS.audioTours}">Audio Tours · from €4.99</a></li>
+                    <li><a href="${BW_HEADER_LINKS.firstDayRescue}">First-Day Rescue Plan · €9</a></li>
+                    <li><a href="${BW_HEADER_LINKS.photoMissions}">Photo Missions · €3.99</a></li>
                   </ul>
                 </li>
                 <li><a href="${BW_HEADER_LINKS.games}">Games</a></li>
@@ -1125,11 +1125,11 @@ class BWHeaderElement extends HTMLElement {
 
               <details class="bw-header-mobile-section">
                 <summary class="bw-header-mobile-section-label">Products</summary>
-                <a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner</a>
+                <a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner · from €7.99</a>
                 <a href="${BW_HEADER_LINKS.landmarksGuide}">Berlin Landmarks Guide · €2.99</a>
-                <a href="${BW_HEADER_LINKS.audioTours}">Audio Tours</a>
-                <a href="${BW_HEADER_LINKS.firstDayRescue}">First-Day Rescue Plan</a>
-                <a href="${BW_HEADER_LINKS.photoMissions}">Photo Missions</a>
+                <a href="${BW_HEADER_LINKS.audioTours}">Audio Tours · from €4.99</a>
+                <a href="${BW_HEADER_LINKS.firstDayRescue}">First-Day Rescue Plan · €9</a>
+                <a href="${BW_HEADER_LINKS.photoMissions}">Photo Missions · €3.99</a>
               </details>
 
               <a href="${BW_HEADER_LINKS.games}">Games</a>
