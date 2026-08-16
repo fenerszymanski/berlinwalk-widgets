@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-08-16T02:08:36.844Z",
+  "updatedAt": "2026-08-16T05:58:21.262Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 290,
+  "totalPosts": 291,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1617,6 +1617,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin Landmarks in 2 Hours: Choose an East or West Start",
+      "slug": "berlin-landmarks-in-two-hours",
+      "path": "/post/berlin-landmarks-in-two-hours",
+      "url": "https://www.berlinwalk.com/post/berlin-landmarks-in-two-hours",
+      "excerpt": "Use a focused east or west two-hour window for Berlin landmarks instead of forcing Museum Island and Brandenburg Gate into one rushed loop.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "route-stories",
+      "topicLabel": "Tour Route Stories",
+      "readTime": "4 min read",
+      "publishedDate": "2026-08-16T05:53:52.419Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_f539c515c8cc4a8e9cc4c87bbca3b415~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-brandenburg-gate.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_f539c515c8cc4a8e9cc4c87bbca3b415~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-brandenburg-gate.jpg",
+      "alt": "The illuminated Brandenburg Gate at blue hour in Berlin",
+      "relatedToolSlug": "berlin-landmark-window"
+    },
+    {
       "title": "Bauhaus in Berlin: Three Places That Make Modernism Easier to Read",
       "slug": "bauhaus-in-berlin-modernism",
       "path": "/post/bauhaus-in-berlin-modernism",
@@ -1802,26 +1819,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_178c66ebfd684ed1b021fa0f640eeb5a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-innotrans-train.jpg",
       "alt": "A train on display at InnoTrans 2024 in Berlin",
       "relatedToolSlug": ""
-    },
-    {
-      "title": "Open Monument Day Berlin: How to Choose and Book the Hidden Sites",
-      "slug": "open-monument-day-berlin-2026",
-      "path": "/post/open-monument-day-berlin-2026",
-      "url": "https://www.berlinwalk.com/post/open-monument-day-berlin-2026",
-      "excerpt": "Use Berlin's Open Monument Day 2026 programme without criss-crossing the city: one priority site, one local back-up and live access checks.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "4 min read",
-      "publishedDate": "2026-08-03T06:50:46.293Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_8a02c52f847249fc8ff5e8e289f3d08f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-icc-open-monument-day.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_8a02c52f847249fc8ff5e8e289f3d08f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-icc-open-monument-day.jpg",
-      "alt": "Interior view of ICC Berlin during a previous Open Monument Day",
-      "relatedToolSlug": ""
     }
   ],
   "allPosts": [
+    {
+      "title": "Berlin Landmarks in 2 Hours: Choose an East or West Start",
+      "slug": "berlin-landmarks-in-two-hours",
+      "path": "/post/berlin-landmarks-in-two-hours",
+      "url": "https://www.berlinwalk.com/post/berlin-landmarks-in-two-hours",
+      "excerpt": "Use a focused east or west two-hour window for Berlin landmarks instead of forcing Museum Island and Brandenburg Gate into one rushed loop.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "route-stories",
+      "topicLabel": "Tour Route Stories",
+      "readTime": "4 min read",
+      "publishedDate": "2026-08-16T05:53:52.419Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_f539c515c8cc4a8e9cc4c87bbca3b415~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-brandenburg-gate.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_f539c515c8cc4a8e9cc4c87bbca3b415~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-brandenburg-gate.jpg",
+      "alt": "The illuminated Brandenburg Gate at blue hour in Berlin",
+      "relatedToolSlug": "berlin-landmark-window"
+    },
     {
       "title": "Bauhaus in Berlin: Three Places That Make Modernism Easier to Read",
       "slug": "bauhaus-in-berlin-modernism",

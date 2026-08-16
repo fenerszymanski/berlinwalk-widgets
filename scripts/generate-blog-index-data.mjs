@@ -747,6 +747,7 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if ((post.slug || '') === 'berlin-landmarks-in-two-hours') return 'berlin-landmark-window';
   if ((post.slug || '') === 'bauhaus-in-berlin-modernism') return 'berlin-bauhaus-lineage-map';
   if ((post.slug || '') === 'free-berlin-memorials') return 'berlin-memorial-reading-order';
   if ((post.slug || '') === 'berlin-itinerary-for-couples') return 'berlin-day-duet';
