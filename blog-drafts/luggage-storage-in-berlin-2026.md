@@ -105,7 +105,7 @@ For most tourists, the airport storage makes sense in two cases:
 
 If your flight is short notice or your luggage is irregular, ask at the airport information desk before you leave the bag. They will direct you to the current operator and entrance, which has moved a couple of times since BER opened.
 
-The Airport Express (FEX), S-Bahn lines S9 and S45, and the U7 plus bus combination from central Berlin all serve BER. Travel time from Alexanderplatz is roughly 45 to 55 minutes. Build that in if you plan to come back for your bag.
+The Airport Express (FEX), S-Bahn lines S9 and S85, and the U7 plus bus combination from central Berlin all serve BER. Travel time from Alexanderplatz is roughly 45 to 55 minutes. Build that in if you plan to come back for your bag.
 
 ## App-Based Storage (Bounce, Radical Storage, Stasher)
 

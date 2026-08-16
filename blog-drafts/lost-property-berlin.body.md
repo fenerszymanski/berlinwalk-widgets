@@ -75,7 +75,7 @@ BER's official page says **who you contact depends on where you lost the item**.
 
 But if you left something **on the plane or in the apron bus**, BER says your **airline** is the contact. If checked baggage did not arrive, that is also an airline or baggage-tracing issue, not a normal airport lost-property desk problem.
 
-If you lost something on the way to or from BER by train or bus, use the relevant transport company instead: DB for FEX, long-distance or regional trains, S-Bahn Berlin for S45 or S9, and BVG for Berlin buses.
+If you lost something on the way to or from BER by train or bus, use the relevant transport company instead: DB for FEX, long-distance or regional trains, S-Bahn Berlin for S85 or S9, and BVG for Berlin buses.
 
 If your **passport or identity card** is missing at BER, BER says documents such as passports, identity cards, residence permits and driving licences are handled through the Federal and State Police's Joint Service Point, and foreign citizens should contact the responsible consulate directly.
 

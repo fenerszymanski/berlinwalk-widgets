@@ -86,7 +86,7 @@ The board above does this the honest way. It shows you the weekend the league ha
 
 Neither stadium is central, and both are straightforward if you know the line.
 
-**Alte Försterei, Köpenick.** Take the **S3 from Alexanderplatz towards Erkner and get off at S Köpenick**, then walk about 15 minutes to the ground at An der Wuhlheide 263. The club publishes its own [directions to the stadium](https://www.stadion-an-der-alten-foersterei.de/anfahrt/) if you want the exact route. Allow around 40 minutes door to gate from the middle of town. Coming straight from BER airport, take the S45 or S9 to Schöneweide and change to tram 60 or 67, which stops right by the stadium.
+**Alte Försterei, Köpenick.** Take the **S3 from Alexanderplatz towards Erkner and get off at S Köpenick**, then walk about 15 minutes to the ground at An der Wuhlheide 263. The club publishes its own [directions to the stadium](https://www.stadion-an-der-alten-foersterei.de/anfahrt/) if you want the exact route. Allow around 40 minutes door to gate from the middle of town. Coming straight from BER airport, take the S85 or S9 to Schöneweide and change to tram 60 or 67, which stops right by the stadium.
 
 ![The BVG departure board at the Rathaus Köpenick stop, showing bus lines and waiting times](blog-drafts/football-match-in-berlin/images/optimized/koepenick-tram-stop-rathaus.jpg)
 _Köpenick has its own small transport world of trams and buses. On matchday the crowd walking from the S-Bahn is easy enough to follow._

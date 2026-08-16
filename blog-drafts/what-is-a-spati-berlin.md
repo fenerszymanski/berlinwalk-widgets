@@ -2,7 +2,9 @@
 
 Slug idea: `what-is-a-spati-berlin`
 
-Status: Wix draft created, unpublished. Draft ID: `6f3636f2-b910-4481-a87b-82dd5bd91ba4`.
+Status: PUBLISHED (live since 2026-06-10). Post ID: `6f3636f2-b910-4481-a87b-82dd5bd91ba4`.
+Live URL: https://www.berlinwalk.com/post/what-is-a-spati-berlin
+Header corrected on 2026-08-16; it previously still read "Wix draft created, unpublished".
 
 Meta title: What Is a Späti? Berlin Late-Night Shops & Sunday Tips
 
