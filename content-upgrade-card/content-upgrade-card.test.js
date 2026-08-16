@@ -171,14 +171,14 @@ test('component is compact, accessible and has no inner scrolling surface', () =
   assert.match(elementSource, /bw-content-upgrade-error/);
 });
 
-test('orchestrator owns exactly the 12 primary Skip List slugs', () => {
+test('orchestrator keeps the 12 Skip List slugs and registers the approved magnet fleet', () => {
   const ctx = makeInjectorContext({ config: { stage: 'pilot' } });
   assert.deepEqual(Array.from(ctx.hooks.slugs).sort(), [...skipSlugs].sort());
   assert.deepEqual(skipSlugs.filter((slug) => historySlugs.includes(slug)), []);
   assert.deepEqual(skipSlugs.filter((slug) => secondarySlugs.includes(slug)), []);
   assert.equal(ctx.hooks.safetySlug, '');
   assert.equal(ctx.hooks.placement, 'blog_inline_booking_slot');
-  assert.equal(ctx.hooks.magnetConfigs.length, 1);
+  assert.equal(ctx.hooks.magnetConfigs.length, 4);
   assert.deepEqual(JSON.parse(JSON.stringify(ctx.hooks.magnetConfigs[0])), {
     experimentId: 'berlin_skip_list_v1',
     assetId: 'berlin-skip-list',
@@ -191,6 +191,11 @@ test('orchestrator owns exactly the 12 primary Skip List slugs', () => {
     controlUrl: 'https://www.berlinwalk.com/private-tour',
     slugs: [...skipSlugs],
   });
+  assert.equal(JSON.stringify(ctx.hooks.magnetConfigs.slice(1).map((magnet) => magnet.assetId)), JSON.stringify([
+    'berlin-pass-decision-sheet',
+    'berlin-arrival-card',
+    'berlin-day-trip-compare-sheet'
+  ]));
   assert.match(injectorSource, /if \(history\.inExperiment\) return \{ owner: 'history'/);
   assert.match(injectorSource, /if \(contentUpgrade\.inExperiment\) return \{ owner: 'content-upgrade'/);
   assert.match(injectorSource, /data-bw-private-tour-cta/);

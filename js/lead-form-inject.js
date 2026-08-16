@@ -119,6 +119,171 @@
         { number: 9, skip: 'Treating Potsdamer Platz as a full attraction', why: 'The square is a crossing point, not a whole afternoon.', instead: 'See the Wall fragments, then Niederkirchnerstraße.' }
       ]
     }
+  }, {
+    experimentId: 'berlin_pass_sheet_v1',
+    assetId: 'berlin-pass-decision-sheet',
+    assetVersion: '2026-08-v1',
+    storageKey: 'bwContentUpgrade.berlinPassSheet.v1',
+    apiBase: CONTENT_UPGRADE_DEFAULT_API_BASE,
+    elementUrl: CONTENT_UPGRADE_DEFAULT_ELEMENT_URL,
+    placement: CONTENT_UPGRADE_PLACEMENT,
+    controlType: 'landmarks-guide',
+    controlUrl: 'https://www.berlinwalk.com/products/berlin-landmarks-guide',
+    acquisitionCohort: 'berlin_pass_sheet_pilot',
+    slugs: [
+      'which-berlin-pass-is-worth-it',
+      'is-the-berlin-welcomecard-worth-it-in-2026-an-honest-breakdown',
+      'berlin-museum-pass-vs-single-tickets-which-one-saves-you-money',
+      'is-museum-island-free-tickets-prices-and-what-to-actually-skip',
+      'is-the-ddr-museum-worth-it-tickets-queues-and-what-to-expect-in-2026',
+      'berliner-dom-tickets',
+      'victory-column-berlin-view-tickets-and-climb-tips',
+      'museum-pass',
+      'welcomecard',
+      'berlin-ab-abc-ticket-zones',
+      'is-the-berlin-tv-tower-worth-it-an-honest-guide-for-2026'
+    ],
+    component: {
+      barCopy: 'FREE DECISION SHEET',
+      eyebrow: 'Berlin tickets, counted',
+      title: 'The Berlin Pass Decision Sheet',
+      description: 'Count your paid museums before you buy a pass. I put the four ticket worlds and the break-even lines on one page.',
+      gateCopy: 'Those are the three choices. Want the full fill-in sheet with the break-even lines and a place to count your paid museums? I will email it.',
+      submitLabel: 'Email me the Pass Sheet',
+      consentVersion: 'berlin-pass-decision-sheet-v1-2026-08-16',
+      consentText: 'By requesting this sheet, I agree to receive it by email plus occasional BerlinWalk emails about Berlin tickets and trip planning. I can unsubscribe anytime. Privacy Policy.',
+      successCopy: 'Check your inbox to confirm your email and open The Berlin Pass Decision Sheet.',
+      arrivalLabel: 'When are you planning to arrive?',
+      arrivalOptions: [
+        { value: 'this-month', label: 'This month' },
+        { value: 'next-month', label: 'Next month' },
+        { value: 'in-2-3-months', label: 'In 2-3 months' },
+        { value: 'not-booked-yet', label: 'Not booked yet' }
+      ],
+      teasers: [
+        { number: 1, title: 'Museum Island ticket: €24.', body: 'For one focused day, start here. The ticket starts to make sense at the second paid museum.' },
+        { number: 2, title: 'Museumspass Berlin: €32.', body: 'Three days and 30+ museums, but no transit. Count three paid museums before buying it.' },
+        { number: 3, title: 'WelcomeCard Museum Island: €62.', body: 'Transit plus free island entry for 72 hours. It is not the same product as the €39.50 Classic card.' }
+      ],
+      items: [
+        { number: 1, skip: 'Museum Island ticket', why: 'One focused day has a clear break-even point.', instead: 'Start at €24.' },
+        { number: 2, skip: 'Museumspass Berlin', why: 'The three-day pass has a different museum count.', instead: 'Compare at three paid museums.' },
+        { number: 3, skip: 'WelcomeCard Museum Island', why: 'Transit and island entry are bundled.', instead: 'Check that both benefits fit your stay.' }
+      ],
+      controlTitle: 'Want the places behind the ticket choice?',
+      controlDescription: 'My Berlin Landmarks Guide puts the essential places on one practical route, so the ticket decision has a day behind it.',
+      controlLabel: 'See the Landmarks Guide'
+    }
+  }, {
+    experimentId: 'berlin_arrival_card_v1',
+    assetId: 'berlin-arrival-card',
+    assetVersion: '2026-08-v1',
+    storageKey: 'bwContentUpgrade.berlinArrivalCard.v1',
+    apiBase: CONTENT_UPGRADE_DEFAULT_API_BASE,
+    elementUrl: CONTENT_UPGRADE_DEFAULT_ELEMENT_URL,
+    placement: CONTENT_UPGRADE_PLACEMENT,
+    controlType: 'first-day-rescue',
+    controlUrl: 'https://www.berlinwalk.com/products/berlin-first-day-rescue-plan',
+    acquisitionCohort: 'berlin_arrival_card_pilot',
+    slugs: [
+      'how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way',
+      'berlin-airports',
+      'berlin-ber-airport-departure-guide',
+      'berlin-before-hotel-check-in-what-to-do-with-luggage-and-time',
+      'luggage-storage-in-berlin-2026',
+      'esim-sim-wifi-berlin-2026',
+      'berlin-train-stations',
+      'berlin-ab-or-abc-ticket-which-zone-do-tourists-need',
+      'airport-to-alex',
+      'berlin-deutschlandticket-tourists',
+      'leaving-berlin-by-train'
+    ],
+    component: {
+      barCopy: 'FREE SAVE-TO-PHONE CARD',
+      eyebrow: 'Arrival time, made practical',
+      title: 'The Berlin Arrival Card',
+      description: 'Your first move depends on your landing time. I put BER, ABC, luggage and late-arrival decisions on one card.',
+      gateCopy: 'The landing hour changes the route. Want the full card with the ticket prices, shop fallback and late Hbf luggage move? I will email it.',
+      submitLabel: 'Email me the Arrival Card',
+      consentVersion: 'berlin-arrival-card-v1-2026-08-16',
+      consentText: 'By requesting this card, I agree to receive it by email plus occasional BerlinWalk emails about arriving in Berlin and planning a Berlin trip. I can unsubscribe anytime. Privacy Policy.',
+      successCopy: 'Check your inbox to confirm your email and open The Berlin Arrival Card.',
+      arrivalLabel: 'When are you planning to arrive?',
+      arrivalOptions: [
+        { value: 'this-month', label: 'This month' },
+        { value: 'next-month', label: 'Next month' },
+        { value: 'in-2-3-months', label: 'In 2-3 months' },
+        { value: 'not-booked-yet', label: 'Not booked yet' }
+      ],
+      teasers: [
+        { number: 1, title: 'REWE at BER Terminal 1, U1: 24/7.', body: 'It is the simple Sunday and late-arrival fallback for water, food and one calmer decision.' },
+        { number: 2, title: 'FEX: 04:00-01:00, every 15 minutes.', body: 'Use the live board for the actual departure, and do not assume the S9 night pattern runs every night.' },
+        { number: 3, title: 'After 22:00 at Hbf, change the luggage plan.', body: 'The Gepäckcenter is closed. DB lockers remain the late option.' }
+      ],
+      items: [
+        { number: 1, skip: 'Landing time', why: 'The first move changes with the clock.', instead: 'Use the arrival hour as the route.' },
+        { number: 2, skip: 'ABC decision', why: 'BER is zone C.', instead: 'Save €5.00 or €12.90 in one line.' },
+        { number: 3, skip: 'Late luggage', why: 'Hbf services close at different times.', instead: 'Plan around DB lockers after 22:00.' }
+      ],
+      controlTitle: 'Want your first Berlin day mapped around the clock?',
+      controlDescription: 'My First-Day Rescue Plan turns your landing time, luggage and first neighbourhood into a practical first day.',
+      controlLabel: 'See the First-Day Rescue Plan'
+    }
+  }, {
+    experimentId: 'berlin_day_trip_compare_v1',
+    assetId: 'berlin-day-trip-compare-sheet',
+    assetVersion: '2026-08-v1',
+    storageKey: 'bwContentUpgrade.berlinDayTripCompare.v1',
+    apiBase: CONTENT_UPGRADE_DEFAULT_API_BASE,
+    elementUrl: CONTENT_UPGRADE_DEFAULT_ELEMENT_URL,
+    placement: CONTENT_UPGRADE_PLACEMENT,
+    controlType: 'trip-planner',
+    controlUrl: 'https://www.berlinwalk.com/berlin-trip-planner',
+    acquisitionCohort: 'berlin_day_trip_compare_pilot',
+    slugs: [
+      'best-day-trips-from-berlin',
+      'potsdam-from-berlin-day-trip',
+      'potsdam-from-berlin-train-tickets-and-sanssouci-day-trip-plan',
+      'sachsenhausen-from-berlin',
+      'spreewald-day-trip-from-berlin',
+      'dresden-day-trip-from-berlin',
+      'leipzig-day-trip-from-berlin',
+      'tropical-islands-from-berlin',
+      'baltic-sea-day-trip-from-berlin',
+      'wannsee-berlin',
+      'hamburg-day-trip-from-berlin'
+    ],
+    component: {
+      barCopy: 'FREE COMPARISON SHEET',
+      eyebrow: 'Eight Berlin days',
+      title: 'The Berlin Day Trip Compare Sheet',
+      description: 'Eight day trips, four ticket worlds and the travel-time choice that changes the whole day.',
+      gateCopy: 'Want the full comparison with ticket layers, travel durations and the honest fast-versus-cheap call? I will email it.',
+      submitLabel: 'Email me the Compare Sheet',
+      consentVersion: 'berlin-day-trip-compare-sheet-v1-2026-08-16',
+      consentText: 'By requesting this sheet, I agree to receive it by email plus occasional BerlinWalk emails about Berlin day trips and planning. I can unsubscribe anytime. Privacy Policy.',
+      successCopy: 'Check your inbox to confirm your email and open The Berlin Day Trip Compare Sheet.',
+      arrivalLabel: 'When are you planning to arrive?',
+      arrivalOptions: [
+        { value: 'this-month', label: 'This month' },
+        { value: 'next-month', label: 'Next month' },
+        { value: 'in-2-3-months', label: 'In 2-3 months' },
+        { value: 'not-booked-yet', label: 'Not booked yet' }
+      ],
+      teasers: [
+        { number: 1, title: 'Wannsee is the AB half-day.', body: 'Keep it close when you want a lake, shore and local transport without turning the day into a logistics project.' },
+        { number: 2, title: 'Potsdam and Sachsenhausen are ABC.', body: 'The zone is part of the decision. Save the current ABC line before you board.' },
+        { number: 3, title: 'Dresden and Leipzig are clock decisions.', body: 'The Deutschlandticket route technically works, but the slower journey can use around three hours each way.' }
+      ],
+      items: [
+        { number: 1, skip: 'AB', why: 'Wannsee is a local half-day.', instead: 'Keep the ticket layer simple.' },
+        { number: 2, skip: 'ABC', why: 'Potsdam and Sachsenhausen leave Berlin.', instead: 'Check the zone before boarding.' },
+        { number: 3, skip: 'Long-distance', why: 'Fast trains buy back the day.', instead: 'Compare time, not only fare.' }
+      ],
+      controlTitle: 'Want the whole stay planned around the day trips?',
+      controlDescription: 'The Berlin Trip Planner turns day-trip ambition into a day-by-day plan with transport layers and recovery space.',
+      controlLabel: 'Open the Trip Planner'
+    }
   }];
 
   var injections = 0;
@@ -257,14 +422,14 @@
       '.bw-blog-booking-cta{display:block;margin-top:2px;}',
       '.bw-blog-booking-cta a{align-items:center;background:#FFE600;border-radius:999px;color:#1B5E20!important;display:flex;font-size:14px;font-weight:900;justify-content:center;min-height:44px;padding:0 16px;text-decoration:none!important;width:100%;}',
       '.bw-blog-booking-cta a:hover,.bw-blog-booking-cta a:focus-visible{outline:2px solid #1B5E20;outline-offset:2px;}',
-      '.bw-private-tour-control-card{box-sizing:border-box;display:block;margin:30px 0;max-width:100%;padding:22px 24px;border:1px solid #CFE4C8;border-radius:14px;background:#1B5E20;color:#fff;box-shadow:0 8px 22px rgba(27,94,32,.12);font-family:Montserrat,Arial,sans-serif;}',
-      '.bw-private-tour-control-card *{box-sizing:border-box;}',
-      '.bw-private-tour-control-card .bw-private-tour-kicker{margin:0 0 8px;color:#FFE600;font-size:10px;font-weight:900;letter-spacing:.12em;line-height:1.3;text-transform:uppercase;}',
-      '.bw-private-tour-control-card h2{margin:0 0 8px;color:#fff;font-size:22px;line-height:1.12;}',
-      '.bw-private-tour-control-card p{margin:0 0 16px;color:#fff;font-size:14px;line-height:1.5;}',
-      '.bw-private-tour-control-card a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 16px;border-radius:999px;background:#FFE600;color:#123D18!important;font-size:14px;font-weight:900;text-decoration:none!important;}',
-      '.bw-private-tour-control-card a:hover,.bw-private-tour-control-card a:focus-visible{outline:2px solid #FFE600;outline-offset:3px;}',
-      '@media(max-width:640px){.bw-private-tour-control-card{margin:24px 0;padding:20px;}.bw-private-tour-control-card h2{font-size:20px;}.bw-private-tour-control-card a{width:100%;}}',
+      '.bw-private-tour-control-card,.bw-content-upgrade-control-card{box-sizing:border-box;display:block;margin:30px 0;max-width:100%;padding:22px 24px;border:1px solid #CFE4C8;border-radius:14px;background:#1B5E20;color:#fff;box-shadow:0 8px 22px rgba(27,94,32,.12);font-family:Montserrat,Arial,sans-serif;}',
+      '.bw-private-tour-control-card *,.bw-content-upgrade-control-card *{box-sizing:border-box;}',
+      '.bw-private-tour-control-card .bw-private-tour-kicker,.bw-content-upgrade-control-card .bw-content-upgrade-kicker{margin:0 0 8px;color:#FFE600;font-size:10px;font-weight:900;letter-spacing:.12em;line-height:1.3;text-transform:uppercase;}',
+      '.bw-private-tour-control-card h2,.bw-content-upgrade-control-card h2{margin:0 0 8px;color:#fff;font-size:22px;line-height:1.12;}',
+      '.bw-private-tour-control-card p,.bw-content-upgrade-control-card p{margin:0 0 16px;color:#fff;font-size:14px;line-height:1.5;}',
+      '.bw-private-tour-control-card a,.bw-content-upgrade-control-card a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 16px;border-radius:999px;background:#FFE600;color:#123D18!important;font-size:14px;font-weight:900;text-decoration:none!important;}',
+      '.bw-private-tour-control-card a:hover,.bw-private-tour-control-card a:focus-visible,.bw-content-upgrade-control-card a:hover,.bw-content-upgrade-control-card a:focus-visible{outline:2px solid #FFE600;outline-offset:3px;}',
+      '@media(max-width:640px){.bw-private-tour-control-card,.bw-content-upgrade-control-card{margin:24px 0;padding:20px;}.bw-private-tour-control-card h2,.bw-content-upgrade-control-card h2{font-size:20px;}.bw-private-tour-control-card a,.bw-content-upgrade-control-card a{width:100%;}}',
       '@media(max-width:640px){.bw-blog-booking-card{margin:24px 0;}.bw-blog-booking-strip{font-size:9px;letter-spacing:.1em;}.bw-blog-booking-inner{display:block;padding:12px;}.bw-blog-booking-media{float:left;width:92px;flex:none;margin:0 10px 4px 0;}.bw-blog-booking-media img{width:92px;height:92px;}.bw-blog-booking-body{display:block;padding:0;}.bw-blog-booking-title{font-size:16px!important;margin:0 0 6px!important;}.bw-blog-booking-facts{font-size:11.5px;}.bw-blog-booking-dates{clear:both;margin-top:10px;}.bw-blog-booking-day{margin-top:8px;}.bw-blog-booking-cta{margin-top:8px;}}'
     ].join('');
     document.head.appendChild(style);
@@ -502,16 +667,20 @@
     var wrapper = document.createElement('aside');
     wrapper.setAttribute(MARKER, '1');
     wrapper.setAttribute('data-bw-private-tour-control', '1');
-    wrapper.className = 'bw-private-tour-control-card';
-    wrapper.setAttribute('aria-label', 'BerlinWalk private walks');
     var magnet = contentUpgradeMagnetById(assignment && assignment.assetId);
     var copy = magnet && magnet.component || {};
+    var isPrivateTour = assignment && assignment.controlType === 'private-tour';
+    wrapper.setAttribute('data-bw-content-upgrade-control', '1');
+    wrapper.className = isPrivateTour ? 'bw-private-tour-control-card' : 'bw-content-upgrade-control-card';
+    wrapper.setAttribute('aria-label', isPrivateTour ? 'BerlinWalk private walks' : 'BerlinWalk next step');
     var href = contentUpgradeControlUrl(assignment);
+    var kicker = isPrivateTour ? 'BERLINWALK PRIVATE WALK' : 'BERLINWALK NEXT STEP';
+    var ctaAttribute = isPrivateTour ? 'data-bw-private-tour-cta' : 'data-bw-content-upgrade-control-cta';
     wrapper.innerHTML = [
-      '<p class="bw-private-tour-kicker">BERLINWALK PRIVATE WALK</p>',
+      '<p class="', isPrivateTour ? 'bw-private-tour-kicker' : 'bw-content-upgrade-kicker', '">', kicker, '</p>',
       '<h2>', escapeHtml(copy.controlTitle || 'Want Berlin planned around your group?'), '</h2>',
       '<p>', escapeHtml(copy.controlDescription || 'I can build a private walk around your date and pace.'), '</p>',
-      '<a href="', escapeHtml(href), '" target="_top" data-bw-private-tour-cta>See private walks</a>'
+      '<a href="', escapeHtml(href), '" target="_top" ', ctaAttribute, '>', escapeHtml(copy.controlLabel || (isPrivateTour ? 'See private walks' : 'Open the next step')), '</a>'
     ].join('');
     return wrapper;
   }
@@ -1119,7 +1288,7 @@
       acquisitionCohort: assignment.acquisitionCohort || contentUpgradeAcquisitionCohort(magnet, assignment.sourceSlug),
       placement: assignment.placement || CONTENT_UPGRADE_PLACEMENT,
       controlType: assignment.controlType || '',
-      controlUrl: assignment.controlType === 'private-tour' ? contentUpgradeControlUrl(assignment) : '',
+      controlUrl: contentUpgradeControlUrl(assignment),
       assignmentId: assignmentId,
       utm: historyUtm(),
       device: {
@@ -1195,7 +1364,7 @@
   function bindControlContentUpgradeTracking(card, assignment) {
     if (!assignment.inExperiment) return;
     card.addEventListener('click', function (event) {
-      var target = event.target.closest('[data-bw-private-tour-cta],[data-bw-booking-cta],[data-bw-day-index],[data-bw-slot-index],.bw-blog-booking-more');
+      var target = event.target.closest('[data-bw-private-tour-cta],[data-bw-content-upgrade-control-cta],[data-bw-booking-cta],[data-bw-day-index],[data-bw-slot-index],.bw-blog-booking-more');
       if (target) sendContentUpgradeEvent('bw_lead_asset_control_booking_click', assignment);
     });
   }
@@ -1307,7 +1476,7 @@
 
   function insertControl(anchor, assignment) {
     var isContentControl = Boolean(assignment && assignment.inExperiment && assignment.magnetId && assignment.experimentId);
-    var card = isContentControl && assignment.controlType === 'private-tour'
+    var card = isContentControl
       ? buildPrivateTourControlCard(assignment)
       : buildBookingCard();
     if (isContentControl) {
