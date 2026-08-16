@@ -1,6 +1,6 @@
 # Visual source record — Berlin Weekend with a Friday Night Arrival
 
-Run: `2026-08-16-1208-Europe-Berlin`  
+Run: `2026-08-16-1208-Europe-Berlin`
 Post slug: `berlin-weekend-friday-night-arrival`
 
 All four files were inspected at their final 1600px master size before draft creation. The cover was selected for a clear, uncluttered introduction to BER; the station, tram and World Clock images were selected to move the reader from arrival through the first evening to Saturday's start. No weak, event-specific, misleading, or duplicate image was used.
