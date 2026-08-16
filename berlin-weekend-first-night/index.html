@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Move a Friday evening arrival along a Berlin time rail and protect Saturday before the first night gets too ambitious.">
+  <title>Berlin Weekend First Night | BerlinWalk</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+  <main id="bw-first-night">
+    <section class="shell" aria-labelledby="tool-title">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Friday night · Berlin weekend</p>
+          <h1 id="tool-title">Berlin Weekend First Night</h1>
+          <p>Move your arrival along the evening rail. The result keeps one useful move for now and releases the rest to Saturday.</p>
+        </div>
+        <img class="hero-icon" src="../tools-home/icons/berlin-weekend-first-night.png" alt="A night train above a warm yellow time rail">
+      </header>
+
+      <section class="intro" aria-labelledby="rail-intro-title">
+        <div>
+          <p class="eyebrow eyebrow-dark">A calmer arrival</p>
+          <h2 id="rail-intro-title">Set the time you actually expect to arrive in Berlin</h2>
+        </div>
+        <p>This is not a live timetable. It is a way to decide what the evening can honestly carry after the airport or station has already taken its share.</p>
+      </section>
+
+      <section class="control-deck" aria-label="Friday arrival controls">
+        <div class="source-row">
+          <div>
+            <p class="control-label">Where are you arriving?</p>
+            <p class="source-explain" id="source-explain">BER: leave the terminal with a live connection checked, then make the hotel transfer your only substantial move.</p>
+          </div>
+          <div class="source-switch" role="group" aria-label="Arrival point">
+            <button type="button" class="source is-active" data-source="ber" aria-pressed="true">BER</button>
+            <button type="button" class="source" data-source="hbf" aria-pressed="false">Hauptbahnhof</button>
+            <button type="button" class="source" data-source="station" aria-pressed="false">Another station</button>
+          </div>
+        </div>
+
+        <div class="time-control">
+          <div class="time-heading">
+            <div>
+              <p class="control-label">Slide the arrival marker</p>
+              <p class="time-caption">A little later changes the goal; it should not add pressure.</p>
+            </div>
+            <output id="arrival-time" for="arrival-range" aria-live="polite">21:15</output>
+          </div>
+          <div class="range-wrap">
+            <span class="range-label start">18:00</span>
+            <input id="arrival-range" type="range" min="1080" max="1530" step="15" value="1275" aria-label="Expected Friday arrival time">
+            <span class="range-label end">01:30</span>
+          </div>
+          <div class="tick-row" aria-hidden="true"><span>early evening</span><span>late evening</span><span>midnight</span></div>
+        </div>
+      </section>
+
+      <section class="rail-panel" aria-labelledby="rail-title">
+        <div class="panel-top">
+          <div>
+            <p class="eyebrow eyebrow-dark">Your time rail</p>
+            <h2 id="rail-title">There is still room for a small arrival</h2>
+          </div>
+          <span id="mode-badge" class="mode-badge">Keep it local</span>
+        </div>
+
+        <div class="rail-stage">
+          <div class="rail-background" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+          <div id="arrival-marker" class="arrival-marker" style="left: 43.3%"><span></span><strong>21:15</strong></div>
+          <div class="rail-labels" aria-hidden="true"><span>land</span><span>hotel</span><span>bed</span><span>Saturday</span></div>
+        </div>
+        <p id="rail-line" class="rail-line" aria-live="polite">Your arrival belongs to the part of the evening where a nearby meal or one short outside moment can still be optional, not required.</p>
+      </section>
+
+      <section class="sequence" aria-labelledby="sequence-title">
+        <div class="sequence-heading">
+          <div>
+            <p class="eyebrow eyebrow-dark">Keep / release</p>
+            <h2 id="sequence-title">The sequence that protects Saturday</h2>
+          </div>
+          <p id="sequence-note">The one thing to avoid is turning this into a second cross-city journey.</p>
+        </div>
+        <ol id="steps" class="steps" aria-live="polite"></ol>
+      </section>
+
+      <section class="boundary" aria-label="Practical boundary">
+        <strong id="boundary-title">What I would not add tonight</strong>
+        <p id="boundary-copy">A landmark on the other side of Berlin. If it needs another transfer after the hotel, it belongs to Saturday.</p>
+      </section>
+
+      <footer class="footer">
+        <a class="article-link" href="https://www.berlinwalk.com/post/berlin-weekend-friday-night-arrival">Read the full Friday-night arrival guide <span aria-hidden="true">→</span></a>
+        <a id="official-link" class="official-link" href="https://www.bvg.de/en/tourists/transportation-tariff-zones" target="_blank" rel="noopener">Check a live connection <span aria-hidden="true">↗</span></a>
+      </footer>
+    </section>
+  </main>
+
+  <style>
+    html, body { margin: 0; width: 100%; max-width: 100%; overflow-x: hidden; background: transparent; }
+    #bw-first-night {
+      --ink: #172019;
+      --green: #123D18;
+      --green-2: #1B5E20;
+      --yellow: #FFE600;
+      --night: #071327;
+      --night-2: #101f38;
+      --paper: #F6F5EE;
+      --line: rgba(18, 61, 24, .18);
+      --muted: #506154;
+      width: min(100%, 1080px);
+      margin: 18px auto;
+      padding: 0 12px;
+      color: var(--ink);
+      font-family: Montserrat, Arial, sans-serif;
+      line-height: 1.5;
+      box-sizing: border-box;
+    }
+    #bw-first-night *, #bw-first-night *::before, #bw-first-night *::after { box-sizing: border-box; }
+    #bw-first-night .shell { overflow: hidden; border: 1px solid var(--line); border-radius: 24px; background: #fff; box-shadow: 0 20px 60px rgba(7,19,39,.15); }
+    #bw-first-night .hero { min-height: 300px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(230px, .48fr); gap: 28px; align-items: center; padding: 34px 42px; background: linear-gradient(121deg, #071327 0%, #102541 69%, #17344e 100%); color: #fff; }
+    #bw-first-night .eyebrow { margin: 0; color: var(--yellow); font-size: 10px; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
+    #bw-first-night .eyebrow-dark { color: var(--green-2); }
+    #bw-first-night h1, #bw-first-night h2, #bw-first-night p { margin-top: 0; }
+    #bw-first-night h1 { max-width: 600px; margin: 6px 0 12px; color: #fff; font-size: clamp(34px, 5vw, 58px); line-height: 1.01; letter-spacing: -.05em; }
+    #bw-first-night .hero-copy > p:not(.eyebrow) { max-width: 610px; margin-bottom: 0; color: rgba(255,255,255,.87); font-size: 15px; line-height: 1.65; }
+    #bw-first-night .hero-icon { justify-self: end; width: min(100%, 248px); border: 1px solid rgba(255,255,255,.12); border-radius: 20px; box-shadow: 0 20px 38px rgba(0,0,0,.22); }
+    #bw-first-night .intro { display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); gap: 28px; padding: 28px 42px; border-bottom: 1px solid var(--line); background: var(--paper); }
+    #bw-first-night h2 { margin: 4px 0 0; color: var(--green); font-size: clamp(22px, 3vw, 31px); line-height: 1.12; letter-spacing: -.03em; }
+    #bw-first-night .intro > p { align-self: end; max-width: 580px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.63; }
+    #bw-first-night .control-deck { padding: 28px 42px 30px; background: #fff; }
+    #bw-first-night .source-row { display: flex; align-items: end; justify-content: space-between; gap: 22px; }
+    #bw-first-night .control-label { margin: 0; color: var(--green); font-size: 11px; font-weight: 950; letter-spacing: .08em; text-transform: uppercase; }
+    #bw-first-night .source-explain { max-width: 610px; margin: 6px 0 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+    #bw-first-night .source-switch { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 7px; }
+    #bw-first-night button { font: inherit; }
+    #bw-first-night .source { border: 1px solid rgba(18,61,24,.32); border-radius: 999px; padding: 8px 11px; background: #fff; color: var(--green); font-size: 11px; font-weight: 900; cursor: pointer; transition: background .16s ease, color .16s ease, transform .16s ease; }
+    #bw-first-night .source:hover { transform: translateY(-1px); }
+    #bw-first-night .source.is-active { border-color: var(--green); background: var(--green); color: #fff; box-shadow: inset 0 -3px 0 var(--yellow); }
+    #bw-first-night .time-control { margin-top: 27px; border: 1px solid var(--line); border-radius: 17px; padding: 19px 19px 16px; background: #fbfcf8; }
+    #bw-first-night .time-heading { display: flex; align-items: end; justify-content: space-between; gap: 18px; }
+    #bw-first-night .time-caption { margin: 5px 0 0; color: var(--muted); font-size: 12px; }
+    #bw-first-night output { flex: 0 0 auto; min-width: 87px; border-radius: 11px; padding: 8px 10px; background: var(--yellow); color: var(--green); text-align: center; font-size: 22px; font-weight: 950; line-height: 1; }
+    #bw-first-night .range-wrap { display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; align-items: center; gap: 10px; margin-top: 18px; }
+    #bw-first-night .range-label { color: var(--muted); font-size: 11px; font-weight: 850; }
+    #bw-first-night .range-label.end { text-align: right; }
+    #bw-first-night input[type="range"] { width: 100%; height: 26px; margin: 0; accent-color: var(--green); cursor: ew-resize; }
+    #bw-first-night input[type="range"]::-webkit-slider-runnable-track { height: 7px; border-radius: 999px; background: linear-gradient(90deg, var(--yellow), #b9d894 49%, var(--green)); }
+    #bw-first-night input[type="range"]::-webkit-slider-thumb { width: 22px; height: 22px; margin-top: -7px; border: 3px solid var(--green); border-radius: 50%; background: var(--yellow); -webkit-appearance: none; }
+    #bw-first-night input[type="range"]::-moz-range-track { height: 7px; border-radius: 999px; background: linear-gradient(90deg, var(--yellow), #b9d894 49%, var(--green)); }
+    #bw-first-night input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border: 3px solid var(--green); border-radius: 50%; background: var(--yellow); }
+    #bw-first-night .tick-row { display: flex; justify-content: space-between; padding: 0 52px; color: #728172; font-size: 10px; font-weight: 800; }
+    #bw-first-night .rail-panel { padding: 30px 42px; background: var(--night); color: #fff; }
+    #bw-first-night .panel-top, #bw-first-night .sequence-heading { display: flex; align-items: end; justify-content: space-between; gap: 22px; }
+    #bw-first-night .rail-panel .eyebrow { color: var(--yellow); }
+    #bw-first-night .rail-panel h2 { color: #fff; }
+    #bw-first-night .mode-badge { border: 1px solid rgba(255,255,255,.22); border-radius: 999px; padding: 7px 10px; color: #efffe9; font-size: 11px; font-weight: 900; white-space: nowrap; }
+    #bw-first-night .rail-stage { position: relative; margin-top: 27px; padding: 26px 0 35px; }
+    #bw-first-night .rail-background { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; height: 17px; padding: 3px; border-radius: 999px; background: rgba(255,255,255,.14); }
+    #bw-first-night .rail-background span:nth-child(1) { border-radius: 999px 4px 4px 999px; background: #cbe3ac; }
+    #bw-first-night .rail-background span:nth-child(2) { background: #ffe477; }
+    #bw-first-night .rail-background span:nth-child(3) { background: #f0b756; }
+    #bw-first-night .rail-background span:nth-child(4) { border-radius: 4px 999px 999px 4px; background: #bb6f51; }
+    #bw-first-night .arrival-marker { position: absolute; top: -2px; display: grid; justify-items: center; transform: translateX(-50%); transition: left .22s ease; }
+    #bw-first-night .arrival-marker span { width: 3px; height: 46px; background: var(--yellow); box-shadow: 0 0 0 4px rgba(255,230,0,.16); }
+    #bw-first-night .arrival-marker strong { margin-top: 6px; color: var(--yellow); font-size: 12px; letter-spacing: .04em; }
+    #bw-first-night .rail-labels { display: grid; grid-template-columns: repeat(4,1fr); margin-top: 15px; color: rgba(255,255,255,.62); font-size: 10px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    #bw-first-night .rail-labels span:nth-child(2), #bw-first-night .rail-labels span:nth-child(3) { text-align: center; }
+    #bw-first-night .rail-labels span:last-child { text-align: right; }
+    #bw-first-night .rail-line { max-width: 770px; margin: 0; color: rgba(255,255,255,.86); font-size: 14px; line-height: 1.6; }
+    #bw-first-night .sequence { padding: 32px 42px 36px; background: #fff; }
+    #bw-first-night .sequence-note { max-width: 360px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; text-align: right; }
+    #bw-first-night .steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 23px 0 0; padding: 0; list-style: none; }
+    #bw-first-night .step { position: relative; min-height: 188px; overflow: hidden; border: 1px solid var(--line); border-radius: 15px; padding: 16px 15px 15px; background: #fff; }
+    #bw-first-night .step::before { position: absolute; top: 0; right: 0; left: 0; height: 5px; background: var(--green); content: ''; }
+    #bw-first-night .step.is-release { background: #fbfcf8; }
+    #bw-first-night .step.is-release::before { background: #d1d9cb; }
+    #bw-first-night .step-index { display: inline-flex; min-width: 31px; border-radius: 999px; padding: 4px 7px; background: var(--paper); color: var(--green); font-size: 10px; font-weight: 950; }
+    #bw-first-night .step.is-release .step-index { background: #e5e9e2; color: #566255; }
+    #bw-first-night .step h3 { margin: 14px 0 7px; color: var(--ink); font-size: 17px; line-height: 1.12; letter-spacing: -.018em; }
+    #bw-first-night .step p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    #bw-first-night .step small { display: block; margin-top: 13px; color: var(--green-2); font-size: 10px; font-weight: 900; letter-spacing: .045em; text-transform: uppercase; }
+    #bw-first-night .boundary { display: grid; grid-template-columns: minmax(180px,.43fr) minmax(0,1fr); gap: 18px; padding: 19px 42px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--paper); }
+    #bw-first-night .boundary strong { color: var(--green); font-size: 15px; line-height: 1.24; }
+    #bw-first-night .boundary p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+    #bw-first-night .footer { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 22px 42px; background: var(--green); }
+    #bw-first-night .article-link { color: #fff; font-size: 13px; font-weight: 900; text-decoration: none; }
+    #bw-first-night .article-link:hover { text-decoration: underline; }
+    #bw-first-night .official-link { flex: 0 0 auto; border-radius: 9px; padding: 10px 12px; background: var(--yellow); color: var(--green); font-size: 12px; font-weight: 950; text-decoration: none; }
+    #bw-first-night .official-link:hover { text-decoration: underline; }
+    #bw-first-night .source:focus-visible, #bw-first-night input:focus-visible, #bw-first-night a:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+    @media (max-width: 720px) {
+      #bw-first-night { margin: 8px auto; padding: 0 7px; }
+      #bw-first-night .shell { border-radius: 17px; }
+      #bw-first-night .hero { grid-template-columns: 1fr; gap: 19px; min-height: 0; padding: 27px 22px 24px; }
+      #bw-first-night h1 { font-size: 40px; }
+      #bw-first-night .hero-icon { justify-self: start; width: 132px; border-radius: 14px; }
+      #bw-first-night .intro { grid-template-columns: 1fr; gap: 12px; padding: 22px; }
+      #bw-first-night .control-deck, #bw-first-night .rail-panel, #bw-first-night .sequence { padding: 23px 22px; }
+      #bw-first-night .source-row, #bw-first-night .panel-top, #bw-first-night .sequence-heading, #bw-first-night .footer { align-items: flex-start; flex-direction: column; }
+      #bw-first-night .source-switch { justify-content: flex-start; }
+      #bw-first-night .time-heading { align-items: flex-start; flex-direction: column; }
+      #bw-first-night output { min-width: 94px; }
+      #bw-first-night .tick-row { padding: 0 1px; }
+      #bw-first-night .rail-stage { margin-top: 23px; }
+      #bw-first-night .rail-line { font-size: 13px; }
+      #bw-first-night .mode-badge { white-space: normal; }
+      #bw-first-night .sequence-note { text-align: left; }
+      #bw-first-night .steps { grid-template-columns: 1fr; gap: 9px; }
+      #bw-first-night .step { min-height: 0; padding-bottom: 14px; }
+      #bw-first-night .boundary { grid-template-columns: 1fr; gap: 7px; padding: 17px 22px; }
+      #bw-first-night .footer { padding: 20px 22px; }
+      #bw-first-night .official-link { width: 100%; text-align: center; }
+    }
+  </style>
+
+  <script>
+    (() => {
+      const range = document.querySelector('#arrival-range');
+      const output = document.querySelector('#arrival-time');
+      const marker = document.querySelector('#arrival-marker');
+      const railTitle = document.querySelector('#rail-title');
+      const railLine = document.querySelector('#rail-line');
+      const badge = document.querySelector('#mode-badge');
+      const steps = document.querySelector('#steps');
+      const sequenceNote = document.querySelector('#sequence-note');
+      const boundaryTitle = document.querySelector('#boundary-title');
+      const boundaryCopy = document.querySelector('#boundary-copy');
+      const sourceExplain = document.querySelector('#source-explain');
+      const officialLink = document.querySelector('#official-link');
+      const sourceButtons = [...document.querySelectorAll('.source')];
+      let source = 'ber';
+
+      const sourceCopy = {
+        ber: {
+          explain: 'BER: leave the terminal with a live connection checked, then make the hotel transfer your only substantial move.',
+          first: 'At BER, check the live connection once, use the ABC fare zone for central Berlin, and follow the train or S-Bahn that fits now.',
+          official: 'https://sbahn.berlin/en/plan-a-journey/information-for-berlin-visitors/berlins-berlin-brandenburg-ber-airport/'
+        },
+        hbf: {
+          explain: 'Hauptbahnhof: it is central, but hotel first is still a complete arrival plan.',
+          first: 'At Hauptbahnhof, choose the hotel transfer or walk before you look for a second destination.',
+          official: 'https://www.bvg.de/en/tourists/transportation-tariff-zones'
+        },
+        station: {
+          explain: 'Another station: the honest first move is the one that gets you and your bag to the hotel without a detour.',
+          first: 'From another Berlin station, use the live journey search for the hotel transfer rather than fitting the evening around a map pin.',
+          official: 'https://www.bvg.de/en/tourists/transportation-tariff-zones'
+        }
+      };
+
+      function clock(value) {
+        const hours = Math.floor(value / 60) % 24;
+        const minutes = value % 60;
+        return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+      }
+
+      function plan(value) {
+        const first = sourceCopy[source].first;
+        if (value <= 1200) return {
+          title: 'You can land softly and still see one small piece of Berlin',
+          badge: 'One local option',
+          rail: 'There is room for the hotel transfer, a nearby meal, and one short outside moment if it feels effortless. Nothing needs to become a destination night.',
+          note: 'Protect the hotel transfer first; the optional part stays close enough to walk back from.',
+          boundaryTitle: 'What I would not add tonight',
+          boundary: 'A timed attraction or dinner on the other side of Berlin. The evening is still useful when it ends near your hotel.',
+          steps: [
+            ['Keep now', 'Make the transfer', first, 'One substantial move'],
+            ['Keep now', 'Check in and reset', 'Drop the bag, charge the phone and decide only after you know how you feel.', 'Your real arrival'],
+            ['Optional', 'Choose one nearby moment', 'A simple meal, a short street loop or a quiet drink near the hotel is enough.', 'Only if local'],
+            ['Release', 'Set Saturday’s start', 'Choose one area for tomorrow before sleep; do not build the whole weekend tonight.', 'Give it daylight']
+          ]
+        };
+        if (value <= 1350) return {
+          title: 'There is room for a proper landing, not a city crossing',
+          badge: 'Keep it local',
+          rail: 'The evening still has a useful shape, but the hotel and food need to be the centre of it. A second transfer is more likely to steal Saturday than improve Friday.',
+          note: 'The useful limit is one transfer plus something you can reach without reopening the map.',
+          boundaryTitle: 'What I would not add tonight',
+          boundary: 'A landmark promise or a booking that sends you across town after check-in. Tomorrow can hold the city-shaped decision.',
+          steps: [
+            ['Keep now', 'Finish the transfer', first, 'One substantial move'],
+            ['Keep now', 'Check in before food', 'Let the hotel become the base first, even if the station or airport still feels busy.', 'End the carrying'],
+            ['Keep now', 'Eat close to bed', 'Choose a nearby meal without making the evening depend on one far-away place.', 'No second journey'],
+            ['Release', 'Leave Berlin for morning', 'Pick the first Saturday area, then stop planning and sleep.', 'Saturday opens clean']
+          ]
+        };
+        if (value <= 1440) return {
+          title: 'The evening is now a minimum-viable arrival',
+          badge: 'Hotel, food, sleep',
+          rail: 'At this point the good plan is short on purpose: get to the hotel, solve food only if it is close, and let the city wait for daylight.',
+          note: 'Late does not mean failed. It means the hotel transfer is the whole evening’s main task.',
+          boundaryTitle: 'What I would not add tonight',
+          boundary: 'A late route built around a view, a district or a list. It is better to keep the weekend than to win a few tired minutes.',
+          steps: [
+            ['Keep now', 'Use the live route', first, 'Do not improvise'],
+            ['Keep now', 'Get to the hotel', 'Make the transfer and end the luggage problem before adding anything else.', 'The main win'],
+            ['Optional', 'Solve food simply', 'Only eat out when it is nearby and clearly open; otherwise keep the next step easy.', 'No detour'],
+            ['Release', 'Start Saturday later', 'Give yourself a realistic morning and one clear area, not a catch-up list.', 'Save energy']
+          ]
+        };
+        return {
+          title: 'You have arrived; nothing else needs proving tonight',
+          badge: 'Release the evening',
+          rail: 'After midnight, the strongest first-night plan is the smallest: complete the transfer, settle in and give Saturday an honest start time.',
+          note: 'The marker has moved past sightseeing. The weekend is protected by ending the journey cleanly.',
+          boundaryTitle: 'What I would not add tonight',
+          boundary: 'Anything that turns “getting in” into a city mission. A quiet arrival is not a lesser Berlin weekend; it is how Saturday stays available.',
+          steps: [
+            ['Keep now', 'Get the next connection', first, 'One route, then stop'],
+            ['Keep now', 'Reach the hotel', 'Check in, put the bag down and remove the pressure to find a Berlin moment tonight.', 'Arrival complete'],
+            ['Release', 'Skip the detour', 'Do not cross the city for a view, a bar or a famous address.', 'Nothing to catch up'],
+            ['Release', 'Let Saturday begin later', 'Set one humane starting point and sleep before you decide what Berlin needs to be.', 'Enough is enough']
+          ]
+        };
+      }
+
+      function render() {
+        const value = Number(range.value);
+        const time = clock(value);
+        const result = plan(value);
+        const position = ((value - Number(range.min)) / (Number(range.max) - Number(range.min))) * 100;
+        output.value = time;
+        output.textContent = time;
+        marker.style.left = `${position}%`;
+        marker.querySelector('strong').textContent = time;
+        railTitle.textContent = result.title;
+        railLine.textContent = result.rail;
+        badge.textContent = result.badge;
+        sequenceNote.textContent = result.note;
+        boundaryTitle.textContent = result.boundaryTitle;
+        boundaryCopy.textContent = result.boundary;
+        steps.innerHTML = result.steps.map((step, index) => `<li class="step ${step[0] === 'Release' ? 'is-release' : ''}"><span class="step-index">${String(index + 1).padStart(2, '0')} · ${step[0]}</span><h3>${step[1]}</h3><p>${step[2]}</p><small>${step[3]}</small></li>`).join('');
+      }
+
+      sourceButtons.forEach((button) => button.addEventListener('click', () => {
+        source = button.dataset.source;
+        sourceButtons.forEach((item) => {
+          const active = item === button;
+          item.classList.toggle('is-active', active);
+          item.setAttribute('aria-pressed', String(active));
+        });
+        sourceExplain.textContent = sourceCopy[source].explain;
+        officialLink.href = sourceCopy[source].official;
+        render();
+      }));
+      range.addEventListener('input', render);
+      render();
+    })();
+  </script>
+</body>
+</html>

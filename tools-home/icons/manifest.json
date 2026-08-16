@@ -2679,5 +2679,18 @@
     "png160": "tools-home/icons/berlin-landmark-window-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-landmark-window-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_af1329cec454488a8944a27c0770a673~mv2.png"
+  },
+  {
+    "slug": "berlin-weekend-first-night",
+    "title": "Berlin Weekend First Night",
+    "category": "Discovery",
+    "model": "Built-in ImageGen",
+    "style": "BerlinWalk nocturnal departure-board time-rail icon family 2026-08-16",
+    "sourceSheet": "tools-home/icons/_src/berlin-weekend-first-night/source.png",
+    "promptSource": "tools-home/icons/_src/berlin-weekend-first-night/PROMPT.md",
+    "png512": "tools-home/icons/berlin-weekend-first-night.png",
+    "png160": "tools-home/icons/berlin-weekend-first-night-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-weekend-first-night-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_60e72eaa45044d1691216dd93f167fc5~mv2.png"
   }
 ]
