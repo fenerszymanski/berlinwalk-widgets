@@ -239,8 +239,18 @@ The element renders into light DOM, so:
 When Yusuf is in the Wix automation editor → email step → "Edit email," the browser URL contains the messageId between `/automations/edit/` and `/content/en`. Example: `…/automations/edit/{MESSAGE_ID}/content/en?...&actionId={ACTION_ID}…`. Ask him for the URL when you need a current messageId.
 
 ### Git / deploy workflow
-- Yusuf does `git push` and Wix Editor publishing — agents drafting code stage/commit but do not push unless explicitly asked
+- **Agents may push their own work.** Yusuf approved this on 2026-08-17; the old rule was that only he pushed. Wix Editor publishing is still his.
+- **This repo is shared and its local `main` is frequently diverged** (Codex commits from more than one clone, so the same change can exist as two commits). `git fetch` and check `git status -sb` before anything. If local is both ahead and behind, do **not** push the local branch: that publishes other agents' unreviewed commits and duplicates history.
+- **Publish only your own commits.** The safe pattern is a throwaway worktree off the remote tip, cherry-pick your commit, verify, then push just that:
+  ```
+  git worktree add --detach <tmp> origin/main
+  cd <tmp> && git cherry-pick <sha> && <run tests> && git push origin HEAD:main
+  git worktree remove <tmp>
+  ```
+  This leaves the shared working tree and other agents' in-progress files untouched.
+- **Never a bare `git commit`.** Other agents leave files modified and staged. Always commit explicit paths (`git commit -F - -- <paths>`) and check `git diff --cached --name-only` first.
 - GitHub Pages auto-deploys main branch; cache-bust with `?cb={timestamp}` query when verifying changes
+- Each push cancels the in-flight Pages build, so batch commits rather than pushing repeatedly; a restarted build costs about six minutes
 - Cloudflare-style `_headers` file in repo root allows iframe embedding from `berlinwalk.com`
 
 ### Sensitive data
