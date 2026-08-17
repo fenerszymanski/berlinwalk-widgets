@@ -2718,5 +2718,18 @@
     "png160": "tools-home/icons/berlin-spy-museum-mission-match-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-spy-museum-mission-match-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_1d824d7db48945ecaa065e0d4141b05a~mv2.png"
+  },
+  {
+    "slug": "berlin-pink-pipe-decoder",
+    "title": "Berlin Pink Pipe Decoder",
+    "category": "Discovery",
+    "model": "Built-in ImageGen",
+    "style": "BerlinWalk tactile editorial pink industrial inspection-valve object, 2026-08-17",
+    "sourceSheet": "tools-home/icons/_src/berlin-pink-pipe-decoder/berlin-pink-pipe-decoder-source.png",
+    "promptSource": "tools-home/icons/_src/berlin-pink-pipe-decoder/PROMPT.md",
+    "png512": "tools-home/icons/berlin-pink-pipe-decoder.png",
+    "png160": "tools-home/icons/berlin-pink-pipe-decoder-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-pink-pipe-decoder-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_50d5a04ebd5e4918ad3d898e3178fede~mv2.png"
   }
 ]

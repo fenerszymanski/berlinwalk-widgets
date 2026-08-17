@@ -6427,6 +6427,33 @@
       "image": "https://static.wixstatic.com/media/5a08a3_1d824d7db48945ecaa065e0d4141b05a~mv2.png",
       "iconStatus": "live-wix-media",
       "cmsItemId": "3db961db-1bb0-4ba9-ae4f-a9eb2eeef741"
+    },
+    {
+      "slug": "berlin-pink-pipe-decoder",
+      "title": "Berlin Pink Pipe Decoder",
+      "lead": "Turn one inspection valve to read whether a coloured Berlin pipe is temporary groundwater work, a permanent landmark or not clear enough to call.",
+      "category": "Discovery",
+      "hubCategory": "CultureLandmarks",
+      "type": "Guide",
+      "priority": 26,
+      "tags": [
+        "Berlin pink pipes",
+        "Berlin construction",
+        "Berlin groundwater",
+        "Umlauftank 2",
+        "Berlin street details"
+      ],
+      "aliases": [
+        "what are the pink pipes in Berlin",
+        "Berlin coloured pipes",
+        "Berlin Rosa Röhre",
+        "Berlin groundwater construction"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-pink-pipe-decoder/",
+      "embedHeight": 1560,
+      "image": "https://static.wixstatic.com/media/5a08a3_50d5a04ebd5e4918ad3d898e3178fede~mv2.png",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "f469e394-396c-470b-a7e3-07ba838d882c"
     }
   ],
   "hubCategories": [
