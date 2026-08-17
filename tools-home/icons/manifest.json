@@ -2705,5 +2705,18 @@
     "png160": "tools-home/icons/berlin-pace-passport-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-pace-passport-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_16b81f26645b4e7396d433fdd92c7c6d~mv2.png"
+  },
+  {
+    "slug": "berlin-spy-museum-mission-match",
+    "title": "Berlin Spy Museum Mission Match",
+    "category": "Discovery",
+    "model": "Built-in ImageGen",
+    "style": "BerlinWalk glossy deep-green mission dossier with brass compass-keyhole seal, 2026-08-17",
+    "sourceSheet": "tools-home/icons/_src/berlin-spy-museum-mission-match/berlin-spy-museum-mission-match-source.png",
+    "promptSource": "tools-home/icons/_src/berlin-spy-museum-mission-match/PROMPT.md",
+    "png512": "tools-home/icons/berlin-spy-museum-mission-match.png",
+    "png160": "tools-home/icons/berlin-spy-museum-mission-match-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-spy-museum-mission-match-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_1d824d7db48945ecaa065e0d4141b05a~mv2.png"
   }
 ]

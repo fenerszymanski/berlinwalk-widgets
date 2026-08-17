@@ -6398,6 +6398,35 @@
       "relatedBlogSlug": "berlin-with-parents",
       "iconStatus": "live-wix-media",
       "cmsItemId": "000204de-2fe0-4747-a370-2b853a741909"
+    },
+    {
+      "slug": "berlin-spy-museum-mission-match",
+      "title": "Berlin Spy Museum Mission Match",
+      "lead": "Open three evidence files to decide whether an active spy-museum visit, a real historic site or a lighter outdoor move fits your Potsdamer Platz hours.",
+      "category": "Discovery",
+      "hubCategory": "CultureLandmarks",
+      "type": "Guide",
+      "priority": 25,
+      "tags": [
+        "Berlin Spy Museum",
+        "Potsdamer Platz",
+        "Berlin museums",
+        "Cold War Berlin",
+        "Berlin history",
+        "interactive museum"
+      ],
+      "aliases": [
+        "is Berlin Spy Museum worth it",
+        "German Spy Museum Berlin",
+        "Berlin Spy Museum review",
+        "Potsdamer Platz museum",
+        "interactive museum Berlin"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-spy-museum-mission-match/",
+      "embedHeight": 2700,
+      "image": "https://static.wixstatic.com/media/5a08a3_1d824d7db48945ecaa065e0d4141b05a~mv2.png",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "3db961db-1bb0-4ba9-ae4f-a9eb2eeef741"
     }
   ],
   "hubCategories": [
