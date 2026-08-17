@@ -8,6 +8,10 @@
   var DEFAULT_CONSENT_VERSION = 'berlin-skip-list-v1-2026-08-15';
   var DEFAULT_CONSENT_TEXT = 'By requesting this list, I agree to receive it by email plus occasional BerlinWalk emails about planning a Berlin trip. I can unsubscribe anytime. Privacy Policy.';
   var PRIVACY_URL = 'https://www.berlinwalk.com/privacy-policy';
+  // Small shot of the real card, so the reader can see they are being sent a
+  // designed thing rather than a generic attachment. Too small to read, on
+  // purpose. Hidden automatically if a magnet has no preview yet.
+  var PREVIEW_BASE = 'https://fenerszymanski.github.io/berlinwalk-widgets/content-upgrade-card/previews/';
   var DEFAULT_GATE_COPY = 'That is three of nine. Want all nine as a card you can keep on your phone while you walk? I will email it.';
   var DEFAULT_TEASERS = [
     {
@@ -191,6 +195,7 @@
 
     _render() {
       var copy = this._copy();
+      var previewAssetId = cleanText(this.getAttribute('asset-id'), 120) || DEFAULT_ASSET_ID;
       var teasers = copy.teasers.map(function (item) {
         return '<article class="teaser"><p class="teaser-title"><span class="teaser-number">' + escapeHtml(item.number) + '</span><strong>' + escapeHtml(item.title) + '</strong></p><p class="teaser-body">' + escapeHtml(item.body) + '</p></article>';
       }).join('');
@@ -245,7 +250,9 @@
           .success{align-items:flex-start;display:none;flex-direction:column;gap:5px;justify-content:center;max-width:560px;padding:4px 0 0}
           .success[aria-hidden="false"]{display:flex}
           .success strong{color:#123d18;font-size:17px;line-height:1.2}
+          .preview{border:1px solid #dbe7d6;border-radius:7px;box-shadow:0 3px 10px rgba(18,61,24,.14);float:right;height:auto;margin:2px 0 10px 16px;max-width:38%;width:124px}
           .success p{color:#435346;font-size:12.5px;line-height:1.5;margin:0}
+          .success .spam-note{background:#fffbe0;border-left:3px solid #ffe600;border-radius:0 6px 6px 0;color:#123d18!important;font-weight:700;margin:7px 0 0!important;padding:9px 11px}
           .arrival-step{border-top:1px solid #dbe7d6;margin-top:12px;padding-top:13px;width:min(100%,430px)}
           .arrival-prompt{color:#172319!important;font-size:14px!important;font-weight:800;line-height:1.45!important;margin-bottom:10px!important}
           .arrival-actions{align-items:center;display:flex;gap:10px;margin-top:9px}
@@ -255,13 +262,16 @@
           .arrival-skip:hover,.arrival-skip:active,.arrival-skip:visited{background:#f2f7ef;color:#123d18!important}
           .arrival-status{color:#1b5e20!important;font-size:11.5px!important;font-weight:800;min-height:0}
           .honeypot{height:1px;left:-10000px;overflow:hidden;position:absolute;top:auto;width:1px}
-          @media(max-width:720px){:host{margin:24px 0}.card{padding-left:14px}.bar{padding-bottom:7px}h2{font-size:20px}.teasers{margin-top:15px}.teaser-body{font-size:12.5px}.gate-copy{font-size:13.5px}.arrival-actions{align-items:stretch;flex-direction:column}.arrival-actions button{width:100%}}
+          @media(max-width:720px){:host{margin:24px 0}.card{padding-left:14px}.bar{padding-bottom:7px}h2{font-size:20px}.teasers{margin-top:15px}.teaser-body{font-size:12.5px}.gate-copy{font-size:13.5px}.arrival-actions{align-items:stretch;flex-direction:column}.arrival-actions button{width:100%}.preview{margin-left:12px;width:86px}}
           @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
         </style>
         <section class="card" role="region" aria-labelledby="bw-content-upgrade-title">
           <div class="bar"><span class="bar-icon" aria-hidden="true">✂</span><span class="bar-copy">${escapeHtml(copy.barCopy)}</span></div>
           <div class="body">
             <div class="offer">
+              <img class="preview" alt="" aria-hidden="true" loading="lazy" decoding="async" width="124" height="220"
+                src="${escapeHtml(PREVIEW_BASE + previewAssetId + '.png')}"
+                onerror="this.remove()">
               <p class="eyebrow">${escapeHtml(copy.eyebrow)}</p>
               <h2 id="bw-content-upgrade-title">${escapeHtml(copy.title)}</h2>
               <p class="description">${escapeHtml(copy.description)}</p>
@@ -279,6 +289,7 @@
             <div class="success" aria-hidden="true" role="status" aria-live="polite">
               <strong>Check your inbox.</strong>
               <p>${escapeHtml(copy.successCopy)}</p>
+              <p class="spam-note">Not there in a minute? Look in spam or junk. I send from a new address, so the first email often lands there. Drag it into your inbox and the rest will arrive properly.</p>
               ${arrival}
             </div>
           </div>

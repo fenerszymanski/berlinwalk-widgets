@@ -154,6 +154,11 @@ test('component leads with three full Skip List judgements and keeps arrival tim
   assert.doesNotMatch(elementSource, /berlin-transport-ticket-pocket-card/);
   assert.match(elementSource, /url\.searchParams\.set\('action', 'submit'\)/);
   assert.match(elementSource, /Check your inbox\./);
+  // Deliverability is still warming up, so the success screen must always tell
+  // people where the email actually landed.
+  assert.match(elementSource, /class="spam-note"/);
+  assert.match(elementSource, /Look in spam or junk/);
+  assert.match(elementSource, /\.spam-note\{[^}]*color:#123d18/);
 });
 
 test('component is compact, accessible and has no inner scrolling surface', () => {
