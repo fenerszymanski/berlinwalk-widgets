@@ -22,6 +22,7 @@ function jsonResponse(status, body = {}) {
 
 function createFixture() {
   const runDir = fs.mkdtempSync(path.join(os.tmpdir(), 'berlinwalk-publish-once-'));
+  const widgetRoot = path.join(runDir, 'widgets');
   const identity = {
     runId: '2026-08-14-1205-Europe-Berlin',
     draftId: '11111111-2222-4333-8444-555555555555',
@@ -101,9 +102,12 @@ function createFixture() {
   };
   fs.writeFileSync(path.join(runDir, 'run-manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`);
   fs.writeFileSync(path.join(runDir, 'prepublish-check.json'), `${JSON.stringify(prepublish, null, 2)}\n`);
+  fs.mkdirSync(path.join(widgetRoot, identity.toolSlug), { recursive: true });
+  fs.writeFileSync(path.join(widgetRoot, identity.toolSlug, 'index.html'), '<a href="https://www.bvg.de/en/">Official source</a>\n');
 
   return {
     runDir,
+    widgetRoot,
     identity,
     title,
     unpublishedDraft,
@@ -150,6 +154,7 @@ function runtime(runDir, fetchImpl) {
     pollMs: 0,
     timeoutMs: 1_000,
     sleepImpl: async () => {},
+    widgetRoot: path.join(runDir, 'widgets'),
   };
 }
 
@@ -274,4 +279,3 @@ test('ambiguous transport blocks and a rerun never sends a second POST', async (
   assert.equal(journal.postAttemptCount, 1);
   assert.equal(journal.status, 'UNPROVEN_NO_RETRY');
 });
-

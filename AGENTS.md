@@ -107,8 +107,8 @@ All Velo HTTP functions live in `backend/http-functions.js` on the Wix site (not
   Wix draft and live tool/assets; make one journalled publish call plus GET
   readback; add the exact CMS link, refresh `/blog --limit 300`, and run live
   desktop/mobile QA; then record the exact post/tool Search Console outcomes.
-  Sol normally owns the full run. Luna Max is optional for genuinely heavy,
-  bounded mechanical work and never publishes or self-approves. Parallel runs
+  GPT-5.6 Sol at Max reasoning owns and completes the full run itself, without
+  delegation or agent review rounds. Parallel runs
   must reserve distinct packages; shared writes take the short mutation lease
   only during write/readback. An unresolved identity, quality, deploy, or
   collision failure stays `BLOCKED_UNPUBLISHED`; unfinished post-publish work is
@@ -163,6 +163,11 @@ Every new tool widget must:
 2. **Be added to `tools-hub/data.json`** with: `slug`, `title`, `lead`, legacy `category` (Money / Weather / Maps / Discovery, still used by `/widgets`), BerlinTools `hubCategory`, `type`, `tags`, `aliases`, and the two embed fields **`widgetUrl`** (full GitHub Pages URL ending in `/`) and **`embedHeight`** (recommended iframe height in px). `hubCategory` must be one of the keys in `hubCategories`; the current public directory categories are Trip Plans & First Day, Transport/Tickets/Arrival, Money/Shopping/Costs, Open Today & Essentials, Weather/Seasons/Outdoors, Food/Drink/Nights Out, Events/Sports/Festivals, and History/Culture/Landmarks. Once the category is selected in `data.json`, `/berlin-tools` automatically renders the new tool under that category and makes it filterable; no renderer code change is needed. Optional flags: `href` overrides the card link when the destination is not `/tools/<slug>` (e.g. the paid `/products/berlin-first-day-rescue-plan` page; supported by tools-home and tools-hub renderers), and `embedHidden: true` keeps an entry visible in `/berlin-tools` while excluding it from the `/widgets` third-party embed gallery (`hidden: true` still hides it everywhere).
 3. **Have a standard `image`** for the tool card. BerlinTools icons are no longer optional: use the single glossy 3D app-icon family documented in `tools-home/icons/chatgpt-standard-2026-06-12/README.md` and `../BERLINWALK_BRAND_REFERENCE.md`, extending it with the current AI visual source rule: built-in Codex image generation first, then Yusuf's logged-in ChatGPT account through Chrome, Atlas, or the Codex browser as fallback. Create canonical `tools-home/icons/<slug>.png` and `<slug>-160.png`, keep clean RGBA/transparent or cream outer corners, no text/letters/numbers, no black vignette corners, no flat vectors or one-off AI styles, save the prompt/source output, update both icon manifests, and wire the `image` field before treating the tool as visually complete. A new tool must not be pushed or wired live with a reused/generic placeholder, locally drawn, or manually assembled fallback icon.
 4. **Have a matching BerlinTools CMS item** for the dynamic `/tools/<slug>` page (see public-toilets and luggage-storage as templates). Fields: `slug`, `title`, `h1`, `lead`, `secondary`, `intro`, `seoTitle`, `seoDescription`, `jsonLd` (WebApplication schema), `widgetUrl`, `bodyContent` (Ricos), `relatedTool1*` / `relatedTool2*`, `relatedBlog*`, `link-berlin-tools-title` (= `/tools/<slug>`).
+   The `relatedBlog*` card is the only tool-to-post bridge for that post-specific
+   widget. Never add a link to the same `/post/<slug>` inside the widget iframe:
+   it reloads the post inside Wix's sandbox. Any deliberate widget link to a
+   different BerlinWalk post must use `target="_blank" rel="noopener"` and be
+   verified by a real Wix-iframe click.
 5. **Optionally be added to a related blog post's FAQ + quick-summary** under matching slugs in `faq/data.json`, `quick-summary/data.json`, and the SLUG_MAP + SCHEMAS in `faq/inject.js`.
 
 Before push, run `node tools-hub/validate-data.mjs` from the repo root. It fails if a tool lacks `hubCategory`, uses an unknown category/type, or is missing searchable metadata. The gallery and tools directory pick up the new entry automatically as soon as `tools-hub/data.json` is pushed.

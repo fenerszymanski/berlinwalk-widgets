@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
+import { validateDailyWidgetArticleLinks } from './validate-daily-widget-article-link.mjs';
 
 const DEFAULT_API_BASE = 'https://www.wixapis.com';
 const HASH_ALGORITHM = 'canonical-json-sha256-v1';
@@ -395,6 +396,11 @@ export async function publishDailyBlogOnce(options) {
     const manifest = readJson(manifestPath);
     const prepublish = readJson(prepublishPath);
     config = resolveConfiguration(manifest, prepublish, apiBase);
+    validateDailyWidgetArticleLinks({
+      toolSlug: config.toolSlug,
+      postSlug: config.postSlug,
+      rootDir: options.widgetRoot,
+    });
     const token = options.token ?? process.env.WIX_API_KEY;
     assert(typeof token === 'string' && token.length > 0, 'WIX_API_KEY is not loaded');
     const headers = {
@@ -632,4 +638,3 @@ async function main() {
 
 const invokedPath = process.argv[1] ? path.resolve(process.argv[1]) : null;
 if (invokedPath === fileURLToPath(import.meta.url)) await main();
-
