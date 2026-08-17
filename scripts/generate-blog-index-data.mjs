@@ -214,14 +214,14 @@ const YEAR_REQUIRED_TITLE_SLUGS = new Set([
 ]);
 
 const HERO_SLUGS = {
-  // 15 Aug 2026: Long Night of Museums remains the strongest current, dated
-  // visitor-useful lead; keep the rail mixed with the newest broad practical
-  // guide, route context, transport help, and a proven history evergreen.
-  lead: 'long-night-of-museums-berlin-2026',
+  // 17 Aug 2026: the Friday-night-arrival guide is the strongest new,
+  // broad first-trip planning lead; keep the rail mixed with fresh route,
+  // free/history and practical posts plus proven transport/history evergreen.
+  lead: 'berlin-weekend-friday-night-arrival',
   secondary: [
-    'morning-or-afternoon-walking-tour-berlin',
-    'guided-vs-self-guided-berlin-walking-tour',
-    'best-museums-in-berlin-first-time-visitors',
+    'berlin-landmarks-in-two-hours',
+    'free-berlin-memorials',
+    'what-to-wear-for-a-berlin-walking-tour',
     'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
     'where-was-the-berlin-wall-interactive-map',
     'what-happens-on-a-berlin-free-walking-tour',
@@ -329,6 +329,10 @@ const REQUIRED_SLUGS = [
   'why-is-berlin-founding-year-1237',
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
+  'berlin-weekend-friday-night-arrival',
+  'berlin-landmarks-in-two-hours',
+  'free-berlin-memorials',
+  'what-to-wear-for-a-berlin-walking-tour',
   'best-museums-in-berlin-first-time-visitors',
   'long-night-of-museums-berlin-2026',
   'morning-or-afternoon-walking-tour-berlin',

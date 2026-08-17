@@ -1,42 +1,42 @@
 const BW_BLOG_HOME_DATA_URL = (() => {
   const script = document.currentScript;
   const base = script && script.src ? script.src : window.location.href;
-  return new URL('./data.json?v=20260815-featured-listings', base).href;
+  return new URL('./data.json?v=20260817-featured-listings', base).href;
 })();
 
 const BW_BLOG_HOME_FALLBACK = {
   featured: {
-    title: 'Best Museums in Berlin for First-Time Visitors: Pick Three, Not Thirty',
-    url: 'https://www.berlinwalk.com/post/best-museums-in-berlin-first-time-visitors',
+    title: 'Berlin Landmarks in 2 Hours: Choose an East or West Start',
+    url: 'https://www.berlinwalk.com/post/berlin-landmarks-in-two-hours',
     category: 'Tourist Tips',
     readTime: '4 min read',
-    label: 'New: pick three museums',
-    summary: 'The best museums in Berlin for first-time visitors are three different slots, not thirty pins: Neues Museum, Jewish Museum Berlin and Topography of Terror.',
-    image: 'https://static.wixstatic.com/media/5a08a3_717947ab3eff4a4584fd9a6c71735cc7~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island.jpg',
-    alt: 'Museum Island and Berlin Cathedral beside the Spree'
+    label: 'New: choose one side',
+    summary: 'Use a focused east or west two-hour window for Berlin landmarks instead of forcing Museum Island and Brandenburg Gate into one rushed loop.',
+    image: 'https://static.wixstatic.com/media/5a08a3_f539c515c8cc4a8e9cc4c87bbca3b415~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-brandenburg-gate.jpg',
+    alt: 'The illuminated Brandenburg Gate at blue hour in Berlin'
   },
   miniPosts: [
     {
-      title: 'What Happens on a Berlin Free Walking Tour',
-      url: 'https://www.berlinwalk.com/post/what-happens-on-a-berlin-free-walking-tour',
-      category: 'Tour Route',
-      readTime: '3 min read'
-    },
-    {
-      title: 'Berlin Sights Within Walking Distance of Alexanderplatz',
-      url: 'https://www.berlinwalk.com/post/berlin-sights-near-alexanderplatz-walking-distance',
-      category: 'Tour Route',
-      readTime: '3 min read'
-    },
-    {
-      title: 'Which Berlin Pass Is Worth It? WelcomeCard vs CityTourCard vs Museum Pass',
-      url: 'https://www.berlinwalk.com/post/which-berlin-pass-is-worth-it',
+      title: 'Berlin Weekend with a Friday Night Arrival: A Plan That Starts Small',
+      url: 'https://www.berlinwalk.com/post/berlin-weekend-friday-night-arrival',
       category: 'Tourist Tips',
-      readTime: '7 min read'
+      readTime: '4 min read'
     },
     {
-      title: 'Where to Eat in Berlin by Neighbourhood: A Three-Night Dinner Plan',
-      url: 'https://www.berlinwalk.com/post/where-to-eat-berlin-by-neighbourhood',
+      title: 'Bauhaus in Berlin: Three Places That Make Modernism Easier to Read',
+      url: 'https://www.berlinwalk.com/post/bauhaus-in-berlin-modernism',
+      category: 'Tourist Tips',
+      readTime: '4 min read'
+    },
+    {
+      title: 'Free Berlin Memorials: Four Powerful Places That Are Easy to Visit',
+      url: 'https://www.berlinwalk.com/post/free-berlin-memorials',
+      category: 'Tourist Tips',
+      readTime: '5 min read'
+    },
+    {
+      title: 'What to Wear for a Berlin Walking Tour: Shoes, Layers and Rain',
+      url: 'https://www.berlinwalk.com/post/what-to-wear-for-a-berlin-walking-tour',
       category: 'Tourist Tips',
       readTime: '5 min read'
     }
@@ -61,13 +61,13 @@ const BW_BLOG_HOME_FALLBACK = {
       alt: 'Where Was the Berlin Wall? An Interactive Map of East and West in 1989'
     },
     {
-      title: "How Many Days Do You Need in Berlin? An Honest Local's Answer",
-      url: 'https://www.berlinwalk.com/post/how-many-days-in-berlin',
+      title: 'Long Night of Museums Berlin: How to Build a Route That Works',
+      url: 'https://www.berlinwalk.com/post/long-night-of-museums-berlin-2026',
       category: 'Tourist Tips',
-      readTime: '6 min read',
-      summary: 'Berlin is big on the map but small where it counts. Here is how many days you actually need, what each extra day unlocks, and when a day trip is worth it.',
-      image: 'https://static.wixstatic.com/media/5a08a3_4553ac6f0071439db5ef873edec0e8f6~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-berlin-skyline-how-many-days.jpg',
-      alt: 'Warm high-angle view over central Berlin with the TV Tower rising above Mitte and the River Spree'
+      readTime: '4 min read',
+      summary: 'How to build a realistic Long Night of Museums route in Berlin, with the confirmed 2026 timing and practical queue advice.',
+      image: 'https://static.wixstatic.com/media/5a08a3_8e322674b4ce4bffa822de5812164c06~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-bode-museum-night-cover.jpg',
+      alt: "Bode Museum illuminated at night on Berlin's Museum Island"
     }
   ]
 };
