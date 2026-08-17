@@ -261,6 +261,32 @@
       const copy = document.querySelector('#briefing-copy');
       const rule = document.querySelector('#briefing-rule p');
       const actions = document.querySelector('#briefing-actions');
+      let resizeQueued = false;
+
+      function reportHeight() {
+        resizeQueued = false;
+        const root = document.querySelector('#bw-spy-mission-match');
+        const height = Math.ceil(Math.max(
+          document.body.scrollHeight,
+          document.documentElement.scrollHeight,
+          root ? root.scrollHeight : 0,
+        ));
+        if (height > 0 && window.parent) {
+          window.parent.postMessage({ type: 'bw-resize', height }, '*');
+        }
+      }
+
+      function scheduleHeightReport() {
+        if (resizeQueued) return;
+        resizeQueued = true;
+        window.requestAnimationFrame(() => window.requestAnimationFrame(reportHeight));
+      }
+
+      if ('ResizeObserver' in window) {
+        new ResizeObserver(scheduleHeightReport).observe(document.body);
+      }
+      window.addEventListener('load', scheduleHeightReport, { once: true });
+      window.addEventListener('resize', scheduleHeightReport);
 
       function resultFor({ energy, company, time }) {
         if (energy === 'active' && time === 'room') {
@@ -312,6 +338,7 @@
         progress.textContent = String(marked);
         if (marked < 3) {
           status.textContent = `Waiting for ${3 - marked} file${3 - marked === 1 ? '' : 's'}`;
+          scheduleHeightReport();
           return;
         }
         const result = resultFor(answers);
@@ -324,6 +351,7 @@
         copy.textContent = result.copy;
         rule.textContent = result.rule;
         actions.hidden = false;
+        scheduleHeightReport();
       }
 
       document.querySelectorAll('.signal').forEach((button) => {
