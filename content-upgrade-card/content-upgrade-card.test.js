@@ -25,13 +25,29 @@ const skipSlugs = [
   'berlin-accessibility',
   'berlin-itinerary-for-couples',
   'travelling-alone-in-berlin-day-plan',
-];
-const secondarySlugs = [
-  'is-berlin-safe-for-solo-travelers-an-honest-local-perspective',
+  // 2026-08-18 coverage expansion (CODEX_HANDOFF_MAGNET_COVERAGE_100_20260818.md)
   'how-to-spend-a-sunday-in-berlin',
-  'are-shops-open-on-sunday-in-berlin-what-you-need-to-know',
   'berlin-on-a-monday',
   'berlin-heatwave-day-plan',
+  'is-berlin-safe-for-solo-travelers-an-honest-local-perspective',
+  'berlin-last-day',
+  'what-to-do-in-berlin-when-it-rains-12-indoor-activities-worth-your-time',
+  'berlin-in-the-rain',
+  'berlin-with-parents',
+  'berlin-sights-near-alexanderplatz-walking-distance',
+  'hidden-places-central-berlin',
+  '7-best-photo-spots-in-berlin-most-tourists-walk-right-past',
+  '5-mistakes-tourists-make-at-alexanderplatz',
+  'berlin-tourist-scams',
+  'berlin-hop-on-hop-off-bus-worth-it',
+  'what-to-book-in-advance-in-berlin',
+  'bus-100-berlin-the-4-sightseeing-tour-locals-don-t-want-you-to-know-about',
+  'free-things-to-do-in-berlin-2026',
+];
+// vegan is reserved for the Phase 2 food magnet; shops-open-sunday stays on the
+// booking card. Both must remain outside every content-upgrade experiment.
+const secondarySlugs = [
+  'are-shops-open-on-sunday-in-berlin-what-you-need-to-know',
   'vegan-berlin-guide-2026',
 ];
 const historySlugs = [
@@ -176,7 +192,7 @@ test('component is compact, accessible and has no inner scrolling surface', () =
   assert.match(elementSource, /bw-content-upgrade-error/);
 });
 
-test('orchestrator keeps the 12 Skip List slugs and registers the approved magnet fleet', () => {
+test('orchestrator keeps the 29 Skip List slugs and registers the approved magnet fleet', () => {
   const ctx = makeInjectorContext({ config: { stage: 'pilot' } });
   assert.deepEqual(Array.from(ctx.hooks.slugs).sort(), [...skipSlugs].sort());
   assert.deepEqual(skipSlugs.filter((slug) => historySlugs.includes(slug)), []);
@@ -205,7 +221,23 @@ test('orchestrator keeps the 12 Skip List slugs and registers the approved magne
   assert.match(injectorSource, /if \(contentUpgrade\.inExperiment\) return \{ owner: 'content-upgrade'/);
   assert.match(injectorSource, /data-bw-private-tour-cta/);
   assert.doesNotMatch(injectorSource, /transport_ticket_pocket_card_v1/);
-  assert.doesNotMatch(injectorSource, /berlin-ticket-machines/);
+  // berlin-ticket-machines is deliberately IN the arrival cluster since the
+  // 2026-08-18 expansion; the old Transport Pocket Card exclusion no longer
+  // applies to the slug itself, only to the retired experiment id above.
+});
+
+test('the four magnet slug lists are disjoint and exclude the history experiment slugs', () => {
+  const ctx = makeInjectorContext({ config: { stage: 'pilot' } });
+  const lists = ctx.hooks.magnetConfigs.map((magnet) => magnet.slugs);
+  const seen = new Map();
+  for (const [index, list] of lists.entries()) {
+    for (const slug of list) {
+      assert.equal(seen.has(slug), false, `${slug} appears in magnets ${seen.get(slug)} and ${index}`);
+      seen.set(slug, index);
+      assert.equal(historySlugs.includes(slug), false, `${slug} collides with the history experiment`);
+    }
+  }
+  assert.equal(seen.size, 103);
 });
 
 test('pilot uses a 50/50 Skip List gate and keeps unrelated posts on booking', () => {
@@ -248,7 +280,7 @@ test('forced QA choices are deterministic and history keeps slot priority', () =
   assert.equal(both.hooks.slotDecision().owner, 'history');
 });
 
-test('all 12 primary slugs are eligible only in pilot', () => {
+test('all 29 primary slugs are eligible only in pilot', () => {
   for (const slug of skipSlugs) {
     const ctx = makeInjectorContext({ pathname: `/post/${slug}`, config: { stage: 'pilot' }, random: 0.49 });
     assert.equal(ctx.hooks.assignment().inExperiment, true, slug);
