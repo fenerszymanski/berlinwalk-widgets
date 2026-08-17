@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-08-17T05:39:05.138Z",
+  "updatedAt": "2026-08-17T09:55:34.334Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 293,
+  "totalPosts": 294,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1617,6 +1617,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin Spy Museum: Is It Worth Your Time on a First Visit?",
+      "slug": "berlin-spy-museum-worth-it",
+      "path": "/post/berlin-spy-museum-worth-it",
+      "url": "https://www.berlinwalk.com/post/berlin-spy-museum-worth-it",
+      "excerpt": "Is the Berlin Spy Museum worth your time? Decide whether its hands-on experience at Potsdamer Platz fits your first Berlin visit, or whether a real historic site is the better move.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "3 min read",
+      "publishedDate": "2026-08-17T09:53:54.636Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_6264fdbbee424906a8b517c2baac902a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-spy-museum-exterior.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_6264fdbbee424906a8b517c2baac902a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-spy-museum-exterior.jpg",
+      "alt": "The entrance to the German Spy Museum at Leipziger Platz in Berlin",
+      "relatedToolSlug": ""
+    },
+    {
       "title": "Berlin With Parents: A Calm Historic-Centre Day Without the Rushed Checklist",
       "slug": "berlin-with-parents",
       "path": "/post/berlin-with-parents",
@@ -1802,23 +1819,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_1e9adaf4d31548a2b0b67f47501c3c40~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-world-clock-cover.jpg",
       "alt": "Alexanderplatz World Clock under a blue sky, the BerlinWalk tour meeting point",
       "relatedToolSlug": "berlin-tour-time-window"
-    },
-    {
-      "title": "Best Museums in Berlin for First-Time Visitors: Pick Three, Not Thirty",
-      "slug": "best-museums-in-berlin-first-time-visitors",
-      "path": "/post/best-museums-in-berlin-first-time-visitors",
-      "url": "https://www.berlinwalk.com/post/best-museums-in-berlin-first-time-visitors",
-      "excerpt": "The best museums in Berlin for first-time visitors are three different slots, not thirty pins: Neues Museum, Jewish Museum Berlin and Topography of Terror.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "4 min read",
-      "publishedDate": "2026-08-03T06:50:50.175Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_717947ab3eff4a4584fd9a6c71735cc7~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_717947ab3eff4a4584fd9a6c71735cc7~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island.jpg",
-      "alt": "Museum Island and Berlin Cathedral beside the Spree",
-      "relatedToolSlug": "berlin-first-day-planner"
     }
   ]
 }
