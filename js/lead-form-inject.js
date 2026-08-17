@@ -57,7 +57,7 @@
   var CONTENT_UPGRADE_ELEMENT_TAG = 'bw-content-upgrade-card';
   var CONTENT_UPGRADE_MARKER = 'data-bw-content-upgrade';
   var CONTENT_UPGRADE_DEFAULT_API_BASE = window.BW_DOWNLOAD_LEAD_API_BASE || 'https://app.berlinwalk.com/api/download-lead';
-  var CONTENT_UPGRADE_DEFAULT_ELEMENT_URL = window.BW_CONTENT_UPGRADE_ELEMENT_URL || 'https://fenerszymanski.github.io/berlinwalk-widgets/content-upgrade-card/content-upgrade-card-element.js?v=20260816-magnet1';
+  var CONTENT_UPGRADE_DEFAULT_ELEMENT_URL = window.BW_CONTENT_UPGRADE_ELEMENT_URL || 'https://fenerszymanski.github.io/berlinwalk-widgets/content-upgrade-card/content-upgrade-card-element.js?v=20260817-magnet1';
   var CONTENT_UPGRADE_PLACEMENT = 'blog_inline_booking_slot';
   var CONTENT_UPGRADE_READY_TIMEOUT_MS = 7000;
   var CONTENT_UPGRADE_MAGNETS = [{
@@ -120,10 +120,10 @@
       ]
     }
   }, {
-    experimentId: 'berlin_pass_sheet_v1',
+    experimentId: 'berlin_pass_calculator_v1',
     assetId: 'berlin-pass-decision-sheet',
     assetVersion: '2026-08-v1',
-    storageKey: 'bwContentUpgrade.berlinPassSheet.v1',
+    storageKey: 'bwContentUpgrade.berlinPassCalc.v1',
     apiBase: CONTENT_UPGRADE_DEFAULT_API_BASE,
     elementUrl: CONTENT_UPGRADE_DEFAULT_ELEMENT_URL,
     placement: CONTENT_UPGRADE_PLACEMENT,
@@ -149,7 +149,51 @@
       title: 'The Berlin Pass Decision Sheet',
       description: 'Count your paid museums before you buy a pass. I put the four ticket worlds and the break-even lines on one page.',
       gateCopy: 'Those are three of the four ticket worlds. Want the full fill-in sheet with the break-even lines and a place to count your paid museums? I will email it.',
-      submitLabel: 'Email me the Pass Sheet',
+      submitLabel: 'Email me the sheet with my numbers',
+      gateMode: 'calculator',
+      calcConfig: {
+        questions: [
+          {
+            id: 'days',
+            prompt: 'How many days are you in Berlin?',
+            options: [
+              { value: '1', label: '1' },
+              { value: '2-3', label: '2-3' },
+              { value: '4+', label: '4+' }
+            ]
+          },
+          {
+            id: 'museums',
+            prompt: 'Be honest: how many paid museums will you actually enter?',
+            options: [
+              { value: '0-1', label: '0-1' },
+              { value: '2', label: '2' },
+              { value: '3+', label: '3+' }
+            ]
+          },
+          {
+            id: 'transit',
+            prompt: 'Do you want transit included?',
+            options: [
+              { value: 'Yes', label: 'Yes' },
+              { value: 'No', label: 'No' }
+            ]
+          }
+        ],
+        base: [
+          { museums: '0-1', line: 'No pass. Pay single tickets; a lot of the best things are free anyway.' },
+          { museums: '2', line: 'If both are on Museum Island, the €24 island day ticket wins (two singles are €28). If they are not, stay on single tickets.' },
+          { museums: '3+', days: '1', line: 'One day, three museums: stay on Museum Island and take the €24 island day ticket. The €32 Museumspass only wins if you leave the island.' },
+          { museums: '3+', days: ['2-3', '4+'], line: 'The €32 Museumspass wins. You break even inside the third museum and it covers 30+ museums over 3 consecutive days.' }
+        ],
+        transitAddenda: [
+          { line: 'For transit, a €11.20 AB day ticket per day is the honest baseline. The €39.50 WelcomeCard 72h is €5.90 more than three day tickets; it only pays off if you use the discounts.' },
+          { museums: '3+', days: '2-3', line: 'If you want transit plus free Museum Island entry in one card, the €62 WelcomeCard Museum Island is €3.60 cheaper than Museumspass plus day tickets, but it covers only the island.' },
+          { museums: '3+', days: '4+', line: 'Museumspass runs 3 consecutive days; pick which 3.' }
+        ],
+        stamp: 'Prices checked 16 August 2026',
+        placeholder: 'Answer all three questions.'
+      },
       consentVersion: 'berlin-pass-decision-sheet-v1-2026-08-16',
       consentText: 'By requesting this sheet, I agree to receive it by email plus occasional BerlinWalk emails about Berlin tickets and trip planning. I can unsubscribe anytime. Privacy Policy.',
       successCopy: 'Check your inbox to confirm your email and open The Berlin Pass Decision Sheet.',
@@ -1590,6 +1634,9 @@
     element.addEventListener('bw-content-upgrade-submit', function () {
       sendContentUpgradeEvent('bw_lead_asset_submit', assignment);
     });
+    element.addEventListener('bw-content-upgrade-calc-done', function () {
+      sendContentUpgradeEvent('bw_lead_asset_calc_done', assignment);
+    }, { once: true });
   }
 
   function monitorContentUpgradeElement(element, requestedPath, assignment) {
@@ -1655,6 +1702,8 @@
         element.setAttribute('arrival-options', JSON.stringify(copy.arrivalOptions));
         element.setAttribute('teaser-items', JSON.stringify(copy.teasers));
         element.setAttribute('content-items', JSON.stringify(copy.items));
+        if (copy.gateMode) element.setAttribute('gate-mode', copy.gateMode);
+        if (copy.calcConfig) element.setAttribute('calc-config', JSON.stringify(copy.calcConfig));
       }
       bindContentUpgradeElementTracking(element, assignment);
       anchor.parentNode.insertBefore(element, anchor.nextSibling);

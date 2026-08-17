@@ -114,6 +114,36 @@
     }
   }
 
+  function parseJsonObjectAttribute(element, name) {
+    try {
+      var raw = element.getAttribute(name);
+      if (!raw) return null;
+      var value = JSON.parse(raw);
+      return value && typeof value === 'object' && !Array.isArray(value) ? value : null;
+    } catch (err) {
+      return null;
+    }
+  }
+
+  function calcRuleMatches(rule, answers) {
+    return ['days', 'museums', 'transit'].every(function (key) {
+      if (!(key in rule)) return true;
+      var want = rule[key];
+      return Array.isArray(want) ? want.indexOf(answers[key]) !== -1 : want === answers[key];
+    });
+  }
+
+  function calcVerdictLines(config, answers) {
+    var base = (config.base || []).filter(function (rule) { return calcRuleMatches(rule, answers); })[0];
+    var lines = base ? [cleanText(base.line, 400)] : [];
+    if (answers.transit === 'Yes') {
+      (config.transitAddenda || []).forEach(function (rule) {
+        if (calcRuleMatches(rule, answers)) lines.push(cleanText(rule.line, 400));
+      });
+    }
+    return lines;
+  }
+
   function dispatch(element, name, detail) {
     element.dispatchEvent(new CustomEvent(name, {
       bubbles: true,
@@ -127,6 +157,7 @@
       super();
       this._startedAt = new Date().toISOString();
       this._formStarted = false;
+      this._calcDone = false;
       this._submitted = false;
       this._arrivalSaved = false;
       this._arrivalStartedAt = '';
@@ -193,12 +224,48 @@
       };
     }
 
+    _calc() {
+      var mode = cleanText(this.getAttribute('gate-mode'), 40);
+      var config = parseJsonObjectAttribute(this, 'calc-config');
+      var valid = mode === 'calculator' && config
+        && Array.isArray(config.questions) && config.questions.length === 3
+        && config.questions.every(function (q) {
+          return q && q.id && q.prompt && Array.isArray(q.options) && q.options.length > 0;
+        })
+        && Array.isArray(config.base) && config.base.length > 0;
+      return { active: !!valid, config: valid ? config : null };
+    }
+
+    _renderCalc(config) {
+      var placeholder = cleanText(config.placeholder, 160) || 'Answer all three questions.';
+      var stamp = cleanText(config.stamp, 120);
+      var questions = config.questions.map(function (question, qIndex) {
+        var options = question.options.map(function (option) {
+          return '<button type="button" class="calc-opt" data-value="' + escapeHtml(option.value) + '" aria-pressed="false">' + escapeHtml(option.label) + '</button>';
+        }).join('');
+        var promptId = 'bw-calc-prompt-' + qIndex;
+        return '<div class="calc-q" data-q="' + escapeHtml(question.id) + '">'
+          + '<p class="calc-prompt" id="' + promptId + '">' + escapeHtml(question.prompt) + '</p>'
+          + '<div class="calc-options" role="group" aria-labelledby="' + promptId + '">' + options + '</div>'
+          + '</div>';
+      }).join('');
+      return '<div class="calc" aria-label="Mini pass calculator">'
+        + questions
+        + '<div class="calc-verdict" role="status" aria-live="polite"><p class="calc-verdict-text">' + escapeHtml(placeholder) + '</p></div>'
+        + (stamp ? '<p class="calc-stamp">' + escapeHtml(stamp) + '</p>' : '')
+        + '</div>';
+    }
+
     _render() {
       var copy = this._copy();
+      var calc = this._calc();
       var previewAssetId = cleanText(this.getAttribute('asset-id'), 120) || DEFAULT_ASSET_ID;
       var teasers = copy.teasers.map(function (item) {
         return '<article class="teaser"><p class="teaser-title"><span class="teaser-number">' + escapeHtml(item.number) + '</span><strong>' + escapeHtml(item.title) + '</strong></p><p class="teaser-body">' + escapeHtml(item.body) + '</p></article>';
       }).join('');
+      var offerExtra = calc.active
+        ? this._renderCalc(calc.config)
+        : '<div class="teasers" aria-label="Three Skip List examples">' + teasers + '</div><p class="gate-copy">' + escapeHtml(copy.gateCopy) + '</p>';
       var arrival = copy.arrivalOptions.length
         ? '<div class="arrival-step">'
           + '<p class="arrival-prompt">On its way. While I have you, when are you coming?</p>'
@@ -234,6 +301,17 @@
           .teaser-number{color:#1b5e20;display:inline-block;font-weight:900;margin-right:7px;min-width:16px}
           .teaser-body{color:#435346;font-size:13px;line-height:1.55;margin:4px 0 0}
           .gate-copy{color:#172319;font-size:14px;font-weight:800;line-height:1.5;margin:17px 0 14px;max-width:680px}
+          .calc{margin:16px 0 2px;max-width:520px}
+          .calc-q{margin:0 0 13px}
+          .calc-prompt{color:#172319;font-size:13.5px;font-weight:800;line-height:1.4;margin:0 0 7px}
+          .calc-options{display:flex;flex-wrap:wrap;gap:7px}
+          .calc-opt{appearance:none;background:#fff;border:1.5px solid #9fbb98;border-radius:999px;color:#172319;cursor:pointer;display:inline-flex;font:700 13px/1 Montserrat,Arial,sans-serif;min-height:38px;padding:0 15px;width:auto}
+          .calc-opt:hover{border-color:#1b5e20}
+          .calc-opt:focus-visible{outline:3px solid rgba(255,230,0,.9);outline-offset:1px}
+          .calc-opt[aria-pressed="true"]{background:#1b5e20;border-color:#1b5e20;color:#fff!important}
+          .calc-verdict{background:#fffbe0;border-left:3px solid #ffe600;border-radius:0 8px 8px 0;margin:14px 0 8px;padding:11px 13px}
+          .calc-verdict-text{color:#123d18!important;font-size:13.5px;font-weight:700;line-height:1.5;margin:0}
+          .calc-stamp{color:#748076;font-size:10.5px;font-weight:600;margin:0 0 2px}
           form{display:flex;flex-direction:column;gap:9px;max-width:430px;min-width:0}
           label{color:#243127;font-size:12px;font-weight:900;line-height:1.3}
           input[type="email"],select{appearance:none;background:#fff;border:1.5px solid #9fbb98;border-radius:9px;color:#172319;font:600 16px/1.2 Montserrat,Arial,sans-serif;min-height:46px;min-width:0;padding:0 12px;width:100%}
@@ -262,7 +340,7 @@
           .arrival-skip:hover,.arrival-skip:active,.arrival-skip:visited{background:#f2f7ef;color:#123d18!important}
           .arrival-status{color:#1b5e20!important;font-size:11.5px!important;font-weight:800;min-height:0}
           .honeypot{height:1px;left:-10000px;overflow:hidden;position:absolute;top:auto;width:1px}
-          @media(max-width:720px){:host{margin:24px 0}.card{padding-left:14px}.bar{padding-bottom:7px}h2{font-size:20px}.teasers{margin-top:15px}.teaser-body{font-size:12.5px}.gate-copy{font-size:13.5px}.arrival-actions{align-items:stretch;flex-direction:column}.arrival-actions button{width:100%}.preview{margin-left:12px;width:86px}}
+          @media(max-width:720px){:host{margin:24px 0}.card{padding-left:14px}.bar{padding-bottom:7px}h2{font-size:20px}.teasers{margin-top:15px}.teaser-body{font-size:12.5px}.gate-copy{font-size:13.5px}.calc-opt{font-size:12.5px;min-height:36px;padding:0 12px}.arrival-actions{align-items:stretch;flex-direction:column}.arrival-actions button{width:100%}.preview{margin-left:12px;width:86px}}
           @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
         </style>
         <section class="card" role="region" aria-labelledby="bw-content-upgrade-title">
@@ -275,8 +353,7 @@
               <p class="eyebrow">${escapeHtml(copy.eyebrow)}</p>
               <h2 id="bw-content-upgrade-title">${escapeHtml(copy.title)}</h2>
               <p class="description">${escapeHtml(copy.description)}</p>
-              <div class="teasers" aria-label="Three Skip List examples">${teasers}</div>
-              <p class="gate-copy">${escapeHtml(copy.gateCopy)}</p>
+              ${offerExtra}
             </div>
             <form novalidate>
               <label for="bw-content-upgrade-email">Where should I send it?</label>
@@ -296,9 +373,45 @@
         </section>`;
     }
 
+    _bindCalc(config) {
+      var self = this;
+      var root = this._root.querySelector('.calc');
+      if (!root) return;
+      var verdictText = root.querySelector('.calc-verdict-text');
+      var placeholder = verdictText.textContent;
+      var questionIds = config.questions.map(function (question) { return question.id; });
+      var answers = {};
+      function recompute() {
+        var complete = questionIds.every(function (id) { return answers[id]; });
+        if (!complete) {
+          verdictText.textContent = placeholder;
+          return;
+        }
+        verdictText.textContent = calcVerdictLines(config, answers).join(' ');
+        if (!self._calcDone) {
+          self._calcDone = true;
+          dispatch(self, 'bw-content-upgrade-calc-done');
+        }
+      }
+      root.querySelectorAll('.calc-q').forEach(function (block) {
+        var qId = block.getAttribute('data-q');
+        block.querySelectorAll('.calc-opt').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            block.querySelectorAll('.calc-opt').forEach(function (b) {
+              b.setAttribute('aria-pressed', String(b === btn));
+            });
+            answers[qId] = btn.getAttribute('data-value');
+            recompute();
+          });
+        });
+      });
+    }
+
     _bind() {
       var self = this;
       var copy = this._copy();
+      var calc = this._calc();
+      if (calc.active) this._bindCalc(calc.config);
       var form = this._root.querySelector('form');
       var email = this._root.querySelector('input[name="email"]');
       var arrival = this._root.querySelector('select[name="arrivalTiming"]');

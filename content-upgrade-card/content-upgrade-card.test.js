@@ -190,7 +190,7 @@ test('orchestrator keeps the 12 Skip List slugs and registers the approved magne
     assetVersion: '2026-08-v1',
     storageKey: 'bwContentUpgrade.berlinSkipList.v1',
     apiBase: 'https://app.berlinwalk.com/api/download-lead',
-    elementUrl: 'https://fenerszymanski.github.io/berlinwalk-widgets/content-upgrade-card/content-upgrade-card-element.js?v=20260816-magnet1',
+    elementUrl: 'https://fenerszymanski.github.io/berlinwalk-widgets/content-upgrade-card/content-upgrade-card-element.js?v=20260817-magnet1',
     placement: 'blog_inline_booking_slot',
     controlType: 'private-tour',
     controlUrl: 'https://www.berlinwalk.com/private-tour',
@@ -332,4 +332,105 @@ test('orchestrator sends the lead-asset contract without PII and records the pri
   assert.equal(payload.analyticsConsent, true);
   assert.match(payload.assignmentId, /^cua_[a-f0-9]{32}$/);
   assert.equal(JSON.stringify(payload).includes('@'), false);
+});
+
+test('component supports an optional config-driven calculator gate mode, teaser mode unchanged by default', () => {
+  // Off by default: an element with no gate-mode attribute still renders the
+  // original static teaser + gate-copy path used by the other three magnets.
+  assert.match(elementSource, /class="teasers" aria-label="Three Skip List examples"/);
+  assert.match(elementSource, /class="gate-copy"/);
+  assert.match(elementSource, /copy\.gateCopy/);
+
+  // On path: gated behind gate-mode="calculator" + a validated calc-config object.
+  assert.match(elementSource, /getAttribute\('gate-mode'\)/);
+  assert.match(elementSource, /parseJsonObjectAttribute\(this, 'calc-config'\)/);
+  assert.match(elementSource, /_calc\(\)\s*\{/);
+  assert.match(elementSource, /mode === 'calculator'/);
+  assert.match(elementSource, /class="calc-q"/);
+  assert.match(elementSource, /class="calc-opt"/);
+  assert.match(elementSource, /aria-pressed/);
+  assert.match(elementSource, /class="calc-verdict"/);
+  assert.match(elementSource, /class="calc-stamp"/);
+  assert.match(elementSource, /bw-content-upgrade-calc-done/);
+
+  // Shadow DOM only, yellow-surface verdict box uses the required dark-green text.
+  assert.match(elementSource, /this\._root = this\.attachShadow/);
+  assert.match(elementSource, /\.calc-verdict\{background:#fffbe0/);
+  assert.match(elementSource, /\.calc-verdict-text\{color:#123d18!important/);
+});
+
+test('pass magnet is the only one wired to the calculator gate; registry ids untouched', () => {
+  assert.match(injectorSource, /experimentId: 'berlin_pass_calculator_v1'/);
+  assert.match(injectorSource, /storageKey: 'bwContentUpgrade\.berlinPassCalc\.v1'/);
+  assert.match(injectorSource, /assetId: 'berlin-pass-decision-sheet'/);
+  assert.match(injectorSource, /submitLabel: 'Email me the sheet with my numbers'/);
+  assert.equal(injectorSource.includes('berlin_pass_sheet_v1'), false);
+  assert.equal(injectorSource.includes('bwContentUpgrade.berlinPassSheet.v1'), false);
+
+  // Isolation: exactly one magnet (pass) carries gate-mode/calc-config; the
+  // other three (skip-list, arrival-card, day-trip) are untouched.
+  assert.equal((injectorSource.match(/gateMode:/g) || []).length, 1);
+  assert.equal((injectorSource.match(/calcConfig:/g) || []).length, 1);
+  assert.match(injectorSource, /if \(copy\.gateMode\) element\.setAttribute\('gate-mode', copy\.gateMode\);/);
+  assert.match(injectorSource, /if \(copy\.calcConfig\) element\.setAttribute\('calc-config', JSON\.stringify\(copy\.calcConfig\)\);/);
+
+  const ctx = makeInjectorContext({ config: { stage: 'pilot' } });
+  const passMagnet = ctx.hooks.magnetConfigs[1];
+  assert.equal(passMagnet.assetId, 'berlin-pass-decision-sheet');
+  assert.equal(passMagnet.experimentId, 'berlin_pass_calculator_v1');
+  assert.equal(passMagnet.storageKey, 'bwContentUpgrade.berlinPassCalc.v1');
+  assert.equal(passMagnet.elementUrl.includes('?v=20260817-magnet1'), true);
+});
+
+test('pass calculator verdict table matches the locked prices and gating exactly', () => {
+  const start = injectorSource.indexOf('calcConfig: {');
+  const end = injectorSource.indexOf("placeholder: 'Answer all three questions.'", start);
+  assert.notEqual(start, -1);
+  assert.notEqual(end, -1);
+  const block = injectorSource.slice(start, end);
+
+  // Three locked questions, exact prompts and option values.
+  assert.equal(block.includes('How many days are you in Berlin?'), true);
+  assert.equal(block.includes('Be honest: how many paid museums will you actually enter?'), true);
+  assert.equal(block.includes('Do you want transit included?'), true);
+  [
+    "value: '1', label: '1'",
+    "value: '2-3', label: '2-3'",
+    "value: '4+', label: '4+'",
+    "value: '0-1', label: '0-1'",
+    "value: '3+', label: '3+'",
+    "value: 'Yes', label: 'Yes'",
+    "value: 'No', label: 'No'",
+  ].forEach((needle) => assert.equal(block.includes(needle), true, needle));
+
+  // Museum axis (evaluated first) — every locked base line, verbatim.
+  assert.equal(block.includes('No pass. Pay single tickets; a lot of the best things are free anyway.'), true);
+  assert.equal(block.includes('the €24 island day ticket wins (two singles are €28)'), true);
+  assert.equal(block.includes('stay on Museum Island and take the €24 island day ticket. The €32 Museumspass only wins if you leave the island.'), true);
+  assert.equal(block.includes("museums: '3+', days: ['2-3', '4+'], line: 'The €32 Museumspass wins. You break even inside the third museum and it covers 30+ museums over 3 consecutive days.'"), true);
+
+  // Transit addendum — only appended when transit = Yes; €32 stays inside the M=3+/D>=2 line.
+  assert.equal(block.includes('For transit, a €11.20 AB day ticket per day is the honest baseline. The €39.50 WelcomeCard 72h is €5.90 more than three day tickets; it only pays off if you use the discounts.'), true);
+  assert.equal(block.includes("museums: '3+', days: '2-3', line: 'If you want transit plus free Museum Island entry in one card, the €62 WelcomeCard Museum Island is €3.60 cheaper than Museumspass plus day tickets, but it covers only the island.'"), true);
+  assert.equal(block.includes("museums: '3+', days: '4+', line: 'Museumspass runs 3 consecutive days; pick which 3.'"), true);
+  assert.equal(block.includes('Prices checked 16 August 2026'), true);
+
+  // No invented numbers: every euro figure in the block is one of the locked prices.
+  const lockedAmounts = ['€24', '€28', '€32', '€11.20', '€39.50', '€5.90', '€62', '€3.60'];
+  const foundAmounts = block.match(/€[0-9]+(?:\.[0-9]+)?/g) || [];
+  foundAmounts.forEach((amount) => assert.equal(lockedAmounts.includes(amount), true, 'unexpected amount: ' + amount));
+});
+
+test('calc-done reuses the existing gate_view/form_start analytics mechanism, no new API fields', () => {
+  assert.equal(injectorSource.includes('bw_lead_asset_calc_done'), true);
+  assert.match(injectorSource, /bw-content-upgrade-calc-done['"]?,\s*function \(\) \{\s*sendContentUpgradeEvent\('bw_lead_asset_calc_done', assignment\);/);
+  // download-lead submission payload is untouched: no calc-specific field added.
+  const payloadStart = elementSource.indexOf('_submissionPayload(form, email, copy, overrides) {');
+  const payloadEnd = elementSource.indexOf('\n    }', payloadStart);
+  assert.notEqual(payloadStart, -1);
+  const payloadBody = elementSource.slice(payloadStart, payloadEnd);
+  assert.equal(payloadBody.includes('calcAnswers'), false);
+  assert.equal(payloadBody.includes('verdict'), false);
+  assert.equal(payloadBody.includes('days'), false);
+  assert.equal(payloadBody.includes('museums'), false);
 });
