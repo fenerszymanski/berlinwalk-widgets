@@ -311,6 +311,8 @@
       }
       window.addEventListener('load', scheduleHeightReport, { once: true });
       window.addEventListener('resize', scheduleHeightReport);
+      if (document.fonts?.ready) document.fonts.ready.then(scheduleHeightReport);
+      [250, 1200, 3000].forEach((delay) => window.setTimeout(scheduleHeightReport, delay));
 
       function resultFor({ energy, company, time }) {
         if (energy === 'active' && time === 'room') {
