@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-08-17T05:06:11.782Z",
+  "updatedAt": "2026-08-17T05:39:05.138Z",
   "source": "Wix Blog API",
-  "totalPosts": 292,
+  "totalPosts": 293,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Berlin With Parents: A Calm Historic-Centre Day Without the Rushed Checklist",
+      "slug": "berlin-with-parents",
+      "path": "/post/berlin-with-parents",
+      "url": "https://www.berlinwalk.com/post/berlin-with-parents",
+      "excerpt": "Planning Berlin with parents? Build a calmer historic-centre day around Alexanderplatz, Museum Island and one useful pause instead of a rushed checklist.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "4 min read",
+      "publishedDate": "2026-08-17T05:34:41.761Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_93b5df72f94a42e8b55a27c72dbd4197~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-alexanderplatz-world-clock-wide.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_93b5df72f94a42e8b55a27c72dbd4197~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-alexanderplatz-world-clock-wide.jpg",
+      "alt": "The World Time Clock at Alexanderplatz with the Fernsehturm behind it",
+      "relatedToolSlug": ""
+    },
     {
       "title": "Berlin Weekend with a Friday Night Arrival: A Plan That Starts Small",
       "slug": "berlin-weekend-friday-night-arrival",
