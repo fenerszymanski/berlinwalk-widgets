@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "slug": "berlin-with-parents",
+  "key": "berlin-with-parents",
+  "config": {
+    "title": "Berlin With Parents - FAQ",
+    "subtitle": "Straight answers for planning a calmer historic-centre day with parents or older relatives.",
+    "items": [
+      { "q": "What is a good Berlin plan when I am travelling with my parents?", "a": "Start with the pace your group actually wants, not an assumption about age. Choose one clear beginning such as the World Clock at Alexanderplatz or Nikolaiviertel, one main reason to continue and one point at which it is fine to stop. A smaller historic-centre day usually feels better than forcing every major landmark into the same afternoon." },
+      { "q": "Is Alexanderplatz a good meeting point for parents in Berlin?", "a": "It can be a useful beginning because the World Clock is a visible, specific meeting point. From there, keep the first move simple: walk toward Nikolaiviertel or the Spree instead of treating the square as the start of a long landmark checklist. Make a pause before deciding whether Museum Island is worth adding." },
+      { "q": "Are Museum Island museums open on Monday?", "a": "Several Staatliche Museen zu Berlin venues normally close on Mondays, but the exact museum and day still need an official check before travel. On a Monday, use Museum Island for the outdoor setting, Lustgarten and the river, then save a particular museum interior for another day if the current information does not support it." },
+      { "q": "Should we visit Berliner Dom and a Museum Island museum on the same day?", "a": "Only when your group genuinely wants both and the current entry details work. Berliner Dom says a detailed visit takes about 1.5 hours, while a museum deserves its own reason and time. For most visitors travelling with parents, choose one interior and let the other stay optional rather than turning both into a queue-and-clock exercise." },
+      { "q": "Is a private Berlin tour suitable for a family travelling with parents?", "a": "It can be useful when your group wants the historic centre explained around its own interests, pauses and one priority instead of a fixed checklist. Ask about the group and what you would rather skip first; that makes it possible to decide whether a private format is a sensible fit without assuming a route, availability or accessibility arrangement." }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What is a good Berlin plan when I am travelling with my parents?", "acceptedAnswer": { "@type": "Answer", "text": "Start with the pace your group actually wants, not an assumption about age. Choose one clear beginning such as the World Clock at Alexanderplatz or Nikolaiviertel, one main reason to continue and one point at which it is fine to stop. A smaller historic-centre day usually feels better than forcing every major landmark into the same afternoon." } },
+      { "@type": "Question", "name": "Is Alexanderplatz a good meeting point for parents in Berlin?", "acceptedAnswer": { "@type": "Answer", "text": "It can be a useful beginning because the World Clock is a visible, specific meeting point. From there, keep the first move simple: walk toward Nikolaiviertel or the Spree instead of treating the square as the start of a long landmark checklist. Make a pause before deciding whether Museum Island is worth adding." } },
+      { "@type": "Question", "name": "Are Museum Island museums open on Monday?", "acceptedAnswer": { "@type": "Answer", "text": "Several Staatliche Museen zu Berlin venues normally close on Mondays, but the exact museum and day still need an official check before travel. On a Monday, use Museum Island for the outdoor setting, Lustgarten and the river, then save a particular museum interior for another day if the current information does not support it." } },
+      { "@type": "Question", "name": "Should we visit Berliner Dom and a Museum Island museum on the same day?", "acceptedAnswer": { "@type": "Answer", "text": "Only when your group genuinely wants both and the current entry details work. Berliner Dom says a detailed visit takes about 1.5 hours, while a museum deserves its own reason and time. For most visitors travelling with parents, choose one interior and let the other stay optional rather than turning both into a queue-and-clock exercise." } },
+      { "@type": "Question", "name": "Is a private Berlin tour suitable for a family travelling with parents?", "acceptedAnswer": { "@type": "Answer", "text": "It can be useful when your group wants the historic centre explained around its own interests, pauses and one priority instead of a fixed checklist. Ask about the group and what you would rather skip first; that makes it possible to decide whether a private format is a sensible fit without assuming a route, availability or accessibility arrangement." } }
+    ]
+  }
+}
