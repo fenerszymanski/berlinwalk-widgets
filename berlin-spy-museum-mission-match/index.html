@@ -284,16 +284,17 @@
       const copy = document.querySelector('#briefing-copy');
       const rule = document.querySelector('#briefing-rule p');
       const actions = document.querySelector('#briefing-actions');
+      const resizeRoot = document.querySelector('#bw-spy-mission-match');
       let resizeQueued = false;
 
       function reportHeight() {
         resizeQueued = false;
-        const root = document.querySelector('#bw-spy-mission-match');
-        const height = Math.ceil(Math.max(
-          document.body.scrollHeight,
-          document.documentElement.scrollHeight,
-          root ? root.scrollHeight : 0,
-        ));
+        const box = resizeRoot ? resizeRoot.getBoundingClientRect() : null;
+        const styles = resizeRoot ? window.getComputedStyle(resizeRoot) : null;
+        const margin = styles
+          ? (Number.parseFloat(styles.marginTop) || 0) + (Number.parseFloat(styles.marginBottom) || 0)
+          : 0;
+        const height = Math.ceil((box ? box.height : document.body.scrollHeight) + margin);
         if (height > 0 && window.parent) {
           window.parent.postMessage({ type: 'bw-resize', height }, '*');
         }
@@ -305,8 +306,8 @@
         window.requestAnimationFrame(() => window.requestAnimationFrame(reportHeight));
       }
 
-      if ('ResizeObserver' in window) {
-        new ResizeObserver(scheduleHeightReport).observe(document.body);
+      if (resizeRoot && 'ResizeObserver' in window) {
+        new ResizeObserver(scheduleHeightReport).observe(resizeRoot);
       }
       window.addEventListener('load', scheduleHeightReport, { once: true });
       window.addEventListener('resize', scheduleHeightReport);
