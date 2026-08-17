@@ -269,7 +269,7 @@
           <div class="bar"><span class="bar-icon" aria-hidden="true">✂</span><span class="bar-copy">${escapeHtml(copy.barCopy)}</span></div>
           <div class="body">
             <div class="offer">
-              <img class="preview" alt="" aria-hidden="true" loading="lazy" decoding="async" width="124" height="220"
+              <img class="preview" alt="" aria-hidden="true" decoding="async" width="124" height="220"
                 src="${escapeHtml(PREVIEW_BASE + previewAssetId + '.png')}"
                 onerror="this.remove()">
               <p class="eyebrow">${escapeHtml(copy.eyebrow)}</p>
