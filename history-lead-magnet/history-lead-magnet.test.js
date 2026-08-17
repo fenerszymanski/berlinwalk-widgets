@@ -24,8 +24,21 @@ const exactNewsletterCopy = 'Also send me occasional Berlin history, new article
 
 function controlFunctionHash() {
   const start = injectorSource.indexOf('  function buildBookingCard() {');
-  const end = injectorSource.indexOf('\n\n  /* The history lead experiment', start);
   assert.notEqual(start, -1);
+  const bodyStart = injectorSource.indexOf('{', start);
+  let depth = 0;
+  let end = -1;
+  for (let i = bodyStart; i < injectorSource.length; i++) {
+    const ch = injectorSource[i];
+    if (ch === '{') depth++;
+    else if (ch === '}') {
+      depth--;
+      if (depth === 0) {
+        end = i + 1;
+        break;
+      }
+    }
+  }
   assert.notEqual(end, -1);
   return crypto.createHash('sha256').update(injectorSource.slice(start, end)).digest('hex');
 }
