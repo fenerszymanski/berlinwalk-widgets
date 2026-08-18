@@ -753,6 +753,7 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if ((post.slug || '') === 'cash-only-restaurants-in-berlin') return 'berlin-meal-wallet';
   if ((post.slug || '') === 'berlin-pink-pipes') return 'berlin-pink-pipe-decoder';
   if ((post.slug || '') === 'berlin-with-parents') return 'berlin-pace-passport';
   if ((post.slug || '') === 'berlin-spy-museum-worth-it') return 'berlin-spy-museum-mission-match';

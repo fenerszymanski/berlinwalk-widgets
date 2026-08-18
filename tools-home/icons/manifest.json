@@ -2731,5 +2731,18 @@
     "png160": "tools-home/icons/berlin-pink-pipe-decoder-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-pink-pipe-decoder-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_50d5a04ebd5e4918ad3d898e3178fede~mv2.png"
+  },
+  {
+    "slug": "berlin-meal-wallet",
+    "title": "Berlin Meal Wallet",
+    "category": "Guide",
+    "model": "Built-in ImageGen",
+    "style": "BerlinWalk glossy deep-green meal wallet with a yellow halo and dining fork, 2026-08-18",
+    "sourceSheet": "tools-home/icons/_src/berlin-meal-wallet/berlin-meal-wallet-source.png",
+    "promptSource": "tools-home/icons/_src/berlin-meal-wallet/PROMPT.md",
+    "png512": "tools-home/icons/berlin-meal-wallet.png",
+    "png160": "tools-home/icons/berlin-meal-wallet-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-meal-wallet-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_58a529372de5458590323991e4b5a6bc~mv2.png"
   }
 ]
