@@ -700,6 +700,68 @@
       controlDescription: 'On a private walk I guide in clear English, at your pace, around the places that matter to your date.',
       controlLabel: 'See private walks'
     }
+  }, {
+    experimentId: 'berlin_month_planner_v1',
+    assetId: 'berlin-month-planner-card',
+    assetVersion: '2026-08-v1',
+    storageKey: 'bwContentUpgrade.berlinMonthPlanner.v1',
+    apiBase: CONTENT_UPGRADE_DEFAULT_API_BASE,
+    elementUrl: CONTENT_UPGRADE_DEFAULT_ELEMENT_URL,
+    placement: CONTENT_UPGRADE_PLACEMENT,
+    controlType: 'trip-planner',
+    controlUrl: 'https://www.berlinwalk.com/berlin-trip-planner',
+    acquisitionCohort: 'berlin_month_planner_pilot',
+    slugs: [
+      'berlin-in-january-2027',
+      'berlin-in-february-2027',
+      'berlin-in-march-2027',
+      'berlin-in-april-2027',
+      'berlin-in-may-2027',
+      'visiting-berlin-in-june',
+      'berlin-in-july-2026',
+      'berlin-in-august-2026',
+      'berlin-in-september-2026',
+      'berlin-in-october-2026',
+      'berlin-in-november-2026',
+      'berlin-in-december-2026',
+      'what-s-the-best-time-to-visit-berlin-a-month-by-month-guide',
+      'open-air-cinema-berlin',
+      'average-temperature-in-berlin-by-month-a-complete-climate-guide'
+    ],
+    component: {
+      barCopy: 'FREE SAVE-TO-PHONE CARD',
+      eyebrow: 'Choose the month, protect the day',
+      title: 'Berlin Month Planner Card',
+      description: 'I put the month, the weather clue and one useful planning move on a card. Averages are context, not a forecast.',
+      gateCopy: 'Those are three month moves. Want the full card with all 12 months, daylight decisions and current-calendar checks? I will email it.',
+      submitLabel: 'Email me the Month Planner Card',
+      consentVersion: 'berlin-month-planner-card-v1-2026-08-18',
+      consentText: 'By requesting this card, I agree to receive it by email plus occasional BerlinWalk emails about Berlin seasons, weather and planning a Berlin trip. I can unsubscribe anytime. Privacy Policy.',
+      successCopy: 'Check your inbox to confirm your email and open Berlin Month Planner Card.',
+      arrivalLabel: 'When are you planning to arrive?',
+      arrivalOptions: [
+        { value: 'this-month', label: 'This month' },
+        { value: 'next-month', label: 'Next month' },
+        { value: 'in-2-3-months', label: 'In 2-3 months' },
+        { value: 'not-booked-yet', label: 'Not booked yet' }
+      ],
+      teasers: [
+        { number: 1, title: 'January to February: indoor anchor first.', body: 'Short daylight and cold weather make one timed indoor plan more useful than a packed outdoor checklist.' },
+        { number: 2, title: 'July to August: start before the heat.', body: 'Put the longest outdoor block in the morning, keep a storm-flexible window and check the current programme for seasonal cinema.' },
+        { number: 3, title: 'December: snow is a bonus.', body: 'Check holiday opening hours and your current New Year plan. Berlin winter atmosphere does not require a snow promise.' }
+      ],
+      items: [
+        { number: 1, skip: 'Treating averages as a forecast', why: 'Monthly numbers describe a pattern, not your travel week.', instead: 'Pack for the conditions you may actually get.' },
+        { number: 2, skip: 'Booking every outdoor plan', why: 'Rain, heat and storms can move the useful order of the day.', instead: 'Pair outdoor plans with an indoor backup.' },
+        { number: 3, skip: 'Using last year’s event dates', why: 'Berlinale, Easter, Festival of Lights and holiday hours move.', instead: 'Check the official calendar for your year.' },
+        { number: 4, skip: 'Planning late outdoor blocks in November', why: 'Daylight closes the useful window earlier.', instead: 'Use late morning or early afternoon first.' },
+        { number: 5, skip: 'Assuming open-air cinema is guaranteed', why: 'Programme, language, weather policy and venue availability change.', instead: 'Check the current programme before you go.' },
+        { number: 6, skip: 'Turning December into a fixed route', why: 'Closures and market schedules can change around the holidays.', instead: 'Check 24 to 26 December hours and keep snow optional.' }
+      ],
+      controlTitle: 'Want the whole Berlin stay planned around your dates?',
+      controlDescription: 'The Berlin Trip Planner turns your dates, weather risk and energy into a practical plan with room to change it.',
+      controlLabel: 'Open the Trip Planner'
+    }
   }];
 
   var injections = 0;

@@ -75,6 +75,23 @@ const unwrittenSlugs = [
   'where-to-find-free-drinking-water-in-berlin',
   'public-toilets-in-berlin',
 ];
+const monthPlannerSlugs = [
+  'berlin-in-january-2027',
+  'berlin-in-february-2027',
+  'berlin-in-march-2027',
+  'berlin-in-april-2027',
+  'berlin-in-may-2027',
+  'visiting-berlin-in-june',
+  'berlin-in-july-2026',
+  'berlin-in-august-2026',
+  'berlin-in-september-2026',
+  'berlin-in-october-2026',
+  'berlin-in-november-2026',
+  'berlin-in-december-2026',
+  'what-s-the-best-time-to-visit-berlin-a-month-by-month-guide',
+  'open-air-cinema-berlin',
+  'average-temperature-in-berlin-by-month-a-complete-climate-guide',
+];
 const historySlugs = [
   'why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point',
   'why-berlin-s-streets-are-so-wide-it-wasn-t-always-the-plan',
@@ -224,7 +241,7 @@ test('orchestrator keeps the Skip List slugs and registers the approved magnet f
   assert.deepEqual(skipSlugs.filter((slug) => secondarySlugs.includes(slug)), []);
   assert.equal(ctx.hooks.safetySlug, '');
   assert.equal(ctx.hooks.placement, 'blog_inline_booking_slot');
-  assert.equal(ctx.hooks.magnetConfigs.length, 8);
+  assert.equal(ctx.hooks.magnetConfigs.length, 9);
   assert.deepEqual(JSON.parse(JSON.stringify(ctx.hooks.magnetConfigs[0])), {
     experimentId: 'berlin_skip_list_v1',
     assetId: 'berlin-skip-list',
@@ -244,7 +261,8 @@ test('orchestrator keeps the Skip List slugs and registers the approved magnet f
     'berlin-german-cheat-card',
     'berlin-food-decision-card',
     'berlin-neighborhood-matcher',
-    'berlin-unwritten-rules-card'
+    'berlin-unwritten-rules-card',
+    'berlin-month-planner-card'
   ]));
   const food = ctx.hooks.magnetConfigs[5];
   assert.equal(food.experimentId, 'berlin_food_decision_card_v1');
@@ -276,6 +294,16 @@ test('orchestrator keeps the Skip List slugs and registers the approved magnet f
   assert.match(injectorSource, /€5 is the standard red-light pedestrian fine/);
   assert.match(injectorSource, /€20 to €40/);
   assert.match(injectorSource, /DB and S-Bahn areas are not BVG U-Bahn areas/);
+  const monthPlanner = ctx.hooks.magnetConfigs[8];
+  assert.equal(monthPlanner.assetId, 'berlin-month-planner-card');
+  assert.equal(monthPlanner.experimentId, 'berlin_month_planner_v1');
+  assert.equal(monthPlanner.storageKey, 'bwContentUpgrade.berlinMonthPlanner.v1');
+  assert.equal(monthPlanner.controlType, 'trip-planner');
+  assert.equal(monthPlanner.controlUrl, 'https://www.berlinwalk.com/berlin-trip-planner');
+  assert.deepEqual(JSON.parse(JSON.stringify(monthPlanner.slugs)), monthPlannerSlugs);
+  assert.match(injectorSource, /Berlin Month Planner Card/);
+  assert.match(injectorSource, /Averages are context, not a forecast/);
+  assert.match(injectorSource, /Check the official calendar for your year/);
   assert.match(injectorSource, /if \(history\.inExperiment\) return \{ owner: 'history'/);
   assert.match(injectorSource, /if \(contentUpgrade\.inExperiment\) return \{ owner: 'content-upgrade'/);
   assert.match(injectorSource, /data-bw-private-tour-cta/);
@@ -296,7 +324,7 @@ test('the magnet slug lists are disjoint and exclude the history experiment slug
       assert.equal(historySlugs.includes(slug), false, `${slug} collides with the history experiment`);
     }
   }
-  assert.equal(seen.size, 158);
+  assert.equal(seen.size, 173);
 });
 
 test('pilot uses a 50/50 Skip List gate and keeps unrelated posts on booking', () => {
