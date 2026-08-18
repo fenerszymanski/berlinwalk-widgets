@@ -517,6 +517,126 @@
       controlDescription: 'My private walk gives you a clear route, real places and plain explanations without making you hunt through a city map alone.',
       controlLabel: 'See private walks'
     }
+  }, {
+    experimentId: 'berlin_neighborhood_matcher_v1',
+    assetId: 'berlin-neighborhood-matcher',
+    assetVersion: '2026-08-v1',
+    storageKey: 'bwContentUpgrade.berlinNeighborhoodMatcher.v1',
+    apiBase: CONTENT_UPGRADE_DEFAULT_API_BASE,
+    elementUrl: CONTENT_UPGRADE_DEFAULT_ELEMENT_URL,
+    placement: CONTENT_UPGRADE_PLACEMENT,
+    controlType: 'private-tour',
+    controlUrl: 'https://www.berlinwalk.com/private-tour',
+    acquisitionCohort: 'berlin_neighborhood_matcher_pilot',
+    slugs: [
+      'kreuzberg-berlin',
+      'neukolln-berlin',
+      'friedrichshain-berlin',
+      'prenzlauer-berg-berlin',
+      'schoneberg-berlin',
+      'kurfurstendamm-berlin',
+      'nikolaiviertel-rebuilt-old-town',
+      'berlin-courtyards-hoefe',
+      'karl-marx-allee-berlin',
+      'where-to-stay-in-berlin-best-neighborhoods-for-every-type-of-tourist',
+      'berlin-street-art'
+    ],
+    component: {
+      barCopy: 'FREE SAVE-TO-PHONE MATCHER',
+      eyebrow: 'A place for your actual day',
+      title: 'Which Berlin Neighborhood Matcher',
+      description: 'I match your vibe, time and trip purpose to one real Berlin area, then give you the first move.',
+      gateMode: 'calculator',
+      calcConfig: {
+        ariaLabel: 'Berlin neighborhood matcher',
+        questions: [
+          {
+            id: 'vibe',
+            prompt: 'What kind of Berlin day do you want?',
+            options: [
+              { value: 'food-late', label: 'Food and late' },
+              { value: 'quiet-local', label: 'Quiet and local' },
+              { value: 'markets-cafes', label: 'Markets and cafés' },
+              { value: 'wall-nightlife', label: 'Wall and nightlife' },
+              { value: 'classic-west', label: 'Classic West' },
+              { value: 'history-architecture', label: 'History and architecture' },
+              { value: 'street-art', label: 'Street art' }
+            ]
+          },
+          {
+            id: 'time',
+            prompt: 'How much time do you have?',
+            options: [
+              { value: 'short-block', label: 'One short block' },
+              { value: 'afternoon', label: 'One afternoon' },
+              { value: 'two-days', label: 'Two or more days' }
+            ]
+          },
+          {
+            id: 'purpose',
+            prompt: 'What is the trip mainly for?',
+            options: [
+              { value: 'sleep-base', label: 'Sleep and base' },
+              { value: 'explore', label: 'Explore for a day' },
+              { value: 'low-cost', label: 'Low-cost and free' },
+              { value: 'food-led', label: 'Food-led' },
+              { value: 'museum-history', label: 'Museum and history' }
+            ]
+          }
+        ],
+        base: [
+          { vibe: 'food-late', time: ['short-block', 'afternoon'], purpose: 'food-led', line: 'Try East Kreuzberg around SO36. Start at Kottbusser Tor and move along Oranienstraße.' },
+          { vibe: 'quiet-local', time: 'afternoon', purpose: 'explore', line: 'Choose Prenzlauer Berg. Start at Eberswalder Straße and walk toward Kollwitzplatz.' },
+          { vibe: 'quiet-local', time: 'short-block', purpose: 'low-cost', line: 'Choose West Kreuzberg around Bergmannkiez. Start near Bergmannstraße and Marheineke Markthalle.' },
+          { vibe: 'quiet-local', time: 'afternoon', purpose: 'museum-history', line: 'Choose Körnerpark and Rixdorf in Neukölln. Start from Hermannstraße or S+U Neukölln and keep the route local.' },
+          { vibe: 'markets-cafes', time: 'afternoon', purpose: 'food-led', line: 'Choose North Neukölln around Reuterkiez. On Tuesday or Friday, go down to Maybachufer and check the market before you leave.' },
+          { vibe: 'markets-cafes', time: 'short-block', purpose: 'explore', line: 'Choose the Höfe around Hackescher Markt. Start at S Hackescher Markt, then walk to Hackesche Höfe and Haus Schwarzenberg.' },
+          { vibe: 'wall-nightlife', time: 'afternoon', purpose: 'explore', line: 'Choose Friedrichshain. Start at East Side Gallery, then check the current situation at Boxhagener Platz or RAW.' },
+          { vibe: 'classic-west', time: ['short-block', 'afternoon'], purpose: 'explore', line: 'Choose Breitscheidplatz and a short Kurfürstendamm. Start at Wittenbergplatz and finish at Breitscheidplatz or Savignyplatz.' },
+          { vibe: 'history-architecture', time: 'short-block', purpose: 'low-cost', line: 'Choose Karl-Marx-Allee. Take U5 to Strausberger Platz and walk east to Frankfurter Tor.' },
+          { vibe: 'history-architecture', time: 'short-block', purpose: 'museum-history', line: 'Choose Nikolaiviertel for central context. Enter from Rotes Rathaus and remember that most of the quarter is a GDR-era 1980s rebuild.' },
+          { vibe: 'street-art', time: 'short-block', purpose: 'explore', line: 'Choose Haus Schwarzenberg. Walk five minutes from Hackescher Markt to Rosenthaler Straße 39.' },
+          { vibe: 'street-art', time: 'afternoon', purpose: 'explore', line: 'Choose East Side Gallery plus RAW. Start at Warschauer Straße and check the current RAW situation.' },
+          { vibe: 'street-art', time: 'afternoon', purpose: 'low-cost', line: 'Choose Urban Nation in Schöneberg. Go to Bülowstraße and check the current opening schedule.' },
+          { vibe: 'street-art', time: 'two-days', purpose: 'explore', line: 'Choose Teufelsberg as a dedicated outing. Plan for a dry weekday morning and check entry and walking time.' },
+          { vibe: 'food-late', purpose: 'sleep-base', line: 'Base yourself near East Kreuzberg or Sonnenallee if food and a late return matter. Check the exact street before booking.' },
+          { vibe: 'quiet-local', purpose: 'sleep-base', line: 'Base yourself in Prenzlauer Berg for cafés and a calmer start. Check the exact block, not only the district name.' },
+          { vibe: 'markets-cafes', purpose: 'sleep-base', line: 'Base yourself near North Neukölln or Prenzlauer Berg, depending on whether Maybachufer or cafés matter more.' },
+          { vibe: 'wall-nightlife', purpose: 'sleep-base', line: 'Base yourself in Friedrichshain if East Side Gallery and a late night belong in the same day.' },
+          { vibe: 'classic-west', purpose: 'sleep-base', line: 'Base yourself around City West if shopping, a short route and western Berlin are the point.' },
+          { vibe: 'history-architecture', purpose: 'sleep-base', line: 'Base yourself centrally only if the extra cost buys you the short historic route you actually want.' },
+          { vibe: 'street-art', purpose: 'sleep-base', line: 'Base yourself in Friedrichshain for East-side street art, or choose Schöneberg for an indoor backup.' },
+          { line: 'Pick one real area, check the current opening schedule, and make the first move from the named station or street.' }
+        ],
+        stamp: 'Decision table checked 18 August 2026',
+        placeholder: 'Answer all three questions.'
+      },
+      gateCopy: 'That is one starting point. Want the full neighborhood card with the place, reason and first move? I will email it.',
+      submitLabel: 'Email me the Neighborhood Matcher',
+      consentVersion: 'berlin-neighborhood-matcher-v1-2026-08-18',
+      consentText: 'By requesting this matcher, I agree to receive it by email plus occasional BerlinWalk emails about neighborhoods and planning a Berlin trip. I can unsubscribe anytime. Privacy Policy.',
+      successCopy: 'Check your inbox to confirm your email and open Which Berlin Neighborhood Matcher.',
+      arrivalLabel: 'When are you planning to arrive?',
+      arrivalOptions: [
+        { value: 'this-month', label: 'This month' },
+        { value: 'next-month', label: 'Next month' },
+        { value: 'in-2-3-months', label: 'In 2-3 months' },
+        { value: 'not-booked-yet', label: 'Not booked yet' }
+      ],
+      teasers: [
+        { number: 1, title: 'There is no best neighborhood.', body: 'The useful answer is the real area that creates the least friction for your day.' },
+        { number: 2, title: 'A station is a better start than a label.', body: 'Kottbusser Tor, Eberswalder Straße or Warschauer Straße gives you a first move.' },
+        { number: 3, title: 'Nikolaiviertel is a rebuild.', body: 'It gives central historical context, but most of the quarter is a GDR-era 1980s reconstruction.' }
+      ],
+      items: [
+        { number: 1, skip: 'Choosing the best district in theory', why: 'Your time and purpose decide the useful area.', instead: 'Answer the three questions.' },
+        { number: 2, skip: 'Treating a district as one place', why: 'A named station or street gives you a workable start.', instead: 'Use the first move.' },
+        { number: 3, skip: 'Calling Nikolaiviertel a surviving medieval old town', why: 'Most of it is a GDR-era 1980s rebuild.', instead: 'Read the rebuild in the place.' }
+      ],
+      controlTitle: 'Want a Berlin walk in plain English?',
+      controlDescription: 'On a private walk I guide in clear English, at your pace, around the places that matter to your date.',
+      controlLabel: 'See private walks'
+    }
   }];
 
   var injections = 0;

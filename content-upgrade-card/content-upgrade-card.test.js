@@ -49,6 +49,19 @@ const skipSlugs = [
 const secondarySlugs = [
   'are-shops-open-on-sunday-in-berlin-what-you-need-to-know',
 ];
+const neighborhoodSlugs = [
+  'kreuzberg-berlin',
+  'neukolln-berlin',
+  'friedrichshain-berlin',
+  'prenzlauer-berg-berlin',
+  'schoneberg-berlin',
+  'kurfurstendamm-berlin',
+  'nikolaiviertel-rebuilt-old-town',
+  'berlin-courtyards-hoefe',
+  'karl-marx-allee-berlin',
+  'where-to-stay-in-berlin-best-neighborhoods-for-every-type-of-tourist',
+  'berlin-street-art',
+];
 const historySlugs = [
   'why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point',
   'why-berlin-s-streets-are-so-wide-it-wasn-t-always-the-plan',
@@ -191,14 +204,14 @@ test('component is compact, accessible and has no inner scrolling surface', () =
   assert.match(elementSource, /bw-content-upgrade-error/);
 });
 
-test('orchestrator keeps the 29 Skip List slugs and registers the approved magnet fleet', () => {
+test('orchestrator keeps the Skip List slugs and registers the approved magnet fleet', () => {
   const ctx = makeInjectorContext({ config: { stage: 'pilot' } });
   assert.deepEqual(Array.from(ctx.hooks.slugs).sort(), [...skipSlugs].sort());
   assert.deepEqual(skipSlugs.filter((slug) => historySlugs.includes(slug)), []);
   assert.deepEqual(skipSlugs.filter((slug) => secondarySlugs.includes(slug)), []);
   assert.equal(ctx.hooks.safetySlug, '');
   assert.equal(ctx.hooks.placement, 'blog_inline_booking_slot');
-  assert.equal(ctx.hooks.magnetConfigs.length, 6);
+  assert.equal(ctx.hooks.magnetConfigs.length, 7);
   assert.deepEqual(JSON.parse(JSON.stringify(ctx.hooks.magnetConfigs[0])), {
     experimentId: 'berlin_skip_list_v1',
     assetId: 'berlin-skip-list',
@@ -216,7 +229,8 @@ test('orchestrator keeps the 29 Skip List slugs and registers the approved magne
     'berlin-arrival-card',
     'berlin-day-trip-compare-sheet',
     'berlin-german-cheat-card',
-    'berlin-food-decision-card'
+    'berlin-food-decision-card',
+    'berlin-neighborhood-matcher'
   ]));
   const food = ctx.hooks.magnetConfigs[5];
   assert.equal(food.experimentId, 'berlin_food_decision_card_v1');
@@ -227,6 +241,17 @@ test('orchestrator keeps the 29 Skip List slugs and registers the approved magne
   assert.equal(food.slugs.length, 21);
   assert.equal(food.slugs.includes('vegan-berlin-guide-2026'), true);
   assert.equal(food.slugs.includes('how-to-order-doner-in-berlin'), true);
+  const neighborhood = ctx.hooks.magnetConfigs[6];
+  assert.equal(neighborhood.assetId, 'berlin-neighborhood-matcher');
+  assert.equal(neighborhood.experimentId, 'berlin_neighborhood_matcher_v1');
+  assert.equal(neighborhood.storageKey, 'bwContentUpgrade.berlinNeighborhoodMatcher.v1');
+  assert.equal(neighborhood.controlType, 'private-tour');
+  assert.equal(JSON.stringify(neighborhood.slugs), JSON.stringify(neighborhoodSlugs));
+  assert.match(injectorSource, /gateMode: 'calculator'/);
+  assert.match(injectorSource, /ariaLabel: 'Berlin neighborhood matcher'/);
+  assert.match(injectorSource, /Decision table checked 18 August 2026/);
+  assert.match(injectorSource, /Nikolaiviertel for central context/);
+  assert.match(injectorSource, /GDR-era 1980s rebuild/);
   assert.match(injectorSource, /if \(history\.inExperiment\) return \{ owner: 'history'/);
   assert.match(injectorSource, /if \(contentUpgrade\.inExperiment\) return \{ owner: 'content-upgrade'/);
   assert.match(injectorSource, /data-bw-private-tour-cta/);
@@ -247,7 +272,7 @@ test('the magnet slug lists are disjoint and exclude the history experiment slug
       assert.equal(historySlugs.includes(slug), false, `${slug} collides with the history experiment`);
     }
   }
-  assert.equal(seen.size, 134);
+  assert.equal(seen.size, 145);
 });
 
 test('pilot uses a 50/50 Skip List gate and keeps unrelated posts on booking', () => {
@@ -290,7 +315,7 @@ test('forced QA choices are deterministic and history keeps slot priority', () =
   assert.equal(both.hooks.slotDecision().owner, 'history');
 });
 
-test('all 29 primary slugs are eligible only in pilot', () => {
+test('all Skip List primary slugs are eligible only in pilot', () => {
   for (const slug of skipSlugs) {
     const ctx = makeInjectorContext({ pathname: `/post/${slug}`, config: { stage: 'pilot' }, random: 0.49 });
     assert.equal(ctx.hooks.assignment().inExperiment, true, slug);
@@ -394,6 +419,9 @@ test('component supports an optional config-driven calculator gate mode, teaser 
   assert.match(elementSource, /class="calc-verdict"/);
   assert.match(elementSource, /class="calc-stamp"/);
   assert.match(elementSource, /bw-content-upgrade-calc-done/);
+  assert.match(elementSource, /Object\.keys\(rule\)\.every/);
+  assert.match(elementSource, /if \(key === 'line'\) return true;/);
+  assert.match(elementSource, /Mini decision calculator/);
 
   // Shadow DOM only, yellow-surface verdict box uses the required dark-green text.
   assert.match(elementSource, /this\._root = this\.attachShadow/);
@@ -401,7 +429,7 @@ test('component supports an optional config-driven calculator gate mode, teaser 
   assert.match(elementSource, /\.calc-verdict-text\{color:#123d18!important/);
 });
 
-test('pass magnet is the only one wired to the calculator gate; registry ids untouched', () => {
+test('pass and Neighborhood magnets use the calculator gate; registry ids stay isolated', () => {
   assert.match(injectorSource, /experimentId: 'berlin_pass_calculator_v1'/);
   assert.match(injectorSource, /storageKey: 'bwContentUpgrade\.berlinPassCalc\.v1'/);
   assert.match(injectorSource, /assetId: 'berlin-pass-decision-sheet'/);
@@ -409,10 +437,10 @@ test('pass magnet is the only one wired to the calculator gate; registry ids unt
   assert.equal(injectorSource.includes('berlin_pass_sheet_v1'), false);
   assert.equal(injectorSource.includes('bwContentUpgrade.berlinPassSheet.v1'), false);
 
-  // Isolation: exactly one magnet (pass) carries gate-mode/calc-config; the
-  // other three (skip-list, arrival-card, day-trip) are untouched.
-  assert.equal((injectorSource.match(/gateMode:/g) || []).length, 1);
-  assert.equal((injectorSource.match(/calcConfig:/g) || []).length, 1);
+  // Isolation: only pass and Neighborhood carry gate-mode/calc-config; the
+  // static magnets remain on their original teaser path.
+  assert.equal((injectorSource.match(/gateMode:/g) || []).length, 2);
+  assert.equal((injectorSource.match(/calcConfig:/g) || []).length, 2);
   assert.match(injectorSource, /if \(copy\.gateMode\) element\.setAttribute\('gate-mode', copy\.gateMode\);/);
   assert.match(injectorSource, /if \(copy\.calcConfig\) element\.setAttribute\('calc-config', JSON\.stringify\(copy\.calcConfig\)\);/);
 
@@ -422,6 +450,11 @@ test('pass magnet is the only one wired to the calculator gate; registry ids unt
   assert.equal(passMagnet.experimentId, 'berlin_pass_calculator_v1');
   assert.equal(passMagnet.storageKey, 'bwContentUpgrade.berlinPassCalc.v1');
   assert.equal(passMagnet.elementUrl.includes('?v=20260817-magnet1'), true);
+
+  const neighborhoodMagnet = ctx.hooks.magnetConfigs[6];
+  assert.equal(neighborhoodMagnet.assetId, 'berlin-neighborhood-matcher');
+  assert.equal(neighborhoodMagnet.experimentId, 'berlin_neighborhood_matcher_v1');
+  assert.equal(neighborhoodMagnet.storageKey, 'bwContentUpgrade.berlinNeighborhoodMatcher.v1');
 });
 
 test('pass calculator verdict table matches the locked prices and gating exactly', () => {

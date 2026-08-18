@@ -126,8 +126,9 @@
   }
 
   function calcRuleMatches(rule, answers) {
-    return ['days', 'museums', 'transit'].every(function (key) {
-      if (!(key in rule)) return true;
+    if (!rule || typeof rule !== 'object') return false;
+    return Object.keys(rule).every(function (key) {
+      if (key === 'line') return true;
       var want = rule[key];
       return Array.isArray(want) ? want.indexOf(answers[key]) !== -1 : want === answers[key];
     });
@@ -249,7 +250,7 @@
           + '<div class="calc-options" role="group" aria-labelledby="' + promptId + '">' + options + '</div>'
           + '</div>';
       }).join('');
-      return '<div class="calc" aria-label="Mini pass calculator">'
+      return '<div class="calc" aria-label="' + escapeHtml(cleanText(config.ariaLabel, 120) || 'Mini decision calculator') + '">'
         + questions
         + '<div class="calc-verdict" role="status" aria-live="polite"><p class="calc-verdict-text">' + escapeHtml(placeholder) + '</p></div>'
         + (stamp ? '<p class="calc-stamp">' + escapeHtml(stamp) + '</p>' : '')
