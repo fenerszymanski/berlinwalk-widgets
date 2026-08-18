@@ -1,30 +1,30 @@
 const BW_BLOG_HOME_DATA_URL = (() => {
   const script = document.currentScript;
   const base = script && script.src ? script.src : window.location.href;
-  return new URL('./data.json?v=20260817-featured-listings', base).href;
+  return new URL('./data.json?v=20260818-featured-listings', base).href;
 })();
 
 const BW_BLOG_HOME_FALLBACK = {
   featured: {
-    title: 'Berlin Landmarks in 2 Hours: Choose an East or West Start',
-    url: 'https://www.berlinwalk.com/post/berlin-landmarks-in-two-hours',
+    title: 'Berlin Weekend with a Friday Night Arrival: A Plan That Starts Small',
+    url: 'https://www.berlinwalk.com/post/berlin-weekend-friday-night-arrival',
     category: 'Tourist Tips',
     readTime: '4 min read',
-    label: 'New: choose one side',
-    summary: 'Use a focused east or west two-hour window for Berlin landmarks instead of forcing Museum Island and Brandenburg Gate into one rushed loop.',
-    image: 'https://static.wixstatic.com/media/5a08a3_f539c515c8cc4a8e9cc4c87bbca3b415~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-brandenburg-gate.jpg',
-    alt: 'The illuminated Brandenburg Gate at blue hour in Berlin'
+    label: 'New: start small',
+    summary: 'Arriving in Berlin on Friday night? Use a small first-night plan for BER or Hauptbahnhof that protects Saturday instead of forcing a rushed checklist.',
+    image: 'https://static.wixstatic.com/media/5a08a3_8124c1065ff349a690b2df2692ea0b5d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ber-airport-night.jpg',
+    alt: 'Terminal 1 at Berlin Brandenburg Airport lit at dusk'
   },
   miniPosts: [
     {
-      title: 'Berlin Weekend with a Friday Night Arrival: A Plan That Starts Small',
-      url: 'https://www.berlinwalk.com/post/berlin-weekend-friday-night-arrival',
+      title: 'Berlin Spy Museum: Is It Worth Your Time on a First Visit?',
+      url: 'https://www.berlinwalk.com/post/berlin-spy-museum-worth-it',
       category: 'Tourist Tips',
-      readTime: '4 min read'
+      readTime: '3 min read'
     },
     {
-      title: 'Bauhaus in Berlin: Three Places That Make Modernism Easier to Read',
-      url: 'https://www.berlinwalk.com/post/bauhaus-in-berlin-modernism',
+      title: 'Berlin Landmarks in 2 Hours: Choose an East or West Start',
+      url: 'https://www.berlinwalk.com/post/berlin-landmarks-in-two-hours',
       category: 'Tourist Tips',
       readTime: '4 min read'
     },

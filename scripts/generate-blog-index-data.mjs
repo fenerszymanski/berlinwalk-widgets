@@ -214,16 +214,16 @@ const YEAR_REQUIRED_TITLE_SLUGS = new Set([
 ]);
 
 const HERO_SLUGS = {
-  // 17 Aug 2026: the Friday-night-arrival guide is the strongest new,
-  // broad first-trip planning lead; keep the rail mixed with fresh route,
-  // free/history and practical posts plus proven transport/history evergreen.
-  lead: 'berlin-weekend-friday-night-arrival',
+  // 18 Aug 2026: the parents guide is the strongest new broad first-trip
+  // planning lead; keep the rail mixed with fresh arrival/museum/route stories,
+  // a free-history post, and a proven popular transport evergreen.
+  lead: 'berlin-with-parents',
   secondary: [
+    'berlin-weekend-friday-night-arrival',
+    'berlin-spy-museum-worth-it',
     'berlin-landmarks-in-two-hours',
     'free-berlin-memorials',
-    'what-to-wear-for-a-berlin-walking-tour',
     'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
-    'where-was-the-berlin-wall-interactive-map',
     'what-happens-on-a-berlin-free-walking-tour',
     'berlin-sights-near-alexanderplatz-walking-distance',
     'berlin-courtyards-hoefe',
@@ -329,6 +329,8 @@ const REQUIRED_SLUGS = [
   'why-is-berlin-founding-year-1237',
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
+  'berlin-with-parents',
+  'berlin-spy-museum-worth-it',
   'berlin-weekend-friday-night-arrival',
   'berlin-landmarks-in-two-hours',
   'free-berlin-memorials',
@@ -752,6 +754,8 @@ function topicFor(post) {
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
   if ((post.slug || '') === 'berlin-pink-pipes') return 'berlin-pink-pipe-decoder';
+  if ((post.slug || '') === 'berlin-with-parents') return 'berlin-pace-passport';
+  if ((post.slug || '') === 'berlin-spy-museum-worth-it') return 'berlin-spy-museum-mission-match';
   if ((post.slug || '') === 'berlin-weekend-friday-night-arrival') return 'berlin-weekend-first-night';
   if ((post.slug || '') === 'berlin-landmarks-in-two-hours') return 'berlin-landmark-window';
   if ((post.slug || '') === 'bauhaus-in-berlin-modernism') return 'berlin-bauhaus-lineage-map';
