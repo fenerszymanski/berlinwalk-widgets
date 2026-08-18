@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Berlin Address Compass | BerlinWalk</title>
+  <link rel="icon" type="image/png" href="../tools-home/icons/berlin-address-compass-160.png">
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    :root {
+      --ink: #123d18;
+      --ink-deep: #09280f;
+      --paper: #f7f1e5;
+      --cream: #fffdf8;
+      --yellow: #ffe600;
+      --line: rgba(18, 61, 24, .2);
+      --muted: #526256;
+      --soft-green: #eaf2e8;
+      --warn: #6a5510;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: transparent; color: var(--ink); font-family: Arial, Helvetica, sans-serif; }
+    button, textarea { font: inherit; }
+    button { cursor: pointer; }
+    .compass { max-width: 940px; margin: 0 auto; overflow: hidden; border: 1px solid var(--line); border-radius: 28px; background: var(--paper); box-shadow: 0 18px 46px rgba(18, 61, 24, .15); }
+    .hero { display: grid; grid-template-columns: minmax(0, 1fr) 188px; gap: 28px; align-items: center; min-height: 296px; padding: 34px; background: linear-gradient(119deg, #0b3415 0%, #123d18 63%, #234e2e 100%); color: #fff; }
+    .eyebrow { margin: 0 0 12px; color: var(--yellow); font-size: 11px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+    h1 { max-width: 610px; margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(38px, 5vw, 62px); line-height: .96; letter-spacing: -.055em; }
+    .hero-copy { max-width: 600px; margin: 15px 0 0; color: rgba(255,255,255,.91); font-size: 16px; line-height: 1.55; }
+    .hero-icon { display: block; width: min(100%, 170px); height: auto; justify-self: end; border-radius: 27px; box-shadow: 0 18px 30px rgba(0,0,0,.26); }
+    .inside { padding: 30px 34px 36px; }
+    .intro { max-width: 720px; margin: 0 auto 24px; font-size: 17px; line-height: 1.58; text-align: center; }
+    .workbench { overflow: hidden; border: 1px solid var(--line); border-radius: 24px; background: var(--cream); }
+    .entry { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; padding: 22px; border-bottom: 1px solid var(--line); background: #f0eadb; }
+    .entry label { display: block; margin: 0 0 8px; font-size: 11px; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
+    textarea { display: block; width: 100%; min-height: 96px; padding: 14px; resize: vertical; border: 1px solid rgba(18,61,24,.33); border-radius: 14px; background: #fff; color: var(--ink); line-height: 1.48; }
+    textarea:focus { outline: 3px solid var(--yellow); outline-offset: 2px; border-color: var(--ink); }
+    .entry-actions { display: flex; flex-direction: column; justify-content: end; gap: 10px; min-width: 152px; }
+    .button { min-height: 43px; padding: 10px 13px; border: 1px solid var(--ink); border-radius: 12px; font-weight: 800; line-height: 1.25; }
+    .button.primary { background: var(--yellow); color: var(--ink-deep); }
+    .button.secondary { background: #fff; color: var(--ink); }
+    .button:hover, .button:focus-visible { box-shadow: 0 5px 0 rgba(18,61,24,.18); outline: 3px solid rgba(255,230,0,.8); outline-offset: 2px; transform: translateY(-1px); }
+    .privacy { grid-column: 1 / -1; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .result { padding: 24px 22px 25px; }
+    .result-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+    .result-head h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: 29px; letter-spacing: -.035em; }
+    .result-head p { max-width: 420px; margin: 4px 0 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
+    .result-pill { flex: 0 0 auto; padding: 7px 9px; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--ink); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .result-pill.ready { border-color: rgba(27,94,32,.42); background: var(--soft-green); }
+    .result-pill.caution { border-color: rgba(106,85,16,.35); background: #fff5c7; color: #4c3d09; }
+    .fold { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .clue { min-height: 176px; padding: 17px 15px; border: 1px solid var(--line); border-radius: 18px; background: #fff; box-shadow: 0 8px 17px rgba(18,61,24,.055); }
+    .clue-kicker { display: block; margin-bottom: 14px; color: #6f7e72; font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .clue h3 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: 21px; line-height: 1.02; letter-spacing: -.03em; }
+    .clue p { margin: 10px 0 0; color: #415443; font-size: 13px; line-height: 1.48; }
+    .clue.good { border-color: rgba(27,94,32,.44); }
+    .clue.good .clue-kicker { color: #1b5e20; }
+    .clue.caution { border-color: rgba(137,108,19,.42); background: #fffbeb; }
+    .clue.caution .clue-kicker { color: var(--warn); }
+    .clue.empty { background: #f6f1e7; }
+    .clue-value { overflow-wrap: anywhere; }
+    .arrival { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 13px; align-items: start; margin-top: 17px; padding: 15px; border: 1px solid var(--line); border-radius: 15px; background: var(--soft-green); }
+    .arrival-mark { display: grid; width: 30px; height: 30px; place-items: center; border-radius: 50%; background: var(--yellow); color: var(--ink-deep); font-weight: 900; }
+    .arrival h3 { margin: 1px 0 4px; font-size: 14px; }
+    .arrival p { margin: 0; color: #415443; font-size: 13px; line-height: 1.5; }
+    .bottom { max-width: 735px; margin: 22px auto 0; color: var(--muted); font-size: 12px; line-height: 1.58; text-align: center; }
+    @media (max-width: 760px) {
+      .compass { border-radius: 18px; }
+      .hero { grid-template-columns: minmax(0, 1fr) 112px; gap: 17px; min-height: 250px; padding: 25px 22px; }
+      .hero-icon { width: 108px; border-radius: 19px; }
+      .inside { padding: 22px 16px 28px; }
+      .entry { grid-template-columns: 1fr; padding: 17px; }
+      .entry-actions { flex-direction: row; justify-content: stretch; min-width: 0; }
+      .entry-actions .button { flex: 1; }
+      .result { padding: 20px 15px 22px; }
+      .result-head { display: block; }
+      .result-pill { display: inline-block; margin-top: 12px; }
+      .fold { grid-template-columns: repeat(2, 1fr); }
+      .clue { min-height: 155px; }
+    }
+    @media (max-width: 390px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-icon { justify-self: start; width: 94px; }
+      .entry-actions { flex-direction: column; }
+      .fold { grid-template-columns: 1fr; }
+      .clue { min-height: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="compass" id="bw-address-compass">
+    <section class="hero" aria-labelledby="tool-title">
+      <div>
+        <p class="eyebrow">Berlin arrival · address check</p>
+        <h1 id="tool-title">Berlin Address Compass</h1>
+        <p class="hero-copy">Paste the address you received. I separate the small clues that get you to the right street, number and entrance without pretending to be a live map.</p>
+      </div>
+      <img class="hero-icon" src="../tools-home/icons/berlin-address-compass.png" alt="" width="512" height="512">
+    </section>
+
+    <section class="inside">
+      <p class="intro">This is a local text check, not a route finder. It helps you keep the address complete before you open your usual map or leave the hotel.</p>
+      <section class="workbench" aria-labelledby="check-title">
+        <div class="entry">
+          <div>
+            <label for="address-input">Paste an address or type one line</label>
+            <textarea id="address-input" spellcheck="false" autocomplete="off" placeholder="Example: Alexanderplatz 1, 10178 Berlin"></textarea>
+          </div>
+          <div class="entry-actions">
+            <button class="button secondary" id="example-button" type="button">Use example</button>
+            <button class="button primary" id="check-button" type="button">Check address</button>
+          </div>
+          <p class="privacy">What you type stays in this browser. Do not paste a door code, booking reference or another private detail.</p>
+        </div>
+
+        <div class="result" aria-live="polite">
+          <div class="result-head">
+            <div>
+              <h2 id="check-title">Your four-part address fold</h2>
+              <p id="result-summary">Add an address to see the details that are present and the one thing to check before you go.</p>
+            </div>
+            <span class="result-pill" id="result-pill">Waiting</span>
+          </div>
+
+          <div class="fold">
+            <article class="clue empty" id="street-card">
+              <span class="clue-kicker">01 · Street</span>
+              <h3 class="clue-value" id="street-value">Street name</h3>
+              <p id="street-note">Keep the full street type, such as Straße, Platz or Allee.</p>
+            </article>
+            <article class="clue empty" id="number-card">
+              <span class="clue-kicker">02 · Number</span>
+              <h3 class="clue-value" id="number-value">House number</h3>
+              <p id="number-note">A letter after the number can be part of the destination.</p>
+            </article>
+            <article class="clue empty" id="postcode-card">
+              <span class="clue-kicker">03 · Postcode</span>
+              <h3 class="clue-value" id="postcode-value">Five digits + Berlin</h3>
+              <p id="postcode-note">Use the postcode as a cross-check in your map.</p>
+            </article>
+            <article class="clue empty" id="arrival-card">
+              <span class="clue-kicker">04 · Arrival note</span>
+              <h3 class="clue-value" id="arrival-value">Entrance detail</h3>
+              <p id="arrival-note">Keep any courtyard, stairway, floor or bell note with the address.</p>
+            </article>
+          </div>
+
+          <aside class="arrival">
+            <span class="arrival-mark" aria-hidden="true">✓</span>
+            <div>
+              <h3 id="next-title">The useful move</h3>
+              <p id="next-copy">Paste the full address, then check it before you move. A street name alone is not enough.</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+      <p class="bottom">A house number can orient you at the building, but do not infer a route from odd and even numbers alone. Berlin has both newer zig-zag and older horseshoe-numbered streets. Use the exact result in your chosen map.</p>
+    </section>
+  </main>
+
+  <script src="../js/brand.js"></script>
+  <script>
+    (function () {
+      const root = document.getElementById('bw-address-compass');
+      const input = document.getElementById('address-input');
+      const exampleButton = document.getElementById('example-button');
+      const checkButton = document.getElementById('check-button');
+      const resultSummary = document.getElementById('result-summary');
+      const resultPill = document.getElementById('result-pill');
+      const nextTitle = document.getElementById('next-title');
+      const nextCopy = document.getElementById('next-copy');
+      const example = 'Alexanderplatz 1, 10178 Berlin';
+
+      const cards = {
+        street: { card: document.getElementById('street-card'), value: document.getElementById('street-value'), note: document.getElementById('street-note') },
+        number: { card: document.getElementById('number-card'), value: document.getElementById('number-value'), note: document.getElementById('number-note') },
+        postcode: { card: document.getElementById('postcode-card'), value: document.getElementById('postcode-value'), note: document.getElementById('postcode-note') },
+        arrival: { card: document.getElementById('arrival-card'), value: document.getElementById('arrival-value'), note: document.getElementById('arrival-note') }
+      };
+
+      function reportHeight() {
+        const height = Math.ceil(Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, root.getBoundingClientRect().bottom));
+        window.parent.postMessage({ type: 'berlinwalk-widget-height', slug: 'berlin-address-compass', height: height }, '*');
+      }
+
+      function setCard(key, state, value, note) {
+        const item = cards[key];
+        item.card.className = 'clue ' + state;
+        item.value.textContent = value;
+        item.note.textContent = note;
+      }
+
+      function normalise(value) {
+        return String(value || '').replace(/[\n\r]+/g, ', ').replace(/\s+/g, ' ').replace(/\s*,\s*/g, ', ').trim();
+      }
+
+      function parseAddress(value) {
+        const clean = normalise(value);
+        const parts = clean.split(',').map(function (part) { return part.trim(); }).filter(Boolean);
+        const first = parts[0] || '';
+        const full = clean;
+        const houseMatch = first.match(/^(.*?)(?:\s+)(\d+\s*[A-Za-z]?(?:\s*[-/]\s*\d+\s*[A-Za-z]?)?)\s*$/);
+        const street = houseMatch ? houseMatch[1].trim() : first;
+        const number = houseMatch ? houseMatch[2].replace(/\s+/g, '') : '';
+        const postcodeMatch = full.match(/\b(\d{5})\b/);
+        const postcode = postcodeMatch ? postcodeMatch[1] : '';
+        const berlin = /\bberlin\b/i.test(full);
+        const suffix = /(straße|str\.?|platz|allee|ufer|brücke|damm|weg|chaussee|gasse)\b/i.test(street);
+        const entry = /(hof|hinterhaus|aufgang|eingang|etage|\bog\b|stock|klingel|bell|tür|door|haus\s*[a-z0-9])/i.exec(full);
+        const trailing = parts.slice(2).join(', ');
+        return { clean: clean, street: street, number: number, postcode: postcode, berlin: berlin, suffix: suffix, entry: entry ? entry[0] : '', trailing: trailing };
+      }
+
+      function applyCheck() {
+        const parsed = parseAddress(input.value);
+        if (!parsed.clean) {
+          resultPill.textContent = 'Waiting';
+          resultPill.className = 'result-pill';
+          resultSummary.textContent = 'Add an address to see the details that are present and the one thing to check before you go.';
+          setCard('street', 'empty', 'Street name', 'Keep the full street type, such as Straße, Platz or Allee.');
+          setCard('number', 'empty', 'House number', 'A letter after the number can be part of the destination.');
+          setCard('postcode', 'empty', 'Five digits + Berlin', 'Use the postcode as a cross-check in your map.');
+          setCard('arrival', 'empty', 'Entrance detail', 'Keep any courtyard, stairway, floor or bell note with the address.');
+          nextTitle.textContent = 'The useful move';
+          nextCopy.textContent = 'Paste the full address, then check it before you move. A street name alone is not enough.';
+          reportHeight();
+          return;
+        }
+
+        const misses = [];
+        if (parsed.street) {
+          setCard('street', 'good', parsed.street, parsed.suffix ? 'Street name and type are present. Keep both in your map search.' : 'Street name found. Keep the original spelling and any street type shown in the message.');
+        } else {
+          setCard('street', 'caution', 'Street unclear', 'Look for the street name before the house number. Copy the full first line from the original message.');
+          misses.push('street name');
+        }
+
+        if (parsed.number) {
+          const hasLetter = /[A-Za-z]/.test(parsed.number);
+          setCard('number', 'good', parsed.number, hasLetter ? 'The letter is preserved. Treat it as part of the destination.' : 'Number present. Preserve any letter, range or slash if the original includes one.');
+        } else {
+          setCard('number', 'caution', 'Number missing', 'Add the house number. A street name alone can leave you on the right block but at the wrong door.');
+          misses.push('house number');
+        }
+
+        if (parsed.postcode && parsed.berlin) {
+          setCard('postcode', 'good', parsed.postcode + ' Berlin', 'Postcode and city are together. Use them as a quiet map cross-check.');
+        } else if (parsed.postcode) {
+          setCard('postcode', 'caution', parsed.postcode, 'Five digits found. Add Berlin or compare the full result in your map before you leave.');
+          misses.push('city');
+        } else {
+          setCard('postcode', 'caution', 'Postcode missing', 'Add the five-digit postcode when you have it. It helps distinguish a complete map result.');
+          misses.push('postcode');
+        }
+
+        if (parsed.entry) {
+          setCard('arrival', 'good', parsed.entry, 'An arrival note is present. Keep it with the street address until you are inside.');
+        } else if (parsed.trailing) {
+          setCard('arrival', 'caution', 'Extra note found', 'Keep the remaining detail with the address. If it describes an entrance, floor or bell, do not drop it.');
+        } else {
+          setCard('arrival', 'empty', 'No extra note', 'That is fine if none was given. If a host later sends a courtyard, entrance or bell detail, attach it here.');
+        }
+
+        if (!misses.length) {
+          resultPill.textContent = 'Ready';
+          resultPill.className = 'result-pill ready';
+          resultSummary.textContent = 'All core clues are present. Put this exact line into your chosen map, then keep any entrance note visible for the final door.';
+          nextTitle.textContent = 'Use the complete address';
+          nextCopy.textContent = 'You have a street, number and postcode. Do not use odd/even numbering as a shortcut; compare the exact number at the building.';
+        } else {
+          resultPill.textContent = 'Check again';
+          resultPill.className = 'result-pill caution';
+          resultSummary.textContent = 'This address is usable only after you check the missing clue: ' + misses.join(', ') + '.';
+          nextTitle.textContent = 'Fix one thing before leaving';
+          nextCopy.textContent = 'Return to the booking or message and copy the missing part exactly. A calm 20-second check is easier than a suitcase detour.';
+        }
+        reportHeight();
+      }
+
+      exampleButton.addEventListener('click', function () {
+        input.value = example;
+        applyCheck();
+        input.focus();
+      });
+      checkButton.addEventListener('click', applyCheck);
+      input.addEventListener('keydown', function (event) {
+        if ((event.metaKey || event.ctrlKey) && event.key === 'Enter') applyCheck();
+      });
+      new ResizeObserver(reportHeight).observe(root);
+      window.addEventListener('load', reportHeight);
+      window.addEventListener('resize', reportHeight);
+      reportHeight();
+    }());
+  </script>
+</body>
+</html>

@@ -6481,6 +6481,33 @@
       "image": "https://static.wixstatic.com/media/5a08a3_58a529372de5458590323991e4b5a6bc~mv2.png",
       "iconStatus": "live-wix-media",
       "cmsItemId": "99c4d5d6-59fc-4736-afd8-d9327edc1b33"
+    },
+    {
+      "slug": "berlin-address-compass",
+      "title": "Berlin Address Compass",
+      "lead": "Paste a Berlin address and separate the street, exact house number, postcode and arrival note before a small detail turns into the wrong door.",
+      "category": "Discovery",
+      "hubCategory": "TripPlans",
+      "type": "Guide",
+      "priority": 46,
+      "tags": [
+        "how to read a Berlin address",
+        "Berlin address format",
+        "Berlin house number",
+        "Berlin postcode",
+        "Berlin street names"
+      ],
+      "aliases": [
+        "how do Berlin addresses work",
+        "Berlin address format",
+        "what does 12a mean in a Berlin address",
+        "Berlin street number and postcode"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-address-compass/",
+      "embedHeight": 1740,
+      "image": "https://static.wixstatic.com/media/5a08a3_51eeeb815ae14e9283c0d9c124a609f9~mv2.png",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "11d46681-1d71-41e4-8e24-508bc004db23"
     }
   ],
   "hubCategories": [

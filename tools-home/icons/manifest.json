@@ -2744,5 +2744,18 @@
     "png160": "tools-home/icons/berlin-meal-wallet-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-meal-wallet-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_58a529372de5458590323991e4b5a6bc~mv2.png"
+  },
+  {
+    "slug": "berlin-address-compass",
+    "title": "Berlin Address Compass",
+    "category": "Discovery",
+    "model": "Built-in ImageGen",
+    "style": "BerlinWalk tactile forest-green folded address card with a brass compass, 2026-08-18",
+    "sourceSheet": "tools-home/icons/_src/berlin-address-compass/icon.png",
+    "promptSource": "tools-home/icons/_src/berlin-address-compass/PROMPT.md",
+    "png512": "tools-home/icons/berlin-address-compass.png",
+    "png160": "tools-home/icons/berlin-address-compass-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-address-compass-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_51eeeb815ae14e9283c0d9c124a609f9~mv2.png"
   }
 ]
