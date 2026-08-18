@@ -44,11 +44,9 @@ const skipSlugs = [
   'bus-100-berlin-the-4-sightseeing-tour-locals-don-t-want-you-to-know-about',
   'free-things-to-do-in-berlin-2026',
 ];
-// Shops-open-sunday stays on the booking card. It must remain outside every
-// content-upgrade experiment; vegan is now owned by the Phase 2 Food Card.
-const secondarySlugs = [
-  'are-shops-open-on-sunday-in-berlin-what-you-need-to-know',
-];
+// There is no secondary slug in this fleet. Shops-open-sunday is now owned by
+// the Phase 2 Unwritten Rules Card; vegan remains owned by the Food Card.
+const secondarySlugs = [];
 const neighborhoodSlugs = [
   'kreuzberg-berlin',
   'neukolln-berlin',
@@ -61,6 +59,21 @@ const neighborhoodSlugs = [
   'karl-marx-allee-berlin',
   'where-to-stay-in-berlin-best-neighborhoods-for-every-type-of-tourist',
   'berlin-street-art',
+];
+const unwrittenSlugs = [
+  'tipping-in-berlin',
+  'how-much-should-you-tip-in-berlin-a-simple-guide-to-tipping-in-germany',
+  'jaywalking-in-berlin',
+  'pfand-in-germany',
+  'smoking-in-berlin',
+  'drink-alcohol-in-public-berlin',
+  'can-you-use-credit-cards-in-berlin-a-tourist-s-guide-to-paying-in-germany',
+  'berlin-city-tax',
+  'tax-free-shopping-berlin-vat-refund',
+  'are-shops-open-on-sunday-in-berlin-what-you-need-to-know',
+  'is-tap-water-safe-to-drink-in-berlin-what-tourists-should-know',
+  'where-to-find-free-drinking-water-in-berlin',
+  'public-toilets-in-berlin',
 ];
 const historySlugs = [
   'why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point',
@@ -211,7 +224,7 @@ test('orchestrator keeps the Skip List slugs and registers the approved magnet f
   assert.deepEqual(skipSlugs.filter((slug) => secondarySlugs.includes(slug)), []);
   assert.equal(ctx.hooks.safetySlug, '');
   assert.equal(ctx.hooks.placement, 'blog_inline_booking_slot');
-  assert.equal(ctx.hooks.magnetConfigs.length, 7);
+  assert.equal(ctx.hooks.magnetConfigs.length, 8);
   assert.deepEqual(JSON.parse(JSON.stringify(ctx.hooks.magnetConfigs[0])), {
     experimentId: 'berlin_skip_list_v1',
     assetId: 'berlin-skip-list',
@@ -230,7 +243,8 @@ test('orchestrator keeps the Skip List slugs and registers the approved magnet f
     'berlin-day-trip-compare-sheet',
     'berlin-german-cheat-card',
     'berlin-food-decision-card',
-    'berlin-neighborhood-matcher'
+    'berlin-neighborhood-matcher',
+    'berlin-unwritten-rules-card'
   ]));
   const food = ctx.hooks.magnetConfigs[5];
   assert.equal(food.experimentId, 'berlin_food_decision_card_v1');
@@ -252,6 +266,16 @@ test('orchestrator keeps the Skip List slugs and registers the approved magnet f
   assert.match(injectorSource, /Decision table checked 18 August 2026/);
   assert.match(injectorSource, /Nikolaiviertel for central context/);
   assert.match(injectorSource, /GDR-era 1980s rebuild/);
+  const unwritten = ctx.hooks.magnetConfigs[7];
+  assert.equal(unwritten.assetId, 'berlin-unwritten-rules-card');
+  assert.equal(unwritten.experimentId, 'berlin_unwritten_rules_v1');
+  assert.equal(unwritten.storageKey, 'bwContentUpgrade.berlinUnwrittenRules.v1');
+  assert.equal(unwritten.controlType, 'private-tour');
+  assert.equal(JSON.stringify(unwritten.slugs), JSON.stringify(unwrittenSlugs));
+  assert.match(injectorSource, /Berlin Unwritten Rules Card/);
+  assert.match(injectorSource, /€5 is the standard red-light pedestrian fine/);
+  assert.match(injectorSource, /€20 to €40/);
+  assert.match(injectorSource, /DB and S-Bahn areas are not BVG U-Bahn areas/);
   assert.match(injectorSource, /if \(history\.inExperiment\) return \{ owner: 'history'/);
   assert.match(injectorSource, /if \(contentUpgrade\.inExperiment\) return \{ owner: 'content-upgrade'/);
   assert.match(injectorSource, /data-bw-private-tour-cta/);
@@ -272,7 +296,7 @@ test('the magnet slug lists are disjoint and exclude the history experiment slug
       assert.equal(historySlugs.includes(slug), false, `${slug} collides with the history experiment`);
     }
   }
-  assert.equal(seen.size, 145);
+  assert.equal(seen.size, 158);
 });
 
 test('pilot uses a 50/50 Skip List gate and keeps unrelated posts on booking', () => {
@@ -429,7 +453,7 @@ test('component supports an optional config-driven calculator gate mode, teaser 
   assert.match(elementSource, /\.calc-verdict-text\{color:#123d18!important/);
 });
 
-test('pass and Neighborhood magnets use the calculator gate; registry ids stay isolated', () => {
+test('pass and Neighborhood magnets use the calculator gate; static registry ids stay isolated', () => {
   assert.match(injectorSource, /experimentId: 'berlin_pass_calculator_v1'/);
   assert.match(injectorSource, /storageKey: 'bwContentUpgrade\.berlinPassCalc\.v1'/);
   assert.match(injectorSource, /assetId: 'berlin-pass-decision-sheet'/);

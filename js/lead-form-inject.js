@@ -637,6 +637,69 @@
       controlDescription: 'On a private walk I guide in clear English, at your pace, around the places that matter to your date.',
       controlLabel: 'See private walks'
     }
+  }, {
+    experimentId: 'berlin_unwritten_rules_v1',
+    assetId: 'berlin-unwritten-rules-card',
+    assetVersion: '2026-08-v1',
+    storageKey: 'bwContentUpgrade.berlinUnwrittenRules.v1',
+    apiBase: CONTENT_UPGRADE_DEFAULT_API_BASE,
+    elementUrl: CONTENT_UPGRADE_DEFAULT_ELEMENT_URL,
+    placement: CONTENT_UPGRADE_PLACEMENT,
+    controlType: 'private-tour',
+    controlUrl: 'https://www.berlinwalk.com/private-tour',
+    acquisitionCohort: 'berlin_unwritten_rules_pilot',
+    slugs: [
+      'tipping-in-berlin',
+      'how-much-should-you-tip-in-berlin-a-simple-guide-to-tipping-in-germany',
+      'jaywalking-in-berlin',
+      'pfand-in-germany',
+      'smoking-in-berlin',
+      'drink-alcohol-in-public-berlin',
+      'can-you-use-credit-cards-in-berlin-a-tourist-s-guide-to-paying-in-germany',
+      'berlin-city-tax',
+      'tax-free-shopping-berlin-vat-refund',
+      'are-shops-open-on-sunday-in-berlin-what-you-need-to-know',
+      'is-tap-water-safe-to-drink-in-berlin-what-tourists-should-know',
+      'where-to-find-free-drinking-water-in-berlin',
+      'public-toilets-in-berlin'
+    ],
+    component: {
+      barCopy: 'FREE SAVE-TO-PHONE CARD',
+      eyebrow: 'Small rules, fewer awkward surprises',
+      title: 'Berlin Unwritten Rules Card',
+      description: 'I put the small money, sign and timing rules on one card so a minor Berlin mistake does not change your day.',
+      gateCopy: 'Those are three small rules. Want the full card with the amounts, sign checks and planning moves? I will email it.',
+      submitLabel: 'Email me the Unwritten Rules Card',
+      consentVersion: 'berlin-unwritten-rules-card-v1-2026-08-18',
+      consentText: 'By requesting this card, I agree to receive it by email plus occasional BerlinWalk emails about practical Berlin travel rules and planning a Berlin trip. I can unsubscribe anytime. Privacy Policy.',
+      successCopy: 'Check your inbox to confirm your email and open Berlin Unwritten Rules Card.',
+      arrivalLabel: 'When are you planning to arrive?',
+      arrivalOptions: [
+        { value: 'this-month', label: 'This month' },
+        { value: 'next-month', label: 'Next month' },
+        { value: 'in-2-3-months', label: 'In 2-3 months' },
+        { value: 'not-booked-yet', label: 'Not booked yet' }
+      ],
+      teasers: [
+        { number: 1, title: 'Carry the coins that solve the small problems.', body: '€20 to €40 in small notes, a 25-cent coin and a €1 coin cover more useful moments than a wallet full of assumptions.' },
+        { number: 2, title: 'The rule changes with the place.', body: 'DB and S-Bahn areas are not BVG U-Bahn areas. Read the sign in front of you, especially around alcohol and smoking.' },
+        { number: 3, title: 'Small amounts need the right context.', body: '€5 is the standard red-light pedestrian fine. €10 applies only if you cause an accident, not as a general range.' }
+      ],
+      items: [
+        { number: 1, skip: 'Leaving a large percentage tip by default', why: 'Berlin service is not an automatic American 20% system.', instead: 'Round up or use about 5% to 10% when service was good.' },
+        { number: 2, skip: 'Assuming every terminal takes every card', why: 'Small cafés, stalls, bars and kiosks can be cash-first.', instead: 'Carry €20 to €40 in small notes.' },
+        { number: 3, skip: 'Treating €5 to €10 as a jaywalking range', why: 'The €10 amount applies only when you cause an accident.', instead: 'Remember €5, then read the situation.' },
+        { number: 4, skip: 'Throwing a Pfand bottle away', why: 'The deposit is part of the price you can recover.', instead: 'Return it at a Pfandautomat.' },
+        { number: 5, skip: 'Drinking by a station without reading the sign', why: 'DB and S-Bahn rules do not map exactly onto BVG U-Bahn areas.', instead: 'Follow the current sign.' },
+        { number: 6, skip: 'Building a Sunday shopping plan around ordinary shops', why: 'Most ordinary shops are closed on Sunday.', instead: 'Shop Saturday, then check Berlin.de.' },
+        { number: 7, skip: 'Treating City Tax as part of every hotel extra', why: 'The 7.5% rule uses the net overnight room price.', instead: 'Keep breakfast and extra services separate.' },
+        { number: 8, skip: 'Expecting a full 19% Tax Free refund', why: 'The €50.01 threshold has store, receipt, day and non-EU conditions.', instead: 'Keep the same-shop receipt and check the process.' },
+        { number: 9, skip: 'Assuming every public toilet costs the same', why: 'Street facilities are often 50 cents, stations around €1 and some cabins are free.', instead: 'Carry both coins and check the facility.' }
+      ],
+      controlTitle: 'Want a Berlin day explained in plain English?',
+      controlDescription: 'On a private walk I guide in clear English, at your pace, around the places that matter to your date.',
+      controlLabel: 'See private walks'
+    }
   }];
 
   var injections = 0;
