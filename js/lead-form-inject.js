@@ -446,6 +446,77 @@
       controlDescription: 'On a private walk you do not need any German at all. I guide in clear English, at your pace, around your date.',
       controlLabel: 'See private walks'
     }
+  }, {
+    experimentId: 'berlin_food_decision_card_v1',
+    assetId: 'berlin-food-decision-card',
+    assetVersion: '2026-08-v1',
+    storageKey: 'bwContentUpgrade.berlinFoodDecisionCard.v1',
+    apiBase: CONTENT_UPGRADE_DEFAULT_API_BASE,
+    elementUrl: CONTENT_UPGRADE_DEFAULT_ELEMENT_URL,
+    placement: CONTENT_UPGRADE_PLACEMENT,
+    controlType: 'private-tour',
+    controlUrl: 'https://www.berlinwalk.com/private-tour',
+    acquisitionCohort: 'berlin_food_decision_card_pilot',
+    slugs: [
+      '5-best-döner-kebab-spots-in-berlin-you-need-to-try-in-2026',
+      'how-to-order-doner-in-berlin',
+      'best-currywurst-places-in-berlin-2026',
+      'what-to-eat-in-berlin-12-must-try-local-foods',
+      'vietnamese-food-in-berlin',
+      'halal-food-in-berlin',
+      'vegan-berlin-guide-2026',
+      'breakfast-in-berlin',
+      'how-to-order-at-a-berlin-bakery',
+      'how-to-read-a-german-menu-without-panicking',
+      'berlin-restaurant-phrases',
+      'where-to-eat-near-alexanderplatz-without-getting-ripped-off',
+      'where-to-eat-berlin-by-neighbourhood',
+      'where-to-eat-late-at-night-in-berlin',
+      'markthalle-neun-berlin',
+      'turkish-market-berlin-maybachufer',
+      'berlin-beer-gardens-guide',
+      'what-is-a-spati-berlin',
+      'grocery-shopping-in-berlin',
+      '5-best-coffee-shops-near-hackescher-markt-a-local-s-guide',
+      'kaffee-vs-coffee-a-beginner-s-guide-to-german-café-culture'
+    ],
+    component: {
+      barCopy: 'FREE SAVE-TO-PHONE CARD',
+      eyebrow: 'Food by hour, place and need',
+      title: 'The Berlin Food Decision Card',
+      description: 'Do not cross Berlin for one open listing. I put the hour, the market day and the nearby food move on one card.',
+      gateCopy: 'Those are three food moves. Want the full card with the market times, late-food hubs and place-first decisions? I will email it.',
+      submitLabel: 'Email me the Food Decision Card',
+      consentVersion: 'berlin-food-decision-card-v1-2026-08-18',
+      consentText: 'By requesting this card, I agree to receive it by email plus occasional BerlinWalk emails about food in Berlin and planning a Berlin trip. I can unsubscribe anytime. Privacy Policy.',
+      successCopy: 'Check your inbox to confirm your email and open The Berlin Food Decision Card.',
+      arrivalLabel: 'When are you planning to arrive?',
+      arrivalOptions: [
+        { value: 'this-month', label: 'This month' },
+        { value: 'next-month', label: 'Next month' },
+        { value: 'in-2-3-months', label: 'In 2-3 months' },
+        { value: 'not-booked-yet', label: 'Not booked yet' }
+      ],
+      teasers: [
+        { number: 1, title: 'After midnight, follow the station.', body: 'Kottbusser Tor, Schlesisches Tor, Hermannplatz, Sonnenallee and Warschauer Straße are useful food hubs. One open listing is not worth a cross-city journey.' },
+        { number: 2, title: 'Markthalle Neun is a day decision.', body: 'Street Food Thursday runs 17:00 to 22:00, the large market is Saturday 10:00 to 18:00, and Sunday is closed. Check the day before you go.' },
+        { number: 3, title: 'Döner is not a €5 plan anymore.', body: 'Current Berlin guide sources put a typical döner around €7 to €8. The card keeps the price useful without pretending every shop charges the same.' }
+      ],
+      items: [
+        { number: 1, skip: 'Chasing one open listing', why: 'The nearest hub gives you food and a way home.', instead: 'Walk toward the nearest U-Bahn hub.' },
+        { number: 2, skip: 'Ignoring the kitchen clock', why: 'A bar can stay open after hot food stops.', instead: 'Check before 22:00.' },
+        { number: 3, skip: 'Guessing a Sunday market', why: 'Market and shop rules are not the same.', instead: 'Check the actual day and place.' },
+        { number: 4, skip: 'Markthalle Neun on Sunday', why: 'The published market is closed that day.', instead: 'Choose Thursday or Saturday.' },
+        { number: 5, skip: 'Maybachufer on the wrong day', why: 'The public market runs Tuesday and Friday.', instead: 'Plan 11:00 to 18:30.' },
+        { number: 6, skip: 'Dong Xuan on Tuesday', why: 'The published centre schedule says Tuesday closed.', instead: 'Go Wednesday to Monday, then check the shop.' },
+        { number: 7, skip: 'Assuming halal', why: 'A neighbourhood is not a certification.', instead: 'Ask about ingredients and shared equipment.' },
+        { number: 8, skip: 'Crossing Berlin for a price', why: 'Döner is about €7 to €8 and the shop still matters.', instead: 'Take the workable nearby option.' },
+        { number: 9, skip: 'Choosing by a generic currywurst price', why: 'The source set does not prove one reliable citywide price.', instead: 'Choose by place, timing and route.' }
+      ],
+      controlTitle: 'Want a Berlin day planned around the places you care about?',
+      controlDescription: 'My private walk gives you a clear route, real places and plain explanations without making you hunt through a city map alone.',
+      controlLabel: 'See private walks'
+    }
   }];
 
   var injections = 0;

@@ -44,11 +44,10 @@ const skipSlugs = [
   'bus-100-berlin-the-4-sightseeing-tour-locals-don-t-want-you-to-know-about',
   'free-things-to-do-in-berlin-2026',
 ];
-// vegan is reserved for the Phase 2 food magnet; shops-open-sunday stays on the
-// booking card. Both must remain outside every content-upgrade experiment.
+// Shops-open-sunday stays on the booking card. It must remain outside every
+// content-upgrade experiment; vegan is now owned by the Phase 2 Food Card.
 const secondarySlugs = [
   'are-shops-open-on-sunday-in-berlin-what-you-need-to-know',
-  'vegan-berlin-guide-2026',
 ];
 const historySlugs = [
   'why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point',
@@ -199,7 +198,7 @@ test('orchestrator keeps the 29 Skip List slugs and registers the approved magne
   assert.deepEqual(skipSlugs.filter((slug) => secondarySlugs.includes(slug)), []);
   assert.equal(ctx.hooks.safetySlug, '');
   assert.equal(ctx.hooks.placement, 'blog_inline_booking_slot');
-  assert.equal(ctx.hooks.magnetConfigs.length, 5);
+  assert.equal(ctx.hooks.magnetConfigs.length, 6);
   assert.deepEqual(JSON.parse(JSON.stringify(ctx.hooks.magnetConfigs[0])), {
     experimentId: 'berlin_skip_list_v1',
     assetId: 'berlin-skip-list',
@@ -216,8 +215,18 @@ test('orchestrator keeps the 29 Skip List slugs and registers the approved magne
     'berlin-pass-decision-sheet',
     'berlin-arrival-card',
     'berlin-day-trip-compare-sheet',
-    'berlin-german-cheat-card'
+    'berlin-german-cheat-card',
+    'berlin-food-decision-card'
   ]));
+  const food = ctx.hooks.magnetConfigs[5];
+  assert.equal(food.experimentId, 'berlin_food_decision_card_v1');
+  assert.equal(food.assetVersion, '2026-08-v1');
+  assert.equal(food.storageKey, 'bwContentUpgrade.berlinFoodDecisionCard.v1');
+  assert.equal(food.controlType, 'private-tour');
+  assert.equal(food.controlUrl, 'https://www.berlinwalk.com/private-tour');
+  assert.equal(food.slugs.length, 21);
+  assert.equal(food.slugs.includes('vegan-berlin-guide-2026'), true);
+  assert.equal(food.slugs.includes('how-to-order-doner-in-berlin'), true);
   assert.match(injectorSource, /if \(history\.inExperiment\) return \{ owner: 'history'/);
   assert.match(injectorSource, /if \(contentUpgrade\.inExperiment\) return \{ owner: 'content-upgrade'/);
   assert.match(injectorSource, /data-bw-private-tour-cta/);
@@ -227,7 +236,7 @@ test('orchestrator keeps the 29 Skip List slugs and registers the approved magne
   // applies to the slug itself, only to the retired experiment id above.
 });
 
-test('the four magnet slug lists are disjoint and exclude the history experiment slugs', () => {
+test('the magnet slug lists are disjoint and exclude the history experiment slugs', () => {
   const ctx = makeInjectorContext({ config: { stage: 'pilot' } });
   const lists = ctx.hooks.magnetConfigs.map((magnet) => magnet.slugs);
   const seen = new Map();
@@ -238,7 +247,7 @@ test('the four magnet slug lists are disjoint and exclude the history experiment
       assert.equal(historySlugs.includes(slug), false, `${slug} collides with the history experiment`);
     }
   }
-  assert.equal(seen.size, 113);
+  assert.equal(seen.size, 134);
 });
 
 test('pilot uses a 50/50 Skip List gate and keeps unrelated posts on booking', () => {
