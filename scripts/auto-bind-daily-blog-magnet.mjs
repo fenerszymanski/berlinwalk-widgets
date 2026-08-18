@@ -139,6 +139,8 @@ export function classifyDailyBlogPost(post) {
     return result(null, RULES.event);
   }
 
+  if (topic === 'food and nightlife') return result(MAGNET_IDS.food, RULES.food);
+
   // German Language is a specialist category, but practical-rule terms such
   // as Pfand still belong to Unwritten Rules and food-topic phrases belong to
   // the Food card.
@@ -152,7 +154,6 @@ export function classifyDailyBlogPost(post) {
 
   // These are explicit specialist categories/signals. They take precedence
   // over a broad topic label such as “Tour Route Stories”.
-  if (topic === 'food and nightlife') return result(MAGNET_IDS.food, RULES.food);
   if (GERMAN_RE.test(text)) return result(MAGNET_IDS.german, RULES.german);
   if (TRIP_PLANNING_RE.test(text)) return result(MAGNET_IDS.tripPlanning, RULES.tripPlanning);
 
