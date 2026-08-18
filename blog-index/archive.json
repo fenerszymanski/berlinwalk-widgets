@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-08-18T01:09:45.048Z",
+  "updatedAt": "2026-08-18T04:58:26.144Z",
   "source": "Wix Blog API",
-  "totalPosts": 295,
+  "totalPosts": 296,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Cash-Only Restaurants in Berlin: A Food-Day Payment Plan for Visitors",
+      "slug": "cash-only-restaurants-in-berlin",
+      "path": "/post/cash-only-restaurants-in-berlin",
+      "url": "https://www.berlinwalk.com/post/cash-only-restaurants-in-berlin",
+      "excerpt": "Are Berlin restaurants cash only? A practical food-day payment plan for bakery counters, market stalls, sit-down dinners and late snacks, with the short question that prevents an awkward bill.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-08-18T04:56:07.904Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_2dfc59724f244e35bfe4d86ba01204ce~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-meal-wallet-hero.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_2dfc59724f244e35bfe4d86ba01204ce~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-meal-wallet-hero.jpg",
+      "alt": "A visitor checking wallet options beside a meal in a Berlin-style café",
+      "relatedToolSlug": "berlin-meal-wallet"
+    },
     {
       "title": "Why Are There Pink Pipes in Berlin? A First Visitor's Guide",
       "slug": "berlin-pink-pipes",
