@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-08-18T04:58:26.144Z",
+  "updatedAt": "2026-08-18T10:07:13.330Z",
   "source": "Wix Blog API",
-  "totalPosts": 296,
+  "totalPosts": 297,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "How to Read a Berlin Address: Street Names, House Numbers and the Clues That Get You There",
+      "slug": "how-to-read-a-berlin-address",
+      "path": "/post/how-to-read-a-berlin-address",
+      "url": "https://www.berlinwalk.com/post/how-to-read-a-berlin-address",
+      "excerpt": "Keep a Berlin address complete: street name, exact number, postcode and the entrance note that gets you through the right door.",
+      "category": "German Language",
+      "categorySlug": "german-language",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "4 min read",
+      "publishedDate": "2026-08-18T10:04:34.340Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_47824af90c004d359df32ab3b0eb322e~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-address-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_47824af90c004d359df32ab3b0eb322e~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-address-cover.jpg",
+      "alt": "A visitor checks a map and phone near Alexanderplatz, with Berlin's TV Tower in the background",
+      "relatedToolSlug": "berlin-address-compass"
+    },
     {
       "title": "Cash-Only Restaurants in Berlin: A Food-Day Payment Plan for Visitors",
       "slug": "cash-only-restaurants-in-berlin",

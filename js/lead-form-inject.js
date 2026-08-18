@@ -407,7 +407,8 @@
       'german-signs-in-berlin',
       'do-i-need-to-speak-german-to-visit-berlin',
       'feierabend-fernweh-schadenfreude-7-german-words-with-no-english-translation',
-      'why-berliners-aren-t-rude-they-re-just-honest'
+      'why-berliners-aren-t-rude-they-re-just-honest',
+      'how-to-read-a-berlin-address',
     ],
     component: {
       barCopy: 'FREE SAVE-TO-PHONE CARD',

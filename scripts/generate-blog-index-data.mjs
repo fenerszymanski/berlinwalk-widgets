@@ -753,6 +753,7 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if ((post.slug || '') === 'how-to-read-a-berlin-address') return 'berlin-address-compass';
   if ((post.slug || '') === 'cash-only-restaurants-in-berlin') return 'berlin-meal-wallet';
   if ((post.slug || '') === 'berlin-pink-pipes') return 'berlin-pink-pipe-decoder';
   if ((post.slug || '') === 'berlin-with-parents') return 'berlin-pace-passport';
