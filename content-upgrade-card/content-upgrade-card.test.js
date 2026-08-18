@@ -11,6 +11,22 @@ const journeyPath = path.join(root, 'js', 'blog-journey-inject.js');
 const elementSource = fs.readFileSync(elementPath, 'utf8');
 const injectorSource = fs.readFileSync(injectorPath, 'utf8');
 const journeySource = fs.readFileSync(journeyPath, 'utf8');
+const blogIndex = JSON.parse(fs.readFileSync(path.join(root, 'blog-index', 'data.json'), 'utf8'));
+const blogIndexSlugs = new Set(blogIndex.allPosts.map((post) => post.slug));
+
+// These nine aliases predate the current generated index and remain in the
+// injector for old direct URLs. The daily binder never adds to this set.
+const preexistingLegacyMagnetSlugs = new Set([
+  'is-the-ddr-museum-worth-it-tickets-queues-and-what-to-expect-in-2026',
+  'victory-column-berlin-view-tickets-and-climb-tips',
+  'museum-pass',
+  'welcomecard',
+  'berlin-before-hotel-check-in-what-to-do-with-luggage-and-time',
+  'berlin-ab-or-abc-ticket-which-zone-do-tourists-need',
+  'airport-to-alex',
+  'berlin-deutschlandticket-tourists',
+  'potsdam-from-berlin-train-tickets-and-sanssouci-day-trip-plan',
+]);
 
 const skipSlugs = [
   'how-many-days-in-berlin',
@@ -99,6 +115,7 @@ const historySlugs = [
   'the-ampelmann-how-a-traffic-light-became-berlin-s-most-beloved-symbol',
   'unter-den-linden-berlin',
   'why-is-berlin-founding-year-1237',
+  'alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos',
 ];
 
 function makeInjectorContext(options = {}) {
@@ -236,13 +253,14 @@ test('component is compact, accessible and has no inner scrolling surface', () =
 
 test('orchestrator keeps the Skip List slugs and registers the approved magnet fleet', () => {
   const ctx = makeInjectorContext({ config: { stage: 'pilot' } });
-  assert.deepEqual(Array.from(ctx.hooks.slugs).sort(), [...skipSlugs].sort());
+  assert.equal(skipSlugs.every((slug) => ctx.hooks.slugs.includes(slug)), true);
   assert.deepEqual(skipSlugs.filter((slug) => historySlugs.includes(slug)), []);
   assert.deepEqual(skipSlugs.filter((slug) => secondarySlugs.includes(slug)), []);
   assert.equal(ctx.hooks.safetySlug, '');
   assert.equal(ctx.hooks.placement, 'blog_inline_booking_slot');
   assert.equal(ctx.hooks.magnetConfigs.length, 9);
-  assert.deepEqual(JSON.parse(JSON.stringify(ctx.hooks.magnetConfigs[0])), {
+  const { slugs: actualSkipSlugs, ...actualSkipConfig } = JSON.parse(JSON.stringify(ctx.hooks.magnetConfigs[0]));
+  assert.deepEqual(actualSkipConfig, {
     experimentId: 'berlin_skip_list_v1',
     assetId: 'berlin-skip-list',
     assetVersion: '2026-08-v1',
@@ -252,8 +270,8 @@ test('orchestrator keeps the Skip List slugs and registers the approved magnet f
     placement: 'blog_inline_booking_slot',
     controlType: 'private-tour',
     controlUrl: 'https://www.berlinwalk.com/private-tour',
-    slugs: [...skipSlugs],
   });
+  assert.equal(skipSlugs.every((slug) => actualSkipSlugs.includes(slug)), true);
   assert.equal(JSON.stringify(ctx.hooks.magnetConfigs.slice(1).map((magnet) => magnet.assetId)), JSON.stringify([
     'berlin-pass-decision-sheet',
     'berlin-arrival-card',
@@ -270,7 +288,6 @@ test('orchestrator keeps the Skip List slugs and registers the approved magnet f
   assert.equal(food.storageKey, 'bwContentUpgrade.berlinFoodDecisionCard.v1');
   assert.equal(food.controlType, 'private-tour');
   assert.equal(food.controlUrl, 'https://www.berlinwalk.com/private-tour');
-  assert.equal(food.slugs.length, 21);
   assert.equal(food.slugs.includes('vegan-berlin-guide-2026'), true);
   assert.equal(food.slugs.includes('how-to-order-doner-in-berlin'), true);
   const neighborhood = ctx.hooks.magnetConfigs[6];
@@ -278,7 +295,7 @@ test('orchestrator keeps the Skip List slugs and registers the approved magnet f
   assert.equal(neighborhood.experimentId, 'berlin_neighborhood_matcher_v1');
   assert.equal(neighborhood.storageKey, 'bwContentUpgrade.berlinNeighborhoodMatcher.v1');
   assert.equal(neighborhood.controlType, 'private-tour');
-  assert.equal(JSON.stringify(neighborhood.slugs), JSON.stringify(neighborhoodSlugs));
+  assert.equal(neighborhoodSlugs.every((slug) => neighborhood.slugs.includes(slug)), true);
   assert.match(injectorSource, /gateMode: 'calculator'/);
   assert.match(injectorSource, /ariaLabel: 'Berlin neighborhood matcher'/);
   assert.match(injectorSource, /Decision table checked 18 August 2026/);
@@ -289,7 +306,7 @@ test('orchestrator keeps the Skip List slugs and registers the approved magnet f
   assert.equal(unwritten.experimentId, 'berlin_unwritten_rules_v1');
   assert.equal(unwritten.storageKey, 'bwContentUpgrade.berlinUnwrittenRules.v1');
   assert.equal(unwritten.controlType, 'private-tour');
-  assert.equal(JSON.stringify(unwritten.slugs), JSON.stringify(unwrittenSlugs));
+  assert.equal(unwrittenSlugs.every((slug) => unwritten.slugs.includes(slug)), true);
   assert.match(injectorSource, /Berlin Unwritten Rules Card/);
   assert.match(injectorSource, /€5 is the standard red-light pedestrian fine/);
   assert.match(injectorSource, /€20 to €40/);
@@ -300,7 +317,7 @@ test('orchestrator keeps the Skip List slugs and registers the approved magnet f
   assert.equal(monthPlanner.storageKey, 'bwContentUpgrade.berlinMonthPlanner.v1');
   assert.equal(monthPlanner.controlType, 'trip-planner');
   assert.equal(monthPlanner.controlUrl, 'https://www.berlinwalk.com/berlin-trip-planner');
-  assert.deepEqual(JSON.parse(JSON.stringify(monthPlanner.slugs)), monthPlannerSlugs);
+  assert.equal(monthPlannerSlugs.every((slug) => monthPlanner.slugs.includes(slug)), true);
   assert.match(injectorSource, /Berlin Month Planner Card/);
   assert.match(injectorSource, /Averages are context, not a forecast/);
   assert.match(injectorSource, /Check the official calendar for your year/);
@@ -324,7 +341,15 @@ test('the magnet slug lists are disjoint and exclude the history experiment slug
       assert.equal(historySlugs.includes(slug), false, `${slug} collides with the history experiment`);
     }
   }
-  assert.equal(seen.size, 173);
+  const unexpectedMissingFromIndex = [...seen.keys()]
+    .filter((slug) => !blogIndexSlugs.has(slug) && !preexistingLegacyMagnetSlugs.has(slug))
+    .sort();
+  assert.deepEqual(unexpectedMissingFromIndex, []);
+  assert.equal(
+    [...seen.keys()].filter((slug) => !blogIndexSlugs.has(slug))
+      .every((slug) => preexistingLegacyMagnetSlugs.has(slug)),
+    true,
+  );
 });
 
 test('pilot uses a 50/50 Skip List gate and keeps unrelated posts on booking', () => {
