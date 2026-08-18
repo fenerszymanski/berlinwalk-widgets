@@ -199,7 +199,7 @@ test('orchestrator keeps the 29 Skip List slugs and registers the approved magne
   assert.deepEqual(skipSlugs.filter((slug) => secondarySlugs.includes(slug)), []);
   assert.equal(ctx.hooks.safetySlug, '');
   assert.equal(ctx.hooks.placement, 'blog_inline_booking_slot');
-  assert.equal(ctx.hooks.magnetConfigs.length, 4);
+  assert.equal(ctx.hooks.magnetConfigs.length, 5);
   assert.deepEqual(JSON.parse(JSON.stringify(ctx.hooks.magnetConfigs[0])), {
     experimentId: 'berlin_skip_list_v1',
     assetId: 'berlin-skip-list',
@@ -215,7 +215,8 @@ test('orchestrator keeps the 29 Skip List slugs and registers the approved magne
   assert.equal(JSON.stringify(ctx.hooks.magnetConfigs.slice(1).map((magnet) => magnet.assetId)), JSON.stringify([
     'berlin-pass-decision-sheet',
     'berlin-arrival-card',
-    'berlin-day-trip-compare-sheet'
+    'berlin-day-trip-compare-sheet',
+    'berlin-german-cheat-card'
   ]));
   assert.match(injectorSource, /if \(history\.inExperiment\) return \{ owner: 'history'/);
   assert.match(injectorSource, /if \(contentUpgrade\.inExperiment\) return \{ owner: 'content-upgrade'/);
@@ -237,7 +238,7 @@ test('the four magnet slug lists are disjoint and exclude the history experiment
       assert.equal(historySlugs.includes(slug), false, `${slug} collides with the history experiment`);
     }
   }
-  assert.equal(seen.size, 103);
+  assert.equal(seen.size, 113);
 });
 
 test('pilot uses a 50/50 Skip List gate and keeps unrelated posts on booking', () => {

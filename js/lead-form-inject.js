@@ -386,6 +386,66 @@
       controlDescription: 'The Berlin Trip Planner turns day-trip ambition into a day-by-day plan with transport layers and recovery space.',
       controlLabel: 'Open the Trip Planner'
     }
+  }, {
+    experimentId: 'berlin_german_cheat_card_v1',
+    assetId: 'berlin-german-cheat-card',
+    assetVersion: '2026-08-v1',
+    storageKey: 'bwContentUpgrade.berlinGermanCheatCard.v1',
+    apiBase: CONTENT_UPGRADE_DEFAULT_API_BASE,
+    elementUrl: CONTENT_UPGRADE_DEFAULT_ELEMENT_URL,
+    placement: CONTENT_UPGRADE_PLACEMENT,
+    controlType: 'private-tour',
+    controlUrl: 'https://www.berlinwalk.com/private-tour',
+    acquisitionCohort: 'berlin_german_cheat_card_pilot',
+    slugs: [
+      '50-essential-german-phrases-every-tourist-should-know-before-visiting-berlin',
+      '10-german-words-every-tourist-should-know-before-visiting-berlin',
+      'german-numbers-for-tourists-berlin',
+      'telling-time-in-german-berlin',
+      'entschuldigung-berlin',
+      'berlin-slang-10-words-you-ll-only-hear-in-this-city',
+      'german-signs-in-berlin',
+      'do-i-need-to-speak-german-to-visit-berlin',
+      'feierabend-fernweh-schadenfreude-7-german-words-with-no-english-translation',
+      'why-berliners-aren-t-rude-they-re-just-honest'
+    ],
+    component: {
+      barCopy: 'FREE SAVE-TO-PHONE CARD',
+      eyebrow: 'Berlin German, five phrases first',
+      title: 'The Berlin German Cheat Card',
+      description: 'You do not need fluent German. You need five phrases you can say without thinking. I put them on one card for your phone.',
+      gateCopy: 'Those are three of them. Want the full card with the five phrases that do the work, three rescue lines and the signs worth knowing on sight? I will email it.',
+      submitLabel: 'Email me the German Cheat Card',
+      consentVersion: 'berlin-german-cheat-card-v1-2026-08-18',
+      consentText: 'By requesting this card, I agree to receive it by email plus occasional BerlinWalk emails about visiting Berlin and planning a Berlin trip. I can unsubscribe anytime. Privacy Policy.',
+      successCopy: 'Check your inbox to confirm your email and open The Berlin German Cheat Card.',
+      arrivalLabel: 'When are you planning to arrive?',
+      arrivalOptions: [
+        { value: 'this-month', label: 'This month' },
+        { value: 'next-month', label: 'Next month' },
+        { value: 'in-2-3-months', label: 'In 2-3 months' },
+        { value: 'not-booked-yet', label: 'Not booked yet' }
+      ],
+      teasers: [
+        { number: 1, title: 'Ich hätte gern...', body: 'The one phrase that opens almost any order. It is the polite "I would like," softer than "Ich will," and it works at a bakery, a bar or a ticket counter.' },
+        { number: 2, title: 'Sprechen Sie Englisch?', body: 'Open in German, then ask this. Starting in German and switching lands far better than opening in English, and most people will happily switch.' },
+        { number: 3, title: 'A flat reply is not rudeness.', body: 'Berliner Schnauze is the local directness. A short answer or a neutral face is not aimed at you, so do not let it stop you trying the German.' }
+      ],
+      items: [
+        { number: 1, skip: 'Ich hätte gern (I would like)' },
+        { number: 2, skip: 'Das da, bitte (that one, please)' },
+        { number: 3, skip: 'Zum Mitnehmen, bitte (to take away)' },
+        { number: 4, skip: 'Kann ich mit Karte zahlen? (pay by card)' },
+        { number: 5, skip: 'Die Rechnung, bitte (the bill, please)' },
+        { number: 6, skip: 'Sprechen Sie Englisch? (do you speak English)' },
+        { number: 7, skip: 'Wo ist...? (where is)' },
+        { number: 8, skip: 'Eine Fahrkarte, bitte (one ticket, please)' },
+        { number: 9, skip: 'Ausgang / Eingang (exit / entrance)' }
+      ],
+      controlTitle: 'Want a Berlin walk in plain English?',
+      controlDescription: 'On a private walk you do not need any German at all. I guide in clear English, at your pace, around your date.',
+      controlLabel: 'See private walks'
+    }
   }];
 
   var injections = 0;
