@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Berlin Private Route Brief | BerlinWalk</title>
-  <meta name="description" content="See the real BerlinWalk route of 11 stops across 16 places, then pick the version of the walk your group needs before you enquire.">
+  <meta name="description" content="See the main stopping points on BerlinWalk's historic-centre route, then choose the pace and emphasis your group needs before you enquire.">
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../css/brand.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -97,10 +97,10 @@
       <header class="route-head">
         <p class="route-kicker">Berlin Private Route Brief</p>
         <h1>The walk I actually lead, shaped around your group.</h1>
-        <p>A private walk does not become a different city. It is the same historic centre line from the World Clock at Alexanderplatz to Hackescher Markt, on your date, with only your group. What changes is where the time goes. Pick the version your group needs and see which stops keep it.</p>
+        <p>A private walk can stay inside the historic-centre corridor from Alexanderplatz towards Hackescher Markt without repeating every public-tour stop in the same way. What changes is where the time goes. Pick the version your group needs and see which stopping points keep it.</p>
         <ul class="route-facts">
-          <li><b>11</b> stops</li>
-          <li><b>16</b> places</li>
+          <li><b>Central</b> route</li>
+          <li><b>Real</b> places</li>
           <li><b>3 km</b> on foot</li>
           <li><b>~2 h</b> at a normal pace</li>
         </ul>
@@ -113,16 +113,16 @@
         <div class="route-versions" aria-label="Private walk versions">
           <button class="route-version" type="button" data-version="classic" aria-pressed="false">The classic centre<small>A thousand years, the full line</small></button>
           <button class="route-version" type="button" data-version="children" aria-pressed="false">With children<small>Shorter, with things to walk around</small></button>
-          <button class="route-version" type="button" data-version="stepfree" aria-pressed="false">Step-free and slow<small>Short legs, real sitting points</small></button>
+          <button class="route-version" type="button" data-version="stepfree" aria-pressed="false">Slower pace<small>Short legs, real sitting points</small></button>
           <button class="route-version" type="button" data-version="twentieth" aria-pressed="false">The 20th century<small>The GDR centre and what the war took</small></button>
           <button class="route-version" type="button" data-version="museum" aria-pressed="false">Museum Island focus<small>The context before you go in</small></button>
           <button class="route-version" type="button" data-version="highlights" aria-pressed="false">Just the highlights<small>One tight loop when time is short</small></button>
         </div>
         <div class="route-map-wrap">
-          <div id="route-map" role="application" aria-label="Map of the eleven-stop BerlinWalk route from Alexanderplatz to Hackescher Markt"></div>
-          <p class="route-map-note"><strong>Route order, not navigation.</strong> The line shows the walking order of the eleven stops. I confirm the final order and the meeting point with you before the walk.</p>
+          <div id="route-map" role="application" aria-label="Map of the main stopping points on the BerlinWalk historic-centre route"></div>
+          <p class="route-map-note"><strong>Route order, not navigation.</strong> The line shows the order of the main stopping points. I confirm the final order and the meeting point with you before the walk.</p>
         </div>
-        <ol class="route-stops" id="route-stops" aria-label="The eleven stops in walking order"></ol>
+        <ol class="route-stops" id="route-stops" aria-label="Main stopping points in walking order"></ol>
         <section class="route-brief" id="route-brief" hidden aria-live="polite">
           <h2 id="route-brief-title">Your route brief</h2>
           <div class="route-verdict"><p id="route-verdict"></p></div>
@@ -139,7 +139,7 @@
           <h3>What a private walk does not change</h3>
           <p>The route stays in the historic centre. I do not stitch Charlottenburg Palace, the East Side Gallery and Mitte into the same two hours, because that day is mostly transport and the walk stops being a walk. If your group wants places that far apart, book the centre properly and keep the rest of the day separate.</p>
         </div>
-        <p class="route-footnote">The free tip-based walk keeps running on its fixed days with a mixed group. A private walk is the same route on your own date, for your group only. Check opening hours, tickets and access needs separately before you fix the day.</p>
+        <p class="route-footnote">The free tip-based walk keeps running on its fixed days with a mixed group. A private walk can change the emphasis and pace inside the central route after confirmation. Check opening hours, tickets and access needs separately before you fix the day.</p>
       </div>
     </section>
   </main>
@@ -155,7 +155,7 @@
         { n: 6, name: 'Sanchi Gate', area: 'Lustgarten side of the Humboldt Forum', lat: 52.51824, lng: 13.40161 },
         { n: 7, name: 'Humboldt Forum', area: 'Schlossplatz', lat: 52.51703, lng: 13.40123 },
         { n: 8, name: 'Lustgarten, Berliner Dom, Altes Museum', area: 'Museum Island', lat: 52.51895, lng: 13.39970 },
-        { n: 9, name: 'Neues Museum, Alte Nationalgalerie, Pergamon', area: 'Museum Island', lat: 52.52050, lng: 13.39800 },
+        { n: 9, name: 'Neues Museum and Alte Nationalgalerie', area: 'Museum Island', lat: 52.52050, lng: 13.39800 },
         { n: 10, name: 'Friedrichsbrücke', area: 'Spree crossing', lat: 52.52047, lng: 13.40016 },
         { n: 11, name: 'Hackescher Markt', area: 'Finish', lat: 52.52268, lng: 13.40234 }
       ];
@@ -176,21 +176,21 @@
         classic: {
           label: 'The classic centre',
           keep: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-          verdict: '<strong>Nothing gets cut.</strong> This is the full line, in order, at a normal walking pace. It is the version most groups should take the first time, because the point is not the individual stops. It is that Alexanderplatz, the medieval core, the GDR centre and Museum Island stop being separate sights by the end.',
-          keeps: 'All eleven stops, about three kilometres, about two hours.',
+          verdict: '<strong>Nothing gets cut.</strong> This is the full line, in order, at a normal walking pace. It suits a first visit because Alexanderplatz, the medieval core, the GDR centre and Museum Island stop feeling like separate sights by the end.',
+          keeps: 'All main stopping points, about three kilometres, about two hours.',
           drops: 'Nothing, which means no single stop gets a long stay. If one place matters more than the rest, tell me in the form and pick a different version.'
         },
         children: {
           label: 'With children',
           keep: [1, 2, 3, 5, 6, 8, 11],
-          verdict: '<strong>Children hold attention at things they can walk around.</strong> The Neptunbrunnen and the Sanchi Gate do more for a seven year old than another facade. I keep the same line, stop more often and finish earlier, and I would rather cut three stops than march a tired family through all eleven.',
+          verdict: '<strong>Children hold attention at things they can walk around.</strong> The Neptunbrunnen and the Sanchi Gate do more for a seven year old than another facade. I keep the same central line, stop more often and finish earlier, and I would rather cut three stopping points than march a tired family through all of them.',
           keeps: 'World Clock, TV Tower, Rotes Rathaus and Neptunbrunnen, Marx-Engels-Forum, Sanchi Gate, the Lustgarten, then food and a station at Hackescher Markt.',
           drops: 'The Marienkirche interior and the detail on the museum row. Both are worth your time without children in the group.'
         },
         stepfree: {
-          label: 'Step-free and slow',
+          label: 'Slower pace',
           keep: [1, 2, 3, 5, 7, 8, 10],
-          verdict: '<strong>This ground is flat, so the real problem is distance, not stairs.</strong> I shorten the legs, plan actual sitting points at the Neptunbrunnen and in the Lustgarten, and drop the stops that only pay off if you stand for a while. If two hours is too much, we finish at Museum Island and you are next to trams and buses.',
+          verdict: '<strong>Distance and standing time matter more than a label.</strong> I shorten the legs, plan actual sitting points at the Neptunbrunnen and in the Lustgarten, and drop the stops that only pay off if you stand for a while. Share the group’s exact access needs before booking so I can confirm whether the route works.',
           keeps: 'World Clock, TV Tower, Rotes Rathaus and Neptunbrunnen, Marx-Engels-Forum, Humboldt Forum, the Lustgarten, Friedrichsbrücke.',
           drops: 'The Marienkirche and the Sanchi Gate, and the walk up to the northern museums if the group has had enough by the Lustgarten.'
         },
@@ -204,9 +204,9 @@
         museum: {
           label: 'Museum Island focus',
           keep: [5, 6, 7, 8, 9, 10],
-          verdict: '<strong>The context before you go in.</strong> I keep the first half short and give the island the time, so the collections make sense when you buy the ticket. I do not go inside the museums with you, and that is deliberate. You will get more out of an hour in the Pergamon after this walk than after a queue.',
+          verdict: '<strong>The context before you go in.</strong> I keep the first half short and give the island the time, so one currently open collection makes more sense when you buy the ticket. I do not go inside the museums with you, and that is deliberate. Check the official opening page before choosing which museum follows the walk.',
           keeps: 'Marx-Engels-Forum, Sanchi Gate, Humboldt Forum, the Lustgarten with the Dom and the Altes Museum, the northern museums, Friedrichsbrücke.',
-          drops: 'Most of the Alexanderplatz opening. We still meet at the World Clock unless another start suits you better, then walk west without stopping long.'
+          drops: 'Most of the Alexanderplatz opening. The default start remains the World Clock unless another confirmed start suits the group better, then the walk moves west without stopping long.'
         },
         highlights: {
           label: 'Just the highlights',

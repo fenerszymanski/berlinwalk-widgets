@@ -10,7 +10,7 @@ Start **east** when you are already at Alexanderplatz, Hackescher Markt or on Mu
 
 Start **west** when you are around Pariser Platz, the government quarter or Hauptbahnhof. This is the cleanest way to understand the Brandenburg Gate, the Reichstag and the wide political spaces around them without doubling back across Mitte. The [official Brandenburg Gate page](https://www.berlin.de/en/attractions-and-sights/3560266-3104052-brandenburg-gate.en.html) is a useful current check for access details.
 
-The point is not to crown one side the winner. It is to stop pretending that east and west are one quick loop.
+There is no need to crown one side the winner. The useful decision is which side gets your two hours.
 
 ![The illuminated Brandenburg Gate at blue hour in Berlin](images/optimized/01-brandenburg-gate.jpg)
 

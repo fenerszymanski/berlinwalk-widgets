@@ -17,7 +17,7 @@ _The field of stelae changes as you move through it; there is no single viewpoin
 
 Begin at Cora-Berliner-Straße 1, just south of the Brandenburg Gate. The field of 2,711 concrete stelae is open around the clock, while the underground Information Centre has its own visiting hours: Tuesday to Sunday, 10:00–18:00. Both the field and the Information Centre are free to visit; check the [official visitor information](https://www.stiftung-denkmal.de/en/memorials/memorial-to-the-murdered-jews-of-europe/) before planning a timed stop.
 
-I would not begin by trying to photograph the whole field from its edge. Walk into it, notice how the ground falls and rises, and then decide whether you want the names, biographies and family stories in the Information Centre. The point is not to finish the site quickly. The point is to let the scale become personal before moving on to the institutions that made the crimes possible.
+I would not begin by trying to photograph the whole field from its edge. Walk into it, notice how the ground falls and rises, and then decide whether you want the names, biographies and family stories in the Information Centre. Do not rush to finish the site. Let the scale become personal before moving on to the institutions that made the crimes possible.
 
 ![A view down a path between the stelae at the Memorial to the Murdered Jews of Europe](blog-drafts/free-berlin-memorials/images/optimized/02-memorial-field.jpg)
 _The field is open 24 hours; the Information Centre below it follows separate visiting hours._

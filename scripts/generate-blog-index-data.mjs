@@ -753,8 +753,10 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if ((post.slug || '') === 'english-bookshops-in-berlin') return 'berlin-reading-stop-line';
   if ((post.slug || '') === 'berlin-botanic-garden') return 'berlin-plant-passport';
   if ((post.slug || '') === 'berlin-opera-for-first-time-visitors') return 'berlin-opera-house-reader';
+  if ((post.slug || '') === 'berlin-brutalist-architecture') return 'berlin-concrete-clue-chain';
   if ((post.slug || '') === 'how-to-read-a-berlin-address') return 'berlin-address-compass';
   if ((post.slug || '') === 'cash-only-restaurants-in-berlin') return 'berlin-meal-wallet';
   if ((post.slug || '') === 'berlin-pink-pipes') return 'berlin-pink-pipe-decoder';
@@ -764,9 +766,13 @@ function relatedToolSlugFor(post) {
   if ((post.slug || '') === 'berlin-landmarks-in-two-hours') return 'berlin-landmark-window';
   if ((post.slug || '') === 'bauhaus-in-berlin-modernism') return 'berlin-bauhaus-lineage-map';
   if ((post.slug || '') === 'free-berlin-memorials') return 'berlin-memorial-reading-order';
+  if ((post.slug || '') === 'what-to-wear-for-a-berlin-walking-tour') return 'berlin-walking-kit';
+  if ((post.slug || '') === 'travelling-alone-in-berlin-day-plan') return 'berlin-solo-day-path';
+  if ((post.slug || '') === 'private-berlin-tour-for-groups') return 'berlin-private-route-brief';
   if ((post.slug || '') === 'berlin-itinerary-for-couples') return 'berlin-day-duet';
   if ((post.slug || '') === 'guided-vs-self-guided-berlin-walking-tour') return 'berlin-first-walk-lens';
   if ((post.slug || '') === 'morning-or-afternoon-walking-tour-berlin') return 'berlin-tour-time-window';
+  if ((post.slug || '') === 'best-museums-in-berlin-first-time-visitors') return 'berlin-museum-three-slot-builder';
   if ((post.slug || '') === 'which-berlin-pass-is-worth-it') return 'berlin-pass-cost-comparison';
   if ((post.slug || '') === 'where-to-eat-late-at-night-in-berlin') return 'berlin-late-night-food';
   if ((post.slug || '') === 'vietnamese-food-in-berlin') return 'berlin-vietnamese-food-finder';

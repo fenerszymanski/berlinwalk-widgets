@@ -7,10 +7,10 @@ Internal production record. Reader-facing credits for article images belong in t
 | File | Use | Source and licence |
 | --- | --- | --- |
 | `01-oberbaumbruecke-cover.jpg` | Cover: Oberbaumbrücke and the U-Bahn over the Spree | [Guido from Berlin, Wikimedia Commons](https://commons.wikimedia.org/wiki/File:-Sunset_on_Oberbaumbr%C3%BCcke-_(43668194515).jpg), CC BY 2.0 |
-| `02-museum-island.jpg` | Museum Island planning anchor | [Thomas Wolf, Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Berlin_Museumsinsel_Fernsehturm.jpg), CC BY-SA 3.0 |
+| `02-museum-island.jpg` | Museum Island fixed cultural stop | [Thomas Wolf, Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Berlin_Museumsinsel_Fernsehturm.jpg), CC BY-SA 3.0 |
 | `03-east-side-gallery.jpg` | East Side Gallery sequence | [Perituss, Wikimedia Commons](https://commons.wikimedia.org/wiki/File:East_Side_Gallery_2015_02.jpg), CC0 |
 | `04-tiergarten.jpg` | Tiergarten outdoor half-day | [Ryan Snyder, Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Bicyclist,_Gro%C3%9Fer_Tiergarten,_Berlin_(13543027693).jpg), CC BY 2.0 |
-| `05-markthalle-neun.jpg` | Kreuzberg food hinge | [Dirk Ingo Franke, Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Markthalle_Neun_08.02.2015_16-33-23.JPG), CC BY-SA 4.0 |
+| `05-markthalle-neun.jpg` | Kreuzberg food stop | [Dirk Ingo Franke, Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Markthalle_Neun_08.02.2015_16-33-23.JPG), CC BY-SA 4.0 |
 
 ## Tool images
 

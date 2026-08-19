@@ -1,6 +1,6 @@
 A Berlin address often arrives at the least convenient moment: in a hotel message, on a restaurant booking, or while you are halfway across Alexanderplatz with a phone in one hand and a suitcase in the other. It can look like one long string, but it is really a few small clues that need to stay together.
 
-My advice: do not copy only the street name and hope the map fills in the rest. Keep the street, number, postcode and any entrance note as one address. I have made that mistake before, usually by treating the little letter after a house number as a detail rather than the bit that gets you to the right door.
+Do not copy only the street name and hope the map fills in the rest. Keep the street, number, postcode and any entrance note as one address. A small letter after the house number is easy to dismiss, but it can be the detail that gets you to the right door.
 
 {{quick-summary}}
 
@@ -57,6 +57,6 @@ That is more useful than trying to learn a new street system from memory. If you
 
 For a first historic-centre walk, Alexanderplatz is a practical anchor because it gives you one recognisable meeting point before the city starts branching in every direction. My [Free Walking Tour](https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based) starts there and explores the historic centre of former East Berlin in about 2 hours. Check the live booking page for the date and meeting details, then keep the full address of your next stop saved for after the tour.
 
-The point is not to make Berlin feel like a form to complete. It is to give one address enough attention that you arrive calmly, ring the right bell and have your attention left for the city around you.
+This is not about making Berlin feel like a form to complete. Give one address enough attention that you arrive calmly, ring the right bell and still have attention left for the city around you.
 
 {{faq}}

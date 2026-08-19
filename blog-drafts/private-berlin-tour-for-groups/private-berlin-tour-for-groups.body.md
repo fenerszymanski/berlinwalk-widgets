@@ -27,9 +27,9 @@ It is not the right answer when three people need a west Berlin start, two peopl
 ![A BerlinWalk group with the TV Tower behind them](blog-drafts/private-berlin-tour-for-groups/images/optimized/03-tour-group-tv-tower.jpg)
 _A BerlinWalk group with the TV Tower behind them in the historic centre._
 
-Use the [Berlin Private Route Brief](https://www.berlinwalk.com/tools/berlin-private-route-brief) before you book. Tap three real places and look at the sequence, not just the number of pins. Alexanderplatz, Museum Island and the Brandenburg Gate form a central conversation. East Side Gallery added to that sequence changes the day because the group is no longer staying in one compact area. Charlottenburg Palace introduces a west-side decision rather than another central highlight.
+Use the [Berlin Private Route Brief](https://www.berlinwalk.com/tools/berlin-private-route-brief) before you book. Choose the version that sounds like your group: a classic central walk, a slower pace, a child-friendly shape, a twentieth-century focus, more Museum Island context or a shorter highlights route. The map shows which central stopping points keep the time and which ones are reduced.
 
-The tool draws a simple line between the selected coordinates. It is a planning signal, not a promised walking route or a turn-by-turn travel time. That distinction matters in Berlin, where a map can look close while a group still needs a train, a booking buffer or a proper pause.
+The tool shows the order and emphasis of one central route. It is a planning signal, not a promised final route or a turn-by-turn travel time. I still need the date, group size, preferred start and any access needs before confirming what the walk can honestly include.
 
 {{widget:berlin-private-route-brief}}
 
@@ -38,13 +38,13 @@ Official visitor sources make the same practical point from another angle. [visi
 ## Match the format to the group's actual friction
 
 ![Marx and Engels Forum with the Berliner Dom in the background](blog-drafts/private-berlin-tour-for-groups/images/optimized/04-marx-engels-berliner-dom.jpg)
-_Marx and Engels Forum with the Berliner Dom in the background, a useful central hinge between several Berlin stories._
+_Marx and Engels Forum with the Berliner Dom in the background, a central place where several Berlin stories meet._
 
 Here is the practical split I use:
 
 - If the group wants a first look at central Berlin, choose the public walk and keep the next plan flexible.
 - If the group has a strong shared theme, ask about a private route that can give that theme enough time instead of adding unrelated highlights.
-- If the group has different must-sees, make one person’s fixed booking the anchor and choose one shared hinge nearby. Do not promise four districts just because the map makes them look interesting.
+- If the group has different must-sees, start with the least flexible booking and choose one shared stop nearby. Do not promise four districts just because the map makes them look interesting.
 - If the group has a useful start or end point, mention it early. The route can be judged against the real day rather than against a generic city-centre loop.
 
 The [guided versus self-guided Berlin walking tour guide](https://www.berlinwalk.com/post/guided-vs-self-guided-berlin-walking-tour) is useful when the main choice is live orientation versus private pace. The [Berlin itinerary for couples guide](https://www.berlinwalk.com/post/berlin-itinerary-for-couples) uses a similar one-must-do-each rule for two people. Groups need the same discipline, just with more voices in the room.
@@ -52,7 +52,7 @@ The [guided versus self-guided Berlin walking tour guide](https://www.berlinwalk
 ## A simple decision before you enquire
 
 ![Museum Island colonnade in Berlin](blog-drafts/private-berlin-tour-for-groups/images/optimized/05-museum-island-colonnade.jpg)
-_Museum Island is a strong central anchor when a group wants history, architecture and a route that can stay compact._
+_Museum Island works as a compact central base when a group wants history and architecture without another cross-city move._
 
 Choose the free walk when a fixed central introduction is the answer. Choose a private Berlin tour when the group needs a particular route, a particular starting point or a particular balance between history, landmarks, museums and neighbourhood time.
 

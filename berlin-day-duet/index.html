@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Berlin Day Duet | BerlinWalk</title>
-  <meta name="description" content="Two travellers privately choose two Berlin postcards each, then reveal one shared hinge and a fair shape for the day.">
+  <meta name="description" content="Two travellers privately choose two Berlin postcards each, then reveal one shared stop and a fair shape for the day.">
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../css/brand.css">
   <script defer src="../js/brand.js"></script>
@@ -407,7 +407,7 @@
       <div class="duet-hero-copy">
         <p class="duet-kicker">Two travellers • one phone</p>
         <h2>Build one Berlin day from two honest wish lists</h2>
-        <p>Pick privately, pass the phone, then reveal a shared hinge and one part of the day that belongs to each of you.</p>
+        <p>Pick privately, pass the phone, then reveal a shared stop and one part of the day that belongs to each of you.</p>
       </div>
       <div class="duet-postcard-stack" aria-hidden="true">
         <div class="duet-mini-card"><img src="assets/museum-island.jpg" alt=""></div>
@@ -636,7 +636,7 @@
     }
 
     function hingeMarkup(hinge) {
-      return '<article class="duet-route-card is-hinge"><span>Shared hinge</span><strong>' + hinge.name + '</strong><p>' + hinge.note + '</p></article>';
+      return '<article class="duet-route-card is-hinge"><span>Shared stop</span><strong>' + hinge.name + '</strong><p>' + hinge.note + '</p></article>';
     }
 
     function arrowMarkup() { return '<div class="duet-arrow" aria-hidden="true">→</div>'; }
@@ -655,10 +655,10 @@
         var aOnly = picks.A.filter(function (id) { return id !== shared; })[0];
         var bOnly = picks.B.filter(function (id) { return id !== shared; })[0];
         resultLabel.textContent = 'One matching postcard';
-        resultTitle.textContent = 'You found a real shared anchor';
+        resultTitle.textContent = 'You found a place that works for both of you';
         resultIntro.textContent = 'Protect the matching choice, then give each traveller one personal part of the day.';
         html = cardMarkup('Traveller A’s part', aOnly) + arrowMarkup() + hingeMarkup({ name: places[shared].name, note: 'Both of you chose this. Use it as the centre of the day.' }) + arrowMarkup() + cardMarkup('Traveller B’s part', bOnly);
-        resultNote.textContent = 'Put the fixed or time-sensitive stop first. If the three places do not form a compact route, keep the shared anchor and move one personal choice to another day.';
+        resultNote.textContent = 'Put the fixed or time-sensitive stop first. If the three places do not form a compact route, keep the shared stop and move one personal choice to another day.';
       } else {
         var pair = closestPair();
         var hinge = hingeFor(pair.a, pair.b);

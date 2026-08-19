@@ -1,6 +1,6 @@
 The cash question usually arrives when the food is already in front of you. You have found a small bakery near a station, ordered a coffee and a roll, then noticed that the card reader is nowhere obvious. Or you have sat down for dinner in Kreuzberg and realised that “cash-only” is not a city rule but it might be this restaurant’s rule today.
 
-My advice: do not turn Berlin into a hunt for cash-only places. Treat cash as a calm backup for a food day, then ask before you commit to an order. I have made that mistake before: assuming the payment part will sort itself out because the counter feels informal. One direct question is faster than a rescue mission after the bill arrives.
+Do not turn Berlin into a hunt for cash-only places. Treat cash as a calm backup for a food day, then ask before you commit to an order. An informal counter is not a promise that the payment part will sort itself out. One direct question is faster than a rescue mission after the bill arrives.
 
 {{quick-summary}}
 

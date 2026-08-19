@@ -54,7 +54,7 @@ The builder spreads three choices across your actual travel days. It does not tu
 
 ## What not to add automatically
 
-Do not add the Pergamonmuseum just because it is the name you remember from a guidebook. Its closure and reopening phases have changed the practical Museum Island decision, so check my [Pergamon closure guide](https://www.berlinwalk.com/post/is-the-pergamon-museum-closed-what-every-tourist-needs-to-know-in-2026) before you shape a trip around it.
+Do not add the Pergamonmuseum just because it is the name you remember from a guidebook. It remains completely closed, and the official reopening date is 4 June 2027. Check the [Staatliche Museen zu Berlin announcement](https://www.smb.museum/en/press/press-releases/detail/museumsinsel-berlin-the-pergamonmuseum-returns-reopening-462027/) before you shape a trip around it.
 
 Do not buy a pass before you know how many paid museums you will actually enter. My [Museum Pass versus single tickets guide](https://www.berlinwalk.com/post/berlin-museum-pass-vs-single-tickets-which-one-saves-you-money) owns that calculation. A pass can be good value, but it is not a reason to cram in a fourth museum you did not want.
 

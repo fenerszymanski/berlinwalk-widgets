@@ -1,4 +1,4 @@
-Berlin has the kind of bookshop problem that sounds pleasant until you are standing outside at 4pm with one hour left, a wet tote bag and no idea whether you need a huge English shelf, a quiet café table or one specific novel. I have made that mistake before: I treated every bookshop pin as interchangeable, then spent the useful part of the afternoon crossing the city.
+Berlin has the kind of bookshop problem that sounds pleasant until you are standing outside at 4pm with one hour left, a wet tote bag and no idea whether you need a huge English shelf, a quiet café table or one specific novel. Treating every bookshop pin as interchangeable is how that useful hour disappears into transport.
 
 This is not a list of every place that sells a book in English. It is a three-stop way to give a bookshop a job in your day. Start in Mitte if you want range, move east if a browse needs coffee with it, or make Kreuzberg the point of the afternoon if you prefer an independent shelf to a department-store scale. Check each shop's own page before you travel; stock, events and opening hours change.
 

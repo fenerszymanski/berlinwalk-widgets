@@ -48,7 +48,7 @@ Choose **Staatsoper Unter den Linden** if you want the opera to finish a day in 
 
 Choose **Deutsche Oper Berlin** if you want a west-Berlin plan and a direct U-Bahn arrival. Treat it as its own destination. Build the afternoon around Charlottenburg or City West, then let the short ride or walk to the house feel straightforward. I would not try to squeeze it into a frantic line from Alexanderplatz, Museum Island and a 19:30 curtain.
 
-Choose **Komische Oper Berlin at Schillertheater** if the specific production catches you and you have checked the current venue. The point is not to label one house more adventurous than another from a travel blog. The point is to read the production page, save Bismarckstraße 110 when it is the listed location, and arrive at the building the company actually names.
+Choose **Komische Oper Berlin at Schillertheater** if the specific production catches you and you have checked the current venue. Do not label one house more adventurous than another from a travel blog. Read the production page, save Bismarckstraße 110 when it is the listed location, and arrive at the building the company actually names.
 
 If you have a different morning free, my [Free Walking Tour](https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based) is a separate historic-centre plan from Alexanderplatz. It lasts 2 hours and gives you street-level context for a later Staatsoper evening, but it does not replace a visit to an opera house or claim to cover their programmes. Check the live booking page for the date and meeting details.
 

@@ -1,4 +1,4 @@
-Travelling in Berlin with parents does not mean treating the city as fragile. It means choosing the part of the day that deserves their energy before Alexanderplatz, Museum Island and the Brandenburg Gate turn into a points race. I have made that mistake before: the group reaches a famous place, but nobody has the attention left to enjoy it. A calmer historic-centre day has one beginning, one meaningful stop and a clear point at which it is allowed to be finished.
+Travelling in Berlin with parents does not mean treating the city as fragile. It means choosing the part of the day that deserves their energy before Alexanderplatz, Museum Island and the Brandenburg Gate turn into a points race. That plan fails when the group reaches a famous place but nobody has the attention left to enjoy it. A calmer historic-centre day has one beginning, one meaningful stop and a clear point at which it is allowed to be finished.
 
 {{quick-summary}}
 
@@ -14,7 +14,7 @@ _Alexanderplatz gives a group a concrete meeting point before the city starts as
 
 ## Use Alexanderplatz as a beginning, not a test
 
-The World Time Clock at Alexanderplatz is a practical place to meet because nobody needs to hunt for a hidden entrance or understand a complicated map first. From there, take the day toward Nikolaiviertel or the Spree at an unhurried pace. The point is not to collect distance. It is to give the first hour a real Berlin scene: the square, the television tower, the older street pattern beyond it and the river nearby.
+The World Time Clock at Alexanderplatz is a practical place to meet because nobody needs to hunt for a hidden entrance or understand a complicated map first. From there, take the day toward Nikolaiviertel or the Spree at an unhurried pace. Distance is not the goal. Give the first hour a real Berlin scene: the square, the television tower, the older street pattern beyond it and the river nearby.
 
 Nikolaiviertel works well when the group wants a short, contained walk with cafés and places to sit. It is not an untouched medieval district, and it does not need to be sold as one. It is a rebuilt historic quarter where you can slow down, look at the scale of the streets and decide whether the next move should be Museum Island or simply a longer pause.
 

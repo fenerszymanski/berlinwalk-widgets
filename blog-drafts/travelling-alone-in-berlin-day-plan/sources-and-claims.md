@@ -1,4 +1,4 @@
-# Sources and claims - Travelling Alone in Berlin: Build a Day With One Good Anchor
+# Sources and claims - Travelling Alone in Berlin: Pick the Right Area for Your Solo Day
 
 ## Current official sources checked 2026-08-15 Europe/Berlin
 

@@ -1,6 +1,6 @@
 At Alexanderplatz, the first lesson of a Berlin walking tour is often under your feet. You set off feeling ready, then notice the hard pavement, the long pauses, the wind between buildings and the fact that the weather has changed since breakfast.
 
-I have made that mistake before. My practical rule is simple: dress for the time you will spend outside, build layers you can remove, and choose shoes for the ground rather than the photograph. Berlin rewards a comfortable pair of feet much more than a perfect outfit.
+My rule is simple: dress for the time you will spend outside, build layers you can remove, and choose shoes for the ground rather than the photograph. Berlin rewards a comfortable pair of feet much more than a perfect outfit.
 
 {{quick-summary}}
 
