@@ -6510,7 +6510,7 @@
       "cmsItemId": "11d46681-1d71-41e4-8e24-508bc004db23"
     },
     {
-    "slug": "berlin-plant-passport",
+      "slug": "berlin-plant-passport",
       "title": "Berlin Plant Passport",
       "lead": "Stamp your weather cover, honest time and garden aim into one calm greenhouse-and-outdoor visit shape for Berlin Botanic Garden.",
       "category": "Discovery",
@@ -6562,6 +6562,36 @@
       "image": "https://static.wixstatic.com/media/5a08a3_6dc12e4140a0444d9fac670b9fa15142~mv2.png",
       "iconStatus": "live-wix-media",
       "cmsItemId": "639b645b-48a5-4af7-8f6f-92ab0e936b7e"
+    },
+    {
+      "slug": "berlin-opera-house-reader",
+      "title": "Berlin Opera House Reader",
+      "lead": "Open three programme folds to place Staatsoper, Deutsche Oper and Komische Oper at Schillertheater before you turn a venue into an evening plan.",
+      "category": "Discovery",
+      "hubCategory": "CultureLandmarks",
+      "type": "Guide",
+      "priority": 48,
+      "tags": [
+        "Berlin opera",
+        "Berlin opera houses",
+        "Staatsoper Unter den Linden",
+        "Deutsche Oper Berlin",
+        "Komische Oper Berlin",
+        "Schillertheater",
+        "opera for tourists"
+      ],
+      "aliases": [
+        "Berlin opera for tourists",
+        "which Berlin opera house should I choose",
+        "Staatsoper or Deutsche Oper",
+        "Komische Oper current venue",
+        "Berlin opera houses map"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-opera-house-reader/",
+      "embedHeight": 1870,
+      "image": "https://static.wixstatic.com/media/5a08a3_f9c68db4a21746da8e78e5dd8e8162a0~mv2.png",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "d11564f8-bd66-4e76-954f-f49c912d51af"
     }
   ],
   "hubCategories": [
