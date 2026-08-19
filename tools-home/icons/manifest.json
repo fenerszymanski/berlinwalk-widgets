@@ -2792,5 +2792,18 @@
     "png160": "tools-home/icons/berlin-opera-house-reader-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-opera-house-reader-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_f9c68db4a21746da8e78e5dd8e8162a0~mv2.png"
+  },
+  {
+    "slug": "berlin-reading-stop-line",
+    "title": "Berlin Reading Stop Line",
+    "category": "Discovery",
+    "model": "Built-in ImageGen",
+    "style": "BerlinWalk glossy deep-green reading lamp, open book and golden bookmark tile, 2026-08-19",
+    "sourceSheet": "tools-home/icons/_src/berlin-reading-stop-line/icon-source.png",
+    "promptSource": "tools-home/icons/_src/berlin-reading-stop-line/PROMPT.md",
+    "png512": "tools-home/icons/berlin-reading-stop-line.png",
+    "png160": "tools-home/icons/berlin-reading-stop-line-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-reading-stop-line-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_c3bd7a379cde4fa7884c84fcae296288~mv2.png"
   }
 ]
