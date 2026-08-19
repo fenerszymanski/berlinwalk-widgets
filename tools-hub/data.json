@@ -6620,6 +6620,38 @@
       "image": "https://static.wixstatic.com/media/5a08a3_c3bd7a379cde4fa7884c84fcae296288~mv2.png",
       "iconStatus": "live-wix-media",
       "cmsItemId": "1dca37d9-a643-4bf2-956e-07da3a6d498d"
+    },
+    {
+      "slug": "berlin-live-music-week",
+      "title": "Berlin Live Music This Week",
+      "lead": "Pick the day you are in Berlin and see the recurring live music worth planning around: the free Wednesday lunch concert, the jazz clubs, the Saturday late-night jam, and Sunday in Mauerpark, plus what runs every night. Check the venue listing before you go.",
+      "category": "Discovery",
+      "hubCategory": "FoodNightlife",
+      "type": "Guide",
+      "tags": [
+        "live music in berlin",
+        "free live music berlin",
+        "berlin jazz clubs",
+        "berliner philharmonie lunch concert",
+        "mauerpark karaoke",
+        "berlin music tonight",
+        "b-flat berlin",
+        "a-trane berlin"
+      ],
+      "aliases": [
+        "live music in berlin",
+        "free live music berlin",
+        "where to hear live music in berlin",
+        "berlin jazz tonight",
+        "berlin concerts this week",
+        "cheap live music berlin"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-live-music-week/",
+      "embedHeight": 1500,
+      "image": "https://static.wixstatic.com/media/5a08a3_21c722e9851441f78e1d2091a56c3937~mv2.png",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "675387c6-f075-448e-bb93-46eb245a71d2",
+      "relatedBlog": "/post/berlin-opera-for-first-time-visitors"
     }
   ],
   "hubCategories": [
