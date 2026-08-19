@@ -13,7 +13,7 @@
     body { margin:0; background:transparent; color:var(--ink); font-family:Montserrat,Arial,sans-serif; }
     button { font:inherit; }
     .tool { max-width:940px; margin:0 auto; overflow:hidden; border:1px solid var(--line); border-radius:26px; background:var(--cream); box-shadow:0 18px 45px rgba(18,61,24,.12); }
-    .hero { display:grid; grid-template-columns:minmax(0,1.08fr) minmax(250px,.92fr); gap:22px; min-height:330px; padding:32px; align-items:end; background:linear-gradient(105deg,rgba(8,36,13,.98) 0 53%,rgba(8,36,13,.74) 64%,rgba(8,36,13,.20) 100%), url('../blog-drafts/berlin-brutalist-architecture/images/optimized/01-maeusebunker.jpg') center/cover; color:#fff; }
+    .hero { display:grid; grid-template-columns:minmax(0,1.08fr) minmax(250px,.92fr); gap:22px; min-height:330px; padding:32px; align-items:end; background:linear-gradient(105deg,rgba(8,36,13,.98) 0 53%,rgba(8,36,13,.74) 64%,rgba(8,36,13,.20) 100%), url('assets/01-maeusebunker.jpg') center/cover; color:#fff; }
     .eyebrow { margin:0 0 10px; color:var(--yellow); font-weight:800; font-size:11px; letter-spacing:.13em; text-transform:uppercase; }
     h1,h2,h3 { font-family:Merriweather,Georgia,serif; }
     h1 { max-width:560px; margin:0; font-size:clamp(34px,5.2vw,58px); line-height:.98; letter-spacing:-.045em; }
@@ -92,7 +92,7 @@
       </nav>
       <section class="workbench" aria-live="polite">
         <div class="photo-panel" id="photo-panel" data-revealed="false">
-          <img id="building-photo" src="../blog-drafts/berlin-brutalist-architecture/images/optimized/01-maeusebunker.jpg" alt="The wedge-shaped Mäusebunker research building in Berlin-Lichterfelde with its projecting ventilation tubes">
+          <img id="building-photo" src="assets/01-maeusebunker.jpg" alt="The wedge-shaped Mäusebunker research building in Berlin-Lichterfelde with its projecting ventilation tubes">
           <div class="photo-shade"></div>
           <div class="photo-label"><span id="photo-kicker">Clue 01</span><strong id="photo-title">Read the facade before naming the style.</strong></div>
         </div>
@@ -139,7 +139,7 @@
       const sites = [
         {
           name: 'Mäusebunker', kicker: 'Clue 01',
-          image: '../blog-drafts/berlin-brutalist-architecture/images/optimized/01-maeusebunker.jpg',
+          image: 'assets/01-maeusebunker.jpg',
           alt: 'The wedge-shaped Mäusebunker research building in Berlin-Lichterfelde with its projecting ventilation tubes',
           question: 'What makes this facade feel like a machine rather than a smooth office block?',
           copy: 'Choose the feature that is actually doing the architectural work in the photograph.',
@@ -152,7 +152,7 @@
         },
         {
           name: 'St. Agnes', kicker: 'Clue 02',
-          image: '../blog-drafts/berlin-brutalist-architecture/images/optimized/02-st-agnes.jpg',
+          image: 'assets/02-st-agnes.jpg',
           alt: 'The concrete tower of St. Agnes in Kreuzberg seen from Alexandrinenstraße',
           question: 'What was this massive concrete volume designed to be before it became a gallery?',
           copy: 'The original use explains why the building feels so concentrated and quiet from the street.',
@@ -165,7 +165,7 @@
         },
         {
           name: 'Corbusierhaus', kicker: 'Clue 03',
-          image: '../blog-drafts/berlin-brutalist-architecture/images/optimized/03-corbusierhaus.jpg',
+          image: 'assets/03-corbusierhaus.jpg',
           alt: 'The long facade and coloured balcony rhythm of Corbusierhaus in Berlin-Westend',
           question: 'Which visual detail tells you this is a lived-in post-war housing block?',
           copy: 'This stop is a counterpoint. Look for the repeated domestic rhythm, not an industrial gesture.',
@@ -178,7 +178,7 @@
         },
         {
           name: 'Haus des Lehrers', kicker: 'Clue 04',
-          image: '../blog-drafts/berlin-brutalist-architecture/images/optimized/04-haus-des-lehrers.jpg',
+          image: 'assets/04-haus-des-lehrers.jpg',
           alt: 'Haus des Lehrers at Alexanderplatz with Walter Womacka’s mosaic frieze around its base',
           question: 'What turns this slim Alexanderplatz tower into a public image rather than a plain slab?',
           copy: 'Look below the tower. The answer is not hidden in the concrete itself.',
