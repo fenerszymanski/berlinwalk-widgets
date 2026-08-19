@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-08-19T13:41:51.290Z",
+  "updatedAt": "2026-08-19T13:46:00.513Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 298,
+  "totalPosts": 300,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1617,6 +1617,40 @@
   ],
   "latest": [
     {
+      "title": "Berlin Botanic Garden: Is It Worth the Trip From Mitte?",
+      "slug": "berlin-botanic-garden",
+      "path": "/post/berlin-botanic-garden",
+      "url": "https://www.berlinwalk.com/post/berlin-botanic-garden",
+      "excerpt": "Use the glasshouses and weather to shape a Botanic Garden visit that feels calmer than another rushed Berlin landmark.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "4 min read",
+      "publishedDate": "2026-08-19T13:43:15.052Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_4bf46a90ba4b49bf8a680ced300ea456~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-tropical-house-exterior.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_4bf46a90ba4b49bf8a680ced300ea456~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-tropical-house-exterior.jpg",
+      "alt": "The Great Tropical House at Berlin Botanic Garden seen from the garden",
+      "relatedToolSlug": "berlin-plant-passport"
+    },
+    {
+      "title": "Berlin Opera for First-Time Visitors: Which House Fits Your Evening?",
+      "slug": "berlin-opera-for-first-time-visitors",
+      "path": "/post/berlin-opera-for-first-time-visitors",
+      "url": "https://www.berlinwalk.com/post/berlin-opera-for-first-time-visitors",
+      "excerpt": "Choose a Berlin opera evening by the part of the city you want, then use the production page for the final venue, language and seating check.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-08-19T13:42:25.460Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_c9cf541cc0594fa8a18c583efa2001d1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-staatsoper-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_c9cf541cc0594fa8a18c583efa2001d1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-staatsoper-cover.jpg",
+      "alt": "Frontal view of Staatsoper Unter den Linden on Berlin's historic boulevard",
+      "relatedToolSlug": "berlin-opera-house-reader"
+    },
+    {
       "title": "Berlin Brutalist Architecture: Four Concrete Buildings Worth a Detour",
       "slug": "berlin-brutalist-architecture",
       "path": "/post/berlin-brutalist-architecture",
@@ -1785,43 +1819,43 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_f2af2e72c11942cda3a5db5c5e2bd8d3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-memorial-stelae-detail.jpg",
       "alt": "The concrete stelae of the Memorial to the Murdered Jews of Europe in Berlin",
       "relatedToolSlug": "berlin-memorial-reading-order"
+    }
+  ],
+  "allPosts": [
+    {
+      "title": "Berlin Botanic Garden: Is It Worth the Trip From Mitte?",
+      "slug": "berlin-botanic-garden",
+      "path": "/post/berlin-botanic-garden",
+      "url": "https://www.berlinwalk.com/post/berlin-botanic-garden",
+      "excerpt": "Use the glasshouses and weather to shape a Botanic Garden visit that feels calmer than another rushed Berlin landmark.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "4 min read",
+      "publishedDate": "2026-08-19T13:43:15.052Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_4bf46a90ba4b49bf8a680ced300ea456~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-tropical-house-exterior.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_4bf46a90ba4b49bf8a680ced300ea456~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-tropical-house-exterior.jpg",
+      "alt": "The Great Tropical House at Berlin Botanic Garden seen from the garden",
+      "relatedToolSlug": "berlin-plant-passport"
     },
     {
-      "title": "What to Wear for a Berlin Walking Tour: Shoes, Layers and Rain",
-      "slug": "what-to-wear-for-a-berlin-walking-tour",
-      "path": "/post/what-to-wear-for-a-berlin-walking-tour",
-      "url": "https://www.berlinwalk.com/post/what-to-wear-for-a-berlin-walking-tour",
-      "excerpt": "Berlin walking days move between hard pavement, park paths, transport shelter and indoor stops. Here is the simple clothing rule I use: comfortable shoes, removable layers and a small bag.",
+      "title": "Berlin Opera for First-Time Visitors: Which House Fits Your Evening?",
+      "slug": "berlin-opera-for-first-time-visitors",
+      "path": "/post/berlin-opera-for-first-time-visitors",
+      "url": "https://www.berlinwalk.com/post/berlin-opera-for-first-time-visitors",
+      "excerpt": "Choose a Berlin opera evening by the part of the city you want, then use the production page for the final venue, language and seating check.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "first-day",
       "topicLabel": "First Day in Berlin",
       "readTime": "5 min read",
-      "publishedDate": "2026-08-15T10:47:50.091Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_12b76c3e948943b481006495e988fa1c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-people-alexanderplatz.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_12b76c3e948943b481006495e988fa1c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-people-alexanderplatz.jpg",
-      "alt": "People crossing Alexanderplatz with the TV Tower behind them, a typical starting point for a Berlin walking day",
-      "relatedToolSlug": "best-month-to-visit-berlin"
+      "publishedDate": "2026-08-19T13:42:25.460Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_c9cf541cc0594fa8a18c583efa2001d1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-staatsoper-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_c9cf541cc0594fa8a18c583efa2001d1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-staatsoper-cover.jpg",
+      "alt": "Frontal view of Staatsoper Unter den Linden on Berlin's historic boulevard",
+      "relatedToolSlug": "berlin-opera-house-reader"
     },
-    {
-      "title": "Travelling Alone in Berlin: Build a Day With One Good Anchor",
-      "slug": "travelling-alone-in-berlin-day-plan",
-      "path": "/post/travelling-alone-in-berlin-day-plan",
-      "url": "https://www.berlinwalk.com/post/travelling-alone-in-berlin-day-plan",
-      "excerpt": "Travelling alone in Berlin is easier with one good anchor. Choose a history, quiet or neighbourhood shape, then keep the rest of the day flexible.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "history-myths",
-      "topicLabel": "Berlin History & Myths",
-      "readTime": "5 min read",
-      "publishedDate": "2026-08-15T05:53:50.723Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_b0635599b6774af98722ea6926cc9559~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-alexanderplatz-night-tram.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_b0635599b6774af98722ea6926cc9559~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-alexanderplatz-night-tram.jpg",
-      "alt": "Alexanderplatz at night with a moving tram, a useful first anchor when you are travelling alone in Berlin",
-      "relatedToolSlug": ""
-    }
-  ],
-  "allPosts": [
     {
       "title": "Berlin Brutalist Architecture: Four Concrete Buildings Worth a Detour",
       "slug": "berlin-brutalist-architecture",
