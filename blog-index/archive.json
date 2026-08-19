@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-08-19T14:53:27.270Z",
+  "updatedAt": "2026-08-19T17:24:05.950Z",
   "source": "Wix Blog API",
   "totalPosts": 300,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Where to Hear Live Music in Berlin Without Overpaying",
+      "slug": "where-to-hear-live-music-in-berlin",
+      "path": "/post/where-to-hear-live-music-in-berlin",
+      "url": "https://www.berlinwalk.com/post/where-to-hear-live-music-in-berlin",
+      "excerpt": "The live music you remember in Berlin is rarely the show you paid the most for. A local guide to the free lunch concert, the jazz clubs, the Saturday jam, and Sunday in Mauerpark, with a week reader to plan by.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-08-19T17:23:01.814Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_cdb608b17b264077b31b0779f4db7326~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berliner-philharmonie-lunch-concert.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_cdb608b17b264077b31b0779f4db7326~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berliner-philharmonie-lunch-concert.jpg",
+      "alt": "A free lunchtime concert in the foyer of the Berliner Philharmonie, with the audience seated on folding chairs and a grand piano at the side",
+      "relatedToolSlug": ""
+    },
     {
       "title": "English Bookshops in Berlin: Three Stops That Fit a Real Day",
       "slug": "english-bookshops-in-berlin",
@@ -19,7 +36,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_e96deaa0c27a4c27a6541845074b6642~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-dussmann-exterior.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_e96deaa0c27a4c27a6541845074b6642~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-dussmann-exterior.jpg",
       "alt": "Dussmann KulturKaufhaus exterior on Friedrichstraße in Berlin",
-      "relatedToolSlug": "berlin-shopping-areas"
+      "relatedToolSlug": "berlin-reading-stop-line"
     },
     {
       "title": "Berlin Botanic Garden: Is It Worth the Trip From Mitte?",
@@ -70,7 +87,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_bc566f0216b747b3861c80fc2683103c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-maeusebunker.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_bc566f0216b747b3861c80fc2683103c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-maeusebunker.jpg",
       "alt": "The wedge-shaped Mäusebunker research building in Berlin-Lichterfelde, with its projecting ventilation tubes",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-concrete-clue-chain"
     },
     {
       "title": "How to Read a Berlin Address: Street Names, House Numbers and the Clues That Get You There",
@@ -240,14 +257,14 @@
       "image": "https://static.wixstatic.com/media/5a08a3_12b76c3e948943b481006495e988fa1c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-people-alexanderplatz.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_12b76c3e948943b481006495e988fa1c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-people-alexanderplatz.jpg",
       "alt": "People crossing Alexanderplatz with the TV Tower behind them, a typical starting point for a Berlin walking day",
-      "relatedToolSlug": "best-month-to-visit-berlin"
+      "relatedToolSlug": "berlin-walking-kit"
     },
     {
-      "title": "Travelling Alone in Berlin: Build a Day With One Good Anchor",
+      "title": "Travelling Alone in Berlin: Pick the Right Area for Your Solo Day",
       "slug": "travelling-alone-in-berlin-day-plan",
       "path": "/post/travelling-alone-in-berlin-day-plan",
       "url": "https://www.berlinwalk.com/post/travelling-alone-in-berlin-day-plan",
-      "excerpt": "Travelling alone in Berlin is easier with one good anchor. Choose a history, quiet or neighbourhood shape, then keep the rest of the day flexible.",
+      "excerpt": "Choose the historic centre, Tiergarten or Kreuzberg first, then build a solo Berlin day with one proper stop and a flexible finish.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "history-myths",
@@ -257,14 +274,14 @@
       "image": "https://static.wixstatic.com/media/5a08a3_b0635599b6774af98722ea6926cc9559~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-alexanderplatz-night-tram.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_b0635599b6774af98722ea6926cc9559~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-alexanderplatz-night-tram.jpg",
       "alt": "Alexanderplatz at night with a moving tram, a useful first anchor when you are travelling alone in Berlin",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-solo-day-path"
     },
     {
       "title": "Private Berlin Tour for Groups: Build the Right Berlin Day",
       "slug": "private-berlin-tour-for-groups",
       "path": "/post/private-berlin-tour-for-groups",
       "url": "https://www.berlinwalk.com/post/private-berlin-tour-for-groups",
-      "excerpt": "A group does not need more Berlin pins. Start with three real places, then choose a fixed central walk or a private route that fits the day.",
+      "excerpt": "Choose between BerlinWalk's fixed public walk and a private historic-centre route whose pace and emphasis can be confirmed around your group.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "route-stories",
@@ -274,14 +291,14 @@
       "image": "https://static.wixstatic.com/media/5a08a3_e02189b723b1481389f23f9dd8ff703d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-altes-museum-guide-cover.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_e02189b723b1481389f23f9dd8ff703d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-altes-museum-guide-cover.jpg",
       "alt": "BerlinWalk guide speaking with guests outside the Altes Museum on Museum Island",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-private-route-brief"
     },
     {
       "title": "Berlin Itinerary for Couples: Build One Day Around Two Different Interests",
       "slug": "berlin-itinerary-for-couples",
       "path": "/post/berlin-itinerary-for-couples",
       "url": "https://www.berlinwalk.com/post/berlin-itinerary-for-couples",
-      "excerpt": "Plan one Berlin day around two different interests: put the least flexible promise first, give each traveller one real choice and connect them with one shared hinge.",
+      "excerpt": "Plan one Berlin day around two different interests: put the least flexible promise first, give each traveller one real choice and connect them with one shared pause.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "history-myths",
@@ -342,7 +359,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_717947ab3eff4a4584fd9a6c71735cc7~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_717947ab3eff4a4584fd9a6c71735cc7~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island.jpg",
       "alt": "Museum Island and Berlin Cathedral beside the Spree",
-      "relatedToolSlug": "berlin-first-day-planner"
+      "relatedToolSlug": "berlin-museum-three-slot-builder"
     },
     {
       "title": "Where to Eat in Berlin by Neighbourhood: A Three-Night Dinner Plan",
@@ -5086,23 +5103,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_76b381ba7c8e42c798b577b29efdcac5~mv2.jpeg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/areberlinersrude.jpeg",
       "alt": "A waiter takes an order from a seated woman at an outdoor café. A yellow tram passes in the background. The scene is bustling and urban.",
       "relatedToolSlug": ""
-    },
-    {
-      "title": "The Pope's Revenge: How East Germany's TV Tower Backfired",
-      "slug": "the-pope-s-revenge-how-east-germany-s-tv-tower-backfired",
-      "path": "/post/the-pope-s-revenge-how-east-germany-s-tv-tower-backfired",
-      "url": "https://www.berlinwalk.com/post/the-pope-s-revenge-how-east-germany-s-tv-tower-backfired",
-      "excerpt": "A strange Cold War irony hidden in plain sight: Berlin’s TV Tower was built to symbolize socialist power, yet under the right sunlight it reveals a glowing cross — the famous “Pope’s Revenge.” Discover the story behind this accidental symbol, why it embarrassed East Germany, and how you can still spot it today at Alexanderplatz.",
-      "category": "Tour Route",
-      "categorySlug": "tour-route",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "5 min read",
-      "publishedDate": "2026-02-26T14:37:02.956Z",
-      "image": "https://static.wixstatic.com/media/nsplsh_644e491769034414871b0141a6e205a3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20very%20tall%20tower%20with%20a%20very%20tall%20clock%20on%20it's%20side.jpg",
-      "thumb": "https://static.wixstatic.com/media/nsplsh_644e491769034414871b0141a6e205a3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20very%20tall%20tower%20with%20a%20very%20tall%20clock%20on%20it's%20side.jpg",
-      "alt": "TV Tower with a metallic sphere and antennas against a clear blue sky, flanked by two modern buildings with large windows.",
-      "relatedToolSlug": "east-or-west-1989"
     }
   ]
 }
