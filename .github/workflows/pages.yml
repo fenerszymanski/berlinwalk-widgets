@@ -29,6 +29,9 @@ jobs:
             !/blog-drafts/
             !/output/
             !/.playwright-cli/
+            !/tools-home/icons/_src/
+            !/tools-home/icons/chatgpt-standard-2026-06-12/
+            !/berlin-battle/assets/source/
             /blog-drafts/images/berlin-ab-abc-ticket-zones/assets/optimized/
             /blog-drafts/images/holocaust-memorial-berlin/assets/optimized/
             /blog-drafts/images/tempelhof-airport-berlin/assets/optimized/
@@ -42,6 +45,9 @@ jobs:
             --exclude='.DS_Store' \
             --exclude='.playwright-cli/' \
             --exclude='blog-drafts/' \
+            --exclude='tools-home/icons/_src/' \
+            --exclude='tools-home/icons/chatgpt-standard-2026-06-12/' \
+            --exclude='berlin-battle/assets/source/' \
             --exclude='node_modules/' \
             --exclude='output/' \
             ./ _site/
