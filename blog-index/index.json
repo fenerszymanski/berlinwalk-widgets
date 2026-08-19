@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-19T13:46:00.513Z",
+  "updatedAt": "2026-08-19T14:53:27.270Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 300,
@@ -872,23 +872,6 @@
       "description": "The places around the BerlinWalk route, explained as story layers rather than postcard stops.",
       "posts": [
         {
-          "title": "12 Stops Through Berlin’s Ancient Core: What You’ll See on My Free Walking Tour",
-          "slug": "12-stops-through-berlin-s-ancient-core-what-you-ll-see-on-our-free-walking-tour",
-          "path": "/post/12-stops-through-berlin-s-ancient-core-what-you-ll-see-on-our-free-walking-tour",
-          "url": "https://www.berlinwalk.com/post/12-stops-through-berlin-s-ancient-core-what-you-ll-see-on-our-free-walking-tour",
-          "excerpt": "Most Berlin free walking tours start at the Brandenburg Gate and head west. My tour doesn't. I begin where Berlin itself began — at Alexanderplatz — and walk through the oldest neighborhoods in the city, ending at the vibrant Hackescher Markt. Over 12 carefully chosen stops, you'll trace 800 years of history through streets that most tourists never explore. This isn't a greatest-hits tour of famous landmarks. It's a walk through the layers of Berlin — from its medieval founding to Prussian...",
-          "category": "Tour Route",
-          "categorySlug": "tour-route",
-          "topic": "route-stories",
-          "topicLabel": "Tour Route Stories",
-          "readTime": "8 min read",
-          "publishedDate": "2026-02-25T06:59:12.211Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_4aee725fb5764dfb9f69f6485b9c8a36~mv2.jpeg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinFreeWalkingTour.jpeg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_4aee725fb5764dfb9f69f6485b9c8a36~mv2.jpeg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinFreeWalkingTour.jpeg",
-          "alt": "Illustration of Berlin landmarks in green and yellow. Features buildings like the Berlin TV Tower, Brandenburg Gate, and Berlin Cathedral.",
-          "relatedToolSlug": ""
-        },
-        {
           "title": "Why My Tour Starts at Alexanderplatz (And Not at Brandenburg Gate)",
           "slug": "why-our-tour-starts-at-alexanderplatz-and-not-at-brandenburg-gate",
           "path": "/post/why-our-tour-starts-at-alexanderplatz-and-not-at-brandenburg-gate",
@@ -1039,6 +1022,23 @@
           "image": "https://static.wixstatic.com/media/5a08a3_8e322674b4ce4bffa822de5812164c06~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-bode-museum-night-cover.jpg",
           "thumb": "https://static.wixstatic.com/media/5a08a3_8e322674b4ce4bffa822de5812164c06~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-bode-museum-night-cover.jpg",
           "alt": "Bode Museum illuminated at night on Berlin's Museum Island",
+          "relatedToolSlug": ""
+        },
+        {
+          "title": "Berlin Brutalist Architecture: Four Concrete Buildings Worth a Detour",
+          "slug": "berlin-brutalist-architecture",
+          "path": "/post/berlin-brutalist-architecture",
+          "url": "https://www.berlinwalk.com/post/berlin-brutalist-architecture",
+          "excerpt": "Four Berlin concrete buildings that make a useful architecture detour: Mäusebunker, St. Agnes, Corbusierhaus and Haus des Lehrers, with clear labels for what is and is not Brutalist.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "route-stories",
+          "topicLabel": "Tour Route Stories",
+          "readTime": "5 min read",
+          "publishedDate": "2026-08-19T13:39:24.045Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_bc566f0216b747b3861c80fc2683103c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-maeusebunker.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_bc566f0216b747b3861c80fc2683103c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-maeusebunker.jpg",
+          "alt": "The wedge-shaped Mäusebunker research building in Berlin-Lichterfelde, with its projecting ventilation tubes",
           "relatedToolSlug": ""
         }
       ]
@@ -1617,6 +1617,23 @@
   ],
   "latest": [
     {
+      "title": "English Bookshops in Berlin: Three Stops That Fit a Real Day",
+      "slug": "english-bookshops-in-berlin",
+      "path": "/post/english-bookshops-in-berlin",
+      "url": "https://www.berlinwalk.com/post/english-bookshops-in-berlin",
+      "excerpt": "Choose an English bookshop in Berlin by the day you actually have: Dussmann for range in Mitte, Shakespeare and Sons for a slower east-side pause, or Curious Fox for an independent Kreuzberg browse.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-08-19T14:47:13.289Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_e96deaa0c27a4c27a6541845074b6642~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-dussmann-exterior.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_e96deaa0c27a4c27a6541845074b6642~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-dussmann-exterior.jpg",
+      "alt": "Dussmann KulturKaufhaus exterior on Friedrichstraße in Berlin",
+      "relatedToolSlug": "berlin-shopping-areas"
+    },
+    {
       "title": "Berlin Botanic Garden: Is It Worth the Trip From Mitte?",
       "slug": "berlin-botanic-garden",
       "path": "/post/berlin-botanic-garden",
@@ -1802,23 +1819,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_ae0682cacfbd442f8a6d037255ee5898~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-bauhaus-archiv.jpg",
       "alt": "The curved roofline of the Bauhaus-Archiv in Berlin",
       "relatedToolSlug": "berlin-bauhaus-lineage-map"
-    },
-    {
-      "title": "Free Berlin Memorials: Four Powerful Places That Are Easy to Visit",
-      "slug": "free-berlin-memorials",
-      "path": "/post/free-berlin-memorials",
-      "url": "https://www.berlinwalk.com/post/free-berlin-memorials",
-      "excerpt": "Berlin’s most important memorials are free, but four places can become a rushed checklist. Here is the reading order I use: memory, evidence, division and the human border crossing.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "free-budget",
-      "topicLabel": "Free & Budget",
-      "readTime": "5 min read",
-      "publishedDate": "2026-08-15T15:43:42.323Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_f2af2e72c11942cda3a5db5c5e2bd8d3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-memorial-stelae-detail.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_f2af2e72c11942cda3a5db5c5e2bd8d3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-memorial-stelae-detail.jpg",
-      "alt": "The concrete stelae of the Memorial to the Murdered Jews of Europe in Berlin",
-      "relatedToolSlug": "berlin-memorial-reading-order"
     }
   ]
 }
