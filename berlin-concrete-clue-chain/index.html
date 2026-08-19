@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Berlin Concrete Clue Chain | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    :root { --ink:#123d18; --ink-deep:#08240d; --cream:#f8f4e9; --paper:#fffdf8; --yellow:#ffe600; --muted:#516255; --line:rgba(18,61,24,.18); --good:#eaf7dc; --wrong:#fff2ef; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:transparent; color:var(--ink); font-family:Montserrat,Arial,sans-serif; }
+    button { font:inherit; }
+    .tool { max-width:940px; margin:0 auto; overflow:hidden; border:1px solid var(--line); border-radius:26px; background:var(--cream); box-shadow:0 18px 45px rgba(18,61,24,.12); }
+    .hero { display:grid; grid-template-columns:minmax(0,1.08fr) minmax(250px,.92fr); gap:22px; min-height:330px; padding:32px; align-items:end; background:linear-gradient(105deg,rgba(8,36,13,.98) 0 53%,rgba(8,36,13,.74) 64%,rgba(8,36,13,.20) 100%), url('../blog-drafts/berlin-brutalist-architecture/images/optimized/01-maeusebunker.jpg') center/cover; color:#fff; }
+    .eyebrow { margin:0 0 10px; color:var(--yellow); font-weight:800; font-size:11px; letter-spacing:.13em; text-transform:uppercase; }
+    h1,h2,h3 { font-family:Merriweather,Georgia,serif; }
+    h1 { max-width:560px; margin:0; font-size:clamp(34px,5.2vw,58px); line-height:.98; letter-spacing:-.045em; }
+    .hero-copy { max-width:520px; margin:16px 0 0; color:rgba(255,255,255,.91); font-size:16px; line-height:1.58; }
+    .hero-note { justify-self:end; width:min(245px,100%); padding:15px 16px; border:1px solid rgba(255,255,255,.36); border-radius:15px; background:rgba(8,36,13,.76); color:rgba(255,255,255,.92); font-size:13px; line-height:1.5; }
+    .hero-note strong { display:block; margin-bottom:5px; color:var(--yellow); font-size:10px; letter-spacing:.1em; text-transform:uppercase; }
+    .inside { padding:30px 34px 34px; }
+    .intro { max-width:700px; margin:0 auto 25px; text-align:center; line-height:1.6; font-size:16px; }
+    .chain { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; margin:0 auto 22px; max-width:680px; }
+    .chain-step { min-width:0; padding:9px 8px 10px; border-radius:11px; border:1px solid var(--line); background:#fff; color:#667469; font-size:10px; font-weight:800; letter-spacing:.06em; line-height:1.25; text-align:center; text-transform:uppercase; }
+    .chain-step[aria-current="step"] { border-color:var(--ink); background:var(--yellow); color:var(--ink-deep); }
+    .chain-step.is-done { border-color:#85ae57; background:var(--good); color:var(--ink); }
+    .workbench { display:grid; grid-template-columns:minmax(260px,.86fr) minmax(0,1.14fr); gap:23px; align-items:stretch; padding:18px; border:1px solid var(--line); border-radius:23px; background:var(--paper); }
+    .photo-panel { position:relative; min-height:390px; overflow:hidden; border-radius:17px; background:var(--ink-deep); }
+    .photo-panel img { width:100%; height:100%; min-height:390px; object-fit:cover; display:block; opacity:.86; transition:opacity .25s ease, transform .45s ease; }
+    .photo-panel[data-revealed="true"] img { opacity:1; transform:scale(1.015); }
+    .photo-shade { position:absolute; inset:0; background:linear-gradient(180deg,rgba(8,36,13,.12) 20%,rgba(8,36,13,.82) 100%); pointer-events:none; }
+    .photo-label { position:absolute; left:16px; right:16px; bottom:15px; color:#fff; text-shadow:0 1px 6px rgba(0,0,0,.55); }
+    .photo-label span { display:inline-block; margin-bottom:6px; padding:5px 8px; border-radius:999px; background:var(--yellow); color:var(--ink-deep); font-size:10px; font-weight:900; letter-spacing:.08em; text-shadow:none; text-transform:uppercase; }
+    .photo-label strong { display:block; max-width:270px; font-family:Merriweather,Georgia,serif; font-size:24px; line-height:1.12; }
+    .prompt { display:flex; flex-direction:column; min-width:0; padding:6px 4px; }
+    .prompt-label { margin:0 0 8px; color:#657369; font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+    h2 { margin:0; font-size:clamp(25px,3.4vw,34px); line-height:1.15; letter-spacing:-.035em; }
+    .prompt-copy { margin:11px 0 18px; color:#405142; font-size:14px; line-height:1.57; }
+    .choices { display:grid; gap:9px; }
+    .choice { display:flex; gap:12px; width:100%; min-height:64px; padding:12px; cursor:pointer; border:1px solid var(--line); border-radius:14px; background:#fff; color:var(--ink); text-align:left; transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease,background .16s ease; }
+    .choice:hover,.choice:focus-visible { border-color:var(--ink); box-shadow:0 8px 17px rgba(18,61,24,.11); outline:none; transform:translateY(-2px); }
+    .choice-mark { display:grid; flex:0 0 28px; width:28px; height:28px; place-items:center; border-radius:50%; background:#e8efe4; color:var(--ink); font-size:11px; font-weight:900; }
+    .choice:hover .choice-mark,.choice:focus-visible .choice-mark { background:var(--yellow); color:var(--ink-deep); }
+    .choice b { display:block; margin:1px 0 3px; font-size:13px; line-height:1.32; }
+    .choice small { display:block; color:var(--muted); font-size:11px; line-height:1.36; }
+    .choice.is-correct { border:2px solid #6d9a3e; background:var(--good); }
+    .choice.is-correct .choice-mark { background:var(--yellow); color:var(--ink-deep); }
+    .choice.is-wrong { border-color:#d38a7b; background:var(--wrong); }
+    .feedback { margin-top:15px; padding:15px; border-radius:14px; border:1px solid var(--line); background:#f4f0e6; color:#314332; font-size:13px; line-height:1.55; }
+    .feedback[hidden] { display:none; }
+    .feedback .flag { display:inline-block; margin-bottom:5px; color:var(--ink); font-size:10px; font-weight:900; letter-spacing:.1em; text-transform:uppercase; }
+    .feedback strong { display:block; margin-bottom:4px; color:var(--ink-deep); font-family:Merriweather,Georgia,serif; font-size:19px; line-height:1.2; }
+    .next { align-self:flex-start; min-height:42px; margin-top:14px; padding:10px 14px; cursor:pointer; border:1px solid var(--ink); border-radius:10px; background:var(--ink); color:#fff; font-size:12px; font-weight:900; }
+    .next:hover,.next:focus-visible { background:var(--ink-deep); outline:3px solid rgba(255,230,0,.55); outline-offset:2px; }
+    .finish { margin-top:18px; padding:20px; border:1px solid #83ab57; border-radius:18px; background:linear-gradient(135deg,#eff9e2,#fbf7e8); }
+    .finish[hidden] { display:none; }
+    .finish h2 { font-size:28px; }
+    .finish p { margin:9px 0 0; color:#3f5140; font-size:14px; line-height:1.6; }
+    .detour-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; margin:15px 0 0; padding:0; list-style:none; }
+    .detour-list li { padding:11px; border:1px solid rgba(18,61,24,.16); border-radius:11px; background:rgba(255,255,255,.7); color:#314833; font-size:12px; line-height:1.42; }
+    .detour-list strong { display:block; margin-bottom:3px; color:var(--ink-deep); }
+    .restart { min-height:40px; margin-top:15px; padding:9px 13px; cursor:pointer; border:1px solid var(--ink); border-radius:9px; background:#fff; color:var(--ink); font-size:12px; font-weight:900; }
+    .restart:hover,.restart:focus-visible { background:var(--yellow); color:var(--ink-deep); outline:3px solid rgba(18,61,24,.14); outline-offset:2px; }
+    .tool-credits { max-width:760px; margin:23px auto 0; padding:0; border:1px solid var(--line); border-radius:12px; background:#fff; color:#435444; font-size:11px; line-height:1.5; }
+    .tool-credits summary { padding:12px 14px; cursor:pointer; color:var(--ink); font-size:12px; font-weight:800; }
+    .tool-credits > div { padding:0 14px 14px; }
+    .tool-credits ul { margin:8px 0 0; padding-left:18px; }
+    .tool-credits a { color:#0d5719; text-underline-offset:2px; }
+    @media (max-width:680px) { .tool { border-radius:18px; } .hero { grid-template-columns:1fr; min-height:375px; padding:24px 21px; } .hero-note { justify-self:start; } .inside { padding:22px 15px 25px; } .chain { gap:5px; } .chain-step { min-height:49px; padding:8px 4px; font-size:8px; } .workbench { grid-template-columns:1fr; gap:16px; padding:12px; } .photo-panel,.photo-panel img { min-height:278px; } .photo-label strong { font-size:22px; } .prompt { padding:4px 2px; } .choice { min-height:60px; } .detour-list { grid-template-columns:1fr; } }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { transition:none !important; scroll-behavior:auto !important; } }
+  </style>
+</head>
+<body>
+  <main class="tool" id="berlin-concrete-clue-chain">
+    <section class="hero" aria-labelledby="tool-title">
+      <div>
+        <p class="eyebrow">Four buildings · one visual reading at a time</p>
+        <h1 id="tool-title">Berlin Concrete Clue Chain</h1>
+        <p class="hero-copy">Follow one visible clue through four Berlin buildings. You will finish with a practical exterior, gallery, residential or Alexanderplatz move, not a vague list of concrete names.</p>
+      </div>
+      <aside class="hero-note"><strong>How to use it</strong>Read the image, choose the clue that belongs to the building, then take the next link in the chain.</aside>
+    </section>
+    <section class="inside" aria-labelledby="chain-title">
+      <p class="intro" id="chain-title">This is a visual reading exercise, not a live access guide. Pick the clue that explains what you can see. A wrong choice simply lets you look again.</p>
+      <nav class="chain" aria-label="Concrete clue chain progress">
+        <span class="chain-step" data-progress="0" aria-current="step">01<br>Mäusebunker</span>
+        <span class="chain-step" data-progress="1">02<br>St. Agnes</span>
+        <span class="chain-step" data-progress="2">03<br>Corbusierhaus</span>
+        <span class="chain-step" data-progress="3">04<br>Haus des Lehrers</span>
+      </nav>
+      <section class="workbench" aria-live="polite">
+        <div class="photo-panel" id="photo-panel" data-revealed="false">
+          <img id="building-photo" src="../blog-drafts/berlin-brutalist-architecture/images/optimized/01-maeusebunker.jpg" alt="The wedge-shaped Mäusebunker research building in Berlin-Lichterfelde with its projecting ventilation tubes">
+          <div class="photo-shade"></div>
+          <div class="photo-label"><span id="photo-kicker">Clue 01</span><strong id="photo-title">Read the facade before naming the style.</strong></div>
+        </div>
+        <div class="prompt" id="prompt-panel">
+          <p class="prompt-label" id="prompt-label">First clue</p>
+          <h2 id="question">What makes this facade feel like a machine rather than a smooth office block?</h2>
+          <p class="prompt-copy" id="prompt-copy">Choose the feature that is actually doing the architectural work in the photograph.</p>
+          <div class="choices" id="choices" role="group" aria-label="Choose an architecture clue"></div>
+          <div class="feedback" id="feedback" hidden>
+            <span class="flag" id="feedback-flag">Look again</span>
+            <strong id="feedback-title"></strong>
+            <span id="feedback-copy"></span>
+          </div>
+          <button class="next" type="button" id="next" hidden>Read the next building</button>
+        </div>
+      </section>
+      <section class="finish" id="finish" hidden aria-labelledby="finish-title">
+        <h2 id="finish-title">Your concrete clue chain is complete.</h2>
+        <p>Now choose by the kind of detour you actually want. The strongest building is not automatically the right building for the day you have.</p>
+        <ul class="detour-list">
+          <li><strong>Mäusebunker</strong>Make the specialist, exterior-first Lichterfelde detour.</li>
+          <li><strong>St. Agnes</strong>Use a Kreuzberg gallery day, after checking current access.</li>
+          <li><strong>Corbusierhaus</strong>Read post-war housing from public space and respect residents.</li>
+          <li><strong>Haus des Lehrers</strong>Take the fast Alexanderplatz comparison when you are already there.</li>
+        </ul>
+        <button class="restart" type="button" id="restart">Start the clue chain again</button>
+      </section>
+      <details class="tool-credits" id="tool-credits">
+        <summary>Tool visual credits</summary>
+        <div>
+          <p>Source and licence details for the four photographs rendered inside this tool.</p>
+          <ul>
+            <li><a href="https://commons.wikimedia.org/wiki/File:2019-06-16-Zentrale-Tierlaboratorien-Forschungseinrichtung-f-experimentelle-Medizin-Maeusebunker-Krahmerstr-Berlin-Lichterfelde_01.jpg" target="_blank" rel="noopener noreferrer">Mäusebunker, Lichterfelde</a>: Gunnar Klack, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>, via Wikimedia Commons.</li>
+            <li><a href="https://commons.wikimedia.org/wiki/File:St-Agnes-Alexandrinenstr-Berlin-Kreuzberg-03-2017.jpg" target="_blank" rel="noopener noreferrer">St. Agnes, Kreuzberg</a>: Gunnar Klack, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>, via Wikimedia Commons.</li>
+            <li><a href="https://commons.wikimedia.org/wiki/File:Unite-d-Habitation-Corbusierhaus-Berlin-Westend-05-2017a.jpg" target="_blank" rel="noopener noreferrer">Corbusierhaus, Westend</a>: Gunnar Klack, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>, via Wikimedia Commons.</li>
+            <li><a href="https://commons.wikimedia.org/wiki/File:Haus_des_Lehrers,_2024_(01).jpg" target="_blank" rel="noopener noreferrer">Haus des Lehrers, Alexanderplatz</a>: Bahnfrend, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>, via Wikimedia Commons.</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+  </main>
+  <script>
+    (function () {
+      const sites = [
+        {
+          name: 'Mäusebunker', kicker: 'Clue 01',
+          image: '../blog-drafts/berlin-brutalist-architecture/images/optimized/01-maeusebunker.jpg',
+          alt: 'The wedge-shaped Mäusebunker research building in Berlin-Lichterfelde with its projecting ventilation tubes',
+          question: 'What makes this facade feel like a machine rather than a smooth office block?',
+          copy: 'Choose the feature that is actually doing the architectural work in the photograph.',
+          choices: [
+            { title: 'Projecting tubes work as exposed infrastructure.', note: 'The services become the building’s most visible feature.', correct: true },
+            { title: 'Stone window mouldings hide the plumbing.', note: 'This belongs to a different, more decorative vocabulary.', correct: false },
+            { title: 'A mural carries the story around the base.', note: 'That is the key clue at another building in this chain.', correct: false }
+          ],
+          reveal: { title: 'Correct: the infrastructure is part of the architecture.', copy: 'Mäusebunker makes its service tubes, wedge form and deep openings impossible to ignore. Treat it as a deliberate exterior-first Lichterfelde detour, not an assumed interior visit.' }
+        },
+        {
+          name: 'St. Agnes', kicker: 'Clue 02',
+          image: '../blog-drafts/berlin-brutalist-architecture/images/optimized/02-st-agnes.jpg',
+          alt: 'The concrete tower of St. Agnes in Kreuzberg seen from Alexandrinenstraße',
+          question: 'What was this massive concrete volume designed to be before it became a gallery?',
+          copy: 'The original use explains why the building feels so concentrated and quiet from the street.',
+          choices: [
+            { title: 'A church with a deliberately heavy, enclosed presence.', note: 'The former St. Agnes church is now used by a gallery.', correct: true },
+            { title: 'A residential block with repeated coloured balconies.', note: 'That describes Corbusierhaus, further along the chain.', correct: false },
+            { title: 'A research facility built around visible service pipes.', note: 'That is the Mäusebunker clue you have just read.', correct: false }
+          ],
+          reveal: { title: 'Correct: this was a church before it was a gallery.', copy: 'St. Agnes was designed by Werner Düttmann as a church. It is the practical central stop in this chain, but check the gallery’s current access information if going inside matters to your day.' }
+        },
+        {
+          name: 'Corbusierhaus', kicker: 'Clue 03',
+          image: '../blog-drafts/berlin-brutalist-architecture/images/optimized/03-corbusierhaus.jpg',
+          alt: 'The long facade and coloured balcony rhythm of Corbusierhaus in Berlin-Westend',
+          question: 'Which visual detail tells you this is a lived-in post-war housing block?',
+          copy: 'This stop is a counterpoint. Look for the repeated domestic rhythm, not an industrial gesture.',
+          choices: [
+            { title: 'Repeated coloured loggias interrupt the long facade.', note: 'The balconies make everyday housing visible at a big scale.', correct: true },
+            { title: 'A mosaic wraps the lower levels around a tower.', note: 'That is the Alexanderplatz clue still to come.', correct: false },
+            { title: 'Exterior pipes punch out of a sloping concrete hull.', note: 'That belongs to Mäusebunker, not this residential block.', correct: false }
+          ],
+          reveal: { title: 'Correct: housing is the visible rhythm here.', copy: 'Corbusierhaus uses repetition and colour to make a huge residential block legible. View it from public space and let it sharpen the contrast with Mäusebunker rather than forcing the same label onto both.' }
+        },
+        {
+          name: 'Haus des Lehrers', kicker: 'Clue 04',
+          image: '../blog-drafts/berlin-brutalist-architecture/images/optimized/04-haus-des-lehrers.jpg',
+          alt: 'Haus des Lehrers at Alexanderplatz with Walter Womacka’s mosaic frieze around its base',
+          question: 'What turns this slim Alexanderplatz tower into a public image rather than a plain slab?',
+          copy: 'Look below the tower. The answer is not hidden in the concrete itself.',
+          choices: [
+            { title: 'A long mosaic frieze makes the base part of the building’s message.', note: 'The artwork gives the tower a very different public voice.', correct: true },
+            { title: 'A ring of external research pipes shows its technical purpose.', note: 'That is the Mäusebunker reading, not this one.', correct: false },
+            { title: 'A series of residential loggias marks the private floors.', note: 'That is the Corbusierhaus reading, not this one.', correct: false }
+          ],
+          reveal: { title: 'Correct: the mosaic changes the entire reading.', copy: 'Haus des Lehrers is a GDR modernist counterpoint, not a shortcut label for Brutalism. If you are already at Alexanderplatz, it gives you the quickest way to compare public image, colour and concrete.' }
+        }
+      ];
+      const state = { index: 0, solved: new Set() };
+      const photo = document.getElementById('building-photo');
+      const photoPanel = document.getElementById('photo-panel');
+      const photoTitle = document.getElementById('photo-title');
+      const photoKicker = document.getElementById('photo-kicker');
+      const promptLabel = document.getElementById('prompt-label');
+      const question = document.getElementById('question');
+      const promptCopy = document.getElementById('prompt-copy');
+      const choices = document.getElementById('choices');
+      const feedback = document.getElementById('feedback');
+      const feedbackFlag = document.getElementById('feedback-flag');
+      const feedbackTitle = document.getElementById('feedback-title');
+      const feedbackCopy = document.getElementById('feedback-copy');
+      const next = document.getElementById('next');
+      const finish = document.getElementById('finish');
+      const progress = Array.from(document.querySelectorAll('[data-progress]'));
+
+      function updateProgress() {
+        progress.forEach(function (item, index) {
+          item.classList.toggle('is-done', state.solved.has(index));
+          if (index === state.index && state.index < sites.length) item.setAttribute('aria-current', 'step');
+          else item.removeAttribute('aria-current');
+        });
+      }
+
+      function render() {
+        const site = sites[state.index];
+        updateProgress();
+        photoPanel.dataset.revealed = 'false';
+        photo.src = site.image;
+        photo.alt = site.alt;
+        photoKicker.textContent = site.kicker;
+        photoTitle.textContent = 'Read the facade before naming the style.';
+        promptLabel.textContent = site.kicker + ' · ' + site.name;
+        question.textContent = site.question;
+        promptCopy.textContent = site.copy;
+        feedback.hidden = true;
+        next.hidden = true;
+        choices.replaceChildren();
+        site.choices.forEach(function (choice, index) {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'choice';
+          button.innerHTML = '<span class="choice-mark">' + String(index + 1).padStart(2, '0') + '</span><span><b></b><small></small></span>';
+          button.querySelector('b').textContent = choice.title;
+          button.querySelector('small').textContent = choice.note;
+          button.addEventListener('click', function () { choose(button, choice); });
+          choices.appendChild(button);
+        });
+      }
+
+      function choose(button, choice) {
+        const site = sites[state.index];
+        if (state.solved.has(state.index)) return;
+        if (!choice.correct) {
+          button.classList.add('is-wrong');
+          feedbackFlag.textContent = 'Try another detail';
+          feedbackTitle.textContent = 'That clue belongs elsewhere in the chain.';
+          feedbackCopy.textContent = 'Use the photograph again. The strongest clue for ' + site.name + ' is still visible in front of you.';
+          feedback.hidden = false;
+          return;
+        }
+        state.solved.add(state.index);
+        photoPanel.dataset.revealed = 'true';
+        photoTitle.textContent = site.name;
+        button.classList.add('is-correct');
+        choices.querySelectorAll('button').forEach(function (item) { item.disabled = true; });
+        feedbackFlag.textContent = 'Clue connected';
+        feedbackTitle.textContent = site.reveal.title;
+        feedbackCopy.textContent = site.reveal.copy;
+        feedback.hidden = false;
+        next.textContent = state.index === sites.length - 1 ? 'See your four detour moves' : 'Read the next building';
+        next.hidden = false;
+        updateProgress();
+      }
+
+      next.addEventListener('click', function () {
+        if (state.index === sites.length - 1) {
+          document.getElementById('prompt-panel').hidden = true;
+          document.querySelector('.workbench').hidden = true;
+          finish.hidden = false;
+          progress.forEach(function (item) { item.classList.add('is-done'); item.removeAttribute('aria-current'); });
+          finish.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
+        }
+        state.index += 1;
+        render();
+        document.getElementById('prompt-panel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+
+      document.getElementById('restart').addEventListener('click', function () {
+        state.index = 0;
+        state.solved = new Set();
+        finish.hidden = true;
+        document.getElementById('prompt-panel').hidden = false;
+        document.querySelector('.workbench').hidden = false;
+        render();
+        document.getElementById('chain-title').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      render();
+    }());
+  </script>
+  <script src="../js/brand.js"></script>
+</body>
+</html>
