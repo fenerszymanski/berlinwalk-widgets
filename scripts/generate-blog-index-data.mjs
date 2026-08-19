@@ -753,6 +753,7 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if ((post.slug || '') === 'berlin-botanic-garden') return 'berlin-plant-passport';
   if ((post.slug || '') === 'berlin-opera-for-first-time-visitors') return 'berlin-opera-house-reader';
   if ((post.slug || '') === 'how-to-read-a-berlin-address') return 'berlin-address-compass';
   if ((post.slug || '') === 'cash-only-restaurants-in-berlin') return 'berlin-meal-wallet';
