@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-08-19T12:33:44.033Z",
+  "updatedAt": "2026-08-19T13:41:51.290Z",
   "source": "Wix Blog API",
-  "totalPosts": 297,
+  "totalPosts": 298,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Berlin Brutalist Architecture: Four Concrete Buildings Worth a Detour",
+      "slug": "berlin-brutalist-architecture",
+      "path": "/post/berlin-brutalist-architecture",
+      "url": "https://www.berlinwalk.com/post/berlin-brutalist-architecture",
+      "excerpt": "Four Berlin concrete buildings that make a useful architecture detour: Mäusebunker, St. Agnes, Corbusierhaus and Haus des Lehrers, with clear labels for what is and is not Brutalist.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "route-stories",
+      "topicLabel": "Tour Route Stories",
+      "readTime": "5 min read",
+      "publishedDate": "2026-08-19T13:39:24.045Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_bc566f0216b747b3861c80fc2683103c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-maeusebunker.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_bc566f0216b747b3861c80fc2683103c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-maeusebunker.jpg",
+      "alt": "The wedge-shaped Mäusebunker research building in Berlin-Lichterfelde, with its projecting ventilation tubes",
+      "relatedToolSlug": ""
+    },
     {
       "title": "How to Read a Berlin Address: Street Names, House Numbers and the Clues That Get You There",
       "slug": "how-to-read-a-berlin-address",

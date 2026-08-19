@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-08-19T12:33:44.033Z",
+  "updatedAt": "2026-08-19T13:41:51.290Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 297,
+  "totalPosts": 298,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1617,6 +1617,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin Brutalist Architecture: Four Concrete Buildings Worth a Detour",
+      "slug": "berlin-brutalist-architecture",
+      "path": "/post/berlin-brutalist-architecture",
+      "url": "https://www.berlinwalk.com/post/berlin-brutalist-architecture",
+      "excerpt": "Four Berlin concrete buildings that make a useful architecture detour: Mäusebunker, St. Agnes, Corbusierhaus and Haus des Lehrers, with clear labels for what is and is not Brutalist.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "route-stories",
+      "topicLabel": "Tour Route Stories",
+      "readTime": "5 min read",
+      "publishedDate": "2026-08-19T13:39:24.045Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_bc566f0216b747b3861c80fc2683103c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-maeusebunker.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_bc566f0216b747b3861c80fc2683103c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-maeusebunker.jpg",
+      "alt": "The wedge-shaped Mäusebunker research building in Berlin-Lichterfelde, with its projecting ventilation tubes",
+      "relatedToolSlug": ""
+    },
+    {
       "title": "How to Read a Berlin Address: Street Names, House Numbers and the Clues That Get You There",
       "slug": "how-to-read-a-berlin-address",
       "path": "/post/how-to-read-a-berlin-address",
@@ -1801,23 +1818,6 @@
       "image": "https://static.wixstatic.com/media/5a08a3_b0635599b6774af98722ea6926cc9559~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-alexanderplatz-night-tram.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_b0635599b6774af98722ea6926cc9559~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-alexanderplatz-night-tram.jpg",
       "alt": "Alexanderplatz at night with a moving tram, a useful first anchor when you are travelling alone in Berlin",
-      "relatedToolSlug": ""
-    },
-    {
-      "title": "Private Berlin Tour for Groups: Build the Right Berlin Day",
-      "slug": "private-berlin-tour-for-groups",
-      "path": "/post/private-berlin-tour-for-groups",
-      "url": "https://www.berlinwalk.com/post/private-berlin-tour-for-groups",
-      "excerpt": "A group does not need more Berlin pins. Start with three real places, then choose a fixed central walk or a private route that fits the day.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "route-stories",
-      "topicLabel": "Tour Route Stories",
-      "readTime": "4 min read",
-      "publishedDate": "2026-08-14T18:44:09.193Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_e02189b723b1481389f23f9dd8ff703d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-altes-museum-guide-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_e02189b723b1481389f23f9dd8ff703d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-altes-museum-guide-cover.jpg",
-      "alt": "BerlinWalk guide speaking with guests outside the Altes Museum on Museum Island",
       "relatedToolSlug": ""
     }
   ]
