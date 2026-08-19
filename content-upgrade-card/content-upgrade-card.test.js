@@ -164,6 +164,7 @@ function makeInjectorContext(options = {}) {
       },
     },
     customElements: { get() { return null; } },
+    getComputedStyle() { return { display: 'block', visibility: 'visible' }; },
     location: null,
     innerWidth: 390,
     innerHeight: 844,
@@ -266,7 +267,7 @@ test('orchestrator keeps the Skip List slugs and registers the approved magnet f
     assetVersion: '2026-08-v1',
     storageKey: 'bwContentUpgrade.berlinSkipList.v1',
     apiBase: 'https://app.berlinwalk.com/api/download-lead',
-    elementUrl: 'https://fenerszymanski.github.io/berlinwalk-widgets/content-upgrade-card/content-upgrade-card-element.js?v=20260817-magnet1',
+    elementUrl: 'https://fenerszymanski.github.io/berlinwalk-widgets/content-upgrade-card/content-upgrade-card-element.js?v=20260819-calcfirst',
     placement: 'blog_inline_booking_slot',
     controlType: 'private-tour',
     controlUrl: 'https://www.berlinwalk.com/private-tour',
@@ -423,6 +424,19 @@ test('stable assignment is persisted only after analytics consent', () => {
   assert.equal(repeated.assignmentId, after.assignmentId);
 });
 
+test('calculator experiments use the first H2 paragraph while static magnets keep the second H2 anchor', () => {
+  const blocks = [
+    { tagName: 'H2', textContent: 'First section', nodeType: 1, parentElement: null, closest() { return null; } },
+    { tagName: 'P', textContent: 'First section paragraph', nodeType: 1, parentElement: null, closest() { return null; } },
+    { tagName: 'H2', textContent: 'Second section', nodeType: 1, parentElement: null, closest() { return null; } },
+    { tagName: 'P', textContent: 'Second section paragraph', nodeType: 1, parentElement: null, closest() { return null; } },
+  ];
+  const body = { querySelectorAll() { return blocks; } };
+  const ctx = makeInjectorContext({ config: { stage: 'pilot' } });
+  assert.equal(ctx.hooks.findInsertionAnchor(body, { experimentId: 'berlin_pass_calculator_v1' }), blocks[1]);
+  assert.equal(ctx.hooks.findInsertionAnchor(body, { experimentId: 'berlin_skip_list_v1', assetId: 'berlin-skip-list' }), blocks[3]);
+});
+
 test('invalid config and element failure paths restore the existing booking control', () => {
   const brokenConfig = new Proxy({}, { get() { throw new Error('broken config'); } });
   const ctx = makeInjectorContext({ config: brokenConfig });
@@ -459,6 +473,8 @@ test('orchestrator sends the lead-asset contract without PII and records the pri
   [
     'bw_lead_asset_experiment_view',
     'bw_lead_asset_gate_view',
+    'bw_lead_asset_gate_seen',
+    'bw_lead_asset_calc_done',
     'bw_lead_asset_form_start',
     'bw_lead_asset_submit',
     'bw_lead_asset_control_booking_click',
@@ -478,6 +494,16 @@ test('orchestrator sends the lead-asset contract without PII and records the pri
   assert.equal(JSON.stringify(payload).includes('@'), false);
 });
 
+test('gate_seen is bound to both content-upgrade variants and experiment controls with a one-shot 35% observer', () => {
+  assert.match(injectorSource, /CONTENT_UPGRADE_GATE_SEEN_THRESHOLD = 0\.35/);
+  assert.match(injectorSource, /var Observer = window\.IntersectionObserver/);
+  assert.match(injectorSource, /intersectionRatio < CONTENT_UPGRADE_GATE_SEEN_THRESHOLD/);
+  assert.match(injectorSource, /observer\.disconnect\(\);\s*sendContentUpgradeEvent\('bw_lead_asset_gate_seen', assignment\)/);
+  assert.match(injectorSource, /bindContentUpgradeGateSeenTracking\(card, assignment\)/);
+  assert.match(injectorSource, /bindContentUpgradeGateSeenTracking\(element, assignment\)/);
+  assert.match(injectorSource, /threshold: \[CONTENT_UPGRADE_GATE_SEEN_THRESHOLD\]/);
+});
+
 test('component supports an optional config-driven calculator gate mode, teaser mode unchanged by default', () => {
   // Off by default: an element with no gate-mode attribute still renders the
   // original static teaser + gate-copy path used by the other three magnets.
@@ -495,6 +521,7 @@ test('component supports an optional config-driven calculator gate mode, teaser 
   assert.match(elementSource, /aria-pressed/);
   assert.match(elementSource, /class="calc-verdict"/);
   assert.match(elementSource, /class="calc-stamp"/);
+  assert.match(elementSource, /class="calc-lead">Three taps, your answer\.<\/p>/);
   assert.match(elementSource, /bw-content-upgrade-calc-done/);
   assert.match(elementSource, /Object\.keys\(rule\)\.every/);
   assert.match(elementSource, /if \(key === 'line'\) return true;/);
@@ -504,6 +531,13 @@ test('component supports an optional config-driven calculator gate mode, teaser 
   assert.match(elementSource, /this\._root = this\.attachShadow/);
   assert.match(elementSource, /\.calc-verdict\{background:#fffbe0/);
   assert.match(elementSource, /\.calc-verdict-text\{color:#123d18!important/);
+
+  const bodyTemplate = elementSource.slice(elementSource.lastIndexOf('<div class="body">'));
+  assert.ok(bodyTemplate.indexOf('${offerMarkup}') < bodyTemplate.indexOf('${formMarkup}'));
+  assert.ok(bodyTemplate.indexOf('${formMarkup}') < bodyTemplate.indexOf('${successMarkup}'));
+  assert.ok(bodyTemplate.indexOf('${successMarkup}') < bodyTemplate.indexOf('${calculatorTeasers}'));
+  assert.match(elementSource, /class="offer calculator-offer"/);
+  assert.match(elementSource, /class="teasers calculator-teasers"/);
 });
 
 test('pass and Neighborhood magnets use the calculator gate; static registry ids stay isolated', () => {
@@ -526,7 +560,7 @@ test('pass and Neighborhood magnets use the calculator gate; static registry ids
   assert.equal(passMagnet.assetId, 'berlin-pass-decision-sheet');
   assert.equal(passMagnet.experimentId, 'berlin_pass_calculator_v1');
   assert.equal(passMagnet.storageKey, 'bwContentUpgrade.berlinPassCalc.v1');
-  assert.equal(passMagnet.elementUrl.includes('?v=20260817-magnet1'), true);
+  assert.equal(passMagnet.elementUrl.includes('?v=20260819-calcfirst'), true);
 
   const neighborhoodMagnet = ctx.hooks.magnetConfigs[6];
   assert.equal(neighborhoodMagnet.assetId, 'berlin-neighborhood-matcher');

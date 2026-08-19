@@ -267,6 +267,28 @@
       var offerExtra = calc.active
         ? this._renderCalc(calc.config)
         : '<div class="teasers" aria-label="Three Skip List examples">' + teasers + '</div><p class="gate-copy">' + escapeHtml(copy.gateCopy) + '</p>';
+      var formMarkup;
+      var successMarkup;
+      var offerMarkup = calc.active
+        ? `<div class="offer calculator-offer">
+              <p class="eyebrow">${escapeHtml(copy.eyebrow)}</p>
+              <h2 id="bw-content-upgrade-title">${escapeHtml(copy.title)}</h2>
+              <p class="calc-lead">Three taps, your answer.</p>
+              ${this._renderCalc(calc.config)}
+              <p class="gate-copy">${escapeHtml(copy.gateCopy)}</p>
+            </div>`
+        : `<div class="offer">
+              <img class="preview" alt="" aria-hidden="true" decoding="async" width="124" height="220"
+                src="${escapeHtml(PREVIEW_BASE + previewAssetId + '.png')}"
+                onerror="this.remove()">
+              <p class="eyebrow">${escapeHtml(copy.eyebrow)}</p>
+              <h2 id="bw-content-upgrade-title">${escapeHtml(copy.title)}</h2>
+              <p class="description">${escapeHtml(copy.description)}</p>
+              ${offerExtra}
+            </div>`;
+      var calculatorTeasers = calc.active
+        ? '<div class="teasers calculator-teasers" aria-label="Three decision sheet examples">' + teasers + '</div>'
+        : '';
       var arrival = copy.arrivalOptions.length
         ? '<div class="arrival-step">'
           + '<p class="arrival-prompt">On its way. While I have you, when are you coming?</p>'
@@ -280,6 +302,20 @@
           + '</div>'
         : '';
       var consent = escapeHtml(copy.consentText).replace(/Privacy Policy\.?$/, '<a href="' + PRIVACY_URL + '" target="_top">Privacy Policy</a>.');
+      formMarkup = `<form novalidate>
+              <label for="bw-content-upgrade-email">Where should I send it?</label>
+              <input id="bw-content-upgrade-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="none" spellcheck="false" placeholder="you@example.com" required aria-describedby="bw-content-upgrade-disclosure bw-content-upgrade-status">
+              <div class="honeypot" hidden aria-hidden="true"><label>Website<input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
+              <p class="disclosure" id="bw-content-upgrade-disclosure">${consent}</p>
+              <button type="submit">${escapeHtml(copy.submitLabel)}</button>
+              <p class="status" id="bw-content-upgrade-status" role="status" aria-live="polite"></p>
+            </form>`;
+      successMarkup = `<div class="success" aria-hidden="true" role="status" aria-live="polite">
+              <strong>Check your inbox.</strong>
+              <p>${escapeHtml(copy.successCopy)}</p>
+              <p class="spam-note">Not there in a minute? Look in spam or junk. I send from a new address, so the first email often lands there. Drag it into your inbox and the rest will arrive properly.</p>
+              ${arrival}
+            </div>`;
       this._root.innerHTML = `
         <style>
           :host{box-sizing:border-box;contain:inline-size;display:block;margin:30px 0;max-width:100%;min-width:0;overflow:visible;color:#212121;font-family:Montserrat,Arial,sans-serif;white-space:normal}
@@ -294,6 +330,7 @@
           .eyebrow{color:#1b5e20;font-size:11px;font-weight:900;letter-spacing:.08em;margin:0 0 5px;text-transform:uppercase}
           h2{color:#172319;font-size:22px;font-weight:900;letter-spacing:-.02em;line-height:1.12;margin:0}
           .description{color:#48564a;font-size:13px;line-height:1.55;margin:8px 0 0}
+          .calc-lead{color:#435346;font-size:14px;font-weight:800;line-height:1.4;margin:12px 0 0}
           .teasers{margin:18px 0 0;max-width:700px}
           .teaser{border-top:1px solid #dbe7d6;padding:12px 0 0}
           .teaser:first-child{border-top:0;padding-top:0}
@@ -302,7 +339,7 @@
           .teaser-number{color:#1b5e20;display:inline-block;font-weight:900;margin-right:7px;min-width:16px}
           .teaser-body{color:#435346;font-size:13px;line-height:1.55;margin:4px 0 0}
           .gate-copy{color:#172319;font-size:14px;font-weight:800;line-height:1.5;margin:17px 0 14px;max-width:680px}
-          .calc{margin:16px 0 2px;max-width:520px}
+          .calc{margin:10px 0 2px;max-width:520px}
           .calc-q{margin:0 0 13px}
           .calc-prompt{color:#172319;font-size:13.5px;font-weight:800;line-height:1.4;margin:0 0 7px}
           .calc-options{display:flex;flex-wrap:wrap;gap:7px}
@@ -330,6 +367,7 @@
           .success[aria-hidden="false"]{display:flex}
           .success strong{color:#123d18;font-size:17px;line-height:1.2}
           .preview{border:1px solid #dbe7d6;border-radius:7px;box-shadow:0 3px 10px rgba(18,61,24,.14);float:right;height:auto;margin:2px 0 10px 16px;max-width:38%;width:124px}
+          .calculator-teasers{margin-top:22px}
           .success p{color:#435346;font-size:12.5px;line-height:1.5;margin:0}
           .success .spam-note{background:#fffbe0;border-left:3px solid #ffe600;border-radius:0 6px 6px 0;color:#123d18!important;font-weight:700;margin:7px 0 0!important;padding:9px 11px}
           .arrival-step{border-top:1px solid #dbe7d6;margin-top:12px;padding-top:13px;width:min(100%,430px)}
@@ -347,29 +385,10 @@
         <section class="card" role="region" aria-labelledby="bw-content-upgrade-title">
           <div class="bar"><span class="bar-icon" aria-hidden="true">✂</span><span class="bar-copy">${escapeHtml(copy.barCopy)}</span></div>
           <div class="body">
-            <div class="offer">
-              <img class="preview" alt="" aria-hidden="true" decoding="async" width="124" height="220"
-                src="${escapeHtml(PREVIEW_BASE + previewAssetId + '.png')}"
-                onerror="this.remove()">
-              <p class="eyebrow">${escapeHtml(copy.eyebrow)}</p>
-              <h2 id="bw-content-upgrade-title">${escapeHtml(copy.title)}</h2>
-              <p class="description">${escapeHtml(copy.description)}</p>
-              ${offerExtra}
-            </div>
-            <form novalidate>
-              <label for="bw-content-upgrade-email">Where should I send it?</label>
-              <input id="bw-content-upgrade-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="none" spellcheck="false" placeholder="you@example.com" required aria-describedby="bw-content-upgrade-disclosure bw-content-upgrade-status">
-              <div class="honeypot" hidden aria-hidden="true"><label>Website<input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
-              <p class="disclosure" id="bw-content-upgrade-disclosure">${consent}</p>
-              <button type="submit">${escapeHtml(copy.submitLabel)}</button>
-              <p class="status" id="bw-content-upgrade-status" role="status" aria-live="polite"></p>
-            </form>
-            <div class="success" aria-hidden="true" role="status" aria-live="polite">
-              <strong>Check your inbox.</strong>
-              <p>${escapeHtml(copy.successCopy)}</p>
-              <p class="spam-note">Not there in a minute? Look in spam or junk. I send from a new address, so the first email often lands there. Drag it into your inbox and the rest will arrive properly.</p>
-              ${arrival}
-            </div>
+            ${offerMarkup}
+            ${formMarkup}
+            ${successMarkup}
+            ${calculatorTeasers}
           </div>
         </section>`;
     }

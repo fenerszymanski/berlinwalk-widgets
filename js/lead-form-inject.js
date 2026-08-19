@@ -57,9 +57,14 @@
   var CONTENT_UPGRADE_ELEMENT_TAG = 'bw-content-upgrade-card';
   var CONTENT_UPGRADE_MARKER = 'data-bw-content-upgrade';
   var CONTENT_UPGRADE_DEFAULT_API_BASE = window.BW_DOWNLOAD_LEAD_API_BASE || 'https://app.berlinwalk.com/api/download-lead';
-  var CONTENT_UPGRADE_DEFAULT_ELEMENT_URL = window.BW_CONTENT_UPGRADE_ELEMENT_URL || 'https://fenerszymanski.github.io/berlinwalk-widgets/content-upgrade-card/content-upgrade-card-element.js?v=20260817-magnet1';
+  var CONTENT_UPGRADE_DEFAULT_ELEMENT_URL = window.BW_CONTENT_UPGRADE_ELEMENT_URL || 'https://fenerszymanski.github.io/berlinwalk-widgets/content-upgrade-card/content-upgrade-card-element.js?v=20260819-calcfirst';
   var CONTENT_UPGRADE_PLACEMENT = 'blog_inline_booking_slot';
   var CONTENT_UPGRADE_READY_TIMEOUT_MS = 7000;
+  var CONTENT_UPGRADE_GATE_SEEN_THRESHOLD = 0.35;
+  var CALCULATOR_EXPERIMENTS = {
+    berlin_pass_calculator_v1: true,
+    berlin_neighborhood_matcher_v1: true
+  };
   var CONTENT_UPGRADE_MAGNETS = [{
     experimentId: 'berlin_skip_list_v1',
     assetId: 'berlin-skip-list',
@@ -820,12 +825,21 @@
     return null;
   }
 
-  function findInsertionAnchor(body) {
+  function isCalculatorContentUpgradeAssignment(assignment) {
+    if (!assignment) return false;
+    if (CALCULATOR_EXPERIMENTS[assignment.experimentId]) return true;
+    var magnet = contentUpgradeMagnetById(assignment.assetId);
+    return Boolean(magnet && magnet.component && magnet.component.gateMode === 'calculator');
+  }
+
+  function findInsertionAnchor(body, assignment) {
     /* Wix wraps every rich-content block in its own div, so walking
      * nextElementSibling from a heading never reaches that section's
      * paragraphs. Work in document order over the visible h2/p blocks
      * instead: insert after the first real paragraph that follows the
-     * 2nd H2 (~25% depth), staying inside that section. */
+     * 2nd H2 (~25% depth), staying inside that section. Calculator
+     * experiments deliberately use the first H2 so their decision aid appears
+     * before the long ticket/neighborhood explanation. */
     var blocks = [];
     var all = body.querySelectorAll('h2, p');
     for (var i = 0; i < all.length; i++) {
@@ -838,7 +852,9 @@
     }
 
     if (headingIndexes.length) {
-      var anchorIndex = headingIndexes.length >= 2 ? headingIndexes[1] : headingIndexes[0];
+      var anchorIndex = isCalculatorContentUpgradeAssignment(assignment)
+        ? headingIndexes[0]
+        : (headingIndexes.length >= 2 ? headingIndexes[1] : headingIndexes[0]);
       var sectionEnd = blocks.length;
       for (var s = 0; s < headingIndexes.length; s++) {
         if (headingIndexes[s] > anchorIndex) { sectionEnd = headingIndexes[s]; break; }
@@ -1948,9 +1964,27 @@
     return contentUpgradeElementPromise;
   }
 
-  function currentInsertionAnchor() {
+  function currentInsertionAnchor(assignment) {
     var body = findPostBody();
-    return body ? findInsertionAnchor(body) : null;
+    return body ? findInsertionAnchor(body, assignment) : null;
+  }
+
+  function bindContentUpgradeGateSeenTracking(element, assignment) {
+    var Observer = window.IntersectionObserver;
+    if (typeof Observer !== 'function' || !element) return;
+    var seen = false;
+    var observer = new Observer(function (entries) {
+      if (seen) return;
+      for (var i = 0; i < entries.length; i++) {
+        var entry = entries[i];
+        if (!entry || entry.intersectionRatio < CONTENT_UPGRADE_GATE_SEEN_THRESHOLD) continue;
+        seen = true;
+        observer.disconnect();
+        sendContentUpgradeEvent('bw_lead_asset_gate_seen', assignment);
+        break;
+      }
+    }, { threshold: [CONTENT_UPGRADE_GATE_SEEN_THRESHOLD] });
+    observer.observe(element);
   }
 
   function insertControl(anchor, assignment) {
@@ -1966,6 +2000,7 @@
     anchor.parentNode.insertBefore(card, anchor.nextSibling);
     injections += 1;
     if (isContentControl) {
+      bindContentUpgradeGateSeenTracking(card, assignment);
       queueContentUpgradeExperimentView(assignment);
     } else {
       queueHistoryExperimentView(assignment);
@@ -1981,7 +2016,7 @@
     clearHistoryInlineLayering();
     if (location.pathname !== requestedPath) return false;
     if (document.querySelector('[' + MARKER + ']')) return true;
-    var anchor = currentInsertionAnchor();
+    var anchor = currentInsertionAnchor(assignment);
     if (!anchor) {
       scheduleInject();
       return false;
@@ -2021,7 +2056,7 @@
     loadHistoryElement().then(function () {
       historyInsertionPending = false;
       if (location.pathname !== requestedPath || document.querySelector('[' + MARKER + ']')) return;
-      var anchor = currentInsertionAnchor();
+      var anchor = currentInsertionAnchor(assignment);
       if (!anchor) return;
       var element = document.createElement(HISTORY_ELEMENT_TAG);
       insertedElement = element;
@@ -2051,7 +2086,7 @@
     if (element && element.parentNode) element.parentNode.removeChild(element);
     if (location.pathname !== requestedPath) return false;
     if (document.querySelector('[' + MARKER + ']')) return true;
-    var anchor = currentInsertionAnchor();
+    var anchor = currentInsertionAnchor(assignment);
     if (!anchor) {
       scheduleInject();
       return false;
@@ -2105,7 +2140,7 @@
     loadContentUpgradeElement(magnet).then(function () {
       contentUpgradeInsertionPending = false;
       if (location.pathname !== requestedPath || document.querySelector('[' + MARKER + ']')) return;
-      var anchor = currentInsertionAnchor();
+      var anchor = currentInsertionAnchor(assignment);
       if (!anchor) return;
       var element = document.createElement(CONTENT_UPGRADE_ELEMENT_TAG);
       insertedElement = element;
@@ -2142,6 +2177,7 @@
       }
       bindContentUpgradeElementTracking(element, assignment);
       anchor.parentNode.insertBefore(element, anchor.nextSibling);
+      bindContentUpgradeGateSeenTracking(element, assignment);
       injections += 1;
       monitorContentUpgradeElement(element, requestedPath, assignment);
       console.log(LOG, 'injected attempt', injections, 'content-upgrade experiment variant');
@@ -2167,12 +2203,12 @@
 
     var body = findPostBody();
     if (!body) return false;
+    var decision;
     var anchor = findInsertionAnchor(body);
     if (!anchor) return false;
-
-    var decision;
     try {
       decision = slotDecision();
+      anchor = findInsertionAnchor(body, decision.assignment) || anchor;
       if (decision.owner === 'history' && decision.assignment.variant === 'variant') return insertHistoryVariant(decision.assignment);
       if (decision.owner === 'content-upgrade' && decision.assignment.variant === 'variant') return insertContentUpgradeVariant(decision.assignment);
       return insertControl(anchor, decision.assignment);
@@ -2252,6 +2288,7 @@
       storageKey: CONTENT_UPGRADE_MAGNETS[0].storageKey,
       placement: CONTENT_UPGRADE_MAGNETS[0].placement,
       safetySlug: '',
+      findInsertionAnchor: findInsertionAnchor,
       magnetConfigs: CONTENT_UPGRADE_MAGNETS.map(function (magnet) {
         return {
           experimentId: magnet.experimentId,
