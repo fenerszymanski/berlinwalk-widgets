@@ -61,9 +61,10 @@
     .place-links a { display: inline-flex; align-items: center; min-height: 38px; padding: 9px 12px; border: 1px solid var(--ink); border-radius: 999px; color: var(--ink); font-size: 12px; font-weight: 800; text-decoration: none; }
     .place-links a:hover { background: var(--ink); color: #fff; }
     .notice { margin: 20px 0 0; color: var(--muted); font-size: 12px; line-height: 1.58; text-align: center; }
-    details { margin-top: 18px; border-top: 1px solid var(--line); }
-    summary { padding: 15px 0 2px; color: var(--ink); cursor: pointer; font-size: 12px; font-weight: 800; }
-    .credit-copy { padding: 8px 0 2px; color: var(--muted); font-size: 12px; line-height: 1.55; }
+    #tool-credits { position: relative; min-height: 34px; margin-top: 18px; border-top: 1px solid var(--line); }
+    #tool-credits summary { padding: 15px 0 2px; color: var(--ink); cursor: pointer; font-size: 12px; font-weight: 800; }
+    #tool-credits .credit-copy { color: var(--muted); font-size: 12px; line-height: 1.55; }
+    #tool-credits[open] .credit-copy { position: absolute; z-index: 5; right: 0; bottom: calc(100% + 8px); left: 0; margin: 0; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--cream); box-shadow: 0 12px 26px rgba(18,61,24,.16); }
     .credit-copy a { color: var(--ink); font-weight: 800; }
     @media (max-width: 720px) { .line-tool { border-radius: 19px; } .desk { grid-template-columns: minmax(0,1fr) 106px; gap: 15px; min-height: 255px; padding: 27px 22px; } .tool-icon { width: 104px; border-radius: 20px; } .inside { padding: 22px 16px 29px; } .map-stage, #reading-map { min-height: 360px; } .bookmarks { grid-template-columns: 1fr; } .bookmark { min-height: 82px; } .place-sheet { grid-template-columns: 128px minmax(0,1fr); gap: 14px; } .place-image { min-height: 100%; } .place-detail { padding: 19px 16px 19px 0; } .place-detail h2 { font-size: 28px; } }
     @media (max-width: 430px) { .desk { grid-template-columns: 1fr; } .tool-icon { width: 90px; } .line-key { display: block; } .line-key p { margin-top: 5px; text-align: left; } .map-stage, #reading-map { min-height: 325px; } .place-sheet { grid-template-columns: 1fr; gap: 0; } .place-image { min-height: 155px; } .place-detail { padding: 18px; } .place-links a { width: 100%; justify-content: center; } }
@@ -169,7 +170,6 @@
         setTimeout(function () { map.invalidateSize(); selectStop('dussmann', false); }, 100);
       }
       buttons.forEach(function (button) { button.addEventListener('click', function () { selectStop(button.dataset.stop, true); }); });
-      document.getElementById('tool-credits').addEventListener('toggle', reportHeight);
       startMap();
       window.addEventListener('load', reportHeight);
       window.addEventListener('resize', reportHeight);
