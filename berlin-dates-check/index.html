@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0,0&display=swap">
 <link rel="stylesheet" href="../css/brand.css">
 <style>
   :root {
@@ -24,7 +25,8 @@
     --lime: #5C8F2E;
     --alert: #B3242F;
     --alert-soft: #F7E2E3;
-    --sky-1: #0C2338;
+    --cream: #F8F6F0;
+    --hero-green: #0B351A;
     --shadow: 0 1px 2px rgba(22,33,26,.05), 0 14px 36px -20px rgba(22,33,26,.4);
     --f-display: "Fraunces", Georgia, serif;
     --f-body: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
@@ -54,46 +56,84 @@
   #bw-date-check .wrap { max-width: 1040px; margin: 0 auto; padding: 0 22px; width: 100%; }
   #bw-date-check .eyebrow { font-family: var(--f-mono); font-size: 11px; font-weight: 500; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); }
 
-  /* ---- hero / input ---- */
-  #bw-date-check .hero { position: relative; background: var(--sky-1); overflow: hidden; }
-  #bw-date-check .hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .5s ease; }
+  /* ---- split hero / input ---- */
+  #bw-date-check .hero { position: relative; background: var(--cream); overflow: hidden; }
+  #bw-date-check .hero-in {
+    display: grid; grid-template-columns: minmax(0, 55fr) minmax(360px, 45fr);
+    min-height: 720px; margin: 0; padding: 0; max-width: none; gap: 0; align-items: stretch;
+  }
+  #bw-date-check .hero-visual { position: relative; min-height: 720px; overflow: hidden; background: var(--hero-green); }
+  #bw-date-check .hero-photo {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 0% 50%;
+    opacity: 0; transition: opacity .5s ease;
+  }
   #bw-date-check .hero-photo.is-loaded { opacity: 1; }
-  #bw-date-check .hero-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,20,32,.35) 0%, rgba(8,20,32,.6) 45%, rgba(8,20,32,.9) 100%); }
-  #bw-date-check .hero-in { position: relative; padding: 48px 22px 40px; max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: 1.15fr .85fr; gap: 30px; align-items: end; }
-  #bw-date-check .hero-copy { display: flex; flex-direction: column; gap: 13px; color: #fff; }
-  #bw-date-check .hero-copy .kicker { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--yellow); }
-  #bw-date-check .hero-copy h1 { color: #fff; }
-  #bw-date-check .hero-copy p { font-size: 15px; line-height: 1.5; color: rgba(255,255,255,.88); max-width: 42ch; }
+  #bw-date-check .hero-scrim {
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(7, 40, 20, .92) 0%, rgba(7, 40, 20, .84) 28%, rgba(7, 40, 20, .52) 54%, rgba(7, 40, 20, .14) 78%, rgba(7, 40, 20, .03) 100%), linear-gradient(0deg, rgba(5, 28, 13, .12), rgba(5, 28, 13, 0) 58%);
+  }
+  #bw-date-check .hero-copy {
+    position: relative; z-index: 1; min-height: 100%; max-width: 590px; padding: clamp(48px, 7vw, 112px) clamp(28px, 3.8vw, 56px);
+    display: flex; flex-direction: column; justify-content: center; gap: 17px; color: #fff;
+  }
+  #bw-date-check .hero-copy .kicker { font-family: var(--f-mono); font-size: 11px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--yellow); }
+  #bw-date-check .hero-copy h1 { color: #fff; font-size: clamp(44px, 5.2vw, 72px); line-height: .98; letter-spacing: -.032em; }
+  #bw-date-check .hero-copy p { font-size: clamp(16px, 1.45vw, 19px); line-height: 1.55; color: rgba(255,255,255,.94); max-width: 30ch; }
 
-  #bw-date-check .panel { background: var(--surface); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 15px; box-shadow: 0 20px 44px -18px rgba(0,0,0,.55); }
-  #bw-date-check .field { display: flex; flex-direction: column; gap: 7px; }
-  #bw-date-check .field > label { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .11em; text-transform: uppercase; color: var(--muted); }
-  #bw-date-check .datebox { position: relative; border: 1.5px solid var(--green); border-radius: 10px; }
+  #bw-date-check .hero-form-surface {
+    display: flex; align-items: center; justify-content: center; padding: clamp(48px, 6vw, 88px) clamp(30px, 3.9vw, 58px);
+    background: var(--cream); color: #183B20;
+  }
+  #bw-date-check .panel { width: min(100%, 540px); padding: 0; display: flex; flex-direction: column; gap: 30px; background: transparent; border-radius: 0; box-shadow: none; }
+  #bw-date-check .field { display: flex; flex-direction: column; gap: 9px; }
+  #bw-date-check .field > label { font-family: var(--f-mono); font-size: 11px; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; color: #1A4524; }
+  #bw-date-check .datebox { position: relative; border: 1.5px solid #173F20; border-radius: 0; background: rgba(255,255,255,.34); }
   #bw-date-check input[type="date"] {
-    width: 100%; border: 0; background: transparent; border-radius: 10px;
-    font-family: var(--f-mono); font-size: 16px; font-weight: 600; color: var(--ink);
-    padding: 13px 12px; -webkit-appearance: none; appearance: none;
+    width: 100%; min-height: 64px; border: 0; background: transparent; border-radius: 0;
+    font-family: var(--f-mono); font-size: 17px; font-weight: 600; color: #16211A;
+    padding: 13px 18px; -webkit-appearance: none; appearance: none;
   }
   #bw-date-check input[type="date"]::-webkit-calendar-picker-indicator {
-    transform: scale(1.55); margin-right: 2px; cursor: pointer; opacity: .85;
+    transform: scale(1.35); margin-right: 3px; cursor: pointer; opacity: .9;
   }
-  #bw-date-check input[type="date"]:focus { outline: 2px solid var(--lime); outline-offset: -2px; }
-  #bw-date-check .nights { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+  #bw-date-check input[type="date"]:focus { outline: 2px solid var(--lime); outline-offset: -3px; }
+  #bw-date-check .nights { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; border: 1.5px solid #173F20; }
   #bw-date-check .nights button {
-    font-family: var(--f-mono); font-size: 12.5px; border: 1px solid var(--hair); border-radius: 7px;
-    padding: 9px 0; text-align: center; color: var(--muted); background: var(--surface); cursor: pointer;
+    min-height: 58px; font-family: var(--f-mono); font-size: 15px; border: 0; border-radius: 0;
+    border-right: 1.5px solid #173F20; padding: 9px 0; text-align: center; color: #16211A; background: rgba(255,255,255,.24); cursor: pointer;
   }
-  #bw-date-check .nights button.on { background: var(--green) !important; border-color: var(--green) !important; color: #fff !important; font-weight: 600; }
+  #bw-date-check .nights button:last-child { border-right: 0; }
+  #bw-date-check .nights button:focus-visible { outline: 2px solid var(--lime); outline-offset: -3px; }
+  #bw-date-check .nights button.on { background: #1B5E20 !important; border-color: #1B5E20 !important; color: #fff !important; font-weight: 600; }
+  #bw-date-check .material-symbols-outlined {
+    display: inline-block; direction: ltr; font-family: 'Material Symbols Outlined'; font-size: 24px; font-style: normal; font-weight: normal;
+    letter-spacing: normal; line-height: 1; text-transform: none; white-space: nowrap; word-wrap: normal;
+    -webkit-font-feature-settings: 'liga'; -webkit-font-smoothing: antialiased; font-feature-settings: 'liga';
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
   #bw-date-check .cta {
-    background: var(--yellow) !important; color: var(--green-ink) !important; border: 0; border-radius: 10px;
-    padding: 14px; font-size: 15px; font-weight: 700; text-align: center; cursor: pointer; font-family: var(--f-body);
+    position: relative; min-height: 78px; background: var(--yellow) !important; color: #123D18 !important; border: 0; border-radius: 2px;
+    display: flex; align-items: center; justify-content: center; padding: 14px 58px; font-size: 18px; font-weight: 700; text-align: center; cursor: pointer; font-family: var(--f-body);
   }
+  #bw-date-check .cta .material-symbols-outlined { position: absolute; right: 21px; top: 50%; font-size: 28px; transform: translateY(-50%); }
+  #bw-date-check .cta:hover, #bw-date-check .cta:focus, #bw-date-check .cta:active { background: #F4D900 !important; color: #123D18 !important; }
   #bw-date-check .cta:disabled { opacity: .55; cursor: not-allowed; }
-  #bw-date-check .microcopy { font-size: 11.5px; color: var(--muted); text-align: center; line-height: 1.4; }
-  #bw-date-check .err-line { font-size: 12.5px; color: var(--alert); text-align: center; min-height: 1.4em; }
+  #bw-date-check .microcopy { padding-left: 13px; border-left: 2px solid var(--green); font-size: 13px; color: #263E2B; text-align: left; line-height: 1.45; }
+  #bw-date-check .err-line { font-size: 12.5px; color: var(--alert); text-align: left; min-height: 1.4em; }
+
+  /* ---- initial supporting strip ---- */
+  #bw-date-check .date-support { background: #FCFBF7; border-top: 1px solid #173F20; border-bottom: 1px solid #D8DDD2; color: #173F20; }
+  #bw-date-check .date-support-in { width: 100%; max-width: 1320px; margin: 0 auto; padding: 36px clamp(22px, 5vw, 72px); }
+  #bw-date-check .date-support h2 { font-size: clamp(25px, 3vw, 37px); text-align: center; color: #173F20; }
+  #bw-date-check .date-support-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 26px; }
+  #bw-date-check .date-support-item { display: grid; grid-template-columns: 28px minmax(0, 1fr); column-gap: 14px; padding: 5px clamp(20px, 3.2vw, 50px) 9px; }
+  #bw-date-check .date-support-item + .date-support-item { border-left: 1px solid #A8B4A5; }
+  #bw-date-check .date-support-item .material-symbols-outlined { margin-top: 1px; color: #1B5E20; font-size: 26px; }
+  #bw-date-check .date-support-item h3 { margin: 0 0 7px; font-size: 18px; line-height: 1.22; color: #1B5E20; }
+  #bw-date-check .date-support-item p { font-size: 14px; line-height: 1.55; color: #3E5143; max-width: 31ch; }
 
   /* ---- result ---- */
-  #bw-date-check .result-stage { display: none; flex-direction: column; gap: 46px; padding: 44px 0 70px; }
+  #bw-date-check .result-stage { display: none; flex-direction: column; gap: 46px; padding: 44px 22px 70px; }
   #bw-date-check .result-stage.is-visible { display: flex; }
   #bw-date-check section { display: flex; flex-direction: column; gap: 18px; }
   #bw-date-check .sec-head { display: flex; flex-direction: column; gap: 8px; }
@@ -137,6 +177,7 @@
   #bw-date-check .tourblock .slots { display: flex; flex-wrap: wrap; gap: 8px; }
   #bw-date-check .tourblock .slot-link { font-family: var(--f-mono); font-size: 12.5px; font-weight: 600; color: var(--green-ink) !important; background: var(--yellow) !important; border-radius: 8px; padding: 9px 13px; text-decoration: none; }
   #bw-date-check .tourblock .slot-link:hover { opacity: .88; }
+  #bw-date-check .tourblock .slot-link:hover, #bw-date-check .tourblock .slot-link:focus, #bw-date-check .tourblock .slot-link:active, #bw-date-check .tourblock .slot-link:visited { color: var(--green-ink) !important; }
 
   #bw-date-check .bridge { font-size: 13.5px; line-height: 1.55; padding: 15px 18px; border-radius: 10px; background: var(--green-soft); border: 1px solid var(--hair); }
   #bw-date-check .bridge a { color: var(--green-ink); font-weight: 600; }
@@ -183,19 +224,44 @@
   #bw-date-check .gate-stake { margin: 10px 0 0; font-size: 15.5px; line-height: 1.45; color: var(--ink); font-weight: 500; }
   #bw-date-check .gate .lede { margin-top: 8px; font-size: 13px; line-height: 1.5; color: var(--muted); }
   @media (max-width: 420px) { #bw-date-check .gate-stake { font-size: 14.5px; } }
-  #bw-date-check .hero-proof { list-style: none; margin: 2px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 7px; }
-  #bw-date-check .hero-proof li { font-family: var(--f-mono); font-size: 11px; letter-spacing: .04em; color: #fff; border: 1px solid rgba(255,255,255,.45); border-radius: 999px; padding: 5px 11px; }
   #bw-date-check footer { padding: 26px 0 50px; font-family: var(--f-mono); font-size: 10px; color: var(--muted); text-align: center; letter-spacing: .04em; }
 
   @media (max-width: 860px) {
-    #bw-date-check .hero-in { grid-template-columns: 1fr; }
+    #bw-date-check .hero-in { grid-template-columns: 1fr; min-height: 0; }
+    #bw-date-check .hero-visual { min-height: clamp(450px, 75vw, 620px); }
+    #bw-date-check .hero-photo { object-position: 28% 50%; }
+    #bw-date-check .hero-copy { max-width: 600px; padding: 52px clamp(22px, 7vw, 60px) 62px; }
+    #bw-date-check .hero-copy h1 { font-size: clamp(42px, 8vw, 62px); }
+    #bw-date-check .hero-form-surface { padding: 48px clamp(22px, 7vw, 60px) 54px; }
+    #bw-date-check .panel { max-width: 620px; }
+    #bw-date-check .date-support-list { grid-template-columns: 1fr; }
+    #bw-date-check .date-support-item { padding: 18px 0; }
+    #bw-date-check .date-support-item + .date-support-item { border-left: 0; border-top: 1px solid #C8D0C4; }
+    #bw-date-check .date-support-item p { max-width: 48ch; }
     #bw-date-check .reading { grid-template-columns: 1fr; }
   }
   @media (max-width: 520px) {
     #bw-date-check .wrap { padding: 0 16px; }
-    #bw-date-check .hero-in { padding: 34px 16px 30px; gap: 20px; }
-    #bw-date-check .result-stage { padding: 34px 0 54px; gap: 38px; }
+    #bw-date-check .hero-visual { min-height: 385px; }
+    #bw-date-check .hero-scrim { background: linear-gradient(90deg, rgba(7, 40, 20, .91) 0%, rgba(7, 40, 20, .78) 45%, rgba(7, 40, 20, .65) 75%, rgba(7, 40, 20, .60) 100%), linear-gradient(0deg, rgba(5, 28, 13, .16), rgba(5, 28, 13, .08) 58%); }
+    #bw-date-check .hero-copy { padding: 44px 20px 58px; }
+    #bw-date-check .hero-copy h1 { font-size: clamp(40px, 11.2vw, 48px); }
+    #bw-date-check .hero-copy p { font-size: 16px; }
+    #bw-date-check .hero-photo { object-position: 50% 50%; }
+    #bw-date-check .hero-form-surface { padding: 36px 20px 42px; }
+    #bw-date-check .panel { gap: 18px; }
+    #bw-date-check .datebox input[type="date"] { min-height: 58px; padding-left: 14px; padding-right: 14px; }
     #bw-date-check .nights { grid-template-columns: repeat(4, 1fr); }
+    #bw-date-check .nights button { min-height: 48px; }
+    #bw-date-check .nights button:nth-child(-n + 4) { border-bottom: 1.5px solid #173F20; }
+    #bw-date-check .nights button:nth-child(4) { border-right: 0; }
+    #bw-date-check .nights button:last-child { grid-column: span 2; border-right: 0; }
+    #bw-date-check .cta { height: 54px; min-height: 54px; padding: 10px 48px; font-size: 17px; line-height: 1.2; }
+    #bw-date-check .date-support-in { padding: 32px 20px; }
+    #bw-date-check .date-support h2 { text-align: left; font-size: 27px; }
+    #bw-date-check .date-support-list { margin-top: 22px; }
+    #bw-date-check .date-support-item { padding: 16px 0; }
+    #bw-date-check .result-stage { padding: 34px 16px 54px; gap: 38px; }
   }
 </style>
 </head>
@@ -203,42 +269,70 @@
 <div id="bw-date-check">
 
   <div class="hero">
-    <img class="hero-photo" id="heroPhoto" alt="">
-    <div class="hero-scrim"></div>
     <div class="hero-in">
-      <div class="hero-copy">
-        <p class="kicker">Free &middot; no email to see it</p>
-        <h1>What your Berlin dates actually mean</h1>
-        <p>Tell me when you arrive. I will show you, for your exact days:</p>
-        <ul class="hero-proof">
-          <li>what closes on which of your days</li>
-          <li>your book-by dates</li>
-          <li>daylight, weather and tour days</li>
-        </ul>
+      <div class="hero-visual">
+        <img class="hero-photo" id="heroPhoto" alt="">
+        <div class="hero-scrim"></div>
+        <div class="hero-copy">
+          <p class="kicker">Free &middot; no email to see it</p>
+          <h1>What your Berlin dates actually mean</h1>
+          <p>Tell me when you arrive. I will show you what closes, what to book first, and whether my walking tour runs while you are here.</p>
+        </div>
       </div>
-      <form class="panel" id="inputForm" novalidate>
-        <div class="field">
-          <label for="arrivalInput">When do you arrive?</label>
-          <div class="datebox"><input type="date" id="arrivalInput" name="arrival" required></div>
-        </div>
-        <div class="field">
-          <label id="nightsLabel">How many nights?</label>
-          <div class="nights" role="group" aria-labelledby="nightsLabel" id="nightsGroup">
-            <button type="button" data-nights="1">1</button>
-            <button type="button" data-nights="2">2</button>
-            <button type="button" data-nights="3">3</button>
-            <button type="button" data-nights="4" class="on">4</button>
-            <button type="button" data-nights="5">5</button>
-            <button type="button" data-nights="6">6</button>
-            <button type="button" data-nights="7">7+</button>
+      <div class="hero-form-surface">
+        <form class="panel" id="inputForm" novalidate>
+          <div class="field">
+            <label for="arrivalInput">When do you arrive?</label>
+            <div class="datebox"><input type="date" id="arrivalInput" name="arrival" required></div>
           </div>
-        </div>
-        <button type="submit" class="cta">Check my dates</button>
-        <p class="microcopy">No email needed to see the result.</p>
-        <p class="err-line" id="inputError" role="alert"></p>
-      </form>
+          <div class="field">
+            <label id="nightsLabel">How many nights?</label>
+            <div class="nights" role="group" aria-labelledby="nightsLabel" id="nightsGroup">
+              <button type="button" data-nights="1">1</button>
+              <button type="button" data-nights="2">2</button>
+              <button type="button" data-nights="3">3</button>
+              <button type="button" data-nights="4" class="on">4</button>
+              <button type="button" data-nights="5">5</button>
+              <button type="button" data-nights="6">6</button>
+              <button type="button" data-nights="7">7+</button>
+            </div>
+          </div>
+          <button type="submit" class="cta"><span>Check my dates</span><span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></button>
+          <p class="microcopy">No email needed to see the result.</p>
+          <p class="err-line" id="inputError" role="alert"></p>
+        </form>
+      </div>
     </div>
   </div>
+
+  <section class="date-support" aria-labelledby="dateSupportHeading">
+    <div class="date-support-in">
+      <h2 id="dateSupportHeading">Your dates, translated into Berlin reality</h2>
+      <div class="date-support-list">
+        <article class="date-support-item">
+          <span class="material-symbols-outlined" aria-hidden="true">storefront</span>
+          <div>
+            <h3>Closed days</h3>
+            <p>Museums, shops, markets and public holidays that affect your plan.</p>
+          </div>
+        </article>
+        <article class="date-support-item">
+          <span class="material-symbols-outlined" aria-hidden="true">event_available</span>
+          <div>
+            <h3>Book-by dates</h3>
+            <p>Registration, timed entry and windows that matter before you land.</p>
+          </div>
+        </article>
+        <article class="date-support-item">
+          <span class="material-symbols-outlined" aria-hidden="true">wb_twilight</span>
+          <div>
+            <h3>Daylight + tour days</h3>
+            <p>Sunrise, sunset and my walking tour schedule on your dates.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
 
   <div class="wrap result-stage" id="resultStage">
 
@@ -1150,14 +1244,14 @@
   })();
 
   // ---------------------------------------------------------------------
-  // hero photo (neutral month-of-load backdrop, not tied to visitor input)
+  // hero photo (fixed Alexanderplatz context, not tied to visitor input)
   // ---------------------------------------------------------------------
   function initHeroPhoto() {
     var img = document.getElementById('heroPhoto');
-    var month = partsOf(todayStr())[1];
-    var src = DATA.seasonalPhotos && DATA.seasonalPhotos[String(month)];
-    if (!src) return;
+    var src = '../gallery/images/06-1600w.webp';
+    if (!img) return;
     img.onload = function () { img.classList.add('is-loaded'); };
+    img.onerror = function () { img.classList.remove('is-loaded'); };
     img.src = src;
     img.alt = '';
   }
