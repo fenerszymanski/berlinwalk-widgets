@@ -142,7 +142,7 @@
   #bw-date-check .bridge a { color: var(--green-ink); font-weight: 600; }
 
   /* ---- gate ---- */
-  #bw-date-check .gate { border: 1px solid var(--hair); border-radius: 14px; background: var(--surface); padding: 26px 24px; display: flex; flex-direction: column; gap: 16px; }
+  #bw-date-check .gate { border: 1.5px solid var(--green); border-radius: 14px; background: var(--surface); padding: 26px 24px; display: flex; flex-direction: column; gap: 16px; }
   #bw-date-check .gate h2 { font-size: clamp(19px, 2.6vw, 24px); }
   #bw-date-check .gate .lede { font-size: 14px; line-height: 1.55; color: var(--muted); max-width: 62ch; }
   #bw-date-check .gate-row { display: flex; gap: 10px; flex-wrap: wrap; }
@@ -183,6 +183,8 @@
   #bw-date-check .gate-stake { margin: 10px 0 0; font-size: 15.5px; line-height: 1.45; color: var(--ink); font-weight: 500; }
   #bw-date-check .gate .lede { margin-top: 8px; font-size: 13px; line-height: 1.5; color: var(--muted); }
   @media (max-width: 420px) { #bw-date-check .gate-stake { font-size: 14.5px; } }
+  #bw-date-check .hero-proof { list-style: none; margin: 2px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 7px; }
+  #bw-date-check .hero-proof li { font-family: var(--f-mono); font-size: 11px; letter-spacing: .04em; color: #fff; border: 1px solid rgba(255,255,255,.45); border-radius: 999px; padding: 5px 11px; }
   #bw-date-check footer { padding: 26px 0 50px; font-family: var(--f-mono); font-size: 10px; color: var(--muted); text-align: center; letter-spacing: .04em; }
 
   @media (max-width: 860px) {
@@ -207,7 +209,12 @@
       <div class="hero-copy">
         <p class="kicker">Free &middot; no email to see it</p>
         <h1>What your Berlin dates actually mean</h1>
-        <p>Tell me when you arrive. I will show you what closes, what needs booking this week, and how much daylight you get.</p>
+        <p>Tell me when you arrive. I will show you, for your exact days:</p>
+        <ul class="hero-proof">
+          <li>what closes on which of your days</li>
+          <li>your book-by dates</li>
+          <li>daylight, weather and tour days</li>
+        </ul>
       </div>
       <form class="panel" id="inputForm" novalidate>
         <div class="field">
@@ -259,6 +266,25 @@
     <section>
       <div class="readings" id="readings"></div>
     </section>
+    <section>
+      <div class="gate" id="gate">
+        <h2 id="gateHeading">Your dates, in your inbox, at the right moment</h2>
+        <p class="gate-stake" id="gateStake"></p>
+        <p class="lede" id="gateLede">I will send this summary to your inbox, then short emails timed to your trip. Nothing else.</p>
+        <form id="gateForm" novalidate>
+          <div class="gate-row">
+            <input type="email" id="gateEmail" name="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required>
+            <button type="submit" id="gateSubmit">Email me these dates</button>
+          </div>
+          <div class="honeypot"><label>Website<input type="text" name="website" id="gateWebsite" tabindex="-1" autocomplete="off"></label></div>
+          <label class="consent">
+            <input type="checkbox" id="gateConsent" required>
+            <span>Send me this dated summary plus the short reminders timed to my trip. I can unsubscribe any time. <a href="https://www.berlinwalk.com/privacy-policy" target="_top">Privacy Policy.</a></span>
+          </label>
+          <p class="gate-status" id="gateStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
 
     <section>
       <div class="lightcard">
@@ -280,25 +306,6 @@
       <p class="bridge">This covers what your dates hit. It does not plan your days. <a href="https://www.berlinwalk.com/berlin-trip-planner" target="_top" id="bridgeLink">Want the day by day plan for these dates?</a></p>
     </section>
 
-    <section>
-      <div class="gate" id="gate">
-        <h2 id="gateHeading">Your dates, in your inbox, at the right moment</h2>
-        <p class="gate-stake" id="gateStake"></p>
-        <p class="lede" id="gateLede">I will send this summary to your inbox, then short emails timed to your trip. Nothing else.</p>
-        <form id="gateForm" novalidate>
-          <div class="gate-row">
-            <input type="email" id="gateEmail" name="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required>
-            <button type="submit" id="gateSubmit">Email me these dates</button>
-          </div>
-          <div class="honeypot"><label>Website<input type="text" name="website" id="gateWebsite" tabindex="-1" autocomplete="off"></label></div>
-          <label class="consent">
-            <input type="checkbox" id="gateConsent" required>
-            <span>Send me this dated summary plus the short reminders timed to my trip. I can unsubscribe any time. <a href="https://www.berlinwalk.com/privacy-policy" target="_top">Privacy Policy.</a></span>
-          </label>
-          <p class="gate-status" id="gateStatus" role="status" aria-live="polite"></p>
-        </form>
-      </div>
-    </section>
 
     <footer>
       <span id="checkedOnLine"></span>
