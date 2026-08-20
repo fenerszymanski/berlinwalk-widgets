@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-19T17:24:05.950Z",
+  "updatedAt": "2026-08-20T01:12:04.689Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 300,
@@ -43,21 +43,21 @@
   ],
   "hero": {
     "lead": {
-      "title": "Berlin With Parents: A Calm Historic-Centre Day Without the Rushed Checklist",
-      "slug": "berlin-with-parents",
-      "path": "/post/berlin-with-parents",
-      "url": "https://www.berlinwalk.com/post/berlin-with-parents",
-      "excerpt": "Planning Berlin with parents? Build a calmer historic-centre day around Alexanderplatz, Museum Island and one useful pause instead of a rushed checklist.",
+      "title": "Where to Hear Live Music in Berlin Without Overpaying",
+      "slug": "where-to-hear-live-music-in-berlin",
+      "path": "/post/where-to-hear-live-music-in-berlin",
+      "url": "https://www.berlinwalk.com/post/where-to-hear-live-music-in-berlin",
+      "excerpt": "The live music you remember in Berlin is rarely the show you paid the most for. A local guide to the free lunch concert, the jazz clubs, the Saturday jam, and Sunday in Mauerpark, with a week reader to plan by.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "first-day",
       "topicLabel": "First Day in Berlin",
-      "readTime": "4 min read",
-      "publishedDate": "2026-08-17T05:34:41.761Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_93b5df72f94a42e8b55a27c72dbd4197~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-alexanderplatz-world-clock-wide.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_93b5df72f94a42e8b55a27c72dbd4197~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-alexanderplatz-world-clock-wide.jpg",
-      "alt": "The World Time Clock at Alexanderplatz with the Fernsehturm behind it",
-      "relatedToolSlug": "berlin-pace-passport"
+      "readTime": "5 min read",
+      "publishedDate": "2026-08-19T17:23:01.814Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_cdb608b17b264077b31b0779f4db7326~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berliner-philharmonie-lunch-concert.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_cdb608b17b264077b31b0779f4db7326~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berliner-philharmonie-lunch-concert.jpg",
+      "alt": "A free lunchtime concert in the foyer of the Berliner Philharmonie, with the audience seated on folding chairs and a grand piano at the side",
+      "relatedToolSlug": ""
     },
     "secondary": [
       {

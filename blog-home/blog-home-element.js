@@ -1,47 +1,77 @@
 const BW_BLOG_HOME_DATA_URL = (() => {
   const script = document.currentScript;
   const base = script && script.src ? script.src : window.location.href;
-  return new URL('./data.json?v=20260818-featured-listings', base).href;
+  return new URL('./data.json?v=20260820-featured-listings', base).href;
 })();
 
 const BW_BLOG_HOME_FALLBACK = {
   featured: {
-    title: 'Berlin Weekend with a Friday Night Arrival: A Plan That Starts Small',
-    url: 'https://www.berlinwalk.com/post/berlin-weekend-friday-night-arrival',
+    title: 'Berlin With Parents: A Calm Historic-Centre Day Without the Rushed Checklist',
+    url: 'https://www.berlinwalk.com/post/berlin-with-parents',
     category: 'Tourist Tips',
     readTime: '4 min read',
-    label: 'New: start small',
-    summary: 'Arriving in Berlin on Friday night? Use a small first-night plan for BER or Hauptbahnhof that protects Saturday instead of forcing a rushed checklist.',
-    image: 'https://static.wixstatic.com/media/5a08a3_8124c1065ff349a690b2df2692ea0b5d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ber-airport-night.jpg',
-    alt: 'Terminal 1 at Berlin Brandenburg Airport lit at dusk'
+    label: 'Featured: plan a calmer day',
+    summary: 'Planning Berlin with parents? Build a calmer historic-centre day around Alexanderplatz, Museum Island and one useful pause instead of a rushed checklist.',
+    image: 'https://static.wixstatic.com/media/5a08a3_93b5df72f94a42e8b55a27c72dbd4197~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-alexanderplatz-world-clock-wide.jpg',
+    alt: 'The World Time Clock at Alexanderplatz with the Fernsehturm behind it'
   },
   miniPosts: [
+    {
+      title: 'Where to Hear Live Music in Berlin Without Overpaying',
+      url: 'https://www.berlinwalk.com/post/where-to-hear-live-music-in-berlin',
+      category: 'Tourist Tips',
+      readTime: '5 min read',
+      summary: 'The live music you remember in Berlin is rarely the show you paid the most for. A local guide to the free lunch concert, the jazz clubs, the Saturday jam, and Sunday in Mauerpark, with a week reader to plan by.',
+      image: 'https://static.wixstatic.com/media/5a08a3_cdb608b17b264077b31b0779f4db7326~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berliner-philharmonie-lunch-concert.jpg',
+      alt: 'A free lunchtime concert in the foyer of the Berliner Philharmonie, with the audience seated on folding chairs and a grand piano at the side'
+    },
+    {
+      title: 'English Bookshops in Berlin: Three Stops That Fit a Real Day',
+      url: 'https://www.berlinwalk.com/post/english-bookshops-in-berlin',
+      category: 'Tourist Tips',
+      readTime: '5 min read',
+      summary: 'Choose an English bookshop in Berlin by the day you actually have: Dussmann for range in Mitte, Shakespeare and Sons for a slower east-side pause, or Curious Fox for an independent Kreuzberg browse.',
+      image: 'https://static.wixstatic.com/media/5a08a3_e96deaa0c27a4c27a6541845074b6642~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-dussmann-exterior.jpg',
+      alt: 'Dussmann KulturKaufhaus exterior on Friedrichstraße in Berlin'
+    },
     {
       title: 'Berlin Spy Museum: Is It Worth Your Time on a First Visit?',
       url: 'https://www.berlinwalk.com/post/berlin-spy-museum-worth-it',
       category: 'Tourist Tips',
-      readTime: '3 min read'
+      readTime: '4 min read',
+      summary: 'Is the Berlin Spy Museum worth your time? Decide whether its hands-on experience at Potsdamer Platz fits your first Berlin visit, or whether a real historic site is the better move.',
+      image: 'https://static.wixstatic.com/media/5a08a3_6264fdbbee424906a8b517c2baac902a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-spy-museum-exterior.jpg',
+      alt: 'The entrance to the German Spy Museum at Leipziger Platz in Berlin'
     },
     {
       title: 'Berlin Landmarks in 2 Hours: Choose an East or West Start',
       url: 'https://www.berlinwalk.com/post/berlin-landmarks-in-two-hours',
       category: 'Tourist Tips',
-      readTime: '4 min read'
+      readTime: '4 min read',
+      summary: 'Use a focused east or west two-hour window for Berlin landmarks instead of forcing Museum Island and Brandenburg Gate into one rushed loop.',
+      image: 'https://static.wixstatic.com/media/5a08a3_f539c515c8cc4a8e9cc4c87bbca3b415~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-brandenburg-gate.jpg',
+      alt: 'The illuminated Brandenburg Gate at blue hour in Berlin'
+    }
+  ],
+  posts: [
+    {
+      title: 'Berlin Weekend with a Friday Night Arrival: A Plan That Starts Small',
+      url: 'https://www.berlinwalk.com/post/berlin-weekend-friday-night-arrival',
+      category: 'Tourist Tips',
+      readTime: '4 min read',
+      summary: 'Arriving in Berlin on Friday night? Use a small first-night plan for BER or Hauptbahnhof that protects Saturday instead of forcing a rushed checklist.',
+      image: 'https://static.wixstatic.com/media/5a08a3_8124c1065ff349a690b2df2692ea0b5d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ber-airport-night.jpg',
+      alt: 'Terminal 1 at Berlin Brandenburg Airport lit at dusk'
     },
     {
       title: 'Free Berlin Memorials: Four Powerful Places That Are Easy to Visit',
       url: 'https://www.berlinwalk.com/post/free-berlin-memorials',
       category: 'Tourist Tips',
-      readTime: '5 min read'
+      readTime: '5 min read',
+      summary: 'Berlin’s most important memorials are free, but four places can become a rushed checklist. Here is the reading order I use: memory, evidence, division and the human border crossing.',
+      image: 'https://static.wixstatic.com/media/5a08a3_f2af2e72c11942cda3a5db5c5e2bd8d3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-memorial-stelae-detail.jpg',
+      alt: 'The concrete stelae of the Memorial to the Murdered Jews of Europe in Berlin'
     },
-    {
-      title: 'What to Wear for a Berlin Walking Tour: Shoes, Layers and Rain',
-      url: 'https://www.berlinwalk.com/post/what-to-wear-for-a-berlin-walking-tour',
-      category: 'Tourist Tips',
-      readTime: '5 min read'
-    }
-  ],
-  posts: [
     {
       title: 'Berlin Public Transport for Tourists: Tickets, Zones, Prices and Validation',
       url: 'https://www.berlinwalk.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
@@ -50,24 +80,6 @@ const BW_BLOG_HOME_FALLBACK = {
       summary: 'Berlin public transport uses one shared ticket system for U-Bahn, S-Bahn, tram and bus. This local guide covers zones, prices, validation, BER airport trips, and the EUR 60 fine.',
       image: 'https://static.wixstatic.com/media/5a08a3_09bdf461857549d291c3769973fe3a9b~mv2.png/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_8c97b9e50ab54e0b9a53b8d3982f4ce4~mv2.jpg',
       alt: 'Yellow train speeding through Konstanzer Strasse station. The wall has bold stripes and text. Ceiling lights illuminate the platform.'
-    },
-    {
-      title: 'Where Was the Berlin Wall? An Interactive Map of East and West in 1989',
-      url: 'https://www.berlinwalk.com/post/where-was-the-berlin-wall-interactive-map',
-      category: 'Berlin History',
-      readTime: '8 min read',
-      summary: 'The Berlin Wall ran 155 kilometers around West Berlin. Tap any point on this interactive map to see exactly where it stood and which side an address was on in 1989.',
-      image: 'https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_6f4f6d714c71713574696f~mv2.jpg',
-      alt: 'Where Was the Berlin Wall? An Interactive Map of East and West in 1989'
-    },
-    {
-      title: 'Long Night of Museums Berlin: How to Build a Route That Works',
-      url: 'https://www.berlinwalk.com/post/long-night-of-museums-berlin-2026',
-      category: 'Tourist Tips',
-      readTime: '4 min read',
-      summary: 'How to build a realistic Long Night of Museums route in Berlin, with the confirmed 2026 timing and practical queue advice.',
-      image: 'https://static.wixstatic.com/media/5a08a3_8e322674b4ce4bffa822de5812164c06~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-bode-museum-night-cover.jpg',
-      alt: "Bode Museum illuminated at night on Berlin's Museum Island"
     }
   ]
 };

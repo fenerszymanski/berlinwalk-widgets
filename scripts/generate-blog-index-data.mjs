@@ -214,10 +214,10 @@ const YEAR_REQUIRED_TITLE_SLUGS = new Set([
 ]);
 
 const HERO_SLUGS = {
-  // 18 Aug 2026: the parents guide is the strongest new broad first-trip
-  // planning lead; keep the rail mixed with fresh arrival/museum/route stories,
-  // a free-history post, and a proven popular transport evergreen.
-  lead: 'berlin-with-parents',
+  // 20 Aug 2026: the new live-music guide is the strongest current,
+  // tourist-useful lead; keep the rail mixed with recent arrival/museum/route
+  // stories, a free-history post, and a proven popular transport evergreen.
+  lead: 'where-to-hear-live-music-in-berlin',
   secondary: [
     'berlin-weekend-friday-night-arrival',
     'berlin-spy-museum-worth-it',
@@ -329,6 +329,7 @@ const REQUIRED_SLUGS = [
   'why-is-berlin-founding-year-1237',
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
+  'where-to-hear-live-music-in-berlin',
   'berlin-with-parents',
   'berlin-spy-museum-worth-it',
   'berlin-weekend-friday-night-arrival',
