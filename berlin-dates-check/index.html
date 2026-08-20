@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Berlin Date Check</title>
+<meta name="description" content="Tell me your Berlin arrival date and I will show you what closes, what needs booking, and how much daylight you get. No email needed to see it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --ground: #F1F4EC;
+    --surface: #FFFFFF;
+    --surface-2: #E7EEE1;
+    --ink: #16211A;
+    --muted: #5C6C5F;
+    --hair: #CBD8C4;
+    --green: #1B5E20;
+    --green-ink: #123D18;
+    --green-soft: #E2EEDC;
+    --yellow: #FFE600;
+    --lime: #5C8F2E;
+    --alert: #B3242F;
+    --alert-soft: #F7E2E3;
+    --sky-1: #0C2338;
+    --shadow: 0 1px 2px rgba(22,33,26,.05), 0 14px 36px -20px rgba(22,33,26,.4);
+    --f-display: "Fraunces", Georgia, serif;
+    --f-body: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+    --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0D130E; --surface: #151E16; --surface-2: #1D2A1E;
+      --ink: #E7EEE4; --muted: #94A793; --hair: #2C3D2D;
+      --green: #8CC26A; --green-ink: #0D130E; --green-soft: #1E2C1F;
+      --lime: #9BD063; --alert: #F1888F; --alert-soft: #331B1D;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 16px 38px -20px rgba(0,0,0,.9);
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--ground); color: var(--ink);
+    font-family: var(--f-body); font-size: 16px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  #bw-date-check { display: flex; flex-direction: column; }
+  #bw-date-check h1, #bw-date-check h2, #bw-date-check h3 { text-wrap: balance; margin: 0; }
+  #bw-date-check h1 { font-family: var(--f-display); font-weight: 600; font-size: clamp(30px, 5.6vw, 50px); line-height: 1.04; letter-spacing: -.015em; }
+  #bw-date-check h2 { font-family: var(--f-display); font-weight: 600; font-size: clamp(21px, 3vw, 28px); line-height: 1.12; letter-spacing: -.01em; }
+  #bw-date-check p { margin: 0; }
+  #bw-date-check .wrap { max-width: 1040px; margin: 0 auto; padding: 0 22px; width: 100%; }
+  #bw-date-check .eyebrow { font-family: var(--f-mono); font-size: 11px; font-weight: 500; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); }
+
+  /* ---- hero / input ---- */
+  #bw-date-check .hero { position: relative; background: var(--sky-1); overflow: hidden; }
+  #bw-date-check .hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .5s ease; }
+  #bw-date-check .hero-photo.is-loaded { opacity: 1; }
+  #bw-date-check .hero-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,20,32,.35) 0%, rgba(8,20,32,.6) 45%, rgba(8,20,32,.9) 100%); }
+  #bw-date-check .hero-in { position: relative; padding: 48px 22px 40px; max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: 1.15fr .85fr; gap: 30px; align-items: end; }
+  #bw-date-check .hero-copy { display: flex; flex-direction: column; gap: 13px; color: #fff; }
+  #bw-date-check .hero-copy .kicker { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--yellow); }
+  #bw-date-check .hero-copy h1 { color: #fff; }
+  #bw-date-check .hero-copy p { font-size: 15px; line-height: 1.5; color: rgba(255,255,255,.88); max-width: 42ch; }
+
+  #bw-date-check .panel { background: var(--surface); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 15px; box-shadow: 0 20px 44px -18px rgba(0,0,0,.55); }
+  #bw-date-check .field { display: flex; flex-direction: column; gap: 7px; }
+  #bw-date-check .field > label { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .11em; text-transform: uppercase; color: var(--muted); }
+  #bw-date-check .datebox { position: relative; border: 1.5px solid var(--green); border-radius: 10px; }
+  #bw-date-check input[type="date"] {
+    width: 100%; border: 0; background: transparent; border-radius: 10px;
+    font-family: var(--f-mono); font-size: 16px; font-weight: 600; color: var(--ink);
+    padding: 13px 12px; -webkit-appearance: none; appearance: none;
+  }
+  #bw-date-check input[type="date"]::-webkit-calendar-picker-indicator {
+    transform: scale(1.55); margin-right: 2px; cursor: pointer; opacity: .85;
+  }
+  #bw-date-check input[type="date"]:focus { outline: 2px solid var(--lime); outline-offset: -2px; }
+  #bw-date-check .nights { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+  #bw-date-check .nights button {
+    font-family: var(--f-mono); font-size: 12.5px; border: 1px solid var(--hair); border-radius: 7px;
+    padding: 9px 0; text-align: center; color: var(--muted); background: var(--surface); cursor: pointer;
+  }
+  #bw-date-check .nights button.on { background: var(--green) !important; border-color: var(--green) !important; color: #fff !important; font-weight: 600; }
+  #bw-date-check .cta {
+    background: var(--yellow) !important; color: var(--green-ink) !important; border: 0; border-radius: 10px;
+    padding: 14px; font-size: 15px; font-weight: 700; text-align: center; cursor: pointer; font-family: var(--f-body);
+  }
+  #bw-date-check .cta:disabled { opacity: .55; cursor: not-allowed; }
+  #bw-date-check .microcopy { font-size: 11.5px; color: var(--muted); text-align: center; line-height: 1.4; }
+  #bw-date-check .err-line { font-size: 12.5px; color: var(--alert); text-align: center; min-height: 1.4em; }
+
+  /* ---- result ---- */
+  #bw-date-check .result-stage { display: none; flex-direction: column; gap: 46px; padding: 44px 0 70px; }
+  #bw-date-check .result-stage.is-visible { display: flex; }
+  #bw-date-check section { display: flex; flex-direction: column; gap: 18px; }
+  #bw-date-check .sec-head { display: flex; flex-direction: column; gap: 8px; }
+  #bw-date-check .season-band { position: relative; border-radius: 14px; overflow: hidden; min-height: 200px; display: flex; align-items: flex-end; background: var(--surface-2); }
+  #bw-date-check .season-band img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .4s ease; }
+  #bw-date-check .season-band img.is-loaded { opacity: 1; }
+  #bw-date-check .season-band .season-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,20,20,0) 45%, rgba(8,20,20,.75) 100%); }
+  #bw-date-check .season-band .season-label { position: relative; padding: 16px 20px; font-family: var(--f-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #fff; }
+
+  #bw-date-check .stripwrap { overflow-x: auto; padding-bottom: 4px; }
+  #bw-date-check .strip { display: grid; grid-auto-columns: minmax(84px, 1fr); grid-auto-flow: column; gap: 7px; }
+  #bw-date-check .day { border: 1px solid var(--hair); border-radius: 10px; overflow: hidden; background: var(--surface); display: flex; flex-direction: column; }
+  #bw-date-check .day .top { padding: 11px 8px 9px; display: flex; flex-direction: column; gap: 1px; align-items: center; }
+  #bw-date-check .day .wd { font-family: var(--f-mono); font-size: 9.5px; letter-spacing: .13em; text-transform: uppercase; color: var(--muted); }
+  #bw-date-check .day .num { font-family: var(--f-mono); font-size: 24px; font-weight: 600; line-height: 1.05; font-variant-numeric: tabular-nums; }
+  #bw-date-check .day .mo { font-family: var(--f-mono); font-size: 9px; letter-spacing: .11em; text-transform: uppercase; color: var(--muted); }
+  #bw-date-check .day .band { padding: 6px 6px; font-family: var(--f-mono); font-size: 9px; letter-spacing: .05em; text-transform: uppercase; text-align: center; border-top: 1px solid var(--hair); }
+  #bw-date-check .band.clear { background: var(--green-soft); color: var(--green); }
+  #bw-date-check .band.warn { background: var(--alert-soft); color: var(--alert); }
+  #bw-date-check .band.tour { background: var(--yellow); color: var(--green-ink); font-weight: 600; }
+  #bw-date-check .legend { display: flex; flex-wrap: wrap; gap: 7px 16px; font-family: var(--f-mono); font-size: 10px; color: var(--muted); letter-spacing: .04em; }
+  #bw-date-check .legend b { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 5px; vertical-align: middle; }
+
+  #bw-date-check .readings { display: flex; flex-direction: column; border: 1px solid var(--hair); border-radius: 12px; overflow: hidden; }
+  #bw-date-check .reading { display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; background: var(--surface); border-bottom: 1px solid var(--hair); }
+  #bw-date-check .reading:last-child { border-bottom: none; }
+  #bw-date-check .reading .k { font-family: var(--f-mono); font-size: 10px; letter-spacing: .11em; text-transform: uppercase; color: var(--green); }
+  #bw-date-check .reading .say { font-size: 14px; line-height: 1.5; border-left: 2px solid var(--yellow); padding-left: 12px; }
+  #bw-date-check .reading.is-clean .say { border-left-color: var(--hair); color: var(--muted); }
+  #bw-date-check .reading .extra { font-size: 12.5px; color: var(--muted); line-height: 1.4; }
+
+  #bw-date-check .lightcard { border: 1px solid var(--hair); border-radius: 12px; background: var(--surface); padding: 18px 20px; display: flex; flex-direction: column; gap: 12px; }
+  #bw-date-check .lightcard .lab { font-family: var(--f-mono); font-size: 10px; letter-spacing: .13em; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; gap: 8px; }
+  #bw-date-check .arc { width: 100%; height: auto; display: block; }
+  #bw-date-check .lightcard p { font-size: 13.5px; line-height: 1.5; }
+
+  #bw-date-check .tourblock { border: 2px solid var(--yellow); border-radius: 13px; background: var(--surface); padding: 20px 22px; display: none; flex-direction: column; gap: 12px; }
+  #bw-date-check .tourblock.is-visible { display: flex; }
+  #bw-date-check .tourblock .tag { display: inline-flex; align-self: flex-start; background: var(--yellow); color: var(--green-ink) !important; font-family: var(--f-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; padding: 4px 9px; border-radius: 999px; }
+  #bw-date-check .tourblock p { font-size: 14.5px; line-height: 1.55; }
+  #bw-date-check .tourblock .slots { display: flex; flex-wrap: wrap; gap: 8px; }
+  #bw-date-check .tourblock .slot-link { font-family: var(--f-mono); font-size: 12.5px; font-weight: 600; color: var(--green-ink) !important; background: var(--yellow) !important; border-radius: 8px; padding: 9px 13px; text-decoration: none; }
+  #bw-date-check .tourblock .slot-link:hover { opacity: .88; }
+
+  #bw-date-check .bridge { font-size: 13.5px; line-height: 1.55; padding: 15px 18px; border-radius: 10px; background: var(--green-soft); border: 1px solid var(--hair); }
+  #bw-date-check .bridge a { color: var(--green-ink); font-weight: 600; }
+
+  /* ---- gate ---- */
+  #bw-date-check .gate { border: 1px solid var(--hair); border-radius: 14px; background: var(--surface); padding: 26px 24px; display: flex; flex-direction: column; gap: 16px; }
+  #bw-date-check .gate h2 { font-size: clamp(19px, 2.6vw, 24px); }
+  #bw-date-check .gate .lede { font-size: 14px; line-height: 1.55; color: var(--muted); max-width: 62ch; }
+  #bw-date-check .gate-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  #bw-date-check .gate-row input[type="email"] {
+    flex: 1 1 240px; border: 1.5px solid var(--hair); border-radius: 9px; padding: 12px 13px;
+    font-family: var(--f-body); font-size: 14.5px; color: var(--ink); background: var(--ground);
+  }
+  #bw-date-check .gate-row input[type="email"]:focus { outline: 2px solid var(--lime); outline-offset: -2px; border-color: var(--lime); }
+  #bw-date-check .gate-row button {
+    background: var(--yellow) !important; color: var(--green-ink) !important; border: 0; border-radius: 9px;
+    padding: 12px 20px; font-weight: 700; font-size: 14px; cursor: pointer; font-family: var(--f-body); white-space: nowrap;
+  }
+  #bw-date-check .gate-row button:disabled { opacity: .55; cursor: not-allowed; }
+  #bw-date-check .consent { display: flex; gap: 10px; align-items: flex-start; font-size: 12px; line-height: 1.5; color: var(--muted); }
+  #bw-date-check .consent input { margin-top: 3px; flex: none; }
+  #bw-date-check .consent a { color: var(--green); }
+  #bw-date-check .honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  #bw-date-check .gate-status { font-size: 13px; min-height: 1.4em; }
+  #bw-date-check .gate-status.is-error { color: var(--alert); }
+  #bw-date-check .gate-status.is-success { color: var(--green); font-weight: 600; }
+  #bw-date-check .gate.is-complete .gate-row, #bw-date-check .gate.is-complete .consent { display: none; }
+
+  #bw-date-check footer { padding: 26px 0 50px; font-family: var(--f-mono); font-size: 10px; color: var(--muted); text-align: center; letter-spacing: .04em; }
+
+  @media (max-width: 860px) {
+    #bw-date-check .hero-in { grid-template-columns: 1fr; }
+    #bw-date-check .reading { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) {
+    #bw-date-check .wrap { padding: 0 16px; }
+    #bw-date-check .hero-in { padding: 34px 16px 30px; gap: 20px; }
+    #bw-date-check .result-stage { padding: 34px 0 54px; gap: 38px; }
+    #bw-date-check .nights { grid-template-columns: repeat(4, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div id="bw-date-check">
+
+  <div class="hero">
+    <img class="hero-photo" id="heroPhoto" alt="">
+    <div class="hero-scrim"></div>
+    <div class="hero-in">
+      <div class="hero-copy">
+        <p class="kicker">Free &middot; no email to see it</p>
+        <h1>What your Berlin dates actually mean</h1>
+        <p>Tell me when you arrive. I will show you what closes, what needs booking this week, and how much daylight you get.</p>
+      </div>
+      <form class="panel" id="inputForm" novalidate>
+        <div class="field">
+          <label for="arrivalInput">When do you arrive?</label>
+          <div class="datebox"><input type="date" id="arrivalInput" name="arrival" required></div>
+        </div>
+        <div class="field">
+          <label id="nightsLabel">How many nights?</label>
+          <div class="nights" role="group" aria-labelledby="nightsLabel" id="nightsGroup">
+            <button type="button" data-nights="1">1</button>
+            <button type="button" data-nights="2">2</button>
+            <button type="button" data-nights="3">3</button>
+            <button type="button" data-nights="4" class="on">4</button>
+            <button type="button" data-nights="5">5</button>
+            <button type="button" data-nights="6">6</button>
+            <button type="button" data-nights="7">7+</button>
+          </div>
+        </div>
+        <button type="submit" class="cta">Check my dates</button>
+        <p class="microcopy">No email needed to see the result.</p>
+        <p class="err-line" id="inputError" role="alert"></p>
+      </form>
+    </div>
+  </div>
+
+  <div class="wrap result-stage" id="resultStage">
+
+    <section>
+      <div class="season-band" id="seasonBand">
+        <img id="seasonPhoto" alt="">
+        <div class="season-scrim"></div>
+        <p class="season-label" id="seasonLabel"></p>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <p class="eyebrow" id="rangeEyebrow"></p>
+        <h2>Your dates at a glance</h2>
+      </div>
+      <div class="stripwrap"><div class="strip" id="strip"></div></div>
+      <div class="legend">
+        <span><b style="background:var(--green-soft);border:1px solid var(--green)"></b>clear</span>
+        <span><b style="background:var(--alert-soft);border:1px solid var(--alert)"></b>closure or holiday</span>
+        <span><b style="background:var(--yellow)"></b>my tour runs</span>
+      </div>
+    </section>
+
+    <section>
+      <div class="readings" id="readings"></div>
+    </section>
+
+    <section>
+      <div class="lightcard">
+        <div class="lab"><span id="lightLabel">Light on your first day</span><span id="lightHours"></span></div>
+        <svg class="arc" id="lightArc" viewBox="0 0 600 130" role="img" aria-label=""></svg>
+        <p id="lightText"></p>
+      </div>
+    </section>
+
+    <section id="tourSection">
+      <div class="tourblock" id="tourBlock">
+        <span class="tag">My tour runs on your dates</span>
+        <p id="tourText"></p>
+        <div class="slots" id="tourSlots"></div>
+      </div>
+    </section>
+
+    <section>
+      <p class="bridge">This covers what your dates hit. It does not plan your days. <a href="https://www.berlinwalk.com/berlin-trip-planner" target="_top" id="bridgeLink">Want the day by day plan for these dates?</a></p>
+    </section>
+
+    <section>
+      <div class="gate" id="gate">
+        <h2>Your dates, in your inbox, at the right moment</h2>
+        <p class="lede">I will send this summary to your inbox, then three short emails timed to your trip: what to book three weeks out, what to buy a week out, and what to do on your first morning. Nothing else.</p>
+        <form id="gateForm" novalidate>
+          <div class="gate-row">
+            <input type="email" id="gateEmail" name="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required>
+            <button type="submit" id="gateSubmit">Send me the dates</button>
+          </div>
+          <div class="honeypot"><label>Website<input type="text" name="website" id="gateWebsite" tabindex="-1" autocomplete="off"></label></div>
+          <label class="consent">
+            <input type="checkbox" id="gateConsent" required>
+            <span>Send me this summary plus three short emails timed to my trip. I can unsubscribe any time. <a href="https://www.berlinwalk.com/privacy-policy" target="_top">Privacy Policy.</a></span>
+          </label>
+          <p class="gate-status" id="gateStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <span id="checkedOnLine"></span>
+    </footer>
+
+  </div>
+
+</div>
+
+<script src="../js/brand.js" defer></script>
+<script>
+(function () {
+  'use strict';
+
+  var TZ = 'Europe/Berlin';
+  var LAT = 52.520, LNG = 13.405;
+  var DATA_URL = './data.json';
+  var API_BASE = 'https://app.berlinwalk.com/api/download-lead';
+  var AVAILABILITY_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/booking-calendar-availability';
+  var ASSET_ID = 'berlin-date-check';
+  var EXPERIMENT_ID = 'berlin_date_check_v1';
+  var CONSENT_VERSION = 'berlin-date-check-v1-2026-08-20';
+  var SOURCE_SLUG = 'berlin-dates-check';
+
+  var root = document.getElementById('bw-date-check');
+  var DATA = null;
+  var startedAt = new Date().toISOString();
+  var STATE = { arrivalStr: null, nights: 4, days: [], daysUntilArrival: null, resultFlags: [], tourSlotShown: false, tourSummary: null, readingTexts: {} };
+
+  // ---------------------------------------------------------------------
+  // date helpers (all date-string math done as Y-M-D strings to sidestep
+  // DST/timezone drift entirely; only sunrise/sunset needs true instants)
+  // ---------------------------------------------------------------------
+  function pad2(n) { return n < 10 ? '0' + n : '' + n; }
+
+  function todayStr() {
+    var parts = new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+    return parts;
+  }
+  function addDaysStr(dateStr, n) {
+    var p = dateStr.split('-').map(Number);
+    var dt = new Date(Date.UTC(p[0], p[1] - 1, p[2], 12));
+    dt.setUTCDate(dt.getUTCDate() + n);
+    return dt.getUTCFullYear() + '-' + pad2(dt.getUTCMonth() + 1) + '-' + pad2(dt.getUTCDate());
+  }
+  function dateRangeStrs(startStr, count) {
+    var out = [];
+    for (var i = 0; i < count; i++) out.push(addDaysStr(startStr, i));
+    return out;
+  }
+  function daysBetween(fromStr, toStr) {
+    var f = fromStr.split('-').map(Number), t = toStr.split('-').map(Number);
+    var a = Date.UTC(f[0], f[1] - 1, f[2]), b = Date.UTC(t[0], t[1] - 1, t[2]);
+    return Math.round((b - a) / 86400000);
+  }
+  function partsOf(dateStr) { return dateStr.split('-').map(Number); }
+  function weekdayLong(dateStr) {
+    var p = partsOf(dateStr);
+    return new Date(Date.UTC(p[0], p[1] - 1, p[2], 12)).toLocaleDateString('en-US', { weekday: 'long', timeZone: 'UTC' });
+  }
+  function weekdayShort(dateStr) {
+    var p = partsOf(dateStr);
+    return new Date(Date.UTC(p[0], p[1] - 1, p[2], 12)).toLocaleDateString('en-US', { weekday: 'short', timeZone: 'UTC' });
+  }
+  function monthShort(dateStr) {
+    var p = partsOf(dateStr);
+    return new Date(Date.UTC(p[0], p[1] - 1, p[2], 12)).toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' });
+  }
+  function ordinal(n) {
+    var s = ['th', 'st', 'nd', 'rd'], v = n % 100;
+    return n + (s[(v - 20) % 10] || s[v] || s[0]);
+  }
+  function fmtDayLabel(dateStr) {
+    var p = partsOf(dateStr);
+    return weekdayLong(dateStr) + ' ' + ordinal(p[2]);
+  }
+  function localDateStrFromIso(iso) {
+    var d = new Date(iso);
+    return new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit' }).format(d);
+  }
+
+  // ---------------------------------------------------------------------
+  // sunrise/sunset - SunCalc-style NOAA solar position algorithm.
+  // Verified against handoff reference points: 21 Jun 2026 sunset 21:33,
+  // 21 Dec 2026 sunset 15:54, 30 Sep 2026 sunrise/sunset 07:05/18:47.
+  // ---------------------------------------------------------------------
+  var RAD = Math.PI / 180, J1970 = 2440588, J2000 = 2451545, DAY_MS = 86400000;
+  var OBLIQUITY = RAD * 23.4397;
+  function toJulian(date) { return date.getTime() / DAY_MS - 0.5 + J1970; }
+  function toDays(date) { return toJulian(date) - J2000; }
+  function solarMeanAnomaly(d) { return RAD * (357.5291 + 0.98560028 * d); }
+  function eclipticLongitude(M) {
+    var C = RAD * (1.9148 * Math.sin(M) + 0.02 * Math.sin(2 * M) + 0.0003 * Math.sin(3 * M));
+    var P = RAD * 102.9372;
+    return M + C + P + Math.PI;
+  }
+  function declination(l) { return Math.asin(Math.sin(0) * Math.cos(OBLIQUITY) + Math.cos(0) * Math.sin(OBLIQUITY) * Math.sin(l)); }
+  function julianCycle(d, lw) { return Math.round(d - 0.0009 - lw / (2 * Math.PI)); }
+  function approxTransit(Ht, lw, n) { return 0.0009 + (Ht + lw) / (2 * Math.PI) + n; }
+  function solarTransitJ(ds, M, L) { return J2000 + ds + 0.0053 * Math.sin(M) - 0.0069 * Math.sin(2 * L); }
+  function hourAngle(h, phi, d) { return Math.acos((Math.sin(h) - Math.sin(phi) * Math.sin(d)) / (Math.cos(phi) * Math.cos(d))); }
+  function fromJulian(j) { return new Date((j + 0.5 - J1970) * DAY_MS); }
+
+  function sunTimes(date, lat, lng) {
+    var lw = RAD * -lng, phi = RAD * lat;
+    var d = toDays(date);
+    var n = julianCycle(d, lw);
+    var ds = approxTransit(0, lw, n);
+    var M = solarMeanAnomaly(ds);
+    var L = eclipticLongitude(M);
+    var dec = declination(L);
+    var Jnoon = solarTransitJ(ds, M, L);
+    var h0 = RAD * -0.833;
+    var w = hourAngle(h0, phi, dec);
+    var a = approxTransit(w, lw, n);
+    var Jset = solarTransitJ(a, M, L);
+    var Jrise = Jnoon - (Jset - Jnoon);
+    return { sunrise: fromJulian(Jrise), sunset: fromJulian(Jset) };
+  }
+  function fmtBerlinTime(date) {
+    return new Intl.DateTimeFormat('en-GB', { timeZone: TZ, hour: '2-digit', minute: '2-digit', hour12: false }).format(date);
+  }
+  function minutesOfDayBerlin(date) {
+    var s = fmtBerlinTime(date).split(':').map(Number);
+    return s[0] * 60 + s[1];
+  }
+  function sunTimesForDateStr(dateStr) {
+    var p = partsOf(dateStr);
+    var noonUtc = new Date(Date.UTC(p[0], p[1] - 1, p[2], 11));
+    return sunTimes(noonUtc, LAT, LNG);
+  }
+
+  // ---------------------------------------------------------------------
+  // Block 1 - Monday / Sunday trap
+  // ---------------------------------------------------------------------
+  function mondaySundayReading(days, mondayData) {
+    var mondays = days.filter(function (d) { return weekdayLong(d) === 'Monday'; });
+    var sundays = days.filter(function (d) { return weekdayLong(d) === 'Sunday'; });
+    if (!mondays.length && !sundays.length) {
+      return { flag: false, text: 'Your dates avoid both Berlin traps: no Monday museum closures, no Sunday shopping surprise.' };
+    }
+    var parts = [];
+    if (mondays.length) {
+      var venues = (mondayData.venues || []).slice(0, 4).map(function (v) { return v.name; }).join(', ');
+      parts.push(fmtDayLabel(mondays[0]) + ' is the day ' + venues + ' and most other Museum Island houses are closed.');
+    }
+    if (sundays.length) {
+      parts.push('Shops are closed all day on ' + fmtDayLabel(sundays[0]) + ', so buy what you need the day before.');
+    }
+    return { flag: true, text: parts.join(' ') };
+  }
+
+  // ---------------------------------------------------------------------
+  // Block 2 - public holidays
+  // ---------------------------------------------------------------------
+  function holidayReading(days, holidays) {
+    var hits = days.map(function (d) {
+      return holidays.filter(function (h) { return h.date === d; })[0];
+    }).filter(Boolean);
+    if (!hits.length) return { flag: false, text: 'No public holidays fall inside your dates.' };
+    var h = hits[0];
+    return { flag: true, text: fmtDayLabel(h.date) + ' is ' + h.label + '. ' + h.tip };
+  }
+
+  // ---------------------------------------------------------------------
+  // Block 3 - booking deadlines
+  // ---------------------------------------------------------------------
+  function bookingDeadlineReading(daysUntilArrival, arrivalMonth, items) {
+    var scored = items.map(function (it) {
+      var threshold = (it.peakMonths && it.peakMonths.indexOf(arrivalMonth) !== -1) ? it.peakDays : it.baseDays;
+      return {
+        id: it.id, label: it.label, comfortableClause: it.comfortableClause, urgentNote: it.urgentNote,
+        threshold: threshold, urgent: daysUntilArrival <= threshold, margin: threshold - daysUntilArrival
+      };
+    });
+    var urgent = scored.filter(function (s) { return s.urgent; }).sort(function (a, b) { return b.margin - a.margin; });
+    if (!urgent.length) {
+      var weeks = Math.round(daysUntilArrival / 7);
+      var distance = daysUntilArrival <= 13 ? (daysUntilArrival + ' days out') : (weeks + ' weeks out');
+      return { flag: false, text: 'You are ' + distance + '. Nothing is urgent yet, but I will remind you when it is.', urgentIds: [] };
+    }
+    var top = urgent[0];
+    var comfortable = scored.filter(function (s) { return !s.urgent; })[0];
+    var text = 'You are ' + daysUntilArrival + ' day' + (daysUntilArrival === 1 ? '' : 's') + ' out. ' + top.urgentNote;
+    if (comfortable) text += ' ' + comfortable.comfortableClause;
+    return { flag: true, text: text, urgentIds: urgent.map(function (u) { return u.id; }) };
+  }
+
+  // ---------------------------------------------------------------------
+  // Block 4 - light + weather
+  // ---------------------------------------------------------------------
+  function lightWeatherReading(arrivalStr, lastStr, weatherByMonth) {
+    var first = sunTimesForDateStr(arrivalStr);
+    var last = sunTimesForDateStr(lastStr);
+    var firstRiseMin = minutesOfDayBerlin(first.sunrise), firstSetMin = minutesOfDayBerlin(first.sunset);
+    var hours = Math.round(((firstSetMin - firstRiseMin) / 60) * 10) / 10;
+    var month = partsOf(arrivalStr)[1];
+    var wx = weatherByMonth.filter(function (w) { return w.month === month; })[0];
+    var text = 'The sun is up from ' + fmtBerlinTime(first.sunrise) + ' to ' + fmtBerlinTime(first.sunset) + ', about ' + hours + ' hours of daylight.';
+    if (arrivalStr !== lastStr) {
+      var lastSetMin = minutesOfDayBerlin(last.sunset);
+      if (Math.abs(lastSetMin - firstSetMin) >= 8) {
+        text += ' By your last day the sun sets at ' + fmtBerlinTime(last.sunset) + ', so that window ' + (lastSetMin < firstSetMin ? 'keeps shrinking' : 'keeps stretching') + '.';
+      }
+    }
+    if (wx) {
+      text += ' Expect highs around ' + Math.round(wx.tempHighC) + '°C and lows near ' + Math.round(wx.tempLowC) + '°C, ' + wx.blurb + '.';
+    }
+    return { text: text, hours: hours, firstSunrise: first.sunrise, firstSunset: first.sunset, firstRiseMin: firstRiseMin, firstSetMin: firstSetMin };
+  }
+
+  function renderLightArc(riseMin, setMin, riseLabel, setLabel) {
+    var svg = document.getElementById('lightArc');
+    var w = 600, h = 130, baseY = 100, top = 22;
+    var x1 = 90, x2 = 510;
+    var midX = (x1 + x2) / 2;
+    svg.setAttribute('aria-label', 'Sunrise ' + riseLabel + ', sunset ' + setLabel);
+    svg.innerHTML =
+      '<defs><linearGradient id="dcDayfill" x1="0" y1="0" x2="0" y2="1">' +
+      '<stop offset="0%" stop-color="var(--yellow)" stop-opacity=".5"/>' +
+      '<stop offset="100%" stop-color="var(--yellow)" stop-opacity=".03"/></linearGradient></defs>' +
+      '<path d="M' + x1 + ' ' + baseY + ' Q ' + midX + ' ' + top + ' ' + x2 + ' ' + baseY + ' Z" fill="url(#dcDayfill)"/>' +
+      '<path d="M' + x1 + ' ' + baseY + ' Q ' + midX + ' ' + top + ' ' + x2 + ' ' + baseY + '" fill="none" stroke="var(--green)" stroke-width="2"/>' +
+      '<line x1="24" y1="' + baseY + '" x2="576" y2="' + baseY + '" stroke="var(--hair)" stroke-width="1.5"/>' +
+      '<line x1="' + x1 + '" y1="' + (baseY - 8) + '" x2="' + x1 + '" y2="' + (baseY + 8) + '" stroke="var(--green)" stroke-width="2"/>' +
+      '<line x1="' + x2 + '" y1="' + (baseY - 8) + '" x2="' + x2 + '" y2="' + (baseY + 8) + '" stroke="var(--green)" stroke-width="2"/>' +
+      '<circle cx="' + midX + '" cy="30" r="6.5" fill="var(--yellow)" stroke="var(--green)" stroke-width="1.5"/>' +
+      '<text x="' + x1 + '" y="' + (baseY + 24) + '" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="14" font-weight="600" fill="currentColor">' + riseLabel + '</text>' +
+      '<text x="' + x2 + '" y="' + (baseY + 24) + '" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="14" font-weight="600" fill="currentColor">' + setLabel + '</text>';
+  }
+
+  // ---------------------------------------------------------------------
+  // Job 1 - tour block: computeDaysParam / deriveTourBlock (unit-tested
+  // standalone against the live endpoint shape and fabricated payloads
+  // covering states a/b/c and error paths before being ported here)
+  // ---------------------------------------------------------------------
+  function computeDaysParam(todayStrVal, arrivalStr, nights) {
+    var raw = daysBetween(todayStrVal, arrivalStr) + nights + 1;
+    return Math.max(7, Math.min(400, raw));
+  }
+
+  function deriveTourBlock(payload, arrivalStr, nights) {
+    try {
+      if (!payload || payload.ok !== true || !Array.isArray(payload.slots)) return { show: false, reason: 'bad-payload' };
+      var wanted = {};
+      dateRangeStrs(arrivalStr, nights + 1).forEach(function (d) { wanted[d] = true; });
+      var byDate = {};
+      for (var i = 0; i < payload.slots.length; i++) {
+        var slot = payload.slots[i];
+        if (!slot || typeof slot.startDate !== 'string') continue;
+        var openSpots = Number(slot.openSpots);
+        if (!(openSpots > 0)) continue;
+        var dateStr = localDateStrFromIso(slot.startDate);
+        if (!wanted[dateStr]) continue;
+        if (!byDate[dateStr]) byDate[dateStr] = [];
+        byDate[dateStr].push(slot);
+      }
+      var dateKeys = Object.keys(byDate);
+      if (!dateKeys.length) return { show: false, reason: 'no-bookable-slots-in-range' };
+      dateKeys.sort();
+      var days = dateKeys.map(function (dateStr) {
+        var slots = byDate[dateStr].slice().sort(function (a, b) { return a.startDate < b.startDate ? -1 : 1; });
+        return {
+          dateStr: dateStr,
+          slots: slots.map(function (s) {
+            return {
+              startLocal: fmtBerlinTime(new Date(s.startDate)),
+              openSpots: s.openSpots,
+              sessionId: s.sessionId,
+              eventId: s.eventId,
+              serviceId: s.serviceId,
+              timezone: s.timezone || TZ,
+              locationId: s.locationId,
+              locationName: s.locationName
+            };
+          })
+        };
+      });
+      return { show: true, days: days };
+    } catch (err) {
+      return { show: false, reason: 'exception:' + err.message };
+    }
+  }
+
+  function bookingHref(slot, tourData) {
+    var base = tourData.bookingFormBase;
+    var url = new URL(base, window.location.href);
+    url.searchParams.set('bookings_timezone', slot.timezone || TZ);
+    if (slot.serviceId || tourData.serviceId) url.searchParams.set('bookings_serviceId', slot.serviceId || tourData.serviceId);
+    if (slot.locationId || tourData.locationId) url.searchParams.set('bookings_locationId', slot.locationId || tourData.locationId);
+    if (slot.sessionId || slot.eventId) url.searchParams.set('bookings_sessionId', slot.sessionId || slot.eventId);
+    try {
+      var incoming = new URL(window.location.href);
+      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id', 'fbclid', 'fbc', 'fbp'].forEach(function (p) {
+        if (incoming.searchParams.has(p)) url.searchParams.set(p, incoming.searchParams.get(p));
+      });
+    } catch (e) {}
+    if (!url.searchParams.has('utm_source')) url.searchParams.set('utm_source', 'berlinwalk');
+    if (!url.searchParams.has('utm_medium')) url.searchParams.set('utm_medium', 'berlin_date_check');
+    if (!url.searchParams.has('utm_campaign')) url.searchParams.set('utm_campaign', 'berlin_date_check_v1');
+    if (!url.searchParams.has('utm_content')) url.searchParams.set('utm_content', 'result_tour_block');
+    return url.toString();
+  }
+
+  function loadTourAvailability(arrivalStr, nights) {
+    var days = computeDaysParam(todayStr(), arrivalStr, nights);
+    var url = AVAILABILITY_ENDPOINT + '?days=' + days;
+    return fetch(url, { mode: 'cors', credentials: 'omit' })
+      .then(function (res) {
+        if (!res.ok) throw new Error('availability http ' + res.status);
+        return res.json();
+      })
+      .then(function (payload) { return deriveTourBlock(payload, arrivalStr, nights); })
+      .catch(function (err) {
+        console.warn('berlin-dates-check: tour availability unavailable, hiding tour block', err);
+        return { show: false, reason: 'fetch-error' };
+      });
+  }
+
+  // ---------------------------------------------------------------------
+  // calendar strip
+  // ---------------------------------------------------------------------
+  function buildStrip(days, holidayDates, mondayFlag, sundayFlag, tourDates) {
+    var strip = document.getElementById('strip');
+    strip.innerHTML = '';
+    days.forEach(function (d, idx) {
+      var isHoliday = holidayDates[d];
+      var isMonday = mondayFlag && weekdayLong(d) === 'Monday';
+      var isSunday = sundayFlag && weekdayLong(d) === 'Sunday';
+      var isTour = !!tourDates[d];
+      var bandClass = 'clear', bandLabel = 'Clear';
+      if (isTour) { bandClass = 'tour'; bandLabel = 'Tour day'; }
+      else if (isHoliday) { bandClass = 'warn'; bandLabel = 'Holiday'; }
+      else if (isMonday) { bandClass = 'warn'; bandLabel = 'Museums shut'; }
+      else if (isSunday) { bandClass = 'warn'; bandLabel = 'Shops shut'; }
+      if (idx === 0) bandLabel = bandClass === 'clear' ? 'Arrival' : bandLabel;
+      var el = document.createElement('div');
+      el.className = 'day';
+      el.innerHTML =
+        '<div class="top"><span class="wd">' + weekdayShort(d) + '</span>' +
+        '<span class="num">' + pad2(partsOf(d)[2]) + '</span>' +
+        '<span class="mo">' + monthShort(d) + '</span></div>' +
+        '<div class="band ' + bandClass + '">' + bandLabel + '</div>';
+      strip.appendChild(el);
+    });
+  }
+
+  // ---------------------------------------------------------------------
+  // readings render
+  // ---------------------------------------------------------------------
+  function renderReading(container, key, reading) {
+    var el = document.createElement('div');
+    el.className = 'reading' + (reading.flag ? '' : ' is-clean');
+    el.innerHTML = '<div class="k">' + key + '</div><div class="say">' + reading.text + '</div>';
+    container.appendChild(el);
+  }
+
+  // ---------------------------------------------------------------------
+  // analytics
+  // ---------------------------------------------------------------------
+  var analyticsConsent = true; // no consent wall on this tool; matches sitewide pixel embed already firing consent-free
+  function trackEvent(eventName, extra) {
+    try {
+      var url = new URL(API_BASE, window.location.href);
+      url.searchParams.set('action', 'event');
+      var body = Object.assign({
+        eventName: eventName,
+        occurredAt: new Date().toISOString(),
+        analyticsConsent: analyticsConsent,
+        analyticsConsentAtSubmit: analyticsConsent,
+        assetId: ASSET_ID,
+        assetVersion: '2026-08-v1',
+        sourceSlug: SOURCE_SLUG,
+        pageUrl: window.location.href,
+        referrer: document.referrer || '',
+        experiment: EXPERIMENT_ID,
+        variant: 'standalone',
+        placement: 'standalone_page',
+        utm: readUtm(),
+        device: { width: window.innerWidth || 0, height: window.innerHeight || 0 },
+        qa: /[?&]qa=1\b/.test(window.location.search)
+      }, extra || {});
+      fetch(url.toString(), { method: 'POST', headers: { 'content-type': 'application/json' }, keepalive: true, body: JSON.stringify(body) }).catch(function () {});
+    } catch (e) {}
+  }
+  function arrivalTimingBucket(daysUntilArrival) {
+    if (daysUntilArrival <= 31) return 'this-month';
+    if (daysUntilArrival <= 62) return 'next-month';
+    if (daysUntilArrival <= 93) return 'in-2-3-months';
+    return 'not-booked-yet';
+  }
+  function readUtm() {
+    try {
+      var p = new URL(window.location.href).searchParams;
+      return { source: p.get('utm_source') || '', medium: p.get('utm_medium') || '', campaign: p.get('utm_campaign') || '', content: p.get('utm_content') || '', term: p.get('utm_term') || '', id: p.get('utm_id') || '' };
+    } catch (e) { return {}; }
+  }
+
+  // ---------------------------------------------------------------------
+  // compute + render full result
+  // ---------------------------------------------------------------------
+  function computeAndRender(arrivalStr, nights) {
+    var today = todayStr();
+    var daysUntilArrival = daysBetween(today, arrivalStr);
+    var days = dateRangeStrs(arrivalStr, nights + 1);
+    var lastStr = days[days.length - 1];
+
+    STATE.arrivalStr = arrivalStr;
+    STATE.nights = nights;
+    STATE.days = days;
+    STATE.daysUntilArrival = daysUntilArrival;
+    STATE.resultFlags = [];
+    STATE.tourSlotShown = false;
+
+    var holidayDates = {};
+    DATA.holidays.forEach(function (h) { if (days.indexOf(h.date) !== -1) holidayDates[h.date] = h; });
+
+    var mondaySunday = mondaySundayReading(days, DATA.mondayClosures);
+    var holiday = holidayReading(days, DATA.holidays);
+    var arrivalMonth = partsOf(arrivalStr)[1];
+    var deadline = bookingDeadlineReading(daysUntilArrival, arrivalMonth, DATA.bookingDeadlines);
+    var light = lightWeatherReading(arrivalStr, lastStr, DATA.weatherByMonth);
+
+    if (mondaySunday.flag) STATE.resultFlags.push('monday_sunday');
+    if (holiday.flag) STATE.resultFlags.push('holiday');
+    if (deadline.flag) STATE.resultFlags.push('booking_deadline');
+    STATE.readingTexts = { mondaySunday: mondaySunday.text, holiday: holiday.text, bookingDeadline: deadline.text, light: light.text };
+
+    document.getElementById('rangeEyebrow').textContent =
+      fmtDayLabel(arrivalStr) + ' → ' + fmtDayLabel(lastStr) + ' · ' + nights + ' night' + (nights === 1 ? '' : 's');
+
+    buildStrip(days, holidayDates, true, true, {});
+
+    var readingsEl = document.getElementById('readings');
+    readingsEl.innerHTML = '';
+    renderReading(readingsEl, 'Monday / Sunday', mondaySunday);
+    renderReading(readingsEl, 'Public holiday', holiday);
+    renderReading(readingsEl, 'Book by', deadline);
+
+    document.getElementById('lightLabel').textContent = 'Light on ' + weekdayLong(arrivalStr);
+    document.getElementById('lightHours').textContent = light.hours + ' H';
+    document.getElementById('lightText').textContent = light.text;
+    renderLightArc(light.firstRiseMin, light.firstSetMin, fmtBerlinTime(light.firstSunrise), fmtBerlinTime(light.firstSunset));
+
+    renderSeasonPhoto(arrivalMonth);
+
+    document.getElementById('checkedOnLine').textContent = 'Checked on ' + DATA.checkedOn + ' · Berlin Date Check';
+
+    var stage = document.getElementById('resultStage');
+    stage.classList.add('is-visible');
+    trackEvent('bw_lead_asset_experiment_view');
+    trackEvent('bw_lead_asset_gate_view');
+    stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    loadTourAvailability(arrivalStr, nights).then(function (tourResult) {
+      renderTourBlock(tourResult, days);
+    });
+  }
+
+  function renderSeasonPhoto(month) {
+    var img = document.getElementById('seasonPhoto');
+    var label = document.getElementById('seasonLabel');
+    var wx = DATA.weatherByMonth.filter(function (w) { return w.month === month; })[0];
+    label.textContent = 'Berlin in ' + (wx ? wx.name : month) + (wx ? ' · ' + wx.blurb : '');
+    var src = DATA.seasonalPhotos && DATA.seasonalPhotos[String(month)];
+    img.classList.remove('is-loaded');
+    if (!src) { img.removeAttribute('src'); return; }
+    img.onload = function () { img.classList.add('is-loaded'); };
+    img.onerror = function () { img.classList.remove('is-loaded'); };
+    img.src = src;
+    img.alt = 'Berlin in ' + (wx ? wx.name : '');
+  }
+
+  function renderTourBlock(tourResult, visitDays) {
+    var block = document.getElementById('tourBlock');
+    var tourDates = {};
+    if (!tourResult || !tourResult.show) {
+      block.classList.remove('is-visible');
+      STATE.tourSlotShown = false;
+      trackEvent('bw_lead_asset_control_booking_click', { controlType: 'tour_block_hidden' });
+      buildStrip(visitDays, currentHolidayDates(), true, true, tourDates);
+      return;
+    }
+    STATE.tourSlotShown = true;
+    STATE.tourSummary = tourResult;
+    STATE.resultFlags.push('tour_day');
+    tourResult.days.forEach(function (d) { tourDates[d.dateStr] = true; });
+    buildStrip(visitDays, currentHolidayDates(), true, true, tourDates);
+
+    var text = describeTourDays(tourResult.days, visitDays) + ' It is ' + DATA.tour.stopsText + ', ' + DATA.tour.durationText + '.';
+    document.getElementById('tourText').textContent = text;
+    STATE.readingTexts.tour = text;
+
+    var slotsEl = document.getElementById('tourSlots');
+    slotsEl.innerHTML = '';
+    tourResult.days.forEach(function (d) {
+      d.slots.forEach(function (s) {
+        var a = document.createElement('a');
+        a.className = 'slot-link';
+        a.target = '_top';
+        a.rel = 'noopener';
+        a.href = bookingHref(s, DATA.tour);
+        a.textContent = weekdayShort(d.dateStr) + ' ' + partsOf(d.dateStr)[2] + ', ' + s.startLocal;
+        a.addEventListener('click', function () { trackEvent('bw_lead_asset_control_booking_click', { controlType: 'tour_slot', controlUrl: a.href }); });
+        slotsEl.appendChild(a);
+      });
+    });
+    block.classList.add('is-visible');
+    trackEvent('bw_lead_asset_calc_done', { placement: 'tour_block_shown' });
+  }
+
+  function currentHolidayDates() {
+    var holidayDates = {};
+    DATA.holidays.forEach(function (h) { if (STATE.days.indexOf(h.date) !== -1) holidayDates[h.date] = h; });
+    return holidayDates;
+  }
+
+  function joinWithAnd(arr) {
+    if (arr.length === 1) return arr[0];
+    if (arr.length === 2) return arr[0] + ' and ' + arr[1];
+    return arr.slice(0, -1).join(', ') + ' and ' + arr[arr.length - 1];
+  }
+
+  function describeTourDays(tourDays, visitDays) {
+    var tourDateSet = {};
+    tourDays.forEach(function (d) { tourDateSet[d.dateStr] = true; });
+    var excluded = visitDays.filter(function (d) { return !tourDateSet[d]; });
+    if (visitDays.length >= 4 && excluded.length && excluded.length <= 2) {
+      return 'I run every day of your trip except ' + joinWithAnd(excluded.map(fmtDayLabel)) + '.';
+    }
+    return 'I run on your ' + joinWithAnd(tourDays.map(function (d) { return fmtDayLabel(d.dateStr); })) + '.';
+  }
+
+  // ---------------------------------------------------------------------
+  // input wiring
+  // ---------------------------------------------------------------------
+  function initInput() {
+    var form = document.getElementById('inputForm');
+    var arrivalInput = document.getElementById('arrivalInput');
+    var nightsGroup = document.getElementById('nightsGroup');
+    var errLine = document.getElementById('inputError');
+
+    var min = todayStr();
+    var maxDate = new Date();
+    maxDate.setFullYear(maxDate.getFullYear() + 3);
+    var max = maxDate.getFullYear() + '-' + pad2(maxDate.getMonth() + 1) + '-' + pad2(maxDate.getDate());
+    arrivalInput.min = min;
+    arrivalInput.max = max;
+
+    nightsGroup.addEventListener('click', function (e) {
+      var btn = e.target.closest('button[data-nights]');
+      if (!btn) return;
+      Array.prototype.forEach.call(nightsGroup.querySelectorAll('button'), function (b) { b.classList.remove('on'); });
+      btn.classList.add('on');
+      STATE.nights = Number(btn.getAttribute('data-nights'));
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      errLine.textContent = '';
+      var val = arrivalInput.value;
+      if (!val) { errLine.textContent = 'Pick your arrival date.'; arrivalInput.focus(); return; }
+      if (val < min) { errLine.textContent = 'Pick a date from today onward.'; arrivalInput.focus(); return; }
+      trackEvent('bw_lead_asset_form_start', { placement: 'date_input' });
+      computeAndRender(val, STATE.nights);
+    });
+  }
+
+  // ---------------------------------------------------------------------
+  // gate submission
+  // ---------------------------------------------------------------------
+  function initGate() {
+    var form = document.getElementById('gateForm');
+    var email = document.getElementById('gateEmail');
+    var consent = document.getElementById('gateConsent');
+    var status = document.getElementById('gateStatus');
+    var button = document.getElementById('gateSubmit');
+    var website = document.getElementById('gateWebsite');
+    var gateStartedAt = new Date().toISOString();
+    var submitting = false;
+    var trackedFocus = false;
+
+    email.addEventListener('focus', function () {
+      if (trackedFocus) return;
+      trackedFocus = true;
+      trackEvent('bw_lead_asset_gate_seen');
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (submitting) return;
+      status.className = 'gate-status';
+      if (!email.checkValidity() || !email.value) {
+        status.className = 'gate-status is-error';
+        status.textContent = 'Enter a valid email address.';
+        email.focus();
+        return;
+      }
+      if (!consent.checked) {
+        status.className = 'gate-status is-error';
+        status.textContent = 'Tick the box so I know it is okay to email you.';
+        consent.focus();
+        return;
+      }
+      submitting = true;
+      button.disabled = true;
+      button.textContent = 'Sending...';
+
+      var body = {
+        email: email.value.trim(),
+        consent: true,
+        consentVersion: CONSENT_VERSION,
+        assetId: ASSET_ID,
+        assetVersion: '2026-08-v1',
+        sourceSlug: SOURCE_SLUG,
+        sourceUrl: window.location.href,
+        experiment: EXPERIMENT_ID,
+        variant: 'standalone',
+        placement: 'standalone_page',
+        arrivalTiming: arrivalTimingBucket(STATE.daysUntilArrival),
+        arrivalDate: STATE.arrivalStr,
+        nights: STATE.nights,
+        daysUntilArrival: STATE.daysUntilArrival,
+        resultFlags: STATE.resultFlags,
+        resultTexts: STATE.readingTexts,
+        tourSlotShown: STATE.tourSlotShown,
+        analyticsConsentAtSubmit: analyticsConsent,
+        screenWidth: window.innerWidth || 0,
+        screenHeight: window.innerHeight || 0,
+        utm: readUtm(),
+        website: website.value || '',
+        startedAt: gateStartedAt,
+        submittedAt: new Date().toISOString(),
+        qa: /[?&]qa=1\b/.test(window.location.search)
+      };
+
+      var url = new URL(API_BASE, window.location.href);
+      url.searchParams.set('action', 'submit');
+
+      fetch(url.toString(), {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(body)
+      }).then(function (res) {
+        if (!res.ok) throw new Error('submit failed ' + res.status);
+        document.getElementById('gate').classList.add('is-complete');
+        email.disabled = true;
+        consent.disabled = true;
+        button.hidden = true;
+        status.className = 'gate-status is-success';
+        status.textContent = 'Check your inbox. Click the confirmation link and your dated summary is on its way.';
+        trackEvent('bw_lead_asset_submit', { placement: 'gate' });
+      }).catch(function () {
+        button.disabled = false;
+        button.textContent = 'Send me the dates';
+        status.className = 'gate-status is-error';
+        status.textContent = 'That did not go through. Please try again.';
+      }).finally(function () {
+        submitting = false;
+      });
+    });
+  }
+
+  // ---------------------------------------------------------------------
+  // hero photo (neutral month-of-load backdrop, not tied to visitor input)
+  // ---------------------------------------------------------------------
+  function initHeroPhoto() {
+    var img = document.getElementById('heroPhoto');
+    var month = partsOf(todayStr())[1];
+    var src = DATA.seasonalPhotos && DATA.seasonalPhotos[String(month)];
+    if (!src) return;
+    img.onload = function () { img.classList.add('is-loaded'); };
+    img.src = src;
+    img.alt = '';
+  }
+
+  // ---------------------------------------------------------------------
+  // boot
+  // ---------------------------------------------------------------------
+  fetch(DATA_URL, { cache: 'no-store' })
+    .then(function (res) { return res.json(); })
+    .then(function (json) {
+      DATA = json;
+      initInput();
+      initGate();
+      initHeroPhoto();
+      trackEvent('bw_lead_asset_experiment_view', { placement: 'tool_view' });
+    })
+    .catch(function (err) {
+      console.error('berlin-dates-check: failed to load data.json', err);
+      var errLine = document.getElementById('inputError');
+      if (errLine) errLine.textContent = 'This tool could not load. Please refresh the page.';
+    });
+})();
+</script>
+</body>
+</html>
