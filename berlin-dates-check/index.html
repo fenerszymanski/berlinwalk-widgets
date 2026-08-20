@@ -731,49 +731,34 @@
     var WHAT_I_SEND = 'I will send you this dated list now, then remind you ' + stepList + '. Nothing else.';
     var heading = document.getElementById('gateHeading');
     var stake = document.getElementById('gateStake');
-    // The strongest honest hook is the question this page cannot answer. My
-    // booking calendar is usually published only a few weeks out, so a visitor
-    // planning further ahead gets no tour block at all. That gap is real, it is
-    // theirs, and the email is the only thing that closes it.
-    if (!STATE.tourSlotShown) {
-      if (heading) heading.textContent = 'There is one thing I cannot tell you yet';
-      if (stake) stake.textContent = 'My walking tour schedule does not reach ' + fmtDeadlineDate(STATE.arrivalStr)
-        + ' yet. It usually opens a few weeks ahead. I check again every time I email you, so you will hear the day it does.';
-      lede.textContent = upcoming.length
-        ? ('You also have ' + upcoming.length + ' booking deadline' + (upcoming.length === 1 ? '' : 's')
-           + ' above, the first on ' + fmtDeadlineDate(upcoming[0].dateStr) + '. ' + WHAT_I_SEND)
-        : WHAT_I_SEND;
-      return;
+    // The hook is deliberately NOT about the walking tour. This lead exists to
+    // build a list of people with a known arrival date; the tour is one of
+    // several things that list ever hears about. Hooking on the tour would
+    // narrow the magnet to tour marketing, and would also decay the moment the
+    // booking calendar stretches far enough to answer the question on-page.
+    // What actually differentiates this page is the date itself.
+    var arrivalLabel = fmtDeadlineDate(STATE.arrivalStr);
+    if (heading) heading.textContent = 'Nothing else you read about Berlin knows your dates';
+    if (stake) {
+      stake.textContent = 'This page does, and so do the emails: what to book while it is still bookable, '
+        + 'what to buy before the shops shut on you, and what to do with your first morning. All of it keyed to '
+        + arrivalLabel + ', not to a generic Berlin week.';
     }
     if (!upcoming.length) {
-      if (heading) heading.textContent = 'Everything is already bookable';
-      if (stake) stake.textContent = 'Which moves the risk off booking and onto the trip itself: what is shut on your '
-        + 'days, and what to do with your first morning.';
-      lede.textContent = WHAT_I_SEND;
+      lede.textContent = 'Every booking window for your dates is already open, so the timing that still matters is '
+        + 'the last stretch. ' + WHAT_I_SEND;
       return;
     }
     var next = upcoming[0];
     var last = upcoming[upcoming.length - 1];
-    var WORDS = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight'];
-    var count = WORDS[upcoming.length] || String(upcoming.length);
-    if (heading) {
-      heading.textContent = upcoming.length === 1
-        ? 'One date to remember'
-        : count + ' dates, spread over the next ' + (daysBetween(todayStr(), last.dateStr) > 55 ? 'couple of months' : 'few weeks');
-    }
-    if (stake) {
-      // Naming their own dates back to them is the whole argument: the list is
-      // useless on the day they read it and useful on days they will not be
-      // thinking about Berlin.
-      stake.textContent = upcoming.length === 1
-        ? ('It is ' + fmtDeadlineDate(next.dateStr) + ', for ' + next.label + '. You will not be thinking about Berlin that day.')
-        : ('The next is ' + fmtDeadlineDate(next.dateStr) + ', the last is ' + fmtDeadlineDate(last.dateStr)
-           + '. None of them will be on your mind that morning.');
-    }
+    var deadlineLine = upcoming.length === 1
+      ? ('Your one remaining deadline is ' + fmtDeadlineDate(next.dateStr) + '. ')
+      : (upcoming.length + ' of those deadlines are still ahead of you, the first on '
+         + fmtDeadlineDate(next.dateStr) + ' and the last on ' + fmtDeadlineDate(last.dateStr) + '. ');
     var openLine = overdue.length === 1
       ? 'One window is already open, so that one is for today. '
       : (overdue.length > 1 ? overdue.length + ' windows are already open, so those are for today. ' : '');
-    lede.textContent = openLine + WHAT_I_SEND;
+    lede.textContent = deadlineLine + openLine + WHAT_I_SEND;
   }
 
   // ---------------------------------------------------------------------
