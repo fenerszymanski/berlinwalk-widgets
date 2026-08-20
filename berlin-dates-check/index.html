@@ -738,11 +738,24 @@
     // booking calendar stretches far enough to answer the question on-page.
     // What actually differentiates this page is the date itself.
     var arrivalLabel = fmtDeadlineDate(STATE.arrivalStr);
-    if (heading) heading.textContent = 'Nothing else you read about Berlin knows your dates';
-    if (stake) {
-      stake.textContent = 'This page does, and so do the emails: what to book while it is still bookable, '
-        + 'what to buy before the shops shut on you, and what to do with your first morning. All of it keyed to '
-        + arrivalLabel + ', not to a generic Berlin week.';
+    // Near-term arrivals are most of the real traffic, and for them the dated
+    // deadline list is mostly in the past: a screenshot of this page solves it.
+    // What a screenshot cannot hold is information that does not exist yet.
+    // The engine already re-checks the live tour times on the arrival morning,
+    // so for anyone inside a week the gate sells exactly that.
+    if (STATE.daysUntilArrival <= 7) {
+      if (heading) heading.textContent = 'The one email this page cannot show you';
+      if (stake) {
+        stake.textContent = 'A screenshot keeps today. It cannot keep ' + arrivalLabel + '. That morning I check '
+          + 'what is actually open and the live tour times, and send you a two minute brief for the day itself.';
+      }
+    } else {
+      if (heading) heading.textContent = 'Nothing else you read about Berlin knows your dates';
+      if (stake) {
+        stake.textContent = 'This page does, and so do the emails: what to book while it is still bookable, '
+          + 'what to buy before the shops shut on you, and what to do with your first morning. All of it keyed to '
+          + arrivalLabel + ', not to a generic Berlin week.';
+      }
     }
     if (!upcoming.length) {
       lede.textContent = 'Every booking window for your dates is already open, so the timing that still matters is '
