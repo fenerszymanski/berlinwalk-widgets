@@ -1125,9 +1125,16 @@
   (function initResizeReporter() {
     if (window.parent === window) return;
     var pending = null;
+    var lastSent = 0;
     function send() {
       pending = null;
-      var h = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+      // documentElement.scrollHeight never drops below the iframe's own
+      // height, so measuring it makes the frame unable to shrink and adds a
+      // slow +4 ratchet. Measure the actual content root instead.
+      var root = document.getElementById('bw-date-check');
+      var h = Math.ceil(root ? root.getBoundingClientRect().height : document.body.offsetHeight) + 2;
+      if (Math.abs(h - lastSent) < 6) return;
+      lastSent = h;
       try {
         window.parent.postMessage({ type: 'bw-resize', height: h, src: 'berlin-dates-check' }, '*');
       } catch (e) {}
