@@ -38,7 +38,7 @@ const BW_BLOG_HOME_FALLBACK = {
       title: 'Berlin Spy Museum: Is It Worth Your Time on a First Visit?',
       url: 'https://www.berlinwalk.com/post/berlin-spy-museum-worth-it',
       category: 'Tourist Tips',
-      readTime: '4 min read',
+      readTime: '3 min read',
       summary: 'Is the Berlin Spy Museum worth your time? Decide whether its hands-on experience at Potsdamer Platz fits your first Berlin visit, or whether a real historic site is the better move.',
       image: 'https://static.wixstatic.com/media/5a08a3_6264fdbbee424906a8b517c2baac902a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-spy-museum-exterior.jpg',
       alt: 'The entrance to the German Spy Museum at Leipziger Platz in Berlin'
