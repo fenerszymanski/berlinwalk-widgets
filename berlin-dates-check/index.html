@@ -1117,6 +1117,32 @@
   }
 
   // ---------------------------------------------------------------------
+  // embed height reporter: the site-wide auto-resize listener consumes
+  // {type:'bw-resize', height, src} messages. Only runs when framed. The
+  // listener ignores heights above 5000, so the page embed carries its own
+  // uncapped fallback listener for the long mobile result.
+  // ---------------------------------------------------------------------
+  (function initResizeReporter() {
+    if (window.parent === window) return;
+    var pending = null;
+    function send() {
+      pending = null;
+      var h = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+      try {
+        window.parent.postMessage({ type: 'bw-resize', height: h, src: 'berlin-dates-check' }, '*');
+      } catch (e) {}
+    }
+    function queue() { if (!pending) pending = setTimeout(send, 250); }
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(queue).observe(document.body);
+    } else {
+      setInterval(queue, 1200);
+    }
+    window.addEventListener('load', queue);
+    queue();
+  })();
+
+  // ---------------------------------------------------------------------
   // hero photo (neutral month-of-load backdrop, not tied to visitor input)
   // ---------------------------------------------------------------------
   function initHeroPhoto() {
