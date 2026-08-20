@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-20T02:07:54.613Z",
+  "updatedAt": "2026-08-20T08:00:43.238Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 300,
@@ -1617,6 +1617,23 @@
   ],
   "latest": [
     {
+      "title": "Vintage Shopping in Berlin: Where to Find the Good Stuff",
+      "slug": "vintage-shopping-in-berlin",
+      "path": "/post/vintage-shopping-in-berlin",
+      "url": "https://www.berlinwalk.com/post/vintage-shopping-in-berlin",
+      "excerpt": "Berlin has one of Europe's best second-hand scenes and one of its most confusing. A local guide to which district to pick, how the kilo shops work, and the one day the whole plan falls apart.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-08-20T07:54:06.615Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_4345cfbde97c4873a16daa7fe746b1b5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-second-hand-shop-kreuzberg.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_4345cfbde97c4873a16daa7fe746b1b5~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-second-hand-shop-kreuzberg.jpg",
+      "alt": "A second-hand shop front in Berlin-Kreuzberg, with yellow signage and clothes in the window",
+      "relatedToolSlug": "berlin-shopping-areas"
+    },
+    {
       "title": "Where to Hear Live Music in Berlin Without Overpaying",
       "slug": "where-to-hear-live-music-in-berlin",
       "path": "/post/where-to-hear-live-music-in-berlin",
@@ -1802,23 +1819,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_8124c1065ff349a690b2df2692ea0b5d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ber-airport-night.jpg",
       "alt": "Terminal 1 at Berlin Brandenburg Airport lit at dusk",
       "relatedToolSlug": "berlin-weekend-first-night"
-    },
-    {
-      "title": "Berlin Landmarks in 2 Hours: Choose an East or West Start",
-      "slug": "berlin-landmarks-in-two-hours",
-      "path": "/post/berlin-landmarks-in-two-hours",
-      "url": "https://www.berlinwalk.com/post/berlin-landmarks-in-two-hours",
-      "excerpt": "Use a focused east or west two-hour window for Berlin landmarks instead of forcing Museum Island and Brandenburg Gate into one rushed loop.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "route-stories",
-      "topicLabel": "Tour Route Stories",
-      "readTime": "4 min read",
-      "publishedDate": "2026-08-16T05:53:52.419Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_f539c515c8cc4a8e9cc4c87bbca3b415~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-brandenburg-gate.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_f539c515c8cc4a8e9cc4c87bbca3b415~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-brandenburg-gate.jpg",
-      "alt": "The illuminated Brandenburg Gate at blue hour in Berlin",
-      "relatedToolSlug": "berlin-landmark-window"
     }
   ]
 }
