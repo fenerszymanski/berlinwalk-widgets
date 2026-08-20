@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-20T14:08:27.652Z",
+  "updatedAt": "2026-08-20T23:26:28.658Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 300,
@@ -1617,6 +1617,23 @@
   ],
   "latest": [
     {
+      "title": "How to Watch Films in English in Berlin",
+      "slug": "watch-films-in-english-in-berlin",
+      "path": "/post/watch-films-in-english-in-berlin",
+      "url": "https://www.berlinwalk.com/post/watch-films-in-english-in-berlin",
+      "excerpt": "Berlin has more than sixty cinemas showing films in their original language, but the whole system hides behind a few German letters. Here is how to read OV, OmU and OmeU, where to go, and how to find an English screening tonight.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-08-20T23:23:54.840Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_0a19dd190168476fa27927be5289e100~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kino-international.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_0a19dd190168476fa27927be5289e100~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kino-international.jpg",
+      "alt": "The modernist glass facade of Kino International on Karl-Marx-Allee under a blue sky",
+      "relatedToolSlug": ""
+    },
+    {
       "title": "Where to Eat Near the Brandenburg Gate Without Getting Ripped Off",
       "slug": "where-to-eat-near-brandenburg-gate",
       "path": "/post/where-to-eat-near-brandenburg-gate",
@@ -1802,26 +1819,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_6264fdbbee424906a8b517c2baac902a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-spy-museum-exterior.jpg",
       "alt": "The entrance to the German Spy Museum at Leipziger Platz in Berlin",
       "relatedToolSlug": "berlin-spy-museum-mission-match"
-    },
-    {
-      "title": "Berlin With Parents: A Calm Historic-Centre Day Without the Rushed Checklist",
-      "slug": "berlin-with-parents",
-      "path": "/post/berlin-with-parents",
-      "url": "https://www.berlinwalk.com/post/berlin-with-parents",
-      "excerpt": "Planning Berlin with parents? Build a calmer historic-centre day around Alexanderplatz, Museum Island and one useful pause instead of a rushed checklist.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "4 min read",
-      "publishedDate": "2026-08-17T05:34:41.761Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_93b5df72f94a42e8b55a27c72dbd4197~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-alexanderplatz-world-clock-wide.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_93b5df72f94a42e8b55a27c72dbd4197~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-alexanderplatz-world-clock-wide.jpg",
-      "alt": "The World Time Clock at Alexanderplatz with the Fernsehturm behind it",
-      "relatedToolSlug": "berlin-pace-passport"
     }
   ],
   "allPosts": [
+    {
+      "title": "How to Watch Films in English in Berlin",
+      "slug": "watch-films-in-english-in-berlin",
+      "path": "/post/watch-films-in-english-in-berlin",
+      "url": "https://www.berlinwalk.com/post/watch-films-in-english-in-berlin",
+      "excerpt": "Berlin has more than sixty cinemas showing films in their original language, but the whole system hides behind a few German letters. Here is how to read OV, OmU and OmeU, where to go, and how to find an English screening tonight.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-08-20T23:23:54.840Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_0a19dd190168476fa27927be5289e100~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kino-international.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_0a19dd190168476fa27927be5289e100~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kino-international.jpg",
+      "alt": "The modernist glass facade of Kino International on Karl-Marx-Allee under a blue sky",
+      "relatedToolSlug": ""
+    },
     {
       "title": "Where to Eat Near the Brandenburg Gate Without Getting Ripped Off",
       "slug": "where-to-eat-near-brandenburg-gate",
@@ -6904,23 +6921,6 @@
       "thumb": "https://static.wixstatic.com/media/nsplsh_4d8cbfe279ae44afafc90bd121d63210~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Humboldt%20Forum%20Building%2C%20Berlin%2C%20Germany.%20History_%20East%20Germans%20later%20demolished%20Humboldt%20Forum%2C%20a%2015th-century%20royal%20and%20imperial%20palace%20in.jpg",
       "alt": "humboldt forum berlin",
       "relatedToolSlug": ""
-    },
-    {
-      "title": "Museum Island: Why Prussia Built an Entire Island of Museums",
-      "slug": "museum-island-why-prussia-built-an-entire-island-of-museums",
-      "path": "/post/museum-island-why-prussia-built-an-entire-island-of-museums",
-      "url": "https://www.berlinwalk.com/post/museum-island-why-prussia-built-an-entire-island-of-museums",
-      "excerpt": "Why Prussia built Museum Island: the five museums, UNESCO status, war damage, restoration, tickets and how to read the island on foot.",
-      "category": "Tour Route",
-      "categorySlug": "tour-route",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "10 min read",
-      "publishedDate": "2026-02-26T14:37:52.312Z",
-      "image": "https://static.wixstatic.com/media/nsplsh_f83d2c2ec63f4e978cea87bd171d6b55~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Boat%20on%20river%20with%20cityscape%20and%20TV%20tower.jpg",
-      "thumb": "https://static.wixstatic.com/media/nsplsh_f83d2c2ec63f4e978cea87bd171d6b55~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Boat%20on%20river%20with%20cityscape%20and%20TV%20tower.jpg",
-      "alt": "Museum Island and the Bode Museum seen from the Spree with the TV Tower behind",
-      "relatedToolSlug": "berlin-landmarks-map"
     }
   ]
 }

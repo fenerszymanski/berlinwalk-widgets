@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-20T14:08:27.652Z",
+  "updatedAt": "2026-08-20T23:26:28.658Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 300,
@@ -1617,6 +1617,23 @@
   ],
   "latest": [
     {
+      "title": "How to Watch Films in English in Berlin",
+      "slug": "watch-films-in-english-in-berlin",
+      "path": "/post/watch-films-in-english-in-berlin",
+      "url": "https://www.berlinwalk.com/post/watch-films-in-english-in-berlin",
+      "excerpt": "Berlin has more than sixty cinemas showing films in their original language, but the whole system hides behind a few German letters. Here is how to read OV, OmU and OmeU, where to go, and how to find an English screening tonight.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-08-20T23:23:54.840Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_0a19dd190168476fa27927be5289e100~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kino-international.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_0a19dd190168476fa27927be5289e100~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kino-international.jpg",
+      "alt": "The modernist glass facade of Kino International on Karl-Marx-Allee under a blue sky",
+      "relatedToolSlug": ""
+    },
+    {
       "title": "Where to Eat Near the Brandenburg Gate Without Getting Ripped Off",
       "slug": "where-to-eat-near-brandenburg-gate",
       "path": "/post/where-to-eat-near-brandenburg-gate",
@@ -1802,23 +1819,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_6264fdbbee424906a8b517c2baac902a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-spy-museum-exterior.jpg",
       "alt": "The entrance to the German Spy Museum at Leipziger Platz in Berlin",
       "relatedToolSlug": "berlin-spy-museum-mission-match"
-    },
-    {
-      "title": "Berlin With Parents: A Calm Historic-Centre Day Without the Rushed Checklist",
-      "slug": "berlin-with-parents",
-      "path": "/post/berlin-with-parents",
-      "url": "https://www.berlinwalk.com/post/berlin-with-parents",
-      "excerpt": "Planning Berlin with parents? Build a calmer historic-centre day around Alexanderplatz, Museum Island and one useful pause instead of a rushed checklist.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "4 min read",
-      "publishedDate": "2026-08-17T05:34:41.761Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_93b5df72f94a42e8b55a27c72dbd4197~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-alexanderplatz-world-clock-wide.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_93b5df72f94a42e8b55a27c72dbd4197~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-alexanderplatz-world-clock-wide.jpg",
-      "alt": "The World Time Clock at Alexanderplatz with the Fernsehturm behind it",
-      "relatedToolSlug": "berlin-pace-passport"
     }
   ]
 }
