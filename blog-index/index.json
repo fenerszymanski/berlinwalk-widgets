@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-20T08:00:43.238Z",
+  "updatedAt": "2026-08-20T14:08:27.652Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 300,
@@ -1617,6 +1617,23 @@
   ],
   "latest": [
     {
+      "title": "Where to Eat Near the Brandenburg Gate Without Getting Ripped Off",
+      "slug": "where-to-eat-near-brandenburg-gate",
+      "path": "/post/where-to-eat-near-brandenburg-gate",
+      "url": "https://www.berlinwalk.com/post/where-to-eat-near-brandenburg-gate",
+      "excerpt": "Pariser Platz is one of the worst places in Berlin to eat. A local guide to the cheap eats, the sit-down escapes, and the picnic move, all a few minutes from the Brandenburg Gate.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "free-budget",
+      "topicLabel": "Free & Budget",
+      "readTime": "5 min read",
+      "publishedDate": "2026-08-20T14:02:02.549Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_8f1bc4dfd5f54dfda3cafd51e4d72e59~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-brandenburg-gate-pariser-platz.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_8f1bc4dfd5f54dfda3cafd51e4d72e59~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-brandenburg-gate-pariser-platz.jpg",
+      "alt": "Crowds and a costumed photo tout in front of the Brandenburg Gate on Pariser Platz",
+      "relatedToolSlug": "brandenburg-gate-food-escape"
+    },
+    {
       "title": "Vintage Shopping in Berlin: Where to Find the Good Stuff",
       "slug": "vintage-shopping-in-berlin",
       "path": "/post/vintage-shopping-in-berlin",
@@ -1802,23 +1819,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_93b5df72f94a42e8b55a27c72dbd4197~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-alexanderplatz-world-clock-wide.jpg",
       "alt": "The World Time Clock at Alexanderplatz with the Fernsehturm behind it",
       "relatedToolSlug": "berlin-pace-passport"
-    },
-    {
-      "title": "Berlin Weekend with a Friday Night Arrival: A Plan That Starts Small",
-      "slug": "berlin-weekend-friday-night-arrival",
-      "path": "/post/berlin-weekend-friday-night-arrival",
-      "url": "https://www.berlinwalk.com/post/berlin-weekend-friday-night-arrival",
-      "excerpt": "Arriving in Berlin on Friday night? Use a small first-night plan for BER or Hauptbahnhof that protects Saturday instead of forcing a rushed checklist.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "4 min read",
-      "publishedDate": "2026-08-16T10:58:45.247Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_8124c1065ff349a690b2df2692ea0b5d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ber-airport-night.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_8124c1065ff349a690b2df2692ea0b5d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ber-airport-night.jpg",
-      "alt": "Terminal 1 at Berlin Brandenburg Airport lit at dusk",
-      "relatedToolSlug": "berlin-weekend-first-night"
     }
   ]
 }

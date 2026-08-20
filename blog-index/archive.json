@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-08-20T08:00:43.238Z",
+  "updatedAt": "2026-08-20T14:08:27.652Z",
   "source": "Wix Blog API",
   "totalPosts": 300,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Where to Eat Near the Brandenburg Gate Without Getting Ripped Off",
+      "slug": "where-to-eat-near-brandenburg-gate",
+      "path": "/post/where-to-eat-near-brandenburg-gate",
+      "url": "https://www.berlinwalk.com/post/where-to-eat-near-brandenburg-gate",
+      "excerpt": "Pariser Platz is one of the worst places in Berlin to eat. A local guide to the cheap eats, the sit-down escapes, and the picnic move, all a few minutes from the Brandenburg Gate.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "free-budget",
+      "topicLabel": "Free & Budget",
+      "readTime": "5 min read",
+      "publishedDate": "2026-08-20T14:02:02.549Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_8f1bc4dfd5f54dfda3cafd51e4d72e59~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-brandenburg-gate-pariser-platz.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_8f1bc4dfd5f54dfda3cafd51e4d72e59~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-brandenburg-gate-pariser-platz.jpg",
+      "alt": "Crowds and a costumed photo tout in front of the Brandenburg Gate on Pariser Platz",
+      "relatedToolSlug": "brandenburg-gate-food-escape"
+    },
     {
       "title": "Vintage Shopping in Berlin: Where to Find the Good Stuff",
       "slug": "vintage-shopping-in-berlin",
@@ -5085,23 +5102,6 @@
       "image": "https://static.wixstatic.com/media/nsplsh_f83d2c2ec63f4e978cea87bd171d6b55~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Boat%20on%20river%20with%20cityscape%20and%20TV%20tower.jpg",
       "thumb": "https://static.wixstatic.com/media/nsplsh_f83d2c2ec63f4e978cea87bd171d6b55~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Boat%20on%20river%20with%20cityscape%20and%20TV%20tower.jpg",
       "alt": "Museum Island and the Bode Museum seen from the Spree with the TV Tower behind",
-      "relatedToolSlug": "berlin-landmarks-map"
-    },
-    {
-      "title": "5 Mistakes Tourists Make at Alexanderplatz (And What to Do Instead)",
-      "slug": "5-mistakes-tourists-make-at-alexanderplatz",
-      "path": "/post/5-mistakes-tourists-make-at-alexanderplatz",
-      "url": "https://www.berlinwalk.com/post/5-mistakes-tourists-make-at-alexanderplatz",
-      "excerpt": "Alexanderplatz is Berlin’s busiest square — and one of its most misunderstood. Here are five common mistakes tourists make here, and what you should do instead.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "5 min read",
-      "publishedDate": "2026-02-26T14:37:36.941Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_73b3fbf73e494644a00a805c2d85e69b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinAlexanderPlatz.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_73b3fbf73e494644a00a805c2d85e69b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinAlexanderPlatz.jpg",
-      "alt": "Alexanderplatz Berlin",
       "relatedToolSlug": "berlin-landmarks-map"
     }
   ]
