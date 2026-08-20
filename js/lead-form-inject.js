@@ -2314,3 +2314,93 @@
     }
   }, 300);
 })();
+
+// ---------------------------------------------------------------------------
+// Berlin Date Check first-screen teaser. Deliberately independent of the
+// content-upgrade experiment above: no assignment, no variant, no gating.
+// The magnet cards sit at the 2nd H2 and only 5.7% of readers ever saw one,
+// so this one-liner goes BEFORE the first H2 on a fixed list of live
+// timing/logistics posts and links out to the standalone checker page.
+// ---------------------------------------------------------------------------
+(function () {
+  'use strict';
+  var TEASER_MARKER = 'data-bw-date-check-teaser';
+  var TEASER_SLUGS = {
+    'are-shops-open-on-sunday-in-berlin-what-you-need-to-know': 1,
+    'average-temperature-in-berlin-by-month-a-complete-climate-guide': 1,
+    'berlin-in-december-2026': 1,
+    'berlin-in-november-2026': 1,
+    'berlin-in-october-2026': 1,
+    'berlin-museum-pass-vs-single-tickets-which-one-saves-you-money': 1,
+    'best-christmas-markets-berlin-2026': 1,
+    'how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way': 1,
+    'is-the-berlin-welcomecard-worth-it-in-2026-an-honest-breakdown': 1,
+    'luggage-storage-in-berlin-2026': 1,
+    'what-s-happening-in-berlin-this-weekend-your-ultimate-guide': 1,
+    'what-s-the-best-time-to-visit-berlin-a-month-by-month-guide': 1,
+    'berlin-weekend-friday-night-arrival': 1,
+    'berlin-before-hotel-check-in': 1,
+    'berlin-hauptbahnhof-guide': 1,
+    'berlin-layover-guide': 1,
+    'which-berlin-pass-is-worth-it': 1
+  };
+
+  function teaserSlug() {
+    var m = location.pathname.match(/\/post\/([^/?#]+)/);
+    return m ? decodeURIComponent(m[1]) : null;
+  }
+
+  function teaserMonthWord() {
+    // The month most readers are actually planning for: about three weeks out.
+    var d = new Date(Date.now() + 21 * 86400000);
+    return ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+      'August', 'September', 'October', 'November', 'December'][d.getMonth()];
+  }
+
+  function buildTeaser(slug) {
+    var a = document.createElement('a');
+    a.setAttribute(TEASER_MARKER, '1');
+    a.href = 'https://www.berlinwalk.com/berlin-dates-check'
+      + '?utm_source=blog&utm_medium=teaser&utm_campaign=berlin_date_check'
+      + '&utm_content=' + encodeURIComponent(slug);
+    a.target = '_top';
+    a.textContent = 'Coming in ' + teaserMonthWord() + '? See what your exact dates hit →';
+    a.style.cssText = 'display:block;margin:18px 0 22px;padding:12px 16px;'
+      + 'background:#EAF3E2;border:1px solid #C5E1A5;border-radius:10px;'
+      + 'color:#1B5E20;font-weight:700;font-size:14.5px;line-height:1.4;'
+      + 'text-decoration:none;';
+    return a;
+  }
+
+  function firstContentHeading() {
+    var nodes = document.querySelectorAll('main h2, [data-hook="post-description"] h2, article h2');
+    for (var i = 0; i < nodes.length; i++) {
+      var r = nodes[i].getBoundingClientRect();
+      if (r.width > 0 && r.height > 0) return nodes[i];
+    }
+    return null;
+  }
+
+  function ensureTeaser() {
+    var slug = teaserSlug();
+    if (!slug || !TEASER_SLUGS[slug]) return;
+    if (document.querySelector('[' + TEASER_MARKER + ']')) return;
+    var h2 = firstContentHeading();
+    if (!h2 || !h2.parentNode) return;
+    // Wix wraps each rich-content block in its own div; insert the teaser
+    // before the block that CONTAINS the first H2, not before the bare H2.
+    var block = h2;
+    while (block.parentNode && block.parentNode !== document.body
+      && !/post-description|main/i.test(block.parentNode.getAttribute
+        ? (block.parentNode.getAttribute('data-hook') || block.parentNode.tagName) : '')) {
+      if (block.parentNode.childElementCount > 1) break;
+      block = block.parentNode;
+    }
+    block.parentNode.insertBefore(buildTeaser(slug), block);
+  }
+
+  ensureTeaser();
+  // Wix hydration deletes early DOM injections; keep watching.
+  new MutationObserver(ensureTeaser)
+    .observe(document.documentElement, { childList: true, subtree: true });
+})();
