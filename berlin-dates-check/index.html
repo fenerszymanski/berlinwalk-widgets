@@ -263,6 +263,14 @@
     #bw-date-check .date-support-item { padding: 16px 0; }
     #bw-date-check .result-stage { padding: 34px 16px 54px; gap: 38px; }
   }
+  @media (max-width: 250px) {
+    #bw-date-check .gate-row input[type="email"] { flex: 1 1 100%; width: 100%; min-width: 0; }
+    #bw-date-check .gate-row button { flex: 1 1 100%; width: 100%; min-width: 0; padding-left: 10px; padding-right: 10px; white-space: normal; }
+    #bw-date-check .deadline-schedule .say { min-width: 0; }
+    #bw-date-check .deadline-schedule .dl-row { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+    #bw-date-check .deadline-schedule .dl-label, #bw-date-check .deadline-schedule .dl-when { min-width: 0; overflow-wrap: anywhere; }
+    #bw-date-check .deadline-schedule .dl-when { grid-column: auto; white-space: normal; }
+  }
 </style>
 </head>
 <body>
