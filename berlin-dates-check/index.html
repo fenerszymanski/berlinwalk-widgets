@@ -486,6 +486,21 @@
   }
 
   // ---------------------------------------------------------------------
+  // Block 2b - big citywide dates (curated, source-checked windows only)
+  // ---------------------------------------------------------------------
+  function bigDatesReading(days, events) {
+    var first = days[0], last = days[days.length - 1];
+    var hits = (events || []).filter(function (e) { return e.from <= last && e.to >= first; });
+    if (!hits.length) {
+      return { flag: false, text: 'No big citywide event lands on your dates, so hotels and queues stay at their normal level.' };
+    }
+    var parts = hits.slice(0, 2).map(function (h) {
+      return 'Your dates hit ' + h.label + '. ' + h.note;
+    });
+    return { flag: true, text: parts.join(' ') };
+  }
+
+  // ---------------------------------------------------------------------
   // Block 3 - booking deadlines
   // ---------------------------------------------------------------------
   // Each item's threshold is a number of days before arrival, so it resolves to
@@ -843,17 +858,20 @@
 
     var mondaySunday = mondaySundayReading(days, DATA.mondayClosures, DATA.sundayRule);
     var holiday = holidayReading(days, DATA.holidays);
+    var bigDates = bigDatesReading(days, DATA.bigDates);
     var arrivalMonth = partsOf(arrivalStr)[1];
     var deadline = bookingDeadlineReading(daysUntilArrival, arrivalMonth, DATA.bookingDeadlines);
     var light = lightWeatherReading(arrivalStr, lastStr, DATA.weatherByMonth);
 
     if (mondaySunday.flag) STATE.resultFlags.push('monday_sunday');
     if (holiday.flag) STATE.resultFlags.push('holiday');
+    if (bigDates.flag) STATE.resultFlags.push('big_date');
     if (deadline.flag) STATE.resultFlags.push('booking_deadline');
-    STATE.readingTexts = { mondaySunday: mondaySunday.text, holiday: holiday.text, bookingDeadline: deadline.text, light: light.text };
+    STATE.readingTexts = { mondaySunday: mondaySunday.text, holiday: holiday.text, bigDates: bigDates.text, bookingDeadline: deadline.text, light: light.text };
 
     document.getElementById('rangeEyebrow').textContent =
-      fmtDayLabel(arrivalStr) + ' → ' + fmtDayLabel(lastStr) + ' · ' + nights + ' night' + (nights === 1 ? '' : 's');
+      fmtDayLabel(arrivalStr) + ' → ' + fmtDayLabel(lastStr) + ' · ' + nights + ' night' + (nights === 1 ? '' : 's')
+      + (nights >= 2 ? ' · ' + (nights - 1) + ' full day' + (nights - 1 === 1 ? '' : 's') + ' plus two half days' : '');
 
     buildStrip(days, holidayDates, true, true, {});
 
@@ -861,6 +879,7 @@
     readingsEl.innerHTML = '';
     renderReading(readingsEl, 'Monday / Sunday', mondaySunday);
     renderReading(readingsEl, 'Public holiday', holiday);
+    renderReading(readingsEl, 'Big dates', bigDates);
     renderReading(readingsEl, 'Book by', deadline);
 
     var schedule = deadlineSchedule(arrivalStr, today, arrivalMonth, DATA.bookingDeadlines);

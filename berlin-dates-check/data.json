@@ -1,44 +1,160 @@
 {
   "checkedOn": "2026-08-20",
-  "coordinates": { "lat": 52.520, "lng": 13.405 },
+  "coordinates": {
+    "lat": 52.52,
+    "lng": 13.405
+  },
   "holidays": [
-    { "date": "2026-01-01", "label": "New Year's Day", "tip": "Shops close; museums and restaurants vary." },
-    { "date": "2026-03-08", "label": "International Women's Day", "tip": "Berlin-only holiday; in 2026 it falls on Sunday." },
-    { "date": "2026-04-03", "label": "Good Friday", "tip": "Quiet holiday; shops close, nightlife may be calmer." },
-    { "date": "2026-04-06", "label": "Easter Monday", "tip": "Shops close; plan food and museums ahead." },
-    { "date": "2026-05-01", "label": "Labour Day", "tip": "Shops close; demonstrations and street events are common." },
-    { "date": "2026-05-14", "label": "Ascension Day", "tip": "Public holiday; parks, brunch and walks work well." },
-    { "date": "2026-05-25", "label": "Whit Monday", "tip": "Shops close; check museums individually." },
-    { "date": "2026-10-03", "label": "German Unity Day", "tip": "National holiday; in 2026 it falls on Saturday." },
-    { "date": "2026-12-25", "label": "Christmas Day", "tip": "Major closure day; transport runs with holiday patterns." },
-    { "date": "2026-12-26", "label": "Boxing Day", "tip": "Second Christmas holiday; shops stay closed." },
-    { "date": "2027-01-01", "label": "New Year's Day", "tip": "Shops close; museums and restaurants vary." },
-    { "date": "2027-03-08", "label": "International Women's Day", "tip": "Berlin-only holiday; in 2027 it falls on Monday, right after the weekend." },
-    { "date": "2027-03-26", "label": "Good Friday", "tip": "Quiet holiday; shops close, nightlife may be calmer." },
-    { "date": "2027-03-29", "label": "Easter Monday", "tip": "Shops close; plan food and museums ahead." },
-    { "date": "2027-05-01", "label": "Labour Day", "tip": "National holiday; in 2027 it falls on Saturday." },
-    { "date": "2027-05-06", "label": "Ascension Day", "tip": "Public holiday; parks, brunch and walks work well." },
-    { "date": "2027-05-17", "label": "Whit Monday", "tip": "Shops close; check museums individually." },
-    { "date": "2027-10-03", "label": "German Unity Day", "tip": "National holiday; in 2027 it falls on Sunday, so shops would be closed anyway." },
-    { "date": "2027-12-25", "label": "Christmas Day", "tip": "Major closure day; transport runs with holiday patterns." },
-    { "date": "2027-12-26", "label": "Boxing Day", "tip": "Second Christmas holiday; shops stay closed." }
+    {
+      "date": "2026-01-01",
+      "label": "New Year's Day",
+      "tip": "Shops close; museums and restaurants vary."
+    },
+    {
+      "date": "2026-03-08",
+      "label": "International Women's Day",
+      "tip": "Berlin-only holiday; in 2026 it falls on Sunday."
+    },
+    {
+      "date": "2026-04-03",
+      "label": "Good Friday",
+      "tip": "Quiet holiday; shops close, nightlife may be calmer."
+    },
+    {
+      "date": "2026-04-06",
+      "label": "Easter Monday",
+      "tip": "Shops close; plan food and museums ahead."
+    },
+    {
+      "date": "2026-05-01",
+      "label": "Labour Day",
+      "tip": "Shops close; demonstrations and street events are common."
+    },
+    {
+      "date": "2026-05-14",
+      "label": "Ascension Day",
+      "tip": "Public holiday; parks, brunch and walks work well."
+    },
+    {
+      "date": "2026-05-25",
+      "label": "Whit Monday",
+      "tip": "Shops close; check museums individually."
+    },
+    {
+      "date": "2026-10-03",
+      "label": "German Unity Day",
+      "tip": "National holiday; in 2026 it falls on Saturday."
+    },
+    {
+      "date": "2026-12-25",
+      "label": "Christmas Day",
+      "tip": "Major closure day; transport runs with holiday patterns."
+    },
+    {
+      "date": "2026-12-26",
+      "label": "Boxing Day",
+      "tip": "Second Christmas holiday; shops stay closed."
+    },
+    {
+      "date": "2027-01-01",
+      "label": "New Year's Day",
+      "tip": "Shops close; museums and restaurants vary."
+    },
+    {
+      "date": "2027-03-08",
+      "label": "International Women's Day",
+      "tip": "Berlin-only holiday; in 2027 it falls on Monday, right after the weekend."
+    },
+    {
+      "date": "2027-03-26",
+      "label": "Good Friday",
+      "tip": "Quiet holiday; shops close, nightlife may be calmer."
+    },
+    {
+      "date": "2027-03-29",
+      "label": "Easter Monday",
+      "tip": "Shops close; plan food and museums ahead."
+    },
+    {
+      "date": "2027-05-01",
+      "label": "Labour Day",
+      "tip": "National holiday; in 2027 it falls on Saturday."
+    },
+    {
+      "date": "2027-05-06",
+      "label": "Ascension Day",
+      "tip": "Public holiday; parks, brunch and walks work well."
+    },
+    {
+      "date": "2027-05-17",
+      "label": "Whit Monday",
+      "tip": "Shops close; check museums individually."
+    },
+    {
+      "date": "2027-10-03",
+      "label": "German Unity Day",
+      "tip": "National holiday; in 2027 it falls on Sunday, so shops would be closed anyway."
+    },
+    {
+      "date": "2027-12-25",
+      "label": "Christmas Day",
+      "tip": "Major closure day; transport runs with holiday patterns."
+    },
+    {
+      "date": "2027-12-26",
+      "label": "Boxing Day",
+      "tip": "Second Christmas holiday; shops stay closed."
+    }
   ],
   "holidaysSource": "berlin-public-holiday-checker/index.html (2026 entries, ported verbatim); 2027 dates cross-checked against kalenderpedia.de/feiertage/feiertage-berlin-2027.html and verified independently with the Gauss Easter algorithm (Easter Sunday 2027 = 28 March)",
   "mondayClosures": {
     "venues": [
-      { "name": "Altes Museum", "note": "Museum Island" },
-      { "name": "Neues Museum", "note": "Museum Island, Nefertiti bust" },
-      { "name": "Bode-Museum", "note": "Museum Island" },
-      { "name": "Alte Nationalgalerie", "note": "Museum Island" },
-      { "name": "James-Simon-Galerie", "note": "Museum Island entrance building" },
-      { "name": "Deutsches Technikmuseum", "note": "including Science Center Spectrum" },
-      { "name": "Berlin Wall Memorial Documentation Center", "note": "Bernauer Straße, viewing tower" },
-      { "name": "Charlottenburg Palace", "note": "interior, palace grounds stay open" }
+      {
+        "name": "Altes Museum",
+        "note": "Museum Island"
+      },
+      {
+        "name": "Neues Museum",
+        "note": "Museum Island, Nefertiti bust"
+      },
+      {
+        "name": "Bode-Museum",
+        "note": "Museum Island"
+      },
+      {
+        "name": "Alte Nationalgalerie",
+        "note": "Museum Island"
+      },
+      {
+        "name": "James-Simon-Galerie",
+        "note": "Museum Island entrance building"
+      },
+      {
+        "name": "Deutsches Technikmuseum",
+        "note": "including Science Center Spectrum"
+      },
+      {
+        "name": "Berlin Wall Memorial Documentation Center",
+        "note": "Bernauer Straße, viewing tower"
+      },
+      {
+        "name": "Charlottenburg Palace",
+        "note": "interior, palace grounds stay open"
+      }
     ],
     "openOnMondayInstead": [
-      { "name": "Humboldt Forum", "closedInstead": "Tuesday" },
-      { "name": "Berlinische Galerie", "closedInstead": "Tuesday" },
-      { "name": "Futurium", "closedInstead": "Tuesday" }
+      {
+        "name": "Humboldt Forum",
+        "closedInstead": "Tuesday"
+      },
+      {
+        "name": "Berlinische Galerie",
+        "closedInstead": "Tuesday"
+      },
+      {
+        "name": "Futurium",
+        "closedInstead": "Tuesday"
+      }
     ],
     "generalNote": "Most Staatliche Museen zu Berlin (state museum) houses follow the same Monday closure as the confirmed list above.",
     "source": "berlin-monday-plan-checker/index.html (verified list) + PROJECT_MEMORY.md verified facts (Technikmuseum checked 2026-07-23 against technikmuseum.berlin; Bernauer Straße from official hours)"
@@ -53,7 +169,12 @@
       "id": "reichstag",
       "label": "The Reichstag dome",
       "baseDays": 21,
-      "peakMonths": [6, 7, 8, 9],
+      "peakMonths": [
+        6,
+        7,
+        8,
+        9
+      ],
       "peakDays": 42,
       "urgentNote": "The Reichstag dome is free but registration only, and it fills first. Put it in this week.",
       "comfortableClause": "The Reichstag dome is still comfortable at this range.",
@@ -63,7 +184,12 @@
       "id": "museums",
       "label": "Museum Island timed slots",
       "baseDays": 5,
-      "peakMonths": [6, 7, 8, 9],
+      "peakMonths": [
+        6,
+        7,
+        8,
+        9
+      ],
       "peakDays": 10,
       "urgentNote": "Museum Island timed-entry tickets are close to selling out for your dates. Book the one museum you actually care about now.",
       "comfortableClause": "Museum Island timed slots are still comfortable at this range.",
@@ -73,7 +199,13 @@
       "id": "palaces",
       "label": "Sanssouci Palace",
       "baseDays": 10,
-      "peakMonths": [5, 6, 7, 8, 9],
+      "peakMonths": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
       "peakDays": 21,
       "urgentNote": "Sanssouci Palace uses fixed entry times and a limited daily ticket count. Book the interior slot now if that is the reason for your day trip.",
       "comfortableClause": "Sanssouci Palace is still comfortable at this range.",
@@ -83,7 +215,11 @@
       "id": "tower",
       "label": "TV Tower",
       "baseDays": 7,
-      "peakMonths": [6, 7, 8],
+      "peakMonths": [
+        6,
+        7,
+        8
+      ],
       "peakDays": 14,
       "urgentNote": "The TV Tower is worth booking now only if you want a fixed time, the restaurant, or a sunset slot.",
       "comfortableClause": "The TV Tower is still comfortable at this range.",
@@ -115,18 +251,102 @@
     "transport": "berlin-booking-deadline-planner treats this as never urgent ('do not over-plan this, buy the right ticket when you know the route'); no numeric threshold applies."
   },
   "weatherByMonth": [
-    { "month": 1, "name": "January", "tempHighC": 2.4, "tempLowC": -3, "rainyDays": "9", "blurb": "the coldest, quietest and cheapest month, ideal for museums and indoor culture" },
-    { "month": 2, "name": "February", "tempHighC": 3.8, "tempLowC": -2.5, "rainyDays": "7", "blurb": "still cold but with lengthening days" },
-    { "month": 3, "name": "March", "tempHighC": 8.2, "tempLowC": 0.4, "rainyDays": "8", "blurb": "changeable early spring, longer days after the clock change, and fewer crowds" },
-    { "month": 4, "name": "April", "tempHighC": 13.3, "tempLowC": 3.4, "rainyDays": "9", "blurb": "spring in full swing with cherry blossom and long evenings, but unpredictable weather" },
-    { "month": 5, "name": "May", "tempHighC": 18.8, "tempLowC": 7.7, "rainyDays": "9", "blurb": "friendly weather, long days, festivals and beer gardens, before the peak-summer crowds" },
-    { "month": 6, "name": "June", "tempHighC": 22, "tempLowC": 12, "rainyDays": "9-12", "blurb": "warm, long days with occasional afternoon thunderstorms" },
-    { "month": 7, "name": "July", "tempHighC": 23, "tempLowC": 12, "rainyDays": "8", "blurb": "warm peak-summer days, long evenings, occasional heatwaves and short rain showers" },
-    { "month": 8, "name": "August", "tempHighC": 23.4, "tempLowC": 12.1, "rainyDays": "8", "blurb": "Berlin's warmest month, with lake weather and evenings that shorten quickly" },
-    { "month": 9, "name": "September", "tempHighC": 19.5, "tempLowC": 9.5, "rainyDays": "8", "blurb": "mild late-summer days, cooler evenings, golden light" },
-    { "month": 10, "name": "October", "tempHighC": 14.1, "tempLowC": 5.7, "rainyDays": "7", "blurb": "autumn colour and soft light, comfortable for walking" },
-    { "month": 11, "name": "November", "tempHighC": 7.5, "tempLowC": 1.8, "rainyDays": "8", "blurb": "cold, grey and quiet, the best month for museums" },
-    { "month": 12, "name": "December", "tempHighC": 3.6, "tempLowC": -1.3, "rainyDays": "9", "blurb": "cold, dark and festive, dominated by Christmas markets" }
+    {
+      "month": 1,
+      "name": "January",
+      "tempHighC": 2.4,
+      "tempLowC": -3,
+      "rainyDays": "9",
+      "blurb": "the coldest, quietest and cheapest month, ideal for museums and indoor culture"
+    },
+    {
+      "month": 2,
+      "name": "February",
+      "tempHighC": 3.8,
+      "tempLowC": -2.5,
+      "rainyDays": "7",
+      "blurb": "still cold but with lengthening days"
+    },
+    {
+      "month": 3,
+      "name": "March",
+      "tempHighC": 8.2,
+      "tempLowC": 0.4,
+      "rainyDays": "8",
+      "blurb": "changeable early spring, longer days after the clock change, and fewer crowds"
+    },
+    {
+      "month": 4,
+      "name": "April",
+      "tempHighC": 13.3,
+      "tempLowC": 3.4,
+      "rainyDays": "9",
+      "blurb": "spring in full swing with cherry blossom and long evenings, but unpredictable weather"
+    },
+    {
+      "month": 5,
+      "name": "May",
+      "tempHighC": 18.8,
+      "tempLowC": 7.7,
+      "rainyDays": "9",
+      "blurb": "friendly weather, long days, festivals and beer gardens, before the peak-summer crowds"
+    },
+    {
+      "month": 6,
+      "name": "June",
+      "tempHighC": 22,
+      "tempLowC": 12,
+      "rainyDays": "9-12",
+      "blurb": "warm, long days with occasional afternoon thunderstorms"
+    },
+    {
+      "month": 7,
+      "name": "July",
+      "tempHighC": 23,
+      "tempLowC": 12,
+      "rainyDays": "8",
+      "blurb": "warm peak-summer days, long evenings, occasional heatwaves and short rain showers"
+    },
+    {
+      "month": 8,
+      "name": "August",
+      "tempHighC": 23.4,
+      "tempLowC": 12.1,
+      "rainyDays": "8",
+      "blurb": "Berlin's warmest month, with lake weather and evenings that shorten quickly"
+    },
+    {
+      "month": 9,
+      "name": "September",
+      "tempHighC": 19.5,
+      "tempLowC": 9.5,
+      "rainyDays": "8",
+      "blurb": "mild late-summer days, cooler evenings, golden light"
+    },
+    {
+      "month": 10,
+      "name": "October",
+      "tempHighC": 14.1,
+      "tempLowC": 5.7,
+      "rainyDays": "7",
+      "blurb": "autumn colour and soft light, comfortable for walking"
+    },
+    {
+      "month": 11,
+      "name": "November",
+      "tempHighC": 7.5,
+      "tempLowC": 1.8,
+      "rainyDays": "8",
+      "blurb": "cold, grey and quiet, the best month for museums"
+    },
+    {
+      "month": 12,
+      "name": "December",
+      "tempHighC": 3.6,
+      "tempLowC": -1.3,
+      "rainyDays": "9",
+      "blurb": "cold, dark and festive, dominated by Christmas markets"
+    }
   ],
   "weatherSource": "monthly-weather/data.json, extracted verbatim (temperature normals, not a forecast)",
   "seasonalPhotos": {
@@ -158,5 +378,35 @@
   },
   "paidPlannerUrl": "https://www.berlinwalk.com/berlin-trip-planner",
   "sourcePage": "berlin-dates-check",
-  "experimentId": "berlin_date_check_v1"
+  "experimentId": "berlin_date_check_v1",
+  "bigDates": [
+    {
+      "from": "2026-09-26",
+      "to": "2026-09-27",
+      "label": "Berlin Marathon weekend",
+      "note": "The race closes big stretches of the centre on Sunday and hotel prices jump, so book the bed before anything else.",
+      "source": "bmw-berlin-marathon.com, race Sunday 27 September 2026, closures start Saturday; verified 2026-08-20"
+    },
+    {
+      "from": "2026-10-09",
+      "to": "2026-10-18",
+      "label": "Festival of Lights",
+      "note": "Landmarks glow after dark from about 19:00, free to walk, and the popular spots get crowded from 20:00.",
+      "source": "festival-of-lights.de programme 2026, 9 to 18 October; verified 2026-08-20"
+    },
+    {
+      "from": "2026-11-27",
+      "to": "2026-12-26",
+      "label": "Christmas market season",
+      "note": "Squares fill from late afternoon and the markets stay open on Sundays, which softens the usual Sunday shutdown.",
+      "source": "seasonal window, most markets open the week before first Advent (29 Nov 2026); phrased as season, not per-market dates"
+    },
+    {
+      "from": "2026-12-31",
+      "to": "2027-01-01",
+      "label": "New Year's Eve",
+      "note": "The Brandenburg Gate party zone fills early, transport reroutes at night, and restaurants need booking well ahead.",
+      "source": "fixed date"
+    }
+  ]
 }
