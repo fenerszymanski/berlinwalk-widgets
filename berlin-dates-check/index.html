@@ -180,6 +180,9 @@
     #bw-date-check .dl-row { grid-template-columns: 68px 1fr; row-gap: 1px; }
     #bw-date-check .dl-when { grid-column: 2; }
   }
+  #bw-date-check .gate-stake { margin: 10px 0 0; font-size: 15.5px; line-height: 1.45; color: var(--ink); font-weight: 500; }
+  #bw-date-check .gate .lede { margin-top: 8px; font-size: 13px; line-height: 1.5; color: var(--muted); }
+  @media (max-width: 420px) { #bw-date-check .gate-stake { font-size: 14.5px; } }
   #bw-date-check footer { padding: 26px 0 50px; font-family: var(--f-mono); font-size: 10px; color: var(--muted); text-align: center; letter-spacing: .04em; }
 
   @media (max-width: 860px) {
@@ -279,17 +282,18 @@
 
     <section>
       <div class="gate" id="gate">
-        <h2>Your dates, in your inbox, at the right moment</h2>
-        <p class="lede" id="gateLede">I will send this summary to your inbox, then three short emails timed to your trip: what to book three weeks out, what to buy a week out, and what to do on your first morning. Nothing else.</p>
+        <h2 id="gateHeading">Your dates, in your inbox, at the right moment</h2>
+        <p class="gate-stake" id="gateStake"></p>
+        <p class="lede" id="gateLede">I will send this summary to your inbox, then short emails timed to your trip. Nothing else.</p>
         <form id="gateForm" novalidate>
           <div class="gate-row">
             <input type="email" id="gateEmail" name="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required>
-            <button type="submit" id="gateSubmit">Send me the dates</button>
+            <button type="submit" id="gateSubmit">Email me these dates</button>
           </div>
           <div class="honeypot"><label>Website<input type="text" name="website" id="gateWebsite" tabindex="-1" autocomplete="off"></label></div>
           <label class="consent">
             <input type="checkbox" id="gateConsent" required>
-            <span>Send me this summary plus three short emails timed to my trip. I can unsubscribe any time. <a href="https://www.berlinwalk.com/privacy-policy" target="_top">Privacy Policy.</a></span>
+            <span>Send me this dated summary plus the short reminders timed to my trip. I can unsubscribe any time. <a href="https://www.berlinwalk.com/privacy-policy" target="_top">Privacy Policy.</a></span>
           </label>
           <p class="gate-status" id="gateStatus" role="status" aria-live="polite"></p>
         </form>
@@ -321,7 +325,7 @@
   var root = document.getElementById('bw-date-check');
   var DATA = null;
   var startedAt = new Date().toISOString();
-  var STATE = { arrivalStr: null, nights: 4, days: [], daysUntilArrival: null, resultFlags: [], tourSlotShown: false, tourSummary: null, readingTexts: {} };
+  var STATE = { arrivalStr: null, nights: 4, days: [], daysUntilArrival: null, resultFlags: [], tourSlotShown: false, tourSummary: null, readingTexts: {}, deadlineSchedule: null };
 
   // ---------------------------------------------------------------------
   // date helpers (all date-string math done as Y-M-D strings to sidestep
@@ -724,21 +728,52 @@
     var stepList = steps.length === 1
       ? steps[0]
       : steps.slice(0, -1).join(', ') + ' and ' + steps[steps.length - 1];
-    var WHAT_I_SEND = ' I will send you this dated list now, then remind you ' + stepList + '. Nothing else.';
+    var WHAT_I_SEND = 'I will send you this dated list now, then remind you ' + stepList + '. Nothing else.';
+    var heading = document.getElementById('gateHeading');
+    var stake = document.getElementById('gateStake');
+    // The strongest honest hook is the question this page cannot answer. My
+    // booking calendar is usually published only a few weeks out, so a visitor
+    // planning further ahead gets no tour block at all. That gap is real, it is
+    // theirs, and the email is the only thing that closes it.
+    if (!STATE.tourSlotShown) {
+      if (heading) heading.textContent = 'There is one thing I cannot tell you yet';
+      if (stake) stake.textContent = 'My walking tour schedule does not reach ' + fmtDeadlineDate(STATE.arrivalStr)
+        + ' yet. It usually opens a few weeks ahead. I check again every time I email you, so you will hear the day it does.';
+      lede.textContent = upcoming.length
+        ? ('You also have ' + upcoming.length + ' booking deadline' + (upcoming.length === 1 ? '' : 's')
+           + ' above, the first on ' + fmtDeadlineDate(upcoming[0].dateStr) + '. ' + WHAT_I_SEND)
+        : WHAT_I_SEND;
+      return;
+    }
     if (!upcoming.length) {
-      lede.textContent = 'Every booking window for your dates is already open, so book what you want now.' + WHAT_I_SEND;
+      if (heading) heading.textContent = 'Everything is already bookable';
+      if (stake) stake.textContent = 'Which moves the risk off booking and onto the trip itself: what is shut on your '
+        + 'days, and what to do with your first morning.';
+      lede.textContent = WHAT_I_SEND;
       return;
     }
     var next = upcoming[0];
     var last = upcoming[upcoming.length - 1];
-    var head = upcoming.length === 1
-      ? ('Your one remaining deadline is ' + fmtDeadlineDate(next.dateStr) + ', for ' + next.label + '.')
-      : ('Your next deadline is ' + fmtDeadlineDate(next.dateStr) + ', for ' + next.label
-         + ', and ' + (upcoming.length - 1) + ' more follow through ' + fmtDeadlineDate(last.dateStr) + '.');
+    var WORDS = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight'];
+    var count = WORDS[upcoming.length] || String(upcoming.length);
+    if (heading) {
+      heading.textContent = upcoming.length === 1
+        ? 'One date to remember'
+        : count + ' dates, spread over the next ' + (daysBetween(todayStr(), last.dateStr) > 55 ? 'couple of months' : 'few weeks');
+    }
+    if (stake) {
+      // Naming their own dates back to them is the whole argument: the list is
+      // useless on the day they read it and useful on days they will not be
+      // thinking about Berlin.
+      stake.textContent = upcoming.length === 1
+        ? ('It is ' + fmtDeadlineDate(next.dateStr) + ', for ' + next.label + '. You will not be thinking about Berlin that day.')
+        : ('The next is ' + fmtDeadlineDate(next.dateStr) + ', the last is ' + fmtDeadlineDate(last.dateStr)
+           + '. None of them will be on your mind that morning.');
+    }
     var openLine = overdue.length === 1
-      ? ' One is already open and worth doing today.'
-      : (overdue.length > 1 ? ' ' + overdue.length + ' are already open and worth doing today.' : '');
-    lede.textContent = head + openLine + WHAT_I_SEND;
+      ? 'One window is already open, so that one is for today. '
+      : (overdue.length > 1 ? overdue.length + ' windows are already open, so those are for today. ' : '');
+    lede.textContent = openLine + WHAT_I_SEND;
   }
 
   // ---------------------------------------------------------------------
@@ -824,6 +859,7 @@
     renderReading(readingsEl, 'Book by', deadline);
 
     var schedule = deadlineSchedule(arrivalStr, today, arrivalMonth, DATA.bookingDeadlines);
+    STATE.deadlineSchedule = schedule;
     renderDeadlineSchedule(readingsEl, schedule);
     applyGateCopy(schedule);
 
@@ -869,11 +905,15 @@
       STATE.tourSlotShown = false;
       trackEvent('bw_lead_asset_control_booking_click', { controlType: 'tour_block_hidden' });
       buildStrip(visitDays, currentHolidayDates(), true, true, tourDates);
+      // The gate was rendered before this fetch resolved, and its strongest
+      // wording depends on whether a tour was found. Re-apply now that we know.
+      if (STATE.deadlineSchedule) applyGateCopy(STATE.deadlineSchedule);
       return;
     }
     STATE.tourSlotShown = true;
     STATE.tourSummary = tourResult;
     STATE.resultFlags.push('tour_day');
+    if (STATE.deadlineSchedule) applyGateCopy(STATE.deadlineSchedule);
     tourResult.days.forEach(function (d) { tourDates[d.dateStr] = true; });
     buildStrip(visitDays, currentHolidayDates(), true, true, tourDates);
 
