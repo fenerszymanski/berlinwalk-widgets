@@ -437,7 +437,7 @@
   // ---------------------------------------------------------------------
   // Block 1 - Monday / Sunday trap
   // ---------------------------------------------------------------------
-  function mondaySundayReading(days, mondayData) {
+  function mondaySundayReading(days, mondayData, sundayRule) {
     var mondays = days.filter(function (d) { return weekdayLong(d) === 'Monday'; });
     var sundays = days.filter(function (d) { return weekdayLong(d) === 'Sunday'; });
     if (!mondays.length && !sundays.length) {
@@ -450,6 +450,14 @@
     }
     if (sundays.length) {
       parts.push('Shops are closed all day on ' + fmtDayLabel(sundays[0]) + ', so buy what you need the day before.');
+      // The closure alone leaves the visitor stuck; the exceptions are the part
+      // that actually solves a forgotten Sunday.
+      if (sundayRule && sundayRule.generalNote) {
+        var exceptions = sundayRule.generalNote.split('. ').filter(function (sentence) {
+          return /exception|bakeries|kiosk/i.test(sentence);
+        })[0];
+        if (exceptions) parts.push(exceptions.replace(/\.$/, '') + '.');
+      }
     }
     return { flag: true, text: parts.join(' ') };
   }
@@ -793,7 +801,7 @@
     var holidayDates = {};
     DATA.holidays.forEach(function (h) { if (days.indexOf(h.date) !== -1) holidayDates[h.date] = h; });
 
-    var mondaySunday = mondaySundayReading(days, DATA.mondayClosures);
+    var mondaySunday = mondaySundayReading(days, DATA.mondayClosures, DATA.sundayRule);
     var holiday = holidayReading(days, DATA.holidays);
     var arrivalMonth = partsOf(arrivalStr)[1];
     var deadline = bookingDeadlineReading(daysUntilArrival, arrivalMonth, DATA.bookingDeadlines);
