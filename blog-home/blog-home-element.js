@@ -1,29 +1,38 @@
 const BW_BLOG_HOME_DATA_URL = (() => {
   const script = document.currentScript;
   const base = script && script.src ? script.src : window.location.href;
-  return new URL('./data.json?v=20260820-featured-listings', base).href;
+  return new URL('./data.json?v=20260821-featured-listings', base).href;
 })();
 
 const BW_BLOG_HOME_FALLBACK = {
   featured: {
-    title: 'Berlin With Parents: A Calm Historic-Centre Day Without the Rushed Checklist',
-    url: 'https://www.berlinwalk.com/post/berlin-with-parents',
+    title: 'How to Watch Films in English in Berlin',
+    url: 'https://www.berlinwalk.com/post/watch-films-in-english-in-berlin',
     category: 'Tourist Tips',
-    readTime: '4 min read',
-    label: 'Featured: plan a calmer day',
-    summary: 'Planning Berlin with parents? Build a calmer historic-centre day around Alexanderplatz, Museum Island and one useful pause instead of a rushed checklist.',
-    image: 'https://static.wixstatic.com/media/5a08a3_93b5df72f94a42e8b55a27c72dbd4197~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-alexanderplatz-world-clock-wide.jpg',
-    alt: 'The World Time Clock at Alexanderplatz with the Fernsehturm behind it'
+    readTime: '5 min read',
+    label: 'New: decode the cinema listing',
+    summary: 'Berlin has more than sixty cinemas showing films in their original language, but the whole system hides behind a few German letters. Here is how to read OV, OmU and OmeU, where to go, and how to find an English screening tonight.',
+    image: 'https://static.wixstatic.com/media/5a08a3_0a19dd190168476fa27927be5289e100~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kino-international.jpg',
+    alt: 'The modernist glass facade of Kino International on Karl-Marx-Allee under a blue sky'
   },
   miniPosts: [
     {
-      title: 'Where to Hear Live Music in Berlin Without Overpaying',
-      url: 'https://www.berlinwalk.com/post/where-to-hear-live-music-in-berlin',
+      title: 'Where to Eat Near the Brandenburg Gate Without Getting Ripped Off',
+      url: 'https://www.berlinwalk.com/post/where-to-eat-near-brandenburg-gate',
       category: 'Tourist Tips',
       readTime: '5 min read',
-      summary: 'The live music you remember in Berlin is rarely the show you paid the most for. A local guide to the free lunch concert, the jazz clubs, the Saturday jam, and Sunday in Mauerpark, with a week reader to plan by.',
-      image: 'https://static.wixstatic.com/media/5a08a3_cdb608b17b264077b31b0779f4db7326~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berliner-philharmonie-lunch-concert.jpg',
-      alt: 'A free lunchtime concert in the foyer of the Berliner Philharmonie, with the audience seated on folding chairs and a grand piano at the side'
+      summary: 'Pariser Platz is one of the worst places in Berlin to eat. A local guide to the cheap eats, the sit-down escapes, and the picnic move, all a few minutes from the Brandenburg Gate.',
+      image: 'https://static.wixstatic.com/media/5a08a3_8f1bc4dfd5f54dfda3cafd51e4d72e59~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-brandenburg-gate-pariser-platz.jpg',
+      alt: 'Crowds and a costumed photo tout in front of the Brandenburg Gate on Pariser Platz'
+    },
+    {
+      title: 'Vintage Shopping in Berlin: Where to Find the Good Stuff',
+      url: 'https://www.berlinwalk.com/post/vintage-shopping-in-berlin',
+      category: 'Tourist Tips',
+      readTime: '6 min read',
+      summary: 'Berlin has one of Europe\'s best second-hand scenes and one of its most confusing. A local guide to which district to pick, how the kilo shops work, and the one day the whole plan falls apart.',
+      image: 'https://static.wixstatic.com/media/5a08a3_4345cfbde97c4873a16daa7fe746b1b5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-second-hand-shop-kreuzberg.jpg',
+      alt: 'A second-hand shop front in Berlin-Kreuzberg, with yellow signage and clothes in the window'
     },
     {
       title: 'English Bookshops in Berlin: Three Stops That Fit a Real Day',
@@ -35,22 +44,13 @@ const BW_BLOG_HOME_FALLBACK = {
       alt: 'Dussmann KulturKaufhaus exterior on Friedrichstraße in Berlin'
     },
     {
-      title: 'Berlin Spy Museum: Is It Worth Your Time on a First Visit?',
-      url: 'https://www.berlinwalk.com/post/berlin-spy-museum-worth-it',
-      category: 'Tourist Tips',
-      readTime: '3 min read',
-      summary: 'Is the Berlin Spy Museum worth your time? Decide whether its hands-on experience at Potsdamer Platz fits your first Berlin visit, or whether a real historic site is the better move.',
-      image: 'https://static.wixstatic.com/media/5a08a3_6264fdbbee424906a8b517c2baac902a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-spy-museum-exterior.jpg',
-      alt: 'The entrance to the German Spy Museum at Leipziger Platz in Berlin'
-    },
-    {
-      title: 'Berlin Landmarks in 2 Hours: Choose an East or West Start',
-      url: 'https://www.berlinwalk.com/post/berlin-landmarks-in-two-hours',
+      title: 'Berlin Botanic Garden: Is It Worth the Trip From Mitte?',
+      url: 'https://www.berlinwalk.com/post/berlin-botanic-garden',
       category: 'Tourist Tips',
       readTime: '4 min read',
-      summary: 'Use a focused east or west two-hour window for Berlin landmarks instead of forcing Museum Island and Brandenburg Gate into one rushed loop.',
-      image: 'https://static.wixstatic.com/media/5a08a3_f539c515c8cc4a8e9cc4c87bbca3b415~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-brandenburg-gate.jpg',
-      alt: 'The illuminated Brandenburg Gate at blue hour in Berlin'
+      summary: 'Use the glasshouses and weather to shape a Botanic Garden visit that feels calmer than another rushed Berlin landmark.',
+      image: 'https://static.wixstatic.com/media/5a08a3_4bf46a90ba4b49bf8a680ced300ea456~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-tropical-house-exterior.jpg',
+      alt: 'The Great Tropical House at Berlin Botanic Garden seen from the garden'
     }
   ],
   posts: [

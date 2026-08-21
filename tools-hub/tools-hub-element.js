@@ -1,5 +1,5 @@
 const BW_TOOLS_HUB_DATA_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/data.json';
-const BW_TOOLS_HUB_DATA_VERSION = '20260727-featured-listings';
+const BW_TOOLS_HUB_DATA_VERSION = '20260821-featured-listings';
 const BW_TOOLS_HUB_DEFAULT_IMAGE = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/generic-tool.svg';
 const BW_TOOLS_HUB_TYPE_ORDER = ['Planner', 'Calculator', 'Map', 'Guide', 'Audio', 'Quiz', 'Game'];
 

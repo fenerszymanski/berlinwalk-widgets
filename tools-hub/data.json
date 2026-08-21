@@ -1342,6 +1342,8 @@
       "href": "https://www.berlinwalk.com/berlin-dates-check",
       "hubCategory": "TripPlans",
       "type": "Planner",
+      "priority": 3,
+      "featured": true,
       "tags": [
         "berlin dates",
         "arrival date",
@@ -5624,7 +5626,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_9a5c32069aef4ee294ca0f76c64f3351~mv2.png",
       "iconStatus": "live-wix-media",
       "priority": 5,
-      "featured": true,
+      "featured": false,
       "cmsItemId": "517517f7-80c6-47ce-88c1-edd27bb8f91a",
       "relatedBlog": "/post/which-berlin-pass-is-worth-it"
     },
