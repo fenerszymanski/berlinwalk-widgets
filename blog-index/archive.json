@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-08-21T07:53:09.462Z",
+  "updatedAt": "2026-08-21T13:53:50.592Z",
   "source": "Wix Blog API",
   "totalPosts": 300,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Do You Need Restaurant Reservations in Berlin? When to Book and When to Walk In",
+      "slug": "restaurant-reservations-in-berlin",
+      "path": "/post/restaurant-reservations-in-berlin",
+      "url": "https://www.berlinwalk.com/post/restaurant-reservations-in-berlin",
+      "excerpt": "The honest local answer to whether you need restaurant reservations in Berlin: usually not. Here is when to book a table, when to just walk in, and how Berlin restaurants actually take bookings.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "food-nightlife",
+      "topicLabel": "Food & Nightlife",
+      "readTime": "5 min read",
+      "publishedDate": "2026-08-21T13:50:47.742Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_1e6e9543b4f34bcc807d9b26d0b0b4c8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kudamm-terrace-cafes.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_1e6e9543b4f34bcc807d9b26d0b0b4c8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kudamm-terrace-cafes.jpg",
+      "alt": "Pavement cafes with white umbrellas and diners along the Kurfurstendamm in Berlin on a sunny day",
+      "relatedToolSlug": ""
+    },
     {
       "title": "Madame Tussauds, the Dungeon and Legoland: Which Berlin Attractions Are Worth It?",
       "slug": "berlin-attractions-worth-it",
@@ -53,7 +70,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_8f1bc4dfd5f54dfda3cafd51e4d72e59~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-brandenburg-gate-pariser-platz.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_8f1bc4dfd5f54dfda3cafd51e4d72e59~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-brandenburg-gate-pariser-platz.jpg",
       "alt": "Crowds and a costumed photo tout in front of the Brandenburg Gate on Pariser Platz",
-      "relatedToolSlug": "brandenburg-gate-food-escape"
+      "relatedToolSlug": ""
     },
     {
       "title": "Vintage Shopping in Berlin: Where to Find the Good Stuff",
@@ -104,7 +121,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_e96deaa0c27a4c27a6541845074b6642~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-dussmann-exterior.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_e96deaa0c27a4c27a6541845074b6642~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-dussmann-exterior.jpg",
       "alt": "Dussmann KulturKaufhaus exterior on Friedrichstraße in Berlin",
-      "relatedToolSlug": "berlin-reading-stop-line"
+      "relatedToolSlug": "berlin-shopping-areas"
     },
     {
       "title": "Berlin Botanic Garden: Is It Worth the Trip From Mitte?",
@@ -121,7 +138,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_4bf46a90ba4b49bf8a680ced300ea456~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-tropical-house-exterior.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_4bf46a90ba4b49bf8a680ced300ea456~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-tropical-house-exterior.jpg",
       "alt": "The Great Tropical House at Berlin Botanic Garden seen from the garden",
-      "relatedToolSlug": "berlin-plant-passport"
+      "relatedToolSlug": ""
     },
     {
       "title": "Berlin Opera for First-Time Visitors: Which House Fits Your Evening?",
@@ -138,7 +155,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_c9cf541cc0594fa8a18c583efa2001d1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-staatsoper-cover.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_c9cf541cc0594fa8a18c583efa2001d1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-staatsoper-cover.jpg",
       "alt": "Frontal view of Staatsoper Unter den Linden on Berlin's historic boulevard",
-      "relatedToolSlug": "berlin-opera-house-reader"
+      "relatedToolSlug": "berlin-first-day-planner"
     },
     {
       "title": "Berlin Brutalist Architecture: Four Concrete Buildings Worth a Detour",
@@ -155,7 +172,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_bc566f0216b747b3861c80fc2683103c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-maeusebunker.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_bc566f0216b747b3861c80fc2683103c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-maeusebunker.jpg",
       "alt": "The wedge-shaped Mäusebunker research building in Berlin-Lichterfelde, with its projecting ventilation tubes",
-      "relatedToolSlug": "berlin-concrete-clue-chain"
+      "relatedToolSlug": ""
     },
     {
       "title": "How to Read a Berlin Address: Street Names, House Numbers and the Clues That Get You There",
@@ -172,7 +189,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_47824af90c004d359df32ab3b0eb322e~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-address-cover.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_47824af90c004d359df32ab3b0eb322e~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-address-cover.jpg",
       "alt": "A visitor checks a map and phone near Alexanderplatz, with Berlin's TV Tower in the background",
-      "relatedToolSlug": "berlin-address-compass"
+      "relatedToolSlug": ""
     },
     {
       "title": "Cash-Only Restaurants in Berlin: A Food-Day Payment Plan for Visitors",
@@ -189,7 +206,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_2dfc59724f244e35bfe4d86ba01204ce~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-meal-wallet-hero.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_2dfc59724f244e35bfe4d86ba01204ce~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-meal-wallet-hero.jpg",
       "alt": "A visitor checking wallet options beside a meal in a Berlin-style café",
-      "relatedToolSlug": "berlin-meal-wallet"
+      "relatedToolSlug": "berlin-daily-budget"
     },
     {
       "title": "Why Are There Pink Pipes in Berlin? A First Visitor's Guide",
@@ -206,7 +223,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_64b4f5724c384aeaa708b2be7bcc8955~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-modersohnstrasse-pink-pipes.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_64b4f5724c384aeaa708b2be7bcc8955~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-modersohnstrasse-pink-pipes.jpg",
       "alt": "A raised temporary pink pipe running beside a construction site in Friedrichshain",
-      "relatedToolSlug": "berlin-pink-pipe-decoder"
+      "relatedToolSlug": ""
     },
     {
       "title": "Berlin Spy Museum: Is It Worth Your Time on a First Visit?",
@@ -223,7 +240,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_6264fdbbee424906a8b517c2baac902a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-spy-museum-exterior.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_6264fdbbee424906a8b517c2baac902a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-spy-museum-exterior.jpg",
       "alt": "The entrance to the German Spy Museum at Leipziger Platz in Berlin",
-      "relatedToolSlug": "berlin-spy-museum-mission-match"
+      "relatedToolSlug": ""
     },
     {
       "title": "Berlin With Parents: A Calm Historic-Centre Day Without the Rushed Checklist",
@@ -240,7 +257,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_93b5df72f94a42e8b55a27c72dbd4197~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-alexanderplatz-world-clock-wide.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_93b5df72f94a42e8b55a27c72dbd4197~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-alexanderplatz-world-clock-wide.jpg",
       "alt": "The World Time Clock at Alexanderplatz with the Fernsehturm behind it",
-      "relatedToolSlug": "berlin-pace-passport"
+      "relatedToolSlug": ""
     },
     {
       "title": "Berlin Weekend with a Friday Night Arrival: A Plan That Starts Small",
@@ -325,7 +342,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_12b76c3e948943b481006495e988fa1c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-people-alexanderplatz.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_12b76c3e948943b481006495e988fa1c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-people-alexanderplatz.jpg",
       "alt": "People crossing Alexanderplatz with the TV Tower behind them, a typical starting point for a Berlin walking day",
-      "relatedToolSlug": "berlin-walking-kit"
+      "relatedToolSlug": "best-month-to-visit-berlin"
     },
     {
       "title": "Travelling Alone in Berlin: Pick the Right Area for Your Solo Day",
@@ -342,7 +359,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_b0635599b6774af98722ea6926cc9559~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-alexanderplatz-night-tram.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_b0635599b6774af98722ea6926cc9559~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-alexanderplatz-night-tram.jpg",
       "alt": "Alexanderplatz at night with a moving tram, a useful first anchor when you are travelling alone in Berlin",
-      "relatedToolSlug": "berlin-solo-day-path"
+      "relatedToolSlug": "berlin-safety"
     },
     {
       "title": "Private Berlin Tour for Groups: Build the Right Berlin Day",
@@ -359,7 +376,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_e02189b723b1481389f23f9dd8ff703d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-altes-museum-guide-cover.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_e02189b723b1481389f23f9dd8ff703d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-altes-museum-guide-cover.jpg",
       "alt": "BerlinWalk guide speaking with guests outside the Altes Museum on Museum Island",
-      "relatedToolSlug": "berlin-private-route-brief"
+      "relatedToolSlug": ""
     },
     {
       "title": "Berlin Itinerary for Couples: Build One Day Around Two Different Interests",
@@ -427,7 +444,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_717947ab3eff4a4584fd9a6c71735cc7~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_717947ab3eff4a4584fd9a6c71735cc7~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island.jpg",
       "alt": "Museum Island and Berlin Cathedral beside the Spree",
-      "relatedToolSlug": "berlin-museum-three-slot-builder"
+      "relatedToolSlug": "berlin-first-day-planner"
     },
     {
       "title": "Where to Eat in Berlin by Neighbourhood: A Three-Night Dinner Plan",
@@ -5086,23 +5103,6 @@
       "thumb": "https://static.wixstatic.com/media/nsplsh_7a1723d95fbd40129e7e14039803ec91~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/people%20walking%20on%20street%20during%20daytime.jpg",
       "alt": "Guide speaking to a walking tour group near a historic European landmark",
       "relatedToolSlug": "berlin-tip-calculator"
-    },
-    {
-      "title": "Alexanderplatz Then and Now: From Medieval Market to Modern Chaos",
-      "slug": "alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos",
-      "path": "/post/alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos",
-      "url": "https://www.berlinwalk.com/post/alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos",
-      "excerpt": "Alexanderplatz then and now: how Berlin changed from medieval market edge to Weimar hub, GDR showcase, 1989 protest stage and modern chaos.",
-      "category": "Before & After",
-      "categorySlug": "before-after",
-      "topic": "history-myths",
-      "topicLabel": "Berlin History & Myths",
-      "readTime": "10 min read",
-      "publishedDate": "2026-02-26T14:43:48.550Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_d800723c43a94bf2ace1623c83b07f1c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Markt-auf-dem-Alexanderplatz-1889_edited.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_d800723c43a94bf2ace1623c83b07f1c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Markt-auf-dem-Alexanderplatz-1889_edited.jpg",
-      "alt": "Alexanderplatz photo in 1889",
-      "relatedToolSlug": "medieval-berlin-mini-walk"
     }
   ]
 }
