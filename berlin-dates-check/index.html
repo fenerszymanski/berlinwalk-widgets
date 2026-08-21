@@ -972,6 +972,32 @@
     } catch (e) { return {}; }
   }
 
+  function reducedMotion() {
+    return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }
+
+  function revealResult(stage) {
+    if (!stage) return;
+    var behavior = reducedMotion() ? 'auto' : 'smooth';
+    if (window.parent === window) {
+      stage.scrollIntoView({ behavior: behavior, block: 'start' });
+      return;
+    }
+    // This frame grows to its full content height after a result renders. A
+    // child-window scroll is therefore clamped back to zero during that resize.
+    // Give the route-specific Wix helper the stable document-space offset and
+    // let the parent own the one post-resize scroll instead.
+    var resultOffset = Math.max(0, Math.round(stage.getBoundingClientRect().top + window.scrollY));
+    try {
+      window.parent.postMessage({
+        type: 'bw-date-check-scroll-to-result',
+        src: 'berlin-dates-check',
+        resultOffset: resultOffset,
+        behavior: behavior
+      }, '*');
+    } catch (e) {}
+  }
+
   // ---------------------------------------------------------------------
   // compute + render full result
   // ---------------------------------------------------------------------
@@ -1035,7 +1061,7 @@
     stage.classList.add('is-visible');
     trackEvent('bw_lead_asset_experiment_view');
     trackEvent('bw_lead_asset_gate_view');
-    if (!options || options.scroll !== false) stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (!options || options.scroll !== false) revealResult(stage);
 
     loadTourAvailability(arrivalStr, nights).then(function (tourResult) {
       renderTourBlock(tourResult, days);
