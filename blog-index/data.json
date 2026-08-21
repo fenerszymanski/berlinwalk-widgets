@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-21T02:06:56.523Z",
+  "updatedAt": "2026-08-21T07:53:09.462Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 300,
@@ -1617,6 +1617,23 @@
   ],
   "latest": [
     {
+      "title": "Madame Tussauds, the Dungeon and Legoland: Which Berlin Attractions Are Worth It?",
+      "slug": "berlin-attractions-worth-it",
+      "path": "/post/berlin-attractions-worth-it",
+      "url": "https://www.berlinwalk.com/post/berlin-attractions-worth-it",
+      "excerpt": "An honest local take on whether Berlin's paid attractions are worth it: Madame Tussauds, the Berlin Dungeon and LEGOLAND Discovery Centre, who each one suits, and the two that closed for good in 2024.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-08-21T07:50:14.608Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_c3487d418bd84fd1b361bc92522f2d30~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-unter-den-linden.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_c3487d418bd84fd1b361bc92522f2d30~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-unter-den-linden.jpg",
+      "alt": "The Brandenburg Gate seen from Unter den Linden in central Berlin under a blue sky",
+      "relatedToolSlug": ""
+    },
+    {
       "title": "How to Watch Films in English in Berlin",
       "slug": "watch-films-in-english-in-berlin",
       "path": "/post/watch-films-in-english-in-berlin",
@@ -1802,26 +1819,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_64b4f5724c384aeaa708b2be7bcc8955~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-modersohnstrasse-pink-pipes.jpg",
       "alt": "A raised temporary pink pipe running beside a construction site in Friedrichshain",
       "relatedToolSlug": "berlin-pink-pipe-decoder"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Berlin Spy Museum: Is It Worth Your Time on a First Visit?",
-      "slug": "berlin-spy-museum-worth-it",
-      "path": "/post/berlin-spy-museum-worth-it",
-      "url": "https://www.berlinwalk.com/post/berlin-spy-museum-worth-it",
-      "excerpt": "Is the Berlin Spy Museum worth your time? Decide whether its hands-on experience at Potsdamer Platz fits your first Berlin visit, or whether a real historic site is the better move.",
+      "title": "Madame Tussauds, the Dungeon and Legoland: Which Berlin Attractions Are Worth It?",
+      "slug": "berlin-attractions-worth-it",
+      "path": "/post/berlin-attractions-worth-it",
+      "url": "https://www.berlinwalk.com/post/berlin-attractions-worth-it",
+      "excerpt": "An honest local take on whether Berlin's paid attractions are worth it: Madame Tussauds, the Berlin Dungeon and LEGOLAND Discovery Centre, who each one suits, and the two that closed for good in 2024.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "practical",
       "topicLabel": "Practical Berlin",
-      "readTime": "3 min read",
-      "publishedDate": "2026-08-17T09:53:54.636Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_6264fdbbee424906a8b517c2baac902a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-spy-museum-exterior.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_6264fdbbee424906a8b517c2baac902a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-spy-museum-exterior.jpg",
-      "alt": "The entrance to the German Spy Museum at Leipziger Platz in Berlin",
-      "relatedToolSlug": "berlin-spy-museum-mission-match"
-    }
-  ],
-  "allPosts": [
+      "readTime": "6 min read",
+      "publishedDate": "2026-08-21T07:50:14.608Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_c3487d418bd84fd1b361bc92522f2d30~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-unter-den-linden.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_c3487d418bd84fd1b361bc92522f2d30~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-unter-den-linden.jpg",
+      "alt": "The Brandenburg Gate seen from Unter den Linden in central Berlin under a blue sky",
+      "relatedToolSlug": ""
+    },
     {
       "title": "How to Watch Films in English in Berlin",
       "slug": "watch-films-in-english-in-berlin",
@@ -6904,23 +6921,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_d800723c43a94bf2ace1623c83b07f1c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Markt-auf-dem-Alexanderplatz-1889_edited.jpg",
       "alt": "Alexanderplatz photo in 1889",
       "relatedToolSlug": "medieval-berlin-mini-walk"
-    },
-    {
-      "title": "The Humboldt Forum: Berlin's Most Controversial Building",
-      "slug": "the-humboldt-forum-berlin-s-most-controversial-building",
-      "path": "/post/the-humboldt-forum-berlin-s-most-controversial-building",
-      "url": "https://www.berlinwalk.com/post/the-humboldt-forum-berlin-s-most-controversial-building",
-      "excerpt": "Why the Humboldt Forum is Berlin's most controversial building: palace reconstruction, Palast der Republik memory, colonial collections, tickets, roof terrace and what to see.",
-      "category": "Tour Route",
-      "categorySlug": "tour-route",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "8 min read",
-      "publishedDate": "2026-02-26T14:38:12.744Z",
-      "image": "https://static.wixstatic.com/media/nsplsh_4d8cbfe279ae44afafc90bd121d63210~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Humboldt%20Forum%20Building%2C%20Berlin%2C%20Germany.%20History_%20East%20Germans%20later%20demolished%20Humboldt%20Forum%2C%20a%2015th-century%20royal%20and%20imperial%20palace%20in.jpg",
-      "thumb": "https://static.wixstatic.com/media/nsplsh_4d8cbfe279ae44afafc90bd121d63210~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Humboldt%20Forum%20Building%2C%20Berlin%2C%20Germany.%20History_%20East%20Germans%20later%20demolished%20Humboldt%20Forum%2C%20a%2015th-century%20royal%20and%20imperial%20palace%20in.jpg",
-      "alt": "humboldt forum berlin",
-      "relatedToolSlug": ""
     }
   ]
 }
