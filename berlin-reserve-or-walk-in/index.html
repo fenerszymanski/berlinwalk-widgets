@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Berlin: Reserve or Just Walk In?</title>
+<meta name="description" content="Do you need to book a table in Berlin, or can you just show up? Pick the size of your group, the night and the type of place, and get a clear reserve-or-walk-in call, plus how that kind of Berlin restaurant actually takes bookings." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='32' r='19' fill='%23FFE600'/%3E%3Cpath d='M24 21h16M24 29h16M24 37h10' stroke='%231B5E20' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-dark:#123D18; --green-mid:#2E7D32;
+    --lime:#7CB342; --light:#C5E1A5; --yellow:#FFE600;
+    --cream:#FAFAF5; --ink:#212121; --muted:#4b584b;
+    --line:#E3E8DC; --panel:#F4F7F0;
+    --walk:#1B5E20; --same:#2E7D32; --few:#B26A00; --weeks:#8E2C2C;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .wrap{max-width:680px;margin:0 auto;padding:4px 14px 20px}
+  .card{background:var(--cream);border:1px solid var(--line);border-radius:18px;padding:20px 16px;box-shadow:0 10px 30px rgba(18,61,24,.06)}
+  .kicker{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-mid);margin:0 0 6px}
+  h1{font-size:22px;font-weight:800;line-height:1.16;margin:0 0 8px;color:var(--green-dark)}
+  .lede{font-size:15px;color:var(--muted);margin:0 0 12px}
+  .context{font-size:12.5px;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--lime);border-radius:10px;padding:9px 12px;margin:0 0 18px;line-height:1.45}
+
+  .q{margin:0 0 14px}
+  .q-label{font-weight:800;font-size:13.5px;color:var(--green-dark);margin:0 0 8px}
+  .pills{display:flex;flex-wrap:wrap;gap:8px}
+  .pill{appearance:none;border:2px solid var(--line);background:#fff;border-radius:999px;padding:9px 13px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;color:var(--green-dark);transition:border-color .15s,background .15s,color .15s,transform .05s;flex:1 1 auto;min-width:0;text-align:center}
+  .pill small{display:block;font-size:10.5px;font-weight:600;color:var(--muted);margin-top:2px}
+  .pill:hover{border-color:var(--lime)}
+  .pill:active{transform:translateY(1px)}
+  .pill.sel{border-color:var(--green);background:var(--green);color:#fff}
+  .pill.sel small{color:#dcefd2}
+
+  .verdict{margin:18px 0 4px;border-radius:16px;padding:0;overflow:hidden;border:1px solid var(--line);background:#fff;box-shadow:0 6px 18px rgba(27,94,32,.07)}
+  .vhead{padding:15px 16px;color:#fff}
+  .vhead.walk{background:var(--walk)}
+  .vhead.same{background:var(--same)}
+  .vhead.few{background:var(--few)}
+  .vhead.weeks{background:var(--weeks)}
+  .vtag{font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;opacity:.9;display:block;margin-bottom:3px}
+  .vtitle{font-size:19px;font-weight:800;margin:0;line-height:1.15}
+  .vbody{padding:14px 16px 15px}
+  .reason{font-size:14.5px;color:#2b352f;margin:0 0 12px;line-height:1.5}
+  .reason b{color:var(--green-dark)}
+  .howto{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--lime);border-radius:10px;padding:11px 13px;margin:0}
+  .howto .ht-label{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green-mid);margin:0 0 4px}
+  .howto p{font-size:13.5px;color:#33403a;margin:0;line-height:1.5}
+  .extra{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column;gap:7px}
+  .extra li{font-size:13px;color:#33403a;line-height:1.45;padding-left:20px;position:relative}
+  .extra li::before{content:"→";position:absolute;left:0;top:0;color:var(--green-mid);font-weight:800}
+
+  .placeholder{margin:18px 0 4px;border:1px dashed var(--line);border-radius:14px;padding:20px 16px;text-align:center;color:var(--muted);font-size:14px;background:#fff}
+  .foot{font-size:12px;color:var(--muted);margin-top:16px;border-top:1px dashed var(--line);padding-top:12px;line-height:1.45}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <p class="kicker">BerlinWalk Tool</p>
+    <h1>Berlin: Reserve or Just Walk In?</h1>
+    <p class="lede">The honest default in Berlin is that you can just turn up. But a handful of situations flip that. Tell me your table and I will give you a clear call, plus how that kind of place actually takes bookings.</p>
+
+    <p class="context">Most neighbourhood restaurants and every Imbiss are walk-in by nature. Booking matters for big groups, buzzy names, special meals, warm-evening terraces and Sundays.</p>
+
+    <div class="q">
+      <p class="q-label">1. How big is your table?</p>
+      <div class="pills" id="sizePills">
+        <button class="pill" data-size="solo">1&ndash;2<small>solo or a couple</small></button>
+        <button class="pill" data-size="small">3&ndash;4<small>small group</small></button>
+        <button class="pill" data-size="big">5 or more<small>big group</small></button>
+      </div>
+    </div>
+
+    <div class="q">
+      <p class="q-label">2. When are you eating?</p>
+      <div class="pills" id="whenPills">
+        <button class="pill" data-when="lunch">Lunch<small>any day</small></button>
+        <button class="pill" data-when="weeknight">Weeknight<small>Mon&ndash;Thu</small></button>
+        <button class="pill" data-when="weekend">Fri or Sat night<small>the busy slots</small></button>
+        <button class="pill" data-when="sunday">Sunday<small>fewer places open</small></button>
+      </div>
+    </div>
+
+    <div class="q">
+      <p class="q-label">3. What kind of place?</p>
+      <div class="pills" id="placePills">
+        <button class="pill" data-place="casual">Casual &amp; Imbiss<small>d&ouml;ner, ramen, neighbourhood spots</small></button>
+        <button class="pill" data-place="popular">Buzzy &amp; trendy<small>the name everyone names</small></button>
+        <button class="pill" data-place="special">Special or fine dining<small>a proper occasion</small></button>
+        <button class="pill" data-place="outdoor">Beer garden or terrace<small>outdoor in summer</small></button>
+      </div>
+    </div>
+
+    <div id="output">
+      <div class="placeholder" id="placeholder">Pick one from each row and your verdict appears here.</div>
+    </div>
+
+    <p class="foot">A guide's rule of thumb, not a guarantee. When you truly must eat at one specific place at one specific time, booking is always the safe move.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var state = { size:null, when:null, place:null };
+
+  // Tier scale: 1 = just walk in, 2 = reserve same day, 3 = book 2-3 days, 4 = book 1-2 weeks
+  var TIERS = {
+    1: { cls:'walk',  tag:'The Berlin default', title:'Just walk in' },
+    2: { cls:'same',  tag:'A light touch',       title:'Reserve the same day' },
+    3: { cls:'few',   tag:'Plan a little',       title:'Book 2–3 days ahead' },
+    4: { cls:'weeks', tag:'Plan properly',       title:'Book 1–2 weeks ahead' }
+  };
+
+  function baseTier(place){
+    return { casual:1, outdoor:1, popular:2, special:3 }[place];
+  }
+
+  // How-to-book note by place type
+  function howto(place){
+    switch(place){
+      case 'casual':  return "Most casual Berlin spots and every Imbiss take no bookings at all. You turn up. Have a second option on the same street in case the first is full.";
+      case 'popular': return "Buzzy places usually book through their own website, OpenTable or Quandoo. If there is no online link, a short phone call the same afternoon almost always lands a table.";
+      case 'special': return "Destination kitchens open reservations weeks out and fill fast. Book online the moment you know your date; a few ask for a card to hold the table.";
+      case 'outdoor': return "Beer gardens are first-come by design, so arrive early on a warm evening. Canal-side and rooftop terraces that do take bookings are worth reserving the moment the sun is out.";
+    }
+  }
+
+  function compute(){
+    var s = state.size, w = state.when, p = state.place;
+    var tier = baseTier(p);
+    var notes = [];
+
+    // WHEN adjustments
+    if(w === 'lunch'){
+      // lunch is the easy slot almost everywhere
+      if(p === 'special') tier = Math.min(tier, 2);
+      else if(p === 'popular') tier = Math.min(tier, 1);
+    }
+    if(w === 'weekend'){
+      // Friday and Saturday nights are the pressure point
+      if(p === 'popular') tier = Math.max(tier, 3);
+      if(p === 'special') tier = Math.max(tier, 4);
+      if(p === 'outdoor') tier = Math.max(tier, 2);
+    }
+    if(w === 'sunday'){
+      notes.push("On a Sunday, check the place is even open before you set out. Fewer kitchens run, and the ones that do fill up for brunch and late lunch.");
+      if(p === 'popular') tier = Math.max(tier, 3);
+      if(p === 'special') tier = Math.max(tier, 3);
+    }
+
+    // SIZE adjustments
+    if(s === 'small'){
+      if(p === 'popular' || p === 'outdoor') tier = Math.max(tier, 2);
+    }
+    if(s === 'big'){
+      // Five or more is the single biggest reason to book anywhere in Berlin
+      tier = Math.max(tier, 3);
+      if(p === 'special') tier = Math.max(tier, 4);
+      notes.push("For 5 or more, call or email the restaurant directly, even where online booking exists. Large tables are limited and rarely bookable through an app.");
+    }
+
+    tier = Math.max(1, Math.min(4, tier));
+    return { tier: tier, notes: notes };
+  }
+
+  function reasonLine(tier, p, w, s){
+    if(tier === 1){
+      if(p === 'outdoor') return "A beer garden or terrace runs first-come, so a reservation is beside the point. <b>Just show up</b> and grab a bench; come early if the weather is good.";
+      return "This is exactly the Berlin table you do not need to plan. <b>Walk in</b>, and keep a backup nearby if it happens to be full.";
+    }
+    if(tier === 2){
+      return "You are close to walk-in territory, but this combination gets busy. A <b>quick same-day reservation</b>, even a phone call an hour before, saves you the wait or the wander.";
+    }
+    if(tier === 3){
+      if(s === 'big') return "Five or more people is hard to seat on the spot anywhere in Berlin. <b>Book two or three days ahead</b> so the kitchen can hold a proper table.";
+      return "For this place at this time, tables go. <b>Book two or three days ahead</b> and you walk straight in while others queue.";
+    }
+    return "This is the one combination Berlin genuinely rewards planning for. <b>Book one to two weeks ahead</b>; the best rooms on a weekend are gone long before the day.";
+  }
+
+  function render(){
+    var out = document.getElementById('output');
+    if(!state.size || !state.when || !state.place){
+      out.innerHTML = '<div class="placeholder" id="placeholder">Pick one from each row and your verdict appears here.</div>';
+      return;
+    }
+    var r = compute();
+    var t = TIERS[r.tier];
+    var extra = r.notes.map(function(n){ return '<li>'+n+'</li>'; }).join('');
+    out.innerHTML =
+      '<div class="verdict">'
+      + '<div class="vhead '+t.cls+'"><span class="vtag">'+t.tag+'</span><p class="vtitle">'+t.title+'</p></div>'
+      + '<div class="vbody">'
+      + '<p class="reason">'+reasonLine(r.tier, state.place, state.when, state.size)+'</p>'
+      + '<div class="howto"><p class="ht-label">How this kind of place books in Berlin</p><p>'+howto(state.place)+'</p></div>'
+      + (extra ? '<ul class="extra">'+extra+'</ul>' : '')
+      + '</div></div>';
+  }
+
+  function wire(id, key){
+    document.getElementById(id).addEventListener('click', function(e){
+      var btn = e.target.closest('.pill'); if(!btn) return;
+      state[key] = btn.getAttribute('data-'+key);
+      [].forEach.call(this.querySelectorAll('.pill'), function(p){ p.classList.remove('sel'); });
+      btn.classList.add('sel');
+      render();
+    });
+  }
+  wire('sizePills','size');
+  wire('whenPills','when');
+  wire('placePills','place');
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
