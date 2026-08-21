@@ -379,18 +379,18 @@
     </section>
     <section>
       <div class="gate" id="gate">
-        <h2 id="gateHeading">Keep the deadlines that are still ahead</h2>
+        <h2 id="gateHeading">Take the useful links with you</h2>
         <p class="gate-stake" id="gateStake"></p>
-        <p class="lede" id="gateLede">I will send this exact list now, then only the reminders still ahead of your trip.</p>
+        <p class="lede" id="gateLede">It arrives as one phone-friendly email, separate from the result above.</p>
         <form id="gateForm" novalidate>
           <div class="gate-row">
             <input type="email" id="gateEmail" name="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required>
-            <button type="submit" id="gateSubmit">Send my Berlin date plan</button>
+            <button type="submit" id="gateSubmit">Send my Berlin Dates Pack</button>
           </div>
           <div class="honeypot"><label>Website<input type="text" name="website" id="gateWebsite" tabindex="-1" autocomplete="off"></label></div>
           <label class="consent">
             <input type="checkbox" id="gateConsent" required>
-            <span>Send me my dated Berlin plan and the short reminders still ahead of my trip. I can unsubscribe any time. <a href="https://www.berlinwalk.com/privacy-policy" target="_top">Privacy Policy.</a></span>
+            <span>Send me my Berlin Dates Pack and occasional BerlinWalk emails with Berlin travel tips and offers. I can unsubscribe any time. <a href="https://www.berlinwalk.com/privacy-policy" target="_top">Privacy Policy.</a></span>
           </label>
           <p class="gate-status" id="gateStatus" role="status" aria-live="polite"></p>
         </form>
@@ -437,7 +437,7 @@
   var AVAILABILITY_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/booking-calendar-availability';
   var ASSET_ID = 'berlin-date-check';
   var EXPERIMENT_ID = 'berlin_date_check_v1';
-  var CONSENT_VERSION = 'berlin-date-check-v1-2026-08-20';
+  var CONSENT_VERSION = 'berlin-date-check-pack-v1-2026-08-21';
   var SOURCE_SLUG = 'berlin-dates-check';
 
   var root = document.getElementById('bw-date-check');
@@ -495,6 +495,22 @@
     var p = partsOf(dateStr);
     return new Date(Date.UTC(p[0], p[1] - 1, p[2], 12))
       .toLocaleDateString('en-GB', { day: 'numeric', month: style === 'short' ? 'short' : 'long', timeZone: 'UTC' });
+  }
+
+  function fmtCompactTripRange(firstStr, lastStr) {
+    var first = partsOf(firstStr), last = partsOf(lastStr);
+    function monthName(dateStr) {
+      var p = partsOf(dateStr);
+      return new Date(Date.UTC(p[0], p[1] - 1, p[2], 12)).toLocaleDateString('en-GB', { month: 'long', timeZone: 'UTC' });
+    }
+    if (firstStr === lastStr) return first[2] + ' ' + monthName(firstStr) + ' ' + first[0];
+    if (first[0] === last[0] && first[1] === last[1]) {
+      return first[2] + '–' + last[2] + ' ' + monthName(lastStr) + ' ' + last[0];
+    }
+    if (first[0] === last[0]) {
+      return first[2] + ' ' + monthName(firstStr) + '–' + last[2] + ' ' + monthName(lastStr) + ' ' + last[0];
+    }
+    return first[2] + ' ' + monthName(firstStr) + ' ' + first[0] + '–' + last[2] + ' ' + monthName(lastStr) + ' ' + last[0];
   }
 
   function weekdayShort(dateStr) {
@@ -629,7 +645,7 @@
   // ---------------------------------------------------------------------
   // Each item's threshold is a number of days before arrival, so it resolves to
   // a real calendar date. Showing that date (rather than only "you are N days
-  // out") is what makes the reminder worth an email: the visitor can read the
+  // out") is what makes the dated schedule useful: the visitor can read the
   // page today, but cannot act on 20 September until 20 September.
   function deadlineSchedule(arrivalStr, todayStrVal, arrivalMonth, items) {
     return items.map(function (it) {
@@ -655,7 +671,7 @@
     if (!urgent.length) {
       var weeks = Math.round(daysUntilArrival / 7);
       var distance = daysUntilArrival <= 13 ? (daysUntilArrival + ' days out') : (weeks + ' weeks out');
-      return { flag: false, text: 'You are ' + distance + '. Nothing is urgent yet, but I will remind you when it is.', urgentIds: [] };
+      return { flag: false, text: 'You are ' + distance + '. Nothing is urgent yet; the comfortable windows are listed below.', urgentIds: [] };
     }
     var top = urgent[0];
     // The dated schedule below already lists every window that is still
@@ -864,7 +880,7 @@
     var form = document.getElementById('gateForm');
     if (!gate || !heading || !form) return false;
     gate.classList.add('is-complete', 'is-hydrated');
-    heading.textContent = 'Your Berlin date plan is in your inbox. If it is missing, check Spam or Promotions.';
+    heading.textContent = 'Your Berlin Dates Pack is in your inbox. If it is missing, check Spam or Promotions.';
     if (stake) stake.hidden = true;
     if (lede) lede.hidden = true;
     form.hidden = true;
@@ -882,33 +898,37 @@
     if (form) form.hidden = false;
   }
 
-  function applyGateCopy(schedule) {
+  function applyGateCopy() {
     if (showHydratedGateStatus()) return;
     var heading = document.getElementById('gateHeading');
     var stake = document.getElementById('gateStake');
     var lede = document.getElementById('gateLede');
     if (!lede) return;
-    var upcoming = schedule.filter(function (item) { return item.state === 'upcoming'; });
-    var steps = [];
-    if (STATE.daysUntilArrival >= 21) steps.push('three weeks out');
-    if (STATE.daysUntilArrival >= 7) steps.push('one week out');
-    if (STATE.daysUntilArrival >= 3) steps.push('three days out');
-    steps.push('your first morning');
-    var cadence = steps.length === 1
-      ? steps[0]
-      : steps.slice(0, -1).join(', ') + ' and ' + steps[steps.length - 1];
-    if (heading) heading.textContent = 'Keep the deadlines that are still ahead';
-    if (upcoming.length) {
-      if (stake) {
-        stake.textContent = 'Your next comfortable booking deadline is ' + fmtDeadlineDate(upcoming[0].dateStr)
-          + '. I will send this exact list now, then only the reminders still ahead of your trip.';
-      }
-    } else if (stake) {
-      stake.textContent = 'Your comfortable booking windows are already open. I will send this exact list now, then one short first-morning check.';
+    var holidayDates = {};
+    (DATA.holidays || []).forEach(function (holiday) { holidayDates[holiday.date] = true; });
+    var hasMonday = STATE.days.some(function (day) { return weekdayLong(day) === 'Monday'; });
+    var hasNonHolidaySunday = STATE.days.some(function (day) {
+      return weekdayLong(day) === 'Sunday' && !holidayDates[day];
+    });
+    var hasPublicHoliday = STATE.days.some(function (day) { return !!holidayDates[day]; });
+    var backupLabels = [];
+    if (hasMonday) backupLabels.push('Monday');
+    if (hasNonHolidaySunday) backupLabels.push('Sunday');
+    if (hasPublicHoliday) backupLabels.push('public-holiday');
+    if (heading) heading.textContent = 'Take the useful links with you';
+    if (stake) {
+      stake.textContent = "For " + fmtCompactTripRange(STATE.arrivalStr, STATE.days[STATE.days.length - 1])
+        + ", I will send four official booking pages and Berlin.de's event calendar already filtered to your stay.";
     }
-    lede.textContent = steps.length === 1
-      ? 'The remaining reminder is timed for ' + cadence + '.'
-      : 'The remaining reminders are timed for ' + cadence + '.';
+    if (!backupLabels.length) {
+      lede.textContent = 'It arrives as one phone-friendly email, separate from the result above.';
+    } else if (backupLabels.length === 1) {
+      lede.textContent = 'I will also add ' + backupLabels[0] + ' backups with Maps links.';
+    } else if (backupLabels.length === 2) {
+      lede.textContent = 'I will also add ' + backupLabels[0] + ' and ' + backupLabels[1] + ' backups with Maps links.';
+    } else {
+      lede.textContent = 'I will also add ' + backupLabels[0] + ', ' + backupLabels[1] + ' and ' + backupLabels[2] + ' backups with Maps links.';
+    }
   }
 
   // ---------------------------------------------------------------------
@@ -1000,7 +1020,7 @@
     var schedule = deadlineSchedule(arrivalStr, today, arrivalMonth, DATA.bookingDeadlines);
     STATE.deadlineSchedule = schedule;
     renderDeadlineSchedule(readingsEl, schedule);
-    applyGateCopy(schedule);
+    applyGateCopy();
 
     document.getElementById('lightLabel').textContent = 'Light on ' + weekdayLong(arrivalStr);
     document.getElementById('lightHours').textContent = light.hours + ' H';
@@ -1237,11 +1257,11 @@
         consent.disabled = true;
         button.hidden = true;
         status.className = 'gate-status is-success';
-        status.textContent = 'Check your inbox. Your Berlin date plan or confirmation link should arrive in a few minutes. If you do not see it, check Spam or Promotions.';
+        status.textContent = 'Check your inbox. Your Berlin Dates Pack or confirmation link should arrive in a few minutes. Check Spam or Promotions too.';
         trackEvent('bw_lead_asset_submit', { placement: 'gate' });
       }).catch(function () {
         button.disabled = false;
-        button.textContent = 'Send my Berlin date plan';
+        button.textContent = 'Send my Berlin Dates Pack';
         status.className = 'gate-status is-error';
         status.textContent = 'That did not go through. Please try again.';
       }).finally(function () {
