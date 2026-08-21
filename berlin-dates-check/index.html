@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Berlin Date Check</title>
-<meta name="description" content="Tell me your Berlin arrival date and I will show you what closes, what needs booking, and how much daylight you get. No email needed to see it.">
+<meta name="description" content="Enter your Berlin arrival date to see closures, booking deadlines and daylight that can change your trip.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap">
@@ -79,6 +79,8 @@
   #bw-date-check .hero-copy .kicker { font-family: var(--f-mono); font-size: 11px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--yellow); }
   #bw-date-check .hero-copy h1 { color: #fff; font-size: clamp(44px, 5.2vw, 72px); line-height: .98; letter-spacing: -.032em; }
   #bw-date-check .hero-copy p { font-size: clamp(16px, 1.45vw, 19px); line-height: 1.55; color: rgba(255,255,255,.94); max-width: 30ch; }
+  #bw-date-check .hero-proof { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 0; padding: 0; list-style: none; max-width: 34rem; }
+  #bw-date-check .hero-proof li { border: 1px solid rgba(255,255,255,.58); color: rgba(255,255,255,.96); padding: 7px 10px; font-family: var(--f-mono); font-size: 10px; line-height: 1.3; letter-spacing: .04em; }
 
   #bw-date-check .hero-form-surface {
     display: flex; align-items: center; justify-content: center; padding: clamp(48px, 6vw, 88px) clamp(30px, 3.9vw, 58px);
@@ -205,6 +207,8 @@
   #bw-date-check .gate-status.is-error { color: var(--alert); }
   #bw-date-check .gate-status.is-success { color: var(--green); font-weight: 600; }
   #bw-date-check .gate.is-complete .gate-row, #bw-date-check .gate.is-complete .consent { display: none; }
+  #bw-date-check .gate.is-hydrated { gap: 0; }
+  #bw-date-check .gate.is-hydrated h2 { max-width: 38ch; }
 
   #bw-date-check .deadline-schedule .dl-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
   #bw-date-check .dl-row { display: grid; grid-template-columns: 78px 1fr auto; gap: 10px; align-items: baseline; padding: 7px 0; border-bottom: 1px solid var(--hair); }
@@ -262,6 +266,8 @@
     #bw-date-check .date-support-list { margin-top: 22px; }
     #bw-date-check .date-support-item { padding: 16px 0; }
     #bw-date-check .result-stage { padding: 34px 16px 54px; gap: 38px; }
+    #bw-date-check .stripwrap { overflow-x: visible; padding-bottom: 0; }
+    #bw-date-check .strip { grid-template-columns: repeat(auto-fit, minmax(74px, 1fr)); grid-auto-columns: auto; grid-auto-flow: row; gap: 7px; }
   }
   @media (max-width: 250px) {
     #bw-date-check .gate-row input[type="email"] { flex: 1 1 100%; width: 100%; min-width: 0; }
@@ -282,9 +288,13 @@
         <img class="hero-photo" id="heroPhoto" alt="">
         <div class="hero-scrim"></div>
         <div class="hero-copy">
-          <p class="kicker">Free &middot; no email to see it</p>
           <h1>What your Berlin dates actually mean</h1>
-          <p>Tell me when you arrive. I will show you what closes, what to book first, and whether my walking tour runs while you are here.</p>
+          <p>Enter your arrival date. I will show you the closures, booking deadlines and daylight that can change your trip.</p>
+          <ul class="hero-proof" aria-label="What this check covers">
+            <li>closures on your exact days</li>
+            <li>the last comfortable days to book</li>
+            <li>sunrise and sunset for your arrival</li>
+          </ul>
         </div>
       </div>
       <div class="hero-form-surface">
@@ -306,7 +316,6 @@
             </div>
           </div>
           <button type="submit" class="cta"><span>Check my dates</span><span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></button>
-          <p class="microcopy">No email needed to see the result.</p>
           <p class="err-line" id="inputError" role="alert"></p>
         </form>
       </div>
@@ -334,8 +343,8 @@
         <article class="date-support-item">
           <span class="material-symbols-outlined" aria-hidden="true">wb_twilight</span>
           <div>
-            <h3>Daylight + tour days</h3>
-            <p>Sunrise, sunset and my walking tour schedule on your dates.</p>
+            <h3>Daylight hours</h3>
+            <p>Sunrise and sunset for your arrival date.</p>
           </div>
         </article>
       </div>
@@ -370,18 +379,18 @@
     </section>
     <section>
       <div class="gate" id="gate">
-        <h2 id="gateHeading">Your dates, in your inbox, at the right moment</h2>
+        <h2 id="gateHeading">Keep the deadlines that are still ahead</h2>
         <p class="gate-stake" id="gateStake"></p>
-        <p class="lede" id="gateLede">I will send this summary to your inbox, then short emails timed to your trip. Nothing else.</p>
+        <p class="lede" id="gateLede">I will send this exact list now, then only the reminders still ahead of your trip.</p>
         <form id="gateForm" novalidate>
           <div class="gate-row">
             <input type="email" id="gateEmail" name="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required>
-            <button type="submit" id="gateSubmit">Email me these dates</button>
+            <button type="submit" id="gateSubmit">Send my Berlin date plan</button>
           </div>
           <div class="honeypot"><label>Website<input type="text" name="website" id="gateWebsite" tabindex="-1" autocomplete="off"></label></div>
           <label class="consent">
             <input type="checkbox" id="gateConsent" required>
-            <span>Send me this dated summary plus the short reminders timed to my trip. I can unsubscribe any time. <a href="https://www.berlinwalk.com/privacy-policy" target="_top">Privacy Policy.</a></span>
+            <span>Send me my dated Berlin plan and the short reminders still ahead of my trip. I can unsubscribe any time. <a href="https://www.berlinwalk.com/privacy-policy" target="_top">Privacy Policy.</a></span>
           </label>
           <p class="gate-status" id="gateStatus" role="status" aria-live="polite"></p>
         </form>
@@ -434,7 +443,7 @@
   var root = document.getElementById('bw-date-check');
   var DATA = null;
   var startedAt = new Date().toISOString();
-  var STATE = { arrivalStr: null, nights: 4, days: [], daysUntilArrival: null, resultFlags: [], tourSlotShown: false, tourSummary: null, readingTexts: {}, deadlineSchedule: null };
+  var STATE = { arrivalStr: null, nights: 4, days: [], daysUntilArrival: null, resultFlags: [], tourSlotShown: false, tourSummary: null, readingTexts: {}, deadlineSchedule: null, leadAssetStatus: '' };
 
   // ---------------------------------------------------------------------
   // date helpers (all date-string math done as Y-M-D strings to sidestep
@@ -463,6 +472,19 @@
     return Math.round((b - a) / 86400000);
   }
   function partsOf(dateStr) { return dateStr.split('-').map(Number); }
+  function isValidDateString(dateStr) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr || '')) return false;
+    var p = partsOf(dateStr);
+    var date = new Date(Date.UTC(p[0], p[1] - 1, p[2], 12));
+    return date.getUTCFullYear() === p[0] && date.getUTCMonth() === p[1] - 1 && date.getUTCDate() === p[2];
+  }
+  function inputDateBounds() {
+    var min = todayStr();
+    var maxDate = new Date();
+    maxDate.setFullYear(maxDate.getFullYear() + 3);
+    var max = maxDate.getFullYear() + '-' + pad2(maxDate.getMonth() + 1) + '-' + pad2(maxDate.getDate());
+    return { min: min, max: max };
+  }
   function weekdayLong(dateStr) {
     var p = partsOf(dateStr);
     return new Date(Date.UTC(p[0], p[1] - 1, p[2], 12)).toLocaleDateString('en-US', { weekday: 'long', timeZone: 'UTC' });
@@ -833,69 +855,60 @@
     container.appendChild(el);
   }
 
-  // The gate stops promising "three short emails" and starts naming the exact
-  // day the next deadline lands on. A generic promise is easy to skip; a dated
-  // one is the only way to get that reminder at the moment it matters.
-  function applyGateCopy(schedule) {
-    var lede = document.getElementById('gateLede');
-    if (!lede) return;
-    var upcoming = schedule.filter(function (i) { return i.state === 'upcoming'; });
-    var overdue = schedule.filter(function (i) { return i.state !== 'upcoming'; });
-    // The engine sends E1/E2/E3 at 21/7/3 days out and E4 on the arrival
-    // morning, skipping any step already in the past. Promise only what this
-    // particular lead will still receive.
-    var steps = [];
-    if (STATE.daysUntilArrival >= 21) steps.push('three weeks out');
-    if (STATE.daysUntilArrival >= 7) steps.push('a week out');
-    if (STATE.daysUntilArrival >= 3) steps.push('three days out');
-    steps.push('on your first morning');
-    var stepList = steps.length === 1
-      ? steps[0]
-      : steps.slice(0, -1).join(', ') + ' and ' + steps[steps.length - 1];
-    var WHAT_I_SEND = 'I will send you this dated list now, then remind you ' + stepList + '. Nothing else.';
+  function showHydratedGateStatus() {
+    if (STATE.leadAssetStatus !== 'confirmed' && STATE.leadAssetStatus !== 'sent') return false;
+    var gate = document.getElementById('gate');
     var heading = document.getElementById('gateHeading');
     var stake = document.getElementById('gateStake');
-    // The hook is deliberately NOT about the walking tour. This lead exists to
-    // build a list of people with a known arrival date; the tour is one of
-    // several things that list ever hears about. Hooking on the tour would
-    // narrow the magnet to tour marketing, and would also decay the moment the
-    // booking calendar stretches far enough to answer the question on-page.
-    // What actually differentiates this page is the date itself.
-    var arrivalLabel = fmtDeadlineDate(STATE.arrivalStr);
-    // Near-term arrivals are most of the real traffic, and for them the dated
-    // deadline list is mostly in the past: a screenshot of this page solves it.
-    // What a screenshot cannot hold is information that does not exist yet.
-    // The engine already re-checks the live tour times on the arrival morning,
-    // so for anyone inside a week the gate sells exactly that.
-    if (STATE.daysUntilArrival <= 7) {
-      if (heading) heading.textContent = 'The one email this page cannot show you';
+    var lede = document.getElementById('gateLede');
+    var form = document.getElementById('gateForm');
+    if (!gate || !heading || !form) return false;
+    gate.classList.add('is-complete', 'is-hydrated');
+    heading.textContent = 'Your Berlin date plan is in your inbox. If it is missing, check Spam or Promotions.';
+    if (stake) stake.hidden = true;
+    if (lede) lede.hidden = true;
+    form.hidden = true;
+    return true;
+  }
+
+  function clearHydratedGateStatus() {
+    var gate = document.getElementById('gate');
+    var stake = document.getElementById('gateStake');
+    var lede = document.getElementById('gateLede');
+    var form = document.getElementById('gateForm');
+    if (gate) gate.classList.remove('is-complete', 'is-hydrated');
+    if (stake) stake.hidden = false;
+    if (lede) lede.hidden = false;
+    if (form) form.hidden = false;
+  }
+
+  function applyGateCopy(schedule) {
+    if (showHydratedGateStatus()) return;
+    var heading = document.getElementById('gateHeading');
+    var stake = document.getElementById('gateStake');
+    var lede = document.getElementById('gateLede');
+    if (!lede) return;
+    var upcoming = schedule.filter(function (item) { return item.state === 'upcoming'; });
+    var steps = [];
+    if (STATE.daysUntilArrival >= 21) steps.push('three weeks out');
+    if (STATE.daysUntilArrival >= 7) steps.push('one week out');
+    if (STATE.daysUntilArrival >= 3) steps.push('three days out');
+    steps.push('your first morning');
+    var cadence = steps.length === 1
+      ? steps[0]
+      : steps.slice(0, -1).join(', ') + ' and ' + steps[steps.length - 1];
+    if (heading) heading.textContent = 'Keep the deadlines that are still ahead';
+    if (upcoming.length) {
       if (stake) {
-        stake.textContent = 'A screenshot keeps today. It cannot keep ' + arrivalLabel + '. That morning I check '
-          + 'what is actually open and the live tour times, and send you a two minute brief for the day itself.';
+        stake.textContent = 'Your next comfortable booking deadline is ' + fmtDeadlineDate(upcoming[0].dateStr)
+          + '. I will send this exact list now, then only the reminders still ahead of your trip.';
       }
-    } else {
-      if (heading) heading.textContent = 'Nothing else you read about Berlin knows your dates';
-      if (stake) {
-        stake.textContent = 'This page does, and so do the emails: what to book while it is still bookable, '
-          + 'what to buy before the shops shut on you, and what to do with your first morning. All of it keyed to '
-          + arrivalLabel + ', not to a generic Berlin week.';
-      }
+    } else if (stake) {
+      stake.textContent = 'Your comfortable booking windows are already open. I will send this exact list now, then one short first-morning check.';
     }
-    if (!upcoming.length) {
-      lede.textContent = 'Every booking window for your dates is already open, so the timing that still matters is '
-        + 'the last stretch. ' + WHAT_I_SEND;
-      return;
-    }
-    var next = upcoming[0];
-    var last = upcoming[upcoming.length - 1];
-    var deadlineLine = upcoming.length === 1
-      ? ('Your one remaining deadline is ' + fmtDeadlineDate(next.dateStr) + '. ')
-      : (upcoming.length + ' of those deadlines are still ahead of you, the first on '
-         + fmtDeadlineDate(next.dateStr) + ' and the last on ' + fmtDeadlineDate(last.dateStr) + '. ');
-    var openLine = overdue.length === 1
-      ? 'One window is already open, so that one is for today. '
-      : (overdue.length > 1 ? overdue.length + ' windows are already open, so those are for today. ' : '');
-    lede.textContent = deadlineLine + openLine + WHAT_I_SEND;
+    lede.textContent = steps.length === 1
+      ? 'The remaining reminder is timed for ' + cadence + '.'
+      : 'The remaining reminders are timed for ' + cadence + '.';
   }
 
   // ---------------------------------------------------------------------
@@ -942,7 +955,7 @@
   // ---------------------------------------------------------------------
   // compute + render full result
   // ---------------------------------------------------------------------
-  function computeAndRender(arrivalStr, nights) {
+  function computeAndRender(arrivalStr, nights, options) {
     var today = todayStr();
     var daysUntilArrival = daysBetween(today, arrivalStr);
     var days = dateRangeStrs(arrivalStr, nights + 1);
@@ -1002,7 +1015,7 @@
     stage.classList.add('is-visible');
     trackEvent('bw_lead_asset_experiment_view');
     trackEvent('bw_lead_asset_gate_view');
-    stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (!options || options.scroll !== false) stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
     loadTourAvailability(arrivalStr, nights).then(function (tourResult) {
       renderTourBlock(tourResult, days);
@@ -1031,15 +1044,11 @@
       STATE.tourSlotShown = false;
       trackEvent('bw_lead_asset_control_booking_click', { controlType: 'tour_block_hidden' });
       buildStrip(visitDays, currentHolidayDates(), true, true, tourDates);
-      // The gate was rendered before this fetch resolved, and its strongest
-      // wording depends on whether a tour was found. Re-apply now that we know.
-      if (STATE.deadlineSchedule) applyGateCopy(STATE.deadlineSchedule);
       return;
     }
     STATE.tourSlotShown = true;
     STATE.tourSummary = tourResult;
     STATE.resultFlags.push('tour_day');
-    if (STATE.deadlineSchedule) applyGateCopy(STATE.deadlineSchedule);
     tourResult.days.forEach(function (d) { tourDates[d.dateStr] = true; });
     buildStrip(visitDays, currentHolidayDates(), true, true, tourDates);
 
@@ -1090,25 +1099,46 @@
   // ---------------------------------------------------------------------
   // input wiring
   // ---------------------------------------------------------------------
+  function setSelectedNights(nights) {
+    var nightsGroup = document.getElementById('nightsGroup');
+    if (!nightsGroup) return;
+    Array.prototype.forEach.call(nightsGroup.querySelectorAll('button[data-nights]'), function (button) {
+      button.classList.toggle('on', Number(button.getAttribute('data-nights')) === nights);
+    });
+    STATE.nights = nights;
+  }
+
+  function hydrateFromQuery() {
+    var params;
+    try { params = new URL(window.location.href).searchParams; } catch (e) { return false; }
+    var arrival = params.get('arrival') || '';
+    var nightsText = params.get('nights') || '';
+    var status = params.get('lead_asset_status') || '';
+    var bounds = inputDateBounds();
+    if (!isValidDateString(arrival) || arrival < bounds.min || arrival > bounds.max || !/^[1-7]$/.test(nightsText)) return false;
+    var arrivalInput = document.getElementById('arrivalInput');
+    if (!arrivalInput) return false;
+    arrivalInput.value = arrival;
+    setSelectedNights(Number(nightsText));
+    STATE.leadAssetStatus = status === 'confirmed' || status === 'sent' ? status : '';
+    computeAndRender(arrival, STATE.nights, { scroll: false });
+    return true;
+  }
+
   function initInput() {
     var form = document.getElementById('inputForm');
     var arrivalInput = document.getElementById('arrivalInput');
     var nightsGroup = document.getElementById('nightsGroup');
     var errLine = document.getElementById('inputError');
 
-    var min = todayStr();
-    var maxDate = new Date();
-    maxDate.setFullYear(maxDate.getFullYear() + 3);
-    var max = maxDate.getFullYear() + '-' + pad2(maxDate.getMonth() + 1) + '-' + pad2(maxDate.getDate());
-    arrivalInput.min = min;
-    arrivalInput.max = max;
+    var bounds = inputDateBounds();
+    arrivalInput.min = bounds.min;
+    arrivalInput.max = bounds.max;
 
     nightsGroup.addEventListener('click', function (e) {
       var btn = e.target.closest('button[data-nights]');
       if (!btn) return;
-      Array.prototype.forEach.call(nightsGroup.querySelectorAll('button'), function (b) { b.classList.remove('on'); });
-      btn.classList.add('on');
-      STATE.nights = Number(btn.getAttribute('data-nights'));
+      setSelectedNights(Number(btn.getAttribute('data-nights')));
     });
 
     form.addEventListener('submit', function (e) {
@@ -1116,7 +1146,9 @@
       errLine.textContent = '';
       var val = arrivalInput.value;
       if (!val) { errLine.textContent = 'Pick your arrival date.'; arrivalInput.focus(); return; }
-      if (val < min) { errLine.textContent = 'Pick a date from today onward.'; arrivalInput.focus(); return; }
+      if (val < bounds.min || val > bounds.max) { errLine.textContent = 'Pick a date from today onward.'; arrivalInput.focus(); return; }
+      STATE.leadAssetStatus = '';
+      clearHydratedGateStatus();
       trackEvent('bw_lead_asset_form_start', { placement: 'date_input' });
       computeAndRender(val, STATE.nights);
     });
@@ -1205,11 +1237,11 @@
         consent.disabled = true;
         button.hidden = true;
         status.className = 'gate-status is-success';
-        status.textContent = 'Check your inbox. Click the confirmation link and your dated summary is on its way.';
+        status.textContent = 'Check your inbox. Your Berlin date plan or confirmation link should arrive in a few minutes. If you do not see it, check Spam or Promotions.';
         trackEvent('bw_lead_asset_submit', { placement: 'gate' });
       }).catch(function () {
         button.disabled = false;
-        button.textContent = 'Send me the dates';
+        button.textContent = 'Send my Berlin date plan';
         status.className = 'gate-status is-error';
         status.textContent = 'That did not go through. Please try again.';
       }).finally(function () {
@@ -1275,6 +1307,7 @@
       initGate();
       initHeroPhoto();
       trackEvent('bw_lead_asset_experiment_view', { placement: 'tool_view' });
+      hydrateFromQuery();
     })
     .catch(function (err) {
       console.error('berlin-dates-check: failed to load data.json', err);
