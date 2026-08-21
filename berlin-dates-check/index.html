@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Berlin Date Check</title>
 <meta name="description" content="Enter your Berlin arrival date to see closures, booking deadlines and daylight that can change your trip.">
+<link rel="icon" href="../ultimate-berlin-trip-planner/assets/berlinwalk-logo-rounded.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap">
@@ -133,6 +134,22 @@
   #bw-date-check .date-support-item .material-symbols-outlined { margin-top: 1px; color: #1B5E20; font-size: 26px; }
   #bw-date-check .date-support-item h3 { margin: 0 0 7px; font-size: 18px; line-height: 1.22; color: #1B5E20; }
   #bw-date-check .date-support-item p { font-size: 14px; line-height: 1.55; color: #3E5143; max-width: 31ch; }
+  #bw-date-check .pocket-preview {
+    display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(240px, .85fr) minmax(220px, .9fr); gap: 20px; align-items: center;
+    margin-top: 28px; padding: 21px 23px; border: 1.5px solid #1B5E20; border-radius: 12px; background: #E8F0E2;
+  }
+  #bw-date-check .pocket-preview-copy { min-width: 0; }
+  #bw-date-check .pocket-preview-photo { min-width: 0; margin: 0; overflow: hidden; aspect-ratio: 16 / 10; border-radius: 9px; background: #123D18; }
+  #bw-date-check .pocket-preview-photo picture, #bw-date-check .pocket-preview-photo img { display: block; width: 100%; height: 100%; }
+  #bw-date-check .pocket-preview-photo img { object-fit: cover; object-position: 68% center; }
+  #bw-date-check .pocket-preview .eyebrow { margin-bottom: 7px; color: #1B5E20; }
+  #bw-date-check .pocket-preview h3 { margin: 0 0 7px; color: #123D18; font-size: clamp(19px, 2.4vw, 25px); line-height: 1.18; }
+  #bw-date-check .pocket-preview p { color: #324934; font-size: 13.5px; line-height: 1.5; }
+  #bw-date-check .pocket-preview-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 0; padding: 0; list-style: none; }
+  #bw-date-check .pocket-preview-list li { display: grid; grid-template-columns: 22px minmax(0, 1fr); column-gap: 7px; padding: 9px 10px; border: 1px solid #B8CBB0; background: rgba(255,255,255,.56); color: #234429; font-size: 12px; line-height: 1.35; }
+  #bw-date-check .pocket-preview-item-icon { margin-top: 1px; color: #1B5E20; font-size: 20px; }
+  #bw-date-check .pocket-preview-item-copy { min-width: 0; }
+  #bw-date-check .pocket-preview-list strong { display: block; margin-bottom: 2px; color: #1B5E20; font-family: var(--f-mono); font-size: 10px; letter-spacing: .04em; text-transform: uppercase; }
 
   /* ---- result ---- */
   #bw-date-check .result-stage { display: none; flex-direction: column; gap: 46px; padding: 44px 22px 70px; }
@@ -155,7 +172,6 @@
   #bw-date-check .day .band { padding: 6px 6px; font-family: var(--f-mono); font-size: 9px; letter-spacing: .05em; text-transform: uppercase; text-align: center; border-top: 1px solid var(--hair); }
   #bw-date-check .band.clear { background: var(--green-soft); color: var(--green); }
   #bw-date-check .band.warn { background: var(--alert-soft); color: var(--alert); }
-  #bw-date-check .band.tour { background: var(--yellow); color: var(--green-ink); font-weight: 600; }
   #bw-date-check .legend { display: flex; flex-wrap: wrap; gap: 7px 16px; font-family: var(--f-mono); font-size: 10px; color: var(--muted); letter-spacing: .04em; }
   #bw-date-check .legend b { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 5px; vertical-align: middle; }
 
@@ -171,15 +187,6 @@
   #bw-date-check .lightcard .lab { font-family: var(--f-mono); font-size: 10px; letter-spacing: .13em; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; gap: 8px; }
   #bw-date-check .arc { width: 100%; height: auto; display: block; }
   #bw-date-check .lightcard p { font-size: 13.5px; line-height: 1.5; }
-
-  #bw-date-check .tourblock { border: 2px solid var(--yellow); border-radius: 13px; background: var(--surface); padding: 20px 22px; display: none; flex-direction: column; gap: 12px; }
-  #bw-date-check .tourblock.is-visible { display: flex; }
-  #bw-date-check .tourblock .tag { display: inline-flex; align-self: flex-start; background: var(--yellow); color: var(--green-ink) !important; font-family: var(--f-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; padding: 4px 9px; border-radius: 999px; }
-  #bw-date-check .tourblock p { font-size: 14.5px; line-height: 1.55; }
-  #bw-date-check .tourblock .slots { display: flex; flex-wrap: wrap; gap: 8px; }
-  #bw-date-check .tourblock .slot-link { font-family: var(--f-mono); font-size: 12.5px; font-weight: 600; color: var(--green-ink) !important; background: var(--yellow) !important; border-radius: 8px; padding: 9px 13px; text-decoration: none; }
-  #bw-date-check .tourblock .slot-link:hover { opacity: .88; }
-  #bw-date-check .tourblock .slot-link:hover, #bw-date-check .tourblock .slot-link:focus, #bw-date-check .tourblock .slot-link:active, #bw-date-check .tourblock .slot-link:visited { color: var(--green-ink) !important; }
 
   #bw-date-check .bridge { font-size: 13.5px; line-height: 1.55; padding: 15px 18px; border-radius: 10px; background: var(--green-soft); border: 1px solid var(--hair); }
   #bw-date-check .bridge a { color: var(--green-ink); font-weight: 600; }
@@ -265,6 +272,9 @@
     #bw-date-check .date-support h2 { text-align: left; font-size: 27px; }
     #bw-date-check .date-support-list { margin-top: 22px; }
     #bw-date-check .date-support-item { padding: 16px 0; }
+    #bw-date-check .pocket-preview { grid-template-columns: 1fr; gap: 16px; margin-top: 22px; padding: 18px; }
+    #bw-date-check .pocket-preview-photo { order: 3; aspect-ratio: 16 / 10; }
+    #bw-date-check .pocket-preview-list { grid-template-columns: 1fr; }
     #bw-date-check .result-stage { padding: 34px 16px 54px; gap: 38px; }
     #bw-date-check .stripwrap { overflow-x: visible; padding-bottom: 0; }
     #bw-date-check .strip { grid-template-columns: repeat(auto-fit, minmax(74px, 1fr)); grid-auto-columns: auto; grid-auto-flow: row; gap: 7px; }
@@ -348,6 +358,25 @@
           </div>
         </article>
       </div>
+      <aside class="pocket-preview" id="pocketPreview" aria-labelledby="pocketPreviewHeading">
+        <div class="pocket-preview-copy">
+          <p class="eyebrow">Email-only bonus</p>
+          <h3 id="pocketPreviewHeading">Your date result stays here. The Pocket Kit travels with you.</h3>
+          <p>I will send a second, phone-friendly layer after the date result: useful places and official links for the moments when you are already out in Berlin.</p>
+        </div>
+        <ul class="pocket-preview-list" aria-label="Pocket Kit contents">
+          <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">restaurant</span><span class="pocket-preview-item-copy"><strong>50 picks</strong>Food and drink by situation</span></li>
+          <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">map</span><span class="pocket-preview-item-copy"><strong>Transport</strong>Maps and ticket shortcuts</span></li>
+          <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">account_balance</span><span class="pocket-preview-item-copy"><strong>19 places</strong>Essential landmark map with stations</span></li>
+          <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">rule</span><span class="pocket-preview-item-copy"><strong>12 rules</strong>Small local moves that save time and money</span></li>
+        </ul>
+        <figure class="pocket-preview-photo">
+          <picture>
+            <source media="(max-width: 620px)" srcset="photos/pocket-kit-hero.jpg">
+            <img src="photos/pocket-kit-hero.jpg" width="1600" height="1066" loading="lazy" decoding="async" alt="Berlin tram passing a café table with a phone, maps, coffee and a sandwich.">
+          </picture>
+        </figure>
+      </aside>
     </div>
   </section>
 
@@ -370,7 +399,6 @@
       <div class="legend">
         <span><b style="background:var(--green-soft);border:1px solid var(--green)"></b>clear</span>
         <span><b style="background:var(--alert-soft);border:1px solid var(--alert)"></b>closure or holiday</span>
-        <span><b style="background:var(--yellow)"></b>my tour runs</span>
       </div>
     </section>
 
@@ -379,18 +407,18 @@
     </section>
     <section>
       <div class="gate" id="gate">
-        <h2 id="gateHeading">Take the useful links with you</h2>
+        <h2 id="gateHeading">Get the Berlin Pocket Kit too</h2>
         <p class="gate-stake" id="gateStake"></p>
-        <p class="lede" id="gateLede">It arrives as one phone-friendly email, separate from the result above.</p>
+        <p class="lede" id="gateLede">The full date result stays visible above. Email adds the Pocket Kit so you can keep it on your phone.</p>
         <form id="gateForm" novalidate>
           <div class="gate-row">
             <input type="email" id="gateEmail" name="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required>
-            <button type="submit" id="gateSubmit">Send my Berlin Dates Pack</button>
+            <button type="submit" id="gateSubmit">Send my Berlin pack</button>
           </div>
           <div class="honeypot"><label>Website<input type="text" name="website" id="gateWebsite" tabindex="-1" autocomplete="off"></label></div>
           <label class="consent">
             <input type="checkbox" id="gateConsent" required>
-            <span>Send me my Berlin Dates Pack and occasional BerlinWalk emails with Berlin travel tips and offers. I can unsubscribe any time. <a href="https://www.berlinwalk.com/privacy-policy" target="_top">Privacy Policy.</a></span>
+            <span>Send me my Berlin Dates Pack + Pocket Kit and occasional BerlinWalk emails with Berlin travel tips and offers. I can unsubscribe any time. <a href="https://www.berlinwalk.com/privacy-policy" target="_top">Privacy Policy.</a></span>
           </label>
           <p class="gate-status" id="gateStatus" role="status" aria-live="polite"></p>
         </form>
@@ -402,14 +430,6 @@
         <div class="lab"><span id="lightLabel">Light on your first day</span><span id="lightHours"></span></div>
         <svg class="arc" id="lightArc" viewBox="0 0 600 130" role="img" aria-label=""></svg>
         <p id="lightText"></p>
-      </div>
-    </section>
-
-    <section id="tourSection">
-      <div class="tourblock" id="tourBlock">
-        <span class="tag">My tour runs on your dates</span>
-        <p id="tourText"></p>
-        <div class="slots" id="tourSlots"></div>
       </div>
     </section>
 
@@ -434,7 +454,6 @@
   var LAT = 52.520, LNG = 13.405;
   var DATA_URL = './data.json';
   var API_BASE = 'https://app.berlinwalk.com/api/download-lead';
-  var AVAILABILITY_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/booking-calendar-availability';
   var ASSET_ID = 'berlin-date-check';
   var EXPERIMENT_ID = 'berlin_date_check_v1';
   var CONSENT_VERSION = 'berlin-date-check-pack-v1-2026-08-21';
@@ -724,107 +743,17 @@
   }
 
   // ---------------------------------------------------------------------
-  // Job 1 - tour block: computeDaysParam / deriveTourBlock (unit-tested
-  // standalone against the live endpoint shape and fabricated payloads
-  // covering states a/b/c and error paths before being ported here)
-  // ---------------------------------------------------------------------
-  function computeDaysParam(todayStrVal, arrivalStr, nights) {
-    var raw = daysBetween(todayStrVal, arrivalStr) + nights + 1;
-    return Math.max(7, Math.min(400, raw));
-  }
-
-  function deriveTourBlock(payload, arrivalStr, nights) {
-    try {
-      if (!payload || payload.ok !== true || !Array.isArray(payload.slots)) return { show: false, reason: 'bad-payload' };
-      var wanted = {};
-      dateRangeStrs(arrivalStr, nights + 1).forEach(function (d) { wanted[d] = true; });
-      var byDate = {};
-      for (var i = 0; i < payload.slots.length; i++) {
-        var slot = payload.slots[i];
-        if (!slot || typeof slot.startDate !== 'string') continue;
-        var openSpots = Number(slot.openSpots);
-        if (!(openSpots > 0)) continue;
-        var dateStr = localDateStrFromIso(slot.startDate);
-        if (!wanted[dateStr]) continue;
-        if (!byDate[dateStr]) byDate[dateStr] = [];
-        byDate[dateStr].push(slot);
-      }
-      var dateKeys = Object.keys(byDate);
-      if (!dateKeys.length) return { show: false, reason: 'no-bookable-slots-in-range' };
-      dateKeys.sort();
-      var days = dateKeys.map(function (dateStr) {
-        var slots = byDate[dateStr].slice().sort(function (a, b) { return a.startDate < b.startDate ? -1 : 1; });
-        return {
-          dateStr: dateStr,
-          slots: slots.map(function (s) {
-            return {
-              startLocal: fmtBerlinTime(new Date(s.startDate)),
-              openSpots: s.openSpots,
-              sessionId: s.sessionId,
-              eventId: s.eventId,
-              serviceId: s.serviceId,
-              timezone: s.timezone || TZ,
-              locationId: s.locationId,
-              locationName: s.locationName
-            };
-          })
-        };
-      });
-      return { show: true, days: days };
-    } catch (err) {
-      return { show: false, reason: 'exception:' + err.message };
-    }
-  }
-
-  function bookingHref(slot, tourData) {
-    var base = tourData.bookingFormBase;
-    var url = new URL(base, window.location.href);
-    url.searchParams.set('bookings_timezone', slot.timezone || TZ);
-    if (slot.serviceId || tourData.serviceId) url.searchParams.set('bookings_serviceId', slot.serviceId || tourData.serviceId);
-    if (slot.locationId || tourData.locationId) url.searchParams.set('bookings_locationId', slot.locationId || tourData.locationId);
-    if (slot.sessionId || slot.eventId) url.searchParams.set('bookings_sessionId', slot.sessionId || slot.eventId);
-    try {
-      var incoming = new URL(window.location.href);
-      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id', 'fbclid', 'fbc', 'fbp'].forEach(function (p) {
-        if (incoming.searchParams.has(p)) url.searchParams.set(p, incoming.searchParams.get(p));
-      });
-    } catch (e) {}
-    if (!url.searchParams.has('utm_source')) url.searchParams.set('utm_source', 'berlinwalk');
-    if (!url.searchParams.has('utm_medium')) url.searchParams.set('utm_medium', 'berlin_date_check');
-    if (!url.searchParams.has('utm_campaign')) url.searchParams.set('utm_campaign', 'berlin_date_check_v1');
-    if (!url.searchParams.has('utm_content')) url.searchParams.set('utm_content', 'result_tour_block');
-    return url.toString();
-  }
-
-  function loadTourAvailability(arrivalStr, nights) {
-    var days = computeDaysParam(todayStr(), arrivalStr, nights);
-    var url = AVAILABILITY_ENDPOINT + '?days=' + days;
-    return fetch(url, { mode: 'cors', credentials: 'omit' })
-      .then(function (res) {
-        if (!res.ok) throw new Error('availability http ' + res.status);
-        return res.json();
-      })
-      .then(function (payload) { return deriveTourBlock(payload, arrivalStr, nights); })
-      .catch(function (err) {
-        console.warn('berlin-dates-check: tour availability unavailable, hiding tour block', err);
-        return { show: false, reason: 'fetch-error' };
-      });
-  }
-
-  // ---------------------------------------------------------------------
   // calendar strip
   // ---------------------------------------------------------------------
-  function buildStrip(days, holidayDates, mondayFlag, sundayFlag, tourDates) {
+  function buildStrip(days, holidayDates, mondayFlag, sundayFlag) {
     var strip = document.getElementById('strip');
     strip.innerHTML = '';
     days.forEach(function (d, idx) {
       var isHoliday = holidayDates[d];
       var isMonday = mondayFlag && weekdayLong(d) === 'Monday';
       var isSunday = sundayFlag && weekdayLong(d) === 'Sunday';
-      var isTour = !!tourDates[d];
       var bandClass = 'clear', bandLabel = 'Clear';
-      if (isTour) { bandClass = 'tour'; bandLabel = 'Tour day'; }
-      else if (isHoliday) { bandClass = 'warn'; bandLabel = 'Holiday'; }
+      if (isHoliday) { bandClass = 'warn'; bandLabel = 'Holiday'; }
       else if (isMonday) { bandClass = 'warn'; bandLabel = 'Museums shut'; }
       else if (isSunday) { bandClass = 'warn'; bandLabel = 'Shops shut'; }
       if (idx === 0) bandLabel = bandClass === 'clear' ? 'Arrival' : bandLabel;
@@ -880,7 +809,7 @@
     var form = document.getElementById('gateForm');
     if (!gate || !heading || !form) return false;
     gate.classList.add('is-complete', 'is-hydrated');
-    heading.textContent = 'Your Berlin Dates Pack is in your inbox. If it is missing, check Spam or Promotions.';
+    heading.textContent = 'Your Berlin pack is in your Inbox. If it is missing, check Spam and Promotions.';
     if (stake) stake.hidden = true;
     if (lede) lede.hidden = true;
     form.hidden = true;
@@ -915,20 +844,13 @@
     if (hasMonday) backupLabels.push('Monday');
     if (hasNonHolidaySunday) backupLabels.push('Sunday');
     if (hasPublicHoliday) backupLabels.push('public-holiday');
-    if (heading) heading.textContent = 'Take the useful links with you';
+    if (heading) heading.textContent = 'Get the Berlin Pocket Kit too';
     if (stake) {
       stake.textContent = "For " + fmtCompactTripRange(STATE.arrivalStr, STATE.days[STATE.days.length - 1])
-        + ", I will send four official booking pages and a Berlin event calendar already filtered to your stay.";
+        + ", I will send the dated Berlin Dates Pack plus 50 food and drink picks, official transport maps and ticket tools, the 19-place landmark map, 12 local rules and toilet, water and luggage maps.";
     }
-    if (!backupLabels.length) {
-      lede.textContent = 'It arrives as one phone-friendly email, separate from the result above.';
-    } else if (backupLabels.length === 1) {
-      lede.textContent = 'I will also add ' + backupLabels[0] + ' backups with Maps links.';
-    } else if (backupLabels.length === 2) {
-      lede.textContent = 'I will also add ' + backupLabels[0] + ' and ' + backupLabels[1] + ' backups with Maps links.';
-    } else {
-      lede.textContent = 'I will also add ' + backupLabels[0] + ', ' + backupLabels[1] + ' and ' + backupLabels[2] + ' backups with Maps links.';
-    }
+    lede.textContent = 'The full date result stays visible above. Email adds the Pocket Kit and the dated official links in one phone-friendly message.'
+      + (backupLabels.length ? ' I will also include ' + backupLabels.join(', ').replace(/, ([^,]*)$/, ' and $1') + ' backups with Maps links.' : '');
   }
 
   // ---------------------------------------------------------------------
@@ -936,6 +858,7 @@
   // ---------------------------------------------------------------------
   var analyticsConsent = true; // no consent wall on this tool; matches sitewide pixel embed already firing consent-free
   function trackEvent(eventName, extra) {
+    if (/^(localhost|127\.0\.0\.1)$/.test(window.location.hostname)) return;
     try {
       var url = new URL(API_BASE, window.location.href);
       url.searchParams.set('action', 'event');
@@ -1034,7 +957,7 @@
       fmtDayLabel(arrivalStr) + ' → ' + fmtDayLabel(lastStr) + ' · ' + nights + ' night' + (nights === 1 ? '' : 's')
       + (nights >= 2 ? ' · ' + (nights - 1) + ' full day' + (nights - 1 === 1 ? '' : 's') + ' plus two half days' : '');
 
-    buildStrip(days, holidayDates, true, true, {});
+    buildStrip(days, holidayDates, true, true);
 
     var readingsEl = document.getElementById('readings');
     readingsEl.innerHTML = '';
@@ -1063,9 +986,6 @@
     trackEvent('bw_lead_asset_gate_view');
     if (!options || options.scroll !== false) revealResult(stage);
 
-    loadTourAvailability(arrivalStr, nights).then(function (tourResult) {
-      renderTourBlock(tourResult, days);
-    });
   }
 
   function renderSeasonPhoto(month) {
@@ -1082,64 +1002,10 @@
     img.alt = 'Berlin in ' + (wx ? wx.name : '');
   }
 
-  function renderTourBlock(tourResult, visitDays) {
-    var block = document.getElementById('tourBlock');
-    var tourDates = {};
-    if (!tourResult || !tourResult.show) {
-      block.classList.remove('is-visible');
-      STATE.tourSlotShown = false;
-      trackEvent('bw_lead_asset_control_booking_click', { controlType: 'tour_block_hidden' });
-      buildStrip(visitDays, currentHolidayDates(), true, true, tourDates);
-      return;
-    }
-    STATE.tourSlotShown = true;
-    STATE.tourSummary = tourResult;
-    STATE.resultFlags.push('tour_day');
-    tourResult.days.forEach(function (d) { tourDates[d.dateStr] = true; });
-    buildStrip(visitDays, currentHolidayDates(), true, true, tourDates);
-
-    var text = describeTourDays(tourResult.days, visitDays) + ' It is ' + DATA.tour.stopsText + ', ' + DATA.tour.durationText + '.';
-    document.getElementById('tourText').textContent = text;
-    STATE.readingTexts.tour = text;
-
-    var slotsEl = document.getElementById('tourSlots');
-    slotsEl.innerHTML = '';
-    tourResult.days.forEach(function (d) {
-      d.slots.forEach(function (s) {
-        var a = document.createElement('a');
-        a.className = 'slot-link';
-        a.target = '_top';
-        a.rel = 'noopener';
-        a.href = bookingHref(s, DATA.tour);
-        a.textContent = weekdayShort(d.dateStr) + ' ' + partsOf(d.dateStr)[2] + ', ' + s.startLocal;
-        a.addEventListener('click', function () { trackEvent('bw_lead_asset_control_booking_click', { controlType: 'tour_slot', controlUrl: a.href }); });
-        slotsEl.appendChild(a);
-      });
-    });
-    block.classList.add('is-visible');
-    trackEvent('bw_lead_asset_calc_done', { placement: 'tour_block_shown' });
-  }
-
-  function currentHolidayDates() {
-    var holidayDates = {};
-    DATA.holidays.forEach(function (h) { if (STATE.days.indexOf(h.date) !== -1) holidayDates[h.date] = h; });
-    return holidayDates;
-  }
-
   function joinWithAnd(arr) {
     if (arr.length === 1) return arr[0];
     if (arr.length === 2) return arr[0] + ' and ' + arr[1];
     return arr.slice(0, -1).join(', ') + ' and ' + arr[arr.length - 1];
-  }
-
-  function describeTourDays(tourDays, visitDays) {
-    var tourDateSet = {};
-    tourDays.forEach(function (d) { tourDateSet[d.dateStr] = true; });
-    var excluded = visitDays.filter(function (d) { return !tourDateSet[d]; });
-    if (visitDays.length >= 4 && excluded.length && excluded.length <= 2) {
-      return 'I run every day of your trip except ' + joinWithAnd(excluded.map(fmtDayLabel)) + '.';
-    }
-    return 'I run on your ' + joinWithAnd(tourDays.map(function (d) { return fmtDayLabel(d.dateStr); })) + '.';
   }
 
   // ---------------------------------------------------------------------
@@ -1283,11 +1149,11 @@
         consent.disabled = true;
         button.hidden = true;
         status.className = 'gate-status is-success';
-        status.textContent = 'Check your inbox. Your Berlin Dates Pack or confirmation link should arrive in a few minutes. Check Spam or Promotions too.';
+        status.textContent = 'Check Inbox, Spam and Promotions. Your Berlin pack or confirmation link should arrive in a few minutes.';
         trackEvent('bw_lead_asset_submit', { placement: 'gate' });
       }).catch(function () {
         button.disabled = false;
-        button.textContent = 'Send my Berlin Dates Pack';
+        button.textContent = 'Send my Berlin pack';
         status.className = 'gate-status is-error';
         status.textContent = 'That did not go through. Please try again.';
       }).finally(function () {

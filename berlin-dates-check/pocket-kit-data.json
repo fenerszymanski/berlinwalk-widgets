@@ -1,0 +1,813 @@
+{
+  "checkedAt": "2026-08-22",
+  "title": "Berlin Pocket Kit",
+  "intro": "Fifty food and drink picks by situation, official transport map pages and ticket tools, the 19-place landmark map, twelve local rules and three practical maps for a Berlin stay.",
+  "categories": [
+    {
+      "id": "quick-budget",
+      "label": "Quick and under-control budget",
+      "shortLabel": "Quick budget"
+    },
+    {
+      "id": "german-classics",
+      "label": "Berlin and German classics",
+      "shortLabel": "German classics"
+    },
+    {
+      "id": "vegetarian-vegan",
+      "label": "Vegetarian and vegan",
+      "shortLabel": "Vegetarian"
+    },
+    {
+      "id": "breakfast-brunch",
+      "label": "Breakfast and brunch",
+      "shortLabel": "Breakfast"
+    },
+    {
+      "id": "near-sights",
+      "label": "Near major sights",
+      "shortLabel": "Near sights"
+    },
+    {
+      "id": "after-2200",
+      "label": "After 22:00",
+      "shortLabel": "After 22:00"
+    },
+    {
+      "id": "cocktails-wine",
+      "label": "Cocktails and wine",
+      "shortLabel": "Cocktails"
+    },
+    {
+      "id": "pubs-beer-rooftops",
+      "label": "Pubs, beer gardens and rooftops",
+      "shortLabel": "Pubs and rooftops"
+    }
+  ],
+  "venues": [
+    {
+      "id": "mustafas-gemuse-kebab",
+      "name": "Mustafa's Gemüse Kebap",
+      "area": "Kreuzberg",
+      "category": "quick-budget",
+      "priceBand": "EUR",
+      "bestFor": "A fast vegetable kebab stop when you want lunch without turning the day into a restaurant plan.",
+      "reservation": "walk-in",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Mustafa%27s+Gem%C3%BCse+Kebap%2C+Mehringdamm+33%2C+10961+Berlin",
+      "sourceUrl": "https://mustafas.de/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "curry-36",
+      "name": "Curry 36",
+      "area": "Kreuzberg",
+      "category": "quick-budget",
+      "priceBand": "EUR",
+      "bestFor": "A quick currywurst and chips stop around Mehringdamm.",
+      "reservation": "walk-in",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Curry+36%2C+Mehringdamm+36%2C+10961+Berlin",
+      "sourceUrl": "https://curry36.de/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "burgermeister-schlesisches-tor",
+      "name": "Burgermeister Schlesisches Tor",
+      "area": "Kreuzberg",
+      "category": "quick-budget",
+      "priceBand": "EUR EUR",
+      "bestFor": "A burger stop under the railway arches when you want something direct before the next walk.",
+      "reservation": "walk-in",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Burgermeister+Schlesisches+Tor%2C+Oberbaumstrasse+8%2C+10997+Berlin",
+      "sourceUrl": "https://www.burger-meister.de/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "konnopkes-imbiss",
+      "name": "Konnopke's Imbiß",
+      "area": "Prenzlauer Berg",
+      "category": "quick-budget",
+      "priceBand": "EUR",
+      "bestFor": "A classic currywurst break beneath the U2 tracks on Schönhauser Allee.",
+      "reservation": "walk-in",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Konnopke%27s+Imbiss%2C+Sch%C3%B6nhauser+Allee+44B%2C+10435+Berlin",
+      "sourceUrl": "https://konnopke-imbiss.de/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "risa-chicken-kreuzberg",
+      "name": "Risa Chicken",
+      "area": "Kreuzberg",
+      "category": "quick-budget",
+      "priceBand": "EUR",
+      "bestFor": "A fast grilled chicken plate or sandwich when you need a filling stop between neighbourhoods.",
+      "reservation": "walk-in",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Risa+Chicken+Kreuzberg%2C+Kottbusser+Damm+96%2C+10967+Berlin",
+      "sourceUrl": "https://www.risa-chicken.de/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "zeit-fur-brot-mitte",
+      "name": "Zeit für Brot",
+      "area": "Mitte",
+      "category": "quick-budget",
+      "priceBand": "EUR",
+      "bestFor": "A warm cinnamon roll and coffee when breakfast needs to stay simple.",
+      "reservation": "walk-in",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Zeit+f%C3%BCr+Brot%2C+Alte+Sch%C3%B6nhauser+Allee+4%2C+10119+Berlin",
+      "sourceUrl": "https://www.zeitfuerbrot.com/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "zur-letzten-instanz",
+      "name": "Zur letzten Instanz",
+      "area": "Mitte",
+      "category": "german-classics",
+      "priceBand": "EUR EUR",
+      "bestFor": "A traditional Berlin meal near Klosterstraße when you want a sit-down local classic.",
+      "reservation": "reserve",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Zur+letzten+Instanz%2C+Waisenstra%C3%9Fe+14-16%2C+10179+Berlin",
+      "sourceUrl": "https://www.zurletzteninstanz.com/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "max-und-moritz",
+      "name": "Max und Moritz",
+      "area": "Kreuzberg",
+      "category": "german-classics",
+      "priceBand": "EUR EUR",
+      "bestFor": "A Kreuzberg tavern meal when you want Berlin comfort food in a neighbourhood setting.",
+      "reservation": "reserve",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Max+und+Moritz%2C+Oranienstra%C3%9Fe+162%2C+10969+Berlin",
+      "sourceUrl": "https://www.maxundmoritzberlin.de/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "dicke-wirtin",
+      "name": "Dicke Wirtin",
+      "area": "Charlottenburg",
+      "category": "german-classics",
+      "priceBand": "EUR EUR",
+      "bestFor": "A hearty German meal near Savignyplatz after exploring west Berlin.",
+      "reservation": "reserve",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Dicke+Wirtin%2C+Carmerstra%C3%9Fe+9%2C+10623+Berlin",
+      "sourceUrl": "https://dicke-wirtin.de/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "marjellchen",
+      "name": "Marjellchen",
+      "area": "Charlottenburg",
+      "category": "german-classics",
+      "priceBand": "EUR EUR",
+      "bestFor": "A slower East Prussian and German-style dinner when the meal itself is the evening.",
+      "reservation": "reserve",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Marjellchen%2C+Mommsenstra%C3%9Fe+9%2C+10629+Berlin",
+      "sourceUrl": "https://www.restaurant-marjellchen-berlin.de/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "hofbrau-wirtshaus-berlin",
+      "name": "Hofbräu Wirtshaus Berlin",
+      "area": "Alexanderplatz",
+      "category": "german-classics",
+      "priceBand": "EUR EUR",
+      "bestFor": "A large beer-hall setting when your group wants familiar Bavarian-style dishes.",
+      "reservation": "check",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Hofbr%C3%A4u+Wirtshaus+Berlin%2C+Karl-Liebknecht-Stra%C3%9Fe+30%2C+10178+Berlin",
+      "sourceUrl": "https://www.hofbraeu-wirtshaus.de/berlin/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "berliner-republik",
+      "name": "Berliner Republik",
+      "area": "Friedrichstraße",
+      "category": "german-classics",
+      "priceBand": "EUR EUR",
+      "bestFor": "A Spree-side German meal when you want a lively room close to Friedrichstraße.",
+      "reservation": "check",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Berliner+Republik%2C+Schiffbauerdamm+8%2C+10117+Berlin",
+      "sourceUrl": "https://www.die-berliner-republik.de/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "cookies-cream",
+      "name": "Cookies Cream",
+      "area": "Mitte",
+      "category": "vegetarian-vegan",
+      "priceBand": "EUR EUR EUR",
+      "bestFor": "A dressed-up plant-based dinner when you want the meal to be an evening occasion.",
+      "reservation": "reserve",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Cookies+Cream%2C+Behrenstra%C3%9Fe+55%2C+10117+Berlin",
+      "sourceUrl": "https://cookiescream.com/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "lucky-leek",
+      "name": "Lucky Leek",
+      "area": "Prenzlauer Berg",
+      "category": "vegetarian-vegan",
+      "priceBand": "EUR EUR EUR",
+      "bestFor": "A creative plant-based dinner when you want a proper multi-course restaurant setting.",
+      "reservation": "reserve",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Lucky+Leek%2C+Kollwitzstra%C3%9Fe+54%2C+10405+Berlin",
+      "sourceUrl": "https://www.lucky-leek.com/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "1990-vegan-living",
+      "name": "1990 Vegan Living",
+      "area": "Friedrichshain",
+      "category": "vegetarian-vegan",
+      "priceBand": "EUR EUR",
+      "bestFor": "A casual Vietnamese-style plant-based meal around Boxhagener Platz.",
+      "reservation": "walk-in",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=1990+Vegan+Living%2C+Krossener+Stra%C3%9Fe+19%2C+10245+Berlin",
+      "sourceUrl": "https://www.restaurant-1990.de/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "chay-viet",
+      "name": "Chay Viet",
+      "area": "Mitte",
+      "category": "vegetarian-vegan",
+      "priceBand": "EUR EUR",
+      "bestFor": "A relaxed Vietnamese vegetarian meal near Brunnenstraße when you are exploring northern Mitte.",
+      "reservation": "walk-in",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Chay+Viet%2C+Brunnenstra%C3%9Fe+164%2C+10115+Berlin",
+      "sourceUrl": "https://chay-viet-restaurant.eatbu.com/?lang=de",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "frea",
+      "name": "FREA",
+      "area": "Mitte",
+      "category": "vegetarian-vegan",
+      "priceBand": "EUR EUR EUR",
+      "bestFor": "A considered plant-based dinner in Mitte when you want to book around a food-focused evening.",
+      "reservation": "reserve",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=FREA%2C+Kleine+Hamburger+Stra%C3%9Fe+2%2C+10115+Berlin",
+      "sourceUrl": "https://www.frea.de/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "soy-berlin",
+      "name": "SOY",
+      "area": "Mitte",
+      "category": "vegetarian-vegan",
+      "priceBand": "EUR EUR",
+      "bestFor": "A Vietnamese plant-based lunch near Hackescher Markt.",
+      "reservation": "walk-in",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=SOY%2C+Rosa-Luxemburg-Stra%C3%9Fe+30%2C+10178+Berlin",
+      "sourceUrl": "https://www.soy-berlin.com/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "oukan",
+      "name": "Oukan",
+      "area": "Mitte",
+      "category": "vegetarian-vegan",
+      "priceBand": "EUR EUR EUR",
+      "bestFor": "A plant-based Japanese-inspired dinner when you want a calm Mitte setting.",
+      "reservation": "reserve",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Oukan%2C+Ackerstra%C3%9Fe+144%2C+10115+Berlin",
+      "sourceUrl": "https://oukan.de/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "house-of-small-wonder",
+      "name": "House of Small Wonder",
+      "area": "Mitte",
+      "category": "breakfast-brunch",
+      "priceBand": "EUR EUR",
+      "bestFor": "A Japanese-influenced brunch when you want a distinctive start near Friedrichstraße.",
+      "reservation": "check",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=House+of+Small+Wonder%2C+Auguststra%C3%9Fe+11-13%2C+10117+Berlin",
+      "sourceUrl": "https://houseofsmallwonder.de/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "benedict-berlin",
+      "name": "Benedict Berlin",
+      "area": "Charlottenburg",
+      "category": "breakfast-brunch",
+      "priceBand": "EUR EUR",
+      "bestFor": "A substantial breakfast when your group wants several familiar morning choices.",
+      "reservation": "check",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Benedict+Berlin%2C+Uhlandstra%C3%9Fe+49%2C+10719+Berlin",
+      "sourceUrl": "https://benedict.world/pages/locations",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "silo-coffee",
+      "name": "Silo Coffee",
+      "area": "Friedrichshain",
+      "category": "breakfast-brunch",
+      "priceBand": "EUR EUR",
+      "bestFor": "A brunch and specialty coffee stop in Friedrichshain when you want a generous start before exploring the east.",
+      "reservation": "check",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Silo+Coffee%2C+Gabriel-Max-Stra%C3%9Fe+4%2C+10245+Berlin",
+      "sourceUrl": "https://www.silo-coffee.com/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "distrikt-coffee",
+      "name": "Distrikt Coffee",
+      "area": "Mitte",
+      "category": "breakfast-brunch",
+      "priceBand": "EUR EUR",
+      "bestFor": "A coffee-led breakfast close to the Oranienburger Tor museums and galleries.",
+      "reservation": "walk-in",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Distrikt+Coffee%2C+Bergstra%C3%9Fe+68%2C+10115+Berlin",
+      "sourceUrl": "https://www.distriktcoffee.de/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "father-carpenter",
+      "name": "Father Carpenter",
+      "area": "Mitte",
+      "category": "breakfast-brunch",
+      "priceBand": "EUR EUR",
+      "bestFor": "A compact coffee and brunch stop in the courtyards around Münzstraße.",
+      "reservation": "walk-in",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Father+Carpenter%2C+M%C3%BCnzstra%C3%9Fe+21%2C+10178+Berlin",
+      "sourceUrl": "https://fathercarpenter.com/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "cafe-anna-blume",
+      "name": "Café Anna Blume",
+      "area": "Prenzlauer Berg",
+      "category": "breakfast-brunch",
+      "priceBand": "EUR EUR",
+      "bestFor": "A relaxed cake and brunch stop by Kollwitzplatz.",
+      "reservation": "check",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Caf%C3%A9+Anna+Blume%2C+Kollwitzstra%C3%9Fe+83%2C+10435+Berlin",
+      "sourceUrl": "https://www.cafe-anna-blume.de/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "kafer-dachgarten",
+      "name": "Käfer Dachgarten",
+      "area": "Mitte",
+      "category": "near-sights",
+      "priceBand": "EUR EUR EUR",
+      "bestFor": "A meal with a Reichstag visit when you want to stay close to the government quarter.",
+      "reservation": "check",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=K%C3%A4fer+Dachgarten%2C+Platz+der+Republik+1%2C+11011+Berlin",
+      "sourceUrl": "https://dachgarten-restaurant.feinkost-kaefer.de/en/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "baret-berlin",
+      "name": "Baret Berlin",
+      "area": "Mitte",
+      "category": "near-sights",
+      "priceBand": "EUR EUR",
+      "bestFor": "A drink or meal beside the Humboldt Forum when you are already in the historic centre.",
+      "reservation": "check",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Baret+Berlin%2C+Schlossplatz+1%2C+10178+Berlin",
+      "sourceUrl": "https://baret.berlin/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "the-greens-coffee",
+      "name": "The Greens Coffee and Plants",
+      "area": "Mitte",
+      "category": "near-sights",
+      "priceBand": "EUR EUR",
+      "bestFor": "A calm coffee break by Alte Münze when you need a short indoor reset near Museum Island.",
+      "reservation": "walk-in",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=The+Greens+Coffee+and+Plants%2C+Am+Kr%C3%B6gel+2%2C+10179+Berlin",
+      "sourceUrl": "https://the-greens-berlin.de/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "the-bike-cafe",
+      "name": "The Bike Café",
+      "area": "Mitte",
+      "category": "near-sights",
+      "priceBand": "EUR EUR",
+      "bestFor": "A breakfast or coffee pause near the Brandenburg Gate when the government quarter is already on your walk.",
+      "reservation": "check",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=The+Bike+Caf%C3%A9%2C+Wilhelmstra%C3%9Fe+91%2C+10117+Berlin",
+      "sourceUrl": "https://www.thebikecafe.de/cafe-brandenburger-tor",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "sphere-berlin-tv-tower",
+      "name": "Sphere Berlin",
+      "area": "Alexanderplatz",
+      "category": "near-sights",
+      "priceBand": "EUR EUR EUR",
+      "bestFor": "A meal with a view when your Alexanderplatz visit already includes the TV Tower.",
+      "reservation": "check",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Sphere+Berlin%2C+Panoramastra%C3%9Fe+1A%2C+10178+Berlin",
+      "sourceUrl": "https://tv-turm.de/en/restaurant/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "nolle",
+      "name": "Nolle",
+      "area": "Mitte",
+      "category": "near-sights",
+      "priceBand": "EUR EUR",
+      "bestFor": "A meal below the railway arches when your route runs through Friedrichstraße.",
+      "reservation": "check",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Nolle%2C+Georgenstra%C3%9Fe+203%2C+10117+Berlin",
+      "sourceUrl": "https://www.restaurant-nolle.de/kontakt/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "kaschk",
+      "name": "Kaschk",
+      "area": "Mitte",
+      "category": "after-2200",
+      "priceBand": "EUR EUR",
+      "bestFor": "A late craft-beer stop near Rosenthaler Platz when you want a focused drinks list.",
+      "reservation": "walk-in",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Kaschk%2C+Linienstra%C3%9Fe+40%2C+10119+Berlin",
+      "sourceUrl": "https://en.brlo.de/gastronomien/brlo-kaschk",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "brlo-brwhouse",
+      "name": "BRLO Brwhouse",
+      "area": "Kreuzberg",
+      "category": "after-2200",
+      "priceBand": "EUR EUR",
+      "bestFor": "A late brewery stop by Gleisdreieck when beer is the point of the evening.",
+      "reservation": "check",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=BRLO+Brwhouse%2C+Sch%C3%B6neberger+Stra%C3%9Fe+16%2C+10963+Berlin",
+      "sourceUrl": "https://brlo.de/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "schwarze-traube",
+      "name": "Schwarze Traube",
+      "area": "Kreuzberg",
+      "category": "after-2200",
+      "priceBand": "EUR EUR",
+      "bestFor": "A small late bar stop around Görlitzer Bahnhof when you want to stay in Kreuzberg.",
+      "reservation": "walk-in",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Schwarze+Traube%2C+Muskauer+Stra%C3%9Fe+15%2C+10997+Berlin",
+      "sourceUrl": "https://schwarzetraube.eatbu.com/?lang=de",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "yaam",
+      "name": "YAAM",
+      "area": "Friedrichshain",
+      "category": "after-2200",
+      "priceBand": "EUR EUR",
+      "bestFor": "An open-air music and food stop by the Spree when you want an event site with more room than a bar.",
+      "reservation": "check",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=YAAM%2C+An+der+Schillingbr%C3%BCcke+3%2C+10243+Berlin",
+      "sourceUrl": "https://yaam.de/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "club-der-visionaere",
+      "name": "Club der Visionaere",
+      "area": "Treptow",
+      "category": "after-2200",
+      "priceBand": "EUR EUR",
+      "bestFor": "A late riverside electronic-music option when the night is about the setting as much as the drink.",
+      "reservation": "check",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Club+der+Visionaere%2C+Am+Flutgraben+1%2C+12435+Berlin",
+      "sourceUrl": "https://clubdervisionaere.com/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "bateau-ivre",
+      "name": "Bateau Ivre",
+      "area": "Kreuzberg",
+      "category": "after-2200",
+      "priceBand": "EUR EUR",
+      "bestFor": "A late Kreuzberg bar stop when you want a compact room and an unplanned finish.",
+      "reservation": "walk-in",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Bateau+Ivre%2C+Oranienstra%C3%9Fe+18%2C+10999+Berlin",
+      "sourceUrl": "https://bateau-ivre.eatbu.com/?lang=en",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "becketts-kopf",
+      "name": "Becketts Kopf",
+      "area": "Prenzlauer Berg",
+      "category": "cocktails-wine",
+      "priceBand": "EUR EUR EUR",
+      "bestFor": "A serious cocktail when you want to make the drink the destination.",
+      "reservation": "check",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Becketts+Kopf%2C+Pappelallee+64%2C+10437+Berlin",
+      "sourceUrl": "https://becketts-kopf.de/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "buck-and-breck",
+      "name": "Buck and Breck",
+      "area": "Mitte",
+      "category": "cocktails-wine",
+      "priceBand": "EUR EUR EUR",
+      "bestFor": "A compact cocktail-bar visit near Rosenthaler Platz when you want a focused menu.",
+      "reservation": "check",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Buck+and+Breck%2C+Brunnenstra%C3%9Fe+177%2C+10119+Berlin",
+      "sourceUrl": "https://www.buckandbreck.com/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "velvet-bar",
+      "name": "Velvet Bar",
+      "area": "Neukölln",
+      "category": "cocktails-wine",
+      "priceBand": "EUR EUR",
+      "bestFor": "A Neukölln cocktail stop when you want to keep the evening close to Weserstraße.",
+      "reservation": "check",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Velvet+Bar%2C+Ganghoferstra%C3%9Fe+1%2C+12043+Berlin",
+      "sourceUrl": "https://velvet-bar-berlin.de/about",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "bar-tausend",
+      "name": "Bar Tausend",
+      "area": "Mitte",
+      "category": "cocktails-wine",
+      "priceBand": "EUR EUR EUR",
+      "bestFor": "A polished cocktail near Friedrichstraße when you want a deliberate night-out setting.",
+      "reservation": "check",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Bar+Tausend%2C+Schiffbauerdamm+11%2C+10117+Berlin",
+      "sourceUrl": "https://www.tausendberlin.com/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "freundschaft",
+      "name": "Freundschaft",
+      "area": "Mitte",
+      "category": "cocktails-wine",
+      "priceBand": "EUR EUR EUR",
+      "bestFor": "A wine-led evening near Potsdamer Platz when you want a small, considered list.",
+      "reservation": "check",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Freundschaft%2C+Mittelstra%C3%9Fe+1%2C+10117+Berlin",
+      "sourceUrl": "https://www.istdeinbesterfreund.com/kontakt",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "wasser-seafood-bar",
+      "name": "Wasser Seafood Bar",
+      "area": "Mitte",
+      "category": "cocktails-wine",
+      "priceBand": "EUR EUR EUR",
+      "bestFor": "A seafood and wine-led evening around Hackescher Markt when you want to stay in Mitte.",
+      "reservation": "check",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Wasser+Seafood+Bar%2C+Gro%C3%9Fe+Hamburger+Stra%C3%9Fe+32%2C+10115+Berlin",
+      "sourceUrl": "https://www.inswasser.berlin/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "prater-garten",
+      "name": "Prater Garten",
+      "area": "Prenzlauer Berg",
+      "category": "pubs-beer-rooftops",
+      "priceBand": "EUR EUR",
+      "bestFor": "A long beer-garden pause when the day is warm enough to stay outside.",
+      "reservation": "check",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Prater+Garten%2C+Kastanienallee+7-9%2C+10435+Berlin",
+      "sourceUrl": "https://www.pratergarten.de/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "cafe-am-neuen-see",
+      "name": "Café am Neuen See",
+      "area": "Tiergarten",
+      "category": "pubs-beer-rooftops",
+      "priceBand": "EUR EUR",
+      "bestFor": "A lakeside beer-garden break inside Tiergarten when you want green space near the centre.",
+      "reservation": "check",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Caf%C3%A9+am+Neuen+See%2C+Lichtensteinallee+2%2C+10787+Berlin",
+      "sourceUrl": "https://www.cafeamneuensee.de/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "alte-turnhalle-summer-garden",
+      "name": "Alte Turnhalle Summer Garden",
+      "area": "Friedrichshain",
+      "category": "pubs-beer-rooftops",
+      "priceBand": "EUR EUR",
+      "bestFor": "A leafy beer-garden pause in Friedrichshain when you want lunch, brunch or a drink outdoors.",
+      "reservation": "check",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Alte+Turnhalle+Summer+Garden%2C+Holteistra%C3%9Fe+6-9%2C+10245+Berlin",
+      "sourceUrl": "https://www.alte-turnhalle-berlin.de/en/sommergarten",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "klunkerkranich",
+      "name": "Klunkerkranich",
+      "area": "Neukölln",
+      "category": "pubs-beer-rooftops",
+      "priceBand": "EUR EUR",
+      "bestFor": "A rooftop drink with an open skyline when you want a view rather than a table service meal.",
+      "reservation": "check",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Klunkerkranich%2C+Karl-Marx-Stra%C3%9Fe+66%2C+12043+Berlin",
+      "sourceUrl": "https://klunkerkranich.org/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "neulich-biergarten-thf",
+      "name": "Neulich Biergarten am THF",
+      "area": "Tempelhof",
+      "category": "pubs-beer-rooftops",
+      "priceBand": "EUR EUR",
+      "bestFor": "A seasonal beer-garden stop at Tempelhof Field when you want open space, food and a drink.",
+      "reservation": "check",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Neulich+Biergarten+am+THF%2C+Tempelhofer+Damm+45%2C+12101+Berlin",
+      "sourceUrl": "https://www.thf-berlin.de/aktuelles/veranstaltungen/veranstaltung/neulich-bier-und-kulturgarten-am-thf-tower",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "haus-zenner",
+      "name": "Haus Zenner",
+      "area": "Treptow",
+      "category": "pubs-beer-rooftops",
+      "priceBand": "EUR EUR",
+      "bestFor": "A Spree-side beer-garden stop when you want a slower east Berlin afternoon.",
+      "reservation": "check",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Haus+Zenner%2C+Alt-Treptow+15%2C+12435+Berlin",
+      "sourceUrl": "https://zenner.berlin/info-kontakt/",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "golgatha",
+      "name": "Golgatha",
+      "area": "Kreuzberg",
+      "category": "pubs-beer-rooftops",
+      "priceBand": "EUR EUR",
+      "bestFor": "A park-side beer and snack stop in Viktoriapark when you want to finish outdoors.",
+      "reservation": "check",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Golgatha%2C+Viktoriapark+1%2C+10965+Berlin",
+      "sourceUrl": "https://www.golgatha-berlin.de/",
+      "checkedAt": "2026-08-22"
+    }
+  ],
+  "transport": [
+    {
+      "id": "night-network-map",
+      "title": "Night Network Map",
+      "description": "BVG's current network-map page is the starting point for night services and the latest network PDFs.",
+      "url": "https://www.bvg.de/en/connections/network-maps-and-routes",
+      "sourceUrl": "https://www.bvg.de/en/connections/network-maps-and-routes",
+      "sourceType": "official BVG page",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "s-bahn-regional-map",
+      "title": "S-Bahn and regional train map",
+      "description": "The S-Bahn Berlin route-network page keeps the current Berlin ABC and regional route-map links together.",
+      "url": "https://sbahn.berlin/en/plan-a-journey/route-network/",
+      "sourceUrl": "https://sbahn.berlin/en/plan-a-journey/route-network/",
+      "sourceType": "official S-Bahn Berlin page",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "tram-network-map",
+      "title": "Tram Network Map",
+      "description": "Use the BVG network-map page for the current tram map instead of an undated mirror.",
+      "url": "https://www.bvg.de/en/connections/network-maps-and-routes",
+      "sourceUrl": "https://www.bvg.de/en/connections/network-maps-and-routes",
+      "sourceType": "official BVG page",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "vbb-regional-map",
+      "title": "Full VBB regional map",
+      "description": "The VBB maps page links the current Berlin and Brandenburg regional maps.",
+      "url": "https://www.vbb.de/en/driving-information/maps/",
+      "sourceUrl": "https://www.vbb.de/en/driving-information/maps/",
+      "sourceType": "official VBB page",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "transport-ticket-calculator",
+      "title": "Berlin Transport Ticket Calculator",
+      "description": "Compare the Berlin ticket choices before you buy, then check the operator page for the current fare.",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/transport-calculator/",
+      "sourceUrl": "https://www.berlinwalk.com/tools/transport-ticket-calculator",
+      "sourceType": "BerlinWalk tool",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "zone-ticket-decoder",
+      "title": "Zone Ticket Decoder",
+      "description": "Check whether your airport or day-trip stop needs Berlin AB, ABC or a wider regional ticket.",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-zone-ticket-decoder/",
+      "sourceUrl": "https://www.berlinwalk.com/tools/berlin-zone-ticket-decoder",
+      "sourceType": "BerlinWalk tool",
+      "checkedAt": "2026-08-22"
+    }
+  ],
+  "landmarks": {
+    "title": "Berlin Landmarks Map",
+    "description": "The existing free map covers 19 essential landmarks, nearest stations and direct Maps links so you can find the next place without carrying another guide.",
+    "url": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-landmarks-map/",
+    "sourceUrl": "https://www.berlinwalk.com/tools/berlin-landmarks-map",
+    "sourceType": "BerlinWalk tool",
+    "checkedAt": "2026-08-22"
+  },
+  "rules": [
+    {
+      "id": "validate-paper-ticket",
+      "title": "Validate a paper ticket before boarding",
+      "text": "A paper ticket needs a validation stamp before the ride. Keep it with you until the journey is over.",
+      "sourceUrl": "https://www.bvg.de/en/tickets-tariffs"
+    },
+    {
+      "id": "escalator-right",
+      "title": "Stand on the right",
+      "text": "Leave the left side of an escalator open for people walking past.",
+      "sourceUrl": "https://www.bvg.de/en"
+    },
+    {
+      "id": "red-crossing",
+      "title": "Wait at a red pedestrian signal",
+      "text": "Berliners may cross on an empty road, but the safe local move is to wait for the green signal.",
+      "sourceUrl": "https://www.bvg.de/en"
+    },
+    {
+      "id": "sunday-shopping",
+      "title": "Buy basics before Sunday",
+      "text": "Most regular shops close on Sunday. Station shops and a few special exceptions can help, but do not treat them as a full grocery plan.",
+      "sourceUrl": "https://www.berlinwalk.com/tools/berlin-sunday-shopping"
+    },
+    {
+      "id": "pfand",
+      "title": "Keep Pfand separate",
+      "text": "Bottle and can deposits are part of the price you pay. Return them at a suitable machine or leave empties neatly beside a bin.",
+      "sourceUrl": "https://www.berlinwalk.com/tools/berlin-pfand-calculator"
+    },
+    {
+      "id": "small-cash",
+      "title": "Carry a little cash",
+      "text": "A small cash reserve helps at markets, kiosks and independent places where payment choices vary.",
+      "sourceUrl": "https://www.berlinwalk.com/tools/berlin-daily-budget"
+    },
+    {
+      "id": "bike-lane",
+      "title": "Look before stepping into a bike lane",
+      "text": "Bike lanes can run beside the pavement and through busy crossings. Pause, look both ways and keep them clear.",
+      "sourceUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-bike-lane-map/"
+    },
+    {
+      "id": "let-people-off",
+      "title": "Let passengers off first",
+      "text": "Stand to the side of the train or tram doors so people can leave before you board.",
+      "sourceUrl": "https://www.bvg.de/en"
+    },
+    {
+      "id": "keep-ticket",
+      "title": "Keep your valid ticket ready",
+      "text": "Ticket checks happen on the network. Keep the valid paper or mobile ticket available during the journey.",
+      "sourceUrl": "https://www.bvg.de/en/tickets-tariffs"
+    },
+    {
+      "id": "ask-before-photo",
+      "title": "Ask before photographing people",
+      "text": "Street scenes are part of Berlin, but ask before making a person the subject of a close photo.",
+      "sourceUrl": "https://www.berlinwalk.com/the-guide"
+    },
+    {
+      "id": "refill-at-marked-point",
+      "title": "Refill at a marked drinking-water point",
+      "text": "Use a marked drinking-water point for a refill. A decorative fountain is not automatically drinking water.",
+      "sourceUrl": "https://www.berlinwalk.com/tools/berlin-drinking-water"
+    },
+    {
+      "id": "clear-doorway",
+      "title": "Keep doorways and station stairs moving",
+      "text": "Move to the side before checking your phone, especially at Alexanderplatz, Hauptbahnhof and other busy interchanges.",
+      "sourceUrl": "https://www.bvg.de/en"
+    }
+  ],
+  "practical": [
+    {
+      "id": "public-toilets",
+      "title": "Public Toilet Finder",
+      "description": "Find marked public toilets before the need becomes urgent.",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/public-toilets-map/",
+      "sourceUrl": "https://www.berlinwalk.com/tools/berlin-public-toilets",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "drinking-water",
+      "title": "Drinking Water Map",
+      "description": "Find refill points for a bottle during a long walking day.",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/drinking-water-map/",
+      "sourceUrl": "https://www.berlinwalk.com/tools/berlin-drinking-water",
+      "checkedAt": "2026-08-22"
+    },
+    {
+      "id": "luggage-storage",
+      "title": "Luggage Storage Map",
+      "description": "Find a storage option before a museum or a late train when carrying bags changes the day.",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/luggage-storage-map/",
+      "sourceUrl": "https://www.berlinwalk.com/tools/berlin-luggage-storage",
+      "checkedAt": "2026-08-22"
+    }
+  ]
+}

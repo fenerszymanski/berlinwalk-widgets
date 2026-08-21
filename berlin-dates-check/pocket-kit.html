@@ -1,0 +1,717 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Berlin Pocket Kit | BerlinWalk</title>
+<meta name="description" content="A phone-friendly Berlin Pocket Kit with 50 food and drink picks, official transport maps, the 19-place landmark map, local rules and practical maps.">
+<link rel="icon" href="../ultimate-berlin-trip-planner/assets/berlinwalk-logo-rounded.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0,0&display=swap">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --ground: #f4f6ef;
+    --surface: #fff;
+    --surface-soft: #e8f0e2;
+    --ink: #172119;
+    --muted: #5d6a5d;
+    --line: #d1ddcb;
+    --green: #1b5e20;
+    --green-dark: #123d18;
+    --yellow: #ffe600;
+    --cream: #fafaf5;
+    --display: Georgia, "Times New Roman", serif;
+    --body: Montserrat, Arial, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--body);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--green); }
+  a:focus-visible, button:focus-visible, input:focus-visible {
+    outline: 3px solid #91b965;
+    outline-offset: 3px;
+  }
+  .pk-shell { width: min(100%, 1120px); margin: 0 auto; padding: 0 22px; }
+  .pk-hero {
+    background: var(--green-dark);
+    color: #fff;
+    border-bottom: 7px solid var(--yellow);
+  }
+  .pk-hero-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(300px, .95fr);
+    align-items: center;
+    gap: clamp(25px, 4.5vw, 58px);
+    width: min(100%, 1120px);
+    margin: 0 auto;
+    padding: clamp(38px, 7vw, 76px) 22px 48px;
+  }
+  .pk-hero-copy { min-width: 0; }
+  .pk-hero-media {
+    width: 100%;
+    min-width: 0;
+    aspect-ratio: 16 / 10;
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.34);
+    border-radius: 18px;
+    background: #0a2b14;
+    box-shadow: 0 18px 40px rgba(0,0,0,.2);
+  }
+  .pk-hero-media picture, .pk-hero-media img { display: block; width: 100%; height: 100%; }
+  .pk-hero-media img { object-fit: cover; object-position: 68% center; }
+  .pk-kicker {
+    margin: 0 0 13px;
+    color: var(--yellow);
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+  h1, h2, h3 { text-wrap: balance; }
+  h1 {
+    max-width: 760px;
+    margin: 0;
+    font-family: var(--display);
+    font-size: clamp(38px, 7vw, 70px);
+    line-height: .99;
+    letter-spacing: -.035em;
+    font-weight: 700;
+  }
+  .pk-hero-lead {
+    max-width: 66ch;
+    margin: 20px 0 0;
+    color: rgba(255,255,255,.9);
+    font-size: clamp(16px, 2vw, 20px);
+    line-height: 1.55;
+  }
+  .pk-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 30px;
+  }
+  .pk-nav a {
+    padding: 8px 11px;
+    border: 1px solid rgba(255,255,255,.42);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .pk-nav a:hover, .pk-nav a:visited:hover { background: rgba(255,255,255,.12); color: #fff; }
+
+  main { padding: 38px 0 64px; }
+  .pk-section { margin-top: 54px; scroll-margin-top: 18px; }
+  .pk-section:first-child { margin-top: 0; }
+  .pk-section-head { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 18px; }
+  .pk-heading { display: inline-flex; align-items: flex-start; gap: 10px; }
+  .material-symbols-outlined {
+    display: inline-block;
+    direction: ltr;
+    font-family: 'Material Symbols Outlined';
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: normal;
+    line-height: 1;
+    text-transform: none;
+    white-space: nowrap;
+    word-wrap: normal;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: 'liga';
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+  .pk-heading-icon { flex: 0 0 auto; margin-top: 3px; color: var(--green); font-size: 29px; }
+  .pk-eyebrow {
+    margin: 0 0 8px;
+    color: var(--green);
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+  }
+  h2 {
+    margin: 0;
+    color: var(--green-dark);
+    font-family: var(--display);
+    font-size: clamp(28px, 4.5vw, 43px);
+    line-height: 1.05;
+    letter-spacing: -.025em;
+  }
+  h3 { margin: 0; color: var(--green-dark); font-size: 17px; line-height: 1.22; }
+  .pk-resource h3, .pk-practical h3 { display: flex; align-items: flex-start; gap: 9px; }
+  .pk-card-icon { flex: 0 0 auto; margin-top: 1px; color: var(--green); font-size: 23px; }
+  .pk-section-lead { max-width: 68ch; margin: 8px 0 0; color: var(--muted); font-size: 14px; }
+  .pk-filter-panel {
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: 0 10px 26px rgba(18,61,24,.06);
+  }
+  .pk-search-label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--green-dark);
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+  }
+  .pk-search {
+    width: 100%;
+    min-height: 49px;
+    padding: 11px 13px;
+    border: 1.5px solid var(--green);
+    border-radius: 9px;
+    background: var(--cream);
+    color: var(--ink);
+    font: 500 15px/1.3 var(--body);
+  }
+  .pk-search::placeholder { color: #768274; }
+  .pk-filter-label {
+    margin: 19px 0 8px;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .pk-filters { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pk-filter {
+    min-height: 38px;
+    padding: 8px 11px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--green-dark);
+    cursor: pointer;
+    font: 700 12px/1.15 var(--body);
+  }
+  .pk-filter:hover { border-color: var(--green); background: var(--surface-soft); }
+  .pk-filter[aria-pressed="true"] { border-color: var(--green); background: var(--green); color: #fff; }
+  .pk-count {
+    margin: 15px 0 0;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 12px;
+  }
+  .pk-venue-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 13px;
+    margin-top: 18px;
+  }
+  .pk-card {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    padding: 17px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 13px;
+  }
+  .pk-card-top { display: flex; align-items: start; justify-content: space-between; gap: 10px; }
+  .pk-card .pk-area {
+    margin: 5px 0 0;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+  .pk-price {
+    flex: 0 0 auto;
+    padding: 4px 6px;
+    border-radius: 5px;
+    background: var(--surface-soft);
+    color: var(--green-dark);
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    white-space: nowrap;
+  }
+  .pk-card-best {
+    flex: 1;
+    margin: 13px 0 15px;
+    color: #374638;
+    font-size: 13px;
+    line-height: 1.48;
+  }
+  .pk-card-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    padding-top: 11px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .pk-card-links { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 11px; }
+  .pk-card-links a, .pk-resource a, .pk-practical a {
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 800;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .pk-empty {
+    display: none;
+    margin: 18px 0 0;
+    padding: 20px;
+    border: 1px dashed var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+    color: var(--muted);
+  }
+  .pk-empty.is-visible { display: block; }
+  .pk-resource-grid, .pk-practical-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 13px;
+  }
+  .pk-resource, .pk-practical {
+    min-width: 0;
+    padding: 18px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 13px;
+  }
+  .pk-resource p, .pk-practical p { margin: 9px 0 14px; color: var(--muted); font-size: 13px; line-height: 1.5; }
+  .pk-source {
+    display: block;
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.4;
+  }
+  .pk-source a { color: var(--green); }
+  .pk-landmark {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 20px;
+    padding: 23px;
+    background: var(--green);
+    border-radius: 16px;
+    color: #fff;
+  }
+  .pk-landmark h3 { color: #fff; font-size: 22px; }
+  .pk-landmark p { max-width: 68ch; margin: 9px 0 0; color: rgba(255,255,255,.88); font-size: 14px; }
+  .pk-button, .pk-button:visited {
+    display: inline-block;
+    padding: 12px 15px;
+    border-radius: 8px;
+    background: var(--yellow);
+    color: var(--green-dark);
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .pk-button:hover, .pk-button:focus, .pk-button:active, .pk-button:visited:hover {
+    background: #f4d900;
+    color: var(--green-dark);
+  }
+  .pk-rules {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 11px 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: pocket-rule;
+  }
+  .pk-rule {
+    position: relative;
+    min-width: 0;
+    padding: 17px 17px 17px 53px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    counter-increment: pocket-rule;
+  }
+  .pk-rule::before {
+    content: counter(pocket-rule, decimal-leading-zero);
+    position: absolute;
+    top: 17px;
+    left: 17px;
+    color: var(--green);
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .pk-rule h3 { font-size: 15px; }
+  .pk-rule p { margin: 7px 0 0; color: var(--muted); font-size: 13px; line-height: 1.48; }
+  .pk-footnote {
+    margin: 58px 0 0;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  @media (max-width: 860px) {
+    .pk-venue-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .pk-resource-grid, .pk-practical-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 620px) {
+    .pk-shell { padding: 0 16px; }
+    .pk-hero-inner { grid-template-columns: 1fr; padding: 38px 16px 40px; gap: 24px; }
+    .pk-hero-media { order: 2; aspect-ratio: 16 / 10; border-radius: 13px; }
+    .pk-hero-media img { object-position: 69% center; }
+    main { padding-top: 28px; }
+    .pk-section { margin-top: 42px; }
+    .pk-section-head { display: block; }
+    .pk-venue-grid, .pk-resource-grid, .pk-practical-grid, .pk-rules { grid-template-columns: 1fr; }
+    .pk-landmark { display: block; padding: 20px; }
+    .pk-landmark .pk-button { margin-top: 18px; }
+    .pk-nav { gap: 6px; }
+    .pk-nav a { font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+<header class="pk-hero">
+  <div class="pk-hero-inner">
+    <div class="pk-hero-copy">
+      <p class="pk-kicker">BerlinWalk · phone-friendly bonus</p>
+      <h1>Berlin in your pocket</h1>
+      <p class="pk-hero-lead">When you are already walking, the useful answer is usually a short list and the right official link. I put 50 food and drink picks, transport shortcuts, the essential landmark map, twelve local rules and three practical maps here.</p>
+      <nav class="pk-nav" aria-label="Pocket Kit sections">
+        <a href="#food">Food and drink</a>
+        <a href="#transport">Transport</a>
+        <a href="#landmarks">Landmarks</a>
+        <a href="#rules">Local rules</a>
+        <a href="#practical">Practical maps</a>
+      </nav>
+    </div>
+    <figure class="pk-hero-media">
+      <picture>
+        <source media="(max-width: 620px)" srcset="./photos/pocket-kit-hero.jpg">
+        <img src="./photos/pocket-kit-hero.jpg" width="1600" height="1066" loading="eager" fetchpriority="high" decoding="async" alt="Berlin tram passing a café table with a phone, maps, coffee and a sandwich.">
+      </picture>
+    </figure>
+  </div>
+</header>
+
+<main class="pk-shell">
+  <section class="pk-section" id="food" aria-labelledby="foodHeading">
+    <div class="pk-section-head">
+      <div>
+        <p class="pk-eyebrow">50 picks by situation</p>
+        <h2 id="foodHeading" class="pk-heading"><span class="material-symbols-outlined pk-heading-icon" aria-hidden="true">restaurant</span><span>Food and drink without the citywide ranking game</span></h2>
+        <p class="pk-section-lead">Use a situation filter, then check the venue source before you leave. I have kept this to names, areas, price bands and one useful reason to choose each place.</p>
+      </div>
+    </div>
+    <div class="pk-filter-panel">
+      <label class="pk-search-label" for="venueSearch">Search the 50 picks</label>
+      <input class="pk-search" id="venueSearch" type="search" placeholder="Try Kreuzberg, brunch or late beer" autocomplete="off">
+      <p class="pk-filter-label">Filter by situation</p>
+      <div class="pk-filters" id="categoryFilters" role="group" aria-label="Food and drink situations"></div>
+      <p class="pk-count" id="venueCount" role="status" aria-live="polite">Loading 50 picks...</p>
+    </div>
+    <div class="pk-venue-grid" id="venueGrid"></div>
+    <p class="pk-empty" id="venueEmpty" role="status">No picks match that search. Try a neighbourhood, a category or a broader word such as coffee.</p>
+  </section>
+
+  <section class="pk-section" id="transport" aria-labelledby="transportHeading">
+    <div class="pk-section-head">
+      <div>
+        <p class="pk-eyebrow">Official map pages and ticket tools</p>
+        <h2 id="transportHeading" class="pk-heading"><span class="material-symbols-outlined pk-heading-icon" aria-hidden="true">map</span><span>Take the right transport map with you</span></h2>
+        <p class="pk-section-lead">I use the operator pages for network maps. They can update their PDFs without this Pocket Kit becoming an old mirror.</p>
+      </div>
+    </div>
+    <div class="pk-resource-grid" id="transportGrid"></div>
+  </section>
+
+  <section class="pk-section" id="landmarks" aria-labelledby="landmarksHeading">
+    <div class="pk-section-head">
+      <div>
+        <p class="pk-eyebrow">19 places in one map</p>
+        <h2 id="landmarksHeading" class="pk-heading"><span class="material-symbols-outlined pk-heading-icon" aria-hidden="true">account_balance</span><span>Keep the essential landmarks close</span></h2>
+      </div>
+    </div>
+    <div class="pk-landmark" id="landmarkCard"></div>
+  </section>
+
+  <section class="pk-section" id="rules" aria-labelledby="rulesHeading">
+    <div class="pk-section-head">
+      <div>
+        <p class="pk-eyebrow">Small moves that save time</p>
+        <h2 id="rulesHeading" class="pk-heading"><span class="material-symbols-outlined pk-heading-icon" aria-hidden="true">rule</span><span>Twelve local rules</span></h2>
+        <p class="pk-section-lead">These are practical habits, not a performance test. Use the one that solves the situation in front of you.</p>
+      </div>
+    </div>
+    <ol class="pk-rules" id="rulesList"></ol>
+  </section>
+
+  <section class="pk-section" id="practical" aria-labelledby="practicalHeading">
+    <div class="pk-section-head">
+      <div>
+        <p class="pk-eyebrow">When the small problem arrives</p>
+        <h2 id="practicalHeading" class="pk-heading"><span class="material-symbols-outlined pk-heading-icon" aria-hidden="true">pin_drop</span><span>Toilet, water and luggage maps</span></h2>
+        <p class="pk-section-lead">Save these before a long walking day, a museum visit or the gap between checkout and your train.</p>
+      </div>
+    </div>
+    <div class="pk-practical-grid" id="practicalGrid"></div>
+  </section>
+
+  <p class="pk-footnote">Venue sources were checked on 22 August 2026. A source check confirms that the place or primary profile was live when checked, not that its service details stay unchanged. Check the linked source before leaving. This page does not publish opening hours, review scores, rankings or exact prices.</p>
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  var DATA_URL = './pocket-kit-data.json';
+  var data = null;
+  var activeCategory = 'all';
+  var searchTerm = '';
+  var RESOURCE_ICONS = {
+    'night-network-map': 'dark_mode',
+    's-bahn-regional-map': 'train',
+    'tram-network-map': 'tram',
+    'vbb-regional-map': 'map',
+    'transport-ticket-calculator': 'confirmation_number',
+    'zone-ticket-decoder': 'pin_drop'
+  };
+  var PRACTICAL_ICONS = {
+    'public-toilets': 'wc',
+    'drinking-water': 'water_drop',
+    'luggage-storage': 'luggage'
+  };
+
+  function text(value) {
+    return String(value == null ? '' : value);
+  }
+
+  function iconNode(name, className) {
+    var icon = document.createElement('span');
+    icon.className = 'material-symbols-outlined ' + (className || 'pk-card-icon');
+    icon.setAttribute('aria-hidden', 'true');
+    icon.textContent = name;
+    return icon;
+  }
+
+  function externalLink(label, href, className) {
+    var link = document.createElement('a');
+    link.href = href;
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.textContent = label;
+    if (className) link.className = className;
+    return link;
+  }
+
+  function categoryLabel(id) {
+    var category = data.categories.find(function (item) { return item.id === id; });
+    return category ? category.label : id;
+  }
+
+  function renderFilters() {
+    var target = document.getElementById('categoryFilters');
+    target.innerHTML = '';
+    var all = document.createElement('button');
+    all.type = 'button';
+    all.className = 'pk-filter';
+    all.dataset.category = 'all';
+    all.setAttribute('aria-pressed', activeCategory === 'all' ? 'true' : 'false');
+    all.textContent = 'All 50';
+    target.appendChild(all);
+    data.categories.forEach(function (category) {
+      var button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'pk-filter';
+      button.dataset.category = category.id;
+      button.setAttribute('aria-pressed', activeCategory === category.id ? 'true' : 'false');
+      button.textContent = category.shortLabel;
+      target.appendChild(button);
+    });
+  }
+
+  function venueMatches(venue) {
+    var categoryMatch = activeCategory === 'all' || venue.category === activeCategory;
+    if (!categoryMatch) return false;
+    if (!searchTerm) return true;
+    var haystack = [venue.name, venue.area, venue.bestFor, categoryLabel(venue.category)].join(' ').toLowerCase();
+    return haystack.indexOf(searchTerm) !== -1;
+  }
+
+  function renderVenues() {
+    var grid = document.getElementById('venueGrid');
+    var empty = document.getElementById('venueEmpty');
+    var count = document.getElementById('venueCount');
+    var venues = data.venues.filter(venueMatches);
+    grid.innerHTML = '';
+    venues.forEach(function (venue) {
+      var card = document.createElement('article');
+      card.className = 'pk-card';
+      var top = document.createElement('div');
+      top.className = 'pk-card-top';
+      var heading = document.createElement('div');
+      var title = document.createElement('h3');
+      title.textContent = venue.name;
+      heading.appendChild(title);
+      var area = document.createElement('p');
+      area.className = 'pk-area';
+      area.textContent = venue.area + ' · ' + categoryLabel(venue.category);
+      heading.appendChild(area);
+      var price = document.createElement('span');
+      price.className = 'pk-price';
+      price.textContent = venue.priceBand;
+      top.appendChild(heading);
+      top.appendChild(price);
+      card.appendChild(top);
+      var best = document.createElement('p');
+      best.className = 'pk-card-best';
+      best.textContent = venue.bestFor;
+      card.appendChild(best);
+      var meta = document.createElement('div');
+      meta.className = 'pk-card-meta';
+      var reservation = document.createElement('span');
+      reservation.textContent = venue.reservation === 'walk-in' ? 'Walk-in' : venue.reservation === 'reserve' ? 'Reserve' : 'Check first';
+      var checked = document.createElement('span');
+      checked.textContent = 'Checked ' + venue.checkedAt;
+      meta.appendChild(reservation);
+      meta.appendChild(checked);
+      card.appendChild(meta);
+      var links = document.createElement('div');
+      links.className = 'pk-card-links';
+      links.appendChild(externalLink('Open in Maps', venue.mapsUrl));
+      links.appendChild(externalLink('Venue source', venue.sourceUrl));
+      card.appendChild(links);
+      grid.appendChild(card);
+    });
+    empty.classList.toggle('is-visible', venues.length === 0);
+    count.textContent = 'Showing ' + venues.length + ' of ' + data.venues.length + ' picks';
+  }
+
+  function renderResources() {
+    var target = document.getElementById('transportGrid');
+    data.transport.forEach(function (resource) {
+      var card = document.createElement('article');
+      card.className = 'pk-resource';
+      var heading = document.createElement('h3');
+      heading.appendChild(iconNode(RESOURCE_ICONS[resource.id] || 'link'));
+      heading.appendChild(document.createTextNode(resource.title));
+      card.appendChild(heading);
+      var body = document.createElement('p');
+      body.textContent = resource.description;
+      card.appendChild(body);
+      card.appendChild(externalLink('Open resource', resource.url));
+      var source = document.createElement('small');
+      source.className = 'pk-source';
+      source.textContent = resource.sourceType + ' · checked ' + resource.checkedAt;
+      card.appendChild(source);
+      target.appendChild(card);
+    });
+  }
+
+  function renderLandmark() {
+    var card = document.getElementById('landmarkCard');
+    var heading = document.createElement('div');
+    var title = document.createElement('h3');
+    title.textContent = data.landmarks.title;
+    heading.appendChild(title);
+    var body = document.createElement('p');
+    body.textContent = data.landmarks.description;
+    heading.appendChild(body);
+    card.appendChild(heading);
+    card.appendChild(externalLink('Open the 19-place map', data.landmarks.url, 'pk-button'));
+  }
+
+  function renderRules() {
+    var target = document.getElementById('rulesList');
+    data.rules.forEach(function (rule) {
+      var item = document.createElement('li');
+      item.className = 'pk-rule';
+      var title = document.createElement('h3');
+      title.textContent = rule.title;
+      item.appendChild(title);
+      var body = document.createElement('p');
+      body.textContent = rule.text;
+      item.appendChild(body);
+      target.appendChild(item);
+    });
+  }
+
+  function renderPractical() {
+    var target = document.getElementById('practicalGrid');
+    data.practical.forEach(function (resource) {
+      var card = document.createElement('article');
+      card.className = 'pk-practical';
+      var title = document.createElement('h3');
+      title.appendChild(iconNode(PRACTICAL_ICONS[resource.id] || 'pin_drop'));
+      title.appendChild(document.createTextNode(resource.title));
+      card.appendChild(title);
+      var body = document.createElement('p');
+      body.textContent = resource.description;
+      card.appendChild(body);
+      card.appendChild(externalLink('Open map', resource.url));
+      var source = document.createElement('small');
+      source.className = 'pk-source';
+      source.textContent = 'BerlinWalk tool · checked ' + resource.checkedAt;
+      card.appendChild(source);
+      target.appendChild(card);
+    });
+  }
+
+  function init() {
+    renderFilters();
+    renderVenues();
+    renderResources();
+    renderLandmark();
+    renderRules();
+    renderPractical();
+    var search = document.getElementById('venueSearch');
+    search.addEventListener('input', function () {
+      searchTerm = search.value.trim().toLowerCase();
+      renderVenues();
+    });
+    document.getElementById('categoryFilters').addEventListener('click', function (event) {
+      var button = event.target.closest('button[data-category]');
+      if (!button) return;
+      var restoreFocus = document.activeElement === button;
+      activeCategory = button.dataset.category;
+      renderFilters();
+      if (restoreFocus) {
+        var activeButton = document.querySelector('#categoryFilters button[data-category="' + activeCategory + '"]');
+        if (activeButton) activeButton.focus();
+      }
+      renderVenues();
+    });
+  }
+
+  fetch(DATA_URL, { cache: 'no-store' })
+    .then(function (response) {
+      if (!response.ok) throw new Error('Pocket Kit data failed to load');
+      return response.json();
+    })
+    .then(function (json) {
+      data = json;
+      init();
+    })
+    .catch(function () {
+      document.getElementById('venueCount').textContent = 'The Pocket Kit could not load. Refresh the page and try again.';
+    });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
