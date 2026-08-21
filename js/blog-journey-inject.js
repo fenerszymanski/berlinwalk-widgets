@@ -1178,9 +1178,9 @@
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"]{color:#212121;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] [' + EMPTY_PARAGRAPH_MARKER + '="1"]{display:none!important;height:0!important;line-height:0!important;margin:0!important;min-height:0!important;padding:0!important;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] p:not(.bw-blog-mobile-guide-title):not(.bw-blog-journey-intro):not(.bw-blog-tool-copy):not([' + EMPTY_PARAGRAPH_MARKER + ']){font-family:Merriweather,Georgia,serif!important;font-size:18px!important;line-height:1.74!important;margin:0 0 18px!important;}',
-      'body.bw-blog-post-enhanced [' + POST_TITLE_MARKER + '="1"]{color:#212121!important;display:block!important;font-family:Montserrat,Arial,sans-serif!important;font-weight:900!important;font-variation-settings:"wght" 900!important;letter-spacing:0!important;line-height:1.06!important;max-width:100%!important;width:100%!important;-webkit-text-stroke:.18px currentColor!important;text-shadow:.18px 0 0 currentColor,-.18px 0 0 currentColor!important;}',
+      'body.bw-blog-post-enhanced [' + POST_TITLE_MARKER + '="1"]{color:#212121!important;display:block!important;font-family:"BW Montserrat Black",Arial,sans-serif!important;font-weight:900!important;font-variation-settings:"wght" 900!important;letter-spacing:0!important;line-height:1.06!important;max-width:100%!important;width:100%!important;-webkit-text-stroke:.18px currentColor!important;text-shadow:.18px 0 0 currentColor,-.18px 0 0 currentColor!important;}',
       'body.bw-blog-post-enhanced [' + POST_TITLE_MARKER + '="1"] *{color:inherit!important;font-family:inherit!important;font-size:inherit!important;font-style:normal!important;font-weight:900!important;font-variation-settings:"wght" 900!important;letter-spacing:0!important;line-height:inherit!important;-webkit-text-stroke:.18px currentColor!important;text-shadow:.18px 0 0 currentColor,-.18px 0 0 currentColor!important;}',
-      'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2,body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h3{font-family:Montserrat,Arial,sans-serif!important;font-weight:900!important;font-variation-settings:"wght" 900!important;letter-spacing:0!important;color:#212121!important;scroll-margin-top:96px;-webkit-text-stroke:.12px currentColor!important;text-shadow:.12px 0 0 currentColor!important;}',
+      'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2,body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h3{font-family:"BW Montserrat Black",Arial,sans-serif!important;font-weight:900!important;font-variation-settings:"wght" 900!important;letter-spacing:0!important;color:#212121!important;scroll-margin-top:96px;-webkit-text-stroke:.12px currentColor!important;text-shadow:.12px 0 0 currentColor!important;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2 *,body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h3 *{color:inherit!important;font-family:inherit!important;font-size:inherit!important;font-style:normal!important;font-weight:900!important;font-variation-settings:"wght" 900!important;letter-spacing:0!important;line-height:inherit!important;-webkit-text-stroke:.12px currentColor!important;text-shadow:.12px 0 0 currentColor!important;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2{border-top:2px solid #212121;font-size:clamp(28px,4vw,38px)!important;line-height:1.06!important;margin:42px 0 14px!important;padding-top:24px!important;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h3{font-size:clamp(21px,3vw,26px)!important;line-height:1.12!important;margin:30px 0 10px!important;}',
@@ -1454,7 +1454,7 @@
     });
     if (!title) return;
     title.setAttribute(POST_TITLE_MARKER, '1');
-    title.style.setProperty('font-family', 'Montserrat, Arial, sans-serif', 'important');
+    title.style.setProperty('font-family', '"BW Montserrat Black", Arial, sans-serif', 'important');
     title.style.setProperty('display', 'block', 'important');
     title.style.setProperty('width', '100%', 'important');
     title.style.setProperty('max-width', '100%', 'important');
@@ -1623,7 +1623,7 @@
     if (!body) return;
     body.querySelectorAll('h2, h3').forEach(function (heading) {
       if (heading.closest('[' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + JOURNEY_MARKER + '], [data-bw-leadform], [data-bw-tourcta], [' + FDR_BRIDGE_MARKER + ']')) return;
-      heading.style.setProperty('font-family', 'Montserrat, Arial, sans-serif', 'important');
+      heading.style.setProperty('font-family', '"BW Montserrat Black", Arial, sans-serif', 'important');
       heading.style.setProperty('font-weight', '900', 'important');
       heading.style.setProperty('font-variation-settings', '"wght" 900', 'important');
       heading.style.setProperty('letter-spacing', '0', 'important');
