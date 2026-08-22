@@ -1,3 +1,54 @@
+# Berlin Date Check Pocket Kit Gate Placement Design QA
+
+**Comparison Target**
+
+- Source visual truth: Yusuf's Chrome appshots `Google Chrome Appshot 2026-08-22T04-39-23.526Z.png` and `Google Chrome Appshot 2026-08-22T04-42-42.077Z.png`, plus the captured pre-change implementation at `/private/tmp/date-check-source-preview-natural.png` and `/private/tmp/date-check-source-gate-natural.png`.
+- Rendered implementation, desktop result/gate state: `/private/tmp/date-check-after-zone-natural.png`.
+- Rendered implementation, mobile bonus state: `/private/tmp/date-check-gate-after-focus-390x844-cdp.png`.
+- Rendered implementation, mobile consent state: `/private/tmp/date-check-gate-consent-390x844-cdp.png`.
+- Desktop viewport/state: 1280 x 720 CSS px, hydrated `25-29 September 2026` result, screenshot output 1280 x 720 px.
+- Mobile viewport/state: 390 x 844 CSS px, device scale factor 1, same hydrated result, screenshot output 390 x 844 px.
+
+**Comparison Evidence**
+
+- Full gate-flow comparison: `/private/tmp/date-check-gate-before-after-verified.jpg`.
+- Focused consent-spacing comparison: `/private/tmp/date-check-consent-before-after-verified.jpg`.
+- Focused comparison was required because the 0 px versus 12 px consent gap is too small to judge reliably in a full-page capture.
+
+**Findings**
+
+- No actionable P0, P1, or P2 finding remains.
+- Fonts and typography: the established serif display and sans/mono UI hierarchy is unchanged; headings, supporting copy and consent text remain untruncated in the tested desktop and mobile states.
+- Spacing and layout rhythm: the single `Email-only bonus` card now sits directly above the email gate inside the result stage. The full date result remains before it, and the consent row has a measured 12 px separation from the email action row.
+- Colors and visual tokens: the existing cream, dark-green, soft-green and yellow treatments are unchanged; CTA text remains dark green on yellow.
+- Image quality and asset fidelity: the 1600 px Pocket Kit editorial image keeps its intended crop and loads at full natural width on mobile; no placeholder or code-drawn asset was introduced.
+- Copy and content: all approved Pocket Kit and consent wording is unchanged. Only the requested hierarchy and spacing moved.
+- Responsive behavior: at 390 px the preview stacks copy, four icon rows and the photo cleanly; document horizontal overflow is 0. Desktop overflow is also 0.
+- Visibility and accessibility: before a date result, `#resultStage` is `display:none` and the bonus is not visible. After hydration, exactly one `#pocketPreview` is present inside the result stage before `#gate`; heading and list semantics are preserved.
+- Runtime: desktop and mobile browser logs contain zero errors. The targeted Pocket Kit suite passes 10/10.
+
+**Comparison History**
+
+1. Earlier P1 - the email-only value card appeared before the visitor saw the dated result, separating the bonus promise from the actual email gate. Fix: moved the single preview into `.gate-zone`, immediately before `#gate`, while preserving result visibility. Post-fix evidence: `/private/tmp/date-check-gate-before-after-verified.jpg`.
+2. Earlier P2 - the consent checkbox/text started at the exact bottom edge of the email action row. Fix: added `margin-top: 12px` to `.consent`. Post-fix evidence: `/private/tmp/date-check-consent-before-after-verified.jpg` and computed desktop/mobile gap `12px`.
+
+**Implementation Checklist**
+
+- [x] One Pocket Kit preview only.
+- [x] Hidden until a date result exists.
+- [x] Preview immediately precedes the email gate.
+- [x] Consent has a measured 12 px top gap.
+- [x] Desktop and 390 px mobile overflow and console checks.
+- [x] Regression tests for placement, uniqueness, hidden parent and spacing.
+
+**Follow-up Polish**
+
+- None required for this scoped correction.
+
+final result: passed
+
+---
+
 # Berlin Trip Planner Landing A/B Design QA
 
 **Comparison Target**

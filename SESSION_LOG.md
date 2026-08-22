@@ -8,6 +8,15 @@ Yalnız listing data, generator, renderer ve cache-buster dosyaları commit `c29
 
 **Next session should:** Yeni Wix inventory ile listing seçimlerini yeniden değerlendirsin; homepage custom elements görünür olana kadar ana sayfa kartlarını doğrulanmış kabul etmesin.
 
+- 2026-08-22 06:53 CEST (Codex + Luna Max, DATE CHECK GATE HIERARCHY CORRECTION):
+  Moved the single email-only Pocket Kit preview out of the pre-result support
+  strip and into `resultStage` immediately before the email gate; it stays
+  hidden before dates are calculated. Added a measured 12px top gap to the
+  consent row. Commit `ff6bf0c10fd0b43a2b811398350c3b869f585601`; no push or
+  deployment. Pocket Kit 10/10 and diff check PASS; 1280x720 plus 390x844
+  browser QA found overflow0, console0 and the expected desktop/mobile gap.
+  The refreshed project-root `design-qa.md` ends `final result: passed`.
+
 - 2026-08-22 01:32 CEST (Codex + Luna Max, DATE CHECK POCKET KIT LOCAL COMPLETE):
   Added the Date Check LP Pocket Kit preview, editorial hero image and Material
   Symbols treatment; removed result-page tour availability/sales UI while
