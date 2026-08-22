@@ -265,6 +265,12 @@ test('Date Check mobile CSS and custom date display resist physical Safari overf
   assert.doesNotMatch(injectorSource, /<p class="bw-date-check-blog-card__(?:eyebrow|copy|micro|status)"/);
 });
 
+test('Date Check keeps a visible editable desktop input and opens the mobile picker from the field', () => {
+  assert.match(injectorSource, /@media\(min-width:701px\)\{\.bw-date-check-blog-card__date-display\{display:none\}/);
+  assert.match(injectorSource, /@media\(min-width:701px\)[^']*\.bw-date-check-blog-card__date-control input\{[^}]*color:#212121!important[^}]*opacity:1!important/);
+  assert.match(injectorSource, /arrivalInput\.addEventListener\('click',[\s\S]*window\.innerWidth \|\| 0\) >= 701\) return;[\s\S]*typeof arrivalInput\.showPicker !== 'function'[\s\S]*arrivalInput\.showPicker\(\)/);
+});
+
 test('journey keeps editorial tools, related guides and booking while removing fixed product promotions', () => {
   assert.match(journeySource, /Related guides/);
   assert.match(journeySource, /data-bw-blog-journey/);
