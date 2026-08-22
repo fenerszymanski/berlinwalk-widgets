@@ -1,285 +1,87 @@
-# Berlin Date Check Pocket Kit Gate Placement Design QA
+# Berlin Date Check — Berlin Unlocked design QA
 
-**Comparison Target**
+## Comparison target
 
-- Source visual truth: Yusuf's Chrome appshots `Google Chrome Appshot 2026-08-22T04-39-23.526Z.png` and `Google Chrome Appshot 2026-08-22T04-42-42.077Z.png`, plus the captured pre-change implementation at `/private/tmp/date-check-source-preview-natural.png` and `/private/tmp/date-check-source-gate-natural.png`.
-- Rendered implementation, desktop result/gate state: `/private/tmp/date-check-after-zone-natural.png`.
-- Rendered implementation, mobile bonus state: `/private/tmp/date-check-gate-after-focus-390x844-cdp.png`.
-- Rendered implementation, mobile consent state: `/private/tmp/date-check-gate-consent-390x844-cdp.png`.
-- Desktop viewport/state: 1280 x 720 CSS px, hydrated `25-29 September 2026` result, screenshot output 1280 x 720 px.
-- Mobile viewport/state: 390 x 844 CSS px, device scale factor 1, same hydrated result, screenshot output 390 x 844 px.
+- Source visual truth: `/var/folders/qy/p38mnw8s6zdcgddbj_0b8z2m0000gn/T/codex-clipboard-849fd92f-54b5-446b-bd26-482ba6839516.png`
+- Source dimensions: `1490 × 1560` px.
+- Intended transformation: merge the source's separate bonus-preview and email-form cards into one offer; replace the two public product names with one prominent `Berlin Unlocked` name; reduce the explanatory copy while preserving the four benefits, supplied photo, form, and consent.
+- Implementation URL/state: `http://127.0.0.1:4517/berlin-dates-check/index.html?arrival=2026-09-25&nights=4&qa=1` with the hydrated four-night result visible.
+- Desktop implementation evidence: `berlin-dates-check/qa/berlin-unlocked-desktop-1280x900.png` (`1280 × 900` px, CSS viewport `1280 × 900`, density `1`).
+- Mobile implementation evidence: `berlin-dates-check/qa/berlin-unlocked-mobile-390x844.png` (`390 × 844` px, CSS viewport `390 × 844`, density `1`).
+- Combined source/final comparison: `berlin-dates-check/qa/berlin-unlocked-source-vs-final.png` (`1500 × 850` px).
 
-**Comparison Evidence**
+## Full-view comparison evidence
 
-- Full gate-flow comparison: `/private/tmp/date-check-gate-before-after-verified.jpg`.
-- Focused consent-spacing comparison: `/private/tmp/date-check-consent-before-after-verified.jpg`.
-- Focused comparison was required because the 0 px versus 12 px consent gap is too small to judge reliably in a full-page capture.
+The combined comparison places the supplied source and the rendered desktop offer in one image. The source uses two bordered cards, two headings, two product names, and several overlapping explanatory paragraphs. The final uses one bordered card, one product name, one compact promise, one date line, the four existing benefit tiles, the supplied tram photo, and the form in the same visual unit.
 
-**Findings**
+This is an intentional information-architecture change rather than a pixel-for-pixel reproduction. The existing cream/green/yellow palette, line-icon treatment, tram image, border weight, radii, and form styling remain visually consistent with the source.
 
-- No actionable P0, P1, or P2 finding remains.
-- Fonts and typography: the established serif display and sans/mono UI hierarchy is unchanged; headings, supporting copy and consent text remain untruncated in the tested desktop and mobile states.
-- Spacing and layout rhythm: the single `Email-only bonus` card now sits directly above the email gate inside the result stage. The full date result remains before it, and the consent row has a measured 12 px separation from the email action row.
-- Colors and visual tokens: the existing cream, dark-green, soft-green and yellow treatments are unchanged; CTA text remains dark green on yellow.
-- Image quality and asset fidelity: the 1600 px Pocket Kit editorial image keeps its intended crop and loads at full natural width on mobile; no placeholder or code-drawn asset was introduced.
-- Copy and content: all approved Pocket Kit and consent wording is unchanged. Only the requested hierarchy and spacing moved.
-- Responsive behavior: at 390 px the preview stacks copy, four icon rows and the photo cleanly; document horizontal overflow is 0. Desktop overflow is also 0.
-- Visibility and accessibility: before a date result, `#resultStage` is `display:none` and the bonus is not visible. After hydration, exactly one `#pocketPreview` is present inside the result stage before `#gate`; heading and list semantics are preserved.
-- Runtime: desktop and mobile browser logs contain zero errors. The targeted Pocket Kit suite passes 10/10.
+## Focused region evidence
 
-**Comparison History**
+- Desktop focused region: the whole merged offer is readable in `berlin-unlocked-desktop-1280x900.png`; no extra crop was needed because the complete card, form, CTA, and consent fit in one viewport.
+- Mobile focused region: `berlin-unlocked-mobile-390x844.png` shows the complete one-column offer, full-width image, full-width email input and CTA, plus the consent line.
+- Delivered utility page: `pocket-kit.html` renders public H1/title/navigation as `Berlin Unlocked`; its filter changed the visible count from `50` to `6`, and search narrowed that to `1` without console errors.
 
-1. Earlier P1 - the email-only value card appeared before the visitor saw the dated result, separating the bonus promise from the actual email gate. Fix: moved the single preview into `.gate-zone`, immediately before `#gate`, while preserving result visibility. Post-fix evidence: `/private/tmp/date-check-gate-before-after-verified.jpg`.
-2. Earlier P2 - the consent checkbox/text started at the exact bottom edge of the email action row. Fix: added `margin-top: 12px` to `.consent`. Post-fix evidence: `/private/tmp/date-check-consent-before-after-verified.jpg` and computed desktop/mobile gap `12px`.
+## Required fidelity surfaces
 
-**Implementation Checklist**
+### Fonts and typography
 
-- [x] One Pocket Kit preview only.
-- [x] Hidden until a date result exists.
-- [x] Preview immediately precedes the email gate.
-- [x] Consent has a measured 12 px top gap.
-- [x] Desktop and 390 px mobile overflow and console checks.
-- [x] Regression tests for placement, uniqueness, hidden parent and spacing.
+- `BERLIN UNLOCKED` is the dominant label, using the existing Space Grotesk family at `50px/700` desktop and `30px/700` mobile with controlled tracking.
+- The promise, date line, tile labels, form, and consent retain the existing type system and readable hierarchy.
+- Desktop heading wraps to two lines; mobile fits on one line at 390 px. At the narrow fallback viewport it wraps without overflow.
 
-**Follow-up Polish**
+### Spacing and layout rhythm
 
-- None required for this scoped correction.
+- Exactly one `.gate-zone`, one preview, one gate and one `#gateHeading` render.
+- Desktop card: `996px` wide, `387px` high, `22px` internal gap, `14px` radius, and `1.5px` border.
+- Mobile card: `358px` wide at a 390px viewport. Email input and CTA are both `319px` wide; consent has the required `12px` top separation.
+- Document horizontal overflow is `0` at 1280px, 390px, and the narrow fallback check. No fixed or sticky element exists inside the widget.
 
-final result: passed
+### Colors and visual tokens
 
----
+- The merged card keeps the established cream/white surfaces and brand green border.
+- CTA computed background is `rgb(255, 230, 0)` and foreground is `rgb(18, 61, 24)` on desktop and mobile, satisfying the yellow contrast rule.
+- No new unapproved color or decorative effect was introduced.
 
-# Berlin Trip Planner Landing A/B Design QA
+### Image quality and asset fidelity
 
-**Comparison Target**
+- The supplied Berlin tram/table image remains the only offer image.
+- Desktop crop preserves the tram, phone, maps, food and coffee. Mobile uses the existing responsive crop without stretching or horizontal overflow.
+- Existing Material Symbols remain the four benefit icons; no placeholder, emoji, CSS drawing, or handcrafted SVG replaced an asset.
 
-- Control: the existing premium `/berlin-trip-planner` landing and its single embedded planner.
-- Value-first B: one compact product-value card immediately before that same planner, without changing the form or checkout.
-- Live B desktop card: `/Users/yusufucuz/Documents/New project/berlinwalk-widgets/.playwright-cli/element-2026-07-15T18-44-38-251Z.png`
-- Live B mobile card: `/Users/yusufucuz/Documents/New project/berlinwalk-widgets/.playwright-cli/element-2026-07-15T18-45-49-741Z.png`
-- Local full-page captures: `output/playwright/trip-planner-ab-20260715/value-first-desktop.png`, `value-first-mobile.png`, and `control-desktop.png`.
+### Copy and content
 
-**Findings**
+- Dominant product name: `BERLIN UNLOCKED`.
+- Promise: `Your dates. My local shortcuts. One phone-ready guide.`
+- Dynamic line: `Built for 25–29 September 2026.`
+- CTA: `Send me Berlin Unlocked`.
+- Consent and success copy use the same name.
+- Rendered Date Check, delivered utility, DOI copy and access-email copy contain no reader-facing `Dates Pack`, `Pocket Kit`, or `Berlin pack` terminology.
 
-- No actionable P0, P1, or P2 difference remains.
-- Value hierarchy: the B card names a real sample route (`Alexanderplatz -> Museum Island -> Hackescher Markt`) before listing the paid plan's concrete additions. The EUR7.99 price and free-preview reassurance are visible beside the CTA on desktop and directly above it on mobile.
-- Experiment isolation: forced live B rendered exactly one `.bw-trip-value-first` and one iframe; forced control rendered zero value cards and one iframe. Both arms resolve to the same embedded planner and checkout.
-- Behavior: `Build my free preview` scrolls the planner frame to about 21px below the viewport top and focuses the active `Arrival date` field inside the iframe. It does not reset or duplicate the form.
-- Responsiveness: at 390 x 844 the B card measured 370px from x=10 to x=380 with document horizontal overflow `0`. The route panel, benefit chips, price and full-width CTA stack cleanly with no clipped text.
-- Contrast: the live B CTA computed to dark green `rgb(18,61,24)` on yellow `rgb(255,230,0)`.
-- Assignment: a normal live session kept the same `value_first` variant and assignment ID across reload; test event requests were mocked. Forced control/B sessions carried `forced_qa` and were excluded from the production report.
-- Accessibility and SEO: the value card uses a labelled region, semantic heading/list, descriptive route label and ordinary anchor CTA. Final rendered DOM had exactly one H1 in both arms.
-- Runtime: live Chromium reported zero console errors. Two pre-existing load-before-navigation `bw-measure-request` target-origin warnings appeared during the iframe height handshake; the loaded iframe, resize channel, CTA focus and form all worked normally.
+## Interaction and browser checks
 
-**Implementation Checklist**
+- Date result hydration: passed.
+- Email field and required consent remain present and labelled.
+- Hydrated sent state: form hidden; `Berlin Unlocked is on its way. Check Inbox, Spam and Promotions.` visible in an `aria-live="polite"` status.
+- Delivered utility filter/search: passed (`50 → 6 → 1`).
+- Browser console errors: `0` on Date Check and delivered utility.
+- Widget tests: `11/11` passed.
+- Targeted content-app tests: `72/72` passed.
 
-- [x] Stable 50/50 control/value-first assignment.
-- [x] Same single planner and checkout in both arms.
-- [x] Concrete route and paid value before the B form.
-- [x] Desktop and 390px mobile visual review.
-- [x] No horizontal overflow.
-- [x] Yellow CTA contrast verified from computed styles.
-- [x] B CTA scroll and input focus verified.
-- [x] Control/B QA separation and reload persistence verified.
-- [x] Live GitHub Pages source and production Wix page verified.
+## Comparison history
 
-final result: passed
+1. Initial merged build finding: `[P2]` At 390px, the email input used the available width but the CTA wrapped to a narrower `207px` left-aligned button. This weakened the conversion hierarchy.
+2. Fix: commit `1fb8dfa8185fe2e2af7d26c88946485b8edc2e18` makes the CTA `flex: 1 1 100%`, `width: 100%`, `min-width: 0` below 520px.
+3. Post-fix evidence: the CTA is `319px` wide at 390px, matches the email input, has the correct dark-on-yellow colors, and produces `0` horizontal overflow. The saved mobile screenshot is post-fix.
 
----
+## Findings
 
-# BerlinWalk Global Navigation Design QA
+No actionable P0, P1 or P2 findings remain.
 
-**Comparison Target**
+## Follow-up polish
 
-- Source visual truth: `/var/folders/qy/p38mnw8s6zdcgddbj_0b8z2m0000gn/T/codex-clipboard-3acf1240-eaa9-4751-bad3-8f4f7275546a.png`
-- Source intent: information architecture and menu grouping. The existing BerlinWalk wordmark, typography, trust bar, colors, and CTA treatment are intentionally retained.
-- Rendered implementation, closed desktop: `/Users/yusufucuz/Documents/New project/output/qa/global-nav-redesign-20260714/local-header/webkit-desktop/.playwright-cli/page-2026-07-14T22-18-25-572Z.png`
-- Rendered implementation, Tour dropdown: `/Users/yusufucuz/Documents/New project/output/qa/global-nav-redesign-20260714/local-header/webkit-desktop/.playwright-cli/page-2026-07-14T22-18-39-536Z.png`
-- Rendered implementation, Products dropdown: `/Users/yusufucuz/Documents/New project/output/qa/global-nav-redesign-20260714/local-header/webkit-desktop/.playwright-cli/page-2026-07-14T22-18-48-200Z.png`
-- Rendered implementation, mobile menu: `/Users/yusufucuz/Documents/New project/output/qa/global-nav-redesign-20260714/local-header/webkit-mobile/.playwright-cli/page-2026-07-14T22-19-15-083Z.png`
-- Desktop viewport/state: 1456 × 458, closed plus Tour-open and Products-open states, WebKit.
-- Mobile viewport/state: iPhone 13 emulation, 390 × 664 visible viewport, menu open with both groups initially closed, WebKit.
+No P3 change is required for this scope.
 
-**Comparison Evidence**
-
-- Full-view comparison: `/Users/yusufucuz/Documents/New project/output/qa/global-nav-redesign-20260714/design-comparison.png`
-- Focused navigation and dropdown comparison: `/Users/yusufucuz/Documents/New project/output/qa/global-nav-redesign-20260714/design-comparison-focused.png`
-- The focused comparison is required because submenu labels, ordering, caret states, and CTA contrast are too small to judge reliably from the full-view board alone.
-
-**Findings**
-
-- No actionable P0, P1, or P2 differences remain.
-- Information architecture: exact target order and grouping are present. Tour contains Tour Route, Meeting Point, Reviews, and The Guide. Products contains Berlin Trip Planner, Audio Tours, First-Day Rescue Plan, and Photo Missions. Games, Blog, and Berlin Hacks are direct links. Individual games and audio routes are absent from the header.
-- Fonts and typography: the implementation intentionally preserves BerlinWalk's existing Montserrat navigation and official wordmark instead of copying the schematic reference's black serif wordmark. Labels remain legible, consistently weighted, and untruncated across the tested desktop and mobile widths.
-- Spacing and layout rhythm: the desktop order, group separation, dropdown alignment, CTA separation, radii, and elevation match the structural hierarchy in the source. The existing trust strip adds brand context without changing the requested navigation hierarchy. The header switches cleanly to the mobile pattern at 980 px with no horizontal overflow.
-- Colors and visual tokens: existing BerlinWalk green, cream, and yellow tokens are retained. The yellow CTA has dark text in normal and focus states, satisfying the project contrast rule.
-- Image quality and asset fidelity: the supplied BerlinWalk wordmark asset is sharp and correctly scaled. The reference contains no other photographic or illustrative assets, and no placeholder or code-drawn replacement was introduced.
-- Copy and content: all public labels match the approved menu brief. Canonical `www.berlinwalk.com` URLs are used, including the Photo Missions canonical URL.
-- Behavior and accessibility: desktop menus work with pointer, hover, Enter, Space, Escape, outside click, and submenu selection. Closed dropdowns are removed from the accessibility tree with `visibility: hidden`; `aria-expanded` reflects state. Mobile groups are native disclosure controls, only one opens at a time, closing the overlay resets both groups, Escape restores focus to the hamburger, and body scroll lock is removed.
-- Responsiveness: Chromium passed 1440, 1280, 1024, 981, 980, 390, 375, and 360 px checks. WebKit passed desktop and iPhone 13 checks. No tested state produced horizontal overflow.
-- Wix dual-mount safety: a two-header responsive harness passed 30 active-menu transitions between 981 and 980 px in both Chromium and WebKit with `failures: []`. Exactly one overlay and two submenu portals remained under `body`, IDs stayed unique, inactive-mount removal preserved the active scroll lock, and active-mount removal released it.
-
-**Comparison History**
-
-1. Earlier P2 — a pointer click could close a dropdown that had just opened on hover. Fix: the first click after hover keeps the selected menu open, while a subsequent click and Enter/Space retain toggle behavior. Post-fix evidence: the final Tour and Products screenshots above plus an `aria-expanded` readback of `true` after the first click and `false` after the second.
-2. Earlier P2 — showing all mobile child links at once made the menu too dense for the visible phone viewport. Fix: Tour and Products became default-closed native disclosure groups with mutually exclusive opening and compact link spacing. Post-fix evidence: the final mobile screenshot above.
-3. Earlier P2 — Escape closed the mobile menu without returning keyboard focus. Fix: Escape, close-button, and backdrop dismissal now restore focus to the hamburger. Post-fix evidence: WebKit state readback reported `activeLabel: "Open menu"`, body overflow reset, and both disclosure groups closed.
-4. Earlier P2 — closed desktop submenus remained discoverable in the accessibility tree, and the initially unpositioned hidden sibling could produce a compositor artifact in dropdown captures. Fix: closed menus now use `visibility: hidden`, and both menus receive a safe initial position before interaction. Post-fix evidence: the focused comparison shows clean Tour and Products states, and the closed WebKit accessibility snapshot contains no submenu items.
-5. Earlier P1 — an open desktop dropdown survived a 981→980 px transition, and an open mobile overlay survived 980→981 px with body scroll still locked. Fix: viewport-mode changes now close both portal types before the responsive mount changes. Post-fix evidence: Chromium and WebKit each passed 30 alternating open-menu transitions with no stale open layer or scroll lock.
-6. Earlier P1 — Wix's two simultaneously connected responsive header instances could each create portals and could clear another instance's body scroll lock during cleanup. Fix: a visibility-scored active-instance coordinator now permits only one runtime owner, every portal ID is instance-unique, and body scroll lock is released only by its owner. Post-fix evidence: the dual-mount harness held exactly one body overlay and two body submenus, reported no duplicate IDs, preserved lock after inactive-instance removal, and fully cleaned portals after active-instance removal.
-7. Earlier P2 — `role="menu"` / `role="menuitem"` implied an application-menu keyboard model that the navigation did not implement. Fix: desktop dropdowns now use native navigation list/link semantics with `aria-expanded` and instance-unique `aria-controls` relationships. Post-fix evidence: the final accessibility snapshots expose ordinary lists and links only when the relevant disclosure is visible.
-
-**Open Questions**
-
-- None. The visual reference was treated as the requested menu structure, while the established BerlinWalk brand system was preserved.
-
-**Implementation Checklist**
-
-- [x] Exact desktop order and dropdown contents.
-- [x] Exact canonical link targets.
-- [x] Direct Games, Blog, and Berlin Hacks links.
-- [x] Individual game and audio-route links removed from the header.
-- [x] Keyboard and pointer interaction states.
-- [x] Mobile disclosure behavior and focus restoration.
-- [x] Breakpoint and overflow checks in Chromium and WebKit.
-- [x] Dynamic 981↔980 transition and dual Wix mount lifecycle checks in Chromium and WebKit.
-- [x] Yellow CTA contrast check.
-- [x] Browser console checked; final local WebKit navigation run had zero errors and zero warnings.
-
-**Follow-up Polish**
-
-- None required for this structural change.
+## Final result
 
 final result: passed
-
----
-
-# BerlinWalk Homepage Products Design QA
-
-**Comparison Target**
-
-- Source visual truth: `/Users/yusufucuz/.codex/generated_images/019f5d2f-fb10-7690-988e-10e8be912812/exec-b213bf4d-cb79-43af-b348-393ec2755777.png`
-- Rendered implementation, desktop: `/tmp/berlinwalk-home-products-local-desktop-final.png`
-- Rendered implementation, mobile top: `/tmp/berlinwalk-home-products-mobile-top.png`
-- Rendered implementation, mobile middle: `/tmp/berlinwalk-home-products-mobile-mid.png`
-- Rendered implementation, mobile bottom: `/tmp/berlinwalk-home-products-mobile-bottom.png`
-- Live homepage, desktop Products section: `/Users/yusufucuz/Documents/New project/output/qa/home-products-redesign-20260715/live/homepage-headless-chromium-products-desktop-1366x900.jpg`
-- Live homepage, mobile Products section: `/Users/yusufucuz/Documents/New project/output/qa/home-products-redesign-20260715/live/homepage-headless-chromium-products-mobile-390x900.jpg`
-- Desktop viewport/state: 1280 × 720 viewport, full component capture, default state.
-- Mobile viewport/state: 390 × 844 viewport, top/middle/bottom scroll states after all lazy images loaded.
-
-**Comparison Evidence**
-
-- Combined full-view comparison: `/Users/yusufucuz/Documents/New project/output/qa/home-products-redesign-20260715/source-vs-local-native.png`
-- Final live render report: `/Users/yusufucuz/Documents/New project/output/qa/home-products-redesign-20260715/live/homepage-render-headless-qa.json`
-- The full-view comparison is high resolution and keeps both the selected direction and the complete implementation legible, so no separate focused crop was required.
-
-**Findings**
-
-- No actionable P0, P1, or P2 differences remain.
-- Live source truth: the homepage renders the design through the existing Wix custom layer, not directly from the standalone `<bw-home-products>` file. The production layer is `BerlinWalk Homepage Products Explore Custom Layer`, revision `22`, build `homepage-products-explore-custom-20260715-products-redesign`; its external CSS and images are pinned to Git commit `18fe03fc8200f13767c05412f08ffc732bebb978`.
-- Visual hierarchy: the selected split composition is preserved. Trip Planner remains the dominant product on the left; Audio Tours, First-Day Rescue Plan, and Photo Missions form the scannable secondary stack on the right.
-- Fonts and typography: local Fraunces and Space Grotesk files reproduce the selected editorial display/body pairing without a third-party font request. Heading wraps and card title scale remain stable at desktop and 390 px mobile widths.
-- Spacing and layout rhythm: the implementation keeps the source's cream canvas, generous heading space, one large feature card, three ruled secondary rows, and compact yellow CTAs. The layout becomes one column below 1040 px and converts the secondary rows to compact image-and-copy cards below 720 px.
-- Colors and visual tokens: BerlinWalk cream, dark green, green labels, and yellow CTA tokens are retained. Every yellow CTA computes to dark green text in its default state; hover and focus rules explicitly keep the same dark foreground.
-- Image quality and asset fidelity: all four cards use real BerlinWalk assets already present in the project. Images loaded at their natural dimensions, used `object-fit: cover`, had descriptive alt text, and produced no broken or placeholder state.
-- Copy and content: the section now reflects the current product family rather than the older narrow card set. All public copy is English, concise, concrete, and points to canonical `www.berlinwalk.com` URLs.
-- Behavior and accessibility: each entire card is one descriptive link with one focus target. The Trip Planner card was clicked in the exact embed preview and navigated to the live Trip Planner page. Live DOM readback found the four expected canonical anchors, and all four destinations returned HTTP 200.
-- Responsiveness: the exact embed preview, the full live homepage, and a separate Chrome live readback all passed at desktop and 390 px mobile widths. Both live Chromium viewports reported zero horizontal overflow, correct page-section order, one visible navigation pattern, all four natural-size images loaded, no visible image missing alt text, and zero page errors. Products begins exactly where the booking section ends and FAQ begins exactly where Products ends, so no hidden blank section remains.
-
-**Comparison History**
-
-1. Earlier P2 — the first Photo Missions thumbnail used a dense product-cover graphic that became noisy at the compact card size. Fix: it was replaced with the real Anhalter Bahnhof route image and a precise alt description. Post-fix evidence: the final desktop and mobile captures above.
-2. Earlier P2 — the first mobile full-page capture showed blank lower thumbnails because those images were intentionally lazy-loaded and had not entered the viewport. Fix: the page was scrolled through all card states, every image was confirmed complete at its natural dimensions, and separate top/middle/bottom captures were inspected. No loading bug remained.
-3. Implementation adaptation — the source concept uses generated campaign imagery and arrow glyphs. The production version uses existing BerlinWalk product/route imagery and makes the entire card clickable, avoiding decorative controls and unverified imagery while preserving the approved hierarchy.
-4. Source-truth correction — the first implementation updated the reusable `<bw-home-products>` component, but the real homepage was still mounted by the Wix Products/Explore custom layer. Fix: the existing native Wix slot and mount lifecycle were preserved, the approved design was moved into that active layer, a commit-pinned external stylesheet kept the embed below Wix's size limit, and the exact generated embed was tested before the live revision was saved and published.
-
-**Implementation Checklist**
-
-- [x] Selected option 1 hierarchy implemented.
-- [x] Current product family and canonical URLs.
-- [x] Local brand fonts and project color tokens.
-- [x] Desktop and 390 px mobile visual QA.
-- [x] No horizontal overflow.
-- [x] Four images loaded with descriptive alt text.
-- [x] Yellow CTA foreground contrast verified.
-- [x] Primary product interaction verified.
-- [x] All four destinations returned HTTP 200.
-- [x] Browser console checked with zero errors.
-- [x] Wix custom embed read back independently at revision 22 with the expected build, pinned stylesheet, homepage-only guard, no iframe, and SHA256 `cade6a5f3ec21a6bdd78e33054a843c81e4ba6733366ada3a5a825ef087732a3`.
-- [x] Full live homepage regression passed at 1366 × 900 and 390 × 900: order, links, images, alt text, clickability, and overflow.
-
-**Open Questions**
-
-- None.
-
-**Follow-up Polish**
-
-- None required after publication.
-
-final result: passed
-
----
-
-# BerlinWalk Four-Page Editorial System Design QA
-
-## Scope
-
-Meeting Point, Reviews, The Guide, and Route were brought into the homepage editorial language without making the four pages identical. Existing public URLs, content, booking links, Custom Element tags, Route analytics hooks, Reviews API, Guide audio element, global header/footer, and sticky tour control remain outside the styling layer.
-
-## Same-input visual comparison
-
-Each board places the current live source capture and the final local Atlas implementation in one image at the same desktop viewport and top-of-page state.
-
-- Meeting Point: `/Users/yusufucuz/Documents/New project/output/qa/four-page-editorial-20260717/local/comparison-meeting.jpg`
-- Reviews: `/Users/yusufucuz/Documents/New project/output/qa/four-page-editorial-20260717/local/comparison-reviews.jpg`
-- The Guide: `/Users/yusufucuz/Documents/New project/output/qa/four-page-editorial-20260717/local/comparison-guide.jpg`
-- Route: `/Users/yusufucuz/Documents/New project/output/qa/four-page-editorial-20260717/local/comparison-route.jpg`
-
-Visible review:
-
-- Meeting Point keeps the real World Clock image and precise wayfinding identity, while replacing the generic sans headline and pill CTA treatment with Fraunces hierarchy and rectangular actions.
-- Reviews now reads as a social-proof ledger: one strong quote panel, a compact score rail, and lower visual noise.
-- The Guide is deliberately portrait-led, with the real guide photo becoming the first visual anchor rather than another generic card layout.
-- Route keeps its dark photographic story-atlas identity while adopting the same display typography, CTA geometry, spacing, and surface rhythm.
-- No fake map, placeholder illustration, handcrafted icon, or approximate asset was introduced.
-
-## Responsive and functional evidence
-
-Atlas executed the real local components at `1366`, `1040`, `980`, `768`, `430`, `390`, `375`, `360`, and `320px`.
-
-Evidence: `/Users/yusufucuz/Documents/New project/output/qa/four-page-editorial-20260717/local/atlas-responsive-metrics.json`
-
-Result:
-
-- 36 page-width rows passed with `0px` horizontal overflow.
-- Every page had exactly one H1, the Fraunces asset loaded, heading computed font matched, yellow CTA text stayed dark, images loaded, and every image retained alt markup.
-- Meeting Point rendered three arrival steps and zero fake-map parts.
-- Reviews loaded 15 current reviews, rendered one semantic blockquote per card, and left `aria-busy=false`.
-- The Guide rendered three verified quotes and mounted the existing audio Custom Element.
-- Route rendered 12 stops and 12 pins and retained `#bw-rs-title`.
-- Route pin, chapter, and booking interactions emitted the original three analytics events with the expected payloads.
-- Meeting Point map and booking links, Reviews source URL safety, and Guide booking/audio contracts passed.
-
-Mobile Atlas captures:
-
-- `/Users/yusufucuz/Documents/New project/output/qa/four-page-editorial-20260717/local/meeting-mobile-390-final.jpg`
-- `/Users/yusufucuz/Documents/New project/output/qa/four-page-editorial-20260717/local/reviews-mobile-390-final.jpg`
-- `/Users/yusufucuz/Documents/New project/output/qa/four-page-editorial-20260717/local/guide-mobile-390-final.jpg`
-- `/Users/yusufucuz/Documents/New project/output/qa/four-page-editorial-20260717/local/route-mobile-390-final.jpg`
-
-## Accessibility and release review
-
-- The Guide no longer creates a nested `main` landmark.
-- Reviews announces only a short load status instead of reading all review text as one live-region update.
-- Review averages reject ratings outside `1–5`, source links permit only HTTP(S), and the partial-sample label remains available if the API total exceeds the returned rows.
-- Focus rings switch to yellow on dark surfaces.
-- Route pins keep an expanded mobile pointer target and the first pin is moved away from the clipped map edge.
-- Only the portrait image is eager on The Guide; below-fold photos are lazy.
-- Static contract validation passed 34 checks, and all modified JavaScript files passed `node --check` and `git diff --check`.
-
-Automated Chromium/WebKit regression and numeric live CLS/LCP measurement were not run because the approved plan requires separate permission before that browser automation. Atlas cold-load and first-scroll checks remain part of the live release gate; no numeric performance claim is made here.
-
-## Result
-
-passed
