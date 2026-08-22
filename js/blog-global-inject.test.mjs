@@ -219,6 +219,18 @@ test('Date Check is one idempotent no-email surface with consent-safe first-part
   assert.equal((injectorSource.match(/data-bw-blog-booking/g) || []).length >= 1, true);
 });
 
+test('Date Check mobile CSS resists Wix typography and Safari date-field overflow', () => {
+  assert.match(injectorSource, /bw-date-check-blog-card__title/);
+  assert.match(injectorSource, /\.bw-date-check-blog-card\[data-bw-date-check-card\] \.bw-date-check-blog-card__title\{[^}]*padding:0!important[^}]*color:#fff!important/);
+  assert.match(injectorSource, /\.bw-date-check-blog-card\[data-bw-date-check-card\] \.bw-date-check-blog-card__copy\{[^}]*font:400 15px\/1\.48 Montserrat[^}]*color:rgba\(255,255,255,\.94\)!important/);
+  assert.match(injectorSource, /\.bw-date-check-blog-card__field\{[^}]*min-width:0[^}]*max-width:100%/);
+  assert.match(injectorSource, /input,.bw-date-check-blog-card__field select\{[^}]*min-inline-size:0[^}]*max-inline-size:100%/);
+  assert.match(injectorSource, /The result is built around your arrival date and number of nights\./);
+  assert.match(injectorSource, /\.bw-date-check-blog-card__status:empty\{display:none\}/);
+  assert.doesNotMatch(injectorSource, /not a generic Berlin week/);
+  assert.doesNotMatch(injectorSource, /<p class="bw-date-check-blog-card__(?:eyebrow|copy|micro|status)"/);
+});
+
 test('journey keeps editorial tools, related guides and booking while removing fixed product promotions', () => {
   assert.match(journeySource, /Related guides/);
   assert.match(journeySource, /data-bw-blog-journey/);
