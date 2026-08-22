@@ -87,6 +87,28 @@ function fakeBody(tags) {
   return body;
 }
 
+function nestedLastBlockBody() {
+  const body = { querySelectorAll() { return body.blocks; } };
+  const laterWrapper = { parentNode: body, parentElement: body, nextElementSibling: null };
+  const firstWrapper = { parentNode: body, parentElement: body, nextElementSibling: laterWrapper };
+  const paddedWrapper = { parentNode: firstWrapper, parentElement: firstWrapper, nextElementSibling: null };
+  const first = {
+    nodeType: 1, tagName: 'P', textContent: 'First block', parentNode: paddedWrapper,
+    parentElement: paddedWrapper, nextElementSibling: null, children: [], closest() { return null; },
+  };
+  const anchor = {
+    nodeType: 1, tagName: 'H2', textContent: 'Anchor block', parentNode: paddedWrapper,
+    parentElement: paddedWrapper, nextElementSibling: null, children: [], closest() { return null; },
+  };
+  const later = {
+    nodeType: 1, tagName: 'P', textContent: 'Later block', parentNode: laterWrapper,
+    parentElement: laterWrapper, nextElementSibling: null, children: [], closest() { return null; },
+  };
+  first.nextElementSibling = anchor;
+  body.blocks = [first, anchor, later];
+  return { body, anchor, firstWrapper };
+}
+
 test('global contract covers every indexed slug without a legacy allowlist', () => {
   const posts = blogIndex.allPosts.filter((post) => post && post.slug);
   assert.ok(posts.length > 100);
@@ -120,6 +142,14 @@ test('Date Check insertion anchors after roughly 10% of short, long and headingl
 
   const bookingBody = fakeBody(['H2', 'P', 'H2', 'P', 'P', 'H2', 'P']);
   assert.equal(hooks.findBookingInsertionPoint(bookingBody).after, bookingBody.blocks[3]);
+});
+
+test('Date Check escapes a padded Wix wrapper when its anchor is the last real child', () => {
+  const hooks = injectorHooks();
+  const { body, anchor, firstWrapper } = nestedLastBlockBody();
+  const point = hooks.insertionTarget(anchor, body);
+  assert.equal(point.parent, body);
+  assert.equal(point.after, firstWrapper);
 });
 
 test('Date Check handoff keeps arrival, nights and exact blog UTM contract', () => {

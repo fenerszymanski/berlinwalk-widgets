@@ -110,7 +110,16 @@
     var target = node;
     while (target.parentNode && target.parentNode !== body) {
       var parent = target.parentNode;
-      if (!parent.children || parent.children.length > 1) break;
+      var sibling = target.nextElementSibling;
+      var hasFollowingContent = false;
+      while (sibling) {
+        if (!hasSurfaceAncestor(sibling)) {
+          hasFollowingContent = true;
+          break;
+        }
+        sibling = sibling.nextElementSibling;
+      }
+      if (hasFollowingContent) break;
       target = parent;
     }
     return target.parentNode ? { parent: target.parentNode, after: target } : null;
@@ -606,6 +615,7 @@
       dateCheckAnchorIndex: dateCheckAnchorIndex,
       dateCheckTargetUrl: dateCheckTargetUrl,
       validDateFields: validDateFields,
+      insertionTarget: insertionTarget,
       findDateCheckInsertionPoint: findDateCheckInsertionPoint,
       findBookingInsertionPoint: findBookingInsertionPoint
     };
