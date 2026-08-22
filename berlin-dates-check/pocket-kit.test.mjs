@@ -119,6 +119,25 @@ test('Date Check keeps the result informational and does not expose tour sales c
   assert.match(DATE_CHECK_PAGE, /tourSlotShown:\s*STATE\.tourSlotShown/);
 });
 
+test('Date Check reveals one Pocket Kit preview inside the result gate zone', () => {
+  const pocketIndex = DATE_CHECK_PAGE.indexOf('id="pocketPreview"');
+  const resultIndex = DATE_CHECK_PAGE.indexOf('id="resultStage"');
+  const gateIndex = DATE_CHECK_PAGE.indexOf('id="gate"');
+  const supportIndex = DATE_CHECK_PAGE.indexOf('class="date-support"');
+  assert.notEqual(pocketIndex, -1);
+  assert.equal((DATE_CHECK_PAGE.match(/id="pocketPreview"/g) || []).length, 1);
+  assert.ok(resultIndex < pocketIndex, 'Pocket Kit preview must be inside the result stage');
+  assert.ok(pocketIndex < gateIndex, 'Pocket Kit preview must precede the email gate');
+  assert.ok(supportIndex < resultIndex, 'Date support must remain before the result stage');
+  assert.match(DATE_CHECK_PAGE, /<section class="gate-zone">[\s\S]*<aside class="pocket-preview" id="pocketPreview"[\s\S]*<\/aside>[\s\S]*<div class="gate" id="gate">/);
+  assert.doesNotMatch(DATE_CHECK_PAGE.slice(supportIndex, resultIndex), /id="pocketPreview"/);
+  assert.match(DATE_CHECK_PAGE, /#bw-date-check \.result-stage \{\s*display:\s*none;/);
+});
+
+test('Date Check separates consent from the email action row', () => {
+  assert.match(DATE_CHECK_PAGE, /#bw-date-check \.consent \{[^}]*margin-top:\s*12px;/);
+});
+
 test('source manifest contains every venue source and every approved map source', () => {
   for (const venue of DATA.venues) assert.match(SOURCES, escapedPattern(venue.sourceUrl));
   for (const resource of [...DATA.transport, DATA.landmarks, ...DATA.practical]) {

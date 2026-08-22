@@ -193,6 +193,8 @@
 
   /* ---- gate ---- */
   #bw-date-check .gate { border: 1.5px solid var(--green); border-radius: 14px; background: var(--surface); padding: 26px 24px; display: flex; flex-direction: column; gap: 16px; }
+  #bw-date-check .gate-zone { gap: 18px; }
+  #bw-date-check .gate-zone .pocket-preview { margin-top: 0; }
   #bw-date-check .gate h2 { font-size: clamp(19px, 2.6vw, 24px); }
   #bw-date-check .gate .lede { font-size: 14px; line-height: 1.55; color: var(--muted); max-width: 62ch; }
   #bw-date-check .gate-row { display: flex; gap: 10px; flex-wrap: wrap; }
@@ -206,7 +208,7 @@
     padding: 12px 20px; font-weight: 700; font-size: 14px; cursor: pointer; font-family: var(--f-body); white-space: nowrap;
   }
   #bw-date-check .gate-row button:disabled { opacity: .55; cursor: not-allowed; }
-  #bw-date-check .consent { display: flex; gap: 10px; align-items: flex-start; font-size: 12px; line-height: 1.5; color: var(--muted); }
+  #bw-date-check .consent { display: flex; gap: 10px; align-items: flex-start; margin-top: 12px; font-size: 12px; line-height: 1.5; color: var(--muted); }
   #bw-date-check .consent input { margin-top: 3px; flex: none; }
   #bw-date-check .consent a { color: var(--green); }
   #bw-date-check .honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
@@ -358,25 +360,6 @@
           </div>
         </article>
       </div>
-      <aside class="pocket-preview" id="pocketPreview" aria-labelledby="pocketPreviewHeading">
-        <div class="pocket-preview-copy">
-          <p class="eyebrow">Email-only bonus</p>
-          <h3 id="pocketPreviewHeading">Your date result stays here. The Pocket Kit travels with you.</h3>
-          <p>I will send a second, phone-friendly layer after the date result: useful places and official links for the moments when you are already out in Berlin.</p>
-        </div>
-        <ul class="pocket-preview-list" aria-label="Pocket Kit contents">
-          <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">restaurant</span><span class="pocket-preview-item-copy"><strong>50 picks</strong>Food and drink by situation</span></li>
-          <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">map</span><span class="pocket-preview-item-copy"><strong>Transport</strong>Maps and ticket shortcuts</span></li>
-          <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">account_balance</span><span class="pocket-preview-item-copy"><strong>19 places</strong>Essential landmark map with stations</span></li>
-          <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">rule</span><span class="pocket-preview-item-copy"><strong>12 rules</strong>Small local moves that save time and money</span></li>
-        </ul>
-        <figure class="pocket-preview-photo">
-          <picture>
-            <source media="(max-width: 620px)" srcset="photos/pocket-kit-hero.jpg">
-            <img src="photos/pocket-kit-hero.jpg" width="1600" height="1066" loading="lazy" decoding="async" alt="Berlin tram passing a café table with a phone, maps, coffee and a sandwich.">
-          </picture>
-        </figure>
-      </aside>
     </div>
   </section>
 
@@ -405,7 +388,26 @@
     <section>
       <div class="readings" id="readings"></div>
     </section>
-    <section>
+    <section class="gate-zone">
+      <aside class="pocket-preview" id="pocketPreview" aria-labelledby="pocketPreviewHeading">
+        <div class="pocket-preview-copy">
+          <p class="eyebrow">Email-only bonus</p>
+          <h3 id="pocketPreviewHeading">Your date result stays here. The Pocket Kit travels with you.</h3>
+          <p>I will send a second, phone-friendly layer after the date result: useful places and official links for the moments when you are already out in Berlin.</p>
+        </div>
+        <ul class="pocket-preview-list" aria-label="Pocket Kit contents">
+          <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">restaurant</span><span class="pocket-preview-item-copy"><strong>50 picks</strong>Food and drink by situation</span></li>
+          <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">map</span><span class="pocket-preview-item-copy"><strong>Transport</strong>Maps and ticket shortcuts</span></li>
+          <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">account_balance</span><span class="pocket-preview-item-copy"><strong>19 places</strong>Essential landmark map with stations</span></li>
+          <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">rule</span><span class="pocket-preview-item-copy"><strong>12 rules</strong>Small local moves that save time and money</span></li>
+        </ul>
+        <figure class="pocket-preview-photo">
+          <picture>
+            <source media="(max-width: 620px)" srcset="photos/pocket-kit-hero.jpg">
+            <img src="photos/pocket-kit-hero.jpg" width="1600" height="1066" loading="lazy" decoding="async" alt="Berlin tram passing a café table with a phone, maps, coffee and a sandwich.">
+          </picture>
+        </figure>
+      </aside>
       <div class="gate" id="gate">
         <h2 id="gateHeading">Get the Berlin Pocket Kit too</h2>
         <p class="gate-stake" id="gateStake"></p>
