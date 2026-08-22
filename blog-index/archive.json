@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-08-22T12:50:51.821Z",
+  "updatedAt": "2026-08-22T14:08:58.080Z",
   "source": "Wix Blog API",
-  "totalPosts": 320,
+  "totalPosts": 321,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Berlin in the Evening: What Is Still Open After the Museums Close",
+      "slug": "berlin-in-the-evening",
+      "path": "/post/berlin-in-the-evening",
+      "url": "https://www.berlinwalk.com/post/berlin-in-the-evening",
+      "excerpt": "Almost every ticketed sight in central Berlin shuts between 17:00 and 18:30. Here is what stays open late, what the floodlit centre is actually good for, and one twenty-minute walk that turns the dead hours into the best part of the day.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "when-to-visit",
+      "topicLabel": "Month-by-Month Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-08-22T14:07:13.766Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_d63dc2cd24cf4b579a376714ce5fb5fd~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-dom-spree.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_d63dc2cd24cf4b579a376714ce5fb5fd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-dom-spree.jpg",
+      "alt": "Berlin Cathedral floodlit above the Spree at blue hour, with a boat passing and the embankment lit along Museum Island",
+      "relatedToolSlug": "best-month-to-visit-berlin"
+    },
     {
       "title": "Berlin at Christmas Beyond the Markets: Four Things Worth Planning",
       "slug": "berlin-christmas-events-beyond-markets",
