@@ -5,7 +5,7 @@ That gap is the most wasted stretch of a Berlin trip. It is also the stretch whe
 My advice: stop trying to buy one more ticket after 18:00. I have made that mistake, walking fast to a museum that turned out to have stopped selling tickets an hour earlier. Find out what has actually shut, take the two or three late options seriously, and give the rest of the evening to the open-air city.
 
 ![Berlin Cathedral floodlit above the Spree at blue hour, with a boat passing and the embankment lit along Museum Island](images/opt/01-cover-dom-spree.jpg)
-*Blue hour on the Spree below Museum Island. The cathedral is shut by now, and this is the part of the evening it looks best.*
+_Blue hour on the Spree below Museum Island. The cathedral is shut by now, and this is the part of the evening it looks best._
 
 {{quick-summary}}
 
@@ -33,7 +33,7 @@ There are not many, which is exactly why they matter. These four are the whole l
 - **Topography of Terror, until 20:00, free.** On [Niederkirchnerstraße](https://www.topographie.de/en/visit/), next to the surviving stretch of Wall. The outdoor trench exhibition closes at dusk, so in winter the indoor documentation centre is the part still running. It is a heavy place to end an evening on, and worth knowing that before you go.
 
 ![Alexanderplatz station and the Berlin TV Tower at blue hour, with the station sign lit and a tram at the kerb](images/opt/02-alexanderplatz-blue-hour.jpg)
-*Alexanderplatz at blue hour. The TV Tower deck above it runs until 23:00, which makes it the latest ticketed view in the centre.*
+_Alexanderplatz at blue hour. The TV Tower deck above it runs until 23:00, which makes it the latest ticketed view in the centre._
 
 ## Watch the cascade for the night you are actually here
 
@@ -64,13 +64,13 @@ None of these has a gate or a closing time:
 - **The Friedrichsbrücke**, the short bridge between the Bode-Museum and the cathedral. Dom on one side, Bode reflected in the Spree on the other. It takes ninety seconds to cross and most people cross it without looking up.
 
 ![Berlin Cathedral lit from the ground at night seen from the Lustgarten, with the TV Tower behind it](images/opt/03-dom-lustgarten-night.jpg)
-*The Lustgarten side of the cathedral after closing. You cannot get in, and you do not need to.*
+_The Lustgarten side of the cathedral after closing. You cannot get in, and you do not need to._
 
 ![The Brandenburg Gate floodlit at night from Pariser Platz, with a few people walking across the empty square](images/opt/04-brandenburg-gate-night.jpg)
-*Pariser Platz late in the evening. The coach groups have gone and the columns finally have room around them.*
+_Pariser Platz late in the evening. The coach groups have gone and the columns finally have room around them._
 
 ![The Konzerthaus on Gendarmenmarkt floodlit at night, with the steps and fountain lit in front of it](images/opt/05-gendarmenmarkt-night.jpg)
-*Gendarmenmarkt at about 22:00. Six minutes from Französische Straße and usually almost empty.*
+_Gendarmenmarkt at about 22:00. Six minutes from Französische Straße and usually almost empty._
 
 ## One walk that works, and it is twenty minutes
 
@@ -94,7 +94,7 @@ This is the part visitors underestimate more than anything else on this page. Be
 That is a swing of more than four hours between a late summer evening and a midwinter one. In August the floodlit walk described above only makes sense after 20:30, so you have time for a museum first. In December the entire lit city is available by 16:30, before most people have thought about dinner, and the museums are still open while it is already dark outside. Winter visitors get a much better deal here than they expect. There is more on the seasonal shape of a Berlin day in [where to watch sunset in Berlin](https://www.berlinwalk.com/post/where-to-watch-sunset-in-berlin).
 
 ![The Oberbaumbrücke at night, its brick towers lit and traffic light trails crossing beneath the U-Bahn viaduct](images/opt/06-oberbaumbruecke-night.jpg)
-*The Oberbaumbrücke, twenty minutes east on the U1. Worth the ride if you want a different kind of Berlin evening.*
+_The Oberbaumbrücke, twenty minutes east on the U1. Worth the ride if you want a different kind of Berlin evening._
 
 ## Eating, and getting back
 
