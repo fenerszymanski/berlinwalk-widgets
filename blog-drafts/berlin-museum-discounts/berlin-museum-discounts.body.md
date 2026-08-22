@@ -12,7 +12,7 @@ _The Bode-Museum at the tip of Museum Island. Like most of its neighbours it cha
 
 ## How Berlin museum discounts actually work
 
-The German word is **ermäßigt**, and it means reduced. At the Staatliche Museen zu Berlin, the group that runs the Museum Island houses, the Gemäldegalerie and the Hamburger Bahnhof, the reduction is stated plainly on their own pages: **the general reduction is 50 percent.**
+The German word is **ermäßigt**, and it means reduced. At the Staatliche Museen zu Berlin, the group that runs the Museum Island houses, the Gemäldegalerie and the Hamburger Bahnhof, the reduction is stated plainly on [their own reductions page](https://www.smb.museum/en/museums-institutions/neues-museum/plan-your-visit/discounts-free-admission/): **the general reduction is 50 percent.**
 
 So the second number is almost never a children's price. It is the adult price halved for people who can prove they belong to one of a short list of groups.
 
@@ -77,7 +77,7 @@ _The Alte Nationalgalerie. The banner on the stairs is the tell: when a big temp
 
 The 50 percent rule belongs to the Staatliche Museen zu Berlin. City museums, private museums and foundation museums each write their own list, and the numbers stop being tidy.
 
-The Berlinische Galerie in Kreuzberg is a good example. Its day ticket is **12 euros and the reduced ticket is a flat 7**, which is more than half. Under 18s are free there too. And it runs something the state museums do not: on the **first Wednesday of every month, everyone pays 7 euros**, with no card, no proof and no argument. That is the single easiest Berlin museum discount there is, and it exists because one museum decided to make one Wednesday cheap.
+[The Berlinische Galerie](https://berlinischegalerie.de/en/visit/) in Kreuzberg is a good example. Its day ticket is **12 euros and the reduced ticket is a flat 7**, which is more than half. Under 18s are free there too. And it runs something the state museums do not: on the **first Wednesday of every month, everyone pays 7 euros**, with no card, no proof and no argument. That is the single easiest Berlin museum discount there is, and it exists because one museum decided to make one Wednesday cheap.
 
 While we are clearing up museum myths: **Museumssonntag, the free first Sunday of the month, ended in December 2024 and has not come back.** Plenty of travel pages still promise it. If a Berlin guide tells you to plan your trip around the free Sunday, that guide has not been updated in two years.
 
