@@ -286,6 +286,9 @@
     #bw-date-check .stripwrap { overflow-x: visible; padding-bottom: 0; }
     #bw-date-check .strip { grid-template-columns: repeat(auto-fit, minmax(74px, 1fr)); grid-auto-columns: auto; grid-auto-flow: row; gap: 7px; }
   }
+  @media (max-width: 760px) {
+    #bw-date-check .pocket-preview { grid-template-columns: 1fr; }
+  }
   @media (max-width: 250px) {
     #bw-date-check .gate-row input[type="email"] { flex: 1 1 100%; width: 100%; min-width: 0; }
     #bw-date-check .gate-row button { flex: 1 1 100%; width: 100%; min-width: 0; padding-left: 10px; padding-right: 10px; white-space: normal; }
