@@ -214,16 +214,18 @@ const YEAR_REQUIRED_TITLE_SLUGS = new Set([
 ]);
 
 const HERO_SLUGS = {
-  // 20 Aug 2026: the new live-music guide is the strongest current,
-  // tourist-useful lead; keep the rail mixed with recent arrival/museum/route
-  // stories, a free-history post, and a proven popular transport evergreen.
-  lead: 'where-to-hear-live-music-in-berlin',
+  // 22 Aug 2026: the new restaurant-reservations guide answers a broad,
+  // immediate visitor decision and has a matching live BerlinTools utility;
+  // keep the rail mixed with current nightlife/arrival/culture, a free-history
+  // post, and a proven popular transport evergreen.
+  lead: 'restaurant-reservations-in-berlin',
   secondary: [
+    'where-to-hear-live-music-in-berlin',
     'berlin-weekend-friday-night-arrival',
     'berlin-spy-museum-worth-it',
-    'berlin-landmarks-in-two-hours',
     'free-berlin-memorials',
     'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
+    'berlin-landmarks-in-two-hours',
     'what-happens-on-a-berlin-free-walking-tour',
     'berlin-sights-near-alexanderplatz-walking-distance',
     'berlin-courtyards-hoefe',
@@ -329,6 +331,7 @@ const REQUIRED_SLUGS = [
   'why-is-berlin-founding-year-1237',
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
+  'restaurant-reservations-in-berlin',
   'where-to-hear-live-music-in-berlin',
   'berlin-with-parents',
   'berlin-spy-museum-worth-it',
@@ -754,6 +757,7 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if ((post.slug || '') === 'restaurant-reservations-in-berlin') return 'berlin-reserve-or-walk-in';
   if ((post.slug || '') === 'english-bookshops-in-berlin') return 'berlin-reading-stop-line';
   if ((post.slug || '') === 'berlin-botanic-garden') return 'berlin-plant-passport';
   if ((post.slug || '') === 'berlin-opera-for-first-time-visitors') return 'berlin-opera-house-reader';

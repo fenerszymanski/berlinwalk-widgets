@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-21T13:53:50.592Z",
+  "updatedAt": "2026-08-22T02:10:10.599Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 300,
@@ -43,39 +43,73 @@
   ],
   "hero": {
     "lead": {
-      "title": "Berlin Weekend with a Friday Night Arrival: A Plan That Starts Small",
-      "slug": "berlin-weekend-friday-night-arrival",
-      "path": "/post/berlin-weekend-friday-night-arrival",
-      "url": "https://www.berlinwalk.com/post/berlin-weekend-friday-night-arrival",
-      "excerpt": "Arriving in Berlin on Friday night? Use a small first-night plan for BER or Hauptbahnhof that protects Saturday instead of forcing a rushed checklist.",
+      "title": "Do You Need Restaurant Reservations in Berlin? When to Book and When to Walk In",
+      "slug": "restaurant-reservations-in-berlin",
+      "path": "/post/restaurant-reservations-in-berlin",
+      "url": "https://www.berlinwalk.com/post/restaurant-reservations-in-berlin",
+      "excerpt": "The honest local answer to whether you need restaurant reservations in Berlin: usually not. Here is when to book a table, when to just walk in, and how Berlin restaurants actually take bookings.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "4 min read",
-      "publishedDate": "2026-08-16T10:58:45.247Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_8124c1065ff349a690b2df2692ea0b5d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ber-airport-night.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_8124c1065ff349a690b2df2692ea0b5d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ber-airport-night.jpg",
-      "alt": "Terminal 1 at Berlin Brandenburg Airport lit at dusk",
-      "relatedToolSlug": "berlin-weekend-first-night"
+      "topic": "food-nightlife",
+      "topicLabel": "Food & Nightlife",
+      "readTime": "5 min read",
+      "publishedDate": "2026-08-21T13:50:47.742Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_1e6e9543b4f34bcc807d9b26d0b0b4c8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kudamm-terrace-cafes.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_1e6e9543b4f34bcc807d9b26d0b0b4c8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kudamm-terrace-cafes.jpg",
+      "alt": "Pavement cafes with white umbrellas and diners along the Kurfurstendamm in Berlin on a sunny day",
+      "relatedToolSlug": "berlin-reserve-or-walk-in"
     },
     "secondary": [
       {
-        "title": "Berlin Landmarks in 2 Hours: Choose an East or West Start",
-        "slug": "berlin-landmarks-in-two-hours",
-        "path": "/post/berlin-landmarks-in-two-hours",
-        "url": "https://www.berlinwalk.com/post/berlin-landmarks-in-two-hours",
-        "excerpt": "Use a focused east or west two-hour window for Berlin landmarks instead of forcing Museum Island and Brandenburg Gate into one rushed loop.",
+        "title": "Where to Hear Live Music in Berlin Without Overpaying",
+        "slug": "where-to-hear-live-music-in-berlin",
+        "path": "/post/where-to-hear-live-music-in-berlin",
+        "url": "https://www.berlinwalk.com/post/where-to-hear-live-music-in-berlin",
+        "excerpt": "The live music you remember in Berlin is rarely the show you paid the most for. A local guide to the free lunch concert, the jazz clubs, the Saturday jam, and Sunday in Mauerpark, with a week reader to plan by.",
         "category": "Tourist Tips",
         "categorySlug": "tourist-tips",
-        "topic": "route-stories",
-        "topicLabel": "Tour Route Stories",
+        "topic": "first-day",
+        "topicLabel": "First Day in Berlin",
+        "readTime": "5 min read",
+        "publishedDate": "2026-08-19T17:23:01.814Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_cdb608b17b264077b31b0779f4db7326~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berliner-philharmonie-lunch-concert.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_cdb608b17b264077b31b0779f4db7326~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berliner-philharmonie-lunch-concert.jpg",
+        "alt": "A free lunchtime concert in the foyer of the Berliner Philharmonie, with the audience seated on folding chairs and a grand piano at the side",
+        "relatedToolSlug": ""
+      },
+      {
+        "title": "Berlin Weekend with a Friday Night Arrival: A Plan That Starts Small",
+        "slug": "berlin-weekend-friday-night-arrival",
+        "path": "/post/berlin-weekend-friday-night-arrival",
+        "url": "https://www.berlinwalk.com/post/berlin-weekend-friday-night-arrival",
+        "excerpt": "Arriving in Berlin on Friday night? Use a small first-night plan for BER or Hauptbahnhof that protects Saturday instead of forcing a rushed checklist.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "practical",
+        "topicLabel": "Practical Berlin",
         "readTime": "4 min read",
-        "publishedDate": "2026-08-16T05:53:52.419Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_f539c515c8cc4a8e9cc4c87bbca3b415~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-brandenburg-gate.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_f539c515c8cc4a8e9cc4c87bbca3b415~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-brandenburg-gate.jpg",
-        "alt": "The illuminated Brandenburg Gate at blue hour in Berlin",
-        "relatedToolSlug": "berlin-landmark-window"
+        "publishedDate": "2026-08-16T10:58:45.247Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_8124c1065ff349a690b2df2692ea0b5d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ber-airport-night.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_8124c1065ff349a690b2df2692ea0b5d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ber-airport-night.jpg",
+        "alt": "Terminal 1 at Berlin Brandenburg Airport lit at dusk",
+        "relatedToolSlug": "berlin-weekend-first-night"
+      },
+      {
+        "title": "Berlin Spy Museum: Is It Worth Your Time on a First Visit?",
+        "slug": "berlin-spy-museum-worth-it",
+        "path": "/post/berlin-spy-museum-worth-it",
+        "url": "https://www.berlinwalk.com/post/berlin-spy-museum-worth-it",
+        "excerpt": "Is the Berlin Spy Museum worth your time? Decide whether its hands-on experience at Potsdamer Platz fits your first Berlin visit, or whether a real historic site is the better move.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "practical",
+        "topicLabel": "Practical Berlin",
+        "readTime": "3 min read",
+        "publishedDate": "2026-08-17T09:53:54.636Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_6264fdbbee424906a8b517c2baac902a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-spy-museum-exterior.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_6264fdbbee424906a8b517c2baac902a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-spy-museum-exterior.jpg",
+        "alt": "The entrance to the German Spy Museum at Leipziger Platz in Berlin",
+        "relatedToolSlug": "berlin-spy-museum-mission-match"
       },
       {
         "title": "Free Berlin Memorials: Four Powerful Places That Are Easy to Visit",
@@ -95,23 +129,6 @@
         "relatedToolSlug": "berlin-memorial-reading-order"
       },
       {
-        "title": "What to Wear for a Berlin Walking Tour: Shoes, Layers and Rain",
-        "slug": "what-to-wear-for-a-berlin-walking-tour",
-        "path": "/post/what-to-wear-for-a-berlin-walking-tour",
-        "url": "https://www.berlinwalk.com/post/what-to-wear-for-a-berlin-walking-tour",
-        "excerpt": "Berlin walking days move between hard pavement, park paths, transport shelter and indoor stops. Here is the simple clothing rule I use: comfortable shoes, removable layers and a small bag.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "first-day",
-        "topicLabel": "First Day in Berlin",
-        "readTime": "5 min read",
-        "publishedDate": "2026-08-15T10:47:50.091Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_12b76c3e948943b481006495e988fa1c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-people-alexanderplatz.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_12b76c3e948943b481006495e988fa1c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-people-alexanderplatz.jpg",
-        "alt": "People crossing Alexanderplatz with the TV Tower behind them, a typical starting point for a Berlin walking day",
-        "relatedToolSlug": "best-month-to-visit-berlin"
-      },
-      {
         "title": "Berlin Public Transport for Tourists: Tickets, Zones, Prices and Validation",
         "slug": "berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus",
         "path": "/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus",
@@ -127,23 +144,6 @@
         "thumb": "https://static.wixstatic.com/media/5a08a3_09bdf461857549d291c3769973fe3a9b~mv2.png/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_8c97b9e50ab54e0b9a53b8d3982f4ce4~mv2.jpg",
         "alt": "Yellow train speeding through Konstanzer Strasse station. The wall has bold stripes and text. Ceiling lights illuminate the platform.",
         "relatedToolSlug": "transport-ticket-calculator"
-      },
-      {
-        "title": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
-        "slug": "where-was-the-berlin-wall-interactive-map",
-        "path": "/post/where-was-the-berlin-wall-interactive-map",
-        "url": "https://www.berlinwalk.com/post/where-was-the-berlin-wall-interactive-map",
-        "excerpt": "The Berlin Wall ran 155 kilometers around West Berlin. Tap any point on this interactive map to see exactly where it stood and which side an address was on in 1989.",
-        "category": "Berlin History",
-        "categorySlug": "berlin-history",
-        "topic": "history-myths",
-        "topicLabel": "Berlin History & Myths",
-        "readTime": "8 min read",
-        "publishedDate": "2026-05-05T09:32:22.821Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_6f4f6d714c71713574696f~mv2.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_6f4f6d714c71713574696f~mv2.jpg",
-        "alt": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
-        "relatedToolSlug": "east-or-west-1989"
       }
     ]
   },
@@ -502,7 +502,7 @@
           "image": "https://static.wixstatic.com/media/5a08a3_717947ab3eff4a4584fd9a6c71735cc7~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island.jpg",
           "thumb": "https://static.wixstatic.com/media/5a08a3_717947ab3eff4a4584fd9a6c71735cc7~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island.jpg",
           "alt": "Museum Island and Berlin Cathedral beside the Spree",
-          "relatedToolSlug": "berlin-first-day-planner"
+          "relatedToolSlug": "berlin-museum-three-slot-builder"
         }
       ]
     },
@@ -1039,7 +1039,7 @@
           "image": "https://static.wixstatic.com/media/5a08a3_bc566f0216b747b3861c80fc2683103c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-maeusebunker.jpg",
           "thumb": "https://static.wixstatic.com/media/5a08a3_bc566f0216b747b3861c80fc2683103c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-maeusebunker.jpg",
           "alt": "The wedge-shaped Mäusebunker research building in Berlin-Lichterfelde, with its projecting ventilation tubes",
-          "relatedToolSlug": ""
+          "relatedToolSlug": "berlin-concrete-clue-chain"
         }
       ]
     },
@@ -1631,7 +1631,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_1e6e9543b4f34bcc807d9b26d0b0b4c8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kudamm-terrace-cafes.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_1e6e9543b4f34bcc807d9b26d0b0b4c8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kudamm-terrace-cafes.jpg",
       "alt": "Pavement cafes with white umbrellas and diners along the Kurfurstendamm in Berlin on a sunny day",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-reserve-or-walk-in"
     },
     {
       "title": "Madame Tussauds, the Dungeon and Legoland: Which Berlin Attractions Are Worth It?",
@@ -1682,7 +1682,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_8f1bc4dfd5f54dfda3cafd51e4d72e59~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-brandenburg-gate-pariser-platz.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_8f1bc4dfd5f54dfda3cafd51e4d72e59~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-brandenburg-gate-pariser-platz.jpg",
       "alt": "Crowds and a costumed photo tout in front of the Brandenburg Gate on Pariser Platz",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "brandenburg-gate-food-escape"
     },
     {
       "title": "Vintage Shopping in Berlin: Where to Find the Good Stuff",
@@ -1733,7 +1733,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_e96deaa0c27a4c27a6541845074b6642~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-dussmann-exterior.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_e96deaa0c27a4c27a6541845074b6642~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-dussmann-exterior.jpg",
       "alt": "Dussmann KulturKaufhaus exterior on Friedrichstraße in Berlin",
-      "relatedToolSlug": "berlin-shopping-areas"
+      "relatedToolSlug": "berlin-reading-stop-line"
     },
     {
       "title": "Berlin Botanic Garden: Is It Worth the Trip From Mitte?",
@@ -1750,7 +1750,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_4bf46a90ba4b49bf8a680ced300ea456~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-tropical-house-exterior.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_4bf46a90ba4b49bf8a680ced300ea456~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-tropical-house-exterior.jpg",
       "alt": "The Great Tropical House at Berlin Botanic Garden seen from the garden",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-plant-passport"
     },
     {
       "title": "Berlin Opera for First-Time Visitors: Which House Fits Your Evening?",
@@ -1767,7 +1767,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_c9cf541cc0594fa8a18c583efa2001d1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-staatsoper-cover.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_c9cf541cc0594fa8a18c583efa2001d1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-staatsoper-cover.jpg",
       "alt": "Frontal view of Staatsoper Unter den Linden on Berlin's historic boulevard",
-      "relatedToolSlug": "berlin-first-day-planner"
+      "relatedToolSlug": "berlin-opera-house-reader"
     },
     {
       "title": "Berlin Brutalist Architecture: Four Concrete Buildings Worth a Detour",
@@ -1784,7 +1784,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_bc566f0216b747b3861c80fc2683103c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-maeusebunker.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_bc566f0216b747b3861c80fc2683103c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-maeusebunker.jpg",
       "alt": "The wedge-shaped Mäusebunker research building in Berlin-Lichterfelde, with its projecting ventilation tubes",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-concrete-clue-chain"
     },
     {
       "title": "How to Read a Berlin Address: Street Names, House Numbers and the Clues That Get You There",
@@ -1801,7 +1801,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_47824af90c004d359df32ab3b0eb322e~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-address-cover.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_47824af90c004d359df32ab3b0eb322e~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-address-cover.jpg",
       "alt": "A visitor checks a map and phone near Alexanderplatz, with Berlin's TV Tower in the background",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-address-compass"
     },
     {
       "title": "Cash-Only Restaurants in Berlin: A Food-Day Payment Plan for Visitors",
@@ -1818,7 +1818,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_2dfc59724f244e35bfe4d86ba01204ce~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-meal-wallet-hero.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_2dfc59724f244e35bfe4d86ba01204ce~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-meal-wallet-hero.jpg",
       "alt": "A visitor checking wallet options beside a meal in a Berlin-style café",
-      "relatedToolSlug": "berlin-daily-budget"
+      "relatedToolSlug": "berlin-meal-wallet"
     }
   ]
 }

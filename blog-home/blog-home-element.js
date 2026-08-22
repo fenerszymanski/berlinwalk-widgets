@@ -1,19 +1,19 @@
 const BW_BLOG_HOME_DATA_URL = (() => {
   const script = document.currentScript;
   const base = script && script.src ? script.src : window.location.href;
-  return new URL('./data.json?v=20260821-featured-listings', base).href;
+  return new URL('./data.json?v=20260822-featured-listings', base).href;
 })();
 
 const BW_BLOG_HOME_FALLBACK = {
   featured: {
-    title: 'How to Watch Films in English in Berlin',
-    url: 'https://www.berlinwalk.com/post/watch-films-in-english-in-berlin',
+    title: 'Madame Tussauds, the Dungeon and Legoland: Which Berlin Attractions Are Worth It?',
+    url: 'https://www.berlinwalk.com/post/berlin-attractions-worth-it',
     category: 'Tourist Tips',
-    readTime: '5 min read',
-    label: 'New: decode the cinema listing',
-    summary: 'Berlin has more than sixty cinemas showing films in their original language, but the whole system hides behind a few German letters. Here is how to read OV, OmU and OmeU, where to go, and how to find an English screening tonight.',
-    image: 'https://static.wixstatic.com/media/5a08a3_0a19dd190168476fa27927be5289e100~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kino-international.jpg',
-    alt: 'The modernist glass facade of Kino International on Karl-Marx-Allee under a blue sky'
+    readTime: '6 min read',
+    label: 'New: choose the right paid attraction',
+    summary: 'An honest local take on whether Berlin’s paid attractions are worth it: who each one suits, and which two closed for good.',
+    image: 'https://static.wixstatic.com/media/5a08a3_c3487d418bd84fd1b361bc92522f2d30~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-unter-den-linden.jpg',
+    alt: 'The Brandenburg Gate seen from Unter den Linden in central Berlin under a blue sky'
   },
   miniPosts: [
     {
