@@ -13,7 +13,6 @@
   var MOBILE_NAV_MARKER = 'data-bw-blog-mobile-nav';
   var MOBILE_MARKER = 'data-bw-blog-mobile-guide';
   var TOOL_MARKER = 'data-bw-blog-tool-prompt';
-  var FDR_BRIDGE_MARKER = 'data-bw-blog-fdr-bridge';
   var JOURNEY_MARKER = 'data-bw-blog-journey';
   var ENHANCEMENT_MARKER = 'data-bw-blog-enhancement-ready';
   var JOURNEY_LAYOUT_VERSION = 'blog-journey-action-cards-20260709a';
@@ -31,7 +30,6 @@
   var BOOKING_DEST_LANDING = 'https://www.berlinwalk.com/free-berlin-walking-tour';
   var BOOKING_EXPERIMENT_VARIANT = 'service';
   var BOOKING_NEXT_ACTION_PATCH_URL = 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@fc4858cae9aa7c2e7a807a17b4c1bdd9f67bb571/booking-calendar/book-now-intro-patch.js';
-  var TRIP_PLANNER_URL = 'https://www.berlinwalk.com/berlin-trip-planner';
   var TRACK_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/pf-event';
   var ATTRIBUTION_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id', 'fbclid', 'fbc', 'fbp'];
   var NEXT_TOUR_SLOT_URL = resolveAdjacentScriptUrl('next-tour-slot.js');
@@ -1005,11 +1003,6 @@
   ];
 
   var TOOL_FALLBACKS = {
-    'berlin-first-day-planner': {
-      title: 'Berlin First-Day Planner',
-      url: 'https://www.berlinwalk.com/tools/berlin-first-day-planner',
-      summary: 'Turn arrival time, luggage, weather, and energy into a realistic first-day plan.'
-    },
     'berlin-public-toilets': {
       title: 'Berlin Public Toilet Finder',
       url: 'https://www.berlinwalk.com/tools/berlin-public-toilets',
@@ -1063,7 +1056,6 @@
   };
 
   var TOOL_ICON_FALLBACKS = {
-    'berlin-first-day-planner': TOOL_ICON_BASE_URL + 'berlin-first-day-planner-160.png',
     'berlin-public-toilets': TOOL_ICON_BASE_URL + 'berlin-public-toilets-160.png',
     'berlin-luggage-storage': TOOL_ICON_BASE_URL + 'berlin-luggage-storage-160.png',
     'transport-ticket-calculator': TOOL_ICON_BASE_URL + 'transport-ticket-calculator-160.png',
@@ -1154,7 +1146,7 @@
       var text = cleanText(heading.textContent);
       if (!text || text.length < 3) continue;
       if (/^(share|related posts?|recent posts?|comments?|leave a reply)$/i.test(text)) continue;
-      if (heading.closest('[' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + JOURNEY_MARKER + '], [data-bw-leadform], [data-bw-tourcta], [' + FDR_BRIDGE_MARKER + ']')) continue;
+      if (heading.closest('[' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + JOURNEY_MARKER + '], [data-bw-leadform], [data-bw-tourcta]')) continue;
       if (!isVisible(heading)) continue;
       var base = slugify(text);
       var id = heading.id || 'bw-guide-' + base;
@@ -1223,7 +1215,6 @@
       '.bw-blog-tool-prompt strong{color:#212121;display:block;font-size:24px;font-weight:900;line-height:1.08;margin:0 0 7px;}',
       '.bw-blog-tool-copy{color:#4E5A4E!important;display:block;font-family:Merriweather,Georgia,serif!important;font-size:15px!important;line-height:1.48!important;margin:0!important;}',
       '.bw-blog-tool-button{align-items:center;background:#FFE600;border:1px solid #212121;color:#212121;display:inline-flex;font-size:12px;font-weight:900;justify-content:center;letter-spacing:.8px;min-height:42px;padding:0 15px;text-decoration:none;text-transform:uppercase;white-space:nowrap;}',
-      '.bw-blog-fdr-bridge{border-top:5px solid #1B5E20;}',
       '.bw-blog-journey{background:#111111;color:#FFFFFF;margin:42px 0 34px;padding:28px;position:relative;overflow:hidden;}',
       '.bw-blog-journey:before{background:linear-gradient(90deg,#FFE600,#7CB342);content:"";display:block;height:5px;left:0;position:absolute;top:0;width:100%;}',
       '.bw-blog-journey-kicker{color:#FFE600;}',
@@ -1353,13 +1344,12 @@
 
   function relatedTool(data, post) {
     var slug = post && post.relatedToolSlug;
-    var match = null;
-    if (slug) {
-      match = (data.toolsHub || []).filter(function (item) { return item.slug === slug; })[0] ||
-        (data.tools || []).filter(function (item) { return item.slug === slug; })[0] ||
-        TOOL_FALLBACKS[slug];
-    }
-    var tool = cloneTool(match || (data.tools || [])[0] || TOOL_FALLBACKS['berlin-first-day-planner'], slug || 'berlin-first-day-planner');
+    if (!slug) return null;
+    var match = (data.toolsHub || []).filter(function (item) { return item.slug === slug; })[0] ||
+      (data.tools || []).filter(function (item) { return item.slug === slug; })[0] ||
+      TOOL_FALLBACKS[slug];
+    var tool = cloneTool(match, slug);
+    if (!tool) return null;
     if (tool && tool.slug && !tool.url) tool.url = 'https://www.berlinwalk.com/tools/' + tool.slug;
     if (tool && !tool.summary && tool.lead) tool.summary = tool.lead;
     if (tool && tool.slug && !tool.image) tool.image = TOOL_ICON_FALLBACKS[tool.slug] || DEFAULT_TOOL_IMAGE;
@@ -1383,7 +1373,7 @@
   function normalizePostSpacing(body) {
     if (!body) return;
     body.querySelectorAll('p').forEach(function (paragraph) {
-      if (paragraph.closest('[' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + JOURNEY_MARKER + '], [data-bw-leadform], [data-bw-tourcta], [' + FDR_BRIDGE_MARKER + ']')) return;
+      if (paragraph.closest('[' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + JOURNEY_MARKER + '], [data-bw-leadform], [data-bw-tourcta]')) return;
       var hasMedia = paragraph.querySelector('img,iframe,video,svg,canvas,button,audio');
       var text = String(paragraph.textContent || '').replace(/\u00a0/g, ' ').trim();
       if (!hasMedia && !text) {
@@ -1431,7 +1421,7 @@
       oldBlock.removeAttribute(WIDGET_BLOCK_MARKER);
     });
     body.querySelectorAll('iframe[src*="fenerszymanski.github.io/berlinwalk-widgets/"]').forEach(function (frame) {
-      if (frame.closest('[' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + JOURNEY_MARKER + '], [data-bw-leadform], [data-bw-tourcta], [' + FDR_BRIDGE_MARKER + ']')) return;
+      if (frame.closest('[' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + JOURNEY_MARKER + '], [data-bw-leadform], [data-bw-tourcta]')) return;
       findWidgetFrameBlock(frame, body).setAttribute(WIDGET_BLOCK_MARKER, '1');
     });
   }
@@ -1440,7 +1430,7 @@
     var headings = document.querySelectorAll('h1');
     for (var i = 0; i < headings.length; i++) {
       var heading = headings[i];
-      if (heading.closest('[' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + JOURNEY_MARKER + '], [data-bw-leadform], [data-bw-tourcta], [' + FDR_BRIDGE_MARKER + ']')) continue;
+      if (heading.closest('[' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + JOURNEY_MARKER + '], [data-bw-leadform], [data-bw-tourcta]')) continue;
       if (!isVisible(heading)) continue;
       if (cleanText(heading.textContent).length > 8) return heading;
     }
@@ -1622,7 +1612,7 @@
   function normalizeHeadingTypography(body) {
     if (!body) return;
     body.querySelectorAll('h2, h3').forEach(function (heading) {
-      if (heading.closest('[' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + JOURNEY_MARKER + '], [data-bw-leadform], [data-bw-tourcta], [' + FDR_BRIDGE_MARKER + ']')) return;
+      if (heading.closest('[' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + JOURNEY_MARKER + '], [data-bw-leadform], [data-bw-tourcta]')) return;
       heading.style.setProperty('font-family', '"BW Montserrat Black", Arial, sans-serif', 'important');
       heading.style.setProperty('font-weight', '900', 'important');
       heading.style.setProperty('font-variation-settings', '"wght" 900', 'important');
@@ -1766,18 +1756,13 @@
     return hasExistingToolReference(body, tool);
   }
 
-  function isAdjacentToFdrBridge(node) {
-    var next = node && node.nextElementSibling;
-    return !!(next && next.hasAttribute && next.hasAttribute(FDR_BRIDGE_MARKER));
-  }
-
   function findToolInsertionPoint(body, items) {
     var start = items && items.length > 1 ? items[1].node : (items && items.length ? items[0].node : null);
     var node = start ? start.nextElementSibling : null;
     while (node) {
       var tag = (node.tagName || '').toUpperCase();
       if (tag === 'H2' || tag === 'H3') break;
-      if (tag === 'P' && isVisible(node) && cleanText(node.textContent).length > 40 && !isAdjacentToFdrBridge(node)) return { parent: node.parentNode, after: node };
+      if (tag === 'P' && isVisible(node) && cleanText(node.textContent).length > 40) return { parent: node.parentNode, after: node };
       node = node.nextElementSibling;
     }
     var paragraphs = body.querySelectorAll('p');
@@ -1785,9 +1770,8 @@
     for (var i = 0; i < paragraphs.length; i++) {
       var paragraph = paragraphs[i];
       if (!isVisible(paragraph)) continue;
-      if (paragraph.closest('[' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + JOURNEY_MARKER + '], [data-bw-leadform], [data-bw-tourcta], [' + FDR_BRIDGE_MARKER + ']')) continue;
+      if (paragraph.closest('[' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + JOURNEY_MARKER + '], [data-bw-leadform], [data-bw-tourcta]')) continue;
       if (cleanText(paragraph.textContent).length < 40) continue;
-      if (isAdjacentToFdrBridge(paragraph)) continue;
       seen++;
       if (seen >= 2) return { parent: paragraph.parentNode, after: paragraph };
     }
@@ -1854,7 +1838,6 @@
     });
   }
 
-  var FDR_PRODUCT_URL = 'https://www.berlinwalk.com/berlin-trip-planner';
   var WALL_TIMELINE_URL = 'https://www.berlinwalk.com/berlin-wall-timeline';
   var WALL_TIMELINE_COVER = 'https://fenerszymanski.github.io/berlinwalk-widgets/berlin-wall-timeline/assets/social/berlin-wall-timeline-1200x630.jpg';
   var WALL_TIMELINE_SLUGS = {
@@ -1864,98 +1847,6 @@
     'berlin-wall-memorial-bernauer-strasse': 1,
     'exploring-checkpoint-charlie-a-historical-journey-through-cold-war-berlin-s-iconic-border-crossing': 1
   };
-  var FDR_BRIDGE_SLUGS = {
-    'how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way': 1,
-    'berlin-before-hotel-check-in': 1,
-    'luggage-storage-in-berlin-2026': 1,
-    'berlin-hauptbahnhof-guide': 1,
-    'berlin-train-stations': 1,
-    'taxi-in-berlin': 1,
-    'uber-in-berlin': 1,
-    'atm-in-berlin': 1,
-    'esim-sim-wifi-berlin-2026': 1
-  };
-
-  function fdrBridgeUrl(slug) {
-    var url = new URL(FDR_PRODUCT_URL);
-    url.searchParams.set('utm_source', 'berlinwalk');
-    url.searchParams.set('utm_medium', 'blog_bridge');
-    url.searchParams.set('utm_campaign', 'trip_planner_blog_bridge');
-    url.searchParams.set('utm_content', slug || 'blog_post');
-    return url.toString();
-  }
-
-  function hasExistingFdrReference(body) {
-    var refs = body.querySelectorAll('a[href*="/berlin-trip-planner"]');
-    for (var i = 0; i < refs.length; i++) {
-      if (!refs[i].closest('[' + FDR_BRIDGE_MARKER + '], [' + TOOL_MARKER + '], [' + JOURNEY_MARKER + ']')) return true;
-    }
-    return false;
-  }
-
-  function rewriteLegacyFdrReferences(body, slug) {
-    if (!body) return;
-    var links = body.querySelectorAll('a[href*="/products/berlin-first-day-rescue-plan"]');
-    for (var i = 0; i < links.length; i++) {
-      if (links[i].closest('[' + TOOL_MARKER + '], [' + JOURNEY_MARKER + ']')) continue;
-      links[i].href = fdrBridgeUrl(slug);
-      if (/first-day rescue plan/i.test(cleanText(links[i].textContent))) links[i].textContent = 'Berlin Trip Planner';
-    }
-  }
-
-  function findFdrInsertionPoint(body) {
-    var paragraphs = body.querySelectorAll('p');
-    var lastQualifying = null;
-    var seen = 0;
-    for (var i = 0; i < paragraphs.length; i++) {
-      var paragraph = paragraphs[i];
-      if (!isVisible(paragraph)) continue;
-      if (paragraph.closest('[' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + JOURNEY_MARKER + '], [data-bw-leadform], [data-bw-tourcta], [' + FDR_BRIDGE_MARKER + ']')) continue;
-      if (cleanText(paragraph.textContent).length < 40) continue;
-      seen++;
-      lastQualifying = paragraph;
-      if (seen >= 5) return { parent: paragraph.parentNode, after: paragraph };
-    }
-    if (seen >= 2 && lastQualifying) return { parent: lastQualifying.parentNode, after: lastQualifying };
-    return null;
-  }
-
-  function insertFdrBridge(body) {
-    var old = document.querySelector('[' + FDR_BRIDGE_MARKER + ']');
-    var slug = currentSlug();
-    rewriteLegacyFdrReferences(body, slug);
-    if (!body || !slug || !FDR_BRIDGE_SLUGS[slug] || hasExistingFdrReference(body)) {
-      if (old) old.remove();
-      return;
-    }
-    if (old && old.getAttribute('data-bw-blog-fdr-key') === slug) return;
-    if (old) old.remove();
-    var point = findFdrInsertionPoint(body);
-    if (!point || !point.parent || !point.after) return;
-
-    var bridge = document.createElement('aside');
-    bridge.className = 'bw-blog-tool-prompt bw-blog-fdr-bridge';
-    bridge.setAttribute(FDR_BRIDGE_MARKER, '1');
-    bridge.setAttribute('data-bw-blog-fdr-key', slug);
-    bridge.setAttribute('aria-label', 'Berlin Trip Planner');
-    bridge.innerHTML =
-      '<div>' +
-        '<span class="bw-blog-tool-kicker">Arriving in Berlin soon?</span>' +
-        '<strong>Berlin Trip Planner</strong>' +
-        '<p class="bw-blog-tool-copy">Enter your dates and where you are staying. I build a private Web plan with a matching PDF, from €7.99 for the whole trip in one payment.</p>' +
-      '</div>' +
-      '<a class="bw-blog-tool-button" href="' + escapeAttr(fdrBridgeUrl(slug)) + '" target="_top" data-bw-blog-fdr-click="1">Build my Berlin plan</a>';
-
-    bridge.addEventListener('click', function (event) {
-      var link = event.target.closest('[data-bw-blog-fdr-click]');
-      if (!link) return;
-      pushEvent('bw_blog_trip_planner_bridge_click', { slug: slug, href: link.href });
-    });
-
-    point.parent.insertBefore(bridge, point.after.nextSibling);
-    pushEvent('bw_blog_trip_planner_bridge_view', { slug: slug });
-  }
-
   function insertMobileGuide(body, items) {
     var old = document.querySelector('[' + MOBILE_MARKER + ']');
     if (!body || !items || items.length < 2) {
@@ -2101,20 +1992,6 @@
     };
   }
 
-  function plannerJourneyCard(post, title, context) {
-    var slug = post && post.slug || currentSlug();
-    return {
-      label: 'Plan it',
-      kind: 'tool',
-      title: title || 'Build a Berlin Trip Pack',
-      copy: 'Turn this guide into a simple route and timing plan.',
-      url: journeyUtmUrl(TRIP_PLANNER_URL, slug, context || 'trip_planner', 'blog_bridge'),
-      image: TOOL_ICON_FALLBACKS['berlin-first-day-planner'] || DEFAULT_TOOL_IMAGE,
-      actionText: 'Plan route',
-      ctaKind: 'trip_planner'
-    };
-  }
-
   function toolJourneyCard(tool, post, label) {
     if (!tool || !tool.url || !tool.title) return null;
     return {
@@ -2170,7 +2047,6 @@
   function journeyStrategy(post, tool, posts, bookingUrl) {
     var intent = postIntentClass(post);
     var toolCard = toolJourneyCard(tool, post);
-    var plannerCard = plannerJourneyCard(post);
     var readCard = relatedJourneyCard(posts && posts[0]);
     var wallTimelineCard = wallTimelineJourneyCard(post);
     var directBookCard = bookingJourneyCard(bookingUrl, 'Walk this context with me in Berlin', 'blog_journey_direct_booking_nextslot');
@@ -2192,21 +2068,21 @@
 
     if (intent === 'planner-first') {
       strategy.title = 'Make the practical part easier';
-      strategy.intro = 'For utility topics, start with planning help first. Book the walk later only if it fits the trip you are building.';
-      strategy.cards = dedupeJourneyCards([toolCard, softBookCard, plannerCard, readCard], 3);
+      strategy.intro = 'For utility topics, start with the article tool or the practical next move. Book the walk later only if it fits the trip you are building.';
+      strategy.cards = dedupeJourneyCards([toolCard, softBookCard, readCard], 3);
       return strategy;
     }
 
     if (intent === 'event-context') {
       strategy.title = 'Plan around this Berlin moment';
       strategy.intro = 'Use this as context for your trip, then choose whether a walk, a tool, or another guide is the useful next move.';
-      strategy.cards = dedupeJourneyCards([plannerCard, softBookCard, toolCard, readCard], 3);
+      strategy.cards = dedupeJourneyCards([softBookCard, toolCard, readCard], 3);
       return strategy;
     }
 
     strategy.title = 'Turn this into a Berlin day';
-    strategy.intro = 'Build a route first, then keep reading or book the walk if you want the city context in person.';
-    strategy.cards = dedupeJourneyCards([plannerCard, softBookCard, toolCard, readCard], 3);
+    strategy.intro = 'Keep reading, use the article-specific tool when there is one, or book the walk if you want the city context in person.';
+    strategy.cards = dedupeJourneyCards([softBookCard, toolCard, readCard], 3);
     return strategy;
   }
 
@@ -2215,7 +2091,7 @@
     for (var i = candidates.length - 1; i >= 0; i--) {
       var el = candidates[i];
       if (!isVisible(el)) continue;
-      if (el.closest('[' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + JOURNEY_MARKER + '], [data-bw-leadform], [data-bw-tourcta], [' + FDR_BRIDGE_MARKER + ']')) continue;
+      if (el.closest('[' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + JOURNEY_MARKER + '], [data-bw-leadform], [data-bw-tourcta]')) continue;
       if (cleanText(el.textContent).length < 24) continue;
       return journeyInsertionTarget(el, body);
     }
@@ -2483,7 +2359,7 @@
       var node = el;
       for (var depth = 0; depth < 8 && node.parentElement && node.parentElement !== document.body; depth++) {
         var parent = node.parentElement;
-        if (parent.closest('[' + JOURNEY_MARKER + '], [' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + FDR_BRIDGE_MARKER + ']')) break;
+        if (parent.closest('[' + JOURNEY_MARKER + '], [' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + ']')) break;
         if (isUnsafeEndMatterContainer(parent)) break;
         var text = cleanText(parent.textContent);
         var hasRelatedShape = label === 'Related Posts' && text.indexOf('Related Posts') !== -1 && parent.querySelectorAll('a,img').length >= 2 && text.length < 1200;
@@ -2505,7 +2381,7 @@
     }
 
     function isNativeShareControl(el) {
-      if (!el || !el.closest || el.closest('[' + SHARE_MARKER + '], [' + JOURNEY_MARKER + '], [' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + FDR_BRIDGE_MARKER + ']')) return false;
+      if (!el || !el.closest || el.closest('[' + SHARE_MARKER + '], [' + JOURNEY_MARKER + '], [' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + ']')) return false;
       if (isFooterLike(el)) return false;
       var semantic = cleanText([
         el.getAttribute('aria-label') || '',
@@ -2530,7 +2406,7 @@
       var best = null;
       for (var depth = 0; depth < 8 && node && node.parentElement && node.parentElement !== document.body; depth++) {
         var parent = node.parentElement;
-        if (parent.closest('[' + SHARE_MARKER + '], [' + JOURNEY_MARKER + '], [' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + FDR_BRIDGE_MARKER + ']')) break;
+        if (parent.closest('[' + SHARE_MARKER + '], [' + JOURNEY_MARKER + '], [' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + ']')) break;
         if (isFooterLike(parent) || isUnsafeEndMatterContainer(parent)) break;
         var controls = shareControlCount(parent);
         var allControls = parent.querySelectorAll('a,button,[role="button"]').length;
@@ -2559,7 +2435,7 @@
     for (var i = 0; i < candidates.length; i++) {
       var text = cleanText(candidates[i].textContent);
       if (labels.indexOf(text) === -1) continue;
-      if (candidates[i].closest('[' + JOURNEY_MARKER + '], [' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + FDR_BRIDGE_MARKER + ']')) continue;
+      if (candidates[i].closest('[' + JOURNEY_MARKER + '], [' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + ']')) continue;
       var label = 'Related Posts';
       var container = chooseContainer(candidates[i], label);
       if (container && !isUnsafeEndMatterContainer(container)) {
@@ -2656,7 +2532,7 @@
     for (var i = 0; i < seeds.length; i++) {
       var seed = seeds[i];
       if (!isCommentSeed(seed)) continue;
-      if (seed.closest('[' + JOURNEY_MARKER + '], [' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + FDR_BRIDGE_MARKER + '], [' + SHARE_MARKER + ']')) continue;
+      if (seed.closest('[' + JOURNEY_MARKER + '], [' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + SHARE_MARKER + ']')) continue;
       if (seed.closest('.bw-site-footer, #bw-site-footer-restore')) continue;
 
       // Walk up while the whole subtree is still nothing but comments UI.
@@ -2903,7 +2779,6 @@
       insertMobileBlogNav(body, data);
       insertShareBar(body);
       insertToolPrompt(body, data, items);
-      insertFdrBridge(body);
       insertJourney(body, data);
       hideNativeEndMatter();
       decorateBlogBookLinks();
@@ -2982,14 +2857,12 @@
     var mobile = document.querySelector('[' + MOBILE_MARKER + ']');
     var share = document.querySelector('[' + SHARE_MARKER + ']');
     var tool = document.querySelector('[' + TOOL_MARKER + ']');
-    var fdrBridge = document.querySelector('[' + FDR_BRIDGE_MARKER + ']');
     var journey = document.querySelector('[' + JOURNEY_MARKER + ']');
     var backTop = document.querySelector('[' + BACK_TOP_MARKER + ']');
     if (mobileNav) mobileNav.remove();
     if (mobile) mobile.remove();
     if (share) share.remove();
     if (tool) tool.remove();
-    if (fdrBridge) fdrBridge.remove();
     if (journey) journey.remove();
     if (backTop) backTop.remove();
     if (backTopScrollHandler) {
