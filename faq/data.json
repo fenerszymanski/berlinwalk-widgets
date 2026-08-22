@@ -9014,11 +9014,11 @@
     "items": [
       {
         "q": "Which exit should I take at Alexanderplatz station?",
-        "a": "**Follow `Ausgang Dircksenstraße` for the World Clock and the open square, and `Ausgang Rathausstraße` for the TV Tower and the Rotes Rathaus.** Those two cover almost every visitor reason for being at this station. From Rathausstraße the TV Tower entrance is 183 metres; from Grunerstraße, the traffic side, it is 358 metres and you have a wide road to cross. Grunerstraße is worth taking only for the Alexa shopping centre."
+        "a": "**Follow **Ausgang Dircksenstraße** for the World Clock and the open square, and **Ausgang Rathausstraße** for the TV Tower and the Rotes Rathaus.** Those two cover almost every visitor reason for being at this station. From Rathausstraße the TV Tower entrance is 183 metres; from Grunerstraße, the traffic side, it is 358 metres and you have a wide road to cross. Grunerstraße is worth taking only for the Alexa shopping centre."
       },
       {
         "q": "What does Ausgang mean on a Berlin station sign?",
-        "a": "**`Ausgang` means exit.** The useful part is the word that follows it, which in Berlin is a street name: `Ausgang Kantstraße`, `Ausgang Leipziger Platz`. Some exits also carry a letter, but letters get covered during building work and Berlin always has building work, so **treat the street name as the real label** and the letter as a bonus."
+        "a": "**Ausgang means exit.** The useful part is the word that follows it, which in Berlin is a street name: **Ausgang Kantstraße**, **Ausgang Leipziger Platz**. Some exits also carry a letter, but letters get covered during building work and Berlin always has building work, so **treat the street name as the real label** and the letter as a bonus."
       },
       {
         "q": "Which exit at Zoologischer Garten is closest to the Kaiser Wilhelm Memorial Church?",
@@ -9026,7 +9026,7 @@
       },
       {
         "q": "Which exit do I take for Berlin Zoo?",
-        "a": "**It depends on which gate you are using, and the two are 400 metres apart.** `Ausgang Hardenbergplatz` is the side for the Löwentor, the Lion Gate that opened in 1909. `Ausgang Budapester Straße` is the side for the Elefantentor, the ornate 1899 Elephant Gate that appears on the postcards. Both gates sell tickets, so decide the gate first and let it choose your exit."
+        "a": "**It depends on which gate you are using, and the two are 400 metres apart.** **Ausgang Hardenbergplatz** is the side for the Löwentor, the Lion Gate that opened in 1909. **Ausgang Budapester Straße** is the side for the Elefantentor, the ornate 1899 Elephant Gate that appears on the postcards. Both gates sell tickets, so decide the gate first and let it choose your exit."
       },
       {
         "q": "Does BVG publish a map of station exits?",
