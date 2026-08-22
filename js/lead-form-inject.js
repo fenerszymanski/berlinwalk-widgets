@@ -546,6 +546,28 @@
     return insertAfter(point, node);
   }
 
+  function syncSurfaceGutters(node) {
+    if (!node || !node.parentElement || !node.style) return false;
+    var style;
+    try {
+      style = window.getComputedStyle(node.parentElement);
+    } catch (err) {
+      return false;
+    }
+    var left = Math.max(0, parseFloat(style.paddingLeft) || 0);
+    var right = Math.max(0, parseFloat(style.paddingRight) || 0);
+    if (left + right < 0.5) {
+      node.style.removeProperty('width');
+      node.style.removeProperty('margin-left');
+      node.style.removeProperty('margin-right');
+      return true;
+    }
+    node.style.setProperty('width', 'calc(100% + ' + (left + right) + 'px)');
+    node.style.setProperty('margin-left', (-left) + 'px', 'important');
+    node.style.setProperty('margin-right', (-right) + 'px', 'important');
+    return true;
+  }
+
   function injectSurfaces() {
     if (!ENABLED || !isSurfacePath()) return false;
     var body = findPostBody();
@@ -566,6 +588,7 @@
     } else if (!ensureSurfacePosition(datePoint, dateCard)) {
       dateCard = null;
     }
+    if (dateCard) syncSurfaceGutters(dateCard);
     if (booking && dateCard) {
       retries = 0;
       return true;
@@ -616,6 +639,7 @@
       dateCheckTargetUrl: dateCheckTargetUrl,
       validDateFields: validDateFields,
       insertionTarget: insertionTarget,
+      syncSurfaceGutters: syncSurfaceGutters,
       findDateCheckInsertionPoint: findDateCheckInsertionPoint,
       findBookingInsertionPoint: findBookingInsertionPoint
     };
@@ -634,4 +658,7 @@
     removeSurfaces();
     if (isSurfacePath() && !DISABLED) boot();
   }, 300);
+  window.addEventListener('resize', function () {
+    if (isSurfacePath() && !DISABLED) scheduleInject(80);
+  });
 })();

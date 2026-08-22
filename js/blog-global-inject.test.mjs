@@ -38,7 +38,7 @@ function injectorHooks() {
     setTimeout() { return 1; },
     clearTimeout() {},
     setInterval() { return 1; },
-    getComputedStyle() { return { display: 'block', visibility: 'visible' }; },
+    getComputedStyle(node) { return node && node.computedStyle || { display: 'block', visibility: 'visible' }; },
     consentPolicyManager: { getCurrentConsentPolicy() { return { analytics: false }; } },
   };
   window.window = window;
@@ -150,6 +150,27 @@ test('Date Check escapes a padded Wix wrapper when its anchor is the last real c
   const point = hooks.insertionTarget(anchor, body);
   assert.equal(point.parent, body);
   assert.equal(point.after, firstWrapper);
+});
+
+test('Date Check compensates for a padded Wix parent without creating overflow on an unpadded parent', () => {
+  const hooks = injectorHooks();
+  const values = new Map();
+  const style = {
+    setProperty(name, value, priority = '') { values.set(name, { value, priority }); },
+    removeProperty(name) { values.delete(name); },
+  };
+  const card = {
+    parentElement: { computedStyle: { paddingLeft: '18px', paddingRight: '18px' } },
+    style,
+  };
+  assert.equal(hooks.syncSurfaceGutters(card), true);
+  assert.deepEqual(values.get('width'), { value: 'calc(100% + 36px)', priority: '' });
+  assert.deepEqual(values.get('margin-left'), { value: '-18px', priority: 'important' });
+  assert.deepEqual(values.get('margin-right'), { value: '-18px', priority: 'important' });
+
+  card.parentElement.computedStyle = { paddingLeft: '0px', paddingRight: '0px' };
+  assert.equal(hooks.syncSurfaceGutters(card), true);
+  assert.equal(values.size, 0);
 });
 
 test('Date Check handoff keeps arrival, nights and exact blog UTM contract', () => {
