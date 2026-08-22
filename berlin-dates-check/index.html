@@ -143,8 +143,9 @@
   #bw-date-check .pocket-preview-photo picture, #bw-date-check .pocket-preview-photo img { display: block; width: 100%; height: 100%; }
   #bw-date-check .pocket-preview-photo img { object-fit: cover; object-position: 68% center; }
   #bw-date-check .pocket-preview .eyebrow { margin-bottom: 7px; color: #1B5E20; }
-  #bw-date-check .pocket-preview h3 { margin: 0 0 7px; color: #123D18; font-size: clamp(19px, 2.4vw, 25px); line-height: 1.18; }
+  #bw-date-check .pocket-preview h2 { margin: 0 0 9px; color: #123D18; font-family: var(--f-body); font-size: clamp(30px, 5vw, 50px); font-weight: 700; line-height: .95; letter-spacing: .07em; }
   #bw-date-check .pocket-preview p { color: #324934; font-size: 13.5px; line-height: 1.5; }
+  #bw-date-check .pocket-preview .unlock-promise { max-width: 34ch; color: #123D18; font-size: clamp(16px, 2vw, 19px); font-weight: 600; line-height: 1.35; }
   #bw-date-check .pocket-preview-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 0; padding: 0; list-style: none; }
   #bw-date-check .pocket-preview-list li { display: grid; grid-template-columns: 22px minmax(0, 1fr); column-gap: 7px; padding: 9px 10px; border: 1px solid #B8CBB0; background: rgba(255,255,255,.56); color: #234429; font-size: 12px; line-height: 1.35; }
   #bw-date-check .pocket-preview-item-icon { margin-top: 1px; color: #1B5E20; font-size: 20px; }
@@ -193,8 +194,9 @@
 
   /* ---- gate ---- */
   #bw-date-check .gate { border: 1.5px solid var(--green); border-radius: 14px; background: var(--surface); padding: 26px 24px; display: flex; flex-direction: column; gap: 16px; }
-  #bw-date-check .gate-zone { gap: 18px; }
-  #bw-date-check .gate-zone .pocket-preview { margin-top: 0; }
+  #bw-date-check .gate-zone { gap: 22px; border: 1.5px solid var(--green); border-radius: 14px; background: var(--surface); padding: 26px 24px 24px; }
+  #bw-date-check .gate-zone .pocket-preview { margin-top: 0; padding: 0; border: 0; border-radius: 0; background: transparent; }
+  #bw-date-check .gate-zone .gate { border: 0; border-top: 1px solid var(--hair); border-radius: 0; background: transparent; padding: 22px 0 0; }
   #bw-date-check .gate h2 { font-size: clamp(19px, 2.6vw, 24px); }
   #bw-date-check .gate .lede { font-size: 14px; line-height: 1.55; color: var(--muted); max-width: 62ch; }
   #bw-date-check .gate-row { display: flex; gap: 10px; flex-wrap: wrap; }
@@ -212,7 +214,7 @@
   #bw-date-check .consent input { margin-top: 3px; flex: none; }
   #bw-date-check .consent a { color: var(--green); }
   #bw-date-check .honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-  #bw-date-check .gate-status { font-size: 13px; min-height: 1.4em; }
+  #bw-date-check .gate-status { margin: 12px 0 0; font-size: 13px; min-height: 1.4em; }
   #bw-date-check .gate-status.is-error { color: var(--alert); }
   #bw-date-check .gate-status.is-success { color: var(--green); font-weight: 600; }
   #bw-date-check .gate.is-complete .gate-row, #bw-date-check .gate.is-complete .consent { display: none; }
@@ -277,6 +279,8 @@
     #bw-date-check .pocket-preview { grid-template-columns: 1fr; gap: 16px; margin-top: 22px; padding: 18px; }
     #bw-date-check .pocket-preview-photo { order: 3; aspect-ratio: 16 / 10; }
     #bw-date-check .pocket-preview-list { grid-template-columns: 1fr; }
+    #bw-date-check .gate-zone { gap: 18px; padding: 22px 18px 20px; }
+    #bw-date-check .gate-zone .gate { padding-top: 18px; }
     #bw-date-check .result-stage { padding: 34px 16px 54px; gap: 38px; }
     #bw-date-check .stripwrap { overflow-x: visible; padding-bottom: 0; }
     #bw-date-check .strip { grid-template-columns: repeat(auto-fit, minmax(74px, 1fr)); grid-auto-columns: auto; grid-auto-flow: row; gap: 7px; }
@@ -389,13 +393,14 @@
       <div class="readings" id="readings"></div>
     </section>
     <section class="gate-zone">
-      <aside class="pocket-preview" id="pocketPreview" aria-labelledby="pocketPreviewHeading">
+      <aside class="pocket-preview" id="pocketPreview" aria-labelledby="gateHeading">
         <div class="pocket-preview-copy">
-          <p class="eyebrow">Email-only bonus</p>
-          <h3 id="pocketPreviewHeading">Your date result stays here. The Pocket Kit travels with you.</h3>
-          <p>I will send a second, phone-friendly layer after the date result: useful places and official links for the moments when you are already out in Berlin.</p>
+          <p class="eyebrow">BerlinWalk bonus</p>
+          <h2 id="gateHeading">BERLIN UNLOCKED</h2>
+          <p class="unlock-promise" id="gateLede">Your dates. My local shortcuts. One phone-ready guide.</p>
+          <p class="gate-stake" id="gateStake"></p>
         </div>
-        <ul class="pocket-preview-list" aria-label="Pocket Kit contents">
+        <ul class="pocket-preview-list" aria-label="Berlin Unlocked contents">
           <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">restaurant</span><span class="pocket-preview-item-copy"><strong>50 picks</strong>Food and drink by situation</span></li>
           <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">map</span><span class="pocket-preview-item-copy"><strong>Transport</strong>Maps and ticket shortcuts</span></li>
           <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">account_balance</span><span class="pocket-preview-item-copy"><strong>19 places</strong>Essential landmark map with stations</span></li>
@@ -409,21 +414,18 @@
         </figure>
       </aside>
       <div class="gate" id="gate">
-        <h2 id="gateHeading">Get the Berlin Pocket Kit too</h2>
-        <p class="gate-stake" id="gateStake"></p>
-        <p class="lede" id="gateLede">The full date result stays visible above. Email adds the Pocket Kit so you can keep it on your phone.</p>
         <form id="gateForm" novalidate>
           <div class="gate-row">
             <input type="email" id="gateEmail" name="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required>
-            <button type="submit" id="gateSubmit">Send my Berlin pack</button>
+            <button type="submit" id="gateSubmit">Send me Berlin Unlocked</button>
           </div>
           <div class="honeypot"><label>Website<input type="text" name="website" id="gateWebsite" tabindex="-1" autocomplete="off"></label></div>
           <label class="consent">
             <input type="checkbox" id="gateConsent" required>
-            <span>Send me my Berlin Dates Pack + Pocket Kit and occasional BerlinWalk emails with Berlin travel tips and offers. I can unsubscribe any time. <a href="https://www.berlinwalk.com/privacy-policy" target="_top">Privacy Policy.</a></span>
+            <span>Send me Berlin Unlocked and occasional BerlinWalk emails with Berlin travel tips and offers. I can unsubscribe any time. <a href="https://www.berlinwalk.com/privacy-policy" target="_top">Privacy Policy.</a></span>
           </label>
-          <p class="gate-status" id="gateStatus" role="status" aria-live="polite"></p>
         </form>
+        <p class="gate-status" id="gateStatus" role="status" aria-live="polite" hidden></p>
       </div>
     </section>
 
@@ -809,12 +811,18 @@
     var stake = document.getElementById('gateStake');
     var lede = document.getElementById('gateLede');
     var form = document.getElementById('gateForm');
+    var status = document.getElementById('gateStatus');
     if (!gate || !heading || !form) return false;
     gate.classList.add('is-complete', 'is-hydrated');
-    heading.textContent = 'Your Berlin pack is in your Inbox. If it is missing, check Spam and Promotions.';
+    heading.textContent = 'BERLIN UNLOCKED';
     if (stake) stake.hidden = true;
     if (lede) lede.hidden = true;
     form.hidden = true;
+    if (status) {
+      status.hidden = false;
+      status.className = 'gate-status is-success';
+      status.textContent = 'Berlin Unlocked is on its way. Check Inbox, Spam and Promotions.';
+    }
     return true;
   }
 
@@ -823,10 +831,16 @@
     var stake = document.getElementById('gateStake');
     var lede = document.getElementById('gateLede');
     var form = document.getElementById('gateForm');
+    var status = document.getElementById('gateStatus');
     if (gate) gate.classList.remove('is-complete', 'is-hydrated');
     if (stake) stake.hidden = false;
     if (lede) lede.hidden = false;
     if (form) form.hidden = false;
+    if (status) {
+      status.hidden = true;
+      status.className = 'gate-status';
+      status.textContent = '';
+    }
   }
 
   function applyGateCopy() {
@@ -835,24 +849,11 @@
     var stake = document.getElementById('gateStake');
     var lede = document.getElementById('gateLede');
     if (!lede) return;
-    var holidayDates = {};
-    (DATA.holidays || []).forEach(function (holiday) { holidayDates[holiday.date] = true; });
-    var hasMonday = STATE.days.some(function (day) { return weekdayLong(day) === 'Monday'; });
-    var hasNonHolidaySunday = STATE.days.some(function (day) {
-      return weekdayLong(day) === 'Sunday' && !holidayDates[day];
-    });
-    var hasPublicHoliday = STATE.days.some(function (day) { return !!holidayDates[day]; });
-    var backupLabels = [];
-    if (hasMonday) backupLabels.push('Monday');
-    if (hasNonHolidaySunday) backupLabels.push('Sunday');
-    if (hasPublicHoliday) backupLabels.push('public-holiday');
-    if (heading) heading.textContent = 'Get the Berlin Pocket Kit too';
+    if (heading) heading.textContent = 'BERLIN UNLOCKED';
     if (stake) {
-      stake.textContent = "For " + fmtCompactTripRange(STATE.arrivalStr, STATE.days[STATE.days.length - 1])
-        + ", I will send the dated Berlin Dates Pack plus 50 food and drink picks, official transport maps and ticket tools, the 19-place landmark map, 12 local rules and toilet, water and luggage maps.";
+      stake.textContent = 'Built for ' + fmtCompactTripRange(STATE.arrivalStr, STATE.days[STATE.days.length - 1]) + '.';
     }
-    lede.textContent = 'The full date result stays visible above. Email adds the Pocket Kit and the dated official links in one phone-friendly message.'
-      + (backupLabels.length ? ' I will also include ' + backupLabels.join(', ').replace(/, ([^,]*)$/, ' and $1') + ' backups with Maps links.' : '');
+    lede.textContent = 'Your dates. My local shortcuts. One phone-ready guide.';
   }
 
   // ---------------------------------------------------------------------
@@ -1094,12 +1095,14 @@
       status.className = 'gate-status';
       if (!email.checkValidity() || !email.value) {
         status.className = 'gate-status is-error';
+        status.hidden = false;
         status.textContent = 'Enter a valid email address.';
         email.focus();
         return;
       }
       if (!consent.checked) {
         status.className = 'gate-status is-error';
+        status.hidden = false;
         status.textContent = 'Tick the box so I know it is okay to email you.';
         consent.focus();
         return;
@@ -1151,12 +1154,14 @@
         consent.disabled = true;
         button.hidden = true;
         status.className = 'gate-status is-success';
-        status.textContent = 'Check Inbox, Spam and Promotions. Your Berlin pack or confirmation link should arrive in a few minutes.';
+        status.hidden = false;
+        status.textContent = 'Berlin Unlocked is on its way. Check Inbox, Spam and Promotions.';
         trackEvent('bw_lead_asset_submit', { placement: 'gate' });
       }).catch(function () {
         button.disabled = false;
-        button.textContent = 'Send my Berlin pack';
+        button.textContent = 'Send me Berlin Unlocked';
         status.className = 'gate-status is-error';
+        status.hidden = false;
         status.textContent = 'That did not go through. Please try again.';
       }).finally(function () {
         submitting = false;

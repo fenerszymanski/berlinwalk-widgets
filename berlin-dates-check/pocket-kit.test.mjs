@@ -29,6 +29,7 @@ function escapedPattern(value) {
 
 test('Pocket Kit has exactly 50 unique venue picks in the eight approved situations', () => {
   assert.equal(DATA.checkedAt, '2026-08-22');
+  assert.equal(DATA.title, 'Berlin Unlocked');
   assert.equal(DATA.venues.length, 50);
   assert.equal(new Set(DATA.venues.map((venue) => venue.id)).size, 50);
   assert.equal(new Set(DATA.venues.map((venue) => venue.name)).size, 50);
@@ -78,7 +79,7 @@ test('the local rules stay at twelve and do not become a route or paid-product s
     assertHttps(rule.sourceUrl, rule.id + ' sourceUrl');
   }
   const publicCopy = JSON.stringify(DATA).toLowerCase();
-  for (const forbidden of ['reminder', 'subscription', 'live tour', 'no email', 'best in berlin', 'rating', 'ranked']) {
+  for (const forbidden of ['reminder', 'subscription', 'live tour', 'no email', 'best in berlin', 'rating', 'ranked', 'dates pack', 'pocket kit', 'berlin pack']) {
     assert.equal(publicCopy.includes(forbidden), false, 'forbidden Pocket Kit copy: ' + forbidden);
   }
   const forbiddenBerlinDomain = [...publicCopy.matchAll(/https?:\/\/([^\/\s"]+)/g)]
@@ -98,10 +99,13 @@ test('page is a standalone utility with keyboard filters, visible count and no s
   assert.match(PAGE, /restoreFocus[\s\S]*activeButton\.focus\(\)/);
   assert.doesNotMatch(PAGE, /type="email"/i);
   assert.doesNotMatch(PAGE, /id="gate|id="lead|subscribe/i);
-  assert.doesNotMatch(PAGE, /berlin\.de|reminder|live tour|no email|subscription/i);
+  assert.doesNotMatch(PAGE, /berlin\.de|reminder|live tour|no email|subscription|Pocket Kit|Dates Pack|Berlin pack/i);
 });
 
-test('Pocket Kit hero and icon treatment are present without venue thumbnails', () => {
+test('Berlin Unlocked hero and icon treatment are present without venue thumbnails', () => {
+  assert.match(PAGE, /<title>Berlin Unlocked \| BerlinWalk<\/title>/);
+  assert.match(PAGE, /<h1>BERLIN UNLOCKED<\/h1>/);
+  assert.match(PAGE, /aria-label="Berlin Unlocked sections"/);
   assert.match(PAGE, /<picture>[\s\S]*pocket-kit-hero\.jpg[\s\S]*<img/);
   assert.match(PAGE, /loading="eager"/);
   assert.match(PAGE, /fetchpriority="high"/);
@@ -111,6 +115,7 @@ test('Pocket Kit hero and icon treatment are present without venue thumbnails', 
     assert.match(PAGE, new RegExp(icon));
   }
   assert.doesNotMatch(PAGE, /venue.*thumbnail|venue.*photo|<img[^>]+venue/i);
+  assert.doesNotMatch(PAGE, /Pocket Kit|Dates Pack|Berlin pack/i);
 });
 
 test('Date Check keeps the result informational and does not expose tour sales controls', () => {
@@ -136,6 +141,21 @@ test('Date Check reveals one Pocket Kit preview inside the result gate zone', ()
 
 test('Date Check separates consent from the email action row', () => {
   assert.match(DATE_CHECK_PAGE, /#bw-date-check \.consent \{[^}]*margin-top:\s*12px;/);
+});
+
+test('Date Check uses one Berlin Unlocked card and one public product name', () => {
+  assert.match(DATE_CHECK_PAGE, /<h2 id="gateHeading">BERLIN UNLOCKED<\/h2>/);
+  assert.match(DATE_CHECK_PAGE, /Your dates\. My local shortcuts\. One phone-ready guide\./);
+  assert.match(DATE_CHECK_PAGE, /Built for [^<]+/);
+  assert.match(DATE_CHECK_PAGE, /Send me Berlin Unlocked/);
+  assert.match(DATE_CHECK_PAGE, /Send me Berlin Unlocked and occasional BerlinWalk emails with Berlin travel tips and offers\./);
+  assert.match(DATE_CHECK_PAGE, /Berlin Unlocked is on its way\. Check Inbox, Spam and Promotions\./);
+  assert.match(DATE_CHECK_PAGE, /#bw-date-check \.gate-zone \{[^}]*border:/);
+  assert.match(DATE_CHECK_PAGE, /#bw-date-check \.gate-zone \.pocket-preview \{[^}]*border: 0/);
+  assert.match(DATE_CHECK_PAGE, /#bw-date-check \.gate-zone \.gate \{[^}]*border: 0/);
+  for (const forbidden of ['Pocket Kit', 'Dates Pack', 'Berlin pack']) {
+    assert.doesNotMatch(DATE_CHECK_PAGE, new RegExp(forbidden.replace(' ', '\\s'), 'i'));
+  }
 });
 
 test('source manifest contains every venue source and every approved map source', () => {

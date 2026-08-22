@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Berlin Pocket Kit | BerlinWalk</title>
-<meta name="description" content="A phone-friendly Berlin Pocket Kit with 50 food and drink picks, official transport maps, the 19-place landmark map, local rules and practical maps.">
+<title>Berlin Unlocked | BerlinWalk</title>
+<meta name="description" content="Berlin Unlocked: 50 food and drink picks, official transport maps, the 19-place landmark map, local rules and practical maps in one phone-ready guide.">
 <link rel="icon" href="../ultimate-berlin-trip-planner/assets/berlinwalk-logo-rounded.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -389,10 +389,10 @@
 <header class="pk-hero">
   <div class="pk-hero-inner">
     <div class="pk-hero-copy">
-      <p class="pk-kicker">BerlinWalk · phone-friendly bonus</p>
-      <h1>Berlin in your pocket</h1>
-      <p class="pk-hero-lead">When you are already walking, the useful answer is usually a short list and the right official link. I put 50 food and drink picks, transport shortcuts, the essential landmark map, twelve local rules and three practical maps here.</p>
-      <nav class="pk-nav" aria-label="Pocket Kit sections">
+      <p class="pk-kicker">BerlinWalk · phone-ready guide</p>
+      <h1>BERLIN UNLOCKED</h1>
+      <p class="pk-hero-lead">50 food and drink picks, official transport maps and ticket tools, the 19-place landmark map, twelve local rules and three practical maps for the moments you are already out in Berlin.</p>
+      <nav class="pk-nav" aria-label="Berlin Unlocked sections">
         <a href="#food">Food and drink</a>
         <a href="#transport">Transport</a>
         <a href="#landmarks">Landmarks</a>
@@ -434,7 +434,7 @@
       <div>
         <p class="pk-eyebrow">Official map pages and ticket tools</p>
         <h2 id="transportHeading" class="pk-heading"><span class="material-symbols-outlined pk-heading-icon" aria-hidden="true">map</span><span>Take the right transport map with you</span></h2>
-        <p class="pk-section-lead">I use the operator pages for network maps. They can update their PDFs without this Pocket Kit becoming an old mirror.</p>
+        <p class="pk-section-lead">I use the operator pages for network maps. They can update their PDFs without Berlin Unlocked becoming an old mirror.</p>
       </div>
     </div>
     <div class="pk-resource-grid" id="transportGrid"></div>
@@ -700,7 +700,7 @@
 
   fetch(DATA_URL, { cache: 'no-store' })
     .then(function (response) {
-      if (!response.ok) throw new Error('Pocket Kit data failed to load');
+      if (!response.ok) throw new Error('Berlin Unlocked data failed to load');
       return response.json();
     })
     .then(function (json) {
@@ -708,7 +708,7 @@
       init();
     })
     .catch(function () {
-      document.getElementById('venueCount').textContent = 'The Pocket Kit could not load. Refresh the page and try again.';
+      document.getElementById('venueCount').textContent = 'Berlin Unlocked could not load. Refresh the page and try again.';
     });
 })();
 </script>
