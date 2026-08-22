@@ -299,7 +299,8 @@
       'deutschlandticket-berlin-tourists',
       'berlin-night-transport',
       'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
-      'how-to-pronounce-berlin-station-names'
+      'how-to-pronounce-berlin-station-names',
+      'berlin-station-exits',
     ],
     component: {
       barCopy: 'FREE SAVE-TO-PHONE CARD',
