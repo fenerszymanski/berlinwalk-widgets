@@ -583,12 +583,54 @@
     return insertAfter(point, node);
   }
 
-  function syncSurfaceGutters(node, body) {
+  function findContentColumn(body) {
+    if (!body || !body.querySelectorAll || !body.getBoundingClientRect) return null;
+    var bodyRect = body.getBoundingClientRect();
+    if (!bodyRect || bodyRect.width < 360) return null;
+    var nodes = body.querySelectorAll('p,h2,h3,blockquote,figure');
+    var groups = {};
+    var best = null;
+    for (var i = 0; i < nodes.length; i++) {
+      var candidate = nodes[i];
+      if (!isVisible(candidate) || hasSurfaceAncestor(candidate)) continue;
+      var tag = (candidate.tagName || '').toUpperCase();
+      if (tag !== 'FIGURE' && cleanText(candidate.textContent).length < 18) continue;
+      var rect = candidate.getBoundingClientRect();
+      if (!rect || rect.width < 320 || rect.width > bodyRect.width - 8) continue;
+      if (rect.left < bodyRect.left - 1 || rect.right > bodyRect.right + 1) continue;
+      var left = Math.round(rect.left);
+      var right = Math.round(rect.right);
+      var key = left + ':' + right;
+      if (!groups[key]) groups[key] = { left: left, right: right, width: right - left, count: 0 };
+      groups[key].count += 1;
+      if (!best || groups[key].count > best.count ||
+          (groups[key].count === best.count && groups[key].width > best.width)) {
+        best = groups[key];
+      }
+    }
+    return best;
+  }
+
+  function syncSurfaceGutters(node, body, expandMobileGutters) {
     if (!node || !body || !node.style || !node.getBoundingClientRect || !body.getBoundingClientRect) return false;
     node.style.removeProperty('width');
+    node.style.removeProperty('max-width');
     node.style.removeProperty('margin-left');
     node.style.removeProperty('margin-right');
     var nodeRect = node.getBoundingClientRect();
+    var viewportWidth = window.innerWidth || 0;
+    if (viewportWidth >= 900) {
+      var column = findContentColumn(body);
+      if (column && column.width >= 320) {
+        var offset = column.left - nodeRect.left;
+        node.style.setProperty('width', column.width + 'px', 'important');
+        node.style.setProperty('max-width', column.width + 'px', 'important');
+        node.style.setProperty('margin-left', offset + 'px', 'important');
+        node.style.setProperty('margin-right', '0px', 'important');
+        return true;
+      }
+    }
+    if (!expandMobileGutters) return true;
     var bodyRect = body.getBoundingClientRect();
     var left = Math.max(0, nodeRect.left - bodyRect.left);
     var right = Math.max(0, bodyRect.right - nodeRect.right);
@@ -622,7 +664,8 @@
     } else if (!ensureSurfacePosition(datePoint, dateCard)) {
       dateCard = null;
     }
-    if (dateCard) syncSurfaceGutters(dateCard, body);
+    if (booking) syncSurfaceGutters(booking, body, false);
+    if (dateCard) syncSurfaceGutters(dateCard, body, true);
     if (booking && dateCard) {
       retries = 0;
       return true;
@@ -672,6 +715,7 @@
       dateCheckTargetUrl: dateCheckTargetUrl,
       validDateFields: validDateFields,
       insertionTarget: insertionTarget,
+      findContentColumn: findContentColumn,
       syncSurfaceGutters: syncSurfaceGutters,
       findDateCheckInsertionPoint: findDateCheckInsertionPoint,
       findBookingInsertionPoint: findBookingInsertionPoint

@@ -162,14 +162,38 @@ test('Date Check compensates for a padded Wix parent without creating overflow o
   };
   const card = { style, getBoundingClientRect() { return { left: 54, right: 563 }; } };
   const body = { getBoundingClientRect() { return { left: 36, right: 581 }; } };
-  assert.equal(hooks.syncSurfaceGutters(card, body), true);
+  assert.equal(hooks.syncSurfaceGutters(card, body, true), true);
   assert.deepEqual(values.get('width'), { value: 'calc(100% + 36px)', priority: '' });
   assert.deepEqual(values.get('margin-left'), { value: '-18px', priority: 'important' });
   assert.deepEqual(values.get('margin-right'), { value: '-18px', priority: 'important' });
 
   card.getBoundingClientRect = () => ({ left: 36, right: 581 });
-  assert.equal(hooks.syncSurfaceGutters(card, body), true);
+  assert.equal(hooks.syncSurfaceGutters(card, body, true), true);
   assert.equal(values.size, 0);
+});
+
+test('desktop surfaces use the repeated article text column instead of the wider Wix parent', () => {
+  const hooks = injectorHooks();
+  const makeBlock = (left, right, text = 'A real article paragraph with enough text') => ({
+    nodeType: 1,
+    tagName: 'P',
+    textContent: text,
+    parentElement: null,
+    closest() { return null; },
+    getBoundingClientRect() { return { left, right, width: right - left, height: 80 }; },
+  });
+  const blocks = [
+    makeBlock(192, 932),
+    makeBlock(192, 932),
+    makeBlock(192, 932),
+    makeBlock(92, 1032),
+  ];
+  const body = {
+    querySelectorAll() { return blocks; },
+    getBoundingClientRect() { return { left: 92, right: 1032, width: 940, height: 3000 }; },
+  };
+  blocks.forEach((block) => { block.parentElement = body; });
+  assert.deepEqual({ ...hooks.findContentColumn(body) }, { left: 192, right: 932, width: 740, count: 3 });
 });
 
 test('Date Check handoff keeps arrival, nights and exact blog UTM contract', () => {
@@ -202,6 +226,8 @@ test('Date Check is one idempotent no-email surface with consent-safe first-part
   assert.match(injectorSource, /removeDuplicateSurfaces\(DATE_CHECK_MARKER\)/);
   assert.match(injectorSource, /ensureSurfacePosition\(bookingPoint, booking\)/);
   assert.match(injectorSource, /ensureSurfacePosition\(datePoint, dateCard\)/);
+  assert.match(injectorSource, /syncSurfaceGutters\(booking, body, false\)/);
+  assert.match(injectorSource, /syncSurfaceGutters\(dateCard, body, true\)/);
   assert.match(injectorSource, /MutationObserver/);
   assert.match(injectorSource, /data-bw-blog-mobile-guide/);
   assert.match(injectorSource, /data-bw-blog-mobile-nav/);
