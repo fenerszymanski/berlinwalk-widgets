@@ -105,7 +105,7 @@ All Velo HTTP functions live in `backend/http-functions.js` on the Wix site (not
   may publish only its own one-manifest package after one consolidated Sol
   pre-publish check passes. The visible flow is: plan one package; check the
   Wix draft and live tool/assets; make one journalled publish call plus GET
-  readback; add the exact CMS link, refresh `/blog --limit 300`, and run live
+  readback; add the exact CMS link, refresh `/blog --limit 400`, and run live
   desktop/mobile QA; then record the exact post/tool Search Console outcomes.
   GPT-5.6 Sol at Max reasoning owns and completes the full run itself, without
   delegation or agent review rounds. Parallel runs
