@@ -159,17 +159,15 @@ test('Date Check compensates for a padded Wix parent without creating overflow o
     setProperty(name, value, priority = '') { values.set(name, { value, priority }); },
     removeProperty(name) { values.delete(name); },
   };
-  const card = {
-    parentElement: { computedStyle: { paddingLeft: '18px', paddingRight: '18px' } },
-    style,
-  };
-  assert.equal(hooks.syncSurfaceGutters(card), true);
+  const card = { style, getBoundingClientRect() { return { left: 54, right: 563 }; } };
+  const body = { getBoundingClientRect() { return { left: 36, right: 581 }; } };
+  assert.equal(hooks.syncSurfaceGutters(card, body), true);
   assert.deepEqual(values.get('width'), { value: 'calc(100% + 36px)', priority: '' });
   assert.deepEqual(values.get('margin-left'), { value: '-18px', priority: 'important' });
   assert.deepEqual(values.get('margin-right'), { value: '-18px', priority: 'important' });
 
-  card.parentElement.computedStyle = { paddingLeft: '0px', paddingRight: '0px' };
-  assert.equal(hooks.syncSurfaceGutters(card), true);
+  card.getBoundingClientRect = () => ({ left: 36, right: 581 });
+  assert.equal(hooks.syncSurfaceGutters(card, body), true);
   assert.equal(values.size, 0);
 });
 
@@ -204,6 +202,10 @@ test('Date Check is one idempotent no-email surface with consent-safe first-part
   assert.match(injectorSource, /ensureSurfacePosition\(bookingPoint, booking\)/);
   assert.match(injectorSource, /ensureSurfacePosition\(datePoint, dateCard\)/);
   assert.match(injectorSource, /MutationObserver/);
+  assert.match(injectorSource, /data-bw-blog-mobile-guide/);
+  assert.match(injectorSource, /data-bw-blog-mobile-nav/);
+  assert.match(injectorSource, /data-bw-blog-tool-prompt/);
+  assert.match(injectorSource, /data-bw-blog-journey/);
   assert.match(injectorSource, /data-bw-leadform/);
   assert.match(injectorSource, /bw_date_check_blog_card_mount/);
   assert.match(injectorSource, /bw_date_check_blog_card_seen/);

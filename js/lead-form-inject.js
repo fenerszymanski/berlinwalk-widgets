@@ -65,7 +65,7 @@
 
   function hasSurfaceAncestor(el) {
     if (!el || !el.closest) return false;
-    if (el.closest('[' + BOOKING_MARKER + '],[' + DATE_CHECK_MARKER + '],[data-bw-leadform],[data-bw-tourcta]')) return true;
+    if (el.closest('[' + BOOKING_MARKER + '],[' + DATE_CHECK_MARKER + '],[data-bw-leadform],[data-bw-tourcta],[data-bw-blog-mobile-guide],[data-bw-blog-mobile-nav],[data-bw-blog-tool-prompt],[data-bw-blog-journey],[data-bw-blog-share-bar]')) return true;
     var container = el.closest('figure,li');
     return Boolean(container && container !== el);
   }
@@ -546,20 +546,16 @@
     return insertAfter(point, node);
   }
 
-  function syncSurfaceGutters(node) {
-    if (!node || !node.parentElement || !node.style) return false;
-    var style;
-    try {
-      style = window.getComputedStyle(node.parentElement);
-    } catch (err) {
-      return false;
-    }
-    var left = Math.max(0, parseFloat(style.paddingLeft) || 0);
-    var right = Math.max(0, parseFloat(style.paddingRight) || 0);
+  function syncSurfaceGutters(node, body) {
+    if (!node || !body || !node.style || !node.getBoundingClientRect || !body.getBoundingClientRect) return false;
+    node.style.removeProperty('width');
+    node.style.removeProperty('margin-left');
+    node.style.removeProperty('margin-right');
+    var nodeRect = node.getBoundingClientRect();
+    var bodyRect = body.getBoundingClientRect();
+    var left = Math.max(0, nodeRect.left - bodyRect.left);
+    var right = Math.max(0, bodyRect.right - nodeRect.right);
     if (left + right < 0.5) {
-      node.style.removeProperty('width');
-      node.style.removeProperty('margin-left');
-      node.style.removeProperty('margin-right');
       return true;
     }
     node.style.setProperty('width', 'calc(100% + ' + (left + right) + 'px)');
@@ -588,7 +584,7 @@
     } else if (!ensureSurfacePosition(datePoint, dateCard)) {
       dateCard = null;
     }
-    if (dateCard) syncSurfaceGutters(dateCard);
+    if (dateCard) syncSurfaceGutters(dateCard, body);
     if (booking && dateCard) {
       retries = 0;
       return true;
