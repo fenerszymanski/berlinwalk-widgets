@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Double Closure Weekend | BerlinWalk</title>
+  <meta name="description" content="A reversible weekend-commitment board for a Pyronale ticket, accommodation area and next-day pressure, built only from confirmed 2026 event facts.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <style>
+    html, body { background: transparent; margin: 0; overflow-x: hidden; }
+    #bw-pyronale-board {
+      --forest: #123D18;
+      --green: #1B5E20;
+      --yellow: #FFE600;
+      --lime: #7CB342;
+      --cream: #FAFAF5;
+      --paper: #FFFFFF;
+      --ink: #202920;
+      --muted: #536053;
+      --line: #C9D8C3;
+      --red: #A5413E;
+      --red-wash: #FCF0EE;
+      box-sizing: border-box;
+      color: var(--ink);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 0 auto;
+      max-width: 760px;
+      padding: 14px;
+    }
+    #bw-pyronale-board *, #bw-pyronale-board *::before, #bw-pyronale-board *::after { box-sizing: border-box; }
+    #bw-pyronale-board .shell { background: var(--cream); border: 1px solid var(--line); box-shadow: 0 17px 40px rgba(18, 61, 24, .11); }
+    #bw-pyronale-board header { background: var(--paper); border-bottom: 1px solid var(--line); padding: 23px 24px 20px; }
+    #bw-pyronale-board .eyebrow { color: var(--green); font-size: 11px; font-weight: 900; letter-spacing: .13em; margin: 0 0 8px; text-transform: uppercase; }
+    #bw-pyronale-board h1 { color: var(--forest); font-size: clamp(24px, 4.5vw, 35px); letter-spacing: -.045em; line-height: 1.04; margin: 0; max-width: 620px; }
+    #bw-pyronale-board .lede { color: #425242; font-size: 13.5px; line-height: 1.55; margin: 11px 0 0; max-width: 630px; }
+    #bw-pyronale-board .fact-ribbon { background: var(--forest); color: #fff; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    #bw-pyronale-board .fact { border-right: 1px solid rgba(255,255,255,.2); min-height: 76px; padding: 13px 14px; }
+    #bw-pyronale-board .fact:last-child { border-right: 0; }
+    #bw-pyronale-board .fact b { color: var(--yellow); display: block; font-size: 14px; line-height: 1.18; }
+    #bw-pyronale-board .fact span { color: #D9E9D5; display: block; font-size: 10.5px; font-weight: 700; line-height: 1.34; margin-top: 4px; }
+    #bw-pyronale-board .body { padding: 19px 20px 22px; }
+    #bw-pyronale-board .intro { color: var(--muted); font-size: 13px; line-height: 1.52; margin: 0 0 14px; }
+    #bw-pyronale-board .ledger { display: grid; gap: 10px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    #bw-pyronale-board .commitment { background: var(--paper); border: 1px solid var(--line); min-width: 0; padding: 14px 13px 13px; position: relative; }
+    #bw-pyronale-board .commitment::before { background: var(--lime); content: ''; height: 4px; left: 0; position: absolute; right: 0; top: 0; }
+    #bw-pyronale-board .commitment:nth-child(2)::before { background: var(--yellow); }
+    #bw-pyronale-board .commitment:nth-child(3)::before { background: var(--green); }
+    #bw-pyronale-board .commitment .number { color: var(--green); display: block; font-size: 10px; font-weight: 900; letter-spacing: .12em; margin: 3px 0 6px; text-transform: uppercase; }
+    #bw-pyronale-board .commitment h2 { color: var(--forest); font-size: 15px; line-height: 1.22; margin: 0 0 9px; }
+    #bw-pyronale-board .commitment p { color: var(--muted); font-size: 11.5px; line-height: 1.43; margin: 0 0 10px; }
+    #bw-pyronale-board .choice-list { display: grid; gap: 6px; }
+    #bw-pyronale-board .choice {
+      appearance: none;
+      background: #fff;
+      border: 1px solid #D9E4D4;
+      color: #2C3C2D;
+      cursor: pointer;
+      font: inherit;
+      font-size: 11.5px;
+      font-weight: 800;
+      line-height: 1.3;
+      min-height: 42px;
+      padding: 8px;
+      text-align: left;
+      width: 100%;
+    }
+    #bw-pyronale-board .choice:hover { background: #F5F9F2; border-color: var(--lime); }
+    #bw-pyronale-board .choice:focus-visible, #bw-pyronale-board .reset:focus-visible, #bw-pyronale-board .source-note a:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+    #bw-pyronale-board .choice[aria-pressed="true"] { background: var(--forest); border-color: var(--forest); color: #fff; }
+    #bw-pyronale-board .board-result { background: var(--paper); border: 1px solid var(--line); border-left: 6px solid var(--yellow); margin-top: 14px; padding: 16px; }
+    #bw-pyronale-board .board-result[data-state="watch"] { background: var(--red-wash); border-left-color: var(--red); }
+    #bw-pyronale-board .board-result[data-state="ready"] { border-left-color: var(--green); }
+    #bw-pyronale-board .board-result .result-label { color: var(--green); font-size: 10.5px; font-weight: 900; letter-spacing: .12em; margin: 0 0 6px; text-transform: uppercase; }
+    #bw-pyronale-board .board-result[data-state="watch"] .result-label { color: var(--red); }
+    #bw-pyronale-board .board-result h2 { color: var(--forest); font-size: 18px; line-height: 1.22; margin: 0 0 7px; }
+    #bw-pyronale-board .board-result p { color: #3E4B3F; font-size: 12.8px; line-height: 1.53; margin: 0; }
+    #bw-pyronale-board .result-lines { display: grid; gap: 7px; margin-top: 13px; }
+    #bw-pyronale-board .result-line { align-items: flex-start; border-top: 1px solid rgba(27,94,32,.14); display: grid; gap: 8px; grid-template-columns: 16px minmax(0, 1fr); padding-top: 7px; }
+    #bw-pyronale-board .result-line::before { color: var(--green); content: '•'; font-size: 20px; font-weight: 900; line-height: .7; }
+    #bw-pyronale-board .result-line span { color: var(--muted); font-size: 11.5px; font-weight: 650; line-height: 1.42; }
+    #bw-pyronale-board .actions { display: flex; justify-content: flex-end; margin-top: 10px; }
+    #bw-pyronale-board .reset { appearance: none; background: transparent; border: 0; color: var(--green); cursor: pointer; font: 800 11.5px Montserrat, Arial, sans-serif; padding: 6px 0; text-decoration: underline; text-underline-offset: 3px; }
+    #bw-pyronale-board .source-note { border-top: 1px dashed var(--line); color: var(--muted); font-size: 11px; line-height: 1.5; margin: 15px 0 0; padding-top: 12px; }
+    #bw-pyronale-board .source-note a { color: var(--green); font-weight: 800; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+    @media (max-width: 610px) {
+      #bw-pyronale-board { padding: 8px; }
+      #bw-pyronale-board header { padding: 20px 17px 18px; }
+      #bw-pyronale-board .body { padding: 16px 13px 18px; }
+      #bw-pyronale-board .fact-ribbon { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      #bw-pyronale-board .fact:nth-child(2) { border-right: 0; }
+      #bw-pyronale-board .fact:nth-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,.2); }
+      #bw-pyronale-board .ledger { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) { #bw-pyronale-board * { scroll-behavior: auto !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+  <main id="bw-pyronale-board">
+    <section class="shell" aria-labelledby="pyronale-title">
+      <header>
+        <p class="eyebrow">Pyronale Berlin · Friday 25 and Saturday 26 September</p>
+        <h1 id="pyronale-title">Make one event night fit the rest of the weekend.</h1>
+        <p class="lede">Set and change three commitments below. The board does not predict an exit time, a transit route or a fixed Sunday outcome.</p>
+      </header>
+      <div class="fact-ribbon" aria-label="Confirmed event facts">
+        <div class="fact"><b>25 / 26 Sep</b><span>Two event nights</span></div>
+        <div class="fact"><b>Maifeld</b><span>At Olympiastadion Berlin</span></div>
+        <div class="fact"><b>South Gate</b><span>Only general entry point</span></div>
+        <div class="fact"><b>21:00</b><span>First named team in current programme</span></div>
+      </div>
+      <div class="body">
+        <p class="intro">The ticket is the fixed part. Accommodation and the next day are where a simple change can protect the rest of your weekend.</p>
+        <div class="ledger" aria-label="Reversible Pyronale weekend commitments">
+          <section class="commitment" aria-labelledby="ticket-title">
+            <span class="number">Commitment 01</span>
+            <h2 id="ticket-title">Pyronale ticket</h2>
+            <p>Choose the event night you hold, or keep it open while checking the current programme.</p>
+            <div class="choice-list" role="group" aria-label="Choose a Pyronale ticket status">
+              <button class="choice" type="button" data-group="ticket" data-value="friday" aria-pressed="false">Friday 25 September</button>
+              <button class="choice" type="button" data-group="ticket" data-value="saturday" aria-pressed="false">Saturday 26 September</button>
+              <button class="choice" type="button" data-group="ticket" data-value="open" aria-pressed="false">Still choosing</button>
+            </div>
+          </section>
+          <section class="commitment" aria-labelledby="stay-title">
+            <span class="number">Commitment 02</span>
+            <h2 id="stay-title">Accommodation area</h2>
+            <p>Keep the venue procedure separate from a generic stadium visit or city-wide route assumption.</p>
+            <div class="choice-list" role="group" aria-label="Choose an accommodation area status">
+              <button class="choice" type="button" data-group="stay" data-value="nearby" aria-pressed="false">Near Olympic Park</button>
+              <button class="choice" type="button" data-group="stay" data-value="elsewhere" aria-pressed="false">Elsewhere in Berlin</button>
+              <button class="choice" type="button" data-group="stay" data-value="open" aria-pressed="false">Still choosing</button>
+            </div>
+          </section>
+          <section class="commitment" aria-labelledby="next-title">
+            <span class="number">Commitment 03</span>
+            <h2 id="next-title">Next-day pressure</h2>
+            <p>Label the morning honestly before you lock the fireworks night into a crowded weekend.</p>
+            <div class="choice-list" role="group" aria-label="Choose a next-day plan status">
+              <button class="choice" type="button" data-group="next" data-value="flexible" aria-pressed="false">Flexible next morning</button>
+              <button class="choice" type="button" data-group="next" data-value="fixed" aria-pressed="false">Fixed next-day plan</button>
+              <button class="choice" type="button" data-group="next" data-value="early" aria-pressed="false">Early departure</button>
+            </div>
+          </section>
+        </div>
+        <section class="board-result" id="board-result" data-state="empty" aria-live="polite" aria-labelledby="board-result-title">
+          <p class="result-label">Weekend reading</p>
+          <h2 id="board-result-title">Set three commitments to read the trade-off</h2>
+          <p id="board-result-copy">Each choice remains reversible. The event facts stay the same: two nights at the Maifeld, South Gate-only general entry, and a 21:00 first named team in the current programme.</p>
+          <div class="result-lines" id="result-lines" hidden></div>
+        </section>
+        <div class="actions"><button class="reset" id="reset-board" type="button" hidden>Clear all three choices</button></div>
+        <p class="source-note">Facts checked 22 August 2026 from <a href="https://pyronale.de/" target="_blank" rel="noopener">Pyronale visitor information</a>, its <a href="https://pyronale.de/programm/" target="_blank" rel="noopener">current programme</a> and <a href="https://pyronale.de/ticket/" target="_blank" rel="noopener">ticket information</a>. Recheck the organiser’s pages and the actual ticket on the day.</p>
+      </div>
+    </section>
+  </main>
+  <script>
+    (function () {
+      'use strict';
+      var state = { ticket: null, stay: null, next: null };
+      var labels = {
+        ticket: { friday: 'Friday 25 September ticket', saturday: 'Saturday 26 September ticket', open: 'Ticket still open' },
+        stay: { nearby: 'Accommodation near Olympic Park', elsewhere: 'Accommodation elsewhere in Berlin', open: 'Accommodation still open' },
+        next: { flexible: 'Flexible next morning', fixed: 'Fixed next-day plan', early: 'Early departure next day' }
+      };
+      var choices = Array.prototype.slice.call(document.querySelectorAll('.choice'));
+      var result = document.getElementById('board-result');
+      var resultTitle = document.getElementById('board-result-title');
+      var resultCopy = document.getElementById('board-result-copy');
+      var lines = document.getElementById('result-lines');
+      var reset = document.getElementById('reset-board');
+      function updateButtons() {
+        choices.forEach(function (choice) {
+          var group = choice.getAttribute('data-group');
+          choice.setAttribute('aria-pressed', state[group] === choice.getAttribute('data-value') ? 'true' : 'false');
+        });
+      }
+      function render() {
+        updateButtons();
+        if (!state.ticket || !state.stay || !state.next) return;
+        var all = [labels.ticket[state.ticket], labels.stay[state.stay], labels.next[state.next]];
+        var isWatch = state.next === 'fixed' || state.next === 'early';
+        var isReady = state.next === 'flexible' && state.ticket !== 'open';
+        result.setAttribute('data-state', isWatch ? 'watch' : (isReady ? 'ready' : 'open'));
+        if (state.ticket === 'open') {
+          resultTitle.textContent = 'Keep the ticket decision open until the programme fits';
+          resultCopy.textContent = 'A broad event date is not a reason to assume one evening is automatically best. Check the current programme and ticket terms before making it the fixed part of the weekend.';
+        } else if (isWatch) {
+          resultTitle.textContent = 'This board has one pressure point worth changing';
+          resultCopy.textContent = 'A fixed or early next-day commitment can make the event night feel tighter. That does not predict a bad outcome; it simply flags the part of the weekend that has least room to move.';
+        } else {
+          resultTitle.textContent = 'The next morning keeps some room to move';
+          resultCopy.textContent = 'The selected event night can be the weekend’s one fixed evening. Keep the actual ticket, South Gate procedure and live return check separate from this planning board.';
+        }
+        var guide = [
+          'Selected: ' + all[0] + '.',
+          'Selected: ' + all[1] + '. The ticket’s South Gate instruction remains the event entry authority.',
+          'Selected: ' + all[2] + '. Do not treat the 21:00 first-team time as a promised end or home-arrival time.'
+        ];
+        lines.innerHTML = guide.map(function (line) { return '<div class="result-line"><span>' + line + '</span></div>'; }).join('');
+        lines.hidden = false;
+        reset.hidden = false;
+      }
+      choices.forEach(function (choice) {
+        choice.addEventListener('click', function () {
+          var group = choice.getAttribute('data-group');
+          state[group] = choice.getAttribute('data-value');
+          render();
+        });
+      });
+      reset.addEventListener('click', function () {
+        state = { ticket: null, stay: null, next: null };
+        updateButtons();
+        result.setAttribute('data-state', 'empty');
+        resultTitle.textContent = 'Set three commitments to read the trade-off';
+        resultCopy.textContent = 'Each choice remains reversible. The event facts stay the same: two nights at the Maifeld, South Gate-only general entry, and a 21:00 first named team in the current programme.';
+        lines.hidden = true;
+        lines.innerHTML = '';
+        reset.hidden = true;
+      });
+    }());
+  </script>
+</body>
+</html>

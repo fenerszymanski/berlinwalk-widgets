@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Freedom Week evidence desk | BerlinWalk</title>
+  <meta name="description" content="Separate confirmed Berlin Freedom Week anchors from programme details that still need an official current check." />
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+  <main id="bw-nine-desk">
+    <style>
+      body { margin: 0; background: #f5eedc; }
+      #bw-nine-desk {
+        --ink: #20231c;
+        --green: #1b5e20;
+        --deep-green: #123d18;
+        --yellow: #ffe600;
+        --paper: #fffaf0;
+        --cream: #f5eedc;
+        --line: #d7c7a5;
+        --muted: #5e6256;
+        box-sizing: border-box;
+        color: var(--ink);
+        font-family: Georgia, "Times New Roman", serif;
+        margin: 0 auto;
+        max-width: 720px;
+        padding: 14px;
+      }
+      #bw-nine-desk * { box-sizing: border-box; }
+      .nd-sheet {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        box-shadow: 5px 5px 0 rgba(27, 94, 32, .12);
+        padding: 18px;
+      }
+      .nd-kicker {
+        color: var(--green);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: .73rem;
+        font-weight: 800;
+        letter-spacing: .13em;
+        margin: 0 0 8px;
+        text-transform: uppercase;
+      }
+      .nd-title {
+        font-size: clamp(1.35rem, 4.5vw, 2rem);
+        line-height: 1.08;
+        margin: 0;
+      }
+      .nd-intro { font-size: 1rem; line-height: 1.55; margin: 10px 0 0; max-width: 60ch; }
+      .nd-record {
+        border-bottom: 1px solid var(--line);
+        border-top: 1px solid var(--line);
+        display: grid;
+        gap: 9px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin: 18px 0;
+        padding: 13px 0;
+      }
+      .nd-stamp {
+        background: #edf3e4;
+        border: 2px solid var(--green);
+        color: var(--deep-green);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: .83rem;
+        font-weight: 800;
+        line-height: 1.35;
+        padding: 9px;
+        text-transform: uppercase;
+      }
+      .nd-stamp span { display: block; font-size: .72rem; letter-spacing: .08em; margin-bottom: 3px; }
+      .nd-question {
+        border: 0;
+        margin: 0;
+        padding: 0;
+      }
+      .nd-question legend { font-size: 1.06rem; font-weight: 700; margin-bottom: 9px; padding: 0; }
+      .nd-choices { display: grid; gap: 8px; }
+      .nd-choice {
+        background: #fffdf7;
+        border: 1px solid var(--line);
+        border-left: 5px solid var(--green);
+        color: var(--ink);
+        cursor: pointer;
+        font: inherit;
+        font-size: .97rem;
+        line-height: 1.35;
+        padding: 11px 12px;
+        text-align: left;
+        transition: background .16s ease, transform .16s ease;
+      }
+      .nd-choice:hover { background: #edf3e4; transform: translateX(2px); }
+      .nd-choice[aria-pressed="true"] { background: var(--yellow); border-color: var(--deep-green); color: var(--deep-green); }
+      .nd-choice:focus-visible, .nd-source a:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
+      .nd-result {
+        background: #f0f5e8;
+        border: 1px solid #b8cba1;
+        margin-top: 16px;
+        min-height: 102px;
+        padding: 14px;
+      }
+      .nd-result-label {
+        color: var(--green);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: .72rem;
+        font-weight: 800;
+        letter-spacing: .1em;
+        margin: 0 0 5px;
+        text-transform: uppercase;
+      }
+      .nd-result h3 { font-size: 1.15rem; line-height: 1.2; margin: 0 0 7px; }
+      .nd-result p { font-size: .96rem; line-height: 1.5; margin: 0; }
+      .nd-result ul { line-height: 1.48; margin: 10px 0 0; padding-left: 20px; }
+      .nd-result li + li { margin-top: 5px; }
+      .nd-result a, .nd-source a { color: var(--deep-green); font-weight: 700; }
+      .nd-source {
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: .8rem;
+        line-height: 1.45;
+        margin-top: 17px;
+        padding-top: 11px;
+      }
+      .nd-source a { display: inline-block; margin-right: 8px; }
+      @media (max-width: 420px) {
+        #bw-nine-desk { padding: 9px; }
+        .nd-sheet { padding: 15px; }
+        .nd-record { grid-template-columns: 1fr; }
+        .nd-choice { font-size: .93rem; }
+      }
+      @media (prefers-reduced-motion: reduce) { .nd-choice { transition: none; } }
+    </style>
+
+    <section class="nd-sheet" aria-labelledby="nd-title">
+      <p class="nd-kicker">Berlin Freedom Week, 2026</p>
+      <h1 class="nd-title" id="nd-title">Plan 9 November from what is confirmed</h1>
+      <p class="nd-intro">Choose the type of visit you want. This guide separates two confirmed Freedom Week anchors from details that still need a responsible organiser.</p>
+
+      <div class="nd-record" aria-label="Confirmed record">
+        <div class="nd-stamp"><span>Confirmed window</span>Freedom Week: 7 to 14 November 2026</div>
+        <div class="nd-stamp"><span>Confirmed anchor</span>Freedom Conference: 10 November 2026</div>
+      </div>
+
+      <fieldset class="nd-question">
+        <legend>What do you need from 9 November?</legend>
+        <div class="nd-choices">
+          <button class="nd-choice" type="button" data-purpose="freedom" aria-pressed="false">I want an official Freedom Week plan</button>
+          <button class="nd-choice" type="button" data-purpose="history" aria-pressed="false">I want a short Berlin Wall history visit</button>
+          <button class="nd-choice" type="button" data-purpose="programme" aria-pressed="false">I am looking for a 9 November programme</button>
+        </div>
+      </fieldset>
+
+      <div class="nd-result" id="nd-result" aria-live="polite" aria-atomic="true">
+        <p class="nd-result-label">Start here</p>
+        <h3>Pick one purpose above.</h3>
+        <p>It keeps a confirmed date from becoming a made-up schedule.</p>
+      </div>
+
+      <footer class="nd-source">
+        Source record:
+        <a href="https://www.berlin.de/en/events/9796393-2842498-berlin-freedom-week.en.html" target="_blank" rel="noopener">Freedom Week listing</a>
+        <a href="https://www.berlin.de/en/news/10538992-5559700-world-liberty-congress-opens-european-he.en.html" target="_blank" rel="noopener">City announcement</a>
+        <a href="https://www.stiftung-berliner-mauer.de/en/berlin-wall-memorial/" target="_blank" rel="noopener">Berlin Wall Memorial</a>
+      </footer>
+    </section>
+
+    <script>
+      (function () {
+        var result = document.getElementById('nd-result');
+        var choices = Array.prototype.slice.call(document.querySelectorAll('.nd-choice'));
+        var content = {
+          freedom: {
+            heading: 'Use the official Freedom Week listing as the starting record.',
+            text: 'The verified window is 7 to 14 November 2026, and the Freedom Conference is confirmed for 10 November. Individual event conditions can differ.',
+            bullets: [
+              'Open the current Freedom Week listing before choosing a named event.',
+              'Check its own date, place, language, registration and access details with the responsible organiser.',
+              'Treat the 10 November conference as a confirmed anchor, not a full-day itinerary.'
+            ],
+            href: 'https://www.berlin.de/en/events/9796393-2842498-berlin-freedom-week.en.html',
+            link: 'Open the current Freedom Week listing'
+          },
+          history: {
+            heading: 'Choose a permanent historical site, then check its current visitor page.',
+            text: 'For Berlin Wall history, the Berlin Wall Memorial is a responsible place to begin. This desk does not turn that into a special Freedom Week event or a route plan.',
+            bullets: [
+              'Use the memorial’s own visitor information for the day you intend to go.',
+              'Do not infer a 2026 Freedom Week programme from permanent-site information.',
+              'Keep the visit separate from any individual event until that event has its own current details.'
+            ],
+            href: 'https://www.stiftung-berliner-mauer.de/en/berlin-wall-memorial/',
+            link: 'Check Berlin Wall Memorial visitor information'
+          },
+          programme: {
+            heading: 'Keep the programme question open until its own 2026 record is live.',
+            text: 'No place, time, language or access detail is confirmed here for a 9 November item. A date alone is not enough to build an evening around.',
+            bullets: [
+              'Return to the official Freedom Week listing when the individual programme is published.',
+              'Confirm the responsible organiser before adding anything to your day.',
+              'If no current record appears, leave the date flexible instead of relying on an older card.'
+            ],
+            href: 'https://www.berlin.de/en/events/9796393-2842498-berlin-freedom-week.en.html',
+            link: 'Check the official Freedom Week listing'
+          }
+        };
+
+        function addText(parent, tag, value, className) {
+          var node = document.createElement(tag);
+          if (className) node.className = className;
+          node.textContent = value;
+          parent.appendChild(node);
+          return node;
+        }
+
+        function render(purpose) {
+          var item = content[purpose];
+          choices.forEach(function (choice) {
+            choice.setAttribute('aria-pressed', String(choice.dataset.purpose === purpose));
+          });
+          result.replaceChildren();
+          addText(result, 'p', 'Evidence desk response', 'nd-result-label');
+          addText(result, 'h3', item.heading);
+          addText(result, 'p', item.text);
+          var list = document.createElement('ul');
+          item.bullets.forEach(function (bullet) { addText(list, 'li', bullet); });
+          result.appendChild(list);
+          var link = document.createElement('a');
+          link.href = item.href;
+          link.target = '_blank';
+          link.rel = 'noopener';
+          link.textContent = item.link;
+          result.appendChild(link);
+        }
+
+        choices.forEach(function (choice) {
+          choice.addEventListener('click', function () { render(choice.dataset.purpose); });
+        });
+      }());
+    </script>
+  </main>
+</body>
+</html>

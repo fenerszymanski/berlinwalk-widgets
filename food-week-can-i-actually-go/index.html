@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Berlin Food Week: Can I Actually Go?</title>
+  <link rel="icon" href="data:," />
+  <meta name="description" content="Classify one Berlin Food Week plan by its published access route: free entry, reservation, ticket, invite-only or check details." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=DM+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/brand.css" />
+  <style>
+    :root {
+      --green: #1B5E20;
+      --green-deep: #123D18;
+      --lime: #7CB342;
+      --yellow: #FFE600;
+      --cream: #FAFAF5;
+      --paper: #FFFFFF;
+      --ink: #212121;
+      --muted: #536052;
+      --line: #D9E5D2;
+      --mono: "DM Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      --shadow: 0 13px 30px rgba(18, 61, 24, .1);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { background: transparent; color: var(--ink); font-family: Montserrat, Arial, sans-serif; line-height: 1.48; }
+    button, a { font: inherit; }
+    button:focus-visible, a:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+    .food-tool { max-width: 740px; margin: 0 auto; padding: 6px; }
+    .shell { overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: var(--cream); box-shadow: var(--shadow); }
+    .topline { display: flex; justify-content: space-between; gap: 12px; padding: 10px 16px; background: var(--yellow); color: var(--green-deep); font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+    header { padding: 18px 18px 16px; background: var(--paper); border-bottom: 1px solid var(--line); }
+    .eyebrow { margin: 0 0 6px; color: var(--green); font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    h1 { margin: 0; color: var(--green-deep); font-size: clamp(21px, 5.2vw, 29px); line-height: 1.12; letter-spacing: -.025em; }
+    header p { max-width: 630px; margin: 8px 0 0; color: var(--muted); font-size: 13px; }
+    .main { padding: 17px 18px 19px; }
+    .instructions { display: flex; gap: 9px; align-items: flex-start; margin: 0 0 14px; padding: 10px 11px; border-left: 4px solid var(--lime); background: #F1F7EC; color: #324633; font-size: 12px; }
+    .instructions b { color: var(--green-deep); }
+    .instructions > span:first-child { flex: 0 0 auto; color: var(--green); font-family: var(--mono); font-size: 10px; font-weight: 700; }
+    .instructions > span:last-child { min-width: 0; flex: 1 1 auto; }
+    .class-legend { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 5px; margin: 0 0 17px; padding: 0; list-style: none; }
+    .class-legend li { min-width: 0; padding: 7px 5px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); color: #627061; font-family: var(--mono); font-size: 9.5px; font-weight: 700; line-height: 1.2; text-align: center; transition: background .15s, border-color .15s, color .15s; }
+    .class-legend li.active { border-color: var(--green); background: var(--green); color: #fff; }
+    .prompt { margin: 0 0 9px; color: var(--green-deep); font-size: 13px; font-weight: 800; }
+    .routes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .route {
+      min-height: 97px; padding: 12px; cursor: pointer; border: 1.5px solid var(--line); border-radius: 12px; background: var(--paper); color: var(--ink); text-align: left; transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+    }
+    .route:hover { border-color: var(--lime); transform: translateY(-1px); }
+    .route[aria-pressed="true"] { border-color: var(--green); box-shadow: inset 0 0 0 1px var(--green), 0 5px 13px rgba(18, 61, 24, .08); }
+    .route .route-code { display: block; margin-bottom: 4px; color: var(--green); font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+    .route b { display: block; color: var(--green-deep); font-size: 13px; line-height: 1.25; }
+    .route small { display: block; margin-top: 4px; color: var(--muted); font-size: 10.5px; font-weight: 600; line-height: 1.35; }
+    .verdict { margin-top: 17px; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--paper); }
+    .verdict-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 13px; background: #F1F7EC; border-bottom: 1px solid var(--line); }
+    .verdict-head span { color: var(--green); font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+    .verdict-head strong { color: var(--green-deep); font-size: 13px; }
+    .verdict-body { padding: 14px; }
+    .empty { margin: 0; color: var(--muted); font-size: 12.5px; }
+    .result-title { margin: 0; color: var(--green-deep); font-size: 20px; line-height: 1.18; }
+    .rule { margin: 7px 0 0; color: #303C31; font-size: 13px; }
+    .next-step { margin: 13px 0 0; padding: 10px 11px; border: 1px solid #E7D865; border-radius: 10px; background: #FFFCE3; color: #3E3D21; font-size: 12px; }
+    .next-step b { color: var(--green-deep); }
+    .scope { margin: 12px 0 0; color: var(--muted); font-size: 11px; line-height: 1.45; }
+    .source { margin: 16px 0 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+    .source a { color: var(--green); font-weight: 800; }
+    @media (max-width: 500px) {
+      .food-tool { padding: 0; }
+      .shell { border-radius: 14px; }
+      .topline { padding-left: 13px; padding-right: 13px; font-size: 9px; }
+      header, .main { padding-left: 13px; padding-right: 13px; }
+      .class-legend { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .class-legend li:last-child { grid-column: span 2; }
+      .routes { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="food-tool">
+    <section class="shell" aria-labelledby="food-title">
+      <div class="topline"><span>Berlin Food Week · 5–11 Oct 2026</span><span>Access ledger</span></div>
+      <header>
+        <p class="eyebrow">One listing at a time</p>
+        <h1 id="food-title">Can I actually go?</h1>
+        <p>Food Week is not one access rule. Classify the exact thing you are considering before you plan around it.</p>
+      </header>
+
+      <div class="main">
+        <p class="instructions"><span>01</span><span><b>Pick the access wording you have.</b> This tool does not decide whether Food Week is open or closed to visitors as a whole.</span></p>
+        <ol class="class-legend" aria-label="The five access classes">
+          <li data-class="freeentry">Free entry</li>
+          <li data-class="reservation">Reservation</li>
+          <li data-class="ticket">Ticket</li>
+          <li data-class="invite">Invite-only</li>
+          <li data-class="details">Check details</li>
+        </ol>
+
+        <p class="prompt">What are you trying to access?</p>
+        <div class="routes" role="group" aria-label="Choose your Food Week plan">
+          <button class="route" type="button" data-route="house" aria-pressed="false">
+            <span class="route-code">Published public anchor</span>
+            <b>House of Food at BIKINI Berlin</b>
+            <small>9–10 Oct · 10:00–20:00 · free entry</small>
+          </button>
+          <button class="route" type="button" data-route="reservation" aria-pressed="false">
+            <span class="route-code">Exact listing says “reserve”</span>
+            <b>A seat, menu or booking route</b>
+            <small>Classify the specific listing, not the whole festival.</small>
+          </button>
+          <button class="route" type="button" data-route="ticket" aria-pressed="false">
+            <span class="route-code">Exact listing sells entry</span>
+            <b>A ticketed listing</b>
+            <small>Only use this when its own official page gives a ticket route.</small>
+          </button>
+          <button class="route" type="button" data-route="night" aria-pressed="false">
+            <span class="route-code">Published access statement</span>
+            <b>Berlin Food Night · 5 Oct</b>
+            <small>The organiser says participation is by invitation only.</small>
+          </button>
+          <button class="route" type="button" data-route="details" aria-pressed="false">
+            <span class="route-code">No clear access wording</span>
+            <b>A different Food Week listing</b>
+            <small>Its entry route, date or terms are missing or unclear.</small>
+          </button>
+        </div>
+
+        <section class="verdict" aria-live="polite" aria-labelledby="verdict-label">
+          <div class="verdict-head"><span id="verdict-label">Your access class</span><strong id="class-label">Choose one plan</strong></div>
+          <div class="verdict-body" id="verdict-body"><p class="empty">The answer will be one of exactly five classes. It is an access check, not a recommendation.</p></div>
+        </section>
+
+        <p class="source">Official checks: <a href="https://www.berlinfoodweek.de/event/hof-event-1/" target="_blank" rel="noopener">House of Food</a>, <a href="https://www.berlinfoodweek.de/event/bfn2026/" target="_blank" rel="noopener">Berlin Food Night 2026</a> and the <a href="https://www.berlinfoodweek.de/" target="_blank" rel="noopener">Berlin Food Week programme</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const verdicts = {
+        house: {
+          className: 'freeentry', label: 'Free-entry public anchor', title: 'House of Food is a free-entry public anchor.',
+          rule: 'The official page lists House of Food at BIKINI Berlin on 9–10 October, 10:00–20:00, with free entry.',
+          step: 'Check the current official House of Food page for any entry condition, then confirm the published hours and any specific exhibitor or activity before you go.',
+          scope: 'This is only the access statement for House of Food. It does not classify the rest of Berlin Food Week.'
+        },
+        reservation: {
+          className: 'reservation', label: 'Reservation', title: 'A reservation route is not a ticket.',
+          rule: 'Use this class only when the exact official listing asks you to reserve a seat, table, menu or time.',
+          step: 'Follow that listing’s own reservation route and confirm the date, time and party size before you make the journey.',
+          scope: 'This does not prove that another 2026 Food Week event takes reservations. The individual listing must say so.'
+        },
+        ticket: {
+          className: 'ticket', label: 'Ticket', title: 'A ticket route needs its own listing check.',
+          rule: 'Use this class only when the exact official listing has a ticket path and its conditions are current.',
+          step: 'Read the event page before paying: verify the date, start time, venue, ticket terms and what the ticket covers.',
+          scope: 'The festival name alone is not a ticket promise or an access guarantee.'
+        },
+        night: {
+          className: 'invite', label: 'Invite-only', title: 'Berlin Food Night is invite-only.',
+          rule: 'For Berlin Food Night on 5 October, the organiser states that participation is by invitation only.',
+          step: 'Do not treat an enquiry, an address or the broader Food Week programme as an invitation or a booking.',
+          scope: 'This access rule belongs to Berlin Food Night only.'
+        },
+        details: {
+          className: 'details', label: 'Check details', title: 'The access route is not clear enough yet.',
+          rule: 'A missing or vague listing cannot be safely classified as free entry, reservation, ticket or invite-only.',
+          step: 'Wait for the official listing to state the entry route. Check its date, location, start time and any booking or access wording before you travel.',
+          scope: 'Unclear is not the same as free, sold out or private. It simply needs an official detail check.'
+        }
+      };
+      const body = document.getElementById('verdict-body');
+      const label = document.getElementById('class-label');
+      const legend = document.querySelectorAll('.class-legend li');
+      const buttons = document.querySelectorAll('.route');
+
+      function show(route) {
+        const result = verdicts[route];
+        buttons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.route === route)));
+        legend.forEach((item) => item.classList.toggle('active', item.dataset.class === result.className));
+        label.textContent = result.label;
+        body.innerHTML = `
+          <h3 class="result-title">${result.title}</h3>
+          <p class="rule">${result.rule}</p>
+          <p class="next-step"><b>Next move:</b> ${result.step}</p>
+          <p class="scope">${result.scope}</p>`;
+      }
+
+      buttons.forEach((button) => button.addEventListener('click', () => show(button.dataset.route)));
+    }());
+  </script>
+  <script src="../js/brand.js"></script>
+</body>
+</html>

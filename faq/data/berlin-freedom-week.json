@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "slug": "berlin-freedom-week",
+  "key": "berlin-freedom-week",
+  "config": {
+    "title": "Berlin Freedom Week 2026 - FAQ",
+    "subtitle": "What is confirmed for the week and how to avoid turning missing programme details into promises.",
+    "items": [
+      {
+        "q": "When is Berlin Freedom Week 2026?",
+        "a": "Berlin Freedom Week runs from 7 to 14 November 2026."
+      },
+      {
+        "q": "When is the Freedom Conference in 2026?",
+        "a": "The Freedom Conference is confirmed for 10 November 2026. Check the official programme for its current venue, access and registration details."
+      },
+      {
+        "q": "What should I do in Berlin on 9 November 2026?",
+        "a": "Choose a real history site and check the live official programme before adding a special event to your day. Do not assume a ceremony, time, language or access rule until the responsible organiser publishes it."
+      },
+      {
+        "q": "Can I combine Berlin Freedom Week with the BerlinWalk tour?",
+        "a": "Yes, if you give them separate blocks. The free walking tour starts at Alexanderplatz and explores the historic centre of former East Berlin in about 2 hours. It does not trace the Berlin Wall line or replace a Wall memorial visit."
+      },
+      {
+        "q": "Which Berlin Wall site is useful for a November history visit?",
+        "a": "The Berlin Wall Memorial on Bernauer Strasse is a strong choice for Wall history. Use its current visitor information and the official Freedom Week programme to decide whether a special 2026 event is confirmed."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "When is Berlin Freedom Week 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin Freedom Week runs from 7 to 14 November 2026."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When is the Freedom Conference in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Freedom Conference is confirmed for 10 November 2026. Check the official programme for its current venue, access and registration details."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I do in Berlin on 9 November 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Choose a real history site and check the live official programme before adding a special event to your day. Do not assume a ceremony, time, language or access rule until the responsible organiser publishes it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I combine Berlin Freedom Week with the BerlinWalk tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, if you give them separate blocks. The free walking tour starts at Alexanderplatz and explores the historic centre of former East Berlin in about 2 hours. It does not trace the Berlin Wall line or replace a Wall memorial visit."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Berlin Wall site is useful for a November history visit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Berlin Wall Memorial on Bernauer Strasse is a strong choice for Wall history. Use its current visitor information and the official Freedom Week programme to decide whether a special 2026 event is confirmed."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "slug": "pyronale-berlin",
+  "key": "pyronale-berlin",
+  "config": {
+    "title": "Pyronale Berlin 2026 - FAQ",
+    "subtitle": "Dates, South Gate entry and a realistic Maifeld weekend.",
+    "items": [
+      {
+        "q": "When is Pyronale Berlin 2026?",
+        "a": "Pyronale takes place on Friday 25 and Saturday 26 September 2026 at the Maifeld beside Olympiastadion Berlin."
+      },
+      {
+        "q": "Where do Pyronale ticket holders enter?",
+        "a": "The organiser says general entry for both nights is exclusively through the South Gate. It says the East Gate is not an entry point for this edition."
+      },
+      {
+        "q": "What time does Pyronale start?",
+        "a": "The current detailed programme schedules its first named team for 21:00. Recheck the organiser's visitor information and your actual ticket on the day."
+      },
+      {
+        "q": "Should I choose Friday or Saturday for Pyronale?",
+        "a": "Compare the current programme, ticket category and the next morning in your own trip. Three teams are scheduled on each event day, so one date is not automatically better for every visitor."
+      },
+      {
+        "q": "Can I make a fixed early plan after Pyronale?",
+        "a": "Keep the later night and the following morning flexible if possible. The programme gives a scheduled start, but it does not create a guaranteed departure time or journey home."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "When is Pyronale Berlin 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Pyronale takes place on Friday 25 and Saturday 26 September 2026 at the Maifeld beside Olympiastadion Berlin."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where do Pyronale ticket holders enter?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The organiser says general entry for both nights is exclusively through the South Gate. It says the East Gate is not an entry point for this edition."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What time does Pyronale start?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The current detailed programme schedules its first named team for 21:00. Recheck the organiser's visitor information and your actual ticket on the day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I choose Friday or Saturday for Pyronale?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Compare the current programme, ticket category and the next morning in your own trip. Three teams are scheduled on each event day, so one date is not automatically better for every visitor."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I make a fixed early plan after Pyronale?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Keep the later night and the following morning flexible if possible. The programme gives a scheduled start, but it does not create a guaranteed departure time or journey home."
+        }
+      }
+    ]
+  }
+}

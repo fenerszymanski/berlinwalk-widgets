@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "slug": "berlin-science-week",
+  "key": "berlin-science-week",
+  "config": {
+    "title": "Berlin Science Week 2026 - FAQ",
+    "subtitle": "Dates, HKW and how to use the programme without guessing.",
+    "items": [
+      {
+        "q": "When is Berlin Science Week 2026?",
+        "a": "Berlin Science Week runs from 1 to 10 November 2026."
+      },
+      {
+        "q": "What is the theme of Berlin Science Week 2026?",
+        "a": "The 2026 theme is In Touch. The official information frames it around the personal side of science, the people behind research and the connections it creates."
+      },
+      {
+        "q": "Where is the Berlin Science Week Festival Centre?",
+        "a": "The 2026 Festival Centre is the Haus der Kulturen der Welt, known as HKW. Individual events can still take place elsewhere in Berlin."
+      },
+      {
+        "q": "Are Berlin Science Week events free or in English?",
+        "a": "The festival describes hundreds of free events, but each event page is the source for its exact access condition, language, registration and accessibility details. Do not make a festival-wide assumption."
+      },
+      {
+        "q": "Is Falling Walls part of Berlin Science Week?",
+        "a": "Falling Walls has its own Science Summit from 6 to 9 November. The dates overlap, but each programme and access page should be checked independently."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "When is Berlin Science Week 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin Science Week runs from 1 to 10 November 2026."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the theme of Berlin Science Week 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The 2026 theme is In Touch. The official information frames it around the personal side of science, the people behind research and the connections it creates."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is the Berlin Science Week Festival Centre?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The 2026 Festival Centre is the Haus der Kulturen der Welt, known as HKW. Individual events can still take place elsewhere in Berlin."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are Berlin Science Week events free or in English?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The festival describes hundreds of free events, but each event page is the source for its exact access condition, language, registration and accessibility details. Do not make a festival-wide assumption."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Falling Walls part of Berlin Science Week?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Falling Walls has its own Science Summit from 6 to 9 November. The dates overlap, but each programme and access page should be checked independently."
+        }
+      }
+    ]
+  }
+}

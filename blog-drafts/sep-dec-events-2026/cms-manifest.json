@@ -1,0 +1,390 @@
+{
+  "batch": "sep-dec-events-2026",
+  "tools": {
+    "berlin-autumn-film-language-board": {
+      "title": "Berlin Autumn Film Language Board",
+      "h1": "Choose a Berlin autumn film night with the screening details in view",
+      "lead": "Compare six confirmed autumn festival windows, then use a screening-level checklist for language, subtitles, venue and ticket details.",
+      "secondary": "A selected festival-date board, not a live programme, cinema guide, ticket service or promise that any screening will be in English.",
+      "intro": "I made this board for the awkward stage between knowing that a Berlin festival is on and knowing whether one particular screening will work for you. Pick a date window first, then let the individual screening page settle the details that change from one showing to the next.",
+      "seoTitle": "Berlin Autumn Film Language Board | BerlinWalk",
+      "seoDescription": "Compare six Berlin autumn film-festival date windows and use a screening-level check for language, subtitles, venue and tickets.",
+      "sections": [
+        {
+          "title": "Start with the festival window",
+          "body": "The board keeps six confirmed autumn festival windows in one place. That is enough to decide whether a cinema night fits your Berlin dates. It is not a complete festival calendar, so use the organiser's current programme before treating a row as a bookable plan."
+        },
+        {
+          "title": "Read the individual screening",
+          "body": "Festival labels do not settle spoken language, subtitle format, cinema, start time, ticket terms or a possible introduction. Once you have picked a night, open the exact screening listing and check each of those points before you buy."
+        },
+        {
+          "title": "Keep the evening realistic",
+          "body": "I would choose one screening near a part of Berlin where you already want to be, then leave the rest of the evening flexible. The board helps you make the first calendar decision; the organiser's live listing remains the source for everything that makes the night usable."
+        }
+      ],
+      "relatedTools": [
+        {
+          "slug": "berlin-cinema-listing-decoder",
+          "title": "Berlin Cinema Listing Decoder",
+          "url": "https://www.berlinwalk.com/tools/berlin-cinema-listing-decoder"
+        },
+        {
+          "slug": "screen-mood-finder",
+          "title": "Berlin Screen Mood Finder",
+          "url": "https://www.berlinwalk.com/tools/screen-mood-finder"
+        }
+      ]
+    },
+    "tempelhof-kite-day-approach": {
+      "title": "Tempelhof Kite Day Approach",
+      "h1": "Choose your Tempelhofer Feld approach before the giant kite festival",
+      "lead": "Choose a sensible Tempelhofer Feld approach from the organiser's event-day entrance list, then recheck the live route.",
+      "secondary": "An event-day approach helper, not a route map, queue forecast, walking-time calculator, parking guide or guarantee of a particular gate.",
+      "intro": "I made this for a very Berlin problem: a huge field can look simple on a normal map, but the festival has several event-day entrances and changing local conditions. Start from the side of the city you are already in, then use the organiser's live guidance for the final approach.",
+      "seoTitle": "Tempelhof Kite Day Approach | BerlinWalk",
+      "seoDescription": "Use the organiser's event-day entrance list to choose a sensible approach to the 2026 Tempelhofer Feld giant kite festival.",
+      "sections": [
+        {
+          "title": "Choose the side you will arrive from",
+          "body": "The tool starts with your broad approach, not a fictional shortest route. It keeps the published event-day entrance list together so you can decide which side of Tempelhofer Feld makes sense from your actual Berlin plan."
+        },
+        {
+          "title": "Treat the entrance list as live guidance",
+          "body": "Festival access can differ from an ordinary Tempelhofer Feld visit. Check the organiser's current notice on the day, including any restriction around Tempelhof and the surrounding road network, before choosing a station, taxi drop-off or meeting point."
+        },
+        {
+          "title": "Leave room for the field",
+          "body": "I would not make this a tightly timed stop between two fixed appointments. The useful move is to pick an approach that fits your wider day, arrive with a little slack, and let the live organiser page overrule this planning aid if conditions change."
+        }
+      ],
+      "relatedTools": [
+        {
+          "slug": "tempelhof-field-planner",
+          "title": "Tempelhof Field Planner",
+          "url": "https://www.berlinwalk.com/tools/tempelhof-field-planner"
+        },
+        {
+          "slug": "berlin-weather-by-month",
+          "title": "Berlin Weather by Month",
+          "url": "https://www.berlinwalk.com/tools/berlin-weather-by-month"
+        }
+      ]
+    },
+    "uber-arena-night-cost-clock": {
+      "title": "Uber Arena Night Cost Clock",
+      "h1": "Compare two Uber Arena sports nights with a live ticket check",
+      "lead": "Compare two confirmed Uber Arena fixtures, then use a live ticket, entry and journey checklist.",
+      "secondary": "A preparation sequence for two fixtures, not a total-cost calculator, ticket-availability feed, door-time service, transit plan or home-arrival promise.",
+      "intro": "I made this for visitors who see two good-looking Uber Arena fixtures and want to choose without turning an incomplete ticket check into a made-up evening budget. Pick the sport and fixture first, then check the current seller page and live journey for the details that can still move.",
+      "seoTitle": "Uber Arena Night Cost Clock | BerlinWalk",
+      "seoDescription": "Compare two Uber Arena sports fixtures and use a practical live ticket, entry and journey checklist for a Berlin evening.",
+      "sections": [
+        {
+          "title": "Choose the fixture before the ticket page",
+          "body": "The tool keeps the hockey and basketball fixtures separate. The current seller page is the source for a live price, seat category, fee and availability. It does not settle the cost of your whole night."
+        },
+        {
+          "title": "Use the official ticket journey",
+          "body": "After choosing a fixture, open the official ticket route for the current category, fees, availability and entry information. Those details belong to the live seller page, not to a static planning tool."
+        },
+        {
+          "title": "Plan Friedrichshain as an evening",
+          "body": "I would decide whether you want dinner, a walk or an early return before you leave for the arena. Check the live route from your own starting point after the ticket details are clear, because a fixed return-time promise would not be honest here."
+        }
+      ],
+      "relatedTools": [
+        {
+          "slug": "friedrichshain-kiez-loop",
+          "title": "Friedrichshain Kiez Loop",
+          "url": "https://www.berlinwalk.com/tools/friedrichshain-kiez-loop"
+        },
+        {
+          "slug": "berlin-night-transport-checker",
+          "title": "Berlin Night Transport Timeline",
+          "url": "https://www.berlinwalk.com/tools/berlin-night-transport-checker"
+        }
+      ]
+    },
+    "berlin-double-closure-weekend": {
+      "title": "Berlin Double Closure Weekend",
+      "h1": "Make one Pyronale night fit the rest of your Berlin weekend",
+      "lead": "Set the Pyronale night, stay area and next-day pressure to keep a Maifeld fireworks plan realistic.",
+      "secondary": "A weekend trade-off board, not a ticket service, departure prediction, live transport route, stadium-exit guide or fixed Sunday plan.",
+      "intro": "I made this board for the point when one fireworks night begins to press on the rest of a short Berlin weekend. It asks you to hold the ticket choice, accommodation area and next-day commitment together, while leaving live entry and journey details to the organiser.",
+      "seoTitle": "Berlin Double Closure Weekend | BerlinWalk",
+      "seoDescription": "Use a simple trade-off board to fit one Pyronale Maifeld fireworks night into a realistic Berlin weekend.",
+      "sections": [
+        {
+          "title": "Keep the confirmed event facts clear",
+          "body": "Pyronale is scheduled for two September nights at the Maifeld. The current organiser information identifies South Gate as the general entry point and lists the first named team at 21:00, but neither fact predicts the end of your evening."
+        },
+        {
+          "title": "Name the part of the weekend that cannot move",
+          "body": "Choose the event night you are holding, the area where you are staying and whether the next morning matters. That makes the real trade-off visible without pretending that a static tool knows your exit route, traffic or exact arrival home."
+        },
+        {
+          "title": "Recheck before the event day",
+          "body": "I would re-open the official programme, ticket and visitor information after you have made the broad decision. A current ticket category, entry instruction and live route are the only sensible basis for the final journey."
+        }
+      ],
+      "relatedTools": [
+        {
+          "slug": "olympiastadion-visit-planner",
+          "title": "Olympiastadion Visit Planner",
+          "url": "https://www.berlinwalk.com/tools/olympiastadion-visit-planner"
+        },
+        {
+          "slug": "berlin-night-transport-checker",
+          "title": "Berlin Night Transport Timeline",
+          "url": "https://www.berlinwalk.com/tools/berlin-night-transport-checker"
+        }
+      ]
+    },
+    "clubkultur-week-door-free-finder": {
+      "title": "Tag der Clubkultur Format Filter",
+      "h1": "Choose a Tag der Clubkultur format before you chase a door",
+      "lead": "Turn three night preferences into broad format lanes, then verify the live Tag der Clubkultur programme yourself.",
+      "secondary": "A preference filter for a citywide festival week, not a venue recommendation, programme listing, queue prediction, door-policy guide or admission promise.",
+      "intro": "I made this filter because a citywide club week can look like an invitation to do everything. It is more useful to name the type of night you can actually enjoy, then compare that preference with the current programme and each venue's own information.",
+      "seoTitle": "Tag der Clubkultur Format Filter | BerlinWalk",
+      "seoDescription": "Choose broad night preferences for Tag der Clubkultur Berlin and take a useful filter to the current official programme.",
+      "sections": [
+        {
+          "title": "Start with your own evening",
+          "body": "The filter uses broad preferences such as energy, scale and finish time to create format lanes. It does not claim that a named event is scheduled, that a venue is right for you or that any door will admit you."
+        },
+        {
+          "title": "Use the festival week as a programme to inspect",
+          "body": "Tag der Clubkultur has a confirmed 2026 festival window and motto, but useful decisions still happen on the individual listing. Check the actual date, venue, ticket condition, accessibility information and route home before you make a plan."
+        },
+        {
+          "title": "Let the live listing decide the final choice",
+          "body": "I would use the result as a short list of qualities, then choose one real event that matches them. That keeps a format preference from becoming a false promise about queues, door rules or admission."
+        }
+      ],
+      "relatedTools": [
+        {
+          "slug": "berlin-club-picker",
+          "title": "Berlin Club Picker",
+          "url": "https://www.berlinwalk.com/tools/berlin-club-picker"
+        },
+        {
+          "slug": "berlin-night-transport-checker",
+          "title": "Berlin Night Transport Timeline",
+          "url": "https://www.berlinwalk.com/tools/berlin-night-transport-checker"
+        }
+      ]
+    },
+    "food-week-can-i-actually-go": {
+      "title": "Berlin Food Week Access Check",
+      "h1": "Check whether a Berlin Food Week listing is actually open to you",
+      "lead": "Classify a Berlin Food Week listing as free entry, reservation, ticket, invite-only or check details before you build a day around it.",
+      "secondary": "An access-language classifier, not a festival-wide access ruling, ticket service, reservation system, availability feed or recommendation engine.",
+      "intro": "I made this because an event title is not evidence that you can attend. Put the access wording you have into one of five practical classes, then return to the exact listing for the conditions that apply to that one event.",
+      "seoTitle": "Berlin Food Week Access Check | BerlinWalk",
+      "seoDescription": "Classify a Berlin Food Week listing by access language before you plan a day around a free-entry, reservation, ticket or invite-only event.",
+      "sections": [
+        {
+          "title": "Read the access wording first",
+          "body": "The tool uses five classes: free entry, reservation, ticket, invite-only and check details. They are reading aids, not claims about every Food Week event. A named festival does not create a universal right of entry."
+        },
+        {
+          "title": "Use the exact listing for the final condition",
+          "body": "House of Food and Berlin Food Night are useful examples of why access needs checking one listing at a time. Open the current page for the event you want, then confirm its date, venue, timing and any ticket or reservation wording."
+        },
+        {
+          "title": "Build the day after access is clear",
+          "body": "I would not plan a meal, a taxi ride or another timed stop until the access class is clear. Once you know whether you can realistically attend, choose the nearby part of Berlin and let the live event page settle the final details."
+        }
+      ],
+      "relatedTools": [
+        {
+          "slug": "berlin-reserve-or-walk-in",
+          "title": "Berlin: Reserve or Walk In?",
+          "url": "https://www.berlinwalk.com/tools/berlin-reserve-or-walk-in"
+        },
+        {
+          "slug": "berlin-restaurant-phrase-card",
+          "title": "Berlin Restaurant Phrase Card",
+          "url": "https://www.berlinwalk.com/tools/berlin-restaurant-phrase-card"
+        }
+      ]
+    },
+    "jazzfest-room-comparator": {
+      "title": "Jazzfest Berlin Programme Checker",
+      "h1": "Plan Jazzfest Berlin from confirmed dates, not imagined rooms",
+      "lead": "Hold the confirmed Jazzfest dates and create a programme checklist without inventing rooms, artists or ticket details.",
+      "secondary": "A programme-release checklist, not a venue comparator, artist guide, ticket service, seating guide, timetable or claim about an unpublished edition.",
+      "intro": "I made this for the period when the Jazzfest window is useful for a Berlin trip, but the programme is not yet a responsible basis for choosing a room or buying a ticket. It lets you name what matters to you so the official release is easier to read when it arrives.",
+      "seoTitle": "Jazzfest Berlin Programme Checker | BerlinWalk",
+      "seoDescription": "Use confirmed Jazzfest Berlin dates and a practical release checklist without guessing the 2026 rooms, artists or tickets.",
+      "sections": [
+        {
+          "title": "Keep the confirmed window useful",
+          "body": "The 2026 Jazzfest date window is enough to hold space in a trip plan. It does not tell you the artist, room, venue, price, accessibility detail, finish time or ticket condition that makes one evening workable."
+        },
+        {
+          "title": "Turn listening preferences into checks",
+          "body": "Choose the qualities you care about, then take those questions to the official programme. Look for the exact artist, venue, room, time, ticket route and practical access information on the current festival listing."
+        },
+        {
+          "title": "Wait for the published programme",
+          "body": "I would not rank rooms or recommend a concert before the organiser publishes the edition details. The honest result is a short checklist now and a final decision only when the live programme can support it."
+        }
+      ],
+      "relatedTools": [
+        {
+          "slug": "berlin-live-music-week",
+          "title": "Berlin Live Music This Week",
+          "url": "https://www.berlinwalk.com/tools/berlin-live-music-week"
+        },
+        {
+          "slug": "berlin-night-transport-checker",
+          "title": "Berlin Night Transport Timeline",
+          "url": "https://www.berlinwalk.com/tools/berlin-night-transport-checker"
+        }
+      ]
+    },
+    "science-week-three-day-window": {
+      "title": "Berlin Science Week Programme Release Desk",
+      "h1": "Choose a Berlin Science Week interest now, then wait for real listings",
+      "lead": "Choose an interest lens for Berlin Science Week, then wait for individual 2026 listings before choosing dates.",
+      "secondary": "A release-and-listing checklist, not a three-day itinerary, event-density model, registration forecast, language guide or Falling Walls programme claim.",
+      "intro": "I made this desk for a citywide science week where the scale is exciting but an unpublished daily schedule cannot honestly produce a best three-day plan. Pick an interest first, then use the individual listings when they are available.",
+      "seoTitle": "Berlin Science Week Programme Release Desk | BerlinWalk",
+      "seoDescription": "Choose an interest lens for Berlin Science Week 2026 and use a responsible checklist once individual event listings are published.",
+      "sections": [
+        {
+          "title": "Use the confirmed framework",
+          "body": "Berlin Science Week has a confirmed 2026 window, theme and Festival Centre, with the organiser describing a large citywide programme. That makes it sensible to reserve some flexibility in a November trip, but not to assign a date or claim a daily event density."
+        },
+        {
+          "title": "Choose a personal search lens",
+          "body": "The tool lets you label an interest that you want to explore. The label is not a promise that the published programme will contain that category, language, venue or access condition. It is simply a practical way to search once the listings are live."
+        },
+        {
+          "title": "Keep separate programmes separate",
+          "body": "I would inspect each Berlin Science Week listing on its own merits and check Falling Walls separately. They should not be blended into one invented timetable, access claim or recommendation."
+        }
+      ],
+      "relatedTools": [
+        {
+          "slug": "berlin-museums-map",
+          "title": "Berlin Museums Map",
+          "url": "https://www.berlinwalk.com/tools/berlin-museums-map"
+        },
+        {
+          "slug": "whats-open-in-berlin-today",
+          "title": "What's Open in Berlin Today",
+          "url": "https://www.berlinwalk.com/tools/whats-open-in-berlin-today"
+        }
+      ]
+    },
+    "november-nine-hour-line": {
+      "title": "Berlin Freedom Week Evidence Desk",
+      "h1": "Plan 9 November from what Berlin Freedom Week has confirmed",
+      "lead": "Separate confirmed Freedom Week anchors from the 9 November event details that still need an organiser's evidence.",
+      "secondary": "An evidence desk for a historic date, not a 9 November programme, ceremony guide, memorial-event claim, route map, timetable or access promise.",
+      "intro": "I made this tool to keep an important Berlin date from turning into a made-up day plan. It separates the confirmed Freedom Week window and conference from any specific 9 November event that still needs direct evidence from its responsible organiser.",
+      "seoTitle": "Berlin Freedom Week Evidence Desk | BerlinWalk",
+      "seoDescription": "Use confirmed Berlin Freedom Week anchors and a careful evidence checklist before planning a 9 November event or Wall-history visit.",
+      "sections": [
+        {
+          "title": "Hold the confirmed anchors",
+          "body": "Berlin Freedom Week has a confirmed 2026 window, and the Freedom Conference has a confirmed date. Those facts are useful starting points, but they do not establish a ceremony, venue, time, admission condition or programme on 9 November."
+        },
+        {
+          "title": "Treat historic places and event listings differently",
+          "body": "A permanent Wall-history site can be a responsible place to visit, but its existence does not prove that it is hosting a Freedom Week event. Check the memorial's current visitor information and any named event with the organiser that actually owns it."
+        },
+        {
+          "title": "Make the final plan from evidence",
+          "body": "I would choose one permanent site or one named event only after checking its live date, time, access, language and practical visitor information. This keeps a meaningful date honest and leaves room to change course if the programme says something different."
+        }
+      ],
+      "relatedTools": [
+        {
+          "slug": "berlin-wall-remnants",
+          "title": "Berlin Wall Remnants Map",
+          "url": "https://www.berlinwalk.com/tools/berlin-wall-remnants"
+        },
+        {
+          "slug": "berlin-memorial-reading-order",
+          "title": "Berlin Memorial Reading Order",
+          "url": "https://www.berlinwalk.com/tools/berlin-memorial-reading-order"
+        }
+      ]
+    },
+    "christmas-garden-closed-night-calendar": {
+      "title": "Christmas Garden Leave-By Ladder",
+      "h1": "Use the Christmas Garden closed nights and ticket cue to plan your departure",
+      "lead": "Use listed closed nights and ticket cues to make a reverse departure plan, then check the live VBB journey.",
+      "secondary": "A reverse-planning aid for a timed light trail, not a ticket-availability checker, route calculator, weather service, price guide or fixed city-centre departure promise.",
+      "intro": "I made this ladder for the last practical question before a Christmas Garden evening: when should I begin checking my way there? Start with a possible ticket cue and the listed closed nights, then work backwards from your own live journey.",
+      "seoTitle": "Christmas Garden Leave-By Ladder | BerlinWalk",
+      "seoDescription": "Check Christmas Garden Berlin closed nights and ticket cues, then make a reverse departure plan with a live VBB journey check.",
+      "sections": [
+        {
+          "title": "Check the date before the journey",
+          "body": "The organiser lists a 2026 to 2027 run and specific closed nights. The tool keeps those closures visible so you do not build a Dahlem evening around a date that is not operating. Recheck the organiser's current visit page before you leave."
+        },
+        {
+          "title": "Keep ticket cue and route cue separate",
+          "body": "A selected entry cue is not a claim that you hold that ticket or that it is available. It is only the point from which to work backwards. The final route, service condition and departure time belong to your live VBB journey."
+        },
+        {
+          "title": "Use the ladder on the day",
+          "body": "I would check the ticket, the organiser's visitor information and VBB in that order. The tool does not promise weather, access, a route length or a fixed return, but it gives you a calm order for making the real checks."
+        }
+      ],
+      "relatedTools": [
+        {
+          "slug": "berlin-plant-passport",
+          "title": "Berlin Plant Passport",
+          "url": "https://www.berlinwalk.com/tools/berlin-plant-passport"
+        },
+        {
+          "slug": "berlin-night-transport-checker",
+          "title": "Berlin Night Transport Timeline",
+          "url": "https://www.berlinwalk.com/tools/berlin-night-transport-checker"
+        }
+      ]
+    },
+    "berlin-christmas-window-overlap": {
+      "title": "Berlin Christmas Travel-Band Ledger",
+      "h1": "See which Berlin winter runs overlap your Christmas travel band",
+      "lead": "See which verified non-market winter event runs overlap one of five fixed Berlin travel bands.",
+      "secondary": "A verified date-overlap ledger, not a ticket finder, calendar picker, session timetable, venue guide, opening-hours service or guarantee of entry.",
+      "intro": "I made this ledger for visitors who want a winter evening beyond a Christmas market but only have a few fixed Berlin dates. Choose the travel band that fits your stay, then use the organiser's current listing for the exact performance, concert or light-trail session.",
+      "seoTitle": "Berlin Christmas Travel-Band Ledger | BerlinWalk",
+      "seoDescription": "Match five fixed Berlin winter travel bands with four verified non-market event runs, then check the organiser for the exact session and access.",
+      "sections": [
+        {
+          "title": "Choose the travel band, not a pretend booking date",
+          "body": "The ledger uses five fixed date bands because the useful first question is whether a verified run overlaps your stay. It does not take an arbitrary arrival date or imply that an overlapping event has a suitable or available session."
+        },
+        {
+          "title": "Read each run as its own event",
+          "body": "The four listed winter runs have different calendars and formats. A light trail, two circuses and a winter-concert festival should not be treated as one generic Christmas product. Open the current organiser or event listing for the exact venue, session, ticket and visitor details."
+        },
+        {
+          "title": "Make the final evening plan late",
+          "body": "I would use the overlap only to decide where to investigate, then choose one real session after checking its conditions. That protects a short winter trip from an attractive date range that does not actually match your evening."
+        }
+      ],
+      "relatedTools": [
+        {
+          "slug": "christmas-markets-map",
+          "title": "Berlin Christmas Markets Map",
+          "url": "https://www.berlinwalk.com/tools/christmas-markets-map"
+        },
+        {
+          "slug": "berlin-public-holiday-checker",
+          "title": "Berlin Public Holiday Checker",
+          "url": "https://www.berlinwalk.com/tools/berlin-public-holiday-checker"
+        }
+      ]
+    }
+  }
+}

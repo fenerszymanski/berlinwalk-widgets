@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "slug": "jazzfest-berlin",
+  "key": "jazzfest-berlin",
+  "config": {
+    "title": "Jazzfest Berlin 2026 - FAQ",
+    "subtitle": "What is confirmed now and what needs the September programme.",
+    "items": [
+      {
+        "q": "When is Jazzfest Berlin 2026?",
+        "a": "Jazzfest Berlin runs from 29 October to 1 November 2026."
+      },
+      {
+        "q": "Where does Jazzfest Berlin take place?",
+        "a": "The official 2026 page names the Haus der Berliner Festspiele and other venues. Use the individual event listing once the programme is published for the exact location."
+      },
+      {
+        "q": "When will the Jazzfest Berlin programme be published?",
+        "a": "The official information says the full programme is due in September. Return to the festival's current page for artists, rooms, tickets and event details."
+      },
+      {
+        "q": "Can I plan a Jazzfest route from a previous year?",
+        "a": "No. Earlier editions do not prove the 2026 artist, venue, format, ticket route or travel plan. Start again from the live 2026 listing."
+      },
+      {
+        "q": "What is the best first Jazzfest choice for a visitor?",
+        "a": "Wait for the programme, then choose one artist or format you genuinely want to hear. Check its venue, access conditions and live journey before building the rest of the evening around it."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "When is Jazzfest Berlin 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Jazzfest Berlin runs from 29 October to 1 November 2026."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where does Jazzfest Berlin take place?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The official 2026 page names the Haus der Berliner Festspiele and other venues. Use the individual event listing once the programme is published for the exact location."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When will the Jazzfest Berlin programme be published?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The official information says the full programme is due in September. Return to the festival's current page for artists, rooms, tickets and event details."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I plan a Jazzfest route from a previous year?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Earlier editions do not prove the 2026 artist, venue, format, ticket route or travel plan. Start again from the live 2026 listing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best first Jazzfest choice for a visitor?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Wait for the programme, then choose one artist or format you genuinely want to hear. Check its venue, access conditions and live journey before building the rest of the evening around it."
+        }
+      }
+    ]
+  }
+}
