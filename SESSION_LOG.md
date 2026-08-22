@@ -1,3 +1,24 @@
+## 2026-08-22 18:38 CEST — Codex + Luna Max (GLOBAL BLOG DATE CHECK RELEASE CANDIDATE)
+
+Luna Max replaced the per-slug history/content-upgrade/Date-teaser orchestrator
+with two global, idempotent blog surfaces: one visual Date Check form after
+approximately 10% of the real article body and the existing compact live tour
+calendar at its established mid-article position. The Date handoff carries
+arrival, nights and exact blog UTMs to `/berlin-dates-check`; mount, 50%-seen,
+start and submit remain distinct analytics-consent-gated events. Late Wix
+hydration repositions both surfaces without duplicates. Fixed Trip Planner/FDR
+journey cards and the mid-post FDR bridge were removed; article-specific tools,
+related guides, Quick Summary, FAQ and tour-booking surfaces remain. The daily
+magnet binder is now an explicit read-only `retired` compatibility command.
+
+Source commits `19d75709` + QA hardening `327bac5e`; no push or live mutation at
+the time of this entry. Targeted/global tests 25/25; full repo 115/118 with only
+the three pre-existing sibling-worktree/Trip Planner fixture failures. Local
+Playwright 1280/617/390: one Date card, one tour calendar, old surfaces zero,
+card/body widths equal, overflow0, dark-green-on-yellow CTA, valid handoff and
+hydration/duplicate recovery PASS. The only console error was the local
+preview's missing favicon.
+
 ## 2026-08-22 04:21 CEST — Codex automation (BerlinWalk Daily Featured Listings Refresh, CANLI)
 
 Güncel Wix Blog snapshot'ı `--limit 150` ile 184, final `--limit 300` ile 300 post döndürdü. `/blog` lead `restaurant-reservations-in-berlin`; rail live music, Friday arrival, Spy Museum, free memorials ve public transport olarak güncellendi. `popularSource` Wix Blog `metrics.views` lifetime sort; lead güncel ve geniş ilk-seyahat kararına, rail ise current/popular/category-required karışımına bağlandı.
