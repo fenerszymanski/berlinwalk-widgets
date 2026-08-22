@@ -453,7 +453,11 @@ async function waitForMediaReady(uploaded, prepared, image) {
     const readback = mediaRecord(response.file || response.files?.[0] || response, prepared, image);
     assert(readback.id === uploaded.id, `Wix media GET returned a different file id for ${prepared.post.slug}/${image.path}`);
     assert(readback.url === uploaded.url, `Wix media GET returned a different URL for ${prepared.post.slug}/${image.path}`);
-    assert(readback.width === image.dimensions.width && readback.height === image.dimensions.height, `Wix media GET dimensions differ for ${prepared.post.slug}/${image.path}`);
+    // Wix normalizes EXIF rotation at import. Preserve the Media readback dimensions
+    // for Ricos, but reject any transformation other than an exact 90-degree rotation.
+    const exactDimensions = readback.width === image.dimensions.width && readback.height === image.dimensions.height;
+    const rotatedDimensions = readback.width === image.dimensions.height && readback.height === image.dimensions.width;
+    assert(exactDimensions || rotatedDimensions, `Wix media GET dimensions differ unexpectedly for ${prepared.post.slug}/${image.path}`);
     if (readback.operationStatus === 'READY') return readback;
     if (readback.operationStatus === 'FAILED') throw new Error(`Wix media processing failed for ${prepared.post.slug}/${image.path}`);
     if (attempt < MEDIA_READY_POLL_ATTEMPTS) await delay(MEDIA_READY_POLL_DELAY_MS);
@@ -508,7 +512,7 @@ function hasCaptionStyle(node) {
     && (text.textData?.decorations || []).some((decoration) => decoration.type === 'FONT_SIZE' && Number(decoration.fontSizeData?.value) === 12));
 }
 
-function verifyDraft(prepared, draft) {
+function verifyDraft(prepared, draft, expectedCover) {
   const nodes = draft.richContent?.nodes || [];
   const images = nodes.filter((node) => node.type === 'IMAGE');
   const embeds = nodes.filter((node) => node.type === 'HTML');
@@ -517,6 +521,8 @@ function verifyDraft(prepared, draft) {
   assert(draft.title === prepared.post.title, `${prepared.post.slug} draft title readback mismatch`);
   assert(draft.seoSlug === prepared.post.slug, `${prepared.post.slug} draft slug readback mismatch`);
   assert(draft.status === 'UNPUBLISHED' && draft.hasUnpublishedChanges === true, `${prepared.post.slug} is not an UNPUBLISHED draft`);
+  const coverImageId = draft.media?.wixMedia?.image?.id || null;
+  assert(expectedCover?.id && coverImageId === expectedCover.id, `${prepared.post.slug} draft cover readback mismatch`);
   assert(images.length === 4 && images.every((node) => node.imageData?.altText?.trim()), `${prepared.post.slug} draft needs four images with alt text`);
   assert(embeds.length === 3, `${prepared.post.slug} draft needs exactly three embeds`);
   const expectedUrls = Object.values(prepared.embeds).map((embed) => embed.url).sort();
@@ -540,6 +546,7 @@ function verifyDraft(prepared, draft) {
     sourceCreditCount: prepared.plan.sourceCredits.length,
     nativeImageCredits: credits.length,
     seoTags: draft.seoData?.tags?.length || 0,
+    coverImageId,
     richContentSha256: sha256(draft.richContent),
     seoDataSha256: sha256(draft.seoData),
     editUrl: `https://manage.wix.com/dashboard/${SITE_ID}/blog/drafts/${draft.id}/edit`,
@@ -638,7 +645,8 @@ async function main() {
   const readback = [];
   for (const result of state.sort((a, b) => a.originalIndex - b.originalIndex)) {
     const item = prepared[result.originalIndex];
-    readback.push(verifyDraft(item, await fetchDraft(result.draftId)));
+    const expectedCover = mediaByPost.get(item.post.slug).get(item.plan.coverPath);
+    readback.push(verifyDraft(item, await fetchDraft(result.draftId), expectedCover));
   }
   writeJson(readbackPath, { runId, batch: BATCH_SLUG, targetStatus: 'UNPUBLISHED', checkedAt: new Date().toISOString(), drafts: readback });
   console.log(JSON.stringify({ mode: 'CREATED_UNPUBLISHED', runId, batch: BATCH_SLUG, drafts: readback }, null, 2));
