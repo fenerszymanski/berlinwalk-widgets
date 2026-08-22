@@ -757,6 +757,20 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  // Sep–Dec 2026 event batch: keep these post-to-tool links exact. Broad
+  // keyword fallbacks below would otherwise send several event posts to an
+  // older, merely adjacent tool.
+  if ((post.slug || '') === 'film-festivals-berlin-autumn') return 'berlin-autumn-film-language-board';
+  if ((post.slug || '') === 'giant-kite-festival-berlin') return 'tempelhof-kite-day-approach';
+  if ((post.slug || '') === 'ice-hockey-basketball-berlin') return 'uber-arena-night-cost-clock';
+  if ((post.slug || '') === 'pyronale-berlin') return 'berlin-double-closure-weekend';
+  if ((post.slug || '') === 'tag-der-clubkultur-berlin') return 'clubkultur-week-door-free-finder';
+  if ((post.slug || '') === 'berlin-food-week') return 'food-week-can-i-actually-go';
+  if ((post.slug || '') === 'jazzfest-berlin') return 'jazzfest-room-comparator';
+  if ((post.slug || '') === 'berlin-science-week') return 'science-week-three-day-window';
+  if ((post.slug || '') === 'berlin-freedom-week') return 'november-nine-hour-line';
+  if ((post.slug || '') === 'christmas-garden-berlin') return 'christmas-garden-closed-night-calendar';
+  if ((post.slug || '') === 'berlin-christmas-events-beyond-markets') return 'berlin-christmas-window-overlap';
   if ((post.slug || '') === 'restaurant-reservations-in-berlin') return 'berlin-reserve-or-walk-in';
   if ((post.slug || '') === 'english-bookshops-in-berlin') return 'berlin-reading-stop-line';
   if ((post.slug || '') === 'berlin-botanic-garden') return 'berlin-plant-passport';
