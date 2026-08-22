@@ -401,6 +401,22 @@
     return true;
   }
 
+  function trackDateCheckSeen(card, slug) {
+    if (!card || card.getAttribute('data-bw-date-check-seen-bound') === '1') return;
+    card.setAttribute('data-bw-date-check-seen-bound', '1');
+    if (typeof window.IntersectionObserver !== 'function') return;
+    var observer = new window.IntersectionObserver(function (entries) {
+      for (var i = 0; i < entries.length; i++) {
+        if (!entries[i].isIntersecting || entries[i].intersectionRatio < 0.5) continue;
+        pushDateCheckEvent('bw_date_check_blog_card_seen', slug);
+        card.setAttribute('data-bw-date-check-seen', '1');
+        observer.disconnect();
+        break;
+      }
+    }, { threshold: [0.5] });
+    observer.observe(card);
+  }
+
   function dateCheckTargetUrl(destination, sourceSlug, arrival, nights, baseHref) {
     var url = new URL(destination || DATE_CHECK_URL, baseHref || window.location.href);
     url.searchParams.set('arrival', arrival);
@@ -467,7 +483,8 @@
     };
     form.elements.arrival.addEventListener('focus', markStart);
     form.elements.nights.addEventListener('focus', markStart);
-    pushDateCheckEvent('bw_date_check_blog_card_view', slug);
+    pushDateCheckEvent('bw_date_check_blog_card_mount', slug);
+    trackDateCheckSeen(card, slug);
     form.addEventListener('submit', function (event) {
       event.preventDefault();
       status.textContent = '';
@@ -514,21 +531,31 @@
     return true;
   }
 
+  function ensureSurfacePosition(point, node) {
+    if (!point || !point.parent || !point.after || !node) return false;
+    if (point.after.nextSibling === node && node.parentNode === point.parent) return true;
+    return insertAfter(point, node);
+  }
+
   function injectSurfaces() {
     if (!ENABLED || !isSurfacePath()) return false;
     var body = findPostBody();
     if (!body) return false;
     var booking = removeDuplicateSurfaces(BOOKING_MARKER);
     var dateCard = removeDuplicateSurfaces(DATE_CHECK_MARKER);
+    var bookingPoint = findBookingInsertionPoint(body);
+    var datePoint = findDateCheckInsertionPoint(body);
     if (!booking) {
-      var bookingPoint = findBookingInsertionPoint(body);
       if (bookingPoint) booking = buildBookingCard();
       if (booking && !insertAfter(bookingPoint, booking)) booking = null;
+    } else if (!ensureSurfacePosition(bookingPoint, booking)) {
+      booking = null;
     }
     if (!dateCard) {
-      var datePoint = findDateCheckInsertionPoint(body);
       if (datePoint) dateCard = buildDateCheckCard(currentSlug());
       if (dateCard && !insertAfter(datePoint, dateCard)) dateCard = null;
+    } else if (!ensureSurfacePosition(datePoint, dateCard)) {
+      dateCard = null;
     }
     if (booking && dateCard) {
       retries = 0;
@@ -554,9 +581,7 @@
     if (typeof window.MutationObserver !== 'function' || !document.body) return;
     observer = new window.MutationObserver(function () {
       if (!isSurfacePath()) return;
-      var booking = firstSurface(BOOKING_MARKER);
-      var dateCard = firstSurface(DATE_CHECK_MARKER);
-      if (!booking || !dateCard) scheduleInject(80);
+      scheduleInject(80);
     });
     observer.observe(document.body, { childList: true, subtree: true });
   }

@@ -26,7 +26,7 @@ test('daily magnet binding is retired behind the global Date Check contract', ()
 test('every indexed post resolves to the same global surface with no asset owner', () => {
   const posts = blogIndex.allPosts.filter((post) => post && post.slug);
   assert.ok(posts.length > 100);
-  for (const post of posts.slice(0, 12).concat(posts.slice(-12))) {
+  for (const post of posts) {
     assert.deepEqual(classifyDailyBlogPost(post), { assetId: null, rule: 'global-date-check', slug: post.slug });
     const result = bindDailyBlogPost({ injectorSource, blogIndex, post });
     assert.equal(result.status, 'retired');

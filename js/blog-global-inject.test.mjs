@@ -150,9 +150,13 @@ test('Date Check handoff keeps arrival, nights and exact blog UTM contract', () 
 test('Date Check is one idempotent no-email surface with consent-safe first-party events', () => {
   assert.match(injectorSource, /removeDuplicateSurfaces\(BOOKING_MARKER\)/);
   assert.match(injectorSource, /removeDuplicateSurfaces\(DATE_CHECK_MARKER\)/);
+  assert.match(injectorSource, /ensureSurfacePosition\(bookingPoint, booking\)/);
+  assert.match(injectorSource, /ensureSurfacePosition\(datePoint, dateCard\)/);
   assert.match(injectorSource, /MutationObserver/);
   assert.match(injectorSource, /data-bw-leadform/);
-  assert.match(injectorSource, /bw_date_check_blog_card_view/);
+  assert.match(injectorSource, /bw_date_check_blog_card_mount/);
+  assert.match(injectorSource, /bw_date_check_blog_card_seen/);
+  assert.match(injectorSource, /intersectionRatio < 0\.5/);
   assert.match(injectorSource, /bw_date_check_blog_card_start/);
   assert.match(injectorSource, /bw_date_check_blog_card_submit/);
   assert.match(injectorSource, /dataLayer\.push/);

@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 
+import { readFile } from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
 /*
  * Daily magnet binding is retired. Every public blog post now receives the
  * global Date Check card and the compact tour booking card from
@@ -59,4 +63,43 @@ export function bindDailyBlogPost({ injectorSource, blogIndex, post }) {
     rule: decision.rule,
     source: injectorSource,
   };
+}
+
+function parseArgs(argv) {
+  const args = { slug: '', help: false };
+  for (let index = 0; index < argv.length; index += 1) {
+    const arg = argv[index];
+    if (arg === '--slug' || arg === '--post-slug') args.slug = argv[++index] || '';
+    else if (arg === '--dry-run') continue;
+    else if (arg === '--help' || arg === '-h') args.help = true;
+    else throw new Error(`Unknown argument: ${arg}`);
+  }
+  return args;
+}
+
+async function main() {
+  const args = parseArgs(process.argv.slice(2));
+  if (args.help) {
+    console.log('Daily magnet binding is retired. Every indexed blog post receives the global Date Check and tour-calendar surfaces automatically.');
+    return;
+  }
+  if (!args.slug) throw new Error('--slug is required so the global contract can verify the published post index');
+  const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+  const [injectorSource, blogIndexSource] = await Promise.all([
+    readFile(path.join(root, 'js', 'lead-form-inject.js'), 'utf8'),
+    readFile(path.join(root, 'blog-index', 'data.json'), 'utf8'),
+  ]);
+  const blogIndex = JSON.parse(blogIndexSource);
+  const post = blogIndex.allPosts.find((item) => String(item?.slug || '') === args.slug);
+  if (!post) throw new Error(`blog post is not in blog-index/data.json: ${args.slug}`);
+  const result = bindDailyBlogPost({ injectorSource, blogIndex, post });
+  console.log(JSON.stringify({ contract: GLOBAL_BLOG_CONTRACT, ...result, source: undefined }, null, 2));
+}
+
+const isMain = Boolean(process.argv[1]) && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+if (isMain) {
+  main().catch((error) => {
+    console.error(error.message);
+    process.exitCode = 1;
+  });
 }
