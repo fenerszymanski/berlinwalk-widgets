@@ -6873,6 +6873,36 @@
       "iconStatus": "live-wix-media",
       "cmsItemId": "b7398740-10e1-413c-9e07-5d8659cf6f84",
       "relatedBlog": "/post/berlin-museum-discounts"
+    },
+    {
+      "slug": "berlin-station-exit-map",
+      "title": "Berlin Station Exit Map",
+      "lead": "Berlin exit signs are named after streets, never after the thing you came to see. Pick one of four big central stations and where you are heading, and the map shows which Ausgang surfaces closest, plus how many extra metres every other exit costs you.",
+      "category": "Maps",
+      "hubCategory": "Transport",
+      "type": "Map",
+      "tags": [
+        "berlin station exits",
+        "which exit berlin u-bahn",
+        "ausgang berlin station",
+        "alexanderplatz exit world clock",
+        "zoologischer garten exit",
+        "potsdamer platz station exit",
+        "friedrichstrasse station exit",
+        "berlin u-bahn wayfinding"
+      ],
+      "aliases": [
+        "berlin u-bahn which exit",
+        "alexanderplatz which exit to take",
+        "bahnhof zoo exit for memorial church",
+        "berlin exit sign street names",
+        "berlin station ausgang map"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-station-exit-map/",
+      "embedHeight": 1560,
+      "image": "https://static.wixstatic.com/media/5a08a3_76fb62e9db2a4b56b27ddb46367b95c2~mv2.png",
+      "iconStatus": "live-wix-media",
+      "relatedBlog": "/post/berlin-station-exits"
     }
   ],
   "hubCategories": [

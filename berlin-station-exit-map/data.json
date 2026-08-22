@@ -1,0 +1,687 @@
+{
+  "generated": "2026-08-22",
+  "stations": [
+    {
+      "id": "alexanderplatz",
+      "label": "Alexanderplatz",
+      "lines": "U2 U5 U8, S3 S5 S7 S9, tram, regional",
+      "entranceCount": 9,
+      "spreadM": 260,
+      "note": "Three separate stations share the name: the U-Bahn levels, the S-Bahn hall and the regional platforms. The exits fan out over 260 metres.",
+      "map": {
+        "img": "img/alexanderplatz.jpg",
+        "w": 548,
+        "h": 547,
+        "x0": 18027159.96411051,
+        "y0": 11003913.213243173,
+        "z": 17
+      },
+      "exits": [
+        {
+          "street": "Rathausstraße",
+          "count": 1,
+          "refs": [
+            "H"
+          ],
+          "lat": 52.5204665,
+          "lon": 13.4120532,
+          "sign": [
+            "Rathausstraße",
+            "Gontardstraße",
+            "Berliner Rathaus",
+            "Fernsehturm",
+            "Nikolaiviertel"
+          ]
+        },
+        {
+          "street": "Dircksenstraße",
+          "count": 2,
+          "refs": [
+            "K",
+            "N"
+          ],
+          "lat": 52.5212567,
+          "lon": 13.4126467,
+          "sign": [
+            "Dircksenstraße",
+            "Gontardstraße",
+            "Fernsehturm",
+            "S-Bahn",
+            "Tram"
+          ]
+        },
+        {
+          "street": "Grunerstraße",
+          "count": 1,
+          "refs": [
+            "P"
+          ],
+          "lat": 52.5208274,
+          "lon": 13.414707,
+          "sign": [
+            "Grunerstraße",
+            "Alexanderstraße",
+            "Alexa"
+          ]
+        },
+        {
+          "street": "Alexanderplatz",
+          "count": 2,
+          "refs": [
+            "L",
+            "M"
+          ],
+          "lat": 52.52165195,
+          "lon": 13.412560299999999,
+          "sign": [
+            "Alexanderplatz",
+            "Karl-Liebknecht-Straße",
+            "Galeria",
+            "Bus 100",
+            "Bus 200",
+            "Bus 300"
+          ]
+        }
+      ],
+      "targets": [
+        {
+          "name": "World Clock (Weltzeituhr)",
+          "lat": 52.5211638,
+          "lon": 13.4133059,
+          "walks": [
+            {
+              "street": "Dircksenstraße",
+              "m": 46
+            },
+            {
+              "street": "Alexanderplatz",
+              "m": 74
+            },
+            {
+              "street": "Grunerstraße",
+              "m": 102
+            },
+            {
+              "street": "Rathausstraße",
+              "m": 115
+            }
+          ],
+          "best": {
+            "street": "Dircksenstraße",
+            "m": 46
+          },
+          "penalty": 69
+        },
+        {
+          "name": "TV Tower entrance",
+          "lat": 52.5208279,
+          "lon": 13.4094214,
+          "walks": [
+            {
+              "street": "Rathausstraße",
+              "m": 183
+            },
+            {
+              "street": "Dircksenstraße",
+              "m": 223
+            },
+            {
+              "street": "Alexanderplatz",
+              "m": 231
+            },
+            {
+              "street": "Grunerstraße",
+              "m": 358
+            }
+          ],
+          "best": {
+            "street": "Rathausstraße",
+            "m": 183
+          },
+          "penalty": 175
+        },
+        {
+          "name": "Rotes Rathaus",
+          "lat": 52.5182718,
+          "lon": 13.4078309,
+          "walks": [
+            {
+              "street": "Rathausstraße",
+              "m": 376
+            },
+            {
+              "street": "Dircksenstraße",
+              "m": 465
+            },
+            {
+              "street": "Alexanderplatz",
+              "m": 494
+            },
+            {
+              "street": "Grunerstraße",
+              "m": 545
+            }
+          ],
+          "best": {
+            "street": "Rathausstraße",
+            "m": 376
+          },
+          "penalty": 169
+        },
+        {
+          "name": "Alexa shopping centre",
+          "lat": 52.5190723,
+          "lon": 13.4160154,
+          "walks": [
+            {
+              "street": "Grunerstraße",
+              "m": 214
+            },
+            {
+              "street": "Rathausstraße",
+              "m": 310
+            },
+            {
+              "street": "Dircksenstraße",
+              "m": 333
+            },
+            {
+              "street": "Alexanderplatz",
+              "m": 370
+            }
+          ],
+          "best": {
+            "street": "Grunerstraße",
+            "m": 214
+          },
+          "penalty": 156
+        }
+      ]
+    },
+    {
+      "id": "zoologischer-garten",
+      "label": "Zoologischer Garten",
+      "lines": "U2 U9, S3 S5 S7 S9, regional",
+      "entranceCount": 13,
+      "spreadM": 307,
+      "note": "Thirteen exits over 307 metres, the widest spread of any central Berlin station. The Hardenbergplatz side and the Kantstraße side feel like two different neighbourhoods.",
+      "map": {
+        "img": "img/zoologischer-garten.jpg",
+        "w": 613,
+        "h": 613,
+        "x0": 18019671.536898177,
+        "y0": 11006191.350417502,
+        "z": 17
+      },
+      "exits": [
+        {
+          "street": "Hardenbergplatz",
+          "count": 6,
+          "refs": [
+            "K",
+            "L",
+            "M",
+            "N",
+            "O"
+          ],
+          "lat": 52.50699228333334,
+          "lon": 13.3330565,
+          "sign": [
+            "Hardenbergplatz"
+          ]
+        },
+        {
+          "street": "Budapester Straße",
+          "count": 1,
+          "refs": [
+            "S"
+          ],
+          "lat": 52.5055903,
+          "lon": 13.3341387,
+          "sign": [
+            "Budapester Straße"
+          ]
+        },
+        {
+          "street": "Kantstraße",
+          "count": 1,
+          "refs": [
+            "T"
+          ],
+          "lat": 52.5049504,
+          "lon": 13.3338029,
+          "sign": [
+            "Kantstraße"
+          ]
+        },
+        {
+          "street": "Hardenbergstraße",
+          "count": 5,
+          "refs": [
+            "P",
+            "Q",
+            "R"
+          ],
+          "lat": 52.50606402,
+          "lon": 13.3326381,
+          "sign": [
+            "Hardenbergstraße"
+          ]
+        }
+      ],
+      "targets": [
+        {
+          "name": "Zoo Löwentor gate",
+          "lat": 52.50831,
+          "lon": 13.33493,
+          "walks": [
+            {
+              "street": "Hardenbergplatz",
+              "m": 194
+            },
+            {
+              "street": "Hardenbergstraße",
+              "m": 294
+            },
+            {
+              "street": "Budapester Straße",
+              "m": 307
+            },
+            {
+              "street": "Kantstraße",
+              "m": 381
+            }
+          ],
+          "best": {
+            "street": "Hardenbergplatz",
+            "m": 194
+          },
+          "penalty": 187
+        },
+        {
+          "name": "Zoo Elefantentor gate",
+          "lat": 52.50566,
+          "lon": 13.33969,
+          "walks": [
+            {
+              "street": "Budapester Straße",
+              "m": 376
+            },
+            {
+              "street": "Kantstraße",
+              "m": 406
+            },
+            {
+              "street": "Hardenbergplatz",
+              "m": 473
+            },
+            {
+              "street": "Hardenbergstraße",
+              "m": 479
+            }
+          ],
+          "best": {
+            "street": "Budapester Straße",
+            "m": 376
+          },
+          "penalty": 103
+        },
+        {
+          "name": "Kaiser Wilhelm Memorial Church",
+          "lat": 52.5048945,
+          "lon": 13.3346131,
+          "walks": [
+            {
+              "street": "Kantstraße",
+              "m": 55
+            },
+            {
+              "street": "Budapester Straße",
+              "m": 84
+            },
+            {
+              "street": "Hardenbergstraße",
+              "m": 186
+            },
+            {
+              "street": "Hardenbergplatz",
+              "m": 256
+            }
+          ],
+          "best": {
+            "street": "Kantstraße",
+            "m": 55
+          },
+          "penalty": 201
+        },
+        {
+          "name": "Bikini Berlin",
+          "lat": 52.5057233,
+          "lon": 13.335549,
+          "walks": [
+            {
+              "street": "Budapester Straße",
+              "m": 97
+            },
+            {
+              "street": "Kantstraße",
+              "m": 146
+            },
+            {
+              "street": "Hardenbergstraße",
+              "m": 201
+            },
+            {
+              "street": "Hardenbergplatz",
+              "m": 220
+            }
+          ],
+          "best": {
+            "street": "Budapester Straße",
+            "m": 97
+          },
+          "penalty": 123
+        }
+      ]
+    },
+    {
+      "id": "potsdamer-platz",
+      "label": "Potsdamer Platz",
+      "lines": "U2, S1 S2 S25 S26, regional",
+      "entranceCount": 9,
+      "spreadM": 270,
+      "note": "Nine exits over 270 metres, split between the Leipziger Platz side to the east and the Ebertstraße side toward Tiergarten.",
+      "map": {
+        "img": "img/potsdamer-platz.jpg",
+        "w": 555,
+        "h": 556,
+        "x0": 18023815.34900221,
+        "y0": 11005629.876901023,
+        "z": 17
+      },
+      "exits": [
+        {
+          "street": "Leipziger Platz",
+          "count": 3,
+          "refs": [
+            "A",
+            "B"
+          ],
+          "lat": 52.509709199999996,
+          "lon": 13.378500033333333,
+          "sign": [
+            "Leipziger Platz"
+          ]
+        },
+        {
+          "street": "Potsdamer Platz",
+          "count": 2,
+          "refs": [
+            "C"
+          ],
+          "lat": 52.5089915,
+          "lon": 13.37660545,
+          "sign": [
+            "Potsdamer Platz"
+          ]
+        },
+        {
+          "street": "Ebertstraße",
+          "count": 3,
+          "refs": [],
+          "lat": 52.5104814,
+          "lon": 13.376781266666667,
+          "sign": [
+            "Ebertstraße"
+          ]
+        },
+        {
+          "street": "Hans-von-Bülow-Straße",
+          "count": 1,
+          "refs": [],
+          "lat": 52.5106587,
+          "lon": 13.376578,
+          "sign": [
+            "Hans-von-Bülow-Straße"
+          ]
+        }
+      ],
+      "targets": [
+        {
+          "name": "Das Center am Potsdamer Platz",
+          "lat": 52.5105307,
+          "lon": 13.3724771,
+          "walks": [
+            {
+              "street": "Hans-von-Bülow-Straße",
+              "m": 278
+            },
+            {
+              "street": "Ebertstraße",
+              "m": 291
+            },
+            {
+              "street": "Potsdamer Platz",
+              "m": 328
+            },
+            {
+              "street": "Leipziger Platz",
+              "m": 418
+            }
+          ],
+          "best": {
+            "street": "Hans-von-Bülow-Straße",
+            "m": 278
+          },
+          "penalty": 140
+        },
+        {
+          "name": "Holocaust Memorial",
+          "lat": 52.5138731,
+          "lon": 13.3787346,
+          "walks": [
+            {
+              "street": "Hans-von-Bülow-Straße",
+              "m": 386
+            },
+            {
+              "street": "Ebertstraße",
+              "m": 400
+            },
+            {
+              "street": "Leipziger Platz",
+              "m": 463
+            },
+            {
+              "street": "Potsdamer Platz",
+              "m": 562
+            }
+          ],
+          "best": {
+            "street": "Hans-von-Bülow-Straße",
+            "m": 386
+          },
+          "penalty": 176
+        },
+        {
+          "name": "Topography of Terror",
+          "lat": 52.5062137,
+          "lon": 13.3841548,
+          "walks": [
+            {
+              "street": "Leipziger Platz",
+              "m": 545
+            },
+            {
+              "street": "Potsdamer Platz",
+              "m": 597
+            },
+            {
+              "street": "Ebertstraße",
+              "m": 689
+            },
+            {
+              "street": "Hans-von-Bülow-Straße",
+              "m": 712
+            }
+          ],
+          "best": {
+            "street": "Leipziger Platz",
+            "m": 545
+          },
+          "penalty": 167
+        },
+        {
+          "name": "Gemäldegalerie / Kulturforum",
+          "lat": 52.5085133,
+          "lon": 13.3647492,
+          "walks": [
+            {
+              "street": "Potsdamer Platz",
+              "m": 804
+            },
+            {
+              "street": "Hans-von-Bülow-Straße",
+              "m": 835
+            },
+            {
+              "street": "Ebertstraße",
+              "m": 843
+            },
+            {
+              "street": "Leipziger Platz",
+              "m": 940
+            }
+          ],
+          "best": {
+            "street": "Potsdamer Platz",
+            "m": 804
+          },
+          "penalty": 136
+        }
+      ]
+    },
+    {
+      "id": "friedrichstrasse",
+      "label": "Friedrichstraße",
+      "lines": "U6, S1 S2 S3 S5 S7 S9 S25 S26, regional",
+      "entranceCount": 6,
+      "spreadM": 231,
+      "note": "Six exits over 231 metres. Georgenstraße is the arches side, Friedrichstraße is the main street, Dorothea-Schlegel-Platz is the quiet back square.",
+      "map": {
+        "img": "img/friedrichstrasse.jpg",
+        "w": 598,
+        "h": 598,
+        "x0": 18024678.474053975,
+        "y0": 11004034.521474617,
+        "z": 17
+      },
+      "exits": [
+        {
+          "street": "Friedrichstraße",
+          "count": 3,
+          "refs": [],
+          "lat": 52.520482466666664,
+          "lon": 13.388249033333333,
+          "sign": [
+            "Friedrichstraße"
+          ]
+        },
+        {
+          "street": "Dorothea-Schlegel-Platz",
+          "count": 1,
+          "refs": [],
+          "lat": 52.5197213,
+          "lon": 13.3854297,
+          "sign": [
+            "Dorothea-Schlegel-Platz"
+          ]
+        },
+        {
+          "street": "Georgenstraße",
+          "count": 2,
+          "refs": [],
+          "lat": 52.5200335,
+          "lon": 13.3886272,
+          "sign": [
+            "Georgenstraße"
+          ]
+        }
+      ],
+      "targets": [
+        {
+          "name": "Tränenpalast",
+          "lat": 52.5208597,
+          "lon": 13.3870933,
+          "walks": [
+            {
+              "street": "Friedrichstraße",
+              "m": 89
+            },
+            {
+              "street": "Georgenstraße",
+              "m": 139
+            },
+            {
+              "street": "Dorothea-Schlegel-Platz",
+              "m": 169
+            }
+          ],
+          "best": {
+            "street": "Friedrichstraße",
+            "m": 89
+          },
+          "penalty": 80
+        },
+        {
+          "name": "Unter den Linden",
+          "lat": 52.517,
+          "lon": 13.3885,
+          "walks": [
+            {
+              "street": "Georgenstraße",
+              "m": 337
+            },
+            {
+              "street": "Dorothea-Schlegel-Platz",
+              "m": 367
+            },
+            {
+              "street": "Friedrichstraße",
+              "m": 388
+            }
+          ],
+          "best": {
+            "street": "Georgenstraße",
+            "m": 337
+          },
+          "penalty": 51
+        },
+        {
+          "name": "Museum Island / Humboldt Forum",
+          "lat": 52.5170316,
+          "lon": 13.4012274,
+          "walks": [
+            {
+              "street": "Georgenstraße",
+              "m": 916
+            },
+            {
+              "street": "Friedrichstraße",
+              "m": 958
+            },
+            {
+              "street": "Dorothea-Schlegel-Platz",
+              "m": 1110
+            }
+          ],
+          "best": {
+            "street": "Georgenstraße",
+            "m": 916
+          },
+          "penalty": 194
+        }
+      ]
+    }
+  ]
+}
