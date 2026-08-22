@@ -2,8 +2,9 @@
  *
  * The compact Free Berlin Walking Tour card keeps its existing placement and
  * live date picker. The Date Check card is a separate, no-email decision aid
- * placed after roughly the first tenth of the real article body. Both cards
- * are light DOM, page-local, and owned by this one idempotent injector.
+ * placed later in the article, after the compact tour card and a short stretch
+ * of editorial copy. Both cards are light DOM, page-local, and owned by this
+ * one idempotent injector.
  */
 (function () {
   'use strict';
@@ -125,16 +126,37 @@
     return target.parentNode ? { parent: target.parentNode, after: target } : null;
   }
 
-  function dateCheckAnchorIndex(count) {
-    count = Number(count) || 0;
-    if (count <= 0) return -1;
-    return Math.min(count - 1, Math.max(0, Math.ceil(count * 0.1) - 1));
+  function dateCheckBlocks(body) {
+    if (!body || !body.querySelectorAll) return [];
+    var nodes = body.querySelectorAll('h2,h3,p,blockquote');
+    var blocks = [];
+    for (var i = 0; i < nodes.length; i++) {
+      var node = nodes[i];
+      if (!isVisible(node) || hasSurfaceAncestor(node) || !cleanText(node.textContent)) continue;
+      blocks.push(node);
+    }
+    return blocks;
   }
 
-  function findDateCheckInsertionPoint(body) {
-    var blocks = articleBlocks(body);
-    var index = dateCheckAnchorIndex(blocks.length);
-    return index < 0 ? null : insertionTarget(blocks[index], body);
+  function nodeContains(container, node) {
+    if (!container || !node) return false;
+    if (container === node) return true;
+    return typeof container.contains === 'function' && container.contains(node);
+  }
+
+  function findDateCheckInsertionPoint(body, bookingPoint) {
+    if (!bookingPoint || !bookingPoint.after) return null;
+    var blocks = dateCheckBlocks(body);
+    var bookingAnchor = bookingPoint.after;
+    var anchorIndex = -1;
+    for (var i = 0; i < blocks.length; i++) {
+      if (nodeContains(bookingAnchor, blocks[i]) || nodeContains(blocks[i], bookingAnchor)) anchorIndex = i;
+    }
+    if (anchorIndex < 0) return null;
+    var laterIndex = anchorIndex + 3;
+    if (laterIndex >= blocks.length) laterIndex = blocks.length - 1;
+    if (laterIndex <= anchorIndex) return null;
+    return insertionTarget(blocks[laterIndex], body);
   }
 
   function bookingBlocks(body) {
@@ -406,7 +428,7 @@
   function pushDateCheckEvent(name, slug) {
     if (!analyticsAllowed()) return false;
     window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: name, placement: 'blog_inline_10pct', source_slug: slug || currentSlug() });
+    window.dataLayer.push({ event: name, placement: 'blog_inline_after_tour', source_slug: slug || currentSlug() });
     return true;
   }
 
@@ -447,11 +469,11 @@
       '.bw-date-check-blog-card__scrim{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:26px;background:linear-gradient(180deg,rgba(8,45,22,.10) 18%,rgba(8,45,22,.94) 100%);color:#fff}.bw-date-check-blog-card[data-bw-date-check-card] .bw-date-check-blog-card__eyebrow{margin:0 0 10px!important;padding:0!important;font:700 11px/1.35 "IBM Plex Mono",monospace!important;letter-spacing:.14em!important;text-transform:uppercase;color:var(--bw-yellow)!important}',
       '.bw-date-check-blog-card[data-bw-date-check-card] .bw-date-check-blog-card__title{margin:0!important;padding:0!important;font-family:Fraunces,Georgia,serif!important;font-size:clamp(29px,4vw,40px)!important;font-weight:700!important;line-height:1.02!important;letter-spacing:-.02em!important;color:#fff!important}.bw-date-check-blog-card[data-bw-date-check-card] .bw-date-check-blog-card__copy{margin:12px 0 0!important;padding:0!important;font:400 15px/1.48 Montserrat,Arial,sans-serif!important;letter-spacing:0!important;color:rgba(255,255,255,.94)!important}.bw-date-check-blog-card__proof{display:flex;flex-wrap:wrap;gap:6px;margin-top:17px}.bw-date-check-blog-card[data-bw-date-check-card] .bw-date-check-blog-card__proof span{margin:0!important;padding:5px 7px!important;border:1px solid rgba(255,255,255,.52);font:400 9px/1.35 "IBM Plex Mono",monospace!important;letter-spacing:.06em!important;text-transform:uppercase;color:#fff!important}',
       '.bw-date-check-blog-card__form{display:flex;flex-direction:column;justify-content:center;gap:17px;min-width:0;max-width:100%;padding:30px}.bw-date-check-blog-card__fields{display:grid;grid-template-columns:minmax(0,1fr) minmax(112px,.42fr);gap:12px;width:100%;min-width:0;max-width:100%}.bw-date-check-blog-card__field{display:flex;flex-direction:column;gap:7px;width:100%;min-width:0;max-width:100%}.bw-date-check-blog-card__field label{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--bw-green-ink)}',
-      '.bw-date-check-blog-card__field input,.bw-date-check-blog-card__field select{display:block;inline-size:100%;width:100%;min-inline-size:0;min-width:0;max-inline-size:100%;max-width:100%;height:54px;min-height:54px;padding:0 14px;border:1.5px solid var(--bw-green-ink);border-radius:8px;background:#fff;color:#212121;font:600 15px/1 Montserrat,Arial,sans-serif}.bw-date-check-blog-card__field input:focus,.bw-date-check-blog-card__field select:focus{outline:3px solid rgba(255,230,0,.68);outline-offset:2px}',
+      '.bw-date-check-blog-card__date-control{position:relative;display:flex;align-items:center;inline-size:100%;width:100%;min-inline-size:0;min-width:0;max-inline-size:100%;max-width:100%;height:54px;min-height:54px;overflow:hidden;contain:inline-size;border:1.5px solid var(--bw-green-ink);border-radius:8px;background:#fff}.bw-date-check-blog-card__date-display{display:flex;align-items:center;width:100%;height:100%;min-width:0;padding:0 14px;color:#58705C;font:600 16px/1 Montserrat,Arial,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}.bw-date-check-blog-card__date-control[data-has-value="1"] .bw-date-check-blog-card__date-display{color:#212121}.bw-date-check-blog-card__date-control input{position:absolute!important;inset:0!important;display:block!important;inline-size:100%!important;width:100%!important;min-inline-size:0!important;min-width:0!important;max-inline-size:100%!important;max-width:100%!important;height:100%!important;min-height:100%!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;box-sizing:border-box!important;background:transparent!important;color:transparent!important;-webkit-text-fill-color:transparent!important;font:600 16px/1 Montserrat,Arial,sans-serif!important;opacity:0!important;cursor:pointer}.bw-date-check-blog-card__field select{display:block;inline-size:100%!important;width:100%!important;min-inline-size:0!important;min-width:0!important;max-inline-size:100%!important;max-width:100%!important;height:54px;min-height:54px;margin:0!important;padding:0 14px!important;border:1.5px solid var(--bw-green-ink);border-radius:8px;background:#fff;color:#212121!important;font:600 16px/1 Montserrat,Arial,sans-serif!important;box-sizing:border-box!important}.bw-date-check-blog-card__date-control:focus-within,.bw-date-check-blog-card__field select:focus{outline:3px solid rgba(255,230,0,.68);outline-offset:2px}',
       '.bw-date-check-blog-card__submit{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:56px;padding:13px 18px;border:1.5px solid var(--bw-yellow);border-radius:8px;background:var(--bw-yellow);color:var(--bw-green-ink)!important;font:800 16px/1.2 Montserrat,Arial,sans-serif;text-align:left;cursor:pointer;text-decoration:none!important}.bw-date-check-blog-card__submit:hover,.bw-date-check-blog-card__submit:focus,.bw-date-check-blog-card__submit:active,.bw-date-check-blog-card__submit:visited{background:#F4DC00;color:var(--bw-green-ink)!important;text-decoration:none!important}.bw-date-check-blog-card__submit:focus{outline:3px solid rgba(27,94,32,.24);outline-offset:2px}.bw-date-check-blog-card__arrow{font-size:24px;line-height:1}',
       '.bw-date-check-blog-card[data-bw-date-check-card] .bw-date-check-blog-card__micro{margin:0!important;padding:0!important;font:500 12.5px/1.5 Montserrat,Arial,sans-serif!important;letter-spacing:0!important;color:#58705C!important}.bw-date-check-blog-card[data-bw-date-check-card] .bw-date-check-blog-card__status{min-height:18px;margin:0!important;padding:0!important;color:#A2222B!important;font:700 12.5px/1.4 Montserrat,Arial,sans-serif!important;overflow-wrap:anywhere}.bw-date-check-blog-card__status:empty{display:none}',
       '@media(max-width:700px){.bw-date-check-blog-card{grid-template-columns:1fr}.bw-date-check-blog-card__visual{min-height:260px}.bw-date-check-blog-card__scrim{padding:22px}.bw-date-check-blog-card__form{padding:24px}.bw-date-check-blog-card__fields{grid-template-columns:minmax(0,1fr) minmax(105px,.42fr)}}',
-      '@media(max-width:430px){.bw-date-check-blog-card{margin:22px 0;border-radius:14px}.bw-date-check-blog-card__visual{min-height:260px}.bw-date-check-blog-card[data-bw-date-check-card] .bw-date-check-blog-card__title{font-size:34px!important}.bw-date-check-blog-card[data-bw-date-check-card] .bw-date-check-blog-card__copy{font-size:14.5px!important}.bw-date-check-blog-card__form{padding:20px}.bw-date-check-blog-card__fields{grid-template-columns:minmax(0,1fr)}.bw-date-check-blog-card__field input,.bw-date-check-blog-card__field select{height:52px;min-height:52px}.bw-date-check-blog-card__submit{min-height:54px;font-size:15px}}',
+      '@media(max-width:430px){.bw-date-check-blog-card{margin:22px 0;border-radius:14px}.bw-date-check-blog-card__visual{min-height:260px}.bw-date-check-blog-card[data-bw-date-check-card] .bw-date-check-blog-card__title{font-size:34px!important}.bw-date-check-blog-card[data-bw-date-check-card] .bw-date-check-blog-card__copy{font-size:14.5px!important}.bw-date-check-blog-card__form{padding:20px}.bw-date-check-blog-card__fields{grid-template-columns:minmax(0,1fr)}.bw-date-check-blog-card__date-control,.bw-date-check-blog-card__field select{height:52px;min-height:52px}.bw-date-check-blog-card__submit{min-height:54px;font-size:15px}}',
       '@media(prefers-reduced-motion:reduce){.bw-date-check-blog-card *{scroll-behavior:auto!important;transition:none!important}}'
     ].join('');
     document.head.appendChild(style);
@@ -477,20 +499,35 @@
       '<div class="bw-date-check-blog-card__eyebrow">Berlin Date Check</div><h2 class="bw-date-check-blog-card__title" id="' + id + '-title">Check your Berlin trip dates</h2>',
       '<div class="bw-date-check-blog-card__copy">See closures, book-by dates and daylight for your exact stay.</div><div class="bw-date-check-blog-card__proof" aria-label="Date Check covers"><span>Closures</span><span>Book-by</span><span>Daylight</span></div></div></div>',
       '<form class="bw-date-check-blog-card__form" method="get" action="' + escapeAttr(DATE_CHECK_URL) + '" target="_top">',
-      '<div class="bw-date-check-blog-card__fields"><div class="bw-date-check-blog-card__field"><label for="' + id + '-arrival">When do you arrive?</label><input id="' + id + '-arrival" name="arrival" type="date" min="' + todayString() + '" max="' + maxDateString() + '" required></div>',
+      '<div class="bw-date-check-blog-card__fields"><div class="bw-date-check-blog-card__field"><label for="' + id + '-arrival">When do you arrive?</label><div class="bw-date-check-blog-card__date-control" data-has-value="0"><span class="bw-date-check-blog-card__date-display" aria-hidden="true">Select arrival date</span><input id="' + id + '-arrival" name="arrival" type="date" min="' + todayString() + '" max="' + maxDateString() + '" required></div></div>',
       '<div class="bw-date-check-blog-card__field"><label for="' + id + '-nights">Nights</label><select id="' + id + '-nights" name="nights" required><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option><option value="6">6</option><option value="7">7+</option></select></div></div>',
       '<button class="bw-date-check-blog-card__submit" type="submit"><span>Check my Berlin dates</span><span class="bw-date-check-blog-card__arrow" aria-hidden="true">→</span></button>',
       '<div class="bw-date-check-blog-card__micro">The result is built around your arrival date and number of nights.</div><div class="bw-date-check-blog-card__status" role="status" aria-live="polite"></div></form>'
     ].join('');
     var form = card.querySelector('form');
     var status = card.querySelector('.bw-date-check-blog-card__status');
+    var arrivalInput = form.elements.arrival;
+    var dateControl = card.querySelector('.bw-date-check-blog-card__date-control');
+    var dateDisplay = card.querySelector('.bw-date-check-blog-card__date-display');
+    var syncDateDisplay = function () {
+      var value = arrivalInput.value;
+      var parts = String(value || '').split('-').map(Number);
+      var valid = parts.length === 3 && parts[0] > 0 && parts[1] > 0 && parts[2] > 0;
+      dateControl.setAttribute('data-has-value', valid ? '1' : '0');
+      dateDisplay.textContent = valid
+        ? new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(new Date(Date.UTC(parts[0], parts[1] - 1, parts[2])))
+        : 'Select arrival date';
+    };
+    arrivalInput.addEventListener('input', syncDateDisplay);
+    arrivalInput.addEventListener('change', syncDateDisplay);
+    syncDateDisplay();
     var started = false;
     var markStart = function () {
       if (started) return;
       started = true;
       pushDateCheckEvent('bw_date_check_blog_card_start', slug);
     };
-    form.elements.arrival.addEventListener('focus', markStart);
+    arrivalInput.addEventListener('focus', markStart);
     form.elements.nights.addEventListener('focus', markStart);
     pushDateCheckEvent('bw_date_check_blog_card_mount', slug);
     trackDateCheckSeen(card, slug);
@@ -571,13 +608,14 @@
     var booking = removeDuplicateSurfaces(BOOKING_MARKER);
     var dateCard = removeDuplicateSurfaces(DATE_CHECK_MARKER);
     var bookingPoint = findBookingInsertionPoint(body);
-    var datePoint = findDateCheckInsertionPoint(body);
     if (!booking) {
       if (bookingPoint) booking = buildBookingCard();
       if (booking && !insertAfter(bookingPoint, booking)) booking = null;
     } else if (!ensureSurfacePosition(bookingPoint, booking)) {
       booking = null;
     }
+    var datePoint = findDateCheckInsertionPoint(body, bookingPoint);
+    if (!datePoint && booking && booking.parentNode) datePoint = { parent: booking.parentNode, after: booking };
     if (!dateCard) {
       if (datePoint) dateCard = buildDateCheckCard(currentSlug());
       if (dateCard && !insertAfter(datePoint, dateCard)) dateCard = null;
@@ -631,7 +669,6 @@
 
   if (window.BW_BLOG_INJECTOR_TEST_HOOKS === true) {
     window.__bwBlogInjectorTestHooks = {
-      dateCheckAnchorIndex: dateCheckAnchorIndex,
       dateCheckTargetUrl: dateCheckTargetUrl,
       validDateFields: validDateFields,
       insertionTarget: insertionTarget,

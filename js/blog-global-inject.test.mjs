@@ -69,7 +69,10 @@ function injectorHooks() {
 
 function fakeBody(tags) {
   const body = {
-    querySelectorAll() { return body.blocks; },
+    querySelectorAll(selector = '') {
+      const requested = new Set(String(selector).toUpperCase().split(',').map((tag) => tag.trim()));
+      return body.blocks.filter((block) => !requested.size || requested.has(block.tagName));
+    },
     contains(node) { return body.blocks.includes(node); },
   };
   body.blocks = tags.map((tag, index) => ({
@@ -121,27 +124,25 @@ test('global contract covers every indexed slug without a legacy allowlist', () 
   for (const post of posts) assert.ok(String(post.slug).trim().length > 0);
 });
 
-test('Date Check insertion anchors after roughly 10% of short, long and headingless bodies', () => {
+test('Date Check insertion stays after the tour card anchor and later editorial copy', () => {
   const hooks = injectorHooks();
-  assert.equal(hooks.dateCheckAnchorIndex(0), -1);
-  assert.equal(hooks.dateCheckAnchorIndex(1), 0);
-  assert.equal(hooks.dateCheckAnchorIndex(2), 0);
-  assert.equal(hooks.dateCheckAnchorIndex(10), 0);
-  assert.equal(hooks.dateCheckAnchorIndex(20), 1);
-  assert.equal(hooks.dateCheckAnchorIndex(100), 9);
-
-  for (const count of [1, 2, 10, 20, 100]) {
-    const body = fakeBody(Array.from({ length: count }, () => 'P'));
-    const point = hooks.findDateCheckInsertionPoint(body);
-    assert.equal(point.parent, body);
-    assert.equal(point.after, body.blocks[hooks.dateCheckAnchorIndex(count)]);
-  }
-  const headingless = fakeBody(['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P']);
-  assert.equal(hooks.findDateCheckInsertionPoint(headingless).after, headingless.blocks[0]);
-  assert.equal(hooks.findDateCheckInsertionPoint(fakeBody([])), null);
-
   const bookingBody = fakeBody(['H2', 'P', 'H2', 'P', 'P', 'H2', 'P']);
-  assert.equal(hooks.findBookingInsertionPoint(bookingBody).after, bookingBody.blocks[3]);
+  const bookingPoint = hooks.findBookingInsertionPoint(bookingBody);
+  assert.equal(bookingPoint.after, bookingBody.blocks[3]);
+  assert.equal(hooks.findDateCheckInsertionPoint(bookingBody, bookingPoint).after, bookingBody.blocks[6]);
+  assert.equal(hooks.findDateCheckInsertionPoint(bookingBody, null), null);
+
+  const shortBody = fakeBody(['H2', 'P']);
+  const shortBookingPoint = hooks.findBookingInsertionPoint(shortBody);
+  assert.equal(hooks.findDateCheckInsertionPoint(shortBody, shortBookingPoint), null);
+
+  const photoBody = fakeBody(['P', 'FIGURE', 'P', 'H2', 'P', 'H2', 'P', 'P', 'H2', 'P', 'P']);
+  const photoBookingPoint = hooks.findBookingInsertionPoint(photoBody);
+  const photoDatePoint = hooks.findDateCheckInsertionPoint(photoBody, photoBookingPoint);
+  assert.equal(photoBookingPoint.after, photoBody.blocks[6]);
+  assert.equal(photoDatePoint.after, photoBody.blocks[9]);
+  assert.notEqual(photoDatePoint.after, photoBody.blocks[1]);
+  assert.ok(photoBody.blocks.indexOf(photoDatePoint.after) > photoBody.blocks.indexOf(photoBookingPoint.after));
 });
 
 test('Date Check escapes a padded Wix wrapper when its anchor is the last real child', () => {
@@ -212,6 +213,7 @@ test('Date Check is one idempotent no-email surface with consent-safe first-part
   assert.match(injectorSource, /intersectionRatio < 0\.5/);
   assert.match(injectorSource, /bw_date_check_blog_card_start/);
   assert.match(injectorSource, /bw_date_check_blog_card_submit/);
+  assert.match(injectorSource, /placement: 'blog_inline_after_tour'/);
   assert.match(injectorSource, /dataLayer\.push/);
   assert.match(injectorSource, /bw-date-check-blog-submit/);
   assert.doesNotMatch(injectorSource, /type=["']email["']/i);
@@ -219,14 +221,18 @@ test('Date Check is one idempotent no-email surface with consent-safe first-part
   assert.equal((injectorSource.match(/data-bw-blog-booking/g) || []).length >= 1, true);
 });
 
-test('Date Check mobile CSS resists Wix typography and Safari date-field overflow', () => {
+test('Date Check mobile CSS and custom date display resist physical Safari overflow', () => {
   assert.match(injectorSource, /bw-date-check-blog-card__title/);
   assert.match(injectorSource, /\.bw-date-check-blog-card\[data-bw-date-check-card\] \.bw-date-check-blog-card__title\{[^}]*padding:0!important[^}]*color:#fff!important/);
   assert.match(injectorSource, /\.bw-date-check-blog-card\[data-bw-date-check-card\] \.bw-date-check-blog-card__copy\{[^}]*font:400 15px\/1\.48 Montserrat[^}]*color:rgba\(255,255,255,\.94\)!important/);
   assert.match(injectorSource, /\.bw-date-check-blog-card__field\{[^}]*min-width:0[^}]*max-width:100%/);
-  assert.match(injectorSource, /input,.bw-date-check-blog-card__field select\{[^}]*min-inline-size:0[^}]*max-inline-size:100%/);
-  assert.match(injectorSource, /input,.bw-date-check-blog-card__field select\{[^}]*height:54px;min-height:54px/);
-  assert.match(injectorSource, /input,.bw-date-check-blog-card__field select\{height:52px;min-height:52px\}/);
+  assert.match(injectorSource, /bw-date-check-blog-card__date-control\{[^}]*overflow:hidden[^}]*contain:inline-size/);
+  assert.match(injectorSource, /bw-date-check-blog-card__date-control input\{[^}]*width:100%!important[^}]*opacity:0!important/);
+  assert.match(injectorSource, /bw-date-check-blog-card__date-display/);
+  assert.match(injectorSource, /new Intl\.DateTimeFormat\('en-GB'/);
+  assert.match(injectorSource, /Select arrival date/);
+  assert.match(injectorSource, /font:600 16px\/1 Montserrat/);
+  assert.match(injectorSource, /bw-date-check-blog-card__date-control,.bw-date-check-blog-card__field select\{height:52px;min-height:52px\}/);
   assert.match(injectorSource, /The result is built around your arrival date and number of nights\./);
   assert.match(injectorSource, /\.bw-date-check-blog-card__status:empty\{display:none\}/);
   assert.doesNotMatch(injectorSource, /not a generic Berlin week/);
