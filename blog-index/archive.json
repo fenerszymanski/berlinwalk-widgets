@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-08-22T02:10:10.599Z",
+  "updatedAt": "2026-08-22T05:13:58.403Z",
   "source": "Wix Blog API",
-  "totalPosts": 300,
+  "totalPosts": 301,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Berlin Museum Discounts: Who Actually Gets the Reduced Ticket",
+      "slug": "berlin-museum-discounts",
+      "path": "/post/berlin-museum-discounts",
+      "url": "https://www.berlinwalk.com/post/berlin-museum-discounts",
+      "excerpt": "Every Berlin museum board prints two prices and nobody explains which one is yours. A local guide to Berlin museum discounts: the 50 percent reduction, who qualifies, why under 18s are free, why there is no senior rate, and what a pass does not cover.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-08-22T05:12:41.919Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_2f20e52df84849f299433453b9014f9f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-bode-museum-museum-island.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_2f20e52df84849f299433453b9014f9f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-bode-museum-museum-island.jpg",
+      "alt": "The Bode-Museum at the northern tip of Museum Island, seen from the Ebertbrücke with the TV Tower behind it",
+      "relatedToolSlug": "transport-ticket-calculator"
+    },
     {
       "title": "Do You Need Restaurant Reservations in Berlin? When to Book and When to Walk In",
       "slug": "restaurant-reservations-in-berlin",
@@ -14,7 +31,7 @@
       "categorySlug": "tourist-tips",
       "topic": "food-nightlife",
       "topicLabel": "Food & Nightlife",
-      "readTime": "5 min read",
+      "readTime": "6 min read",
       "publishedDate": "2026-08-21T13:50:47.742Z",
       "image": "https://static.wixstatic.com/media/5a08a3_1e6e9543b4f34bcc807d9b26d0b0b4c8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kudamm-terrace-cafes.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_1e6e9543b4f34bcc807d9b26d0b0b4c8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kudamm-terrace-cafes.jpg",
