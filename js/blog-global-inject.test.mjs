@@ -225,6 +225,8 @@ test('Date Check mobile CSS resists Wix typography and Safari date-field overflo
   assert.match(injectorSource, /\.bw-date-check-blog-card\[data-bw-date-check-card\] \.bw-date-check-blog-card__copy\{[^}]*font:400 15px\/1\.48 Montserrat[^}]*color:rgba\(255,255,255,\.94\)!important/);
   assert.match(injectorSource, /\.bw-date-check-blog-card__field\{[^}]*min-width:0[^}]*max-width:100%/);
   assert.match(injectorSource, /input,.bw-date-check-blog-card__field select\{[^}]*min-inline-size:0[^}]*max-inline-size:100%/);
+  assert.match(injectorSource, /input,.bw-date-check-blog-card__field select\{[^}]*height:54px;min-height:54px/);
+  assert.match(injectorSource, /input,.bw-date-check-blog-card__field select\{height:52px;min-height:52px\}/);
   assert.match(injectorSource, /The result is built around your arrival date and number of nights\./);
   assert.match(injectorSource, /\.bw-date-check-blog-card__status:empty\{display:none\}/);
   assert.doesNotMatch(injectorSource, /not a generic Berlin week/);
