@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "slug": "berlin-in-the-evening",
+  "key": "berlin-in-the-evening",
+  "config": {
+    "title": "Berlin in the Evening - FAQ",
+    "items": [
+      {
+        "q": "What time do Berlin's museums close in the evening?",
+        "a": "**Most of them close at 18:00, and some close at 17:00.** On Museum Island the Neues Museum, the Pergamon Panorama and the James-Simon-Galerie close at **18:00**, while the **Altes Museum and the Bode-Museum close at 17:00 from Tuesday to Friday** and only run to 18:00 at the weekend. The Humboldt Forum is the latest of the group at **18:30**, and it is closed all day Tuesday. Museum Island as a whole is closed on Mondays."
+      },
+      {
+        "q": "What is actually still open in central Berlin after 20:00?",
+        "a": "**Four reliable things.** The **Reichstag dome** is open until midnight but only with a confirmed slot booked in advance. The **TV Tower** observation deck runs to **23:00**. The **DDR Museum** on Karl-Liebknecht-Straße is open until **21:00** seven days a week, which makes it the only real indoor museum still running late in the centre. **Topography of Terror** is free and open until **20:00**, although its outdoor trench exhibition closes at dusk."
+      },
+      {
+        "q": "Is there a late museum night in Berlin?",
+        "a": "**Yes, Thursday.** The **Neue Nationalgalerie** at the Kulturforum and **Hamburger Bahnhof** on Invalidenstraße both stay open until **20:00** on Thursdays instead of their usual 18:00. The **Museum für Fotografie** next to Zoologischer Garten is the quiet one: **19:00** most days and **20:00** on Thursday. None of the Museum Island houses has a weekly late night."
+      },
+      {
+        "q": "Can you go inside the Berliner Dom in the evening?",
+        "a": "**Only just, and only in summer.** Between **1 June and 31 August** the cathedral stays open until **19:00**, and outside those months it closes at 18:00 on weekdays and 17:00 at the weekend. **Last admission is 60 minutes before closing**, so in August the real cut-off is 18:00, not 19:00. After that the building is a facade, and honestly the floodlit facade from the Lustgarten is the better view anyway."
+      },
+      {
+        "q": "How dark is it in Berlin in the evening?",
+        "a": "**It depends enormously on the month.** Sunset in central Berlin is about **20:20 in late August**, about **18:15 in mid-October** and about **15:55 on 21 December**, so the gap between midsummer and midwinter evenings is more than four hours. Full dark arrives roughly 35 to 40 minutes after sunset. In December you can do the whole floodlit centre and still be at dinner by 18:30."
+      },
+      {
+        "q": "What can you do in Berlin in the evening for free?",
+        "a": "**The open-air centre, which has no gate and no closing time.** The **field of stelae** behind the Brandenburg Gate is quieter after the coach groups leave. The **Brandenburg Gate** and the **Berliner Dom** are floodlit from dusk. The **Friedrichsbrücke** gives you the Dom on one side and the Bode-Museum reflected in the Spree on the other. **Gendarmenmarkt** is lit and almost empty at 22:00, and the **Oberbaumbrücke** is worth the U1 ride east."
+      },
+      {
+        "q": "Is it safe to walk around central Berlin at night?",
+        "a": "**The central tourist route is busy and well lit well past midnight.** Unter den Linden, Museum Island, Hackescher Markt and the Spree bridges all keep foot traffic late. Normal city sense still applies around Alexanderplatz and the big stations late at night, and the U-Bahn runs all night on Friday and Saturday, with night buses covering the other nights."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What time do Berlin's museums close in the evening?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most of them close at 18:00, and some close at 17:00. On Museum Island the Neues Museum, the Pergamon Panorama and the James-Simon-Galerie close at 18:00, while the Altes Museum and the Bode-Museum close at 17:00 from Tuesday to Friday and only run to 18:00 at the weekend. The Humboldt Forum is the latest of the group at 18:30, and it is closed all day Tuesday. Museum Island as a whole is closed on Mondays."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is actually still open in central Berlin after 20:00?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Four reliable things. The Reichstag dome is open until midnight but only with a confirmed slot booked in advance. The TV Tower observation deck runs to 23:00. The DDR Museum on Karl-Liebknecht-Straße is open until 21:00 seven days a week, which makes it the only real indoor museum still running late in the centre. Topography of Terror is free and open until 20:00, although its outdoor trench exhibition closes at dusk."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a late museum night in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, Thursday. The Neue Nationalgalerie at the Kulturforum and Hamburger Bahnhof on Invalidenstraße both stay open until 20:00 on Thursdays instead of their usual 18:00. The Museum für Fotografie next to Zoologischer Garten is the quiet one: 19:00 most days and 20:00 on Thursday. None of the Museum Island houses has a weekly late night."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you go inside the Berliner Dom in the evening?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Only just, and only in summer. Between 1 June and 31 August the cathedral stays open until 19:00, and outside those months it closes at 18:00 on weekdays and 17:00 at the weekend. Last admission is 60 minutes before closing, so in August the real cut-off is 18:00, not 19:00. After that the building is a facade, and honestly the floodlit facade from the Lustgarten is the better view anyway."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How dark is it in Berlin in the evening?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends enormously on the month. Sunset in central Berlin is about 20:20 in late August, about 18:15 in mid-October and about 15:55 on 21 December, so the gap between midsummer and midwinter evenings is more than four hours. Full dark arrives roughly 35 to 40 minutes after sunset. In December you can do the whole floodlit centre and still be at dinner by 18:30."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What can you do in Berlin in the evening for free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The open-air centre, which has no gate and no closing time. The field of stelae behind the Brandenburg Gate is quieter after the coach groups leave. The Brandenburg Gate and the Berliner Dom are floodlit from dusk. The Friedrichsbrücke gives you the Dom on one side and the Bode-Museum reflected in the Spree on the other. Gendarmenmarkt is lit and almost empty at 22:00, and the Oberbaumbrücke is worth the U1 ride east."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it safe to walk around central Berlin at night?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The central tourist route is busy and well lit well past midnight. Unter den Linden, Museum Island, Hackescher Markt and the Spree bridges all keep foot traffic late. Normal city sense still applies around Alexanderplatz and the big stations late at night, and the U-Bahn runs all night on Friday and Saturday, with night buses covering the other nights."
+        }
+      }
+    ]
+  }
+}

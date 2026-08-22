@@ -23,14 +23,31 @@ function readJson(file) {
   return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
 
+// FAQPage JSON-LD is machine-readable text, so the Markdown emphasis used in
+// the human-facing FAQ answers must not survive into the schema. Mirrors
+// generate-faq-inject.mjs so both shard writers emit identical structured data.
+function markdownToPlainText(value) {
+  return String(value || '')
+    .replace(/!\[([^\]]*)\]\([^)]+\)/g, '$1')
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)(?:\s+"[^"]*")?\)/g, '$1')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/__([^_]+)__/g, '$1')
+    .replace(/\*([^*]+)\*/g, '$1')
+    .replace(/_([^_]+)_/g, '$1')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 function faqSchema(config) {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: (config.items || []).map((item) => ({
       '@type': 'Question',
-      name: item.q,
-      acceptedAnswer: { '@type': 'Answer', text: item.a },
+      name: markdownToPlainText(item.q),
+      acceptedAnswer: { '@type': 'Answer', text: markdownToPlainText(item.a) },
     })),
   };
 }
