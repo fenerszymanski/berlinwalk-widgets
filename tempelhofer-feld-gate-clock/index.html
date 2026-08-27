@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tempelhofer Feld Gate Clock</title>
+<meta name="description" content="Tempelhofer Feld has ten public gates spread over 2.2 km, a closing time that changes every month, and only five gates you can still walk out of afterwards. Set the month and the hour and the map shows which gate to use." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Cpath d='M10 40h44' stroke='%23FFE600' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M22 40V22h20v18' stroke='%23C5E1A5' stroke-width='4' fill='none'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-dark:#123D18; --green-mid:#2E7D32;
+    --lime:#7CB342; --light:#C5E1A5; --yellow:#FFE600;
+    --ink:#212121; --muted:#4b584b; --line:#E3E8DC; --panel:#F4F7F0;
+    --amber:#B87400; --shut:#8d8d8d;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .wrap{max-width:760px;margin:0 auto;padding:4px 14px 20px}
+  .kicker{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-mid);margin:0 0 6px}
+  h1{font-size:22px;font-weight:800;line-height:1.16;margin:0 0 8px;color:var(--green-dark)}
+  .lede{font-size:14.5px;color:var(--muted);margin:0 0 16px}
+  .lbl{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--green-mid);margin:0 0 7px;display:block}
+
+  .deck{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 13px 14px;margin:0 0 12px}
+  .months{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 14px}
+  .mo{appearance:none;border:2px solid var(--line);background:#fff;border-radius:9px;padding:5px 9px;
+      font-family:inherit;font-size:12px;font-weight:700;color:var(--green-dark);cursor:pointer;transition:.13s}
+  .mo:hover{border-color:var(--lime)}
+  .mo:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+  .mo[aria-pressed="true"]{border-color:var(--green);background:var(--green);color:#fff}
+
+  .slide{margin:0 0 4px}
+  .slidehead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px}
+  .clockread{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:26px;font-weight:700;color:var(--green-dark);line-height:1}
+  .clockstate{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+  input[type=range]{width:100%;margin:10px 0 2px;-webkit-appearance:none;appearance:none;background:transparent;height:28px;cursor:pointer}
+  input[type=range]:focus-visible{outline:3px solid var(--lime);outline-offset:2px;border-radius:8px}
+  input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:6px;background:linear-gradient(90deg,#2b3f52 0 var(--o),var(--light) var(--o) var(--c),#2b3f52 var(--c) 100%)}
+  input[type=range]::-moz-range-track{height:8px;border-radius:6px;background:linear-gradient(90deg,#2b3f52 0 var(--o),var(--light) var(--o) var(--c),#2b3f52 var(--c) 100%)}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--yellow);
+    border:3px solid var(--green-dark);margin-top:-8px}
+  input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--yellow);border:3px solid var(--green-dark)}
+  .ticks{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10px;color:var(--muted)}
+
+  .stage{border:2px solid var(--green-dark);border-radius:14px;overflow:hidden;background:#EFF1E7;margin:0 0 8px;position:relative}
+  canvas{display:block;width:100%;height:auto}
+  .mapcred{font-size:9.5px;color:#5c655c;padding:4px 8px 5px;background:#fff;border-top:1px solid var(--line);margin:0}
+  .mapcred a{color:var(--green)}
+
+  .goal{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 14px}
+  .gl{appearance:none;border:2px solid var(--line);background:#fff;border-radius:20px;padding:6px 12px;
+      font-family:inherit;font-size:12.5px;font-weight:700;color:var(--green-dark);cursor:pointer;transition:.13s}
+  .gl:hover{border-color:var(--lime)}
+  .gl:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+  .gl[aria-pressed="true"]{border-color:var(--green);background:#F1F6EC}
+
+  .verdict{border:2px solid var(--green);border-radius:14px;background:#fff;padding:13px 14px 14px;margin:0 0 14px}
+  .verdict h2{font-size:16.5px;font-weight:800;color:var(--green-dark);margin:0 0 3px}
+  .vsub{font-size:13px;color:var(--green-mid);font-weight:700;margin:0 0 10px}
+  .facts{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 11px}
+  .fact{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:5px 9px;font-size:11.5px;color:var(--muted)}
+  .fact b{color:var(--green-dark);font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:700}
+  .verdict p{font-size:13.5px;margin:0 0 9px;color:var(--ink)}
+  .callout{border-left:4px solid var(--yellow);background:#FFFDF0;padding:8px 11px;border-radius:0 9px 9px 0;font-size:12.5px;margin:0}
+  .callout b{color:var(--green-dark)}
+
+  .rows{display:flex;flex-direction:column;gap:6px}
+  .row{display:flex;gap:10px;align-items:center;border:2px solid var(--line);background:#fff;border-radius:12px;padding:8px 11px}
+  .row.best{border-color:var(--green);background:#F1F6EC}
+  .dot{flex:0 0 auto;width:12px;height:12px;border-radius:50%}
+  .rmain{flex:1 1 auto;min-width:0}
+  .rname{display:block;font-size:13px;font-weight:800;color:var(--green-dark);overflow-wrap:anywhere}
+  .rmeta{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+  .rdist{flex:0 0 auto;text-align:right}
+  .rbig{display:block;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:15px;font-weight:700;line-height:1.1;color:var(--green-dark)}
+  .rsmall{display:block;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+  .legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11.5px;color:var(--muted);margin:0 0 14px}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+  .empty{font-size:13px;color:var(--muted);padding:14px;border:2px dashed var(--line);border-radius:12px}
+  @media(max-width:420px){ h1{font-size:19.5px} .clockread{font-size:22px} .row{padding:7px 9px;gap:8px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Berlin Tools</p>
+  <h1>Tempelhofer Feld Gate Clock</h1>
+  <p class="lede">The old airfield is 2.2 km from the west fence to the east fence, it has ten public gates, and its closing time moves every month. Set the month, drag the hour, say what you came for, and the map answers the only question that matters at the fence: which gate, and can you still get through it.</p>
+
+  <div class="deck">
+    <span class="lbl" id="molbl">Month you are in Berlin</span>
+    <div class="months" id="months" role="group" aria-labelledby="molbl"></div>
+
+    <div class="slide">
+      <div class="slidehead">
+        <div>
+          <span class="lbl" for="hour">Time you are at the fence</span>
+          <span class="clockread" id="clockread">18:00</span>
+        </div>
+        <span class="clockstate" id="clockstate"></span>
+      </div>
+      <input type="range" id="hour" min="0" max="1435" step="5" value="1080" aria-label="Time of day at the fence" />
+      <div class="ticks"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span></div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <canvas id="map" width="1400" height="900" role="img" aria-label="Map of Tempelhofer Feld showing the two runways, the ten public gates and which of them are open, exit-only or locked at the selected time"></canvas>
+    <p class="mapcred">Field outline, runways and gate positions from <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>, ODbL. Opening times and entrance list from Grün Berlin.</p>
+  </div>
+
+  <div class="legend">
+    <span><i style="background:#2E7D32"></i>Open, walk in</span>
+    <span><i style="background:#B87400"></i>Turnstile, exit only</span>
+    <span><i style="background:#8d8d8d"></i>Locked</span>
+    <span><i style="background:#123D18;border-radius:2px"></i>Station</span>
+  </div>
+
+  <span class="lbl" id="gllbl">What you came for</span>
+  <div class="goal" id="goals" role="group" aria-labelledby="gllbl"></div>
+
+  <div id="verdict"></div>
+  <div class="rows" id="rows"></div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var monthsEl = document.getElementById('months');
+  var goalsEl = document.getElementById('goals');
+  var hourEl = document.getElementById('hour');
+  var readEl = document.getElementById('clockread');
+  var stateEl = document.getElementById('clockstate');
+  var cv = document.getElementById('map');
+  var verdictEl = document.getElementById('verdict');
+  var rowsEl = document.getElementById('rows');
+
+  var COL = { open:'#2E7D32', exit:'#B87400', shut:'#8d8d8d' };
+  var DATA = null, proj = null, mi = 8, goal = 'runway';
+
+  function hhmm(min) {
+    var h = Math.floor(min / 60), m = min % 60;
+    return (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m;
+  }
+  function toMin(s) { var p = s.split(':'); return (+p[0]) * 60 + (+p[1]); }
+
+  /* Berlin month index, with May split the way Gruen Berlin splits it. */
+  function seedMonth() {
+    var now = new Date();
+    var berlin = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Berlin' }));
+    var m = berlin.getMonth(), d = berlin.getDate();
+    if (m < 4) return m;
+    if (m === 4) return d <= 15 ? 4 : 5;
+    return m + 1;
+  }
+  function seedHour() {
+    var berlin = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Berlin' }));
+    return Math.min(1435, Math.round((berlin.getHours() * 60 + berlin.getMinutes()) / 5) * 5);
+  }
+
+  function buildProjection(w, h) {
+    var pad = 46, la = [], lo = [];
+    DATA.boundary.forEach(function (p) { la.push(p[0]); lo.push(p[1]); });
+    DATA.stations.forEach(function (s) { la.push(s.lat); lo.push(s.lon); });
+    var la0 = Math.min.apply(null, la), la1 = Math.max.apply(null, la);
+    var lo0 = Math.min.apply(null, lo), lo1 = Math.max.apply(null, lo);
+    var kx = Math.cos(52.475 * Math.PI / 180);
+    var sx = (w - pad * 2) / ((lo1 - lo0) * kx), sy = (h - pad * 2) / (la1 - la0);
+    var s = Math.min(sx, sy);
+    var ox = pad + ((w - pad * 2) - (lo1 - lo0) * kx * s) / 2;
+    var oy = pad + ((h - pad * 2) - (la1 - la0) * s) / 2;
+    return function (lat, lon) {
+      return [ox + (lon - lo0) * kx * s, oy + (la1 - lat) * s];
+    };
+  }
+
+  function hours() {
+    var r = DATA.hours[mi];
+    return { label: r[0], open: toMin(r[1]), close: toMin(r[2]), openStr: r[1], closeStr: r[2] };
+  }
+  function gateState(g, now, hh) {
+    if (now >= hh.open && now < hh.close) return 'open';
+    return g.turnstile ? 'exit' : 'shut';
+  }
+
+  function path(ctx, line, close) {
+    ctx.beginPath();
+    for (var i = 0; i < line.length; i++) {
+      var p = proj(line[i][0], line[i][1]);
+      if (i === 0) ctx.moveTo(p[0], p[1]); else ctx.lineTo(p[0], p[1]);
+    }
+    if (close) ctx.closePath();
+  }
+
+  function draw() {
+    var css = cv.clientWidth || 700;
+    var ratio = Math.min(2, window.devicePixelRatio || 1);
+    var narrow = css < 520;
+    var W = narrow ? 1000 : 1400, H = Math.round(W * (narrow ? 0.92 : 0.62));
+    cv.width = W; cv.height = H;
+    cv.style.height = Math.round(css * H / W) + 'px';
+    var ctx = cv.getContext('2d');
+    proj = buildProjection(W, H);
+
+    var now = +hourEl.value, hh = hours();
+    var isOpen = now >= hh.open && now < hh.close;
+    var dusk = !isOpen;
+
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = dusk ? '#1d2733' : '#EFF1E7';
+    ctx.fillRect(0, 0, W, H);
+
+    /* the field itself */
+    path(ctx, DATA.boundary, true);
+    ctx.fillStyle = dusk ? '#26332a' : '#DCE8C8';
+    ctx.fill();
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = dusk ? '#4a5a48' : '#1B5E20';
+    ctx.stroke();
+
+    /* paved perimeter loop */
+    ctx.lineWidth = 7; ctx.lineCap = 'round';
+    ctx.strokeStyle = dusk ? '#3b4a52' : '#C4C9BC';
+    DATA.loop.forEach(function (w) { path(ctx, w, false); ctx.stroke(); });
+
+    /* the two runways */
+    ctx.lineWidth = 15;
+    ctx.strokeStyle = dusk ? '#5b6a74' : '#9AA294';
+    DATA.runways.forEach(function (r) { path(ctx, r.line, false); ctx.stroke(); });
+    ctx.lineWidth = 2.5;
+    ctx.setLineDash([22, 20]);
+    ctx.strokeStyle = dusk ? '#8d9aa2' : '#F6F7F2';
+    DATA.runways.forEach(function (r) { path(ctx, r.line, false); ctx.stroke(); });
+    ctx.setLineDash([]);
+
+    /* what you came for, drawn as the real cluster it is */
+    var pts = DATA.targetPoints[goal] || [];
+    ctx.fillStyle = dusk ? 'rgba(255,230,0,.30)' : 'rgba(124,179,66,.42)';
+    pts.forEach(function (p) {
+      var q = proj(p[0], p[1]);
+      ctx.beginPath(); ctx.arc(q[0], q[1], goal === 'runway' ? 9 : 26, 0, 6.284); ctx.fill();
+    });
+
+    /* stations outside the fence */
+    ctx.font = '600 ' + (narrow ? 24 : 19) + 'px Montserrat, sans-serif';
+    DATA.stations.forEach(function (s) {
+      var q = proj(s.lat, s.lon);
+      ctx.fillStyle = dusk ? '#c9d3c6' : '#123D18';
+      ctx.fillRect(q[0] - 7, q[1] - 7, 14, 14);
+      ctx.fillStyle = dusk ? '#9fb09c' : '#3d493d';
+      var right = q[0] < W / 2;
+      ctx.textAlign = right ? 'left' : 'right';
+      var dy = q[1] < H * 0.22 ? -16 : 6;
+      ctx.fillText(s.name, q[0] + (right ? 13 : -13), q[1] + dy);
+    });
+
+    /* the gates */
+    var best = bestGate();
+    DATA.gates.forEach(function (g) {
+      var q = proj(g.lat, g.lon), st = gateState(g, now, hh);
+      if (best && g.id === best.id) {
+        ctx.beginPath(); ctx.arc(q[0], q[1], narrow ? 30 : 25, 0, 6.284);
+        ctx.fillStyle = 'rgba(255,230,0,.30)'; ctx.fill();
+        ctx.lineWidth = 4; ctx.strokeStyle = '#FFE600'; ctx.stroke();
+      }
+      ctx.beginPath(); ctx.arc(q[0], q[1], (g.main ? 13 : 10) * (narrow ? 1.25 : 1), 0, 6.284);
+      ctx.fillStyle = COL[st === 'open' ? 'open' : st === 'exit' ? 'exit' : 'shut'];
+      ctx.fill();
+      ctx.lineWidth = 3.5; ctx.strokeStyle = dusk ? '#1d2733' : '#fff'; ctx.stroke();
+    });
+
+    /* scale bar, because the whole point is how far apart these gates are */
+    var a = proj(52.4700, 13.3900), b = proj(52.4700, 13.4047); /* ~1000 m */
+    var y = H - 26, x0 = 34, len = Math.abs(b[0] - a[0]);
+    ctx.lineWidth = 4; ctx.strokeStyle = dusk ? '#c9d3c6' : '#123D18';
+    ctx.beginPath(); ctx.moveTo(x0, y); ctx.lineTo(x0 + len, y);
+    ctx.moveTo(x0, y - 7); ctx.lineTo(x0, y + 7);
+    ctx.moveTo(x0 + len, y - 7); ctx.lineTo(x0 + len, y + 7); ctx.stroke();
+    ctx.font = '700 ' + (narrow ? 22 : 18) + 'px Montserrat, sans-serif'; ctx.textAlign = 'left';
+    ctx.fillStyle = dusk ? '#c9d3c6' : '#123D18';
+    ctx.fillText('1 km', x0 + len + 10, y + 6);
+
+    ctx.font = '800 ' + (narrow ? 24 : 21) + 'px Montserrat, sans-serif'; ctx.textAlign = 'right';
+    ctx.fillStyle = dusk ? '#FFE600' : '#1B5E20';
+    ctx.fillText(isOpen ? 'Gates open until ' + hh.closeStr : 'Gates locked since ' + hh.closeStr, W - 26, 40);
+  }
+
+  function total(g) { return g.walk + g.to[goal]; }
+
+  function bestGate() {
+    if (!DATA) return null;
+    var now = +hourEl.value, hh = hours();
+    var open = DATA.gates.filter(function (g) { return gateState(g, now, hh) === 'open'; });
+    var pool = open.length ? open : DATA.gates;
+    var sorted = pool.slice().sort(function (a, b) { return total(a) - total(b); });
+    return sorted[0];
+  }
+
+  function render() {
+    var now = +hourEl.value, hh = hours();
+    var isOpen = now >= hh.open && now < hh.close;
+    readEl.textContent = hhmm(now);
+    stateEl.textContent = isOpen ? 'Gates open' : 'Gates locked';
+    stateEl.style.color = isOpen ? '#2E7D32' : '#B87400';
+    hourEl.style.setProperty('--o', (hh.open / 1435 * 100) + '%');
+    hourEl.style.setProperty('--c', (hh.close / 1435 * 100) + '%');
+
+    draw();
+
+    var target = DATA.targets.filter(function (t) { return t.id === goal; })[0];
+    var best = bestGate();
+    var mins = Math.max(1, Math.round(total(best) / 80));
+    var walkMins = Math.max(1, Math.round(best.walk / 80));
+
+    var html = '<div class="verdict">';
+    html += '<h2>' + best.name + '</h2>';
+    var bstate = gateState(best, now, hh);
+    html += '<p class="vsub">' + best.side + ' side, ' + (bstate === 'open' ? 'open right now' :
+      bstate === 'exit' ? 'turnstile only right now, you can walk out but not in' : 'locked at this hour') + '</p>';
+    html += '<div class="facts">';
+    html += '<span class="fact">' + DATA.hours[mi][0] + ' <b>' + hh.openStr + '–' + hh.closeStr + '</b></span>';
+    html += '<span class="fact">' + best.station + ' <b>' + best.walk + ' m</b> (' + walkMins + ' min)</span>';
+    html += '<span class="fact">Lines <b>' + best.lines + '</b></span>';
+    html += '<span class="fact">Gate to ' + (target.id === 'runway' ? 'the concrete' : 'your spot') + ' <b>' + best.to[goal] + ' m</b></span>';
+    html += '<span class="fact">Station to spot <b>' + mins + ' min</b></span>';
+    html += '</div>';
+    html += '<p>' + target.note + '</p>';
+    if (!isOpen) {
+      html += '<p class="callout"><b>The field is shut at ' + hhmm(now) + '.</b> In ' + DATA.hours[mi][0] +
+        ' the gates open at ' + hh.openStr + ' and close at ' + hh.closeStr +
+        '. Five gates keep a full-height turnstile that lets you walk out at any hour, and no gate lets you back in.</p>';
+    } else {
+      var left = hh.close - now;
+      html += '<p class="callout"><b>' + (left >= 60 ? Math.floor(left / 60) + ' h' + (left % 60 ? ' ' + (left % 60) + ' min' : '') : left + ' min') +
+        ' left before the gates close</b> at ' + hh.closeStr + '. Walking back across the field from the far fence takes about half an hour.</p>';
+    }
+    html += '</div>';
+    verdictEl.innerHTML = html;
+
+    var sorted = DATA.gates.slice().sort(function (a, b) { return total(a) - total(b); });
+    rowsEl.innerHTML = sorted.map(function (g) {
+      var st = gateState(g, now, hh);
+      var word = st === 'open' ? 'Open, walk in' : st === 'exit' ? 'Turnstile, exit only' : 'Locked';
+      return '<div class="row' + (best && g.id === best.id ? ' best' : '') + '">' +
+        '<span class="dot" style="background:' + COL[st] + '"></span>' +
+        '<span class="rmain"><span class="rname">' + g.name + '</span>' +
+        '<span class="rmeta">' + word + ' · ' + g.station + ' ' + g.walk + ' m, then ' + g.to[goal] + ' m inside' +
+        (g.stepfree ? ' · step-free' : '') + '</span></span>' +
+        '<span class="rdist"><span class="rbig">' + Math.max(1, Math.round(total(g) / 80)) + ' min</span><span class="rsmall">door to spot</span></span>' +
+        '</div>';
+    }).join('');
+
+    if (window.bwResize) window.bwResize();
+  }
+
+  function buildControls() {
+    monthsEl.innerHTML = DATA.hours.map(function (r, i) {
+      return '<button type="button" class="mo" data-i="' + i + '" aria-pressed="' + (i === mi) + '">' + r[0] + '</button>';
+    }).join('');
+    monthsEl.addEventListener('click', function (e) {
+      var b = e.target.closest('.mo'); if (!b) return;
+      mi = +b.dataset.i;
+      [].forEach.call(monthsEl.querySelectorAll('.mo'), function (x) {
+        x.setAttribute('aria-pressed', String(+x.dataset.i === mi));
+      });
+      render();
+    });
+    goalsEl.innerHTML = DATA.targets.map(function (t) {
+      return '<button type="button" class="gl" data-id="' + t.id + '" aria-pressed="' + (t.id === goal) + '">' + t.name + '</button>';
+    }).join('');
+    goalsEl.addEventListener('click', function (e) {
+      var b = e.target.closest('.gl'); if (!b) return;
+      goal = b.dataset.id;
+      [].forEach.call(goalsEl.querySelectorAll('.gl'), function (x) {
+        x.setAttribute('aria-pressed', String(x.dataset.id === goal));
+      });
+      render();
+    });
+  }
+
+  hourEl.addEventListener('input', render);
+  hourEl.addEventListener('change', render);
+  var rt = null;
+  window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(render, 140); });
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (j) {
+    DATA = j;
+    mi = seedMonth();
+    hourEl.value = seedHour();
+    buildControls();
+    render();
+  }).catch(function () {
+    rowsEl.innerHTML = '<div class="empty">The field data could not load right now. Reload the page and it should come back.</div>';
+    if (window.bwResize) window.bwResize();
+  });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
