@@ -1094,11 +1094,11 @@ class BWHeaderElement extends HTMLElement {
                     Tour <span class="bw-header-caret" aria-hidden="true">⌄</span>
                   </button>
                   <ul id="${this._tourMenuId}" class="bw-header-submenu">
-                    <li><a href="${BW_HEADER_LINKS.privateTour}">Private Tours</a></li>
                     <li><a href="${BW_HEADER_LINKS.route}">Tour Route</a></li>
                     <li><a href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a></li>
                     <li><a href="${BW_HEADER_LINKS.reviews}">Reviews</a></li>
                     <li><a href="${BW_HEADER_LINKS.guide}">The Guide</a></li>
+                    <li><a href="${BW_HEADER_LINKS.privateTour}">Private Tours</a></li>
                   </ul>
                 </li>
                 <li class="bw-header-dropdown">
@@ -1144,11 +1144,11 @@ class BWHeaderElement extends HTMLElement {
                     Berlin Hacks <span class="bw-header-caret" aria-hidden="true">⌄</span>
                   </button>
                   <ul id="${this._hacksMenuId}" class="bw-header-submenu">
+                    <li><a href="${BW_HEADER_LINKS.plan}">All Berlin Tools</a></li>
                     <li><a href="${BW_HEADER_LINKS.dateCheck}">Berlin Date Check</a></li>
                     <li><a href="${BW_HEADER_LINKS.whatsOpen}">What's Open Today</a></li>
                     <li><a href="${BW_HEADER_LINKS.ticketCalculator}">Transport Ticket Calculator</a></li>
                     <li><a href="${BW_HEADER_LINKS.luggageStorage}">Luggage Storage Map</a></li>
-                    <li><a href="${BW_HEADER_LINKS.plan}">All Berlin Tools</a></li>
                   </ul>
                 </li>
               </ul>
@@ -1177,11 +1177,11 @@ class BWHeaderElement extends HTMLElement {
             <nav class="bw-header-mobile-nav" aria-label="Mobile primary">
               <details class="bw-header-mobile-section">
                 <summary class="bw-header-mobile-section-label">Tour</summary>
-                <a href="${BW_HEADER_LINKS.privateTour}">Private Tours</a>
                 <a href="${BW_HEADER_LINKS.route}">Tour Route</a>
                 <a href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a>
                 <a href="${BW_HEADER_LINKS.reviews}">Reviews</a>
                 <a href="${BW_HEADER_LINKS.guide}">The Guide</a>
+                <a href="${BW_HEADER_LINKS.privateTour}">Private Tours</a>
               </details>
 
               <details class="bw-header-mobile-section">
@@ -1214,11 +1214,11 @@ class BWHeaderElement extends HTMLElement {
               </details>
               <details class="bw-header-mobile-section">
                 <summary class="bw-header-mobile-section-label">Berlin Hacks</summary>
+                <a href="${BW_HEADER_LINKS.plan}">All Berlin Tools</a>
                 <a href="${BW_HEADER_LINKS.dateCheck}">Berlin Date Check</a>
                 <a href="${BW_HEADER_LINKS.whatsOpen}">What's Open Today</a>
                 <a href="${BW_HEADER_LINKS.ticketCalculator}">Transport Ticket Calculator</a>
                 <a href="${BW_HEADER_LINKS.luggageStorage}">Luggage Storage Map</a>
-                <a href="${BW_HEADER_LINKS.plan}">All Berlin Tools</a>
               </details>
             </nav>
 
