@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dinner Neighbourhood Picker | BerlinWalk</title>
+    <meta name="description" content="Choose a Berlin dinner neighbourhood for one to three evenings without a restaurant ranking." />
+    <link rel="stylesheet" href="../css/brand.css" />
+    <style>
+      :root {
+        --dnp-ink: #26342d;
+        --dnp-cream: #fffaf0;
+        --dnp-paper: #fffdf8;
+        --dnp-green: #1b5e20;
+        --dnp-sage: #dce8c8;
+        --dnp-yellow: #ffe600;
+        --dnp-berry: #8c3936;
+        --dnp-line: #d6d0bf;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: transparent; color: var(--dnp-ink); }
+      .dnp {
+        width: min(1040px, 100%);
+        margin: 0 auto;
+        padding: 22px;
+        background: var(--dnp-cream);
+        border: 1px solid #e3dac4;
+      }
+      .dnp__intro { display: grid; grid-template-columns: minmax(0, 1fr) 230px; gap: 24px; align-items: end; padding: 11px 7px 24px; }
+      .dnp__eyebrow { margin: 0 0 8px; color: var(--dnp-berry); font-size: 11px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+      .dnp h1 { max-width: 690px; margin: 0; color: var(--dnp-green); font-size: clamp(28px, 4.7vw, 50px); line-height: 1.04; letter-spacing: -.04em; }
+      .dnp__intro p { margin: 10px 0 0; color: #526057; font-size: 14px; line-height: 1.62; }
+      .dnp__rule { padding: 13px; border-left: 4px solid var(--dnp-yellow); background: #f0f4e7; color: #304135; font-size: 12px; line-height: 1.55; }
+      .dnp__rule strong { display: block; margin-bottom: 4px; color: var(--dnp-green); }
+      .dnp__controlbar { display: grid; grid-template-columns: 1.35fr .72fr 1fr 1fr; gap: 10px; padding: 14px; background: var(--dnp-green); }
+      .dnp__field { display: grid; gap: 6px; }
+      .dnp__field span { color: #dce8c8; font-size: 10px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+      .dnp select { width: 100%; min-height: 43px; padding: 9px 32px 9px 10px; border: 1px solid rgba(255,255,255,.33); color: #fff; background: #17491b; border-radius: 0; font: 700 12px Montserrat, Arial, sans-serif; }
+      .dnp select option { color: var(--dnp-ink); background: #fff; }
+      .dnp__nights { display: grid; gap: 15px; margin-top: 18px; }
+      .dnp__night { position: relative; display: grid; grid-template-columns: 128px minmax(0, 1fr); min-height: 181px; overflow: hidden; border: 1px solid var(--dnp-line); background: var(--dnp-paper); }
+      .dnp__night::before { content: ""; position: absolute; top: 0; bottom: 0; left: 127px; border-left: 1px dashed #c5baa2; }
+      .dnp__stub { display: grid; align-content: space-between; gap: 16px; padding: 18px 16px; color: #fff; background: var(--dnp-berry); }
+      .dnp__stub span { color: #ffe6b8; font-size: 10px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+      .dnp__stub strong { display: block; font-size: 24px; line-height: 1.05; }
+      .dnp__stub small { color: #f5d6cc; font-size: 11px; line-height: 1.45; }
+      .dnp__route { display: grid; grid-template-columns: .9fr 1.35fr .9fr; gap: 0; }
+      .dnp__stop { position: relative; padding: 19px 17px 16px 23px; }
+      .dnp__stop + .dnp__stop { border-left: 1px solid #eee7d7; }
+      .dnp__stop + .dnp__stop::before { content: "→"; position: absolute; z-index: 1; top: 18px; left: -10px; color: #7e9670; font-size: 15px; font-weight: 900; }
+      .dnp__stop label { display: block; margin-bottom: 8px; color: #6d776f; font-size: 10px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+      .dnp__stop h2 { margin: 0; color: var(--dnp-green); font-size: 17px; line-height: 1.18; }
+      .dnp__stop p { margin: 7px 0 0; color: #4e5a52; font-size: 12px; line-height: 1.5; }
+      .dnp__stop--food h2 { color: var(--dnp-berry); }
+      .dnp__mood { display: inline-block; margin-top: 11px; padding: 4px 7px; color: #214827; background: var(--dnp-sage); font-size: 10px; font-weight: 900; }
+      .dnp__footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 19px; padding: 16px 3px 2px; }
+      .dnp__footer p { flex: 1 1 420px; margin: 0; color: #59655c; font-size: 12px; line-height: 1.55; }
+      .dnp__footer a:not(.dnp__cta) { color: var(--dnp-green); font-weight: 800; }
+      .dnp__cta { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 11px 15px; color: #123d18 !important; background: var(--dnp-yellow); font-size: 12px; font-weight: 900; text-decoration: none; }
+      .dnp__cta:hover, .dnp__cta:focus { color: #123d18 !important; background: #f4da00; outline: 2px solid #123d18; outline-offset: 2px; }
+      @media (max-width: 780px) {
+        .dnp { padding: 15px; }
+        .dnp__intro, .dnp__controlbar { grid-template-columns: 1fr 1fr; }
+        .dnp__rule { grid-column: span 2; }
+        .dnp__route { grid-template-columns: 1fr; }
+        .dnp__stop + .dnp__stop { border-top: 1px solid #eee7d7; border-left: 0; }
+        .dnp__stop + .dnp__stop::before { top: -11px; left: 18px; transform: rotate(90deg); }
+        .dnp__night { grid-template-columns: 104px minmax(0, 1fr); }
+        .dnp__night::before { left: 103px; }
+        .dnp__stub { padding: 15px 12px; }
+      }
+      @media (max-width: 480px) {
+        .dnp__intro, .dnp__controlbar { grid-template-columns: minmax(0, 1fr); }
+        .dnp__rule { grid-column: auto; }
+        .dnp__night { grid-template-columns: 1fr; }
+        .dnp__night::before { display: none; }
+        .dnp__stub { min-height: 102px; }
+      }
+      @media (max-width: 260px) {
+        .dnp h1 { font-size: 24px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="dnp">
+      <header class="dnp__intro">
+        <div>
+          <p class="dnp__eyebrow">Berlin dinner neighbourhood picker</p>
+          <h1>Give each evening one neighbourhood, not three reservations across the city.</h1>
+          <p>My rule after a long Berlin day: arrive by one station, eat within that pocket, then finish with something you can reach on foot. It is calmer and usually more memorable.</p>
+        </div>
+        <aside class="dnp__rule"><strong>Not a restaurant ranking.</strong>These are street, market and square clusters. Check the place you choose for current opening hours, allergies and reservations.</aside>
+      </header>
+
+      <section class="dnp__controlbar" aria-label="Choose your dinner evenings">
+        <label class="dnp__field"><span>Hotel side</span>
+          <select id="dnp-hotel">
+            <option value="centre">Mitte / central</option>
+            <option value="west">City West</option>
+            <option value="east">Friedrichshain / east</option>
+            <option value="south">Kreuzberg / Neukölln</option>
+          </select>
+        </label>
+        <label class="dnp__field"><span>Nights</span>
+          <select id="dnp-nights">
+            <option value="1">1 night</option>
+            <option value="2">2 nights</option>
+            <option value="3">3 nights</option>
+          </select>
+        </label>
+        <label class="dnp__field"><span>Dinner mood</span>
+          <select id="dnp-mood">
+            <option value="market">Market / casual</option>
+            <option value="international">International street food</option>
+            <option value="classic">A proper seated dinner</option>
+            <option value="quiet">Quiet and local</option>
+          </select>
+        </label>
+        <label class="dnp__field"><span>Energy</span>
+          <select id="dnp-energy">
+            <option value="low">Low: keep it close</option>
+            <option value="steady">Steady: dinner plus a walk</option>
+            <option value="high">High: I want a late neighbourhood</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="dnp__nights" id="dnp-output" aria-live="polite"></section>
+      <footer class="dnp__footer">
+        <p>Use this to make evenings legible, then build the daytime structure in the <a href="https://www.berlinwalk.com/berlin-trip-planner" target="_top">Berlin Trip Planner</a>. If you want my historic-centre walk during the day, <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_top">check live availability first</a> before treating it as fixed.</p>
+        <a class="dnp__cta" href="https://www.berlinwalk.com/berlin-trip-planner" target="_top">Plan my Berlin days</a>
+      </footer>
+    </main>
+    <script src="../js/brand.js"></script>
+    <script>
+      (function () {
+        var hotel = document.getElementById('dnp-hotel');
+        var nights = document.getElementById('dnp-nights');
+        var mood = document.getElementById('dnp-mood');
+        var energy = document.getElementById('dnp-energy');
+        var output = document.getElementById('dnp-output');
+        var routes = {
+          centre: [
+            { anchor: 'U Rosenthaler Platz', cluster: 'Torstraße, Linienstraße and Hackescher Markt', landmark: 'Monbijou bridge and the Spree', market: 'Keep it around Hackescher Markt rather than travelling again after food.' },
+            { anchor: 'U Kottbusser Tor', cluster: 'Oranienstraße and the Markthalle Neun side of Kreuzberg', landmark: 'Admiralbrücke by the canal', market: 'For a market-style evening, make the Kottbusser Tor to Markthalle Neun area your one destination.' },
+            { anchor: 'S+U Savignyplatz', cluster: 'Kantstraße and Savignyplatz', landmark: 'the Savignyplatz gardens', market: 'Use Kantstraße as a compact food street, then stop around the square rather than taking another line.' }
+          ],
+          west: [
+            { anchor: 'S+U Savignyplatz', cluster: 'Kantstraße and Savignyplatz', landmark: 'the Savignyplatz gardens', market: 'Start on the City West side. Kantstraße gives you a dense choice without a long first transfer.' },
+            { anchor: 'U Nollendorfplatz', cluster: 'Winterfeldtplatz and Akazienstraße', landmark: 'St. Matthias Church at Winterfeldtplatz', market: 'Choose the compact streets south of Nollendorfplatz, then keep the rest of the evening within walking distance.' },
+            { anchor: 'U Rosenthaler Platz', cluster: 'Torstraße, Linienstraße and Hackescher Markt', landmark: 'Monbijou bridge and the Spree', market: 'Only make the Mitte move if you have a second night. Do the whole pocket, not one address and a taxi back.' }
+          ],
+          east: [
+            { anchor: 'S+U Warschauer Straße', cluster: 'Boxhagener Platz and the Simon-Dach-Straße side streets', landmark: 'Oberbaum Bridge', market: 'Start in Friedrichshain so the first night does not begin with a cross-city ride.' },
+            { anchor: 'U Kottbusser Tor', cluster: 'Oranienstraße and the Markthalle Neun side of Kreuzberg', landmark: 'Admiralbrücke by the canal', market: 'A Kottbusser Tor evening works best when the dining area and canal walk are treated as one small radius.' },
+            { anchor: 'U Rosenthaler Platz', cluster: 'Torstraße, Linienstraße and Hackescher Markt', landmark: 'Monbijou bridge and the Spree', market: 'Mitte is the clean third-night contrast: begin at Rosenthaler Platz and walk downhill toward the river.' }
+          ],
+          south: [
+            { anchor: 'U Hermannplatz', cluster: 'Maybachufer, Weserstraße and the Neukölln canal side', landmark: 'Maybachufer', market: 'Start in the south. A canal-side route is easier than crossing Berlin after a long day.' },
+            { anchor: 'U Kottbusser Tor', cluster: 'Oranienstraße and the Markthalle Neun side of Kreuzberg', landmark: 'Admiralbrücke by the canal', market: 'Use the northward move for one evening only and stop at the canal after dinner.' },
+            { anchor: 'U Nollendorfplatz', cluster: 'Winterfeldtplatz and Akazienstraße', landmark: 'St. Matthias Church at Winterfeldtplatz', market: 'For the contrast night, switch to Schöneberg and make the square and food streets one plan.' }
+          ]
+        };
+        var moodCopy = {
+          market: 'For a market / casual mood: ',
+          international: 'For an international-food mood: stay on the same few streets and decide after you arrive, not from a citywide list. ',
+          classic: 'For a seated dinner: choose one table in this cluster and leave room for a slow walk after it. ',
+          quiet: 'For a quieter evening: use the side streets off the main cluster and keep the landmark close. '
+        };
+        function closeLine(place) {
+          if (energy.value === 'low') return 'After dinner, see ' + place.landmark + ' only if it is on your direct route back. Going home early is a good plan.';
+          if (energy.value === 'high') return 'Use ' + place.landmark + ' as the last stop, then decide there whether you still want one more drink in the same neighbourhood.';
+          return 'Walk to ' + place.landmark + ' after dinner, then take the direct route back from the nearest station.';
+        }
+        function draw() {
+          var list = routes[hotel.value];
+          var count = Number(nights.value);
+          output.innerHTML = '';
+          for (var i = 0; i < count; i += 1) {
+            var place = list[i];
+            var card = document.createElement('article');
+            card.className = 'dnp__night';
+            card.innerHTML = '<aside class="dnp__stub"><span>Evening ' + (i + 1) + '</span><strong>One area<br />only.</strong><small></small></aside><div class="dnp__route"><section class="dnp__stop"><label>Transit anchor</label><h2></h2><p>Arrive here first. It gives the evening a clear starting point.</p></section><section class="dnp__stop dnp__stop--food"><label>Dinner cluster</label><h2></h2><p></p><span class="dnp__mood"></span></section><section class="dnp__stop"><label>After dinner</label><h2></h2><p></p></section></div>';
+            card.querySelector('.dnp__stub small').textContent = energy.value === 'low' ? 'Short radius, early finish.' : energy.value === 'high' ? 'Leave the final decision open.' : 'Dinner plus one local walk.';
+            var stops = card.querySelectorAll('.dnp__stop');
+            stops[0].querySelector('h2').textContent = place.anchor;
+            stops[1].querySelector('h2').textContent = place.cluster;
+            stops[1].querySelector('p').textContent = moodCopy[mood.value] + place.market;
+            stops[1].querySelector('.dnp__mood').textContent = mood.options[mood.selectedIndex].text;
+            stops[2].querySelector('h2').textContent = place.landmark;
+            stops[2].querySelector('p').textContent = closeLine(place);
+            output.appendChild(card);
+          }
+        }
+        [hotel, nights, mood, energy].forEach(function (field) { field.addEventListener('change', draw); });
+        draw();
+      })();
+    </script>
+  </body>
+</html>

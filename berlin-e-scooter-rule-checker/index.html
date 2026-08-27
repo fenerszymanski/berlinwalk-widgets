@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Berlin E-Scooter Rule Checker</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../css/brand.css">
+<script defer src="../js/brand.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { padding: 14px 12px 4px; }
+  .bw-esc {
+    max-width: 580px;
+    margin: 0 auto;
+    background: var(--bw-white);
+    border: 1px solid var(--bw-border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .bw-esc-head {
+    background: linear-gradient(135deg, var(--bw-green) 0%, var(--bw-green-dark) 100%);
+    color: var(--bw-white);
+    padding: 18px 18px 16px;
+  }
+  .bw-esc-kicker {
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--bw-yellow);
+    margin: 0 0 6px;
+  }
+  .bw-esc-title {
+    font-size: 19px;
+    font-weight: 800;
+    margin: 0 0 6px;
+    line-height: 1.25;
+  }
+  .bw-esc-sub {
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0;
+    color: rgba(255,255,255,0.9);
+  }
+  .bw-esc-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 14px;
+    padding: 12px 18px 0;
+    margin: 0;
+  }
+  .bw-esc-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--bw-muted);
+  }
+  .bw-esc-dot {
+    width: 11px; height: 11px; border-radius: 50%;
+    display: inline-block; flex: 0 0 11px;
+  }
+  .bw-esc-dot.bad  { background: var(--bw-high); }
+  .bw-esc-dot.meh  { background: var(--bw-moderate); }
+  .bw-esc-dot.good { background: var(--bw-lime); }
+  .bw-esc-body { padding: 14px 18px 6px; }
+  .bw-esc-prompt {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--bw-muted);
+    margin: 0 0 10px;
+  }
+  .bw-esc-item {
+    border: 1.5px solid var(--bw-border);
+    border-radius: 12px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    background: var(--bw-white);
+  }
+  .bw-esc-q {
+    width: 100%;
+    text-align: left;
+    background: var(--bw-white);
+    border: none;
+    padding: 13px 14px;
+    font-family: Montserrat, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--bw-text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-height: 46px;
+  }
+  .bw-esc-q:hover { background: var(--bw-lime-soft); }
+  .bw-esc-q-icon { font-size: 18px; flex: 0 0 22px; line-height: 1; }
+  .bw-esc-q-text { flex: 1; line-height: 1.4; }
+  .bw-esc-chev {
+    flex: 0 0 auto;
+    color: var(--bw-muted);
+    font-size: 13px;
+    transition: transform 0.2s ease;
+  }
+  .bw-esc-item.open .bw-esc-chev { transform: rotate(180deg); }
+  .bw-esc-answer { display: none; padding: 0 14px 14px; }
+  .bw-esc-item.open .bw-esc-answer { display: block; }
+  .bw-esc-verdict {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  .bw-esc-verdict.bad  { background: #FDECEC; color: var(--bw-high); }
+  .bw-esc-verdict.meh  { background: #FFF8E1; color: #8A6D00; }
+  .bw-esc-verdict.good { background: #EEF6EA; color: var(--bw-green); }
+  .bw-esc-rule {
+    font-size: 13.5px;
+    line-height: 1.55;
+    margin: 0 0 10px;
+    color: var(--bw-text);
+  }
+  .bw-esc-meta {
+    display: grid;
+    grid-template-columns: 74px 1fr;
+    gap: 6px 10px;
+    font-size: 12.5px;
+    line-height: 1.5;
+    padding: 10px 12px;
+    background: var(--bw-lime-soft);
+    border-radius: 9px;
+  }
+  .bw-esc-meta dt {
+    font-weight: 800;
+    color: var(--bw-green);
+    letter-spacing: 0.3px;
+  }
+  .bw-esc-meta dd { margin: 0; color: var(--bw-text); }
+  .bw-esc-ref {
+    margin: 6px 18px 4px;
+    padding: 14px 16px;
+    background: var(--bw-lime-soft);
+    border: 1px solid var(--bw-border);
+    border-radius: 12px;
+  }
+  .bw-esc-ref h3 {
+    font-size: 12.5px;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--bw-green);
+    margin: 0 0 9px;
+  }
+  .bw-esc-ref ul {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--bw-text);
+  }
+  .bw-esc-ref li { margin-bottom: 5px; }
+  .bw-esc-ref strong { color: var(--bw-green-dark); }
+  .bw-esc-cta {
+    display: block;
+    text-align: center;
+    background: var(--bw-green);
+    color: var(--bw-white) !important;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 13px;
+    font-weight: 800;
+    font-size: 13.5px;
+    margin: 14px 18px 8px;
+  }
+  .bw-esc-cta:hover { background: var(--bw-green-dark); }
+  .bw-esc-foot {
+    font-size: 11px;
+    line-height: 1.5;
+    color: var(--bw-muted);
+    margin: 0 18px 8px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="bw-esc" id="app">
+  <div class="bw-esc-head">
+    <p class="bw-esc-kicker">BERLINWALK.COM &middot; E-SCOOTER RULE CHECKER</p>
+    <h2 class="bw-esc-title">Will this get you fined in Berlin?</h2>
+    <p class="bw-esc-sub">Tap a move you were about to make on a rental e-scooter. You get the real rule, what it can cost, and what I'd do instead.</p>
+  </div>
+  <p class="bw-esc-legend">
+    <span><i class="bw-esc-dot bad"></i>Illegal / fine</span>
+    <span><i class="bw-esc-dot meh"></i>Risky</span>
+    <span><i class="bw-esc-dot good"></i>Fine-free</span>
+  </p>
+  <div class="bw-esc-body" id="list"></div>
+  <div class="bw-esc-ref">
+    <h3>The 5 rules that actually matter</h3>
+    <ul>
+      <li><strong>One rider per scooter.</strong> No passengers, ever.</li>
+      <li><strong>No pavements, no pedestrian zones.</strong> Use the bike lane, or the road if there's none.</li>
+      <li><strong>Max 20 km/h</strong>, and you must be at least 14 to ride (apps usually want 18+ to rent).</li>
+      <li><strong>Park at the kerb edge or in a marked bay.</strong> Never block the pavement.</li>
+      <li><strong>Alcohol counts as drink-driving.</strong> It's a motor vehicle in the eyes of the law.</li>
+    </ul>
+  </div>
+  <a class="bw-esc-cta" id="ctaLink" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=widget&utm_medium=embed&utm_campaign=berlin-e-scooter-rule-checker" target="_blank" rel="noopener">See the centre on foot with me instead &rarr;</a>
+  <p class="bw-esc-foot">Practical guidance from a Berlin guide, not legal advice. Fines follow Germany's StVO and can change; the tighter 2027 rules raise several of them.</p>
+</div>
+
+<script>
+(function () {
+  var ITEMS = [
+    {
+      icon: "\u{1F6F4}",
+      q: "Ride down the pavement past the TV Tower because the road looks busy",
+      verdict: "bad", label: "Illegal",
+      rule: "Sidewalks and pedestrian zones are off-limits for e-scooters, full stop. You belong in the bike lane, or on the road where there isn't one. Alexanderplatz gets police and wardens, and this is the classic tourist ticket.",
+      cost: "15–25 €", move: "Drop into the bike lane on Karl-Liebknecht-Straße, or just push it on foot through the busy square."
+    },
+    {
+      icon: "\u{1F46B}",
+      q: "Take a friend on the back through Hackescher Markt",
+      verdict: "bad", label: "Illegal",
+      rule: "One person per scooter. Two-up is one of the most enforced rules, because it's obvious and it causes falls. The scooter's insurance also stops covering you the moment there are two of you on it.",
+      cost: "~5 € (rising)", move: "Unlock a second scooter. In the centre there's almost always one within sight."
+    },
+    {
+      icon: "\u{1F333}",
+      q: "Cut through Tiergarten's park paths to save time",
+      verdict: "bad", label: "Illegal / blocked",
+      rule: "Many Berlin parks, including Tiergarten and Park am Gleisdreieck, are posted no-scooter zones, and the apps geofence a lot of green space so the scooter slows to a crawl or refuses to end the ride. You'll see red 'E-Scooter verboten' signs.",
+      cost: "Fine + app slow-zone", move: "Skirt the park on the road. Straße des 17. Juni has a proper cycle route straight across."
+    },
+    {
+      icon: "\u{1F17F}️",
+      q: "Leave it in the middle of the pavement outside your hotel",
+      verdict: "meh", label: "Risky / fine",
+      rule: "Park parallel at the very edge of the pavement and leave about 2.30 m clear for people, prams and wheelchairs. In central districts you increasingly have to end the ride inside a marked bay, or the app keeps charging you.",
+      cost: "15–30 €", move: "Before you tap 'end ride', check the map for a blue-outlined parking zone or the Jelbi 'J' symbol and walk it there."
+    },
+    {
+      icon: "\u{1F37A}",
+      q: "Ride back to the hotel after two beers at the beer garden",
+      verdict: "bad", label: "Illegal (drink-driving)",
+      rule: "An e-scooter is legally a motor vehicle. The 0.5‰ limit applies exactly like a car, and from 1.1‰ it's a criminal offence. Under 21 or on a probationary licence it's a strict 0.0‰. This is the mistake that actually ruins a trip.",
+      cost: "From ~500 € + your licence", move: "Walk it or take the U-Bahn. Losing your driving licence over a 3 € scooter ride is a bad trade."
+    },
+    {
+      icon: "✅",
+      q: "Ride in the bike lane on Karl-Marx-Allee at a steady 18 km/h",
+      verdict: "good", label: "Fine-free",
+      rule: "This is exactly where a scooter belongs: a bike lane, one rider, under the 20 km/h cap. No helmet is legally required, though I'd wear one. Ride predictably and signal turns with your arm like a cyclist.",
+      cost: "0 €", move: "Nothing to fix. This is the safe default that keeps you legal and out of everyone's way."
+    }
+  ];
+
+  var list = document.getElementById("list");
+  var html = '<p class="bw-esc-prompt">What were you about to do?</p>';
+  ITEMS.forEach(function (it, i) {
+    html += '<div class="bw-esc-item" data-i="' + i + '">';
+    html += '<button class="bw-esc-q" type="button" aria-expanded="false">';
+    html += '<span class="bw-esc-q-icon" aria-hidden="true">' + it.icon + '</span>';
+    html += '<span class="bw-esc-q-text">' + it.q + '</span>';
+    html += '<span class="bw-esc-chev" aria-hidden="true">▼</span>';
+    html += '</button>';
+    html += '<div class="bw-esc-answer">';
+    html += '<span class="bw-esc-verdict ' + it.verdict + '">' + it.label + '</span>';
+    html += '<p class="bw-esc-rule">' + it.rule + '</p>';
+    html += '<dl class="bw-esc-meta">';
+    html += '<dt>Can cost</dt><dd>' + it.cost + '</dd>';
+    html += '<dt>Do instead</dt><dd>' + it.move + '</dd>';
+    html += '</dl>';
+    html += '</div></div>';
+  });
+  list.innerHTML = html;
+
+  Array.prototype.forEach.call(list.querySelectorAll(".bw-esc-q"), function (btn) {
+    btn.addEventListener("click", function () {
+      var item = btn.parentNode;
+      var isOpen = item.classList.contains("open");
+      Array.prototype.forEach.call(list.querySelectorAll(".bw-esc-item"), function (el) {
+        el.classList.remove("open");
+        el.querySelector(".bw-esc-q").setAttribute("aria-expanded", "false");
+      });
+      if (!isOpen) {
+        item.classList.add("open");
+        btn.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

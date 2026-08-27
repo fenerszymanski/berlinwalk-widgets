@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unter den Linden Walk Planner | BerlinWalk</title>
+  <meta name="description" content="Plan an Unter den Linden walk in Berlin by time, direction and travel mood, from Brandenburg Gate to Museum Island.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-linden-planner">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-linden-planner {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-light: #C5E1A5;
+      --bw-cream: #FAFAF5;
+      --bw-white: #FFFFFF;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-border: #D9E7C8;
+      --bw-red: #E63946;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 24px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-linden-planner *,
+    #bw-linden-planner *::before,
+    #bw-linden-planner *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-linden-planner h2,
+    #bw-linden-planner h3,
+    #bw-linden-planner p {
+      margin-top: 0;
+    }
+
+    #bw-linden-planner .bw-shell {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-linden-planner .bw-head {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.18), rgba(124, 179, 66, 0.18)),
+        var(--bw-green);
+      color: var(--bw-white);
+      padding: 22px;
+    }
+
+    #bw-linden-planner .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.8px;
+      line-height: 1.2;
+      margin: 0 0 8px;
+      text-transform: uppercase;
+    }
+
+    #bw-linden-planner .bw-title {
+      color: var(--bw-white);
+      font-size: 29px;
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 1.08;
+      margin: 0;
+    }
+
+    #bw-linden-planner .bw-sub {
+      color: #E7F4D5;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 10px 0 0;
+      max-width: 860px;
+    }
+
+    #bw-linden-planner .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(270px, 0.78fr) minmax(0, 1.22fr);
+      padding: 18px 20px 20px;
+    }
+
+    #bw-linden-planner .bw-panel,
+    #bw-linden-planner .bw-result,
+    #bw-linden-planner .bw-strip {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+    }
+
+    #bw-linden-planner .bw-panel {
+      padding: 14px;
+    }
+
+    #bw-linden-planner .bw-control {
+      margin-bottom: 15px;
+    }
+
+    #bw-linden-planner .bw-label {
+      color: var(--bw-green);
+      display: block;
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: 1.1px;
+      line-height: 1.25;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    #bw-linden-planner .bw-segments {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-linden-planner .bw-segments.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-linden-planner button {
+      background: var(--bw-white);
+      border: 1px solid rgba(124, 179, 66, 0.45);
+      border-radius: 8px;
+      color: var(--bw-green);
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.22;
+      min-height: 42px;
+      padding: 9px 8px;
+      text-align: center;
+      transition: background 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
+      width: 100%;
+    }
+
+    #bw-linden-planner button:hover {
+      border-color: var(--bw-green);
+      transform: translateY(-1px);
+    }
+
+    #bw-linden-planner button[aria-pressed="true"] {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+      color: var(--bw-white);
+    }
+
+    #bw-linden-planner button:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.82);
+      outline-offset: 2px;
+    }
+
+    #bw-linden-planner .bw-result {
+      overflow: hidden;
+    }
+
+    #bw-linden-planner .bw-result-head {
+      background: linear-gradient(135deg, #FFFFFF, #F2F8E9);
+      border-bottom: 1px solid var(--bw-border);
+      display: grid;
+      gap: 8px;
+      padding: 15px 16px 13px;
+    }
+
+    #bw-linden-planner .bw-result-head h3 {
+      color: var(--bw-green);
+      font-size: 21px;
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    #bw-linden-planner .bw-result-head p {
+      color: var(--bw-muted);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.48;
+      margin: 0;
+    }
+
+    #bw-linden-planner .bw-route {
+      display: grid;
+      gap: 10px;
+      padding: 14px 16px 16px;
+    }
+
+    #bw-linden-planner .bw-stop {
+      align-items: start;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 30px minmax(0, 1fr);
+      min-width: 0;
+    }
+
+    #bw-linden-planner .bw-dot {
+      align-items: center;
+      background: var(--bw-yellow);
+      border: 2px solid var(--bw-green);
+      border-radius: 50%;
+      color: var(--bw-green);
+      display: flex;
+      font-size: 12px;
+      font-weight: 950;
+      height: 30px;
+      justify-content: center;
+      line-height: 1;
+      width: 30px;
+    }
+
+    #bw-linden-planner .bw-stop strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 14px;
+      font-weight: 950;
+      line-height: 1.25;
+      margin-bottom: 2px;
+    }
+
+    #bw-linden-planner .bw-stop span {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    #bw-linden-planner .bw-strip {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      padding: 13px 14px;
+    }
+
+    #bw-linden-planner .bw-mini strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 12px;
+      font-weight: 950;
+      line-height: 1.25;
+      margin-bottom: 3px;
+    }
+
+    #bw-linden-planner .bw-mini span {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 11.5px;
+      font-weight: 750;
+      line-height: 1.4;
+    }
+
+    #bw-linden-planner .bw-note {
+      border-top: 1px solid var(--bw-border);
+      color: var(--bw-muted);
+      font-size: 11.5px;
+      font-weight: 750;
+      line-height: 1.45;
+      margin: 0;
+      padding: 12px 16px 14px;
+    }
+
+    @media (max-width: 720px) {
+      #bw-linden-planner {
+        margin: 18px 0;
+      }
+
+      #bw-linden-planner .bw-head {
+        padding: 18px;
+      }
+
+      #bw-linden-planner .bw-title {
+        font-size: 24px;
+      }
+
+      #bw-linden-planner .bw-body {
+        grid-template-columns: 1fr;
+        padding: 14px;
+      }
+
+      #bw-linden-planner .bw-segments,
+      #bw-linden-planner .bw-segments.two,
+      #bw-linden-planner .bw-strip {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <section class="bw-shell" aria-labelledby="bw-linden-title">
+    <header class="bw-head">
+      <p class="bw-kicker">BerlinWalk route helper</p>
+      <h2 class="bw-title" id="bw-linden-title">Unter den Linden Walk Planner</h2>
+      <p class="bw-sub">Choose your time, direction and mood. The planner turns Berlin's grand boulevard into a realistic walk instead of a rushed line between photo stops.</p>
+    </header>
+
+    <div class="bw-body">
+      <aside class="bw-panel" aria-label="Walk choices">
+        <div class="bw-control">
+          <span class="bw-label">How much time?</span>
+          <div class="bw-segments" data-group="time">
+            <button type="button" data-value="short" aria-pressed="false">35 min</button>
+            <button type="button" data-value="steady" aria-pressed="true">75 min</button>
+            <button type="button" data-value="deep" aria-pressed="false">2 hours</button>
+          </div>
+        </div>
+
+        <div class="bw-control">
+          <span class="bw-label">Direction</span>
+          <div class="bw-segments two" data-group="direction">
+            <button type="button" data-value="westEast" aria-pressed="true">Gate to island</button>
+            <button type="button" data-value="eastWest" aria-pressed="false">Island to gate</button>
+          </div>
+        </div>
+
+        <div class="bw-control">
+          <span class="bw-label">Travel mood</span>
+          <div class="bw-segments" data-group="mood">
+            <button type="button" data-value="classic" aria-pressed="true">First visit</button>
+            <button type="button" data-value="history" aria-pressed="false">History</button>
+            <button type="button" data-value="rain" aria-pressed="false">Rain rescue</button>
+          </div>
+        </div>
+      </aside>
+
+      <main class="bw-result" aria-live="polite">
+        <div class="bw-result-head">
+          <h3 id="bw-plan-title">Classic first-visit walk</h3>
+          <p id="bw-plan-summary">Start with Berlin's symbolic gate, then let the street get denser: Bebelplatz, Humboldt University, Neue Wache, Schlossbruecke and Museum Island.</p>
+        </div>
+
+        <div class="bw-route" id="bw-route"></div>
+
+        <div class="bw-strip">
+          <div class="bw-mini">
+            <strong>U-Bahn fallback</strong>
+            <span id="bw-transport">U5 Brandenburger Tor, Unter den Linden or Museumsinsel.</span>
+          </div>
+          <div class="bw-mini">
+            <strong>Best pause</strong>
+            <span id="bw-pause">Bebelplatz if the square is calm; Museum Island if you want the best ending.</span>
+          </div>
+          <div class="bw-mini">
+            <strong>BerlinWalk fit</strong>
+            <span id="bw-tour-fit">Best before or after the 2 hours tour, not as a rushed detour during it.</span>
+          </div>
+        </div>
+
+        <p class="bw-note" id="bw-note">Tip: do not spend all your time at the Brandenburg Gate. The strongest part of Unter den Linden is the sequence of smaller stops east of Friedrichstrasse.</p>
+      </main>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var state = {
+        time: 'steady',
+        direction: 'westEast',
+        mood: 'classic'
+      };
+
+      var stopSets = {
+        short: ['Brandenburg Gate', 'Bebelplatz', 'Neue Wache', 'Schlossbruecke'],
+        steady: ['Brandenburg Gate', 'Bebelplatz', 'Humboldt University', 'Neue Wache', 'Schlossbruecke', 'Museum Island'],
+        deep: ['Brandenburg Gate', 'Pariser Platz', 'Bebelplatz', 'Humboldt University', 'Neue Wache', 'Zeughaus exterior', 'Schlossbruecke', 'Humboldt Forum', 'Museum Island']
+      };
+
+      var copy = {
+        classic: {
+          title: 'Classic first-visit walk',
+          summary: 'Use Unter den Linden as your clean orientation line between Brandenburg Gate and Museum Island, with only the stops that help the city make sense.',
+          pause: 'Bebelplatz if the square is calm; Museum Island if you want the best ending.',
+          note: 'Tip: do not spend all your time at the Brandenburg Gate. The strongest part of Unter den Linden is the sequence of smaller stops east of Friedrichstrasse.'
+        },
+        history: {
+          title: 'History-heavy boulevard walk',
+          summary: 'Read the street as a compressed timeline: royal power, public knowledge, book burning memory, war memorials, GDR reconstruction and reunited Berlin.',
+          pause: 'Neue Wache for the quietest moment; Bebelplatz if you want the sharpest historical contrast.',
+          note: 'Tip: let the architecture disagree with itself. That is the point of this street, not a flaw in the walk.'
+        },
+        rain: {
+          title: 'Rain-safe Unter den Linden plan',
+          summary: 'Keep the outdoor line short and use strong indoor edges around the route: museums, the Humboldt Forum, cafes and U5 stations.',
+          pause: 'Humboldt Forum or Museum Island when rain gets heavy; Bebelplatz when it is only light drizzle.',
+          note: 'Tip: if the weather turns, split the walk at U Unter den Linden or U Museumsinsel instead of forcing the whole boulevard.'
+        }
+      };
+
+      var descriptions = {
+        'Brandenburg Gate': 'The symbolic western anchor. Get the photo, then keep moving east.',
+        'Pariser Platz': 'Use the square to understand how formal this end of the boulevard wants to feel.',
+        'Bebelplatz': 'The beauty-and-rupture stop: opera house, university edge and the book-burning memorial.',
+        'Humboldt University': 'A public-knowledge landmark on the boulevard, useful for the Prussian education story.',
+        'Neue Wache': 'Berlin at its most restrained: one room, one sculpture, one difficult memorial function.',
+        'Zeughaus exterior': 'The former arsenal, now tied to the German Historical Museum, shows state power in stone.',
+        'Schlossbruecke': 'The bridge that turns the boulevard into Museum Island and the old royal centre.',
+        'Humboldt Forum': 'A modern controversy in a rebuilt palace shell. Look at it before judging it.',
+        'Museum Island': 'The natural eastern finish: museums, river views and the next decision for your day.'
+      };
+
+      var root = document.getElementById('bw-linden-planner');
+      var route = root.querySelector('#bw-route');
+      var title = root.querySelector('#bw-plan-title');
+      var summary = root.querySelector('#bw-plan-summary');
+      var transport = root.querySelector('#bw-transport');
+      var pause = root.querySelector('#bw-pause');
+      var tourFit = root.querySelector('#bw-tour-fit');
+      var note = root.querySelector('#bw-note');
+
+      function render() {
+        var mood = copy[state.mood];
+        var stops = stopSets[state.time].slice();
+        if (state.direction === 'eastWest') stops.reverse();
+        title.textContent = mood.title;
+        summary.textContent = mood.summary;
+        pause.textContent = mood.pause;
+        transport.textContent = state.time === 'deep'
+          ? 'U5 is useful at both ends; keep Museumsinsel as the rescue stop if the walk grows long.'
+          : 'U5 Brandenburger Tor, Unter den Linden or Museumsinsel lets you shorten the walk cleanly.';
+        tourFit.textContent = state.time === 'deep'
+          ? 'Do this as a separate half-day layer around the 2 hours BerlinWalk tour.'
+          : 'Works well before or after the 2 hours BerlinWalk tour from Alexanderplatz.';
+        note.textContent = mood.note;
+        route.innerHTML = stops.map(function (stop, index) {
+          return '<div class="bw-stop"><div class="bw-dot">' + (index + 1) + '</div><div><strong>' + stop + '</strong><span>' + descriptions[stop] + '</span></div></div>';
+        }).join('');
+        requestAnimationFrame(function () {
+          window.dispatchEvent(new Event('resize'));
+        });
+      }
+
+      root.querySelectorAll('button[data-value]').forEach(function (button) {
+        button.addEventListener('click', function () {
+          var group = button.closest('[data-group]').getAttribute('data-group');
+          state[group] = button.getAttribute('data-value');
+          button.closest('[data-group]').querySelectorAll('button').forEach(function (peer) {
+            peer.setAttribute('aria-pressed', peer === button ? 'true' : 'false');
+          });
+          render();
+        });
+      });
+
+      render();
+    })();
+  </script>
+</div>
+</body>
+</html>

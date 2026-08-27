@@ -1,0 +1,933 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Transport Backup Planner | BerlinWalk</title>
+  <meta name="description" content="A Berlin transport disruption planner that helps tourists make the city smaller, find the working layer, and protect flights, trains or tour timing.">
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    :root {
+      --green: #1B5E20;
+      --green-soft: #e6f0df;
+      --green-mid: #2f7a34;
+      --lime: #7CB342;
+      --yellow: #FFE600;
+      --cream: #FAFAF5;
+      --ink: #212121;
+      --muted: #5a665b;
+      --line: rgba(27, 94, 32, 0.18);
+      --red: #E63946;
+      --white: #ffffff;
+      color-scheme: light;
+      font-family: Montserrat, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: transparent;
+      color: var(--ink);
+    }
+
+    button,
+    a {
+      font: inherit;
+    }
+
+    .bw-rescue {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--cream);
+      box-shadow: 0 18px 54px rgba(27, 94, 32, 0.14);
+    }
+
+    .bw-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(360px, 0.86fr);
+      min-height: 384px;
+      background:
+        linear-gradient(115deg, rgba(9, 46, 19, 0.96), rgba(9, 46, 19, 0.84) 48%, rgba(9, 46, 19, 0.46)),
+        url("assets/hauptbahnhof-sbahn.jpg") center / cover no-repeat;
+      color: var(--white);
+    }
+
+    .bw-hero-copy {
+      display: grid;
+      align-content: center;
+      gap: 16px;
+      padding: 34px 30px;
+    }
+
+    .bw-kicker {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 9px;
+      color: var(--yellow);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .bw-kicker::before {
+      content: "";
+      width: 30px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--yellow);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      max-width: 620px;
+      font-size: 46px;
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .bw-hero-copy > p {
+      max-width: 610px;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 16px;
+      font-weight: 650;
+      line-height: 1.6;
+    }
+
+    .bw-hero-rules {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      max-width: 670px;
+      gap: 1px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .bw-hero-rule {
+      min-height: 86px;
+      padding: 13px;
+      background: rgba(255, 255, 255, 0.11);
+      backdrop-filter: blur(6px);
+    }
+
+    .bw-hero-rule strong {
+      display: block;
+      color: var(--yellow);
+      font-size: 14px;
+      line-height: 1.2;
+    }
+
+    .bw-hero-rule span {
+      display: block;
+      margin-top: 5px;
+      color: rgba(255, 255, 255, 0.84);
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    .bw-photo-column {
+      display: grid;
+      align-content: stretch;
+      gap: 10px;
+      padding: 18px;
+    }
+
+    .bw-photo-card {
+      position: relative;
+      min-height: 110px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 8px;
+      background: #102817;
+    }
+
+    .bw-photo-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 110px;
+      display: block;
+      object-fit: cover;
+      opacity: 0.88;
+    }
+
+    .bw-photo-card span {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 10px;
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.25;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.75);
+    }
+
+    .bw-board {
+      display: grid;
+      grid-template-columns: minmax(310px, 0.78fr) minmax(0, 1.22fr);
+      gap: 1px;
+      background: var(--line);
+      border-top: 1px solid var(--line);
+    }
+
+    .bw-controls,
+    .bw-result {
+      background: var(--white);
+    }
+
+    .bw-controls {
+      padding: 22px;
+    }
+
+    .bw-control-head {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .bw-control-head h2 {
+      color: var(--green);
+      font-size: 24px;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .bw-control-head p {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .bw-control-group {
+      display: grid;
+      gap: 9px;
+      margin-top: 18px;
+    }
+
+    .bw-control-group h3 {
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 950;
+      line-height: 1.2;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .bw-situation-grid {
+      display: grid;
+      gap: 8px;
+    }
+
+    .bw-situation {
+      display: grid;
+      gap: 3px;
+      min-height: 66px;
+      padding: 12px;
+      border: 1px solid rgba(27, 94, 32, 0.22);
+      border-radius: 8px;
+      background: #f8fbf3;
+      color: var(--ink);
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+    }
+
+    .bw-situation strong {
+      color: var(--green);
+      font-size: 13px;
+      line-height: 1.2;
+    }
+
+    .bw-situation span {
+      color: #526258;
+      font-size: 11px;
+      font-weight: 750;
+      line-height: 1.35;
+    }
+
+    .bw-chip-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .bw-chip {
+      min-height: 46px;
+      padding: 9px 10px;
+      border: 1px solid rgba(27, 94, 32, 0.22);
+      border-radius: 8px;
+      background: #f8fbf3;
+      color: var(--green);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.25;
+      text-align: center;
+      transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+    }
+
+    .bw-situation:hover,
+    .bw-chip:hover {
+      transform: translateY(-1px);
+      border-color: rgba(27, 94, 32, 0.55);
+    }
+
+    .bw-situation[aria-pressed="true"],
+    .bw-chip[aria-pressed="true"] {
+      border-color: var(--green);
+      background: var(--yellow);
+      box-shadow: inset 0 0 0 2px rgba(27, 94, 32, 0.15);
+    }
+
+    .bw-reset {
+      width: 100%;
+      min-height: 44px;
+      margin-top: 18px;
+      border: 1px solid rgba(27, 94, 32, 0.25);
+      border-radius: 8px;
+      background: var(--green);
+      color: var(--white);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .bw-result {
+      display: grid;
+      grid-template-columns: minmax(240px, 0.74fr) minmax(0, 1.26fr);
+      min-height: 670px;
+    }
+
+    .bw-result-photo {
+      position: relative;
+      min-height: 100%;
+      overflow: hidden;
+      background: var(--green);
+    }
+
+    .bw-result-photo img {
+      width: 100%;
+      height: 100%;
+      min-height: 670px;
+      display: block;
+      object-fit: cover;
+      filter: saturate(1.04) contrast(1.04);
+    }
+
+    .bw-photo-caption {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      padding: 11px 12px;
+      border-radius: 8px;
+      background: rgba(10, 42, 18, 0.84);
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 850;
+      line-height: 1.35;
+    }
+
+    .bw-result-copy {
+      display: grid;
+      align-content: start;
+      gap: 18px;
+      padding: 24px;
+    }
+
+    .bw-mode {
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 950;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+
+    .bw-result-copy h2 {
+      color: var(--green);
+      font-size: 30px;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .bw-lead {
+      color: #334139;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.62;
+    }
+
+    .bw-route {
+      display: grid;
+      gap: 8px;
+      padding: 14px;
+      border: 1px solid rgba(27, 94, 32, 0.16);
+      border-radius: 8px;
+      background: linear-gradient(180deg, #fbfff5, #f1f8e9);
+    }
+
+    .bw-route-title {
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 950;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .bw-route-steps {
+      display: grid;
+      gap: 6px;
+    }
+
+    .bw-step {
+      display: grid;
+      grid-template-columns: 28px minmax(0, 1fr);
+      gap: 9px;
+      align-items: start;
+      min-height: 38px;
+    }
+
+    .bw-step b {
+      display: grid;
+      width: 28px;
+      height: 28px;
+      place-items: center;
+      border-radius: 999px;
+      background: var(--green);
+      color: var(--yellow);
+      font-size: 12px;
+      line-height: 1;
+    }
+
+    .bw-step span {
+      padding-top: 3px;
+      color: #34433a;
+      font-size: 13px;
+      font-weight: 780;
+      line-height: 1.4;
+    }
+
+    .bw-action-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .bw-action {
+      min-height: 138px;
+      padding: 13px;
+      border: 1px solid rgba(27, 94, 32, 0.16);
+      border-radius: 8px;
+      background: var(--white);
+      box-shadow: 0 10px 22px rgba(27, 94, 32, 0.08);
+    }
+
+    .bw-action strong {
+      display: block;
+      color: var(--green);
+      font-size: 13px;
+      line-height: 1.25;
+    }
+
+    .bw-action p {
+      margin-top: 6px;
+      color: #4a5a50;
+      font-size: 12px;
+      font-weight: 720;
+      line-height: 1.43;
+    }
+
+    .bw-official {
+      display: grid;
+      gap: 12px;
+      padding: 22px;
+      border-top: 1px solid var(--line);
+      background: var(--green);
+      color: var(--white);
+    }
+
+    .bw-official h2 {
+      color: var(--yellow);
+      font-size: 22px;
+      line-height: 1.15;
+    }
+
+    .bw-official p {
+      max-width: 760px;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.55;
+    }
+
+    .bw-link-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 9px;
+    }
+
+    .bw-link-grid a {
+      min-height: 58px;
+      padding: 11px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.28;
+      text-decoration: none;
+    }
+
+    .bw-link-grid a:hover {
+      background: rgba(255, 230, 0, 0.16);
+      color: var(--yellow);
+    }
+
+    .bw-note-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      background: var(--line);
+      border-top: 1px solid var(--line);
+    }
+
+    .bw-note {
+      min-height: 142px;
+      padding: 16px;
+      background: var(--cream);
+    }
+
+    .bw-note strong {
+      display: block;
+      color: var(--green);
+      font-size: 14px;
+      line-height: 1.25;
+    }
+
+    .bw-note span {
+      display: block;
+      margin-top: 7px;
+      color: #48564e;
+      font-size: 12px;
+      font-weight: 720;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 920px) {
+      .bw-hero,
+      .bw-result {
+        grid-template-columns: 1fr;
+      }
+
+      .bw-photo-column {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .bw-result {
+        min-height: 0;
+      }
+
+      .bw-result-photo img {
+        min-height: 300px;
+        max-height: 360px;
+      }
+
+      .bw-action-grid,
+      .bw-link-grid,
+      .bw-note-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 700px) {
+      .bw-board {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .bw-rescue {
+        border-radius: 0;
+      }
+
+      .bw-hero-copy,
+      .bw-controls,
+      .bw-result-copy,
+      .bw-official {
+        padding: 18px;
+      }
+
+      h1 {
+        font-size: 31px;
+      }
+
+      .bw-hero-copy > p,
+      .bw-lead {
+        font-size: 14px;
+      }
+
+      .bw-hero-rules,
+      .bw-photo-column,
+      .bw-note-strip,
+      .bw-result-photo,
+      .bw-situation span,
+      .bw-official p {
+        display: none;
+      }
+
+      .bw-action-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .bw-link-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .bw-chip-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .bw-result-copy h2 {
+        font-size: 25px;
+      }
+
+      .bw-result-photo img {
+        min-height: 210px;
+      }
+
+      .bw-situation,
+      .bw-chip {
+        min-height: 44px;
+      }
+
+      .bw-action {
+        min-height: 0;
+      }
+
+      .bw-link-grid a {
+        min-height: 52px;
+        padding: 9px;
+        font-size: 11px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="bw-rescue" data-version="20260703c" aria-label="Berlin Transport Backup Planner">
+    <header class="bw-hero">
+      <div class="bw-hero-copy">
+        <p class="bw-kicker">Berlin disruption day</p>
+        <h1>Make the city smaller first</h1>
+        <p>When the station board goes red, do not fight the whole map. Pick what needs saving, find the transport layer that still works, then make one practical Berlin move.</p>
+        <div class="bw-hero-rules" aria-label="Planner rules">
+          <div class="bw-hero-rule">
+            <strong>Read the warning</strong>
+            <span>BVG, S-Bahn, VBB, BER and DB can tell different stories.</span>
+          </div>
+          <div class="bw-hero-rule">
+            <strong>Use the centre</strong>
+            <span>Alexanderplatz to Museum Island can be a real plan, not a sad backup.</span>
+          </div>
+          <div class="bw-hero-rule">
+            <strong>Move earlier</strong>
+            <span>Flights, trains and tour starts need a decision before the buffer disappears.</span>
+          </div>
+        </div>
+      </div>
+      <div class="bw-photo-column" aria-label="Berlin transport photos">
+        <div class="bw-photo-card">
+          <img src="assets/alexanderplatz-ubahn.jpg" alt="Yellow U-Bahn train at Alexanderplatz station" loading="eager" decoding="async">
+          <span>Alexanderplatz: several layers in one place</span>
+        </div>
+        <div class="bw-photo-card">
+          <img src="assets/ber-airport-station.jpg" alt="Rail platform at Flughafen BER Airport station" loading="lazy" decoding="async">
+          <span>BER: protect the flight first</span>
+        </div>
+        <div class="bw-photo-card">
+          <img src="assets/mobility-hub-suedkreuz.jpg" alt="Shared bikes and scooters at the Südkreuz mobility hub" loading="lazy" decoding="async">
+          <span>Final leg: walk, bike, scooter or taxi</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="bw-board">
+      <aside class="bw-controls" aria-label="Planner controls">
+        <div class="bw-control-head">
+          <h2>What is the real problem?</h2>
+          <p>A loose museum day, a flight and a tour start should not use the same backup. Choose the pressure first.</p>
+        </div>
+
+        <div class="bw-control-group" data-group="scene">
+          <h3>Situation</h3>
+          <div class="bw-situation-grid">
+            <button class="bw-situation" type="button" data-scene="central" aria-pressed="true">
+              <strong>Central sightseeing</strong>
+              <span>I am near Mitte, Alexanderplatz, Museum Island or Hackescher Markt.</span>
+            </button>
+            <button class="bw-situation" type="button" data-scene="airport" aria-pressed="false">
+              <strong>BER Airport</strong>
+              <span>I have a flight and cannot gamble on the last connection.</span>
+            </button>
+            <button class="bw-situation" type="button" data-scene="train" aria-pressed="false">
+              <strong>Hauptbahnhof or onward train</strong>
+              <span>I need a long-distance train, FlixBus, or a fixed connection.</span>
+            </button>
+            <button class="bw-situation" type="button" data-scene="tour" aria-pressed="false">
+              <strong>BerlinWalk tour start</strong>
+              <span>I need to reach Alexanderplatz without turning the morning into stress.</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="bw-control-group" data-group="layer">
+          <h3>What looks disrupted?</h3>
+          <div class="bw-chip-row">
+            <button class="bw-chip" type="button" data-layer="unclear" aria-pressed="true">Not sure yet</button>
+            <button class="bw-chip" type="button" data-layer="bvg" aria-pressed="false">BVG / U-Bahn</button>
+            <button class="bw-chip" type="button" data-layer="sbahn" aria-pressed="false">S-Bahn / rail</button>
+            <button class="bw-chip" type="button" data-layer="wide" aria-pressed="false">Many modes</button>
+          </div>
+        </div>
+
+        <div class="bw-control-group" data-group="time">
+          <h3>How tight is the timing?</h3>
+          <div class="bw-chip-row">
+            <button class="bw-chip" type="button" data-time="loose" aria-pressed="true">Loose day</button>
+            <button class="bw-chip" type="button" data-time="soon" aria-pressed="false">Need to arrive soon</button>
+            <button class="bw-chip" type="button" data-time="hard" aria-pressed="false">Hard deadline</button>
+            <button class="bw-chip" type="button" data-time="luggage" aria-pressed="false">Luggage or tired group</button>
+          </div>
+        </div>
+
+        <button class="bw-reset" type="button">Reset to central walk</button>
+      </aside>
+
+      <main class="bw-result" aria-live="polite">
+        <div class="bw-result-photo">
+          <img id="resultImage" src="assets/alexanderplatz-ubahn.jpg" alt="Yellow U-Bahn train at Alexanderplatz station" decoding="async">
+          <div class="bw-photo-caption" id="resultCaption">If the day is central, a red board can become a walking route instead of a lost hour.</div>
+        </div>
+
+        <div class="bw-result-copy">
+          <p class="bw-mode" id="resultMode">Best move: make central Berlin the plan</p>
+          <h2 id="resultTitle">Walk the city that is already near you</h2>
+          <p class="bw-lead" id="resultLead">If you are already around Alexanderplatz or Museum Island and the day is flexible, stop forcing the same train. Walk west, keep the official app open, and rejoin transport from a calmer hub.</p>
+
+          <section class="bw-route" aria-label="Suggested route">
+            <p class="bw-route-title" id="routeTitle">Route that still works</p>
+            <div class="bw-route-steps" id="routeSteps"></div>
+          </section>
+
+          <div class="bw-action-grid" aria-label="Next actions">
+            <article class="bw-action">
+              <strong>Check</strong>
+              <p id="checkText">Confirm whether the problem is BVG, S-Bahn or a wider VBB issue before changing the whole day.</p>
+            </article>
+            <article class="bw-action">
+              <strong>Move</strong>
+              <p id="moveText">If the centre is close, start walking toward Museum Island or Hackescher Markt instead of waiting through three bad signs.</p>
+            </article>
+            <article class="bw-action">
+              <strong>Fallback</strong>
+              <p id="fallbackText">Use a working rail layer to a nearby hub, then walk, bike, scooter or taxi for the awkward final part.</p>
+            </article>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <section class="bw-official" aria-label="Official transport links">
+      <h2>Open the official source before you move</h2>
+      <p>This planner helps with the order of decisions. Live status still belongs to the operator pages and apps.</p>
+      <div class="bw-link-grid">
+        <a href="https://www.bvg.de/en/connections/traffic-news" target="_blank" rel="noopener">BVG Traffic News<br>U-Bahn, tram, bus, ferry</a>
+        <a href="https://sbahn.berlin/en/plan-a-journey/timetable-changes/" target="_blank" rel="noopener">S-Bahn Changes<br>S-Bahn disruptions</a>
+        <a href="https://www.vbb.de/en/driving-information/apps/vbb-app-bus-bahn/" target="_blank" rel="noopener">VBB App<br>mixed Berlin routes</a>
+        <a href="https://ber.berlin-airport.de/en/orientation/getting-here/public-transport.html" target="_blank" rel="noopener">BER Public Transport<br>airport routes</a>
+      </div>
+    </section>
+
+    <section class="bw-note-strip" aria-label="Berlin disruption notes">
+      <article class="bw-note">
+        <strong>Central Berlin</strong>
+        <span>Alexanderplatz to Museum Island to Hackescher Markt can be the day, not just the detour.</span>
+      </article>
+      <article class="bw-note">
+        <strong>BVG affected</strong>
+        <span>Look for S-Bahn or regional rail to a nearby hub, then solve the final stretch separately.</span>
+      </article>
+      <article class="bw-note">
+        <strong>S-Bahn affected</strong>
+        <span>Try U-Bahn, tram or bus before assuming the whole city is unavailable.</span>
+      </article>
+      <article class="bw-note">
+        <strong>BER or Hbf</strong>
+        <span>Hard deadlines change the rule. Switch earlier and keep proof of cancelled services.</span>
+      </article>
+    </section>
+  </section>
+
+  <script>
+    const state = {
+      scene: 'central',
+      layer: 'unclear',
+      time: 'loose'
+    };
+
+    const scenes = {
+      central: {
+        mode: 'Best move: make central Berlin the plan',
+        title: 'Walk the city that is already near you',
+        lead: 'If you are already around Alexanderplatz or Museum Island and the day is flexible, stop forcing the same train. Walk west, keep the official app open, and rejoin transport from a calmer hub.',
+        image: 'assets/alexanderplatz-ubahn.jpg',
+        alt: 'Yellow U-Bahn train at Alexanderplatz station',
+        caption: 'If the day is central, a red board can become a walking route instead of a lost hour.',
+        routeTitle: 'Central walk that still works',
+        steps: ['Alexanderplatz and the TV Tower', 'Rotes Rathaus and the Spree crossing', 'Berlin Cathedral and Museum Island', 'Hackescher Markt for S-Bahn, tram, food or a calm reset'],
+        check: 'Confirm whether the problem is BVG, S-Bahn or a wider VBB issue before you shrink the day.',
+        move: 'If the centre is close, start walking toward Museum Island or Hackescher Markt before the platform eats the morning.',
+        fallback: 'Use a working rail layer to a nearby hub, then solve the awkward final part separately.'
+      },
+      airport: {
+        mode: 'Best move: protect the flight',
+        title: 'Move the BER fallback earlier',
+        lead: 'Airport journeys are not the place for clever guessing. If the first safe rail option is unstable, compare FEX, regional trains, S9/S85, X7/X71 and taxi before the final window disappears.',
+        image: 'assets/ber-airport-station.jpg',
+        alt: 'Rail platform at Flughafen BER Airport station',
+        caption: 'BER has rail and bus options, but flight timing needs a bigger buffer than sightseeing.',
+        routeTitle: 'Airport order I would use',
+        steps: ['Check BER plus VBB or DB before leaving the hotel', 'Try a working rail hub: Hauptbahnhof, Potsdamer Platz or Südkreuz', 'Compare S9/S85 or express bus via Rudow if rail is unstable', 'Move to taxi or ride-hail before the last safe train is gone'],
+        check: 'Use BER public transport and VBB or DB for the exact route, not an old screenshot from the hotel.',
+        move: 'Leave early enough that one failed train becomes annoying, not expensive.',
+        fallback: 'With luggage, kids, mobility needs or tight check-in timing, taxi becomes serious earlier.'
+      },
+      train: {
+        mode: 'Best move: reach the hub first',
+        title: 'Protect Hauptbahnhof or the onward train',
+        lead: 'A long-distance train changes the mood. Your target is not the prettiest cross-town route. Your target is a reliable arrival at Hauptbahnhof or the correct terminal with enough buffer to think.',
+        image: 'assets/hauptbahnhof-sbahn.jpg',
+        alt: 'Blurred S-Bahn train moving through Berlin Hauptbahnhof',
+        caption: 'At a big hub, arrive early enough to recover from platform changes and crowds.',
+        routeTitle: 'Hub-first route',
+        steps: ['Check the affected operator and DB Navigator if an onward train is involved', 'Aim for a major hub rather than the exact original transfer', 'Build one backup station into the plan', 'Keep screenshots if a cancellation affects a paid rail journey'],
+        check: 'Use DB for the onward train and BVG, S-Bahn or VBB for the city route that gets you there.',
+        move: 'If two city connections look unstable, choose fewer transfers even if the route is not shortest on paper.',
+        fallback: 'Taxi for the final leg can be worth it when the missed connection costs more than the ride.'
+      },
+      tour: {
+        mode: 'Best move: get near Alexanderplatz',
+        title: 'Reach the tour start by any working layer',
+        lead: 'For the BerlinWalk tour, the useful target is Alexanderplatz. If your exact route breaks, look for any working way into the area, then walk the last part calmly.',
+        image: 'assets/alexanderplatz-ubahn.jpg',
+        alt: 'Yellow U-Bahn train at Alexanderplatz station',
+        caption: 'Alexanderplatz works well for visitors because several transport choices overlap there.',
+        routeTitle: 'Tour-start order I would use',
+        steps: ['Check the line before leaving the hotel', 'Choose a backup hub: Alexanderplatz, Hackescher Markt or Friedrichstraße', 'Leave enough time for a short central walk', 'If you will miss the start, rebook instead of chasing stress'],
+        check: 'Use BVG, S-Bahn or VBB depending on your line. Do not assume every mode is broken.',
+        move: 'If a nearby central hub still works, go there and walk to Alexanderplatz rather than waiting for the original route.',
+        fallback: 'With a hard start time, switch sooner. One simple taxi leg can beat two uncertain transfers.'
+      }
+    };
+
+    const layerAdvice = {
+      unclear: 'First identify the layer. A BVG problem and an S-Bahn problem create different Berlin maps.',
+      bvg: 'BVG affected: look for S-Bahn, regional rail or a walkable central hub before giving up on the day.',
+      sbahn: 'S-Bahn or rail affected: rebuild through U-Bahn, tram or bus if BVG is still running.',
+      wide: 'Many modes affected: reduce distance, keep the plan central, and save taxis for hard deadlines or luggage.'
+    };
+
+    const timeAdvice = {
+      loose: 'Loose day: one short wait is fine, but do not wait through repeated cancellations.',
+      soon: 'Need to arrive soon: switch after the first clear bad sign, not after the platform is crowded.',
+      hard: 'Hard deadline: protect arrival time now. Take the less elegant route if it is more reliable.',
+      luggage: 'Luggage or a tired group: remove transfers, stairs and long final walks from the plan where possible.'
+    };
+
+    function selectedButton(group, key, value) {
+      document.querySelectorAll(`[data-${key}]`).forEach((button) => {
+        button.setAttribute('aria-pressed', String(button.dataset[key] === value));
+      });
+    }
+
+    function renderSteps(steps) {
+      const container = document.getElementById('routeSteps');
+      container.innerHTML = steps.map((step, index) => `
+        <div class="bw-step">
+          <b>${index + 1}</b>
+          <span>${step}</span>
+        </div>
+      `).join('');
+    }
+
+    function render() {
+      const base = scenes[state.scene];
+      const image = document.getElementById('resultImage');
+      image.src = base.image;
+      image.alt = base.alt;
+      document.getElementById('resultMode').textContent = base.mode;
+      document.getElementById('resultTitle').textContent = base.title;
+      document.getElementById('resultLead').textContent = `${base.lead} ${layerAdvice[state.layer]} ${timeAdvice[state.time]}`;
+      document.getElementById('resultCaption').textContent = base.caption;
+      document.getElementById('routeTitle').textContent = base.routeTitle;
+      document.getElementById('checkText').textContent = base.check;
+      document.getElementById('moveText').textContent = base.move;
+      document.getElementById('fallbackText').textContent = base.fallback;
+      renderSteps(base.steps);
+      selectedButton('scene', 'scene', state.scene);
+      selectedButton('layer', 'layer', state.layer);
+      selectedButton('time', 'time', state.time);
+    }
+
+    document.querySelectorAll('[data-scene]').forEach((button) => {
+      button.addEventListener('click', () => {
+        state.scene = button.dataset.scene;
+        render();
+      });
+    });
+
+    document.querySelectorAll('[data-layer]').forEach((button) => {
+      button.addEventListener('click', () => {
+        state.layer = button.dataset.layer;
+        render();
+      });
+    });
+
+    document.querySelectorAll('[data-time]').forEach((button) => {
+      button.addEventListener('click', () => {
+        state.time = button.dataset.time;
+        render();
+      });
+    });
+
+    document.querySelector('.bw-reset').addEventListener('click', () => {
+      state.scene = 'central';
+      state.layer = 'unclear';
+      state.time = 'loose';
+      render();
+    });
+
+    render();
+  </script>
+  <script src="../js/brand.js"></script>
+</body>
+</html>

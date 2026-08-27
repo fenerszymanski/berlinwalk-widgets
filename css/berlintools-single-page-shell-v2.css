@@ -1,0 +1,1843 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,800&family=IBM+Plex+Mono:wght@500;600;700;900&family=Montserrat:wght@500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+/* Shared BerlinTools editorial shell. The extra bw-tools-shell-v2 class is
+ * intentional: it wins over the older Wix template polish without changing
+ * any CMS or editor-owned component. */
+html.bw-tools-detail.bw-tools-shell-v2 {
+  --bw-shell-green: #1B5E20;
+  --bw-shell-green-dark: #102414;
+  --bw-shell-green-ink: #123D18;
+  --bw-shell-yellow: #FFE600;
+  --bw-shell-lime: #7CB342;
+  --bw-shell-light: #C5E1A5;
+  --bw-shell-cream: #FAFAF5;
+  --bw-shell-paper: #FFFEF8;
+  --bw-shell-ink: #212121;
+  --bw-shell-muted: #596159;
+  --bw-shell-line: #DCE3D5;
+  background: var(--bw-shell-cream) !important;
+  color: var(--bw-shell-ink) !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2,
+html.bw-tools-detail.bw-tools-shell-v2 body {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body {
+  background: var(--bw-shell-cream) !important;
+  color: var(--bw-shell-ink) !important;
+  font-family: Montserrat, Arial, sans-serif !important;
+  line-height: 1.55 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-moznh5yl,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo {
+  box-sizing: border-box !important;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  position: relative !important;
+  transform: none !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body [data-bw-shell-v2-empty="1"],
+html.bw-tools-detail.bw-tools-shell-v2 body [data-bw-shell-v2-related-hidden="1"] {
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  visibility: hidden !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 {
+  --bw-shell-band-height: clamp(320px, 52vw, 560px);
+  background: var(--bw-shell-cream) !important;
+  border-bottom: 0 !important;
+  color: #FFFFFF !important;
+  isolation: isolate !important;
+  margin: 0 !important;
+  padding: 0 24px 66px !important;
+}
+
+/* The dark editorial band is a visual layer, not a height constraint on the
+ * hero or its widget. The iframe/card can grow through the cream below it. */
+html.bw-tools-detail.bw-tools-shell-v2 body #bgLayers_comp-mozc935g3 > [data-testid="colorUnderlay"] {
+  background: transparent !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3::before {
+  background-color: var(--bw-shell-green-dark) !important;
+  background-image:
+    linear-gradient(rgba(250, 250, 245, .05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(250, 250, 245, .05) 1px, transparent 1px) !important;
+  background-size: 34px 34px !important;
+  content: '' !important;
+  height: var(--bw-shell-band-height) !important;
+  inset: 0 0 auto !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  z-index: 0 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .comp-mozc935g3-container {
+  align-items: start !important;
+  box-sizing: border-box !important;
+  column-gap: clamp(28px, 5vw, 76px) !important;
+  display: grid !important;
+  grid-template-areas:
+    'meta summary'
+    'heading summary'
+    'lead summary'
+    'secondary summary'
+    'widget widget' !important;
+  grid-template-columns: minmax(0, 1.14fr) minmax(230px, .86fr) !important;
+  grid-template-rows: auto auto auto auto auto !important;
+  height: auto !important;
+  justify-content: stretch !important;
+  margin: 0 auto !important;
+  max-width: 1120px !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  padding: 52px 0 0 !important;
+  position: relative !important;
+  row-gap: 0 !important;
+  width: 100% !important;
+  z-index: 1 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozch2i3,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozck6is,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozcllqt,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozco5et,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 [data-bw-shell-v2-hero-meta],
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 [data-bw-shell-v2-summary] {
+  align-self: start !important;
+  box-sizing: border-box !important;
+  height: auto !important;
+  inset: auto !important;
+  justify-self: stretch !important;
+  margin: 0 !important;
+  max-width: none !important;
+  min-height: 0 !important;
+  min-width: 0 !important;
+  position: relative !important;
+  transform: none !important;
+  width: auto !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozch2i3,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozck6is,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozcllqt,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozco5et {
+  display: block !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 [data-bw-shell-v2-hero-meta] {
+  align-items: center !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 10px 14px !important;
+  grid-area: meta !important;
+  min-height: 28px !important;
+  padding: 0 0 18px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-breadcrumb {
+  color: var(--bw-shell-light) !important;
+  font: 700 11px/1.2 'IBM Plex Mono', monospace !important;
+  letter-spacing: .1em !important;
+  text-decoration: none !important;
+  text-transform: uppercase !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-breadcrumb:hover,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-breadcrumb:focus-visible {
+  color: var(--bw-shell-yellow) !important;
+  text-decoration: underline !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-type {
+  background: transparent !important;
+  border: 1px solid rgba(197, 225, 165, .72) !important;
+  border-radius: 999px !important;
+  color: #FFFFFF !important;
+  font: 600 10px/1 'IBM Plex Mono', monospace !important;
+  letter-spacing: .08em !important;
+  padding: 7px 10px !important;
+  text-transform: uppercase !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozch2i3 {
+  grid-area: heading !important;
+  padding: 0 0 16px !important;
+  text-align: left !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozch2i3 h1,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozch2i3 h2,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozch2i3 h3,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozch2i3 span {
+  color: #FFFFFF !important;
+  font-family: Fraunces, Merriweather, Georgia, serif !important;
+  font-size: clamp(44px, 6.2vw, 82px) !important;
+  font-weight: 500 !important;
+  letter-spacing: -.045em !important;
+  line-height: .94 !important;
+  margin: 0 !important;
+  max-width: 720px !important;
+  overflow-wrap: anywhere !important;
+  text-align: left !important;
+  white-space: normal !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozch2i3 .bw-tools-shell-v2-title-accent {
+  color: var(--bw-shell-yellow) !important;
+  font-style: italic !important;
+  font-weight: 500 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozck6is {
+  grid-area: lead !important;
+  max-width: 680px !important;
+  padding: 0 0 14px !important;
+  text-align: left !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozck6is p,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozck6is span {
+  color: rgba(255, 255, 255, .84) !important;
+  font-family: Fraunces, Merriweather, Georgia, serif !important;
+  font-size: clamp(18px, 2vw, 24px) !important;
+  font-style: italic !important;
+  font-weight: 500 !important;
+  letter-spacing: -.01em !important;
+  line-height: 1.25 !important;
+  margin: 0 !important;
+  text-align: left !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozcllqt {
+  grid-area: secondary !important;
+  max-width: 680px !important;
+  padding: 0 0 8px !important;
+  text-align: left !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozcllqt p,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozcllqt span {
+  color: rgba(255, 255, 255, .68) !important;
+  font: 500 13px/1.45 Montserrat, Arial, sans-serif !important;
+  margin: 0 !important;
+  text-align: left !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozco5et {
+  background: var(--bw-shell-paper) !important;
+  border: 1px solid rgba(16, 36, 20, .18) !important;
+  border-top: 7px solid var(--bw-shell-yellow) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 22px 48px rgba(16, 36, 20, .24) !important;
+  color: var(--bw-shell-ink) !important;
+  grid-area: widget !important;
+  margin: 26px 0 0 !important;
+  overflow: visible !important;
+  padding: 0 !important;
+  z-index: 2 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozco5et iframe {
+  background: var(--bw-shell-paper) !important;
+  border: 0 !important;
+  display: block !important;
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozco5et > [data-bw-shell-v2-tool-entry] {
+  align-items: center !important;
+  background: var(--bw-shell-paper) !important;
+  border-bottom: 1px solid var(--bw-shell-line) !important;
+  box-sizing: border-box !important;
+  color: var(--bw-shell-green-ink) !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 10px 14px !important;
+  justify-content: space-between !important;
+  margin: 0 !important;
+  min-height: 42px !important;
+  padding: 14px 22px 24px !important;
+  position: relative !important;
+  width: 100% !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozco5et > [data-bw-shell-v2-tool-entry] .bw-tools-shell-v2-tool-entry-kicker {
+  color: var(--bw-shell-green-ink) !important;
+  font: 700 10px/1.2 'IBM Plex Mono', monospace !important;
+  letter-spacing: .14em !important;
+  text-transform: uppercase !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozco5et > [data-bw-shell-v2-tool-entry] .bw-tools-shell-v2-tool-entry-chip {
+  background: var(--bw-shell-green) !important;
+  border-radius: 999px !important;
+  color: #FFFFFF !important;
+  font: 600 10px/1.2 Montserrat, Arial, sans-serif !important;
+  letter-spacing: .04em !important;
+  padding: 7px 10px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 [data-bw-shell-v2-summary] {
+  align-self: start !important;
+  background: var(--bw-shell-green) !important;
+  border: 1px solid rgba(197, 225, 165, .28) !important;
+  border-top: 7px solid var(--bw-shell-yellow) !important;
+  color: #FFFFFF !important;
+  display: block !important;
+  grid-area: summary !important;
+  margin: 12px 0 0 !important;
+  min-height: 250px !important;
+  padding: 22px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-summary-head {
+  align-items: center !important;
+  display: flex !important;
+  gap: 14px !important;
+  margin: 0 0 22px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-summary-icon {
+  background: var(--bw-shell-light) !important;
+  border: 0 !important;
+  border-radius: 2px !important;
+  display: block !important;
+  flex: 0 0 76px !important;
+  height: 76px !important;
+  object-fit: cover !important;
+  width: 76px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-summary-kicker {
+  color: var(--bw-shell-light) !important;
+  display: block !important;
+  font: 700 10px/1.2 'IBM Plex Mono', monospace !important;
+  letter-spacing: .1em !important;
+  margin: 0 0 8px !important;
+  text-transform: uppercase !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-summary-head strong {
+  color: #FFFFFF !important;
+  display: block !important;
+  font: 600 clamp(20px, 2.5vw, 30px)/1.05 Fraunces, Merriweather, Georgia, serif !important;
+  letter-spacing: -.025em !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-summary-facts {
+  border-top: 1px solid rgba(197, 225, 165, .34) !important;
+  display: grid !important;
+  gap: 12px !important;
+  margin: 0 !important;
+  padding: 16px 0 0 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-summary-facts > div {
+  align-items: baseline !important;
+  display: flex !important;
+  gap: 12px !important;
+  justify-content: space-between !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-summary-facts dt {
+  color: rgba(255, 255, 255, .64) !important;
+  font: 600 10px/1.2 'IBM Plex Mono', monospace !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-summary-facts dd {
+  color: #FFFFFF !important;
+  font: 600 12px/1.3 Montserrat, Arial, sans-serif !important;
+  margin: 0 !important;
+  text-align: right !important;
+}
+
+/* Lower page: the tool stays attached to the hero edge, then real CMS copy
+ * reads as a quiet cream editorial page. */
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at {
+  background: var(--bw-shell-cream) !important;
+  margin: 0 !important;
+  padding: 78px 24px 22px !important;
+}
+
+/* The native intro and article are separate Wix sections. Keep the independently
+ * positioned TOC/rail out of the intro's row height so the article follows the
+ * native intro copy and the approved editorial spacing remains deterministic. */
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] {
+  padding-top: 32px !important;
+  padding-bottom: 0 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at .comp-mozmt2at-container {
+  align-items: stretch !important;
+  box-sizing: border-box !important;
+  display: block !important;
+  height: auto !important;
+  justify-content: initial !important;
+  margin: 0 auto !important;
+  max-width: 1060px !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+/* When the CMS supplies both an intro and article headings, the single TOC
+ * rail lives beside the intro content. The native intro/body sections stay
+ * separate so Wix can continue to hydrate their own fields. */
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .comp-mozmt2at-container {
+  justify-content: center !important;
+  display: grid !important;
+  grid-template-columns: 210px minmax(0, 700px) !important;
+  column-gap: 70px !important;
+  max-width: 1060px !important;
+  position: relative !important;
+  z-index: 3 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .comp-mozmt2at-container > [data-bw-shell-v2-toc] {
+  left: 0 !important;
+  position: absolute !important;
+  top: 0 !important;
+  width: 210px !important;
+  z-index: 4 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .comp-mozmt2at-container > [data-bw-shell-v2-toc] {
+  align-self: start !important;
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] #comp-mozmtefi {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  margin: 0 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at #comp-mozmtefi {
+  background: transparent !important;
+  border: 0 !important;
+  border-left: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+  height: auto !important;
+  inset: auto !important;
+  margin: 0 auto !important;
+  max-width: 700px !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  position: relative !important;
+  transform: none !important;
+  width: 100% !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at #comp-mozmtefi p:first-child::first-letter {
+  color: var(--bw-shell-green) !important;
+  float: left !important;
+  font: 650 72px/.76 Fraunces, Merriweather, Georgia, serif !important;
+  margin: 7px 8px 0 0 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at #comp-mozmtefi p,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at #comp-mozmtefi span {
+  color: var(--bw-shell-ink) !important;
+  font: 500 19px/1.7 Fraunces, Merriweather, Georgia, serif !important;
+  margin: 0 !important;
+  text-align: left !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up {
+  background: var(--bw-shell-cream) !important;
+  margin: 0 !important;
+  padding: 18px 24px 112px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up .comp-mozn18up-container {
+  align-items: stretch !important;
+  box-sizing: border-box !important;
+  display: block !important;
+  grid-template-columns: 210px minmax(0, 700px) !important;
+  column-gap: 70px !important;
+  height: auto !important;
+  justify-content: center !important;
+  margin: 0 auto !important;
+  max-width: 1060px !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up[data-bw-shell-v2-toc-in-body="1"] .comp-mozn18up-container {
+  display: grid !important;
+}
+
+/* Keep article copy in the same 210px + 70px + 700px editorial column as the
+ * intro/TOC host when Wix keeps the native body section separate. */
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up[data-bw-shell-v2-body-follow-rail="1"] .comp-mozn18up-container {
+  display: grid !important;
+  grid-template-columns: 210px minmax(0, 700px) !important;
+  column-gap: 70px !important;
+  justify-content: center !important;
+  max-width: 1060px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up[data-bw-shell-v2-body-follow-rail="1"] {
+  padding-top: 86px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up[data-bw-shell-v2-body-follow-rail="1"] .comp-mozn18up-container > #comp-mozn27df {
+  grid-column: 2 !important;
+  max-width: 700px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up[data-bw-shell-v2-toc-in-body="1"] .comp-mozn18up-container > [data-bw-shell-v2-toc] {
+  align-self: start !important;
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  position: sticky !important;
+  top: 28px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up[data-bw-shell-v2-toc-in-body="1"] .comp-mozn18up-container > #comp-mozn27df {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up[data-bw-shell-v2-no-toc="1"] .comp-mozn18up-container {
+  display: block !important;
+  max-width: 700px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up:not([data-bw-shell-v2-toc-in-body="1"]):not([data-bw-shell-v2-no-toc="1"]):not([data-bw-shell-v2-body-follow-rail="1"]) .comp-mozn18up-container {
+  max-width: 700px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up[data-bw-shell-v2-no-toc="1"] .comp-mozn18up-container > #comp-mozn27df {
+  margin: 0 auto !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up .bw-tools-shell-v2-toc {
+  border-top: 2px solid var(--bw-shell-green) !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  max-width: 210px !important;
+  padding: 7px 0 0 !important;
+  width: 100% !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up .bw-tools-shell-v2-toc-label {
+  color: var(--bw-shell-green) !important;
+  font: 700 9px/1.4 'IBM Plex Mono', monospace !important;
+  letter-spacing: .14em !important;
+  margin: 0 0 18px !important;
+  text-transform: uppercase !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up .bw-tools-shell-v2-toc-list {
+  display: block !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up .bw-tools-shell-v2-toc-list li {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 0 !important;
+  display: block !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up .bw-tools-shell-v2-toc-list a {
+  align-items: baseline !important;
+  color: var(--bw-shell-muted) !important;
+  display: grid !important;
+  border-bottom: 1px solid var(--bw-shell-line) !important;
+  font: 650 10px/1.35 'IBM Plex Mono', monospace !important;
+  grid-template-columns: 28px minmax(0, 1fr) !important;
+  gap: 8px !important;
+  padding: 9px 0 !important;
+  text-decoration: none !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up .bw-tools-shell-v2-toc-list a:hover,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up .bw-tools-shell-v2-toc-list a:focus-visible {
+  color: var(--bw-shell-green-ink) !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up .bw-tools-shell-v2-toc-number {
+  color: var(--bw-shell-green) !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up .bw-tools-shell-v2-toc-text {
+  min-width: 0 !important;
+  overflow-wrap: anywhere !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .bw-tools-shell-v2-toc {
+  border-top: 2px solid var(--bw-shell-green) !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  max-width: 210px !important;
+  padding: 7px 0 0 !important;
+  position: sticky !important;
+  top: 28px !important;
+  width: 100% !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .bw-tools-shell-v2-toc-label {
+  color: var(--bw-shell-green) !important;
+  font: 700 9px/1.4 'IBM Plex Mono', monospace !important;
+  letter-spacing: .14em !important;
+  margin: 0 0 18px !important;
+  text-transform: uppercase !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .bw-tools-shell-v2-toc-list {
+  display: block !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .bw-tools-shell-v2-toc-list li {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 0 !important;
+  display: block !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .bw-tools-shell-v2-toc-list a {
+  align-items: baseline !important;
+  color: var(--bw-shell-muted) !important;
+  display: grid !important;
+  border-bottom: 1px solid var(--bw-shell-line) !important;
+  font: 650 10px/1.35 'IBM Plex Mono', monospace !important;
+  gap: 8px !important;
+  grid-template-columns: 28px minmax(0, 1fr) !important;
+  padding: 9px 0 !important;
+  text-decoration: none !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .bw-tools-shell-v2-toc-list a:hover,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .bw-tools-shell-v2-toc-list a:focus-visible {
+  color: var(--bw-shell-green-ink) !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .bw-tools-shell-v2-toc-number {
+  color: var(--bw-shell-green) !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .bw-tools-shell-v2-toc-text {
+  min-width: 0 !important;
+  overflow: hidden !important;
+  overflow-wrap: anywhere !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+/* The rail card and final band are two presentations derived from the same
+ * hydrated native tour CTA. Keeping the native section as the source of truth
+ * avoids duplicating CMS fields while matching the approved editorial layout. */
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .comp-mozmt2at-container .bw-tools-shell-v2-toc > [data-bw-shell-v2-tour-rail] {
+  align-self: start !important;
+  background: var(--bw-shell-green-dark) !important;
+  box-sizing: border-box !important;
+  color: #FFFFFF !important;
+  display: block !important;
+  left: 0 !important;
+  margin: 0 !important;
+  max-width: 210px !important;
+  min-height: 0 !important;
+  padding: 18px !important;
+  position: absolute !important;
+  top: calc(100% + 26px) !important;
+  width: 100% !important;
+  z-index: 2 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .bw-tools-shell-v2-tour-rail-eyebrow {
+  color: rgba(255, 255, 255, .72) !important;
+  font: 700 11px/1.2 'IBM Plex Mono', monospace !important;
+  letter-spacing: .16em !important;
+  margin: 0 0 13px !important;
+  text-transform: uppercase !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .bw-tools-shell-v2-tour-rail-title {
+  color: #FFFFFF !important;
+  display: block !important;
+  font: 650 23px/1.05 Fraunces, Merriweather, Georgia, serif !important;
+  letter-spacing: -.025em !important;
+  margin: 8px 0 5px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .bw-tools-shell-v2-tour-rail-copy {
+  color: rgba(255, 255, 255, .72) !important;
+  font: 500 11px/1.55 'Space Grotesk', Montserrat, Arial, sans-serif !important;
+  margin: 0 0 13px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .bw-tools-shell-v2-tour-rail-link {
+  align-items: center !important;
+  background: var(--bw-shell-yellow) !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  box-sizing: border-box !important;
+  color: var(--bw-shell-green-ink) !important;
+  display: inline-flex !important;
+  font: 900 9px/1.35 'IBM Plex Mono', monospace !important;
+  letter-spacing: .05em !important;
+  margin: 0 !important;
+  min-height: 38px !important;
+  padding: 8px 12px !important;
+  text-decoration: none !important;
+  text-transform: uppercase !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .bw-tools-shell-v2-tour-rail-link:hover,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .bw-tools-shell-v2-tour-rail-link:focus-visible,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .bw-tools-shell-v2-tour-rail-link:active {
+  background: var(--bw-shell-light) !important;
+  color: var(--bw-shell-green-ink) !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df {
+  box-sizing: border-box !important;
+  height: auto !important;
+  inset: auto !important;
+  margin: 0 auto !important;
+  max-width: 700px !important;
+  min-height: 0 !important;
+  min-width: 0 !important;
+  position: relative !important;
+  transform: none !important;
+  width: 100% !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df h1,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df h2,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df h3,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df h4 {
+  border-top: 3px solid var(--bw-shell-green) !important;
+  color: var(--bw-shell-ink) !important;
+  font-family: 'Space Grotesk', Montserrat, Arial, sans-serif !important;
+  font-weight: 750 !important;
+  letter-spacing: -.04em !important;
+  line-height: 1.04 !important;
+  margin: 86px 0 22px !important;
+  padding-top: 14px !important;
+  text-align: left !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df .bw-tools-shell-v2-section-heading::after {
+  color: var(--bw-shell-green) !important;
+  content: attr(data-bw-shell-v2-section) !important;
+  float: right !important;
+  font: 700 9px/1 'IBM Plex Mono', monospace !important;
+  letter-spacing: .08em !important;
+  margin-top: 7px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df h1:first-child,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df h2:first-child,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df h3:first-child,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df h4:first-child {
+  margin-top: 0 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df h1 { font-size: clamp(32px, 3.4vw, 43px) !important; }
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df h2 { font-size: clamp(29px, 3.4vw, 43px) !important; }
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df h3 { font-size: clamp(26px, 2.6vw, 34px) !important; }
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df h4 { font-size: clamp(21px, 2.2vw, 28px) !important; }
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df p,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df li {
+  color: var(--bw-shell-ink) !important;
+  font: 400 16px/1.72 'Space Grotesk', Montserrat, Arial, sans-serif !important;
+  text-align: left !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df p {
+  margin: 0 0 16px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df ul,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df ol {
+  box-sizing: border-box !important;
+  display: block !important;
+  list-style-position: outside !important;
+  margin: 24px 0 !important;
+  margin-inline-start: 0 !important;
+  padding-inline-start: 1.5em !important;
+  padding-left: 1.5em !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df ul {
+  list-style-type: disc !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df ol {
+  list-style-type: decimal !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df ul ul {
+  list-style-type: circle !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df ol ol {
+  list-style-type: lower-alpha !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df ul ul,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df ul ol,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df ol ul,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df ol ol {
+  margin: 10px 0 !important;
+  margin-inline-start: 0 !important;
+  padding-inline-start: 1.5em !important;
+  padding-left: 1.5em !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df li {
+  background: transparent !important;
+  border: 0 !important;
+  box-sizing: border-box !important;
+  display: list-item !important;
+  list-style-position: outside !important;
+  list-style-type: inherit !important;
+  margin: 10px 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  text-indent: 0 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df li::before {
+  content: none !important;
+  display: none !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df li::marker {
+  color: var(--bw-shell-lime) !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df li > p,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df li p {
+  display: block !important;
+  font: inherit !important;
+  line-height: inherit !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df [data-bw-shell-v2-advice],
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df .bw-tools-shell-v2-advice {
+  background: transparent !important;
+  border: 0 !important;
+  border-left: 4px solid var(--bw-shell-yellow) !important;
+  box-sizing: border-box !important;
+  color: var(--bw-shell-green-dark) !important;
+  font: italic 520 28px/1.4 Fraunces, Merriweather, Georgia, serif !important;
+  margin: 54px 0 0 !important;
+  padding: 28px 0 4px 28px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df [data-bw-shell-v2-advice] * {
+  color: inherit !important;
+  font: inherit !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df [data-bw-shell-v2-advice] > strong:first-child,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df .bw-tools-shell-v2-advice > strong:first-child {
+  color: var(--bw-shell-green) !important;
+  display: block !important;
+  font: 700 9px/1.2 'IBM Plex Mono', monospace !important;
+  letter-spacing: .16em !important;
+  margin: 0 0 8px !important;
+  text-transform: uppercase !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df [data-bw-shell-v2-advice] > strong:first-child + br,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df .bw-tools-shell-v2-advice > strong:first-child + br {
+  display: none !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-moznh5yl {
+  background: var(--bw-shell-paper) !important;
+  border-top: 1px solid var(--bw-shell-line) !important;
+  margin: 0 !important;
+  padding: 40px 24px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-moznh5yl iframe {
+  display: block !important;
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band {
+  background-color: var(--bw-shell-green-dark) !important;
+  background-image:
+    linear-gradient(rgba(250, 250, 245, .05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(250, 250, 245, .05) 1px, transparent 1px) !important;
+  background-size: 34px 34px !important;
+  border-top: 0 !important;
+  color: #FFFFFF !important;
+  display: block !important;
+  grid-area: 9 / 1 / 10 / 2 !important;
+  margin: 0 !important;
+  padding: 88px 24px !important;
+  visibility: visible !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band .comp-mozmgdoo-container {
+  align-items: flex-start !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+  height: auto !important;
+  justify-content: flex-start !important;
+  margin: 0 auto !important;
+  max-width: 860px !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmi7u3,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmkgew {
+  box-sizing: border-box !important;
+  height: auto !important;
+  inset: auto !important;
+  margin: 0 !important;
+  max-width: 720px !important;
+  min-height: 0 !important;
+  position: relative !important;
+  transform: none !important;
+  width: 100% !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmkgew {
+  max-width: 610px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmlwb5 {
+  align-self: flex-start !important;
+  box-sizing: border-box !important;
+  display: block !important;
+  flex: 0 0 auto !important;
+  height: auto !important;
+  inset: auto !important;
+  margin: 0 !important;
+  max-width: 100% !important;
+  min-height: 0 !important;
+  min-width: 0 !important;
+  position: relative !important;
+  transform: none !important;
+  width: max-content !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmi7u3 h1,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmi7u3 h2,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmi7u3 h3,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmi7u3 span {
+  color: #FFFFFF !important;
+  font: 500 clamp(42px, 5.2vw, 67px)/.99 Fraunces, Merriweather, Georgia, serif !important;
+  letter-spacing: -.045em !important;
+  margin: 12px 0 20px !important;
+  text-align: left !important;
+  white-space: normal !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmi7u3::before {
+  color: var(--bw-shell-light) !important;
+  content: 'FREE BERLIN WALKING TOUR \00B7  ~2H \00B7  TIP-BASED' !important;
+  display: block !important;
+  font: 700 9px/1.2 'IBM Plex Mono', monospace !important;
+  letter-spacing: .16em !important;
+  margin: 0 0 12px !important;
+  text-transform: uppercase !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmkgew p,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmkgew span {
+  color: rgba(255, 255, 255, .76) !important;
+  font: 400 16px/1.65 Montserrat, Arial, sans-serif !important;
+  margin: 0 0 26px !important;
+  text-align: left !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmlwb5 a {
+  align-items: center !important;
+  background: var(--bw-shell-yellow) !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  box-sizing: border-box !important;
+  color: var(--bw-shell-green-ink) !important;
+  display: inline-flex !important;
+  font: 800 11px/1.2 Montserrat, Arial, sans-serif !important;
+  height: auto !important;
+  letter-spacing: .06em !important;
+  margin: 0 !important;
+  max-height: 56px !important;
+  max-width: 100% !important;
+  min-height: 46px !important;
+  padding: 13px 19px !important;
+  text-decoration: none !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+  width: max-content !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmlwb5 a:link,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmlwb5 a:visited,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmlwb5 a:focus-visible {
+  color: var(--bw-shell-green-ink) !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmlwb5 a span {
+  color: var(--bw-shell-green-ink) !important;
+  display: inline !important;
+  font: inherit !important;
+  height: auto !important;
+  max-width: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  white-space: nowrap !important;
+  width: auto !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmlwb5 a:hover,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmlwb5 a:active {
+  background: var(--bw-shell-light) !important;
+  color: var(--bw-shell-green-ink) !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv {
+  background: var(--bw-shell-paper) !important;
+  border-top: 1px solid var(--bw-shell-line) !important;
+  grid-area: 10 / 1 / 11 / 2 !important;
+  margin: 0 !important;
+  padding: 90px 24px 110px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv .comp-mozp1zlv-container,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-container] {
+  align-items: stretch !important;
+  box-sizing: border-box !important;
+  column-gap: 18px !important;
+  display: grid !important;
+  grid-auto-rows: auto !important;
+  grid-template-areas: 'head head' 'first second' !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  grid-template-rows: max-content max-content !important;
+  margin: 0 auto !important;
+  max-width: 1020px !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  row-gap: 30px !important;
+  width: 100% !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozpfm6g {
+  color: var(--bw-shell-ink) !important;
+  font: 650 42px/1 Fraunces, Merriweather, Georgia, serif !important;
+  grid-area: head !important;
+  height: auto !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+  text-align: left !important;
+  letter-spacing: -.035em !important;
+  padding-right: 210px !important;
+  width: 100% !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozpfm6g::before {
+  color: var(--bw-shell-green) !important;
+  content: 'KEEP PLANNING' !important;
+  display: block !important;
+  font: 700 9px/1.2 'IBM Plex Mono', monospace !important;
+  letter-spacing: .14em !important;
+  margin: 0 0 8px !important;
+  text-transform: uppercase !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozpfm6g h1,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozpfm6g h2,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozpfm6g h3,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozpfm6g h4,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozpfm6g span {
+  color: var(--bw-shell-ink) !important;
+  font: 650 42px/1 Fraunces, Merriweather, Georgia, serif !important;
+  letter-spacing: -.035em !important;
+  margin: 0 !important;
+  text-align: left !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv .bw-tools-shell-v2-related-all {
+  align-self: end !important;
+  color: var(--bw-shell-green-ink) !important;
+  display: inline-flex !important;
+  font: 700 10px/1.2 'IBM Plex Mono', monospace !important;
+  grid-area: head !important;
+  justify-self: end !important;
+  letter-spacing: .08em !important;
+  margin: 0 0 4px !important;
+  position: relative !important;
+  text-decoration: underline !important;
+  text-transform: uppercase !important;
+  text-underline-offset: 4px !important;
+  width: max-content !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv .bw-tools-shell-v2-related-all:hover,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv .bw-tools-shell-v2-related-all:focus-visible {
+  color: var(--bw-shell-green) !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozp2aft,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozp3f25 {
+  align-self: stretch !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--bw-shell-line) !important;
+  border-radius: 0 !important;
+  border-top: 1px solid var(--bw-shell-line) !important;
+  box-sizing: border-box !important;
+  box-shadow: none !important;
+  filter: none !important;
+  height: auto !important;
+  justify-self: stretch !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  width: 100% !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozp2aft { grid-area: first !important; }
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozp3f25 { grid-area: second !important; }
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] {
+  min-width: 0 !important;
+  overflow: visible !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > a {
+  align-items: center !important;
+  box-sizing: border-box !important;
+  color: var(--bw-shell-green-ink) !important;
+  display: grid !important;
+  gap: 8px 20px !important;
+  grid-template-columns: 78px minmax(0, 1fr) !important;
+  grid-template-rows: auto auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  padding: 24px !important;
+  text-decoration: none !important;
+  width: 100% !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > a > img,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] .bw-related-tool-icon,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] .inner-box img {
+  display: block !important;
+  height: 78px !important;
+  max-height: 78px !important;
+  max-width: 78px !important;
+  object-fit: contain !important;
+  overflow: hidden !important;
+  width: 78px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] .bw-related-tool-icon > img {
+  display: block !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  max-width: 100% !important;
+  object-fit: contain !important;
+  width: 100% !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > a > img,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > a > .bw-related-tool-icon,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > .bw-related-tool-icon {
+  align-self: center !important;
+  grid-column: 1 !important;
+  grid-row: 1 / span 2 !important;
+  inset: auto !important;
+  position: relative !important;
+  transform: none !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > a > span,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > a > div span {
+  color: var(--bw-shell-green) !important;
+  display: block !important;
+  font: 700 9px/1.2 'IBM Plex Mono', monospace !important;
+  letter-spacing: .11em !important;
+  margin: 0 0 7px !important;
+  text-transform: uppercase !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > a > span {
+  align-self: end !important;
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > a > h2,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > a > h3,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > a > h4,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > a > div h2,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > a > div h3,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > a > div h4 {
+  color: var(--bw-shell-ink) !important;
+  font: 700 19px/1.2 'IBM Plex Mono', monospace !important;
+  letter-spacing: .04em !important;
+  margin: 0 !important;
+  overflow-wrap: anywhere !important;
+  text-transform: uppercase !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > a > h2,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > a > h3,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > a > h4 {
+  align-self: start !important;
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+}
+
+/* Native Wix related cards keep the link in a button wrapper and the icon in
+ * an empty inner box. Keep that contract intact while constraining both
+ * branches to the same small editorial card footprint. */
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] {
+  align-items: center !important;
+  display: grid !important;
+  gap: 8px 20px !important;
+  grid-template-columns: 78px minmax(0, 1fr) !important;
+  grid-template-rows: auto auto !important;
+  padding: 24px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card][data-bw-shell-v2-related-direct-link="1"] {
+  display: block !important;
+  padding: 0 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > .inner-box {
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+  grid-column: 1 !important;
+  grid-row: 1 / span 2 !important;
+  height: 78px !important;
+  max-height: 78px !important;
+  max-width: 78px !important;
+  min-height: 0 !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  width: 78px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > [data-testid="richTextElement"] {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  min-width: 0 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] [data-bw-shell-v2-related-kicker] {
+  color: var(--bw-shell-green) !important;
+  display: block !important;
+  font: 700 9px/1.2 'IBM Plex Mono', monospace !important;
+  letter-spacing: .11em !important;
+  margin: 0 0 7px !important;
+  text-transform: uppercase !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] [data-bw-shell-v2-related-title] {
+  color: var(--bw-shell-ink) !important;
+  display: block !important;
+  font: 700 19px/1.2 'IBM Plex Mono', monospace !important;
+  letter-spacing: .04em !important;
+  margin: 0 !important;
+  overflow-wrap: anywhere !important;
+  text-transform: uppercase !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > [data-testid="richTextElement"] h2,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > [data-testid="richTextElement"] h3,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > [data-testid="richTextElement"] h4 {
+  color: var(--bw-shell-ink) !important;
+  font: 700 19px/1.2 'IBM Plex Mono', monospace !important;
+  letter-spacing: .04em !important;
+  margin: 0 !important;
+  overflow-wrap: anywhere !important;
+  text-transform: uppercase !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > :has(> a[href]),
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > [data-bw-shell-v2-related-action-wrap] {
+  align-self: start !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-sizing: border-box !important;
+  display: block !important;
+  height: auto !important;
+  inset: auto !important;
+  margin: 0 !important;
+  position: relative !important;
+  transform: none !important;
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+  visibility: visible !important;
+  width: max-content !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > :has(> a[href]) a,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] [data-bw-shell-v2-related-action] {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: var(--bw-shell-green-ink) !important;
+  display: inline-flex !important;
+  font: 700 10px/1.2 'IBM Plex Mono', monospace !important;
+  height: auto !important;
+  justify-content: flex-start !important;
+  letter-spacing: .08em !important;
+  max-height: none !important;
+  max-width: 100% !important;
+  min-height: 0 !important;
+  min-width: 0 !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+  padding: 0 !important;
+  text-decoration: none !important;
+  text-transform: uppercase !important;
+  visibility: visible !important;
+  white-space: nowrap !important;
+  width: auto !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] [data-bw-shell-v2-related-action]::before,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] [data-bw-shell-v2-related-action]::after {
+  border: 0 !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] [data-bw-shell-v2-related-action] span {
+  color: var(--bw-shell-green-ink) !important;
+  display: inline !important;
+  font: inherit !important;
+  height: auto !important;
+  max-width: none !important;
+  opacity: 1 !important;
+  text-align: left !important;
+  visibility: visible !important;
+  white-space: nowrap !important;
+  width: auto !important;
+}
+
+/* Keep the shared bridge as the one outer conversion surface when it exists.
+ * The widget's own brand.js CTA is disabled by surface=tool-page. */
+html.bw-tools-detail.bw-tools-shell-v2 body .bw-tool-bridge,
+html.bw-tools-detail.bw-tools-shell-v2 body .bw-tour-cta-row {
+  box-sizing: border-box !important;
+  margin: 24px auto !important;
+  max-width: 1120px !important;
+  width: calc(100% - 48px) !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body .bw-tool-bridge {
+  background: var(--bw-shell-green-dark) !important;
+  border-top: 7px solid var(--bw-shell-yellow) !important;
+  color: #FFFFFF !important;
+  padding: 24px 28px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body .bw-tool-bridge h2,
+html.bw-tools-detail.bw-tools-shell-v2 body .bw-tool-bridge p {
+  color: #FFFFFF !important;
+  font-family: Fraunces, Merriweather, Georgia, serif !important;
+  margin-top: 0 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body .bw-tool-bridge .bw-tool-bridge-book {
+  background: var(--bw-shell-yellow) !important;
+  color: var(--bw-shell-green-ink) !important;
+  display: inline-flex !important;
+  font-weight: 700 !important;
+  min-height: 44px !important;
+  padding: 12px 18px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body .bw-tour-cta-row {
+  background: var(--bw-shell-green-dark) !important;
+  border-top: 7px solid var(--bw-shell-yellow) !important;
+  padding: 20px 24px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body .bw-tour-cta-row .bw-tour-cta-link {
+  background: var(--bw-shell-yellow) !important;
+  color: var(--bw-shell-green-ink) !important;
+  display: block !important;
+  min-height: 44px !important;
+}
+
+/* Existing Wix/global conversion surfaces are hidden so the bridge or the
+ * dynamic widget can own one clear next action. */
+html.bw-tools-detail.bw-tools-shell-v2 body #bw-desktop-cta,
+html.bw-tools-detail.bw-tools-shell-v2 body #bw-sticky-cta,
+html.bw-tools-detail.bw-tools-shell-v2 body #bw-exit-intent-popup,
+html.bw-tools-detail.bw-tools-shell-v2 body [data-bw-tools-shell-v2-hidden="1"] {
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body a:focus-visible,
+html.bw-tools-detail.bw-tools-shell-v2 body button:focus-visible,
+html.bw-tools-detail.bw-tools-shell-v2 body input:focus-visible {
+  outline: 3px solid var(--bw-shell-yellow) !important;
+  outline-offset: 3px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body .bw-tool-bridge .bw-tool-bridge-book:focus-visible,
+html.bw-tools-detail.bw-tools-shell-v2 body .bw-tour-cta-row .bw-tour-cta-link:focus-visible {
+  outline-color: var(--bw-shell-light) !important;
+}
+
+@media (max-width: 899px) {
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 {
+    --bw-shell-band-height: clamp(280px, 108vw, 500px);
+    padding: 0 16px 38px !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .comp-mozc935g3-container {
+    column-gap: 0 !important;
+    grid-template-areas:
+      'meta'
+      'heading'
+      'lead'
+      'widget'
+      'secondary' !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    padding-top: 28px !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 [data-bw-shell-v2-hero-meta] {
+    padding-bottom: 14px !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozch2i3 h1,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozch2i3 h2,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozch2i3 h3,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozch2i3 span {
+    font-size: clamp(42px, 13vw, 62px) !important;
+    line-height: .96 !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozck6is p,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozck6is span {
+    font-size: 19px !important;
+    line-height: 1.28 !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozco5et {
+    margin: 18px 0 0 !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozco5et > [data-bw-shell-v2-tool-entry] {
+    padding: 13px 16px 22px !important;
+  }
+
+  /* On mobile this row follows the dynamic widget and sits on cream, so it
+   * needs its own readable light-surface treatment instead of hero white. */
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozcllqt {
+    background: var(--bw-shell-cream) !important;
+    border-top: 1px solid var(--bw-shell-line) !important;
+    color: var(--bw-shell-green-ink) !important;
+    margin: 22px 0 0 !important;
+    padding: 16px 0 2px !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozcllqt p,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozcllqt span {
+    color: var(--bw-shell-green-ink) !important;
+    font: 500 13px/1.55 Montserrat, Arial, sans-serif !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 [data-bw-shell-v2-summary] {
+    display: none !important;
+    height: 0 !important;
+    margin: 0 !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    visibility: hidden !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at {
+    padding: 42px 16px 18px !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] {
+    padding-bottom: 18px !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at #comp-mozmtefi {
+    padding: 0 !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .comp-mozmt2at-container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    position: static !important;
+    z-index: auto !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] #comp-mozmtefi {
+    order: 2 !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .bw-tools-shell-v2-toc {
+    margin: 0 0 42px !important;
+    max-width: none !important;
+    order: 1 !important;
+    position: static !important;
+    width: 100% !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .comp-mozmt2at-container > [data-bw-shell-v2-toc] {
+    left: auto !important;
+    position: static !important;
+    top: auto !important;
+    width: 100% !important;
+    z-index: auto !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .bw-tools-shell-v2-toc-list a {
+    padding: 10px 0 !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .bw-tools-shell-v2-toc-text {
+    overflow: visible !important;
+    overflow-wrap: anywhere !important;
+    text-overflow: clip !important;
+    white-space: normal !important;
+  }
+
+  /* Keep the rail's tour note desktop-only. The native full-width band below
+   * the article remains the single mobile conversion surface. */
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .comp-mozmt2at-container .bw-tools-shell-v2-toc > [data-bw-shell-v2-tour-rail] {
+    display: none !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at #comp-mozmtefi p,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at #comp-mozmtefi span {
+    font-size: 17px !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up {
+    padding: 18px 16px 56px !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up[data-bw-shell-v2-body-follow-rail="1"] {
+    padding-top: 18px !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up .comp-mozn18up-container {
+    display: block !important;
+    max-width: 700px !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up[data-bw-shell-v2-body-follow-rail="1"] .comp-mozn18up-container {
+    display: block !important;
+    max-width: 700px !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up .comp-mozn18up-container > [data-bw-shell-v2-toc] {
+    margin: 0 0 42px !important;
+    max-width: none !important;
+    position: static !important;
+    width: 100% !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up .bw-tools-shell-v2-toc-list a {
+    font-size: 10px !important;
+    padding: 10px 0 !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df h1 { font-size: 32px !important; }
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df h2 { font-size: 31px !important; }
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df h3 { font-size: 24px !important; }
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df p,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df li { font-size: 16px !important; }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df ul,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df ol {
+    display: block !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-moznh5yl,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band {
+    padding: 68px 20px !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmlwb5 {
+    align-self: flex-start !important;
+    height: auto !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    width: max-content !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmlwb5 a {
+    display: inline-flex !important;
+    height: auto !important;
+    max-height: 56px !important;
+    max-width: 100% !important;
+    min-height: 46px !important;
+    padding: 13px 19px !important;
+    white-space: nowrap !important;
+    width: max-content !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmi7u3 h1,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmi7u3 h2,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmi7u3 h3,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmi7u3 span {
+    font-size: clamp(36px, 11vw, 54px) !important;
+    line-height: 1 !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmkgew p,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmkgew span {
+    font-size: 15px !important;
+    line-height: 1.55 !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > a {
+    gap: 14px !important;
+    grid-template-columns: 64px minmax(0, 1fr) !important;
+    padding: 18px !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > a > img,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] .bw-related-tool-icon,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] .inner-box img {
+    height: 64px !important;
+    max-height: 64px !important;
+    max-width: 64px !important;
+    width: 64px !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > a > h2,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > a > h3,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > a > h4,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > a > div h2,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > a > div h3,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > a > div h4 {
+    font-size: 16px !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] {
+    display: grid !important;
+    gap: 8px 14px !important;
+    grid-template-columns: 64px minmax(0, 1fr) !important;
+    grid-template-rows: auto auto !important;
+    padding: 18px !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > .inner-box {
+    grid-column: 1 !important;
+    grid-row: 1 / span 2 !important;
+    height: 64px !important;
+    max-height: 64px !important;
+    max-width: 64px !important;
+    width: 64px !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > [data-testid="richTextElement"] {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > [data-testid="richTextElement"] h2,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > [data-testid="richTextElement"] h3,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > [data-testid="richTextElement"] h4 {
+    font-size: 16px !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-card] > :has(> a[href]) {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv .comp-mozp1zlv-container,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-related-container] {
+    grid-template-areas: 'title' 'all' 'first' 'second' !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: max-content max-content max-content max-content !important;
+    row-gap: 0 !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozpfm6g {
+    grid-area: title !important;
+    margin: 0 0 12px !important;
+    padding-right: 0 !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv .bw-tools-shell-v2-related-all {
+    grid-area: all !important;
+    justify-self: start !important;
+    margin: 0 0 30px !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozp3f25 {
+    border-top: 0 !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body .bw-tool-bridge,
+  html.bw-tools-detail.bw-tools-shell-v2 body .bw-tour-cta-row {
+    margin-left: 16px !important;
+    margin-right: 16px !important;
+    width: calc(100% - 32px) !important;
+  }
+}
+
+@media (max-width: 460px) {
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozch2i3 h1,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozch2i3 h2,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozch2i3 h3,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozch2i3 span {
+    font-size: clamp(38px, 12vw, 52px) !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozco5et {
+    margin-top: 14px !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 [data-bw-shell-v2-summary] {
+    padding: 16px !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-summary-icon {
+    flex-basis: 62px !important;
+    height: 62px !important;
+    width: 62px !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-summary-head strong {
+    font-size: 22px !important;
+  }
+}
+
+/*
+ * Host repair pilot.
+ *
+ * The route flag is set by the shell JS, not by the Wix host runtime. Keep
+ * this contract limited to the primary HTML component and its private iframe
+ * chain: no section, responsive-container or page-grid sizing is written here.
+ * Inline height/min-height from the existing rev18 runtime remains authoritative
+ * on the iframe/private shells; these rules only restore normal flow and remove
+ * Wix's aspect/clipping envelope. Host width is intentionally not declared here:
+ * the existing template/Wix desktop and mobile width rules remain authoritative.
+ * The route root carries the pilot specificity; no section ID is part of this
+ * repair selector, so Wix section/page-grid ownership remains untouched. The
+ * private chain is intentionally limited to the three direct wrapper levels
+ * rev18 traverses before the host; this keeps a secondary/nested iframe outside
+ * the repair surface. The named layer is earlier than the legacy unlayered
+ * important envelope, so the important cascade order is reversed by CSS layers
+ * without a runtime marker, remount, or MutationObserver.
+ */
+@layer bw-host-repair {
+html.bw-tools-shell-v2[data-bw-host-repair="pilot"].bw-host-repair-pilot body #comp-mozco5et,
+html.bw-tools-shell-v2[data-bw-host-repair="all"].bw-host-repair-all body #comp-mozco5et {
+  aspect-ratio: auto !important;
+  background: #FAFAF5 !important;
+  box-sizing: border-box !important;
+  display: block !important;
+  height: auto !important;
+  inset: auto !important;
+  max-height: none !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  padding: 0 !important;
+  position: relative !important;
+}
+
+html.bw-tools-shell-v2[data-bw-host-repair="pilot"].bw-host-repair-pilot body #comp-mozco5et > div:has(iframe),
+html.bw-tools-shell-v2[data-bw-host-repair="all"].bw-host-repair-all body #comp-mozco5et > div:has(iframe),
+html.bw-tools-shell-v2[data-bw-host-repair="pilot"].bw-host-repair-pilot body #comp-mozco5et > div:has(iframe) > div:has(iframe),
+html.bw-tools-shell-v2[data-bw-host-repair="all"].bw-host-repair-all body #comp-mozco5et > div:has(iframe) > div:has(iframe),
+html.bw-tools-shell-v2[data-bw-host-repair="pilot"].bw-host-repair-pilot body #comp-mozco5et > div:has(iframe) > div:has(iframe) > div:has(iframe),
+html.bw-tools-shell-v2[data-bw-host-repair="all"].bw-host-repair-all body #comp-mozco5et > div:has(iframe) > div:has(iframe) > div:has(iframe),
+html.bw-tools-shell-v2[data-bw-host-repair="pilot"].bw-host-repair-pilot body #comp-mozco5et > div:has(iframe) iframe,
+html.bw-tools-shell-v2[data-bw-host-repair="all"].bw-host-repair-all body #comp-mozco5et > div:has(iframe) iframe {
+  aspect-ratio: auto !important;
+  box-sizing: border-box !important;
+  display: block !important;
+  inset: auto !important;
+  max-height: none !important;
+  max-width: 100% !important;
+  min-height: 0 !important;
+  min-width: 0 !important;
+  overflow: visible !important;
+  position: relative !important;
+  width: 100% !important;
+}
+
+html.bw-tools-shell-v2[data-bw-host-repair="pilot"].bw-host-repair-pilot body #comp-mozco5et > div:has(iframe),
+html.bw-tools-shell-v2[data-bw-host-repair="all"].bw-host-repair-all body #comp-mozco5et > div:has(iframe),
+html.bw-tools-shell-v2[data-bw-host-repair="pilot"].bw-host-repair-pilot body #comp-mozco5et > div:has(iframe) > div:has(iframe),
+html.bw-tools-shell-v2[data-bw-host-repair="all"].bw-host-repair-all body #comp-mozco5et > div:has(iframe) > div:has(iframe),
+html.bw-tools-shell-v2[data-bw-host-repair="pilot"].bw-host-repair-pilot body #comp-mozco5et > div:has(iframe) > div:has(iframe) > div:has(iframe),
+html.bw-tools-shell-v2[data-bw-host-repair="all"].bw-host-repair-all body #comp-mozco5et > div:has(iframe) > div:has(iframe) > div:has(iframe) {
+  height: auto !important;
+}
+}

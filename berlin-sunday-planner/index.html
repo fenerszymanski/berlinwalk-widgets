@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Your Berlin Sunday: A Real Plan for the Day the Shops Are Shut</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='32' r='21' fill='%23FFE600'/%3E%3Cpath d='M18 20h28v27H18z' fill='%23FAFAF5'/%3E%3Cpath d='M22 25c7 1 9 15 20 16' fill='none' stroke='%23123D18' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
+    --yellow:#FFE600; --ink:#1c2a1c; --panel:#ffffff; --bone:#f4f9ec;
+    --line:#e0eccf; --shadow:0 10px 30px rgba(18,61,24,.14); --red:#E63946;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .wrap{max-width:940px;margin:0 auto;padding:4px}
+  .card{background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+  .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:20px 22px}
+  .kick{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:700;margin:0 0 6px;font-family:"IBM Plex Mono",monospace}
+  .head h1{margin:0;font-size:21px;font-weight:800;line-height:1.22}
+  .head p{margin:8px 0 0;font-size:13.5px;color:#e7f3e2;max-width:680px}
+
+  .controls{padding:16px 18px 6px}
+  .ctrl{margin:0 0 14px}
+  .ctrl-label{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--green-deep);font-weight:700;font-family:"IBM Plex Mono",monospace;margin:0 0 8px;display:flex;align-items:center;gap:7px}
+  .ctrl-label .n{background:var(--green);color:#fff;width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px}
+  .pills{display:flex;flex-wrap:wrap;gap:8px}
+  .pill{border:1.5px solid var(--line);background:var(--bone);color:var(--green-deep);border-radius:999px;padding:9px 15px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s;display:inline-flex;align-items:center;gap:7px}
+  .pill:hover{border-color:var(--lime)}
+  .pill[aria-pressed="true"]{background:var(--green);color:#fff;border-color:var(--green)}
+  .pill .emo{font-size:15px;line-height:1}
+
+  .rulebar{margin:2px 18px 0;background:#fff8cc;border:1px solid #f0e08a;border-radius:12px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:#5a4e12}
+  .rulebar b{color:#3f3a10}
+  .rulebar .ico{font-size:16px;line-height:1.3}
+
+  .plan{padding:16px 18px 6px}
+  .plan-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:0 0 4px}
+  .plan-h h2{margin:0;font-size:15px;color:var(--green-deep);font-weight:800}
+  .plan-h .sub{font-size:12px;color:#6f7d68}
+
+  .timeline{position:relative;margin:14px 0 4px;padding-left:8px}
+  .slot{position:relative;padding:0 0 18px 34px}
+  .slot:before{content:"";position:absolute;left:12px;top:6px;bottom:-6px;width:2px;background:linear-gradient(var(--lime),var(--soft))}
+  .slot:last-child:before{display:none}
+  .dot{position:absolute;left:5px;top:4px;width:16px;height:16px;border-radius:50%;background:var(--green);border:3px solid #fff;box-shadow:0 0 0 2px var(--soft)}
+  .slot.sun .dot{background:#f2a900;box-shadow:0 0 0 2px #ffe08a}
+  .slot.grey .dot{background:#5b7f9e;box-shadow:0 0 0 2px #cfe0ec}
+  .time{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:700;color:var(--green);letter-spacing:.04em}
+  .slot h3{margin:3px 0 3px;font-size:15.5px;font-weight:800;color:var(--ink)}
+  .slot p{margin:0 0 7px;font-size:13.5px;color:#3f4a3c}
+  .meta{display:flex;flex-wrap:wrap;gap:6px}
+  .tag{font-size:11.5px;font-weight:600;border-radius:8px;padding:4px 9px;display:inline-flex;align-items:center;gap:5px}
+  .tag.open{background:#e6f4e0;color:#255c1f;border:1px solid #c7e6bd}
+  .tag.trip{background:#eef3fb;color:#2c4a72;border:1px solid #d3e0f2}
+  .tag.warn{background:#fdeceb;color:#a3271f;border:1px solid #f4cdca}
+
+  .foot{padding:6px 18px 18px}
+  .note{font-size:12px;color:#6f7d68;margin:6px 0 0}
+  .cta{display:inline-block;margin-top:10px;background:var(--yellow);color:#123D18;font-weight:800;text-decoration:none;padding:11px 16px;border-radius:10px;font-size:13.5px}
+  .cta:hover{filter:brightness(.97)}
+  a.inl{color:var(--green);font-weight:700;text-decoration:none;border-bottom:1.5px solid var(--soft)}
+</style>
+</head>
+<body>
+<div class="wrap"><div class="card">
+  <div class="head">
+    <p class="kick">BerlinWalk • Sunday Planner</p>
+    <h1>Build your Berlin Sunday</h1>
+    <p>Most normal shops are shut, but Sunday is Berlin's best day if you know the rhythm. Tell me three things and I will lay out a real plan, with the places, the hours, and the Sunday traps.</p>
+  </div>
+
+  <div class="controls">
+    <div class="ctrl">
+      <p class="ctrl-label"><span class="n">1</span> What is the weather doing?</p>
+      <div class="pills" data-group="weather">
+        <button class="pill" data-val="sun" aria-pressed="true"><span class="emo">☀️</span> Sunny</button>
+        <button class="pill" data-val="grey" aria-pressed="false"><span class="emo">🌧️</span> Grey or wet</button>
+      </div>
+    </div>
+    <div class="ctrl">
+      <p class="ctrl-label"><span class="n">2</span> Where are you based?</p>
+      <div class="pills" data-group="base">
+        <button class="pill" data-val="mitte" aria-pressed="true">Mitte</button>
+        <button class="pill" data-val="pberg" aria-pressed="false">Prenzlauer Berg</button>
+        <button class="pill" data-val="xberg" aria-pressed="false">Kreuzberg / Neukölln</button>
+        <button class="pill" data-val="fhain" aria-pressed="false">Friedrichshain</button>
+      </div>
+    </div>
+    <div class="ctrl">
+      <p class="ctrl-label"><span class="n">3</span> How much do you want to move?</p>
+      <div class="pills" data-group="pace">
+        <button class="pill" data-val="easy" aria-pressed="true">Easy day</button>
+        <button class="pill" data-val="full" aria-pressed="false">Full Berlin day</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="rulebar">
+    <span class="ico">🛒</span>
+    <span><b>Sunday rule:</b> most normal supermarkets, shops and chemists close. Grab water, snacks and picnic supplies from an open station supermarket or a Späti before you settle in a park, and check the exact place first.</span>
+  </div>
+
+  <div class="plan">
+    <div class="plan-h">
+      <h2 id="planTitle">Your Sunday</h2>
+      <span class="sub" id="planSub"></span>
+    </div>
+    <div class="timeline" id="timeline"></div>
+  </div>
+
+  <div class="foot">
+    <p class="note" id="seasonNote"></p>
+    <a class="cta" href="https://www.berlinwalk.com/berlin-walking-tour-route?utm_source=embed&utm_medium=widget&utm_campaign=berlin-sunday-planner&utm_content=cta" target="_blank" rel="noopener">Walk my tour route as a story map →</a>
+    <p class="note">I usually do not guide on a Sunday, so this is a self-guided kind of day. Save the <a class="inl" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=embed&utm_medium=widget&utm_campaign=berlin-sunday-planner&utm_content=book" target="_blank" rel="noopener">free walking tour</a> for another day of your trip.</p>
+  </div>
+</div></div>
+
+<script>
+(function(){
+  var state = { weather:"sun", base:"mitte", pace:"easy" };
+
+  // Morning flea market nearest each base.
+  var MARKET = {
+    mitte:  { t:"10:15", title:"Flohmarkt am Mauerpark", desc:"A short hop north lands you at Berlin's biggest Sunday flea market on the former border strip. Records, vintage, street food and buskers.", open:"Flea market, 10:00–18:00", trip:"~15 min · U8 to Bernauer Str.", cash:true },
+    pberg:  { t:"10:15", title:"Flohmarkt am Mauerpark", desc:"Your local Sunday institution. Arrive soon after opening for more space before the midday crowd.", open:"Flea market, 10:00–18:00", trip:"~10 min on foot / U2 Eberswalder Str.", cash:true },
+    xberg:  { t:"10:00", title:"Nowkoelln Flowmarkt (Maybachufer)", desc:"Young designers and private sellers along the canal in Neukölln. It runs on selected published Sundays, usually every two weeks in season. On an off week, walk the Maybachufer and Landwehrkanal instead.", open:"Selected dates, 10:00–17:00", trip:"~10 min on foot / U8 Schönleinstr.", cash:true },
+    fhain:  { t:"10:00", title:"Boxhagener Platz flea market", desc:"Smaller and better for it: heavy on records and books, ringed by cafés for the coffee afterwards.", open:"Flea market, ~10:00–18:00", trip:"~8 min on foot", cash:true }
+  };
+  var BRUNCH = {
+    mitte:  { t:"12:00", title:"Brunch around Hackescher Markt", desc:"Slow Sunday brunch is a Berlin ritual. Cafés fill from about 10:00, so put your name down and wander." },
+    pberg:  { t:"12:00", title:"Brunch on Kastanienallee", desc:"Prenzlauer Berg does the classic long Sunday breakfast. Expect a wait at the popular spots near the market." },
+    xberg:  { t:"12:00", title:"Brunch in Kreuzberg / Neukölln", desc:"This is brunch heartland. Grab an outside table and a coffee, and let the morning stretch." },
+    fhain:  { t:"12:00", title:"Coffee on Boxhagener Platz", desc:"The square is ringed with cafés. Post-market coffee here is the whole point of a Friedrichshain Sunday." }
+  };
+  // Sunny afternoon outdoors nearest each base.
+  var SUN_PM = {
+    mitte:  { t:"14:30", title:"Tiergarten", desc:"Berlin's huge central park is five minutes from Brandenburg Gate. Find a patch of grass and do nothing well.", trip:"~10 min · S-Bahn to Brandenburger Tor" },
+    pberg:  { t:"14:30", title:"Mauerpark on the grass", desc:"Stay put. The slope fills with picnics, drummers and grill smoke through the afternoon.", trip:"you are already here" },
+    xberg:  { t:"14:30", title:"Tempelhofer Feld", desc:"The runways of the old airport are now a vast open park for cycling, skating and kites. Nothing in Europe feels quite like it.", trip:"~10 min · U8 to Boddinstr." },
+    fhain:  { t:"14:30", title:"Volkspark Friedrichshain", desc:"The city's oldest park, with the fairytale fountain and shady lawns a short walk from Boxhagener Platz.", trip:"~15 min on foot" }
+  };
+  // Grey-day museum nearest each base.
+  var GREY_PM = {
+    mitte:  { t:"14:00", title:"Museum Island", desc:"On a wet Sunday the museums win. Nefertiti at the Neues Museum, the Alte Nationalgalerie, the Bode. The Pergamonmuseum remains fully closed until its partial reopening on 4 June 2027.", open:"Check each museum's Sunday hours", trip:"~5 min on foot" },
+    pberg:  { t:"14:00", title:"Museum in der Kulturbrauerei", desc:"Free museum of everyday life in East Germany, inside the old brewery. Half an hour well spent, then Museum Island by tram M1 if you want more.", open:"Free · Tue–Sun", trip:"~10 min on foot" },
+    xberg:  { t:"14:00", title:"Jewish Museum Berlin", desc:"Daniel Libeskind's building is as much the point as the collection. A strong, sheltered Sunday afternoon.", open:"Open daily · normal Sunday hours", trip:"~10 min · U1/U3 Hallesches Tor" },
+    fhain:  { t:"14:00", title:"Museum Island", desc:"Hop west to the island for the big names. In Berlin the museums close on Mondays, not Sundays, so a wet Sunday is ideal.", open:"Normal Sunday hours (Mon is the closed day)", trip:"~15 min · U5 to Museumsinsel" }
+  };
+  // Big-move lake option for a full sunny day.
+  var LAKE = {
+    mitte:  { t:"15:30", title:"Strandbad Weißensee", desc:"Trade the crowd for a real sand beach in the north of the city. Bring your swim things and something to grill.", trip:"~30 min · tram M4" },
+    pberg:  { t:"15:30", title:"Strandbad Weißensee", desc:"An easy tram ride to a proper lake beach. The classic Prenzlauer Berg summer-Sunday escape.", trip:"~25 min · tram M4" },
+    xberg:  { t:"15:30", title:"Schlachtensee or Wannsee", desc:"Ride the S-Bahn southwest to the lakes. Schlachtensee for a shady loop, Wannsee for the big lido beach.", trip:"~35 min · S1 / S7" },
+    fhain:  { t:"15:30", title:"Müggelsee, Berlin's biggest lake", desc:"Head east to the Müggelsee for swimming, a forest shore and a lakeside beer garden.", trip:"~35 min · S3 + tram" }
+  };
+  // Evening.
+  var SUN_EVE = {
+    mitte:  { t:"18:30", title:"Sunset on the Spree", desc:"Drift back to the river by Museum Island or Monbijoupark and watch the light go over the water. Grab a beer from a Späti on the way.", trip:"riverside" },
+    pberg:  { t:"15:00", title:"Bearpit Karaoke, Mauerpark", desc:"The Sunday centrepiece. From about May to October, free open-air karaoke fills the stone amphitheatre from around 15:00. Silly, warm, completely Berlin.", open:"~15:00–19:00 in season, if dry", trip:"in Mauerpark" },
+    xberg:  { t:"18:30", title:"Klunkerkranich or the canal", desc:"Sunset from the rooftop garden above the Neukölln Arcaden, or a slow walk along the Landwehrkanal with a Späti beer.", trip:"Rathaus Neukölln (U7)" },
+    fhain:  { t:"18:30", title:"Spree at the Oberbaumbrücke", desc:"End on the river by the old brick bridge, one of Berlin's best evening spots, with the water and the skyline.", trip:"~10 min on foot" }
+  };
+  var GREY_EVE = {
+    mitte:  { t:"18:00", title:"Long dinner in the Scheunenviertel", desc:"Restaurants and bars are open as normal. Settle into a proper Sunday dinner and let the rain do its thing." },
+    pberg:  { t:"18:00", title:"Dinner on Kastanienallee", desc:"The cafés and restaurants stay open. Round off a museum afternoon with a warm, unhurried dinner." },
+    xberg:  { t:"18:00", title:"Dinner in Neukölln", desc:"Sonnenallee and the side streets are full of open kitchens on a Sunday night. Eat well, stay dry." },
+    fhain:  { t:"18:00", title:"Dinner around Simon-Dach-Straße", desc:"The Friedrichshain restaurant strip runs all week. A good place to end a wet Sunday indoors." }
+  };
+
+  function slot(cls, time, title, desc, tags){
+    var m = "";
+    (tags||[]).forEach(function(tg){ m += '<span class="tag '+tg.k+'">'+tg.t+'</span>'; });
+    return '<div class="slot '+cls+'"><span class="dot"></span>'
+      + '<div class="time">'+time+'</div>'
+      + '<h3>'+title+'</h3><p>'+desc+'</p>'
+      + (m?'<div class="meta">'+m+'</div>':'') + '</div>';
+  }
+
+  function render(){
+    var w=state.weather, b=state.base, p=state.pace;
+    var mk=MARKET[b], br=BRUNCH[b];
+    var html="";
+
+    var mkTags=[{k:"open",t:mk.open},{k:"trip",t:mk.trip}];
+    if(mk.cash) mkTags.push({k:"warn",t:"Bring cash"});
+    html += slot("", mk.t, mk.title, mk.desc, mkTags);
+    html += slot("", br.t, br.title, br.desc, [{k:"open",t:"Cafés open · brunch till ~15:00"}]);
+
+    if(w==="sun"){
+      if(p==="full"){
+        var lk=LAKE[b];
+        html += slot("sun", lk.t, lk.title, lk.desc, [{k:"trip",t:lk.trip},{k:"warn",t:"Buy drinks first"}]);
+      } else {
+        var s=SUN_PM[b];
+        html += slot("sun", s.t, s.title, s.desc, [{k:"trip",t:s.trip}]);
+      }
+      var se=SUN_EVE[b];
+      var seTags=[]; if(se.open) seTags.push({k:"open",t:se.open}); if(se.trip) seTags.push({k:"trip",t:se.trip});
+      html += slot("sun", se.t, se.title, se.desc, seTags);
+    } else {
+      var g=GREY_PM[b];
+      var gTags=[]; if(g.open) gTags.push({k:"open",t:g.open}); if(g.trip) gTags.push({k:"trip",t:g.trip});
+      html += slot("grey", g.t, g.title, g.desc, gTags);
+      var ge=GREY_EVE[b];
+      html += slot("grey", ge.t, ge.title, ge.desc, [{k:"open",t:"Restaurants open as normal"}]);
+    }
+
+    document.getElementById("timeline").innerHTML = html;
+    document.getElementById("planTitle").textContent =
+      (w==="sun"?"Your sunny Sunday":"Your grey-day Sunday");
+    var baseName={mitte:"Mitte",pberg:"Prenzlauer Berg",xberg:"Kreuzberg / Neukölln",fhain:"Friedrichshain"}[b];
+    document.getElementById("planSub").textContent = "from "+baseName+" · "+(p==="full"?"full day":"easy day");
+
+    var notes=[];
+    if(b==="xberg") notes.push("The Nowkoelln Flowmarkt runs on selected published Sundays, usually every two weeks in season. Check its official calendar first.");
+    notes.push("Bearpit Karaoke and the lake beaches are summer-season, roughly May to October, and weather dependent.");
+    document.getElementById("seasonNote").textContent = "Good to know: " + notes.join(" ");
+  }
+
+  document.querySelectorAll(".pills").forEach(function(group){
+    group.addEventListener("click", function(e){
+      var btn=e.target.closest(".pill"); if(!btn) return;
+      var g=group.getAttribute("data-group");
+      group.querySelectorAll(".pill").forEach(function(x){ x.setAttribute("aria-pressed","false"); });
+      btn.setAttribute("aria-pressed","true");
+      state[g]=btn.getAttribute("data-val");
+      render();
+    });
+  });
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

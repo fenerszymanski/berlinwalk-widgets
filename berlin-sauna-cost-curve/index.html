@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Berlin Sauna Day Board</title>
+<meta name="description" content="Every open Berlin sauna plotted across one day, priced on the same basket: a two hour visit with the sauna, starting at the hour you turn up." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Crect x='10' y='17' width='40' height='8' rx='4' fill='%23FFE600'/%3E%3Crect x='10' y='30' width='26' height='8' rx='4' fill='%237CB342'/%3E%3Crect x='10' y='43' width='14' height='8' rx='4' fill='%23FFE600'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-dark:#123D18; --green-mid:#2E7D32; --lime:#7CB342;
+    --yellow:#FFE600; --ink:#1D231C; --ink-2:#4b584b; --ink-3:#77806f;
+    --surface:#fcfcfb; --panel:#F4F7F0; --line:#E1E7D9;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+       color:var(--ink);background:transparent;line-height:1.5;-webkit-text-size-adjust:100%}
+  .wrap{max-width:820px;margin:0 auto;padding:4px 14px 18px}
+
+  .kicker{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-mid);margin:0 0 6px}
+  h1{font-size:21px;font-weight:800;line-height:1.18;margin:0 0 8px;color:var(--green-dark)}
+  .lede{font-size:14.5px;color:var(--ink-2);margin:0 0 14px}
+
+  .bar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 12px}
+  .bar .grp{display:flex;gap:6px;flex:1 1 320px}
+  .bar button{min-height:44px;font-family:inherit;font-size:12.5px;font-weight:700;
+        color:var(--green-dark);background:#fff;border:2px solid var(--line);border-radius:11px;cursor:pointer;padding:8px 12px}
+  .bar .grp button{flex:1}
+  .bar button[aria-pressed="true"]{background:var(--yellow);border-color:var(--green-dark)}
+  .bar button:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+  .bar .now{background:var(--green-dark);color:#fff;border-color:var(--green-dark);flex:0 0 auto}
+
+  .boardbox{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 8px 6px;margin:0 0 8px}
+  .board{display:block;outline:none;cursor:pointer;touch-action:pan-y}
+  .board:focus-visible{outline:3px solid var(--lime);outline-offset:3px;border-radius:10px}
+  svg.day{display:block;width:100%;height:auto}
+  .ax{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;font-weight:600;fill:var(--ink-3)}
+  .rowname{font-size:12.5px;font-weight:800}
+  .rowsub{font-size:10.5px;font-weight:600;fill:var(--ink-3)}
+  .blockprice{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;font-weight:700;fill:#fff}
+  .cut{font-size:10.5px;font-weight:700}
+  .hint{font-size:11.5px;color:var(--ink-3);margin:0 2px 14px}
+
+  .legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0 2px 14px;font-size:12px;font-weight:600;color:var(--ink-2)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend i{display:inline-block;width:20px;height:11px;border-radius:3px}
+
+  .readhead{font-size:12.5px;font-weight:700;color:var(--ink-2);margin:0 2px 8px}
+  .readhead b{color:var(--green-dark)}
+  .cards{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:8px}
+  .cards li{background:#fff;border:1px solid var(--line);border-left-width:5px;border-radius:12px;padding:10px 12px}
+  .cards li.shut{background:#F6F6F4}
+  .ctop{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;justify-content:space-between}
+  .vname{font-size:14px;font-weight:800;color:var(--green-dark);margin:0}
+  .vprice{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:15px;font-weight:700;color:var(--green-dark);white-space:nowrap}
+  .vticket{font-size:12.5px;color:var(--ink-2);margin:4px 0 3px}
+  .vmeta{font-size:12px;color:var(--ink-3);margin:0}
+  .cards li.shut .vname,.cards li.shut .vprice{color:#5b6157}
+  .ladder{display:flex;flex-wrap:wrap;gap:4px;margin:7px 0 0}
+  .ladder b{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;font-weight:700;
+        background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:3px 7px;color:var(--ink-2)}
+  .ladder b.win{background:#EAF4DC;border-color:#c9dcae;color:var(--green-dark)}
+
+  .note{font-size:12.5px;color:var(--ink-2);background:var(--panel);border:1px solid var(--line);
+        border-radius:12px;padding:10px 12px;margin:0 0 12px}
+  .note b{color:var(--green-dark)}
+
+  details.tbl{border:1px solid var(--line);border-radius:12px;background:#fff;margin:0 0 12px}
+  details.tbl summary{cursor:pointer;padding:10px 12px;font-size:12.5px;font-weight:700;color:var(--green-dark);list-style:none}
+  details.tbl summary::-webkit-details-marker{display:none}
+  details.tbl summary:before{content:"+ ";font-family:'IBM Plex Mono',monospace}
+  details.tbl[open] summary:before{content:"- "}
+  details.tbl summary:focus-visible{outline:3px solid var(--lime);outline-offset:-2px;border-radius:12px}
+  .tblscroll{overflow-x:auto;padding:0 12px 12px}
+  table{border-collapse:collapse;width:100%;min-width:440px;font-size:12px}
+  th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);font-weight:800}
+  td.num{font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:700;color:var(--green-dark);white-space:nowrap}
+
+  .stamp{font-size:11.5px;color:var(--ink-3);margin:0 2px}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  @media (max-width:480px){ h1{font-size:19px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Berlin Tools</p>
+  <h1>Berlin Sauna Day Board</h1>
+  <p class="lede">Three open saunas, three completely different products. One is a long open band, one stops admitting anybody ninety minutes before it closes, one only sells fixed two hour slots. Here they are on one day, priced on the same basket: a two hour visit with the sauna, starting at the hour you turn up.</p>
+
+  <div class="bar">
+    <div class="grp" role="group" aria-label="Day of the week">
+      <button type="button" id="btnWeekday" aria-pressed="true">Monday to Thursday</button>
+      <button type="button" id="btnWeekend" aria-pressed="false">Friday to Sunday and holidays</button>
+    </div>
+    <button type="button" class="now" id="btnNow">Back to now</button>
+  </div>
+
+  <div class="boardbox">
+    <div class="board" id="board" tabindex="0" role="application"
+         aria-label="Berlin sauna day board. Use the left and right arrow keys to move through the hours.">
+      <svg class="day" id="day" viewBox="0 0 760 316" preserveAspectRatio="xMidYMid meet" role="img"
+           aria-labelledby="dayTitle dayDesc"></svg>
+    </div>
+    <p class="sr" id="live" aria-live="polite"></p>
+  </div>
+  <p class="hint">Tap or click anywhere on the board to move the hour. The board takes keyboard focus, so the left and right arrow keys work too.</p>
+
+  <div class="legend" id="legend"></div>
+
+  <p class="readhead" id="readhead"></p>
+  <ul class="cards" id="cards"></ul>
+
+  <div class="note" id="crossnote"></div>
+
+  <details class="tbl">
+    <summary>See the published tariffs and rules as a table</summary>
+    <div class="tblscroll">
+      <table>
+        <caption class="sr">Published Berlin sauna tariffs and house rules</caption>
+        <thead><tr><th scope="col">Where</th><th scope="col">Ticket</th><th scope="col">Price</th><th scope="col">Rules</th></tr></thead>
+        <tbody id="tblBody"></tbody>
+      </table>
+    </div>
+  </details>
+
+  <p class="stamp">Opening hours, admission cutoffs and tariffs read from each operator's own pages and checked on 27 August 2026. Refundable deposits are not included: the public baths take 10 euros for the sauna chip, Stadtbad Oderberger takes 20 euros in cash for the key card.</p>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  function vabaliTariff(hours, weekend){
+    if(hours>6.001) return { p: weekend?56.50:51.50, t:'Day pass' };
+    if(hours>=6)    return { p: weekend?49.50:45.50, t:'6 hour ticket' };
+    if(hours>=4)    return { p: weekend?39.50:36.50, t:'4 hour ticket' };
+    if(hours>=2)    return { p: weekend?29.50:27.50, t:'2 hour ticket' };
+    return null;
+  }
+  function liquidromTariff(hours){
+    var base, t;
+    if(hours<1.5) return null;
+    if(hours<2){ base=22.00; t='Short Escape 90 plus the sauna area'; }
+    else if(hours<3){ base=24.50; t='Urban Flow 120 plus the sauna area'; }
+    else if(hours<3.5){ base=29.50; t='Deep Dive 180 plus the sauna area'; }
+    else {
+      var blocks=Math.floor((hours-3)/0.5);
+      base=29.50+5.00*blocks;
+      t='Deep Dive 180 plus '+blocks+' half hour extensions, plus the sauna area';
+    }
+    return { p: base+2.50, t:t };
+  }
+
+  var ROWS = [
+    {
+      id:'vabali', name:'vabali spa Berlin', color:'#2E7D32', kind:'band',
+      sub:'Seydlitzstr. 6, Moabit',
+      openTo:function(){ return 24; },
+      lastEntry:function(){ return 22; },
+      openFrom:9,
+      fits:function(hour, weekend){
+        if(hour<9 || hour+2>24) return null;
+        return vabaliTariff(2, weekend);
+      },
+      ladder:[2,4,6],
+      ladderPrice:function(h,weekend){ var r=vabaliTariff(h,weekend); return r?r.p:null; },
+      clothing:'Textile free in the whole building, swimwear is not allowed at any time',
+      getting:'Eight minutes on foot north of Hauptbahnhof',
+      age:'From 12, under 18 with a legal guardian',
+      rows:[['2 hours','27,50 EUR Mon to Thu / 29,50 EUR Fri to Sun'],
+            ['4 hours','36,50 EUR Mon to Thu / 39,50 EUR Fri to Sun'],
+            ['6 hours','45,50 EUR Mon to Thu / 49,50 EUR Fri to Sun'],
+            ['Day pass','51,50 EUR Mon to Thu / 56,50 EUR Fri to Sun']]
+    },
+    {
+      id:'liquidrom', name:'Liquidrom', color:'#1D6FA3', kind:'band',
+      sub:'Möckernstr. 10, Kreuzberg',
+      openTo:function(weekend){ return weekend?25:24; },
+      lastEntry:function(weekend){ return (weekend?25:24)-1.5; },
+      openFrom:9,
+      fits:function(hour, weekend){
+        if(hour<9) return null;
+        if(hour > this.lastEntry(weekend)) return null;
+        if(hour+2 > this.openTo(weekend)) return null;
+        return liquidromTariff(2);
+      },
+      ladder:[2,4,6],
+      ladderPrice:function(h){ var r=liquidromTariff(h); return r?r.p:null; },
+      clothing:'Swimwear in the water, textile free in the sauna rooms',
+      getting:'S Anhalter Bahnhof, or U Möckernbrücke and U Gleisdreieck',
+      age:'From 14, 14 to 17 with a parent or legal guardian',
+      rows:[['Short Escape 90','22,00 EUR, sauna area 2,50 EUR extra'],
+            ['Urban Flow 120','24,50 EUR, sauna area 2,50 EUR extra'],
+            ['Deep Dive 180','29,50 EUR, sauna area 2,50 EUR extra'],
+            ['Every further 30 minutes','5,00 EUR']]
+    },
+    {
+      id:'oderberger', name:'Stadtbad Oderberger', color:'#C03A70', kind:'slots',
+      sub:'Oderberger Str. 57',
+      slotList:[],
+      fits:function(hour){
+        for(var i=0;i<this.slotList.length;i++){
+          var s=this.slotList[i];
+          if(hour===s.from){
+            return s.sauna
+              ? { p:20.00, from:true, t:'Two hour booked slot, swim and sauna' }
+              : { p:9.00, from:true, t:'Two hour booked slot, swim only. The sauna is not bookable before 11:00' };
+          }
+        }
+        return null;
+      },
+      ladder:null,
+      clothing:'Swimwear in the pool, textile free in the sauna',
+      getting:'U Eberswalder Straße, five minutes on foot',
+      age:'Sauna from 18 only, under 16 in the pool with an adult',
+      rows:[['2 hour slot, swim and sauna','20,00 to 22,00 EUR depending on the slot'],
+            ['2 hour slot, swim only','9,00 to 10,00 EUR depending on the slot'],
+            ['Key card deposit','20,00 EUR in cash, notes up to 20 EUR only'],
+            ['Leaving late','10,00 EUR per 30 minutes']]
+    },
+    {
+      id:'public', name:'Public pool saunas', color:'#8A8F84', kind:'shut',
+      sub:'Twelve baths across the city',
+      clothing:'Textile free, the house rules say the sauna may only be used naked',
+      getting:'Stadtbad Neukölln, Schwimmhalle Fischerinsel and nine other baths',
+      age:'Under 14 in the sauna only with an adult',
+      rows:[['3 hours, cheapest category','13,00 EUR'],
+            ['Day ticket, cheapest category','15,00 EUR'],
+            ['3 hours, Stadtbad Neukölln','20,00 EUR'],
+            ['Day ticket, Stadtbad Neukölln','23,00 EUR']]
+    }
+  ];
+  (function(){
+    var o=ROWS[2], list=[];
+    for(var s=8;s<=19;s++) list.push({ from:s, to:s+2, sauna:s>=11 });
+    list.push({ from:22, to:24, sauna:false });
+    o.slotList=list;
+  })();
+
+  var W=790, H=316, M={t:28,r:14,b:34,l:168};
+  var X0=M.l, X1=W-M.r, Y0=M.t;
+  var HFROM=8, HTO=25;
+  var ROWH=(H-M.t-M.b)/ROWS.length;
+  function sx(h){ return X0+(h-HFROM)/(HTO-HFROM)*(X1-X0); }
+  function eur(n){ return n.toFixed(2).replace('.',',')+' EUR'; }
+  function clock(h){ var w=Math.floor(h)%24; return (w<10?'0':'')+w+':00'; }
+
+  var state={ hour:14, weekend:false };
+  var NS='http://www.w3.org/2000/svg';
+  var svg=document.getElementById('day');
+  function el(n,a){ var e=document.createElementNS(NS,n); for(var k in a){ if(a[k]!==null&&a[k]!==undefined) e.setAttribute(k,a[k]); } return e; }
+
+  function berlinHourNow(){
+    try{
+      var f=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Berlin',hour:'2-digit',hour12:false});
+      var h=parseInt(f.format(new Date()),10);
+      if(isNaN(h)) return 14;
+      return Math.max(HFROM, Math.min(HTO-1, h));
+    }catch(e){ return 14; }
+  }
+  function berlinIsWeekendish(){
+    try{
+      var f=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Berlin',weekday:'short'});
+      var d=f.format(new Date());
+      return d==='Fri'||d==='Sat'||d==='Sun';
+    }catch(e){ return false; }
+  }
+
+  function shade(price){
+    var t=Math.max(0,Math.min(1,(price-20)/38));
+    return 0.40+t*0.55;
+  }
+
+  function draw(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var title=el('title',{id:'dayTitle'}); title.textContent='Berlin saunas plotted across one day';
+    var desc=el('desc',{id:'dayDesc'});
+    desc.textContent='Four rows, one per venue, across a clock from 08:00 to 01:00. Every block is the price of a two hour sauna visit starting at that hour. vabali spa is a long band from 09:00 to a last two hour start at 22:00. Liquidrom is the same shape on a weekday but runs an hour later on Friday and Saturday, because it closes at 01:00. Stadtbad Oderberger is a run of fixed two hour slots, pale before 11:00 when the sauna is not yet bookable. The public pool saunas are a closed row until 1 November 2026.';
+    svg.appendChild(title); svg.appendChild(desc);
+
+    for(var h=HFROM;h<=HTO;h++){
+      var major=h%2===0;
+      svg.appendChild(el('line',{x1:sx(h),x2:sx(h),y1:Y0-6,y2:H-M.b,stroke:major?'#E1E7D9':'#F1F4EC','stroke-width':1}));
+      if(major){
+        var t=el('text',{x:sx(h),y:H-M.b+16,'text-anchor':'middle','class':'ax'});
+        t.textContent=clock(h); svg.appendChild(t);
+      }
+    }
+
+    ROWS.forEach(function(r,i){
+      var y=Y0+i*ROWH, bh=ROWH-18, by=y+7;
+
+      var nm=el('text',{x:4,y:by+14,'class':'rowname',fill:r.kind==='shut'?'#5b6157':r.color});
+      nm.textContent=r.name; svg.appendChild(nm);
+      var sb=el('text',{x:4,y:by+29,'class':'rowsub'});
+      sb.textContent=r.sub; svg.appendChild(sb);
+
+      svg.appendChild(el('rect',{x:X0,y:by,width:X1-X0,height:bh,rx:5,fill:'#F7F9F4'}));
+
+      if(r.kind==='band'){
+        var to=r.openTo(state.weekend), lastOk=null;
+        for(var hh=r.openFrom; hh<to; hh++){
+          var x=sx(hh), w=sx(hh+1)-sx(hh)-1.5;
+          var res=r.fits(hh,state.weekend);
+          if(!res){
+            svg.appendChild(el('rect',{x:x,y:by,width:w,height:bh,rx:3,fill:'#D8DED2'}));
+            continue;
+          }
+          lastOk=hh;
+          svg.appendChild(el('rect',{x:x,y:by,width:w,height:bh,rx:3,fill:r.color,'fill-opacity':shade(res.p)}));
+          if(hh%2===1){
+            var pt=el('text',{x:x+w/2,y:by+bh/2+4,'text-anchor':'middle','class':'blockprice'});
+            pt.textContent=res.p.toFixed(2).replace('.',','); svg.appendChild(pt);
+          }
+        }
+        if(lastOk!==null){
+          svg.appendChild(el('line',{x1:sx(lastOk+1),x2:sx(lastOk+1),y1:by-4,y2:by+bh+4,stroke:r.color,'stroke-width':2.5,'stroke-dasharray':'4 3'}));
+          var cu=el('text',{x:sx(lastOk+1)-5,y:by-6,'text-anchor':'end','class':'cut',fill:r.color});
+          cu.textContent='last two hour start '+clock(lastOk); svg.appendChild(cu);
+        }
+      }
+
+      if(r.kind==='slots'){
+        var lastSauna=null;
+        r.slotList.forEach(function(s){
+          var x=sx(s.from), w=sx(s.from+1)-sx(s.from)-1.5;
+          svg.appendChild(el('rect',{x:x,y:by+(s.sauna?0:5),width:w,height:s.sauna?bh:bh-10,rx:3,
+            fill:r.color,'fill-opacity':s.sauna?0.72:0.22,
+            stroke:r.color,'stroke-width':1,'stroke-opacity':s.sauna?0:0.55}));
+          if(s.sauna){
+            lastSauna=s.from;
+            if(s.from%2===1){
+              var pt2=el('text',{x:x+w/2,y:by+bh/2+4,'text-anchor':'middle','class':'blockprice'});
+              pt2.textContent='20,00'; svg.appendChild(pt2);
+            }
+          }
+        });
+        var sl=el('text',{x:X0+2,y:by-6,'class':'cut',fill:'#9b5c78'});
+        sl.textContent='pale: no sauna before 11:00'; svg.appendChild(sl);
+        if(lastSauna!==null){
+          svg.appendChild(el('line',{x1:sx(lastSauna+1),x2:sx(lastSauna+1),y1:by-4,y2:by+bh+4,stroke:r.color,'stroke-width':2.5,'stroke-dasharray':'4 3'}));
+          var cu2=el('text',{x:sx(lastSauna+1)-5,y:by-6,'text-anchor':'end','class':'cut',fill:r.color});
+          cu2.textContent='last sauna slot '+clock(lastSauna); svg.appendChild(cu2);
+        }
+      }
+
+      if(r.kind==='shut'){
+        svg.appendChild(el('rect',{x:X0,y:by,width:X1-X0,height:bh,rx:5,fill:'#8A8F84','fill-opacity':.14,
+          stroke:'#8A8F84','stroke-width':1.5,'stroke-dasharray':'5 4'}));
+        var st=el('text',{x:(X0+X1)/2,y:by+bh/2+4,'text-anchor':'middle','class':'cut',fill:'#5b6157'});
+        st.textContent='Closed for the summer, back on 1 November 2026'; svg.appendChild(st);
+      }
+    });
+
+    var cx0=sx(state.hour), cw=sx(state.hour+1)-cx0;
+    svg.appendChild(el('rect',{x:cx0,y:Y0-10,width:cw,height:H-M.b-Y0+10,rx:4,fill:'none',stroke:'#123D18','stroke-width':2.5}));
+    var hl=el('text',{x:cx0+cw/2,y:Y0-15,'text-anchor':'middle','class':'ax',fill:'#123D18'});
+    hl.setAttribute('font-weight','700');
+    hl.textContent=clock(state.hour); svg.appendChild(hl);
+  }
+
+  function render(){
+    draw();
+    document.getElementById('readhead').innerHTML =
+      'If you turn up at <b>'+clock(state.hour)+'</b> on a <b>'+
+      (state.weekend?'Friday, Saturday, Sunday or public holiday':'Monday to Thursday')+'</b>:';
+
+    var ul=document.getElementById('cards'); ul.innerHTML='';
+    var openNames=[];
+    ROWS.forEach(function(r){
+      var li=document.createElement('li');
+      li.style.borderLeftColor=r.color;
+
+      if(r.kind==='shut'){
+        li.className='shut';
+        li.innerHTML='<div class="ctop"><p class="vname">'+r.name+'</p><span class="vprice">closed</span></div>'+
+          '<p class="vticket">Back on 1 November 2026, then 13,00 EUR to 20,00 EUR for three hours. Tickets are sold at the counter and not online, and there is a refundable 10 euro deposit for the sauna chip.</p>'+
+          '<p class="vmeta">'+r.clothing+'. '+r.getting+'.</p>';
+        ul.appendChild(li); return;
+      }
+
+      var res=r.fits(state.hour, state.weekend);
+      if(!res){
+        li.className='shut';
+        var why = r.kind==='slots'
+          ? 'No slot starts at this hour. Two hour slots start on the hour from 08:00 to 19:00, and there is a late swim-only block at 22:00.'
+          : (state.hour < r.openFrom
+              ? 'Not open yet. Doors are at '+clock(r.openFrom)+'.'
+              : 'Too late. '+r.name+' admits nobody after '+clock(r.lastEntry(state.weekend)+1)+'.');
+        li.innerHTML='<div class="ctop"><p class="vname">'+r.name+'</p><span class="vprice">no</span></div>'+
+          '<p class="vticket">'+why+'</p><p class="vmeta">'+r.getting+'.</p>';
+        ul.appendChild(li); return;
+      }
+
+      openNames.push(r.name);
+      var ladder='';
+      if(r.ladder){
+        var best=null;
+        r.ladder.forEach(function(h){ var p=r.ladderPrice(h,state.weekend); if(p!==null&&(best===null||p<best)) best=p; });
+        ladder='<div class="ladder">';
+        r.ladder.forEach(function(h){
+          var p=r.ladderPrice(h,state.weekend);
+          if(p===null) return;
+          ladder+='<b'+(p===best?' class="win"':'')+'>'+h+' h · '+p.toFixed(2).replace('.',',')+'</b>';
+        });
+        ladder+='</div>';
+      }
+      li.innerHTML=
+        '<div class="ctop"><p class="vname">'+r.name+'</p><span class="vprice">'+(res.from?'from ':'')+eur(res.p)+'</span></div>'+
+        '<p class="vticket">'+res.t+'</p>'+
+        '<p class="vmeta">'+r.clothing+'. '+r.getting+'. '+r.age+'.</p>'+ladder;
+      ul.appendChild(li);
+    });
+
+    document.getElementById('crossnote').innerHTML =
+      '<b>The number worth carrying: three and a half hours.</b> Below it Liquidrom is cheaper, because two hours with the sauna is 24,50 EUR against vabali at 27,50 EUR. Above it the order flips, because Liquidrom keeps charging 5,00 EUR for every further half hour while vabali sells wider blocks. At six hours it is 62,00 EUR against 45,50 EUR.';
+
+    document.getElementById('live').textContent =
+      'At '+clock(state.hour)+', open to you: '+(openNames.length?openNames.join(', '):'none of them')+'.';
+  }
+
+  (function(){
+    var L=document.getElementById('legend');
+    L.innerHTML =
+      '<span><i style="background:#2E7D32;opacity:.62"></i>A two hour sauna visit starting this hour</span>'+
+      '<span><i style="background:#D8DED2"></i>Shut, or too late for two hours</span>'+
+      '<span><i style="background:#C03A70;opacity:.22;border:1px solid #C03A70"></i>Slot without the sauna</span>'+
+      '<span><i style="background:#8A8F84;opacity:.25;border:1px dashed #8A8F84"></i>Closed until 1 November</span>';
+  })();
+
+  (function(){
+    var html='';
+    ROWS.forEach(function(r){
+      r.rows.forEach(function(row,i){
+        html+='<tr><td>'+(i===0?'<strong>'+r.name+'</strong><br>'+r.getting:'')+'</td><td>'+row[0]+
+              '</td><td class="num">'+row[1]+'</td><td>'+(i===0?r.clothing+'. '+r.age+'.':'')+'</td></tr>';
+      });
+    });
+    document.getElementById('tblBody').innerHTML=html;
+  })();
+
+  var bwd=document.getElementById('btnWeekday'), bwe=document.getElementById('btnWeekend');
+  function setDay(weekend){
+    state.weekend=weekend;
+    bwd.setAttribute('aria-pressed',String(!weekend));
+    bwe.setAttribute('aria-pressed',String(weekend));
+    render();
+  }
+  bwd.addEventListener('click',function(){ setDay(false); });
+  bwe.addEventListener('click',function(){ setDay(true); });
+  document.getElementById('btnNow').addEventListener('click',function(){
+    state.hour=berlinHourNow(); setDay(berlinIsWeekendish());
+  });
+
+  var board=document.getElementById('board');
+  board.addEventListener('click',function(e){
+    var rect=svg.getBoundingClientRect();
+    var vx=(e.clientX-rect.left)/rect.width*W;
+    var h=Math.floor(HFROM+(vx-X0)/(X1-X0)*(HTO-HFROM));
+    h=Math.max(HFROM,Math.min(HTO-1,h));
+    if(h!==state.hour){ state.hour=h; render(); }
+  });
+  board.addEventListener('keydown',function(e){
+    var d = e.key==='ArrowRight' ? 1 : e.key==='ArrowLeft' ? -1 : 0;
+    if(!d) return;
+    e.preventDefault();
+    state.hour=Math.max(HFROM,Math.min(HTO-1,state.hour+d));
+    render();
+  });
+
+  state.hour=berlinHourNow();
+  state.weekend=berlinIsWeekendish();
+  bwd.setAttribute('aria-pressed',String(!state.weekend));
+  bwe.setAttribute('aria-pressed',String(state.weekend));
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

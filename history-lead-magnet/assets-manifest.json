@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "status": "approved-assets",
+  "reviewedAt": "2026-07-17",
+  "allowedLicenses": [
+    "Public Domain",
+    "CC0 1.0",
+    "CC BY 3.0",
+    "CC BY 4.0",
+    "CC BY-SA 3.0",
+    "CC BY-SA 4.0"
+  ],
+  "stories": {
+    "monbijou": {
+      "approved": true,
+      "archive": {
+        "src": "assets/optimized/monbijou-before.jpg",
+        "alt": "Monbijou Palace and its formal garden in Berlin around 1900",
+        "creator": "Königlich Preußische Messbild-Anstalt",
+        "sourceName": "Architekturmuseum der Technischen Universität Berlin, Inv. F 0051",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:F_0051.jpg",
+        "institutionalSource": "https://doi.org/10.25645/5k85-ex0",
+        "originalFile": "https://upload.wikimedia.org/wikipedia/commons/5/5c/F_0051.jpg",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "changes": "Resized and re-encoded as JPEG for web delivery."
+      },
+      "current": {
+        "src": "assets/optimized/monbijou-now.jpg",
+        "alt": "People crossing the lawns of Monbijoupark beside Oranienburger Straße",
+        "creator": "De-okin",
+        "sourceName": "Wikimedia Commons, Monbijoupark Berlin Oranienburgerstraße",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Monbijoupark_Berlin_Oranienburgerstra%C3%9Fe.JPG",
+        "originalFile": "https://upload.wikimedia.org/wikipedia/commons/2/23/Monbijoupark_Berlin_Oranienburgerstra%C3%9Fe.JPG",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "changes": "Resized and re-encoded as JPEG for web delivery."
+      }
+    },
+    "bethlehem": {
+      "approved": true,
+      "archive": {
+        "src": "assets/optimized/bethlehem-before.jpg",
+        "alt": "The Bohemian Bethlehem Church at Bethlehemkirchplatz in 1910",
+        "creator": "Königlich Preußische Messbildanstalt",
+        "sourceName": "Wikimedia Commons, M Bethlehemskirche Berlin 1910",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:M_Bethlehemskirche_Berlin_1910.jpg",
+        "originalFile": "https://upload.wikimedia.org/wikipedia/commons/c/c9/M_Bethlehemskirche_Berlin_1910.jpg",
+        "license": "Public Domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "changes": "Resized and re-encoded as JPEG for web delivery."
+      },
+      "current": {
+        "src": "assets/optimized/bethlehem-now.jpg",
+        "alt": "Juan Garaizabal's steel outline of the vanished Bethlehem Church on the square",
+        "creator": "OTFW; sculpture by Juan Garaizabal",
+        "sourceName": "Wikimedia Commons, Skulptur Bethlehemkirchplatz Memoria Urbana Berlin",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Skulptur_Bethlehemkirchplatz_(Mitte)_Memoria_Urbana_Berlin.jpg",
+        "originalFile": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Skulptur%20Bethlehemkirchplatz%20%28Mitte%29%20Memoria%20Urbana%20Berlin.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "changes": "Resized and re-encoded as JPEG for web delivery."
+      }
+    },
+    "engelbecken": {
+      "approved": true,
+      "archive": {
+        "src": "assets/optimized/engelbecken-before.jpg",
+        "alt": "The Luisenstadt Canal and Engelbecken looking south around 1900",
+        "creator": "Unknown photographer, circa 1900",
+        "sourceName": "Wikimedia Commons, Luisenstädtischer Kanal mit Engelbecken",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Luisenst%C3%A4dtischer_Kanal_mit_Engelbecken,_um_1900.jpg",
+        "originalFile": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Luisenst%C3%A4dtischer%20Kanal%20mit%20Engelbecken%2C%20um%201900.jpg",
+        "license": "Public Domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "changes": "Resized and re-encoded as JPEG for web delivery."
+      },
+      "current": {
+        "src": "assets/optimized/engelbecken-now.jpg",
+        "alt": "The restored Engelbecken water basin and gardens in Berlin",
+        "creator": "Z thomas",
+        "sourceName": "Wikimedia Commons, Engelbecken Berlin 2018-06-29",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Engelbecken_Berlin_2018-06-29.jpg",
+        "originalFile": "https://upload.wikimedia.org/wikipedia/commons/0/06/Engelbecken_Berlin_2018-06-29.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "changes": "Resized and re-encoded as JPEG for web delivery."
+      }
+    }
+  }
+}

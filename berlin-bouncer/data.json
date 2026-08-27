@@ -1,0 +1,174 @@
+{
+  "version": "3.0",
+  "title": "Can You Get Into Berghain?",
+  "lead": "Test a fictional Berlin club-door night with outfit, queue and timed decisions.",
+  "threshold": -2,
+  "shameThreshold": -9,
+  "vipThreshold": 7,
+  "timerSeconds": 10,
+  "phases": {
+    "outfit": {
+      "question": "First, choose your outfit for the night.",
+      "viewType": "cards",
+      "options": [
+        { "id": "black", "text": "All black, subtle.", "image": "assets/outfit_black.png", "score": 3, "next": "group" },
+        { "id": "rave", "text": "Neon mesh, glitter.", "image": "assets/outfit_rave.png", "score": -2, "next": "group" },
+        { "id": "casual", "text": "Jeans, sneakers.", "image": "assets/outfit_casual.png", "score": 1, "next": "group" },
+        { "id": "suit", "text": "A tailored suit.", "image": "assets/outfit_suit.png", "score": -4, "next": "group" }
+      ]
+    },
+    "group": {
+      "bouncerState": "queue",
+      "question": "How many people are you queuing with?",
+      "options": [
+        { "id": "solo", "text": "Just me.", "score": 4, "next": "queue_action" },
+        { "id": "duo", "text": "Two of us.", "score": 2, "next": "queue_action" },
+        { "id": "four", "text": "Four, but we will split up.", "score": 0, "next": "queue_action" },
+        { "id": "large-group", "text": "A big group, all together.", "score": -8, "next": "queue_action" }
+      ]
+    },
+    "queue_action": {
+      "bouncerState": "queue",
+      "randomPool": [
+        {
+          "id": "long-queue",
+          "question": "You are in the queue. It is a long wait. What are you doing?",
+          "options": [
+            { "id": "quiet-wait", "text": "Wait quietly and keep my phone away.", "score": 3, "next": "door1" },
+            { "id": "building-selfie", "text": "Take a selfie with the building.", "score": -5, "next": "door1" },
+            { "id": "loud-chat", "text": "Laugh loudly and narrate the queue.", "score": -3, "next": "door1" }
+          ]
+        },
+        {
+          "id": "queue-offer",
+          "question": "Someone in front offers you a drink. What do you do?",
+          "options": [
+            { "id": "polite-decline", "text": "Politely decline and stay present.", "score": 3, "next": "door1" },
+            { "id": "accept-drink", "text": "Take it. It is party time.", "score": -2, "next": "door1" },
+            { "id": "check-in", "text": "Ask what the event is before deciding.", "score": 1, "next": "door1" }
+          ]
+        },
+        {
+          "id": "queue-weather",
+          "question": "The line is moving slowly. How do you handle it?",
+          "options": [
+            { "id": "read-line", "text": "Stay patient and read the room.", "score": 2, "next": "door1" },
+            { "id": "skip-line", "text": "Try to negotiate a shortcut.", "score": -4, "next": "door1" },
+            { "id": "complain-line", "text": "Complain until everyone hears it.", "score": -6, "next": "door1" }
+          ]
+        }
+      ]
+    },
+    "door1": {
+      "bouncerState": "idle",
+      "randomPool": [
+        {
+          "id": "lineup-check",
+          "question": "You reach the front. The bouncer asks what is on tonight.",
+          "audio": "assets/audio/wer_legt_auf.mp3",
+          "options": [
+            { "id": "know-lineup", "text": "I know the lineup and the room I want.", "score": 4, "next": "door2" },
+            { "id": "honest-lineup", "text": "I do not know yet. I just want to dance.", "score": 1, "next": "door2" },
+            { "id": "guess-lineup", "text": "Name a random headliner with confidence.", "score": -8, "next": "door2" }
+          ]
+        },
+        {
+          "id": "id-check",
+          "question": "You reach the front. The bouncer asks for your ID.",
+          "audio": "assets/audio/hast_du_ausweis.mp3",
+          "options": [
+            { "id": "show-id", "text": "Hand over my physical ID calmly.", "score": 4, "next": "door2" },
+            { "id": "ask-id", "text": "Ask which ID is needed, then check.", "score": 1, "next": "door2" },
+            { "id": "forgot-id", "text": "Pat my pockets. I forgot it.", "score": -8, "next": "door2" }
+          ]
+        },
+        {
+          "id": "door-tone",
+          "question": "The bouncer studies the queue and gives you one second to speak.",
+          "options": [
+            { "id": "quiet-answer", "text": "Give a short, calm answer.", "score": 3, "next": "door2" },
+            { "id": "blank-answer", "text": "Say, 'I am not sure,' and wait.", "score": 0, "next": "door2" },
+            { "id": "guest-list", "text": "Lead with, 'I am on the guest list.'", "score": -6, "next": "door2" }
+          ]
+        }
+      ]
+    },
+    "door2": {
+      "bouncerState": "suspicious",
+      "randomPool": [
+        {
+          "id": "why-dance",
+          "question": "The bouncer asks: Why do you want to go in?",
+          "audio": "assets/audio/warum_wollt_ihr_rein.mp3",
+          "options": [
+            { "id": "dance-answer", "text": "I want to dance and hear the room.", "score": 3, "next": "end" },
+            { "id": "music-answer", "text": "The music matters to me tonight.", "score": 1, "next": "end" },
+            { "id": "birthday-answer", "text": "It is my friend's birthday.", "score": -3, "next": "end" }
+          ]
+        },
+        {
+          "id": "night-plan",
+          "question": "The bouncer asks what kind of night you planned.",
+          "options": [
+            { "id": "calm-plan", "text": "A late night focused on the music.", "score": 2, "next": "end" },
+            { "id": "open-plan", "text": "I will see where the night goes.", "score": 0, "next": "end" },
+            { "id": "rush-plan", "text": "I need to see everything immediately.", "score": -4, "next": "end" }
+          ]
+        },
+        {
+          "id": "phone-check",
+          "question": "One last check: what happens to your phone inside?",
+          "options": [
+            { "id": "phone-away", "text": "It stays away. I am here for the room.", "score": 3, "next": "end" },
+            { "id": "phone-silent", "text": "It goes on silent and stays in my pocket.", "score": 0, "next": "end" },
+            { "id": "photo-plan", "text": "I will get one quick photo inside.", "score": -7, "next": "end" }
+          ]
+        }
+      ]
+    }
+  },
+  "results": {
+    "vip": {
+      "title": "Stammgast",
+      "message": "The fictional door mood lines up with your choices. Welcome into the night.",
+      "image": "assets/success.png",
+      "audio": "assets/audio/viel_spass.mp3"
+    },
+    "success": {
+      "title": "Viel Spaß.",
+      "message": "The fictional bouncer gives a small nod. You made it through this round.",
+      "image": "assets/success.png",
+      "audio": "assets/audio/viel_spass.mp3"
+    },
+    "fail": {
+      "title": "Heute leider nicht.",
+      "message": "The fictional door stays closed tonight. The result is a game, not a forecast.",
+      "image": "assets/fail.png",
+      "audio": "assets/audio/heute_leider_nicht.mp3"
+    },
+    "shame": {
+      "title": "Raus hier.",
+      "message": "That route sent the fictional night sideways before the door could warm to you.",
+      "image": "assets/fail.png",
+      "audio": "assets/audio/zu_laut.mp3"
+    }
+  },
+  "resultPersonas": {
+    "vip": [
+      { "id": "quiet-regular", "title": "The Quiet Regular", "reason": "You kept the energy low and let the music do the talking.", "scoreLine": "VIP door mood" },
+      { "id": "floor-reader", "title": "The Floor Reader", "reason": "You read the room, answered cleanly and did not chase approval.", "scoreLine": "VIP door mood" }
+    ],
+    "success": [
+      { "id": "calm-entry", "title": "The Calm Entry", "reason": "You made enough grounded calls for this fictional door to open.", "scoreLine": "Entry door mood" },
+      { "id": "right-night", "title": "The Right Night", "reason": "Not perfect, but your choices fit this made-up night's mood.", "scoreLine": "Entry door mood" }
+    ],
+    "fail": [
+      { "id": "near-miss", "title": "The Near Miss", "reason": "A few good calls were not enough to turn the whole night around.", "scoreLine": "Almost at the door" },
+      { "id": "wrong-turn", "title": "The Wrong Turn", "reason": "One noisy detour changed the tone before the final question.", "scoreLine": "Almost at the door" }
+    ],
+    "shame": [
+      { "id": "queue-static", "title": "The Queue Static", "reason": "The queue energy got louder than the plan, and the fictional door noticed.", "scoreLine": "Door mood: not tonight" },
+      { "id": "too-much-signal", "title": "Too Much Signal", "reason": "The night sent too many signals at once for this imaginary bouncer.", "scoreLine": "Door mood: not tonight" }
+    ]
+  }
+}

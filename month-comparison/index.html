@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Month Comparison | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <style>
+    #bw-month-compare {
+      box-sizing: border-box;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      max-width: 760px;
+      margin: 24px auto;
+      position: relative;
+    }
+    #bw-month-compare *, #bw-month-compare *::before, #bw-month-compare *::after {
+      box-sizing: border-box;
+    }
+    .mc-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .mc-head {
+      background: var(--bw-green);
+      padding: 16px 20px;
+    }
+    .mc-kicker {
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .mc-title {
+      color: var(--bw-white);
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+    .mc-sub {
+      color: rgba(255,255,255,0.75);
+      font-size: 12px;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+    .mc-body { background: var(--bw-white); overflow-x: auto; }
+    .mc-body table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    .mc-body thead th {
+      background: var(--bw-cream);
+      color: var(--bw-muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 0.5px solid var(--bw-border);
+    }
+    .mc-body tbody td {
+      padding: 14px;
+      border-bottom: 0.5px solid var(--bw-border);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    .mc-body tbody tr:last-child td { border-bottom: none; }
+    .mc-name {
+      font-weight: 800;
+      color: var(--bw-text);
+      font-size: 15px;
+    }
+    .mc-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .mc-badge.shoulder { background: #EAF3DE; color: #27500A; }
+    .mc-badge.peak { background: #FCEBEB; color: #791F1F; }
+    .mc-badge.transitioning { background: #FFF8DC; color: #6B5300; }
+    .mc-price {
+      font-weight: 800;
+      color: var(--bw-green);
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+    .mc-body tbody tr.highlighted td {
+      background: #FFFDF0;
+    }
+    .mc-body tbody tr.highlighted td:first-child {
+      box-shadow: inset 3px 0 0 var(--bw-yellow);
+    }
+    .mc-watermark {
+      position: absolute;
+      right: 14px;
+      bottom: -16px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--bw-green);
+      opacity: 0.7;
+      letter-spacing: 0.4px;
+      pointer-events: none;
+    }
+    .mc-empty { padding: 22px; text-align: center; color: var(--bw-muted); font-size: 14px; }
+
+    @media (max-width: 520px) {
+      #bw-month-compare { margin: 22px auto; }
+      .mc-head { padding: 14px 16px; }
+      .mc-title { font-size: 15px; }
+      .mc-body { padding: 12px 14px; }
+      .mc-body table, .mc-body thead, .mc-body tbody, .mc-body tr, .mc-body th, .mc-body td { display: block; }
+      .mc-body thead { display: none; }
+      .mc-body tbody tr {
+        border: 1px solid var(--bw-border);
+        border-radius: 10px;
+        margin-bottom: 12px;
+        padding: 14px;
+        background: var(--bw-white);
+      }
+      .mc-body tbody tr:last-child { margin-bottom: 0; }
+      .mc-body tbody tr.highlighted {
+        border-color: var(--bw-yellow);
+        border-left-width: 4px;
+        background: #FFFDF0;
+      }
+      .mc-body tbody td {
+        border: none;
+        padding: 4px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .mc-body tbody td::before {
+        content: attr(data-label);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: var(--bw-muted);
+        flex-shrink: 0;
+        padding-top: 2px;
+      }
+      .mc-body tbody td[data-label="Month"] { padding-bottom: 8px; margin-bottom: 6px; border-bottom: 1px solid var(--bw-border); }
+      .mc-body tbody td[data-label="Month"]::before { display: none; }
+      .mc-body tbody td[data-label="Key Strengths"] { flex-direction: column; align-items: flex-start; gap: 4px; }
+      .mc-watermark { right: 10px; bottom: -14px; font-size: 9px; }
+    }
+  </style>
+</head>
+<body>
+<div id="bw-month-compare" aria-live="polite">
+  <div class="mc-empty">Loading comparison…</div>
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('bw-month-compare');
+  var params = new URLSearchParams(window.location.search);
+  var postKey = params.get('post') || 'visiting-berlin-in-june';
+
+  function escapeHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[c];
+    });
+  }
+
+  function renderEmpty(label) {
+    root.innerHTML = '<div class="mc-empty">' + escapeHtml(label) + '</div>';
+  }
+
+  function render(cfg) {
+    if (!cfg || !Array.isArray(cfg.rows) || !cfg.rows.length) {
+      renderEmpty('No comparison configured for this post.');
+      return;
+    }
+    var headers = cfg.headers || ['Month', 'Season', 'Key Strengths', 'Price Tier'];
+    var headHtml = headers.map(function (h) { return '<th>' + escapeHtml(h) + '</th>'; }).join('');
+
+    var rowsHtml = cfg.rows.map(function (r) {
+      var badge = r.statusBadge || {};
+      var badgeType = (badge.type || '').toLowerCase();
+      var badgeClass = (['shoulder', 'peak', 'transitioning'].indexOf(badgeType) >= 0) ? badgeType : 'shoulder';
+      var trClass = r.highlighted ? ' class="highlighted"' : '';
+      return '<tr' + trClass + '>' +
+        '<td data-label="' + escapeHtml(headers[0]) + '"><span class="mc-name">' + escapeHtml(r.name) + '</span></td>' +
+        '<td data-label="' + escapeHtml(headers[1]) + '"><span class="mc-badge ' + badgeClass + '">' + escapeHtml(badge.label || '') + '</span></td>' +
+        '<td data-label="' + escapeHtml(headers[2]) + '">' + escapeHtml(r.highlights || '') + '</td>' +
+        '<td data-label="' + escapeHtml(headers[3]) + '"><span class="mc-price">' + escapeHtml(r.priceTier || '') + '</span></td>' +
+      '</tr>';
+    }).join('');
+
+    root.innerHTML =
+      '<div class="mc-wrap">' +
+        '<div class="mc-head">' +
+          '<div class="mc-kicker">Month Comparison</div>' +
+          '<div class="mc-title">' + escapeHtml(cfg.title || '') + '</div>' +
+          (cfg.subtitle ? '<div class="mc-sub">' + escapeHtml(cfg.subtitle) + '</div>' : '') +
+        '</div>' +
+        '<div class="mc-body"><table><thead><tr>' + headHtml + '</tr></thead>' +
+        '<tbody>' + rowsHtml + '</tbody></table></div>' +
+      '</div>' +
+      '<div class="mc-watermark" aria-hidden="true">@berlinwalkingtour</div>';
+  }
+
+  fetch('./data.json', { cache: 'no-store' })
+    .then(function (r) { if (!r.ok) throw new Error('404'); return r.json(); })
+    .then(function (d) { render(d[postKey]); })
+    .catch(function () { renderEmpty('Comparison data unavailable.'); });
+})();
+</script>
+</body>
+</html>

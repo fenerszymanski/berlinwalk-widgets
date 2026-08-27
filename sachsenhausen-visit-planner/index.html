@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sachsenhausen Visit Planner | BerlinWalk</title>
+  <meta name="description" content="Plan a respectful Sachsenhausen Memorial visit from Berlin: time, ticket zone, train choice, walking or bus transfer, and guided or audio guide options.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-sachsenhausen-planner">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-sachsenhausen-planner {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-light: #C5E1A5;
+      --bw-cream: #FAFAF5;
+      --bw-white: #FFFFFF;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-border: #D9E7C8;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 28px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-sachsenhausen-planner *,
+    #bw-sachsenhausen-planner *::before,
+    #bw-sachsenhausen-planner *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-sachsenhausen-planner .bw-shell {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-sachsenhausen-planner .bw-head {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.13), rgba(124, 179, 66, 0.22)),
+        var(--bw-green);
+      color: var(--bw-white);
+      padding: 20px;
+    }
+
+    #bw-sachsenhausen-planner .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      margin: 0 0 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-sachsenhausen-planner h2,
+    #bw-sachsenhausen-planner h3,
+    #bw-sachsenhausen-planner p {
+      margin-top: 0;
+    }
+
+    #bw-sachsenhausen-planner .bw-title {
+      color: var(--bw-white);
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    #bw-sachsenhausen-planner .bw-sub {
+      color: #DDEFC7;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 9px 0 0;
+      max-width: 860px;
+    }
+
+    #bw-sachsenhausen-planner .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(260px, 0.84fr) minmax(0, 1.16fr);
+      padding: 18px 20px 20px;
+    }
+
+    #bw-sachsenhausen-planner .bw-panel,
+    #bw-sachsenhausen-planner .bw-result,
+    #bw-sachsenhausen-planner .bw-card {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 14px;
+    }
+
+    #bw-sachsenhausen-planner .bw-form {
+      display: grid;
+      gap: 12px;
+    }
+
+    #bw-sachsenhausen-planner label {
+      display: block;
+      min-width: 0;
+    }
+
+    #bw-sachsenhausen-planner .bw-label {
+      color: var(--bw-green);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.1px;
+      line-height: 1.3;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-sachsenhausen-planner select {
+      appearance: none;
+      background:
+        linear-gradient(45deg, transparent 50%, var(--bw-green) 50%) right 14px center / 8px 8px no-repeat,
+        linear-gradient(135deg, var(--bw-green) 50%, transparent 50%) right 9px center / 8px 8px no-repeat,
+        var(--bw-white);
+      border: 1.5px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font: inherit;
+      font-size: 15px;
+      font-weight: 850;
+      line-height: 1.25;
+      min-height: 44px;
+      padding: 9px 34px 9px 10px;
+      width: 100%;
+    }
+
+    #bw-sachsenhausen-planner select:focus-visible,
+    #bw-sachsenhausen-planner a:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.82);
+      outline-offset: 2px;
+    }
+
+    #bw-sachsenhausen-planner .bw-note {
+      background: #F2F8E8;
+      border: 1px solid rgba(124, 179, 66, 0.32);
+      border-radius: 8px;
+      color: var(--bw-muted);
+      font-size: 12.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 0;
+      padding: 10px;
+    }
+
+    #bw-sachsenhausen-planner .bw-result {
+      border-color: rgba(27, 94, 32, 0.25);
+      display: grid;
+      gap: 12px;
+    }
+
+    #bw-sachsenhausen-planner .bw-pill {
+      align-items: center;
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      color: var(--bw-green);
+      display: inline-flex;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      padding: 6px 9px;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+
+    #bw-sachsenhausen-planner .bw-result h3 {
+      color: var(--bw-green);
+      font-size: 23px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.15;
+      margin: 0;
+    }
+
+    #bw-sachsenhausen-planner .bw-result p,
+    #bw-sachsenhausen-planner li {
+      color: var(--bw-muted);
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.58;
+      margin-bottom: 0;
+    }
+
+    #bw-sachsenhausen-planner .bw-stats,
+    #bw-sachsenhausen-planner .bw-steps,
+    #bw-sachsenhausen-planner .bw-links {
+      display: grid;
+      gap: 9px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-sachsenhausen-planner .bw-stat,
+    #bw-sachsenhausen-planner .bw-step,
+    #bw-sachsenhausen-planner .bw-link {
+      background: #F8FBF1;
+      border: 1px solid rgba(27, 94, 32, 0.12);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 10px;
+    }
+
+    #bw-sachsenhausen-planner .bw-stat strong,
+    #bw-sachsenhausen-planner .bw-step strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    #bw-sachsenhausen-planner .bw-link {
+      color: var(--bw-green);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 900;
+      line-height: 1.3;
+      text-decoration: none;
+    }
+
+    #bw-sachsenhausen-planner .bw-link span {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 11.5px;
+      font-weight: 650;
+      line-height: 1.35;
+      margin-top: 4px;
+    }
+
+    #bw-sachsenhausen-planner ul {
+      display: grid;
+      gap: 7px;
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    #bw-sachsenhausen-planner .bw-warning {
+      background: #FFFBE0;
+      border: 1px solid rgba(255, 230, 0, 0.8);
+      border-radius: 8px;
+      color: #3F4A17;
+      font-size: 12.5px;
+      font-weight: 750;
+      line-height: 1.5;
+      padding: 10px;
+    }
+
+    @media (max-width: 760px) {
+      #bw-sachsenhausen-planner {
+        margin: 18px 0;
+      }
+
+      #bw-sachsenhausen-planner .bw-head,
+      #bw-sachsenhausen-planner .bw-body {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      #bw-sachsenhausen-planner .bw-title {
+        font-size: 23px;
+      }
+
+      #bw-sachsenhausen-planner .bw-body,
+      #bw-sachsenhausen-planner .bw-stats,
+      #bw-sachsenhausen-planner .bw-steps,
+      #bw-sachsenhausen-planner .bw-links {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <section class="bw-shell" aria-labelledby="bw-sachsenhausen-title">
+    <header class="bw-head">
+      <p class="bw-kicker">BerlinWalk planning tool</p>
+      <h2 class="bw-title" id="bw-sachsenhausen-title">Sachsenhausen Visit Planner</h2>
+      <p class="bw-sub">Build a realistic memorial visit from Berlin: time budget, ticket zone, transfer choice and the right level of guidance.</p>
+    </header>
+
+    <div class="bw-body">
+      <div class="bw-panel">
+        <form class="bw-form" id="bw-sachsenhausen-form">
+          <label>
+            <span class="bw-label">Time available</span>
+            <select name="time">
+              <option value="full">5-6 hours door to door</option>
+              <option value="half">4-5 hours, focused visit</option>
+              <option value="short">Under 4 hours</option>
+            </select>
+          </label>
+
+          <label>
+            <span class="bw-label">Visit style</span>
+            <select name="style">
+              <option value="audio">Independent with audio guide</option>
+              <option value="public">Saturday public tour</option>
+              <option value="self">Independent, no audio</option>
+              <option value="group">Private/group booking</option>
+            </select>
+          </label>
+
+          <label>
+            <span class="bw-label">Day and season</span>
+            <select name="day">
+              <option value="summer">Summer opening period</option>
+              <option value="winter">Winter opening period</option>
+              <option value="saturday">Saturday, tour possible</option>
+              <option value="late">Late start after lunch</option>
+            </select>
+          </label>
+
+          <label>
+            <span class="bw-label">Mobility and energy</span>
+            <select name="mobility">
+              <option value="steady">Comfortable walking</option>
+              <option value="limited">Limited mobility or wheelchair user</option>
+              <option value="kids">With younger children</option>
+              <option value="heavy">Emotionally heavy day already</option>
+            </select>
+          </label>
+
+          <label>
+            <span class="bw-label">After the visit</span>
+            <select name="after">
+              <option value="quiet">Quiet evening, no heavy second site</option>
+              <option value="central">Return for a central Berlin walk</option>
+              <option value="more">Add another history stop</option>
+            </select>
+          </label>
+        </form>
+
+        <p class="bw-note">Official details can change. Use this as a planning filter, then check the memorial page and a live transport app before leaving.</p>
+      </div>
+
+      <div class="bw-result" aria-live="polite">
+        <span class="bw-pill" id="bw-sachsenhausen-pill">Recommended plan</span>
+        <h3 id="bw-sachsenhausen-heading">Go, but make it the main plan of the day</h3>
+        <p id="bw-sachsenhausen-copy">Use an ABC ticket, travel to Oranienburg, then choose the short bus transfer or the 20-minute walk. Rent the audio guide unless you are joining the Saturday public tour.</p>
+
+        <div class="bw-stats">
+          <div class="bw-stat"><strong>Ticket</strong><span id="bw-sachsenhausen-ticket">Berlin ABC</span></div>
+          <div class="bw-stat"><strong>Route</strong><span id="bw-sachsenhausen-route">S1 or RE/RB to Oranienburg</span></div>
+          <div class="bw-stat"><strong>On site</strong><span id="bw-sachsenhausen-onsite">2.5-3.5 hours</span></div>
+        </div>
+
+        <div class="bw-steps">
+          <div class="bw-step"><strong>1. Travel</strong><span id="bw-sachsenhausen-step1">Start early enough to arrive before the afternoon thins out.</span></div>
+          <div class="bw-step"><strong>2. Transfer</strong><span id="bw-sachsenhausen-step2">Walk 20 minutes from Oranienburg or take bus 804/821.</span></div>
+          <div class="bw-step"><strong>3. Pace</strong><span id="bw-sachsenhausen-step3">Leave the rest of the day simple and quiet.</span></div>
+        </div>
+
+        <ul id="bw-sachsenhausen-list"></ul>
+
+        <p class="bw-warning" id="bw-sachsenhausen-warning">This is a memorial site. Plan for focus, respectful behavior and enough time to leave without rushing.</p>
+
+        <div class="bw-links">
+          <a class="bw-link" href="https://www.sachsenhausen-sbg.de/en/visitor-service/opening-times-prices-and-travel-information/" target="_blank" rel="noopener">Official memorial info<span>Opening hours, prices, route and bus notes</span></a>
+          <a class="bw-link" href="https://www.berlin.de/en/public-transportation/1772016-2913840-tickets-fares-and-route-maps.en.html" target="_blank" rel="noopener">Berlin ticket zones<span>Check current AB/ABC fares before travel</span></a>
+          <a class="bw-link" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_blank" rel="noopener">BerlinWalk route<span>Use the city-centre tour on a separate day or morning</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var root = document.getElementById('bw-sachsenhausen-planner');
+      var form = root.querySelector('#bw-sachsenhausen-form');
+      var els = {
+        pill: root.querySelector('#bw-sachsenhausen-pill'),
+        heading: root.querySelector('#bw-sachsenhausen-heading'),
+        copy: root.querySelector('#bw-sachsenhausen-copy'),
+        ticket: root.querySelector('#bw-sachsenhausen-ticket'),
+        route: root.querySelector('#bw-sachsenhausen-route'),
+        onsite: root.querySelector('#bw-sachsenhausen-onsite'),
+        step1: root.querySelector('#bw-sachsenhausen-step1'),
+        step2: root.querySelector('#bw-sachsenhausen-step2'),
+        step3: root.querySelector('#bw-sachsenhausen-step3'),
+        list: root.querySelector('#bw-sachsenhausen-list'),
+        warning: root.querySelector('#bw-sachsenhausen-warning')
+      };
+
+      function values() {
+        return {
+          time: form.elements.time.value,
+          style: form.elements.style.value,
+          day: form.elements.day.value,
+          mobility: form.elements.mobility.value,
+          after: form.elements.after.value
+        };
+      }
+
+      function renderList(items) {
+        els.list.innerHTML = items.map(function (item) {
+          return '<li>' + item + '</li>';
+        }).join('');
+      }
+
+      function plan(v) {
+        var result = {
+          pill: 'Recommended plan',
+          heading: 'Go, but make it the main plan of the day',
+          copy: 'Use an ABC ticket, travel to Oranienburg, then choose the short bus transfer or the 20-minute walk. Rent the audio guide unless you are joining the Saturday public tour.',
+          ticket: 'Berlin ABC',
+          route: 'S1 or RE/RB to Oranienburg',
+          onsite: '2.5-3.5 hours',
+          step1: 'Start early enough to arrive before the afternoon thins out.',
+          step2: 'Walk 20 minutes from Oranienburg or take bus 804/821.',
+          step3: 'Leave the rest of the day simple and quiet.',
+          warning: 'This is a memorial site. Plan for focus, respectful behavior and enough time to leave without rushing.',
+          items: [
+            'Best fit: a morning departure from central Berlin.',
+            'Use the Visitor Information Centre first for current maps, audio guides and site orientation.',
+            'Do not treat the free admission as a reason to rush the visit.'
+          ]
+        };
+
+        if (v.time === 'short') {
+          result.pill = 'Better not today';
+          result.heading = 'Choose a central history stop instead';
+          result.copy = 'Under four hours door to door turns Sachsenhausen into a rushed memorial visit. Use Topography of Terror, Tränenpalast or the Berlin Wall Memorial today, then give Sachsenhausen a real half day.';
+          result.onsite = 'Too rushed';
+          result.step1 = 'Save Sachsenhausen for a morning start.';
+          result.step2 = 'Use today for a central free site.';
+          result.step3 = 'Keep the memorial visit for a calmer day.';
+          result.warning = 'A rushed visit is the wrong tradeoff here. The respectful choice is to come back with enough time.';
+          result.items = [
+            'Central alternative: Topography of Terror for Nazi-era documentation.',
+            'Wall alternative: Berlin Wall Memorial at Bernauer Strasse.',
+            'Human border-crossing story: Tränenpalast near Friedrichstrasse.'
+          ];
+        }
+
+        if (v.style === 'public') {
+          result.heading = v.time === 'short' ? result.heading : 'Use the Saturday public tour if timing fits';
+          result.copy = v.time === 'short' ? result.copy : 'The memorial lists a Saturday English public tour at 11:00 and a German tour at 14:00. Register on site at the Visitor Information Centre; do not build the whole day on it without arriving early.';
+          result.items[0] = 'Arrive early enough to register on site and still orient yourself.';
+          result.items.push('Public tours are recommended for visitors aged 14 and older.');
+        }
+
+        if (v.style === 'self') {
+          result.items.push('If you skip the audio guide, read the site plan first so the visit does not become random walking.');
+        }
+
+        if (v.style === 'group') {
+          result.heading = v.time === 'short' ? result.heading : 'Book a group visit well ahead';
+          result.copy = v.time === 'short' ? result.copy : 'The memorial asks groups to book guided tours and workshops far in advance because demand is high. For a normal tourist day, keep an independent audio-guide backup.';
+          result.items.push('Group bookings are not a last-minute same-day plan.');
+        }
+
+        if (v.day === 'winter') {
+          result.step1 = 'Start in the morning because winter closing is earlier.';
+          result.onsite = '2-3 hours';
+          result.items.push('In winter, the outdoor areas and exhibitions close earlier than in the summer period.');
+        }
+
+        if (v.day === 'late') {
+          result.pill = 'Risky timing';
+          result.heading = v.time === 'short' ? result.heading : 'A late start only works as a short, focused visit';
+          result.copy = v.time === 'short' ? result.copy : 'If you leave Berlin after lunch, check closing time before you board. In winter, postpone. In summer, keep the visit focused and avoid adding another heavy stop.';
+          result.step1 = 'Check closing time before boarding.';
+          result.step3 = 'Do not add a second memorial afterwards.';
+        }
+
+        if (v.mobility === 'limited') {
+          result.step2 = 'Use bus 804/821 if available; accessibility is limited on the historic site.';
+          result.warning = 'The memorial says accessibility is only possible to a limited extent and recommends accompaniment for visitors with mobility or visual impairments.';
+          result.items.push('Wheelchairs can be borrowed at the Visitor Information Centre, but the preserved site is not fully barrier-free.');
+        }
+
+        if (v.mobility === 'kids') {
+          result.pill = 'Use judgment';
+          result.heading = v.time === 'short' ? result.heading : 'Only go with children if the day is built around care';
+          result.copy = v.time === 'short' ? result.copy : 'Sachsenhausen can be meaningful for mature teenagers, but it is not an easy family sightseeing stop. Keep the visit shorter, use breaks and avoid graphic detail overload.';
+          result.items.push('The memorial recommends public tours for visitors aged 14 and older.');
+        }
+
+        if (v.mobility === 'heavy') {
+          result.pill = 'Slow day';
+          result.heading = v.time === 'short' ? result.heading : 'Do not stack heavy history today';
+          result.step3 = 'Plan food, quiet transport and rest afterwards.';
+          result.warning = 'If the day already includes Holocaust or Nazi-era memorials, make Sachsenhausen the only major heavy site.';
+        }
+
+        if (v.after === 'more') {
+          result.warning = 'One heavy site is usually enough. Add another documentation site only if you know you still have focus.';
+          result.items.push('If you add a second site, choose one short and central rather than another long excursion.');
+        } else if (v.after === 'central') {
+          result.items.push('If you still want movement afterwards, keep it light: food, a river walk or the route back through central Berlin.');
+        }
+
+        return result;
+      }
+
+      function update() {
+        var p = plan(values());
+        els.pill.textContent = p.pill;
+        els.heading.textContent = p.heading;
+        els.copy.textContent = p.copy;
+        els.ticket.textContent = p.ticket;
+        els.route.textContent = p.route;
+        els.onsite.textContent = p.onsite;
+        els.step1.textContent = p.step1;
+        els.step2.textContent = p.step2;
+        els.step3.textContent = p.step3;
+        els.warning.textContent = p.warning;
+        renderList(p.items);
+        if (window.BerlinWalkBrand && window.BerlinWalkBrand.resize) {
+          window.BerlinWalkBrand.resize();
+        }
+      }
+
+      form.addEventListener('change', update);
+      update();
+    }());
+  </script>
+</div>
+</body>
+</html>

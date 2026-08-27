@@ -1,0 +1,346 @@
+{
+  "checkedOn": "24 August 2026",
+  "origin": {
+    "name": "S+U Alexanderplatz",
+    "lat": 52.5215,
+    "lon": 13.4113
+  },
+  "bounds": {
+    "west": 13.08,
+    "east": 13.59,
+    "south": 52.395,
+    "north": 52.585
+  },
+  "axes": {
+    "travelMax": 55,
+    "stayMax": 130,
+    "budgetMin": 60,
+    "budgetMax": 300,
+    "budgetStep": 10,
+    "budgetDefault": 120
+  },
+  "sites": [
+    {
+      "key": "museumsinsel",
+      "name": "Museum Island",
+      "short": "Museum Island",
+      "property": "Museum Island Berlin",
+      "listed": 1999,
+      "lat": 52.5173,
+      "lon": 13.3989,
+      "travel": 3,
+      "stop": "U Museumsinsel (U5), one stop from Alexanderplatz",
+      "verdict": "Go",
+      "band": "go",
+      "what": "Five museums on one island in the middle of the Spree, built between 1824 and 1930 as a single ensemble. Four of them are open. The Pergamonmuseum is shut for rebuilding and reopens on 4 June 2027.",
+      "onsite": "Stand in the Lustgarten with the Altes Museum's eighteen columns on one side and the cathedral on the other. That view is the argument the whole island was built to make.",
+      "note": "This is the only Berlin World Heritage site you can reach on foot from Alexanderplatz, and the one my free tour walks through.",
+      "anchor": "start",
+      "dx": 10,
+      "dy": 3,
+      "goodVisit": 180,
+      "minStay": 90
+    },
+    {
+      "key": "carl-legien",
+      "name": "Wohnstadt Carl Legien",
+      "short": "Carl Legien",
+      "property": "Berlin Modernism Housing Estates",
+      "listed": 2008,
+      "lat": 52.5466,
+      "lon": 13.4328,
+      "travel": 14,
+      "stop": "Erich-Weinert-Str., tram M2 from Alexanderplatz",
+      "verdict": "Go if you have half an hour",
+      "band": "go",
+      "what": "Bruno Taut and Franz Hillinger, 1928 to 1930. The densest of the seven estates and the only one built inside the inner city, so the blocks open in U shapes onto planted courtyards instead of the dark back yards Berlin was full of.",
+      "onsite": "Walk into one courtyard from Erich-Weinert-Strasse and look up at the loggias. The colour is on the balcony recesses and the window reveals, not on the street front.",
+      "note": "The cheapest of all seven to try. Fourteen minutes each way from Alexanderplatz on one tram.",
+      "anchor": "end",
+      "dx": -10,
+      "dy": 3,
+      "goodVisit": 30,
+      "minStay": 20
+    },
+    {
+      "key": "hufeisensiedlung",
+      "name": "Grosssiedlung Britz, the Hufeisensiedlung",
+      "short": "Hufeisensiedlung",
+      "property": "Berlin Modernism Housing Estates",
+      "listed": 2008,
+      "lat": 52.4482,
+      "lon": 13.4474,
+      "travel": 22,
+      "stop": "U Parchimer Allee (U7), then about five minutes on foot",
+      "verdict": "Go, this is the one to pick",
+      "band": "go",
+      "what": "Bruno Taut and Martin Wagner, 1925 to 1930. A three-storey block bent into a horseshoe around a pond, with red and white terraced streets running off it. If you only make one trip out, make it this one.",
+      "onsite": "Follow the curve of Lowise-Reuter-Ring the whole way round. The horseshoe only works as a shape when you walk it, and the front doors change colour as you go.",
+      "note": "The one estate with a real visitor culture: resident-led guided tours, and one house kept as a 1920s interior that is let to guests.",
+      "anchor": "start",
+      "dx": 10,
+      "dy": 3,
+      "goodVisit": 60,
+      "minStay": 45
+    },
+    {
+      "key": "weisse-stadt",
+      "name": "Weisse Stadt",
+      "short": "Weisse Stadt",
+      "property": "Berlin Modernism Housing Estates",
+      "listed": 2008,
+      "lat": 52.5687,
+      "lon": 13.3517,
+      "travel": 22,
+      "stop": "Aroser Allee/Gotthardstr., U8 to Residenzstr. then bus 120",
+      "verdict": "Only with Schillerpark",
+      "band": "pair",
+      "what": "Otto Rudolf Salvisberg, Bruno Ahrends and Wilhelm Buening, 1929 to 1931. White rendered slabs in open rows, including a block that bridges straight over Aroser Allee on piers.",
+      "onsite": "Stand under the bridge building on Aroser Allee and look through it. Flats over a public street was a genuinely strange idea in 1930.",
+      "note": "Three minutes on the 120 bus from the Schillerpark estate. Doing one without the other wastes the journey.",
+      "anchor": "start",
+      "dx": 10,
+      "dy": 16,
+      "goodVisit": 30,
+      "minStay": 20
+    },
+    {
+      "key": "schillerpark",
+      "name": "Siedlung Schillerpark",
+      "short": "Schillerpark",
+      "property": "Berlin Modernism Housing Estates",
+      "listed": 2008,
+      "lat": 52.5601,
+      "lon": 13.3495,
+      "travel": 29,
+      "stop": "Bristolstr., U8 to Residenzstr. then bus 120",
+      "verdict": "Only with Weisse Stadt",
+      "band": "pair",
+      "what": "Bruno Taut, 1924 to 1930. The first of the seven to be built after the war and the only one in dark red brick, borrowed from Dutch housing of the same years.",
+      "onsite": "Look at the stairwells. The brick outside is severe on purpose, and Taut put the colour where the residents would meet it, inside the entrances.",
+      "note": "Small, quiet and quick. It is a fifteen minute walk or a three minute bus ride from the Weisse Stadt.",
+      "anchor": "start",
+      "dx": 10,
+      "dy": 3,
+      "goodVisit": 25,
+      "minStay": 20
+    },
+    {
+      "key": "siemensstadt",
+      "name": "Grosssiedlung Siemensstadt, the Ringsiedlung",
+      "short": "Siemensstadt",
+      "property": "Berlin Modernism Housing Estates",
+      "listed": 2008,
+      "lat": 52.5397,
+      "lon": 13.2755,
+      "travel": 31,
+      "stop": "U Siemensdamm (U7), then about five minutes on foot",
+      "verdict": "For architecture readers only",
+      "band": "skip",
+      "what": "Six architects on one site between 1929 and 1934, among them Hans Scharoun, Walter Gropius, Otto Bartning and Hugo Haering. Each took a section, so the estate is a row of arguments about how a flat should be shaped.",
+      "onsite": "Find Scharoun's long block with the rounded ends on Jungfernheideweg, then walk to the Gropius rows. Reading one against the other is the whole point of coming.",
+      "note": "Rewarding if you already know these names. If you do not, it is a well-kept housing estate and a long ride back.",
+      "anchor": "start",
+      "dx": 10,
+      "dy": -8,
+      "goodVisit": 40,
+      "minStay": 30
+    },
+    {
+      "key": "waldsiedlung",
+      "name": "Waldsiedlung Zehlendorf, Onkel Toms Huette",
+      "short": "Waldsiedlung Zehlendorf",
+      "property": "Berlin Modernism Housing Estates",
+      "listed": 2026,
+      "lat": 52.4487,
+      "lon": 13.2573,
+      "travel": 40,
+      "stop": "U Onkel Toms Huette (U3), the station is inside the estate",
+      "verdict": "Go on a good afternoon",
+      "band": "pair",
+      "what": "The newest addition, listed on 26 July 2026. Bruno Taut, Hugo Haering and Otto Rudolf Salvisberg built 1,917 homes here between 1926 and 1932, dropped straight into a pine forest.",
+      "onsite": "Come up out of the U-Bahn and walk the shopping street built along the platforms, then follow Riemeisterstrasse into the trees where the house fronts start changing colour.",
+      "note": "The one estate where the station is part of the design. It also hosts the Landesdenkmalamt festival from 27 to 30 August 2026.",
+      "anchor": "start",
+      "dx": 10,
+      "dy": 3,
+      "plotLabel": "Waldsiedlung",
+      "goodVisit": 60,
+      "minStay": 40
+    },
+    {
+      "key": "falkenberg",
+      "name": "Gartenstadt Falkenberg, the Tuschkastensiedlung",
+      "short": "Gartenstadt Falkenberg",
+      "property": "Berlin Modernism Housing Estates",
+      "listed": 2008,
+      "lat": 52.4107,
+      "lon": 13.5674,
+      "travel": 50,
+      "stop": "S Gruenau, then about seven minutes on foot",
+      "verdict": "Last on the list",
+      "band": "skip",
+      "what": "Bruno Taut with Heinrich Tessenow, 1913 to 1916, and the oldest of the seven by a decade. Its nickname, the paintbox estate, comes from facades painted in flat blocks of blue, red and ochre.",
+      "onsite": "Akazienhof is the corner that earns the trip. Two rows of houses face each other in colours nobody would risk today.",
+      "note": "The most colourful and the smallest. Two changes and roughly fifty minutes each way for a walk that takes half an hour.",
+      "anchor": "end",
+      "dx": -10,
+      "dy": 3,
+      "plotLabel": "Falkenberg",
+      "goodVisit": 30,
+      "minStay": 25
+    },
+    {
+      "key": "glienicke",
+      "name": "Schloss Glienicke",
+      "short": "Schloss Glienicke",
+      "property": "Palaces and Parks of Potsdam and Berlin",
+      "listed": 1990,
+      "lat": 52.4139,
+      "lon": 13.0955,
+      "travel": 47,
+      "stop": "Schloss Glienicke, S7 to Wannsee then bus 316",
+      "verdict": "Only with Pfaueninsel",
+      "band": "pair",
+      "what": "Schinkel's Italian villa for Prince Carl of Prussia, with a Lenne park running down to the water beside the Glienicke Bridge. Palace 8.00 EUR, reduced 6.00 EUR; the park costs nothing.",
+      "onsite": "Walk the park down to the Casino terrace and look across at Babelsberg. This was the Berlin edge of the Cold War border, and the bridge is a five minute walk away.",
+      "note": "Open Tuesday to Sunday, 10:00 to 17:30 from April to October, closed Mondays and closed on 2 September 2026.",
+      "anchor": "end",
+      "dx": -10,
+      "dy": 3,
+      "goodVisit": 90,
+      "minStay": 60
+    },
+    {
+      "key": "pfaueninsel",
+      "name": "Pfaueninsel",
+      "short": "Pfaueninsel",
+      "property": "Palaces and Parks of Potsdam and Berlin",
+      "listed": 1990,
+      "lat": 52.4351,
+      "lon": 13.1303,
+      "travel": 49,
+      "stop": "Pfaueninsel, S7 to Wannsee then bus 218, then the ferry",
+      "verdict": "Go if you have the whole day",
+      "band": "go",
+      "what": "An island in the Havel with a white folly of a palace, a landscape park and free-roaming peacocks. Ferry 6.00 EUR, reduced 5.00 EUR; the palace 8.00 EUR, reduced 6.00 EUR, interior on a guided tour only.",
+      "onsite": "Take the ferry across, then walk the shore loop before the palace. The island is big enough that most people never leave the first two paths.",
+      "note": "Ferries leave at 15, 35 and 55 past the hour, 10:00 to 18:00 in summer. Closed Mondays, and closed on 2 September 2026.",
+      "anchor": "end",
+      "dx": -10,
+      "dy": 3,
+      "goodVisit": 150,
+      "minStay": 120
+    }
+  ],
+  "ring": [
+    [
+      52.5031,
+      13.4692
+    ],
+    [
+      52.4938,
+      13.4618
+    ],
+    [
+      52.4738,
+      13.456
+    ],
+    [
+      52.4693,
+      13.4437
+    ],
+    [
+      52.4675,
+      13.4313
+    ],
+    [
+      52.4706,
+      13.3859
+    ],
+    [
+      52.4755,
+      13.3655
+    ],
+    [
+      52.4798,
+      13.3528
+    ],
+    [
+      52.4781,
+      13.3429
+    ],
+    [
+      52.4777,
+      13.3286
+    ],
+    [
+      52.4801,
+      13.3123
+    ],
+    [
+      52.4883,
+      13.3007
+    ],
+    [
+      52.4967,
+      13.2901
+    ],
+    [
+      52.5011,
+      13.283
+    ],
+    [
+      52.5066,
+      13.2829
+    ],
+    [
+      52.5186,
+      13.2842
+    ],
+    [
+      52.5305,
+      13.3001
+    ],
+    [
+      52.5343,
+      13.3287
+    ],
+    [
+      52.5362,
+      13.3438
+    ],
+    [
+      52.5427,
+      13.3661
+    ],
+    [
+      52.5486,
+      13.3884
+    ],
+    [
+      52.5493,
+      13.4151
+    ],
+    [
+      52.5448,
+      13.4274
+    ],
+    [
+      52.5407,
+      13.4384
+    ],
+    [
+      52.5288,
+      13.4559
+    ],
+    [
+      52.5239,
+      13.4647
+    ],
+    [
+      52.5136,
+      13.4758
+    ]
+  ]
+}

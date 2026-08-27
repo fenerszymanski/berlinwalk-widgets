@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Berlin Evening Cascade</title>
+<meta name="description" content="Drag one playhead across a Berlin evening and watch sixteen central sights close behind you, against the real sunset and blue hour for the date you pick." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23123D18'/%3E%3Crect x='12' y='16' width='40' height='5' rx='2.5' fill='%23FFE600'/%3E%3Crect x='12' y='28' width='28' height='5' rx='2.5' fill='%237CB342'/%3E%3Crect x='12' y='40' width='16' height='5' rx='2.5' fill='%23C5E1A5'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --deep:#123D18; --lime:#7CB342; --light:#C5E1A5;
+    --yellow:#FFE600; --ink:#212121; --muted:#4E5A4E; --line:#E3E8DC;
+    --night:#101a2e; --dusk:#2b3f6b; --day:#f5c451; --dark-row:#1b2438;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#FAFAF5;font-family:Montserrat,Arial,sans-serif;color:var(--ink)}
+  .wrap{max-width:900px;margin:0 auto;padding:14px}
+
+  .head{background:var(--deep);color:#fff;border-radius:14px;padding:16px 18px}
+  .kicker{font:700 11px/1.2 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow)}
+  h1{margin:8px 0 6px;font-size:21px;line-height:1.2;font-weight:800}
+  .sub{margin:0;font-size:13.5px;line-height:1.5;color:#dbe7d6}
+
+  .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin:14px 0 10px}
+  .field{flex:1 1 170px;min-width:150px}
+  label{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+  input[type=date]{width:100%;padding:9px 10px;border:2px solid var(--line);border-radius:9px;font:600 14px Montserrat,Arial,sans-serif;color:var(--ink);background:#fff}
+  input[type=date]:focus-visible{outline:3px solid var(--lime);outline-offset:1px}
+  .daytag{display:inline-block;background:var(--light);color:var(--deep);font:700 12px 'IBM Plex Mono',monospace;padding:7px 11px;border-radius:8px}
+
+  .readout{background:#fff;border:2px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px}
+  .clock{font:800 34px/1 'IBM Plex Mono',monospace;color:var(--deep);letter-spacing:-.02em}
+  .band{display:inline-block;margin-left:10px;font:700 11px 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;padding:5px 9px;border-radius:20px;vertical-align:6px}
+  .b-day{background:#FFF3C4;color:#6b4c00}
+  .b-dusk{background:#D9E2F5;color:#233766}
+  .b-dark{background:#1b2438;color:#cbd6ee}
+  .tally{margin:10px 0 0;font-size:15px;line-height:1.55}
+  .tally strong{color:var(--deep)}
+  .nextout{margin:8px 0 0;font-size:14px;line-height:1.5;color:var(--muted)}
+  .nextout b{color:#8a2b12}
+
+  .scrubwrap{margin:12px 0 4px}
+  input[type=range]{width:100%;accent-color:var(--green);height:26px}
+  input[type=range]:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+
+  .chart{background:#fff;border:2px solid var(--line);border-radius:14px;padding:12px 12px 8px;overflow:hidden}
+  .sky{position:relative;height:26px;border-radius:7px;overflow:hidden;margin-bottom:4px}
+  .skylabel{position:absolute;top:5px;font:700 9.5px 'IBM Plex Mono',monospace;letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;pointer-events:none}
+  .axis{position:relative;height:16px;margin-bottom:6px}
+  .tick{position:absolute;top:0;font:600 10px 'IBM Plex Mono',monospace;color:var(--muted);transform:translateX(-50%)}
+  .plot{position:relative;cursor:ew-resize;touch-action:pan-y}
+  .row{position:relative;height:26px;margin-bottom:3px}
+  .rowbg{position:absolute;inset:0;background:#F4F7F0;border-radius:5px}
+  .bar{position:absolute;top:0;bottom:0;border-radius:5px;background:linear-gradient(180deg,#7CB342,#4d8a26);display:flex;align-items:center;justify-content:space-between;gap:6px;padding:0 9px;overflow:hidden}
+  .bar.late{background:linear-gradient(180deg,#FFE600,#e6ce00)}
+  .bar .blab{font:700 11.5px Montserrat,Arial,sans-serif;color:#fff;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;min-width:0}
+  .bar .btime{font:700 11px 'IBM Plex Mono',monospace;color:#fff;white-space:nowrap;flex:0 0 auto;opacity:.92}
+  .bar.late .blab,.bar.late .btime{color:#123D18}
+  .row.shut .bar{filter:grayscale(1) brightness(1.35);opacity:.5}
+  .rowname{position:absolute;left:var(--nx);top:0;bottom:0;display:flex;align-items:center;font:700 11px Montserrat,Arial,sans-serif;color:var(--muted);white-space:nowrap;pointer-events:none}
+  .row.wide .rowname{display:none}
+  .rowname em{font-style:normal}
+  .rowname b{font-weight:700}
+  .skycap{display:none;margin:0 0 6px;font:600 10.5px 'IBM Plex Mono',monospace;color:var(--muted);letter-spacing:.03em}
+  .closedday{position:absolute;left:8px;top:0;bottom:0;display:flex;align-items:center;font:700 10.5px 'IBM Plex Mono',monospace;color:#8b948a;letter-spacing:.06em;text-transform:uppercase}
+  .head-line{position:absolute;top:0;bottom:0;width:2px;background:#B00020;pointer-events:none;z-index:4}
+  .head-line::before{content:'';position:absolute;top:-7px;left:-5px;width:12px;height:12px;border-radius:50%;background:#B00020}
+
+  .legend{display:flex;flex-wrap:wrap;gap:12px;margin:10px 2px 0;font-size:11px;color:var(--muted)}
+  .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-2px}
+
+  .detail{margin-top:14px}
+  .detail h2{font-size:14px;margin:0 0 8px;letter-spacing:.04em;text-transform:uppercase;color:var(--deep)}
+  .card{background:#fff;border:2px solid var(--line);border-left:5px solid var(--lime);border-radius:11px;padding:11px 13px;margin-bottom:8px}
+  .card.gone{border-left-color:#c9d1c4;background:#F7F8F5}
+  .card h3{margin:0 0 3px;font-size:14.5px;color:var(--deep)}
+  .card .meta{font:600 11px 'IBM Plex Mono',monospace;color:var(--muted);margin-bottom:5px}
+  .card p{margin:0;font-size:13.5px;line-height:1.55;color:#333}
+
+  .free{background:var(--deep);color:#fff;border-radius:14px;padding:15px 17px;margin-top:16px}
+  .free h2{margin:0 0 4px;font-size:15px;color:var(--yellow);letter-spacing:.04em;text-transform:uppercase}
+  .free>p{margin:0 0 10px;font-size:13.5px;line-height:1.5;color:#dbe7d6}
+  .free ul{margin:0;padding:0;list-style:none}
+  .free li{padding:9px 0;border-top:1px solid rgba(255,255,255,.16)}
+  .free li b{display:block;font-size:14px}
+  .free li em{display:block;font-style:normal;font:600 11px 'IBM Plex Mono',monospace;color:var(--light);margin:2px 0 4px}
+  .free li span{font-size:13px;line-height:1.5;color:#e6efe3}
+
+  .foot{margin:14px 2px 0;font-size:11.5px;line-height:1.55;color:var(--muted)}
+  @media (max-width:560px){
+    .wrap{padding:10px}
+    h1{font-size:18px}
+    .clock{font-size:28px}
+    .skycap{display:block}
+    .sky .skylabel[data-mid]{display:none}
+    .row{height:37px;margin-bottom:5px}
+    .rowbg{top:16px}
+    .rowname{left:3px !important;top:0;bottom:auto;height:15px;font-size:11px;color:var(--deep);display:flex !important;max-width:96%;overflow:hidden}
+    .rowname b{display:none}
+    .row.wide .rowname{display:flex}
+    .bar{top:16px}
+    .bar .blab{display:none}
+    .bar .btime{font-size:10px;margin-left:auto}
+    .closedday{top:16px;font-size:9.5px}
+    .axis .tick{font-size:9.5px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="head">
+    <p class="kicker">Berlin after 18:00</p>
+    <h1>What is still open, and what just shut behind you</h1>
+    <p class="sub">Pick a date, then drag the playhead through the evening. Rows are sorted by tonight's closing time, so the staircase you see is the order Berlin switches off in.</p>
+  </header>
+
+  <div class="controls">
+    <div class="field">
+      <label for="dt">Date of your evening</label>
+      <input type="date" id="dt" />
+    </div>
+    <div class="field" style="flex:0 0 auto">
+      <label>Day</label>
+      <span class="daytag" id="daytag">Saturday</span>
+    </div>
+  </div>
+
+  <div class="readout">
+    <span class="clock" id="clock">20:40</span><span class="band b-dusk" id="bandtag">Blue hour</span>
+    <p class="tally" id="tally"></p>
+    <p class="nextout" id="nextout"></p>
+    <div class="scrubwrap">
+      <label for="scrub" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Time of evening</label>
+      <input type="range" id="scrub" min="960" max="1439" step="5" value="1240" aria-label="Time of evening" />
+    </div>
+  </div>
+
+  <div class="chart">
+    <div class="sky" id="sky"></div>
+    <p class="skycap" id="skycap"></p>
+    <div class="axis" id="axis"></div>
+    <div class="plot" id="plot"></div>
+    <div class="legend">
+      <span><i style="background:linear-gradient(180deg,#FFE600,#e6ce00)"></i>Still open past 18:00</span>
+      <span><i style="background:linear-gradient(180deg,#7CB342,#4d8a26)"></i>Daytime only</span>
+      <span><i style="background:#F4F7F0;border:1px solid #dfe6d8"></i>Shut at this minute</span>
+    </div>
+  </div>
+
+  <div class="detail">
+    <h2 id="detailhead">Still open at this minute</h2>
+    <div id="cards"></div>
+  </div>
+
+  <section class="free">
+    <h2>No ticket, no closing time</h2>
+    <p>These do not appear on the chart because they never switch off. On a normal Berlin evening they are the better half of the plan.</p>
+    <ul id="freelist"></ul>
+  </section>
+
+  <p class="foot" id="foot"></p>
+</div>
+
+<script src="data.js"></script>
+<script>
+(function(){
+  var D = window.BW_EVENING_DATA;
+  var DAY_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var T0 = 960, T1 = 1440; // 16:00 to 24:00
+
+  function pad(n){ return (n<10?'0':'')+n; }
+  function hhmm(m){ m = Math.round(m); if(m>=1440) return '24:00'; return pad(Math.floor(m/60))+':'+pad(m%60); }
+  function hhmm5(m){ return hhmm(Math.round(m/5)*5); }
+  function pct(m){ return ((m-T0)/(T1-T0))*100; }
+
+  /* --- Sun times for Berlin, NOAA solar position, returns local minutes --- */
+  var LAT = 52.5200, LON = 13.4050;
+  function sunEventMinutes(date, zenithDeg){
+    var start = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
+    var n = start/86400000 + 2440587.5;            // Julian day at 00:00 UTC
+    var nDays = Math.round(n - 2451545.0 + 0.0008);
+    var Jstar = nDays - LON/360;
+    var M = (357.5291 + 0.98560028*Jstar) % 360;
+    var Mr = M*Math.PI/180;
+    var C = 1.9148*Math.sin(Mr) + 0.0200*Math.sin(2*Mr) + 0.0003*Math.sin(3*Mr);
+    var lam = (M + C + 180 + 102.9372) % 360;
+    var lamR = lam*Math.PI/180;
+    var Jtransit = 2451545.0 + Jstar + 0.0053*Math.sin(Mr) - 0.0069*Math.sin(2*lamR);
+    var decl = Math.asin(Math.sin(lamR)*Math.sin(23.4397*Math.PI/180));
+    var latR = LAT*Math.PI/180, zR = zenithDeg*Math.PI/180;
+    var cosH = (Math.cos(zR) - Math.sin(latR)*Math.sin(decl)) / (Math.cos(latR)*Math.cos(decl));
+    if (cosH > 1 || cosH < -1) return null;        // polar edge case, not possible in Berlin
+    var H = Math.acos(cosH)*180/Math.PI;
+    var Jset = Jtransit + H/360;
+    var utcMs = (Jset - 2440587.5) * 86400000;
+    // convert that instant to Berlin wall-clock minutes
+    var d = new Date(utcMs);
+    var parts = new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Berlin',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(d);
+    var h=0,mi=0;
+    parts.forEach(function(p){ if(p.type==='hour') h=+p.value; if(p.type==='minute') mi=+p.value; });
+    return h*60+mi;
+  }
+
+  function hoursFor(v, date){
+    var dow = date.getDay();
+    var table = v.hours;
+    if (v.until && date > new Date(v.until+'T23:59:59')) table = v.afterHours;
+    if (v.summer){
+      var m = date.getMonth()+1, dd = date.getDate();
+      var inSummer = (m===6) || (m===7) || (m===8 && dd<=31);
+      if (inSummer) table = v.summer;
+    }
+    return table[dow] || null;
+  }
+
+  function build(){
+    var dtEl = document.getElementById('dt');
+    var date = new Date(dtEl.value + 'T12:00:00');
+    if (isNaN(date)) return;
+    var dow = date.getDay();
+    document.getElementById('daytag').textContent = DAY_NAMES[dow];
+
+    var sunset = sunEventMinutes(date, 90.833);
+    var civil  = sunEventMinutes(date, 96);
+
+    /* sky ribbon */
+    var sky = document.getElementById('sky');
+    var sunsetPos = Math.max(0, Math.min(100, pct(sunset)));
+    var civilPos  = Math.max(0, Math.min(100, pct(civil)));
+    sky.style.background = 'linear-gradient(90deg, #f5c451 0%, #f0b64a '+sunsetPos+'%, #2b3f6b '+civilPos+'%, #101a2e 100%)';
+    var skyHtml = '';
+    if (sunset > T0 + 40) skyHtml += '<span class="skylabel" style="left:8px;color:#6b4c00">Daylight</span>';
+    if (sunset > T0) skyHtml += '<span class="skylabel" data-mid style="left:'+Math.min(88, sunsetPos+1.5)+'%;color:#dfe7fb">Sunset about '+hhmm5(sunset)+'</span>';
+    else skyHtml += '<span class="skylabel" data-mid style="left:8px;color:#dfe7fb">Sun already down at '+hhmm5(sunset)+'</span>';
+    if (civil > T0) skyHtml += '<span class="skylabel" data-mid style="right:8px;color:#cbd6ee">Dark from about '+hhmm5(civil)+'</span>';
+    else skyHtml += '<span class="skylabel" data-mid style="right:8px;color:#cbd6ee">Dark all evening</span>';
+    sky.innerHTML = skyHtml;
+    document.getElementById('skycap').textContent =
+      (sunset > T0 ? 'Sunset about ' + hhmm5(sunset) : 'Sun down at ' + hhmm5(sunset)) +
+      ' · dark from about ' + hhmm5(civil);
+
+    /* axis */
+    var axis = document.getElementById('axis');
+    axis.innerHTML = '';
+    var step = (axis.getBoundingClientRect().width < 470) ? 120 : 60;
+    for (var t=T0; t<=T1; t+=step){
+      var s = document.createElement('span');
+      s.className='tick'; s.style.left = pct(t)+'%'; s.textContent = hhmm(t);
+      if (t===T0) { s.style.left='0'; s.style.transform='none'; }
+      if (t===T1) { s.style.left='auto'; s.style.right='0'; s.style.transform='none'; }
+      axis.appendChild(s);
+    }
+
+    /* rows sorted by tonight's closing time, latest first */
+    var rows = D.venues.map(function(v){
+      var h = hoursFor(v, date);
+      return { v:v, open:h?h[0]:null, close:h?h[1]:null };
+    }).sort(function(a,b){
+      if (a.close===null && b.close===null) return a.v.name.localeCompare(b.v.name);
+      if (a.close===null) return 1;
+      if (b.close===null) return -1;
+      return b.close - a.close;
+    });
+
+    var plot = document.getElementById('plot');
+    plot.innerHTML = '';
+    rows.forEach(function(r){
+      var row = document.createElement('div');
+      row.className = 'row'; row.dataset.id = r.v.id;
+      var bg = document.createElement('div'); bg.className='rowbg'; row.appendChild(bg);
+      if (r.close === null){
+        var cd = document.createElement('span'); cd.className='closedday';
+        cd.textContent = r.v.name + ' · closed ' + DAY_NAMES[dow];
+        row.appendChild(cd);
+      } else {
+        var l = Math.max(0, pct(r.open)), rr = Math.min(100, pct(r.close));
+        var wide = (rr - l) > 30;
+        if (wide) row.classList.add('wide');
+        var name = document.createElement('span');
+        name.className='rowname';
+        name.style.setProperty('--nx', (Math.min(rr, 84) + 1.2) + '%');
+        name.innerHTML = '<em>' + r.v.name + '</em><b> · to ' + hhmm(r.close) + '</b>';
+        row.appendChild(name);
+        if (rr > 0){
+          var bar = document.createElement('div');
+          bar.className = 'bar' + (r.close > 1080 ? ' late' : '');
+          bar.style.left = l+'%'; bar.style.width = Math.max(0.8, rr-l)+'%';
+          var b1 = document.createElement('span'); b1.className='blab'; b1.textContent = r.v.name;
+          var b2 = document.createElement('span'); b2.className='btime'; b2.textContent = 'to ' + hhmm(r.close);
+          bar.appendChild(b1); bar.appendChild(b2);
+          row.appendChild(bar);
+        }
+      }
+      plot.appendChild(row);
+    });
+    var line = document.createElement('div'); line.className='head-line'; line.id='headline';
+    plot.appendChild(line);
+
+    window.__rows = rows; window.__date = date; window.__sunset = sunset; window.__civil = civil;
+    paint();
+  }
+
+  function paint(){
+    var t = +document.getElementById('scrub').value;
+    var rows = window.__rows || [], sunset = window.__sunset, civil = window.__civil;
+    document.getElementById('clock').textContent = hhmm(t);
+    var line = document.getElementById('headline');
+    if (line) line.style.left = pct(t)+'%';
+
+    var band = document.getElementById('bandtag');
+    if (t < sunset){ band.className='band b-day'; band.textContent='Still daylight'; }
+    else if (t < civil){ band.className='band b-dusk'; band.textContent='Blue hour'; }
+    else { band.className='band b-dark'; band.textContent='Full dark'; }
+
+    var open = [], shutJust = [], nextClose = null;
+    rows.forEach(function(r){
+      var el = document.querySelector('.row[data-id="'+r.v.id+'"]');
+      var isOpen = r.close !== null && t >= r.open && t < r.close;
+      if (el) el.classList.toggle('shut', !isOpen);
+      if (isOpen){
+        open.push(r);
+        if (!nextClose || r.close < nextClose.close) nextClose = r;
+      } else if (r.close !== null && t >= r.close){
+        shutJust.push(r);
+      }
+    });
+
+    var total = rows.length;
+    var closedAllDay = rows.filter(function(r){ return r.close === null; }).length;
+    document.getElementById('tally').innerHTML =
+      '<strong>' + open.length + ' of ' + total + '</strong> ' +
+      (open.length === 1 ? 'places on this list is' : 'places on this list are') +
+      ' still open at ' + hhmm(t) +
+      (closedAllDay ? ', and ' + closedAllDay + ' of them do not open at all on a ' + DAY_NAMES[window.__date.getDay()] : '') +
+      (open.length === 0 ? '. Everything with a door has shut. What is left is the free, open-air half below.' : '.');
+
+    var nx = document.getElementById('nextout');
+    if (nextClose){
+      var mins = nextClose.close - t;
+      var h = Math.floor(mins/60), m = mins%60;
+      var left = h ? (h + ' h' + (m ? ' ' + m + ' min' : '')) : (m + ' min');
+      var la = nextClose.v.lastAdmissionOffset;
+      nx.innerHTML = 'Next to go: <b>' + nextClose.v.name + '</b> at ' + hhmm(nextClose.close) + ', so you have ' + left +
+        (la ? '. Last admission is ' + la + ' minutes before that, at ' + hhmm(nextClose.close - la) + '.' : '.');
+    } else {
+      nx.innerHTML = 'Nothing else on this list is going to close, because nothing on it is open.';
+    }
+
+    var head = document.getElementById('detailhead');
+    var cards = document.getElementById('cards');
+    cards.innerHTML = '';
+    var show = open.length ? open : shutJust.slice(0, 4);
+    head.textContent = open.length ? 'Still open at ' + hhmm(t) : 'The last four to close tonight';
+    show.forEach(function(r){
+      var c = document.createElement('article');
+      c.className = 'card' + (open.length ? '' : ' gone');
+      c.innerHTML = '<h3>' + r.v.name + '</h3>' +
+        '<p class="meta">' + r.v.area + ' · ' + r.v.ticket + ' · today ' + hhmm(r.open) + '–' + hhmm(r.close) + '</p>' +
+        '<p>' + r.v.note + '</p>';
+      cards.appendChild(c);
+    });
+  }
+
+  /* drag on the chart */
+  var plot = document.getElementById('plot');
+  var scrub = document.getElementById('scrub');
+  function fromClientX(x){
+    var rect = plot.getBoundingClientRect();
+    var f = Math.max(0, Math.min(1, (x - rect.left) / rect.width));
+    scrub.value = Math.round((T0 + f*(T1-T0))/5)*5;
+    paint();
+  }
+  var dragging = false;
+  plot.addEventListener('pointerdown', function(e){ dragging = true; plot.setPointerCapture(e.pointerId); fromClientX(e.clientX); });
+  plot.addEventListener('pointermove', function(e){ if (dragging) fromClientX(e.clientX); });
+  plot.addEventListener('pointerup', function(){ dragging = false; });
+  plot.addEventListener('pointercancel', function(){ dragging = false; });
+  scrub.addEventListener('input', paint);
+  document.getElementById('dt').addEventListener('change', build);
+  var lastNarrow = null;
+  window.addEventListener('resize', function(){
+    if (!window.__rows) return;
+    var narrow = window.innerWidth < 561;
+    if (narrow !== lastNarrow){ lastNarrow = narrow; build(); } else { paint(); }
+  });
+
+  /* free list */
+  var fl = document.getElementById('freelist');
+  D.alwaysOpen.forEach(function(f){
+    var li = document.createElement('li');
+    li.innerHTML = '<b>' + f.name + '</b><em>' + f.where + '</em><span>' + f.line + '</span>';
+    fl.appendChild(li);
+  });
+  document.getElementById('foot').textContent =
+    'Opening hours checked on ' + D.checkedOn + ' against each venue’s own published times. Sunset and the end of civil twilight are calculated for central Berlin and shown to the nearest five minutes. Hours move for public holidays, special exhibitions and private events, so check the day you go.';
+
+  /* today in Berlin */
+  var todayBerlin = new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Berlin',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+  var dt = document.getElementById('dt');
+  dt.value = todayBerlin; dt.min = '2026-01-01'; dt.max = '2027-12-31';
+  build();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

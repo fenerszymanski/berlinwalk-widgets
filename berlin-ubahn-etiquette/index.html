@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Berlin U-Bahn Etiquette Cheat Sheet: The Unwritten Rules</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='32' r='20' fill='%23FFE600'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
+    --yellow:#FFE600; --amber:#F0A500; --red:#E63946; --ink:#1c2a1c; --panel:#ffffff;
+    --bone:#f4f9ec; --line:#e3edd6; --stone:#6d7b66; --shadow:0 10px 30px rgba(18,61,24,.14);
+    --do:#2e7d32; --dont:#c62828;
+  }
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}
+  html,body{margin:0}
+  body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .bx{max-width:940px;margin:0 auto;padding:4px}
+  .card{position:relative;background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+
+  .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:18px 22px 16px}
+  .head .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:600;margin:0 0 6px}
+  .head h2{margin:0;font-size:21px;font-weight:800;letter-spacing:-.01em}
+  .head p{margin:7px 0 0;font-size:13px;color:#e7f2e3;max-width:680px}
+
+  .filterbar{padding:14px 16px 4px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .chip{border:1.5px solid var(--line);background:var(--bone);color:var(--green-deep);font-family:inherit;font-weight:700;font-size:12.5px;
+    padding:7px 13px;border-radius:999px;cursor:pointer;transition:all .12s ease;line-height:1;display:inline-flex;align-items:center;gap:6px}
+  .chip:hover{border-color:var(--lime)}
+  .chip[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+  .chip .ic{font-size:14px}
+
+  .count{padding:6px 16px 0;font-size:12px;color:var(--stone);font-weight:600}
+
+  .grid{padding:12px 16px 6px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media (max-width:640px){ .grid{grid-template-columns:1fr} }
+
+  .rule{border:1px solid var(--line);border-radius:15px;background:#fff;overflow:hidden;display:flex;flex-direction:column;transition:transform .1s ease, box-shadow .1s ease}
+  .rule:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(18,61,24,.10)}
+  .rule .top{display:flex;gap:10px;align-items:flex-start;padding:13px 14px;cursor:pointer;list-style:none;min-height:64px}
+  .rule .top::-webkit-details-marker{display:none}
+  .rule .top::after{content:'+';margin-left:auto;flex:none;color:var(--green);font:800 20px/1 Montserrat,sans-serif}
+  .rule[open] .top::after{content:'\2212'}
+  .rule .top:focus-visible{outline:3px solid var(--yellow);outline-offset:-3px;border-radius:12px}
+  .rule .emoji{font-size:22px;line-height:1;flex:none;width:38px;height:38px;border-radius:10px;background:var(--bone);display:flex;align-items:center;justify-content:center;border:1px solid var(--line)}
+  .rule h3{margin:0;font-size:15px;font-weight:800;color:var(--green-deep);letter-spacing:-.01em}
+  .rule .tag{display:inline-block;margin-top:3px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);font-weight:600}
+
+  .lines{padding:2px 14px 4px}
+  .ln{display:flex;gap:9px;align-items:flex-start;padding:6px 0;font-size:13.5px}
+  .ln .badge{flex:none;font-weight:800;font-size:10.5px;letter-spacing:.06em;padding:3px 7px;border-radius:6px;margin-top:1px;line-height:1.1}
+  .ln.do .badge{background:#e4f2e4;color:var(--do)}
+  .ln.dont .badge{background:#fbe4e4;color:var(--dont)}
+  .ln .txt{color:#243422}
+  .ln .txt b{color:var(--green-deep)}
+
+  .why{margin:6px 14px 14px;padding:9px 12px;background:var(--bone);border-left:3px solid var(--yellow);border-radius:0 10px 10px 0;font-size:12.5px;color:#3a4a37}
+  .why .de{font-family:'IBM Plex Mono',monospace;font-weight:700;color:var(--green-deep)}
+
+  .foot{margin:6px 16px 4px;padding:14px 16px;background:linear-gradient(135deg,#f3f9ec,#eaf4dd);border:1px solid var(--line);border-radius:14px}
+  .foot p{margin:0;font-size:13px;color:#31402d}
+  .foot a{color:var(--green);font-weight:700;text-decoration:none;border-bottom:2px solid var(--yellow)}
+  .creditsbar{display:flex;justify-content:flex-end;padding:10px 16px 16px}
+  .creditsTrigger{border:1px solid #d5c300;border-radius:999px;background:var(--yellow);color:var(--green-deep);padding:8px 13px;font:800 12px Montserrat,sans-serif;cursor:pointer}
+  .creditsTrigger:hover{background:#f5dc00}
+  .creditsTrigger:focus-visible,.creditsClose:focus-visible,.creditsList a:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+  .creditsLayer{position:absolute;z-index:20;inset:0;display:flex;align-items:flex-end;justify-content:center;padding:10px;background:rgba(8,28,11,.66)}
+  .creditsLayer[hidden]{display:none!important}
+  .creditsDialog{width:min(680px,100%);max-height:430px;overflow:auto;overscroll-behavior:contain;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 18px 55px rgba(0,0,0,.32)}
+  .creditsTop{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+  .creditsTop h3{margin:0;color:var(--green-deep);font-size:17px;font-weight:800}
+  .creditsIntro{margin:5px 0 12px;color:var(--stone);font-size:11.5px;line-height:1.5}
+  .creditsClose{flex:0 0 auto;width:32px;height:32px;border:1px solid var(--line);border-radius:50%;background:var(--bone);color:var(--green-deep);font:800 20px/1 Montserrat,sans-serif;cursor:pointer}
+  .creditsList{margin:0;padding-left:20px;color:var(--ink);font-size:11.5px;line-height:1.55}
+  .creditsList li+li{margin-top:8px}
+  .creditsList a,.creditsList a:visited{color:var(--green-deep);font-weight:700;text-underline-offset:2px}
+  .empty{padding:26px 16px;text-align:center;color:var(--stone);font-size:13.5px}
+  @media (max-width:280px){
+    .head{padding:13px 12px 12px}
+    .head h2{font-size:17px}
+    .head p{font-size:11.5px}
+    .filterbar{padding:9px 10px 2px;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain}
+    .chip{flex:0 0 auto;min-height:44px;padding:8px 11px}
+    .count{padding-left:10px;padding-right:10px}
+    .grid{padding:8px 10px 4px;gap:6px}
+    .rule .top{padding:8px;min-height:56px;gap:7px}
+    .rule .emoji{width:32px;height:32px;font-size:18px}
+    .rule h3{font-size:12px}
+    .rule .tag{font-size:8.5px;letter-spacing:.05em}
+    .lines{padding:0 8px 2px}
+    .ln{gap:6px;padding:4px 0;font-size:11.5px}
+    .ln .badge{font-size:8.5px;padding:3px 5px}
+    .why{margin:4px 8px 8px;padding:7px 8px;font-size:10.5px}
+    .foot{margin-left:10px;margin-right:10px;padding:10px}
+    .creditsbar{padding:8px 10px 12px}
+  }
+</style>
+</head>
+<body>
+<div class="bx">
+  <div class="card">
+    <div class="head">
+      <p class="eyebrow">BerlinWalk.com • Tourist Tips</p>
+      <h2>Berlin U-Bahn Etiquette Cheat Sheet</h2>
+      <p>Current transport rules and useful local habits, separated by situation: doors, escalators, seats, food, bikes and tickets.</p>
+    </div>
+
+    <div class="filterbar" id="filters" role="tablist" aria-label="Filter etiquette rules by situation"></div>
+    <div class="count" id="count"></div>
+
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty" hidden>No rules in that group.</div>
+
+    <div class="foot">
+      <p>My <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based">free walking tour</a> starts above ground at Alexanderplatz and explores the historic centre of former East Berlin.</p>
+    </div>
+
+    <div class="creditsbar">
+      <button class="creditsTrigger" id="creditsOpen" type="button" aria-expanded="false" aria-controls="imageCredits">Image credits</button>
+    </div>
+
+    <div class="creditsLayer" id="imageCredits" hidden>
+      <section class="creditsDialog" role="dialog" aria-modal="true" aria-labelledby="creditsTitle" tabindex="-1">
+        <div class="creditsTop">
+          <div>
+            <h3 id="creditsTitle">Article image credits</h3>
+            <p class="creditsIntro">Source and licence details for the five photographs used in the article.</p>
+          </div>
+          <button class="creditsClose" id="creditsClose" type="button" aria-label="Close image credits">&times;</button>
+        </div>
+        <ul class="creditsList">
+          <li><a href="https://commons.wikimedia.org/wiki/File:U-Bahn_BVG-Baureihe_J_am_Hauptbahnhof_01.jpg" target="_blank" rel="noopener">Open-door cover</a> and <a href="https://commons.wikimedia.org/wiki/File:U-Bahn_BVG-Baureihe_J_Innenraum_02.jpg" target="_blank" rel="noopener">interior</a>: NutzerAusBerlin, <a href="https://creativecommons.org/licenses/by/4.0" target="_blank" rel="noopener">CC BY 4.0</a>.</li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:U-Bahnhof_Alexanderplatz_U5-Bahnsteig.jpg" target="_blank" rel="noopener">Alexanderplatz platform</a>: Geoprofi Lars, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:Rolltreppe-Beton-U-Bahnhof-Rathaus-Spandau-08-2017.jpg" target="_blank" rel="noopener">Station escalator</a>: Gunnar Klack, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:BVG-Baureihe_F_offene_T%C3%BCr.jpg" target="_blank" rel="noopener">Older train doors</a>: Lukas Beck, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var CATS = [
+    { key:'all',       label:'All rules',       ic:'🚈' },
+    { key:'escalator', label:'Escalators',      ic:'↗' },
+    { key:'boarding',  label:'Boarding & doors',ic:'🚪' },
+    { key:'seats',     label:'Seats & space',   ic:'💺' },
+    { key:'sound',     label:'Sound',           ic:'🔇' },
+    { key:'food',      label:'Food & drink',    ic:'🥨' },
+    { key:'bikes',     label:'Bikes & bags',    ic:'🚲' },
+    { key:'tickets',   label:'Tickets',         ic:'🎫' }
+  ];
+
+  var RULES = [
+    { cat:'escalator', emoji:'↗', title:'Standing on the escalator', tag:'rechts stehen, links gehen',
+      do:'Stand on the <b>right</b>, single file, and leave the left lane clear.',
+      dont:'Stand two-abreast or plant yourself on the left with your suitcase.',
+      why:'At deep stations like Alexanderplatz and Friedrichstraße the left side is a walking lane. Block it and you will hear the sigh. <span class="de">Rechts stehen, links gehen.</span>' },
+
+    { cat:'boarding', emoji:'🚪', title:'Getting on the train', tag:'aussteigen lassen',
+      do:'Step to the <b>side</b> of the doors and let everyone off first.',
+      dont:'Bunch up in the doorway and push in before it clears.',
+      why:'Wait at the edges of the door, not in the middle. <span class="de">Erst aussteigen lassen, dann einsteigen.</span>' },
+
+    { cat:'boarding', emoji:'🟢', title:'Opening the door', tag:'press the button',
+      do:'Press the <b>lit button</b> (or lift the handle) the moment it glows.',
+      dont:'Wait for the door to slide open on its own and miss your stop.',
+      why:'Many U-Bahn and S-Bahn doors only open when a passenger presses. The button lights up once the train releases it, then it is yours to push.' },
+
+    { cat:'boarding', emoji:'🎒', title:'Riding a packed carriage', tag:'move through',
+      do:'Move into the <b>middle</b> of the car and take your backpack off.',
+      dont:'Cluster by the doors with a bag on your back blocking three people.',
+      why:'The U8 and U2 fill fast at rush hour. A backpack on your back is a backpack in someone else’s ribs; hold it low by your feet.' },
+
+    { cat:'seats', emoji:'💺', title:'Priority seats', tag:'reserved seating',
+      do:'Leave the <b>marked seats</b> free for the elderly, disabled, pregnant, or people with small children.',
+      dont:'Sprawl across two seats or leave your bag on the seat beside you.',
+      why:'The little icons above certain seats are not decoration. If someone who needs it boards, get up before you are asked.' },
+
+    { cat:'sound', emoji:'🔇', title:'Phone calls and music', tag:'keep it low',
+      do:'Keep calls <b>short and quiet</b>, and use headphones for anything with sound.',
+      dont:'Play video, music, or a speakerphone call out loud for the whole car.',
+      why:'Current VBB conditions prohibit sound that disturbs other passengers. Keep your audio to yourself.' },
+
+    { cat:'food', emoji:'🥨', title:'Food on board', tag:'keep it closed',
+      do:'Finish food <b>before boarding</b> and keep anything you carry sealed.',
+      dont:'Enter with open food or eat during the journey.',
+      why:'Current VBB conditions prohibit boarding with open food and consuming it during the journey.' },
+
+    { cat:'food', emoji:'🥤', title:'Drinks on board', tag:'closed containers',
+      do:'Keep drinks <b>closed</b> while you are on the train.',
+      dont:'Board with an open cup or open a can during the journey.',
+      why:'The VBB rule covers open drinks, including beer. At Zoologischer Garten and Ostbahnhof, a 2026 pilot also restricts open alcohol in the station and forecourt.' },
+
+    { cat:'bikes', emoji:'🚲', title:'Taking a bike on board', tag:'separate bike ticket',
+      do:'Buy the required <b>bike ticket</b> and use the door and area marked with a bicycle symbol.',
+      dont:'Block a wheelchair or pram area, or assume a full train must take your bike.',
+      why:'There is no blanket weekday rush-hour ban in current guidance. Capacity is the limit, and wheelchairs and prams have priority.' },
+
+    { cat:'seats', emoji:'🧳', title:'Suitcases and big bags', tag:'out of the aisle',
+      do:'Keep luggage <b>tight against you</b>, in the door bay or under your seat.',
+      dont:'Park a wheelie case in the middle of the aisle on the airport run.',
+      why:'The FEX and S-Bahn to the airport get busy with commuters too. Keep a clear walking path down the car.' },
+
+    { cat:'tickets', emoji:'🎫', title:'Your ticket', tag:'validate before you ride',
+      do:'Have a <b>valid, validated ticket</b> in hand before you step on.',
+      dont:'Assume open platforms with no barriers mean no checks.',
+      why:'Inspectors check trains without warning. Without a valid ticket, you can receive a €60 EBE notice. See the <a href="https://www.berlinwalk.com/post/berlin-u-bahn-fine">U-Bahn fine guide</a>.' }
+  ];
+
+  var current = 'all';
+  var filtersEl = document.getElementById('filters');
+  var gridEl = document.getElementById('grid');
+  var countEl = document.getElementById('count');
+  var emptyEl = document.getElementById('empty');
+
+  CATS.forEach(function(c){
+    var b = document.createElement('button');
+    b.className = 'chip';
+    b.type = 'button';
+    b.setAttribute('role','tab');
+    b.setAttribute('aria-pressed', c.key === current ? 'true' : 'false');
+    b.dataset.key = c.key;
+    b.innerHTML = '<span class="ic">'+c.ic+'</span>'+c.label;
+    b.addEventListener('click', function(){ setCat(c.key); });
+    filtersEl.appendChild(b);
+  });
+
+  function render(){
+    var list = current === 'all' ? RULES : RULES.filter(function(r){ return r.cat === current; });
+    gridEl.innerHTML = '';
+    if(!list.length){ emptyEl.hidden = false; countEl.textContent=''; return; }
+    emptyEl.hidden = true;
+    countEl.textContent = list.length + (list.length === 1 ? ' rule or habit' : ' rules and habits');
+    list.forEach(function(r, index){
+      var el = document.createElement('details');
+      el.className = 'rule';
+      el.open = index === 0;
+      el.innerHTML =
+        '<summary class="top"><span class="emoji">'+r.emoji+'</span>'+
+          '<span><h3>'+r.title+'</h3><span class="tag">'+r.tag+'</span></span></summary>'+
+        '<div class="lines">'+
+          '<div class="ln do"><span class="badge">DO</span><span class="txt">'+r.do+'</span></div>'+
+          '<div class="ln dont"><span class="badge">DON’T</span><span class="txt">'+r.dont+'</span></div>'+
+        '</div>'+
+        '<div class="why">'+r.why+'</div>';
+      el.addEventListener('toggle', function(){
+        if(!el.open) return;
+        Array.prototype.forEach.call(gridEl.querySelectorAll('details[open]'), function(other){
+          if(other !== el) other.open = false;
+        });
+      });
+      gridEl.appendChild(el);
+    });
+  }
+
+  function setCat(key){
+    current = key;
+    Array.prototype.forEach.call(filtersEl.children, function(b){
+      b.setAttribute('aria-pressed', b.dataset.key === key ? 'true' : 'false');
+    });
+    render();
+  }
+
+  render();
+
+  var creditsOpen = document.getElementById('creditsOpen');
+  var creditsLayer = document.getElementById('imageCredits');
+  var creditsDialog = creditsLayer.querySelector('.creditsDialog');
+  var creditsClose = document.getElementById('creditsClose');
+  function openCredits(){
+    creditsLayer.hidden = false;
+    creditsOpen.setAttribute('aria-expanded','true');
+    creditsClose.focus();
+  }
+  function closeCredits(returnFocus){
+    creditsLayer.hidden = true;
+    creditsOpen.setAttribute('aria-expanded','false');
+    if(returnFocus) creditsOpen.focus();
+  }
+  creditsOpen.addEventListener('click', openCredits);
+  creditsClose.addEventListener('click', function(){ closeCredits(true); });
+  creditsLayer.addEventListener('click', function(event){ if(event.target === creditsLayer) closeCredits(true); });
+  document.addEventListener('keydown', function(event){
+    if(creditsLayer.hidden) return;
+    if(event.key === 'Escape'){ event.preventDefault(); closeCredits(true); return; }
+    if(event.key !== 'Tab') return;
+    var focusable = Array.prototype.slice.call(creditsDialog.querySelectorAll('button,a[href]'));
+    if(!focusable.length) return;
+    var first = focusable[0], last = focusable[focusable.length - 1];
+    if(event.shiftKey && document.activeElement === first){ event.preventDefault(); last.focus(); }
+    else if(!event.shiftKey && document.activeElement === last){ event.preventDefault(); first.focus(); }
+  });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

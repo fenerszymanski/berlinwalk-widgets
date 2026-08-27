@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Station Arrival Planner | BerlinWalk</title>
+  <meta name="description" content="Choose your Berlin arrival station, luggage situation and first destination, then get a practical first-move plan for tourists.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-station-planner">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-station-planner {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-light: #C5E1A5;
+      --bw-cream: #FAFAF5;
+      --bw-white: #FFFFFF;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-red: #E63946;
+      --bw-border: #D9E7C8;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 28px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-station-planner *,
+    #bw-station-planner *::before,
+    #bw-station-planner *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-station-planner .bw-shell {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-station-planner .bw-head {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.18), rgba(124, 179, 66, 0.16)),
+        var(--bw-green);
+      color: var(--bw-white);
+      padding: 20px;
+    }
+
+    #bw-station-planner .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      margin: 0 0 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-station-planner h2,
+    #bw-station-planner h3,
+    #bw-station-planner p {
+      margin-top: 0;
+    }
+
+    #bw-station-planner .bw-title {
+      color: var(--bw-white);
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    #bw-station-planner .bw-sub {
+      color: #DDEFC7;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 9px 0 0;
+      max-width: 820px;
+    }
+
+    #bw-station-planner .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(270px, 0.82fr) minmax(0, 1.18fr);
+      padding: 18px 20px 20px;
+    }
+
+    #bw-station-planner .bw-panel,
+    #bw-station-planner .bw-result,
+    #bw-station-planner .bw-mini {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 14px;
+    }
+
+    #bw-station-planner .bw-form {
+      display: grid;
+      gap: 12px;
+    }
+
+    #bw-station-planner label {
+      display: block;
+      min-width: 0;
+    }
+
+    #bw-station-planner .bw-label {
+      color: var(--bw-green);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.1px;
+      line-height: 1.3;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-station-planner select {
+      appearance: none;
+      background:
+        linear-gradient(45deg, transparent 50%, var(--bw-green) 50%) right 14px center / 8px 8px no-repeat,
+        linear-gradient(135deg, var(--bw-green) 50%, transparent 50%) right 9px center / 8px 8px no-repeat,
+        var(--bw-white);
+      border: 1.5px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font: inherit;
+      font-size: 15px;
+      font-weight: 850;
+      line-height: 1.25;
+      min-height: 44px;
+      padding: 9px 34px 9px 10px;
+      width: 100%;
+    }
+
+    #bw-station-planner select:focus-visible,
+    #bw-station-planner button:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.82);
+      outline-offset: 2px;
+    }
+
+    #bw-station-planner .bw-choice-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-station-planner button {
+      background: var(--bw-white);
+      border: 1px solid rgba(124, 179, 66, 0.45);
+      border-radius: 8px;
+      color: var(--bw-green);
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.25;
+      min-height: 42px;
+      padding: 9px 10px;
+      text-align: center;
+    }
+
+    #bw-station-planner button[aria-pressed="true"] {
+      background: var(--bw-yellow);
+      border-color: rgba(27, 94, 32, 0.38);
+      color: var(--bw-green);
+      box-shadow: inset 0 -2px 0 rgba(27, 94, 32, 0.2);
+    }
+
+    #bw-station-planner .bw-note {
+      background: #F2F8E8;
+      border: 1px solid rgba(124, 179, 66, 0.32);
+      border-radius: 8px;
+      color: var(--bw-muted);
+      font-size: 12.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 0;
+      padding: 10px;
+    }
+
+    #bw-station-planner .bw-result {
+      border-color: rgba(27, 94, 32, 0.25);
+      display: grid;
+      gap: 12px;
+    }
+
+    #bw-station-planner .bw-pill {
+      align-items: center;
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      color: var(--bw-green);
+      display: inline-flex;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      padding: 6px 9px;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+
+    #bw-station-planner .bw-result h3 {
+      color: var(--bw-green);
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.18;
+      margin: 0;
+    }
+
+    #bw-station-planner .bw-result p,
+    #bw-station-planner li {
+      color: var(--bw-muted);
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.58;
+      margin-bottom: 0;
+    }
+
+    #bw-station-planner .bw-steps {
+      counter-reset: steps;
+      display: grid;
+      gap: 9px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    #bw-station-planner .bw-steps li {
+      background: #F7FAF0;
+      border: 1px solid rgba(124, 179, 66, 0.26);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font-weight: 760;
+      min-height: 46px;
+      padding: 10px 10px 10px 40px;
+      position: relative;
+    }
+
+    #bw-station-planner .bw-steps li::before {
+      background: var(--bw-green);
+      border-radius: 50%;
+      color: var(--bw-yellow);
+      content: counter(steps);
+      counter-increment: steps;
+      font-size: 12px;
+      font-weight: 900;
+      height: 22px;
+      left: 10px;
+      line-height: 22px;
+      position: absolute;
+      text-align: center;
+      top: 10px;
+      width: 22px;
+    }
+
+    #bw-station-planner .bw-mini-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-station-planner .bw-mini strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1.3;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+
+    #bw-station-planner .bw-mini span {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    #bw-station-planner .bw-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    #bw-station-planner .bw-links a {
+      background: var(--bw-green);
+      border-radius: 999px;
+      color: var(--bw-white);
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.2;
+      padding: 9px 11px;
+      text-decoration: none;
+    }
+
+    #bw-station-planner .bw-links a:nth-child(2) {
+      background: #315C35;
+    }
+
+    @media (max-width: 760px) {
+      #bw-station-planner {
+        margin: 18px 0;
+      }
+
+      #bw-station-planner .bw-head,
+      #bw-station-planner .bw-body {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      #bw-station-planner .bw-body,
+      #bw-station-planner .bw-mini-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-station-planner .bw-title {
+        font-size: 23px;
+      }
+
+      #bw-station-planner .bw-choice-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <div class="bw-shell">
+    <header class="bw-head">
+      <p class="bw-kicker">BerlinWalk.com - arrival tool</p>
+      <h2 class="bw-title">Berlin Station Arrival Planner</h2>
+      <p class="bw-sub">Choose where you arrive, what you are carrying and where you want to go first. Get the calm tourist move, not the overcomplicated rail answer.</p>
+    </header>
+
+    <div class="bw-body">
+      <section class="bw-panel" aria-label="Arrival choices">
+        <div class="bw-form">
+          <label>
+            <span class="bw-label">Arrival station</span>
+            <select id="bw-station">
+              <option value="hauptbahnhof">Berlin Hauptbahnhof</option>
+              <option value="ostbahnhof">Berlin Ostbahnhof</option>
+              <option value="suedkreuz">Berlin Suedkreuz</option>
+              <option value="gesundbrunnen">Berlin Gesundbrunnen</option>
+              <option value="zoo">Zoologischer Garten</option>
+              <option value="friedrichstrasse">Friedrichstrasse</option>
+              <option value="alexanderplatz">Alexanderplatz</option>
+            </select>
+          </label>
+
+          <div>
+            <span class="bw-label">Luggage</span>
+            <div class="bw-choice-grid" role="group" aria-label="Luggage amount">
+              <button type="button" data-luggage="light" aria-pressed="true">Backpack only</button>
+              <button type="button" data-luggage="heavy" aria-pressed="false">Suitcase</button>
+            </div>
+          </div>
+
+          <label>
+            <span class="bw-label">First goal</span>
+            <select id="bw-goal">
+              <option value="hotel">Reach my hotel</option>
+              <option value="sightseeing">Start sightseeing</option>
+              <option value="tour">Reach the BerlinWalk meeting point</option>
+              <option value="airport">Go to BER Airport</option>
+            </select>
+          </label>
+
+          <p class="bw-note">This tool gives a first-move plan. Always check BVG, VBB or DB on the day for disruptions, platform changes and late-night service.</p>
+        </div>
+      </section>
+
+      <section class="bw-result" aria-live="polite">
+        <span class="bw-pill" id="bw-pill">Best first move</span>
+        <h3 id="bw-heading">Use the station, then leave with a plan</h3>
+        <p id="bw-summary"></p>
+        <ol class="bw-steps" id="bw-steps"></ol>
+        <div class="bw-mini-grid" id="bw-mini-grid"></div>
+        <div class="bw-links">
+          <a id="bw-map-link" href="https://maps.google.com/?q=Berlin+Hauptbahnhof" target="_blank" rel="noopener">Open map</a>
+          <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_blank" rel="noopener">Book the 2 hours tour</a>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.getElementById('bw-station-planner');
+      if (!root) return;
+
+      var state = { station: 'hauptbahnhof', luggage: 'light', goal: 'hotel' };
+
+      var stations = {
+        hauptbahnhof: {
+          name: 'Berlin Hauptbahnhof',
+          map: 'https://maps.google.com/?q=Berlin+Hauptbahnhof',
+          area: 'Government district / Moabit',
+          luggage: 'Large locker banks and station services make this the best central station for bag storage.',
+          ticket: 'AB for central Berlin, ABC for BER Airport or Potsdam.',
+          route: {
+            hotel: 'Use U5, S-Bahn, tram, bus or taxi after checking which side your hotel is on.',
+            sightseeing: 'Store luggage, exit Washingtonplatz, then walk toward the Spree, Reichstag or Brandenburg Gate.',
+            tour: 'Take U5 or S-Bahn east to Alexanderplatz, then walk to the World Clock.',
+            airport: 'Use FEX or the current DB/VBB airport route. BER needs an ABC ticket.'
+          }
+        },
+        ostbahnhof: {
+          name: 'Berlin Ostbahnhof',
+          map: 'https://maps.google.com/?q=Berlin+Ostbahnhof',
+          area: 'Friedrichshain / East Side Gallery side',
+          luggage: 'Useful for East Side Gallery plans, but less central for the historic core.',
+          ticket: 'AB covers central Berlin from here.',
+          route: {
+            hotel: 'Use S-Bahn west for Alexanderplatz, Friedrichstrasse and Hauptbahnhof, or east for Friedrichshain.',
+            sightseeing: 'Best first walk is East Side Gallery if you are bag-free. Otherwise go to the hotel first.',
+            tour: 'Take S-Bahn west to Alexanderplatz, then walk to the World Clock.',
+            airport: 'Check DB/VBB. Often you change through Ostkreuz or use regional/S-Bahn connections.'
+          }
+        },
+        suedkreuz: {
+          name: 'Berlin Suedkreuz',
+          map: 'https://maps.google.com/?q=Berlin+Suedkreuz',
+          area: 'South Berlin transfer hub',
+          luggage: 'Good transfer station, not a first sightseeing base.',
+          ticket: 'AB for central Berlin, ABC for BER Airport.',
+          route: {
+            hotel: 'Use S-Bahn north/south or regional connections, depending on your hotel district.',
+            sightseeing: 'Go to the hotel first unless you are deliberately heading to Potsdamer Platz or Kreuzberg.',
+            tour: 'Use S-Bahn/regional links toward Friedrichstrasse or Alexanderplatz, then continue to the World Clock.',
+            airport: 'Suedkreuz is strong for BER connections. Check FEX/RE airport trains and use ABC.'
+          }
+        },
+        gesundbrunnen: {
+          name: 'Berlin Gesundbrunnen',
+          map: 'https://maps.google.com/?q=Berlin+Gesundbrunnen',
+          area: 'North Berlin / Ringbahn',
+          luggage: 'Fine for transfers, weaker for first-time central sightseeing.',
+          ticket: 'AB covers central Berlin from here.',
+          route: {
+            hotel: 'Use S-Bahn, U8 or Ringbahn depending on your district.',
+            sightseeing: 'If bag-free, Bernauer Strasse Berlin Wall Memorial is nearby. Otherwise reach your hotel first.',
+            tour: 'Use U8/S-Bahn connections toward Alexanderplatz, then walk to the World Clock.',
+            airport: 'Check VBB. You will usually need a connection and an ABC ticket.'
+          }
+        },
+        zoo: {
+          name: 'Zoologischer Garten',
+          map: 'https://maps.google.com/?q=Berlin+Zoologischer+Garten+station',
+          area: 'City West / KuDamm',
+          luggage: 'Good for City West hotels, not ideal for the BerlinWalk meeting point.',
+          ticket: 'AB for central Berlin, ABC for BER Airport or Potsdam.',
+          route: {
+            hotel: 'Use this station if you sleep in Charlottenburg, KuDamm or Tiergarten west.',
+            sightseeing: 'Start with City West, Kaiser Wilhelm Memorial Church or Tiergarten if you are bag-free.',
+            tour: 'Take S-Bahn east to Alexanderplatz, then walk to the World Clock.',
+            airport: 'Check DB/VBB. Airport trips usually need ABC and may route via Hauptbahnhof or Ostkreuz.'
+          }
+        },
+        friedrichstrasse: {
+          name: 'Friedrichstrasse',
+          map: 'https://maps.google.com/?q=Berlin+Friedrichstrasse+station',
+          area: 'Central Mitte',
+          luggage: 'Good central stop, but not as easy for large luggage as Hauptbahnhof.',
+          ticket: 'AB covers central Berlin from here.',
+          route: {
+            hotel: 'Useful for Mitte hotels near Unter den Linden, Museumsinsel and the Spree.',
+            sightseeing: 'Bag-free visitors can walk to Museum Island, Unter den Linden or Brandenburg Gate.',
+            tour: 'Take S-Bahn east to Alexanderplatz or U6/U5 combinations if useful.',
+            airport: 'Check VBB for the current best airport route and use ABC.'
+          }
+        },
+        alexanderplatz: {
+          name: 'Alexanderplatz',
+          map: 'https://maps.google.com/?q=Alexanderplatz+Berlin+Weltzeituhr',
+          area: 'BerlinWalk meeting area',
+          luggage: 'Avoid sightseeing with a suitcase. Use hotel storage or a station locker if needed.',
+          ticket: 'AB covers central Berlin from here.',
+          route: {
+            hotel: 'Strong for Mitte, Prenzlauer Berg, Friedrichshain and U2/U5/U8 routes.',
+            sightseeing: 'Start at the World Clock, TV Tower, Rotes Rathaus and Museum Island area.',
+            tour: 'You are already at the right station. Walk to the World Clock meeting point.',
+            airport: 'Use S9 or connect to regional/FEX routes. BER needs ABC.'
+          }
+        }
+      };
+
+      function stepsFor(station, luggage, goal) {
+        var steps = [];
+        if (luggage === 'heavy') {
+          steps.push(station === 'hauptbahnhof'
+            ? 'Store the suitcase at Hauptbahnhof before sightseeing or joining a walking route.'
+            : 'If possible, go to your hotel or a luggage storage point before starting sightseeing.');
+        } else {
+          steps.push('Keep your ticket, phone and water reachable before leaving the platform area.');
+        }
+
+        if (goal === 'hotel') {
+          steps.push('Check whether your hotel is better reached by U-Bahn, S-Bahn, tram, bus or taxi.');
+          steps.push('Use AB for central Berlin unless your route includes BER Airport or Potsdam.');
+        } else if (goal === 'sightseeing') {
+          steps.push('Choose one nearby first walk, not a full itinerary while you are still in arrival mode.');
+          steps.push(luggage === 'heavy' ? 'Do not drag a rolling suitcase over cobblestones and crowded crossings.' : 'Keep the first walk central and easy, then check in later.');
+        } else if (goal === 'tour') {
+          steps.push('Aim for Alexanderplatz and the World Clock meeting point.');
+          steps.push('Arrive a few minutes early and keep the 2 hours walking route bag-light.');
+        } else {
+          steps.push('Use the official journey planner on the day and allow buffer time.');
+          steps.push('Buy or activate an ABC ticket before boarding toward BER Airport.');
+        }
+        return steps;
+      }
+
+      function render() {
+        var station = stations[state.station];
+        var heading = document.getElementById('bw-heading');
+        var summary = document.getElementById('bw-summary');
+        var steps = document.getElementById('bw-steps');
+        var mini = document.getElementById('bw-mini-grid');
+        var map = document.getElementById('bw-map-link');
+        var pill = document.getElementById('bw-pill');
+
+        pill.textContent = state.goal === 'airport' ? 'Airport move' : state.luggage === 'heavy' ? 'Bag-first plan' : 'Best first move';
+        heading.textContent = station.name + ': ' + station.route[state.goal];
+        summary.textContent = station.area + '. ' + station.luggage;
+        steps.innerHTML = stepsFor(station, state.luggage, state.goal).map(function (item) {
+          return '<li>' + item + '</li>';
+        }).join('');
+        mini.innerHTML = [
+          ['Ticket', station.ticket],
+          ['Good for', station.area],
+          ['Local tip', state.luggage === 'heavy' ? 'Solve luggage before sightseeing.' : 'Move slowly until you know your exit.']
+        ].map(function (item) {
+          return '<div class="bw-mini"><strong>' + item[0] + '</strong><span>' + item[1] + '</span></div>';
+        }).join('');
+        map.href = station.map;
+
+        window.setTimeout(function () {
+          window.dispatchEvent(new Event('resize'));
+        }, 20);
+      }
+
+      root.querySelector('#bw-station').addEventListener('change', function (event) {
+        state.station = event.target.value;
+        render();
+      });
+
+      root.querySelector('#bw-goal').addEventListener('change', function (event) {
+        state.goal = event.target.value;
+        render();
+      });
+
+      root.querySelectorAll('[data-luggage]').forEach(function (button) {
+        button.addEventListener('click', function () {
+          state.luggage = button.getAttribute('data-luggage');
+          root.querySelectorAll('[data-luggage]').forEach(function (item) {
+            item.setAttribute('aria-pressed', String(item === button));
+          });
+          render();
+        });
+      });
+
+      render();
+    })();
+  </script>
+</div>
+</body>
+</html>

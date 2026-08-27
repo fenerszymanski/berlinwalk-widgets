@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Street Sense Drill | BerlinWalk</title>
+  <meta name="description" content="Practice calm first moves for common Berlin tourist pressure moments: street games, fake police, tickets, taxis, ATMs and crowded stations.">
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    :root {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #164A1A;
+      --bw-lime: #7CB342;
+      --bw-yellow: #FFE600;
+      --bw-cream: #FAFAF5;
+      --bw-ink: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-border: rgba(27, 94, 32, .18);
+      --bw-soft: #F2F8E8;
+      --bw-warning: #F9A825;
+      --bw-shadow: 0 18px 38px rgba(27, 94, 32, .14);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bw-cream);
+      color: var(--bw-ink);
+      font-family: Montserrat, Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    .bw-tool {
+      width: min(100%, 960px);
+      margin: 0 auto;
+      padding: 18px;
+    }
+
+    .bw-shell {
+      overflow: hidden;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: var(--bw-shadow);
+    }
+
+    .bw-hero {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 18px;
+      padding: 24px;
+      background:
+        linear-gradient(135deg, rgba(27, 94, 32, .98), rgba(46, 93, 43, .94)),
+        linear-gradient(90deg, rgba(255, 230, 0, .22), transparent 48%);
+      color: #fff;
+    }
+
+    .bw-kicker {
+      margin: 0 0 8px;
+      color: var(--bw-yellow);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 38px;
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .bw-hero p {
+      max-width: 62ch;
+      margin: 12px 0 0;
+      color: rgba(255,255,255,.9);
+      font-size: 15px;
+    }
+
+    .bw-score {
+      align-self: stretch;
+      display: grid;
+      align-content: center;
+      gap: 8px;
+      padding: 16px;
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 8px;
+      background: rgba(255,255,255,.11);
+    }
+
+    .bw-score strong {
+      color: var(--bw-yellow);
+      font-size: 44px;
+      line-height: 1;
+    }
+
+    .bw-score span {
+      color: rgba(255,255,255,.86);
+      font-size: 13px;
+    }
+
+    .bw-layout {
+      display: grid;
+      grid-template-columns: 310px 1fr;
+      min-height: 700px;
+    }
+
+    .bw-side {
+      padding: 18px;
+      border-right: 1px solid var(--bw-border);
+      background: linear-gradient(180deg, #fff, #fbfff9);
+    }
+
+    .bw-side h2,
+    .bw-result h2 {
+      margin: 0 0 10px;
+      color: var(--bw-green);
+      font-size: 17px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .bw-filter {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 0 0 16px;
+    }
+
+    button {
+      min-height: 44px;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--bw-green);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      text-align: left;
+      cursor: pointer;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+
+    button:hover,
+    button:focus-visible {
+      transform: translateY(-1px);
+      border-color: var(--bw-lime);
+      outline: none;
+    }
+
+    .bw-filter button {
+      padding: 10px 11px;
+      text-align: center;
+    }
+
+    .bw-filter button[aria-pressed="true"] {
+      border-color: var(--bw-green);
+      background: var(--bw-green);
+      color: #fff;
+    }
+
+    .bw-list {
+      display: grid;
+      gap: 9px;
+    }
+
+    .bw-scenario {
+      width: 100%;
+      padding: 12px;
+      border-left: 5px solid transparent;
+      text-align: left;
+    }
+
+    .bw-scenario strong {
+      display: block;
+      margin: 0 0 3px;
+      color: inherit;
+      font-size: 14px;
+      line-height: 1.25;
+    }
+
+    .bw-scenario span {
+      display: block;
+      color: var(--bw-muted);
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .bw-scenario.is-active {
+      border-color: var(--bw-yellow);
+      background: var(--bw-green);
+      color: #fff;
+    }
+
+    .bw-scenario.is-active span {
+      color: rgba(255,255,255,.85);
+    }
+
+    .bw-result {
+      padding: 22px;
+      background:
+        linear-gradient(180deg, rgba(250,250,245,.75), #fff 34%),
+        repeating-linear-gradient(135deg, rgba(27,94,32,.04), rgba(27,94,32,.04) 1px, transparent 1px, transparent 18px);
+    }
+
+    .bw-chiprow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 14px;
+    }
+
+    .bw-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--bw-soft);
+      color: var(--bw-green);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .bw-main-card {
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .bw-alert {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 16px;
+      padding: 18px;
+      background: linear-gradient(135deg, var(--bw-yellow), #fff1a3);
+    }
+
+    .bw-badge {
+      display: grid;
+      place-items: center;
+      width: 72px;
+      height: 72px;
+      border-radius: 8px;
+      background: var(--bw-green);
+      color: var(--bw-yellow);
+      font-size: 32px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .bw-alert h2 {
+      margin-top: 0;
+      color: var(--bw-green);
+      font-size: 24px;
+    }
+
+    .bw-alert p {
+      margin: 6px 0 0;
+      color: #243324;
+      font-size: 15px;
+    }
+
+    .bw-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--bw-border);
+    }
+
+    .bw-step {
+      padding: 16px;
+      border-right: 1px solid var(--bw-border);
+    }
+
+    .bw-step:last-child { border-right: 0; }
+
+    .bw-step h3 {
+      margin: 0 0 8px;
+      color: var(--bw-green);
+      font-size: 14px;
+      line-height: 1.2;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .bw-step p {
+      margin: 0;
+      color: var(--bw-ink);
+      font-size: 14px;
+    }
+
+    .bw-script {
+      margin: 18px 0 0;
+      padding: 16px;
+      border-left: 5px solid var(--bw-lime);
+      border-radius: 8px;
+      background: var(--bw-soft);
+    }
+
+    .bw-script strong {
+      display: block;
+      margin: 0 0 6px;
+      color: var(--bw-green);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .bw-script p {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .bw-links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .bw-links a {
+      display: grid;
+      align-content: center;
+      min-height: 62px;
+      padding: 12px;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--bw-green);
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .bw-links a span {
+      display: block;
+      margin-top: 3px;
+      color: var(--bw-muted);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .bw-reset {
+      margin-top: 18px;
+      padding: 16px;
+      border: 1px dashed rgba(27,94,32,.32);
+      border-radius: 8px;
+      background: rgba(255,255,255,.8);
+    }
+
+    .bw-reset ol {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+
+    .bw-reset li {
+      margin: 4px 0;
+      font-size: 14px;
+    }
+
+    @media (max-width: 760px) {
+      .bw-tool { padding: 12px; }
+      .bw-hero,
+      .bw-layout {
+        grid-template-columns: 1fr;
+      }
+
+      h1 { font-size: 30px; }
+
+      .bw-side {
+        border-right: 0;
+        border-bottom: 1px solid var(--bw-border);
+      }
+
+      .bw-list {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .bw-steps,
+      .bw-links {
+        grid-template-columns: 1fr;
+      }
+
+      .bw-step {
+        border-right: 0;
+        border-bottom: 1px solid var(--bw-border);
+      }
+
+      .bw-step:last-child { border-bottom: 0; }
+    }
+
+    @media (max-width: 460px) {
+      .bw-hero,
+      .bw-result,
+      .bw-side {
+        padding: 16px;
+      }
+
+      h1 { font-size: 26px; }
+
+      .bw-score strong { font-size: 36px; }
+
+      .bw-filter,
+      .bw-list {
+        grid-template-columns: 1fr;
+      }
+
+      .bw-alert {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="bw-tool">
+    <section class="bw-shell" aria-labelledby="tool-title">
+      <header class="bw-hero">
+        <div>
+          <p class="bw-kicker">BerlinWalk tool</p>
+          <h1 id="tool-title">Berlin Street Sense Drill</h1>
+          <p>Pick a common visitor pressure moment and get the calm first move: what to do, what to say, what not to hand over, and where to verify it.</p>
+        </div>
+        <div class="bw-score" aria-live="polite">
+          <span>Calm score</span>
+          <strong id="score">92</strong>
+          <span id="score-copy">Strong move: pause, step aside, keep control of phone, wallet and bag.</span>
+        </div>
+      </header>
+
+      <div class="bw-layout">
+        <aside class="bw-side">
+          <h2>Choose the moment</h2>
+          <div class="bw-filter" role="group" aria-label="Filter scenarios">
+            <button type="button" data-filter="all" aria-pressed="true">All</button>
+            <button type="button" data-filter="station" aria-pressed="false">Station</button>
+            <button type="button" data-filter="sight" aria-pressed="false">Sight</button>
+            <button type="button" data-filter="payment" aria-pressed="false">Payment</button>
+          </div>
+          <div class="bw-list" id="scenario-list"></div>
+        </aside>
+
+        <section class="bw-result" aria-live="polite">
+          <div class="bw-chiprow" id="chips"></div>
+          <article class="bw-main-card">
+            <div class="bw-alert">
+              <div class="bw-badge" id="badge">1</div>
+              <div>
+                <h2 id="scenario-title">Street game near a sight</h2>
+                <p id="scenario-context">A small crowd gathers around a cup, shell or card game and someone invites you to try once.</p>
+              </div>
+            </div>
+            <div class="bw-steps">
+              <div class="bw-step">
+                <h3>Do now</h3>
+                <p id="do-now"></p>
+              </div>
+              <div class="bw-step">
+                <h3>Do not do</h3>
+                <p id="dont-do"></p>
+              </div>
+              <div class="bw-step">
+                <h3>Verify here</h3>
+                <p id="verify"></p>
+              </div>
+            </div>
+          </article>
+
+          <div class="bw-script">
+            <strong>Say this</strong>
+            <p id="script-line"></p>
+          </div>
+
+          <div class="bw-reset">
+            <h2>20-second reset</h2>
+            <ol>
+              <li>Stop moving your hands and close the bag.</li>
+              <li>Step sideways out of the crowd line.</li>
+              <li>Use one short sentence, then leave the conversation.</li>
+              <li>If something was stolen or you feel unsafe, move to staff or call the correct official number.</li>
+            </ol>
+          </div>
+
+          <div class="bw-links" id="links"></div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const scenarios = [
+      {
+        id: 'street-game',
+        filter: 'sight',
+        title: 'Street game near a sight',
+        tag: 'Ignore',
+        risk: 'Fast cash pressure',
+        context: 'A small crowd gathers around a cup, shell or card game and someone invites you to try once.',
+        doNow: 'Keep walking. Put your phone and wallet away before you pass the group.',
+        dontDo: 'Do not bet, do not watch from close range, and do not treat the crowd as proof that the game is fair.',
+        verify: 'Berlin.de warns visitors to avoid street games and similar street-scamming setups.',
+        say: 'No, thank you. I am not playing.',
+        score: 96,
+        badge: '1',
+        links: [
+          ['Berlin.de street scammers', 'Official Berlin visitor warning', 'https://www.berlin.de/en/tourism/travel-information/2771003-2862820-avoiding-street-scammers.en.html'],
+          ['BerlinWalk safety guide', 'Solo travel and calm city habits', 'https://www.berlinwalk.com/post/is-berlin-safe-for-solo-travelers-an-honest-local-perspective']
+        ]
+      },
+      {
+        id: 'clipboard',
+        filter: 'sight',
+        title: 'Clipboard or petition approach',
+        tag: 'Step away',
+        risk: 'Signature and wallet pressure',
+        context: 'Someone approaches with a petition, charity form, bracelet, rose, photo prop or “free” gift near a tourist sight.',
+        doNow: 'Say no once, keep walking, and do not open your wallet to prove anything.',
+        dontDo: 'Do not sign forms you do not understand or let politeness keep you stopped.',
+        verify: 'Official tourist guidance lists petition-style street approaches among scams to ignore.',
+        say: 'Nein, danke.',
+        score: 91,
+        badge: '2',
+        links: [
+          ['Berlin.de tourist warnings', 'Official scam examples for visitors', 'https://www.berlin.de/en/tourism/travel-information/2771003-2862820-avoiding-street-scammers.en.html'],
+          ['BerlinWalk first day planner', 'Plan a calmer first day', 'https://www.berlinwalk.com/tools/berlin-first-day-planner']
+        ]
+      },
+      {
+        id: 'fake-police',
+        filter: 'sight',
+        title: '“Police” wants your wallet',
+        tag: 'Check ID',
+        risk: 'Official-sounding pressure',
+        context: 'A stranger says they are police and wants to inspect your wallet, cash, card or PIN on the street.',
+        doNow: 'Ask for official ID, keep your wallet in your hand, and move toward a staffed public place.',
+        dontDo: 'Do not hand over cash, cards or PINs because someone sounds official.',
+        verify: 'If you are unsure and feel pressured, call 110 for police. For immediate danger or injury, use 112.',
+        say: 'Please show police ID. I will verify this with 110.',
+        score: 95,
+        badge: '3',
+        links: [
+          ['Berlin.de fake police', 'Official visitor warning', 'https://www.berlin.de/en/tourism/travel-information/3933750-2862820-safety-beware-of-fake-police-officers.en.html'],
+          ['Berlin.de police', 'Official police contact guidance', 'https://www.berlin.de/en/tourism/travel-information/1749512-2862820-police.en.html']
+        ]
+      },
+      {
+        id: 'ticket-check',
+        filter: 'station',
+        title: 'Ticket inspector in plain clothes',
+        tag: 'Verify',
+        risk: 'Real check, wrong reaction',
+        context: 'Someone asks to see your ticket on U-Bahn, S-Bahn, tram, bus or regional train.',
+        doNow: 'Stay calm, ask for inspector ID if unsure, and show your valid ticket or app.',
+        dontDo: 'Do not pay a random cash bargain or get loud on the platform.',
+        verify: 'Ticket checks are real. If there is a fare issue, use the official operator process.',
+        say: 'Please show inspector ID. Here is my ticket.',
+        score: 88,
+        badge: '4',
+        links: [
+          ['BVG ticket control', 'Official ticket-check information', 'https://www.bvg.de/en/subscriptions-and-tickets/ticket-control'],
+          ['BerlinWalk validation guide', 'When tourists must validate tickets', 'https://www.berlinwalk.com/post/do-you-really-need-to-validate-your-ticket-on-berlin-trains']
+        ]
+      },
+      {
+        id: 'crowded-platform',
+        filter: 'station',
+        title: 'Crowded platform or train doors',
+        tag: 'Reset',
+        risk: 'Distraction window',
+        context: 'Doors open, people push past, and someone asks a question while your phone is out.',
+        doNow: 'Pause before boarding: phone, wallet, zip, route. Hold bags in front until the crowd thins.',
+        dontDo: 'Do not leave a phone in a back pocket or stand at doors with open bags.',
+        verify: 'Berlin.de pickpocket guidance focuses on crowded tourist and transport situations.',
+        say: 'One second. I need to step aside.',
+        score: 93,
+        badge: '5',
+        links: [
+          ['Berlin.de pickpockets', 'Official visitor prevention tips', 'https://www.berlin.de/en/tourism/travel-information/2832639-2862820-pickpockets.en.html'],
+          ['Berlin lost property router', 'If something is already missing', 'https://www.berlinwalk.com/tools/berlin-lost-item-router']
+        ]
+      },
+      {
+        id: 'taxi',
+        filter: 'payment',
+        title: 'Taxi or ride price feels vague',
+        tag: 'Check before ride',
+        risk: 'Payment confusion',
+        context: 'A driver or stranger offers a fast ride with a vague price, or card payment suddenly sounds difficult.',
+        doNow: 'Use licensed taxis, taxi ranks, hotel ordering or trusted apps. Confirm card payment before the ride if you need it.',
+        dontDo: 'Do not get into a car if the setup feels unclear before the ride starts.',
+        verify: 'Use official taxi information and keep receipts for unclear payment moments.',
+        say: 'Card payment and receipt, please. If not, I will take another taxi.',
+        score: 87,
+        badge: '6',
+        links: [
+          ['Berlin.de tourist info', 'Official Berlin visitor information', 'https://www.berlin.de/en/tourism/travel-information/'],
+          ['BerlinWalk taxi guide', 'Taxi, Uber and airport ride choices', 'https://www.berlinwalk.com/post/taxi-in-berlin']
+        ]
+      },
+      {
+        id: 'atm',
+        filter: 'payment',
+        title: 'ATM or card terminal currency prompt',
+        tag: 'Choose carefully',
+        risk: 'Bad exchange rate',
+        context: 'The terminal offers to charge you in your home currency instead of euros.',
+        doNow: 'Pause and read the screen. In Germany, choosing euros is usually the cleaner choice for foreign cards.',
+        dontDo: 'Do not accept a home-currency conversion just because it looks familiar.',
+        verify: 'Dynamic currency conversion can include poor exchange rates and extra costs.',
+        say: 'I choose euros.',
+        score: 86,
+        badge: '7',
+        links: [
+          ['Visa travel advice', 'Dynamic currency conversion explained', 'https://www.visa.com/en-us/personal/travel/dynamic-currency-conversion'],
+          ['BerlinWalk card guide', 'Cash, cards and payment habits', 'https://www.berlinwalk.com/post/can-you-use-credit-cards-in-berlin-a-tourist-s-guide-to-paying-in-germany']
+        ]
+      },
+      {
+        id: 'missing-item',
+        filter: 'station',
+        title: 'Phone, wallet or passport is gone',
+        tag: 'Admin first',
+        risk: 'Delay after loss',
+        context: 'You realize something important is missing after a station, cafe, taxi or crowded sight.',
+        doNow: 'Lock cards and devices, secure travel documents, and report the item through the correct system.',
+        dontDo: 'Do not wait all day hoping it appears before protecting cards, phone access or passport status.',
+        verify: 'Lost property in Berlin is split by operator: BVG, S-Bahn/DB, airport, police and city offices.',
+        say: 'I need to secure cards and report the document/item first.',
+        score: 90,
+        badge: '8',
+        links: [
+          ['Berlin Lost Item Router', 'Choose the right lost-property route', 'https://www.berlinwalk.com/tools/berlin-lost-item-router'],
+          ['BerlinWalk lost property guide', 'Detailed lost item steps', 'https://www.berlinwalk.com/post/lost-property-berlin']
+        ]
+      }
+    ];
+
+    const els = {
+      list: document.getElementById('scenario-list'),
+      chips: document.getElementById('chips'),
+      title: document.getElementById('scenario-title'),
+      context: document.getElementById('scenario-context'),
+      doNow: document.getElementById('do-now'),
+      dontDo: document.getElementById('dont-do'),
+      verify: document.getElementById('verify'),
+      script: document.getElementById('script-line'),
+      score: document.getElementById('score'),
+      scoreCopy: document.getElementById('score-copy'),
+      badge: document.getElementById('badge'),
+      links: document.getElementById('links'),
+    };
+
+    let currentFilter = 'all';
+    let activeId = scenarios[0].id;
+
+    function visibleScenarios() {
+      return scenarios.filter((item) => currentFilter === 'all' || item.filter === currentFilter);
+    }
+
+    function renderList() {
+      const visible = visibleScenarios();
+      if (!visible.some((item) => item.id === activeId)) activeId = visible[0].id;
+      els.list.innerHTML = visible.map((item) => `
+        <button type="button" class="bw-scenario ${item.id === activeId ? 'is-active' : ''}" data-id="${item.id}" aria-pressed="${item.id === activeId}">
+          <strong>${item.title}</strong>
+          <span>${item.risk}</span>
+        </button>
+      `).join('');
+    }
+
+    function renderScenario() {
+      const item = scenarios.find((scenario) => scenario.id === activeId) || scenarios[0];
+      els.chips.innerHTML = `
+        <span class="bw-chip">${item.tag}</span>
+        <span class="bw-chip">${item.risk}</span>
+      `;
+      els.title.textContent = item.title;
+      els.context.textContent = item.context;
+      els.doNow.textContent = item.doNow;
+      els.dontDo.textContent = item.dontDo;
+      els.verify.textContent = item.verify;
+      els.script.textContent = item.say;
+      els.score.textContent = item.score;
+      els.scoreCopy.textContent = item.score >= 92
+        ? 'Strong move: pause, step aside, keep control of phone, wallet and bag.'
+        : 'Good move: slow the decision down and verify before money or documents move.';
+      els.badge.textContent = item.badge;
+      els.links.innerHTML = item.links.map(([label, desc, href]) => `
+        <a href="${href}" target="_blank" rel="noopener">
+          ${label}
+          <span>${desc}</span>
+        </a>
+      `).join('');
+    }
+
+    document.querySelector('.bw-filter').addEventListener('click', (event) => {
+      const button = event.target.closest('button[data-filter]');
+      if (!button) return;
+      currentFilter = button.dataset.filter;
+      document.querySelectorAll('.bw-filter button').forEach((el) => {
+        el.setAttribute('aria-pressed', String(el === button));
+      });
+      renderList();
+      renderScenario();
+    });
+
+    els.list.addEventListener('click', (event) => {
+      const button = event.target.closest('button[data-id]');
+      if (!button) return;
+      activeId = button.dataset.id;
+      renderList();
+      renderScenario();
+    });
+
+    renderList();
+    renderScenario();
+  </script>
+  <script src="../js/brand.js"></script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Giraffatitan Scale — How Tall Is the World's Tallest Dinosaur?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
+    --yellow:#FFE600; --ink:#1c2a1c; --bone:#efe7d4; --bone-line:#d8cbab;
+    --panel:#ffffff; --shadow:0 10px 30px rgba(18,61,24,.14);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .wrap{max-width:940px;margin:0 auto;padding:4px}
+  .card{background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+  .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:20px 22px}
+  .kick{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:700;margin:0 0 6px}
+  .head h1{margin:0;font-size:22px;font-weight:800;line-height:1.2}
+  .head p{margin:8px 0 0;font-size:14px;color:#e7f3e2;max-width:640px}
+  .body{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:0}
+  @media (max-width:720px){.body{grid-template-columns:1fr}}
+  /* photo scale panel */
+  .scene{position:relative;background:#0d1f13;border-right:1px solid #12281a;min-height:380px}
+  @media (max-width:720px){.scene{border-right:none;border-bottom:1px solid #12281a}}
+  .scene img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;opacity:.96}
+  .axis{position:absolute;inset:0;pointer-events:none}
+  .axis .tick{position:absolute;left:0;right:0;border-top:1px dashed rgba(255,255,255,.28);font-size:10px;color:#eafbe6}
+  .axis .tick span{position:absolute;left:6px;top:-14px;background:rgba(18,40,19,.72);padding:1px 6px;border-radius:6px;font-weight:600}
+  .yline{position:absolute;left:8px;bottom:8px;background:var(--yellow);color:var(--green-deep);font-weight:800;font-size:11px;padding:4px 8px;border-radius:8px}
+  /* controls + result */
+  .panel{padding:20px 22px}
+  .lead{font-size:14px;margin:0 0 14px;color:#33482f}
+  label.b{display:block;font-weight:700;font-size:13px;margin:0 0 6px;color:var(--green-deep)}
+  .row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  input[type=range]{flex:1;min-width:150px;accent-color:var(--green)}
+  .htbox{display:flex;align-items:baseline;gap:4px;font-weight:800;color:var(--green);font-size:20px;min-width:96px;justify-content:flex-end}
+  .htbox input{width:66px;font:inherit;font-weight:800;font-size:20px;color:var(--green);border:1px solid var(--bone-line);border-radius:8px;padding:4px 6px;text-align:right}
+  .htbox .u{font-size:13px;color:#6d7a67;font-weight:700}
+  .presets{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 4px}
+  .presets button{border:1px solid var(--soft);background:#f4f9ec;color:var(--green-deep);font:inherit;font-weight:600;font-size:12px;padding:6px 10px;border-radius:999px;cursor:pointer;transition:.12s}
+  .presets button:hover{background:var(--soft)}
+  .presets button.on{background:var(--green);color:#fff;border-color:var(--green)}
+  .result{margin-top:16px;background:#f3f8ec;border:1px solid #e0eccf;border-radius:14px;padding:16px}
+  .big{font-size:15px;font-weight:600;color:#26361f;margin:0}
+  .big b{color:var(--green)}
+  .stat{font-size:34px;font-weight:800;color:var(--green);line-height:1;margin:2px 0 2px}
+  .sub{font-size:12.5px;color:#5d6a56;margin:2px 0 0}
+  /* mini bar viz */
+  .viz{margin-top:16px;display:flex;align-items:flex-end;gap:18px;height:150px;padding:0 4px;border-bottom:2px solid var(--bone-line)}
+  .bar{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;flex:0 0 auto;width:52px}
+  .bar .col{width:34px;border-radius:6px 6px 0 0}
+  .bar.dino .col{background:linear-gradient(180deg,#8a6d3b,#b08d4e)}
+  .bar.you .col{background:linear-gradient(180deg,var(--lime),var(--green))}
+  .bar .cap{font-size:11px;font-weight:700;margin-top:6px;text-align:center;color:#43503d}
+  .bar .m{font-size:11px;font-weight:800;color:var(--green-deep)}
+  .facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .facts .f{background:#fff;border:1px solid var(--bone-line);border-radius:10px;padding:8px 11px;font-size:12px;color:#3d4b37;font-weight:600}
+  .facts .f b{display:block;font-size:15px;color:var(--green);font-weight:800}
+  .foot{padding:12px 22px 16px;font-size:11px;color:#7a8574;border-top:1px solid #eef3e8}
+  .foot a{color:var(--green);font-weight:700;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="head">
+      <p class="kick">Berlin Natural History Museum</p>
+      <h1>How tall is the world's tallest dinosaur?</h1>
+      <p>The Giraffatitan skeleton in the museum's central hall stands <b>13.27 metres</b> high. Set your own height and see what you are actually walking up to.</p>
+    </div>
+    <div class="body">
+      <div class="scene">
+        <img src="giraffatitan.jpg" alt="The towering Giraffatitan skeleton in the glass-roofed hall of the Berlin Natural History Museum, with visitors at its feet for scale" />
+        <div class="axis" id="axis"></div>
+        <div class="yline">13.27 m to the head</div>
+      </div>
+      <div class="panel">
+        <p class="lead">Numbers like &ldquo;13 metres&rdquo; slide right past you until you stand under them. Here is the honest comparison.</p>
+        <label class="b" for="ht">Your height</label>
+        <div class="row">
+          <input type="range" id="ht" min="90" max="220" step="1" value="170" />
+          <div class="htbox"><input type="number" id="htn" min="60" max="260" value="170" /><span class="u">cm</span></div>
+        </div>
+        <div class="presets" id="presets">
+          <button data-h="115">A 6-year-old</button>
+          <button data-h="170" class="on">Average adult</button>
+          <button data-h="198">A tall basketball player</button>
+        </div>
+
+        <div class="result">
+          <p class="big">The Giraffatitan is <b id="times">7.8&times;</b> your height.</p>
+          <div class="stat" id="stack">8 of you</div>
+          <p class="sub" id="stacksub">standing on each other's shoulders to look it in the eye.</p>
+          <p class="big" style="margin-top:10px">At your height you would reach roughly its <b id="reach">knee</b>.</p>
+          <p class="sub" style="margin-top:10px">For scale: a full-grown giraffe reaches only its belly, and a double-decker bus barely clears its back. This animal carried its head where a four-storey window would be.</p>
+        </div>
+
+        <div class="viz" id="viz">
+          <div class="bar dino"><div class="m">13.3 m</div><div class="col" style="height:130px"></div><div class="cap">Giraffatitan</div></div>
+          <div class="bar you"><div class="m" id="youm">1.7 m</div><div class="col" id="youcol" style="height:17px"></div><div class="cap">You</div></div>
+        </div>
+
+        <div class="facts">
+          <div class="f"><b>13.27 m</b>tall (Guinness record)</div>
+          <div class="f"><b>26.8 m</b>nose to tail</div>
+          <div class="f"><b>~150 m</b>years old, Late Jurassic</div>
+          <div class="f"><b>Tanzania</b>dug up 1909&ndash;1913</div>
+        </div>
+      </div>
+    </div>
+    <div class="foot">
+      The real skeleton stands in the Museum f&uuml;r Naturkunde on Invalidenstra&szlig;e (U6 Naturkundemuseum). Skeleton photo: Raimond Spekking, CC BY-SA 4.0, via Wikimedia Commons. <a href="https://www.berlinwalk.com/post/berlin-natural-history-museum" target="_blank" rel="noopener">Read the full visiting guide &rarr;</a>
+    </div>
+  </div>
+</div>
+<script defer src="../js/brand.js"></script>
+<script>
+(function(){
+  var DINO_CM = 1327;
+  var range = document.getElementById('ht');
+  var num = document.getElementById('htn');
+  var presets = document.getElementById('presets');
+  var timesEl = document.getElementById('times');
+  var stackEl = document.getElementById('stack');
+  var stackSub = document.getElementById('stacksub');
+  var reachEl = document.getElementById('reach');
+  var youm = document.getElementById('youm');
+  var youcol = document.getElementById('youcol');
+
+  // Body part the given height reaches, as a fraction of a scaled-up quadruped's shoulder/neck line.
+  // Giraffatitan shoulder ~4 m, hip ~4 m, back ~ 4.5 m, then the long neck rises to 13.27 m.
+  function reachName(cm){
+    if (cm < 120) return 'lower shin';
+    if (cm < 175) return 'knee';
+    if (cm < 230) return 'thigh';
+    if (cm < 400) return 'belly';
+    if (cm < 460) return 'back';
+    if (cm < 800) return 'shoulder';
+    return 'neck';
+  }
+  function buildAxis(){
+    var ax = document.getElementById('axis');
+    ax.innerHTML='';
+    // Marks at 12, 9, 6, 3 m as a rough visual guide over the photo (0 = floor at bottom).
+    [12,9,6,3].forEach(function(m){
+      var t=document.createElement('div');
+      t.className='tick';
+      t.style.top = ((1 - m/14) * 100) + '%';
+      t.innerHTML='<span>'+m+' m</span>';
+      ax.appendChild(t);
+    });
+  }
+  function update(cm){
+    cm = Math.max(60, Math.min(260, Math.round(cm)));
+    var times = DINO_CM / cm;
+    timesEl.innerHTML = times.toFixed(1) + '&times;';
+    var stack = Math.round(DINO_CM / cm);
+    stackEl.textContent = stack + (stack === 1 ? ' of you' : ' of you');
+    stackSub.textContent = 'standing on each other’s shoulders to look it in the eye.';
+    reachEl.textContent = reachName(cm);
+    youm.textContent = (cm/100).toFixed(2).replace(/0$/,'') + ' m';
+    // bar: dino col = 130px for 13.27 m
+    var px = Math.max(3, (cm/DINO_CM) * 130);
+    youcol.style.height = px + 'px';
+    // sync inputs
+    if (String(range.value) !== String(cm) && cm>=90 && cm<=220) range.value = cm;
+    if (String(num.value) !== String(cm)) num.value = cm;
+    // preset active state
+    Array.prototype.forEach.call(presets.children, function(b){
+      b.classList.toggle('on', Number(b.getAttribute('data-h')) === cm);
+    });
+  }
+  range.addEventListener('input', function(){ update(Number(range.value)); });
+  num.addEventListener('input', function(){ update(Number(num.value)); });
+  presets.addEventListener('click', function(e){
+    var b = e.target.closest('button'); if(!b) return;
+    update(Number(b.getAttribute('data-h')));
+  });
+  buildAxis();
+  update(170);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1066 @@
+{
+  "version": "2026-06-19-unique-topic-covers",
+  "defaultTopic": "food",
+  "topics": [
+    {
+      "id": "food",
+      "title": "Berlin Food Battle",
+      "kicker": "Playable now",
+      "lead": "Pick between Berlin food favorites until one winner owns your plate.",
+      "image": "assets/topics/food-battle-cover.webp",
+      "status": "active",
+      "theme": "Food",
+      "shareTitle": "My Berlin Food Battle winner",
+      "resultPrefix": "Your Berlin taste says:",
+      "items": [
+        {
+          "id": "currywurst",
+          "name": "Currywurst",
+          "line": "Saucy, fast, very Berlin.",
+          "image": "assets/cards/currywurst.webp"
+        },
+        {
+          "id": "doner-kebab",
+          "name": "Döner Kebab",
+          "line": "The midnight legend with salad crunch.",
+          "image": "assets/cards/doner-kebab.webp"
+        },
+        {
+          "id": "falafel",
+          "name": "Falafel",
+          "line": "Crisp, cheap, and built for street corners.",
+          "image": "assets/cards/falafel.webp"
+        },
+        {
+          "id": "shawarma",
+          "name": "Shawarma",
+          "line": "Warm wrap energy for a long Berlin day.",
+          "image": "assets/cards/shawarma.webp"
+        },
+        {
+          "id": "schnitzel",
+          "name": "Schnitzel",
+          "line": "Golden, loud, and impossible to ignore.",
+          "image": "assets/cards/schnitzel.webp"
+        },
+        {
+          "id": "pretzel",
+          "name": "Pretzel",
+          "line": "Simple, salty, always ready.",
+          "image": "assets/cards/pretzel.webp"
+        },
+        {
+          "id": "berliner-pfannkuchen",
+          "name": "Berliner Pfannkuchen",
+          "line": "Jam-filled proof that Berlin can be soft.",
+          "image": "assets/cards/berliner-pfannkuchen.webp"
+        },
+        {
+          "id": "boulette",
+          "name": "Boulette",
+          "line": "Old-school snack counter comfort.",
+          "image": "assets/cards/boulette.webp"
+        },
+        {
+          "id": "kartoffelpuffer",
+          "name": "Kartoffelpuffer",
+          "line": "Crispy potato with market-day nostalgia.",
+          "image": "assets/cards/kartoffelpuffer.webp"
+        },
+        {
+          "id": "eisbein",
+          "name": "Eisbein",
+          "line": "Heavy classic for serious appetites.",
+          "image": "assets/cards/eisbein.webp"
+        },
+        {
+          "id": "kasekuchen",
+          "name": "Käsekuchen",
+          "line": "Quiet cafe happiness on a small plate.",
+          "image": "assets/cards/kasekuchen.webp"
+        },
+        {
+          "id": "apfelstrudel",
+          "name": "Apfelstrudel",
+          "line": "Warm apple, pastry, and a pause.",
+          "image": "assets/cards/apfelstrudel.webp"
+        },
+        {
+          "id": "lahmacun",
+          "name": "Lahmacun",
+          "line": "Thin, spicy, folded for the street.",
+          "image": "assets/cards/lahmacun.webp"
+        },
+        {
+          "id": "vietnamese-pho",
+          "name": "Vietnamese Pho",
+          "line": "Broth, herbs, and Berlin's global appetite.",
+          "image": "assets/cards/vietnamese-pho.webp"
+        },
+        {
+          "id": "spati-snack-run",
+          "name": "Späti Snack Run",
+          "line": "Late-night chaos, chosen proudly.",
+          "image": "assets/cards/spati-snack-run.webp"
+        },
+        {
+          "id": "berliner-weisse",
+          "name": "Berliner Weiße",
+          "line": "Tart, bright, and made for summer tables.",
+          "image": "assets/cards/berliner-weisse.webp"
+        }
+      ]
+    },
+    {
+      "id": "districts",
+      "title": "Berlin District Battle",
+      "kicker": "Playable now",
+      "lead": "Pick the Berlin neighborhood energy you would rather spend a day inside.",
+      "image": "assets/topics/district-battle-cover.webp",
+      "status": "active",
+      "theme": "Districts",
+      "shareTitle": "My Berlin District Battle winner",
+      "resultPrefix": "Your Berlin neighborhood says:",
+      "resultFallback": "You picked the Berlin neighborhood energy that feels most like your kind of day.",
+      "gamePrompt": "Pick the neighborhood mood you would rather wander through right now.",
+      "items": [
+        {
+          "id": "mitte",
+          "name": "Mitte",
+          "line": "Big sights, museum stops and first Berlin impressions.",
+          "resultLine": "You chose the classic Berlin opening chapter: landmarks, museums and a lot of context in one walk.",
+          "image": "assets/cards/districts/mitte.webp"
+        },
+        {
+          "id": "kreuzberg",
+          "name": "Kreuzberg",
+          "line": "Canals, street food, murals and late corners.",
+          "resultLine": "You like Berlin when it feels layered, loud, political and full of street-level life.",
+          "image": "assets/cards/districts/kreuzberg.webp"
+        },
+        {
+          "id": "friedrichshain",
+          "name": "Friedrichshain",
+          "line": "East-side energy, bars and warehouse edges.",
+          "resultLine": "You picked the side of Berlin that keeps moving after sunset and still carries its post-wall texture.",
+          "image": "assets/cards/districts/friedrichshain.webp"
+        },
+        {
+          "id": "neukolln",
+          "name": "Neukölln",
+          "line": "Markets, canals, cafes and restless change.",
+          "resultLine": "You chose Berlin at its most mixed: everyday life, creative pressure and a little beautiful chaos.",
+          "image": "assets/cards/districts/neukolln.webp"
+        },
+        {
+          "id": "prenzlauer-berg",
+          "name": "Prenzlauer Berg",
+          "line": "Leafy streets, Sunday markets and cafe pauses.",
+          "resultLine": "You like Berlin when it softens: old streets, long brunches and calm corners with history underneath.",
+          "image": "assets/cards/districts/prenzlauer-berg.webp"
+        },
+        {
+          "id": "charlottenburg",
+          "name": "Charlottenburg",
+          "line": "Old west elegance, museums and broad avenues.",
+          "resultLine": "You picked the polished Berlin mood: grand streets, culture stops and a little old-west confidence.",
+          "image": "assets/cards/districts/charlottenburg.webp"
+        },
+        {
+          "id": "schoneberg",
+          "name": "Schöneberg",
+          "line": "Queer history, local squares and grown-up nights.",
+          "resultLine": "You chose a Berlin with character: quietly iconic, socially layered and comfortable in itself.",
+          "image": "assets/cards/districts/schoneberg.webp"
+        },
+        {
+          "id": "wedding",
+          "name": "Wedding",
+          "line": "Canals, snack counters and underrated grit.",
+          "resultLine": "You like the Berlin that does not perform for visitors and is better because of it.",
+          "image": "assets/cards/districts/wedding.webp"
+        },
+        {
+          "id": "moabit",
+          "name": "Moabit",
+          "line": "Island feeling, markets and quiet local routes.",
+          "resultLine": "You chose a Berlin that sits between everything: practical, local and easy to underestimate.",
+          "image": "assets/cards/districts/moabit.webp"
+        },
+        {
+          "id": "tiergarten",
+          "name": "Tiergarten",
+          "line": "Green space between monuments and museums.",
+          "resultLine": "You picked the breathing space of the city: park paths, big history and room to slow down.",
+          "image": "assets/cards/districts/tiergarten.webp"
+        },
+        {
+          "id": "tempelhof",
+          "name": "Tempelhof",
+          "line": "Runway walks, big skies and Berlin scale.",
+          "resultLine": "You like Berlin when the city suddenly opens wide and turns history into public space.",
+          "image": "assets/cards/districts/tempelhof.webp"
+        },
+        {
+          "id": "kopenick",
+          "name": "Köpenick",
+          "line": "Water, old town corners and a slower day.",
+          "resultLine": "You chose the river-and-lake version of Berlin: calmer, greener and further from the rush.",
+          "image": "assets/cards/districts/kopenick.webp"
+        },
+        {
+          "id": "spandau",
+          "name": "Spandau",
+          "line": "Citadel mood, old streets and western edges.",
+          "resultLine": "You picked the Berlin that feels like its own town, with fortress energy and a longer memory.",
+          "image": "assets/cards/districts/spandau.webp"
+        },
+        {
+          "id": "pankow",
+          "name": "Pankow",
+          "line": "Leafy north Berlin with villas and village traces.",
+          "resultLine": "You like Berlin when it turns residential, green and quietly full of old layers.",
+          "image": "assets/cards/districts/pankow.webp"
+        },
+        {
+          "id": "lichtenberg",
+          "name": "Lichtenberg",
+          "line": "Trams, wide streets and east Berlin edges.",
+          "resultLine": "You chose the less-obvious Berlin: everyday east-side texture and plenty still being rewritten.",
+          "image": "assets/cards/districts/lichtenberg.webp"
+        },
+        {
+          "id": "treptow",
+          "name": "Treptow",
+          "line": "River paths, parks and after-work space.",
+          "resultLine": "You picked a Berlin that follows the water: open, relaxed and built for long wandering.",
+          "image": "assets/cards/districts/treptow.webp"
+        }
+      ]
+    },
+    {
+      "id": "museums",
+      "title": "Berlin Museum Battle",
+      "kicker": "Playable now",
+      "lead": "A playful museum bracket for culture-heavy Berlin days.",
+      "image": "assets/topics/museum-battle-cover.webp",
+      "status": "active",
+      "theme": "Museums",
+      "shareTitle": "My Berlin Museum Battle winner",
+      "resultPrefix": "Your Berlin museum mood says:",
+      "resultFallback": "You picked the museum that feels most like your Berlin culture day.",
+      "gamePrompt": "Pick the museum you would rather visit first on a culture-heavy Berlin day.",
+      "items": [
+        {
+          "id": "neues-museum",
+          "name": "Neues Museum",
+          "line": "Ancient worlds, Nefertiti and rebuilt ruins.",
+          "resultLine": "You chose the museum where Berlin's broken and rebuilt story meets the ancient world.",
+          "image": "assets/cards/museums/neues-museum.webp"
+        },
+        {
+          "id": "altes-museum",
+          "name": "Altes Museum",
+          "line": "Classical calm at the front of Museum Island.",
+          "resultLine": "You picked the graceful museum mood: columns, antiquity and a very composed Berlin day.",
+          "image": "assets/cards/museums/altes-museum.webp"
+        },
+        {
+          "id": "alte-nationalgalerie",
+          "name": "Alte Nationalgalerie",
+          "line": "Paintings, staircases and old-world drama.",
+          "resultLine": "You chose art with a grand staircase feeling: romantic, elegant and a little theatrical.",
+          "image": "assets/cards/museums/alte-nationalgalerie.webp"
+        },
+        {
+          "id": "bode-museum",
+          "name": "Bode-Museum",
+          "line": "Sculpture, domes and river-island presence.",
+          "resultLine": "You picked the museum that feels like a stage set on the water: sculptural, formal and cinematic.",
+          "image": "assets/cards/museums/bode-museum.webp"
+        },
+        {
+          "id": "humboldt-forum",
+          "name": "Humboldt Forum",
+          "line": "Global collections inside a debated palace shell.",
+          "resultLine": "You chose the complicated Berlin museum: huge, global, central and impossible to discuss simply.",
+          "image": "assets/cards/museums/humboldt-forum.webp"
+        },
+        {
+          "id": "jewish-museum-berlin",
+          "name": "Jewish Museum Berlin",
+          "line": "Architecture, memory and deep emotional weight.",
+          "resultLine": "You picked a museum that asks for attention, not just viewing: architecture, absence and memory.",
+          "image": "assets/cards/museums/jewish-museum-berlin.webp"
+        },
+        {
+          "id": "berlinische-galerie",
+          "name": "Berlinische Galerie",
+          "line": "Modern art with Berlin as the main character.",
+          "resultLine": "You chose Berlin looking at itself: art, photography, city identity and sharp local angles.",
+          "image": "assets/cards/museums/berlinische-galerie.webp"
+        },
+        {
+          "id": "hamburger-bahnhof",
+          "name": "Hamburger Bahnhof",
+          "line": "Contemporary art inside a former station.",
+          "resultLine": "You picked the big contemporary mood: spacious, experimental and a little unpredictable.",
+          "image": "assets/cards/museums/hamburger-bahnhof.webp"
+        },
+        {
+          "id": "gemaldegalerie",
+          "name": "Gemäldegalerie",
+          "line": "Old masters without the Museum Island crush.",
+          "resultLine": "You chose the quiet art-lover's answer: fewer crowds, serious paintings and time to look.",
+          "image": "assets/cards/museums/gemaldegalerie.webp"
+        },
+        {
+          "id": "ddr-museum",
+          "name": "DDR Museum",
+          "line": "Hands-on everyday life behind the Wall.",
+          "resultLine": "You picked the interactive history route: objects, habits and the texture of daily life.",
+          "image": "assets/cards/museums/ddr-museum.webp"
+        },
+        {
+          "id": "topography-of-terror",
+          "name": "Topography of Terror",
+          "line": "Documentation, warning and hard history.",
+          "resultLine": "You chose the sober Berlin history stop: direct, documentary and necessary.",
+          "image": "assets/cards/museums/topography-of-terror.webp"
+        },
+        {
+          "id": "museum-fur-naturkunde",
+          "name": "Museum für Naturkunde",
+          "line": "Dinosaurs, science and wide-eyed curiosity.",
+          "resultLine": "You picked the curiosity museum: fossils, science and the kind of wonder that works at any age.",
+          "image": "assets/cards/museums/museum-fur-naturkunde.webp"
+        },
+        {
+          "id": "deutsches-technikmuseum",
+          "name": "Deutsches Technikmuseum",
+          "line": "Planes, trains and machines with Berlin scale.",
+          "resultLine": "You chose the hands-on machine mood: big objects, transport stories and engineering detail.",
+          "image": "assets/cards/museums/deutsches-technikmuseum.webp"
+        },
+        {
+          "id": "futurium",
+          "name": "Futurium",
+          "line": "Future questions in a clean riverfront shell.",
+          "resultLine": "You picked Berlin looking forward: ideas, choices and bright what-if energy.",
+          "image": "assets/cards/museums/futurium.webp"
+        },
+        {
+          "id": "urban-nation",
+          "name": "Urban Nation",
+          "line": "Street art, murals and contemporary city color.",
+          "resultLine": "You chose the museum that keeps one foot on the street: visual, graphic and very urban.",
+          "image": "assets/cards/museums/urban-nation.webp"
+        },
+        {
+          "id": "museum-for-communication",
+          "name": "Museum for Communication",
+          "line": "Messages, media and how people connect.",
+          "resultLine": "You picked the museum of signals: playful, clever and all about how people reach each other.",
+          "image": "assets/cards/museums/museum-for-communication.webp"
+        }
+      ]
+    },
+    {
+      "id": "clubs",
+      "title": "Berlin Night Battle",
+      "kicker": "Playable now",
+      "lead": "A nightlife bracket built around mood, not official rankings.",
+      "image": "assets/topics/night-battle-cover.webp",
+      "status": "active",
+      "theme": "Nightlife",
+      "shareTitle": "My Berlin Night Battle winner",
+      "resultPrefix": "Your Berlin night says:",
+      "resultFallback": "You picked the night-out mood that feels most like your Berlin.",
+      "gamePrompt": "Pick the Berlin night-out mood you would rather follow tonight.",
+      "items": [
+        {
+          "id": "techno-warehouse",
+          "name": "Techno Warehouse",
+          "line": "Dark rooms, heavy sound and no rush home.",
+          "resultLine": "You chose the classic Berlin night myth: bass, patience and a room that feels outside normal time.",
+          "image": "assets/cards/night/techno-warehouse.webp"
+        },
+        {
+          "id": "riverside-club",
+          "name": "Riverside Club",
+          "line": "Water, lights and a softer edge to the night.",
+          "resultLine": "You picked the night where Berlin reflects on the water and the party feels a little lighter.",
+          "image": "assets/cards/night/riverside-club.webp"
+        },
+        {
+          "id": "queer-dancefloor",
+          "name": "Queer Dancefloor",
+          "line": "Expressive, open and built around belonging.",
+          "resultLine": "You chose the dancefloor as a social space: expressive, protective and full of chosen-family energy.",
+          "image": "assets/cards/night/queer-dancefloor.webp"
+        },
+        {
+          "id": "punk-show",
+          "name": "Punk Show",
+          "line": "Small stage, loud room, no polish required.",
+          "resultLine": "You picked the rougher Berlin night: guitars, basement heat and a room that does not care about perfect.",
+          "image": "assets/cards/night/punk-show.webp"
+        },
+        {
+          "id": "jazz-cellar",
+          "name": "Jazz Cellar",
+          "line": "Low light, live sound and close tables.",
+          "resultLine": "You chose the intimate night: musicians close by, lights low and conversation after the last note.",
+          "image": "assets/cards/night/jazz-cellar.webp"
+        },
+        {
+          "id": "open-air-rave",
+          "name": "Open-Air Rave",
+          "line": "Summer air, park edges and sunrise plans.",
+          "resultLine": "You picked the Berlin night that wants fresh air, loose plans and a long way home.",
+          "image": "assets/cards/night/open-air-rave.webp"
+        },
+        {
+          "id": "karaoke-bar",
+          "name": "Karaoke Bar",
+          "line": "No shame, bad choruses and instant friends.",
+          "resultLine": "You chose the night where confidence matters more than pitch and strangers become backing singers.",
+          "image": "assets/cards/night/karaoke-bar.webp"
+        },
+        {
+          "id": "kneipe-crawl",
+          "name": "Kneipe Crawl",
+          "line": "Local bars, wooden tables and one more stop.",
+          "resultLine": "You picked the Berlin pub crawl mood: low-key, talkative and better without a strict plan.",
+          "image": "assets/cards/night/kneipe-crawl.webp"
+        },
+        {
+          "id": "spati-corner",
+          "name": "Späti Corner",
+          "line": "Cheap drinks, pavement talks and late snacks.",
+          "resultLine": "You chose Berlin's informal living room: a bottle, a corner and the night happening around you.",
+          "image": "assets/cards/night/spati-corner.webp"
+        },
+        {
+          "id": "cocktail-bar",
+          "name": "Cocktail Bar",
+          "line": "Dim lights, clean glassware and slow starts.",
+          "resultLine": "You picked the polished night: one good drink, good lighting and no need to shout.",
+          "image": "assets/cards/night/cocktail-bar.webp"
+        },
+        {
+          "id": "rooftop-sunset",
+          "name": "Rooftop Sunset",
+          "line": "Skyline, golden hour and a soft landing.",
+          "resultLine": "You chose the Berlin night that begins above the city before deciding where to go next.",
+          "image": "assets/cards/night/rooftop-sunset.webp"
+        },
+        {
+          "id": "comedy-night",
+          "name": "Comedy Night",
+          "line": "Basement laughs, small stages and sharp turns.",
+          "resultLine": "You picked the social night: low stakes, quick laughs and a room that warms up fast.",
+          "image": "assets/cards/night/comedy-night.webp"
+        },
+        {
+          "id": "late-doner-stop",
+          "name": "Late Döner Stop",
+          "line": "The real final boss of many Berlin nights.",
+          "resultLine": "You know the night is not complete until there is sauce, salad and a glowing snack counter.",
+          "image": "assets/cards/night/late-doner-stop.webp"
+        },
+        {
+          "id": "night-bus-ride",
+          "name": "Night Bus Ride",
+          "line": "Window reflections and the long route home.",
+          "resultLine": "You chose the cinematic ending: headphones, city lights and a bus that shows you another Berlin.",
+          "image": "assets/cards/night/night-bus-ride.webp"
+        },
+        {
+          "id": "gallery-opening",
+          "name": "Gallery Opening",
+          "line": "White walls, cheap wine and art-world orbit.",
+          "resultLine": "You picked the art-night version of Berlin: looking, talking and pretending not to network.",
+          "image": "assets/cards/night/gallery-opening.webp"
+        },
+        {
+          "id": "afterhours-breakfast",
+          "name": "Afterhours Breakfast",
+          "line": "Coffee, pastry and daylight after a long night.",
+          "resultLine": "You chose the sunrise epilogue: tired, happy and suddenly very grateful for breakfast.",
+          "image": "assets/cards/night/afterhours-breakfast.webp"
+        }
+      ]
+    },
+    {
+      "id": "transport",
+      "title": "Berlin Transport Battle",
+      "kicker": "New battle",
+      "lead": "Pick the Berlin way of moving through the city that feels most like your trip.",
+      "image": "assets/topics/transport-battle-cover.webp",
+      "status": "active",
+      "theme": "Transport",
+      "shareTitle": "My Berlin Transport Battle winner",
+      "resultPrefix": "Your Berlin travel rhythm says:",
+      "resultFallback": "You picked the Berlin transport mood that fits your city day.",
+      "gamePrompt": "Pick the Berlin transport moment you would rather follow today.",
+      "items": [
+        {
+          "id": "u-bahn-ride",
+          "name": "U-Bahn Ride",
+          "line": "Yellow trains, quick changes and station tiles.",
+          "image": "assets/cards/transport/u-bahn-ride.webp"
+        },
+        {
+          "id": "s-bahn-ring",
+          "name": "S-Bahn Ring",
+          "line": "Big loops, window views and Berlin scale.",
+          "image": "assets/cards/transport/s-bahn-ring.webp"
+        },
+        {
+          "id": "tram-glide",
+          "name": "Tram Glide",
+          "line": "Slow corners, east-side streets and above-ground calm.",
+          "image": "assets/cards/transport/tram-glide.webp"
+        },
+        {
+          "id": "double-decker-bus",
+          "name": "Double-Decker Bus",
+          "line": "Front-seat sightseeing without a tour script.",
+          "image": "assets/cards/transport/double-decker-bus.webp"
+        },
+        {
+          "id": "airport-train",
+          "name": "Airport Train",
+          "line": "The first serious Berlin decision after landing.",
+          "image": "assets/cards/transport/airport-train.webp"
+        },
+        {
+          "id": "ferry-crossing",
+          "name": "Ferry Crossing",
+          "line": "A tiny public-transport holiday on the water.",
+          "image": "assets/cards/transport/ferry-crossing.webp"
+        },
+        {
+          "id": "bike-lane",
+          "name": "Bike Lane",
+          "line": "Fast, exposed and very Berlin when the weather behaves.",
+          "image": "assets/cards/transport/bike-lane.webp"
+        },
+        {
+          "id": "walking-route",
+          "name": "Walking Route",
+          "line": "The oldest transport system and still the best one.",
+          "image": "assets/cards/transport/walking-route.webp"
+        },
+        {
+          "id": "night-bus",
+          "name": "Night Bus",
+          "line": "Late windows, quiet streets and the long way home.",
+          "image": "assets/cards/transport/night-bus.webp"
+        },
+        {
+          "id": "regional-train",
+          "name": "Regional Train",
+          "line": "A quick escape to lakes, palaces or another town.",
+          "image": "assets/cards/transport/regional-train.webp"
+        },
+        {
+          "id": "taxi-ride",
+          "name": "Taxi Ride",
+          "line": "Door-to-door comfort when the city gets complicated.",
+          "image": "assets/cards/transport/taxi-ride.webp"
+        },
+        {
+          "id": "escooter-hop",
+          "name": "E-Scooter Hop",
+          "line": "Short-distance chaos with a battery icon.",
+          "image": "assets/cards/transport/escooter-hop.webp"
+        },
+        {
+          "id": "ticket-machine",
+          "name": "Ticket Machine",
+          "line": "The small tourist boss battle before the ride.",
+          "image": "assets/cards/transport/ticket-machine.webp"
+        },
+        {
+          "id": "platform-bakery",
+          "name": "Platform Bakery",
+          "line": "Coffee, pastry and a train you might still catch.",
+          "image": "assets/cards/transport/platform-bakery.webp"
+        },
+        {
+          "id": "station-shortcut",
+          "name": "Station Shortcut",
+          "line": "That hidden exit that suddenly saves ten minutes.",
+          "image": "assets/cards/transport/station-shortcut.webp"
+        },
+        {
+          "id": "rainy-tram-window",
+          "name": "Rainy Tram Window",
+          "line": "Soft glass reflections and no need to rush.",
+          "image": "assets/cards/transport/rainy-tram-window.webp"
+        }
+      ]
+    },
+    {
+      "id": "techno-clubs",
+      "title": "Berlin Techno Club Battle",
+      "kicker": "New battle",
+      "lead": "A real-club name battle for Berlin nightlife moods, without pretending it is an official ranking.",
+      "image": "assets/topics/techno-club-battle-cover.webp",
+      "status": "active",
+      "theme": "Techno clubs",
+      "shareTitle": "My Berlin Techno Club Battle winner",
+      "resultPrefix": "Your Berlin club mood says:",
+      "resultFallback": "You picked the Berlin club mood that sounds most like your night.",
+      "gamePrompt": "Pick the Berlin club you would rather build your night around.",
+      "items": [
+        {
+          "id": "berghain",
+          "name": "Berghain",
+          "line": "The door-myth cathedral of Berlin techno.",
+          "image": "assets/cards/techno-clubs/berghain.webp"
+        },
+        {
+          "id": "tresor",
+          "name": "Tresor",
+          "line": "Concrete, history and bunker-pressure sound.",
+          "image": "assets/cards/techno-clubs/tresor.webp"
+        },
+        {
+          "id": "rso",
+          "name": "RSO",
+          "line": "Big-room energy on the eastern edge.",
+          "image": "assets/cards/techno-clubs/rso.webp"
+        },
+        {
+          "id": "sisyphos",
+          "name": "Sisyphos",
+          "line": "Long-format weekend playground with outdoor sprawl.",
+          "image": "assets/cards/techno-clubs/sisyphos.webp"
+        },
+        {
+          "id": "kater-blau",
+          "name": "Kater Blau",
+          "line": "Riverside color, wandering corners and sunrise plans.",
+          "image": "assets/cards/techno-clubs/kater-blau.webp"
+        },
+        {
+          "id": "about-blank",
+          "name": "://about blank",
+          "line": "Garden, politics and a rougher edge.",
+          "image": "assets/cards/techno-clubs/about-blank.webp"
+        },
+        {
+          "id": "kitkatclub",
+          "name": "KitKatClub",
+          "line": "Dress-code theatre and sex-positive nightlife.",
+          "image": "assets/cards/techno-clubs/kitkatclub.webp"
+        },
+        {
+          "id": "renate",
+          "name": "Renate",
+          "line": "Room-to-room maze with house-party weirdness.",
+          "image": "assets/cards/techno-clubs/renate.webp"
+        },
+        {
+          "id": "club-der-visionaere",
+          "name": "Club der Visionaere",
+          "line": "Canal-side minimal mood and summer patience.",
+          "image": "assets/cards/techno-clubs/club-der-visionaere.webp"
+        },
+        {
+          "id": "ritter-butzke",
+          "name": "Ritter Butzke",
+          "line": "Big mixed rooms with a playful Berlin feel.",
+          "image": "assets/cards/techno-clubs/ritter-butzke.webp"
+        },
+        {
+          "id": "heidegluehen",
+          "name": "Heideglühen",
+          "line": "Day-party warmth and serious sound systems.",
+          "image": "assets/cards/techno-clubs/heidegluehen.webp"
+        },
+        {
+          "id": "anomalie-art-club",
+          "name": "Anomalie Art Club",
+          "line": "Industrial scale with art-space energy.",
+          "image": "assets/cards/techno-clubs/anomalie-art-club.webp"
+        },
+        {
+          "id": "oxi",
+          "name": "OXI",
+          "line": "Raw-yard atmosphere and late-night momentum.",
+          "image": "assets/cards/techno-clubs/oxi.webp"
+        },
+        {
+          "id": "aeden",
+          "name": "ÆDEN",
+          "line": "Garden, dancefloor and a softer open-air pull.",
+          "image": "assets/cards/techno-clubs/aeden.webp"
+        },
+        {
+          "id": "ohm",
+          "name": "OHM",
+          "line": "Small-room pressure with serious heads-down sound.",
+          "image": "assets/cards/techno-clubs/ohm.webp"
+        },
+        {
+          "id": "gretchen",
+          "name": "Gretchen",
+          "line": "Vaulted rooms, bass music and Kreuzberg range.",
+          "image": "assets/cards/techno-clubs/gretchen.webp"
+        }
+      ]
+    },
+    {
+      "id": "doner-shops",
+      "title": "Döner Shops Battle",
+      "kicker": "New battle",
+      "lead": "Pick between Berlin döner stops by mood, not by pretending one list can settle the city.",
+      "image": "assets/topics/doner-shops-battle-cover.webp",
+      "status": "active",
+      "theme": "Döner shops",
+      "shareTitle": "My Berlin Döner Shops Battle winner",
+      "resultPrefix": "Your Berlin döner mood says:",
+      "resultFallback": "You picked the Berlin döner stop that fits your appetite.",
+      "gamePrompt": "Pick the Berlin döner stop you would rather try first.",
+      "items": [
+        {
+          "id": "dunya-gemuse-kebab",
+          "name": "Dunya Gemüse Kebab",
+          "line": "Friedrichshain vegetables and a bright first bite.",
+          "image": "assets/cards/doner-shops/dunya-gemuse-kebab.webp"
+        },
+        {
+          "id": "goltz-kebap",
+          "name": "Golt'z Kebap",
+          "line": "Charlottenburg yaprak energy with a polished edge.",
+          "image": "assets/cards/doner-shops/goltz-kebap.webp"
+        },
+        {
+          "id": "oggis-gemusekebab",
+          "name": "Oggi's Gemüsekebab",
+          "line": "A practical Hauptbahnhof-area rescue stop.",
+          "image": "assets/cards/doner-shops/oggis-gemusekebab.webp"
+        },
+        {
+          "id": "ruyam-gemuse-kebab",
+          "name": "Rüyam Gemüse Kebab",
+          "line": "Schöneberg crunch, color and cult lines.",
+          "image": "assets/cards/doner-shops/ruyam-gemuse-kebab.webp"
+        },
+        {
+          "id": "muca-kebap",
+          "name": "Muca Kebap",
+          "line": "Kreuzberg newcomer mood with fresh city buzz.",
+          "image": "assets/cards/doner-shops/muca-kebap.webp"
+        },
+        {
+          "id": "mustafas-gemuse-kebap",
+          "name": "Mustafa's Gemüse Kebap",
+          "line": "The famous queue-and-vegetable Berlin ritual.",
+          "image": "assets/cards/doner-shops/mustafas-gemuse-kebap.webp"
+        },
+        {
+          "id": "imren-grill",
+          "name": "Imren Grill",
+          "line": "Old-school meat, seasoning and serious regulars.",
+          "image": "assets/cards/doner-shops/imren-grill.webp"
+        },
+        {
+          "id": "tadim",
+          "name": "Tadim",
+          "line": "Kotti classic with no-nonsense grill energy.",
+          "image": "assets/cards/doner-shops/tadim.webp"
+        }
+      ]
+    },
+    {
+      "id": "currywurst-shops",
+      "title": "Currywurst Shops Battle",
+      "kicker": "New battle",
+      "lead": "Pick the Berlin currywurst stop that matches your snack mood.",
+      "image": "assets/topics/currywurst-shops-battle-cover.webp",
+      "status": "active",
+      "theme": "Currywurst shops",
+      "shareTitle": "My Berlin Currywurst Shops Battle winner",
+      "resultPrefix": "Your Berlin currywurst mood says:",
+      "resultFallback": "You picked the currywurst stop that sounds like your Berlin snack.",
+      "gamePrompt": "Pick the Berlin currywurst stop you would rather try.",
+      "items": [
+        {
+          "id": "curry-baude",
+          "name": "Curry Baude",
+          "line": "Gesundbrunnen local signal with snack-counter confidence.",
+          "image": "assets/cards/currywurst-shops/curry-baude.webp"
+        },
+        {
+          "id": "curry-61",
+          "name": "Curry 61",
+          "line": "Central, quick and useful after Museum Island.",
+          "image": "assets/cards/currywurst-shops/curry-61.webp"
+        },
+        {
+          "id": "zur-bratpfanne",
+          "name": "Zur Bratpfanne",
+          "line": "Old West Berlin stand energy in Steglitz.",
+          "image": "assets/cards/currywurst-shops/zur-bratpfanne.webp"
+        },
+        {
+          "id": "curry-und-chili",
+          "name": "Curry & Chili",
+          "line": "Spice-level drama for brave snack decisions.",
+          "image": "assets/cards/currywurst-shops/curry-und-chili.webp"
+        },
+        {
+          "id": "konnopkes-imbiss",
+          "name": "Konnopke's Imbiss",
+          "line": "Under-the-U-Bahn history in Prenzlauer Berg.",
+          "image": "assets/cards/currywurst-shops/konnopkes-imbiss.webp"
+        },
+        {
+          "id": "curry-36",
+          "name": "Curry 36",
+          "line": "Famous, busy and built for late Kreuzberg hunger.",
+          "image": "assets/cards/currywurst-shops/curry-36.webp"
+        },
+        {
+          "id": "wittys",
+          "name": "Witty's",
+          "line": "Organic and vegan-friendly near Wittenbergplatz.",
+          "image": "assets/cards/currywurst-shops/wittys.webp"
+        },
+        {
+          "id": "krasselts-imbiss",
+          "name": "Krasselt's Imbiss",
+          "line": "A southwest Berlin deep cut for snack purists.",
+          "image": "assets/cards/currywurst-shops/krasselts-imbiss.webp"
+        }
+      ]
+    },
+    {
+      "id": "parks-lakes",
+      "title": "Berlin Park & Lakes Battle",
+      "kicker": "New battle",
+      "lead": "Pick the green or blue Berlin escape you would rather build a day around.",
+      "image": "assets/topics/parks-lakes-battle-cover.webp",
+      "status": "active",
+      "theme": "Parks & lakes",
+      "shareTitle": "My Berlin Park & Lakes Battle winner",
+      "resultPrefix": "Your Berlin outdoor mood says:",
+      "resultFallback": "You picked the Berlin green-space mood that fits your day.",
+      "gamePrompt": "Pick the Berlin park or lake you would rather visit.",
+      "items": [
+        {
+          "id": "tiergarten",
+          "name": "Tiergarten",
+          "line": "Classic green space between monuments and museums.",
+          "image": "assets/cards/parks-lakes/tiergarten.webp"
+        },
+        {
+          "id": "tempelhofer-feld",
+          "name": "Tempelhofer Feld",
+          "line": "Runway walks, big sky and Berlin scale.",
+          "image": "assets/cards/parks-lakes/tempelhofer-feld.webp"
+        },
+        {
+          "id": "mauerpark",
+          "name": "Mauerpark",
+          "line": "Flea-market Sundays, music and rough edges.",
+          "image": "assets/cards/parks-lakes/mauerpark.webp"
+        },
+        {
+          "id": "treptower-park",
+          "name": "Treptower Park",
+          "line": "River paths, memorial scale and quiet corners.",
+          "image": "assets/cards/parks-lakes/treptower-park.webp"
+        },
+        {
+          "id": "viktoriapark",
+          "name": "Viktoriapark",
+          "line": "Waterfall, hill views and Kreuzberg pause.",
+          "image": "assets/cards/parks-lakes/viktoriapark.webp"
+        },
+        {
+          "id": "volkspark-friedrichshain",
+          "name": "Volkspark Friedrichshain",
+          "line": "Old park layers, fountains and local loops.",
+          "image": "assets/cards/parks-lakes/volkspark-friedrichshain.webp"
+        },
+        {
+          "id": "park-am-gleisdreieck",
+          "name": "Park am Gleisdreieck",
+          "line": "Railway traces, lawns and city movement.",
+          "image": "assets/cards/parks-lakes/park-am-gleisdreieck.webp"
+        },
+        {
+          "id": "schlossgarten-charlottenburg",
+          "name": "Schlossgarten Charlottenburg",
+          "line": "Palace gardens and slower west-side elegance.",
+          "image": "assets/cards/parks-lakes/schlossgarten-charlottenburg.webp"
+        },
+        {
+          "id": "grunewald",
+          "name": "Grunewald",
+          "line": "Forest paths when Berlin needs more air.",
+          "image": "assets/cards/parks-lakes/grunewald.webp"
+        },
+        {
+          "id": "teufelsberg",
+          "name": "Teufelsberg",
+          "line": "Hilltop views and Cold War echoes.",
+          "image": "assets/cards/parks-lakes/teufelsberg.webp"
+        },
+        {
+          "id": "schlachtensee",
+          "name": "Schlachtensee",
+          "line": "Clear-water loop with swim-day temptation.",
+          "image": "assets/cards/parks-lakes/schlachtensee.webp"
+        },
+        {
+          "id": "muggelsee",
+          "name": "Müggelsee",
+          "line": "Big lake feeling on Berlin’s eastern edge.",
+          "image": "assets/cards/parks-lakes/muggelsee.webp"
+        },
+        {
+          "id": "wannsee",
+          "name": "Wannsee",
+          "line": "Classic beach-day Berlin with old resort energy.",
+          "image": "assets/cards/parks-lakes/wannsee.webp"
+        },
+        {
+          "id": "plotzensee",
+          "name": "Plötzensee",
+          "line": "Inner-city lake pause in Wedding.",
+          "image": "assets/cards/parks-lakes/plotzensee.webp"
+        },
+        {
+          "id": "krumme-lanke",
+          "name": "Krumme Lanke",
+          "line": "Forest-water calm in the southwest.",
+          "image": "assets/cards/parks-lakes/krumme-lanke.webp"
+        },
+        {
+          "id": "tegeler-see",
+          "name": "Tegeler See",
+          "line": "Wide northern water and boat-day thoughts.",
+          "image": "assets/cards/parks-lakes/tegeler-see.webp"
+        }
+      ]
+    },
+    {
+      "id": "ubahn-sbahn-lines",
+      "title": "Berlin U-Bahn & S-Bahn Lines Battle",
+      "kicker": "New battle",
+      "lead": "Pick the Berlin rail line whose route, color and city mood wins for you.",
+      "image": "assets/topics/lines-battle-cover.webp",
+      "status": "active",
+      "theme": "U-Bahn & S-Bahn",
+      "shareTitle": "My Berlin U-Bahn & S-Bahn Battle winner",
+      "resultPrefix": "Your Berlin line mood says:",
+      "resultFallback": "You picked the Berlin rail line that feels most like your city route.",
+      "gamePrompt": "Pick the Berlin U-Bahn or S-Bahn line you would rather ride.",
+      "items": [
+        {
+          "id": "u1",
+          "name": "U1",
+          "line": "Kreuzberg viaduct mood and east-west color.",
+          "image": "assets/cards/lines/u1.webp"
+        },
+        {
+          "id": "u2",
+          "name": "U2",
+          "line": "Classic sightseeing spine through old and new Berlin.",
+          "image": "assets/cards/lines/u2.webp"
+        },
+        {
+          "id": "u3",
+          "name": "U3",
+          "line": "Leafy southwest start with a museum finish.",
+          "image": "assets/cards/lines/u3.webp"
+        },
+        {
+          "id": "u5",
+          "name": "U5",
+          "line": "Central palace-to-east connection with tourist power.",
+          "image": "assets/cards/lines/u5.webp"
+        },
+        {
+          "id": "u6",
+          "name": "U6",
+          "line": "North-south backbone with Cold War station echoes.",
+          "image": "assets/cards/lines/u6.webp"
+        },
+        {
+          "id": "u7",
+          "name": "U7",
+          "line": "Long colorful tunnel through everyday Berlin.",
+          "image": "assets/cards/lines/u7.webp"
+        },
+        {
+          "id": "u8",
+          "name": "U8",
+          "line": "Wedding, Mitte, Kreuzberg and Neukölln intensity.",
+          "image": "assets/cards/lines/u8.webp"
+        },
+        {
+          "id": "u9",
+          "name": "U9",
+          "line": "West Berlin speed from Steglitz to Wedding.",
+          "image": "assets/cards/lines/u9.webp"
+        },
+        {
+          "id": "s1",
+          "name": "S1",
+          "line": "Wannsee-to-north rhythm through layered Berlin.",
+          "image": "assets/cards/lines/s1.webp"
+        },
+        {
+          "id": "s2",
+          "name": "S2",
+          "line": "North-south city cut with practical commuter energy.",
+          "image": "assets/cards/lines/s2.webp"
+        },
+        {
+          "id": "s3",
+          "name": "S3",
+          "line": "East-west reach from Spandau toward Köpenick.",
+          "image": "assets/cards/lines/s3.webp"
+        },
+        {
+          "id": "s5",
+          "name": "S5",
+          "line": "Long east-west run with platform-window Berlin.",
+          "image": "assets/cards/lines/s5.webp"
+        },
+        {
+          "id": "s7",
+          "name": "S7",
+          "line": "Potsdam pull, central stations and big-day range.",
+          "image": "assets/cards/lines/s7.webp"
+        },
+        {
+          "id": "s9",
+          "name": "S9",
+          "line": "Airport link with a real arrival feeling.",
+          "image": "assets/cards/lines/s9.webp"
+        },
+        {
+          "id": "s41",
+          "name": "S41 Ring",
+          "line": "Clockwise loop around Berlin’s inner city.",
+          "image": "assets/cards/lines/s41.webp"
+        },
+        {
+          "id": "s42",
+          "name": "S42 Ring",
+          "line": "Counter-clockwise loop for the other kind of brain.",
+          "image": "assets/cards/lines/s42.webp"
+        }
+      ]
+    }
+  ]
+}

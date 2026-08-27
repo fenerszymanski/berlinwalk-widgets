@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Tour Time Window | BerlinWalk</title>
+  <meta name="description" content="Set the earliest time you can reach the World Clock and the latest time you must be free. See whether the 11:30 or 15:30 Berlin walking-tour window fits.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231B5E20'/%3E%3Ccircle cx='16' cy='16' r='10' fill='%23FFE600'/%3E%3Cpath d='M16 9v7l5 3' fill='none' stroke='%23123D18' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-time-window">
+  <style>
+    #bw-time-window{
+      --green:#1B5E20; --deep:#123D18; --yellow:#FFE600; --cream:#FFFBE8;
+      --ink:#212121; --muted:#4F5F50; --line:#D9E7D6; --pale:#F3F8EE;
+      --morning:#FFE600; --afternoon:#85C66B; --shadow:0 20px 50px rgba(18,61,24,.14);
+      max-width:940px; margin:0 auto; padding:4px; color:var(--ink);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    }
+    #bw-time-window *{box-sizing:border-box;}
+    #bw-time-window .tw-shell{overflow:hidden; border:1px solid var(--line); border-radius:26px; background:#fff; box-shadow:var(--shadow);}
+    #bw-time-window .tw-hero{position:relative; min-height:260px; display:flex; align-items:flex-end; isolation:isolate;}
+    #bw-time-window .tw-hero img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 46%; z-index:-2;}
+    #bw-time-window .tw-hero:after{content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg,rgba(8,36,17,.05) 14%,rgba(8,36,17,.88) 100%);}
+    #bw-time-window .tw-hero-copy{padding:26px 28px 25px; max-width:760px; color:#fff;}
+    #bw-time-window .tw-kicker{display:inline-flex; align-items:center; gap:8px; margin:0 0 10px; padding:6px 10px; border-radius:999px; background:var(--yellow); color:var(--deep); font-size:.75rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase;}
+    #bw-time-window h2{margin:0; max-width:650px; font-size:clamp(1.65rem,4vw,2.55rem); line-height:1.04; letter-spacing:-.035em;}
+    #bw-time-window .tw-hero p:not(.tw-kicker){margin:10px 0 0; max-width:680px; color:#F0F6EE; font-size:.98rem; line-height:1.55;}
+    #bw-time-window .tw-body{padding:26px 28px 30px; background:linear-gradient(180deg,#fff 0%,var(--pale) 100%);}
+    #bw-time-window .tw-intro{margin:0 0 22px; max-width:760px; line-height:1.65; color:var(--muted);}
+    #bw-time-window .tw-controls{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:24px;}
+    #bw-time-window .tw-control{padding:17px 18px 18px; border:1px solid var(--line); border-radius:18px; background:#fff;}
+    #bw-time-window label{display:flex; justify-content:space-between; gap:12px; align-items:baseline; font-weight:850; line-height:1.35; color:var(--deep);}
+    #bw-time-window .tw-time{font-variant-numeric:tabular-nums; color:var(--green); font-size:1.14rem; white-space:nowrap;}
+    #bw-time-window .tw-help{margin:5px 0 14px; color:var(--muted); font-size:.82rem; line-height:1.45;}
+    #bw-time-window input[type="range"]{width:100%; min-height:44px; margin:0; accent-color:var(--green); cursor:pointer;}
+    #bw-time-window input[type="range"]:focus-visible{outline:3px solid var(--yellow); outline-offset:4px; border-radius:6px;}
+    #bw-time-window .tw-dayline-wrap{padding:20px 18px 18px; border:1px solid var(--line); border-radius:20px; background:#fff;}
+    #bw-time-window .tw-dayline-title{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:15px;}
+    #bw-time-window .tw-dayline-title strong{color:var(--deep);}
+    #bw-time-window .tw-dayline-title span{font-size:.78rem; color:var(--muted);}
+    #bw-time-window .tw-track{position:relative; height:92px; margin:0 9px; border-radius:16px; background:linear-gradient(90deg,#DCE9F4 0%,#FFF5C9 38%,#FFEAA0 58%,#E7D8EE 100%); overflow:hidden; box-shadow:inset 0 0 0 1px rgba(18,61,24,.08);}
+    #bw-time-window .tw-window{position:absolute; top:0; bottom:0; background:rgba(27,94,32,.14); border-left:3px solid var(--green); border-right:3px solid var(--green); transition:left .16s,width .16s;}
+    #bw-time-window .tw-slot{position:absolute; top:25px; height:42px; display:flex; align-items:center; justify-content:center; border-radius:11px; border:2px solid var(--deep); color:var(--deep); font-size:.8rem; font-weight:900; letter-spacing:.01em; box-shadow:0 4px 9px rgba(18,61,24,.12); transition:filter .16s,opacity .16s,transform .16s;}
+    #bw-time-window .tw-slot[data-slot="morning"]{background:var(--morning);}
+    #bw-time-window .tw-slot[data-slot="afternoon"]{background:var(--afternoon);}
+    #bw-time-window .tw-slot.is-out{filter:grayscale(.72); opacity:.42; transform:scaleY(.88);}
+    #bw-time-window .tw-marker{position:absolute; top:0; bottom:0; width:3px; background:var(--deep); transform:translateX(-1px); transition:left .16s;}
+    #bw-time-window .tw-marker:before{content:""; position:absolute; top:6px; left:50%; width:12px; height:12px; border-radius:50%; background:var(--yellow); border:3px solid var(--deep); transform:translateX(-50%);}
+    #bw-time-window .tw-marker.latest:before{top:auto; bottom:6px; background:#fff;}
+    #bw-time-window .tw-axis{display:flex; justify-content:space-between; margin:8px 8px 0; color:var(--muted); font-size:.72rem; font-variant-numeric:tabular-nums;}
+    #bw-time-window .tw-legend{display:flex; gap:14px; flex-wrap:wrap; margin-top:13px; font-size:.78rem; color:var(--muted);}
+    #bw-time-window .tw-legend span{display:inline-flex; align-items:center; gap:6px;}
+    #bw-time-window .tw-dot{width:10px; height:10px; border-radius:50%; border:1px solid var(--deep);}
+    #bw-time-window .tw-result{margin-top:20px; padding:20px; border-radius:20px; background:var(--deep); color:#fff;}
+    #bw-time-window .tw-result-kicker{margin:0 0 5px; color:var(--yellow); font-size:.75rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase;}
+    #bw-time-window .tw-result h3{margin:0; font-size:1.36rem; line-height:1.2;}
+    #bw-time-window .tw-result-copy{margin:9px 0 0; color:#EDF5EA; line-height:1.58;}
+    #bw-time-window .tw-margins{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin-top:15px;}
+    #bw-time-window .tw-margin{padding:11px 12px; border:1px solid rgba(255,255,255,.17); border-radius:12px; background:rgba(255,255,255,.08); font-size:.81rem; line-height:1.4;}
+    #bw-time-window .tw-margin strong{display:block; color:var(--yellow); font-size:.94rem;}
+    #bw-time-window .tw-place{margin:15px 0 0; padding-top:14px; border-top:1px solid rgba(255,255,255,.18); line-height:1.52; font-size:.88rem;}
+    #bw-time-window .tw-foot{display:flex; gap:14px; justify-content:space-between; align-items:center; margin-top:18px; padding-top:18px; border-top:1px solid var(--line);}
+    #bw-time-window .tw-foot p{margin:0; max-width:590px; color:var(--muted); font-size:.8rem; line-height:1.5;}
+    #bw-time-window .tw-tool-link{color:var(--deep); font-weight:800; text-underline-offset:3px;}
+    #bw-time-window .tw-tool-link:focus-visible{outline:3px solid var(--green); outline-offset:3px; border-radius:3px;}
+    #bw-time-window .tw-cta{display:inline-flex; min-height:46px; align-items:center; justify-content:center; padding:11px 17px; border:2px solid var(--deep); border-radius:999px; background:var(--yellow); color:var(--deep) !important; font-weight:900; text-decoration:none; white-space:nowrap; box-shadow:0 4px 0 var(--deep);}
+    #bw-time-window .tw-cta:hover{transform:translateY(1px); box-shadow:0 3px 0 var(--deep);}
+    #bw-time-window .tw-cta:focus-visible{outline:3px solid var(--green); outline-offset:4px;}
+    @media (max-width:680px){
+      #bw-time-window .tw-hero{min-height:300px;}
+      #bw-time-window .tw-hero-copy,#bw-time-window .tw-body{padding-left:18px; padding-right:18px;}
+      #bw-time-window .tw-controls{grid-template-columns:1fr; gap:12px;}
+      #bw-time-window .tw-dayline-wrap{padding-left:10px; padding-right:10px;}
+      #bw-time-window .tw-slot{font-size:.69rem; line-height:1.1; text-align:center; padding:0 3px;}
+      #bw-time-window .tw-margins{grid-template-columns:1fr;}
+      #bw-time-window .tw-foot{align-items:stretch; flex-direction:column;}
+      #bw-time-window .tw-cta{width:100%;}
+    }
+    @media (prefers-reduced-motion:reduce){#bw-time-window *{scroll-behavior:auto !important; transition:none !important;}}
+  </style>
+
+  <main class="tw-shell">
+    <header class="tw-hero">
+      <img src="assets/world-clock-dayline.jpg" alt="Alexanderplatz World Clock under a blue sky">
+      <div class="tw-hero-copy">
+        <p class="tw-kicker">BerlinWalk dayline</p>
+        <h2>Which tour window fits your real Berlin day?</h2>
+        <p>Set the earliest time you can stand at the World Clock and the latest time you must be free near Hackescher Markt.</p>
+      </div>
+    </header>
+
+    <section class="tw-body" aria-labelledby="tw-instructions">
+      <p class="tw-intro" id="tw-instructions">Use realistic times after luggage, transport and hotel stops. The bands below are planning windows for the current 11:30 and 15:30 calendar options, each allowing about 2 hours plus a 5-minute early arrival.</p>
+
+      <div class="tw-controls">
+        <div class="tw-control">
+          <label for="tw-earliest"><span>I can reach the World Clock by</span><output class="tw-time" id="tw-earliest-value" for="tw-earliest">10:30</output></label>
+          <p class="tw-help">Use your meeting-point arrival, not your flight or train arrival.</p>
+          <input id="tw-earliest" type="range" min="480" max="1020" step="5" value="630" aria-describedby="tw-earliest-help">
+          <span id="tw-earliest-help" hidden>The tour asks guests to arrive 5 minutes before the booked start.</span>
+        </div>
+        <div class="tw-control">
+          <label for="tw-latest"><span>I need to be free again by</span><output class="tw-time" id="tw-latest-value" for="tw-latest">18:30</output></label>
+          <p class="tw-help">The tour ends at Hackescher Markt, not back at Alexanderplatz.</p>
+          <input id="tw-latest" type="range" min="810" max="1260" step="5" value="1110" aria-describedby="tw-latest-help">
+          <span id="tw-latest-help" hidden>Add separate travel time from Hackescher Markt to your next reservation.</span>
+        </div>
+      </div>
+
+      <div class="tw-dayline-wrap" aria-label="Your available day window and two tour planning bands">
+        <div class="tw-dayline-title"><strong>Your usable window</strong><span>08:00 to 21:00 dayline</span></div>
+        <div class="tw-track" id="tw-track">
+          <div class="tw-window" id="tw-window"></div>
+          <div class="tw-slot" data-slot="morning" id="tw-morning">11:30 to 13:30</div>
+          <div class="tw-slot" data-slot="afternoon" id="tw-afternoon">15:30 to 17:30</div>
+          <div class="tw-marker earliest" id="tw-earliest-marker" aria-hidden="true"></div>
+          <div class="tw-marker latest" id="tw-latest-marker" aria-hidden="true"></div>
+        </div>
+        <div class="tw-axis" aria-hidden="true"><span>08:00</span><span>11:00</span><span>14:00</span><span>17:00</span><span>21:00</span></div>
+        <div class="tw-legend" aria-hidden="true">
+          <span><i class="tw-dot" style="background:#FFE600"></i>11:30 window</span>
+          <span><i class="tw-dot" style="background:#85C66B"></i>15:30 window</span>
+          <span><i class="tw-dot" style="background:rgba(27,94,32,.16)"></i>Your available time</span>
+        </div>
+      </div>
+
+      <section class="tw-result" id="tw-result" aria-live="polite" aria-atomic="true">
+        <p class="tw-result-kicker" id="tw-result-kicker">Your fit</p>
+        <h3 id="tw-result-title">Both windows fit</h3>
+        <p class="tw-result-copy" id="tw-result-copy"></p>
+        <div class="tw-margins" id="tw-margins"></div>
+        <p class="tw-place" id="tw-place"></p>
+      </section>
+
+      <footer class="tw-foot">
+        <p>This is a planning tool, not live availability. The booking calendar confirms the exact date and time. The walk is about 2 hours and ends at Hackescher Markt. <a class="tw-tool-link" href="https://www.berlinwalk.com/tools/berlin-tour-time-window" target="_blank" rel="noopener">Open the full Berlin Tour Time Window page.</a></p>
+        <a class="tw-cta" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_blank" rel="noopener">Check live availability</a>
+      </footer>
+    </section>
+  </main>
+
+  <script>
+  (function(){
+    var DAY_START=480, DAY_END=1260;
+    var slots={
+      morning:{start:690,end:810,label:'11:30',name:'Morning'},
+      afternoon:{start:930,end:1050,label:'15:30',name:'Afternoon'}
+    };
+    var earliest=document.getElementById('tw-earliest');
+    var latest=document.getElementById('tw-latest');
+    var earliestValue=document.getElementById('tw-earliest-value');
+    var latestValue=document.getElementById('tw-latest-value');
+    var windowEl=document.getElementById('tw-window');
+    var earliestMarker=document.getElementById('tw-earliest-marker');
+    var latestMarker=document.getElementById('tw-latest-marker');
+    var resultTitle=document.getElementById('tw-result-title');
+    var resultCopy=document.getElementById('tw-result-copy');
+    var resultKicker=document.getElementById('tw-result-kicker');
+    var margins=document.getElementById('tw-margins');
+    var place=document.getElementById('tw-place');
+
+    function time(minutes){
+      var h=Math.floor(minutes/60), m=minutes%60;
+      return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0');
+    }
+    function pct(minutes){return Math.max(0,Math.min(100,(minutes-DAY_START)/(DAY_END-DAY_START)*100));}
+    function duration(minutes){
+      if(minutes<60) return minutes+' min';
+      var h=Math.floor(minutes/60), m=minutes%60;
+      return h+'h'+(m?' '+m+'m':'');
+    }
+    function fits(slot,a,b){return a<=slot.start-5 && b>=slot.end;}
+    function marginCard(slot,a,b){
+      var before=(slot.start-5)-a, after=b-slot.end;
+      return '<div class="tw-margin"><strong>'+slot.label+' '+slot.name.toLowerCase()+'</strong>'+duration(before)+' before meeting · '+duration(after)+' after finish</div>';
+    }
+    function update(){
+      var a=Number(earliest.value), b=Number(latest.value);
+      earliestValue.value=time(a); latestValue.value=time(b);
+      earliestValue.textContent=time(a); latestValue.textContent=time(b);
+      var left=pct(a), right=pct(b);
+      windowEl.style.left=left+'%'; windowEl.style.width=Math.max(0,right-left)+'%';
+      earliestMarker.style.left=left+'%'; latestMarker.style.left=right+'%';
+      Object.keys(slots).forEach(function(key){
+        var slot=slots[key], el=document.getElementById('tw-'+key);
+        el.style.left=pct(slot.start)+'%'; el.style.width=(pct(slot.end)-pct(slot.start))+'%';
+        el.classList.toggle('is-out',!fits(slot,a,b));
+      });
+      var morning=fits(slots.morning,a,b), afternoon=fits(slots.afternoon,a,b);
+      margins.innerHTML='';
+      if(a>=b){
+        resultKicker.textContent='Window needs fixing';
+        resultTitle.textContent='Your finish must be later than your arrival';
+        resultCopy.textContent='Move one boundary so the day contains a real open block. Then the tour bands can be checked honestly.';
+        place.textContent='Practical move: start with the next reservation you cannot move, then work backwards from Hackescher Markt.';
+      } else if(morning&&afternoon){
+        resultKicker.textContent='Both fit';
+        resultTitle.textContent='Choose the shape of the day, not a fake winner';
+        resultCopy.textContent='Book 11:30 for a long open afternoon. Choose 15:30 for a slower morning and a direct move into dinner. Check weather only as a tie-breaker.';
+        margins.innerHTML=marginCard(slots.morning,a,b)+marginCard(slots.afternoon,a,b);
+        place.textContent='Place-first move: morning can lead from Hackescher Markt to one Museum Island visit; afternoon can lead into dinner around Hackesche Höfe or the Scheunenviertel.';
+      } else if(morning){
+        resultKicker.textContent='One clean fit';
+        resultTitle.textContent='The 11:30 morning window fits';
+        resultCopy.textContent='The afternoon band misses one of your boundaries. Keep the morning tour and protect the fixed plan that follows.';
+        margins.innerHTML=marginCard(slots.morning,a,b);
+        place.textContent='Place-first move: after the tour ends at Hackescher Markt, choose one afternoon destination such as Museum Island or Bernauer Strasse.';
+      } else if(afternoon){
+        resultKicker.textContent='One clean fit';
+        resultTitle.textContent='The 15:30 afternoon window fits';
+        resultCopy.textContent='The morning band misses one of your boundaries. Use the earlier part of the day for arrival, luggage or one fixed commitment.';
+        margins.innerHTML=marginCard(slots.afternoon,a,b);
+        place.textContent='Place-first move: finish at Hackescher Markt, then keep dinner close around Hackesche Höfe, the Scheunenviertel or the Spree.';
+      } else {
+        resultKicker.textContent='Neither fits';
+        resultTitle.textContent='Do not turn this date into a race';
+        var why=[];
+        if(a>slots.morning.start-5) why.push('you cannot reach the 11:30 meeting in time');
+        if(b<slots.morning.end) why.push('your hard stop is before the morning finish');
+        if(a>slots.afternoon.start-5) why.push('you cannot reach the 15:30 meeting in time');
+        if(b<slots.afternoon.end) why.push('your hard stop is before the afternoon finish');
+        resultCopy.textContent=(why.length?'With these limits, '+why.join(' and ')+'. ':'')+'Choose another date or move the fixed commitment instead of cutting the walk short.';
+        place.textContent='Practical move: check the live calendar for another date, then rebuild the day from the World Clock start and Hackescher Markt finish.';
+      }
+      requestHeight();
+    }
+    function requestHeight(){
+      try{window.parent.postMessage({type:'berlinwalk:resize',height:document.documentElement.scrollHeight},'*');}catch(e){}
+    }
+    earliest.addEventListener('input',update); latest.addEventListener('input',update);
+    window.addEventListener('load',requestHeight);
+    if('ResizeObserver' in window){new ResizeObserver(requestHeight).observe(document.getElementById('bw-time-window'));}
+    update();
+  })();
+  </script>
+</div>
+</body>
+</html>

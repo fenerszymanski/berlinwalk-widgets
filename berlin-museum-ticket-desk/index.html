@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Berlin Museum Ticket Desk</title>
+<meta name="description" content="Build the group that is actually standing at the museum desk in Berlin, pick the museum, and get an itemised slip: who pays full price, who gets the reduced ticket, who walks in free, and what each person has to show." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='32' r='19' fill='%23FFE600'/%3E%3Crect x='20' y='25' width='24' height='14' rx='2' fill='%231B5E20'/%3E%3Cpath d='M36 25v14' stroke='%23FFE600' stroke-width='2' stroke-dasharray='2 2'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-dark:#123D18; --green-mid:#2E7D32;
+    --lime:#7CB342; --light:#C5E1A5; --yellow:#FFE600;
+    --cream:#FAFAF5; --ink:#212121; --muted:#4b584b;
+    --line:#E3E8DC; --panel:#F4F7F0;
+    --paper:#FFFDF6; --paper-line:#D8DCCE;
+    --free:#2E7D32; --red:#A63030;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .wrap{max-width:720px;margin:0 auto;padding:4px 14px 20px}
+  .kicker{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-mid);margin:0 0 6px}
+  h1{font-size:22px;font-weight:800;line-height:1.16;margin:0 0 8px;color:var(--green-dark)}
+  .lede{font-size:14.5px;color:var(--muted);margin:0 0 16px}
+
+  .step{margin:0 0 16px}
+  .step-h{display:flex;align-items:baseline;gap:8px;margin:0 0 9px}
+  .step-n{width:20px;height:20px;flex:0 0 20px;border-radius:50%;background:var(--green);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;line-height:1}
+  .step-t{font-size:13.5px;font-weight:800;color:var(--green-dark);margin:0}
+  .step-s{font-size:12px;color:var(--muted);margin:0 0 10px 28px}
+
+  .adders{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+  @media(min-width:520px){.adders{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  .add{appearance:none;border:2px solid var(--line);background:#fff;border-radius:12px;padding:9px 10px;cursor:pointer;font-family:inherit;text-align:left;transition:border-color .15s,background .15s;min-width:0}
+  .add:hover{border-color:var(--lime)}
+  .add:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+  .add .an{display:block;font-size:12.5px;font-weight:800;color:var(--green-dark);line-height:1.25}
+  .add .ap{display:block;font-size:10.5px;font-weight:700;letter-spacing:.04em;margin-top:3px;text-transform:uppercase}
+  .add .ap.full{color:var(--muted)}
+  .add .ap.half{color:#8a5a00}
+  .add .ap.free{color:var(--free)}
+
+  .roster{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+  .roster:empty{display:none}
+  .rrow{display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:7px 8px 7px 11px}
+  .rname{flex:1 1 auto;min-width:0;font-size:12.5px;font-weight:700;color:var(--green-dark);line-height:1.3}
+  .rname em{display:block;font-style:normal;font-size:10.5px;font-weight:600;color:var(--muted);margin-top:2px}
+  .rcount{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:700;color:var(--green-dark);min-width:22px;text-align:center}
+  .rbtn{appearance:none;width:26px;height:26px;flex:0 0 26px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--green-dark);font-size:15px;font-weight:800;line-height:1;cursor:pointer;font-family:inherit}
+  .rbtn:hover{border-color:var(--lime)}
+  .rbtn:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+
+  .venues{display:flex;flex-wrap:wrap;gap:6px}
+  .ven{appearance:none;border:2px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;cursor:pointer;font-family:inherit;font-size:12.5px;font-weight:700;color:var(--green-dark)}
+  .ven:hover{border-color:var(--lime)}
+  .ven:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+  .ven.sel{border-color:var(--green);background:var(--green);color:#fff}
+
+  .slip{margin:18px 0 0;background:var(--paper);border:1px solid var(--paper-line);border-radius:6px;padding:16px 15px 4px;box-shadow:0 8px 24px rgba(18,61,24,.08);position:relative}
+  .slip::after{content:"";position:absolute;left:0;right:0;bottom:-9px;height:10px;background:radial-gradient(circle at 6px -1px, transparent 6px, var(--paper) 6.5px);background-size:12px 10px;filter:drop-shadow(0 2px 2px rgba(18,61,24,.06))}
+  .slip-h{text-align:center;border-bottom:2px dashed var(--paper-line);padding-bottom:10px;margin-bottom:11px}
+  .slip-brand{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.16em;color:var(--green-mid);margin:0 0 5px}
+  .slip-ven{font-size:15.5px;font-weight:800;color:var(--green-dark);margin:0;line-height:1.2}
+  .slip-add{font-size:11.5px;color:var(--muted);margin:3px 0 0}
+  .lines{list-style:none;margin:0;padding:0}
+  .line{display:flex;align-items:baseline;gap:8px;padding:7px 0;border-bottom:1px dotted var(--paper-line)}
+  .l-txt{flex:1 1 auto;min-width:0}
+  .l-who{font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600;color:var(--ink);line-height:1.35;word-break:break-word}
+  .l-doc{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.4}
+  .l-doc b{color:var(--green-dark);font-weight:700}
+  .l-amt{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:700;color:var(--ink);white-space:nowrap}
+  .l-amt.free{color:var(--free)}
+  .total{display:flex;align-items:baseline;gap:8px;padding:11px 0 12px;margin-top:2px;border-top:2px solid var(--green-dark)}
+  .t-txt{flex:1 1 auto;font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-dark)}
+  .t-amt{font-family:'IBM Plex Mono',monospace;font-size:19px;font-weight:700;color:var(--green-dark);white-space:nowrap}
+  .saved{margin:0 0 12px;background:var(--yellow);color:var(--green-dark);border-radius:8px;padding:8px 11px;font-size:12.5px;font-weight:700;line-height:1.4}
+  .note{margin:0 0 12px;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--lime);border-radius:8px;padding:9px 11px;font-size:12px;color:#33403a;line-height:1.5}
+  .note b{color:var(--green-dark)}
+  .empty{padding:22px 8px;text-align:center;color:var(--muted);font-size:13.5px;line-height:1.5}
+
+  .foot{font-size:11.5px;color:var(--muted);margin-top:22px;border-top:1px dashed var(--line);padding-top:12px;line-height:1.5}
+  .foot a{color:var(--green-mid);font-weight:700}
+  .cta{display:inline-block;margin-top:10px;background:var(--yellow);color:var(--green-dark);border-radius:999px;padding:10px 16px;font-size:12.5px;font-weight:800;text-decoration:none}
+  .cta:visited,.cta:hover,.cta:active,.cta:focus{color:var(--green-dark)}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">BerlinWalk · Free Berlin tool</p>
+  <h1>Berlin Museum Ticket Desk</h1>
+  <p class="lede">Two prices are printed on every Berlin museum board, and the person at the counter will not talk you into the cheaper one. Build the group that is actually standing there, pick the museum, and read the slip.</p>
+
+  <div class="step">
+    <div class="step-h"><span class="step-n">1</span><p class="step-t">Who is standing at the desk?</p></div>
+    <p class="step-s">Tap once per person. Everything is priced on the Staatliche Museen zu Berlin rules unless the museum below says otherwise.</p>
+    <div class="adders" id="adders"></div>
+    <ul class="roster" id="roster" aria-live="polite"></ul>
+  </div>
+
+  <div class="step">
+    <div class="step-h"><span class="step-n">2</span><p class="step-t">Which museum?</p></div>
+    <div class="venues" id="venues"></div>
+  </div>
+
+  <div class="slip" id="slip"></div>
+
+  <p class="foot">
+    Prices and eligibility checked on the museums' own ticket pages on 22 August 2026: <a href="https://www.smb.museum/en/museums-institutions/neues-museum/plan-your-visit/prices-tickets/" target="_blank" rel="noopener">Staatliche Museen zu Berlin</a> and <a href="https://berlinischegalerie.de/en/visit/" target="_blank" rel="noopener">Berlinische Galerie</a>. Museums change tariffs and special-exhibition rules during the year, so treat this as a planning slip and not as a guarantee at the counter.
+    <br />
+    <a class="cta" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_blank" rel="noopener">No ticket needed: join the free walking tour</a>
+  </p>
+</div>
+
+<script>
+(function () {
+  var PEOPLE = [
+    { id:'adult',    name:'Adult',                    hint:'18 or over, not studying',        band:'full', doc:'' },
+    { id:'student',  name:'Student or apprentice',    hint:'any age, valid card required',    band:'half', doc:'A student card, enrolment certificate or apprenticeship contract. A card with no dates on it is often refused.' },
+    { id:'minor',    name:'Under 18',                 hint:'free, still needs a ticket',      band:'free', doc:'Any ID showing the date of birth. Collect the free ticket at the desk, do not walk past it.' },
+    { id:'disabled', name:'Disabled visitor',         hint:'degree of disability 50 or more', band:'half', doc:'The disability certificate. German cards are read fastest, foreign documents usually work if the degree is printed on them.' },
+    { id:'carer',    name:'Registered companion',     hint:'marked in the disability card',   band:'free', doc:'The disabled visitor’s card carrying the companion mark. Both of you go to the desk together.' },
+    { id:'icom',     name:'ICOM or press card',       hint:'museum professionals, press',     band:'free', doc:'The ICOM, Deutscher Museumsbund or press card. This is checked properly, so carry the physical card.' }
+  ];
+
+  var VENUES = [
+    { id:'neues', name:'Neues Museum',           where:'Bodestraße 1-3, Museum Island', full:1400, half:700, island:true },
+    { id:'altes', name:'Altes Museum',           where:'Am Lustgarten, Museum Island',            full:1400, half:700, island:true },
+    { id:'bode',  name:'Bode-Museum',            where:'Am Kupfergraben 1, Museum Island',        full:1400, half:700, island:true },
+    { id:'ang',   name:'Alte Nationalgalerie',   where:'Bodestraße 1-3, Museum Island', full:1600, half:800, island:true,
+      note:'Right now the Alte Nationalgalerie sells only the combined ticket with its Paul Cassirer exhibition, which is why it costs more than its neighbours. Museum Island, Museumspass and WelcomeCard holders are not covered for that exhibition and pay a <b>6 euro surcharge, 3 euro reduced</b>, until 27 September 2026.' },
+    { id:'gg',    name:'Gemäldegalerie',    where:'Kulturforum, Matthäikirchplatz',     full:1400, half:700 },
+    { id:'kf',    name:'Kulturforum day ticket', where:'All Kulturforum museums, one day',        full:2200, half:1100 },
+    { id:'hbf',   name:'Hamburger Bahnhof',      where:'Invalidenstraße 50-51, Moabit', full:1600, half:800 },
+    { id:'bg',    name:'Berlinische Galerie',    where:'Alte Jakobstraße 124-128, Kreuzberg', full:1200, half:700,
+      note:'This one is a Berlin city museum, not a state museum, so the reduced ticket is a flat <b>7 euro</b> rather than half of 12. On the <b>first Wednesday of every month</b> everyone pays that 7 euro price, whatever you can or cannot show.' }
+  ];
+
+  var ISLAND_PASS = { full:2400, half:1200, name:'Museumsinsel-Ticket' };
+
+  var counts = { adult:2 };
+  var venueId = 'neues';
+
+  var addersEl = document.getElementById('adders');
+  var rosterEl = document.getElementById('roster');
+  var venuesEl = document.getElementById('venues');
+  var slipEl   = document.getElementById('slip');
+
+  function euro(cents) { return (cents / 100).toFixed(2).replace('.', ',') + ' €'; }
+  function bandLabel(band) { return band === 'full' ? 'Full price' : band === 'half' ? 'Reduced' : 'Free'; }
+  function venue() { return VENUES.filter(function (v) { return v.id === venueId; })[0]; }
+  function priceFor(person, v) { return person.band === 'full' ? v.full : person.band === 'half' ? v.half : 0; }
+  function headcount() { var n = 0; PEOPLE.forEach(function (p) { n += counts[p.id] || 0; }); return n; }
+
+  function buildAdders() {
+    PEOPLE.forEach(function (p) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'add';
+      b.innerHTML = '<span class="an">' + p.name + '</span><span class="ap ' + p.band + '">' + bandLabel(p.band) + '</span>';
+      b.setAttribute('aria-label', 'Add one ' + p.name.toLowerCase() + ' to the group');
+      b.addEventListener('click', function () { counts[p.id] = (counts[p.id] || 0) + 1; render(); });
+      addersEl.appendChild(b);
+    });
+  }
+
+  function buildVenues() {
+    VENUES.forEach(function (v) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'ven';
+      b.textContent = v.name;
+      b.dataset.id = v.id;
+      b.addEventListener('click', function () { venueId = v.id; render(); });
+      venuesEl.appendChild(b);
+    });
+  }
+
+  function renderRoster() {
+    rosterEl.innerHTML = '';
+    PEOPLE.forEach(function (p) {
+      var n = counts[p.id] || 0;
+      if (!n) return;
+      var li = document.createElement('li');
+      li.className = 'rrow';
+      var name = document.createElement('div');
+      name.className = 'rname';
+      name.innerHTML = p.name + '<em>' + p.hint + '</em>';
+      var minus = document.createElement('button');
+      minus.type = 'button'; minus.className = 'rbtn'; minus.textContent = '−';
+      minus.setAttribute('aria-label', 'Remove one ' + p.name.toLowerCase());
+      minus.addEventListener('click', function () { counts[p.id] = Math.max(0, (counts[p.id] || 0) - 1); render(); });
+      var num = document.createElement('span');
+      num.className = 'rcount'; num.textContent = String(n);
+      var plus = document.createElement('button');
+      plus.type = 'button'; plus.className = 'rbtn'; plus.textContent = '+';
+      plus.setAttribute('aria-label', 'Add one ' + p.name.toLowerCase());
+      plus.addEventListener('click', function () { counts[p.id] = (counts[p.id] || 0) + 1; render(); });
+      li.appendChild(name); li.appendChild(minus); li.appendChild(num); li.appendChild(plus);
+      rosterEl.appendChild(li);
+    });
+  }
+
+  function renderVenues() {
+    Array.prototype.forEach.call(venuesEl.children, function (b) {
+      b.classList.toggle('sel', b.dataset.id === venueId);
+      b.setAttribute('aria-pressed', b.dataset.id === venueId ? 'true' : 'false');
+    });
+  }
+
+  function renderSlip() {
+    var v = venue();
+    var head = '<div class="slip-h"><p class="slip-brand">BERLINWALK TICKET DESK</p>'
+      + '<p class="slip-ven">' + v.name + '</p><p class="slip-add">' + v.where + '</p></div>';
+
+    if (!headcount()) {
+      slipEl.innerHTML = head + '<p class="empty">Nobody is in the group yet. Add the people who will actually walk up to the counter and the slip prices itself.</p>';
+      return;
+    }
+
+    var total = 0, fullTotal = 0, lines = '';
+    PEOPLE.forEach(function (p) {
+      var n = counts[p.id] || 0;
+      if (!n) return;
+      var each = priceFor(p, v);
+      total += each * n;
+      fullTotal += v.full * n;
+      lines += '<li class="line"><div class="l-txt"><div class="l-who">' + n + ' × ' + p.name
+        + (p.band === 'half' ? ' (reduced)' : '') + '</div>'
+        + (p.doc ? '<div class="l-doc"><b>Show:</b> ' + p.doc + '</div>' : '')
+        + '</div><div class="l-amt' + (each ? '' : ' free') + '">' + (each ? euro(each * n) : 'free') + '</div></li>';
+    });
+
+    var saved = fullTotal - total;
+    var savedHtml = saved > 0
+      ? '<p class="saved">Carrying the right documents takes ' + euro(saved) + ' off this desk. Left in a hotel room, it is ' + euro(fullTotal) + '.</p>'
+      : '<p class="saved">Everyone here pays full price, so there is nothing to prove at the counter. Put the money towards the things in Berlin that are free anyway.</p>';
+
+    var extra = '';
+    if (v.note) extra += '<p class="note">' + v.note + '</p>';
+    if (v.island) {
+      var pass = 0;
+      PEOPLE.forEach(function (p) {
+        var n = counts[p.id] || 0;
+        if (!n) return;
+        pass += (p.band === 'full' ? ISLAND_PASS.full : p.band === 'half' ? ISLAND_PASS.half : 0) * n;
+      });
+      var breakEven = Math.ceil(ISLAND_PASS.full / v.full);
+      extra += '<p class="note">This one sits on Museum Island, so the day-long <b>' + ISLAND_PASS.name
+        + '</b> is on the same counter: ' + euro(pass) + ' for this group, every island museum included, against ' + euro(total)
+        + ' for this museum alone. It overtakes single tickets from your <b>' + breakEven + 'nd museum in one day</b>'
+        + (v.id === 'ang' ? ', and the Cassirer surcharge is still payable here on top of it' : '') + '.</p>';
+    }
+
+    slipEl.innerHTML = head + '<ul class="lines">' + lines + '</ul>'
+      + '<div class="total"><span class="t-txt">Group total</span><span class="t-amt">' + euro(total) + '</span></div>'
+      + savedHtml + extra;
+  }
+
+  function render() { renderRoster(); renderVenues(); renderSlip(); }
+
+  buildAdders();
+  buildVenues();
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

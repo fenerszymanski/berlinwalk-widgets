@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>InnoTrans Three-Evening Board | BerlinWalk</title>
+    <meta name="description" content="A practical post-fair evening board for InnoTrans visitors in Berlin." />
+    <link rel="stylesheet" href="../css/brand.css" />
+    <style>
+      :root {
+        --ink: #112326;
+        --night: #0b171a;
+        --rail: #284047;
+        --paper: #f7f3e8;
+        --sand: #e7dfc7;
+        --signal: #ffe600;
+        --mint: #dcebd7;
+        --red: #bd4845;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: transparent; color: var(--ink); }
+      .itb {
+        width: min(1060px, 100%);
+        margin: 0 auto;
+        overflow: hidden;
+        border: 1px solid #294047;
+        background: var(--paper);
+        box-shadow: 0 18px 42px rgba(11, 23, 26, .15);
+      }
+      .itb__mast {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 28px;
+        padding: 27px 29px 24px;
+        color: #fff;
+        background: linear-gradient(120deg, var(--night), #173137);
+      }
+      .itb__eyebrow {
+        margin: 0 0 9px;
+        color: var(--signal);
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+      }
+      .itb h1 { margin: 0; font-size: clamp(28px, 4vw, 47px); line-height: 1.02; letter-spacing: -.035em; }
+      .itb__mast p { max-width: 680px; margin: 12px 0 0; color: #d9e5e0; font-size: 14px; line-height: 1.6; }
+      .itb__stamp {
+        align-self: start;
+        min-width: 175px;
+        padding: 12px 13px;
+        border: 1px solid rgba(255,255,255,.23);
+        color: #e9efea;
+        font-size: 11px;
+        line-height: 1.5;
+      }
+      .itb__stamp strong { display: block; color: var(--signal); font-size: 12px; letter-spacing: .07em; text-transform: uppercase; }
+      .itb__layout { display: grid; grid-template-columns: 286px minmax(0, 1fr); }
+      .itb__controls { padding: 23px; color: #eff6f1; background: var(--rail); }
+      .itb__controls h2 { margin: 0 0 17px; color: #fff; font-size: 17px; line-height: 1.25; }
+      .itb__field { display: grid; gap: 7px; margin: 0 0 14px; }
+      .itb__field span { color: #cee0da; font-size: 10px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+      .itb select {
+        width: 100%;
+        min-height: 43px;
+        padding: 9px 34px 9px 11px;
+        border: 1px solid rgba(255,255,255,.25);
+        border-radius: 0;
+        color: #fff;
+        background: #173137;
+        font: 700 13px Montserrat, Arial, sans-serif;
+      }
+      .itb select option { color: var(--ink); background: #fff; }
+      .itb__rule { margin: 18px 0; border: 0; border-top: 1px solid rgba(255,255,255,.18); }
+      .itb__control-note { margin: 0; color: #d8e6df; font-size: 12px; line-height: 1.55; }
+      .itb__board { padding: 24px 26px 27px; }
+      .itb__board-head { display: flex; align-items: start; justify-content: space-between; gap: 16px; padding-bottom: 16px; border-bottom: 2px solid var(--ink); }
+      .itb__board-head h2 { margin: 0; font-size: 20px; letter-spacing: -.02em; }
+      .itb__board-head p { max-width: 570px; margin: 6px 0 0; color: #526160; font-size: 13px; line-height: 1.5; }
+      .itb__finish { flex: 0 0 auto; padding: 6px 8px; color: #18352b; background: var(--mint); font-size: 11px; font-weight: 900; text-align: right; }
+      .itb__tracks { position: relative; display: grid; gap: 0; margin-top: 12px; }
+      .itb__tracks::before { content: ""; position: absolute; top: 17px; bottom: 22px; left: 82px; width: 2px; background: var(--sand); }
+      .itb__stop { position: relative; display: grid; grid-template-columns: 67px minmax(0, 1fr); gap: 20px; padding: 14px 0 14px 0; }
+      .itb__time { position: relative; padding-top: 10px; color: #526160; font-size: 12px; font-weight: 900; text-align: right; }
+      .itb__time::after { content: ""; position: absolute; z-index: 1; top: 10px; right: -20px; width: 11px; height: 11px; border: 3px solid var(--paper); border-radius: 50%; background: var(--red); }
+      .itb__stop:nth-child(2) .itb__time::after { background: #668c4c; }
+      .itb__stop:nth-child(3) .itb__time::after { background: #e3a419; }
+      .itb__carriage { padding: 15px 16px 16px; border: 1px solid #d8d3c3; background: #fffdf7; }
+      .itb__carriage small { display: block; margin-bottom: 5px; color: #6a766e; font-size: 10px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+      .itb__carriage h3 { margin: 0; color: var(--ink); font-size: 18px; line-height: 1.2; }
+      .itb__carriage p { margin: 7px 0 0; color: #394847; font-size: 13px; line-height: 1.55; }
+      .itb__carriage b { color: #1b5e20; }
+      .itb__bottom { display: flex; align-items: center; justify-content: space-between; gap: 17px; flex-wrap: wrap; margin-top: 18px; padding-top: 17px; border-top: 1px solid #d8d3c3; }
+      .itb__bottom p { flex: 1 1 380px; margin: 0; color: #526160; font-size: 11.5px; line-height: 1.55; }
+      .itb__cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 11px 14px;
+        color: #123d18 !important;
+        background: var(--signal);
+        font-size: 12px;
+        font-weight: 900;
+        text-decoration: none;
+      }
+      .itb__cta:hover, .itb__cta:focus { color: #123d18 !important; background: #f4da00; outline: 2px solid #123d18; outline-offset: 2px; }
+      .itb__tour { color: #1b5e20; font-weight: 800; text-decoration: underline; }
+      @media (max-width: 720px) {
+        .itb__mast, .itb__layout { grid-template-columns: 1fr; }
+        .itb__mast { gap: 18px; padding: 22px 20px; }
+        .itb__stamp { width: 100%; }
+        .itb__controls, .itb__board { padding: 20px; }
+      }
+      @media (max-width: 430px) {
+        .itb__board-head { display: block; }
+        .itb__finish { display: inline-block; margin-top: 11px; }
+        .itb__tracks::before { left: 66px; }
+        .itb__stop { grid-template-columns: 52px minmax(0, 1fr); gap: 18px; }
+        .itb__time { font-size: 11px; }
+        .itb__time::after { right: -19px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="itb">
+      <header class="itb__mast">
+        <div>
+          <p class="itb__eyebrow">InnoTrans evening board</p>
+          <h1>Three hours after the fair, without turning Berlin into another trade show.</h1>
+          <p>Start with the side of the city where you are sleeping. The useful evening is the one that leaves enough energy for tomorrow.</p>
+        </div>
+        <aside class="itb__stamp" aria-label="Published InnoTrans 2026 facts">
+          <strong>22–25 Sep 2026</strong>
+          Trade visitors only.<br />Tue–Thu 09:00–18:00<br />Fri 09:00–16:00
+        </aside>
+      </header>
+
+      <div class="itb__layout">
+        <section class="itb__controls" aria-label="Choose your InnoTrans evening">
+          <h2>Set your departure point</h2>
+          <label class="itb__field"><span>Fair day</span>
+            <select id="itb-day">
+              <option value="tue">Tuesday, 22 September</option>
+              <option value="wed">Wednesday, 23 September</option>
+              <option value="thu">Thursday, 24 September</option>
+              <option value="fri">Friday, 25 September</option>
+            </select>
+          </label>
+          <label class="itb__field"><span>Hotel side</span>
+            <select id="itb-hotel">
+              <option value="west">City West / near Messe</option>
+              <option value="centre">Mitte / central</option>
+              <option value="east">East / Friedrichshain side</option>
+            </select>
+          </label>
+          <label class="itb__field"><span>Energy</span>
+            <select id="itb-energy">
+              <option value="low">My head is full</option>
+              <option value="steady">I can still walk and eat</option>
+              <option value="late">I want one proper Berlin evening</option>
+            </select>
+          </label>
+          <label class="itb__field"><span>Networking</span>
+            <select id="itb-network">
+              <option value="none">No meetings tonight</option>
+              <option value="one">One short catch-up</option>
+              <option value="group">A small group dinner</option>
+            </select>
+          </label>
+          <hr class="itb__rule" />
+          <p class="itb__control-note">The selected day changes the recovery and travel strategy, not the published fair timetable. Recheck the organiser’s instructions, your ticket and public transport before you leave the grounds.</p>
+        </section>
+
+        <section class="itb__board" aria-live="polite">
+          <div class="itb__board-head">
+            <div>
+              <h2 id="itb-title">Stay on the west side first.</h2>
+              <p id="itb-lead"></p>
+            </div>
+            <span class="itb__finish" id="itb-finish">Published finish: 18:00</span>
+          </div>
+          <div class="itb__tracks" id="itb-tracks"></div>
+          <div class="itb__bottom">
+            <p>For a daytime gap, you can <a class="itb__tour" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_top">check live availability for my 2-hour historic-centre walk</a>. Do not build a fair day around it until the booking page confirms a place.</p>
+            <a class="itb__cta" href="https://www.berlinwalk.com/berlin-trip-planner" target="_top">Build the rest of my Berlin days</a>
+          </div>
+        </section>
+      </div>
+    </main>
+    <script src="../js/brand.js"></script>
+    <script>
+      (function () {
+        var day = document.getElementById('itb-day');
+        var hotel = document.getElementById('itb-hotel');
+        var energy = document.getElementById('itb-energy');
+        var network = document.getElementById('itb-network');
+        var title = document.getElementById('itb-title');
+        var lead = document.getElementById('itb-lead');
+        var finish = document.getElementById('itb-finish');
+        var tracks = document.getElementById('itb-tracks');
+
+        var routes = {
+          west: {
+            title: 'Let City West be enough for tonight.',
+            anchor: 'Messe Süd / Westkreuz',
+            dinner: 'Kantstraße and Savignyplatz',
+            close: 'Savignyplatz',
+            travel: 'Keep the first move short: leave from the Messe side and do not cross the whole city before dinner.'
+          },
+          centre: {
+            title: 'Make one clean move toward the centre.',
+            anchor: 'Messe Süd to Potsdamer Platz',
+            dinner: 'Potsdamer Platz and the Kulturforum edge',
+            close: 'the Tiergarten side of Potsdamer Platz',
+            travel: 'A direct S-Bahn move is sensible here. Do not add a second transfer until you know how much energy is left.'
+          },
+          east: {
+            title: 'Only go east if you are actually sleeping east.',
+            anchor: 'Messe Süd to Alexanderplatz',
+            dinner: 'Alexanderplatz, Nikolaiviertel and the Spree edge',
+            close: 'Nikolaiviertel by the river',
+            travel: 'The cross-city ride is real. Treat it as the evening’s one long move, then keep every later stop close together.'
+          }
+        };
+
+        var dayProfiles = {
+          tue: {
+            name: 'Tuesday',
+            finish: '18:00',
+            times: ['18:15', '19:15', '20:45'],
+            title: 'Treat Tuesday as a landing night.',
+            lead: 'Tuesday is the first full fair evening. Keep one district and learn what a full day at the fair actually leaves you for.',
+            leave: 'Use the first 45 minutes to leave the fair edge, open your live route and make no second-district commitment yet.',
+            eat: 'Make dinner the only fixed social move tonight.',
+            close: 'Finish with a short local close so Wednesday starts without a late-night recovery bill.',
+            labels: ['Leave', 'Eat', 'Close early']
+          },
+          wed: {
+            name: 'Wednesday',
+            finish: '18:00',
+            times: ['18:15', '19:15', '20:45'],
+            title: 'Keep Wednesday compact and local.',
+            lead: 'By Wednesday, reduce choices rather than adding a second district. A straightforward meal and direct route back protects the next fair day.',
+            leave: 'Use the first 45 minutes to leave the fair edge, then take the simplest route toward your hotel side.',
+            eat: 'Put any useful catch-up inside one meal area rather than turning it into a separate cross-city stop.',
+            close: 'Make the final block optional and keep the return route obvious before the evening gets late.',
+            labels: ['Leave', 'Catch up', 'Return-ready close']
+          },
+          thu: {
+            name: 'Thursday',
+            finish: '18:00',
+            times: ['18:15', '19:15', '20:45'],
+            title: 'Use Thursday to make Friday easier.',
+            lead: 'Thursday is the last 18:00 fair finish before Friday’s earlier close. Keep the final block optional and leave room for a simple reset.',
+            leave: 'Use the first 45 minutes to leave the fair edge and decide whether the evening needs food, a short walk or simply a direct return.',
+            eat: 'Keep the meal near the route you will want to use again tomorrow, not in a second district for its own sake.',
+            close: 'Use the last block for one local close or a practical reset, rather than trying to make Thursday the biggest night.',
+            labels: ['Leave', 'Eat nearby', 'Reset']
+          },
+          fri: {
+            name: 'Friday',
+            finish: '16:00',
+            times: ['16:15', '17:15', '19:00'],
+            title: 'Use Friday’s early finish for one longer move.',
+            lead: 'Friday’s published 16:00 finish gives you an earlier departure. Use the extra daylight for one district, not a city-wide catch-up.',
+            leave: 'Leave the fair edge while there is still daylight, open your live route and make the cross-city move only once.',
+            eat: 'Take an earlier meal in the district you chose, then decide whether a longer walk still feels useful.',
+            close: 'Use the final block as the one proper Berlin close for the week, without adding another district afterwards.',
+            labels: ['Leave in daylight', 'Eat earlier', 'One longer close']
+          }
+        };
+
+        function timeFor(profile, step) {
+          return profile.times[step];
+        }
+
+        function networkLine(area) {
+          if (network.value === 'group') return 'For a small group, agree on one table area around ' + area + ' before anyone leaves the fair.';
+          if (network.value === 'one') return 'Make the catch-up a 40-minute coffee or drink near ' + area + ', then let both people go their own way.';
+          return 'No meeting to protect: choose the first simple meal that feels right rather than waiting for a perfect table.';
+        }
+
+        function energyLine(route) {
+          if (energy.value === 'low') return 'Keep the last block optional. A short walk near ' + route.close + ' is enough after a full exhibition day.';
+          if (energy.value === 'late') return 'After dinner, take one unhurried walk around ' + route.close + '. Stop there rather than adding a second district.';
+          return 'After dinner, give yourself one local landmark and one direct route back to the hotel.';
+        }
+
+        function draw() {
+          var route = routes[hotel.value];
+          var profile = dayProfiles[day.value];
+          finish.textContent = profile.name + ' published finish: ' + profile.finish;
+          title.textContent = profile.title + ' ' + route.title;
+          lead.textContent = profile.lead + ' ' + route.travel + ' The board below gives the evening three blocks, not a list of places to chase.';
+          var blocks = [
+            { label: profile.labels[0], heading: route.anchor, text: profile.leave },
+            { label: profile.labels[1], heading: route.dinner, text: profile.eat + ' ' + networkLine(route.dinner) + ' This is a dining area, not a restaurant ranking.' },
+            { label: profile.labels[2], heading: route.close, text: profile.close + ' ' + energyLine(route) }
+          ];
+          tracks.innerHTML = '';
+          blocks.forEach(function (block, index) {
+            var row = document.createElement('article');
+            row.className = 'itb__stop';
+            row.innerHTML = '<div class="itb__time"></div><div class="itb__carriage"><small></small><h3></h3><p></p></div>';
+            row.querySelector('.itb__time').textContent = timeFor(profile, index);
+            row.querySelector('small').textContent = 'Block ' + (index + 1) + ' · ' + block.label;
+            row.querySelector('h3').textContent = block.heading;
+            row.querySelector('p').textContent = block.text;
+            tracks.appendChild(row);
+          });
+        }
+        [day, hotel, energy, network].forEach(function (field) { field.addEventListener('change', draw); });
+        draw();
+      })();
+    </script>
+  </body>
+</html>

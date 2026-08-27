@@ -1,0 +1,9 @@
+{
+  "_comment": "Short on-screen reveal lines per photo id. Keep under ~95 chars so they fit two lines in the reel. If an id is missing, make-reel.mjs falls back to the photo title only and prints a warning.",
+  "ph_001": "Potsdamer Platz as Berlin's electric crossroads — traffic tower and all.",
+  "ph_002": "Constitution Day crowds at the Gate, long before the Cold War postcard.",
+  "ph_003": "Tempelhof already drawing crowds — years before the Airlift made it famous.",
+  "ph_004": "The whole city grinds to a halt — one year before everything changes.",
+  "ph_008": "August 1961 — the Wall goes up, and the Gate closes for 28 years.",
+  "ph_010": "9 November — hours after the announcement, the city simply walks through."
+}

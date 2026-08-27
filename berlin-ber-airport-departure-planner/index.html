@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BER Airport Departure Planner | BerlinWalk</title>
+  <meta name="description" content="Plan when to leave for Berlin BER Airport based on terminal, baggage, flight type, time and transport.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-ber-departure">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-ber-departure {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-light: #C5E1A5;
+      --bw-cream: #FAFAF5;
+      --bw-white: #FFFFFF;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-red: #E63946;
+      --bw-border: #D9E7C8;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 28px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-ber-departure *,
+    #bw-ber-departure *::before,
+    #bw-ber-departure *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-ber-departure .bw-shell {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-ber-departure .bw-head {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.16), rgba(124, 179, 66, 0.18)),
+        var(--bw-green);
+      color: var(--bw-white);
+      padding: 20px;
+    }
+
+    #bw-ber-departure .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      margin: 0 0 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-ber-departure h2,
+    #bw-ber-departure h3,
+    #bw-ber-departure p {
+      margin-top: 0;
+    }
+
+    #bw-ber-departure .bw-title {
+      color: var(--bw-white);
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    #bw-ber-departure .bw-sub {
+      color: #DDEFC7;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 9px 0 0;
+      max-width: 840px;
+    }
+
+    #bw-ber-departure .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(270px, 0.82fr) minmax(0, 1.18fr);
+      padding: 18px 20px 20px;
+    }
+
+    #bw-ber-departure .bw-panel,
+    #bw-ber-departure .bw-result,
+    #bw-ber-departure .bw-mini {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 14px;
+    }
+
+    #bw-ber-departure .bw-form {
+      display: grid;
+      gap: 12px;
+    }
+
+    #bw-ber-departure label {
+      display: block;
+      min-width: 0;
+    }
+
+    #bw-ber-departure .bw-label {
+      color: var(--bw-green);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.1px;
+      line-height: 1.3;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-ber-departure select {
+      appearance: none;
+      background:
+        linear-gradient(45deg, transparent 50%, var(--bw-green) 50%) right 14px center / 8px 8px no-repeat,
+        linear-gradient(135deg, var(--bw-green) 50%, transparent 50%) right 9px center / 8px 8px no-repeat,
+        var(--bw-white);
+      border: 1.5px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font: inherit;
+      font-size: 15px;
+      font-weight: 850;
+      line-height: 1.25;
+      min-height: 44px;
+      padding: 9px 34px 9px 10px;
+      width: 100%;
+    }
+
+    #bw-ber-departure select:focus-visible,
+    #bw-ber-departure button:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.82);
+      outline-offset: 2px;
+    }
+
+    #bw-ber-departure .bw-choice-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-ber-departure button {
+      background: var(--bw-white);
+      border: 1px solid rgba(124, 179, 66, 0.45);
+      border-radius: 8px;
+      color: var(--bw-green);
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.25;
+      min-height: 42px;
+      padding: 9px 10px;
+      text-align: center;
+    }
+
+    #bw-ber-departure button[aria-pressed="true"] {
+      background: var(--bw-yellow);
+      border-color: rgba(27, 94, 32, 0.38);
+      color: var(--bw-green);
+      box-shadow: inset 0 -2px 0 rgba(27, 94, 32, 0.2);
+    }
+
+    #bw-ber-departure .bw-note {
+      background: #F2F8E8;
+      border: 1px solid rgba(124, 179, 66, 0.32);
+      border-radius: 8px;
+      color: var(--bw-muted);
+      font-size: 12.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 0;
+      padding: 10px;
+    }
+
+    #bw-ber-departure .bw-result {
+      border-color: rgba(27, 94, 32, 0.25);
+      display: grid;
+      gap: 12px;
+    }
+
+    #bw-ber-departure .bw-pill {
+      align-items: center;
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      color: var(--bw-green);
+      display: inline-flex;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      padding: 6px 9px;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+
+    #bw-ber-departure .bw-verdict {
+      color: var(--bw-green);
+      font-size: 25px;
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 1.13;
+      margin: 0;
+    }
+
+    #bw-ber-departure .bw-lead {
+      color: var(--bw-muted);
+      font-size: 14px;
+      font-weight: 650;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    #bw-ber-departure .bw-timeline {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-ber-departure .bw-step {
+      background: var(--bw-cream);
+      border: 1px solid rgba(124, 179, 66, 0.32);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 10px;
+    }
+
+    #bw-ber-departure .bw-step strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 17px;
+      font-weight: 950;
+      line-height: 1.15;
+      margin-bottom: 4px;
+    }
+
+    #bw-ber-departure .bw-step span {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 11.5px;
+      font-weight: 750;
+      line-height: 1.35;
+    }
+
+    #bw-ber-departure .bw-actions {
+      display: grid;
+      gap: 8px;
+    }
+
+    #bw-ber-departure .bw-action {
+      align-items: start;
+      background: #F8FBF0;
+      border-left: 5px solid var(--bw-lime);
+      border-radius: 8px;
+      color: var(--bw-text);
+      display: grid;
+      font-size: 13px;
+      font-weight: 700;
+      gap: 2px;
+      line-height: 1.45;
+      padding: 10px 11px;
+    }
+
+    #bw-ber-departure .bw-action strong {
+      color: var(--bw-green);
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+    }
+
+    #bw-ber-departure .bw-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-ber-departure .bw-mini h3 {
+      color: var(--bw-green);
+      font-size: 14px;
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 1.25;
+      margin: 0 0 6px;
+    }
+
+    #bw-ber-departure .bw-mini p {
+      color: var(--bw-muted);
+      font-size: 12.5px;
+      font-weight: 650;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    #bw-ber-departure .bw-link {
+      color: var(--bw-green);
+      font-weight: 900;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+    }
+
+    @media (max-width: 760px) {
+      #bw-ber-departure {
+        margin: 18px 0;
+      }
+
+      #bw-ber-departure .bw-head {
+        padding: 18px 16px;
+      }
+
+      #bw-ber-departure .bw-title {
+        font-size: 23px;
+      }
+
+      #bw-ber-departure .bw-body,
+      #bw-ber-departure .bw-grid,
+      #bw-ber-departure .bw-timeline {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-ber-departure .bw-body {
+        gap: 12px;
+        padding: 14px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      #bw-ber-departure .bw-choice-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-ber-departure .bw-verdict {
+        font-size: 22px;
+      }
+    }
+  </style>
+
+  <section class="bw-shell" aria-labelledby="bw-ber-title">
+    <header class="bw-head">
+      <p class="bw-kicker">BerlinWalk Airport Tool</p>
+      <h2 class="bw-title" id="bw-ber-title">BER Airport Departure Planner</h2>
+      <p class="bw-sub">Choose your flight situation and get a practical Berlin-to-BER timing plan. Use it as a planning guide, then check your airline and live transport before you leave.</p>
+    </header>
+
+    <div class="bw-body">
+      <div class="bw-panel">
+        <form class="bw-form" id="bw-ber-form">
+          <label>
+            <span class="bw-label">Flight type</span>
+            <select id="flightType">
+              <option value="schengen">Schengen / short-haul</option>
+              <option value="nonSchengen">Non-Schengen / passport control</option>
+              <option value="longHaul">Long-haul or complex airline check-in</option>
+            </select>
+          </label>
+
+          <label>
+            <span class="bw-label">Baggage</span>
+            <select id="baggage">
+              <option value="hand">Hand baggage only</option>
+              <option value="checked">Checked bag or bag drop</option>
+              <option value="special">Oversized bag, VAT refund or paperwork</option>
+            </select>
+          </label>
+
+          <label>
+            <span class="bw-label">Terminal</span>
+            <select id="terminal">
+              <option value="t1">Terminal 1</option>
+              <option value="t2">Terminal 2</option>
+              <option value="unknown">Not sure yet</option>
+            </select>
+          </label>
+
+          <label>
+            <span class="bw-label">Departure time</span>
+            <select id="time">
+              <option value="normal">Daytime / normal evening</option>
+              <option value="early">Very early flight</option>
+              <option value="late">Late-night departure</option>
+            </select>
+          </label>
+
+          <div>
+            <span class="bw-label">How are you getting there?</span>
+            <div class="bw-choice-grid" role="group" aria-label="Transport choice">
+              <button type="button" class="transport" data-value="train" aria-pressed="true">Train / S-Bahn</button>
+              <button type="button" class="transport" data-value="taxi" aria-pressed="false">Taxi / ride app</button>
+              <button type="button" class="transport" data-value="mixed" aria-pressed="false">Not decided</button>
+              <button type="button" class="transport" data-value="group" aria-pressed="false">Family / group</button>
+            </div>
+          </div>
+
+          <p class="bw-note">BER is in fare zone C. From central Berlin, most visitors need an ABC ticket unless their pass already covers zone C.</p>
+        </form>
+      </div>
+
+      <div class="bw-result" aria-live="polite">
+        <span class="bw-pill" id="risk">Comfortable plan</span>
+        <h3 class="bw-verdict" id="verdict">Reach BER about 2 hours before departure.</h3>
+        <p class="bw-lead" id="lead">This is enough for a normal Schengen flight with hand baggage when you have a clean route and your airline does not require extra desk time.</p>
+
+        <div class="bw-timeline" aria-label="Suggested timing">
+          <div class="bw-step">
+            <strong id="leaveCity">3h 00m</strong>
+            <span>Before flight: leave central Berlin</span>
+          </div>
+          <div class="bw-step">
+            <strong id="reachAirport">2h 00m</strong>
+            <span>Before flight: be at the terminal</span>
+          </div>
+          <div class="bw-step">
+            <strong id="security">ASAP</strong>
+            <span>After bag drop: go to security</span>
+          </div>
+        </div>
+
+        <div class="bw-actions" id="actions"></div>
+
+        <div class="bw-grid">
+          <div class="bw-mini">
+            <h3>Train plan</h3>
+            <p>Check FEX, regional trains and S-Bahn live in BVG, VBB or DB Navigator. Do not trust yesterday's screenshot during construction work.</p>
+          </div>
+          <div class="bw-mini">
+            <h3>Security habit</h3>
+            <p>Pack liquids as 100 ml containers in a 1-liter bag. If you get a newer CT lane, it only makes the process easier.</p>
+          </div>
+          <div class="bw-mini">
+            <h3>Terminal 2</h3>
+            <p>Terminal 2 is walkable from Terminal 1, but add a small buffer if you have luggage, children or a tight boarding time.</p>
+          </div>
+          <div class="bw-mini">
+            <h3>After BerlinWalk</h3>
+            <p>A <a class="bw-link" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_blank" rel="noopener">2 hours BerlinWalk tour</a> works best before a later flight, not a tight airport run.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      const root = document.getElementById('bw-ber-departure');
+      const fields = {
+        flightType: root.querySelector('#flightType'),
+        baggage: root.querySelector('#baggage'),
+        terminal: root.querySelector('#terminal'),
+        time: root.querySelector('#time')
+      };
+      const buttons = Array.from(root.querySelectorAll('.transport'));
+      const output = {
+        risk: root.querySelector('#risk'),
+        verdict: root.querySelector('#verdict'),
+        lead: root.querySelector('#lead'),
+        leaveCity: root.querySelector('#leaveCity'),
+        reachAirport: root.querySelector('#reachAirport'),
+        security: root.querySelector('#security'),
+        actions: root.querySelector('#actions')
+      };
+      let transport = 'train';
+
+      function fmt(minutes) {
+        const h = Math.floor(minutes / 60);
+        const m = minutes % 60;
+        return h ? `${h}h ${String(m).padStart(2, '0')}m` : `${m}m`;
+      }
+
+      function action(title, text) {
+        return `<div class="bw-action"><strong>${title}</strong><span>${text}</span></div>`;
+      }
+
+      function calculate() {
+        let airport = 120;
+        let city = 60;
+        const notes = [];
+
+        if (fields.flightType.value === 'nonSchengen') {
+          airport += 25;
+          notes.push(action('Passport control', 'Add time for non-Schengen gates and document checks, especially if you also have checked luggage.'));
+        }
+        if (fields.flightType.value === 'longHaul') {
+          airport += 45;
+          notes.push(action('Long-haul buffer', 'Use your airline deadline as the hard rule and keep a larger airport buffer.'));
+        }
+        if (fields.baggage.value === 'checked') {
+          airport += 30;
+          notes.push(action('Bag drop', 'Checked luggage means desk or machine time before security. Do not plan only for the security queue.'));
+        }
+        if (fields.baggage.value === 'special') {
+          airport += 55;
+          notes.push(action('Paperwork mode', 'VAT refunds, oversized luggage, pets or special documents need their own buffer before security.'));
+        }
+        if (fields.terminal.value === 't2') {
+          airport += 10;
+          notes.push(action('Terminal 2 walk', 'The airport station is under Terminal 1. Terminal 2 is close, but the walk still counts.'));
+        }
+        if (fields.terminal.value === 'unknown') {
+          airport += 15;
+          notes.push(action('Check terminal', 'Find your terminal before leaving Berlin. Terminal uncertainty is a cheap problem to fix early.'));
+        }
+        if (fields.time.value === 'early') {
+          city += 25;
+          airport += 15;
+          notes.push(action('Early flight', 'Check night/early transport live. A taxi can be smarter than a fragile multi-transfer route.'));
+        }
+        if (fields.time.value === 'late') {
+          city += 15;
+          notes.push(action('Late departure', 'Public transport can still work, but check whether your route is train-first or night-bus-first.'));
+        }
+        if (transport === 'train') {
+          notes.push(action('Ticket zone', 'BER is in zone C. From central Berlin, use a Berlin ABC ticket unless your pass already includes C.'));
+        }
+        if (transport === 'taxi') {
+          city = Math.max(city, 50);
+          notes.push(action('Taxi buffer', 'A car removes platform stress, not traffic or bag-drop stress. Keep the airport buffer.'));
+        }
+        if (transport === 'mixed') {
+          city += 20;
+          notes.push(action('Decide now', 'Choose train or taxi before the final morning. Last-minute switching usually costs more time than it saves.'));
+        }
+        if (transport === 'group') {
+          city += 20;
+          airport += 20;
+          notes.push(action('Group pace', 'Families and groups move slower through tickets, lifts, toilets, bag drop and security.'));
+        }
+
+        const total = airport + city;
+        let risk = 'Comfortable plan';
+        let lead = 'This gives you a realistic airport buffer without turning the whole day into waiting.';
+        if (airport >= 190) {
+          risk = 'High-buffer plan';
+          lead = 'Your situation has enough moving parts that a larger BER buffer is the sensible choice.';
+        } else if (airport <= 125 && city <= 65) {
+          risk = 'Lean but normal';
+          lead = 'This works only if your route is clean, you are checked in, and your airline has no extra desk requirement.';
+        }
+
+        output.risk.textContent = risk;
+        output.verdict.textContent = `Reach BER about ${fmt(airport)} before departure.`;
+        output.lead.textContent = lead;
+        output.leaveCity.textContent = fmt(total);
+        output.reachAirport.textContent = fmt(airport);
+        output.security.textContent = fields.baggage.value === 'hand' ? 'Direct' : 'After bag drop';
+        output.actions.innerHTML = notes.slice(0, 4).join('');
+
+        if (window.BerlinWalkBrand && typeof window.BerlinWalkBrand.resize === 'function') {
+          window.BerlinWalkBrand.resize();
+        }
+      }
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          transport = button.dataset.value;
+          buttons.forEach((item) => item.setAttribute('aria-pressed', item === button ? 'true' : 'false'));
+          calculate();
+        });
+      });
+      Object.values(fields).forEach((field) => field.addEventListener('change', calculate));
+      calculate();
+    }());
+  </script>
+</div>
+</body>
+</html>

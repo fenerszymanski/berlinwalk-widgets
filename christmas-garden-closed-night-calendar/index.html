@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Christmas Garden leave-by ladder | BerlinWalk</title>
+  <meta name="description" content="Work backwards from a Christmas Garden entry time and your starting area, then check the live route and ticket conditions." />
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+  <main id="bw-garden-ladder">
+    <style>
+      body { margin: 0; background: #f5f8ef; }
+      #bw-garden-ladder {
+        --green: #1b5e20;
+        --deep-green: #123d18;
+        --yellow: #ffe600;
+        --lime: #7cb342;
+        --soft: #edf4e4;
+        --line: #cbdabb;
+        --ink: #212121;
+        --muted: #566154;
+        box-sizing: border-box;
+        color: var(--ink);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+        margin: 0 auto;
+        max-width: 720px;
+        padding: 14px;
+      }
+      #bw-garden-ladder * { box-sizing: border-box; }
+      .cg-card { background: #fff; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+      .cg-head { background: var(--green); color: #fff; padding: 18px; }
+      .cg-head p { color: #e1efcf; font-size: .91rem; line-height: 1.5; margin: 7px 0 0; max-width: 62ch; }
+      .cg-head h1 { font-size: clamp(1.2rem, 4.5vw, 1.7rem); line-height: 1.16; margin: 0; }
+      .cg-body { padding: 18px; }
+      .cg-label { color: var(--muted); font-size: .75rem; font-weight: 800; letter-spacing: .09em; margin: 0 0 8px; text-transform: uppercase; }
+      .cg-ledger { border-left: 4px solid var(--yellow); display: grid; gap: 10px; margin: 0 0 19px; padding: 11px 0 11px 13px; }
+      .cg-ledger-row { border-bottom: 1px solid #e5ecdd; padding-bottom: 9px; }
+      .cg-ledger-row:last-child { border-bottom: 0; padding-bottom: 0; }
+      .cg-ledger strong { display: block; font-size: .95rem; line-height: 1.35; }
+      .cg-ledger span { color: var(--muted); display: block; font-size: .88rem; line-height: 1.45; margin-top: 2px; }
+      .cg-form { border-top: 1px solid var(--line); padding-top: 17px; }
+      .cg-form h3 { font-size: 1.08rem; line-height: 1.25; margin: 0 0 4px; }
+      .cg-form > p { color: var(--muted); font-size: .91rem; line-height: 1.45; margin: 0 0 13px; }
+      .cg-fields { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .cg-field { display: grid; gap: 6px; }
+      .cg-field label { font-size: .86rem; font-weight: 750; line-height: 1.35; }
+      .cg-field select { appearance: none; background: #fff; border: 1.5px solid var(--line); border-radius: 10px; color: var(--ink); font: inherit; line-height: 1.35; min-height: 48px; padding: 10px; width: 100%; }
+      .cg-field select:focus-visible, .cg-links a:focus-visible { outline: 3px solid var(--green); outline-offset: 2px; }
+      .cg-result { background: var(--soft); border: 1px solid #b9d1a1; border-radius: 14px; margin-top: 15px; padding: 15px; }
+      .cg-status { background: var(--yellow); color: var(--deep-green); display: inline-block; font-size: .74rem; font-weight: 850; letter-spacing: .07em; padding: 4px 7px; text-transform: uppercase; }
+      .cg-result h4 { font-size: 1.05rem; line-height: 1.3; margin: 10px 0 5px; }
+      .cg-result > p { font-size: .92rem; line-height: 1.48; margin: 0; }
+      .cg-steps { counter-reset: ladder; display: grid; gap: 9px; list-style: none; margin: 13px 0 0; padding: 0; }
+      .cg-steps li { align-items: start; display: grid; font-size: .9rem; gap: 9px; grid-template-columns: 27px 1fr; line-height: 1.48; }
+      .cg-steps li::before { align-items: center; background: var(--green); border-radius: 50%; color: #fff; content: counter(ladder); counter-increment: ladder; display: flex; font-size: .76rem; font-weight: 800; height: 25px; justify-content: center; margin-top: 1px; width: 25px; }
+      .cg-caution { border-top: 1px solid #b9d1a1; color: var(--muted); font-size: .84rem; line-height: 1.46; margin-top: 12px; padding-top: 10px; }
+      .cg-links { border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; line-height: 1.48; margin-top: 19px; padding-top: 12px; }
+      .cg-links a { color: var(--deep-green); font-weight: 800; }
+      @media (max-width: 520px) {
+        #bw-garden-ladder { padding: 9px; }
+        .cg-body { padding: 15px; }
+        .cg-fields { grid-template-columns: 1fr; }
+      }
+    </style>
+
+    <section class="cg-card" aria-labelledby="cg-title">
+      <header class="cg-head">
+        <h1 id="cg-title">Christmas Garden leave-by ladder</h1>
+        <p>Start from the possible ticket cue, then work backwards with your own live route. This is not a ticket-availability checker or a fixed Berlin journey promise.</p>
+      </header>
+
+      <div class="cg-body">
+        <p class="cg-label">Static blackout-date reference</p>
+        <div class="cg-ledger" aria-label="Christmas Garden schedule reference">
+          <div class="cg-ledger-row"><strong>Season</strong><span>18 November 2026 to 10 January 2027</span></div>
+          <div class="cg-ledger-row"><strong>Closed nights</strong><span>23, 24 and 30 November 2026; 7, 24 and 31 December 2026; 4 and 5 January 2027</span></div>
+          <div class="cg-ledger-row"><strong>Normal listed cue</strong><span>Last entry 19:20. Final route start 19:45.</span></div>
+          <div class="cg-ledger-row"><strong>Extended Fri/Sat cue</strong><span>18 December 2026 to 2 January 2027: last entry 20:20. Final route start 20:45.</span></div>
+        </div>
+
+        <section class="cg-form" aria-labelledby="cg-ladder-title">
+          <h3 id="cg-ladder-title">Build your reverse leave-by check</h3>
+          <p>Select a possible listed entry cue and your broad departure situation. Both are check cues only.</p>
+          <div class="cg-fields">
+            <div class="cg-field">
+              <label for="cg-entry">Possible entry cue</label>
+              <select id="cg-entry">
+                <option value="">Choose one</option>
+                <option value="normal">Normal listed last entry: 19:20</option>
+                <option value="extended">Extended Fri/Sat listed last entry: 20:20</option>
+                <option value="other">Another possible time shown by the organiser</option>
+              </select>
+            </div>
+            <div class="cg-field">
+              <label for="cg-area">Departure-area category</label>
+              <select id="cg-area">
+                <option value="">Choose one</option>
+                <option value="nearby">Already near the Botanical Garden</option>
+                <option value="direct">Near a direct city connection</option>
+                <option value="outer">Starting outside the inner city</option>
+                <option value="transfer">A transfer or mobility need matters</option>
+              </select>
+            </div>
+          </div>
+          <div class="cg-result" id="cg-result" aria-live="polite" aria-atomic="true">
+            <span class="cg-status">Waiting for two cues</span>
+            <h4>Choose an entry cue and an area category.</h4>
+            <p>The tool will give a reverse planning order, never a universal departure time.</p>
+          </div>
+        </section>
+
+        <footer class="cg-links">
+          Recheck both sources before leaving: <a href="https://www.christmas-garden.de/berlin/besuch/" target="_blank" rel="noopener">Christmas Garden visit information</a> and <a href="https://www.vbb.de/en/driving-information/apps/vbb-app-bus-bahn/" target="_blank" rel="noopener">live VBB journey planning</a>.
+        </footer>
+      </div>
+    </section>
+
+    <script>
+      (function () {
+        var entry = document.getElementById('cg-entry');
+        var area = document.getElementById('cg-area');
+        var result = document.getElementById('cg-result');
+        var entryText = {
+          normal: 'the normal listed 19:20 last-entry cue',
+          extended: 'the extended Fri/Sat listed 20:20 last-entry cue',
+          other: 'the other possible time shown by the organiser'
+        };
+        var areaText = {
+          nearby: 'You are already near the Botanical Garden. Check the specific access point and the live conditions before treating a short walk as certain.',
+          direct: 'You are near a direct city connection. Check the live VBB route from your own stop, not a generic central-Berlin estimate.',
+          outer: 'You are starting outside the inner city. Begin the route check earlier because the personal journey can include more than one dependency.',
+          transfer: 'A transfer or mobility need matters. Build a personal buffer from the live route and the access information; do not copy a standard journey time.'
+        };
+
+        function add(parent, tag, text, className) {
+          var node = document.createElement(tag);
+          if (className) node.className = className;
+          node.textContent = text;
+          parent.appendChild(node);
+          return node;
+        }
+
+        function renderEmpty() {
+          result.replaceChildren();
+          add(result, 'span', 'Waiting for two cues', 'cg-status');
+          add(result, 'h4', 'Choose an entry cue and an area category.');
+          add(result, 'p', 'The tool will give a reverse planning order, never a universal departure time.');
+        }
+
+        function render() {
+          if (!entry.value || !area.value) {
+            renderEmpty();
+            return;
+          }
+          result.replaceChildren();
+          add(result, 'span', 'Reverse leave-by check', 'cg-status');
+          add(result, 'h4', 'Work backwards from ' + entryText[entry.value] + '.');
+          add(result, 'p', 'The selected time is a schedule check cue only. A live ticket and live VBB route are both still required.');
+          var list = document.createElement('ol');
+          list.className = 'cg-steps';
+          add(list, 'li', 'Ticket anchor: confirm that your own ticket and visit date still match ' + entryText[entry.value] + '.');
+          add(list, 'li', 'Departure-area cue: ' + areaText[area.value]);
+          add(list, 'li', 'Leave-by check: in VBB, work backwards from the confirmed ticket cue using your exact route and the extra time you personally need for a change and entrance.');
+          result.appendChild(list);
+          add(result, 'p', 'This is neither a ticket result nor a transport timetable. It does not promise a fixed departure or return time.', 'cg-caution');
+        }
+
+        entry.addEventListener('change', render);
+        area.addEventListener('change', render);
+      }());
+    </script>
+  </main>
+</body>
+</html>

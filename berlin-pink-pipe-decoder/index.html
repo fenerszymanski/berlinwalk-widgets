@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Berlin Pink Pipe Decoder | BerlinWalk</title>
+  <style>
+    :root { --ink:#123d18; --paper:#f6f0e4; --pink:#e95d91; --pink-deep:#b22f63; --yellow:#ffe600; --muted:#526256; --line:rgba(18,61,24,.20); }
+    * { box-sizing:border-box; }
+    body { margin:0; background:transparent; color:var(--ink); font-family:Arial, Helvetica, sans-serif; }
+    button { font:inherit; }
+    .tool { max-width:940px; margin:0 auto; overflow:hidden; border:1px solid var(--line); border-radius:28px; background:var(--paper); box-shadow:0 18px 44px rgba(18,61,24,.13); }
+    .hero { min-height:310px; position:relative; display:grid; grid-template-columns:minmax(0,1.08fr) minmax(280px,.92fr); gap:24px; align-items:end; padding:34px; background:linear-gradient(112deg,rgba(18,61,24,.97) 0 54%,rgba(18,61,24,.38) 68%,rgba(18,61,24,.04) 100%), url('assets/pink-pipe-hero.jpg') center/cover; color:#fff; }
+    .eyebrow { margin:0 0 11px; font-size:11px; letter-spacing:.13em; font-weight:800; text-transform:uppercase; color:#ffe600; }
+    h1 { margin:0; max-width:560px; font-family:Georgia, 'Times New Roman', serif; font-size:clamp(34px,5vw,58px); line-height:.96; letter-spacing:-.045em; }
+    .hero p:not(.eyebrow) { max-width:490px; margin:16px 0 0; line-height:1.55; font-size:16px; color:rgba(255,255,255,.9); }
+    .hero-note { justify-self:end; align-self:start; width:min(236px,100%); padding:16px; border:1px solid rgba(255,255,255,.3); border-radius:15px; background:rgba(6,31,11,.74); font-size:13px; line-height:1.45; }
+    .hero-note b { color:#ffe600; display:block; margin-bottom:5px; letter-spacing:.08em; font-size:10px; text-transform:uppercase; }
+    .inside { padding:30px 34px 34px; }
+    .intro { max-width:690px; margin:0 auto 28px; text-align:center; font-size:17px; line-height:1.56; }
+    .decoder { display:grid; grid-template-columns:minmax(270px,350px) minmax(0,1fr); gap:26px; align-items:center; padding:25px; border:1px solid var(--line); border-radius:23px; background:#fffdf8; }
+    .dial-wrap { min-height:323px; display:grid; place-items:center; position:relative; }
+    .dial { width:275px; height:275px; border-radius:50%; position:relative; display:grid; place-items:center; background:radial-gradient(circle at 37% 26%,#f994b8 0 3%,var(--pink) 4% 35%,var(--pink-deep) 36% 63%,#812142 64% 100%); border:13px solid #63223a; box-shadow:inset 0 0 0 7px rgba(255,255,255,.25), inset 0 0 38px rgba(61,0,24,.36), 0 16px 20px rgba(18,61,24,.14); transition:transform .65s cubic-bezier(.2,.85,.3,1); }
+    .dial::before { content:''; width:142px; height:142px; border-radius:50%; background:radial-gradient(circle at 35% 27%,#f7c0d4 0 2%,#ed76a2 4% 34%,#a52f58 35% 100%); border:8px solid #6b1c3e; box-shadow:inset 0 0 0 4px rgba(255,255,255,.23); }
+    .dial::after { content:''; position:absolute; width:76px; height:22px; border-radius:16px; background:var(--yellow); border:4px solid #6b1c3e; left:calc(50% - 38px); top:24px; box-shadow:0 2px 0 rgba(0,0,0,.14); }
+    .pointer { position:absolute; top:5px; left:50%; width:0; height:0; transform:translateX(-50%); border-left:13px solid transparent; border-right:13px solid transparent; border-top:23px solid var(--ink); z-index:2; filter:drop-shadow(0 2px 0 rgba(255,255,255,.65)); }
+    .dial-label { position:absolute; width:94px; color:#fff; font-size:10px; line-height:1.18; text-align:center; font-weight:800; letter-spacing:.06em; text-transform:uppercase; text-shadow:0 1px 2px rgba(0,0,0,.3); }
+    .dial-label.one { top:34px; left:90px; } .dial-label.two { right:8px; bottom:61px; } .dial-label.three { left:8px; bottom:61px; }
+    .dial-caption { margin:16px 0 0; color:var(--muted); font-size:12px; line-height:1.45; text-align:center; }
+    .controls { min-width:0; }
+    .controls h2 { margin:0; font-family:Georgia, 'Times New Roman', serif; font-size:29px; letter-spacing:-.03em; }
+    .controls > p { margin:9px 0 18px; line-height:1.55; color:#394a3d; }
+    .choices { display:grid; gap:10px; }
+    .choice { display:flex; gap:13px; align-items:flex-start; width:100%; padding:13px 14px; cursor:pointer; border:1px solid var(--line); border-radius:14px; background:#fff; color:var(--ink); text-align:left; transition:transform .16s ease, border-color .16s ease, box-shadow .16s ease; }
+    .choice:hover, .choice:focus-visible { transform:translateY(-2px); border-color:var(--pink-deep); box-shadow:0 8px 15px rgba(18,61,24,.1); outline:none; }
+    .choice[aria-pressed="true"] { border:2px solid var(--pink-deep); background:#fff0f5; box-shadow:0 7px 14px rgba(178,47,99,.12); }
+    .choice .number { flex:0 0 auto; display:grid; place-items:center; width:29px; height:29px; border-radius:50%; background:var(--ink); color:#fff; font-size:12px; font-weight:800; }
+    .choice b { display:block; margin-bottom:3px; font-size:14px; } .choice small { display:block; color:var(--muted); font-size:12px; line-height:1.35; }
+    .reading { margin-top:24px; min-height:162px; padding:19px; border-radius:18px; border:1px solid #d9c8cc; background:linear-gradient(125deg,#fff 0,#fff7f8 100%); }
+    .reading[hidden] { display:none; }
+    .reading .status { display:inline-flex; gap:7px; align-items:center; padding:5px 9px; border-radius:999px; background:var(--yellow); color:var(--ink); font-weight:800; font-size:10px; letter-spacing:.09em; text-transform:uppercase; }
+    .reading h3 { margin:12px 0 6px; font-family:Georgia, 'Times New Roman', serif; font-size:25px; letter-spacing:-.025em; }
+    .reading p { margin:0; line-height:1.55; color:#253b2b; }
+    .actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:15px; }
+    .action { display:inline-flex; align-items:center; justify-content:center; min-height:42px; padding:9px 13px; border-radius:10px; border:1px solid var(--ink); background:var(--ink); color:#fff; text-decoration:none; font-weight:800; font-size:13px; }
+    .action.secondary { background:#fff; color:var(--ink); }
+    .footer-note { margin:22px auto 0; max-width:740px; font-size:12px; line-height:1.55; color:var(--muted); text-align:center; }
+    @media (max-width:680px) { .tool { border-radius:18px; } .hero { grid-template-columns:1fr; min-height:360px; padding:25px 22px; } .hero-note { justify-self:start; } .inside { padding:22px 16px 25px; } .intro { font-size:16px; } .decoder { grid-template-columns:1fr; gap:17px; padding:18px 14px; } .dial-wrap { min-height:275px; } .dial { transform:scale(.87); } .dial-wrap:has(.dial) { margin:-18px 0; } .controls h2 { font-size:27px; } .reading { min-height:0; } }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { transition:none !important; scroll-behavior:auto !important; } }
+  </style>
+</head>
+<body>
+  <main class="tool" id="bw-pink-pipe-decoder">
+    <section class="hero" aria-labelledby="tool-title">
+      <div>
+        <p class="eyebrow">Berlin street detail · no live works map</p>
+        <h1 id="tool-title">Berlin Pink Pipe Decoder</h1>
+        <p>Turn the inspection valve to read the situation in front of you. This is about the clue you can see, not a guess at a live construction route.</p>
+      </div>
+      <aside class="hero-note"><b>One rule first</b>Colour alone does not tell you what a pipe means. Its setting does.</aside>
+    </section>
+    <section class="inside">
+      <p class="intro">Pick the scene that is closest to yours. The valve opens one cautious field note, so a strange pipe becomes a detail you understand instead of a problem you have to solve.</p>
+      <div class="decoder">
+        <div>
+          <div class="dial-wrap" aria-hidden="true">
+            <span class="pointer"></span>
+            <div class="dial" id="dial">
+              <span class="dial-label one">site<br>edge</span>
+              <span class="dial-label two">fixed<br>landmark</span>
+              <span class="dial-label three">not<br>enough</span>
+            </div>
+          </div>
+          <p class="dial-caption">The pointer is fixed. Your choice turns the valve beneath it.</p>
+        </div>
+        <div class="controls">
+          <h2>What can you actually see?</h2>
+          <p>Choose the strongest physical clue. You can turn the valve again at any time.</p>
+          <div class="choices" role="group" aria-label="Pipe observation">
+            <button class="choice" type="button" data-mode="site" aria-pressed="false"><span class="number">01</span><span><b>It is on temporary supports beside a dig.</b><small>There are barriers, a construction edge, pumps or a protected pavement ramp.</small></span></button>
+            <button class="choice" type="button" data-mode="landmark" aria-pressed="false"><span class="number">02</span><span><b>It is fixed into a striking pink-and-blue building.</b><small>It looks permanent, especially near the Landwehrkanal and Tiergarten.</small></span></button>
+            <button class="choice" type="button" data-mode="unsure" aria-pressed="false"><span class="number">03</span><span><b>I only saw a coloured pipe from a distance.</b><small>I cannot see a site edge or a permanent building well enough to know.</small></span></button>
+          </div>
+          <section class="reading" id="reading" hidden aria-live="polite">
+            <span class="status" id="reading-status">Field note</span>
+            <h3 id="reading-title"></h3>
+            <p id="reading-copy"></p>
+            <div class="actions" id="reading-actions"></div>
+          </section>
+        </div>
+      </div>
+      <p class="footer-note">This decoder does not identify a specific active project, route, permit, water destination or accessibility condition. Follow site barriers and current official notices when a pipe affects where you walk.</p>
+    </section>
+  </main>
+  <script>
+    (function () {
+      const dial = document.getElementById('dial');
+      const reading = document.getElementById('reading');
+      const title = document.getElementById('reading-title');
+      const copy = document.getElementById('reading-copy');
+      const status = document.getElementById('reading-status');
+      const actions = document.getElementById('reading-actions');
+      const buttons = Array.from(document.querySelectorAll('.choice'));
+      const modes = {
+        site: { turn: '0deg', status: 'Most likely: temporary site line', title: 'This is probably groundwater management.', copy: 'When a coloured pipe sits on temporary supports beside an excavation, it is usually carrying groundwater pumped out so work can happen in a dry pit. Use the ramp if one is provided, keep clear of the barriers and do not treat the paint colour as a universal label.', links: [['Berlin Water Works: groundwater extraction', 'https://www.bwb.de/de/entnahme-und-einleitung-von-grundwasser.php'], ['Berlin groundwater guidance', 'https://www.berlin.de/sen/uvk/umwelt/wasser-und-geologie/grundwasserbenutzung/schutz-und-benutzung/']] },
+        landmark: { turn: '120deg', status: 'Different object: permanent landmark', title: 'You may be looking at Umlauftank 2.', copy: 'A bright pink tube integrated into a pink-and-blue building by the Landwehrkanal is not temporary construction plumbing. Umlauftank 2 is part of a Technical University hydraulic-engineering facility. Look from the public street and read it as architecture, not a live building site.', links: [['District guide to the Rosa Röhre', 'https://www.berlin.de/ba-charlottenburg-wilmersdorf/ueber-den-bezirk/bauwerke/artikel.1468639.php'], ['See the landmark on a map', 'https://www.openstreetmap.org/?mlat=52.5123&mlon=13.3335#map=17/52.5123/13.3335']] },
+        unsure: { turn: '-120deg', status: 'Honest answer: not enough to tell', title: 'Do not invent a meaning from the colour.', copy: 'Pink, blue and yellow can all appear in temporary groundwater work, but a distant pipe does not reveal a project plan. Treat the visible site edge as the useful safety signal. If you need to change your route, use the current construction notice or a live map instead of this tool.', links: [['Berlin official construction information', 'https://www.berlin.de/baustellen/'], ['Berlin groundwater information', 'https://www.berlin.de/sen/uvk/umwelt/wasser-und-geologie/grundwasser/']] }
+      };
+      function reportHeight() {
+        const root = document.getElementById('bw-pink-pipe-decoder');
+        const height = Math.ceil(Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, root.getBoundingClientRect().bottom));
+        window.parent.postMessage({ type: 'berlinwalk-widget-height', slug: 'berlin-pink-pipe-decoder', height: height }, '*');
+      }
+      function select(mode) {
+        const detail = modes[mode];
+        dial.style.transform = 'rotate(' + detail.turn + ')';
+        buttons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.mode === mode)));
+        status.textContent = detail.status;
+        title.textContent = detail.title;
+        copy.textContent = detail.copy;
+        actions.replaceChildren(...detail.links.map(function (link, index) { const a = document.createElement('a'); a.className = 'action' + (index ? ' secondary' : ''); a.href = link[1]; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = link[0]; return a; }));
+        reading.hidden = false;
+        window.requestAnimationFrame(function () { window.requestAnimationFrame(reportHeight); });
+      }
+      buttons.forEach((button) => button.addEventListener('click', () => select(button.dataset.mode)));
+      new ResizeObserver(reportHeight).observe(document.getElementById('bw-pink-pipe-decoder'));
+      window.addEventListener('load', reportHeight);
+      window.addEventListener('resize', reportHeight);
+    }());
+  </script>
+  <script src="../js/brand.js"></script>
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bernauer Strasse Memorial Walk | BerlinWalk</title>
+  <meta name="description" content="Walk the 1.4 km Berlin Wall Memorial on Bernauer Strasse stop by stop, with a live check of whether the Documentation Center and viewing tower are open right now.">
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    :root{
+      --green:#1B5E20; --green2:#2e7d32; --yellow:#FFE600; --lime:#7CB342;
+      --lightgreen:#C5E1A5; --cream:#FAFAF5; --ink:#212121; --red:#E63946;
+      --line:rgba(33,33,33,.13); --shadow:0 18px 45px rgba(27,94,32,.16);
+      --sand:#e7dcc4;
+    }
+    *{box-sizing:border-box;}
+    body{margin:0;background:var(--cream);color:var(--ink);font-family:Montserrat,Arial,sans-serif;line-height:1.5;}
+    .wrap{max-width:820px;margin:0 auto;padding:18px 16px 8px;}
+    .card{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden;}
+    .head{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;padding:18px 20px 20px;}
+    .kicker{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:700;margin:0 0 6px;}
+    .title{margin:0;font-size:23px;font-weight:800;letter-spacing:-.01em;}
+    .sub{margin:7px 0 0;font-size:13px;color:rgba(255,255,255,.9);}
+
+    /* live open-now status: the site-specific value */
+    .status{padding:14px 16px 4px;display:grid;gap:8px;}
+    .stat{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:13px;padding:10px 12px;background:var(--cream);}
+    .stat .dot{width:11px;height:11px;border-radius:50%;flex:0 0 auto;box-shadow:0 0 0 4px rgba(0,0,0,.04);}
+    .stat.open .dot{background:var(--lime);box-shadow:0 0 0 4px rgba(124,179,66,.18);}
+    .stat.closed .dot{background:var(--red);box-shadow:0 0 0 4px rgba(230,57,70,.14);}
+    .stat .txt{flex:1;min-width:0;}
+    .stat .name{font-size:12.5px;font-weight:800;color:var(--ink);}
+    .stat .detail{font-size:11.5px;color:#5b5b52;margin-top:1px;}
+    .stat .badge{font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:4px 9px;border-radius:999px;flex:0 0 auto;}
+    .stat.open .badge{background:rgba(124,179,66,.16);color:#33691e;}
+    .stat.closed .badge{background:rgba(230,57,70,.12);color:#b02a34;}
+    .clock{font-size:11px;color:#7a7a70;text-align:center;padding:2px 0 0;}
+
+    .body{padding:8px 16px 18px;}
+
+    /* the linear 1.4 km strip: a real schematic of the memorial in walking order */
+    .rail-label{display:flex;justify-content:space-between;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--green);margin:8px 2px 6px;}
+    .rail-label span:last-child{color:#8a8a80;}
+    .rail{position:relative;height:56px;margin:0 6px 2px;}
+    .rail .track{position:absolute;top:26px;left:8px;right:8px;height:8px;border-radius:8px;
+      background:repeating-linear-gradient(90deg,var(--sand),var(--sand) 7px,#d9cba9 7px,#d9cba9 14px);
+      border:1px solid #cdbf9d;}
+    .rail .fill{position:absolute;top:26px;left:8px;height:8px;border-radius:8px;background:linear-gradient(90deg,var(--green),var(--lime));transition:width .25s ease;}
+    .rail .stops{position:absolute;top:0;left:8px;right:8px;height:100%;}
+    .rail .pin{position:absolute;top:18px;transform:translateX(-50%);width:24px;height:24px;border-radius:50%;background:#fff;border:2px solid #cdbf9d;color:#8a8a80;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .18s ease;padding:0;}
+    .rail .pin:hover{border-color:var(--lime);}
+    .rail .pin.done{border-color:var(--lime);color:var(--green);}
+    .rail .pin.active{background:var(--green);border-color:var(--green);color:#fff;transform:translateX(-50%) scale(1.22);box-shadow:0 6px 16px rgba(27,94,32,.35);}
+    .rail .pin.indoor::after{content:"";position:absolute;top:-4px;right:-4px;width:8px;height:8px;border-radius:50%;background:var(--yellow);border:1.5px solid #fff;}
+
+    /* stop detail */
+    .stop{border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:10px;}
+    .stop-top{display:flex;gap:12px;align-items:flex-start;padding:14px 15px 10px;background:linear-gradient(180deg,#fff,#fbfbf6);}
+    .stop-num{flex:0 0 auto;width:34px;height:34px;border-radius:11px;background:var(--green);color:#fff;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;}
+    .stop-h{flex:1;min-width:0;}
+    .stop-name{margin:0;font-size:17px;font-weight:800;letter-spacing:-.01em;}
+    .stop-meta{margin:3px 0 0;font-size:11.5px;color:#7a7a70;font-weight:600;}
+    .stop-open{margin-top:6px;display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:3px 8px;border-radius:999px;}
+    .stop-open.live-open{background:rgba(124,179,66,.16);color:#33691e;}
+    .stop-open.live-closed{background:rgba(230,57,70,.12);color:#b02a34;}
+    .stop-open.always{background:rgba(27,94,32,.09);color:var(--green);}
+    .stop-body{padding:4px 15px 15px;}
+    .field{margin:11px 0 0;}
+    .field h4{margin:0 0 3px;font-size:10.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--lime);}
+    .field.was h4{color:#b08a2e;}
+    .field.notice h4{color:var(--green);}
+    .field p{margin:0;font-size:13.5px;color:#33332e;}
+    .field.notice{background:rgba(255,230,0,.09);border-left:3px solid var(--yellow);padding:9px 11px;border-radius:0 10px 10px 0;}
+
+    .nav{display:flex;gap:10px;margin-top:14px;}
+    .nav button{flex:1;border:0;border-radius:13px;padding:12px 14px;font-family:inherit;font-weight:800;font-size:13.5px;cursor:pointer;transition:transform .1s ease,filter .15s ease;}
+    .nav button:active{transform:translateY(1px);}
+    .nav .prev{background:#eef1e8;color:var(--green);}
+    .nav .next{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;}
+    .nav button:disabled{opacity:.4;cursor:default;}
+    .foot{margin:13px 2px 2px;font-size:11.5px;color:#7a7a70;text-align:center;}
+    .foot a{color:var(--green);font-weight:700;}
+    @media (max-width:430px){
+      .title{font-size:20px;}
+      .rail .pin{width:21px;height:21px;font-size:10px;}
+      .stop-name{font-size:15.5px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="head">
+        <p class="kicker">BerlinWalk.com • Berlin History</p>
+        <h1 class="title">Walk the Bernauer Strasse Memorial</h1>
+        <p class="sub">The Berlin Wall Memorial runs 1.4 km along Bernauer Strasse. Walk it in order, and check what is open before you go &mdash; the grounds and the indoor parts keep different hours.</p>
+      </div>
+
+      <div class="status" id="status"></div>
+      <div class="clock" id="clock"></div>
+
+      <div class="body">
+        <div class="rail-label"><span>S Nordbahnhof</span><span>along Bernauer Strasse &rarr;</span></div>
+        <div class="rail">
+          <div class="track"></div>
+          <div class="fill" id="fill"></div>
+          <div class="stops" id="pins"></div>
+        </div>
+
+        <div class="stop">
+          <div class="stop-top">
+            <div class="stop-num" id="sNum">1</div>
+            <div class="stop-h">
+              <h2 class="stop-name" id="sName"></h2>
+              <p class="stop-meta" id="sMeta"></p>
+              <span class="stop-open" id="sOpen"></span>
+            </div>
+          </div>
+          <div class="stop-body">
+            <div class="field"><h4>What you see today</h4><p id="sToday"></p></div>
+            <div class="field was"><h4>What it was</h4><p id="sWas"></p></div>
+            <div class="field notice"><h4>Notice this</h4><p id="sNotice"></p></div>
+          </div>
+        </div>
+
+        <div class="nav">
+          <button class="prev" id="prev">&larr; Previous stop</button>
+          <button class="next" id="next">Next stop &rarr;</button>
+        </div>
+
+        <p class="foot">Free, open-air, and always worth an hour. Start inside <strong>S Nordbahnhof</strong>, then walk north along Bernauer Strasse.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    // Bernauer Strasse memorial, roughly south (Nordbahnhof / Gartenstrasse) to north (Schwedter Strasse).
+    // pos = share of the 1.4 km walk, used to place the pin and the progress fill.
+    // access: "indoor" stops follow the Documentation Center hours; "grounds" are open-air 08:00-22:00.
+    var STOPS = [
+      {
+        name:"S-Bahn Nordbahnhof (ghost station)", meta:"Start · inside the station · ~0 min", pos:0, access:"indoor",
+        today:"A normal S-Bahn stop with a free wall exhibition, “Border and Ghost Stations in Divided Berlin,” along the platform level.",
+        was:"During the division this was a sealed “ghost station.” West Berlin trains rolled through the East without stopping, past dim platforms guarded by border troops.",
+        notice:"Read the panels before you climb to street level. They set up everything you are about to walk past outside."
+      },
+      {
+        name:"Visitor Center (Besucherzentrum)", meta:"Corner of Gartenstrasse · ~2 min", pos:0.1, access:"indoor",
+        today:"A small orientation building with a bookshop, toilets, and two short films that explain how the border worked here.",
+        was:"This corner was the very edge of the death strip, where Bernauer Strasse became the front line between two systems.",
+        notice:"This is the one place to get your bearings and check tour times. It is the best first stop after the station, not the Documentation Center."
+      },
+      {
+        name:"The preserved border strip", meta:"Central section · ~6 min", pos:0.34, access:"grounds",
+        today:"An 80 m stretch of the original border, kept intact between two rusted steel walls: outer wall, raked sand, patrol road, lamps, and a watchtower base.",
+        was:"This is the actual death strip. No man’s land between the walls, floodlit at night, watched from towers, with a clear line of fire.",
+        notice:"This is the only place in Berlin where you see the full depth of the border, not just a single wall. Stand at the slit in the steel and look through."
+      },
+      {
+        name:"Documentation Center & viewing tower", meta:"Bernauer Strasse 119 · ~8 min", pos:0.46, access:"indoor",
+        today:"A free exhibition on the Wall and the people who lived beside it, plus a rooftop platform that looks straight down onto the preserved strip.",
+        was:"The building stands where border houses were demolished so guards had a clear, open field across the strip.",
+        notice:"Climb the tower for the view that makes the whole site click. The last ascent is 17:45, and the tower closes on Mondays with the exhibition."
+      },
+      {
+        name:"Window of Remembrance", meta:"Memorial grounds · ~11 min", pos:0.6, access:"grounds",
+        today:"A steel wall of small lit portraits, one for each person known to have died at the Berlin Wall.",
+        was:"At least 140 people died at the Wall between 1961 and 1989. Several of them were killed on this street in the first months, some jumping from windows that were bricked up soon after.",
+        notice:"Take your time here. The faces are young. This is the quiet centre of the whole memorial."
+      },
+      {
+        name:"Chapel of Reconciliation", meta:"Memorial grounds · ~13 min", pos:0.72, access:"grounds",
+        today:"A small round chapel of rammed earth and timber, standing alone on the former strip. Short prayers for the victims are read here on weekdays.",
+        was:"The neo-Gothic Church of Reconciliation stood here, stranded inside the death strip. The GDR blew it up in 1985 because it blocked the guards’ sightline.",
+        notice:"The rammed-earth walls contain rubble from the destroyed church. A building erased by the border, rebuilt on the same spot."
+      },
+      {
+        name:"Escape tunnels & house markers", meta:"Toward Schwedter Strasse · ~16 min", pos:0.92, access:"grounds",
+        today:"Steel ground lines and markers trace where border houses stood and where escape tunnels ran, including “Tunnel 57,” which brought 57 people west.",
+        was:"Bernauer Strasse was an escape magnet because the house fronts were the border itself. People dug, jumped, and were lowered from windows to the western pavement.",
+        notice:"Look down, not up. The story here is written in metal lines on the ground, easy to walk straight over without seeing."
+      }
+    ];
+
+    var idx = 0;
+    var $ = function(id){ return document.getElementById(id); };
+
+    // --- live Berlin-time open status ---
+    function berlinNow(){
+      // parts in Europe/Berlin, DST-safe
+      var fmt = new Intl.DateTimeFormat('en-GB',{ timeZone:'Europe/Berlin', weekday:'short', hour:'2-digit', minute:'2-digit', hour12:false });
+      var parts = {};
+      fmt.formatToParts(new Date()).forEach(function(p){ parts[p.type]=p.value; });
+      var days = { Sun:0, Mon:1, Tue:2, Wed:3, Thu:4, Fri:5, Sat:6 };
+      var h = parseInt(parts.hour,10); if(h===24) h=0;
+      return { dow: days[parts.weekday], hour:h, minute:parseInt(parts.minute,10), label:parts.weekday+' '+parts.hour+':'+parts.minute };
+    }
+    var DAYNAME = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+    function groundsStatus(t){
+      var mins = t.hour*60 + t.minute;
+      var open = mins >= 8*60 && mins < 22*60;
+      return open
+        ? { open:true, detail:'Open now · open-air until 22:00' }
+        : { open:false, detail:(mins < 8*60 ? 'Opens 08:00 today' : 'Closed for the night · opens 08:00') };
+    }
+    function indoorStatus(t){
+      // Documentation Center, Visitor Center, tower: Tue-Sun 10:00-18:00, closed Monday.
+      var mins = t.hour*60 + t.minute;
+      var isMon = t.dow === 1;
+      if(isMon) return { open:false, detail:'Closed today (Monday) · opens Tue 10:00' };
+      var open = mins >= 10*60 && mins < 18*60;
+      if(open){
+        var towerLeft = mins < 17*60+45;
+        return { open:true, detail:'Open until 18:00' + (towerLeft ? ' · last tower climb 17:45' : ' · tower climb closed for today') };
+      }
+      if(mins < 10*60) return { open:false, detail:'Opens 10:00 today' };
+      // after 18:00: next day, unless tomorrow is Monday
+      var next = (t.dow===0) ? 'Tue' : (t.dow===6 ? 'Sun' : DAYNAME[(t.dow+1)%7].slice(0,3));
+      return { open:false, detail:'Closed now · opens '+next+' 10:00' };
+    }
+
+    function renderStatus(){
+      var t = berlinNow();
+      var g = groundsStatus(t), d = indoorStatus(t);
+      $('status').innerHTML =
+        row('Memorial grounds & death strip', g, 'Open-air, free, daily 08:00–22:00') +
+        row('Documentation Center + viewing tower', d, 'Tue–Sun 10:00–18:00, closed Mondays');
+      $('clock').textContent = 'Checked against Berlin time now: '+t.label;
+      // keep the active stop's own badge in sync
+      renderStopOpen(t);
+    }
+    function row(name, s, hours){
+      return '<div class="stat '+(s.open?'open':'closed')+'">'
+        + '<span class="dot"></span>'
+        + '<div class="txt"><div class="name">'+name+'</div><div class="detail">'+hours+' — '+s.detail+'</div></div>'
+        + '<span class="badge">'+(s.open?'Open now':'Closed')+'</span></div>';
+    }
+
+    function renderStopOpen(t){
+      t = t || berlinNow();
+      var st = STOPS[idx];
+      var el = $('sOpen');
+      if(st.access === 'grounds'){
+        var g = groundsStatus(t);
+        el.className = 'stop-open always';
+        el.textContent = 'Open-air · ' + (g.open ? 'open now' : g.detail.toLowerCase());
+      } else {
+        var d = indoorStatus(t);
+        el.className = 'stop-open ' + (d.open ? 'live-open' : 'live-closed');
+        el.textContent = (d.open ? 'Open now' : 'Closed now') + ' · ' + d.detail;
+      }
+    }
+
+    // --- rail pins ---
+    function buildPins(){
+      var html = '';
+      STOPS.forEach(function(s,i){
+        var cls = 'pin' + (s.access==='indoor' ? ' indoor' : '');
+        html += '<button class="'+cls+'" data-i="'+i+'" style="left:'+(s.pos*100)+'%" aria-label="Stop '+(i+1)+'">'+(i+1)+'</button>';
+      });
+      $('pins').innerHTML = html;
+      Array.prototype.forEach.call($('pins').querySelectorAll('.pin'), function(p){
+        p.addEventListener('click', function(){ idx = parseInt(p.getAttribute('data-i'),10); render(); });
+      });
+    }
+    function paintPins(){
+      Array.prototype.forEach.call($('pins').querySelectorAll('.pin'), function(p){
+        var i = parseInt(p.getAttribute('data-i'),10);
+        p.classList.toggle('active', i===idx);
+        p.classList.toggle('done', i<idx);
+      });
+      $('fill').style.width = (STOPS[idx].pos*100) + '%';
+    }
+
+    function render(){
+      var s = STOPS[idx];
+      $('sNum').textContent = idx+1;
+      $('sName').textContent = s.name;
+      $('sMeta').textContent = s.meta;
+      $('sToday').textContent = s.today;
+      $('sWas').textContent = s.was;
+      $('sNotice').textContent = s.notice;
+      $('prev').disabled = idx===0;
+      $('next').disabled = idx===STOPS.length-1;
+      paintPins();
+      renderStopOpen();
+    }
+
+    $('prev').addEventListener('click', function(){ if(idx>0){ idx--; render(); } });
+    $('next').addEventListener('click', function(){ if(idx<STOPS.length-1){ idx++; render(); } });
+
+    buildPins();
+    render();
+    renderStatus();
+    setInterval(renderStatus, 30000); // keep the open/closed status honest while the page is open
+  })();
+  </script>
+  <script src="../js/brand.js"></script>
+</body>
+</html>

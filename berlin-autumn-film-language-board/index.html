@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Autumn Film Language Board | BerlinWalk</title>
+  <meta name="description" content="A six-date Berlin autumn film-festival board that keeps screening language, venue and ticket checks at individual-listing level.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <style>
+    html, body { background: transparent; margin: 0; overflow-x: hidden; }
+    #bw-film-language-board {
+      --ink: #18301b;
+      --pine: #123D18;
+      --green: #1B5E20;
+      --lime: #7CB342;
+      --yellow: #FFE600;
+      --paper: #FCFCF7;
+      --wash: #EDF4E8;
+      --line: #C9D9C5;
+      --muted: #526052;
+      box-sizing: border-box;
+      color: var(--ink);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 0 auto;
+      max-width: 760px;
+      padding: 14px;
+    }
+    #bw-film-language-board *, #bw-film-language-board *::before, #bw-film-language-board *::after { box-sizing: border-box; }
+    #bw-film-language-board .shell { background: var(--paper); border: 1px solid var(--line); box-shadow: 0 16px 34px rgba(18, 61, 24, .10); }
+    #bw-film-language-board .masthead { background: var(--pine); color: #fff; padding: 23px 24px 21px; }
+    #bw-film-language-board .eyebrow { color: var(--yellow); font-size: 11px; font-weight: 900; letter-spacing: .14em; margin: 0 0 8px; text-transform: uppercase; }
+    #bw-film-language-board h1 { color: #fff; font-size: clamp(24px, 4.5vw, 36px); letter-spacing: -.035em; line-height: 1.03; margin: 0; max-width: 620px; }
+    #bw-film-language-board .masthead p:last-child { color: #D9E9D5; font-size: 14px; line-height: 1.55; margin: 12px 0 0; max-width: 620px; }
+    #bw-film-language-board .rule { background: var(--yellow); height: 5px; }
+    #bw-film-language-board .body { padding: 19px 20px 22px; }
+    #bw-film-language-board .instruction { color: var(--muted); font-size: 13px; line-height: 1.5; margin: 0 0 13px; }
+    #bw-film-language-board .instruction strong { color: var(--pine); }
+    #bw-film-language-board .festival-list { border-top: 1px solid var(--line); }
+    #bw-film-language-board .festival-row {
+      align-items: center;
+      appearance: none;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      color: inherit;
+      cursor: pointer;
+      display: grid;
+      font: inherit;
+      gap: 12px;
+      grid-template-columns: 98px minmax(0, 1fr) 28px;
+      min-height: 69px;
+      padding: 11px 4px;
+      text-align: left;
+      width: 100%;
+    }
+    #bw-film-language-board .festival-row:hover { background: #F3F8EF; }
+    #bw-film-language-board .festival-row:focus-visible { outline: 3px solid var(--yellow); outline-offset: -3px; }
+    #bw-film-language-board .festival-row[aria-expanded="true"] { background: var(--wash); }
+    #bw-film-language-board .date { color: var(--green); font-size: 12px; font-weight: 900; letter-spacing: .04em; line-height: 1.25; text-transform: uppercase; }
+    #bw-film-language-board .festival-name { color: var(--pine); font-size: 15px; font-weight: 850; line-height: 1.24; }
+    #bw-film-language-board .festival-note { color: var(--muted); display: block; font-size: 11.5px; font-weight: 600; line-height: 1.35; margin-top: 3px; }
+    #bw-film-language-board .row-mark { align-items: center; background: var(--yellow); border-radius: 50%; color: var(--pine); display: inline-flex; font-size: 19px; font-weight: 900; height: 28px; justify-content: center; line-height: 1; width: 28px; }
+    #bw-film-language-board .festival-row[aria-expanded="true"] .row-mark { background: var(--green); color: #fff; }
+    #bw-film-language-board .detail {
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+      padding: 15px 15px 16px 114px;
+    }
+    #bw-film-language-board .detail h2 { color: var(--pine); font-size: 16px; line-height: 1.25; margin: 0 0 7px; }
+    #bw-film-language-board .detail p { color: #344334; font-size: 13px; line-height: 1.55; margin: 0; }
+    #bw-film-language-board .detail .listing-rule { align-items: flex-start; background: #FFFBE0; border-left: 4px solid var(--yellow); color: #384138; display: flex; font-size: 12px; font-weight: 700; gap: 8px; line-height: 1.45; margin-top: 12px; padding: 9px 10px; }
+    #bw-film-language-board .listing-rule b { color: var(--pine); }
+    #bw-film-language-board .checklist { background: #F6F9F2; border: 1px solid var(--line); margin-top: 18px; padding: 14px 15px; }
+    #bw-film-language-board .checklist h2 { color: var(--pine); font-size: 15px; line-height: 1.25; margin: 0 0 7px; }
+    #bw-film-language-board .checklist ul { color: #3F4D3F; font-size: 12.5px; line-height: 1.5; margin: 0; padding-left: 18px; }
+    #bw-film-language-board .checklist li + li { margin-top: 4px; }
+    #bw-film-language-board .sources { border-top: 1px dashed var(--line); color: var(--muted); font-size: 11px; line-height: 1.5; margin: 18px 0 0; padding-top: 13px; }
+    #bw-film-language-board .sources a { color: var(--green); font-weight: 800; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+    #bw-film-language-board .sources a:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+    @media (max-width: 500px) {
+      #bw-film-language-board { padding: 8px; }
+      #bw-film-language-board .masthead { padding: 20px 17px 18px; }
+      #bw-film-language-board .body { padding: 16px 13px 18px; }
+      #bw-film-language-board .festival-row { gap: 9px; grid-template-columns: 74px minmax(0, 1fr) 25px; min-height: 74px; }
+      #bw-film-language-board .date { font-size: 10.5px; }
+      #bw-film-language-board .festival-name { font-size: 13px; }
+      #bw-film-language-board .festival-note { font-size: 10.5px; }
+      #bw-film-language-board .row-mark { height: 25px; width: 25px; }
+      #bw-film-language-board .detail { padding: 13px; }
+    }
+    @media (prefers-reduced-motion: reduce) { #bw-film-language-board * { scroll-behavior: auto !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+  <main id="bw-film-language-board">
+    <section class="shell" aria-labelledby="film-board-title">
+      <header class="masthead">
+        <p class="eyebrow">Berlin autumn 2026</p>
+        <h1 id="film-board-title">Six festival windows. One screening-level check.</h1>
+        <p>Open one row to keep the calendar decision separate from the details that only an individual screening can answer.</p>
+      </header>
+      <div class="rule" aria-hidden="true"></div>
+      <div class="body">
+        <p class="instruction"><strong>Choose a date first.</strong> Then return to the organiser’s individual listing before you buy.</p>
+        <div class="festival-list" id="festival-list">
+          <button class="festival-row" type="button" data-festival="fantasy" aria-expanded="false" aria-controls="film-detail">
+            <span class="date">2–9 Sep</span><span><span class="festival-name">Fantasy Filmfest</span><span class="festival-note">Genre-focused programme</span></span><span class="row-mark" aria-hidden="true">+</span>
+          </button>
+          <button class="festival-row" type="button" data-festival="animation" aria-expanded="false" aria-controls="film-detail">
+            <span class="date">8–11 Oct</span><span><span class="festival-name">Festival of Animation Berlin</span><span class="festival-note">silent green and City Kino Wedding named by organiser</span></span><span class="row-mark" aria-hidden="true">+</span>
+          </button>
+          <button class="festival-row" type="button" data-festival="ukrainian" aria-expanded="false" aria-controls="film-detail">
+            <span class="date">14–18 Oct</span><span><span class="festival-name">Ukrainian Film Festival Berlin</span><span class="festival-note">Full programme announced separately</span></span><span class="row-mark" aria-hidden="true">+</span>
+          </button>
+          <button class="festival-row" type="button" data-festival="interfilm" aria-expanded="false" aria-controls="film-detail">
+            <span class="date">10–15 Nov</span><span><span class="festival-name">INTERFILM</span><span class="festival-note">International short-film festival</span></span><span class="row-mark" aria-hidden="true">+</span>
+          </button>
+          <button class="festival-row" type="button" data-festival="italian" aria-expanded="false" aria-controls="film-detail">
+            <span class="date">10–15 Nov</span><span><span class="festival-name">Italian Film Festival Berlin</span><span class="festival-note">Same week, separate edition page</span></span><span class="row-mark" aria-hidden="true">+</span>
+          </button>
+          <button class="festival-row" type="button" data-festival="punk" aria-expanded="false" aria-controls="film-detail">
+            <span class="date">3–6 Dec</span><span><span class="festival-name">Punkfilmfest</span><span class="festival-note">Exact screening details stay individual</span></span><span class="row-mark" aria-hidden="true">+</span>
+          </button>
+          <section class="detail" id="film-detail" aria-live="polite" hidden></section>
+        </div>
+        <section class="checklist" aria-labelledby="listing-check-title">
+          <h2 id="listing-check-title">The individual-listing check</h2>
+          <ul>
+            <li>spoken language or original-language information;</li>
+            <li>subtitle language and any OV, OmU or similar label;</li>
+            <li>exact cinema, start time, ticket category and availability;</li>
+            <li>the language of any introduction, discussion or Q&amp;A, if advertised.</li>
+          </ul>
+        </section>
+        <p class="sources">Dates checked 22 August 2026 from <a href="https://fantasyfilmfest.com/en/tickets-berlin/" target="_blank" rel="noopener">Fantasy Filmfest</a>, <a href="https://fa-berlin.com/en/" target="_blank" rel="noopener">Festival of Animation Berlin</a>, <a href="https://www.uffberlin.de/de/home" target="_blank" rel="noopener">Ukrainian Film Festival</a>, <a href="https://www.interfilm.de/en/interfilm-festival-2026/program/" target="_blank" rel="noopener">INTERFILM</a>, <a href="https://www.italianfilmfestivalberlin.com/programme/italian-film-festival-berlin-2026" target="_blank" rel="noopener">Italian Film Festival</a> and <a href="https://www.berlin.de/kino/filmfestivals/7742361-2020379-punkfilmfest.html" target="_blank" rel="noopener">Punkfilmfest</a>. Recheck live listings before booking.</p>
+      </div>
+    </section>
+  </main>
+  <script>
+    (function () {
+      'use strict';
+      var details = {
+        fantasy: { title: 'Fantasy Filmfest · 2–9 September', text: 'A confirmed date window for a genre-focused cinema night. Use the festival’s own 2026 ticket or programme listing for the exact Berlin screening you are considering.' },
+        animation: { title: 'Festival of Animation Berlin · 8–11 October', text: 'The organiser names silent green Kulturquartier and City Kino Wedding for 2026. That does not decide the cinema, time or language for a particular screening.' },
+        ukrainian: { title: 'Ukrainian Film Festival Berlin · 14–18 October', text: 'The dates are published, while the full programme is announced separately. Keep this as a calendar window until a specific listing appears.' },
+        interfilm: { title: 'INTERFILM · 10–15 November', text: 'The short-film festival has published its 2026 dates. A festival name does not settle the spoken or subtitle language of an individual programme.' },
+        italian: { title: 'Italian Film Festival Berlin · 10–15 November', text: 'This is a separate edition page in the same November week. Check its exact title, venue, time and access details at listing level.' },
+        punk: { title: 'Punkfilmfest · 3–6 December', text: 'The festival window is confirmed. Treat its individual screening page as the authority for venue, time, ticket and language information.' }
+      };
+      var buttons = Array.prototype.slice.call(document.querySelectorAll('.festival-row'));
+      var detail = document.getElementById('film-detail');
+      function closeAll() {
+        buttons.forEach(function (button) {
+          button.setAttribute('aria-expanded', 'false');
+          button.querySelector('.row-mark').textContent = '+';
+        });
+        detail.hidden = true;
+        detail.innerHTML = '';
+      }
+      buttons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          var key = button.getAttribute('data-festival');
+          var isOpen = button.getAttribute('aria-expanded') === 'true';
+          closeAll();
+          if (isOpen) return;
+          var item = details[key];
+          button.setAttribute('aria-expanded', 'true');
+          button.querySelector('.row-mark').textContent = '–';
+          detail.innerHTML = '<h2>' + item.title + '</h2><p>' + item.text + '</p><p class="listing-rule"><span aria-hidden="true">✓</span><span><b>Still check the individual listing:</b> language, subtitles, venue, time, ticket and any Q&amp;A are not festival-wide promises.</span></p>';
+          detail.hidden = false;
+        });
+      });
+    }());
+  </script>
+</body>
+</html>

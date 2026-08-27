@@ -1,0 +1,288 @@
+{
+  "meta": {
+    "title": "Berlin Early Hours Board",
+    "axisFrom": 210,
+    "axisTo": 630,
+    "checkedOn": "25 August 2026",
+    "travelNote": "Door-to-door minutes from the Weltzeituhr at Alexanderplatz, public transport, weekday 07:00.",
+    "accessFilterNote": "Ticketed places use the explicit access=ticketed field. Indoor alone does not imply a ticket; transport, free registration and fenced free places remain separate."
+  },
+  "rows": [
+    {
+      "id": "first-train",
+      "name": "First U-Bahn from Alexanderplatz",
+      "area": "Alexanderplatz",
+      "travel": 0,
+      "kind": "transport",
+      "access": "transport",
+      "open": {
+        "type": "firstTrain",
+        "weekdayMinutes": 245
+      },
+      "note": "U2, U5 and U8 start again around 04:05 on weekday mornings. On Saturday and Sunday mornings they never stopped.",
+      "short": "First U-Bahn of the day"
+    },
+    {
+      "id": "weltzeituhr",
+      "name": "Weltzeituhr, Alexanderplatz",
+      "area": "Mitte",
+      "travel": 0,
+      "kind": "outdoor",
+      "access": "no-gate",
+      "open": {
+        "type": "always"
+      },
+      "note": "No gate, no ticket. The square is lit all night and the S-Bahn viaduct above it starts moving first.",
+      "short": "Weltzeituhr"
+    },
+    {
+      "id": "brandenburg",
+      "name": "Brandenburg Gate and Tiergarten",
+      "area": "Mitte",
+      "travel": 12,
+      "kind": "outdoor",
+      "access": "no-gate",
+      "open": {
+        "type": "always"
+      },
+      "note": "The one hour of the day when you can stand under the Quadriga without a crowd in the frame.",
+      "short": "Brandenburg Gate"
+    },
+    {
+      "id": "stelae",
+      "name": "Holocaust Memorial, field of stelae",
+      "area": "Mitte",
+      "travel": 15,
+      "kind": "outdoor",
+      "access": "no-gate",
+      "open": {
+        "type": "always"
+      },
+      "note": "The field of stelae is accessible around the clock. The Information Centre below it opens at 10:00 and is shut on Mondays.",
+      "short": "Holocaust Memorial"
+    },
+    {
+      "id": "humboldthain",
+      "name": "Volkspark Humboldthain flak tower",
+      "area": "Gesundbrunnen",
+      "travel": 17,
+      "kind": "outdoor",
+      "access": "no-gate",
+      "open": {
+        "type": "always"
+      },
+      "note": "A public park with no gate, and a climb onto a wartime flak tower that looks straight back at the TV Tower.",
+      "short": "Humboldthain flak tower"
+    },
+    {
+      "id": "east-side",
+      "name": "East Side Gallery",
+      "area": "Friedrichshain",
+      "travel": 20,
+      "kind": "outdoor",
+      "access": "no-gate",
+      "open": {
+        "type": "always"
+      },
+      "note": "An open-air stretch of the Wall on a public pavement. Early is the only time the paintings are not behind other people's phones.",
+      "short": "East Side Gallery"
+    },
+    {
+      "id": "tempelhof",
+      "name": "Tempelhofer Feld",
+      "area": "Tempelhof",
+      "travel": 30,
+      "kind": "outdoor",
+      "access": "free-gated",
+      "open": {
+        "type": "monthly",
+        "openByMonth": [
+          450,
+          420,
+          360,
+          360,
+          360,
+          360,
+          360,
+          360,
+          360,
+          420,
+          420,
+          450
+        ],
+        "closeByMonth": [
+          1020,
+          1080,
+          1140,
+          1230,
+          1290,
+          1350,
+          1350,
+          1290,
+          1230,
+          1140,
+          1080,
+          1020
+        ]
+      },
+      "note": "The old airport runways. Gate times change month by month, so the same walk starts at 06:00 in August and 07:30 in December.",
+      "short": "Tempelhofer Feld"
+    },
+    {
+      "id": "sommerbad",
+      "name": "Sommerbad Humboldthain",
+      "area": "Gesundbrunnen",
+      "travel": 20,
+      "kind": "indoor",
+      "access": "ticketed",
+      "open": {
+        "type": "weekday",
+        "byWeekday": [
+          600,
+          420,
+          420,
+          420,
+          420,
+          420,
+          420
+        ],
+        "seasonUntil": "2026-09-11",
+        "seasonLabel": "Summer pool. The 2026 season ends on 11 September."
+      },
+      "note": "An outdoor 50 metre pool that opens at 07:00 six days a week. Everyone aged 14 and over needs an original photo ID at the gate.",
+      "short": "Sommerbad Humboldthain"
+    },
+    {
+      "id": "reichstag",
+      "name": "Reichstag visitor service point",
+      "area": "Mitte",
+      "travel": 15,
+      "kind": "indoor",
+      "access": "free-registration",
+      "open": {
+        "type": "weekday",
+        "byWeekday": [
+          480,
+          480,
+          480,
+          480,
+          480,
+          480,
+          480
+        ]
+      },
+      "note": "The walk-up registration hut near the Reichstag opens at 08:00. The dome itself needs a slot booked in advance.",
+      "short": "Reichstag service point"
+    },
+    {
+      "id": "berliner-dom",
+      "name": "Berliner Dom",
+      "area": "Mitte",
+      "travel": 9,
+      "kind": "indoor",
+      "access": "ticketed",
+      "open": {
+        "type": "weekday",
+        "byWeekday": [
+          540,
+          540,
+          540,
+          540,
+          540,
+          540,
+          720
+        ]
+      },
+      "note": "Opens at 09:00 from Monday to Saturday. On Sunday the building belongs to services until 12:00.",
+      "short": "Berliner Dom"
+    },
+    {
+      "id": "tv-tower",
+      "name": "TV Tower viewing deck",
+      "area": "Alexanderplatz",
+      "travel": 3,
+      "kind": "indoor",
+      "access": "ticketed",
+      "open": {
+        "type": "weekday",
+        "byWeekday": [
+          540,
+          540,
+          540,
+          540,
+          540,
+          540,
+          540
+        ]
+      },
+      "note": "First lift at 09:00. The 09:00 to 10:00 slots are the quietest hour the deck gets all day.",
+      "short": "TV Tower deck"
+    },
+    {
+      "id": "ddr-museum",
+      "name": "DDR Museum",
+      "area": "Mitte",
+      "travel": 10,
+      "kind": "indoor",
+      "access": "ticketed",
+      "open": {
+        "type": "weekday",
+        "byWeekday": [
+          540,
+          540,
+          540,
+          540,
+          540,
+          540,
+          540
+        ]
+      },
+      "note": "09:00 every day of the week, public holidays included. It is the earliest proper museum in central Berlin and it opens on Mondays.",
+      "short": "DDR Museum"
+    },
+    {
+      "id": "zoo-berlin",
+      "name": "Zoo Berlin",
+      "area": "Charlottenburg",
+      "travel": 22,
+      "kind": "indoor",
+      "access": "ticketed",
+      "open": {
+        "type": "weekday",
+        "byWeekday": [
+          540,
+          540,
+          540,
+          540,
+          540,
+          540,
+          540
+        ]
+      },
+      "note": "Gates at 09:00. Closing moves with the season, so check the day before if you want a long visit.",
+      "short": "Zoo Berlin"
+    },
+    {
+      "id": "museum-island",
+      "name": "Museum Island museums",
+      "area": "Mitte",
+      "travel": 12,
+      "kind": "indoor",
+      "access": "ticketed",
+      "open": {
+        "type": "weekday",
+        "byWeekday": [
+          null,
+          600,
+          600,
+          600,
+          600,
+          600,
+          600
+        ]
+      },
+      "note": "Altes Museum, Neues Museum, Alte Nationalgalerie and the James-Simon-Galerie all open at 10:00 and all close on Mondays.",
+      "short": "Museum Island"
+    }
+  ]
+}

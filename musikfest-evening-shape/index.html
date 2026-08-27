@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Musikfest Evening Shape | BerlinWalk</title>
+    <link rel="stylesheet" href="../css/brand.css" />
+    <style>
+      :root {
+        --wine: #4d1d35;
+        --rose: #f5d9db;
+        --cream: #fcfaf6;
+        --ink: #262023;
+        --gold: #c89636;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Montserrat, Arial, sans-serif;
+        background: transparent;
+        color: var(--ink);
+      }
+      .tool {
+        max-width: 1040px;
+        margin: auto;
+        background: var(--cream);
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid #e6d8cf;
+      }
+      .top {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        min-height: 310px;
+        background: var(--wine);
+        color: #fff;
+      }
+      .copy {
+        padding: 30px;
+        display: grid;
+        align-content: center;
+      }
+      .copy span {
+        color: #f4ca6a;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .copy h1 {
+        margin: 9px 0;
+        font-size: clamp(30px, 5vw, 47px);
+        line-height: 1.05;
+      }
+      .copy p {
+        margin: 0;
+        line-height: 1.55;
+        color: #fae8ea;
+      }
+      .photo {
+        background: url("assets/hero-philharmonie.jpg") center/cover;
+      }
+      .inner {
+        padding: 24px;
+      }
+      .picks {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      .picks label {
+        display: grid;
+        gap: 7px;
+        padding: 13px;
+        border: 1px solid #ead9d4;
+        border-radius: 10px;
+        background: #fff;
+        font-size: 12px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+      .picks select {
+        border: 0;
+        background: var(--rose);
+        border-radius: 7px;
+        padding: 10px;
+        color: var(--ink);
+        font: 700 14px Montserrat;
+      }
+      .district-board {
+        display: grid;
+        grid-template-columns: minmax(210px, 0.72fr) minmax(0, 1.28fr);
+        gap: 20px;
+        margin-top: 20px;
+        padding: 20px;
+        border-radius: 12px;
+        background: #fff;
+        border: 1px solid #ead9d4;
+      }
+      .district-marker {
+        display: grid;
+        align-content: start;
+        gap: 9px;
+        min-height: 210px;
+        padding: 20px;
+        border-radius: 10px;
+        background: linear-gradient(150deg, var(--wine), #753d55);
+        color: #fff;
+      }
+      .district-marker span {
+        color: #f6d67e;
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.1em;
+      }
+      .district-marker b {
+        display: block;
+        font-size: 28px;
+        line-height: 1.05;
+      }
+      .district-marker p {
+        margin: 0;
+        color: #fae8ea;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .plan h2 {
+        margin: 2px 0 10px;
+        font-size: 26px;
+      }
+      .plan p {
+        line-height: 1.58;
+        color: #57494c;
+      }
+      .steps {
+        display: grid;
+        gap: 8px;
+      }
+      .step {
+        padding: 10px 12px;
+        border-left: 3px solid var(--gold);
+        background: #fbf5f1;
+      }
+      .step b {
+        color: var(--wine);
+        font-size: 12px;
+      }
+      .step span {
+        display: block;
+        margin-top: 4px;
+        line-height: 1.45;
+      }
+      .end {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-top: 17px;
+      }
+      .end small {
+        max-width: 690px;
+        line-height: 1.5;
+      }
+      .cta {
+        background: var(--wine);
+        color: #fff !important;
+        padding: 12px 15px;
+        border-radius: 8px;
+        font-weight: 900;
+        text-decoration: none;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+      }
+      .cta.planner {
+        background: #ffe600;
+        color: #262023 !important;
+      }
+      .credits {
+        font-size: 12px;
+        margin-top: 15px;
+      }
+      .credits button {
+        border: 0;
+        padding: 0;
+        background: none;
+        color: var(--wine);
+        text-decoration: underline;
+        font: inherit;
+        cursor: pointer;
+      }
+      .credits div {
+        margin-top: 8px;
+        padding: 8px;
+        border-radius: 7px;
+        background: var(--rose);
+      }
+      [hidden] {
+        display: none !important;
+      }
+      @media (max-width: 980px) {
+        .picks label {
+          min-width: 0;
+        }
+        .picks select {
+          width: 100%;
+          max-width: 100%;
+          min-width: 0;
+        }
+      }
+      @media (min-width: 681px) and (max-width: 980px) {
+        .picks {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+      @media (max-width: 680px) {
+        .top {
+          grid-template-columns: 1fr;
+        }
+        .photo {
+          min-height: 210px;
+        }
+        .inner,
+        .copy {
+          padding: 20px;
+        }
+        .picks,
+        .district-board {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="tool">
+      <section class="top">
+        <div class="copy">
+          <span>Berlin event decision tool</span>
+          <h1>Musikfest Evening Shape</h1>
+          <p>
+            Choose the concert venue first. Then give its part of Berlin the
+            evening instead of squeezing a concert into the end of a citywide
+            checklist.
+          </p>
+        </div>
+        <div class="photo"></div>
+      </section>
+      <section class="inner">
+        <div class="picks">
+          <label
+            >Your concert venue<select id="venue">
+              <option value="phil">Philharmonie / Chamber Music Hall</option>
+              <option value="konzerthaus">Konzerthaus Berlin</option>
+              <option value="festspiele">Haus der Berliner Festspiele</option>
+              <option value="oper">Deutsche Oper Berlin</option>
+            </select></label
+          ><label
+            >Your concert timing<select id="timing">
+              <option value="early">It starts before 19:00</option>
+              <option value="evening">It starts around 19:00–20:00</option>
+              <option value="late">It starts after 20:00</option>
+            </select></label
+          ><label
+            >Your finish<select id="finish">
+              <option value="dinner">Dinner belongs before the concert</option>
+              <option value="walk">A short post-concert walk is enough</option>
+              <option value="home">I want to go straight home after</option>
+            </select></label
+          >
+        </div>
+        <section class="district-board" aria-live="polite">
+          <div class="district-marker">
+            <span>YOUR VENUE DISTRICT</span>
+            <b id="district">Kulturforum · Potsdamer Platz</b>
+            <p id="districtnote"></p>
+          </div>
+          <div class="plan">
+            <h2 id="heading">Let the concert set the radius.</h2>
+            <p id="intro"></p>
+            <div class="steps">
+              <div class="step"><b>BEFORE THE DOORS</b><span id="before"></span></div>
+              <div class="step"><b>THE CONCERT</b><span id="listen"></span></div>
+              <div class="step"><b>AFTER THE APPLAUSE</b><span id="after"></span></div>
+            </div>
+          </div>
+        </section>
+        <div class="end">
+          <small
+            >Start times, venue access and remaining tickets must come from the
+            official festival listings. This tool is a pacing decision, not a
+            ticketing system.</small
+          ><div class="actions">
+            <a
+              class="cta"
+              href="https://www.berlinerfestspiele.de/en/musikfest-berlin"
+              target="_blank"
+              rel="noopener"
+              >Open Musikfest programme</a
+            ><a
+              class="cta planner"
+              href="https://www.berlinwalk.com/berlin-trip-planner"
+              target="_top"
+              >Plan my other Berlin days</a
+            >
+          </div>
+        </div>
+        <div class="credits">
+          <button aria-expanded="false" aria-controls="c">
+            Widget visual credit
+          </button>
+          <div id="c" hidden>
+            Tool hero image: Berliner Philharmonie by Ansgar Koreng,
+            <a
+              href="https://commons.wikimedia.org/wiki/File:Berliner_Philharmonie,_170517,_ako.jpg"
+              target="_blank"
+              rel="noopener"
+              >Wikimedia Commons</a
+            >, CC BY-SA 4.0.
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="../js/brand.js"></script>
+    <script>
+      const q = (s) => document.querySelector(s);
+      function draw() {
+        const venue = q("#venue").value;
+        const timing = q("#timing").value;
+        const finish = q("#finish").value;
+        const venues = {
+          phil: {
+            name: "Philharmonie / Chamber Music Hall",
+            district: "Kulturforum · Potsdamer Platz",
+            before: "Kulturforum and the Tiergarten edge",
+            after: "the Kulturforum edge toward Potsdamer Platz",
+          },
+          konzerthaus: {
+            name: "Konzerthaus Berlin",
+            district: "Gendarmenmarkt · historic centre",
+            before: "Gendarmenmarkt, Französische Straße and the historic centre",
+            after: "Gendarmenmarkt itself before you turn home",
+          },
+          festspiele: {
+            name: "Haus der Berliner Festspiele",
+            district: "Wilmersdorf · Spichernstraße",
+            before: "the quiet Wilmersdorf side around Spichernstraße and Kurfürstendamm",
+            after: "one short Ku’damm or Spichernstraße block",
+          },
+          oper: {
+            name: "Deutsche Oper Berlin",
+            district: "Bismarckstraße · Charlottenburg",
+            before: "the immediate Bismarckstraße and Charlottenburg block",
+            after: "the Bismarckstraße side, not a dash back to Mitte",
+          },
+        };
+        const timingPlan = {
+          early: {
+            title: "Use the late afternoon, then arrive unhurried.",
+            before: "You have a short, useful daylight window. Stay around {place}; do not add a distant sight before an early concert.",
+            listen: "Because the concert starts before 19:00, check the official programme and venue details early, then leave a personal buffer for the entrance and cloakroom.",
+          },
+          evening: {
+            title: "Give one district the whole evening.",
+            before: "Use late afternoon for {place}, then move toward the venue without crossing Berlin again.",
+            listen: "For a 19:00–20:00 start, the concert is the main appointment. Confirm its exact time, ticket and venue details in the official programme.",
+          },
+          late: {
+            title: "Let the late start buy you a slower afternoon.",
+            before: "Keep a real break before the performance, then stay around {place} rather than saving your longest transfer for the evening.",
+            listen: "For a start after 20:00, check the official programme for exact access and timing before you decide how late the rest of the night can run.",
+          },
+        };
+        const finishPlan = {
+          dinner: "Have dinner in the same wider district before the concert. After applause, let the music be the end of the night rather than fitting in another destination.",
+          walk: "If the weather and energy still work, take one short look around {place}. Then go home while the evening still feels complete.",
+          home: "Open your route home before the applause. From this district, resist adding a final cross-city stop just because Berlin is still awake.",
+        };
+        const selectedVenue = venues[venue];
+        const selectedTiming = timingPlan[timing];
+        const selectedFinish = finishPlan[finish];
+        const withPlace = (copy, place) => copy.replace("{place}", place);
+        q("#district").textContent = selectedVenue.district;
+        q("#districtnote").textContent = `${selectedVenue.name} is your fixed point. The festival programme decides the individual concert; this tool decides the useful radius around it.`;
+        q("#heading").textContent = selectedTiming.title;
+        q("#intro").textContent = `Build around ${selectedVenue.name}, not around a generic idea of a concert night. ${selectedVenue.district} is the practical area to keep close.`;
+        q("#before").textContent = withPlace(selectedTiming.before, selectedVenue.before);
+        q("#listen").textContent = selectedTiming.listen;
+        q("#after").textContent = withPlace(selectedFinish, selectedVenue.after);
+      }
+      document.querySelectorAll("select").forEach((e) => (e.onchange = draw));
+      q(".credits button").onclick = (e) => {
+        let x = q("#c");
+        x.hidden = !x.hidden;
+        e.currentTarget.setAttribute("aria-expanded", String(!x.hidden));
+      };
+      draw();
+    </script>
+  </body>
+</html>

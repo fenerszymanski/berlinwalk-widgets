@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Three-Day Itinerary | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <style>
+    #bw-itinerary {
+      box-sizing: border-box;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      max-width: 800px;
+      margin: 24px auto;
+      position: relative;
+      padding: 0 4px 18px;
+    }
+    #bw-itinerary *, #bw-itinerary *::before, #bw-itinerary *::after {
+      box-sizing: border-box;
+    }
+    .ic-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--bw-green);
+      margin: 0 0 4px;
+      line-height: 1.2;
+    }
+    .ic-subtitle {
+      font-size: 14px;
+      color: var(--bw-muted);
+      margin: 0 0 20px;
+      font-weight: 500;
+    }
+    .ic-days {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .ic-day {
+      position: relative;
+      background: var(--bw-white);
+      border: 1px solid #E0E0E0;
+      border-left: 4px solid var(--bw-lime);
+      border-radius: 8px;
+      padding: 20px 20px 18px 20px;
+    }
+    .ic-day-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .ic-day-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      background: var(--bw-green);
+      color: var(--bw-white);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .ic-day-theme {
+      font-weight: 800;
+      color: var(--bw-green);
+      font-size: 18px;
+      line-height: 1.25;
+    }
+    .ic-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .ic-row {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      align-items: start;
+      gap: 12px;
+      padding: 8px 10px;
+      border-radius: 6px;
+    }
+    .ic-time {
+      display: inline-block;
+      font-weight: 500;
+      font-size: 12px;
+      color: var(--bw-green);
+      background: #F5F5F5;
+      padding: 4px 8px;
+      border-radius: 4px;
+      text-align: center;
+      white-space: nowrap;
+      align-self: start;
+    }
+    .ic-activity {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--bw-text);
+    }
+    .ic-row.cta {
+      background: #FFFCDB;
+      align-items: center;
+    }
+    .ic-row.cta .ic-activity {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .ic-row.cta a {
+      color: var(--bw-green);
+      font-weight: 700;
+      text-decoration: underline;
+    }
+    .ic-row.cta::after {
+      content: '\203A';
+      color: var(--bw-green);
+      font-weight: 800;
+      font-size: 18px;
+      grid-column: 2 / 3;
+      justify-self: end;
+      align-self: center;
+      padding-right: 4px;
+    }
+    .ic-watermark {
+      position: absolute;
+      right: 8px;
+      bottom: -6px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--bw-green);
+      opacity: 0.7;
+      letter-spacing: 0.4px;
+      pointer-events: none;
+    }
+    .ic-empty {
+      padding: 22px;
+      text-align: center;
+      color: var(--bw-muted);
+      font-size: 14px;
+    }
+    @media (max-width: 500px) {
+      #bw-itinerary { padding: 0 2px 14px; }
+      .ic-title { font-size: 20px; }
+      .ic-subtitle { font-size: 13px; margin-bottom: 16px; }
+      .ic-day { padding: 16px; }
+      .ic-day-theme { font-size: 16px; }
+      .ic-row { grid-template-columns: 70px 1fr; gap: 10px; padding: 8px; }
+      .ic-time { font-size: 11px; padding: 3px 6px; }
+      .ic-activity { font-size: 13px; }
+      .ic-watermark { font-size: 9px; }
+    }
+  </style>
+</head>
+<body>
+<div id="bw-itinerary" aria-live="polite">
+  <div class="ic-empty">Loading itinerary…</div>
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('bw-itinerary');
+  var params = new URLSearchParams(window.location.search);
+  var monthKey = (params.get('month') || 'june').toLowerCase();
+
+  function escapeHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[c];
+    });
+  }
+
+  function escapeAttr(s) { return escapeHtml(s); }
+
+  function renderEmpty(label) {
+    root.innerHTML = '<div class="ic-empty">' + escapeHtml(label) + '</div>';
+  }
+
+  function safeUrl(u) {
+    if (!u) return '#';
+    if (/^https?:\/\//i.test(u)) return u;
+    if (u.charAt(0) === '/') return 'https://www.berlinwalk.com' + u;
+    return u;
+  }
+
+  function render(cfg) {
+    if (!cfg || !Array.isArray(cfg.days) || !cfg.days.length) {
+      renderEmpty('Itinerary coming soon');
+      return;
+    }
+    var daysHtml = cfg.days.map(function (day) {
+      var rowsHtml = (day.schedule || []).map(function (row) {
+        if (row.isCTA) {
+          var url = safeUrl(row.link);
+          return '<div class="ic-row cta">' +
+            '<span class="ic-time">' + escapeHtml(row.time) + '</span>' +
+            '<div class="ic-activity"><a href="' + escapeAttr(url) + '" target="_top" rel="noopener">' + escapeHtml(row.activity) + '</a></div>' +
+          '</div>';
+        }
+        return '<div class="ic-row">' +
+          '<span class="ic-time">' + escapeHtml(row.time) + '</span>' +
+          '<div class="ic-activity">' + escapeHtml(row.activity) + '</div>' +
+        '</div>';
+      }).join('');
+
+      return '<div class="ic-day">' +
+        '<div class="ic-day-head">' +
+          '<span class="ic-day-badge">' + escapeHtml(String(day.dayNumber)) + '</span>' +
+          '<span class="ic-day-theme">' + escapeHtml(day.theme) + '</span>' +
+        '</div>' +
+        '<div class="ic-rows">' + rowsHtml + '</div>' +
+      '</div>';
+    }).join('');
+
+    root.innerHTML =
+      '<h2 class="ic-title">' + escapeHtml(cfg.title || '') + '</h2>' +
+      (cfg.subtitle ? '<p class="ic-subtitle">' + escapeHtml(cfg.subtitle) + '</p>' : '') +
+      '<div class="ic-days">' + daysHtml + '</div>' +
+      '<div class="ic-watermark" aria-hidden="true">@berlinwalkingtour</div>';
+  }
+
+  fetch('./data.json', { cache: 'no-store' })
+    .then(function (r) { if (!r.ok) throw new Error('404'); return r.json(); })
+    .then(function (d) { render(d[monthKey]); })
+    .catch(function () { renderEmpty('Itinerary unavailable.'); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Walk the Soviet War Memorial — Treptower Park, stop by stop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
+    --yellow:#FFE600; --ink:#1c2a1c; --panel:#ffffff; --bone:#f4f9ec;
+    --line:#e0eccf; --stone:#6d7b66; --shadow:0 10px 30px rgba(18,61,24,.14);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .wrap{max-width:940px;margin:0 auto;padding:4px}
+  .card{background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+
+  .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:18px 22px 16px}
+  .kick{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:700;margin:0 0 6px;font-family:"IBM Plex Mono",monospace}
+  .head h1{margin:0;font-size:21px;font-weight:800;line-height:1.2}
+  .head p{margin:8px 0 0;font-size:13.5px;color:#e7f3e2;max-width:660px}
+
+  /* progress rail */
+  .rail{display:flex;gap:6px;padding:14px 18px 4px;background:var(--bone);border-bottom:1px solid var(--line)}
+  .seg{flex:1;text-align:center;background:none;border:0;padding:0;cursor:pointer;font:inherit}
+  .seg .bar{height:6px;border-radius:6px;background:#dbe7cc;transition:.2s}
+  .seg .lab{display:block;margin-top:6px;font-size:10px;font-weight:700;letter-spacing:.02em;color:#8a9a80;line-height:1.25;text-transform:uppercase}
+  .seg[aria-current="true"] .bar{background:var(--lime)}
+  .seg[aria-current="true"] .lab{color:var(--green)}
+  .seg.done .bar{background:var(--green)}
+  @media (max-width:560px){.seg .lab{display:none}.rail{padding:14px 18px}}
+
+  /* stage */
+  .stage{position:relative}
+  .photo{position:relative;aspect-ratio:16/9;background:#e9efe1 center/cover no-repeat;overflow:hidden}
+  @media (max-width:560px){.photo{aspect-ratio:4/3}}
+  .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 42%,rgba(0,0,0,.62) 100%)}
+  .stopbadge{position:absolute;top:12px;left:14px;z-index:2;background:rgba(18,61,24,.86);color:#fff;font-family:"IBM Plex Mono",monospace;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:5px 9px;border-radius:8px}
+  .caption{position:absolute;left:14px;right:14px;bottom:11px;z-index:2;color:#fff}
+  .caption .de{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--yellow);font-weight:600;letter-spacing:.02em}
+  .caption h2{margin:2px 0 0;font-size:20px;font-weight:800;line-height:1.15;text-shadow:0 1px 10px rgba(0,0,0,.45)}
+
+  .info{padding:15px 18px 6px}
+  .stat{display:inline-flex;align-items:center;gap:8px;background:var(--bone);border:1px solid var(--line);border-radius:11px;padding:7px 12px;margin:0 0 11px}
+  .stat .n{font-family:"IBM Plex Mono",monospace;font-weight:700;color:var(--green);font-size:15px;line-height:1}
+  .stat .t{font-size:11.5px;color:#5f7355;font-weight:600;letter-spacing:.02em}
+  .desc{margin:0;font-size:14.5px;color:#33452f;line-height:1.6}
+  .notice{margin:11px 0 2px;padding:11px 13px;background:#fbfcf6;border:1px solid var(--line);border-left:3px solid var(--lime);border-radius:0 11px 11px 0;font-size:13px;color:#3c4d38;line-height:1.55}
+  .notice b{color:var(--green-deep)}
+
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 18px 16px}
+  .nbtn{border:1px solid var(--line);background:#fff;color:var(--green-deep);font:inherit;font-weight:700;font-size:13px;padding:9px 15px;border-radius:11px;cursor:pointer;transition:.12s;display:inline-flex;align-items:center;gap:6px}
+  .nbtn:hover:not(:disabled){border-color:var(--lime)}
+  .nbtn:disabled{opacity:.4;cursor:default}
+  .nbtn.primary{background:var(--yellow);border-color:var(--green);color:var(--green-deep)}
+  .nbtn.primary:hover{filter:brightness(.97);border-color:var(--green)}
+  .counter{font-size:12px;color:#8a9a80;font-weight:700;letter-spacing:.03em}
+
+  .plan{border-top:1px dashed #cddab9;background:var(--bone);padding:12px 18px;display:flex;flex-wrap:wrap;gap:8px 16px}
+  .plan span{font-size:12px;color:#4a5a44;display:inline-flex;align-items:center;gap:6px;font-weight:600}
+  .plan .dot{width:6px;height:6px;border-radius:50%;background:var(--lime);flex:0 0 6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="head">
+      <p class="kick">BerlinWalk • Treptower Park</p>
+      <h1>Walk the Soviet War Memorial, stop by stop</h1>
+      <p>The memorial is built as one long straight walk. Move through the five stops below in the order you actually pass them, so the scale and the story land before you go.</p>
+    </div>
+
+    <div class="rail" id="rail"></div>
+
+    <div class="stage">
+      <div class="photo" id="photo">
+        <span class="stopbadge" id="badge">Stop 1 / 5</span>
+        <div class="caption">
+          <span class="de" id="cde"></span>
+          <h2 id="ctitle"></h2>
+        </div>
+      </div>
+      <div class="info">
+        <div class="stat"><span class="n" id="statN"></span><span class="t" id="statT"></span></div>
+        <p class="desc" id="desc"></p>
+        <div class="notice" id="notice"></div>
+      </div>
+      <div class="nav">
+        <button class="nbtn" id="prev" type="button">&larr; Back</button>
+        <span class="counter" id="counter"></span>
+        <button class="nbtn primary" id="next" type="button">Next stop &rarr;</button>
+      </div>
+    </div>
+
+    <div class="plan">
+      <span><span class="dot"></span>Free, always open</span>
+      <span><span class="dot"></span>S Treptower Park (S8 · S85 · S9 · S41 · S42)</span>
+      <span><span class="dot"></span>Allow 30–45 min</span>
+      <span><span class="dot"></span>A quiet, respectful place</span>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var STOPS = [
+    {
+      img: "img/cover-memorial-axis.jpg",
+      de: "Der Weg · the approach",
+      title: "The long walk in",
+      statN: "~750 m",
+      statT: "straight axis, entrance to statue",
+      desc: "From the S-Bahn you reach a plain gate and then a single straight line runs the whole length of the memorial. Everything is placed on that axis on purpose, so you read it like a sentence as you walk.",
+      notice: "<b>What to notice:</b> stop at the top of the steps before you go down. From here you can already see the two red pillars and, far behind them, the small dark figure of the soldier on his hill. That first view is the whole point."
+    },
+    {
+      img: "img/mother-homeland-statue.jpg",
+      de: "Mutter Heimat · Mother Homeland",
+      title: "The grieving mother",
+      statN: "1949",
+      statT: "opened 8 May, four years after the war",
+      desc: "Just inside, a stone mother sits alone with her head bowed, mourning her sons. She is the first human figure you meet, and she sets the tone before any of the triumph further along the axis.",
+      notice: "<b>What to notice:</b> she faces the graves, not the entrance. The memorial wants you to feel the loss first and the victory second, which is unusual for a monument this grand."
+    },
+    {
+      img: "img/flags-kneeling-soldiers.jpg",
+      de: "Die Fahnen · the flags",
+      title: "The two red flags",
+      statN: "2 × granite",
+      statT: "lowered flags, two kneeling soldiers",
+      desc: "Two enormous flags carved from deep red granite bow inward across the path, each with a kneeling bronze soldier beneath it. This is the formal gateway into the sunken field of the fallen.",
+      notice: "<b>Berlin myth, corrected:</b> people love to say this red granite was ripped from Hitler's ruined Reich Chancellery. It is a good story, but it is <b>not true</b>. The stone was quarried for the memorial."
+    },
+    {
+      img: "img/sarcophagus-relief.jpg",
+      de: "Die Sarkophage · the sarcophagi",
+      title: "The field of the fallen",
+      statN: "16 · ~7,000",
+      statT: "stone sarcophagi · soldiers buried here",
+      desc: "The path drops into a long green field lined with sixteen white stone blocks, one for each Soviet republic of the time. Around 7,000 Red Army soldiers who died taking Berlin in 1945 are actually buried under this lawn.",
+      notice: "<b>What to notice:</b> each block carries a carved war scene and a Stalin quotation in Russian and German. Read one or two slowly. This is a real cemetery, so keep it quiet."
+    },
+    {
+      img: "img/liberator-soldier-statue.jpg",
+      de: "Der Befreier · the Liberator",
+      title: "The soldier on the hill",
+      statN: "12 m · 70 t",
+      statT: "bronze soldier, child in one arm",
+      desc: "At the far end a 12-metre bronze soldier stands on a mound, a rescued German child in one arm and his sword resting on a broken swastika. You climb the hill to a small domed hall beneath his feet.",
+      notice: "<b>The story:</b> the child comes from an account of Sergeant Nikolai Masalov, said to have carried a German girl to safety during the battle. Turn around at the top for the best view back down the whole axis you just walked."
+    }
+  ];
+
+  var i = 0;
+  var photo = document.getElementById('photo');
+  var badge = document.getElementById('badge');
+  var cde = document.getElementById('cde');
+  var ctitle = document.getElementById('ctitle');
+  var statN = document.getElementById('statN');
+  var statT = document.getElementById('statT');
+  var desc = document.getElementById('desc');
+  var notice = document.getElementById('notice');
+  var counter = document.getElementById('counter');
+  var prev = document.getElementById('prev');
+  var next = document.getElementById('next');
+  var rail = document.getElementById('rail');
+
+  // preload
+  STOPS.forEach(function(s){ var im = new Image(); im.src = s.img; });
+
+  // build rail
+  var RAIL_LABELS = ['Approach','Mother','Flags','Graves','Statue'];
+  STOPS.forEach(function(s, idx){
+    var b = document.createElement('button');
+    b.className = 'seg';
+    b.type = 'button';
+    b.innerHTML = '<span class="bar"></span><span class="lab">'+RAIL_LABELS[idx]+'</span>';
+    b.addEventListener('click', function(){ go(idx); });
+    rail.appendChild(b);
+  });
+  var segs = rail.querySelectorAll('.seg');
+
+  function render(){
+    var s = STOPS[i];
+    photo.style.backgroundImage = "url('"+s.img+"')";
+    badge.textContent = 'Stop ' + (i+1) + ' / ' + STOPS.length;
+    cde.textContent = s.de;
+    ctitle.textContent = s.title;
+    statN.textContent = s.statN;
+    statT.textContent = s.statT;
+    desc.textContent = s.desc;
+    notice.innerHTML = s.notice;
+    counter.textContent = (i+1) + ' of ' + STOPS.length;
+    prev.disabled = (i === 0);
+    next.textContent = (i === STOPS.length-1) ? 'Start over' : 'Next stop →';
+    for (var k=0;k<segs.length;k++){
+      segs[k].setAttribute('aria-current', k===i ? 'true' : 'false');
+      segs[k].classList.toggle('done', k < i);
+    }
+  }
+
+  function go(n){ i = (n + STOPS.length) % STOPS.length; render(); }
+
+  prev.addEventListener('click', function(){ if (i>0) go(i-1); });
+  next.addEventListener('click', function(){ go(i+1); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowRight') go(i+1);
+    if (e.key === 'ArrowLeft' && i>0) go(i-1);
+  });
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

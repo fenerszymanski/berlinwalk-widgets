@@ -1,0 +1,719 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Boat Tour Finder | BerlinWalk</title>
+  <meta name="description" content="Match your Berlin trip with the right Spree cruise, Landwehrkanal bridge tour, Wannsee lake cruise, or evening dinner boat ride, then go to official booking pages.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-boat-finder">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-boat-finder {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #143F17;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-light-green: #C5E1A5;
+      --bw-lime-soft: #F2F8E8;
+      --bw-cream: #FAFAF5;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-red: #E63946;
+      --bw-red-soft: #FDEBED;
+      --bw-amber: #B56A00;
+      --bw-amber-soft: #FFF5DA;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 28px 0;
+      min-width: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-boat-finder *,
+    #bw-boat-finder *::before,
+    #bw-boat-finder *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-boat-finder .bw-wrap {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      max-width: 100%;
+      min-width: 0;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-boat-finder .bw-head {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.18), rgba(124, 179, 66, 0.1)),
+        var(--bw-green);
+      color: var(--bw-white);
+      min-width: 0;
+      padding: 18px 20px;
+    }
+
+    #bw-boat-finder .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2.3px;
+      line-height: 1.2;
+      margin: 0 0 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-boat-finder h2,
+    #bw-boat-finder h3,
+    #bw-boat-finder p {
+      margin-top: 0;
+    }
+
+    #bw-boat-finder .bw-title {
+      color: var(--bw-white);
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    #bw-boat-finder .bw-sub {
+      color: #DDEFC7;
+      font-size: 13.5px;
+      font-weight: 600;
+      line-height: 1.55;
+      margin: 9px 0 0;
+      max-width: 760px;
+      overflow-wrap: break-word;
+    }
+
+    #bw-boat-finder .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.75fr);
+      min-width: 0;
+      padding: 18px 20px 20px;
+    }
+
+    #bw-boat-finder .bw-form {
+      display: grid;
+      gap: 13px;
+      min-width: 0;
+    }
+
+    #bw-boat-finder .bw-question,
+    #bw-boat-finder .bw-result {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 13px;
+    }
+
+    #bw-boat-finder .bw-label {
+      color: var(--bw-green);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.3px;
+      line-height: 1.3;
+      margin-bottom: 9px;
+      text-transform: uppercase;
+    }
+
+    #bw-boat-finder .bw-options {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-boat-finder button,
+    #bw-boat-finder a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    #bw-boat-finder button {
+      font: inherit;
+    }
+
+    #bw-boat-finder .bw-option {
+      align-items: center;
+      background: var(--bw-white);
+      border: 1.5px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      cursor: pointer;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 28px minmax(0, 1fr);
+      min-height: 54px;
+      padding: 9px 10px;
+      text-align: left;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+      width: 100%;
+    }
+
+    #bw-boat-finder .bw-option:hover {
+      background: var(--bw-lime-soft);
+      border-color: var(--bw-lime);
+      transform: translateY(-1px);
+    }
+
+    #bw-boat-finder .bw-option.is-active {
+      background: linear-gradient(135deg, var(--bw-yellow), #FFF78A);
+      border-color: var(--bw-green);
+      box-shadow: inset 0 0 0 1px rgba(27, 94, 32, 0.14);
+    }
+
+    #bw-boat-finder .bw-option:focus-visible,
+    #bw-boat-finder .bw-link:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.8);
+      outline-offset: 2px;
+    }
+
+    #bw-boat-finder .bw-ico {
+      align-items: center;
+      background: var(--bw-lime-soft);
+      border-radius: 8px;
+      color: var(--bw-green);
+      display: inline-flex;
+      font-size: 17px;
+      height: 28px;
+      justify-content: center;
+      line-height: 1;
+      width: 28px;
+    }
+
+    #bw-boat-finder .bw-option.is-active .bw-ico {
+      background: var(--bw-green);
+      color: var(--bw-yellow);
+    }
+
+    #bw-boat-finder .bw-option-text {
+      display: grid;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    #bw-boat-finder .bw-main {
+      color: var(--bw-text);
+      font-size: 12.5px;
+      font-weight: 900;
+      line-height: 1.25;
+      overflow-wrap: break-word;
+    }
+
+    #bw-boat-finder .bw-mini {
+      color: var(--bw-muted);
+      font-size: 10.5px;
+      font-weight: 700;
+      line-height: 1.25;
+      overflow-wrap: break-word;
+    }
+
+    #bw-boat-finder .bw-result {
+      align-self: stretch;
+      display: grid;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    #bw-boat-finder .bw-badge {
+      align-items: center;
+      border-radius: 999px;
+      display: inline-flex;
+      font-size: 10px;
+      font-weight: 900;
+      gap: 6px;
+      justify-self: start;
+      letter-spacing: 1.2px;
+      line-height: 1;
+      padding: 8px 10px;
+      text-transform: uppercase;
+    }
+
+    #bw-boat-finder .bw-badge.good {
+      background: var(--bw-lime-soft);
+      color: var(--bw-green);
+    }
+
+    #bw-boat-finder .bw-result-title {
+      color: var(--bw-green);
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    #bw-boat-finder .bw-result-copy {
+      color: var(--bw-text);
+      font-size: 13px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 0;
+      overflow-wrap: break-word;
+    }
+
+    #bw-boat-finder .bw-steps {
+      display: grid;
+      gap: 7px;
+      margin: 0;
+      padding: 0;
+    }
+
+    #bw-boat-finder .bw-step {
+      align-items: start;
+      background: #FBFCF7;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 24px minmax(0, 1fr);
+      list-style: none;
+      padding: 8px 9px;
+    }
+
+    #bw-boat-finder .bw-step-mark {
+      align-items: center;
+      background: var(--bw-green);
+      border-radius: 999px;
+      color: var(--bw-yellow);
+      display: inline-flex;
+      font-size: 11px;
+      font-weight: 900;
+      height: 24px;
+      justify-content: center;
+      line-height: 1;
+      width: 24px;
+    }
+
+    #bw-boat-finder .bw-step-text {
+      color: var(--bw-text);
+      font-size: 12.2px;
+      font-weight: 700;
+      line-height: 1.45;
+      margin: 0;
+      overflow-wrap: break-word;
+    }
+
+    #bw-boat-finder .bw-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    #bw-boat-finder .bw-link {
+      align-items: center;
+      background: var(--bw-green);
+      border-radius: 999px;
+      color: var(--bw-white);
+      display: inline-flex;
+      font-size: 11px;
+      font-weight: 900;
+      gap: 6px;
+      line-height: 1;
+      min-height: 34px;
+      padding: 9px 12px;
+      text-decoration: none;
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+
+    #bw-boat-finder .bw-link:hover {
+      background: var(--bw-green-dark);
+      transform: translateY(-1px);
+    }
+
+    #bw-boat-finder .bw-link.secondary {
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+    }
+
+    #bw-boat-finder .bw-link.secondary:hover {
+      background: #FFF78A;
+    }
+
+    #bw-boat-finder .bw-note {
+      border-left: 4px solid var(--bw-yellow);
+      color: var(--bw-muted);
+      font-size: 11.5px;
+      font-weight: 700;
+      line-height: 1.45;
+      margin: 0;
+      overflow-wrap: break-word;
+      padding-left: 10px;
+    }
+
+    @media (max-width: 760px) {
+      #bw-boat-finder {
+        margin: 22px 0;
+      }
+
+      #bw-boat-finder .bw-head {
+        padding: 16px;
+      }
+
+      #bw-boat-finder .bw-title {
+        font-size: 23px;
+      }
+
+      #bw-boat-finder .bw-body {
+        grid-template-columns: 1fr;
+        padding: 14px;
+      }
+
+      #bw-boat-finder .bw-options {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-boat-finder .bw-result-title {
+        font-size: 18px;
+      }
+    }
+  </style>
+
+  <div class="bw-wrap">
+    <header class="bw-head">
+      <p class="bw-kicker">Berlin Boat Tour Matcher</p>
+      <h2 class="bw-title">Find Your Perfect Boat Tour</h2>
+      <p class="bw-sub">Choose your route shape and travel mood, then jump to official booking pages for the tours that actually fit.</p>
+    </header>
+
+    <div class="bw-body">
+      <section class="bw-form" aria-label="Boat finder inputs">
+        <div class="bw-question">
+          <span class="bw-label" id="duration-label">Which route shape fits your plan?</span>
+          <div class="bw-options" role="group" aria-labelledby="duration-label" data-group="duration">
+            <button class="bw-option is-active" type="button" data-value="short" aria-pressed="true">
+              <span class="bw-ico" aria-hidden="true">⏱️</span>
+              <span class="bw-option-text"><span class="bw-main">Quick city cruise</span><span class="bw-mini">1 to 1.5 hours</span></span>
+            </button>
+            <button class="bw-option" type="button" data-value="medium" aria-pressed="false">
+              <span class="bw-ico" aria-hidden="true">🗺️</span>
+              <span class="bw-option-text"><span class="bw-main">Longer city loop</span><span class="bw-mini">2 to 2.5 hours</span></span>
+            </button>
+            <button class="bw-option" type="button" data-value="long" aria-pressed="false">
+              <span class="bw-ico" aria-hidden="true">🌲</span>
+              <span class="bw-option-text"><span class="bw-main">Bridge tour / lake escape</span><span class="bw-mini">3+ hours</span></span>
+            </button>
+            <button class="bw-option" type="button" data-value="evening" aria-pressed="false">
+              <span class="bw-ico" aria-hidden="true">🌙</span>
+              <span class="bw-option-text"><span class="bw-main">Evening or dinner</span><span class="bw-mini">Sunset, food, city lights</span></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="bw-question">
+          <span class="bw-label" id="vibe-label">What do you care about most?</span>
+          <div class="bw-options" role="group" aria-labelledby="vibe-label" data-group="vibe">
+            <button class="bw-option is-active" type="button" data-value="sightseeing" aria-pressed="true">
+              <span class="bw-ico" aria-hidden="true">🏛️</span>
+              <span class="bw-option-text"><span class="bw-main">Classic landmarks</span><span class="bw-mini">Reichstag, museums, cathedral</span></span>
+            </button>
+            <button class="bw-option" type="button" data-value="neighborhood" aria-pressed="false">
+              <span class="bw-ico" aria-hidden="true">🏘️</span>
+              <span class="bw-option-text"><span class="bw-main">Canals & neighborhoods</span><span class="bw-mini">Landwehrkanal, locks, bridges</span></span>
+            </button>
+            <button class="bw-option" type="button" data-value="nature" aria-pressed="false">
+              <span class="bw-ico" aria-hidden="true">⛵</span>
+              <span class="bw-option-text"><span class="bw-main">Lakes & parks</span><span class="bw-mini">Wannsee, Havel, green Spree</span></span>
+            </button>
+            <button class="bw-option" type="button" data-value="leisure" aria-pressed="false">
+              <span class="bw-ico" aria-hidden="true">🍻</span>
+              <span class="bw-option-text"><span class="bw-main">Food, drinks, relaxed pace</span><span class="bw-mini">Brunch, beer, dinner</span></span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <aside class="bw-result" aria-live="polite">
+        <span class="bw-badge good" data-result-badge>Best Match</span>
+        <h3 class="bw-result-title" data-result-title>Historic City Centre Spree Cruise</h3>
+        <p class="bw-result-copy" data-result-copy>The classic city center cruise, passing the Reichstag, government district, and Museum Island. Best if you have limited time.</p>
+        <ul class="bw-steps" data-result-steps></ul>
+        <div class="bw-links" data-result-links></div>
+        <p class="bw-note">Official schedules change by season and sometimes by disruption notice. If you rely on a WelcomeCard discount, check the operator rules before paying online; Riedel in particular has mixed official discount signals.</p>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.getElementById('bw-boat-finder');
+      if (!root) return;
+
+      var state = {
+        duration: 'short',
+        vibe: 'sightseeing'
+      };
+
+      var links = {
+        stern: {
+          label: 'Stern + Kreis official tickets',
+          url: 'https://www.sternundkreis.de/en/shop/ship-tours/',
+          kind: 'official'
+        },
+        winkler1: {
+          label: 'Winkler City Tour 1',
+          url: 'https://www.reedereiwinkler.de/en/citytouren/city-tour-1',
+          kind: 'official'
+        },
+        winkler2: {
+          label: 'Winkler City Tour 2',
+          url: 'https://www.reedereiwinkler.de/en/citytouren/city-tour-2',
+          kind: 'official'
+        },
+        winkler3: {
+          label: 'Winkler Bridge Tour',
+          url: 'https://www.reedereiwinkler.de/en/citytouren/city-tour-3',
+          kind: 'official'
+        },
+        winklerEvening: {
+          label: 'Winkler evening tour',
+          url: 'https://www.reedereiwinkler.de/en/citytouren/evening-citytour-2',
+          kind: 'official'
+        },
+        winklerSundowner: {
+          label: 'Winkler Sundowner',
+          url: 'https://www.reedereiwinkler.de/en/citytouren/sundowner-tour',
+          kind: 'official'
+        },
+        riedel: {
+          label: 'Riedel official booking',
+          url: 'https://fareharbor.com/embeds/book/reederei-riedel/items/?flow=403457&full-items=yes',
+          kind: 'official'
+        },
+        bwsg: {
+          label: 'BWSG schedule & tickets',
+          url: 'https://bwsg-berlin.de/en/schedule-tickets/',
+          kind: 'official'
+        },
+        becker: {
+          label: 'Becker dinner cruise',
+          url: 'https://www.reedereibecker.com/',
+          kind: 'official'
+        }
+      };
+
+      function baseResult(title, copy, steps, linkKeys) {
+        return { title: title, copy: copy, steps: steps, linkKeys: linkKeys || [] };
+      }
+
+      var results = {
+        classic: baseResult(
+          '1-Hour Historic Spree City Cruise',
+          'The realistic best match for a short first-time Berlin boat ride: central landmarks, frequent departures, and no long detour away from Mitte.',
+          [
+            'Duration: 1 to 1.5 hours',
+            'Route: Friedrichstraße, Nikolaiviertel, Museum Island, Reichstag, government district',
+            'Best for: First-time visitors, families, and anyone with a tight afternoon',
+            'Book ahead when: It is a sunny summer weekend or you need a specific departure time',
+            'WelcomeCard: Clear with Stern + Kreis, Winkler and BWSG; verify Riedel before relying on it'
+          ],
+          ['stern', 'winkler1', 'riedel']
+        ),
+        extended: baseResult(
+          '2 to 2.5-Hour Extended City Cruise',
+          'A better fit when you want more than the short Spree loop, but do not want to spend half a day on the water.',
+          [
+            'Duration: 2 to 2.5 hours',
+            'Route: Central Spree plus longer western or eastern stretches, depending on operator',
+            'Best for: More context, fewer rushed photos, and a calmer pace',
+            'Main docks: Friedrichstraße, Schlossbrücke, Alte Börse / Hackescher Markt, or Jannowitzbrücke',
+            'Trade-off: Not the full Landwehrkanal bridge loop; choose 3+ hours for that'
+          ],
+          ['winkler2', 'stern', 'bwsg']
+        ),
+        shortCanal: baseResult(
+          'Closest Short Fit: East Side or Extended Spree Cruise',
+          'A true Landwehrkanal bridge tour is not a 1-hour product. If you want neighborhood texture without losing half a day, choose an East Side or 2 to 2.5-hour city route.',
+          [
+            'Duration: Usually 1.5 to 2.5 hours',
+            'Route: East Side, green Spree, or an extended central city loop; BWSG East-Side-Tour is a 2.5-hour example',
+            'Best for: More local feeling than the classic 1-hour landmark loop',
+            'Reality check: The proper bridge tour needs about 3 to 3.5 hours',
+            'Book ahead when: You want a specific East Side, evening, or weekend slot'
+          ],
+          ['bwsg', 'winkler2', 'stern']
+        ),
+        bridge: baseResult(
+          'Spree & Landwehrkanal Bridge Tour',
+          'This is the route I would choose if you have the time: canals, locks, Kreuzberg edges, Tiergarten, government district, and many more bridges.',
+          [
+            'Duration: 3.25 to 3.75 hours',
+            'Route: Spree and Landwehrkanal loop through Mitte, Kreuzberg, Tiergarten, and Charlottenburg',
+            'Best for: Neighborhood texture, engineering, locks, and a less generic Berlin view',
+            'Book ahead when: It is July, August, a weekend, or you want a late-afternoon departure',
+            'Avoid if: You only have one hour; the real bridge tour cannot be compressed'
+          ],
+          ['stern', 'winkler3', 'riedel']
+        ),
+        natureShort: baseResult(
+          'Short Green Spree or Havel Cruise',
+          'You want water, air, and greener banks without committing to a full lake day. This is the better match than forcing a long Wannsee trip into a short slot.',
+          [
+            'Duration: 1.5 to 2.5 hours',
+            'Route: Green Spree, East Side, Tegel / Havel, or another outer-water route depending on date',
+            'Best for: A quieter break from Mitte, parks, river bends, and less dense sightseeing',
+            'Main docks: Uber Platz / East Side, Alte Börse, Tegel, or other seasonal docks',
+            'Check first: Nature routes are more seasonal than the central city cruise'
+          ],
+          ['stern', 'bwsg', 'winkler2']
+        ),
+        lakes: baseResult(
+          'Wannsee, Havel, Tegel, or Müggelsee Lake Cruise',
+          'The right choice when the boat ride is the plan, not just a quick break between museums.',
+          [
+            'Duration: 2 to 5+ hours depending on lake route',
+            'Route: Wannsee and Potsdam palaces, Tegel / Oberhavel, Müggelsee, or southeast Berlin waterways',
+            'Best for: Longer stays, sunny days, palaces, forests, and a proper day-trip feeling',
+            'Main docks: Wannsee, Tegel Greenwichpromenade, Treptow, Köpenick, or Potsdam depending on route',
+            'Transport note: Add travel time to the dock; these are not quick Mitte add-ons'
+          ],
+          ['stern', 'bwsg', 'riedel']
+        ),
+        relaxedShort: baseResult(
+          'Short Sundowner or City Cruise with Drinks',
+          'For a short relaxed ride, pick a sundowner or simple city cruise and keep dinner for another night.',
+          [
+            'Duration: 1 to 1.5 hours',
+            'Route: Central Spree, East Side, or a short evening route depending on date',
+            'Best for: A beer on board, golden light, and a quick reset after walking',
+            'Trade-off: Full brunch and dinner products usually need about 2.5 hours',
+            'Book ahead when: You want a sunset slot or a weekend evening'
+          ],
+          ['winklerSundowner', 'stern', 'winkler1']
+        ),
+        relaxedLong: baseResult(
+          'Longer Relaxed Lake or Dinner Plan',
+          'If 3+ hours is fixed, choose a lake/day route with onboard drinks. If dinner is the real goal, switch to an evening dinner cruise and expect about 2.5 hours.',
+          [
+            'Duration: 2.5 hours for dinner, 3+ hours for lake and day routes',
+            'Route: Central dinner cruise, Havel lakes, Wannsee, Müggelsee, or longer seasonal water routes',
+            'Best for: Slow travel, a seated break, and less pressure to photograph every landmark',
+            'Decision point: Pick dinner for atmosphere; pick lakes for a true half-day plan',
+            'Book ahead when: Food, a table, or a summer weekend matters'
+          ],
+          ['becker', 'stern', 'riedel']
+        ),
+        evening: baseResult(
+          'Sundowner, Evening City, or Dinner Cruise',
+          'Choose this when the mood matters more than maximum sightseeing: golden light, drinks, dinner, or a slower evening on the Spree.',
+          [
+            'Duration: 1 hour for sundowner, 2 to 2.5 hours for evening city tours, about 2.5 hours for dinner',
+            'Route: Usually central Spree or an evening city loop; dinner cruises prioritize atmosphere',
+            'Best for: Couples, slow evenings, birthdays, and post-walking-tour relaxation',
+            'Book ahead when: You want dinner, brunch, or a table-style experience',
+            'Photo tip: For landmark photos, choose daytime; for atmosphere, choose sunset'
+          ],
+          ['becker', 'winklerSundowner', 'winklerEvening', 'stern']
+        )
+      };
+
+      function evaluate() {
+        if (state.duration === 'evening') {
+          return results.evening;
+        }
+
+        if (state.vibe === 'leisure') {
+          if (state.duration === 'short') return results.relaxedShort;
+          if (state.duration === 'long') return results.relaxedLong;
+          return results.evening;
+        }
+
+        if (state.vibe === 'nature') {
+          return state.duration === 'long' ? results.lakes : results.natureShort;
+        }
+
+        if (state.vibe === 'neighborhood') {
+          if (state.duration === 'short') return results.shortCanal;
+          if (state.duration === 'long') return results.bridge;
+          return results.extended;
+        }
+
+        if (state.duration === 'long') return results.bridge;
+        if (state.duration === 'medium') return results.extended;
+        return results.classic;
+      }
+
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, function (char) {
+          return {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+          }[char];
+        });
+      }
+
+      function render() {
+        var result = evaluate();
+        var title = root.querySelector('[data-result-title]');
+        var copy = root.querySelector('[data-result-copy]');
+        var steps = root.querySelector('[data-result-steps]');
+        var linkWrap = root.querySelector('[data-result-links]');
+
+        title.textContent = result.title;
+        copy.textContent = result.copy;
+
+        steps.innerHTML = result.steps.map(function (step) {
+          var parts = step.split(': ');
+          if (parts.length > 1) {
+            return '<li class="bw-step"><span class="bw-step-mark">✓</span><p class="bw-step-text"><strong>' + escapeHtml(parts[0]) + ':</strong> ' + escapeHtml(parts.slice(1).join(': ')) + '</p></li>';
+          }
+          return '<li class="bw-step"><span class="bw-step-mark">✓</span><p class="bw-step-text">' + escapeHtml(step) + '</p></li>';
+        }).join('');
+
+        linkWrap.innerHTML = result.linkKeys.map(function (key) {
+          var link = links[key];
+          if (!link) return '';
+          var className = link.kind === 'guide' ? 'bw-link secondary' : 'bw-link';
+          return '<a class="' + className + '" href="' + escapeHtml(link.url) + '" target="_blank" rel="noopener">' + escapeHtml(link.label) + ' →</a>';
+        }).join('');
+      }
+
+      root.addEventListener('click', function (event) {
+        var button = event.target.closest('.bw-option');
+        if (!button || !root.contains(button)) return;
+        var group = button.closest('[data-group]');
+        if (!group) return;
+        state[group.dataset.group] = button.dataset.value;
+        group.querySelectorAll('.bw-option').forEach(function (item) {
+          var active = item === button;
+          item.classList.toggle('is-active', active);
+          item.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+        render();
+      });
+
+      render();
+    })();
+  </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "2.0.0",
+  "engineVersion": "2026.07.19-output-v2.1",
+  "scenarioId": "monday-museum",
+  "input": {
+    "arrivalDate": "2026-09-14",
+    "tripLength": 1,
+    "arrivalTime": "morning",
+    "arrivalPoint": "hotel",
+    "stayArea": "mitte",
+    "groupType": "couple",
+    "firstTime": "yes",
+    "interests": [
+      "museums",
+      "history"
+    ],
+    "budgetStyle": "comfort",
+    "mustHandle": [
+      "reservations",
+      "rain"
+    ],
+    "pace": "balanced",
+    "tourIntent": "maybe",
+    "labels": {
+      "arrivalDate": "Mon, 14 Sept 2026",
+      "tripLength": "1 day",
+      "arrivalTime": "Before 09:00",
+      "arrivalPoint": "Hotel/Airbnb",
+      "stayArea": "Mitte / Alexanderplatz",
+      "groupType": "Couple / friends",
+      "firstTime": "Yes",
+      "interests": "Museums, History",
+      "budgetStyle": "Comfort",
+      "mustHandle": "Timed entry planning, Rain backup",
+      "pace": "Balanced",
+      "tourIntent": "Maybe later"
+    }
+  },
+  "title": "One strong Berlin day, not a scattered checklist",
+  "summary": "This plan keeps Berlin area-by-area instead of sending you across the city all day. Start with context early, then use the rest of the trip for Wall history, museums, food, neighborhoods, and slower backup time. Book-ahead flags are called out so timed entries do not surprise you.",
+  "displayDate": "Mon, 14 Sept 2026",
+  "ticket": "AB day ticket",
+  "tourFit": "Next Tue-Sat 11:30",
+  "days": [
+    {
+      "dayId": "day_2026-09-14__route_arrival__brandenburg_gate_topography_terror_reichstag",
+      "routeId": "route_arrival__brandenburg_gate_topography_terror_reichstag",
+      "dayNumber": 1,
+      "dateKey": "2026-09-14",
+      "title": "Arrival, orientation, and the one essential Berlin layer",
+      "theme": "Arrival day",
+      "planKey": "arrival",
+      "areaIds": [
+        "mitte"
+      ],
+      "places": [
+        {
+          "placeId": "brandenburg_gate",
+          "label": "Brandenburg Gate",
+          "area": "Mitte",
+          "areaId": "mitte",
+          "type": "landmark",
+          "lat": 52.5163,
+          "lng": 13.3777,
+          "indoor": false,
+          "closedDays": [],
+          "note": ""
+        },
+        {
+          "placeId": "topography_terror",
+          "label": "Topography of Terror",
+          "area": "Mitte / Kreuzberg",
+          "areaId": "mitte",
+          "type": "history",
+          "lat": 52.5066,
+          "lng": 13.3823,
+          "indoor": true,
+          "closedDays": [],
+          "note": "Daily indoor and outdoor history backup; 24/31 Dec and 1 Jan are closure exceptions."
+        },
+        {
+          "placeId": "reichstag",
+          "label": "Reichstag",
+          "area": "Mitte",
+          "areaId": "mitte",
+          "type": "landmark",
+          "lat": 52.5186,
+          "lng": 13.3762,
+          "indoor": true,
+          "closedDays": [],
+          "note": "The dome needs advance registration and can close for security or maintenance."
+        }
+      ],
+      "segments": [
+        {
+          "segmentId": "route_arrival__brandenburg_gate_topography_terror_reichstag__01_arrival_arrival_transfer",
+          "routeId": "route_arrival__brandenburg_gate_topography_terror_reichstag",
+          "type": "arrival",
+          "timeLabel": "Arrival",
+          "window": "09:00-10:45",
+          "title": "Land, reach your base, then keep it light",
+          "copy": "Check in, head outside, and keep your very first walk simple, relaxed, and strictly local.",
+          "primaryPlace": {
+            "placeId": "arrival_transfer",
+            "label": "Hotel/Airbnb → Mitte / Alexanderplatz",
+            "url": "https://www.google.com/maps/search/?api=1&query=Mitte%20%2F%20Alexanderplatz%20Berlin"
+          },
+          "mapStopOwner": true,
+          "mapLinks": []
+        },
+        {
+          "segmentId": "route_arrival__brandenburg_gate_topography_terror_reichstag__02_visit_brandenburg_gate",
+          "routeId": "route_arrival__brandenburg_gate_topography_terror_reichstag",
+          "type": "visit",
+          "timeLabel": "History stop",
+          "window": "",
+          "title": "Use Topography of Terror as the free history stop",
+          "copy": "Stay central and use Topography of Terror as the main stop. If the day feels too heavy, switch to the Brandenburg Gate and memorial walk.",
+          "primaryPlace": {
+            "placeId": "brandenburg_gate",
+            "label": "Brandenburg Gate",
+            "url": "https://www.google.com/maps/search/?api=1&query=Brandenburger%20Tor%20Berlin"
+          },
+          "mapStopOwner": true,
+          "mapLinks": [
+            {
+              "placeId": "brandenburg_gate",
+              "label": "Brandenburg Gate",
+              "url": "https://www.google.com/maps/search/?api=1&query=Brandenburger%20Tor%20Berlin"
+            },
+            {
+              "placeId": "topography_terror",
+              "label": "Topography of Terror",
+              "url": "https://www.google.com/maps/search/?api=1&query=Topography%20of%20Terror%20Berlin"
+            }
+          ]
+        },
+        {
+          "segmentId": "route_arrival__brandenburg_gate_topography_terror_reichstag__03_meal_curry_61",
+          "routeId": "route_arrival__brandenburg_gate_topography_terror_reichstag",
+          "type": "meal",
+          "timeLabel": "Evening",
+          "window": "After 18:00",
+          "title": "Easy dinner, then stop",
+          "copy": "",
+          "primaryPlace": {
+            "placeId": "curry_61",
+            "label": "Curry 61",
+            "url": "https://www.google.com/maps/search/?api=1&query=Curry%2061%20Berlin"
+          },
+          "mapStopOwner": true,
+          "mapLinks": [
+            {
+              "placeId": "curry_61",
+              "label": "Curry 61",
+              "url": "https://www.google.com/maps/search/?api=1&query=Curry%2061%20Berlin"
+            }
+          ]
+        }
+      ],
+      "route": {
+        "url": "https://www.google.com/maps/dir/?api=1&origin=52.5163%2C13.3777&destination=52.5186%2C13.3762&travelmode=walking&waypoints=52.5066%2C13.3823",
+        "travelMode": "walking",
+        "totalDistanceKm": 2.5,
+        "longestSegmentKm": 1.4
+      },
+      "weather": {
+        "mode": "Monthly average",
+        "title": "September average, 20 C high",
+        "cue": "Bring a light rain layer, but keep the day mostly outdoors.",
+        "rainy": false
+      },
+      "opening": {
+        "status": "monday",
+        "primaryClosed": false,
+        "warning": null
+      },
+      "reservation": {
+        "required": true,
+        "placeId": "reichstag",
+        "label": "Open official registration",
+        "url": "https://www.bundestag.de/en/visittheBundestag/dome/registration-245686",
+        "source": "German Bundestag",
+        "checkedAt": "2026-07-19"
+      },
+      "risks": [
+        {
+          "key": "monday",
+          "label": "Museum caution",
+          "severity": "medium",
+          "detail": "Many museums close. Keep outdoor history as the backup."
+        },
+        {
+          "key": "booking",
+          "label": "Book ahead",
+          "severity": "medium",
+          "detail": "Check timed entries, Reichstag dome, restaurants, or evening plans before arrival."
+        }
+      ],
+      "previewStops": [
+        {
+          "time": "09:00",
+          "placeId": "arrival_transfer",
+          "label": "Hotel/Airbnb → Mitte / Alexanderplatz",
+          "copy": "Start at your stay in Mitte / Alexanderplatz, then go directly to the first named stop."
+        },
+        {
+          "time": "History stop",
+          "placeId": "brandenburg_gate",
+          "label": "Brandenburg Gate",
+          "copy": "Brandenburg Gate is Berlin’s most recognisable landmark. Walk through it and look toward Pariser Platz."
+        }
+      ],
+      "weatherSwap": null,
+      "openingSwap": null
+    }
+  ],
+  "quality": {
+    "status": "pass",
+    "issues": [],
+    "warnings": [],
+    "stats": {
+      "days": 1,
+      "issues": 0,
+      "warnings": 0
+    }
+  }
+}

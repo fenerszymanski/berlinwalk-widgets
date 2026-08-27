@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Berlin U-Bahn Design Board</title>
+<meta name="description" content="Set the riding time you can spare from Alexanderplatz and see which of Berlin's design-notable U-Bahn stations fit, plotted against the year each one got its look." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='20' cy='44' r='6' fill='%23FFE600'/%3E%3Ccircle cx='34' cy='30' r='6' fill='%23FFE600'/%3E%3Ccircle cx='48' cy='18' r='6' fill='%237CB342'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-dark:#123D18; --green-mid:#2E7D32; --lime:#7CB342;
+    --light:#C5E1A5; --yellow:#FFE600; --ink:#212121; --muted:#4b584b;
+    --line:#E3E8DC; --panel:#F4F7F0; --dim:#98a091;
+    --era1:#1B5E20; --era2:#B96A06; --era3:#1D6FA3;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .wrap{max-width:780px;margin:0 auto;padding:4px 14px 18px}
+  .kicker{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-mid);margin:0 0 6px}
+  h1{font-size:21px;font-weight:800;line-height:1.18;margin:0 0 8px;color:var(--green-dark)}
+  .lede{font-size:14.5px;color:var(--muted);margin:0 0 14px}
+
+  .budget{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px 14px;margin:0 0 12px}
+  .budget label{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--green-mid);display:block;margin:0 0 4px}
+  .budgetrow{display:flex;align-items:center;gap:12px}
+  .budgetval{font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:700;font-size:19px;color:var(--green-dark);min-width:80px;text-align:right}
+  input[type=range]{flex:1 1 auto;width:100%;min-width:0;height:40px;background:transparent;-webkit-appearance:none;appearance:none;margin:0}
+  input[type=range]:focus-visible{outline:3px solid var(--lime);outline-offset:3px;border-radius:8px}
+  input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:6px;background:linear-gradient(90deg,var(--lime),var(--light))}
+  input[type=range]::-moz-range-track{height:8px;border-radius:6px;background:linear-gradient(90deg,var(--lime),var(--light))}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:28px;height:28px;border-radius:50%;background:var(--green-dark);border:4px solid var(--yellow);margin-top:-10px;cursor:pointer}
+  input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;background:var(--green-dark);border:4px solid var(--yellow);cursor:pointer}
+  .budgetnote{font-size:12.5px;color:var(--muted);margin:8px 0 0}
+  .budgetnote b{color:var(--green-dark)}
+
+  .stage{border:2px solid var(--green-dark);border-radius:14px;overflow:hidden;background:#fff;margin:0 0 9px}
+  .stage svg{display:block;width:100%;height:auto}
+
+  .legend{display:flex;flex-wrap:wrap;gap:5px 14px;font-size:11.5px;color:var(--muted);margin:0 0 14px}
+  .legend i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+
+  .listhead{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--green-mid);margin:0 0 7px}
+  .stations{list-style:none;margin:0 0 14px;padding:0;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .stations li{border-top:1px solid var(--line)}
+  .stations li:first-child{border-top:0}
+  .st{display:flex;align-items:center;gap:11px;width:100%;text-align:left;background:#fff;border:0;
+      font-family:inherit;font-size:14px;color:var(--ink);padding:11px 13px;min-height:48px;cursor:pointer}
+  .st:hover{background:#F7FAF3}
+  .st:focus-visible{outline:3px solid var(--lime);outline-offset:-3px}
+  .st[aria-pressed=true]{background:#EEF6E4}
+  .st .swatch{flex:0 0 auto;width:13px;height:13px;border-radius:50%}
+  .st .name{flex:1 1 auto;min-width:0;font-weight:700;color:var(--green-dark)}
+  .st .name small{display:block;font-weight:600;color:var(--muted);font-size:12px}
+  .st .num{flex:0 0 auto;font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:700;font-size:13px;color:var(--green-dark);text-align:right;white-space:nowrap}
+  .st .num em{display:block;font-style:normal;font-weight:600;color:var(--muted);font-size:11.5px}
+  .st.far{background:#FAFAF7}
+  .st.far .name,.st.far .num{color:var(--dim)}
+  .st.far .name small,.st.far .num em{color:var(--dim)}
+  .st.far .swatch{opacity:.35}
+  .st .tick{flex:0 0 auto;width:19px;font-weight:800;color:var(--green-dark);text-align:center}
+
+  .readout{border:2px solid var(--green-dark);border-radius:14px;padding:12px 14px 13px;margin:0 0 12px;background:#FBFDF7}
+  .readout h2{font-size:13.5px;font-weight:800;margin:0 0 7px;color:var(--green-dark)}
+  .readout p{font-size:14px;margin:0 0 8px;color:var(--ink)}
+  .readout p:last-child{margin-bottom:0}
+  .readout b{color:var(--green-dark)}
+  .flag{display:inline-block;background:var(--yellow);color:var(--green-dark);font-size:11px;font-weight:800;
+        letter-spacing:.05em;text-transform:uppercase;border-radius:6px;padding:2px 7px;margin-right:6px}
+  .picked{list-style:none;margin:10px 0 0;padding:0}
+  .picked li{font-size:13.5px;padding:9px 0 0;border-top:1px solid var(--line);margin-top:9px}
+  .picked li:first-child{border-top:0;margin-top:0;padding-top:0}
+  .picked .mono{font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:700;color:var(--green-dark)}
+  .picked .where{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+  .picked .look{display:block;font-size:13px;margin-top:5px}
+  .picked .warn{display:block;font-size:12.5px;font-weight:700;color:#8a3b06;margin-top:5px}
+  .bar{height:12px;border-radius:7px;background:var(--line);overflow:hidden;margin:2px 0 10px}
+  .bar span{display:block;height:100%;background:var(--lime)}
+  .bar.over span{background:#E63946}
+  .clearbtn{margin-top:11px;background:#fff;border:2px solid var(--green-dark);color:var(--green-dark);
+    font-family:inherit;font-size:12.5px;font-weight:700;border-radius:10px;padding:10px 15px;cursor:pointer;min-height:44px}
+  .clearbtn:hover{background:var(--light)}
+  .clearbtn:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+
+  .fine{font-size:12.5px;color:var(--muted);margin:0}
+  .fine b{color:var(--green-dark)}
+
+  @media (max-width:520px){
+    h1{font-size:19px}
+    .budgetrow{flex-wrap:wrap}
+    .budgetval{min-width:0;text-align:left;order:-1}
+    .st{font-size:13.5px;padding:10px 11px;gap:9px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">BerlinWalk &middot; Free Berlin tool</p>
+  <h1>Which of Berlin's best U-Bahn stations fit in the time you have</h1>
+  <p class="lede">Thirteen stations worth walking out of the train for, plotted by how long the ride from Alexanderplatz takes and by the year each one got the look it has now. Set your real riding budget, then add the ones you want to the run.</p>
+
+  <div class="budget">
+    <label for="mins">Riding time you can spare, there and back</label>
+    <div class="budgetrow">
+      <input id="mins" type="range" min="10" max="150" step="5" value="60" aria-describedby="budgetnote" />
+      <output class="budgetval" id="minsOut" for="mins">60 min</output>
+    </div>
+    <p class="budgetnote" id="budgetnote">Anything past the dashed line is <b>out of reach</b> on that budget. This counts riding time only, so leave a few minutes on each platform for actually looking.</p>
+  </div>
+
+  <div class="stage">
+    <svg id="plot" viewBox="0 0 720 360" role="img" aria-labelledby="plotTitle plotDesc">
+      <title id="plotTitle">Berlin U-Bahn stations plotted by ride time from Alexanderplatz against the year each got its present look</title>
+      <desc id="plotDesc">A scatter plot. The horizontal axis is one-way ride minutes from Alexanderplatz, zero to fifty. The vertical axis is the year, 1905 to 2030. The dots form three groups: four stations from 1913 spread across the whole width, five from 1980 to 1984 at the far right, and three from 2020 and 2021 at the far left. A dashed vertical line marks how far the current riding budget reaches. The same stations are listed as buttons below the plot.</desc>
+    </svg>
+  </div>
+
+  <div class="legend">
+    <span><i style="background:var(--era1)"></i>1913, the first great run</span>
+    <span><i style="background:var(--era2)"></i>1971 to 1984, the R&uuml;mmler years</span>
+    <span><i style="background:var(--era3)"></i>2020 to 2021, the new U5</span>
+  </div>
+
+  <p class="listhead" id="listhead">Tap a station to add it to your run</p>
+  <ul class="stations" id="stations" aria-labelledby="listhead"></ul>
+
+  <div class="readout" aria-live="polite">
+    <h2>Your underground run</h2>
+    <div id="out"></div>
+  </div>
+
+  <p class="fine"><b>Ticket note.</b> A single AB ticket costs <b>&euro;4.00</b> and is valid 120 minutes in one direction only, so an out and back needs two of them. Once you are heading to more than one corner of the city, the 24-hour AB ticket at <b>&euro;11.20</b> is the cheaper buy. Prices checked on 26 August 2026.</p>
+</div>
+
+<script>
+(function(){
+  var STATIONS = [
+    { n:'Rotes Rathaus', l:'U5', y:2020, r:1, c:'centre',
+      look:'Seven mushroom-head columns, each about 7 by 9 metres, holding the ceiling over black and white terrazzo. The shape copies the vault of the medieval town hall that stood on this spot.' },
+    { n:'Klosterstraße', l:'U2', y:1913, r:2, c:'centre',
+      look:'Stylised palms in orange, blue and white glazed tile at the entrances, made with the same brick technique as the Ishtar Gate in the Pergamon Museum, from tiles left over when the gate was assembled. Along the platform, 22 enamel panels of Berlin transport history from 1986 and the front of a 1910 Schöneberg subway car.' },
+    { n:'Museumsinsel', l:'U5', y:2021, r:3, c:'centre',
+      look:'6,662 points of light in a deep blue barrel vault, 16 metres down. Max Dudler took the idea from Schinkel’s 1816 stage set for The Magic Flute.' },
+    { n:'Unter den Linden', l:'U5, U6', y:2020, r:4, c:'centre',
+      look:'A pale, wide interchange hall. The plainest of the three new ones, but you are already standing in it every time you change between the U5 and the U6.' },
+    { n:'Wittenbergplatz', l:'U1, U2, U3', y:1913, r:19, c:'west',
+      look:'Alfred Grenander’s cross-shaped ticket hall, above ground and a listed building. Restored in 1982 and 1983, with historic advertising panels along the walls. KaDeWe is straight across the square.' },
+    { n:'Fehrbelliner Platz', l:'U3, U7', y:1971, r:26, c:'west',
+      look:'Two eras in one station. Wilhelm Leitgebel’s 1913 U3 platform below with its heavy column cladding, and Rainer G. Rümmler’s 1971 entrance pavilion above, all rounded corners and red-framed signs.' },
+    { n:'Heidelberger Platz', l:'U3', y:1913, r:28, c:'west',
+      look:'Leitgebel again, opened 12 October 1913. A cross-groin vault on stone piers with lamps hanging from it. Wilmersdorf paid for stone instead of steel, and that is why this reads as a church rather than a tunnel.' },
+    { n:'Rüdesheimer Platz', l:'U3', y:1913, r:30, c:'west',
+      look:'The quieter Leitgebel station from the same 12 October 1913 opening: granite columns, mosaic detail, murals added in 1988. Come up the stairs for the Rheingauviertel wine square above.' },
+    { n:'Rohrdamm', l:'U7', y:1980, r:40, c:'spandau',
+      look:'Rümmler’s Siemensstadt station, opened 1 October 1980: stylised cogwheels and machine parts on the walls, for the factory district it serves.' },
+    { n:'Paulsternstraße', l:'U7', y:1984, r:42, c:'spandau',
+      look:'A wall of tile flowers and a rainbow on deep blue, with purple and yellow columns around the benches. The friendliest platform on the whole line.' },
+    { n:'Zitadelle', l:'U7', y:1984, r:45, c:'spandau',
+      look:'Red brick answering the 16th-century fortress walls directly above. Come up and the citadel is a short walk.' },
+    { n:'Altstadt Spandau', l:'U7', y:1984, r:47, c:'spandau',
+      look:'White-clad columns set close together, deliberately cathedral-like, right under Spandau’s old town streets.' },
+    { n:'Rathaus Spandau', l:'U7', y:1984, r:48, c:'spandau',
+      look:'Two island platforms at almost monumental scale, opened 1 October 1984, with a gallery at the south end you can stand on and look down the whole station.' }
+  ];
+  var CORRIDOR = {
+    centre:  'Central, on or beside the tour route',
+    west:    'City West and Wilmersdorf, one change',
+    spandau: 'The U7 run out to Siemensstadt and Spandau'
+  };
+  var LOOK_MIN = 6;
+
+  var picked = [];
+  var budget = 60;
+
+  var svg = document.getElementById('plot');
+  var out = document.getElementById('out');
+  var listEl = document.getElementById('stations');
+  var slider = document.getElementById('mins');
+  var minsOut = document.getElementById('minsOut');
+
+  var W = 720, H = 360, ML = 54, MR = 20, MT = 20, MB = 46;
+  var X1 = 52, Y0 = 1905, Y1 = 2032;
+  function px(v){ return ML + v / X1 * (W - ML - MR); }
+  function py(v){ return MT + (Y1 - v) / (Y1 - Y0) * (H - MT - MB); }
+  function eraColor(y){ return y < 1930 ? '#1B5E20' : (y < 2000 ? '#B96A06' : '#1D6FA3'); }
+
+  function el(name, attrs, text){
+    var e = document.createElementNS('http://www.w3.org/2000/svg', name);
+    for (var k in attrs) if (Object.prototype.hasOwnProperty.call(attrs, k)) e.setAttribute(k, attrs[k]);
+    if (text != null) e.textContent = text;
+    return e;
+  }
+
+  var layer = el('g', { id:'layer' });
+  svg.appendChild(layer);
+
+  /* What a set of stations really costs in riding time.
+     Per corridor: one out and back to the furthest station picked in it,
+     plus LOOK_MIN for each extra stop along the way. */
+  function cost(list){
+    var byCorridor = {};
+    list.forEach(function(s){ (byCorridor[s.c] = byCorridor[s.c] || []).push(s); });
+    var total = 0, legs = [];
+    Object.keys(byCorridor).forEach(function(c){
+      var group = byCorridor[c].slice().sort(function(a, b){ return a.r - b.r; });
+      var mins = group[group.length - 1].r * 2 + (group.length - 1) * LOOK_MIN;
+      total += mins;
+      legs.push({ c:c, mins:mins, count:group.length });
+    });
+    return { total: total, legs: legs };
+  }
+
+  function reach(){ return Math.floor(budget / 2); }
+
+  function draw(){
+    while (layer.firstChild) layer.removeChild(layer.firstChild);
+    var i;
+    var rx = Math.min(px(reach()), px(X1));
+
+    layer.appendChild(el('rect', { x:rx, y:MT, width:Math.max(0, px(X1) - rx), height:H - MT - MB, fill:'#F2F4EF' }));
+
+    var years = [1920, 1950, 1980, 2010];
+    for (i = 0; i < years.length; i++){
+      layer.appendChild(el('line', { x1:ML, x2:W - MR, y1:py(years[i]), y2:py(years[i]), stroke:'#E3E8DC', 'stroke-width':1 }));
+      layer.appendChild(el('text', { x:ML - 9, y:py(years[i]) + 4, 'text-anchor':'end', 'font-size':'12', 'font-family':'IBM Plex Mono, monospace', fill:'#4b584b' }, String(years[i])));
+    }
+    layer.appendChild(el('line', { x1:ML, x2:W - MR, y1:H - MB, y2:H - MB, stroke:'#123D18', 'stroke-width':2 }));
+    layer.appendChild(el('line', { x1:ML, x2:ML, y1:MT, y2:H - MB, stroke:'#123D18', 'stroke-width':2 }));
+
+    var xt = [0, 10, 20, 30, 40, 50];
+    for (i = 0; i < xt.length; i++){
+      layer.appendChild(el('line', { x1:px(xt[i]), x2:px(xt[i]), y1:H - MB, y2:H - MB + 5, stroke:'#123D18', 'stroke-width':2 }));
+      layer.appendChild(el('text', { x:px(xt[i]), y:H - MB + 20, 'text-anchor':'middle', 'font-size':'12', 'font-family':'IBM Plex Mono, monospace', fill:'#4b584b' }, String(xt[i])));
+    }
+    layer.appendChild(el('text', { x:(ML + W - MR) / 2, y:H - 8, 'text-anchor':'middle', 'font-size':'12.5', 'font-weight':'700', fill:'#123D18' }, 'MINUTES RIDING FROM ALEXANDERPLATZ, ONE WAY'));
+    var axisMidY = (MT + (H - MB)) / 2;
+    layer.appendChild(el('text', { x:15, y:axisMidY, 'text-anchor':'middle', 'font-size':'12.5', 'font-weight':'700', fill:'#123D18', transform:'rotate(-90 15 ' + axisMidY + ')' }, 'YEAR OF THE LOOK'));
+
+    if (reach() <= X1){
+      layer.appendChild(el('line', { x1:rx, x2:rx, y1:MT, y2:H - MB, stroke:'#123D18', 'stroke-width':2, 'stroke-dasharray':'7 5' }));
+      var atEnd = rx > W - 170;
+      layer.appendChild(el('text', {
+        x: atEnd ? rx - 8 : rx + 8, y:MT + 14, 'text-anchor': atEnd ? 'end' : 'start',
+        'font-size':'12', 'font-weight':'700', fill:'#123D18'
+      }, reach() + ' min reach'));
+    }
+
+    var labels = [];
+    for (i = 0; i < STATIONS.length; i++){
+      var s = STATIONS[i];
+      var inReach = s.r <= reach();
+      var isOn = picked.indexOf(s) !== -1;
+      var cx = px(s.r), cy = py(s.y);
+      if (isOn) layer.appendChild(el('circle', { cx:cx, cy:cy, r:13, fill:'none', stroke:'#123D18', 'stroke-width':3 }));
+      layer.appendChild(el('circle', { cx:cx, cy:cy, r:7, fill:eraColor(s.y), opacity: inReach ? 1 : 0.25 }));
+      if (isOn) labels.push({ name:s.n, cx:cx, cy:cy });
+    }
+
+    /* Selected dots can sit two minutes apart, so their labels would print on
+       top of each other. Push each one below the previous with a leader line;
+       the dot itself never moves. */
+    labels.sort(function(a, b){ return a.cy - b.cy || a.cx - b.cx; });
+    var lastY = -99;
+    labels.forEach(function(L){
+      var ly = Math.max(L.cy + 4, lastY + 16);
+      lastY = ly;
+      var atEndL = L.cx > W - 190;
+      var lx = atEndL ? L.cx - 18 : L.cx + 18;
+      if (Math.abs(ly - (L.cy + 4)) > 3){
+        layer.appendChild(el('line', { x1:L.cx + (atEndL ? -12 : 12), y1:L.cy, x2:lx, y2:ly - 4, stroke:'#123D18', 'stroke-width':1, opacity:0.55 }));
+      }
+      layer.appendChild(el('text', {
+        x:lx, y:ly, 'text-anchor': atEndL ? 'end' : 'start',
+        'font-size':'12.5', 'font-weight':'800', fill:'#123D18'
+      }, L.name));
+    });
+  }
+
+  function buildList(){
+    listEl.innerHTML = '';
+    STATIONS.slice().sort(function(a, b){ return a.r - b.r; }).forEach(function(s){
+      var li = document.createElement('li');
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'st';
+      b.dataset.name = s.n;
+      b.addEventListener('click', function(){ toggle(s); });
+      li.appendChild(b);
+      listEl.appendChild(li);
+      s._btn = b;
+    });
+    paintList();
+  }
+
+  function paintList(){
+    STATIONS.forEach(function(s){
+      var b = s._btn;
+      if (!b) return;
+      var inReach = s.r <= reach();
+      var isOn = picked.indexOf(s) !== -1;
+      b.className = 'st' + (inReach ? '' : ' far');
+      b.setAttribute('aria-pressed', isOn ? 'true' : 'false');
+      b.innerHTML =
+        '<span class="swatch" style="background:' + eraColor(s.y) + '"></span>' +
+        '<span class="tick">' + (isOn ? '✓' : '') + '</span>' +
+        '<span class="name">' + esc(s.n) + '<small>' + esc(s.l) + ' &middot; ' + esc(CORRIDOR[s.c]) + '</small></span>' +
+        '<span class="num">' + s.r + ' min<em>' + s.y + '</em></span>';
+    });
+  }
+
+  function toggle(s){
+    var i = picked.indexOf(s);
+    if (i === -1) picked.push(s); else picked.splice(i, 1);
+    render();
+  }
+
+  function esc(t){ return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+  function render(){
+    minsOut.textContent = budget + ' min';
+    draw();
+    paintList();
+
+    if (!picked.length){
+      var reachable = STATIONS.filter(function(s){ return s.r <= reach(); });
+      out.innerHTML =
+        '<p><span class="flag">Start here</span>On ' + budget + ' minutes of riding you can get <b>' + reach() +
+        ' minutes out</b> and still come back, which puts <b>' + reachable.length + ' of the 13</b> stations inside the line.' +
+        (reachable.length ? ' The nearest is <b>' + esc(reachable[0].n) + '</b>, ' + reachable[0].r + ' ' + (reachable[0].r === 1 ? 'minute' : 'minutes') + ' from Alexanderplatz.' : ' Nothing fits yet, so push the slider right.') +
+        '</p><p>Add stations from the list and the board adds up the real riding time as you go.</p>';
+      return;
+    }
+
+    var c = cost(picked);
+    var over = c.total > budget;
+    var pct = Math.max(3, Math.min(100, Math.round(c.total / budget * 100)));
+    var corridors = c.legs.length;
+    var html = '';
+
+    html += '<div class="bar' + (over ? ' over' : '') + '"><span style="width:' + pct + '%"></span></div>';
+    html += '<p><b>' + c.total + ' minutes</b> of riding for ' + picked.length + ' station' + (picked.length === 1 ? '' : 's') +
+            ', against a budget of <b>' + budget + '</b>. ' +
+            (over ? 'That is <b>' + (c.total - budget) + ' minutes over</b>. Drop the furthest one, or push the slider right.'
+                  : '<b>' + (budget - c.total) + ' minutes spare.</b>') + '</p>';
+
+    if (corridors > 1){
+      html += '<p>This run goes to <b>' + corridors + ' different corners</b> of the network. Two singles only cover one out and back, so the <b>&euro;11.20 day ticket</b> is the buy here.</p>';
+    } else {
+      html += '<p>One corner of the network, one out and back: <b>two single tickets, &euro;8.00</b>. The &euro;11.20 day ticket only starts paying once you add a second direction.</p>';
+    }
+
+    html += '<ul class="picked">';
+    picked.slice().sort(function(a, b){ return a.r - b.r; }).forEach(function(s){
+      html += '<li><span class="mono">' + s.r + ' min &middot; ' + s.y + '</span> &nbsp;<b>' + esc(s.n) + '</b>' +
+              '<span class="where">' + esc(s.l) + ' &middot; ' + esc(CORRIDOR[s.c]) + '</span>' +
+              '<span class="look">' + esc(s.look) + '</span>' +
+              (s.r > reach() ? '<span class="warn">Past your reach line on the current budget.</span>' : '') +
+              '</li>';
+    });
+    html += '</ul>';
+    html += '<button type="button" class="clearbtn" id="clear">Clear the run</button>';
+    out.innerHTML = html;
+    var btn = document.getElementById('clear');
+    if (btn) btn.addEventListener('click', function(){ picked = []; render(); });
+  }
+
+  slider.addEventListener('input', function(){ budget = Number(slider.value); render(); });
+  buildList();
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

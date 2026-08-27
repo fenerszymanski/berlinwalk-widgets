@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Bauhaus Lineage Map | BerlinWalk</title>
+  <meta name="description" content="Read Bauhaus and Mies van der Rohe connections in Berlin through an archive, a house and a public hall.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+  <main id="bw-bauhaus-map">
+    <section class="shell" aria-labelledby="tool-title">
+      <header class="hero">
+        <img src="assets/bauhaus-archiv.jpg" alt="The curved roofline of the Bauhaus-Archiv in Berlin" class="hero-image">
+        <div class="hero-wash"></div>
+        <div class="hero-copy">
+          <p class="eyebrow">Berlin modernism · three scales</p>
+          <h1 id="tool-title">Berlin Bauhaus Lineage Map</h1>
+          <p>Read an archive, a house and a public hall as three different Berlin connections to Bauhaus ideas and Mies van der Rohe.</p>
+          <div class="hero-key" aria-label="Tool scope">
+            <span>Collection</span><span>Domestic space</span><span>Public hall</span>
+          </div>
+        </div>
+      </header>
+
+      <section class="intro" aria-label="How to use this map">
+        <p><strong>Use this as a reading board, not a route.</strong> Tap a place to move the map, see one photograph and learn what to notice there. The three points are deliberately spread across Berlin.</p>
+      </section>
+
+      <section class="workspace" aria-label="Berlin Bauhaus map and selected place">
+        <aside class="place-rail" aria-label="Choose a building scale">
+          <p class="rail-label">Choose one lens</p>
+          <div class="place-buttons" role="list">
+            <button class="place-button" type="button" data-place="archive" aria-pressed="true">
+              <span class="number">01</span>
+              <span><strong>Archive</strong><small>Objects and ideas</small></span>
+            </button>
+            <button class="place-button" type="button" data-place="house" aria-pressed="false">
+              <span class="number">02</span>
+              <span><strong>House</strong><small>Brick, glass, garden</small></span>
+            </button>
+            <button class="place-button" type="button" data-place="hall" aria-pressed="false">
+              <span class="number">03</span>
+              <span><strong>Public hall</strong><small>Roof, columns, open space</small></span>
+            </button>
+          </div>
+          <p class="rail-note">A complete Berlin day is optional. Start with the place that answers your actual question.</p>
+        </aside>
+
+        <div class="map-side">
+          <div class="map-heading">
+            <div>
+              <p class="section-kicker">Three real Berlin coordinates</p>
+              <h2>Follow the thread across the city</h2>
+            </div>
+            <span id="seen-count" class="seen-count" aria-live="polite">1 of 3 read</span>
+          </div>
+          <div id="map" role="application" aria-label="Map of the Bauhaus-Archiv, Haus Lemke and Neue Nationalgalerie in Berlin"></div>
+          <p class="map-note">Map tiles © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>. Opening information and exhibitions can change; use the official links in each place card.</p>
+        </div>
+      </section>
+
+      <section class="reading-card" aria-live="polite">
+        <div class="reading-photo-wrap">
+          <img id="place-photo" src="assets/bauhaus-archiv.jpg" alt="The curved roofline of the Bauhaus-Archiv in Berlin">
+          <p id="place-photo-caption" class="photo-caption">The original museum building makes its roofline visible before you enter.</p>
+        </div>
+        <div class="reading-copy">
+          <p id="place-label" class="section-kicker">01 · Collection</p>
+          <h2 id="place-name">Bauhaus-Archiv / Museum für Gestaltung</h2>
+          <p id="place-address" class="address">Knesebeckstraße 1 · Charlottenburg</p>
+          <p id="place-summary" class="summary">Use the temporary museum when you want the movement's ideas and objects before you start matching labels to buildings.</p>
+          <div class="what-to-read">
+            <p class="what-label">What to notice</p>
+            <p id="place-notice"></p>
+          </div>
+          <p id="place-boundary" class="boundary"></p>
+          <a id="place-link" class="official-link" href="https://www.bauhaus.de/en/visitorinformation/" target="_blank" rel="noopener">Check current visitor information <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+      <section class="comparison" aria-labelledby="comparison-title">
+        <div>
+          <p class="section-kicker">Keep the distinction</p>
+          <h2 id="comparison-title">One thread, three different questions</h2>
+        </div>
+        <ol>
+          <li><span>01</span><strong>Archive</strong><p>What did the movement want objects and rooms to do?</p></li>
+          <li><span>02</span><strong>House</strong><p>How can material and a garden change daily space?</p></li>
+          <li><span>03</span><strong>Hall</strong><p>How can a structure hold a public room open?</p></li>
+        </ol>
+      </section>
+
+      <section id="completion" class="completion" hidden aria-live="polite">
+        <strong>You have read all three scales.</strong>
+        <p>Do not turn the line into a forced itinerary. Keep the place that changed how you looked, and check its official page before you travel there.</p>
+      </section>
+
+      <footer class="tool-footer">
+        <button type="button" id="credits-toggle" class="credits-toggle" aria-haspopup="dialog">Tool visual credits</button>
+      </footer>
+    </section>
+
+    <dialog id="credits-dialog" aria-labelledby="credits-title">
+      <div class="dialog-top">
+        <div>
+          <p class="section-kicker">Three photographs rendered in this tool</p>
+          <h2 id="credits-title">Tool visual credits</h2>
+        </div>
+        <button id="credits-close" type="button" class="dialog-close" aria-label="Close tool visual credits">×</button>
+      </div>
+      <ul>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Bauhaus_Archiv_(26890137627).jpg" target="_blank" rel="noopener">Bauhaus-Archiv</a> by Billie Grace Ward, <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener">CC BY 2.0</a>, via Wikimedia Commons.</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Mies-van-der-Rohe-Haus_Berlin,_4.jpg" target="_blank" rel="noopener">Mies-van-der-Rohe-Haus Berlin</a> by Manfred Brückels, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>, via Wikimedia Commons.</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Berlin_-_Neue_Nationalgalerie_(1).jpg" target="_blank" rel="noopener">Neue Nationalgalerie</a> by Fred Romero, <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener">CC BY 2.0</a>, via Wikimedia Commons.</li>
+      </ul>
+    </dialog>
+  </main>
+
+  <style>
+    #bw-bauhaus-map {
+      --green: #123D18;
+      --green-2: #1B5E20;
+      --green-3: #276C2C;
+      --yellow: #FFE600;
+      --lime: #7CB342;
+      --cream: #FAFAF5;
+      --paper: #F2F5E9;
+      --ink: #212121;
+      --muted: #526050;
+      --line: rgba(18, 61, 24, .17);
+      --shadow: 0 22px 55px rgba(14, 54, 21, .14);
+      width: min(100%, 1100px);
+      margin: 0 auto;
+      padding: 16px;
+      color: var(--ink);
+      font-family: Montserrat, Arial, sans-serif;
+      line-height: 1.5;
+      box-sizing: border-box;
+    }
+
+    #bw-bauhaus-map * { box-sizing: border-box; }
+    #bw-bauhaus-map .shell { overflow: hidden; border: 1px solid var(--line); border-radius: 20px; background: #fff; box-shadow: var(--shadow); }
+    #bw-bauhaus-map .hero { position: relative; min-height: 304px; isolation: isolate; display: grid; align-items: end; overflow: hidden; background: var(--green); }
+    #bw-bauhaus-map .hero-image, #bw-bauhaus-map .hero-wash { position: absolute; inset: 0; width: 100%; height: 100%; }
+    #bw-bauhaus-map .hero-image { object-fit: cover; object-position: center 46%; }
+    #bw-bauhaus-map .hero-wash { z-index: 1; background: linear-gradient(92deg, rgba(10, 47, 17, .97) 0%, rgba(13, 61, 22, .89) 43%, rgba(16, 59, 20, .36) 100%); }
+    #bw-bauhaus-map .hero-copy { position: relative; z-index: 2; max-width: 710px; padding: 32px; color: #fff; }
+    #bw-bauhaus-map .eyebrow, #bw-bauhaus-map .section-kicker, #bw-bauhaus-map .rail-label, #bw-bauhaus-map .what-label { margin: 0; font-size: 11px; font-weight: 900; letter-spacing: .09em; text-transform: uppercase; }
+    #bw-bauhaus-map .eyebrow { color: var(--yellow); }
+    #bw-bauhaus-map h1, #bw-bauhaus-map h2, #bw-bauhaus-map p { margin-top: 0; }
+    #bw-bauhaus-map h1 { max-width: 660px; margin: 6px 0 11px; color: #fff; font-size: clamp(32px, 5vw, 52px); line-height: 1.04; letter-spacing: -.035em; }
+    #bw-bauhaus-map .hero-copy > p:not(.eyebrow) { max-width: 615px; margin-bottom: 0; color: rgba(255,255,255,.92); font-size: 16px; }
+    #bw-bauhaus-map .hero-key { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 19px; }
+    #bw-bauhaus-map .hero-key span { border: 1px solid rgba(255,255,255,.35); border-radius: 999px; padding: 5px 10px; background: rgba(255,255,255,.1); color: #fff; font-size: 11px; font-weight: 850; }
+    #bw-bauhaus-map .intro { padding: 16px 32px; border-bottom: 1px solid var(--line); background: var(--cream); }
+    #bw-bauhaus-map .intro p { max-width: 840px; margin: 0; color: var(--muted); font-size: 14px; }
+    #bw-bauhaus-map .intro strong { color: var(--green); }
+    #bw-bauhaus-map .workspace { display: grid; grid-template-columns: minmax(236px, .42fr) minmax(0, 1fr); min-height: 536px; }
+    #bw-bauhaus-map .place-rail { padding: 26px 18px; border-right: 1px solid var(--line); background: linear-gradient(180deg, #fff 0%, var(--paper) 100%); }
+    #bw-bauhaus-map .rail-label, #bw-bauhaus-map .section-kicker, #bw-bauhaus-map .what-label { color: var(--green-2); }
+    #bw-bauhaus-map .place-buttons { display: grid; gap: 10px; margin-top: 11px; }
+    #bw-bauhaus-map .place-button { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 9px; align-items: center; width: 100%; min-height: 72px; border: 1px solid var(--line); border-radius: 13px; padding: 11px; background: #fff; color: var(--ink); font: inherit; text-align: left; cursor: pointer; transition: transform .16s ease, border-color .16s ease, background .16s ease, box-shadow .16s ease; }
+    #bw-bauhaus-map .place-button:hover { transform: translateY(-1px); border-color: rgba(18, 61, 24, .46); box-shadow: 0 8px 18px rgba(18, 61, 24, .09); }
+    #bw-bauhaus-map .place-button:focus-visible, #bw-bauhaus-map .official-link:focus-visible, #bw-bauhaus-map .back-link:focus-visible, #bw-bauhaus-map .credits-toggle:focus-visible, #credits-dialog button:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+    #bw-bauhaus-map .place-button[aria-pressed="true"] { border-color: var(--green); background: var(--green); color: #fff; box-shadow: inset 4px 0 0 var(--yellow); }
+    #bw-bauhaus-map .number { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--yellow); color: var(--green); font-size: 11px; font-weight: 950; }
+    #bw-bauhaus-map .place-button strong, #bw-bauhaus-map .place-button small { display: block; }
+    #bw-bauhaus-map .place-button strong { font-size: 13px; line-height: 1.15; }
+    #bw-bauhaus-map .place-button small { margin-top: 3px; color: var(--muted); font-size: 11px; font-weight: 700; }
+    #bw-bauhaus-map .place-button[aria-pressed="true"] small { color: rgba(255,255,255,.8); }
+    #bw-bauhaus-map .rail-note { margin: 17px 3px 0; color: var(--muted); font-size: 12px; }
+    #bw-bauhaus-map .map-side { min-width: 0; background: #fff; }
+    #bw-bauhaus-map .map-heading { display: flex; align-items: end; justify-content: space-between; gap: 16px; padding: 22px 24px 15px; }
+    #bw-bauhaus-map .map-heading h2, #bw-bauhaus-map .reading-copy h2, #bw-bauhaus-map .comparison h2, #credits-dialog h2 { margin: 3px 0 0; color: var(--green); font-size: 22px; line-height: 1.14; letter-spacing: -.02em; }
+    #bw-bauhaus-map .seen-count { flex: 0 0 auto; border-radius: 999px; padding: 6px 10px; background: var(--paper); color: var(--green); font-size: 11px; font-weight: 900; }
+    #bw-bauhaus-map #map { height: 430px; min-width: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); z-index: 0; }
+    #bw-bauhaus-map .leaflet-control-attribution { font-size: 10px; }
+    #bw-bauhaus-map .place-pin { display: grid; place-items: center; width: 32px; height: 32px; border: 3px solid #fff; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: var(--green); box-shadow: 0 4px 12px rgba(0,0,0,.25); }
+    #bw-bauhaus-map .place-pin span { transform: rotate(45deg); color: var(--yellow); font-family: Arial, sans-serif; font-size: 12px; font-weight: 900; }
+    #bw-bauhaus-map .place-pin.active { background: var(--yellow); }
+    #bw-bauhaus-map .place-pin.active span { color: var(--green); }
+    #bw-bauhaus-map .map-note { margin: 0; padding: 10px 24px 12px; color: var(--muted); font-size: 11px; }
+    #bw-bauhaus-map .map-note a { color: var(--green); }
+    #bw-bauhaus-map .reading-card { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: 0; border-bottom: 1px solid var(--line); background: #fff; }
+    #bw-bauhaus-map .reading-photo-wrap { position: relative; min-height: 365px; background: var(--green); }
+    #bw-bauhaus-map .reading-photo-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    #bw-bauhaus-map .photo-caption { position: absolute; right: 14px; bottom: 13px; left: 14px; margin: 0; padding: 7px 9px; border-radius: 7px; background: rgba(18,61,24,.88); color: #fff; font-size: 11px; line-height: 1.35; }
+    #bw-bauhaus-map .reading-copy { display: flex; flex-direction: column; align-items: flex-start; padding: 32px; }
+    #bw-bauhaus-map .reading-copy h2 { margin-bottom: 7px; font-size: clamp(25px, 3.5vw, 34px); }
+    #bw-bauhaus-map .address { margin-bottom: 18px; color: var(--green); font-size: 13px; font-weight: 850; }
+    #bw-bauhaus-map .summary { margin-bottom: 17px; color: var(--ink); font-size: 15px; }
+    #bw-bauhaus-map .what-to-read { width: 100%; border-left: 4px solid var(--yellow); padding: 2px 0 2px 13px; }
+    #bw-bauhaus-map .what-to-read p { margin-bottom: 0; }
+    #bw-bauhaus-map .what-label { margin-bottom: 3px !important; }
+    #bw-bauhaus-map .boundary { margin: 18px 0 0; color: var(--muted); font-size: 12px; }
+    #bw-bauhaus-map .official-link, #bw-bauhaus-map .back-link { display: inline-flex; align-items: center; gap: 7px; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 900; }
+    #bw-bauhaus-map .official-link { margin-top: auto; padding: 11px 13px; background: var(--yellow); color: var(--green); }
+    #bw-bauhaus-map .official-link:hover, #bw-bauhaus-map .back-link:hover { text-decoration: underline; }
+    #bw-bauhaus-map .comparison { display: grid; grid-template-columns: minmax(220px, .8fr) minmax(0, 1.2fr); gap: 26px; padding: 30px 32px; background: var(--paper); }
+    #bw-bauhaus-map .comparison h2 { font-size: 25px; }
+    #bw-bauhaus-map .comparison ol { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 0; padding: 0; list-style: none; }
+    #bw-bauhaus-map .comparison li { border-top: 3px solid var(--green); padding: 9px 7px 0 0; }
+    #bw-bauhaus-map .comparison li span { display: block; color: var(--green-2); font-size: 11px; font-weight: 900; }
+    #bw-bauhaus-map .comparison li strong { display: block; margin-top: 3px; color: var(--ink); font-size: 14px; }
+    #bw-bauhaus-map .comparison li p { margin: 5px 0 0; color: var(--muted); font-size: 12px; line-height: 1.42; }
+    #bw-bauhaus-map .completion { margin: 18px 32px 0; border: 1px solid rgba(18,61,24,.25); border-radius: 12px; padding: 14px 16px; background: #f8ffeb; }
+    #bw-bauhaus-map .completion strong { color: var(--green); }
+    #bw-bauhaus-map .completion p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+    #bw-bauhaus-map .tool-footer { display: flex; align-items: center; justify-content: flex-end; gap: 16px; padding: 24px 32px; background: var(--green); }
+    #bw-bauhaus-map .back-link { color: #fff; }
+    #bw-bauhaus-map .credits-toggle { border: 1px solid rgba(255,255,255,.44); border-radius: 8px; padding: 9px 11px; background: transparent; color: #fff; font: inherit; font-size: 12px; font-weight: 850; cursor: pointer; }
+    #bw-bauhaus-map .credits-toggle:hover { border-color: var(--yellow); color: var(--yellow); }
+    #credits-dialog { width: min(590px, calc(100vw - 28px)); border: 0; border-radius: 16px; padding: 0; color: #212121; font-family: Montserrat, Arial, sans-serif; box-shadow: 0 26px 70px rgba(0,0,0,.3); }
+    #credits-dialog::backdrop { background: rgba(9, 37, 13, .62); }
+    #credits-dialog .dialog-top { display: flex; justify-content: space-between; gap: 16px; padding: 24px 24px 15px; border-bottom: 1px solid rgba(18,61,24,.15); }
+    #credits-dialog .section-kicker { margin: 0; color: #1B5E20; font-size: 10px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    #credits-dialog h2 { margin: 3px 0 0; color: #123D18; font-size: 22px; }
+    #credits-dialog .dialog-close { display: grid; place-items: center; flex: 0 0 auto; width: 34px; height: 34px; border: 1px solid rgba(18,61,24,.2); border-radius: 50%; background: #FAFAF5; color: #123D18; font-size: 25px; line-height: 1; cursor: pointer; }
+    #credits-dialog ul { display: grid; gap: 12px; margin: 0; padding: 19px 25px 25px 43px; color: #526050; font-size: 13px; line-height: 1.45; }
+    #credits-dialog a { color: #1B5E20; font-weight: 750; }
+    @media (max-width: 760px) {
+      #bw-bauhaus-map { padding: 8px; }
+      #bw-bauhaus-map .shell { border-radius: 15px; }
+      #bw-bauhaus-map .hero { min-height: 336px; }
+      #bw-bauhaus-map .hero-wash { background: linear-gradient(180deg, rgba(10,47,17,.58) 0%, rgba(10,47,17,.96) 77%); }
+      #bw-bauhaus-map .hero-copy { padding: 22px; }
+      #bw-bauhaus-map h1 { font-size: 35px; }
+      #bw-bauhaus-map .intro { padding: 14px 18px; }
+      #bw-bauhaus-map .workspace, #bw-bauhaus-map .reading-card, #bw-bauhaus-map .comparison { grid-template-columns: 1fr; }
+      #bw-bauhaus-map .place-rail { border-right: 0; border-bottom: 1px solid var(--line); padding: 18px; }
+      #bw-bauhaus-map .place-buttons { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
+      #bw-bauhaus-map .place-button { grid-template-columns: 1fr; min-height: 110px; gap: 6px; padding: 9px; }
+      #bw-bauhaus-map .place-button .number { width: 24px; height: 24px; }
+      #bw-bauhaus-map .place-button strong { font-size: 12px; }
+      #bw-bauhaus-map .place-button small { font-size: 10px; line-height: 1.25; }
+      #bw-bauhaus-map .rail-note { margin-top: 13px; }
+      #bw-bauhaus-map .map-heading { padding: 19px 18px 13px; align-items: start; }
+      #bw-bauhaus-map .map-heading h2 { font-size: 20px; }
+      #bw-bauhaus-map #map { height: 350px; }
+      #bw-bauhaus-map .map-note { padding: 9px 18px 11px; }
+      #bw-bauhaus-map .reading-photo-wrap { min-height: 278px; }
+      #bw-bauhaus-map .reading-copy { padding: 24px 20px; }
+      #bw-bauhaus-map .comparison { gap: 18px; padding: 24px 20px; }
+      #bw-bauhaus-map .comparison ol { grid-template-columns: 1fr; gap: 10px; }
+      #bw-bauhaus-map .comparison li { display: grid; grid-template-columns: 28px 100px 1fr; align-items: baseline; gap: 5px; }
+      #bw-bauhaus-map .comparison li span, #bw-bauhaus-map .comparison li strong, #bw-bauhaus-map .comparison li p { margin: 0; }
+      #bw-bauhaus-map .completion { margin: 14px 20px 0; }
+      #bw-bauhaus-map .tool-footer { align-items: flex-start; flex-direction: column; padding: 21px 20px; }
+    }
+  </style>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (() => {
+      const places = {
+        archive: {
+          order: '01',
+          label: 'Collection',
+          name: 'Bauhaus-Archiv / Museum für Gestaltung',
+          address: 'Knesebeckstraße 1 · Charlottenburg',
+          coords: [52.5107893, 13.3228627],
+          photo: 'assets/bauhaus-archiv.jpg',
+          alt: 'The curved roofline of the Bauhaus-Archiv in Berlin',
+          caption: 'The original museum building makes its roofline visible before you enter.',
+          summary: 'Use the temporary museum when you want the movement’s ideas and objects before you start matching labels to buildings.',
+          notice: 'Ask what each object or design decision was trying to make clearer, easier or more useful in daily life.',
+          boundary: 'The museum is temporarily at Knesebeckstraße 1 while its original building is being renovated. Check the current exhibition and visitor details first.',
+          link: 'https://www.bauhaus.de/en/visitorinformation/',
+          linkLabel: 'Check current visitor information'
+        },
+        house: {
+          order: '02',
+          label: 'Domestic space',
+          name: 'Mies van der Rohe Haus / Haus Lemke',
+          address: 'Oberseestraße 60 · Alt-Hohenschönhausen',
+          coords: [52.5491617, 13.4905287],
+          photo: 'assets/haus-lemke.jpg',
+          alt: 'A view from inside Haus Lemke towards its garden',
+          caption: 'Haus Lemke makes the connection between brick, glass and garden easier to notice at the scale of one home.',
+          summary: 'Choose the house when you want to see modernism meet a garden, a threshold and the ordinary scale of domestic life.',
+          notice: 'Follow one line from the brick wall to the glass and then out to the garden. The detail matters more than a broad architectural label.',
+          boundary: 'Haus Lemke is a small exhibition venue rather than a grand survey museum. Give the eastern-side journey its own reason.',
+          link: 'https://www.miesvanderrohehaus.de/en/visit/registration-and-requests/',
+          linkLabel: 'Check visit information'
+        },
+        hall: {
+          order: '03',
+          label: 'Public hall',
+          name: 'Neue Nationalgalerie',
+          address: 'Potsdamer Straße 50 · Kulturforum',
+          coords: [52.5070408, 13.3676212],
+          photo: 'assets/neue-nationalgalerie.jpg',
+          alt: 'The glass and roof plane of the Neue Nationalgalerie in Berlin',
+          caption: 'The roof and the glass walls make the public-scale structure visible before the collection begins.',
+          summary: 'Read this later Mies van der Rohe building as a public-scale connection, not as a Bauhaus school site.',
+          notice: 'Stand outside first and look at how the roof plane, columns and glass separate structure from enclosure.',
+          boundary: 'The Neue Nationalgalerie was completed in 1968. Its Bauhaus connection is Mies van der Rohe’s later work, not a claim that the school was here.',
+          link: 'https://www.smb.museum/en/museums-institutions/neue-nationalgalerie/about-us/profile',
+          linkLabel: 'Check museum profile'
+        }
+      };
+
+      const seen = new Set(['archive']);
+      const buttons = Array.from(document.querySelectorAll('.place-button'));
+      const map = L.map('map', { scrollWheelZoom: false, zoomControl: true, attributionControl: true }).setView([52.519, 13.405], 11);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'
+      }).addTo(map);
+
+      const markers = {};
+      Object.entries(places).forEach(([key, place]) => {
+        const icon = L.divIcon({
+          className: '',
+          html: `<div class="place-pin${key === 'archive' ? ' active' : ''}" data-marker="${key}"><span>${place.order}</span></div>`,
+          iconSize: [32, 38],
+          iconAnchor: [16, 34],
+          popupAnchor: [0, -35]
+        });
+        markers[key] = L.marker(place.coords, { icon, title: place.name, keyboard: true })
+          .bindTooltip(`${place.order} · ${place.name}`, { direction: 'top', offset: [0, -30] })
+          .addTo(map)
+          .on('click', () => selectPlace(key, false));
+      });
+
+      function updateMarkerState(activeKey) {
+        Object.keys(markers).forEach((key) => {
+          const markerEl = markers[key].getElement();
+          const pin = markerEl && markerEl.querySelector('.place-pin');
+          if (pin) pin.classList.toggle('active', key === activeKey);
+        });
+      }
+
+      function selectPlace(key, pan = true) {
+        const place = places[key];
+        if (!place) return;
+        seen.add(key);
+        buttons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.place === key)));
+        document.getElementById('place-label').textContent = `${place.order} · ${place.label}`;
+        document.getElementById('place-name').textContent = place.name;
+        document.getElementById('place-address').textContent = place.address;
+        document.getElementById('place-summary').textContent = place.summary;
+        document.getElementById('place-notice').textContent = place.notice;
+        document.getElementById('place-boundary').textContent = place.boundary;
+        const photo = document.getElementById('place-photo');
+        photo.src = place.photo;
+        photo.alt = place.alt;
+        document.getElementById('place-photo-caption').textContent = place.caption;
+        const link = document.getElementById('place-link');
+        link.href = place.link;
+        link.childNodes[0].nodeValue = `${place.linkLabel} `;
+        document.getElementById('seen-count').textContent = `${seen.size} of 3 read`;
+        document.getElementById('completion').hidden = seen.size < 3;
+        updateMarkerState(key);
+        if (pan) map.flyTo(place.coords, 14, { duration: .65 });
+      }
+
+      selectPlace('archive', false);
+      buttons.forEach((button) => button.addEventListener('click', () => selectPlace(button.dataset.place)));
+      window.addEventListener('resize', () => map.invalidateSize());
+
+      const dialog = document.getElementById('credits-dialog');
+      document.getElementById('credits-toggle').addEventListener('click', () => dialog.showModal());
+      document.getElementById('credits-close').addEventListener('click', () => dialog.close());
+      dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+    })();
+  </script>
+  <script src="../js/brand.js"></script>
+</body>
+</html>

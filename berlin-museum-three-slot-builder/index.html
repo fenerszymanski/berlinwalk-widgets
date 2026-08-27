@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Berlin Museum Three-Slot Builder | BerlinWalk</title>
+    <meta name="description" content="A calm three-slot Berlin museum planner for first-time visitors." />
+    <link rel="stylesheet" href="../css/brand.css" />
+    <style>
+      :root {
+        --m3-ink: #28302a;
+        --m3-forest: #183d22;
+        --m3-green: #1b5e20;
+        --m3-lime: #7cb342;
+        --m3-paper: #fbfaf3;
+        --m3-line: #d6dfc9;
+        --m3-yellow: #ffe600;
+        --m3-blue: #e3edf0;
+        --m3-red: #9d423c;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: transparent; color: var(--m3-ink); }
+      .m3 {
+        width: min(1060px, 100%);
+        margin: 0 auto;
+        overflow: hidden;
+        border: 1px solid var(--m3-line);
+        background: var(--m3-paper);
+        box-shadow: 0 12px 35px rgba(24, 61, 34, .09);
+      }
+      .m3__head { padding: 27px 29px 23px; color: #fff; background: var(--m3-forest); }
+      .m3__eyebrow { margin: 0 0 9px; color: var(--m3-yellow); font-size: 11px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
+      .m3 h1 { max-width: 830px; margin: 0; font-size: clamp(28px, 4.4vw, 48px); line-height: 1.04; letter-spacing: -.04em; }
+      .m3__head p { max-width: 810px; margin: 12px 0 0; color: #dce8c8; font-size: 14px; line-height: 1.58; }
+      .m3__form { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 11px; padding: 18px 20px; background: #eff5e8; border-bottom: 1px solid var(--m3-line); }
+      .m3__field { display: grid; gap: 6px; }
+      .m3__field span { color: #4e5a4e; font-size: 10px; font-weight: 900; letter-spacing: .09em; text-transform: uppercase; }
+      .m3 select { width: 100%; min-height: 43px; padding: 9px 31px 9px 10px; border: 1px solid #b8cba9; border-radius: 0; color: var(--m3-ink); background: #fff; font: 700 12px Montserrat, Arial, sans-serif; }
+      .m3__brief { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 12px; align-items: start; margin: 20px 20px 0; padding: 14px 16px; border-left: 4px solid var(--m3-red); background: #f6eeea; }
+      .m3__brief-mark { display: grid; place-items: center; width: 36px; height: 36px; color: #fff; background: var(--m3-red); font-size: 19px; font-weight: 900; }
+      .m3__brief p { margin: 0; color: #453b39; font-size: 12.5px; line-height: 1.6; }
+      .m3__brief strong { color: #6f302d; }
+      .m3__sheet { padding: 20px; }
+      .m3__sheet-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; padding: 0 3px 14px; border-bottom: 2px solid var(--m3-forest); }
+      .m3__sheet-head h2 { margin: 0; color: var(--m3-forest); font-size: 21px; letter-spacing: -.02em; }
+      .m3__sheet-head p { max-width: 510px; margin: 0; color: #566159; font-size: 12px; line-height: 1.5; text-align: right; }
+      .m3__slots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 13px; margin-top: 16px; }
+      .m3__slots[data-count="1"] { grid-template-columns: minmax(0, 1fr); }
+      .m3__slots[data-count="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .m3__slot { min-height: 320px; padding: 16px; border: 1px solid var(--m3-line); background: #fffef9; display: grid; align-content: start; }
+      .m3__slot:nth-child(2) { background: #f6f9ef; }
+      .m3__slot:nth-child(3) { background: #f1f6f7; }
+      .m3__slot-no { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid #dfe6d7; }
+      .m3__slot-no b { color: var(--m3-green); font-size: 11px; letter-spacing: .11em; text-transform: uppercase; }
+      .m3__slot-no span { color: #59655d; font-size: 11px; font-weight: 800; text-align: right; }
+      .m3__slot h3 { margin: 0; color: var(--m3-forest); font-size: 22px; line-height: 1.14; letter-spacing: -.025em; }
+      .m3__kind { display: inline-block; width: fit-content; margin: 10px 0 11px; padding: 4px 7px; color: #1c4f22; background: #dce8c8; font-size: 10px; font-weight: 900; }
+      .m3__slot p { margin: 0; color: #48544c; font-size: 12.5px; line-height: 1.56; }
+      .m3__slot .m3__timing { margin-top: 14px; padding-top: 12px; border-top: 1px solid #dfe6d7; color: #506051; font-size: 11px; font-weight: 800; line-height: 1.45; }
+      .m3__slot .m3__timing strong { color: var(--m3-green); }
+      .m3__alt { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px; align-items: start; margin-top: 15px; padding: 16px; border: 1px dashed #95ad7f; background: #eef5e7; }
+      .m3__alt-mark { padding: 6px 8px; color: #183d22; background: var(--m3-yellow); font-size: 10px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+      .m3__alt h3 { margin: 0; color: var(--m3-forest); font-size: 17px; }
+      .m3__alt p { margin: 5px 0 0; color: #4f5e51; font-size: 12.5px; line-height: 1.54; }
+      .m3__bottom { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 17px; padding-top: 17px; border-top: 1px solid var(--m3-line); }
+      .m3__bottom p { flex: 1 1 440px; margin: 0; color: #546055; font-size: 11.5px; line-height: 1.56; }
+      .m3__bottom a:not(.m3__cta) { color: var(--m3-green); font-weight: 800; }
+      .m3__cta { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 11px 14px; color: #123d18 !important; background: var(--m3-yellow); font-size: 12px; font-weight: 900; text-decoration: none; }
+      .m3__cta:hover, .m3__cta:focus { color: #123d18 !important; background: #f4da00; outline: 2px solid #123d18; outline-offset: 2px; }
+      @media (max-width: 760px) {
+        .m3__head { padding: 22px 20px; }
+        .m3__form { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 16px; }
+        .m3__slots { grid-template-columns: 1fr; }
+        .m3__slot { min-height: 0; }
+        .m3__sheet { padding: 16px; }
+      }
+      @media (max-width: 480px) {
+        .m3__form { grid-template-columns: 1fr; }
+        .m3__brief { margin: 16px 16px 0; }
+        .m3__sheet-head { display: block; }
+        .m3__sheet-head p { margin-top: 7px; text-align: left; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="m3">
+      <header class="m3__head">
+        <p class="m3__eyebrow">Berlin Museum Three-Slot Builder</p>
+        <h1>Pick three museum slots across the trip. Do not lose a whole Berlin day indoors.</h1>
+        <p>This is a calm first-pass structure, not a museum league table. Give each collection a reason to be there, leave breathing space between districts and confirm each museum’s current calendar before you book.</p>
+      </header>
+
+      <section class="m3__form" aria-label="Choose your museum plan">
+        <label class="m3__field"><span>Trip length</span>
+          <select id="m3-days"><option value="2">2 days</option><option value="3" selected>3 days</option><option value="4">4 or more days</option></select>
+        </label>
+        <label class="m3__field"><span>Free half-days</span>
+          <select id="m3-halves"><option value="3">3 half-days</option><option value="4" selected>4 half-days</option><option value="5">5+ half-days</option></select>
+        </label>
+        <label class="m3__field"><span>Main interest</span>
+          <select id="m3-interest"><option value="mixed" selected>A first mixed Berlin visit</option><option value="history">History and memory</option><option value="art">Art</option><option value="architecture">Architecture</option></select>
+        </label>
+        <label class="m3__field"><span>Cost approach</span>
+          <select id="m3-cost"><option value="balanced" selected>Mix free and ticketed</option><option value="free">Free first</option><option value="ticket">Tickets are fine</option></select>
+        </label>
+        <label class="m3__field"><span>Pace</span>
+          <select id="m3-pace"><option value="light">Light, with outside time</option><option value="balanced" selected>Balanced</option><option value="deep">Deep museum time</option></select>
+        </label>
+        <label class="m3__field"><span>Is one key day Monday?</span>
+          <select id="m3-monday"><option value="no" selected>No / not sure</option><option value="yes">Yes, Day 1 is Monday</option></select>
+        </label>
+      </section>
+
+      <aside class="m3__brief" id="m3-monday-note" aria-live="polite"></aside>
+      <section class="m3__sheet" aria-live="polite">
+        <div class="m3__sheet-head">
+          <h2 id="m3-title">Your three museum slots</h2>
+          <p id="m3-subtitle"></p>
+        </div>
+        <div class="m3__slots" id="m3-slots"></div>
+        <aside class="m3__alt" id="m3-alt"></aside>
+        <footer class="m3__bottom">
+          <p>Topography of Terror is a free documentation centre and outdoor site. Its material concerns Nazi terror and persecution: plan quiet time there, not a rushed photo stop. For a daytime historic-centre walk, <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_top">check live availability before fixing it into this plan</a>.</p>
+          <a class="m3__cta" href="https://www.berlinwalk.com/berlin-trip-planner" target="_top">Build the whole trip</a>
+        </footer>
+      </section>
+    </main>
+    <script src="../js/brand.js"></script>
+    <script>
+      (function () {
+        var days = document.getElementById('m3-days');
+        var halves = document.getElementById('m3-halves');
+        var interest = document.getElementById('m3-interest');
+        var cost = document.getElementById('m3-cost');
+        var pace = document.getElementById('m3-pace');
+        var monday = document.getElementById('m3-monday');
+        var note = document.getElementById('m3-monday-note');
+        var title = document.getElementById('m3-title');
+        var subtitle = document.getElementById('m3-subtitle');
+        var slots = document.getElementById('m3-slots');
+        var alt = document.getElementById('m3-alt');
+
+        var museums = {
+          topography: { name: 'Topography of Terror', kind: 'Free history anchor', duration: 'Allow 60–90 minutes, then go outside.', copy: 'A free documentation centre and outdoor site on the institutions of Nazi terror. Give it quiet attention and do not treat it as a quick sight.', monday: false },
+          neues: { name: 'Neues Museum', kind: 'Ancient art + architecture', duration: 'Give it a protected 2-hour slot.', copy: 'A strong first-time choice for Egyptian and classical collections, with a building that matters as much as the objects.', monday: true },
+          jewish: { name: 'Jewish Museum Berlin', kind: 'Jewish history + architecture', duration: 'Allow at least 90 minutes.', copy: 'A substantial museum about Jewish life and history in Germany, with Daniel Libeskind’s building shaping the visit. This deserves unhurried time.', monday: true },
+          gemaelde: { name: 'Gemäldegalerie', kind: 'European painting', duration: 'A 90-minute focused visit works well.', copy: 'Choose this when painting is the reason for the visit. It is more rewarding with one period or artist in mind than with a rushed circuit.', monday: true },
+          national: { name: 'Neue Nationalgalerie', kind: 'Modern art + Mies building', duration: 'Allow 75–120 minutes.', copy: 'A focused modern-art stop in a landmark building. Pair it with the Kulturforum or Tiergarten, not another museum across town.', monday: true },
+          futurium: { name: 'Futurium', kind: 'Free future-thinking stop', duration: 'Keep it to 60–90 minutes.', copy: 'A free, lighter contrast near Hauptbahnhof when you want one museum-style stop without another ticketed collection.', monday: false },
+          alte: { name: 'Alte Nationalgalerie', kind: 'Nineteenth-century art', duration: 'Allow 60–90 minutes.', copy: 'A good alternate if painting matters but you want Museum Island atmosphere rather than the larger Gemäldegalerie collection.', monday: true }
+        };
+
+        function basePlan() {
+          if (cost.value === 'free') {
+            if (interest.value === 'history') return ['topography', 'futurium', 'jewish', 'neues'];
+            if (interest.value === 'art') return ['topography', 'futurium', 'neues', 'alte'];
+            if (interest.value === 'architecture') return ['topography', 'futurium', 'neues', 'jewish'];
+            return ['topography', 'futurium', 'neues', 'jewish'];
+          }
+          if (interest.value === 'history') return ['topography', 'jewish', 'neues', 'futurium'];
+          if (interest.value === 'art') return ['neues', 'gemaelde', 'national', 'alte'];
+          if (interest.value === 'architecture') return ['neues', 'jewish', 'national', 'gemaelde'];
+          if (cost.value === 'ticket') return ['neues', 'national', 'gemaelde', 'alte'];
+          return ['neues', 'topography', 'national', 'jewish'];
+        }
+
+        function tripLength() {
+          return days.value === '4' ? 4 : Number(days.value);
+        }
+
+        function freeHalfDays() {
+          return Math.min(Number(halves.value), tripLength() * 2);
+        }
+
+        function syncHalfDayChoices() {
+          var maxHalfDays = tripLength() * 2;
+          Array.prototype.forEach.call(halves.options, function (option) {
+            var available = Number(option.value) <= maxHalfDays;
+            option.disabled = !available;
+            option.hidden = !available;
+          });
+          if (Number(halves.value) > maxHalfDays) halves.value = String(maxHalfDays);
+        }
+
+        function slotCount() {
+          var reserve = pace.value === 'light' ? 2 : 1;
+          var count = Math.max(1, Math.min(3, freeHalfDays() - reserve));
+          if (pace.value === 'light' || pace.value === 'deep') count = Math.min(count, tripLength());
+          return count;
+        }
+
+        function labelFor(dayNumber, half) {
+          if (days.value === '4' && dayNumber === 4) return 'Later-trip ' + half;
+          return 'Day ' + dayNumber + ' ' + half;
+        }
+
+        function spacedDays(count) {
+          var total = tripLength();
+          if (count === 1) return [monday.value === 'yes' ? 1 : Math.min(2, total)];
+          if (count === 2) return [1, total];
+          return total === 3 ? [1, 2, 3] : [1, 3, total];
+        }
+
+        function labelsFor(count) {
+          var total = tripLength();
+          if (pace.value === 'light' || pace.value === 'deep') {
+            return spacedDays(count).map(function (dayNumber, index) {
+              var half = index === 0 && monday.value === 'yes' ? 'morning' : index === 1 ? 'afternoon' : 'morning';
+              return labelFor(dayNumber, half);
+            });
+          }
+          if (total === 2) {
+            return (monday.value === 'yes'
+              ? ['Day 1 morning', 'Day 2 morning', 'Day 2 late afternoon']
+              : ['Day 1 morning', 'Day 1 late afternoon', 'Day 2 morning']).slice(0, count);
+          }
+          if (total === 3) {
+            return (monday.value === 'yes'
+              ? ['Day 1 morning', 'Day 2 afternoon', 'Day 3 morning']
+              : ['Day 1 afternoon', 'Day 2 morning', 'Day 3 afternoon']).slice(0, count);
+          }
+          return (monday.value === 'yes'
+            ? ['Day 1 morning', 'Day 3 afternoon', 'Later-trip morning']
+            : ['Day 1 afternoon', 'Day 3 morning', 'Later-trip afternoon']).slice(0, count);
+        }
+
+        function paceLine(museum) {
+          if (pace.value === 'light') return 'Keep this as the day’s only collection and leave the rest outdoors. ' + museum.duration;
+          if (pace.value === 'deep') return 'Protect this full half-day for the collection. Do not add a second collection to this slot. ' + museum.duration;
+          return 'Pair it only with its own nearby streets or park. ' + museum.duration;
+        }
+
+        function arrange(keys, count) {
+          var candidates = keys.slice();
+          var primary = [];
+          var alternate;
+          var safeIndex;
+          var index;
+          if (monday.value === 'yes') {
+            if (candidates.indexOf('topography') === -1) candidates.push('topography');
+            safeIndex = -1;
+            for (index = 0; index < candidates.length; index += 1) {
+              if (!museums[candidates[index]].monday) {
+                safeIndex = index;
+                break;
+              }
+            }
+            primary.push(candidates.splice(safeIndex, 1)[0]);
+          }
+          primary = primary.concat(candidates.slice(0, count - primary.length));
+          for (index = 0; index < candidates.length; index += 1) {
+            if (primary.indexOf(candidates[index]) === -1) {
+              alternate = candidates[index];
+              break;
+            }
+          }
+          if (!alternate) {
+            Object.keys(museums).some(function (key) {
+              if (primary.indexOf(key) === -1) {
+                alternate = key;
+                return true;
+              }
+              return false;
+            });
+          }
+          return { primary: primary, alternate: alternate };
+        }
+
+        function draw() {
+          syncHalfDayChoices();
+          var count = slotCount();
+          var arranged = arrange(basePlan(), count);
+          var slotLabels = labelsFor(count);
+          var halfDayLabel = halves.options[halves.selectedIndex].textContent;
+          var spareHalfDays = freeHalfDays() - count;
+          var spareLabel = halves.value === '5' ? 'at least ' + spareHalfDays : spareHalfDays;
+          title.textContent = (count === 1 ? 'One museum slot' : count === 3 ? 'Three museum slots' : count + ' museum slots') + ' across ' + (days.value === '4' ? 'a longer Berlin trip' : days.value + ' days');
+          subtitle.textContent = 'You marked ' + halfDayLabel + '. This plan uses ' + count + (count === 1 ? ' protected half-day' : ' protected half-days') + ' and keeps ' + spareLabel + (spareHalfDays === 1 ? ' half-day' : ' half-days') + ' for the city outside.';
+          if (monday.value === 'yes') {
+            note.innerHTML = '<div class="m3__brief-mark" aria-hidden="true">!</div><p><strong>Monday needs a deliberate swap.</strong> Neues Museum and Jewish Museum Berlin are normally closed on Mondays, and other museum calendars can differ too. I put a Monday-safe anchor in the Day 1 slot; any restricted collection stays on a later-day slot. Confirm each museum’s own calendar before booking.</p>';
+          } else {
+            note.innerHTML = '<div class="m3__brief-mark" aria-hidden="true">✓</div><p><strong>Keep one day light.</strong> Three museum slots are enough for a first Berlin visit. The goal is not to tick off a collection at every turn, but to leave room for the streets around it.</p>';
+          }
+          slots.innerHTML = '';
+          slots.dataset.count = String(count);
+          arranged.primary.forEach(function (key, index) {
+            var museum = museums[key];
+            var card = document.createElement('article');
+            card.className = 'm3__slot';
+            card.innerHTML = '<div class="m3__slot-no"><b>Slot ' + String(index + 1).padStart(2, '0') + '</b><span></span></div><h3></h3><span class="m3__kind"></span><p></p><p class="m3__timing"></p>';
+            card.querySelector('.m3__slot-no span').textContent = slotLabels[index];
+            card.querySelector('h3').textContent = museum.name;
+            card.querySelector('.m3__kind').textContent = museum.kind;
+            card.querySelector('p').textContent = museum.copy;
+            card.querySelector('.m3__timing').innerHTML = '<strong>How to use the slot:</strong> ' + paceLine(museum) + (monday.value === 'yes' && museum.monday ? ' Keep this off Monday.' : '');
+            slots.appendChild(card);
+          });
+          var alternative = museums[arranged.alternate];
+          alt.innerHTML = '<span class="m3__alt-mark">Alternate</span><div><h3></h3><p></p></div>';
+          alt.querySelector('h3').textContent = alternative.name;
+          alt.querySelector('p').textContent = alternative.copy + ' Use this if a primary museum is sold out, closed on your date or simply no longer matches your energy.';
+        }
+        [days, halves, interest, cost, pace, monday].forEach(function (field) { field.addEventListener('change', draw); });
+        draw();
+      })();
+    </script>
+  </body>
+</html>

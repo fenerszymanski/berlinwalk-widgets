@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KitKat Week Board</title>
+<meta name="description" content="Every recurring KitKatClub party plotted on one week, with the door time and the dress rule the organiser of that night actually publishes." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Crect x='14' y='16' width='36' height='5' rx='2.5' fill='%23FFE600'/%3E%3Crect x='14' y='29' width='24' height='5' rx='2.5' fill='%237CB342'/%3E%3Crect x='14' y='42' width='31' height='5' rx='2.5' fill='%23FFE600'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-dark:#123D18; --green-mid:#2E7D32; --lime:#7CB342;
+    --light:#C5E1A5; --yellow:#FFE600; --ink:#212121; --muted:#4b584b;
+    --line:#E3E8DC; --panel:#F4F7F0; --dim:#98a091;
+    --strict:#7B1D1D; --mid:#B96A06; --open:#1D6FA3; --shut:#C9CFC2;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .wrap{max-width:780px;margin:0 auto;padding:4px 14px 18px}
+  .kicker{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-mid);margin:0 0 6px}
+  h1{font-size:21px;font-weight:800;line-height:1.18;margin:0 0 8px;color:var(--green-dark)}
+  .lede{font-size:14.5px;color:var(--muted);margin:0 0 14px}
+
+  .picker{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px 14px;margin:0 0 12px}
+  .picker label{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--green-mid);display:block;margin:0 0 6px}
+  select{width:100%;min-height:48px;font-family:inherit;font-size:15px;font-weight:700;color:var(--green-dark);
+         background:#fff;border:2px solid var(--green-dark);border-radius:11px;padding:10px 12px;cursor:pointer}
+  select:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+  .pickernote{font-size:12.5px;color:var(--muted);margin:9px 0 0}
+  .pickernote b{color:var(--green-dark)}
+
+  .stage{border:2px solid var(--green-dark);border-radius:14px;overflow:hidden;background:#fff;margin:0 0 9px}
+  .stage svg{display:block;width:100%;height:auto}
+
+  .legend{display:flex;flex-wrap:wrap;gap:5px 14px;font-size:11.5px;color:var(--muted);margin:0 0 14px}
+  .legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+
+  .readout{border:2px solid var(--green-dark);border-radius:14px;padding:13px 14px 14px;margin:0 0 12px;background:#FBFDF7}
+  .readout .rtop{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px;margin:0 0 9px}
+  .readout h2{font-size:16px;font-weight:800;margin:0;color:var(--green-dark)}
+  .readout .door{font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:700;font-size:13.5px;color:#fff;
+                 background:var(--green-dark);border-radius:999px;padding:3px 10px;white-space:nowrap}
+  .rlab{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--green-mid);margin:11px 0 5px}
+  .rlab:first-of-type{margin-top:0}
+  blockquote{margin:0;padding:9px 12px;border-left:4px solid var(--yellow);background:#fff;border-radius:0 8px 8px 0;
+             font-size:14px;font-style:italic;color:var(--ink)}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin:0}
+  .chip{font-size:12.5px;font-weight:700;color:#fff;background:var(--strict);border-radius:999px;padding:4px 11px}
+  .chip.none{background:var(--green-mid)}
+  .ride{font-size:14px;margin:0;color:var(--ink)}
+  .ride b{color:var(--green-dark)}
+  .src{font-size:12px;color:var(--muted);margin:14px 0 0}
+  .src b{color:var(--green-dark)}
+  @media (max-width:520px){
+    h1{font-size:19px}
+    .wrap{padding:4px 11px 16px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">KitKatClub, one week</p>
+  <h1>The KitKat week: same room, different rules</h1>
+  <p class="lede">KitKatClub is not one party. Each night is run by a different organiser, and each organiser publishes its own door time and its own dress rule. Pick the night you can actually go and read what that night asks for.</p>
+
+  <div class="picker">
+    <label for="night">Which night can you go?</label>
+    <select id="night"></select>
+    <p class="pickernote" id="pickernote"></p>
+  </div>
+
+  <div class="stage">
+    <svg id="plot" viewBox="0 0 760 340" role="img" aria-labelledby="plottitle">
+      <title id="plottitle">The KitKatClub week, plotted by published door time</title>
+    </svg>
+  </div>
+
+  <div class="legend">
+    <span><i style="background:#7B1D1D"></i>No street clothes at all</span>
+    <span><i style="background:#B96A06"></i>No jeans or T-shirts</span>
+    <span><i style="background:#1D6FA3"></i>Smart casual accepted</span>
+    <span><i style="background:#C9CFC2"></i>No evening party</span>
+  </div>
+
+  <div class="readout" id="readout" aria-live="polite"></div>
+
+  <p class="src">Door times and dress rules as published by the club and its event organisers, <b>checked on 27 August 2026</b>. Fridays rotate between organisers, so the Friday you land on decides the rule. Night services read from live BVG departures at U Heinrich-Heine-Straße on the same date. The club publishes no closing times, so the bars show when doors open, not when the party ends.</p>
+</div>
+
+<script>
+var NIGHTS = [
+  { id:'mon', day:'Mon', dayIndex:0, party:'Electric Monday', door:'22:00', doorHour:22,
+    band:'open',
+    rule:'We have a slightly relaxed Dresscode on Mondays. Colourful, Fantasy Costumes, Kinky Sportwear, Smart Casual, Black Tops, Black/Colourful TShirts/Shirts, Mesh TShirts - it is your choice.',
+    refuses:['Long-sleeve pullovers','Too-casual streetwear','Arriving intoxicated','Flip-flops in summer'],
+    note:'The most forgiving night of the week, and the only one that names smart casual and plain black T-shirts as acceptable.',
+    ride:'The U8 has stopped by 03:30. The first trains back are around 04:13; before that the <b>N8 night bus</b> runs from the same street, roughly every 15 minutes.' },
+  { id:'tue', day:'Tue', dayIndex:1, party:'No evening party', door:'-', doorHour:null,
+    band:'shut',
+    rule:'',
+    refuses:[],
+    note:'Tuesday is the one evening the club does not open. The cloakroom desk is closed too, so this is not the night to collect anything you left behind.',
+    ride:'' },
+  { id:'wed', day:'Wed', dayIndex:2, party:'Symbiotikka', door:'22:00', doorHour:22,
+    band:'mid',
+    rule:'Be particular, creative, sexy, wicked, kinky, especially or crazy. But never boring!',
+    refuses:['Boring'],
+    note:'The shortest published rule at the club, and the hardest to prepare for. It does not list garments, it names an effect. Techno night with live kinky and bondage shows, a playspace and the pool.',
+    ride:'The U8 has stopped by 03:30. The first trains back are around 04:13; before that the <b>N8 night bus</b> runs from the same street, roughly every 15 minutes.' },
+  { id:'thu', day:'Thu', dayIndex:3, party:'Unity', door:'22:00', doorHour:22,
+    band:'strict',
+    rule:'Be creative. Fetish, kinky, extravagant, or creatively expressive. Please avoid everyday streetwear such as jeans, T-shirts, and sneakers. The more extravagant, the better.',
+    refuses:['Jeans','T-shirts','Sneakers'],
+    note:'A weeknight with a weekend-strength rule. Sneakers are named here, which catches people who assumed a Thursday would be softer than a Saturday.',
+    ride:'The U8 has stopped by 03:30. The first trains back are around 04:13; before that the <b>N8 night bus</b> runs from the same street, roughly every 15 minutes.' },
+  { id:'fri1', day:'Fri', dayIndex:4, party:'Four Play (1st Friday)', door:'20:00', doorHour:20,
+    band:'strict',
+    rule:'Kinky style: Latex, leather, PVC, vinyl. Sexy style: Lingerie, mesh, sexy swimwear. Natural style: Naked (or minimal with tape). Creative: Wild costumes, super-heroes, glittery festival style. If it is something you would wear casually, it is not for Four Play.',
+    refuses:['Police or military uniforms','Anything you would wear casually'],
+    note:'The one night that bans uniforms of authority and force outright. The following Friday, a different organiser asks for exactly the opposite.',
+    ride:'The <b>U8 runs all night</b> on Friday and Saturday, roughly every 15 minutes at 04:00, with the N60 and N65 buses alongside it.' },
+  { id:'fri2', day:'Fri', dayIndex:4, party:'GEGEN or Psycho (2nd Friday)', door:'20:00', doorHour:20,
+    band:'strict',
+    rule:'GEGEN Gear: Leather, uniforms, boots, harnesses, armbands, hankies, gloves, collars, caps, braces, jocks, rubber, latex, workwear, biker gear, coded colors and exposed skin. Dress in codes. We will read you upon entry. Psycho: White, bikini, kinky, extravagant, gothic, goa.',
+    refuses:['Casual wear','Work attire'],
+    note:'The second Friday alternates between two organisers with different aesthetics. GEGEN reads your outfit as a code and asks for uniforms; Four Play, on the Friday before in the same room, refuses them.',
+    ride:'The <b>U8 runs all night</b> on Friday and Saturday, roughly every 15 minutes at 04:00, with the N60 and N65 buses alongside it.' },
+  { id:'fri3', day:'Fri', dayIndex:4, party:'Mystic Rose (3rd Friday)', door:'20:00', doorHour:20,
+    band:'mid',
+    rule:'Be creative. Be colorful. Be sexy. And always BE YOURSELF. Fetish welcome. But NO MASKS.',
+    refuses:['Masks'],
+    note:'The only published KitKat rule that bans masks. If your whole look depends on covering your face, this is the Friday to skip.',
+    ride:'The <b>U8 runs all night</b> on Friday and Saturday, roughly every 15 minutes at 04:00, with the N60 and N65 buses alongside it.' },
+  { id:'fri4', day:'Fri', dayIndex:4, party:'PiepShow (last Friday)', door:'20:00', doorHour:20,
+    band:'mid',
+    rule:'Kinky or fetish (black or colourful), sporty (sportswear + sneakers), creative (sexy + imaginative), costumes. Regular jeans or T-shirts are usually no piep-outfits.',
+    refuses:['Regular jeans','T-shirts'],
+    note:'A queer techno rave, and the one night that names sportswear and sneakers as an accepted look. Wear the same shoes to the Saturday party and they are refused.',
+    ride:'The <b>U8 runs all night</b> on Friday and Saturday, roughly every 15 minutes at 04:00, with the N60 and N65 buses alongside it.' },
+  { id:'sat', day:'Sat', dayIndex:5, party:'CarneBall Bizarre', door:'20:00', doorHour:20,
+    band:'strict',
+    rule:'Kinky, fetish, gothic, latex and leather, costumes, glitter and glamour, elegant evening wear, the unusual of any kind. Colourful outfits are preferred. NO normal street clothing. Jeans and sports shoes are forbidden. Plain underwear too. We are not a swingers club. Touching without the other person’s consent, including in passing, leads to a ban. For life.',
+    refuses:['Normal street clothes','Jeans','Sports shoes','Plain underwear'],
+    note:'The night the club is famous for, and the strictest published rule. It is also the only listing that spells out the consent rule and its penalty in the same paragraph as the dress code.',
+    ride:'The <b>U8 runs all night</b> on Friday and Saturday, roughly every 15 minutes at 04:00, with the N60 and N65 buses alongside it.' },
+  { id:'sun', day:'Sun', dayIndex:6, party:'Nachspiel (day rave)', door:'08:00', doorHour:8,
+    band:'mid',
+    rule:'Dress to impress! No street wear - no Jeans & no T-Shirts.',
+    refuses:['Street wear','Jeans','T-shirts'],
+    note:'The one party that starts in the morning. Doors at 08:00 on Sunday, and the dress rule still applies in daylight, which surprises people who walk over from another club.',
+    ride:'Nothing special is needed. The <b>U8 runs a normal Sunday service</b> from Heinrich-Heine-Straße, about every ten minutes through the morning.' }
+];
+
+var BAND_FILL = { strict:'#7B1D1D', mid:'#B96A06', open:'#1D6FA3', shut:'#C9CFC2' };
+var DAYS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+var selectEl = document.getElementById('night');
+var plotEl = document.getElementById('plot');
+var readEl = document.getElementById('readout');
+var noteEl = document.getElementById('pickernote');
+var current = 'sat';
+
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+/* x axis runs 18:00 through 18:00 the next day, so a Sunday 08:00 door
+   sits where it really belongs: fourteen hours after the evening starts. */
+var LAYOUT_WIDE = { W:760, H:340, X0:92, X1:736, Y0:46, ROW:38, fTick:11, fDay:13, fLbl:11.5, fFoot:11, laneH:15, friH:6, friGap:7 };
+var LAYOUT_NARROW = { W:430, H:290, X0:54, X1:418, Y0:40, ROW:32, fTick:9.5, fDay:12, fLbl:10.5, fFoot:9.5, laneH:13, friH:5, friGap:6 };
+var LAY = LAYOUT_WIDE;
+
+function hourToX(h){ var t = (h - 18 + 24) % 24; return LAY.X0 + (t / 24) * (LAY.X1 - LAY.X0); }
+
+function drawPlot(){
+  LAY = (plotEl.clientWidth && plotEl.clientWidth < 560) ? LAYOUT_NARROW : LAYOUT_WIDE;
+  plotEl.setAttribute('viewBox', '0 0 ' + LAY.W + ' ' + LAY.H);
+  var axisBottom = LAY.Y0 + 7 * LAY.ROW - 6;
+  var parts = ['<title id="plottitle">The KitKatClub week, plotted by published door time</title>'];
+  parts[parts.length] = '<defs>' +
+    grad('gstrict', '#7B1D1D') + grad('gmid', '#B96A06') + grad('gopen', '#1D6FA3') +
+    '</defs>';
+  parts[parts.length] = '<rect x="0" y="0" width="' + LAY.W + '" height="' + LAY.H + '" fill="#ffffff"/>';
+
+  var tickHours = (LAY === LAYOUT_NARROW) ? [18,0,6,12] : [18,21,0,3,6,9,12,15];
+  for (var t = 0; t < tickHours.length; t++){
+    var hx = hourToX(tickHours[t]);
+    parts[parts.length] = '<line x1="'+hx.toFixed(1)+'" y1="'+(LAY.Y0-14)+'" x2="'+hx.toFixed(1)+'" y2="'+axisBottom+'" stroke="#E3E8DC" stroke-width="1"/>';
+    var lbl = (tickHours[t] < 10 ? '0' : '') + tickHours[t] + ':00';
+    parts[parts.length] = '<text x="'+hx.toFixed(1)+'" y="'+(LAY.Y0-20)+'" font-size="'+LAY.fTick+'" font-family="IBM Plex Mono, monospace" fill="#98a091" text-anchor="middle">'+lbl+'</text>';
+  }
+  var footY = LAY.H - 8;
+  parts[parts.length] = '<text x="'+LAY.X0+'" y="'+footY+'" font-size="'+LAY.fFoot+'" font-family="Montserrat, sans-serif" fill="#98a091">evening</text>';
+  parts[parts.length] = '<text x="'+hourToX(6).toFixed(1)+'" y="'+footY+'" font-size="'+LAY.fFoot+'" font-family="Montserrat, sans-serif" fill="#98a091" text-anchor="middle">next morning</text>';
+  parts[parts.length] = '<text x="'+LAY.X1+'" y="'+footY+'" font-size="'+LAY.fFoot+'" font-family="Montserrat, sans-serif" fill="#98a091" text-anchor="end">afternoon</text>';
+
+  for (var d = 0; d < DAYS.length; d++){
+    var y = LAY.Y0 + d * LAY.ROW;
+    parts[parts.length] = '<text x="'+(LAY.X0-12)+'" y="'+(y+13)+'" font-size="'+LAY.fDay+'" font-weight="700" font-family="Montserrat, sans-serif" fill="#123D18" text-anchor="end">'+DAYS[d]+'</text>';
+  }
+
+  for (var i = 0; i < NIGHTS.length; i++){
+    var n = NIGHTS[i];
+    var y2 = LAY.Y0 + n.dayIndex * LAY.ROW;
+    var on = (n.id === current);
+    if (n.doorHour === null){
+      parts[parts.length] = '<rect x="'+LAY.X0+'" y="'+(y2+3)+'" width="'+(LAY.X1-LAY.X0)+'" height="'+(LAY.laneH-3)+'" rx="'+((LAY.laneH-3)/2)+'" fill="#F1F3EE" stroke="#E3E8DC" stroke-width="1"/>';
+      parts[parts.length] = '<text x="'+(LAY.X0+10)+'" y="'+(y2+LAY.laneH-4)+'" font-size="'+LAY.fFoot+'" font-weight="600" font-family="Montserrat, sans-serif" fill="#98a091">no evening party</text>';
+      continue;
+    }
+    var bx = hourToX(n.doorHour);
+    var lane = 0, laneH = LAY.laneH, off = 2;
+    if (n.dayIndex === 4){ laneH = LAY.friH; lane = ['fri1','fri2','fri3','fri4'].indexOf(n.id); off = 1 + lane * LAY.friGap; }
+    var w = Math.max(30, LAY.X1 - bx);
+    var gid = 'g' + n.band;
+    parts[parts.length] = '<rect x="'+bx.toFixed(1)+'" y="'+(y2+off)+'" width="'+w.toFixed(1)+'" height="'+laneH+'" rx="'+(laneH/2)+'" fill="url(#'+gid+')" opacity="'+(on?'1':'0.34')+'"/>';
+    if (on){
+      parts[parts.length] = '<rect x="'+(bx-2.5).toFixed(1)+'" y="'+(y2+off-2.5)+'" width="'+(Math.min(w, 96)+5).toFixed(1)+'" height="'+(laneH+5)+'" rx="'+((laneH+5)/2)+'" fill="none" stroke="#123D18" stroke-width="2.5"/>';
+      parts[parts.length] = '<circle cx="'+bx.toFixed(1)+'" cy="'+(y2+off+laneH/2)+'" r="'+(LAY===LAYOUT_NARROW?4.5:6)+'" fill="#FFE600" stroke="#123D18" stroke-width="2.5"/>';
+      var ty = y2 + off + laneH + (LAY===LAYOUT_NARROW?10:12);
+      if (ty > axisBottom + 2) ty = y2 + off - 4;
+      parts[parts.length] = '<text x="'+(bx+8).toFixed(1)+'" y="'+ty+'" font-size="'+LAY.fLbl+'" font-weight="800" font-family="Montserrat, sans-serif" fill="#123D18">doors '+n.door+'</text>';
+    }
+  }
+  plotEl.innerHTML = parts.join('');
+}
+
+function grad(id, colour){
+  return '<linearGradient id="'+id+'" x1="0" y1="0" x2="1" y2="0">' +
+    '<stop offset="0" stop-color="'+colour+'" stop-opacity="1"/>' +
+    '<stop offset="0.45" stop-color="'+colour+'" stop-opacity="0.55"/>' +
+    '<stop offset="1" stop-color="'+colour+'" stop-opacity="0.05"/>' +
+    '</linearGradient>';
+}
+
+function drawReadout(){
+  var n = null;
+  for (var i = 0; i < NIGHTS.length; i++){ if (NIGHTS[i].id === current) n = NIGHTS[i]; }
+  if (!n) return;
+  var html = '<div class="rtop"><h2>' + esc(n.party) + '</h2>';
+  if (n.doorHour !== null) html += '<span class="door">' + esc(n.day) + ' &middot; doors ' + esc(n.door) + '</span>';
+  html += '</div>';
+  if (n.rule){
+    html += '<p class="rlab">What this night publishes</p><blockquote>' + esc(n.rule) + '</blockquote>';
+    html += '<p class="rlab">Named as refused</p><div class="chips">';
+    for (var r = 0; r < n.refuses.length; r++) html += '<span class="chip">' + esc(n.refuses[r]) + '</span>';
+    html += '</div>';
+  }
+  html += '<p class="rlab">Why it matters</p><p class="ride">' + n.note + '</p>';
+  if (n.ride) html += '<p class="rlab">Getting home</p><p class="ride">' + n.ride + '</p>';
+  readEl.innerHTML = html;
+}
+
+function drawNote(){
+  var strictCount = 0, midCount = 0, openCount = 0;
+  for (var i = 0; i < NIGHTS.length; i++){
+    if (NIGHTS[i].band === 'strict') strictCount++;
+    else if (NIGHTS[i].band === 'mid') midCount++;
+    else if (NIGHTS[i].band === 'open') openCount++;
+  }
+  noteEl.innerHTML = 'Across a normal month the club publishes <b>' + (strictCount + midCount + openCount) +
+    ' different dress rules</b> for the same rooms, because each Friday belongs to a different organiser: ' + strictCount + ' that refuse street clothes outright, ' +
+    midCount + ' that refuse jeans and T-shirts, and ' + openCount + ' that accepts smart casual.';
+}
+
+function render(){ drawPlot(); drawReadout(); }
+
+var opts = '';
+for (var i = 0; i < NIGHTS.length; i++){
+  var n = NIGHTS[i];
+  var label = n.day + ' · ' + n.party + (n.doorHour !== null ? ' · doors ' + n.door : '');
+  opts += '<option value="' + n.id + '"' + (n.id === current ? ' selected' : '') + '>' + esc(label) + '</option>';
+}
+selectEl.innerHTML = opts;
+selectEl.onchange = function(){ current = selectEl.value; render(); };
+
+drawNote();
+render();
+window.onresize = function(){ drawPlot(); };
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

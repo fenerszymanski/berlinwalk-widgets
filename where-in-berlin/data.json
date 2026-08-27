@@ -1,0 +1,400 @@
+{
+  "version": "where-in-berlin-20260711b",
+  "title": "Where in Berlin Do You Belong?",
+  "timezone": "Europe/Berlin",
+  "axes": ["energy", "urbanity", "heritage", "night", "communal", "planned"],
+  "questions": [
+    {
+      "id": "free-saturday",
+      "kicker": "1 of 6 · A free Saturday",
+      "title": "You have no plan until lunch.",
+      "situation": "Where does Berlin pull you first?",
+      "ambience": "canal-morning",
+      "options": [
+        {
+          "id": "canal-breakfast",
+          "label": "Canal breakfast",
+          "micro": "Coffee, pastry, and nowhere urgent to be.",
+          "image": "assets/questions/q1-canal-breakfast.jpg",
+          "stinger": "cup",
+          "axes": {"energy": -1, "urbanity": 1, "heritage": -1, "night": -2, "communal": 0, "planned": -1},
+          "affinity": {"neukoelln": 2, "pankow": 1, "friedrichshain-kreuzberg": 1}
+        },
+        {
+          "id": "museum-courtyard",
+          "label": "Museum courtyards",
+          "micro": "Stone, quiet, and one proper story.",
+          "image": "assets/questions/q1-museum-courtyard.jpg",
+          "stinger": "footsteps",
+          "axes": {"energy": -1, "urbanity": 1, "heritage": 2, "night": -2, "communal": -1, "planned": 1},
+          "affinity": {"mitte": 2, "charlottenburg-wilmersdorf": 2, "pankow": 1}
+        },
+        {
+          "id": "flea-market-food",
+          "label": "Flea market + street food",
+          "micro": "Browse first. Decide later.",
+          "image": "assets/questions/q1-flea-market-food.jpg",
+          "stinger": "market",
+          "axes": {"energy": 1, "urbanity": 1, "heritage": 0, "night": 0, "communal": 2, "planned": -1},
+          "affinity": {"friedrichshain-kreuzberg": 2, "neukoelln": 2, "tempelhof-schoeneberg": 1}
+        },
+        {
+          "id": "forest-lake",
+          "label": "Forest and lake",
+          "micro": "A bike, a shoreline, a longer way home.",
+          "image": "assets/questions/q1-forest-lake.jpg",
+          "stinger": "water",
+          "axes": {"energy": 0, "urbanity": -2, "heritage": 0, "night": -2, "communal": -1, "planned": 0},
+          "affinity": {"steglitz-zehlendorf": 2, "reinickendorf": 2, "treptow-koepenick": 2}
+        }
+      ]
+    },
+    {
+      "id": "one-evening",
+      "kicker": "2 of 6 · One evening",
+      "title": "You have three hours before dark.",
+      "situation": "What makes the evening feel worth it?",
+      "ambience": "city-evening",
+      "options": [
+        {
+          "id": "skyline-monuments",
+          "label": "Skyline and monuments",
+          "micro": "Give me the big Berlin view.",
+          "image": "assets/questions/q2-skyline-monuments.jpg",
+          "stinger": "city",
+          "axes": {"energy": 0, "urbanity": 1, "heritage": 2, "night": 0, "communal": 0, "planned": 1},
+          "affinity": {"mitte": 2, "charlottenburg-wilmersdorf": 2, "pankow": 1}
+        },
+        {
+          "id": "canal-bar",
+          "label": "A canal-side bar",
+          "micro": "One drink, good people-watching.",
+          "image": "assets/questions/q2-canal-bar.jpg",
+          "stinger": "glass",
+          "axes": {"energy": 1, "urbanity": 1, "heritage": -1, "night": 1, "communal": 2, "planned": -1},
+          "affinity": {"neukoelln": 2, "friedrichshain-kreuzberg": 2, "tempelhof-schoeneberg": 1}
+        },
+        {
+          "id": "neighbourhood-restaurant",
+          "label": "A neighbourhood restaurant",
+          "micro": "A table worth staying at.",
+          "image": "assets/questions/q2-neighbourhood-restaurant.jpg",
+          "stinger": "glass",
+          "axes": {"energy": -1, "urbanity": 1, "heritage": 0, "night": 0, "communal": 1, "planned": 0},
+          "affinity": {"pankow": 2, "neukoelln": 2, "charlottenburg-wilmersdorf": 1}
+        },
+        {
+          "id": "sunset-park",
+          "label": "Sunset in a park",
+          "micro": "Take the long way through open sky.",
+          "image": "assets/questions/q2-sunset-park.jpg",
+          "stinger": "water",
+          "axes": {"energy": 0, "urbanity": 0, "heritage": 0, "night": -1, "communal": 1, "planned": -1},
+          "affinity": {"tempelhof-schoeneberg": 2, "treptow-koepenick": 2, "reinickendorf": 1}
+        }
+      ]
+    },
+    {
+      "id": "ubahn-interruption",
+      "kicker": "3 of 6 · The U-Bahn stops",
+      "title": "Your line is suddenly not moving.",
+      "situation": "What is your first instinct?",
+      "ambience": "ubahn",
+      "options": [
+        {
+          "id": "switch-lines",
+          "label": "Switch lines and keep the plan",
+          "micro": "There is always another connection.",
+          "image": "assets/questions/q3-switch-lines.jpg",
+          "stinger": "announcement",
+          "axes": {"energy": 0, "urbanity": 1, "heritage": 0, "night": 0, "communal": 0, "planned": 2},
+          "affinity": {"charlottenburg-wilmersdorf": 2, "mitte": 1, "lichtenberg": 1}
+        },
+        {
+          "id": "walk-side-streets",
+          "label": "Walk the side streets",
+          "micro": "The detour might be the point.",
+          "image": "assets/questions/q3-walk-side-streets.jpg",
+          "stinger": "footsteps",
+          "axes": {"energy": 1, "urbanity": 1, "heritage": 1, "night": 0, "communal": 0, "planned": -1},
+          "affinity": {"neukoelln": 2, "friedrichshain-kreuzberg": 2, "mitte": 1}
+        },
+        {
+          "id": "coffee-reset",
+          "label": "Pause in a cafe",
+          "micro": "Five quiet minutes first.",
+          "image": "assets/questions/q3-coffee-reset.jpg",
+          "stinger": "cup",
+          "axes": {"energy": -1, "urbanity": 1, "heritage": 0, "night": -1, "communal": -1, "planned": 0},
+          "affinity": {"pankow": 2, "charlottenburg-wilmersdorf": 2, "lichtenberg": 1}
+        },
+        {
+          "id": "bike-away",
+          "label": "Get a bike and go",
+          "micro": "Movement beats waiting.",
+          "image": "assets/questions/q3-bike-away.jpg",
+          "stinger": "bike",
+          "axes": {"energy": 2, "urbanity": 0, "heritage": 0, "night": 0, "communal": -1, "planned": -1},
+          "affinity": {"treptow-koepenick": 2, "tempelhof-schoeneberg": 2, "reinickendorf": 1}
+        }
+      ]
+    },
+    {
+      "id": "one-month-home",
+      "kicker": "4 of 6 · One month here",
+      "title": "You can choose your temporary home.",
+      "situation": "Which key do you want in your pocket?",
+      "ambience": "home",
+      "options": [
+        {
+          "id": "grand-altbau",
+          "label": "A grand Altbau",
+          "micro": "Tall windows, old details, a real hallway.",
+          "image": "assets/questions/q4-grand-altbau.jpg",
+          "stinger": "footsteps",
+          "axes": {"energy": -1, "urbanity": 1, "heritage": 2, "night": -1, "communal": 0, "planned": 1},
+          "affinity": {"charlottenburg-wilmersdorf": 2, "pankow": 2, "mitte": 1}
+        },
+        {
+          "id": "raw-loft",
+          "label": "A raw loft",
+          "micro": "Brick, concrete, and room to make noise.",
+          "image": "assets/questions/q4-raw-loft.jpg",
+          "stinger": "city",
+          "axes": {"energy": 1, "urbanity": 2, "heritage": -1, "night": 1, "communal": 1, "planned": -1},
+          "affinity": {"friedrichshain-kreuzberg": 2, "neukoelln": 2, "lichtenberg": 1}
+        },
+        {
+          "id": "garden-edge",
+          "label": "A garden at the edge",
+          "micro": "More green than noise at the window.",
+          "image": "assets/questions/q4-garden-edge.jpg",
+          "stinger": "water",
+          "axes": {"energy": -1, "urbanity": -2, "heritage": 0, "night": -2, "communal": -1, "planned": 1},
+          "affinity": {"steglitz-zehlendorf": 2, "reinickendorf": 2, "spandau": 1}
+        },
+        {
+          "id": "modern-tower",
+          "label": "A modern tower view",
+          "micro": "Light, space, and the horizon.",
+          "image": "assets/questions/q4-modern-tower.jpg",
+          "stinger": "city",
+          "axes": {"energy": 0, "urbanity": 1, "heritage": -1, "night": 0, "communal": 0, "planned": 2},
+          "affinity": {"marzahn-hellersdorf": 2, "lichtenberg": 2, "mitte": 1}
+        }
+      ]
+    },
+    {
+      "id": "after-dark",
+      "kicker": "5 of 6 · After dark",
+      "title": "The day is not over yet.",
+      "situation": "Which Berlin sound pulls you outside?",
+      "ambience": "night-city",
+      "options": [
+        {
+          "id": "club-bass",
+          "label": "Club bass through a doorway",
+          "micro": "You will find out where the night goes.",
+          "image": "assets/questions/q5-club-bass.jpg",
+          "stinger": "city",
+          "axes": {"energy": 2, "urbanity": 2, "heritage": -1, "night": 2, "communal": 2, "planned": -1},
+          "affinity": {"friedrichshain-kreuzberg": 2, "neukoelln": 2, "tempelhof-schoeneberg": 1}
+        },
+        {
+          "id": "tram-bell",
+          "label": "A tram bell across the street",
+          "micro": "One more stop, one more small discovery.",
+          "image": "assets/questions/q5-tram-bell.jpg",
+          "stinger": "announcement",
+          "axes": {"energy": 1, "urbanity": 1, "heritage": 0, "night": 1, "communal": 0, "planned": 0},
+          "affinity": {"mitte": 2, "lichtenberg": 1, "charlottenburg-wilmersdorf": 1}
+        },
+        {
+          "id": "beer-garden",
+          "label": "A beer garden table",
+          "micro": "Stay out until the conversation slows down.",
+          "image": "assets/questions/q5-beer-garden.jpg",
+          "stinger": "glass",
+          "axes": {"energy": 0, "urbanity": 1, "heritage": 1, "night": 0, "communal": 2, "planned": 0},
+          "affinity": {"charlottenburg-wilmersdorf": 2, "pankow": 2, "spandau": 1}
+        },
+        {
+          "id": "water-wind",
+          "label": "Water and wind",
+          "micro": "The city can wait behind you.",
+          "image": "assets/questions/q5-water-wind.jpg",
+          "stinger": "water",
+          "axes": {"energy": -1, "urbanity": -2, "heritage": 0, "night": -1, "communal": -1, "planned": -1},
+          "affinity": {"treptow-koepenick": 2, "reinickendorf": 1, "steglitz-zehlendorf": 1}
+        }
+      ]
+    },
+    {
+      "id": "sunday-plan",
+      "kicker": "6 of 6 · A Berlin Sunday",
+      "title": "The city is slower on purpose.",
+      "situation": "How do you use the open day?",
+      "ambience": "sunday",
+      "options": [
+        {
+          "id": "history-walk",
+          "label": "A long history walk",
+          "micro": "One route, proper context, no rush.",
+          "image": "assets/questions/q6-history-walk.jpg",
+          "stinger": "footsteps",
+          "axes": {"energy": 0, "urbanity": 1, "heritage": 2, "night": -1, "communal": 0, "planned": 1},
+          "affinity": {"mitte": 2, "spandau": 2, "charlottenburg-wilmersdorf": 1}
+        },
+        {
+          "id": "long-brunch",
+          "label": "A long brunch",
+          "micro": "Nobody leaves the table too early.",
+          "image": "assets/questions/q6-long-brunch.jpg",
+          "stinger": "glass",
+          "axes": {"energy": -1, "urbanity": 1, "heritage": 0, "night": -2, "communal": 2, "planned": 0},
+          "affinity": {"pankow": 2, "neukoelln": 2, "tempelhof-schoeneberg": 1}
+        },
+        {
+          "id": "open-air-market",
+          "label": "An open-air market",
+          "micro": "Small finds and a bag you did not plan for.",
+          "image": "assets/questions/q6-open-air-market.jpg",
+          "stinger": "market",
+          "axes": {"energy": 1, "urbanity": 1, "heritage": 0, "night": -1, "communal": 2, "planned": -1},
+          "affinity": {"friedrichshain-kreuzberg": 2, "neukoelln": 2, "marzahn-hellersdorf": 1}
+        },
+        {
+          "id": "lake-escape",
+          "label": "A lake escape",
+          "micro": "Take enough water and disappear for a while.",
+          "image": "assets/questions/q6-lake-escape.jpg",
+          "stinger": "water",
+          "axes": {"energy": 0, "urbanity": -2, "heritage": 0, "night": -2, "communal": -1, "planned": -1},
+          "affinity": {"treptow-koepenick": 2, "steglitz-zehlendorf": 2, "reinickendorf": 1}
+        }
+      ]
+    }
+  ],
+  "districts": [
+    {
+      "id": "mitte",
+      "district": "Mitte",
+      "archetype": "Story Collector",
+      "poster": "assets/results/mitte-story-collector.jpg",
+      "profile": {"energy": 0.41, "urbanity": 1.04, "heritage": 0.22, "night": -0.12, "communal": 0.76, "planned": -0.12},
+      "guideNote": "You like Berlin when the layers sit close together. Start with one street or one story around Museum Island, not every landmark at once. My rule: one route with context beats three rushed stops.",
+      "bookingCta": "Walk Berlin's stories",
+      "bookingContent": "mitte-story-collector"
+    },
+    {
+      "id": "friedrichshain-kreuzberg",
+      "district": "Friedrichshain-Kreuzberg",
+      "archetype": "Creative Night Walker",
+      "poster": "assets/results/friedrichshain-kreuzberg-creative-night-walker.jpg",
+      "profile": {"energy": 0.65, "urbanity": 0.99, "heritage": -0.22, "night": 0.01, "communal": 0.96, "planned": -0.55},
+      "guideNote": "You want Berlin with a little friction and a lot happening around you. Keep the plan loose, pick a side street before the obvious venue, and leave yourself time to stay out later than intended.",
+      "bookingCta": "Walk Berlin after the obvious route",
+      "bookingContent": "friedrichshain-kreuzberg-night-walker"
+    },
+    {
+      "id": "pankow",
+      "district": "Pankow",
+      "archetype": "Courtyard Regular",
+      "poster": "assets/results/pankow-courtyard-regular.jpg",
+      "profile": {"energy": -0.34, "urbanity": 0.52, "heritage": 0.17, "night": -0.81, "communal": 0.36, "planned": 0.11},
+      "guideNote": "You want a lived-in Berlin day, not a sprint through its loudest corners. Find a calm table, notice the buildings on the walk there, and let the city slow you down without making you leave it.",
+      "bookingCta": "Walk Berlin at its calmer pace",
+      "bookingContent": "pankow-courtyard-regular"
+    },
+    {
+      "id": "charlottenburg-wilmersdorf",
+      "district": "Charlottenburg-Wilmersdorf",
+      "archetype": "Cultured City Stroller",
+      "poster": "assets/results/charlottenburg-wilmersdorf-cultured-city-stroller.jpg",
+      "profile": {"energy": -0.22, "urbanity": 0.67, "heritage": 0.86, "night": -0.71, "communal": 0.09, "planned": 0.41},
+      "guideNote": "You enjoy Berlin when a good plan still has room for a coffee and a proper building. Pair one cultural stop with a neighbourhood walk; the city is more generous once you step off the big avenue.",
+      "bookingCta": "Walk Berlin with context",
+      "bookingContent": "charlottenburg-wilmersdorf-stroller"
+    },
+    {
+      "id": "spandau",
+      "district": "Spandau",
+      "archetype": "Old-Town Escape Artist",
+      "poster": "assets/results/spandau-old-town-escape-artist.jpg",
+      "profile": {"energy": -0.35, "urbanity": 0.02, "heritage": 0.49, "night": -0.98, "communal": -0.17, "planned": 0.14},
+      "guideNote": "You look for the Berlin that does not feel like a race. An old-town detour, water nearby, and one clear story suit you better than another crowded central square.",
+      "bookingCta": "Walk beyond central Berlin",
+      "bookingContent": "spandau-escape-artist"
+    },
+    {
+      "id": "steglitz-zehlendorf",
+      "district": "Steglitz-Zehlendorf",
+      "archetype": "Lakeside Planner",
+      "poster": "assets/results/steglitz-zehlendorf-lakeside-planner.jpg",
+      "profile": {"energy": 0.2, "urbanity": 0.26, "heritage": 0.33, "night": -0.54, "communal": 0, "planned": 0.09},
+      "guideNote": "You want the open part of Berlin, but you like knowing how to reach it. Pack water, choose one lake or green route, and give yourself a clean way back before the last train feels like a puzzle.",
+      "bookingCta": "Walk Berlin, then escape it well",
+      "bookingContent": "steglitz-zehlendorf-lakeside-planner"
+    },
+    {
+      "id": "tempelhof-schoeneberg",
+      "district": "Tempelhof-Schöneberg",
+      "archetype": "Open-Sky Local",
+      "poster": "assets/results/tempelhof-schoeneberg-open-sky-local.jpg",
+      "profile": {"energy": 0.06, "urbanity": 0.8, "heritage": -0.17, "night": -0.43, "communal": 0.66, "planned": -0.14},
+      "guideNote": "You like Berlin social, spacious and easy to enter. Choose a big park or terrace, bring somebody along, and do not over-plan the next hour. The city works well when the sky stays in the picture.",
+      "bookingCta": "Walk Berlin in the open air",
+      "bookingContent": "tempelhof-schoeneberg-open-sky"
+    },
+    {
+      "id": "neukoelln",
+      "district": "Neukölln",
+      "archetype": "Spontaneous Neighbour",
+      "poster": "assets/results/neukoelln-spontaneous-neighbour.jpg",
+      "profile": {"energy": 0.5, "urbanity": 0.38, "heritage": -0.1, "night": -0.32, "communal": 0.39, "planned": -0.49},
+      "guideNote": "You follow the city when it changes direction. Pick an area, not a rigid list, then leave space for a market, a bar, or a side street that was never in the plan.",
+      "bookingCta": "Walk Berlin like a neighbour",
+      "bookingContent": "neukoelln-spontaneous-neighbour"
+    },
+    {
+      "id": "treptow-koepenick",
+      "district": "Treptow-Köpenick",
+      "archetype": "Waterside Drifter",
+      "poster": "assets/results/treptow-koepenick-waterside-drifter.jpg",
+      "profile": {"energy": -0.19, "urbanity": -0.52, "heritage": 0.13, "night": -1.05, "communal": -0.3, "planned": -0.2},
+      "guideNote": "You use Berlin best when the water gives the day a shape. Take a longer S-Bahn ride, walk one shoreline without rushing, and let the central city stay behind you for a few hours.",
+      "bookingCta": "Walk Berlin, then follow the water",
+      "bookingContent": "treptow-koepenick-waterside-drifter"
+    },
+    {
+      "id": "marzahn-hellersdorf",
+      "district": "Marzahn-Hellersdorf",
+      "archetype": "Horizon Seeker",
+      "poster": "assets/results/marzahn-hellersdorf-horizon-seeker.jpg",
+      "profile": {"energy": 0.14, "urbanity": 0.57, "heritage": 0.39, "night": -0.55, "communal": 0.47, "planned": -0.23},
+      "guideNote": "You notice space before hype. A broad view, a practical route and the feeling that there is room to breathe matter more to you than being in the middle of the crowd.",
+      "bookingCta": "Walk Berlin beyond the postcard",
+      "bookingContent": "marzahn-hellersdorf-horizon-seeker"
+    },
+    {
+      "id": "lichtenberg",
+      "district": "Lichtenberg",
+      "archetype": "Quiet Explorer",
+      "poster": "assets/results/lichtenberg-quiet-explorer.jpg",
+      "profile": {"energy": 0.07, "urbanity": 0.98, "heritage": 0.47, "night": -0.37, "communal": 0.44, "planned": 0.28},
+      "guideNote": "You make a good Berlin day by keeping it simple and moving with purpose. One calm stop, one reliable connection and one place that feels slightly outside the usual tourist current is enough.",
+      "bookingCta": "Walk the quieter Berlin",
+      "bookingContent": "lichtenberg-quiet-explorer"
+    },
+    {
+      "id": "reinickendorf",
+      "district": "Reinickendorf",
+      "archetype": "Forest-Edge Wanderer",
+      "poster": "assets/results/reinickendorf-forest-edge-wanderer.jpg",
+      "profile": {"energy": 0.02, "urbanity": 0, "heritage": -0.03, "night": -0.76, "communal": 0.14, "planned": -0.33},
+      "guideNote": "You need Berlin to leave some air around the day. Follow a green edge, take the slower route once, and keep the evening light. The city does not always need to be loud to be memorable.",
+      "bookingCta": "Walk Berlin, then find its edge",
+      "bookingContent": "reinickendorf-forest-edge"
+    }
+  ]
+}

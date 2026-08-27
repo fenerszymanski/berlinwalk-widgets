@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Berlin Cemetery Clock</title>
+<meta name="description" content="Pick the date you are in Berlin and the hour you leave Alexanderplatz, and see on a real map which of five historic cemeteries would still be open, including Berlin public holidays and the Shabbat closure at Weißensee." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='32' r='16' fill='none' stroke='%23FFE600' stroke-width='4'/%3E%3Cpath d='M32 22v11l7 5' stroke='%23FFE600' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-dark:#123D18; --green-mid:#2E7D32;
+    --lime:#7CB342; --light:#C5E1A5; --yellow:#FFE600;
+    --ink:#212121; --muted:#4b584b; --line:#E3E8DC; --panel:#F4F7F0;
+    --grey:#8b948a; --amber:#B87400; --shut:#8d8d8d;
+    --land:#EFF1E7; --water:#BFD8E6;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .wrap{max-width:760px;margin:0 auto;padding:4px 14px 20px}
+  .kicker{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-mid);margin:0 0 6px}
+  h1{font-size:22px;font-weight:800;line-height:1.16;margin:0 0 8px;color:var(--green-dark)}
+  .lede{font-size:14.5px;color:var(--muted);margin:0 0 16px}
+  .lbl{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--green-mid);margin:0 0 6px;display:block}
+
+  .clock{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 13px 14px;margin:0 0 12px}
+  .clock-top{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px 16px;margin:0 0 12px}
+  .pick{flex:1 1 130px;min-width:0}
+  select{width:100%;appearance:none;border:2px solid var(--line);background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23123D18' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 10px center/11px 7px;
+    border-radius:10px;padding:8px 28px 8px 10px;font-family:inherit;font-size:13px;font-weight:700;color:var(--green-dark);cursor:pointer}
+  select:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+  input[type=date],input[type=time]{width:100%;border:2px solid var(--line);background:#fff;border-radius:10px;
+    padding:8px 10px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:15px;font-weight:700;color:var(--green-dark);
+    -webkit-appearance:none;appearance:none;min-height:42px}
+  input[type=date]:focus-visible,input[type=time]:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+  input[type=date]::-webkit-calendar-picker-indicator,input[type=time]::-webkit-calendar-picker-indicator{
+    opacity:1;cursor:pointer;filter:invert(22%) sepia(28%) saturate(1600%) hue-rotate(80deg) brightness(92%)}
+  .dayline{font-size:12.5px;color:var(--muted);margin:0;padding-left:11px;border-left:3px solid var(--light)}
+  .dayline b{color:var(--green-dark)}
+  .dayline.holiday{border-left-color:var(--yellow);background:#FFFDF0;padding:7px 11px;border-radius:0 9px 9px 0}
+
+  .stage{border:2px solid var(--green-dark);border-radius:14px;overflow:hidden;background:var(--land);margin:0 0 8px;position:relative}
+  .stage svg{display:block;width:100%;height:auto}
+  .mapcred{font-size:9.5px;color:#5c655c;padding:4px 8px 5px;background:#fff;border-top:1px solid var(--line);margin:0}
+  .mapcred a{color:var(--green)}
+  .pin{cursor:pointer}
+  .pin:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+
+  .legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11.5px;color:var(--muted);margin:0 0 16px}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+
+  .rows{display:flex;flex-direction:column;gap:7px;margin:0 0 14px}
+  .row{appearance:none;width:100%;text-align:left;border:2px solid var(--line);background:#fff;border-radius:12px;
+       padding:9px 11px;font-family:inherit;cursor:pointer;transition:.14s;display:flex;gap:10px;align-items:center}
+  .row:hover{border-color:var(--lime)}
+  .row:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+  .row[aria-pressed="true"]{border-color:var(--green);background:#F1F6EC}
+  .dot{flex:0 0 auto;width:13px;height:13px;border-radius:50%}
+  .rmain{flex:1 1 auto;min-width:0}
+  .rname{display:block;font-size:13.5px;font-weight:800;color:var(--green-dark);overflow-wrap:anywhere}
+  .rmeta{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+  .rtime{flex:0 0 auto;text-align:right}
+  .rbig{display:block;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:16px;font-weight:700;line-height:1.1}
+  .rsmall{display:block;font-size:10px;letter-spacing:.05em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+
+  .panel{border:2px solid var(--green);border-radius:14px;background:#fff;padding:13px 14px 14px}
+  .p-head{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;margin:0 0 3px}
+  .p-head h2{font-size:16.5px;font-weight:800;color:var(--green-dark);margin:0}
+  .p-head em{font-style:normal;font-size:11.5px;color:var(--muted)}
+  .verdict{font-size:13.5px;font-weight:700;color:var(--green-mid);margin:6px 0 10px}
+  .facts{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 11px}
+  .fact{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:5px 9px;font-size:11.5px;color:var(--muted)}
+  .fact b{color:var(--green-dark);font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:700}
+  .p-body p{font-size:13.5px;margin:0 0 10px;color:var(--ink)}
+  .p-body p.small{font-size:12.5px;color:var(--muted)}
+  .p-body h3{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--green-mid);margin:0 0 5px}
+  .names{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 11px;padding:0;list-style:none}
+  .names li{background:#F1F6EC;border:1px solid var(--line);border-radius:8px;padding:4px 8px;font-size:11.5px;font-weight:700;color:var(--green-dark)}
+  .callout{border-left:4px solid var(--yellow);background:#FFFDF0;padding:8px 11px;border-radius:0 9px 9px 0;font-size:12.5px;margin:0}
+  .callout b{color:var(--green-dark)}
+  .empty{font-size:13px;color:var(--muted);padding:14px;border:2px dashed var(--line);border-radius:12px}
+  @media(max-width:420px){
+    h1{font-size:19.5px}
+    .timeread b{font-size:26px}
+    .row{padding:8px 9px;gap:8px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Berlin Tools</p>
+  <h1>Berlin Cemetery Clock</h1>
+  <p class="lede">Five historic Berlin cemeteries, five different closing rules. Give it the date you are actually in Berlin and the hour you leave Alexanderplatz, and the map answers the only question that matters: would you still get in, and for how long.</p>
+
+  <div class="clock">
+    <div class="clock-top">
+      <div class="pick">
+        <label class="lbl" for="dd">Date of your visit</label>
+        <input type="date" id="dd" />
+      </div>
+      <div class="pick">
+        <label class="lbl" for="tt">You leave Alexanderplatz at</label>
+        <input type="time" id="tt" value="13:00" />
+      </div>
+    </div>
+    <p class="dayline" id="dayline">Pick the day you are actually in Berlin. Weekday, season and Berlin public holidays all change which gates are open.</p>
+    <div class="stage">
+      <svg id="map" viewBox="0 0 700 700" role="img" aria-labelledby="maptitle"><title id="maptitle">Map of five historic Berlin cemeteries with the transit route from Alexanderplatz to each one</title></svg>
+      <p class="mapcred">Cemetery outlines and waterways from <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>, ODbL. Route lines from live VBB journey data.</p>
+    </div>
+    <div class="legend">
+      <span><i style="background:#2E7D32"></i>Enough time</span>
+      <span><i style="background:#E8A400"></i>Tight, go anyway</span>
+      <span><i style="background:#8d8d8d"></i>Gate shut when you arrive</span>
+      <span><i style="background:#123D18;border-radius:2px"></i>Alexanderplatz</span>
+    </div>
+  </div>
+
+  <div class="rows" id="rows"></div>
+  <div id="panel"></div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  var COLOR = { good:'#2E7D32', tight:'#E8A400', shut:'#8d8d8d' };
+
+  var ddEl = document.getElementById('dd');
+  var ttEl = document.getElementById('tt');
+  var daylineEl = document.getElementById('dayline');
+  var mapEl = document.getElementById('map');
+  var rowsEl = document.getElementById('rows');
+  var panelEl = document.getElementById('panel');
+
+  var DATA = null, selected = null, proj = null;
+
+  var state = { month: 1, dow: 0, mins: 780, holiday: null, date: null };
+
+  /* Berlin keeps ten public holidays, including 8 March, which no other German
+     state does. Wei\u00dfensee closes on all of them, so the date has to know. */
+  function easterSunday(year) {
+    var a = year % 19, b = Math.floor(year / 100), c = year % 100;
+    var d = Math.floor(b / 4), e = b % 4, f = Math.floor((b + 8) / 25);
+    var g = Math.floor((b - f + 1) / 3);
+    var h = (19 * a + b - d - g + 15) % 30;
+    var i = Math.floor(c / 4), k = c % 4;
+    var l = (32 + 2 * e + 2 * i - h - k) % 7;
+    var m = Math.floor((a + 11 * h + 22 * l) / 451);
+    var month = Math.floor((h + l - 7 * m + 114) / 31);
+    var day = ((h + l - 7 * m + 114) % 31) + 1;
+    return new Date(Date.UTC(year, month - 1, day));
+  }
+  function berlinHoliday(d) {
+    var y = d.getUTCFullYear();
+    var key = (d.getUTCMonth() + 1) + '-' + d.getUTCDate();
+    var fixed = { '1-1': 'New Year', '3-8': 'International Women\u2019s Day',
+      '5-1': 'Labour Day', '10-3': 'German Unity Day',
+      '12-25': 'Christmas Day', '12-26': 'Boxing Day' };
+    if (fixed[key]) return fixed[key];
+    var easter = easterSunday(y).getTime(), DAY = 86400000;
+    var moving = [[-2, 'Good Friday'], [1, 'Easter Monday'], [39, 'Ascension Day'], [50, 'Whit Monday']];
+    for (var j = 0; j < moving.length; j++) {
+      var t = easter + moving[j][0] * DAY;
+      if (new Date(t).toISOString().slice(0, 10) === d.toISOString().slice(0, 10)) return moving[j][1];
+    }
+    return null;
+  }
+
+  function dur(m) {
+    if (m >= 240) return '4h+';
+    if (m >= 90) return Math.floor(m / 60) + 'h ' + (m % 60 ? (m % 60) + 'm' : '00');
+    return m + ' min';
+  }
+  function pinLabel(m) {
+    if (m === 999) return '\u221e';
+    if (m < 0) return '\u00d7';
+    if (m >= 90) return Math.floor(m / 60) + 'h';
+    return String(m);
+  }
+  function hhmm(m) {
+    var h = Math.floor(m / 60), r = m % 60;
+    return (h < 10 ? '0' : '') + h + ':' + (r < 10 ? '0' : '') + r;
+  }
+
+  /* ---- opening rules, one per site kind ---- */
+  function window_(site, month, dow) {
+    var k = site.hoursKind;
+    if (k === 'open-access') return { openAccess: true, open: 0, close: 1440 };
+    if (k === 'invaliden') {
+      return (month >= 4 && month <= 9) ? { open: 420, close: 1140 } : { open: 540, close: 960 };
+    }
+    if (k === 'weissensee') {
+      if (state.holiday) return { shutAllDay: true, why: 'Closed for the ' + state.holiday + ' public holiday' };
+      if (dow === 5) return { shutAllDay: true, why: 'Closed all day Saturday for Shabbat' };
+      if (dow === 4) return { open: 450, close: 870 };
+      var late = (month >= 4 && month <= 9);
+      if (dow === 6) return { open: 480, close: late ? 1020 : 960 };
+      return { open: 450, close: late ? 1020 : 960 };
+    }
+    /* seasonal-daily: opens 08:00, closing walks with the month */
+    var closeH = [16,17,18,19,20,20,20,20,19,18,17,16][month - 1];
+    return { open: 480, close: closeH * 60 };
+  }
+
+  function evaluate(site) {
+    var w = window_(site, state.month, state.dow);
+    var arrive = state.mins + site.travelMin;
+    var r = { site: site, arrive: arrive, w: w };
+    if (w.shutAllDay) { r.status = 'shut'; r.headline = 'Closed'; r.why = w.why; r.minutes = -1; return r; }
+    if (w.openAccess) {
+      r.status = (arrive >= 1230) ? 'tight' : 'good';
+      r.minutes = 999;
+      r.headline = 'Open';
+      r.why = (arrive >= 1230) ? 'Open ground, but you would be walking it in the dark half the year' : 'Open ground, no gate to beat';
+      return r;
+    }
+    if (arrive >= w.close) {
+      r.status = 'shut'; r.minutes = -1; r.headline = 'Too late';
+      r.why = 'The gate shuts at ' + hhmm(w.close) + ' and you would reach it at ' + hhmm(arrive);
+      return r;
+    }
+    if (arrive < w.open) {
+      r.status = 'tight'; r.minutes = w.close - w.open; r.headline = 'Wait ' + (w.open - arrive) + ' min';
+      r.why = 'The gate opens at ' + hhmm(w.open) + ', so you would be early';
+      return r;
+    }
+    r.minutes = w.close - arrive;
+    r.status = r.minutes >= site.need ? 'good' : 'tight';
+    r.headline = dur(r.minutes);
+    r.why = 'At the gate ' + hhmm(arrive) + ', closing ' + hhmm(w.close) +
+            '. This one wants about ' + site.need + ' minutes.';
+    return r;
+  }
+
+  /* ---- projection over the real coordinates in the dataset ---- */
+  function buildProjection() {
+    var lats = [], lons = [], i, j;
+    function eat(pts) { for (j = 0; j < pts.length; j++) { lats.push(pts[j][0]); lons.push(pts[j][1]); } }
+    for (i = 0; i < DATA.mapPolygons.length; i++) eat(DATA.mapPolygons[i].pts);
+    for (i = 0; i < DATA.sites.length; i++) { lats.push(DATA.sites[i].lat); lons.push(DATA.sites[i].lon); }
+    lats.push(DATA.origin.lat); lons.push(DATA.origin.lon);
+    var la0 = Math.min.apply(null, lats), la1 = Math.max.apply(null, lats);
+    var lo0 = Math.min.apply(null, lons), lo1 = Math.max.apply(null, lons);
+    var padLa = (la1 - la0) * 0.09, padLo = (lo1 - lo0) * 0.09;
+    la0 -= padLa; la1 += padLa; lo0 -= padLo; lo1 += padLo;
+    var k = Math.cos((la0 + la1) / 2 * Math.PI / 180);
+    var wDeg = (lo1 - lo0) * k, hDeg = (la1 - la0);
+    var W = 700, H = Math.round(W * hDeg / wDeg);
+    return {
+      W: W, H: H,
+      x: function (lon) { return (lon - lo0) * k / wDeg * W; },
+      y: function (lat) { return H - (lat - la0) / hDeg * H; }
+    };
+  }
+
+  function pathOf(pts, close) {
+    var d = '', i;
+    for (i = 0; i < pts.length; i++) {
+      d += (i ? 'L' : 'M') + proj.x(pts[i][1]).toFixed(1) + ' ' + proj.y(pts[i][0]).toFixed(1);
+    }
+    return d + (close ? 'Z' : '');
+  }
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function drawMap(results) {
+    var svg = '', i;
+    svg += '<rect x="0" y="0" width="' + proj.W + '" height="' + proj.H + '" fill="#EFF1E7"/>';
+
+    for (i = 0; i < DATA.water.length; i++) {
+      svg += '<path d="' + pathOf(DATA.water[i], false) + '" fill="none" stroke="#BFD8E6" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>';
+    }
+    for (i = 0; i < DATA.mapPolygons.length; i++) {
+      var pg = DATA.mapPolygons[i];
+      var ctx = pg.id === 'context';
+      svg += '<path d="' + pathOf(pg.pts, true) + '" fill="' + (ctx ? '#DEE6D2' : '#C9DDB4') +
+             '" stroke="' + (ctx ? '#C3CDB4' : '#8FB36A') + '" stroke-width="1.5"/>';
+    }
+    var order = ['grosse-hamburger','dorotheenstadt','invaliden','weissensee','matthaeus'];
+    for (i = 0; i < order.length; i++) {
+      var rt = DATA.routes[order[i]];
+      if (!rt || rt.pts.length < 2) continue;
+      svg += '<path d="' + pathOf(rt.pts, false) + '" fill="none" stroke="#123D18" stroke-width="2.4" stroke-opacity=".38" stroke-dasharray="7 5" stroke-linecap="round"/>';
+    }
+
+    var ox = proj.x(DATA.origin.lon), oy = proj.y(DATA.origin.lat);
+    svg += '<rect x="' + (ox - 7) + '" y="' + (oy - 7) + '" width="14" height="14" rx="3" fill="#123D18"/>';
+    svg += '<text x="' + (ox + 12) + '" y="' + (oy + 5) + '" font-family="Montserrat,Arial" font-size="13" font-weight="800" fill="#123D18">Alexanderplatz</text>';
+
+    for (i = 0; i < results.length; i++) {
+      var r = results[i], s = r.site;
+      var cx = proj.x(s.lon), cy = proj.y(s.lat);
+      var rad = 9 + Math.min(13, Math.sqrt(s.hectares) * 2.4);
+      var col = COLOR[r.status];
+      var on = selected === s.id;
+      svg += '<g class="pin" tabindex="0" role="button" data-id="' + s.id + '" aria-label="' + esc(s.name + ', ' + r.headline) + '">';
+      svg += '<circle cx="' + cx + '" cy="' + cy + '" r="' + (rad + 9) + '" fill="transparent"/>';
+      svg += '<circle cx="' + cx + '" cy="' + cy + '" r="' + rad + '" fill="' + col + '" fill-opacity="' + (r.status === 'shut' ? '.5' : '.85') +
+             '" stroke="' + (on ? '#FFE600' : '#ffffff') + '" stroke-width="' + (on ? 5 : 3) + '"/>';
+      var lx = cx, ly = cy - rad - 9, anchor = 'middle';
+      if (s.id === 'weissensee') { lx = cx - rad - 8; ly = cy + 4; anchor = 'end'; }
+      if (s.id === 'grosse-hamburger') { lx = cx + rad + 8; ly = cy + 4; anchor = 'start'; }
+      if (s.id === 'invaliden') { lx = cx + rad + 6; ly = cy - rad - 9; anchor = 'start'; }
+      svg += '<text x="' + lx + '" y="' + ly + '" text-anchor="' + anchor + '" font-family="Montserrat,Arial" font-size="12.5" font-weight="800" ' +
+             'fill="#123D18" stroke="#EFF1E7" stroke-width="3.5" paint-order="stroke">' + esc(s.short) + '</text>';
+      svg += '<text x="' + cx + '" y="' + (cy + 4.5) + '" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#ffffff">' +
+             pinLabel(r.minutes) + '</text>';
+      svg += '</g>';
+    }
+    mapEl.setAttribute('viewBox', '0 0 ' + proj.W + ' ' + proj.H);
+    mapEl.innerHTML = '<title id="maptitle">Map of five historic Berlin cemeteries with the transit route from Alexanderplatz to each one</title>' + svg;
+  }
+
+  function drawRows(results) {
+    var html = '', i;
+    for (i = 0; i < results.length; i++) {
+      var r = results[i], s = r.site;
+      html += '<button type="button" class="row" data-id="' + s.id + '" aria-pressed="' + (selected === s.id) + '">' +
+        '<span class="dot" style="background:' + COLOR[r.status] + '"></span>' +
+        '<span class="rmain"><span class="rname">' + esc(s.name) + '</span>' +
+        '<span class="rmeta">' + esc(s.sub) + ' &middot; ' + s.travelMin + ' min from Alexanderplatz</span></span>' +
+        '<span class="rtime"><span class="rbig" style="color:' + COLOR[r.status] + '">' + esc(r.headline) + '</span>' +
+        '<span class="rsmall">' + (r.minutes < 0 ? 'no visit' : 'inside') + '</span></span></button>';
+    }
+    rowsEl.innerHTML = html;
+  }
+
+  function drawPanel(results) {
+    var r = null, i;
+    for (i = 0; i < results.length; i++) if (results[i].site.id === selected) r = results[i];
+    if (!r) { panelEl.innerHTML = ''; return; }
+    var s = r.site;
+    var names = '';
+    for (i = 0; i < s.graves.length; i++) names += '<li>' + esc(s.graves[i]) + '</li>';
+    panelEl.innerHTML =
+      '<div class="panel">' +
+        availableHead(s) +
+        '<p class="verdict">' + esc(s.verdict) + '</p>' +
+        '<div class="facts">' +
+          '<span class="fact">Founded <b>' + s.founded + '</b></span>' +
+          '<span class="fact">Grounds <b>' + s.hectares + ' ha</b></span>' +
+          '<span class="fact">Door to gate <b>' + s.travelMin + ' min</b></span>' +
+          '<span class="fact" style="border-color:' + COLOR[r.status] + '">Your slot <b style="color:' + COLOR[r.status] + '">' + esc(r.headline) + '</b></span>' +
+        '</div>' +
+        '<div class="p-body">' +
+          '<p>' + esc(s.seeIt) + '</p>' +
+          '<h3>Who is buried here</h3><ul class="names">' + names + '</ul>' +
+          '<h3>Getting there</h3><p class="small">' + esc(s.travelText) + '</p>' +
+          '<h3>Opening rule</h3><p class="small">' + esc(s.hoursText) + ' ' + esc(String(r.why).replace(/\.$/, '')) + '.</p>' +
+          '<p class="callout"><b>Worth knowing.</b> ' + esc(s.practical) + '</p>' +
+        '</div>' +
+      '</div>';
+  }
+
+  function availableHead(s) {
+    return '<div class="p-head"><h2>' + esc(s.name) + '</h2><em>' + esc(s.address) + '</em></div>';
+  }
+
+  function rank(a, b) {
+    var aShut = a.minutes < 0, bShut = b.minutes < 0;
+    if (aShut && !bShut) return 1;
+    if (bShut && !aShut) return -1;
+    if (b.minutes !== a.minutes) return b.minutes - a.minutes;
+    return a.site.travelMin - b.site.travelMin;
+  }
+
+  function render() {
+    var results = [], i;
+    for (i = 0; i < DATA.sites.length; i++) results.push(evaluate(DATA.sites[i]));
+    var ranked = results.slice().sort(rank);
+    var open = 0;
+    for (i = 0; i < results.length; i++) if (results[i].minutes >= 0) open++;
+    var comfortable = 0;
+    for (i = 0; i < results.length; i++) if (results[i].status === 'good') comfortable++;
+    var verdict = open === 0 ? 'Every gate is already shut at that hour.'
+      : (open === 5 ? 'All five gates are still open' : (open === 1 ? 'One gate is still open' : open + ' gates are still open'))
+        + ', ' + (comfortable === 0 ? 'though none of them leaves you a proper visit.'
+          : comfortable === 1 ? 'and one leaves you enough time inside.'
+          : 'and ' + comfortable + ' of them leave you enough time inside.');
+    daylineEl.className = 'dayline' + (state.holiday ? ' holiday' : '');
+    daylineEl.innerHTML = '<b>' + esc(DAYS[state.dow]) + ' ' + state.date.getUTCDate() + ' ' +
+      esc(MONTHS[state.month - 1]) + '</b>, leaving at <b>' + hhmm(state.mins) + '</b>. ' +
+      (state.holiday ? esc(state.holiday) + ' is a Berlin public holiday, so Wei\u00dfensee is shut. ' : '') +
+      esc(verdict);
+    drawMap(results);
+    drawRows(ranked);
+    drawPanel(results);
+    if (window.bwResize) window.bwResize();
+  }
+
+  function choose(id) {
+    selected = (selected === id) ? null : id;
+    render();
+  }
+
+  rowsEl.addEventListener('click', function (e) {
+    var b = e.target.closest('.row');
+    if (b) choose(b.getAttribute('data-id'));
+  });
+  mapEl.addEventListener('click', function (e) {
+    var g = e.target.closest('.pin');
+    if (g) choose(g.getAttribute('data-id'));
+  });
+  mapEl.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var g = e.target.closest('.pin');
+    if (g) { e.preventDefault(); choose(g.getAttribute('data-id')); }
+  });
+  function readControls() {
+    var iso = ddEl.value;
+    var d = iso ? new Date(iso + 'T00:00:00Z') : new Date();
+    if (isNaN(d.getTime())) d = new Date();
+    state.date = d;
+    state.month = d.getUTCMonth() + 1;
+    state.dow = (d.getUTCDay() + 6) % 7;
+    state.holiday = berlinHoliday(d);
+    var parts = (ttEl.value || '13:00').split(':');
+    var mins = parseInt(parts[0], 10) * 60 + parseInt(parts[1] || '0', 10);
+    state.mins = isNaN(mins) ? 780 : Math.min(1439, Math.max(0, mins));
+  }
+  ttEl.addEventListener('input', function () { readControls(); render(); });
+  ttEl.addEventListener('change', function () { readControls(); render(); });
+  ddEl.addEventListener('input', function () { readControls(); render(); });
+  ddEl.addEventListener('change', function () { readControls(); render(); });
+
+  (function seedDate() {
+    var t = new Date();
+    ddEl.value = new Date(Date.UTC(t.getFullYear(), t.getMonth(), t.getDate())).toISOString().slice(0, 10);
+    readControls();
+  })();
+
+  fetch('data.json')
+    .then(function (r) { return r.json(); })
+    .then(function (j) {
+      DATA = j;
+      proj = buildProjection();
+      selected = 'dorotheenstadt';
+      render();
+    })
+    .catch(function () {
+      rowsEl.innerHTML = '<div class="empty">The cemetery data could not load right now. Reload the page and it should come back.</div>';
+      if (window.bwResize) window.bwResize();
+    });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

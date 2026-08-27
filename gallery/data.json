@@ -1,0 +1,124 @@
+{
+  "photos": [
+    {
+      "id": "01",
+      "area": "a",
+      "alt": "BerlinWalk guide Yusuf leading guests outside the Altes Museum on Museum Island",
+      "caption": "Storytelling outside the Altes Museum",
+      "sizes": "(max-width: 360px) 100vw, (max-width: 520px) 50vw, (max-width: 900px) 33vw, (max-width: 1180px) 25vw, 20vw",
+      "aspectRatio": "1/1"
+    },
+    {
+      "id": "02",
+      "area": "b",
+      "alt": "Small Berlin walking tour group smiling on a city street",
+      "caption": "A small group between city stories",
+      "sizes": "(max-width: 360px) 100vw, (max-width: 520px) 50vw, (max-width: 900px) 33vw, (max-width: 1180px) 25vw, 20vw",
+      "aspectRatio": "1/1"
+    },
+    {
+      "id": "03",
+      "area": "c",
+      "alt": "Guests smiling during a winter Berlin walking tour",
+      "caption": "Winter morning near Alexanderplatz",
+      "sizes": "(max-width: 360px) 100vw, (max-width: 520px) 50vw, (max-width: 900px) 33vw, (max-width: 1180px) 25vw, 20vw",
+      "aspectRatio": "1/1"
+    },
+    {
+      "id": "04",
+      "area": "d",
+      "alt": "Museum Island colonnade in golden light",
+      "caption": "Golden hour on Museum Island",
+      "sizes": "(max-width: 360px) 100vw, (max-width: 520px) 50vw, (max-width: 900px) 33vw, (max-width: 1180px) 25vw, 20vw",
+      "aspectRatio": "1/1"
+    },
+    {
+      "id": "05",
+      "area": "e",
+      "alt": "Guide and guests with the Berlin TV Tower behind them",
+      "caption": "Berlin skyline moments between stops",
+      "sizes": "(max-width: 360px) 100vw, (max-width: 520px) 50vw, (max-width: 900px) 33vw, (max-width: 1180px) 25vw, 20vw",
+      "aspectRatio": "5/8"
+    },
+    {
+      "id": "06",
+      "area": "f",
+      "alt": "Alexanderplatz World Clock under a blue sky",
+      "caption": "Starting point at the World Clock",
+      "sizes": "(max-width: 360px) 100vw, (max-width: 520px) 50vw, (max-width: 900px) 33vw, (max-width: 1180px) 25vw, 20vw",
+      "aspectRatio": "16/9"
+    },
+    {
+      "id": "07",
+      "area": "g",
+      "alt": "Berliner Dom and TV Tower at sunset",
+      "caption": "Berliner Dom from the Spree side",
+      "sizes": "(max-width: 360px) 100vw, (max-width: 520px) 50vw, (max-width: 900px) 33vw, (max-width: 1180px) 25vw, 20vw",
+      "aspectRatio": "16/9"
+    },
+    {
+      "id": "08",
+      "area": "h",
+      "alt": "Altes Museum facade glowing at sunset",
+      "caption": "Classic Museum Island perspective",
+      "sizes": "(max-width: 360px) 100vw, (max-width: 520px) 50vw, (max-width: 900px) 33vw, (max-width: 1180px) 25vw, 20vw",
+      "aspectRatio": "16/9"
+    },
+    {
+      "id": "09",
+      "area": "i",
+      "alt": "Berlin walking tour group selfie near Alexanderplatz with the TV Tower in the background",
+      "caption": "Sunny group moment near Alexanderplatz",
+      "sizes": "(max-width: 360px) 100vw, (max-width: 520px) 50vw, (max-width: 900px) 33vw, (max-width: 1180px) 25vw, 20vw",
+      "aspectRatio": "3/4"
+    },
+    {
+      "id": "10",
+      "area": "j",
+      "alt": "Bronze city model of medieval Berlin's Marienviertel near Marienkirche",
+      "caption": "Medieval Berlin in bronze, near Marienkirche",
+      "sizes": "(max-width: 360px) 100vw, (max-width: 520px) 50vw, (max-width: 900px) 33vw, (max-width: 1180px) 25vw, 20vw",
+      "aspectRatio": "16/9"
+    },
+    {
+      "id": "11",
+      "area": "k",
+      "alt": "Historic Hackescher Markt station entrance glowing at night",
+      "caption": "Hackescher Markt, where the walk ends",
+      "sizes": "(max-width: 360px) 100vw, (max-width: 520px) 50vw, (max-width: 900px) 33vw, (max-width: 1180px) 25vw, 20vw",
+      "aspectRatio": "3/2"
+    },
+    {
+      "id": "12",
+      "area": "l",
+      "alt": "Marx and Engels monument with Berlin Cathedral in the background",
+      "caption": "East German memory at Marx-Engels Forum",
+      "sizes": "(max-width: 360px) 100vw, (max-width: 520px) 50vw, (max-width: 900px) 33vw, (max-width: 1180px) 25vw, 20vw",
+      "aspectRatio": "3/2"
+    },
+    {
+      "id": "13",
+      "area": "m",
+      "alt": "BerlinWalk guide Yusuf holding historical photos at the Humboldt Forum",
+      "caption": "Yusuf with visual stories at Humboldt Forum",
+      "sizes": "(max-width: 360px) 100vw, (max-width: 520px) 50vw, (max-width: 900px) 33vw, (max-width: 1180px) 25vw, 20vw",
+      "aspectRatio": "3/4"
+    },
+    {
+      "id": "14",
+      "area": "n",
+      "alt": "Berlin TV Tower rising above trees and clouds near Alexanderplatz",
+      "caption": "Looking up at the TV Tower",
+      "sizes": "(max-width: 360px) 100vw, (max-width: 520px) 50vw, (max-width: 900px) 33vw, (max-width: 1180px) 25vw, 20vw",
+      "aspectRatio": "3/4"
+    },
+    {
+      "id": "15",
+      "area": "o",
+      "alt": "Marienkirche glowing in golden light near Alexanderplatz",
+      "caption": "Marienkirche, where old Berlin still shows",
+      "sizes": "(max-width: 360px) 100vw, (max-width: 520px) 50vw, (max-width: 900px) 33vw, (max-width: 1180px) 25vw, 20vw",
+      "aspectRatio": "5/4"
+    }
+  ]
+}

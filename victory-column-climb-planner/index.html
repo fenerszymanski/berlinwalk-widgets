@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Victory Column Climb Planner | BerlinWalk</title>
+  <meta name="description" content="Decide whether the Berlin Victory Column climb fits your day: weather, stairs, timing, mobility and route pairings.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-victory-planner">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-victory-planner {
+      --bw-green: #1B5E20;
+      --bw-dark: #123F16;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-cream: #FAFAF5;
+      --bw-white: #FFFFFF;
+      --bw-text: #212121;
+      --bw-muted: #536153;
+      --bw-border: rgba(27, 94, 32, .18);
+      --bw-soft: #EFF7E8;
+      --bw-shadow: 0 18px 42px rgba(27, 94, 32, .14);
+      box-sizing: border-box;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      line-height: 1.5;
+      margin: 0 auto;
+      max-width: 1080px;
+      overflow-x: hidden;
+      padding: 14px;
+      width: 100%;
+    }
+
+    #bw-victory-planner *,
+    #bw-victory-planner *::before,
+    #bw-victory-planner *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-victory-planner h1,
+    #bw-victory-planner h2,
+    #bw-victory-planner h3,
+    #bw-victory-planner p {
+      margin-top: 0;
+    }
+
+    #bw-victory-planner .bw-shell {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: var(--bw-shadow);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-victory-planner .bw-hero {
+      background-image:
+        linear-gradient(90deg, rgba(18, 63, 22, .98) 0%, rgba(18, 63, 22, .9) 38%, rgba(18, 63, 22, .46) 70%, rgba(18, 63, 22, .06) 100%),
+        url("assets/victory-column-climb-hero.webp");
+      background-position: center;
+      background-size: cover;
+      color: var(--bw-white);
+      min-height: 330px;
+      padding: 30px;
+      position: relative;
+    }
+
+    #bw-victory-planner .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 1.2;
+      margin: 0 0 8px;
+      text-transform: uppercase;
+    }
+
+    #bw-victory-planner h1 {
+      color: var(--bw-white);
+      font-size: 40px;
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 1.04;
+      margin: 0;
+      max-width: 610px;
+    }
+
+    #bw-victory-planner .bw-hero p {
+      color: rgba(255, 255, 255, .95);
+      font-size: 15.5px;
+      font-weight: 700;
+      line-height: 1.55;
+      margin: 12px 0 0;
+      max-width: 560px;
+      text-shadow: 0 1px 14px rgba(0, 0, 0, .26);
+    }
+
+    #bw-victory-planner .bw-hero-facts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+      max-width: 720px;
+    }
+
+    #bw-victory-planner .bw-chip {
+      align-items: center;
+      background: rgba(255, 255, 255, .13);
+      border: 1px solid rgba(255, 255, 255, .28);
+      border-radius: 999px;
+      color: var(--bw-white);
+      display: inline-flex;
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1.2;
+      min-height: 31px;
+      padding: 7px 10px;
+    }
+
+    #bw-victory-planner .bw-main {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      grid-template-columns: 320px minmax(0, 1fr);
+      padding: 16px;
+    }
+
+    #bw-victory-planner .bw-panel,
+    #bw-victory-planner .bw-result,
+    #bw-victory-planner .bw-card,
+    #bw-victory-planner .bw-view-strip {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+    }
+
+    #bw-victory-planner .bw-panel {
+      align-self: start;
+      display: grid;
+      gap: 15px;
+      padding: 15px;
+    }
+
+    #bw-victory-planner .bw-control {
+      display: grid;
+      gap: 8px;
+    }
+
+    #bw-victory-planner .bw-label {
+      color: var(--bw-muted);
+      font-size: 11px;
+      font-weight: 950;
+      line-height: 1.3;
+      text-transform: uppercase;
+    }
+
+    #bw-victory-planner .bw-options {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 1fr;
+    }
+
+    #bw-victory-planner button,
+    #bw-victory-planner a {
+      font: inherit;
+    }
+
+    #bw-victory-planner button {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      cursor: pointer;
+      font-size: 12.5px;
+      font-weight: 850;
+      line-height: 1.25;
+      min-height: 42px;
+      padding: 9px 10px;
+      text-align: left;
+      transition: background .16s ease, border-color .16s ease, transform .16s ease;
+      width: 100%;
+    }
+
+    #bw-victory-planner button:hover {
+      background: var(--bw-soft);
+      border-color: rgba(27, 94, 32, .38);
+    }
+
+    #bw-victory-planner button[aria-pressed="true"] {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+      color: var(--bw-white);
+    }
+
+    #bw-victory-planner .bw-result {
+      display: grid;
+      gap: 14px;
+      padding: 17px;
+    }
+
+    #bw-victory-planner .bw-verdict {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 84px minmax(0, 1fr);
+    }
+
+    #bw-victory-planner .bw-score {
+      align-items: center;
+      background:
+        radial-gradient(circle at 35% 25%, rgba(255, 255, 255, .72), transparent 36%),
+        linear-gradient(135deg, var(--bw-yellow), #E6C800);
+      border: 1px solid rgba(27, 94, 32, .18);
+      border-radius: 8px;
+      color: var(--bw-green);
+      display: grid;
+      font-size: 29px;
+      font-weight: 950;
+      height: 84px;
+      justify-items: center;
+      line-height: 1;
+      padding-top: 5px;
+      text-align: center;
+    }
+
+    #bw-victory-planner .bw-score span {
+      color: rgba(27, 94, 32, .72);
+      font-size: 10px;
+      font-weight: 950;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    #bw-victory-planner .bw-result h2,
+    #bw-victory-planner .bw-card h3,
+    #bw-victory-planner .bw-view-strip h2 {
+      color: var(--bw-green);
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 1.14;
+      margin: 0;
+    }
+
+    #bw-victory-planner .bw-result h2 {
+      font-size: 24px;
+    }
+
+    #bw-victory-planner .bw-result p,
+    #bw-victory-planner .bw-card p {
+      color: var(--bw-muted);
+      font-size: 13px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    #bw-victory-planner .bw-path {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-victory-planner .bw-step {
+      background: #F8FBF2;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      display: grid;
+      gap: 5px;
+      min-width: 0;
+      padding: 11px;
+    }
+
+    #bw-victory-planner .bw-step strong {
+      color: var(--bw-green);
+      font-size: 12px;
+      font-weight: 950;
+      line-height: 1.25;
+    }
+
+    #bw-victory-planner .bw-step span {
+      color: var(--bw-muted);
+      font-size: 11.5px;
+      font-weight: 700;
+      line-height: 1.42;
+    }
+
+    #bw-victory-planner .bw-view-strip {
+      display: grid;
+      gap: 14px;
+      padding: 15px;
+    }
+
+    #bw-victory-planner .bw-meter {
+      background: #E6EFD9;
+      border-radius: 999px;
+      height: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #bw-victory-planner .bw-meter-fill {
+      background: linear-gradient(90deg, var(--bw-lime), var(--bw-yellow));
+      border-radius: inherit;
+      height: 100%;
+      transition: width .18s ease;
+      width: 60%;
+    }
+
+    #bw-victory-planner .bw-grid {
+      display: grid;
+      gap: 11px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-victory-planner .bw-card {
+      display: grid;
+      gap: 7px;
+      padding: 13px;
+    }
+
+    #bw-victory-planner .bw-card h3 {
+      font-size: 16px;
+    }
+
+    #bw-victory-planner .bw-link {
+      align-items: center;
+      background: var(--bw-green);
+      border-radius: 8px;
+      color: var(--bw-white);
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 950;
+      justify-content: center;
+      line-height: 1.2;
+      min-height: 40px;
+      padding: 10px 12px;
+      text-decoration: none;
+      width: fit-content;
+    }
+
+    #bw-victory-planner .bw-note {
+      background: #FFF9B8;
+      border: 1px solid rgba(158, 90, 0, .22);
+      border-radius: 8px;
+      color: #4E3B00;
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.55;
+      padding: 12px;
+    }
+
+    @media (max-width: 760px) {
+      #bw-victory-planner {
+        padding: 10px;
+      }
+
+      #bw-victory-planner .bw-hero {
+        min-height: 360px;
+        padding: 24px 18px;
+      }
+
+      #bw-victory-planner h1 {
+        font-size: 31px;
+        max-width: 430px;
+      }
+
+      #bw-victory-planner .bw-hero p {
+        font-size: 13.5px;
+        max-width: 360px;
+      }
+
+      #bw-victory-planner .bw-main {
+        grid-template-columns: 1fr;
+        padding: 12px;
+      }
+
+      #bw-victory-planner .bw-verdict {
+        grid-template-columns: 72px minmax(0, 1fr);
+      }
+
+      #bw-victory-planner .bw-score {
+        font-size: 24px;
+        height: 72px;
+      }
+
+      #bw-victory-planner .bw-result h2 {
+        font-size: 20px;
+      }
+
+      #bw-victory-planner .bw-path,
+      #bw-victory-planner .bw-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <div class="bw-shell">
+    <section class="bw-hero" aria-labelledby="bw-victory-title">
+      <p class="bw-kicker">BerlinWalk Tool</p>
+      <h1 id="bw-victory-title">Victory Column Climb Planner</h1>
+      <p>Decide whether the Siegessäule climb fits today's weather, your legs, your timing and the rest of your Berlin route.</p>
+      <div class="bw-hero-facts" aria-label="Victory Column facts">
+        <span class="bw-chip">285 steps</span>
+        <span class="bw-chip">Cash ticket</span>
+        <span class="bw-chip">Tiergarten view</span>
+        <span class="bw-chip">No lift</span>
+      </div>
+    </section>
+
+    <div class="bw-main">
+      <section class="bw-panel" aria-label="Planner controls">
+        <div class="bw-control" data-group="weather">
+          <div class="bw-label">Sky today</div>
+          <div class="bw-options">
+            <button type="button" data-value="clear" aria-pressed="true">Clear or golden hour</button>
+            <button type="button" data-value="mixed" aria-pressed="false">Mixed clouds</button>
+            <button type="button" data-value="grey" aria-pressed="false">Grey, wet or windy</button>
+          </div>
+        </div>
+
+        <div class="bw-control" data-group="stairs">
+          <div class="bw-label">Stair comfort</div>
+          <div class="bw-options">
+            <button type="button" data-value="ready" aria-pressed="true">285 steps sounds fine</button>
+            <button type="button" data-value="unsure" aria-pressed="false">Possible, but not ideal</button>
+            <button type="button" data-value="no" aria-pressed="false">Avoid stairs or tight spaces</button>
+          </div>
+        </div>
+
+        <div class="bw-control" data-group="time">
+          <div class="bw-label">Time available</div>
+          <div class="bw-options">
+            <button type="button" data-value="20" aria-pressed="false">20 minutes</button>
+            <button type="button" data-value="45" aria-pressed="true">45 minutes</button>
+            <button type="button" data-value="90" aria-pressed="false">90 minutes</button>
+          </div>
+        </div>
+
+        <div class="bw-control" data-group="goal">
+          <div class="bw-label">Main reason</div>
+          <div class="bw-options">
+            <button type="button" data-value="view" aria-pressed="true">Viewpoint</button>
+            <button type="button" data-value="history" aria-pressed="false">History layer</button>
+            <button type="button" data-value="park" aria-pressed="false">Tiergarten walk</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="bw-result" aria-live="polite">
+        <div class="bw-verdict">
+          <div class="bw-score"><strong id="bw-score">82</strong><span>fit</span></div>
+          <div>
+            <h2 id="bw-verdict-title">Climb it today.</h2>
+            <p id="bw-verdict-copy">Good weather, enough time and stair comfort make this one of Berlin's best low-cost views.</p>
+          </div>
+        </div>
+
+        <div class="bw-view-strip">
+          <h2>Plan strength</h2>
+          <div class="bw-meter" aria-hidden="true"><div class="bw-meter-fill" id="bw-meter"></div></div>
+          <p id="bw-meter-copy">The climb is the right version of the stop today. Build in a few minutes for the tunnel and base before the stairs.</p>
+        </div>
+
+        <div class="bw-path" id="bw-path"></div>
+
+        <div class="bw-grid">
+          <article class="bw-card">
+            <h3 id="bw-pair-title">Best pairing</h3>
+            <p id="bw-pair-copy">Pair it with Tiergarten and Brandenburg Gate if you want the long city axis to make sense.</p>
+          </article>
+          <article class="bw-card">
+            <h3>Do not miss</h3>
+            <p id="bw-detail-copy">Use the pedestrian tunnel, look at the base, then climb. The road circle is not a crossing challenge.</p>
+          </article>
+        </div>
+
+        <p class="bw-note" id="bw-note">Official pages currently list cash admission and no wheelchair-accessible ascent. Recheck hours and payment before a late or holiday visit.</p>
+        <a class="bw-link" href="https://www.berlinwalk.com/post/victory-column-berlin" target="_blank" rel="noopener">Read the full Victory Column guide</a>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.getElementById('bw-victory-planner');
+      if (!root) return;
+
+      var state = {
+        weather: 'clear',
+        stairs: 'ready',
+        time: '45',
+        goal: 'view'
+      };
+
+      var pathTemplates = {
+        climb: [
+          ['1. Tunnel', 'Enter through the pedestrian tunnel, not across traffic.'],
+          ['2. Base', 'Read the monument before treating it as a view tower.'],
+          ['3. Platform', 'Climb steadily and pause at the top for the full Tiergarten view.']
+        ],
+        outside: [
+          ['1. Approach', 'Use the tunnel and stay outside the traffic circle.'],
+          ['2. Base only', 'Look at the reliefs, mosaics and Goldelse from below.'],
+          ['3. Continue', 'Save the climb for a clear day with better stair comfort.']
+        ],
+        park: [
+          ['1. Column', 'Use the monument as a visual anchor, not the whole day.'],
+          ['2. Tiergarten', 'Walk into the park while the light is still good.'],
+          ['3. Return', 'Finish toward Brandenburg Gate, Bellevue or Zoo.']
+        ]
+      };
+
+      function scorePlan() {
+        var score = 55;
+        if (state.weather === 'clear') score += 20;
+        if (state.weather === 'mixed') score += 6;
+        if (state.weather === 'grey') score -= 18;
+        if (state.stairs === 'ready') score += 18;
+        if (state.stairs === 'unsure') score -= 4;
+        if (state.stairs === 'no') score -= 32;
+        if (state.time === '20') score -= 12;
+        if (state.time === '45') score += 9;
+        if (state.time === '90') score += 14;
+        if (state.goal === 'view' && state.weather === 'clear') score += 8;
+        if (state.goal === 'history') score += 4;
+        if (state.goal === 'park' && state.time === '90') score += 8;
+        return Math.max(8, Math.min(98, score));
+      }
+
+      function resultFor(score) {
+        if (state.stairs === 'no') {
+          return {
+            mode: 'outside',
+            title: 'Do the outside, not the climb.',
+            copy: 'The monument is still worth a short stop, but the official ascent is not the right version for this day.',
+            meter: 'Keep this as a ground-level Tiergarten landmark stop and avoid turning a good day into a staircase problem.',
+            pairTitle: 'Best pairing',
+            pair: 'Pair it with a flat Tiergarten walk, Bellevue exterior or a bus route rather than a climb.',
+            detail: 'The safe move is tunnel, base, photos, then continue. Do not force the stairs.',
+            note: 'This is the right call for wheelchair users, stroller-heavy days, weak knees, tight-space discomfort or tired groups.'
+          };
+        }
+        if (score >= 78) {
+          return {
+            mode: state.goal === 'park' ? 'park' : 'climb',
+            title: 'Climb it today.',
+            copy: 'Good conditions make this one of Berlin\'s best low-cost views.',
+            meter: 'Build in a few minutes for the tunnel and base before the 285 steps.',
+            pairTitle: 'Best pairing',
+            pair: state.goal === 'park' ? 'Pair it with Tiergarten and a slower green walk.' : 'Pair it with Tiergarten and Brandenburg Gate if you want the long city axis to make sense.',
+            detail: 'Use the pedestrian tunnel, look at the base, then climb. The road circle is not a crossing challenge.',
+            note: 'Bring cash and recheck the official hours if you are going late, in winter or near a holiday.'
+          };
+        }
+        if (score >= 52) {
+          return {
+            mode: state.goal === 'park' ? 'park' : 'outside',
+            title: 'Make it a flexible stop.',
+            copy: 'The column fits the day, but the climb is optional. Decide at the base after checking weather and energy.',
+            meter: 'Treat the outside and base as the guaranteed visit. Climb only if the sky and group mood are still good.',
+            pairTitle: 'Best pairing',
+            pair: 'Pair it with Tiergarten, Zoo, Bellevue or Brandenburg Gate, not with a rushed museum slot.',
+            detail: 'If you have only 20 minutes, skip the platform. If you have 45 minutes, decide at the ticket point.',
+            note: 'Mixed conditions are where tourists waste time. Keep the plan reversible.'
+          };
+        }
+        return {
+          mode: 'outside',
+          title: 'Save the climb for another day.',
+          copy: 'The view is the reward, so weak weather, limited time or stair doubts make the climb poor value.',
+          meter: 'Use this as a short exterior landmark stop or remove it from today\'s route.',
+          pairTitle: 'Better use of time',
+          pair: 'Choose Brandenburg Gate, Reichstag exterior, Museum Island or a covered museum if today is tight.',
+          detail: 'The column is not going anywhere. A clear day makes a much better climb.',
+          note: 'This is especially true in winter afternoons, rain, strong wind or when your group is already tired.'
+        };
+      }
+
+      function renderPath(mode) {
+        var container = root.querySelector('#bw-path');
+        container.innerHTML = '';
+        pathTemplates[mode].forEach(function (item) {
+          var card = document.createElement('article');
+          card.className = 'bw-step';
+          card.innerHTML = '<strong>' + item[0] + '</strong><span>' + item[1] + '</span>';
+          container.appendChild(card);
+        });
+      }
+
+      function render() {
+        var score = scorePlan();
+        var result = resultFor(score);
+        root.querySelector('#bw-score').textContent = String(score);
+        root.querySelector('#bw-meter').style.width = score + '%';
+        root.querySelector('#bw-verdict-title').textContent = result.title;
+        root.querySelector('#bw-verdict-copy').textContent = result.copy;
+        root.querySelector('#bw-meter-copy').textContent = result.meter;
+        root.querySelector('#bw-pair-title').textContent = result.pairTitle;
+        root.querySelector('#bw-pair-copy').textContent = result.pair;
+        root.querySelector('#bw-detail-copy').textContent = result.detail;
+        root.querySelector('#bw-note').textContent = result.note;
+        renderPath(result.mode);
+        if (window.BerlinWalkBrand && typeof window.BerlinWalkBrand.resize === 'function') {
+          window.BerlinWalkBrand.resize();
+        }
+      }
+
+      root.querySelectorAll('[data-group]').forEach(function (group) {
+        group.addEventListener('click', function (event) {
+          var button = event.target.closest('button[data-value]');
+          if (!button) return;
+          state[group.dataset.group] = button.dataset.value;
+          group.querySelectorAll('button[data-value]').forEach(function (other) {
+            other.setAttribute('aria-pressed', String(other === button));
+          });
+          render();
+        });
+      });
+
+      render();
+    })();
+  </script>
+</div>
+</body>
+</html>

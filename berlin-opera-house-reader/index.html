@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Berlin Opera House Reader | BerlinWalk</title>
+  <link rel="icon" type="image/png" href="../tools-home/icons/berlin-opera-house-reader-160.png">
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    :root {
+      --ink: #123d18;
+      --ink-deep: #09280f;
+      --paper: #f7f0df;
+      --cream: #fffdf7;
+      --yellow: #ffe600;
+      --wine: #74272b;
+      --line: rgba(18, 61, 24, .22);
+      --muted: #4c5c4e;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: transparent; color: var(--ink); font-family: Arial, Helvetica, sans-serif; }
+    button { font: inherit; cursor: pointer; }
+    button:focus-visible, a:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+    [hidden] { display: none !important; }
+    .reader { max-width: 940px; margin: 0 auto; overflow: hidden; border: 1px solid var(--line); border-radius: 28px; background: var(--paper); box-shadow: 0 20px 52px rgba(18, 61, 24, .16); }
+    .curtain { position: relative; overflow: hidden; padding: 38px 38px 34px; background: radial-gradient(circle at 76% 18%, rgba(255, 230, 0, .2), transparent 24%), linear-gradient(135deg, #08250f 0%, #123d18 56%, #315b37 100%); color: #fff; }
+    .curtain::after { content: ''; position: absolute; right: -86px; bottom: -126px; width: 330px; height: 330px; border: 30px solid rgba(255,255,255,.06); border-radius: 50%; }
+    .eyebrow { position: relative; z-index: 1; margin: 0 0 13px; color: var(--yellow); font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    h1 { position: relative; z-index: 1; max-width: 680px; margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(39px, 6vw, 67px); line-height: .94; letter-spacing: -.055em; }
+    .hero-copy { position: relative; z-index: 1; max-width: 660px; margin: 17px 0 0; color: rgba(255,255,255,.9); font-size: 16px; line-height: 1.58; }
+    .sealed-programme { position: absolute; z-index: 1; right: 38px; bottom: 28px; width: 150px; height: auto; border-radius: 22px; box-shadow: 0 18px 30px rgba(0,0,0,.28); }
+    .inside { padding: 30px 34px 36px; }
+    .intro { max-width: 715px; margin: 0 auto 22px; font-size: 17px; line-height: 1.58; text-align: center; }
+    .progress-line { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 0 0 16px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 13px; background: rgba(255,255,255,.58); }
+    .progress-line strong { font-size: 13px; }
+    .progress-line p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; text-align: right; }
+    .programme { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px; }
+    .fold { overflow: hidden; border: 1px solid rgba(18, 61, 24, .28); border-radius: 20px; background: var(--cream); box-shadow: 0 9px 20px rgba(18,61,24,.08); }
+    .fold-visual { display: block; width: 100%; height: 180px; object-fit: cover; }
+    .fold-heading { min-height: 132px; padding: 18px 17px 15px; background: linear-gradient(150deg, #fffdf8, #eee3c9); }
+    .number { display: inline-flex; align-items: center; justify-content: center; width: 25px; height: 25px; border-radius: 50%; background: var(--ink); color: #fff; font-size: 11px; font-weight: 800; }
+    .fold h2 { margin: 12px 0 5px; font-family: Georgia, 'Times New Roman', serif; font-size: 25px; line-height: .97; letter-spacing: -.035em; }
+    .fold .place { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; }
+    .fold-trigger { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 13px 17px; border: 0; border-top: 1px solid rgba(18,61,24,.17); background: var(--yellow); color: var(--ink-deep); font-size: 13px; font-weight: 800; text-align: left; }
+    .fold-trigger:hover { background: #f2d900; }
+    .fold-trigger .mark { font-size: 18px; line-height: 1; }
+    .fold-body { display: grid; gap: 13px; padding: 17px; border-top: 1px dashed rgba(18,61,24,.28); background: #fff; }
+    .fold-body p { margin: 0; color: #354b38; font-size: 14px; line-height: 1.52; }
+    .fold-body strong { color: var(--ink); }
+    .fold-body a { color: var(--ink); font-weight: 800; }
+    .next-move { display: none; margin-top: 22px; padding: 21px; border: 1px solid rgba(116,39,43,.32); border-radius: 18px; background: #fff7e1; }
+    .next-move.show { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px; align-items: start; }
+    .next-mark { display: grid; width: 36px; height: 36px; place-items: center; border-radius: 50%; background: var(--wine); color: #fff; font-weight: 800; }
+    .next-move h2 { margin: 2px 0 5px; font-family: Georgia, 'Times New Roman', serif; font-size: 25px; letter-spacing: -.035em; }
+    .next-move p { margin: 0; color: #4e4138; font-size: 14px; line-height: 1.56; }
+    .footnote { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin: 22px 0 0; color: var(--muted); font-size: 12px; line-height: 1.55; }
+    .credits-button { flex: 0 0 auto; padding: 8px 10px; border: 1px solid var(--ink); border-radius: 999px; background: #fff; color: var(--ink); font-size: 12px; font-weight: 800; }
+    .credits-button:hover { background: var(--ink); color: #fff; }
+    .modal-backdrop { position: fixed; z-index: 9999; inset: 0; display: grid; place-items: center; padding: 18px; background: rgba(5, 22, 9, .66); }
+    .modal { position: relative; width: min(610px, 100%); max-height: min(700px, 88vh); overflow: auto; padding: 27px; border-radius: 20px; background: #fffdf8; color: var(--ink); box-shadow: 0 28px 60px rgba(0,0,0,.36); }
+    .modal h2 { margin: 0 42px 12px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 29px; letter-spacing: -.035em; }
+    .modal p, .modal li { color: #3f5142; font-size: 14px; line-height: 1.55; }
+    .modal ul { margin: 14px 0 0; padding-left: 19px; }
+    .modal a { color: var(--ink); font-weight: 800; }
+    .close { position: absolute; top: 15px; right: 15px; width: 34px; height: 34px; border: 1px solid var(--ink); border-radius: 50%; background: #fff; color: var(--ink); font-size: 21px; line-height: 1; }
+    .close:hover { background: var(--yellow); color: var(--ink-deep); }
+    @media (max-width: 760px) {
+      .reader { border-radius: 19px; }
+      .curtain { min-height: 342px; padding: 28px 23px 26px; }
+      .sealed-programme { right: 22px; bottom: 25px; width: 110px; }
+      .inside { padding: 22px 16px 29px; }
+      .programme { grid-template-columns: 1fr; }
+      .fold { display: grid; grid-template-columns: 122px minmax(0, 1fr); }
+      .fold-visual { grid-row: span 2; height: 100%; min-height: 204px; }
+      .fold-heading { min-height: 0; }
+      .fold-trigger { grid-column: 2; }
+      .fold-body { grid-column: 1 / -1; }
+    }
+    @media (max-width: 430px) {
+      .curtain { min-height: 0; padding-bottom: 26px; }
+      .sealed-programme { position: relative; right: auto; bottom: auto; left: auto; display: block; width: 96px; margin: 20px 0 0 auto; }
+      .progress-line { display: block; }
+      .progress-line p { margin-top: 5px; text-align: left; }
+      .fold { display: block; }
+      .fold-visual { height: 188px; }
+      .fold-trigger { width: 100%; }
+      .footnote { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="reader" id="bw-opera-reader">
+    <section class="curtain" aria-labelledby="tool-title">
+      <p class="eyebrow">Berlin evening reader</p>
+      <h1 id="tool-title">Berlin Opera House Reader</h1>
+      <p class="hero-copy">Open three programme folds. Each one gives you the physical place, the current visitor cue and one calmer next move before you choose an evening.</p>
+      <img class="sealed-programme" src="../tools-home/icons/berlin-opera-house-reader.png" alt="" width="512" height="512">
+    </section>
+
+    <section class="inside">
+      <p class="intro">This is a venue reader, not a booking engine. It does not choose a ticket for you. It helps you put the house, neighbourhood and final production-page check in the right order.</p>
+
+      <div class="progress-line" aria-live="polite">
+        <strong id="progress-title">Programme closed</strong>
+        <p id="progress-copy">Open a fold to begin with the physical Berlin evening you want.</p>
+      </div>
+
+      <section class="programme" aria-label="Three Berlin opera house programme folds">
+        <article class="fold">
+          <img class="fold-visual" src="assets/staatsoper.jpg" alt="Front of Staatsoper Unter den Linden on Unter den Linden">
+          <div class="fold-heading">
+            <span class="number">01</span>
+            <h2>Staatsoper</h2>
+            <p class="place">Mitte · Unter den Linden 7</p>
+          </div>
+          <button class="fold-trigger" type="button" aria-expanded="false" aria-controls="fold-staatsoper" data-house="staatsoper"><span>Open the Mitte fold</span><span class="mark" aria-hidden="true">+</span></button>
+          <div class="fold-body" id="fold-staatsoper" hidden>
+            <p><strong>Read the place:</strong> this is the house for a day that already has Bebelplatz, Museum Island or Unter den Linden in it.</p>
+            <p><strong>Check before booking:</strong> the official FAQ says German and English surtitles are available but are not readable from every side or rear seat.</p>
+            <p><a href="https://www.staatsoper-berlin.de/en/service/how-to-get-there/staatsoper-unter-den-linden.35/" target="_blank" rel="noopener">Open the official visitor page</a></p>
+          </div>
+        </article>
+
+        <article class="fold">
+          <img class="fold-visual" src="assets/deutsche-oper.jpg" alt="Deutsche Oper Berlin exterior in Charlottenburg">
+          <div class="fold-heading">
+            <span class="number">02</span>
+            <h2>Deutsche Oper</h2>
+            <p class="place">Charlottenburg · Bismarckstraße 35</p>
+          </div>
+          <button class="fold-trigger" type="button" aria-expanded="false" aria-controls="fold-deutsche" data-house="deutsche"><span>Open the west fold</span><span class="mark" aria-hidden="true">+</span></button>
+          <div class="fold-body" id="fold-deutsche" hidden>
+            <p><strong>Read the place:</strong> make it a City West or Charlottenburg evening rather than a rushed extension of a Mitte sightseeing day.</p>
+            <p><strong>Check before booking:</strong> the visitor page lists U2 at Deutsche Oper and accessible U2/U7 access at Bismarckstraße nearby.</p>
+            <p><a href="https://deutscheoperberlin.de/en_EN/service" target="_blank" rel="noopener">Open the official visitor page</a></p>
+          </div>
+        </article>
+
+        <article class="fold">
+          <img class="fold-visual" src="assets/schillertheater.jpg" alt="Schillertheater facade on Bismarckstraße in Charlottenburg">
+          <div class="fold-heading">
+            <span class="number">03</span>
+            <h2>Komische Oper</h2>
+            <p class="place">Current main venue · Schillertheater</p>
+          </div>
+          <button class="fold-trigger" type="button" aria-expanded="false" aria-controls="fold-komische" data-house="komische"><span>Open the venue fold</span><span class="mark" aria-hidden="true">+</span></button>
+          <div class="fold-body" id="fold-komische" hidden>
+            <p><strong>Read the place:</strong> Komische Oper lists Schillertheater, Bismarckstraße 110, as its visitor entrance. Older search results can still name Behrenstraße.</p>
+            <p><strong>Check before booking:</strong> use the specific production page as the final address check because a performance can use another location.</p>
+            <p><a href="https://www.komische-oper-berlin.de/en/plan/venues/schillertheater/" target="_blank" rel="noopener">Open the official venue page</a></p>
+          </div>
+        </article>
+      </section>
+
+      <aside class="next-move" id="next-move" aria-live="polite">
+        <span class="next-mark" aria-hidden="true">✓</span>
+        <div>
+          <h2 id="next-title">Your useful next move</h2>
+          <p id="next-copy">Read at least one fold, then use the exact production page for language, surtitles, running time and the final venue address.</p>
+        </div>
+      </aside>
+
+      <div class="footnote">
+        <span>Venue facts are a starting point. The individual production page owns the current performance details, accessibility notes and ticket availability.</span>
+        <button class="credits-button" id="credits-button" type="button" aria-expanded="false" aria-controls="credits-modal">Tool visual credits</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-backdrop" id="credits-modal" role="dialog" aria-modal="true" aria-labelledby="credits-title" hidden>
+    <section class="modal">
+      <button class="close" id="credits-close" type="button" aria-label="Close tool visual credits">×</button>
+      <h2 id="credits-title">Tool visual credits</h2>
+      <p>Source and licence details for the three photographs rendered in this tool.</p>
+      <ul>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Berlin_-_Staatsoper_Unter_den_Linden.jpg" target="_blank" rel="noopener">Staatsoper Unter den Linden</a>: Marek Śliwecki, CC BY-SA 4.0.</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Deutsche_Oper_Berlin,_Blick_von_Osten.jpg" target="_blank" rel="noopener">Deutsche Oper Berlin</a>: Manfred Brückels, CC BY-SA 3.0.</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Berlin_Schillertheater.JPG" target="_blank" rel="noopener">Schillertheater</a>: Bukk, CC BY-SA 3.0.</li>
+      </ul>
+    </section>
+  </div>
+
+  <script src="../js/brand.js"></script>
+  <script>
+    (function () {
+      const root = document.getElementById('bw-opera-reader');
+      const triggers = Array.from(root.querySelectorAll('.fold-trigger'));
+      const progressTitle = document.getElementById('progress-title');
+      const progressCopy = document.getElementById('progress-copy');
+      const nextMove = document.getElementById('next-move');
+      const nextTitle = document.getElementById('next-title');
+      const nextCopy = document.getElementById('next-copy');
+      const creditButton = document.getElementById('credits-button');
+      const creditsModal = document.getElementById('credits-modal');
+      const closeCredits = document.getElementById('credits-close');
+
+      function reportHeight() {
+        const height = Math.ceil(Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, root.getBoundingClientRect().bottom));
+        window.parent.postMessage({ type: 'berlinwalk-widget-height', slug: 'berlin-opera-house-reader', height: height }, '*');
+      }
+
+      function updateReadingState() {
+        const open = triggers.filter(function (trigger) { return trigger.getAttribute('aria-expanded') === 'true'; });
+        const names = open.map(function (trigger) { return trigger.dataset.house; });
+        if (!open.length) {
+          progressTitle.textContent = 'Programme closed';
+          progressCopy.textContent = 'Open a fold to begin with the physical Berlin evening you want.';
+          nextMove.classList.remove('show');
+          reportHeight();
+          return;
+        }
+        if (open.length === 1) {
+          progressTitle.textContent = 'One house read';
+          progressCopy.textContent = 'Good. Now read one contrasting location before you turn a venue into an evening plan.';
+          nextMove.classList.add('show');
+          nextTitle.textContent = 'Keep the exact page beside the ticket';
+          nextCopy.textContent = 'You know the neighbourhood. Before buying, confirm language, surtitles, running time and the listed door on the individual production page.';
+          reportHeight();
+          return;
+        }
+        if (open.length === 2) {
+          progressTitle.textContent = 'Two Berlin evenings compared';
+          progressCopy.textContent = 'The location contrast is visible. Open the final fold only if you want the full three-house map in your head.';
+          nextMove.classList.add('show');
+          nextTitle.textContent = 'Do not force the city into one line';
+          nextCopy.textContent = 'Mitte and City West are different nights. Choose the house that lets you arrive calm, not the one that makes the rest of the day collapse.';
+          reportHeight();
+          return;
+        }
+        progressTitle.textContent = 'All three programme folds open';
+        progressCopy.textContent = 'You have the practical map: one Mitte house, two west-Berlin venues, and a final production-page check.';
+        nextMove.classList.add('show');
+        nextTitle.textContent = 'Make one specific evening, not three imaginary ones';
+        nextCopy.textContent = 'Pick the production you actually want, save its live venue address and build the afternoon around that side of Berlin. The final decision belongs to the current official listing.';
+        reportHeight();
+      }
+
+      triggers.forEach(function (trigger) {
+        trigger.addEventListener('click', function () {
+          const body = document.getElementById(trigger.getAttribute('aria-controls'));
+          const willOpen = trigger.getAttribute('aria-expanded') !== 'true';
+          trigger.setAttribute('aria-expanded', String(willOpen));
+          trigger.querySelector('.mark').textContent = willOpen ? '−' : '+';
+          body.hidden = !willOpen;
+          updateReadingState();
+        });
+      });
+
+      function openCredits() {
+        creditsModal.hidden = false;
+        creditButton.setAttribute('aria-expanded', 'true');
+        closeCredits.focus();
+      }
+      function shutCredits() {
+        creditsModal.hidden = true;
+        creditButton.setAttribute('aria-expanded', 'false');
+        creditButton.focus();
+      }
+      creditButton.addEventListener('click', openCredits);
+      closeCredits.addEventListener('click', shutCredits);
+      creditsModal.addEventListener('click', function (event) { if (event.target === creditsModal) shutCredits(); });
+      document.addEventListener('keydown', function (event) { if (event.key === 'Escape' && !creditsModal.hidden) shutCredits(); });
+      window.addEventListener('load', reportHeight);
+      window.addEventListener('resize', reportHeight);
+      updateReadingState();
+    }());
+  </script>
+</body>
+</html>

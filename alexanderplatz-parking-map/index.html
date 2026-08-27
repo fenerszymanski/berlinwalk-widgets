@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alexanderplatz Parking Map | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-parking-map">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-parking-map {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-soft: #F2F8E8;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-cream: #FAFAF5;
+      --bw-central: #1B5E20;
+      --bw-pr: #1565C0;
+      --bw-tour: #FFE600;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      overflow-x: hidden;
+      width: 100vw;
+      max-width: 100vw;
+    }
+
+    #bw-parking-map * { box-sizing: border-box; }
+
+    #bw-parking-map .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+      width: 100%;
+      max-width: 100%;
+    }
+
+    #bw-parking-map .bw-head {
+      background: var(--bw-green);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #bw-parking-map .bw-head-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1;
+      flex: 0 0 24px;
+    }
+
+    #bw-parking-map .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+      line-height: 1.35;
+      min-width: 0;
+    }
+
+    #bw-parking-map .bw-body {
+      background: var(--bw-cream);
+      padding: 16px 18px;
+      overflow-wrap: anywhere;
+    }
+
+    #bw-parking-map .bw-hint {
+      font-size: 13px;
+      color: var(--bw-muted);
+      margin: 0 0 14px;
+      line-height: 1.55;
+    }
+
+    #bw-parking-map .bw-controls {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    #bw-parking-map .bw-filter {
+      appearance: none;
+      border: 1px solid var(--bw-border);
+      background: var(--bw-white);
+      color: var(--bw-green);
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    #bw-parking-map .bw-filter.is-active {
+      background: var(--bw-green);
+      color: var(--bw-yellow);
+      border-color: var(--bw-green);
+    }
+
+    #bw-parking-map .bw-map-container {
+      width: 100%;
+      height: 470px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--bw-border);
+      background: #E8EEDC;
+      position: relative;
+    }
+
+    #bw-parking-map .bw-map {
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    #bw-parking-map .leaflet-container {
+      font-family: Montserrat, Arial, sans-serif;
+      background: #E8EEDC;
+    }
+
+    #bw-parking-map .leaflet-popup-content-wrapper {
+      border-radius: 12px;
+      padding: 0;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      border: 1px solid var(--bw-border);
+    }
+
+    #bw-parking-map .leaflet-popup-content {
+      margin: 0;
+      width: 266px !important;
+      font-family: inherit;
+    }
+
+    #bw-parking-map .bw-popup-head {
+      padding: 10px 14px;
+      border-radius: 11px 11px 0 0;
+      color: var(--bw-white);
+    }
+
+    #bw-parking-map .bw-popup-head.central { background: var(--bw-central); }
+    #bw-parking-map .bw-popup-head.pr { background: var(--bw-pr); }
+    #bw-parking-map .bw-popup-head.tour { background: var(--bw-tour); color: var(--bw-green); }
+
+    #bw-parking-map .bw-popup-type {
+      display: block;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      opacity: 0.9;
+      margin-bottom: 2px;
+    }
+
+    #bw-parking-map .bw-popup-name {
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+
+    #bw-parking-map .bw-popup-body {
+      padding: 12px 14px 14px;
+      font-size: 12.5px;
+      color: var(--bw-text);
+      line-height: 1.55;
+    }
+
+    #bw-parking-map .bw-popup-cost {
+      display: inline-block;
+      margin: 0 0 7px;
+      padding: 3px 8px;
+      border-radius: 20px;
+      background: var(--bw-soft);
+      color: var(--bw-green);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+
+    #bw-parking-map .bw-popup-link {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 10px;
+      padding: 8px 10px;
+      border-radius: 7px;
+      background: var(--bw-green);
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    #bw-parking-map .bw-marker {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 3px solid var(--bw-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    #bw-parking-map .bw-marker.central { background: var(--bw-central); color: var(--bw-white); }
+    #bw-parking-map .bw-marker.pr { background: var(--bw-pr); color: var(--bw-white); }
+    #bw-parking-map .bw-marker.tour { background: var(--bw-tour); color: var(--bw-green); }
+
+    #bw-parking-map .bw-count {
+      font-size: 11px;
+      color: var(--bw-muted);
+      margin: 10px 0 0;
+      text-align: center;
+    }
+
+    #bw-parking-map .bw-count strong {
+      color: var(--bw-green);
+      font-weight: 900;
+    }
+
+    #bw-parking-map .bw-footer {
+      padding: 10px 18px;
+      background: var(--bw-white);
+      border-top: 1px solid var(--bw-border);
+      color: var(--bw-muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 560px) {
+      #bw-parking-map { margin: 22px 0; }
+      #bw-parking-map .bw-head { padding: 12px 16px; }
+      #bw-parking-map .bw-kicker { font-size: 10px; letter-spacing: 1.7px; }
+      #bw-parking-map .bw-body { padding: 14px; }
+      #bw-parking-map .bw-hint { font-size: 12px; margin-bottom: 12px; }
+      #bw-parking-map .bw-filter { flex: 1 1 calc(50% - 8px); min-width: 132px; padding: 9px 8px; font-size: 10px; }
+      #bw-parking-map .bw-map-container { height: 390px; }
+      #bw-parking-map .leaflet-popup-content { width: 224px !important; }
+      #bw-parking-map .bw-popup-name { font-size: 14px; }
+      #bw-parking-map .bw-popup-body { font-size: 12px; }
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <span class="bw-head-icon" aria-hidden="true">P</span>
+      <span class="bw-kicker">Parking near the BerlinWalk tour start</span>
+    </div>
+    <div class="bw-body">
+      <p class="bw-hint">Tap a pin for my practical note and a Google Maps directions button. Central garages are easiest for the Alexanderplatz World Clock. P+R options are better if you want to avoid driving into Mitte.</p>
+      <div class="bw-controls" aria-label="Filter Alexanderplatz parking map">
+        <button class="bw-filter is-active" type="button" data-filter="all">All</button>
+        <button class="bw-filter" type="button" data-filter="central">Near Alex</button>
+        <button class="bw-filter" type="button" data-filter="pr">Park + Ride</button>
+        <button class="bw-filter" type="button" data-filter="tour">Tour start</button>
+      </div>
+      <div class="bw-map-container">
+        <div class="bw-map" id="bw-parking-map-canvas"></div>
+      </div>
+      <p class="bw-count"><strong data-count>0</strong> parking points mapped around the tour</p>
+    </div>
+    <div class="bw-footer">Parking prices, opening hours, low-emission-zone rules, and availability change. Use this as a planning map, then check the operator page before driving.</div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function () {
+      var root = document.getElementById('bw-parking-map');
+      var mapEl = document.getElementById('bw-parking-map-canvas');
+      if (!root || !mapEl || !window.L) return;
+
+      var tourStart = { lat: 52.52192, lng: 13.41322 };
+      var places = [
+        {
+          name: 'BerlinWalk meeting point: World Clock',
+          type: 'tour',
+          cost: 'Tour start',
+          lat: tourStart.lat,
+          lng: tourStart.lng,
+          travel: 'Meet at the Weltzeituhr on Alexanderplatz',
+          note: 'This is where the walking tour begins. If you park nearby, give yourself at least 10-15 minutes to leave the garage, pay, and find the clock.'
+        },
+        {
+          name: 'RathausPassagen parking garage',
+          type: 'central',
+          cost: 'Very close to World Clock',
+          lat: 52.51985,
+          lng: 13.41275,
+          travel: '~5 min walk',
+          note: 'One of the most convenient garages for the tour start. Good pick if you want to park once and walk straight to Alexanderplatz.'
+        },
+        {
+          name: 'ALEXA shopping centre garage',
+          type: 'central',
+          cost: 'Large central garage',
+          lat: 52.51910,
+          lng: 13.41685,
+          travel: '~6-8 min walk',
+          note: 'Large garage beside the ALEXA shopping centre. Practical if you also want food, toilets, or shops before the tour.'
+        },
+        {
+          name: 'Q-Park Am Alexanderplatz',
+          type: 'central',
+          cost: 'Check live tariff',
+          lat: 52.52265,
+          lng: 13.41078,
+          travel: '~3-5 min walk',
+          note: 'Closest-feeling option on many routes into Alexanderplatz. Check the operator page for the current rate before relying on it.'
+        },
+        {
+          name: 'Park Inn / Alexanderplatz garage area',
+          type: 'central',
+          cost: 'Check live tariff',
+          lat: 52.52298,
+          lng: 13.41365,
+          travel: '~2-4 min walk',
+          note: 'Extremely close to the meeting point, but central hotel-area parking can be expensive. Best when convenience matters more than price.'
+        },
+        {
+          name: 'P+R Ahrensfelde',
+          type: 'pr',
+          cost: 'Outside the center',
+          lat: 52.57125,
+          lng: 13.56555,
+          travel: 'S-Bahn toward Alexanderplatz',
+          note: 'Useful if you arrive from the northeast/east and want to avoid the Umweltzone. Check space availability before planning around it.'
+        },
+        {
+          name: 'P+R Hönow',
+          type: 'pr',
+          cost: 'Outside the center',
+          lat: 52.53825,
+          lng: 13.63355,
+          travel: 'U5 directly to Alexanderplatz',
+          note: 'Good east-side option because the U5 runs directly to Alexanderplatz. Works best if you already plan to use a day ticket.'
+        },
+        {
+          name: 'P+R Wartenberg',
+          type: 'pr',
+          cost: 'Outside the center',
+          lat: 52.57325,
+          lng: 13.50310,
+          travel: 'S-Bahn toward the city',
+          note: 'A north/east approach option. Build in extra time because P+R lots near busy stations can fill up.'
+        },
+        {
+          name: 'P+R Wannsee',
+          type: 'pr',
+          cost: 'Outside the center',
+          lat: 52.42135,
+          lng: 13.17910,
+          travel: 'S-Bahn / regional rail into Mitte',
+          note: 'Useful if you arrive from Potsdam or the southwest. It saves central driving, but it is not the fastest route to Alexanderplatz.'
+        }
+      ];
+
+      var map = L.map(mapEl, {
+        center: [52.525, 13.444],
+        zoom: 12,
+        scrollWheelZoom: false,
+        tap: true
+      });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 18
+      }).addTo(map);
+
+      map.once('click', function () { map.scrollWheelZoom.enable(); });
+
+      var typeLabels = {
+        central: 'Central garage',
+        pr: 'Park + Ride',
+        tour: 'BerlinWalk tour start'
+      };
+
+      var markerIcons = {
+        central: 'P',
+        pr: 'R',
+        tour: 'BW'
+      };
+
+      function markerIcon(type) {
+        return L.divIcon({
+          className: 'bw-marker-wrap',
+          html: '<div class="bw-marker ' + type + '">' + markerIcons[type] + '</div>',
+          iconSize: [30, 30],
+          iconAnchor: [15, 15],
+          popupAnchor: [0, -18]
+        });
+      }
+
+      function directions(place) {
+        var origin = encodeURIComponent(place.lat + ',' + place.lng);
+        var destination = encodeURIComponent(tourStart.lat + ',' + tourStart.lng);
+        var mode = place.type === 'pr' ? 'transit' : 'walking';
+        return 'https://www.google.com/maps/dir/?api=1&origin=' + origin + '&destination=' + destination + '&travelmode=' + mode;
+      }
+
+      function popup(place) {
+        var link = place.type === 'tour'
+          ? 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(place.lat + ',' + place.lng)
+          : directions(place);
+        var linkText = place.type === 'tour' ? 'Open in Google Maps' : 'Directions to tour start';
+        return '<div class="bw-popup-head ' + place.type + '">' +
+          '<span class="bw-popup-type">' + typeLabels[place.type] + '</span>' +
+          '<div class="bw-popup-name">' + place.name + '</div>' +
+          '</div>' +
+          '<div class="bw-popup-body">' +
+          '<span class="bw-popup-cost">' + place.cost + '</span><br>' +
+          '<strong>' + place.travel + '</strong><br>' +
+          place.note +
+          '<br><a class="bw-popup-link" target="_blank" rel="noopener" href="' + link + '">' + linkText + '</a>' +
+          '</div>';
+      }
+
+      var markerLayer = L.layerGroup().addTo(map);
+      var countEl = root.querySelector('[data-count]');
+
+      function render(filter) {
+        var visible = places.filter(function (place) {
+          return filter === 'all' || place.type === filter;
+        });
+        markerLayer.clearLayers();
+        visible.forEach(function (place) {
+          L.marker([place.lat, place.lng], {
+            icon: markerIcon(place.type)
+          }).bindPopup(popup(place), {
+            closeButton: true,
+            maxWidth: 284
+          }).addTo(markerLayer);
+        });
+        if (countEl) countEl.textContent = String(visible.length);
+      }
+
+      root.querySelectorAll('.bw-filter').forEach(function (button) {
+        button.addEventListener('click', function () {
+          root.querySelectorAll('.bw-filter').forEach(function (item) {
+            item.classList.remove('is-active');
+          });
+          button.classList.add('is-active');
+          render(button.getAttribute('data-filter'));
+        });
+      });
+
+      render('all');
+      setTimeout(function () { map.invalidateSize(); }, 250);
+    })();
+  </script>
+</div>
+</body>
+</html>

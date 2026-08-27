@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Berlin Rail Decoder — U-Bahn, S-Bahn, Tram or Bus?</title>
+<meta name="description" content="Type any Berlin line label (U8, S41, M10, Bus 100) and instantly see what kind of service it is, whether it runs underground, if your ticket covers it, and when it runs at night." />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  .rd {
+    font-family: 'Montserrat', system-ui, sans-serif;
+    color: var(--bw-text);
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 4px 4px 10px;
+    box-sizing: border-box;
+  }
+  .rd *, .rd *::before, .rd *::after { box-sizing: border-box; }
+  .rd__head {
+    background: var(--bw-green);
+    color: #fff;
+    border-radius: 16px 16px 0 0;
+    padding: 18px 20px 16px;
+  }
+  .rd__kicker {
+    font-size: 11px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--bw-yellow); margin: 0 0 6px;
+  }
+  .rd__title { font-size: 21px; font-weight: 800; margin: 0 0 4px; line-height: 1.2; }
+  .rd__sub { font-size: 13.5px; margin: 0; color: #E8F0E0; line-height: 1.5; }
+  .rd__body {
+    background: var(--bw-white);
+    border: 1px solid var(--bw-border);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    padding: 18px 18px 20px;
+  }
+  .rd__label { display:block; font-size: 12.5px; font-weight: 700; color: var(--bw-muted); margin: 0 0 7px; }
+  .rd__inputrow { display: flex; gap: 8px; }
+  .rd__input {
+    flex: 1; font-family: inherit; font-size: 17px; font-weight: 700;
+    padding: 12px 14px; border: 2px solid var(--bw-border); border-radius: 11px;
+    color: var(--bw-text); background: var(--bw-cream); outline: none; min-width: 0;
+    text-transform: uppercase;
+  }
+  .rd__input:focus { border-color: var(--bw-lime); background: #fff; }
+  .rd__input::placeholder { color: #9aa79a; font-weight: 600; text-transform: none; }
+  .rd__go {
+    font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer;
+    padding: 12px 18px; border: none; border-radius: 11px;
+    background: var(--bw-green); color: var(--bw-yellow); white-space: nowrap;
+  }
+  .rd__go:hover { background: var(--bw-green-dark); }
+  .rd__chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 12px 0 2px; }
+  .rd__chip {
+    font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+    padding: 6px 11px; border-radius: 999px; border: 1.5px solid var(--bw-border);
+    background: #fff; color: var(--bw-text);
+  }
+  .rd__chip:hover { border-color: var(--bw-lime); background: var(--bw-lime-soft); }
+  .rd__hint { font-size: 11.5px; color: #8a948a; margin: 9px 0 0; }
+
+  .rd__card {
+    margin-top: 16px; border: 1px solid var(--bw-border); border-radius: 14px;
+    overflow: hidden; display: none; animation: rdfade .2s ease;
+  }
+  .rd__card.is-on { display: block; }
+  @keyframes rdfade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .rd__cardhead { display: flex; align-items: center; gap: 14px; padding: 15px 16px; }
+  .rd__badge {
+    flex: 0 0 auto; width: 52px; height: 52px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; font-weight: 800; color: #fff; line-height: 1;
+  }
+  .rd__badge--circle { border-radius: 999px; }
+  .rd__ctitle { margin: 0; font-size: 18px; font-weight: 800; line-height: 1.2; }
+  .rd__cop { margin: 3px 0 0; font-size: 12.5px; color: var(--bw-muted); font-weight: 600; }
+  .rd__rows { border-top: 1px solid var(--bw-border); }
+  .rd__row { display: flex; gap: 12px; padding: 11px 16px; border-bottom: 1px solid #EEF2E6; font-size: 13.5px; line-height: 1.5; }
+  .rd__row:last-child { border-bottom: none; }
+  .rd__rk { flex: 0 0 108px; font-weight: 700; color: var(--bw-muted); }
+  .rd__rv { flex: 1; }
+  .rd__ticket {
+    display: flex; gap: 9px; align-items: flex-start; padding: 12px 16px;
+    background: var(--bw-lime-soft); font-size: 13px; line-height: 1.5;
+  }
+  .rd__ticket b { color: var(--bw-green); }
+  .rd__tip { padding: 12px 16px; font-size: 13px; line-height: 1.55; background: #fff; border-top: 1px solid #EEF2E6; }
+  .rd__tip b { color: var(--bw-green); }
+  .rd__err { margin-top: 14px; font-size: 13.5px; color: var(--bw-red); font-weight: 600; display: none; }
+  .rd__err.is-on { display: block; }
+  @media (max-width: 460px) {
+    .rd__rk { flex-basis: 92px; }
+    .rd__title { font-size: 19px; }
+  }
+</style>
+</head>
+<body>
+<div class="rd">
+  <div class="rd__head">
+    <p class="rd__kicker">Berlinwalk.com · Free tool</p>
+    <h1 class="rd__title">Berlin Rail Decoder</h1>
+    <p class="rd__sub">A U, an S, an M and a three-digit number all sit on the same map. Type any line label and I will tell you exactly what it is, whether your ticket covers it, and when it stops running.</p>
+  </div>
+  <div class="rd__body">
+    <label class="rd__label" for="rd-input">Type a line label</label>
+    <div class="rd__inputrow">
+      <input id="rd-input" class="rd__input" type="text" inputmode="text" autocomplete="off"
+             placeholder="e.g. S41, U8, M10, Bus 100, RE1" aria-label="Berlin line label" />
+      <button id="rd-go" class="rd__go" type="button">Decode</button>
+    </div>
+    <div class="rd__chips" id="rd-chips"></div>
+    <p class="rd__hint">Tip: the letter in front of the number is the whole secret. U and S are trains, M is usually a tram, and a bare three-digit number is a bus.</p>
+
+    <p class="rd__err" id="rd-err"></p>
+
+    <div class="rd__card" id="rd-card" aria-live="polite">
+      <div class="rd__cardhead">
+        <div class="rd__badge" id="rd-badge">S</div>
+        <div>
+          <h2 class="rd__ctitle" id="rd-ctitle">Line</h2>
+          <p class="rd__cop" id="rd-cop">Operator</p>
+        </div>
+      </div>
+      <div class="rd__rows" id="rd-rows"></div>
+      <div class="rd__ticket" id="rd-ticket"></div>
+      <div class="rd__tip" id="rd-tip"></div>
+    </div>
+  </div>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var input = document.getElementById('rd-input');
+  var go = document.getElementById('rd-go');
+  var chipsWrap = document.getElementById('rd-chips');
+  var card = document.getElementById('rd-card');
+  var err = document.getElementById('rd-err');
+  var badge = document.getElementById('rd-badge');
+  var ctitle = document.getElementById('rd-ctitle');
+  var cop = document.getElementById('rd-cop');
+  var rows = document.getElementById('rd-rows');
+  var ticket = document.getElementById('rd-ticket');
+  var tip = document.getElementById('rd-tip');
+
+  var chips = ['U2', 'U5', 'U8', 'S3', 'S7', 'S9', 'S41', 'M10', 'M4', 'Bus 100', 'RE1', 'N8'];
+  chips.forEach(function (c) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'rd__chip'; b.textContent = c;
+    b.addEventListener('click', function () { input.value = c; decode(); });
+    chipsWrap.appendChild(b);
+  });
+
+  var COVERED = 'Yes. One Berlin <b>AB ticket</b> covers this inside the city, alongside every U-Bahn, S-Bahn, tram and bus. You never buy a separate ticket to switch between them.';
+
+  function classify(raw) {
+    var s = raw.toUpperCase().replace(/\s+/g, '').replace('BUS', '').replace('LINE', '');
+    var m;
+    // Night bus first (N + number), before plain S/U checks
+    if ((m = s.match(/^N(\d{1,3})$/))) return build('bus-night', 'N' + m[1]);
+    if ((m = s.match(/^U(\d{1,2})$/)) && +m[1] >= 1 && +m[1] <= 9) return build('u', 'U' + m[1]);
+    if ((m = s.match(/^S(\d{1,3})$/))) return build('s', 'S' + m[1]);
+    if ((m = s.match(/^M(\d{1,3})$/))) {
+      var n = +m[1];
+      // MetroBus lines are M11, M19, M21, M27, M29, M32, M37, M41, M44, M45, M46, M48, M49, M76, M77, M82, M85, M27...
+      // MetroTram lines are M1, M2, M4, M5, M6, M8, M10, M13, M17.
+      var tramSet = [1, 2, 4, 5, 6, 8, 10, 13, 17];
+      if (tramSet.indexOf(n) !== -1) return build('tram', 'M' + n);
+      return build('bus-metro', 'M' + n);
+    }
+    if ((m = s.match(/^X(\d{1,3})$/))) return build('bus-express', 'X' + m[1]);
+    if (/^(RE|RB)\d{1,3}$/.test(s) || s === 'FEX') return build('regional', s === 'FEX' ? 'FEX' : s);
+    if ((m = s.match(/^(\d{2,3})$/))) return build('bus', m[1]);
+    if ((m = s.match(/^(\d{1,2})$/))) return build('tram-num', m[1]); // low bare number = eastern tram
+    return null;
+  }
+
+  function build(kind, label) {
+    var d = {
+      'u': {
+        title: 'U-Bahn line ' + label, op: 'Run by BVG · Berlin’s city metro',
+        bcolor: '#0A3D91', btext: 'U', circle: false,
+        rows: [
+          ['Where', 'Mostly <b>underground</b>, packed across the inner city. Short stops, trains every few minutes.'],
+          ['Best for', 'Getting between central sights fast. This is the workhorse you will ride most.'],
+          ['At night', 'Roughly 4:00 to 1:00 on weekdays; <b>runs all night on Friday and Saturday</b>. Night buses cover the gaps midweek.']
+        ],
+        tip: 'On the map the U-Bahn is the dense tangle of lines with a <b>blue U</b>. If you are hopping between Alexanderplatz, Museum Island and Kreuzberg, you are almost certainly on a U-Bahn.'
+      },
+      's': {
+        title: 'S-Bahn line ' + label, op: 'Run by S-Bahn Berlin (Deutsche Bahn)',
+        bcolor: '#2E7D32', btext: 'S', circle: true,
+        rows: [
+          ['Where', 'Mostly <b>above ground</b>, on longer routes. Fewer, wider-spaced stops than the U-Bahn, and some lines run out to Potsdam and Brandenburg.'],
+          ['Best for', 'Crossing the city quickly, the airport run, and the <b>Ringbahn</b> loop around the centre.'],
+          ['At night', 'Similar hours to the U-Bahn; <b>runs all night Friday and Saturday</b>. Midweek, check the last train.']
+        ],
+        tip: (label === 'S41' || label === 'S42')
+          ? 'You picked the <b>Ringbahn</b>. S41 circles the inner city clockwise, S42 anticlockwise, and neither has an end stop, so just ride to the station you want. It traces the edge of fare zone A.'
+          : 'On the map the S-Bahn is the small green <b>S</b> in a circle. The trains are the red-and-cream ones, often on brick viaducts. Great for covering distance; less handy for short central hops.'
+      },
+      'tram': {
+        title: 'MetroTram line ' + label, op: 'Run by BVG · street-level tram',
+        bcolor: '#C0392B', btext: 'M', circle: false,
+        rows: [
+          ['Where', 'On the <b>street</b>, mostly in the eastern districts (Prenzlauer Berg, Friedrichshain, Mitte). You wait at a kerbside stop, not on a platform.'],
+          ['Best for', 'Short, scenic hops the U-Bahn does not cover. The <b>M10</b> and <b>M1</b> are handy around Prenzlauer Berg and Mauerpark.'],
+          ['At night', 'MetroTram lines (the M ones) run <b>24 hours</b> on their core routes.']
+        ],
+        tip: 'Trams barely exist in the former West, so if you are in Charlottenburg you will rarely see one. In the east they are often the quickest way to cover a kilometre or two.'
+      },
+      'tram-num': {
+        title: 'Tram line ' + label, op: 'Run by BVG · street-level tram',
+        bcolor: '#C0392B', btext: String(label).length > 2 ? '🚋' : label, circle: false,
+        rows: [
+          ['Where', 'On the <b>street</b> in the eastern districts. Kerbside stops, not underground platforms.'],
+          ['Best for', 'Local hops in the east. Plain-numbered trams are usually quieter neighbourhood routes.'],
+          ['At night', 'Most plain-numbered trams stop overnight midweek; the M-numbered MetroTrams run 24h. Check the last departure.']
+        ],
+        tip: 'If the number has no letter and it is a tram, it is an eastern-district line. In the west, you almost never meet a tram.'
+      },
+      'bus': {
+        title: 'Bus line ' + label, op: 'Run by BVG · city bus',
+        bcolor: '#7A2E8C', btext: '🚌', circle: false,
+        rows: [
+          ['Where', 'On the road, everywhere the trains do not reach. A bare three-digit number is a normal city bus.'],
+          ['Best for', (label === '100' || label === '200' || label === '300')
+            ? 'Sightseeing on the cheap. <b>Bus ' + label + '</b> rolls past major landmarks for the price of a normal ticket, no tour bus needed.'
+            : 'Filling gaps between stations and reaching quieter corners.'],
+          ['At night', 'Daytime buses stop late evening. Overnight, the <b>N-prefixed night buses</b> take over midweek.']
+        ],
+        tip: (label === '100' || label === '200')
+          ? 'Locals’ secret: line ' + label + ' is the poor man’s sightseeing tour. Grab an upper-deck front seat and ride it past the Reichstag, Brandenburg Gate and Unter den Linden on a standard ticket.'
+          : 'Enter at the front and show the driver your ticket. Buses are slower than the trains in traffic but reach places no train does.'
+      },
+      'bus-metro': {
+        title: 'MetroBus line ' + label, op: 'Run by BVG · frequent city bus',
+        bcolor: '#7A2E8C', btext: 'M', circle: false,
+        rows: [
+          ['Where', 'On the road, on high-demand corridors. MetroBus lines run more often than plain buses.'],
+          ['Best for', 'Reliable frequency where there is no train. You rarely wait long.'],
+          ['At night', 'MetroBus routes generally run <b>24 hours</b>, which makes them useful after the midweek trains stop.']
+        ],
+        tip: 'An M in front of a bus number means “frequent”, not tram, when the number is in the 20s–80s. Do not confuse M41 (a bus) with M4 (a tram).'
+      },
+      'bus-express': {
+        title: 'Express bus ' + label, op: 'Run by BVG · express (X) bus',
+        bcolor: '#7A2E8C', btext: 'X', circle: false,
+        rows: [
+          ['Where', 'On the road, but skipping minor stops for speed.'],
+          ['Best for', 'Longer cross-town trips where a train does not run directly.'],
+          ['At night', 'Express buses are daytime services; use night buses or the weekend trains overnight.']
+        ],
+        tip: 'The X means express: fewer stops, faster ride. Just make sure it actually stops where you want before you board.'
+      },
+      'bus-night': {
+        title: 'Night bus ' + label, op: 'Run by BVG · overnight service',
+        bcolor: '#37474F', btext: 'N', circle: false,
+        rows: [
+          ['Where', 'On the road, overnight, roughly following daytime routes.'],
+          ['Best for', 'Getting home on a <b>weeknight</b>, when the U-Bahn and S-Bahn have stopped.'],
+          ['At night', 'This <b>is</b> the night service. On Friday and Saturday the trains run all night, so you may not even need it then.']
+        ],
+        tip: 'Night buses (the N lines) mostly run every 30 minutes, so check the time. Weekend nights, the all-night U-Bahn is usually faster.'
+      },
+      'regional': {
+        title: (label === 'FEX' ? 'Airport Express ' : 'Regional train ') + label, op: 'Run by Deutsche Bahn / regional operators',
+        bcolor: '#546E7A', btext: (label === 'FEX' ? '✈' : 'R'), circle: false,
+        rows: [
+          ['Where', 'Above ground, on mainline rails. Bigger, faster trains that stop only at major stations.'],
+          ['Best for', label === 'FEX' ? 'The fast run between BER Airport and central Berlin.' : 'Crossing Berlin quickly with few stops, or day trips like Potsdam.'],
+          ['At night', 'Regional trains thin out overnight. Check the timetable rather than assuming a service.']
+        ],
+        tip: label === 'FEX'
+          ? 'The FEX links BER Airport with the centre in about half an hour. Your airport ticket (fare zones ABC) covers it, so you do not need a separate rail ticket.'
+          : 'These run on the same rails as intercity trains but count as local transport within Berlin, so a normal zone ticket covers 2nd class inside the fare zone.'
+      }
+    };
+    var t = d[kind];
+    t.covered = (kind === 'regional')
+      ? 'Yes, inside the fare zone. A normal Berlin <b>AB</b> or <b>ABC</b> ticket covers 2nd-class regional trains within that zone, so no separate ticket for a hop across town or out to the airport.'
+      : COVERED;
+    t.label = label;
+    return t;
+  }
+
+  function render(t) {
+    err.classList.remove('is-on');
+    badge.textContent = t.btext;
+    badge.style.background = t.bcolor;
+    badge.className = 'rd__badge' + (t.circle ? ' rd__badge--circle' : '');
+    ctitle.textContent = t.title;
+    cop.textContent = t.op;
+    rows.innerHTML = '';
+    t.rows.forEach(function (r) {
+      var row = document.createElement('div');
+      row.className = 'rd__row';
+      row.innerHTML = '<div class="rd__rk">' + r[0] + '</div><div class="rd__rv">' + r[1] + '</div>';
+      rows.appendChild(row);
+    });
+    ticket.innerHTML = '<div>🎟️</div><div><b>Does my ticket cover it?</b> ' + t.covered + '</div>';
+    tip.innerHTML = '<b>Yusuf’s tip:</b> ' + t.tip;
+    card.classList.add('is-on');
+  }
+
+  function decode() {
+    var val = (input.value || '').trim();
+    if (!val) return;
+    var t = classify(val);
+    if (!t) {
+      card.classList.remove('is-on');
+      err.textContent = 'I could not read “' + val + '”. Try a label like U8, S41, M10, Bus 100 or RE1.';
+      err.classList.add('is-on');
+      return;
+    }
+    render(t);
+  }
+
+  go.addEventListener('click', decode);
+  input.addEventListener('keydown', function (e) { if (e.key === 'Enter') decode(); });
+})();
+</script>
+</body>
+</html>

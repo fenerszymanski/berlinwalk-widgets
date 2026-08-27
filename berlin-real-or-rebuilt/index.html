@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Berlin: Real or Rebuilt</title>
+<style>
+:root{--green:#123d18;--green2:#1b5e20;--yellow:#ffe600;--ink:#172018;--paper:#fffdf5;--soft:#eef4ec;--line:#cbd9c8;--gold:#c98a00;--rust:#9c3b1b;--ghost:#b9c0b6;--water:#a9c8dd}
+*{box-sizing:border-box}
+body{margin:0;background:transparent;color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.tool{max-width:900px;margin:auto;background:var(--paper);border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 15px 42px rgba(18,61,24,.12)}
+header{padding:26px 26px 20px;background:linear-gradient(135deg,var(--green),#0b2810);color:#fff}
+h1{font-size:clamp(25px,4.6vw,38px);line-height:1.04;margin:0 0 10px;max-width:700px}
+header p{margin:0;max-width:680px;line-height:1.55;color:#e8f2e6;font-size:15px}
+.control{padding:20px 26px 18px;background:var(--yellow);color:var(--green)}
+.control-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.control label{font-weight:800;font-size:15px}
+.year{font-weight:900;font-size:clamp(30px,7vw,42px);line-height:1;font-variant-numeric:tabular-nums}
+.control input[type=range]{width:100%;accent-color:var(--green);margin:12px 0 2px;display:block}
+.ticks{display:flex;justify-content:space-between;font-size:11.5px;font-weight:750;opacity:.85}
+.state-line{margin:12px 0 0;font-size:14.5px;font-weight:650;line-height:1.5}
+.state-line b{font-weight:900}
+.mapwrap{padding:16px 12px 4px;background:var(--soft)}
+.map{display:block;width:100%;height:auto}
+.bld{cursor:pointer}
+.bld .shape{stroke:#0d2b12;stroke-width:.7;stroke-linejoin:round;transition:fill .18s ease,opacity .18s ease}
+.bld .badge{fill:#0d2b12;opacity:.92}
+.bld .num{fill:#fff;font-size:9px;font-weight:800;text-anchor:middle;dominant-baseline:central}
+.bld .nm{fill:#25392a;font-size:7.4px;font-weight:700;display:none;paint-order:stroke}
+.bld .nm.halo{stroke:#eef4ec;stroke-width:2.4;stroke-linejoin:round;fill:#eef4ec;opacity:.92}
+.bld.sel .shape{stroke:#0d2b12;stroke-width:2}
+.bld.sel .badge{fill:var(--rust)}
+.bld.off{cursor:default}
+.bld.off .badge{opacity:.28}
+.riv{fill:none;stroke:var(--water);stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round;opacity:.95}
+.scale{stroke:#5d6b5f;stroke-width:1}
+.scaletx{fill:#5d6b5f;font-size:7px;font-weight:650}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;padding:10px 20px 16px;background:var(--soft);font-size:12.5px;font-weight:700}
+.key{display:flex;align-items:center;gap:7px}
+.sw{width:14px;height:14px;border-radius:3px;border:1px solid #0d2b12}
+.list{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:18px 20px 6px}
+.row{display:flex;align-items:center;gap:9px;padding:8px 10px;border:1px solid var(--line);border-radius:12px;background:#fff;cursor:pointer;text-align:left;font:inherit;font-size:13.5px;line-height:1.25}
+.row:hover{border-color:var(--green2)}
+.row[aria-pressed=true]{border:2px solid var(--green);padding:7px 9px;background:#f4f9f2}
+.row .n{flex:0 0 20px;height:20px;border-radius:50%;background:#0d2b12;color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.row .t{flex:1;min-width:0}
+.row .t b{display:block;font-weight:750;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .t span{display:block;font-size:11.5px;color:#5d6b5f;font-weight:600}
+.row .dot{flex:0 0 12px;height:12px;border-radius:3px;border:1px solid #0d2b12}
+.detail{margin:14px 20px 20px;border:1px solid var(--line);border-radius:18px;background:#fff;overflow:hidden}
+.detail-head{padding:16px 18px 12px;border-bottom:1px solid var(--line)}
+.detail-head h2{margin:0 0 8px;font-size:21px;color:var(--green);line-height:1.2}
+.badge-v{display:inline-block;background:var(--yellow);color:var(--green);border-radius:999px;padding:5px 11px;font-size:12px;font-weight:900}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px 18px}
+.cell{background:var(--soft);border-radius:12px;padding:11px 13px}
+.cell span{display:block;font-size:11.5px;font-weight:750;color:#4e5d50;text-transform:uppercase;letter-spacing:.4px}
+.cell strong{display:block;font-size:24px;font-weight:900;color:var(--green);font-variant-numeric:tabular-nums;line-height:1.15;margin-top:3px}
+.cell em{display:block;font-style:normal;font-size:12.5px;color:#3c4a3e;margin-top:4px;line-height:1.4}
+.life{padding:2px 18px 10px}
+.life svg{display:block;width:100%;height:auto}
+.life .lb{fill:#5d6b5f;font-size:7px;font-weight:650}
+.detail p{margin:0 0 12px;padding:0 18px;line-height:1.6;font-size:14.5px}
+.detail p.tell{background:var(--soft);margin:0;padding:14px 18px;border-top:1px solid var(--line);font-size:14px}
+.detail p.tell b{color:var(--green)}
+.source{padding:0 20px 20px;color:#5b685c;font-size:11.5px;line-height:1.5}
+.source a{color:var(--green2)}
+@media(min-width:700px){.bld .nm{display:block}}
+@media(max-width:640px){
+  header,.control{padding-left:17px;padding-right:17px}
+  .mapwrap{padding:12px 6px 2px}
+  .legend{padding-left:14px;padding-right:14px}
+  .list{grid-template-columns:1fr;padding:14px 14px 4px}
+  .detail{margin-left:14px;margin-right:14px}
+  .pair{grid-template-columns:1fr}
+  .source{padding-left:14px;padding-right:14px}
+}
+</style>
+</head>
+<body>
+<main class="tool">
+  <header>
+    <h1>Berlin's centre: real, ruined or rebuilt</h1>
+    <p>Fourteen landmarks between the Staatsoper and Alexanderplatz, drawn from their real map footprints. Move the year and watch the historic centre get built, burn and come back as something younger than it looks.</p>
+  </header>
+
+  <section class="control">
+    <div class="control-top">
+      <label for="year">Year</label>
+      <output id="yearOut" class="year" for="year">2026</output>
+    </div>
+    <input id="year" type="range" min="1200" max="2026" step="1" value="2026" aria-describedby="stateLine">
+    <div class="ticks"><span>1200</span><span>1500</span><span>1800</span><span>1945</span><span>today</span></div>
+    <p id="stateLine" class="state-line" aria-live="polite"></p>
+  </section>
+
+  <section class="mapwrap" aria-label="Map of the historic centre of Berlin through time">
+    <svg class="map" id="map" viewBox="0 0 480 264" role="img" aria-labelledby="mapTitle mapDesc">
+      <title id="mapTitle">The historic centre of Berlin, coloured by what each landmark was in the selected year</title>
+      <desc id="mapDesc">Real OpenStreetMap footprints of fourteen landmarks between the Staatsoper Unter den Linden and Alexanderplatz, with the Spree drawn through them. Each footprint is shaded to show whether the building was standing as built, a ruin, cleared away or rebuilt in the selected year.</desc>
+      <g id="rivers"></g>
+      <g id="shapes"></g>
+      <g id="marks"></g>
+      <g id="scalebar"></g>
+    </svg>
+  </section>
+
+  <div class="legend">
+    <span class="key"><i class="sw" style="background:#1b5e20"></i>standing as built</span>
+    <span class="key"><i class="sw" style="background:#9c3b1b"></i>ruin or burnt-out shell</span>
+    <span class="key"><i class="sw" style="background:#fffdf5;border-style:dashed"></i>cleared away</span>
+    <span class="key"><i class="sw" style="background:#c98a00"></i>rebuilt fabric</span>
+  </div>
+
+  <div class="list" id="list" role="group" aria-label="Choose a landmark"></div>
+
+  <article class="detail" id="detail" aria-live="polite">
+    <div class="detail-head">
+      <h2 id="dName">Loading</h2>
+      <span class="badge-v" id="dVerdict">-</span>
+    </div>
+    <div class="pair">
+      <div class="cell"><span>It reads as</span><strong id="dReads">-</strong><em id="dReadsNote">the century your eye gives it</em></div>
+      <div class="cell"><span>What you touch</span><strong id="dFabric">-</strong><em id="dFabricNote">-</em></div>
+    </div>
+    <div class="life">
+      <svg id="life" viewBox="0 0 480 44" role="img" aria-labelledby="lifeTitle">
+        <title id="lifeTitle">Lifeline of the selected building from 1200 to today</title>
+      </svg>
+    </div>
+    <p id="dToday"></p>
+    <p class="tell"><b>How to tell on site.</b> <span id="dTell"></span></p>
+  </article>
+
+  <p class="source">Building outlines and river lines are real geometry from <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>, ODbL 1.0. Construction, destruction and reconstruction years come from each building's own institution and from standard architectural histories, checked on 24 August 2026.</p>
+</main>
+
+<script>
+const COLOR={original:'#1b5e20',rebuilt:'#c98a00',ruin:'#9c3b1b',gone:'#fffdf5',none:'#fffdf5'};
+const STATE_WORD={original:'standing as built',rebuilt:'rebuilt',ruin:'a ruin',gone:'cleared away',none:'not built yet'};
+const NS='http://www.w3.org/2000/svg';
+const el=(name,attrs={})=>{const n=document.createElementNS(NS,name);for(const k in attrs)n.setAttribute(k,attrs[k]);return n;};
+const $=(id)=>document.getElementById(id);
+
+let DATA=null,selected=null,project=null;
+
+function stateAt(building,year){
+  let state='none';
+  for(const phase of building.phases){if(year>=phase.from)state=phase.state;}
+  return state;
+}
+
+function makeProjection(bounds,box){
+  const midLat=(bounds.minLat+bounds.maxLat)/2;
+  const k=Math.cos(midLat*Math.PI/180);
+  const w=(bounds.maxLon-bounds.minLon)*k, h=bounds.maxLat-bounds.minLat;
+  const padLon=(bounds.maxLon-bounds.minLon)*0.035, padLat=(bounds.maxLat-bounds.minLat)*0.10;
+  const minLon=bounds.minLon-padLon, maxLon=bounds.maxLon+padLon;
+  const minLat=bounds.minLat-padLat, maxLat=bounds.maxLat+padLat;
+  const spanX=(maxLon-minLon)*k, spanY=maxLat-minLat;
+  const scale=Math.min(box.w/spanX,box.h/spanY);
+  const offX=box.x+(box.w-spanX*scale)/2, offY=box.y+(box.h-spanY*scale)/2;
+  const fn=(lat,lon)=>[offX+(lon-minLon)*k*scale,offY+(maxLat-lat)*scale];
+  fn.scale=scale; fn.k=k;
+  return fn;
+}
+
+function metresPerUnit(){
+  // One degree of longitude at this latitude, converted through the projection.
+  return 111320*project.k/(project.scale*project.k)*project.k;
+}
+
+function drawStatic(){
+  const rivers=$('rivers'); rivers.textContent='';
+  for(const river of DATA.water){
+    const d=river.line.map((p,i)=>`${i?'L':'M'}${project(p[0],p[1]).map(n=>n.toFixed(1)).join(' ')}`).join(' ');
+    rivers.appendChild(el('path',{d,class:'riv'}));
+  }
+  const shapes=$('shapes'); shapes.textContent='';
+  const marks=$('marks'); marks.textContent='';
+  const ringArea=(ring)=>Math.abs(ring.reduce((sum,p,i)=>{const q=ring[(i+1)%ring.length];return sum+(p[1]*q[0]-q[1]*p[0]);},0))/2;
+  // Big footprints go down first so a small church inside a large quarter stays visible.
+  const order=DATA.buildings.map((b,i)=>({b,i})).sort((a,z)=>ringArea(z.b.outline)-ringArea(a.b.outline));
+  for(const {b,i} of order){
+    const g=el('g',{class:'bld',id:'bld-'+b.key});
+    const d=b.outline.map((p,j)=>`${j?'L':'M'}${project(p[0],p[1]).map(n=>n.toFixed(1)).join(' ')}`).join(' ')+' Z';
+    g.appendChild(el('path',{d,class:'shape'}));
+    g.addEventListener('click',()=>select(b.key));
+    shapes.appendChild(g);
+    const m=el('g',{class:'bld mark',id:'mark-'+b.key,role:'button',tabindex:'0','aria-label':b.name});
+    const [cx,cy]=project(b.centre[0],b.centre[1]);
+    const bx=cx+(b.label.dx||0), by=cy+(b.label.dy||0);
+    m.appendChild(el('line',{x1:cx.toFixed(1),y1:cy.toFixed(1),x2:bx.toFixed(1),y2:by.toFixed(1),stroke:'#0d2b12','stroke-width':'.5',opacity:'.55'}));
+    m.appendChild(el('circle',{cx:bx.toFixed(1),cy:by.toFixed(1),r:'6.6',class:'badge'}));
+    const num=el('text',{x:bx.toFixed(1),y:by.toFixed(1),class:'num'}); num.textContent=String(i+1); m.appendChild(num);
+    const anchor=b.label.anchor||'middle';
+    const nx=bx+(anchor==='start'?9:anchor==='end'?-9:0);
+    const halo=el('text',{x:nx.toFixed(1),y:(by+2.6).toFixed(1),class:'nm halo','text-anchor':anchor}); halo.textContent=b.label.text||b.name; m.appendChild(halo);
+    const nm=el('text',{x:nx.toFixed(1),y:(by+2.6).toFixed(1),class:'nm','text-anchor':anchor}); nm.textContent=b.label.text||b.name; m.appendChild(nm);
+    m.addEventListener('click',()=>select(b.key));
+    m.addEventListener('keydown',(e)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(b.key);}});
+    marks.appendChild(m);
+  }
+  drawScale();
+}
+
+function drawScale(){
+  const bar=$('scalebar'); bar.textContent='';
+  const a=project(DATA.bounds.minLat,DATA.bounds.minLon), b=project(DATA.bounds.minLat,DATA.bounds.minLon+0.00294); // 200 m east
+  const y=252, x0=16, len=Math.abs(b[0]-a[0]);
+  bar.appendChild(el('line',{x1:x0,y1:y,x2:x0+len,y2:y,class:'scale'}));
+  bar.appendChild(el('line',{x1:x0,y1:y-3,x2:x0,y2:y+3,class:'scale'}));
+  bar.appendChild(el('line',{x1:x0+len,y1:y-3,x2:x0+len,y2:y+3,class:'scale'}));
+  const t=el('text',{x:x0+len+6,y:y+2.6,class:'scaletx'}); t.textContent='200 m'; bar.appendChild(t);
+  const n=el('text',{x:464,y:y+2.6,class:'scaletx','text-anchor':'end'}); n.textContent='north is up'; bar.appendChild(n);
+}
+
+function buildList(){
+  const list=$('list'); list.textContent='';
+  DATA.buildings.forEach((b,i)=>{
+    const row=document.createElement('button');
+    row.type='button'; row.className='row'; row.id='row-'+b.key; row.setAttribute('aria-pressed','false');
+    row.innerHTML=`<span class="n">${i+1}</span><span class="t"><b>${b.name}</b><span class="st"></span></span><i class="dot"></i>`;
+    row.addEventListener('click',()=>select(b.key));
+    list.appendChild(row);
+  });
+}
+
+function paintYear(year){
+  $('yearOut').textContent=year;
+  const tally={original:0,rebuilt:0,ruin:0,gone:0,none:0};
+  for(const b of DATA.buildings){
+    const state=stateAt(b,year); tally[state]++;
+    const g=$('bld-'+b.key), m=$('mark-'+b.key), row=$('row-'+b.key);
+    const shape=g.querySelector('.shape');
+    g.style.display=state==='none'?'none':'';
+    m.style.display=state==='none'?'none':'';
+    m.classList.toggle('off',state==='gone');
+    shape.setAttribute('fill',COLOR[state]);
+    shape.setAttribute('fill-opacity',state==='gone'?'0':'1');
+    shape.setAttribute('stroke-dasharray',state==='gone'?'2 2':'none');
+    shape.setAttribute('opacity',state==='gone'?'.65':'1');
+    const dot=row.querySelector('.dot');
+    dot.style.background=state==='gone'||state==='none'?'transparent':COLOR[state];
+    dot.style.borderStyle=state==='gone'?'dashed':'solid';
+    dot.style.opacity=state==='none'?'.25':'1';
+    const former=b.formerName&&b.nameFrom&&year<b.nameFrom?b.formerName:null;
+    row.querySelector('.st').textContent=(state==='none'?'not built yet':STATE_WORD[state])+(former&&state!=='none'?`, as the ${former}`:'');
+    const nmNodes=m.querySelectorAll('.nm');
+    for(const node of nmNodes)node.textContent=former?former:(b.label.text||b.name);
+  }
+  const standing=tally.original+tally.rebuilt;
+  const parts=[];
+  parts.push(`<b>${standing}</b> of the fourteen standing`);
+  if(tally.original)parts.push(`<b>${tally.original}</b> still as originally built`);
+  if(tally.rebuilt)parts.push(`<b>${tally.rebuilt}</b> carrying rebuilt fabric`);
+  if(tally.ruin)parts.push(`<b>${tally.ruin}</b> in ruins`);
+  if(tally.gone)parts.push(`<b>${tally.gone}</b> cleared away`);
+  if(tally.none)parts.push(`<b>${tally.none}</b> not built yet`);
+  $('stateLine').innerHTML=`In ${year}: ${parts.join(', ')}.`;
+}
+
+function lifeline(b){
+  const svg=$('life'); [...svg.querySelectorAll('g,rect,text,line')].forEach(n=>n.remove());
+  const x0=10,x1=470,y=12,h=13,from=1200,to=2026;
+  const at=(yr)=>x0+(Math.max(from,Math.min(to,yr))-from)/(to-from)*(x1-x0);
+  const marks=[...b.phases];
+  const segs=[];
+  for(let i=0;i<marks.length;i++){
+    const end=i+1<marks.length?marks[i+1].from:to;
+    segs.push({state:marks[i].state,a:marks[i].from,b:end});
+  }
+  if(marks[0].from>from)svg.appendChild(el('rect',{x:x0,y,width:(at(marks[0].from)-x0).toFixed(1),height:h,fill:'#e4e9e2',rx:3}));
+  for(const s of segs){
+    const w=Math.max(1.6,at(s.b)-at(s.a));
+    const r=el('rect',{x:at(s.a).toFixed(1),y,width:w.toFixed(1),height:h,rx:3,fill:COLOR[s.state]});
+    if(s.state==='gone'){r.setAttribute('fill','none');r.setAttribute('stroke','#8e968b');r.setAttribute('stroke-dasharray','3 2');}
+    svg.appendChild(r);
+  }
+  for(const yr of [1200,1400,1600,1800,1900,1945,2026]){
+    svg.appendChild(el('line',{x1:at(yr).toFixed(1),y1:y+h+2,x2:at(yr).toFixed(1),y2:y+h+5,stroke:'#8e968b','stroke-width':'.8'}));
+    const t=el('text',{x:at(yr).toFixed(1),y:y+h+14,class:'lb','text-anchor':yr===1200?'start':yr===2026?'end':'middle'});
+    t.textContent=yr===2026?'today':yr; svg.appendChild(t);
+  }
+  const cur=Number($('year').value);
+  svg.appendChild(el('line',{x1:at(cur).toFixed(1),y1:y-5,x2:at(cur).toFixed(1),y2:y+h+2,stroke:'#9c3b1b','stroke-width':'1.6'}));
+}
+
+function select(key){
+  const b=DATA.buildings.find(x=>x.key===key); if(!b)return;
+  selected=key;
+  for(const other of DATA.buildings){
+    $('bld-'+other.key).classList.toggle('sel',other.key===key);
+    $('mark-'+other.key).classList.toggle('sel',other.key===key);
+    $('row-'+other.key).setAttribute('aria-pressed',String(other.key===key));
+  }
+  $('dName').textContent=b.name;
+  $('dVerdict').textContent=b.verdictLabel;
+  $('dReads').textContent=b.readsAs;
+  $('dReadsNote').textContent=`the year its design belongs to`;
+  $('dFabric').textContent=b.fabric;
+  $('dFabricNote').textContent=b.fabricLine;
+  $('dToday').textContent=b.today;
+  $('dTell').textContent=b.tell;
+  lifeline(b);
+}
+
+fetch('data.json').then(r=>r.json()).then(data=>{
+  DATA=data;
+  project=makeProjection(data.bounds,{x:14,y:10,w:452,h:232});
+  drawStatic(); buildList();
+  const input=$('year');
+  input.addEventListener('input',()=>{paintYear(Number(input.value));if(selected)lifeline(DATA.buildings.find(b=>b.key===selected));});
+  paintYear(Number(input.value));
+  select('berliner-schloss');
+});
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

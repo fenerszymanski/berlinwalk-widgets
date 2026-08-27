@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Berlin Club Night Timing Checker</title>
+<meta name="description" content="Compare your planned arrival with the published format for a Berghain Klubnacht, Friday event, ticketed show, or another Berlin club night. This tool does not predict admission." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='32' r='18' fill='none' stroke='%23E8E4D8' stroke-width='4'/%3E%3Crect x='30' y='18' width='4' height='16' rx='2' fill='%23FFE600'/%3E%3Crect x='31' y='31' width='13' height='4' rx='2' fill='%23FFE600' transform='rotate(35 32 32)'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-dark:#123D18; --green-mid:#2E7D32;
+    --lime:#7CB342; --light:#C5E1A5; --yellow:#FFE600;
+    --cream:#FAFAF5; --ink:#212121; --line:#E3E8DC; --panel:#F4F7F0;
+    --night:#0e1220; --dawn:#243b55;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    font-family:'Montserrat',system-ui,sans-serif;
+    color:var(--ink); background:transparent; line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:680px;margin:0 auto;padding:4px 4px 8px}
+  .card{
+    background:var(--cream); border:1px solid var(--line);
+    border-radius:18px; overflow:hidden;
+    box-shadow:0 10px 30px rgba(18,61,24,.10);
+  }
+  .head{
+    background:linear-gradient(135deg,var(--green) 0%,var(--green-mid) 100%);
+    color:#fff; padding:16px 18px 14px;
+  }
+  .kicker{
+    display:inline-block; font-size:11px; font-weight:800; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--green-dark);
+    background:var(--yellow); padding:3px 9px; border-radius:999px;
+  }
+  .head h2{margin:9px 0 3px; font-size:19px; font-weight:800; line-height:1.2}
+  .head p{margin:0; font-size:13px; color:#DDECD5}
+
+  /* Club-type chips */
+  .chips{display:flex; gap:8px; padding:12px 14px 2px; flex-wrap:wrap}
+  .chip{
+    flex:1 1 46%; min-width:150px; cursor:pointer;
+    border:1.5px solid var(--line); background:#fff; border-radius:12px;
+    padding:9px 11px; text-align:left; font-family:inherit; transition:.15s;
+  }
+  .chip:hover{border-color:var(--lime)}
+  .chip.active{border-color:var(--green); background:#F1F7EC; box-shadow:0 3px 10px rgba(27,94,32,.12)}
+  .chip .nm{display:block; font-size:13px; font-weight:800; color:var(--green); letter-spacing:.01em}
+  .chip .ex{display:block; font-size:11.5px; font-weight:600; color:#4b584b; margin-top:1px}
+
+  /* Night stage */
+  .stage-wrap{padding:10px 14px 2px}
+  .stage{
+    position:relative; border-radius:14px; overflow:hidden; color:#fff;
+    background:linear-gradient(90deg,var(--night) 0%,#12203a 55%,var(--dawn) 100%);
+    padding:14px 15px 12px; user-select:none;
+  }
+  .stagetop{display:flex; justify-content:space-between; align-items:baseline; gap:10px}
+  .clockread{font-size:30px; font-weight:800; letter-spacing:.01em; line-height:1}
+  .clockread small{font-size:13px; font-weight:700; color:#b9c6e0; margin-left:6px}
+  .statepill{
+    font-size:11px; font-weight:800; letter-spacing:.05em; text-transform:uppercase;
+    padding:5px 11px; border-radius:999px; white-space:nowrap;
+  }
+  .sceneline{margin:10px 0 2px; font-size:13.5px; line-height:1.5; color:#eef2fb; min-height:40px}
+  .sceneline b{color:#fff}
+
+  /* Timeline band */
+  .band{position:relative; height:16px; margin:12px 0 4px; border-radius:999px; overflow:hidden; background:#0a0f1c}
+  .band .seg{position:absolute; top:0; bottom:0}
+  .marks{display:flex; justify-content:space-between; font-size:10.5px; font-weight:700; color:#9fb0d0; margin-top:3px; letter-spacing:.02em}
+
+  input[type=range]{
+    -webkit-appearance:none; appearance:none; width:100%; height:8px; margin:12px 0 0;
+    background:linear-gradient(90deg,#3a3f52,var(--lime)); border-radius:999px; cursor:pointer;
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none; width:28px; height:28px; border-radius:50%;
+    background:var(--yellow); border:3px solid #fff; box-shadow:0 2px 8px rgba(0,0,0,.45); cursor:pointer;
+  }
+  input[type=range]::-moz-range-thumb{
+    width:28px; height:28px; border-radius:50%; background:var(--yellow);
+    border:3px solid #fff; box-shadow:0 2px 8px rgba(0,0,0,.45); cursor:pointer;
+  }
+  .draghint{text-align:center; font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:#8FA0BE; margin-top:6px; transition:opacity .25s}
+  .draghint.gone{opacity:0}
+
+  /* My move callout */
+  .move{
+    display:flex; gap:10px; align-items:flex-start; margin:12px 14px 4px;
+    background:var(--yellow); border-radius:12px; padding:11px 13px;
+  }
+  .move svg{flex:0 0 auto; width:20px; height:20px; fill:var(--green-dark); margin-top:1px}
+  .move b{color:var(--green-dark)}
+  .move span{font-size:13px; color:var(--green-dark); font-weight:600; line-height:1.45}
+
+  /* Door reading */
+  .door{margin:10px 14px 4px; display:grid; grid-template-columns:1fr 1fr; gap:10px}
+  .dcol{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:11px 12px}
+  .dcol h4{margin:0 0 7px; font-size:12px; font-weight:800; letter-spacing:.04em; text-transform:uppercase}
+  .dcol.yes h4{color:var(--green)} .dcol.no h4{color:#b23b32}
+  .dcol ul{margin:0; padding:0; list-style:none}
+  .dcol li{position:relative; padding-left:18px; font-size:12.5px; color:#2b3a2b; margin-bottom:6px; line-height:1.4}
+  .dcol li:last-child{margin-bottom:0}
+  .dcol.yes li::before{content:"✓"; position:absolute; left:0; color:var(--green); font-weight:800}
+  .dcol.no li::before{content:"✕"; position:absolute; left:0; color:#b23b32; font-weight:800}
+
+  .foot{padding:8px 16px 14px; font-size:12px; color:#5c6b5c}
+  .foot a{color:var(--green); font-weight:700; text-decoration:none}
+  .foot a:hover{text-decoration:underline}
+
+  @media (max-width:430px){
+    .clockread{font-size:26px}
+    .door{grid-template-columns:1fr; gap:8px}
+    .chip{flex:1 1 100%; padding:7px 11px}
+    .chips{gap:6px; padding:10px 12px 0}
+    .stage-wrap{padding:8px 12px 2px}
+    .stage{padding:12px 13px 11px}
+    .sceneline{min-height:0; margin:9px 0 2px}
+    .move{margin:10px 12px 4px}
+    .door{margin:8px 12px 4px}
+    .dcol{padding:10px 11px}
+    .dcol li{margin-bottom:5px}
+    .foot{padding:8px 14px 12px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="head">
+      <span class="kicker">BerlinWalk.com • Nightlife</span>
+      <h2>Berlin Club Night Timing Checker</h2>
+      <p>Match your arrival plan to the official event listing. This tool never predicts the door.</p>
+    </div>
+
+    <div class="chips" id="chips">
+      <button class="chip active" data-type="klubnacht"><span class="nm">Saturday Klubnacht</span><span class="ex">Often listed at 23:59</span></button>
+      <button class="chip" data-type="friday"><span class="nm">Friday club event</span><span class="ex">Often a separate format</span></button>
+      <button class="chip" data-type="ticketed"><span class="nm">Ticketed show</span><span class="ex">Follow doors + start time</span></button>
+      <button class="chip" data-type="other"><span class="nm">Another Berlin club</span><span class="ex">Use that venue's listing</span></button>
+    </div>
+
+    <div class="stage-wrap">
+      <div class="stage">
+        <div class="stagetop">
+          <div class="clockread"><span id="clock">01:00</span><small id="dayLabel">Sat → Sun</small></div>
+          <div class="statepill" id="statePill">00:00–02:00</div>
+        </div>
+        <div class="sceneline" id="scene"></div>
+        <div class="band"><div class="seg" id="segFill"></div></div>
+        <input type="range" id="range" min="0" max="14" step="1" value="3" aria-label="Planned arrival hour" />
+        <div class="marks"><span>22:00</span><span>02:00</span><span>06:00</span><span>10:00</span><span>12:00</span></div>
+        <div class="draghint" id="draghint">Drag the slider across the night</div>
+      </div>
+    </div>
+
+    <div class="move">
+      <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 00-4 12.7V17a1 1 0 001 1h6a1 1 0 001-1v-2.3A7 7 0 0012 2zm-2 19a1 1 0 001 1h2a1 1 0 001-1v-1h-4v1z"/></svg>
+      <span id="move"></span>
+    </div>
+
+    <div class="door">
+      <div class="dcol yes">
+        <h4>Check before you go</h4>
+        <ul id="doYes"></ul>
+      </div>
+      <div class="dcol no">
+        <h4>Do not treat as a rule</h4>
+        <ul id="doNo"></ul>
+      </div>
+    </div>
+
+    <div class="foot" id="foot"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // Night runs from 22:00 (index 0) to 12:00 next day (index 14).
+  var HOURS = ["22:00","23:00","00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00","10:00","11:00","12:00"];
+
+  // Neutral time bands. They describe the clock only, never the queue, crowd, or admission odds.
+  var BANDS = [
+    {to:2,  col:"#3a3f52", label:"Before midnight"},
+    {to:4,  col:"#4a5a86", label:"00:00–02:00"},
+    {to:7,  col:"#2E7D32", label:"02:00–05:00"},
+    {to:10, col:"#1B5E20", label:"05:00–08:00"},
+    {to:13, col:"#7CB342", label:"08:00–11:00"},
+    {to:14, col:"#FFE600", label:"12:00"}
+  ];
+
+  function stateAt(i){
+    for(var b=0;b<BANDS.length;b++){ if(i<BANDS[b].to) return BANDS[b]; }
+    return BANDS[BANDS.length-1];
+  }
+
+  var TYPES = {
+    klubnacht: {
+      name:"Saturday Klubnacht",
+      scene:[
+        "Recent 2026 listings commonly show a 23:59 start. If your date says the same, this hour is before the published start. Check the exact event page.",
+        "You are close to the common 23:59 start shown on recent listings. Confirm the date, rooms, and running order before leaving.",
+        "If your listing says 23:59, the event is under way. This says nothing about queue length, crowd level, or admission.",
+        "Use the running order to see which artists are playing. Do not use the clock as a claim about door odds.",
+        "A Klubnacht running order can continue through Sunday. Eat, rest, hydrate, and choose an exit plan instead of chasing a supposed peak.",
+        "Check the live running order. Some editions are still active at this hour, but the exact event page is the only reliable schedule.",
+        "Sunday daytime can appear in a Klubnacht running order. Confirm your date and transport before travelling."
+      ],
+      sweet:"the official event page and running order",
+      move:{
+        early:"Open the official listing. If it shows 23:59, do not join a queue before the event starts just because an old guide told you to.",
+        good:"Match this hour to the artist schedule you actually want. Admission remains subjective at every hour.",
+        peak:"Take care of rest, food, water, and the people you came with. The clock does not predict the door.",
+        late:"Check whether your exact running order is still active and how you will get home. Keep a second event or a simple exit plan."
+      },
+      yes:["Exact event name, date, start time and running order","Physical photo ID and the event's current age rule","A rested plan, route home and current payment options","A backup that does not depend on admission"],
+      no:["Any hour as a guarantee of entry","An old price or cash-only claim","Black clothes as a universal dress rule","Filming strangers or arguing at the door"]
+    },
+    friday: {
+      name:"Friday club event",
+      scene:[
+        "Friday events are separate formats, not smaller copies of Klubnacht. Recent listings can start at 22:00, but your exact page controls.",
+        "If the listing says 22:00, the event has started. Read the rooms and artist schedule before choosing this hour.",
+        "The event may be running, but timing varies by format. Check the official page rather than applying a Saturday rule.",
+        "Use the published running order. This tool does not estimate the crowd, queue, or admission decision.",
+        "Confirm that the event is still running and that the artist you want has not finished.",
+        "Some Friday formats finish before a long Saturday Klubnacht would. Check before crossing the city.",
+        "Do not assume a Friday event continues through Sunday. The exact listing decides."
+      ],
+      sweet:"the Friday event's own start time and running order",
+      move:{
+        early:"Check whether the listing says 22:00, 23:00, or another time. Friday is event-led.",
+        good:"Use the current running order and plan transport. The time does not change admission into a guarantee.",
+        peak:"Check which room and artist you want, not a generic club-night peak.",
+        late:"Verify that the event is still running before travelling and keep a backup."
+      },
+      yes:["The exact Friday event page","Start time, rooms and artist order","Physical ID and event-specific notes","A live route and backup plan"],
+      no:["Klubnacht timing copied onto Friday","A claimed best hour for the door","Old payment or price information","A venue name without checking the event"]
+    },
+    ticketed: {
+      name:"Ticketed show or concert",
+      scene:[
+        "Ticketed shows often publish separate door and performance times. Follow both, not the normal club-night mythology.",
+        "Check your ticket and event page now. A missed door or start time cannot be repaired by a generic nightlife rule.",
+        "If the show has started, the ticket terms and late-entry policy matter. Read the organiser's instructions.",
+        "This may already be well into the performance. Check the actual schedule before setting out.",
+        "Most ticketed shows are not all-weekend events. Do not assume the venue is still admitting for this programme.",
+        "Verify the event status. A club building can host formats with completely different end times.",
+        "A daytime arrival only makes sense if the listing explicitly schedules it."
+      ],
+      sweet:"the doors time printed on your ticket",
+      move:{
+        early:"Read the ticket for doors, start time, age rule, and entry conditions.",
+        good:"Follow the ticket and organiser instructions. Do not substitute advice for a different event.",
+        peak:"Confirm late-entry rules before travelling.",
+        late:"Assume nothing. Check whether the ticketed programme is still active."
+      },
+      yes:["Valid ticket or the stated box-office plan","Doors time and show start","Photo ID if the listing requires it","Organiser updates and transport"],
+      no:["Klubnacht timing for a concert","A door rumour over ticket conditions","Assuming late entry is allowed","Ignoring an event cancellation or change"]
+    },
+    other: {
+      name:"Another Berlin club or party",
+      scene:[
+        "There is no city-wide opening rule. Use the venue's official calendar and the exact party page.",
+        "Check the published start before leaving. A venue can host very different formats on different nights.",
+        "The party may be running, but this tool cannot know its crowd, queue, capacity, or admission decision.",
+        "Read the running order if one exists and confirm the address. Berlin venue information changes quickly.",
+        "Do not assume every club runs into the morning. Verify the event's own schedule.",
+        "Some parties continue; others have finished. Only the organiser can answer that for your date.",
+        "A daytime arrival is valid only when the event listing says so."
+      ],
+      sweet:"that venue's official event listing",
+      move:{
+        early:"Find the exact party, not just the venue name. Check start time, address, rules, and ticket status.",
+        good:"Match your arrival to the published programme and keep a backup.",
+        peak:"Do not infer a peak or easier door from the clock.",
+        late:"Verify the event is still active before crossing the city."
+      },
+      yes:["Official venue and party pages","Current address, start time and ticket status","Event-specific dress or conduct rules","A backup and a live route home"],
+      no:["A single Berlin-wide club timetable","Claims of an easier or guaranteed door","An old listicle as current evidence","Filming people without consent"]
+    }
+  };
+
+  var chips=document.getElementById('chips');
+  var range=document.getElementById('range');
+  var clock=document.getElementById('clock');
+  var dayLabel=document.getElementById('dayLabel');
+  var statePill=document.getElementById('statePill');
+  var scene=document.getElementById('scene');
+  var segFill=document.getElementById('segFill');
+  var moveEl=document.getElementById('move');
+  var doYes=document.getElementById('doYes');
+  var doNo=document.getElementById('doNo');
+  var foot=document.getElementById('foot');
+  var draghint=document.getElementById('draghint');
+
+  var current='klubnacht';
+
+  // Map a slider index to a neutral time phase used by the selected event format.
+  function phaseAt(i){
+    if(i<1) return 0;
+    if(i<3) return 1;
+    if(i<5) return 2;
+    if(i<7) return 3;
+    if(i<9) return 4;
+    if(i<12) return 5;
+    return 6;
+  }
+  function moveKey(i){
+    if(i<3) return 'early';
+    if(i<5) return 'good';
+    if(i<9) return 'peak';
+    return 'late';
+  }
+
+  function renderList(el, items){
+    el.innerHTML='';
+    items.forEach(function(t){ var li=document.createElement('li'); li.textContent=t; el.appendChild(li); });
+  }
+
+  function paintBand(){
+    var html='';
+    var prev=0;
+    BANDS.forEach(function(b){
+      var left=(prev/14)*100, w=((b.to-prev)/14)*100;
+      html+='<div class="seg" style="left:'+left+'%;width:'+w+'%;background:'+b.col+'"></div>';
+      prev=b.to;
+    });
+    document.querySelector('.band').innerHTML=html;
+  }
+
+  function pillColour(state){
+    // dark text on light/yellow, white on dark
+    if(state.col==='#FFE600'){ statePill.style.background='#FFE600'; statePill.style.color='#123D18'; }
+    else if(state.col==='#7CB342'){ statePill.style.background='#C5E1A5'; statePill.style.color='#123D18'; }
+    else { statePill.style.background=state.col; statePill.style.color='#fff'; }
+  }
+
+  function render(){
+    var i=parseInt(range.value,10);
+    var t=TYPES[current];
+    var state=stateAt(i);
+    clock.textContent=HOURS[i];
+    dayLabel.textContent = i>=2 ? "Sat → Sun" : "Saturday";
+    statePill.textContent=state.label;
+    pillColour(state);
+    scene.innerHTML='<b>'+t.name+'.</b> '+t.scene[phaseAt(i)];
+    moveEl.innerHTML='<b>My move:</b> '+t.move[moveKey(i)]+' <b>Planning anchor: '+t.sweet+'.</b>';
+    renderList(doYes, t.yes);
+    renderList(doNo, t.no);
+  }
+
+  chips.addEventListener('click', function(e){
+    var btn=e.target.closest('.chip'); if(!btn) return;
+    current=btn.getAttribute('data-type');
+    Array.prototype.forEach.call(chips.querySelectorAll('.chip'), function(c){ c.classList.toggle('active', c===btn); });
+    render();
+  });
+  range.addEventListener('input', function(){ draghint.classList.add('gone'); render(); });
+
+  foot.innerHTML='This checker never predicts admission, queue length, crowd level, or a guaranteed best hour. Verify your exact date on the <a href="https://www.berghain.berlin/en/program/" target="_blank" rel="noopener">official Berghain programme</a>. Planning the day before the night? <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based">See the free walking tour</a>.';
+
+  paintBand();
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

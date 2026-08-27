@@ -1,0 +1,1715 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Can You Make a Berliner Smile? | BerlinWalk</title>
+  <meta name="description" content="A tiny Berlin social survival game. Pick the right tone and see if you can make a Berliner almost smile.">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <script>
+    try {
+      if (window.self !== window.top) document.documentElement.dataset.bwEmbedded = 'true';
+    } catch (error) {
+      document.documentElement.dataset.bwEmbedded = 'true';
+    }
+  </script>
+  <style>
+    :root {
+      --cream: #FAFAF5;
+      --paper: #FFF7E8;
+      --ink: #102E38;
+      --green: #1B5E20;
+      --green-deep: #0D3515;
+      --yellow: #FFE600;
+      --lime: #7CB342;
+      --red: #E63946;
+      --muted: #5C6A62;
+      --white: #FFFFFF;
+      --shadow: rgba(16, 46, 56, 0.18);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      background: transparent;
+      height: 100%;
+      margin: 0 !important;
+      min-height: 100%;
+      padding: 0 !important;
+      overscroll-behavior: contain;
+      overflow: hidden;
+      overflow-x: hidden;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--ink);
+    }
+
+    body {
+      width: 100%;
+    }
+
+    button,
+    a {
+      font: inherit;
+    }
+
+    .bw-smile-game {
+      background:
+        linear-gradient(115deg, rgba(255, 230, 0, 0.15) 0 16%, transparent 16% 100%),
+        repeating-linear-gradient(90deg, rgba(16, 46, 56, 0.055) 0 1px, transparent 1px 44px),
+        var(--paper);
+      border: 6px solid var(--ink);
+      border-radius: 28px;
+      box-shadow: 10px 10px 0 rgba(16, 46, 56, 0.95);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      min-height: 0;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+
+    .bw-smile-topbar {
+      align-items: center;
+      background: var(--ink);
+      color: var(--yellow);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .bw-sound-toggle {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 230, 0, 0.5);
+      border-radius: 999px;
+      color: var(--yellow);
+      cursor: pointer;
+      display: inline-flex;
+      gap: 6px;
+      min-height: 30px;
+      padding: 6px 10px;
+      text-transform: uppercase;
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .bw-screen {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow: hidden;
+      padding: clamp(22px, 5vw, 36px);
+    }
+
+    .bw-start-screen {
+      display: grid;
+      align-content: start;
+      gap: 16px;
+    }
+
+    .bw-badge {
+      align-items: center;
+      background: var(--yellow);
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      box-shadow: 4px 4px 0 var(--ink);
+      color: var(--ink);
+      display: inline-flex;
+      font-size: 11px;
+      font-weight: 900;
+      justify-self: start;
+      letter-spacing: 0.12em;
+      padding: 8px 12px;
+      text-transform: uppercase;
+    }
+
+    .bw-start-hero {
+      aspect-ratio: 16 / 10;
+      background: #F7F1DC;
+      border: 2px solid var(--ink);
+      border-radius: 16px;
+      box-shadow: 4px 4px 0 var(--ink);
+      margin: 0;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .bw-start-hero img {
+      display: block;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      width: 100%;
+    }
+
+    .bw-start-copy {
+      display: grid;
+      gap: 10px;
+    }
+
+    .bw-start-kicker {
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: 0.12em;
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    .bw-start-title {
+      color: var(--red);
+      font-size: clamp(30px, 7vw, 44px);
+      font-weight: 950;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      margin: 0;
+    }
+
+    .bw-start-lead {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 750;
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    .bw-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .bw-primary,
+    .bw-secondary {
+      border: 2px solid var(--ink);
+      border-radius: 10px;
+      box-shadow: 5px 5px 0 var(--ink);
+      cursor: pointer;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 48px;
+      padding: 13px 18px;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 13px;
+      font-weight: 950;
+      letter-spacing: 0.02em;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .bw-primary {
+      background: var(--yellow);
+      color: var(--ink);
+    }
+
+    .bw-secondary {
+      background: var(--white);
+      color: var(--ink);
+    }
+
+    .bw-primary:hover,
+    .bw-secondary:hover {
+      box-shadow: 3px 3px 0 var(--ink);
+      transform: translate(2px, 2px);
+    }
+
+    .bw-primary:disabled,
+    .bw-secondary:disabled {
+      cursor: not-allowed;
+      opacity: 0.58;
+      transform: none;
+    }
+
+    .bw-game-screen {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      gap: 18px;
+    }
+
+    .bw-meters {
+      display: grid;
+      gap: 12px;
+    }
+
+    .bw-meter {
+      background: rgba(255, 255, 255, 0.72);
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      box-shadow: 3px 3px 0 var(--ink);
+      display: grid;
+      gap: 6px;
+      padding: 10px;
+    }
+
+    .bw-meter-label {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .bw-meter-copy {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.3;
+      margin: 0;
+    }
+
+    .bw-meter-track {
+      background: rgba(16, 46, 56, 0.14);
+      border-radius: 999px;
+      height: 12px;
+      overflow: hidden;
+    }
+
+    .bw-meter-fill {
+      background: linear-gradient(90deg, var(--lime), var(--yellow));
+      border-radius: 999px;
+      height: 100%;
+      transition: width 0.3s ease;
+    }
+
+    .bw-scene-card {
+      background: var(--white);
+      border: 2px solid var(--ink);
+      border-radius: 18px;
+      box-shadow: 6px 6px 0 var(--ink);
+      display: grid;
+      gap: 12px;
+      min-height: 0;
+      overflow: hidden;
+      padding: clamp(18px, 4vw, 26px);
+    }
+
+    .bw-scene-visual {
+      aspect-ratio: 16 / 10;
+      background: #F7F1DC;
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      box-shadow: 4px 4px 0 rgba(16, 46, 56, 0.95);
+      margin: 0 0 2px;
+      overflow: hidden;
+      pointer-events: none;
+      position: relative;
+      width: 100%;
+    }
+
+    .bw-scene-visual img {
+      display: block;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      width: 100%;
+    }
+
+    .bw-roundline {
+      align-items: center;
+      color: var(--green);
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: 0.12em;
+    }
+
+    .bw-scene-title {
+      font-size: clamp(24px, 5vw, 36px);
+      font-weight: 950;
+      letter-spacing: -0.03em;
+      line-height: 1.02;
+      margin: 0;
+    }
+
+    .bw-scene-setting {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    .bw-prompt {
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 900;
+      margin: 4px 0 0;
+    }
+
+    .bw-options {
+      display: grid;
+      gap: 10px;
+    }
+
+    .bw-option {
+      background: #FFFDF6;
+      border: 2px solid rgba(16, 46, 56, 0.26);
+      border-radius: 12px;
+      color: var(--ink);
+      cursor: pointer;
+      min-height: 58px;
+      padding: 13px 14px;
+      text-align: left;
+      transition: border-color 0.15s ease, transform 0.15s ease, background 0.15s ease;
+      width: 100%;
+      font-size: 14px;
+      font-weight: 850;
+      line-height: 1.28;
+    }
+
+    .bw-option:hover:not(:disabled) {
+      background: #FFF8BE;
+      border-color: var(--ink);
+      transform: translateX(3px);
+    }
+
+    .bw-option:disabled {
+      cursor: default;
+      opacity: 0.62;
+    }
+
+    .bw-option.is-selected {
+      background: var(--yellow);
+      border-color: var(--ink);
+      opacity: 1;
+    }
+
+    .bw-answer-stack {
+      display: grid;
+      gap: 10px;
+    }
+
+    .bw-selected-answer {
+      background: #FFFDF6;
+      border: 2px solid rgba(16, 46, 56, 0.26);
+      border-radius: 12px;
+      color: var(--ink);
+      font-weight: 850;
+      line-height: 1.28;
+      min-height: 58px;
+      padding: 13px 14px;
+      cursor: default;
+      transform: none !important;
+      text-align: left;
+      width: 100%;
+    }
+
+    .bw-reaction {
+      background: var(--ink);
+      border-radius: 14px;
+      color: var(--cream);
+      display: grid;
+      gap: 8px;
+      padding: 16px;
+    }
+
+    .bw-reaction strong {
+      color: var(--yellow);
+      font-size: 20px;
+      line-height: 1.15;
+    }
+
+    .bw-reaction p {
+      color: rgba(250, 250, 245, 0.84);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    .bw-delta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .bw-pill {
+      background: rgba(255, 230, 0, 0.15);
+      border: 1px solid rgba(255, 230, 0, 0.35);
+      border-radius: 999px;
+      color: var(--yellow);
+      font-size: 11px;
+      font-weight: 950;
+      padding: 6px 8px;
+      text-transform: uppercase;
+    }
+
+    .bw-result-screen {
+      display: grid;
+      gap: 18px;
+      align-content: center;
+    }
+
+    .bw-result-card {
+      background: var(--white);
+      border: 2px solid var(--ink);
+      border-radius: 20px;
+      box-shadow: 7px 7px 0 var(--ink);
+      display: grid;
+      gap: 13px;
+      padding: clamp(22px, 5vw, 32px);
+    }
+
+    .bw-result-visual {
+      aspect-ratio: 16 / 10;
+      background: #F7F1DC;
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      box-shadow: 4px 4px 0 rgba(16, 46, 56, 0.95);
+      margin: 0;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .bw-result-visual img {
+      display: block;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      width: 100%;
+    }
+
+    .bw-result-card h1 {
+      font-size: clamp(36px, 8vw, 64px);
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      margin: 0;
+    }
+
+    .bw-result-tagline {
+      color: var(--red);
+      font-size: clamp(18px, 4vw, 24px);
+      font-weight: 950;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    .bw-result-body,
+    .bw-stat-copy {
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 750;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .bw-copy-panel {
+      background: #FFFDF6;
+      border: 2px dashed rgba(16, 46, 56, 0.36);
+      border-radius: 14px;
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+    }
+
+    .bw-copy-panel label {
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .bw-copy-panel textarea {
+      background: #FFFFFF;
+      border: 1px solid rgba(16, 46, 56, 0.24);
+      border-radius: 10px;
+      color: var(--ink);
+      font: 800 13px/1.45 Montserrat, Arial, sans-serif;
+      min-height: 112px;
+      padding: 10px;
+      resize: vertical;
+      width: 100%;
+    }
+
+    .bw-score-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .bw-score-box {
+      background: #F7F1DC;
+      border: 2px solid rgba(16, 46, 56, 0.18);
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    .bw-score-box span {
+      color: var(--green);
+      display: block;
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: 0.08em;
+      margin-bottom: 3px;
+      text-transform: uppercase;
+    }
+
+    .bw-score-box strong {
+      color: var(--ink);
+      font-size: 28px;
+      font-weight: 950;
+    }
+
+    .bw-toast {
+      background: var(--ink);
+      border: 2px solid var(--yellow);
+      border-radius: 999px;
+      bottom: 18px;
+      box-shadow: 0 10px 24px rgba(16, 46, 56, 0.24);
+      color: var(--yellow);
+      font-size: 12px;
+      font-weight: 950;
+      left: 50%;
+      opacity: 0;
+      padding: 10px 14px;
+      pointer-events: none;
+      position: absolute;
+      text-transform: uppercase;
+      transform: translate(-50%, 12px);
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      z-index: 8;
+      white-space: nowrap;
+    }
+
+    .bw-toast.is-visible {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .bw-error-state {
+      background: var(--white);
+      border: 2px solid var(--red);
+      border-radius: 16px;
+      color: var(--ink);
+      font-weight: 800;
+      line-height: 1.5;
+      margin: 28px;
+      padding: 22px;
+    }
+
+    @media (max-width: 560px) {
+      html,
+      body {
+        height: auto;
+        min-height: 100%;
+        overflow: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .bw-smile-game {
+        border-width: 4px;
+        border-radius: 18px;
+        box-shadow: 6px 6px 0 var(--ink);
+        height: auto;
+        min-height: 100svh;
+        overflow: visible;
+      }
+
+      .bw-screen {
+        flex: 0 0 auto;
+        overflow: visible;
+        padding: 10px;
+      }
+
+      .bw-smile-topbar {
+        font-size: 9px;
+        min-height: 38px;
+        padding: 6px 8px;
+      }
+
+      .bw-sound-toggle {
+        font-size: 9px;
+        min-height: 26px;
+        padding: 5px 8px;
+      }
+
+      .bw-scene-visual {
+        border-radius: 12px;
+        box-shadow: 3px 3px 0 rgba(16, 46, 56, 0.95);
+        justify-self: center;
+        max-height: none;
+        width: min(100%, 286px);
+      }
+
+      .bw-start-hero {
+        border-radius: 12px;
+        aspect-ratio: 16 / 8;
+      }
+
+      .bw-start-screen,
+      .bw-result-screen {
+        min-height: 0;
+      }
+
+      .bw-start-screen {
+        align-content: start;
+        gap: 12px;
+      }
+
+      .bw-start-copy {
+        gap: 7px;
+      }
+
+      .bw-start-title {
+        font-size: 28px;
+      }
+
+      .bw-start-lead {
+        font-size: 12px;
+      }
+
+      .bw-actions {
+        display: grid;
+        gap: 8px;
+        margin-top: 4px;
+      }
+
+      .bw-primary,
+      .bw-secondary {
+        font-size: 11px;
+        min-height: 40px;
+        padding: 10px 12px;
+        width: 100%;
+      }
+
+      .bw-game-screen {
+        gap: 8px;
+      }
+
+      .bw-meters {
+        gap: 7px;
+      }
+
+      .bw-meter {
+        border-radius: 10px;
+        box-shadow: 2px 2px 0 var(--ink);
+        gap: 5px;
+        padding: 7px;
+      }
+
+      .bw-meter-label {
+        font-size: 9px;
+        gap: 6px;
+        letter-spacing: 0.04em;
+      }
+
+      .bw-meter-copy {
+        display: none;
+      }
+
+      .bw-meter-track {
+        height: 8px;
+      }
+
+      .bw-scene-card {
+        border-radius: 14px;
+        box-shadow: 4px 4px 0 var(--ink);
+        gap: 7px;
+        padding: 10px;
+      }
+
+      .bw-scene-card.is-answered .bw-scene-visual {
+        display: none;
+      }
+
+      .bw-roundline {
+        font-size: 8px;
+        gap: 8px;
+        letter-spacing: 0.06em;
+      }
+
+      .bw-scene-title {
+        font-size: 18px;
+        line-height: 1;
+      }
+
+      .bw-scene-setting {
+        display: -webkit-box;
+        font-size: 11px;
+        line-height: 1.25;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+      }
+
+      .bw-prompt {
+        font-size: 12px;
+        margin-top: 0;
+      }
+
+      .bw-options,
+      .bw-answer-stack {
+        gap: 6px;
+      }
+
+      .bw-option {
+        border-radius: 10px;
+        font-size: 12px;
+        line-height: 1.18;
+        min-height: 39px;
+        padding: 8px 9px;
+      }
+
+      .bw-reaction {
+        border-radius: 11px;
+        gap: 6px;
+        padding: 9px;
+      }
+
+      .bw-reaction strong {
+        font-size: 16px;
+        line-height: 1.08;
+      }
+
+      .bw-reaction p {
+        font-size: 11px;
+        line-height: 1.25;
+      }
+
+      .bw-pill {
+        font-size: 9px;
+        padding: 4px 6px;
+      }
+
+      .bw-result-screen {
+        align-content: start;
+      }
+
+      .bw-result-card {
+        border-radius: 14px;
+        box-shadow: 4px 4px 0 var(--ink);
+        gap: 8px;
+        padding: 12px;
+      }
+
+      .bw-result-visual {
+        justify-self: center;
+        max-height: none;
+        width: min(100%, 244px);
+      }
+
+      .bw-result-card h1 {
+        font-size: 28px;
+      }
+
+      .bw-result-tagline {
+        font-size: 14px;
+      }
+
+      .bw-result-body,
+      .bw-stat-copy {
+        font-size: 11px;
+        line-height: 1.3;
+      }
+
+      .bw-score-box {
+        padding: 8px;
+      }
+
+      .bw-score-box strong {
+        font-size: 20px;
+      }
+
+      .bw-score-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .bw-result-card .bw-actions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .bw-result-card .bw-primary,
+      .bw-result-card .bw-secondary {
+        font-size: 9px;
+        line-height: 1.05;
+        min-height: 36px;
+        padding: 8px 6px;
+      }
+
+      html[data-bw-embedded="true"],
+      html[data-bw-embedded="true"] body {
+        height: 100%;
+        min-height: 0;
+        overflow: hidden;
+      }
+
+      html[data-bw-embedded="true"] .bw-smile-game {
+        height: 100%;
+        min-height: 0;
+        overflow: hidden;
+      }
+
+      html[data-bw-embedded="true"] .bw-screen {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow: hidden;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="bw-smile-game" id="app" aria-live="polite">
+    <div class="bw-error-state">Loading the social weather...</div>
+  </main>
+
+  <script>
+    (() => {
+      const BUILD = 'smile-embedded-height-lock-20260708';
+      const DATA_URL = `data.json?v=${BUILD}`;
+      const PROD_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/smile-event';
+      const LOCAL_ENDPOINT = 'http://127.0.0.1:5173/api/smile-event';
+      const app = document.getElementById('app');
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('resize') === 'none' || params.get('attribution') === 'none') {
+        document.documentElement.dataset.bwEmbedded = 'true';
+      }
+      const isLocal = ['localhost', '127.0.0.1', ''].includes(window.location.hostname);
+      const trackingEndpoint = isLocal
+        ? (params.get('tracking') === 'local' ? LOCAL_ENDPOINT : '')
+        : (params.get('tracking') === 'off' ? '' : PROD_ENDPOINT);
+      const sessionId = getSessionId();
+
+      let data = null;
+      let state = {
+        screen: 'start',
+        started: false,
+        scenes: [],
+        roundIndex: 0,
+        smile: 18,
+        selected: null,
+        result: null,
+        stats: null,
+        manualShareText: '',
+        soundOn: localStorage.getItem('bwSmileSound') !== 'off'
+      };
+
+      class AudioManager {
+        constructor() {
+          this.enabled = false;
+          this.muted = !state.soundOn;
+          this.ambience = null;
+          this.voice = null;
+          this.cache = new Map();
+        }
+
+        enable() {
+          this.enabled = true;
+          this.muted = false;
+          state.soundOn = true;
+          localStorage.setItem('bwSmileSound', 'on');
+        }
+
+        setMuted(nextMuted) {
+          this.muted = nextMuted;
+          state.soundOn = !nextMuted;
+          localStorage.setItem('bwSmileSound', nextMuted ? 'off' : 'on');
+          if (this.ambience) this.ambience.volume = nextMuted ? 0 : 0.18;
+          if (this.voice) this.voice.volume = nextMuted ? 0 : 0.9;
+        }
+
+        prepare(src) {
+          if (!src || this.cache.has(src)) return this.cache.get(src);
+          const audio = new Audio(src);
+          audio.preload = 'auto';
+          this.cache.set(src, audio);
+          return audio;
+        }
+
+        preloadScene(scene) {
+          if (!scene) return;
+          this.prepare(scene.ambience && scene.ambience.file);
+          scene.options.forEach((option) => this.prepare(option.voiceFile));
+        }
+
+        async playAmbience(src) {
+          if (!this.enabled || this.muted || !src) return;
+          try {
+            if (this.ambience && this.ambience.src.includes(src)) return;
+            if (this.ambience) {
+              this.ambience.pause();
+              this.ambience.currentTime = 0;
+            }
+            const audio = this.prepare(src);
+            audio.loop = true;
+            audio.volume = 0.18;
+            this.ambience = audio;
+            await audio.play();
+          } catch (error) {
+            if (!error || error.name !== 'AbortError') {
+              console.warn('[Berlin Smile] ambience failed', error);
+            }
+          }
+        }
+
+        async playVoice(src) {
+          if (!this.enabled || this.muted || !src) return;
+          try {
+            if (this.voice) {
+              this.voice.pause();
+              this.voice.currentTime = 0;
+            }
+            if (this.ambience) this.ambience.volume = 0.07;
+            const audio = this.prepare(src);
+            audio.loop = false;
+            audio.volume = 0.9;
+            this.voice = audio;
+            audio.onended = () => {
+              if (this.ambience && !this.muted) this.ambience.volume = 0.18;
+            };
+            await audio.play();
+          } catch (error) {
+            if (this.ambience && !this.muted) this.ambience.volume = 0.18;
+            if (!error || error.name !== 'AbortError') {
+              console.warn('[Berlin Smile] voice failed', error);
+            }
+          }
+        }
+
+        stopAll() {
+          [this.ambience, this.voice].forEach((audio) => {
+            if (!audio) return;
+            audio.pause();
+            audio.currentTime = 0;
+          });
+        }
+      }
+
+      const audio = new AudioManager();
+
+      fetch(DATA_URL)
+        .then((response) => {
+          if (!response.ok) throw new Error(`Data load failed: ${response.status}`);
+          return response.json();
+        })
+        .then((payload) => {
+          data = payload;
+          state.smile = Number(data.initialSmile || 18);
+          render();
+        })
+        .catch((error) => {
+          app.innerHTML = `<div class="bw-error-state">The smile simulator failed to load. ${escapeHtml(error.message)}</div>`;
+          postResize();
+        });
+
+      function getSessionId() {
+        const key = 'bwSmileSessionId';
+        let id = sessionStorage.getItem(key);
+        if (!id) {
+          id = `smile-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+          sessionStorage.setItem(key, id);
+        }
+        return id;
+      }
+
+      function shuffle(items) {
+        const copy = items.slice();
+        for (let i = copy.length - 1; i > 0; i -= 1) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        return copy;
+      }
+
+      function clamp(value) {
+        return Math.max(0, Math.min(100, Math.round(value)));
+      }
+
+      function currentScene() {
+        return state.scenes[state.roundIndex];
+      }
+
+      async function startGame(options = {}) {
+        if (!data) return;
+        const withSound = options.withSound !== false;
+        if (withSound) {
+          audio.enable();
+        } else {
+          audio.enabled = false;
+          audio.setMuted(true);
+        }
+        state = {
+          ...state,
+          screen: 'game',
+          started: true,
+          scenes: shuffle(data.scenes).slice(0, data.roundsPerRun || 7),
+          roundIndex: 0,
+          smile: Number(data.initialSmile || 18),
+          selected: null,
+          result: null,
+          stats: null,
+          manualShareText: ''
+        };
+        audio.preloadScene(currentScene());
+        audio.preloadScene(state.scenes[1]);
+        render();
+        postFocus('game');
+        if (withSound) await audio.playAmbience(currentScene().ambience.file);
+        track('bw_berlin_smile_start', {
+          sound_enabled: String(withSound),
+          round_count: String(state.scenes.length)
+        });
+      }
+
+      function toggleSound() {
+        const nextMuted = state.soundOn;
+        if (!audio.enabled && !nextMuted) audio.enable();
+        audio.setMuted(nextMuted);
+        render();
+        if (state.screen === 'game' && state.soundOn && currentScene()) {
+          audio.playAmbience(currentScene().ambience.file);
+        }
+        track('bw_berlin_smile_sound_toggle', {
+          sound_enabled: String(state.soundOn)
+        });
+      }
+
+      function preserveParentScroll() {
+        window.parent.postMessage({ type: 'bw-smile-preserve-scroll' }, '*');
+      }
+
+      function chooseOption(optionId, sourceNode) {
+        const scene = currentScene();
+        if (!scene || state.selected) return;
+        const option = scene.options.find((item) => item.id === optionId);
+        if (!option) return;
+        if (sourceNode && typeof sourceNode.blur === 'function') sourceNode.blur();
+        preserveParentScroll();
+        state.selected = option;
+        state.smile = clamp(state.smile + Number(option.smile || 0));
+        render();
+        postFocus('answer');
+        audio.playVoice(option.voiceFile);
+        track('bw_berlin_smile_answer', {
+          scene: scene.id,
+          scene_title: scene.kicker,
+          answer: option.id,
+          answer_text: option.text,
+          reply: option.reply,
+          smile: String(state.smile),
+          round_number: String(state.roundIndex + 1),
+          round_count: String(state.scenes.length),
+          sound_enabled: String(state.soundOn)
+        });
+      }
+
+      function nextRound() {
+        preserveParentScroll();
+        if (state.roundIndex >= state.scenes.length - 1) {
+          finishGame('completed');
+          return;
+        }
+        state.roundIndex += 1;
+        state.selected = null;
+        audio.preloadScene(currentScene());
+        audio.preloadScene(state.scenes[state.roundIndex + 1]);
+        render();
+        postFocus('game');
+        audio.playAmbience(currentScene().ambience.file);
+      }
+
+      async function finishGame(reason) {
+        state.screen = 'result';
+        state.result = pickResult(reason);
+        state.selected = null;
+        audio.stopAll();
+        render();
+        postFocus('result');
+        const response = await track('bw_berlin_smile_result', {
+          ending: state.result.id,
+          score: String(state.smile),
+          step_count: String(state.roundIndex + 1),
+          success: String(['corner', 'spaeti'].includes(state.result.id)),
+          sound_enabled: String(state.soundOn),
+          reason
+        }, true);
+        if (response && response.stats) {
+          state.stats = response.stats;
+          render();
+        }
+      }
+
+      function pickResult() {
+        return data.results
+          .slice()
+          .sort((a, b) => b.minSmile - a.minSmile)
+          .find((item) => state.smile >= item.minSmile) || data.results[0];
+      }
+
+      function restart() {
+        audio.stopAll();
+        state.screen = 'start';
+        state.started = false;
+        state.selected = null;
+        state.result = null;
+        state.stats = null;
+        state.manualShareText = '';
+        render();
+        postFocus('start');
+      }
+
+      async function shareResult(method = 'share', triggerNode = null) {
+        if (!state.result) return;
+        const supportsShare = typeof navigator.share === 'function';
+        const canUseNativeShare = supportsShare && (
+          typeof window.matchMedia === 'function' &&
+          (window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(any-pointer: coarse)').matches)
+        );
+        const text = `${state.result.shareLine}\n\nPlay it here: ${data.shareUrl}`;
+        state.manualShareText = '';
+        try {
+          if (method === 'share' && canUseNativeShare) {
+            const file = await resultCardFile().catch(() => null);
+            if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
+              await navigator.share({
+                title: data.title,
+                text,
+                url: data.shareUrl,
+                files: [file]
+              });
+              showToast('Result shared');
+              showButtonFeedback(triggerNode, 'Shared');
+              track('bw_berlin_smile_share', { method: 'native_card', ending: state.result.id, success: 'true' });
+              return;
+            }
+            await navigator.share({
+              title: data.title,
+              text,
+              url: data.shareUrl
+            });
+            showToast('Result shared');
+            showButtonFeedback(triggerNode, 'Shared');
+            track('bw_berlin_smile_share', { method: 'native', ending: state.result.id, success: 'true' });
+            return;
+          }
+          if (method === 'share') {
+            showToast('Link copied');
+            showButtonFeedback(triggerNode, 'Link copied');
+          }
+          const copyMethod = await copyText(text);
+          if (method !== 'share') {
+            showToast('Link copied');
+            showButtonFeedback(triggerNode, 'Link copied');
+          }
+          track('bw_berlin_smile_share', { method: copyMethod, ending: state.result.id, success: 'true' });
+        } catch (error) {
+          state.manualShareText = text;
+          render();
+          requestAnimationFrame(() => {
+            const textarea = app.querySelector('[data-manual-copy]');
+            if (textarea) {
+              textarea.focus();
+              textarea.select();
+            }
+            showToast('Copy text below');
+          });
+          track('bw_berlin_smile_share', { method: canUseNativeShare ? 'fallback' : 'copy', ending: state.result.id, success: 'fallback' });
+        }
+      }
+
+      async function copyText(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+          try {
+            await navigator.clipboard.writeText(text);
+            return 'clipboard';
+          } catch (error) {
+            // Fall through to the legacy selection-based copy path.
+          }
+        }
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'fixed';
+        textarea.style.left = '-9999px';
+        textarea.style.top = '0';
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        textarea.setSelectionRange(0, textarea.value.length);
+        const copied = document.execCommand('copy');
+        document.body.removeChild(textarea);
+        if (!copied) throw new Error('Legacy copy failed');
+        return 'legacy_clipboard';
+      }
+
+      async function downloadCard() {
+        if (!state.result) return;
+        const blob = await resultCardBlob();
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.download = 'berlin-smile-challenge-result.png';
+        link.href = url;
+        link.click();
+        setTimeout(() => URL.revokeObjectURL(url), 1200);
+        showToast('Card downloaded');
+        track('bw_berlin_smile_share', { method: 'download_card', ending: state.result.id, success: 'true' });
+      }
+
+      async function resultCardFile() {
+        const blob = await resultCardBlob();
+        return new File([blob], 'berlin-smile-challenge-result.png', { type: 'image/png' });
+      }
+
+      async function resultCardBlob() {
+        const canvas = await renderResultCardCanvas();
+        return new Promise((resolve, reject) => {
+          canvas.toBlob((blob) => {
+            if (blob) resolve(blob);
+            else reject(new Error('Card rendering failed'));
+          }, 'image/png');
+        });
+      }
+
+      async function renderResultCardCanvas() {
+        const canvas = document.createElement('canvas');
+        canvas.width = 1200;
+        canvas.height = 630;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#FAFAF5';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#FFE600';
+        ctx.fillRect(0, 0, canvas.width, 46);
+        ctx.fillStyle = '#1B5E20';
+        ctx.fillRect(0, canvas.height - 46, canvas.width, 46);
+        ctx.strokeStyle = '#102E38';
+        ctx.lineWidth = 8;
+        ctx.strokeRect(40, 70, canvas.width - 80, canvas.height - 140);
+
+        const imageSrc = resultImageSrc(state.result);
+        if (imageSrc) {
+          try {
+            const image = await loadImage(imageSrc);
+            ctx.save();
+            roundedRect(ctx, 704, 112, 400, 250, 22);
+            ctx.clip();
+            drawCoverImage(ctx, image, 704, 112, 400, 250);
+            ctx.restore();
+            ctx.strokeStyle = '#102E38';
+            ctx.lineWidth = 7;
+            roundedRect(ctx, 704, 112, 400, 250, 22);
+            ctx.stroke();
+            ctx.fillStyle = '#E63946';
+            ctx.fillRect(728, 342, 376, 12);
+          } catch (error) {
+            console.warn('[Berlin Smile] result image failed', error);
+          }
+        }
+
+        ctx.fillStyle = '#102E38';
+        ctx.font = '900 42px Montserrat, Arial';
+        ctx.fillText('BERLINWALK GAME', 80, 130);
+        ctx.fillStyle = '#E63946';
+        ctx.font = '900 66px Montserrat, Arial';
+        wrapText(ctx, state.result.title, 80, 220, 560, 70);
+        ctx.fillStyle = '#102E38';
+        ctx.font = '800 30px Montserrat, Arial';
+        wrapText(ctx, state.result.shareLine, 80, 392, 560, 38);
+        ctx.fillStyle = '#1B5E20';
+        ctx.font = '900 28px Montserrat, Arial';
+        ctx.fillText(`Smile ${state.smile}/100`, 80, 540);
+        ctx.fillStyle = '#FAFAF5';
+        ctx.font = '900 25px Montserrat, Arial';
+        ctx.fillText('berlinwalk.com/games/berlin-smile-challenge', 80, 610);
+        return canvas;
+      }
+
+      function resultImageSrc(result) {
+        return result && result.image ? `${result.image}?v=${BUILD}` : '';
+      }
+
+      function loadImage(src) {
+        return new Promise((resolve, reject) => {
+          const image = new Image();
+          image.onload = () => resolve(image);
+          image.onerror = reject;
+          image.src = src;
+        });
+      }
+
+      function drawCoverImage(ctx, image, x, y, width, height) {
+        const sourceRatio = image.width / image.height;
+        const targetRatio = width / height;
+        let sx = 0;
+        let sy = 0;
+        let sw = image.width;
+        let sh = image.height;
+        if (sourceRatio > targetRatio) {
+          sw = image.height * targetRatio;
+          sx = (image.width - sw) / 2;
+        } else {
+          sh = image.width / targetRatio;
+          sy = (image.height - sh) / 2;
+        }
+        ctx.drawImage(image, sx, sy, sw, sh, x, y, width, height);
+      }
+
+      function roundedRect(ctx, x, y, width, height, radius) {
+        const r = Math.min(radius, width / 2, height / 2);
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.arcTo(x + width, y, x + width, y + height, r);
+        ctx.arcTo(x + width, y + height, x, y + height, r);
+        ctx.arcTo(x, y + height, x, y, r);
+        ctx.arcTo(x, y, x + width, y, r);
+        ctx.closePath();
+      }
+
+      function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+        const words = String(text).split(/\s+/);
+        let line = '';
+        let lineY = y;
+        for (const word of words) {
+          const testLine = line ? `${line} ${word}` : word;
+          if (ctx.measureText(testLine).width > maxWidth && line) {
+            ctx.fillText(line, x, lineY);
+            line = word;
+            lineY += lineHeight;
+          } else {
+            line = testLine;
+          }
+        }
+        if (line) ctx.fillText(line, x, lineY);
+      }
+
+      function bookClick() {
+        track('bw_berlin_smile_booking_click', {
+          action: 'book_tour',
+          ending: state.result ? state.result.id : '',
+          score: String(state.smile)
+        });
+      }
+
+      async function track(eventName, payload = {}, returnStats = false) {
+        if (!trackingEndpoint) return null;
+        const body = {
+          eventName,
+          eventId: `${sessionId}:${eventName}:${Date.now()}:${Math.random().toString(36).slice(2, 6)}`,
+          sessionId,
+          timestamp: new Date().toISOString(),
+          pagePath: window.location.pathname,
+          pageUrl: window.location.href,
+          parentPath: params.get('parent_path') || '',
+          parentUrl: params.get('parent_url') || document.referrer || '',
+          referrer: document.referrer || '',
+          landingPage: sessionStorage.getItem('bwSmileLanding') || window.location.href,
+          firstPage: sessionStorage.getItem('bwSmileFirstPage') || window.location.pathname,
+          utmSource: params.get('utm_source') || '',
+          utmMedium: params.get('utm_medium') || '',
+          utmCampaign: params.get('utm_campaign') || '',
+          utmContent: params.get('utm_content') || '',
+          utmTerm: params.get('utm_term') || '',
+          fbclid: params.get('fbclid') || '',
+          isPaid: params.has('fbclid') || params.get('utm_medium') === 'paid_social',
+          screenWidth: String(window.screen && window.screen.width || ''),
+          viewportWidth: String(window.innerWidth || ''),
+          payload: {
+            context: 'berlin_smile_challenge',
+            ...payload
+          },
+          returnStats
+        };
+        sessionStorage.setItem('bwSmileLanding', body.landingPage);
+        sessionStorage.setItem('bwSmileFirstPage', body.firstPage);
+        try {
+          const response = await fetch(trackingEndpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify(body)
+          });
+          if (response.status === 204) return null;
+          return await response.json().catch(() => null);
+        } catch (error) {
+          console.warn('[Berlin Smile] tracking failed', error);
+          return null;
+        }
+      }
+
+      function render() {
+        if (!data) return;
+        if (state.screen === 'game') renderGame();
+        else if (state.screen === 'result') renderResult();
+        else renderStart();
+        bindEvents();
+        postResize();
+        setTimeout(postResize, 80);
+        setTimeout(postResize, 260);
+        setTimeout(postResize, 520);
+      }
+
+      function topbarHtml() {
+        return `
+          <div class="bw-smile-topbar">
+            <span>BerlinWalk Games</span>
+            <span hidden data-build="${escapeAttr(BUILD)}"></span>
+            <button class="bw-sound-toggle" type="button" data-action="sound">${state.soundOn ? 'Sound on' : 'Sound off'}</button>
+          </div>
+        `;
+      }
+
+      function renderStart() {
+        app.innerHTML = `
+          ${topbarHtml()}
+          <section class="bw-screen bw-start-screen">
+            <figure class="bw-start-hero" aria-hidden="true">
+              <img src="assets/hero/berlin-smile-challenge-hero.webp?v=${escapeAttr(BUILD)}" alt="" loading="eager" decoding="async">
+            </figure>
+            <div class="bw-start-copy">
+              <p class="bw-start-kicker">Berlin social weather</p>
+              <h1 class="bw-start-title">Make the almost-smile happen.</h1>
+              <p class="bw-start-lead">Pick your words and see if the face softens.</p>
+            </div>
+            <div class="bw-actions">
+              <button class="bw-primary" type="button" data-action="start">${escapeHtml(data.startLabel || 'Start with sound')}</button>
+              <button class="bw-secondary" type="button" data-action="quiet-start">Start quietly</button>
+            </div>
+          </section>
+          <div class="bw-toast" data-toast></div>
+        `;
+      }
+
+      async function quietStart() {
+        state.soundOn = false;
+        await startGame({ withSound: false });
+      }
+
+      function renderGame() {
+        const scene = currentScene();
+        const selected = state.selected;
+        app.innerHTML = `
+          ${topbarHtml()}
+          <section class="bw-screen bw-game-screen">
+            <div class="bw-meters" aria-label="Game meters">
+              ${meterHtml('Smile', state.smile, '', 'How close you are to a visible almost-smile.')}
+            </div>
+            <article class="bw-scene-card ${selected ? 'is-answered' : ''}">
+              ${sceneVisualHtml(scene)}
+              <div class="bw-roundline">
+                <span>${escapeHtml(scene.kicker)}</span>
+                <span>Scene ${state.roundIndex + 1} / ${state.scenes.length}</span>
+              </div>
+              <h2 class="bw-scene-title">${escapeHtml(scene.title)}</h2>
+              <p class="bw-scene-setting">${escapeHtml(scene.setting)}</p>
+              <p class="bw-prompt">${escapeHtml(scene.prompt)}</p>
+              ${selected ? selectedAnswerHtml(selected) : optionsHtml(scene)}
+            </article>
+          </section>
+          <div class="bw-toast" data-toast></div>
+        `;
+      }
+
+      function optionsHtml(scene) {
+        return `
+          <div class="bw-options">
+            ${scene.options.map((option) => `
+              <button class="bw-option" type="button" data-option="${escapeAttr(option.id)}">
+                ${escapeHtml(option.text)}
+              </button>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      function selectedAnswerHtml(option) {
+        return `
+          <div class="bw-answer-stack">
+            <div class="bw-selected-answer">${escapeHtml(option.text)}</div>
+            ${reactionHtml(option)}
+          </div>
+        `;
+      }
+
+      function sceneVisualHtml(scene) {
+        if (!scene || !scene.image) return '';
+        return `
+          <figure class="bw-scene-visual" aria-hidden="true">
+            <img src="${escapeAttr(scene.image)}?v=${escapeAttr(BUILD)}" alt="" loading="eager" decoding="async">
+          </figure>
+        `;
+      }
+
+      function meterHtml(label, value, className, helpText) {
+        return `
+          <div class="bw-meter">
+            <div class="bw-meter-label"><span>${escapeHtml(label)}</span><strong>${value}/100</strong></div>
+            <p class="bw-meter-copy">${escapeHtml(helpText)}</p>
+            <div class="bw-meter-track"><div class="bw-meter-fill ${className}" style="width:${value}%"></div></div>
+          </div>
+        `;
+      }
+
+      function reactionHtml(option) {
+        const nextLabel = state.roundIndex >= state.scenes.length - 1 ? 'See result' : 'Next encounter';
+        const smileDelta = Number(option.smile || 0);
+        return `
+          <div class="bw-reaction">
+            <strong>${escapeHtml(option.reply)}</strong>
+            <p>${escapeHtml(option.feedback)}</p>
+            <div class="bw-delta">
+              <span class="bw-pill">Smile ${smileDelta >= 0 ? '+' : ''}${smileDelta}</span>
+            </div>
+            <button class="bw-primary" type="button" data-action="next">${nextLabel}</button>
+          </div>
+        `;
+      }
+
+      function renderResult() {
+        const result = state.result;
+        const statText = statsText();
+        app.innerHTML = `
+          ${topbarHtml()}
+          <section class="bw-screen bw-result-screen">
+            <article class="bw-result-card">
+              <div class="bw-badge">Result</div>
+              ${resultVisualHtml(result)}
+              <h1>${escapeHtml(result.title)}</h1>
+              <p class="bw-result-tagline">${escapeHtml(result.tagline)}</p>
+              <p class="bw-result-body">${escapeHtml(result.body)}</p>
+              <div class="bw-score-grid">
+                <div class="bw-score-box"><span>Smile</span><strong>${state.smile}/100</strong></div>
+              </div>
+              <p class="bw-stat-copy">${escapeHtml(statText)}</p>
+              ${manualCopyHtml()}
+              <div class="bw-actions">
+                <button class="bw-primary" type="button" data-action="share">Share result</button>
+                <button class="bw-secondary" type="button" data-action="download">Download card</button>
+                <button class="bw-secondary" type="button" data-action="restart">Try again</button>
+                <a class="bw-primary" href="${escapeAttr(data.bookingUrl)}" target="_top" rel="noopener" data-action="book">Book the walking tour</a>
+              </div>
+            </article>
+          </section>
+          <div class="bw-toast" data-toast></div>
+        `;
+      }
+
+      function resultVisualHtml(result) {
+        const image = resultImageSrc(result);
+        if (!image) return '';
+        return `
+          <figure class="bw-result-visual" aria-hidden="true">
+            <img src="${escapeAttr(image)}" alt="" loading="eager" decoding="async">
+          </figure>
+        `;
+      }
+
+      function manualCopyHtml() {
+        if (!state.manualShareText) return '';
+        return `
+          <div class="bw-copy-panel">
+            <label for="bw-manual-copy">Copy result manually</label>
+            <textarea id="bw-manual-copy" data-manual-copy readonly>${escapeHtml(state.manualShareText)}</textarea>
+          </div>
+        `;
+      }
+
+      function statsText() {
+        if (!state.stats) return 'Live Berlin smile stats are loading.';
+        const total = Number(state.stats.total || 0);
+        if (!total) return 'You are the first recorded smile attempt today. Historic pressure.';
+        const successes = Number(state.stats.successes || 0);
+        const rate = Number(state.stats.smileRate || 0).toFixed(1);
+        return `Today: ${successes} successful almost-smiles out of ${total}. Berlin smiled in ${rate}% of attempts.`;
+      }
+
+      function bindEvents() {
+        app.querySelectorAll('[data-option]').forEach((button) => {
+          button.addEventListener('click', (event) => {
+            event.preventDefault();
+            chooseOption(button.dataset.option, button);
+          });
+        });
+        app.querySelectorAll('[data-action]').forEach((node) => {
+          const action = node.dataset.action;
+          if (action === 'sound') node.addEventListener('click', toggleSound);
+          if (action === 'start') node.addEventListener('click', () => startGame());
+          if (action === 'quiet-start') node.addEventListener('click', quietStart);
+          if (action === 'next') node.addEventListener('click', nextRound);
+          if (action === 'share') node.addEventListener('click', () => shareResult('share', node));
+          if (action === 'download') node.addEventListener('click', downloadCard);
+          if (action === 'restart') node.addEventListener('click', restart);
+          if (action === 'book') node.addEventListener('click', bookClick);
+        });
+      }
+
+      function showToast(message) {
+        const toast = app.querySelector('[data-toast]');
+        if (!toast) return;
+        toast.textContent = message;
+        toast.classList.add('is-visible');
+        window.clearTimeout(showToast._timer);
+        showToast._timer = window.setTimeout(() => toast.classList.remove('is-visible'), 1700);
+      }
+
+      function showButtonFeedback(button, message) {
+        const target = button || app.querySelector('[data-action="share"]');
+        if (!target) return;
+        const original = target.dataset.originalLabel || target.textContent;
+        target.dataset.originalLabel = original;
+        target.textContent = message;
+        window.clearTimeout(target._bwFeedbackTimer);
+        target._bwFeedbackTimer = window.setTimeout(() => {
+          target.textContent = target.dataset.originalLabel || original;
+        }, 1700);
+      }
+
+      function postResize() {
+        if (params.get('resize') === 'none' || params.get('autoresize') === 'none') return;
+        const appRect = app.getBoundingClientRect();
+        const gameNode = app.querySelector('.bw-screen');
+        const gameRect = gameNode ? gameNode.getBoundingClientRect() : null;
+        const height = Math.ceil(Math.max(
+          app.scrollHeight || 0,
+          appRect.height || 0,
+          gameRect ? gameRect.bottom - appRect.top : 0
+        ));
+        window.parent.postMessage({ type: 'bw-resize', height }, '*');
+      }
+
+      function postFocus() {
+        requestAnimationFrame(() => {
+          postResize();
+          setTimeout(postResize, 120);
+          setTimeout(postResize, 360);
+        });
+      }
+
+      if ('ResizeObserver' in window) {
+        new ResizeObserver(postResize).observe(app);
+      }
+      window.addEventListener('load', postResize);
+      window.addEventListener('resize', postResize);
+
+      function escapeHtml(value) {
+        return String(value == null ? '' : value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      function escapeAttr(value) {
+        return escapeHtml(value);
+      }
+    })();
+  </script>
+</body>
+</html>

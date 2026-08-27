@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>One Day in Berlin: a realistic time-budget planner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
+    --yellow:#FFE600; --ink:#1c2a1c; --panel:#ffffff; --bone:#f4f9ec;
+    --line:#e3edd6; --stone:#6d7b66; --shadow:0 10px 30px rgba(18,61,24,.14);
+    --cut:#b23b2e;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .od{max-width:940px;margin:0 auto;padding:4px}
+  .card{background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+
+  .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:18px 22px 16px}
+  .kick{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:700;margin:0 0 6px;font-family:"IBM Plex Mono",monospace}
+  .head h1{margin:0;font-size:21px;font-weight:800;line-height:1.2}
+  .head p{margin:8px 0 0;font-size:13.5px;color:#e7f3e2;max-width:700px}
+
+  /* controls */
+  .ctrl{background:var(--bone);border-bottom:1px solid var(--line);padding:15px 16px 14px}
+  .cap{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);font-weight:700;margin:0 0 8px;font-family:"IBM Plex Mono",monospace}
+  .hoursrow{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
+  .hoursrow .hv{font-size:26px;font-weight:800;color:var(--green-deep);font-family:"IBM Plex Mono",monospace;line-height:1}
+  .hoursrow .hl{font-size:12.5px;color:var(--stone);font-weight:700}
+  input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:8px;border-radius:999px;background:linear-gradient(90deg,var(--lime),var(--green));outline:none;margin:8px 0 3px}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;border:3px solid var(--green);box-shadow:0 2px 7px rgba(18,61,24,.32);cursor:pointer}
+  input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:#fff;border:3px solid var(--green);box-shadow:0 2px 7px rgba(18,61,24,.32);cursor:pointer}
+  .ticks{display:flex;justify-content:space-between;font-size:10px;color:var(--stone);font-family:"IBM Plex Mono",monospace;font-weight:600;margin-bottom:14px}
+
+  .subrow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:560px){.subrow{grid-template-columns:1fr;gap:12px}}
+  .chips{display:flex;flex-wrap:wrap;gap:7px}
+  .chip{border:1.5px solid var(--line);background:#fff;color:var(--green-deep);border-radius:999px;padding:7px 12px;font:inherit;font-size:12px;font-weight:700;cursor:pointer;transition:.16s}
+  .chip:hover{border-color:var(--lime)}
+  .chip[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+
+  /* verdict meter */
+  .meter{padding:14px 16px 4px}
+  .mbar{position:relative;height:16px;border-radius:999px;background:#eef4e4;border:1px solid var(--line);overflow:hidden}
+  .mfill{position:absolute;left:0;top:0;bottom:0;border-radius:999px;background:linear-gradient(90deg,var(--lime),var(--green));transition:width .35s ease,background .35s ease}
+  .mfill.over{background:linear-gradient(90deg,#e8a13a,var(--cut))}
+  .mline{display:flex;align-items:center;gap:8px;margin-top:9px;font-size:13px;font-weight:700}
+  .mdot{width:11px;height:11px;border-radius:50%;background:var(--green);flex-shrink:0}
+  .mdot.warn{background:var(--cut)}
+  .mnote{font-weight:600;color:var(--stone);font-size:12px}
+
+  /* schedule */
+  .sched{padding:6px 16px 4px}
+  .row{display:grid;grid-template-columns:64px 1fr;gap:12px;position:relative}
+  .time{font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:700;color:var(--green-deep);padding-top:13px;text-align:right}
+  .stopwrap{border-left:2px solid var(--line);padding:0 0 14px 16px;position:relative}
+  .row:last-child .stopwrap{border-left-color:transparent}
+  .stopwrap::before{content:"";position:absolute;left:-7px;top:14px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--lime)}
+  .stopwrap.key::before{border-color:var(--green);background:var(--yellow)}
+  .stop{background:#fbfdf6;border:1px solid var(--line);border-radius:13px;padding:11px 13px}
+  .stop h3{margin:0;font-size:14.5px;font-weight:800;color:var(--green-deep);line-height:1.25}
+  .stop .dur{display:inline-block;margin-left:7px;font-size:10.5px;font-family:"IBM Plex Mono",monospace;color:var(--stone);font-weight:700;vertical-align:middle}
+  .stop p{margin:5px 0 0;font-size:12.6px;color:#3c4a37;line-height:1.5}
+  .badge{display:inline-block;margin-top:8px;background:var(--yellow);color:#123D18;font-size:10px;font-weight:800;letter-spacing:.02em;padding:3px 8px;border-radius:999px;font-family:"IBM Plex Mono",monospace}
+  .badge.book{background:#fff2b0}
+
+  /* cut list */
+  .cutbox{margin:6px 16px 2px;background:#fdf3f1;border:1px solid #f2d6d0;border-radius:13px;padding:12px 14px}
+  .cutbox .cap{color:var(--cut)}
+  .cutbox ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px}
+  .cutbox li{font-size:12.5px;color:#7a3129;font-weight:600;display:flex;gap:8px;align-items:flex-start}
+  .cutbox li::before{content:"–";color:var(--cut);font-weight:800;flex-shrink:0}
+  .cutbox.hide{display:none}
+
+  .foot{padding:12px 16px 16px;color:var(--stone);font-size:11.5px;line-height:1.5;border-top:1px solid var(--line);margin-top:6px}
+  .foot b{color:var(--green-deep)}
+</style>
+</head>
+<body>
+<div class="od">
+  <div class="card">
+    <div class="head">
+      <p class="kick">BERLINWALK.COM • ONE DAY IN BERLIN</p>
+      <h1>How much Berlin fits in your day?</h1>
+      <p>Set the hours you actually have and the kind of day you want. This builds an honest, clock-timed plan on the central historic spine, and tells you straight what will not fit.</p>
+    </div>
+
+    <div class="ctrl">
+      <p class="cap">Hours you have in the city</p>
+      <div class="hoursrow"><span class="hv" id="hv">8h</span><span class="hl" id="hlabel">a full, unrushed day</span></div>
+      <input type="range" id="hours" min="3" max="11" step="1" value="8" aria-label="Hours available in Berlin" />
+      <div class="ticks"><span>3h</span><span>5h</span><span>7h</span><span>9h</span><span>11h</span></div>
+
+      <div class="subrow">
+        <div>
+          <p class="cap">Start your day at</p>
+          <div class="chips" id="starts">
+            <button class="chip" data-start="480" role="button" aria-pressed="false">8:00</button>
+            <button class="chip" data-start="540" role="button" aria-pressed="true">9:00</button>
+            <button class="chip" data-start="600" role="button" aria-pressed="false">10:00</button>
+            <button class="chip" data-start="660" role="button" aria-pressed="false">11:00</button>
+          </div>
+        </div>
+        <div>
+          <p class="cap">The day you want</p>
+          <div class="chips" id="focus">
+            <button class="chip" data-focus="classic" role="button" aria-pressed="true">Classic highlights</button>
+            <button class="chip" data-focus="history" role="button" aria-pressed="false">History &amp; museums</button>
+            <button class="chip" data-focus="wall" role="button" aria-pressed="false">Wall &amp; Cold War</button>
+            <button class="chip" data-focus="easy" role="button" aria-pressed="false">Easy pace</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="meter">
+      <div class="mbar"><div class="mfill" id="mfill" style="width:60%"></div></div>
+      <div class="mline"><span class="mdot" id="mdot"></span><span id="mverdict">Comfortable day</span></div>
+      <div class="mnote" id="mnote"></div>
+    </div>
+
+    <div class="sched" id="sched"></div>
+
+    <div class="cutbox hide" id="cutbox">
+      <p class="cap">Not today — these need more time</p>
+      <ul id="cutlist"></ul>
+    </div>
+
+    <div class="foot">
+      <b>How to read this:</b> the plan keeps the essentials and adds depth stops only while your hours allow, with a short buffer for walking, coffee and getting lost. Times are a guide, not a timetable. The Reichstag dome is free but must be booked in advance with ID, and Berlin museums close on Mondays.
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // Fixed spine essentials, always included (minutes).
+  var ESSENTIALS = [
+    { key:true, name:'Alexanderplatz & the TV Tower', dur:30, why:'Start at the easiest hub in the city, under the TV Tower and the World Clock. A quick coffee, then walk west.' },
+    { name:'Walk Unter den Linden', dur:55, why:'The grand boulevard past Museum Island, Bebelplatz and the old royal core. This walk is the backbone of the whole day.' },
+    { key:true, name:'Brandenburg Gate & Reichstag', dur:30, why:'The two images most people came for, five minutes apart. Stand under the gate, then walk up to the glass-domed parliament.' }
+  ];
+  var LUNCH = { name:'Lunch, one street back', dur:45, why:'Eat a block away from the landmarks, not right on the tourist square. Refuel before the afternoon.' };
+  var SUNSET = { name:'Slow finish by the Spree', dur:45, why:'Berlin light lasts late in summer. End by the water near Museum Island instead of chasing one more sight.' };
+
+  // Optional depth blocks per focus, in priority order (added while time allows).
+  var DEPTH = {
+    classic: [
+      { name:'Reichstag dome', dur:45, book:true, why:'The free glass-dome view over the government district. Book online in advance with your passport or ID.' },
+      { name:'One Museum Island museum', dur:90, why:'Four of the five are open; the Neues Museum with Nefertiti is the highlight. One museum is plenty for a day.' },
+      { name:'Holocaust Memorial', dur:40, why:'The field of stelae by the gate, with a free, quietly powerful information centre beneath it.' }
+    ],
+    history: [
+      { name:'One Museum Island museum', dur:110, why:'Go deeper: the Neues Museum or the Pergamon Panorama. The Pergamon main building is closed until 2027.' },
+      { name:'Reichstag dome', dur:45, book:true, why:'The free view into the German parliament. Advance ID registration required, so book before you fly.' },
+      { name:'Topography of Terror', dur:55, why:'Free outdoor and indoor documentation on the site of the former SS headquarters, by a surviving Wall stretch.' },
+      { name:'Holocaust Memorial', dur:35, why:'The stelae field and free information centre, right by the Brandenburg Gate.' }
+    ],
+    wall: [
+      { name:'East Side Gallery', dur:70, why:'A short S-Bahn ride east to the longest surviving painted stretch of the Berlin Wall, along the Spree.' },
+      { name:'Checkpoint Charlie & Topography of Terror', dur:60, why:'The famous Cold War crossing, then the free documentation centre on a preserved Wall segment nearby.' },
+      { name:'Berlin Wall Memorial, Bernauer Strasse', dur:60, why:'The most honest Wall site: a preserved death strip, watchtower and free documentation centre.' }
+    ],
+    easy: [
+      { name:'Long lunch and a sit-down', dur:60, why:'Take a real break. A proper lunch and a coffee, no rushing to the next thing.' },
+      { name:'A Spree boat trip', dur:75, why:'See the centre from the water instead of on foot. A relaxed hour past Museum Island and the government district.' },
+      { name:'One easy museum or the Berliner Dom', dur:70, why:'Pick a single indoor stop at your own pace rather than a museum marathon.' }
+    ]
+  };
+
+  var LABELS = { 3:'a quick layover slice', 4:'a tight half day', 5:'a short but real day', 6:'half a day, done well', 7:'a solid day', 8:'a full, unrushed day', 9:'a long full day', 10:'a very full day', 11:'dawn-to-dusk' };
+
+  var state = { hours:8, start:540, focus:'classic' };
+
+  function fmt(mins){
+    var h = Math.floor(mins/60), m = mins%60;
+    return h + ':' + (m<10?'0':'') + m;
+  }
+
+  function build(){
+    var budget = state.hours*60;
+    // buffer for walking between stops, queues and getting lost: ~9 min per potential stop
+    var buffer = Math.round(state.hours*7 + 10);
+    var usable = budget - buffer;
+
+    var plan = [];
+    var used = 0;
+    // essentials first
+    ESSENTIALS.forEach(function(b){ plan.push(b); used += b.dur; });
+    // lunch if half a day or more
+    if(state.hours >= 5){ plan.push(LUNCH); used += LUNCH.dur; }
+
+    var cut = [];
+    var depth = DEPTH[state.focus];
+    depth.forEach(function(b){
+      if(used + b.dur <= usable){ plan.push(b); used += b.dur; }
+      else { cut.push(b); }
+    });
+    // sunset if any room and at least a short day
+    var sunsetIn = false;
+    if(state.hours >= 5 && used + SUNSET.dur <= usable + 20){ plan.push(SUNSET); used += SUNSET.dur; sunsetIn = true; }
+
+    return { plan:plan, cut:cut, used:used, budget:budget, buffer:buffer, usable:usable, sunsetIn:sunsetIn };
+  }
+
+  function render(){
+    var r = build();
+
+    // schedule
+    var t = state.start;
+    var html = '';
+    r.plan.forEach(function(b){
+      var keyCls = b.key ? ' key' : '';
+      html += '<div class="row">'
+        + '<div class="time">'+fmt(t)+'</div>'
+        + '<div class="stopwrap'+keyCls+'">'
+        + '<div class="stop"><h3>'+b.name+'<span class="dur">'+b.dur+' min</span></h3>'
+        + '<p>'+b.why+'</p>'
+        + (b.book ? '<span class="badge book">Book ahead with ID</span>' : '')
+        + '</div></div></div>';
+      t += b.dur;
+    });
+    document.getElementById('sched').innerHTML = html;
+
+    // cut list
+    var cb = document.getElementById('cutbox');
+    if(r.cut.length){
+      cb.classList.remove('hide');
+      document.getElementById('cutlist').innerHTML = r.cut.map(function(b){
+        return '<li>'+b.name+' — save it for a second day</li>';
+      }).join('');
+    } else {
+      cb.classList.add('hide');
+      document.getElementById('cutlist').innerHTML = '';
+    }
+
+    // meter: fraction of the day genuinely committed vs available
+    var frac = r.used / r.budget;
+    var pct = Math.min(100, Math.round(frac*100));
+    var mfill = document.getElementById('mfill');
+    var mdot = document.getElementById('mdot');
+    mfill.style.width = pct + '%';
+
+    var verdict, note, warn = false;
+    if(r.cut.length >= 2){
+      verdict = 'Short day — trimmed hard';
+      note = 'Your hours are tight for this focus, so several bigger stops are cut below. The plan here is the honest short version: do it well and leave the rest for another trip.';
+      warn = true;
+    } else if(frac <= 0.74){
+      verdict = 'Comfortable day';
+      note = r.cut.length
+        ? 'A relaxed pace with room to wander. One bigger stop is left out below because your day is short.'
+        : 'Plenty of slack for photos, a longer lunch and just wandering. This is the pace I recommend.';
+    } else if(frac <= 0.9){
+      verdict = 'Full but doable';
+      note = r.cut.length
+        ? 'A proper full day. One bigger stop is left out below, which is the honest trade-off for your hours.'
+        : 'A proper full day with little idle time. Fine if you keep moving and do not add extra stops.';
+    } else {
+      verdict = 'Full — keep moving';
+      note = 'This uses almost all your time. It works if the day runs smoothly, but one long queue or late train eats a stop. Do not add anything.';
+      warn = true;
+    }
+    if(warn){ mfill.classList.add('over'); mdot.classList.add('warn'); }
+    else { mfill.classList.remove('over'); mdot.classList.remove('warn'); }
+    document.getElementById('mverdict').textContent = verdict;
+    document.getElementById('mnote').textContent = note;
+
+    // header readouts
+    document.getElementById('hv').textContent = state.hours + 'h';
+    document.getElementById('hlabel').textContent = LABELS[state.hours] || '';
+  }
+
+  // wire controls
+  var hours = document.getElementById('hours');
+  hours.addEventListener('input', function(){ state.hours = parseInt(hours.value,10); render(); });
+
+  function wireChips(id, prop, cast){
+    var box = document.getElementById(id);
+    box.addEventListener('click', function(e){
+      var btn = e.target.closest('.chip'); if(!btn) return;
+      Array.prototype.forEach.call(box.querySelectorAll('.chip'), function(c){ c.setAttribute('aria-pressed', c===btn ? 'true':'false'); });
+      state[prop] = cast(btn.dataset[prop === 'start' ? 'start' : 'focus']);
+      render();
+    });
+  }
+  wireChips('starts','start', function(v){ return parseInt(v,10); });
+  wireChips('focus','focus', function(v){ return v; });
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

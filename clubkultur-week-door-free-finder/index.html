@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tag der Clubkultur: Format Filter</title>
+  <link rel="icon" href="data:," />
+  <meta name="description" content="Use three preferences to make a short, format-only reading list for Tag der Clubkultur 2026. It does not recommend venues or predict admission." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Merriweather:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/brand.css" />
+  <style>
+    :root {
+      --green: #1B5E20;
+      --green-deep: #123D18;
+      --lime: #7CB342;
+      --yellow: #FFE600;
+      --cream: #FAFAF5;
+      --paper: #FFFFFF;
+      --ink: #212121;
+      --muted: #50604F;
+      --line: #D9E5D2;
+      --discard: #7B3127;
+      --discard-bg: #FFF6F2;
+      --shadow: 0 14px 32px rgba(18, 61, 24, .11);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { background: transparent; color: var(--ink); font-family: Montserrat, Arial, sans-serif; line-height: 1.48; }
+    button, a { font: inherit; }
+    button:focus-visible, a:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+    [hidden] { display: none !important; }
+    .club-tool { max-width: 760px; margin: 0 auto; padding: 6px; }
+    .shell { overflow: hidden; border: 1px solid var(--line); border-radius: 20px; background: var(--cream); box-shadow: var(--shadow); }
+    .masthead { padding: 20px 20px 18px; background: var(--green); color: #fff; }
+    .eyebrow { margin: 0 0 7px; color: var(--yellow); font-size: 11px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+    h1 { margin: 0; max-width: 610px; font-family: Merriweather, Georgia, serif; font-size: clamp(22px, 5.4vw, 31px); line-height: 1.16; }
+    .masthead p { margin: 10px 0 0; max-width: 650px; color: #E2F0DD; font-size: 13px; }
+    .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 15px; }
+    .fact { min-width: 0; padding: 9px 10px; border: 1px solid rgba(255, 255, 255, .23); border-radius: 10px; background: rgba(0, 0, 0, .09); }
+    .fact b { display: block; color: var(--yellow); font-size: 13px; line-height: 1.15; }
+    .fact span { display: block; margin-top: 2px; color: #EFF7EC; font-size: 10.5px; font-weight: 700; line-height: 1.3; }
+    .main { padding: 18px; }
+    .intro { margin: 0 0 17px; color: var(--muted); font-size: 13px; }
+    .intro strong { color: var(--green-deep); }
+    fieldset { min-width: 0; margin: 0 0 13px; padding: 0; border: 0; }
+    legend { margin-bottom: 7px; color: var(--green-deep); font-size: 13px; font-weight: 800; }
+    .choice-row { display: flex; flex-wrap: wrap; gap: 7px; }
+    .choice {
+      flex: 1 1 138px; min-height: 43px; padding: 9px 10px; cursor: pointer;
+      border: 1.5px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--green-deep);
+      font-size: 12px; font-weight: 800; text-align: left; transition: transform .16s ease, border-color .16s ease, background .16s ease;
+    }
+    .choice:hover { border-color: var(--lime); transform: translateY(-1px); }
+    .choice[aria-pressed="true"] { border-color: var(--green); background: #EAF4E4; box-shadow: inset 0 0 0 1px var(--green); }
+    .choice small { display: block; margin-top: 1px; color: var(--muted); font-size: 10px; font-weight: 700; line-height: 1.3; }
+    .actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 17px; }
+    .deal { min-height: 45px; padding: 11px 15px; cursor: pointer; border: 0; border-radius: 10px; background: var(--yellow); color: var(--green-deep); font-size: 13px; font-weight: 800; }
+    .deal:hover { background: #F2D900; }
+    .deal:disabled { cursor: not-allowed; opacity: .54; }
+    .reset { padding: 8px 2px; cursor: pointer; border: 0; background: transparent; color: var(--green); font-size: 12px; font-weight: 800; text-decoration: underline; }
+    .status { margin: 0; color: var(--muted); font-size: 11px; font-weight: 700; text-align: right; }
+    .results { margin-top: 20px; padding-top: 17px; border-top: 1px dashed #BCD2B4; }
+    .result-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+    h3 { margin: 0; color: var(--green-deep); font-size: 16px; line-height: 1.2; }
+    .count { color: var(--muted); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+    .deck-note { margin: 6px 0 12px; color: var(--muted); font-size: 11.5px; }
+    .kept-stack { display: grid; gap: 9px; }
+    .format-card { position: relative; overflow: hidden; min-height: 76px; padding: 14px 15px 13px 17px; border: 1px solid var(--line); border-left: 6px solid var(--lime); border-radius: 13px; background: var(--paper); box-shadow: 0 5px 13px rgba(18, 61, 24, .06); }
+    .format-card::after { content: attr(data-label); position: absolute; top: 11px; right: 12px; color: #49733C; font-size: 10px; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
+    .format-card[data-label="compromise"] { border-left-color: #D4A819; background: #FFFDF0; }
+    .format-card[data-label="compromise"]::after { color: #715C00; }
+    .format-card:nth-child(2) { transform: translateX(5px); }
+    .format-card:nth-child(3) { transform: translateX(10px); }
+    .format-name { margin: 0; padding-right: 48px; color: var(--green-deep); font-size: 15px; font-weight: 800; }
+    .format-card p { margin: 4px 0 0; color: var(--muted); font-size: 11.5px; }
+    .discard-heading { margin: 19px 0 8px; color: var(--discard); font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+    .discard-pile { display: grid; gap: 7px; }
+    .discard-card { padding: 10px 12px; border: 1px solid #F0CABE; border-left: 5px solid #B45C4A; border-radius: 9px; background: var(--discard-bg); color: #593129; }
+    .discard-card b { display: block; font-size: 12px; }
+    .discard-card span { display: block; margin-top: 2px; font-size: 10.5px; line-height: 1.4; }
+    .honesty { margin-top: 17px; padding: 12px 13px; border: 1px solid #E3D87C; border-radius: 11px; background: #FFFCE5; color: #3B3A21; font-size: 11.5px; line-height: 1.5; }
+    .honesty b { color: var(--green-deep); }
+    .source { margin: 14px 0 0; color: var(--muted); font-size: 11.5px; line-height: 1.5; }
+    .source a { color: var(--green); font-weight: 800; }
+    @media (max-width: 460px) {
+      .club-tool { padding: 0; }
+      .shell { border-radius: 15px; }
+      .masthead, .main { padding-left: 14px; padding-right: 14px; }
+      .facts { grid-template-columns: 1fr; }
+      .fact { display: flex; align-items: baseline; gap: 6px; }
+      .fact span { margin: 0; }
+      .choice { flex-basis: 100%; }
+      .actions { align-items: flex-start; flex-direction: column; }
+      .status { text-align: left; }
+      .format-card:nth-child(2), .format-card:nth-child(3) { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="club-tool">
+    <section class="shell" aria-labelledby="tool-title">
+      <header class="masthead">
+        <p class="eyebrow">Tag der Clubkultur 2026 · 3–11 October</p>
+        <h1 id="tool-title">Make a format list, not a door gamble.</h1>
+        <p>STAY CORE brings a citywide festival week. This is a preference filter for how you want an evening to feel, not a venue finder or an admission forecast.</p>
+        <div class="facts" aria-label="Confirmed festival facts">
+          <div class="fact"><b>STAY CORE</b><span>2026 festival-week motto</span></div>
+          <div class="fact"><b>100+ events</b><span>across the week</span></div>
+          <div class="fact"><b>32 recipients</b><span>club-culture award</span></div>
+        </div>
+      </header>
+
+      <div class="main">
+        <p class="intro"><strong>Choose the kind of night you can actually enjoy.</strong> The output uses broad format lanes only. It does not say that a named venue is right for you, that a particular event is on, or that anyone will be admitted.</p>
+
+        <form id="filter-form" novalidate>
+          <fieldset>
+            <legend>1. Your energy</legend>
+            <div class="choice-row" data-question="energy">
+              <button class="choice" type="button" data-value="quiet" aria-pressed="false">Keep it gentle<small>talk, exhibition or a short screening</small></button>
+              <button class="choice" type="button" data-value="steady" aria-pressed="false">I have a normal evening<small>one focused thing, then food or a drink</small></button>
+              <button class="choice" type="button" data-value="late" aria-pressed="false">I want the night to build<small>I am happy with a later format</small></button>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>2. Latest finish that works for you</legend>
+            <div class="choice-row" data-question="latest">
+              <button class="choice" type="button" data-value="early" aria-pressed="false">Before 22:00<small>protect tomorrow morning</small></button>
+              <button class="choice" type="button" data-value="midnight" aria-pressed="false">Around midnight<small>one late-enough plan</small></button>
+              <button class="choice" type="button" data-value="late" aria-pressed="false">After midnight is fine<small>no early finish needed</small></button>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>3. How much door uncertainty do you want?</legend>
+            <div class="choice-row" data-question="door">
+              <button class="choice" type="button" data-value="avoid" aria-pressed="false">Avoid it<small>keep this format-led and low-friction</small></button>
+              <button class="choice" type="button" data-value="open" aria-pressed="false">I can weigh it myself<small>do not rule out a club-night format</small></button>
+            </div>
+          </fieldset>
+
+          <div class="actions">
+            <button class="deal" id="deal" type="submit">Deal the format cards</button>
+            <p class="status" id="status" aria-live="polite">Choose all three preferences first.</p>
+            <button class="reset" id="reset" type="button" hidden>Start again</button>
+          </div>
+        </form>
+
+        <section class="results" id="results" aria-live="polite" hidden>
+          <div class="result-top">
+            <h3>Your short format list</h3>
+            <span class="count" id="kept-count"></span>
+          </div>
+          <p class="deck-note">These cards rank your preferences. If your choices conflict, a clearly labelled compromise keeps the list useful. Match all cards against the current official programme before you travel or buy anything.</p>
+          <div class="kept-stack" id="kept-stack"></div>
+          <p class="discard-heading">Visible discard pile</p>
+          <div class="discard-pile" id="discard-pile"></div>
+          <p class="honesty"><b>What this cannot tell you:</b> individual venues, exact start times, ticket terms, queue length, door policy or admission. A card is a format prompt, not a programme listing.</p>
+          <p class="source">Check the <a href="https://tagderclubkultur.berlin/en/" target="_blank" rel="noopener">official Tag der Clubkultur programme and updates</a> for the current event details.</p>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const state = { energy: null, latest: null, door: null };
+      const labels = {
+        energy: { quiet: 'a gentle evening', steady: 'a normal-energy evening', late: 'a later-building night' },
+        latest: { early: 'a finish before 22:00', midnight: 'a finish around midnight', late: 'no early finish' },
+        door: { avoid: 'no door uncertainty', open: 'an optional club-night format' }
+      };
+      const lanes = [
+        { id: 'talk', name: 'Daytime talk or discussion', energy: ['quiet'], latest: 'early', door: false, note: 'A calm format lane for a short, structured visit.' },
+        { id: 'exhibition', name: 'Exhibition or installation', energy: ['quiet', 'steady'], latest: 'early', door: false, note: 'A self-paced format lane when you want to avoid a late commitment.' },
+        { id: 'workshop', name: 'Workshop or participatory session', energy: ['steady'], latest: 'early', door: false, note: 'A focused format lane that asks for active attention.' },
+        { id: 'screening', name: 'Film or screening', energy: ['quiet', 'steady'], latest: 'midnight', door: false, note: 'A sit-down format lane when a fixed start suits you.' },
+        { id: 'concert', name: 'Concert or live set', energy: ['steady', 'late'], latest: 'midnight', door: false, note: 'A music-led format lane without treating any venue as a recommendation.' },
+        { id: 'openair', name: 'Open-air format', energy: ['steady', 'late'], latest: 'midnight', door: false, note: 'A format lane to verify against weather, timing and the current listing.' },
+        { id: 'club', name: 'Club-night format', energy: ['late'], latest: 'late', door: true, note: 'A later format lane only. It says nothing about entry.' }
+      ];
+      const rank = {
+        quiet: ['talk', 'exhibition', 'screening', 'workshop', 'concert', 'openair', 'club'],
+        steady: ['workshop', 'screening', 'concert', 'exhibition', 'openair', 'talk', 'club'],
+        late: ['concert', 'club', 'openair', 'screening', 'workshop', 'exhibition', 'talk']
+      };
+      const latestRank = { early: 1, midnight: 2, late: 3 };
+      const status = document.getElementById('status');
+      const results = document.getElementById('results');
+      const form = document.getElementById('filter-form');
+      const reset = document.getElementById('reset');
+
+      function updateStatus() {
+        const answered = Object.values(state).filter(Boolean).length;
+        status.textContent = answered === 3 ? 'Ready to deal seven format cards.' : `${answered} of 3 preferences chosen.`;
+      }
+
+      function discardReason(lane) {
+        if (!lane.energy.includes(state.energy)) return `Discarded: you chose ${labels.energy[state.energy]}.`;
+        if (latestRank[lane.latest] > latestRank[state.latest]) return `Discarded: you chose ${labels.latest[state.latest]}.`;
+        if (lane.door && state.door === 'avoid') return 'Discarded: you asked to avoid door uncertainty.';
+        return 'Set aside: the shortlist stays focused on three format lanes.';
+      }
+
+      function render() {
+        const kept = document.getElementById('kept-stack');
+        const pile = document.getElementById('discard-pile');
+        const count = document.getElementById('kept-count');
+        const eligible = lanes.filter((lane) => !(
+          !lane.energy.includes(state.energy) ||
+          latestRank[lane.latest] > latestRank[state.latest] ||
+          (lane.door && state.door === 'avoid')
+        ));
+        eligible.sort((a, b) => rank[state.energy].indexOf(a.id) - rank[state.energy].indexOf(b.id));
+        const shortlist = eligible.slice(0, 3).map((lane) => ({ ...lane, compromise: false }));
+        const fallback = lanes
+          .filter((lane) => !lane.door || state.door !== 'avoid')
+          .filter((lane) => !shortlist.some((item) => item.id === lane.id))
+          .sort((a, b) => rank[state.energy].indexOf(a.id) - rank[state.energy].indexOf(b.id));
+        while (shortlist.length < 2 && fallback.length) {
+          shortlist.push({ ...fallback.shift(), compromise: true });
+        }
+        const retained = new Set(shortlist.map((lane) => lane.id));
+        kept.innerHTML = shortlist.map((lane) => `
+          <article class="format-card" data-label="${lane.compromise ? 'compromise' : 'kept'}">
+            <p class="format-name">${lane.name}</p>
+            <p>${lane.note}${lane.compromise ? ' This is a compromise because your energy and finish preferences conflict.' : ''}</p>
+          </article>`).join('');
+        pile.innerHTML = lanes.filter((lane) => !retained.has(lane.id)).map((lane) => `
+          <article class="discard-card"><b>${lane.name}</b><span>${discardReason(lane)}</span></article>`).join('');
+        count.textContent = `${shortlist.length} kept`;
+        results.hidden = false;
+        reset.hidden = false;
+        status.textContent = 'Your format cards are dealt.';
+      }
+
+      document.querySelectorAll('.choice-row').forEach((row) => {
+        row.addEventListener('click', (event) => {
+          const button = event.target.closest('button[data-value]');
+          if (!button) return;
+          const question = row.dataset.question;
+          state[question] = button.dataset.value;
+          row.querySelectorAll('button').forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+          updateStatus();
+        });
+      });
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (Object.values(state).some((value) => !value)) {
+          status.textContent = 'Choose all three preferences before dealing the cards.';
+          return;
+        }
+        render();
+      });
+
+      reset.addEventListener('click', () => {
+        Object.keys(state).forEach((key) => { state[key] = null; });
+        document.querySelectorAll('.choice').forEach((button) => button.setAttribute('aria-pressed', 'false'));
+        results.hidden = true;
+        reset.hidden = true;
+        updateStatus();
+      });
+    }());
+  </script>
+  <script src="../js/brand.js"></script>
+</body>
+</html>

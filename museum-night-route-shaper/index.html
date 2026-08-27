@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Berlin Museum Night Route Shaper | BerlinWalk</title>
+    <link rel="stylesheet" href="../css/brand.css" />
+    <style>
+      :root {
+        --navy: #122338;
+        --blue: #2077bf;
+        --gold: #f6cb55;
+        --mist: #eff5f9;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Montserrat, Arial, sans-serif;
+        color: var(--navy);
+      }
+      .tool {
+        max-width: 1040px;
+        margin: auto;
+        border: 1px solid #cbdbe7;
+        border-radius: 14px;
+        overflow: hidden;
+        background: #fff;
+      }
+      .head {
+        padding: 30px;
+        color: #fff;
+        background:
+          linear-gradient(120deg, #0b1d31d9, #0b1d3170),
+          url("assets/hero-museum-night.jpg") center/cover;
+      }
+      .tag {
+        color: var(--gold);
+        font-size: 12px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+      .head h1 {
+        margin: 8px 0;
+        font-size: clamp(30px, 5vw, 48px);
+        line-height: 1.05;
+      }
+      .head p {
+        max-width: 640px;
+        line-height: 1.55;
+      }
+      .body {
+        padding: 24px;
+      }
+      .ask {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      .ask label {
+        display: grid;
+        gap: 7px;
+        padding: 13px;
+        border-radius: 10px;
+        background: var(--mist);
+        font-size: 12px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+      .ask select {
+        border: 1px solid #b8ccda;
+        border-radius: 7px;
+        padding: 10px;
+        background: #fff;
+        color: var(--navy);
+        font: 700 14px Montserrat;
+      }
+      .ask input {
+        width: 100%;
+        min-width: 0;
+        border: 1px solid #b8ccda;
+        border-radius: 7px;
+        padding: 10px;
+        background: #fff;
+        color: var(--navy);
+        font: 700 14px Montserrat;
+        text-transform: none;
+      }
+      .route {
+        margin-top: 20px;
+        padding: 18px;
+        border: 1px solid #d9e6ee;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #fff, #f1f7fb);
+      }
+      .passport-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .passport-kicker {
+        display: block;
+        color: var(--blue);
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.11em;
+      }
+      .route h2 {
+        margin: 5px 0 8px;
+        font-size: 25px;
+      }
+      .budget {
+        flex: 0 0 auto;
+        border-radius: 999px;
+        padding: 8px 10px;
+        background: var(--navy);
+        color: #fff;
+        font-size: 12px;
+        font-weight: 900;
+        text-align: center;
+      }
+      .route > p {
+        margin: 0;
+        color: #4d6172;
+        line-height: 1.55;
+      }
+      .stops {
+        display: grid;
+        gap: 10px;
+        margin-top: 15px;
+      }
+      .stop {
+        display: grid;
+        grid-template-columns: 72px minmax(0, 1fr);
+        gap: 12px;
+        padding: 14px;
+        border-radius: 10px;
+        background: #fff;
+        border-left: 5px solid var(--blue);
+        box-shadow: 0 4px 12px #17365314;
+      }
+      .stop:nth-child(2) {
+        border-color: var(--gold);
+      }
+      .stop:nth-child(3) {
+        border-color: #4aa46e;
+      }
+      .no {
+        color: #6f8292;
+        font-size: 12px;
+        font-weight: 900;
+      }
+      .time {
+        color: var(--navy);
+        font-size: 18px;
+        font-weight: 900;
+        letter-spacing: -0.02em;
+      }
+      .stop h3 {
+        margin: 5px 0;
+        font-size: 17px;
+      }
+      .stop p {
+        margin: 0;
+        color: #52657a;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .note {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        margin-top: 18px;
+        padding: 15px 0 0;
+        border-top: 1px solid #d9e6ee;
+        flex-wrap: wrap;
+      }
+      .note p {
+        max-width: 690px;
+        margin: 0;
+        font-size: 13px;
+        line-height: 1.55;
+      }
+      .cta {
+        border-radius: 8px;
+        padding: 12px 15px;
+        background: var(--navy);
+        color: #fff !important;
+        text-decoration: none;
+        font-weight: 900;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+      }
+      .cta.planner {
+        background: var(--gold);
+        color: var(--navy) !important;
+      }
+      .credits {
+        margin-top: 16px;
+        font-size: 12px;
+      }
+      .credits button {
+        border: 0;
+        background: none;
+        padding: 0;
+        text-decoration: underline;
+        color: var(--navy);
+        cursor: pointer;
+        font: inherit;
+      }
+      .credits div {
+        margin-top: 7px;
+        padding: 9px;
+        background: var(--mist);
+        border-radius: 7px;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      @media (max-width: 980px) {
+        .ask label {
+          min-width: 0;
+        }
+        .ask select {
+          width: 100%;
+          max-width: 100%;
+          min-width: 0;
+        }
+      }
+      @media (min-width: 681px) and (max-width: 980px) {
+        .ask {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+      @media (max-width: 680px) {
+        .head,
+        .body {
+          padding: 20px;
+        }
+        .ask {
+          grid-template-columns: 1fr;
+        }
+        .passport-top,
+        .note {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .stop {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="tool">
+      <section class="head">
+        <span class="tag">Berlin event decision tool</span>
+        <h1>Museum Night Route Shaper</h1>
+        <p>
+          On Saturday 29 August, make one museum your reason to go out, then
+          give the rest of the night a realistic shape. This is a three-stop
+          passport, not a pretend live queue map.
+        </p>
+      </section>
+      <section class="body">
+        <div class="ask">
+          <label
+            >Start area<select id="area">
+              <option value="centre">Mitte / Alexanderplatz</option>
+              <option value="west">West Berlin</option>
+              <option value="anchor">I am already near my anchor</option>
+            </select></label
+          ><label
+            >Your must-see museum
+            <input
+              id="anchor"
+              type="text"
+              maxlength="72"
+              placeholder="Choose it in the official programme"
+              autocomplete="off"
+            /> </label
+          ><label
+            >How the night must end<select id="finish">
+              <option value="early">I need a simple way home by 22:30</option>
+              <option value="mid">I can stay until around midnight</option>
+              <option value="flex">I will decide late on the night</option>
+            </select></label
+          >
+        </div>
+        <section class="route" aria-live="polite">
+          <div class="passport-top">
+            <div>
+              <span class="passport-kicker">NIGHT PASSPORT · 29 AUG · 18:00–02:00</span>
+              <h2 id="title">One anchor, then a calm finish</h2>
+            </div>
+            <span class="budget" id="budget">3 museums maximum</span>
+          </div>
+          <p id="lead"></p>
+          <div class="stops">
+            <article class="stop">
+              <span class="time" id="onetime">18:00</span>
+              <div>
+                <span class="no">01 · YOUR ANCHOR</span>
+                <h3 id="one"></h3>
+                <p id="onecopy"></p>
+              </div>
+            </article>
+            <article class="stop">
+              <span class="time" id="twotime">19:30</span>
+              <div>
+                <span class="no">02 · NEARBY CONTRAST</span>
+                <h3 id="two"></h3>
+                <p id="twocopy"></p>
+              </div>
+            </article>
+            <article class="stop">
+              <span class="time" id="threetime">21:15</span>
+              <div>
+                <span class="no">03 · LAST MOVE</span>
+                <h3 id="three"></h3>
+                <p id="threecopy"></p>
+              </div>
+            </article>
+          </div>
+          <div class="note">
+            <p id="tip"></p>
+            <div class="actions">
+              <a
+                class="cta"
+                target="_blank"
+                rel="noopener"
+                href="https://langenachtdermuseen.berlin/en/"
+                >Open official programme &amp; My Route</a
+              ><a
+                class="cta planner"
+                target="_top"
+                href="https://www.berlinwalk.com/berlin-trip-planner"
+                >Plan my other Berlin days</a
+              >
+            </div>
+          </div>
+        </section>
+        <div class="credits">
+          <button aria-expanded="false" aria-controls="c">
+            Widget visual credit
+          </button>
+          <div id="c" hidden>
+            Tool hero image: Neues Museum west facade by Janericloebe,
+            <a
+              href="https://commons.wikimedia.org/wiki/File:Berlin_Neues_Museum_001.JPG"
+              target="_blank"
+              rel="noopener"
+              >Wikimedia Commons</a
+            >, public domain.
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="../js/brand.js"></script>
+    <script>
+      const q = (s) => document.querySelector(s);
+      function draw() {
+        const area = q("#area").value;
+        const finish = q("#finish").value;
+        const typedAnchor = q("#anchor").value.trim();
+        const anchor = typedAnchor || "Your saved official-programme museum";
+        const starts = {
+          centre: {
+            title: "Start in Mitte, then keep the night compact",
+            copy: "Be at your chosen museum by 18:00. From Alexanderplatz or Mitte, do not spend your first hour making a cross-city transfer.",
+            contrast: "A second official-programme museum in the same walkable area",
+          },
+          west: {
+            title: "Start west, then make only one deliberate move",
+            copy: "If the official map puts your anchor in the west, begin there at 18:00. If it does not, make one early transfer before entering, then keep every later move close to that anchor.",
+            contrast: "A second official-programme museum close to the anchor district",
+          },
+          anchor: {
+            title: "Your anchor already decides the first district",
+            copy: "You are already in the right area at 18:00. Use that advantage for a full first stop instead of adding a museum just because it is famous.",
+            contrast: "One contrasting official-programme museum nearby",
+          },
+        };
+        const endings = {
+          early: {
+            time: "21:15",
+            title: "Leave while the route is still simple",
+            copy: "Make the third stop a short, flexible visit, then start the journey home by 22:30. Do not add a fourth museum.",
+            budget: "3 museums maximum",
+            tip: "Save one backup in My Route, but treat a long queue as a reason to leave, not a reason to wait. Confirm the participating list, hours and live queue information before you set out.",
+          },
+          mid: {
+            time: "22:30",
+            title: "Use a third museum as the final full stop",
+            copy: "Give this visit one clear purpose, then leave around midnight with the route home already checked.",
+            budget: "3 museums + 1 optional",
+            tip: "A fourth museum is only an optional short visit after your three real stops. Use My Route to check current participation, exact hours and the live queue information before you leave.",
+          },
+          flex: {
+            time: "23:00",
+            title: "Keep the last hour deliberately open",
+            copy: "Choose the third stop in the official programme on the night itself. It should be close to your second stop, not a citywide dash.",
+            budget: "3 museums + 1 flexible extra",
+            tip: "Your flexibility is useful only if the first two stops stay close together. Build and save a My Route plan before leaving, then use the organiser's live information for queues and exceptions.",
+          },
+        };
+        const start = starts[area];
+        const end = endings[finish];
+        q("#title").textContent = start.title;
+        q("#lead").textContent =
+          "The Long Night runs 18:00–02:00, but this plan reserves the night for one anchor, one nearby contrast and one final move. It never assumes a museum's participation, hours or queue.";
+        q("#budget").textContent = end.budget;
+        q("#one").textContent = anchor;
+        q("#onecopy").textContent = start.copy;
+        q("#two").textContent = start.contrast;
+        q("#twocopy").textContent =
+          "After 60–90 minutes, choose a different kind of museum from the official programme within the same area. A single short transfer is fine; a second city crossing is not.";
+        q("#three").textContent = end.title;
+        q("#threecopy").textContent = end.copy;
+        q("#threetime").textContent = end.time;
+        q("#tip").textContent = end.tip;
+      }
+      document.querySelectorAll("select, input").forEach((e) => {
+        e.addEventListener("input", draw);
+        e.addEventListener("change", draw);
+      });
+      q(".credits button").onclick = (e) => {
+        let x = q("#c");
+        x.hidden = !x.hidden;
+        e.currentTarget.setAttribute("aria-expanded", String(!x.hidden));
+      };
+      draw();
+    </script>
+  </body>
+</html>

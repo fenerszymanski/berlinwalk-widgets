@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spandau Loop Builder — plan your old town and Citadel walk | BerlinWalk</title>
+<meta name="description" content="Build your own walking loop through Spandau: the Citadel, the medieval old town, the Kolk quarter and the Havel riverside, with realistic times and opening-day warnings.">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --green-dark: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --light-green: #C5E1A5;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --water: #9DBFB4;
+    --paper: #F4EFE3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+  }
+  .sl-wrap { max-width: 940px; margin: 0 auto; padding: 18px 14px 26px; }
+  .sl-head { text-align: center; margin-bottom: 14px; }
+  .sl-kicker {
+    display: inline-block; font-size: 11px; letter-spacing: 2px; font-weight: 700;
+    color: var(--green); text-transform: uppercase; margin-bottom: 6px;
+  }
+  .sl-title { font-size: 26px; line-height: 1.2; margin: 0 0 8px; color: var(--green-dark); font-weight: 800; }
+  .sl-sub { font-size: 14px; line-height: 1.55; margin: 0 auto; max-width: 640px; color: #4a4a4a; }
+
+  .sl-daysrow { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin: 16px 0 4px; }
+  .sl-daylabel { width: 100%; text-align: center; font-size: 11px; font-weight: 700; letter-spacing: 1.4px; color: var(--green); text-transform: uppercase; margin-bottom: 2px; }
+  .sl-day {
+    border: 2px solid var(--green); background: #fff; color: var(--green-dark);
+    font-family: inherit; font-size: 13px; font-weight: 700; padding: 7px 12px;
+    border-radius: 999px; cursor: pointer; transition: background .15s, color .15s;
+  }
+  .sl-day[aria-pressed="true"] { background: var(--green); color: #fff; }
+  .sl-day:hover { background: var(--light-green); color: var(--green-dark); }
+  .sl-day[aria-pressed="true"]:hover { background: var(--green-dark); color: #fff; }
+
+  .sl-mapbox {
+    background: var(--paper);
+    border: 2px solid var(--green);
+    border-radius: 14px;
+    margin: 14px 0 10px;
+    overflow: hidden;
+  }
+  .sl-map-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .sl-map-scroll svg { display: block; min-width: 640px; width: 100%; height: auto; }
+
+  .sl-chips { display: flex; flex-wrap: wrap; gap: 7px; justify-content: center; margin: 10px 0 4px; }
+  .sl-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    border: 2px solid var(--green); border-radius: 999px;
+    background: #fff; color: var(--green-dark);
+    font-family: inherit; font-size: 12.5px; font-weight: 700;
+    padding: 7px 12px; cursor: pointer; transition: background .15s;
+  }
+  .sl-chip .sl-chip-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: #fff; border: 2px solid var(--green); flex: 0 0 auto;
+  }
+  .sl-chip[aria-pressed="true"] { background: var(--green); color: #fff; }
+  .sl-chip[aria-pressed="true"] .sl-chip-dot { background: var(--yellow); border-color: var(--yellow); }
+  .sl-chip:hover { background: var(--light-green); color: var(--green-dark); }
+  .sl-chip[aria-pressed="true"]:hover { background: var(--green-dark); color: #fff; }
+
+  .sl-summary {
+    display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+    margin: 14px 0 6px;
+  }
+  .sl-stat {
+    background: var(--yellow); color: var(--green-dark);
+    border-radius: 12px; padding: 10px 16px; text-align: center; min-width: 128px;
+  }
+  .sl-stat b { display: block; font-size: 20px; line-height: 1.1; }
+  .sl-stat span { font-size: 11.5px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; }
+
+  .sl-plan { margin: 12px 0 0; }
+  .sl-plan-title { font-size: 15px; font-weight: 800; color: var(--green-dark); margin: 14px 0 8px; text-align: center; }
+  .sl-steps { list-style: none; margin: 0; padding: 0; max-width: 640px; margin-left: auto; margin-right: auto; }
+  .sl-step {
+    display: flex; gap: 12px; align-items: flex-start;
+    background: #fff; border: 1.5px solid #E3E0D4; border-radius: 12px;
+    padding: 11px 14px; margin-bottom: 8px;
+  }
+  .sl-step-num {
+    flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%;
+    background: var(--green); color: #fff; font-weight: 800; font-size: 13px;
+    display: flex; align-items: center; justify-content: center; margin-top: 1px;
+  }
+  .sl-step-body { font-size: 13.5px; line-height: 1.5; }
+  .sl-step-body b { color: var(--green-dark); }
+  .sl-step-meta { display: block; font-size: 12px; color: #666; margin-top: 5px; }
+  .sl-step-walk {
+    font-size: 12px; color: var(--green); font-weight: 700;
+    margin: 0 0 8px 13px; padding-left: 25px; position: relative;
+  }
+  .sl-step-walk::before {
+    content: ""; position: absolute; left: 12px; top: -6px; bottom: -6px;
+    border-left: 2px dashed var(--lime);
+  }
+  .sl-warn {
+    max-width: 640px; margin: 10px auto 0;
+    background: #FFF8D6; border: 2px solid var(--yellow); border-radius: 12px;
+    padding: 10px 14px; font-size: 13px; line-height: 1.5; color: var(--green-dark);
+  }
+  .sl-warn + .sl-warn { margin-top: 8px; }
+  .sl-warn b { color: var(--green-dark); }
+  .sl-empty {
+    max-width: 640px; margin: 12px auto 0; text-align: center;
+    font-size: 13.5px; color: #666; line-height: 1.55;
+  }
+  .sl-foot { text-align: center; font-size: 12px; color: #777; margin-top: 16px; line-height: 1.5; }
+  .sl-foot a { color: var(--green); font-weight: 700; }
+
+  svg text { font-family: 'Montserrat', sans-serif; }
+  .sl-pin { cursor: pointer; }
+  .sl-pin circle.core { fill: #fff; stroke: var(--green); stroke-width: 2.5; transition: fill .15s; }
+  .sl-pin.on circle.core { fill: var(--yellow); }
+  .sl-pin.on circle.halo { fill: rgba(255, 230, 0, .25); }
+  .sl-pin text { font-size: 11px; font-weight: 700; fill: var(--green-dark); }
+  .sl-pin circle.halo { fill: transparent; }
+
+  @media (max-width: 480px) {
+    .sl-title { font-size: 21px; }
+    .sl-stat { min-width: 104px; padding: 8px 12px; }
+    .sl-stat b { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+<div class="sl-wrap">
+  <div class="sl-head">
+    <span class="sl-kicker">BerlinWalk &bull; Free Berlin Tools</span>
+    <h1 class="sl-title">Spandau Loop Builder</h1>
+    <p class="sl-sub">Tap the stops you want on the map. The planner orders them into one walking loop from U Altstadt Spandau, adds realistic times, and flags opening-hour traps for your day of the week.</p>
+  </div>
+
+  <div class="sl-daysrow" id="sl-days" role="group" aria-label="Day of your visit">
+    <span class="sl-daylabel">Which day are you going?</span>
+  </div>
+
+  <div class="sl-mapbox">
+    <div class="sl-map-scroll">
+      <svg id="sl-map" viewBox="0 0 800 560" role="img" aria-label="Schematic map of Spandau old town, the Kolk quarter and the Citadel with selectable stops"></svg>
+    </div>
+  </div>
+
+  <div class="sl-chips" id="sl-chips" role="group" aria-label="Stops to include"></div>
+
+  <div class="sl-summary" id="sl-summary" hidden>
+    <div class="sl-stat"><b id="sl-total">0h00</b><span>Total loop</span></div>
+    <div class="sl-stat"><b id="sl-walkmin">0 min</b><span>Walking</span></div>
+    <div class="sl-stat"><b id="sl-stops">0</b><span>Stops</span></div>
+  </div>
+
+  <div class="sl-plan" id="sl-plan"></div>
+  <div id="sl-warnings"></div>
+
+  <p class="sl-foot">Times assume a relaxed pace. Citadel hours and prices: <a href="https://www.zitadelle-berlin.de/en/your-visit/" target="_blank" rel="noopener">zitadelle-berlin.de</a>. Full guide: <a href="https://www.berlinwalk.com/post/spandau-berlin" target="_blank" rel="noopener">Spandau on BerlinWalk</a>.</p>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+  // Canonical walking order from U Altstadt Spandau, with map coordinates.
+  var STOPS = [
+    { id: 'kolk', name: 'Kolk & town wall', short: 'Kolk', x: 320, y: 175,
+      dwell: 15, desc: 'Cobbled lanes at Hoher Steinweg along the 14th-century town wall, still at its original height.',
+      meta: 'Free, always open' },
+    { id: 'marien', name: 'St. Marien am Behnitz', short: 'St. Marien', x: 390, y: 140,
+      dwell: 10, desc: 'The small 1848 church in the Behnitz corner, the second-oldest Catholic church in Berlin.',
+      meta: 'Exterior always visible' },
+    { id: 'zitadelle', name: 'Citadel & Juliusturm', short: 'Citadel', x: 615, y: 120,
+      dwell: 90, desc: 'The complete Renaissance star fort. Climb the 13th-century Juliusturm and see the Unveiled monument exhibition with the Lenin head.',
+      meta: '4.50 euros, Fri-Wed from 10:00, Thu from 13:00' },
+    { id: 'lindenufer', name: 'Havel riverside (Lindenufer)', short: 'Lindenufer', x: 480, y: 330,
+      dwell: 20, desc: 'Benches, swans and moored boats where the old town meets the Havel. The unhurried part of the loop.',
+      meta: 'Free, always open' },
+    { id: 'nikolai', name: 'St. Nikolai & Reformationsplatz', short: 'St. Nikolai', x: 350, y: 320,
+      dwell: 25, desc: 'The 14th-century brick church where the Reformation entered Brandenburg in 1539, on the calmest square in the old town.',
+      meta: 'Interior usually open around midday' },
+    { id: 'gotisches', name: 'Gotisches Haus', short: 'Gotisches Haus', x: 300, y: 395,
+      dwell: 25, desc: 'Berlin’s oldest town house, free to enter, with the tourist information downstairs and the town history upstairs.',
+      meta: 'Free, Mon-Sat from 10:00, Sun from 12:00' },
+    { id: 'breite', name: 'Breite Straße & Markt', short: 'Breite Str.', x: 330, y: 455,
+      dwell: 25, desc: 'The medieval market streets, today the shopping spine. Read the bends of the lanes, not the shopfronts.',
+      meta: 'Free, liveliest before 18:00' }
+  ];
+
+  // Walking minutes between consecutive canonical points, incl. entry/exit.
+  var ENTRY = { name: 'U Altstadt Spandau (U7)', walkToFirst: { kolk: 4, marien: 4, zitadelle: 12, lindenufer: 8, nikolai: 5, gotisches: 6, breite: 6 } };
+  var LEGS = { kolk: 3, marien: 12, zitadelle: 14, lindenufer: 9, nikolai: 4, gotisches: 4, breite: 0 };
+  // LEGS[id] = walk minutes from this stop to the NEXT canonical stop.
+  var EXIT = { breite: 5, gotisches: 6, nikolai: 8, lindenufer: 10, zitadelle: 6, marien: 10, kolk: 10 };
+  var EXIT_NAME = { zitadelle: 'U Zitadelle (U7)', 'default': 'U Rathaus Spandau / Bahnhof Spandau' };
+
+  // Waypoints for drawing legs that cross the bridge to the Citadel.
+  var BRIDGE = [ [455, 138], [545, 132] ];
+
+  var state = { day: new Date().getDay(), selected: {} };
+  // Default selection: the article's recommended half-day core.
+  ['zitadelle', 'kolk', 'nikolai', 'gotisches'].forEach(function (id) { state.selected[id] = true; });
+  var dayIndex = (state.day + 6) % 7; // JS Sunday=0 -> Mon-first index
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  function fmtTotal(min) {
+    var h = Math.floor(min / 60), m = min % 60;
+    return h + 'h' + (m < 10 ? '0' : '') + m;
+  }
+
+  function selectedStops() {
+    return STOPS.filter(function (s) { return state.selected[s.id]; });
+  }
+
+  function buildDays() {
+    var row = $('sl-days');
+    DAYS.forEach(function (d, i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'sl-day';
+      b.textContent = d;
+      b.setAttribute('aria-pressed', i === dayIndex ? 'true' : 'false');
+      b.addEventListener('click', function () {
+        dayIndex = i;
+        Array.prototype.forEach.call(row.querySelectorAll('.sl-day'), function (x, j) {
+          x.setAttribute('aria-pressed', j === dayIndex ? 'true' : 'false');
+        });
+        render();
+      });
+      row.appendChild(b);
+    });
+  }
+
+  function buildChips() {
+    var box = $('sl-chips');
+    STOPS.forEach(function (s) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'sl-chip';
+      b.id = 'chip-' + s.id;
+      b.setAttribute('aria-pressed', state.selected[s.id] ? 'true' : 'false');
+      b.innerHTML = '<span class="sl-chip-dot"></span>' + s.short;
+      b.addEventListener('click', function () { toggle(s.id); });
+      box.appendChild(b);
+    });
+  }
+
+  function toggle(id) {
+    state.selected[id] = !state.selected[id];
+    render();
+  }
+
+  function svgEl(tag, attrs) {
+    var el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+    for (var k in attrs) el.setAttribute(k, attrs[k]);
+    return el;
+  }
+
+  function drawBase(svg) {
+    // Havel river, east side
+    svg.appendChild(svgEl('path', {
+      d: 'M 640 560 C 610 430 620 320 560 250 C 520 205 530 150 560 60 L 660 40 C 640 140 630 200 665 260 C 710 340 700 460 720 560 Z',
+      fill: 'var(--water)', opacity: '0.85'
+    }));
+    var havelLabel = svgEl('text', { x: 655, y: 400, 'font-size': '13', fill: '#4C7267', 'font-style': 'italic', transform: 'rotate(78 655 400)' });
+    havelLabel.textContent = 'Havel';
+    svg.appendChild(havelLabel);
+
+    // Muehlengraben arm making the Altstadt an island
+    svg.appendChild(svgEl('path', {
+      d: 'M 560 250 C 470 250 240 230 215 300 C 190 380 240 490 380 520 C 490 545 580 480 600 440',
+      fill: 'none', stroke: 'var(--water)', 'stroke-width': '26', 'stroke-linecap': 'round', opacity: '0.7'
+    }));
+
+    // Citadel: square Renaissance fort with four corner bastions
+    svg.appendChild(svgEl('path', {
+      d: 'M 585 85 L 645 85 L 700 50 L 665 105 L 665 135 L 700 190 L 645 155 L 585 155 L 530 190 L 565 135 L 565 105 L 530 50 Z',
+      fill: '#DCD4BC', stroke: 'var(--green)', 'stroke-width': '2.5', 'stroke-linejoin': 'round'
+    }));
+
+    // Altstadt oval
+    svg.appendChild(svgEl('ellipse', {
+      cx: 345, cy: 350, rx: 150, ry: 165, fill: '#EFE7CF', stroke: 'var(--green)', 'stroke-width': '2', 'stroke-dasharray': '6 5'
+    }));
+    var al = svgEl('text', { x: 345, y: 245, 'font-size': '11.5', 'text-anchor': 'middle', fill: 'var(--green-dark)', 'font-weight': '700', 'letter-spacing': '1.5' });
+    al.textContent = 'ALTSTADT';
+    svg.appendChild(al);
+
+    // Bridge over to the citadel (Am Juliusturm)
+    svg.appendChild(svgEl('path', {
+      d: 'M 445 138 L 552 132', stroke: '#B7AE93', 'stroke-width': '10', 'stroke-linecap': 'round'
+    }));
+
+    // Stations
+    var stations = [
+      { x: 258, y: 205, label: 'U Altstadt Spandau', anchor: 'end' },
+      { x: 508, y: 208, label: 'U Zitadelle', anchor: 'end', lx: -14, ly: 4 },
+      { x: 300, y: 520, label: 'U Rathaus Spandau', anchor: 'middle', ly: 26 },
+      { x: 175, y: 495, label: 'S+DB Bahnhof Spandau', anchor: 'start', lx: -12, ly: 26 }
+    ];
+    stations.forEach(function (st) {
+      svg.appendChild(svgEl('rect', { x: st.x - 9, y: st.y - 9, width: 18, height: 18, rx: 4, fill: 'var(--green)' }));
+      var u = svgEl('text', { x: st.x, y: st.y + 4.5, 'font-size': '11', 'text-anchor': 'middle', fill: '#fff', 'font-weight': '800' });
+      u.textContent = st.label.indexOf('S+DB') === 0 ? 'S' : 'U';
+      svg.appendChild(u);
+      var t = svgEl('text', { x: st.x + (st.lx || (st.anchor === 'end' ? -14 : 14)), y: st.y + (st.ly || 4), 'font-size': '10.5', 'text-anchor': st.anchor, fill: 'var(--green-dark)', 'font-weight': '700' });
+      t.textContent = st.label;
+      svg.appendChild(t);
+    });
+
+    // North arrow + scale hint
+    var n = svgEl('text', { x: 40, y: 46, 'font-size': '13', fill: 'var(--green-dark)', 'font-weight': '800' });
+    n.textContent = 'N ↑';
+    svg.appendChild(n);
+    var hint = svgEl('text', { x: 40, y: 66, 'font-size': '10', fill: '#8a8a7a' });
+    hint.textContent = 'Schematic, not to scale';
+    svg.appendChild(hint);
+  }
+
+  function routePoints(sel) {
+    // Points in canonical order with bridge waypoints around the citadel leg.
+    var pts = [];
+    sel.forEach(function (s, i) {
+      if (i > 0) {
+        var prev = sel[i - 1];
+        var crossing = (prev.id === 'zitadelle') !== (s.id === 'zitadelle');
+        if (crossing) {
+          var wp = prev.id === 'zitadelle' ? BRIDGE.slice().reverse() : BRIDGE;
+          wp.forEach(function (p) { pts.push(p); });
+        }
+      }
+      pts.push([s.x, s.y]);
+    });
+    return pts;
+  }
+
+  function drawRoute(svg, sel) {
+    if (sel.length < 2) return;
+    var pts = routePoints(sel);
+    var d = pts.map(function (p, i) { return (i === 0 ? 'M ' : 'L ') + p[0] + ' ' + p[1]; }).join(' ');
+    svg.appendChild(svgEl('path', {
+      d: d, fill: 'none', stroke: 'var(--green)', 'stroke-width': '3.5',
+      'stroke-dasharray': '9 6', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', opacity: '0.9'
+    }));
+  }
+
+  function drawPins(svg) {
+    STOPS.forEach(function (s, idx) {
+      var g = svgEl('g', { 'class': 'sl-pin' + (state.selected[s.id] ? ' on' : ''), tabindex: '0', role: 'button' });
+      g.setAttribute('aria-pressed', state.selected[s.id] ? 'true' : 'false');
+      g.setAttribute('aria-label', s.name + (state.selected[s.id] ? ' (in your loop)' : ' (tap to add)'));
+      g.appendChild(svgEl('circle', { 'class': 'halo', cx: s.x, cy: s.y, r: 19 }));
+      g.appendChild(svgEl('circle', { 'class': 'core', cx: s.x, cy: s.y, r: 11 }));
+      var order = selectedStops().indexOf(s);
+      var num = svgEl('text', { x: s.x, y: s.y + 4, 'text-anchor': 'middle', 'font-size': '11.5', 'font-weight': '800' });
+      num.textContent = state.selected[s.id] ? String(order + 1) : '+';
+      g.appendChild(num);
+      var labelY = s.y - 18;
+      var lbl = svgEl('text', { x: s.x, y: labelY, 'text-anchor': 'middle' });
+      lbl.textContent = s.short;
+      g.appendChild(lbl);
+      var act = function () { toggle(s.id); };
+      g.addEventListener('click', act);
+      g.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); act(); }
+      });
+      svg.appendChild(g);
+    });
+  }
+
+  function computePlan(sel) {
+    var steps = [];
+    var walk = 0, dwell = 0;
+    if (!sel.length) return { steps: steps, walk: 0, dwell: 0 };
+    var entryWalk = ENTRY.walkToFirst[sel[0].id];
+    walk += entryWalk;
+    steps.push({ type: 'walk', text: 'Start at ' + ENTRY.name + ', walk ' + entryWalk + ' min' });
+    sel.forEach(function (s, i) {
+      if (i > 0) {
+        var legWalk = legBetween(sel[i - 1], s);
+        walk += legWalk;
+        steps.push({ type: 'walk', text: 'Walk ' + legWalk + ' min' });
+      }
+      dwell += s.dwell;
+      steps.push({ type: 'stop', stop: s });
+    });
+    var last = sel[sel.length - 1];
+    var exitWalk = EXIT[last.id];
+    walk += exitWalk;
+    var exitName = EXIT_NAME[last.id] || EXIT_NAME['default'];
+    steps.push({ type: 'walk', text: 'Finish: walk ' + exitWalk + ' min to ' + exitName });
+    return { steps: steps, walk: walk, dwell: dwell };
+  }
+
+  function legBetween(a, b) {
+    var ia = STOPS.indexOf(a), ib = STOPS.indexOf(b);
+    var mins = 0;
+    for (var i = ia; i < ib; i++) mins += LEGS[STOPS[i].id];
+    return Math.max(2, mins);
+  }
+
+  function warningsFor(sel) {
+    var w = [];
+    var day = DAYS[dayIndex];
+    if (state.selected['zitadelle'] && day === 'Thu') {
+      w.push('<b>Thursday:</b> the Citadel opens at 13:00, not 10:00. Do the old town and the Kolk in the morning and cross the bridge after lunch. On the plus side, it stays open until 20:00.');
+    }
+    if (state.selected['gotisches'] && day === 'Sun') {
+      w.push('<b>Sunday:</b> the Gotisches Haus opens at 12:00. If it is your first stop for a paper map, start with St. Nikolai or the Kolk instead.');
+    }
+    if (state.selected['nikolai']) {
+      w.push('<b>St. Nikolai:</b> the interior is usually open around midday. Plan the church for the middle of your loop, not first thing.');
+    }
+    if (day === 'Fri' || day === 'Sat' || day === 'Sun') {
+      w.push('<b>2026 construction weekends (24-27 Jul and 31 Jul-3 Aug):</b> the Stadtbahn S-Bahn is suspended from Friday evening. On those dates take the U7 to Spandau instead of the S3/S9.');
+    }
+    if (state.selected['zitadelle']) {
+      w.push('<b>Concert days:</b> the Citadel is a summer venue and museum hours can shift on event days. Check zitadelle-berlin.de before you go.');
+    }
+    return w;
+  }
+
+  function render() {
+    var svg = $('sl-map');
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    var sel = selectedStops();
+    drawBase(svg);
+    drawRoute(svg, sel);
+    drawPins(svg);
+
+    STOPS.forEach(function (s) {
+      var chip = $('chip-' + s.id);
+      if (chip) chip.setAttribute('aria-pressed', state.selected[s.id] ? 'true' : 'false');
+    });
+
+    var plan = computePlan(sel);
+    var summary = $('sl-summary');
+    var planBox = $('sl-plan');
+    var warnBox = $('sl-warnings');
+    planBox.innerHTML = '';
+    warnBox.innerHTML = '';
+
+    if (!sel.length) {
+      summary.hidden = true;
+      planBox.innerHTML = '<p class="sl-empty">Tap a stop on the map or a chip above to start building your loop. The half-day classic is Citadel, Kolk, St. Nikolai and the Gotisches Haus.</p>';
+      return;
+    }
+
+    summary.hidden = false;
+    $('sl-total').textContent = fmtTotal(plan.walk + plan.dwell);
+    $('sl-walkmin').textContent = plan.walk + ' min';
+    $('sl-stops').textContent = String(sel.length);
+
+    var title = document.createElement('div');
+    title.className = 'sl-plan-title';
+    title.textContent = 'Your loop, in walking order';
+    planBox.appendChild(title);
+
+    var ol = document.createElement('ol');
+    ol.className = 'sl-steps';
+    var n = 0;
+    plan.steps.forEach(function (st) {
+      if (st.type === 'walk') {
+        var wdiv = document.createElement('div');
+        wdiv.className = 'sl-step-walk';
+        wdiv.textContent = st.text;
+        ol.appendChild(wdiv);
+      } else {
+        n += 1;
+        var li = document.createElement('li');
+        li.className = 'sl-step';
+        li.innerHTML = '<span class="sl-step-num">' + n + '</span>' +
+          '<span class="sl-step-body"><b>' + st.stop.name + '</b> · about ' + st.stop.dwell + ' min<br>' +
+          st.stop.desc + '<span class="sl-step-meta">' + st.stop.meta + '</span></span>';
+        ol.appendChild(li);
+      }
+    });
+    planBox.appendChild(ol);
+
+    warningsFor(sel).forEach(function (html) {
+      var d = document.createElement('div');
+      d.className = 'sl-warn';
+      d.innerHTML = html;
+      warnBox.appendChild(d);
+    });
+
+    if (window.bwNotifyResize) window.bwNotifyResize();
+  }
+
+  buildDays();
+  buildChips();
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

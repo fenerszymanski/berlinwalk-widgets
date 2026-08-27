@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Berlin Airports: what is open and how to reach the city</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='32' r='20' fill='%23FFE600'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
+    --yellow:#FFE600; --amber:#F0A500; --red:#E63946; --ink:#1c2a1c; --panel:#ffffff;
+    --bone:#f4f9ec; --line:#e3edd6; --stone:#6d7b66; --shadow:0 10px 30px rgba(18,61,24,.14);
+  }
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}
+  html,body{margin:0}
+  body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .bx{max-width:940px;margin:0 auto;padding:4px}
+  .card{background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+
+  .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:18px 22px 16px}
+  .kick{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:700;margin:0 0 6px;font-family:"IBM Plex Mono",monospace}
+  .head h1{margin:0;font-size:21px;font-weight:800;line-height:1.2}
+  .head p{margin:8px 0 0;font-size:13.5px;color:#e7f3e2;max-width:720px}
+
+  .tabs{display:flex;gap:6px;padding:12px 14px 0}
+  .tab{flex:1;border:1.5px solid var(--line);background:#fff;border-bottom:none;border-radius:12px 12px 0 0;padding:11px 10px 12px;font-size:13px;font-weight:800;color:var(--green-deep);cursor:pointer;font-family:Montserrat,sans-serif;line-height:1.15;text-align:center}
+  .tab small{display:block;font-size:10px;font-weight:600;color:var(--stone);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+  .tab[aria-selected="true"]{background:var(--green);color:#fff;border-color:var(--green)}
+  .tab[aria-selected="true"] small{color:#d6ecc8}
+
+  .body{padding:14px 16px 8px;border-top:1.5px solid var(--line);margin-top:-1.5px}
+  .pane[hidden]{display:none}
+
+  /* --- map pane --- */
+  .maprow{display:grid;grid-template-columns:1.15fr 1fr;gap:14px;align-items:start}
+  .mapwrap{position:relative;background:#eef5e4;border:1px solid var(--line);border-radius:14px;padding:8px;overflow:hidden}
+  .mapwrap svg{width:100%;height:auto;display:block}
+  .dot{cursor:pointer}
+  .dot circle.hit{fill:transparent}
+  .dot .ring{fill:none;stroke-width:2.5}
+  .dot text{font-family:"IBM Plex Mono",monospace;font-size:8.5px;font-weight:700;fill:var(--green-deep)}
+  .dot.open .core{fill:var(--green)}
+  .dot.open .ring{stroke:var(--green)}
+  .dot.closed .core{fill:#c2ccbc}
+  .dot.closed .ring{stroke:#c2ccbc}
+  .dot[aria-pressed="true"] .ring{stroke:var(--yellow);stroke-width:4}
+  .pulse{transform-origin:center;animation:pulse 2.4s ease-out infinite}
+  @keyframes pulse{0%{r:7;opacity:.55}70%{r:17;opacity:0}100%{opacity:0}}
+
+  .detail{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--bone);min-height:190px}
+  .detail .stamp{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 9px;border-radius:999px;margin-bottom:9px}
+  .stamp.open{background:var(--green);color:#fff}
+  .stamp.closed{background:#e5ebdf;color:#5a6a53;border:1px solid #cfdcc2}
+  .detail h3{margin:0 0 2px;font-size:18px;color:var(--green-deep);font-weight:800}
+  .detail .code{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--stone);font-weight:700;margin:0 0 9px}
+  .detail p.d{font-size:13px;color:#31402f;margin:0 0 8px;line-height:1.55}
+  .detail .you{font-size:12.5px;font-weight:800;color:var(--green-deep);background:#e7f4d8;border:1px solid #d0e6b6;border-radius:9px;padding:8px 10px;margin:8px 0 0}
+  .legend{display:flex;gap:14px;margin:10px 2px 2px;font-size:11px;color:var(--stone);font-weight:700}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend i{width:10px;height:10px;border-radius:50%;display:inline-block}
+
+  /* --- board pane --- */
+  .board{background:#12210f;border-radius:14px;overflow:hidden;border:1px solid #0c1709}
+  .brow{display:grid;grid-template-columns:1.35fr 1.25fr .8fr .8fr;gap:8px;padding:11px 13px;align-items:center;border-bottom:1px solid rgba(255,255,255,.06)}
+  .brow.h{background:#0d1a0b}
+  .brow.h span{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--yellow);font-weight:700}
+  .brow .line{font-weight:800;color:#fff;font-size:13.5px}
+  .brow .line small{display:block;font-size:10.5px;font-weight:600;color:#9fb598;font-family:"IBM Plex Mono",monospace;margin-top:1px}
+  .brow .to{font-size:12.5px;color:#dfeed6;font-weight:600}
+  .brow .t{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:var(--yellow)}
+  .brow .ev{font-family:"IBM Plex Mono",monospace;font-size:12px;color:#bcd0b3}
+  .board .tk{padding:11px 13px;font-size:12px;color:#cfe0c4;background:#0d1a0b;line-height:1.5}
+  .board .tk b{color:var(--yellow)}
+
+  .foot{font-size:12px;color:var(--stone);margin:14px 2px 4px;line-height:1.5}
+  .foot a{color:var(--green);font-weight:700}
+  .credits-row{display:flex;justify-content:flex-end;margin:12px 0 2px}
+  .credits-trigger{border:1px solid #d5c300;border-radius:999px;background:var(--yellow);color:var(--green-deep);padding:8px 13px;font:800 12px Montserrat,sans-serif;cursor:pointer}
+  .credits-trigger:hover,.credits-trigger:focus-visible{background:#f5dc00;outline:2px solid var(--green-deep);outline-offset:2px}
+  .credits-modal{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:18px;background:rgba(8,28,11,.72)}
+  .credits-panel{width:min(590px,100%);max-height:min(78vh,620px);overflow:auto;border:1px solid var(--line);border-radius:16px;background:#fff;padding:18px;box-shadow:0 18px 55px rgba(0,0,0,.34)}
+  .credits-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:10px}
+  .credits-head h2{margin:0;color:var(--green-deep);font-size:18px}.credits-close{border:0;border-radius:999px;background:#e8f1dd;color:var(--green-deep);width:34px;height:34px;font-size:20px;font-weight:800;cursor:pointer}
+  .credits-list{margin:0;padding-left:20px;color:#374734;font-size:12px;line-height:1.55}.credits-list li+li{margin-top:7px}.credits-list a{color:var(--green);font-weight:700}
+
+  @media(max-width:560px){
+    .maprow{grid-template-columns:1fr}
+    .brow{grid-template-columns:1.3fr 1fr;grid-row-gap:2px}
+    .brow .t{text-align:right}
+    .brow.h{display:none}
+    .brow .to{grid-column:1 / -1;color:#a9c09f;font-size:11.5px}
+    .brow .ev{display:block;grid-column:1 / -1;text-align:right;font-size:11px;color:#dfeed6}
+    .brow .ev::before{content:attr(data-label) ": ";color:#9fb598;font-weight:600}
+  }
+  @media(max-width:430px){ .head h1{font-size:19px} .tab{font-size:12px} }
+  @media(prefers-reduced-motion:reduce){.pulse{animation:none}}
+</style>
+</head>
+<body>
+<div class="bx">
+  <div class="card">
+    <div class="head">
+      <p class="kick">BerlinWalk.com • Airport orientation</p>
+      <h1>Berlin airports: what is open, and how to reach the city</h1>
+      <p>Tegel, Schönefeld, Tempelhof, BER. Only BER handles scheduled passenger flights. Tap an airport to see what happened to it, then check the fastest way from BER into town.</p>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Airport views">
+      <button class="tab" id="t-map" role="tab" aria-selected="true" aria-controls="p-map" tabindex="0">The airports<small>what is open</small></button>
+      <button class="tab" id="t-board" role="tab" aria-selected="false" aria-controls="p-board" tabindex="-1">BER to the centre<small>how to get in</small></button>
+    </div>
+
+    <div class="body">
+
+      <!-- MAP PANE -->
+      <div class="pane" id="p-map" role="tabpanel" aria-labelledby="t-map">
+        <div class="maprow">
+          <div class="mapwrap">
+            <svg viewBox="0 0 300 300" role="img" aria-label="Schematic map of Berlin airport locations">
+              <!-- rough city shape -->
+              <path d="M150 26 C205 30 250 62 262 112 C274 160 258 214 214 250 C170 286 108 284 66 246 C28 212 20 156 40 108 C58 64 100 32 150 26 Z" fill="#dcebca" stroke="#c3d9a7" stroke-width="2"/>
+              <!-- spree line -->
+              <path d="M70 150 C120 132 168 168 232 148" fill="none" stroke="#bcd4e8" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+              <!-- centre marker -->
+              <circle cx="150" cy="150" r="3" fill="#6d7b66"/>
+              <text x="150" y="140" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" font-weight="700" fill="#6d7b66">Mitte</text>
+
+              <!-- Tegel NW -->
+              <g class="dot closed" data-k="txl" role="button" tabindex="0" aria-pressed="false" aria-label="Tegel airport, closed" transform="translate(92,86)">
+                <circle class="hit" r="20"/><circle class="ring" r="10"/><circle class="core" r="6"/>
+                <text x="0" y="-15" text-anchor="middle">TXL</text>
+              </g>
+              <!-- Tempelhof central-south -->
+              <g class="dot closed" data-k="thf" role="button" tabindex="0" aria-pressed="false" aria-label="Tempelhof, closed, now a park" transform="translate(150,196)">
+                <circle class="hit" r="20"/><circle class="ring" r="10"/><circle class="core" r="6"/>
+                <text x="0" y="26" text-anchor="middle">THF</text>
+              </g>
+              <!-- Schönefeld / T5 SE -->
+              <g class="dot closed" data-k="sxf" role="button" tabindex="0" aria-pressed="false" aria-label="Schonefeld, closed" transform="translate(206,214)">
+                <circle class="hit" r="18"/><circle class="ring" r="10"/><circle class="core" r="6"/>
+                <text x="0" y="-14" text-anchor="middle">SXF</text>
+              </g>
+              <!-- BER SE (open) -->
+              <g class="dot open" data-k="ber" role="button" tabindex="0" aria-pressed="true" aria-label="BER airport, open" transform="translate(240,246)">
+                <circle class="pulse" r="7" fill="#1B5E20"/>
+                <circle class="hit" r="22"/><circle class="ring" r="11"/><circle class="core" r="7"/>
+                <text x="0" y="27" text-anchor="middle" fill="#123D18">BER</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="detail" id="detail" aria-live="polite"></div>
+        </div>
+        <div class="legend">
+          <span><i style="background:#1B5E20"></i>Open, takes flights</span>
+          <span><i style="background:#c2ccbc"></i>Closed</span>
+        </div>
+      </div>
+
+      <!-- BOARD PANE -->
+      <div class="pane" id="p-board" role="tabpanel" aria-labelledby="t-board" hidden>
+        <div class="board">
+          <div class="brow h"><span>From BER</span><span>Towards</span><span>Time</span><span>Every</span></div>
+          <div class="brow"><div class="line">FEX<small>Airport Express</small></div><div class="to">Hauptbahnhof via Südkreuz and Potsdamer Platz</div><div class="t">~23 min</div><div class="ev" data-label="Every">15 min</div></div>
+          <div class="brow"><div class="line">RE20<small>Regional Express</small></div><div class="to">Hauptbahnhof on the same central corridor</div><div class="t">~23 min</div><div class="ev" data-label="Every">60 min</div></div>
+          <div class="brow"><div class="line">S9<small>S-Bahn</small></div><div class="to">Alexanderplatz and the Stadtbahn</div><div class="t">~40–45 min</div><div class="ev" data-label="Every">20 min</div></div>
+          <div class="brow"><div class="line">Taxi<small>ride-hail price varies</small></div><div class="to">Central Berlin, traffic dependent</div><div class="t">35–45 min</div><div class="ev" data-label="Taxi fare">~€55–65</div></div>
+          <div class="tk">Rail leaves from <b>Flughafen BER – Terminal 1-2</b>, directly under Terminal 1 on level U2. From Terminal 2, follow the signed passage through level E0. BER is in fare zone C, so you need a <b>Berlin ABC ticket</b> (€5.00 single in 2026). Buy it before boarding; validate a paper ticket or activate a digital one before starting the journey.</div>
+        </div>
+      </div>
+
+      <p class="foot">A quick orientation, not a live timetable. Check the board on the day for exact departures. For a full walkthrough see my guides on the <a href="https://www.berlinwalk.com/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way">airport to Alexanderplatz</a> and <a href="https://www.berlinwalk.com/post/tempelhof-airport-berlin">Tempelhof, the airport that became a park</a>.</p>
+      <div class="credits-row"><button class="credits-trigger" id="creditsOpen" type="button" aria-expanded="false" aria-controls="creditsModal">Image credits</button></div>
+
+    </div>
+  </div>
+</div>
+
+<div class="credits-modal" id="creditsModal" hidden role="dialog" aria-modal="true" aria-labelledby="creditsTitle">
+  <div class="credits-panel">
+    <div class="credits-head"><h2 id="creditsTitle">Image credits</h2><button class="credits-close" id="creditsClose" type="button" aria-label="Close image credits">×</button></div>
+    <ul class="credits-list">
+      <li><a href="https://commons.wikimedia.org/wiki/File:%282026%29_Flughafen_BER_Terminal_1_panorama.jpg" target="_blank" rel="noopener">BER Terminal 1</a>, <a href="https://commons.wikimedia.org/wiki/User:RoyZuoMedia" target="_blank" rel="noopener">Roy Zuo</a>, cropped; <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:%2820260318%29_BER_Airport_Terminal_2_02.jpg" target="_blank" rel="noopener">BER Terminal 2</a>, <a href="https://commons.wikimedia.org/wiki/User:RoyZuoMedia" target="_blank" rel="noopener">Roy Zuo</a>, cropped; <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:Flughafen-Express_FEX_Berlin_Hauptbahnhof.jpg" target="_blank" rel="noopener">FEX at Berlin Hauptbahnhof</a>, Profpcde, <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener">CC0</a>.</li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:Tempelhofer_Feld_May_2021.jpg" target="_blank" rel="noopener">Tempelhofer Feld</a>, Coooohen, cropped; <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:Flughafen-Berlin-Tegel-Hauptgebaeude-Nebelhalle-Terminal-B-02-2018a.jpg" target="_blank" rel="noopener">Tegel terminal</a>, Gunnar Klack, cropped; <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+(function(){
+  var DATA={
+    ber:{name:'Berlin Brandenburg', code:'BER • Willy Brandt', open:true,
+      d:'Berlin\'s scheduled passenger traffic has been concentrated at BER since Tegel handled its final flight on 8 November 2020. T1 and T2 are about a five-minute signed walk apart; the airport station is under T1 on level U2.',
+      you:'Check your booking for T1 or T2 because airline terminal assignments can change.'},
+    txl:{name:'Tegel', code:'TXL • final flight 8 Nov 2020', open:false,
+      d:'The much-loved airport in the northwest was famous for its compact hexagonal terminal and taxi-to-gate speed. It closed after BER opened. The site is becoming a research and housing district, but the terminal still stands.',
+      you:''},
+    sxf:{name:'Schönefeld', code:'SXF • absorbed into BER', open:false,
+      d:'The old eastern airport became BER Terminal 5 when the new airport opened, then T5 closed permanently. Schönefeld remains a place and an S-Bahn station, but as a separate passenger airport it no longer exists.',
+      you:''},
+    thf:{name:'Tempelhof', code:'THF • closed 2008', open:false,
+      d:'The airport closed in 2008, and Tempelhofer Feld opened as a free public park in 2010. Berliners cycle and picnic on the old runways. Worth a visit, just not by plane.',
+      you:''}
+  };
+
+  var detail=document.getElementById('detail');
+  function show(k){
+    var x=DATA[k];
+    detail.innerHTML=
+      '<span class="stamp '+(x.open?'open':'closed')+'">'+(x.open?'Open':'Closed')+'</span>'+
+      '<h3>'+x.name+' Airport</h3>'+
+      '<p class="code">'+x.code+'</p>'+
+      '<p class="d">'+x.d+'</p>'+
+      (x.you?'<p class="you">'+x.you+'</p>':'');
+    if(window.BWResize) window.BWResize();
+  }
+  function selectDot(g){
+    Array.prototype.forEach.call(document.querySelectorAll('.dot'),function(d){d.setAttribute('aria-pressed','false');});
+    g.setAttribute('aria-pressed','true');
+    show(g.dataset.k);
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.dot'),function(g){
+    g.addEventListener('click',function(){selectDot(g);});
+    g.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();selectDot(g);} });
+  });
+  show('ber');
+
+  // tabs
+  var tabs=[document.getElementById('t-map'),document.getElementById('t-board')];
+  var panes={'t-map':document.getElementById('p-map'),'t-board':document.getElementById('p-board')};
+  function activateTab(t,moveFocus){
+      tabs.forEach(function(x){
+        var selected=x===t;
+        x.setAttribute('aria-selected',selected?'true':'false');
+        x.tabIndex=selected?0:-1;
+      });
+      Object.keys(panes).forEach(function(id){panes[id].hidden=(id!==t.id);});
+      if(moveFocus)t.focus();
+      if(window.BWResize) window.BWResize();
+  }
+  tabs.forEach(function(t,index){
+    t.addEventListener('click',function(){activateTab(t,false);});
+    t.addEventListener('keydown',function(e){
+      var next=index;
+      if(e.key==='ArrowRight')next=(index+1)%tabs.length;
+      else if(e.key==='ArrowLeft')next=(index-1+tabs.length)%tabs.length;
+      else if(e.key==='Home')next=0;
+      else if(e.key==='End')next=tabs.length-1;
+      else return;
+      e.preventDefault();
+      activateTab(tabs[next],true);
+    });
+  });
+})();
+</script>
+<script>
+(function(){
+  var open=document.getElementById('creditsOpen'), modal=document.getElementById('creditsModal'), close=document.getElementById('creditsClose');
+  function show(){modal.hidden=false;open.setAttribute('aria-expanded','true');close.focus();}
+  function hide(){modal.hidden=true;open.setAttribute('aria-expanded','false');open.focus();}
+  open.addEventListener('click',show);close.addEventListener('click',hide);modal.addEventListener('click',function(e){if(e.target===modal)hide();});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!modal.hidden)hide();});
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Which Berlin Tram Should You Take? — Tourist Tram Picker</title>
+<meta name="description" content="Tell it what you want to do in Berlin and this picker shows the right tram line to catch, the destination to look for on the front, the key stops, and one practical tip. Covers the M1, M2, M4, M10 and M13 that tourists actually use." />
+<link rel="stylesheet" href="../css/brand.css" />
+<script defer src="../js/brand.js"></script>
+<style>
+  .tpk {
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+    color: var(--bw-text);
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 4px 4px 16px;
+    box-sizing: border-box;
+  }
+  .tpk *, .tpk *::before, .tpk *::after { box-sizing: border-box; }
+  .tpk__head {
+    background: var(--bw-green);
+    color: #fff;
+    border-radius: 16px 16px 0 0;
+    padding: 18px 20px 16px;
+  }
+  .tpk__kicker {
+    font-size: 11px; font-weight: 700; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--bw-yellow); margin: 0 0 6px;
+  }
+  .tpk__title { font-size: 22px; font-weight: 800; margin: 0 0 5px; line-height: 1.22; }
+  .tpk__sub { font-size: 13.5px; line-height: 1.5; margin: 0; color: #E8F1E2; }
+  .tpk__body {
+    border: 1px solid var(--bw-border);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    background: var(--bw-white);
+    overflow: hidden;
+  }
+  .tpk__prompt {
+    font-size: 12px; font-weight: 700; letter-spacing: .04em;
+    text-transform: uppercase; color: var(--bw-muted);
+    padding: 14px 16px 2px;
+  }
+  .tpk__grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    padding: 8px 14px 4px;
+  }
+  @media (max-width: 460px) { .tpk__grid { grid-template-columns: 1fr; } }
+  .tpk__opt {
+    display: flex; align-items: center; gap: 10px;
+    text-align: left; width: 100%;
+    background: var(--bw-lime-soft);
+    border: 1px solid var(--bw-border);
+    border-radius: 12px;
+    padding: 12px 12px;
+    font-size: 13.5px; font-weight: 600; line-height: 1.3;
+    color: var(--bw-text); cursor: pointer;
+    transition: background .15s, border-color .15s, transform .05s;
+  }
+  .tpk__opt:hover { background: #EAF3DA; border-color: var(--bw-lime); }
+  .tpk__opt:active { transform: translateY(1px); }
+  .tpk__opt[aria-pressed="true"] {
+    background: var(--bw-green); color: #fff; border-color: var(--bw-green);
+  }
+  .tpk__opt[aria-pressed="true"] .tpk__emoji { filter: none; }
+  .tpk__emoji { font-size: 20px; line-height: 1; flex: 0 0 auto; }
+
+  .tpk__result {
+    margin: 12px 14px 4px;
+    border: 1px solid var(--bw-border);
+    border-radius: 14px;
+    background: var(--bw-cream);
+    overflow: hidden;
+  }
+  .tpk__result[hidden] { display: none; }
+  .tpk__rhead {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    padding: 14px 16px 10px;
+    border-bottom: 1px dashed var(--bw-border);
+  }
+  .tpk__lines { display: flex; gap: 6px; flex: 0 0 auto; }
+  .tpk__badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 40px; height: 28px; padding: 0 9px;
+    background: #C1272D; color: #fff;
+    font-weight: 800; font-size: 14px; letter-spacing: .02em;
+    border-radius: 6px;
+  }
+  .tpk__badge--reg { background: var(--bw-muted); }
+  .tpk__rtitle { font-size: 15px; font-weight: 800; margin: 0; line-height: 1.3; }
+  .tpk__rows { padding: 6px 16px 12px; }
+  .tpk__row { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--bw-border); }
+  .tpk__row:last-child { border-bottom: none; }
+  .tpk__k {
+    flex: 0 0 96px; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .05em; color: var(--bw-green);
+    padding-top: 2px;
+  }
+  .tpk__v { font-size: 13.5px; line-height: 1.5; color: var(--bw-text); }
+  .tpk__v strong { font-weight: 700; }
+  .tpk__tip {
+    display: flex; gap: 8px; align-items: flex-start;
+    margin: 0 16px 14px; padding: 10px 12px;
+    background: #FFF9D6; border: 1px solid #F0E39A; border-radius: 10px;
+    font-size: 12.5px; line-height: 1.45; color: #5b5320;
+  }
+  .tpk__tip b { color: #3f3a12; }
+
+  .tpk__basics {
+    margin: 12px 14px 2px; padding: 12px 14px;
+    background: var(--bw-lime-soft); border: 1px solid var(--bw-border);
+    border-radius: 12px;
+  }
+  .tpk__basics h3 {
+    font-size: 11px; font-weight: 800; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--bw-green); margin: 0 0 8px;
+  }
+  .tpk__basics ul { margin: 0; padding: 0; list-style: none; }
+  .tpk__basics li {
+    font-size: 12.5px; line-height: 1.5; color: var(--bw-text);
+    padding: 3px 0 3px 20px; position: relative;
+  }
+  .tpk__basics li::before {
+    content: "🚊"; position: absolute; left: 0; top: 2px; font-size: 12px;
+  }
+  .tpk__foot {
+    font-size: 11px; color: var(--bw-muted); text-align: center;
+    padding: 10px 16px 2px; line-height: 1.45;
+  }
+</style>
+</head>
+<body>
+<div class="tpk">
+  <div class="tpk__head">
+    <p class="tpk__kicker">BERLINWALK.COM • Berlin Trams</p>
+    <h2 class="tpk__title">Which Berlin tram should you take?</h2>
+    <p class="tpk__sub">Pick what you want to do. I will tell you the tram line to catch, the destination to look for on the front, the stops that matter, and one thing worth knowing before you board.</p>
+  </div>
+  <div class="tpk__body">
+    <p class="tpk__prompt">I want to&hellip;</p>
+    <div class="tpk__grid" id="tpkGrid" role="group" aria-label="Choose what you want to do"></div>
+
+    <div class="tpk__result" id="tpkResult" hidden aria-live="polite">
+      <div class="tpk__rhead">
+        <span class="tpk__lines" id="tpkLines"></span>
+        <h3 class="tpk__rtitle" id="tpkRtitle"></h3>
+      </div>
+      <div class="tpk__rows">
+        <div class="tpk__row"><div class="tpk__k">Catch it at</div><div class="tpk__v" id="tpkCatch"></div></div>
+        <div class="tpk__row"><div class="tpk__k">Look for</div><div class="tpk__v" id="tpkDir"></div></div>
+        <div class="tpk__row"><div class="tpk__k">Key stops</div><div class="tpk__v" id="tpkStops"></div></div>
+      </div>
+      <div class="tpk__tip"><span>💡</span><span id="tpkTip"></span></div>
+    </div>
+
+    <div class="tpk__basics">
+      <h3>Three things that are true on every Berlin tram</h3>
+      <ul>
+        <li>Trams run almost entirely in the former East. The M10 and M13 are the two that now cross into the old West.</li>
+        <li>Buy and stamp your ticket on board: the yellow machine sits mid-carriage, and its tickets come pre-validated.</li>
+        <li>A tram is named by its final stop, not a platform. Match the destination on the front to the way you want to go.</li>
+      </ul>
+    </div>
+    <p class="tpk__foot">Lines and directions reflect the 2026 BVG tram network. Always glance at the destination sign on the front before you step on.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var OPTIONS = [
+    {
+      id: "sightsee",
+      emoji: "🌇",
+      label: "Just ride a scenic tram",
+      lines: [{ n: "M10", reg: false }],
+      title: "The M10 is Berlin's sightseeing tram",
+      catch: "<strong>Warschauer Str.</strong> (Friedrichshain) or <strong>Nordbahnhof</strong> in Mitte.",
+      dir: "A front reading <strong>Turmstr.</strong> (going west) or <strong>Warschauer Str.</strong> (going east).",
+      stops: "Warschauer Str, Frankfurter Tor, Eberswalder Str (Mauerpark), Nordbahnhof, Hauptbahnhof.",
+      tip: "<b>Sit on the right heading north-west</b> and you get Friedrichshain bars, the Mauerpark edge and Prenzlauer Berg back-streets one after another."
+    },
+    {
+      id: "prenz",
+      emoji: "🍺",
+      label: "Get to Prenzlauer Berg",
+      lines: [{ n: "M2", reg: false }],
+      title: "The M2 climbs straight into Prenzlauer Berg",
+      catch: "<strong>Alexanderplatz</strong> (the tram stop on the north side, by the Alexa/Memhardstr. corner).",
+      dir: "A front reading <strong>Heinersdorf</strong> or <strong>Am Steinberg</strong>.",
+      stops: "Alexanderplatz, Am Friedrichshain, Prenzlauer Allee/Danziger Str, Prenzlauer Berg.",
+      tip: "<b>M2 is the quick way up from the tour area</b> into the cafe streets around Kollwitzplatz without changing trains."
+    },
+    {
+      id: "museum",
+      emoji: "🏛️",
+      label: "Reach the Museum Island area",
+      lines: [{ n: "M1", reg: false }],
+      title: "The M1 is the only tram by Museum Island",
+      catch: "<strong>Am Kupfergraben</strong> (behind the Pergamon/Neues Museum) or <strong>Hackescher Markt</strong>.",
+      dir: "A front reading <strong>Rosenthal Nord</strong> or <strong>Schillerstr.</strong>",
+      stops: "Am Kupfergraben, Hackescher Markt, Rosenthaler Platz, Eberswalder Str, Kollwitzplatz.",
+      tip: "<b>M1 links the museums to Prenzlauer Berg in one ride</b>, so it is the tram to remember when your feet give out on Museum Island."
+    },
+    {
+      id: "fast",
+      emoji: "⚡",
+      label: "Leave Alexanderplatz eastward fast",
+      lines: [{ n: "M4", reg: false }],
+      title: "The M4 is Berlin's busiest tram",
+      catch: "<strong>S+U Alexanderplatz</strong> (tram stop on the north/Memhardstr. side).",
+      dir: "A front reading <strong>Hohenschönhausen</strong>, <strong>Zingster Str.</strong> or <strong>Falkenberg</strong>.",
+      stops: "Alexanderplatz, Mollstr./Prenzlauer Allee, Am Friedrichshain, Greifswalder Str.",
+      tip: "<b>You rarely wait more than a few minutes</b> for an M4, day or night. If a tram is pulling in at Alex, it is often this one."
+    },
+    {
+      id: "mauerpark",
+      emoji: "🎤",
+      label: "Get to Mauerpark on Sunday",
+      lines: [{ n: "M10", reg: false }, { n: "M1", reg: false }],
+      title: "The M10 (or M1) drops you at Mauerpark",
+      catch: "<strong>M10</strong> from Warschauer Str or Nordbahnhof; <strong>M1</strong> from Hackescher Markt.",
+      dir: "For the M10, the <strong>Eberswalder Str</strong> stop; the M1 stops one street over at <strong>Eberswalder Str</strong> too.",
+      stops: "Eberswalder Str is the stop. The flea market and karaoke bowl are a two-minute walk north.",
+      tip: "<b>Go before noon</b> if you want the flea market calm; the M10 gets packed by early afternoon on a sunny Sunday."
+    },
+    {
+      id: "eastside",
+      emoji: "🎨",
+      label: "Head to the East Side Gallery",
+      lines: [{ n: "M10", reg: false }, { n: "M13", reg: false }],
+      title: "The M10 and M13 both end at Warschauer Str",
+      catch: "<strong>M10</strong> from Mitte/Prenzlauer Berg or <strong>M13</strong> from Wedding.",
+      dir: "A front reading <strong>Warschauer Str.</strong> (the eastern terminus for both).",
+      stops: "Warschauer Str is the last stop. Walk down toward the river and the wall is right there.",
+      tip: "<b>Warschauer Str is a transport knot</b>: tram, U1/U3, S-Bahn and the M10/M13 all meet, so it is an easy place to change onto the U-Bahn afterwards."
+    }
+  ];
+
+  var grid = document.getElementById("tpkGrid");
+  var result = document.getElementById("tpkResult");
+  var elLines = document.getElementById("tpkLines");
+  var elTitle = document.getElementById("tpkRtitle");
+  var elCatch = document.getElementById("tpkCatch");
+  var elDir = document.getElementById("tpkDir");
+  var elStops = document.getElementById("tpkStops");
+  var elTip = document.getElementById("tpkTip");
+  var buttons = [];
+
+  function badge(line) {
+    var b = document.createElement("span");
+    b.className = "tpk__badge" + (line.reg ? " tpk__badge--reg" : "");
+    b.textContent = line.n;
+    return b;
+  }
+
+  function select(opt, btn) {
+    buttons.forEach(function (b) { b.setAttribute("aria-pressed", b === btn ? "true" : "false"); });
+    elLines.innerHTML = "";
+    opt.lines.forEach(function (l) { elLines.appendChild(badge(l)); });
+    elTitle.textContent = opt.title;
+    elCatch.innerHTML = opt.catch;
+    elDir.innerHTML = opt.dir;
+    elStops.textContent = opt.stops;
+    elTip.innerHTML = opt.tip;
+    result.hidden = false;
+  }
+
+  OPTIONS.forEach(function (opt) {
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "tpk__opt";
+    btn.setAttribute("aria-pressed", "false");
+    btn.innerHTML = '<span class="tpk__emoji">' + opt.emoji + '</span><span>' + opt.label + '</span>';
+    btn.addEventListener("click", function () { select(opt, btn); });
+    grid.appendChild(btn);
+    buttons.push(btn);
+  });
+})();
+</script>
+</body>
+</html>

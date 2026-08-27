@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,follow">
+  <title>Berlin First-Day Survival Guide Retired | BerlinWalk</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Montserrat, Arial, sans-serif;
+      color: #17351d;
+      background: transparent;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: transparent; }
+
+    .retired {
+      width: min(100%, 720px);
+      margin: 0 auto;
+      padding: 28px;
+      border: 1px solid #dce8c8;
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 12px 32px rgba(27, 94, 32, .08);
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: #1b5e20;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(24px, 5vw, 38px);
+      line-height: 1.08;
+    }
+
+    p {
+      margin: 14px 0 0;
+      color: #465548;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      margin-top: 20px;
+      padding: 12px 20px;
+      border: 2px solid #ffe600;
+      border-radius: 999px;
+      background: #ffe600;
+      color: #102414;
+      font-size: 15px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .cta:hover,
+    .cta:focus-visible {
+      border-color: #1b5e20;
+      color: #102414;
+      outline: none;
+    }
+
+    @media (max-width: 520px) {
+      .retired { padding: 22px 18px; border-radius: 12px; }
+      .cta { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <main class="retired">
+    <p class="eyebrow">BerlinWalk update</p>
+    <h1>This free guide has retired.</h1>
+    <p>I am replacing it with a smaller Berlin history experience built around real archival photographs and details you can still find in the city today.</p>
+    <a class="cta" href="https://www.berlinwalk.com/berlin-before-and-now?utm_source=berlinwalk&amp;utm_medium=legacy_lead_form&amp;utm_campaign=history_sampler_v1" target="_top" rel="noopener">Open Berlin Before &amp; Now</a>
+  </main>
+
+  <script>
+    (function () {
+      function reportHeight() {
+        if (window.parent === window) return;
+        var height = Math.ceil(document.documentElement.scrollHeight || document.body.scrollHeight || 0);
+        if (height > 0) window.parent.postMessage({ type: 'bw-resize', height: height }, '*');
+      }
+      window.addEventListener('load', reportHeight);
+      window.addEventListener('resize', reportHeight);
+      if (typeof ResizeObserver !== 'undefined') new ResizeObserver(reportHeight).observe(document.body);
+      reportHeight();
+    })();
+  </script>
+</body>
+</html>

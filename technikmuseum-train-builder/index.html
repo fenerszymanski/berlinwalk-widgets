@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Technikmuseum Train Builder — plan the giant museum like a dispatcher | BerlinWalk</title>
+<meta name="description" content="Couple the halls of the Deutsches Technikmuseum onto your own train: pick a time budget, add Aviation, Rail, Ships or Spectrum, and get a walking order across both entrances with the real hour traps.">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20; --green-dark: #123D18; --yellow: #FFE600; --lime: #7CB342;
+    --light-green: #C5E1A5; --cream: #FAFAF5; --ink: #212121; --steel: #37474F;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .tb-wrap { max-width: 720px; margin: 0 auto; padding: 18px 14px 30px; }
+  .tb-head { text-align: center; margin-bottom: 12px; }
+  .tb-kicker { display: inline-block; font-size: 11px; letter-spacing: 2px; font-weight: 700; color: var(--green); text-transform: uppercase; margin-bottom: 6px; }
+  .tb-title { font-size: 25px; line-height: 1.2; margin: 0 0 8px; color: var(--green-dark); font-weight: 800; }
+  .tb-sub { font-size: 13.5px; line-height: 1.55; margin: 0 auto; max-width: 560px; color: #4a4a4a; }
+
+  .tb-label { font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase; font-weight: 700; color: var(--steel); margin: 18px 0 8px; text-align: center; }
+
+  /* locomotive picker */
+  .tb-locos { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+  .tb-loco { border: 2px solid var(--green); background: #fff; border-radius: 12px; padding: 9px 12px 8px; cursor: pointer; font: inherit; color: var(--green-dark); min-width: 96px; }
+  .tb-loco b { display: block; font-size: 13.5px; }
+  .tb-loco span { font-size: 11.5px; color: #555; }
+  .tb-loco[aria-pressed="true"] { background: var(--green); color: #fff; }
+  .tb-loco[aria-pressed="true"] span { color: var(--light-green); }
+  .tb-loco:focus-visible, .tb-day:focus-visible, .tb-couple:focus-visible { outline: 3px solid var(--lime); outline-offset: 2px; }
+
+  /* day picker */
+  .tb-days { display: flex; gap: 5px; justify-content: center; flex-wrap: wrap; }
+  .tb-day { border: 2px solid var(--green); background: #fff; color: var(--green-dark); border-radius: 999px; font: inherit; font-size: 12px; font-weight: 700; padding: 6px 10px; cursor: pointer; }
+  .tb-day[aria-pressed="true"] { background: var(--green); color: #fff; }
+  .tb-day.tb-day-closed { border-style: dashed; opacity: 0.75; }
+
+  /* rail strip with train */
+  .tb-railbed { margin: 10px 0 4px; background: linear-gradient(#e8ede4, #dde5d7); border: 1px solid #c9d4c0; border-radius: 14px; padding: 14px 10px 8px; }
+  .tb-trainscroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
+  .tb-train { display: flex; align-items: flex-end; gap: 0; min-height: 74px; width: max-content; margin: 0 auto; padding: 0 6px; }
+  .tb-car { position: relative; flex: 0 0 auto; }
+  .tb-carbody { border-radius: 8px 8px 4px 4px; padding: 7px 10px 6px; font-size: 11.5px; font-weight: 700; line-height: 1.25; text-align: center; }
+  .tb-loco-body { background: var(--green-dark); color: #fff; border-radius: 12px 6px 4px 4px; padding: 8px 12px 7px; }
+  .tb-loco-body small { display: block; font-weight: 600; font-size: 10px; color: var(--light-green); }
+  .tb-chimney { position: absolute; top: -8px; left: 10px; width: 10px; height: 10px; background: var(--green-dark); border-radius: 3px 3px 0 0; }
+  .tb-wagon-body { background: #fff; border: 2px solid var(--green); color: var(--green-dark); }
+  .tb-wagon-body small { display: block; font-weight: 600; font-size: 10px; color: #607d60; }
+  .tb-wheels { display: flex; justify-content: space-around; padding: 0 8px; margin-top: 2px; }
+  .tb-wheel { width: 9px; height: 9px; border-radius: 50%; background: var(--steel); }
+  .tb-coupler { flex: 0 0 12px; height: 4px; background: var(--steel); margin: 0 0 16px; border-radius: 2px; align-self: flex-end; }
+  .tb-track { height: 0; border-top: 3px solid #9aa79a; margin: 2px 4px 0; border-radius: 2px; }
+  .tb-empty-hint { text-align: center; font-size: 12.5px; color: #666; padding: 18px 8px 20px; }
+
+  /* capacity gauge */
+  .tb-gauge { max-width: 420px; margin: 10px auto 0; }
+  .tb-gauge-bar { height: 12px; border-radius: 999px; background: #e4e9e0; overflow: hidden; border: 1px solid #cdd6c8; }
+  .tb-gauge-fill { height: 100%; border-radius: 999px; background: var(--lime); transition: width 0.25s ease; }
+  .tb-gauge-fill.tb-warn { background: var(--yellow); }
+  .tb-gauge-fill.tb-over { background: #E63946; }
+  .tb-gauge-text { font-size: 12px; text-align: center; margin-top: 5px; color: var(--steel); font-weight: 600; }
+
+  /* wagon cards */
+  .tb-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; margin-top: 8px; }
+  .tb-card { background: #fff; border: 1.5px solid #d7dfd2; border-radius: 12px; padding: 12px 12px 10px; display: flex; flex-direction: column; }
+  .tb-card.tb-on { border-color: var(--green); box-shadow: 0 0 0 2px var(--light-green); }
+  .tb-card-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .tb-card h3 { margin: 0; font-size: 14px; color: var(--green-dark); line-height: 1.3; }
+  .tb-mins { font-size: 11.5px; font-weight: 700; color: var(--steel); white-space: nowrap; }
+  .tb-site { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #607d60; margin-top: 3px; }
+  .tb-card p { margin: 6px 0 10px; font-size: 12.5px; line-height: 1.5; color: #4a4a4a; flex: 1; }
+  .tb-kids { font-size: 11px; color: var(--steel); margin-bottom: 8px; }
+  .tb-couple { border: 2px solid var(--green); background: #fff; color: var(--green-dark); font: inherit; font-size: 12.5px; font-weight: 700; border-radius: 999px; padding: 7px 12px; cursor: pointer; }
+  .tb-card.tb-on .tb-couple { background: var(--green); color: #fff; }
+
+  /* plan */
+  .tb-plan { margin-top: 18px; background: #fff; border: 1.5px solid #d7dfd2; border-radius: 14px; padding: 14px 14px 12px; }
+  .tb-plan h2 { margin: 0 0 10px; font-size: 16px; color: var(--green-dark); }
+  .tb-verdict { border-radius: 10px; padding: 9px 12px; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+  .tb-verdict.tb-ok { background: var(--light-green); color: var(--green-dark); }
+  .tb-verdict.tb-no { background: #fdecea; color: #8c1d18; }
+  .tb-verdict.tb-closed { background: var(--yellow); color: var(--green-dark); }
+  .tb-stops { list-style: none; margin: 0; padding: 0; }
+  .tb-stops li { display: flex; gap: 10px; align-items: baseline; padding: 6px 0; border-bottom: 1px dashed #e0e6dc; font-size: 13px; }
+  .tb-stops li:last-child { border-bottom: 0; }
+  .tb-stop-min { flex: 0 0 58px; font-weight: 700; color: var(--steel); font-size: 12px; text-align: right; }
+  .tb-stop-walk { color: #607d60; font-style: italic; }
+  .tb-stop-gate { font-weight: 700; color: var(--green-dark); }
+  .tb-warnings { margin: 10px 0 0; padding: 0; list-style: none; }
+  .tb-warnings li { font-size: 12.5px; line-height: 1.5; padding: 7px 10px; border-radius: 9px; margin-top: 6px; }
+  .tb-w-stop { background: var(--yellow); color: var(--green-dark); font-weight: 700; }
+  .tb-w-tip { background: #f4f8ef; color: var(--green-dark); }
+  .tb-w-info { background: #f2f4f1; color: #37474F; }
+  .tb-suggest { margin-top: 8px; font-size: 12.5px; font-weight: 700; color: #8c1d18; }
+  .tb-suggest button { border: 0; background: transparent; color: var(--green); font: inherit; font-weight: 700; text-decoration: underline; cursor: pointer; padding: 0; }
+  .tb-foot { margin-top: 14px; text-align: center; font-size: 11.5px; color: #777; line-height: 1.5; }
+
+  @media (max-width: 420px) {
+    .tb-cards { grid-template-columns: 1fr; }
+    .tb-title { font-size: 21px; }
+  }
+</style>
+</head>
+<body>
+<div class="tb-wrap">
+  <header class="tb-head">
+    <span class="tb-kicker">BerlinWalk &middot; Berlin Tools</span>
+    <h1 class="tb-title">Technikmuseum Train Builder</h1>
+    <p class="tb-sub">The Deutsches Technikmuseum fills a whole freight yard, and nobody sees all of it in one visit. Pick a locomotive for your time budget, couple the halls you care about, and get a walking order that fits your day.</p>
+  </header>
+
+  <div class="tb-label">1 &middot; Pick your locomotive</div>
+  <div class="tb-locos" id="tbLocos" role="group" aria-label="Time budget"></div>
+
+  <div class="tb-label">2 &middot; Which day?</div>
+  <div class="tb-days" id="tbDays" role="group" aria-label="Day of the week"></div>
+
+  <div class="tb-label">3 &middot; Couple your wagons</div>
+  <div class="tb-railbed">
+    <div class="tb-trainscroll">
+      <div class="tb-train" id="tbTrain"></div>
+    </div>
+    <div class="tb-track"></div>
+    <div class="tb-empty-hint" id="tbEmptyHint">Your train is just a locomotive so far. Couple wagons from the cards below.</div>
+    <div class="tb-gauge" id="tbGauge" hidden>
+      <div class="tb-gauge-bar"><div class="tb-gauge-fill" id="tbGaugeFill"></div></div>
+      <div class="tb-gauge-text" id="tbGaugeText"></div>
+    </div>
+  </div>
+
+  <div class="tb-cards" id="tbCards"></div>
+
+  <section class="tb-plan" id="tbPlan" hidden aria-live="polite">
+    <h2>Your dispatch plan</h2>
+    <div class="tb-verdict" id="tbVerdict"></div>
+    <ol class="tb-stops" id="tbStops"></ol>
+    <ul class="tb-warnings" id="tbWarnings"></ul>
+    <div class="tb-suggest" id="tbSuggest" hidden></div>
+  </section>
+
+  <p class="tb-foot">One ticket covers the main museum and the Science Center Spectrum on the same day. Under-18s are free. Hours and prices checked on the official site in July 2026.</p>
+</div>
+
+<script src="engine.js"></script>
+<script>
+(function () {
+  var E = window.TMTrainBuilder;
+  var state = { loco: 'half', day: 'sat', selected: [] };
+
+  var kidsDots = function (n) {
+    var s = '';
+    for (var i = 0; i < 3; i++) s += i < n ? '●' : '○';
+    return s;
+  };
+
+  function el(id) { return document.getElementById(id); }
+
+  function renderPickers() {
+    var locoHtml = E.LOCOS.map(function (l) {
+      return '<button type="button" class="tb-loco" data-loco="' + l.id + '" aria-pressed="' + (state.loco === l.id) + '"><b>' + l.label + '</b><span>' + l.note + '</span></button>';
+    }).join('');
+    el('tbLocos').innerHTML = locoHtml;
+    var dayHtml = E.DAYS.map(function (d) {
+      return '<button type="button" class="tb-day' + (d.open ? '' : ' tb-day-closed') + '" data-day="' + d.id + '" aria-pressed="' + (state.day === d.id) + '">' + d.label + (d.open ? '' : ' ×') + '</button>';
+    }).join('');
+    el('tbDays').innerHTML = dayHtml;
+  }
+
+  function renderCards() {
+    el('tbCards').innerHTML = E.WAGONS.map(function (w) {
+      var on = state.selected.indexOf(w.id) !== -1;
+      return '<div class="tb-card' + (on ? ' tb-on' : '') + '">' +
+        '<div class="tb-card-top"><h3>' + w.name + '</h3><span class="tb-mins">' + w.minutes + ' min</span></div>' +
+        '<span class="tb-site">' + (w.site === 'main' ? 'Trebbiner Str. 9' : 'Möckernstr. 26') + (w.outdoor ? ' · open air' : '') + '</span>' +
+        '<p>' + w.blurb + '</p>' +
+        '<div class="tb-kids">Kid pull: ' + kidsDots(w.kids) + '</div>' +
+        '<button type="button" class="tb-couple" data-wagon="' + w.id + '" aria-pressed="' + on + '">' + (on ? 'Uncouple' : 'Couple wagon') + '</button>' +
+        '</div>';
+    }).join('');
+  }
+
+  function renderTrain(plan) {
+    var loco = E.LOCOS.filter(function (l) { return l.id === state.loco; })[0];
+    var cars = ['<div class="tb-car"><div class="tb-chimney"></div><div class="tb-carbody tb-loco-body">' + loco.label + '<small>' + loco.minutes + ' min of steam</small></div><div class="tb-wheels"><span class="tb-wheel"></span><span class="tb-wheel"></span><span class="tb-wheel"></span></div></div>'];
+    plan.wagons.forEach(function (id) {
+      var w = E.WAGONS.filter(function (x) { return x.id === id; })[0];
+      cars.push('<div class="tb-coupler"></div>');
+      cars.push('<div class="tb-car"><div class="tb-carbody tb-wagon-body">' + w.short + '<small>' + w.minutes + ' min</small></div><div class="tb-wheels"><span class="tb-wheel"></span><span class="tb-wheel"></span></div></div>');
+    });
+    el('tbTrain').innerHTML = cars.join('');
+    el('tbEmptyHint').hidden = plan.wagons.length > 0;
+    el('tbGauge').hidden = plan.wagons.length === 0;
+    if (plan.wagons.length) {
+      var pct = Math.min(100, Math.round(plan.totalMinutes / plan.loco.minutes * 100));
+      var fill = el('tbGaugeFill');
+      fill.style.width = pct + '%';
+      fill.className = 'tb-gauge-fill' + (plan.fits ? (pct >= 85 ? ' tb-warn' : '') : ' tb-over');
+      el('tbGaugeText').textContent = plan.totalMinutes + ' of ' + plan.loco.minutes + ' min used' + (plan.fits ? '' : ' · over by ' + plan.overBy + ' min');
+    }
+  }
+
+  function renderPlan(plan) {
+    var planEl = el('tbPlan');
+    planEl.hidden = plan.wagons.length === 0;
+    if (plan.wagons.length === 0) return;
+    var v = el('tbVerdict');
+    if (!plan.day.open) {
+      v.className = 'tb-verdict tb-closed';
+      v.textContent = 'Closed on Mondays. Shift your train to another day.';
+    } else if (plan.fits) {
+      v.className = 'tb-verdict tb-ok';
+      v.textContent = 'Departure cleared: ' + plan.totalMinutes + ' minutes of museum fits your ' + plan.loco.label.toLowerCase() + ' (' + plan.day.label + ' ' + plan.day.hours + ').';
+    } else {
+      v.className = 'tb-verdict tb-no';
+      v.textContent = 'Train too long: ' + plan.totalMinutes + ' minutes will not fit in ' + plan.loco.minutes + '. Uncouple a wagon or take a bigger locomotive.';
+    }
+    el('tbStops').innerHTML = plan.day.open ? plan.stops.map(function (s) {
+      var cls = s.type === 'walk' ? 'tb-stop-walk' : (s.type === 'gate' ? 'tb-stop-gate' : '');
+      return '<li><span class="tb-stop-min">' + s.minutes + ' min</span><span class="' + cls + '">' + s.label + '</span></li>';
+    }).join('') : '';
+    el('tbWarnings').innerHTML = plan.warnings.map(function (w) {
+      var cls = w.level === 'stop' ? 'tb-w-stop' : (w.level === 'tip' ? 'tb-w-tip' : 'tb-w-info');
+      return '<li class="' + cls + '">' + w.text + '</li>';
+    }).join('');
+    var sg = el('tbSuggest');
+    if (plan.suggestion) {
+      sg.hidden = false;
+      if (plan.suggestion.type === 'upgrade') {
+        sg.innerHTML = plan.suggestion.text + ' <button type="button" data-upgrade="' + plan.suggestion.locoId + '">Switch locomotive</button>';
+      } else {
+        sg.innerHTML = plan.suggestion.text + ' <button type="button" data-drop="' + plan.suggestion.wagonId + '">Uncouple it</button>';
+      }
+    } else { sg.hidden = true; sg.innerHTML = ''; }
+  }
+
+  function render() {
+    var plan = E.buildPlan(state);
+    renderPickers();
+    renderCards();
+    renderTrain(plan);
+    renderPlan(plan);
+  }
+
+  document.addEventListener('click', function (ev) {
+    var t = ev.target.closest ? ev.target.closest('button') : null;
+    if (!t) return;
+    if (t.dataset.loco) { state.loco = t.dataset.loco; render(); }
+    else if (t.dataset.day) { state.day = t.dataset.day; render(); }
+    else if (t.dataset.wagon) {
+      var id = t.dataset.wagon;
+      var i = state.selected.indexOf(id);
+      if (i === -1) state.selected.push(id); else state.selected.splice(i, 1);
+      render();
+    }
+    else if (t.dataset.upgrade) { state.loco = t.dataset.upgrade; render(); }
+    else if (t.dataset.drop) {
+      var j = state.selected.indexOf(t.dataset.drop);
+      if (j !== -1) state.selected.splice(j, 1);
+      render();
+    }
+  });
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

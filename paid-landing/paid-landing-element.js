@@ -1,0 +1,1553 @@
+(function () {
+  const SCRIPT_URL = document.currentScript?.src || '';
+  const BASE_URL = SCRIPT_URL
+    ? new URL('../', SCRIPT_URL).toString()
+    : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
+  const CALENDAR_SCRIPT_URL = new URL('booking-calendar/booking-calendar-element.js', BASE_URL).toString();
+  const TRACK_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/pf-event';
+  const LOGO_URL = 'https://static.wixstatic.com/media/5a08a3_2f62d59b419643c0994771fac5765c79~mv2.png';
+  const PAID_TRACKING_KEY = 'bwPaidTracking.v1';
+  const PAID_VISITOR_KEY = 'bwVisitorId.v1';
+  const PAID_SESSION_KEY = 'bwSessionId.v1';
+  const PAID_AD_IDENTIFIER_KEYS = ['fbclid', 'fbc', 'fbp'];
+
+  const asset = (path) => new URL(path, BASE_URL).toString();
+
+  function consentBoolean(value) {
+    return value === true || value === 1 || value === '1' || value === 'true';
+  }
+
+  function gdprDefaultPolicyBlocked(current) {
+    if (!current || current.defaultPolicy !== true) return false;
+    try {
+      const manager = window.wixTagManager;
+      const config = manager && typeof manager.getConfig === 'function'
+        ? manager.getConfig()
+        : null;
+      return !config || config.gdprEnforcedGeo !== false;
+    } catch {
+      return true;
+    }
+  }
+
+  function readConsentPolicy() {
+    try {
+      const manager = window.consentPolicyManager;
+      const current = manager && typeof manager.getCurrentConsentPolicy === 'function'
+        ? manager.getCurrentConsentPolicy()
+        : null;
+      if (gdprDefaultPolicyBlocked(current)) return { analytics: false, advertising: false };
+      const policy = current && (current.policy || current);
+      if (policy && Object.keys(policy).length) return policy;
+    } catch {}
+
+    try {
+      const match = document.cookie.match(/(?:^|;\s*)consent-policy=([^;]+)/);
+      if (!match) return null;
+      const parsed = JSON.parse(decodeURIComponent(match[1]));
+      const policy = parsed && (parsed.policy || parsed);
+      return policy && Object.keys(policy).length ? policy : null;
+    } catch {
+      return null;
+    }
+  }
+
+  function consentState() {
+    const policy = readConsentPolicy();
+    const known = Boolean(policy && Object.keys(policy).length);
+    const nested = policy && policy.consent && typeof policy.consent === 'object' ? policy.consent : {};
+    const analyticsRaw = policy && (policy.analytics ?? policy.anl ?? policy.analyticsConsent ?? policy.analyticsStorage ?? nested.analytics);
+    const advertisingRaw = policy && (policy.advertising ?? policy.adv ?? policy.advertisingConsent ?? policy.marketing ?? policy.marketingConsent ?? policy.dataToThirdParty ?? policy.marketingStorage ?? nested.advertising ?? nested.marketing);
+    const analyticsKnown = analyticsRaw !== undefined && analyticsRaw !== null;
+    const advertisingKnown = advertisingRaw !== undefined && advertisingRaw !== null;
+    return {
+      known,
+      analyticsKnown,
+      advertisingKnown,
+      analytics: analyticsKnown && consentBoolean(analyticsRaw),
+      advertising: advertisingKnown && consentBoolean(advertisingRaw),
+    };
+  }
+
+  function randomId(prefix) {
+    try {
+      if (window.crypto && typeof window.crypto.getRandomValues === 'function') {
+        const values = new Uint32Array(4);
+        window.crypto.getRandomValues(values);
+        return `${prefix}_${Array.from(values).map((value) => value.toString(16).padStart(8, '0')).join('')}`;
+      }
+    } catch {}
+    return `${prefix}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 10)}`;
+  }
+
+  function readJSON(storage, key) {
+    try {
+      const raw = storage && storage.getItem(key);
+      return raw ? JSON.parse(raw) : null;
+    } catch {
+      return null;
+    }
+  }
+
+  function writeJSON(storage, key, value) {
+    try {
+      storage && storage.setItem(key, JSON.stringify(value));
+    } catch {}
+  }
+
+  function readCookie(name) {
+    try {
+      const prefix = `${name}=`;
+      const part = String(document.cookie || '').split(';').map((item) => item.trim()).find((item) => item.startsWith(prefix));
+      return part ? decodeURIComponent(part.slice(prefix.length)) : '';
+    } catch {
+      return '';
+    }
+  }
+
+  function privacySafeTrackingUrl(value, advertisingAllowed) {
+    const raw = String(value || '');
+    if (!raw || advertisingAllowed) return raw;
+    try {
+      const url = new URL(raw, window.location.href);
+      PAID_AD_IDENTIFIER_KEYS.forEach((key) => url.searchParams.delete(key));
+      return url.toString();
+    } catch {
+      return raw;
+    }
+  }
+
+  function purgeAdvertisingIdentifiers(preserveAnalyticsState = false) {
+    try {
+      if (preserveAnalyticsState) {
+        const stored = readJSON(window.localStorage, PAID_TRACKING_KEY);
+        if (stored && typeof stored === 'object') {
+          PAID_AD_IDENTIFIER_KEYS.forEach((key) => { delete stored[key]; });
+          writeJSON(window.localStorage, PAID_TRACKING_KEY, stored);
+        }
+      } else {
+        window.localStorage?.removeItem(PAID_TRACKING_KEY);
+        window.localStorage?.removeItem(PAID_VISITOR_KEY);
+        window.sessionStorage?.removeItem(PAID_SESSION_KEY);
+      }
+    } catch {}
+  }
+
+  function canonicalTrackingState(consent) {
+    if (!consent.analytics) {
+      if (consent.analyticsKnown) purgeAdvertisingIdentifiers(false);
+      return null;
+    }
+
+    const params = new URLSearchParams(window.location.search || '');
+    const stored = readJSON(window.localStorage, PAID_TRACKING_KEY) || {};
+    const storedAdvertisingIdentifiers = PAID_AD_IDENTIFIER_KEYS.some((key) => Boolean(stored[key]));
+    const current = {
+      utm_source: params.get('utm_source') || '',
+      utm_medium: params.get('utm_medium') || '',
+      utm_campaign: params.get('utm_campaign') || '',
+      utm_content: params.get('utm_content') || '',
+      utm_term: params.get('utm_term') || '',
+      utm_id: params.get('utm_id') || '',
+    };
+    const merged = Object.assign({}, stored);
+    if (!merged.visitorId) merged.visitorId = readJSON(window.localStorage, PAID_VISITOR_KEY) || randomId('bw_v');
+    writeJSON(window.localStorage, PAID_VISITOR_KEY, merged.visitorId);
+    if (!merged.sessionId) merged.sessionId = readJSON(window.sessionStorage, PAID_SESSION_KEY) || randomId('bw_s');
+    writeJSON(window.sessionStorage, PAID_SESSION_KEY, merged.sessionId);
+    if (!merged.attributionId) merged.attributionId = randomId('bw_attr');
+    if (!merged.firstPage) merged.firstPage = window.location.pathname;
+    if (!merged.landingPage) merged.landingPage = window.location.href;
+    if (!merged.createdAt) merged.createdAt = new Date().toISOString();
+
+    Object.keys(current).forEach((key) => {
+      if (!merged[key] && current[key]) merged[key] = current[key];
+    });
+
+    if (consent.advertising) {
+      const identifiers = {
+        fbclid: params.get('fbclid') || '',
+        fbc: params.get('fbc') || readCookie('_fbc'),
+        fbp: params.get('fbp') || readCookie('_fbp'),
+      };
+      PAID_AD_IDENTIFIER_KEYS.forEach((key) => {
+        if (!merged[key] && identifiers[key]) merged[key] = identifiers[key];
+      });
+    } else if (consent.advertisingKnown) {
+      PAID_AD_IDENTIFIER_KEYS.forEach((key) => { delete merged[key]; });
+      purgeAdvertisingIdentifiers(true);
+    } else {
+      // A missing policy is a fail-closed send state, not proof of denial. Do
+      // not overwrite a previously consented local record while Wix is still
+      // initialising its policy.
+      PAID_AD_IDENTIFIER_KEYS.forEach((key) => { delete merged[key]; });
+    }
+
+    if (!consent.advertising) merged.landingPage = privacySafeTrackingUrl(merged.landingPage, false);
+
+    const paidSignal = [merged.utm_source, merged.utm_medium, merged.utm_campaign].join(' ').toLowerCase();
+    merged.isPaid = /(^|[^a-z])(meta|facebook|instagram|fb|ig|paid|cpc|paid_social)([^a-z]|$)/i.test(paidSignal);
+    merged.updatedAt = new Date().toISOString();
+    // If Wix has not exposed an advertising decision yet, preserve an existing
+    // record that may contain consented identifiers, but still persist a new
+    // analytics-only record when there is nothing sensitive to preserve.
+    if (consent.advertising || consent.advertisingKnown || !storedAdvertisingIdentifiers) {
+      writeJSON(window.localStorage, PAID_TRACKING_KEY, merged);
+    }
+    return merged;
+  }
+
+  function ensureBookingCalendar() {
+    if (customElements.get('bw-booking-calendar')) return Promise.resolve();
+    if (window.__bwBookingCalendarLoading) return window.__bwBookingCalendarLoading;
+
+    window.__bwBookingCalendarLoading = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = CALENDAR_SCRIPT_URL;
+      script.async = true;
+      script.onload = resolve;
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
+
+    return window.__bwBookingCalendarLoading;
+  }
+
+  function ensureFont() {
+    if (document.querySelector('link[data-bw-paid-landing-font]')) return;
+    const preconnect = document.createElement('link');
+    preconnect.rel = 'preconnect';
+    preconnect.href = 'https://fonts.gstatic.com';
+    preconnect.crossOrigin = 'anonymous';
+
+    const font = document.createElement('link');
+    font.rel = 'stylesheet';
+    font.href = 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap';
+    font.dataset.bwPaidLandingFont = 'true';
+
+    document.head.appendChild(preconnect);
+    document.head.appendChild(font);
+  }
+
+  class BWPaidLandingElement extends HTMLElement {
+    connectedCallback() {
+      ensureFont();
+      this._activatePaidLandingPage();
+      this._pageViewAnalyticsSent = false;
+      this._pageViewAdvertisingSent = false;
+      this._consentHandler = () => {
+        const consent = consentState();
+        if (consent.advertisingKnown && !consent.advertising) purgeAdvertisingIdentifiers(consent.analytics);
+        this._trackingState = consent.analytics ? canonicalTrackingState(consent) : null;
+        this._trackPageView();
+      };
+      ['consentPolicyInitialized', 'consentPolicyChanged', 'TagManagerConfigSet', 'ucConsentEvent', 'bwConsentPolicyChanged'].forEach((eventName) => {
+        document.addEventListener(eventName, this._consentHandler);
+        window.addEventListener(eventName, this._consentHandler);
+      });
+      ensureBookingCalendar().catch((error) => {
+        console.error('BerlinWalk paid landing calendar loader failed:', error);
+      });
+      this._render();
+      this._bind();
+      this._setupAutoHeight();
+      this._hideGlobalStickyCtas();
+      this._trackPageView();
+    }
+
+    disconnectedCallback() {
+      if (this._stickyObserver) this._stickyObserver.disconnect();
+      if (this._heightObserver) this._heightObserver.disconnect();
+      if (this._globalCtaObserver) this._globalCtaObserver.disconnect();
+      if (this._scrollHandler) window.removeEventListener('scroll', this._scrollHandler);
+      if (this._resizeHandler) window.removeEventListener('resize', this._resizeHandler);
+      if (this._heightResizeHandler) window.removeEventListener('resize', this._heightResizeHandler);
+      if (this._loadHandler) window.removeEventListener('load', this._loadHandler);
+      if (this._consentHandler) {
+        ['consentPolicyInitialized', 'consentPolicyChanged', 'TagManagerConfigSet', 'ucConsentEvent', 'bwConsentPolicyChanged'].forEach((eventName) => {
+          document.removeEventListener(eventName, this._consentHandler);
+          window.removeEventListener(eventName, this._consentHandler);
+        });
+      }
+      document.documentElement.classList.remove('bw-paid-landing-active');
+      document.body?.classList.remove('bw-paid-landing-active');
+    }
+
+    _render() {
+      const heroImage = asset('gallery/images/06-1600w.webp');
+      const routeImage = asset('gallery/images/08-1600w.webp');
+      const guideImage = asset('gallery/images/13-1200w.webp');
+      const featureStory = asset('gallery/images/10-1200w.webp');
+      const featureLogistics = asset('gallery/images/11-1200w.webp');
+      const featureTip = asset('gallery/images/01-1200w.webp');
+
+      this.innerHTML = `
+        <style>${this._styles()}</style>
+        <main class="bw-paid-landing" style="--bw-paid-hero-image: url('${heroImage}'); --bw-paid-route-image: url('${routeImage}'); --bw-paid-guide-image: url('${guideImage}');">
+          <div class="bw-paid-top-strip">9.8 / 10 on FreeTour - Free reservation - ~2h - Tue-Sat 11:30 - From 3 July 2026: 11:30 + 15:30</div>
+
+          <section class="bw-paid-hero" id="bw-paid-book">
+            <div class="bw-paid-inner">
+              <div class="bw-paid-mini-nav" aria-label="BerlinWalk">
+                <img class="bw-paid-logo" src="${LOGO_URL}" alt="BerlinWalk">
+                <span>Tip-based walking tour through historic Berlin</span>
+              </div>
+
+              <div class="bw-paid-hero-grid">
+                <div class="bw-paid-hero-copy">
+                  <p class="bw-paid-eyebrow">No upfront payment</p>
+                  <h1>Free Berlin Walking Tour</h1>
+                  <p class="bw-paid-lead">Most Berlin tours focus on the Wall and Cold War. This walk starts where Berlin began: the historic centre, from Alexanderplatz through medieval streets and Museum Island to Hackescher Markt.</p>
+                  <div class="bw-paid-facts" aria-label="Tour facts">
+                    <span>~2 hours</span>
+                    <span>12 stops</span>
+                    <span>English</span>
+                    <span>Tip-based</span>
+                    <span>Small groups</span>
+                  </div>
+                  <div class="bw-paid-actions">
+                    <a class="bw-paid-button bw-paid-button-primary" href="#bw-paid-calendar" data-scroll-target="bw-paid-calendar" data-track-pick-date>Pick your date</a>
+                    <a class="bw-paid-button bw-paid-button-secondary" href="#bw-paid-route" data-scroll-target="bw-paid-route">See the route</a>
+                  </div>
+                </div>
+
+                <aside class="bw-paid-booking-panel" id="bw-paid-calendar" aria-label="Pick your tour date">
+                  <div class="bw-paid-booking-above">
+                    <strong>Live availability</strong>
+                    <span>Free reservation. Tip at the end. Phone is only for tour-day coordination.</span>
+                  </div>
+                  <bw-booking-calendar
+                    availability-days="${this.getAttribute('availability-days') || '365'}"
+                    service-title="Pick your tour date"
+                    cta-label="Reserve your spot">
+                  </bw-booking-calendar>
+                </aside>
+              </div>
+            </div>
+          </section>
+
+          <section class="bw-paid-trust" aria-label="Trust signals">
+            <div class="bw-paid-inner bw-paid-trust-grid">
+              <div><b>Free to reserve</b>No card and no upfront payment.</div>
+              <div><b>Central start</b>World Clock, Alexanderplatz.</div>
+              <div><b>Clear finish</b>Hackescher Markt.</div>
+              <div><b>Local guide</b>Berlin explained while you walk.</div>
+            </div>
+          </section>
+
+          <section class="bw-paid-section" id="bw-paid-why">
+            <div class="bw-paid-inner">
+              <div class="bw-paid-section-head">
+                <h2>A first Berlin walk that makes the city click</h2>
+                <p>Built for travellers who want context, practical orientation, and a confident first route through the historic centre.</p>
+              </div>
+
+              <div class="bw-paid-feature-grid">
+                <article class="bw-paid-feature">
+                  <div class="bw-paid-feature-img" style="background-image: url('${featureStory}');"></div>
+                  <div class="bw-paid-feature-body">
+                    <b>Stories you can see</b>
+                    <p>Old images, maps, and street-level details connect the places in front of you with the Berlin that used to stand there.</p>
+                  </div>
+                </article>
+                <article class="bw-paid-feature">
+                  <div class="bw-paid-feature-img" style="background-image: url('${featureLogistics}');"></div>
+                  <div class="bw-paid-feature-body">
+                    <b>Easy first-day logistics</b>
+                    <p>Start centrally, walk at a practical pace, and finish near food, transit, museums, and the rest of your Berlin day.</p>
+                  </div>
+                </article>
+                <article class="bw-paid-feature">
+                  <div class="bw-paid-feature-img" style="background-image: url('${featureTip}');"></div>
+                  <div class="bw-paid-feature-body">
+                    <b>Tip-based, not prepaid</b>
+                    <p>Reserve for free. At the end, you decide the tip based on the value of the walk and your own budget.</p>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <section class="bw-paid-route" id="bw-paid-route" aria-label="Tour route preview">
+            <div class="bw-paid-inner bw-paid-route-layout">
+              <div class="bw-paid-route-copy">
+                <p class="bw-paid-eyebrow">The route</p>
+                <h2>From World Clock to Hackescher Markt</h2>
+                <p>The walk is designed as one clear story through Berlin's historic centre, not a random checklist of sights.</p>
+              </div>
+
+              <div class="bw-paid-route-map" aria-label="Route summary">
+                <div class="bw-paid-route-line" aria-hidden="true">
+                  <span>1</span>
+                  <i></i>
+                  <span>12</span>
+                  <i></i>
+                  <span>2h</span>
+                </div>
+                <div class="bw-paid-route-labels">
+                  <div>
+                    <b>Start at Alexanderplatz</b>
+                    <small>Meet at the World Clock, easy to reach by U-Bahn, S-Bahn, tram, and bus.</small>
+                  </div>
+                  <div>
+                    <b>Connect 12 stops</b>
+                    <small>Medieval Berlin, Museum Island, political memory, and practical shortcuts between sights.</small>
+                  </div>
+                  <div>
+                    <b>Finish at Hackescher Markt</b>
+                    <small>Simple handoff to lunch, museums, transport, or your next Berlin plan.</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="bw-paid-section bw-paid-guide">
+            <div class="bw-paid-inner bw-paid-guide-layout">
+              <div class="bw-paid-guide-photo" role="img" aria-label="BerlinWalk guide Yusuf with historic photos on tour"></div>
+              <div class="bw-paid-guide-copy">
+                <p class="bw-paid-eyebrow">Your guide</p>
+                <h2>Berlin explained by a local guide, not a script.</h2>
+                <p>Yusuf built BerlinWalk for visitors who want the city to make sense while they are standing inside it.</p>
+                <ul>
+                  <li>Small-group format, practical pace, and clear meeting instructions.</li>
+                  <li>Historical context without turning the walk into a lecture.</li>
+                  <li>Useful local tips for what to do after the tour ends.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="bw-paid-section">
+            <div class="bw-paid-inner">
+              <div class="bw-paid-section-head">
+                <h2>Quick answers before you reserve</h2>
+                <p>Short, practical answers for the questions that usually slow people down.</p>
+              </div>
+              <div class="bw-paid-faq-grid">
+                <details open>
+                  <summary>Do I pay anything now?</summary>
+                  <p>No. The reservation is free and there is no upfront payment. You can tip at the end of the walk.</p>
+                </details>
+                <details>
+                  <summary>Where do we meet?</summary>
+                  <p>At the World Clock on Alexanderplatz. The exact meeting details are included in the booking confirmation.</p>
+                </details>
+                <details>
+                  <summary>How long is the walk?</summary>
+                  <p>About 2 hours. Ends at Hackescher Markt.</p>
+                </details>
+                <details>
+                  <summary>Why do you ask for a phone number?</summary>
+                  <p>Only for tour-day coordination, especially if you are late or cannot find the group.</p>
+                </details>
+              </div>
+            </div>
+          </section>
+
+          <section class="bw-paid-final-cta">
+            <div class="bw-paid-inner">
+              <div>
+                <h2>Pick a date while there are still spots.</h2>
+                <p>Reserve for free now. Add your attendee details on the next step.</p>
+              </div>
+              <a class="bw-paid-button" href="#bw-paid-calendar" data-scroll-target="bw-paid-calendar" data-track-pick-date>Pick your date</a>
+            </div>
+          </section>
+
+          <div class="bw-paid-sticky-cta">
+            <a class="bw-paid-button" href="#bw-paid-calendar" data-scroll-target="bw-paid-calendar" data-track-pick-date>Pick your date</a>
+          </div>
+        </main>
+      `;
+    }
+
+    _bind() {
+      const links = Array.from(this.querySelectorAll('[data-scroll-target]'));
+      links.forEach((link) => {
+        link.addEventListener('click', (event) => {
+          event.preventDefault();
+          const target = this.querySelector(`#${link.getAttribute('data-scroll-target')}`);
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          if (link.hasAttribute('data-track-pick-date')) {
+            this._track('bw_booking_pick_date_click', {
+              label: link.textContent.trim(),
+              source: 'paid_landing_anchor',
+            });
+          }
+        });
+      });
+
+      const calendar = this.querySelector('bw-booking-calendar');
+      if (calendar) {
+        calendar.addEventListener('bw-booking-calendar-change', (event) => {
+          const detail = event.detail || {};
+          const eventName = detail.action === 'slot' ? 'bw_booking_slot_select' : 'bw_booking_pick_date_click';
+          this._track(eventName, {
+            source: 'booking_calendar',
+            action: detail.action,
+            date: detail.date,
+            time: detail.time,
+          });
+        });
+        calendar.addEventListener('bw-booking-calendar-continue', (event) => {
+          const detail = event.detail || {};
+          this._track('bw_booking_next_click', {
+            source: 'booking_calendar',
+            date: detail.date,
+            time: detail.time,
+          });
+        });
+      }
+
+      this._setupStickyCta(calendar);
+    }
+
+    _setupStickyCta(calendar) {
+      const sticky = this.querySelector('.bw-paid-sticky-cta');
+      let calendarVisible = true;
+
+      const update = () => {
+        if (!sticky) return;
+        const shouldShow = !calendarVisible && window.scrollY > 260 && window.innerWidth <= 620;
+        sticky.classList.toggle('is-visible', shouldShow);
+      };
+
+      this._scrollHandler = update;
+      this._resizeHandler = update;
+
+      if (sticky && calendar && 'IntersectionObserver' in window) {
+        this._stickyObserver = new IntersectionObserver((entries) => {
+          calendarVisible = entries.some((entry) => entry.isIntersecting);
+          update();
+        }, { threshold: 0.05 });
+        this._stickyObserver.observe(calendar);
+      }
+
+      window.addEventListener('scroll', this._scrollHandler, { passive: true });
+      window.addEventListener('resize', this._resizeHandler);
+    }
+
+    _setupAutoHeight() {
+      const content = this.querySelector('.bw-paid-landing');
+      if (!content) return;
+
+      const sync = () => this._syncAutoHeight();
+      this._loadHandler = sync;
+      this._heightResizeHandler = sync;
+
+      if ('ResizeObserver' in window) {
+        this._heightObserver = new ResizeObserver(sync);
+        this._heightObserver.observe(content);
+      }
+
+      window.addEventListener('load', this._loadHandler);
+      window.addEventListener('resize', this._heightResizeHandler);
+      window.requestAnimationFrame(sync);
+      window.requestAnimationFrame(() => window.requestAnimationFrame(sync));
+      window.setTimeout(sync, 800);
+      window.setTimeout(sync, 2200);
+    }
+
+    _activatePaidLandingPage() {
+      document.documentElement.classList.add('bw-paid-landing-active');
+      document.body?.classList.add('bw-paid-landing-active');
+    }
+
+    _hideGlobalStickyCtas() {
+      const hide = () => {
+        document.querySelectorAll('#bw-sticky-cta, #bw-desktop-cta, [data-bw-tourcta]').forEach((node) => {
+          if (!(node instanceof HTMLElement)) return;
+          node.style.setProperty('display', 'none', 'important');
+          node.style.setProperty('visibility', 'hidden', 'important');
+          node.style.setProperty('pointer-events', 'none', 'important');
+        });
+        document.body?.classList.remove('bw-sticky-active');
+        document.body?.style.setProperty('padding-bottom', '0px', 'important');
+      };
+
+      hide();
+      window.setTimeout(hide, 300);
+      window.setTimeout(hide, 1200);
+      window.setTimeout(hide, 2600);
+
+      if ('MutationObserver' in window) {
+        this._globalCtaObserver = new MutationObserver(hide);
+        this._globalCtaObserver.observe(document.body || document.documentElement, {
+          childList: true,
+          subtree: true,
+        });
+      }
+    }
+
+    _syncAutoHeight() {
+      const content = this.querySelector('.bw-paid-landing');
+      if (!content) return;
+
+      const height = Math.ceil(content.getBoundingClientRect().height);
+      if (!height) return;
+
+      this.style.setProperty('display', 'block', 'important');
+      this.style.setProperty('height', `${height}px`, 'important');
+      this.style.setProperty('min-height', '0', 'important');
+      this.style.setProperty('overflow', 'visible', 'important');
+      this.style.setProperty('width', '100%', 'important');
+
+      const parent = this.parentElement;
+      if (parent) {
+        const parentHeight = Math.ceil(parent.getBoundingClientRect().height);
+        if (parentHeight > height + 180) {
+          parent.style.setProperty('height', `${height}px`, 'important');
+          parent.style.setProperty('min-height', '0', 'important');
+        }
+      }
+
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({
+          type: 'bw-resize',
+          source: 'bw-paid-landing',
+          height,
+        }, '*');
+      }
+    }
+
+    _trackPageView() {
+      const marker = String(window.location.pathname || '/');
+      const sent = window.__bwPaidLandingPageViews || (window.__bwPaidLandingPageViews = {});
+      const current = sent[marker] || {};
+      this._pageViewAnalyticsSent = this._pageViewAnalyticsSent || current.analytics === true;
+      this._pageViewAdvertisingSent = this._pageViewAdvertisingSent || current.advertising === true;
+      const consent = consentState();
+      const channels = {
+        analytics: consent.analytics && !this._pageViewAnalyticsSent,
+        advertising: consent.advertising && !this._pageViewAdvertisingSent,
+      };
+      if (!channels.analytics && !channels.advertising) return false;
+      const result = this._track('bw_booking_page_view', { source: 'paid_landing' }, channels);
+      if (result.analytics) this._pageViewAnalyticsSent = true;
+      if (result.advertising) this._pageViewAdvertisingSent = true;
+      sent[marker] = {
+        analytics: this._pageViewAnalyticsSent,
+        advertising: this._pageViewAdvertisingSent,
+      };
+      return result.analytics || result.advertising;
+    }
+
+    _track(name, detail, channels = {}) {
+      const consent = consentState();
+      const allowAnalytics = channels.analytics !== false && consent.analytics;
+      const allowAdvertising = channels.advertising !== false && consent.advertising;
+      if (!allowAnalytics && !allowAdvertising) return { analytics: false, advertising: false };
+
+      const now = new Date().toISOString();
+      const state = allowAnalytics
+        ? (this._trackingState = canonicalTrackingState(consent))
+        : null;
+      const params = this._params(consent);
+      const eventId = randomId('bw_e');
+      const detailPayload = Object.assign({}, detail || {}, {
+        event_id: eventId,
+        attribution_id: state?.attributionId || '',
+      });
+
+      if (allowAnalytics) {
+        const payload = {
+          event: name,
+          eventName: name,
+          pagePath: window.location.pathname,
+          detail: detailPayload,
+          ts: now,
+        };
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push(payload);
+        if (typeof window.gtag === 'function') window.gtag('event', name, detailPayload);
+      }
+
+      if (allowAdvertising && typeof window.fbq === 'function') {
+        window.fbq('trackCustom', name, Object.assign({}, detailPayload));
+      }
+
+      if (allowAnalytics && /(^|\.)berlinwalk\.com$/i.test(window.location.hostname)) {
+        fetch(TRACK_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          keepalive: true,
+          body: JSON.stringify({
+            eventName: name,
+            eventId,
+            consentGranted: consent.analytics,
+            analyticsConsent: consent.analytics,
+            consent: {
+              analytics: consent.analytics,
+              advertising: consent.advertising,
+            },
+            timestamp: now,
+            sessionId: state?.sessionId || '',
+            visitorId: state?.visitorId || '',
+            attributionId: state?.attributionId || '',
+            pagePath: window.location.pathname,
+            landingPage: state?.landingPage || window.location.href,
+            firstPage: state?.firstPage || window.location.pathname,
+            referrer: document.referrer || '',
+            isPaid: Boolean(state?.isPaid),
+            screenWidth: String(window.screen && window.screen.width || ''),
+            viewportWidth: String(window.innerWidth || ''),
+            utmSource: params.utm_source,
+            utmMedium: params.utm_medium,
+            utmCampaign: params.utm_campaign,
+            utmContent: params.utm_content,
+            utmTerm: params.utm_term,
+            utmId: params.utm_id,
+            fbclid: allowAdvertising ? params.fbclid : '',
+            fbc: allowAdvertising ? params.fbc : '',
+            fbp: allowAdvertising ? params.fbp : '',
+            payload: detailPayload,
+          }),
+        }).catch(() => {});
+      }
+
+      return { analytics: allowAnalytics, advertising: allowAdvertising };
+    }
+
+    _params(consent = consentState()) {
+      const params = new URLSearchParams(window.location.search);
+      const advertising = consent.advertising === true;
+      return {
+        utm_source: params.get('utm_source') || '',
+        utm_medium: params.get('utm_medium') || '',
+        utm_campaign: params.get('utm_campaign') || '',
+        utm_content: params.get('utm_content') || '',
+        utm_term: params.get('utm_term') || '',
+        utm_id: params.get('utm_id') || '',
+        fbclid: advertising ? params.get('fbclid') || '' : '',
+        fbc: advertising ? params.get('fbc') || readCookie('_fbc') : '',
+        fbp: advertising ? params.get('fbp') || readCookie('_fbp') : '',
+      };
+    }
+
+    _styles() {
+      return `
+        html.bw-paid-landing-active #bw-sticky-cta,
+        html.bw-paid-landing-active #bw-desktop-cta,
+        html.bw-paid-landing-active [data-bw-tourcta],
+        body.bw-paid-landing-active #bw-sticky-cta,
+        body.bw-paid-landing-active #bw-desktop-cta,
+        body.bw-paid-landing-active [data-bw-tourcta] {
+          display: none !important;
+          visibility: hidden !important;
+          pointer-events: none !important;
+        }
+
+        html.bw-paid-landing-active body.bw-sticky-active,
+        body.bw-paid-landing-active.bw-sticky-active {
+          padding-bottom: 0 !important;
+        }
+
+        bw-paid-landing {
+          display: block !important;
+          height: auto !important;
+          min-height: 0 !important;
+          overflow: visible !important;
+          width: 100% !important;
+        }
+
+        .bw-paid-landing {
+          --green: #1B5E20;
+          --green-dark: #0E2A13;
+          --yellow: #FFE600;
+          --cream: #FAFAF5;
+          --white: #FFFFFF;
+          --ink: #212121;
+          --muted: #4E5A4E;
+          --line: #DCE3DD;
+          background: var(--cream);
+          color: var(--ink);
+          font-family: Montserrat, Arial, sans-serif;
+          letter-spacing: 0;
+          line-height: 1.5;
+          margin: 0;
+          min-height: 100vh;
+          overflow-x: hidden;
+          width: 100%;
+        }
+
+        .bw-paid-landing *,
+        .bw-paid-landing *::before,
+        .bw-paid-landing *::after {
+          box-sizing: border-box;
+        }
+
+        .bw-paid-landing a {
+          color: inherit;
+        }
+
+        .bw-paid-landing img {
+          display: block;
+          max-width: 100%;
+        }
+
+        .bw-paid-landing h1,
+        .bw-paid-landing h2,
+        .bw-paid-landing h3,
+        .bw-paid-landing p {
+          margin-top: 0;
+        }
+
+        .bw-paid-top-strip {
+          background: var(--green);
+          color: var(--white);
+          font-size: 12px;
+          font-weight: 800;
+          letter-spacing: 0;
+          padding: 8px 16px;
+          text-align: center;
+        }
+
+        .bw-paid-hero {
+          background:
+            linear-gradient(90deg, rgba(10, 34, 13, 0.94) 0%, rgba(10, 34, 13, 0.78) 43%, rgba(10, 34, 13, 0.36) 100%),
+            linear-gradient(0deg, rgba(10, 34, 13, 0.72) 0%, rgba(10, 34, 13, 0) 42%),
+            var(--bw-paid-hero-image);
+          background-position: center;
+          background-size: cover;
+          color: var(--white);
+          min-height: clamp(640px, 86svh, 780px);
+          padding: clamp(18px, 3vw, 34px) 16px clamp(28px, 5vw, 54px);
+        }
+
+        .bw-paid-inner {
+          margin: 0 auto;
+          max-width: 1120px;
+          min-width: 0;
+          width: 100%;
+        }
+
+        .bw-paid-mini-nav {
+          align-items: center;
+          display: flex;
+          gap: 18px;
+          justify-content: space-between;
+          margin-bottom: clamp(28px, 6vw, 74px);
+        }
+
+        .bw-paid-logo {
+          background: rgba(255, 255, 255, 0.96);
+          border-radius: 6px;
+          padding: 8px 14px;
+          width: 176px;
+        }
+
+        .bw-paid-mini-nav span {
+          color: #E7F2E3;
+          font-size: 12px;
+          font-weight: 800;
+          text-align: right;
+          text-transform: uppercase;
+        }
+
+        .bw-paid-hero-grid {
+          align-items: center;
+          display: grid;
+          gap: clamp(22px, 5vw, 58px);
+          grid-template-columns: minmax(0, 1.06fr) minmax(340px, 420px);
+          min-width: 0;
+        }
+
+        .bw-paid-eyebrow {
+          color: var(--yellow);
+          font-size: 12px;
+          font-weight: 800;
+          letter-spacing: 0.04em;
+          margin: 0 0 10px;
+          text-transform: uppercase;
+        }
+
+        .bw-paid-hero h1 {
+          color: inherit;
+          font-size: clamp(42px, 6vw, 78px);
+          line-height: 0.95;
+          margin-bottom: 0;
+          max-width: 10ch;
+          text-wrap: balance;
+        }
+
+        .bw-paid-lead {
+          color: #F1F8EE;
+          font-size: clamp(16px, 1.8vw, 20px);
+          font-weight: 700;
+          line-height: 1.45;
+          margin: 18px 0 0;
+          max-width: 58ch;
+        }
+
+        .bw-paid-facts {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          margin: 22px 0 0;
+        }
+
+        .bw-paid-facts span {
+          background: rgba(255, 255, 255, 0.14);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          border-radius: 999px;
+          color: var(--white);
+          font-size: 12px;
+          font-weight: 800;
+          line-height: 1;
+          padding: 10px 12px;
+          text-transform: uppercase;
+        }
+
+        .bw-paid-actions {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin: 24px 0 0;
+        }
+
+        .bw-paid-button {
+          align-items: center;
+          border: 0;
+          border-radius: 8px;
+          display: inline-flex;
+          font-size: 15px;
+          font-weight: 800;
+          justify-content: center;
+          line-height: 1;
+          min-height: 46px;
+          padding: 0 18px;
+          text-decoration: none;
+          transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+        }
+
+        .bw-paid-button-primary {
+          background: var(--yellow);
+          color: var(--ink) !important;
+        }
+
+        .bw-paid-button-secondary {
+          background: rgba(255, 255, 255, 0.95);
+          border: 1px solid rgba(255, 255, 255, 0.72);
+          color: var(--green) !important;
+        }
+
+        .bw-paid-button-primary:hover,
+        .bw-paid-button-primary:focus-visible {
+          background: #FFF04A;
+          color: var(--ink) !important;
+          transform: translateY(-1px);
+        }
+
+        .bw-paid-button-secondary:hover,
+        .bw-paid-button-secondary:focus-visible {
+          background: var(--white);
+          color: var(--green-dark) !important;
+          transform: translateY(-1px);
+        }
+
+        .bw-paid-note {
+          color: #DDEED8;
+          font-size: 13px;
+          font-weight: 700;
+          margin: 14px 0 0;
+          max-width: 58ch;
+        }
+
+        .bw-paid-booking-panel {
+          color: var(--ink);
+          min-width: 0;
+        }
+
+        .bw-paid-booking-above {
+          align-items: center;
+          background: rgba(255, 255, 255, 0.96);
+          border: 1px solid rgba(255, 255, 255, 0.68);
+          border-radius: 10px 10px 0 0;
+          color: var(--green);
+          display: flex;
+          gap: 10px;
+          justify-content: space-between;
+          padding: 10px 12px;
+        }
+
+        .bw-paid-booking-above strong,
+        .bw-paid-booking-above span {
+          font-size: 12px;
+          font-weight: 800;
+          text-transform: uppercase;
+        }
+
+        .bw-paid-booking-above span {
+          color: var(--muted);
+          font-size: 11px;
+          text-align: right;
+        }
+
+        .bw-paid-booking-panel bw-booking-calendar .bw-cal-shell {
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+          box-shadow: 0 22px 60px rgba(0, 0, 0, 0.28);
+        }
+
+        .bw-paid-booking-panel bw-booking-calendar .bw-cal-cta {
+          color: #FFFFFF;
+        }
+
+        .bw-paid-section {
+          padding: clamp(34px, 5vw, 64px) 16px;
+        }
+
+        .bw-paid-trust {
+          background: var(--white);
+          border-bottom: 1px solid var(--line);
+          border-top: 1px solid var(--line);
+          padding: 18px 16px;
+        }
+
+        .bw-paid-trust-grid {
+          display: grid;
+          gap: 10px;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .bw-paid-trust-grid div {
+          border-left: 4px solid var(--yellow);
+          color: var(--muted);
+          font-size: 13px;
+          font-weight: 700;
+          padding: 4px 0 4px 10px;
+        }
+
+        .bw-paid-trust-grid b {
+          color: var(--green);
+          display: block;
+          font-size: 15px;
+          line-height: 1.2;
+          margin-bottom: 2px;
+        }
+
+        .bw-paid-section-head {
+          display: grid;
+          gap: 8px;
+          margin: 0 0 20px;
+          max-width: 760px;
+        }
+
+        .bw-paid-section-head h2 {
+          color: var(--green);
+          font-size: clamp(30px, 4vw, 46px);
+          line-height: 1.02;
+          margin: 0;
+          text-wrap: balance;
+        }
+
+        .bw-paid-section-head p {
+          color: var(--muted);
+          font-size: 16px;
+          font-weight: 700;
+          margin: 0;
+        }
+
+        .bw-paid-feature-grid {
+          display: grid;
+          gap: 14px;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .bw-paid-feature {
+          background: var(--white);
+          border: 1px solid var(--line);
+          border-radius: 8px;
+          overflow: hidden;
+        }
+
+        .bw-paid-feature-img {
+          aspect-ratio: 16 / 10;
+          background-position: center;
+          background-size: cover;
+        }
+
+        .bw-paid-feature-body {
+          padding: 16px;
+        }
+
+        .bw-paid-feature b {
+          color: var(--green);
+          display: block;
+          font-size: 18px;
+          line-height: 1.2;
+          margin-bottom: 8px;
+        }
+
+        .bw-paid-feature p {
+          color: var(--muted);
+          font-size: 14px;
+          font-weight: 600;
+          margin: 0;
+        }
+
+        .bw-paid-route {
+          background:
+            linear-gradient(90deg, rgba(14, 42, 19, 0.98) 0%, rgba(14, 42, 19, 0.92) 45%, rgba(14, 42, 19, 0.72) 100%),
+            var(--bw-paid-route-image);
+          background-position: center;
+          background-size: cover;
+          color: var(--white);
+          overflow: hidden;
+          padding: clamp(44px, 6vw, 78px) 16px;
+        }
+
+        .bw-paid-route-layout {
+          display: grid;
+          gap: 26px;
+          grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+          min-width: 0;
+        }
+
+        .bw-paid-route-copy h2 {
+          color: var(--yellow);
+          font-size: clamp(32px, 4vw, 50px);
+          line-height: 1;
+          margin: 0 0 12px;
+        }
+
+        .bw-paid-route-copy p {
+          color: #DFEDDB;
+          font-size: 16px;
+          font-weight: 700;
+          margin-bottom: 0;
+          max-width: 62ch;
+        }
+
+        .bw-paid-route-map {
+          align-self: center;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 8px;
+          padding: 18px;
+        }
+
+        .bw-paid-route-line {
+          align-items: center;
+          display: grid;
+          gap: 8px;
+          grid-template-columns: auto 1fr auto 1fr auto;
+          margin-bottom: 16px;
+        }
+
+        .bw-paid-route-line span {
+          align-items: center;
+          background: var(--yellow);
+          border-radius: 999px;
+          color: var(--ink);
+          display: inline-flex;
+          font-size: 12px;
+          font-weight: 800;
+          height: 34px;
+          justify-content: center;
+          width: 34px;
+        }
+
+        .bw-paid-route-line i {
+          border-top: 3px dashed var(--yellow);
+          min-width: 0;
+        }
+
+        .bw-paid-route-labels {
+          display: grid;
+          gap: 12px;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .bw-paid-route-labels b {
+          color: var(--white);
+          display: block;
+          font-size: 14px;
+          line-height: 1.2;
+          margin-bottom: 3px;
+        }
+
+        .bw-paid-route-labels small {
+          color: #CFE4C8;
+          display: block;
+          font-size: 12px;
+          font-weight: 700;
+          line-height: 1.35;
+        }
+
+        .bw-paid-guide {
+          background: var(--white);
+        }
+
+        .bw-paid-guide-layout {
+          align-items: center;
+          display: grid;
+          gap: 24px;
+          grid-template-columns: minmax(260px, 0.42fr) minmax(0, 0.58fr);
+          min-width: 0;
+        }
+
+        .bw-paid-guide-photo {
+          aspect-ratio: 4 / 5;
+          background:
+            linear-gradient(180deg, rgba(10, 34, 13, 0), rgba(10, 34, 13, 0.66)),
+            var(--bw-paid-guide-image);
+          background-position: center;
+          background-size: cover;
+          border-radius: 8px;
+          min-height: 360px;
+        }
+
+        .bw-paid-guide-copy h2 {
+          color: var(--green);
+          font-size: clamp(30px, 4vw, 46px);
+          line-height: 1.02;
+          margin: 0 0 12px;
+          overflow-wrap: anywhere;
+        }
+
+        .bw-paid-guide-copy p {
+          color: var(--muted);
+          font-size: 16px;
+          font-weight: 700;
+          margin: 0 0 16px;
+        }
+
+        .bw-paid-guide-copy ul {
+          display: grid;
+          gap: 10px;
+          margin: 0;
+          padding: 0;
+        }
+
+        .bw-paid-guide-copy li {
+          align-items: start;
+          color: var(--ink);
+          display: grid;
+          font-size: 14px;
+          font-weight: 700;
+          gap: 9px;
+          grid-template-columns: 22px 1fr;
+          list-style: none;
+        }
+
+        .bw-paid-guide-copy li::before {
+          background: var(--yellow);
+          border-radius: 999px;
+          content: "";
+          height: 10px;
+          margin-top: 6px;
+          width: 10px;
+        }
+
+        .bw-paid-faq-grid {
+          display: grid;
+          gap: 10px;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .bw-paid-faq-grid details {
+          background: var(--white);
+          border: 1px solid var(--line);
+          border-radius: 8px;
+          padding: 14px 16px;
+        }
+
+        .bw-paid-faq-grid summary {
+          color: var(--green);
+          cursor: pointer;
+          font-weight: 800;
+        }
+
+        .bw-paid-faq-grid p {
+          color: var(--muted);
+          font-size: 14px;
+          font-weight: 600;
+          margin: 10px 0 0;
+        }
+
+        .bw-paid-final-cta {
+          background: var(--yellow);
+          color: var(--ink);
+          padding: clamp(34px, 5vw, 64px) 16px;
+        }
+
+        .bw-paid-final-cta .bw-paid-inner {
+          align-items: center;
+          display: grid;
+          gap: 18px;
+          grid-template-columns: 1fr auto;
+        }
+
+        .bw-paid-final-cta h2 {
+          font-size: clamp(28px, 4vw, 44px);
+          line-height: 1.02;
+          margin: 0;
+        }
+
+        .bw-paid-final-cta p {
+          font-weight: 800;
+          margin: 8px 0 0;
+        }
+
+        .bw-paid-final-cta .bw-paid-button {
+          background: var(--green);
+          color: var(--white);
+          min-width: 190px;
+        }
+
+        .bw-paid-sticky-cta {
+          bottom: 12px;
+          display: none;
+          left: 12px;
+          position: fixed;
+          right: 12px;
+          z-index: 20;
+        }
+
+        .bw-paid-sticky-cta a {
+          background: var(--yellow);
+          border: 1px solid rgba(33, 33, 33, 0.12);
+          border-radius: 999px;
+          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+          color: var(--ink);
+          display: flex;
+          font-weight: 800;
+          justify-content: center;
+          min-height: 52px;
+          text-decoration: none;
+          width: 100%;
+        }
+
+        @media (max-width: 940px) {
+          .bw-paid-hero {
+            min-height: auto;
+          }
+
+          .bw-paid-hero-grid,
+          .bw-paid-route-layout,
+          .bw-paid-guide-layout,
+          .bw-paid-final-cta .bw-paid-inner {
+            grid-template-columns: minmax(0, 1fr);
+          }
+
+          .bw-paid-booking-panel {
+            max-width: 430px;
+          }
+
+          .bw-paid-trust-grid,
+          .bw-paid-feature-grid,
+          .bw-paid-faq-grid {
+            grid-template-columns: 1fr 1fr;
+          }
+
+          .bw-paid-guide-photo {
+            aspect-ratio: 16 / 10;
+            min-height: 280px;
+          }
+        }
+
+        @media (max-width: 620px) {
+          .bw-paid-top-strip {
+            font-size: 11px;
+            padding: 7px 8px;
+          }
+
+          .bw-paid-hero {
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 10px;
+          }
+
+          .bw-paid-mini-nav {
+            align-items: start;
+            display: grid;
+            gap: 7px;
+            margin-bottom: 10px;
+          }
+
+          .bw-paid-mini-nav span {
+            text-align: left;
+          }
+
+          .bw-paid-logo {
+            padding: 6px 11px;
+            width: 132px;
+          }
+
+          .bw-paid-hero-grid {
+            gap: 12px;
+          }
+
+          .bw-paid-hero-copy {
+            background: rgba(10, 34, 13, 0.84);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 8px;
+            padding: 14px;
+          }
+
+          .bw-paid-hero h1 {
+            font-size: 30px;
+            line-height: 1;
+            max-width: none;
+          }
+
+          .bw-paid-lead {
+            font-size: 13.5px;
+            line-height: 1.35;
+            margin-top: 9px;
+          }
+
+          .bw-paid-facts {
+            gap: 6px;
+            margin-top: 10px;
+          }
+
+          .bw-paid-facts span {
+            font-size: 10px;
+            padding: 7px 8px;
+          }
+
+          .bw-paid-actions,
+          .bw-paid-note {
+            display: none;
+          }
+
+          .bw-paid-button {
+            width: 100%;
+          }
+
+          .bw-paid-booking-panel {
+            max-width: none;
+            order: -1;
+          }
+
+          .bw-paid-booking-above {
+            align-items: start;
+            display: grid;
+            gap: 2px;
+            justify-content: start;
+            padding: 8px 10px;
+          }
+
+          .bw-paid-booking-above span {
+            font-size: 10px;
+            text-align: left;
+          }
+
+          .bw-paid-booking-panel bw-booking-calendar .bw-cal-head {
+            gap: 5px;
+            padding: 8px 10px 7px;
+          }
+
+          .bw-paid-booking-panel bw-booking-calendar .bw-cal-title {
+            font-size: 16px !important;
+          }
+
+          .bw-paid-booking-panel bw-booking-calendar .bw-cal-note {
+            display: none;
+          }
+
+          .bw-paid-booking-panel bw-booking-calendar .bw-cal-body {
+            gap: 7px;
+            padding: 8px 10px;
+          }
+
+          .bw-paid-booking-panel bw-booking-calendar .bw-cal-date-tools {
+            gap: 6px;
+            grid-template-columns: minmax(0, 1fr) minmax(116px, auto);
+            margin-bottom: 5px;
+          }
+
+          .bw-paid-booking-panel bw-booking-calendar .bw-cal-days {
+            gap: 6px;
+            padding-bottom: 3px;
+          }
+
+          .bw-paid-booking-panel bw-booking-calendar .bw-cal-day {
+            flex-basis: 54px;
+            min-height: 54px;
+            padding: 6px 5px;
+          }
+
+          .bw-paid-booking-panel bw-booking-calendar .bw-cal-day b {
+            font-size: 18px;
+          }
+
+          .bw-paid-booking-panel bw-booking-calendar .bw-cal-slots {
+            gap: 6px;
+          }
+
+          .bw-paid-booking-panel bw-booking-calendar .bw-cal-slot {
+            min-height: 38px;
+            padding: 6px;
+          }
+
+          .bw-paid-booking-panel bw-booking-calendar .bw-cal-summary {
+            gap: 6px;
+            padding: 8px 10px 10px;
+          }
+
+          .bw-paid-booking-panel bw-booking-calendar .bw-cal-next-note {
+            display: none;
+          }
+
+          .bw-paid-booking-panel bw-booking-calendar .bw-cal-cta {
+            height: 44px;
+          }
+
+          .bw-paid-trust-grid,
+          .bw-paid-feature-grid,
+          .bw-paid-faq-grid,
+          .bw-paid-route-labels {
+            grid-template-columns: 1fr;
+          }
+
+          .bw-paid-route-line {
+            grid-template-columns: auto 1fr auto;
+          }
+
+          .bw-paid-route-line span:nth-of-type(3),
+          .bw-paid-route-line i:nth-of-type(2) {
+            display: none;
+          }
+
+          .bw-paid-guide-photo {
+            min-height: 240px;
+          }
+
+          .bw-paid-final-cta {
+            padding-bottom: 86px;
+          }
+
+          .bw-paid-sticky-cta {
+            display: block;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(120%);
+            transition: opacity 180ms ease, transform 180ms ease;
+          }
+
+          .bw-paid-sticky-cta.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+          }
+        }
+      `;
+    }
+  }
+
+  if (window.BW_PAID_LANDING_TEST_HOOKS) {
+    window.__bwPaidLandingTestHooks = {
+      consentState,
+      canonicalTrackingState,
+      purgeAdvertisingIdentifiers,
+      BWPaidLandingElement,
+    };
+  }
+
+  if (!customElements.get('bw-paid-landing')) {
+    customElements.define('bw-paid-landing', BWPaidLandingElement);
+  }
+}());

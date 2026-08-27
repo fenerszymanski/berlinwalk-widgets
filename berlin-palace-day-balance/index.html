@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Berlin Palace Day Balance</title>
+  <style>
+    :root{--green:#123d18;--green2:#1b5e20;--yellow:#ffe600;--ink:#172018;--paper:#fffdf5;--soft:#e9f1e7;--blue:#2467a8;--rose:#9b4b5a;--gold:#d39e00}
+    *{box-sizing:border-box}body{margin:0;background:transparent;color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.tool{max-width:900px;margin:auto;background:var(--paper);border:1px solid #cbd9c8;border-radius:24px;overflow:hidden;box-shadow:0 15px 42px rgba(18,61,24,.12)}header{padding:26px 26px 18px;background:linear-gradient(135deg,var(--green),#0b2810);color:#fff}h1{font-size:clamp(26px,5vw,42px);line-height:1.02;margin:0 0 10px;max-width:720px}header p{margin:0;max-width:690px;line-height:1.55;color:#edf6eb}.control{padding:22px 26px;background:var(--yellow);color:#123d18}.control-line{display:flex;justify-content:space-between;gap:20px;align-items:end}.control label{font-weight:800}.hours{font-weight:900;font-size:30px;line-height:1}.control input{width:100%;accent-color:var(--green);margin:16px 0 4px}.ticks{display:flex;justify-content:space-between;font-size:12px;font-weight:750}.canvas{padding:24px 18px 10px}.legend{display:flex;flex-wrap:wrap;gap:10px 18px;padding:0 8px 14px;font-size:12px;font-weight:700}.key{display:flex;align-items:center;gap:7px}.swatch{width:13px;height:13px;border-radius:3px}.chart{width:100%;height:auto;display:block}.row-title{font-size:20px;font-weight:900;fill:var(--ink)}.row-sub{font-size:12px;fill:#4b5b4d}.segment-label{font-size:12px;font-weight:800;fill:#fff}.segment-label.dark{fill:#17321b}.axis{font-size:11px;fill:#5e6c60}.marker{transition:transform .25s ease}.results{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:10px 26px 26px}.result{border:1px solid #cdd9ca;border-radius:18px;padding:18px;background:#fff}.result.best{border:3px solid var(--green);padding:16px;box-shadow:0 7px 18px rgba(18,61,24,.12)}.result h2{margin:0 0 8px;font-size:20px;color:var(--green)}.result p{margin:0 0 10px;line-height:1.45}.result strong{display:block;font-size:25px;margin-bottom:6px}.tag{display:inline-block;background:var(--yellow);color:#123d18;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:900}.note{margin:0 26px 26px;padding:14px 16px;border-left:5px solid var(--yellow);background:var(--soft);line-height:1.5;font-size:14px}.source{padding:0 26px 22px;color:#5b685c;font-size:12px}.source a{color:var(--green2)}@media(max-width:640px){header,.control{padding-left:18px;padding-right:18px}.canvas{padding-left:4px;padding-right:4px}.results{grid-template-columns:1fr;padding-left:18px;padding-right:18px}.note{margin-left:18px;margin-right:18px}.segment-label{font-size:10px}.row-title{font-size:17px}}
+  </style>
+</head>
+<body>
+<main class="tool">
+  <header>
+    <h1>How much palace day do you really have?</h1>
+    <p>Move one control. The two timelines keep travel, one palace interior and outdoor time visible at the same scale.</p>
+  </header>
+  <section class="control">
+    <div class="control-line"><label for="hours">Time available, Alexanderplatz to Alexanderplatz</label><output id="hoursOut" class="hours">5h</output></div>
+    <input id="hours" type="range" min="3" max="8" value="5" step="0.5" aria-describedby="timeHelp">
+    <div class="ticks"><span>3h</span><span id="timeHelp">half-day</span><span>8h</span></div>
+  </section>
+  <section class="canvas" aria-label="Two palace day timelines">
+    <div class="legend">
+      <span class="key"><i class="swatch" style="background:#2467a8"></i>travel</span>
+      <span class="key"><i class="swatch" style="background:#9b4b5a"></i>interior</span>
+      <span class="key"><i class="swatch" style="background:#1b5e20"></i>garden or park</span>
+      <span class="key"><i class="swatch" style="background:#d39e00"></i>flex time</span>
+      <span class="key"><i class="swatch" style="background:#d5dbd2"></i>time missing</span>
+    </div>
+    <svg class="chart" viewBox="0 0 820 350" role="img" aria-labelledby="chartTitle chartDesc">
+      <title id="chartTitle">Charlottenburg and Sanssouci day shapes</title>
+      <desc id="chartDesc">Two scaled timelines compare travel, palace interior, outdoor time and spare time within the selected day length.</desc>
+      <text x="18" y="35" class="row-title">Charlottenburg</text><text x="18" y="55" class="row-sub">Compact Berlin day, about 60 minutes total travel</text>
+      <rect x="18" y="72" width="784" height="72" rx="12" fill="#d5dbd2"/>
+      <rect id="cTravel1" x="18" y="72" height="72" rx="12" fill="#2467a8"/><rect id="cInside" y="72" height="72" fill="#9b4b5a"/><rect id="cGarden" y="72" height="72" fill="#1b5e20"/><rect id="cFlex" y="72" height="72" rx="0" fill="#d39e00"/><rect id="cTravel2" y="72" height="72" rx="12" fill="#2467a8"/>
+      <text id="cLab1" y="114" text-anchor="middle" class="segment-label">out</text><text id="cLab2" y="114" text-anchor="middle" class="segment-label">rooms</text><text id="cLab3" y="114" text-anchor="middle" class="segment-label">garden</text><text id="cLab4" y="114" text-anchor="middle" class="segment-label dark">flex</text><text id="cLab5" y="114" text-anchor="middle" class="segment-label">back</text>
+      <line x1="18" y1="160" x2="802" y2="160" stroke="#aab6a8"/><text x="18" y="178" class="axis">start</text><text x="784" y="178" class="axis">return</text>
+
+      <text x="18" y="220" class="row-title">Sanssouci</text><text x="18" y="240" class="row-sub">Potsdam landscape, about 140 minutes total travel</text>
+      <rect x="18" y="257" width="784" height="72" rx="12" fill="#d5dbd2"/>
+      <rect id="sTravel1" x="18" y="257" height="72" rx="12" fill="#2467a8"/><rect id="sInside" y="257" height="72" fill="#9b4b5a"/><rect id="sPark" y="257" height="72" fill="#1b5e20"/><rect id="sFlex" y="257" height="72" fill="#d39e00"/><rect id="sTravel2" y="257" height="72" rx="12" fill="#2467a8"/>
+      <text id="sLab1" y="299" text-anchor="middle" class="segment-label">out</text><text id="sLab2" y="299" text-anchor="middle" class="segment-label">palace</text><text id="sLab3" y="299" text-anchor="middle" class="segment-label">park</text><text id="sLab4" y="299" text-anchor="middle" class="segment-label dark">flex</text><text id="sLab5" y="299" text-anchor="middle" class="segment-label">back</text>
+    </svg>
+  </section>
+  <section class="results" aria-live="polite">
+    <article id="charlottenburgResult" class="result"><h2>Charlottenburg</h2><strong id="cScore">Comfortable</strong><p id="cText">One interior and the formal garden fit without rushing.</p><span id="cTag" class="tag">best fit</span></article>
+    <article id="sanssouciResult" class="result"><h2>Sanssouci</h2><strong id="sScore">Compressed</strong><p id="sText">Travel and one palace leave little room for the park.</p><span id="sTag" class="tag">needs more time</span></article>
+  </section>
+  <p class="note"><strong>My practical rule:</strong> below 5.5 hours, stay in Berlin and choose Charlottenburg. At 6.5 hours or more, Sanssouci starts to work as the palace-and-park day people imagine.</p>
+  <p class="source">Planning ranges use live public-transport samples from Alexanderplatz on 24 August 2026 and current SPSG visitor information. Always check your exact date and route.</p>
+</main>
+<script>
+  const scale=784/8, start=18;
+  const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
+  const place=(id,x,w)=>{const el=document.getElementById(id);el.setAttribute('x',start+x*scale);el.setAttribute('width',Math.max(0,w*scale));el.style.display=w>.01?'block':'none'};
+  const label=(id,x,w,text)=>{const el=document.getElementById(id);el.setAttribute('x',start+(x+w/2)*scale);el.textContent=w>=.55?text:''};
+  function layout(prefix,parts,y){let x=0;for(const [key,hours,text] of parts){place(prefix+key,x,hours);label(prefix+'Lab'+({'Travel1':1,'Inside':2,'Garden':3,'Park':3,'Flex':4,'Travel2':5}[key]),x,hours,text);x+=hours}}
+  function render(){
+    const total=Number(document.getElementById('hours').value);document.getElementById('hoursOut').textContent=Number.isInteger(total)?`${total}h`:`${total.toFixed(1)}h`;
+    const cOut=.5,cInside=1.5,cGarden=1.25,cBack=.5,cFlex=clamp(total-cOut-cInside-cGarden-cBack,0,4.25);const cNeed=cOut+cInside+cGarden+cBack;const cScale=total<cNeed?total/cNeed:1;
+    layout('c', [['Travel1',cOut*cScale,'out'],['Inside',cInside*cScale,'rooms'],['Garden',cGarden*cScale,'garden'],['Flex',cFlex,'flex'],['Travel2',cBack*cScale,'back']],72);
+    const sOut=1.15,sInside=1.25,sPark=2.25,sBack=1.15,sFlex=clamp(total-sOut-sInside-sPark-sBack,0,2.2);const sNeed=sOut+sInside+sPark+sBack;const sScale=total<sNeed?total/sNeed:1;
+    layout('s', [['Travel1',sOut*sScale,'out'],['Inside',sInside*sScale,'palace'],['Park',sPark*sScale,'park'],['Flex',sFlex,'flex'],['Travel2',sBack*sScale,'back']],257);
+    const c=document.getElementById('charlottenburgResult'),s=document.getElementById('sanssouciResult');c.classList.toggle('best',total<6.5);s.classList.toggle('best',total>=6.5);
+    document.getElementById('cScore').textContent=total<3.75?'Short version':total<5?'Good fit':'Comfortable';document.getElementById('cText').textContent=total<3.75?'Choose the garden or one interior, not both.':total<5?'One interior and the formal garden fit with a clear pace.':'One interior, garden and a useful buffer all fit.';document.getElementById('cTag').textContent=total<6.5?'best fit':'easy option';
+    document.getElementById('sScore').textContent=total<5.5?'Too tight':total<6.5?'Compressed':'Full day works';document.getElementById('sText').textContent=total<5.5?'Travel and one palace crowd out the park experience.':total<6.5?'Possible, but the park needs a firm route and early start.':'Travel, Sanssouci Palace and a real park walk fit.';document.getElementById('sTag').textContent=total>=6.5?'best fit':'needs more time';
+    window.parent?.postMessage({type:'setHeight',height:document.documentElement.scrollHeight},'*');
+  }
+  document.getElementById('hours').addEventListener('input',render);render();
+</script>
+  <script src="../js/brand.js"></script>
+</body>
+</html>

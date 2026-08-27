@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Berlin Late-Night Food Board</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root{
+    --board:#0e1512;        /* dark station board */
+    --board-2:#16211b;
+    --led:#ffe600;          /* amber/yellow LED */
+    --led-dim:#8a8330;
+    --green:#1B5E20;
+    --lime:#7CB342;
+    --ok:#5fd06a;
+    --warn:#ffb038;
+    --off:#d9534f;
+    --ink:#20261f;
+    --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:transparent;color:var(--ink);font-family:Montserrat,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  .ln{max-width:760px;margin:0 auto;padding:18px 14px 8px}
+
+  /* intro */
+  .ln-lede{font-size:.92rem;line-height:1.55;color:#3f4a3c;margin:0 0 14px}
+  .ln-lede b{color:var(--green)}
+
+  /* location picker */
+  .ln-ask{font-weight:800;font-size:.9rem;margin:0 0 9px;color:var(--ink);display:flex;align-items:center;gap:8px}
+  .ln-ask .pin{width:22px;height:22px;border-radius:50%;background:var(--green);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.8rem;flex:0 0 22px}
+  .ln-spots{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 14px}
+  .ln-spot{cursor:pointer;border:1.5px solid #cdd8c4;background:#f6f9f0;border-radius:999px;padding:8px 13px;font-size:.82rem;font-weight:700;color:#40513a;font-family:inherit;transition:all .14s;line-height:1.2}
+  .ln-spot .sub{display:block;font-size:.68rem;font-weight:600;color:#8a978a;margin-top:1px}
+  .ln-spot:hover{border-color:var(--lime)}
+  .ln-spot[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+  .ln-spot[aria-pressed="true"] .sub{color:#c9e0c0}
+  .ln-spot:focus-visible{outline:3px solid var(--led);outline-offset:2px}
+
+  /* night toggle */
+  .ln-night{display:flex;align-items:center;gap:9px;margin:0 0 15px;font-size:.82rem;font-weight:700;color:#40513a;flex-wrap:wrap}
+  .ln-seg{display:inline-flex;border:1.5px solid #cdd8c4;border-radius:999px;overflow:hidden}
+  .ln-seg button{min-height:44px;border:0;background:#f6f9f0;color:#5a6a54;font-family:inherit;font-weight:700;font-size:.78rem;padding:10px 14px;cursor:pointer;transition:all .14s}
+  .ln-seg button[aria-pressed="true"]{background:var(--led);color:#3a3600}
+  .ln-seg button:focus-visible{outline:3px solid var(--green);outline-offset:-3px}
+
+  /* the board */
+  .board{background:linear-gradient(180deg,var(--board),var(--board-2));border-radius:16px;padding:14px 14px 16px;box-shadow:0 16px 34px rgba(10,20,14,.32);border:1px solid #05100a}
+  .board-top{display:flex;justify-content:space-between;align-items:center;gap:10px;border-bottom:1px dashed rgba(255,230,0,.28);padding-bottom:9px;margin-bottom:10px}
+  .board-top .ttl{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--led)}
+  .board-top .loc{font-size:.86rem;font-weight:800;color:#eafbe6;text-align:right;line-height:1.2}
+  .board-top .loc small{display:block;font-size:.66rem;font-weight:600;color:#9fc79a;letter-spacing:.04em}
+
+  .row{display:grid;grid-template-columns:20px 1fr;gap:11px;padding:9px 2px;border-bottom:1px solid rgba(255,255,255,.06)}
+  .row:last-child{border-bottom:0}
+  .lamp{width:11px;height:11px;border-radius:50%;margin-top:5px;box-shadow:0 0 0 3px rgba(255,255,255,.05)}
+  .lamp.ok{background:var(--ok);box-shadow:0 0 8px 1px rgba(95,208,106,.6)}
+  .lamp.warn{background:var(--warn);box-shadow:0 0 8px 1px rgba(255,176,56,.55)}
+  .lamp.off{background:var(--off);box-shadow:0 0 6px 1px rgba(217,83,73,.4)}
+  .row .k{font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--led-dim);margin:0 0 2px}
+  .row .v{font-size:.86rem;line-height:1.45;color:#eafbe6;margin:0;font-weight:500}
+  .row .v b{color:#fff;font-weight:800}
+  .row.home .v b{color:var(--led)}
+
+  .board-note{margin-top:11px;font-size:.72rem;line-height:1.4;color:#a9c3a4;font-style:italic}
+
+  .ln-empty{padding:18px 8px;text-align:center;color:#9fc79a;font-size:.86rem;line-height:1.5}
+  .ln-empty b{color:var(--led)}
+
+  /* reality strip under board */
+  .ln-reality{margin-top:13px;background:#fff;border:1px solid #e3ecd8;border-left:4px solid var(--lime);border-radius:10px;padding:11px 13px;font-size:.82rem;line-height:1.5;color:#3f4a3c}
+  .ln-reality b{color:var(--green)}
+
+  @media (max-width:430px){
+    .board-top{flex-direction:column;align-items:flex-start;gap:3px}
+    .board-top .loc{text-align:left}
+  }
+</style>
+</head>
+<body>
+<div class="ln">
+  <p class="ln-lede">It is late in Berlin and you are hungry. <b>Many restaurant kitchens stop hot food around 22:00 or 23:00</b>, while counter and Späti hours vary. Pick your area and night to compare the next places to check and the transport plan home.</p>
+
+  <div class="ln-ask"><span class="pin">📍</span><span>Where are you right now?</span></div>
+  <div class="ln-spots" id="spots" role="group" aria-label="Choose your location"></div>
+
+  <div class="ln-night">
+    <span>Which night is it?</span>
+    <span class="ln-seg" role="group" aria-label="Which night">
+      <button type="button" id="nWeekend" aria-pressed="true">Fri / Sat</button>
+      <button type="button" id="nWeek" aria-pressed="false">Sun–Thu</button>
+    </span>
+  </div>
+
+  <div class="board" id="board" aria-live="polite">
+    <div class="ln-empty" id="empty">Pick a spot above and the <b>late-night board</b> lights up.</div>
+    <div id="boardBody" hidden></div>
+  </div>
+
+  <div class="ln-reality">
+    <b>One rule that saves the night:</b> after midnight, compare several current options around your nearest well-connected stop before moving. In Berlin, late food often follows transport hubs, but one old listing is never a promise.
+  </div>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function(){
+  // Reliable late-night food clusters + a couple of common tourist locations.
+  // Metro lines are durable orientation facts; "home" text is filled per night.
+  var SPOTS = [
+    { id:'kotti', name:'Kottbusser Tor', area:'Kreuzberg', metro:'U8', chip:'Kottbusser Tor',
+      zone:{s:'ok', k:"Several checks in one place", v:"<b>Kottbusser Tor (“Kotti”)</b> puts several kebab, falafel and grill counters close to the U8 exits."},
+      best:{s:'ok', v:"Compare the current opening signs around the station before choosing a döner or falafel counter."},
+      spati:{s:'ok', v:"Search the square for the exact shop and check today's opening hours."},
+      home:'U8'
+    },
+    { id:'schlesi', name:'Schlesisches Tor', area:'Kreuzberg', metro:'U1/U3', chip:'Schlesisches Tor',
+      zone:{s:'ok', k:"Several checks in one place", v:"Around <b>Schlesisches Tor</b>, grills and takeaway counters sit close to the elevated U-Bahn line."},
+      best:{s:'ok', v:"Check the counters below the station and along Schlesische Straße; do not travel for one remembered opening time."},
+      spati:{s:'ok', v:"Search Schlesische Straße and Falckensteinstraße, then confirm the exact shop hours."},
+      home:'U1/U3'
+    },
+    { id:'hermann', name:'Hermannplatz', area:'Neukölln', metro:'U7/U8', chip:'Hermannplatz',
+      zone:{s:'ok', k:"Neukölln's late hub", v:"<b>Hermannplatz</b> and the streets toward Sonnenallee put several Turkish and Arab grills, bakeries and sweet shops close together."},
+      best:{s:'ok', v:"Walk a short section of Sonnenallee and compare the current signs for kebab, manakish or an Arab sweet."},
+      spati:{s:'ok', v:"Search the exact Sonnenallee shop and check today's hours."},
+      home:'U7/U8'
+    },
+    { id:'warschauer', name:'Warschauer Str.', area:'Friedrichshain', metro:'U1/U3 + S', chip:'Warschauer Str.',
+      zone:{s:'ok', k:"Club-land food", v:"By <b>Warschauer Straße</b> and the RAW grounds you are in Berlin's club belt, so food follows the crowds late."},
+      best:{s:'ok', v:"Compare the counters around the station and Revaler Straße, then choose the one that is visibly serving."},
+      spati:{s:'ok', v:"Search the station area and Simon-Dach-Straße, then confirm the exact shop hours."},
+      home:'U1/U3 + S-Bahn'
+    },
+    { id:'alex', name:'Alexanderplatz', area:'Mitte', metro:'U2/U5/U8 + S', chip:'Alexanderplatz',
+      zone:{s:'warn', k:"Check before moving", v:"Central <b>Alexanderplatz</b> has several takeaway and station options, but late opening varies by venue and weekday."},
+      best:{s:'warn', v:"Compare current signs around the station before crossing town. If nothing works, check live listings around Kottbusser Tor before boarding the U8."},
+      spati:{s:'ok', v:"Search toward Rosa-Luxemburg-Platz and Hackescher Markt, then confirm the exact shop hours."},
+      home:'U2/U5/U8 + S-Bahn'
+    },
+    { id:'zoo', name:'Zoo / City West', area:'Charlottenburg', metro:'U2/U9 + S', chip:'Zoo / City West'
+      ,zone:{s:'warn', k:"Quiet after midnight", v:"The <b>Zoologischer Garten</b> and Ku'damm side of town is calmer late. Station food and a few kebab spots stay open, but the buzz is on the east side."},
+      best:{s:'warn', v:"Check the station and its immediate streets before making a longer trip. Late openings vary by venue."},
+      spati:{s:'warn', v:"Search near the station and confirm the exact shop hours."},
+      home:'U2/U9 + S-Bahn'
+    },
+    { id:'hbf', name:'Hauptbahnhof', area:'arriving late', metro:'S + U5', chip:'Hauptbahnhof',
+      zone:{s:'warn', k:"Just arrived?", v:"<b>Berlin Hauptbahnhof</b> is a transport hub, not a food street. Check the station's live directory and current signs before leaving the building."},
+      best:{s:'warn', v:"If one station counter is visibly serving, use it. Otherwise check live options in your destination district before boarding."},
+      spati:{s:'warn', v:"Station kiosks over spätis; the classic späti scene is in the residential districts."},
+      home:'S-Bahn + U5'
+    },
+    { id:'quiet', name:'A quiet area', area:'residential / hotel', metro:null, chip:'Somewhere quiet',
+      zone:{s:'off', k:"Not near a cluster", v:"If your hotel is on a calm residential street, the late-food options right outside you are thin. This is the normal Berlin situation, not a problem with your area."},
+      best:{s:'warn', v:"Search your current area first. Cross the city only after you have confirmed several current options around <b>Kottbusser Tor</b>, <b>Hermannplatz</b> or <b>Schlesisches Tor</b>."},
+      spati:{s:'warn', v:"Search the exact shop and check today's hours; quiet districts do not guarantee a late-open späti."},
+      home:null
+    }
+  ];
+
+  var state = { spot:null, weekend:true };
+
+  var spotsEl = document.getElementById('spots');
+  var boardBody = document.getElementById('boardBody');
+  var emptyEl = document.getElementById('empty');
+  var nWeekend = document.getElementById('nWeekend');
+  var nWeek = document.getElementById('nWeek');
+
+  SPOTS.forEach(function(sp){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'ln-spot';
+    b.setAttribute('aria-pressed','false');
+    b.dataset.id = sp.id;
+    b.innerHTML = sp.chip + '<span class="sub">' + sp.area + '</span>';
+    b.addEventListener('click', function(){ selectSpot(sp.id); });
+    spotsEl.appendChild(b);
+  });
+
+  function selectSpot(id){
+    state.spot = id;
+    Array.prototype.forEach.call(spotsEl.children, function(c){
+      c.setAttribute('aria-pressed', c.dataset.id === id ? 'true' : 'false');
+    });
+    render();
+  }
+
+  function setNight(weekend){
+    state.weekend = weekend;
+    nWeekend.setAttribute('aria-pressed', weekend ? 'true':'false');
+    nWeek.setAttribute('aria-pressed', weekend ? 'false':'true');
+    if(state.spot) render();
+  }
+  nWeekend.addEventListener('click', function(){ setNight(true); });
+  nWeek.addEventListener('click', function(){ setNight(false); });
+
+  function homeText(sp){
+    if(state.weekend){
+      if(!sp.metro) return "On <b>Fri and Sat nights and before public holidays</b>, the U-Bahn and S-Bahn run through the night. Typical intervals are about 15 minutes for U-Bahn and 30 minutes for S-Bahn, but check the live BVG journey planner.";
+      return "On weekend nights, the <b>" + sp.metro + "</b> network runs through the night. Typical intervals are about 15 minutes for U-Bahn and 30 minutes for S-Bahn, so check the live BVG journey planner for this stop.";
+    }
+    // weeknight
+    if(!sp.metro) return "On <b>Sun to Thu nights</b>, U-Bahn service normally ends around 01:00 and S-Bahn service around 01:00–01:30. N1–N9 buses roughly follow the corresponding U-Bahn lines, and Metrotram routes continue overnight. Check BVG for the exact trip.";
+    return "On a weeknight, <b>" + sp.metro + "</b> service may end around <b>01:00–01:30</b>. N1–N9 buses roughly follow the corresponding U-Bahn lines, while Metrotram routes continue overnight. Check BVG for the exact connection.";
+  }
+
+  function spatiText(sp){
+    var base = sp.spati.v;
+    // Späti Sunday caveat only matters into Sunday
+    if(state.weekend){
+      return base + " One catch: <b>Sunday opening is not guaranteed</b>. Berlin allows only narrow shop-law exceptions, so check this exact shop rather than relying on the Späti label.";
+    }
+    return base;
+  }
+
+  function row(cls, lamp, key, val){
+    return '<div class="row ' + cls + '"><span class="lamp ' + lamp + '"></span><div><p class="k">' + key + '</p><p class="v">' + val + '</p></div></div>';
+  }
+
+  function render(){
+    var sp = SPOTS.filter(function(x){ return x.id === state.spot; })[0];
+    if(!sp){ emptyEl.hidden = false; boardBody.hidden = true; return; }
+    emptyEl.hidden = true;
+    boardBody.hidden = false;
+
+    var html = '';
+    html += '<div class="board-top"><span class="ttl">Late-Night Food Board</span>' +
+            '<span class="loc">' + sp.name + '<small>' + sp.area + (sp.metro ? ' · ' + sp.metro : '') + '</small></span></div>';
+    html += row('', sp.zone.s, sp.zone.k || 'Late-food zone', sp.zone.v);
+    html += row('', sp.best.s, 'Practical next check', sp.best.v);
+    html += row('', sp.spati.s, 'Späti (snacks & drinks)', spatiText(sp));
+    html += row('', 'off', 'Sit-down kitchen', 'Many restaurant kitchens stop hot food around <b>22:00 or 23:00</b>, even if the bar stays open. Check the venue before travelling; after midnight, counters are the safer plan.');
+    html += row('home', state.weekend ? 'ok' : 'warn', 'Getting home', homeText(sp));
+    html += '<p class="board-note">Times drift by day and season, so treat these as a starting point, not a promise. Confirm the venue and the live BVG trip before moving.</p>';
+
+    boardBody.innerHTML = html;
+  }
+
+  // default to the strongest, most useful example so the board is never empty-looking
+  selectSpot('kotti');
+})();
+</script>
+</body>
+</html>

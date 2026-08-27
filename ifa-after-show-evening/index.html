@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>IFA After-Show Evening | BerlinWalk</title>
+    <link rel="stylesheet" href="../css/brand.css" />
+    <style>
+      :root {
+        --dark: #10272a;
+        --teal: #1d7874;
+        --mint: #dff6e8;
+        --signal: #ffb300;
+        --paper: #fbfbf7;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Montserrat, Arial, sans-serif;
+        color: var(--dark);
+      }
+      .tool {
+        max-width: 1040px;
+        margin: auto;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid #cde0dd;
+        background: var(--paper);
+      }
+      .head {
+        min-height: 300px;
+        display: grid;
+        align-content: end;
+        padding: 31px;
+        color: #fff;
+        background:
+          linear-gradient(90deg, #10272af0, #10272a88 51%, #10272a12),
+          url("assets/hero-messe.jpg") center/cover;
+      }
+      .tag {
+        color: #ffcc57;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+      .head h1 {
+        max-width: 640px;
+        margin: 8px 0;
+        font-size: clamp(30px, 5vw, 48px);
+        line-height: 1.04;
+      }
+      .head p {
+        max-width: 600px;
+        margin: 0;
+        color: #edf9f6;
+        line-height: 1.55;
+      }
+      .content {
+        padding: 24px;
+      }
+      .choices {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .choices label {
+        padding: 13px;
+        border-radius: 10px;
+        background: #e8f3f1;
+        display: grid;
+        gap: 7px;
+        font-size: 12px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+      .choices select {
+        padding: 10px;
+        border-radius: 7px;
+        border: 1px solid #b6d4cf;
+        background: #fff;
+        color: var(--dark);
+        font: 700 14px Montserrat;
+      }
+      .board {
+        margin-top: 20px;
+        padding: 18px;
+        border-radius: 12px;
+        background: var(--dark);
+        color: #fff;
+      }
+      .board h2 {
+        margin: 0;
+        font-size: 26px;
+      }
+      .board > p {
+        margin: 8px 0 16px;
+        color: #cfe6e1;
+        line-height: 1.55;
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 11px;
+      }
+      .card {
+        padding: 14px;
+        border-radius: 9px;
+        background: #ffffff11;
+        border: 1px solid #ffffff22;
+      }
+      .card b {
+        font-size: 12px;
+        color: #ffcc57;
+      }
+      .card h3 {
+        margin: 7px 0;
+        font-size: 18px;
+      }
+      .card p {
+        margin: 0;
+        color: #e6f1ef;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .foot {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-top: 18px;
+      }
+      .foot small {
+        max-width: 680px;
+        color: #425a5c;
+        line-height: 1.5;
+      }
+      .cta {
+        border-radius: 8px;
+        background: var(--signal);
+        padding: 12px 15px;
+        color: #172525 !important;
+        text-decoration: none;
+        font-weight: 900;
+      }
+      .cta.secondary {
+        background: #dff6e8;
+        color: var(--dark) !important;
+      }
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .credits {
+        margin-top: 14px;
+        font-size: 12px;
+      }
+      .credits button {
+        border: 0;
+        background: none;
+        color: var(--dark);
+        padding: 0;
+        text-decoration: underline;
+        cursor: pointer;
+        font: inherit;
+      }
+      .credits div {
+        margin-top: 8px;
+        padding: 9px;
+        border-radius: 7px;
+        background: var(--mint);
+      }
+      [hidden] {
+        display: none !important;
+      }
+      @media (max-width: 980px) {
+        .choices label {
+          min-width: 0;
+        }
+        .choices select {
+          width: 100%;
+          max-width: 100%;
+          min-width: 0;
+        }
+      }
+      @media (min-width: 681px) and (max-width: 980px) {
+        .choices {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+      @media (max-width: 680px) {
+        .head,
+        .content {
+          padding: 20px;
+        }
+        .choices,
+        .cards {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="tool">
+      <section class="head">
+        <span class="tag">Berlin event decision tool</span>
+        <h1>IFA After-Show Evening</h1>
+        <p>
+          IFA can fill a whole day before you notice you have no evening left.
+          Pick one realistic Berlin area before you leave Messe Berlin, rather
+          than trying to turn the exit into a second full itinerary.
+        </p>
+      </section>
+      <section class="content">
+        <div class="choices">
+          <label
+            >IFA exit time<select id="exit">
+              <option value="close">Leaving when the halls close</option>
+              <option value="mid">Leaving in mid-afternoon</option>
+              <option value="early">Leaving early with time to spare</option>
+            </select></label
+          ><label
+            >Fixed evening commitment<select id="commitment">
+              <option value="none">Nothing fixed after IFA</option>
+              <option value="west">A west-Berlin table or meeting</option>
+              <option value="central">A central table, show or meeting</option>
+              <option value="return">I need an early return to my hotel</option>
+            </select></label
+          ><label
+            >Energy left<select id="energy">
+              <option value="low">I need a short, quiet finish</option>
+              <option value="mid">Dinner and one area is enough</option>
+              <option value="high">I still want a proper city evening</option>
+            </select></label
+          ><label
+            >Where you sleep<select id="hotel">
+              <option value="west">West / near Messe Berlin</option>
+              <option value="centre">Mitte / central Berlin</option>
+              <option value="east">East / Friedrichshain side</option>
+            </select></label
+          >
+        </div>
+        <section class="board" aria-live="polite">
+          <h2 id="title">
+            Give IFA one exit margin, then one area.
+          </h2>
+          <p id="lead"></p>
+          <div class="cards">
+            <article class="card">
+              <b>01 · EXIT MARGIN</b>
+              <h3 id="a"></h3>
+              <p id="acopy"></p>
+            </article>
+            <article class="card">
+              <b>02 · TONIGHT'S AREA</b>
+              <h3 id="b"></h3>
+              <p id="bcopy"></p>
+            </article>
+            <article class="card">
+              <b>03 · END THE NIGHT</b>
+              <h3 id="c"></h3>
+              <p id="ccopy"></p>
+            </article>
+          </div>
+        </section>
+        <div class="foot">
+          <small
+            >IFA visitor entry and access conditions are set by the organiser.
+            Check your ticket, the official venue instructions and your live
+            route before choosing an exit. The margin below is a planning
+            buffer, not a prediction of queues or trains.</small
+          ><div class="actions">
+            <a
+              class="cta"
+              target="_blank"
+              rel="noopener"
+              href="https://www.ifa-berlin.com/visit"
+              >Open IFA visitor info</a
+            ><a
+              class="cta secondary"
+              target="_top"
+              href="https://www.berlinwalk.com/berlin-trip-planner"
+              >Place IFA in my trip</a
+            >
+          </div>
+        </div>
+        <div class="credits">
+          <button aria-expanded="false" aria-controls="credit">
+            Widget visual credit
+          </button>
+          <div id="credit" hidden>
+            Tool hero image: IFA at Messe Berlin in 2015 by dambranslv,
+            <a
+              href="https://commons.wikimedia.org/wiki/File:Messe_Berlin_-_IFA_2015.jpg"
+              target="_blank"
+              rel="noopener"
+              >Wikimedia Commons</a
+            >, CC BY 2.0.
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="../js/brand.js"></script>
+    <script>
+      const q = (s) => document.querySelector(s);
+      const exitPlans = {
+        early: {
+          title: "Keep 20 minutes for the actual exit",
+          copy:
+            "An early finish gives you room for one deliberate move. Use the time for a single district, not another list of sights.",
+        },
+        mid: {
+          title: "Keep 30 minutes before your next decision",
+          copy:
+            "Give yourself time to leave the hall, find the correct gate and open a live route before you head across Berlin.",
+        },
+        close: {
+          title: "Treat closing time as the start of your exit",
+          copy:
+            "Set aside 30 to 45 minutes for the hall exit, toilets, the crowd and your live route. Do not book the next thing for the minute IFA ends.",
+        },
+      };
+      const hotelEnds = {
+        west: "Finish toward your west-Berlin hotel after the one area you chose.",
+        centre:
+          "Finish toward your central hotel after the one area you chose, not by adding a second district.",
+        east:
+          "If you are sleeping east, make the return your last move rather than squeezing in another stop on the way.",
+      };
+      const destinations = {
+        reset: {
+          title: "Hotel reset",
+          lead:
+            "The fair already owns the day. A proper meal near your hotel and a quiet reset is the useful plan, not the fallback.",
+          area: "Your hotel side",
+          areaCopy:
+            "Use the live route to get back, eat close by and protect tomorrow's energy. Do not force a cross-city evening because you are in Berlin.",
+          end: "One meal, then stop",
+        },
+        west: {
+          title: "Charlottenburg",
+          lead:
+            "Stay near Messe Berlin and make a west-Berlin evening of it. This keeps the fair from turning into a long transfer before dinner.",
+          area: "Savignyplatz, Kurfürstendamm or the Memorial Church",
+          areaCopy:
+            "Choose one of these Charlottenburg landmarks or streets, then eat nearby. They are a better fit than a rushed historic-centre dash after a hall day.",
+          end: "West Berlin, then your hotel",
+        },
+        kulturforum: {
+          title: "Kulturforum and Potsdamer Platz",
+          lead:
+            "Make one central move for an evening block, then stay there. It works when you still have energy but do not want to improvise three neighbourhoods.",
+          area: "Kulturforum or Potsdamer Platz",
+          areaCopy:
+            "Use the Kulturforum and Potsdamer Platz area for one walk, meal or confirmed plan. Check the live route when you leave Messe Berlin, especially if your commitment has a hard start time.",
+          end: "One central block, then home",
+        },
+        historic: {
+          title: "Historic centre",
+          lead:
+            "Make Mitte the point of the evening only when you have an early exit and enough energy for the longer move. It is a choice, not the automatic next stop after IFA.",
+          area: "Museum Island, Unter den Linden or Hackescher Markt",
+          areaCopy:
+            "Pick one historic-centre line and let it hold the evening. The Spree, Museum Island and Hackescher Markt work better as one real area than as a late checklist.",
+          end: "Historic centre, then a direct return",
+        },
+      };
+
+      function chooseDestination(exit, commitment, energy, hotel) {
+        if (commitment === "return") return "reset";
+        if (commitment === "west") return "west";
+        if (commitment === "central") return "kulturforum";
+        if (exit === "close" && energy === "low") return "reset";
+        if (energy === "low") return hotel === "west" ? "west" : "reset";
+        if (energy === "high" && exit === "early" && hotel !== "west") {
+          return "historic";
+        }
+        if (hotel === "west") return "west";
+        if (energy === "high" && hotel === "east" && exit !== "close") {
+          return "historic";
+        }
+        return "kulturforum";
+      }
+
+      function draw() {
+        const exit = q("#exit").value;
+        const commitment = q("#commitment").value;
+        const energy = q("#energy").value;
+        const hotel = q("#hotel").value;
+        const destination = destinations[
+          chooseDestination(exit, commitment, energy, hotel)
+        ];
+        const commitmentNote =
+          commitment === "none"
+            ? "With nothing fixed, the selected area is the whole plan."
+            : commitment === "return"
+              ? "Your early return is the commitment, so keep every decision small."
+              : "Your fixed commitment is the anchor. Do not add a stop on the other side of Berlin before it.";
+
+        q("#title").textContent = `Tonight: ${destination.title}`;
+        q("#lead").textContent = `${destination.lead} ${commitmentNote}`;
+        q("#a").textContent = exitPlans[exit].title;
+        q("#acopy").textContent = exitPlans[exit].copy;
+        q("#b").textContent = destination.area;
+        q("#bcopy").textContent = destination.areaCopy;
+        q("#c").textContent = destination.end;
+        q("#ccopy").textContent = hotelEnds[hotel];
+      }
+      document.querySelectorAll("select").forEach((e) => (e.onchange = draw));
+      q(".credits button").onclick = (e) => {
+        let x = q("#credit");
+        x.hidden = !x.hidden;
+        e.currentTarget.setAttribute("aria-expanded", String(!x.hidden));
+      };
+      draw();
+    </script>
+  </body>
+</html>

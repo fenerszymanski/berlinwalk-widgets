@@ -1,0 +1,109 @@
+{
+  "june": {
+    "label": "JUNE 21",
+    "longLabel": "June 21 (summer solstice)",
+    "sunrise": "04:43",
+    "sunset": "21:33",
+    "daylightMinutes": 1010,
+    "daylightDisplay": "16h 50m"
+  },
+  "december": {
+    "label": "DEC 21",
+    "longLabel": "December 21 (winter solstice)",
+    "sunrise": "08:15",
+    "sunset": "15:54",
+    "daylightMinutes": 459,
+    "daylightDisplay": "7h 39m"
+  },
+  "comparisonText": "Berlin gets 9 hours 11 minutes more daylight in June than December.",
+  "january": {
+    "label": "JAN 1",
+    "longLabel": "January 1",
+    "sunrise": "08:16",
+    "sunset": "16:03",
+    "daylightMinutes": 467,
+    "daylightDisplay": "7h 47m",
+    "comparisonText": "After the winter solstice the days slowly lengthen again, gaining nearly an hour of evening light across January."
+  },
+  "february": {
+    "label": "FEB 1",
+    "longLabel": "February 1",
+    "sunrise": "07:41",
+    "sunset": "16:57",
+    "daylightMinutes": 556,
+    "daylightDisplay": "9h 16m",
+    "comparisonText": "February adds daylight quickly, with sunset moving from around 5 pm to nearly 5:45 pm by the end of the month."
+  },
+  "march": {
+    "label": "MAR 1",
+    "longLabel": "March 1",
+    "sunrise": "06:48",
+    "sunset": "17:46",
+    "daylightMinutes": 658,
+    "daylightDisplay": "10h 58m",
+    "comparisonText": "March transforms the evenings: the clocks go forward on March 28, 2027, pushing sunset close to 8 pm."
+  },
+  "april": {
+    "label": "APR 1",
+    "longLabel": "April 1",
+    "sunrise": "06:56",
+    "sunset": "19:56",
+    "daylightMinutes": 780,
+    "daylightDisplay": "13h 00m",
+    "comparisonText": "April keeps stretching the evenings, with sunset reaching nearly 8:45 pm by the end of the month."
+  },
+  "may": {
+    "label": "MAY 1",
+    "longLabel": "May 1",
+    "sunrise": "05:41",
+    "sunset": "20:45",
+    "daylightMinutes": 904,
+    "daylightDisplay": "15h 04m",
+    "comparisonText": "By May, Berlin enjoys long days and late sunsets, close to 9:25 pm by the end of the month."
+  },
+  "july": {
+    "label": "JULY 1",
+    "longLabel": "July 1",
+    "sunrise": "04:47",
+    "sunset": "21:32",
+    "daylightMinutes": 1005,
+    "daylightDisplay": "16h 45m",
+    "comparisonText": "Berlin still gets just over 9 hours more daylight on July 1 than around the winter solstice."
+  },
+  "august": {
+    "label": "AUG 1",
+    "longLabel": "August 1",
+    "sunrise": "05:28",
+    "sunset": "20:57",
+    "daylightMinutes": 929,
+    "daylightDisplay": "15h 29m",
+    "comparisonText": "Berlin still gets almost 8 hours more daylight on August 1 than around the winter solstice, but the month loses light quickly."
+  },
+  "september": {
+    "label": "SEP 1",
+    "longLabel": "September 1",
+    "sunrise": "06:17",
+    "sunset": "19:54",
+    "daylightMinutes": 817,
+    "daylightDisplay": "13h 37m",
+    "comparisonText": "Berlin still gets about 6 hours more daylight on September 1 than around the winter solstice, but the month loses more than an hour of evening light."
+  },
+  "october": {
+    "label": "OCT 1",
+    "longLabel": "October 1",
+    "sunrise": "07:08",
+    "sunset": "18:41",
+    "daylightMinutes": 693,
+    "daylightDisplay": "11h 33m",
+    "comparisonText": "Berlin loses light fast in October, and sunset jumps back an hour when the clocks change on October 25, 2026."
+  },
+  "november": {
+    "label": "NOV 1",
+    "longLabel": "November 1",
+    "sunrise": "07:01",
+    "sunset": "16:33",
+    "daylightMinutes": 572,
+    "daylightDisplay": "9h 32m",
+    "comparisonText": "By November, Berlin is down to about nine and a half hours of daylight, and it keeps shrinking toward the winter solstice."
+  }
+}
