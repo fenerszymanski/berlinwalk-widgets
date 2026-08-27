@@ -238,7 +238,6 @@
         "events"
       ],
       "aliases": [
-        "where to watch football",
         "fifa"
       ]
     },
@@ -7570,6 +7569,38 @@
       "iconStatus": "live-wix-media",
       "priority": 15,
       "cmsItemId": "55b55de2-0a49-4394-95f9-b7cb33d8a13d"
+    },
+    {
+      "slug": "berlin-football-screen-board",
+      "title": "Berlin Football Screen Board",
+      "lead": "Compare eight Berlin football bars by the competitions their official pages name, then check the venue's current programme for your exact match.",
+      "category": "Discovery",
+      "hubCategory": "EventsSports",
+      "type": "Guide",
+      "tags": [
+        "football",
+        "sports bars",
+        "premier league",
+        "champions league",
+        "bundesliga",
+        "la liga",
+        "europa league",
+        "berlin nightlife"
+      ],
+      "aliases": [
+        "where to watch football",
+        "where to watch soccer",
+        "football bars berlin",
+        "sports bars berlin",
+        "watch premier league berlin",
+        "watch champions league berlin"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-football-screen-board/",
+      "embedHeight": 2300,
+      "image": "https://static.wixstatic.com/media/5a08a3_c0913e82f6774be5a627202a9e173631~mv2.png",
+      "iconStatus": "live-wix-media",
+      "priority": 9,
+      "cmsItemId": "0a319d69-759a-4d1d-820d-e178462179c6"
     }
   ],
   "hubCategories": [

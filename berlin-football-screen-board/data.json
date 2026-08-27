@@ -1,0 +1,429 @@
+{
+  "meta": {
+    "title": "Berlin Football Screen Board",
+    "checkedAt": "2026-08-27",
+    "timezone": "Europe/Berlin",
+    "disclaimer": "A venue-level listing is not confirmation of a specific fixture. Check the venue's official programme on match day."
+  },
+  "competitions": [
+    {
+      "id": "champions-league",
+      "label": "Champions League",
+      "shortLabel": "UCL",
+      "aliases": ["champions league", "ucl", "champions"]
+    },
+    {
+      "id": "premier-league",
+      "label": "Premier League",
+      "shortLabel": "PL",
+      "aliases": ["premier league", "epl", "english league"]
+    },
+    {
+      "id": "la-liga",
+      "label": "La Liga",
+      "shortLabel": "La Liga",
+      "aliases": ["la liga", "spanish league", "spanish football"]
+    },
+    {
+      "id": "bundesliga",
+      "label": "Bundesliga",
+      "shortLabel": "BL",
+      "aliases": ["bundesliga", "german league", "1. bundesliga"]
+    },
+    {
+      "id": "europa-league",
+      "label": "Europa League",
+      "shortLabel": "UEL",
+      "aliases": ["europa league", "uel", "euro league"]
+    }
+  ],
+  "statuses": {
+    "regular": {
+      "label": "Named by venue",
+      "shortLabel": "Named",
+      "description": "The official venue page names this competition. It still does not confirm every fixture."
+    },
+    "selected": {
+      "label": "Selected matches",
+      "shortLabel": "Selected",
+      "description": "The venue says it shows selected matches or a broader competition group. Check the exact fixture."
+    },
+    "current-programme": {
+      "label": "In current programme",
+      "shortLabel": "Programme",
+      "description": "A dated official programme included this competition when checked. Recheck the individual match."
+    },
+    "ask-first": {
+      "label": "Ask first",
+      "shortLabel": "Ask",
+      "description": "The competition is named, but the exact broadcast list varies or is published elsewhere."
+    },
+    "unknown": {
+      "label": "Unknown",
+      "shortLabel": "Unknown",
+      "description": "No current official evidence for this competition was recorded in this check."
+    }
+  },
+  "venues": [
+    {
+      "id": "kilkenny",
+      "priority": 1,
+      "name": "Kilkenny Irish Pub",
+      "shortName": "Kilkenny",
+      "area": "Mitte",
+      "address": "Am Zwirngraben 17-20, 10178 Berlin",
+      "station": "S Hackescher Markt",
+      "venueStatus": "REGULAR",
+      "officialUrl": "https://www.kilkenny-pub.de/sportsbar-berlin-programme/",
+      "programmeUrl": "https://www.kilkenny-pub.de/sportsbar-berlin-programme/",
+      "reservationUrl": "https://www.kilkenny-pub.de/reservation/",
+      "liveListUrl": null,
+      "reservationPolicy": "Online reservation available. The venue says its programme can change.",
+      "facts": [
+        "The official sports page names four of the five competitions on this board.",
+        "The venue advertises several large screens."
+      ],
+      "cautions": [
+        "Confirm the exact fixture with the venue, even when the competition is named."
+      ],
+      "checkedAt": "2026-08-27",
+      "coverage": {
+        "champions-league": {
+          "status": "regular",
+          "evidence": "The official sports programme names the Champions League among the competitions shown."
+        },
+        "premier-league": {
+          "status": "regular",
+          "evidence": "The official sports programme names the English Premier League among the competitions shown."
+        },
+        "la-liga": {
+          "status": "unknown",
+          "evidence": "La Liga was not named in the verified official programme text."
+        },
+        "bundesliga": {
+          "status": "regular",
+          "evidence": "The official sports programme names the Bundesliga among the competitions shown."
+        },
+        "europa-league": {
+          "status": "regular",
+          "evidence": "The official sports programme names the Europa League among the competitions shown."
+        }
+      }
+    },
+    {
+      "id": "fc-magnet",
+      "priority": 2,
+      "name": "FC Magnet Bar",
+      "shortName": "FC Magnet",
+      "area": "Mitte",
+      "address": "Veteranenstr. 26, 10119 Berlin",
+      "station": null,
+      "venueStatus": "STALE_UNKNOWN",
+      "officialUrl": "http://fcmagnetbar.de/demnaechst",
+      "programmeUrl": "http://fcmagnetbar.de/demnaechst",
+      "reservationUrl": null,
+      "liveListUrl": null,
+      "reservationPolicy": "The venue says reservations are not possible during matches.",
+      "facts": [
+        "The official calendar has carried Champions League, international matches and simultaneous broadcasts."
+      ],
+      "cautions": [
+        "The visible calendar evidence was from March and April 2026, so every competition remains unknown for the current season."
+      ],
+      "checkedAt": "2026-08-27",
+      "coverage": {
+        "champions-league": {
+          "status": "unknown",
+          "evidence": "Older Champions League calendar entries are not treated as current-season proof."
+        },
+        "premier-league": {
+          "status": "unknown",
+          "evidence": "No current official Premier League evidence was recorded in this check."
+        },
+        "la-liga": {
+          "status": "unknown",
+          "evidence": "No current official La Liga evidence was recorded in this check."
+        },
+        "bundesliga": {
+          "status": "unknown",
+          "evidence": "No current official Bundesliga evidence was recorded in this check."
+        },
+        "europa-league": {
+          "status": "unknown",
+          "evidence": "No current official Europa League evidence was recorded in this check."
+        }
+      }
+    },
+    {
+      "id": "tante-kaethe",
+      "priority": 3,
+      "name": "Tante Käthe Fußballkneipe",
+      "shortName": "Tante Käthe",
+      "area": "Mauerpark",
+      "address": "Bernauer Str. 63, 13355 Berlin",
+      "station": null,
+      "venueStatus": "REGULAR_SELECTED",
+      "officialUrl": "https://tante-kaethe-fussballkneipe.de/",
+      "programmeUrl": "https://tante-kaethe-fussballkneipe.de/programm/",
+      "reservationUrl": null,
+      "liveListUrl": null,
+      "reservationPolicy": "Reservation information was not verified in this check.",
+      "facts": [
+        "The venue advertises live football on four large screens.",
+        "The venue describes itself as non-smoking."
+      ],
+      "cautions": [
+        "English, Spanish and Italian league games are explicitly described as selected matches."
+      ],
+      "checkedAt": "2026-08-27",
+      "coverage": {
+        "champions-league": {
+          "status": "selected",
+          "evidence": "The official page says it shows European cup football, but it does not promise every Champions League fixture."
+        },
+        "premier-league": {
+          "status": "selected",
+          "evidence": "The official page says it shows selected matches from the English league."
+        },
+        "la-liga": {
+          "status": "selected",
+          "evidence": "The official page says it shows selected matches from the Spanish league."
+        },
+        "bundesliga": {
+          "status": "regular",
+          "evidence": "The official page explicitly names the first and second Bundesliga."
+        },
+        "europa-league": {
+          "status": "selected",
+          "evidence": "The official page says it shows European cup football, but it does not promise every Europa League fixture."
+        }
+      }
+    },
+    {
+      "id": "blarney",
+      "priority": 4,
+      "name": "Blarney Irish Pub",
+      "shortName": "Blarney",
+      "area": "Kreuzberg",
+      "address": "Methfesselstr. 4, 10965 Berlin",
+      "station": "U Mehringdamm or U Platz der Luftbrücke",
+      "venueStatus": "CURRENT_PROGRAMME",
+      "officialUrl": "https://blarney-pub.de/",
+      "programmeUrl": "https://blarney-pub.de/sports/",
+      "reservationUrl": null,
+      "liveListUrl": null,
+      "reservationPolicy": "Reservation information was not verified in this check.",
+      "facts": [
+        "The official sports page publishes a dated match list.",
+        "The current list included Bundesliga, second Bundesliga, Premier League, DFB Cup and League Cup fixtures."
+      ],
+      "cautions": [
+        "Use the dated programme for the exact match. A league appearing once does not mean every fixture is shown."
+      ],
+      "checkedAt": "2026-08-27",
+      "coverage": {
+        "champions-league": {
+          "status": "unknown",
+          "evidence": "No Champions League fixture was present in the verified dated programme."
+        },
+        "premier-league": {
+          "status": "current-programme",
+          "evidence": "The official dated programme contained multiple Premier League fixtures when checked."
+        },
+        "la-liga": {
+          "status": "unknown",
+          "evidence": "No La Liga fixture was present in the verified dated programme."
+        },
+        "bundesliga": {
+          "status": "current-programme",
+          "evidence": "The official dated programme contained Bundesliga fixtures when checked."
+        },
+        "europa-league": {
+          "status": "unknown",
+          "evidence": "No Europa League fixture was present in the verified dated programme."
+        }
+      }
+    },
+    {
+      "id": "country-cheers",
+      "priority": 5,
+      "name": "Country Cheers",
+      "shortName": "Country Cheers",
+      "area": "Friedrichshain",
+      "address": "Karl-Marx-Allee 65, 10243 Berlin",
+      "station": "U5 Strausberger Platz",
+      "venueStatus": "REGULAR_SELECTED",
+      "officialUrl": "https://www.countrycheers.de/en",
+      "programmeUrl": "https://www.countrycheers.de/en",
+      "reservationUrl": null,
+      "liveListUrl": null,
+      "reservationPolicy": "A EUR 12 minimum spend per person applies to football matches.",
+      "facts": [
+        "The venue advertises televisions plus two large screens and can switch between different events.",
+        "It shows the Bundesliga conference or the top match of the day.",
+        "Smoking is allowed, entry is 18+, and the venue does not offer normal food."
+      ],
+      "cautions": [
+        "Other competitions may be available on request, but that is not treated as verified coverage."
+      ],
+      "checkedAt": "2026-08-27",
+      "coverage": {
+        "champions-league": {
+          "status": "unknown",
+          "evidence": "The official page did not name the Champions League in the verified text."
+        },
+        "premier-league": {
+          "status": "unknown",
+          "evidence": "The official page did not name the Premier League in the verified text."
+        },
+        "la-liga": {
+          "status": "unknown",
+          "evidence": "The official page did not name La Liga in the verified text."
+        },
+        "bundesliga": {
+          "status": "regular",
+          "evidence": "The official page says it shows every Bundesliga matchday as a conference or the top match."
+        },
+        "europa-league": {
+          "status": "unknown",
+          "evidence": "The official page did not name the Europa League in the verified text."
+        }
+      }
+    },
+    {
+      "id": "belushis-alexanderplatz",
+      "priority": 6,
+      "name": "Belushi's Berlin Alexanderplatz",
+      "shortName": "Belushi's Alex",
+      "area": "Mitte",
+      "address": "Rosa-Luxemburg-Str. 41, 10178 Berlin",
+      "station": "U Rosa-Luxemburg-Platz",
+      "venueStatus": "REGULAR_SELECTED",
+      "officialUrl": "https://belushis.com/berlin-rosa-luxemburg-strasse?fav_bar_code=BER",
+      "programmeUrl": "https://belushis.com/berlin-rosa-luxemburg-strasse?fav_bar_code=BER",
+      "reservationUrl": "https://belushis.com/berlin-rosa-luxemburg-strasse?fav_bar_code=BER",
+      "liveListUrl": null,
+      "reservationPolicy": "Online booking is available from the official venue page.",
+      "facts": [
+        "The venue advertises 13 HD televisions and a huge screen.",
+        "The venue says staff speak English and food is served until 22:00."
+      ],
+      "cautions": [
+        "Only competitions explicitly verified on the official venue page receive a positive matrix status."
+      ],
+      "checkedAt": "2026-08-27",
+      "coverage": {
+        "champions-league": {
+          "status": "regular",
+          "evidence": "The official Berlin Alexanderplatz page explicitly names the Champions League."
+        },
+        "premier-league": {
+          "status": "regular",
+          "evidence": "The official Berlin Alexanderplatz page explicitly names the Premier League."
+        },
+        "la-liga": {
+          "status": "unknown",
+          "evidence": "La Liga was not included in the verified manifest for this venue."
+        },
+        "bundesliga": {
+          "status": "unknown",
+          "evidence": "The Bundesliga was not included in the verified manifest for this venue."
+        },
+        "europa-league": {
+          "status": "unknown",
+          "evidence": "The Europa League was not included in the verified manifest for this venue."
+        }
+      }
+    },
+    {
+      "id": "irish-pub-uber-arena",
+      "priority": 7,
+      "name": "The Irish Pub Berlin by Uber Arena",
+      "shortName": "Irish Pub Uber",
+      "area": "Friedrichshain",
+      "address": "Mildred-Harnack-Str. 11, 10243 Berlin",
+      "station": "S+U Warschauer Straße",
+      "venueStatus": "REGULAR",
+      "officialUrl": "https://www.theirishpubberlin.de/",
+      "programmeUrl": "https://www.theirishpubberlin.de/sport-bar-berlin-programm/",
+      "reservationUrl": "https://www.theirishpubberlin.de/",
+      "liveListUrl": null,
+      "reservationPolicy": "The venue advertises reservations and food on its official site.",
+      "facts": [
+        "The official site names four of the five competitions on this board.",
+        "The venue advertises several big screens."
+      ],
+      "cautions": [
+        "Check the official programme for the exact game before travelling."
+      ],
+      "checkedAt": "2026-08-27",
+      "coverage": {
+        "champions-league": {
+          "status": "regular",
+          "evidence": "The verified official programme names the Champions League."
+        },
+        "premier-league": {
+          "status": "regular",
+          "evidence": "The verified official programme names the Premier League."
+        },
+        "la-liga": {
+          "status": "unknown",
+          "evidence": "La Liga was not named in the verified official programme."
+        },
+        "bundesliga": {
+          "status": "regular",
+          "evidence": "The verified official programme names the Bundesliga."
+        },
+        "europa-league": {
+          "status": "regular",
+          "evidence": "The verified official programme names the Europa League."
+        }
+      }
+    },
+    {
+      "id": "the-lir",
+      "priority": 8,
+      "name": "The Lir",
+      "shortName": "The Lir",
+      "area": "Tiergarten",
+      "address": "Flensburger Str. 7, 10557 Berlin",
+      "station": "S Bellevue or U Hansaplatz",
+      "venueStatus": "ASK_FIRST",
+      "officialUrl": "https://www.thelir.de/sports",
+      "programmeUrl": "https://www.thelir.de/sports",
+      "reservationUrl": null,
+      "liveListUrl": "https://www.facebook.com/irishpubberlin/",
+      "reservationPolicy": "The exact live broadcast list is published separately. Ask first for your match.",
+      "facts": [
+        "The official sports page advertises football on a Full HD large screen.",
+        "It names Premier League, Champions League, Euro League and Bundesliga highlights."
+      ],
+      "cautions": [
+        "The venue directs visitors to Facebook for its exact live broadcast list."
+      ],
+      "checkedAt": "2026-08-27",
+      "coverage": {
+        "champions-league": {
+          "status": "ask-first",
+          "evidence": "The official sports page names Champions League, but the exact list is published separately."
+        },
+        "premier-league": {
+          "status": "ask-first",
+          "evidence": "The official sports page names Premier League, but the exact list is published separately."
+        },
+        "la-liga": {
+          "status": "unknown",
+          "evidence": "La Liga was not named in the verified official sports text."
+        },
+        "bundesliga": {
+          "status": "ask-first",
+          "evidence": "The official sports page names Bundesliga highlights, not every match."
+        },
+        "europa-league": {
+          "status": "ask-first",
+          "evidence": "The official sports page names Euro League, but the exact list is published separately."
+        }
+      }
+    }
+  ]
+}
