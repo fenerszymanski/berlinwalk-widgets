@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-08-27T08:21:22.771Z",
+  "updatedAt": "2026-08-27T13:57:51.050Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 332,
-  "toolsTotal": 250,
+  "totalPosts": 333,
+  "toolsTotal": 251,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1618,6 +1618,23 @@
   ],
   "latest": [
     {
+      "title": "Tempelhofer Feld: Which Gate to Use and How to Get Out After Closing",
+      "slug": "tempelhofer-feld-berlin",
+      "path": "/post/tempelhofer-feld-berlin",
+      "url": "https://www.berlinwalk.com/post/tempelhofer-feld-berlin",
+      "excerpt": "Berlin’s old airfield is easy to enjoy and hard to arrive at properly. Ten public gates are spread around a fence that runs seven and a half kilometres, and the barbecue areas, the community gardens and the beer gardens all sit at opposite ends of it. The gate you choose decides whether you walk 175 metres or 1,737. And the field locks at a different time every month, with only five gates that let you back out afterwards.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "history-myths",
+      "topicLabel": "Berlin History & Myths",
+      "readTime": "8 min read",
+      "publishedDate": "2026-08-27T13:56:07.553Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_164e9f6fb7b3418e8945e07de5c6769d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-runway-evening.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_164e9f6fb7b3418e8945e07de5c6769d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-runway-evening.jpg",
+      "alt": "The old Tempelhof runway at dusk, its painted centre line running towards a low orange horizon",
+      "relatedToolSlug": "tempelhof-field-planner"
+    },
+    {
       "title": "Berlin Sauna Guide: What It Costs, What You Take Off and Which Ones Are Closed",
       "slug": "berlin-sauna-guide",
       "path": "/post/berlin-sauna-guide",
@@ -1803,26 +1820,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_1039705c22ec444ba5b50cd7bff261f0~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/topography-of-terror-berlin.jpg",
       "alt": "The excavated cellar walls, the open-air exhibition trench and the surviving stretch of Berlin Wall at the Topography of Terror on Niederkirchnerstraße",
       "relatedToolSlug": "third-reich-berlin-what-survives"
-    },
-    {
-      "title": "Berlin in the Evening: What Is Still Open After the Museums Close",
-      "slug": "berlin-in-the-evening",
-      "path": "/post/berlin-in-the-evening",
-      "url": "https://www.berlinwalk.com/post/berlin-in-the-evening",
-      "excerpt": "Almost every ticketed sight in central Berlin shuts between 17:00 and 18:30. Here is what stays open late, what the floodlit centre is actually good for, and one twenty-minute walk that turns the dead hours into the best part of the day.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "when-to-visit",
-      "topicLabel": "Month-by-Month Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-08-22T14:07:13.766Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_d63dc2cd24cf4b579a376714ce5fb5fd~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-dom-spree.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_d63dc2cd24cf4b579a376714ce5fb5fd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-dom-spree.jpg",
-      "alt": "Berlin Cathedral floodlit above the Spree at blue hour, with a boat passing and the embankment lit along Museum Island",
-      "relatedToolSlug": "berlin-evening-cascade"
     }
   ],
   "allPosts": [
+    {
+      "title": "Tempelhofer Feld: Which Gate to Use and How to Get Out After Closing",
+      "slug": "tempelhofer-feld-berlin",
+      "path": "/post/tempelhofer-feld-berlin",
+      "url": "https://www.berlinwalk.com/post/tempelhofer-feld-berlin",
+      "excerpt": "Berlin’s old airfield is easy to enjoy and hard to arrive at properly. Ten public gates are spread around a fence that runs seven and a half kilometres, and the barbecue areas, the community gardens and the beer gardens all sit at opposite ends of it. The gate you choose decides whether you walk 175 metres or 1,737. And the field locks at a different time every month, with only five gates that let you back out afterwards.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "history-myths",
+      "topicLabel": "Berlin History & Myths",
+      "readTime": "8 min read",
+      "publishedDate": "2026-08-27T13:56:07.553Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_164e9f6fb7b3418e8945e07de5c6769d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-runway-evening.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_164e9f6fb7b3418e8945e07de5c6769d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-runway-evening.jpg",
+      "alt": "The old Tempelhof runway at dusk, its painted centre line running towards a low orange horizon",
+      "relatedToolSlug": "tempelhof-field-planner"
+    },
     {
       "title": "Berlin Sauna Guide: What It Costs, What You Take Off and Which Ones Are Closed",
       "slug": "berlin-sauna-guide",
