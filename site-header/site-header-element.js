@@ -14,7 +14,22 @@ const BW_HEADER_LINKS = {
   audioTours: 'https://www.berlinwalk.com/audio-tours',
   photoMissions: 'https://www.berlinwalk.com/products/hidden-berlin-photo-missions',
   games: 'https://www.berlinwalk.com/games',
+  timeDetective: 'https://www.berlinwalk.com/games/berlin-time-detective',
+  whereInBerlin: 'https://www.berlinwalk.com/games/where-in-berlin',
+  berlinBattle: 'https://www.berlinwalk.com/games/berlin-battle',
+  berghainBouncer: 'https://www.berlinwalk.com/games/berghain-bouncer',
+  kitkatDoorTest: 'https://www.berlinwalk.com/games/kitkat-door-test',
+  daySurvival: 'https://www.berlinwalk.com/games/berlin-day-survival',
+  berlinRewind: 'https://www.berlinwalk.com/games/berlin-rewind',
+  smileChallenge: 'https://www.berlinwalk.com/games/berlin-smile-challenge',
   blog: 'https://www.berlinwalk.com/blog',
+  blogFirstDay: 'https://www.berlinwalk.com/blog#bw-topic-first-day',
+  blogPractical: 'https://www.berlinwalk.com/blog#bw-topic-practical',
+  blogFreeBudget: 'https://www.berlinwalk.com/blog#bw-topic-free-budget',
+  blogRouteStories: 'https://www.berlinwalk.com/blog#bw-topic-route-stories',
+  blogHistoryMyths: 'https://www.berlinwalk.com/blog#bw-topic-history-myths',
+  blogFoodNightlife: 'https://www.berlinwalk.com/blog#bw-topic-food-nightlife',
+  blogWhenToVisit: 'https://www.berlinwalk.com/blog#bw-topic-when-to-visit',
   firstDayRescue: 'https://www.berlinwalk.com/products/berlin-first-day-rescue-plan',
   dateCheck: 'https://www.berlinwalk.com/berlin-dates-check',
   whatsOpen: 'https://www.berlinwalk.com/tools/whats-open-in-berlin-today',
@@ -83,6 +98,8 @@ class BWHeaderElement extends HTMLElement {
     this._mobileMenuId = `${this._instanceId}-mobile-menu`;
     this._tourMenuId = `${this._instanceId}-tour-menu`;
     this._productsMenuId = `${this._instanceId}-products-menu`;
+    this._gamesMenuId = `${this._instanceId}-games-menu`;
+    this._blogMenuId = `${this._instanceId}-blog-menu`;
     this._hacksMenuId = `${this._instanceId}-hacks-menu`;
     this._render();
     BW_HEADER_INSTANCES.add(this);
@@ -384,11 +401,13 @@ class BWHeaderElement extends HTMLElement {
         const menuRect = menu.getBoundingClientRect();
         const cx = rect.left + rect.width / 2;
         const viewportW = window.innerWidth || document.documentElement.clientWidth;
+        const viewportH = window.innerHeight || document.documentElement.clientHeight;
         let left = cx - menuRect.width / 2;
         if (left < 12) left = 12;
         if (left + menuRect.width > viewportW - 12) left = viewportW - 12 - menuRect.width;
         menu.style.top = (rect.bottom + 10) + 'px';
         menu.style.left = left + 'px';
+        menu.style.maxHeight = Math.max(180, viewportH - rect.bottom - 22) + 'px';
       };
       const setOpen = (open) => {
         wrap.classList.toggle('bw-header-dropdown-open', open);
@@ -690,6 +709,8 @@ class BWHeaderElement extends HTMLElement {
           margin: 0;
           min-width: 240px;
           opacity: 0;
+          overflow-y: auto;
+          overscroll-behavior: contain;
           padding: 10px;
           pointer-events: none;
           position: fixed;
@@ -1092,8 +1113,32 @@ class BWHeaderElement extends HTMLElement {
                     <li><a href="${BW_HEADER_LINKS.photoMissions}">Photo Missions · €3.99</a></li>
                   </ul>
                 </li>
-                <li><a href="${BW_HEADER_LINKS.games}">Games</a></li>
-                <li><a href="${BW_HEADER_LINKS.blog}">Blog</a></li>
+                <li class="bw-header-dropdown">
+                  <button class="bw-header-dropdown-trigger" type="button" aria-expanded="false" aria-controls="${this._gamesMenuId}">
+                    Games <span class="bw-header-caret" aria-hidden="true">⌄</span>
+                  </button>
+                  <ul id="${this._gamesMenuId}" class="bw-header-submenu">
+                    <li><a href="${BW_HEADER_LINKS.games}">All Games</a></li>
+                    <li><a href="${BW_HEADER_LINKS.berghainBouncer}">Berghain Bouncer</a></li>
+                    <li><a href="${BW_HEADER_LINKS.kitkatDoorTest}">KitKat Club Door Test</a></li>
+                    <li><a href="${BW_HEADER_LINKS.whereInBerlin}">Where in Berlin Do You Belong?</a></li>
+                    <li><a href="${BW_HEADER_LINKS.daySurvival}">Berlin Day Survival</a></li>
+                    <li><a href="${BW_HEADER_LINKS.berlinBattle}">Berlin Battle</a></li>
+                  </ul>
+                </li>
+                <li class="bw-header-dropdown">
+                  <button class="bw-header-dropdown-trigger" type="button" aria-expanded="false" aria-controls="${this._blogMenuId}">
+                    Blog <span class="bw-header-caret" aria-hidden="true">⌄</span>
+                  </button>
+                  <ul id="${this._blogMenuId}" class="bw-header-submenu">
+                    <li><a href="${BW_HEADER_LINKS.blog}">All Blog Posts</a></li>
+                    <li><a href="${BW_HEADER_LINKS.blogFirstDay}">First Day in Berlin</a></li>
+                    <li><a href="${BW_HEADER_LINKS.blogHistoryMyths}">Berlin History &amp; Myths</a></li>
+                    <li><a href="${BW_HEADER_LINKS.blogPractical}">Practical Berlin</a></li>
+                    <li><a href="${BW_HEADER_LINKS.blogFoodNightlife}">Food &amp; Nightlife</a></li>
+                    <li><a href="${BW_HEADER_LINKS.blogRouteStories}">Tour Route Stories</a></li>
+                  </ul>
+                </li>
                 <li class="bw-header-dropdown">
                   <button class="bw-header-dropdown-trigger" type="button" aria-expanded="false" aria-controls="${this._hacksMenuId}">
                     Berlin Hacks <span class="bw-header-caret" aria-hidden="true">⌄</span>
@@ -1148,8 +1193,25 @@ class BWHeaderElement extends HTMLElement {
                 <a href="${BW_HEADER_LINKS.photoMissions}">Photo Missions · €3.99</a>
               </details>
 
-              <a href="${BW_HEADER_LINKS.games}">Games</a>
-              <a href="${BW_HEADER_LINKS.blog}">Blog</a>
+              <details class="bw-header-mobile-section">
+                <summary class="bw-header-mobile-section-label">Games</summary>
+                <a href="${BW_HEADER_LINKS.games}">All Games</a>
+                <a href="${BW_HEADER_LINKS.berghainBouncer}">Berghain Bouncer</a>
+                <a href="${BW_HEADER_LINKS.kitkatDoorTest}">KitKat Club Door Test</a>
+                <a href="${BW_HEADER_LINKS.whereInBerlin}">Where in Berlin Do You Belong?</a>
+                <a href="${BW_HEADER_LINKS.daySurvival}">Berlin Day Survival</a>
+                <a href="${BW_HEADER_LINKS.berlinBattle}">Berlin Battle</a>
+              </details>
+
+              <details class="bw-header-mobile-section">
+                <summary class="bw-header-mobile-section-label">Blog</summary>
+                <a href="${BW_HEADER_LINKS.blog}">All Blog Posts</a>
+                <a href="${BW_HEADER_LINKS.blogFirstDay}">First Day in Berlin</a>
+                <a href="${BW_HEADER_LINKS.blogHistoryMyths}">Berlin History &amp; Myths</a>
+                <a href="${BW_HEADER_LINKS.blogPractical}">Practical Berlin</a>
+                <a href="${BW_HEADER_LINKS.blogFoodNightlife}">Food &amp; Nightlife</a>
+                <a href="${BW_HEADER_LINKS.blogRouteStories}">Tour Route Stories</a>
+              </details>
               <details class="bw-header-mobile-section">
                 <summary class="bw-header-mobile-section-label">Berlin Hacks</summary>
                 <a href="${BW_HEADER_LINKS.dateCheck}">Berlin Date Check</a>

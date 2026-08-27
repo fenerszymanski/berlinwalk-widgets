@@ -120,6 +120,7 @@ class BWBlogIndexElement extends HTMLElement {
     this._scrollspyBound = false;
     this._scrollspyHandler = null;
     this._lastKnownScheduleC = '';
+    this._initialTopicHashHandled = false;
   }
 
   connectedCallback() {
@@ -1365,6 +1366,28 @@ class BWBlogIndexElement extends HTMLElement {
     }
     this._archiveLoaded = Array.isArray(this._data.allPosts) && this._data.allPosts.length > 0;
     this._rerender();
+    this._scrollToInitialTopicHash();
+  }
+
+  _scrollToInitialTopicHash() {
+    if (this._initialTopicHashHandled) return;
+    const match = /^#bw-topic-([a-z0-9-]+)$/.exec(window.location.hash || '');
+    if (!match) {
+      this._initialTopicHashHandled = true;
+      return;
+    }
+    const topicKey = match[1];
+    const knownTopic = (this._data.navTopics || []).some((topic) => topic.key === topicKey);
+    if (!knownTopic) {
+      this._initialTopicHashHandled = true;
+      return;
+    }
+    const target = this.querySelector(`[id="bw-topic-${topicKey}"]`);
+    if (!target) return;
+    this._initialTopicHashHandled = true;
+    window.requestAnimationFrame(() => {
+      target.scrollIntoView({ behavior: 'auto', block: 'start' });
+    });
   }
 
   _loadArchive() {
