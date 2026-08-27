@@ -54,6 +54,18 @@ const EXPECTED_COMPATIBILITY_HASHES = new Map([
   ['_compat/wix/f985d8f5288df84d46e904298ad9186236561df1/history-lead-magnet-element.js', '83559f72195084595b178cbbdb9c12f505328bfbf73b2d9469c33b50c25d46d0'],
   ['_compat/wix/e7ea2563499af1987863402a1c181dfcbd44b3a5/booking-calendar-element.js', '468312ec8492c74fb036e968b78974313711290b836313c4de9570aaf3a6d5c5'],
 ]);
+const REQUIRED_SUBRESOURCE_INTEGRITY = [
+  {
+    file: 'east-west-1989/index.html',
+    src: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js',
+    integrity: 'sha384-NElt3Op+9NBMCYaef5HxeJmU4Xeard/Lku8ek6hoPTvYkQPh3zLIrJP7KiRocsxO',
+  },
+  {
+    file: 'east-west-1989/index.html',
+    src: 'https://cdnjs.cloudflare.com/ajax/libs/Turf.js/6.5.0/turf.min.js',
+    integrity: 'sha384-82q0nm29xZzIo5BMtDYnh2/NxeO6FoaK1S/0nF84w3cEsqbBfun3JdMyDVYWfVY5',
+  },
+];
 const ALLOWED_EMAILS = new Set(['info@berlinwalk.com', 'you@example.com']);
 const MAX_PUBLIC_FILE_BYTES = 20 * 1024 * 1024;
 
@@ -86,6 +98,18 @@ for (const [relative, expectedHash] of EXPECTED_COMPATIBILITY_HASHES) {
   if (!fileSet.has(relative)) continue;
   const actualHash = sha256(await readFile(path.join(root, relative)));
   if (actualHash !== expectedHash) errors.push(`compatibility asset changed: ${relative}`);
+}
+
+for (const required of REQUIRED_SUBRESOURCE_INTEGRITY) {
+  if (!fileSet.has(required.file)) {
+    errors.push(`SRI host file missing: ${required.file}`);
+    continue;
+  }
+  const body = await readFile(path.join(root, required.file), 'utf8');
+  const tag = (body.match(/<script\b[^>]*>/gi) || []).find((candidate) => candidate.includes(`src="${required.src}"`));
+  if (!tag || !tag.includes(`integrity="${required.integrity}"`) || !/crossorigin=["']anonymous["']/i.test(tag)) {
+    errors.push(`required subresource integrity missing or changed: ${required.file} -> ${required.src}`);
+  }
 }
 
 function forbiddenFilename(relative) {
