@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Berlin Vietnamese Food Finder</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root{
+    --pho:#B8341B;        /* warm broth red */
+    --pho-dark:#8f2814;
+    --herb:#3f7d34;       /* coriander green */
+    --broth:#F6EEDD;      /* warm bowl cream */
+    --ink:#241a12;
+    --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:transparent;color:var(--ink);font-family:Montserrat,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  .vf{max-width:760px;margin:0 auto;padding:18px 14px 8px}
+
+  .vf-top{
+    position:relative;overflow:hidden;border-radius:18px;
+    background:
+      radial-gradient(120% 140% at 8% 0%, rgba(255,230,0,.18), transparent 55%),
+      linear-gradient(135deg,#7a1f10 0%, var(--pho) 48%, #a8492c 100%);
+    color:#fff;padding:20px 18px 18px;box-shadow:0 12px 30px rgba(120,30,15,.28)
+  }
+  .vf-kicker{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;opacity:.9;margin:0 0 6px}
+  .vf-top h2{margin:0 0 8px;font-size:1.42rem;line-height:1.18;font-weight:800}
+  .vf-top p{margin:0;font-size:.95rem;line-height:1.5;color:#fdeede;max-width:52ch}
+  .vf-bowls{position:absolute;right:-14px;top:-10px;font-size:70px;opacity:.16;transform:rotate(-8deg);pointer-events:none}
+
+  .vf-worlds{display:flex;gap:8px;margin:14px 0 4px;flex-wrap:wrap}
+  .vf-world{flex:1 1 150px;min-width:0;background:var(--broth);border:1px solid #eaddc4;border-radius:13px;padding:11px 12px}
+  .vf-world b{display:block;font-size:.86rem;color:var(--pho-dark);margin-bottom:2px}
+  .vf-world span{display:block;font-size:.78rem;line-height:1.4;color:#5c4a38}
+
+  .vf-quiz{background:var(--card);border:1px solid #ecdfc9;border-radius:16px;padding:16px 15px;margin-top:14px;box-shadow:0 6px 18px rgba(140,80,30,.08)}
+  .vf-q{margin-bottom:15px}
+  .vf-q:last-of-type{margin-bottom:8px}
+  .vf-q > label{display:block;font-weight:700;font-size:.93rem;margin-bottom:8px;color:var(--ink)}
+  .vf-q > label .n{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--pho);color:#fff;font-size:.72rem;margin-right:7px;vertical-align:middle}
+  .vf-opts{display:flex;gap:8px;flex-wrap:wrap}
+  .vf-opt{flex:1 1 auto;cursor:pointer}
+  .vf-opt input{position:absolute;opacity:0;pointer-events:none}
+  .vf-opt span{display:flex;align-items:center;justify-content:center;min-height:44px;box-sizing:border-box;text-align:center;padding:11px 10px;border:1.5px solid #e0d3bd;border-radius:10px;font-size:.83rem;font-weight:600;color:#5c4a38;background:#fdfaf3;transition:all .15s;line-height:1.3}
+  .vf-opt input:checked + span{background:var(--pho);border-color:var(--pho);color:#fff;box-shadow:0 4px 12px rgba(184,52,27,.28)}
+  .vf-opt input:focus-visible + span{outline:3px solid #ffcf33;outline-offset:2px}
+
+  .vf-cta{width:100%;margin-top:6px;border:0;cursor:pointer;background:var(--bw-yellow,#FFE600);color:#123D18;font-weight:800;font-size:1rem;padding:13px;border-radius:12px;font-family:inherit;transition:filter .15s}
+  .vf-cta:hover{filter:brightness(.95)}
+  .vf-cta:focus-visible{outline:3px solid var(--pho);outline-offset:2px}
+
+  .vf-result{margin-top:16px;display:none}
+  .vf-result.on{display:block;animation:vfin .3s ease}
+  @keyframes vfin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  .vf-verdict{background:linear-gradient(135deg,#123D18,#1B5E20);color:#fff;border-radius:15px;padding:15px 16px;margin-bottom:12px}
+  .vf-verdict .lab{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#ffe600;margin:0 0 4px}
+  .vf-verdict h3{margin:0 0 6px;font-size:1.16rem;font-weight:800;line-height:1.2}
+  .vf-verdict p{margin:0;font-size:.9rem;line-height:1.5;color:#e6f0e0}
+
+  .vf-venue{background:var(--card);border:1px solid #ecdfc9;border-radius:13px;padding:13px 14px;margin-bottom:10px}
+  .vf-venue-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:3px}
+  .vf-venue-h b{font-size:1rem;color:var(--pho-dark);line-height:1.2}
+  .vf-price{font-size:.8rem;font-weight:700;color:var(--herb);white-space:nowrap}
+  .vf-area{font-size:.76rem;color:#8a7860;margin-bottom:7px;font-weight:600}
+  .vf-area .stn{color:#5c4a38}
+  .vf-venue p{margin:0 0 6px;font-size:.86rem;line-height:1.5;color:#4a3d2e}
+  .vf-order{font-size:.82rem;line-height:1.45;background:var(--broth);border-radius:8px;padding:7px 10px;color:#5c4a38}
+  .vf-order b{color:var(--pho-dark)}
+  .vf-tags{margin-top:7px}
+  .vf-tag{display:inline-block;font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:20px;margin:2px 4px 0 0}
+  .vf-tag.veg{background:#e4f2df;color:#2f6d28}
+  .vf-tag.cash{background:#fdeede;color:#a8492c}
+
+  .vf-deep{background:var(--broth);border:1px dashed #d9b98a;border-radius:13px;padding:13px 14px;margin-top:4px}
+  .vf-deep b{display:block;color:var(--pho-dark);font-size:.92rem;margin-bottom:4px}
+  .vf-deep p{margin:0;font-size:.83rem;line-height:1.5;color:#5c4a38}
+
+  .vf-again{min-height:44px;background:none;border:0;color:var(--pho-dark);font-weight:700;font-size:.86rem;cursor:pointer;padding:11px 8px;font-family:inherit;text-decoration:underline}
+  .vf-note{font-size:.74rem;color:#9a8a72;text-align:center;margin:8px 4px 0;line-height:1.4}
+  @media (max-width:430px){
+    .vf-top h2{font-size:1.24rem}
+    .vf-world{flex:1 1 100%}
+    .vf-opts{flex-direction:column}
+    .vf-opt span{text-align:left}
+  }
+</style>
+</head>
+<body>
+<div class="vf">
+  <div class="vf-top">
+    <div class="vf-bowls">🍜</div>
+    <p class="vf-kicker">Berlin Vietnamese Food Finder</p>
+    <h2>Which Vietnamese bowl is right for you tonight?</h2>
+    <p>Vietnamese food is part of everyday Berlin, but the useful choice depends on your evening. Tell me your situation and I will point you to a current place, with one dish to consider and the nearest station.</p>
+  </div>
+
+  <div class="vf-worlds" aria-hidden="false">
+    <div class="vf-world"><b>Central classics</b><span>Mitte street-food canteens and institutions</span></div>
+    <div class="vf-world"><b>Kantstraße west</b><span>Sit-down dinners on Berlin's Asian food street</span></div>
+    <div class="vf-world"><b>Dong Xuan world</b><span>The wholesale market kitchens out east</span></div>
+  </div>
+
+  <form class="vf-quiz" id="vfQuiz">
+    <div class="vf-q">
+      <label><span class="n">1</span>What are you after?</label>
+      <div class="vf-opts">
+        <label class="vf-opt"><input type="radio" name="mood" value="quick" checked><span>A quick, great bowl</span></label>
+        <label class="vf-opt"><input type="radio" name="mood" value="sitdown"><span>A proper sit-down meal</span></label>
+        <label class="vf-opt"><input type="radio" name="mood" value="adventure"><span>A daytime market trip</span></label>
+      </div>
+    </div>
+    <div class="vf-q">
+      <label><span class="n">2</span>How do you eat?</label>
+      <div class="vf-opts">
+        <label class="vf-opt"><input type="radio" name="diet" value="any" checked><span>Anything goes</span></label>
+        <label class="vf-opt"><input type="radio" name="diet" value="veg"><span>Vegetarian or vegan</span></label>
+      </div>
+    </div>
+    <div class="vf-q">
+      <label><span class="n">3</span>How far will you travel?</label>
+      <div class="vf-opts">
+        <label class="vf-opt"><input type="radio" name="reach" value="central" checked><span>Stay central</span></label>
+        <label class="vf-opt"><input type="radio" name="reach" value="far"><span>Happy to cross the city</span></label>
+      </div>
+    </div>
+    <button type="submit" class="vf-cta">Find my Vietnamese spot →</button>
+  </form>
+
+  <div class="vf-result" id="vfResult" aria-live="polite"></div>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function(){
+  // Real Berlin Vietnamese venues, grouped by "world". Details kept general and
+  // durable: neighbourhood, nearest station, what it is known for, a price band,
+  // and one honest line. No per-dish prices that could go stale.
+  var V = {
+    vuong:   {name:'Monsieur Vuong', area:'Mitte', stn:'U Weinmeisterstraße', price:'€€', veg:false, cash:false,
+              blurb:'A long-running Mitte restaurant founded in 1999. Its current site accepts reservations and also keeps space for walk-ins.',
+              order:'Check the changing menu, then consider pho or the daily special.'},
+    mot:     {name:'District Mot', area:'Mitte', stn:'U Rosenthaler Platz', price:'€€', veg:false, cash:false,
+              blurb:'A colourful Saigon street-food setting with compact seating. Check the current menu and hours before going.',
+              order:'Consider bun, or choose one sharing dish from the current menu.'},
+    ngo:     {name:'Madame Ngo', area:'Charlottenburg · Kantstraße', stn:'S Savignyplatz', price:'€€€', veg:false, cash:false,
+              blurb:'A Hanoi-style brasserie on Kantstraße, Berlin\'s unofficial Asian food street. This is the one for a calm, proper dinner rather than a fast bowl.',
+              order:'The pho bo (beef pho) is the house signature.'},
+    ben:     {name:'Ben Thanh', area:'Charlottenburg · Kantstraße', stn:'U Wilmersdorfer Straße', price:'€€', veg:false, cash:false,
+              blurb:'Named after Saigon\'s market, a relaxed sit-down spot on the same west-side food street. Fair prices for the quality.',
+              order:'Choose from the current menu rather than travelling for one remembered dish.'},
+    gmv:     {name:'Good Morning Vietnam', area:'Kreuzberg', stn:'U Gneisenaustraße', price:'€€', veg:true, cash:false,
+              blurb:'A fully vegan Vietnamese kitchen with a leafy back terrace on Bergmannstraße. Easy if someone in the group does not eat meat.',
+              order:'A vegan pho or a lemongrass tofu bowl.'},
+    saigon:  {name:'Miss Saigon', area:'Kreuzberg', stn:'U Görlitzer Bahnhof', price:'€', veg:true, cash:false,
+              blurb:'A South-Vietnamese restaurant whose current menu includes vegetarian and vegan choices alongside meat dishes.',
+              order:'Compare the current bun, curry and meat-free choices.'},
+    dongxuan:{name:'Dong Xuan Center food halls', area:'Lichtenberg (East Berlin)', stn:'Tram M8 to Herzbergstr./Dong-Xuan', price:'€', veg:false, cash:false,
+              blurb:'A large wholesale and retail complex with salons, trade, services and several places to eat. Individual hours and payment methods vary.',
+              order:'Walk the halls first, then choose one open kitchen. Carry a card plus some cash.'}
+  };
+
+  var WORLDS = {
+    central: {lab:'Your match: Central classics', pick:['vuong','mot'],
+      say:'Stay in Mitte. You get a genuinely good bowl without a detour, in the part of town where most visitors already are.'},
+    west: {lab:'Your match: Kantstraße, west side', pick:['ngo','ben'],
+      say:'Head to Charlottenburg. Kantstraße is Berlin\'s Asian food street, and it is the right call when you want to sit down and eat properly rather than grab and go.'},
+    kreuz: {lab:'Your match: Kreuzberg, verified veg-first choices', pick:['gmv','saigon'],
+      say:'The clearest verified vegan-first pair in this small finder is in Kreuzberg. Check the journey before deciding; if you must stay in Mitte, verify a current menu there.'},
+    east: {lab:'Your match: the Dong Xuan world', pick:['dongxuan'],
+      say:'Ride the M8 to Herzbergstr./Dong-Xuan for a daytime market visit. The published center hours are 10:00–20:00 from Wednesday to Monday, with Tuesday closed; individual businesses vary.'}
+  };
+
+  function esc(s){return String(s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+
+  function decide(mood, diet, reach){
+    // Dietary need wins: only the Kreuzberg pair is independently verified here.
+    if(diet==='veg') return 'kreuz';
+    // Adventure + willing to travel = the market world.
+    if(mood==='adventure') return reach==='far' ? 'east' : 'kreuz';
+    if(mood==='sitdown') return reach==='far' ? 'west' : 'central';
+    // quick bowl
+    return reach==='far' ? 'kreuz' : 'central';
+  }
+
+  function venueCard(key, diet){
+    var v=V[key];
+    var tags='';
+    if(diet==='veg' && v.veg) tags+='<span class="vf-tag veg">good veg / vegan options</span>';
+    if(v.cash) tags+='<span class="vf-tag cash">cash may help</span>';
+    return '<div class="vf-venue">'+
+      '<div class="vf-venue-h"><b>'+esc(v.name)+'</b><span class="vf-price">'+esc(v.price)+'</span></div>'+
+      '<div class="vf-area">'+esc(v.area)+' · <span class="stn">'+esc(v.stn)+'</span></div>'+
+      '<p>'+esc(v.blurb)+'</p>'+
+      '<div class="vf-order"><b>Order:</b> '+esc(v.order)+'</div>'+
+      (tags?'<div class="vf-tags">'+tags+'</div>':'')+
+    '</div>';
+  }
+
+  var quiz=document.getElementById('vfQuiz');
+  var out=document.getElementById('vfResult');
+
+  quiz.addEventListener('submit', function(e){
+    e.preventDefault();
+    var mood=quiz.mood.value, diet=quiz.diet.value, reach=quiz.reach.value;
+    var w=WORLDS[decide(mood,diet,reach)];
+    var picks=w.pick.slice();
+    var html='<div class="vf-verdict"><p class="lab">'+esc(w.lab.split(':')[0])+'</p><h3>'+esc(w.lab.split(':').slice(1).join(':').trim())+'</h3><p>'+esc(w.say)+'</p></div>';
+    picks.forEach(function(k){ html+=venueCard(k,diet); });
+    // Always offer the deep-dive unless it is already the match.
+    if(picks.indexOf('dongxuan')===-1){
+      html+='<div class="vf-deep"><b>Want a market trip? Go east to the Dong Xuan Center</b>'+
+        '<p>Take tram M8 to Herzbergstr./Dong-Xuan and walk the halls before choosing an open kitchen. The center publishes 10:00–20:00 from Wednesday to Monday and Tuesday closed; individual businesses vary. Carry a card plus some cash.</p></div>';
+    }
+    html+='<button type="button" class="vf-again" id="vfAgain">Start over</button>';
+    html+='<p class="vf-note">Places change. Check current opening hours before you set off, especially for a trip out to Lichtenberg.</p>';
+    out.innerHTML=html;
+    out.classList.add('on');
+    document.getElementById('vfAgain').addEventListener('click', function(){
+      out.classList.remove('on'); out.innerHTML='';
+      out.scrollIntoView?window.scrollTo(0,0):null;
+    });
+    out.scrollIntoView({behavior:'smooth',block:'nearest'});
+  });
+})();
+</script>
+</body>
+</html>

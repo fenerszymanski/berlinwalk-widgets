@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Berlin Pass Cost Comparison</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root{
+    --green:#1B5E20;
+    --green-dark:#164a1a;
+    --yellow:#FFE600;
+    --lime:#7CB342;
+    --lime-soft:#F2F8E8;
+    --border:#DCE8C8;
+    --cream:#FAFAF5;
+    --ink:#212121;
+    --muted:#4E5A4E;
+    --win:#1B5E20;
+    --bar:#c7d8b4;
+    --bar-win:#2e7d33;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:transparent;color:var(--ink);font-family:Montserrat,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  .pc{max-width:760px;margin:0 auto;padding:18px 14px 10px}
+
+  .pc-lede{font-size:.92rem;line-height:1.55;color:#3f4a3c;margin:0 0 15px}
+  .pc-lede b{color:var(--green)}
+
+  .pc-controls{background:var(--cream);border:1px solid var(--border);border-radius:14px;padding:14px 14px 6px;margin:0 0 14px}
+  .ctl{margin:0 0 13px}
+  .ctl > .lab{display:block;font-weight:800;font-size:.82rem;color:var(--ink);margin:0 0 7px}
+  .ctl > .lab small{display:block;font-weight:600;font-size:.7rem;color:var(--muted);margin-top:1px}
+
+  .seg{display:inline-flex;flex-wrap:wrap;gap:6px}
+  .seg button{border:1.5px solid var(--border);background:#fff;color:#40513a;font-family:inherit;font-weight:700;font-size:.8rem;padding:8px 14px;min-height:44px;border-radius:999px;cursor:pointer;transition:all .14s;line-height:1.15}
+  .seg button .sub{display:block;font-size:.66rem;font-weight:600;color:#8a978a;margin-top:1px}
+  .seg button:hover{border-color:var(--lime)}
+  .seg button[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+  .seg button[aria-pressed="true"] .sub{color:#c9e0c0}
+  .seg button:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+
+  .stepper{display:inline-flex;align-items:center;gap:0;border:1.5px solid var(--border);border-radius:999px;overflow:hidden;background:#fff}
+  .stepper button{border:0;background:#f2f6ea;color:var(--green-dark);font-family:inherit;font-weight:800;font-size:1.1rem;width:44px;height:44px;cursor:pointer;line-height:1;transition:background .14s}
+  .stepper button:hover{background:var(--lime-soft)}
+  .stepper button:focus-visible{outline:3px solid var(--yellow);outline-offset:-3px}
+  .stepper .val{min-width:52px;text-align:center;font-weight:800;font-size:.95rem;color:var(--ink)}
+  .stepper .val small{display:block;font-size:.6rem;font-weight:600;color:var(--muted);letter-spacing:.02em}
+
+  /* results */
+  .pc-out{margin:2px 0 0}
+  .pc-out h3{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--green);margin:0 0 11px}
+  .opt{margin:0 0 11px}
+  .opt-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:0 0 5px}
+  .opt-name{font-weight:700;font-size:.86rem;color:var(--ink)}
+  .opt-name .tag{display:inline-block;font-size:.62rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#3a3600;background:var(--yellow);border-radius:4px;padding:1px 6px;margin-left:6px;vertical-align:middle}
+  .opt-price{font-weight:800;font-size:.9rem;color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .track{height:15px;background:#eef2e6;border-radius:8px;overflow:hidden}
+  .fill{height:100%;width:0;background:var(--bar);border-radius:8px;transition:width .5s cubic-bezier(.22,.61,.36,1)}
+  .opt.win .fill{background:var(--bar-win)}
+  .opt.win .opt-price{color:var(--win)}
+  .opt.na{opacity:.5}
+  .opt .note{font-size:.7rem;color:var(--muted);margin:4px 0 0;line-height:1.4}
+
+  .verdict{background:var(--green);color:#fff;border-radius:13px;padding:14px 15px;margin:15px 0 4px;font-size:.9rem;line-height:1.55}
+  .verdict b{color:var(--yellow)}
+  .verdict .vh{display:block;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--yellow);margin:0 0 5px}
+
+  .pc-fine{font-size:.7rem;color:#7a857a;line-height:1.5;margin:12px 2px 0}
+  .pc-fine b{color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="pc">
+  <p class="pc-lede">Set the shape of your trip and see what each Berlin option would actually cost. The <b>cheapest choice is highlighted</b>, and it changes completely depending on how much you ride and how many museums you enter. Prices are 2026 zone AB fares.</p>
+
+  <div class="pc-controls">
+    <div class="ctl">
+      <span class="lab">How many days?</span>
+      <div class="seg" id="seg-days" role="group" aria-label="Trip length in days"></div>
+    </div>
+    <div class="ctl">
+      <span class="lab">How much will you ride public transport?<small>Walking a compact central route vs hopping across the city all day.</small></span>
+      <div class="seg" id="seg-ride" role="group" aria-label="Transport intensity"></div>
+    </div>
+    <div class="ctl">
+      <span class="lab">Paid museums you will actually enter<small>Count only museums with an entry fee, like the Museum Island houses.</small></span>
+      <div class="stepper">
+        <button type="button" id="mus-minus" aria-label="Fewer museums">&minus;</button>
+        <span class="val"><span id="mus-val">3</span><small>museums</small></span>
+        <button type="button" id="mus-plus" aria-label="More museums">&plus;</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="pc-out">
+    <h3>What your trip would cost</h3>
+    <div id="opts"></div>
+    <div class="verdict" id="verdict"></div>
+    <p class="pc-fine"><b>How this is worked out:</b> single AB ride €4.00, 24-hour AB day ticket €11.20 (whichever is cheaper per day), average paid-museum entry counted at €15, Museum Pass Berlin €32 (30+ museums, no transport), CityTourCard €23.80 (48h) / €35.60 (72h), WelcomeCard €28.50 (48h) / €39.50 (72h), and WelcomeCard Museum Island €62 (72h, transport plus daily entry to the open Museum Island museums). Pergamonmuseum is currently closed. Partner discounts are not counted, so a transport card can beat the displayed figure if you use them. Check current prices before buying.</p>
+  </div>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function(){
+  var SINGLE=4.00, DAYTICKET=11.20, MUSEUM=15, MUSEUM_PASS=32;
+  // rides per day by intensity; per-day transport is min(rides*single, dayticket)
+  var RIDE={light:{n:2,label:'Light',sub:'mostly walking'},medium:{n:4,label:'Medium',sub:'a few rides a day'},heavy:{n:6,label:'Heavy',sub:'all over the city'}};
+
+  var state={days:3, ride:'medium', mus:3};
+
+  // build day segments
+  var segDays=document.getElementById('seg-days');
+  [1,2,3].forEach(function(d){
+    var b=document.createElement('button');
+    b.type='button'; b.dataset.d=d; b.textContent=d+(d===1?' day':' days');
+    b.setAttribute('aria-pressed', d===state.days);
+    b.addEventListener('click',function(){state.days=d;syncDays();render();});
+    segDays.appendChild(b);
+  });
+  function syncDays(){Array.prototype.forEach.call(segDays.children,function(b){b.setAttribute('aria-pressed', +b.dataset.d===state.days);});}
+
+  // build ride segments
+  var segRide=document.getElementById('seg-ride');
+  ['light','medium','heavy'].forEach(function(k){
+    var b=document.createElement('button');
+    b.type='button'; b.dataset.k=k;
+    b.innerHTML=RIDE[k].label+'<span class="sub">'+RIDE[k].sub+'</span>';
+    b.setAttribute('aria-pressed', k===state.ride);
+    b.addEventListener('click',function(){state.ride=k;syncRide();render();});
+    segRide.appendChild(b);
+  });
+  function syncRide(){Array.prototype.forEach.call(segRide.children,function(b){b.setAttribute('aria-pressed', b.dataset.k===state.ride);});}
+
+  // museum stepper
+  var musVal=document.getElementById('mus-val');
+  document.getElementById('mus-minus').addEventListener('click',function(){state.mus=Math.max(0,state.mus-1);musVal.textContent=state.mus;render();});
+  document.getElementById('mus-plus').addEventListener('click',function(){state.mus=Math.min(8,state.mus+1);musVal.textContent=state.mus;render();});
+
+  function transportPerDay(){ return Math.min(RIDE[state.ride].n*SINGLE, DAYTICKET); }
+  function cityTourPrice(){ return state.days>=3 ? 35.60 : 23.80; } // 48h covers up to 2 days, 72h for 3
+  function welcomePrice(){ return state.days>=3 ? 39.50 : 28.50; } // 48h covers up to 2 days, 72h for 3
+  function eur(n){ return '€'+ (Math.round(n*100)/100).toFixed(2).replace(/\.00$/,''); }
+
+  var optsEl=document.getElementById('opts');
+  var verdictEl=document.getElementById('verdict');
+
+  function render(){
+    var tDay=transportPerDay();
+    var transport=state.days*tDay;
+    var mus=state.mus;
+
+    var options=[];
+    // 1. Pay as you go
+    options.push({
+      id:'payg', name:'Pay as you go', tag:null,
+      total: transport + mus*MUSEUM,
+      note: 'Single tickets or a day ticket when you ride, plus each museum bought on its own.'
+    });
+    // 2. Museum Pass + transport tickets
+    options.push({
+      id:'pass', name:'Museum Pass + tickets', tag:null,
+      total: (mus>=1? MUSEUM_PASS : MUSEUM_PASS) + transport,
+      na: mus===0,
+      note: mus===0 ? 'No point without museums. The pass is only for museum entry.' :
+            'One €32 pass covers 30+ museums; you still buy transport separately.'
+    });
+    // 3. CityTourCard (transport bundle) + museums singly
+    options.push({
+      id:'ctc', name:'CityTourCard', tag:null,
+      total: cityTourPrice() + mus*MUSEUM,
+      note: 'Unlimited transport plus discounts at 30+ partners (discounts not counted here).'
+    });
+    // 4. WelcomeCard (transport bundle) + museums singly
+    options.push({
+      id:'wc', name:'WelcomeCard', tag:null,
+      total: welcomePrice() + mus*MUSEUM,
+      note: 'Unlimited transport plus up to 50% off at 170+ partners (discounts not counted here).'
+    });
+    // 5. WelcomeCard Museum Island (72h)
+    options.push({
+      id:'wcmi', name:'WelcomeCard Museum Island', tag:'best for Museum Island',
+      total: 62,
+      note: 'Flat €62: transport plus one daily entry to the open Museum Island museums. A 72-hour card.'
+    });
+
+    // cheapest among applicable
+    var applicable=options.filter(function(o){return !o.na;});
+    var min=Math.min.apply(null, applicable.map(function(o){return o.total;}));
+    var max=Math.max.apply(null, options.map(function(o){return o.total;}));
+
+    var html='';
+    options.forEach(function(o){
+      var isWin = !o.na && o.total===min;
+      var pct = max>0 ? Math.max(6, Math.round(o.total/max*100)) : 6;
+      html+='<div class="opt'+(isWin?' win':'')+(o.na?' na':'')+'">';
+      html+='<div class="opt-top"><span class="opt-name">'+o.name+(o.tag?'<span class="tag">'+o.tag+'</span>':'')+'</span>'+
+            '<span class="opt-price">'+(o.na?'N/A':eur(o.total))+'</span></div>';
+      html+='<div class="track"><div class="fill" style="width:'+(o.na?0:pct)+'%"></div></div>';
+      html+='<p class="note">'+o.note+'</p>';
+      html+='</div>';
+    });
+    optsEl.innerHTML=html;
+
+    // verdict
+    var winner=applicable.filter(function(o){return o.total===min;})[0];
+    var v='';
+    if(mus===0){
+      v='<span class="vh">The verdict</span>With <b>no museums</b> in the plan, the tourist cards only add discounts. For '+state.days+(state.days===1?' day':' days')+' of '+RIDE[state.ride].label.toLowerCase()+' riding, just <b>pay as you go</b> or buy a day ticket on busy days. That is '+eur(options[0].total)+'.';
+    } else if(winner.id==='payg'){
+      v='<span class="vh">The verdict</span>For this trip, <b>paying as you go beats every card</b> at '+eur(winner.total)+'. You are not riding or visiting enough to make a pass pay off. Berlin is walkable, so keep it simple.';
+    } else if(winner.id==='pass'){
+      v='<span class="vh">The verdict</span>Your trip is <b>museum-led</b>, so the <b>Museum Pass Berlin</b> wins at '+eur(winner.total)+' and unlocks 30+ museums, not just the ones you counted. Add day tickets or walk between them.';
+    } else if(winner.id==='wcmi'){
+      var passOpt=applicable.filter(function(o){return o.id==='pass';})[0];
+      v='<span class="vh">The verdict</span>If your museums are the <b>open Museum Island museums</b>, the <b>WelcomeCard Museum Island</b> is cheapest at €62, with transport and those museums in one card. Pergamonmuseum is currently closed. If you want the wider 30+ museums instead, the Museum Pass route is '+(passOpt?eur(passOpt.total):'close')+' and covers far more.';
+    } else if(winner.id==='ctc'){
+      v='<span class="vh">The verdict</span>The <b>CityTourCard</b> is the lowest transport-card total here at '+eur(winner.total)+'. Its partner discounts are not included in this calculation, so check whether its 30-plus partners match places you will actually visit.';
+    } else {
+      v='<span class="vh">The verdict</span>The <b>WelcomeCard</b> comes out ahead here at '+eur(winner.total)+', mostly because you ride enough for the bundle to pay off. Check its partner discounts before you buy. Used well, they push it further ahead.';
+    }
+    verdictEl.innerHTML=v;
+  }
+
+  syncDays(); syncRide(); render();
+})();
+</script>
+</body>
+</html>

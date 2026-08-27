@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Festival of Lights Berlin 2026 Walking Route | BerlinWalk</title>
+  <meta name="description" content="A BerlinWalk route map for Festival of Lights Berlin 2026, based on the official programme preview: core walking route, Potsdamer Platz cluster and extension stops.">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-fol-route">
+  <style>
+    #bw-fol-route {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #123F16;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-cream: #FAFAF5;
+      --bw-soft: #F2F8E8;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #526052;
+      --bw-red: #E63946;
+      --bw-white: #FFFFFF;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+    #bw-fol-route * { box-sizing: border-box; }
+    #bw-fol-route .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+    #bw-fol-route .bw-head {
+      background: linear-gradient(135deg, var(--bw-green), var(--bw-green-dark));
+      padding: 16px 20px;
+      display: grid;
+      gap: 4px;
+    }
+    #bw-fol-route .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+    }
+    #bw-fol-route .bw-title {
+      color: var(--bw-white);
+      font-size: 20px;
+      font-weight: 900;
+      line-height: 1.18;
+      margin: 0;
+    }
+    #bw-fol-route .bw-body { background: var(--bw-cream); padding: 16px 18px 18px; }
+    #bw-fol-route .bw-note {
+      margin: 0 0 14px;
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--bw-muted);
+    }
+    #bw-fol-route .bw-note strong { color: var(--bw-green); font-weight: 800; }
+    #bw-fol-route .bw-filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 0 0 14px;
+    }
+    #bw-fol-route .bw-filter {
+      border: 1.5px solid var(--bw-border);
+      background: var(--bw-white);
+      color: var(--bw-green);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 8px 13px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+      white-space: nowrap;
+    }
+    #bw-fol-route .bw-filter:hover { border-color: var(--bw-lime); background: var(--bw-soft); }
+    #bw-fol-route .bw-filter.active { background: var(--bw-green); border-color: var(--bw-green); color: var(--bw-yellow); }
+    #bw-fol-route .bw-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
+      gap: 14px;
+      align-items: stretch;
+    }
+    #bw-fol-route .bw-map-panel {
+      min-width: 0;
+      border: 1px solid var(--bw-border);
+      border-radius: 12px;
+      background: #E8EEDC;
+      overflow: hidden;
+      position: relative;
+    }
+    #bw-fol-route .bw-map {
+      width: 100%;
+      height: 520px;
+      min-height: 420px;
+      z-index: 1;
+    }
+    #bw-fol-route .leaflet-container { font-family: Montserrat, Arial, sans-serif; background: #E8EEDC; }
+    #bw-fol-route .leaflet-popup-content-wrapper {
+      border-radius: 12px;
+      padding: 0;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      border: 1px solid var(--bw-border);
+    }
+    #bw-fol-route .leaflet-popup-content { margin: 0; width: 258px !important; font-family: inherit; }
+    #bw-fol-route .leaflet-popup-tip { box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); }
+    #bw-fol-route .bw-marker {
+      width: 32px;
+      height: 32px;
+      background: var(--bw-green);
+      border: 3px solid var(--bw-yellow);
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+    #bw-fol-route .bw-marker-inner {
+      transform: rotate(45deg);
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1;
+    }
+    #bw-fol-route .bw-marker.extension { background: var(--bw-white); border-color: var(--bw-green); }
+    #bw-fol-route .bw-marker.extension .bw-marker-inner { color: var(--bw-green); }
+    #bw-fol-route .bw-marker.cluster { background: var(--bw-yellow); border-color: var(--bw-green); }
+    #bw-fol-route .bw-marker.cluster .bw-marker-inner { color: var(--bw-green); }
+    #bw-fol-route .bw-popup-head { background: var(--bw-green); padding: 10px 13px; border-radius: 11px 11px 0 0; }
+    #bw-fol-route .bw-popup-type {
+      display: block;
+      margin-bottom: 2px;
+      color: var(--bw-yellow);
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+    #bw-fol-route .bw-popup-name { color: var(--bw-white); font-size: 15px; font-weight: 900; line-height: 1.24; }
+    #bw-fol-route .bw-popup-body { padding: 12px 13px; }
+    #bw-fol-route .bw-popup-note { margin: 0 0 10px; font-size: 12px; line-height: 1.5; color: var(--bw-text); }
+    #bw-fol-route .bw-popup-row { display: flex; gap: 8px; font-size: 12px; line-height: 1.45; margin: 0 0 6px; color: var(--bw-text); }
+    #bw-fol-route .bw-popup-label { min-width: 54px; color: var(--bw-green); font-size: 10px; font-weight: 900; letter-spacing: 0.4px; text-transform: uppercase; }
+    #bw-fol-route .bw-popup-link {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 8px;
+      padding: 8px 11px;
+      border-radius: 8px;
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+      font-size: 11px;
+      font-weight: 900;
+      text-decoration: none;
+    }
+    #bw-fol-route .bw-side {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 10px;
+      min-width: 0;
+    }
+    #bw-fol-route .bw-statbar {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+    #bw-fol-route .bw-stat {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 10px;
+      padding: 10px;
+      min-width: 0;
+    }
+    #bw-fol-route .bw-stat b { display: block; color: var(--bw-green); font-size: 16px; line-height: 1; margin-bottom: 4px; }
+    #bw-fol-route .bw-stat span { display: block; color: var(--bw-muted); font-size: 10px; font-weight: 800; line-height: 1.25; text-transform: uppercase; letter-spacing: 0.5px; }
+    #bw-fol-route .bw-route-card {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 12px;
+      padding: 13px 14px;
+      overflow: hidden;
+    }
+    #bw-fol-route .bw-route-card h3 {
+      margin: 0 0 9px;
+      color: var(--bw-green);
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+    #bw-fol-route .bw-steps {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    #bw-fol-route .bw-steps li {
+      display: grid;
+      grid-template-columns: 22px minmax(0, 1fr);
+      gap: 8px;
+      align-items: start;
+      color: var(--bw-text);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    #bw-fol-route .bw-step-num {
+      display: inline-flex;
+      width: 22px;
+      height: 22px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: var(--bw-green);
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 900;
+    }
+    #bw-fol-route .bw-steps strong { color: var(--bw-green); font-weight: 900; }
+    #bw-fol-route .bw-callout {
+      background: var(--bw-soft);
+      border: 1px solid var(--bw-border);
+      border-radius: 12px;
+      padding: 12px 13px;
+      font-size: 12px;
+      line-height: 1.55;
+      color: var(--bw-text);
+    }
+    #bw-fol-route .bw-callout strong { color: var(--bw-green); font-weight: 900; }
+    #bw-fol-route .bw-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 13px;
+      margin-top: 12px;
+      font-size: 11px;
+      color: var(--bw-muted);
+      line-height: 1.4;
+    }
+    #bw-fol-route .bw-legend span { display: inline-flex; align-items: center; gap: 5px; }
+    #bw-fol-route .bw-dot {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--bw-green);
+      border: 2px solid var(--bw-yellow);
+      flex: 0 0 auto;
+    }
+    #bw-fol-route .bw-dot.cluster { background: var(--bw-yellow); border-color: var(--bw-green); }
+    #bw-fol-route .bw-dot.extension { background: var(--bw-white); border-color: var(--bw-green); }
+
+    @media (max-width: 820px) {
+      #bw-fol-route .bw-grid { grid-template-columns: 1fr; }
+      #bw-fol-route .bw-map { height: 460px; }
+      #bw-fol-route .bw-side { grid-template-rows: auto; }
+    }
+    @media (max-width: 520px) {
+      #bw-fol-route { margin: 22px 0; }
+      #bw-fol-route .bw-head { padding: 14px 16px; }
+      #bw-fol-route .bw-title { font-size: 17px; }
+      #bw-fol-route .bw-kicker { font-size: 10px; letter-spacing: 1.8px; }
+      #bw-fol-route .bw-body { padding: 14px; }
+      #bw-fol-route .bw-filter { font-size: 11px; padding: 7px 11px; }
+      #bw-fol-route .bw-map { height: 380px; min-height: 360px; }
+      #bw-fol-route .leaflet-popup-content { width: 220px !important; }
+      #bw-fol-route .bw-statbar { grid-template-columns: 1fr 1fr 1fr; }
+      #bw-fol-route .bw-stat { padding: 9px 8px; }
+      #bw-fol-route .bw-stat b { font-size: 14px; }
+      #bw-fol-route .bw-stat span { font-size: 9px; }
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <span class="bw-kicker">Festival of Lights 2026 - BerlinWalk Route</span>
+      <h2 class="bw-title">Core walk first. Outer locations later.</h2>
+    </div>
+    <div class="bw-body">
+      <p class="bw-note"><strong>Based on the official 2026 programme preview.</strong> The final festival map, exact artworks and individual timing notes may still change, so recheck before you go.</p>
+      <div class="bw-filters" aria-label="Filter Festival of Lights locations">
+        <button class="bw-filter active" type="button" data-filter="all">Show all</button>
+        <button class="bw-filter" type="button" data-filter="core">Core walk</button>
+        <button class="bw-filter" type="button" data-filter="mitte">Old centre</button>
+        <button class="bw-filter" type="button" data-filter="potsdamer">Potsdamer Platz</button>
+        <button class="bw-filter" type="button" data-filter="extension">Extensions</button>
+      </div>
+
+      <div class="bw-grid">
+        <div class="bw-map-panel">
+          <div class="bw-map" id="bw-fol-map-canvas"></div>
+        </div>
+
+        <aside class="bw-side" aria-label="Suggested Festival of Lights route">
+          <div class="bw-statbar">
+            <div class="bw-stat"><b id="bw-count-num">19</b><span>Visible stops</span></div>
+            <div class="bw-stat"><b>2h+</b><span>Core route</span></div>
+            <div class="bw-stat"><b>7-11</b><span>Typical hours</span></div>
+          </div>
+
+          <div class="bw-route-card">
+            <h3>Best first-time route</h3>
+            <ol class="bw-steps">
+              <li><span class="bw-step-num">1</span><span><strong>Alexanderplatz:</strong> TV Tower and St. Mary's Church</span></li>
+              <li><span class="bw-step-num">2</span><span><strong>Nikolai Quarter:</strong> old Berlin atmosphere</span></li>
+              <li><span class="bw-step-num">3</span><span><strong>Berlin Cathedral:</strong> big open photo stop</span></li>
+              <li><span class="bw-step-num">4</span><span><strong>Bebelplatz:</strong> Humboldt University, State Opera, Saint Hedwig's and Hotel de Rome</span></li>
+              <li><span class="bw-step-num">5</span><span><strong>Brandenburg Gate:</strong> classic but crowded</span></li>
+              <li><span class="bw-step-num">6</span><span><strong>Potsdamer Platz:</strong> compact final cluster</span></li>
+            </ol>
+          </div>
+
+          <div class="bw-callout">
+            <strong>Local rule:</strong> do not chase every pin in one night. The central walk is the main event. Victory Column, Oberbaum Bridge, THF Tower and Radio Tower are better as extensions or separate evenings.
+          </div>
+        </aside>
+      </div>
+
+      <div class="bw-legend">
+        <span><i class="bw-dot"></i> Core walk</span>
+        <span><i class="bw-dot cluster"></i> Dense cluster</span>
+        <span><i class="bw-dot extension"></i> Extension stop</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function () {
+      var root = document.getElementById('bw-fol-route');
+      if (!root || !window.L) return;
+
+      var locations = [
+        {
+          order: '1',
+          name: 'Berlin TV Tower',
+          type: 'Core walk - Alexanderplatz',
+          note: 'Start near Alexanderplatz. The TV Tower is the easiest meeting point for the eastern half of the route.',
+          nearest: 'U/S Alexanderplatz',
+          lat: 52.5208,
+          lng: 13.4094,
+          cats: ['all', 'core', 'mitte'],
+          kind: 'core',
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Berlin+TV+Tower'
+        },
+        {
+          order: '2',
+          name: "St. Mary's Church",
+          type: 'Core walk - old Berlin',
+          note: 'One of the oldest surviving churches in Berlin and a natural first stop after the TV Tower.',
+          nearest: 'U/S Alexanderplatz',
+          lat: 52.5209,
+          lng: 13.4080,
+          cats: ['all', 'core', 'mitte'],
+          kind: 'core',
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=St.+Mary%27s+Church+Berlin'
+        },
+        {
+          order: '3',
+          name: 'Nikolai Quarter',
+          type: 'Core walk - old town',
+          note: 'A compact reconstructed old-town quarter. It works well as the atmospheric bridge between Alexanderplatz and Museum Island.',
+          nearest: 'U Rotes Rathaus / U Klosterstrasse',
+          lat: 52.5168,
+          lng: 13.4078,
+          cats: ['all', 'core', 'mitte'],
+          kind: 'core',
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Nikolai+Quarter+Berlin'
+        },
+        {
+          order: '4',
+          name: 'Berlin Cathedral',
+          type: 'Core walk - Museum Island',
+          note: 'Usually one of the strongest visual stops because the building is large and the space around Lustgarten gives you room to stand back.',
+          nearest: 'U Museumsinsel / S Hackescher Markt',
+          lat: 52.5192,
+          lng: 13.4011,
+          cats: ['all', 'core', 'mitte'],
+          kind: 'core',
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Berlin+Cathedral'
+        },
+        {
+          order: '5',
+          name: 'Humboldt University',
+          type: 'Bebelplatz cluster',
+          note: 'Part of the dense Unter den Linden / Bebelplatz run. Do not rush this cluster.',
+          nearest: 'U Unter den Linden / U Museumsinsel',
+          lat: 52.5177,
+          lng: 13.3933,
+          cats: ['all', 'core', 'mitte'],
+          kind: 'cluster',
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Humboldt+University+Berlin+Unter+den+Linden'
+        },
+        {
+          order: '6',
+          name: 'State Opera',
+          type: 'Bebelplatz cluster',
+          note: 'One side of the Bebelplatz cluster. This is one of the places where the square can feel like a theatre.',
+          nearest: 'U Unter den Linden / U Museumsinsel',
+          lat: 52.5170,
+          lng: 13.3947,
+          cats: ['all', 'core', 'mitte'],
+          kind: 'cluster',
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Staatsoper+Unter+den+Linden'
+        },
+        {
+          order: '7',
+          name: "Saint Hedwig's Cathedral",
+          type: 'Bebelplatz cluster',
+          note: 'A compact but important stop in the Bebelplatz group, close to the State Opera and Hotel de Rome.',
+          nearest: 'U Unter den Linden / U Museumsinsel',
+          lat: 52.5167,
+          lng: 13.3941,
+          cats: ['all', 'core', 'mitte'],
+          kind: 'cluster',
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Saint+Hedwig%27s+Cathedral+Berlin'
+        },
+        {
+          order: '8',
+          name: 'Hotel de Rome & Behren Palais',
+          type: 'Bebelplatz cluster',
+          note: 'The hotel and palace facade sit directly in the Unter den Linden / Bebelplatz run.',
+          nearest: 'U Unter den Linden / U Museumsinsel',
+          lat: 52.5160,
+          lng: 13.3944,
+          cats: ['all', 'core', 'mitte'],
+          kind: 'cluster',
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Hotel+de+Rome+Berlin'
+        },
+        {
+          order: '9',
+          name: 'Faculty of Law, Humboldt University',
+          type: 'Bebelplatz cluster',
+          note: 'Another confirmed preview location in the same tight cluster, so it is easy to include without extending the walk.',
+          nearest: 'U Unter den Linden / U Museumsinsel',
+          lat: 52.5168,
+          lng: 13.3930,
+          cats: ['all', 'core', 'mitte'],
+          kind: 'cluster',
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Faculty+of+Law+Humboldt+University+Berlin+Bebelplatz'
+        },
+        {
+          order: '10',
+          name: 'Brandenburg Gate',
+          type: 'Core walk - classic stop',
+          note: 'The classic Festival of Lights landmark. It is powerful, obvious and crowded. Arrive after you have already enjoyed the calmer eastern half.',
+          nearest: 'S/U Brandenburger Tor',
+          lat: 52.5163,
+          lng: 13.3777,
+          cats: ['all', 'core'],
+          kind: 'core',
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Brandenburg+Gate+Berlin'
+        },
+        {
+          order: '11',
+          name: 'P5',
+          type: 'Potsdamer Platz cluster',
+          note: 'The Potsdamer Platz end of the route starts here. This cluster is the best final section because several preview locations sit close together.',
+          nearest: 'S/U Potsdamer Platz',
+          lat: 52.5094,
+          lng: 13.3745,
+          cats: ['all', 'core', 'potsdamer'],
+          kind: 'cluster',
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Potsdamer+Strasse+5+Berlin'
+        },
+        {
+          order: '12',
+          name: 'The Ritz-Carlton, Berlin',
+          type: 'Potsdamer Platz cluster',
+          note: 'A confirmed preview location on Potsdamer Platz, useful because it keeps the final cluster compact.',
+          nearest: 'S/U Potsdamer Platz',
+          lat: 52.5099,
+          lng: 13.3764,
+          cats: ['all', 'core', 'potsdamer'],
+          kind: 'cluster',
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=The+Ritz-Carlton+Berlin'
+        },
+        {
+          order: '13',
+          name: 'Kollhoff Tower',
+          type: 'Potsdamer Platz cluster',
+          note: 'One of the key Potsdamer Platz towers and a strong part of the modern-Berlin finish.',
+          nearest: 'S/U Potsdamer Platz',
+          lat: 52.5088,
+          lng: 13.3758,
+          cats: ['all', 'core', 'potsdamer'],
+          kind: 'cluster',
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Kollhoff+Tower+Berlin'
+        },
+        {
+          order: '14',
+          name: 'Forum Tower',
+          type: 'Potsdamer Platz cluster',
+          note: 'Another confirmed preview location in the Potsdamer Platz cluster.',
+          nearest: 'S/U Potsdamer Platz',
+          lat: 52.5086,
+          lng: 13.3751,
+          cats: ['all', 'core', 'potsdamer'],
+          kind: 'cluster',
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Forum+Tower+Potsdamer+Platz+Berlin'
+        },
+        {
+          order: '15',
+          name: 'Potsdamer Platz',
+          type: 'Core walk - final cluster',
+          note: 'Best end point for the first-time route. You are at a transport hub, with several preview locations packed around the square.',
+          nearest: 'S/U Potsdamer Platz',
+          lat: 52.5096,
+          lng: 13.3752,
+          cats: ['all', 'core', 'potsdamer'],
+          kind: 'cluster',
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Potsdamer+Platz+Berlin'
+        },
+        {
+          order: 'E1',
+          name: 'Victory Column',
+          type: 'Extension',
+          note: 'Possible after Brandenburg Gate if you still have energy. It is a long but direct walk through Tiergarten.',
+          nearest: 'Bus 100 / Großer Stern',
+          lat: 52.5145,
+          lng: 13.3501,
+          cats: ['all', 'extension'],
+          kind: 'extension',
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Victory+Column+Berlin'
+        },
+        {
+          order: 'E2',
+          name: 'Oberbaum Bridge',
+          type: 'Extension',
+          note: 'Better as a separate Friedrichshain-Kreuzberg evening with the East Side Gallery and the river.',
+          nearest: 'U1/U3 Warschauer Strasse / Schlesisches Tor',
+          lat: 52.5016,
+          lng: 13.4452,
+          cats: ['all', 'extension'],
+          kind: 'extension',
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Oberbaum+Bridge+Berlin'
+        },
+        {
+          order: 'E3',
+          name: 'THF Tower',
+          type: 'Extension',
+          note: 'A Tempelhof stop. Pair it with Tempelhofer Feld rather than adding it to the end of the central walk.',
+          nearest: 'U6 Paradestrasse / S+U Tempelhof',
+          lat: 52.4829,
+          lng: 13.3860,
+          cats: ['all', 'extension'],
+          kind: 'extension',
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=THF+Tower+Berlin'
+        },
+        {
+          order: 'E4',
+          name: 'Radio Tower',
+          type: 'Extension',
+          note: 'Out by Messe Berlin in the west. It is too far from the central walk to force into the same evening.',
+          nearest: 'S Messe Nord / U2 Kaiserdamm',
+          lat: 52.5048,
+          lng: 13.2806,
+          cats: ['all', 'extension'],
+          kind: 'extension',
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Berlin+Radio+Tower+Funkturm'
+        }
+      ];
+
+      var coreLine = [
+        [52.5208, 13.4094],
+        [52.5209, 13.4080],
+        [52.5168, 13.4078],
+        [52.5192, 13.4011],
+        [52.5170, 13.3940],
+        [52.5163, 13.3777],
+        [52.5096, 13.3752]
+      ];
+
+      var mapEl = root.querySelector('#bw-fol-map-canvas');
+      var countEl = root.querySelector('#bw-count-num');
+      var filterBtns = root.querySelectorAll('.bw-filter');
+      var map = L.map(mapEl, {
+        center: [52.515, 13.391],
+        zoom: 13,
+        scrollWheelZoom: false,
+        tap: true
+      });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 18
+      }).addTo(map);
+
+      map.once('click', function () { map.scrollWheelZoom.enable(); });
+
+      var routeLine = L.polyline(coreLine, {
+        color: '#1B5E20',
+        weight: 4,
+        opacity: 0.8,
+        dashArray: '8 8'
+      }).addTo(map);
+
+      function createMarkerIcon(loc) {
+        var html = '<div class="bw-marker ' + loc.kind + '"><div class="bw-marker-inner">' + loc.order + '</div></div>';
+        return L.divIcon({
+          className: 'bw-marker-wrap',
+          html: html,
+          iconSize: [32, 32],
+          iconAnchor: [16, 32],
+          popupAnchor: [0, -30]
+        });
+      }
+
+      function popup(loc) {
+        return '<div class="bw-popup-head">' +
+          '<span class="bw-popup-type">' + loc.type + '</span>' +
+          '<div class="bw-popup-name">' + loc.name + '</div>' +
+          '</div>' +
+          '<div class="bw-popup-body">' +
+          '<p class="bw-popup-note">' + loc.note + '</p>' +
+          '<div class="bw-popup-row"><span class="bw-popup-label">Nearest</span><span>' + loc.nearest + '</span></div>' +
+          '<a href="' + loc.gmaps + '" target="_blank" rel="noopener" class="bw-popup-link">Open in Google Maps -></a>' +
+          '</div>';
+      }
+
+      var markers = locations.map(function (loc) {
+        var marker = L.marker([loc.lat, loc.lng], { icon: createMarkerIcon(loc) })
+          .bindPopup(popup(loc), { closeButton: true, maxWidth: 278, className: 'bw-popup-wrapper' });
+        marker.addTo(map);
+        marker._cats = loc.cats;
+        return marker;
+      });
+
+      function fitVisible() {
+        var bounds = [];
+        markers.forEach(function (marker) {
+          if (map.hasLayer(marker)) bounds.push(marker.getLatLng());
+        });
+        if (bounds.length) {
+          map.fitBounds(bounds, { padding: [22, 22], maxZoom: 14 });
+        }
+      }
+
+      function applyFilter(filter) {
+        var visibleCount = 0;
+        markers.forEach(function (marker) {
+          var show = filter === 'all' || marker._cats.indexOf(filter) !== -1;
+          if (show) {
+            if (!map.hasLayer(marker)) marker.addTo(map);
+            visibleCount += 1;
+          } else if (map.hasLayer(marker)) {
+            map.removeLayer(marker);
+          }
+        });
+        if (filter === 'extension') {
+          if (map.hasLayer(routeLine)) map.removeLayer(routeLine);
+        } else if (!map.hasLayer(routeLine)) {
+          routeLine.addTo(map);
+        }
+        countEl.textContent = visibleCount;
+        fitVisible();
+      }
+
+      filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          filterBtns.forEach(function (other) { other.classList.remove('active'); });
+          btn.classList.add('active');
+          applyFilter(btn.getAttribute('data-filter'));
+        });
+      });
+
+      setTimeout(function () {
+        map.invalidateSize();
+        fitVisible();
+      }, 180);
+    })();
+  </script>
+</div>
+</body>
+</html>

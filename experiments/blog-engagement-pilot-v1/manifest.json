@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "experimentId": "blog_engagement_qs_jump_v1",
+  "version": "20260824a",
+  "status": "live_scheduled",
+  "timezone": "Europe/Berlin",
+  "schedule": {
+    "measurementStart": "2026-08-31T00:00:00+02:00",
+    "experimentStart": "2026-09-07T00:00:00+02:00",
+    "experimentEnd": "2026-10-05T00:00:00+02:00",
+    "outcomeGraceMinutes": 15,
+    "decisionEarliest": "2026-10-05T00:15:00+02:00"
+  },
+  "assignment": {
+    "controlWeight": 0.5,
+    "utilityWeight": 0.5,
+    "storageKey": "bwBlogEngagement.v1",
+    "ttlDays": 28,
+    "requiresAnalyticsConsent": true
+  },
+  "variants": {
+    "control": "Current static Quick Summary",
+    "utility": "The same Quick Summary slot with four section jump buttons"
+  },
+  "slugs": {
+    "where-was-the-berlin-wall-interactive-map": {
+      "quickSummaryPost": "was-your-berlin-address-east-or-west",
+      "primaryKind": "utility_iframe",
+      "primaryPath": "/berlinwalk-widgets/east-west-1989/",
+      "sections": [
+        "East Berlin or West Berlin: How to Read the Map",
+        "What the Wall Actually Was and Where Was the Berlin Wall",
+        "How the Wall Came Down",
+        "What Is Left Today"
+      ]
+    },
+    "what-to-wear-to-berlin-clubs": {
+      "quickSummaryPost": "berlin-club-dress-code",
+      "primaryKind": "utility_iframe",
+      "primaryPath": "/berlinwalk-widgets/club-picker/",
+      "sections": [
+        "Play the Berghain Bouncer Game",
+        "Find Your Berlin Club Match",
+        "Berlin Club Dress-Code Matrix",
+        "What Actually Helps at Berlin Club Doors"
+      ]
+    },
+    "berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus": {
+      "quickSummaryPost": "transport",
+      "primaryKind": "utility_iframe",
+      "primaryPath": "/berlinwalk-widgets/transport-calculator/",
+      "sections": [
+        "Quick answer: the four transport types",
+        "Berlin public transport zones: AB vs ABC",
+        "Which ticket should you buy?",
+        "Do tourists need to validate tickets?"
+      ]
+    },
+    "shopping-in-berlin": {
+      "quickSummaryPost": "shopping-in-berlin",
+      "primaryKind": "utility_iframe",
+      "primaryPath": "/berlinwalk-widgets/berlin-shopping-areas/",
+      "sections": [
+        "First, the honest part: it is about neighborhoods, not luxury",
+        "The famous shopping streets (and whether they are worth it)",
+        "Where locals actually shop: the neighborhoods",
+        "Vintage and second-hand: Berlin's real strength"
+      ]
+    },
+    "public-toilets-in-berlin": {
+      "quickSummaryPost": "public-toilets",
+      "primaryKind": "utility_iframe",
+      "primaryPath": "/berlinwalk-widgets/public-toilets-map/",
+      "sections": [
+        "The Honest Answer",
+        "How Berlin's Public Toilet System Works",
+        "The 107 Free Toilets",
+        "Toilets Along Common Tourist Routes"
+      ]
+    },
+    "how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way": {
+      "quickSummaryPost": "airport-to-alex",
+      "primaryKind": "commercial_cta_iframe",
+      "primaryPath": "/berlinwalk-widgets/cta/",
+      "requiredQuery": {
+        "post": "airport-to-alex"
+      },
+      "sections": [
+        "Option 1: FEX Airport Express (Fastest)",
+        "Option 2: S-Bahn S9 (Direct to Alexanderplatz, No Transfer)",
+        "Quick Comparison",
+        "My Recommendation"
+      ]
+    }
+  },
+  "decisionRule": {
+    "minimumEligiblePageViewsPerArm": 300,
+    "minimumQualifiedReadsPerArm": 30,
+    "minimumAbsoluteLiftPoints": 2,
+    "minimumRelativeLift": 0.2,
+    "minimumPositiveConfidence": 0.9,
+    "maxBookingIntentDropPoints": 0.5,
+    "maxRead75RelativeDrop": 0.1
+  }
+}

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Berlin Branded Attractions: Worth-It Matcher</title>
+<meta name="description" content="Madame Tussauds, the Berlin Dungeon and LEGOLAND Discovery Centre are the three branded Berlin attractions still open. Pick who is visiting and get an honest per-group verdict, including when to skip all three, before you overpay at the door." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='32' r='19' fill='%23FFE600'/%3E%3Cpath d='M22 41V24l10-6 10 6v17' fill='none' stroke='%231B5E20' stroke-width='3' stroke-linejoin='round'/%3E%3Cpath d='M27 41v-9h10v9' fill='%231B5E20'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-dark:#123D18; --green-mid:#2E7D32;
+    --lime:#7CB342; --light:#C5E1A5; --yellow:#FFE600;
+    --cream:#FAFAF5; --ink:#212121; --muted:#4b584b;
+    --line:#E3E8DC; --panel:#F4F7F0;
+    --good:#1B5E20; --warn:#B26A00; --bad:#8E2C2C;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .wrap{max-width:680px;margin:0 auto;padding:4px 14px 20px}
+  .card{background:var(--cream);border:1px solid var(--line);border-radius:18px;padding:20px 16px;box-shadow:0 10px 30px rgba(18,61,24,.06)}
+  .kicker{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-mid);margin:0 0 6px}
+  h1{font-size:22px;font-weight:800;line-height:1.16;margin:0 0 8px;color:var(--green-dark)}
+  .lede{font-size:15px;color:var(--muted);margin:0 0 12px}
+  .context{font-size:12.5px;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--lime);border-radius:10px;padding:9px 12px;margin:0 0 18px;line-height:1.45}
+
+  .controls{margin-bottom:6px}
+  .ctrl-label{font-weight:800;font-size:13.5px;color:var(--green-dark);margin:0 0 8px}
+  .pills{display:flex;flex-wrap:wrap;gap:8px}
+  .pill{appearance:none;border:2px solid var(--line);background:#fff;border-radius:999px;padding:9px 14px;cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:700;color:var(--green-dark);transition:border-color .15s,background .15s,color .15s,transform .05s;flex:1 1 auto;min-width:0;text-align:center}
+  .pill:hover{border-color:var(--lime)}
+  .pill:active{transform:translateY(1px)}
+  .pill.sel{border-color:var(--green);background:var(--green);color:#fff}
+
+  .rainrow{display:flex;align-items:center;gap:11px;margin:16px 0 4px;padding:11px 13px;border:1px solid var(--line);border-radius:12px;background:#fff}
+  .rainrow .rlabel{font-weight:700;font-size:13.5px;color:var(--green-dark)}
+  .rainrow .rsub{font-size:12px;color:var(--muted);margin-top:1px}
+  .raintext{flex:1 1 auto;min-width:0}
+  .toggle{appearance:none;position:relative;flex:none;width:48px;height:27px;border-radius:999px;background:#d5ddcf;border:none;cursor:pointer;transition:background .18s}
+  .toggle::after{content:"";position:absolute;top:3px;left:3px;width:21px;height:21px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .18s}
+  .toggle.on{background:var(--green-mid)}
+  .toggle.on::after{transform:translateX(21px)}
+
+  .banner{margin:18px 0 6px;border-radius:14px;padding:14px 15px;background:#EEF5E8;border:1px solid var(--light);border-left:5px solid var(--green);line-height:1.4}
+  .banner .btag{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--green-mid);display:block;margin-bottom:4px}
+  .banner .btext{font-size:15px;font-weight:700;color:var(--green-dark);margin:0}
+  .banner.skipall{background:var(--cream);border:1px solid var(--line);border-left:5px solid var(--yellow);box-shadow:inset 4px 0 0 -1px var(--yellow)}
+  .banner.skipall .btag{color:#8a6d00}
+  .banner.skipall .btext{color:var(--ink)}
+
+  .cards{margin-top:14px;display:flex;flex-direction:column;gap:11px}
+  .att{border:1px solid var(--line);background:#fff;border-radius:14px;padding:14px 14px 13px;transition:box-shadow .25s,border-color .25s}
+  .att.go{border-color:#bfe0b6;box-shadow:0 6px 18px rgba(27,94,32,.08)}
+  .att-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+  .att-name{font-size:15.5px;font-weight:800;color:var(--green-dark);margin:0;line-height:1.2}
+  .att-where{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--green-mid);margin:3px 0 0}
+  .vtag{flex:none;display:inline-block;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:999px;color:#fff}
+  .vtag.go{background:var(--good)}
+  .vtag.maybe{background:var(--warn)}
+  .vtag.skip{background:var(--bad)}
+  .reason{font-size:14px;color:#33403a;margin:10px 0 0;line-height:1.5}
+  .reason .rainnote{display:block;margin-top:5px;font-size:12.5px;color:var(--warn);font-weight:600}
+  .facts{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+  .fact{font-size:11.5px;font-weight:700;color:var(--green-dark);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:5px 9px;line-height:1.3}
+  .fact .fk{color:var(--muted);font-weight:600;margin-right:4px}
+  .pricegap{color:var(--warn)}
+
+  .foot{font-size:12px;color:var(--muted);margin-top:16px;border-top:1px dashed var(--line);padding-top:12px;line-height:1.45}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <p class="kicker">BerlinWalk Tool</p>
+    <h1>Berlin Branded Attractions: Worth-It Matcher</h1>
+    <p class="lede">Madame Tussauds, the Berlin Dungeon and LEGOLAND Discovery Centre still run at 20 to 30 euros a head. Tell me who is visiting and I will give you an honest call for your group, including when to skip all three.</p>
+
+    <p class="context">2 of Berlin's 5 branded attractions - Sea Life and Little BIG City - closed for good in December 2024. These three are what is left.</p>
+
+    <div class="controls">
+      <p class="ctrl-label">Who is visiting?</p>
+      <div class="pills" id="groupPills">
+        <button class="pill" data-group="kids">Young kids (~3-10)</button>
+        <button class="pill" data-group="teens">Teens (~11-17)</button>
+        <button class="pill" data-group="adults">Adults only</button>
+        <button class="pill" data-group="mixed">Mixed family</button>
+      </div>
+    </div>
+
+    <div class="rainrow">
+      <div class="raintext">
+        <div class="rlabel">It's raining right now</div>
+        <div class="rsub">Nudges the close calls toward a dry indoor hour</div>
+      </div>
+      <button class="toggle" id="rainToggle" role="switch" aria-checked="false" aria-label="It is raining right now"></button>
+    </div>
+
+    <div class="banner" id="banner">
+      <span class="btag">Honest call</span>
+      <p class="btext">Pick who is visiting and I will float the best fit to the top.</p>
+    </div>
+
+    <div class="cards" id="cards"></div>
+
+    <p class="foot">Prices are online-booking floors checked on 21 August 2026; walk-up prices at the door are higher.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var state={group:null,rain:false};
+
+  var attractions=[
+    {
+      id:'tussauds',
+      name:'Madame Tussauds',
+      where:'Brandenburger Tor',
+      online:'€22', door:'€29.50', duration:'~1 to 1.5 hours',
+      station:'U5, S1/S2/S25', address:'Unter den Linden 74',
+      v:{
+        kids:['maybe','Fun to spot the figures, but it is photos not play, and pricey for little ones.'],
+        teens:['go','The selfie-with-celebrities format is made for this age. Book online to skip the €29.50 door price.'],
+        adults:['maybe','Only worth it if you actually enjoy the photo-op. Otherwise your money goes further elsewhere.'],
+        mixed:['maybe','Works as a short, warm, everyone-can-do-it stop, but it is not the highlight of a Berlin trip.']
+      }
+    },
+    {
+      id:'dungeon',
+      name:'Berlin Dungeon',
+      where:'Alexanderplatz',
+      online:'from €18', door:'€29', duration:'~80 minutes',
+      station:'U2/U5/U8, S3/S5/S7/S9', address:'Spandauer Str. 2',
+      v:{
+        kids:['skip','Too dark and scary, and the minimum age is about 10. Not for small children.'],
+        teens:['go','Theatrical scares and live actors are exactly their thing. One catch: the show runs mostly in German.'],
+        adults:['maybe','Fun if you like immersive scare-shows, but it is performed mostly in German, so a lot of the jokes will pass you by.'],
+        mixed:['maybe','Only with older kids (about 10+), and be ready for a show that is mostly in German.']
+      }
+    },
+    {
+      id:'legoland',
+      name:'LEGOLAND Discovery Centre',
+      where:'Potsdamer Platz',
+      online:'€19.50', door:'€25', duration:'2 to 3 hours',
+      station:'U2, S1/S2/S25', address:'Sony Center',
+      v:{
+        kids:['go','This is its exact audience. A rainy afternoon here buys you two to three hours of happy kids.'],
+        teens:['skip','Aimed at much younger children. Teens will be bored within twenty minutes.'],
+        adults:['skip','You literally cannot get in without a child. Not an option for an adults-only day.'],
+        mixed:['go','The safe pick if you have younger kids in the group. Adults get in with them.']
+      }
+    }
+  ];
+
+  var banners={
+    kids:['go','My pick for young kids: LEGOLAND Discovery Centre at Potsdamer Platz, especially if it is raining.'],
+    teens:['go','My pick for teens: the Berlin Dungeon for a scare, or Madame Tussauds for the photos. Book online either way.'],
+    mixed:['go','My pick for a mixed family: LEGOLAND if the kids are young. Save the Dungeon for when they are older.'],
+    adults:['skipall','Honest call for adults only: I would skip all three. For the same €20 to €30, a real Berlin museum, a rooftop view, or a walking tour gives you far more of the actual city.']
+  };
+
+  var badgeText={go:'Go',maybe:'Maybe',skip:'Skip'};
+  var rainTail={
+    tussauds:'With rain outside, a dry, warm indoor hour edges this a little closer to worth it.',
+    dungeon:'On a wet day, an indoor show like this earns back a bit more of the ticket.',
+    legoland:'On a wet day, a dry indoor stretch like this is worth a little more than usual.'
+  };
+
+  function scoreFor(verdict,rain){
+    // GO floats to top, SKIP sinks; rain gives MAYBE a small lift but never past GO.
+    if(verdict==='go') return 100;
+    if(verdict==='maybe') return rain?58:50;
+    return 10;
+  }
+
+  var cardsEl=document.getElementById('cards');
+  var bannerEl=document.getElementById('banner');
+
+  function render(){
+    // pills
+    document.querySelectorAll('#groupPills .pill').forEach(function(b){
+      b.classList.toggle('sel',b.dataset.group===state.group);
+    });
+
+    if(!state.group){
+      bannerEl.className='banner';
+      bannerEl.innerHTML='<span class="btag">Honest call</span><p class="btext">Pick who is visiting and I will float the best fit to the top.</p>';
+      cardsEl.innerHTML='';
+      buildCards(null);
+      return;
+    }
+
+    // banner
+    var bn=banners[state.group];
+    if(bn[0]==='skipall'){
+      bannerEl.className='banner skipall';
+      bannerEl.innerHTML='<span class="btag">Skip all three</span><p class="btext">'+bn[1]+'</p>';
+    }else{
+      bannerEl.className='banner';
+      bannerEl.innerHTML='<span class="btag">Honest call</span><p class="btext">'+bn[1]+'</p>';
+    }
+
+    buildCards(state.group);
+  }
+
+  function factHTML(a){
+    return '<div class="facts">'+
+      '<span class="fact"><span class="fk">Online from</span>'+a.online+'</span>'+
+      '<span class="fact pricegap"><span class="fk">At the door</span>'+a.door+'</span>'+
+      '<span class="fact"><span class="fk">Time</span>'+a.duration+'</span>'+
+      '<span class="fact"><span class="fk">Nearest</span>'+a.where+' ('+a.station+')</span>'+
+    '</div>';
+  }
+
+  function buildCards(group){
+    // order
+    var ordered=attractions.map(function(a,i){
+      var verdict=group?a.v[group][0]:'maybe';
+      return {a:a,verdict:verdict,idx:i,score:group?scoreFor(verdict,state.rain):-1};
+    });
+    if(group){
+      ordered.sort(function(x,y){
+        if(y.score!==x.score) return y.score-x.score;
+        return x.idx-y.idx; // stable tie-break
+      });
+    }
+
+    var html='';
+    ordered.forEach(function(o){
+      var a=o.a;
+      var verdict=group?o.verdict:null;
+      var reason=group?a.v[group][1]:'Pick a group above to see the verdict.';
+      var rainNote='';
+      if(group && verdict==='maybe' && state.rain){
+        rainNote='<span class="rainnote">'+rainTail[a.id]+'</span>';
+      }
+      var vtag=verdict?('<span class="vtag '+verdict+'">'+badgeText[verdict]+'</span>'):'';
+      var cls='att'+(verdict==='go'?' go':'');
+      html+='<div class="'+cls+'">'+
+        '<div class="att-top">'+
+          '<div><p class="att-name">'+a.name+'</p><p class="att-where">'+a.where+' · '+a.address+'</p></div>'+
+          vtag+
+        '</div>'+
+        '<p class="reason">'+reason+rainNote+'</p>'+
+        factHTML(a)+
+      '</div>';
+    });
+    cardsEl.innerHTML=html;
+  }
+
+  document.getElementById('groupPills').addEventListener('click',function(e){
+    var b=e.target.closest('.pill'); if(!b) return;
+    state.group=b.dataset.group; render();
+  });
+  var rt=document.getElementById('rainToggle');
+  rt.addEventListener('click',function(){
+    state.rain=!state.rain;
+    rt.classList.toggle('on',state.rain);
+    rt.setAttribute('aria-checked',state.rain?'true':'false');
+    render();
+  });
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

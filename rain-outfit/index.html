@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Locals Wear in Berlin Rain</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+    color: #1a1a1a;
+    background: transparent;
+    line-height: 1.5;
+    padding: 0;
+  }
+  .rw-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 24px 20px;
+  }
+  .rw-kicker {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #1B5E20;
+    text-align: center;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .rw-headline {
+    font-size: 22px;
+    font-weight: 800;
+    text-align: center;
+    color: #1a1a1a;
+    margin-bottom: 24px;
+    line-height: 1.25;
+  }
+  .rw-figures {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .rw-figure-card {
+    background: #f8f8f5;
+    border-radius: 12px;
+    padding: 16px 12px;
+    text-align: center;
+  }
+  .rw-figure-card.tourist { border-top: 3px solid #E63946; }
+  .rw-figure-card.local { border-top: 3px solid #1B5E20; }
+  .rw-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+  .rw-badge.tourist { background: #FCEBEB; color: #791F1F; }
+  .rw-badge.local { background: #EAF3DE; color: #27500A; }
+  .rw-figure-svg { width: 70px; height: 130px; display: block; margin: 0 auto; }
+  .rw-figure-caption {
+    font-size: 11px;
+    color: #666;
+    margin-top: 10px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .rw-table {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .rw-table-head {
+    display: grid;
+    grid-template-columns: 1fr 36px 1fr;
+    padding: 10px 14px;
+    background: #1B5E20;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .rw-table-head .vs { text-align: center; opacity: 0.55; }
+  .rw-table-head .right { text-align: right; }
+  .rw-row {
+    border-top: 1px solid rgba(0,0,0,0.06);
+    cursor: pointer;
+    transition: background 150ms ease;
+  }
+  .rw-row:hover { background: #fafaf5; }
+  .rw-row-main {
+    display: grid;
+    grid-template-columns: 1fr 36px 1fr;
+    align-items: center;
+    padding: 14px 14px;
+    gap: 8px;
+  }
+  .rw-cell {
+    font-size: 13.5px;
+    font-weight: 500;
+    line-height: 1.35;
+  }
+  .rw-cell.right { text-align: right; }
+  .rw-mark {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 16px;
+    font-size: 10px;
+    font-weight: 700;
+    margin-right: 6px;
+    vertical-align: 1px;
+  }
+  .rw-mark.x { background: #FCEBEB; color: #E63946; }
+  .rw-mark.check { background: #EAF3DE; color: #1B5E20; }
+  .rw-toggle {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #FFE600;
+    color: #1B5E20;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 22px;
+    text-align: center;
+    margin: 0 auto;
+    transition: transform 200ms ease;
+    user-select: none;
+  }
+  .rw-row.expanded .rw-toggle { transform: rotate(45deg); }
+  .rw-detail {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 280ms ease;
+    background: #fafaf5;
+  }
+  .rw-row.expanded .rw-detail { max-height: 240px; }
+  .rw-detail-inner {
+    padding: 4px 18px 16px 18px;
+    font-size: 13px;
+    color: #444;
+    line-height: 1.55;
+    border-left: 3px solid #FFE600;
+  }
+  .rw-cta {
+    margin-top: 20px;
+    background: #FFE600;
+    border-radius: 12px;
+    padding: 18px 16px;
+    text-align: center;
+  }
+  .rw-cta-text {
+    font-size: 13px;
+    color: #1B5E20;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .rw-cta-btn {
+    display: inline-block;
+    background: #1B5E20;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 13px;
+    transition: background 150ms ease;
+  }
+  .rw-cta-btn:hover { background: #154D1A; }
+
+  @media (max-width: 520px) {
+    .rw-wrap { padding: 18px 14px; }
+    .rw-headline { font-size: 18px; }
+    .rw-figure-card { padding: 12px 8px; }
+    .rw-figure-svg { width: 56px; height: 110px; }
+    .rw-figure-caption { font-size: 10.5px; }
+    .rw-table-head { padding: 8px 10px; font-size: 9px; }
+    .rw-row-main { padding: 12px 10px; gap: 4px; }
+    .rw-cell { font-size: 12.5px; }
+    .rw-detail-inner { padding: 4px 14px 14px 14px; font-size: 12.5px; }
+    .rw-mark { width: 14px; height: 14px; line-height: 14px; font-size: 9px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="rw-wrap">
+
+  <div class="rw-kicker">Rain gear — what works, what doesn't</div>
+  <h2 class="rw-headline">What Berlin locals actually wear in the rain</h2>
+
+  <div class="rw-figures">
+    <div class="rw-figure-card tourist">
+      <div class="rw-badge tourist">Tourist</div>
+      <svg class="rw-figure-svg" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="50" cy="32" r="14" fill="#D8D6CB"/>
+        <rect x="36" y="50" width="28" height="58" fill="#85B7EB" rx="3"/>
+        <rect x="38" y="108" width="10" height="48" fill="#888780"/>
+        <rect x="52" y="108" width="10" height="48" fill="#888780"/>
+        <rect x="35" y="156" width="14" height="7" fill="#444441" rx="2"/>
+        <rect x="51" y="156" width="14" height="7" fill="#444441" rx="2"/>
+        <path d="M 28 26 Q 50 4 72 26 L 70 28 Q 50 12 30 28 Z" fill="#E63946" stroke="#A32D2D" stroke-width="0.8"/>
+        <line x1="50" y1="26" x2="50" y2="50" stroke="#444441" stroke-width="1.5"/>
+        <circle cx="80" cy="72" r="1.2" fill="#85B7EB" opacity="0.6"/>
+        <circle cx="20" cy="80" r="1.2" fill="#85B7EB" opacity="0.6"/>
+        <circle cx="85" cy="100" r="1.2" fill="#85B7EB" opacity="0.6"/>
+        <circle cx="15" cy="110" r="1.2" fill="#85B7EB" opacity="0.6"/>
+      </svg>
+      <p class="rw-figure-caption">Lasts 4 minutes in Alexanderplatz wind</p>
+    </div>
+
+    <div class="rw-figure-card local">
+      <div class="rw-badge local">Local</div>
+      <svg class="rw-figure-svg" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="50" cy="32" r="14" fill="#D8D6CB"/>
+        <path d="M 35 20 Q 50 9 65 20 L 65 36 Q 50 31 35 36 Z" fill="#1B5E20"/>
+        <rect x="33" y="48" width="34" height="62" fill="#1B5E20" rx="5"/>
+        <rect x="36" y="110" width="11" height="48" fill="#444441"/>
+        <rect x="53" y="110" width="11" height="48" fill="#444441"/>
+        <rect x="33" y="158" width="16" height="9" fill="#2C2C2A" rx="3"/>
+        <rect x="51" y="158" width="16" height="9" fill="#2C2C2A" rx="3"/>
+        <rect x="64" y="55" width="18" height="26" fill="#154D1A" rx="3"/>
+        <line x1="64" y1="55" x2="64" y2="81" stroke="#0d3d12" stroke-width="0.5"/>
+      </svg>
+      <p class="rw-figure-caption">Walks through any storm, hands free</p>
+    </div>
+  </div>
+
+  <div class="rw-table">
+    <div class="rw-table-head">
+      <div>Tourist choice</div>
+      <div class="vs">vs</div>
+      <div class="right">Local choice</div>
+    </div>
+
+    <div class="rw-row" data-expanded="false">
+      <div class="rw-row-main">
+        <div class="rw-cell"><span class="rw-mark x">✕</span>Umbrella</div>
+        <div class="rw-toggle">+</div>
+        <div class="rw-cell right"><span class="rw-mark check">✓</span>Hooded rain jacket</div>
+      </div>
+      <div class="rw-detail">
+        <div class="rw-detail-inner">
+          Berlin's wind, especially around open squares like Alexanderplatz and the Lustgarten, will turn most umbrellas inside out within minutes. A hooded waterproof jacket keeps your hands free and works even when you are walking briskly between stops.
+        </div>
+      </div>
+    </div>
+
+    <div class="rw-row" data-expanded="false">
+      <div class="rw-row-main">
+        <div class="rw-cell"><span class="rw-mark x">✕</span>Sneakers / canvas shoes</div>
+        <div class="rw-toggle">+</div>
+        <div class="rw-cell right"><span class="rw-mark check">✓</span>Waterproof boots, grippy sole</div>
+      </div>
+      <div class="rw-detail">
+        <div class="rw-detail-inner">
+          The cobblestones around Museum Island, Nikolaiviertel, and Hackescher Markt get glossy and slick when wet. The streetcar tracks near Hackescher Markt are especially treacherous. Smooth-soled boots and unsealed sneakers are the two most common reasons tourists slip in central Berlin.
+        </div>
+      </div>
+    </div>
+
+    <div class="rw-row" data-expanded="false">
+      <div class="rw-row-main">
+        <div class="rw-cell"><span class="rw-mark x">✕</span>Tote bag / open shoulder bag</div>
+        <div class="rw-toggle">+</div>
+        <div class="rw-cell right"><span class="rw-mark check">✓</span>Backpack, hands free</div>
+      </div>
+      <div class="rw-detail">
+        <div class="rw-detail-inner">
+          A tote bag in Berlin rain soaks through within minutes, strains your shoulder, and ties up one hand you need for balance on wet cobblestones. A small backpack keeps your gear dry, your weight balanced, and both hands free for your phone, jacket zipper, and museum tickets.
+        </div>
+      </div>
+    </div>
+
+    <div class="rw-row" data-expanded="false">
+      <div class="rw-row-main">
+        <div class="rw-cell"><span class="rw-mark x">✕</span>Single layer / cotton hoodie</div>
+        <div class="rw-toggle">+</div>
+        <div class="rw-cell right"><span class="rw-mark check">✓</span>Layers + waterproof shell</div>
+      </div>
+      <div class="rw-detail">
+        <div class="rw-detail-inner">
+          When rain starts in Berlin, the temperature can drop several degrees in minutes. A single layer leaves you either too hot inside museums or freezing outside on the Liebknecht Bridge. Layering — a base layer, a warm mid-layer, and a waterproof shell — lets you adjust on the move without going back to the hotel.
+        </div>
+      </div>
+    </div>
+
+    <div class="rw-row" data-expanded="false">
+      <div class="rw-row-main">
+        <div class="rw-cell"><span class="rw-mark x">✕</span>Phone in your hand</div>
+        <div class="rw-toggle">+</div>
+        <div class="rw-cell right"><span class="rw-mark check">✓</span>Phone in inner pocket</div>
+      </div>
+      <div class="rw-detail">
+        <div class="rw-detail-inner">
+          Rain plus slippery cobblestones plus a phone in your hand is one slipped grip away from a screen repair. An inner jacket pocket or a zippered chest pocket keeps your phone dry, secure, and out of pickpocket reach in busier areas like Hackescher Markt and Alexanderplatz.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rw-cta">
+    <div class="rw-cta-text">Dressed right? Walk Berlin's historic core with a local guide.</div>
+    <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" class="rw-cta-btn" target="_top">Reserve Free Tour →</a>
+  </div>
+
+</div>
+
+<script>
+  document.querySelectorAll('.rw-row').forEach(function(row) {
+    row.addEventListener('click', function() {
+      var isExpanded = row.classList.toggle('expanded');
+      row.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+      var toggle = row.querySelector('.rw-toggle');
+      if (toggle) toggle.textContent = isExpanded ? '×' : '+';
+    });
+  });
+</script>
+<script src="../js/brand.js" defer></script>
+
+</body>
+</html>

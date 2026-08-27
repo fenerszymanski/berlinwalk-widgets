@@ -1,0 +1,34 @@
+{
+  "header": {
+    "eyebrow": "HOW IT WORKS",
+    "title": "From booking to walking — in three steps",
+    "subtitle": "Booking takes 30 seconds. The rest is on me."
+  },
+  "steps": [
+    {
+      "number": 1,
+      "icon": "calendar",
+      "timeChip": "~30 SEC",
+      "title": "Book Your Spot",
+      "description": "Pick a date and reserve. Just your name and email."
+    },
+    {
+      "number": 2,
+      "icon": "umbrella",
+      "timeChip": "11:30 AM TUE–SAT",
+      "title": "Meet at Alexanderplatz",
+      "description": "Find me at the World Clock. Look for the **GREEN UMBRELLA**."
+    },
+    {
+      "number": 3,
+      "icon": "walking",
+      "timeChip": "~2 HOURS · 12 STOPS",
+      "title": "Walk + Tip",
+      "description": "Walk Berlin with me. Tip what feels fair at the end."
+    }
+  ],
+  "cta": {
+    "text": "Book your free spot →",
+    "url": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based"
+  }
+}

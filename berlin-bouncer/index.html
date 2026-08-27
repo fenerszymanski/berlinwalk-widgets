@@ -1,0 +1,1794 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berghain Simulator: Can You Get In? | BerlinWalk</title>
+  <meta name="description" content="Play the free Berghain simulator. Choose your outfit, face the bouncer and answer each question in 10 seconds. Can you make it through the door?">
+  <link rel="canonical" href="https://www.berlinwalk.com/games/berghain-bouncer">
+  <link rel="icon" href="../tools-home/icons/berlin-bouncer-160.png">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <style>
+    :root {
+      --bw-yellow: #FFFF00;
+      --bw-green-dark: #0A1C10;
+      --bw-white: #FFFFFF;
+      --bw-error: #FF3333;
+      --bw-lime: #CCFF00;
+      --bw-text-muted: #A0AAB2;
+    }
+    
+    @keyframes shake {
+      0% { transform: translate(1px, 1px) rotate(0deg); }
+      10% { transform: translate(-1px, -2px) rotate(-1deg); }
+      20% { transform: translate(-3px, 0px) rotate(1deg); }
+      30% { transform: translate(3px, 2px) rotate(0deg); }
+      40% { transform: translate(1px, -1px) rotate(1deg); }
+      50% { transform: translate(-1px, 2px) rotate(-1deg); }
+      60% { transform: translate(-3px, 1px) rotate(0deg); }
+      70% { transform: translate(3px, 1px) rotate(-1deg); }
+      80% { transform: translate(-1px, -1px) rotate(1deg); }
+      90% { transform: translate(1px, 2px) rotate(0deg); }
+      100% { transform: translate(1px, -2px) rotate(-1deg); }
+    }
+    
+    @keyframes pulse-red {
+      0% { box-shadow: inset 0 0 50px rgba(255, 0, 0, 0); }
+      50% { box-shadow: inset 0 0 100px rgba(255, 0, 0, 0.2); }
+      100% { box-shadow: inset 0 0 50px rgba(255, 0, 0, 0); }
+    }
+    
+    .shake {
+      animation: shake 0.5s;
+    }
+    
+    .club-lights {
+      animation: pulse-red 2s infinite;
+    }
+    
+    * {
+      box-sizing: border-box;
+      --bw-error: #E63946;
+    }
+    html, body {
+      background: transparent;
+      margin: 0 !important;
+      padding: 0 !important;
+      height: 100%;
+      overflow: hidden;
+      font-family: Montserrat, Arial, sans-serif;
+    }
+    #bw-bouncer-sim {
+      background: var(--bw-green-dark);
+      background-size: cover;
+      background-position: center;
+      transition: background-image 0.5s ease-in-out;
+      color: var(--bw-white);
+      margin: 0 !important;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      isolation: isolate;
+    }
+
+    .scene-art {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .scene-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.42;
+    }
+
+    #start-screen,
+    #game-container,
+    #result-container {
+      position: relative;
+      z-index: 10;
+    }
+    .bouncer-hero {
+      background: linear-gradient(135deg, rgba(27, 94, 32, 0.8), rgba(18, 63, 22, 0.95));
+      background-size: cover;
+      background-position: center;
+      padding: 40px 20px;
+      text-align: center;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+    .kicker {
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    h1 {
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 900;
+      margin: 0 0 12px;
+      line-height: 1.1;
+    }
+    .lead-text {
+      color: var(--bw-text-muted);
+      font-size: 16px;
+      line-height: 1.5;
+      max-width: 500px;
+      margin: 0 auto 24px;
+    }
+
+    .mode-toggle {
+      align-items: center;
+      color: var(--bw-text-muted);
+      display: inline-flex;
+      font-size: 12px;
+      gap: 8px;
+      margin: 14px auto 0;
+      max-width: 320px;
+      text-align: left;
+    }
+
+    .mode-toggle input {
+      accent-color: var(--bw-yellow);
+      flex: 0 0 auto;
+      height: 18px;
+      width: 18px;
+    }
+    .btn-start {
+      background: var(--bw-yellow);
+      color: var(--bw-green-dark);
+      border: none;
+      padding: 14px 28px;
+      font-size: 16px;
+      font-weight: 800;
+      border-radius: 8px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .btn-start:hover {
+      transform: translateY(-2px);
+      background: #FFF04D;
+    }
+    
+    #game-container {
+      display: none;
+      flex-grow: 1;
+      flex-direction: column;
+      justify-content: center;
+      padding: 20px;
+      background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 80%, transparent 100%);
+    }
+    
+    /* Dialogue Box Style */
+    .dialogue-box {
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-left: 4px solid var(--bw-yellow);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(4px);
+    }
+    
+    .question-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0;
+      color: var(--bw-white);
+      line-height: 1.4;
+      min-height: 56px;
+    }
+    
+    .options-grid {
+      display: grid;
+      gap: 12px;
+      width: 100%;
+    }
+    
+    .options-grid.cards-view {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    
+    .option-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--bw-white);
+      padding: 14px 20px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s;
+    }
+    
+    .option-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: var(--bw-yellow);
+      transform: translateX(4px);
+    }
+
+    .option-btn:focus-visible,
+    .card-btn:focus-visible,
+    .btn-start:focus-visible,
+    .restart-btn:focus-visible,
+    .result-next-step:focus-visible {
+      outline: 3px solid var(--bw-yellow);
+      outline-offset: 3px;
+    }
+    
+    .card-btn {
+      background: rgba(0,0,0,0.8);
+      border: 2px solid transparent;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s;
+      display: flex;
+      flex-direction: column;
+      font: inherit;
+      padding: 0;
+      text-align: left;
+    }
+    
+    .card-btn:hover {
+      transform: scale(1.02);
+      border-color: var(--bw-yellow);
+    }
+    
+    .card-btn img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      display: block;
+    }
+    
+    .card-btn .card-label {
+      padding: 12px;
+      font-weight: 700;
+      font-size: 14px;
+      text-align: center;
+      color: var(--bw-white);
+    }
+    
+    .progress-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: rgba(0,0,0,0.5);
+      z-index: 20;
+      display: none;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--bw-lime);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    
+    .timer-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: rgba(0,0,0,0.8);
+      z-index: 20;
+      display: none;
+    }
+    .timer-fill {
+      height: 100%;
+      background: var(--bw-error);
+      width: 100%;
+      transition: width linear;
+    }
+    
+    #countdown-text {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      min-width: 86px;
+      padding: 10px 12px 8px;
+      border: 2px solid rgba(255, 51, 51, 0.95);
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.82);
+      font-size: 52px;
+      line-height: 0.9;
+      font-weight: 900;
+      color: var(--bw-white);
+      text-align: center;
+      z-index: 45;
+      display: none;
+      pointer-events: none;
+      text-shadow: 0 0 18px rgba(255, 51, 51, 0.75);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 10px 30px rgba(0,0,0,0.45), 0 0 28px rgba(255,51,51,0.35);
+    }
+
+    #countdown-text::after {
+      content: "SECONDS";
+      display: block;
+      margin-top: 6px;
+      color: var(--bw-yellow);
+      font-size: 9px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: 1.6px;
+    }
+    
+    #result-container {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+      background: rgba(0,0,0,0.85);
+      flex-grow: 1;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .result-title {
+      font-size: 38px;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+    .result-title.success { color: var(--bw-lime); }
+    .result-title.fail { color: var(--bw-error); }
+    
+    .result-msg {
+      font-size: 18px;
+      color: var(--bw-text-muted);
+      margin-bottom: 30px;
+      max-width: 500px;
+      line-height: 1.5;
+    }
+    
+    .global-stats {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      font-size: 14px;
+      color: var(--bw-white);
+    }
+    .global-stats span {
+      display: block;
+      font-weight: 700;
+      color: var(--bw-yellow);
+      margin-bottom: 4px;
+    }
+
+    .result-persona {
+      color: var(--bw-yellow);
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 0.4px;
+      margin: -4px 0 10px;
+      text-transform: uppercase;
+    }
+
+    .result-score {
+      color: var(--bw-text-muted);
+      font-size: 13px;
+      margin: -16px 0 20px;
+    }
+
+    .result-card-art {
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 10px;
+      display: block;
+      height: 90px;
+      margin: 0 auto 18px;
+      object-fit: cover;
+      width: 160px;
+    }
+
+    .result-card-art[hidden] {
+      display: none !important;
+    }
+
+    .challenge-note {
+      color: var(--bw-text-muted);
+      font-size: 11px;
+      letter-spacing: 0.6px;
+      margin: 0 0 18px;
+      text-transform: uppercase;
+    }
+
+    .result-next-step {
+      color: var(--bw-yellow);
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.4;
+      margin-top: 18px;
+      max-width: 360px;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .bw-visually-hidden {
+      border: 0;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      white-space: nowrap;
+      width: 1px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    
+    .restart-btn {
+      background: transparent;
+      border: 2px solid var(--bw-white);
+      color: var(--bw-white);
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+    .restart-btn:hover {
+      background: rgba(255,255,255,0.1);
+    }
+    
+    .share-btn {
+      background: var(--bw-yellow);
+      color: var(--bw-green-dark);
+      border-color: var(--bw-yellow);
+    }
+    .share-btn:hover {
+      background: #FFF04D;
+    }
+    
+    .action-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .share-toast {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translate(-50%, 14px);
+      z-index: 70;
+      max-width: min(92vw, 420px);
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: rgba(8, 20, 10, 0.94);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: var(--bw-white);
+      font-size: 13px;
+      font-weight: 800;
+      text-align: center;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .share-toast.is-visible {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .share-toast.is-error {
+      border-color: rgba(230, 57, 70, 0.7);
+      color: #FFD6DA;
+    }
+
+    @media (max-width: 600px) {
+      #result-container {
+        justify-content: flex-start;
+        padding: 18px 14px 16px;
+      }
+
+      .result-title {
+        font-size: clamp(28px, 9vw, 34px);
+        line-height: 1.02;
+        margin-bottom: 8px;
+      }
+
+      .result-persona {
+        font-size: 12px;
+        line-height: 1.15;
+        margin: 0 0 8px;
+      }
+
+      .result-msg {
+        font-size: 15px;
+        line-height: 1.3;
+        margin-bottom: 12px;
+      }
+
+      .result-score {
+        margin: 0 0 10px;
+      }
+
+      .result-card-art {
+        width: 120px;
+        height: 68px;
+        margin-bottom: 10px;
+      }
+
+      .challenge-note {
+        font-size: 10px;
+        margin-bottom: 10px;
+      }
+
+      .global-stats {
+        padding: 10px;
+        margin-bottom: 12px;
+        font-size: 12px;
+        line-height: 1.25;
+      }
+
+      .action-row {
+        gap: 8px;
+      }
+
+      .restart-btn {
+        min-height: 44px;
+        padding: 10px 16px;
+      }
+
+      .result-next-step {
+        margin-top: 10px;
+        max-width: 330px;
+      }
+    }
+    
+    /* Force hide brand.js auto-injected footer badge in standalone view */
+    .bw-attr-badge { display: none !important; }
+  </style>
+</head>
+<body>
+  <main id="bw-bouncer-sim">
+    <picture class="scene-art" id="scene-art" aria-hidden="true">
+      <source id="scene-art-avif" type="image/avif" srcset="assets/optimized/berghain_exterior.avif">
+      <source id="scene-art-webp" type="image/webp" srcset="assets/optimized/berghain_exterior.webp">
+      <img id="scene-art-img" src="assets/berghain_exterior.png" alt="" fetchpriority="high">
+    </picture>
+    <div class="progress-bar" id="progress"><div class="progress-fill" id="progress-fill"></div></div>
+    
+    <div id="start-screen" class="bouncer-hero">
+      <span class="kicker">Playable Now</span>
+      <h1>Can You Get Into Berghain?</h1>
+      <p class="lead-text">A quick fictional Berlin club-door test. Make your choices and see how this imaginary bouncer reads the night.</p>
+      <button class="btn-start" type="button" onclick="startGame()">Try to get in</button>
+      <label class="mode-toggle"><input id="untimed-mode" type="checkbox"> Practice mode: no countdown (not included in timed stats)</label>
+    </div>
+    
+    <div id="game-container">
+      <div id="countdown-text" aria-hidden="true">10</div>
+      <div class="bw-visually-hidden" id="timer-announcement" role="status" aria-live="polite"></div>
+      <div class="dialogue-box">
+        <p class="question-title" id="question-text" aria-describedby="game-announcement"></p>
+      </div>
+      <div class="options-grid" id="options-grid"></div>
+      <div class="timer-bar" id="timer"><div class="timer-fill" id="timer-fill"></div></div>
+      <div class="bw-visually-hidden" id="game-announcement" role="status" aria-live="polite"></div>
+    </div>
+    
+    <div id="result-container" role="region" aria-labelledby="result-title">
+      <h2 class="result-title" id="result-title" tabindex="-1"></h2>
+      <p class="result-persona" id="result-persona"></p>
+      <p class="result-msg" id="result-msg"></p>
+      <p class="result-score" id="result-score"></p>
+      <picture>
+        <source id="result-art-avif" type="image/avif">
+        <source id="result-art-webp" type="image/webp">
+        <img id="result-art" class="result-card-art" loading="lazy" alt="" hidden>
+      </picture>
+      <p class="challenge-note" id="challenge-note"></p>
+      <div class="global-stats" id="global-stats" style="display: none;">
+        <span>Today's Timed Door Results</span>
+        <div id="stats-text">Loading stats...</div>
+      </div>
+      <div class="action-row">
+        <button class="restart-btn share-btn" id="share-result-btn" type="button" onclick="shareResult()">CHALLENGE A FRIEND</button>
+        <button class="restart-btn" type="button" onclick="replayGame()">TRY AGAIN</button>
+      </div>
+      <a class="result-next-step" id="result-next-step" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" onclick="trackResultTourClick()">My ~2h walking tour starts at Alexanderplatz and explores the historic centre of former East Berlin.</a>
+    </div>
+    <div class="share-toast" id="share-toast" role="status" aria-live="polite"></div>
+  </main>
+
+  <script>
+    let gameData = null;
+    let currentPhaseId = 'outfit';
+    let score = 0;
+    let stepCount = 0;
+    let bgmAudio = null;
+    let currentVoiceAudio = null;
+    let countdown;
+    let countdownInterval;
+    let shareToastTimeout;
+    let trackingSequence = 0;
+    let shareInFlight = false;
+    let runId = '';
+    let runIndex = 0;
+    let runStartedAt = 0;
+    let runResultRecorded = false;
+    let runTrackingEligible = false;
+    let timedMode = true;
+    let runMode = 'daily';
+    let activeChallengeId = '';
+    let activeChallengeSeed = '';
+    let runRandom = null;
+    let currentResultPersona = null;
+    let runCompletionReason = 'choice';
+    let currentQuestionMeta = {};
+    let visibilityEligible = false;
+    let visibilityTracked = false;
+    let parentContextReceived = false;
+    let trackingContext = {
+      parentPath: '',
+      parentUrl: '',
+      pageSessionId: '',
+      referrerDomain: '',
+      parentViewportWidth: '',
+      deviceClass: '',
+      experimentVariant: '',
+      challengeId: '',
+      analyticsConsent: 'unknown',
+      isQa: false,
+      qaLabel: '',
+      sourceContext: '',
+      utmSource: '',
+      utmMedium: '',
+      utmCampaign: '',
+      utmContent: '',
+      utmTerm: ''
+    };
+    
+    const simContainer = document.getElementById('bw-bouncer-sim');
+    const URL_PARAMS = new URLSearchParams(window.location.search || '');
+    const TRACKING_ENDPOINT_PROD = 'https://berlinwalk-content-app.vercel.app/api/bouncer-event';
+    const TRACKING_ENDPOINT_LOCAL = 'http://127.0.0.1:5173/api/bouncer-event';
+    const SHARE_OPERATION_TIMEOUT_MS = 1500;
+    const TRACKING_SESSION_KEY = 'bw_berlin_bouncer_session_id';
+    const TRACKING_VISITOR_KEY = 'bw_berlin_bouncer_visitor_id';
+    const TRACKING_LANDING_KEY = 'bw_berlin_bouncer_landing_page';
+    const TRACKING_VISIBLE_KEY = 'bw_berlin_bouncer_visible_page_session';
+    const BOUNCER_CONTEXT_MESSAGE = 'bw-berghain-bouncer-context';
+    const BOUNCER_READY_MESSAGE = 'bw-berghain-bouncer-ready';
+    const BOUNCER_VISIBLE_MESSAGE = 'bw-berghain-bouncer-visible';
+    const BOUNCER_TRACK_MESSAGE = 'bw-berghain-bouncer-track';
+    const BOUNCER_PARENT_ORIGINS = new Set([
+      'https://www.berlinwalk.com',
+      'https://berlinwalk.com',
+      'https://fenerszymanski.github.io',
+      'https://cdn.jsdelivr.net',
+      'https://raw.githubusercontent.com',
+      'https://raw.githack.com',
+      'http://localhost:8000',
+      'http://localhost:8765',
+      'http://127.0.0.1:8000',
+      'http://127.0.0.1:8765'
+    ]);
+
+    function storageGet(key) {
+      try {
+        return window.localStorage ? window.localStorage.getItem(key) : '';
+      } catch (error) {
+        return '';
+      }
+    }
+
+    function storageSet(key, value) {
+      try {
+        if (window.localStorage) window.localStorage.setItem(key, value);
+      } catch (error) {
+        /* Storage is optional. */
+      }
+    }
+
+    function sessionGet(key) {
+      try {
+        return window.sessionStorage ? window.sessionStorage.getItem(key) : '';
+      } catch (error) {
+        return '';
+      }
+    }
+
+    function sessionSet(key, value) {
+      try {
+        if (window.sessionStorage) window.sessionStorage.setItem(key, value);
+      } catch (error) {
+        /* Storage is optional. */
+      }
+    }
+
+    function randomId(prefix) {
+      const cryptoObj = window.crypto || window.msCrypto;
+      if (cryptoObj && cryptoObj.getRandomValues) {
+        const values = new Uint32Array(4);
+        cryptoObj.getRandomValues(values);
+        return prefix + '_' + Array.prototype.map.call(values, value => value.toString(16).padStart(8, '0')).join('');
+      }
+      return prefix + '_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 10);
+    }
+
+    function trackingSessionId() {
+      const existing = sessionGet(TRACKING_SESSION_KEY);
+      if (existing) return existing;
+      const value = randomId('bbouncer_s');
+      sessionSet(TRACKING_SESSION_KEY, value);
+      return value;
+    }
+
+    function trackingVisitorId() {
+      const existing = storageGet(TRACKING_VISITOR_KEY);
+      if (existing) return existing;
+      const value = randomId('bbouncer_v');
+      storageSet(TRACKING_VISITOR_KEY, value);
+      return value;
+    }
+
+    function trackingLandingPage() {
+      const existing = sessionGet(TRACKING_LANDING_KEY);
+      if (existing) return existing;
+      const value = window.location.href;
+      sessionSet(TRACKING_LANDING_KEY, value);
+      return value;
+    }
+
+    function urlParam(key) {
+      try {
+        return URL_PARAMS.get(key) || '';
+      } catch (error) {
+        return '';
+      }
+    }
+
+    function safeTelemetryValue(value, max = 180) {
+      return String(value || '')
+        .trim()
+        .replace(/[^a-zA-Z0-9._~:/+%-]/g, '')
+        .slice(0, max);
+    }
+
+    function safeTelemetryText(value, max = 180) {
+      return String(value || '')
+        .replace(/[\u0000-\u001f\u007f]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .slice(0, max);
+    }
+
+    function analyticsConsentState() {
+      const value = String(trackingContext.analyticsConsent || '').toLowerCase();
+      if (value === 'granted' || value === 'true') return 'granted';
+      if (value === 'denied' || value === 'false') return 'denied';
+      return 'unknown';
+    }
+
+    function isQaRun() {
+      return Boolean(trackingContext.isQa) || ['1', 'true', 'yes', 'on'].includes(String(urlParam('bw_qa') || urlParam('isQa') || urlParam('qa')).toLowerCase()) || /^codex[_-]/i.test(urlParam('utm_content'));
+    }
+
+    function qaLabel() {
+      return safeTelemetryValue(trackingContext.qaLabel || urlParam('qa_label') || urlParam('qaLabel'), 80);
+    }
+
+    function parentOriginFromReferrer() {
+      try {
+        return new URL(document.referrer || '').origin;
+      } catch (error) {
+        return '';
+      }
+    }
+
+    function allowedParentOrigin(origin) {
+      return Boolean(origin) && BOUNCER_PARENT_ORIGINS.has(origin);
+    }
+
+    function validBouncerEventName(eventName) {
+      return /^bw_berlin_bouncer_[a-z0-9_]{1,90}$/.test(String(eventName || ''));
+    }
+
+    function isRunScopedEvent(eventName) {
+      return /^bw_berlin_bouncer_(start|choice|timeout|result|replay|share|share_opened|share_success|share_cancelled|share_failed)$/.test(String(eventName || ''));
+    }
+
+    function normalizeParentContext(input) {
+      const source = input && typeof input === 'object' ? input : {};
+      const numberValue = Number(source.parentViewportWidth || 0);
+      const viewportWidth = Number.isFinite(numberValue) && numberValue > 0 ? Math.round(numberValue) : '';
+      const deviceClass = ['mobile', 'tablet', 'desktop', 'unknown'].includes(String(source.deviceClass || '').toLowerCase())
+        ? String(source.deviceClass).toLowerCase()
+        : '';
+      return {
+        parentPath: safeTelemetryValue(source.parentPath, 400),
+        parentUrl: safeTelemetryValue(source.parentUrl, 700),
+        pageSessionId: safeTelemetryValue(source.pageSessionId, 140),
+        referrerDomain: safeTelemetryValue(source.referrerDomain, 180),
+        parentViewportWidth: viewportWidth,
+        deviceClass,
+        experimentVariant: safeTelemetryValue(source.experimentVariant, 60),
+        challengeId: safeTelemetryValue(source.challengeId, 100),
+        analyticsConsent: ['granted', 'denied', 'unknown'].includes(String(source.analyticsConsent || '').toLowerCase())
+          ? String(source.analyticsConsent).toLowerCase()
+          : 'unknown',
+        isQa: Boolean(source.isQa),
+        qaLabel: safeTelemetryValue(source.qaLabel, 80),
+        sourceContext: safeTelemetryValue(source.sourceContext, 80),
+        utmSource: safeTelemetryValue(source.utmSource, 120),
+        utmMedium: safeTelemetryValue(source.utmMedium, 120),
+        utmCampaign: safeTelemetryValue(source.utmCampaign, 180),
+        utmContent: safeTelemetryValue(source.utmContent, 180),
+        utmTerm: safeTelemetryValue(source.utmTerm, 180)
+      };
+    }
+
+    function currentDeviceClass() {
+      const parentWidth = Number(trackingContext.parentViewportWidth || 0);
+      const width = parentWidth || Number(window.innerWidth || document.documentElement.clientWidth || 0);
+      if (!width) return 'unknown';
+      if (width < 700) return 'mobile';
+      if (width < 1024) return 'tablet';
+      return 'desktop';
+    }
+
+    function currentRunPayload(detail = {}) {
+      return Object.assign({
+        runId,
+        runIndex,
+        pageSessionId: trackingContext.pageSessionId || '',
+        parentPath: trackingContext.parentPath || urlParam('parent_path'),
+        parentUrl: trackingContext.parentUrl || urlParam('parent_url'),
+        deviceClass: currentDeviceClass(),
+        parentViewportWidth: trackingContext.parentViewportWidth || '',
+        experimentVariant: trackingContext.experimentVariant || urlParam('experiment_variant') || '',
+        challengeId: activeChallengeId || trackingContext.challengeId || urlParam('challenge') || '',
+        timedMode,
+        timed: timedMode,
+        referrerDomain: trackingContext.referrerDomain || '',
+        analyticsConsent: analyticsConsentState(),
+        isQa: isQaRun(),
+        qaLabel: qaLabel(),
+        sourceContext: trackingContext.sourceContext || urlParam('source') || 'berlin_bouncer_widget'
+      }, detail);
+    }
+
+    function postParentReady() {
+      if (!window.parent || window.parent === window) return;
+      const targetOrigin = parentOriginFromReferrer();
+      try {
+        window.parent.postMessage({ type: BOUNCER_READY_MESSAGE }, allowedParentOrigin(targetOrigin) ? targetOrigin : '*');
+      } catch (error) {
+        /* Context is optional outside the Wix wrapper. */
+      }
+    }
+
+    function maybeTrackVisible() {
+      if (!visibilityEligible || visibilityTracked) return;
+      if (!trackingEndpoint()) return;
+      const pageSession = trackingContext.pageSessionId || 'standalone';
+      const dedupeKey = `${TRACKING_VISIBLE_KEY}:${pageSession}`;
+      if (sessionGet(dedupeKey) === '1') {
+        visibilityTracked = true;
+        return;
+      }
+      visibilityTracked = true;
+      sessionSet(dedupeKey, '1');
+      sendBouncerEvent('bw_berlin_bouncer_visible', {
+        visibilityRatio: '0.5',
+        visibilityDurationMs: 1000,
+        eligibility: 'game_visible'
+      });
+    }
+
+    function handleParentMessage(event) {
+      if (!event || event.source !== window.parent || !allowedParentOrigin(event.origin)) return;
+      const data = event.data && typeof event.data === 'object' ? event.data : null;
+      if (!data) return;
+      if (data.type === BOUNCER_CONTEXT_MESSAGE) {
+        trackingContext = normalizeParentContext(data.context);
+        parentContextReceived = true;
+        maybeTrackVisible();
+        return;
+      }
+      if (data.type === BOUNCER_VISIBLE_MESSAGE) {
+        visibilityEligible = true;
+        maybeTrackVisible();
+        return;
+      }
+      if (data.type === BOUNCER_TRACK_MESSAGE && validBouncerEventName(data.eventName)) {
+        const payload = data.payload && typeof data.payload === 'object' ? data.payload : {};
+        sendBouncerEvent(data.eventName, currentRunPayload(payload));
+      }
+    }
+
+    window.addEventListener('message', handleParentMessage);
+    postParentReady();
+    window.setTimeout(postParentReady, 0);
+    window.setTimeout(postParentReady, 250);
+
+    function berlinDatePart(date = new Date()) {
+      try {
+        const parts = new Intl.DateTimeFormat('en-CA', {
+          timeZone: 'Europe/Berlin',
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
+        }).formatToParts(date);
+        const map = Object.fromEntries(parts.map(part => [part.type, part.value]));
+        return `${map.year}-${map.month}-${map.day}`;
+      } catch (error) {
+        return date.toISOString().slice(0, 10);
+      }
+    }
+
+    function hashSeed(value) {
+      let hash = 2166136261;
+      const text = String(value || '');
+      for (let i = 0; i < text.length; i += 1) {
+        hash ^= text.charCodeAt(i);
+        hash = Math.imul(hash, 16777619);
+      }
+      return hash >>> 0;
+    }
+
+    function seededRandom(seed) {
+      let state = hashSeed(seed) || 1;
+      return () => {
+        state = (state + 0x6D2B79F5) | 0;
+        let value = Math.imul(state ^ (state >>> 15), 1 | state);
+        value ^= value + Math.imul(value ^ (value >>> 7), 61 | value);
+        return ((value ^ (value >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+
+    function challengeIdFromUrl() {
+      const supplied = safeTelemetryValue(trackingContext.challengeId || urlParam('challenge') || urlParam('challengeId'), 100);
+      return supplied || `berghain-${berlinDatePart()}`;
+    }
+
+    function randomPhaseIndex(length) {
+      if (!length) return -1;
+      const random = runRandom || Math.random;
+      return Math.floor(random() * length);
+    }
+
+    function isPaidAttribution(utmMedium, utmCampaign) {
+      const medium = String(utmMedium || '').toLowerCase();
+      const campaign = String(utmCampaign || '').toLowerCase();
+      return /paid|cpc|ppc|ad|ads|meta|facebook|instagram/.test(medium) ||
+        /paid|campaign|lead|conversion|meta|facebook|instagram/.test(campaign) ||
+        Boolean(urlParam('fbclid'));
+    }
+
+    function trackingEndpoint() {
+      const explicitLocalTracking = urlParam('tracking') === 'local' || urlParam('local_tracking') === '1';
+      if (/^(localhost|127\.0\.0\.1)$/.test(window.location.hostname)) {
+        if (explicitLocalTracking) return TRACKING_ENDPOINT_LOCAL;
+        return '';
+      }
+      if (analyticsConsentState() !== 'granted') return '';
+      return TRACKING_ENDPOINT_PROD;
+    }
+
+    function sendBouncerEvent(eventName, detail = {}, options = {}) {
+      if (isRunScopedEvent(eventName) && runId && !runTrackingEligible) return Promise.resolve(null);
+      const endpoint = trackingEndpoint();
+      if (!endpoint) return Promise.resolve(null);
+      const timestamp = new Date().toISOString();
+      const utmSource = trackingContext.utmSource || urlParam('utm_source');
+      const utmMedium = trackingContext.utmMedium || urlParam('utm_medium');
+      const utmCampaign = trackingContext.utmCampaign || urlParam('utm_campaign');
+      const utmContent = trackingContext.utmContent || urlParam('utm_content');
+      const utmTerm = trackingContext.utmTerm || urlParam('utm_term');
+      const parentPath = trackingContext.parentPath || urlParam('parent_path');
+      const parentUrl = trackingContext.parentUrl || urlParam('parent_url');
+      const referrerDomain = trackingContext.referrerDomain || '';
+      const payload = currentRunPayload(Object.assign({}, detail));
+      const body = {
+        eventName,
+        eventId: `${trackingSessionId()}:${eventName}:${++trackingSequence}`,
+        sessionId: trackingSessionId(),
+        visitorId: trackingVisitorId(),
+        timestamp,
+        eventDate: berlinDatePart(new Date(timestamp)),
+        pagePath: window.location.pathname,
+        pageUrl: window.location.href,
+        parentPath,
+        parentUrl,
+        referrer: referrerDomain,
+        referrerDomain,
+        landingPage: trackingLandingPage(),
+        firstPage: trackingLandingPage(),
+        utmSource,
+        utmMedium,
+        utmCampaign,
+        utmContent,
+        utmTerm,
+        fbclid: urlParam('fbclid'),
+        isPaid: isPaidAttribution(utmMedium, utmCampaign),
+        sourceContext: isQaRun() ? 'codex_smoke' : (trackingContext.sourceContext || urlParam('source') || 'berlin_bouncer_widget'),
+        screenWidth: String(window.screen && window.screen.width ? window.screen.width : ''),
+        viewportWidth: String(trackingContext.parentViewportWidth || window.innerWidth || document.documentElement.clientWidth || ''),
+        returnStats: Boolean(options.returnStats),
+        payload: Object.assign({
+          source: trackingContext.sourceContext || urlParam('source') || 'berlin_bouncer_widget',
+          context: isQaRun() ? 'codex_smoke' : (trackingContext.sourceContext || urlParam('source') || 'berlin_bouncer_widget'),
+          parentPath,
+          parentUrl,
+          referrerDomain,
+          pageSessionId: trackingContext.pageSessionId || '',
+          deviceClass: currentDeviceClass(),
+          parentViewportWidth: trackingContext.parentViewportWidth || '',
+          experimentVariant: trackingContext.experimentVariant || '',
+          analyticsConsent: analyticsConsentState(),
+          isQa: isQaRun(),
+          qaLabel: qaLabel()
+        }, payload)
+      };
+      const json = JSON.stringify(body);
+      if (!options.returnStats) {
+        try {
+          if (navigator.sendBeacon && window.Blob) {
+            const blob = new Blob([json], { type: 'application/json' });
+            if (navigator.sendBeacon(endpoint, blob)) return Promise.resolve(null);
+          }
+        } catch (error) {
+          /* Fall through to fetch. */
+        }
+      }
+      try {
+        return window.fetch(endpoint, {
+          method: 'POST',
+          mode: 'cors',
+          keepalive: !options.returnStats,
+          headers: { 'Content-Type': 'application/json' },
+          body: json
+        }).then(response => {
+          if (!options.returnStats || !response.ok) return null;
+          return response.json().catch(() => null);
+        }).catch(() => null);
+      } catch (error) {
+        return Promise.resolve(null);
+      }
+    }
+
+    function publicShareUrl() {
+      const base = urlParam('parent_url') || 'https://www.berlinwalk.com/games/berghain-bouncer';
+      try {
+        const url = new URL(base, window.location.href);
+        url.search = '';
+        url.hash = '';
+        url.searchParams.set('challenge', activeChallengeId || challengeIdFromUrl());
+        return url.toString();
+      } catch (error) {
+        return `https://www.berlinwalk.com/games/berghain-bouncer?challenge=${encodeURIComponent(activeChallengeId || challengeIdFromUrl())}`;
+      }
+    }
+
+    function trackResultTourClick() {
+      sendBouncerEvent('bw_berlin_bouncer_tour_cta_click', {
+        ctaName: 'historic_centre_tour',
+        targetPath: '/book-berlin-walking-tour/berlin-free-walking-tour-tip-based',
+        href: 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based'
+      });
+    }
+
+    function showShareToast(message, isError = false) {
+      const toast = document.getElementById('share-toast');
+      if (!toast) return;
+      toast.textContent = message;
+      toast.classList.toggle('is-error', isError);
+      toast.classList.add('is-visible');
+      clearTimeout(shareToastTimeout);
+      shareToastTimeout = setTimeout(() => {
+        toast.classList.remove('is-visible');
+      }, 2600);
+    }
+
+    function flashShareButton(label) {
+      const button = document.getElementById('share-result-btn');
+      if (!button) return;
+      const original = button.dataset.originalLabel || button.textContent;
+      button.dataset.originalLabel = original;
+      button.textContent = label;
+      setTimeout(() => {
+        button.textContent = button.dataset.originalLabel || 'CHALLENGE A FRIEND';
+      }, 1800);
+    }
+
+    function copyViaTextArea(text) {
+      const area = document.createElement('textarea');
+      area.value = text;
+      area.setAttribute('readonly', '');
+      area.style.position = 'fixed';
+      area.style.left = '-9999px';
+      area.style.top = '0';
+      document.body.appendChild(area);
+      area.select();
+      area.setSelectionRange(0, area.value.length);
+      let copied = false;
+      try {
+        copied = document.execCommand('copy');
+      } catch (error) {
+        copied = false;
+      }
+      document.body.removeChild(area);
+      return copied;
+    }
+
+    async function runShareOperation(operation) {
+      let timeoutId;
+      try {
+        return await Promise.race([
+          Promise.resolve().then(operation),
+          new Promise((resolve, reject) => {
+            timeoutId = setTimeout(() => {
+              const error = new Error('Share operation timed out.');
+              error.name = 'TimeoutError';
+              reject(error);
+            }, SHARE_OPERATION_TIMEOUT_MS);
+          })
+        ]);
+      } finally {
+        clearTimeout(timeoutId);
+      }
+    }
+
+    async function loadData() {
+      try {
+        const response = await fetch('data.json');
+        gameData = await response.json();
+      } catch (err) {
+        console.error("Failed to load game data:", err);
+      }
+    }
+    
+    function startBackgroundMusic() {
+      if (bgmAudio) {
+        bgmAudio.play().catch(e => console.log("Audio play blocked by browser:", e));
+        return;
+      }
+      bgmAudio = new Audio('assets/audio/techno_loop.wav');
+      bgmAudio.loop = true;
+      bgmAudio.volume = 0.4;
+      bgmAudio.play().catch(e => console.log("Audio play blocked by browser:", e));
+    }
+
+    function beginRun(isReplay = false, previousRunId = '') {
+      if (!gameData) return;
+      score = 0;
+      stepCount = 0;
+      currentPhaseId = 'outfit';
+      runIndex += 1;
+      runId = randomId('bbouncer_run');
+      runMode = isReplay ? 'random' : (urlParam('challenge') || urlParam('challengeId') ? 'shared' : 'daily');
+      activeChallengeId = isReplay ? randomId('berghain-random') : challengeIdFromUrl();
+      activeChallengeSeed = String(hashSeed(activeChallengeId));
+      runRandom = seededRandom(`${activeChallengeSeed}:${runIndex}`);
+      runStartedAt = Date.now();
+      runResultRecorded = false;
+      runTrackingEligible = Boolean(trackingEndpoint());
+      currentQuestionMeta = {};
+      currentResultPersona = null;
+      runCompletionReason = 'choice';
+      const resultArt = document.getElementById('result-art');
+      if (resultArt) resultArt.hidden = true;
+      if (!isReplay) {
+        const mode = document.getElementById('untimed-mode');
+        timedMode = !(mode && mode.checked);
+      }
+      startBackgroundMusic();
+      document.getElementById('start-screen').style.display = 'none';
+      document.getElementById('game-container').style.display = 'flex';
+      document.getElementById('result-container').style.display = 'none';
+      document.getElementById('progress').style.display = 'block';
+      if (isReplay) {
+        sendBouncerEvent('bw_berlin_bouncer_replay', {
+          previousRunId,
+          nextRunId: runId,
+          nextRunIndex: runIndex,
+          challengeId: activeChallengeId,
+          runMode,
+          timedMode
+        });
+      }
+      sendBouncerEvent('bw_berlin_bouncer_start', {
+        score_start: score,
+        step_count: stepCount,
+        runId,
+        runIndex,
+        challengeId: activeChallengeId,
+        challengeSeed: activeChallengeSeed,
+        runMode,
+        timedMode,
+        timed: timedMode
+      });
+      showPhase();
+    }
+
+    function startGame() {
+      if (!gameData || runId) return;
+      beginRun(false);
+    }
+
+    function replayGame() {
+      if (!gameData || !runId) return;
+      const previousRunId = runId;
+      beginRun(true, previousRunId);
+    }
+    
+    // Typewriter effect
+    let typeTimeout;
+    function typeText(element, text, speed = 30) {
+      clearTimeout(typeTimeout);
+      element.textContent = '';
+      const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduceMotion) {
+        element.textContent = text;
+        return;
+      }
+      let i = 0;
+      function typeWriter() {
+        if (i < text.length) {
+          element.textContent += text.charAt(i);
+          i++;
+          typeTimeout = setTimeout(typeWriter, speed);
+        }
+      }
+      typeWriter();
+    }
+
+    function optimizedAsset(path, extension = 'webp') {
+      const match = String(path || '').match(/^assets\/([^/]+)\.png$/);
+      return match ? `assets/optimized/${match[1]}.${extension}` : String(path || '');
+    }
+
+    function appendResponsiveImage(parent, path, alt, loading = 'lazy') {
+      const picture = document.createElement('picture');
+      const avif = document.createElement('source');
+      avif.type = 'image/avif';
+      avif.srcset = optimizedAsset(path, 'avif');
+      const webp = document.createElement('source');
+      webp.type = 'image/webp';
+      webp.srcset = optimizedAsset(path, 'webp');
+      const image = document.createElement('img');
+      image.src = path;
+      image.alt = alt || '';
+      image.loading = loading;
+      if (loading === 'eager') image.fetchPriority = 'high';
+      picture.append(avif, webp, image);
+      parent.appendChild(picture);
+      return image;
+    }
+
+    function setSceneArt(path) {
+      const image = document.getElementById('scene-art-img');
+      const avif = document.getElementById('scene-art-avif');
+      const webp = document.getElementById('scene-art-webp');
+      if (!image || !path) return;
+      if (avif) avif.srcset = optimizedAsset(path, 'avif');
+      if (webp) webp.srcset = optimizedAsset(path, 'webp');
+      image.src = path;
+    }
+
+    function loadResultCard(path, alt) {
+      const image = document.getElementById('result-art');
+      const avif = document.getElementById('result-art-avif');
+      const webp = document.getElementById('result-art-webp');
+      if (!image || !path) return;
+      if (avif) avif.srcset = optimizedAsset(path, 'avif');
+      if (webp) webp.srcset = optimizedAsset(path, 'webp');
+      image.src = path;
+      image.alt = alt || 'Fictional Berghain simulator result card';
+      image.hidden = false;
+    }
+
+    function prefetchAsset(path) {
+      if (!path) return;
+      const image = new Image();
+      image.src = optimizedAsset(path, 'webp');
+    }
+
+    function prefetchPhaseAssets(phaseId) {
+      const phase = gameData && gameData.phases && gameData.phases[phaseId];
+      if (!phase) return;
+      const questions = phase.randomPool || [phase];
+      const assets = questions.flatMap(question => (question.options || []).map(option => option.image)).filter(Boolean);
+      const work = () => assets.forEach(prefetchAsset);
+      if (typeof window.requestIdleCallback === 'function') window.requestIdleCallback(work, { timeout: 600 });
+      else window.setTimeout(work, 120);
+    }
+    
+    function triggerShake() {
+      simContainer.classList.remove('shake');
+      void simContainer.offsetWidth; // trigger reflow
+      simContainer.classList.add('shake');
+    }
+
+    function setBackground(state) {
+      simContainer.classList.remove('club-lights');
+      if (state === 'idle' || state === 'queue') {
+        setSceneArt('assets/bouncer_idle.png');
+        if (state === 'idle') simContainer.classList.add('club-lights');
+      } else if (state === 'suspicious') {
+        setSceneArt('assets/bouncer_suspicious.png');
+        simContainer.classList.add('club-lights');
+      } else if (state === 'success' || state === 'vip') {
+        setSceneArt('assets/success.png');
+      } else if (state === 'fail' || state === 'shame') {
+        setSceneArt('assets/fail.png');
+      } else {
+        setSceneArt('assets/berghain_exterior.png');
+      }
+    }
+    
+    function startTimer(durationMs) {
+      if (!timedMode) {
+        stopTimer();
+        const timerAnnouncement = document.getElementById('timer-announcement');
+        if (timerAnnouncement) timerAnnouncement.textContent = 'Practice mode: countdown paused.';
+        return;
+      }
+      document.getElementById('timer').style.display = 'block';
+      const fill = document.getElementById('timer-fill');
+      fill.style.transition = 'none';
+      fill.style.width = '100%';
+      setTimeout(() => {
+        fill.style.transition = `width ${durationMs}ms linear`;
+        fill.style.width = '0%';
+      }, 50);
+
+      const cdText = document.getElementById('countdown-text');
+      cdText.style.display = 'block';
+      let secLeft = durationMs / 1000;
+      cdText.textContent = secLeft;
+      const timerAnnouncement = document.getElementById('timer-announcement');
+      if (timerAnnouncement) timerAnnouncement.textContent = `${secLeft} second countdown started.`;
+      
+      clearInterval(countdownInterval);
+      countdownInterval = setInterval(() => {
+        secLeft--;
+        if (secLeft > 0) {
+          cdText.textContent = secLeft;
+        } else {
+          clearInterval(countdownInterval);
+        }
+      }, 1000);
+
+      clearTimeout(countdown);
+      countdown = setTimeout(() => {
+        if (runResultRecorded) return;
+        sendBouncerEvent('bw_berlin_bouncer_timeout', {
+          phase: currentQuestionMeta.phaseId || currentPhaseId,
+          questionId: currentQuestionMeta.questionId || '',
+          questionIndex: currentQuestionMeta.questionIndex,
+          timeoutMs: durationMs,
+          stepIndex: stepCount + 1
+        });
+        runCompletionReason = 'timeout';
+        score -= 7;
+        if (timerAnnouncement) timerAnnouncement.textContent = 'Time expired. The fictional door moved on.';
+        showResult("You ran out of time. The fictional door moved on to the next guest.");
+      }, durationMs);
+    }
+
+    function stopTimer() {
+      clearTimeout(countdown);
+      clearInterval(countdownInterval);
+      document.getElementById('timer').style.display = 'none';
+      document.getElementById('countdown-text').style.display = 'none';
+    }
+
+    function showPhase() {
+      if (!gameData.phases[currentPhaseId]) {
+        showResult();
+        return;
+      }
+      
+      const phase = gameData.phases[currentPhaseId];
+      
+      // Handle random pool vs single question
+      let q = phase;
+      let questionIndex = -1;
+      if (phase.randomPool) {
+        questionIndex = randomPhaseIndex(phase.randomPool.length);
+        q = phase.randomPool[questionIndex];
+      }
+      currentQuestionMeta = {
+        phaseId: currentPhaseId,
+        questionIndex,
+        questionId: q.id || `${currentPhaseId}_${questionIndex >= 0 ? questionIndex : 'default'}`,
+        question: q.question || ''
+      };
+      
+      const bState = phase.bouncerState || q.bouncerState || 'none';
+      setBackground(bState);
+      
+      // Start the short timer only at the fictional door.
+      if (bState === 'idle' || bState === 'suspicious') {
+         startTimer(Number(gameData.timerSeconds || 10) * 1000);
+      } else {
+         stopTimer();
+      }
+      
+      const qTextEl = document.getElementById('question-text');
+      typeText(qTextEl, q.question);
+      const announcement = document.getElementById('game-announcement');
+      if (announcement) announcement.textContent = `Question ${stepCount + 1} of 5. ${q.question}`;
+      
+      // Play voice if exists
+      if (currentVoiceAudio) currentVoiceAudio.pause();
+      if (q.audio) {
+        currentVoiceAudio = new Audio(q.audio);
+        currentVoiceAudio.volume = 1.0;
+        currentVoiceAudio.play().catch(e => console.log("Voice blocked:", e));
+      }
+      
+      const grid = document.getElementById('options-grid');
+      grid.innerHTML = '';
+      
+      if (q.viewType === 'cards' || phase.viewType === 'cards') {
+        grid.className = 'options-grid cards-view';
+        q.options.forEach((opt, optionIndex) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'card-btn';
+          btn.setAttribute('aria-label', opt.text);
+          btn.onclick = () => selectOption(opt.score, opt.next, {
+            choice: opt.text,
+            choiceId: opt.id || '',
+            choiceIndex: optionIndex
+          });
+          appendResponsiveImage(btn, opt.image, `${opt.text} choice`, optionIndex === 0 ? 'eager' : 'lazy');
+          const label = document.createElement('div');
+          label.className = 'card-label';
+          label.textContent = opt.text;
+          btn.appendChild(label);
+          grid.appendChild(btn);
+        });
+      } else {
+        grid.className = 'options-grid';
+        q.options.forEach((opt, optionIndex) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'option-btn';
+          btn.textContent = opt.text;
+          btn.onclick = () => selectOption(opt.score, opt.next, {
+            choice: opt.text,
+            choiceId: opt.id || '',
+            choiceIndex: optionIndex
+          });
+          grid.appendChild(btn);
+        });
+      }
+      const firstOption = grid.querySelector('button');
+      if (firstOption) firstOption.focus({ preventScroll: true });
+      updateProgress();
+    }
+    
+    function selectOption(points, nextPhaseId, choiceDetail = {}) {
+      stopTimer();
+      
+      if (points < 0) triggerShake();
+      
+      sendBouncerEvent('bw_berlin_bouncer_choice', {
+        phase: currentQuestionMeta.phaseId || currentPhaseId,
+        questionId: currentQuestionMeta.questionId || '',
+        questionIndex: currentQuestionMeta.questionIndex,
+        choice: safeTelemetryText(choiceDetail.choice, 180),
+        choiceId: safeTelemetryValue(choiceDetail.choiceId, 80),
+        choiceIndex: Number.isFinite(Number(choiceDetail.choiceIndex)) ? Number(choiceDetail.choiceIndex) : '',
+        points,
+        nextPhaseId,
+        stepIndex: stepCount + 1
+      });
+      score += points;
+      stepCount++;
+      
+      if (points <= -100) {
+        showResult();
+        return;
+      }
+      
+      if (nextPhaseId === 'end') {
+        runCompletionReason = 'choice';
+        showResult();
+        return;
+      }
+      
+      currentPhaseId = nextPhaseId;
+      prefetchPhaseAssets(nextPhaseId);
+      
+      showPhase();
+    }
+    
+    function showResult(customMsg = null) {
+      if (runResultRecorded) return;
+      runResultRecorded = true;
+      stopTimer();
+      document.getElementById('game-container').style.display = 'none';
+      document.getElementById('progress').style.display = 'none';
+      
+      const resContainer = document.getElementById('result-container');
+      const titleEl = document.getElementById('result-title');
+      const msgEl = document.getElementById('result-msg');
+      
+      resContainer.style.display = 'flex';
+      
+      let endingKey = 'fail';
+      if (score < Number(gameData.shameThreshold ?? -100)) {
+        endingKey = 'shame';
+      } else if (score < gameData.threshold) {
+        endingKey = 'fail';
+      } else if (score >= gameData.vipThreshold) {
+        endingKey = 'vip';
+      } else if (score >= gameData.threshold) {
+        endingKey = 'success';
+      }
+      
+      setBackground(endingKey);
+      
+      const resData = gameData.results[endingKey];
+      const personaPool = gameData.resultPersonas && gameData.resultPersonas[endingKey] || [];
+      const personaIndex = personaPool.length
+        ? hashSeed(`${activeChallengeId}:${runIndex}:${score}:${stepCount}`) % personaPool.length
+        : 0;
+      currentResultPersona = personaPool[personaIndex] || null;
+      
+      // Handle ending music / audio
+      if (bgmAudio) bgmAudio.pause();
+      if (currentVoiceAudio) currentVoiceAudio.pause();
+      
+      if (resData.audio) {
+        currentVoiceAudio = new Audio(resData.audio);
+        currentVoiceAudio.play().catch(e => console.log(e));
+      }
+      
+      titleEl.textContent = currentResultPersona ? currentResultPersona.title : resData.title;
+      titleEl.className = 'result-title ' + (endingKey === 'success' || endingKey === 'vip' ? 'success' : 'fail');
+      msgEl.textContent = customMsg ? customMsg : resData.message;
+      const personaEl = document.getElementById('result-persona');
+      if (personaEl) personaEl.textContent = currentResultPersona ? currentResultPersona.reason : '';
+      const scoreEl = document.getElementById('result-score');
+      if (scoreEl) scoreEl.textContent = `${currentResultPersona ? currentResultPersona.scoreLine : 'Door mood'} · ${score} points`;
+      loadResultCard(resData.image, `${currentResultPersona ? currentResultPersona.title : resData.title} fictional result card`);
+      const challengeNote = document.getElementById('challenge-note');
+      if (challengeNote) {
+        challengeNote.textContent = `${runMode === 'daily' ? 'Daily door mood' : (runMode === 'shared' ? 'Shared challenge' : 'Random replay')} · ${activeChallengeId}`;
+      }
+      
+      // Save endingKey globally for sharing
+      window.currentEnding = endingKey;
+
+      fetchGlobalStats(endingKey === 'success' || endingKey === 'vip', runCompletionReason);
+      window.setTimeout(() => titleEl.focus({ preventScroll: true }), 0);
+    }
+    
+    function fetchGlobalStats(isSuccess, completionReason = 'choice') {
+      document.getElementById('global-stats').style.display = 'block';
+      if (!timedMode) {
+        document.getElementById('stats-text').textContent = 'Practice mode result. It is not included in timed door stats.';
+      } else {
+        document.getElementById('stats-text').textContent = 'Updating live door stats...';
+      }
+      sendBouncerEvent('bw_berlin_bouncer_result', {
+        ending: window.currentEnding || '',
+        score,
+        step_count: stepCount,
+        success: isSuccess ? 'true' : 'false',
+        durationMs: runStartedAt ? Math.max(0, Date.now() - runStartedAt) : '',
+        completionReason,
+        questionCount: stepCount,
+        timedMode,
+        timed: timedMode
+      }, { returnStats: timedMode }).then(data => {
+        if (!timedMode) return;
+        const stats = data && data.stats;
+        if (!stats || !stats.total) {
+          document.getElementById('stats-text').innerHTML = isSuccess
+            ? 'Live stats just started today.<br>You are one of the first to get in.'
+            : 'Live stats just started today.<br>Your rejection has been recorded.';
+          return;
+        }
+        const rate = Number(stats.rejectionRate || 0).toFixed(1);
+        const entryRate = Math.max(0, 100 - Number(stats.rejectionRate || 0)).toFixed(1);
+        if (isSuccess) {
+          const gotIn = Number.isFinite(Number(stats.gotIn)) ? Number(stats.gotIn) : Math.max(0, Number(stats.total) - Number(stats.rejected));
+          document.getElementById('stats-text').innerHTML = `Today: ${gotIn} got in out of ${stats.total}.<br>You joined today's ${entryRate}% who got in.`;
+        } else {
+          document.getElementById('stats-text').innerHTML = `Today: ${stats.rejected} rejected out of ${stats.total}.<br>You joined today's ${rate}% rejected.`;
+        }
+      });
+    }
+    
+    async function fallbackCopy(text) {
+      const fullText = `${text} Try it here: ${publicShareUrl()}`;
+      if (navigator.clipboard && window.isSecureContext) {
+        try {
+          await runShareOperation(() => navigator.clipboard.writeText(fullText));
+          sendBouncerEvent('bw_berlin_bouncer_share_success', {
+            ending: window.currentEnding || '',
+            score,
+            step_count: stepCount,
+            method: 'clipboard'
+          });
+          flashShareButton('Copied');
+          showShareToast('Result copied. Paste it anywhere.');
+          return true;
+        } catch (error) {
+          /* Fall through to the legacy copy path. */
+        }
+      }
+      if (copyViaTextArea(fullText)) {
+        sendBouncerEvent('bw_berlin_bouncer_share_success', {
+          ending: window.currentEnding || '',
+          score,
+          step_count: stepCount,
+          method: 'legacy_clipboard'
+        });
+        flashShareButton('Copied');
+        showShareToast('Result copied. Paste it anywhere.');
+        return true;
+      } else {
+        sendBouncerEvent('bw_berlin_bouncer_share_failed', {
+          ending: window.currentEnding || '',
+          score,
+          step_count: stepCount,
+          method: 'clipboard'
+        });
+        flashShareButton('Copy failed');
+        showShareToast('Copy blocked. Use the page link to share your result.', true);
+        return false;
+      }
+    }
+
+    async function resultCardFile() {
+      const image = document.getElementById('result-art');
+      if (!image || !image.src || typeof File !== 'function') return null;
+      try {
+        const response = await fetch(image.currentSrc || image.src);
+        if (!response.ok) return null;
+        const blob = await response.blob();
+        return new File([blob], 'berghain-simulator-' + (window.currentEnding || 'result') + '.webp', {
+          type: blob.type || 'image/webp'
+        });
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function shouldUseNativeShare() {
+      if (!navigator.share) return false;
+      if (parentContextReceived) {
+        return ['mobile', 'tablet'].includes(String(trackingContext.deviceClass || '').toLowerCase());
+      }
+      const coarsePointer = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+      const touchCapable = (navigator.maxTouchPoints || 0) > 0 || 'ontouchstart' in window;
+      return coarsePointer || touchCapable;
+    }
+
+    async function shareResult() {
+      if (shareInFlight) return;
+      shareInFlight = true;
+      try {
+        let statsText = document.getElementById('stats-text').innerText.replace('\n', ' ');
+        if (statsText.includes("Loading")) statsText = "";
+
+        const personaTitle = currentResultPersona && currentResultPersona.title ? currentResultPersona.title : 'a Berlin door mood';
+        const texts = {
+          vip: `My Berghain simulator result: ${personaTitle}. ${statsText}`,
+          success: `My Berghain simulator result: ${personaTitle}. ${statsText}`,
+          fail: `My Berghain simulator result: ${personaTitle}. ${statsText}`,
+          shame: `My Berghain simulator result: ${personaTitle}. ${statsText}`
+        };
+        const text = texts[window.currentEnding] || "Can you get into Berghain?";
+        const useNativeShare = shouldUseNativeShare();
+        const cardFile = useNativeShare ? await resultCardFile() : null;
+        const shareMethod = useNativeShare ? (cardFile ? 'native_file' : 'native') : 'clipboard';
+        sendBouncerEvent('bw_berlin_bouncer_share', {
+          ending: window.currentEnding || '',
+          score,
+          step_count: stepCount,
+          action: useNativeShare ? 'native_share' : 'copy_fallback',
+          method: shareMethod,
+          challengeId: activeChallengeId
+        });
+        sendBouncerEvent('bw_berlin_bouncer_share_opened', {
+          ending: window.currentEnding || '',
+          score,
+          step_count: stepCount,
+          method: shareMethod,
+          challengeId: activeChallengeId
+        });
+
+        if (useNativeShare) {
+          try {
+            const shareData = {
+              title: 'Berghain Simulator',
+              text: text,
+              url: publicShareUrl()
+            };
+            if (cardFile && navigator.canShare && navigator.canShare({ files: [cardFile] })) {
+              shareData.files = [cardFile];
+            }
+            await navigator.share(shareData);
+            sendBouncerEvent('bw_berlin_bouncer_share_success', {
+              ending: window.currentEnding || '',
+              score,
+              step_count: stepCount,
+              method: cardFile ? 'native_file' : 'native',
+              challengeId: activeChallengeId
+            });
+            flashShareButton('Shared');
+            showShareToast('Result shared.');
+          } catch (err) {
+            console.log('Native share not supported or cancelled:', err);
+            const name = err && err.name ? String(err.name) : '';
+            if (name === 'AbortError') {
+              sendBouncerEvent('bw_berlin_bouncer_share_cancelled', {
+                ending: window.currentEnding || '',
+                score,
+                step_count: stepCount,
+                method: 'native',
+                reason: 'dismissed',
+                challengeId: activeChallengeId
+              });
+              flashShareButton('Cancelled');
+              showShareToast('Share cancelled.');
+            } else {
+              await fallbackCopy(text);
+            }
+          }
+        } else {
+          await fallbackCopy(text);
+        }
+      } finally {
+        shareInFlight = false;
+      }
+    }
+    
+    function updateProgress() {
+      const pct = (stepCount / 5) * 100;
+      document.getElementById('progress-fill').style.width = Math.min(pct, 100) + '%';
+    }
+    
+    // Init
+    loadData();
+  </script>
+</body>
+</html>

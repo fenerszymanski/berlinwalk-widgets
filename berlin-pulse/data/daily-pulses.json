@@ -1,0 +1,102 @@
+{
+  "version": "2026-07-08a",
+  "timezone": "Europe/Berlin",
+  "prompts": [
+    {
+      "id": "summer-outside-or-shelter",
+      "title": "Where does Berlin pull you today?",
+      "situation": "The city looks easy from a hotel lobby. Then the U-Bahn heat, the Spree breeze and one sudden cloud make the decision for you.",
+      "guideNote": "My practical move: choose one area and leave yourself a way out if the weather turns.",
+      "options": [
+        { "id": "outside", "label": "Stay outside", "short": "Open air wins", "advice": "Use parks, canals and open squares before the light gets too flat." },
+        { "id": "museum", "label": "Museum shelter", "short": "Go indoors", "advice": "Pick one museum cluster, not three scattered stops." },
+        { "id": "kiosk", "label": "Kiosk pause", "short": "Reset small", "advice": "A cold drink and ten quiet minutes can save the next two hours." },
+        { "id": "water", "label": "Find water shade", "short": "Follow the breeze", "advice": "The Spree, Landwehrkanal or a shady bridge will usually beat a random square." }
+      ]
+    },
+    {
+      "id": "first-day-energy",
+      "title": "What does a first Berlin day need most?",
+      "situation": "Most first days fail from one small thing: too many stops before the city has started to make sense.",
+      "guideNote": "I would anchor the day around Alexanderplatz, Museum Island and Hackescher Markt, then stop pretending you can see everything.",
+      "options": [
+        { "id": "route", "label": "A clear route", "short": "Direction wins", "advice": "Start with a route you can explain in one sentence." },
+        { "id": "food", "label": "Food first", "short": "Eat early", "advice": "Do not make your biggest decisions while hungry." },
+        { "id": "history", "label": "One story", "short": "Context first", "advice": "One good story makes the next five streets easier to read." },
+        { "id": "rest", "label": "A quiet break", "short": "Protect energy", "advice": "A planned pause is better than an accidental collapse." }
+      ]
+    },
+    {
+      "id": "rain-plan",
+      "title": "The sky looks unsure. What wins?",
+      "situation": "Berlin rain rarely asks politely. It arrives just when you are between stations and not quite hungry enough to stop.",
+      "guideNote": "My move is simple: stay near useful transit and choose a Plan B before you need it.",
+      "options": [
+        { "id": "umbrella", "label": "Risk the walk", "short": "Keep moving", "advice": "Fine if your next shelter is under ten minutes away." },
+        { "id": "cafe", "label": "Cafe delay", "short": "Wait it out", "advice": "Best when the rain looks sharp but short." },
+        { "id": "museum", "label": "Museum pivot", "short": "Commit indoors", "advice": "Good when the whole afternoon looks wet." },
+        { "id": "tram", "label": "Ride through it", "short": "Use transit", "advice": "A tram window can be a better Berlin view than a soaked pavement." }
+      ]
+    },
+    {
+      "id": "neighborhood-mood",
+      "title": "Which Berlin neighborhood mood is strongest?",
+      "situation": "A good Berlin day is rarely the whole city. It is usually one district doing exactly what you needed.",
+      "guideNote": "I would not chase six neighborhoods. Pick the mood, then stay with it long enough to notice details.",
+      "options": [
+        { "id": "mitte", "label": "Mitte clarity", "short": "History layer", "advice": "Use it when you want the city to explain itself quickly." },
+        { "id": "kreuzberg", "label": "Kreuzberg drift", "short": "Edges and canals", "advice": "Better when you have time to wander instead of ticking boxes." },
+        { "id": "neukoelln", "label": "Neukoelln evening", "short": "Outside tables", "advice": "Best when the day wants food, streets and a slower finish." },
+        { "id": "prenzlauer", "label": "Prenzlauer calm", "short": "Soft landing", "advice": "Useful when you need Berlin without fighting Berlin." }
+      ]
+    },
+    {
+      "id": "transport-instinct",
+      "title": "Your Berlin transport instinct today?",
+      "situation": "The map looks logical until one platform sign, one lift closure or one tired decision changes the whole trip.",
+      "guideNote": "My rule: if the route needs three clever transfers, make it simpler.",
+      "options": [
+        { "id": "sbahn", "label": "S-Bahn long hop", "short": "Cross the city", "advice": "Good when distance matters more than door-to-door perfection." },
+        { "id": "ubahn", "label": "U-Bahn tunnel", "short": "Stay direct", "advice": "Best when you can avoid a transfer and arrive near the stop." },
+        { "id": "tram", "label": "Tram window", "short": "See the city", "advice": "Take it when the view matters and you are not late." },
+        { "id": "walk", "label": "Just walk", "short": "Trust your feet", "advice": "Often right inside Mitte, especially when two stations are too much effort." }
+      ]
+    },
+    {
+      "id": "food-or-history",
+      "title": "What should you follow first?",
+      "situation": "Berlin gives you food, history and strange little streets at the same time. The mistake is trying to obey all of them.",
+      "guideNote": "I would choose the anchor first, then let the rest orbit around it.",
+      "options": [
+        { "id": "currywurst", "label": "Classic snack", "short": "Fast Berlin", "advice": "Use it as a quick reset, not the whole food plan." },
+        { "id": "doner", "label": "Doener stop", "short": "Proper fuel", "advice": "Better when you need calories before another long walk." },
+        { "id": "memorial", "label": "A serious stop", "short": "Slow down", "advice": "Do it when you can give the place full attention." },
+        { "id": "market", "label": "Market browse", "short": "Follow stalls", "advice": "Works best when the weather and timing are already on your side." }
+      ]
+    },
+    {
+      "id": "night-or-early",
+      "title": "What kind of Berlin evening is this?",
+      "situation": "Berlin nights can be huge, but the best evening is often the one you can still enjoy tomorrow morning.",
+      "guideNote": "My honest advice: choose the night you actually have energy for.",
+      "options": [
+        { "id": "beer", "label": "One beer outside", "short": "Easy night", "advice": "The right bench can beat an overplanned bar crawl." },
+        { "id": "club", "label": "Late door gamble", "short": "Go big", "advice": "Only worth it if you accept the queue and the no." },
+        { "id": "spree", "label": "River walk", "short": "Soft finish", "advice": "Good when the day was full and you still want Berlin." },
+        { "id": "sleep", "label": "Protect tomorrow", "short": "Early win", "advice": "Not glamorous, but often the smartest travel decision." }
+      ]
+    },
+    {
+      "id": "camera-or-memory",
+      "title": "What should you collect today?",
+      "situation": "It is easy to photograph Berlin and still miss what was happening right in front of you.",
+      "guideNote": "I would take the photo, then put the phone down for the next street.",
+      "options": [
+        { "id": "photo", "label": "One strong photo", "short": "Frame it well", "advice": "Make one image you actually want to remember." },
+        { "id": "story", "label": "One good story", "short": "Listen longer", "advice": "A story will outlast a dozen rushed pictures." },
+        { "id": "detail", "label": "Tiny detail", "short": "Look closer", "advice": "Berlin often explains itself through small traces." },
+        { "id": "direction", "label": "A route idea", "short": "Save the path", "advice": "The best souvenir can be knowing where to go next." }
+      ]
+    }
+  ]
+}

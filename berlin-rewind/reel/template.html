@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Berlin Rewind — Reel</title>
+<style>
+/*__FONTS_CSS__*/
+
+:root {
+  --green: #1B5E20;
+  --green-dark: #102414;
+  --yellow: #FFE600;
+  --lime: #7CB342;
+  --cream: #FAFAF5;
+  --paper: #FFFFFF;
+  --ink: #212121;
+  --muted: #556155;
+  --line: #D6E2CE;
+  --red: #E63946;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  background: #1a1a1a;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  font-family: "Space Grotesk", Arial, sans-serif;
+  color: var(--ink);
+  background:
+    linear-gradient(rgba(27, 94, 32, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(27, 94, 32, 0.05) 1px, transparent 1px),
+    var(--cream);
+  background-size: 34px 34px, 34px 34px, auto;
+}
+
+/* ---- header ---- */
+#topbar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 16px;
+  background: linear-gradient(90deg, var(--yellow), var(--lime));
+}
+#header {
+  position: absolute;
+  top: 70px;
+  left: 64px;
+  right: 64px;
+}
+#header .brand {
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 700;
+  font-size: 78px;
+  line-height: 1;
+  color: var(--green-dark);
+  letter-spacing: -1px;
+}
+#header .tagline {
+  margin-top: 14px;
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--muted);
+}
+#header .date-chip {
+  position: absolute;
+  top: 8px;
+  right: 0;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--green-dark);
+  background: var(--paper);
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  padding: 12px 26px;
+}
+
+/* ---- photo card ---- */
+#card {
+  position: absolute;
+  top: 250px;
+  left: 48px;
+  width: 984px;
+  height: 692px;
+  background: var(--paper);
+  border: 2px solid var(--line);
+  border-radius: 22px;
+  padding: 14px;
+  box-shadow: 0 18px 44px rgba(16, 36, 20, 0.14);
+}
+#photo-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--green-dark);
+}
+.photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  filter: saturate(0.92) contrast(1.04);
+  will-change: transform, opacity;
+}
+#photo-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(16, 36, 20, 0.16), rgba(16, 36, 20, 0) 30%, rgba(16, 36, 20, 0) 62%, rgba(16, 36, 20, 0.30));
+  pointer-events: none;
+}
+.card-chip {
+  position: absolute;
+  z-index: 3;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 600;
+  font-size: 25px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 999px;
+  padding: 12px 24px;
+}
+#chip-district {
+  top: 26px;
+  left: 26px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--green-dark);
+}
+#chip-difficulty {
+  top: 26px;
+  left: 220px; /* repositioned by JS */
+  background: rgba(16, 36, 20, 0.86);
+  color: var(--yellow);
+}
+#chip-counter {
+  top: 26px;
+  right: 26px;
+  background: var(--yellow);
+  color: var(--green-dark);
+}
+#credit {
+  position: absolute;
+  z-index: 3;
+  right: 14px;
+  bottom: 12px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 17px;
+  color: rgba(250, 250, 245, 0.92);
+  background: rgba(16, 36, 20, 0.78);
+  border-radius: 8px;
+  padding: 6px 14px;
+}
+
+/* ---- hook overlay ---- */
+.hook-line {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  white-space: nowrap;
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 700;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+#hook1 {
+  top: 400px;
+  font-size: 74px;
+  color: var(--cream);
+  background: rgba(16, 36, 20, 0.88);
+  padding: 22px 46px;
+  border-radius: 16px;
+}
+#hook2 {
+  top: 560px;
+  font-size: 92px;
+  color: var(--green-dark);
+  background: var(--yellow);
+  padding: 20px 52px;
+  border-radius: 16px;
+  transform: rotate(-2deg);
+}
+
+/* ---- question / reveal text ---- */
+#question {
+  position: absolute;
+  top: 986px;
+  left: 64px;
+  right: 64px;
+  text-align: center;
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 600;
+  font-size: 56px;
+  color: var(--green-dark);
+  opacity: 0;
+}
+#reveal-text {
+  position: absolute;
+  top: 962px;
+  left: 90px;
+  right: 90px;
+  text-align: center;
+  opacity: 0;
+}
+#reveal-title {
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 700;
+  font-size: 46px;
+  color: var(--green-dark);
+}
+#reveal-line {
+  margin-top: 16px;
+  font-size: 33px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+/* ---- year counter ---- */
+#year-wrap {
+  position: absolute;
+  top: 1168px;
+  left: 0;
+  right: 0;
+  height: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#year-pill {
+  position: relative;
+  border-radius: 26px;
+  padding: 8px 54px;
+  background: transparent;
+  will-change: transform;
+}
+#year-pill.locked {
+  background: var(--yellow);
+  box-shadow: 0 10px 30px rgba(255, 230, 0, 0.45);
+}
+#year-value {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 700;
+  font-size: 148px;
+  line-height: 1.1;
+  color: var(--green-dark);
+  letter-spacing: 2px;
+}
+
+/* ---- slider ---- */
+#slider {
+  position: absolute;
+  top: 1408px;
+  left: 100px;
+  width: 880px;
+}
+#track {
+  position: relative;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--line);
+}
+#track-fill {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  border-radius: 999px;
+  background: var(--lime);
+}
+#thumb {
+  position: absolute;
+  top: 50%;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--green);
+  border: 5px solid var(--paper);
+  box-shadow: 0 4px 14px rgba(16, 36, 20, 0.35);
+  transform: translate(-50%, -50%);
+  will-change: left;
+}
+#thumb.pulse::after {
+  content: "";
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  border: 4px solid var(--yellow);
+}
+.track-label {
+  position: absolute;
+  top: 26px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 25px;
+  font-weight: 600;
+  color: var(--muted);
+}
+#label-min { left: 0; }
+#label-max { right: 0; }
+
+/* ---- era chips ---- */
+#eras {
+  position: absolute;
+  top: 1508px;
+  left: 64px;
+  right: 64px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+.era-chip {
+  font-family: "Space Grotesk", Arial, sans-serif;
+  font-size: 29px;
+  font-weight: 600;
+  color: var(--green-dark);
+  background: var(--paper);
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  padding: 14px 28px;
+  transition: none;
+}
+.era-chip.active {
+  background: var(--yellow);
+  border-color: var(--green-dark);
+  transform: translateY(-3px);
+}
+
+/* ---- footer ---- */
+#footer {
+  position: absolute;
+  top: 1622px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--muted);
+}
+#footer strong { color: var(--green); font-weight: 600; }
+
+/* ---- CTA ---- */
+#cta {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  opacity: 0;
+  background:
+    linear-gradient(rgba(250, 250, 245, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(250, 250, 245, 0.045) 1px, transparent 1px),
+    var(--green-dark);
+  background-size: 34px 34px, 34px 34px, auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#cta-inner { text-align: center; width: 100%; padding: 0 70px; margin-top: -140px; }
+#cta .cta-brand {
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 700;
+  font-size: 100px;
+  color: var(--cream);
+  letter-spacing: -1px;
+}
+#cta .cta-dash {
+  width: 320px;
+  height: 8px;
+  margin: 44px auto;
+  background: repeating-linear-gradient(90deg, var(--yellow) 0 16px, transparent 16px 28px);
+}
+#cta .cta-line1 {
+  font-size: 46px;
+  font-weight: 600;
+  color: var(--cream);
+}
+#cta .cta-line2 {
+  margin-top: 18px;
+  font-size: 40px;
+  font-weight: 500;
+  color: var(--lime);
+}
+#cta .cta-url {
+  display: inline-block;
+  margin-top: 54px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 37px;
+  font-weight: 600;
+  color: var(--green-dark);
+  background: var(--yellow);
+  border-radius: 999px;
+  padding: 26px 44px;
+}
+#cta .cta-sub {
+  margin-top: 34px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 27px;
+  color: rgba(250, 250, 245, 0.72);
+}
+#cta .cta-credit {
+  position: absolute;
+  bottom: 56px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 20px;
+  color: rgba(250, 250, 245, 0.5);
+}
+.cta-el { opacity: 0; will-change: transform, opacity; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="topbar"></div>
+
+  <div id="header">
+    <div class="brand">Berlin Rewind</div>
+    <div class="tagline">The daily Berlin photo game</div>
+    <div class="date-chip" id="date-chip"></div>
+  </div>
+
+  <div id="card">
+    <div id="photo-frame">
+      <img class="photo" id="photo-a" alt="">
+      <img class="photo" id="photo-b" alt="">
+      <div class="card-chip" id="chip-district"></div>
+      <div class="card-chip" id="chip-difficulty"></div>
+      <div class="card-chip" id="chip-counter"></div>
+      <div id="credit"></div>
+    </div>
+  </div>
+
+  <div class="hook-line" id="hook1">This is Berlin.</div>
+  <div class="hook-line" id="hook2">But&nbsp;when?</div>
+
+  <div id="question">When was this taken?</div>
+  <div id="reveal-text">
+    <div id="reveal-title"></div>
+    <div id="reveal-line"></div>
+  </div>
+
+  <div id="year-wrap">
+    <div id="year-pill"><div id="year-value">1963</div></div>
+  </div>
+
+  <div id="slider">
+    <div id="track">
+      <div id="track-fill"></div>
+      <div id="thumb"></div>
+    </div>
+    <div class="track-label" id="label-min">1900</div>
+    <div class="track-label" id="label-max">2026</div>
+  </div>
+
+  <div id="eras"></div>
+
+  <div id="footer">New photos daily &middot; <strong>berlinwalk.com/games/berlin-rewind</strong></div>
+
+  <div id="cta">
+    <div id="cta-inner">
+      <div class="cta-brand cta-el" id="cta-brand">Berlin Rewind</div>
+      <div class="cta-dash cta-el" id="cta-dash"></div>
+      <div class="cta-line1 cta-el" id="cta-line1">3 photos a day. Guess the year.</div>
+      <div class="cta-line2 cta-el" id="cta-line2">A new set every morning.</div>
+      <div class="cta-el" id="cta-url-wrap"><span class="cta-url">berlinwalk.com/games/berlin-rewind</span></div>
+      <div class="cta-sub cta-el" id="cta-sub">free &middot; in your browser &middot; 2 minutes</div>
+    </div>
+    <div class="cta-credit" id="cta-credit"></div>
+  </div>
+</div>
+
+<script id="reel-data" type="application/json">__REEL_DATA_JSON__</script>
+
+<script>
+(() => {
+  const DATA = JSON.parse(document.getElementById('reel-data').textContent);
+
+  /* ---------- timeline constants (ms) ---------- */
+  const HOOK = 2100;
+  const GUESS = 3800;
+  const REVEAL = 3200;
+  const LAST_EXTRA = 500;
+  const CTA = 4000;
+  const XFADE = 520;          // photo crossfade at beat start
+  const BEAT = GUESS + REVEAL;
+  const N = DATA.photos.length;
+  const DURATION = HOOK + N * BEAT + LAST_EXTRA + CTA;
+
+  const YEAR_MIN = 1900, YEAR_MAX = 2026, YEAR_START = 1963;
+  const ERAS = [
+    { key: 'kaiser', label: 'Kaiser', min: 1900, max: 1918 },
+    { key: 'weimar', label: 'Weimar', min: 1919, max: 1932 },
+    { key: 'war', label: 'War', min: 1933, max: 1945 },
+    { key: 'divided', label: 'Divided', min: 1946, max: 1989 },
+    { key: 'reunified', label: 'Reunified', min: 1990, max: 2026 }
+  ];
+
+  /* ---------- easing ---------- */
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const easeInOut = (u) => u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2;
+  const easeOut = (u) => 1 - Math.pow(1 - u, 3);
+  const popScale = (u) => {           // 1 -> 1.13 -> 1
+    if (u >= 1) return 1;
+    return 1 + 0.13 * Math.sin(Math.PI * clamp(u, 0, 1));
+  };
+
+  /* ---------- year wander paths ---------- */
+  // Human-feeling scrub: overshoot high, swing back low, close in, settle.
+  function yearPath(from, target, flip) {
+    const s = flip ? -1 : 1;
+    const p1 = clamp(target + s * 47, YEAR_MIN, YEAR_MAX);
+    const p2 = clamp(target - s * 22, YEAR_MIN, YEAR_MAX);
+    const p3 = clamp(target + s * 8, YEAR_MIN, YEAR_MAX);
+    // waypoints with normalized segment ends
+    return {
+      points: [from, p1, p2, p3, target],
+      ends: [0.34, 0.60, 0.81, 1.0]
+    };
+  }
+  function yearAt(path, u) {
+    let prevEnd = 0;
+    for (let i = 0; i < path.ends.length; i++) {
+      const end = path.ends[i];
+      if (u <= end || i === path.ends.length - 1) {
+        const local = clamp((u - prevEnd) / (end - prevEnd), 0, 1);
+        const a = path.points[i], b = path.points[i + 1];
+        return a + (b - a) * easeInOut(local);
+      }
+      prevEnd = end;
+    }
+    return path.points[path.points.length - 1];
+  }
+
+  // Precompute per-beat paths (start from previous photo's year).
+  const paths = DATA.photos.map((p, i) => {
+    const from = i === 0 ? YEAR_START : DATA.photos[i - 1].year;
+    return yearPath(from, p.year, i % 2 === 1);
+  });
+
+  /* ---------- els ---------- */
+  const $ = (id) => document.getElementById(id);
+  const els = {
+    photoA: $('photo-a'), photoB: $('photo-b'),
+    chipDistrict: $('chip-district'), chipDifficulty: $('chip-difficulty'), chipCounter: $('chip-counter'),
+    credit: $('credit'),
+    hook1: $('hook1'), hook2: $('hook2'),
+    question: $('question'), revealText: $('reveal-text'),
+    revealTitle: $('reveal-title'), revealLine: $('reveal-line'),
+    yearPill: $('year-pill'), yearValue: $('year-value'),
+    trackFill: $('track-fill'), thumb: $('thumb'),
+    eras: $('eras'),
+    footer: $('footer'),
+    cta: $('cta'),
+    ctaEls: ['cta-brand', 'cta-dash', 'cta-line1', 'cta-line2', 'cta-url-wrap', 'cta-sub'].map($),
+    ctaCredit: $('cta-credit'),
+    dateChip: $('date-chip')
+  };
+
+  /* ---------- static setup ---------- */
+  els.dateChip.textContent = DATA.dateLabel;
+  els.ctaCredit.textContent = 'Photos: ' + DATA.creditSummary;
+  ERAS.forEach((era) => {
+    const chip = document.createElement('div');
+    chip.className = 'era-chip';
+    chip.dataset.era = era.key;
+    chip.textContent = era.label;
+    els.eras.appendChild(chip);
+  });
+  const eraChips = Array.from(els.eras.children);
+
+  // photo slots: even beats -> A, odd beats -> B
+  const slots = [els.photoA, els.photoB];
+  DATA.photos.forEach((p, i) => { slots[i % 2].dataset['src' + i] = ''; });
+
+  const DIFF_COLOR = { easy: '#7CB342', medium: '#FFE600', hard: '#FF8A80' };
+
+  /* ---------- text helpers ---------- */
+  function fade(el, opacity, rise) {
+    el.style.opacity = String(clamp(opacity, 0, 1));
+    if (rise !== undefined) el.style.transform = 'translateY(' + rise + 'px)';
+  }
+  function fadeCentered(el, opacity, rise, extra) {
+    el.style.opacity = String(clamp(opacity, 0, 1));
+    el.style.transform = 'translateX(-50%) translateY(' + (rise || 0) + 'px)' + (extra || '');
+  }
+
+  /* ---------- beat state applied per frame ---------- */
+  function setPhotoContent(i) {
+    const p = DATA.photos[i];
+    els.chipDistrict.textContent = p.districtLabel;
+    els.chipDifficulty.textContent = p.difficulty;
+    els.chipDifficulty.style.color = DIFF_COLOR[p.difficulty] || '#FFE600';
+    els.chipDifficulty.style.left = (26 + els.chipDistrict.offsetWidth + 40) + 'px';
+    els.chipCounter.textContent = 'Photo ' + (i + 1) + '/' + N;
+    els.credit.textContent = p.credit;
+    els.revealTitle.textContent = p.title;
+    els.revealLine.textContent = p.line;
+  }
+
+  function setYear(year, lockedPop) {
+    const y = Math.round(year);
+    els.yearValue.textContent = String(y);
+    const frac = clamp((y - YEAR_MIN) / (YEAR_MAX - YEAR_MIN), 0, 1);
+    els.trackFill.style.width = (frac * 100) + '%';
+    els.thumb.style.left = (frac * 100) + '%';
+    const era = ERAS.find((e) => y >= e.min && y <= e.max);
+    eraChips.forEach((chip) => chip.classList.toggle('active', !!era && chip.dataset.era === era.key));
+    els.yearPill.style.transform = 'scale(' + (lockedPop || 1) + ')';
+  }
+
+  function photoTransform(i, u) {
+    // slow ken-burns per photo, origin varies
+    const origins = ['46% 38%', '54% 46%', '50% 58%'];
+    const el = slots[i % 2];
+    el.style.transformOrigin = origins[i % origins.length];
+    el.style.transform = 'scale(' + (1.05 + 0.09 * u) + ')';
+  }
+
+  /* ---------- main render ---------- */
+  let currentLoaded = [-1, -1]; // which photo index each slot holds
+
+  function ensurePhoto(slotIdx, photoIdx) {
+    if (currentLoaded[slotIdx] !== photoIdx && photoIdx >= 0 && photoIdx < N) {
+      slots[slotIdx].src = DATA.photos[photoIdx].imgData;
+      currentLoaded[slotIdx] = photoIdx;
+    }
+  }
+
+  function render(t) {
+    t = clamp(t, 0, DURATION);
+
+    /* -- which beat are we in -- */
+    let beat = -1, beatT = 0;
+    if (t >= HOOK) {
+      beat = Math.min(N - 1, Math.floor((t - HOOK) / BEAT));
+      beatT = t - HOOK - beat * BEAT;
+    }
+    const inGuess = beat >= 0 && beatT < GUESS;
+    const inReveal = beat >= 0 && beatT >= GUESS;
+
+    /* -- photos: current + previous slot for crossfade -- */
+    const cur = Math.max(0, beat);
+    ensurePhoto(cur % 2, cur);
+    if (cur > 0) ensurePhoto((cur - 1) % 2, cur - 1);
+
+    const curSlot = slots[cur % 2], prevSlot = slots[(cur + 1) % 2];
+    let xf = 1;
+    if (beat > 0 && beatT < XFADE) xf = easeOut(beatT / XFADE);
+    curSlot.style.opacity = String(xf);
+    prevSlot.style.opacity = String(beat > 0 ? 1 - xf : 0);
+    curSlot.style.zIndex = 2;
+    prevSlot.style.zIndex = 1;
+
+    const beatU = beat >= 0 ? clamp(beatT / (BEAT + (beat === N - 1 ? LAST_EXTRA : 0)), 0, 1) : clamp(t / HOOK, 0, 1) * 0.2;
+    photoTransform(cur, beat >= 0 ? beatU : beatU);
+
+    if (beat >= 0) setPhotoContent(beat);
+    else setPhotoContent(0);
+
+    /* -- hook overlays -- */
+    if (t < HOOK + 300) {
+      const a1 = clamp((t - 150) / 300, 0, 1) - clamp((t - (HOOK - 80)) / 220, 0, 1);
+      fadeCentered(els.hook1, a1, 18 * (1 - clamp((t - 150) / 300, 0, 1)));
+      const a2 = clamp((t - 950) / 300, 0, 1) - clamp((t - (HOOK + 60)) / 220, 0, 1);
+      fadeCentered(els.hook2, a2, 18 * (1 - clamp((t - 950) / 300, 0, 1)), ' rotate(-2deg)');
+    } else {
+      els.hook1.style.opacity = '0';
+      els.hook2.style.opacity = '0';
+    }
+
+    /* -- question vs reveal text -- */
+    let qOpacity = 0;
+    if (inGuess) {
+      qOpacity = clamp((beatT - (beat === 0 ? 0 : XFADE * 0.4)) / 320, 0, 1) - clamp((beatT - (GUESS - 260)) / 200, 0, 1);
+    }
+    fade(els.question, qOpacity);
+
+    let rOpacity = 0, rRise = 16;
+    if (inReveal) {
+      const rt = beatT - GUESS;
+      const revealLen = REVEAL + (beat === N - 1 ? LAST_EXTRA : 0);
+      const inU = clamp((rt - 240) / 340, 0, 1);
+      rOpacity = inU - clamp((rt - (revealLen - 300)) / 240, 0, 1);
+      rRise = 16 * (1 - easeOut(inU));
+    }
+    fade(els.revealText, rOpacity, rRise);
+
+    /* -- year + slider -- */
+    if (beat < 0) {
+      setYear(YEAR_START);
+      els.yearPill.classList.remove('locked');
+      els.thumb.classList.remove('pulse');
+    } else if (inGuess) {
+      const u = clamp((beatT - 500) / (GUESS - 500 - 420), 0, 1); // wander window, settle ~420ms before reveal
+      setYear(yearAt(paths[beat], u));
+      els.yearPill.classList.remove('locked');
+      els.thumb.classList.toggle('pulse', u >= 1);
+    } else {
+      const rt = beatT - GUESS;
+      setYear(DATA.photos[beat].year, popScale(rt / 420));
+      els.yearPill.classList.add('locked');
+      els.thumb.classList.remove('pulse');
+    }
+
+    /* -- CTA -- */
+    const ctaStart = DURATION - CTA;
+    if (t >= ctaStart) {
+      const ct = t - ctaStart;
+      els.cta.style.opacity = String(clamp(ct / 480, 0, 1));
+      els.ctaEls.forEach((el, i) => {
+        const local = clamp((ct - 260 - i * 170) / 380, 0, 1);
+        fade(el, local, 22 * (1 - easeOut(local)));
+      });
+    } else {
+      els.cta.style.opacity = '0';
+      els.ctaEls.forEach((el) => fade(el, 0, 22));
+    }
+  }
+
+  /* ---------- ready + playback ---------- */
+  let playing = false, rafId = null, startWall = 0, startT = 0;
+
+  function loop(now) {
+    if (!playing) return;
+    const t = (startT + (now - startWall)) % DURATION;
+    render(t);
+    rafId = requestAnimationFrame(loop);
+  }
+  function play(fromT) {
+    playing = true;
+    startT = fromT !== undefined ? fromT : 0;
+    startWall = performance.now();
+    rafId = requestAnimationFrame(loop);
+  }
+  function pause() {
+    playing = false;
+    if (rafId) cancelAnimationFrame(rafId);
+  }
+
+  window.__seek = (t) => { pause(); render(t); return t; };
+  window.__duration = DURATION;
+  window.__play = play;
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === ' ') { playing ? pause() : play(); e.preventDefault(); }
+    if (e.key === 'r') play(0);
+  });
+  document.addEventListener('click', () => { playing ? pause() : play(); });
+
+  /* fit stage to window for live preview (render uses 1080x1920 viewport = scale 1) */
+  function fit() {
+    const s = Math.min(window.innerWidth / 1080, window.innerHeight / 1920);
+    const stage = document.getElementById('stage');
+    stage.style.transformOrigin = '0 0';
+    stage.style.transform = 'scale(' + s + ')';
+    stage.style.left = ((window.innerWidth - 1080 * s) / 2) + 'px';
+    stage.style.top = ((window.innerHeight - 1920 * s) / 2) + 'px';
+  }
+  window.addEventListener('resize', fit);
+  fit();
+
+  /* preload all photos, then flag ready */
+  Promise.all(DATA.photos.map((p) => new Promise((res) => {
+    const im = new Image();
+    im.onload = res; im.onerror = res;
+    im.src = p.imgData;
+  }))).then(() => document.fonts.ready).then(() => {
+    render(0);
+    window.__ready = true;
+    const auto = new URLSearchParams(location.search).get('still') === null;
+    if (auto) play(0);
+  });
+})();
+</script>
+</body>
+</html>

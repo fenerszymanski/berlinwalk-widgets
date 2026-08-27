@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Self-Guided Prenzlauer Berg Loop — A Half-Day Walk From a Local Guide</title>
+<meta name="description" content="A self-guided half-day walking loop through Prenzlauer Berg: Eberswalder Straße and Konnopke's, the Kulturbrauerei, Kollwitzplatz, the Wasserturm, Kastanienallee and Mauerpark. Tap through the six stops in walking order." />
+<link rel="stylesheet" href="../css/brand.css" />
+<script defer src="../js/brand.js"></script>
+<style>
+  .pbw {
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+    color: var(--bw-text);
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4px 4px 14px;
+    box-sizing: border-box;
+  }
+  .pbw *, .pbw *::before, .pbw *::after { box-sizing: border-box; }
+  .pbw__head {
+    background: var(--bw-green);
+    color: #fff;
+    border-radius: 16px 16px 0 0;
+    padding: 18px 20px 16px;
+  }
+  .pbw__kicker {
+    font-size: 11px; font-weight: 700; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--bw-yellow); margin: 0 0 6px;
+  }
+  .pbw__title { font-size: 21px; font-weight: 800; margin: 0 0 5px; line-height: 1.25; }
+  .pbw__sub { font-size: 13.5px; line-height: 1.5; margin: 0; color: #E8F1E2; }
+  .pbw__body {
+    border: 1px solid var(--bw-border);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    background: var(--bw-white);
+    overflow: hidden;
+  }
+  /* map */
+  .pbw__mapwrap { background: var(--bw-lime-soft); padding: 12px 12px 6px; }
+  .pbw__map { display: block; width: 100%; height: auto; }
+  .pbw__route-done { fill: none; stroke: var(--bw-green); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+  .pbw__route-todo { fill: none; stroke: #B9CDA0; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 2 7; }
+  .pbw__node { cursor: pointer; }
+  .pbw__node-dot { fill: #fff; stroke: #9DB587; stroke-width: 2.5; transition: all .15s ease; }
+  .pbw__node.is-done .pbw__node-dot { fill: var(--bw-lime); stroke: var(--bw-green); }
+  .pbw__node.is-current .pbw__node-dot { fill: var(--bw-yellow); stroke: var(--bw-green); stroke-width: 3; }
+  .pbw__node-num { font-size: 12px; font-weight: 800; fill: var(--bw-green); text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+  .pbw__node.is-current .pbw__node-num { fill: #123D18; }
+  .pbw__node-label { font-size: 10.5px; font-weight: 700; fill: var(--bw-muted); pointer-events: none; }
+  .pbw__node.is-current .pbw__node-label { fill: var(--bw-green); }
+  .pbw__pulse { fill: var(--bw-yellow); opacity: .35; }
+  /* progress */
+  .pbw__prog { display: flex; align-items: center; gap: 8px; padding: 8px 16px 0; }
+  .pbw__prog-bar { flex: 1; height: 6px; background: var(--bw-border); border-radius: 4px; overflow: hidden; }
+  .pbw__prog-fill { height: 100%; background: linear-gradient(90deg, var(--bw-green), var(--bw-lime)); border-radius: 4px; transition: width .25s ease; }
+  .pbw__prog-txt { font-size: 11px; font-weight: 700; color: var(--bw-muted); letter-spacing: .04em; white-space: nowrap; }
+  /* card */
+  .pbw__card { padding: 14px 16px 4px; }
+  .pbw__eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--bw-lime); margin: 0 0 3px; }
+  .pbw__stopname { font-size: 19px; font-weight: 800; margin: 0 0 8px; line-height: 1.2; }
+  .pbw__what { font-size: 14px; line-height: 1.55; margin: 0 0 10px; color: var(--bw-text); }
+  .pbw__do { font-size: 14px; line-height: 1.55; margin: 0 0 12px; color: var(--bw-text); }
+  .pbw__do b { color: var(--bw-green); }
+  .pbw__chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 6px; }
+  .pbw__chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 700; padding: 5px 11px; border-radius: 999px;
+    background: var(--bw-lime-soft); color: var(--bw-green); border: 1px solid var(--bw-border);
+  }
+  .pbw__chip--walk { background: #FFF9CC; color: #123D18; border-color: #F2E27A; }
+  /* controls */
+  .pbw__nav { display: flex; gap: 10px; padding: 12px 16px 14px; }
+  .pbw__btn {
+    flex: 1; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer;
+    padding: 12px 14px; border-radius: 12px; border: 2px solid var(--bw-green);
+    transition: transform .05s ease, background .15s ease;
+  }
+  .pbw__btn:active { transform: translateY(1px); }
+  .pbw__btn--prev { background: #fff; color: var(--bw-green); }
+  .pbw__btn--prev:disabled { opacity: .4; cursor: default; }
+  .pbw__btn--next { background: var(--bw-green); color: #fff; }
+  .pbw__btn--next.is-restart { background: var(--bw-yellow); color: #123D18; border-color: #123D18; }
+  /* end summary */
+  .pbw__end { padding: 4px 16px 10px; }
+  .pbw__end.is-hidden { display: none; }
+  .pbw__endbox { background: var(--bw-green); color: #fff; border-radius: 14px; padding: 16px 18px; }
+  .pbw__endbox h4 { margin: 0 0 6px; font-size: 16px; font-weight: 800; }
+  .pbw__endbox p { margin: 0 0 10px; font-size: 13.5px; line-height: 1.55; color: #E8F1E2; }
+  .pbw__endbox a { color: var(--bw-yellow); font-weight: 800; text-decoration: none; border-bottom: 2px solid rgba(255,230,0,.4); }
+  .pbw__endbox a:hover { border-bottom-color: var(--bw-yellow); }
+  @media (max-width: 430px) {
+    .pbw__title { font-size: 19px; }
+    .pbw__stopname { font-size: 17.5px; }
+    .pbw__node-label { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="pbw">
+  <div class="pbw__head">
+    <p class="pbw__kicker">Berlinwalk.com • Prenzlauer Berg</p>
+    <h2 class="pbw__title">A self-guided Prenzlauer Berg loop</h2>
+    <p class="pbw__sub">Six real stops in walking order, from the U-Bahn to Mauerpark. Tap through them, or pick any dot on the map to jump. About 2.5 km and half a day if you linger.</p>
+  </div>
+
+  <div class="pbw__body">
+    <div class="pbw__mapwrap">
+      <svg class="pbw__map" viewBox="0 0 360 250" role="img" aria-label="Stylised walking map of Prenzlauer Berg with six numbered stops">
+        <!-- soft blocks -->
+        <rect x="0" y="0" width="360" height="250" fill="#F2F8E8"></rect>
+        <g opacity="0.5">
+          <rect x="24" y="26" width="66" height="40" rx="4" fill="#E4EFD3"></rect>
+          <rect x="150" y="18" width="70" height="42" rx="4" fill="#E4EFD3"></rect>
+          <rect x="250" y="70" width="72" height="46" rx="4" fill="#E4EFD3"></rect>
+          <rect x="196" y="150" width="66" height="44" rx="4" fill="#E4EFD3"></rect>
+          <rect x="60" y="150" width="70" height="48" rx="4" fill="#E4EFD3"></rect>
+        </g>
+        <!-- route paths (drawn under nodes). Order: 1 Eberswalder ->2 Kulturbrauerei ->3 Kollwitzplatz ->4 Wasserturm ->5 Kastanienallee ->6 Mauerpark -->
+        <path id="pbwTodo" class="pbw__route-todo" d="M110,70 L188,96 L272,140 L232,196 L108,182 L54,58"></path>
+        <path id="pbwDone" class="pbw__route-done" d=""></path>
+        <g id="pbwNodes"></g>
+      </svg>
+    </div>
+
+    <div class="pbw__prog">
+      <div class="pbw__prog-bar"><div class="pbw__prog-fill" id="pbwFill" style="width:16%"></div></div>
+      <div class="pbw__prog-txt" id="pbwProg">Stop 1 of 6</div>
+    </div>
+
+    <div class="pbw__card">
+      <p class="pbw__eyebrow" id="pbwEyebrow">Stop 1</p>
+      <h3 class="pbw__stopname" id="pbwName">Eberswalder Straße</h3>
+      <p class="pbw__what" id="pbwWhat"></p>
+      <p class="pbw__do" id="pbwDo"></p>
+      <div class="pbw__chips" id="pbwChips"></div>
+    </div>
+
+    <div class="pbw__end is-hidden" id="pbwEnd">
+      <div class="pbw__endbox">
+        <h4>That is the Prenzlauer Berg loop</h4>
+        <p>Roughly 2.5 km, and easily half a day if you stop for coffee and a market. For the old heart of the city on the other side of town, I run a <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_blank" rel="noopener">free walking tour from Alexanderplatz</a>, about 2 hours on foot.</p>
+      </div>
+    </div>
+
+    <div class="pbw__nav">
+      <button class="pbw__btn pbw__btn--prev" id="pbwPrev" disabled>Previous</button>
+      <button class="pbw__btn pbw__btn--next" id="pbwNext">Next stop</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var STOPS = [
+    {
+      name: 'Eberswalder Straße',
+      x: 110, y: 70, lx: 118, ly: 60,
+      what: 'The U2 station under the yellow overground line. This is the corner where the district’s Sunday energy really starts.',
+      do: 'Start with a currywurst at <b>Konnopke’s</b>, the sausage stand tucked under the railway bridge since 1930. Eat it standing up like everyone else.',
+      chips: [{t: 'Konnopke’s: Mon–Sat, closed Sun'}],
+      walk: '3 min walk to the Kulturbrauerei'
+    },
+    {
+      name: 'Kulturbrauerei',
+      x: 188, y: 96, lx: 196, ly: 90,
+      what: 'A huge 1800s red-brick brewery, now a cobbled courtyard of cinemas, music venues and a Sunday street-food market.',
+      do: 'Step into the <b>free Museum in der Kulturbrauerei</b> on everyday life in East Germany. Entry costs nothing and it is one of the most honest small museums in the city.',
+      chips: [{t: 'Museum: free entry, Tue–Sun'}],
+      walk: '5 min walk to Kollwitzplatz'
+    },
+    {
+      name: 'Kollwitzplatz',
+      x: 272, y: 140, lx: 210, ly: 136,
+      what: 'The leafy square that gave Prenzlauer Berg its comfortable, café-lined reputation.',
+      do: 'Come on a <b>Thursday or Saturday</b> for the weekly market of Brandenburg produce and cheese. Any other day, take a bench and just watch the neighbourhood go by.',
+      chips: [{t: 'Market: Thursday + Saturday'}],
+      walk: '4 min walk to the Wasserturm'
+    },
+    {
+      name: 'Wasserturm',
+      x: 232, y: 196, lx: 150, ly: 214,
+      what: 'Berlin’s oldest water tower, built in 1877 and now flats, standing on a small green hill.',
+      do: 'Loop the quiet park around it. A plaque near the base marks the dark early-Nazi history of the machine room below, worth a slow minute.',
+      chips: [{t: 'Free, open park'}],
+      walk: '8 min walk to Kastanienallee'
+    },
+    {
+      name: 'Kastanienallee',
+      x: 108, y: 182, lx: 20, ly: 200,
+      what: 'The café-and-vintage street locals half-jokingly call “Casting Allee” for its steady parade of people-watching.',
+      do: 'Slow down for a coffee, then find <b>Prater Garten</b> at number 7, Berlin’s oldest beer garden, pouring since 1837 under the chestnut trees.',
+      chips: [{t: 'Prater: beer garden, summer'}],
+      walk: '10 min walk to Mauerpark'
+    },
+    {
+      name: 'Mauerpark',
+      x: 54, y: 58, lx: 30, ly: 48,
+      what: 'A strip of the old Berlin Wall death zone, now the city’s most famous Sunday park.',
+      do: 'On a <b>Sunday</b>, dig through the flea market for records and odd treasures, then join the crowd at the open-air Bearpit Karaoke in the afternoon.',
+      chips: [{t: 'Flea market + karaoke: Sundays'}],
+      walk: null
+    }
+  ];
+
+  var idx = 0;
+  var maxReached = 0;
+
+  var nodesG = document.getElementById('pbwNodes');
+  var donePath = document.getElementById('pbwDone');
+  var fill = document.getElementById('pbwFill');
+  var prog = document.getElementById('pbwProg');
+  var eyebrow = document.getElementById('pbwEyebrow');
+  var nameEl = document.getElementById('pbwName');
+  var whatEl = document.getElementById('pbwWhat');
+  var doEl = document.getElementById('pbwDo');
+  var chipsEl = document.getElementById('pbwChips');
+  var endEl = document.getElementById('pbwEnd');
+  var prevBtn = document.getElementById('pbwPrev');
+  var nextBtn = document.getElementById('pbwNext');
+
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  function el(name, attrs) {
+    var e = document.createElementNS(SVGNS, name);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+
+  // build nodes
+  STOPS.forEach(function (s, i) {
+    var g = el('g', { class: 'pbw__node', 'data-i': i });
+    var pulse = el('circle', { class: 'pbw__pulse', cx: s.x, cy: s.y, r: 18 });
+    pulse.style.display = 'none';
+    var dot = el('circle', { class: 'pbw__node-dot', cx: s.x, cy: s.y, r: 12 });
+    var num = el('text', { class: 'pbw__node-num', x: s.x, y: s.y });
+    num.textContent = String(i + 1);
+    var lab = el('text', { class: 'pbw__node-label', x: s.lx, y: s.ly });
+    lab.textContent = s.name;
+    g.appendChild(pulse); g.appendChild(dot); g.appendChild(num); g.appendChild(lab);
+    g.addEventListener('click', function () { go(i); });
+    nodesG.appendChild(g);
+  });
+
+  function donePathData(upto) {
+    var d = 'M' + STOPS[0].x + ',' + STOPS[0].y;
+    for (var i = 1; i <= upto; i++) d += ' L' + STOPS[i].x + ',' + STOPS[i].y;
+    return upto > 0 ? d : '';
+  }
+
+  function render() {
+    var s = STOPS[idx];
+    eyebrow.textContent = 'Stop ' + (idx + 1) + (idx === STOPS.length - 1 ? ' · last stop' : '');
+    nameEl.textContent = s.name;
+    whatEl.textContent = s.what;
+    doEl.innerHTML = s.do;
+    chipsEl.innerHTML = '';
+    s.chips.forEach(function (c) {
+      var span = document.createElement('span');
+      span.className = 'pbw__chip';
+      span.textContent = c.t;
+      chipsEl.appendChild(span);
+    });
+    if (s.walk) {
+      var w = document.createElement('span');
+      w.className = 'pbw__chip pbw__chip--walk';
+      w.textContent = '→ ' + s.walk;
+      chipsEl.appendChild(w);
+    }
+
+    // progress + route to furthest reached
+    fill.style.width = Math.round(((idx + 1) / STOPS.length) * 100) + '%';
+    prog.textContent = 'Stop ' + (idx + 1) + ' of ' + STOPS.length;
+    donePath.setAttribute('d', donePathData(maxReached));
+
+    // node states
+    var groups = nodesG.querySelectorAll('.pbw__node');
+    groups.forEach(function (g, i) {
+      g.classList.toggle('is-current', i === idx);
+      g.classList.toggle('is-done', i < idx || (i <= maxReached && i !== idx));
+      var pulse = g.querySelector('.pbw__pulse');
+      pulse.style.display = i === idx ? '' : 'none';
+    });
+
+    prevBtn.disabled = idx === 0;
+    if (idx === STOPS.length - 1) {
+      nextBtn.textContent = 'Start over';
+      nextBtn.classList.add('is-restart');
+      endEl.classList.remove('is-hidden');
+    } else {
+      nextBtn.textContent = 'Next stop';
+      nextBtn.classList.remove('is-restart');
+      endEl.classList.add('is-hidden');
+    }
+  }
+
+  function go(i) {
+    idx = Math.max(0, Math.min(STOPS.length - 1, i));
+    if (idx > maxReached) maxReached = idx;
+    render();
+  }
+
+  prevBtn.addEventListener('click', function () { go(idx - 1); });
+  nextBtn.addEventListener('click', function () {
+    if (idx === STOPS.length - 1) { idx = 0; maxReached = 0; render(); }
+    else go(idx + 1);
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

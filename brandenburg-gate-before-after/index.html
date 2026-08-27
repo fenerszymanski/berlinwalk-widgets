@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Brandenburg Gate, Then and Now: Drag to Compare</title>
+<meta name="description" content="Drag across the same view of the Brandenburg Gate to fade between a past era and the Gate today. Compare 1945 in ruins and 1961-1989 walled off in the death strip, with one thing to look for when you stand there." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Crect x='12' y='40' width='40' height='6' fill='%23FFE600'/%3E%3Crect x='15' y='16' width='5' height='24' fill='%23E8E4D8'/%3E%3Crect x='24' y='16' width='5' height='24' fill='%23E8E4D8'/%3E%3Crect x='33' y='16' width='5' height='24' fill='%23E8E4D8'/%3E%3Crect x='42' y='16' width='5' height='24' fill='%23E8E4D8'/%3E%3Crect x='13' y='12' width='36' height='5' fill='%23E8E4D8'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-dark:#123D18; --green-mid:#2E7D32;
+    --lime:#7CB342; --light:#C5E1A5; --yellow:#FFE600;
+    --cream:#FAFAF5; --ink:#212121; --line:#E3E8DC; --panel:#F4F7F0;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    font-family:'Montserrat',system-ui,sans-serif;
+    color:var(--ink); background:transparent; line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:680px;margin:0 auto;padding:4px 4px 8px}
+  .card{
+    background:var(--cream); border:1px solid var(--line);
+    border-radius:18px; overflow:hidden;
+    box-shadow:0 10px 30px rgba(18,61,24,.10);
+  }
+  .head{
+    background:linear-gradient(135deg,var(--green) 0%,var(--green-mid) 100%);
+    color:#fff; padding:16px 18px 14px;
+  }
+  .kicker{
+    display:inline-block; font-size:11px; font-weight:800; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--green-dark);
+    background:var(--yellow); padding:3px 9px; border-radius:999px;
+  }
+  .head h2{margin:9px 0 3px; font-size:19px; font-weight:800; line-height:1.2}
+  .head p{margin:0; font-size:13px; color:#DDECD5}
+
+  /* Era chips */
+  .chips{display:flex; gap:8px; padding:12px 14px 4px; flex-wrap:wrap}
+  .chip{
+    flex:1 1 0; min-width:140px; cursor:pointer;
+    border:1.5px solid var(--line); background:#fff; border-radius:12px;
+    padding:9px 11px; text-align:left; font-family:inherit; transition:.15s;
+  }
+  .chip:hover{border-color:var(--lime)}
+  .chip.active{border-color:var(--green); background:#F1F7EC; box-shadow:0 3px 10px rgba(27,94,32,.12)}
+  .chip .yr{font-size:12px; font-weight:800; color:var(--green); letter-spacing:.02em}
+  .chip .lb{font-size:12.5px; font-weight:600; color:var(--ink); margin-top:1px}
+
+  /* Stage */
+  .stage-wrap{padding:8px 14px 2px}
+  .stage{
+    position:relative; width:100%; aspect-ratio:3/2; border-radius:14px;
+    overflow:hidden; background:#0d0d0d; user-select:none; touch-action:pan-y;
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,.15);
+  }
+  .stage img{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; display:block;
+  }
+  #imgNow{object-position:center 44%; z-index:1}
+  .then{z-index:2; will-change:opacity}
+  #then1945{object-position:center 46%}
+  #then1982{object-position:center 50%}
+  .stage.grabbing{cursor:grabbing}
+  .stage{cursor:grab}
+  /* era caption tags on the image */
+  .tag{
+    position:absolute; top:10px; z-index:4; font-size:11px; font-weight:800;
+    letter-spacing:.06em; text-transform:uppercase; padding:4px 9px;
+    border-radius:999px; backdrop-filter:blur(3px);
+  }
+  .tag-then{left:10px; background:rgba(18,18,18,.66); color:#fff}
+  .tag-now{right:10px; background:var(--yellow); color:var(--green-dark)}
+  .hint{
+    position:absolute; left:50%; bottom:12px; transform:translateX(-50%); z-index:6;
+    font-size:11px; font-weight:800; letter-spacing:.06em; text-transform:uppercase;
+    color:#fff; background:rgba(18,18,18,.55); padding:5px 12px; border-radius:999px;
+    backdrop-filter:blur(3px); pointer-events:none; transition:opacity .25s;
+  }
+  .hint.gone{opacity:0}
+
+  /* Range control */
+  .rangebox{padding:12px 16px 4px}
+  .rlabels{display:flex; justify-content:space-between; font-size:11.5px; font-weight:800; letter-spacing:.05em; text-transform:uppercase}
+  .rlabels .l{color:var(--ink)} .rlabels .r{color:var(--green)}
+  input[type=range]{
+    -webkit-appearance:none; appearance:none; width:100%; height:8px; margin:8px 0 0;
+    background:linear-gradient(90deg,#9a9a9a,var(--lime)); border-radius:999px; cursor:pointer;
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none; width:26px; height:26px; border-radius:50%;
+    background:var(--green); border:3px solid #fff; box-shadow:0 2px 6px rgba(0,0,0,.3); cursor:pointer;
+  }
+  input[type=range]::-moz-range-thumb{
+    width:26px; height:26px; border-radius:50%; background:var(--green);
+    border:3px solid #fff; box-shadow:0 2px 6px rgba(0,0,0,.3); cursor:pointer;
+  }
+
+  /* Explainer panel */
+  .panel{margin:12px 14px 6px; background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:13px 15px}
+  .panel h3{margin:0 0 5px; font-size:15px; font-weight:800; color:var(--green-dark)}
+  .panel p{margin:0 0 9px; font-size:13.5px; color:#2b3a2b}
+  .look{
+    display:flex; gap:9px; align-items:flex-start;
+    background:var(--yellow); border-radius:11px; padding:10px 12px;
+  }
+  .look svg{flex:0 0 auto; width:18px; height:18px; fill:var(--green-dark); margin-top:1px}
+  .look b{color:var(--green-dark)}
+  .look span{font-size:13px; color:var(--green-dark); font-weight:600}
+
+  .foot{padding:2px 16px 14px; font-size:12px; color:#5c6b5c}
+  .foot a{color:var(--green); font-weight:700; text-decoration:none}
+  .foot a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="head">
+      <span class="kicker">Then &amp; Now</span>
+      <h2>The Brandenburg Gate, then and now</h2>
+      <p>Pick an era, then drag the slider to fade between the Gate back then and the Gate today.</p>
+    </div>
+
+    <div class="chips" id="chips">
+      <button class="chip active" data-era="1945">
+        <div class="yr">1945</div><div class="lb">In ruins after the war</div>
+      </button>
+      <button class="chip" data-era="1982">
+        <div class="yr">1961&ndash;1989</div><div class="lb">Walled off in the death strip</div>
+      </button>
+    </div>
+
+    <div class="stage-wrap">
+      <div class="stage" id="stage">
+        <img id="imgNow" src="img/now.jpg" alt="The Brandenburg Gate today, floodlit at dusk seen from Pariser Platz" />
+        <img id="then1945" class="then" src="img/then-1945.jpg" alt="The Brandenburg Gate standing damaged among ruins in 1945" />
+        <img id="then1982" class="then" src="img/then-1982.jpg" alt="The Brandenburg Gate closed off behind the Berlin Wall barrier in 1982" />
+        <span class="tag tag-then" id="tagThen">1945</span>
+        <span class="tag tag-now">Today</span>
+        <div class="hint" id="hint">Drag to fade</div>
+      </div>
+    </div>
+
+    <div class="rangebox">
+      <div class="rlabels"><span class="l" id="lblThen">1945</span><span class="r">Today</span></div>
+      <input type="range" id="range" min="0" max="100" value="50" aria-label="Fade between the past and the Gate today" />
+    </div>
+
+    <div class="panel">
+      <h3 id="pTitle">1945: a landmark among the ruins</h3>
+      <p id="pBody"></p>
+      <div class="look">
+        <svg viewBox="0 0 24 24"><path d="M12 5c-5 0-9 4.5-10 7 1 2.5 5 7 10 7s9-4.5 10-7c-1-2.5-5-7-10-7zm0 11a4 4 0 110-8 4 4 0 010 8zm0-6a2 2 0 100 4 2 2 0 000-4z"/></svg>
+        <span><b>Stand here:</b> <span id="pLook"></span></span>
+      </div>
+    </div>
+
+    <div class="foot">
+      The Gate faces east into the city. Come from Unter den Linden and it is the last thing before the Tiergarten.
+      Planning the walk? <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based">See the free tour route</a>.
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var ERAS = {
+    "1945": {
+      thenId:"then1945", tag:"1945", label:"1945",
+      title:"1945: a landmark among the ruins",
+      body:"By the end of the war almost every building around Pariser Platz was rubble. The Gate itself was badly damaged, one horse of the Quadriga survived as a single head, and Soviet and Allied soldiers posed under it. It remained one of the few recognisable structures in the ruined square.",
+      look:"Look at the columns up close on the Pariser Platz side. Some of the sandstone still carries filled and patched scars from shrapnel and bullets."
+    },
+    "1982": {
+      thenId:"then1982", tag:"1961–1989", label:"1961–1989",
+      title:"1961–1989: locked inside the death strip",
+      body:"When the Wall went up in 1961 the Gate ended up in the death strip between East and West, closed to everyone for nearly 30 years. This 1982 view is from the eastern side: a barrier, empty ground, and a sign warning that beyond it was a prohibited zone. It reopened on 22 December 1989.",
+      look:"Follow the double row of cobblestones set into the road nearby. That line marks exactly where the Berlin Wall once ran across the city."
+    }
+  };
+
+  var stage=document.getElementById('stage');
+  var range=document.getElementById('range');
+  var hint=document.getElementById('hint');
+  var t1945=document.getElementById('then1945');
+  var t1982=document.getElementById('then1982');
+  var tagThen=document.getElementById('tagThen');
+  var lblThen=document.getElementById('lblThen');
+  var pTitle=document.getElementById('pTitle');
+  var pBody=document.getElementById('pBody');
+  var pLook=document.getElementById('pLook');
+  var current="1945";
+
+  function activeThenEl(){ return current==="1945"? t1945 : t1982; }
+
+  function applyFade(v){
+    // v: 0 = fully the past era, 100 = fully today. Crossfade the THEN image out.
+    var thenEl=activeThenEl();
+    thenEl.style.opacity = (1 - v/100).toFixed(3);
+  }
+
+  function setEra(era){
+    current=era;
+    var e=ERAS[era];
+    // only the active THEN image is on top and clipped; the other is hidden
+    t1945.style.display = era==="1945" ? "block" : "none";
+    t1982.style.display = era==="1982" ? "block" : "none";
+    tagThen.textContent=e.tag;
+    lblThen.textContent=e.label;
+    pTitle.textContent=e.title;
+    pBody.textContent=e.body;
+    pLook.textContent=e.look;
+    // chips
+    var chips=document.querySelectorAll('.chip');
+    chips.forEach(function(c){ c.classList.toggle('active', c.getAttribute('data-era')===era); });
+    applyFade(parseInt(range.value,10));
+  }
+
+  document.getElementById('chips').addEventListener('click',function(ev){
+    var b=ev.target.closest('.chip'); if(!b) return; setEra(b.getAttribute('data-era'));
+  });
+  range.addEventListener('input',function(){ hideHint(); applyFade(parseInt(range.value,10)); });
+
+  // Drag directly on the stage to move the fade
+  function stageToVal(clientX){
+    var r=stage.getBoundingClientRect();
+    var x=Math.min(Math.max(clientX-r.left,0),r.width);
+    return Math.round(x/r.width*100);
+  }
+  var dragging=false;
+  function hideHint(){ hint.classList.add('gone'); }
+  function down(e){ dragging=true; stage.classList.add('grabbing'); hideHint(); move(e); }
+  function move(e){
+    if(!dragging) return;
+    var cx = e.touches? e.touches[0].clientX : e.clientX;
+    var v=stageToVal(cx); range.value=v; applyFade(v);
+  }
+  function up(){ dragging=false; stage.classList.remove('grabbing'); }
+  stage.addEventListener('mousedown',down);
+  window.addEventListener('mousemove',move);
+  window.addEventListener('mouseup',up);
+  stage.addEventListener('touchstart',function(e){down(e);},{passive:true});
+  stage.addEventListener('touchmove',function(e){move(e);},{passive:true});
+  stage.addEventListener('touchend',up);
+
+  setEra("1945");
+  applyFade(50);
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

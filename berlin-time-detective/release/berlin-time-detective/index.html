@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#1b5e20">
+    <title>Berlin Time Detective: A Free Berlin History Game | BerlinWalk</title>
+    <meta name="description" content="Play a free five-mission Berlin history game from Alexanderplatz to Hackescher Markt. Read visual clues, collect field notes and see central Berlin in layers.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://www.berlinwalk.com/games/berlin-time-detective">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="BerlinWalk">
+    <meta property="og:url" content="https://www.berlinwalk.com/games/berlin-time-detective">
+    <meta property="og:title" content="Berlin Time Detective: A Free Berlin History Game">
+    <meta property="og:description" content="Five short evidence cases, 13 real places and one route across Berlin's historic centre.">
+    <meta property="og:image" content="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-time-detective/release/berlin-time-detective/assets/social/berlin-time-detective-social-1200x630.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Berlin Time Detective game screen with a five-mission route through central Berlin">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Berlin Time Detective: A Free Berlin History Game">
+    <meta name="twitter:description" content="Five short evidence cases, 13 real places and one route across Berlin's historic centre.">
+    <meta name="twitter:image" content="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-time-detective/release/berlin-time-detective/assets/social/berlin-time-detective-social-1200x630.jpg">
+    <meta name="twitter:image:alt" content="Berlin Time Detective game screen with a five-mission route through central Berlin">
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","name":"Berlin Time Detective: A Free Berlin History Game","url":"https://www.berlinwalk.com/games/berlin-time-detective","description":"A free five-mission Berlin history game from Alexanderplatz to Hackescher Markt.","isPartOf":{"@type":"WebSite","name":"BerlinWalk","url":"https://www.berlinwalk.com"}},{"@type":"WebApplication","name":"Berlin Time Detective","applicationCategory":"GameApplication","operatingSystem":"Web","url":"https://www.berlinwalk.com/games/berlin-time-detective","image":"https://fenerszymanski.github.io/berlinwalk-widgets/berlin-time-detective/release/berlin-time-detective/assets/social/berlin-time-detective-social-1200x630.jpg","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"publisher":{"@type":"Organization","name":"BerlinWalk","url":"https://www.berlinwalk.com"}}]}</script>
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/mission-1.css">
+  </head>
+  <body>
+    <div id="game-app" data-screen="intro">
+      <div id="game-status-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+      <div id="toast-notification" class="toast-notification" hidden aria-hidden="true"></div>
+
+      <aside id="route-rail" class="route-rail" aria-label="Berlin Time Detective route">
+        <div class="route-rail__header">
+          <img class="wordmark" src="assets/berlinwalk-wordmark-01-brand-green.png" width="1826" height="432" alt="BerlinWalk">
+          <div class="route-rail__label"><span class="eyebrow">Field route</span><strong>5 missions</strong><strong>13 places</strong></div>
+        </div>
+        <nav class="route-nav" aria-label="Mission route">
+          <ol id="route-stop-list" class="route-stop-list"></ol>
+          <span class="route-scroll-cue" aria-hidden="true">Scroll for more missions</span>
+        </nav>
+        <section id="route-map-card" class="route-map-card" aria-labelledby="route-map-title">
+          <div class="route-map-card__heading"><div><span class="eyebrow">Field map</span><h2 id="route-map-title">Historic centre</h2></div><span id="map-progress" class="mono-label">0 / 13 places · 0 / 5 missions</span></div>
+          <div id="route-map" class="route-map" data-completed-places="0">
+            <img id="map-image" src="assets/berlin-mitte-osm-map.png" width="2048" height="2048" alt="Central Berlin field map from the Wikimedia Commons location map">
+            <div id="map-pins" class="map-pins" aria-hidden="true"></div>
+          </div>
+          <p class="map-attribution">Map work <a href="https://commons.wikimedia.org/wiki/File:Location_map_Berlin_central_2.svg" target="_blank" rel="noreferrer">Justin Kunimune, CC0</a>; data <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">© OpenStreetMap contributors</a>, <a href="https://opendatacommons.org/licenses/odbl/1-0/" target="_blank" rel="noreferrer">ODbL</a>.</p>
+        </section>
+        <button id="passport-trigger" class="passport-trigger" type="button" aria-haspopup="dialog"><span class="passport-trigger__overline">Field passport</span><span class="passport-trigger__title">Clues collected</span><span id="passport-trigger-count" class="passport-trigger__count">0 / 5 missions</span></button>
+      </aside>
+
+      <main id="game-main" class="game-main">
+        <header class="game-header"><div class="game-header__copy"><p class="eyebrow">Berlin Time Detective</p><h1>Read Berlin in layers</h1><p class="game-header__subline">See the place, notice a detail, decide, and watch the route change.</p></div><div class="score-card" aria-label="Committed score and mission progress"><div><span id="mission-count" class="score-card__label">0 / 5 missions</span><span id="score-value" class="score-card__value">SCORE 0000</span></div><span class="score-card__rule" aria-hidden="true"></span><span class="score-card__mark">FIELD<br>NOTES</span></div></header>
+        <div class="game-actions" aria-label="Case controls"><button id="info-trigger" class="quiet-button" type="button" aria-haspopup="dialog">How to play</button><button id="audio-toggle" class="quiet-button" type="button" aria-pressed="false" aria-label="Turn audio on">Audio off</button><button id="credits-trigger" class="quiet-button" type="button" aria-haspopup="dialog">Image credits</button><button id="restart-trigger" class="quiet-button" type="button" aria-haspopup="dialog">Restart case</button></div>
+        <section id="case-progress" class="case-progress" aria-label="Your next step"><span class="eyebrow">Your next step</span><strong id="case-progress-title">Mission 1 of 5 · Alexanderplatz</strong><span id="case-progress-copy">Start the first short evidence case. Each clue unlocks one clear next mission.</span></section>
+
+        <section id="intro-panel" class="intro-panel" aria-labelledby="intro-title"><div class="intro-panel__stamp">CASE FILE<br><span>Berlin centre</span></div><div class="intro-panel__copy"><p class="eyebrow">A five-mission field game</p><h2 id="intro-title">Start with one clue</h2><p id="intro-description">Follow five short evidence cases from Alexanderplatz to Hackescher Markt. You only need to focus on one task at a time.</p><ol class="intro-steps"><li><strong>Look</strong><span>Compare the evidence on the page.</span></li><li><strong>Decide</strong><span>Make one choice. A wrong choice never blocks the case.</span></li><li><strong>Continue</strong><span>Collect the clue, then use the yellow button for the next mission.</span></li></ol><p id="intro-current-mission" class="intro-panel__small">Mission 1 is ready: Alexanderplatz, Rotes Rathaus, and the World Clock.</p><button id="start-mission" class="primary-button" type="button" data-mission-id="mission-1">Start Mission 1</button></div></section>
+
+        <section id="mission-view" class="mission-view" hidden aria-labelledby="mission-region-title"><h2 id="mission-region-title" class="sr-only">Active mission</h2><div id="mission-workspace"></div></section>
+        <section id="result-view" class="result-view" hidden aria-labelledby="result-title"></section>
+
+        <footer class="app-footer"><span>Follow the evidence across Berlin's historic centre.</span><span class="app-footer__note">Audio starts off.</span></footer>
+      </main>
+
+      <div id="info-modal" class="modal-layer" role="dialog" aria-modal="true" aria-labelledby="info-modal-title" aria-describedby="info-modal-copy" aria-hidden="true" hidden><section class="modal-card"><button class="modal-close" type="button" data-dialog-close aria-label="Close case information">Close</button><p class="eyebrow">Case guide</p><h2 id="info-modal-title">One clear step at a time</h2><p id="info-modal-copy">Five missions connect thirteen real stops. Every mission follows the same short loop:</p><ol class="modal-steps"><li><strong>Read the task.</strong> It appears at the top of the active mission.</li><li><strong>Choose or arrange the evidence.</strong> A wrong choice records an observation but never locks the game.</li><li><strong>Collect the clue and continue.</strong> The yellow button opens the next mission in route order.</li></ol><p class="modal-note">The field map shows route geography. It does not claim that documentary photographs share one viewpoint.</p><a class="modal-source" href="https://www.berlin.de/en/history/8477225-8619314-the-royal-capital.en.html" target="_blank" rel="noreferrer">Open the Berlin history source</a></section></div>
+
+      <div id="passport-modal" class="modal-layer" role="dialog" aria-modal="true" aria-labelledby="passport-modal-title" aria-describedby="passport-modal-copy" aria-hidden="true" hidden><section class="modal-card passport-modal-card"><button class="modal-close" type="button" data-dialog-close aria-label="Close field passport">Close</button><p class="eyebrow">Field passport</p><h2 id="passport-modal-title">Clues collected</h2><p id="passport-modal-copy">Five pages, one for each mission. Review pages are read-only and do not change a frozen score.</p><p class="passport-total" data-passport-total>Committed score 0000 / 1000</p><div id="passport-list" class="passport-list"></div><button class="outline-button" type="button" data-dialog-close>Return to the case</button></section></div>
+
+      <div id="credits-modal" class="modal-layer" role="dialog" aria-modal="true" aria-labelledby="credits-modal-title" aria-describedby="credits-modal-copy" aria-hidden="true" hidden><section class="modal-card credits-modal-card"><button class="modal-close" type="button" data-dialog-close aria-label="Close image credits">Close</button><p class="eyebrow">Source register</p><h2 id="credits-modal-title">Image credits</h2><p id="credits-modal-copy">Credits are listed for documentary images, the field map, and the five collectible objects. Public credits do not include internal production notes.</p><div id="credits-list" class="credits-list"></div></section></div>
+
+      <div id="restart-modal" class="modal-layer" role="dialog" aria-modal="true" aria-labelledby="restart-modal-title" aria-describedby="restart-modal-copy" aria-hidden="true" hidden><section class="modal-card"><button class="modal-close" type="button" data-dialog-close aria-label="Close restart confirmation">Close</button><p class="eyebrow">Case control</p><h2 id="restart-modal-title">Start a fresh case?</h2><p id="restart-modal-copy">This clears the saved passport only after a successful readback. Cancel keeps the current case unchanged.</p><div class="modal-actions"><button id="restart-cancel" class="outline-button" type="button" data-dialog-close>Cancel</button><button id="restart-confirm" class="primary-button" type="button">Confirm restart</button></div></section></div>
+    </div>
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>

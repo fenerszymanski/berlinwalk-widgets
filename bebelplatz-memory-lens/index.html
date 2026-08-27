@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bebelplatz Stop Planner</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+    }
+
+    body {
+      font-family: Montserrat, Arial, sans-serif;
+      color: #212121;
+    }
+
+    .planner,
+    .planner * {
+      box-sizing: border-box;
+    }
+
+    .planner {
+      --green: #1B5E20;
+      --green-dark: #123B15;
+      --yellow: #FFE600;
+      --cream: #FAFAF5;
+      --paper: #FFFFFF;
+      --line: #DCE8C8;
+      --ink: #212121;
+      --muted: #53624F;
+      width: 100%;
+      max-width: 940px;
+      margin: 0 auto;
+      background: var(--cream);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 16px 38px rgba(18, 59, 21, 0.12);
+    }
+
+    .hero {
+      min-height: 260px;
+      padding: 24px;
+      background:
+        linear-gradient(90deg, rgba(18, 59, 21, 0.94), rgba(18, 59, 21, 0.74) 58%, rgba(18, 59, 21, 0.22)),
+        url("assets/bebelplatz-memory-lens-hero.jpg") center / cover no-repeat;
+      color: #FFFFFF;
+      display: grid;
+      grid-template-columns: minmax(220px, 0.8fr) minmax(260px, 1fr);
+      gap: 20px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      padding: 7px 10px;
+      background: rgba(255, 230, 0, 0.98);
+      color: var(--green);
+      font-size: 11px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 999px;
+    }
+
+    .hero h1 {
+      margin: 12px 0 10px;
+      max-width: 500px;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.03;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 510px;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 15px;
+      line-height: 1.55;
+      font-weight: 650;
+    }
+
+    .choice-panel {
+      justify-self: end;
+      width: min(100%, 460px);
+      background: rgba(250, 250, 245, 0.96);
+      color: var(--ink);
+      border: 1px solid rgba(255, 255, 255, 0.48);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .panel-label {
+      margin: 0 0 9px;
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .choice-panel .panel-label {
+      color: var(--green);
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .time-options,
+    .route-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(136px, 1fr));
+      gap: 8px;
+    }
+
+    .chip {
+      min-height: 42px;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      background: #FFFFFF;
+      color: var(--green);
+      border-radius: 8px;
+      font-size: 13px;
+      line-height: 1.15;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .chip[aria-pressed="true"] {
+      background: var(--green);
+      color: var(--yellow);
+      border-color: var(--green);
+      box-shadow: inset 0 0 0 2px rgba(255, 230, 0, 0.24);
+    }
+
+    .body {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: minmax(280px, 1fr) minmax(250px, 0.78fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .visit-card,
+    .side-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .visit-top {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: start;
+      margin-bottom: 16px;
+    }
+
+    .visit-card h2,
+    .side-card h3 {
+      margin: 0;
+      color: var(--green);
+      letter-spacing: 0;
+    }
+
+    .visit-card h2 {
+      font-size: 24px;
+      line-height: 1.14;
+    }
+
+    .side-card h3 {
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .minute-badge {
+      min-width: 72px;
+      padding: 9px 10px;
+      border-radius: 8px;
+      background: var(--green);
+      color: var(--yellow);
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.1;
+      font-weight: 900;
+    }
+
+    .steps {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .steps li {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 10px;
+      align-items: start;
+      min-height: 44px;
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.45;
+      font-weight: 650;
+    }
+
+    .num {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--yellow);
+      color: var(--green);
+      font-weight: 900;
+      line-height: 1;
+      box-shadow: inset 0 0 0 2px rgba(27, 94, 32, 0.18);
+    }
+
+    .route-line {
+      display: grid;
+      grid-template-columns: 1fr 24px 1fr 24px 1fr;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+      min-width: 0;
+    }
+
+    .route-point {
+      min-height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8px;
+      border-radius: 8px;
+      background: #F2F8E8;
+      color: var(--green);
+      font-size: 13px;
+      line-height: 1.25;
+      font-weight: 900;
+      min-width: 0;
+      overflow-wrap: break-word;
+    }
+
+    .arrow {
+      color: var(--green);
+      font-size: 22px;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .side-stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .side-card p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+      font-weight: 600;
+    }
+
+    .do-list,
+    .dont-list {
+      display: grid;
+      gap: 8px;
+      margin: 10px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .do-list li,
+    .dont-list li {
+      position: relative;
+      padding-left: 22px;
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.4;
+      font-weight: 650;
+    }
+
+    .do-list li::before,
+    .dont-list li::before {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 16px;
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .do-list li::before {
+      content: "+";
+    }
+
+    .dont-list li::before {
+      content: "-";
+      color: #8A3B20;
+    }
+
+    .quote {
+      border-left: 4px solid var(--yellow);
+      background: #F6FAEF;
+    }
+
+    .cta {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      margin-top: 12px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: var(--green);
+      color: var(--yellow);
+      font-size: 13px;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .cta:focus,
+    .cta:hover {
+      background: var(--green-dark);
+      color: var(--yellow);
+    }
+
+    @media (max-width: 760px) {
+      .hero,
+      .body {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: 0;
+        padding: 18px;
+        background:
+          linear-gradient(180deg, rgba(18, 59, 21, 0.96), rgba(18, 59, 21, 0.78)),
+          url("assets/bebelplatz-memory-lens-hero.jpg") center / cover no-repeat;
+      }
+
+      .choice-panel {
+        justify-self: stretch;
+      }
+
+      .body {
+        padding: 14px;
+      }
+
+    }
+
+    @media (max-width: 460px) {
+      .hero h1 {
+        font-size: 29px;
+      }
+
+      .time-options,
+      .route-options,
+      .visit-top {
+        grid-template-columns: 1fr;
+      }
+
+      .chip {
+        min-height: 40px;
+      }
+
+      .route-line {
+        grid-template-columns: 1fr 18px 1fr 18px 1fr;
+        gap: 5px;
+      }
+
+      .route-point {
+        padding: 5px 3px;
+        font-size: 11px;
+      }
+
+      .minute-badge {
+        width: fit-content;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="planner" aria-labelledby="planner-title">
+    <section class="hero">
+      <div>
+        <span class="eyebrow">BerlinWalk tool</span>
+        <h1 id="planner-title">Bebelplatz Stop Planner</h1>
+        <p>Pick how much time you have. I will give you the simple order: look down, read the plaque, then choose your next stop.</p>
+      </div>
+      <div class="choice-panel" aria-label="Bebelplatz visit options">
+        <p class="panel-label">How long are you stopping?</p>
+        <div class="time-options">
+          <button class="chip time-chip" type="button" data-time="5" aria-pressed="false">5 min</button>
+          <button class="chip time-chip" type="button" data-time="15" aria-pressed="true">15 min</button>
+          <button class="chip time-chip" type="button" data-time="30" aria-pressed="false">30 min</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="body">
+      <article class="visit-card" aria-live="polite">
+        <div class="visit-top">
+          <div>
+            <p class="panel-label">Your order on the square</p>
+            <h2 id="plan-title">A calm 15-minute stop</h2>
+          </div>
+          <div class="minute-badge"><span id="minutes">15</span> min</div>
+        </div>
+        <ol class="steps" id="steps"></ol>
+
+        <div class="route-line" aria-label="Simple route line">
+          <div class="route-point" id="route-start">Museum Island</div>
+          <div class="arrow" aria-hidden="true">&rarr;</div>
+          <div class="route-point">Bebelplatz</div>
+          <div class="arrow" aria-hidden="true">&rarr;</div>
+          <div class="route-point" id="route-end">Brandenburg Gate</div>
+        </div>
+      </article>
+
+      <aside class="side-stack">
+        <div class="side-card">
+          <p class="panel-label">Choose your next stop</p>
+          <div class="route-options">
+            <button class="chip route-chip" type="button" data-route="gate" aria-pressed="true">Brandenburg Gate</button>
+            <button class="chip route-chip" type="button" data-route="island" aria-pressed="false">Museum Island</button>
+            <button class="chip route-chip" type="button" data-route="gendarmenmarkt" aria-pressed="false">Gendarmenmarkt</button>
+          </div>
+        </div>
+
+        <div class="side-card">
+          <h3>Do this</h3>
+          <ul class="do-list">
+            <li>Find the glass panel before taking wide photos.</li>
+            <li>Move a little if glare hides the shelves.</li>
+            <li>Read the plaque while you are still on the square.</li>
+          </ul>
+        </div>
+
+        <div class="side-card">
+          <h3>Avoid this</h3>
+          <ul class="dont-list">
+            <li>Do not treat Bebelplatz as only architecture.</li>
+            <li>Do not stand on the glass longer than needed.</li>
+            <li>Do not overload the day with too many heavy stops.</li>
+          </ul>
+        </div>
+
+        <div class="side-card quote">
+          <h3>My quick rule</h3>
+          <p>If you remember only one move here, make it this: look down first, then look around.</p>
+          <a class="cta" href="https://www.berlinwalk.com/post/unter-den-linden-berlin" target="_blank" rel="noopener">Open Unter den Linden guide</a>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script src="../js/brand.js"></script>
+  <script>
+    const state = { time: '15', route: 'gate' };
+
+    const plans = {
+      5: {
+        title: 'A focused 5-minute stop',
+        steps: [
+          'Walk straight to the glass panel in the paving stones.',
+          'Look into the Empty Library below the square.',
+          'Read the plaque, then leave by the clearest next stop.'
+        ]
+      },
+      15: {
+        title: 'A calm 15-minute stop',
+        steps: [
+          'Find the glass panel and shift position until the shelves are visible.',
+          'Read the plaque and the Heine warning near the memorial.',
+          'Make one slow turn: State Opera, St. Hedwig, Humboldt University, Old Library facade.',
+          'Choose one next stop instead of adding every nearby sight.'
+        ]
+      },
+      30: {
+        title: 'A slower 30-minute pause',
+        steps: [
+          'Start with the Empty Library and stay long enough for the absence to register.',
+          'Read the plaque, then walk the square edge by edge.',
+          'Connect the formal buildings with the public book burning of 10 May 1933.',
+          'Leave by one simple route: west to Brandenburg Gate, east to Museum Island, or south to Gendarmenmarkt.'
+        ]
+      }
+    };
+
+    const routes = {
+      gate: {
+        start: 'Museum Island',
+        end: 'Brandenburg Gate'
+      },
+      island: {
+        start: 'Brandenburg Gate',
+        end: 'Museum Island'
+      },
+      gendarmenmarkt: {
+        start: 'Unter den Linden',
+        end: 'Gendarmenmarkt'
+      }
+    };
+
+    function setPressed(selector, value, attr) {
+      document.querySelectorAll(selector).forEach((button) => {
+        button.setAttribute('aria-pressed', String(button.dataset[attr] === value));
+      });
+    }
+
+    function render() {
+      const plan = plans[state.time];
+      const route = routes[state.route];
+      document.getElementById('plan-title').textContent = plan.title;
+      document.getElementById('minutes').textContent = state.time;
+      document.getElementById('steps').innerHTML = plan.steps
+        .map((step, index) => `<li><span class="num">${index + 1}</span><span>${step}</span></li>`)
+        .join('');
+      document.getElementById('route-start').textContent = route.start;
+      document.getElementById('route-end').textContent = route.end;
+      setPressed('.time-chip', state.time, 'time');
+      setPressed('.route-chip', state.route, 'route');
+    }
+
+    document.querySelectorAll('.time-chip').forEach((button) => {
+      button.addEventListener('click', () => {
+        state.time = button.dataset.time;
+        render();
+      });
+    });
+
+    document.querySelectorAll('.route-chip').forEach((button) => {
+      button.addEventListener('click', () => {
+        state.route = button.dataset.route;
+        render();
+      });
+    });
+
+    render();
+  </script>
+</body>
+</html>

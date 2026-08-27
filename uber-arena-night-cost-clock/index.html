@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Uber Arena Night Cost Clock | BerlinWalk</title>
+  <meta name="description" content="Choose one confirmed September 2026 Uber Arena fixture and a departure area for a cautious ticket, route and after-game preparation sequence.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <style>
+    html, body { background: transparent; margin: 0; overflow-x: hidden; }
+    #bw-arena-clock {
+      --forest: #123D18;
+      --green: #1B5E20;
+      --yellow: #FFE600;
+      --lime: #7CB342;
+      --cream: #FAFAF5;
+      --paper: #FFFFFF;
+      --ink: #202720;
+      --muted: #536153;
+      --line: #CBDAC6;
+      --purple: #4D3B66;
+      --purple-soft: #F1EDF5;
+      box-sizing: border-box;
+      color: var(--ink);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 0 auto;
+      max-width: 760px;
+      padding: 14px;
+    }
+    #bw-arena-clock *, #bw-arena-clock *::before, #bw-arena-clock *::after { box-sizing: border-box; }
+    #bw-arena-clock .shell { background: var(--cream); border: 1px solid var(--line); box-shadow: 0 17px 39px rgba(18, 61, 24, .11); }
+    #bw-arena-clock header { background: var(--forest); color: #fff; padding: 23px 24px 22px; }
+    #bw-arena-clock .eyebrow { color: var(--yellow); font-size: 11px; font-weight: 900; letter-spacing: .13em; margin: 0 0 8px; text-transform: uppercase; }
+    #bw-arena-clock h1 { color: #fff; font-size: clamp(24px, 4.5vw, 35px); letter-spacing: -.04em; line-height: 1.04; margin: 0; max-width: 610px; }
+    #bw-arena-clock header p:last-child { color: #DAE6D8; font-size: 13.5px; line-height: 1.55; margin: 11px 0 0; max-width: 600px; }
+    #bw-arena-clock .body { padding: 19px 20px 22px; }
+    #bw-arena-clock .section-label { color: var(--forest); display: block; font-size: 11px; font-weight: 900; letter-spacing: .12em; margin: 0 0 8px; text-transform: uppercase; }
+    #bw-arena-clock .fixture-grid { display: grid; gap: 10px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #bw-arena-clock .fixture {
+      appearance: none;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      cursor: pointer;
+      display: block;
+      font: inherit;
+      min-height: 153px;
+      padding: 15px;
+      position: relative;
+      text-align: left;
+      transition: background .15s ease, border-color .15s ease, transform .15s ease;
+      width: 100%;
+    }
+    #bw-arena-clock .fixture::before { background: var(--lime); content: ''; height: 5px; left: 0; position: absolute; right: 0; top: 0; }
+    #bw-arena-clock .fixture[data-fixture="basketball"]::before { background: var(--yellow); }
+    #bw-arena-clock .fixture:hover { background: #F5F9F2; border-color: var(--lime); }
+    #bw-arena-clock .fixture:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+    #bw-arena-clock .fixture[aria-pressed="true"] { background: var(--forest); border-color: var(--forest); color: #fff; }
+    #bw-arena-clock .fixture[aria-pressed="true"]::after { color: var(--yellow); content: 'SELECTED'; font-size: 9px; font-weight: 900; letter-spacing: .11em; position: absolute; right: 13px; top: 16px; }
+    #bw-arena-clock .fixture .date { color: var(--green); display: block; font-size: 10.5px; font-weight: 900; letter-spacing: .09em; margin: 5px 0 8px; text-transform: uppercase; }
+    #bw-arena-clock .fixture[aria-pressed="true"] .date { color: var(--yellow); }
+    #bw-arena-clock .fixture strong { display: block; font-size: 15px; line-height: 1.22; padding-right: 56px; }
+    #bw-arena-clock .fixture small { color: var(--muted); display: block; font-size: 11.5px; font-weight: 650; line-height: 1.4; margin-top: 7px; }
+    #bw-arena-clock .fixture[aria-pressed="true"] small { color: #D8E7D6; }
+    #bw-arena-clock .price { color: var(--purple); display: block; font-size: 14px; font-weight: 900; margin-top: 10px; }
+    #bw-arena-clock .fixture[aria-pressed="true"] .price { color: #fff; }
+    #bw-arena-clock .price b { color: var(--forest); }
+    #bw-arena-clock .fixture[aria-pressed="true"] .price b { color: var(--yellow); }
+    #bw-arena-clock .origin-wrap { border-top: 1px dashed var(--line); margin-top: 18px; padding-top: 17px; }
+    #bw-arena-clock .origin-grid { display: grid; gap: 8px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    #bw-arena-clock .origin {
+      appearance: none;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      color: var(--forest);
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.3;
+      min-height: 66px;
+      padding: 9px 10px;
+      text-align: left;
+    }
+    #bw-arena-clock .origin:hover { border-color: var(--lime); }
+    #bw-arena-clock .origin:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+    #bw-arena-clock .origin[aria-pressed="true"] { background: var(--purple-soft); border: 2px solid var(--purple); color: #2D1F3E; padding: 8px 9px; }
+    #bw-arena-clock .result { background: var(--paper); border: 1px solid var(--line); margin-top: 17px; padding: 17px; }
+    #bw-arena-clock .result[data-ready="false"] { background: #F3F6F0; border-style: dashed; }
+    #bw-arena-clock .result .result-kicker { color: var(--green); font-size: 10.5px; font-weight: 900; letter-spacing: .12em; margin: 0 0 6px; text-transform: uppercase; }
+    #bw-arena-clock .result h2 { color: var(--forest); font-size: 19px; line-height: 1.2; margin: 0 0 7px; }
+    #bw-arena-clock .result p { color: #3D4B3D; font-size: 13px; line-height: 1.52; margin: 0; }
+    #bw-arena-clock .sequence { display: grid; gap: 8px; margin: 14px 0 0; }
+    #bw-arena-clock .sequence-item { align-items: flex-start; border-top: 1px solid #E0E9DD; display: grid; gap: 10px; grid-template-columns: 31px minmax(0, 1fr); padding-top: 10px; }
+    #bw-arena-clock .sequence-item:first-child { border-top: 0; padding-top: 0; }
+    #bw-arena-clock .seq-num { align-items: center; background: var(--yellow); border-radius: 50%; color: var(--forest); display: inline-flex; font-size: 12px; font-weight: 900; height: 31px; justify-content: center; }
+    #bw-arena-clock .sequence-item strong { color: var(--forest); display: block; font-size: 12.5px; line-height: 1.3; }
+    #bw-arena-clock .sequence-item span:not(.seq-num) { color: var(--muted); display: block; font-size: 11.5px; line-height: 1.43; margin-top: 2px; }
+    #bw-arena-clock .boundary { border-top: 1px dashed var(--line); color: var(--muted); font-size: 11px; line-height: 1.5; margin: 18px 0 0; padding-top: 12px; }
+    #bw-arena-clock .boundary a { color: var(--green); font-weight: 800; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+    #bw-arena-clock .boundary a:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+    @media (max-width: 540px) {
+      #bw-arena-clock { padding: 8px; }
+      #bw-arena-clock header { padding: 20px 17px 18px; }
+      #bw-arena-clock .body { padding: 16px 13px 18px; }
+      #bw-arena-clock .fixture-grid { grid-template-columns: 1fr; }
+      #bw-arena-clock .fixture { min-height: 127px; }
+      #bw-arena-clock .origin-grid { grid-template-columns: 1fr; }
+      #bw-arena-clock .origin { min-height: 49px; }
+    }
+    @media (prefers-reduced-motion: reduce) { #bw-arena-clock * { scroll-behavior: auto !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+  <main id="bw-arena-clock">
+    <section class="shell" aria-labelledby="arena-title">
+      <header>
+        <p class="eyebrow">Uber Arena · 17–18 September 2026</p>
+        <h1 id="arena-title">Choose the fixture. Keep the rest live.</h1>
+        <p>Live ticket prices belong on the official seller page. They are not a total sports-night budget or a promise of availability.</p>
+      </header>
+      <div class="body">
+        <span class="section-label">1. Pick the confirmed game</span>
+        <div class="fixture-grid" role="group" aria-label="Choose a confirmed Uber Arena fixture">
+          <button class="fixture" type="button" data-fixture="hockey" aria-pressed="false">
+            <span class="date">Thu 17 Sep · 19:30</span><strong>Eisbären Berlin v Straubing Tigers</strong><small>Ice hockey at Uber Arena</small><span class="price">Check the official seller for the live price</span>
+          </button>
+          <button class="fixture" type="button" data-fixture="basketball" aria-pressed="false">
+            <span class="date">Fri 18 Sep · 20:00</span><strong>ALBA BERLIN v NINERS Chemnitz</strong><small>Basketball at Uber Arena</small><span class="price">Check the official seller for the live price</span>
+          </button>
+        </div>
+        <div class="origin-wrap">
+          <span class="section-label">2. Where will you begin the evening?</span>
+          <div class="origin-grid" role="group" aria-label="Choose a departure-area category">
+            <button class="origin" type="button" data-origin="central" aria-pressed="false">Central Berlin<br><small>Mitte or another central stop</small></button>
+            <button class="origin" type="button" data-origin="east" aria-pressed="false">East / nearby<br><small>Friedrichshain or an already-local plan</small></button>
+            <button class="origin" type="button" data-origin="other" aria-pressed="false">Another area<br><small>West, south, airport or train arrival</small></button>
+          </div>
+        </div>
+        <section class="result" id="arena-result" data-ready="false" aria-live="polite" aria-labelledby="arena-result-title">
+          <p class="result-kicker">Preparation sequence</p>
+          <h2 id="arena-result-title">Choose a fixture and starting area</h2>
+          <p id="arena-result-copy">The tool will keep ticket, entry, live journey and return decisions separate without predicting a fixed total cost or home-arrival time.</p>
+          <div class="sequence" id="arena-sequence" hidden></div>
+        </section>
+        <p class="boundary">Facts checked 22 August 2026 from the <a href="https://www.eisbaeren.de/spielplan-tabelle/spielplan" target="_blank" rel="noopener">Eisbären schedule</a>, <a href="https://www.uber-arena.de/en/events-tickets/" target="_blank" rel="noopener">Uber Arena calendar</a> and <a href="https://www.albaberlin.de/spielplan/maenner/spieltermine/" target="_blank" rel="noopener">ALBA schedule</a>. Recheck the official ticket journey for current category, fee, entry and availability details.</p>
+      </div>
+    </section>
+  </main>
+  <script>
+    (function () {
+      'use strict';
+      var fixtures = {
+        hockey: { name: 'Eisbären Berlin v Straubing Tigers', date: 'Thursday 17 September at 19:30' },
+        basketball: { name: 'ALBA BERLIN v NINERS Chemnitz', date: 'Friday 18 September at 20:00' }
+      };
+      var origins = {
+        central: 'Your evening starts in central Berlin. Keep the earlier stop simple, then use a live route check before you leave for Uber Arena.',
+        east: 'Your evening starts in Friedrichshain or nearby. A local start can keep the day compact, but the ticket still decides the actual arena entrance.',
+        other: 'Your evening starts outside the immediate area. Treat the live journey check as a separate decision before you commit to a tight pre-game plan.'
+      };
+      var state = { fixture: null, origin: null };
+      var fixtureButtons = Array.prototype.slice.call(document.querySelectorAll('.fixture'));
+      var originButtons = Array.prototype.slice.call(document.querySelectorAll('.origin'));
+      var result = document.getElementById('arena-result');
+      var resultTitle = document.getElementById('arena-result-title');
+      var resultCopy = document.getElementById('arena-result-copy');
+      var sequence = document.getElementById('arena-sequence');
+      function render() {
+        fixtureButtons.forEach(function (button) { button.setAttribute('aria-pressed', button.getAttribute('data-fixture') === state.fixture ? 'true' : 'false'); });
+        originButtons.forEach(function (button) { button.setAttribute('aria-pressed', button.getAttribute('data-origin') === state.origin ? 'true' : 'false'); });
+        if (!state.fixture || !state.origin) return;
+        var fixture = fixtures[state.fixture];
+        result.setAttribute('data-ready', 'true');
+        resultTitle.textContent = fixture.name + ' · ' + fixture.date;
+        resultCopy.textContent = origins[state.origin] + ' Check the official seller for the live ticket price, category, fee and availability; this is not a total-cost calculation.';
+        var items = [
+          ['Read the current ticket page', 'Check the exact ticket category, its price and any fee before paying.'],
+          ['Save the ticket’s own instructions', 'Use the actual ticket for entry details; do not infer them from a generic arena visit.'],
+          ['Run a live journey check on the day', 'The fixture start is confirmed, but a generic widget does not promise a transit route or arrival time.'],
+          ['Keep the post-game plan optional', 'Live sport and the trip back do not have one fixed finish or home-arrival time.']
+        ];
+        sequence.innerHTML = items.map(function (item, index) { return '<div class="sequence-item"><span class="seq-num">' + (index + 1) + '</span><div><strong>' + item[0] + '</strong><span>' + item[1] + '</span></div></div>'; }).join('');
+        sequence.hidden = false;
+      }
+      fixtureButtons.forEach(function (button) { button.addEventListener('click', function () { state.fixture = button.getAttribute('data-fixture'); render(); }); });
+      originButtons.forEach(function (button) { button.addEventListener('click', function () { state.origin = button.getAttribute('data-origin'); render(); }); });
+    }());
+  </script>
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Berlin World Heritage: What Fits Your Time</title>
+<style>
+:root{--green:#123d18;--green2:#1b5e20;--yellow:#ffe600;--ink:#172018;--paper:#fffdf5;--soft:#eef4ec;--line:#cbd9c8;--gold:#c98a00;--rust:#9c3b1b;--ghost:#b4bfb2;--mute:#5d6b5f}
+*{box-sizing:border-box}
+body{margin:0;background:transparent;color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.tool{max-width:900px;margin:auto;background:var(--paper);border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 15px 42px rgba(18,61,24,.12)}
+header{padding:26px 26px 20px;background:linear-gradient(135deg,var(--green),#0b2810);color:#fff}
+h1{font-size:clamp(24px,4.4vw,36px);line-height:1.06;margin:0 0 10px;max-width:720px}
+header p{margin:0;max-width:690px;line-height:1.55;color:#e8f2e6;font-size:15px}
+.control{padding:20px 26px 18px;background:var(--yellow);color:var(--green)}
+.ctop{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.control label{font-weight:800;font-size:15px}
+.budget{font-weight:900;font-size:clamp(28px,6.4vw,40px);line-height:1;font-variant-numeric:tabular-nums}
+.control input[type=range]{width:100%;accent-color:var(--green);margin:12px 0 2px;display:block}
+.ticks{display:flex;justify-content:space-between;font-size:11.5px;font-weight:750;opacity:.85}
+.state{margin:12px 0 0;font-size:14.5px;font-weight:650;line-height:1.5}
+.state b{font-weight:900}
+.plotwrap{padding:18px 12px 6px;background:var(--soft)}
+.plot,.mini{display:block;width:100%;height:auto}
+.ax{stroke:#9aa89c;stroke-width:.8}
+.grid{stroke:#d5e0d3;stroke-width:.7}
+.axtx{fill:var(--mute);font-size:8px;font-weight:650}
+.axlab{fill:#33422f;font-size:9.5px;font-weight:800;letter-spacing:.3px}
+.evenln{stroke:var(--mute);stroke-width:.9;stroke-dasharray:3 4;opacity:.65}
+.eventx{fill:var(--mute);font-size:7.6px;font-weight:700}
+.fitzone{fill:var(--green2);opacity:.09}
+.fitln{stroke:var(--green2);stroke-width:1.6}
+.fittx{fill:var(--green2);font-size:8.4px;font-weight:850}
+.pt{cursor:pointer}
+.pt .hit{fill:transparent}
+.pt .dot{stroke:#0d2b12;stroke-width:.9;transition:fill .18s ease,opacity .18s ease}
+.pt .lbl{fill:#33422f;font-size:7.6px;font-weight:750;paint-order:stroke;stroke:var(--soft);stroke-width:2.6;stroke-linejoin:round;transition:opacity .18s ease}
+.pt.out .dot{fill:var(--ghost);opacity:.6}
+.pt.out .lbl{opacity:.5}
+.pt[aria-pressed=true] .dot{stroke-width:2.6}
+.pt[aria-pressed=true] .lbl{fill:var(--green);font-weight:900;opacity:1}
+.pt:focus{outline:none}
+.pt:focus-visible .dot{stroke:var(--gold);stroke-width:3}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;padding:8px 22px 16px;background:var(--soft);font-size:12.5px;font-weight:700;color:#33422f}
+.key{display:flex;align-items:center;gap:7px}
+.sw{width:13px;height:13px;border-radius:50%;border:1px solid #0d2b12}
+.dash{width:22px;height:0;border-top:2px dashed var(--mute);opacity:.75}
+.pickrow{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;padding:18px 20px 4px}
+.pick{display:flex;align-items:center;gap:9px;padding:8px 10px;border:1px solid var(--line);border-radius:12px;background:#fff;cursor:pointer;text-align:left;font:inherit;font-size:13.5px;line-height:1.25;color:var(--ink)}
+.pick:hover{border-color:var(--green2)}
+.pick[aria-pressed=true]{border:2px solid var(--green);padding:7px 9px;background:#f4f9f2}
+.pick.out{opacity:.52}
+.pick .bd{flex:0 0 12px;height:12px;border-radius:50%;border:1px solid #0d2b12}
+.pick .tx{flex:1;min-width:0}
+.pick .tx b{display:block;font-weight:750;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pick .tx span{display:block;font-size:11.5px;color:var(--mute);font-weight:600}
+.detail{margin:14px 20px 18px;border:1px solid var(--line);border-radius:18px;background:#fff;overflow:hidden}
+.dhead{padding:16px 18px 13px;border-bottom:1px solid var(--line)}
+.dhead h2{margin:0 0 4px;font-size:21px;color:var(--green);line-height:1.2}
+.dhead .prop{display:block;font-size:12.5px;color:var(--mute);font-weight:650;margin-bottom:9px}
+.vb{display:inline-block;background:var(--yellow);color:var(--green);border-radius:999px;padding:5px 12px;font-size:12px;font-weight:900}
+.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:14px 18px}
+.cell{background:var(--soft);border-radius:12px;padding:10px 12px}
+.cell span{display:block;font-size:11px;font-weight:750;color:#4e5d50;text-transform:uppercase;letter-spacing:.4px}
+.cell strong{display:block;font-size:22px;font-weight:900;color:var(--green);font-variant-numeric:tabular-nums;line-height:1.15;margin-top:3px}
+.cell em{display:block;font-style:normal;font-size:11.5px;color:#3c4a3e;margin-top:3px;line-height:1.35}
+.miniwrap{padding:2px 18px 8px}
+.ringln{fill:none;stroke:#8fb3c9;stroke-width:1.1;opacity:.85}
+.mdot{fill:#b9c6b7;stroke:#5d6b5f;stroke-width:.5}
+.mdot.on{fill:var(--green);stroke:var(--yellow);stroke-width:3}
+.mcore{fill:var(--green);stroke:#fff;stroke-width:1}
+.mtx{fill:var(--mute);font-size:7px;font-weight:700}
+.detail p{margin:0 0 12px;padding:0 18px;line-height:1.6;font-size:14.5px}
+.detail p.onsite{background:var(--soft);margin:0;padding:14px 18px;border-top:1px solid var(--line);font-size:14px}
+.detail p.onsite b{color:var(--green)}
+.source{padding:0 20px 20px;color:#5b685c;font-size:11.5px;line-height:1.55}
+.source a{color:var(--green2)}
+@media(max-width:640px){
+  header,.control{padding-left:17px;padding-right:17px}
+  .plotwrap{padding:14px 6px 2px}
+  .legend{padding-left:14px;padding-right:14px}
+  .pickrow{grid-template-columns:1fr;padding:14px 14px 2px}
+  .detail{margin-left:14px;margin-right:14px}
+  .nums{grid-template-columns:1fr}
+  .miniwrap{padding-left:14px;padding-right:14px}
+  .source{padding-left:14px;padding-right:14px}
+}
+</style>
+</head>
+<body>
+<main class="tool">
+  <header>
+    <h1>Berlin's World Heritage, against the time you actually have</h1>
+    <p>Ten places across three UNESCO properties. Set the block of time you can give this trip and the board answers: which ones you can reach from Alexanderplatz, look at properly, and get back from. Journey times are real VBB data, not estimates.</p>
+  </header>
+
+  <section class="control">
+    <div class="ctop">
+      <label for="budget">Time you can give it</label>
+      <output id="budgetOut" class="budget" for="budget">2h 00m</output>
+    </div>
+    <input id="budget" type="range" min="60" max="300" step="10" value="120" aria-describedby="stateLine">
+    <div class="ticks"><span>1h</span><span>2h</span><span>3h</span><span>4h</span><span>5h</span></div>
+    <p id="stateLine" class="state" aria-live="polite"></p>
+  </section>
+
+  <section class="plotwrap" aria-label="Which World Heritage places fit the selected block of time">
+    <svg class="plot" id="plot" viewBox="0 0 480 300" role="img" aria-labelledby="plotTitle plotDesc">
+      <title id="plotTitle">Journey time from Alexanderplatz against the shortest visit that is worth making</title>
+      <desc id="plotDesc">A scatter plot. Each World Heritage place sits at its measured one-way journey time from Alexanderplatz and at the shortest visit worth making once there. A sloping line shows the limit of the selected time block, counting the journey out and back. Places under the line fit, places above it do not.</desc>
+      <g id="pGrid"></g>
+      <g id="pFit"></g>
+      <g id="pAxes"></g>
+      <g id="pPoints"></g>
+    </svg>
+  </section>
+
+  <div class="legend">
+    <span class="key"><i class="sw" style="background:#1b5e20"></i>fits the time you set</span>
+    <span class="key"><i class="sw" style="background:#c98a00"></i>fits, but only just</span>
+    <span class="key"><i class="sw" style="background:#b4bfb2"></i>does not fit</span>
+    <span class="key"><i class="dash"></i>above the dashes, the visit outlasts the journey</span>
+  </div>
+
+  <div class="pickrow" id="picks" role="group" aria-label="Choose a World Heritage place"></div>
+
+  <article class="detail" id="detail" aria-live="polite">
+    <div class="dhead">
+      <h2 id="dName">Loading</h2>
+      <span class="prop" id="dProp"></span>
+      <span class="vb" id="dVerdict"></span>
+    </div>
+    <div class="nums">
+      <div class="cell"><span>From Alexanderplatz</span><strong id="dTravel"></strong><em id="dStop"></em></div>
+      <div class="cell"><span>Shortest visit worth making</span><strong id="dMin"></strong><em id="dGood"></em></div>
+      <div class="cell"><span>Whole trip costs you</span><strong id="dDoor"></strong><em id="dFit"></em></div>
+    </div>
+    <div class="miniwrap">
+      <svg class="mini" id="mini" viewBox="0 0 480 190" role="img" aria-labelledby="miniTitle">
+        <title id="miniTitle">Where the selected place sits in Berlin, with the S-Bahn Ring for scale</title>
+        <g id="mRing"></g>
+        <g id="mDots"></g>
+      </svg>
+    </div>
+    <p id="dWhat"></p>
+    <p class="onsite"><b>On site.</b> <span id="dOnsite"></span></p>
+    <p id="dNote"></p>
+  </article>
+
+  <p class="source">Journey times are the median of twelve live queries against the VBB and BVG timetable API from S+U Alexanderplatz, with each access stop resolved from the site's real OpenStreetMap coordinates. The S-Bahn Ring outline is drawn from the real coordinates of its 27 stations. The shortest worthwhile visit is my own judgement as a Berlin guide, not a measurement. Listing years and the July 2026 extension come from the Berlin Landesdenkmalamt and the German UNESCO Commission; prices and opening times come from the SPSG. Checked on 24 August 2026.</p>
+</main>
+
+<script>
+var NS='http://www.w3.org/2000/svg';
+var DATA=null,current=null,budget=120;
+function $(id){return document.getElementById(id);}
+function el(tag,attrs,text){
+  var n=document.createElementNS(NS,tag),k;
+  for(k in attrs){if(attrs[k]!==null&&attrs[k]!==undefined)n.setAttribute(k,attrs[k]);}
+  if(text!==undefined)n.textContent=text;
+  return n;
+}
+var PL={x:52,y:18,w:404,h:236};
+function px(t){return PL.x+(t/DATA.axes.travelMax)*PL.w;}
+function py(m){return PL.y+PL.h-(m/DATA.axes.stayMax)*PL.h;}
+function doorToDoor(s){return 2*s.travel+s.minStay;}
+function clock(m){var h=Math.floor(m/60),r=m%60;return h+'h '+(r<10?'0':'')+r+'m';}
+
+function drawFrame(){
+  var g=$('pGrid'),a=$('pAxes'),i;
+  var xt=[0,10,20,30,40,50],yt=[0,30,60,90,120];
+  for(i=0;i<yt.length;i++){
+    g.appendChild(el('line',{x1:PL.x,y1:py(yt[i]),x2:PL.x+PL.w,y2:py(yt[i]),'class':'grid'}));
+    a.appendChild(el('text',{x:PL.x-7,y:py(yt[i])+3,'text-anchor':'end','class':'axtx'},yt[i]));
+  }
+  for(i=0;i<xt.length;i++){
+    g.appendChild(el('line',{x1:px(xt[i]),y1:PL.y,x2:px(xt[i]),y2:PL.y+PL.h,'class':'grid'}));
+    a.appendChild(el('text',{x:px(xt[i]),y:PL.y+PL.h+14,'text-anchor':'middle','class':'axtx'},xt[i]));
+  }
+  /* Faint reference: above this line the visit is longer than the return journey. */
+  var xe=Math.min(DATA.axes.travelMax,DATA.axes.stayMax/2);
+  a.appendChild(el('line',{x1:px(0),y1:py(0),x2:px(xe),y2:py(2*xe),'class':'evenln'}));
+  a.appendChild(el('line',{x1:PL.x,y1:PL.y+PL.h,x2:PL.x+PL.w,y2:PL.y+PL.h,'class':'ax'}));
+  a.appendChild(el('line',{x1:PL.x,y1:PL.y,x2:PL.x,y2:PL.y+PL.h,'class':'ax'}));
+  a.appendChild(el('text',{x:PL.x+PL.w,y:PL.y+PL.h+27,'text-anchor':'end','class':'axlab'},'MINUTES FROM ALEXANDERPLATZ, ONE WAY'));
+  a.appendChild(el('text',{x:14,y:PL.y+PL.h/2,'class':'axlab',transform:'rotate(-90 14 '+(PL.y+PL.h/2)+')','text-anchor':'middle'},'SHORTEST VISIT WORTH MAKING'));
+}
+
+function drawPoints(){
+  var host=$('pPoints');
+  DATA.sites.forEach(function(s){
+    var x=px(s.travel),y=py(Math.min(s.minStay,DATA.axes.stayMax));
+    var g=el('g',{'class':'pt',role:'button',tabindex:'0','aria-pressed':'false','data-key':s.key});
+    g.appendChild(el('title',{},s.name+', '+s.travel+' minutes each way, shortest worthwhile visit '+s.minStay+' minutes'));
+    g.appendChild(el('circle',{cx:x,cy:y,r:14,'class':'hit'}));
+    g.appendChild(el('circle',{cx:x,cy:y,r:6,'class':'dot'}));
+    g.appendChild(el('text',{x:x+s.dx,y:y+s.dy,'text-anchor':s.anchor,'class':'lbl'},s.plotLabel||s.short));
+    g.addEventListener('click',function(){select(s.key);});
+    g.addEventListener('keydown',function(ev){if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();select(s.key);}});
+    host.appendChild(g);
+  });
+}
+
+function buildPicks(){
+  $('picks').innerHTML=DATA.sites.map(function(s){
+    return '<button type="button" class="pick" aria-pressed="false" data-key="'+s.key+'">'
+      +'<i class="bd"></i><span class="tx"><b></b><span></span></span></button>';
+  }).join('');
+  var nodes=$('picks').children,i;
+  for(i=0;i<nodes.length;i++){
+    (function(btn,s){
+      btn.querySelector('.tx b').textContent=s.short;
+      btn.addEventListener('click',function(){select(s.key);});
+    })(nodes[i],DATA.sites[i]);
+  }
+}
+
+function drawMini(){
+  var b=DATA.bounds,M={x:24,y:14,w:432,h:162};
+  var mx=function(v){return M.x+((v-b.west)/(b.east-b.west))*M.w;};
+  var my=function(v){return M.y+M.h-((v-b.south)/(b.north-b.south))*M.h;};
+  var pts=DATA.ring.map(function(p){return mx(p[1]).toFixed(1)+','+my(p[0]).toFixed(1);}).join(' ');
+  var ring=$('mRing');
+  ring.appendChild(el('polygon',{points:pts,'class':'ringln'}));
+  ring.appendChild(el('text',{x:mx(13.3661),y:my(52.5427)-6,'text-anchor':'middle','class':'mtx'},'S-Bahn Ring'));
+  var dots=$('mDots');
+  DATA.sites.forEach(function(s){
+    dots.appendChild(el('circle',{cx:mx(s.lon),cy:my(s.lat),r:4.6,'class':'mdot','data-key':s.key}));
+  });
+  var o=DATA.origin;
+  dots.appendChild(el('circle',{cx:mx(o.lon),cy:my(o.lat),r:3.4,'class':'mcore'}));
+  dots.appendChild(el('text',{x:mx(o.lon),y:my(o.lat)-7,'text-anchor':'middle','class':'mtx'},'Alexanderplatz'));
+}
+
+function paintBudget(mins){
+  budget=mins;
+  $('budgetOut').textContent=clock(mins);
+  var host=$('pFit');
+  host.innerHTML='';
+  /* Fit region: minStay <= budget - 2 * travel, clipped to the plot. Sampled so
+     the shape stays correct when the frontier leaves the axes entirely. */
+  var TX=DATA.axes.travelMax,TY=DATA.axes.stayMax,step=0.5;
+  var top='',line='',x,y,inLine=false,anyLine=false,segX1=0,segY1=0,segX2=0,segY2=0;
+  for(x=0;x<=TX+1e-9;x+=step){
+    y=mins-2*x;
+    if(y<0)y=0;
+    if(y>TY)y=TY;
+    top+=px(x).toFixed(1)+','+py(y).toFixed(1)+' ';
+    var onEdge=(mins-2*x)>0&&(mins-2*x)<TY;
+    if(onEdge){
+      line+=px(x).toFixed(1)+','+py(y).toFixed(1)+' ';
+      if(!inLine){segX1=x;segY1=y;inLine=true;}
+      segX2=x;segY2=y;anyLine=true;
+    }
+  }
+  host.appendChild(el('polygon',{points:top+px(TX).toFixed(1)+','+py(0).toFixed(1)+' '+px(0).toFixed(1)+','+py(0).toFixed(1),'class':'fitzone'}));
+  if(anyLine){
+    host.appendChild(el('polyline',{points:line.trim(),fill:'none','class':'fitln'}));
+    var mx=(segX1+segX2)/2,my=(segY1+segY2)/2;
+    host.appendChild(el('text',{x:px(mx),y:py(my)+15,'text-anchor':'middle','class':'fittx'},'inside your '+clock(mins)));
+  }else{
+    host.appendChild(el('text',{x:px(TX/2),y:py(TY)+16,'text-anchor':'middle','class':'fittx'},'all ten sit inside your '+clock(mins)));
+  }
+
+  var fits=0,tight=0,i,s,d;
+  var pts=$('pPoints').children;
+  for(i=0;i<pts.length;i++){
+    s=DATA.sites[i];d=doorToDoor(s);
+    var inb=d<=mins,near=inb&&d>mins-25;
+    if(inb)fits++;
+    if(near)tight++;
+    pts[i].setAttribute('class',inb?'pt':'pt out');
+    pts[i].querySelector('.dot').setAttribute('fill',inb?(near?'#c98a00':'#1b5e20'):'#b4bfb2');
+    var btn=$('picks').children[i];
+    btn.setAttribute('class',inb?'pick':'pick out');
+    btn.querySelector('.bd').setAttribute('style','background:'+(inb?(near?'#c98a00':'#1b5e20'):'#b4bfb2'));
+    btn.querySelector('.tx span').textContent=inb?clock(d)+' door to door':'needs '+clock(d);
+  }
+  var slack=tight===1?', and one of those leaves you no slack':(tight>1?', and '+tight+' of those leave you no slack':'');
+  $('stateLine').innerHTML=fits===0
+    ? 'With <b>'+clock(mins)+'</b> none of the ten works from Alexanderplatz once you count the journey back. Give it thirty more minutes.'
+    : (fits===1
+      ? 'With <b>'+clock(mins)+'</b> exactly <b>one of the ten</b> works, journey home included'+slack+'.'
+      : 'With <b>'+clock(mins)+'</b> you can do <b>'+fits+' of the ten</b>, journey home included'+slack+'.');
+  if(current)select(current);
+}
+
+function select(key){
+  var s=null,i;
+  for(i=0;i<DATA.sites.length;i++){if(DATA.sites[i].key===key)s=DATA.sites[i];}
+  if(!s)return;
+  current=key;
+  var pts=$('pPoints').children;
+  for(i=0;i<pts.length;i++)pts[i].setAttribute('aria-pressed',pts[i].getAttribute('data-key')===key?'true':'false');
+  var picks=$('picks').children;
+  for(i=0;i<picks.length;i++)picks[i].setAttribute('aria-pressed',picks[i].getAttribute('data-key')===key?'true':'false');
+  var md=$('mDots').children;
+  for(i=0;i<md.length;i++){
+    var k=md[i].getAttribute('data-key');
+    if(k)md[i].setAttribute('class',k===key?'mdot on':'mdot');
+  }
+  var d=doorToDoor(s);
+  $('dName').textContent=s.name;
+  $('dProp').textContent=s.property+', listed '+s.listed;
+  $('dVerdict').textContent=s.verdict;
+  $('dTravel').textContent=s.travel+' min';
+  $('dStop').textContent=s.stop;
+  $('dMin').textContent=s.minStay+' min';
+  $('dGood').textContent='a good visit runs about '+s.goodVisit+' minutes';
+  $('dDoor').textContent=clock(d);
+  $('dFit').textContent=d<=budget
+    ? 'inside the '+clock(budget)+' you set, with '+(budget-d)+' minutes spare'
+    : 'you would need '+(d-budget)+' minutes more than you set';
+  $('dWhat').textContent=s.what;
+  $('dOnsite').textContent=s.onsite;
+  $('dNote').textContent=s.note;
+}
+
+fetch('data.json').then(function(r){return r.json();}).then(function(d){
+  DATA=d;
+  drawFrame();drawPoints();buildPicks();drawMini();
+  var input=$('budget');
+  input.min=d.axes.budgetMin;input.max=d.axes.budgetMax;input.step=d.axes.budgetStep;input.value=d.axes.budgetDefault;
+  input.addEventListener('input',function(){paintBudget(Number(input.value));});
+  current='hufeisensiedlung';
+  paintBudget(Number(input.value));
+});
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nikolaiviertel Self-Guided Walk Map | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-nikolai-walk">
+  <style>
+    #bw-nikolai-walk {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-soft: #F2F8E8;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-cream: #FAFAF5;
+      --bw-original: #1B5E20;
+      --bw-salvaged: #7CB342;
+      --bw-rebuilt: #F9A825;
+      --bw-tavern: #A1424A;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+
+    #bw-nikolai-walk * { box-sizing: border-box; }
+
+    #bw-nikolai-walk .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    #bw-nikolai-walk .bw-head {
+      background: var(--bw-green);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #bw-nikolai-walk .bw-head-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1;
+      flex: 0 0 24px;
+    }
+
+    #bw-nikolai-walk .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+    }
+
+    #bw-nikolai-walk .bw-body {
+      background: var(--bw-cream);
+      padding: 16px 18px;
+    }
+
+    #bw-nikolai-walk .bw-hint {
+      font-size: 13px;
+      color: var(--bw-muted);
+      margin: 0 0 14px;
+      line-height: 1.55;
+    }
+
+    #bw-nikolai-walk .bw-legend {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 0 0 14px;
+      font-size: 11px;
+      color: var(--bw-text);
+    }
+
+    #bw-nikolai-walk .bw-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 20px;
+      font-weight: 700;
+    }
+
+    #bw-nikolai-walk .bw-legend i {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    #bw-nikolai-walk .bw-legend i.original { background: var(--bw-original); }
+    #bw-nikolai-walk .bw-legend i.salvaged { background: var(--bw-salvaged); }
+    #bw-nikolai-walk .bw-legend i.rebuilt { background: var(--bw-rebuilt); }
+    #bw-nikolai-walk .bw-legend i.tavern { background: var(--bw-tavern); }
+
+    #bw-nikolai-walk .bw-map-container {
+      width: 100%;
+      height: 500px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--bw-border);
+      background: #E8EEDC;
+      position: relative;
+    }
+
+    #bw-nikolai-walk .bw-map {
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    #bw-nikolai-walk .leaflet-container {
+      font-family: Montserrat, Arial, sans-serif;
+      background: #E8EEDC;
+    }
+
+    #bw-nikolai-walk .leaflet-popup-content-wrapper {
+      border-radius: 12px;
+      padding: 0;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      border: 1px solid var(--bw-border);
+    }
+
+    #bw-nikolai-walk .leaflet-popup-content {
+      margin: 0;
+      width: 268px !important;
+      font-family: inherit;
+    }
+
+    #bw-nikolai-walk .bw-popup-head {
+      padding: 10px 14px;
+      border-radius: 11px 11px 0 0;
+      color: var(--bw-white);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #bw-nikolai-walk .bw-popup-head.original { background: var(--bw-original); }
+    #bw-nikolai-walk .bw-popup-head.salvaged { background: var(--bw-salvaged); }
+    #bw-nikolai-walk .bw-popup-head.rebuilt { background: var(--bw-rebuilt); color: var(--bw-green); }
+    #bw-nikolai-walk .bw-popup-head.tavern { background: var(--bw-tavern); }
+
+    #bw-nikolai-walk .bw-popup-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.22);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 900;
+      flex: 0 0 26px;
+    }
+
+    #bw-nikolai-walk .bw-popup-head.rebuilt .bw-popup-num {
+      background: rgba(27,94,32,0.18);
+    }
+
+    #bw-nikolai-walk .bw-popup-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    #bw-nikolai-walk .bw-popup-type {
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+
+    #bw-nikolai-walk .bw-popup-name {
+      font-size: 14.5px;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+
+    #bw-nikolai-walk .bw-popup-body {
+      padding: 12px 14px 14px;
+      font-size: 12.5px;
+      color: var(--bw-text);
+      line-height: 1.55;
+    }
+
+    #bw-nikolai-walk .bw-marker {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 3px solid var(--bw-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    #bw-nikolai-walk .bw-marker.original { background: var(--bw-original); color: var(--bw-white); }
+    #bw-nikolai-walk .bw-marker.salvaged { background: var(--bw-salvaged); color: var(--bw-white); }
+    #bw-nikolai-walk .bw-marker.rebuilt { background: var(--bw-rebuilt); color: var(--bw-green); }
+    #bw-nikolai-walk .bw-marker.tavern { background: var(--bw-tavern); color: var(--bw-white); }
+
+    #bw-nikolai-walk .bw-count {
+      font-size: 11px;
+      color: var(--bw-muted);
+      margin: 10px 0 0;
+      text-align: center;
+    }
+
+    #bw-nikolai-walk .bw-count strong {
+      color: var(--bw-green);
+      font-weight: 900;
+    }
+
+    #bw-nikolai-walk .bw-footer {
+      padding: 10px 18px;
+      background: var(--bw-white);
+      border-top: 1px solid var(--bw-border);
+      color: var(--bw-muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 560px) {
+      #bw-nikolai-walk { margin: 22px 0; }
+      #bw-nikolai-walk .bw-head { padding: 12px 16px; }
+      #bw-nikolai-walk .bw-kicker { font-size: 10px; letter-spacing: 1.8px; }
+      #bw-nikolai-walk .bw-body { padding: 14px; }
+      #bw-nikolai-walk .bw-hint { font-size: 12px; margin-bottom: 12px; }
+      #bw-nikolai-walk .bw-legend { font-size: 10px; gap: 6px; }
+      #bw-nikolai-walk .bw-map-container { height: 420px; }
+      #bw-nikolai-walk .leaflet-popup-content { width: 230px !important; }
+      #bw-nikolai-walk .bw-popup-name { font-size: 13.5px; }
+      #bw-nikolai-walk .bw-popup-body { font-size: 12px; }
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <span class="bw-head-icon" aria-hidden="true">N</span>
+      <span class="bw-kicker">Nikolaiviertel Self-Guided Walk</span>
+    </div>
+    <div class="bw-body">
+      <p class="bw-hint">A 10-stop walking loop through Berlin's medieval quarter. Each pin shows whether the building is genuinely old, partly salvaged, a 1980s GDR reconstruction, or a tavern. Roughly 45 minutes.</p>
+      <div class="bw-legend" aria-label="Nikolaiviertel walk legend">
+        <span><i class="original"></i>Genuinely old</span>
+        <span><i class="salvaged"></i>Salvaged facade</span>
+        <span><i class="rebuilt"></i>GDR 1980s rebuild</span>
+        <span><i class="tavern"></i>Tavern</span>
+      </div>
+      <div class="bw-map-container">
+        <div class="bw-map" id="bw-nikolai-walk-canvas"></div>
+      </div>
+      <p class="bw-count"><strong data-count>0</strong> stops, roughly <strong>1.2 km</strong> on foot</p>
+    </div>
+    <div class="bw-footer">The numbered pins follow walking order. Tap any pin for the story. Tap and drag the map to scroll the route.</div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function () {
+      var root = document.getElementById('bw-nikolai-walk');
+      var mapEl = document.getElementById('bw-nikolai-walk-canvas');
+      if (!root || !mapEl || !window.L) return;
+
+      var stops = [
+        {
+          n: 1,
+          name: 'Rotes Rathaus',
+          type: 'rebuilt',
+          typeLabel: 'Start (1869, post-war restored)',
+          lat: 52.5189,
+          lng: 13.4083,
+          note: "Start at Berlin's red-brick city hall. Not in the Nikolaiviertel itself, but the easiest landmark to begin from. Walk south toward the river."
+        },
+        {
+          n: 2,
+          name: 'Neptunbrunnen Fountain',
+          type: 'original',
+          typeLabel: 'Original sculpture (1891)',
+          lat: 52.5197,
+          lng: 13.4068,
+          note: 'Reinhold Begas designed this fountain in 1891 for the Stadtschloss courtyard. Moved here in 1969 after the GDR demolished the palace. The same fountain, a different square.'
+        },
+        {
+          n: 3,
+          name: 'Nikolaikirche (St. Nicholas Church)',
+          type: 'original',
+          typeLabel: 'Berlin\'s oldest building, c. 1230',
+          lat: 52.5168,
+          lng: 13.4071,
+          note: 'The oldest church in Berlin. Survived the war as a roofless shell. Rebuilt by the GDR between 1981 and 1987 using the original walls and brickwork. Now a Stadtmuseum branch. Entry around 5 euros.'
+        },
+        {
+          n: 4,
+          name: 'Nikolaikirchplatz',
+          type: 'rebuilt',
+          typeLabel: '1980s reconstruction',
+          lat: 52.5166,
+          lng: 13.4066,
+          note: 'The small square in front of the west door of the church. The gabled houses lining it were rebuilt in the 1980s in a medieval style, using prefab GDR concrete behind historicising facades.'
+        },
+        {
+          n: 5,
+          name: 'Knoblauchhaus',
+          type: 'original',
+          typeLabel: 'Original Baroque, 1761',
+          lat: 52.5161,
+          lng: 13.4072,
+          note: "Late-Baroque townhouse that survived the war intact. Free museum about Berlin's Biedermeier era and the Knoblauch family. A rare genuinely old building in this quarter."
+        },
+        {
+          n: 6,
+          name: 'Zum Nussbaum tavern',
+          type: 'tavern',
+          typeLabel: 'Reconstruction (1571 original)',
+          lat: 52.5162,
+          lng: 13.4069,
+          note: 'Small corner tavern reconstructed from a 1571 original that stood on the Fischerinsel. The interior copies the lost tavern that Heinrich Zille drew in the 1920s. Berliner home cooking.'
+        },
+        {
+          n: 7,
+          name: 'Ephraim-Palais',
+          type: 'salvaged',
+          typeLabel: 'Original facade reassembled (1762 / 1987)',
+          lat: 52.5152,
+          lng: 13.4070,
+          note: 'Salmon-pink Rococo palais. Demolished in 1936 to widen the bridge, the original stones were stored, the GDR rebuilt the palais on a nearby site in 1987. Stadtmuseum exhibitions inside.'
+        },
+        {
+          n: 8,
+          name: 'Mühlendamm bridge view',
+          type: 'rebuilt',
+          typeLabel: 'Spree crossing',
+          lat: 52.5151,
+          lng: 13.4078,
+          note: "Walk to the Mühlendamm bridge for a view of the Spree, the Fischerinsel, and (looking north) the Berliner Dom. The river is the southern edge of the medieval quarter."
+        },
+        {
+          n: 9,
+          name: 'Spreeufer riverside',
+          type: 'rebuilt',
+          typeLabel: '1980s reconstruction',
+          lat: 52.5158,
+          lng: 13.4082,
+          note: 'Riverside lane along the Spree. The buildings here are all 1980s reconstructions in historical style. On a sunny day, the cafes have outdoor tables overlooking the water.'
+        },
+        {
+          n: 10,
+          name: 'Zum letzten Heller tavern',
+          type: 'tavern',
+          typeLabel: 'Reconstruction with old name',
+          lat: 52.5165,
+          lng: 13.4084,
+          note: 'Traditional German tavern near the Mühlendamm exit. A good final stop before walking back to Alexanderplatz or continuing across the river to Museum Island.'
+        }
+      ];
+
+      var map = L.map(mapEl, {
+        center: [52.5168, 13.4075],
+        zoom: 17,
+        scrollWheelZoom: false,
+        tap: true
+      });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 19
+      }).addTo(map);
+
+      map.once('click', function () { map.scrollWheelZoom.enable(); });
+
+      // Walking route polyline
+      var routeLatLngs = stops.map(function (s) { return [s.lat, s.lng]; });
+      L.polyline(routeLatLngs, {
+        color: '#1B5E20',
+        weight: 4,
+        opacity: 0.55,
+        dashArray: '6 8',
+        lineCap: 'round',
+        lineJoin: 'round'
+      }).addTo(map);
+
+      function markerIcon(stop) {
+        return L.divIcon({
+          className: 'bw-marker-wrap',
+          html: '<div class="bw-marker ' + stop.type + '">' + stop.n + '</div>',
+          iconSize: [32, 32],
+          iconAnchor: [16, 16],
+          popupAnchor: [0, -20]
+        });
+      }
+
+      function popup(stop) {
+        return '<div class="bw-popup-head ' + stop.type + '">' +
+          '<span class="bw-popup-num">' + stop.n + '</span>' +
+          '<span class="bw-popup-meta">' +
+            '<span class="bw-popup-type">' + stop.typeLabel + '</span>' +
+            '<span class="bw-popup-name">' + stop.name + '</span>' +
+          '</span>' +
+          '</div>' +
+          '<div class="bw-popup-body">' + stop.note + '</div>';
+      }
+
+      stops.forEach(function (stop) {
+        L.marker([stop.lat, stop.lng], { icon: markerIcon(stop) })
+          .bindPopup(popup(stop), { closeButton: true, maxWidth: 280 })
+          .addTo(map);
+      });
+
+      var countEl = root.querySelector('[data-count]');
+      if (countEl) countEl.textContent = String(stops.length);
+
+      // Fit to route bounds for a tidy view
+      var bounds = L.latLngBounds(routeLatLngs).pad(0.2);
+      map.fitBounds(bounds);
+
+      setTimeout(function () { map.invalidateSize(); map.fitBounds(bounds); }, 250);
+    })();
+  </script>
+</div>
+</body>
+</html>

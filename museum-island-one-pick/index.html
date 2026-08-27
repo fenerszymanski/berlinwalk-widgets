@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Museum Island: Pick One | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-mi-pick">
+  <style>
+    #bw-mi-pick{
+      --bw-green:#1B5E20; --bw-green-dark:#164a1a; --bw-yellow:#FFE600;
+      --bw-lime:#7CB342; --bw-border:#DCE8C8; --bw-text:#212121;
+      --bw-muted:#4E5A4E; --bw-white:#FFFFFF; --bw-lime-soft:#F2F8E8;
+      color:var(--bw-text);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      max-width:720px; margin:0 auto; padding:2px;
+    }
+    #bw-mi-pick *{box-sizing:border-box;}
+    .mi-card{border:1px solid var(--bw-border); border-radius:16px; background:var(--bw-white);
+      overflow:hidden; box-shadow:0 1px 2px rgba(20,74,26,.05);}
+    .mi-head{background:var(--bw-green); color:var(--bw-white); padding:16px 18px;}
+    .mi-head h2{margin:0; font-size:1.12rem; line-height:1.25;}
+    .mi-head p{margin:5px 0 0; font-size:.86rem; color:#dCE8CF;}
+    .mi-body{padding:16px;}
+
+    .mi-progress{display:flex; gap:6px; margin-bottom:14px;}
+    .mi-pip{flex:1; height:5px; border-radius:5px; background:var(--bw-border);}
+    .mi-pip.done{background:var(--bw-lime);}
+    .mi-pip.active{background:var(--bw-green);}
+
+    .mi-q{font-size:.82rem; color:var(--bw-muted); font-weight:700; text-transform:uppercase;
+      letter-spacing:.5px; margin-bottom:10px;}
+    .mi-pair{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+    .mi-opt{border:1.5px solid var(--bw-border); border-radius:14px; background:var(--bw-white);
+      padding:13px 13px 14px; text-align:left; cursor:pointer; font:inherit; color:inherit;
+      display:flex; flex-direction:column; gap:6px; transition:border-color .12s, background .12s, transform .08s;}
+    .mi-opt:hover{border-color:var(--bw-lime); background:var(--bw-lime-soft);}
+    .mi-opt:active{transform:scale(.99);}
+    .mi-opt .n{font-weight:800; font-size:1rem; line-height:1.2;}
+    .mi-opt .draw{font-size:.86rem; line-height:1.45; color:var(--bw-text);}
+    .mi-opt .meta{font-size:.76rem; color:var(--bw-muted); font-weight:600; margin-top:auto;}
+
+    .mi-skip{margin-top:12px; text-align:center;}
+    .mi-skipbtn{border:none; background:none; color:var(--bw-muted); font-size:.82rem;
+      text-decoration:underline; cursor:pointer; font-family:inherit;}
+    .mi-skipbtn:hover{color:var(--bw-green);}
+
+    .mi-result{display:none;}
+    .mi-result.show{display:block;}
+    .mi-badge{display:inline-block; font-size:.72rem; font-weight:800; letter-spacing:.6px;
+      text-transform:uppercase; color:var(--bw-green); background:var(--bw-yellow);
+      border-radius:6px; padding:3px 8px;}
+    .mi-win{margin:10px 0 4px; font-size:1.24rem; font-weight:800; line-height:1.2;}
+    .mi-why{font-size:.95rem; line-height:1.55; margin:0 0 12px;}
+    .mi-plan{border:1px solid var(--bw-border); border-radius:14px; background:var(--bw-lime-soft);
+      padding:13px 14px; margin-bottom:12px;}
+    .mi-plan h3{margin:0 0 8px; font-size:.94rem; color:var(--bw-green);}
+    .mi-plan ol{margin:0; padding-left:18px;}
+    .mi-plan li{font-size:.9rem; line-height:1.5; margin-bottom:5px;}
+    .mi-facts{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;}
+    .mi-chip{font-size:.76rem; font-weight:700; color:var(--bw-green);
+      border:1.5px solid var(--bw-border); border-radius:999px; padding:5px 10px; background:var(--bw-white);}
+    .mi-again{border:1.5px solid var(--bw-border); background:var(--bw-white); color:var(--bw-green);
+      border-radius:999px; padding:9px 16px; font-size:.86rem; font-weight:700; cursor:pointer; font-family:inherit;}
+    .mi-again:hover{border-color:var(--bw-lime); background:var(--bw-lime-soft);}
+    .mi-foot{padding:12px 16px 15px; font-size:.8rem; color:var(--bw-muted); border-top:1px solid var(--bw-border);}
+    .mi-foot a{color:var(--bw-green); font-weight:700; text-decoration:none;}
+    .mi-foot a:hover{text-decoration:underline;}
+
+    @media (max-width:420px){
+      .mi-pair{grid-template-columns:1fr;}
+      .mi-head h2{font-size:1.02rem;}
+      .mi-win{font-size:1.1rem;}
+    }
+  </style>
+
+  <div class="mi-card">
+    <div class="mi-head">
+      <h2>Museum Island: which one should you actually enter?</h2>
+      <p>Five buildings, one closed, and most visitors only have time for one. Pick between two at a time and I will tell you which is yours.</p>
+    </div>
+
+    <div class="mi-body">
+      <div class="mi-progress" id="mi-progress"></div>
+
+      <div id="mi-game">
+        <div class="mi-q" id="mi-q">Which of these two pulls you more?</div>
+        <div class="mi-pair" id="mi-pair"></div>
+        <div class="mi-skip"><button class="mi-skipbtn" id="mi-skip" type="button">No strong feeling, show me the safe pick</button></div>
+      </div>
+
+      <div class="mi-result" id="mi-result">
+        <span class="mi-badge">Your pick</span>
+        <div class="mi-win" id="mi-win"></div>
+        <p class="mi-why" id="mi-why"></p>
+        <div class="mi-facts" id="mi-facts"></div>
+        <div class="mi-plan">
+          <h3>A three hour Museum Island plan around it</h3>
+          <ol id="mi-plan"></ol>
+        </div>
+        <button class="mi-again" id="mi-again" type="button">Start over</button>
+      </div>
+    </div>
+
+    <div class="mi-foot" id="mi-foot"></div>
+  </div>
+
+  <script>
+  (function(){
+    // Every fact below is taken from the published BerlinWalk Museum Island guides.
+    var M = {
+      neues: {
+        n:'Neues Museum',
+        draw:'Nefertiti, and an Egyptian collection that is genuinely world class.',
+        meta:'Allow at least 2 hours',
+        why:'If you only enter one building on the island, this is the one. The bust of Nefertiti alone justifies the ticket, and the Egyptian collection around her is the strongest thing on Museum Island. It is also the museum that gets busiest, because everyone else has worked that out too.',
+        facts:['€14 single ticket','Allow 2 hours+','Busiest after 11:00','Nefertiti is here, not in the Pergamon']
+      },
+      alte: {
+        n:'Alte Nationalgalerie',
+        draw:'Nineteenth century painting in a building shaped like a Greek temple.',
+        meta:'About 1 to 1.5 hours',
+        why:'The most pleasant building to simply be inside, and the easiest to do well in an hour. Even if you skip the ticket, you can walk up the grand staircase to the colonnade level for free, and the view back over the Lustgarten toward the TV Tower is one of the best photographs on the island.',
+        facts:['€14 single ticket','1 to 1.5 hours','Free staircase and colonnade view','Quieter than the Neues']
+      },
+      altes: {
+        n:'Altes Museum',
+        draw:'Greek and Roman antiquities behind the great colonnade on the Lustgarten.',
+        meta:'About 1 hour',
+        why:'The building that made Berlin a museum city, and the fastest of the five to do properly. Its rotunda is the single most impressive interior space on the island. A good choice if you want a museum that fits around the rest of your day rather than swallowing it.',
+        facts:['€14 single ticket','About 1 hour','Faces the Lustgarten','Best interior architecture']
+      },
+      bode: {
+        n:'Bode-Museum',
+        draw:'Sculpture and Byzantine art, under the dome at the tip of the island.',
+        meta:'About 1.5 hours',
+        why:'The quietest of the open museums and the one locals send people to when the Neues is packed. It sits at the northern point of the island where the Spree splits, so the approach along the water is half the experience.',
+        facts:['€14 single ticket','About 1.5 hours','Usually the calmest','Best exterior on the river']
+      },
+      panorama: {
+        n:'Pergamonmuseum. Das Panorama',
+        draw:'A 360 degree panorama of ancient Pergamon, plus around 80 original sculptures.',
+        meta:'About 1 hour',
+        why:'The Pergamon Museum itself is closed until 2027, so this is where its collection lives for now. It sits across the narrow canal at Am Kupfergraben 2, a five minute walk from the old Pergamon entrance, and the sculptures are originals from the altar and the excavations, not replicas.',
+        facts:['€14 adults, €7 concessions','About 1 hour','Across the canal, Am Kupfergraben 2','Pergamon itself closed until 2027']
+      }
+    };
+    var KEYS = ['neues','alte','altes','bode','panorama'];
+    // Fixed bracket so the run is short: 2 semifinals, 1 final. Order chosen so the
+    // Neues (the default answer) has to be earned rather than handed over.
+    var BRACKET = [['alte','panorama'], ['altes','bode'], null];
+
+    var progress=document.getElementById('mi-progress');
+    var pairEl=document.getElementById('mi-pair');
+    var qEl=document.getElementById('mi-q');
+    var game=document.getElementById('mi-game');
+    var result=document.getElementById('mi-result');
+    var winners=[]; var round=0;
+
+    function renderProgress(){
+      progress.innerHTML='';
+      for(var i=0;i<3;i++){
+        var d=document.createElement('div');
+        d.className='mi-pip'+(i<round?' done':(i===round?' active':''));
+        progress.appendChild(d);
+      }
+    }
+    function optionButton(key){
+      var m=M[key];
+      var b=document.createElement('button');
+      b.type='button'; b.className='mi-opt';
+      b.innerHTML='<span class="n"></span><span class="draw"></span><span class="meta"></span>';
+      b.querySelector('.n').textContent=m.n;
+      b.querySelector('.draw').textContent=m.draw;
+      b.querySelector('.meta').textContent=m.meta;
+      b.addEventListener('click',function(){ choose(key); });
+      return b;
+    }
+    function renderRound(){
+      renderProgress();
+      var pair = round<2 ? BRACKET[round] : winners.slice(0,2);
+      qEl.textContent = round<2 ? 'Which of these two pulls you more?' : 'Last one. Which wins?';
+      pairEl.innerHTML='';
+      pairEl.appendChild(optionButton(pair[0]));
+      pairEl.appendChild(optionButton(pair[1]));
+    }
+    function choose(key){
+      if(round<2){ winners.push(key); round++; renderRound(); }
+      else { finish(key); }
+    }
+    function planFor(key){
+      var steps=[];
+      steps.push('Arrive at opening, 10:00. The island fills up after 11:00, especially the Neues Museum.');
+      steps.push('Enter ' + M[key].n + ' first, while you are fresh and it is quiet. ' + M[key].meta + '.');
+      if(key!=='alte') steps.push('Walk up the Alte Nationalgalerie staircase to the colonnade level. It is free, and the view over the Lustgarten toward the TV Tower is the best photograph here.');
+      else steps.push('Cross to the Kolonnadenhof courtyard and the James-Simon-Galerie entrance hall. Both are free to walk through.');
+      steps.push('Finish outside: the Lustgarten in front of the Altes Museum, then the riverside path past the Bode-Museum dome. No ticket needed for any of it.');
+      return steps;
+    }
+    function finish(key){
+      var m=M[key];
+      document.getElementById('mi-win').textContent=m.n;
+      document.getElementById('mi-why').textContent=m.why;
+      var f=document.getElementById('mi-facts'); f.innerHTML='';
+      m.facts.forEach(function(t){ var s=document.createElement('span'); s.className='mi-chip'; s.textContent=t; f.appendChild(s); });
+      var ol=document.getElementById('mi-plan'); ol.innerHTML='';
+      planFor(key).forEach(function(t){ var li=document.createElement('li'); li.textContent=t; ol.appendChild(li); });
+      game.style.display='none'; result.classList.add('show');
+      progress.innerHTML='';
+      for(var i=0;i<3;i++){ var d=document.createElement('div'); d.className='mi-pip done'; progress.appendChild(d); }
+    }
+    function reset(){
+      winners=[]; round=0; game.style.display=''; result.classList.remove('show'); renderRound();
+    }
+    document.getElementById('mi-again').addEventListener('click',reset);
+    document.getElementById('mi-skip').addEventListener('click',function(){ finish('neues'); });
+
+    document.getElementById('mi-foot').innerHTML =
+      'One museum is €14. Two or more and the Museum Island day pass (about €24 to €25) is already cheaper. ' +
+      'Under 18 is free but still needs a €0 ticket. ' +
+      '<a href="https://www.smb.museum/en/home/" target="_blank" rel="noopener">Check current prices and opening hours ›</a>';
+
+    renderRound();
+  })();
+  </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Day Duet | BerlinWalk</title>
+  <meta name="description" content="Two travellers privately choose two Berlin postcards each, then reveal one shared stop and a fair shape for the day.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<main id="bw-day-duet">
+  <style>
+    #bw-day-duet {
+      --duet-deep: #123d18;
+      --duet-green: #1b5e20;
+      --duet-yellow: #ffe600;
+      --duet-cream: #fffbea;
+      --duet-paper: #fffef8;
+      --duet-ink: #212121;
+      --duet-muted: #526052;
+      --duet-line: #d7e3d2;
+      --duet-coral: #e36d58;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 3px;
+      color: var(--duet-ink);
+      font-family: Montserrat, Arial, sans-serif;
+    }
+    #bw-day-duet * { box-sizing: border-box; }
+    #bw-day-duet [hidden] { display: none !important; }
+    .duet-shell {
+      overflow: hidden;
+      border: 1px solid var(--duet-line);
+      border-radius: 26px;
+      background: var(--duet-paper);
+      box-shadow: 0 22px 56px rgba(18, 61, 24, .14);
+    }
+    .duet-hero {
+      position: relative;
+      min-height: 315px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(230px, .75fr);
+      align-items: center;
+      gap: 20px;
+      overflow: hidden;
+      padding: 30px;
+      color: #fff;
+      background:
+        radial-gradient(circle at 82% 18%, rgba(255, 230, 0, .22), transparent 31%),
+        linear-gradient(135deg, #0b3111, var(--duet-green));
+    }
+    .duet-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .14;
+      background-image: radial-gradient(circle, #fff 1px, transparent 1.5px);
+      background-size: 19px 19px;
+    }
+    .duet-hero-copy { position: relative; z-index: 2; }
+    .duet-kicker {
+      display: inline-flex;
+      margin: 0 0 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--duet-yellow);
+      color: var(--duet-deep);
+      font-size: .72rem;
+      font-weight: 900;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+    .duet-hero h2 {
+      margin: 0;
+      max-width: 560px;
+      font-family: Merriweather, Georgia, serif;
+      font-size: clamp(1.75rem, 4.8vw, 2.85rem);
+      line-height: 1.08;
+      letter-spacing: -.025em;
+    }
+    .duet-hero-copy > p:last-child {
+      margin: 12px 0 0;
+      max-width: 590px;
+      color: #eaf3e8;
+      font-size: .96rem;
+      line-height: 1.6;
+    }
+    .duet-postcard-stack {
+      position: relative;
+      z-index: 2;
+      min-height: 225px;
+    }
+    .duet-mini-card {
+      position: absolute;
+      width: 165px;
+      height: 205px;
+      overflow: hidden;
+      border: 8px solid #fff;
+      border-bottom-width: 30px;
+      border-radius: 6px;
+      background: #fff;
+      box-shadow: 0 15px 28px rgba(0, 0, 0, .3);
+    }
+    .duet-mini-card img { width: 100%; height: 100%; object-fit: cover; }
+    .duet-mini-card:first-child { top: 11px; left: 8px; transform: rotate(-9deg); }
+    .duet-mini-card:last-child { top: 3px; right: 4px; transform: rotate(8deg); }
+    .duet-mini-card::after {
+      content: "A";
+      position: absolute;
+      right: 5px;
+      bottom: -25px;
+      color: var(--duet-deep);
+      font-size: .72rem;
+      font-weight: 900;
+    }
+    .duet-mini-card:last-child::after { content: "B"; }
+    .duet-body { padding: 25px 28px 30px; }
+    .duet-progress {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 20px;
+      padding: 0;
+      list-style: none;
+    }
+    .duet-progress li {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #758075;
+      font-size: .75rem;
+      font-weight: 850;
+    }
+    .duet-progress li::before {
+      content: attr(data-step);
+      display: grid;
+      place-items: center;
+      flex: 0 0 27px;
+      width: 27px;
+      height: 27px;
+      border: 2px solid #b7c6b4;
+      border-radius: 50%;
+      background: #fff;
+      color: #60705f;
+    }
+    .duet-progress li.is-active { color: var(--duet-deep); }
+    .duet-progress li.is-active::before,
+    .duet-progress li.is-done::before {
+      border-color: var(--duet-deep);
+      background: var(--duet-yellow);
+      color: var(--duet-deep);
+    }
+    .duet-progress li.is-done { color: var(--duet-green); }
+    .duet-stage-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .duet-stage-head h3 {
+      margin: 0;
+      color: var(--duet-deep);
+      font-family: Merriweather, Georgia, serif;
+      font-size: clamp(1.3rem, 3.5vw, 1.75rem);
+      line-height: 1.18;
+    }
+    .duet-stage-head p { margin: 7px 0 0; color: var(--duet-muted); line-height: 1.55; }
+    .duet-counter {
+      flex: 0 0 auto;
+      min-width: 78px;
+      padding: 8px 11px;
+      border: 2px solid var(--duet-deep);
+      border-radius: 999px;
+      background: var(--duet-cream);
+      color: var(--duet-deep);
+      font-size: .78rem;
+      font-weight: 900;
+      text-align: center;
+    }
+    .duet-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .duet-card {
+      position: relative;
+      min-width: 0;
+      overflow: hidden;
+      padding: 0;
+      border: 3px solid transparent;
+      border-radius: 16px;
+      background: #fff;
+      color: var(--duet-ink);
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+      box-shadow: 0 7px 18px rgba(18, 61, 24, .11);
+      transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+    }
+    .duet-card:hover { transform: translateY(-3px) rotate(-.4deg); box-shadow: 0 12px 24px rgba(18, 61, 24, .16); }
+    .duet-card:focus-visible { outline: 4px solid var(--duet-yellow); outline-offset: 3px; }
+    .duet-card[aria-pressed="true"] { border-color: var(--duet-deep); transform: translateY(-2px) rotate(.6deg); }
+    .duet-card[aria-pressed="true"]::after {
+      content: "Picked";
+      position: absolute;
+      top: 9px;
+      right: 9px;
+      padding: 5px 8px;
+      border: 2px solid var(--duet-deep);
+      border-radius: 999px;
+      background: var(--duet-yellow);
+      color: var(--duet-deep);
+      font-size: .67rem;
+      font-weight: 900;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, .18);
+    }
+    .duet-card img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+    .duet-card-copy { display: block; padding: 11px 12px 13px; }
+    .duet-card-copy strong { display: block; color: var(--duet-deep); font-size: .88rem; line-height: 1.25; }
+    .duet-card-copy small { display: block; margin-top: 4px; color: var(--duet-muted); font-size: .72rem; line-height: 1.35; }
+    .duet-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .duet-actions p { margin: 0; color: var(--duet-muted); font-size: .78rem; line-height: 1.45; }
+    .duet-primary,
+    .duet-secondary {
+      display: inline-flex;
+      min-height: 47px;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 18px;
+      border: 2px solid var(--duet-deep);
+      border-radius: 999px;
+      color: var(--duet-deep) !important;
+      font: 900 .84rem/1.2 Montserrat, Arial, sans-serif;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .duet-primary { background: var(--duet-yellow); box-shadow: 0 4px 0 var(--duet-deep); }
+    .duet-primary:hover,
+    .duet-primary:active,
+    .duet-primary:visited { color: var(--duet-deep) !important; }
+    .duet-primary:hover:not(:disabled) { transform: translateY(1px); box-shadow: 0 3px 0 var(--duet-deep); }
+    .duet-primary:disabled { opacity: .42; cursor: not-allowed; box-shadow: none; }
+    .duet-primary:focus-visible,
+    .duet-secondary:focus-visible { outline: 4px solid var(--duet-green); outline-offset: 3px; }
+    .duet-secondary { background: #fff; box-shadow: none; }
+    .duet-pass {
+      position: relative;
+      overflow: hidden;
+      padding: 35px 28px;
+      border-radius: 22px;
+      color: #fff;
+      text-align: center;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255, 230, 0, .21), transparent 31%),
+        var(--duet-deep);
+    }
+    .duet-pass-mark {
+      display: grid;
+      place-items: center;
+      width: 78px;
+      height: 78px;
+      margin: 0 auto 16px;
+      border: 3px solid #fff;
+      border-radius: 22px;
+      background: var(--duet-yellow);
+      color: var(--duet-deep);
+      font-size: 2rem;
+      transform: rotate(-4deg);
+      box-shadow: 8px 8px 0 rgba(255, 255, 255, .14);
+    }
+    .duet-pass h3 { margin: 0; font-family: Merriweather, Georgia, serif; font-size: 1.7rem; }
+    .duet-pass p { max-width: 540px; margin: 10px auto 20px; color: #e8f2e7; line-height: 1.6; }
+    .duet-pass .duet-primary { min-width: 220px; }
+    .duet-result {
+      overflow: hidden;
+      border: 1px solid var(--duet-line);
+      border-radius: 22px;
+      background: var(--duet-cream);
+    }
+    .duet-result-head { padding: 23px 24px 21px; color: #fff; background: var(--duet-deep); }
+    .duet-result-label { margin: 0 0 6px; color: var(--duet-yellow); font-size: .73rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .duet-result-head h3 { margin: 0; font-family: Merriweather, Georgia, serif; font-size: clamp(1.45rem, 4vw, 2rem); line-height: 1.18; }
+    .duet-result-head p:last-child { margin: 9px 0 0; color: #e8f2e7; line-height: 1.55; }
+    .duet-route { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: stretch; gap: 10px; padding: 20px; }
+    .duet-route-card {
+      min-width: 0;
+      padding: 14px;
+      border: 1px solid var(--duet-line);
+      border-radius: 16px;
+      background: #fff;
+    }
+    .duet-route-card.is-hinge { background: var(--duet-yellow); border-color: var(--duet-deep); }
+    .duet-route-card span { display: block; margin-bottom: 5px; color: var(--duet-green); font-size: .65rem; font-weight: 900; letter-spacing: .07em; text-transform: uppercase; }
+    .duet-route-card.is-hinge span { color: var(--duet-deep); }
+    .duet-route-card strong { display: block; color: var(--duet-deep); font-size: .93rem; line-height: 1.25; }
+    .duet-route-card p { margin: 6px 0 0; color: var(--duet-muted); font-size: .73rem; line-height: 1.45; }
+    .duet-route-card.is-hinge p { color: #334530; }
+    .duet-arrow { display: grid; place-items: center; color: var(--duet-green); font-weight: 900; }
+    .duet-note { margin: 0 20px 20px; padding: 13px 15px; border-left: 4px solid var(--duet-coral); border-radius: 0 12px 12px 0; background: #fff; color: var(--duet-muted); font-size: .82rem; line-height: 1.55; }
+    .duet-result-actions { display: flex; gap: 10px; flex-wrap: wrap; padding: 0 20px 22px; }
+    .duet-foot {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 18px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--duet-line);
+    }
+    .duet-foot p { margin: 0; color: var(--duet-muted); font-size: .78rem; line-height: 1.55; }
+    .duet-text-link { color: var(--duet-deep); font-weight: 850; text-underline-offset: 3px; }
+    .duet-text-link:focus-visible { outline: 3px solid var(--duet-yellow); outline-offset: 3px; }
+    .duet-credit-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 39px;
+      padding: 8px 12px;
+      border: 1px solid var(--duet-deep);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--duet-deep);
+      font: 850 .74rem/1 Montserrat, Arial, sans-serif;
+      cursor: pointer;
+    }
+    .duet-credit-button:hover { background: var(--duet-cream); }
+    .duet-credit-button:focus-visible { outline: 3px solid var(--duet-yellow); outline-offset: 3px; }
+    .duet-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      background: rgba(8, 27, 11, .76);
+    }
+    .duet-modal-panel {
+      position: relative;
+      width: min(650px, 100%);
+      max-height: min(78vh, 680px);
+      overflow: auto;
+      padding: 24px;
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, .35);
+    }
+    .duet-modal-panel h3 { margin: 0 38px 8px 0; color: var(--duet-deep); font-family: Merriweather, Georgia, serif; }
+    .duet-modal-panel p { margin: 0 0 10px; color: var(--duet-muted); font-size: .8rem; line-height: 1.5; }
+    .duet-modal-panel ul { margin: 12px 0 0; padding-left: 20px; }
+    .duet-modal-panel li { margin: 7px 0; color: var(--duet-muted); font-size: .78rem; line-height: 1.45; }
+    .duet-modal-panel a { color: var(--duet-deep); font-weight: 800; }
+    .duet-modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border: 2px solid var(--duet-deep);
+      border-radius: 50%;
+      background: var(--duet-yellow);
+      color: var(--duet-deep);
+      font: 900 1.1rem/1 Montserrat, Arial, sans-serif;
+      cursor: pointer;
+    }
+    .duet-modal-close:focus-visible { outline: 3px solid var(--duet-green); outline-offset: 3px; }
+    @media (max-width: 720px) {
+      .duet-hero { grid-template-columns: 1fr; min-height: 500px; padding: 24px 20px 20px; align-content: space-between; }
+      .duet-postcard-stack { width: 300px; max-width: 100%; min-height: 215px; margin: 0 auto; }
+      .duet-body { padding: 21px 16px 25px; }
+      .duet-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .duet-stage-head { display: block; }
+      .duet-counter { display: inline-block; margin-top: 10px; }
+      .duet-route { grid-template-columns: 1fr; }
+      .duet-arrow { transform: rotate(90deg); min-height: 18px; }
+      .duet-foot { grid-template-columns: 1fr; }
+      .duet-actions { align-items: stretch; flex-direction: column; }
+      .duet-primary, .duet-secondary { width: 100%; }
+    }
+    @media (max-width: 390px) {
+      .duet-progress li { gap: 4px; font-size: .66rem; }
+      .duet-progress li::before { flex-basis: 23px; width: 23px; height: 23px; }
+      .duet-card-copy { padding: 9px 9px 11px; }
+      .duet-card-copy strong { font-size: .8rem; }
+      .duet-card-copy small { font-size: .67rem; }
+      .duet-mini-card { width: 150px; height: 190px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #bw-day-duet * { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+
+  <section class="duet-shell">
+    <header class="duet-hero">
+      <div class="duet-hero-copy">
+        <p class="duet-kicker">Two travellers • one phone</p>
+        <h2>Build one Berlin day from two honest wish lists</h2>
+        <p>Pick privately, pass the phone, then reveal a shared stop and one part of the day that belongs to each of you.</p>
+      </div>
+      <div class="duet-postcard-stack" aria-hidden="true">
+        <div class="duet-mini-card"><img src="assets/museum-island.jpg" alt=""></div>
+        <div class="duet-mini-card"><img src="assets/east-side-gallery.jpg" alt=""></div>
+      </div>
+    </header>
+
+    <div class="duet-body">
+      <ol class="duet-progress" aria-label="Berlin Day Duet progress">
+        <li class="is-active" data-progress="A" data-step="1">Traveller A</li>
+        <li data-progress="B" data-step="2">Traveller B</li>
+        <li data-progress="result" data-step="3">Reveal</li>
+      </ol>
+
+      <section id="duet-pick-screen" aria-labelledby="duet-stage-title">
+        <div class="duet-stage-head">
+          <div>
+            <h3 id="duet-stage-title">Traveller A, choose two postcards</h3>
+            <p id="duet-stage-copy">Pick the two places you would most regret missing. Keep the screen private for now.</p>
+          </div>
+          <span class="duet-counter" id="duet-counter" aria-live="polite">0 of 2</span>
+        </div>
+
+        <div class="duet-grid" id="duet-grid">
+          <button class="duet-card" type="button" data-id="museum" aria-pressed="false">
+            <img src="assets/museum-island.jpg" alt="Museum Island and the TV Tower across the River Spree">
+            <span class="duet-card-copy"><strong>Museum Island</strong><small>Collections and monumental Berlin</small></span>
+          </button>
+          <button class="duet-card" type="button" data-id="courtyards" aria-pressed="false">
+            <img src="assets/hackesche-hoefe.jpg" alt="The tiled first courtyard of Hackesche Höfe at night">
+            <span class="duet-card-copy"><strong>Hackesche Höfe</strong><small>Courtyards, cafes and city texture</small></span>
+          </button>
+          <button class="duet-card" type="button" data-id="wallart" aria-pressed="false">
+            <img src="assets/east-side-gallery.jpg" alt="Visitors beside murals at the East Side Gallery">
+            <span class="duet-card-copy"><strong>East Side Gallery</strong><small>Wall history and public art</small></span>
+          </button>
+          <button class="duet-card" type="button" data-id="bridge" aria-pressed="false">
+            <img src="assets/oberbaumbruecke.jpg" alt="Oberbaum Bridge over the Spree at sunset">
+            <span class="duet-card-copy"><strong>Oberbaumbrücke</strong><small>River views and an east-side crossing</small></span>
+          </button>
+          <button class="duet-card" type="button" data-id="market" aria-pressed="false">
+            <img src="assets/markthalle-neun.jpg" alt="Food counters inside Markthalle Neun">
+            <span class="duet-card-copy"><strong>Markthalle Neun</strong><small>Food, provided today's programme fits</small></span>
+          </button>
+          <button class="duet-card" type="button" data-id="park" aria-pressed="false">
+            <img src="assets/tiergarten.jpg" alt="A cyclist crossing a small bridge in Tiergarten">
+            <span class="duet-card-copy"><strong>Tiergarten</strong><small>Trees, space and a slower half-day</small></span>
+          </button>
+        </div>
+
+        <div class="duet-actions">
+          <p>Choose exactly two. Nothing is shared until both travellers have sealed their picks.</p>
+          <button class="duet-primary" id="duet-seal" type="button" disabled>Seal my two picks</button>
+        </div>
+      </section>
+
+      <section class="duet-pass" id="duet-pass-screen" hidden aria-labelledby="duet-pass-title">
+        <div class="duet-pass-mark" aria-hidden="true">↗</div>
+        <h3 id="duet-pass-title">Picks sealed. Pass the phone.</h3>
+        <p>Traveller A's postcards are hidden. Traveller B should tap below, then choose two without asking what came first.</p>
+        <button class="duet-primary" id="duet-start-b" type="button">Traveller B, start</button>
+      </section>
+
+      <section class="duet-result" id="duet-result-screen" hidden aria-live="polite" aria-labelledby="duet-result-title">
+        <div class="duet-result-head">
+          <p class="duet-result-label" id="duet-result-label">Your Berlin day</p>
+          <h3 id="duet-result-title" tabindex="-1"></h3>
+          <p id="duet-result-intro"></p>
+        </div>
+        <div class="duet-route" id="duet-route"></div>
+        <p class="duet-note" id="duet-note"></p>
+        <div class="duet-result-actions">
+          <button class="duet-secondary" id="duet-reset" type="button">Start a new duet</button>
+          <a class="duet-primary" href="https://www.berlinwalk.com/berlin-trip-planner" target="_top">Build the whole trip</a>
+        </div>
+      </section>
+
+      <footer class="duet-foot">
+        <p>This tool shapes a conversation, not live opening hours or transport. Confirm official tickets, programmes and a live route before leaving.</p>
+        <button class="duet-credit-button" id="duet-credit-open" type="button" aria-expanded="false" aria-controls="duet-credit-modal">ⓘ Tool-only visual credit</button>
+      </footer>
+    </div>
+  </section>
+
+  <div class="duet-modal" id="duet-credit-modal" hidden role="dialog" aria-modal="true" aria-labelledby="duet-credit-title">
+    <div class="duet-modal-panel">
+      <button class="duet-modal-close" id="duet-credit-close" type="button" aria-label="Close tool visual credits">×</button>
+      <h3 id="duet-credit-title">Tool-only visual credit</h3>
+      <p>This disclosure covers the postcard photograph used only in this tool. The article owns credits for its matching article images.</p>
+      <ul>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Berlin_Hackesche_H%C3%B6fe2.jpg" target="_blank" rel="noopener">Hackesche Höfe</a> by Marek Śliwecki, CC BY-SA 4.0.</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    var places = {
+      museum: { name: 'Museum Island', zone: 1, note: 'Use the official museum page for the visit and any timed entry.' },
+      courtyards: { name: 'Hackesche Höfe', zone: 1, note: 'Let the courtyards and nearby cafes provide the flexible Mitte block.' },
+      wallart: { name: 'East Side Gallery', zone: 2, note: 'Walk the monument with its history in mind, then stay on the east side.' },
+      bridge: { name: 'Oberbaumbrücke', zone: 2, note: 'Use the Spree crossing as a view and a real link between districts.' },
+      market: { name: 'Markthalle Neun', zone: 3, note: 'Check the current programme before making the market a fixed stop.' },
+      park: { name: 'Tiergarten', zone: 0, note: 'Choose the park entrance that serves the next part of the day.' }
+    };
+    var picks = { A: [], B: [] };
+    var traveller = 'A';
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.duet-card'));
+    var pickScreen = document.getElementById('duet-pick-screen');
+    var passScreen = document.getElementById('duet-pass-screen');
+    var resultScreen = document.getElementById('duet-result-screen');
+    var stageTitle = document.getElementById('duet-stage-title');
+    var stageCopy = document.getElementById('duet-stage-copy');
+    var counter = document.getElementById('duet-counter');
+    var seal = document.getElementById('duet-seal');
+    var startB = document.getElementById('duet-start-b');
+    var reset = document.getElementById('duet-reset');
+    var route = document.getElementById('duet-route');
+    var resultTitle = document.getElementById('duet-result-title');
+    var resultIntro = document.getElementById('duet-result-intro');
+    var resultLabel = document.getElementById('duet-result-label');
+    var resultNote = document.getElementById('duet-note');
+    var progress = Array.prototype.slice.call(document.querySelectorAll('[data-progress]'));
+    var modal = document.getElementById('duet-credit-modal');
+    var openCredits = document.getElementById('duet-credit-open');
+    var closeCredits = document.getElementById('duet-credit-close');
+    var lastFocus = null;
+
+    function updateProgress(active) {
+      var order = ['A', 'B', 'result'];
+      var activeIndex = order.indexOf(active);
+      progress.forEach(function (item) {
+        var index = order.indexOf(item.getAttribute('data-progress'));
+        item.classList.toggle('is-active', index === activeIndex);
+        item.classList.toggle('is-done', index < activeIndex);
+      });
+    }
+
+    function renderPicks() {
+      cards.forEach(function (card) {
+        card.setAttribute('aria-pressed', picks[traveller].indexOf(card.getAttribute('data-id')) !== -1 ? 'true' : 'false');
+      });
+      counter.textContent = picks[traveller].length + ' of 2';
+      seal.disabled = picks[traveller].length !== 2;
+    }
+
+    function concealCards() {
+      cards.forEach(function (card) { card.setAttribute('aria-pressed', 'false'); });
+    }
+
+    cards.forEach(function (card) {
+      card.addEventListener('click', function () {
+        var id = card.getAttribute('data-id');
+        var index = picks[traveller].indexOf(id);
+        if (index !== -1) {
+          picks[traveller].splice(index, 1);
+        } else if (picks[traveller].length < 2) {
+          picks[traveller].push(id);
+        }
+        renderPicks();
+      });
+    });
+
+    seal.addEventListener('click', function () {
+      if (picks[traveller].length !== 2) return;
+      if (traveller === 'A') {
+        concealCards();
+        pickScreen.hidden = true;
+        passScreen.hidden = false;
+        updateProgress('B');
+        startB.focus();
+      } else {
+        showResult();
+      }
+    });
+
+    startB.addEventListener('click', function () {
+      traveller = 'B';
+      passScreen.hidden = true;
+      pickScreen.hidden = false;
+      stageTitle.textContent = 'Traveller B, choose two postcards';
+      stageCopy.textContent = 'Traveller A’s choices are hidden. Pick the two places you would most regret missing.';
+      seal.textContent = 'Seal and reveal the day';
+      renderPicks();
+      cards[0].focus();
+    });
+
+    function closestPair() {
+      var candidates = [];
+      picks.A.forEach(function (a, ai) {
+        picks.B.forEach(function (b, bi) {
+          candidates.push({ a: a, b: b, score: Math.abs(places[a].zone - places[b].zone), tie: ai + bi });
+        });
+      });
+      candidates.sort(function (x, y) { return x.score - y.score || x.tie - y.tie; });
+      return candidates[0];
+    }
+
+    function hingeFor(a, b) {
+      var pair = [a, b].sort().join('|');
+      if (pair === 'courtyards|museum') {
+        return { name: 'Monbijoupark and the Spree', note: 'Leave the museum side, pause beside the river, then continue to Hackescher Markt.' };
+      }
+      if (pair === 'bridge|wallart') {
+        return { name: 'The Spree at Oberbaumbrücke', note: 'Keep the Gallery and bridge in one sequence instead of treating them as two distant stops.' };
+      }
+      if (pair === 'bridge|market' || pair === 'market|wallart') {
+        return { name: 'Oberbaumbrücke handoff', note: 'Cross the river, then check a live route towards Markthalle Neun before you continue.' };
+      }
+      if (pair === 'museum|wallart' || pair === 'courtyards|wallart' || pair === 'bridge|museum' || pair === 'bridge|courtyards') {
+        return { name: 'Alexanderplatz transfer', note: 'Finish the Mitte choice, then use one direct eastbound transit move instead of adding stops between.' };
+      }
+      if (pair === 'courtyards|park' || pair === 'museum|park') {
+        return { name: 'Brandenburg Gate', note: 'Use the eastern edge of Tiergarten as the pause, then check a live route to or from Mitte.' };
+      }
+      if (pair === 'market|park') {
+        return { name: 'Potsdamer Platz transfer', note: 'Treat this as a transport handoff, not another attraction, and check the live route.' };
+      }
+      return { name: 'One clean transit move', note: 'Keep both priorities, remove extra stops, and check a live route between them.' };
+    }
+
+    function cardMarkup(label, id, extraClass) {
+      var place = places[id];
+      return '<article class="duet-route-card' + (extraClass ? ' ' + extraClass : '') + '">' +
+        '<span>' + label + '</span><strong>' + place.name + '</strong><p>' + place.note + '</p></article>';
+    }
+
+    function hingeMarkup(hinge) {
+      return '<article class="duet-route-card is-hinge"><span>Shared stop</span><strong>' + hinge.name + '</strong><p>' + hinge.note + '</p></article>';
+    }
+
+    function arrowMarkup() { return '<div class="duet-arrow" aria-hidden="true">→</div>'; }
+
+    function showResult() {
+      var overlap = picks.A.filter(function (id) { return picks.B.indexOf(id) !== -1; });
+      var html = '';
+      if (overlap.length === 2) {
+        resultLabel.textContent = 'Two matching postcards';
+        resultTitle.textContent = 'A full match: keep the day compact';
+        resultIntro.textContent = 'You chose the same two places. That is permission to slow down, not an invitation to add four more.';
+        html = cardMarkup('First shared stop', overlap[0]) + arrowMarkup() + hingeMarkup(hingeFor(overlap[0], overlap[1])) + arrowMarkup() + cardMarkup('Second shared stop', overlap[1]);
+        resultNote.textContent = 'Check the least flexible opening or booking first. Let that decide the order, then leave the rest of the half-day open.';
+      } else if (overlap.length === 1) {
+        var shared = overlap[0];
+        var aOnly = picks.A.filter(function (id) { return id !== shared; })[0];
+        var bOnly = picks.B.filter(function (id) { return id !== shared; })[0];
+        resultLabel.textContent = 'One matching postcard';
+        resultTitle.textContent = 'You found a place that works for both of you';
+        resultIntro.textContent = 'Protect the matching choice, then give each traveller one personal part of the day.';
+        html = cardMarkup('Traveller A’s part', aOnly) + arrowMarkup() + hingeMarkup({ name: places[shared].name, note: 'Both of you chose this. Use it as the centre of the day.' }) + arrowMarkup() + cardMarkup('Traveller B’s part', bOnly);
+        resultNote.textContent = 'Put the fixed or time-sensitive stop first. If the three places do not form a compact route, keep the shared stop and move one personal choice to another day.';
+      } else {
+        var pair = closestPair();
+        var hinge = hingeFor(pair.a, pair.b);
+        resultLabel.textContent = 'No matching postcards';
+        resultTitle.textContent = 'Different interests, one workable handoff';
+        resultIntro.textContent = 'Do not invent a weak compromise. Use the closest pair as the spine and let one traveller lead each side.';
+        html = cardMarkup('Traveller A leads', pair.a) + arrowMarkup() + hingeMarkup(hinge) + arrowMarkup() + cardMarkup('Traveller B leads', pair.b);
+        resultNote.textContent = 'Your other two postcards are not rejected. Move them to another day rather than stretching this one across Berlin.';
+      }
+      route.innerHTML = html;
+      concealCards();
+      pickScreen.hidden = true;
+      resultScreen.hidden = false;
+      updateProgress('result');
+      resultTitle.focus && resultTitle.focus();
+    }
+
+    reset.addEventListener('click', function () {
+      picks = { A: [], B: [] };
+      traveller = 'A';
+      resultScreen.hidden = true;
+      passScreen.hidden = true;
+      pickScreen.hidden = false;
+      stageTitle.textContent = 'Traveller A, choose two postcards';
+      stageCopy.textContent = 'Pick the two places you would most regret missing. Keep the screen private for now.';
+      seal.textContent = 'Seal my two picks';
+      updateProgress('A');
+      renderPicks();
+      cards[0].focus();
+    });
+
+    function closeModal() {
+      modal.hidden = true;
+      openCredits.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      if (lastFocus) lastFocus.focus();
+    }
+
+    openCredits.addEventListener('click', function () {
+      lastFocus = document.activeElement;
+      modal.hidden = false;
+      openCredits.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      closeCredits.focus();
+    });
+    closeCredits.addEventListener('click', closeModal);
+    modal.addEventListener('click', function (event) { if (event.target === modal) closeModal(); });
+    document.addEventListener('keydown', function (event) { if (event.key === 'Escape' && !modal.hidden) closeModal(); });
+
+    renderPicks();
+  }());
+  </script>
+</main>
+</body>
+</html>

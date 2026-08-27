@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Berlin Train Announcement Decoder — What the U-Bahn and S-Bahn Voice Is Saying</title>
+<meta name="description" content="Ride one Berlin train and decode the German announcements you actually hear: Zurückbleiben bitte, Nächster Halt, Ausstieg rechts, Ersatzverkehr and Endstation. Switch between the U-Bahn and S-Bahn voice, see the plain-English meaning, and know what to do." />
+<link rel="stylesheet" href="../css/brand.css" />
+<script defer src="../js/brand.js"></script>
+<style>
+  .bta {
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+    color: var(--bw-text, #212121);
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4px 4px 16px;
+    box-sizing: border-box;
+    -webkit-text-size-adjust: 100%;
+  }
+  .bta *, .bta *::before, .bta *::after { box-sizing: border-box; }
+  .bta__eyebrow {
+    font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+    color: #1B5E20; margin: 2px 0 4px;
+  }
+  .bta__title { font-size: clamp(19px, 5vw, 25px); line-height: 1.15; font-weight: 800; margin: 0 0 6px; color: #123D18; }
+  .bta__intro { font-size: 14px; line-height: 1.55; margin: 0 0 12px; color: #33463a; }
+
+  /* Mode toggle */
+  .bta__modes { display: flex; gap: 8px; margin: 0 0 12px; }
+  .bta__mode {
+    flex: 1 1 0; min-width: 0; cursor: pointer; border: 2px solid #cfe0c8; background: #fff;
+    border-radius: 12px; padding: 9px 8px; font-family: inherit; font-size: 13.5px; font-weight: 700;
+    color: #2c3b30; display: flex; align-items: center; justify-content: center; gap: 7px; line-height: 1.2;
+    transition: border-color .15s, background .15s, box-shadow .15s;
+  }
+  .bta__mode .bta__dot { width: 11px; height: 11px; border-radius: 3px; flex: none; }
+  .bta__mode--u .bta__dot { background: #FFD400; }
+  .bta__mode--s .bta__dot { background: #178a3a; border-radius: 50%; }
+  .bta__mode[aria-pressed="true"] { border-color: #1B5E20; background: #f2f8ee; box-shadow: 0 2px 0 #1B5E20; }
+  .bta__mode:focus-visible { outline: 3px solid #7CB342; outline-offset: 2px; }
+
+  /* Display panel (train PIS look) */
+  .bta__stage {
+    background: linear-gradient(180deg, #12241c 0%, #0d1b14 100%);
+    border: 1px solid #0a140f; border-radius: 16px; padding: 14px 15px 16px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 8px 22px rgba(9,20,15,.28);
+    position: relative; overflow: hidden;
+  }
+  .bta__meta { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .bta__line {
+    font-weight: 800; font-size: 13px; color: #123D18; background: #FFD400;
+    border-radius: 6px; padding: 3px 8px; line-height: 1; flex: none; letter-spacing: .02em;
+  }
+  .bta--s .bta__line { background: #178a3a; color: #fff; border-radius: 50%; width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; padding: 0; }
+  .bta__eq { display: inline-flex; align-items: flex-end; gap: 3px; height: 18px; }
+  .bta__eq i { width: 3px; background: #7CB342; border-radius: 2px; height: 5px; }
+  .bta--speaking .bta__eq i { animation: btaEq .9s ease-in-out infinite; }
+  .bta__eq i:nth-child(2) { animation-delay: .12s; }
+  .bta__eq i:nth-child(3) { animation-delay: .24s; }
+  .bta__eq i:nth-child(4) { animation-delay: .36s; }
+  @keyframes btaEq { 0%,100% { height: 5px; } 50% { height: 17px; } }
+  .bta__speaklabel { font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: #8fb69a; font-weight: 700; }
+  .bta__count { margin-left: auto; font-size: 11px; color: #7fa389; font-weight: 700; letter-spacing: .04em; }
+
+  .bta__de {
+    font-size: clamp(20px, 6.2vw, 30px); line-height: 1.2; font-weight: 800; color: #ffe600;
+    margin: 2px 0 6px; letter-spacing: .01em; min-height: 1.2em;
+  }
+  .bta__phon { font-size: 12.5px; color: #a9c9b1; font-style: italic; margin: 0 0 4px; }
+  .bta__jingle {
+    display: none; align-items: center; gap: 6px; margin-top: 8px; font-size: 12px; font-weight: 700;
+    color: #cfe8d3; background: rgba(124,179,66,.16); border: 1px solid rgba(124,179,66,.4);
+    border-radius: 999px; padding: 4px 10px; width: fit-content;
+  }
+  .bta--jingle .bta__jingle { display: inline-flex; }
+
+  /* Sliding doors accent (doors step only) */
+  .bta__doors { position: absolute; inset: 0; pointer-events: none; display: none; }
+  .bta--doors .bta__doors { display: block; }
+  .bta__doors span { position: absolute; top: 0; bottom: 0; width: 50%; background: rgba(10,20,15,.0); }
+  .bta__doors span.l { left: 0; border-right: 2px solid rgba(124,179,66,.0); animation: btaDoorL 1.1s ease forwards; }
+  .bta__doors span.r { right: 0; animation: btaDoorR 1.1s ease forwards; }
+  @keyframes btaDoorL { 0% { transform: translateX(-100%); background: rgba(9,17,13,.72);} 100% { transform: translateX(0); background: rgba(9,17,13,0);} }
+  @keyframes btaDoorR { 0% { transform: translateX(100%); background: rgba(9,17,13,.72);} 100% { transform: translateX(0); background: rgba(9,17,13,0);} }
+
+  /* Reveal + answer */
+  .bta__reveal {
+    margin-top: 12px; width: 100%; cursor: pointer; border: none; border-radius: 11px;
+    background: #FFE600; color: #123D18; font-family: inherit; font-weight: 800; font-size: 14.5px;
+    padding: 11px 12px; letter-spacing: .01em; transition: filter .15s;
+  }
+  .bta__reveal:hover { filter: brightness(.95); }
+  .bta__reveal:focus-visible { outline: 3px solid #1B5E20; outline-offset: 2px; }
+  .bta__answer { display: none; margin-top: 12px; }
+  .bta--open .bta__answer { display: block; }
+  .bta--open .bta__reveal { display: none; }
+  .bta__en { font-size: 15.5px; line-height: 1.5; font-weight: 700; color: #16241b; margin: 0 0 9px; }
+  .bta__en b { color: #1B5E20; }
+  .bta__do {
+    display: flex; gap: 9px; align-items: flex-start; background: #eef6e6; border: 1px solid #cfe4bf;
+    border-left: 4px solid #1B5E20; border-radius: 10px; padding: 10px 12px; margin: 0 0 11px;
+  }
+  .bta__do svg { flex: none; margin-top: 1px; }
+  .bta__do p { margin: 0; font-size: 14px; line-height: 1.5; color: #223528; }
+  .bta__do b { color: #1B5E20; }
+  .bta__wordshead { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #6a8471; margin: 0 0 6px; }
+  .bta__words { display: flex; flex-wrap: wrap; gap: 6px; }
+  .bta__word {
+    font-size: 12.5px; background: #FAFAF5; border: 1px solid #e2e4d6; border-radius: 8px;
+    padding: 4px 9px; color: #2c3b30; line-height: 1.35;
+  }
+  .bta__word b { color: #123D18; font-weight: 800; }
+
+  /* Nav */
+  .bta__nav { display: flex; align-items: center; gap: 10px; margin-top: 14px; }
+  .bta__btn {
+    cursor: pointer; border: 2px solid #1B5E20; background: #1B5E20; color: #fff; font-family: inherit;
+    font-weight: 800; font-size: 14px; border-radius: 11px; padding: 10px 16px; transition: filter .15s, opacity .15s;
+  }
+  .bta__btn--ghost { background: #fff; color: #1B5E20; }
+  .bta__btn:hover { filter: brightness(1.06); }
+  .bta__btn:disabled { opacity: .38; cursor: default; filter: none; }
+  .bta__btn:focus-visible { outline: 3px solid #7CB342; outline-offset: 2px; }
+  .bta__btn--next { margin-left: auto; }
+  .bta__dots { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; flex: 1 1 auto; }
+  .bta__pip { width: 9px; height: 9px; border-radius: 50%; background: #d5e2cd; border: none; padding: 0; cursor: pointer; }
+  .bta__pip[aria-current="true"] { background: #1B5E20; transform: scale(1.25); }
+  .bta__pip:focus-visible { outline: 2px solid #1B5E20; outline-offset: 2px; }
+
+  .bta__note {
+    margin-top: 12px; font-size: 12.5px; line-height: 1.5; color: #40513f; background: #f4f7ef;
+    border: 1px solid #e3ecd8; border-radius: 10px; padding: 9px 12px;
+  }
+  .bta__note b { color: #1B5E20; }
+
+  @media (max-width: 430px) {
+    .bta__mode { font-size: 12.5px; padding: 8px 6px; }
+    .bta__btn { padding: 9px 12px; font-size: 13px; }
+    .bta__de { min-height: 1.1em; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bta--speaking .bta__eq i { animation: none; height: 12px; }
+    .bta__doors span.l, .bta__doors span.r { animation: none; transform: translateX(0); background: transparent; }
+  }
+</style>
+</head>
+<body>
+<div class="bta bta--s" id="bta">
+  <p class="bta__eyebrow">Berlinwalk.com · Transport German</p>
+  <h1 class="bta__title">Berlin Train Announcement Decoder</h1>
+  <p class="bta__intro">Board one train to Alexanderplatz and hear it out. Step through the German announcements you actually get on a Berlin ride, see what each one means, and know the one move it is asking you to make. Switch between the two voices: the U-Bahn (BVG) keeps it short, the S-Bahn (DB) tells you more.</p>
+
+  <div class="bta__modes" role="group" aria-label="Choose which train voice">
+    <button type="button" class="bta__mode bta__mode--u" data-mode="u" aria-pressed="false"><span class="bta__dot"></span>U-Bahn · BVG</button>
+    <button type="button" class="bta__mode bta__mode--s" data-mode="s" aria-pressed="true"><span class="bta__dot"></span>S-Bahn · DB</button>
+  </div>
+
+  <div class="bta__stage" aria-live="polite">
+    <div class="bta__doors" aria-hidden="true"><span class="l"></span><span class="r"></span></div>
+    <div class="bta__meta">
+      <span class="bta__line" id="btaLine">S</span>
+      <span class="bta__eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span class="bta__speaklabel">Now playing</span>
+      <span class="bta__count" id="btaCount">1 / 7</span>
+    </div>
+    <div class="bta__de" id="btaDe">Zug nach Alexanderplatz. Einsteigen, bitte.</div>
+    <p class="bta__phon" id="btaPhon">tsook nakh · ain-shty-gen, bit-uh</p>
+    <div class="bta__jingle" id="btaJingle" aria-hidden="true">♪ doo · DOO · doo <span style="opacity:.75">— the old S-Bahn door chime</span></div>
+  </div>
+
+  <button type="button" class="bta__reveal" id="btaReveal">What does it mean? →</button>
+
+  <div class="bta__answer" id="btaAnswer">
+    <p class="bta__en" id="btaEn"></p>
+    <div class="bta__do">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#1B5E20"/><path d="M4.6 9.2l2.6 2.6 6-6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <p id="btaDo"></p>
+    </div>
+    <p class="bta__wordshead">Word by word</p>
+    <div class="bta__words" id="btaWords"></div>
+  </div>
+
+  <div class="bta__nav">
+    <button type="button" class="bta__btn bta__btn--ghost" id="btaPrev" aria-label="Previous announcement">← Back</button>
+    <div class="bta__dots" id="btaDots" role="tablist" aria-label="Ride progress"></div>
+    <button type="button" class="bta__btn bta__btn--next" id="btaNext">Next →</button>
+  </div>
+
+  <p class="bta__note" id="btaNote"></p>
+</div>
+
+<script>
+(function () {
+  var STEPS = {
+    s: [
+      {
+        line: 'S', de: 'Zug nach Alexanderplatz. Einsteigen, bitte.', phon: 'tsook nakh … · ain-shty-gen, bit-uh',
+        en: 'This is the <b>train to Alexanderplatz</b>. Please board.',
+        doTxt: '<b>Check the destination, then get on.</b> A Berlin train is named by its final stop, not a number you memorise. If your stop is on the way to that destination, this is your train.',
+        words: [['Zug','train'],['nach','to / towards'],['Einsteigen','board / get in'],['bitte','please']]
+      },
+      {
+        line: 'S', de: 'Zurückbleiben, bitte!', phon: 'tsoo-RUK-bly-ben, bit-uh', jingle: true, doors: true,
+        en: 'Stand back, please. <b>The doors are closing now.</b>',
+        doTxt: '<b>Step back from the doors.</b> This is the one you will hear most in Berlin. When it plays, the doors are about to shut, so do not lunge for them. Wait for the next train instead; on the core lines it is only a few minutes.',
+        words: [['zurück','back'],['bleiben','to stay'],['zurückbleiben','stand / stay back'],['bitte','please']]
+      },
+      {
+        line: 'S', de: 'Nächster Halt: Hackescher Markt.', phon: 'NEKH-ster halt',
+        en: '<b>Next stop: Hackescher Markt.</b> Alexanderplatz is the one after.',
+        doTxt: '<b>Listen for your stop, or watch the strip above the doors.</b> The recorded voice and the little display say the same thing. If you hear a name that is not yours yet, stay seated.',
+        words: [['nächster','next'],['Halt','stop'],['Halt','(also: "stop!" as a command)']]
+      },
+      {
+        line: 'S', de: 'Ausstieg rechts.', phon: 'OWS-shteek rekhts',
+        en: 'Exit on the <b>right</b>, in the direction of travel. (<b>links</b> = left.)',
+        doTxt: '<b>Shift toward the correct doors before the train stops.</b> The S-Bahn tells you which side opens at each station. Getting this right saves you the little scramble across a packed carriage.',
+        words: [['Ausstieg','exit / way out'],['rechts','right'],['links','left'],['in Fahrtrichtung','in the direction of travel']]
+      },
+      {
+        line: 'S', de: 'Bitte beachten Sie die Lücke.', phon: 'bit-uh be-AKH-ten zee dee LUK-uh',
+        en: 'Please <b>mind the gap</b> between the train and the platform edge.',
+        doTxt: '<b>Watch your step getting off.</b> On some curved platforms the gap is real, especially with a suitcase or a pram. Not every train says it, so do not rely on the warning.',
+        words: [['beachten','pay attention to'],['Lücke','gap'],['Bahnsteig','platform'],['Bahnsteigkante','platform edge']]
+      },
+      {
+        line: 'S', de: 'Ersatzverkehr / Schienenersatzverkehr (SEV).', phon: 'er-ZATS-fair-kair',
+        en: 'Rail replacement service. <b>A stretch of the line is closed and a bus takes over.</b>',
+        doTxt: '<b>Follow the SEV / Ersatzverkehr signs to the marked bus.</b> Usually purple, labelled "Ersatzverkehr", running every few minutes. It follows the same route and your normal ticket still covers it. Weekend and summer works are the usual cause.',
+        words: [['Ersatz','replacement'],['Verkehr','traffic / transport'],['Schiene','rail'],['SEV','= Schienenersatzverkehr']]
+      },
+      {
+        line: 'S', de: 'Endstation. Bitte alle aussteigen.', phon: 'ENT-shta-tsyon · bit-uh AL-uh OWS-shty-gen',
+        en: '<b>End of the line.</b> Everybody off, please.',
+        doTxt: '<b>Get off, the train goes no further.</b> If this is not where you wanted to be, you rode past your stop or took the wrong direction. Cross to the other platform and ride back.',
+        words: [['Endstation','terminus / last stop'],['alle','everyone'],['aussteigen','get off']]
+      }
+    ]
+  };
+  // U-Bahn: same story, shorter. BVG trains mostly give you the destination and "Zurückbleiben, bitte";
+  // newer trains add the next stop. No exit-side call, no gap line, no door jingle.
+  STEPS.u = [
+    { line: 'U8', de: 'Nach Hermannstraße.', phon: 'nakh HER-man-shtrah-suh',
+      en: 'Towards <b>Hermannstraße</b>. That destination is how you tell the direction.',
+      doTxt: '<b>Match the destination on the front and the platform sign.</b> The U-Bahn barely talks, so the terminus name is your main direction check, not a north/south label.',
+      words: [['nach','to / towards'],['U8','U-Bahn line 8'],['Ziel','destination'],['Richtung','direction']] },
+    Object.assign({}, STEPS.s[1], { line: 'U8', jingle: false, doors: true,
+      en: 'Stand back, please. <b>The doors are closing.</b> No chime on the U-Bahn, just the voice.',
+      doTxt: '<b>Step back from the doors.</b> The signature Berlin announcement. On older U-Bahn trains this is almost the only thing the voice says, so treat it as the doors-closing cue.' }),
+    { line: 'U8', de: 'Nächster Halt: Alexanderplatz.', phon: 'NEKH-ster halt',
+      en: '<b>Next stop: Alexanderplatz.</b> Newer U-Bahn trains announce and display the next station.',
+      doTxt: '<b>Get ready if it is your stop.</b> Older trains may skip this, so still glance at the station name signs on the platform as you pull in.',
+      words: [['nächster','next'],['Halt','stop'],['Alexanderplatz','a station + the tour meeting point']] },
+    STEPS.s[5],
+    Object.assign({}, STEPS.s[6], { line: 'U8' })
+  ];
+
+  var root = document.getElementById('bta');
+  var el = {
+    line: document.getElementById('btaLine'), count: document.getElementById('btaCount'),
+    de: document.getElementById('btaDe'), phon: document.getElementById('btaPhon'),
+    reveal: document.getElementById('btaReveal'), answer: document.getElementById('btaAnswer'),
+    en: document.getElementById('btaEn'), doTxt: document.getElementById('btaDo'),
+    words: document.getElementById('btaWords'), prev: document.getElementById('btaPrev'),
+    next: document.getElementById('btaNext'), dots: document.getElementById('btaDots'),
+    note: document.getElementById('btaNote')
+  };
+  var NOTES = {
+    s: 'The <b>S-Bahn</b> (green S, run by Deutsche Bahn) is the chatty one: next stop, exit side, and connections at big stations. It also carries the famous three-note door chime, which is slowly being replaced by a plain beep on the newest trains.',
+    u: 'The <b>U-Bahn</b> (white U on blue, run by BVG) is the quiet one. Older trains give you little more than the destination and "Zurückbleiben, bitte". For the full network picture, see how the two systems differ.'
+  };
+  var mode = 's', idx = 0, open = false;
+
+  function steps() { return STEPS[mode]; }
+
+  function render() {
+    var list = steps();
+    if (idx >= list.length) idx = list.length - 1;
+    var s = list[idx];
+    root.classList.toggle('bta--s', mode === 's');
+    root.classList.toggle('bta--u', mode === 'u');
+    el.line.textContent = s.line;
+    el.count.textContent = (idx + 1) + ' / ' + list.length;
+    el.de.textContent = s.de;
+    el.phon.textContent = s.phon || '';
+    // speaking + jingle + doors animation state
+    root.classList.add('bta--speaking');
+    root.classList.toggle('bta--jingle', mode === 's' && !!s.jingle);
+    // retrigger the door animation on the doors step
+    root.classList.remove('bta--doors');
+    if (s.doors) { void root.offsetWidth; root.classList.add('bta--doors'); }
+    // answer
+    open = false;
+    root.classList.remove('bta--open');
+    el.en.innerHTML = s.en;
+    el.doTxt.innerHTML = s.doTxt;
+    el.words.innerHTML = '';
+    (s.words || []).forEach(function (w) {
+      var span = document.createElement('span');
+      span.className = 'bta__word';
+      span.innerHTML = '<b>' + w[0] + '</b> = ' + w[1];
+      el.words.appendChild(span);
+    });
+    el.prev.disabled = idx === 0;
+    el.next.textContent = idx === list.length - 1 ? '↺ Replay the ride' : 'Next →';
+    el.note.innerHTML = NOTES[mode];
+    renderDots(list.length);
+  }
+
+  function renderDots(n) {
+    el.dots.innerHTML = '';
+    for (var i = 0; i < n; i++) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'bta__pip';
+      b.setAttribute('role', 'tab');
+      b.setAttribute('aria-label', 'Announcement ' + (i + 1));
+      if (i === idx) b.setAttribute('aria-current', 'true');
+      (function (j) { b.addEventListener('click', function () { idx = j; render(); }); })(i);
+      el.dots.appendChild(b);
+    }
+  }
+
+  el.reveal.addEventListener('click', function () {
+    open = true; root.classList.add('bta--open');
+  });
+  el.prev.addEventListener('click', function () { if (idx > 0) { idx--; render(); } });
+  el.next.addEventListener('click', function () {
+    var list = steps();
+    if (idx === list.length - 1) { idx = 0; } else { idx++; }
+    render();
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('.bta__mode'), function (btn) {
+    btn.addEventListener('click', function () {
+      var m = btn.getAttribute('data-mode');
+      if (m === mode) return;
+      mode = m; idx = 0;
+      Array.prototype.forEach.call(document.querySelectorAll('.bta__mode'), function (b) {
+        b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+      });
+      render();
+    });
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

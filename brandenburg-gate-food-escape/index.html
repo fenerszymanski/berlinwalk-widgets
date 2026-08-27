@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Brandenburg Gate Food Escape</title>
+<meta name="description" content="Standing hungry at the Brandenburg Gate? Say what you want and how far you will walk, and get the direction, the walk time, and an honest verdict for a better meal than the ones on Pariser Platz." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='32' r='20' fill='%23FFE600'/%3E%3Cpath d='M24 20v24M24 20c-3 0-3 8 0 8M28 20v24M40 20l-2 14h6l-2-14 2-2v26' stroke='%231B5E20' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-dark:#123D18; --green-mid:#2E7D32;
+    --lime:#7CB342; --light:#C5E1A5; --yellow:#FFE600;
+    --cream:#FAFAF5; --ink:#212121; --muted:#4b584b;
+    --line:#E3E8DC; --panel:#F4F7F0; --red:#B23A2E;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    font-family:'Montserrat',system-ui,sans-serif;
+    color:var(--ink); background:transparent; line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:700px;margin:0 auto;padding:4px 4px 12px}
+  .card{background:var(--cream);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+  .head{background:var(--green);color:#fff;padding:18px 18px 16px}
+  .kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow);font-weight:700;margin:0 0 6px}
+  .head h1{margin:0 0 6px;font-size:21px;line-height:1.15;font-weight:800}
+  .head p{margin:0;font-size:13.5px;color:#e8f0e4;line-height:1.5}
+  .body{padding:16px 16px 6px}
+  .qlabel{font-size:12.5px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.05em;margin:2px 0 8px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+  .chip{border:1.5px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;
+    padding:9px 14px;font:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:.12s}
+  .chip:hover{border-color:var(--lime)}
+  .chip[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+  .chip.small{padding:8px 13px}
+  .toggle{display:flex;align-items:center;gap:10px;margin:0 0 14px;font-size:13.5px;font-weight:600;color:var(--green-dark)}
+  .switch{position:relative;width:46px;height:26px;flex:0 0 auto}
+  .switch input{opacity:0;width:0;height:0;position:absolute}
+  .slider{position:absolute;inset:0;background:#cdd6c8;border-radius:999px;transition:.15s;cursor:pointer}
+  .slider::before{content:"";position:absolute;height:20px;width:20px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.15s}
+  .switch input:checked + .slider{background:var(--green)}
+  .switch input:checked + .slider::before{transform:translateX(20px)}
+  .trap{margin:2px 0 16px;background:#fbeceb;border:1px solid #efc9c4;border-left:4px solid var(--red);
+    border-radius:12px;padding:11px 13px;font-size:12.8px;color:#5c2a24;line-height:1.5}
+  .trap b{color:var(--red)}
+  .results{margin:8px 0 4px}
+  .move{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 14px 13px;margin:0 0 11px}
+  .move .top{display:flex;align-items:flex-start;gap:10px;justify-content:space-between}
+  .move h3{margin:0;font-size:15.5px;font-weight:800;color:var(--green-dark);line-height:1.25}
+  .walk{flex:0 0 auto;background:var(--yellow);color:var(--green-dark);font-weight:800;font-size:11.5px;
+    border-radius:999px;padding:5px 10px;white-space:nowrap}
+  .dir{font-size:11.5px;font-weight:700;color:var(--green-mid);text-transform:uppercase;letter-spacing:.05em;margin:8px 0 6px}
+  .move p{margin:0;font-size:13.2px;color:var(--ink);line-height:1.55}
+  .verdict{margin-top:9px;font-size:12.6px;color:var(--muted);font-style:italic;border-top:1px dashed var(--line);padding-top:8px}
+  .flag{display:inline-block;margin-top:9px;font-size:11.5px;font-weight:700;border-radius:8px;padding:3px 8px}
+  .flag.ok{background:#e5f2e0;color:#2e5b2a}
+  .flag.no{background:#fbeceb;color:#8a2e25}
+  .none{background:var(--panel);border:1px dashed var(--line);border-radius:12px;padding:14px;font-size:13px;color:var(--muted)}
+  .local{margin:6px 0 2px;background:var(--green);color:#fff;border-radius:14px;padding:14px 15px}
+  .local .qlabel{color:var(--yellow);margin-bottom:6px}
+  .local p{margin:0;font-size:13.4px;color:#eaf1e6;line-height:1.6}
+  .foot{font-size:11.5px;color:var(--muted);margin:12px 2px 2px;line-height:1.5}
+  @media (max-width:430px){
+    .head h1{font-size:19px}
+    .chip{font-size:12.5px;padding:8px 12px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="head">
+      <p class="kicker">Berlinwalk.com · Free tool</p>
+      <h1>Hungry at the Brandenburg Gate?</h1>
+      <p>Pariser Platz is one of the worst places in Berlin to eat: a handful of photo-menu restaurants charging landmark prices. Tell me what you want and how far you will walk, and I will point you at something better. Walk times are from the Gate itself.</p>
+    </div>
+    <div class="body">
+      <div class="trap">
+        <b>Skip these right at the Gate:</b> the "traditional German" places on and just off Pariser Platz with laminated photo menus and a host waving you in, the currywurst stands charging tourist prices, and anything with a live-music surcharge. You are paying for the address, not the food.
+      </div>
+
+      <div class="qlabel">What are you after?</div>
+      <div class="chips" id="need" role="group" aria-label="What are you after">
+        <button class="chip" data-need="quick" aria-pressed="false">Quick and cheap</button>
+        <button class="chip" data-need="sit" aria-pressed="false">A proper sit-down meal</button>
+        <button class="chip" data-need="coffee" aria-pressed="false">Coffee and cake</button>
+        <button class="chip" data-need="picnic" aria-pressed="false">A picnic in the park</button>
+        <button class="chip" data-need="veg" aria-pressed="false">Vegetarian or vegan</button>
+      </div>
+
+      <div class="qlabel">How far will you walk?</div>
+      <div class="chips" id="walk" role="group" aria-label="How far will you walk">
+        <button class="chip small" data-walk="5" aria-pressed="false">About 5 minutes</button>
+        <button class="chip small" data-walk="12" aria-pressed="false">About 10 minutes</button>
+        <button class="chip small" data-walk="99" aria-pressed="true">A proper walk is fine</button>
+      </div>
+
+      <div class="toggle">
+        <label class="switch"><input type="checkbox" id="sun" /><span class="slider"></span></label>
+        <span>It is Sunday (shops and malls are shut)</span>
+      </div>
+
+      <div class="results" id="results" aria-live="polite"></div>
+
+      <div class="local">
+        <div class="qlabel">The move locals make</div>
+        <p>Buy a few things at a bakery or a station supermarket, walk two minutes west into the Tiergarten, and eat on the grass by the Neuer See. It is the cheapest good lunch near the Gate, and on a warm day it beats every restaurant on Pariser Platz.</p>
+      </div>
+
+      <p class="foot">Guidance from a Berlin walking-tour guide, checked on 20 August 2026. Places and prices change; treat this as a starting direction, not a booking. My free tour runs through this exact part of Mitte.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var MOVES = [
+    { need:['quick'], walk:6, dir:'East, toward Friedrichstrasse', title:'A doner or a bakery on the way to Friedrichstrasse',
+      text:'Head east down Unter den Linden and cut toward Friedrichstrasse. Within ten minutes you reach normal Berlin streets with doner shops, bakeries and Imbiss stands where a filling lunch is a few euros, not fifteen.',
+      verdict:'The fastest way to stop overpaying: keep walking until the photo menus disappear.', sunday:true },
+    { need:['quick'], walk:12, dir:'South, toward Potsdamer Platz', title:'Food court at Potsdamer Platz or the Mall of Berlin',
+      text:'Walk south past the Holocaust Memorial to Potsdamer Platz or the Mall of Berlin on Leipziger Platz. Both have big indoor food courts with a dozen quick options at real prices, and a roof if it rains.',
+      verdict:'Reliable and cheap. The Mall of Berlin food court is closed on Sundays, so check the day.', sunday:false, sundayNote:'The Mall of Berlin is shut on Sundays; the restaurants around Potsdamer Platz square stay open.' },
+    { need:['sit'], walk:15, dir:'West, into the Tiergarten', title:'Cafe am Neuen See',
+      text:'A fifteen-minute walk west into the Tiergarten brings you to Cafe am Neuen See, a lakeside beer garden under old trees. Grilled dishes, pizza and cold beer, open all year, and one of the nicest spots in central Berlin to sit down.',
+      verdict:'Not the cheapest, but it is a genuine Berlin place rather than a tourist trap. Open daily.', sunday:true },
+    { need:['sit'], walk:12, dir:'South, toward Potsdamer Platz', title:'A proper restaurant around Potsdamer Platz',
+      text:'The blocks around Potsdamer Platz and the Mall of Berlin hold everyday restaurants aimed at office workers, not tour buses. You will eat better and pay less than at any table you can see from the Gate.',
+      verdict:'Ten to fifteen minutes on foot buys you honest prices and locals at the next table.', sunday:true },
+    { need:['coffee'], walk:9, dir:'East, toward Friedrichstrasse', title:'A real cafe on or near Friedrichstrasse',
+      text:'Walk east about ten minutes to the Friedrichstrasse area, where proper cafes serve coffee and cake without the landmark markup. The Dussmann culture store nearby is a good, quiet place to sit for a bit.',
+      verdict:'A short walk turns a rushed six-euro coffee into an actual break.', sunday:true },
+    { need:['picnic'], walk:3, dir:'West, into the Tiergarten', title:'Picnic on the Tiergarten lawns',
+      text:'Grab bread, cheese, fruit and a drink from a bakery or a station supermarket, then walk two or three minutes west into the Tiergarten. The lawns around the Neuer See are made for lying down with lunch.',
+      verdict:'The best-value lunch near the Gate, full stop. On a warm day it is also the nicest.', sunday:true,
+      sundayNote:'On a Sunday most supermarkets are shut, but the ones inside Hauptbahnhof and Friedrichstrasse station stay open, and bakeries usually open in the morning.' },
+    { need:['veg'], walk:12, dir:'East, into Mitte', title:'Vegetarian and vegan spots in Mitte',
+      text:'Berlin is one of the best cities in Europe for meat-free food, but almost none of it is at the Gate. Walk ten to fifteen minutes east into Mitte, or check the Potsdamer Platz and Mall of Berlin food courts, which always have vegan and vegetarian counters.',
+      verdict:'Worth the walk. The plant-based Berlin you have read about starts a few blocks away.', sunday:true },
+    { need:['veg','quick'], walk:8, dir:'East, toward Friedrichstrasse', title:'A falafel or veggie doner heading east',
+      text:'The doner and falafel shops on the way to Friedrichstrasse almost all do a vegetarian or vegan version, loaded with salad and sauce, for a few euros. Faster and cheaper than any sit-down option.',
+      verdict:'Quick, cheap and genuinely good. Ask for it "vegetarisch" or "vegan".', sunday:true }
+  ];
+
+  var need = null, walk = 99, sunday = false;
+  var results = document.getElementById('results');
+
+  function pressGroup(groupId, attr, value){
+    var group = document.getElementById(groupId);
+    group.querySelectorAll('.chip').forEach(function(b){
+      b.setAttribute('aria-pressed', b.getAttribute(attr) === value ? 'true' : 'false');
+    });
+  }
+
+  document.getElementById('need').addEventListener('click', function(e){
+    var b = e.target.closest('.chip'); if(!b) return;
+    need = b.getAttribute('data-need');
+    pressGroup('need','data-need',need);
+    render();
+  });
+  document.getElementById('walk').addEventListener('click', function(e){
+    var b = e.target.closest('.chip'); if(!b) return;
+    walk = parseInt(b.getAttribute('data-walk'),10);
+    pressGroup('walk','data-walk',String(walk));
+    render();
+  });
+  document.getElementById('sun').addEventListener('change', function(e){
+    sunday = e.target.checked; render();
+  });
+
+  function esc(s){ return String(s).replace(/[&<>]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); }
+
+  function render(){
+    if(!need){
+      results.innerHTML = '<div class="none">Pick what you are after above and I will point you the right way. If you are only after a photo, eat first: there is nothing good to buy while you stand in the crowd.</div>';
+      return;
+    }
+    var list = MOVES.filter(function(m){ return m.need.indexOf(need) !== -1 && m.walk <= walk; });
+    // If a 5-minute budget rules everything out for this need, offer the nearest option with a note.
+    var stretched = false;
+    if(!list.length){
+      var near = MOVES.filter(function(m){ return m.need.indexOf(need) !== -1; }).sort(function(a,b){ return a.walk-b.walk; });
+      if(near.length){ list = [near[0]]; stretched = true; }
+    }
+    list.sort(function(a,b){ return a.walk - b.walk; });
+
+    var html = '';
+    if(stretched){
+      html += '<div class="none">Nothing good is five minutes away for that. The closest worth the walk:</div>';
+    }
+    list.forEach(function(m){
+      var closedToday = sunday && m.sunday === false;
+      html += '<div class="move">';
+      html += '<div class="top"><h3>'+esc(m.title)+'</h3><span class="walk">'+m.walk+' min walk</span></div>';
+      html += '<div class="dir">'+esc(m.dir)+'</div>';
+      html += '<p>'+esc(m.text)+'</p>';
+      html += '<div class="verdict">'+esc(m.verdict)+'</div>';
+      if(sunday){
+        if(m.sundayNote){ html += '<span class="flag no">Sunday: '+esc(m.sundayNote)+'</span>'; }
+        else if(m.sunday){ html += '<span class="flag ok">Open on Sundays</span>'; }
+        else { html += '<span class="flag no">Closed on Sundays</span>'; }
+      }
+      html += '</div>';
+    });
+    results.innerHTML = html;
+  }
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

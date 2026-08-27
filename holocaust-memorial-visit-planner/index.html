@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Holocaust Memorial Visit Planner | BerlinWalk</title>
+  <meta name="description" content="A respectful Berlin Holocaust Memorial visit planner for choosing time, route order, etiquette and nearby context.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    :root {
+      --green: #1B5E20;
+      --green-dark: #102F13;
+      --lime: #7CB342;
+      --yellow: #FFE600;
+      --cream: #FAFAF5;
+      --paper: #FFFFFF;
+      --ink: #212121;
+      --muted: #5A665B;
+      --line: rgba(27, 94, 32, 0.18);
+      --stone: #D8D8D2;
+      --stone-dark: #7E817A;
+      color-scheme: light;
+      font-family: Montserrat, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      color: var(--ink);
+    }
+
+    button,
+    a {
+      font: inherit;
+    }
+
+    .memorial-tool {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--cream);
+      box-shadow: 0 18px 50px rgba(16, 47, 19, 0.14);
+    }
+
+    .hero {
+      min-height: 360px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.78fr);
+      background:
+        linear-gradient(105deg, rgba(16, 47, 19, 0.96), rgba(16, 47, 19, 0.82) 48%, rgba(16, 47, 19, 0.26)),
+        url("../blog-drafts/images/holocaust-memorial-berlin/assets/optimized/01-holocaust-memorial-berlin-cover.jpg") center / cover no-repeat;
+      color: #FFFFFF;
+    }
+
+    .hero-copy {
+      display: grid;
+      align-content: center;
+      gap: 14px;
+      padding: 34px 30px;
+    }
+
+    .kicker {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 9px;
+      color: var(--yellow);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .kicker::before {
+      content: "";
+      width: 28px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--yellow);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      max-width: 660px;
+      font-size: 44px;
+      line-height: 1.04;
+    }
+
+    .hero-copy > p {
+      max-width: 620px;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 16px;
+      line-height: 1.6;
+      font-weight: 650;
+    }
+
+    .hero-note {
+      display: grid;
+      align-content: end;
+      padding: 24px;
+    }
+
+    .note-card {
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 8px;
+      background: rgba(250, 250, 245, 0.94);
+      color: var(--ink);
+      padding: 16px;
+    }
+
+    .note-card strong {
+      display: block;
+      color: var(--green);
+      font-size: 14px;
+      line-height: 1.3;
+    }
+
+    .note-card span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 750;
+      line-height: 1.45;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: minmax(300px, 0.8fr) minmax(0, 1.2fr);
+      gap: 1px;
+      background: var(--line);
+      border-top: 1px solid var(--line);
+    }
+
+    .controls,
+    .result {
+      background: var(--paper);
+    }
+
+    .controls {
+      padding: 22px;
+      display: grid;
+      gap: 20px;
+    }
+
+    .control-group {
+      display: grid;
+      gap: 9px;
+    }
+
+    .control-title {
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .choice {
+      min-height: 54px;
+      padding: 10px 9px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #FFFFFF;
+      color: var(--green);
+      cursor: pointer;
+      font-size: 13px;
+      line-height: 1.18;
+      font-weight: 900;
+    }
+
+    .choice small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .choice[aria-pressed="true"] {
+      background: var(--green);
+      color: var(--yellow);
+      border-color: var(--green);
+      box-shadow: inset 0 0 0 2px rgba(255, 230, 0, 0.24);
+    }
+
+    .choice[aria-pressed="true"] small {
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .check-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .toggle {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: 9px;
+      align-items: start;
+      min-height: 42px;
+      padding: 9px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #F8FAF3;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.35;
+      cursor: pointer;
+    }
+
+    .toggle input {
+      width: 18px;
+      height: 18px;
+      margin: 1px 0 0;
+      accent-color: var(--green);
+    }
+
+    .result {
+      padding: 24px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .result-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .result h2 {
+      color: var(--green);
+      font-size: 28px;
+      line-height: 1.12;
+    }
+
+    .time-badge {
+      min-width: 86px;
+      padding: 10px;
+      border-radius: 8px;
+      background: var(--green);
+      color: var(--yellow);
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.15;
+      font-weight: 900;
+    }
+
+    .route {
+      display: grid;
+      grid-template-columns: 1fr 26px 1fr 26px 1fr;
+      gap: 8px;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .route-point {
+      min-height: 66px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #F8FAF3;
+      display: grid;
+      align-content: center;
+      gap: 3px;
+    }
+
+    .route-point b {
+      color: var(--green);
+      font-size: 13px;
+      line-height: 1.2;
+    }
+
+    .route-point span {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .route-arrow {
+      color: var(--green);
+      text-align: center;
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .steps {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .steps li {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 10px;
+      align-items: start;
+      min-height: 46px;
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.48;
+    }
+
+    .num {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--yellow);
+      color: var(--green);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      box-shadow: inset 0 0 0 2px rgba(27, 94, 32, 0.16);
+    }
+
+    .advice-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .advice {
+      min-height: 96px;
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--cream);
+    }
+
+    .advice b {
+      display: block;
+      color: var(--green);
+      font-size: 13px;
+      line-height: 1.25;
+    }
+
+    .advice span {
+      display: block;
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.42;
+    }
+
+    .source-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .source-row a {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: var(--green);
+      color: var(--yellow);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .photo-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--line);
+      border-top: 1px solid var(--line);
+    }
+
+    .photo-strip figure {
+      margin: 0;
+      min-height: 190px;
+      position: relative;
+      background: var(--green-dark);
+      overflow: hidden;
+    }
+
+    .photo-strip img {
+      width: 100%;
+      height: 100%;
+      min-height: 190px;
+      display: block;
+      object-fit: cover;
+      opacity: 0.9;
+    }
+
+    .photo-strip figcaption {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 10px;
+      color: #FFFFFF;
+      font-size: 12px;
+      line-height: 1.28;
+      font-weight: 900;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.72);
+    }
+
+    @media (max-width: 760px) {
+      .hero,
+      .board {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: 0;
+      }
+
+      h1 {
+        font-size: 34px;
+      }
+
+      .hero-copy,
+      .hero-note,
+      .controls,
+      .result {
+        padding: 18px;
+      }
+
+      .button-grid,
+      .advice-grid,
+      .photo-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .result-head,
+      .route {
+        grid-template-columns: 1fr;
+      }
+
+      .route-arrow {
+        transform: rotate(90deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="memorial-tool" data-tool="holocaust-memorial-visit-planner">
+    <section class="hero" aria-labelledby="tool-title">
+      <div class="hero-copy">
+        <div class="kicker">Berlin memorial planner</div>
+        <h1 id="tool-title">Holocaust Memorial Visit Planner</h1>
+        <p>Choose the visit shape that fits your day. The goal is not to see more memorials; it is to give this one enough attention.</p>
+      </div>
+      <div class="hero-note">
+        <div class="note-card">
+          <strong>Current check: field open at all times, Information Centre Tue-Sun 10:00-18:00.</strong>
+          <span>Last admission is 45 minutes before closing. Check the official page before building a day around the exhibition.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="board" aria-label="Planner controls and result">
+      <div class="controls">
+        <div class="control-group">
+          <div class="control-title">Time available</div>
+          <div class="button-grid" data-group="time">
+            <button class="choice" type="button" data-time="20" aria-pressed="true">20 min<small>field only</small></button>
+            <button class="choice" type="button" data-time="45" aria-pressed="false">45 min<small>field + pause</small></button>
+            <button class="choice" type="button" data-time="90" aria-pressed="false">90 min<small>add exhibition</small></button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="control-title">Day pressure</div>
+          <div class="check-list">
+            <label class="toggle"><input type="checkbox" data-factor="fixed"> I have a fixed booking soon</label>
+            <label class="toggle"><input type="checkbox" data-factor="children"> I am visiting with children</label>
+            <label class="toggle"><input type="checkbox" data-factor="heavy"> I already have another heavy history site today</label>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="control-title">Next direction</div>
+          <div class="button-grid" data-group="direction">
+            <button class="choice" type="button" data-direction="gate" aria-pressed="true">Gate<small>Pariser Platz</small></button>
+            <button class="choice" type="button" data-direction="reichstag" aria-pressed="false">Reichstag<small>booking slot</small></button>
+            <button class="choice" type="button" data-direction="tiergarten" aria-pressed="false">Tiergarten<small>quiet reset</small></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="result" aria-live="polite">
+        <div class="result-head">
+          <div>
+            <h2 id="plan-title">Quiet field visit</h2>
+            <p id="plan-summary">Enter from the edge, walk slowly into the deeper rows, pause, and leave without treating the field like a photo maze.</p>
+          </div>
+          <div class="time-badge" id="time-badge">20 min<br>field only</div>
+        </div>
+
+        <div class="route" aria-label="Suggested route order">
+          <div class="route-point"><b id="route-a">Brandenburg Gate</b><span>orientation</span></div>
+          <div class="route-arrow">→</div>
+          <div class="route-point"><b id="route-b">Field of Stelae</b><span>slow crossing</span></div>
+          <div class="route-arrow">→</div>
+          <div class="route-point"><b id="route-c">Tiergarten edge</b><span>quiet reset</span></div>
+        </div>
+
+        <ol class="steps" id="steps"></ol>
+
+        <div class="advice-grid">
+          <div class="advice">
+            <b>Etiquette</b>
+            <span id="etiquette">Walk slowly, keep noise down, do not climb or jump on the stelae, and use photos with restraint.</span>
+          </div>
+          <div class="advice">
+            <b>Do not stack</b>
+            <span id="stacking">If the day already includes Sachsenhausen or Topography of Terror, keep this visit shorter and leave space afterward.</span>
+          </div>
+        </div>
+
+        <div class="source-row" aria-label="Official source links">
+          <a href="https://www.stiftung-denkmal.de/en/memorials/memorial-to-the-murdered-jews-of-europe/" target="_blank" rel="noopener">Official memorial page</a>
+          <a href="https://www.stiftung-denkmal.de/en/ausstellung/information-centre-under-the-field-of-stelae/" target="_blank" rel="noopener">Information Centre</a>
+          <a href="https://www.bundestag.de/en/visittheBundestag/dome/registration-245686" target="_blank" rel="noopener">Reichstag booking</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="photo-strip" aria-label="Nearby context photos">
+      <figure>
+        <img src="../blog-drafts/images/holocaust-memorial-berlin/assets/optimized/04-holocaust-memorial-berlin-human-scale.jpg" alt="Visitors walking quietly through the Holocaust Memorial Berlin stelae">
+        <figcaption>Human scale matters more than speed here.</figcaption>
+      </figure>
+      <figure>
+        <img src="../blog-drafts/images/holocaust-memorial-berlin/assets/optimized/05-brandenburg-gate-nearby.jpg" alt="Pariser Platz sign with Brandenburg Gate behind it">
+        <figcaption>Brandenburg Gate is close, but the mood changes fast.</figcaption>
+      </figure>
+    </section>
+  </main>
+
+  <script src="../js/brand.js"></script>
+  <script>
+    (function () {
+      const plans = {
+        20: {
+          title: 'Quiet field visit',
+          badge: '20 min<br>field only',
+          summary: 'Enter from the edge, walk slowly into the deeper rows, pause, and leave without treating the field like a photo maze.',
+          steps: [
+            'Start at the edge and read the official name before you enter.',
+            'Walk into the deeper rows slowly. Do not climb, jump, smoke, drink or make noise.',
+            'Leave through the side that matches your next stop, then take a short reset before the next sight.'
+          ],
+          stacking: 'If the day already includes Sachsenhausen or Topography of Terror, keep this visit shorter and leave space afterward.'
+        },
+        45: {
+          title: 'Field plus context pause',
+          badge: '45 min<br>field + pause',
+          summary: 'Use the field properly, then pause at the edge and decide whether the Information Centre deserves a separate visit.',
+          steps: [
+            'Spend 20 minutes in the field without rushing the deepest rows.',
+            'Come out near Cora-Berliner-Strasse and check whether the Information Centre queue fits your day.',
+            'If it does not fit, do not force it. Save the exhibition for a better hour instead of doing it badly.'
+          ],
+          stacking: 'This is the best compromise when you want more than a crossing but cannot give the exhibition full attention.'
+        },
+        90: {
+          title: 'Full memorial visit',
+          badge: '90 min<br>add exhibition',
+          summary: 'Give the field time first, then use the Information Centre to bring names, families and places back into the story.',
+          steps: [
+            'Walk through the field before the exhibition so the abstract space has time to work.',
+            'Enter the Information Centre only if the hours and security queue fit. Bring as little baggage as possible.',
+            'After the exhibition, avoid racing straight into another heavy site. Get air, walk through Tiergarten, or pause near the edge.'
+          ],
+          stacking: 'Do not combine this full version with Sachsenhausen on the same day unless there is a strong reason.'
+        }
+      };
+
+      const directionRoutes = {
+        gate: ['Brandenburg Gate', 'Field of Stelae', 'Tiergarten edge'],
+        reichstag: ['Field of Stelae', 'Reichstag area', 'Booking entrance'],
+        tiergarten: ['Field of Stelae', 'Sinti/Roma Memorial', 'Tiergarten path']
+      };
+
+      const state = { time: '20', direction: 'gate', fixed: false, children: false, heavy: false };
+      const root = document.querySelector('.memorial-tool');
+      const steps = document.getElementById('steps');
+
+      function setPressed(group, attr, value) {
+        root.querySelectorAll(`[data-group="${group}"] .choice`).forEach((button) => {
+          button.setAttribute('aria-pressed', String(button.dataset[attr] === value));
+        });
+      }
+
+      function render() {
+        const plan = plans[state.time];
+        document.getElementById('plan-title').textContent = plan.title;
+        document.getElementById('plan-summary').textContent = plan.summary;
+        document.getElementById('time-badge').innerHTML = plan.badge;
+        const route = directionRoutes[state.direction];
+        document.getElementById('route-a').textContent = route[0];
+        document.getElementById('route-b').textContent = route[1];
+        document.getElementById('route-c').textContent = route[2];
+
+        const extra = [];
+        if (state.fixed) extra.push('Because you have a fixed booking soon, leave the Information Centre for another time unless you already have at least 75 calm minutes.');
+        if (state.children) extra.push('With children, keep the field visit slow and short; the foundation recommends the exhibition for young people from 14.');
+        if (state.heavy) extra.push('Because another heavy history site is already in the day, choose one serious stop well instead of stacking everything nearby.');
+
+        const allSteps = [...plan.steps, ...extra];
+        steps.innerHTML = allSteps.map((item, index) => `<li><span class="num">${index + 1}</span><span>${item}</span></li>`).join('');
+        document.getElementById('stacking').textContent = state.heavy ? 'You already have a heavy site in the day. Keep this visit focused and make the next stop lighter.' : plan.stacking;
+        window.dispatchEvent(new Event('resize'));
+      }
+
+      root.addEventListener('click', (event) => {
+        const timeButton = event.target.closest('[data-time]');
+        if (timeButton) {
+          state.time = timeButton.dataset.time;
+          setPressed('time', 'time', state.time);
+          render();
+          return;
+        }
+        const directionButton = event.target.closest('[data-direction]');
+        if (directionButton) {
+          state.direction = directionButton.dataset.direction;
+          setPressed('direction', 'direction', state.direction);
+          render();
+        }
+      });
+
+      root.addEventListener('change', (event) => {
+        const input = event.target.closest('[data-factor]');
+        if (!input) return;
+        state[input.dataset.factor] = input.checked;
+        render();
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>

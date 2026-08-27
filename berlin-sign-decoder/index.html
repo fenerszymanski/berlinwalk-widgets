@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Sign Decoder | BerlinWalk</title>
+  <meta name="description" content="Decode common German signs in Berlin stations, shops, ticket machines and everyday tourist situations.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    :root {
+      --bw-green: #1B5E20;
+      --bw-dark: #164A1A;
+      --bw-lime: #7CB342;
+      --bw-light: #C5E1A5;
+      --bw-yellow: #FFE600;
+      --bw-cream: #FAFAF5;
+      --bw-ink: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-line: rgba(27, 94, 32, .18);
+      --bw-soft: #F4F9EC;
+      --bw-warn: #FFF7D6;
+      --bw-shadow: 0 18px 38px rgba(27, 94, 32, .13);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bw-cream);
+      color: var(--bw-ink);
+      font-family: Montserrat, Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    .bw-tool {
+      width: min(100%, 980px);
+      margin: 0 auto;
+      padding: 18px;
+    }
+
+    .bw-shell {
+      overflow: hidden;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: var(--bw-shadow);
+    }
+
+    .bw-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 235px;
+      gap: 18px;
+      padding: 24px;
+      color: #fff;
+      background:
+        radial-gradient(circle at 88% 16%, rgba(255, 230, 0, .38), transparent 34%),
+        linear-gradient(135deg, rgba(27, 94, 32, .98), rgba(43, 111, 38, .94));
+    }
+
+    .bw-kicker {
+      margin: 0 0 8px;
+      color: var(--bw-yellow);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(31px, 5vw, 46px);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    .bw-hero p {
+      max-width: 62ch;
+      margin: 12px 0 0;
+      color: rgba(255,255,255,.9);
+      font-size: 15px;
+    }
+
+    .bw-signpost {
+      align-self: stretch;
+      display: grid;
+      align-content: center;
+      gap: 10px;
+      min-height: 190px;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 8px;
+      background: rgba(255,255,255,.12);
+    }
+
+    .bw-arrow {
+      position: relative;
+      min-height: 42px;
+      padding: 10px 38px 10px 14px;
+      border-radius: 8px;
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+      font-weight: 950;
+      box-shadow: 0 10px 22px rgba(0,0,0,.12);
+    }
+
+    .bw-arrow::after {
+      content: "";
+      position: absolute;
+      right: -18px;
+      top: 0;
+      border-top: 21px solid transparent;
+      border-bottom: 21px solid transparent;
+      border-left: 18px solid var(--bw-yellow);
+    }
+
+    .bw-main {
+      display: grid;
+      grid-template-columns: 330px 1fr;
+      min-height: 690px;
+    }
+
+    .bw-controls {
+      padding: 18px;
+      border-right: 1px solid var(--bw-line);
+      background: linear-gradient(180deg, #fff, #fbfff7);
+    }
+
+    label {
+      display: block;
+      margin: 0 0 8px;
+      color: var(--bw-green);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .bw-search {
+      width: 100%;
+      min-height: 46px;
+      padding: 10px 12px;
+      border: 1px solid rgba(27,94,32,.24);
+      border-radius: 8px;
+      color: var(--bw-ink);
+      font: inherit;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .bw-search:focus {
+      border-color: var(--bw-green);
+      box-shadow: 0 0 0 3px rgba(197,225,165,.42);
+    }
+
+    .bw-filter {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      margin: 16px 0;
+    }
+
+    button {
+      min-height: 45px;
+      padding: 10px 11px;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--bw-ink);
+      cursor: pointer;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 850;
+      text-align: left;
+      transition: transform .14s ease, border-color .14s ease, background .14s ease;
+    }
+
+    button:hover,
+    button:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(27,94,32,.45);
+      outline: none;
+    }
+
+    button[aria-pressed="true"] {
+      border-color: var(--bw-green);
+      background: linear-gradient(135deg, rgba(197,225,165,.55), #fff);
+      box-shadow: inset 4px 0 0 var(--bw-yellow);
+    }
+
+    .bw-tip {
+      margin: 0;
+      padding: 12px;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      background: var(--bw-soft);
+      color: var(--bw-muted);
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .bw-output {
+      min-width: 0;
+      padding: 18px;
+    }
+
+    .bw-selected {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 150px;
+      gap: 14px;
+      min-height: 210px;
+      padding: 18px;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .bw-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 27px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--bw-green);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .bw-selected h2 {
+      margin: 10px 0 8px;
+      color: var(--bw-green);
+      font-size: clamp(28px, 5vw, 42px);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    .bw-selected p {
+      margin: 0;
+      color: var(--bw-muted);
+      font-size: 15px;
+    }
+
+    .bw-glyph {
+      display: grid;
+      place-items: center;
+      align-self: center;
+      min-height: 150px;
+      border: 1px solid rgba(27,94,32,.16);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(255,230,0,.92), rgba(197,225,165,.66)),
+        #fff;
+      color: var(--bw-green);
+      font-size: 56px;
+      font-weight: 950;
+    }
+
+    .bw-decision-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .bw-decision {
+      min-height: 118px;
+      padding: 12px;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      background: var(--bw-soft);
+    }
+
+    .bw-decision strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--bw-green);
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    .bw-decision span {
+      color: var(--bw-muted);
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .bw-list-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 18px 0 10px;
+    }
+
+    .bw-list-head h3 {
+      margin: 0;
+      color: var(--bw-green);
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+
+    .bw-count {
+      color: var(--bw-muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .bw-sign-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .bw-card {
+      min-height: 118px;
+      padding: 12px;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      background: #fff;
+      cursor: pointer;
+      transition: transform .14s ease, border-color .14s ease, box-shadow .14s ease;
+    }
+
+    .bw-card:hover,
+    .bw-card:focus-visible,
+    .bw-card.active {
+      transform: translateY(-1px);
+      border-color: rgba(27,94,32,.45);
+      box-shadow: 0 12px 22px rgba(27,94,32,.1);
+      outline: none;
+    }
+
+    .bw-card.active {
+      background: linear-gradient(135deg, #fff, rgba(197,225,165,.28));
+    }
+
+    .bw-word {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 5px;
+      color: var(--bw-green);
+      font-size: 18px;
+      font-weight: 950;
+    }
+
+    .bw-category {
+      flex: 0 0 auto;
+      padding: 4px 7px;
+      border-radius: 999px;
+      background: var(--bw-warn);
+      color: #5E4C00;
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .bw-card p {
+      margin: 0;
+      color: var(--bw-muted);
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .bw-empty {
+      display: none;
+      padding: 16px;
+      border: 1px dashed rgba(27,94,32,.3);
+      border-radius: 8px;
+      color: var(--bw-muted);
+      font-weight: 750;
+      background: var(--bw-soft);
+    }
+
+    .bw-empty.visible { display: block; }
+
+    @media (max-width: 760px) {
+      .bw-tool { padding: 10px; }
+      .bw-hero,
+      .bw-main,
+      .bw-selected {
+        grid-template-columns: 1fr;
+      }
+      .bw-controls {
+        border-right: 0;
+        border-bottom: 1px solid var(--bw-line);
+      }
+      .bw-filter {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .bw-decision-grid,
+      .bw-sign-list {
+        grid-template-columns: 1fr;
+      }
+      .bw-glyph {
+        min-height: 100px;
+        font-size: 42px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .bw-hero,
+      .bw-controls,
+      .bw-output,
+      .bw-selected {
+        padding: 14px;
+      }
+      .bw-filter {
+        grid-template-columns: 1fr;
+      }
+      h1 { font-size: 31px; }
+      .bw-selected h2 { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="bw-tool" data-widget="berlin-sign-decoder">
+    <section class="bw-shell" aria-label="Berlin Sign Decoder">
+      <header class="bw-hero">
+        <div>
+          <p class="bw-kicker">BerlinWalk tool</p>
+          <h1>Berlin Sign Decoder</h1>
+          <p>Tap a word you see on a Berlin sign, ticket machine, shop door or station board. The decoder gives you the meaning and the next tourist move.</p>
+        </div>
+        <div class="bw-signpost" aria-hidden="true">
+          <div class="bw-arrow">Ausgang</div>
+          <div class="bw-arrow">Gleis</div>
+          <div class="bw-arrow">Pfand</div>
+        </div>
+      </header>
+
+      <div class="bw-main">
+        <aside class="bw-controls">
+          <label for="signSearch">Find a sign word</label>
+          <input class="bw-search" id="signSearch" type="search" placeholder="Try Ausgang, Gleis, Pfand..." autocomplete="off">
+
+          <div class="bw-filter" role="group" aria-label="Filter sign words">
+            <button type="button" data-filter="all" aria-pressed="true">All signs</button>
+            <button type="button" data-filter="station" aria-pressed="false">Stations</button>
+            <button type="button" data-filter="ticket" aria-pressed="false">Tickets</button>
+            <button type="button" data-filter="shop" aria-pressed="false">Shops</button>
+            <button type="button" data-filter="daily" aria-pressed="false">Daily life</button>
+          </div>
+
+          <p class="bw-tip">Best use: search the word you can see, then follow the action line. Berlin signs are usually decision tools, not grammar tests.</p>
+        </aside>
+
+        <section class="bw-output" aria-live="polite">
+          <article class="bw-selected" id="selectedCard">
+            <div>
+              <span class="bw-badge" id="selectedCategory">Station</span>
+              <h2 id="selectedWord">Ausgang</h2>
+              <p id="selectedMeaning">Exit. Follow it when you want to leave a station, museum, shop or public building.</p>
+            </div>
+            <div class="bw-glyph" id="selectedGlyph" aria-hidden="true">A</div>
+          </article>
+
+          <div class="bw-decision-grid">
+            <div class="bw-decision">
+              <strong>Do this</strong>
+              <span id="selectedAction">Check the street or landmark name under the exit sign before following the crowd.</span>
+            </div>
+            <div class="bw-decision">
+              <strong>Do not confuse</strong>
+              <span id="selectedConfuse">Eingang means entrance, not exit.</span>
+            </div>
+            <div class="bw-decision">
+              <strong>Tourist moment</strong>
+              <span id="selectedMoment">Useful at Alexanderplatz, Hauptbahnhof, museums, malls and S-Bahn stations.</span>
+            </div>
+          </div>
+
+          <div class="bw-list-head">
+            <h3>Sign words</h3>
+            <span class="bw-count" id="resultCount"></span>
+          </div>
+          <div class="bw-empty" id="emptyState">No match. Try a shorter word, or switch back to all signs.</div>
+          <div class="bw-sign-list" id="signList"></div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const SIGNS = [
+      { word: 'Ausgang', category: 'station', label: 'Station', glyph: 'A', meaning: 'Exit. Follow it when you want to leave a station, museum, shop or public building.', action: 'Check the street or landmark name under the exit sign before following the crowd.', confuse: 'Eingang means entrance, not exit.', moment: 'Useful at Alexanderplatz, Hauptbahnhof, museums, malls and S-Bahn stations.', tags: 'exit leave station museum' },
+      { word: 'Eingang', category: 'daily', label: 'Daily', glyph: 'E', meaning: 'Entrance. This is where you go in.', action: 'Use it at museums, shops, public offices and courtyards when doors are split by direction.', confuse: 'Ausgang means exit.', moment: 'Helpful when a museum has one entry door and a separate exit route.', tags: 'entrance enter museum shop' },
+      { word: 'Gleis', category: 'station', label: 'Station', glyph: 'G', meaning: 'Track or platform, especially for trains.', action: 'Match the Gleis number in the station with the platform number in your app or ticket.', confuse: 'A stop name is not always the same as the platform direction.', moment: 'Important at Hauptbahnhof, Ostbahnhof, regional trains and larger S-Bahn stations.', tags: 'platform track train station' },
+      { word: 'Richtung', category: 'station', label: 'Station', glyph: 'R', meaning: 'Direction. Often shown as the end station of a line.', action: 'Find the train line first, then choose the correct Richtung before boarding.', confuse: 'The direction may not be your destination stop.', moment: 'Useful on U-Bahn and S-Bahn platforms with two sides.', tags: 'direction end station ubahn sbahn' },
+      { word: 'Umstieg', category: 'station', label: 'Station', glyph: 'U', meaning: 'Transfer or change to another line.', action: 'Follow the line number or transport symbol after the word.', confuse: 'Ausgang leaves the station; Umstieg keeps you inside the route network.', moment: 'Useful at Alexanderplatz, Friedrichstrasse, Stadtmitte and big interchange stations.', tags: 'transfer change connection' },
+      { word: 'Ersatzverkehr', category: 'station', label: 'Station', glyph: 'EV', meaning: 'Replacement service, often a bus replacing a train or tram section.', action: 'Stop waiting for the normal train and look for SEV signs, staff directions or app updates.', confuse: 'Verspatung means delay; Ersatzverkehr usually means a changed route.', moment: 'Most important during construction, strikes or service interruptions.', tags: 'replacement service sev bus construction disruption' },
+      { word: 'Fahrkarte', category: 'ticket', label: 'Ticket', glyph: 'F', meaning: 'Ticket. It may be paper, digital, single trip, day ticket or another fare type.', action: 'Check whether it is already active or needs validation before the first ride.', confuse: 'Buying a ticket is not always the same as validating it.', moment: 'Useful at ticket machines and tram/bus ticket signs.', tags: 'ticket fare card transport' },
+      { word: 'Entwerten', category: 'ticket', label: 'Ticket', glyph: 'OK', meaning: 'Validate or stamp a paper ticket.', action: 'If your paper ticket is not already time-stamped, validate it before boarding or immediately when entering a tram/bus.', confuse: 'A blank paper ticket can still be invalid.', moment: 'Critical before U-Bahn, S-Bahn, tram and bus rides.', tags: 'validate stamp ticket entwerter' },
+      { word: 'Kontrolle', category: 'ticket', label: 'Ticket', glyph: 'ID', meaning: 'Inspection or control, often a ticket check.', action: 'Show your valid ticket calmly and ask for official ID or paperwork if there is a problem.', confuse: 'Inspectors can be in plain clothes.', moment: 'Common on trains, platforms and busy routes.', tags: 'inspection ticket check fine' },
+      { word: 'Nur Barzahlung', category: 'shop', label: 'Shop', glyph: 'EUR', meaning: 'Cash only.', action: 'Use cash, find an ATM, or choose another place before you order.', confuse: 'A card logo on the door may not mean every card works every time.', moment: 'Useful at small bakeries, kiosks, cafes and market stalls.', tags: 'cash only barzahlung payment' },
+      { word: 'Kasse', category: 'shop', label: 'Shop', glyph: 'K', meaning: 'Checkout, till or cashier.', action: 'Take vouchers, Pfand receipts or unpaid items there.', confuse: 'Pfandautomat prints a voucher; Kasse gives you the value.', moment: 'Useful in supermarkets, museums, bakeries and shops.', tags: 'checkout cashier till pay' },
+      { word: 'Selbstbedienung', category: 'shop', label: 'Shop', glyph: 'S', meaning: 'Self-service.', action: 'Order, take or collect something yourself instead of waiting for table service.', confuse: 'Bitte warten means wait; Selbstbedienung means act yourself.', moment: 'Common in cafes, bakeries, canteens and snack places.', tags: 'self service cafe bakery' },
+      { word: 'Geoffnet', category: 'shop', label: 'Shop', glyph: 'OPEN', meaning: 'Open.', action: 'If the door also lists days and times, check today before relying on it.', confuse: 'Geschlossen means closed.', moment: 'Useful on shop and restaurant doors.', tags: 'open hours shop door' },
+      { word: 'Geschlossen', category: 'shop', label: 'Shop', glyph: 'C', meaning: 'Closed.', action: 'Look for today-specific notes such as holiday, break or changed opening hours.', confuse: 'Heute geschlossen means closed today.', moment: 'Especially useful on Sundays, holidays and small shop doors.', tags: 'closed opening hours sunday' },
+      { word: 'Pfandautomat', category: 'daily', label: 'Daily', glyph: 'P', meaning: 'Bottle-deposit machine.', action: 'Return accepted bottles/cans, print the voucher, then redeem it at the checkout.', confuse: 'Not every bottle has a deposit.', moment: 'Useful in supermarkets and station shops.', tags: 'pfand bottle deposit supermarket' },
+      { word: 'Leergut', category: 'daily', label: 'Daily', glyph: 'L', meaning: 'Empties, usually bottles or crates for return.', action: 'Follow it when you want to return deposit containers.', confuse: 'Kasse is checkout; Leergut points to bottle return.', moment: 'Useful in larger supermarkets.', tags: 'empties bottles pfand return' },
+      { word: 'WC', category: 'daily', label: 'Daily', glyph: 'WC', meaning: 'Toilet.', action: 'Check whether it is public, customer-only or paid before relying on it.', confuse: 'Damen means women; Herren means men.', moment: 'Useful before a walking tour, museum visit or longer train ride.', tags: 'toilet bathroom restroom' },
+      { word: 'Aufzug', category: 'daily', label: 'Daily', glyph: 'UP', meaning: 'Elevator or lift.', action: 'Use it for luggage, strollers, wheelchairs or step-free station exits.', confuse: 'Treppe means stairs.', moment: 'Useful at stations, malls and museums.', tags: 'elevator lift luggage accessible' },
+      { word: 'Notausgang', category: 'daily', label: 'Daily', glyph: '!', meaning: 'Emergency exit.', action: 'Remember it for safety, but do not use it as a normal shortcut unless instructed.', confuse: 'Ausgang is a normal exit.', moment: 'Useful in museums, clubs, hotels and public buildings.', tags: 'emergency exit safety' },
+      { word: 'Apotheke', category: 'daily', label: 'Daily', glyph: '+', meaning: 'Pharmacy.', action: 'Go here for medicine advice, prescriptions and many over-the-counter items.', confuse: 'Drogerie is more like toiletries/cosmetics, not a full pharmacy.', moment: 'Useful for small health issues during the trip.', tags: 'pharmacy medicine health' }
+    ];
+
+    const listEl = document.getElementById('signList');
+    const searchEl = document.getElementById('signSearch');
+    const emptyEl = document.getElementById('emptyState');
+    const countEl = document.getElementById('resultCount');
+    const filterButtons = [...document.querySelectorAll('[data-filter]')];
+    let activeFilter = 'all';
+    let selectedWord = 'Ausgang';
+
+    function normalize(value) {
+      return String(value || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    }
+
+    function selectedSign() {
+      return SIGNS.find((sign) => sign.word === selectedWord) || SIGNS[0];
+    }
+
+    function setSelected(sign) {
+      selectedWord = sign.word;
+      document.getElementById('selectedCategory').textContent = sign.label;
+      document.getElementById('selectedWord').textContent = sign.word;
+      document.getElementById('selectedMeaning').textContent = sign.meaning;
+      document.getElementById('selectedGlyph').textContent = sign.glyph;
+      document.getElementById('selectedAction').textContent = sign.action;
+      document.getElementById('selectedConfuse').textContent = sign.confuse;
+      document.getElementById('selectedMoment').textContent = sign.moment;
+      renderList();
+    }
+
+    function matches(sign, query) {
+      if (activeFilter !== 'all' && sign.category !== activeFilter) return false;
+      if (!query) return true;
+      const haystack = normalize([sign.word, sign.meaning, sign.action, sign.tags].join(' '));
+      return haystack.includes(query);
+    }
+
+    function renderList() {
+      const query = normalize(searchEl.value.trim());
+      const visible = SIGNS.filter((sign) => matches(sign, query));
+      listEl.innerHTML = '';
+      visible.forEach((sign) => {
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = `bw-card${sign.word === selectedWord ? ' active' : ''}`;
+        card.innerHTML = `<div class="bw-word"><span>${sign.word}</span><span class="bw-category">${sign.label}</span></div><p>${sign.meaning}</p>`;
+        card.addEventListener('click', () => setSelected(sign));
+        listEl.appendChild(card);
+      });
+      countEl.textContent = `${visible.length} shown`;
+      emptyEl.classList.toggle('visible', visible.length === 0);
+    }
+
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        activeFilter = button.dataset.filter;
+        filterButtons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+        const current = selectedSign();
+        if (activeFilter !== 'all' && current.category !== activeFilter) {
+          const first = SIGNS.find((sign) => sign.category === activeFilter);
+          if (first) selectedWord = first.word;
+        }
+        renderList();
+      });
+    });
+
+    searchEl.addEventListener('input', renderList);
+    setSelected(SIGNS[0]);
+  </script>
+  <script src="../js/brand.js"></script>
+</body>
+</html>

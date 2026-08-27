@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Berlin Street Art: What's Worth the Trip? — Effort vs Payoff Map</title>
+<meta name="description" content="Berlin's best street art spots plotted by how far you have to go versus how much there is to see. Tap a spot to get the area, the nearest station, whether it is free, and my honest verdict on whether it is worth the trip." />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  .sa {
+    font-family: 'Montserrat', system-ui, sans-serif;
+    color: var(--bw-text);
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 4px 4px 12px;
+    box-sizing: border-box;
+  }
+  .sa *, .sa *::before, .sa *::after { box-sizing: border-box; }
+  .sa__head {
+    background: var(--bw-green);
+    color: #fff;
+    border-radius: 16px 16px 0 0;
+    padding: 18px 20px 16px;
+  }
+  .sa__kicker {
+    font-size: 11px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--bw-yellow); margin: 0 0 6px;
+  }
+  .sa__title { font-size: 21px; font-weight: 800; margin: 0 0 5px; line-height: 1.2; }
+  .sa__sub { font-size: 13.5px; margin: 0; color: #E8F0E0; line-height: 1.5; }
+  .sa__body {
+    background: var(--bw-white);
+    border: 1px solid var(--bw-border);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    padding: 16px 15px 18px;
+  }
+
+  /* effort vs payoff plot */
+  .sa__plotwrap { margin: 0 0 6px; }
+  .sa__caption {
+    font-size: 10.5px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--bw-muted); text-align: center; margin: 0 0 8px;
+  }
+  .sa__svg { width: 100%; height: auto; display: block; touch-action: manipulation; }
+  .sa__sweet { fill: var(--bw-lime-soft); }
+  .sa__sweetlabel { font-size: 8.4px; font-weight: 800; fill: var(--bw-green); letter-spacing: .02em; }
+  .sa__axis { stroke: var(--bw-border); stroke-width: 1.4; }
+  .sa__axislabel { font-size: 8.6px; font-weight: 800; fill: var(--bw-muted); letter-spacing: .03em; }
+  .sa__axisend { font-size: 7.6px; font-weight: 700; fill: var(--bw-muted); }
+  .sa__dot { cursor: pointer; }
+  .sa__dot circle { fill: var(--bw-green); stroke: #fff; stroke-width: 2; transition: r .15s ease, fill .15s ease; }
+  .sa__dot text { font-size: 10px; font-weight: 800; fill: #fff; pointer-events: none; }
+  .sa__dot.is-paid circle { fill: var(--bw-moderate); }
+  .sa__dot.is-paid text { fill: #3a2c00; }
+  .sa__dot.is-active circle { fill: var(--bw-yellow); stroke: var(--bw-green); stroke-width: 3; }
+  .sa__dot.is-active text { fill: var(--bw-green); }
+  .sa__dot:focus { outline: none; }
+  .sa__dot:focus circle { stroke: var(--bw-green); stroke-width: 3; }
+
+  .sa__legend { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 14px; }
+  .sa__lchip {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11.5px; font-weight: 700; padding: 5px 10px 5px 7px; border-radius: 999px;
+    border: 1px solid var(--bw-border); background: #fff; color: var(--bw-text); cursor: pointer;
+  }
+  .sa__lchip:hover { border-color: var(--bw-lime); }
+  .sa__lchip.is-active { background: var(--bw-green); color: #fff; border-color: var(--bw-green); }
+  .sa__lnum {
+    width: 17px; height: 17px; border-radius: 50%; background: var(--bw-lime-soft); color: var(--bw-green);
+    font-size: 10px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center;
+  }
+  .sa__lchip.is-active .sa__lnum { background: var(--bw-yellow); color: var(--bw-green); }
+
+  /* detail card */
+  .sa__detail { border: 1px solid var(--bw-border); border-radius: 14px; overflow: hidden; }
+  .sa__dhead { padding: 13px 15px 12px; background: var(--bw-lime-soft); border-bottom: 1px solid var(--bw-border); }
+  .sa__dname { font-size: 16.5px; font-weight: 800; color: var(--bw-green); margin: 0 0 4px; line-height: 1.2; }
+  .sa__chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .sa__chip {
+    font-size: 10.5px; font-weight: 700; padding: 3px 9px; border-radius: 999px;
+    border: 1px solid var(--bw-border); background: #fff; color: var(--bw-muted);
+  }
+  .sa__chip.free { background: var(--bw-safe); color: #fff; border-color: var(--bw-safe); }
+  .sa__chip.paid { background: var(--bw-moderate); color: #3a2c00; border-color: var(--bw-moderate); }
+  .sa__dbody { padding: 13px 15px 15px; }
+  .sa__block { margin: 0 0 11px; }
+  .sa__block:last-child { margin-bottom: 0; }
+  .sa__blabel {
+    font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--bw-lime); margin: 0 0 3px;
+  }
+  .sa__blabel.get { color: var(--bw-muted); }
+  .sa__blabel.tip { color: var(--bw-green); }
+  .sa__blabel.for { color: var(--bw-moderate); }
+  .sa__btext { font-size: 13px; line-height: 1.5; margin: 0; color: var(--bw-text); }
+  .sa__btext b { color: var(--bw-green); }
+
+  .sa__foot { font-size: 11px; color: var(--bw-muted); line-height: 1.5; margin: 14px 2px 0; text-align: center; }
+</style>
+</head>
+<body>
+<div class="sa">
+  <div class="sa__head">
+    <p class="sa__kicker">BerlinWalk · Berlin Street Art</p>
+    <h2 class="sa__title">Berlin street art: what's worth the trip?</h2>
+    <p class="sa__sub">Not all of it is close, and not all of it is worth a special journey. Every spot below is plotted by how far you have to go against how much there is to see. Tap one for the area, the nearest station and my honest take.</p>
+  </div>
+  <div class="sa__body">
+    <div class="sa__plotwrap">
+      <p class="sa__caption">Effort to get there vs how much there is to see</p>
+      <svg class="sa__svg" viewBox="0 0 360 286" role="img" aria-label="Chart of Berlin street art spots plotted by effort to reach against how much there is to see. Tap a numbered dot to read about that spot.">
+        <!-- sweet spot zone: low effort + high payoff (top-left) -->
+        <rect class="sa__sweet" x="44" y="20" width="150" height="106" rx="8" />
+        <text class="sa__sweetlabel" x="52" y="34">CLOSE · AND WORTH IT</text>
+
+        <!-- axes -->
+        <line class="sa__axis" x1="44" y1="20" x2="44" y2="240" />
+        <line class="sa__axis" x1="44" y1="240" x2="346" y2="240" />
+        <!-- y arrow -->
+        <path class="sa__axis" d="M44 20 l-4 7 M44 20 l4 7" fill="none" />
+        <!-- x arrow -->
+        <path class="sa__axis" d="M346 240 l-7 -4 M346 240 l-7 4" fill="none" />
+
+        <!-- axis labels -->
+        <text class="sa__axislabel" x="195" y="262" text-anchor="middle">EFFORT TO GET THERE →</text>
+        <text class="sa__axisend" x="48" y="253">central · easy</text>
+        <text class="sa__axisend" x="344" y="253" text-anchor="end">far · a dedicated trip</text>
+        <text class="sa__axislabel" x="0" y="0" transform="translate(15,130) rotate(-90)" text-anchor="middle">HOW MUCH TO SEE →</text>
+
+        <!-- dots injected by script -->
+        <g id="saDots"></g>
+      </svg>
+    </div>
+
+    <div class="sa__legend" id="saLegend"></div>
+
+    <div class="sa__detail">
+      <div class="sa__dhead">
+        <h3 class="sa__dname" id="saName">Haus Schwarzenberg</h3>
+        <div class="sa__chips" id="saChips"></div>
+      </div>
+      <div class="sa__dbody">
+        <div class="sa__block">
+          <p class="sa__blabel">What it is</p>
+          <p class="sa__btext" id="saWhat"></p>
+        </div>
+        <div class="sa__block">
+          <p class="sa__blabel get">Getting there</p>
+          <p class="sa__btext" id="saGet"></p>
+        </div>
+        <div class="sa__block">
+          <p class="sa__blabel tip">Yusuf's verdict</p>
+          <p class="sa__btext" id="saTip"></p>
+        </div>
+        <div class="sa__block">
+          <p class="sa__blabel for">Best for</p>
+          <p class="sa__btext" id="saFor"></p>
+        </div>
+      </div>
+    </div>
+
+    <p class="sa__foot">Outdoor street art changes constantly, so a specific piece may be painted over by the time you arrive. Times are rough door-to-door from central Mitte. This is a planning guide, not the whole map.</p>
+  </div>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  // effort (x, 0 = central/easy → 1 = far/a trip); payoff (y, 0 = quick look → 1 = big & worth lingering)
+  var SPOTS = [
+    {
+      id: 'haus', n: 1, x: 0.10, y: 0.62, paid: false,
+      name: 'Haus Schwarzenberg (Dead Chicken Alley)',
+      chips: [{ t: 'Free · 24h', c: 'free' }, { t: 'Mitte', c: '' }, { t: '15 min', c: '' }],
+      what: 'A scruffy courtyard off Rosenthaler Straße 39, right by Hackescher Markt, where paste-ups, stencils and murals are layered on and painted over almost weekly. The famous Anne Frank portrait by Jimmy C stays. It is the last genuinely independent art courtyard in the polished centre.',
+      get: 'S-Bahn <b>Hackescher Markt</b>, then one minute on foot. It sits directly beside the smart Hackesche Höfe, so most people walk straight past the entrance.',
+      tip: 'The easiest street art in the city, and the one I actually point guests to. It is about <b>five minutes from where my tour ends</b>, costs nothing, and is open at any hour. Start here before you decide whether to chase the rest.',
+      for: 'Anyone short on time who wants the real, messy Berlin a step off the tourist drag.'
+    },
+    {
+      id: 'esg', n: 2, x: 0.30, y: 0.85, paid: false,
+      name: 'East Side Gallery',
+      chips: [{ t: 'Free · open air', c: 'free' }, { t: 'Friedrichshain', c: '' }, { t: '45 min', c: '' }],
+      what: 'A 1.3 km stretch of the Berlin Wall painted by artists in 1990, including the Brezhnev–Honecker kiss and the Trabant breaking through the concrete. It is the longest open-air gallery in the world and the single most famous street art in Berlin.',
+      get: 'U/S <b>Warschauer Straße</b> or S-Bahn <b>Ostbahnhof</b>, then a short walk to the river. The painted side faces the Spree.',
+      tip: 'It earns the hype, but go early. By midday it is packed and people queue to photograph the kiss. It is Wall history as much as street art, so I gave it <b>its own full guide</b> rather than squeezing it in here.',
+      for: 'First-time visitors who want the icons and do not mind a crowd.'
+    },
+    {
+      id: 'raw', n: 3, x: 0.44, y: 0.71, paid: false,
+      name: 'RAW-Gelände',
+      chips: [{ t: 'Free · open air', c: 'free' }, { t: 'Friedrichshain', c: '' }, { t: '30 min', c: '' }],
+      what: 'A former railway repair yard on Revaler Straße, now a raw compound of clubs, a skate hall and walls buried under constantly changing graffiti. This is the living, unglossy end of the scene, not curated murals.',
+      get: 'U/S <b>Warschauer Straße</b>, then a few minutes east. It runs into the same night-life strip, so it is busy after dark.',
+      tip: 'Go in daylight to actually see the art. It feels edgier than the rest, which is the point, but keep the usual city sense about you at night. Pairs naturally with the East Side Gallery in one loop.',
+      for: 'Travellers who want the working, spray-can side of Berlin over polished murals.'
+    },
+    {
+      id: 'kreuzberg', n: 4, x: 0.50, y: 0.58, paid: false,
+      name: 'Kreuzberg murals (the Cosmonaut)',
+      chips: [{ t: 'Free · open air', c: 'free' }, { t: 'Kreuzberg', c: '' }, { t: '20–40 min', c: '' }],
+      what: 'The streets around Kottbusser Tor hold some of the city\'s best big-wall murals. The star is Victor Ash\'s giant "Astronaut/Cosmonaut", a stencilled spaceman on the corner of Mariannenstraße and Oranienstraße, painted in 2007 and now a neighbourhood landmark.',
+      get: 'U-Bahn <b>Kottbusser Tor</b>, then wander Oranienstraße and its side streets on foot. The Cosmonaut is a two-minute walk from the station.',
+      tip: 'My favourite way to see street art here is to just walk Kreuzberg with your head up rather than tick off one wall. The Cosmonaut is the anchor, and the falafel and bars around it make it an easy evening.',
+      for: 'People who like a neighbourhood stroll with the art woven through it.'
+    },
+    {
+      id: 'urban', n: 5, x: 0.58, y: 0.74, paid: false,
+      name: 'Urban Nation Museum',
+      chips: [{ t: 'Free entry', c: 'free' }, { t: 'Schöneberg', c: '' }, { t: '45–60 min', c: '' }],
+      what: 'Berlin\'s free museum dedicated to urban and street art, on Bülowstraße in Schöneberg. Indoors it rotates exhibitions by big international names; outdoors the surrounding street is an open-air wall of commissioned murals.',
+      get: 'U-Bahn <b>Bülowstraße</b> or <b>Nollendorfplatz</b>, a couple of minutes away. Closed Mondays; open later on Thursday to Sunday.',
+      tip: 'The one indoor option here, and it is free, so it rescues a grey or rainy afternoon. Check the current show before a special trip, because it is exhibition-led and the space is not huge.',
+      for: 'Rainy days, and anyone who wants context and named artists, not just walls.'
+    },
+    {
+      id: 'mauerpark', n: 6, x: 0.34, y: 0.43, paid: false,
+      name: 'Mauerpark graffiti wall',
+      chips: [{ t: 'Free · open air', c: 'free' }, { t: 'Prenzlauer Berg', c: '' }, { t: '20 min', c: '' }],
+      what: 'A surviving stretch of the inner Wall inside Mauerpark, now a legal graffiti wall that is repainted over and over. On a Sunday it comes with a huge flea market and open-air karaoke around it.',
+      get: 'U-Bahn <b>Eberswalder Straße</b>, then a short walk into the park. Best on a Sunday when the market and karaoke are on.',
+      tip: 'The art itself is a bonus rather than the reason to come. I would fold it into a lazy Sunday in the park, not make a special journey on a quiet weekday. It has its own Sunday guide worth reading first.',
+      for: 'Sunday visitors already planning a flea-market-and-park afternoon.'
+    },
+    {
+      id: 'teufelsberg', n: 7, x: 0.90, y: 0.86, paid: true,
+      name: 'Teufelsberg',
+      chips: [{ t: 'Paid ~€10', c: 'paid' }, { t: 'Grunewald', c: '' }, { t: 'Half-day', c: '' }],
+      what: 'An abandoned Cold War listening station on a hill in the Grunewald forest, its domes and towers now covered inside and out in what is often called Europe\'s largest open-air street art gallery.',
+      get: 'S-Bahn <b>Grunewald</b> or <b>Heerstraße</b>, then a real walk uphill through the forest. There is an entry fee (around €10) and no easy parking on site.',
+      tip: 'The only spot here that is a genuine expedition, and the only paid one. Worth it if you love street art or Cold War ruins and have a clear half-day; skippable if you are on a tight first visit. Go on a dry weekday morning.',
+      for: 'Enthusiasts with time who want the atmosphere as much as the art.'
+    }
+  ];
+
+  var PLOT = { x0: 44, x1: 344, y0: 20, y1: 240 };
+  function px(x) { return PLOT.x0 + x * (PLOT.x1 - PLOT.x0); }
+  function py(y) { return PLOT.y1 - y * (PLOT.y1 - PLOT.y0); }
+
+  var dotsEl = document.getElementById('saDots');
+  var legendEl = document.getElementById('saLegend');
+  var nameEl = document.getElementById('saName');
+  var chipsEl = document.getElementById('saChips');
+  var whatEl = document.getElementById('saWhat');
+  var getEl = document.getElementById('saGet');
+  var tipEl = document.getElementById('saTip');
+  var forEl = document.getElementById('saFor');
+
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  SPOTS.forEach(function (s) {
+    var g = document.createElementNS(SVGNS, 'g');
+    g.setAttribute('class', 'sa__dot' + (s.paid ? ' is-paid' : ''));
+    g.setAttribute('id', 'dot-' + s.id);
+    g.setAttribute('tabindex', '0');
+    g.setAttribute('role', 'button');
+    g.setAttribute('aria-label', s.n + '. ' + s.name);
+    var c = document.createElementNS(SVGNS, 'circle');
+    c.setAttribute('cx', px(s.x)); c.setAttribute('cy', py(s.y)); c.setAttribute('r', 11);
+    var t = document.createElementNS(SVGNS, 'text');
+    t.setAttribute('x', px(s.x)); t.setAttribute('y', py(s.y) + 3.5); t.setAttribute('text-anchor', 'middle');
+    t.textContent = s.n;
+    g.appendChild(c); g.appendChild(t);
+    g.addEventListener('click', function () { select(s.id); });
+    g.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(s.id); }
+    });
+    dotsEl.appendChild(g);
+
+    var chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'sa__lchip';
+    chip.id = 'leg-' + s.id;
+    chip.innerHTML = '<span class="sa__lnum">' + s.n + '</span>' + shortName(s.name);
+    chip.addEventListener('click', function () { select(s.id); });
+    legendEl.appendChild(chip);
+  });
+
+  function shortName(name) {
+    return name.replace(' (Dead Chicken Alley)', '').replace(' (the Cosmonaut)', '').replace(' Museum', '');
+  }
+
+  function select(id) {
+    var s = SPOTS.filter(function (v) { return v.id === id; })[0];
+    if (!s) return;
+    SPOTS.forEach(function (v) {
+      var dot = document.getElementById('dot-' + v.id);
+      var leg = document.getElementById('leg-' + v.id);
+      if (dot) dot.classList.toggle('is-active', v.id === id);
+      if (leg) leg.classList.toggle('is-active', v.id === id);
+    });
+    nameEl.textContent = s.name;
+    chipsEl.innerHTML = s.chips.map(function (c) {
+      return '<span class="sa__chip ' + (c.c || '') + '">' + c.t + '</span>';
+    }).join('');
+    whatEl.innerHTML = s.what;
+    getEl.innerHTML = s.get;
+    tipEl.innerHTML = s.tip;
+    forEl.innerHTML = s.for;
+  }
+
+  select('haus');
+})();
+</script>
+</body>
+</html>

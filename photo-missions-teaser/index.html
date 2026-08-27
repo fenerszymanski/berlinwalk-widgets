@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hidden Berlin Photo Missions — Try Mission 1 Free</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    html, body { margin: 0; padding: 0; background: transparent; }
+    body { font-family: Montserrat, Arial, sans-serif; color: #212121; }
+
+    .missions, .missions * { box-sizing: border-box; }
+
+    .missions {
+      --green: #1B5E20;
+      --green-dark: #123B15;
+      --yellow: #FFE600;
+      --cream: #FAFAF5;
+      --paper: #FFFFFF;
+      --line: #DCE8C8;
+      --ink: #212121;
+      --muted: #53624F;
+      width: 100%;
+      max-width: 640px;
+      margin: 0 auto;
+      background: var(--cream);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 16px 38px rgba(18, 59, 21, 0.12);
+    }
+
+    .head {
+      padding: 20px 20px 4px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      padding: 7px 10px;
+      background: var(--yellow);
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 999px;
+    }
+
+    .head h1 {
+      margin: 12px 0 8px;
+      color: var(--green);
+      font-size: clamp(22px, 4vw, 28px);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14.5px;
+      line-height: 1.55;
+      font-weight: 600;
+    }
+
+    .card {
+      margin: 16px 20px 0;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .card-photo {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1100 / 755;
+      background: #dde5d0;
+    }
+
+    .card-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 6px 10px;
+      background: var(--green);
+      color: var(--yellow);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border-radius: 6px;
+    }
+
+    .card-body {
+      padding: 14px 16px 16px;
+    }
+
+    .card-body h2 {
+      margin: 0 0 6px;
+      color: var(--green);
+      font-size: 17px;
+      line-height: 1.25;
+    }
+
+    .card-body .brief {
+      margin: 0;
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.5;
+      font-weight: 600;
+    }
+
+    .reveal-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      justify-content: center;
+      min-height: 44px;
+      margin-top: 12px;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 8px;
+      background: var(--green);
+      color: var(--yellow);
+      font: inherit;
+      font-size: 14px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .reveal-btn:hover,
+    .reveal-btn:focus-visible {
+      background: var(--green-dark);
+      outline: none;
+    }
+
+    .tip {
+      margin-top: 12px;
+      padding: 12px 14px;
+      background: #F2F8E8;
+      border-left: 4px solid var(--yellow);
+      border-radius: 0 8px 8px 0;
+      display: none;
+    }
+
+    .tip.is-visible { display: block; }
+
+    .tip p {
+      margin: 0;
+      color: var(--ink);
+      font-size: 13.5px;
+      line-height: 1.55;
+      font-weight: 600;
+    }
+
+    .tip .tip-label {
+      display: block;
+      margin: 0 0 4px;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .complete-badge {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+      padding: 10px 12px;
+      background: var(--green);
+      border-radius: 8px;
+      color: var(--yellow);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .complete-badge.is-visible { display: flex; }
+
+    .complete-badge .check {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--yellow);
+      color: var(--green);
+      font-size: 13px;
+      line-height: 1;
+      flex: 0 0 20px;
+    }
+
+    .route {
+      margin: 18px 20px 4px;
+    }
+
+    .route-label {
+      margin: 0 0 8px;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .route-strip {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .stop {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      min-width: 30px;
+    }
+
+    .stop-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .stop.done .stop-dot {
+      background: var(--green);
+      color: var(--yellow);
+    }
+
+    .stop.locked .stop-dot {
+      background: #E4EBD8;
+      color: var(--muted);
+    }
+
+    .stop-name {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--muted);
+      text-align: center;
+      max-width: 46px;
+      line-height: 1.2;
+    }
+
+    .stop.done .stop-name { color: var(--green); font-weight: 800; }
+
+    .route-connector {
+      flex: 1 1 8px;
+      min-width: 8px;
+      height: 2px;
+      background: var(--line);
+      margin-bottom: 15px;
+    }
+
+    .route-caption {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 12.5px;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    .cta-block {
+      margin: 18px 20px 20px;
+      padding: 16px;
+      background: var(--green);
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .cta-block .cta-line {
+      margin: 0 0 10px;
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .cta-block .price {
+      color: var(--yellow);
+      font-weight: 900;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--yellow);
+      color: var(--green-dark);
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 14.5px;
+      font-weight: 900;
+    }
+
+    .cta-btn:hover,
+    .cta-btn:focus-visible {
+      background: #f5dc00;
+      outline: none;
+    }
+
+    .cta-note {
+      margin: 10px 0 0;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 460px) {
+      .head { padding: 16px 16px 4px; }
+      .card { margin: 14px 16px 0; }
+      .route { margin: 16px 16px 4px; }
+      .cta-block { margin: 16px 16px 18px; padding: 14px; }
+      .stop-name { display: none; }
+      .stop.done .stop-name { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <main class="missions" aria-labelledby="missions-title">
+    <div class="head">
+      <span class="eyebrow">Free preview</span>
+      <h1 id="missions-title">Try mission 1 of the Berlin photo hunt.</h1>
+      <p>Ten photo missions, Anhalter Bahnhof to Alexanderplatz, about 5&nbsp;km. Here is the first one, free.</p>
+    </div>
+
+    <article class="card">
+      <div class="card-photo">
+        <span class="card-tag">Mission 1 of 10</span>
+        <img src="https://app.berlinwalk.com/assets/photo-missions/samples/sample-card-1.png" alt="Hidden Berlin Photo Missions, mission 1: the surviving Anhalter Bahnhof portal" loading="lazy" width="1100" height="755">
+      </div>
+      <div class="card-body">
+        <h2>The station that lost everything but one door.</h2>
+        <p class="brief">Anhalter Bahnhof was once Berlin's grandest terminus. Almost none of it survived. Find the one piece still standing.</p>
+
+        <button class="reveal-btn" type="button" data-reveal>
+          <span data-reveal-label>Why this stop made the cut</span>
+        </button>
+
+        <div class="tip" data-tip>
+          <span class="tip-label">Why this stop</span>
+          <p>Anhalter Bahnhof was continental Europe's largest train station before the war. Bombing gutted it, and in 1959 most of the ruin was demolished rather than repaired, a decision that became its own piece of Cold War history. The portal on your card is what a visitor is left to stand in front of today.</p>
+        </div>
+
+        <div class="complete-badge" data-complete>
+          <span class="check" aria-hidden="true">&#10003;</span>
+          <span>Mission 1 complete. 9 more are sealed until you buy.</span>
+        </div>
+      </div>
+    </article>
+
+    <div class="route">
+      <p class="route-label">The full route</p>
+      <div class="route-strip" role="list" aria-label="Ten photo mission stops from Anhalter Bahnhof to Alexanderplatz">
+        <div class="stop done" role="listitem"><span class="stop-dot">&#10003;</span><span class="stop-name">Anhalter Bf.</span></div>
+        <div class="route-connector" aria-hidden="true"></div>
+        <div class="stop locked" role="listitem"><span class="stop-dot">2</span><span class="stop-name">Sealed</span></div>
+        <div class="route-connector" aria-hidden="true"></div>
+        <div class="stop locked" role="listitem"><span class="stop-dot">3</span><span class="stop-name">Sealed</span></div>
+        <div class="route-connector" aria-hidden="true"></div>
+        <div class="stop locked" role="listitem"><span class="stop-dot">4</span><span class="stop-name">Sealed</span></div>
+        <div class="route-connector" aria-hidden="true"></div>
+        <div class="stop locked" role="listitem"><span class="stop-dot">5</span><span class="stop-name">Sealed</span></div>
+        <div class="route-connector" aria-hidden="true"></div>
+        <div class="stop locked" role="listitem"><span class="stop-dot">6</span><span class="stop-name">Sealed</span></div>
+        <div class="route-connector" aria-hidden="true"></div>
+        <div class="stop locked" role="listitem"><span class="stop-dot">7</span><span class="stop-name">Sealed</span></div>
+        <div class="route-connector" aria-hidden="true"></div>
+        <div class="stop locked" role="listitem"><span class="stop-dot">8</span><span class="stop-name">Sealed</span></div>
+        <div class="route-connector" aria-hidden="true"></div>
+        <div class="stop locked" role="listitem"><span class="stop-dot">9</span><span class="stop-name">Sealed</span></div>
+        <div class="route-connector" aria-hidden="true"></div>
+        <div class="stop locked" role="listitem"><span class="stop-dot">10</span><span class="stop-name">Alexanderpl.</span></div>
+      </div>
+      <p class="route-caption">Card 2 to 10 stay sealed until you buy. No spoilers.</p>
+    </div>
+
+    <div class="cta-block">
+      <p class="cta-line">Get all 10 missions for <span class="price">&euro;3.99</span>.</p>
+      <a class="cta-btn" href="https://www.berlinwalk.com/products/hidden-berlin-photo-missions?utm_source=embed&amp;utm_medium=widget&amp;utm_campaign=photo-missions-teaser&amp;utm_content=mission1-cta" target="_top" rel="noopener" data-cta-link>Get the PDF &rarr;</a>
+      <p class="cta-note">Instant download. Works on your phone or printed.</p>
+    </div>
+  </main>
+
+  <script src="../js/brand.js"></script>
+  <script>
+    (function () {
+      var btn = document.querySelector('[data-reveal]');
+      var label = document.querySelector('[data-reveal-label]');
+      var tip = document.querySelector('[data-tip]');
+      var complete = document.querySelector('[data-complete]');
+      var revealed = false;
+
+      btn.addEventListener('click', function () {
+        if (revealed) return;
+        revealed = true;
+        tip.classList.add('is-visible');
+        complete.classList.add('is-visible');
+        label.textContent = 'Tip revealed';
+        btn.disabled = true;
+      });
+    })();
+  </script>
+</body>
+</html>

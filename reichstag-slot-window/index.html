@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reichstag Dome: Can You Book Your Date Yet? | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-reichstag-window">
+  <style>
+    #bw-reichstag-window{
+      --bw-green:#1B5E20; --bw-green-dark:#164a1a; --bw-yellow:#FFE600;
+      --bw-lime:#7CB342; --bw-border:#DCE8C8; --bw-text:#212121;
+      --bw-muted:#4E5A4E; --bw-white:#FFFFFF; --bw-lime-soft:#F2F8E8; --bw-red:#E63946;
+      color:var(--bw-text);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      max-width:720px; margin:0 auto; padding:2px;
+    }
+    #bw-reichstag-window *{box-sizing:border-box;}
+    .rw-card{border:1px solid var(--bw-border); border-radius:16px; background:var(--bw-white);
+      overflow:hidden; box-shadow:0 1px 2px rgba(20,74,26,.05);}
+    .rw-head{background:var(--bw-green); color:var(--bw-white); padding:16px 18px;}
+    .rw-head h2{margin:0; font-size:1.12rem; line-height:1.25;}
+    .rw-head p{margin:5px 0 0; font-size:.86rem; color:#dCE8CF;}
+    .rw-body{padding:16px;}
+
+    .rw-label{font-size:.78rem; font-weight:800; letter-spacing:.5px; text-transform:uppercase;
+      color:var(--bw-muted); margin:0 0 8px;}
+    .rw-input{display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:16px;}
+    .rw-date{font:inherit; font-size:.95rem; padding:10px 12px; border:1.5px solid var(--bw-border);
+      border-radius:12px; background:var(--bw-white); color:var(--bw-text); min-width:170px;}
+    .rw-date:focus{outline:none; border-color:var(--bw-lime);}
+
+    /* window strip */
+    .rw-strip{position:relative; height:60px; margin:4px 0 6px; border:1px solid var(--bw-border);
+      border-radius:12px; background:var(--bw-lime-soft); overflow:hidden;}
+    .rw-band{position:absolute; top:0; bottom:0;}
+    .rw-band.open{background:rgba(124,179,66,.35);}
+    .rw-band.closed{background:rgba(230,57,70,.22);}
+    .rw-tick{position:absolute; top:0; bottom:0; width:2px; background:var(--bw-green);}
+    .rw-tick.you{background:var(--bw-text); width:3px;}
+    .rw-months{display:flex; font-size:.72rem; color:var(--bw-muted); font-weight:700; margin-bottom:14px;}
+    .rw-months span{flex:1; text-align:center;}
+    .rw-legend{display:flex; flex-wrap:wrap; gap:12px; font-size:.75rem; color:var(--bw-muted); margin:-6px 0 14px;}
+    .rw-legend i{display:inline-block; width:11px; height:11px; border-radius:3px; margin-right:5px; vertical-align:-1px;}
+
+    .rw-out{border:1px solid var(--bw-border); border-radius:14px; padding:15px; background:var(--bw-lime-soft);}
+    .rw-verdict{font-size:.74rem; font-weight:800; letter-spacing:.6px; text-transform:uppercase;
+      border-radius:6px; padding:3px 8px; display:inline-block; color:var(--bw-green); background:var(--bw-yellow);}
+    .rw-verdict.warn{background:var(--bw-red); color:var(--bw-white);}
+    .rw-line{margin:10px 0 4px; font-size:1.06rem; font-weight:800; line-height:1.25;}
+    .rw-why{font-size:.94rem; line-height:1.55; margin:0 0 11px;}
+    .rw-steps{margin:0 0 4px; padding-left:18px;}
+    .rw-steps li{font-size:.9rem; line-height:1.5; margin-bottom:5px;}
+    .rw-note{border-top:1px solid var(--bw-border); margin-top:11px; padding-top:10px;
+      font-size:.85rem; line-height:1.5; color:var(--bw-muted);}
+    .rw-note strong{color:var(--bw-text);}
+    .rw-foot{padding:12px 16px 15px; font-size:.8rem; color:var(--bw-muted); border-top:1px solid var(--bw-border);}
+    .rw-foot a{color:var(--bw-green); font-weight:700; text-decoration:none;}
+    .rw-foot a:hover{text-decoration:underline;}
+    @media (max-width:420px){ .rw-head h2{font-size:1.02rem;} .rw-line{font-size:.98rem;} }
+  </style>
+
+  <div class="rw-card">
+    <div class="rw-head">
+      <h2>Reichstag dome: can you book your date yet?</h2>
+      <p>The dome is free, but the Bundestag only takes requests for this month and the next one. Put your Berlin date in and see where it sits.</p>
+    </div>
+
+    <div class="rw-body">
+      <p class="rw-label">Your planned visit date</p>
+      <div class="rw-input">
+        <input class="rw-date" id="rw-date" type="date" aria-label="Planned Reichstag visit date">
+      </div>
+
+      <div class="rw-strip" id="rw-strip"></div>
+      <div class="rw-months" id="rw-months"></div>
+      <div class="rw-legend">
+        <span><i style="background:rgba(124,179,66,.55)"></i>Request window open</span>
+        <span><i style="background:rgba(230,57,70,.45)"></i>Dome closed, terrace only</span>
+        <span><i style="background:#212121"></i>Your date</span>
+      </div>
+
+      <div class="rw-out">
+        <span class="rw-verdict" id="rw-verdict">Enter a date</span>
+        <div class="rw-line" id="rw-line"></div>
+        <p class="rw-why" id="rw-why"></p>
+        <ol class="rw-steps" id="rw-steps"></ol>
+        <div class="rw-note" id="rw-note"></div>
+      </div>
+    </div>
+
+    <div class="rw-foot" id="rw-foot"></div>
+  </div>
+
+  <script>
+  (function(){
+    // Facts below come from the published BerlinWalk Reichstag guide, which sources the
+    // official Bundestag pages. Closure list is the published 2026 set only.
+    var CLOSURES_2026 = [
+      ['2026-06-15','2026-06-19'],
+      ['2026-06-29','2026-07-03'],
+      ['2026-09-14','2026-09-18'],
+      ['2026-09-28','2026-10-02'],
+      ['2026-10-19','2026-10-30']
+    ];
+    var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+    var el=function(id){return document.getElementById(id);};
+    var d0=new Date(); d0.setHours(0,0,0,0);
+    var input=el('rw-date');
+    input.min = iso(d0);
+    var def=new Date(d0.getTime()); def.setDate(def.getDate()+21);
+    input.value = iso(def);
+
+    function iso(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+    function parse(s){ var p=s.split('-'); return new Date(+p[0], +p[1]-1, +p[2]); }
+    function monthStart(y,m){ return new Date(y,m,1); }
+    function fmt(d){ return d.getDate()+' '+MONTHS[d.getMonth()]+' '+d.getFullYear(); }
+    function closureFor(d){
+      var s=iso(d);
+      for(var i=0;i<CLOSURES_2026.length;i++){
+        if(s>=CLOSURES_2026[i][0] && s<=CLOSURES_2026[i][1]) return CLOSURES_2026[i];
+      }
+      return null;
+    }
+
+    function render(){
+      var target = parse(input.value);
+      if(isNaN(target)) return;
+
+      // Request window: current month and the following month.
+      var windowEnd = new Date(d0.getFullYear(), d0.getMonth()+2, 0); // last day of next month
+      var bookable = target <= windowEnd;
+      // The month the window opens for the target date = first day of the month before it.
+      var opensOn = monthStart(target.getFullYear(), target.getMonth()-1);
+
+      // Strip starts this month and always stretches far enough to contain the chosen
+      // date, otherwise a far-future date (exactly the "too early" case this tool is
+      // for) would be clamped to the right edge and invisible.
+      var monthsSpan = 4;
+      var diff = (target.getFullYear()-d0.getFullYear())*12 + (target.getMonth()-d0.getMonth());
+      if (diff + 1 > monthsSpan) monthsSpan = diff + 1;
+      var stripStart = monthStart(d0.getFullYear(), d0.getMonth());
+      var stripEnd = monthStart(d0.getFullYear(), d0.getMonth()+monthsSpan);
+      var span = stripEnd - stripStart;
+      var pct = function(d){ return Math.max(0, Math.min(100, ((d - stripStart)/span)*100)); };
+
+      var strip=el('rw-strip'); strip.innerHTML='';
+      var open=document.createElement('div');
+      open.className='rw-band open';
+      open.style.left=pct(stripStart)+'%';
+      open.style.width=(pct(new Date(windowEnd.getTime()+864e5)) - pct(stripStart))+'%';
+      strip.appendChild(open);
+
+      CLOSURES_2026.forEach(function(c){
+        var a=parse(c[0]), b=parse(c[1]);
+        if(b<stripStart||a>stripEnd) return;
+        var band=document.createElement('div');
+        band.className='rw-band closed';
+        band.style.left=pct(a)+'%';
+        band.style.width=Math.max(1.2, pct(new Date(b.getTime()+864e5))-pct(a))+'%';
+        strip.appendChild(band);
+      });
+
+      var today=document.createElement('div'); today.className='rw-tick'; today.style.left=pct(d0)+'%'; strip.appendChild(today);
+      var you=document.createElement('div'); you.className='rw-tick you'; you.style.left=pct(target)+'%'; strip.appendChild(you);
+
+      var mrow=el('rw-months'); mrow.innerHTML='';
+      // Label every month when the strip is short, otherwise thin them out so the row
+      // stays readable on a phone.
+      var step = monthsSpan > 8 ? Math.ceil(monthsSpan/6) : 1;
+      for(var i=0;i<monthsSpan;i++){
+        var m=new Date(d0.getFullYear(), d0.getMonth()+i, 1);
+        var s=document.createElement('span');
+        s.textContent = (i % step === 0) ? MONTHS[m.getMonth()].slice(0,3) : '';
+        mrow.appendChild(s);
+      }
+
+      var closure = closureFor(target);
+      var verdict=el('rw-verdict'), line=el('rw-line'), why=el('rw-why'), steps=el('rw-steps'), note=el('rw-note');
+      steps.innerHTML='';
+      var add=function(t){ var li=document.createElement('li'); li.textContent=t; steps.appendChild(li); };
+
+      if(bookable){
+        verdict.textContent='Request it now'; verdict.className='rw-verdict';
+        line.textContent='Your date is inside the request window.';
+        why.textContent='The Bundestag only accepts dome requests for the current month and the following month, and '+fmt(target)+' falls inside that. Summer, weekends, school holidays and sunset slots go first, so do not sit on it.';
+        add('Open the official Bundestag visit request form and choose the dome or roof terrace.');
+        add('Pick your date and time, then enter every visitor exactly as their ID reads, including dates of birth.');
+        add('Submit, then wait for the confirmation email. Submitting is not the same as being booked.');
+        add('Save the confirmation offline and bring photo ID that matches the names on it.');
+        add('Arrive 20 to 30 minutes before your slot for security.');
+      } else {
+        verdict.textContent='Too early'; verdict.className='rw-verdict warn';
+        line.textContent='The window for your date opens on '+fmt(opensOn)+'.';
+        why.textContent='Requests are only accepted for the current month and the following month, so '+fmt(target)+' cannot be requested yet. Put a reminder in your calendar for '+fmt(opensOn)+' and book that day, because the good slots go quickly.';
+        add('Set a reminder for '+fmt(opensOn)+', the first day your date can be requested.');
+        add('Book the dome before you book any paid viewpoint. It is free but slot-limited.');
+        add('If your plans firm up later than that, the same-day fallback below still exists.');
+      }
+
+      if(closure){
+        note.innerHTML='<strong>Heads up: the dome is closed '+fmt(parse(closure[0]))+' to '+fmt(parse(closure[1]))+'.</strong> '+
+          'The Bundestag still allows the roof terrace during dome closures, so a visit is not off the table, but the spiral walk inside the glass dome and the dome audioguide are not available. If the dome itself is the reason you are going, move your date outside this band.';
+      } else {
+        note.innerHTML='<strong>The fallback if it is full.</strong> The Visitors’ Service runs a service centre near the Reichstag, and if places remain it can issue a same-day confirmation at least two hours before the visit. Treat that as a last resort, not a plan. Even a confirmed slot can be cancelled by parliamentary business, events, weather or security.';
+      }
+    }
+
+    input.addEventListener('change', render);
+    input.addEventListener('input', render);
+
+    el('rw-foot').innerHTML='Entry is free and the closure dates shown are the published 2026 set, which can change. '+
+      '<a href="https://www.bundestag.de/en/visittheBundestag/dome" target="_blank" rel="noopener">Check the official Bundestag dome page ›</a>';
+
+    render();
+  })();
+  </script>
+</div>
+</body>
+</html>

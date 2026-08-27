@@ -1,0 +1,423 @@
+const SCRIPT_URL = document.currentScript && document.currentScript.src ? document.currentScript.src : '';
+const BASE_URL = SCRIPT_URL
+  ? new URL('../', SCRIPT_URL).toString()
+  : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
+const ASSET_BUILD = 'smile-embedded-height-lock-20260708';
+const GAMES_PREVIEW_BUILD = 'games-preview-rail-hero-preview-20260708a';
+
+function loadGamesPreviewRail(callback) {
+  if (window.BerlinWalkGamesPreviewRail) {
+    callback();
+    return;
+  }
+  const existing = document.querySelector('script[data-bw-games-preview-rail]');
+  if (existing) {
+    existing.addEventListener('load', callback, { once: true });
+    return;
+  }
+  const script = document.createElement('script');
+  script.src = new URL(`js/games-preview-rail.js?v=${GAMES_PREVIEW_BUILD}`, BASE_URL).toString();
+  script.defer = true;
+  script.dataset.bwGamesPreviewRail = 'true';
+  script.addEventListener('load', callback, { once: true });
+  document.head.appendChild(script);
+}
+
+class BwBerlinSmileChallengePage extends HTMLElement {
+  connectedCallback() {
+    this._render();
+    this._bind();
+  }
+
+  disconnectedCallback() {
+    if (this._messageHandler) window.removeEventListener('message', this._messageHandler);
+    if (this._handleHostResize) window.removeEventListener('resize', this._handleHostResize);
+    const iframe = this.querySelector('.bw-smile-frame');
+    if (iframe && this._handleHostResize) iframe.removeEventListener('load', this._handleHostResize);
+    if (this._resizeObserver) this._resizeObserver.disconnect();
+    if (this._timers) this._timers.forEach((timer) => window.clearTimeout(timer));
+  }
+
+  _gameUrl() {
+    const source = new URL(`${BASE_URL}berlin-smile-challenge/`);
+    source.searchParams.set('v', ASSET_BUILD);
+    source.searchParams.set('attribution', 'none');
+    source.searchParams.set('resize', 'none');
+    source.searchParams.set('parent_path', window.location.pathname || '/games/berlin-smile-challenge');
+    source.searchParams.set('parent_url', window.location.href || 'https://www.berlinwalk.com/games/berlin-smile-challenge');
+
+    const current = new URLSearchParams(window.location.search || '');
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid', 'tracking'].forEach((key) => {
+      const value = current.get(key);
+      if (value) source.searchParams.set(key, value);
+    });
+    return source.toString();
+  }
+
+  _render() {
+    this.innerHTML = `
+      <style>
+        bw-berlin-smile-challenge-page {
+          display: block;
+          width: 100%;
+          height: auto !important;
+          min-height: 0 !important;
+          background:
+            linear-gradient(115deg, rgba(230, 57, 70, 0.12) 0 18%, transparent 18% 100%),
+            repeating-linear-gradient(90deg, rgba(16, 46, 56, 0.055) 0 1px, transparent 1px 44px),
+            #FFF7E8;
+          color: #102E38;
+          font-family: Montserrat, Arial, sans-serif;
+          overflow-anchor: none;
+          overflow: visible;
+        }
+
+        bw-berlin-smile-challenge-page *,
+        bw-berlin-smile-challenge-page *::before,
+        bw-berlin-smile-challenge-page *::after {
+          box-sizing: border-box;
+        }
+
+        .bw-smile-page {
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) minmax(360px, 470px);
+          grid-template-areas:
+            "content game"
+            "cta game"
+            "more more";
+          gap: 34px 62px;
+          margin: 0 auto;
+          max-width: 1180px;
+          min-height: 0 !important;
+          overflow-anchor: none;
+          padding: clamp(48px, 7svh, 66px) 24px 24px;
+        }
+
+        .bw-smile-content {
+          align-self: start;
+          grid-area: content;
+        }
+
+        .bw-smile-eyebrow {
+          background: #FFE600;
+          border: 2px solid #102E38;
+          border-radius: 8px;
+          box-shadow: 4px 4px 0 #102E38;
+          color: #102E38;
+          display: inline-flex;
+          font-size: 12px;
+          font-weight: 950;
+          letter-spacing: 0.14em;
+          margin-bottom: 30px;
+          padding: 8px 12px;
+          text-transform: uppercase;
+        }
+
+        .bw-smile-content h1 {
+          color: #102E38;
+          font-size: clamp(56px, 7.4vw, 104px);
+          font-weight: 950;
+          letter-spacing: -0.055em;
+          line-height: 0.9;
+          margin: 0 0 24px;
+          max-width: 720px;
+        }
+
+        .bw-smile-content h1 span {
+          color: #E63946;
+          display: block;
+        }
+
+        .bw-smile-lead {
+          color: #53615B;
+          font-size: clamp(18px, 1.7vw, 22px);
+          font-weight: 800;
+          line-height: 1.55;
+          margin: 0 0 32px;
+          max-width: 620px;
+        }
+
+        .bw-smile-list {
+          display: grid;
+          gap: 14px;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        .bw-smile-list li {
+          align-items: center;
+          color: #102E38;
+          display: flex;
+          font-size: 15px;
+          font-weight: 850;
+          gap: 12px;
+        }
+
+        .bw-smile-list li::before {
+          background: #E63946;
+          border: 2px solid #102E38;
+          box-shadow: 2px 2px 0 #102E38;
+          content: "";
+          flex: 0 0 10px;
+          height: 10px;
+          transform: rotate(45deg);
+          width: 10px;
+        }
+
+        .bw-smile-tour-cta {
+          align-self: start;
+          background: rgba(255, 255, 255, 0.72);
+          border: 2px solid #102E38;
+          border-left: 7px solid #E63946;
+          border-radius: 12px;
+          box-shadow: 6px 6px 0 #102E38;
+          grid-area: cta;
+          max-width: 650px;
+          padding: 24px;
+        }
+
+        .bw-smile-games-preview {
+          grid-area: more;
+          min-width: 0;
+        }
+
+        .bw-smile-tour-cta h2 {
+          font-size: 20px;
+          margin: 0 0 8px;
+        }
+
+        .bw-smile-tour-cta p {
+          color: #53615B;
+          font-size: 14px;
+          font-weight: 750;
+          line-height: 1.5;
+          margin: 0 0 16px;
+        }
+
+        .bw-smile-tour-cta a {
+          align-items: center;
+          background: #FFE600;
+          border: 2px solid #102E38;
+          border-radius: 9px;
+          box-shadow: 4px 4px 0 #102E38;
+          color: #102E38;
+          display: inline-flex;
+          font-size: 13px;
+          font-weight: 950;
+          min-height: 44px;
+          padding: 11px 16px;
+          text-decoration: none;
+          text-transform: uppercase;
+        }
+
+        .bw-smile-device {
+          align-self: start;
+          background: #102E38;
+          border-radius: 32px;
+          box-shadow: 12px 12px 0 #E63946, 0 26px 70px rgba(16, 46, 56, 0.24);
+          grid-area: game;
+          max-width: 470px;
+          height: clamp(560px, calc(100svh - 170px), 700px) !important;
+          min-height: 0 !important;
+          max-height: 700px !important;
+          overflow-anchor: none;
+          overflow: hidden;
+          padding: 12px;
+          position: relative;
+          width: 100%;
+        }
+
+        .bw-smile-device::before {
+          background: #FFE600;
+          border-radius: 999px;
+          content: "";
+          height: 16px;
+          left: 50%;
+          position: absolute;
+          top: 7px;
+          transform: translateX(-50%);
+          width: 72px;
+          z-index: 2;
+        }
+
+        .bw-smile-frame {
+          background: #FFF7E8;
+          border: 0;
+          border-radius: 22px;
+          display: block;
+          height: 100% !important;
+          min-height: 0 !important;
+          max-height: none;
+          overflow-anchor: none;
+          overflow: hidden;
+          width: 100%;
+        }
+
+        .bw-smile-more {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin-top: 26px;
+        }
+
+        .bw-smile-more a {
+          background: rgba(255, 255, 255, 0.66);
+          border: 1px solid rgba(16, 46, 56, 0.22);
+          border-radius: 999px;
+          color: #102E38;
+          font-size: 12px;
+          font-weight: 900;
+          padding: 9px 12px;
+          text-decoration: none;
+        }
+
+        @media (max-width: 940px) {
+          .bw-smile-page {
+            grid-template-columns: 1fr;
+            grid-template-areas:
+              "content"
+              "game"
+              "cta"
+              "more";
+            gap: 32px;
+            min-height: 0;
+            padding: 48px 20px 28px;
+          }
+
+          .bw-smile-content {
+            text-align: left;
+          }
+
+          .bw-smile-content h1 {
+            font-size: clamp(48px, 15vw, 86px);
+          }
+
+          .bw-smile-device {
+            justify-self: center;
+            max-width: 390px;
+            height: clamp(500px, calc(100svh - 88px), 620px) !important;
+            min-height: 0 !important;
+            max-height: 620px !important;
+            border-radius: 22px;
+            box-shadow: 8px 8px 0 #E63946, 0 20px 48px rgba(16, 46, 56, 0.2);
+          }
+
+          .bw-smile-frame {
+            height: 100% !important;
+            min-height: 0 !important;
+            max-height: none;
+          }
+        }
+
+        @media (max-width: 520px) {
+          .bw-smile-page {
+            padding: 40px 14px 30px;
+          }
+
+          .bw-smile-device {
+            padding: 8px;
+          }
+        }
+      </style>
+
+      <main class="bw-smile-page">
+        <section class="bw-smile-content" aria-labelledby="bw-smile-title">
+          <div class="bw-smile-eyebrow">Playable now</div>
+          <h1 id="bw-smile-title">Can You Make <span>a Berliner Smile?</span></h1>
+          <p class="bw-smile-lead">Seven tiny social tests. One almost impossible mission: get a Berliner to soften their face.</p>
+          <ul class="bw-smile-list">
+            <li>Pick the least annoying thing to say</li>
+            <li>Hear the dry Berlin reaction in every scene</li>
+            <li>Watch the Smile score move with every answer</li>
+            <li>Leave with a shareable almost-smile result</li>
+          </ul>
+          <div class="bw-smile-more" aria-label="More BerlinWalk games">
+            <a href="https://www.berlinwalk.com/games/berlin-battle">Berlin Battle</a>
+            <a href="https://www.berlinwalk.com/games/berghain-bouncer">Berghain Bouncer</a>
+          </div>
+        </section>
+
+        <section class="bw-smile-device" aria-label="Berlin Smile Challenge game">
+          <iframe
+            class="bw-smile-frame"
+            title="Can You Make a Berliner Smile?"
+            loading="eager"
+            allow="clipboard-write; web-share; autoplay"
+            scrolling="no"
+            referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </section>
+
+        <aside class="bw-smile-tour-cta">
+          <h2>If you survive the social weather...</h2>
+          <p>Come walk the city with me. I run a tip-based Berlin walking tour through the places where the real city starts to make sense.</p>
+          <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based">Book the walking tour</a>
+        </aside>
+
+        <section class="bw-smile-games-preview" data-bw-games-preview aria-label="More BerlinWalk games"></section>
+      </main>
+    `;
+  }
+
+  _bind() {
+    const iframe = this.querySelector('.bw-smile-frame');
+    this._timers = [];
+    iframe.src = this._gameUrl();
+
+    this._handleHostResize = () => this._syncWixHostHeight();
+    window.addEventListener('resize', this._handleHostResize, { passive: true });
+    iframe.addEventListener('load', this._handleHostResize, { once: false });
+    const page = this.querySelector('.bw-smile-page');
+    if (page && 'ResizeObserver' in window) {
+      this._resizeObserver = new ResizeObserver(this._handleHostResize);
+      this._resizeObserver.observe(page);
+    }
+    this._renderGamesPreview();
+    this._syncWixHostHeight();
+    this._timers.push(window.setTimeout(() => this._syncWixHostHeight(), 100));
+    this._timers.push(window.setTimeout(() => this._syncWixHostHeight(), 800));
+    this._timers.push(window.setTimeout(() => this._syncWixHostHeight(), 1800));
+    this._timers.push(window.setTimeout(() => this._syncWixHostHeight(), 3200));
+  }
+
+  _renderGamesPreview() {
+    const target = this.querySelector('[data-bw-games-preview]');
+    if (!target) return;
+    loadGamesPreviewRail(() => {
+      if (!window.BerlinWalkGamesPreviewRail) return;
+      window.BerlinWalkGamesPreviewRail.render(target, {
+        current: 'berlin-smile-challenge',
+        source: 'berlin_smile_challenge_page'
+      });
+      this._syncWixHostHeight();
+    });
+  }
+
+  _syncWixHostHeight() {
+    const wixShell = this.parentElement;
+    if (!wixShell || !wixShell.id || !wixShell.id.startsWith('comp-')) return;
+    const targets = [
+      wixShell,
+      wixShell && wixShell.parentElement,
+      this.closest('section'),
+    ].filter(Boolean);
+
+    const page = this.querySelector('.bw-smile-page');
+    const height = page ? Math.ceil(page.getBoundingClientRect().height + 24) : 900;
+    const isDesktop = window.matchMedia('(min-width: 941px)').matches;
+    const minHeight = isDesktop ? 900 : Math.max(620, Math.min(height, window.innerHeight || 844));
+    const maxHeight = isDesktop ? 2400 : 3400;
+    const targetHeight = `${Math.min(Math.max(height, minHeight), maxHeight)}px`;
+
+    targets.forEach((target) => {
+      target.style.setProperty('height', targetHeight, 'important');
+      target.style.setProperty('min-height', targetHeight, 'important');
+      target.style.setProperty('max-height', 'none', 'important');
+    });
+  }
+
+}
+
+if (!customElements.get('bw-berlin-smile-challenge-page')) {
+  customElements.define('bw-berlin-smile-challenge-page', BwBerlinSmileChallengePage);
+}

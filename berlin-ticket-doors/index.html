@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Berlin Ticket Doors</title>
+<meta name="description" content="Add the Berlin sights on your list and watch each one drop through the door it is actually sold by: no ticket at all, a free reservation from the venue, or a paid ticket at the venue's own price." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23123D18'/%3E%3Crect x='9' y='18' width='13' height='30' rx='3' fill='%23C5E1A5'/%3E%3Crect x='25.5' y='18' width='13' height='30' rx='3' fill='%237CB342'/%3E%3Crect x='42' y='18' width='13' height='30' rx='3' fill='%23FFE600'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --deep:#123D18; --lime:#7CB342; --light:#C5E1A5;
+    --yellow:#FFE600; --ink:#212121; --muted:#4E5A4E; --line:#E3E8DC;
+    --paper:#FAFAF5;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);font-family:Montserrat,Arial,sans-serif;color:var(--ink)}
+  .wrap{max-width:900px;margin:0 auto;padding:14px}
+
+  .head{background:var(--deep);color:#fff;border-radius:14px;padding:16px 18px}
+  .kicker{font:700 11px/1.2 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow)}
+  h1{margin:8px 0 6px;font-size:21px;line-height:1.2;font-weight:800}
+  .sub{margin:0;font-size:13.5px;line-height:1.5;color:#dbe7d6}
+
+  .shelf{background:#fff;border:2px solid var(--line);border-radius:14px;padding:12px 13px;margin-top:12px}
+  .shelfhead{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;justify-content:space-between;margin-bottom:9px}
+  .shelftitle{font:700 11px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .bulk{display:flex;gap:7px}
+  .bulk button{font:700 11.5px Montserrat,Arial,sans-serif;border:2px solid var(--line);background:#fff;color:var(--green);
+    border-radius:20px;padding:6px 12px;cursor:pointer}
+  .bulk button:hover{border-color:var(--lime)}
+  .bulk button:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font:700 13px Montserrat,Arial,sans-serif;border:2px solid var(--line);background:#fff;color:var(--ink);
+    border-radius:22px;padding:8px 14px 8px 12px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;
+    transition:transform .12s ease,border-color .12s ease,opacity .12s ease}
+  .chip:hover{border-color:var(--lime);transform:translateY(-1px)}
+  .chip:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+  .chip .plus{font:800 15px 'IBM Plex Mono',monospace;color:var(--lime);line-height:1}
+  .shelfempty{font-size:13.5px;line-height:1.5;color:var(--muted);margin:2px 0 0}
+
+  .doors{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-top:12px;align-items:start}
+  .door{background:#fff;border:2px solid var(--line);border-top:6px solid var(--light);border-radius:14px;
+    padding:12px 12px 13px;min-height:150px}
+  .door[data-id=venue]{border-top-color:var(--lime)}
+  .door[data-id=paid]{border-top-color:var(--yellow)}
+  .doorlabel{font:800 14.5px Montserrat,Arial,sans-serif;color:var(--deep);line-height:1.25}
+  .doorcount{font:700 11px 'IBM Plex Mono',monospace;color:var(--muted);margin-top:3px;letter-spacing:.06em}
+  .doornote{font-size:12.5px;line-height:1.5;color:var(--muted);margin:8px 0 10px;border-bottom:1px dashed var(--line);padding-bottom:9px}
+
+  .stub{position:relative;background:#F4F7F0;border:1.5px solid var(--line);border-radius:9px;
+    padding:9px 10px 10px 13px;margin-bottom:8px;cursor:pointer;text-align:left;width:100%;font-family:inherit;
+    animation:drop .28s cubic-bezier(.2,.9,.3,1.2) both}
+  .stub:hover{border-color:var(--lime);background:#EEF4E7}
+  .stub:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+  .stub::before{content:'';position:absolute;left:4px;top:9px;bottom:9px;width:3px;border-radius:2px;background:var(--light)}
+  .door[data-id=venue] .stub::before{background:var(--lime)}
+  .door[data-id=paid] .stub::before{background:var(--yellow)}
+  @keyframes drop{from{opacity:0;transform:translateY(-14px) scale(.96)}to{opacity:1;transform:none}}
+  .stubtop{display:flex;gap:8px;align-items:baseline;justify-content:space-between}
+  .stubname{font:800 13.5px Montserrat,Arial,sans-serif;color:var(--ink);line-height:1.25}
+  .stubprice{font:800 13px 'IBM Plex Mono',monospace;color:var(--deep);white-space:nowrap}
+  .stubprice.free{color:var(--green)}
+  .stubline{font-size:12.5px;line-height:1.5;color:var(--muted);margin:5px 0 0}
+  .stubdomain{display:inline-block;margin-top:7px;font:600 11.5px 'IBM Plex Mono',monospace;color:var(--deep);
+    background:#fff;border:1px solid var(--line);border-radius:6px;padding:3px 7px;overflow-wrap:break-word;word-break:normal}
+  .stubremove{font:600 11px 'IBM Plex Mono',monospace;color:var(--muted);margin-top:7px;display:block}
+  .doorempty{font-size:12.5px;line-height:1.5;color:#8a938a;font-style:italic}
+
+  .tally{background:var(--deep);color:#fff;border-radius:14px;padding:14px 16px;margin-top:12px}
+  .tallyline{font-size:15px;line-height:1.6;margin:0}
+  .tallyline b{color:var(--yellow)}
+  .tallytotal{font:800 30px/1 'IBM Plex Mono',monospace;color:var(--yellow);display:block;margin-top:9px}
+  .tallyfoot{font-size:12.5px;line-height:1.55;color:#c9d8c6;margin:8px 0 0}
+
+  .stamp{font:600 11.5px 'IBM Plex Mono',monospace;color:var(--muted);margin:11px 2px 2px;line-height:1.5}
+
+  @media (max-width:640px){
+    .wrap{padding:11px}
+    h1{font-size:19px}
+    .doors{grid-template-columns:1fr;gap:9px}
+    .door{min-height:0}
+    .tallytotal{font-size:26px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="head">
+    <div class="kicker">Berlin Ticket Doors</div>
+    <h1>Three doors sell Berlin. Only one of them takes your money.</h1>
+    <p class="sub">Add the sights you actually plan to see. Each one drops through the door it is really sold by, with the venue's own price and the venue's own web address on it.</p>
+  </div>
+
+  <div class="shelf">
+    <div class="shelfhead">
+      <div class="shelftitle">Sights not on your list yet</div>
+      <div class="bulk">
+        <button type="button" id="addAll">Add all 13</button>
+        <button type="button" id="clearAll">Clear</button>
+      </div>
+    </div>
+    <div class="chips" id="chips"></div>
+    <p class="shelfempty" id="shelfEmpty" hidden>Every sight is on the board. Tap any stub to take it off again.</p>
+  </div>
+
+  <div class="doors" id="doors"></div>
+
+  <div class="tally">
+    <p class="tallyline" id="tallyLine"></p>
+    <span class="tallytotal" id="tallyTotal" hidden></span>
+    <p class="tallyfoot" id="tallyFoot" hidden></p>
+  </div>
+
+  <p class="stamp" id="stamp"></p>
+
+</div>
+
+<script src="data.js"></script>
+<script src="../js/brand.js"></script>
+<script>
+(function(){
+  var DATA = window.BW_TICKET_DOORS;
+  var picked = (DATA.defaultPicks || []).slice();
+
+  var chipsEl = document.getElementById('chips');
+  var shelfEmptyEl = document.getElementById('shelfEmpty');
+  var doorsEl = document.getElementById('doors');
+  var tallyLine = document.getElementById('tallyLine');
+  var tallyTotal = document.getElementById('tallyTotal');
+  var tallyFoot = document.getElementById('tallyFoot');
+
+  document.getElementById('stamp').textContent =
+    'Prices and rules read from each venue’s own website on ' + DATA.checkedOn + '.';
+
+  function money(n){
+    return n % 1 === 0 ? String(n) : n.toFixed(2).replace('.', ',');
+  }
+
+  function byId(id){
+    for (var i=0;i<DATA.sights.length;i++) if (DATA.sights[i].id === id) return DATA.sights[i];
+    return null;
+  }
+
+  function add(id){ if (picked.indexOf(id) === -1) picked.push(id); render(); }
+  function remove(id){
+    var i = picked.indexOf(id);
+    if (i > -1) picked.splice(i,1);
+    render();
+  }
+
+  function renderChips(){
+    chipsEl.innerHTML = '';
+    var shown = 0;
+    DATA.sights.forEach(function(s){
+      if (picked.indexOf(s.id) > -1) return;
+      shown++;
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'chip';
+      b.setAttribute('aria-label', 'Add ' + s.name + ' to the board');
+      b.innerHTML = '<span class="plus" aria-hidden="true">+</span>' + s.name;
+      b.addEventListener('click', function(){ add(s.id); });
+      chipsEl.appendChild(b);
+    });
+    chipsEl.hidden = shown === 0;
+    shelfEmptyEl.hidden = shown !== 0;
+  }
+
+  function renderDoors(){
+    doorsEl.innerHTML = '';
+    DATA.doors.forEach(function(door){
+      var mine = picked.map(byId).filter(function(s){ return s && s.door === door.id; });
+
+      var col = document.createElement('section');
+      col.className = 'door';
+      col.setAttribute('data-id', door.id);
+
+      var h = document.createElement('div');
+      h.className = 'doorlabel';
+      h.textContent = door.label;
+      col.appendChild(h);
+
+      var c = document.createElement('div');
+      c.className = 'doorcount';
+      c.textContent = mine.length === 1 ? '1 sight' : mine.length + ' sights';
+      col.appendChild(c);
+
+      var n = document.createElement('p');
+      n.className = 'doornote';
+      n.textContent = door.note;
+      col.appendChild(n);
+
+      if (!mine.length){
+        var e = document.createElement('p');
+        e.className = 'doorempty';
+        e.textContent = 'Empty so far.';
+        col.appendChild(e);
+      }
+
+      mine.forEach(function(s){
+        var stub = document.createElement('button');
+        stub.type = 'button';
+        stub.className = 'stub';
+        stub.setAttribute('aria-label', 'Remove ' + s.name + ' from the board');
+
+        var top = document.createElement('div');
+        top.className = 'stubtop';
+        var nm = document.createElement('span');
+        nm.className = 'stubname';
+        nm.textContent = s.name;
+        var pr = document.createElement('span');
+        pr.className = 'stubprice' + (s.price ? '' : ' free');
+        pr.textContent = s.price ? money(s.price) + ' €' : 'free';
+        top.appendChild(nm); top.appendChild(pr);
+        stub.appendChild(top);
+
+        var ln = document.createElement('p');
+        ln.className = 'stubline';
+        ln.textContent = s.line;
+        stub.appendChild(ln);
+
+        if (s.domain){
+          var dm = document.createElement('span');
+          dm.className = 'stubdomain';
+          dm.textContent = s.domain;
+          stub.appendChild(dm);
+        }
+
+        var rm = document.createElement('span');
+        rm.className = 'stubremove';
+        rm.textContent = 'tap to remove';
+        stub.appendChild(rm);
+
+        stub.addEventListener('click', function(){ remove(s.id); });
+        col.appendChild(stub);
+      });
+
+      doorsEl.appendChild(col);
+    });
+  }
+
+  function renderTally(){
+    var chosen = picked.map(byId).filter(Boolean);
+    if (!chosen.length){
+      tallyLine.textContent = 'The board is empty. Add a sight and it drops into its door.';
+      tallyTotal.hidden = true;
+      tallyFoot.hidden = true;
+      return;
+    }
+    var none = chosen.filter(function(s){ return s.door === 'none'; }).length;
+    var venue = chosen.filter(function(s){ return s.door === 'venue'; }).length;
+    var paidList = chosen.filter(function(s){ return s.door === 'paid'; });
+    var total = paidList.reduce(function(a,s){ return a + s.price; }, 0);
+
+    var parts = [];
+    if (none) parts.push('<b>' + none + '</b> need no ticket at all');
+    if (venue) parts.push('<b>' + venue + '</b> ' + (venue === 1 ? 'is' : 'are') + ' free but must be reserved with the venue');
+    if (paidList.length) parts.push('<b>' + paidList.length + '</b> cost money');
+
+    var sentence = 'You have ' + chosen.length + (chosen.length === 1 ? ' sight' : ' sights') + ' on the board: ';
+    if (parts.length === 1) sentence += parts[0] + '.';
+    else if (parts.length === 2) sentence += parts[0] + ' and ' + parts[1] + '.';
+    else sentence += parts[0] + ', ' + parts[1] + ' and ' + parts[2] + '.';
+    tallyLine.innerHTML = sentence;
+
+    if (paidList.length){
+      tallyTotal.hidden = false;
+      tallyTotal.textContent = money(total) + ' €';
+      tallyFoot.hidden = false;
+      tallyFoot.textContent = 'One adult, full price, bought from the venues themselves: '
+        + paidList.map(function(s){ return s.name; }).join(', ')
+        + '. Anything above that number is somebody else’s fee.';
+    } else {
+      tallyTotal.hidden = true;
+      tallyFoot.hidden = false;
+      tallyFoot.textContent = 'Not one of these has a price. If a page is asking you for money for this list, it is selling you a guide, not entry.';
+    }
+  }
+
+  function render(){
+    renderChips();
+    renderDoors();
+    renderTally();
+    if (typeof window.__bwRequestEmbedResize === 'function') window.__bwRequestEmbedResize();
+  }
+
+  document.getElementById('addAll').addEventListener('click', function(){
+    picked = DATA.sights.map(function(s){ return s.id; });
+    render();
+  });
+  document.getElementById('clearAll').addEventListener('click', function(){
+    picked = [];
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

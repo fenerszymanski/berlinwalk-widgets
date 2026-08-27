@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KitKat Door Test</title>
+<meta name="description" content="Nine blunt questions about your outfit, your effort and your attitude, then a door verdict for the KitKatClub night you picked." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=IBM+Plex+Mono:wght@600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{ --green-dark:#123D18; --green:#1B5E20; --lime:#7CB342; --yellow:#FFE600; --cream:#FAFAF5; }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:transparent}
+
+  .cta{position:relative;overflow:hidden;max-width:760px;margin:0 auto;
+       background:linear-gradient(135deg,#0F3314 0%,#1B5E20 62%,#245C28 100%);
+       border-radius:16px;padding:20px 22px;color:var(--cream);
+       display:flex;align-items:center;gap:20px;text-decoration:none}
+  /* faint door-frame motif, drawn not imported */
+  .cta::after{content:"";position:absolute;right:-38px;top:-30px;width:190px;height:190px;
+              border:14px solid rgba(255,230,0,.09);border-radius:50%;pointer-events:none}
+
+  .badge{display:flex;flex:0 0 auto;width:58px;height:58px;border-radius:14px;background:var(--yellow);
+         display:flex;align-items:center;justify-content:center;
+         font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:700;font-size:23px;
+         color:var(--green-dark);line-height:1;box-shadow:0 3px 0 rgba(0,0,0,.22)}
+
+  .copy{flex:1 1 auto;min-width:0;position:relative;z-index:1}
+  .kicker{display:block;font-size:10.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+          color:var(--lime);margin:0 0 5px}
+  .head{display:block;font-size:19px;font-weight:800;line-height:1.22;margin:0 0 5px;color:var(--cream)}
+  .sub{display:block;font-size:13.5px;font-weight:600;line-height:1.45;margin:0;color:rgba(250,250,245,.82)}
+
+  .go{display:inline-block;flex:0 0 auto;position:relative;z-index:1;
+      background:var(--yellow);color:var(--green-dark);
+      font-size:14px;font-weight:800;letter-spacing:.01em;
+      padding:13px 20px;border-radius:999px;white-space:nowrap;
+      box-shadow:0 3px 0 rgba(0,0,0,.24);transition:transform .12s ease,box-shadow .12s ease}
+
+  .cta:hover .go{transform:translateY(-1px);box-shadow:0 4px 0 rgba(0,0,0,.28)}
+  .cta:active .go{transform:translateY(1px);box-shadow:0 2px 0 rgba(0,0,0,.24)}
+  .cta:focus-visible{outline:3px solid var(--lime);outline-offset:3px}
+  /* the yellow-contrast rule: dark green on yellow in every state */
+  .cta:link .go,.cta:visited .go,.cta:hover .go,.cta:active .go,.cta:focus .go{color:var(--green-dark)}
+
+  .note{max-width:760px;margin:8px auto 0;font-size:11.5px;font-weight:600;
+        color:#6b756a;text-align:center}
+
+  /* the blog's mobile embed column is 282px; at that width the badge steals
+     enough room to push the sub copy to seven lines, so it goes away. */
+  @media (max-width:340px){
+    .badge{display:none}
+    .copy{flex:1 1 100%}
+  }
+
+  @media (max-width:600px){
+    .cta{flex-wrap:wrap;gap:14px;padding:18px}
+    .badge{width:48px;height:48px;font-size:19px;border-radius:12px}
+    .copy{flex:1 1 160px}
+    .head{font-size:17px}
+    .sub{font-size:13px}
+    .go{flex:1 1 100%;text-align:center;padding:14px 18px}
+    .cta::after{right:-56px;top:-46px}
+  }
+</style>
+</head>
+<body>
+  <a class="cta" href="https://www.berlinwalk.com/games/kitkat-door-test?utm_source=blog&utm_medium=post-cta&utm_campaign=kitkatclub-berlin-dress-code" target="_blank" rel="noopener">
+    <span class="badge" aria-hidden="true">?</span>
+    <span class="copy">
+      <span class="kicker">Free · 1 minute</span>
+      <span class="head">Would that outfit get you in?</span>
+      <span class="sub">Nine blunt questions about what you are wearing, how much thought went into it and how you behave in the queue. Pick the night, get a verdict.</span>
+    </span>
+    <span class="go">Take the Door Test →</span>
+  </a>
+  <p class="note">A game, not a prediction. No door can be promised, and this one does not try.</p>
+<script src="../js/brand.js"></script>
+</body>
+</html>

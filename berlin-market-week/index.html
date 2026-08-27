@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Berlin Market Week</title>
+<meta name="description" content="Pick the date you are in Berlin and see every weekly market trading that day drawn on one clock line, with the hours you can actually turn up." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Crect x='12' y='26' width='40' height='6' rx='3' fill='%23FFE600'/%3E%3Crect x='20' y='38' width='28' height='6' rx='3' fill='%23FFE600'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-dark:#123D18; --green-mid:#2E7D32; --lime:#7CB342;
+    --light:#C5E1A5; --yellow:#FFE600; --ink:#212121; --muted:#4b584b;
+    --line:#E3E8DC; --panel:#F4F7F0; --gone:#c9cec4;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .wrap{max-width:760px;margin:0 auto;padding:4px 14px 18px}
+  .kicker{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-mid);margin:0 0 6px}
+  h1{font-size:21px;font-weight:800;line-height:1.18;margin:0 0 8px;color:var(--green-dark)}
+  .lede{font-size:14.5px;color:var(--muted);margin:0 0 14px}
+  .lbl{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--green-mid);margin:0 0 6px;display:block}
+
+  .ctrl{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 13px 13px;margin:0 0 12px;
+        display:flex;flex-wrap:wrap;gap:10px 18px;align-items:flex-end}
+  .pick{flex:0 1 190px;min-width:150px}
+  input[type=date]{width:100%;border:2px solid var(--line);background:#fff;border-radius:10px;padding:8px 10px;
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:15px;font-weight:700;color:var(--green-dark);
+    -webkit-appearance:none;appearance:none;min-height:44px}
+  input[type=date]:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+  input[type=date]::-webkit-calendar-picker-indicator{opacity:1;cursor:pointer;filter:invert(22%) sepia(28%) saturate(1600%) hue-rotate(80deg) brightness(92%)}
+  .daybox{flex:1 1 230px;min-width:0;font-size:12.5px;color:var(--muted);padding-left:11px;border-left:3px solid var(--light);margin:0}
+  .daybox b{color:var(--green-dark)}
+
+  .stage{border:2px solid var(--green-dark);border-radius:14px;overflow:hidden;background:#fff;margin:0 0 9px}
+  .stage svg{display:block;width:100%;height:auto}
+  .stage svg .bar{cursor:pointer}
+  .stage svg .bar:focus-visible{outline:none}
+  .stage svg .hit:focus-visible + .barshape{stroke:#123D18;stroke-width:3}
+
+  .legend{display:flex;flex-wrap:wrap;gap:5px 14px;font-size:11.5px;color:var(--muted);margin:0 0 13px}
+  .legend i{display:inline-block;width:12px;height:9px;border-radius:2px;margin-right:5px;vertical-align:0}
+
+  .readout{border:2px solid var(--green-dark);border-radius:14px;padding:12px 14px 13px;margin:0 0 12px;background:#FBFDF7}
+  .readout h2{font-size:13.5px;font-weight:800;margin:0 0 7px;color:var(--green-dark)}
+  .readout p{font-size:14px;margin:0 0 8px;color:var(--ink)}
+  .readout p:last-child{margin-bottom:0}
+  .readout b{color:var(--green-dark)}
+  .flag{display:inline-block;background:var(--yellow);color:var(--green-dark);font-size:11px;font-weight:800;
+        letter-spacing:.05em;text-transform:uppercase;border-radius:6px;padding:2px 7px;margin-right:6px}
+  .picked{list-style:none;margin:8px 0 0;padding:0}
+  .picked li{font-size:13.5px;padding:7px 0 0;border-top:1px solid var(--line);margin-top:7px}
+  .picked li:first-child{border-top:0;margin-top:0;padding-top:0}
+  .picked .mono{font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:700;color:var(--green-dark)}
+  .picked .where{display:block;color:var(--muted);font-size:12.5px}
+  .clearbtn{margin-top:10px;background:#fff;border:2px solid var(--green-dark);color:var(--green-dark);
+    font-family:inherit;font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;
+    border-radius:9px;padding:8px 12px;cursor:pointer;min-height:36px}
+  .clearbtn:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+
+  .note{font-size:11.5px;color:#5c655c;margin:0}
+  .note b{color:var(--green-dark)}
+  @media (max-width:430px){ h1{font-size:19px} .lede{font-size:13.8px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Berlin Tools</p>
+  <h1>Berlin Market Week</h1>
+  <p class="lede">Berlin's weekly markets run on fixed weekdays and most of them are packed away by mid-afternoon. Give it the date you are here and every market trading that day is drawn on one clock line, so you can see how late you can turn up. Tap two of them to check whether the hours actually overlap.</p>
+
+  <div class="ctrl">
+    <div class="pick">
+      <label class="lbl" for="d">Your date in Berlin</label>
+      <input type="date" id="d" min="2026-01-01" max="2027-12-31" />
+    </div>
+    <p class="daybox" id="daybox"></p>
+  </div>
+
+  <div class="stage"><div id="stage"></div></div>
+
+  <p class="legend">
+    <span><i style="background:#1B5E20"></i>trading</span>
+    <span><i style="background:#7CB342"></i>in your plan</span>
+    <span><i style="background:#c9cec4"></i>already packed up today</span>
+    <span><i style="background:#FFE600"></i>the time right now</span>
+  </p>
+
+  <div class="readout" id="readout"></div>
+
+  <p class="note">Market hours checked on <b>26 August 2026</b> against each market's own operator, the Friedrichshain-Kreuzberg district listing and berlin.de. Individual traders pack up early in bad weather, and markets do not run on public holidays.</p>
+</div>
+
+<script>
+(function(){
+  var DATA = null;
+  var DAYS = ['sun','mon','tue','wed','thu','fri','sat'];
+  var DAYNAME = { mon:'Monday', tue:'Tuesday', wed:'Wednesday', thu:'Thursday', fri:'Friday', sat:'Saturday', sun:'Sunday' };
+  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var KIND = {
+    produce:'Produce square', organic:'Organic market', afternoon:'Afternoon market',
+    'street-food':'Eating market', indoor:'Covered hall'
+  };
+
+  var inputEl = document.getElementById('d');
+  var stageEl = document.getElementById('stage');
+  var dayEl   = document.getElementById('daybox');
+  var outEl   = document.getElementById('readout');
+
+  var picks = new Set();
+  var view = null;
+
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function hhmm(v){ var h=Math.floor(v/60), m=Math.round(v%60); return (h<10?'0':'')+h+':'+(m<10?'0':'')+m; }
+  function left(mins){
+    if (mins < 60) return 'about ' + (Math.max(5, Math.round(mins/5)*5)) + ' minutes';
+    var h = Math.floor(mins/60), m = Math.round((mins%60)/15)*15;
+    if (m === 60) { h += 1; m = 0; }
+    return 'about ' + h + (h === 1 ? ' hour' : ' hours') + (m ? ' ' + m + ' minutes' : '');
+  }
+
+  function todayBerlin(){
+    return new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Berlin',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+  }
+  function minutesNowBerlin(){
+    var p = new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Berlin',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date());
+    var b = p.split(':');
+    return parseInt(b[0],10)*60 + parseInt(b[1],10);
+  }
+
+  /** Everything the chart and the readout need for one calendar date. */
+  function build(value){
+    var b = value.split('-');
+    var y = +b[0], mo = +b[1], da = +b[2];
+    var wd = DAYS[new Date(Date.UTC(y,mo-1,da)).getUTCDay()];
+    var rows = DATA.markets
+      .filter(function(m){ return !!m.hours[wd]; })
+      .map(function(m){
+        var h = m.hours[wd];
+        return { id:m.id, name:m.name, district:m.district, station:m.station, kind:m.kind,
+                 line:m.line, walk:m.walk, open:h[0], close:h[1] };
+      })
+      .sort(function(a,b2){ return a.open - b2.open || a.close - b2.close; });
+
+    var isToday = (value === todayBerlin());
+    var winter = (mo <= 3);
+    if (winter) {
+      rows.forEach(function(r){ if (r.id === 'kollwitz-oeko') r.close = 1080; });
+    }
+    return {
+      value:value, weekday:wd, rows:rows, isToday:isToday, winter:winter,
+      now: isToday ? minutesNowBerlin() : null,
+      label: DAYNAME[wd] + ' ' + da + ' ' + MONTHS[mo-1] + ' ' + y
+    };
+  }
+
+  var PAD_L = 8, PAD_R = 12, PAD_T = 26, ROW_H = 46, LABEL_H = 22;
+
+  function paint(){
+    if (!view) return;
+    var W = Math.max(300, stageEl.clientWidth || 700);
+    var narrow = W < 470;
+    var rows = view.rows;
+    var axFrom = DATA.axis.fromMinutes, axTo = DATA.axis.toMinutes;
+    var plotL = PAD_L + (narrow ? 24 : 20);
+    var plotR = W - PAD_R - (narrow ? 18 : 14);
+    var plotW = Math.max(60, plotR - plotL);
+    var H = PAD_T + LABEL_H + Math.max(1, rows.length) * ROW_H + 14;
+    var x = function(min){ return plotL + (Math.min(axTo, Math.max(axFrom, min)) - axFrom) / (axTo - axFrom) * plotW; };
+
+    var s = [];
+    s.push('<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Market trading hours for ' + esc(view.label) + '">');
+    s.push('<rect x="0" y="0" width="' + W + '" height="' + H + '" fill="#ffffff"/>');
+
+    // Hour grid and axis labels.
+    var step = narrow ? 180 : 120;
+    for (var t = axFrom; t <= axTo; t += step) {
+      var gx = x(t);
+      s.push('<line x1="' + gx.toFixed(1) + '" y1="' + PAD_T + '" x2="' + gx.toFixed(1) + '" y2="' + (H - 12) + '" stroke="#EDF1E7" stroke-width="1"/>');
+      s.push('<text x="' + gx.toFixed(1) + '" y="' + (PAD_T - 9) + '" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="700" fill="#4b584b">' + hhmm(t) + '</text>');
+    }
+
+    if (!rows.length) {
+      s.push('<text x="' + (W/2).toFixed(1) + '" y="' + (PAD_T + 46) + '" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="' + (narrow ? 13 : 15) + '" font-weight="800" fill="#123D18">No weekly market trades on this date.</text>');
+      s.push('<text x="' + (W/2).toFixed(1) + '" y="' + (PAD_T + 68) + '" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="' + (narrow ? 11.5 : 12.5) + '" fill="#4b584b">Sunday is the flea market day in Berlin instead.</text>');
+      s.push('</svg>');
+      stageEl.innerHTML = s.join('');
+      return;
+    }
+
+    rows.forEach(function(r, i){
+      var top = PAD_T + LABEL_H + i * ROW_H;
+      var bx = x(r.open), bw = Math.max(6, x(r.close) - x(r.open));
+      var gone = view.now !== null && view.now >= r.close;
+      var chosen = picks.has(r.id);
+      var fill = chosen ? '#7CB342' : (gone ? '#c9cec4' : '#1B5E20');
+
+      s.push('<text x="' + plotL + '" y="' + (top + 11) + '" font-family="Montserrat, sans-serif" font-size="' + (narrow ? 11.5 : 12.5) + '" font-weight="800" fill="' + (gone ? '#7b837a' : '#123D18') + '">' + esc(r.name) + '</text>');
+      if (!narrow) {
+        s.push('<text x="' + plotR + '" y="' + (top + 11) + '" text-anchor="end" font-family="Montserrat, sans-serif" font-size="11" fill="#6c756b">' + esc(r.district) + ' &#183; ' + esc(r.station) + '</text>');
+      }
+
+      s.push('<g class="bar" data-id="' + esc(r.id) + '">');
+      s.push('<rect class="barshape" x="' + bx.toFixed(1) + '" y="' + (top + 17) + '" width="' + bw.toFixed(1) + '" height="16" rx="8" fill="' + fill + '"/>');
+      var lx = bx + bw + 7, anchor = 'start';
+      if (lx > plotR - 62) { lx = bx - 7; anchor = 'end'; }
+      s.push('<text x="' + lx.toFixed(1) + '" y="' + (top + 29) + '" text-anchor="' + anchor + '" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="700" fill="' + (gone ? '#7b837a' : '#123D18') + '">' + hhmm(r.open) + '&#8211;' + hhmm(r.close) + '</text>');
+      s.push('<rect class="hit" x="' + plotL + '" y="' + (top + 2) + '" width="' + (plotR - plotL) + '" height="42" fill="transparent" tabindex="0" role="button" aria-pressed="' + (chosen ? 'true' : 'false') + '"><title>' + esc(r.name) + ', ' + hhmm(r.open) + ' to ' + hhmm(r.close) + '</title></rect>');
+      s.push('</g>');
+    });
+
+    if (view.now !== null && view.now >= axFrom && view.now <= axTo) {
+      var nx = x(view.now);
+      s.push('<line x1="' + nx.toFixed(1) + '" y1="' + (PAD_T + 4) + '" x2="' + nx.toFixed(1) + '" y2="' + (H - 12) + '" stroke="#FFE600" stroke-width="3"/>');
+      s.push('<circle cx="' + nx.toFixed(1) + '" cy="' + (PAD_T + 4) + '" r="4" fill="#FFE600" stroke="#123D18" stroke-width="1.5"/>');
+    }
+    s.push('</svg>');
+    stageEl.innerHTML = s.join('');
+  }
+
+  function overlapLine(chosen){
+    if (chosen.length < 2) return '';
+    var from = Math.max(chosen[0].open, chosen[1].open);
+    var to = Math.min(chosen[0].close, chosen[1].close);
+    if (to - from >= 45) {
+      return 'Your two picks share <b>' + hhmm(from) + ' to ' + hhmm(to) + '</b>, so you can do both in one trip if you keep the travel between them short.';
+    }
+    if (to > from) {
+      return 'The overlap is only <b>' + hhmm(from) + ' to ' + hhmm(to) + '</b>. That is tight for two markets in different districts, so pick the one you care about more.';
+    }
+    var early = chosen[0].close <= chosen[1].open ? chosen[0] : chosen[1];
+    var late = early === chosen[0] ? chosen[1] : chosen[0];
+    return '<b>' + esc(early.name) + '</b> is already packed away before <b>' + esc(late.name) + '</b> opens, so these two cannot be done on the same day.';
+  }
+
+  function render(){
+    var rows = view.rows;
+    var chosen = rows.filter(function(r){ return picks.has(r.id); });
+    var h = [];
+
+    h.push('<h2>' + esc(view.label) + '</h2>');
+
+    if (!rows.length) {
+      h.push('<p><span class="flag">Sunday</span>' + esc(DATA.dayNotes.sun) + ' If you are here on a Sunday, the Mauerpark and Boxhagener Platz flea markets are the equivalent day out.</p>');
+      outEl.innerHTML = h.join('');
+      return;
+    }
+
+    var last = rows[0];
+    rows.forEach(function(r){ if (r.close > last.close) last = r; });
+    var first = rows[0];
+    h.push('<p><b>' + rows.length + (rows.length === 1 ? ' market' : ' markets') + '</b> trading. The first opens at <b>' + hhmm(first.open) + '</b> and the last one packs up at <b>' + hhmm(last.close) + '</b>. ' + esc(DATA.dayNotes[view.weekday]) + '</p>');
+
+    if (view.now !== null) {
+      var openNow = rows.filter(function(r){ return view.now >= r.open && view.now < r.close; });
+      var later = rows.filter(function(r){ return view.now < r.open; });
+      if (openNow.length) {
+        var soonest = openNow[0];
+        openNow.forEach(function(r){ if (r.close < soonest.close) soonest = r; });
+        h.push('<p><span class="flag">Right now</span>' + openNow.length + (openNow.length === 1 ? ' market is' : ' markets are') + ' trading. <b>' + esc(soonest.name) + '</b> is the first to pack up, at <b>' + hhmm(soonest.close) + '</b>, which is ' + left(soonest.close - view.now) + ' from now.</p>');
+      } else if (later.length) {
+        h.push('<p><span class="flag">Right now</span>Nothing is trading yet. The next to open is <b>' + esc(later[0].name) + '</b> at <b>' + hhmm(later[0].open) + '</b>.</p>');
+      } else {
+        h.push('<p><span class="flag">Right now</span>Every market on this date has packed up. Try tomorrow, or pick another date above.</p>');
+      }
+    }
+
+    if (view.winter) {
+      h.push('<p>From January to March the Kollwitzplatz organic market closes at 18:00 instead of 19:00, which is already applied above.</p>');
+    }
+
+    if (chosen.length) {
+      h.push('<ul class="picked">');
+      chosen.forEach(function(r){
+        h.push('<li><span class="mono">' + hhmm(r.open) + '&#8211;' + hhmm(r.close) + '</span> <b>' + esc(r.name) + '</b>'
+          + '<span class="where">' + esc(KIND[r.kind] || 'Market') + ' &#183; ' + esc(r.district) + ' &#183; ' + esc(r.station) + '</span>'
+          + '<span class="where">' + esc(r.line) + '</span></li>');
+      });
+      h.push('</ul>');
+      var ov = overlapLine(chosen);
+      if (ov) h.push('<p>' + ov + '</p>');
+      h.push('<button type="button" class="clearbtn" id="clear">Start the plan again</button>');
+    } else {
+      h.push('<p>Tap a bar on the chart to put a market in your plan. Tap a second one and it will tell you whether the two hours actually overlap.</p>');
+    }
+
+    outEl.innerHTML = h.join('');
+    var c = document.getElementById('clear');
+    if (c) c.addEventListener('click', function(){ picks.clear(); paint(); render(); });
+  }
+
+  function toggle(id){
+    if (picks.has(id)) { picks.delete(id); }
+    else {
+      if (picks.size >= 2) picks.clear();
+      picks.add(id);
+    }
+    paint();
+    render();
+  }
+
+  stageEl.addEventListener('click', function(e){
+    var g = e.target.closest ? e.target.closest('.bar') : null;
+    if (g && g.dataset.id) toggle(g.dataset.id);
+  });
+  stageEl.addEventListener('keydown', function(e){
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var g = e.target.closest ? e.target.closest('.bar') : null;
+    if (g && g.dataset.id) { e.preventDefault(); toggle(g.dataset.id); }
+  });
+
+  function update(){
+    var v = inputEl.value;
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(v)) return;
+    picks.clear();
+    view = build(v);
+    dayEl.innerHTML = '<b>' + esc(DAYNAME[view.weekday]) + '</b><br>' + view.rows.length + (view.rows.length === 1 ? ' market' : ' markets') + ' trading on this date';
+    paint();
+    render();
+  }
+
+  fetch('data.json').then(function(r){ return r.json(); }).then(function(j){
+    DATA = j;
+    var t = todayBerlin();
+    if (t < inputEl.min) t = inputEl.min;
+    if (t > inputEl.max) t = inputEl.max;
+    inputEl.value = t;
+    inputEl.addEventListener('change', update);
+    inputEl.addEventListener('input', update);
+    update();
+    if (window.ResizeObserver) { new ResizeObserver(paint).observe(stageEl); }
+    else { window.addEventListener('resize', paint); }
+  });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

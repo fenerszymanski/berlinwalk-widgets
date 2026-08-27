@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Inspect three visitor signals to decide whether Berlin's German Spy Museum is the right Potsdamer Platz stop.">
+  <title>Berlin Spy Museum Mission Match | BerlinWalk</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+</head>
+<body>
+  <main id="bw-spy-mission-match">
+    <section class="shell" aria-labelledby="tool-title">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Potsdamer Platz · indoor decision</p>
+          <h1 id="tool-title">Berlin Spy Museum<br>Mission Match</h1>
+          <p>Open three small files. The briefing will tell you whether this is the kind of museum your next Berlin hours are asking for.</p>
+        </div>
+        <div class="hero-object" aria-hidden="true">
+          <span class="object-ring ring-one"></span>
+          <span class="object-ring ring-two"></span>
+          <img src="../tools-home/icons/berlin-spy-museum-mission-match.png" alt="">
+          <span class="object-label">FIELD DOSSIER<br>LEIPZIGER PLATZ</span>
+        </div>
+      </header>
+
+      <section class="orientation" aria-labelledby="orientation-title">
+        <div>
+          <p class="eyebrow dark">What this reads</p>
+          <h2 id="orientation-title">Not every history interest needs the same kind of stop.</h2>
+        </div>
+        <p>The German Spy Museum is strongest when you want to take part: codes, devices and the laser maze. These files separate that active curiosity from a desire for a real historic site, a calmer gallery or a shorter outdoor move.</p>
+      </section>
+
+      <section class="casework" aria-labelledby="casework-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow dark">Mission files</p>
+            <h2 id="casework-title">Inspect the evidence in order</h2>
+          </div>
+          <p class="progress"><span id="progress-number">0</span> / 3 files marked</p>
+        </div>
+
+        <div class="file-stack">
+          <article class="mission-file is-open" data-file="energy">
+            <div class="file-tab"><span>FILE 01</span><strong>Experience signal</strong><i aria-hidden="true">↘</i></div>
+            <div class="file-content">
+              <p class="file-question">What do you want the visit to feel like?</p>
+              <div class="signal-grid" role="group" aria-label="Experience signal">
+                <button type="button" class="signal" data-file="energy" data-value="active" aria-pressed="false">
+                  <span class="signal-mark">A</span><span><b>I want to test things.</b><small>Codes, devices and a physical challenge sound like the point.</small></span>
+                </button>
+                <button type="button" class="signal" data-file="energy" data-value="quiet" aria-pressed="false">
+                  <span class="signal-mark">B</span><span><b>I want a slower encounter.</b><small>I would rather let a place or object carry more weight.</small></span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="mission-file is-locked" data-file="company" aria-disabled="true">
+            <div class="file-tab"><span>FILE 02</span><strong>Company signal</strong><i aria-hidden="true">⌕</i></div>
+            <div class="file-content">
+              <p class="file-question">Who is making the decision with you?</p>
+              <div class="signal-grid" role="group" aria-label="Company signal">
+                <button type="button" class="signal" data-file="company" data-value="family" aria-pressed="false" disabled>
+                  <span class="signal-mark">A</span><span><b>I am with someone who wants to join in.</b><small>The museum itself recommends the experience from age eight.</small></span>
+                </button>
+                <button type="button" class="signal" data-file="company" data-value="adult" aria-pressed="false" disabled>
+                  <span class="signal-mark">B</span><span><b>This is an adult history decision.</b><small>Choose depth, quiet or a real site instead.</small></span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="mission-file is-locked" data-file="time" aria-disabled="true">
+            <div class="file-tab"><span>FILE 03</span><strong>Time signal</strong><i aria-hidden="true">⌕</i></div>
+            <div class="file-content">
+              <p class="file-question">What kind of gap does the day actually have?</p>
+              <div class="signal-grid" role="group" aria-label="Time signal">
+                <button type="button" class="signal" data-file="time" data-value="room" aria-pressed="false" disabled>
+                  <span class="signal-mark">A</span><span><b>I can give one indoor stop real time.</b><small>A proper active museum visit will not feel like a detour.</small></span>
+                </button>
+                <button type="button" class="signal" data-file="time" data-value="short" aria-pressed="false" disabled>
+                  <span class="signal-mark">B</span><span><b>I need a lighter next move.</b><small>The ticket should not become an automatic answer to an empty hour.</small></span>
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="briefing-zone" aria-labelledby="briefing-title">
+        <div class="briefing-heading">
+          <div>
+            <p class="eyebrow">Field briefing</p>
+            <h2 id="briefing-title">Your next honest move</h2>
+          </div>
+          <span id="briefing-status" class="briefing-status">Waiting for the files</span>
+        </div>
+
+        <article class="briefing" aria-live="polite">
+          <div class="briefing-topline"><span>BERLINWALK FIELD NOTE</span><span id="briefing-code">UNOPENED</span></div>
+          <div id="briefing-symbol" class="briefing-symbol" aria-hidden="true">?</div>
+          <div class="briefing-main">
+            <p id="briefing-kicker" class="briefing-kicker">Mission status</p>
+            <h3 id="briefing-title-text">Open the three files first</h3>
+            <p id="briefing-copy">Mark the experience, company and time signals. The result will not give you a score. It will give you one clearer type of Berlin stop.</p>
+          </div>
+          <div id="briefing-rule" class="briefing-rule"><strong>Field rule</strong><p>Do not let a central location decide the day for you.</p></div>
+          <div id="briefing-actions" class="briefing-actions" hidden>
+            <a class="cta" href="https://www.deutsches-spionagemuseum.de/en" target="_blank" rel="noopener">Check current museum details <span aria-hidden="true">↗</span></a>
+            <button type="button" id="reset-mission" class="reset">Clear the files</button>
+          </div>
+        </article>
+      </section>
+
+      <section class="ground-note" aria-label="Useful context">
+        <div class="note-dot" aria-hidden="true">!</div>
+        <p><strong>Keep the roles clear.</strong> A playful spy experience can be a good Berlin afternoon. It is not a replacement for an actual historic site when you want the city itself to carry the story.</p>
+      </section>
+    </section>
+  </main>
+
+  <style>
+    html, body { margin: 0; width: 100%; max-width: 100%; overflow-x: hidden; background: transparent; }
+    #bw-spy-mission-match {
+      --ink: #102617;
+      --green: #123D18;
+      --green-deep: #08250d;
+      --green-light: #1b5e20;
+      --yellow: #FFE600;
+      --lime: #d9ef86;
+      --paper: #f7f4e8;
+      --cream: #fffdf7;
+      --mist: #eef3e7;
+      --muted: #516356;
+      --line: rgba(18, 61, 24, .18);
+      width: min(100%, 1080px);
+      margin: 18px auto;
+      padding: 0 12px;
+      color: var(--ink);
+      font-family: Montserrat, Arial, sans-serif;
+      line-height: 1.5;
+      box-sizing: border-box;
+    }
+    #bw-spy-mission-match *, #bw-spy-mission-match *::before, #bw-spy-mission-match *::after { box-sizing: border-box; }
+    #bw-spy-mission-match [hidden] { display: none !important; }
+    #bw-spy-mission-match .shell { overflow: hidden; border: 1px solid var(--line); border-radius: 25px; background: #fff; box-shadow: 0 20px 56px rgba(18, 61, 24, .15); }
+    #bw-spy-mission-match h1, #bw-spy-mission-match h2, #bw-spy-mission-match h3, #bw-spy-mission-match p { margin-top: 0; }
+    #bw-spy-mission-match .hero { position: relative; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr); min-height: 324px; overflow: hidden; background: radial-gradient(circle at 81% 22%, #346b34 0 3%, transparent 3.2%), radial-gradient(circle at 89% 72%, rgba(217,239,134,.18) 0 3%, transparent 3.2%), linear-gradient(135deg, #15491e 0%, #0c3314 50%, #07220b 100%); color: #fff; }
+    #bw-spy-mission-match .hero::before { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px); background-size: 22px 22px; content: ''; mask-image: linear-gradient(90deg, #000, transparent 76%); }
+    #bw-spy-mission-match .hero-copy { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; padding: 39px 44px; }
+    #bw-spy-mission-match .eyebrow { margin: 0; color: var(--yellow); font-size: 10px; font-weight: 950; letter-spacing: .15em; text-transform: uppercase; }
+    #bw-spy-mission-match .eyebrow.dark { color: var(--green-light); }
+    #bw-spy-mission-match h1 { margin: 9px 0 13px; color: #fff; font-size: clamp(34px, 4.7vw, 59px); line-height: .96; letter-spacing: -.06em; }
+    #bw-spy-mission-match .hero-copy > p:not(.eyebrow) { max-width: 530px; margin-bottom: 0; color: rgba(255,255,255,.87); font-size: 14px; line-height: 1.68; }
+    #bw-spy-mission-match .hero-object { position: relative; display: grid; min-height: 324px; place-items: center; }
+    #bw-spy-mission-match .hero-object::before { position: absolute; width: 246px; height: 246px; border: 1px solid rgba(217,239,134,.28); border-radius: 50%; content: ''; }
+    #bw-spy-mission-match .hero-object img { position: relative; z-index: 1; width: min(196px, 59%); border-radius: 31px; filter: drop-shadow(0 23px 19px rgba(0,0,0,.33)); transform: rotate(4deg); }
+    #bw-spy-mission-match .object-ring { position: absolute; width: 190px; height: 190px; border: 1px dashed rgba(255,230,0,.42); border-radius: 50%; }
+    #bw-spy-mission-match .ring-one { transform: rotate(23deg) scale(1.12, .74); }
+    #bw-spy-mission-match .ring-two { border-color: rgba(255,255,255,.19); transform: rotate(-33deg) scale(.86, 1.12); }
+    #bw-spy-mission-match .object-label { position: absolute; right: 27px; bottom: 26px; z-index: 2; color: rgba(255,255,255,.75); font-size: 9px; font-weight: 900; letter-spacing: .13em; line-height: 1.45; text-align: right; }
+    #bw-spy-mission-match .orientation { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: 34px; padding: 30px 43px; border-bottom: 1px solid var(--line); background: var(--paper); }
+    #bw-spy-mission-match h2 { margin: 4px 0 0; color: var(--green); font-size: clamp(22px, 3vw, 32px); line-height: 1.12; letter-spacing: -.04em; }
+    #bw-spy-mission-match .orientation > p { align-self: end; max-width: 560px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
+    #bw-spy-mission-match .casework { padding: 35px 43px 38px; background: #fff; }
+    #bw-spy-mission-match .section-heading, #bw-spy-mission-match .briefing-heading { display: flex; align-items: end; justify-content: space-between; gap: 18px; }
+    #bw-spy-mission-match .progress { margin: 0; color: var(--muted); font-size: 12px; font-weight: 800; white-space: nowrap; }
+    #bw-spy-mission-match .progress span { color: var(--green); font-size: 24px; line-height: .7; }
+    #bw-spy-mission-match .file-stack { display: grid; gap: 12px; margin-top: 25px; }
+    #bw-spy-mission-match .mission-file { overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: var(--cream); transition: opacity .2s ease, transform .2s ease, border-color .2s ease; }
+    #bw-spy-mission-match .mission-file.is-locked { opacity: .48; }
+    #bw-spy-mission-match .mission-file.is-complete { border-color: var(--green); box-shadow: inset 4px 0 0 var(--lime); }
+    #bw-spy-mission-match .file-tab { display: grid; grid-template-columns: 82px minmax(0, 1fr) 24px; align-items: center; min-height: 48px; padding: 0 16px; background: #edf3e5; color: var(--green); }
+    #bw-spy-mission-match .file-tab span { font-size: 10px; font-weight: 950; letter-spacing: .09em; }
+    #bw-spy-mission-match .file-tab strong { font-size: 13px; }
+    #bw-spy-mission-match .file-tab i { color: var(--green); font-size: 17px; font-style: normal; text-align: right; }
+    #bw-spy-mission-match .file-content { padding: 17px 17px 18px; }
+    #bw-spy-mission-match .file-question { margin-bottom: 13px; color: var(--muted); font-size: 13px; }
+    #bw-spy-mission-match .signal-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    #bw-spy-mission-match button { font: inherit; }
+    #bw-spy-mission-match .signal { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 10px; min-height: 82px; border: 1px solid rgba(18,61,24,.24); border-radius: 12px; padding: 11px; background: #fff; color: var(--green); text-align: left; cursor: pointer; transition: background .16s ease, border-color .16s ease, box-shadow .16s ease, transform .16s ease; }
+    #bw-spy-mission-match .signal:not(:disabled):hover { border-color: var(--green); box-shadow: 0 7px 16px rgba(18,61,24,.1); transform: translateY(-1px); }
+    #bw-spy-mission-match .signal:disabled { cursor: not-allowed; }
+    #bw-spy-mission-match .signal-mark { display: grid; width: 28px; height: 28px; border: 1px solid currentColor; border-radius: 50%; place-items: center; color: var(--green); font-size: 11px; font-weight: 950; }
+    #bw-spy-mission-match .signal b, #bw-spy-mission-match .signal small { display: block; }
+    #bw-spy-mission-match .signal b { font-size: 13px; line-height: 1.24; }
+    #bw-spy-mission-match .signal small { margin-top: 4px; color: var(--muted); font-size: 10px; line-height: 1.36; }
+    #bw-spy-mission-match .signal.is-active { border-color: var(--green); background: #eff8d4; box-shadow: inset 0 0 0 2px rgba(217,239,134,.76); }
+    #bw-spy-mission-match .signal.is-active .signal-mark { border-color: var(--green); background: var(--green); color: var(--yellow); }
+    #bw-spy-mission-match .briefing-zone { padding: 34px 43px 38px; background: linear-gradient(136deg, #153e1a, #09270f); color: #fff; }
+    #bw-spy-mission-match .briefing-heading h2 { color: #fff; }
+    #bw-spy-mission-match .briefing-status { flex: 0 0 auto; border: 1px solid rgba(255,255,255,.27); border-radius: 999px; padding: 7px 11px; color: #f3ffeb; font-size: 11px; font-weight: 900; white-space: nowrap; }
+    #bw-spy-mission-match .briefing { position: relative; display: grid; grid-template-columns: 86px minmax(0, 1fr); column-gap: 20px; margin-top: 24px; overflow: hidden; border: 1px solid rgba(18,61,24,.25); border-radius: 18px; padding: 25px; background: var(--paper); color: var(--ink); box-shadow: 0 18px 28px rgba(0,0,0,.17); }
+    #bw-spy-mission-match .briefing::after { position: absolute; right: -73px; bottom: -94px; width: 240px; height: 240px; border: 1px solid rgba(18,61,24,.12); border-radius: 50%; content: ''; }
+    #bw-spy-mission-match .briefing-topline { grid-column: 1 / -1; display: flex; justify-content: space-between; gap: 12px; margin-bottom: 19px; color: var(--green); font-size: 9px; font-weight: 950; letter-spacing: .12em; }
+    #bw-spy-mission-match .briefing-symbol { position: relative; z-index: 1; display: grid; width: 74px; height: 74px; border: 2px solid rgba(18,61,24,.35); border-radius: 50%; place-items: center; align-self: start; color: rgba(18,61,24,.6); font-size: 31px; font-weight: 900; transition: background .2s ease, color .2s ease, transform .2s ease; }
+    #bw-spy-mission-match .briefing.is-ready .briefing-symbol { background: var(--lime); border-color: var(--green); color: var(--green); transform: rotate(-10deg); }
+    #bw-spy-mission-match .briefing-main { position: relative; z-index: 1; min-width: 0; }
+    #bw-spy-mission-match .briefing-kicker { margin-bottom: 5px; color: var(--green-light); font-size: 10px; font-weight: 950; letter-spacing: .11em; text-transform: uppercase; }
+    #bw-spy-mission-match .briefing h3 { margin: 0 0 9px; color: var(--green); font-size: clamp(25px, 3.5vw, 42px); line-height: 1.02; letter-spacing: -.05em; }
+    #bw-spy-mission-match .briefing-main > p:last-child { max-width: 700px; margin-bottom: 0; color: #405741; font-size: 14px; line-height: 1.65; }
+    #bw-spy-mission-match .briefing-rule { position: relative; z-index: 1; grid-column: 1 / -1; display: grid; grid-template-columns: 117px minmax(0, 1fr); gap: 14px; margin-top: 20px; border-top: 1px solid var(--line); padding-top: 15px; }
+    #bw-spy-mission-match .briefing-rule strong { color: var(--green); font-size: 13px; }
+    #bw-spy-mission-match .briefing-rule p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.52; }
+    #bw-spy-mission-match .briefing-actions { position: relative; z-index: 1; grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    #bw-spy-mission-match .cta, #bw-spy-mission-match .cta:visited, #bw-spy-mission-match .cta:hover, #bw-spy-mission-match .cta:active { display: inline-block; min-height: 44px; border-radius: 10px; padding: 12px 14px; background: var(--yellow); color: var(--green); font-size: 12px; font-weight: 950; text-decoration: none; }
+    #bw-spy-mission-match .cta:hover { text-decoration: underline; }
+    #bw-spy-mission-match .reset { min-height: 44px; border: 1px solid rgba(18,61,24,.38); border-radius: 10px; padding: 10px 14px; background: transparent; color: var(--green); font-size: 12px; font-weight: 900; cursor: pointer; }
+    #bw-spy-mission-match .reset:hover { background: #fff; }
+    #bw-spy-mission-match .ground-note { display: grid; grid-template-columns: 35px minmax(0, 1fr); gap: 13px; padding: 22px 43px 24px; background: #fff; }
+    #bw-spy-mission-match .note-dot { display: grid; width: 28px; height: 28px; border-radius: 50%; place-items: center; background: var(--green); color: var(--yellow); font-size: 14px; font-weight: 950; }
+    #bw-spy-mission-match .ground-note p { margin: 1px 0 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+    #bw-spy-mission-match .ground-note strong { color: var(--green); }
+    #bw-spy-mission-match button:focus-visible, #bw-spy-mission-match a:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+    @media (max-width: 760px) {
+      #bw-spy-mission-match { margin: 8px auto; padding: 0 7px; }
+      #bw-spy-mission-match .shell { border-radius: 18px; }
+      #bw-spy-mission-match .hero { grid-template-columns: minmax(0, 1fr) 126px; min-height: 287px; }
+      #bw-spy-mission-match .hero-copy { padding: 30px 22px; }
+      #bw-spy-mission-match h1 { font-size: 42px; }
+      #bw-spy-mission-match .hero-object { min-height: 287px; }
+      #bw-spy-mission-match .hero-object::before { width: 148px; height: 148px; }
+      #bw-spy-mission-match .hero-object img { width: 92px; border-radius: 17px; }
+      #bw-spy-mission-match .object-ring { width: 112px; height: 112px; }
+      #bw-spy-mission-match .object-label { right: 13px; bottom: 16px; font-size: 7px; }
+      #bw-spy-mission-match .orientation { grid-template-columns: 1fr; gap: 13px; padding: 24px 22px; }
+      #bw-spy-mission-match .casework, #bw-spy-mission-match .briefing-zone { padding: 25px 22px; }
+      #bw-spy-mission-match .section-heading, #bw-spy-mission-match .briefing-heading { align-items: flex-start; flex-direction: column; }
+      #bw-spy-mission-match .file-tab { grid-template-columns: 73px minmax(0, 1fr) 20px; padding: 0 13px; }
+      #bw-spy-mission-match .signal-grid { grid-template-columns: 1fr; }
+      #bw-spy-mission-match .briefing { grid-template-columns: 1fr; padding: 20px 17px; }
+      #bw-spy-mission-match .briefing-symbol { margin-bottom: 15px; }
+      #bw-spy-mission-match .briefing-rule { grid-template-columns: 1fr; gap: 4px; }
+      #bw-spy-mission-match .ground-note { padding: 20px 22px; }
+    }
+    @media (max-width: 405px) {
+      #bw-spy-mission-match .hero { grid-template-columns: minmax(0, 1fr) 105px; }
+      #bw-spy-mission-match .hero-copy { padding-right: 12px; }
+      #bw-spy-mission-match h1 { font-size: 37px; }
+      #bw-spy-mission-match .hero-object img { width: 80px; }
+      #bw-spy-mission-match .briefing-actions { display: grid; }
+      #bw-spy-mission-match .cta, #bw-spy-mission-match .reset { text-align: center; }
+    }
+    @media (max-width: 320px) {
+      #bw-spy-mission-match { margin: 4px auto; padding: 0 4px; }
+      #bw-spy-mission-match .hero { grid-template-columns: 1fr; min-height: 0; }
+      #bw-spy-mission-match .hero-copy { padding: 19px 16px; }
+      #bw-spy-mission-match .hero-object { display: none; }
+      #bw-spy-mission-match h1 { font-size: 33px; line-height: 1; }
+      #bw-spy-mission-match .orientation { gap: 10px; padding: 17px 18px; }
+      #bw-spy-mission-match .casework, #bw-spy-mission-match .briefing-zone { padding: 16px; }
+      #bw-spy-mission-match .file-stack { gap: 9px; margin-top: 18px; }
+      #bw-spy-mission-match .file-tab { min-height: 43px; grid-template-columns: 62px minmax(0, 1fr) 18px; padding: 0 10px; }
+      #bw-spy-mission-match .file-tab strong { font-size: 12px; }
+      #bw-spy-mission-match .file-content { padding: 11px; }
+      #bw-spy-mission-match .signal { grid-template-columns: 28px minmax(0, 1fr); gap: 8px; min-height: 68px; padding: 8px; }
+      #bw-spy-mission-match .signal-mark { width: 24px; height: 24px; }
+      #bw-spy-mission-match .signal b { font-size: 12px; }
+      #bw-spy-mission-match .signal small { margin-top: 2px; font-size: 9px; line-height: 1.27; }
+      #bw-spy-mission-match .briefing { padding: 16px 13px; }
+      #bw-spy-mission-match .briefing-symbol { width: 60px; height: 60px; margin-bottom: 10px; font-size: 26px; }
+      #bw-spy-mission-match .briefing-rule { margin-top: 14px; padding-top: 12px; }
+      #bw-spy-mission-match .briefing-actions { margin-top: 14px; }
+      #bw-spy-mission-match .ground-note { grid-template-columns: 27px minmax(0, 1fr); gap: 9px; padding: 13px 16px; }
+      #bw-spy-mission-match .note-dot { width: 24px; height: 24px; }
+    }
+  </style>
+
+  <script>
+    (() => {
+      const files = ['energy', 'company', 'time'];
+      const answers = { energy: null, company: null, time: null };
+      const fileNodes = Object.fromEntries(files.map((key) => [key, document.querySelector(`.mission-file[data-file="${key}"]`)]));
+      const progress = document.querySelector('#progress-number');
+      const briefing = document.querySelector('.briefing');
+      const status = document.querySelector('#briefing-status');
+      const code = document.querySelector('#briefing-code');
+      const symbol = document.querySelector('#briefing-symbol');
+      const kicker = document.querySelector('#briefing-kicker');
+      const title = document.querySelector('#briefing-title-text');
+      const copy = document.querySelector('#briefing-copy');
+      const rule = document.querySelector('#briefing-rule p');
+      const actions = document.querySelector('#briefing-actions');
+      const resizeRoot = document.querySelector('#bw-spy-mission-match');
+      let resizeQueued = false;
+
+      function reportHeight() {
+        resizeQueued = false;
+        const box = resizeRoot ? resizeRoot.getBoundingClientRect() : null;
+        const styles = resizeRoot ? window.getComputedStyle(resizeRoot) : null;
+        const margin = styles
+          ? (Number.parseFloat(styles.marginTop) || 0) + (Number.parseFloat(styles.marginBottom) || 0)
+          : 0;
+        const height = Math.ceil((box ? box.height : document.body.scrollHeight) + margin);
+        if (height > 0 && window.parent) {
+          window.parent.postMessage({ type: 'bw-resize', height }, '*');
+        }
+      }
+
+      function scheduleHeightReport() {
+        if (resizeQueued) return;
+        resizeQueued = true;
+        window.requestAnimationFrame(() => window.requestAnimationFrame(reportHeight));
+      }
+
+      if (resizeRoot && 'ResizeObserver' in window) {
+        new ResizeObserver(scheduleHeightReport).observe(resizeRoot);
+      }
+      window.addEventListener('load', scheduleHeightReport, { once: true });
+      window.addEventListener('resize', scheduleHeightReport);
+      if (document.fonts?.ready) document.fonts.ready.then(scheduleHeightReport);
+      [250, 1200, 3000].forEach((delay) => window.setTimeout(scheduleHeightReport, delay));
+
+      function resultFor({ energy, company, time }) {
+        if (energy === 'active' && time === 'room') {
+          return {
+            code: 'ACTIVE FIT', symbol: '✓', kicker: 'Mission recommendation',
+            title: company === 'family' ? 'Make it the indoor mission.' : 'Make it the active stop.',
+            copy: company === 'family'
+              ? 'You have someone who wants to take part and room for a real indoor stop. The Spy Museum is a sensible Potsdamer Platz choice because the hands-on elements are the actual reason to go, not a bonus after the ticket.'
+              : 'You want activity and have room to give it time. Use the museum as the day’s deliberate indoor experience, then let the rest of Potsdamer Platz stay optional.',
+            rule: 'Check the museum’s current visitor details before travel. A planned active stop works better than an impulse ticket.'
+          };
+        }
+        if (energy === 'active' && time === 'short') {
+          return {
+            code: 'TIME BOUND', symbol: '↗', kicker: 'Mission recommendation',
+            title: 'Keep the ticket optional.',
+            copy: 'The hands-on side sounds right, but the day does not have room for a proper indoor mission. Walk through Potsdamer Platz first and only go in if you can give the visit genuine attention instead of trying to compress it into a gap.',
+            rule: 'Do not make a central address choose the day. An outdoor historic stop is a better honest move when time is tight.'
+          };
+        }
+        if (energy === 'quiet' && company === 'adult') {
+          return {
+            code: 'REAL-SITE LEAD', symbol: '→', kicker: 'Mission recommendation',
+            title: 'Choose a real place first.',
+            copy: 'You are looking for a slower, more grounded kind of history. The Spy Museum can still be interesting later, but its playful interaction is not the strongest answer to that need. Let a real historic site carry the weight before you add an attraction.',
+            rule: 'A museum about espionage and an encounter with Berlin’s difficult history are different kinds of visit. Keep the roles clear.'
+          };
+        }
+        return {
+          code: 'CONTEXT FIRST', symbol: '•', kicker: 'Mission recommendation',
+          title: 'Choose the mood, then the door.',
+          copy: 'There is no need to force this into a yes or no. If the group wants to participate and you can make time, the Spy Museum may work. If the day needs a quieter or more site-specific history experience, step outside and choose one real place instead.',
+          rule: 'The useful decision is the kind of encounter you want, not whether an attraction is nearby.'
+        };
+      }
+
+      function openNext(index) {
+        const next = files[index + 1];
+        if (!next) return;
+        const node = fileNodes[next];
+        node.classList.remove('is-locked');
+        node.setAttribute('aria-disabled', 'false');
+        node.querySelectorAll('.signal').forEach((button) => { button.disabled = false; });
+        node.querySelector('.file-tab i').textContent = '↘';
+      }
+
+      function update() {
+        const marked = files.filter((key) => answers[key]).length;
+        progress.textContent = String(marked);
+        if (marked < 3) {
+          status.textContent = `Waiting for ${3 - marked} file${3 - marked === 1 ? '' : 's'}`;
+          scheduleHeightReport();
+          return;
+        }
+        const result = resultFor(answers);
+        briefing.classList.add('is-ready');
+        status.textContent = 'Briefing ready';
+        code.textContent = result.code;
+        symbol.textContent = result.symbol;
+        kicker.textContent = result.kicker;
+        title.textContent = result.title;
+        copy.textContent = result.copy;
+        rule.textContent = result.rule;
+        actions.hidden = false;
+        scheduleHeightReport();
+      }
+
+      document.querySelectorAll('.signal').forEach((button) => {
+        button.addEventListener('click', () => {
+          const file = button.dataset.file;
+          const index = files.indexOf(file);
+          if (fileNodes[file].classList.contains('is-locked')) return;
+          answers[file] = button.dataset.value;
+          fileNodes[file].querySelectorAll('.signal').forEach((peer) => {
+            const active = peer === button;
+            peer.classList.toggle('is-active', active);
+            peer.setAttribute('aria-pressed', String(active));
+          });
+          fileNodes[file].classList.add('is-complete');
+          fileNodes[file].querySelector('.file-tab i').textContent = '✓';
+          openNext(index);
+          update();
+        });
+      });
+
+      document.querySelector('#reset-mission').addEventListener('click', () => {
+        files.forEach((file, index) => {
+          answers[file] = null;
+          const node = fileNodes[file];
+          node.classList.remove('is-complete');
+          node.querySelectorAll('.signal').forEach((button) => {
+            button.classList.remove('is-active');
+            button.setAttribute('aria-pressed', 'false');
+            button.disabled = index > 0;
+          });
+          node.classList.toggle('is-locked', index > 0);
+          node.setAttribute('aria-disabled', String(index > 0));
+          node.querySelector('.file-tab i').textContent = index === 0 ? '↘' : '⌕';
+        });
+        briefing.classList.remove('is-ready');
+        status.textContent = 'Waiting for the files';
+        code.textContent = 'UNOPENED';
+        symbol.textContent = '?';
+        kicker.textContent = 'Mission status';
+        title.textContent = 'Open the three files first';
+        copy.textContent = 'Mark the experience, company and time signals. The result will not give you a score. It will give you one clearer type of Berlin stop.';
+        rule.textContent = 'Do not let a central location decide the day for you.';
+        actions.hidden = true;
+        update();
+        fileNodes.energy.querySelector('.signal').focus();
+      });
+
+      update();
+    })();
+  </script>
+</body>
+</html>

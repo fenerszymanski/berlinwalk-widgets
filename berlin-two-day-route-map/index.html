@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Two-Day Route Map | BerlinWalk</title>
+  <meta name="description" content="Follow a practical two-day Berlin route from Alexanderplatz to the Reichstag, then Nordbahnhof to the East Side Gallery and Kreuzberg.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+  <main class="bw-two-day" aria-labelledby="route-title">
+    <style>
+      :root {
+        --green: #1b5e20;
+        --green-dark: #0d3514;
+        --yellow: #ffe600;
+        --lime: #7cb342;
+        --cream: #fafaf5;
+        --soft: #eef5e7;
+        --ink: #212121;
+        --muted: #5b655b;
+        --line: #d6dfce;
+        --white: #ffffff;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; min-width: 0; background: var(--cream); color: var(--ink); }
+      body { font-family: Montserrat, Arial, sans-serif; }
+      button, a { font: inherit; }
+      .bw-two-day { width: min(1180px, 100%); margin: 0 auto; overflow: hidden; background: var(--cream); }
+      .route-head {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(280px, .9fr);
+        gap: 28px;
+        align-items: end;
+        padding: 30px clamp(20px, 4vw, 50px);
+        color: var(--white);
+        background:
+          radial-gradient(circle at 82% 12%, rgba(255,230,0,.20), transparent 28%),
+          linear-gradient(130deg, var(--green-dark), var(--green));
+      }
+      .route-kicker { margin: 0 0 8px; color: var(--yellow); font-size: 11px; font-weight: 900; letter-spacing: 2.2px; text-transform: uppercase; }
+      .route-head h1 { margin: 0; max-width: 720px; color: var(--white); font-size: clamp(30px, 5vw, 56px); line-height: 1.02; letter-spacing: -.035em; }
+      .route-head p { margin: 13px 0 0; max-width: 690px; color: #e5f0e2; font-size: 15px; line-height: 1.62; }
+      .route-rule { padding: 16px 18px; border: 1px solid rgba(255,255,255,.24); border-radius: 16px; background: rgba(4,24,8,.34); backdrop-filter: blur(5px); }
+      .route-rule strong { display: block; margin-bottom: 5px; color: var(--yellow); font-size: 13px; }
+      .route-rule span { display: block; color: var(--white); font-size: 13px; line-height: 1.5; }
+      .route-shell { padding: 20px clamp(14px, 3vw, 34px) 26px; }
+      .day-switch { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; margin-bottom: 14px; }
+      .day-button {
+        min-width: 0;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 13px 14px;
+        text-align: left;
+        cursor: pointer;
+        background: var(--white);
+        color: var(--green-dark);
+      }
+      .day-button:hover, .day-button:focus-visible { border-color: var(--lime); outline: 3px solid rgba(124,179,66,.22); outline-offset: 1px; }
+      .day-button[aria-selected="true"] { border-color: var(--green); background: var(--green); color: var(--white); }
+      .day-button b { display: block; font-size: 15px; line-height: 1.25; }
+      .day-button span { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; line-height: 1.35; }
+      .day-button[aria-selected="true"] span { color: #dcebd8; }
+      .route-grid { display: grid; grid-template-columns: minmax(0, 1.18fr) minmax(310px, .82fr); gap: 14px; align-items: stretch; }
+      .map-panel { position: relative; min-width: 0; min-height: 580px; overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: #dfe8d6; }
+      #route-map { width: 100%; height: 100%; min-height: 580px; z-index: 1; }
+      .map-label { position: absolute; z-index: 500; top: 12px; left: 12px; max-width: calc(100% - 24px); padding: 9px 11px; border-radius: 10px; background: rgba(13,53,20,.92); color: var(--white); font-size: 11px; font-weight: 800; line-height: 1.35; box-shadow: 0 4px 12px rgba(0,0,0,.14); }
+      .map-label span { color: var(--yellow); }
+      .route-panel { min-width: 0; display: grid; grid-template-rows: auto auto 1fr auto; gap: 12px; }
+      .day-meta { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; }
+      .meta-card { min-width: 0; padding: 11px; border: 1px solid var(--line); border-radius: 12px; background: var(--white); }
+      .meta-card b { display: block; color: var(--green); font-size: 16px; line-height: 1.1; }
+      .meta-card span { display: block; margin-top: 4px; color: var(--muted); font-size: 9px; font-weight: 800; letter-spacing: .6px; line-height: 1.25; text-transform: uppercase; }
+      .stop-strip { display: flex; gap: 6px; min-width: 0; overflow-x: auto; padding: 2px 2px 7px; scrollbar-width: thin; }
+      .stop-dot { flex: 0 0 36px; width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 50%; cursor: pointer; background: var(--white); color: var(--green); font-weight: 900; }
+      .stop-dot:hover, .stop-dot:focus-visible { border-color: var(--lime); outline: 3px solid rgba(124,179,66,.22); }
+      .stop-dot[aria-current="step"] { border-color: var(--yellow); background: var(--yellow); color: var(--green-dark); box-shadow: 0 0 0 3px rgba(255,230,0,.28); }
+      .stop-card { position: relative; min-width: 0; padding: 20px; border: 1px solid var(--line); border-radius: 18px; background: var(--white); overflow: hidden; }
+      .stop-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--yellow), var(--lime), var(--green)); }
+      .stop-time { margin: 0 0 7px; color: var(--green); font-size: 11px; font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase; }
+      .stop-card h2 { margin: 0; color: var(--green-dark); font-size: clamp(22px, 3vw, 31px); line-height: 1.08; letter-spacing: -.02em; }
+      .stop-context { margin: 11px 0 0; color: var(--ink); font-size: 13px; line-height: 1.58; }
+      .action-block { display: grid; gap: 8px; margin-top: 16px; }
+      .action-row { display: grid; grid-template-columns: 62px minmax(0,1fr); gap: 9px; align-items: start; padding-top: 9px; border-top: 1px solid var(--line); }
+      .action-row b { color: var(--green); font-size: 10px; letter-spacing: .8px; text-transform: uppercase; }
+      .action-row span { color: var(--muted); font-size: 12px; line-height: 1.48; }
+      .map-link, .map-link:visited { display: inline-flex; align-items: center; justify-content: center; margin-top: 16px; min-height: 42px; padding: 10px 14px; border-radius: 10px; background: var(--yellow); color: var(--green-dark); font-size: 12px; font-weight: 900; text-decoration: none; }
+      .map-link:hover, .map-link:focus-visible { background: #f4dc00; color: var(--green-dark); outline: 3px solid rgba(124,179,66,.26); outline-offset: 2px; }
+      .route-controls { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px; }
+      .route-control { min-height: 44px; border: 1px solid var(--green); border-radius: 11px; cursor: pointer; background: var(--white); color: var(--green); font-weight: 900; }
+      .route-control:hover, .route-control:focus-visible { background: var(--soft); outline: 3px solid rgba(124,179,66,.22); }
+      .route-control:disabled { cursor: default; opacity: .42; }
+      .route-foot { margin: 14px 2px 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+      .credits-button, .credits-button:visited { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; margin-top: 12px; padding: 9px 13px; border: 1px solid var(--green); border-radius: 999px; cursor: pointer; background: var(--white); color: var(--green-dark); font-size: 11px; font-weight: 900; }
+      .credits-button:hover, .credits-button:focus-visible { background: var(--soft); outline: 3px solid rgba(124,179,66,.22); outline-offset: 2px; }
+      .credits-backdrop[hidden] { display: none !important; }
+      .credits-backdrop { position: fixed; z-index: 9999; inset: 0; display: grid; place-items: center; padding: 18px; background: rgba(2,13,7,.72); }
+      .credits-panel { width: min(620px, 100%); max-height: min(620px, calc(100vh - 36px)); overflow: auto; border: 2px solid var(--green); border-radius: 18px; padding: 22px; background: var(--cream); box-shadow: 0 18px 60px rgba(0,0,0,.32); }
+      .credits-panel h2 { margin: 0 0 9px; color: var(--green-dark); font-size: 24px; }
+      .credits-panel p { margin: 0 0 14px; color: var(--muted); font-size: 12px; line-height: 1.55; }
+      .credits-list { display: grid; gap: 9px; margin: 0; padding-left: 20px; }
+      .credits-list li { color: var(--ink); font-size: 12px; line-height: 1.5; }
+      .credits-list a, .credits-list a:visited { color: var(--green); font-weight: 800; }
+      .credits-close { margin-top: 18px; min-height: 42px; padding: 10px 15px; border: 0; border-radius: 10px; cursor: pointer; background: var(--yellow); color: var(--green-dark); font-weight: 900; }
+      .credits-close:hover, .credits-close:focus-visible { background: #f4dc00; color: var(--green-dark); outline: 3px solid rgba(124,179,66,.26); outline-offset: 2px; }
+      .leaflet-container { font-family: Montserrat, Arial, sans-serif; background: #dfe8d6; }
+      .leaflet-popup-content-wrapper { border-radius: 12px; box-shadow: 0 8px 22px rgba(0,0,0,.16); }
+      .leaflet-popup-content { margin: 12px 14px; font-size: 12px; line-height: 1.45; }
+      .leaflet-popup-content b { color: var(--green); }
+      .route-marker { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border: 3px solid var(--white); border-radius: 50%; background: var(--green); color: var(--yellow); font-size: 12px; font-weight: 900; box-shadow: 0 3px 9px rgba(0,0,0,.25); }
+      .route-marker.active { border-color: var(--yellow); background: var(--green-dark); transform: scale(1.14); }
+      @media (max-width: 820px) {
+        .route-head { grid-template-columns: 1fr; gap: 18px; }
+        .route-grid { grid-template-columns: 1fr; }
+        .map-panel, #route-map { min-height: 390px; height: 390px; }
+        .route-panel { grid-template-rows: auto auto auto auto; }
+      }
+      @media (max-width: 520px) {
+        .route-head { padding: 24px 17px; }
+        .route-shell { padding: 12px 10px 20px; }
+        .day-switch { gap: 7px; }
+        .day-button { padding: 11px 10px; }
+        .map-panel, #route-map { min-height: 330px; height: 330px; }
+        .day-meta { gap: 6px; }
+        .meta-card { padding: 9px 7px; }
+        .meta-card b { font-size: 14px; }
+        .stop-card { padding: 18px 15px; }
+        .action-row { grid-template-columns: 52px minmax(0,1fr); }
+      }
+      @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+    </style>
+
+    <header class="route-head">
+      <div>
+        <p class="route-kicker">BerlinWalk route board</p>
+        <h1 id="route-title">Two days. Two clear Berlin stories.</h1>
+        <p>Day 1 reads the historic centre from Alexanderplatz to the Reichstag. Day 2 follows the Wall from Nordbahnhof, then crosses to the East Side Gallery and Kreuzberg.</p>
+      </div>
+      <div class="route-rule">
+        <strong>The rule</strong>
+        <span>Tap the stops in order. Do the place in front of you before you ask the map for another district.</span>
+      </div>
+    </header>
+
+    <section class="route-shell">
+      <div class="day-switch" role="tablist" aria-label="Choose itinerary day">
+        <button class="day-button" type="button" role="tab" aria-selected="true" data-day="0">
+          <b>Day 1: Historic centre</b>
+          <span>Alexanderplatz to Reichstag</span>
+        </button>
+        <button class="day-button" type="button" role="tab" aria-selected="false" data-day="1">
+          <b>Day 2: Wall to Kreuzberg</b>
+          <span>Nordbahnhof to Oberbaum Bridge</span>
+        </button>
+      </div>
+
+      <div class="route-grid">
+        <div class="map-panel">
+          <div class="map-label" id="map-label"><span>DAY 1</span> Historic centre</div>
+          <div id="route-map" role="region" aria-label="Interactive two-day Berlin route map"></div>
+        </div>
+
+        <div class="route-panel">
+          <div class="day-meta" aria-label="Day route summary">
+            <div class="meta-card"><b id="meta-walk">5-7 km</b><span>walking</span></div>
+            <div class="meta-card"><b id="meta-stops">7 stops</b><span>route stops</span></div>
+            <div class="meta-card"><b id="meta-shape">Mitte</b><span>main area</span></div>
+          </div>
+
+          <div class="stop-strip" id="stop-strip" aria-label="Route stops"></div>
+
+          <article class="stop-card" aria-live="polite">
+            <p class="stop-time" id="stop-time"></p>
+            <h2 id="stop-name"></h2>
+            <p class="stop-context" id="stop-context"></p>
+            <div class="action-block">
+              <div class="action-row"><b>Do</b><span id="stop-do"></span></div>
+              <div class="action-row"><b>Next</b><span id="stop-next"></span></div>
+            </div>
+            <a class="map-link" id="map-link" href="#" target="_blank" rel="noopener">Open this place in Google Maps</a>
+          </article>
+
+          <div class="route-controls">
+            <button class="route-control" id="prev-stop" type="button">Previous stop</button>
+            <button class="route-control" id="next-stop" type="button">Next stop</button>
+          </div>
+        </div>
+      </div>
+      <p class="route-foot">Routes are a practical planning sequence, not turn-by-turn navigation. Check BVG and venue pages on the day for construction, closures and timed entry.</p>
+      <button class="credits-button" id="credits-open" type="button" aria-expanded="false" aria-controls="image-credits">Image credits</button>
+    </section>
+
+    <div class="credits-backdrop" id="image-credits" hidden>
+      <section class="credits-panel" role="dialog" aria-modal="true" aria-labelledby="credits-title">
+        <h2 id="credits-title">Image credits</h2>
+        <p>The article photographs are used under their listed licences.</p>
+        <ul class="credits-list">
+          <li>Museum Island and TV Tower: <a href="https://commons.wikimedia.org/wiki/File:Berlin_Museumsinsel_Fernsehturm.jpg" target="_blank" rel="noopener">Thomas Wolf</a>, CC BY-SA 3.0.</li>
+          <li>Brandenburg Gate: <a href="https://commons.wikimedia.org/wiki/File:Brandenburger_Tor_morgens.jpg" target="_blank" rel="noopener">Thomas Wolf</a>, CC BY-SA 3.0.</li>
+          <li>Bernauer Strasse border strip: <a href="https://commons.wikimedia.org/wiki/File:Berlin_Bernauer_Stra%C3%9Fe_Mauerstreifen.jpg" target="_blank" rel="noopener">Pedelecs</a>, CC BY-SA 3.0.</li>
+          <li>East Side Gallery: <a href="https://commons.wikimedia.org/wiki/File:East_Side_Gallery_2015_02.jpg" target="_blank" rel="noopener">Perituss</a>, CC0.</li>
+          <li>Oberbaum Bridge: <a href="https://commons.wikimedia.org/wiki/File:-Sunset_on_Oberbaumbr%C3%BCcke-_(43668194515).jpg" target="_blank" rel="noopener">Guido from Berlin</a>, CC BY 2.0.</li>
+        </ul>
+        <button class="credits-close" id="credits-close" type="button">Close image credits</button>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      var days = [
+        {
+          label: 'DAY 1', title: 'Historic centre', walk: '5-7 km', shape: 'Mitte',
+          lineColor: '#1b5e20',
+          stops: [
+            { time: '09:30', name: 'World Clock, Alexanderplatz', lat: 52.5213, lng: 13.4133, context: 'Alexanderplatz is the transport square of the former East Berlin centre. The World Clock gives you one exact place to start.', action: 'Find the TV Tower, St. Mary\'s Church and Rotes Rathaus before you begin walking.', next: 'Walk about 8 minutes toward Rotes Rathaus and Nikolaiviertel.', maps: 'https://www.google.com/maps/search/?api=1&query=World+Clock+Alexanderplatz+Berlin' },
+            { time: '10:00', name: 'Rotes Rathaus', lat: 52.5186, lng: 13.4081, context: 'Berlin\'s red-brick city hall sits between the modern GDR centre and the older street pattern near the Spree.', action: 'Look back toward the TV Tower, then cross into Nikolaiviertel instead of returning to Alexanderplatz.', next: 'Walk 5 minutes into Nikolaiviertel.', maps: 'https://www.google.com/maps/search/?api=1&query=Rotes+Rathaus+Berlin' },
+            { time: '10:20', name: 'Nikolaiviertel', lat: 52.5169, lng: 13.4070, context: 'Nikolaiviertel marks the area where medieval Berlin and Cölln began, even though much of the quarter was reconstructed in the GDR era.', action: 'Walk the small streets around St. Nicholas Church and reach the Spree.', next: 'Cross toward Museum Island in about 10 minutes.', maps: 'https://www.google.com/maps/search/?api=1&query=Nikolaiviertel+Berlin' },
+            { time: '11:00', name: 'Museum Island', lat: 52.5169, lng: 13.4010, context: 'Museum Island is a group of large museums, not one quick attraction. The river and buildings are worth seeing even without a ticket.', action: 'Choose one museum or keep the visit outside around Lustgarten, Berliner Dom and the colonnade.', next: 'Walk 10 minutes to Hackescher Markt for lunch.', maps: 'https://www.google.com/maps/search/?api=1&query=Museum+Island+Berlin' },
+            { time: '12:30', name: 'Hackescher Markt', lat: 52.5225, lng: 13.4020, context: 'Hackescher Markt gives you food, courtyards and easy transport without leaving the central route.', action: 'Eat in the side streets around Sophienstrasse, Gipsstrasse or Rosenthaler Strasse.', next: 'Return to Unter den Linden, then walk west toward Bebelplatz.', maps: 'https://www.google.com/maps/search/?api=1&query=Hackescher+Markt+Berlin' },
+            { time: '15:00', name: 'Bebelplatz', lat: 52.5166, lng: 13.3933, context: 'Bebelplatz is the square of the 1933 Nazi book burning and the underground Empty Library memorial.', action: 'Find the glass panel in the square and read the memorial before continuing.', next: 'Stay on Unter den Linden for about 20 minutes to Brandenburg Gate.', maps: 'https://www.google.com/maps/search/?api=1&query=Bebelplatz+Berlin' },
+            { time: '16:30', name: 'Brandenburg Gate and Reichstag', lat: 52.5163, lng: 13.3777, context: 'Brandenburg Gate leads directly into the government quarter. The Reichstag dome is free but requires registration.', action: 'Walk through the gate, turn back toward Pariser Platz, then continue north to the Reichstag.', next: 'Finish in Tiergarten or take one direct train to dinner.', maps: 'https://www.google.com/maps/search/?api=1&query=Brandenburg+Gate+Berlin' }
+          ]
+        },
+        {
+          label: 'DAY 2', title: 'Wall to Kreuzberg', walk: '4-6 km', shape: 'North + East',
+          lineColor: '#7cb342',
+          stops: [
+            { time: '09:00', name: 'S Nordbahnhof', lat: 52.5317, lng: 13.3871, context: 'Nordbahnhof was a ghost station during the division of Berlin. The platform exhibition explains why trains passed without stopping.', action: 'Use the Bernauer Strasse exit and look at the station exhibition before going outside.', next: 'The memorial route begins immediately outside the station.', maps: 'https://www.google.com/maps/search/?api=1&query=Nordbahnhof+Berlin' },
+            { time: '09:20', name: 'Berlin Wall Memorial', lat: 52.5351, lng: 13.3902, context: 'The preserved border strip shows the outer wall, patrol area, watchtower and inner wall as one system.', action: 'Use the viewing platform instead of photographing only one concrete section.', next: 'Keep walking east along Bernauer Strasse.', maps: 'https://www.google.com/maps/search/?api=1&query=Berlin+Wall+Memorial+Bernauer+Strasse' },
+            { time: '10:15', name: 'Chapel of Reconciliation', lat: 52.5365, lng: 13.3914, context: 'The chapel stands where the Church of Reconciliation was trapped inside the border strip and demolished in 1985.', action: 'Step into the chapel if it is open, then continue past the memorial markers.', next: 'Walk about 20 minutes toward Mauerpark.', maps: 'https://www.google.com/maps/search/?api=1&query=Chapel+of+Reconciliation+Berlin' },
+            { time: '11:30', name: 'Mauerpark and Eberswalder Strasse', lat: 52.5435, lng: 13.4022, context: 'Mauerpark occupies former border land. On Sundays it becomes a flea-market and gathering place; on other days use nearby Kastanienallee for lunch.', action: 'Eat, refill water and keep the break in Prenzlauer Berg.', next: 'Take the M10 tram from Eberswalder Strasse to Warschauer Strasse.', maps: 'https://www.google.com/maps/search/?api=1&query=Mauerpark+Berlin' },
+            { time: '13:30', name: 'Warschauer Strasse', lat: 52.5050, lng: 13.4496, context: 'Warschauer Strasse is the transport handover from the northern Wall route to Friedrichshain and the Spree.', action: 'Leave the station toward the river and walk to the East Side Gallery.', next: 'The gallery begins within about 10 minutes.', maps: 'https://www.google.com/maps/search/?api=1&query=Warschauer+Strasse+Berlin' },
+            { time: '14:15', name: 'East Side Gallery', lat: 52.5053, lng: 13.4397, context: 'This 1.3-kilometre surviving Wall section became an open-air gallery after 1989. It is not the same border-system site you saw at Bernauer Strasse.', action: 'Walk beyond the famous kiss mural and give the full wall section time.', next: 'Return toward Oberbaum Bridge for the final crossing.', maps: 'https://www.google.com/maps/search/?api=1&query=East+Side+Gallery+Berlin' },
+            { time: '16:00', name: 'Oberbaum Bridge', lat: 52.5019, lng: 13.4450, context: 'Oberbaum Bridge connects Friedrichshain and Kreuzberg across the Spree, with the U-Bahn running above the road.', action: 'Cross on foot and look back toward the Wall and river before entering Kreuzberg.', next: 'Stay around Schlesisches Tor, Oranienstrasse or the canal for dinner.', maps: 'https://www.google.com/maps/search/?api=1&query=Oberbaum+Bridge+Berlin' }
+          ]
+        }
+      ];
+
+      var activeDay = 0;
+      var activeStop = 0;
+      var map = null;
+      var routeLine = null;
+      var connectorLine = null;
+      var markers = [];
+      var els = {
+        dayButtons: Array.from(document.querySelectorAll('.day-button')),
+        strip: document.getElementById('stop-strip'),
+        label: document.getElementById('map-label'),
+        metaWalk: document.getElementById('meta-walk'),
+        metaStops: document.getElementById('meta-stops'),
+        metaShape: document.getElementById('meta-shape'),
+        time: document.getElementById('stop-time'),
+        name: document.getElementById('stop-name'),
+        context: document.getElementById('stop-context'),
+        action: document.getElementById('stop-do'),
+        next: document.getElementById('stop-next'),
+        mapLink: document.getElementById('map-link'),
+        prev: document.getElementById('prev-stop'),
+        nextButton: document.getElementById('next-stop')
+      };
+
+      function markerIcon(index, active) {
+        return L.divIcon({
+          className: '',
+          html: '<span class="route-marker' + (active ? ' active' : '') + '">' + (index + 1) + '</span>',
+          iconSize: [34, 34],
+          iconAnchor: [17, 17]
+        });
+      }
+
+      function ensureMap() {
+        if (map || !window.L) return;
+        map = L.map('route-map', { scrollWheelZoom: false, zoomControl: true });
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+      }
+
+      function drawDay() {
+        ensureMap();
+        if (!map) return;
+        var day = days[activeDay];
+        markers.forEach(function (marker) { map.removeLayer(marker); });
+        markers = [];
+        if (routeLine) map.removeLayer(routeLine);
+        if (connectorLine) { map.removeLayer(connectorLine); connectorLine = null; }
+
+        var routeCoords = day.stops.map(function (stop) { return [stop.lat, stop.lng]; });
+        routeLine = L.polyline(routeCoords, { color: day.lineColor, weight: 5, opacity: .8 }).addTo(map);
+
+        if (activeDay === 1) {
+          connectorLine = L.polyline([[52.5435, 13.4022], [52.5417, 13.4120], [52.5050, 13.4496]], {
+            color: '#0d3514', weight: 4, opacity: .72, dashArray: '9 9'
+          }).addTo(map);
+        }
+
+        day.stops.forEach(function (stop, index) {
+          var marker = L.marker([stop.lat, stop.lng], { icon: markerIcon(index, index === activeStop) })
+            .addTo(map)
+            .bindPopup('<b>' + (index + 1) + '. ' + stop.name + '</b><br>' + stop.time);
+          marker.on('click', function () { setStop(index, false); });
+          markers.push(marker);
+        });
+        map.fitBounds(routeLine.getBounds(), { padding: [34, 34] });
+        setTimeout(function () { map.invalidateSize(); }, 120);
+      }
+
+      function renderStrip() {
+        var day = days[activeDay];
+        els.strip.innerHTML = '';
+        day.stops.forEach(function (stop, index) {
+          var button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'stop-dot';
+          button.textContent = String(index + 1);
+          button.setAttribute('aria-label', 'Stop ' + (index + 1) + ': ' + stop.name);
+          if (index === activeStop) button.setAttribute('aria-current', 'step');
+          button.addEventListener('click', function () { setStop(index, true); });
+          els.strip.appendChild(button);
+        });
+      }
+
+      function renderCard(focusMarker) {
+        var day = days[activeDay];
+        var stop = day.stops[activeStop];
+        els.time.textContent = day.label + ' · ' + stop.time + ' · STOP ' + (activeStop + 1) + ' OF ' + day.stops.length;
+        els.name.textContent = stop.name;
+        els.context.textContent = stop.context;
+        els.action.textContent = stop.action;
+        els.next.textContent = stop.next;
+        els.mapLink.href = stop.maps;
+        els.prev.disabled = activeStop === 0;
+        els.nextButton.disabled = activeStop === day.stops.length - 1;
+        els.nextButton.textContent = activeStop === day.stops.length - 1 ? 'Day complete' : 'Next stop';
+        renderStrip();
+        if (map && markers.length) {
+          markers.forEach(function (marker, index) { marker.setIcon(markerIcon(index, index === activeStop)); });
+          if (focusMarker) {
+            map.panTo([stop.lat, stop.lng], { animate: false });
+            markers[activeStop].openPopup();
+          }
+        }
+      }
+
+      function setStop(index, focusMarker) {
+        activeStop = Math.max(0, Math.min(index, days[activeDay].stops.length - 1));
+        renderCard(focusMarker);
+      }
+
+      function setDay(index) {
+        activeDay = index;
+        activeStop = 0;
+        var day = days[activeDay];
+        els.dayButtons.forEach(function (button, buttonIndex) {
+          button.setAttribute('aria-selected', buttonIndex === activeDay ? 'true' : 'false');
+        });
+        els.label.innerHTML = '<span>' + day.label + '</span> ' + day.title;
+        els.metaWalk.textContent = day.walk;
+        els.metaStops.textContent = day.stops.length + ' stops';
+        els.metaShape.textContent = day.shape;
+        drawDay();
+        renderCard(false);
+      }
+
+      els.dayButtons.forEach(function (button) {
+        button.addEventListener('click', function () { setDay(Number(button.dataset.day)); });
+      });
+      els.prev.addEventListener('click', function () { setStop(activeStop - 1, true); });
+      els.nextButton.addEventListener('click', function () { setStop(activeStop + 1, true); });
+
+      var creditsOpen = document.getElementById('credits-open');
+      var creditsBackdrop = document.getElementById('image-credits');
+      var creditsClose = document.getElementById('credits-close');
+      function openCredits() {
+        creditsBackdrop.hidden = false;
+        creditsOpen.setAttribute('aria-expanded', 'true');
+        creditsClose.focus();
+      }
+      function closeCredits() {
+        creditsBackdrop.hidden = true;
+        creditsOpen.setAttribute('aria-expanded', 'false');
+        creditsOpen.focus();
+      }
+      creditsOpen.addEventListener('click', openCredits);
+      creditsClose.addEventListener('click', closeCredits);
+      creditsBackdrop.addEventListener('click', function (event) {
+        if (event.target === creditsBackdrop) closeCredits();
+      });
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && !creditsBackdrop.hidden) closeCredits();
+      });
+
+      var leafletWaits = 0;
+      var leafletTimer = setInterval(function () {
+        leafletWaits += 1;
+        if (window.L) {
+          clearInterval(leafletTimer);
+          setDay(0);
+        } else if (leafletWaits > 40) {
+          clearInterval(leafletTimer);
+          document.getElementById('route-map').textContent = 'The map could not load. Use the stop sequence beside it.';
+          setDay(0);
+        }
+      }, 100);
+    });
+  </script>
+</body>
+</html>

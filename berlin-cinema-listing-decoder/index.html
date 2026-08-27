@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Berlin Cinema Listing Decoder</title>
+<meta name="description" content="Standing in front of a Berlin cinema and unsure if you will understand the film? Pick the label you see (OV, OmU, OmeU, DF) and whether the film is in English, and get a plain verdict, plus the cinemas that reliably screen films you can follow." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='32' r='20' fill='%23FFE600'/%3E%3Cpath d='M20 24h24v18H20z' fill='%231B5E20'/%3E%3Cpath d='M20 24l6 6M28 24l6 6M36 24l6 6' stroke='%23FFE600' stroke-width='2'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-dark:#123D18; --green-mid:#2E7D32;
+    --lime:#7CB342; --light:#C5E1A5; --yellow:#FFE600;
+    --cream:#FAFAF5; --ink:#212121; --muted:#4b584b;
+    --line:#E3E8DC; --panel:#F4F7F0;
+    --good:#1B5E20; --warn:#B26A00; --bad:#8E2C2C;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .wrap{max-width:680px;margin:0 auto;padding:4px 14px 20px}
+  .card{background:var(--cream);border:1px solid var(--line);border-radius:18px;padding:20px 18px;box-shadow:0 10px 30px rgba(18,61,24,.06)}
+  .kicker{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-mid);margin:0 0 6px}
+  h1{font-size:23px;font-weight:800;line-height:1.16;margin:0 0 8px;color:var(--green-dark)}
+  .lede{font-size:15px;color:var(--muted);margin:0 0 4px}
+  .step{margin-top:20px}
+  .steplabel{display:flex;align-items:center;gap:9px;font-weight:800;font-size:15px;color:var(--green-dark);margin:0 0 10px}
+  .num{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--green);color:#fff;font-size:13px;font-weight:800;flex:none}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  @media(max-width:460px){.opts{grid-template-columns:1fr}}
+  .opt{appearance:none;border:2px solid var(--line);background:#fff;border-radius:13px;padding:12px 13px;text-align:left;cursor:pointer;font-family:inherit;transition:border-color .15s,background .15s,transform .05s}
+  .opt:hover{border-color:var(--lime)}
+  .opt:active{transform:translateY(1px)}
+  .opt.sel{border-color:var(--green);background:#F1F7EC}
+  .opt b{display:block;font-size:15px;font-weight:800;color:var(--green-dark)}
+  .opt span{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
+  .verdict{margin-top:20px;border-radius:15px;padding:16px 16px;border:1px solid var(--line);background:#fff}
+  .verdict.empty{color:var(--muted);font-size:14px;text-align:center;padding:22px 16px;background:var(--panel)}
+  .vtag{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px;color:#fff;margin-bottom:9px}
+  .vtag.good{background:var(--good)}
+  .vtag.warn{background:var(--warn)}
+  .vtag.bad{background:var(--bad)}
+  .vtitle{font-size:17px;font-weight:800;color:var(--ink);margin:0 0 6px;line-height:1.3}
+  .vbody{font-size:14.5px;color:#33403a;margin:0}
+  .reset{margin-top:12px;background:none;border:none;color:var(--green-mid);font-weight:700;font-size:13px;cursor:pointer;text-decoration:underline;padding:0;font-family:inherit}
+  .section-h{font-size:16px;font-weight:800;color:var(--green-dark);margin:24px 0 4px}
+  .section-sub{font-size:13px;color:var(--muted);margin:0 0 12px}
+  .venue{border:1px solid var(--line);background:#fff;border-radius:13px;padding:12px 14px;margin-bottom:9px}
+  .venue b{font-size:14.5px;color:var(--green-dark)}
+  .venue .where{font-size:12px;color:var(--green-mid);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+  .venue p{font-size:13px;color:var(--muted);margin:5px 0 0}
+  .listrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .chip{font-size:12.5px;font-weight:700;color:var(--green-dark);background:var(--light);border-radius:999px;padding:6px 12px}
+  .foot{font-size:12px;color:var(--muted);margin-top:16px;border-top:1px dashed var(--line);padding-top:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <p class="kicker">BerlinWalk Tool</p>
+    <h1>Berlin Cinema Listing Decoder</h1>
+    <p class="lede">You are standing in front of a Berlin cinema, the listing says <b>OmU</b>, and you have no idea whether you will understand a word. Pick what you see and what the film is, and I will tell you straight.</p>
+
+    <div class="step">
+      <div class="steplabel"><span class="num">1</span> What does the listing next to the film say?</div>
+      <div class="opts" id="labelOpts">
+        <button class="opt" data-label="ov"><b>OV or OF</b><span>Originalversion / Originalfassung</span></button>
+        <button class="opt" data-label="omu"><b>OmU</b><span>Original with German subtitles</span></button>
+        <button class="opt" data-label="omeu"><b>OmeU / OmenglU</b><span>Original with English subtitles</span></button>
+        <button class="opt" data-label="df"><b>DF, synchronisiert, or nothing</b><span>Dubbed into German</span></button>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="steplabel"><span class="num">2</span> Is the film originally in English?</div>
+      <div class="opts" id="langOpts">
+        <button class="opt" data-lang="en"><b>Yes, it is an English-language film</b><span>Hollywood, British, most blockbusters</span></button>
+        <button class="opt" data-lang="other"><b>No, it is in another language</b><span>French, Korean, German, etc.</span></button>
+        <button class="opt" data-lang="unsure"><b>Not sure</b><span>I just want to be safe</span></button>
+      </div>
+    </div>
+
+    <div class="verdict empty" id="verdict">Pick an option in each step and your verdict appears here.</div>
+    <button class="reset" id="reset" style="display:none">Start over</button>
+
+    <div class="section-h">Berlin cinemas that reliably show films you can follow</div>
+    <p class="section-sub">A short, honest shortlist. Programmes change, so always check the label on the day.</p>
+
+    <div class="venue"><span class="where">Mitte, Karl-Marx-Allee</span><br><b>Kino International</b><p>Berlin's most beautiful old cinema, a 1963 modernist hall with a neon sign. Regular OV and OmeU screenings and premieres.</p></div>
+    <div class="venue"><span class="where">Mitte, Rosa-Luxemburg-Platz</span><br><b>Babylon Mitte</b><p>Independent repertory house. Classics, retrospectives and new arthouse, much of it in the original language with subtitles.</p></div>
+    <div class="venue"><span class="where">Mitte, near Hackescher Markt</span><br><b>Hackesche Höfe Kino</b><p>An arthouse cinema tucked in the courtyards. Original-language programme, and a two-minute walk from where my walking tour ends.</p></div>
+    <div class="venue"><span class="where">Charlottenburg, Kantstrasse</span><br><b>Delphi Lux and Delphi Filmpalast</b><p>New releases and festival films, many in OV or OmeU. Handy if you are staying in the west.</p></div>
+    <div class="venue"><span class="where">Across the city</span><br><b>Yorck cinemas</b><p>A group of a dozen screens (including Babylon Kreuzberg and Neues Off) that lists all its original-version showings in one place.</p></div>
+
+    <div class="section-h">How to see what is on tonight</div>
+    <p class="section-sub">Two local sites collect every original-version screening across Berlin, so you can filter by cinema and language before you leave the hotel.</p>
+    <div class="listrow">
+      <span class="chip">ovkino.de</span>
+      <span class="chip">ov-berlin.de</span>
+      <span class="chip">yorck.de (OV filter)</span>
+    </div>
+
+    <p class="foot">Prices and programmes are set by each cinema and change often. Ticket prices in 2026 sit around 9 to 14 euros; Monday and Tuesday are usually the cheap nights. Checked on 20 August 2026.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var state={label:null,lang:null};
+  var verdicts={
+    'ov|en':['good','A perfect pick','You will hear the original English with no subtitles at all. Just walk in and enjoy it.'],
+    'ov|other':['warn','Original language, no safety net','The film plays in its own language with no subtitles. Only choose this if you actually speak that language, otherwise you will be lost.'],
+    'ov|unsure':['warn','Fine only if it is in English','OV means original audio and no subtitles. Great if the film is in English or a language you speak, risky if it is not. Check the film language first.'],
+    'omu|en':['good','Go for it','You will hear the original English. The subtitles underneath are German, so simply ignore them. This is completely fine for an English film.'],
+    'omu|other':['bad','Skip this one','The audio is original, but the only subtitles are German. If you do not read German you will not follow the story. Look for an OmeU showing instead.'],
+    'omu|unsure':['warn','Depends on the film','You get original audio with German subtitles. Fine if the film is in English, hard if it is in another language and you do not read German.'],
+    'omeu|en':['good','The safe choice','Original English audio with English subtitles. You cannot go wrong.'],
+    'omeu|other':['good','The safe choice','Original audio with English subtitles, whatever the film language. This is the setting to look for when the film is not in English.'],
+    'omeu|unsure':['good','The safe choice','Original audio with English subtitles. This works for any film in any language, so it is always a safe bet.'],
+    'df|en':['bad','Not for you','DF means Deutsche Fassung, dubbed into German. The English voices are replaced by German ones. Find the same film marked OV, OmU or OmeU instead.'],
+    'df|other':['bad','Not for you','This screening is dubbed into German. If a listing shows no language label at all, assume the same. Look for OV, OmU or OmeU.'],
+    'df|unsure':['bad','Not for you','Dubbed into German. A film with no language marking on the listing is almost always dubbed too. Choose one labelled OV, OmU or OmeU.']
+  };
+  function paint(){
+    document.querySelectorAll('#labelOpts .opt').forEach(function(b){b.classList.toggle('sel',b.dataset.label===state.label)});
+    document.querySelectorAll('#langOpts .opt').forEach(function(b){b.classList.toggle('sel',b.dataset.lang===state.lang)});
+    var v=document.getElementById('verdict');
+    var r=document.getElementById('reset');
+    if(state.label&&state.lang){
+      var d=verdicts[state.label+'|'+state.lang];
+      v.className='verdict';
+      v.innerHTML='<span class="vtag '+d[0]+'">'+({good:'Watch it',warn:'Check first',bad:'Skip it'})[d[0]]+'</span>'+
+                  '<p class="vtitle">'+d[1]+'</p><p class="vbody">'+d[2]+'</p>';
+      r.style.display='inline-block';
+    }else{
+      v.className='verdict empty';
+      v.textContent='Pick an option in each step and your verdict appears here.';
+      r.style.display='none';
+    }
+  }
+  document.getElementById('labelOpts').addEventListener('click',function(e){var b=e.target.closest('.opt');if(!b)return;state.label=b.dataset.label;paint()});
+  document.getElementById('langOpts').addEventListener('click',function(e){var b=e.target.closest('.opt');if(!b)return;state.lang=b.dataset.lang;paint()});
+  document.getElementById('reset').addEventListener('click',function(){state={label:null,lang:null};paint()});
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

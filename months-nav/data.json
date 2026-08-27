@@ -1,0 +1,89 @@
+{
+  "linkBase": "https://www.berlinwalk.com/post/",
+  "months": [
+    {
+      "key": "january",
+      "name": "January",
+      "tagline": "Quiet, cold, museum season",
+      "slug": "berlin-in-january-2027",
+      "status": "published"
+    },
+    {
+      "key": "february",
+      "name": "February",
+      "tagline": "Berlinale film festival, raw winter",
+      "slug": "berlin-in-february-2027",
+      "status": "published"
+    },
+    {
+      "key": "march",
+      "name": "March",
+      "tagline": "Light returns, last calm before tourists",
+      "slug": "berlin-in-march-2027",
+      "status": "published"
+    },
+    {
+      "key": "april",
+      "name": "April",
+      "tagline": "Beer gardens open, Gallery Weekend",
+      "slug": "berlin-in-april-2027",
+      "status": "published"
+    },
+    {
+      "key": "may",
+      "name": "May",
+      "tagline": "Gardens in bloom, Carnival of Cultures",
+      "slug": "berlin-in-may-2027",
+      "status": "published"
+    },
+    {
+      "key": "june",
+      "name": "June",
+      "tagline": "Long days, beer gardens, deep history",
+      "slug": "visiting-berlin-in-june",
+      "status": "published"
+    },
+    {
+      "key": "july",
+      "name": "July",
+      "tagline": "Peak summer, festivals, lake weather",
+      "slug": "berlin-in-july-2026",
+      "status": "published"
+    },
+    {
+      "key": "august",
+      "name": "August",
+      "tagline": "Hottest, emptiest, half the city is away",
+      "slug": "berlin-in-august-2026",
+      "status": "published"
+    },
+    {
+      "key": "september",
+      "name": "September",
+      "tagline": "Late warmth, Berlin Marathon, Art Week",
+      "slug": "berlin-in-september-2026",
+      "status": "published"
+    },
+    {
+      "key": "october",
+      "name": "October",
+      "tagline": "Festival of Lights, autumn quiets the city",
+      "slug": "berlin-in-october-2026",
+      "status": "published"
+    },
+    {
+      "key": "november",
+      "name": "November",
+      "tagline": "Cheap, indoor, the beer halls win",
+      "slug": "berlin-in-november-2026",
+      "status": "published"
+    },
+    {
+      "key": "december",
+      "name": "December",
+      "tagline": "Christmas markets, Glühwein, possible snow",
+      "slug": "berlin-in-december-2026",
+      "status": "published"
+    }
+  ]
+}

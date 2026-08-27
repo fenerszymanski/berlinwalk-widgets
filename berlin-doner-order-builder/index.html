@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Berlin Döner Order Builder: Say It Right at the Counter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
+    --yellow:#FFE600; --ink:#1c2a1c; --panel:#ffffff; --bone:#f4f9ec;
+    --line:#e0eccf; --shadow:0 10px 30px rgba(18,61,24,.14);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .wrap{max-width:940px;margin:0 auto;padding:4px}
+  .card{background:var(--panel);border:1px solid #e7eee0;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+  .head{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:20px 22px}
+  .kick{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:700;margin:0 0 6px;font-family:"IBM Plex Mono",monospace}
+  .head h1{margin:0;font-size:22px;font-weight:800;line-height:1.2}
+  .head p{margin:8px 0 0;font-size:14px;color:#e7f3e2;max-width:680px}
+
+  .body{display:grid;grid-template-columns:1fr 340px;gap:0}
+  @media (max-width:760px){.body{grid-template-columns:1fr}}
+
+  .choices{padding:16px 18px;border-right:1px solid var(--line)}
+  @media (max-width:760px){.choices{border-right:none;border-bottom:1px solid var(--line)}}
+  .field{margin:0 0 15px}
+  .field:last-child{margin-bottom:4px}
+  .flabel{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5f7355;font-weight:700;margin:0 0 7px;display:flex;align-items:center;gap:7px}
+  .flabel .de{font-family:"IBM Plex Mono",monospace;color:var(--green);text-transform:none;letter-spacing:0;font-size:11px}
+  .opts{display:flex;gap:7px;flex-wrap:wrap}
+  .opt{border:1px solid var(--line);background:#fff;color:var(--green-deep);font:inherit;font-weight:600;font-size:13px;padding:8px 11px;border-radius:11px;cursor:pointer;transition:.12s;line-height:1.2;text-align:left}
+  .opt small{display:block;font-size:10.5px;color:#84937b;font-weight:600;margin-top:1px}
+  .opt:hover{border-color:var(--lime)}
+  .opt[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+  .opt[aria-pressed="true"] small{color:#cfe6bd}
+
+  .slip{padding:16px 18px;background:var(--bone)}
+  .slipcard{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .sliptop{background:repeating-linear-gradient(90deg,#fff,#fff 8px,#f4f9ec 8px,#f4f9ec 16px);border-bottom:1px dashed #cddab9;padding:11px 14px 10px}
+  .sliptop .tag{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#6d8163;font-weight:700}
+  .say{font-family:"IBM Plex Mono",monospace;font-size:16px;font-weight:600;color:var(--green-deep);margin:6px 0 0;line-height:1.4}
+  .phon{font-size:12.5px;color:#6d8163;font-style:italic;margin:6px 0 0;line-height:1.35}
+  .slipbtn{display:flex;gap:8px;padding:11px 14px 0}
+  .copy{flex:1;border:1px solid var(--green);background:var(--yellow);color:var(--green-deep);font:inherit;font-weight:700;font-size:12.5px;padding:9px 10px;border-radius:10px;cursor:pointer;transition:.12s}
+  .copy:hover{filter:brightness(.97)}
+  .copy.done{background:var(--green);color:#fff;border-color:var(--green)}
+  .gets{padding:12px 14px 6px}
+  .gets h3{margin:0 0 6px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5f7355;font-weight:700}
+  .gets ul{margin:0;padding:0;list-style:none}
+  .gets li{font-size:12.8px;color:#33452f;padding:3px 0 3px 17px;position:relative;line-height:1.4}
+  .gets li::before{content:"";position:absolute;left:2px;top:8px;width:6px;height:6px;border-radius:50%;background:var(--lime)}
+  .price{display:flex;align-items:baseline;justify-content:space-between;padding:11px 14px;border-top:1px dashed #cddab9;margin-top:6px}
+  .price .lab{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5f7355;font-weight:700}
+  .price .val{font-family:"IBM Plex Mono",monospace;font-size:19px;font-weight:700;color:var(--green)}
+  .note{font-size:11.5px;color:#84937b;margin:10px 2px 0;line-height:1.4}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="head">
+      <p class="kick">BerlinWalk • Döner Counter Helper</p>
+      <h1>Build your döner order, then say it right</h1>
+      <p>Pick what you want. The slip on the right gives you the exact German line to say at the counter, roughly how it sounds, and what lands in your hand. Berlin counters move fast, so having the sentence ready helps.</p>
+    </div>
+    <div class="body">
+      <div class="choices" id="choices">
+        <div class="field">
+          <p class="flabel">The form <span class="de">die Form</span></p>
+          <div class="opts" data-group="form" data-single="1"></div>
+        </div>
+        <div class="field">
+          <p class="flabel">The filling <span class="de">die Füllung</span></p>
+          <div class="opts" data-group="meat" data-single="1"></div>
+        </div>
+        <div class="field">
+          <p class="flabel">Salad &amp; onions <span class="de">Salat &amp; Zwiebeln</span></p>
+          <div class="opts" data-group="salad" data-single="1"></div>
+        </div>
+        <div class="field">
+          <p class="flabel">Sauces <span class="de">die Soßen</span></p>
+          <div class="opts" data-group="sauce"></div>
+        </div>
+        <div class="field">
+          <p class="flabel">Extra <span class="de">extra</span></p>
+          <div class="opts" data-group="extra"></div>
+        </div>
+      </div>
+
+      <div class="slip">
+        <div class="slipcard">
+          <div class="sliptop">
+            <span class="tag">Say this at the counter</span>
+            <p class="say" id="say">Einmal Döner, bitte.</p>
+            <p class="phon" id="phon">sounds like: <b>EYE-nmal DUR-ner, BIT-tuh</b></p>
+          </div>
+          <div class="slipbtn">
+            <button class="copy" id="copy" type="button">Copy the German line</button>
+          </div>
+          <div class="gets">
+            <h3>What you get</h3>
+            <ul id="gets"></ul>
+          </div>
+          <div class="price">
+            <span class="lab">Rough price, 2026</span>
+            <span class="val" id="price">€7–8</span>
+          </div>
+        </div>
+        <p class="note">A plain "Einen Döner, bitte" usually gets you chicken or mixed meat with everything. Most kiosks are cash-friendly; many now take cards. Say "zum Mitnehmen" for takeaway or "zum Hieressen" to eat in.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var DATA = {
+    form: [
+      {id:'doner', label:'Döner im Brot', sub:'in flatbread', de:'Döner', phon:'DUR-ner', price:7.5, get:'Grilled meat and salad packed into a folded flatbread pocket.'},
+      {id:'durum', label:'Dürüm', sub:'rolled wrap', de:'Dürüm', phon:'DUE-ruem', price:8, get:'The same filling rolled tightly in a thin yufka wrap, easier to eat on the move.'},
+      {id:'teller', label:'Dönerteller', sub:'plate, no bread', de:'Dönerteller', phon:'DUR-ner-tell-er', price:9.5, get:'Meat, salad and usually fries or rice on a plate. Bigger, sit-down portion.'},
+      {id:'box', label:'Döner-Box', sub:'meat + fries', de:'Döner-Box', phon:'DUR-ner box', price:7, get:'Meat and fries in a box with sauce. No salad-heavy build, just fast fuel.'}
+    ],
+    meat: [
+      {id:'kalb', label:'Kalb', sub:'veal', de:'mit Kalbfleisch', phon:'mit KALB-flysh', price:0.5, get:'Classic Berlin veal döner, the traditional choice.'},
+      {id:'huhn', label:'Hähnchen', sub:'chicken', de:'mit Hähnchen', phon:'mit HANE-shen', price:0, get:'Chicken filling, lighter and very common at Gemüse-style kiosks.'},
+      {id:'gemuese', label:'Vegetarisch', sub:'veg only', de:'vegetarisch', phon:'vedge-eh-TAR-ish', price:-0.5, get:'No meat. Grilled and fresh vegetables, salad and sauce only.'},
+      {id:'falafel', label:'Falafel', sub:'chickpea', de:'mit Falafel', phon:'mit fa-LA-fel', price:0, get:'Fried chickpea balls instead of meat. A safe, filling veggie/vegan base.'}
+    ],
+    salad: [
+      {id:'alles', label:'Mit alles', sub:'everything', de:'mit alles', phon:'mit AL-less', get:'Full salad: lettuce, tomato, cucumber, cabbage, onions.'},
+      {id:'noonion', label:'Ohne Zwiebeln', sub:'no onion', de:'mit alles, ohne Zwiebeln', phon:'...OH-nuh TSVEE-beln', get:'Full salad but no raw onions.'},
+      {id:'onlysalad', label:'Nur Salat', sub:'plain salad', de:'nur mit Salat', phon:'noor mit za-LAHT', get:'Just lettuce and basics, skipping extras like cabbage.'},
+      {id:'nosalad', label:'Ohne Salat', sub:'no salad', de:'ohne Salat', phon:'OH-nuh za-LAHT', get:'Meat and bread only, no salad.'}
+    ],
+    sauce: [
+      {id:'knob', label:'Knoblauch', sub:'garlic', de:'Knoblauch', phon:'k-NOHB-lowkh', get:'Creamy garlic-yogurt sauce.'},
+      {id:'kraeuter', label:'Kräuter', sub:'herb', de:'Kräuter', phon:'KROY-ter', get:'Herb-yogurt sauce, mild and fresh.'},
+      {id:'scharf', label:'Scharf', sub:'hot/chili', de:'scharf', phon:'sharf', get:'Hot chili sauce. Ask for it if you like heat.'},
+      {id:'cocktail', label:'Cocktail', sub:'mild/sweet', de:'Cocktailsoße', phon:'COCK-tail-zoh-suh', get:'Mild, slightly sweet pink sauce.'}
+    ],
+    extra: [
+      {id:'kaese', label:'Feta / Käse', sub:'+ cheese', de:'mit Käse', phon:'mit KAY-zuh', price:0.5, get:'Crumbled feta-style cheese on top.'}
+    ]
+  };
+
+  var state = {form:'doner', meat:'huhn', salad:'alles', sauce:['knob','scharf'], extra:[]};
+
+  var choices = document.getElementById('choices');
+  Object.keys(DATA).forEach(function(group){
+    var host = choices.querySelector('[data-group="'+group+'"]');
+    DATA[group].forEach(function(o){
+      var b = document.createElement('button');
+      b.className='opt'; b.type='button'; b.dataset.id=o.id;
+      b.innerHTML = o.label + (o.sub?'<small>'+o.sub+'</small>':'');
+      b.addEventListener('click', function(){ toggle(group, o.id, host.dataset.single==='1'); });
+      host.appendChild(b);
+    });
+  });
+
+  function toggle(group, id, single){
+    if(single){ state[group]=id; }
+    else {
+      var arr = state[group];
+      var i = arr.indexOf(id);
+      if(i>=0) arr.splice(i,1); else arr.push(id);
+    }
+    render();
+  }
+
+  function find(group, id){ return DATA[group].filter(function(o){return o.id===id;})[0]; }
+
+  function render(){
+    // pressed states
+    Object.keys(DATA).forEach(function(group){
+      var host = choices.querySelector('[data-group="'+group+'"]');
+      host.querySelectorAll('.opt').forEach(function(b){
+        var on = host.dataset.single==='1' ? state[group]===b.dataset.id : state[group].indexOf(b.dataset.id)>=0;
+        b.setAttribute('aria-pressed', on?'true':'false');
+      });
+    });
+
+    var form = find('form', state.form);
+    var meat = find('meat', state.meat);
+    var salad = find('salad', state.salad);
+    var sauces = state.sauce.map(function(id){return find('sauce',id);});
+    var extras = state.extra.map(function(id){return find('extra',id);});
+
+    // German line
+    var parts = [];
+    if(meat.id==='gemuese'){ parts.push('Einmal ' + form.de + ' vegetarisch'); }
+    else { parts.push('Einmal ' + form.de + ' ' + meat.de); }
+    // salad only meaningful when form carries salad; box has no salad build
+    if(form.id!=='box'){ parts.push(salad.de); }
+    if(sauces.length){
+      var names = sauces.map(function(s){return s.de;});
+      parts.push('mit ' + joinDe(names));
+    } else {
+      parts.push('ohne Soße');
+    }
+    if(extras.length){ parts.push(extras.map(function(e){return e.de;}).join(', ')); }
+    var say = parts.join(', ').replace(', mit alles, ohne Zwiebeln', ', mit alles ohne Zwiebeln') + ', bitte.';
+    document.getElementById('say').textContent = say;
+
+    // phonetic line
+    var phonParts = [];
+    phonParts.push('EYE-nmal ' + form.phon + ' ' + (meat.id==='gemuese'?'vedge-eh-TAR-ish':meat.phon.replace(/^mit /,'')));
+    if(sauces.length) phonParts.push('mit ' + sauces.map(function(s){return s.phon;}).join(' & '));
+    document.getElementById('phon').innerHTML = 'sounds like: <b>' + phonParts.join(', ') + ', BIT-tuh</b>';
+
+    // what you get
+    var gets = [];
+    gets.push(form.get);
+    if(meat.get) gets.push(meat.get);
+    if(form.id!=='box') gets.push(salad.get);
+    if(sauces.length) gets.push('Sauce: ' + sauces.map(function(s){return s.label.toLowerCase();}).join(', ') + '.');
+    else gets.push('No sauce.');
+    extras.forEach(function(e){ gets.push(e.get); });
+    var ul = document.getElementById('gets');
+    ul.innerHTML='';
+    gets.forEach(function(g){ var li=document.createElement('li'); li.textContent=g; ul.appendChild(li); });
+
+    // price
+    var base = form.price + (meat.price||0);
+    extras.forEach(function(e){ base += (e.price||0); });
+    var low = Math.max(4, Math.floor(base));
+    var high = low + 1;
+    document.getElementById('price').textContent = '€' + low + '–' + high;
+  }
+
+  function joinDe(names){
+    if(names.length===1) return names[0];
+    return names.slice(0,-1).join(', ') + ' und ' + names[names.length-1];
+  }
+
+  document.getElementById('copy').addEventListener('click', function(){
+    var text = document.getElementById('say').textContent;
+    var btn = this;
+    var ok = function(){ btn.textContent='Copied. Ready to order.'; btn.classList.add('done'); setTimeout(function(){ btn.textContent='Copy the German line'; btn.classList.remove('done'); }, 1800); };
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(ok, ok); }
+    else { var t=document.createElement('textarea'); t.value=text; document.body.appendChild(t); t.select(); try{document.execCommand('copy');}catch(e){} document.body.removeChild(t); ok(); }
+  });
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Connectivity Picker | eSIM, SIM, or WiFi? | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-conn-picker">
+  <style>
+    #bw-conn-picker {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #164a1a;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-lime-soft: #F2F8E8;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+
+    #bw-conn-picker * { box-sizing: border-box; }
+
+    #bw-conn-picker .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    #bw-conn-picker .bw-head {
+      background: var(--bw-green);
+      padding: 16px 20px;
+    }
+
+    #bw-conn-picker .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    #bw-conn-picker .bw-title {
+      margin: 0;
+      color: var(--bw-white);
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    #bw-conn-picker .bw-sub {
+      margin: 6px 0 0;
+      color: #C5E1A5;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    #bw-conn-picker .bw-body {
+      background: #FAFAF5;
+      padding: 18px 20px;
+    }
+
+    #bw-conn-picker .bw-section {
+      margin-bottom: 16px;
+    }
+
+    #bw-conn-picker .bw-section:last-child {
+      margin-bottom: 0;
+    }
+
+    #bw-conn-picker .bw-label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--bw-green);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    #bw-conn-picker .bw-opts {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    #bw-conn-picker .bw-opts.cols-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media (max-width: 520px) {
+      #bw-conn-picker .bw-opts.cols-4 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    #bw-conn-picker .bw-opts button {
+      padding: 12px 10px;
+      border: 1.5px solid var(--bw-border);
+      background: var(--bw-white);
+      color: var(--bw-green);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    #bw-conn-picker .bw-opts button .bw-sublbl {
+      display: block;
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--bw-muted);
+      margin-top: 3px;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    #bw-conn-picker .bw-opts button:hover {
+      border-color: var(--bw-lime);
+      background: var(--bw-lime-soft);
+    }
+
+    #bw-conn-picker .bw-opts button.active {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+      color: var(--bw-yellow);
+    }
+
+    #bw-conn-picker .bw-opts button.active .bw-sublbl {
+      color: #C5E1A5;
+    }
+
+    #bw-conn-picker .bw-result {
+      margin-top: 4px;
+      border: 2px solid var(--bw-green);
+      border-radius: 12px;
+      background: var(--bw-white);
+      overflow: hidden;
+    }
+
+    #bw-conn-picker .bw-result-head {
+      background: var(--bw-green);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    #bw-conn-picker .bw-result-tag {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    #bw-conn-picker .bw-result-pick {
+      color: var(--bw-white);
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    #bw-conn-picker .bw-result-body {
+      padding: 14px 16px;
+    }
+
+    #bw-conn-picker .bw-result-body p {
+      margin: 0 0 10px;
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--bw-text);
+    }
+
+    #bw-conn-picker .bw-result-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    #bw-conn-picker .bw-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 10px 0;
+    }
+
+    @media (max-width: 480px) {
+      #bw-conn-picker .bw-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    #bw-conn-picker .bw-stat {
+      background: var(--bw-lime-soft);
+      padding: 10px 12px;
+      border-radius: 8px;
+    }
+
+    #bw-conn-picker .bw-stat-lbl {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--bw-muted);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    #bw-conn-picker .bw-stat-val {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--bw-green);
+      display: block;
+    }
+
+    #bw-conn-picker .bw-providers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    #bw-conn-picker .bw-prov {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--bw-green);
+    }
+
+    #bw-conn-picker .bw-table-wrap {
+      overflow-x: auto;
+      border-top: 1px solid var(--bw-border);
+      background: var(--bw-white);
+    }
+
+    #bw-conn-picker table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    #bw-conn-picker thead th {
+      background: #FAFAF5;
+      color: var(--bw-muted);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--bw-border);
+    }
+
+    #bw-conn-picker tbody td {
+      padding: 12px 14px;
+      border-bottom: 0.5px solid var(--bw-border);
+      vertical-align: middle;
+      line-height: 1.45;
+      color: var(--bw-text);
+    }
+
+    #bw-conn-picker tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    #bw-conn-picker .bw-opt-name {
+      font-weight: 700;
+      color: var(--bw-text);
+      display: block;
+    }
+
+    #bw-conn-picker .bw-opt-net {
+      font-size: 10px;
+      color: var(--bw-muted);
+      font-weight: 500;
+      display: block;
+      margin-top: 2px;
+    }
+
+    #bw-conn-picker .bw-cost {
+      font-weight: 800;
+      color: var(--bw-green);
+      white-space: nowrap;
+    }
+
+    #bw-conn-picker .bw-yes {
+      color: var(--bw-lime);
+      font-weight: 800;
+    }
+
+    #bw-conn-picker .bw-no {
+      color: #B00020;
+      font-weight: 700;
+    }
+
+    #bw-conn-picker .bw-footer {
+      padding: 11px 20px;
+      background: #FAFAF5;
+      border-top: 1px solid var(--bw-border);
+      font-size: 11px;
+      color: var(--bw-muted);
+      line-height: 1.5;
+    }
+
+    /* Mobile table → cards */
+    @media (max-width: 560px) {
+      #bw-conn-picker table,
+      #bw-conn-picker thead,
+      #bw-conn-picker tbody,
+      #bw-conn-picker tr,
+      #bw-conn-picker th,
+      #bw-conn-picker td { display: block; }
+
+      #bw-conn-picker thead { display: none; }
+
+      #bw-conn-picker .bw-table-wrap {
+        padding: 12px;
+      }
+
+      #bw-conn-picker tbody tr {
+        border: 1px solid var(--bw-border);
+        border-radius: 10px;
+        margin-bottom: 10px;
+        padding: 12px 14px;
+      }
+
+      #bw-conn-picker tbody tr:last-child {
+        margin-bottom: 0;
+      }
+
+      #bw-conn-picker tbody td {
+        border: none;
+        padding: 5px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+      }
+
+      #bw-conn-picker tbody td::before {
+        content: attr(data-label);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: var(--bw-muted);
+        flex-shrink: 0;
+      }
+
+      #bw-conn-picker tbody td[data-label="Option"]::before {
+        display: none;
+      }
+
+      #bw-conn-picker tbody td[data-label="Option"] {
+        justify-content: flex-start;
+        padding-bottom: 8px;
+        margin-bottom: 4px;
+        border-bottom: 1px solid var(--bw-border);
+      }
+    }
+  </style>
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <div class="bw-kicker">📶 Berlin Connectivity Picker</div>
+      <h2 class="bw-title">eSIM, SIM, or WiFi?</h2>
+      <p class="bw-sub">Pick how long you stay and how much data you need. We'll tell you the cheapest path to a working phone in Berlin.</p>
+    </div>
+
+    <div class="bw-body">
+      <div class="bw-section">
+        <label class="bw-label">How long is your trip?</label>
+        <div class="bw-opts cols-4" id="bw-trip">
+          <button data-val="weekend">Weekend<span class="bw-sublbl">1–2 days</span></button>
+          <button data-val="short">Short trip<span class="bw-sublbl">3–7 days</span></button>
+          <button data-val="long">Longer stay<span class="bw-sublbl">1–4 weeks</span></button>
+          <button data-val="month">Month+<span class="bw-sublbl">30+ days</span></button>
+        </div>
+      </div>
+
+      <div class="bw-section">
+        <label class="bw-label">What do you need?</label>
+        <div class="bw-opts" id="bw-need">
+          <button data-val="data">Just data<span class="bw-sublbl">Maps, WhatsApp, sightseeing</span></button>
+          <button data-val="number">Data + German number<span class="bw-sublbl">Calls to local numbers</span></button>
+          <button data-val="heavy">Heavy data<span class="bw-sublbl">Streaming, hotspot, work</span></button>
+          <button data-val="minimal">Barely any<span class="bw-sublbl">Budget, WiFi is fine</span></button>
+        </div>
+      </div>
+
+      <div class="bw-result" id="bw-result">
+        <div class="bw-result-head">
+          <span class="bw-result-tag">Our pick for you</span>
+          <span class="bw-result-pick" id="bw-pick">Pick options above</span>
+        </div>
+        <div class="bw-result-body">
+          <p id="bw-why">Choose a trip length and what you need. We'll match it to the best option for Berlin in 2026.</p>
+          <div class="bw-stats" id="bw-stats" style="display:none;">
+            <div class="bw-stat">
+              <span class="bw-stat-lbl">Typical cost</span>
+              <span class="bw-stat-val" id="bw-cost">—</span>
+            </div>
+            <div class="bw-stat">
+              <span class="bw-stat-lbl">Setup time</span>
+              <span class="bw-stat-val" id="bw-setup">—</span>
+            </div>
+            <div class="bw-stat">
+              <span class="bw-stat-lbl">German number</span>
+              <span class="bw-stat-val" id="bw-num">—</span>
+            </div>
+          </div>
+          <div id="bw-prov-wrap" style="display:none;">
+            <span class="bw-stat-lbl" style="margin-bottom:6px;">Top providers</span>
+            <div class="bw-providers" id="bw-providers"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bw-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Option</th>
+            <th>Typical cost</th>
+            <th>Setup</th>
+            <th>German #</th>
+            <th>Best for</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Option">
+              <span class="bw-opt-name">Travel eSIM</span>
+              <span class="bw-opt-net">Airalo · Saily · Holafly · Nomad</span>
+            </td>
+            <td data-label="Typical cost"><span class="bw-cost">€4–€18</span><br><span class="bw-opt-net">1–5 GB</span></td>
+            <td data-label="Setup">5 min online</td>
+            <td data-label="German #"><span class="bw-no">No</span></td>
+            <td data-label="Best for">Short trips, smooth arrival</td>
+          </tr>
+          <tr>
+            <td data-label="Option">
+              <span class="bw-opt-name">German prepaid SIM</span>
+              <span class="bw-opt-net">Aldi Talk · Lidl Connect · CallYa · Congstar</span>
+            </td>
+            <td data-label="Typical cost"><span class="bw-cost">€9–€15</span><br><span class="bw-opt-net">per 4 weeks · 10–25 GB</span></td>
+            <td data-label="Setup">15–60 min (ID verify)</td>
+            <td data-label="German #"><span class="bw-yes">Yes</span></td>
+            <td data-label="Best for">2+ week stays, calls to Germany</td>
+          </tr>
+          <tr>
+            <td data-label="Option">
+              <span class="bw-opt-name">Free WiFi only</span>
+              <span class="bw-opt-net">BVG · Freifunk · cafes · hotels</span>
+            </td>
+            <td data-label="Typical cost"><span class="bw-cost">€0</span></td>
+            <td data-label="Setup">None</td>
+            <td data-label="German #"><span class="bw-no">No</span></td>
+            <td data-label="Best for">Tight budget, central sightseeing</td>
+          </tr>
+          <tr>
+            <td data-label="Option">
+              <span class="bw-opt-name">Airport SIM kiosk</span>
+              <span class="bw-opt-net">BER arrivals hall</span>
+            </td>
+            <td data-label="Typical cost"><span class="bw-cost">€15–€30</span><br><span class="bw-opt-net">tourist pricing</span></td>
+            <td data-label="Setup">10–20 min queue</td>
+            <td data-label="German #"><span class="bw-yes">Yes</span></td>
+            <td data-label="Best for">Forgot to plan ahead</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="bw-footer">
+      <strong>Note:</strong> Prices and plans verified May 2026. 5G is live across Telekom, Vodafone, and O2 in Berlin. EU roaming is included in every German prepaid plan by law.
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    var root = document.getElementById('bw-conn-picker');
+    if (!root) return;
+
+    var state = { trip: null, need: null };
+
+    var PICKS = {
+      esim: {
+        name: 'Travel eSIM',
+        why: 'For a short Berlin trip, a travel eSIM is the path of least resistance. Buy online the night before, scan a QR code, land at BER with Google Maps already working. No kiosk queue, no German paperwork, and roughly half the price of an airport SIM.',
+        cost: '€4–€15',
+        setup: '5 min',
+        number: 'No',
+        providers: ['Airalo', 'Saily', 'Holafly', 'Nomad']
+      },
+      esim_heavy: {
+        name: 'Travel eSIM (unlimited)',
+        why: 'If you stream, tether, or work from the road, a fair-use-cap-free unlimited eSIM (Holafly) is the cleanest option. Pricier than the gigabyte plans, but no anxiety about going over.',
+        cost: '€6–€9 / day',
+        setup: '5 min',
+        number: 'No',
+        providers: ['Holafly Unlimited', 'Airalo 10 GB+', 'Saily 10 GB+']
+      },
+      prepaid: {
+        name: 'German prepaid SIM',
+        why: 'For 2 weeks or more, a supermarket prepaid SIM is cheaper per gigabyte and gives you a real German number for restaurant bookings, doctor visits, and ride apps. EU roaming is included by law, so it doubles as your travel SIM if you keep moving.',
+        cost: '€9–€15 / 4 wks',
+        setup: '15–60 min',
+        number: 'Yes',
+        providers: ['Aldi Talk', 'Lidl Connect', 'Vodafone CallYa', 'Congstar']
+      },
+      prepaid_long: {
+        name: 'German prepaid SIM',
+        why: 'For a month or longer, this is the obvious answer. Cheap per gigabyte, German phone number, top-up monthly. Lidl Connect and Aldi Talk are the value picks. Congstar is the coverage pick if you also travel outside Berlin.',
+        cost: '€9–€15 / month',
+        setup: '15–60 min',
+        number: 'Yes',
+        providers: ['Lidl Connect', 'Aldi Talk', 'Congstar', 'Vodafone CallYa']
+      },
+      wifi: {
+        name: 'Free WiFi only',
+        why: 'Berlin is one of the easier European cities to do WiFi-only. BVG-WiFi at every U-Bahn station, Freifunk in 1,000+ public spots, free WiFi on Museum Island, in most cafes, and in every hotel. Download Google Maps offline and treat each U-Bahn station as a sync point.',
+        cost: '€0',
+        setup: 'None',
+        number: 'No',
+        providers: ['BVG-WiFi', 'Freifunk', 'Deutsche Bahn WiFi', 'Hotel / cafe WiFi']
+      }
+    };
+
+    function pick(trip, need) {
+      if (!trip || !need) return null;
+      if (need === 'minimal') return PICKS.wifi;
+      if (trip === 'month') return PICKS.prepaid_long;
+      if (trip === 'long' && need === 'number') return PICKS.prepaid;
+      if (trip === 'long' && need === 'heavy') return PICKS.esim_heavy;
+      if (trip === 'long' && need === 'data') return PICKS.prepaid;
+      if (need === 'number') return PICKS.prepaid;
+      if (need === 'heavy') return PICKS.esim_heavy;
+      return PICKS.esim;
+    }
+
+    function render() {
+      var p = pick(state.trip, state.need);
+      var pickEl = document.getElementById('bw-pick');
+      var whyEl = document.getElementById('bw-why');
+      var statsEl = document.getElementById('bw-stats');
+      var provWrap = document.getElementById('bw-prov-wrap');
+      var provEl = document.getElementById('bw-providers');
+
+      if (!p) {
+        pickEl.textContent = 'Pick options above';
+        whyEl.textContent = 'Choose a trip length and what you need. We will match it to the best option for Berlin in 2026.';
+        statsEl.style.display = 'none';
+        provWrap.style.display = 'none';
+        return;
+      }
+
+      pickEl.textContent = p.name;
+      whyEl.textContent = p.why;
+      document.getElementById('bw-cost').textContent = p.cost;
+      document.getElementById('bw-setup').textContent = p.setup;
+      document.getElementById('bw-num').textContent = p.number;
+      statsEl.style.display = 'grid';
+      provEl.innerHTML = p.providers.map(function(n){
+        return '<span class="bw-prov">' + n + '</span>';
+      }).join('');
+      provWrap.style.display = 'block';
+
+      // bubble height so parent iframe (Wix) can auto-resize via brand.js
+      if (typeof window.postMessage === 'function') {
+        try {
+          parent.postMessage({ type: 'bw-resize', height: document.body.scrollHeight }, '*');
+        } catch (e) {}
+      }
+    }
+
+    function bindGroup(groupId, key) {
+      var group = document.getElementById(groupId);
+      if (!group) return;
+      group.addEventListener('click', function(e) {
+        var btn = e.target.closest('button[data-val]');
+        if (!btn) return;
+        var buttons = group.querySelectorAll('button');
+        for (var i = 0; i < buttons.length; i++) {
+          buttons[i].classList.remove('active');
+        }
+        btn.classList.add('active');
+        state[key] = btn.getAttribute('data-val');
+        render();
+      });
+    }
+
+    bindGroup('bw-trip', 'trip');
+    bindGroup('bw-need', 'need');
+  })();
+  </script>
+</div>
+</body>
+</html>

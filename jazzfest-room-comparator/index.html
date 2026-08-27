@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jazzfest Berlin: Comparator Status</title>
+  <link rel="icon" href="data:," />
+  <meta name="description" content="A deliberately data-unavailable planning state for Jazzfest Berlin 2026. It shows what must be confirmed before a room comparator can be responsible." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/brand.css" />
+  <style>
+    :root {
+      --green: #1B5E20;
+      --green-deep: #123D18;
+      --lime: #7CB342;
+      --yellow: #FFE600;
+      --cream: #FAFAF5;
+      --paper: #FFFFFF;
+      --ink: #212121;
+      --muted: #576357;
+      --line: #D7E4D1;
+      --off: #A84A38;
+      --off-bg: #FFF6F2;
+      --shadow: 0 12px 29px rgba(18, 61, 24, .1);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { background: transparent; color: var(--ink); font-family: Montserrat, Arial, sans-serif; line-height: 1.5; }
+    button, a { font: inherit; }
+    button:focus-visible, a:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+    .jazz-tool { max-width: 720px; margin: 0 auto; padding: 6px; }
+    .sheet { overflow: hidden; border: 1px solid var(--line); border-radius: 4px 4px 20px 20px; background: var(--cream); box-shadow: var(--shadow); }
+    .status-strip { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 16px; border-bottom: 1px solid #EDC4BA; background: var(--off-bg); color: var(--off); font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .status-dot { width: 8px; height: 8px; flex: 0 0 auto; border-radius: 50%; background: var(--off); box-shadow: 0 0 0 4px rgba(168, 74, 56, .12); }
+    .title-area { padding: 21px 19px 18px; border-bottom: 1px solid var(--line); background: var(--paper); }
+    .eyebrow { margin: 0 0 7px; color: var(--green); font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    h1 { margin: 0; max-width: 570px; color: var(--green-deep); font-family: "Libre Baskerville", Georgia, serif; font-size: clamp(21px, 5vw, 29px); line-height: 1.22; }
+    .title-area p { max-width: 610px; margin: 9px 0 0; color: var(--muted); font-size: 13px; }
+    .date-chip { display: inline-block; margin-top: 13px; padding: 6px 10px; border: 1px solid #BED5B5; border-radius: 999px; background: #F1F7EC; color: var(--green-deep); font-size: 11px; font-weight: 800; }
+    .main { padding: 18px 19px 20px; }
+    .lock-message { padding: 13px 14px; border: 1px dashed #CFA79D; border-radius: 12px; background: var(--off-bg); color: #5B342B; font-size: 12px; line-height: 1.5; }
+    .lock-message b { color: #7C2F22; }
+    .switch-label { display: block; margin: 20px 0 8px; color: var(--green-deep); font-size: 13px; font-weight: 800; }
+    .switch { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
+    .switch button { min-height: 58px; padding: 10px 11px; cursor: pointer; border: 1.5px solid var(--line); border-radius: 11px; background: var(--paper); color: var(--green-deep); font-size: 12px; font-weight: 800; text-align: left; transition: border-color .15s, background .15s, transform .15s; }
+    .switch button:hover { border-color: var(--lime); transform: translateY(-1px); }
+    .switch button[aria-pressed="true"] { border-color: var(--green); background: #EAF4E4; box-shadow: inset 0 0 0 1px var(--green); }
+    .switch small { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; font-weight: 600; line-height: 1.3; }
+    .brief { margin-top: 18px; border: 1px solid var(--line); border-radius: 13px; background: var(--paper); overflow: hidden; }
+    .brief-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; padding: 11px 13px; background: var(--green); color: #fff; }
+    .brief-head h3 { margin: 0; font-size: 14px; }
+    .brief-head span { color: var(--yellow); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .brief-body { padding: 14px; }
+    .brief-body p { margin: 0; color: #334033; font-size: 12.5px; }
+    .checklist { display: grid; gap: 8px; margin: 13px 0 0; padding: 0; list-style: none; }
+    .checklist li { display: grid; grid-template-columns: 19px 1fr; gap: 9px; align-items: start; padding: 9px 10px; border: 1px solid var(--line); border-radius: 9px; background: #FCFDFB; color: #384638; font-size: 11.5px; }
+    .check { display: grid; place-items: center; width: 19px; height: 19px; border: 1.5px solid #A2B89A; border-radius: 50%; color: var(--green); font-size: 12px; font-weight: 800; }
+    .cannot { margin: 15px 0 0; padding: 11px 12px; border-left: 4px solid var(--yellow); background: #FFFCE5; color: #3C3B20; font-size: 11.5px; }
+    .source { margin: 16px 0 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+    .source a { color: var(--green); font-weight: 800; }
+    @media (max-width: 460px) {
+      .jazz-tool { padding: 0; }
+      .sheet { border-radius: 0 0 14px 14px; }
+      .status-strip, .title-area, .main { padding-left: 13px; padding-right: 13px; }
+      .switch { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="jazz-tool">
+    <section class="sheet" aria-labelledby="jazz-title">
+      <div class="status-strip"><span><span class="status-dot" aria-hidden="true"></span> Comparator locked</span><span>programme data unavailable</span></div>
+      <header class="title-area">
+        <p class="eyebrow">Jazzfest Berlin 2026</p>
+        <h1 id="jazz-title">A room comparator needs rooms first.</h1>
+        <p>The festival window is confirmed, but the 2026 programme is not published yet. A ranking now would invent the details that matter.</p>
+        <span class="date-chip">29 October–1 November 2026</span>
+      </header>
+
+      <div class="main">
+        <p class="lock-message"><b>Status:</b> the official festival page says that the programme will appear in September. Until then, this is a planning brief, not a venue, artist, ticket or room comparison.</p>
+
+        <span class="switch-label">Choose the listening lens you will bring to the released programme</span>
+        <div class="switch" role="group" aria-label="Listener lens">
+          <button type="button" data-lens="first" aria-pressed="true">It is my first jazz festival<small>Start with clarity and a lower-friction first choice.</small></button>
+          <button type="button" data-lens="experienced" aria-pressed="false">I know what I want to hear<small>Start with exact artists, formats and schedule conflicts.</small></button>
+        </div>
+
+        <section class="brief" aria-live="polite" aria-labelledby="brief-title">
+          <div class="brief-head"><h3 id="brief-title">What to confirm when the programme arrives</h3><span id="lens-status">First-time lens</span></div>
+          <div class="brief-body" id="brief-body"></div>
+        </section>
+
+        <p class="cannot"><strong>This tool intentionally does not compare:</strong> rooms, venues, artists, capacity, seating, ticket prices, finish times or historic editions. Those items need a current official programme.</p>
+        <p class="source">Watch the <a href="https://www.berlinerfestspiele.de/en/jazzfest-berlin/programm/2026/jazzfest-berlin-2026" target="_blank" rel="noopener">official Jazzfest Berlin 2026 page</a> and the <a href="https://www.berlinerfestspiele.de/en/jazzfest-berlin" target="_blank" rel="noopener">official festival page</a> for the programme release.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const briefs = {
+        first: {
+          label: 'First-time lens',
+          intro: 'Do not start by guessing which room feels easiest. When individual listings appear, use this order:',
+          checks: [
+            'Pick one named performance or format that genuinely interests you.',
+            'Confirm the exact venue and whether the audience arrangement is stated.',
+            'Check the start time, expected running order and any late-entry rule on that listing.',
+            'Confirm the ticket route, price and availability for that specific event.',
+            'Read language, accessibility and practical arrival information on the official page.'
+          ]
+        },
+        experienced: {
+          label: 'Intent-led lens',
+          intro: 'Use your taste as the filter only after the official listings exist. Check these decision facts in order:',
+          checks: [
+            'Identify the exact artist, ensemble or format, not a general festival label.',
+            'Confirm its specific venue and the event’s stated audience setup.',
+            'Compare official start and end information against your other festival plans.',
+            'Check ticket terms, availability and any event-specific access conditions.',
+            'Keep a second official listing as a backup, without assuming that it shares the same format or access.'
+          ]
+        }
+      };
+      const buttons = document.querySelectorAll('.switch button');
+      const status = document.getElementById('lens-status');
+      const body = document.getElementById('brief-body');
+
+      function render(lens) {
+        const brief = briefs[lens];
+        buttons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.lens === lens)));
+        status.textContent = brief.label;
+        body.innerHTML = `<p>${brief.intro}</p><ol class="checklist">${brief.checks.map((check) => `<li><span class="check" aria-hidden="true">?</span><span>${check}</span></li>`).join('')}</ol>`;
+      }
+      buttons.forEach((button) => button.addEventListener('click', () => render(button.dataset.lens)));
+      render('first');
+    }());
+  </script>
+  <script src="../js/brand.js"></script>
+</body>
+</html>

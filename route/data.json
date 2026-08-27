@@ -1,0 +1,128 @@
+{
+  "image": {
+    "src": "https://fenerszymanski.github.io/berlinwalk-widgets/route/assets/berlin-mitte-illustration-720w.webp",
+    "srcMedium": "https://fenerszymanski.github.io/berlinwalk-widgets/route/assets/berlin-mitte-illustration-960w.webp",
+    "src2x": "https://fenerszymanski.github.io/berlinwalk-widgets/route/assets/berlin-mitte-illustration-1200w.webp",
+    "alt": "Illustrated map of central Berlin Mitte showing the BerlinWalk tour route from Alexanderplatz to Hackescher Markt",
+    "width": 1200,
+    "height": 670,
+    "aspectRatio": "16:9"
+  },
+  "stops": [
+    {
+      "id": 1,
+      "name": "World Clock",
+      "location": "Alexanderplatz",
+      "x": 97,
+      "y": 37,
+      "hook": "Where the tour begins. A Cold War-era monument under which generations of Berliners have met without giving an address.",
+      "image": null
+    },
+    {
+      "id": 2,
+      "name": "TV Tower",
+      "location": "Fernsehturm",
+      "x": 82,
+      "y": 36,
+      "hook": "East Berlin's tallest statement. Built in 1969 to outshine the West, with a reflective cross the Pope's Revenge story explains.",
+      "image": null
+    },
+    {
+      "id": 3,
+      "name": "Rotes Rathaus",
+      "location": "Berlin's Town Hall",
+      "x": 89,
+      "y": 47,
+      "hook": "Red brick that has watched Berlin become Berlin since 1869. Empire, war, division, reunification — all from one balcony.",
+      "image": null
+    },
+    {
+      "id": 4,
+      "name": "Neptun Brunnen",
+      "location": "Neptune Fountain",
+      "x": 73,
+      "y": 42,
+      "hook": "Four river goddesses around a sea god in the middle of Berlin. The detail no one notices until you stop to look.",
+      "image": null
+    },
+    {
+      "id": 5,
+      "name": "St. Mary's Church",
+      "location": "Marienkirche",
+      "x": 72,
+      "y": 35,
+      "hook": "Berlin's second oldest church, with a medieval dance-of-death fresco inside that survived everything the 20th century threw at it.",
+      "image": null
+    },
+    {
+      "id": 6,
+      "name": "Marx-Engels Forum",
+      "location": "The bronze meeting",
+      "x": 76,
+      "y": 58,
+      "hook": "Two seated philosophers, a bit weathered. The plaza around them tells a longer story than the statue itself.",
+      "image": null
+    },
+    {
+      "id": 7,
+      "name": "Humboldt Forum",
+      "location": "Berlin City Palace",
+      "x": 55,
+      "y": 80,
+      "hook": "Demolished, then rebuilt as a near-replica 60 years later. The most controversial reconstruction in modern Berlin.",
+      "image": null
+    },
+    {
+      "id": 8,
+      "name": "Lustgarten",
+      "location": "Pleasure Garden",
+      "x": 38,
+      "y": 72,
+      "hook": "Royal park, military parade ground, Nazi rally site, and finally a garden again. Same lawn, very different uses.",
+      "image": null
+    },
+    {
+      "id": 9,
+      "name": "Berliner Dom",
+      "location": "Berlin Cathedral",
+      "x": 46,
+      "y": 64,
+      "hook": "Prussian ambition in stone. The Hohenzollern family vault below, the green dome above, the bullet holes still on the facade.",
+      "image": null
+    },
+    {
+      "id": 10,
+      "name": "Altes Museum",
+      "location": "Old Museum",
+      "x": 37,
+      "y": 56,
+      "hook": "Berlin's first public museum, 1830. Eighteen Ionic columns built to convince a young city it deserved to keep ancient treasures.",
+      "image": null
+    },
+    {
+      "id": 11,
+      "name": "Neues Museum & Alte Nationalgalerie",
+      "location": "Museum Island",
+      "x": 31,
+      "y": 46,
+      "hook": "Nefertiti's home and a temple of 19th-century German painting, side by side. UNESCO-protected, hard-won, fully restored.",
+      "image": null
+    },
+    {
+      "id": 12,
+      "name": "Hackescher Markt",
+      "location": "End of the tour",
+      "x": 25,
+      "y": 10,
+      "hook": "Where the tour ends and Berlin's most photogenic courtyards begin. Coffee, S-Bahn, your next adventure.",
+      "image": null
+    }
+  ],
+  "meta": {
+    "stopCount": 12,
+    "duration": "~2 hours",
+    "distance": "~3 km",
+    "startStop": 1,
+    "endStop": 12
+  }
+}

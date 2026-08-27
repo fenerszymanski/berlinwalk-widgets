@@ -1,0 +1,417 @@
+{
+  "version": "2.2",
+  "title": "KitKat Club Door Test",
+  "lead": "Answer honestly about your outfit and attitude and get a fictional door verdict.",
+  "thresholds": {
+    "goHomeMax": -5,
+    "notTonightMax": 1,
+    "straightInMin": 10
+  },
+  "baseScore": {
+    "A": 3,
+    "B": 1,
+    "C": -1,
+    "D": -3
+  },
+  "nights": {
+    "hard_fetish": {
+      "id": "hard_fetish",
+      "title": "A hard fetish night",
+      "sub": "Saturday-style. Full latex and leather energy expected.",
+      "weights": {
+        "outfit": 1.5,
+        "effort": 1.5,
+        "attitude": 1,
+        "knowledge": 0.75,
+        "respect": 1
+      }
+    },
+    "mixed_club": {
+      "id": "mixed_club",
+      "title": "A mixed club night",
+      "sub": "Weeknight-style. Broad crowd, still a real dress code.",
+      "weights": {
+        "outfit": 1,
+        "effort": 1,
+        "attitude": 1,
+        "knowledge": 1,
+        "respect": 1
+      }
+    },
+    "techno": {
+      "id": "techno",
+      "title": "A techno-leaning night",
+      "sub": "Music-first crowd. Attitude and know-how matter more than the outfit.",
+      "weights": {
+        "outfit": 0.75,
+        "effort": 0.75,
+        "attitude": 1.5,
+        "knowledge": 1.5,
+        "respect": 1
+      }
+    }
+  },
+  "questions": [
+    {
+      "id": "outfit",
+      "category": "outfit",
+      "question": "What's under your coat tonight?",
+      "options": [
+        {
+          "id": "outfit-latex",
+          "letter": "A",
+          "text": "Full latex or leather, considered head to toe.",
+          "image": "assets/outfit_latex.png"
+        },
+        {
+          "id": "outfit-piece",
+          "letter": "B",
+          "text": "One strong piece, harness or vinyl, over dark basics.",
+          "image": "assets/outfit_piece.png"
+        },
+        {
+          "id": "outfit-black",
+          "letter": "C",
+          "text": "All black, smart, nothing fetish.",
+          "image": "assets/outfit_black.png"
+        },
+        {
+          "id": "outfit-jeans",
+          "letter": "D",
+          "text": "Jeans and a going-out top.",
+          "image": "assets/outfit_jeans.png"
+        }
+      ],
+      "audio": "assets/audio/dresscode_bitte.mp3"
+    },
+    {
+      "id": "shoes",
+      "category": "outfit",
+      "question": "What's on your feet?",
+      "options": [
+        {
+          "id": "shoes-built",
+          "letter": "A",
+          "text": "Boots or heels built for the outfit.",
+          "image": "assets/shoes_built.png"
+        },
+        {
+          "id": "shoes-plain",
+          "letter": "B",
+          "text": "Plain black boots, nothing special.",
+          "image": "assets/shoes_plain.png"
+        },
+        {
+          "id": "shoes-sneaker",
+          "letter": "C",
+          "text": "Clean sneakers.",
+          "image": "assets/shoes_sneaker.png"
+        },
+        {
+          "id": "shoes-worn",
+          "letter": "D",
+          "text": "Trainers you wore sightseeing all day.",
+          "image": "assets/shoes_worn.png"
+        }
+      ]
+    },
+    {
+      "id": "effort",
+      "category": "effort",
+      "question": "How long did you spend getting ready?",
+      "options": [
+        {
+          "id": "effort-weeks",
+          "letter": "A",
+          "text": "I planned this outfit for weeks.",
+          "image": "assets/effort_weeks.png"
+        },
+        {
+          "id": "effort-thought",
+          "letter": "B",
+          "text": "Real thought went into tonight specifically.",
+          "image": "assets/effort_thought.png"
+        },
+        {
+          "id": "effort-throw",
+          "letter": "C",
+          "text": "I threw on my going-out clothes.",
+          "image": "assets/effort_throw.png"
+        },
+        {
+          "id": "effort-plane",
+          "letter": "D",
+          "text": "I'm still in what I wore on the plane.",
+          "image": "assets/effort_plane.png"
+        }
+      ]
+    },
+    {
+      "id": "attitude",
+      "category": "attitude",
+      "question": "Where's your head at in the queue?",
+      "options": [
+        {
+          "id": "attitude-calm",
+          "letter": "A",
+          "text": "Calm, quiet, taking the night seriously.",
+          "image": "assets/attitude_calm.png"
+        },
+        {
+          "id": "attitude-nervous",
+          "letter": "B",
+          "text": "A little nervous but present.",
+          "image": "assets/attitude_nervous.png"
+        },
+        {
+          "id": "attitude-loud",
+          "letter": "C",
+          "text": "Loud with the group, phone out.",
+          "image": "assets/attitude_loud_v2.png"
+        },
+        {
+          "id": "attitude-filming",
+          "letter": "D",
+          "text": "Filming the queue for a story.",
+          "image": "assets/attitude_filming.png"
+        }
+      ]
+    },
+    {
+      "id": "phone",
+      "category": "attitude",
+      "question": "The door asks about your phone.",
+      "options": [
+        {
+          "id": "phone-away",
+          "letter": "A",
+          "text": "It's already in my bag, off.",
+          "image": "assets/phone_away.png"
+        },
+        {
+          "id": "phone-hand",
+          "letter": "B",
+          "text": "I hand it over without being asked twice.",
+          "image": "assets/phone_hand.png"
+        },
+        {
+          "id": "phone-pocket",
+          "letter": "C",
+          "text": "I ask if I can just keep it in my pocket.",
+          "image": "assets/phone_pocket.png"
+        },
+        {
+          "id": "phone-quick",
+          "letter": "D",
+          "text": "I say I'll only use it for one quick photo.",
+          "image": "assets/phone_quick.png"
+        }
+      ],
+      "audio": "assets/audio/kamera_abkleben.mp3"
+    },
+    {
+      "id": "group",
+      "category": "attitude",
+      "question": "Who's with you tonight?",
+      "options": [
+        {
+          "id": "group-solo",
+          "letter": "A",
+          "text": "Alone, or with one person who gets the night.",
+          "image": "assets/group_solo.png"
+        },
+        {
+          "id": "group-small",
+          "letter": "B",
+          "text": "A small group, everyone dressed and serious.",
+          "image": "assets/group_small.png"
+        },
+        {
+          "id": "group-five",
+          "letter": "C",
+          "text": "A group of five, mixed effort.",
+          "image": "assets/group_five.png"
+        },
+        {
+          "id": "group-stag",
+          "letter": "D",
+          "text": "A stag or hen party, still in matching shirts.",
+          "image": "assets/group_stag.png"
+        }
+      ]
+    },
+    {
+      "id": "knowledge",
+      "category": "knowledge",
+      "question": "What's actually on tonight?",
+      "scene": "assets/knowledge_scene.png",
+      "options": [
+        {
+          "id": "knowledge-checked",
+          "letter": "A",
+          "text": "I checked the program and dressed for this specific night."
+        },
+        {
+          "id": "knowledge-roughly",
+          "letter": "B",
+          "text": "I know roughly what kind of night it is."
+        },
+        {
+          "id": "knowledge-name",
+          "letter": "C",
+          "text": "I know it's KitKat, that's it."
+        },
+        {
+          "id": "knowledge-same",
+          "letter": "D",
+          "text": "I thought every night here was the same."
+        }
+      ],
+      "audio": "assets/audio/wen_kennst_du.mp3"
+    },
+    {
+      "id": "response",
+      "category": "knowledge",
+      "question": "The door asks you something short and direct.",
+      "scene": "assets/response_scene.png",
+      "options": [
+        {
+          "id": "response-honest",
+          "letter": "A",
+          "text": "A short, honest, direct answer."
+        },
+        {
+          "id": "response-rehearsed",
+          "letter": "B",
+          "text": "A little rehearsed, but genuine."
+        },
+        {
+          "id": "response-overexplain",
+          "letter": "C",
+          "text": "I overexplain and joke nervously."
+        },
+        {
+          "id": "response-defensive",
+          "letter": "D",
+          "text": "I get defensive and argue back."
+        }
+      ]
+    },
+    {
+      "id": "consent",
+      "category": "respect",
+      "question": "Someone in the queue asks you to move over.",
+      "scene": "assets/consent_scene_v2.png",
+      "options": [
+        {
+          "id": "consent-move",
+          "letter": "A",
+          "text": "I move immediately, no fuss."
+        },
+        {
+          "id": "consent-ask",
+          "letter": "B",
+          "text": "I ask politely, then move."
+        },
+        {
+          "id": "consent-hesitate",
+          "letter": "C",
+          "text": "I hesitate, checking who's watching."
+        },
+        {
+          "id": "consent-ignore",
+          "letter": "D",
+          "text": "I ignore them and keep talking."
+        }
+      ]
+    }
+  ],
+  "results": {
+    "straight_in": {
+      "title": "Straight in.",
+      "message": "The fictional door barely pauses on you tonight. Outfit, effort and attitude all line up.",
+      "fix": "Keep doing exactly this. Commitment reads instantly at the door.",
+      "scene": "assets/verdict_straight_in.png",
+      "audio": "assets/audio/viel_spass.mp3"
+    },
+    "in_after_look": {
+      "title": "In, after a long look.",
+      "message": "The fictional bouncer takes a second look, then waves you through.",
+      "fix": "One more committed choice, outfit or attitude, would have made this an easy yes.",
+      "scene": "assets/verdict_in_after_look.png"
+    },
+    "not_tonight": {
+      "title": "Not tonight.",
+      "message": "The fictional door reads tonight as not your night. Try again with one real change.",
+      "fix": "Pick one strong element, latex, leather or a real costume, and commit to it fully.",
+      "scene": "assets/verdict_not_tonight.png",
+      "audio": "assets/audio/heute_leider_nicht.mp3"
+    },
+    "go_home_change": {
+      "title": "Go home and change.",
+      "message": "The fictional door closes fast. Too many street-clothes signals at once.",
+      "fix": "Half-measures in street shoes are the fastest no. Start over with one committed look.",
+      "scene": "assets/verdict_go_home.png",
+      "audio": "assets/audio/so_nicht.mp3"
+    }
+  },
+  "resultPersonas": {
+    "straight_in": [
+      {
+        "id": "the-regular",
+        "title": "The Regular",
+        "reason": "You dressed like you already know this room."
+      },
+      {
+        "id": "the-committed",
+        "title": "The Committed",
+        "reason": "One strong look, worn with total confidence."
+      }
+    ],
+    "in_after_look": [
+      {
+        "id": "the-close-call",
+        "title": "The Close Call",
+        "reason": "Good instincts, one half-measure kept it from being easy."
+      },
+      {
+        "id": "the-right-idea",
+        "title": "The Right Idea",
+        "reason": "The look was close. The door gave you the benefit of the doubt."
+      }
+    ],
+    "not_tonight": [
+      {
+        "id": "the-near-miss",
+        "title": "The Near Miss",
+        "reason": "A few good calls were not enough to carry the whole night."
+      },
+      {
+        "id": "the-mixed-signal",
+        "title": "The Mixed Signal",
+        "reason": "Part of the outfit said KitKat, the rest said tourist."
+      }
+    ],
+    "go_home_change": [
+      {
+        "id": "the-wrong-night",
+        "title": "The Wrong Night",
+        "reason": "Street clothes, street shoes, street energy. Not this door."
+      },
+      {
+        "id": "the-unprepared",
+        "title": "The Unprepared",
+        "reason": "Zero commitment to the night's actual dress code."
+      }
+    ]
+  },
+  "assets": {
+    "backdrop": "assets/entrance.png",
+    "characters": {
+      "idle": "assets/doorstaff_idle.png",
+      "suspicious": "assets/doorstaff_suspicious.png",
+      "approving": "assets/doorstaff_approving.png"
+    },
+    "loop": "assets/audio/club_loop.mp3"
+  }
+}

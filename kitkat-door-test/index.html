@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KitKat Club Door Test</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --kk-black: #0A0002;
+    --kk-panel: #150207;
+    --kk-red: #E4002B;
+    --kk-red-dim: rgba(228, 0, 43, 0.24);
+    --kk-neon: #FF2ECC;
+    --kk-neon-dim: rgba(255, 46, 204, 0.22);
+    --kk-white: #F5EDEF;
+    --kk-gray: #B8A2A8;
+    --kk-yellow: #FFE600;
+    --kk-green-text: #1B5E20;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: var(--kk-black);
+    color: var(--kk-white);
+    font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* The live page deliberately uses a fixed-height game device. Once every
+     screen fits that device, do not leave a second scroll surface inside it. */
+  html.kk-embedded,
+  html.kk-embedded body {
+    overflow: hidden;
+  }
+
+  body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    background:
+      radial-gradient(ellipse at top, var(--kk-red-dim), transparent 60%),
+      radial-gradient(ellipse at bottom, var(--kk-neon-dim), transparent 55%),
+      var(--kk-black);
+  }
+
+  /* ------- Scene layers (backdrop + character), Berghain-style ------- */
+  .kk-backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .kk-backdrop img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 1;
+    filter: brightness(1.72) contrast(1.04) saturate(1.1);
+    transition: opacity 0.4s ease;
+  }
+  .kk-backdrop img:not([src]),
+  .kk-backdrop img[src=""] { opacity: 0; }
+
+  .kk-character {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .kk-character picture {
+    max-height: 66%;
+    display: flex;
+    align-items: flex-end;
+  }
+  .kk-character img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: bottom center;
+    opacity: 0.92;
+    filter: drop-shadow(0 0 24px rgba(0,0,0,0.6));
+    transition: opacity 0.35s ease;
+  }
+  .kk-character.kk-hidden img,
+  .kk-character img:not([src]) { opacity: 0; }
+
+  /* A vertical scrim keeps copy readable over the art regardless of image. */
+  .kk-scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(180deg,
+      rgba(10,0,2,0.62) 0%,
+      rgba(10,0,2,0.18) 20%,
+      rgba(10,0,2,0.08) 50%,
+      rgba(10,0,2,0.35) 78%,
+      rgba(10,0,2,0.8) 100%);
+  }
+
+  .kk-screen {
+    display: none;
+    position: relative;
+    z-index: 10;
+    flex: 1;
+    flex-direction: column;
+    padding: 20px 14px 18px;
+    max-width: 520px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .kk-screen.kk-active { display: flex; }
+
+  /* ------- Sound toggle chrome ------- */
+  .kk-sound-toggle {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 30;
+    width: 44px;
+    height: 44px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    border-radius: 50%;
+    background: rgba(10,0,2,0.55);
+    color: var(--kk-white);
+    cursor: pointer;
+    padding: 0;
+    backdrop-filter: blur(4px);
+  }
+  .kk-has-audio .kk-sound-toggle { display: inline-flex; }
+  .kk-sound-toggle:hover,
+  .kk-sound-toggle:focus-visible { border-color: var(--kk-neon); }
+  .kk-sound-toggle:focus-visible {
+    outline: 3px solid var(--kk-yellow);
+    outline-offset: 2px;
+  }
+  .kk-sound-toggle svg { width: 20px; height: 20px; display: block; }
+  .kk-sound-toggle .kk-ico-muted { display: none; }
+  .kk-sound-toggle.kk-muted .kk-ico-on { display: none; }
+  .kk-sound-toggle.kk-muted .kk-ico-muted { display: block; }
+
+  .kk-eyebrow {
+    display: inline-block;
+    align-self: flex-start;
+    border: 1px solid var(--kk-red);
+    color: var(--kk-red);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 3px;
+    margin-bottom: 18px;
+  }
+
+  h1.kk-title {
+    font-size: clamp(28px, 7vw, 40px);
+    line-height: 1.02;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    margin: 0 0 14px;
+  }
+
+  h1.kk-title em {
+    font-style: normal;
+    color: var(--kk-neon);
+    display: block;
+  }
+
+  .kk-lead {
+    color: var(--kk-gray);
+    font-size: 15px;
+    line-height: 1.55;
+    margin: 0 0 26px;
+  }
+
+  /* Start prompt chip — reads as game chrome over the scene. */
+  .kk-start-cue {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 16px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(228, 0, 43, 0.14);
+    border: 1px solid var(--kk-red);
+    color: var(--kk-white);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .kk-start-cue::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--kk-neon);
+    animation: kk-pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes kk-pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.55); opacity: 0.5; }
+  }
+
+  .kk-night-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  button.kk-night-btn {
+    all: unset;
+    cursor: pointer;
+    display: block;
+    background: rgba(21, 2, 7, 0.82);
+    border: 1.5px solid rgba(255,255,255,0.14);
+    border-radius: 10px;
+    padding: 16px 18px;
+    min-height: 44px;
+    backdrop-filter: blur(2px);
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+
+  button.kk-night-btn:hover,
+  button.kk-night-btn:focus-visible {
+    border-color: var(--kk-red);
+    background: #1D0510;
+  }
+
+  button.kk-night-btn:focus-visible {
+    outline: 3px solid var(--kk-yellow);
+    outline-offset: 2px;
+  }
+
+  .kk-night-btn .kk-night-title {
+    display: block;
+    font-weight: 800;
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+
+  .kk-night-btn .kk-night-sub {
+    display: block;
+    color: var(--kk-gray);
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .kk-start-note {
+    font-size: 12px;
+    color: var(--kk-gray);
+    line-height: 1.5;
+    margin-top: auto;
+    padding-top: 18px;
+  }
+
+  /* Game screen */
+  .kk-progress-wrap {
+    height: 4px;
+    background: rgba(255,255,255,0.14);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+
+  .kk-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--kk-red), var(--kk-neon));
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  .kk-step-label {
+    font-size: 12px;
+    color: var(--kk-gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+
+  #kk-question-text {
+    font-size: clamp(19px, 5vw, 24px);
+    font-weight: 800;
+    line-height: 1.25;
+    margin: 0 0 12px;
+  }
+
+  .kk-question-scene {
+    width: 100%;
+    aspect-ratio: 16 / 6;
+    max-height: 112px;
+    margin: -2px 0 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 9px;
+    background: #1D0510;
+  }
+  .kk-question-scene picture,
+  .kk-question-scene img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .kk-question-scene img {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .kk-options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .kk-options-grid.kk-options-with-images {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  button.kk-option-btn {
+    all: unset;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(21, 2, 7, 0.86);
+    border: 1.5px solid rgba(255,255,255,0.14);
+    border-radius: 10px;
+    padding: 14px 16px;
+    min-height: 44px;
+    font-size: 15px;
+    line-height: 1.4;
+    color: var(--kk-white);
+    backdrop-filter: blur(2px);
+  }
+
+  button.kk-option-btn:focus-visible {
+    border-color: var(--kk-neon);
+    background: #1D0510;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    button.kk-option-btn:hover {
+      border-color: var(--kk-neon);
+      background: #1D0510;
+    }
+  }
+
+  button.kk-option-btn:focus-visible {
+    outline: 3px solid var(--kk-yellow);
+    outline-offset: 2px;
+  }
+
+  .kk-option-letter {
+    flex: 0 0 auto;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1.5px solid var(--kk-red);
+    color: var(--kk-red);
+    font-weight: 900;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Card-image answers (outfit question) */
+  button.kk-option-btn.kk-has-image {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+    min-width: 0;
+    overflow: hidden;
+  }
+  .kk-option-thumb {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #1D0510;
+  }
+  .kk-option-thumb picture,
+  .kk-option-thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .kk-option-thumb img { filter: brightness(1.55) contrast(1.05); }
+  .kk-option-body {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 8px 9px 9px;
+    font-size: 12px;
+    line-height: 1.3;
+  }
+  .kk-option-body .kk-option-letter {
+    width: 22px;
+    height: 22px;
+    font-size: 11px;
+  }
+
+  /* Result screen */
+  .kk-result-badge {
+    width: 100%;
+    border-radius: 14px;
+    padding: 26px 22px;
+    margin-bottom: 20px;
+    background: rgba(21, 2, 7, 0.9);
+    border: 1.5px solid var(--kk-red);
+    backdrop-filter: blur(2px);
+  }
+
+  .kk-result-badge.kk-tier-straight_in { border-color: var(--kk-yellow); }
+  .kk-result-badge.kk-tier-go_home_change { border-color: #5A5A5A; }
+
+  #kk-result-title {
+    font-size: clamp(24px, 7vw, 32px);
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 0 0 6px;
+  }
+
+  #kk-result-persona {
+    color: var(--kk-neon);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+  }
+
+  #kk-result-message {
+    font-size: 15px;
+    line-height: 1.55;
+    margin: 0 0 14px;
+    color: var(--kk-white);
+  }
+
+  .kk-result-fix {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--kk-gray);
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding-top: 14px;
+  }
+
+  .kk-result-fix strong { color: var(--kk-neon); }
+
+  .kk-result-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  button.kk-replay-btn {
+    all: unset;
+    cursor: pointer;
+    text-align: center;
+    background: var(--kk-red);
+    color: var(--kk-white);
+    font-weight: 800;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 8px;
+    padding: 14px 18px;
+    min-height: 44px;
+  }
+
+  button.kk-replay-btn:hover,
+  button.kk-replay-btn:focus-visible {
+    background: #FF1440;
+  }
+
+  button.kk-replay-btn:focus-visible {
+    outline: 3px solid var(--kk-yellow);
+    outline-offset: 2px;
+  }
+
+  .kk-tour-link {
+    text-align: center;
+    color: var(--kk-gray);
+    font-size: 13px;
+    line-height: 1.5;
+    padding: 4px 6px;
+  }
+
+  .kk-tour-link a {
+    color: var(--kk-neon);
+    text-decoration: underline;
+  }
+
+  .kk-tour-link a:focus-visible {
+    outline: 3px solid var(--kk-yellow);
+    outline-offset: 2px;
+  }
+
+  .kk-visually-hidden {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  [tabindex="-1"]:focus { outline: none; }
+
+  .kk-embed-prompt { display: none; }
+  .kk-embedded .kk-embed-prompt { display: inline-flex; }
+  .kk-embedded #kk-start-screen .kk-eyebrow,
+  .kk-embedded #kk-start-screen .kk-lead,
+  .kk-embedded #kk-start-screen .kk-start-note { display: none; }
+  .kk-embedded #kk-start-title {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>
+<script>
+  // Embedded in the landing page the intro header duplicates the page hero,
+  // so the shell hides it and leads with the night picker instead.
+  if (window.self !== window.top) document.documentElement.classList.add('kk-embedded');
+</script>
+</head>
+<body>
+
+  <!-- Scene: full-bleed backdrop + door-staff character + readability scrim.
+       All three are empty until data.json supplies asset paths, so with no
+       art the game renders exactly like the text-only V1 (gradient only). -->
+  <picture class="kk-backdrop" id="kk-backdrop" aria-hidden="true">
+    <source id="kk-backdrop-avif" type="image/avif">
+    <source id="kk-backdrop-webp" type="image/webp">
+    <img id="kk-backdrop-img" alt="">
+  </picture>
+  <div class="kk-character kk-hidden" id="kk-character" aria-hidden="true">
+    <picture>
+      <source id="kk-character-avif" type="image/avif">
+      <source id="kk-character-webp" type="image/webp">
+      <img id="kk-character-img" alt="">
+    </picture>
+  </div>
+  <div class="kk-scrim" aria-hidden="true"></div>
+
+  <button type="button" class="kk-sound-toggle" id="kk-sound-toggle"
+          aria-pressed="false" aria-label="Mute sound" title="Sound on / off">
+    <svg class="kk-ico-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+      <path d="M15.5 8.5a5 5 0 0 1 0 7"></path>
+      <path d="M18.5 5.5a9 9 0 0 1 0 13"></path>
+    </svg>
+    <svg class="kk-ico-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+      <line x1="22" y1="9" x2="16" y2="15"></line>
+      <line x1="16" y1="9" x2="22" y2="15"></line>
+    </svg>
+  </button>
+
+  <section id="kk-start-screen" class="kk-screen kk-active" aria-labelledby="kk-start-title">
+    <span class="kk-eyebrow">Fictional door test</span>
+    <h1 class="kk-title" id="kk-start-title">KitKat Club<em>Door Test</em></h1>
+    <p class="kk-lead">Nine honest questions about your outfit, effort and attitude. Pick the night, then see what the fictional door decides.</p>
+    <span class="kk-start-cue kk-embed-prompt" aria-hidden="true">Pick tonight's party</span>
+    <div class="kk-night-list" id="kk-night-list" role="group" aria-label="Choose tonight's party"></div>
+    <p class="kk-start-note">This is an independent fan-made game, not affiliated with KitKatClub. Not a real prediction, just a practical test of the dress code.</p>
+  </section>
+
+  <section id="kk-game-screen" class="kk-screen" aria-labelledby="kk-question-text">
+    <div class="kk-progress-wrap"><div class="kk-progress-bar" id="kk-progress-bar"></div></div>
+    <div class="kk-step-label" id="kk-step-label">Question 1 of 9</div>
+    <h2 id="kk-question-text"></h2>
+    <div class="kk-question-scene" id="kk-question-scene" aria-hidden="true" hidden></div>
+    <div class="kk-options-grid" id="kk-options-grid" role="group"></div>
+    <div id="kk-live-region" class="kk-visually-hidden" role="status" aria-live="polite"></div>
+  </section>
+
+  <section id="kk-result-screen" class="kk-screen" aria-labelledby="kk-result-title">
+    <div class="kk-result-badge" id="kk-result-badge">
+      <h2 id="kk-result-title" tabindex="-1"></h2>
+      <p id="kk-result-persona"></p>
+      <p id="kk-result-message"></p>
+      <p class="kk-result-fix" id="kk-result-fix"></p>
+    </div>
+    <div class="kk-result-actions">
+      <button type="button" class="kk-replay-btn" id="kk-replay-btn">Play again</button>
+      <p class="kk-tour-link">My ~2h walking tour starts at Alexanderplatz and explores the historic centre of former East Berlin.<br>
+        <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_blank" rel="noopener">Book the Walking Tour</a>
+      </p>
+    </div>
+  </section>
+
+<script>
+(function () {
+  'use strict';
+
+  var gameData = null;
+  var els = {
+    root: document.documentElement,
+    start: document.getElementById('kk-start-screen'),
+    game: document.getElementById('kk-game-screen'),
+    result: document.getElementById('kk-result-screen'),
+    nightList: document.getElementById('kk-night-list'),
+    progressBar: document.getElementById('kk-progress-bar'),
+    stepLabel: document.getElementById('kk-step-label'),
+    questionText: document.getElementById('kk-question-text'),
+    questionScene: document.getElementById('kk-question-scene'),
+    optionsGrid: document.getElementById('kk-options-grid'),
+    liveRegion: document.getElementById('kk-live-region'),
+    resultBadge: document.getElementById('kk-result-badge'),
+    resultTitle: document.getElementById('kk-result-title'),
+    resultPersona: document.getElementById('kk-result-persona'),
+    resultMessage: document.getElementById('kk-result-message'),
+    resultFix: document.getElementById('kk-result-fix'),
+    replayBtn: document.getElementById('kk-replay-btn'),
+    backdropImg: document.getElementById('kk-backdrop-img'),
+    backdropAvif: document.getElementById('kk-backdrop-avif'),
+    backdropWebp: document.getElementById('kk-backdrop-webp'),
+    character: document.getElementById('kk-character'),
+    characterImg: document.getElementById('kk-character-img'),
+    characterAvif: document.getElementById('kk-character-avif'),
+    characterWebp: document.getElementById('kk-character-webp'),
+    soundToggle: document.getElementById('kk-sound-toggle')
+  };
+
+  var state = {
+    nightKey: null,
+    stepIndex: 0,
+    score: 0,
+    runId: 0
+  };
+
+  // Pointer/touch players should not inherit a visible keyboard focus ring on
+  // the first answer of every new screen. Keep the hand-off for keyboard
+  // players, where moving focus to the next question is useful and expected.
+  var lastInputWasKeyboard = false;
+  document.addEventListener('keydown', function (event) {
+    if (!event.metaKey && !event.ctrlKey && !event.altKey) lastInputWasKeyboard = true;
+  }, true);
+  document.addEventListener('pointerdown', function () { lastInputWasKeyboard = false; }, true);
+  document.addEventListener('mousedown', function () { lastInputWasKeyboard = false; }, true);
+  document.addEventListener('touchstart', function () { lastInputWasKeyboard = false; }, { capture: true, passive: true });
+
+  function focusForKeyboard(el) {
+    if (!el || !lastInputWasKeyboard) return;
+    window.setTimeout(function () {
+      if (lastInputWasKeyboard && el.isConnected) el.focus({ preventScroll: true });
+    }, 0);
+  }
+
+  // Shuffle answer positions without changing the score attached to each
+  // semantic option. Avoid repeating the immediately previous order for the
+  // same question so replay always produces a visibly fresh arrangement.
+  var lastOptionOrderByQuestion = {};
+
+  function randomIndex(limit) {
+    if (limit <= 1) return 0;
+    if (window.crypto && typeof window.crypto.getRandomValues === 'function') {
+      var values = new Uint32Array(1);
+      var ceiling = Math.floor(4294967296 / limit) * limit;
+      do {
+        window.crypto.getRandomValues(values);
+      } while (values[0] >= ceiling);
+      return values[0] % limit;
+    }
+    return Math.floor(Math.random() * limit);
+  }
+
+  function shuffledOptions(options, questionIndex) {
+    var shuffled = options.slice();
+    for (var i = shuffled.length - 1; i > 0; i--) {
+      var j = randomIndex(i + 1);
+      var tmp = shuffled[i];
+      shuffled[i] = shuffled[j];
+      shuffled[j] = tmp;
+    }
+
+    var originalOrder = options.map(function (opt) { return opt.letter; }).join('');
+    var previousOrder = lastOptionOrderByQuestion[questionIndex] || originalOrder;
+    var newOrder = shuffled.map(function (opt) { return opt.letter; }).join('');
+    if (shuffled.length > 1 && newOrder === previousOrder) {
+      var swapIndex = randomIndex(shuffled.length - 1);
+      var lastIndex = shuffled.length - 1;
+      var swap = shuffled[swapIndex];
+      shuffled[swapIndex] = shuffled[lastIndex];
+      shuffled[lastIndex] = swap;
+      newOrder = shuffled.map(function (opt) { return opt.letter; }).join('');
+    }
+    lastOptionOrderByQuestion[questionIndex] = newOrder;
+    return shuffled;
+  }
+
+  // ------- Asset helpers (WebP with PNG/SVG fallback) -------
+  function optimizedAsset(path, ext) {
+    var m = String(path || '').match(/^(.*\/)?([^/]+)\.png$/);
+    if (!m) return '';                       // non-PNG (e.g. .svg placeholder): no optimized variant
+    return (m[1] || '') + 'optimized/' + m[2] + '.' + ext;
+  }
+
+  function setPicture(imgEl, avifEl, webpEl, path) {
+    if (!imgEl) return;
+    // AVIF is intentionally disabled: the build's AVIF encoder produced all-black
+    // files, so we serve WebP (good) with a PNG fallback.
+    if (avifEl) avifEl.removeAttribute('srcset');
+    if (!path) { imgEl.removeAttribute('src'); if (webpEl) webpEl.removeAttribute('srcset'); return; }
+    var webp = optimizedAsset(path, 'webp');
+    if (webpEl) { if (webp) webpEl.srcset = webp; else webpEl.removeAttribute('srcset'); }
+    imgEl.src = path;
+  }
+
+  function assets() { return (gameData && gameData.assets) || {}; }
+
+  function setBackdrop(path, pos) {
+    setPicture(els.backdropImg, els.backdropAvif, els.backdropWebp, path || '');
+    if (els.backdropImg) els.backdropImg.style.objectPosition = pos || 'center';
+  }
+  function hideCharacter() { els.character.classList.add('kk-hidden'); }
+
+  function setCharacter(stateKey) {
+    var chars = assets().characters || {};
+    var path = stateKey ? chars[stateKey] : '';
+    if (path) {
+      setPicture(els.characterImg, els.characterAvif, els.characterWebp, path);
+      els.character.classList.remove('kk-hidden');
+    } else {
+      els.character.classList.add('kk-hidden');
+    }
+  }
+
+  // Character mood follows the running score once a few answers are in.
+  function characterStateForScore() {
+    if (state.stepIndex < 2) return 'idle';
+    if (state.score <= -3) return 'suspicious';
+    if (state.score >= 6) return 'approving';
+    return 'idle';
+  }
+
+  // ------- Audio (loop + voice, ducking, session-persistent mute) -------
+  var audio = {
+    loop: null,
+    voice: null,
+    unlocked: false,
+    muted: false,
+    DUCK: 0.15,
+    LOOP_VOL: 0.35
+  };
+  var MUTE_KEY = 'kkDoorTestMuted';
+
+  function audioConfigured() {
+    var a = assets();
+    if (a.loop) return true;
+    if (gameData && gameData.questions) {
+      for (var i = 0; i < gameData.questions.length; i++) if (gameData.questions[i].audio) return true;
+    }
+    if (gameData && gameData.results) {
+      for (var k in gameData.results) if (gameData.results[k] && gameData.results[k].audio) return true;
+    }
+    return false;
+  }
+
+  function readStoredMute() {
+    try { return window.sessionStorage.getItem(MUTE_KEY) === '1'; } catch (e) { return false; }
+  }
+  function writeStoredMute(v) {
+    try { window.sessionStorage.setItem(MUTE_KEY, v ? '1' : '0'); } catch (e) {}
+  }
+
+  function ensureLoop() {
+    var a = assets();
+    if (!a.loop) return;
+    if (!audio.loop) {
+      audio.loop = new Audio(a.loop);
+      audio.loop.loop = true;
+      audio.loop.volume = audio.muted ? 0 : audio.LOOP_VOL;
+    }
+  }
+
+  function startLoop() {
+    if (audio.muted) return;
+    ensureLoop();
+    if (audio.loop) audio.loop.play().catch(function (e) { /* autoplay policy */ });
+  }
+
+  function stopLoop() {
+    if (audio.loop) { try { audio.loop.pause(); audio.loop.currentTime = 0; } catch (e) {} }
+  }
+
+  function duckLoop(down) {
+    if (!audio.loop) return;
+    audio.loop.volume = audio.muted ? 0 : (down ? audio.DUCK : audio.LOOP_VOL);
+  }
+
+  function playVoice(path) {
+    if (!path || audio.muted) return;
+    try { if (audio.voice) { audio.voice.pause(); } } catch (e) {}
+    audio.voice = new Audio(path);
+    audio.voice.volume = 1.0;
+    duckLoop(true);
+    audio.voice.addEventListener('ended', function () { duckLoop(false); });
+    audio.voice.addEventListener('error', function () { duckLoop(false); });
+    audio.voice.play().catch(function (e) { duckLoop(false); });
+  }
+
+  function applyMute() {
+    if (audio.muted) {
+      if (audio.loop) audio.loop.volume = 0;
+      try { if (audio.voice) audio.voice.pause(); } catch (e) {}
+    } else {
+      if (audio.loop) { audio.loop.volume = audio.LOOP_VOL; startLoop(); }
+    }
+    els.soundToggle.classList.toggle('kk-muted', audio.muted);
+    els.soundToggle.setAttribute('aria-pressed', audio.muted ? 'true' : 'false');
+    els.soundToggle.setAttribute('aria-label', audio.muted ? 'Unmute sound' : 'Mute sound');
+  }
+
+  function toggleMute() {
+    audio.muted = !audio.muted;
+    writeStoredMute(audio.muted);
+    applyMute();
+  }
+
+  function initAudioChrome() {
+    if (!audioConfigured()) return;
+    els.root.classList.add('kk-has-audio');
+    audio.muted = readStoredMute();
+    applyMute();
+    els.soundToggle.addEventListener('click', toggleMute);
+  }
+
+  // ------- Screens -------
+  function showScreen(el) {
+    [els.start, els.game, els.result].forEach(function (s) { s.classList.remove('kk-active'); });
+    el.classList.add('kk-active');
+  }
+
+  function hashSeed(value) {
+    var hash = 2166136261;
+    var str = String(value);
+    for (var i = 0; i < str.length; i++) {
+      hash ^= str.charCodeAt(i);
+      hash = Math.imul(hash, 16777619);
+    }
+    return hash >>> 0;
+  }
+
+  function renderNightList() {
+    var order = ['hard_fetish', 'mixed_club', 'techno'];
+    els.nightList.innerHTML = '';
+    order.forEach(function (key) {
+      var night = gameData.nights[key];
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'kk-night-btn';
+      btn.innerHTML = '<span class="kk-night-title">' + night.title + '</span>' +
+        '<span class="kk-night-sub">' + night.sub + '</span>';
+      btn.addEventListener('click', function () { beginRun(key); });
+      els.nightList.appendChild(btn);
+    });
+  }
+
+  function showStartScene() {
+    var chars = assets().characters || {};
+    setBackdrop(chars.idle || assets().backdrop || '', '50% 16%');
+    hideCharacter();
+  }
+
+  function beginRun(nightKey) {
+    state.nightKey = nightKey;
+    state.stepIndex = 0;
+    state.score = 0;
+    state.runId += 1;
+    // First night pick is the user gesture that may start audio.
+    audio.unlocked = true;
+    startLoop();
+    showScreen(els.game);
+    renderQuestion();
+  }
+
+  function appendResponsiveImage(parent, path) {
+    var pic = document.createElement('picture');
+    var webp = optimizedAsset(path, 'webp');
+    if (webp) { var sW = document.createElement('source'); sW.type = 'image/webp'; sW.srcset = webp; pic.appendChild(sW); }
+    var img = document.createElement('img');
+    img.src = path;
+    img.alt = '';
+    img.loading = 'eager';
+    img.decoding = 'async';
+    pic.appendChild(img);
+    parent.appendChild(pic);
+  }
+
+  function renderQuestion() {
+    var total = gameData.questions.length;
+    var q = gameData.questions[state.stepIndex];
+    var pct = Math.round((state.stepIndex / total) * 100);
+    els.progressBar.style.width = pct + '%';
+    els.stepLabel.textContent = 'Question ' + (state.stepIndex + 1) + ' of ' + total;
+    els.questionText.textContent = q.question;
+
+    // Scene: the door-staff portrait IS the backdrop, mood by running score.
+    var chars = assets().characters || {};
+    var st = characterStateForScore();
+    setBackdrop(chars[st] || assets().backdrop || '', '50% 16%');
+    hideCharacter();
+
+    // Optional per-question voice line.
+    playVoice(q.audio);
+
+    els.questionScene.innerHTML = '';
+    if (q.scene) {
+      appendResponsiveImage(els.questionScene, q.scene);
+      els.questionScene.hidden = false;
+    } else {
+      els.questionScene.hidden = true;
+    }
+
+    var options = shuffledOptions(q.options, state.stepIndex);
+    els.optionsGrid.innerHTML = '';
+    els.optionsGrid.className = 'kk-options-grid' + (q.options.some(function (opt) { return !!opt.image; }) ? ' kk-options-with-images' : '');
+    options.forEach(function (opt, optionIndex) {
+      var displayLetter = String.fromCharCode(65 + optionIndex);
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      if (opt.image) {
+        btn.className = 'kk-option-btn kk-has-image';
+        var thumb = document.createElement('span');
+        thumb.className = 'kk-option-thumb';
+        appendResponsiveImage(thumb, opt.image);
+        var body = document.createElement('span');
+        body.className = 'kk-option-body';
+        body.innerHTML = '<span class="kk-option-letter">' + displayLetter + '</span><span>' + opt.text + '</span>';
+        btn.appendChild(thumb);
+        btn.appendChild(body);
+      } else {
+        btn.className = 'kk-option-btn';
+        btn.innerHTML = '<span class="kk-option-letter">' + displayLetter + '</span><span>' + opt.text + '</span>';
+      }
+      btn.addEventListener('click', function () { selectOption(q, opt); });
+      els.optionsGrid.appendChild(btn);
+    });
+    els.liveRegion.textContent = 'Question ' + (state.stepIndex + 1) + ' of ' + total + '. ' + q.question;
+    var first = els.optionsGrid.querySelector('button');
+    focusForKeyboard(first);
+  }
+
+  function selectOption(question, option) {
+    var weights = gameData.nights[state.nightKey].weights;
+    var base = gameData.baseScore[option.letter];
+    var weight = weights[question.category] != null ? weights[question.category] : 1;
+    state.score += base * weight;
+    state.stepIndex += 1;
+    if (state.stepIndex >= gameData.questions.length) {
+      showResult();
+    } else {
+      renderQuestion();
+    }
+  }
+
+  function tierForScore(score) {
+    var t = gameData.thresholds;
+    if (score <= t.goHomeMax) return 'go_home_change';
+    if (score <= t.notTonightMax) return 'not_tonight';
+    if (score < t.straightInMin) return 'in_after_look';
+    return 'straight_in';
+  }
+
+  function showResult() {
+    var tier = tierForScore(state.score);
+    var resData = gameData.results[tier];
+    var personaPool = gameData.resultPersonas[tier] || [];
+    var personaIndex = personaPool.length
+      ? hashSeed(state.nightKey + ':' + state.runId + ':' + state.score) % personaPool.length
+      : 0;
+    var persona = personaPool[personaIndex];
+
+    // Verdict scene: full-bleed verdict art.
+    setBackdrop(resData.scene || assets().backdrop || '', '50% 50%');
+    hideCharacter();
+
+    // Verdict voice line; loop stops so the verdict lands clean.
+    stopLoop();
+    playVoice(resData.audio);
+
+    els.resultBadge.className = 'kk-result-badge kk-tier-' + tier;
+    els.resultTitle.textContent = resData.title;
+    els.resultPersona.textContent = persona ? persona.title + ' · ' + persona.reason : '';
+    els.resultMessage.textContent = resData.message;
+    els.resultFix.innerHTML = '<strong>My advice:</strong> ' + resData.fix;
+
+    showScreen(els.result);
+    window.setTimeout(function () { els.resultTitle.focus({ preventScroll: true }); }, 0);
+  }
+
+  function replay() {
+    showStartScene();
+    stopLoop();
+    showScreen(els.start);
+    var first = els.nightList.querySelector('button');
+    focusForKeyboard(first);
+  }
+
+  els.replayBtn.addEventListener('click', replay);
+
+  fetch('data.json?v=kitkat-door-test-v2.2-20260826', { cache: 'no-store' })
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      gameData = data;
+      renderNightList();
+      initAudioChrome();
+      showStartScene();
+    })
+    .catch(function (err) {
+      console.error('Failed to load KitKat game data:', err);
+    });
+})();
+</script>
+
+<script src="../js/brand.js"></script>
+</body>
+</html>

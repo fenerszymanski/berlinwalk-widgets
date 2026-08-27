@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Berlin Early Hours Board</title>
+<meta name="description" content="Give it the date you are in Berlin and see, on one timeline, when it gets light and when fourteen real Berlin places actually let you in that morning." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Cpath d='M10 42h44' stroke='%23FFE600' stroke-width='4' stroke-linecap='round'/%3E%3Ccircle cx='32' cy='42' r='11' fill='none' stroke='%23FFE600' stroke-width='4'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-dark:#123D18; --green-mid:#2E7D32; --lime:#7CB342;
+    --light:#C5E1A5; --yellow:#FFE600; --ink:#212121; --muted:#4b584b;
+    --line:#E3E8DC; --panel:#F4F7F0; --night:#1B2A3A; --dawn:#5C6E86; --shut:#8d8d8d;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .wrap{max-width:760px;margin:0 auto;padding:4px 14px 18px}
+  .kicker{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-mid);margin:0 0 6px}
+  h1{font-size:21px;font-weight:800;line-height:1.18;margin:0 0 8px;color:var(--green-dark)}
+  .lede{font-size:14.5px;color:var(--muted);margin:0 0 14px}
+  .lbl{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--green-mid);margin:0 0 6px;display:block}
+
+  .ctrl{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 13px 13px;margin:0 0 12px;
+        display:flex;flex-wrap:wrap;gap:10px 18px;align-items:flex-end}
+  .pick{flex:0 1 190px;min-width:150px}
+  input[type=date]{width:100%;border:2px solid var(--line);background:#fff;border-radius:10px;padding:8px 10px;
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:15px;font-weight:700;color:var(--green-dark);
+    -webkit-appearance:none;appearance:none;min-height:42px}
+  input[type=date]:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+  input[type=date]::-webkit-calendar-picker-indicator{opacity:1;cursor:pointer;filter:invert(22%) sepia(28%) saturate(1600%) hue-rotate(80deg) brightness(92%)}
+  .sunbox{flex:1 1 210px;min-width:0;font-size:12.5px;color:var(--muted);padding-left:11px;border-left:3px solid var(--light)}
+  .sunbox b{color:var(--green-dark);font-family:'IBM Plex Mono',ui-monospace,monospace}
+
+  .filterbar{flex:1 1 100%;min-width:0;display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px;padding-top:2px}
+  .filter-label{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-mid);white-space:nowrap}
+  .filter-buttons{display:flex;flex:1 1 auto;flex-wrap:wrap;gap:6px}
+  .filter-button{border:1px solid var(--green-dark);border-radius:999px;background:#fff;color:var(--green-dark);cursor:pointer;font:700 11px/1.2 'Montserrat',system-ui,sans-serif;min-height:44px;padding:8px 11px;transition:background .15s ease,color .15s ease,border-color .15s ease}
+  .filter-button:hover{background:var(--light);color:var(--green-dark)}
+  .filter-button[aria-pressed="true"]{background:var(--yellow);border-color:var(--yellow);color:var(--green-dark)}
+  .filter-button:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+  .filter-count{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;font-weight:600;color:var(--muted);white-space:nowrap}
+
+  /* The shared /tools/<slug> shell already owns the page title and lead. Keep
+     this standalone widget's controls and result, but remove only its
+     duplicate narrative header when the first-party surface contract is set. */
+  html[data-bw-surface="tool-page"] .wrap{padding-top:0}
+  html[data-bw-surface="tool-page"] .kicker,
+  html[data-bw-surface="tool-page"] h1,
+  html[data-bw-surface="tool-page"] .lede{display:none}
+
+  .stage{border:2px solid var(--green-dark);border-radius:14px;overflow:hidden;background:#fff;margin:0 0 9px}
+  .stage svg{display:block;width:100%;height:auto}
+
+  .legend{display:flex;flex-wrap:wrap;gap:5px 14px;font-size:11.5px;color:var(--muted);margin:0 0 13px}
+  .legend i{display:inline-block;width:12px;height:9px;border-radius:2px;margin-right:5px;vertical-align:0}
+
+  .verdict{border:2px solid var(--green-dark);border-radius:14px;padding:12px 14px 13px;margin:0 0 12px;background:#FBFDF7}
+  .verdict h2{font-size:13.5px;font-weight:800;margin:0 0 7px;color:var(--green-dark)}
+  .verdict p{font-size:14px;margin:0 0 8px;color:var(--ink)}
+  .verdict p:last-child{margin-bottom:0}
+  .verdict b{color:var(--green-dark)}
+  .flag{display:inline-block;background:var(--yellow);color:var(--green-dark);font-size:11px;font-weight:800;
+        letter-spacing:.05em;text-transform:uppercase;border-radius:6px;padding:2px 7px;margin-right:6px}
+
+  .note{font-size:11.5px;color:#5c655c;margin:0}
+  .note b{color:var(--green-dark)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Berlin Tools</p>
+  <h1>Berlin Early Hours Board</h1>
+  <p class="lede">Berlin gets light long before it opens. Give it the date you are here and the board shows, on one timeline, when there is usable light and when fourteen real places actually let you in that morning.</p>
+
+  <div class="ctrl">
+    <div class="pick">
+      <label class="lbl" for="d">Your Berlin morning</label>
+      <input type="date" id="d" min="2026-01-01" max="2027-12-31" />
+    </div>
+    <p class="sunbox" id="sunbox"></p>
+    <div class="filterbar" role="group" aria-label="Filter places">
+      <span class="filter-label">Show me</span>
+      <div class="filter-buttons">
+        <button type="button" class="filter-button" data-board-filter="all" aria-pressed="true">Everything</button>
+        <button type="button" class="filter-button" data-board-filter="before-sunrise" aria-pressed="false">Before sunrise</button>
+        <button type="button" class="filter-button" data-board-filter="no-gate" aria-pressed="false">No gate</button>
+        <button type="button" class="filter-button" data-board-filter="ticketed" aria-pressed="false">Ticketed places</button>
+      </div>
+      <span class="filter-count" id="filter-count" aria-live="polite">14 places shown</span>
+    </div>
+  </div>
+
+  <div class="stage"><div id="stage"></div></div>
+
+  <p class="legend">
+    <span><i style="background:#1B5E20"></i>open at that time</span>
+    <span><i style="background:#7CB342"></i>no gate, open all night</span>
+    <span><i style="background:#d7dad3"></i>shut on this date</span>
+    <span><i style="background:#DADDE0"></i>still dark</span>
+    <span><i style="background:#FDF3DE"></i>first light to sunrise</span>
+  </p>
+
+  <div class="verdict" id="verdict"></div>
+
+  <p class="note">Travel figures are door-to-door minutes from the Weltzeituhr at Alexanderplatz by public transport on a weekday at 07:00. Sunrise and first light are calculated for central Berlin. Opening times checked on <b>25 August 2026</b>; a single venue can still change a day at short notice.</p>
+</div>
+
+<script>
+(function(){
+  var DATA = null;
+  var DEG = Math.PI/180;
+  var LAT = 52.5170, LON = 13.3889;
+  var DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var FILTER_LABELS = {
+    all: 'Everything',
+    'before-sunrise': 'Before sunrise',
+    'no-gate': 'No gate',
+    ticketed: 'Ticketed places'
+  };
+  var activeFilter = 'all';
+
+  function jd(y,m,d){ if(m<=2){y-=1;m+=12;} var A=Math.floor(y/100), B=2-A+Math.floor(A/4);
+    return Math.floor(365.25*(y+4716))+Math.floor(30.6001*(m+1))+d+B-1524.5; }
+
+  function solar(j, zenith){
+    var t=(j-2451545)/36525;
+    var L0=(280.46646+t*(36000.76983+t*0.0003032))%360;
+    var M=357.52911+t*(35999.05029-0.0001537*t);
+    var ec=0.016708634-t*(0.000042037+0.0000001267*t);
+    var C=Math.sin(M*DEG)*(1.914602-t*(0.004817+0.000014*t))+Math.sin(2*M*DEG)*(0.019993-0.000101*t)+Math.sin(3*M*DEG)*0.000289;
+    var omega=125.04-1934.136*t;
+    var lambda=L0+C-0.00569-0.00478*Math.sin(omega*DEG);
+    var secs=21.448-t*(46.815+t*(0.00059-t*0.001813));
+    var eps=23+(26+secs/60)/60+0.00256*Math.cos(omega*DEG);
+    var decl=Math.asin(Math.sin(eps*DEG)*Math.sin(lambda*DEG))/DEG;
+    var y2=Math.pow(Math.tan(eps/2*DEG),2);
+    var eq=4*(y2*Math.sin(2*L0*DEG)-2*ec*Math.sin(M*DEG)+4*ec*y2*Math.sin(M*DEG)*Math.cos(2*L0*DEG)
+              -0.5*y2*y2*Math.sin(4*L0*DEG)-1.25*ec*ec*Math.sin(2*M*DEG))/DEG;
+    var cosH=(Math.cos(zenith*DEG)-Math.sin(LAT*DEG)*Math.sin(decl*DEG))/(Math.cos(LAT*DEG)*Math.cos(decl*DEG));
+    if(cosH>1||cosH<-1) return null;
+    return { eq:eq, H:Math.acos(cosH)/DEG };
+  }
+
+  function berlinOffset(y,m,d){
+    var last=function(yy,mm){ var dt=new Date(Date.UTC(yy,mm,0)); return dt.getUTCDate()-dt.getUTCDay(); };
+    var t=Date.UTC(y,m-1,d,12);
+    return (t>=Date.UTC(y,2,last(y,3),1) && t<Date.UTC(y,9,last(y,10),1)) ? 2 : 1;
+  }
+
+  /** Local Berlin clock minutes for a rising solar event, or null in a polar case. */
+  function riseMinutes(y,m,d,zenith){
+    var j0=jd(y,m,d), j=j0+0.5, mins=null, r, i;
+    for(i=0;i<4;i++){
+      r=solar(j,zenith); if(!r) return null;
+      mins=720-4*(LON+r.H)-r.eq;
+      j=j0+mins/1440;
+    }
+    var v=mins+berlinOffset(y,m,d)*60;
+    return ((v%1440)+1440)%1440;
+  }
+
+  function hhmm(v){
+    if(v===null||v===undefined) return '--:--';
+    var h=Math.floor(v/60), m=Math.round(v%60);
+    if(m===60){h+=1;m=0;}
+    return (h<10?'0':'')+h+':'+(m<10?'0':'')+m;
+  }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function filterLabel(filter){ return FILTER_LABELS[filter] || FILTER_LABELS.all; }
+
+  function matchesFilter(row, filter, sunrise){
+    if(filter==='before-sunrise') return !row.state.shut && (row.state.allNight || (sunrise!==null && row.state.at<=sunrise));
+    if(filter==='no-gate') return row.access==='no-gate';
+    if(filter==='ticketed') return row.access==='ticketed';
+    return true;
+  }
+
+  function visibleRows(state){
+    return state.rows.filter(function(row){ return matchesFilter(row, state.activeFilter, state.sunrise); });
+  }
+
+  /** Resolve one row against a date: when it opens, or why it does not. */
+  function resolve(row, y, m, d, wd){
+    var o=row.open;
+    if(o.type==='always') return { allNight:true, at:null, shut:null };
+    if(o.type==='firstTrain'){
+      if(wd===5||wd===6) return { allNight:true, at:null, shut:null, tag:'runs through the night' };
+      return { allNight:false, at:o.weekdayMinutes, shut:null };
+    }
+    if(o.type==='monthly') return { allNight:false, at:o.openByMonth[m-1], shut:null, closes:o.closeByMonth[m-1] };
+    if(o.type==='weekday'){
+      if(o.seasonUntil){
+        var end=o.seasonUntil.split('-').map(Number);
+        var here=Date.UTC(y,m-1,d), stop=Date.UTC(end[0],end[1]-1,end[2]);
+        if(here>stop) return { allNight:false, at:null, shut:o.seasonLabel };
+      }
+      var v=o.byWeekday[wd];
+      if(v===null) return { allNight:false, at:null, shut:'Closed every '+DAYS[wd] };
+      return { allNight:false, at:v, shut:null };
+    }
+    return { allNight:false, at:null, shut:'No published time' };
+  }
+
+  var COLOR={ bar:'#1B5E20', allnight:'#7CB342', shut:'#d7dad3', track:'#EFF2E9' };
+
+  function draw(state, W){
+    var rows=visibleRows(state), meta=DATA.meta;
+    var narrow = W < 430;
+    var labelW = Math.max(94, Math.min(196, Math.round(W*0.33)));
+    var padR = 10;
+    var x0=labelW, x1=W-padR;
+    var axisTop = 52;
+    var rowH = narrow ? 34 : 36;
+    var H = axisTop + Math.max(rows.length, 1)*rowH + 22;
+    var span = meta.axisTo - meta.axisFrom;
+    function X(v){ return x0 + (Math.max(meta.axisFrom,Math.min(meta.axisTo,v)) - meta.axisFrom)/span*(x1-x0); }
+
+    var p=[];
+    var pushLine=function(s){ p[p.length]=s; };
+
+    /** Trim a label to the label column, because SVG text does not wrap or ellipsis itself. */
+    function fit(text, size, maxPx, weight){
+      var per = size*(weight>=700?0.635:0.575), keep = Math.floor(maxPx/per);
+      if(text.length<=keep) return text;
+      return text.slice(0, Math.max(3, keep-1)).replace(/[ ,]+$/,'')+'…';
+    }
+
+    pushLine('<svg xmlns="http://www.w3.org/2000/svg" width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(filterLabel(state.activeFilter)+' filter: '+rows.length+' places shown on '+state.label)+'">');
+    pushLine('<defs><clipPath id="labclip"><rect x="0" y="0" width="'+(labelW-6)+'" height="'+H+'"/></clipPath></defs>');
+    pushLine('<rect width="'+W+'" height="'+H+'" fill="#ffffff"/>');
+
+    var plotTop=axisTop-4, plotBot=axisTop+rows.length*rowH;
+
+    // Night, then the dawn band, then daylight.
+    var fl=state.firstLight, sr=state.sunrise;
+    if(fl!==null && sr!==null){
+      pushLine('<rect x="'+x0+'" y="'+plotTop+'" width="'+(X(fl)-x0)+'" height="'+(plotBot-plotTop)+'" fill="#1B2A3A" opacity="0.16"/>');
+      pushLine('<rect x="'+X(fl)+'" y="'+plotTop+'" width="'+(X(sr)-X(fl))+'" height="'+(plotBot-plotTop)+'" fill="#F0A500" opacity="0.13"/>');
+    }
+
+    // Hour grid.
+    var h, step = narrow ? 120 : 60;
+    for(h=240; h<=600; h+=step){
+      pushLine('<line x1="'+X(h)+'" y1="'+plotTop+'" x2="'+X(h)+'" y2="'+plotBot+'" stroke="#E3E8DC" stroke-width="1"/>');
+      pushLine('<text x="'+X(h)+'" y="'+(axisTop-9)+'" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="700" fill="#6d786c">'+hhmm(h)+'</text>');
+    }
+
+    // Light markers.
+    function chip(xv, y, text, color, dash){
+      var s='';
+      s+='<line x1="'+xv+'" y1="'+(y+3)+'" x2="'+xv+'" y2="'+plotBot+'" stroke="'+color+'" stroke-width="2"'+(dash?' stroke-dasharray="4 3"':'')+'/>';
+      var anchor='middle', tx=xv;
+      if(xv < x0+52){ anchor='start'; tx=xv+4; }
+      else if(xv > x1-52){ anchor='end'; tx=xv-4; }
+      s+='<text x="'+tx+'" y="'+y+'" text-anchor="'+anchor+'" font-family="Montserrat, sans-serif" font-size="10.5" font-weight="800" fill="'+color+'">'+esc(text)+'</text>';
+      return s;
+    }
+    if(fl!==null) pushLine(chip(X(fl), 14, 'First light '+hhmm(fl), '#4a5b70', true));
+    if(sr!==null) pushLine(chip(X(sr), 32, 'Sunrise '+hhmm(sr), '#B87400', false));
+
+    // Rows.
+    if(!rows.length){
+      pushLine('<text x="'+(x0+8)+'" y="'+(axisTop+21)+'" font-family="Montserrat, sans-serif" font-size="11" font-weight="700" fill="#596159">No places match this filter on the chosen morning.</text>');
+    }
+    rows.forEach(function(r, i){
+      var y=axisTop + i*rowH;
+      var barH = 15;
+      var by = y + (rowH-barH)/2;
+      pushLine('<rect x="'+x0+'" y="'+by+'" width="'+(x1-x0)+'" height="'+barH+'" rx="4" fill="'+COLOR.track+'"/>');
+
+      var st=r.state;
+      var timeText='';
+      if(st.shut){
+        pushLine('<rect x="'+x0+'" y="'+by+'" width="'+(x1-x0)+'" height="'+barH+'" rx="4" fill="'+COLOR.shut+'"/>');
+        pushLine('<text x="'+(x0+7)+'" y="'+(by+11)+'" font-family="Montserrat, sans-serif" font-size="10" font-weight="700" fill="#5a615a">'+esc(narrow ? 'shut' : st.shut)+'</text>');
+        timeText='shut';
+      } else if(st.allNight){
+        pushLine('<rect x="'+x0+'" y="'+by+'" width="'+(x1-x0)+'" height="'+barH+'" rx="4" fill="'+COLOR.allnight+'"/>');
+        pushLine('<text x="'+(x0+7)+'" y="'+(by+11)+'" font-family="Montserrat, sans-serif" font-size="10" font-weight="800" fill="#123D18">'+(narrow?'all night':'open all night')+'</text>');
+        timeText='all night';
+      } else {
+        var bx=X(st.at), bw=x1-bx;
+        pushLine('<rect x="'+bx+'" y="'+by+'" width="'+Math.max(3,bw)+'" height="'+barH+'" rx="4" fill="'+COLOR.bar+'"/>');
+        var tlabel=hhmm(st.at);
+        if(bw>44) pushLine('<text x="'+(bx+6)+'" y="'+(by+11)+'" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="700" fill="#ffffff">'+tlabel+'</text>');
+        else pushLine('<text x="'+(bx-4)+'" y="'+(by+11)+'" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="700" fill="#123D18">'+tlabel+'</text>');
+        timeText=tlabel;
+      }
+
+      var nameSize = narrow ? 10.5 : 11.5;
+      var nm=fit(r.short, nameSize, labelW-8, 700);
+      pushLine('<text x="2" y="'+(y+rowH/2-1)+'" clip-path="url(#labclip)" font-family="Montserrat, sans-serif" font-size="'+nameSize+'" font-weight="700" fill="#123D18">'+esc(nm)+'</text>');
+      var sub = fit(r.area + ' · ' + (r.travel===0 ? 'you are there' : r.travel+' min away'), 9.5, labelW-8, 600);
+      pushLine('<text x="2" y="'+(y+rowH/2+11)+'" clip-path="url(#labclip)" font-family="Montserrat, sans-serif" font-size="9.5" font-weight="600" fill="#6d786c">'+esc(sub)+'</text>');
+      pushLine('<title>'+esc(r.name+' — '+timeText+'. '+r.note)+'</title>');
+    });
+
+    pushLine('<line x1="'+x0+'" y1="'+plotTop+'" x2="'+x0+'" y2="'+plotBot+'" stroke="#123D18" stroke-width="1.5"/>');
+    pushLine('<text x="'+x1+'" y="'+(plotBot+15)+'" text-anchor="end" font-family="Montserrat, sans-serif" font-size="9.5" font-weight="600" fill="#6d786c">bars run from the moment you can walk in</text>');
+    pushLine('</svg>');
+    return p.join('');
+  }
+
+  function build(dateStr){
+    var parts=dateStr.split('-').map(Number);
+    var y=parts[0], m=parts[1], d=parts[2];
+    var js=new Date(Date.UTC(y,m-1,d));
+    var wd=(js.getUTCDay()+6)%7;
+    var sunrise=riseMinutes(y,m,d,90.833);
+    var firstLight=riseMinutes(y,m,d,96);
+
+    var rows=DATA.rows.map(function(r){
+      var st=resolve(r,y,m,d,wd);
+      return { id:r.id, name:r.name, short:r.short||r.name, area:r.area, travel:r.travel, kind:r.kind, access:r.access, note:r.note, state:st };
+    });
+    rows.sort(function(a,b){
+      var ka=a.state.shut?3:(a.state.allNight?0:1);
+      var kb=b.state.shut?3:(b.state.allNight?0:1);
+      if(ka!==kb) return ka-kb;
+      if(ka===1 && a.state.at!==b.state.at) return a.state.at-b.state.at;
+      return a.travel-b.travel;
+    });
+
+    return { rows:rows, sunrise:sunrise, firstLight:firstLight, wd:wd, y:y, m:m, d:d,
+             label:DAYS[wd]+' '+d+' '+MONTHS[m-1]+' '+y, activeFilter:activeFilter };
+  }
+
+  /** Plain-English length of a gap in minutes. */
+  function spanWords(mins){
+    if(mins<60) return mins+' minutes';
+    var h=Math.floor(mins/60), m=mins%60;
+    return h+(h===1?' hour':' hours')+(m?' '+m+' minutes':'');
+  }
+
+  function verdict(state){
+    var visible=visibleRows(state);
+    var ticketed=state.rows.filter(function(r){ return r.access==='ticketed' && !r.state.shut; });
+    var first=ticketed.length?ticketed[0]:null;
+    var noGate=visible.filter(function(r){ return r.access==='no-gate'; });
+    var beforeSun=visible.filter(function(r){ return !r.state.shut && (r.state.allNight || (state.sunrise!==null && r.state.at<=state.sunrise)); });
+    var shut=visible.filter(function(r){ return r.state.shut; });
+
+    var gap = first ? Math.max(0, Math.round(first.state.at-state.firstLight)) : 0;
+    var out='<h2>'+esc(filterLabel(state.activeFilter)+' · '+state.label)+'</h2>';
+    out+='<p><span class="flag">Light</span>Usable light from <b>'+hhmm(state.firstLight)+'</b>, sunrise <b>'+hhmm(state.sunrise)+'</b>. '+
+         'That is <b>'+spanWords(gap)+'</b> of daylight before the first ticketed door on this list opens.</p>';
+    if(first){
+      out+='<p><span class="flag">First door</span><b>'+esc(first.name)+'</b> at <b>'+hhmm(first.state.at)+'</b>, '+
+           (first.travel===0?'right where you are standing':first.travel+' minutes from Alexanderplatz')+'. '+esc(first.note)+'</p>';
+    }
+    out+='<p><span class="flag">Showing</span><b>'+visible.length+' '+(visible.length===1?'place':'places')+'</b> match this view.'+
+         (noGate.length?', including '+noGate.length+' with no gate':'')+
+         (beforeSun.length?', and '+beforeSun.length+' '+(beforeSun.length===1?'is':'are')+' open before the sun is up':'')+
+         '</p>';
+    if(shut.length){
+      out+='<p><span class="flag">Not today</span>'+shut.map(function(r){
+        var why=String(r.state.shut).replace(/\.$/,'');
+        return '<b>'+esc(r.name)+'</b>: '+esc(why);
+      }).join('. ')+'.</p>';
+    }
+    return out;
+  }
+
+  var stageEl=document.getElementById('stage');
+  var inputEl=document.getElementById('d');
+  var sunEl=document.getElementById('sunbox');
+  var verdictEl=document.getElementById('verdict');
+  var filterCountEl=document.getElementById('filter-count');
+  var filterButtons=Array.prototype.slice.call(document.querySelectorAll('[data-board-filter]'));
+  var current=null;
+
+  function updateFilterUi(){
+    var count=current ? visibleRows(current).length : 0;
+    if(filterCountEl) filterCountEl.textContent=count+' '+(count===1?'place':'places')+' shown';
+    filterButtons.forEach(function(button){
+      button.setAttribute('aria-pressed', button.getAttribute('data-board-filter')===activeFilter ? 'true' : 'false');
+    });
+  }
+
+  function paint(){
+    if(!current) return;
+    var W=Math.max(300, Math.min(760, Math.round(stageEl.getBoundingClientRect().width || 700)));
+    stageEl.innerHTML=draw(current, W);
+    if(window.bwResize) window.bwResize();
+  }
+
+  function update(){
+    var v=inputEl.value;
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(v)) return;
+    current=build(v);
+    sunEl.innerHTML='<b>'+esc(current.label)+'</b><br>First light <b>'+hhmm(current.firstLight)+'</b>, sunrise <b>'+hhmm(current.sunrise)+'</b>';
+    verdictEl.innerHTML=verdict(current);
+    updateFilterUi();
+    paint();
+  }
+
+  function todayBerlin(){
+    var f=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Berlin',year:'numeric',month:'2-digit',day:'2-digit'});
+    return f.format(new Date());
+  }
+
+  fetch('data.json').then(function(r){ return r.json(); }).then(function(j){
+    DATA=j;
+    var t=todayBerlin();
+    if(t < inputEl.min) t=inputEl.min;
+    if(t > inputEl.max) t=inputEl.max;
+    inputEl.value=t;
+    inputEl.addEventListener('change', update);
+    inputEl.addEventListener('input', update);
+    filterButtons.forEach(function(button){
+      button.addEventListener('click', function(){
+        var next=button.getAttribute('data-board-filter');
+        if(!FILTER_LABELS[next] || next===activeFilter) return;
+        activeFilter=next;
+        update();
+      });
+    });
+    update();
+    if(window.ResizeObserver){ new ResizeObserver(paint).observe(stageEl); }
+    else { window.addEventListener('resize', paint); }
+  });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

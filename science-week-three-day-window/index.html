@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Berlin Science Week: Programme Release Desk</title>
+  <link rel="icon" href="data:," />
+  <meta name="description" content="A data-unavailable planning desk for Berlin Science Week 2026. Choose an interest and get the individual-listing checks to use after the official programme is released." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/brand.css" />
+  <style>
+    :root {
+      --green: #1B5E20;
+      --green-deep: #123D18;
+      --lime: #7CB342;
+      --yellow: #FFE600;
+      --cream: #FAFAF5;
+      --paper: #FFFFFF;
+      --ink: #212121;
+      --muted: #526052;
+      --line: #D8E5D1;
+      --slate: #1F3522;
+      --slate-soft: #EAF1E7;
+      --mono: "Space Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      --shadow: 0 13px 30px rgba(18, 61, 24, .11);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { background: transparent; color: var(--ink); font-family: Montserrat, Arial, sans-serif; line-height: 1.48; }
+    button, a { font: inherit; }
+    button:focus-visible, a:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+    .science-tool { max-width: 760px; margin: 0 auto; padding: 6px; }
+    .station { overflow: hidden; border: 1px solid var(--line); border-radius: 19px; background: var(--cream); box-shadow: var(--shadow); }
+    .head { padding: 20px 19px 18px; background: var(--slate); color: #fff; }
+    .signal { display: inline-flex; align-items: center; gap: 7px; margin: 0 0 9px; color: var(--yellow); font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    .signal::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--yellow); box-shadow: 0 0 0 4px rgba(255, 230, 0, .16); }
+    h1 { margin: 0; max-width: 600px; font-size: clamp(21px, 5.3vw, 30px); line-height: 1.13; letter-spacing: -.028em; }
+    .head p { max-width: 650px; margin: 9px 0 0; color: #DCEBD8; font-size: 13px; }
+    .fact-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; margin-top: 17px; }
+    .fact { min-width: 0; padding: 9px 9px 8px; border: 1px solid rgba(255,255,255,.18); border-radius: 9px; background: rgba(255,255,255,.05); }
+    .fact b { display: block; color: var(--yellow); font-family: var(--mono); font-size: 11px; line-height: 1.2; }
+    .fact span { display: block; margin-top: 2px; color: #E8F2E5; font-size: 9.5px; font-weight: 700; line-height: 1.3; }
+    .main { padding: 18px 19px 20px; }
+    .notice { margin: 0; padding: 12px 13px; border: 1px solid #E2D771; border-radius: 11px; background: #FFFCE4; color: #3B3A21; font-size: 12px; line-height: 1.5; }
+    .notice b { color: var(--green-deep); }
+    .label { display: block; margin: 19px 0 8px; color: var(--green-deep); font-size: 13px; font-weight: 800; }
+    .interest-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
+    .interest {
+      min-height: 52px; padding: 10px; cursor: pointer; border: 1.5px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--green-deep); font-size: 11.5px; font-weight: 800; text-align: left; transition: border-color .15s, transform .15s, background .15s;
+    }
+    .interest:hover { border-color: var(--lime); transform: translateY(-1px); }
+    .interest[aria-pressed="true"] { border-color: var(--green); background: #EAF4E4; box-shadow: inset 0 0 0 1px var(--green); }
+    .interest small { display: block; margin-top: 2px; color: var(--muted); font-size: 9.5px; font-weight: 600; line-height: 1.25; }
+    .desk { margin-top: 18px; overflow: hidden; border: 1px solid var(--line); border-radius: 13px; background: var(--paper); }
+    .desk-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 11px 13px; background: var(--slate-soft); border-bottom: 1px solid var(--line); }
+    .desk-top h3 { margin: 0; color: var(--green-deep); font-size: 14px; }
+    .desk-top span { color: var(--green); font-family: var(--mono); font-size: 9.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .desk-body { padding: 14px; }
+    .desk-body > p { margin: 0; color: #334033; font-size: 12.5px; }
+    .steps { display: grid; gap: 8px; margin: 13px 0 0; padding: 0; list-style: none; counter-reset: release; }
+    .steps li { display: grid; grid-template-columns: 26px 1fr; gap: 9px; align-items: start; padding: 9px 10px; border: 1px solid var(--line); border-radius: 9px; background: #FCFDFB; color: #384638; font-size: 11.5px; }
+    .steps li::before { counter-increment: release; content: counter(release, decimal-leading-zero); display: grid; place-items: center; min-height: 21px; border-radius: 5px; background: var(--green); color: #fff; font-family: var(--mono); font-size: 9px; font-weight: 700; }
+    .boundary { margin: 16px 0 0; padding: 11px 12px; border-left: 4px solid var(--lime); background: #F2F8EE; color: #394A39; font-size: 11.5px; line-height: 1.5; }
+    .boundary b { color: var(--green-deep); }
+    .source { margin: 16px 0 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+    .source a { color: var(--green); font-weight: 800; }
+    @media (max-width: 560px) {
+      .science-tool { padding: 0; }
+      .station { border-radius: 14px; }
+      .head, .main { padding-left: 13px; padding-right: 13px; }
+      .fact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .interest-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <main class="science-tool">
+    <section class="station" aria-labelledby="science-title">
+      <header class="head">
+        <p class="signal">Programme release desk</p>
+        <h1 id="science-title">Choose an interest now. Choose dates later.</h1>
+        <p>Berlin Science Week is confirmed, but its 2026 schedule is not yet a responsible basis for a three-day recommendation.</p>
+        <div class="fact-grid" aria-label="Confirmed Berlin Science Week context">
+          <div class="fact"><b>1–10 Nov</b><span>festival window</span></div>
+          <div class="fact"><b>In Touch</b><span>2026 theme</span></div>
+          <div class="fact"><b>200+ orgs</b><span>participating organisations</span></div>
+          <div class="fact"><b>HKW</b><span>Festival Centre</span></div>
+        </div>
+      </header>
+
+      <div class="main">
+        <p class="notice"><b>Data status:</b> hundreds of events are described as free, but no daily density, language, registration or date recommendation belongs here until the individual 2026 listings are published.</p>
+        <span class="label">What do you want to look for when the programme appears?</span>
+        <div class="interest-grid" role="group" aria-label="Choose an interest to use when checking the programme">
+          <button class="interest" type="button" data-interest="Life and health" aria-pressed="true">Life &amp; health<small>your own search lens</small></button>
+          <button class="interest" type="button" data-interest="Climate and city" aria-pressed="false">Climate &amp; city<small>your own search lens</small></button>
+          <button class="interest" type="button" data-interest="Technology" aria-pressed="false">Technology<small>your own search lens</small></button>
+          <button class="interest" type="button" data-interest="Society" aria-pressed="false">Society<small>your own search lens</small></button>
+          <button class="interest" type="button" data-interest="Arts and ideas" aria-pressed="false">Arts &amp; ideas<small>your own search lens</small></button>
+          <button class="interest" type="button" data-interest="Learning with children or young people" aria-pressed="false">Young people<small>your own search lens</small></button>
+        </div>
+
+        <section class="desk" aria-live="polite" aria-labelledby="desk-title">
+          <div class="desk-top"><h3 id="desk-title">Your programme-release check</h3><span id="interest-status">Life and health</span></div>
+          <div class="desk-body" id="desk-body"></div>
+        </section>
+
+        <p class="boundary"><b>Keep Falling Walls separate.</b> It is a different programme. Do not use it to infer Berlin Science Week dates, density, access or language. Check it on its own official source.</p>
+        <p class="source">Use the <a href="https://berlinscienceweek.com/" target="_blank" rel="noopener">official Berlin Science Week site</a> for programme release and individual listings. For the separate programme, use the <a href="https://falling-walls.com/" target="_blank" rel="noopener">official Falling Walls site</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const buttons = document.querySelectorAll('.interest');
+      const status = document.getElementById('interest-status');
+      const body = document.getElementById('desk-body');
+
+      function render(interest) {
+        status.textContent = interest;
+        body.innerHTML = `
+          <p>You chose <strong>${interest}</strong> as a personal search lens. It is not a claim about a published programme category.</p>
+          <ol class="steps">
+            <li>Wait for the official 2026 programme or an individual official listing.</li>
+            <li>Use “${interest}” as a starting keyword or browsing lens, then open the individual listing.</li>
+            <li>Check that listing’s exact date, time and venue before deciding which days to be in Berlin.</li>
+            <li>Check its stated language, access route, registration or ticket requirement, and accessibility information.</li>
+            <li>Keep a second individual listing in view before you commit travel days. Do not infer a day’s density from this tool.</li>
+          </ol>`;
+      }
+      buttons.forEach((button) => button.addEventListener('click', () => {
+        buttons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+        render(button.dataset.interest);
+      }));
+      render('Life and health');
+    }());
+  </script>
+  <script src="../js/brand.js"></script>
+</body>
+</html>

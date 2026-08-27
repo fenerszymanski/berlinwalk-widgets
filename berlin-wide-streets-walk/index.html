@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Wide Streets Mini Walk | BerlinWalk</title>
+  <meta name="description" content="A compact walking guide to the visible reasons Berlin's streets feel so wide, from Alexanderplatz to Karl-Marx-Allee.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-wide-streets">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-wide-streets {
+      --green: #1B5E20;
+      --green-dark: #123C16;
+      --yellow: #FFE600;
+      --cream: #FAFAF5;
+      --soft: #F2F8E8;
+      --text: #212121;
+      --muted: #4E5A4E;
+      --white: #FFFFFF;
+      --border: #DCE8C8;
+      color: var(--text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 28px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-wide-streets *,
+    #bw-wide-streets *::before,
+    #bw-wide-streets *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-wide-streets .bw-shell {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-wide-streets .bw-head {
+      background: var(--green);
+      color: var(--white);
+      padding: 18px 20px;
+    }
+
+    #bw-wide-streets .bw-kicker {
+      color: var(--yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      margin: 0 0 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-wide-streets h2,
+    #bw-wide-streets h3,
+    #bw-wide-streets p {
+      margin-top: 0;
+    }
+
+    #bw-wide-streets .bw-title {
+      color: var(--white);
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    #bw-wide-streets .bw-sub {
+      color: #DDEFC7;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 9px 0 0;
+      max-width: 760px;
+    }
+
+    #bw-wide-streets .bw-body {
+      background: var(--cream);
+      display: grid;
+      gap: 12px;
+      padding: 16px 18px 18px;
+    }
+
+    #bw-wide-streets .bw-stop {
+      align-items: start;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 44px minmax(0, 1fr) auto;
+      min-width: 0;
+      padding: 13px;
+    }
+
+    #bw-wide-streets .bw-num {
+      align-items: center;
+      background: var(--green);
+      border-radius: 8px;
+      color: var(--yellow);
+      display: inline-flex;
+      font-size: 16px;
+      font-weight: 900;
+      height: 42px;
+      justify-content: center;
+      line-height: 1;
+      width: 42px;
+    }
+
+    #bw-wide-streets .bw-stop h3 {
+      color: var(--green-dark);
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.25;
+      margin: 0 0 4px;
+    }
+
+    #bw-wide-streets .bw-stop p {
+      color: var(--muted);
+      font-size: 12.8px;
+      font-weight: 650;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    #bw-wide-streets .bw-tag {
+      background: var(--soft);
+      border: 1px solid #E1ECCE;
+      border-radius: 999px;
+      color: var(--green);
+      display: inline-flex;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+      line-height: 1;
+      padding: 8px 10px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    #bw-wide-streets .bw-foot {
+      background: #F7FAEF;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1.55;
+      padding: 13px 18px;
+    }
+
+    #bw-wide-streets .bw-foot strong {
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    @media (max-width: 680px) {
+      #bw-wide-streets { margin: 22px 0; }
+      #bw-wide-streets .bw-head { padding: 16px; }
+      #bw-wide-streets .bw-title { font-size: 22px; }
+      #bw-wide-streets .bw-body { padding: 14px; }
+      #bw-wide-streets .bw-stop {
+        gap: 10px;
+        grid-template-columns: 38px minmax(0, 1fr);
+      }
+      #bw-wide-streets .bw-num {
+        border-radius: 7px;
+        font-size: 14px;
+        height: 36px;
+        width: 36px;
+      }
+      #bw-wide-streets .bw-tag {
+        grid-column: 2;
+        justify-self: start;
+        margin-top: 2px;
+      }
+    }
+  </style>
+
+  <section class="bw-shell" aria-labelledby="bw-wide-streets-title">
+    <header class="bw-head">
+      <p class="bw-kicker">BerlinWalk mini walk</p>
+      <h2 class="bw-title" id="bw-wide-streets-title">Where to Notice Berlin's Wide Streets</h2>
+      <p class="bw-sub">Use these five stops as a street-level decoder: old Berlin, wartime gaps, GDR planning and the monumental scale of Karl-Marx-Allee all line up in one walk.</p>
+    </header>
+
+    <div class="bw-body">
+      <article class="bw-stop">
+        <span class="bw-num">1</span>
+        <div>
+          <h3>Alexanderplatz</h3>
+          <p>Start with the feeling of scale: wide crossings, long sightlines, tram space and buildings set far apart.</p>
+        </div>
+        <span class="bw-tag">Scale</span>
+      </article>
+
+      <article class="bw-stop">
+        <span class="bw-num">2</span>
+        <div>
+          <h3>St. Mary's Church and Rathausforum</h3>
+          <p>The church once sat inside a dense quarter. Today it stands almost alone in the open space created after the old street plan vanished.</p>
+        </div>
+        <span class="bw-tag">Old core</span>
+      </article>
+
+      <article class="bw-stop">
+        <span class="bw-num">3</span>
+        <div>
+          <h3>Karl-Liebknecht-Strasse</h3>
+          <p>This axis shows how old routes were widened, simplified and pulled into a new central plan after the war.</p>
+        </div>
+        <span class="bw-tag">Axis</span>
+      </article>
+
+      <article class="bw-stop">
+        <span class="bw-num">4</span>
+        <div>
+          <h3>Strausberger Platz</h3>
+          <p>The city suddenly becomes ceremonial. This was not just traffic planning; it was a stage for a new socialist capital.</p>
+        </div>
+        <span class="bw-tag">Power</span>
+      </article>
+
+      <article class="bw-stop">
+        <span class="bw-num">5</span>
+        <div>
+          <h3>Frankfurter Tor</h3>
+          <p>End between the twin towers and look back west. The boulevard's width finally makes sense as architecture, politics and theatre.</p>
+        </div>
+        <span class="bw-tag">Boulevard</span>
+      </article>
+    </div>
+
+    <footer class="bw-foot">
+      <strong>Best done from Alexanderplatz toward Frankfurter Tor.</strong> The full walk is about 2.5 km, with U5 stations along the way if you want to shorten it.
+    </footer>
+  </section>
+</div>
+</body>
+</html>

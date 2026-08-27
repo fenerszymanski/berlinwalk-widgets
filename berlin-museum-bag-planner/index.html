@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Museum Bag Planner | BerlinWalk</title>
+  <meta name="description" content="Choose what to do with backpacks, carry-on suitcases and larger luggage before visiting Berlin museums.">
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    :root {
+      --bw-green: #1B5E20;
+      --bw-green-2: #2f7a34;
+      --bw-lime: #7CB342;
+      --bw-yellow: #FFE600;
+      --bw-cream: #FAFAF5;
+      --bw-ink: #212121;
+      --bw-red: #E63946;
+      --bw-line: rgba(27, 94, 32, 0.18);
+      --bw-soft: rgba(255, 255, 255, 0.82);
+      font-family: Montserrat, Arial, sans-serif;
+      color-scheme: light;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: transparent;
+      color: var(--bw-ink);
+    }
+
+    button,
+    select {
+      font: inherit;
+    }
+
+    .bw-bag {
+      max-width: 1180px;
+      margin: 0 auto;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--bw-cream);
+      box-shadow: 0 18px 48px rgba(27, 94, 32, 0.14);
+    }
+
+    .bw-hero {
+      min-height: 390px;
+      display: grid;
+      grid-template-columns: minmax(320px, 0.92fr) minmax(360px, 1.08fr);
+      background:
+        linear-gradient(90deg, rgba(10, 43, 18, 0.96), rgba(13, 54, 24, 0.76) 44%, rgba(13, 54, 24, 0.08)),
+        url("assets/museum-bag-planner-hero.jpg") center / cover no-repeat;
+      color: #fff;
+    }
+
+    .bw-copy {
+      min-height: 390px;
+      padding: 34px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .bw-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      color: var(--bw-yellow);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .bw-kicker::before {
+      content: "";
+      width: 28px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--bw-yellow);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      max-width: 640px;
+      font-size: 36px;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .bw-copy p {
+      max-width: 580px;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 16px;
+      line-height: 1.58;
+      font-weight: 650;
+    }
+
+    .bw-hero-rule {
+      width: fit-content;
+      max-width: 100%;
+      display: grid;
+      gap: 3px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255, 230, 0, 0.38);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.13);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      font-weight: 900;
+      font-size: 13px;
+    }
+
+    .bw-hero-rule span {
+      color: var(--bw-yellow);
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .bw-panel {
+      padding: 24px;
+      display: grid;
+      gap: 20px;
+    }
+
+    .bw-controls {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .bw-field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .bw-field label {
+      font-size: 12px;
+      font-weight: 900;
+      color: var(--bw-green);
+      text-transform: uppercase;
+    }
+
+    .bw-field select {
+      min-height: 48px;
+      width: 100%;
+      border: 1px solid rgba(27, 94, 32, 0.28);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--bw-ink);
+      padding: 0 12px;
+      font-weight: 800;
+      outline: none;
+    }
+
+    .bw-result {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .bw-gate {
+      position: relative;
+      min-height: 358px;
+      border: 1px solid rgba(27, 94, 32, 0.16);
+      border-radius: 8px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(250, 250, 245, 0.94)),
+        repeating-linear-gradient(90deg, rgba(27, 94, 32, 0.08) 0 1px, transparent 1px 90px);
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+
+    .bw-gate-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.74);
+      border-bottom: 1px solid rgba(27, 94, 32, 0.12);
+    }
+
+    .bw-gate-head h2 {
+      font-size: 18px;
+      line-height: 1.2;
+      color: var(--bw-green);
+      letter-spacing: 0;
+    }
+
+    .bw-badge {
+      min-width: 92px;
+      text-align: center;
+      border-radius: 999px;
+      padding: 8px 10px;
+      color: #fff;
+      background: var(--bw-green);
+      font-size: 12px;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .bw-badge[data-tone="amber"] {
+      background: #b68400;
+      color: #211b00;
+    }
+
+    .bw-badge[data-tone="red"] {
+      background: var(--bw-red);
+    }
+
+    .bw-paths {
+      padding: 18px 16px 16px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      align-content: stretch;
+    }
+
+    .bw-path {
+      min-height: 210px;
+      border-radius: 8px;
+      border: 1px solid rgba(27, 94, 32, 0.14);
+      background: #fff;
+      padding: 14px;
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 10px;
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .bw-path.is-active {
+      transform: translateY(-3px);
+      border-color: rgba(27, 94, 32, 0.42);
+      box-shadow: 0 12px 24px rgba(27, 94, 32, 0.14);
+      background: linear-gradient(180deg, #fff, #fffdf0);
+    }
+
+    .bw-path strong {
+      color: var(--bw-green);
+      font-size: 15px;
+      line-height: 1.2;
+    }
+
+    .bw-path b {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--bw-green);
+      background: var(--bw-yellow);
+      font-size: 18px;
+      font-weight: 950;
+    }
+
+    .bw-path p {
+      color: rgba(33, 33, 33, 0.72);
+      font-size: 13px;
+      line-height: 1.45;
+      font-weight: 650;
+    }
+
+    .bw-advice {
+      border-radius: 8px;
+      border: 1px solid rgba(27, 94, 32, 0.14);
+      background: #fff;
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+
+    .bw-advice-top {
+      padding: 18px;
+      background: linear-gradient(135deg, var(--bw-green), #0f3f18);
+      color: #fff;
+      display: grid;
+      gap: 8px;
+    }
+
+    .bw-advice-top span {
+      color: var(--bw-yellow);
+      font-size: 12px;
+      text-transform: uppercase;
+      font-weight: 950;
+    }
+
+    .bw-advice-top h2 {
+      font-size: 23px;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .bw-advice-body {
+      padding: 18px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .bw-advice-body p {
+      font-size: 15px;
+      line-height: 1.58;
+      font-weight: 650;
+      color: rgba(33, 33, 33, 0.82);
+    }
+
+    .bw-checks {
+      display: grid;
+      gap: 8px;
+    }
+
+    .bw-check {
+      display: grid;
+      grid-template-columns: 26px 1fr;
+      gap: 8px;
+      align-items: start;
+      padding: 10px;
+      border-radius: 8px;
+      background: rgba(27, 94, 32, 0.06);
+      color: rgba(33, 33, 33, 0.78);
+      font-size: 13px;
+      line-height: 1.42;
+      font-weight: 700;
+    }
+
+    .bw-check b {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--bw-green);
+      color: #fff;
+      font-size: 13px;
+    }
+
+    .bw-rule-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .bw-rule {
+      min-height: 150px;
+      border-radius: 8px;
+      border: 1px solid rgba(27, 94, 32, 0.14);
+      background: #fff;
+      padding: 14px;
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+
+    .bw-rule h3 {
+      color: var(--bw-green);
+      font-size: 15px;
+      line-height: 1.22;
+    }
+
+    .bw-rule p {
+      color: rgba(33, 33, 33, 0.72);
+      font-size: 13px;
+      line-height: 1.45;
+      font-weight: 650;
+    }
+
+    .bw-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .bw-links a {
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: var(--bw-green);
+      color: #fff;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .bw-links a:nth-child(2) {
+      background: #fff;
+      color: var(--bw-green);
+      border: 1px solid rgba(27, 94, 32, 0.28);
+    }
+
+    .bw-links a:focus-visible,
+    .bw-field select:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.78);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 900px) {
+      .bw-hero,
+      .bw-result {
+        grid-template-columns: 1fr;
+      }
+
+      .bw-hero {
+        background:
+          linear-gradient(180deg, rgba(10, 43, 18, 0.96), rgba(13, 54, 24, 0.72) 58%, rgba(13, 54, 24, 0.18)),
+          url("assets/museum-bag-planner-hero.jpg") center bottom / cover no-repeat;
+      }
+
+      .bw-copy {
+        min-height: 360px;
+      }
+
+      .bw-controls,
+      .bw-rule-row {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .bw-bag {
+        border-radius: 0;
+        border-left: 0;
+        border-right: 0;
+      }
+
+      .bw-copy {
+        padding: 26px 18px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .bw-panel {
+        padding: 16px;
+      }
+
+      .bw-controls,
+      .bw-paths,
+      .bw-rule-row {
+        grid-template-columns: 1fr;
+      }
+
+      .bw-gate-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .bw-path {
+        min-height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="bw-bag" data-widget="berlin-museum-bag-planner">
+    <section class="bw-hero">
+      <div class="bw-copy">
+        <div class="bw-kicker">Berlin museum bag rules</div>
+        <h1>Should the bag go into the museum, the cloakroom or a station locker?</h1>
+        <p>Choose the bag, the museum type and your next deadline. The planner gives one practical Berlin move before you lose time at the entrance.</p>
+        <div class="bw-hero-rule">
+          <span>My default rule</span>
+          If it is bigger than a small day bag, solve it before the exhibition.
+        </div>
+      </div>
+    </section>
+
+    <section class="bw-panel" aria-label="Museum bag decision planner">
+      <div class="bw-controls">
+        <div class="bw-field">
+          <label for="bagType">What are you carrying?</label>
+          <select id="bagType">
+            <option value="small">Small crossbody or camera bag</option>
+            <option value="daypack" selected>Day backpack</option>
+            <option value="carryon">Carry-on suitcase</option>
+            <option value="large">Large suitcase or bulky item</option>
+          </select>
+        </div>
+        <div class="bw-field">
+          <label for="museumType">Where are you going?</label>
+          <select id="museumType">
+            <option value="smb" selected>Museum Island / SMB museum</option>
+            <option value="humboldt">Humboldt Forum</option>
+            <option value="topography">Topography of Terror</option>
+            <option value="jmb">Jewish Museum Berlin</option>
+            <option value="mixed">Several museums in one day</option>
+          </select>
+        </div>
+        <div class="bw-field">
+          <label for="deadlineType">What happens next?</label>
+          <select id="deadlineType">
+            <option value="free">No fixed deadline</option>
+            <option value="timed" selected>Timed ticket or tour start</option>
+            <option value="train">Train or airport later today</option>
+            <option value="walk">BerlinWalk route after the museum</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="bw-result">
+        <div class="bw-gate">
+          <div class="bw-gate-head">
+            <h2 id="gateTitle">Bag gate decision</h2>
+            <div class="bw-badge" id="riskBadge" data-tone="amber">Check first</div>
+          </div>
+          <div class="bw-paths" aria-label="Recommended path">
+            <div class="bw-path" data-path="carry">
+              <b>1</b>
+              <strong>Carry it in</strong>
+              <p>Works only for a genuinely small bag and a relaxed visit.</p>
+            </div>
+            <div class="bw-path" data-path="cloak">
+              <b>2</b>
+              <strong>Use cloakroom or locker</strong>
+              <p>The normal move for backpacks, coats, umbrellas and A4-plus bags.</p>
+            </div>
+            <div class="bw-path" data-path="station">
+              <b>3</b>
+              <strong>Store it before the museum</strong>
+              <p>Best for suitcases, big backpacks, groups or anything you cannot risk being refused.</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="bw-advice" aria-live="polite">
+          <div class="bw-advice-top">
+            <span id="resultLabel">Recommended move</span>
+            <h2 id="resultTitle">Use the museum cloakroom before the exhibition.</h2>
+          </div>
+          <div class="bw-advice-body">
+            <p id="resultText">A normal day backpack is often too large for exhibition rooms. Arrive a few minutes early, use the cloakroom or lockers, and keep only phone, wallet and ticket with you.</p>
+            <div class="bw-checks" id="checks"></div>
+            <div class="bw-links">
+              <a href="https://www.berlinwalk.com/post/luggage-storage-in-berlin-2026" target="_blank" rel="noopener">Luggage storage guide</a>
+              <a href="https://www.berlinwalk.com/tools/berlin-museums-map" target="_blank" rel="noopener">Berlin museums map</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="bw-rule-row" aria-label="Official rule snapshots">
+        <article class="bw-rule">
+          <h3>Museum Island</h3>
+          <p>SMB rules use a 30 x 20 x 10 cm threshold for bags and warn that large storage is limited.</p>
+        </article>
+        <article class="bw-rule">
+          <h3>Humboldt Forum</h3>
+          <p>Bags larger than A4 go to the cloakroom or lockers. Larger-than-carry-on luggage may not be accepted.</p>
+        </article>
+        <article class="bw-rule">
+          <h3>Topography of Terror</h3>
+          <p>Carry-on luggage lockers are available in the foyer, useful when you visit before a train.</p>
+        </article>
+        <article class="bw-rule">
+          <h3>Security museums</h3>
+          <p>Some sites, including the Jewish Museum Berlin, use entrance screening and require large bags at cloakroom.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const DATA = {
+      bags: {
+        small: { level: 0, label: 'Small bag' },
+        daypack: { level: 1, label: 'Day backpack' },
+        carryon: { level: 2, label: 'Carry-on suitcase' },
+        large: { level: 3, label: 'Large luggage' },
+      },
+      museums: {
+        smb: {
+          name: 'Museum Island / SMB museum',
+          strict: 2,
+          fact: 'Museum Island rules use 30 x 20 x 10 cm as the small-bag threshold.',
+        },
+        humboldt: {
+          name: 'Humboldt Forum',
+          strict: 2,
+          fact: 'Humboldt Forum sends A4-plus bags to cloakroom or lockers.',
+        },
+        topography: {
+          name: 'Topography of Terror',
+          strict: 1,
+          fact: 'Topography of Terror has foyer lockers for carry-on luggage.',
+        },
+        jmb: {
+          name: 'Jewish Museum Berlin',
+          strict: 2,
+          fact: 'Jewish Museum Berlin has mandatory entrance screening and cloakroom rules.',
+        },
+        mixed: {
+          name: 'Several museums',
+          strict: 3,
+          fact: 'A multi-museum day is easiest when you follow the strictest likely rule.',
+        },
+      },
+      deadlines: {
+        free: { bump: 0, line: 'No fixed deadline means you can spend a few minutes solving the bag calmly.' },
+        timed: { bump: 1, line: 'Timed tickets make entrance delays more expensive, so arrive with the bag decision already made.' },
+        train: { bump: 1, line: 'A train or airport later today means you should avoid carrying luggage across museum entrances.' },
+        walk: { bump: 0, line: 'If you join a walking route after the museum, a lighter bag makes the whole day better.' },
+      },
+    };
+
+    const els = {
+      bag: document.getElementById('bagType'),
+      museum: document.getElementById('museumType'),
+      deadline: document.getElementById('deadlineType'),
+      badge: document.getElementById('riskBadge'),
+      title: document.getElementById('resultTitle'),
+      text: document.getElementById('resultText'),
+      label: document.getElementById('resultLabel'),
+      checks: document.getElementById('checks'),
+      paths: Array.from(document.querySelectorAll('.bw-path')),
+    };
+
+    function decision() {
+      const bag = DATA.bags[els.bag.value];
+      const museum = DATA.museums[els.museum.value];
+      const deadline = DATA.deadlines[els.deadline.value];
+      const score = bag.level + museum.strict + deadline.bump;
+      if (bag.level >= 3 || (bag.level >= 2 && museum.strict >= 2) || score >= 6) return 'station';
+      if (bag.level === 0 && score <= 2) return 'carry';
+      return 'cloak';
+    }
+
+    function copyFor(path) {
+      const museum = DATA.museums[els.museum.value];
+      const deadline = DATA.deadlines[els.deadline.value];
+      if (path === 'carry') {
+        return {
+          tone: 'green',
+          badge: 'Easy',
+          label: 'Recommended move',
+          title: 'Carry only the small essentials.',
+          text: 'This is the relaxed version: phone, wallet, ticket, water if allowed, and a genuinely small bag. My advice is still to keep the bag flat and light so museum staff do not have to decide at the door.',
+          checks: [
+            museum.fact,
+            'Keep food and large bottles out of exhibition rooms.',
+            deadline.line,
+          ],
+        };
+      }
+      if (path === 'station') {
+        return {
+          tone: 'red',
+          badge: 'Store first',
+          label: 'Recommended move',
+          title: 'Use a station locker before the museum.',
+          text: 'A suitcase turns a museum visit into a storage problem. My advice is simple: store it at Hauptbahnhof, Friedrichstrasse, Alexanderplatz, Potsdamer Platz or another station first, then arrive at the museum with only a small bag.',
+          checks: [
+            museum.fact,
+            'Museum cloakrooms are not a reliable suitcase plan, especially on busy days.',
+            deadline.line,
+          ],
+        };
+      }
+      return {
+        tone: 'amber',
+        badge: 'Check first',
+        label: 'Recommended move',
+        title: 'Use the cloakroom or museum lockers.',
+        text: 'A normal backpack is exactly where Berlin museum rules start to matter. My advice: arrive a little early, put it away before the exhibition, and keep only the items you actually need in your pockets.',
+        checks: [
+          museum.fact,
+          'If the bag is stuffed, wet, sharp-edged or bulky, assume it will need storage.',
+          deadline.line,
+        ],
+      };
+    }
+
+    function render() {
+      const path = decision();
+      const copy = copyFor(path);
+      els.badge.textContent = copy.badge;
+      els.badge.dataset.tone = copy.tone === 'green' ? 'green' : copy.tone;
+      els.label.textContent = copy.label;
+      els.title.textContent = copy.title;
+      els.text.textContent = copy.text;
+      els.checks.innerHTML = copy.checks.map((item) => `<div class="bw-check"><b>OK</b><span>${item}</span></div>`).join('');
+      els.paths.forEach((item) => item.classList.toggle('is-active', item.dataset.path === path));
+      window.dispatchEvent(new Event('resize'));
+    }
+
+    [els.bag, els.museum, els.deadline].forEach((el) => el.addEventListener('change', render));
+    render();
+  </script>
+  <script src="../js/brand.js"></script>
+</body>
+</html>

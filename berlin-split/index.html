@@ -1,0 +1,2203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Split: The Lost Archive</title>
+  <meta name="description" content="Can you read Berlin before the Wall disappears? Play the divided-city archive game by BerlinWalk.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%231B5E20'/%3E%3Cpath d='M10 36h44' stroke='%23FFE600' stroke-width='8' stroke-dasharray='8 6'/%3E%3Ccircle cx='36' cy='28' r='10' fill='%23E63946'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green: #1B5E20;
+      --green-dark: #073B16;
+      --yellow: #FFE600;
+      --lime: #7CB342;
+      --cream: #FAFAF5;
+      --paper: #FFFFFF;
+      --ink: #212121;
+      --muted: #5A655A;
+      --line: #D9E5CB;
+      --red: #E63946;
+      --blueprint: #193A42;
+      --shadow: rgba(7, 59, 22, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body {
+      background:
+        linear-gradient(90deg, rgba(27, 94, 32, 0.055) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(27, 94, 32, 0.055) 1px, transparent 1px),
+        radial-gradient(circle at 18% 12%, rgba(255, 230, 0, 0.18), transparent 34%),
+        var(--cream);
+      background-size: 34px 34px, 34px 34px, auto, auto;
+      color: var(--ink);
+      font-family: Montserrat, Arial, sans-serif;
+      letter-spacing: 0;
+      margin: 0;
+      min-width: 320px;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .bs-app {
+      isolation: isolate;
+      margin: 0 auto;
+      max-width: 1220px;
+      min-height: 100svh;
+      padding: clamp(18px, 3vw, 28px);
+    }
+
+    .bs-panel {
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(250, 250, 245, 0.94)),
+        repeating-linear-gradient(0deg, rgba(27, 94, 32, 0.04) 0 1px, transparent 1px 16px);
+      border: 2px solid var(--green-dark);
+      border-radius: 8px;
+      box-shadow: 10px 10px 0 var(--green-dark);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bs-start {
+      display: grid;
+      gap: 22px;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      min-height: min(760px, calc(100svh - 56px));
+      padding: clamp(22px, 4vw, 44px);
+    }
+
+    .bs-start-copy {
+      align-content: center;
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .bs-kicker,
+    .bs-file-kicker {
+      align-items: center;
+      background: var(--yellow);
+      border: 2px solid var(--green-dark);
+      border-radius: 6px;
+      box-shadow: 3px 3px 0 var(--green-dark);
+      color: var(--green-dark);
+      display: inline-flex;
+      font-size: 11px;
+      font-weight: 900;
+      justify-self: start;
+      min-height: 32px;
+      padding: 6px 10px;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    .bs-start h1 {
+      color: var(--green-dark);
+      font-family: Merriweather, Georgia, serif;
+      font-size: clamp(44px, 8vw, 92px);
+      font-weight: 900;
+      line-height: 0.95;
+      margin-bottom: 0;
+      max-width: 780px;
+    }
+
+    .bs-start h1 span {
+      color: var(--red);
+      display: block;
+    }
+
+    .bs-start-lead {
+      color: var(--muted);
+      font-size: clamp(17px, 2vw, 22px);
+      font-weight: 750;
+      line-height: 1.55;
+      margin-bottom: 4px;
+      max-width: 690px;
+    }
+
+    .bs-start-rules {
+      display: grid;
+      gap: 10px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .bs-start-rules li {
+      align-items: center;
+      color: var(--green-dark);
+      display: flex;
+      font-size: 14px;
+      font-weight: 850;
+      gap: 10px;
+      line-height: 1.35;
+    }
+
+    .bs-start-rules li::before {
+      background: var(--lime);
+      border: 2px solid var(--green-dark);
+      content: "";
+      flex: 0 0 10px;
+      height: 10px;
+      width: 10px;
+    }
+
+    .bs-start-briefing {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-width: 760px;
+    }
+
+    .bs-briefing-card {
+      background: rgba(255, 255, 255, 0.72);
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      color: var(--green-dark);
+      display: grid;
+      gap: 5px;
+      min-height: 106px;
+      padding: 13px;
+    }
+
+    .bs-briefing-card strong {
+      color: var(--green-dark);
+      font-size: 13px;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .bs-briefing-card span {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 760;
+      line-height: 1.35;
+    }
+
+    .bs-sound-card {
+      background: rgba(255, 230, 0, 0.16);
+      border: 2px dashed rgba(7, 59, 22, 0.42);
+      border-radius: 8px;
+      color: var(--green-dark);
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.42;
+      max-width: 740px;
+      padding: 12px 14px;
+    }
+
+    .bs-start-actions,
+    .bs-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .bs-btn {
+      align-items: center;
+      border: 2px solid var(--green-dark);
+      border-radius: 6px;
+      display: inline-flex;
+      font-size: 13px;
+      font-weight: 950;
+      justify-content: center;
+      min-height: 46px;
+      padding: 11px 15px;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    .bs-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .bs-btn-primary {
+      background: var(--green);
+      box-shadow: 4px 4px 0 var(--yellow);
+      color: var(--paper);
+    }
+
+    .bs-btn-yellow {
+      background: var(--yellow);
+      box-shadow: 4px 4px 0 var(--green-dark);
+      color: var(--green-dark);
+    }
+
+    .bs-btn-secondary {
+      background: var(--paper);
+      box-shadow: 4px 4px 0 rgba(7, 59, 22, 0.18);
+      color: var(--green-dark);
+    }
+
+    .bs-btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.55;
+      transform: none;
+    }
+
+    .bs-archive-preview {
+      align-self: start;
+      background: #102E38;
+      border: 2px solid var(--green-dark);
+      border-radius: 8px;
+      box-shadow: 8px 8px 0 var(--yellow);
+      color: var(--paper);
+      display: grid;
+      isolation: isolate;
+      min-height: clamp(520px, 70vh, 660px);
+      overflow: hidden;
+      padding: 0;
+      position: relative;
+    }
+
+    .bs-archive-preview::before,
+    .bs-archive-preview::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .bs-archive-preview::before {
+      background:
+        linear-gradient(180deg, rgba(7, 59, 22, 0.08), rgba(7, 59, 22, 0.74)),
+        radial-gradient(circle at 16% 12%, rgba(255, 230, 0, 0.28), transparent 34%);
+      inset: 0;
+      z-index: 1;
+    }
+
+    .bs-archive-preview::after {
+      border: 1px solid rgba(255, 230, 0, 0.42);
+      inset: 14px;
+      z-index: 2;
+    }
+
+    .bs-preview-image {
+      height: 100%;
+      inset: 0;
+      object-fit: cover;
+      object-position: center;
+      position: absolute;
+      width: 100%;
+      z-index: 0;
+    }
+
+    .bs-preview-content {
+      display: grid;
+      gap: 18px;
+      grid-template-rows: auto 1fr auto;
+      min-height: inherit;
+      padding: clamp(16px, 2.5vw, 24px);
+      position: relative;
+      z-index: 3;
+    }
+
+    .bs-preview-top {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+
+    .bs-preview-label {
+      color: var(--yellow);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .bs-preview-desk {
+      align-self: stretch;
+      display: grid;
+      gap: 12px;
+      grid-template-rows: auto 1fr auto;
+      min-height: 300px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .bs-preview-evidence {
+      background: rgba(250, 250, 245, 0.92);
+      border: 2px solid rgba(255, 230, 0, 0.82);
+      border-radius: 8px;
+      box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.22);
+      color: var(--green-dark);
+      display: grid;
+      gap: 7px;
+      justify-self: start;
+      max-width: 320px;
+      padding: 13px;
+      transform: rotate(-2deg);
+    }
+
+    .bs-preview-evidence strong {
+      font-size: 13px;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .bs-preview-evidence span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 780;
+      line-height: 1.35;
+    }
+
+    .bs-preview-trays {
+      align-self: center;
+      display: grid;
+      gap: 9px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .bs-preview-tray {
+      background: rgba(250, 250, 245, 0.1);
+      border: 1px solid rgba(255, 230, 0, 0.34);
+      border-radius: 8px;
+      min-height: 68px;
+      padding: 10px;
+    }
+
+    .bs-preview-tray strong {
+      color: var(--yellow);
+      display: block;
+      font-size: 12px;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .bs-preview-tray span {
+      color: rgba(250, 250, 245, 0.76);
+      display: block;
+      font-size: 11px;
+      font-weight: 760;
+      line-height: 1.25;
+      margin-top: 4px;
+    }
+
+    .bs-preview-route {
+      align-items: center;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .bs-preview-stop {
+      background: rgba(255, 230, 0, 0.92);
+      border: 2px solid var(--green-dark);
+      border-radius: 999px;
+      color: var(--green-dark);
+      display: grid;
+      font-size: 10px;
+      font-weight: 950;
+      min-height: 38px;
+      place-items: center;
+      text-align: center;
+    }
+
+    .bs-preview-stop.is-red {
+      background: var(--red);
+      color: var(--paper);
+    }
+
+    .bs-map {
+      aspect-ratio: 16 / 10;
+      background: #102E38;
+      border: 1px solid rgba(255, 230, 0, 0.42);
+      border-radius: 8px;
+      display: block;
+      isolation: isolate;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+
+    .bs-map::before {
+      background:
+        radial-gradient(circle at 50% 45%, rgba(255, 230, 0, 0.1), transparent 34%),
+        linear-gradient(180deg, rgba(7, 59, 22, 0.02), rgba(7, 59, 22, 0.36));
+      content: "";
+      inset: 0;
+      pointer-events: none;
+      position: absolute;
+      z-index: 1;
+    }
+
+    .bs-map::after {
+      border: 1px solid rgba(255, 230, 0, 0.36);
+      border-radius: 6px;
+      content: "";
+      inset: 10px;
+      pointer-events: none;
+      position: absolute;
+      z-index: 3;
+    }
+
+    .bs-map img {
+      display: block;
+      filter: saturate(0.96) contrast(1.04) brightness(0.96);
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      width: 100%;
+    }
+
+    .bs-preview-files {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      position: relative;
+      z-index: 1;
+    }
+
+    .bs-preview-file {
+      background: rgba(250, 250, 245, 0.1);
+      border: 1px solid rgba(255, 230, 0, 0.32);
+      border-radius: 6px;
+      min-height: 54px;
+      padding: 8px;
+    }
+
+    .bs-preview-file strong {
+      color: var(--yellow);
+      display: block;
+      font-size: 11px;
+      line-height: 1.2;
+    }
+
+    .bs-preview-file span {
+      color: rgba(250, 250, 245, 0.78);
+      display: block;
+      font-size: 11px;
+      font-weight: 750;
+      line-height: 1.25;
+      margin-top: 3px;
+    }
+
+    .bs-game {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(300px, 0.82fr) minmax(0, 1.18fr);
+      min-height: min(800px, calc(100svh - 56px));
+      padding: 18px;
+    }
+
+    .bs-left {
+      background: var(--blueprint);
+      border: 2px solid var(--green-dark);
+      border-radius: 8px;
+      color: var(--paper);
+      display: grid;
+      gap: 14px;
+      grid-template-rows: auto auto auto auto 1fr auto;
+      min-width: 0;
+      padding: 16px;
+    }
+
+    .bs-status-bar {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .bs-sound-strip {
+      align-items: center;
+      background: rgba(250, 250, 245, 0.08);
+      border: 1px dashed rgba(255, 230, 0, 0.34);
+      border-radius: 6px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: space-between;
+      padding: 9px 10px;
+    }
+
+    .bs-sound-strip span {
+      color: rgba(250, 250, 245, 0.76);
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .bs-sound-mini {
+      background: rgba(255, 230, 0, 0.96);
+      border: 1px solid var(--green-dark);
+      border-radius: 999px;
+      color: var(--green-dark);
+      font-size: 11px;
+      font-weight: 950;
+      min-height: 30px;
+      padding: 5px 10px;
+      text-transform: uppercase;
+    }
+
+    .bs-meter {
+      background: rgba(250, 250, 245, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 6px;
+      min-width: 0;
+      padding: 10px;
+    }
+
+    .bs-meter span {
+      color: rgba(250, 250, 245, 0.7);
+      display: block;
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .bs-meter strong {
+      color: var(--yellow);
+      display: block;
+      font-size: clamp(19px, 3vw, 30px);
+      font-weight: 950;
+      line-height: 1;
+      margin-top: 6px;
+    }
+
+    .bs-progress-track {
+      background: rgba(250, 250, 245, 0.14);
+      border-radius: 999px;
+      height: 10px;
+      overflow: hidden;
+    }
+
+    .bs-progress-fill {
+      background: linear-gradient(90deg, var(--lime), var(--yellow));
+      border-radius: inherit;
+      height: 100%;
+      transition: width 260ms ease;
+      width: 0;
+    }
+
+    .bs-mini-head {
+      align-items: start;
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+    }
+
+    .bs-act {
+      color: rgba(250, 250, 245, 0.78);
+      font-size: 12px;
+      font-weight: 850;
+      line-height: 1.35;
+      margin: 0;
+    }
+
+    .bs-act strong {
+      color: var(--paper);
+      display: block;
+      font-size: 15px;
+      line-height: 1.25;
+      margin-bottom: 3px;
+    }
+
+    .bs-map-wrap {
+      align-content: center;
+      display: grid;
+      min-height: 260px;
+    }
+
+    .bs-map-current-pin {
+      background: var(--red);
+      border: 4px solid var(--paper);
+      border-radius: 999px;
+      box-shadow:
+        0 0 0 11px rgba(230, 57, 70, 0.26),
+        0 8px 20px rgba(0, 0, 0, 0.46);
+      height: 24px;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 24px;
+      z-index: 4;
+    }
+
+    .bs-map-current-pin::after {
+      background: rgba(255, 230, 0, 0.72);
+      border-radius: 999px;
+      content: "";
+      height: 6px;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 6px;
+    }
+
+    .bs-map-credit {
+      background: rgba(250, 250, 245, 0.84);
+      border-radius: 999px;
+      bottom: 8px;
+      color: rgba(7, 59, 22, 0.82);
+      font-size: 9px;
+      font-weight: 800;
+      line-height: 1;
+      padding: 5px 7px;
+      position: absolute;
+      right: 8px;
+      z-index: 4;
+    }
+
+    .bs-pieces {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .bs-piece {
+      align-items: start;
+      background: rgba(250, 250, 245, 0.09);
+      border: 1px solid rgba(250, 250, 245, 0.22);
+      border-radius: 6px;
+      color: rgba(250, 250, 245, 0.48);
+      display: grid;
+      gap: 3px;
+      font-size: 10px;
+      font-weight: 950;
+      justify-content: stretch;
+      min-height: 58px;
+      padding: 8px;
+      text-align: left;
+    }
+
+    .bs-piece strong {
+      color: rgba(255, 230, 0, 0.62);
+      font-size: 10px;
+      line-height: 1;
+    }
+
+    .bs-piece span {
+      color: rgba(250, 250, 245, 0.66);
+      font-size: 11px;
+      line-height: 1.18;
+    }
+
+    .bs-piece.is-on {
+      background: var(--yellow);
+      border-color: var(--yellow);
+      color: var(--green-dark);
+      box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.25);
+    }
+
+    .bs-piece.is-on strong,
+    .bs-piece.is-on span {
+      color: var(--green-dark);
+    }
+
+    .bs-right {
+      display: grid;
+      gap: 14px;
+      grid-template-rows: auto 1fr auto;
+      min-width: 0;
+    }
+
+    .bs-dossier {
+      background: var(--paper);
+      border: 2px solid var(--green-dark);
+      border-radius: 8px;
+      box-shadow: 7px 7px 0 var(--shadow);
+      min-width: 0;
+      padding: clamp(16px, 2.4vw, 26px);
+    }
+
+    .bs-dossier-head {
+      align-items: start;
+      display: flex;
+      gap: 14px;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .bs-dossier h2 {
+      color: var(--green-dark);
+      font-size: clamp(28px, 4.4vw, 52px);
+      font-weight: 950;
+      line-height: 0.95;
+      margin-bottom: 4px;
+    }
+
+    .bs-location {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .bs-mission-visual {
+      background: #102E38;
+      border: 2px solid var(--green-dark);
+      border-radius: 8px;
+      box-shadow: 5px 5px 0 rgba(7, 59, 22, 0.16);
+      margin: 0 0 17px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bs-mission-visual img {
+      aspect-ratio: 16 / 10;
+      display: block;
+      height: auto;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .bs-mission-visual::after {
+      background:
+        linear-gradient(180deg, transparent 45%, rgba(7, 59, 22, 0.78)),
+        linear-gradient(90deg, rgba(255, 230, 0, 0.12), transparent 34%);
+      content: "";
+      inset: 0;
+      pointer-events: none;
+      position: absolute;
+    }
+
+    .bs-mission-visual figcaption {
+      background: rgba(7, 59, 22, 0.88);
+      border: 1px solid rgba(255, 230, 0, 0.54);
+      border-radius: 999px;
+      bottom: 12px;
+      color: var(--yellow);
+      font-size: 11px;
+      font-weight: 950;
+      left: 12px;
+      letter-spacing: 0.02em;
+      padding: 7px 10px;
+      position: absolute;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+
+    .bs-instruction {
+      color: var(--green-dark);
+      font-size: clamp(16px, 2vw, 19px);
+      font-weight: 850;
+      line-height: 1.45;
+      margin-bottom: 14px;
+    }
+
+    .bs-evidence {
+      background:
+        linear-gradient(90deg, rgba(255, 230, 0, 0.2), transparent),
+        #F7F8EF;
+      border-left: 6px solid var(--yellow);
+      border-radius: 6px;
+      color: #394439;
+      font-size: 15px;
+      font-weight: 720;
+      line-height: 1.52;
+      margin-bottom: 16px;
+      padding: 14px;
+    }
+
+    .bs-clue {
+      background: #102E38;
+      border-radius: 6px;
+      color: var(--paper);
+      display: none;
+      font-size: 14px;
+      font-weight: 760;
+      line-height: 1.48;
+      margin-bottom: 16px;
+      padding: 13px;
+    }
+
+    .bs-clue.is-on {
+      display: block;
+    }
+
+    .bs-options {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .bs-decision-label {
+      color: var(--green-dark);
+      display: block;
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: 0.02em;
+      margin: 0 0 10px;
+      text-transform: uppercase;
+    }
+
+    .bs-option {
+      background: #FAFAF5;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      min-height: 104px;
+      padding: 13px;
+      text-align: left;
+      transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+      width: 100%;
+    }
+
+    .bs-option:hover,
+    .bs-option.is-selected {
+      border-color: var(--green-dark);
+      box-shadow: 4px 4px 0 var(--green-dark);
+      transform: translateY(-1px);
+    }
+
+    .bs-option strong {
+      color: var(--green-dark);
+      display: block;
+      font-size: 15px;
+      font-weight: 950;
+      line-height: 1.2;
+      margin-bottom: 7px;
+    }
+
+    .bs-option span {
+      color: var(--muted);
+      display: block;
+      font-size: 13px;
+      font-weight: 760;
+      line-height: 1.35;
+    }
+
+    .bs-align {
+      background: #FAFAF5;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+    }
+
+    .bs-align-stage {
+      background:
+        linear-gradient(90deg, transparent 0 24%, rgba(230, 57, 70, 0.2) 24% 28%, transparent 28% 100%),
+        linear-gradient(180deg, rgba(27, 94, 32, 0.12), rgba(255, 230, 0, 0.18));
+      border: 2px solid var(--green-dark);
+      border-radius: 7px;
+      height: 170px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bs-align-facade,
+    .bs-align-shadow {
+      bottom: 24px;
+      left: 50%;
+      position: absolute;
+      transform: translateX(-50%);
+      transition: left 120ms ease;
+    }
+
+    .bs-align-facade {
+      background:
+        linear-gradient(90deg, transparent 0 12%, rgba(7, 59, 22, 0.18) 12% 14%, transparent 14% 100%),
+        #F8F1DC;
+      border: 2px solid var(--green-dark);
+      height: 92px;
+      width: 190px;
+      z-index: 2;
+    }
+
+    .bs-align-facade::before {
+      background: var(--green-dark);
+      content: "";
+      height: 20px;
+      left: 50%;
+      position: absolute;
+      top: -22px;
+      transform: translateX(-50%);
+      width: 92px;
+    }
+
+    .bs-align-shadow {
+      background: rgba(230, 57, 70, 0.42);
+      border: 2px dashed rgba(230, 57, 70, 0.8);
+      height: 76px;
+      width: 210px;
+      z-index: 1;
+    }
+
+    .bs-range {
+      accent-color: var(--green);
+      width: 100%;
+    }
+
+    .bs-align-labels {
+      color: var(--muted);
+      display: flex;
+      font-size: 12px;
+      font-weight: 850;
+      justify-content: space-between;
+    }
+
+    .bs-feedback {
+      background: var(--green-dark);
+      border-radius: 8px;
+      color: var(--paper);
+      display: none;
+      font-size: 15px;
+      font-weight: 780;
+      line-height: 1.5;
+      padding: 15px;
+    }
+
+    .bs-feedback.is-on {
+      display: block;
+    }
+
+    .bs-feedback strong {
+      color: var(--yellow);
+      display: block;
+      font-size: 12px;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+
+    .bs-footer-actions {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-between;
+    }
+
+    .bs-note {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.35;
+      margin: 0;
+    }
+
+    .bs-center-screen {
+      align-content: center;
+      display: grid;
+      gap: 18px;
+      justify-items: start;
+      min-height: min(720px, calc(100svh - 56px));
+      padding: clamp(22px, 5vw, 50px);
+    }
+
+    .bs-center-screen h2 {
+      color: var(--green-dark);
+      font-family: Merriweather, Georgia, serif;
+      font-size: clamp(40px, 7vw, 78px);
+      line-height: 0.98;
+      margin-bottom: 0;
+      max-width: 850px;
+    }
+
+    .bs-center-screen p {
+      color: var(--muted);
+      font-size: clamp(16px, 2vw, 20px);
+      font-weight: 760;
+      line-height: 1.52;
+      margin-bottom: 0;
+      max-width: 720px;
+    }
+
+    .bs-summary-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      width: min(760px, 100%);
+    }
+
+    .bs-summary-card {
+      background: var(--paper);
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 13px;
+    }
+
+    .bs-summary-card span {
+      color: var(--muted);
+      display: block;
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .bs-summary-card strong {
+      color: var(--green-dark);
+      display: block;
+      font-size: 24px;
+      font-weight: 950;
+      line-height: 1;
+      margin-top: 6px;
+    }
+
+    .bs-result-layout {
+      display: grid;
+      gap: 22px;
+      grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.75fr);
+      min-height: min(780px, calc(100svh - 56px));
+      padding: clamp(20px, 4vw, 42px);
+    }
+
+    .bs-result-copy {
+      align-content: center;
+      display: grid;
+      gap: 16px;
+      min-width: 0;
+    }
+
+    .bs-result-copy h2 {
+      color: var(--green-dark);
+      font-family: Merriweather, Georgia, serif;
+      font-size: clamp(44px, 7vw, 88px);
+      line-height: 0.95;
+      margin-bottom: 0;
+    }
+
+    .bs-result-copy h2 span {
+      color: var(--red);
+      display: block;
+    }
+
+    .bs-result-copy p {
+      color: var(--muted);
+      font-size: clamp(16px, 2vw, 20px);
+      font-weight: 780;
+      line-height: 1.52;
+      margin-bottom: 0;
+      max-width: 760px;
+    }
+
+    .bs-result-board {
+      background: var(--blueprint);
+      border: 2px solid var(--green-dark);
+      border-radius: 8px;
+      box-shadow: 8px 8px 0 var(--yellow);
+      color: var(--paper);
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+    }
+
+    .bs-result-pieces {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .bs-result-piece {
+      background: rgba(250, 250, 245, 0.08);
+      border: 1px solid rgba(250, 250, 245, 0.24);
+      border-radius: 6px;
+      min-height: 58px;
+      padding: 10px;
+    }
+
+    .bs-result-piece.is-on {
+      background: rgba(255, 230, 0, 0.18);
+      border-color: var(--yellow);
+    }
+
+    .bs-result-piece strong {
+      color: var(--yellow);
+      display: block;
+      font-size: 12px;
+      line-height: 1.25;
+    }
+
+    .bs-result-piece span {
+      color: rgba(250, 250, 245, 0.72);
+      display: block;
+      font-size: 11px;
+      font-weight: 750;
+      line-height: 1.25;
+      margin-top: 4px;
+    }
+
+    .bs-manual-copy {
+      background: #F7F8EF;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      color: var(--green-dark);
+      display: none;
+      font-size: 13px;
+      font-weight: 760;
+      line-height: 1.45;
+      margin-top: 4px;
+      padding: 12px;
+      white-space: pre-wrap;
+    }
+
+    .bs-manual-copy.is-on {
+      display: block;
+    }
+
+    @media (max-width: 940px) {
+      .bs-app {
+        padding: 12px;
+      }
+
+      .bs-start,
+      .bs-game,
+      .bs-result-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .bs-start {
+        min-height: 0;
+      }
+
+      .bs-archive-preview {
+        min-height: 520px;
+      }
+
+      .bs-game {
+        padding: 12px;
+      }
+
+      .bs-left {
+        grid-template-rows: auto auto auto auto auto auto;
+      }
+
+      .bs-right {
+        order: -1;
+      }
+
+      .bs-map-wrap {
+        min-height: 210px;
+      }
+
+      .bs-options {
+        grid-template-columns: 1fr;
+      }
+
+      .bs-status-bar,
+      .bs-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .bs-result-board {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .bs-panel {
+        box-shadow: 5px 5px 0 var(--green-dark);
+      }
+
+      .bs-start,
+      .bs-center-screen,
+      .bs-result-layout {
+        padding: 16px;
+      }
+
+      .bs-start h1,
+      .bs-center-screen h2,
+      .bs-result-copy h2 {
+        font-size: 40px;
+      }
+
+      .bs-pieces,
+      .bs-result-pieces {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .bs-start-briefing,
+      .bs-preview-trays {
+        grid-template-columns: 1fr;
+      }
+
+      .bs-preview-route {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .bs-archive-preview {
+        min-height: 480px;
+      }
+
+      .bs-status-bar,
+      .bs-summary-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .bs-footer-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .bs-footer-actions .bs-actions,
+      .bs-actions .bs-btn,
+      .bs-start-actions .bs-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="bs-app" id="berlin-split" aria-live="polite"></main>
+  <script>
+    (() => {
+      const root = document.getElementById('berlin-split');
+      const params = new URLSearchParams(window.location.search);
+      const TRACKING_ENDPOINT = params.get('tracking') === 'off'
+        ? ''
+        : (params.get('tracking') === 'local'
+          ? 'http://127.0.0.1:5173/api/berlin-split-event'
+          : 'https://berlinwalk-content-app.vercel.app/api/berlin-split-event');
+      const storage = safeStorage();
+      const sessionId = storageGet('bw_berlin_split_session') || `bs_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+      const visitorId = storageGet('bw_berlin_split_visitor') || `bv_${Math.random().toString(16).slice(2)}_${Date.now()}`;
+      storageSet('bw_berlin_split_session', sessionId);
+      storageSet('bw_berlin_split_visitor', visitorId);
+
+      const state = {
+        data: null,
+        screen: 'loading',
+        missionIndex: 0,
+        selectedOption: '',
+        alignValue: 50,
+        integrity: 100,
+        clues: 3,
+        cluesUsed: 0,
+        clueVisible: false,
+        pieces: [],
+        stereotypesBroken: 0,
+        commits: 0,
+        collapses: 0,
+        soundEnabled: false,
+        audio: null,
+        sequence: 0,
+        checkpoint: null,
+        feedback: null,
+        result: null
+      };
+
+      function safeStorage() {
+        try { return window.localStorage; } catch { return null; }
+      }
+
+      function storageGet(key) {
+        if (!storage) return '';
+        try { return storage.getItem(key) || ''; } catch { return ''; }
+      }
+
+      function storageSet(key, value) {
+        if (!storage) return;
+        try { storage.setItem(key, value); } catch {}
+      }
+
+      function escapeHtml(value) {
+        return String(value ?? '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      function assetUrl(path) {
+        return escapeHtml(path || '');
+      }
+
+      function clamp(value, min, max) {
+        return Math.max(min, Math.min(max, value));
+      }
+
+      function scrollToTop() {
+        try {
+          window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        } catch {
+          window.scrollTo(0, 0);
+        }
+      }
+
+      async function init() {
+        renderLoading();
+        try {
+          const response = await fetch(`data.json?v=${Date.now()}`);
+          if (!response.ok) throw new Error(`Data load failed: ${response.status}`);
+          state.data = await response.json();
+          state.integrity = state.data.settings.startingIntegrity;
+          state.clues = state.data.settings.startingClues;
+          state.screen = 'start';
+          track('bw_berlin_split_page_view', { mission_count: state.data.missions.length });
+          render();
+        } catch (error) {
+          root.innerHTML = `
+            <section class="bs-panel bs-center-screen">
+              <span class="bs-kicker">Archive offline</span>
+              <h2>The archive drawer is stuck.</h2>
+              <p>${escapeHtml(error.message)}</p>
+            </section>
+          `;
+          syncHostHeight();
+        }
+      }
+
+      function renderLoading() {
+        root.innerHTML = `
+          <section class="bs-panel bs-center-screen">
+            <span class="bs-kicker">Berlin Split</span>
+            <h2>Opening the archive...</h2>
+            <p>Map fragments, border records and rebuilt-city files are being pulled onto the desk.</p>
+          </section>
+        `;
+        syncHostHeight();
+      }
+
+      function render() {
+        if (!state.data) return renderLoading();
+        if (state.screen === 'start') renderStart();
+        else if (state.screen === 'mission') renderMission();
+        else if (state.screen === 'checkpoint') renderCheckpoint();
+        else if (state.screen === 'collapse') renderCollapse();
+        else if (state.screen === 'result') renderResult();
+        bindCurrentScreen();
+        syncHostHeight();
+      }
+
+      function mapSvg(point) {
+        const pin = point || { x: 56, y: 40 };
+        const x = clamp(Number(pin.x) || 56, 6, 94);
+        const y = clamp(Number(pin.y) || 40, 8, 92);
+        const mapImage = state.data && state.data.visuals && (state.data.visuals.map || state.data.visuals.start)
+          ? (state.data.visuals.map || state.data.visuals.start)
+          : 'assets/visuals/berlin-split-real-berlin-map.webp';
+        const mapAttribution = state.data && state.data.visuals && state.data.visuals.mapAttribution
+          ? state.data.visuals.mapAttribution
+          : '';
+        return `
+          <div class="bs-map" role="img" aria-label="Realistic Berlin map with current file pin">
+            <img src="${assetUrl(mapImage)}" alt="" aria-hidden="true" loading="eager" decoding="async">
+            <span class="bs-map-current-pin" style="left:${x}%; top:${y}%"></span>
+            ${mapAttribution ? `<span class="bs-map-credit">${escapeHtml(mapAttribution)}</span>` : ''}
+          </div>
+        `;
+      }
+
+      function renderStart() {
+        const startVisual = state.data.visuals && state.data.visuals.start ? state.data.visuals.start : '';
+        root.innerHTML = `
+          <section class="bs-panel bs-start">
+            <div class="bs-start-copy">
+              <span class="bs-kicker">Divided-city archive game</span>
+              <h1>Berlin Split <span>The Lost Archive</span></h1>
+              <p class="bs-start-lead">You are restoring ten lost Berlin files. Read each piece of evidence, choose the archive tray it belongs in, and keep the city from collapsing into a simple East-vs-West story.</p>
+              <div class="bs-start-briefing" aria-label="How Berlin Split works">
+                <div class="bs-briefing-card"><strong>1. Read the file</strong><span>Each stop gives you one Berlin clue: a square, station, museum, Wall fragment, or rebuilt site.</span></div>
+                <div class="bs-briefing-card"><strong>2. Choose a tray</strong><span>Place the file into East Berlin, West Berlin, Border, Rebuilt, or Layered city logic.</span></div>
+                <div class="bs-briefing-card"><strong>3. Protect integrity</strong><span>Wrong shortcuts damage the archive. Clues help, but they cost integrity.</span></div>
+                <div class="bs-briefing-card"><strong>4. Replay for rank</strong><span>A messy run can still finish. A clean run unlocks the result worth sharing.</span></div>
+              </div>
+              <ul class="bs-start-rules">
+                <li>This is not a trivia test. It is a reading game: the evidence is on the file.</li>
+                <li>The best answer is often the one that keeps Berlin complicated.</li>
+                <li>If the archive collapses, you can retry from the last safe checkpoint.</li>
+              </ul>
+              <p class="bs-sound-card">Sound effects are intentionally off until you choose them. Pick sound mode first, then use the Test sound button inside the game if your browser stays quiet.</p>
+              <div class="bs-start-actions">
+                <button class="bs-btn bs-btn-primary" type="button" data-start="sound">${escapeHtml(state.data.copy.openWithSound)}</button>
+                <button class="bs-btn bs-btn-secondary" type="button" data-start="quiet">${escapeHtml(state.data.copy.openQuietly)}</button>
+              </div>
+            </div>
+            <aside class="bs-archive-preview" aria-label="Archive desk preview">
+              ${startVisual ? `<img class="bs-preview-image" src="${assetUrl(startVisual)}" alt="Cinematic archive desk with a divided Berlin map" loading="eager" decoding="async">` : ''}
+              <div class="bs-preview-content">
+                <div class="bs-preview-top">
+                  <span class="bs-preview-label">Evidence desk</span>
+                  <span class="bs-preview-label">10 files</span>
+                </div>
+                <div class="bs-preview-desk">
+                  <div class="bs-preview-evidence">
+                    <strong>Current file</strong>
+                    <span>Wide square, TV Tower, World Time Clock, older city below the surface.</span>
+                  </div>
+                  <div class="bs-preview-trays" aria-label="Archive trays">
+                    <div class="bs-preview-tray"><strong>East layer</strong><span>GDR-era power, planning, symbols.</span></div>
+                    <div class="bs-preview-tray"><strong>West layer</strong><span>Island city, border pressure, counterculture.</span></div>
+                    <div class="bs-preview-tray"><strong>Border layer</strong><span>Crossings, Wall zones, hidden procedures.</span></div>
+                    <div class="bs-preview-tray"><strong>Layered city</strong><span>Older Berlin, war, division, rebuild at once.</span></div>
+                  </div>
+                  <div class="bs-preview-route" aria-hidden="true">
+                    <span class="bs-preview-stop">File 01</span>
+                    <span class="bs-preview-stop">File 02</span>
+                    <span class="bs-preview-stop is-red">Risk</span>
+                    <span class="bs-preview-stop">Clue</span>
+                    <span class="bs-preview-stop">Rank</span>
+                  </div>
+                </div>
+              </div>
+            </aside>
+          </section>
+        `;
+      }
+
+      function renderMissionVisual(mission) {
+        if (!mission.visual) return '';
+        const caption = `${mission.kicker} / ${mission.location}`;
+        const alt = `${mission.location} archive evidence visual for ${mission.title}`;
+        return `
+          <figure class="bs-mission-visual">
+            <img src="${assetUrl(mission.visual)}" alt="${escapeHtml(alt)}" loading="eager" decoding="async">
+            <figcaption>${escapeHtml(caption)}</figcaption>
+          </figure>
+        `;
+      }
+
+      function currentMission() {
+        return state.data.missions[state.missionIndex];
+      }
+
+      function currentAct() {
+        const mission = currentMission();
+        return state.data.acts.find((act) => act.id === mission.act) || state.data.acts[0];
+      }
+
+      function saveCheckpoint() {
+        state.checkpoint = {
+          missionIndex: state.missionIndex,
+          integrity: Math.max(35, state.integrity),
+          clues: state.clues,
+          cluesUsed: state.cluesUsed,
+          pieces: state.pieces.slice(),
+          stereotypesBroken: state.stereotypesBroken,
+          commits: state.commits
+        };
+      }
+
+      function startGame(soundEnabled) {
+        state.screen = 'mission';
+        state.missionIndex = 0;
+        state.integrity = state.data.settings.startingIntegrity;
+        state.clues = state.data.settings.startingClues;
+        state.cluesUsed = 0;
+        state.clueVisible = false;
+        state.selectedOption = '';
+        state.alignValue = 50;
+        state.pieces = [];
+        state.stereotypesBroken = 0;
+        state.commits = 0;
+        state.collapses = 0;
+        state.feedback = null;
+        state.result = null;
+        state.soundEnabled = Boolean(soundEnabled);
+        if (state.soundEnabled) initAudio();
+        saveCheckpoint();
+        playSound('open');
+        if (state.soundEnabled) window.setTimeout(() => playSound('paper'), 180);
+        track('bw_berlin_split_open_archive', {
+          sound_enabled: state.soundEnabled,
+          mission_count: state.data.missions.length
+        });
+        trackMissionStart();
+        scrollToTop();
+        render();
+      }
+
+      function trackMissionStart() {
+        const mission = currentMission();
+        track('bw_berlin_split_mission_start', {
+          act: mission.act,
+          mission: mission.id,
+          mechanic: mission.mechanic,
+          integrity: state.integrity,
+          clues_used: state.cluesUsed,
+          step_count: state.commits
+        });
+      }
+
+      function renderMission() {
+        const mission = currentMission();
+        const act = currentAct();
+        const progress = Math.round((state.missionIndex / state.data.missions.length) * 100);
+        root.innerHTML = `
+          <section class="bs-panel bs-game">
+            <aside class="bs-left" aria-label="Archive map and status">
+              <div class="bs-status-bar">
+                <div class="bs-meter"><span>Integrity</span><strong>${state.integrity}%</strong></div>
+                <div class="bs-meter"><span>Clues</span><strong>${state.clues}</strong></div>
+                <div class="bs-meter"><span>Files</span><strong>${state.pieces.length}/${state.data.archivePieces.length}</strong></div>
+              </div>
+              <div class="bs-sound-strip">
+                <span>Sound effects: ${state.soundEnabled ? 'on' : 'off'}</span>
+                <button class="bs-sound-mini" type="button" ${state.soundEnabled ? 'data-test-sound' : 'data-enable-sound'}>${state.soundEnabled ? 'Test sound' : 'Turn sound on'}</button>
+              </div>
+              <div class="bs-progress-track" aria-label="Archive progress"><div class="bs-progress-fill" style="width:${progress}%"></div></div>
+              <div class="bs-mini-head">
+                <p class="bs-act"><strong>${escapeHtml(act.label)} - ${escapeHtml(act.title)}</strong>${escapeHtml(act.lead)}</p>
+                <span class="bs-file-kicker">${escapeHtml(mission.kicker)}</span>
+              </div>
+              <div class="bs-map-wrap">${mapSvg(mission.mapPoint)}</div>
+              <div class="bs-pieces" aria-label="Recovered archive pieces">
+                ${state.data.archivePieces.map((piece, index) => `
+                  <div class="bs-piece ${state.pieces.includes(piece.id) ? 'is-on' : ''}" title="${escapeHtml(piece.description)}">
+                    <strong>${String(index + 1).padStart(2, '0')}</strong>
+                    <span>${escapeHtml(piece.name)}</span>
+                  </div>
+                `).join('')}
+              </div>
+            </aside>
+
+            <section class="bs-right" aria-label="Current archive file">
+              <article class="bs-dossier">
+                <div class="bs-dossier-head">
+                  <div>
+                    <h2>${escapeHtml(mission.title)}</h2>
+                    <div class="bs-location">${escapeHtml(mission.location)}</div>
+                  </div>
+                </div>
+                ${renderMissionVisual(mission)}
+                <p class="bs-instruction">${escapeHtml(mission.instruction)}</p>
+                <div class="bs-evidence">${escapeHtml(mission.evidence)}</div>
+                <div class="bs-clue ${state.clueVisible ? 'is-on' : ''}"><strong>Field clue</strong>${escapeHtml(mission.clue)}</div>
+                ${mission.mechanic === 'align' ? renderAlign(mission) : renderOptions(mission)}
+              </article>
+              <div class="bs-feedback ${state.feedback ? 'is-on' : ''}" data-feedback>
+                ${state.feedback ? `<strong>${escapeHtml(state.feedback.label)}</strong>${escapeHtml(state.feedback.text)}` : ''}
+              </div>
+              <footer class="bs-footer-actions">
+                <p class="bs-note">${escapeHtml(mission.stereotype ? `Stereotype file: ${mission.stereotype}` : 'Keep the archive stable.')}</p>
+                <div class="bs-actions">
+                  <button class="bs-btn bs-btn-secondary" type="button" data-clue ${state.clues <= 0 || state.clueVisible ? 'disabled' : ''}>Reveal guide note (-5)</button>
+                  <button class="bs-btn bs-btn-primary" type="button" data-commit>${state.feedback ? 'Recover next file' : 'Lock this file'}</button>
+                </div>
+              </footer>
+            </section>
+          </section>
+        `;
+        updateAlignShadow();
+      }
+
+      function renderOptions(mission) {
+        return `
+          <span class="bs-decision-label">Choose the archive tray for this file</span>
+          <div class="bs-options">
+            ${mission.options.map((option) => `
+              <button class="bs-option ${state.selectedOption === option.id ? 'is-selected' : ''}" type="button" data-option="${escapeHtml(option.id)}">
+                <strong>${escapeHtml(option.label)}</strong>
+                <span>${escapeHtml(option.detail)}</span>
+              </button>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      function renderAlign(mission) {
+        return `
+          <div class="bs-align">
+            <div class="bs-align-stage">
+              <div class="bs-align-shadow" data-align-shadow></div>
+              <div class="bs-align-facade"></div>
+            </div>
+            <input class="bs-range" type="range" min="0" max="100" value="${state.alignValue}" data-align aria-label="Slide the Palast shadow">
+            <div class="bs-align-labels"><span>Erased</span><span>Aligned</span><span>Dominant</span></div>
+          </div>
+        `;
+      }
+
+      function selectOption(id) {
+        if (state.feedback) return;
+        state.selectedOption = id;
+        playSound('select');
+        render();
+      }
+
+      function useClue() {
+        if (state.clues <= 0 || state.clueVisible || state.feedback) return;
+        state.clues -= 1;
+        state.cluesUsed += 1;
+        state.clueVisible = true;
+        state.integrity = clamp(state.integrity - state.data.settings.cluePenalty, 0, 100);
+        playSound('paper');
+        track('bw_berlin_split_clue_used', {
+          act: currentMission().act,
+          mission: currentMission().id,
+          integrity: state.integrity,
+          clues_used: state.cluesUsed,
+          clues_left: state.clues
+        });
+        render();
+      }
+
+      function commitMission() {
+        if (state.feedback) {
+          if (state.feedback.advance === false) {
+            state.feedback = null;
+            render();
+            return;
+          }
+          advanceMission();
+          return;
+        }
+
+        const mission = currentMission();
+        let result;
+        if (mission.mechanic === 'align') {
+          result = evaluateAlign(mission);
+        } else {
+          if (!state.selectedOption) {
+            pulseFeedback('Choose one archive tray before locking this file.', 'Choose a tray first');
+            return;
+          }
+          result = mission.options.find((option) => option.id === state.selectedOption);
+        }
+
+        const loss = Number(result.integrityLoss || 0);
+        state.integrity = clamp(state.integrity - loss, 0, 100);
+        state.commits += 1;
+        if (loss <= 5) state.stereotypesBroken += 1;
+        if (mission.piece && !state.pieces.includes(mission.piece)) state.pieces.push(mission.piece);
+        state.feedback = {
+          label: loss <= 0 ? 'File recovered' : (loss <= 8 ? 'File mostly stable' : 'Archive damaged'),
+          text: result.feedback || result.text || ''
+        };
+
+        playSound(loss <= 0 ? 'recover' : 'warning');
+        track('bw_berlin_split_commit', {
+          act: mission.act,
+          mission: mission.id,
+          mechanic: mission.mechanic,
+          choice: result.id || 'alignment',
+          choice_text: result.label || 'Alignment',
+          integrity_loss: loss,
+          integrity: state.integrity,
+          clue_used: state.clueVisible,
+          archive_piece: mission.piece || '',
+          stereotype_broken: loss <= 5 ? 'true' : 'false',
+          step_count: state.commits,
+          success: loss <= 5 ? 'true' : 'false'
+        });
+        if (loss > 0) {
+          track('bw_berlin_split_integrity_loss', {
+            act: mission.act,
+            mission: mission.id,
+            integrity_loss: loss,
+            integrity: state.integrity
+          });
+        }
+
+        if (state.integrity <= 0) {
+          state.collapses += 1;
+          track('bw_berlin_split_archive_collapse', {
+            act: mission.act,
+            mission: mission.id,
+            collapses: state.collapses,
+            step_count: state.commits
+          });
+          state.screen = 'collapse';
+          scrollToTop();
+        }
+        render();
+      }
+
+      function pulseFeedback(text, label) {
+        state.feedback = { label, text, advance: false };
+        playSound('warning');
+        render();
+        window.setTimeout(() => {
+          if (state.feedback && state.feedback.text === text) {
+            state.feedback = null;
+            render();
+          }
+        }, 1200);
+      }
+
+      function evaluateAlign(mission) {
+        const distance = Math.abs(Number(state.alignValue) - Number(mission.target.value));
+        if (distance <= mission.target.tolerance) {
+          return { id: 'aligned', label: 'Aligned shadow', integrityLoss: 0, feedback: mission.successFeedback };
+        }
+        if (distance <= mission.target.tolerance * 2) {
+          return { id: 'near-aligned', label: 'Near alignment', integrityLoss: 7, feedback: mission.nearFeedback };
+        }
+        return { id: 'misaligned', label: 'Misaligned shadow', integrityLoss: 18, feedback: mission.failFeedback };
+      }
+
+      function advanceMission() {
+        state.feedback = null;
+        state.selectedOption = '';
+        state.alignValue = 50;
+        state.clueVisible = false;
+        state.missionIndex += 1;
+
+        if (state.missionIndex >= state.data.missions.length) {
+          finishGame();
+          return;
+        }
+
+        if (state.missionIndex === 3 || state.missionIndex === 6) {
+          saveCheckpoint();
+          state.screen = 'checkpoint';
+          playSound('stamp');
+          scrollToTop();
+          render();
+          return;
+        }
+
+        trackMissionStart();
+        scrollToTop();
+        render();
+      }
+
+      function renderCheckpoint() {
+        const act = currentAct();
+        root.innerHTML = `
+          <section class="bs-panel bs-center-screen">
+            <span class="bs-kicker">Checkpoint recovered</span>
+            <h2>${escapeHtml(act.title)}</h2>
+            <p>${escapeHtml(act.lead)} The archive has saved a safe file here. A clean top-rank run still needs a restart from the beginning.</p>
+            <div class="bs-summary-grid">
+              <div class="bs-summary-card"><span>Integrity</span><strong>${state.integrity}%</strong></div>
+              <div class="bs-summary-card"><span>Clues used</span><strong>${state.cluesUsed}</strong></div>
+              <div class="bs-summary-card"><span>Files</span><strong>${state.pieces.length}</strong></div>
+              <div class="bs-summary-card"><span>Collapses</span><strong>${state.collapses}</strong></div>
+            </div>
+            <div class="bs-actions">
+              <button class="bs-btn bs-btn-primary" type="button" data-continue>Open next file</button>
+              <button class="bs-btn bs-btn-secondary" type="button" data-clean-restart>${escapeHtml(state.data.copy.cleanRestart)}</button>
+            </div>
+          </section>
+        `;
+      }
+
+      function continueFromCheckpoint() {
+        state.screen = 'mission';
+        trackMissionStart();
+        scrollToTop();
+        render();
+      }
+
+      function renderCollapse() {
+        root.innerHTML = `
+          <section class="bs-panel bs-center-screen">
+            <span class="bs-kicker">Archive collapse</span>
+            <h2>The file cannot hold this version of Berlin.</h2>
+            <p>The city rejects shortcuts. Reopen the last safe file, or start clean and protect the archive from the first stamp.</p>
+            <div class="bs-summary-grid">
+              <div class="bs-summary-card"><span>Integrity</span><strong>0%</strong></div>
+              <div class="bs-summary-card"><span>Files recovered</span><strong>${state.pieces.length}</strong></div>
+              <div class="bs-summary-card"><span>Clues used</span><strong>${state.cluesUsed}</strong></div>
+              <div class="bs-summary-card"><span>Collapses</span><strong>${state.collapses}</strong></div>
+            </div>
+            <div class="bs-actions">
+              <button class="bs-btn bs-btn-primary" type="button" data-retry-checkpoint>${escapeHtml(state.data.copy.checkpoint)}</button>
+              <button class="bs-btn bs-btn-secondary" type="button" data-clean-restart>${escapeHtml(state.data.copy.cleanRestart)}</button>
+            </div>
+          </section>
+        `;
+      }
+
+      function retryCheckpoint() {
+        const checkpoint = state.checkpoint || {
+          missionIndex: 0,
+          integrity: 45,
+          clues: state.data.settings.startingClues,
+          cluesUsed: 0,
+          pieces: [],
+          stereotypesBroken: 0,
+          commits: 0
+        };
+        state.missionIndex = checkpoint.missionIndex;
+        state.integrity = Math.max(45, checkpoint.integrity);
+        state.clues = checkpoint.clues;
+        state.cluesUsed = checkpoint.cluesUsed;
+        state.pieces = checkpoint.pieces.slice();
+        state.stereotypesBroken = checkpoint.stereotypesBroken;
+        state.commits = checkpoint.commits;
+        state.feedback = null;
+        state.selectedOption = '';
+        state.alignValue = 50;
+        state.clueVisible = false;
+        state.screen = 'mission';
+        playSound('open');
+        track('bw_berlin_split_checkpoint_retry', {
+          mission: currentMission().id,
+          act: currentMission().act,
+          integrity: state.integrity,
+          collapses: state.collapses
+        });
+        trackMissionStart();
+        scrollToTop();
+        render();
+      }
+
+      function finishGame() {
+        state.result = pickEnding();
+        state.screen = 'result';
+        playSound('result');
+        storageSet('bw_berlin_split_last_result', state.result.id);
+        track('bw_berlin_split_complete', {
+          ending: state.result.id,
+          result: state.result.id,
+          result_title: state.result.title,
+          integrity: state.integrity,
+          clues_used: state.cluesUsed,
+          archive_pieces: state.pieces.join(','),
+          stereotypes_broken: state.stereotypesBroken,
+          collapses: state.collapses,
+          step_count: state.commits,
+          score: state.integrity,
+          success: state.result.id === 'lost-tourist' ? 'false' : 'true'
+        });
+        scrollToTop();
+        render();
+      }
+
+      function pickEnding() {
+        if (state.collapses > 0 && state.integrity < 55) return endingById('checkpoint-rookie');
+        if (state.integrity >= 90 && state.cluesUsed === 0 && state.pieces.length >= 9) return endingById('myth-breaker');
+        const sorted = state.data.endings.slice().sort((a, b) => b.threshold - a.threshold);
+        return sorted.find((ending) => state.integrity >= ending.threshold) || state.data.endings[0];
+      }
+
+      function endingById(id) {
+        return state.data.endings.find((ending) => ending.id === id) || state.data.endings[0];
+      }
+
+      function renderResult() {
+        const result = state.result || pickEnding();
+        const bookingUrl = new URL(state.data.bookingUrl);
+        bookingUrl.searchParams.set('utm_source', 'berlin_split');
+        bookingUrl.searchParams.set('utm_medium', 'game');
+        bookingUrl.searchParams.set('utm_campaign', 'berlin_split');
+        bookingUrl.searchParams.set('utm_content', result.id);
+        root.innerHTML = `
+          <section class="bs-panel bs-result-layout">
+            <div class="bs-result-copy">
+              <span class="bs-kicker">Archive restored</span>
+              <h2>${escapeHtml(result.title)} <span>${state.integrity}% intact</span></h2>
+              <p>${escapeHtml(result.description)}</p>
+              <p>${escapeHtml(result.tip)}</p>
+              <div class="bs-summary-grid">
+                <div class="bs-summary-card"><span>Integrity</span><strong>${state.integrity}%</strong></div>
+                <div class="bs-summary-card"><span>Clues used</span><strong>${state.cluesUsed}</strong></div>
+                <div class="bs-summary-card"><span>Files</span><strong>${state.pieces.length}/10</strong></div>
+                <div class="bs-summary-card"><span>Myths broken</span><strong>${state.stereotypesBroken}</strong></div>
+              </div>
+              <div class="bs-actions">
+                <button class="bs-btn bs-btn-secondary" type="button" data-share>${shareActionLabel()}</button>
+                <button class="bs-btn bs-btn-yellow" type="button" data-clean-restart>${escapeHtml(state.data.copy.cleanRestart)}</button>
+                <a class="bs-btn bs-btn-primary" href="${escapeHtml(bookingUrl.toString())}" data-booking>${escapeHtml(state.data.copy.tourCta)}</a>
+              </div>
+              <div class="bs-manual-copy" data-manual-copy></div>
+            </div>
+            <aside class="bs-result-board" aria-label="Recovered files">
+              <div>${mapSvg({ x: 54, y: 45 })}</div>
+              <div class="bs-result-pieces">
+                ${state.data.archivePieces.map((piece) => `
+                  <div class="bs-result-piece ${state.pieces.includes(piece.id) ? 'is-on' : ''}">
+                    <strong>${escapeHtml(piece.name)}</strong>
+                    <span>${escapeHtml(state.pieces.includes(piece.id) ? piece.description : 'File still unstable')}</span>
+                  </div>
+                `).join('')}
+              </div>
+            </aside>
+          </section>
+        `;
+      }
+
+      function restartClean() {
+        track('bw_berlin_split_restart', {
+          ending: state.result ? state.result.id : '',
+          integrity: state.integrity,
+          clues_used: state.cluesUsed,
+          collapses: state.collapses
+        });
+        startGame(state.soundEnabled);
+      }
+
+      function updateAlignShadow() {
+        const shadow = root.querySelector('[data-align-shadow]');
+        if (!shadow) return;
+        shadow.style.left = `${state.alignValue}%`;
+      }
+
+      function bindCurrentScreen() {
+        root.querySelectorAll('[data-start]').forEach((button) => {
+          button.addEventListener('click', () => startGame(button.dataset.start === 'sound'));
+        });
+        root.querySelectorAll('[data-option]').forEach((button) => {
+          button.addEventListener('click', () => selectOption(button.dataset.option));
+        });
+        const align = root.querySelector('[data-align]');
+        if (align) {
+          align.addEventListener('input', () => {
+            state.alignValue = Number(align.value);
+            updateAlignShadow();
+          });
+        }
+        const clue = root.querySelector('[data-clue]');
+        if (clue) clue.addEventListener('click', useClue);
+        const commit = root.querySelector('[data-commit]');
+        if (commit) commit.addEventListener('click', commitMission);
+        const testSound = root.querySelector('[data-test-sound]');
+        if (testSound) testSound.addEventListener('click', testSoundEffects);
+        const enableSound = root.querySelector('[data-enable-sound]');
+        if (enableSound) enableSound.addEventListener('click', enableSoundEffects);
+        const cont = root.querySelector('[data-continue]');
+        if (cont) cont.addEventListener('click', continueFromCheckpoint);
+        root.querySelectorAll('[data-clean-restart]').forEach((button) => {
+          button.addEventListener('click', restartClean);
+        });
+        const retry = root.querySelector('[data-retry-checkpoint]');
+        if (retry) retry.addEventListener('click', retryCheckpoint);
+        const share = root.querySelector('[data-share]');
+        if (share) share.addEventListener('click', shareResult);
+        const booking = root.querySelector('[data-booking]');
+        if (booking) {
+          booking.addEventListener('click', () => {
+            track('bw_berlin_split_booking_click', {
+              ending: state.result ? state.result.id : '',
+              result_title: state.result ? state.result.title : '',
+              integrity: state.integrity
+            });
+          });
+        }
+      }
+
+      function initAudio() {
+        if (state.audio) return;
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        state.audio = new AudioContext();
+      }
+
+      function enableSoundEffects() {
+        state.soundEnabled = true;
+        initAudio();
+        playSound('open');
+        track('bw_berlin_split_sound_enabled', {
+          act: currentMission() ? currentMission().act : '',
+          mission: currentMission() ? currentMission().id : '',
+          integrity: state.integrity
+        });
+        render();
+      }
+
+      function testSoundEffects() {
+        state.soundEnabled = true;
+        initAudio();
+        playSound('test');
+        track('bw_berlin_split_sound_test', {
+          act: currentMission() ? currentMission().act : '',
+          mission: currentMission() ? currentMission().id : '',
+          integrity: state.integrity
+        });
+      }
+
+      function playSound(kind) {
+        if (!state.soundEnabled) return;
+        initAudio();
+        const ctx = state.audio;
+        if (!ctx) return;
+        const schedule = () => scheduleSoundPattern(ctx, kind);
+        if (ctx.state === 'suspended') {
+          ctx.resume().then(schedule).catch(() => {});
+          return;
+        }
+        schedule();
+      }
+
+      function scheduleSoundPattern(ctx, kind) {
+        const patterns = {
+          open: [[210, 0.18, 'sine', 0], [315, 0.16, 'triangle', 0.13]],
+          select: [[520, 0.11, 'triangle', 0]],
+          paper: [[175, 0.14, 'sawtooth', 0], [118, 0.08, 'triangle', 0.08]],
+          stamp: [[280, 0.11, 'square', 0], [150, 0.09, 'sawtooth', 0.07]],
+          warning: [[125, 0.18, 'sawtooth', 0], [92, 0.12, 'square', 0.11]],
+          recover: [[640, 0.12, 'triangle', 0], [880, 0.15, 'sine', 0.1]],
+          result: [[360, 0.16, 'sine', 0], [540, 0.15, 'triangle', 0.13], [760, 0.22, 'sine', 0.26]],
+          test: [[260, 0.14, 'sine', 0], [520, 0.14, 'triangle', 0.16], [780, 0.18, 'sine', 0.32]]
+        };
+        const sequence = patterns[kind] || patterns.select;
+        sequence.forEach(([freq, duration, type, delay]) => {
+          const now = ctx.currentTime + delay;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = type;
+          osc.frequency.setValueAtTime(freq, now);
+          gain.gain.setValueAtTime(0.0001, now);
+          gain.gain.exponentialRampToValueAtTime(0.16, now + 0.014);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + duration + 0.04);
+        });
+      }
+
+      function sharePayload() {
+        const result = state.result || pickEnding();
+        return {
+          title: 'Berlin Split: The Lost Archive',
+          text: `I restored ${state.integrity}% of the archive and got ${result.title} in Berlin Split.`,
+          url: state.data.shareUrl
+        };
+      }
+
+      function shareText() {
+        const payload = sharePayload();
+        return `${payload.text}\n${payload.url}`;
+      }
+
+      function prefersNativeShare() {
+        return Boolean(navigator.share && (window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 820));
+      }
+
+      function shareActionLabel() {
+        return prefersNativeShare() ? 'Share result' : 'Copy result';
+      }
+
+      async function shareResult() {
+        let method = 'manual_copy';
+        const payload = sharePayload();
+        try {
+          if (prefersNativeShare()) {
+            await navigator.share(payload);
+            method = 'native_share';
+          } else if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(shareText());
+            method = 'clipboard';
+          } else {
+            copyFallback(shareText());
+            method = 'legacy_clipboard';
+          }
+        } catch {
+          copyFallback(shareText());
+          method = 'fallback_copy';
+        }
+        track('bw_berlin_split_share', {
+          method,
+          share_method: method,
+          ending: state.result ? state.result.id : '',
+          integrity: state.integrity
+        });
+      }
+
+      function copyFallback(text) {
+        const area = document.createElement('textarea');
+        area.value = text;
+        area.setAttribute('readonly', '');
+        area.style.position = 'fixed';
+        area.style.left = '-9999px';
+        document.body.appendChild(area);
+        area.select();
+        let copied = false;
+        try { copied = document.execCommand('copy'); } catch { copied = false; }
+        area.remove();
+        if (!copied) {
+          const box = root.querySelector('[data-manual-copy]');
+          if (box) {
+            box.textContent = text;
+            box.classList.add('is-on');
+          }
+        }
+      }
+
+      function commonTrackingPayload(eventName, payload = {}) {
+        const url = new URL(window.location.href);
+        const parentUrl = params.get('parent_url') || document.referrer || '';
+        const parentPath = (() => {
+          try { return parentUrl ? new URL(parentUrl).pathname : (params.get('parent_path') || ''); } catch { return params.get('parent_path') || ''; }
+        })();
+        return {
+          eventName,
+          eventId: `${sessionId}:${eventName}:${++state.sequence}`,
+          sessionId,
+          visitorId,
+          timestamp: new Date().toISOString(),
+          eventDate: new Date().toISOString().slice(0, 10),
+          pagePath: window.location.pathname,
+          pageUrl: window.location.href,
+          parentPath,
+          parentUrl,
+          referrer: document.referrer || '',
+          landingPage: window.location.href,
+          firstPage: window.location.href,
+          utmSource: url.searchParams.get('utm_source') || '',
+          utmMedium: url.searchParams.get('utm_medium') || '',
+          utmCampaign: url.searchParams.get('utm_campaign') || '',
+          utmContent: url.searchParams.get('utm_content') || '',
+          utmTerm: url.searchParams.get('utm_term') || '',
+          fbclid: url.searchParams.get('fbclid') || '',
+          fbc: readCookie('_fbc'),
+          fbp: readCookie('_fbp'),
+          isPaid: Boolean(url.searchParams.get('fbclid') || /paid|meta|facebook|instagram|cpc/i.test(url.searchParams.get('utm_medium') || '')),
+          screenWidth: String(window.screen.width || ''),
+          viewportWidth: String(window.innerWidth || ''),
+          payload: {
+            context: params.get('context') || params.get('utm_content') || '',
+            source: 'berlin_split',
+            sound_enabled: state.soundEnabled,
+            ...payload
+          }
+        };
+      }
+
+      async function track(eventName, payload = {}) {
+        const detail = {
+          event_source: 'berlin_split',
+          ...payload
+        };
+        if (Array.isArray(window.dataLayer)) window.dataLayer.push({ event: eventName, ...detail });
+        if (typeof window.gtag === 'function') window.gtag('event', eventName, detail);
+        window.parent.postMessage({ type: 'bw-analytics', eventName, payload: detail }, '*');
+        if (!TRACKING_ENDPOINT) return null;
+        try {
+          await fetch(TRACKING_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(commonTrackingPayload(eventName, detail)),
+            keepalive: true
+          });
+        } catch (error) {
+          console.warn('[Berlin Split] tracking failed', error);
+        }
+        return null;
+      }
+
+      function readCookie(name) {
+        const match = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/[.$?*|{}()[\]\\/+^]/g, '\\$&') + '=([^;]*)'));
+        return match ? decodeURIComponent(match[1]) : '';
+      }
+
+      function syncHostHeight() {
+        if (params.get('resize') === 'none') return;
+        window.requestAnimationFrame(() => {
+          const height = Math.ceil(document.documentElement.scrollHeight || document.body.scrollHeight || 680);
+          window.parent.postMessage({ type: 'bw-resize', height }, '*');
+        });
+      }
+
+      window.addEventListener('resize', syncHostHeight, { passive: true });
+      init();
+    })();
+  </script>
+</body>
+</html>

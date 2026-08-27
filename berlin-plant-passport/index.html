@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Berlin Plant Passport | BerlinWalk</title>
+  <link rel="icon" type="image/png" href="../tools-home/icons/berlin-plant-passport-160.png">
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    :root {
+      --forest: #123d18;
+      --forest-deep: #09280f;
+      --ink: #17371d;
+      --paper: #f7f1e5;
+      --cream: #fffdf8;
+      --line: rgba(18, 61, 24, .2);
+      --yellow: #ffe600;
+      --lime: #7cb342;
+      --muted: #526256;
+      --soft: #eaf2e8;
+      --warm: #fff3be;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: transparent; color: var(--ink); font-family: Arial, Helvetica, sans-serif; }
+    button { font: inherit; cursor: pointer; }
+    .passport { max-width: 940px; margin: 0 auto; overflow: hidden; border: 1px solid var(--line); border-radius: 28px; background: var(--paper); box-shadow: 0 18px 46px rgba(18, 61, 24, .15); }
+    .hero { display: grid; grid-template-columns: minmax(0, 1fr) 188px; gap: 28px; align-items: center; min-height: 292px; padding: 34px; background: radial-gradient(circle at 82% 20%, rgba(124, 179, 66, .32), transparent 30%), linear-gradient(120deg, #09280f, #123d18 64%, #285731); color: #fff; }
+    .eyebrow { margin: 0 0 12px; color: var(--yellow); font-size: 11px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+    h1 { max-width: 610px; margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(38px, 5vw, 61px); line-height: .96; letter-spacing: -.055em; }
+    .hero-copy { max-width: 600px; margin: 15px 0 0; color: rgba(255,255,255,.91); font-size: 16px; line-height: 1.55; }
+    .hero-icon { display: block; width: min(100%, 170px); height: auto; justify-self: end; border-radius: 27px; box-shadow: 0 18px 30px rgba(0,0,0,.28); }
+    .inside { padding: 30px 34px 36px; }
+    .intro { max-width: 730px; margin: 0 auto 24px; font-size: 17px; line-height: 1.58; text-align: center; }
+    .book { overflow: hidden; border: 1px solid var(--line); border-radius: 24px; background: var(--cream); }
+    .book-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; padding: 22px 24px; border-bottom: 1px solid var(--line); background: #f0eadb; }
+    .book-head h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: 29px; line-height: 1; letter-spacing: -.035em; }
+    .book-head p { max-width: 500px; margin: 7px 0 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
+    .counter { flex: 0 0 auto; padding: 8px 11px; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--forest); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .counter.ready { background: var(--soft); border-color: rgba(27, 94, 32, .42); }
+    .stamp-list { display: grid; gap: 0; }
+    .stamp { display: grid; grid-template-columns: 54px minmax(0, 1fr); gap: 15px; padding: 22px 24px; border-bottom: 1px dashed rgba(18, 61, 24, .24); }
+    .stamp:last-child { border-bottom: 0; }
+    .stamp-number { display: grid; width: 42px; height: 42px; place-items: center; border: 1px dashed rgba(18, 61, 24, .45); border-radius: 50%; background: #fffdf8; color: var(--forest); font-family: Georgia, "Times New Roman", serif; font-size: 18px; font-weight: 700; }
+    .stamp.complete .stamp-number { border-style: solid; border-color: var(--forest); background: var(--yellow); color: var(--forest-deep); }
+    .stamp-label { display: flex; align-items: baseline; gap: 9px; margin: 0 0 12px; }
+    .stamp-label h3 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: 23px; letter-spacing: -.025em; }
+    .stamp-label span { color: #6f7e72; font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .choice-row { display: flex; flex-wrap: wrap; gap: 9px; }
+    .choice { min-height: 43px; padding: 10px 13px; border: 1px solid rgba(18,61,24,.34); border-radius: 12px; background: #fff; color: var(--forest); font-size: 13px; font-weight: 800; line-height: 1.25; transition: transform .15s ease, box-shadow .15s ease, background .15s ease; }
+    .choice:hover, .choice:focus-visible { outline: 3px solid rgba(255, 230, 0, .82); outline-offset: 2px; transform: translateY(-1px); box-shadow: 0 5px 0 rgba(18,61,24,.16); }
+    .choice[aria-pressed="true"] { border-color: var(--forest); background: var(--yellow); color: var(--forest-deep); }
+    .hint { margin: 11px 0 0; color: var(--muted); font-size: 13px; line-height: 1.48; }
+    .visit-pass { display: none; margin: 0 24px 24px; overflow: hidden; border: 1px solid rgba(18,61,24,.4); border-radius: 19px; background: var(--forest); color: #fff; box-shadow: 0 12px 25px rgba(18,61,24,.18); }
+    .visit-pass.ready { display: block; }
+    .pass-top { display: grid; grid-template-columns: 78px minmax(0, 1fr); gap: 17px; align-items: center; padding: 20px; background: linear-gradient(120deg, rgba(124,179,66,.32), transparent 55%); }
+    .pass-seal { display: grid; width: 70px; height: 70px; place-items: center; border: 2px dashed rgba(255,255,255,.78); border-radius: 50%; color: var(--yellow); font-size: 11px; font-weight: 800; letter-spacing: .08em; line-height: 1.2; text-align: center; text-transform: uppercase; transform: rotate(-8deg); }
+    .pass-kicker { margin: 0 0 5px; color: var(--yellow); font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .pass-top h3 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: 29px; line-height: 1; letter-spacing: -.035em; }
+    .pass-copy { margin: 14px 20px 0; color: rgba(255,255,255,.93); font-size: 15px; line-height: 1.56; }
+    .pass-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 19px; border-top: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.2); }
+    .pass-cell { min-height: 118px; padding: 15px; background: rgba(9,40,15,.76); }
+    .pass-cell span { display: block; margin-bottom: 7px; color: rgba(255,255,255,.62); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .pass-cell strong { display: block; font-family: Georgia, "Times New Roman", serif; font-size: 18px; line-height: 1.08; letter-spacing: -.02em; }
+    .pass-foot { margin: 0; padding: 15px 20px 18px; border-top: 1px solid rgba(255,255,255,.2); color: rgba(255,255,255,.78); font-size: 12px; line-height: 1.5; }
+    .pass-foot a { color: var(--yellow); font-weight: 800; }
+    .bottom { max-width: 735px; margin: 22px auto 0; color: var(--muted); font-size: 12px; line-height: 1.58; text-align: center; }
+    @media (max-width: 760px) {
+      .passport { border-radius: 18px; }
+      .hero { grid-template-columns: minmax(0, 1fr) 112px; gap: 17px; min-height: 250px; padding: 25px 22px; }
+      .hero-icon { width: 108px; border-radius: 19px; }
+      .inside { padding: 22px 16px 28px; }
+      .book-head { display: block; padding: 20px 17px; }
+      .counter { display: inline-block; margin-top: 12px; }
+      .stamp { grid-template-columns: 42px minmax(0, 1fr); gap: 11px; padding: 19px 16px; }
+      .stamp-number { width: 34px; height: 34px; font-size: 15px; }
+      .visit-pass { margin: 0 16px 18px; }
+      .pass-grid { grid-template-columns: 1fr; }
+      .pass-cell { min-height: auto; }
+    }
+    @media (max-width: 390px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-icon { justify-self: start; width: 94px; }
+      .stamp { grid-template-columns: 1fr; }
+      .stamp-number { width: 36px; height: 36px; }
+      .pass-top { grid-template-columns: 58px minmax(0, 1fr); gap: 12px; padding: 17px; }
+      .pass-seal { width: 54px; height: 54px; font-size: 9px; }
+      .pass-top h3 { font-size: 24px; }
+      .passport.has-pass .stamp.complete { grid-template-columns: 42px minmax(0, 1fr); gap: 10px; padding: 13px 16px; }
+      .passport.has-pass .stamp.complete .stamp-number { width: 34px; height: 34px; }
+      .passport.has-pass .stamp.complete .stamp-label { margin-bottom: 7px; }
+      .passport.has-pass .stamp.complete .stamp-label span,
+      .passport.has-pass .stamp.complete .hint,
+      .passport.has-pass .stamp.complete .choice:not([aria-pressed="true"]) { display: none; }
+      .passport.has-pass .stamp.complete .choice-row { gap: 0; }
+      .passport.has-pass .stamp.complete .choice[aria-pressed="true"] { min-height: 36px; padding: 8px 11px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="passport" id="bw-plant-passport">
+    <section class="hero" aria-labelledby="tool-title">
+      <div>
+        <p class="eyebrow">Dahlem · visit shape</p>
+        <h1 id="tool-title">Berlin Plant Passport</h1>
+        <p class="hero-copy">Stamp three honest parts of your day. I will turn them into one calm Botanic Garden visit shape instead of another sprawling checklist.</p>
+      </div>
+      <img class="hero-icon" src="../tools-home/icons/berlin-plant-passport.png" alt="" width="512" height="512">
+    </section>
+
+    <section class="inside">
+      <p class="intro">This is a planning lens, not a live ticket or weather service. Finish the three stamps, then check the Garden’s own page before you travel.</p>
+      <section class="book" aria-labelledby="passport-title">
+        <div class="book-head">
+          <div>
+            <h2 id="passport-title">Stamp your visit</h2>
+            <p>Choose what your real day can carry. There is no wrong combination; the point is to stop pretending every garden visit needs the full site.</p>
+          </div>
+          <span class="counter" id="counter">0 of 3 stamped</span>
+        </div>
+
+        <div class="stamp-list">
+          <section class="stamp" data-stamp="cover" aria-labelledby="cover-title">
+            <div class="stamp-number" aria-hidden="true">1</div>
+            <div>
+              <div class="stamp-label"><h3 id="cover-title">Your cover</h3><span>Weather lens</span></div>
+              <div class="choice-row" role="group" aria-label="Choose your weather cover">
+                <button class="choice" type="button" data-group="cover" data-value="cover" aria-pressed="false">I need indoor cover</button>
+                <button class="choice" type="button" data-group="cover" data-value="open" aria-pressed="false">I want the open air</button>
+                <button class="choice" type="button" data-group="cover" data-value="flex" aria-pressed="false">Either can lead</button>
+              </div>
+              <p class="hint">Let rain, heat or wind shape the order; do not let it cancel the whole idea.</p>
+            </div>
+          </section>
+
+          <section class="stamp" data-stamp="time" aria-labelledby="time-title">
+            <div class="stamp-number" aria-hidden="true">2</div>
+            <div>
+              <div class="stamp-label"><h3 id="time-title">Your honest time</h3><span>Pace lens</span></div>
+              <div class="choice-row" role="group" aria-label="Choose available visit time">
+                <button class="choice" type="button" data-group="time" data-value="short" aria-pressed="false">About 90 minutes</button>
+                <button class="choice" type="button" data-group="time" data-value="half" aria-pressed="false">A calm half-day</button>
+                <button class="choice" type="button" data-group="time" data-value="long" aria-pressed="false">A long wander</button>
+              </div>
+              <p class="hint">A short visit is not a failure; it just needs one clear anchor.</p>
+            </div>
+          </section>
+
+          <section class="stamp" data-stamp="aim" aria-labelledby="aim-title">
+            <div class="stamp-number" aria-hidden="true">3</div>
+            <div>
+              <div class="stamp-label"><h3 id="aim-title">Your aim</h3><span>Attention lens</span></div>
+              <div class="choice-row" role="group" aria-label="Choose your garden aim">
+                <button class="choice" type="button" data-group="aim" data-value="glass" aria-pressed="false">Glass and tropical air</button>
+                <button class="choice" type="button" data-group="aim" data-value="outside" aria-pressed="false">Paths, trees and quiet</button>
+                <button class="choice" type="button" data-group="aim" data-value="both" aria-pressed="false">One of each</button>
+              </div>
+              <p class="hint">Pick the thing you would remember, rather than collecting rooms and paths for their own sake.</p>
+            </div>
+          </section>
+        </div>
+
+        <section class="visit-pass" id="visit-pass" aria-live="polite" aria-labelledby="pass-title">
+          <div class="pass-top">
+            <div class="pass-seal" aria-hidden="true">Berlin<br>Plant<br>Pass</div>
+            <div>
+              <p class="pass-kicker">Passport issued</p>
+              <h3 id="pass-title">Your Garden shape</h3>
+            </div>
+          </div>
+          <p class="pass-copy" id="pass-copy"></p>
+          <div class="pass-grid">
+            <div class="pass-cell"><span>Begin with</span><strong id="pass-start"></strong></div>
+            <div class="pass-cell"><span>Keep it to</span><strong id="pass-pace"></strong></div>
+            <div class="pass-cell"><span>Do not forget</span><strong id="pass-caution"></strong></div>
+          </div>
+          <p class="pass-foot">Opening times, ticket queues and weather exceptions change. <a href="https://www.bgbm.org/en/visit-us/opening-hours-and-box-office?language=de" target="_blank" rel="noopener">Check the Garden’s live visitor information</a> before you set out.</p>
+        </section>
+      </section>
+      <p class="bottom">The passport does not store your choices. It is a calm way to decide between glasshouses and outdoor paths; it does not promise a particular display, entrance, event or service.</p>
+    </section>
+  </main>
+
+  <script src="../js/brand.js"></script>
+  <script>
+    (function () {
+      const root = document.getElementById('bw-plant-passport');
+      const counter = document.getElementById('counter');
+      const visitPass = document.getElementById('visit-pass');
+      const copy = document.getElementById('pass-copy');
+      const start = document.getElementById('pass-start');
+      const pace = document.getElementById('pass-pace');
+      const caution = document.getElementById('pass-caution');
+      const selections = { cover: '', time: '', aim: '' };
+      const labels = {
+        cover: { cover: 'indoor cover', open: 'open air', flex: 'either can lead' },
+        time: { short: 'about 90 minutes', half: 'a calm half-day', long: 'a long wander' },
+        aim: { glass: 'glass and tropical air', outside: 'paths, trees and quiet', both: 'one of each' }
+      };
+
+      function reportHeight() {
+        const height = Math.ceil(Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, root.getBoundingClientRect().bottom));
+        window.parent.postMessage({ type: 'berlinwalk-widget-height', slug: 'berlin-plant-passport', height: height }, '*');
+      }
+
+      function choiceText(group, value) {
+        return labels[group][value] || '';
+      }
+
+      function updateStamp(group) {
+        const stamp = document.querySelector('[data-stamp="' + group + '"]');
+        stamp.classList.toggle('complete', Boolean(selections[group]));
+      }
+
+      function buildPass() {
+        const done = Object.values(selections).filter(Boolean).length;
+        counter.textContent = done + ' of 3 stamped';
+        counter.classList.toggle('ready', done === 3);
+        root.classList.toggle('has-pass', done === 3);
+        if (done !== 3) {
+          visitPass.classList.remove('ready');
+          reportHeight();
+          return;
+        }
+
+        let first = '';
+        let narrative = '';
+        if (selections.cover === 'cover') {
+          first = 'The glasshouses';
+          narrative = 'Begin under glass so the day already has a centre. Treat one outside loop as a bonus rather than making the whole visit depend on a clear sky.';
+        } else if (selections.cover === 'open') {
+          first = 'An outdoor path';
+          narrative = 'Use the dry part of the day for the garden’s outdoor scale, then let a glasshouse become the slower finish instead of the weather backup.';
+        } else {
+          first = selections.aim === 'outside' ? 'One outdoor path' : 'The Great Tropical House';
+          narrative = 'Keep the order flexible. Give either the outdoor garden or the glasshouses permission to lead, but choose one as the anchor once you arrive.';
+        }
+
+        let limit = '';
+        if (selections.time === 'short') limit = 'one anchor + one contrast';
+        if (selections.time === 'half') limit = 'two focused sections';
+        if (selections.time === 'long') limit = 'a slow outdoor-to-glass rhythm';
+
+        let focus = '';
+        if (selections.aim === 'glass') focus = 'Keep a tropical room as the memory, not every labelled plant.';
+        if (selections.aim === 'outside') focus = 'Leave room for a path that was not on your original list.';
+        if (selections.aim === 'both') focus = 'Pair one glasshouse moment with one outdoor pause, then stop while it still feels spacious.';
+
+        copy.textContent = narrative + ' Your stamped aim is ' + choiceText('aim', selections.aim) + ' with ' + choiceText('time', selections.time) + '.';
+        start.textContent = first;
+        pace.textContent = limit;
+        caution.textContent = focus;
+        visitPass.classList.add('ready');
+        reportHeight();
+      }
+
+      document.querySelectorAll('.choice').forEach(function (button) {
+        button.addEventListener('click', function () {
+          const group = button.dataset.group;
+          const value = button.dataset.value;
+          selections[group] = selections[group] === value ? '' : value;
+          document.querySelectorAll('.choice[data-group="' + group + '"]').forEach(function (item) {
+            item.setAttribute('aria-pressed', String(selections[group] && item === button));
+          });
+          updateStamp(group);
+          buildPass();
+        });
+      });
+
+      new ResizeObserver(reportHeight).observe(root);
+      window.addEventListener('load', reportHeight);
+      window.addEventListener('resize', reportHeight);
+      reportHeight();
+    }());
+  </script>
+</body>
+</html>

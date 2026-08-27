@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Stolperstein Reader: Read the Brass Stones Under Your Feet</title>
+<meta name="description" content="Berlin's sidewalks hold thousands of small brass memorials. Walk through a real inscription line by line and learn to read any Stolperstein you pass, in German and English." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Crect x='16' y='16' width='32' height='32' rx='3' fill='%23FFE600'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Spectral:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-deep:#123D18; --lime:#7CB342; --soft:#C5E1A5;
+    --yellow:#FFE600; --ink:#22291f; --cream:#FAFAF5;
+    --brass-hi:#e8c56a; --brass:#c9a24b; --brass-lo:#8a6a25; --brass-ink:#3a2c0d;
+    --pave:#5d615c; --pave-dark:#494d48; --line:#e2e8d8;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:'Montserrat',system-ui,sans-serif;color:var(--ink);
+    background:var(--cream);
+    -webkit-font-smoothing:antialiased;
+  }
+  .sr-wrap{max-width:860px;margin:0 auto;padding:14px 12px 26px}
+
+  .sr-head{margin:2px 2px 14px}
+  .sr-kicker{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);margin:0 0 6px}
+  .sr-head h1{font-size:clamp(21px,4.6vw,29px);line-height:1.15;margin:0 0 8px;color:var(--green-deep);font-weight:800}
+  .sr-head p{font-size:14.5px;line-height:1.65;margin:0;max-width:640px}
+
+  /* ---- pavement stage ---- */
+  .sr-stage{
+    background:
+      radial-gradient(120% 90% at 50% 0%, rgba(255,255,255,.05), transparent 55%),
+      linear-gradient(160deg, var(--pave), var(--pave-dark));
+    border-radius:18px;padding:clamp(14px,4vw,30px);
+    box-shadow:0 14px 34px rgba(18,61,24,.18);
+  }
+  .sr-stagehint{
+    color:#e7eae4;font-size:12.5px;line-height:1.5;margin:0 0 12px;text-align:center;
+  }
+  .sr-stagehint strong{color:var(--yellow)}
+
+  /* pick a stone: three brass tabs shaped like small stones */
+  .sr-stones{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:0 0 16px}
+  .sr-stonetab{
+    appearance:none;border:0;cursor:pointer;border-radius:6px;
+    padding:9px 13px;min-height:44px;
+    font-family:'Montserrat',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.02em;
+    color:var(--brass-ink);
+    background:linear-gradient(150deg, var(--brass-hi), var(--brass) 55%, var(--brass-lo));
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.5), 0 3px 8px rgba(0,0,0,.35);
+    opacity:.62;transform:translateY(0);transition:opacity .15s, transform .15s;
+  }
+  .sr-stonetab span{display:block;font-weight:500;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase}
+  .sr-stonetab[aria-pressed="true"]{opacity:1;transform:translateY(-2px);outline:2px solid var(--yellow);outline-offset:2px}
+  .sr-stonetab:focus-visible{outline:2px solid var(--yellow);outline-offset:2px}
+
+  /* the stone itself */
+  .sr-stoneframe{display:flex;justify-content:center}
+  .sr-stone{
+    width:min(420px,100%);
+    background:
+      radial-gradient(130% 105% at 28% 12%, rgba(255,248,220,.75), rgba(255,248,220,0) 46%),
+      linear-gradient(148deg, var(--brass-hi) 0%, var(--brass) 48%, var(--brass-lo) 100%);
+    border-radius:8px;
+    box-shadow:
+      inset 0 2px 2px rgba(255,255,255,.55),
+      inset 0 -3px 6px rgba(58,44,13,.45),
+      0 10px 24px rgba(0,0,0,.45);
+    padding:clamp(16px,4.5vw,26px) clamp(12px,3.5vw,20px);
+  }
+  .sr-line{
+    display:block;width:100%;appearance:none;background:transparent;border:0;cursor:pointer;
+    font-family:'Spectral',Georgia,serif;font-weight:700;
+    color:var(--brass-ink);
+    text-align:center;letter-spacing:.09em;
+    font-size:clamp(15px,4.2vw,21px);line-height:1.45;
+    padding:6px 4px;min-height:44px;border-radius:6px;
+    text-shadow:0 1px 0 rgba(255,255,255,.35), 0 -1px 1px rgba(58,44,13,.5);
+    transition:background .15s;
+  }
+  .sr-line:hover{background:rgba(255,255,255,.16)}
+  .sr-line[aria-pressed="true"]{background:rgba(18,61,24,.28);outline:2px solid var(--green-deep);text-shadow:none;color:#20180a}
+  .sr-line:focus-visible{outline:2px solid var(--green-deep)}
+  .sr-line.sr-name{font-size:clamp(17px,4.8vw,24px);letter-spacing:.05em}
+
+  /* explanation panel */
+  .sr-panel{
+    margin-top:16px;background:#fff;border-radius:14px;border:1px solid var(--line);
+    padding:16px 16px 14px;min-height:132px;
+  }
+  .sr-panel[data-empty="true"]{display:flex;align-items:center;justify-content:center}
+  .sr-panel[data-empty="true"] .sr-empty{color:#5c665a;font-size:13.5px;text-align:center;margin:0;line-height:1.6}
+  .sr-de{font-family:'Spectral',Georgia,serif;font-weight:700;font-size:17px;letter-spacing:.06em;color:var(--green-deep);margin:0 0 2px}
+  .sr-en{font-size:13px;font-weight:700;color:var(--lime);margin:0 0 10px;text-transform:uppercase;letter-spacing:.08em}
+  .sr-why{font-size:14px;line-height:1.68;margin:0}
+  .sr-why b{color:var(--green-deep)}
+  .sr-step{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:12px}
+  .sr-progress{font-size:11.5px;font-weight:700;color:#748070;letter-spacing:.06em;text-transform:uppercase}
+  .sr-next{
+    appearance:none;border:0;cursor:pointer;border-radius:999px;
+    background:var(--yellow);color:var(--green-deep);
+    font-family:'Montserrat',sans-serif;font-weight:800;font-size:13px;
+    padding:10px 18px;min-height:44px;
+  }
+  .sr-next:hover{filter:brightness(.96)}
+  .sr-next:focus-visible{outline:2px solid var(--green-deep);outline-offset:2px}
+  .sr-next[hidden]{display:none}
+
+  /* fate vocabulary reference */
+  .sr-vocab{margin-top:22px}
+  .sr-vocab h2{font-size:17px;color:var(--green-deep);margin:0 0 4px}
+  .sr-vocab > p{font-size:13.5px;line-height:1.6;margin:0 0 12px;color:#3c4438}
+  .sr-vlist{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0;padding:0;list-style:none}
+  .sr-vlist li{
+    background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;
+  }
+  .sr-vlist .de{display:block;font-family:'Spectral',Georgia,serif;font-weight:700;font-size:14px;letter-spacing:.05em;color:var(--brass-lo)}
+  .sr-vlist .en{display:block;font-size:12.5px;line-height:1.5;color:#3c4438;margin-top:2px}
+  @media (max-width:560px){ .sr-vlist{grid-template-columns:1fr} }
+
+  .sr-foot{margin-top:18px;font-size:12.5px;line-height:1.6;color:#5c665a}
+  .sr-foot a{color:var(--green);font-weight:700}
+</style>
+</head>
+<body>
+<main class="sr-wrap" data-widget="stolperstein-reader">
+  <header class="sr-head">
+    <p class="sr-kicker">BerlinWalk &bull; Berlin History</p>
+    <h1>Read the stone under your feet</h1>
+    <p>Every Stolperstein uses the same compact formula, and once you can read one you can read all of them. Tap each line of the stone the way your eye meets it on the street, top to bottom.</p>
+  </header>
+
+  <section class="sr-stage" aria-label="Interactive Stolperstein inscription">
+    <p class="sr-stagehint">Three real Berlin inscription patterns. <strong>Tap the lines in order.</strong></p>
+    <div class="sr-stones" id="stoneTabs" role="group" aria-label="Choose an inscription"></div>
+    <div class="sr-stoneframe">
+      <div class="sr-stone" id="stonePlate" aria-live="off"></div>
+    </div>
+    <div class="sr-panel" id="panel" data-empty="true" aria-live="polite">
+      <p class="sr-empty">Tap the first line of the stone to begin.</p>
+    </div>
+  </section>
+
+  <section class="sr-vocab" aria-label="Fate words you will meet on other stones">
+    <h2>Words you will meet on other stones</h2>
+    <p>Not every stone ends the same way. These are the fate words used across Berlin, so a stone you pass tomorrow will not stay unreadable.</p>
+    <ul class="sr-vlist" id="vocabList"></ul>
+  </section>
+
+  <p class="sr-foot" id="srFoot"></p>
+</main>
+<script src="./stones-data.js"></script>
+<script>
+(function(){
+  'use strict';
+
+  /* Stone data lives in stones-data.js (verified inscriptions; see article for sources). */
+  var STONES = window.__SR_STONES__ || [];
+  var VOCAB = window.__SR_VOCAB__ || [];
+
+  var tabsEl = document.getElementById('stoneTabs');
+  var plateEl = document.getElementById('stonePlate');
+  var panelEl = document.getElementById('panel');
+  var vocabEl = document.getElementById('vocabList');
+
+  var current = 0;
+  var lineIdx = -1;
+
+  function renderTabs(){
+    tabsEl.innerHTML = '';
+    STONES.forEach(function(s, i){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'sr-stonetab';
+      b.setAttribute('aria-pressed', i === current ? 'true' : 'false');
+      b.innerHTML = s.tabLabel + '<span>' + s.tabSub + '</span>';
+      b.addEventListener('click', function(){ current = i; lineIdx = -1; renderAll(); });
+      tabsEl.appendChild(b);
+    });
+  }
+
+  function renderPlate(){
+    var s = STONES[current];
+    plateEl.innerHTML = '';
+    s.lines.forEach(function(line, i){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'sr-line' + (line.name ? ' sr-name' : '');
+      b.textContent = line.de;
+      b.setAttribute('aria-pressed', i === lineIdx ? 'true' : 'false');
+      b.setAttribute('aria-label', 'Line ' + (i+1) + ': ' + line.de);
+      b.addEventListener('click', function(){ lineIdx = i; renderAll(); });
+      plateEl.appendChild(b);
+    });
+  }
+
+  function renderPanel(){
+    var s = STONES[current];
+    if (lineIdx < 0){
+      panelEl.setAttribute('data-empty','true');
+      panelEl.innerHTML = '<p class="sr-empty">Tap the first line of the stone to begin.</p>';
+      return;
+    }
+    var line = s.lines[lineIdx];
+    panelEl.setAttribute('data-empty','false');
+    var last = lineIdx >= s.lines.length - 1;
+    panelEl.innerHTML =
+      '<p class="sr-de">' + line.de + '</p>' +
+      '<p class="sr-en">' + line.en + '</p>' +
+      '<p class="sr-why">' + line.why + '</p>' +
+      '<div class="sr-step">' +
+        '<span class="sr-progress">Line ' + (lineIdx+1) + ' of ' + s.lines.length + '</span>' +
+        '<button type="button" class="sr-next" id="nextBtn"' + (last ? ' hidden' : '') + '>Next line</button>' +
+      '</div>' +
+      (last && s.closing ? '<p class="sr-why" style="margin-top:10px">' + s.closing + '</p>' : '');
+    var nb = document.getElementById('nextBtn');
+    if (nb) nb.addEventListener('click', function(){ lineIdx += 1; renderAll(); });
+  }
+
+  function renderVocab(){
+    vocabEl.innerHTML = '';
+    VOCAB.forEach(function(v){
+      var li = document.createElement('li');
+      li.innerHTML = '<span class="de">' + v.de + '</span><span class="en">' + v.en + '</span>';
+      vocabEl.appendChild(li);
+    });
+  }
+
+  function renderAll(){ renderTabs(); renderPlate(); renderPanel(); }
+
+  document.getElementById('srFoot').innerHTML =
+    'Inscription patterns follow the standard formula used by the Stolpersteine project. ' +
+    'Find any Berlin stone and its biography on the official <a href="https://www.stolpersteine-berlin.de/en/finding-stolpersteine" target="_blank" rel="noopener">Berlin Stolpersteine map</a>.';
+
+  renderAll(); renderVocab();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Make a compact Berlin Art Week route around one starting district."
+    />
+    <title>Berlin Art Week Route Builder | BerlinWalk</title>
+    <link rel="stylesheet" href="../css/brand.css" />
+    <style>
+      :root {
+        --aw-ink: #17222d;
+        --aw-night: #26364b;
+        --aw-sand: #f5f0e7;
+        --aw-paper: #fffdf8;
+        --aw-coral: #d86950;
+        --aw-blue: #b9d8e9;
+        --aw-line: #d3c7b5;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        background: transparent;
+        color: var(--aw-ink);
+      }
+
+      .aw-tool {
+        max-width: 980px;
+        margin: 0 auto;
+        overflow: hidden;
+        border: 1px solid var(--aw-line);
+        background: var(--aw-paper);
+        box-shadow: 0 14px 35px rgba(23, 34, 45, 0.09);
+      }
+
+      .aw-masthead {
+        position: relative;
+        min-height: 235px;
+        padding: 30px clamp(22px, 5vw, 54px) 34px;
+        color: #fff;
+        background:
+          linear-gradient(118deg, var(--aw-night) 0 44%, #43566c 44% 55%, var(--aw-coral) 55% 74%, var(--aw-blue) 74%);
+      }
+
+      .aw-masthead::after {
+        position: absolute;
+        right: -42px;
+        bottom: -49px;
+        width: 210px;
+        height: 210px;
+        border: 24px solid rgba(255, 253, 248, 0.76);
+        border-radius: 50%;
+        content: "";
+      }
+
+      .aw-eyebrow,
+      .aw-kicker {
+        display: block;
+        margin: 0 0 10px;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .aw-eyebrow { color: #ffe600; }
+
+      .aw-masthead h1 {
+        position: relative;
+        z-index: 1;
+        max-width: 670px;
+        margin: 0;
+        font-family: Merriweather, Georgia, serif;
+        font-size: clamp(31px, 5vw, 52px);
+        line-height: 1.08;
+      }
+
+      .aw-masthead p {
+        position: relative;
+        z-index: 1;
+        max-width: 640px;
+        margin: 13px 0 0;
+        color: #f8fafc;
+        font-size: 15px;
+        line-height: 1.58;
+      }
+
+      .aw-layout {
+        display: grid;
+        grid-template-columns: minmax(255px, 0.84fr) minmax(0, 1.35fr);
+        min-height: 535px;
+      }
+
+      .aw-controls {
+        padding: 28px clamp(20px, 3.8vw, 38px);
+        background: var(--aw-sand);
+        border-right: 1px solid var(--aw-line);
+      }
+
+      .aw-controls h2,
+      .aw-route h2 {
+        margin: 0;
+        font-size: 20px;
+        line-height: 1.25;
+      }
+
+      .aw-controls > p {
+        margin: 8px 0 21px;
+        color: #59616a;
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      .aw-field { display: block; margin: 0 0 15px; }
+
+      .aw-field span {
+        display: block;
+        margin: 0 0 6px;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .aw-field select {
+        width: 100%;
+        min-height: 45px;
+        padding: 9px 36px 9px 11px;
+        border: 1px solid #a99f91;
+        border-radius: 0;
+        appearance: auto;
+        background: #fffdf8;
+        color: var(--aw-ink);
+        font: 600 14px/1.3 Montserrat, Arial, sans-serif;
+      }
+
+      .aw-field select:focus-visible,
+      .aw-build:focus-visible,
+      .aw-link:focus-visible {
+        outline: 3px solid #005fcc;
+        outline-offset: 3px;
+      }
+
+      .aw-build {
+        width: 100%;
+        min-height: 48px;
+        margin-top: 5px;
+        border: 0;
+        border-radius: 0;
+        background: #ffe600;
+        color: #17222d;
+        cursor: pointer;
+        font: 800 14px Montserrat, Arial, sans-serif;
+      }
+
+      .aw-build:hover { background: #f1d800; }
+
+      .aw-route {
+        padding: 28px clamp(20px, 4vw, 46px) 30px;
+      }
+
+      .aw-kicker { color: var(--aw-coral); }
+
+      .aw-route > p {
+        max-width: 600px;
+        margin: 8px 0 21px;
+        color: #57626a;
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .aw-stops {
+        position: relative;
+        display: grid;
+        gap: 14px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .aw-stops::before {
+        position: absolute;
+        top: 30px;
+        bottom: 30px;
+        left: 17px;
+        width: 2px;
+        background: #b8ab99;
+        content: "";
+      }
+
+      .aw-stop {
+        position: relative;
+        display: grid;
+        grid-template-columns: 36px 1fr;
+        gap: 12px;
+        align-items: start;
+      }
+
+      .aw-number {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        width: 36px;
+        height: 36px;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--aw-night);
+        color: #fff;
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .aw-stop:nth-child(2) .aw-number { background: var(--aw-coral); }
+      .aw-stop:nth-child(3) .aw-number { background: #587d98; }
+
+      .aw-stop-copy {
+        min-height: 86px;
+        padding: 13px 15px 14px;
+        border-left: 4px solid var(--aw-night);
+        background: #f8f7f2;
+      }
+
+      .aw-stop:nth-child(2) .aw-stop-copy { border-left-color: var(--aw-coral); }
+      .aw-stop:nth-child(3) .aw-stop-copy { border-left-color: #587d98; }
+
+      .aw-stop-copy b {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 14px;
+      }
+
+      .aw-stop-copy p {
+        margin: 0;
+        color: #4d5962;
+        font-size: 13px;
+        line-height: 1.47;
+      }
+
+      .aw-rule {
+        margin: 22px 0 0;
+        padding: 14px 16px;
+        border: 1px solid #bdcfda;
+        background: #eef7fb;
+        color: #263d4d;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      .aw-links {
+        display: flex;
+        gap: 10px 16px;
+        flex-wrap: wrap;
+        margin-top: 17px;
+      }
+
+      .aw-link {
+        color: #173b57;
+        font-size: 13px;
+        font-weight: 800;
+        text-underline-offset: 3px;
+      }
+
+      @media (max-width: 720px) {
+        .aw-layout { grid-template-columns: 1fr; }
+        .aw-controls { border-right: 0; border-bottom: 1px solid var(--aw-line); }
+      }
+
+      @media (max-width: 460px) {
+        .aw-masthead { min-height: 250px; padding: 25px 20px 30px; }
+        .aw-masthead::after { right: -61px; bottom: -62px; }
+        .aw-controls, .aw-route { padding: 23px 18px; }
+      }
+
+      /* Wix gives this embed a very narrow inner column on some phones. */
+      @media (max-width: 260px) {
+        .aw-field select {
+          padding-right: 32px;
+          font-size: 13px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="aw-tool" aria-labelledby="aw-title">
+      <header class="aw-masthead">
+        <span class="aw-eyebrow">A one-district planning tool</span>
+        <h1 id="aw-title">Berlin Art Week Route Builder</h1>
+        <p>
+          Berlin Art Week is better as a short route than a city-wide scavenger
+          hunt. Start with one real anchor, leave time for one surprise, then
+          stop before the travel becomes the day.
+        </p>
+      </header>
+
+      <div class="aw-layout">
+        <form class="aw-controls" id="route-form">
+          <h2>Set the shape of your day</h2>
+          <p>Start with one official listing. These choices turn it into a district ticket, not a made-up live timetable.</p>
+
+          <label class="aw-field" for="day">
+            <span>Day</span>
+            <select id="day" name="day">
+              <option value="wed">Wednesday</option>
+              <option value="thu">Thursday</option>
+              <option value="fri">Friday</option>
+              <option value="sat">Saturday</option>
+              <option value="sun">Sunday</option>
+            </select>
+          </label>
+
+          <label class="aw-field" for="district">
+            <span>Anchor district</span>
+            <select id="district" name="district">
+              <option value="kulturforum">Kulturforum</option>
+              <option value="tempelhof">Tempelhof</option>
+              <option value="mitte">Mitte</option>
+              <option value="hamburger">Hamburger Bahnhof</option>
+            </select>
+          </label>
+
+          <label class="aw-field" for="anchor">
+            <span>Official anchor</span>
+            <select id="anchor" name="anchor">
+              <option value="confirmed">Confirmed listing</option>
+              <option value="shortlist">Compare listings</option>
+              <option value="finding">Choose an anchor</option>
+            </select>
+          </label>
+
+          <label class="aw-field" for="time">
+            <span>Time window</span>
+            <select id="time" name="time">
+              <option value="day">Daytime</option>
+              <option value="evening">Evening</option>
+            </select>
+          </label>
+
+          <label class="aw-field" for="pace">
+            <span>Pace</span>
+            <select id="pace" name="pace">
+              <option value="slow">Slow, time to look</option>
+              <option value="focused">Focused: 3 stops</option>
+            </select>
+          </label>
+
+          <label class="aw-field" for="registration">
+            <span>Registration tolerance</span>
+            <select id="registration" name="registration">
+              <option value="walkin">Walk-in only</option>
+              <option value="book">Book ahead</option>
+              <option value="either">Either is fine</option>
+            </select>
+          </label>
+
+          <button class="aw-build" type="submit">Build my compact route</button>
+        </form>
+
+        <section class="aw-route" aria-live="polite" aria-atomic="true">
+          <span class="aw-kicker" id="route-kicker">Wednesday · Kulturforum · daytime</span>
+          <h2 id="route-title">Give Kulturforum one proper afternoon.</h2>
+          <p id="route-lead"></p>
+          <ol class="aw-stops" id="route-stops"></ol>
+          <p class="aw-rule" id="route-rule"></p>
+          <div class="aw-links">
+            <a
+              class="aw-link"
+              href="https://berlinartweek.de/en/programme/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Verify the official programme ↗</a>
+            <a
+              class="aw-link"
+              href="https://www.berlinwalk.com/berlin-trip-planner"
+              target="_top"
+              >Build the rest of your Berlin days →</a>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script>
+      (function () {
+        var form = document.getElementById('route-form');
+        var fields = {
+          day: document.getElementById('day'),
+          district: document.getElementById('district'),
+          time: document.getElementById('time'),
+          anchor: document.getElementById('anchor'),
+          pace: document.getElementById('pace'),
+          registration: document.getElementById('registration')
+        };
+        var labels = {
+          day: { wed: 'Wednesday', thu: 'Thursday', fri: 'Friday', sat: 'Saturday', sun: 'Sunday' },
+          district: {
+            kulturforum: 'Kulturforum',
+            tempelhof: 'Tempelhof',
+            mitte: 'Mitte',
+            hamburger: 'Hamburger Bahnhof'
+          },
+          time: { day: 'daytime', evening: 'evening' }
+        };
+        var areas = {
+          kulturforum: {
+            title: 'Give Kulturforum one proper afternoon.',
+            nearby: 'the Potsdamer Platz and Tiergarten edge',
+            arrival: 'Start at Kulturforum and select one confirmed programme listing as your fixed point.',
+            bridge: 'Use the remaining time for one nearby, clearly listed programme choice instead of crossing to another side of Berlin.',
+            finish: 'Finish in the same central-west pocket, so the last part of the day is about the work rather than a second commute.'
+          },
+          tempelhof: {
+            title: 'Let Tempelhof set the scale of the day.',
+            nearby: 'the Tempelhof, Kreuzberg or Neukölln edge that the official listing places nearby',
+            arrival: 'Start at Tempelhof with one confirmed programme listing. Give yourself a buffer for the size of the site.',
+            bridge: 'Choose one second listing only if the official programme keeps it on the same side of the city.',
+            finish: 'End with food or a walk near the district you chose, not a late attempt to add a central museum stop.'
+          },
+          mitte: {
+            title: 'Keep a Mitte route inside one walkable loop.',
+            nearby: 'one short walk around Mitte',
+            arrival: 'Begin with one confirmed Mitte listing, then decide whether it deserves the longest part of your attention.',
+            bridge: 'Use the official map to add one nearby gallery, talk or screening only when the walk stays short.',
+            finish: 'Leave the final slot for one place in the same loop, so you do not turn an art afternoon into a transport plan.'
+          },
+          hamburger: {
+            title: 'Use Hamburger Bahnhof as a north-west anchor.',
+            nearby: 'the Hauptbahnhof and Moabit edge',
+            arrival: 'Start at Hamburger Bahnhof with one confirmed programme listing and a clear arrival time.',
+            bridge: 'Only add a second official choice that sits within the same north-west corridor.',
+            finish: 'Keep your final stop close enough to make the trip back across Berlin optional, not compulsory.'
+          }
+        };
+
+        function makeStop(number, title, copy) {
+          var item = document.createElement('li');
+          item.className = 'aw-stop';
+          var marker = document.createElement('span');
+          marker.className = 'aw-number';
+          marker.textContent = number;
+          var copyBox = document.createElement('div');
+          copyBox.className = 'aw-stop-copy';
+          var heading = document.createElement('b');
+          heading.textContent = title;
+          var paragraph = document.createElement('p');
+          paragraph.textContent = copy;
+          copyBox.appendChild(heading);
+          copyBox.appendChild(paragraph);
+          item.appendChild(marker);
+          item.appendChild(copyBox);
+          return item;
+        }
+
+        function registrationRule(value) {
+          if (value === 'walkin') {
+            return 'Walk-in rule: remove anything marked as registration-only before leaving. Keep one no-registration option from the official programme as your back-up.';
+          }
+          if (value === 'book') {
+            return 'Booking rule: put any confirmed registration or timed entry first. A booking is a fixed appointment, not an extra stop you can squeeze in later.';
+          }
+          return 'Flexible rule: treat a registration page as a hard deadline. If it is not worth booking, replace it with a walk-in option in the same district.';
+        }
+
+        function dayRule(day, time) {
+          var notes = {
+            wed: 'On Wednesday, write down the exact start time before you travel: the first day can have a different rhythm from the rest of the week.',
+            thu: 'On Thursday, do not assume a later programme item replaces a daytime visit. Confirm both the start and the entry condition.',
+            fri: 'On Friday, leave a travel buffer before any evening selection. The strongest plan has one anchor, not a chain of late arrivals.',
+            sat: 'On Saturday, abundance is the trap. Three stops are enough only when they stay in one coherent area.',
+            sun: 'On Sunday, put the one place you would regret missing first, then build the rest around its confirmed closing time.'
+          };
+          return notes[day] + (time === 'evening' ? ' For an evening route, check the official programme again on the day.' : '');
+        }
+
+        function render() {
+          var day = fields.day.value;
+          var district = fields.district.value;
+          var time = fields.time.value;
+          var anchor = fields.anchor.value;
+          var pace = fields.pace.value;
+          var registration = fields.registration.value;
+          var area = areas[district];
+          var stops = document.getElementById('route-stops');
+          var titles = {
+            day: labels.day[day],
+            district: labels.district[district],
+            time: labels.time[time]
+          };
+          var middle = pace === 'slow'
+            ? 'Protect the middle of the route. If your first stop feels rich, make the next one a nearby coffee, street or meal pause and keep the second programme choice optional.'
+            : area.bridge;
+          var finish = time === 'evening'
+            ? 'For the evening, choose only a confirmed late item in ' + area.nearby + '. If the programme does not clearly show one, end after two stops.'
+            : area.finish;
+
+          if (anchor === 'finding') {
+            document.getElementById('route-kicker').textContent = titles.day + ' · choose anchor first';
+            document.getElementById('route-title').textContent = 'Do not build the route until one official listing earns the day.';
+            document.getElementById('route-lead').textContent = 'A district is not an anchor. Open the programme, choose one named event with an exact time or entry condition, then return here to decide what belongs around it.';
+            stops.replaceChildren(
+              makeStop('1', 'Choose one district', 'Filter the official programme to ' + titles.district + ' and save only listings you could realistically reach.'),
+              makeStop('2', 'Name the anchor', 'Pick one listing with a clear start, finish and access rule. It becomes the thing you would regret missing.'),
+              makeStop('3', 'Build the rest', 'Return with that anchor confirmed. Only then decide whether there is room for a nearby second choice or a finish.')
+            );
+            document.getElementById('route-rule').textContent = 'Stop rule: do not cross Berlin for a vague possibility. A live programme listing with its exact entry condition comes before every route decision.';
+            return;
+          }
+
+          if (anchor === 'shortlist') {
+            middle = 'Compare the two official listings before you leave. Choose the one with the clearer time and access rule as your anchor; keep the other as the same-district back-up.';
+          }
+
+          document.getElementById('route-kicker').textContent = titles.day + ' · ' + titles.district + ' · ' + titles.time;
+          document.getElementById('route-title').textContent = area.title;
+          document.getElementById('route-lead').textContent = (anchor === 'confirmed' ? 'Your confirmed listing is the punch on this district ticket. ' : 'Choose one of your two listings as the punch before you travel. ') + 'This is a ' + (pace === 'slow' ? 'two-stop-first' : 'three-stop-maximum') + ' route. The programme decides the precise places; your district decision keeps the day usable.';
+          stops.replaceChildren(
+            makeStop('1', anchor === 'confirmed' ? 'Confirmed anchor' : 'Choose your anchor', area.arrival),
+            makeStop('2', anchor === 'shortlist' ? 'Keep one as back-up' : (pace === 'slow' ? 'Breathing room' : 'Neighbour step'), middle),
+            makeStop('3', 'Finish', finish)
+          );
+          document.getElementById('route-rule').textContent = registrationRule(registration) + ' ' + dayRule(day, time);
+        }
+
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+          render();
+          document.getElementById('route-title').focus({ preventScroll: true });
+        });
+        Object.keys(fields).forEach(function (key) {
+          fields[key].addEventListener('change', render);
+        });
+        document.getElementById('route-title').setAttribute('tabindex', '-1');
+        render();
+      })();
+    </script>
+    <script src="../js/brand.js"></script>
+  </body>
+</html>

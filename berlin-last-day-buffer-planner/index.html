@@ -1,0 +1,1088 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Perfect Last Day in Berlin | BerlinWalk</title>
+  <meta name="description" content="Plan your final Berlin hours before a flight, train or bus: store luggage, choose one central stop, move early and lock the departure buffer.">
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    :root {
+      --bw-green: #1B5E20;
+      --bw-green-2: #2f7a34;
+      --bw-lime: #7CB342;
+      --bw-yellow: #FFE600;
+      --bw-cream: #FAFAF5;
+      --bw-ink: #212121;
+      --bw-red: #E63946;
+      --bw-sky: #dcecef;
+      --bw-line: rgba(27, 94, 32, 0.18);
+      color-scheme: light;
+      font-family: Montserrat, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: transparent;
+      color: var(--bw-ink);
+    }
+
+    .bw-lastday {
+      max-width: 1180px;
+      margin: 0 auto;
+      background: var(--bw-cream);
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 18px 50px rgba(27, 94, 32, 0.13);
+    }
+
+    .bw-hero {
+      min-height: 330px;
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+      background:
+        linear-gradient(90deg, rgba(11, 52, 21, 0.94), rgba(11, 52, 21, 0.74) 42%, rgba(11, 52, 21, 0.10)),
+        url("assets/berlin-last-day-buffer-hero.jpg") center / cover no-repeat;
+      color: #fff;
+    }
+
+    .bw-hero-copy {
+      padding: 34px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .bw-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      color: var(--bw-yellow);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .bw-kicker::before {
+      content: "";
+      width: 26px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--bw-yellow);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 620px;
+      font-size: 34px;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .bw-hero p {
+      margin: 0;
+      max-width: 560px;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 16px;
+      line-height: 1.55;
+      font-weight: 600;
+    }
+
+    .bw-hero-icons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .bw-hero-icons span {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 34px;
+      padding: 7px 10px;
+      border: 1px solid rgba(255, 230, 0, 0.45);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 900;
+      backdrop-filter: blur(5px);
+    }
+
+    .bw-hero-icons b {
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(255, 252, 235, 0.96);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
+      overflow: hidden;
+    }
+
+    .bw-hero-icons img,
+    .bw-visual-symbol img,
+    .bw-stop-icon img,
+    .bw-advice-icon img,
+    .bw-link-symbol img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+    }
+
+    .bw-status-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      background: var(--bw-line);
+      border-bottom: 1px solid var(--bw-line);
+    }
+
+    .bw-stat {
+      min-height: 82px;
+      padding: 16px;
+      background: #fff;
+      display: grid;
+      align-content: center;
+      gap: 4px;
+    }
+
+    .bw-stat strong {
+      color: var(--bw-green);
+      font-size: 18px;
+      line-height: 1.15;
+    }
+
+    .bw-stat span {
+      font-size: 12px;
+      line-height: 1.35;
+      color: #53625a;
+      font-weight: 700;
+    }
+
+    .bw-perfect-path {
+      padding: 20px 22px;
+      background: #fff;
+      border-bottom: 1px solid var(--bw-line);
+      display: grid;
+      gap: 14px;
+    }
+
+    .bw-path-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: end;
+    }
+
+    .bw-path-head h2 {
+      margin: 0;
+      color: var(--bw-green);
+      font-size: 25px;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .bw-path-head p {
+      margin: 6px 0 0;
+      color: #48574e;
+      font-size: 14px;
+      line-height: 1.5;
+      font-weight: 650;
+      max-width: 680px;
+    }
+
+    .bw-path-tag {
+      min-width: 150px;
+      border: 1px solid rgba(27, 94, 32, 0.22);
+      border-radius: 8px;
+      padding: 10px 12px;
+      background: #f7fbf5;
+      color: var(--bw-green);
+      font-size: 12px;
+      line-height: 1.3;
+      font-weight: 900;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .bw-path-steps {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .bw-path-step {
+      min-height: 248px;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      background: linear-gradient(180deg, #fbfff7, #fff);
+      display: grid;
+      grid-template-rows: 126px 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bw-path-step::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--bw-green), var(--bw-lime), var(--bw-yellow));
+    }
+
+    .bw-path-media {
+      position: relative;
+      overflow: hidden;
+      background: #dcecef;
+    }
+
+    .bw-path-media img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 180ms ease;
+    }
+
+    .bw-path-step:hover .bw-path-media img {
+      transform: scale(1.04);
+    }
+
+    .bw-path-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(11, 52, 21, 0.34));
+    }
+
+    .bw-visual-symbol {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 252, 235, 0.94);
+      border: 1px solid rgba(255, 230, 0, 0.72);
+      padding: 4px;
+      z-index: 2;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.20);
+    }
+
+    .bw-path-body {
+      padding: 12px;
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 8px;
+    }
+
+    .bw-step-num {
+      width: fit-content;
+      min-width: 34px;
+      min-height: 26px;
+      border-radius: 999px;
+      padding: 0 10px;
+      display: grid;
+      place-items: center;
+      background: var(--bw-green);
+      color: var(--bw-yellow);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .bw-path-step strong {
+      color: var(--bw-green);
+      font-size: 14px;
+      line-height: 1.15;
+    }
+
+    .bw-path-step span:last-child {
+      color: #4d5b53;
+      font-size: 12px;
+      line-height: 1.35;
+      font-weight: 650;
+    }
+
+    .bw-photo-credit {
+      margin: 0;
+      color: #617068;
+      font-size: 10px;
+      line-height: 1.45;
+      font-weight: 650;
+    }
+
+    .bw-photo-credit a {
+      color: var(--bw-green);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    .bw-panel {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.74fr) minmax(0, 1.26fr);
+      gap: 20px;
+      padding: 22px;
+      align-items: start;
+    }
+
+    .bw-controls,
+    .bw-result {
+      background: #fff;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .bw-controls {
+      padding: 18px;
+      display: grid;
+      gap: 14px;
+      position: sticky;
+      top: 12px;
+    }
+
+    .bw-field {
+      display: grid;
+      gap: 8px;
+    }
+
+    label {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--bw-green);
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    select {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid rgba(27, 94, 32, 0.28);
+      border-radius: 8px;
+      padding: 0 12px;
+      background: #fff;
+      color: var(--bw-ink);
+      font: 700 14px/1.2 Montserrat, Arial, sans-serif;
+    }
+
+    .bw-build {
+      min-height: 46px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--bw-green);
+      color: #fff;
+      font: 800 14px/1 Montserrat, Arial, sans-serif;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 8px 18px rgba(27, 94, 32, 0.20);
+    }
+
+    .bw-build:hover {
+      background: #154d1a;
+    }
+
+    .bw-result-head {
+      padding: 18px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: center;
+      background: linear-gradient(135deg, #f7fbf5, #fffceb);
+      border-bottom: 1px solid var(--bw-line);
+    }
+
+    .bw-result-head h2 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.15;
+      letter-spacing: 0;
+      color: var(--bw-green);
+    }
+
+    .bw-result-head p {
+      margin: 6px 0 0;
+      color: #4f5d55;
+      font-size: 14px;
+      line-height: 1.45;
+      font-weight: 600;
+    }
+
+    .bw-badge {
+      min-width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      background: var(--bw-green);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 12px;
+      box-shadow: inset 0 0 0 7px rgba(255, 230, 0, 0.28);
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.15;
+    }
+
+    .bw-badge strong {
+      display: block;
+      color: var(--bw-yellow);
+      font-size: 21px;
+      line-height: 1;
+    }
+
+    .bw-rail {
+      padding: 18px;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+      background: #fff;
+    }
+
+    .bw-stop {
+      min-height: 126px;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      padding: 12px;
+      display: grid;
+      grid-template-rows: auto auto auto 1fr;
+      gap: 8px;
+      background: #fbfcf8;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bw-stop::before {
+      content: "";
+      width: 100%;
+      height: 5px;
+      background: var(--bw-lime);
+      position: absolute;
+      inset: 0 0 auto;
+    }
+
+    .bw-stop.warn::before {
+      background: var(--bw-yellow);
+    }
+
+    .bw-stop.hard::before {
+      background: var(--bw-red);
+    }
+
+    .bw-stop b {
+      font-size: 12px;
+      color: var(--bw-green);
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .bw-stop-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: #fffceb;
+      border: 1px solid rgba(27, 94, 32, 0.16);
+      padding: 4px;
+      box-shadow: 0 8px 18px rgba(27, 94, 32, 0.10);
+    }
+
+    .bw-stop strong {
+      font-size: 15px;
+      line-height: 1.2;
+    }
+
+    .bw-stop span {
+      font-size: 12px;
+      line-height: 1.35;
+      color: #526058;
+      font-weight: 600;
+    }
+
+    .bw-advice-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      padding: 0 18px 18px;
+    }
+
+    .bw-advice {
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      padding: 14px;
+      background: #fff;
+      display: grid;
+      gap: 8px;
+      min-height: 130px;
+    }
+
+    .bw-advice h3 {
+      margin: 0;
+      color: var(--bw-green);
+      font-size: 14px;
+      line-height: 1.2;
+      letter-spacing: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bw-advice-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      background: #fffceb;
+      border: 1px solid rgba(27, 94, 32, 0.18);
+      padding: 3px;
+      flex: 0 0 auto;
+    }
+
+    .bw-advice p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #3d4b43;
+      font-weight: 600;
+    }
+
+    .bw-do-dont {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+      padding: 0 18px 18px;
+    }
+
+    .bw-list {
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: #f7fbf5;
+      border: 1px solid var(--bw-line);
+    }
+
+    .bw-list h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: var(--bw-green);
+    }
+
+    .bw-list ul {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .bw-list li {
+      font-size: 13px;
+      line-height: 1.45;
+      font-weight: 600;
+    }
+
+    .bw-note {
+      margin: 0 18px 18px;
+      border-left: 5px solid var(--bw-yellow);
+      background: #fffceb;
+      padding: 12px 14px;
+      font-size: 13px;
+      line-height: 1.5;
+      font-weight: 700;
+      color: #39443e;
+    }
+
+    .bw-related {
+      margin: 0 18px 18px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .bw-related a {
+      min-height: 78px;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-content: center;
+      align-items: center;
+      gap: 5px;
+      padding: 12px;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--bw-ink);
+      text-decoration: none;
+      font-weight: 750;
+      line-height: 1.25;
+    }
+
+    .bw-related a:hover {
+      border-color: rgba(27, 94, 32, 0.48);
+      background: #f7fbf5;
+    }
+
+    .bw-link-symbol {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: #fffceb;
+      border: 1px solid rgba(27, 94, 32, 0.18);
+      padding: 4px;
+    }
+
+    .bw-link-text {
+      display: grid;
+      gap: 5px;
+      min-width: 0;
+    }
+
+    .bw-related small {
+      color: var(--bw-green);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 880px) {
+      .bw-hero {
+        grid-template-columns: 1fr;
+        min-height: 300px;
+        background:
+          linear-gradient(180deg, rgba(11, 52, 21, 0.92), rgba(11, 52, 21, 0.48)),
+          url("assets/berlin-last-day-buffer-hero.jpg") center / cover no-repeat;
+      }
+
+      .bw-hero-copy {
+        padding: 28px 20px;
+      }
+
+      h1 {
+        font-size: 29px;
+      }
+
+      .bw-status-strip,
+      .bw-panel,
+      .bw-advice-grid,
+      .bw-do-dont,
+      .bw-related {
+        grid-template-columns: 1fr;
+      }
+
+      .bw-path-head {
+        grid-template-columns: 1fr;
+      }
+
+      .bw-path-tag {
+        width: fit-content;
+        text-align: left;
+      }
+
+      .bw-path-steps {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-flow: row;
+        overflow-x: visible;
+        padding-bottom: 0;
+      }
+
+      .bw-path-step {
+        min-height: 224px;
+      }
+
+      .bw-controls {
+        position: static;
+      }
+
+      .bw-rail {
+        grid-template-columns: 1fr;
+      }
+
+      .bw-stop {
+        min-height: 96px;
+      }
+    }
+
+    @media (max-width: 460px) {
+      .bw-lastday {
+        border-radius: 0;
+      }
+
+      .bw-panel {
+        padding: 14px;
+      }
+
+      .bw-result-head {
+        grid-template-columns: 1fr;
+      }
+
+      .bw-badge {
+        width: 92px;
+      }
+
+      .bw-path-step {
+        min-height: 214px;
+        grid-template-rows: 120px 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="bw-lastday" data-widget>
+    <section class="bw-hero">
+      <div class="bw-hero-copy">
+        <span class="bw-kicker">BerlinWalk tool</span>
+        <h1>The Perfect Last Day in Berlin</h1>
+        <p>Your final hours have one job: leave Berlin without rushing. Store the bags, choose one central stop, and start the airport or station move earlier than feels necessary.</p>
+        <div class="bw-hero-icons" aria-label="Last-day priorities">
+          <span><b aria-hidden="true"><img src="assets/icons/last-day-bag.png" alt=""></b>Store bags</span>
+          <span><b aria-hidden="true"><img src="assets/icons/last-day-pin.png" alt=""></b>One area</span>
+          <span><b aria-hidden="true"><img src="assets/icons/last-day-train.png" alt=""></b>No transfers</span>
+          <span><b aria-hidden="true"><img src="assets/icons/last-day-clock.png" alt=""></b>Gate before extras</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="bw-status-strip" aria-label="Last-day rules">
+      <div class="bw-stat"><strong>Store bags first</strong><span>Suitcases go to a desk, locker, storage app or BER.</span></div>
+      <div class="bw-stat"><strong>Choose one area</strong><span>Spree, Reichstag, Hackescher Markt or Museum Island. No detours.</span></div>
+      <div class="bw-stat"><strong>Move early</strong><span>Take the direct route while the buffer still exists.</span></div>
+      <div class="bw-stat"><strong>Gate before treats</strong><span>Food and souvenirs come after security or the platform.</span></div>
+    </section>
+
+    <section class="bw-perfect-path" aria-label="Perfect last-day path">
+      <div class="bw-path-head">
+        <div>
+          <h2>The only order that works</h2>
+          <p>Do the day in this order: luggage, one close final stop, direct transit, check-in or platform, then snacks. Reverse it and the last hour gets stressful.</p>
+        </div>
+        <div class="bw-path-tag">Do it in order</div>
+      </div>
+      <div class="bw-path-steps">
+        <article class="bw-path-step">
+          <div class="bw-path-media">
+            <img src="assets/step-bags.jpg" alt="Rolling suitcases at Berlin Hauptbahnhof.">
+            <span class="bw-visual-symbol" aria-hidden="true"><img src="assets/icons/last-day-bag.png" alt=""></span>
+          </div>
+          <div class="bw-path-body">
+            <span class="bw-step-num">1</span><strong>Store the bags</strong><span>Put luggage away before sightseeing. No exceptions.</span>
+          </div>
+        </article>
+        <article class="bw-path-step">
+          <div class="bw-path-media">
+            <img src="assets/step-central.jpg" alt="Berlin Hauptbahnhof exterior, a central final-day anchor.">
+            <span class="bw-visual-symbol" aria-hidden="true"><img src="assets/icons/last-day-pin.png" alt=""></span>
+          </div>
+          <div class="bw-path-body">
+            <span class="bw-step-num">2</span><strong>Pick one stop</strong><span>Choose a compact area with fast rail access.</span>
+          </div>
+        </article>
+        <article class="bw-path-step">
+          <div class="bw-path-media">
+            <img src="assets/step-train.jpg" alt="Berlin Hauptbahnhof interior levels and platforms.">
+            <span class="bw-visual-symbol" aria-hidden="true"><img src="assets/icons/last-day-train.png" alt=""></span>
+          </div>
+          <div class="bw-path-body">
+            <span class="bw-step-num">3</span><strong>Start transit early</strong><span>Use the direct route while you still have slack.</span>
+          </div>
+        </article>
+        <article class="bw-path-step">
+          <div class="bw-path-media">
+            <img src="assets/step-airport.jpg" alt="Check-in counters inside BER Terminal 1.">
+            <span class="bw-visual-symbol" aria-hidden="true"><img src="assets/icons/last-day-clock.png" alt=""></span>
+          </div>
+          <div class="bw-path-body">
+            <span class="bw-step-num">4</span><strong>Lock the buffer</strong><span>Enter BER or reach the platform before any extra plan.</span>
+          </div>
+        </article>
+        <article class="bw-path-step">
+          <div class="bw-path-media">
+            <img src="assets/step-gate.jpg" alt="Flughafen BER rail station platform under the airport.">
+            <span class="bw-visual-symbol" aria-hidden="true"><img src="assets/icons/last-day-coffee.png" alt=""></span>
+          </div>
+          <div class="bw-path-body">
+            <span class="bw-step-num">5</span><strong>Then relax</strong><span>Buy food and souvenirs only after the buffer is real.</span>
+          </div>
+        </article>
+      </div>
+      <p class="bw-photo-credit">Photo credits: <a href="https://commons.wikimedia.org/wiki/File:Berlin_hauptbahnhof_drei_rollkoffer_15.04.2011_15-07-46.JPG" target="_blank" rel="noopener">Dirk Ingo Franke</a> / CC BY 3.0; <a href="https://commons.wikimedia.org/wiki/File:Berlin_Hauptbahnhof_2015.jpg" target="_blank" rel="noopener">Perituss</a> and <a href="https://commons.wikimedia.org/wiki/File:Interior_of_Berlin_Hauptbahnhof_-_DSC09579.JPG" target="_blank" rel="noopener">Daderot</a> / CC0; <a href="https://commons.wikimedia.org/wiki/File:Berlin_brandenburg_airport_terminal_1_check_in.jpg" target="_blank" rel="noopener">Alexander Migl</a> / CC BY-SA 3.0 DE; <a href="https://commons.wikimedia.org/wiki/File:BfFlughafenBER-S_Bahnsteig.jpg" target="_blank" rel="noopener">Tbachner</a> / CC BY-SA 4.0.</p>
+    </section>
+
+    <section class="bw-panel">
+      <form class="bw-controls" data-controls>
+        <div class="bw-field">
+          <label for="depart">Departure</label>
+          <select id="depart" name="depart">
+            <option value="flight-schengen">BER flight, simple Schengen</option>
+            <option value="flight-checked">BER flight with checked bag</option>
+            <option value="flight-complex">BER non-Schengen, long-haul or extra checks</option>
+            <option value="train">Long-distance train</option>
+            <option value="bus">Long-distance bus or coach</option>
+          </select>
+        </div>
+
+        <div class="bw-field">
+          <label for="hours">Free time after checkout</label>
+          <select id="hours" name="hours">
+            <option value="3">About 3 hours</option>
+            <option value="5" selected>About 5 hours</option>
+            <option value="8">8 hours or more</option>
+          </select>
+        </div>
+
+        <div class="bw-field">
+          <label for="area">Where you start</label>
+          <select id="area" name="area">
+            <option value="hbf">Near Hauptbahnhof</option>
+            <option value="alex">Alexanderplatz or Mitte east</option>
+            <option value="hackescher">Hackescher Markt or Museum Island</option>
+            <option value="west">Zoo, Ku'damm or Charlottenburg</option>
+            <option value="airport">Already on the BER route</option>
+          </select>
+        </div>
+
+        <div class="bw-field">
+          <label for="bags">Luggage</label>
+          <select id="bags" name="bags">
+            <option value="none">No luggage</option>
+            <option value="small">Small backpack only</option>
+            <option value="suitcase" selected>Rolling suitcase</option>
+            <option value="family">Family or several bags</option>
+          </select>
+        </div>
+
+        <div class="bw-field">
+          <label for="pace">Energy</label>
+          <select id="pace" name="pace">
+            <option value="calm" selected>Calm final walk</option>
+            <option value="food">Meal or cafe priority</option>
+            <option value="culture">One cultural stop</option>
+            <option value="low">Tired, keep it simple</option>
+          </select>
+        </div>
+
+        <button class="bw-build" type="submit">Build my exit plan</button>
+      </form>
+
+      <section class="bw-result" aria-live="polite">
+        <div class="bw-result-head">
+          <div>
+            <h2 data-title>Use the simple exit plan</h2>
+            <p data-summary>Store bags first. Choose one central stop. Start the airport or station move while you still have spare time.</p>
+          </div>
+          <div class="bw-badge"><span>Buffer</span><strong data-buffer>2h30</strong></div>
+        </div>
+
+        <div class="bw-rail" data-rail></div>
+
+        <div class="bw-advice-grid">
+          <article class="bw-advice">
+            <h3><span class="bw-advice-icon" aria-hidden="true"><img src="assets/icons/last-day-pin.png" alt=""></span>Best final area</h3>
+            <p data-anchor>Spree and Reichstag exterior near Hauptbahnhof. Photogenic, central, easy to leave.</p>
+          </article>
+          <article class="bw-advice">
+            <h3><span class="bw-advice-icon" aria-hidden="true"><img src="assets/icons/last-day-bag.png" alt=""></span>Bags first</h3>
+            <p data-luggage>Store luggage before sightseeing. A suitcase changes every decision.</p>
+          </article>
+          <article class="bw-advice">
+            <h3><span class="bw-advice-icon" aria-hidden="true"><img src="assets/icons/last-day-walk.png" alt=""></span>Tour today?</h3>
+            <p data-tour>Only choose a tour if departure is late and you can stay luggage-free for the full 2 hours.</p>
+          </article>
+        </div>
+
+        <div class="bw-do-dont">
+          <div class="bw-list">
+            <h3>Do this</h3>
+            <ul data-do></ul>
+          </div>
+          <div class="bw-list">
+            <h3>Avoid</h3>
+            <ul data-dont></ul>
+          </div>
+        </div>
+
+        <p class="bw-note" data-note>Choose one good final memory, not three rushed errands.</p>
+
+        <nav class="bw-related" aria-label="Related BerlinWalk guides">
+          <a href="https://www.berlinwalk.com/post/luggage-storage-in-berlin-2026" target="_blank" rel="noopener"><span class="bw-link-symbol" aria-hidden="true"><img src="assets/icons/last-day-bag.png" alt=""></span><span class="bw-link-text"><small>Related guide</small>Where to store luggage in Berlin</span></a>
+          <a href="https://www.berlinwalk.com/post/berlin-ber-airport-departure-guide" target="_blank" rel="noopener"><span class="bw-link-symbol" aria-hidden="true"><img src="assets/icons/last-day-plane.png" alt=""></span><span class="bw-link-text"><small>Airport guide</small>BER departure timing and security</span></a>
+          <a href="https://www.berlinwalk.com/tools/berlin-luggage-storage" target="_blank" rel="noopener"><span class="bw-link-symbol" aria-hidden="true"><img src="assets/icons/last-day-map.png" alt=""></span><span class="bw-link-text"><small>Free tool</small>Berlin luggage storage map</span></a>
+        </nav>
+      </section>
+    </section>
+  </main>
+
+  <script src="../js/brand.js"></script>
+  <script>
+    (function () {
+      const root = document.querySelector('[data-widget]');
+      const form = root.querySelector('[data-controls]');
+      const rail = root.querySelector('[data-rail]');
+
+      const areaAnchors = {
+        hbf: {
+          anchor: 'Spree and the Reichstag exterior near Hauptbahnhof. Stay within walking distance of the platforms.',
+          short: 'Hauptbahnhof coffee, one Spree view, then the platform.',
+        },
+        alex: {
+          anchor: 'Alexanderplatz, Marienkirche and the Hackescher Markt edge. Keep the S-Bahn in sight.',
+          short: 'World Clock, Marienkirche, then the S-Bahn.',
+        },
+        hackescher: {
+          anchor: 'Hackescher Markt, courtyards and the Museum Island edge. Stay close to S-Bahn or tram links.',
+          short: 'Courtyards, coffee, then S-Bahn or tram.',
+        },
+        west: {
+          anchor: 'Kaiser Wilhelm Memorial Church, a Ku-damm cafe or a short City West walk. Leave before transfers stack up.',
+          short: 'City West cafe, then train or airport route.',
+        },
+        airport: {
+          anchor: 'Go to BER now. Eat, shop and wander after security.',
+          short: 'Airport route first, then food after security.',
+        },
+      };
+
+      const departProfiles = {
+        'flight-schengen': { label: 'BER flight', buffer: 150, exit: 'Walk into BER at least 2h30 before departure.', hard: 'BER doors' },
+        'flight-checked': { label: 'checked flight', buffer: 180, exit: 'Reach BER at least 3h before departure. Bag drop comes first.', hard: 'Bag drop' },
+        'flight-complex': { label: 'long-haul flight', buffer: 210, exit: 'Reach BER at least 3h30 before departure. Long-haul checks get priority.', hard: 'Long-haul buffer' },
+        train: { label: 'train', buffer: 50, exit: 'Reach the station 50m early. Find the platform first.', hard: 'Platform first' },
+        bus: { label: 'coach', buffer: 65, exit: 'Reach the coach gate 65m early. Keep the ticket screen open.', hard: 'Coach gate' },
+      };
+
+      function formState() {
+        return Object.fromEntries(new FormData(form).entries());
+      }
+
+      function bufferLabel(minutes) {
+        const h = Math.floor(minutes / 60);
+        const m = minutes % 60;
+        if (h && m) return `${h}h${m}`;
+        if (h) return `${h}h`;
+        return `${m}m`;
+      }
+
+      function planRisk(hours, depart, bags) {
+        if (depart === 'flight-complex') return hours >= 8 ? 'amber' : 'red';
+        if (bags === 'family' && hours <= 5) return 'red';
+        if (hours <= 3) return 'red';
+        if (hours <= 5 || bags === 'suitcase') return 'amber';
+        return 'green';
+      }
+
+      function luggageAdvice(bags) {
+        if (bags === 'none') return 'Keep ticket, ID, charger and route screenshot in one pocket.';
+        if (bags === 'small') return 'Backpack only: take a short walk, skip queues and museums.';
+        if (bags === 'family') return 'Store every bag first. With several bags, improvising costs time.';
+        return 'Store the suitcase before sightseeing: hotel desk, station locker, storage app or BER.';
+      }
+
+      function tourFit(hours, depart, bags) {
+        if (hours >= 8 && bags !== 'family' && depart !== 'flight-complex') {
+          return 'A tour is possible only if you stay luggage-free and leave immediately afterwards.';
+        }
+        if (hours >= 5 && bags === 'none' && depart === 'train') {
+          return 'A tour can work with a later train, but only if your station return is direct.';
+        }
+        return 'Skip guided tours today. Protect the departure window.';
+      }
+
+      function titleFor(risk) {
+        if (risk === 'green') return 'You have a real final half-day';
+        if (risk === 'amber') return 'Choose one central stop';
+        return 'Go luggage-first, exit-route first';
+      }
+
+      function summaryFor(risk, profile) {
+        if (risk === 'green') return `Do one worthwhile stop, then stop. Protect the ${profile.label} buffer before adding food or shopping.`;
+        if (risk === 'amber') return 'Choose one close area and leave on the first direct route that works. Do not cross town.';
+        return `${profile.exit} Sightseeing is optional; luggage and departure timing are not.`;
+      }
+
+      function railStops(state, profile, area, risk) {
+        const bagStop = state.bags === 'none' || state.bags === 'small'
+          ? ['1', 'Keep essentials ready', 'Ticket, charger, ID and route saved offline.', 'map']
+          : ['1', 'Store bags first', 'Use hotel storage, station locker, storage app or BER before sightseeing.', 'bag'];
+        const cityText = risk === 'red' ? area.short : area.anchor;
+        return [
+          bagStop,
+          ['2', 'Choose one area', cityText, 'pin'],
+          ['3', 'Take direct transit', 'Pick the clean route now. Transfers are where buffers disappear.', 'train'],
+          [`T-${bufferLabel(profile.buffer)}`, profile.hard, profile.exit, 'clock'],
+          ['5', 'Do errands after', 'Food, souvenirs and restrooms wait until security, platform or gate is handled.', 'coffee'],
+        ];
+      }
+
+      function adviceLists(state, risk) {
+        const doItems = [
+          'Screenshot the exact route before leaving Wi-Fi.',
+          'Keep the final stop on a main S-Bahn, U-Bahn or airport rail line.',
+          state.bags === 'none' ? 'Use the free hands for one proper walk.' : 'Store luggage before the first stop.',
+        ];
+        const dontItems = [
+          'Do not add a distant bonus neighborhood.',
+          'Do not plan around old BER Runway security-slot advice.',
+          risk === 'green' ? 'Do not spend the buffer just because the morning is going well.' : 'Do not start a museum, long meal or shopping hunt with the clock running.',
+        ];
+        return { doItems, dontItems };
+      }
+
+      function renderList(target, items) {
+        target.innerHTML = items.map((item) => `<li>${item}</li>`).join('');
+      }
+
+      function render() {
+        const state = formState();
+        const hours = Number(state.hours);
+        const profile = departProfiles[state.depart];
+        const area = areaAnchors[state.area];
+        const risk = planRisk(hours, state.depart, state.bags);
+        const stops = railStops(state, profile, area, risk);
+        const lists = adviceLists(state, risk);
+
+        root.querySelector('[data-title]').textContent = titleFor(risk);
+        root.querySelector('[data-summary]').textContent = summaryFor(risk, profile);
+        root.querySelector('[data-buffer]').textContent = bufferLabel(profile.buffer);
+        root.querySelector('[data-anchor]').textContent = risk === 'red' ? area.short : area.anchor;
+        root.querySelector('[data-luggage]').textContent = luggageAdvice(state.bags);
+        root.querySelector('[data-tour]').textContent = tourFit(hours, state.depart, state.bags);
+        root.querySelector('[data-note]').textContent = risk === 'green'
+          ? 'End the ambitious part early. The best final memory still needs a clean exit.'
+          : 'One calm walk beats a rushed detour and a bad transfer.';
+
+        rail.innerHTML = stops.map((stop, index) => {
+          const klass = index >= 3 ? 'hard' : risk === 'red' || index === 2 ? 'warn' : '';
+          return `<article class="bw-stop ${klass}"><b>${stop[0]}</b><span class="bw-stop-icon" aria-hidden="true"><img src="assets/icons/last-day-${stop[3]}.png" alt=""></span><strong>${stop[1]}</strong><span>${stop[2]}</span></article>`;
+        }).join('');
+        renderList(root.querySelector('[data-do]'), lists.doItems);
+        renderList(root.querySelector('[data-dont]'), lists.dontItems);
+        window.dispatchEvent(new Event('resize'));
+      }
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        render();
+      });
+      form.addEventListener('change', render);
+      render();
+    })();
+  </script>
+</body>
+</html>

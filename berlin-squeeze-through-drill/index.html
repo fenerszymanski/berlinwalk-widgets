@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Berlin Squeeze-Through Drill</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../css/brand.css">
+<script defer src="../js/brand.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { padding: 14px 12px 4px; }
+  .bw-std {
+    max-width: 560px;
+    margin: 0 auto;
+    background: var(--bw-white);
+    border: 1px solid var(--bw-border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .bw-std-head {
+    background: linear-gradient(135deg, var(--bw-green) 0%, var(--bw-green-dark) 100%);
+    color: var(--bw-white);
+    padding: 18px 18px 16px;
+  }
+  .bw-std-kicker {
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--bw-yellow);
+    margin: 0 0 6px;
+  }
+  .bw-std-title {
+    font-size: 19px;
+    font-weight: 800;
+    margin: 0 0 6px;
+    line-height: 1.25;
+  }
+  .bw-std-sub {
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0;
+    color: rgba(255,255,255,0.9);
+  }
+  .bw-std-body { padding: 18px; }
+  .bw-std-meter-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .bw-std-meter-label {
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--bw-muted);
+    white-space: nowrap;
+  }
+  .bw-std-meter-track {
+    flex: 1;
+    height: 8px;
+    border-radius: 5px;
+    background: var(--bw-lime-soft);
+    overflow: hidden;
+    border: 1px solid var(--bw-border);
+  }
+  .bw-std-meter-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--bw-lime), var(--bw-green));
+    border-radius: 5px;
+    transition: width 0.35s ease;
+    width: 0%;
+  }
+  .bw-std-step {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--bw-muted);
+  }
+  .bw-std-scene-card {
+    background: var(--bw-lime-soft);
+    border: 1px solid var(--bw-border);
+    border-radius: 12px;
+    padding: 14px 14px 12px;
+    margin-bottom: 14px;
+  }
+  .bw-std-loc {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--bw-green);
+    margin: 0 0 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .bw-std-scene-text {
+    font-size: 14.5px;
+    line-height: 1.55;
+    margin: 0;
+    color: var(--bw-text);
+  }
+  .bw-std-phonetic {
+    margin-top: 10px;
+  }
+  .bw-std-phonetic summary {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--bw-green);
+    cursor: pointer;
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .bw-std-phonetic summary::-webkit-details-marker { display: none; }
+  .bw-std-phonetic-body {
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--bw-muted);
+    margin-top: 6px;
+    padding: 8px 10px;
+    background: var(--bw-white);
+    border-radius: 8px;
+    border: 1px dashed var(--bw-border);
+  }
+  .bw-std-phonetic-word {
+    font-weight: 800;
+    color: var(--bw-text);
+    letter-spacing: 0.3px;
+  }
+  .bw-std-choices {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .bw-std-choice-btn {
+    text-align: left;
+    background: var(--bw-white);
+    border: 1.5px solid var(--bw-border);
+    border-radius: 11px;
+    padding: 12px 14px;
+    font-family: Montserrat, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--bw-text);
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+    min-height: 44px;
+  }
+  .bw-std-choice-btn:hover,
+  .bw-std-choice-btn:focus-visible {
+    border-color: var(--bw-lime);
+    background: var(--bw-lime-soft);
+    outline: none;
+  }
+  .bw-std-choice-btn:active { transform: translateY(1px); }
+  .bw-std-outcome {
+    margin-top: 14px;
+    border-radius: 12px;
+    padding: 14px;
+    border: 1.5px solid;
+  }
+  .bw-std-outcome.good { background: #EEF6EA; border-color: var(--bw-lime); }
+  .bw-std-outcome.meh  { background: #FFF8E1; border-color: var(--bw-moderate); }
+  .bw-std-outcome.bad  { background: #FDECEC; border-color: var(--bw-high); }
+  .bw-std-outcome-tag {
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0 0 6px;
+  }
+  .bw-std-outcome.good .bw-std-outcome-tag { color: var(--bw-green); }
+  .bw-std-outcome.meh .bw-std-outcome-tag  { color: #8A6D00; }
+  .bw-std-outcome.bad .bw-std-outcome-tag  { color: var(--bw-high); }
+  .bw-std-outcome-text {
+    font-size: 14px;
+    line-height: 1.55;
+    margin: 0 0 10px;
+    color: var(--bw-text);
+  }
+  .bw-std-fact {
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--bw-muted);
+    margin: 0;
+    padding-top: 10px;
+    border-top: 1px dashed var(--bw-border);
+  }
+  .bw-std-fact strong { color: var(--bw-text); }
+  .bw-std-next-btn {
+    margin-top: 14px;
+    width: 100%;
+    background: var(--bw-green);
+    color: var(--bw-white);
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-family: Montserrat, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    min-height: 44px;
+  }
+  .bw-std-next-btn:hover { background: var(--bw-green-dark); }
+  .bw-std-start-btn {
+    width: 100%;
+    background: var(--bw-yellow);
+    color: var(--bw-green-dark);
+    border: none;
+    border-radius: 10px;
+    padding: 13px;
+    font-family: Montserrat, Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    min-height: 46px;
+    margin-top: 4px;
+  }
+  .bw-std-start-btn:hover { filter: brightness(0.96); }
+  .bw-std-intro-list {
+    margin: 0 0 16px;
+    padding-left: 18px;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--bw-text);
+  }
+  .bw-std-intro-list li { margin-bottom: 4px; }
+  .bw-std-result-badge {
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 6px;
+  }
+  .bw-std-result-title {
+    font-size: 20px;
+    font-weight: 800;
+    text-align: center;
+    margin: 0 0 6px;
+    color: var(--bw-green);
+  }
+  .bw-std-result-score {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--bw-muted);
+    margin: 0 0 16px;
+  }
+  .bw-std-result-recap {
+    background: var(--bw-lime-soft);
+    border: 1px solid var(--bw-border);
+    border-radius: 12px;
+    padding: 14px;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--bw-text);
+    margin-bottom: 14px;
+  }
+  .bw-std-result-recap strong { color: var(--bw-green); }
+  .bw-std-cta {
+    display: block;
+    text-align: center;
+    background: var(--bw-green);
+    color: var(--bw-white) !important;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 13px;
+    font-weight: 800;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  .bw-std-cta:hover { background: var(--bw-green-dark); }
+  .bw-std-again-btn {
+    width: 100%;
+    background: transparent;
+    color: var(--bw-green);
+    border: 1.5px solid var(--bw-border);
+    border-radius: 10px;
+    padding: 11px;
+    font-family: Montserrat, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    min-height: 44px;
+  }
+  .bw-std-again-btn:hover { border-color: var(--bw-lime); }
+</style>
+</head>
+<body>
+<div class="bw-std" id="app">
+  <div class="bw-std-head">
+    <p class="bw-std-kicker">BERLINWALK.COM &middot; BERLIN SQUEEZE-THROUGH DRILL</p>
+    <h2 class="bw-std-title" id="headTitle">Five real Berlin moments. One word to get through.</h2>
+    <p class="bw-std-sub" id="headSub">Doors, corridors, counters and stalls from the actual walking route. Pick how you'd get through each one.</p>
+  </div>
+  <div class="bw-std-body" id="body"></div>
+</div>
+
+<script>
+(function () {
+  var ROUNDS = [
+    {
+      loc: "Alexanderplatz &middot; U8 platform",
+      scene: "The doors are closing. Three people stand between you and the platform, and this is your stop.",
+      phonetic: "ent-SHOOL-dee-goong (stress on the second part, like a soft “shoe” in the middle)",
+      choices: [
+        { label: "Say “Entschuldigung” and move", tag: "good", points: 3, text: "The couple ahead steps aside without even turning around. You're through before the beeping stops." },
+        { label: "Say “sorry, sorry” in English", tag: "meh", points: 1, text: "One person glances back, unsure what you need. You squeeze past anyway, apologizing the whole way." },
+        { label: "Push through without a word", tag: "bad", points: 0, text: "You make it, but the man you brushed past mutters something you didn't need German to understand." }
+      ],
+      fact: "The U-Bahn gives you about three warning beeps before the doors close. Locals plan the squeeze before the beeping even starts."
+    },
+    {
+      loc: "Neues Museum &middot; the scarred corridor before Nefertiti's room",
+      scene: "A tour group has stopped dead in the narrow hallway, cameras up. Your own group is already moving on.",
+      phonetic: "Quietly: “Entschuldigung” — drop the volume, this is an indoor moment.",
+      choices: [
+        { label: "Say “Entschuldigung” quietly", tag: "good", points: 3, text: "Two people turn, smile, and make a gap along the wall. You slide through without ruining anyone's photo." },
+        { label: "Whisper “sorry” as you squeeze by", tag: "meh", points: 1, text: "It works, mostly — but you clip someone's tripod on the way." },
+        { label: "Slip through the gap silently", tag: "bad", points: 0, text: "You make it, but you nearly knock a raised phone out of someone's hand. A woman shoots you a look." }
+      ],
+      fact: "The museum kept its bomb-scarred walls on purpose after reconstruction. It's one of the few stops where the building itself is the exhibit, so corridors fill up fast around it."
+    },
+    {
+      loc: "A Späti near Hackescher Markt &middot; Friday night",
+      scene: "Three people are ahead of you at the counter. You just need to ask if they sell lighters.",
+      phonetic: "“Entschuldigung, haben Sie Feuerzeuge?” — ent-SHOOL-dee-goong, HAH-ben zee FOY-er-tsoy-geh.",
+      choices: [
+        { label: "Ask in German: “Entschuldigung, haben Sie Feuerzeuge?”", tag: "good", points: 3, text: "The owner points without missing a beat in his conversation with the regular next to you. Thirty seconds, done." },
+        { label: "Ask in English: “sorry, do you have lighters?”", tag: "meh", points: 2, text: "He understands fine and answers in English — but you catch the tiniest pause before he does." },
+        { label: "Wave and point at the lighter rack", tag: "bad", points: 1, text: "It works, but you wait an extra minute because nobody registered you were actually asking something." }
+      ],
+      fact: "Späti is short for Spätkauf, “late buy.” These corner shops are half convenience store, half living room for the block."
+    },
+    {
+      loc: "Ostbahnhof &middot; S-Bahn platform after a Hertha BSC match",
+      scene: "The car is packed with fans in blue and white. The doors are open for maybe ten more seconds, and you're on the wrong side of the crowd.",
+      phonetic: "“Entschuldigung, muss hier raus!” — the word everyone in a packed car actually listens for is “raus” (out).",
+      choices: [
+        { label: "Call out “Entschuldigung, muss hier raus!”", tag: "good", points: 3, text: "The crowd near the door actually parts a little. “Raus” is the one word that cuts through the noise." },
+        { label: "Say “sorry, excuse me” in English", tag: "meh", points: 2, text: "A couple of fans laugh and let you by anyway, still in a good mood after the match." },
+        { label: "Shoulder your way through", tag: "bad", points: 0, text: "You get out — so does someone's elbow, into your ribs." }
+      ],
+      fact: "Match days add a real spike at Ostbahnhof and Warschauer Straße. If your visit lands on a Hertha or Union home game, build in extra transfer time."
+    },
+    {
+      loc: "Hackescher Markt &middot; Saturday market",
+      scene: "A stroller is coming straight at you between two produce stalls. Only one of you fits through the gap.",
+      phonetic: "“Entschuldigung” with a small step back — the gesture matters as much as the word here.",
+      choices: [
+        { label: "Say “Entschuldigung” and step back first", tag: "good", points: 3, text: "The parent nods, grateful, and the two of you pass with room to spare." },
+        { label: "Say “sorry” and try to squeeze past anyway", tag: "meh", points: 1, text: "You both stop awkwardly at the same moment. It works out, but it's clumsy." },
+        { label: "Hold your ground and let them go around", tag: "bad", points: 0, text: "They manage it — but you've just made a parent steer a stroller off the paved path for no reason." }
+      ],
+      fact: "The Saturday stalls narrow the walking space right where the courtyard passages already pinch. It's one of the most reliable “excuse me” moments on the whole route."
+    }
+  ];
+
+  var state = { step: -1, score: 0, answered: false };
+  var body = document.getElementById("body");
+  var headTitle = document.getElementById("headTitle");
+  var headSub = document.getElementById("headSub");
+
+  function render() {
+    if (state.step === -1) return renderIntro();
+    if (state.step >= ROUNDS.length) return renderResult();
+    renderRound(state.step);
+  }
+
+  function renderIntro() {
+    headTitle.textContent = "Five real Berlin moments. One word to get through.";
+    headSub.textContent = "Doors, corridors, counters and stalls from the actual walking route. Pick how you'd get through each one.";
+    body.innerHTML =
+      '<ul class="bw-std-intro-list">' +
+      '<li>5 real spots from my walking route, in order you might actually hit them in a day.</li>' +
+      '<li>Pick how you would get through the moment.</li>' +
+      '<li>Build your Local Instinct score and get the one word that covers all five.</li>' +
+      '</ul>' +
+      '<button class="bw-std-start-btn" id="startBtn" type="button">Start the drill</button>';
+    document.getElementById("startBtn").addEventListener("click", function () {
+      state.step = 0;
+      state.score = 0;
+      render();
+    });
+  }
+
+  function renderRound(index) {
+    var round = ROUNDS[index];
+    state.answered = false;
+    headTitle.textContent = "Moment " + (index + 1) + " of " + ROUNDS.length;
+    headSub.textContent = round.loc.replace(/&middot;/g, "·");
+
+    var pct = Math.round((index / ROUNDS.length) * 100);
+    var html = '';
+    html += '<div class="bw-std-meter-row">';
+    html += '<span class="bw-std-meter-label">Local Instinct</span>';
+    html += '<div class="bw-std-meter-track"><div class="bw-std-meter-fill" style="width:' + Math.round((state.score / 15) * 100) + '%"></div></div>';
+    html += '<span class="bw-std-step">' + (index + 1) + '/' + ROUNDS.length + '</span>';
+    html += '</div>';
+    html += '<div class="bw-std-scene-card">';
+    html += '<p class="bw-std-loc">\u{1F4CD} ' + round.loc + '</p>';
+    html += '<p class="bw-std-scene-text">' + round.scene + '</p>';
+    html += '<details class="bw-std-phonetic"><summary>\u{1F4AC} How do I actually say it?</summary>';
+    html += '<div class="bw-std-phonetic-body"><span class="bw-std-phonetic-word">' + round.phonetic + '</span></div></details>';
+    html += '</div>';
+    html += '<div class="bw-std-choices" id="choiceWrap">';
+    round.choices.forEach(function (choice, i) {
+      html += '<button class="bw-std-choice-btn" type="button" data-i="' + i + '">' + choice.label + '</button>';
+    });
+    html += '</div>';
+    html += '<div id="outcomeWrap"></div>';
+    body.innerHTML = html;
+
+    Array.prototype.forEach.call(document.querySelectorAll(".bw-std-choice-btn"), function (btn) {
+      btn.addEventListener("click", function () {
+        if (state.answered) return;
+        state.answered = true;
+        var choice = round.choices[Number(btn.getAttribute("data-i"))];
+        state.score += choice.points;
+        Array.prototype.forEach.call(document.querySelectorAll(".bw-std-choice-btn"), function (b) { b.disabled = true; b.style.opacity = 0.55; });
+        btn.style.opacity = 1;
+        btn.style.borderColor = "var(--bw-lime)";
+
+        var out = document.getElementById("outcomeWrap");
+        var html2 = '<div class="bw-std-outcome ' + choice.tag + '">';
+        html2 += '<p class="bw-std-outcome-tag">' + (choice.tag === 'good' ? 'Solid move' : choice.tag === 'meh' ? 'It worked, mostly' : 'Rough patch') + '</p>';
+        html2 += '<p class="bw-std-outcome-text">' + choice.text + '</p>';
+        html2 += '<p class="bw-std-fact"><strong>Route note:</strong> ' + round.fact + '</p>';
+        html2 += '</div>';
+        html2 += '<button class="bw-std-next-btn" id="nextBtn" type="button">' + (index + 1 < ROUNDS.length ? 'Next moment' : 'See your result') + '</button>';
+        out.innerHTML = html2;
+        document.getElementById("nextBtn").addEventListener("click", function () {
+          state.step += 1;
+          render();
+        });
+      });
+    });
+  }
+
+  function renderResult() {
+    var score = state.score;
+    var tier;
+    if (score >= 11) tier = { emoji: "\u{1F1E9}\u{1F1EA}", title: "Sounds Like You Belong Here", recap: "You reached for <strong>Entschuldigung</strong> almost every time, and it showed: doors opened, corridors cleared, a Späti owner didn't skip a beat. That single word covers excuse me, sorry, and pardon me on every stop of the route." };
+    else if (score >= 6) tier = { emoji: "\u{1F642}", title: "Getting Comfortable", recap: "You mixed English “sorry” with real German a few times, and it mostly worked — Berlin is used to tourists. The moments that landed best were the ones where you said <strong>Entschuldigung</strong> first, before pushing." };
+    else tier = { emoji: "\u{1F914}", title: "Still Warming Up", recap: "English “sorry” and silent pushing get you through, but they're the slower path. One word, <strong>Entschuldigung</strong> (ent-SHOOL-dee-goong), covers every scene above and gets a faster, warmer reaction." };
+
+    headTitle.textContent = "Your result";
+    headSub.textContent = "Based on all 5 Berlin moments.";
+    var html = '';
+    html += '<p class="bw-std-result-badge">' + tier.emoji + '</p>';
+    html += '<p class="bw-std-result-title">' + tier.title + '</p>';
+    html += '<p class="bw-std-result-score">Local Instinct score: ' + score + ' / 15</p>';
+    html += '<div class="bw-std-result-recap">' + tier.recap + '</div>';
+    html += '<a class="bw-std-cta" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=widget&utm_medium=embed&utm_campaign=berlin-squeeze-through-drill" target="_blank" rel="noopener">Walk the actual route with me →</a>';
+    html += '<button class="bw-std-again-btn" id="againBtn" type="button">Play again</button>';
+    body.innerHTML = html;
+    document.getElementById("againBtn").addEventListener("click", function () {
+      state.step = -1;
+      state.score = 0;
+      render();
+    });
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>

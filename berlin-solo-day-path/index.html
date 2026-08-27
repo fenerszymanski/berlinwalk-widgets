@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Solo Day Path | BerlinWalk</title>
+  <meta name="description" content="Choose the historic centre, Tiergarten or Kreuzberg, then build a realistic solo Berlin day with one proper stop and a nearby finish.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <style>
+    :root {
+      --solo-green: #123d18;
+      --solo-mid: #1b5e20;
+      --solo-yellow: #ffe600;
+      --solo-paper: #fffdf4;
+      --solo-cream: #f3eddb;
+      --solo-ink: #212121;
+      --solo-muted: #536052;
+      --solo-line: #d8e2cf;
+      --solo-red: #a2442b;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: transparent; }
+    body { overflow-x: hidden; color: var(--solo-ink); font-family: Montserrat, Arial, sans-serif; }
+    a { color: var(--solo-green); }
+    button { font: inherit; }
+    #bw-solo-day-path { max-width: 880px; margin: 0 auto; padding: 4px; }
+    #bw-solo-day-path [hidden] { display: none !important; }
+    .solo-shell { overflow: hidden; border: 1px solid var(--solo-line); border-radius: 24px; background: var(--solo-paper); box-shadow: 0 20px 50px rgba(18, 61, 24, .13); }
+    .solo-hero { position: relative; min-height: 320px; background: var(--solo-green); }
+    .solo-hero img { display: block; width: 100%; height: 320px; object-fit: cover; }
+    .solo-hero::after { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18, 61, 24, .08), rgba(18, 61, 24, .82)); content: ''; pointer-events: none; }
+    .solo-hero-copy { position: absolute; z-index: 1; right: 24px; bottom: 24px; left: 24px; color: #fff; }
+    .solo-kicker { margin: 0 0 8px; color: var(--solo-yellow); font-size: .7rem; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+    .solo-hero h1 { max-width: 670px; margin: 0; font-family: Merriweather, Georgia, serif; font-size: clamp(1.65rem, 4vw, 2.75rem); line-height: 1.08; letter-spacing: -.035em; }
+    .solo-hero-copy p { max-width: 690px; margin: 10px 0 0; color: #eef5e8; font-size: .9rem; line-height: 1.55; }
+    .solo-body { padding: 24px; }
+    .solo-intro { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; align-items: end; padding-bottom: 22px; border-bottom: 1px solid var(--solo-line); }
+    .solo-intro h2 { margin: 0; color: var(--solo-green); font-size: 1.25rem; line-height: 1.2; }
+    .solo-intro p { max-width: 610px; margin: 8px 0 0; color: var(--solo-muted); font-size: .82rem; line-height: 1.6; }
+    .solo-facts { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; margin: 0; padding: 0; list-style: none; }
+    .solo-facts li { padding: 7px 9px; border: 1px solid #b8cdb2; color: var(--solo-green); font-size: .66rem; font-weight: 900; letter-spacing: .03em; white-space: nowrap; }
+    .path-ribbon { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; margin: 24px 0 22px; }
+    .path-ribbon::before { position: absolute; top: 20px; right: 10%; left: 10%; height: 3px; background: #c7d7bd; content: ''; }
+    .path-node { position: relative; z-index: 1; min-width: 0; padding: 0 5px; text-align: center; }
+    .path-dot { display: grid; place-items: center; width: 41px; height: 41px; margin: 0 auto 7px; border: 3px solid var(--solo-paper); border-radius: 50%; background: #d9e5d4; color: #61705f; box-shadow: 0 0 0 2px #b6cbb0; font-size: .78rem; font-weight: 900; }
+    .path-node.complete .path-dot { background: var(--solo-yellow); color: var(--solo-green); box-shadow: 0 0 0 2px var(--solo-green); }
+    .path-node.current .path-dot { background: var(--solo-green); color: #fff; box-shadow: 0 0 0 3px rgba(18, 61, 24, .15); }
+    .path-node strong { display: block; overflow: hidden; color: var(--solo-green); font-size: .72rem; line-height: 1.25; text-overflow: ellipsis; white-space: nowrap; }
+    .path-node span { display: block; margin-top: 3px; overflow: hidden; color: var(--solo-muted); font-size: .63rem; line-height: 1.25; text-overflow: ellipsis; white-space: nowrap; }
+    .choice-stage { padding: 19px; border: 1px solid var(--solo-line); background: #f8fbf3; }
+    .choice-stage h2 { margin: 0; color: var(--solo-green); font-family: Merriweather, Georgia, serif; font-size: 1.33rem; line-height: 1.2; }
+    .choice-stage > p { max-width: 660px; margin: 8px 0 16px; color: var(--solo-muted); font-size: .82rem; line-height: 1.58; }
+    .choice-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
+    .choice { min-height: 105px; padding: 13px 13px 12px; border: 1px solid #bad0b4; background: #fff; color: var(--solo-green); cursor: pointer; text-align: left; transition: transform .15s ease, border-color .15s ease, background .15s ease; }
+    .choice:hover, .choice:focus-visible { border-color: var(--solo-green); background: #fefef8; outline: 3px solid rgba(18, 61, 24, .17); outline-offset: 2px; transform: translateY(-2px); }
+    .choice strong { display: block; font-size: .82rem; line-height: 1.25; }
+    .choice span { display: block; margin-top: 6px; color: var(--solo-muted); font-size: .7rem; font-weight: 600; line-height: 1.45; }
+    .choice b { display: inline-block; margin-bottom: 8px; color: var(--solo-red); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; }
+    .route-output { margin-top: 21px; padding: 20px; border-top: 7px solid var(--solo-yellow); background: var(--solo-cream); }
+    .route-output h2 { margin: 0; color: var(--solo-green); font-family: Merriweather, Georgia, serif; font-size: 1.45rem; line-height: 1.2; }
+    .route-output > p { max-width: 700px; margin: 9px 0 0; color: #445347; font-size: .82rem; line-height: 1.6; }
+    .route-stops { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 17px 0 0; padding: 0; list-style: none; }
+    .route-stops li { min-width: 0; padding: 12px; border: 1px solid #c9d4bd; background: #fffef8; }
+    .route-stops small { display: block; margin-bottom: 5px; color: var(--solo-red); font-size: .62rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+    .route-stops strong { display: block; color: var(--solo-green); font-size: .82rem; line-height: 1.3; }
+    .route-stops span { display: block; margin-top: 5px; color: #5b685d; font-size: .7rem; line-height: 1.4; }
+    .route-note { margin-top: 13px; padding: 11px 13px; border-left: 4px solid var(--solo-mid); background: #fffef8; color: #445347; font-size: .77rem; line-height: 1.55; }
+    .solo-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 17px; }
+    .solo-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 10px 14px; background: var(--solo-yellow); color: var(--solo-green) !important; font-size: .72rem; font-weight: 900; text-decoration: none; }
+    .solo-cta:hover, .solo-cta:focus-visible { background: #f1d900; color: var(--solo-green) !important; outline: 3px solid var(--solo-green); outline-offset: 2px; }
+    .solo-cta.secondary { border: 1px solid #9bb495; background: transparent; color: var(--solo-green) !important; }
+    .solo-cta.secondary:hover, .solo-cta.secondary:focus-visible { background: #eef5e8; }
+    .solo-reset { margin-top: 15px; border: 0; background: transparent; color: var(--solo-green); cursor: pointer; font-size: .7rem; font-weight: 800; text-decoration: underline; }
+    .solo-reset:focus-visible { outline: 3px solid var(--solo-green); outline-offset: 3px; }
+    .solo-limit { margin-top: 21px; padding: 13px 15px; border: 1px dashed #a7bea0; background: #f3f8ed; color: #536052; font-size: .72rem; line-height: 1.55; }
+    .solo-limit strong { color: var(--solo-green); }
+    .credits-row { display: flex; justify-content: flex-end; margin-top: 16px; }
+    .credits-toggle { border: 1px solid #a8bca3; border-radius: 999px; background: #fff; color: var(--solo-green); cursor: pointer; font-size: .68rem; font-weight: 800; padding: 8px 12px; }
+    .credits-toggle:hover, .credits-toggle:focus-visible { background: #f0f7eb; outline: 3px solid rgba(18, 61, 24, .18); outline-offset: 2px; }
+    .credits-panel { position: relative; margin-top: 10px; padding: 15px 42px 15px 15px; border: 1px solid #b9cbb5; background: #f6f9f0; color: #536052; font-size: .68rem; line-height: 1.55; }
+    .credits-panel button { position: absolute; top: 9px; right: 10px; border: 0; background: transparent; color: var(--solo-green); cursor: pointer; font-size: 1.1rem; font-weight: 900; line-height: 1; }
+    .credits-panel button:focus-visible { outline: 3px solid var(--solo-green); outline-offset: 2px; }
+    @media (max-width: 700px) {
+      .solo-intro { grid-template-columns: minmax(0, 1fr); }
+      .solo-facts { justify-content: flex-start; }
+      .choice-list { grid-template-columns: minmax(0, 1fr); }
+      .choice { min-height: 0; }
+    }
+    @media (max-width: 520px) {
+      #bw-solo-day-path { padding: 0; }
+      .solo-shell { border-radius: 0; }
+      .solo-hero, .solo-hero img { min-height: 285px; height: 285px; }
+      .solo-hero-copy { right: 18px; bottom: 18px; left: 18px; }
+      .solo-body { padding: 17px; }
+      .path-ribbon { gap: 2px; }
+      .path-ribbon::before { right: 9%; left: 9%; }
+      .path-node strong { font-size: .66rem; }
+      .path-node span { font-size: .58rem; }
+      .route-stops { grid-template-columns: minmax(0, 1fr); }
+      .route-output { padding: 16px; }
+      .solo-actions { flex-direction: column; }
+      .solo-cta { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <main id="bw-solo-day-path">
+    <section class="solo-shell">
+      <header class="solo-hero">
+        <img src="assets/alexanderplatz-night-tram.jpg" alt="Alexanderplatz at night with a moving tram and the TV Tower in Berlin">
+        <div class="solo-hero-copy">
+          <p class="solo-kicker">Berlin Solo Day Path</p>
+          <h1>Choose one part of Berlin, then stay long enough to enjoy it.</h1>
+          <p>Start in the historic centre, beside Tiergarten or in Kreuzberg. Add one proper stop and finish nearby instead of chasing another list of pins.</p>
+        </div>
+      </header>
+      <div class="solo-body">
+        <div class="solo-intro">
+          <div>
+            <h2>Build the day one place at a time</h2>
+            <p>This is a planning aid, not turn-by-turn navigation. Every result names a real Berlin place so you know where to start, where to stay and where to finish before checking the live connection.</p>
+          </div>
+          <ul class="solo-facts" aria-label="Tool facts">
+            <li>3 Berlin areas</li>
+            <li>1 flexible finish</li>
+          </ul>
+        </div>
+
+        <div class="path-ribbon" aria-label="Day path progress">
+          <div class="path-node current" data-path-node="0"><div class="path-dot">1</div><strong>Area</strong><span>where to start</span></div>
+          <div class="path-node" data-path-node="1"><div class="path-dot">2</div><strong>Stop</strong><span>where to stay</span></div>
+          <div class="path-node" data-path-node="2"><div class="path-dot">3</div><strong>Finish</strong><span>how to end</span></div>
+        </div>
+
+        <section class="choice-stage" id="choice-stage" aria-live="polite">
+          <h2 id="choice-title">Where should the day begin?</h2>
+          <p id="choice-copy">Pick one part of Berlin. The rest of the plan stays close to it.</p>
+          <div class="choice-list" id="choice-list"></div>
+        </section>
+
+        <section class="route-output" id="route-output" hidden aria-live="polite">
+          <h2 id="route-title">Your solo Berlin day shape</h2>
+          <p id="route-copy"></p>
+          <ol class="route-stops" id="route-stops"></ol>
+          <div class="route-note" id="route-note"></div>
+          <div class="solo-actions">
+            <a class="solo-cta" id="route-primary" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_blank" rel="noopener">Check the BerlinWalk calendar</a>
+            <a class="solo-cta secondary" href="https://www.bvg.de/en/connections" target="_blank" rel="noopener">Check the live BVG connection</a>
+          </div>
+          <button class="solo-reset" type="button" id="reset-path">Start a different day</button>
+        </section>
+
+        <div class="solo-limit"><strong>Keep the promise small.</strong> Opening hours, transport disruptions, tickets and the right finish can change. Check the live source shortly before you move, and stay with a good place when the day is already working.</div>
+
+        <div class="credits-row">
+          <button class="credits-toggle" type="button" id="credits-toggle" aria-expanded="false" aria-controls="credits-panel">Tool visual credits</button>
+        </div>
+        <div class="credits-panel" id="credits-panel" hidden>
+          <button type="button" id="credits-close" aria-label="Close tool visual credits">×</button>
+          Header photo: <a href="https://commons.wikimedia.org/wiki/File:Alexanderplatz_at_night_with_blurred_moving_tram.jpg" target="_blank" rel="noopener">Alexanderplatz at night with blurred moving tram</a> by domdomegg via Wikimedia Commons, CC BY 4.0.
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+    (function () {
+      var state = { area: null, stop: null, finish: null, step: 0 };
+      var stage = document.getElementById('choice-stage');
+      var title = document.getElementById('choice-title');
+      var copy = document.getElementById('choice-copy');
+      var list = document.getElementById('choice-list');
+      var output = document.getElementById('route-output');
+      var routeTitle = document.getElementById('route-title');
+      var routeCopy = document.getElementById('route-copy');
+      var routeStops = document.getElementById('route-stops');
+      var routeNote = document.getElementById('route-note');
+      var primary = document.getElementById('route-primary');
+      var nodeEls = Array.prototype.slice.call(document.querySelectorAll('[data-path-node]'));
+
+      var stages = [
+        {
+          title: 'Where should the day begin?',
+          copy: 'Pick one part of Berlin. The rest of the plan stays close to it.',
+          choices: [
+            { key: 'centre', label: 'Historic centre', detail: 'Start at the World Clock and keep Museum Island and the Spree within reach.', tag: 'Alexanderplatz' },
+            { key: 'tiergarten', label: 'Tiergarten side', detail: 'Start at Brandenburg Gate and let the park or Kulturforum set the pace.', tag: 'Central west' },
+            { key: 'kreuzberg', label: 'Kreuzberg', detail: 'Start at Kottbusser Tor in daylight and stay with the neighbourhood.', tag: 'Street life' }
+          ]
+        },
+        {
+          title: 'What do you want to do in the middle?',
+          copy: 'Choose one proper stop. This is where the day slows down instead of adding another district.',
+          choices: [
+            { key: 'inside', label: 'Go inside once', detail: 'Choose one museum or indoor visit and check its official hours first.', tag: 'Indoor stop' },
+            { key: 'pause', label: 'Sit outside', detail: 'Use a park, square or riverside place for a proper pause.', tag: 'Outdoor pause' },
+            { key: 'food', label: 'Stop for food', detail: 'Choose one food area and stop searching once you get there.', tag: 'Food stop' }
+          ]
+        },
+        {
+          title: 'How should the day finish?',
+          copy: 'Keep the ending close to the part of Berlin you already chose.',
+          choices: [
+            { key: 'gentle', label: 'End quietly nearby', detail: 'Stop after the good part and let the evening stay easy.', tag: 'Gentle finish' },
+            { key: 'landmark', label: 'Add one landmark', detail: 'Use the last energy for one deliberate sight, not another list.', tag: 'One more sight' },
+            { key: 'social', label: 'Stay where people are around', detail: 'Finish in a lively public area without promising yourself an event.', tag: 'Lively finish' }
+          ]
+        }
+      ];
+
+      var areaPlans = {
+        centre: {
+          label: 'historic-centre',
+          intro: 'Keep the day between Alexanderplatz, Museum Island and the streets around Hackescher Markt.',
+          start: { place: 'World Clock, Alexanderplatz', note: 'Use the clear meeting point to begin before walking west.' },
+          stops: {
+            inside: { place: 'Museum Island', note: 'Choose one museum only after checking its official opening page.' },
+            pause: { place: 'Lustgarten and the Spree', note: 'Sit by the river or cross one bridge before deciding anything else.' },
+            food: { place: 'Hackescher Markt', note: 'Choose one café or meal nearby instead of restarting the search in another district.' }
+          },
+          finishes: {
+            gentle: { place: 'Nikolaiviertel', note: 'Finish with the older streets and the riverside instead of another ticket.' },
+            landmark: { place: 'Brandenburg Gate', note: 'Add the boulevard only if your feet and time still agree, then check the live connection.' },
+            social: { place: 'Hackesche Höfe', note: 'Finish in the courtyards and public streets close to Hackescher Markt.' }
+          }
+        },
+        tiergarten: {
+          label: 'Tiergarten-side',
+          intro: 'Keep the day on the central-west side instead of adding Alexanderplatz afterwards.',
+          start: { place: 'Brandenburg Gate', note: 'Begin with a clear landmark before moving into the park side.' },
+          stops: {
+            inside: { place: 'Kulturforum', note: 'Choose one currently open museum and let that be the indoor visit.' },
+            pause: { place: 'Großer Tiergarten', note: 'Walk one path, sit down and let the park count as the main stop.' },
+            food: { place: 'Potsdamer Platz', note: 'Pick one current venue nearby rather than crossing Berlin for a saved restaurant.' }
+          },
+          finishes: {
+            gentle: { place: 'Spree beside Haus der Kulturen der Welt', note: 'End by the water on the Tiergarten edge and stop while the day still feels good.' },
+            landmark: { place: 'Victory Column', note: 'Use the monument as the final sight and check the official page before planning a climb.' },
+            social: { place: 'Sony Center at Potsdamer Platz', note: 'Finish in a public place with people around and easy transport nearby.' }
+          }
+        },
+        kreuzberg: {
+          label: 'Kreuzberg',
+          intro: 'Stay with Kreuzberg in daylight and let one street, canal stop or meal carry the middle.',
+          start: { place: 'Kottbusser Tor', note: 'Use the station as the start, then follow Oranienstraße without rushing.' },
+          stops: {
+            inside: { place: 'Berlinische Galerie', note: 'Check the current opening page and make this the only indoor visit.' },
+            pause: { place: 'Landwehr Canal at Admiralbrücke', note: 'Use the water and the bridge as a real pause, not a route between pins.' },
+            food: { place: 'Markthalle Neun', note: 'Go only when the current programme and opening information fit your day.' }
+          },
+          finishes: {
+            gentle: { place: 'Maybachufer', note: 'End beside the canal and keep the return journey simple.' },
+            landmark: { place: 'Oberbaumbrücke', note: 'Use the bridge as one deliberate final sight, then stop adding districts.' },
+            social: { place: 'Oranienstraße', note: 'Finish on a lived-in street where cafés and people are around without requiring a fixed event.' }
+          }
+        }
+      };
+
+      function updateRibbon() {
+        nodeEls.forEach(function (node, index) {
+          node.classList.toggle('complete', index < state.step);
+          node.classList.toggle('current', index === state.step && state.step < 3);
+          var value = index === 0 ? state.area : index === 1 ? state.stop : state.finish;
+          var span = node.querySelector('span');
+          if (value) span.textContent = value === 'centre' ? 'historic centre' : value === 'tiergarten' ? 'Tiergarten side' : value === 'kreuzberg' ? 'Kreuzberg' : value === 'inside' ? 'indoors' : value === 'pause' ? 'outside pause' : value === 'food' ? 'food stop' : value === 'social' ? 'lively' : value === 'gentle' ? 'nearby' : 'landmark';
+        });
+      }
+
+      function renderStage() {
+        updateRibbon();
+        if (state.step >= stages.length) { renderOutput(); return; }
+        var current = stages[state.step];
+        title.textContent = current.title;
+        copy.textContent = current.copy;
+        list.innerHTML = '';
+        current.choices.forEach(function (choice) {
+          var button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'choice';
+          button.innerHTML = '<b>' + choice.tag + '</b><strong>' + choice.label + '</strong><span>' + choice.detail + '</span>';
+          button.addEventListener('click', function () {
+            if (state.step === 0) state.area = choice.key;
+            if (state.step === 1) state.stop = choice.key;
+            if (state.step === 2) state.finish = choice.key;
+            state.step += 1;
+            renderStage();
+          });
+          list.appendChild(button);
+        });
+        stage.hidden = false;
+        output.hidden = true;
+      }
+
+      function renderOutput() {
+        var plan = areaPlans[state.area];
+        var entries = [
+          { role: 'Start', place: plan.start.place, note: plan.start.note },
+          { role: 'Stay', place: plan.stops[state.stop].place, note: plan.stops[state.stop].note },
+          { role: 'Finish', place: plan.finishes[state.finish].place, note: plan.finishes[state.finish].note }
+        ];
+        routeTitle.textContent = 'Your ' + plan.label + ' Berlin day';
+        routeCopy.textContent = plan.intro;
+        routeStops.innerHTML = '';
+        entries.forEach(function (entry) {
+          var li = document.createElement('li');
+          li.innerHTML = '<small>' + entry.role + '</small><strong>' + entry.place + '</strong><span>' + entry.note + '</span>';
+          routeStops.appendChild(li);
+        });
+        routeNote.innerHTML = '<strong>Before you move:</strong> check the <a href="https://www.bvg.de/en/connections" target="_blank" rel="noopener">live BVG connection</a> and the official page for any indoor or food stop. This plan does not promise hours, tickets or walking time.';
+        primary.textContent = state.area === 'centre' ? 'Check the BerlinWalk calendar' : 'Open the Berlin Trip Planner';
+        primary.href = state.area === 'centre' ? 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based' : 'https://www.berlinwalk.com/berlin-trip-planner';
+        stage.hidden = true;
+        output.hidden = false;
+      }
+
+      document.getElementById('reset-path').addEventListener('click', function () {
+        state = { area: null, stop: null, finish: null, step: 0 };
+        renderStage();
+        document.getElementById('choice-stage').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+
+      var creditsToggle = document.getElementById('credits-toggle');
+      var creditsPanel = document.getElementById('credits-panel');
+      function closeCredits() { creditsPanel.hidden = true; creditsToggle.setAttribute('aria-expanded', 'false'); }
+      creditsToggle.addEventListener('click', function () { var open = creditsPanel.hidden; creditsPanel.hidden = !open; creditsToggle.setAttribute('aria-expanded', String(open)); });
+      document.getElementById('credits-close').addEventListener('click', closeCredits);
+      document.addEventListener('keydown', function (event) { if (event.key === 'Escape') closeCredits(); });
+      document.addEventListener('click', function (event) { if (!creditsPanel.hidden && !creditsPanel.contains(event.target) && event.target !== creditsToggle) closeCredits(); });
+
+      renderStage();
+    }());
+  </script>
+</body>
+</html>

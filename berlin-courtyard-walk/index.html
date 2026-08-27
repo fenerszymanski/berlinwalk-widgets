@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Höfe Walk: Map the Hidden Courtyards Around Hackescher Markt</title>
+<meta name="description" content="A short self-guided walk through the connected courtyards around Hackescher Markt. Tap each stop on the map to see what it is, what to do there, the walk from the last one, and your running time and distance." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Crect x='14' y='14' width='16' height='36' rx='2' fill='%23C8873F'/%3E%3Crect x='34' y='22' width='16' height='28' rx='2' fill='%23E0A25A'/%3E%3Crect x='30' y='30' width='6' height='6' fill='%23FFE600'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root {
+    --green: #1B5E20;
+    --green-dark: #123D18;
+    --green-mid: #2E7D32;
+    --lime: #7CB342;
+    --light: #C5E1A5;
+    --yellow: #FFE600;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --brick: #B25330;
+    --line: #E3E8DC;
+    --panel: #F4F7F0;
+    --muted: #5A6152;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    padding: 14px 14px 26px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .cw { max-width: 760px; margin: 0 auto; }
+
+  /* Header */
+  .cw-head {
+    background: linear-gradient(155deg, var(--green-dark) 0%, var(--green) 60%, var(--green-mid) 100%);
+    border-radius: 18px 18px 0 0;
+    color: #fff;
+    padding: 20px 20px 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cw-kicker {
+    display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em;
+    color: var(--green-dark); background: var(--yellow); border-radius: 999px;
+    padding: 4px 11px; margin-bottom: 11px; text-transform: uppercase;
+  }
+  .cw-head h1 { font-size: 21px; font-weight: 800; line-height: 1.24; max-width: 24ch; }
+  .cw-head p { font-size: 12.5px; line-height: 1.55; margin-top: 9px; max-width: 54ch; color: #E8F5E9; }
+
+  /* Body */
+  .cw-body {
+    background: #fff; border: 1px solid var(--line); border-top: none;
+    border-radius: 0 0 18px 18px; padding: 16px 16px 20px;
+  }
+
+  /* Running total */
+  .cw-total {
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch;
+    margin-bottom: 14px;
+  }
+  .cw-stat {
+    flex: 1 1 0; min-width: 92px;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+    padding: 9px 11px;
+  }
+  .cw-stat .k { font-size: 9.5px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); }
+  .cw-stat .v { font-size: 17px; font-weight: 800; color: var(--green); margin-top: 2px; line-height: 1.1; }
+  .cw-stat .v small { font-size: 11px; font-weight: 700; color: var(--muted); }
+
+  /* Map */
+  .cw-mapwrap {
+    position: relative; border: 1px solid var(--line); border-radius: 14px;
+    overflow: hidden; background: #EEF2E8;
+  }
+  .cw-map { display: block; width: 100%; height: auto; touch-action: manipulation; }
+  .cw-legend {
+    display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 9px 12px;
+    font-size: 10.5px; color: var(--muted); border-top: 1px solid var(--line);
+    background: #fff;
+  }
+  .cw-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .cw-dotk { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+  /* Stops track (segmented stepper) */
+  .cw-track { display: flex; gap: 5px; margin: 14px 0 12px; }
+  .cw-seg {
+    flex: 1; height: 6px; border-radius: 999px; background: var(--line);
+    transition: background .18s;
+  }
+  .cw-seg.on { background: var(--lime); }
+  .cw-seg.cur { background: var(--green); }
+
+  /* Detail panel */
+  .cw-card {
+    border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+  }
+  .cw-card-top {
+    padding: 14px 15px 13px; background: var(--panel);
+    border-bottom: 1px solid var(--line);
+  }
+  .cw-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 10px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+    color: #fff; border-radius: 999px; padding: 3px 10px; margin-bottom: 8px;
+  }
+  .cw-card-top h2 { font-size: 17px; font-weight: 800; color: var(--ink); line-height: 1.22; }
+  .cw-card-top .addr { font-size: 11.5px; color: var(--muted); margin-top: 4px; font-weight: 600; }
+  .cw-card-body { padding: 13px 15px 15px; }
+  .cw-card-body p { font-size: 13px; line-height: 1.6; }
+  .cw-card-body p + p { margin-top: 9px; }
+  .cw-note {
+    margin-top: 11px; font-size: 12px; line-height: 1.5;
+    background: var(--yellow); color: #4a3d00; font-weight: 600;
+    border-radius: 10px; padding: 9px 11px;
+  }
+  .cw-leg {
+    display: flex; align-items: center; gap: 8px; margin-top: 12px;
+    font-size: 11.5px; font-weight: 700; color: var(--green);
+  }
+  .cw-leg .arrow { color: var(--brick); }
+  .cw-maplink {
+    display: inline-flex; align-items: center; gap: 6px; margin-top: 13px;
+    font-size: 12px; font-weight: 700; color: var(--green);
+    text-decoration: none; border: 1.5px solid var(--green); border-radius: 999px;
+    padding: 7px 14px; min-height: 44px;
+  }
+  .cw-maplink:hover { background: var(--green); color: #fff; }
+
+  /* Controls */
+  .cw-nav { display: flex; gap: 9px; margin-top: 14px; }
+  .cw-btn {
+    font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+    border-radius: 999px; padding: 11px 14px; border: 1.5px solid var(--green);
+    background: #fff; color: var(--green); flex: 1; min-height: 44px;
+    transition: background .15s, color .15s, opacity .15s;
+  }
+  .cw-btn.primary { background: var(--green); color: #fff; }
+  .cw-btn:hover:not(:disabled) { background: var(--green-dark); color: #fff; border-color: var(--green-dark); }
+  .cw-btn:disabled { opacity: .38; cursor: default; }
+  .cw-reset {
+    display: block; margin: 12px auto 0; background: none; border: none;
+    color: var(--muted); font-family: inherit; font-size: 11.5px; font-weight: 700;
+    cursor: pointer; text-decoration: underline; text-underline-offset: 2px;
+    min-height: 44px; padding: 8px 12px;
+  }
+
+  .cw-foot { font-size: 11px; color: var(--muted); margin-top: 14px; line-height: 1.5; text-align: center; }
+
+  /* SVG node styling */
+  .node { cursor: pointer; }
+  .node .ring { fill: #fff; stroke-width: 2.5; transition: r .15s; }
+  .node .num { font-weight: 800; font-size: 13px; fill: #fff; text-anchor: middle; dominant-baseline: central; }
+  .node.dim .ring { opacity: .5; }
+  .node.cur .ring { stroke: var(--green); }
+  .node .halo { fill: var(--green); opacity: 0; transition: opacity .15s; }
+  .node.cur .halo { opacity: .16; }
+  .street { stroke: #D8DECF; stroke-width: 9; stroke-linecap: round; fill: none; }
+  .street-lbl { font-size: 9.5px; font-weight: 700; fill: #9AA48B; letter-spacing: .02em; }
+  .route { fill: none; stroke: var(--brick); stroke-width: 3.4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 3 6; }
+  .viaduct { stroke: #B9C0AC; stroke-width: 13; fill: none; }
+  .viaduct-lbl { font-size: 9px; font-weight: 700; fill: #8A937A; }
+
+  @media (max-width: 430px) {
+    body { padding: 10px 9px 22px; }
+    .cw-head { padding: 17px 16px 18px; }
+    .cw-head h1 { font-size: 18.5px; }
+    .cw-body { padding: 13px 12px 17px; }
+    .cw-stat .v { font-size: 15px; }
+    .cw-nav { flex-direction: row; }
+    .cw-btn { padding: 11px 8px; font-size: 12.5px; }
+  }
+</style>
+</head>
+<body>
+<div class="cw">
+  <div class="cw-head">
+    <span class="cw-kicker">Self-guided · Hackescher Markt</span>
+    <h1>The Höfe Walk: Berlin's hidden courtyards, in order</h1>
+    <p>Five connected courtyards sit within a ten-minute walk of where my tour ends. Tap a stop on the map to see what it is, what to do there, and how far it is from the last one. Your walking time and distance add up as you go.</p>
+  </div>
+
+  <div class="cw-body">
+    <div class="cw-total" aria-live="polite">
+      <div class="cw-stat"><div class="k">Stop</div><div class="v" id="stat-stop">1 <small>/ 6</small></div></div>
+      <div class="cw-stat"><div class="k">Walking so far</div><div class="v" id="stat-time">0 <small>min</small></div></div>
+      <div class="cw-stat"><div class="k">Distance so far</div><div class="v" id="stat-dist">0 <small>m</small></div></div>
+    </div>
+
+    <div class="cw-mapwrap">
+      <svg class="cw-map" id="map" viewBox="0 0 640 460" role="img" aria-label="Map of the courtyard walk around Hackescher Markt">
+        <!-- streets -->
+        <path class="street" d="M120 70 L470 120" />
+        <path class="street" d="M470 120 L560 300" />
+        <path class="street" d="M60 150 L470 120" />
+        <path class="street" d="M120 70 L95 250" />
+        <text class="street-lbl" x="205" y="98" transform="rotate(9 205 98)">Sophienstraße</text>
+        <text class="street-lbl" x="300" y="150" transform="rotate(9 300 150)">Rosenthaler Straße</text>
+        <text class="street-lbl" x="52" y="140" transform="rotate(0 52 140)">Oranienburger Str.</text>
+        <!-- S-Bahn viaduct -->
+        <path class="viaduct" d="M470 405 L610 380" />
+        <text class="viaduct-lbl" x="474" y="428">S Hackescher Markt (S-Bahn)</text>
+
+        <!-- route path (progressively revealed via stroke-dashoffset trick using segments) -->
+        <path class="route" id="route" d="" />
+
+        <!-- nodes injected by JS -->
+        <g id="nodes"></g>
+      </svg>
+      <div class="cw-legend">
+        <span><i class="cw-dotk" style="background:#1B5E20"></i> Polished</span>
+        <span><i class="cw-dotk" style="background:#B25330"></i> Gritty / street art</span>
+        <span><i class="cw-dotk" style="background:#7CB342"></i> Green / roses</span>
+        <span><i class="cw-dotk" style="background:#5A6152"></i> Quiet</span>
+        <span><i class="cw-dotk" style="background:#E0A25A"></i> Sweet</span>
+      </div>
+    </div>
+
+    <div class="cw-track" id="track" aria-hidden="true"></div>
+
+    <div class="cw-card">
+      <div class="cw-card-top">
+        <span class="cw-badge" id="badge">Start</span>
+        <h2 id="c-name">—</h2>
+        <div class="addr" id="c-addr">—</div>
+      </div>
+      <div class="cw-card-body">
+        <div id="c-desc"></div>
+        <div class="cw-leg" id="c-leg"></div>
+        <div class="cw-note" id="c-note" hidden></div>
+        <a class="cw-maplink" id="c-map" href="#" target="_blank" rel="noopener">Open this stop in Maps ↗</a>
+      </div>
+    </div>
+
+    <div class="cw-nav">
+      <button class="cw-btn" id="prev" type="button">← Previous</button>
+      <button class="cw-btn primary" id="next" type="button">Next stop →</button>
+    </div>
+    <button class="cw-reset" id="reset" type="button">Start again from Hackescher Markt</button>
+
+    <p class="cw-foot">Distances are practical walking estimates, not exact measurements. The residential courtyards are quietest in the morning; shops and cafés keep their own hours.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  // Stops: relative map positions reflect the real layout of the block.
+  // legMin/legM = walking from the previous stop.
+  var STOPS = [
+    {
+      x: 560, y: 355, color: '#5A6152', tag: 'Start', tagColor: '#5A6152',
+      name: 'S Hackescher Markt',
+      addr: 'Hackescher Markt, 10178 Berlin',
+      desc: ['This is where my two-hour walking tour finishes, under the red-brick S-Bahn arches. Most people head straight back to the trains. The better move is to turn up Rosenthaler Straße instead: the whole courtyard cluster starts two minutes from here.',
+             'Everything below is free to walk into during the day. You do not need a ticket or a tour to see any of it.'],
+      legMin: 0, legM: 0,
+      maps: 'https://www.google.com/maps/search/?api=1&query=S+Hackescher+Markt+Berlin'
+    },
+    {
+      x: 430, y: 205, color: '#1B5E20', tag: 'Polished', tagColor: '#1B5E20',
+      name: 'Hackesche Höfe',
+      addr: 'Rosenthaler Straße 40–41',
+      desc: ['The Hackesche Höfe are eight linked courtyards, opened in 1906 and the largest connected courtyard complex in Germany. Walk straight in through the arch at number 40. The first courtyard is the showpiece: August Endell’s Art Nouveau facade in blue and cream glazed brick, with the Chamäleon variety theatre and a cinema built into it.',
+             'Keep going and the mood shifts from cultural to residential, courtyard by courtyard, each one numbered on the wall. Follow the signs from Hof I toward Hof VIII and out the far side.'],
+      legMin: 3, legM: 240,
+      note: 'The front courtyards are open until late, but the residential ones are calmest before mid-morning. That is also the best light for the tiled facade.',
+      maps: 'https://www.google.com/maps/search/?api=1&query=Hackesche+H%C3%B6fe+Rosenthaler+Stra%C3%9Fe+40+Berlin'
+    },
+    {
+      x: 470, y: 250, color: '#B25330', tag: 'Gritty / street art', tagColor: '#B25330',
+      name: 'Haus Schwarzenberg',
+      addr: 'Rosenthaler Straße 39',
+      desc: ['One door south of the polished Höfe is their opposite. Haus Schwarzenberg was kept deliberately unrestored by an artists’ association, and its passage is layered with paste-ups, stickers and spray work that changes constantly.',
+             'It is not only street art. The same building holds the Anne Frank Zentrum and the Museum Otto Weidt’s Workshop for the Blind, which tells how a small brush-and-broom workshop hid its Jewish workers during the war. The contrast with the courtyard next door is the whole point.'],
+      legMin: 1, legM: 60,
+      maps: 'https://www.google.com/maps/search/?api=1&query=Haus+Schwarzenberg+Rosenthaler+Stra%C3%9Fe+39+Berlin'
+    },
+    {
+      x: 360, y: 175, color: '#7CB342', tag: 'Green / roses', tagColor: '#7CB342',
+      name: 'Rosenhöfe',
+      addr: 'Rosenthaler Straße 40 (through-passage)',
+      desc: ['Back on Rosenthaler Straße, the next entrance leads into the Rosenhöfe. A 1990s redesign wrapped the courtyard in green wrought-iron balconies and planted it as a rose garden that climbs the walls in summer.',
+             'It is small, calm and easy to miss. Stand in the middle and look up: on a clear day the TV Tower shows over the roofline. The passage carries you through toward Sophienstraße.'],
+      legMin: 2, legM: 150,
+      maps: 'https://www.google.com/maps/search/?api=1&query=Rosenh%C3%B6fe+Rosenthaler+Stra%C3%9Fe+Berlin'
+    },
+    {
+      x: 210, y: 120, color: '#5A6152', tag: 'Quiet', tagColor: '#5A6152',
+      name: 'Sophienstraße & Sophie-Gips-Höfe',
+      addr: 'Sophienstraße 19–21',
+      desc: ['Sophienstraße is one of the few Mitte streets that still looks close to its 18th and 19th-century self, restored rather than rebuilt. Duck into the passages at numbers 19 to 21 and the noise drops away completely.',
+             'The Sophie-Gips-Höfe, a former sewing-machine factory, is the elegant one: brick, ivy and a gallery-quiet atmosphere a few steps from the crowds. This is the stretch where the walk stops feeling like sightseeing and starts feeling like ordinary Berlin.'],
+      legMin: 3, legM: 220,
+      maps: 'https://www.google.com/maps/search/?api=1&query=Sophienstra%C3%9Fe+19+Berlin+Mitte'
+    },
+    {
+      x: 95, y: 210, color: '#E0A25A', tag: 'Sweet', tagColor: '#C8873F',
+      name: 'Heckmann-Höfe',
+      addr: 'Oranienburger Straße 32 / Auguststraße 9',
+      desc: ['A slightly longer walk west brings you to the Heckmann-Höfe, a restored 19th-century courtyard run with boutiques and cafés. The reason to come is the Bonbonmacherei, a traditional candy workshop where sweets are still boiled and shaped by hand behind a glass kitchen.',
+             'It is a good place to end: buy a paper bag of Berlin classics, then walk out onto Oranienburger Straße past the golden dome of the New Synagogue.'],
+      legMin: 6, legM: 500,
+      note: 'The Bonbonmacherei only opens a few days a week and usually takes a summer break, so check before making a special trip for it. The courtyard itself stays open.',
+      maps: 'https://www.google.com/maps/search/?api=1&query=Heckmann-H%C3%B6fe+Oranienburger+Stra%C3%9Fe+32+Berlin'
+    }
+  ];
+
+  var idx = 0;
+  var nodesG = document.getElementById('nodes');
+  var routeEl = document.getElementById('route');
+  var trackEl = document.getElementById('track');
+
+  // Build nodes + track
+  STOPS.forEach(function (s, i) {
+    var g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    g.setAttribute('class', 'node');
+    g.setAttribute('tabindex', '0');
+    g.setAttribute('role', 'button');
+    g.setAttribute('aria-label', 'Stop ' + (i + 1) + ': ' + s.name);
+    g.innerHTML =
+      '<circle class="halo" cx="' + s.x + '" cy="' + s.y + '" r="22"></circle>' +
+      '<circle class="ring" cx="' + s.x + '" cy="' + s.y + '" r="15" style="fill:' + s.color + ';stroke:' + s.color + '"></circle>' +
+      '<text class="num" x="' + s.x + '" y="' + s.y + '">' + (i + 1) + '</text>';
+    g.addEventListener('click', function () { go(i); });
+    g.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(i); }
+    });
+    nodesG.appendChild(g);
+
+    var seg = document.createElement('div');
+    seg.className = 'cw-seg';
+    trackEl.appendChild(seg);
+  });
+
+  function fmt(n) { return n.toLocaleString('en-US'); }
+
+  function render() {
+    var s = STOPS[idx];
+    // stats (cumulative up to and including current)
+    var min = 0, m = 0;
+    for (var i = 0; i <= idx; i++) { min += STOPS[i].legMin; m += STOPS[i].legM; }
+    document.getElementById('stat-stop').innerHTML = (idx + 1) + ' <small>/ 6</small>';
+    document.getElementById('stat-time').innerHTML = min + ' <small>min</small>';
+    document.getElementById('stat-dist').innerHTML = (m >= 1000 ? (m / 1000).toFixed(1) + ' <small>km</small>' : fmt(m) + ' <small>m</small>');
+
+    // card
+    document.getElementById('c-name').textContent = s.name;
+    document.getElementById('c-addr').textContent = s.addr;
+    var badge = document.getElementById('badge');
+    badge.textContent = s.tag;
+    badge.style.background = s.tagColor;
+    var desc = document.getElementById('c-desc');
+    desc.innerHTML = '';
+    s.desc.forEach(function (p) { var el = document.createElement('p'); el.textContent = p; desc.appendChild(el); });
+
+    var leg = document.getElementById('c-leg');
+    if (idx === 0) {
+      leg.innerHTML = '<span class="arrow">◆</span> Your starting point';
+    } else {
+      leg.innerHTML = '<span class="arrow">↳</span> Walk from ' + STOPS[idx - 1].name + ': about ' + s.legMin + ' min (~' + s.legM + ' m)';
+    }
+
+    var note = document.getElementById('c-note');
+    if (s.note) { note.hidden = false; note.textContent = s.note; } else { note.hidden = true; }
+
+    document.getElementById('c-map').href = s.maps;
+
+    // nodes
+    Array.prototype.forEach.call(nodesG.children, function (g, i) {
+      g.classList.toggle('cur', i === idx);
+      g.classList.toggle('dim', i > idx);
+    });
+    // track
+    Array.prototype.forEach.call(trackEl.children, function (seg, i) {
+      seg.classList.toggle('on', i <= idx);
+      seg.classList.toggle('cur', i === idx);
+    });
+    // route: draw through visited stops up to idx
+    var d = '';
+    for (var j = 0; j <= idx; j++) { d += (j === 0 ? 'M' : 'L') + STOPS[j].x + ' ' + STOPS[j].y + ' '; }
+    routeEl.setAttribute('d', d.trim());
+
+    // buttons
+    document.getElementById('prev').disabled = (idx === 0);
+    var nextBtn = document.getElementById('next');
+    nextBtn.disabled = (idx === STOPS.length - 1);
+    nextBtn.textContent = (idx === STOPS.length - 1) ? 'End of the walk' : 'Next stop →';
+  }
+
+  function go(i) {
+    idx = Math.max(0, Math.min(STOPS.length - 1, i));
+    render();
+  }
+
+  document.getElementById('next').addEventListener('click', function () { go(idx + 1); });
+  document.getElementById('prev').addEventListener('click', function () { go(idx - 1); });
+  document.getElementById('reset').addEventListener('click', function () { go(0); });
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

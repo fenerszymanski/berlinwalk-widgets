@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leipzig Day Trip Planner: what fits in your day window | BerlinWalk</title>
+<meta name="description" content="Set your Berlin departure and return, pick the fast train or the Deutschlandticket route, and see what realistically fits into one Leipzig day, hour by hour.">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --green-dark: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --light-green: #C5E1A5;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --rail: #37474F;
+    --drop: #B0AFA6;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .lz-wrap { max-width: 940px; margin: 0 auto; padding: 18px 14px 26px; }
+  .lz-head { text-align: center; margin-bottom: 12px; }
+  .lz-kicker { font-size: 11px; letter-spacing: 2px; font-weight: 700; color: var(--lime); text-transform: uppercase; }
+  .lz-title { font-size: clamp(22px, 4vw, 30px); font-weight: 800; color: var(--green-dark); margin: 4px 0 6px; }
+  .lz-lead { font-size: 14px; line-height: 1.55; max-width: 640px; margin: 0 auto; }
+
+  .lz-controls { background: #fff; border: 1px solid #E4E1D5; border-radius: 14px; padding: 14px; margin: 14px 0; }
+  .lz-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: center; margin-bottom: 12px; }
+  .lz-row:last-child { margin-bottom: 0; }
+  .lz-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--green); width: 100%; text-align: center; }
+
+  .lz-ticket { border: 2px solid var(--green); background: #fff; color: var(--green-dark); border-radius: 10px; padding: 9px 14px; font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer; display: inline-flex; flex-direction: column; align-items: center; gap: 2px; min-width: 150px; }
+  .lz-ticket small { font-weight: 600; font-size: 11px; color: #56604F; }
+  .lz-ticket[aria-pressed="true"] { background: var(--green); color: #fff; }
+  .lz-ticket[aria-pressed="true"] small { color: var(--light-green); }
+
+  .lz-day { border: 1.5px solid var(--green); background: #fff; color: var(--green-dark); border-radius: 999px; padding: 6px 11px; font-family: inherit; font-size: 12px; font-weight: 700; cursor: pointer; }
+  .lz-day[aria-pressed="true"] { background: var(--yellow); border-color: var(--green-dark); color: var(--green-dark); }
+
+  .lz-slider-block { flex: 1 1 260px; min-width: 240px; }
+  .lz-slider-block label { display: block; font-size: 12px; font-weight: 700; color: var(--green-dark); margin-bottom: 3px; text-align: center; }
+  .lz-slider-block output { font-weight: 800; color: var(--green); }
+  input[type="range"] { width: 100%; accent-color: var(--green); height: 28px; }
+
+  .lz-ribbon-card { background: var(--green-dark); border-radius: 14px; padding: 16px 14px 12px; margin: 14px 0; color: #fff; }
+  .lz-ribbon-title { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; color: var(--yellow); text-align: center; margin-bottom: 12px; }
+  .lz-ribbon { position: relative; height: 64px; border-radius: 8px; overflow: hidden; background: #26343B; }
+  .lz-seg { position: absolute; top: 0; bottom: 0; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; letter-spacing: 0.4px; text-align: center; overflow: hidden; white-space: nowrap; }
+  .lz-seg.berlin { background: #37474F; color: #C8D2CD; }
+  .lz-seg.train { background: repeating-linear-gradient(135deg, var(--yellow), var(--yellow) 7px, #E3CC00 7px, #E3CC00 14px); color: var(--green-dark); }
+  .lz-seg.leipzig { background: var(--lime); color: var(--green-dark); }
+  .lz-scale { position: relative; height: 16px; margin-top: 4px; }
+  .lz-tick { position: absolute; top: 0; font-size: 9px; color: #AEBDB4; transform: translateX(-50%); }
+  .lz-window-note { text-align: center; font-size: 12px; margin-top: 8px; color: var(--light-green); font-weight: 600; }
+
+  .lz-plan { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+  @media (max-width: 620px) { .lz-plan { grid-template-columns: 1fr; } }
+  .lz-col { background: #fff; border: 1px solid #E4E1D5; border-radius: 14px; padding: 14px; }
+  .lz-col h3 { margin: 0 0 10px; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: var(--green-dark); }
+  .lz-col.drops h3 { color: #6E6D64; }
+  .lz-item { display: flex; gap: 10px; padding: 7px 0; border-bottom: 1px dashed #E4E1D5; align-items: baseline; }
+  .lz-item:last-child { border-bottom: none; }
+  .lz-time { font-variant-numeric: tabular-nums; font-weight: 800; color: var(--green); font-size: 12.5px; flex: 0 0 76px; }
+  .lz-what { font-size: 13px; line-height: 1.45; }
+  .lz-what b { color: var(--green-dark); }
+  .lz-what small { display: block; color: #56604F; font-size: 11.5px; }
+  .lz-drop-item { font-size: 12.5px; color: #6E6D64; padding: 6px 0; border-bottom: 1px dashed #E4E1D5; }
+  .lz-drop-item:last-child { border-bottom: none; }
+  .lz-empty { font-size: 12.5px; color: #56604F; }
+
+  .lz-advice { background: var(--yellow); color: var(--green-dark); border-radius: 12px; padding: 12px 16px; font-size: 13.5px; line-height: 1.5; font-weight: 600; margin: 0 0 8px; }
+  .lz-advice b { font-weight: 800; }
+  .lz-foot { font-size: 11px; color: #6E6D64; text-align: center; line-height: 1.5; margin-top: 10px; }
+  .lz-foot a { color: var(--green); }
+</style>
+</head>
+<body>
+<div class="lz-wrap">
+  <div class="lz-head">
+    <div class="lz-kicker">Berlin Tools</div>
+    <h1 class="lz-title">Leipzig Day Trip Planner</h1>
+    <p class="lz-lead">Set when you leave Berlin and when you want to be back, pick your ticket, and watch the day rebuild itself. The ribbon shows your real Leipzig window; the list shows what fits inside it and what falls off.</p>
+  </div>
+
+  <div class="lz-controls">
+    <div class="lz-row" role="group" aria-label="Ticket and train choice">
+      <span class="lz-label">How are you travelling?</span>
+      <button type="button" class="lz-ticket" id="mode-ice" aria-pressed="true">ICE / IC fast train<small>about 1h 10m each way</small></button>
+      <button type="button" class="lz-ticket" id="mode-dt" aria-pressed="false">Deutschlandticket<small>regional, about 3h each way</small></button>
+    </div>
+    <div class="lz-row" role="group" aria-label="Day of the week" id="day-row">
+      <span class="lz-label">Which day?</span>
+    </div>
+    <div class="lz-row">
+      <div class="lz-slider-block">
+        <label for="dep">Leave Berlin at <output id="dep-out">09:00</output></label>
+        <input type="range" id="dep" min="360" max="720" step="30" value="540" aria-label="Departure time from Berlin">
+      </div>
+      <div class="lz-slider-block">
+        <label for="ret">Back in Berlin by <output id="ret-out">20:00</output></label>
+        <input type="range" id="ret" min="840" max="1350" step="30" value="1200" aria-label="Return time to Berlin">
+      </div>
+    </div>
+  </div>
+
+  <div class="lz-ribbon-card">
+    <div class="lz-ribbon-title">Your day, to scale</div>
+    <div class="lz-ribbon" id="ribbon" aria-hidden="true"></div>
+    <div class="lz-scale" id="scale" aria-hidden="true"></div>
+    <div class="lz-window-note" id="window-note"></div>
+  </div>
+
+  <div class="lz-advice" id="advice"></div>
+
+  <div class="lz-plan">
+    <div class="lz-col">
+      <h3>Fits in your window</h3>
+      <div id="fits"></div>
+    </div>
+    <div class="lz-col drops">
+      <h3>Falls off today</h3>
+      <div id="drops"></div>
+    </div>
+  </div>
+
+  <p class="lz-foot">Times are honest planning estimates, not a timetable. Check live trains on <a href="https://www.bahn.de/en" target="_blank" rel="noopener">bahn.de</a> and the full guide in the <a href="https://www.berlinwalk.com/post/leipzig-day-trip-from-berlin" target="_blank" rel="noopener">Leipzig day trip article</a>.</p>
+</div>
+
+<script>
+(function () {
+  var DAY_START = 420, DAY_END = 1320; // 07:00 - 22:00 ribbon scale
+  var MODES = {
+    ice: { travel: 70, label: 'ICE / IC' },
+    dt: { travel: 175, label: 'Deutschlandticket regional' }
+  };
+  var DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  var state = { mode: 'ice', day: (new Date().getDay() + 6) % 7, dep: 540, ret: 1200 };
+
+  // Priority-ordered day blocks. minutes include getting there on foot.
+  function blocks(day) {
+    var monday = day === 0;
+    return [
+      { key: 'nikolai', min: 35, name: 'Nikolaikirche', sub: 'Palm columns, free entry, start of the 1989 story. Two streets from the station.' },
+      { key: 'markt', min: 30, name: 'Markt and Altes Rathaus', sub: 'The Renaissance heart of the city.' },
+      { key: 'thomas', min: 45, name: 'Thomaskirche and the Bach grave', sub: 'Free entry. Bach worked here for 27 years.' },
+      { key: 'lunch', min: 60, name: 'Lunch', sub: 'Auerbachs Keller if you booked, otherwise the Markt area.' },
+      monday
+        ? { key: 'gdr', min: 75, name: 'Runde Ecke Stasi museum', sub: 'Original Stasi headquarters, 5 euros with audio guide. Open Mondays.' }
+        : { key: 'gdr', min: 75, name: 'Zeitgeschichtliches Forum', sub: 'The free GDR history museum. Closed Mondays.' },
+      { key: 'passage', min: 30, name: 'Mädlerpassage and the arcades', sub: 'Goethe set part of Faust in the cellar below.' },
+      { key: 'vsd', min: 120, name: 'Völkerschlachtdenkmal by tram 15', sub: 'About 15 minutes each way from the station, 12 euros, big view from the top.' }
+    ];
+  }
+
+  function fmt(mins) {
+    var h = Math.floor(mins / 60), m = mins % 60;
+    return (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m;
+  }
+
+  function el(id) { return document.getElementById(id); }
+
+  function seg(cls, from, to, text) {
+    var total = DAY_END - DAY_START;
+    var left = Math.max(0, (from - DAY_START) / total * 100);
+    var width = Math.max(0, (Math.min(to, DAY_END) - Math.max(from, DAY_START)) / total * 100);
+    if (width <= 0) return '';
+    return '<div class="lz-seg ' + cls + '" style="left:' + left.toFixed(2) + '%;width:' + width.toFixed(2) + '%">' + (width > 8 ? text : '') + '</div>';
+  }
+
+  function render() {
+    var mode = MODES[state.mode];
+    var arrive = state.dep + mode.travel;
+    var leaveLeipzig = state.ret - mode.travel;
+    var windowMin = leaveLeipzig - arrive;
+
+    el('dep-out').textContent = fmt(state.dep);
+    el('ret-out').textContent = fmt(state.ret);
+    el('mode-ice').setAttribute('aria-pressed', state.mode === 'ice');
+    el('mode-dt').setAttribute('aria-pressed', state.mode === 'dt');
+    Array.prototype.forEach.call(document.querySelectorAll('.lz-day'), function (b, i) {
+      b.setAttribute('aria-pressed', i === state.day);
+    });
+
+    // Ribbon
+    var r = '';
+    r += seg('berlin', DAY_START, state.dep, 'Berlin');
+    r += seg('train', state.dep, arrive, 'Train');
+    if (windowMin > 0) r += seg('leipzig', arrive, leaveLeipzig, 'Leipzig ' + Math.floor(windowMin / 60) + 'h ' + (windowMin % 60) + 'm');
+    r += seg('train', Math.max(leaveLeipzig, arrive), state.ret, 'Train');
+    r += seg('berlin', state.ret, DAY_END, 'Berlin');
+    el('ribbon').innerHTML = r;
+
+    var s = '';
+    for (var t = DAY_START; t <= DAY_END; t += 120) {
+      s += '<span class="lz-tick" style="left:' + ((t - DAY_START) / (DAY_END - DAY_START) * 100).toFixed(2) + '%">' + fmt(t) + '</span>';
+    }
+    el('scale').innerHTML = s;
+
+    el('window-note').textContent = windowMin > 0
+      ? 'Arrive Leipzig ' + fmt(arrive) + ' · leave Leipzig ' + fmt(leaveLeipzig)
+      : 'This window does not work: the trains eat the whole day.';
+
+    // Fill the window
+    var fits = [], drops = [], cursor = arrive, remaining = windowMin;
+    blocks(state.day).forEach(function (b) {
+      if (remaining >= b.min) {
+        fits.push({ from: cursor, to: cursor + b.min, b: b });
+        cursor += b.min; remaining -= b.min;
+      } else {
+        drops.push(b);
+      }
+    });
+
+    el('fits').innerHTML = fits.length
+      ? fits.map(function (f) {
+          return '<div class="lz-item"><span class="lz-time">' + fmt(f.from) + '–' + fmt(f.to) + '</span><span class="lz-what"><b>' + f.b.name + '</b><small>' + f.b.sub + '</small></span></div>';
+        }).join('')
+      : '<p class="lz-empty">Nothing fits. Leave earlier or come back later.</p>';
+
+    el('drops').innerHTML = drops.length
+      ? drops.map(function (b) { return '<div class="lz-drop-item">' + b.name + ' (needs ' + b.min + ' min)</div>'; }).join('')
+      : '<p class="lz-empty">Nothing. This window takes the whole classic day.</p>';
+
+    // Advice
+    var advice;
+    if (windowMin <= 0) {
+      advice = state.mode === 'dt'
+        ? '<b>The regional route needs a real day.</b> With about three hours of travel each way, leave Berlin by 08:00 or take the fast train instead.'
+        : '<b>Open the window.</b> Even the fast train needs a few hours in the middle to be worth it.';
+    } else if (state.mode === 'dt' && state.dep > 480) {
+      advice = '<b>On the Deutschlandticket, mornings decide the day.</b> Leaving after 08:00 costs you the museum hours. Move the first slider earlier, or accept a churches-and-Markt day. The direct Wittenberg S-Bahn link ends in December 2026, so this slow route is at its best right now.';
+    } else if (state.day === 0) {
+      advice = '<b>Monday plan:</b> the free GDR museum, the Bach Museum and the art museum are closed, so I have swapped in the Runde Ecke, which opens daily. If museums are your priority, drag the day chip to any other day.';
+    } else if (windowMin >= 395) {
+      advice = '<b>This window covers the whole classic day.</b> ' + (state.day === 5 ? 'It is Saturday: the 15:00 motet at the Thomaskirche is about 3 euros and worth planning lunch around.' : 'Keep the return flexible; I never leave a good city on schedule.');
+    } else {
+      advice = '<b>A short but honest day.</b> The centre is compact, so even ' + Math.floor(windowMin / 60) + ' hours covers the churches and the Markt. The tram ride to the Völkerschlachtdenkmal is the first thing to sacrifice.';
+    }
+    el('advice').innerHTML = advice;
+
+    if (window.bwPostResize) window.bwPostResize();
+  }
+
+  // Build day chips
+  var row = el('day-row');
+  DAYS.forEach(function (d, i) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'lz-day'; b.textContent = d;
+    b.setAttribute('aria-pressed', i === state.day);
+    b.addEventListener('click', function () { state.day = i; render(); });
+    row.appendChild(b);
+  });
+
+  el('mode-ice').addEventListener('click', function () { state.mode = 'ice'; render(); });
+  el('mode-dt').addEventListener('click', function () { state.mode = 'dt'; render(); });
+  el('dep').addEventListener('input', function () {
+    state.dep = +this.value;
+    if (state.ret < state.dep + 240) { state.ret = Math.min(1350, state.dep + 240); el('ret').value = state.ret; }
+    render();
+  });
+  el('ret').addEventListener('input', function () {
+    state.ret = +this.value;
+    if (state.dep > state.ret - 240) { state.dep = Math.max(360, state.ret - 240); el('dep').value = state.dep; }
+    render();
+  });
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

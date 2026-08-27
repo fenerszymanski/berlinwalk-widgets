@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Berlin Vintage District Router</title>
+<meta name="description" content="Pick one Berlin district and get a walkable second-hand plan: the character, the nearest station, the anchor shops worth your time, honest value, and what to do on a Sunday when the shops are shut." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='32' r='20' fill='%23FFE600'/%3E%3Cpath d='M32 20a5 5 0 0 0-4 8l-9 9v8h26v-8l-9-9a5 5 0 0 0-4-8z' fill='%231B5E20'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-dark:#123D18; --green-mid:#2E7D32;
+    --lime:#7CB342; --light:#C5E1A5; --yellow:#FFE600;
+    --cream:#FAFAF5; --ink:#212121; --muted:#4b584b;
+    --line:#E3E8DC; --panel:#F4F7F0;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    font-family:'Montserrat',system-ui,sans-serif;
+    color:var(--ink); background:transparent; line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:700px;margin:0 auto;padding:4px 4px 10px}
+  .card{
+    background:var(--cream); border:1px solid var(--line);
+    border-radius:18px; overflow:hidden;
+    box-shadow:0 10px 30px rgba(18,61,24,.10);
+  }
+  .head{
+    background:linear-gradient(135deg,var(--green) 0%,var(--green-mid) 100%);
+    color:#fff; padding:16px 18px 15px;
+  }
+  .kicker{
+    display:inline-block; font-size:11px; font-weight:800; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--green-dark);
+    background:var(--yellow); padding:3px 9px; border-radius:999px;
+  }
+  .head h2{margin:9px 0 3px; font-size:20px; font-weight:800; line-height:1.2}
+  .head p{margin:0; font-size:13px; color:#DDECD5}
+
+  /* District selector — hang-tags */
+  .tags{display:flex; gap:7px; padding:13px 12px 3px; flex-wrap:wrap}
+  .tag{
+    position:relative; cursor:pointer; flex:1 1 auto; min-width:96px;
+    border:1.5px solid var(--line); background:#fff; border-radius:11px;
+    padding:9px 10px 8px 22px; text-align:left; font-family:inherit; transition:.15s;
+  }
+  .tag::before{
+    content:""; position:absolute; left:9px; top:50%; transform:translateY(-50%);
+    width:8px; height:8px; border-radius:50%; background:var(--line); box-shadow:inset 0 0 0 2px #fff;
+  }
+  .tag:hover{border-color:var(--lime)}
+  .tag.active{border-color:var(--green); background:#F1F7EC; box-shadow:0 3px 10px rgba(27,94,32,.12)}
+  .tag.active::before{background:var(--yellow); box-shadow:inset 0 0 0 2px var(--green)}
+  .tag .dn{display:block; font-size:13.5px; font-weight:800; color:var(--green); line-height:1.15}
+  .tag .dt{display:block; font-size:10px; font-weight:800; color:var(--muted); letter-spacing:.04em; text-transform:uppercase; margin-top:2px}
+
+  .panel{padding:6px 15px 2px}
+  .verdict{
+    margin:10px 0 2px; padding:11px 13px; border-radius:13px;
+    background:#F1F7EC; border:1px solid var(--line);
+  }
+  .verdict .v-top{display:flex; justify-content:space-between; gap:10px; align-items:baseline; flex-wrap:wrap}
+  .verdict h3{margin:0; font-size:17px; font-weight:800; color:var(--green)}
+  .verdict .price{font-size:11px; font-weight:800; letter-spacing:.03em; text-transform:uppercase; color:var(--green-dark); background:var(--yellow); padding:3px 9px; border-radius:999px; white-space:nowrap}
+  .verdict .sub{margin:6px 0 0; font-size:13px; line-height:1.5; color:var(--ink)}
+  .verdict .sub b{color:var(--green-dark)}
+  .stations{margin:7px 0 0; font-size:12px; font-weight:700; color:var(--muted)}
+  .stations b{color:var(--green-dark)}
+
+  .railhead{margin:13px 0 2px; font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--muted)}
+  .shop{
+    border:1px solid var(--line); border-radius:14px; background:#fff;
+    padding:11px 13px; margin:8px 0;
+  }
+  .shop .top{display:flex; justify-content:space-between; gap:10px; align-items:baseline; flex-wrap:wrap}
+  .shop .nm{font-size:14.5px; font-weight:800; color:var(--green); line-height:1.25}
+  .badge{
+    font-size:10px; font-weight:800; letter-spacing:.04em; text-transform:uppercase;
+    padding:4px 9px; border-radius:999px; white-space:nowrap;
+  }
+  .badge.curated{background:var(--panel); color:var(--green-dark); border:1px solid var(--line)}
+  .badge.kilo{background:var(--yellow); color:var(--green-dark)}
+  .badge.budget{background:#EAF3E1; color:var(--green-dark); border:1px solid var(--line)}
+  .badge.designer{background:var(--green); color:#fff}
+  .badge.walk{background:#fff; color:var(--muted); border:1px dashed var(--line)}
+  .shop .where{margin:5px 0 0; font-size:12px; font-weight:700; color:var(--muted)}
+  .shop .note{margin:5px 0 0; font-size:13px; line-height:1.5; color:var(--ink)}
+
+  .kilo-box{
+    margin:11px 0 2px; padding:11px 13px; border-radius:13px;
+    background:#fff; border:1px solid var(--line); border-left:5px solid var(--yellow);
+    font-size:12.5px; line-height:1.55; color:var(--ink); display:none;
+  }
+  .kilo-box.show{display:block}
+  .kilo-box b{color:var(--green-dark)}
+
+  .sunday{
+    margin:11px 0 4px; padding:11px 13px; border-radius:13px;
+    background:var(--panel); border:1px dashed var(--line);
+    font-size:12.5px; line-height:1.55; color:var(--muted);
+  }
+  .sunday b{color:var(--green-dark)}
+
+  .foot{padding:8px 15px 4px; font-size:11px; color:var(--muted); line-height:1.5}
+  .foot b{color:var(--green-dark)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="head">
+      <span class="kicker">BerlinWalk • Vintage</span>
+      <h2>Which Berlin district for vintage?</h2>
+      <p>Pick where you want to shop. Get the character, the station, the shops worth your time, and the honest value.</p>
+    </div>
+
+    <div class="tags" id="tags" role="tablist" aria-label="Berlin vintage districts"></div>
+
+    <div class="panel">
+      <div class="verdict">
+        <div class="v-top">
+          <h3 id="dName">Neukölln</h3>
+          <span class="price" id="dPrice"></span>
+        </div>
+        <p class="sub" id="dBlurb"></p>
+        <p class="stations" id="dStations"></p>
+      </div>
+
+      <div class="kilo-box" id="kiloBox">
+        <b>How the kilo shops work:</b> you do not pay per item. Clothes are sorted by coloured tags, each colour has a price per kilo, and everything you pick is weighed at the till. Rates run roughly from the low twenties to near a hundred euro a kilo depending on the tag, so light shirts and dresses are the real value and a heavy coat can cost as much as a small pile. Both places usually cut the kilo price on a Tuesday. Bring a tote and try things on before you commit.
+      </div>
+
+      <div class="railhead">Where to actually go</div>
+      <div id="shops"></div>
+
+      <div class="sunday" id="dSunday"></div>
+    </div>
+
+    <div class="foot">
+      <b>Honest note:</b> small shops keep their own hours and the scene changes, so treat this as a starting map, not a fixed directory. Nearly every vintage shop in Berlin is shut on Sundays. Checked on 20 August 2026 — glance at a shop's current listing before you cross the city for it.
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var DISTRICTS = [
+    {
+      id:'neukolln', name:'Neukölln', tag:'Kreuzkölln',
+      price:'Mid to high', kilo:false,
+      blurb:'The densest run of small, owner-picked vintage in the city, strung along Weserstraße and the side streets off it. This is where the scene actually lives. It is <b>no longer cheap</b>, but it is the best single area for browsing many shops on foot.',
+      stations:'U8 Schönleinstraße, or U7/U8 Hermannplatz',
+      shops:[
+        {name:'Let Them Eat Cake', badge:'curated', where:'On Weserstraße', note:'Hand-picked 70s and 90s pieces, the kind you build an outfit around rather than dig for.'},
+        {name:'Sing Blackbird', badge:'curated', where:'On Sanderstraße', note:'A small, tightly edited rail of 90s and Y2K. Cash is the safe bet at shops this size.'},
+        {name:'Walk Weserstraße', badge:'walk', where:'Schönleinstraße to Sonnenallee', note:'Do not aim for one address. Walk the street, dip into whatever looks good, and let the block do the work.'}
+      ],
+      sunday:'Everything here is shut on Sunday. The nearest Sunday second-hand is the Maybachufer canal a few minutes north, where the Nowkoelln Flowmarkt runs on some Sundays.'
+    },
+    {
+      id:'friedrichshain', name:'Friedrichshain', tag:'Boxhagener Platz',
+      price:'Budget friendly', kilo:false,
+      blurb:'The value end. Big second-hand halls and casual buy-sell-trade shops around Boxhagener Platz, far less precious than Neukölln. This is the district for <b>volume browsing on a smaller budget</b>.',
+      stations:'S/U Frankfurter Tor, or S/U Warschauer Straße',
+      shops:[
+        {name:'Humana flagship', badge:'budget', where:'Frankfurter Tor 3', note:'Five floors of second-hand with a proper vintage department upstairs. Start here, then walk south toward the square.'},
+        {name:'Around Boxhagener Platz', badge:'walk', where:'Grünberger and Wühlischstraße', note:'A knot of small second-hand and streetwear shops around the square. Easy to circle on foot in an hour.'}
+      ],
+      sunday:'Shops shut on Sunday, but Boxhagener Platz itself holds a Sunday flea market, so this is one of the few areas that still works for second-hand on a Sunday.'
+    },
+    {
+      id:'kreuzberg', name:'Kreuzberg', tag:'Bergmannstraße',
+      price:'Mixed', kilo:true,
+      blurb:'Come here mainly for the <b>pay-by-weight experience</b>. Bergmannstraße is pleasant and a little touristy, but it holds one of Berlin’s landmark kilo stores, which is a proper reason to make the trip.',
+      stations:'U7 Gneisenaustraße or Mehringdamm',
+      shops:[
+        {name:'Colours', badge:'kilo', where:'On Bergmannstraße, first floor', note:'The Bergmannstraße kilo landmark: colour-tagged rails weighed at the till. See the box above for how it works.'},
+        {name:'Walk Bergmannstraße', badge:'walk', where:'Between Mehringdamm and Marheinekeplatz', note:'A calm shopping street with a few more second-hand and streetwear stops, plus cafés for a break.'}
+      ],
+      sunday:'Shut on Sunday. If it is a Sunday, save Kreuzberg for another day and head to Mauerpark or Boxhagener Platz for the flea markets instead.'
+    },
+    {
+      id:'mitte', name:'Mitte', tag:'Hackescher Markt',
+      price:'Most expensive', kilo:false,
+      blurb:'The <b>upscale, most central</b> end, in the old fashion quarter around Mulackstraße and Neue Schönhauser Straße. Great for designer resale hunters, weak value for cheap everyday vintage, and the easiest cluster to fold into a day of sightseeing.',
+      stations:'U8 Weinmeisterstraße, or S Hackescher Markt',
+      shops:[
+        {name:'Made in Berlin', badge:'budget', where:'Neue Schönhauser Straße 19', note:'The affordable exception in a pricey quarter: two colour-sorted floors, with a discounted kilo hour on Tuesdays.'},
+        {name:'Das Neue Schwarz', badge:'designer', where:'On Mulackstraße', note:'High-end designer resale. Come to look at the labels even if you leave without buying.'},
+        {name:'Paul’s Chapter', badge:'curated', where:'On Torstraße', note:'90s streetwear, denim and sneakers, the sister address to the Prenzlauer Berg shop.'}
+      ],
+      sunday:'Shut on Sunday like the rest. This is the cluster my free walking tour ends beside: the tour finishes at Hackescher Markt, a two-minute walk from these streets, so do the walk in the morning and the shops in the afternoon.'
+    },
+    {
+      id:'prenzlauerberg', name:'Prenzlauer Berg', tag:'Oderberger Straße',
+      price:'Higher, curated', kilo:false,
+      blurb:'Fewer shops, more polish. Ignore the old advice about Kastanienallee, which is mostly mainstream now; the <b>real second-hand sits on Oderberger and Stargarder Straße</b>. The honest reason to route here is that Mauerpark is next door.',
+      stations:'U2 Eberswalder Straße',
+      shops:[
+        {name:'Paul’s Boutique', badge:'curated', where:'On Oderberger Straße', note:'Curated vintage, designer second-hand and sneakers, on one of the prettiest streets in the district.'},
+        {name:'Walk Oderberger and Stargarder', badge:'walk', where:'Near Eberswalder Straße', note:'A short, calm loop of consignment and curated shops, best paired with a coffee stop.'}
+      ],
+      sunday:'The one district that is arguably better on a Sunday: the shops are shut, but the Mauerpark flea market runs right here from mid-morning, clothes and vinyl included, with the famous karaoke in the afternoon.'
+    }
+  ];
+
+  var tagsEl = document.getElementById('tags');
+  var els = {
+    name: document.getElementById('dName'),
+    price: document.getElementById('dPrice'),
+    blurb: document.getElementById('dBlurb'),
+    stations: document.getElementById('dStations'),
+    shops: document.getElementById('shops'),
+    sunday: document.getElementById('dSunday'),
+    kilo: document.getElementById('kiloBox')
+  };
+
+  function render(d){
+    els.name.textContent = d.name;
+    els.price.textContent = d.price;
+    els.blurb.innerHTML = d.blurb;
+    els.stations.innerHTML = '<b>Nearest station:</b> ' + d.stations;
+    els.kilo.className = 'kilo-box' + (d.kilo ? ' show' : '');
+    els.shops.innerHTML = d.shops.map(function(s){
+      return '<div class="shop"><div class="top"><span class="nm">' + s.name +
+        '</span><span class="badge ' + s.badge + '">' + s.badge + '</span></div>' +
+        '<p class="where">' + s.where + '</p>' +
+        '<p class="note">' + s.note + '</p></div>';
+    }).join('');
+    els.sunday.innerHTML = '<b>On a Sunday:</b> ' + d.sunday;
+  }
+
+  DISTRICTS.forEach(function(d, i){
+    var b = document.createElement('button');
+    b.className = 'tag' + (i === 0 ? ' active' : '');
+    b.setAttribute('role', 'tab');
+    b.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+    b.innerHTML = '<span class="dn">' + d.name + '</span><span class="dt">' + d.tag + '</span>';
+    b.addEventListener('click', function(){
+      Array.prototype.forEach.call(tagsEl.children, function(c){
+        c.classList.remove('active'); c.setAttribute('aria-selected', 'false');
+      });
+      b.classList.add('active'); b.setAttribute('aria-selected', 'true');
+      render(d);
+    });
+    tagsEl.appendChild(b);
+  });
+
+  render(DISTRICTS[0]);
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

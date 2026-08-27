@@ -1,0 +1,498 @@
+{
+  "schemaVersion": "2.0.0",
+  "engineVersion": "2026.07.19-output-v2.1",
+  "scenarioId": "official-reservation-action",
+  "input": {
+    "arrivalDate": "2026-09-16",
+    "tripLength": 2,
+    "arrivalTime": "morning",
+    "arrivalPoint": "hotel",
+    "stayArea": "mitte",
+    "groupType": "couple",
+    "firstTime": "yes",
+    "interests": [
+      "history",
+      "museums"
+    ],
+    "budgetStyle": "comfort",
+    "mustHandle": [
+      "reservations",
+      "rain"
+    ],
+    "pace": "balanced",
+    "tourIntent": "maybe",
+    "labels": {
+      "arrivalDate": "Wed, 16 Sept 2026",
+      "tripLength": "2 days",
+      "arrivalTime": "Before 09:00",
+      "arrivalPoint": "Hotel/Airbnb",
+      "stayArea": "Mitte / Alexanderplatz",
+      "groupType": "Couple / friends",
+      "firstTime": "Yes",
+      "interests": "History, Museums",
+      "budgetStyle": "Comfort",
+      "mustHandle": "Timed entry planning, Rain backup",
+      "pace": "Balanced",
+      "tourIntent": "Maybe later"
+    }
+  },
+  "title": "Build Berlin around the first real orientation day",
+  "summary": "This plan keeps Berlin area-by-area instead of sending you across the city all day. Start with context early, then use the rest of the trip for Wall history, museums, food, neighborhoods, and slower backup time. Book-ahead flags are called out so timed entries do not surprise you.",
+  "displayDate": "Wed, 16 Sept 2026",
+  "ticket": "AB day ticket",
+  "tourFit": "Arrival day 11:30",
+  "days": [
+    {
+      "dayId": "day_2026-09-16__route_arrival__world_clock_brandenburg_gate_topography_terror_reichstag",
+      "routeId": "route_arrival__world_clock_brandenburg_gate_topography_terror_reichstag",
+      "dayNumber": 1,
+      "dateKey": "2026-09-16",
+      "title": "Arrival and first Berlin orientation",
+      "theme": "Arrival day",
+      "planKey": "arrival",
+      "areaIds": [
+        "alexanderplatz",
+        "mitte"
+      ],
+      "places": [
+        {
+          "placeId": "world_clock",
+          "label": "World Clock",
+          "area": "Alexanderplatz",
+          "areaId": "alexanderplatz",
+          "type": "central landmark",
+          "lat": 52.521918,
+          "lng": 13.413215,
+          "indoor": false,
+          "closedDays": [],
+          "note": ""
+        },
+        {
+          "placeId": "brandenburg_gate",
+          "label": "Brandenburg Gate",
+          "area": "Mitte",
+          "areaId": "mitte",
+          "type": "landmark",
+          "lat": 52.5163,
+          "lng": 13.3777,
+          "indoor": false,
+          "closedDays": [],
+          "note": ""
+        },
+        {
+          "placeId": "topography_terror",
+          "label": "Topography of Terror",
+          "area": "Mitte / Kreuzberg",
+          "areaId": "mitte",
+          "type": "history",
+          "lat": 52.5066,
+          "lng": 13.3823,
+          "indoor": true,
+          "closedDays": [],
+          "note": "Daily indoor and outdoor history backup; 24/31 Dec and 1 Jan are closure exceptions."
+        },
+        {
+          "placeId": "reichstag",
+          "label": "Reichstag",
+          "area": "Mitte",
+          "areaId": "mitte",
+          "type": "landmark",
+          "lat": 52.5186,
+          "lng": 13.3762,
+          "indoor": true,
+          "closedDays": [],
+          "note": "The dome needs advance registration and can close for security or maintenance."
+        }
+      ],
+      "segments": [
+        {
+          "segmentId": "route_arrival__world_clock_brandenburg_gate_topography_terror_reichstag__01_arrival_arrival_transfer",
+          "routeId": "route_arrival__world_clock_brandenburg_gate_topography_terror_reichstag",
+          "type": "arrival",
+          "timeLabel": "Arrival",
+          "window": "09:00-10:45",
+          "title": "Get central without over-solving Berlin",
+          "copy": "Check in, head outside, and keep your very first walk simple, relaxed, and strictly local.",
+          "primaryPlace": {
+            "placeId": "arrival_transfer",
+            "label": "Hotel/Airbnb → Mitte / Alexanderplatz",
+            "url": "https://www.google.com/maps/search/?api=1&query=Mitte%20%2F%20Alexanderplatz%20Berlin"
+          },
+          "mapStopOwner": true,
+          "mapLinks": []
+        },
+        {
+          "segmentId": "route_arrival__world_clock_brandenburg_gate_topography_terror_reichstag__02_tour_world_clock",
+          "routeId": "route_arrival__world_clock_brandenburg_gate_topography_terror_reichstag",
+          "type": "tour",
+          "timeLabel": "BerlinWalk",
+          "window": "11:30-13:30",
+          "title": "Use the walking tour as your first Berlin introduction",
+          "copy": "Join BerlinWalk at 11:30 from the World Clock for context.",
+          "primaryPlace": {
+            "placeId": "world_clock",
+            "label": "World Clock",
+            "url": "https://www.google.com/maps/search/?api=1&query=Weltzeituhr%20Alexanderplatz%20Berlin"
+          },
+          "mapStopOwner": true,
+          "mapLinks": [
+            {
+              "placeId": "world_clock",
+              "label": "World Clock",
+              "url": "https://www.google.com/maps/search/?api=1&query=Weltzeituhr%20Alexanderplatz%20Berlin"
+            }
+          ]
+        },
+        {
+          "segmentId": "route_arrival__world_clock_brandenburg_gate_topography_terror_reichstag__03_meal_curry_61",
+          "routeId": "route_arrival__world_clock_brandenburg_gate_topography_terror_reichstag",
+          "type": "meal",
+          "timeLabel": "Lunch",
+          "window": "13:30-14:30",
+          "title": "Lunch near Hackescher Markt",
+          "copy": "",
+          "primaryPlace": {
+            "placeId": "curry_61",
+            "label": "Curry 61",
+            "url": "https://www.google.com/maps/search/?api=1&query=Curry%2061%20Berlin"
+          },
+          "mapStopOwner": true,
+          "mapLinks": [
+            {
+              "placeId": "curry_61",
+              "label": "Curry 61",
+              "url": "https://www.google.com/maps/search/?api=1&query=Curry%2061%20Berlin"
+            },
+            {
+              "placeId": "shiso_burger",
+              "label": "Shiso Burger",
+              "url": "https://www.google.com/maps/search/?api=1&query=Shiso%20Burger%20Berlin%20Mitte"
+            }
+          ]
+        },
+        {
+          "segmentId": "route_arrival__world_clock_brandenburg_gate_topography_terror_reichstag__04_visit_brandenburg_gate",
+          "routeId": "route_arrival__world_clock_brandenburg_gate_topography_terror_reichstag",
+          "type": "visit",
+          "timeLabel": "Afternoon",
+          "window": "14:30-17:00",
+          "title": "Topography of Terror as the free history stop",
+          "copy": "Stay central and use Topography of Terror as the main stop. If the day feels too heavy, switch to the Brandenburg Gate and memorial walk.",
+          "primaryPlace": {
+            "placeId": "brandenburg_gate",
+            "label": "Brandenburg Gate",
+            "url": "https://www.google.com/maps/search/?api=1&query=Brandenburger%20Tor%20Berlin"
+          },
+          "mapStopOwner": true,
+          "mapLinks": [
+            {
+              "placeId": "brandenburg_gate",
+              "label": "Brandenburg Gate",
+              "url": "https://www.google.com/maps/search/?api=1&query=Brandenburger%20Tor%20Berlin"
+            },
+            {
+              "placeId": "topography_terror",
+              "label": "Topography of Terror",
+              "url": "https://www.google.com/maps/search/?api=1&query=Topography%20of%20Terror%20Berlin"
+            }
+          ]
+        },
+        {
+          "segmentId": "route_arrival__world_clock_brandenburg_gate_topography_terror_reichstag__05_meal_claerchens_ballhaus",
+          "routeId": "route_arrival__world_clock_brandenburg_gate_topography_terror_reichstag",
+          "type": "meal",
+          "timeLabel": "Evening",
+          "window": "After 18:00",
+          "title": "Easy dinner, then stop",
+          "copy": "",
+          "primaryPlace": {
+            "placeId": "claerchens_ballhaus",
+            "label": "Clärchens Ballhaus",
+            "url": "https://www.google.com/maps/search/?api=1&query=Claerchens%20Ballhaus%20Berlin"
+          },
+          "mapStopOwner": true,
+          "mapLinks": [
+            {
+              "placeId": "claerchens_ballhaus",
+              "label": "Clärchens Ballhaus",
+              "url": "https://www.google.com/maps/search/?api=1&query=Claerchens%20Ballhaus%20Berlin"
+            }
+          ]
+        }
+      ],
+      "route": {
+        "url": "https://www.google.com/maps/dir/?api=1&origin=52.521918%2C13.413215&destination=52.5186%2C13.3762&travelmode=walking&waypoints=52.5163%2C13.3777%7C52.5066%2C13.3823",
+        "travelMode": "walking",
+        "totalDistanceKm": 5,
+        "longestSegmentKm": 2.5
+      },
+      "weather": {
+        "mode": "Monthly average",
+        "title": "September average, 20 C high",
+        "cue": "Bring a light rain layer, but keep the day mostly outdoors.",
+        "rainy": false
+      },
+      "opening": {
+        "status": "weekday",
+        "primaryClosed": false,
+        "warning": null
+      },
+      "reservation": {
+        "required": true,
+        "placeId": "reichstag",
+        "label": "Open official registration",
+        "url": "https://www.bundestag.de/en/visittheBundestag/dome/registration-245686",
+        "source": "German Bundestag",
+        "checkedAt": "2026-07-19"
+      },
+      "risks": [
+        {
+          "key": "booking",
+          "label": "Book ahead",
+          "severity": "medium",
+          "detail": "Check timed entries, Reichstag dome, restaurants, or evening plans before arrival."
+        }
+      ],
+      "previewStops": [
+        {
+          "time": "09:00",
+          "placeId": "arrival_transfer",
+          "label": "Hotel/Airbnb → Mitte / Alexanderplatz",
+          "copy": "Start at your stay in Mitte / Alexanderplatz, then go directly to the first named stop."
+        },
+        {
+          "time": "11:30",
+          "placeId": "world_clock",
+          "label": "World Clock",
+          "copy": "Start at the World Clock, Alexanderplatz’s classic meeting point. It is a good place to look around before the walk starts."
+        }
+      ],
+      "weatherSwap": null,
+      "openingSwap": null
+    },
+    {
+      "dayId": "day_2026-09-17__route_museums__charlottenburg_palace_savignyplatz_lietzensee",
+      "routeId": "route_museums__charlottenburg_palace_savignyplatz_lietzensee",
+      "dayNumber": 2,
+      "dateKey": "2026-09-17",
+      "title": "Charlottenburg Palace and west-side calm",
+      "theme": "Museum day without repeating Mitte",
+      "planKey": "museums",
+      "areaIds": [
+        "charlottenburg"
+      ],
+      "places": [
+        {
+          "placeId": "charlottenburg_palace",
+          "label": "Charlottenburg Palace",
+          "area": "Charlottenburg",
+          "areaId": "charlottenburg",
+          "type": "palace",
+          "lat": 52.5209,
+          "lng": 13.2957,
+          "indoor": true,
+          "closedDays": [
+            1
+          ],
+          "note": "Palace rooms close Monday; the gardens are the open daily fallback."
+        },
+        {
+          "placeId": "savignyplatz",
+          "label": "Savignyplatz",
+          "area": "Charlottenburg",
+          "areaId": "charlottenburg",
+          "type": "neighborhood",
+          "lat": 52.5054,
+          "lng": 13.3204,
+          "indoor": false,
+          "closedDays": [],
+          "note": ""
+        },
+        {
+          "placeId": "lietzensee",
+          "label": "Lietzensee",
+          "area": "Charlottenburg",
+          "areaId": "charlottenburg",
+          "type": "park",
+          "lat": 52.5082,
+          "lng": 13.2877,
+          "indoor": false,
+          "closedDays": [],
+          "note": ""
+        }
+      ],
+      "segments": [
+        {
+          "segmentId": "route_museums__charlottenburg_palace_savignyplatz_lietzensee__01_visit_charlottenburg_palace",
+          "routeId": "route_museums__charlottenburg_palace_savignyplatz_lietzensee",
+          "type": "visit",
+          "timeLabel": "Morning",
+          "window": "09:30-12:00",
+          "title": "Charlottenburg Palace",
+          "copy": "Use Charlottenburg Palace as the main stop. If the interior is closed, make the gardens the point and skip the ticket.",
+          "primaryPlace": {
+            "placeId": "charlottenburg_palace",
+            "label": "Charlottenburg Palace",
+            "url": "https://www.google.com/maps/search/?api=1&query=Schloss%20Charlottenburg%20Berlin"
+          },
+          "mapStopOwner": true,
+          "mapLinks": [
+            {
+              "placeId": "charlottenburg_palace",
+              "label": "Charlottenburg Palace",
+              "url": "https://www.google.com/maps/search/?api=1&query=Schloss%20Charlottenburg%20Berlin"
+            }
+          ]
+        },
+        {
+          "segmentId": "route_museums__charlottenburg_palace_savignyplatz_lietzensee__02_meal_dicke_wirtin",
+          "routeId": "route_museums__charlottenburg_palace_savignyplatz_lietzensee",
+          "type": "meal",
+          "timeLabel": "Lunch",
+          "window": "12:00-13:30",
+          "title": "Lunch in Charlottenburg",
+          "copy": "",
+          "primaryPlace": {
+            "placeId": "dicke_wirtin",
+            "label": "Dicke Wirtin",
+            "url": "https://www.google.com/maps/search/?api=1&query=Dicke%20Wirtin%20Berlin"
+          },
+          "mapStopOwner": true,
+          "mapLinks": [
+            {
+              "placeId": "dicke_wirtin",
+              "label": "Dicke Wirtin",
+              "url": "https://www.google.com/maps/search/?api=1&query=Dicke%20Wirtin%20Berlin"
+            }
+          ]
+        },
+        {
+          "segmentId": "route_museums__charlottenburg_palace_savignyplatz_lietzensee__03_meal_savignyplatz",
+          "routeId": "route_museums__charlottenburg_palace_savignyplatz_lietzensee",
+          "type": "meal",
+          "timeLabel": "Afternoon",
+          "window": "13:30-16:30",
+          "title": "Savignyplatz and Lietzensee",
+          "copy": "Stay west for cafes, bookstores, and a quieter lake walk.",
+          "primaryPlace": {
+            "placeId": "savignyplatz",
+            "label": "Savignyplatz",
+            "url": "https://www.google.com/maps/search/?api=1&query=Savignyplatz%20Berlin"
+          },
+          "mapStopOwner": true,
+          "mapLinks": [
+            {
+              "placeId": "savignyplatz",
+              "label": "Savignyplatz",
+              "url": "https://www.google.com/maps/search/?api=1&query=Savignyplatz%20Berlin"
+            },
+            {
+              "placeId": "lietzensee",
+              "label": "Lietzensee",
+              "url": "https://www.google.com/maps/search/?api=1&query=Lietzensee%20Berlin"
+            }
+          ]
+        },
+        {
+          "segmentId": "route_museums__charlottenburg_palace_savignyplatz_lietzensee__04_meal_covered_backup_near_lietzensee",
+          "routeId": "route_museums__charlottenburg_palace_savignyplatz_lietzensee",
+          "type": "meal",
+          "timeLabel": "Nearby option",
+          "window": "30-45 min",
+          "title": "Covered backup near Lietzensee",
+          "copy": "Choose one open museum or cafe near Lietzensee. Do not cross Berlin for a separate museum district.",
+          "primaryPlace": null,
+          "mapStopOwner": false,
+          "mapLinks": []
+        },
+        {
+          "segmentId": "route_museums__charlottenburg_palace_savignyplatz_lietzensee__05_meal_schwarzes_cafe",
+          "routeId": "route_museums__charlottenburg_palace_savignyplatz_lietzensee",
+          "type": "meal",
+          "timeLabel": "Evening",
+          "window": "After 18:00",
+          "title": "Dinner",
+          "copy": "Friendly reminder: double-check if you need a timed-entry ticket! Nobody likes being turned away at the door.",
+          "primaryPlace": {
+            "placeId": "schwarzes_cafe",
+            "label": "Schwarzes Café",
+            "url": "https://www.google.com/maps/search/?api=1&query=Schwarzes%20Cafe%20Berlin"
+          },
+          "mapStopOwner": true,
+          "mapLinks": [
+            {
+              "placeId": "schwarzes_cafe",
+              "label": "Schwarzes Café",
+              "url": "https://www.google.com/maps/search/?api=1&query=Schwarzes%20Cafe%20Berlin"
+            }
+          ]
+        }
+      ],
+      "route": {
+        "url": "https://www.google.com/maps/dir/?api=1&origin=52.5209%2C13.2957&destination=52.5082%2C13.2877&travelmode=walking&waypoints=52.5054%2C13.3204",
+        "travelMode": "walking",
+        "totalDistanceKm": 4.6,
+        "longestSegmentKm": 2.4
+      },
+      "weather": {
+        "mode": "Monthly average",
+        "title": "September average, 20 C high",
+        "cue": "Bring a light rain layer, but keep the day mostly outdoors.",
+        "rainy": false
+      },
+      "opening": {
+        "status": "weekday",
+        "primaryClosed": false,
+        "warning": null
+      },
+      "reservation": {
+        "required": true,
+        "placeId": "charlottenburg_palace",
+        "label": "Check official palace entry",
+        "url": "https://www.spsg.de/en/palaces-gardens/object/charlottenburg-palace-old-palace/",
+        "source": "SPSG",
+        "checkedAt": "2026-07-19"
+      },
+      "risks": [
+        {
+          "key": "rain",
+          "label": "Rain backup",
+          "severity": "medium",
+          "detail": "Keep one museum, cafe, or covered market near the same area."
+        },
+        {
+          "key": "booking",
+          "label": "Book ahead",
+          "severity": "medium",
+          "detail": "Check timed entries, Reichstag dome, restaurants, or evening plans before arrival."
+        }
+      ],
+      "previewStops": [
+        {
+          "time": "09:30",
+          "placeId": "charlottenburg_palace",
+          "label": "Charlottenburg Palace",
+          "copy": "Charlottenburg Palace is Berlin’s grandest palace. See the gardens even if you skip the rooms inside."
+        },
+        {
+          "time": "12:00",
+          "placeId": "dicke_wirtin",
+          "label": "Dicke Wirtin",
+          "copy": "Dicke Wirtin is an old-style Charlottenburg pub. Go for a filling German meal after walking around Savignyplatz."
+        }
+      ],
+      "weatherSwap": null,
+      "openingSwap": null
+    }
+  ],
+  "quality": {
+    "status": "pass",
+    "issues": [],
+    "warnings": [],
+    "stats": {
+      "days": 2,
+      "issues": 0,
+      "warnings": 0
+    }
+  }
+}

@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Train Station First Move | BerlinWalk</title>
+  <meta name="description" content="Choose your Berlin arrival station and get the first move: city centre, BER airport, luggage, late arrival or BerlinWalk meeting point.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    :root {
+      --green: #1B5E20;
+      --green-dark: #0b3511;
+      --yellow: #FFE600;
+      --lime: #7CB342;
+      --cream: #FAFAF5;
+      --ink: #212121;
+      --red: #E63946;
+      --line: rgba(27, 94, 32, 0.16);
+      --shadow: 0 22px 54px rgba(11, 53, 17, 0.18);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: Montserrat, Arial, sans-serif;
+    }
+
+    .station-tool {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      background: linear-gradient(180deg, #fffdf2 0%, #f2f7ea 100%);
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 360px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+      align-items: stretch;
+      background: var(--green-dark);
+    }
+
+    .hero-media {
+      min-height: 360px;
+      background:
+        linear-gradient(90deg, rgba(11, 53, 17, 0.86), rgba(11, 53, 17, 0.28)),
+        url("./assets/hero-hauptbahnhof.jpg") center / cover;
+    }
+
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+      padding: 34px clamp(22px, 5vw, 54px);
+      color: #fff;
+      background:
+        radial-gradient(circle at 100% 0%, rgba(255, 230, 0, 0.22), transparent 34%),
+        linear-gradient(135deg, rgba(11, 53, 17, 0.98), rgba(27, 94, 32, 0.94));
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      gap: 8px;
+      padding: 7px 10px;
+      background: rgba(255, 230, 0, 0.16);
+      border: 1px solid rgba(255, 230, 0, 0.36);
+      color: var(--yellow);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 560px;
+      font-family: Merriweather, Georgia, serif;
+      font-size: clamp(32px, 4.8vw, 58px);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    .hero-copy p {
+      margin: 0;
+      max-width: 540px;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 16px;
+      line-height: 1.62;
+      font-weight: 600;
+    }
+
+    .rail {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .rail span {
+      min-height: 58px;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.11);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-size: 12px;
+      line-height: 1.35;
+      font-weight: 800;
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: 320px minmax(0, 1fr);
+      gap: 18px;
+      padding: 20px;
+    }
+
+    .panel {
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid var(--line);
+      box-shadow: 0 12px 32px rgba(27, 94, 32, 0.08);
+      padding: 16px;
+    }
+
+    .panel h2,
+    .panel h3 {
+      margin: 0;
+      color: var(--green-dark);
+      letter-spacing: 0;
+    }
+
+    .panel h2 {
+      font-size: 18px;
+      line-height: 1.25;
+    }
+
+    .panel h3 {
+      font-size: 16px;
+      line-height: 1.3;
+    }
+
+    .hint {
+      margin: 6px 0 14px;
+      color: #54624f;
+      font-size: 13px;
+      line-height: 1.5;
+      font-weight: 600;
+    }
+
+    .station-grid,
+    .need-grid {
+      display: grid;
+      gap: 8px;
+    }
+
+    .station-btn,
+    .need-btn {
+      appearance: none;
+      border: 1px solid rgba(27, 94, 32, 0.18);
+      background: #fff;
+      color: var(--green-dark);
+      cursor: pointer;
+      font: inherit;
+      text-align: left;
+      padding: 11px 12px;
+      display: grid;
+      gap: 3px;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+    }
+
+    .station-btn strong,
+    .need-btn strong {
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .station-btn small,
+    .need-btn small {
+      color: #66715f;
+      font-size: 11px;
+      line-height: 1.35;
+      font-weight: 700;
+    }
+
+    .station-btn:hover,
+    .need-btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(27, 94, 32, 0.36);
+      box-shadow: 0 10px 24px rgba(27, 94, 32, 0.12);
+    }
+
+    .station-btn[aria-pressed="true"],
+    .need-btn[aria-pressed="true"] {
+      background: linear-gradient(135deg, var(--green), var(--green-dark));
+      color: #fff;
+      border-color: var(--green-dark);
+    }
+
+    .station-btn[aria-pressed="true"] small,
+    .need-btn[aria-pressed="true"] small {
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .need-wrap {
+      margin-top: 18px;
+    }
+
+    .result {
+      position: relative;
+      min-height: 100%;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255, 230, 0, 0.18), rgba(255, 255, 255, 0.84) 32%),
+        #fff;
+      border: 1px solid rgba(27, 94, 32, 0.18);
+      box-shadow: var(--shadow);
+      padding: clamp(18px, 3vw, 28px);
+    }
+
+    .result::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 7px;
+      background: linear-gradient(90deg, var(--yellow), var(--lime), var(--green));
+    }
+
+    .result-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: start;
+      margin-bottom: 18px;
+    }
+
+    .station-label {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      gap: 8px;
+      margin-bottom: 9px;
+      padding: 6px 9px;
+      background: rgba(27, 94, 32, 0.09);
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .result h2 {
+      margin: 0;
+      color: var(--green-dark);
+      font-size: clamp(24px, 3.7vw, 38px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .verdict {
+      display: grid;
+      gap: 10px;
+      margin: 18px 0;
+      padding: 16px;
+      background: var(--green-dark);
+      color: #fff;
+      border-left: 8px solid var(--yellow);
+    }
+
+    .verdict strong {
+      color: var(--yellow);
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    .verdict p {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.55;
+      font-weight: 700;
+    }
+
+    .meter {
+      width: 126px;
+      min-height: 126px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 14px;
+      color: var(--green-dark);
+      background: radial-gradient(circle at 50% 38%, var(--yellow), #fff3a5 58%, #fff 59%);
+      border: 1px solid rgba(27, 94, 32, 0.18);
+    }
+
+    .meter strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1.2;
+      font-weight: 900;
+    }
+
+    .meter small {
+      display: block;
+      margin-top: 6px;
+      color: #52604e;
+      font-size: 11px;
+      line-height: 1.35;
+      font-weight: 800;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .card {
+      padding: 13px;
+      background: rgba(250, 250, 245, 0.95);
+      border: 1px solid rgba(27, 94, 32, 0.14);
+      min-height: 122px;
+    }
+
+    .card b {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--green);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .card span {
+      display: block;
+      color: #384235;
+      font-size: 13px;
+      line-height: 1.5;
+      font-weight: 650;
+    }
+
+    .steps {
+      margin-top: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 38px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      padding: 12px;
+      background: rgba(27, 94, 32, 0.06);
+      border: 1px solid rgba(27, 94, 32, 0.12);
+    }
+
+    .step i {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      background: var(--yellow);
+      color: var(--green-dark);
+      font-style: normal;
+      font-weight: 900;
+    }
+
+    .step p {
+      margin: 0;
+      color: #344331;
+      font-size: 13px;
+      line-height: 1.55;
+      font-weight: 650;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 42px;
+      padding: 10px 12px;
+      background: var(--green);
+      color: #fff;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .links a.secondary {
+      background: #fff;
+      color: var(--green-dark);
+      border: 1px solid rgba(27, 94, 32, 0.22);
+    }
+
+    .source-note {
+      margin: 15px 0 0;
+      color: #66715f;
+      font-size: 11px;
+      line-height: 1.45;
+      font-weight: 650;
+    }
+
+    @media (max-width: 880px) {
+      .hero,
+      .workspace,
+      .result-top {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-media {
+        min-height: 250px;
+        order: 2;
+      }
+
+      .workspace {
+        padding: 14px;
+      }
+
+      .meter {
+        width: 100%;
+        min-height: 92px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .rail {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        padding: 26px 18px;
+      }
+
+      .panel,
+      .result {
+        padding: 14px;
+      }
+
+      .station-btn,
+      .need-btn {
+        min-height: 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="station-tool" aria-labelledby="tool-title">
+    <section class="hero">
+      <div class="hero-media" role="img" aria-label="S-Bahn train arriving inside Berlin Hauptbahnhof"></div>
+      <div class="hero-copy">
+        <span class="kicker">Berlin arrival switchboard</span>
+        <h1 id="tool-title">Berlin train station first move</h1>
+        <p>Pick the station on your ticket and what matters next. I will give you the first move, the common trap, and the route logic before the station makes the decision for you.</p>
+        <div class="rail" aria-label="Tool facts">
+          <span>Hbf, Ostbahnhof, Südkreuz, Gesundbrunnen and Spandau</span>
+          <span>City centre, BER, luggage, late arrival or tour meeting point</span>
+          <span>Current route logic checked for July 2026</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <aside class="panel" aria-label="Choose station and need">
+        <h2>1. Choose your station</h2>
+        <p class="hint">Use the exact station name on your ticket. Berlin has several serious arrival stations, not one universal centre.</p>
+        <div class="station-grid" id="station-grid"></div>
+
+        <div class="need-wrap">
+          <h2>2. Choose your first pressure</h2>
+          <p class="hint">The best station move changes when you have bags, a flight, a late arrival or a fixed meeting time.</p>
+          <div class="need-grid" id="need-grid"></div>
+        </div>
+      </aside>
+
+      <section class="result" aria-live="polite">
+        <div class="result-top">
+          <div>
+            <span class="station-label" id="station-label">Berlin Hauptbahnhof</span>
+            <h2 id="result-title">Start central, then go east with purpose.</h2>
+          </div>
+          <div class="meter">
+            <div>
+              <strong id="meter-title">Best for first-timers</strong>
+              <small id="meter-copy">Central, connected, but easy to over-walk with luggage.</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="verdict">
+          <strong>First move</strong>
+          <p id="verdict-copy">Follow the S-Bahn/U5 layer toward Alexanderplatz if your hotel or first walk is in the historic centre. Do not drag bags through the government quarter just because it looks close on the map.</p>
+        </div>
+
+        <div class="cards">
+          <div class="card"><b>Good when</b><span id="good-copy"></span></div>
+          <div class="card"><b>Watch out</b><span id="watch-copy"></span></div>
+          <div class="card"><b>Ticket thought</b><span id="ticket-copy"></span></div>
+        </div>
+
+        <div class="steps" id="steps"></div>
+
+        <div class="links">
+          <a id="map-link" href="https://maps.google.com/?q=Berlin%20Hauptbahnhof" target="_blank" rel="noopener">Open station map</a>
+          <a class="secondary" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_blank" rel="noopener">Check BerlinWalk times</a>
+        </div>
+        <p class="source-note">Always recheck the DB Navigator or VBB app on the travel day. Construction, strikes and platform changes matter more than a saved screenshot.</p>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    const stations = {
+      hbf: {
+        name: 'Berlin Hauptbahnhof',
+        short: 'Hbf',
+        label: 'Central station',
+        title: 'Start central, then go east with purpose.',
+        meterTitle: 'Best for first-timers',
+        meterCopy: 'Central, connected, but easy to over-walk with luggage.',
+        good: 'Your hotel is in Mitte, Moabit, government quarter, Museum Island edge or you need a simple first arrival base.',
+        watch: 'The building is layered. Long-distance platforms, S-Bahn, U5, taxis and lockers are not all in one obvious line.',
+        ticket: 'Most city moves are AB. BER Airport and Potsdam need ABC.',
+        maps: 'https://maps.google.com/?q=Berlin%20Hauptbahnhof',
+        moves: {
+          centre: 'Take S-Bahn east or U5 toward Alexanderplatz/Rotes Rathaus if your first stop is the old centre. Walking is possible, but it is often a tired first mistake with bags.',
+          airport: 'Use FEX when it fits your time. The current BER route runs via Potsdamer Platz and Südkreuz, with Hauptbahnhof to BER at about 23 minutes before disruption buffers.',
+          luggage: 'Solve bags before sightseeing. If you cannot leave them at the hotel, use station storage or a nearby luggage plan before you start walking.',
+          tour: 'For the World Clock, take S-Bahn east to Alexanderplatz or U5 toward Rotes Rathaus/Alexanderplatz, then walk calmly to the meeting point.',
+          late: 'Stay inside the well-lit station layer until you know your route. Choose one clear train, taxi or hotel move instead of wandering the river area.'
+        },
+        steps: ['Find your onward layer first: S-Bahn, U5, taxi or lockers.', 'Do one city move, not a sightseeing detour.', 'If you have a timed plan, add a 15-minute platform-to-street buffer.']
+      },
+      ostbahnhof: {
+        name: 'Berlin Ostbahnhof',
+        short: 'Ostbahnhof',
+        label: 'East side arrival',
+        title: 'Use the east-west S-Bahn spine.',
+        meterTitle: 'Best for Friedrichshain',
+        meterCopy: 'Good east-city access, less natural for first-time Mitte hotels.',
+        good: 'Your hotel is around Friedrichshain, East Side Gallery, Ostkreuz, Warschauer Strasse, or your train naturally stops here.',
+        watch: 'It feels central on railway maps, but many classic first-time sights are still one S-Bahn ride west.',
+        ticket: 'AB covers normal city moves. Use ABC for BER Airport.',
+        maps: 'https://maps.google.com/?q=Berlin%20Ostbahnhof',
+        moves: {
+          centre: 'Take S3/S5/S7/S9 west through Alexanderplatz and Friedrichstrasse. It is the cleanest first move into the historic centre.',
+          airport: 'If the S9 is convenient and you are not in a hurry, it can be a simple direct airport move. For faster trips, compare real-time options through Ostkreuz.',
+          luggage: 'Use station lockers or solve hotel drop-off before you try East Side Gallery. The river walk is much worse with rolling bags.',
+          tour: 'Take S-Bahn west to Alexanderplatz, then walk to the World Clock. Do not start with East Side Gallery if you have a fixed meeting time.',
+          late: 'Stay on the main S-Bahn spine or take a taxi from the station. Avoid turning the first night into an unplanned Friedrichshain walk.'
+        },
+        steps: ['Use the Stadtbahn S-Bahn line as your mental map.', 'Decide west to Mitte or east to Friedrichshain before leaving the concourse.', 'Keep East Side Gallery as a separate stop unless your hotel is nearby.']
+      },
+      suedkreuz: {
+        name: 'Berlin Südkreuz',
+        short: 'Südkreuz',
+        label: 'South and BER hinge',
+        title: 'Great for BER, not automatically for the old centre.',
+        meterTitle: 'Best for airport logic',
+        meterCopy: 'Strong south station, FEX airport link, ring connections.',
+        good: 'Your train arrives from the south, your hotel is in Schöneberg/Tempelhof/Kreuzberg south, or you need BER Airport next.',
+        watch: 'It is efficient but not romantic. For Museum Island or Alexanderplatz you still need a planned transfer.',
+        ticket: 'AB for the city. ABC for BER Airport.',
+        maps: 'https://maps.google.com/?q=Berlin%20S%C3%BCdkreuz',
+        moves: {
+          centre: 'Use S-Bahn or regional connections toward Potsdamer Platz/Friedrichstrasse/Alexanderplatz after checking live routing. Do not assume every central sight is nearby.',
+          airport: 'This is the clean airport station: FEX lists Südkreuz to BER at about 14 minutes before buffers.',
+          luggage: 'Use the station first if you need lockers, then move. Südkreuz is a transfer machine, not a nice luggage-walk base.',
+          tour: 'Leave earlier than the map suggests. Aim for Alexanderplatz with a transfer buffer, then meet at the World Clock.',
+          late: 'Choose taxi or one clear rail route to your hotel. Südkreuz is easy to leave if you already know the line.'
+        },
+        steps: ['Check whether your route is north-south, ring or airport.', 'For BER, prioritize FEX over a complicated chain.', 'For Mitte, add a transfer buffer before any fixed booking.']
+      },
+      gesundbrunnen: {
+        name: 'Berlin Gesundbrunnen',
+        short: 'Gesundbrunnen',
+        label: 'North and ring station',
+        title: 'Good north-side station, weaker first-time centre signal.',
+        meterTitle: 'Best for north Berlin',
+        meterCopy: 'Useful for Wedding, Prenzlauer Berg edge and ring transfers.',
+        good: 'Your hotel is in Wedding, Prenzlauer Berg north, Pankow, Mauerpark area, or your train uses the north-south railway.',
+        watch: 'Do not treat it as Alexanderplatz. It is connected, but your classic first Berlin move needs a transfer.',
+        ticket: 'AB for the city. ABC if you continue to BER Airport.',
+        maps: 'https://maps.google.com/?q=Berlin%20Gesundbrunnen',
+        moves: {
+          centre: 'Use U8/S-Bahn connections toward Alexanderplatz, Friedrichstrasse or your hotel. The best line depends heavily on your exact address.',
+          airport: 'Compare routes live. A common move is to connect through Potsdamer Platz for FEX or through Ostkreuz for airport services.',
+          luggage: 'If you are staying north, hotel drop-off first usually beats dragging luggage into Mitte.',
+          tour: 'Use U8/S-Bahn toward Alexanderplatz with a buffer. The World Clock is not the station exit.',
+          late: 'Keep to the main station exits and choose a direct onward line or taxi. Do not improvise through unfamiliar north-side streets with bags.'
+        },
+        steps: ['Find whether your next line is U8, S-Bahn ring or north-south S-Bahn.', 'If your hotel is north, go there first.', 'If your day starts in Mitte, plan the transfer before leaving the platform area.']
+      },
+      spandau: {
+        name: 'Berlin Spandau',
+        short: 'Spandau',
+        label: 'West-side arrival',
+        title: 'Good west arrival, far from first-time Mitte.',
+        meterTitle: 'Best for the west',
+        meterCopy: 'Useful for Spandau, Charlottenburg and some Potsdam-side plans.',
+        good: 'Your hotel is in Spandau, Charlottenburg, Messe/ICC, west Berlin, or your train naturally stops before crossing the city.',
+        watch: 'If your first booking is in Mitte or at Alexanderplatz, this is not a quick casual hop.',
+        ticket: 'AB covers Spandau to central Berlin. ABC for BER Airport or Potsdam.',
+        maps: 'https://maps.google.com/?q=Berlin%20Spandau%20station',
+        moves: {
+          centre: 'Use S-Bahn/regional trains east and allow a real buffer. Berlin.de notes public transport to the city centre from Spandau takes about 30 minutes.',
+          airport: 'Check live. The S9 runs from Spandau through the city to BER, but it is not the fast choice if time is tight.',
+          luggage: 'If you are staying west, drop luggage first. If you are not, do not start sightseeing in Spandau with bags unless the old town is your plan.',
+          tour: 'For the World Clock, leave early and go east by rail. Treat the station-to-meeting-point phase as part of the journey, not an afterthought.',
+          late: 'Choose a simple onward rail or taxi plan. West Berlin distances can feel longer late at night when transfers thin out.'
+        },
+        steps: ['Decide whether you are staying west or crossing Berlin immediately.', 'Use direct S-Bahn/regional options when they appear.', 'For fixed central times, add at least one missed-connection buffer.']
+      }
+    };
+
+    const needs = {
+      centre: { title: 'City centre first', sub: 'Hotel, Museum Island, Mitte or first walk' },
+      airport: { title: 'BER Airport next', sub: 'Departure or same-day airport transfer' },
+      luggage: { title: 'Luggage problem', sub: 'Bags before sightseeing' },
+      tour: { title: 'BerlinWalk meeting point', sub: 'World Clock at Alexanderplatz' },
+      late: { title: 'Late arrival', sub: 'Simple, lit, low-stress move' }
+    };
+
+    let activeStation = 'hbf';
+    let activeNeed = 'centre';
+
+    const stationGrid = document.getElementById('station-grid');
+    const needGrid = document.getElementById('need-grid');
+
+    function button(label, sub, pressed, onClick, className) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = className;
+      btn.setAttribute('aria-pressed', String(pressed));
+      btn.innerHTML = `<strong>${label}</strong><small>${sub}</small>`;
+      btn.addEventListener('click', onClick);
+      return btn;
+    }
+
+    function renderButtons() {
+      stationGrid.innerHTML = '';
+      Object.entries(stations).forEach(([key, station]) => {
+        stationGrid.appendChild(button(station.name, station.label, key === activeStation, () => {
+          activeStation = key;
+          render();
+        }, 'station-btn'));
+      });
+
+      needGrid.innerHTML = '';
+      Object.entries(needs).forEach(([key, need]) => {
+        needGrid.appendChild(button(need.title, need.sub, key === activeNeed, () => {
+          activeNeed = key;
+          render();
+        }, 'need-btn'));
+      });
+    }
+
+    function render() {
+      const station = stations[activeStation];
+      document.getElementById('station-label').textContent = station.name;
+      document.getElementById('result-title').textContent = station.title;
+      document.getElementById('meter-title').textContent = station.meterTitle;
+      document.getElementById('meter-copy').textContent = station.meterCopy;
+      document.getElementById('verdict-copy').textContent = station.moves[activeNeed];
+      document.getElementById('good-copy').textContent = station.good;
+      document.getElementById('watch-copy').textContent = station.watch;
+      document.getElementById('ticket-copy').textContent = station.ticket;
+      document.getElementById('map-link').href = station.maps;
+
+      const steps = document.getElementById('steps');
+      steps.innerHTML = '';
+      station.steps.forEach((copy, index) => {
+        const node = document.createElement('div');
+        node.className = 'step';
+        node.innerHTML = `<i>${index + 1}</i><p>${copy}</p>`;
+        steps.appendChild(node);
+      });
+      renderButtons();
+      window.BerlinWalkBrand?.resize?.();
+    }
+
+    render();
+  </script>
+  <script src="../js/brand.js"></script>
+</body>
+</html>

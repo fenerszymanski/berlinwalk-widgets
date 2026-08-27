@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Berlin Ringbahn Explorer — Ride the S41/S42 Circle Line</title>
+<meta name="description" content="An interactive map of Berlin's Ringbahn, the S41/S42 circle line locals call the Hundekopf. Tap any of the 27 stations to see which neighbourhood it opens up, or follow the ring clockwise (S41) and anticlockwise (S42)." />
+<link rel="stylesheet" href="../css/brand.css" />
+<script defer src="../js/brand.js"></script>
+<style>
+  .rbx {
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+    color: var(--bw-text);
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 4px 4px 14px;
+    box-sizing: border-box;
+  }
+  .rbx *, .rbx *::before, .rbx *::after { box-sizing: border-box; }
+  .rbx__head {
+    background: var(--bw-green);
+    color: #fff;
+    border-radius: 16px 16px 0 0;
+    padding: 18px 20px 16px;
+  }
+  .rbx__kicker {
+    font-size: 11px; font-weight: 700; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--bw-yellow); margin: 0 0 6px;
+  }
+  .rbx__title { font-size: 22px; font-weight: 800; margin: 0 0 5px; line-height: 1.22; }
+  .rbx__sub { font-size: 13.5px; line-height: 1.5; margin: 0; color: #E8F1E2; }
+  .rbx__body {
+    border: 1px solid var(--bw-border);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    background: var(--bw-white);
+    overflow: hidden;
+  }
+  /* facts strip */
+  .rbx__facts { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px 14px 4px; }
+  .rbx__fact {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11.5px; font-weight: 700; letter-spacing: .01em;
+    padding: 5px 10px; border-radius: 999px;
+    background: var(--bw-lime-soft); color: var(--bw-green); border: 1px solid var(--bw-border);
+  }
+  /* direction toggle */
+  .rbx__dir { display: flex; gap: 8px; padding: 10px 14px 6px; }
+  .rbx__dirbtn {
+    flex: 1; font-family: inherit; cursor: pointer; text-align: left;
+    padding: 9px 12px; border-radius: 12px; border: 2px solid var(--bw-border);
+    background: #fff; color: var(--bw-muted); transition: all .12s ease;
+  }
+  .rbx__dirbtn b { display: block; font-size: 14px; font-weight: 800; color: var(--bw-text); }
+  .rbx__dirbtn span { font-size: 11.5px; font-weight: 600; }
+  .rbx__dirbtn.is-on { border-color: var(--bw-green); background: var(--bw-lime-soft); }
+  .rbx__dirbtn.is-on b { color: var(--bw-green); }
+  .rbx__dirbtn.is-on span { color: var(--bw-green); }
+  /* ring map */
+  .rbx__mapwrap { padding: 6px 8px 2px; display: flex; justify-content: center; }
+  .rbx__map { display: block; width: 100%; max-width: 430px; height: auto; touch-action: manipulation; }
+  .rbx__arc { fill: none; stroke-width: 9; stroke-linecap: round; opacity: .32; transition: opacity .15s ease, stroke-width .15s ease; }
+  .rbx__arc.is-lit { opacity: 1; stroke-width: 11; }
+  .rbx__arc--ne { stroke: #7CB342; }
+  .rbx__arc--se { stroke: #F9A825; }
+  .rbx__arc--sw { stroke: #4FA3D1; }
+  .rbx__arc--nw { stroke: #B07CC6; }
+  .rbx__stn { cursor: pointer; }
+  .rbx__stn-dot { fill: #fff; stroke: #9DB587; stroke-width: 2; transition: r .12s ease, fill .12s ease, stroke .12s ease; }
+  .rbx__stn:hover .rbx__stn-dot { stroke: var(--bw-green); }
+  .rbx__stn.is-corner .rbx__stn-dot { stroke-width: 3; stroke: var(--bw-green); }
+  .rbx__stn.is-sel .rbx__stn-dot { fill: var(--bw-yellow); stroke: var(--bw-green); stroke-width: 3.5; }
+  .rbx__stn-lab { font-size: 10px; font-weight: 700; fill: var(--bw-muted); pointer-events: none; }
+  .rbx__stn.is-corner .rbx__stn-lab { fill: var(--bw-green); font-size: 10.5px; }
+  .rbx__stn.is-sel .rbx__stn-lab { fill: #123D18; }
+  .rbx__train { fill: var(--bw-red); stroke: #fff; stroke-width: 2; }
+  .rbx__compass { font-size: 10px; font-weight: 800; letter-spacing: .1em; fill: #B9C6AC; }
+  .rbx__hub-note { font-size: 9.5px; font-weight: 700; fill: #123D18; text-anchor: middle; }
+  /* side chips */
+  .rbx__sides { display: flex; flex-wrap: wrap; gap: 6px; padding: 6px 14px 2px; }
+  .rbx__side {
+    font-family: inherit; cursor: pointer; font-size: 11.5px; font-weight: 700;
+    padding: 6px 11px; border-radius: 999px; border: 1.5px solid var(--bw-border);
+    background: #fff; color: var(--bw-muted); transition: all .12s ease;
+  }
+  .rbx__side::before { content: ""; display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
+  .rbx__side--ne::before { background: #7CB342; }
+  .rbx__side--se::before { background: #F9A825; }
+  .rbx__side--sw::before { background: #4FA3D1; }
+  .rbx__side--nw::before { background: #B07CC6; }
+  .rbx__side.is-on { color: #123D18; border-color: currentColor; background: var(--bw-lime-soft); }
+  .rbx__sideline { padding: 6px 15px 0; font-size: 12px; line-height: 1.5; color: var(--bw-muted); min-height: 18px; }
+  .rbx__sideline b { color: var(--bw-green); }
+  /* detail card */
+  .rbx__card { padding: 12px 15px 4px; border-top: 1px solid var(--bw-border); margin-top: 10px; }
+  .rbx__eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; margin: 0 0 3px; }
+  .rbx__stopname { font-size: 20px; font-weight: 800; margin: 0 0 6px; line-height: 1.2; }
+  .rbx__meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 9px; }
+  .rbx__tag { font-size: 11px; font-weight: 700; padding: 4px 9px; border-radius: 999px; background: var(--bw-lime-soft); color: var(--bw-green); border: 1px solid var(--bw-border); }
+  .rbx__tag--yes { background: #FFF9CC; color: #123D18; border-color: #F2E27A; }
+  .rbx__tag--skip { background: #F3F4F1; color: #6A756A; border-color: #E0E4DA; }
+  .rbx__blurb { font-size: 14px; line-height: 1.58; margin: 0 0 10px; color: var(--bw-text); }
+  .rbx__blurb b { color: var(--bw-green); }
+  .rbx__hint { font-size: 12px; font-weight: 600; color: var(--bw-muted); margin: 0 0 12px; }
+  .rbx__hint b { color: var(--bw-green); }
+  /* context box */
+  .rbx__ctx { padding: 2px 15px 12px; }
+  .rbx__ctxbox { background: var(--bw-green); color: #fff; border-radius: 14px; padding: 15px 17px; }
+  .rbx__ctxbox h4 { margin: 0 0 6px; font-size: 15px; font-weight: 800; }
+  .rbx__ctxbox p { margin: 0 0 8px; font-size: 13px; line-height: 1.55; color: #E8F1E2; }
+  .rbx__ctxbox p:last-child { margin-bottom: 0; }
+  .rbx__ctxbox a { color: var(--bw-yellow); font-weight: 800; text-decoration: none; border-bottom: 2px solid rgba(255,230,0,.4); }
+  .rbx__ctxbox a:hover { border-bottom-color: var(--bw-yellow); }
+  @media (max-width: 440px) {
+    .rbx__title { font-size: 19.5px; }
+    .rbx__stopname { font-size: 18px; }
+    .rbx__stn-lab { display: none; }
+    .rbx__stn.is-corner .rbx__stn-lab { display: block; }
+  }
+</style>
+</head>
+<body>
+<div class="rbx">
+  <div class="rbx__head">
+    <p class="rbx__kicker">Berlinwalk.com • Berlin Ringbahn</p>
+    <h2 class="rbx__title">Berlin Ringbahn Explorer</h2>
+    <p class="rbx__sub">The S41/S42 circle line locals call the Hundekopf, the dog's head. Tap any of the 27 stations to see which side of Berlin it opens up, or follow the ring in either direction.</p>
+  </div>
+
+  <div class="rbx__body">
+    <div class="rbx__facts">
+      <span class="rbx__fact">27 stations</span>
+      <span class="rbx__fact">~37 km around</span>
+      <span class="rbx__fact">~60 min full loop</span>
+      <span class="rbx__fact">All Zone AB</span>
+    </div>
+
+    <div class="rbx__dir" role="group" aria-label="Ring direction">
+      <button class="rbx__dirbtn is-on" id="rbxS41" type="button" aria-pressed="true">
+        <b>S41 ⟳ clockwise</b><span>Gesundbrunnen → Ostkreuz → Südkreuz</span>
+      </button>
+      <button class="rbx__dirbtn" id="rbxS42" type="button" aria-pressed="false">
+        <b>S42 ⟲ anticlockwise</b><span>Gesundbrunnen → Westkreuz → Südkreuz</span>
+      </button>
+    </div>
+
+    <div class="rbx__mapwrap">
+      <svg class="rbx__map" viewBox="0 0 400 400" role="img" aria-label="Circular map of the Berlin Ringbahn with 27 stations and four interchange corners">
+        <g id="rbxArcs"></g>
+        <g id="rbxStns"></g>
+        <circle class="rbx__train" id="rbxTrain" r="5" cx="200" cy="55"></circle>
+        <text class="rbx__hub-note" id="rbxCenter1" x="200" y="196">Tap a station</text>
+        <text class="rbx__hub-note" id="rbxCenter2" x="200" y="212" style="fill:#6A756A;font-weight:600;">to see what it reaches</text>
+      </svg>
+    </div>
+
+    <div class="rbx__sides" role="group" aria-label="Highlight one side of the ring">
+      <button class="rbx__side rbx__side--ne" data-side="ne" type="button">Prenzlauer Berg &amp; Friedrichshain</button>
+      <button class="rbx__side rbx__side--se" data-side="se" type="button">Neukölln &amp; the south-east</button>
+      <button class="rbx__side rbx__side--sw" data-side="sw" type="button">Leafy west Berlin</button>
+      <button class="rbx__side rbx__side--nw" data-side="nw" type="button">Moabit &amp; Wedding</button>
+    </div>
+    <p class="rbx__sideline" id="rbxSideLine">Each quarter of the ring is a different Berlin. Tap a side to light it up, or pick a single station below.</p>
+
+    <div class="rbx__card">
+      <p class="rbx__eyebrow" id="rbxEyebrow">Interchange corner</p>
+      <h3 class="rbx__stopname" id="rbxName">Ostkreuz</h3>
+      <div class="rbx__meta" id="rbxMeta"></div>
+      <p class="rbx__blurb" id="rbxBlurb"></p>
+      <p class="rbx__hint" id="rbxHint"></p>
+    </div>
+
+    <div class="rbx__ctx">
+      <div class="rbx__ctxbox">
+        <h4>One loop, back where you started</h4>
+        <p>A full circle is about an hour, so a day ticket (Zone AB, 11.20 euros in 2026) is the honest choice for riding the whole ring. A single ticket is not valid for a round trip.</p>
+        <p>The Ring wraps around the historic core, but it does not go through it. For the old centre I walk on foot, I run a <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_blank" rel="noopener">free walking tour from Alexanderplatz</a>, about 2 hours.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  var CX = 200, CY = 206, R = 150;
+
+  // 27 stations, clockwise (S41) from Gesundbrunnen at the top.
+  // side: ne / se / sw / nw arc. corner: interchange corner. worth: yes | ok | skip | hub | transfer | event
+  var STN = [
+    { n: 'Gesundbrunnen', side: 'nw', corner: true, worth: 'hub', lines: 'S1 S2 S25 S26 · U8 · regional',
+      blurb: 'The big northern interchange. From here it is a short walk to <b>Mauerpark</b> for the Sunday flea market and open-air karaoke, or to <b>Humboldthain</b> park and its WWII flak-tower ruins.' },
+    { n: 'Schönhauser Allee', side: 'ne', worth: 'yes', lines: 'U2 · tram M1',
+      blurb: 'The spine of <b>Prenzlauer Berg</b>. Come up for Kastanienallee cafés, the Kollwitzkiez and the leafy Sunday markets a few streets east.' },
+    { n: 'Prenzlauer Allee', side: 'ne', worth: 'ok', lines: 'tram M2',
+      blurb: 'Another Prenzlauer Berg entrance. The <b>Zeiss-Großplanetarium</b> is a couple of minutes from the platform.' },
+    { n: 'Greifswalder Straße', side: 'ne', worth: 'skip', lines: 'tram M4',
+      blurb: 'The residential edge of Prenzlauer Berg, with fast trams toward the centre. A transfer point, not a sight.' },
+    { n: 'Landsberger Allee', side: 'ne', worth: 'skip', lines: 'tram M6 M8',
+      blurb: 'The Velodrom arena and a big swimming hall sit beside the station, on a wide socialist-era boulevard. Skip unless you have tickets.' },
+    { n: 'Storkower Straße', side: 'ne', worth: 'skip', lines: 'tram M13',
+      blurb: 'Mostly housing and offices. Useful as a change, not a reason to get off.' },
+    { n: 'Frankfurter Allee', side: 'ne', worth: 'yes', lines: 'U5',
+      blurb: 'Your gateway to <b>Friedrichshain</b>: the monumental Karl-Marx-Allee boulevard, and a walk south to the <b>East Side Gallery</b> stretch of the Wall.' },
+    { n: 'Ostkreuz', side: 'ne', corner: true, worth: 'hub', lines: 'S3 S5 S7 S9 S8 S85 · regional',
+      blurb: 'Berlin’s busiest interchange, rebuilt into a cathedral of steel and glass. Change here for the <b>East Side Gallery</b>, the RAW nightlife yard and the rest of Friedrichshain.' },
+    { n: 'Treptower Park', side: 'se', worth: 'yes', lines: 'S8 S85 S9',
+      blurb: 'Get off for the vast <b>Soviet War Memorial</b> in the park and the green Spree riverside. In summer, boats leave from here toward the centre.' },
+    { n: 'Sonnenallee', side: 'se', worth: 'yes', lines: '—',
+      blurb: 'The heart of <b>Neukölln’s Arab quarter</b>, the street sometimes called the Arab Street. Come hungry for Levantine bakeries, shawarma and knafeh.' },
+    { n: 'Neukölln', side: 'se', worth: 'yes', lines: 'U7',
+      blurb: 'Kreuzkölln nightlife, Turkish and Arab food, and the <b>Maybachufer canal market</b> a short walk toward Kreuzberg.' },
+    { n: 'Hermannstraße', side: 'se', worth: 'ok', lines: 'U8',
+      blurb: 'Working Neukölln around busy <b>Hermannplatz</b>. One entrance to <b>Tempelhofer Feld</b> is a walk from here.' },
+    { n: 'Tempelhof', side: 'se', worth: 'yes', lines: 'U6',
+      blurb: 'Step out onto <b>Tempelhofer Feld</b>: the former airport, its runways now a giant free park for cycling, picnics and kite-flying.' },
+    { n: 'Südkreuz', side: 'se', corner: true, worth: 'transfer', lines: 'S2 S25 S26 · ICE / regional',
+      blurb: 'The southern interchange and a long-distance rail stop, where fast trains and the airport line meet the ring. More of a gateway than a sight.' },
+    { n: 'Schöneberg', side: 'sw', worth: 'ok', lines: 'S1',
+      blurb: 'Leafy west <b>Schöneberg</b>. The Saturday Winterfeldtmarkt and David Bowie’s old neighbourhood are a walk to the north.' },
+    { n: 'Innsbrucker Platz', side: 'sw', worth: 'skip', lines: 'U4',
+      blurb: 'A quiet Schöneberg transfer corner. Not a tourist stop.' },
+    { n: 'Bundesplatz', side: 'sw', worth: 'skip', lines: 'U9',
+      blurb: 'Comfortable, residential west Berlin. Nothing to get off for.' },
+    { n: 'Heidelberger Platz', side: 'sw', worth: 'ok', lines: 'U3',
+      blurb: 'Worth a glance for its <b>grand vaulted station hall</b>, hidden under leafy Wilmersdorf like a small cathedral.' },
+    { n: 'Hohenzollerndamm', side: 'sw', worth: 'skip', lines: 'regional',
+      blurb: 'West Berlin residential streets and a regional-train stop. Not a sight.' },
+    { n: 'Halensee', side: 'sw', worth: 'ok', lines: '—',
+      blurb: 'The western edge, near the far end of the <b>Ku’damm</b> shopping mile and the Grunewald forest and lakes beyond.' },
+    { n: 'Westkreuz', side: 'sw', corner: true, worth: 'transfer', lines: 'S3 S5 S9',
+      blurb: 'The western interchange, where the ring meets the trains running out to the west and the trade-fair grounds. A change, not a destination.' },
+    { n: 'Messe Nord/ICC', side: 'nw', worth: 'event', lines: 'S41 S42 only',
+      blurb: 'Berlin’s <b>exhibition grounds</b> and the space-age ICC congress hall. Handy during a trade fair, quiet otherwise.' },
+    { n: 'Westend', side: 'nw', worth: 'skip', lines: '—',
+      blurb: 'Quiet villa streets. The Funkturm radio tower and the fair are the nearest landmarks.' },
+    { n: 'Jungfernheide', side: 'nw', worth: 'skip', lines: 'U7 · regional',
+      blurb: 'A north-west transfer stop with a green park beside it. Not a reason to get off.' },
+    { n: 'Beusselstraße', side: 'nw', worth: 'skip', lines: '—',
+      blurb: 'Industrial <b>Moabit</b>: freight yards and the wholesale market, not tourists.' },
+    { n: 'Westhafen', side: 'nw', worth: 'skip', lines: 'U9',
+      blurb: 'Berlin’s inland harbour on the canal, with working docks and a well-known tiled U-Bahn hall below.' },
+    { n: 'Wedding', side: 'nw', worth: 'ok', lines: 'U6',
+      blurb: 'Everyday, multicultural north Berlin: gritty and real, light on postcard sights but full of ordinary city life.' }
+  ];
+
+  var SIDES = {
+    ne: { name: 'Prenzlauer Berg & Friedrichshain', line: 'The <b>north-east arc</b>, Gesundbrunnen round to Ostkreuz, is where most visitors already stay. Cafés, markets and the East Side Gallery are all a short walk from these stops.' },
+    se: { name: 'Neukölln & the south-east', line: 'The <b>south-east arc</b>, Ostkreuz down to Südkreuz, is the food-and-nightlife side: Treptower Park, the Neukölln Arab street and Tempelhofer Feld.' },
+    sw: { name: 'Leafy west Berlin', line: 'The <b>south-west arc</b>, Südkreuz round to Westkreuz, is quieter and greener: comfortable Schöneberg and Wilmersdorf, the far end of the Ku’damm.' },
+    nw: { name: 'Moabit & Wedding', line: 'The <b>north-west arc</b>, Westkreuz back up to Gesundbrunnen, is the working city: the trade fair, harbour, freight yards and everyday Wedding.' }
+  };
+
+  var WORTH = {
+    hub:      { t: 'Major interchange', cls: 'yes' },
+    yes:      { t: 'Worth getting off', cls: 'yes' },
+    ok:       { t: 'Worth a look',      cls: '' },
+    transfer: { t: 'Change here',        cls: '' },
+    event:    { t: 'Handy for events',   cls: '' },
+    skip:     { t: 'Ride on past',       cls: 'skip' }
+  };
+
+  // ---- geometry: place stations by arc so the 4 corners sit at N/E/S/W ----
+  var CORNERS = [0, 7, 13, 20]; // Gesundbrunnen(N), Ostkreuz(E), Südkreuz(S), Westkreuz(W)
+  var CORNER_ANGLE = [0, 90, 180, 270];
+  var angleFor = new Array(STN.length);
+  for (var c = 0; c < CORNERS.length; c++) {
+    var startI = CORNERS[c];
+    var endI = CORNERS[(c + 1) % CORNERS.length];
+    var a0 = CORNER_ANGLE[c];
+    var a1 = CORNER_ANGLE[(c + 1) % CORNERS.length];
+    if (a1 <= a0) a1 += 360;
+    var count = (endI - startI + STN.length) % STN.length; // steps to next corner
+    for (var s = 0; s < count; s++) {
+      var idx = (startI + s) % STN.length;
+      angleFor[idx] = (a0 + (a1 - a0) * (s / count)) % 360;
+    }
+  }
+  function pt(angleDeg, radius) {
+    var a = (angleDeg - 90) * Math.PI / 180; // 0deg = top
+    return { x: CX + radius * Math.cos(a), y: CY + radius * Math.sin(a) };
+  }
+
+  var arcsG = document.getElementById('rbxArcs');
+  var stnsG = document.getElementById('rbxStns');
+  var train = document.getElementById('rbxTrain');
+  var center1 = document.getElementById('rbxCenter1');
+  var center2 = document.getElementById('rbxCenter2');
+
+  function el(name, attrs) {
+    var e = document.createElementNS(SVGNS, name);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+  function arcPath(a0, a1) {
+    var p0 = pt(a0, R), p1 = pt(a1, R);
+    var large = ((a1 - a0 + 360) % 360) > 180 ? 1 : 0;
+    return 'M' + p0.x.toFixed(1) + ',' + p0.y.toFixed(1) + ' A' + R + ',' + R + ' 0 ' + large + ' 1 ' + p1.x.toFixed(1) + ',' + p1.y.toFixed(1);
+  }
+
+  // four coloured arcs
+  var ARC_DEFS = [
+    { side: 'ne', a0: 0,   a1: 90,  cls: 'rbx__arc--ne' },
+    { side: 'se', a0: 90,  a1: 180, cls: 'rbx__arc--se' },
+    { side: 'sw', a0: 180, a1: 270, cls: 'rbx__arc--sw' },
+    { side: 'nw', a0: 270, a1: 360, cls: 'rbx__arc--nw' }
+  ];
+  var arcEls = {};
+  ARC_DEFS.forEach(function (d) {
+    var p = el('path', { class: 'rbx__arc ' + d.cls, d: arcPath(d.a0, d.a1), 'data-side': d.side });
+    arcsG.appendChild(p);
+    arcEls[d.side] = p;
+  });
+
+  // stations
+  var stnEls = [];
+  STN.forEach(function (s, i) {
+    var pos = pt(angleFor[i], R);
+    var g = el('g', { class: 'rbx__stn' + (s.corner ? ' is-corner' : ''), 'data-i': i, tabindex: '0', role: 'button' });
+    g.setAttribute('aria-label', s.n);
+    var dot = el('circle', { class: 'rbx__stn-dot', cx: pos.x.toFixed(1), cy: pos.y.toFixed(1), r: s.corner ? 8 : 5.5 });
+    g.appendChild(dot);
+    if (s.corner) {
+      // keep corner labels in-bounds: North above the dot, South below it,
+      // East/West tucked inside the ring so they never clip the viewBox edge.
+      var deg = angleFor[i], lx, ly, anchor;
+      if (deg < 45 || deg > 315) { lx = pos.x; ly = pos.y - 15; anchor = 'middle'; }
+      else if (deg < 135) { lx = pos.x - 13; ly = pos.y + 3; anchor = 'end'; }
+      else if (deg < 225) { lx = pos.x; ly = pos.y + 22; anchor = 'middle'; }
+      else { lx = pos.x + 13; ly = pos.y + 3; anchor = 'start'; }
+      var lab = el('text', { class: 'rbx__stn-lab', x: lx.toFixed(1), y: ly.toFixed(1), 'text-anchor': anchor });
+      lab.textContent = s.n;
+      g.appendChild(lab);
+    }
+    g.addEventListener('click', function () { select(i); });
+    g.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); select(i); } });
+    stnsG.appendChild(g);
+    stnEls.push(g);
+  });
+
+  // ---- state ----
+  var sel = 7;          // Ostkreuz to start
+  var clockwise = true; // S41
+  var litSide = null;
+
+  var eyebrow = document.getElementById('rbxEyebrow');
+  var nameEl = document.getElementById('rbxName');
+  var metaEl = document.getElementById('rbxMeta');
+  var blurbEl = document.getElementById('rbxBlurb');
+  var hintEl = document.getElementById('rbxHint');
+  var sideLine = document.getElementById('rbxSideLine');
+  var s41 = document.getElementById('rbxS41');
+  var s42 = document.getElementById('rbxS42');
+
+  function nextHubFrom(i) {
+    var step = clockwise ? 1 : -1;
+    var j = i;
+    for (var k = 0; k < STN.length; k++) {
+      j = (j + step + STN.length) % STN.length;
+      if (STN[j].corner) return STN[j].n;
+    }
+    return null;
+  }
+
+  function select(i) {
+    sel = i;
+    var s = STN[i];
+    center1.style.display = 'none';
+    center2.style.display = 'none';
+    eyebrow.textContent = s.corner ? 'Interchange corner' : SIDES[s.side].name;
+    eyebrow.style.color = s.corner ? 'var(--bw-green)' : sideColor(s.side);
+    nameEl.textContent = s.n;
+    metaEl.innerHTML = '';
+    var w = WORTH[s.worth];
+    metaEl.appendChild(tag(w.t, w.cls));
+    if (s.lines && s.lines !== '—') metaEl.appendChild(tag('Change: ' + s.lines, ''));
+    blurbEl.innerHTML = s.blurb;
+    var hub = nextHubFrom(i);
+    hintEl.innerHTML = 'On the <b>' + (clockwise ? 'S41' : 'S42') + '</b> in this direction, the next big interchange is <b>' + hub + '</b>.';
+    stnEls.forEach(function (g, k) { g.classList.toggle('is-sel', k === i); });
+    // if selection is on a side that is not lit, follow the selection's side softly
+  }
+
+  function tag(text, cls) {
+    var e = document.createElement('span');
+    e.className = 'rbx__tag' + (cls ? ' rbx__tag--' + cls : '');
+    e.textContent = text;
+    return e;
+  }
+  function sideColor(side) {
+    return side === 'ne' ? '#5a8a2a' : side === 'se' ? '#b9791a' : side === 'sw' ? '#2f7ba5' : '#8a58a0';
+  }
+
+  function setDirection(cw) {
+    clockwise = cw;
+    s41.classList.toggle('is-on', cw); s41.setAttribute('aria-pressed', String(cw));
+    s42.classList.toggle('is-on', !cw); s42.setAttribute('aria-pressed', String(!cw));
+    select(sel);
+  }
+  s41.addEventListener('click', function () { setDirection(true); });
+  s42.addEventListener('click', function () { setDirection(false); });
+
+  function lightSide(side) {
+    litSide = (litSide === side) ? null : side;
+    ARC_DEFS.forEach(function (d) { arcEls[d.side].classList.toggle('is-lit', litSide === d.side); });
+    document.querySelectorAll('.rbx__side').forEach(function (b) {
+      b.classList.toggle('is-on', b.getAttribute('data-side') === litSide);
+    });
+    if (litSide) {
+      sideLine.innerHTML = SIDES[litSide].line;
+      // dim stations not on this side
+      stnEls.forEach(function (g, k) { g.style.opacity = (STN[k].side === litSide || STN[k].corner) ? '1' : '.28'; });
+    } else {
+      sideLine.innerHTML = 'Each quarter of the ring is a different Berlin. Tap a side to light it up, or pick a single station below.';
+      stnEls.forEach(function (g) { g.style.opacity = '1'; });
+    }
+  }
+  document.querySelectorAll('.rbx__side').forEach(function (b) {
+    b.addEventListener('click', function () { lightSide(b.getAttribute('data-side')); });
+  });
+
+  // ---- gentle train animation around the ring ----
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var t = 0, last = 0;
+  function frame(now) {
+    if (!last) last = now;
+    var dt = now - last; last = now;
+    t = (t + (clockwise ? 1 : -1) * dt / 24000 + 1) % 1; // ~24s per loop
+    var ang = t * 360;
+    var p = pt(ang, R);
+    train.setAttribute('cx', p.x.toFixed(1));
+    train.setAttribute('cy', p.y.toFixed(1));
+    requestAnimationFrame(frame);
+  }
+  if (reduce) {
+    var pStart = pt(0, R);
+    train.setAttribute('cx', pStart.x.toFixed(1));
+    train.setAttribute('cy', pStart.y.toFixed(1));
+  } else {
+    requestAnimationFrame(frame);
+  }
+
+  // init
+  select(7);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Markthalle Neun Week Planner — Which Day Should You Go?</title>
+<meta name="description" content="Markthalle Neun in Berlin is a different place every day of the week. Pick a day to see if the hall is open, what market or street food is on, the hours, and whether it is worth the trip." />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  .mn {
+    font-family: 'Montserrat', system-ui, sans-serif;
+    color: var(--bw-text);
+    max-width: 660px;
+    margin: 0 auto;
+    padding: 4px 4px 12px;
+    box-sizing: border-box;
+  }
+  .mn *, .mn *::before, .mn *::after { box-sizing: border-box; }
+  .mn__head {
+    background: var(--bw-green);
+    color: #fff;
+    border-radius: 16px 16px 0 0;
+    padding: 18px 20px 16px;
+  }
+  .mn__kicker {
+    font-size: 11px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--bw-yellow); margin: 0 0 6px;
+  }
+  .mn__title { font-size: 21px; font-weight: 800; margin: 0 0 4px; line-height: 1.2; }
+  .mn__sub { font-size: 13.5px; margin: 0; color: #E8F0E0; line-height: 1.5; }
+  .mn__body {
+    background: var(--bw-white);
+    border: 1px solid var(--bw-border);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    padding: 16px 16px 18px;
+  }
+  .mn__today {
+    font-size: 12.5px; font-weight: 700; color: var(--bw-muted);
+    margin: 0 0 12px; text-align: center; line-height: 1.4;
+  }
+  .mn__today b { color: var(--bw-green); }
+  .mn__week {
+    display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin: 0 0 16px;
+  }
+  .mn__day {
+    font-family: inherit; cursor: pointer; text-align: center;
+    padding: 9px 2px 8px; border-radius: 12px;
+    border: 2px solid var(--bw-border); background: #fff;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    transition: transform .08s ease;
+  }
+  .mn__day:hover { border-color: var(--bw-lime); }
+  .mn__day:active { transform: scale(.96); }
+  .mn__day.is-sel { border-color: var(--bw-green); background: var(--bw-lime-soft); }
+  .mn__dname { font-size: 12px; font-weight: 800; letter-spacing: .02em; }
+  .mn__dot { width: 9px; height: 9px; border-radius: 50%; background: var(--bw-border); }
+  .mn__day.tier-star .mn__dot { background: var(--bw-green); }
+  .mn__day.tier-good .mn__dot { background: var(--bw-lime); }
+  .mn__day.tier-quiet .mn__dot { background: #C9D3BC; }
+  .mn__day.tier-closed .mn__dot { background: var(--bw-red); }
+  .mn__todaymark { font-size: 8.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: var(--bw-muted); height: 10px; }
+  .mn__day.is-today .mn__todaymark { color: var(--bw-green); }
+
+  .mn__panel {
+    border: 1px solid var(--bw-border); border-radius: 14px; overflow: hidden;
+    background: var(--bw-cream);
+  }
+  .mn__pbar {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    padding: 13px 16px; color: #fff;
+  }
+  .mn__pbar.tier-star { background: var(--bw-green); }
+  .mn__pbar.tier-good { background: var(--bw-lime); }
+  .mn__pbar.tier-quiet { background: #6E7A66; }
+  .mn__pbar.tier-closed { background: var(--bw-red); }
+  .mn__pday { font-size: 16.5px; font-weight: 800; margin: 0; }
+  .mn__verdict {
+    font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em;
+    background: rgba(255,255,255,.22); padding: 5px 11px; border-radius: 999px; white-space: nowrap;
+  }
+  .mn__pbody { padding: 15px 16px 16px; }
+  .mn__status { font-size: 15px; font-weight: 800; margin: 0 0 3px; color: var(--bw-green); }
+  .mn__pbar.tier-closed ~ .mn__pbody .mn__status { color: var(--bw-red); }
+  .mn__hours { font-size: 13px; font-weight: 700; color: var(--bw-muted); margin: 0 0 11px; }
+  .mn__desc { font-size: 14px; line-height: 1.6; margin: 0 0 12px; color: var(--bw-text); }
+  .mn__tip {
+    display: flex; gap: 9px; align-items: flex-start;
+    background: #fff; border: 1px solid var(--bw-border); border-left: 4px solid var(--bw-lime);
+    border-radius: 10px; padding: 10px 12px;
+  }
+  .mn__tip b { color: var(--bw-green); }
+  .mn__tip-ico { font-size: 15px; line-height: 1.4; }
+  .mn__tip-txt { font-size: 13px; line-height: 1.55; margin: 0; }
+
+  .mn__foot {
+    display: flex; flex-wrap: wrap; gap: 8px 16px; justify-content: center;
+    margin: 13px 2px 0; font-size: 11.5px; font-weight: 700; color: var(--bw-muted);
+  }
+  .mn__foot span { display: inline-flex; align-items: center; gap: 5px; }
+  .mn__legdot { width: 8px; height: 8px; border-radius: 50%; }
+
+  @media (max-width: 430px) {
+    .mn__title { font-size: 19px; }
+    .mn__week { gap: 4px; }
+    .mn__day { padding: 8px 1px 7px; border-radius: 10px; }
+    .mn__dname { font-size: 10.5px; }
+    .mn__pday { font-size: 15px; }
+    .mn__verdict { font-size: 10.5px; padding: 4px 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="mn" role="group" aria-label="Markthalle Neun week planner">
+  <div class="mn__head">
+    <p class="mn__kicker">BerlinWalk • Markthalle Neun</p>
+    <h2 class="mn__title">Which day should you go?</h2>
+    <p class="mn__sub">Markthalle Neun is a different place every day of the week. Pick a day to see what is actually on before you cross the city for it.</p>
+  </div>
+  <div class="mn__body">
+    <p class="mn__today" id="mnToday"></p>
+    <div class="mn__week" id="mnWeek" role="tablist" aria-label="Days of the week"></div>
+    <div class="mn__panel">
+      <div class="mn__pbar" id="mnBar">
+        <p class="mn__pday" id="mnPday"></p>
+        <span class="mn__verdict" id="mnVerdict"></span>
+      </div>
+      <div class="mn__pbody">
+        <p class="mn__status" id="mnStatus"></p>
+        <p class="mn__hours" id="mnHours"></p>
+        <p class="mn__desc" id="mnDesc"></p>
+        <div class="mn__tip">
+          <span class="mn__tip-ico">💡</span>
+          <p class="mn__tip-txt" id="mnTip"></p>
+        </div>
+      </div>
+    </div>
+    <div class="mn__foot">
+      <span><span class="mn__legdot" style="background:var(--bw-green)"></span>Plan around this</span>
+      <span><span class="mn__legdot" style="background:var(--bw-lime)"></span>Worth a stop</span>
+      <span><span class="mn__legdot" style="background:#C9D3BC"></span>Quiet</span>
+      <span><span class="mn__legdot" style="background:var(--bw-red)"></span>Closed</span>
+    </div>
+  </div>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var DAYS = [
+    { key: 'Mon', name: 'Mon', full: 'Monday', tier: 'quiet',
+      verdict: 'Quiet', status: 'Open · small weekday market', hours: 'Market roughly 12:00–18:00 (hall from 08:00)',
+      desc: 'A calm neighbourhood market. The permanent traders are open, so you can get coffee, bread, cheese and a bite, but there is no street food and no big crowd.',
+      tip: '<b>Only worth it if you are already nearby.</b> For the real Markthalle Neun, aim for Thursday evening or Saturday morning instead.' },
+    { key: 'Tue', name: 'Tue', full: 'Tuesday', tier: 'quiet',
+      verdict: 'Quiet', status: 'Open · small weekday market', hours: 'Market roughly 12:00–18:00 (hall from 08:00)',
+      desc: 'Same quiet weekday rhythm as Monday. Good for a low-key lunch at the Kantine tables and a look at the beautiful old hall without the crowds.',
+      tip: '<b>Pair it with the Turkish Market on Maybachufer,</b> which runs Tuesdays five minutes away, to make the trip to Kreuzberg worth it.' },
+    { key: 'Wed', name: 'Wed', full: 'Wednesday', tier: 'quiet',
+      verdict: 'Quiet', status: 'Open · small weekday market', hours: 'Market roughly 12:00–18:00 (hall from 08:00)',
+      desc: 'Still the small midweek market. Nice if you want the hall calm and photographable, but do not expect the food-festival version people talk about.',
+      tip: '<b>Set your expectations low midweek.</b> Come for the architecture and the permanent stalls, not for a big food event.' },
+    { key: 'Thu', name: 'Thu', full: 'Thursday', tier: 'star',
+      verdict: 'The big one', status: 'Open · Street Food Thursday', hours: 'Market from 12:00 · Street Food Thursday 17:00–22:00',
+      desc: 'The headline. From 17:00 the hall fills with small international street-food stands, from Korean buns to Peruvian ceviche to barbecue. Busy, warm and very Berlin.',
+      tip: '<b>Come around 17:30–18:00 and go hungry but slow.</b> Do one lap first, share small portions across a few stalls, and expect it to be packed after 19:00.' },
+    { key: 'Fri', name: 'Fri', full: 'Friday', tier: 'good',
+      verdict: 'Worth a stop', status: 'Open · Big Market', hours: 'Big Market roughly 12:00–18:00',
+      desc: 'The full weekly market: produce, deli stalls, flowers and hot food alongside the permanent traders. Livelier than midweek, calmer than Saturday.',
+      tip: '<b>Great for a picnic-builder.</b> Buy bread, cheese and a few things that look good, then eat by the Landwehrkanal a few minutes away.' },
+    { key: 'Sat', name: 'Sat', full: 'Saturday', tier: 'star',
+      verdict: 'Best daytime', status: 'Open · Big Market', hours: 'Big Market roughly 10:00–18:00',
+      desc: 'The best daytime visit. It opens earlier and fills up with the most stalls and the most atmosphere of the week. If you cannot make Thursday night, come now.',
+      tip: '<b>Arrive right at opening around 10:00</b> for the calmest version, before the Saturday crowd and the queues at the popular stands.' },
+    { key: 'Sun', name: 'Sun', full: 'Sunday', tier: 'closed',
+      verdict: 'Closed', status: 'Closed all day', hours: 'No market, no street food',
+      desc: 'This is the mistake almost everyone makes. Markthalle Neun is completely closed on Sundays, so a special trip out to Kreuzberg will just find locked doors.',
+      tip: '<b>Plan around it.</b> Berlin is quiet on Sundays anyway. Save Markthalle Neun for Thursday evening or Saturday, and do something else with your Sunday.' }
+  ];
+
+  var root = document.querySelector('.mn');
+  var week = root.querySelector('#mnWeek');
+  var elToday = root.querySelector('#mnToday');
+  var elBar = root.querySelector('#mnBar');
+  var elPday = root.querySelector('#mnPday');
+  var elVerdict = root.querySelector('#mnVerdict');
+  var elStatus = root.querySelector('#mnStatus');
+  var elHours = root.querySelector('#mnHours');
+  var elDesc = root.querySelector('#mnDesc');
+  var elTip = root.querySelector('#mnTip');
+
+  // Which weekday is it right now in Berlin? (0=Mon..6=Sun)
+  function berlinDayIndex() {
+    try {
+      var wd = new Intl.DateTimeFormat('en-US', { timeZone: 'Europe/Berlin', weekday: 'short' }).format(new Date());
+      var map = { Mon: 0, Tue: 1, Wed: 2, Thu: 3, Fri: 4, Sat: 5, Sun: 6 };
+      if (wd in map) return map[wd];
+    } catch (e) {}
+    var js = new Date().getDay(); // 0=Sun..6=Sat
+    return (js + 6) % 7;
+  }
+
+  var todayIdx = berlinDayIndex();
+
+  function select(idx) {
+    var d = DAYS[idx];
+    Array.prototype.forEach.call(week.children, function (btn, i) {
+      btn.classList.toggle('is-sel', i === idx);
+      btn.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+    });
+    elBar.className = 'mn__pbar tier-' + d.tier;
+    elPday.textContent = d.full;
+    elVerdict.textContent = d.verdict;
+    elStatus.textContent = d.status;
+    elStatus.style.color = d.tier === 'closed' ? 'var(--bw-red)' : 'var(--bw-green)';
+    elHours.textContent = d.hours;
+    elDesc.textContent = d.desc;
+    elTip.innerHTML = d.tip;
+  }
+
+  DAYS.forEach(function (d, i) {
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'mn__day tier-' + d.tier + (i === todayIdx ? ' is-today' : '');
+    btn.setAttribute('role', 'tab');
+    btn.innerHTML =
+      '<span class="mn__dname">' + d.name + '</span>' +
+      '<span class="mn__dot"></span>' +
+      '<span class="mn__todaymark">' + (i === todayIdx ? 'Today' : '') + '</span>';
+    btn.addEventListener('click', function () { select(i); });
+    week.appendChild(btn);
+  });
+
+  var t = DAYS[todayIdx];
+  elToday.innerHTML = 'In Berlin it is <b>' + t.full + '</b> today — ' +
+    (t.tier === 'closed' ? 'the hall is closed.' :
+     t.tier === 'star' ? 'a great day to go.' :
+     t.tier === 'good' ? 'a good day to go.' : 'a quiet day at the hall.') +
+    ' Tap any day to compare.';
+
+  select(todayIdx);
+})();
+</script>
+</body>
+</html>

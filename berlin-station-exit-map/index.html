@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Berlin Station Exit Map</title>
+<meta name="description" content="Pick a Berlin station and where you are heading, and see on a real map which street-named Ausgang surfaces closest, plus how many extra metres every other exit costs you." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Cpath d='M20 44V26a12 12 0 0 1 24 0v18' stroke='%23FFE600' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='32' cy='42' r='6' fill='%23FFE600'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-dark:#123D18; --green-mid:#2E7D32;
+    --lime:#7CB342; --light:#C5E1A5; --yellow:#FFE600;
+    --ink:#212121; --muted:#4b584b; --line:#E3E8DC; --panel:#F4F7F0;
+    --grey:#8b948a; --warn:#A63030;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .wrap{max-width:720px;margin:0 auto;padding:4px 14px 20px}
+  .kicker{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-mid);margin:0 0 6px}
+  h1{font-size:22px;font-weight:800;line-height:1.16;margin:0 0 8px;color:var(--green-dark)}
+  .lede{font-size:14.5px;color:var(--muted);margin:0 0 16px}
+
+  .lbl{font-size:11.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--green-mid);margin:0 0 7px}
+
+  .tabs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+  .tab{appearance:none;border:2px solid var(--line);background:#fff;color:var(--green-dark);border-radius:999px;
+       padding:7px 13px;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;transition:.14s;min-width:0}
+  .tab:hover{border-color:var(--lime)}
+  .tab:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+  .tab[aria-selected="true"]{background:var(--green);border-color:var(--green);color:#fff}
+
+  .stationbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;background:var(--panel);
+       border:1px solid var(--line);border-radius:12px;padding:9px 12px;margin:0 0 12px}
+  .sb-fact{font-size:12px;color:var(--muted)}
+  .sb-fact b{color:var(--green-dark);font-weight:800;font-family:'IBM Plex Mono',ui-monospace,monospace}
+
+  .stage{position:relative;border:2px solid var(--green-dark);border-radius:14px;overflow:hidden;background:#e8e4dc;margin:0 0 10px}
+  .stage img{display:block;width:100%;height:auto}
+  .stage svg{position:absolute;inset:0;width:100%;height:100%}
+  .pin-hit{cursor:default}
+  .pin-body{transition:opacity .2s}
+  .attrib{position:absolute;right:0;bottom:0;background:rgba(255,255,255,.85);font-size:9.5px;color:#333;
+       padding:2px 5px;border-top-left-radius:5px;line-height:1.3}
+  .attrib a{color:#1B5E20}
+
+  .note{font-size:12px;color:var(--muted);margin:0 0 16px;padding-left:11px;border-left:3px solid var(--light)}
+
+  .dests{display:grid;grid-template-columns:repeat(1,minmax(0,1fr));gap:7px;margin:0 0 16px}
+  @media(min-width:480px){.dests{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  .dest{appearance:none;border:2px solid var(--line);background:#fff;border-radius:12px;padding:9px 11px;
+        cursor:pointer;font-family:inherit;text-align:left;transition:.14s;min-width:0;display:block;width:100%}
+  .dest:hover{border-color:var(--lime)}
+  .dest:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+  .dest[aria-pressed="true"]{border-color:var(--green);background:#F1F6EC}
+  .dest-n{font-size:13px;font-weight:800;color:var(--green-dark);display:block;overflow-wrap:anywhere}
+  .dest-m{font-size:11.5px;color:var(--muted);display:block;margin-top:2px}
+
+  .result{border:2px solid var(--green);border-radius:14px;overflow:hidden;margin:0 0 14px}
+  .r-head{background:var(--green);color:#fff;padding:11px 14px}
+  .r-head .r-k{font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;opacity:.85;display:block}
+  .r-head .r-street{font-size:19px;font-weight:800;line-height:1.2;display:block;margin-top:3px;overflow-wrap:anywhere}
+  .r-head .r-sub{font-size:12px;opacity:.9;display:block;margin-top:4px}
+  .r-body{background:#fff;padding:12px 14px}
+
+  .sign{background:var(--green-dark);border:2px solid #0d2c11;border-radius:8px;padding:9px 11px;margin:0 0 12px}
+  .sign-k{font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--light);margin:0 0 5px}
+  .sign-rows{display:flex;flex-wrap:wrap;gap:5px}
+  .sign-row{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;font-weight:600;color:#fff;
+       background:rgba(255,255,255,.09);border-radius:4px;padding:3px 7px;overflow-wrap:anywhere}
+
+  .ladder{margin:0;padding:0;list-style:none}
+  .rung{display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid var(--line)}
+  .rung:last-child{border-bottom:0}
+  .rung-name{font-size:12.5px;font-weight:700;color:var(--ink);flex:1 1 auto;min-width:0;overflow-wrap:anywhere}
+  .rung-bar{flex:0 0 78px;height:7px;border-radius:4px;background:#eceee8;overflow:hidden}
+  .rung-fill{display:block;height:100%;background:var(--grey);border-radius:4px}
+  .rung.best .rung-fill{background:var(--lime)}
+  .rung.best .rung-name{color:var(--green-dark)}
+  .rung-m{flex:0 0 auto;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;font-weight:700;color:var(--muted);text-align:right;min-width:74px}
+  .rung.best .rung-m{color:var(--green)}
+  .rung-tag{display:inline-block;background:var(--yellow);color:var(--green-dark);font-size:9.5px;font-weight:800;
+       letter-spacing:.07em;text-transform:uppercase;border-radius:4px;padding:2px 5px;margin-left:6px;vertical-align:1px}
+
+  .cost{background:var(--yellow);color:var(--green-dark);border-radius:10px;padding:9px 12px;margin:12px 0 0;
+        font-size:12.5px;font-weight:700}
+  .cost b{font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:800}
+
+  .empty{border:2px dashed var(--line);border-radius:14px;padding:16px 14px;text-align:center;color:var(--muted);font-size:13px;margin:0 0 14px}
+
+  .foot{font-size:11.5px;color:var(--muted);margin:14px 0 0;padding-top:11px;border-top:1px solid var(--line)}
+  .foot p{margin:0 0 6px}
+  .foot a{color:var(--green)}
+  details.credits{margin-top:9px}
+  details.credits summary{cursor:pointer;font-size:11.5px;font-weight:700;color:var(--green-mid);list-style:none}
+  details.credits summary::-webkit-details-marker{display:none}
+  details.credits summary::before{content:"▸ ";}
+  details.credits[open] summary::before{content:"▾ ";}
+  details.credits div{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.55}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">BerlinWalk tool</p>
+  <h1>Berlin Station Exit Map</h1>
+  <p class="lede">Berlin exit signs are named after streets, not after the thing you came to see. Pick a station and your destination, and the map shows which <em>Ausgang</em> puts you closest, and what every other exit costs you in metres.</p>
+
+  <p class="lbl" id="st-lbl">Station</p>
+  <div class="tabs" role="tablist" aria-labelledby="st-lbl" id="tabs"></div>
+
+  <div class="stationbar" id="stationbar"></div>
+
+  <div class="stage" id="stage">
+    <img id="mapimg" alt="" />
+    <svg id="overlay" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
+    <div class="attrib">Map data &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors</div>
+  </div>
+  <p class="note" id="note"></p>
+
+  <p class="lbl" id="dest-lbl">Where are you heading?</p>
+  <div class="dests" id="dests" role="group" aria-labelledby="dest-lbl"></div>
+
+  <div id="result"></div>
+
+  <div class="foot">
+    <p>Exit positions and the street each one opens onto come from OpenStreetMap station entrance data, checked on 22 August 2026. Distances are straight-line metres from the exit group to the destination, so real walking is a little longer wherever a road or a rail viaduct is in the way.</p>
+    <p>Signs change during building work. Berlin has a lot of building work. If the letter you want is boarded up, follow the street name instead.</p>
+    <details class="credits">
+      <summary>Tool visual credits</summary>
+      <div>Map tiles and station entrance data: &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors, available under the <a href="https://opendatacommons.org/licenses/odbl/" target="_blank" rel="noopener">Open Database Licence</a>. Tile rendering by the OpenStreetMap Foundation standard style, licensed <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noopener">CC BY-SA 2.0</a>.</div>
+    </details>
+  </div>
+
+  <p class="sr" aria-live="polite" id="live"></p>
+</div>
+
+<script>
+(function () {
+  var DATA = null, station = null, target = null;
+  var tabsEl = document.getElementById('tabs');
+  var barEl = document.getElementById('stationbar');
+  var imgEl = document.getElementById('mapimg');
+  var svgEl = document.getElementById('overlay');
+  var noteEl = document.getElementById('note');
+  var destEl = document.getElementById('dests');
+  var resEl = document.getElementById('result');
+  var liveEl = document.getElementById('live');
+
+  var TS = 256;
+  function projX(lon, z) { return (lon + 180) / 360 * Math.pow(2, z) * TS; }
+  function projY(lat, z) {
+    var r = lat * Math.PI / 180;
+    return (1 - Math.log(Math.tan(r) + 1 / Math.cos(r)) / Math.PI) / 2 * Math.pow(2, z) * TS;
+  }
+  function toPct(st, lat, lon) {
+    var m = st.map;
+    return { x: projX(lon, m.z) - m.x0, y: projY(lat, m.z) - m.y0 };
+  }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]; }); }
+
+  function buildTabs() {
+    tabsEl.innerHTML = '';
+    DATA.stations.forEach(function (s) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'tab'; b.setAttribute('role', 'tab');
+      b.setAttribute('aria-selected', s.id === station.id ? 'true' : 'false');
+      b.textContent = s.label;
+      b.addEventListener('click', function () { selectStation(s.id); });
+      tabsEl.appendChild(b);
+    });
+  }
+
+  function selectStation(id) {
+    station = DATA.stations.filter(function (s) { return s.id === id; })[0];
+    target = null;
+    buildTabs(); renderStation(); renderDests(); renderResult();
+    liveEl.textContent = station.label + ' selected. ' + station.exits.length + ' exit groups.';
+  }
+
+  function renderStation() {
+    barEl.innerHTML =
+      '<span class="sb-fact">Lines: <b>' + esc(station.lines) + '</b></span>' +
+      '<span class="sb-fact">Street exits: <b>' + station.exits.length + '</b></span>' +
+      '<span class="sb-fact">Furthest two exits: <b>' + station.spreadM + ' m</b> apart</span>';
+    svgEl.setAttribute('viewBox', '0 0 ' + station.map.w + ' ' + station.map.h);
+    imgEl.src = station.map.img;
+    imgEl.alt = 'Street map around ' + station.label + ' station, showing where each exit reaches the surface.';
+    noteEl.textContent = station.note;
+    drawOverlay();
+  }
+
+  function drawOverlay() {
+    var parts = [];
+    var t = target ? station.targets.filter(function (x) { return x.name === target; })[0] : null;
+    var bestStreet = t ? t.best.street : null;
+
+    if (t) {
+      var tp = toPct(station, t.lat, t.lon);
+      var bp = null;
+      station.exits.forEach(function (e) { if (e.street === bestStreet) bp = toPct(station, e.lat, e.lon); });
+      // clamp the target marker to the frame edge so far destinations still show a direction
+      var W = station.map.w, H = station.map.h, PADPX = 18;
+      var cx = Math.max(PADPX, Math.min(W - PADPX, tp.x)), cy = Math.max(PADPX, Math.min(H - PADPX, tp.y));
+      var offFrame = (tp.x !== cx || tp.y !== cy);
+      if (bp) {
+        parts.push('<line x1="' + bp.x + '" y1="' + bp.y + '" x2="' + cx + '" y2="' + cy + '" stroke="#123D18" stroke-width="1.1" stroke-dasharray="6 5" vector-effect="non-scaling-stroke" opacity="0.9"/>');
+      }
+      parts.push('<circle cx="' + cx + '" cy="' + cy + '" r="9" fill="#FFE600" stroke="#123D18" stroke-width="1.1" vector-effect="non-scaling-stroke"/>');
+      if (offFrame) {
+        parts.push('<circle cx="' + cx + '" cy="' + cy + '" r="15" fill="none" stroke="#123D18" stroke-width="1" stroke-dasharray="5 5" vector-effect="non-scaling-stroke" opacity="0.75"/>');
+      }
+    }
+
+    station.exits.forEach(function (e) {
+      var p = toPct(station, e.lat, e.lon);
+      var isBest = bestStreet && e.street === bestStreet;
+      var dim = bestStreet && !isBest;
+      var fill = isBest ? '#7CB342' : '#1B5E20';
+      var op = dim ? '0.42' : '1';
+      // keep the label inside the frame: flip it to the left near the right edge
+      var right = p.x > station.map.w * 0.6;
+      var lx = right ? p.x - 15 : p.x + 15;
+      var anchor = right ? 'end' : 'start';
+      var ly = p.y < 22 ? p.y + 22 : p.y + 5;
+      parts.push('<g class="pin-body" opacity="' + op + '">' +
+        '<circle cx="' + p.x + '" cy="' + p.y + '" r="' + (isBest ? 11 : 8) + '" fill="' + fill + '" stroke="#fff" stroke-width="1.4" vector-effect="non-scaling-stroke"/>' +
+        (isBest ? '<circle cx="' + p.x + '" cy="' + p.y + '" r="20" fill="none" stroke="#7CB342" stroke-width="1.4" vector-effect="non-scaling-stroke" opacity="0.8"/>' : '') +
+        '<text x="' + lx + '" y="' + ly + '" text-anchor="' + anchor + '" font-family="Montserrat,sans-serif" font-size="15" font-weight="800"' +
+          ' fill="' + (isBest ? '#123D18' : '#1B5E20') + '" stroke="#ffffff" stroke-width="5" paint-order="stroke"' +
+          ' stroke-linejoin="round">' + esc(e.street) + '</text>' +
+        '</g>');
+    });
+    svgEl.innerHTML = parts.join('');
+  }
+
+  function renderDests() {
+    destEl.innerHTML = '';
+    station.targets.forEach(function (t) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'dest';
+      b.setAttribute('aria-pressed', t.name === target ? 'true' : 'false');
+      b.innerHTML = '<span class="dest-n">' + esc(t.name) + '</span>' +
+        '<span class="dest-m">Best exit ' + t.best.m + ' m &middot; worst exit +' + t.penalty + ' m further</span>';
+      b.addEventListener('click', function () {
+        target = (target === t.name) ? null : t.name;
+        renderDests(); drawOverlay(); renderResult();
+        if (target) liveEl.textContent = 'For ' + t.name + ', take the ' + t.best.street + ' exit, ' + t.best.m + ' metres.';
+      });
+      destEl.appendChild(b);
+    });
+  }
+
+  function renderResult() {
+    if (!target) {
+      resEl.innerHTML = '<div class="empty">Pick a destination above. The map will highlight the exit that surfaces closest to it.</div>';
+      return;
+    }
+    var t = station.targets.filter(function (x) { return x.name === target; })[0];
+    var ex = {}; station.exits.forEach(function (e) { ex[e.street] = e; });
+    var maxM = Math.max.apply(null, t.walks.map(function (w) { return w.m; }));
+    var best = ex[t.best.street];
+
+    var signList = best.sign || [];
+    var hasSignData = signList.length > 1 || (signList.length === 1 && signList[0] !== best.street);
+    var signRows = signList.map(function (s) { return '<span class="sign-row">' + esc(s) + '</span>'; }).join('');
+    var refTxt = best.refs && best.refs.length
+      ? 'Marked ' + (best.refs.length > 1 ? 'exits ' : 'exit ') + best.refs.join(', ') + ' underground.'
+      : 'This exit group is not lettered.';
+
+    var rungs = t.walks.map(function (w) {
+      var isBest = w.street === t.best.street;
+      var pct = Math.round(w.m / maxM * 100);
+      var extra = w.m - t.best.m;
+      return '<li class="rung' + (isBest ? ' best' : '') + '">' +
+        '<span class="rung-name">' + esc(w.street) +
+          (isBest ? '<span class="rung-tag">Take this</span>' : '') + '</span>' +
+        '<span class="rung-bar"><span class="rung-fill" style="width:' + pct + '%"></span></span>' +
+        '<span class="rung-m">' + w.m + ' m' + (extra > 0 ? ' <span style="opacity:.65">+' + extra + '</span>' : '') + '</span>' +
+        '</li>';
+    }).join('');
+
+    resEl.innerHTML =
+      '<div class="result">' +
+        '<div class="r-head">' +
+          '<span class="r-k">For ' + esc(t.name) + ', follow</span>' +
+          '<span class="r-street">Ausgang ' + esc(t.best.street) + '</span>' +
+          '<span class="r-sub">' + t.best.m + ' m from the exit door. ' + esc(refTxt) + '</span>' +
+        '</div>' +
+        '<div class="r-body">' +
+          (hasSignData
+            ? '<div class="sign"><p class="sign-k">What the sign actually says</p><div class="sign-rows">' + signRows + '</div></div>'
+            : '<div class="sign"><p class="sign-k">What to look for</p><div class="sign-rows"><span class="sign-row">Ausgang</span><span class="sign-row">' + esc(best.street) + '</span></div></div>') +
+          '<ul class="ladder">' + rungs + '</ul>' +
+          (t.penalty > 0
+            ? '<p class="cost">Pick the wrong one and you surface <b>' + t.penalty + ' m</b> further away, roughly <b>' + Math.max(1, Math.round(t.penalty / 80)) + '</b> extra ' + (Math.max(1, Math.round(t.penalty / 80)) === 1 ? 'minute' : 'minutes') + ' of walking, usually on the wrong side of a busy road.</p>'
+            : '') +
+        '</div>' +
+      '</div>';
+  }
+
+  fetch('data.json', { cache: 'no-store' })
+    .then(function (r) { return r.json(); })
+    .then(function (j) {
+      DATA = j;
+      station = DATA.stations[0];
+      buildTabs(); renderStation(); renderDests(); renderResult();
+      if (window.bwResize) window.bwResize();
+    })
+    .catch(function () {
+      resEl.innerHTML = '<div class="empty">The exit data could not load right now. Reload the page and it should come back.</div>';
+    });
+
+  imgEl.addEventListener('load', function () { if (window.bwResize) window.bwResize(); });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

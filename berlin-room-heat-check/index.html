@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Berlin Room Heat Check</title>
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-d:#123f16; --yellow:#FFE600; --lime:#7CB342;
+    --soft:#C5E1A5; --ink:#1c2417; --paper:#f6f8f2; --line:#dbe6cc;
+    --cool:#2e7d32; --warm:#c9a227; --hot:#e8791f; --swelt:#d7392f;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Montserrat,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:transparent;}
+  .wrap{max-width:940px;margin:0 auto;padding:16px;}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(18,63,22,.08);}
+  .head{background:linear-gradient(135deg,var(--green),var(--green-d));color:#fff;padding:18px 20px;}
+  .head .kick{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow);font-weight:800;}
+  .head h1{margin:.25em 0 .2em;font-size:22px;line-height:1.15;}
+  .head p{margin:0;font-size:13.5px;opacity:.92;line-height:1.5;}
+  .grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:0;}
+  @media(max-width:720px){.grid{grid-template-columns:1fr;}}
+
+  /* Room stage */
+  .stage{position:relative;background:#eef3e6;border-right:1px solid var(--line);}
+  @media(max-width:720px){.stage{border-right:none;border-bottom:1px solid var(--line);}}
+  .stage svg{display:block;width:100%;height:auto;}
+  .stagecap{position:absolute;left:14px;right:14px;bottom:12px;font-size:12px;color:#41502f;background:rgba(246,248,242,.82);border-radius:10px;padding:7px 10px;line-height:1.4;backdrop-filter:blur(2px);}
+  .stagecap b{color:var(--green);}
+
+  /* Controls */
+  .panel{padding:16px 18px;}
+  .q{margin:0 0 13px;}
+  .q > .lab{font-size:12px;font-weight:800;letter-spacing:.02em;color:#3c4a30;margin-bottom:6px;display:flex;gap:6px;align-items:center;}
+  .q .lab .n{background:var(--soft);color:var(--green-d);border-radius:6px;font-size:10.5px;padding:1px 6px;font-weight:800;}
+  .opts{display:flex;flex-wrap:wrap;gap:6px;}
+  .opt{flex:1 1 auto;min-width:0;border:1.5px solid var(--line);background:#fff;color:#2c3722;border-radius:11px;padding:8px 9px;font:inherit;font-size:12.5px;font-weight:600;cursor:pointer;transition:.14s;line-height:1.25;text-align:center;}
+  .opt:hover{border-color:var(--lime);}
+  .opt[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff;box-shadow:0 3px 9px rgba(27,94,32,.28);}
+
+  /* Result */
+  .result{margin:6px 18px 18px;border-top:1px dashed var(--line);padding-top:14px;}
+  .gauge{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+  .badge{flex:0 0 auto;width:74px;height:74px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-weight:800;box-shadow:0 6px 16px rgba(0,0,0,.16);}
+  .badge .t{font-size:24px;line-height:1;}
+  .badge .s{font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;opacity:.9;margin-top:2px;}
+  .verdict h2{margin:0 0 2px;font-size:17px;}
+  .verdict p{margin:0;font-size:13px;color:#45543a;line-height:1.45;}
+  .tips{list-style:none;margin:8px 0 0;padding:0;}
+  .tips li{position:relative;padding:7px 10px 7px 30px;font-size:13px;line-height:1.42;border-radius:10px;background:#fff;border:1px solid var(--line);margin-bottom:6px;}
+  .tips li::before{content:"";position:absolute;left:11px;top:12px;width:9px;height:9px;border-radius:50%;background:var(--lime);}
+  .tips li.k::before{background:var(--yellow);box-shadow:0 0 0 3px rgba(255,230,0,.28);}
+  .tips li b{color:var(--green-d);}
+  .tonight{margin-top:9px;font-size:12.5px;color:#3c4a30;background:var(--soft);border-radius:10px;padding:9px 11px;line-height:1.45;}
+  .tonight b{color:var(--green-d);}
+  .foot{font-size:11px;color:#6a765d;margin:2px 18px 16px;line-height:1.45;}
+  .foot a{color:var(--green);font-weight:700;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="head">
+      <div class="kick">Berlinwalk.com · Berlin summer tool</div>
+      <h1>Will your Berlin room be too hot?</h1>
+      <p>Most Berlin rooms have no air conditioning. Answer six quick things about where you are staying and the forecast, and this shows your room's heat risk plus the moves that matter most for it.</p>
+    </div>
+
+    <div class="grid">
+      <div class="stage">
+        <svg viewBox="0 0 400 300" role="img" aria-label="A cross-section of a Berlin room that heats up or cools down with your answers">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#bfe0f5"/><stop offset="1" stop-color="#e9f4fb"/>
+            </linearGradient>
+            <linearGradient id="roomg" x1="0" y1="0" x2="0" y2="1">
+              <stop id="roomTop" offset="0" stop-color="#fbf6e8"/><stop id="roomBot" offset="1" stop-color="#efe7d3"/>
+            </linearGradient>
+            <radialGradient id="sung" cx=".5" cy=".5" r=".5">
+              <stop offset="0" stop-color="#fff6c2"/><stop offset="1" stop-color="#ffe14d"/>
+            </radialGradient>
+          </defs>
+          <!-- outside sky -->
+          <rect x="0" y="0" width="400" height="300" fill="url(#sky)"/>
+          <!-- sun -->
+          <g id="sun"><circle cx="330" cy="52" r="26" fill="url(#sung)"/></g>
+          <!-- sun rays into window -->
+          <g id="rays" opacity="0"><polygon points="300,70 250,86 250,150 300,120" fill="#ffe14d" opacity=".5"/></g>
+          <!-- neighbour facade -->
+          <rect x="230" y="18" width="150" height="120" fill="#dfe6ea" opacity=".55"/>
+          <!-- room box -->
+          <rect id="roomFill" x="24" y="70" width="352" height="210" fill="url(#roomg)"/>
+          <!-- floor -->
+          <rect x="24" y="250" width="352" height="30" fill="#c69b63"/>
+          <!-- window opening -->
+          <rect x="250" y="96" width="104" height="150" fill="#eaf4fb" stroke="#8a5a33" stroke-width="6"/>
+          <line x1="302" y1="96" x2="302" y2="246" stroke="#8a5a33" stroke-width="4"/>
+          <line x1="250" y1="171" x2="354" y2="171" stroke="#8a5a33" stroke-width="4"/>
+          <!-- open sash -->
+          <g id="sash"><rect x="214" y="104" width="40" height="120" fill="#f4fbff" stroke="#8a5a33" stroke-width="4" opacity=".95"/></g>
+          <!-- shutter (slides down) -->
+          <g id="shutter"><rect x="250" y="96" width="104" height="0" fill="#7d868c" stroke="#5f676c" stroke-width="1"/></g>
+          <!-- radiator -->
+          <rect x="258" y="250" width="88" height="0" fill="#d8d2c2"/>
+          <!-- fan -->
+          <g id="fan" opacity="0" transform="translate(88,214)">
+            <rect x="-3" y="24" width="6" height="16" fill="#cfd6c6"/>
+            <rect x="-16" y="40" width="32" height="6" rx="3" fill="#cfd6c6"/>
+            <g id="fanblades"><circle r="22" fill="none" stroke="#b8c0ad" stroke-width="3"/>
+              <path d="M0 0 L0 -18 A18 18 0 0 1 15 9 Z" fill="#e7ede0"/>
+              <path d="M0 0 L15 9 A18 18 0 0 1 -15 9 Z" fill="#dbe3d2"/>
+              <path d="M0 0 L-15 9 A18 18 0 0 1 0 -18 Z" fill="#eef3e8"/>
+              <circle r="4" fill="#8aa06f"/>
+            </g>
+          </g>
+          <!-- thermometer -->
+          <g transform="translate(52,96)">
+            <rect x="-9" y="0" width="18" height="132" rx="9" fill="#fff" stroke="#c7cfba" stroke-width="2"/>
+            <rect id="mercury" x="-5" y="120" width="10" height="8" rx="5" fill="#d7392f"/>
+            <circle cx="0" cy="140" r="13" fill="#d7392f"/>
+          </g>
+        </svg>
+        <div class="stagecap" id="stagecap">Set your room and the forecast. The room warms up or cools down as you choose.</div>
+      </div>
+
+      <div class="panel" id="panel"></div>
+    </div>
+
+    <div class="result" id="result" hidden>
+      <div class="gauge">
+        <div class="badge" id="badge"><span class="t" id="btemp">–</span><span class="s" id="btier">risk</span></div>
+        <div class="verdict"><h2 id="vtitle"></h2><p id="vsub"></p></div>
+      </div>
+      <ul class="tips" id="tips"></ul>
+      <div class="tonight" id="tonight"></div>
+    </div>
+    <div class="foot">A rough guide for planning, not a thermostat. The full picture is in my <a href="https://www.berlinwalk.com/post/air-conditioning-in-berlin" target="_blank" rel="noopener">air conditioning in Berlin</a> guide.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var Q=[
+    {id:"room",lab:"Your room",opts:[
+      {v:"ac",t:"Hotel with AC"},
+      {v:"hotel",t:"Hotel / no AC"},
+      {v:"apt",t:"Apartment / no AC"}]},
+    {id:"floor",lab:"Which floor",opts:[
+      {v:"low",t:"Ground / low"},
+      {v:"mid",t:"Middle"},
+      {v:"top",t:"Top / attic"}]},
+    {id:"face",lab:"Windows face",opts:[
+      {v:"shade",t:"Shade / courtyard"},
+      {v:"sun",t:"Afternoon sun"}]},
+    {id:"shade",lab:"Shutters or blackout curtains",opts:[
+      {v:"yes",t:"Yes, it has them"},
+      {v:"no",t:"No / thin curtains"}]},
+    {id:"fan",lab:"A fan",opts:[
+      {v:"yes",t:"Have / can get one"},
+      {v:"no",t:"None"}]},
+    {id:"heat",lab:"The forecast",opts:[
+      {v:"mild",t:"Mild ~25°C"},
+      {v:"warm",t:"Warm ~30°C"},
+      {v:"heat",t:"Heatwave 33°C+"}]}
+  ];
+  var state={};
+  var panel=document.getElementById('panel');
+
+  Q.forEach(function(q,i){
+    var w=document.createElement('div');w.className='q';
+    var l=document.createElement('div');l.className='lab';
+    l.innerHTML='<span class="n">'+(i+1)+'</span>'+q.lab;
+    w.appendChild(l);
+    var o=document.createElement('div');o.className='opts';
+    q.opts.forEach(function(op){
+      var b=document.createElement('button');b.className='opt';b.type='button';
+      b.textContent=op.t;b.setAttribute('aria-pressed','false');
+      b.addEventListener('click',function(){
+        state[q.id]=op.v;
+        o.querySelectorAll('.opt').forEach(function(x){x.setAttribute('aria-pressed','false');});
+        b.setAttribute('aria-pressed','true');
+        render();
+      });
+      o.appendChild(b);
+    });
+    w.appendChild(o);panel.appendChild(w);
+  });
+
+  var el=function(id){return document.getElementById(id);};
+
+  function score(){
+    var base={mild:1,warm:3,heat:5}[state.heat];
+    var s=base;
+    if(state.room==='apt')s+=1;
+    if(state.floor==='top')s+=2;else if(state.floor==='mid')s+=1;
+    if(state.face==='sun')s+=2;
+    if(state.shade==='no')s+=1;else s-=1;
+    if(state.fan==='no')s+=1;else s-=1;
+    if(state.room==='ac')s-=6;
+    return s;
+  }
+
+  function paintRoom(tier,pct){
+    // room colour warms with risk
+    var cols={cool:['#eef6e6','#dcecc9'],warm:['#fbf5df','#f0e6c4'],hot:['#fbe6cf','#f2d4a6'],swelt:['#f7dcc9','#efc09b']};
+    var c=cols[tier];
+    el('roomFill').setAttribute('fill','#00000000');
+    // set gradient stops
+    document.getElementById('roomTop').setAttribute('stop-color',c[0]);
+    document.getElementById('roomBot').setAttribute('stop-color',c[1]);
+    el('roomFill').setAttribute('fill','url(#roomg)');
+    // mercury height 8..118 by pct
+    var h=8+Math.round(110*pct);
+    var merc=el('mercury');merc.setAttribute('y',(128-h));merc.setAttribute('height',h);
+    var mc={cool:'#2e7d32',warm:'#c9a227',hot:'#e8791f',swelt:'#d7392f'}[tier];
+    merc.setAttribute('fill',mc);
+    // sun rays visible when sun-facing and not shuttered
+    el('rays').setAttribute('opacity',(state.face==='sun'&&state.shade==='no')?'1':'0');
+    // shutter down if has shutters
+    var sh=el('shutter').firstChild;
+    sh.setAttribute('height',(state.shade==='yes')?'150':'0');
+    // fan visible + spin if fan yes
+    el('fan').setAttribute('opacity',(state.fan==='yes')?'1':'0');
+    var bl=el('fanblades');
+    if(state.fan==='yes'){bl.style.animation='spin .5s linear infinite';bl.style.transformOrigin='0px 0px';}
+    else bl.style.animation='none';
+    // radiator + sash always shown once started
+    document.querySelector('rect[x="258"][y="250"]').setAttribute('height','24');
+  }
+
+  function render(){
+    if(Object.keys(state).length<Q.length){
+      el('stagecap').innerHTML='Answered '+Object.keys(state).length+' of 6. Keep going to see your room’s heat risk.';
+      return;
+    }
+    var s=score();
+    var tier,label,temp,sub,pct;
+    if(state.room==='ac'){
+      tier='cool';label='You are set';temp='AC';pct=.18;
+      sub='You booked air conditioning, which is the one sure fix in a Berlin heatwave. Set it to a moderate level rather than freezing, and you are done.';
+    }else{
+      if(s<=2){tier='cool';label='Comfortable';temp='OK';pct=.30;sub='Your room should stay liveable with basic habits. Berlin evenings cool off, so the night air does most of the work.';}
+      else if(s<=4){tier='warm';label='A bit warm';temp='Warm';pct=.52;sub='Manageable, but it will get stuffy in the afternoon. Shade and window timing will keep it comfortable enough to sleep.';}
+      else if(s<=6){tier='hot';label='Hot room';temp='Hot';pct=.74;sub='This room will heat up through the day. You will need to be deliberate about shade, airflow and staying out during the worst hours.';}
+      else{tier='swelt';label='Sweltering';temp='35°+';pct=.93;sub='This is a tough setup for a heatwave. Do everything below, spend the hot afternoons out of the room, and if you can still change rooms, do.';}
+    }
+    var bcol={cool:'#2e7d32',warm:'#c9a227',hot:'#e8791f',swelt:'#d7392f'}[tier];
+    var badge=el('badge');badge.style.background=bcol;
+    el('btemp').textContent=temp;el('btier').textContent=tier==='cool'?'low risk':(tier==='warm'?'moderate':(tier==='hot'?'high risk':'extreme'));
+    el('vtitle').textContent=label;el('vsub').textContent=sub;
+
+    // tips, prioritised
+    var tips=[];
+    if(state.room==='ac'){
+      tips.push({k:false,h:'Still open the windows at night if the outside air is cool — it is free and often nicer than running AC all night.'});
+      tips.push({k:false,h:'Even with AC, keep <b>curtains closed on the sunny side</b> during the day so the unit is not fighting direct sun.'});
+    }else{
+      if(state.face==='sun'&&state.shade==='no'){
+        tips.push({k:true,h:'<b>Your weak point:</b> sun-facing windows with no shade. Keep the curtains drawn on the sunny side from late morning, and drape a spare sheet over the window if that is all you have.'});
+      }else if(state.shade==='yes'){
+        tips.push({k:true,h:'<b>Use the shutters early.</b> Pull them down on the sunny side before the room heats up in the late morning, not after — that is your biggest single win.'});
+      }
+      tips.push({k:false,h:'<b>Get the window timing right:</b> shut through the hot afternoon, then wide open on opposite sides for 10-15 minutes once the evening cools to around 13-18°C.'});
+      if(state.fan==='no')tips.push({k:true,h:'<b>Get a fan on day one.</b> They sell out during a heatwave — try a drugstore or electronics shop early, and ask reception, since many hotels will lend one.'});
+      else tips.push({k:false,h:'Point the fan <b>across an open window at night</b> to push cooler outside air through the room.'});
+      if(state.floor==='top')tips.push({k:false,h:'Top-floor and attic rooms bake under the roof. If you can still switch, ask for a <b>lower or courtyard-facing room</b>.'});
+      if(state.heat==='heat')tips.push({k:false,h:'On the hottest days, <b>be out of the room in the afternoon</b>: a museum, a mall, or a lake beats any fan.'});
+    }
+    var ul=el('tips');ul.innerHTML='';
+    tips.slice(0,5).forEach(function(t){var li=document.createElement('li');if(t.k)li.className='k';li.innerHTML=t.h;ul.appendChild(li);});
+
+    // tonight line
+    var ton;
+    if(state.room==='ac')ton='<b>Tonight:</b> set the AC to a steady, moderate temperature and let the room settle before bed — no need to blast it.';
+    else if(state.heat==='mild')ton='<b>Tonight:</b> open both windows wide once it cools, and you should sleep fine without much effort.';
+    else ton='<b>Tonight:</b> keep it shut and shaded until the evening drops, then open opposite windows wide with the fan across the draft. That night swing is your free air conditioning.';
+    el('tonight').innerHTML=ton;
+
+    el('result').hidden=false;
+    el('stagecap').innerHTML='Heat risk: <b>'+label+'</b>. '+(tier==='cool'?'A comfortable room.':'Watch the shade, the airflow and the hottest hours.');
+    paintRoom(tier,pct);
+  }
+
+  // spin keyframes
+  var sty=document.createElement('style');
+  sty.textContent='@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}';
+  document.head.appendChild(sty);
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

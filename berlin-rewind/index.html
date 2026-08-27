@@ -1,0 +1,1547 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Rewind | BerlinWalk</title>
+  <meta name="description" content="Play Berlin Rewind by BerlinWalk: guess the year and district from three historical Berlin photos, compare your score, and come back tomorrow.">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <script src="../js/bw-daily.js"></script>
+  <script src="../js/bw-share-card.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=IBM+Plex+Mono:wght@500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<main id="bw-rewind">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      min-height: 100%;
+      overflow-x: hidden;
+      padding: 0;
+    }
+
+    #bw-rewind {
+      --green: #1B5E20;
+      --green-dark: #102414;
+      --yellow: #FFE600;
+      --lime: #7CB342;
+      --cream: #FAFAF5;
+      --paper: #FFFFFF;
+      --ink: #212121;
+      --muted: #556155;
+      --line: #D6E2CE;
+      --red: #E63946;
+      --shadow: 0 24px 48px rgba(16, 36, 20, 0.14);
+      color: var(--ink);
+      font-family: "Space Grotesk", Arial, sans-serif;
+      margin: 0 auto;
+      max-width: 1180px;
+      min-width: 320px;
+    }
+
+    #bw-rewind *,
+    #bw-rewind *::before,
+    #bw-rewind *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-rewind button,
+    #bw-rewind input {
+      font: inherit;
+    }
+
+    #bw-rewind button {
+      cursor: pointer;
+    }
+
+    #bw-rewind .rw-shell {
+      background:
+        linear-gradient(90deg, rgba(27, 94, 32, 0.06) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(27, 94, 32, 0.06) 1px, transparent 1px),
+        radial-gradient(circle at 18% 16%, rgba(255, 230, 0, 0.16), transparent 24%),
+        var(--cream);
+      background-size: 34px 34px, 34px 34px, auto, auto;
+      border: 1px solid rgba(27, 94, 32, 0.14);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      margin: 14px auto;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #bw-rewind .rw-shell::before {
+      background: linear-gradient(90deg, var(--yellow), var(--lime));
+      content: "";
+      height: 6px;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    #bw-rewind .rw-screen {
+      display: none;
+      min-height: 0;
+      padding: clamp(18px, 2.4vw, 28px);
+      pointer-events: none;
+    }
+
+    #bw-rewind .rw-screen.is-active {
+      display: block;
+      pointer-events: auto;
+    }
+
+    #bw-rewind .rw-kicker {
+      align-items: center;
+      background: var(--yellow);
+      border: 2px solid var(--green-dark);
+      border-radius: 999px;
+      color: var(--green-dark);
+      display: inline-flex;
+      font-size: 11px;
+      font-weight: 900;
+      gap: 10px;
+      letter-spacing: 0.12em;
+      line-height: 1;
+      min-height: 34px;
+      padding: 8px 14px;
+      text-transform: uppercase;
+    }
+
+    #bw-rewind h1,
+    #bw-rewind h2,
+    #bw-rewind h3,
+    #bw-rewind p {
+      margin: 0;
+    }
+
+    #bw-rewind .rw-start {
+      display: grid;
+      gap: 22px;
+      grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+      align-items: center;
+    }
+
+    #bw-rewind .rw-start-copy {
+      display: grid;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    #bw-rewind .rw-title {
+      color: var(--green-dark);
+      font-family: Fraunces, Georgia, serif;
+      font-size: clamp(42px, 6.2vw, 76px);
+      font-weight: 800;
+      line-height: 0.92;
+    }
+
+    #bw-rewind .rw-title span {
+      color: var(--red);
+      display: block;
+    }
+
+    #bw-rewind .rw-lead {
+      color: var(--muted);
+      font-size: clamp(16px, 1.5vw, 19px);
+      font-weight: 700;
+      line-height: 1.42;
+      max-width: 660px;
+    }
+
+    #bw-rewind .rw-rules {
+      display: grid;
+      gap: 9px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    #bw-rewind .rw-rules li {
+      align-items: center;
+      color: var(--green-dark);
+      display: flex;
+      font-size: 15px;
+      font-weight: 800;
+      gap: 12px;
+      line-height: 1.35;
+    }
+
+    #bw-rewind .rw-rules li::before {
+      background: var(--lime);
+      border: 2px solid var(--green-dark);
+      border-radius: 50%;
+      content: "";
+      flex: 0 0 12px;
+      height: 12px;
+      width: 12px;
+    }
+
+    #bw-rewind .rw-action-row,
+    #bw-rewind .rw-footer-actions,
+    #bw-rewind .rw-result-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    #bw-rewind .rw-btn,
+    #bw-rewind .rw-btn-secondary {
+      align-items: center;
+      border: 2px solid var(--green-dark);
+      border-radius: 10px;
+      color: var(--green-dark);
+      display: inline-flex;
+      font-size: 14px;
+      font-weight: 900;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 18px;
+      text-decoration: none;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    #bw-rewind .rw-btn {
+      background: var(--yellow);
+      box-shadow: 6px 6px 0 var(--green-dark);
+    }
+
+    #bw-rewind .rw-btn-secondary {
+      background: var(--paper);
+      box-shadow: 6px 6px 0 rgba(16, 36, 20, 0.18);
+    }
+
+    #bw-rewind .rw-btn:hover,
+    #bw-rewind .rw-btn-secondary:hover {
+      transform: translateY(-2px);
+    }
+
+    #bw-rewind .rw-start-board {
+      background: rgba(255, 255, 255, 0.78);
+      border: 2px solid var(--green-dark);
+      border-radius: 18px;
+      box-shadow: 10px 10px 0 rgba(16, 36, 20, 0.16);
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+    }
+
+    #bw-rewind .rw-board-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: start;
+    }
+
+    #bw-rewind .rw-board-head strong,
+    #bw-rewind .rw-board-metric strong,
+    #bw-rewind .rw-reveal-stat strong {
+      color: var(--green-dark);
+      display: block;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    #bw-rewind .rw-board-head span,
+    #bw-rewind .rw-board-metric span,
+    #bw-rewind .rw-reveal-stat span {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    #bw-rewind .rw-board-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-rewind .rw-board-metric {
+      background: rgba(124, 179, 66, 0.11);
+      border: 1px solid rgba(27, 94, 32, 0.12);
+      border-radius: 14px;
+      min-height: 88px;
+      padding: 12px;
+    }
+
+    #bw-rewind .rw-film-stack {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-rewind .rw-film-stack span {
+      aspect-ratio: 16 / 10;
+      background:
+        linear-gradient(180deg, rgba(16, 36, 20, 0.18), rgba(16, 36, 20, 0.06)),
+        rgba(255, 255, 255, 0.86);
+      border: 2px solid var(--green-dark);
+      border-radius: 12px;
+      position: relative;
+    }
+
+    #bw-rewind .rw-film-stack span::before,
+    #bw-rewind .rw-film-stack span::after {
+      background: repeating-linear-gradient(90deg, var(--green-dark) 0 8px, transparent 8px 13px);
+      content: "";
+      height: 8px;
+      left: 16px;
+      position: absolute;
+      right: 16px;
+    }
+
+    #bw-rewind .rw-film-stack span::before {
+      top: 10px;
+    }
+
+    #bw-rewind .rw-film-stack span::after {
+      bottom: 10px;
+    }
+
+    #bw-rewind .rw-film-stack em {
+      align-items: center;
+      color: var(--green-dark);
+      display: inline-flex;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 22px;
+      font-style: normal;
+      font-weight: 700;
+      inset: 0;
+      justify-content: center;
+      position: absolute;
+    }
+
+    #bw-rewind .rw-play {
+      display: grid;
+      gap: 14px;
+    }
+
+    #bw-rewind .rw-topbar {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-between;
+    }
+
+    #bw-rewind .rw-mini-chip {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(27, 94, 32, 0.14);
+      border-radius: 999px;
+      color: var(--green-dark);
+      display: inline-flex;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 13px;
+      font-weight: 700;
+      gap: 8px;
+      min-height: 38px;
+      padding: 0 14px;
+    }
+
+    #bw-rewind .rw-stage {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(0, 1fr) minmax(360px, 0.82fr);
+      align-items: start;
+    }
+
+    #bw-rewind .rw-photo-panel,
+    #bw-rewind .rw-controls {
+      background: rgba(255, 255, 255, 0.84);
+      border: 2px solid rgba(16, 36, 20, 0.16);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    #bw-rewind .rw-photo-panel {
+      padding: 12px;
+    }
+
+    #bw-rewind .rw-photo-frame {
+      aspect-ratio: 1 / 1;
+      background: linear-gradient(180deg, rgba(16, 36, 20, 0.18), rgba(16, 36, 20, 0.06));
+      border: 3px solid var(--green-dark);
+      border-radius: 18px;
+      display: grid;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #bw-rewind .rw-photo-frame::before,
+    #bw-rewind .rw-photo-frame::after {
+      background: repeating-linear-gradient(90deg, rgba(16, 36, 20, 0.92) 0 12px, transparent 12px 20px);
+      content: "";
+      height: 10px;
+      left: 18px;
+      position: absolute;
+      right: 18px;
+      z-index: 2;
+    }
+
+    #bw-rewind .rw-photo-frame::before {
+      top: 10px;
+    }
+
+    #bw-rewind .rw-photo-frame::after {
+      bottom: 10px;
+    }
+
+    #bw-rewind .rw-photo-frame img {
+      filter: saturate(0.75) contrast(0.94);
+      height: 100%;
+      object-fit: cover;
+      transition: filter 260ms ease;
+      width: 100%;
+    }
+
+    #bw-rewind .rw-photo-frame.is-revealed img {
+      filter: saturate(1) contrast(1);
+    }
+
+    #bw-rewind .rw-photo-index {
+      align-items: center;
+      background: rgba(16, 36, 20, 0.88);
+      border-radius: 999px;
+      color: var(--paper);
+      display: inline-flex;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
+      gap: 6px;
+      left: 16px;
+      min-height: 34px;
+      padding: 0 12px;
+      position: absolute;
+      top: 16px;
+      z-index: 3;
+    }
+
+    #bw-rewind .rw-credit {
+      color: var(--muted);
+      font-size: 12px;
+      font-style: italic;
+      line-height: 1.45;
+      padding: 10px 6px 0;
+      text-align: center;
+    }
+
+    #bw-rewind .rw-controls {
+      display: grid;
+      gap: 12px;
+      padding: 16px;
+    }
+
+    #bw-rewind .rw-controls h2 {
+      color: var(--green-dark);
+      font-size: 24px;
+      font-family: Fraunces, Georgia, serif;
+      line-height: 1.02;
+    }
+
+    #bw-rewind .rw-controls p {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.38;
+    }
+
+    #bw-rewind .rw-year-block,
+    #bw-rewind .rw-district-block,
+    #bw-rewind .rw-reveal-panel {
+      border-top: 1px solid rgba(16, 36, 20, 0.12);
+      display: grid;
+      gap: 10px;
+      padding-top: 12px;
+    }
+
+    #bw-rewind .rw-label {
+      color: var(--green-dark);
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: baseline;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    #bw-rewind .rw-year-big {
+      color: var(--green-dark);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: clamp(36px, 4.5vw, 54px);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-align: center;
+    }
+
+    #bw-rewind input[type="range"] {
+      accent-color: var(--green);
+      width: 100%;
+    }
+
+    #bw-rewind .rw-era-row,
+    #bw-rewind .rw-district-grid,
+    #bw-rewind .rw-share-grid,
+    #bw-rewind .rw-reveal-stats {
+      display: grid;
+      gap: 8px;
+    }
+
+    #bw-rewind .rw-era-row {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    #bw-rewind .rw-era-chip,
+    #bw-rewind .rw-district-btn,
+    #bw-rewind .rw-share-btn {
+      background: var(--paper);
+      border: 1px solid rgba(16, 36, 20, 0.16);
+      border-radius: 12px;
+      color: var(--green-dark);
+      min-height: 42px;
+      padding: 8px 10px;
+      text-align: left;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    #bw-rewind .rw-era-chip {
+      align-items: center;
+      cursor: pointer;
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 700;
+      justify-content: center;
+      min-height: 34px;
+      text-align: center;
+      touch-action: manipulation;
+      width: 100%;
+    }
+
+    #bw-rewind .rw-era-chip.is-selected {
+      background: var(--yellow);
+      border-color: var(--green-dark);
+      box-shadow: inset 0 0 0 1px var(--green-dark);
+    }
+
+    #bw-rewind .rw-district-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-rewind .rw-district-btn {
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 800;
+      min-height: 50px;
+      position: relative;
+      touch-action: manipulation;
+      z-index: 1;
+    }
+
+    #bw-rewind .rw-share-btn:hover,
+    #bw-rewind .rw-share-btn:focus-visible,
+    #bw-rewind .rw-era-chip:hover,
+    #bw-rewind .rw-district-btn:hover,
+    #bw-rewind .rw-district-btn:focus-visible {
+      background: rgba(124, 179, 66, 0.12);
+      border-color: var(--green);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    #bw-rewind .rw-district-btn.is-selected {
+      background: var(--green);
+      border-color: var(--yellow);
+      box-shadow: inset 0 0 0 2px var(--yellow), 0 8px 18px rgba(16, 36, 20, 0.18);
+      color: var(--paper);
+      transform: translateY(-1px);
+    }
+
+    #bw-rewind .rw-district-btn.is-selected::after {
+      color: var(--yellow);
+      content: "SELECTED";
+      display: block;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-top: 4px;
+    }
+
+    #bw-rewind .rw-lock {
+      width: 100%;
+    }
+
+    #bw-rewind .rw-lock[disabled] {
+      cursor: not-allowed;
+      opacity: 0.48;
+      transform: none;
+    }
+
+    #bw-rewind .rw-reveal-panel {
+      display: none;
+    }
+
+    #bw-rewind .rw-reveal-panel.is-visible {
+      display: grid;
+    }
+
+    #bw-rewind .rw-reveal-title {
+      color: var(--green-dark);
+      font-family: Fraunces, Georgia, serif;
+      font-size: 30px;
+      line-height: 1.05;
+    }
+
+    #bw-rewind .rw-reveal-stats {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-rewind .rw-reveal-stat {
+      background: rgba(255, 230, 0, 0.12);
+      border-radius: 14px;
+      min-height: 90px;
+      padding: 14px;
+    }
+
+    #bw-rewind .rw-reveal-story {
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.58;
+    }
+
+    #bw-rewind .rw-scoreline {
+      color: var(--green-dark);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 26px;
+      font-weight: 700;
+    }
+
+    #bw-rewind .rw-result {
+      display: grid;
+      gap: 18px;
+    }
+
+    #bw-rewind .rw-result-head {
+      display: grid;
+      gap: 14px;
+    }
+
+    #bw-rewind .rw-result-head h2 {
+      color: var(--green-dark);
+      font-family: Fraunces, Georgia, serif;
+      font-size: clamp(34px, 5vw, 54px);
+      line-height: 0.98;
+    }
+
+    #bw-rewind .rw-result-score {
+      color: var(--green-dark);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: clamp(44px, 7vw, 88px);
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    #bw-rewind .rw-result-panels {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+    }
+
+    #bw-rewind .rw-summary-panel,
+    #bw-rewind .rw-tomorrow-panel {
+      background: rgba(255, 255, 255, 0.84);
+      border: 2px solid rgba(16, 36, 20, 0.16);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    #bw-rewind .rw-summary-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    #bw-rewind .rw-summary-row {
+      align-items: center;
+      background: rgba(124, 179, 66, 0.1);
+      border-radius: 14px;
+      color: var(--green-dark);
+      display: grid;
+      font-size: 15px;
+      font-weight: 800;
+      gap: 12px;
+      grid-template-columns: auto 1fr auto;
+      padding: 12px 14px;
+    }
+
+    #bw-rewind .rw-summary-row small {
+      color: var(--muted);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    #bw-rewind .rw-summary-row em {
+      font-style: normal;
+      font-weight: 900;
+    }
+
+    #bw-rewind .rw-share-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 10px;
+    }
+
+    #bw-rewind .rw-share-btn {
+      font-size: 13px;
+      font-weight: 900;
+      min-height: 50px;
+      text-align: center;
+    }
+
+    #bw-rewind .rw-countdown {
+      color: var(--green-dark);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 16px;
+      font-weight: 700;
+      margin-top: 14px;
+    }
+
+    #bw-rewind .rw-cta {
+      border-left: 6px solid var(--red);
+      margin-top: 18px;
+      padding-left: 14px;
+    }
+
+    #bw-rewind .rw-toast {
+      background: rgba(16, 36, 20, 0.94);
+      border-radius: 999px;
+      bottom: 18px;
+      color: var(--paper);
+      font-size: 13px;
+      font-weight: 800;
+      left: 50%;
+      max-width: min(90vw, 440px);
+      opacity: 0;
+      padding: 12px 16px;
+      pointer-events: none;
+      position: fixed;
+      text-align: center;
+      transform: translate(-50%, 14px);
+      transition: opacity 180ms ease, transform 180ms ease;
+      z-index: 80;
+    }
+
+    #bw-rewind .rw-toast.is-visible {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    #bw-rewind .rw-screen.rw-empty {
+      align-items: center;
+      gap: 14px;
+      justify-items: start;
+      min-height: 260px;
+      padding: 20px;
+    }
+
+    #bw-rewind .rw-screen.rw-empty.is-active {
+      display: grid;
+    }
+
+    #bw-rewind .rw-empty h2 {
+      color: var(--green-dark);
+      font-family: Fraunces, Georgia, serif;
+      font-size: 34px;
+    }
+
+    #bw-rewind .bw-attr-badge {
+      display: none !important;
+    }
+
+    @media (max-width: 980px) {
+      #bw-rewind .rw-start,
+      #bw-rewind .rw-stage,
+      #bw-rewind .rw-result-panels {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      #bw-rewind .rw-screen {
+        min-height: 0;
+        padding: 16px;
+      }
+
+      #bw-rewind .rw-title {
+        font-size: clamp(38px, 12vw, 60px);
+      }
+
+      #bw-rewind .rw-share-grid,
+      #bw-rewind .rw-reveal-stats {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-rewind .rw-board-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-rewind .rw-topbar {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      #bw-rewind .rw-film-stack {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 420px) {
+      #bw-rewind .rw-district-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-rewind .rw-era-chip {
+        font-size: 10px;
+        padding-inline: 4px;
+      }
+    }
+  </style>
+
+  <section class="rw-shell">
+    <div class="rw-screen rw-empty is-active" data-screen="loading">
+      <span class="rw-kicker">Berlin Rewind</span>
+      <h2>Loading today's archive set</h2>
+      <p>Berlin changes fast. The archive just takes a second to catch up.</p>
+    </div>
+
+    <div class="rw-screen" data-screen="start">
+      <div class="rw-start">
+        <div class="rw-start-copy">
+          <span class="rw-kicker">Daily archive game</span>
+          <h1 class="rw-title">Berlin <span>Rewind</span></h1>
+          <p class="rw-lead">Three historical Berlin photos. One year guess, one district guess, then a quick story that tells you why the corner mattered. Play today's set in under a minute and come back after Berlin midnight for the next one.</p>
+          <ul class="rw-rules">
+            <li>Everyone gets the same daily set, so scores are comparable.</li>
+            <li>Your streak moves when you play, not only when you win.</li>
+            <li>Each reveal gives the date, the district, and one useful Berlin note.</li>
+          </ul>
+          <div class="rw-action-row">
+            <button class="rw-btn" data-action="start">Play today's set</button>
+            <a class="rw-btn-secondary" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=games&utm_medium=rewind&utm_campaign=bw_rewind&utm_content=start_panel">Book the walk</a>
+          </div>
+        </div>
+
+        <aside class="rw-start-board">
+          <div class="rw-board-head">
+            <div>
+              <strong id="rw-day-label">Today's set</strong>
+              <span id="rw-theme">Loading theme...</span>
+            </div>
+            <div>
+              <strong>Streak</strong>
+              <span id="rw-streak-head">0 days</span>
+            </div>
+          </div>
+
+          <div class="rw-board-grid">
+            <div class="rw-board-metric">
+              <strong>Format</strong>
+              <span>3 photos, year + district, max score 3000.</span>
+            </div>
+            <div class="rw-board-metric">
+              <strong>Tomorrow</strong>
+              <span id="rw-next-teaser">Another Berlin layer drops after midnight.</span>
+            </div>
+            <div class="rw-board-metric">
+              <strong>Score title</strong>
+              <span id="rw-title-preview">Berlin Time Machine if you hit 2700+.</span>
+            </div>
+            <div class="rw-board-metric">
+              <strong>Set shape</strong>
+              <span>Easy, medium, hard. Different parts of the city when possible.</span>
+            </div>
+          </div>
+
+          <div class="rw-film-stack" aria-hidden="true">
+            <span><em>#1</em></span>
+            <span><em>#2</em></span>
+            <span><em>#3</em></span>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <div class="rw-screen" data-screen="play">
+      <div class="rw-play">
+        <div class="rw-topbar">
+          <div class="rw-action-row">
+            <span class="rw-mini-chip" id="rw-progress-chip">Frame 1 of 3</span>
+            <span class="rw-mini-chip" id="rw-score-chip">0 / 3000</span>
+            <span class="rw-mini-chip" id="rw-streak-chip">Streak 0</span>
+          </div>
+          <span class="rw-mini-chip" id="rw-countdown-chip">Berlin daily set</span>
+        </div>
+
+        <div class="rw-stage">
+          <section class="rw-photo-panel">
+            <div class="rw-photo-frame" id="rw-photo-frame">
+              <span class="rw-photo-index" id="rw-photo-index">#1 / 3</span>
+              <img id="rw-photo" alt="">
+            </div>
+            <p class="rw-credit" id="rw-credit"></p>
+          </section>
+
+          <section class="rw-controls">
+            <h2 id="rw-prompt-title">Read the year. Read the district.</h2>
+            <p id="rw-prompt-copy">Use the photo clues first. Then lock your guess and see what the street was actually doing.</p>
+
+            <div class="rw-year-block">
+              <div class="rw-label">
+                <span>Your year</span>
+                <span id="rw-year-diff-label">Max 500 pts</span>
+              </div>
+              <div class="rw-year-big" id="rw-year-big">1963</div>
+              <input id="rw-year-range" type="range" min="1900" max="2026" value="1963" step="1">
+              <div class="rw-era-row">
+                <button class="rw-era-chip" type="button" data-era="kaiser" data-year="1910" aria-pressed="false">Kaiser</button>
+                <button class="rw-era-chip" type="button" data-era="weimar" data-year="1928" aria-pressed="false">Weimar</button>
+                <button class="rw-era-chip" type="button" data-era="war" data-year="1942" aria-pressed="false">War</button>
+                <button class="rw-era-chip" type="button" data-era="divided" data-year="1963" aria-pressed="true">Divided</button>
+                <button class="rw-era-chip" type="button" data-era="reunified" data-year="2006" aria-pressed="false">Reunified</button>
+              </div>
+            </div>
+
+            <div class="rw-district-block">
+              <div class="rw-label">
+                <span>Your district</span>
+                <span>500 / 200 / 0</span>
+              </div>
+              <div class="rw-district-grid" id="rw-district-grid"></div>
+            </div>
+
+            <button class="rw-btn rw-lock" id="rw-lock-btn" disabled>Lock it in</button>
+
+            <div class="rw-reveal-panel" id="rw-reveal-panel">
+              <div>
+                <div class="rw-label"><span>Reveal</span><span id="rw-reveal-score">0 pts</span></div>
+                <h3 class="rw-reveal-title" id="rw-reveal-title"></h3>
+              </div>
+              <div class="rw-reveal-stats">
+                <div class="rw-reveal-stat">
+                  <strong>Year</strong>
+                  <span id="rw-reveal-year"></span>
+                </div>
+                <div class="rw-reveal-stat">
+                  <strong>District</strong>
+                  <span id="rw-reveal-district"></span>
+                </div>
+                <div class="rw-reveal-stat">
+                  <strong>Your gap</strong>
+                  <span id="rw-reveal-gap"></span>
+                </div>
+                <div class="rw-reveal-stat">
+                  <strong>Today's average</strong>
+                  <span id="rw-reveal-average">Waiting for more players</span>
+                </div>
+              </div>
+              <p class="rw-reveal-story" id="rw-reveal-story"></p>
+              <div class="rw-footer-actions">
+                <button class="rw-btn" id="rw-next-btn">Next frame</button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <div class="rw-screen" data-screen="result">
+      <div class="rw-result">
+        <div class="rw-result-head">
+          <span class="rw-kicker">Today's archive score</span>
+          <h2 id="rw-final-title">Berlin Time Machine</h2>
+          <div class="rw-result-score" id="rw-final-score">0 / 3000</div>
+          <p class="rw-lead" id="rw-final-lead">You read today's Berlin layer well enough to keep the streak alive.</p>
+        </div>
+
+        <div class="rw-result-panels">
+          <section class="rw-summary-panel">
+            <div class="rw-summary-grid" id="rw-summary-grid"></div>
+            <div class="rw-share-grid">
+              <button class="rw-share-btn" data-share="copy">Copy emoji grid</button>
+              <button class="rw-share-btn" data-share="download">Download card</button>
+            </div>
+          </section>
+
+          <aside class="rw-tomorrow-panel">
+            <div class="rw-label"><span>Come back tomorrow</span><span id="rw-final-streak">Streak 1</span></div>
+            <p class="rw-reveal-story" id="rw-final-teaser">Tomorrow shifts to another Berlin layer.</p>
+            <p class="rw-countdown" id="rw-final-countdown">Next set in 00:00:00</p>
+            <div class="rw-cta">
+              <p><strong id="rw-route-badge">On my route today:</strong> some of this week's corners still sit on the walk I guide through the centre.</p>
+              <a class="rw-btn-secondary" id="rw-book-btn" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=games&utm_medium=rewind&utm_campaign=bw_rewind&utm_content=final_cta">See the corners on the walk</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <div class="rw-toast" id="rw-toast" role="status" aria-live="polite"></div>
+  </section>
+</main>
+
+<script>
+(() => {
+  const daily = window.BerlinWalkDaily;
+  const shareCard = window.BerlinWalkShareCard;
+  if (!daily) {
+    const loading = document.querySelector('[data-screen="loading"]');
+    if (loading) {
+      loading.innerHTML = `
+        <span class="rw-kicker">Berlin Rewind</span>
+        <h2>Today's archive did not load</h2>
+        <p>The daily helper was not ready. Refresh once, then open the game through the local preview URL.</p>
+      `;
+    }
+    return;
+  }
+
+  const STORAGE_KEY_PREFIX = 'bw_rewind_result_';
+  const STREAK = daily.streak('rewind');
+  const params = new URLSearchParams(window.location.search || '');
+  const endpoint = (() => {
+    const local = /^(localhost|127\\.0\\.0\\.1)$/.test(window.location.hostname || '');
+    if (local) return params.get('tracking') === 'local' ? 'http://127.0.0.1:5173/api/rewind-event' : '';
+    return params.get('tracking') === 'off' ? '' : 'https://berlinwalk-content-app.vercel.app/api/rewind-event';
+  })();
+
+  const els = {
+    screens: [...document.querySelectorAll('[data-screen]')],
+    toast: document.getElementById('rw-toast'),
+    dayLabel: document.getElementById('rw-day-label'),
+    theme: document.getElementById('rw-theme'),
+    nextTeaser: document.getElementById('rw-next-teaser'),
+    titlePreview: document.getElementById('rw-title-preview'),
+    streakHead: document.getElementById('rw-streak-head'),
+    progressChip: document.getElementById('rw-progress-chip'),
+    scoreChip: document.getElementById('rw-score-chip'),
+    streakChip: document.getElementById('rw-streak-chip'),
+    countdownChip: document.getElementById('rw-countdown-chip'),
+    photoFrame: document.getElementById('rw-photo-frame'),
+    photoIndex: document.getElementById('rw-photo-index'),
+    photo: document.getElementById('rw-photo'),
+    credit: document.getElementById('rw-credit'),
+    yearRange: document.getElementById('rw-year-range'),
+    yearBig: document.getElementById('rw-year-big'),
+    lockBtn: document.getElementById('rw-lock-btn'),
+    districtGrid: document.getElementById('rw-district-grid'),
+    revealPanel: document.getElementById('rw-reveal-panel'),
+    revealScore: document.getElementById('rw-reveal-score'),
+    revealTitle: document.getElementById('rw-reveal-title'),
+    revealYear: document.getElementById('rw-reveal-year'),
+    revealDistrict: document.getElementById('rw-reveal-district'),
+    revealGap: document.getElementById('rw-reveal-gap'),
+    revealAverage: document.getElementById('rw-reveal-average'),
+    revealStory: document.getElementById('rw-reveal-story'),
+    nextBtn: document.getElementById('rw-next-btn'),
+    finalTitle: document.getElementById('rw-final-title'),
+    finalScore: document.getElementById('rw-final-score'),
+    finalLead: document.getElementById('rw-final-lead'),
+    summaryGrid: document.getElementById('rw-summary-grid'),
+    finalTeaser: document.getElementById('rw-final-teaser'),
+    finalStreak: document.getElementById('rw-final-streak'),
+    finalCountdown: document.getElementById('rw-final-countdown'),
+    routeBadge: document.getElementById('rw-route-badge'),
+    bookBtn: document.getElementById('rw-book-btn'),
+  };
+
+  const state = {
+    dayKey: daily.berlinDate(),
+    scheduleEntry: null,
+    photosById: {},
+    districtMap: {},
+    districtOrder: [],
+    index: 0,
+    score: 0,
+    answers: [],
+    selectedYear: 1963,
+    selectedDistrict: '',
+    countdownHandle: null,
+    sessionId: `rewind_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`,
+    visitorId: localStorage.getItem('bw_rewind_visitor_id') || `visitor_${Math.random().toString(36).slice(2, 10)}`,
+    result: null,
+  };
+  localStorage.setItem('bw_rewind_visitor_id', state.visitorId);
+
+  const TITLE_BY_SCORE = [
+    { min: 2700, title: 'Berlin Time Machine', lead: 'That is the kind of score that says you can read an old Berlin street fast.' },
+    { min: 2100, title: 'Local Historian', lead: 'You were close on the details and strong on the city mood.' },
+    { min: 1400, title: 'Sharp-Eyed Visitor', lead: 'You noticed enough to keep Berlin from flattening into postcard history.' },
+    { min: 700, title: 'First Week in Berlin', lead: 'You found a few useful clues, which is honestly how most Berlin learning starts.' },
+    { min: 0, title: 'Lost in Time', lead: 'No shame. Berlin is exactly the kind of city that gets clearer once someone walks you through the layers.' },
+  ];
+
+  const ERAS = [
+    { key: 'kaiser', min: 1900, max: 1918 },
+    { key: 'weimar', min: 1919, max: 1932 },
+    { key: 'war', min: 1933, max: 1945 },
+    { key: 'divided', min: 1946, max: 1989 },
+    { key: 'reunified', min: 1990, max: 2026 },
+  ];
+
+  function showScreen(name) {
+    els.screens.forEach((screen) => screen.classList.toggle('is-active', screen.dataset.screen === name));
+    if (name !== 'result' && state.countdownHandle) {
+      state.countdownHandle.stop();
+      state.countdownHandle = null;
+    }
+    if (name === 'result') {
+      state.countdownHandle = daily.countdown(els.finalCountdown);
+    }
+    requestAnimationFrame(() => {
+      if (window.BerlinWalkBrand && typeof window.BerlinWalkBrand.resize === 'function') {
+        window.BerlinWalkBrand.resize();
+      }
+    });
+  }
+
+  function toast(message) {
+    if (!message) return;
+    els.toast.textContent = message;
+    els.toast.classList.add('is-visible');
+    window.clearTimeout(toast._timer);
+    toast._timer = window.setTimeout(() => els.toast.classList.remove('is-visible'), 1800);
+  }
+
+  function resultKey(dayKey) {
+    return `${STORAGE_KEY_PREFIX}${dayKey}`;
+  }
+
+  function readTodayResult() {
+    return daily.readJson(resultKey(state.dayKey), null);
+  }
+
+  function saveTodayResult(result) {
+    daily.writeJson(resultKey(state.dayKey), result);
+  }
+
+  function pickTitle(score) {
+    return TITLE_BY_SCORE.find((row) => score >= row.min) || TITLE_BY_SCORE[TITLE_BY_SCORE.length - 1];
+  }
+
+  function buildDistrictButtons() {
+    els.districtGrid.innerHTML = '';
+    state.districtOrder.forEach((slug) => {
+      const info = state.districtMap[slug];
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'rw-district-btn';
+      button.textContent = info.label;
+      button.dataset.slug = slug;
+      button.setAttribute('aria-pressed', 'false');
+      button.addEventListener('click', () => {
+        state.selectedDistrict = slug;
+        [...els.districtGrid.querySelectorAll('.rw-district-btn')].forEach((node) => {
+          const selected = node.dataset.slug === slug;
+          node.classList.toggle('is-selected', selected);
+          node.setAttribute('aria-pressed', String(selected));
+        });
+        updateLockState();
+      });
+      els.districtGrid.appendChild(button);
+    });
+  }
+
+  function updateLockState() {
+    els.lockBtn.disabled = !state.selectedDistrict || !Number.isFinite(Number(state.selectedYear));
+  }
+
+  function eraForYear(year) {
+    const value = Number(year);
+    const era = ERAS.find((item) => value >= item.min && value <= item.max);
+    return era ? era.key : '';
+  }
+
+  function updateEraState() {
+    const selectedEra = eraForYear(state.selectedYear);
+    document.querySelectorAll('.rw-era-chip').forEach((button) => {
+      const selected = button.dataset.era === selectedEra;
+      button.classList.toggle('is-selected', selected);
+      button.setAttribute('aria-pressed', String(selected));
+    });
+  }
+
+  function yearPoints(guess, actual, tolerance) {
+    const diff = Math.abs(Number(guess) - Number(actual));
+    const effective = diff <= Number(tolerance || 0) ? 0 : diff;
+    return Math.max(0, 500 - 12 * effective);
+  }
+
+  function districtResult(guess, actual) {
+    if (guess === actual) return { label: 'correct', points: 500 };
+    const neighbors = (state.districtMap[actual] && state.districtMap[actual].neighbors) || [];
+    if (neighbors.includes(guess)) return { label: 'adjacent', points: 200 };
+    return { label: 'wrong', points: 0 };
+  }
+
+  function emojiForYear(diff) {
+    if (diff <= 5) return '🟩';
+    if (diff <= 15) return '🟨';
+    if (diff <= 30) return '🟧';
+    return '⬛';
+  }
+
+  function emojiForDistrict(result) {
+    if (result === 'correct') return '📍';
+    if (result === 'adjacent') return '🧭';
+    return '❌';
+  }
+
+  async function track(eventName, payload = {}, returnStats = false) {
+    if (!endpoint) return null;
+    const body = {
+      eventName,
+      eventDate: state.dayKey,
+      sessionId: state.sessionId,
+      visitorId: state.visitorId,
+      pagePath: window.location.pathname,
+      pageUrl: window.location.href,
+      parentPath: params.get('parent_path') || '',
+      parentUrl: params.get('parent_url') || '',
+      referrer: document.referrer || '',
+      utmSource: params.get('utm_source') || 'games',
+      utmMedium: params.get('utm_medium') || 'rewind',
+      utmCampaign: params.get('utm_campaign') || 'bw_rewind',
+      utmContent: params.get('utm_content') || '',
+      screenWidth: String(window.screen && window.screen.width || ''),
+      viewportWidth: String(window.innerWidth || ''),
+      payload,
+      returnStats,
+    };
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+        keepalive: !returnStats,
+      });
+      if (!returnStats || !response.ok) return null;
+      return await response.json();
+    } catch {
+      return null;
+    }
+  }
+
+  function renderStart() {
+    const streak = STREAK.read();
+    els.dayLabel.textContent = `Rewind ${state.dayKey}`;
+    els.theme.textContent = state.scheduleEntry.theme || 'Daily Berlin archive set';
+    els.nextTeaser.textContent = state.scheduleEntry.teaser || 'Tomorrow shifts to another Berlin layer.';
+    els.titlePreview.textContent = 'Berlin Time Machine if you hit 2700+.';
+    els.streakHead.textContent = `${streak.current} day${streak.current === 1 ? '' : 's'}`;
+    showScreen('start');
+  }
+
+  function currentPhoto() {
+    return state.scheduleEntry.ids[state.index];
+  }
+
+  function currentPhotoData() {
+    return state.photosById[currentPhoto()];
+  }
+
+  function renderPhoto() {
+    const photo = currentPhotoData();
+    els.photoFrame.classList.remove('is-revealed');
+    els.revealPanel.classList.remove('is-visible');
+    els.photo.src = photo.img;
+    els.photo.alt = `${photo.title}, Berlin historical archive photo`;
+    els.photoIndex.textContent = `#${state.index + 1} / ${state.scheduleEntry.ids.length}`;
+    els.credit.textContent = `Photo: ${photo.credit}`;
+    els.progressChip.textContent = `Frame ${state.index + 1} of ${state.scheduleEntry.ids.length}`;
+    els.scoreChip.textContent = `${state.score} / 3000`;
+    const streak = STREAK.read();
+    els.streakChip.textContent = `Streak ${streak.current}`;
+    els.countdownChip.textContent = state.scheduleEntry.theme || 'Berlin daily set';
+    state.selectedYear = 1963;
+    state.selectedDistrict = '';
+    els.yearRange.value = String(state.selectedYear);
+    els.yearBig.textContent = String(state.selectedYear);
+    [...els.districtGrid.querySelectorAll('.rw-district-btn')].forEach((node) => {
+      node.classList.remove('is-selected');
+      node.setAttribute('aria-pressed', 'false');
+    });
+    updateLockState();
+    showScreen('play');
+  }
+
+  function updateYear() {
+    state.selectedYear = Number(els.yearRange.value);
+    els.yearBig.textContent = String(state.selectedYear);
+    updateEraState();
+    updateLockState();
+  }
+
+  function averageText(stats) {
+    if (!stats || typeof stats.averageScore !== 'number') return 'Waiting for more players';
+    const count = Number(stats.playerCount || 0);
+    return `${Math.round(stats.averageScore)} average across ${count || 1} player${count === 1 ? '' : 's'}`;
+  }
+
+  async function lockGuess() {
+    const photo = currentPhotoData();
+    const yearPts = yearPoints(state.selectedYear, photo.year, photo.yearTolerance);
+    const yearDiff = Math.abs(state.selectedYear - photo.year);
+    const district = districtResult(state.selectedDistrict, photo.district);
+    const totalPts = yearPts + district.points;
+    const answer = {
+      photoId: photo.id,
+      photoTitle: photo.title,
+      guessYear: state.selectedYear,
+      actualYear: photo.year,
+      yearDiff,
+      yearPoints: yearPts,
+      districtGuess: state.selectedDistrict,
+      actualDistrict: photo.district,
+      districtResult: district.label,
+      districtPoints: district.points,
+      totalPoints: totalPts,
+      story: photo.story,
+      onTourRoute: Boolean(photo.onTourRoute),
+    };
+
+    state.answers.push(answer);
+    state.score += totalPts;
+    els.scoreChip.textContent = `${state.score} / 3000`;
+    els.photoFrame.classList.add('is-revealed');
+    els.revealPanel.classList.add('is-visible');
+    els.revealScore.textContent = `${totalPts} pts`;
+    els.revealTitle.textContent = photo.title;
+    els.revealYear.textContent = `${photo.year} · ${yearPts} pts`;
+    els.revealDistrict.textContent = `${state.districtMap[photo.district].label} · ${district.points} pts`;
+    els.revealGap.textContent = `${yearDiff} years · ${district.label}`;
+    els.revealStory.textContent = photo.story;
+    const statsResponse = await track('bw_berlin_rewind_photo_guess', {
+      dayKey: state.dayKey,
+      setId: `rewind-${state.dayKey}`,
+      photoId: photo.id,
+      photoIndex: state.index + 1,
+      guessYear: String(answer.guessYear),
+      actualYear: String(answer.actualYear),
+      yearDiff: String(answer.yearDiff),
+      yearPoints: String(answer.yearPoints),
+      districtGuess: answer.districtGuess,
+      actualDistrict: answer.actualDistrict,
+      districtResult: answer.districtResult,
+      districtPoints: String(answer.districtPoints),
+      totalScore: String(state.score),
+    }, true);
+    els.revealAverage.textContent = averageText(statsResponse && statsResponse.stats);
+    els.nextBtn.textContent = state.index + 1 >= state.scheduleEntry.ids.length ? "See today's result" : 'Next frame';
+  }
+
+  function buildEmojiGrid(result) {
+    return result.answers.map((answer) => `${emojiForYear(answer.yearDiff)}${emojiForDistrict(answer.districtResult)}`).join(' ');
+  }
+
+  function finalise() {
+    const streak = STREAK.touch(state.dayKey, { score: state.score });
+    const picked = pickTitle(state.score);
+    const result = {
+      dayKey: state.dayKey,
+      score: state.score,
+      title: picked.title,
+      lead: picked.lead,
+      streak: streak.current,
+      answers: state.answers.slice(),
+      emojiGrid: buildEmojiGrid({ answers: state.answers }),
+      teaser: state.scheduleEntry.teaser || 'Tomorrow shifts to another Berlin layer.',
+      onRouteCount: state.answers.filter((answer) => answer.onTourRoute).length,
+    };
+    state.result = result;
+    saveTodayResult(result);
+    track('bw_berlin_rewind_complete', {
+      dayKey: state.dayKey,
+      setId: `rewind-${state.dayKey}`,
+      totalScore: String(result.score),
+      title: result.title,
+      streak: String(result.streak),
+      emojiGrid: result.emojiGrid,
+    }, true);
+    renderResult(result);
+  }
+
+  function renderResult(result) {
+    els.finalTitle.textContent = result.title;
+    els.finalScore.textContent = `${result.score} / 3000`;
+    els.finalLead.textContent = result.lead;
+    els.finalTeaser.textContent = result.teaser;
+    els.finalStreak.textContent = `Streak ${result.streak}`;
+    els.routeBadge.textContent = result.onRouteCount
+      ? `${result.onRouteCount} of today's corners are on my route`
+      : 'No direct route overlap today';
+
+    els.summaryGrid.innerHTML = '';
+    result.answers.forEach((answer, index) => {
+      const row = document.createElement('div');
+      row.className = 'rw-summary-row';
+      row.innerHTML = `
+        <span>${emojiForYear(answer.yearDiff)}${emojiForDistrict(answer.districtResult)}</span>
+        <div>
+          <small>Frame ${index + 1}</small>
+          <div>${answer.photoTitle}</div>
+        </div>
+        <em>${answer.totalPoints} pts</em>
+      `;
+      els.summaryGrid.appendChild(row);
+    });
+
+    showScreen('result');
+  }
+
+  function copyText(text) {
+    return navigator.clipboard && navigator.clipboard.writeText
+      ? navigator.clipboard.writeText(text)
+      : Promise.reject(new Error('Clipboard unavailable'));
+  }
+
+  function shareText(result) {
+    return `Berlin Rewind ${result.dayKey}\n${result.emojiGrid} — ${result.score}/3000\n${result.title}\nberlinwalk.com/games/berlin-rewind`;
+  }
+
+  async function handleShare(kind) {
+    const result = state.result || readTodayResult();
+    if (!result) return;
+    const text = shareText(result);
+    if (kind === 'copy') {
+      try {
+        await copyText(text);
+        toast('Emoji grid copied.');
+        track('bw_berlin_rewind_share', { dayKey: state.dayKey, method: 'text' });
+      } catch {
+        toast('Copy failed on this device.');
+      }
+      return;
+    }
+
+    if (kind === 'download' && shareCard) {
+      const canvas = shareCard.createCard({
+        title: 'Berlin Rewind',
+        subtitle: result.dayKey,
+        score: `${result.score}/3000`,
+        meta: `${result.title} · Streak ${result.streak}`,
+        lines: result.answers.map((answer, index) => `#${index + 1} ${emojiForYear(answer.yearDiff)}${emojiForDistrict(answer.districtResult)}  ${answer.photoTitle}`),
+        footer: 'berlinwalk.com/games/berlin-rewind',
+        palette: {
+          background: '#FAFAF5',
+          panel: '#FFFFFF',
+          ink: '#212121',
+          muted: '#556155',
+          green: '#1B5E20',
+          yellow: '#FFE600',
+          lime: '#7CB342',
+        }
+      });
+      shareCard.download(canvas, `berlin-rewind-${result.dayKey}.png`);
+      toast('Share card downloaded.');
+      track('bw_berlin_rewind_share', { dayKey: state.dayKey, method: 'image' });
+    }
+  }
+
+  async function init() {
+    try {
+      const [photosResponse, districtsResponse, scheduleData] = await Promise.all([
+        fetch('./data/photos.json', { cache: 'no-store' }).then((response) => response.json()),
+        fetch('./data/districts.json', { cache: 'no-store' }).then((response) => response.json()),
+        daily.scheduleLoad('./data/schedule.json', { fallbackPool: [] }),
+      ]);
+
+      state.photosById = Object.fromEntries(photosResponse.map((photo) => [photo.id, photo]));
+      state.districtMap = districtsResponse.districts || {};
+      state.districtOrder = districtsResponse.order || Object.keys(state.districtMap);
+      const fallbackPool = photosResponse.map((photo) => photo.id);
+      const resolved = scheduleData.entry && scheduleData.entry.ids && scheduleData.entry.ids.length
+        ? scheduleData.entry
+        : (await daily.scheduleLoad('./data/schedule.json', { fallbackPool })).entry;
+      state.scheduleEntry = {
+        ids: resolved.ids || fallbackPool.slice(0, 3),
+        theme: resolved.theme || 'Daily Berlin archive set',
+        teaser: resolved.teaser || 'Tomorrow shifts to another Berlin layer.',
+      };
+
+      buildDistrictButtons();
+      updateYear();
+      renderStart();
+
+      const existing = readTodayResult();
+      if (existing) {
+        state.result = existing;
+        renderResult(existing);
+      } else {
+        track('bw_berlin_rewind_page_view', {
+          dayKey: state.dayKey,
+          setId: `rewind-${state.dayKey}`,
+          photoCount: String(state.scheduleEntry.ids.length),
+        });
+      }
+    } catch {
+      document.querySelector('[data-screen="loading"]').innerHTML = `
+        <span class="rw-kicker">Berlin Rewind</span>
+        <h2>Today's archive did not load</h2>
+        <p>The safest move is to refresh once. If it still fails, the set is not ready yet.</p>
+      `;
+      showScreen('loading');
+    }
+  }
+
+  document.querySelector('[data-action="start"]').addEventListener('click', () => {
+    track('bw_berlin_rewind_start', {
+      dayKey: state.dayKey,
+      setId: `rewind-${state.dayKey}`,
+    });
+    state.index = 0;
+    state.score = 0;
+    state.answers = [];
+    renderPhoto();
+  });
+
+  els.yearRange.addEventListener('input', updateYear);
+  document.querySelectorAll('.rw-era-chip').forEach((button) => {
+    button.addEventListener('click', () => {
+      const year = Number(button.dataset.year);
+      if (!Number.isFinite(year)) return;
+      els.yearRange.value = String(year);
+      updateYear();
+    });
+  });
+  els.lockBtn.addEventListener('click', lockGuess);
+  els.nextBtn.addEventListener('click', () => {
+    if (state.index + 1 >= state.scheduleEntry.ids.length) {
+      finalise();
+      return;
+    }
+    state.index += 1;
+    renderPhoto();
+  });
+  els.bookBtn.addEventListener('click', () => {
+    track('bw_berlin_rewind_booking_click', { dayKey: state.dayKey, setId: `rewind-${state.dayKey}` });
+  });
+  document.querySelectorAll('[data-share]').forEach((button) => {
+    button.addEventListener('click', () => handleShare(button.dataset.share));
+  });
+
+  init();
+})();
+</script>
+</body>
+</html>

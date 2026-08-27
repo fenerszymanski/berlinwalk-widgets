@@ -1,0 +1,272 @@
+{
+  "checkedOn": "26 August 2026",
+  "axis": {
+    "fromMinutes": 420,
+    "toMinutes": 1320
+  },
+  "markets": [
+    {
+      "id": "hackescher",
+      "name": "Hackescher Markt",
+      "district": "Mitte",
+      "station": "S Hackescher Markt",
+      "kind": "produce",
+      "hours": {
+        "thu": [
+          540,
+          1080
+        ],
+        "sat": [
+          600,
+          1080
+        ]
+      },
+      "line": "Brandenburg fruit and veg, cheese, fish rolls and lahmacun on the square right by the S-Bahn arches.",
+      "walk": "On the doorstep of the old centre, so it needs no separate trip."
+    },
+    {
+      "id": "winterfeldt",
+      "name": "Winterfeldtplatz",
+      "district": "Schöneberg",
+      "station": "U Nollendorfplatz",
+      "kind": "produce",
+      "hours": {
+        "wed": [
+          480,
+          840
+        ],
+        "sat": [
+          480,
+          960
+        ]
+      },
+      "line": "The biggest and best known weekly market in the city, and the one that feels like a Saturday event rather than an errand.",
+      "walk": "Saturday is the long day here; Wednesday packs up at 14:00."
+    },
+    {
+      "id": "maybachufer",
+      "name": "Maybachufer (Turkish market)",
+      "district": "Neukölln",
+      "station": "U Schönleinstraße",
+      "kind": "afternoon",
+      "hours": {
+        "tue": [
+          660,
+          1110
+        ],
+        "fri": [
+          660,
+          1110
+        ]
+      },
+      "line": "A canal-side row of fabric, herbs, olives, cheese and gözleme that only starts at 11:00 and runs into the evening.",
+      "walk": "The one market you can still reach after a long museum morning."
+    },
+    {
+      "id": "kollwitz-oeko",
+      "name": "Ökomarkt Kollwitzplatz",
+      "district": "Prenzlauer Berg",
+      "station": "U Senefelderplatz",
+      "kind": "organic",
+      "hours": {
+        "thu": [
+          720,
+          1140
+        ]
+      },
+      "line": "Around forty certified organic traders under the trees, run by the environmental group Grüne Liga since the late 1990s.",
+      "walk": "Closes an hour earlier, at 18:00, from January to March."
+    },
+    {
+      "id": "kollwitz-sat",
+      "name": "Kollwitzplatz Saturday market",
+      "district": "Prenzlauer Berg",
+      "station": "U Senefelderplatz",
+      "kind": "street-food",
+      "hours": {
+        "sat": [
+          630,
+          990
+        ]
+      },
+      "line": "The Saturday version is broader and much more about eating: currywurst, crepes, falafel, fish rolls, oysters.",
+      "walk": "Busiest around midday, calmer after 15:00."
+    },
+    {
+      "id": "boxhagener",
+      "name": "Boxhagener Platz",
+      "district": "Friedrichshain",
+      "station": "U Frankfurter Tor",
+      "kind": "produce",
+      "hours": {
+        "sat": [
+          540,
+          930
+        ]
+      },
+      "line": "Running since 1905 and the oldest weekly market in the eastern half of the city, wrapped around a green square.",
+      "walk": "Do not confuse it with the Sunday flea market on the same square."
+    },
+    {
+      "id": "karl-august",
+      "name": "Karl-August-Platz",
+      "district": "Charlottenburg",
+      "station": "U Wilmersdorfer Straße",
+      "kind": "produce",
+      "hours": {
+        "wed": [
+          480,
+          780
+        ],
+        "sat": [
+          480,
+          840
+        ]
+      },
+      "line": "Trading since 1894, with over a hundred stalls of produce, cheese, fresh pasta and cut flowers beside the church.",
+      "walk": "The west-side option if you are staying near Ku'damm."
+    },
+    {
+      "id": "arkonaplatz",
+      "name": "Arkonaplatz",
+      "district": "Mitte",
+      "station": "U Bernauer Straße",
+      "kind": "afternoon",
+      "hours": {
+        "fri": [
+          720,
+          1140
+        ]
+      },
+      "line": "Twenty-five to thirty-five traders, a lot of it organic, plus waffles and grilled fish next to a large playground.",
+      "walk": "A Friday afternoon market, not a morning one."
+    },
+    {
+      "id": "chamisso",
+      "name": "Ökomarkt Chamissoplatz",
+      "district": "Kreuzberg",
+      "station": "U Platz der Luftbrücke",
+      "kind": "organic",
+      "hours": {
+        "sat": [
+          540,
+          900
+        ]
+      },
+      "line": "A small organic market on one of the few Kreuzberg squares that kept its nineteenth-century facades intact.",
+      "walk": "Worth it as much for the square as for the stalls."
+    },
+    {
+      "id": "hohenstaufen",
+      "name": "Ökomarkt Hohenstaufenplatz",
+      "district": "Kreuzberg",
+      "station": "U Schönleinstraße",
+      "kind": "organic",
+      "hours": {
+        "tue": [
+          720,
+          1110
+        ],
+        "sat": [
+          540,
+          840
+        ]
+      },
+      "line": "Organic produce about ten minutes on foot from the Maybachufer, which makes a Tuesday double possible without a train.",
+      "walk": "Pairs with the Turkish market on a Tuesday."
+    },
+    {
+      "id": "suedstern",
+      "name": "Südstern",
+      "district": "Kreuzberg",
+      "station": "U Südstern",
+      "kind": "produce",
+      "hours": {
+        "sat": [
+          600,
+          960
+        ]
+      },
+      "line": "A calm neighbourhood Saturday market at the end of Bergmannstraße, good if the bigger squares feel too crowded.",
+      "walk": "Fifteen minutes on foot from Chamissoplatz along Bergmannstraße."
+    },
+    {
+      "id": "karl-marx-allee",
+      "name": "Karl-Marx-Allee",
+      "district": "Friedrichshain",
+      "station": "U Weberwiese",
+      "kind": "produce",
+      "hours": {
+        "tue": [
+          600,
+          960
+        ],
+        "thu": [
+          600,
+          960
+        ]
+      },
+      "line": "A modest market set against the Stalinist boulevard, which is the real reason to walk down here.",
+      "walk": "The only central market that runs on both midweek quiet days."
+    },
+    {
+      "id": "markthalle-neun",
+      "name": "Markthalle Neun",
+      "district": "Kreuzberg",
+      "station": "U Görlitzer Bahnhof",
+      "kind": "indoor",
+      "hours": {
+        "mon": [
+          720,
+          1080
+        ],
+        "tue": [
+          720,
+          1080
+        ],
+        "wed": [
+          720,
+          1080
+        ],
+        "thu": [
+          720,
+          1080
+        ],
+        "fri": [
+          720,
+          1080
+        ],
+        "sat": [
+          600,
+          1080
+        ]
+      },
+      "line": "An 1891 covered hall, so this is the one that works in rain and the only real option on a Monday.",
+      "walk": "Closed on Sundays like every other market in this list."
+    },
+    {
+      "id": "street-food-thursday",
+      "name": "Street Food Thursday",
+      "district": "Kreuzberg",
+      "station": "U Görlitzer Bahnhof",
+      "kind": "street-food",
+      "hours": {
+        "thu": [
+          1020,
+          1320
+        ]
+      },
+      "line": "The Thursday evening cook-up inside Markthalle Neun, and the latest market hours in the city.",
+      "walk": "Starts as the daytime traders pack down."
+    }
+  ],
+  "dayNotes": {
+    "mon": "Monday is the empty day. One covered hall is trading and nothing else on this list is.",
+    "tue": "A quiet day that turns good after 11:00, when the two Neukölln and Kreuzberg markets open.",
+    "wed": "The classic Berlin market morning. Both big squares shut early in the afternoon.",
+    "thu": "The best spread of the week, and the only day that runs from noon to 22:00 without a gap.",
+    "fri": "A late-start day. Nothing here opens before 11:00, so a slow morning costs you nothing.",
+    "sat": "Peak market day. Nine markets, all of them shut by 18:00.",
+    "sun": "No weekly food market in Berlin trades on a Sunday. Sunday belongs to the flea markets instead."
+  }
+}

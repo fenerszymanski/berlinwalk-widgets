@@ -1,0 +1,873 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Mobility App Picker | BerlinWalk</title>
+  <meta name="description" content="Choose the right Berlin mobility app or transport mode: Jelbi, BVG, bike sharing, scooters, MILES car sharing or taxi apps.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-mobility-picker">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-mobility-picker {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-light: #C5E1A5;
+      --bw-cream: #FAFAF5;
+      --bw-white: #FFFFFF;
+      --bw-text: #212121;
+      --bw-muted: #526052;
+      --bw-border: #D9E7C8;
+      --bw-red: #E63946;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 22px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-mobility-picker *,
+    #bw-mobility-picker *::before,
+    #bw-mobility-picker *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-mobility-picker h2,
+    #bw-mobility-picker h3,
+    #bw-mobility-picker h4,
+    #bw-mobility-picker p {
+      margin-top: 0;
+    }
+
+    #bw-mobility-picker .bw-shell {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.07);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-mobility-picker .bw-hero {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.16), rgba(124, 179, 66, 0.2)),
+        var(--bw-green);
+      color: var(--bw-white);
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(0, 1.15fr) minmax(240px, 0.85fr);
+      padding: 22px;
+    }
+
+    #bw-mobility-picker .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.4px;
+      line-height: 1.2;
+      margin: 0 0 8px;
+      text-transform: uppercase;
+    }
+
+    #bw-mobility-picker .bw-title {
+      color: var(--bw-white);
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.08;
+      margin: 0;
+    }
+
+    #bw-mobility-picker .bw-sub {
+      color: #E8F4D7;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 10px 0 0;
+      max-width: 780px;
+    }
+
+    #bw-mobility-picker .bw-status-card {
+      align-self: stretch;
+      background: rgba(250, 250, 245, 0.97);
+      border: 1px solid rgba(255, 230, 0, 0.36);
+      border-radius: 8px;
+      color: var(--bw-text);
+      display: grid;
+      gap: 9px;
+      padding: 14px;
+    }
+
+    #bw-mobility-picker .bw-status-card strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 14.5px;
+      font-weight: 950;
+      line-height: 1.25;
+    }
+
+    #bw-mobility-picker .bw-status-card span {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.45;
+    }
+
+    #bw-mobility-picker .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      padding: 18px 20px 20px;
+    }
+
+    #bw-mobility-picker .bw-panel,
+    #bw-mobility-picker .bw-result,
+    #bw-mobility-picker .bw-map,
+    #bw-mobility-picker .bw-links {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    #bw-mobility-picker .bw-panel {
+      display: grid;
+      gap: 16px;
+      padding: 16px;
+    }
+
+    #bw-mobility-picker .bw-fieldset {
+      border: 0;
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      min-width: 0;
+      padding: 0;
+    }
+
+    #bw-mobility-picker .bw-label {
+      color: var(--bw-green);
+      font-size: 12px;
+      font-weight: 950;
+      line-height: 1.2;
+    }
+
+    #bw-mobility-picker .bw-choice-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-mobility-picker .bw-choice {
+      appearance: none;
+      background: #F6FAEF;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.25;
+      min-height: 48px;
+      padding: 10px 8px;
+      text-align: center;
+      transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease, color 160ms ease;
+    }
+
+    #bw-mobility-picker .bw-choice:hover {
+      border-color: var(--bw-lime);
+      box-shadow: 0 0 0 3px rgba(124, 179, 66, 0.14);
+    }
+
+    #bw-mobility-picker .bw-choice[aria-pressed="true"] {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+      color: var(--bw-white);
+    }
+
+    #bw-mobility-picker .bw-row {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-mobility-picker .bw-select,
+    #bw-mobility-picker .bw-range-wrap {
+      background: #F9FCF4;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 10px;
+    }
+
+    #bw-mobility-picker select {
+      appearance: none;
+      background: var(--bw-white);
+      border: 1px solid #C8DDB4;
+      border-radius: 7px;
+      color: var(--bw-text);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 850;
+      line-height: 1.3;
+      min-height: 42px;
+      padding: 8px 32px 8px 10px;
+      width: 100%;
+    }
+
+    #bw-mobility-picker .bw-select-inner {
+      position: relative;
+    }
+
+    #bw-mobility-picker .bw-select-inner::after {
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid var(--bw-green);
+      content: "";
+      pointer-events: none;
+      position: absolute;
+      right: 12px;
+      top: 18px;
+    }
+
+    #bw-mobility-picker input[type="range"] {
+      accent-color: var(--bw-green);
+      width: 100%;
+    }
+
+    #bw-mobility-picker .bw-range-meta {
+      align-items: center;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    #bw-mobility-picker .bw-range-value {
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      color: var(--bw-green);
+      font-size: 12px;
+      font-weight: 950;
+      line-height: 1;
+      min-width: 62px;
+      padding: 7px 9px;
+      text-align: center;
+    }
+
+    #bw-mobility-picker .bw-result {
+      display: grid;
+      gap: 0;
+    }
+
+    #bw-mobility-picker .bw-result-head {
+      background: #F6FAEF;
+      border-bottom: 1px solid var(--bw-border);
+      display: grid;
+      gap: 7px;
+      padding: 15px;
+    }
+
+    #bw-mobility-picker .bw-result-head span {
+      color: var(--bw-muted);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    #bw-mobility-picker .bw-result-head h3 {
+      color: var(--bw-green);
+      font-size: 23px;
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    #bw-mobility-picker .bw-result-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: minmax(0, 1fr) minmax(230px, 0.68fr);
+      padding: 15px;
+    }
+
+    #bw-mobility-picker .bw-verdict {
+      color: var(--bw-text);
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    #bw-mobility-picker .bw-app-stack {
+      display: grid;
+      gap: 8px;
+    }
+
+    #bw-mobility-picker .bw-app {
+      background: var(--bw-green);
+      border-radius: 8px;
+      color: var(--bw-white);
+      min-width: 0;
+      padding: 11px 12px;
+    }
+
+    #bw-mobility-picker .bw-app small,
+    #bw-mobility-picker .bw-chip small {
+      display: block;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.7px;
+      line-height: 1.2;
+      opacity: 0.78;
+      text-transform: uppercase;
+    }
+
+    #bw-mobility-picker .bw-app strong,
+    #bw-mobility-picker .bw-chip strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 950;
+      line-height: 1.2;
+      margin-top: 3px;
+    }
+
+    #bw-mobility-picker .bw-chips {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      padding: 0 15px 15px;
+    }
+
+    #bw-mobility-picker .bw-chip {
+      background: #F9FCF4;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      min-height: 74px;
+      padding: 10px;
+    }
+
+    #bw-mobility-picker .bw-chip small {
+      color: var(--bw-muted);
+    }
+
+    #bw-mobility-picker .bw-chip strong {
+      color: var(--bw-green);
+    }
+
+    #bw-mobility-picker .bw-map {
+      display: grid;
+      gap: 0;
+    }
+
+    #bw-mobility-picker .bw-map-head,
+    #bw-mobility-picker .bw-links-head {
+      align-items: center;
+      border-bottom: 1px solid var(--bw-border);
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      padding: 14px 15px;
+    }
+
+    #bw-mobility-picker .bw-map-head h3,
+    #bw-mobility-picker .bw-links-head h3 {
+      color: var(--bw-green);
+      font-size: 18px;
+      font-weight: 950;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    #bw-mobility-picker .bw-map-head span,
+    #bw-mobility-picker .bw-links-head span {
+      color: var(--bw-muted);
+      font-size: 11px;
+      font-weight: 850;
+      line-height: 1.3;
+      text-align: right;
+    }
+
+    #bw-mobility-picker .bw-map-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      padding: 14px;
+    }
+
+    #bw-mobility-picker .bw-zone {
+      background: linear-gradient(180deg, #FFFFFF, #F7FBF0);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-height: 142px;
+      padding: 11px;
+      position: relative;
+    }
+
+    #bw-mobility-picker .bw-zone::before {
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      content: "";
+      height: 8px;
+      left: 11px;
+      position: absolute;
+      right: 11px;
+      top: 11px;
+    }
+
+    #bw-mobility-picker .bw-zone h4 {
+      color: var(--bw-green);
+      font-size: 13px;
+      font-weight: 950;
+      line-height: 1.2;
+      margin: 17px 0 7px;
+    }
+
+    #bw-mobility-picker .bw-zone p {
+      color: var(--bw-muted);
+      font-size: 11.5px;
+      font-weight: 700;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    #bw-mobility-picker .bw-zone[data-kind="avoid"]::before {
+      background: var(--bw-red);
+    }
+
+    #bw-mobility-picker .bw-link-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      padding: 14px;
+    }
+
+    #bw-mobility-picker .bw-link {
+      align-items: center;
+      background: #F6FAEF;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-green);
+      display: flex;
+      font-size: 12.5px;
+      font-weight: 950;
+      justify-content: space-between;
+      line-height: 1.25;
+      min-height: 50px;
+      padding: 10px;
+      text-decoration: none;
+    }
+
+    #bw-mobility-picker .bw-link:hover {
+      background: var(--bw-yellow);
+      border-color: var(--bw-yellow);
+    }
+
+    #bw-mobility-picker .bw-note {
+      color: var(--bw-muted);
+      font-size: 11.5px;
+      font-weight: 750;
+      line-height: 1.5;
+      margin: -4px 14px 14px;
+    }
+
+    @media (max-width: 760px) {
+      #bw-mobility-picker {
+        margin: 16px 0;
+      }
+
+      #bw-mobility-picker .bw-hero,
+      #bw-mobility-picker .bw-result-grid,
+      #bw-mobility-picker .bw-row {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-mobility-picker .bw-title {
+        font-size: 25px;
+      }
+
+      #bw-mobility-picker .bw-body {
+        padding: 14px;
+      }
+
+      #bw-mobility-picker .bw-choice-grid,
+      #bw-mobility-picker .bw-chips,
+      #bw-mobility-picker .bw-link-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-mobility-picker .bw-map-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 430px) {
+      #bw-mobility-picker .bw-hero {
+        padding: 18px;
+      }
+
+      #bw-mobility-picker .bw-title {
+        font-size: 22px;
+      }
+
+      #bw-mobility-picker .bw-map-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <section class="bw-shell" aria-label="Berlin Mobility App Picker">
+    <div class="bw-hero">
+      <div>
+        <p class="bw-kicker">BERLINWALK.COM - TRANSPORT TOOL</p>
+        <h2 class="bw-title">Berlin Mobility App Picker</h2>
+        <p class="bw-sub">Choose between BVG/Jelbi, bike sharing, e-scooters, MILES-style car sharing and taxi apps before opening five maps at once.</p>
+      </div>
+      <div class="bw-status-card" aria-live="polite">
+        <strong id="bwMiniMode">Best first move: BVG or Jelbi</strong>
+        <span id="bwMiniReason">Set your trip below and the picker will narrow the first app, backup and red flag.</span>
+      </div>
+    </div>
+
+    <div class="bw-body">
+      <form class="bw-panel">
+        <fieldset class="bw-fieldset" aria-label="Trip situation">
+          <legend class="bw-label">Trip situation</legend>
+          <div class="bw-choice-grid" role="group" aria-label="Trip type">
+            <button class="bw-choice" type="button" data-scenario="central" aria-pressed="true">Central sights</button>
+            <button class="bw-choice" type="button" data-scenario="lastmile" aria-pressed="false">Last kilometre</button>
+            <button class="bw-choice" type="button" data-scenario="late" aria-pressed="false">Late night</button>
+            <button class="bw-choice" type="button" data-scenario="luggage" aria-pressed="false">Luggage</button>
+            <button class="bw-choice" type="button" data-scenario="outer" aria-pressed="false">Outer trip</button>
+            <button class="bw-choice" type="button" data-scenario="leisure" aria-pressed="false">Sunny ride</button>
+          </div>
+        </fieldset>
+
+        <div class="bw-row">
+          <label class="bw-range-wrap">
+            <span class="bw-range-meta">
+              <span class="bw-label">Distance</span>
+              <span class="bw-range-value" id="bwDistanceValue">3 km</span>
+            </span>
+            <input id="bwDistance" type="range" min="1" max="18" value="3">
+          </label>
+
+          <label class="bw-select">
+            <span class="bw-label">Group and bags</span>
+            <span class="bw-select-inner">
+              <select id="bwLoad">
+                <option value="light">1-2 people, no luggage</option>
+                <option value="group">3-4 people, light bags</option>
+                <option value="bags">Suitcases or bulky items</option>
+                <option value="family">Kids or nervous rider</option>
+              </select>
+            </span>
+          </label>
+        </div>
+
+        <div class="bw-row">
+          <label class="bw-select">
+            <span class="bw-label">Weather and street comfort</span>
+            <span class="bw-select-inner">
+              <select id="bwComfort">
+                <option value="confident">Dry and confident riding</option>
+                <option value="cautious">Dry but cautious</option>
+                <option value="rain">Rain, dark or icy</option>
+                <option value="noRide">I do not want to ride</option>
+              </select>
+            </span>
+          </label>
+
+          <label class="bw-select">
+            <span class="bw-label">Driving status</span>
+            <span class="bw-select-inner">
+              <select id="bwLicense">
+                <option value="none">No car plan</option>
+                <option value="licensed">Licensed and confident</option>
+                <option value="unsure">Licensed but unsure in Berlin</option>
+              </select>
+            </span>
+          </label>
+        </div>
+      </form>
+
+      <section class="bw-result" aria-live="polite">
+        <div class="bw-result-head">
+          <span>Recommended first choice</span>
+          <h3 id="bwRecommendation">BVG or Jelbi first</h3>
+        </div>
+        <div class="bw-result-grid">
+          <p class="bw-verdict" id="bwVerdict">For central Berlin sights, public transport or walking usually beats every novelty option. Use Jelbi or BVG to map the route, then add a bike or taxi only if it clearly solves a problem.</p>
+          <div class="bw-app-stack">
+            <div class="bw-app">
+              <small>First app</small>
+              <strong id="bwFirstApp">BVG or Jelbi</strong>
+            </div>
+            <div class="bw-app">
+              <small>Backup</small>
+              <strong id="bwBackup">Walk, taxi or bike</strong>
+            </div>
+          </div>
+        </div>
+        <div class="bw-chips">
+          <div class="bw-chip">
+            <small>Good for</small>
+            <strong id="bwGoodFor">Sightseeing hops</strong>
+          </div>
+          <div class="bw-chip">
+            <small>Avoid when</small>
+            <strong id="bwAvoid">The trip is under 10 min on foot</strong>
+          </div>
+          <div class="bw-chip">
+            <small>Red flag</small>
+            <strong id="bwRedFlag">Choosing a car for central stops</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="bw-map">
+        <div class="bw-map-head">
+          <h3>Berlin Mobility Map Logic</h3>
+          <span>Use the zone, then the vehicle</span>
+        </div>
+        <div class="bw-map-grid">
+          <div class="bw-zone">
+            <h4>Central core</h4>
+            <p>Walk, U-Bahn, S-Bahn, tram and bus are usually the cleanest answer around Alexanderplatz, Museum Island, Hackescher Markt and Brandenburg Gate.</p>
+          </div>
+          <div class="bw-zone">
+            <h4>Station edge</h4>
+            <p>Jelbi hubs and nearby shared vehicles are useful for the last kilometre after the main train leg.</p>
+          </div>
+          <div class="bw-zone">
+            <h4>Outer trips</h4>
+            <p>Check public transport first. Car sharing helps only when driving and ending the rental are clearly easy.</p>
+          </div>
+          <div class="bw-zone" data-kind="avoid">
+            <h4>No-go shortcut</h4>
+            <p>No e-scooters on sidewalks or pedestrian zones. If that is the only route that feels safe, choose another mode.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="bw-links">
+        <div class="bw-links-head">
+          <h3>Useful Official Links</h3>
+          <span>Check live rules and availability</span>
+        </div>
+        <div class="bw-link-grid">
+          <a class="bw-link" href="https://www.bvg.de/en/connections/connection-search" target="_blank" rel="noopener">BVG route planner <span>-></span></a>
+          <a class="bw-link" href="https://www.jelbi.de/en/mobility-partners/" target="_blank" rel="noopener">Jelbi partners <span>-></span></a>
+          <a class="bw-link" href="https://support.miles-mobility.com/hc/en-us/articles/4408702259730-Berlin" target="_blank" rel="noopener">MILES Berlin <span>-></span></a>
+          <a class="bw-link" href="https://www.berlin.de/en/getting-around/electric-scooter-sharing/" target="_blank" rel="noopener">Scooter overview <span>-></span></a>
+          <a class="bw-link" href="https://www.berlin.de/en/getting-around/bikesharing/" target="_blank" rel="noopener">Bike sharing <span>-></span></a>
+          <a class="bw-link" href="https://www.berlinwalk.com/tools/berlin-taxi-uber-cost-checker" target="_blank" rel="noopener">Taxi checker <span>-></span></a>
+        </div>
+        <p class="bw-note">Provider prices, operating areas and vehicle availability change. Use this picker for the decision, then confirm the exact route and quote inside the official app.</p>
+      </section>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var root = document.getElementById('bw-mobility-picker');
+      var scenario = 'central';
+      var distance = root.querySelector('#bwDistance');
+      var distanceValue = root.querySelector('#bwDistanceValue');
+      var load = root.querySelector('#bwLoad');
+      var comfort = root.querySelector('#bwComfort');
+      var license = root.querySelector('#bwLicense');
+      var fields = [distance, load, comfort, license];
+
+      var recommendation = root.querySelector('#bwRecommendation');
+      var verdict = root.querySelector('#bwVerdict');
+      var firstApp = root.querySelector('#bwFirstApp');
+      var backup = root.querySelector('#bwBackup');
+      var goodFor = root.querySelector('#bwGoodFor');
+      var avoid = root.querySelector('#bwAvoid');
+      var redFlag = root.querySelector('#bwRedFlag');
+      var miniMode = root.querySelector('#bwMiniMode');
+      var miniReason = root.querySelector('#bwMiniReason');
+
+      function setScenario(next) {
+        scenario = next;
+        root.querySelectorAll('.bw-choice').forEach(function (button) {
+          button.setAttribute('aria-pressed', button.dataset.scenario === scenario ? 'true' : 'false');
+        });
+        update();
+      }
+
+      function buildResult() {
+        var km = Number(distance.value);
+        var loadValue = load.value;
+        var comfortValue = comfort.value;
+        var licenseValue = license.value;
+        var hasBags = loadValue === 'bags';
+        var isFamily = loadValue === 'family';
+        var isGroup = loadValue === 'group';
+        var noRide = comfortValue === 'noRide' || comfortValue === 'rain' || isFamily || hasBags;
+        var canDrive = licenseValue === 'licensed';
+        var nervousDrive = licenseValue === 'unsure';
+
+        if (scenario === 'late') {
+          return {
+            title: 'Taxi app or night transport',
+            verdict: hasBags || isGroup || comfortValue === 'rain'
+              ? 'Late, wet, tired or luggage-heavy Berlin trips are where a taxi app earns its place. Check public transport first, then choose a taxi if the route has long waits or awkward transfers.'
+              : 'At night, check BVG or Jelbi first. Weekend rail can be very usable, but a taxi is sensible when the final walk or transfer feels weak.',
+            first: 'BVG, Jelbi or taxi app',
+            backup: 'Berlin Taxi or Uber checker',
+            good: 'Late returns',
+            avoidText: 'Scooter after drinks',
+            red: 'Forcing a long night-bus chain while exhausted'
+          };
+        }
+
+        if (scenario === 'luggage' || hasBags) {
+          return {
+            title: 'Taxi, train or planned car share',
+            verdict: 'Suitcases change the whole decision. Use the train when the station route is simple, a taxi when door-to-door comfort matters, and MILES only when you actually want to drive and end the rental legally.',
+            first: 'BVG/Jelbi plus taxi app',
+            backup: canDrive ? 'MILES if parking is clear' : 'Taxi rank or Uber Taxi',
+            good: 'Airport, station, bulky bags',
+            avoidText: 'Scooters and bikes',
+            red: nervousDrive ? 'Driving nervous with luggage' : 'Dragging bags through a last-mile ride'
+          };
+        }
+
+        if (scenario === 'outer') {
+          if (canDrive && km >= 8) {
+            return {
+              title: 'Public transport, then MILES if useful',
+              verdict: 'For outer trips, map public transport first. Car sharing becomes interesting only when the car removes a real problem and the app confirms the business area and legal parking.',
+              first: 'BVG/Jelbi route planner',
+              backup: 'MILES or SIXT share',
+              good: 'Planned errands or edge routes',
+              avoidText: 'Central sightseeing by car',
+              red: 'Ending the rental outside the allowed area'
+            };
+          }
+          return {
+            title: 'Public transport first',
+            verdict: 'Outer Berlin is often better by S-Bahn, U-Bahn, tram or regional connection than by shared car. Add taxi for the final awkward stretch if needed.',
+            first: 'BVG or VBB route search',
+            backup: 'Taxi for final leg',
+            good: 'Longer city crossings',
+            avoidText: 'Unverified car-share plan',
+            red: 'Assuming every car can be dropped anywhere'
+          };
+        }
+
+        if (scenario === 'leisure' && !noRide) {
+          return {
+            title: 'Bike or e-bike',
+            verdict: 'For a sunny Berlin ride without luggage, a bike or e-bike is usually better than a scooter. It turns the route into part of the day instead of a tiny transfer.',
+            first: 'Jelbi, Nextbike, Lime or Bolt',
+            backup: 'BVG if traffic feels too much',
+            good: '2-5 km neighborhood rides',
+            avoidText: 'Wet roads or stress traffic',
+            red: 'Riding where you only feel safe on the sidewalk'
+          };
+        }
+
+        if (scenario === 'lastmile' || (scenario !== 'central' && km <= 3 && !noRide)) {
+          return {
+            title: km <= 2 ? 'Walk, bike or short scooter' : 'Bike, scooter or Jelbi',
+            verdict: km <= 2
+              ? 'For a tiny gap, walking often wins once you include unlocking, parking and app friction. Use a scooter only when the legal route is obvious.'
+              : 'For a clean last kilometre or two from a station, Jelbi is useful. A bike is steadier; a scooter is only for simple, dry, solo routes.',
+            first: 'Jelbi station map',
+            backup: 'Walk or BVG',
+            good: 'Station-to-hotel gaps',
+            avoidText: 'Suitcases and sidewalks',
+            red: 'Parking in the way of pedestrians'
+          };
+        }
+
+        if (noRide) {
+          return {
+            title: 'BVG/Jelbi or taxi',
+            verdict: 'If the weather is poor, you have kids, or you do not want to ride, skip the micromobility temptation. Public transport plus a taxi backup is the calmer Berlin answer.',
+            first: 'BVG or Jelbi',
+            backup: 'Taxi app',
+            good: 'Comfort-first trips',
+            avoidText: 'Scooters, bikes, mopeds',
+            red: 'Choosing a vehicle you do not actually want to ride'
+          };
+        }
+
+        if (km >= 6 && canDrive && scenario !== 'central') {
+          return {
+            title: 'BVG first, car share only if it wins',
+            verdict: 'A longer trip does not automatically need a car. Compare the route first; use MILES only if driving, parking and ending the rental all make sense.',
+            first: 'BVG or Jelbi',
+            backup: 'MILES if the app confirms parking',
+            good: 'Planned cross-city needs',
+            avoidText: 'Dense central stops',
+            red: 'Treating car sharing like a taxi'
+          };
+        }
+
+        return {
+          title: 'BVG or Jelbi first',
+          verdict: 'For central Berlin sights, public transport or walking usually beats every novelty option. Use Jelbi or BVG to map the route, then add a bike or taxi only if it clearly solves a problem.',
+          first: 'BVG or Jelbi',
+          backup: isGroup ? 'Taxi if splitting fare helps' : 'Walk, taxi or bike',
+          good: 'Sightseeing hops',
+          avoidText: 'Car sharing for central stops',
+          red: 'Downloading an app before checking the actual route'
+        };
+      }
+
+      function update() {
+        distanceValue.textContent = distance.value + ' km';
+        var result = buildResult();
+        recommendation.textContent = result.title;
+        verdict.textContent = result.verdict;
+        firstApp.textContent = result.first;
+        backup.textContent = result.backup;
+        goodFor.textContent = result.good;
+        avoid.textContent = result.avoidText;
+        redFlag.textContent = result.red;
+        miniMode.textContent = 'Best first move: ' + result.first;
+        miniReason.textContent = result.good + ' - avoid: ' + result.avoidText + '.';
+      }
+
+      root.querySelectorAll('.bw-choice').forEach(function (button) {
+        button.addEventListener('click', function () {
+          setScenario(button.dataset.scenario);
+        });
+      });
+
+      fields.forEach(function (field) {
+        field.addEventListener('input', update);
+        field.addEventListener('change', update);
+      });
+
+      update();
+    })();
+  </script>
+</div>
+</body>
+</html>

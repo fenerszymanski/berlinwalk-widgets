@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en" data-bw-component="quick-summary">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BerlinWalk Quick Summary</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+    }
+
+    body {
+      font-family: Montserrat, Arial, sans-serif;
+      color: #212121;
+    }
+
+    .bw-quick,
+    .bw-quick * {
+      box-sizing: border-box;
+    }
+
+    .bw-quick {
+      --green: #1B5E20;
+      --deep: #123D18;
+      --night: #102414;
+      --yellow: #FFE600;
+      --cream: #F5F5F0;
+      --border: #DDE4D6;
+      --line: #E4E9DF;
+      --lime: #C5E1A5;
+      --muted: #5C665A;
+      width: 100%;
+      max-width: 820px;
+      margin: 0 auto;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    /* Redesign C is explicitly passed from the parent post enhancer. The old
+       Quick Summary remains byte-for-byte styled for ordinary post views. */
+    body.bw-redesign-c .bw-quick {
+      max-width: none;
+      border: 1px solid #DDE4D6;
+      border-radius: 0;
+      background: #fff;
+    }
+    body.bw-redesign-c .bw-quick-header,
+    body.bw-redesign-c .bw-footer { display: none; }
+    body.bw-redesign-c .bw-quick.bw-c-tiles .bw-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: 0; }
+    body.bw-redesign-c .bw-quick.bw-c-tiles .bw-item { display: block; min-height: 0; padding: 26px 26px 24px; border: 0; border-right: 1px solid #DDE4D6; }
+    body.bw-redesign-c .bw-quick.bw-c-tiles .bw-item:last-child { border-right: 0; }
+    body.bw-redesign-c .bw-quick.bw-c-tiles .bw-number { align-items: initial; background: transparent; border-radius: 0; color: #5C665A; display: block; font: 500 10.5px/1 "IBM Plex Mono", monospace; height: auto; justify-content: initial; letter-spacing: .18em; margin: 0 0 10px; min-width: 0; text-align: left; width: auto; }
+    body.bw-redesign-c .bw-quick.bw-c-tiles .bw-text { color: #5C665A; font: 400 12.5px/1.55 Merriweather, Georgia, serif; text-align: left; }
+    body.bw-redesign-c .bw-quick.bw-c-tiles .bw-text strong { color: #123D18; display: block; font: 800 20px/1.15 Montserrat, Arial, sans-serif; margin: 0 0 6px; }
+    .bw-quick.bw-engagement-utility .bw-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0;
+      padding: 0;
+    }
+    .bw-quick.bw-engagement-utility .bw-pilot-jump {
+      align-items: flex-start;
+      appearance: none;
+      background: #fff;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      color: var(--deep);
+      cursor: pointer;
+      display: grid;
+      font: inherit;
+      gap: 11px;
+      grid-template-columns: 28px 1fr auto;
+      min-height: 92px;
+      padding: 19px 18px;
+      text-align: left;
+      width: 100%;
+    }
+    .bw-quick.bw-engagement-utility .bw-pilot-jump:nth-child(2n) { border-right: 0; }
+    .bw-quick.bw-engagement-utility .bw-pilot-jump:nth-last-child(-n + 2) { border-bottom: 0; }
+    .bw-quick.bw-engagement-utility .bw-pilot-jump:hover { background: #F7F9F4; }
+    .bw-quick.bw-engagement-utility .bw-pilot-jump:focus-visible {
+      box-shadow: inset 0 0 0 3px #1B5E20;
+      outline: 3px solid #FFE600;
+      outline-offset: -5px;
+    }
+    .bw-pilot-jump__number {
+      color: #5C665A;
+      font: 600 10.5px/1.2 "IBM Plex Mono", monospace;
+      letter-spacing: .12em;
+      padding-top: 2px;
+    }
+    .bw-pilot-jump__label {
+      color: #123D18;
+      font: 800 15px/1.3 Montserrat, Arial, sans-serif;
+    }
+    .bw-pilot-jump__arrow {
+      color: #1B5E20;
+      font: 800 18px/1 Montserrat, Arial, sans-serif;
+    }
+    @media (max-width: 640px) {
+      body.bw-redesign-c .bw-quick.bw-c-tiles .bw-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      body.bw-redesign-c .bw-quick.bw-c-tiles .bw-item { min-height: 0; padding: 20px 18px; border-bottom: 1px solid #DDE4D6; }
+      body.bw-redesign-c .bw-quick.bw-c-tiles .bw-item:nth-child(2n) { border-right: 0; }
+    }
+
+    .bw-quick-header {
+      background: var(--night);
+      background-image:
+        linear-gradient(rgba(250, 250, 245, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(250, 250, 245, 0.05) 1px, transparent 1px);
+      background-size: 34px 34px;
+      padding: 16px 20px;
+    }
+
+    .bw-heading-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* The redesign header leads with the mono kicker, so the emoji icon box
+       from the old green card is retired. The node stays for config parity. */
+    .bw-icon {
+      display: none;
+    }
+
+    .bw-heading-row > div:not(.bw-icon) {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+
+    .bw-title {
+      margin: 0;
+      color: #fff;
+      font-size: 17px;
+      line-height: 1.25;
+      font-weight: 800;
+    }
+
+    .bw-kicker {
+      margin: 0 0 7px;
+      color: var(--lime);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .bw-audio {
+      display: none;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .bw-audio.is-visible {
+      display: block;
+    }
+
+    .bw-audio-label {
+      margin: 0 0 9px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .bw-audio audio {
+      width: 100%;
+      height: 40px;
+      display: block;
+    }
+
+    .bw-list {
+      padding: 8px 20px 6px;
+    }
+
+    .bw-item {
+      display: flex;
+      gap: 12px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--line);
+      align-items: flex-start;
+    }
+
+    .bw-item:last-child {
+      border-bottom: 0;
+    }
+
+    .bw-number {
+      width: 26px;
+      height: 26px;
+      min-width: 26px;
+      border-radius: 50%;
+      background: var(--deep);
+      color: var(--yellow);
+      font-size: 13px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    .bw-text {
+      color: #212121;
+      font-family: Merriweather, Georgia, serif;
+      font-size: 15.5px;
+      line-height: 1.6;
+    }
+
+    .bw-text strong {
+      color: var(--deep);
+      font-weight: 700;
+    }
+
+    .bw-footer {
+      background: #fff;
+      border-top: 1px solid var(--line);
+      padding: 10px 20px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .bw-badge {
+      background: transparent;
+      color: var(--muted);
+      padding: 0;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    /* Framed with no data for this slug: render nothing at all. A developer
+       message must never reach a reader inside a post. The 1px spacer keeps
+       brand.js reporting a height (it ignores 0), so the Wix block collapses
+       instead of holding its first-paint reserve. */
+    body.bw-silent > *:not(.bw-silent-spacer) {
+      display: none !important;
+      margin: 0 !important;
+    }
+
+    .bw-silent-spacer {
+      height: 1px;
+    }
+
+    .bw-empty {
+      padding: 16px;
+      color: #4E5A4E;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 600px) {
+      .bw-quick {
+        border-radius: 12px;
+      }
+
+      .bw-quick-header {
+        padding: 13px 16px;
+      }
+
+      .bw-heading-row {
+        gap: 10px;
+      }
+
+      .bw-title {
+        font-size: 15.5px;
+      }
+
+      .bw-kicker {
+        font-size: 9.5px;
+        letter-spacing: 0.16em;
+        margin-bottom: 6px;
+      }
+
+      .bw-audio {
+        margin-top: 11px;
+        padding-top: 11px;
+      }
+
+      .bw-audio-label {
+        font-size: 13px;
+        margin-bottom: 7px;
+      }
+
+      .bw-list {
+        padding: 5px 16px;
+      }
+
+      .bw-item {
+        gap: 10px;
+        padding: 11px 0;
+      }
+
+      .bw-number {
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+        font-size: 12px;
+      }
+
+      .bw-text {
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .bw-footer {
+        padding: 9px 16px;
+      }
+
+      .bw-badge {
+        font-size: 9.5px;
+      }
+
+      .bw-quick.bw-engagement-utility .bw-list { grid-template-columns: 1fr; }
+      .bw-quick.bw-engagement-utility .bw-pilot-jump {
+        border-right: 0;
+        min-height: 0;
+        padding: 16px;
+      }
+      .bw-quick.bw-engagement-utility .bw-pilot-jump:nth-last-child(2) { border-bottom: 1px solid var(--line); }
+      .bw-quick.bw-engagement-utility .bw-pilot-jump__label { font-size: 14px; }
+    }
+  </style>
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+  <section class="bw-quick" aria-label="Quick summary">
+    <div class="bw-quick-header">
+      <div class="bw-heading-row">
+        <div class="bw-icon" data-field="icon" aria-hidden="true">📝</div>
+        <div>
+          <h2 class="bw-title" data-field="title">Quick Summary</h2>
+          <div class="bw-kicker" data-field="kicker">BERLINWALK.COM • TOURIST TIPS</div>
+        </div>
+      </div>
+
+      <div class="bw-audio" data-field="audio-wrap">
+        <p class="bw-audio-label" data-field="audio-label">Listen to the Quick Summary</p>
+        <audio controls preload="none" data-field="audio">
+          <source data-field="audio-source" src="" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+
+    <div class="bw-list" data-field="list"></div>
+
+    <div class="bw-footer">
+      <div class="bw-badge">berlinwalk.com</div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var postSlug = params.get('post');
+      var framed = window.self !== window.top;
+      var root = document.querySelector('.bw-quick');
+      var list = document.querySelector('[data-field="list"]');
+      var icon = document.querySelector('[data-field="icon"]');
+      var title = document.querySelector('[data-field="title"]');
+      var kicker = document.querySelector('[data-field="kicker"]');
+      var audioWrap = document.querySelector('[data-field="audio-wrap"]');
+      var audioSource = document.querySelector('[data-field="audio-source"]');
+      var audio = document.querySelector('[data-field="audio"]');
+      var audioLabel = document.querySelector('[data-field="audio-label"]');
+      var currentConfig = null;
+      var pilotConfig = null;
+
+      function trustedParentOrigin() {
+        try {
+          var origin = new URL(document.referrer).origin;
+          return origin === 'https://www.berlinwalk.com' || origin === 'https://berlinwalk.com' ? origin : '';
+        } catch (error) {
+          return '';
+        }
+      }
+
+      function validPilotButtons(buttons) {
+        return Array.isArray(buttons) && buttons.length === 4 && buttons.every(function (button, index) {
+          return button && typeof button.label === 'string' && button.label.trim().length > 0 && button.label.length <= 180 && Number(button.sectionIndex) === index + 1;
+        });
+      }
+
+      function renderPilot(config) {
+        root.classList.remove('bw-c-tiles');
+        root.classList.add('bw-engagement-utility');
+        var buttons = pilotConfig.buttons;
+        list.innerHTML = buttons.map(function (button) {
+          return [
+            '<button class="bw-pilot-jump" type="button" data-bw-pilot-section="' + Number(button.sectionIndex) + '">',
+            '<span class="bw-pilot-jump__number">' + String(button.sectionIndex).padStart(2, '0') + '</span>',
+            '<span class="bw-pilot-jump__label">' + escapeHtml(button.label) + '</span>',
+            '<span class="bw-pilot-jump__arrow" aria-hidden="true">↓</span>',
+            '</button>'
+          ].join('');
+        }).join('');
+      }
+
+      window.addEventListener('message', function (event) {
+        var parentOrigin = trustedParentOrigin();
+        var data = event.data;
+        if (!parentOrigin || event.origin !== parentOrigin || event.source !== window.parent || !data || data.type !== 'bw-blog-engagement-config') return;
+        if (!postSlug || data.quickSummaryPost !== postSlug || typeof data.sourceSlug !== 'string' || !data.sourceSlug || (data.variant !== 'control' && data.variant !== 'utility')) return;
+        if (data.variant === 'utility') {
+          if (!validPilotButtons(data.buttons) || typeof data.nonce !== 'string' || data.nonce.length < 8 || data.nonce.length > 140) return;
+          pilotConfig = data;
+        } else {
+          pilotConfig = null;
+        }
+        if (currentConfig) render(currentConfig);
+      });
+
+      root.addEventListener('click', function (event) {
+        var button = event.target && typeof event.target.closest === 'function'
+          ? event.target.closest('[data-bw-pilot-section]')
+          : null;
+        if (!button || !pilotConfig) return;
+        var sectionIndex = Number(button.getAttribute('data-bw-pilot-section'));
+        var item = pilotConfig.buttons[sectionIndex - 1];
+        var parentOrigin = trustedParentOrigin();
+        if (!item || !parentOrigin) return;
+        window.parent.postMessage({
+          type: 'bw-blog-engagement-jump',
+          experimentId: pilotConfig.experimentId,
+          version: pilotConfig.version,
+          nonce: pilotConfig.nonce,
+          sourceSlug: pilotConfig.sourceSlug,
+          quickSummaryPost: postSlug,
+          sectionIndex: sectionIndex,
+          label: item.label
+        }, parentOrigin);
+      });
+
+      function renderSilent() {
+        document.body.className = (document.body.className + ' bw-silent').trim();
+        if (!document.querySelector('.bw-silent-spacer')) {
+          var spacer = document.createElement('div');
+          spacer.className = 'bw-silent-spacer';
+          document.body.appendChild(spacer);
+        }
+      }
+
+      function value(name, fallback) {
+        var raw = params.get(name);
+        return raw && raw.trim() ? raw.trim() : fallback;
+      }
+
+      function escapeHtml(text) {
+        return text.replace(/[&<>"']/g, function (char) {
+          return {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+          }[char];
+        });
+      }
+
+      function formatSummary(text) {
+        var escaped = escapeHtml(text);
+        return escaped.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      }
+
+      function collectParamItems() {
+        var paramItems = [];
+        for (var i = 1; i <= 7; i += 1) {
+          var item = value('i' + i, '');
+          if (item) paramItems.push(item);
+        }
+        return paramItems;
+      }
+
+      function render(config) {
+        config = config || {};
+        currentConfig = config;
+
+        icon.textContent = config.icon || value('icon', '📝');
+        title.textContent = config.title || value('title', 'Quick Summary');
+        kicker.textContent = config.kicker || value('kicker', 'BERLINWALK.COM • TOURIST TIPS');
+        audioLabel.textContent = config.audioLabel || value('audioLabel', 'Listen to the Quick Summary');
+
+        var audioUrl = config.audio || value('audio', '');
+        if (audioUrl) {
+          audioSource.src = audioUrl;
+          audio.load();
+          audioWrap.classList.add('is-visible');
+        } else {
+          audioWrap.classList.remove('is-visible');
+          audioSource.removeAttribute('src');
+        }
+
+        var items = Array.isArray(config.items) && config.items.length
+          ? config.items
+          : collectParamItems();
+
+        if (!items.length) {
+          if (framed) { renderSilent(); return; }
+          root.innerHTML = postSlug
+            ? '<div class="bw-empty">Quick summary not found for <strong>' + escapeHtml(postSlug) + '</strong>.</div>'
+            : '<div class="bw-empty">Add summary items with URL parameters such as <strong>i1</strong>, <strong>i2</strong>, and <strong>i3</strong>, or use <strong>?post=slug</strong>.</div>';
+          return;
+        }
+
+        if (pilotConfig && pilotConfig.variant === 'utility') {
+          renderPilot(config);
+          return;
+        }
+        root.classList.remove('bw-engagement-utility');
+
+        // Redesign C has exactly two states. With four short tiles the post shows
+        // the compact strip under the cover. Without tiles it shows nothing under
+        // the cover and this widget falls back to the classic in-body card, so the
+        // rejected cover-width "At a glance" sentence card can never render.
+        if (document.body.classList.contains('bw-redesign-c')) {
+          var tiles = Array.isArray(config.tiles) && config.tiles.length === 4 ? config.tiles : null;
+          if (tiles) {
+            root.classList.add('bw-c-tiles');
+            list.innerHTML = tiles.map(function (tile) {
+              return '<div class="bw-item"><div class="bw-number">' + escapeHtml(tile.label || '') + '</div><div class="bw-text"><strong>' + escapeHtml(tile.value || '') + '</strong>' + (tile.note ? '<br>' + escapeHtml(tile.note) : '') + '</div></div>';
+            }).join('');
+            return;
+          }
+          document.body.classList.remove('bw-redesign-c');
+          root.classList.remove('bw-c-tiles');
+        }
+
+        list.innerHTML = items.map(function (item, index) {
+          return [
+            '<div class="bw-item">',
+            '<div class="bw-number">' + (index + 1) + '</div>',
+            '<div class="bw-text">' + formatSummary(item) + '</div>',
+            '</div>'
+          ].join('');
+        }).join('');
+      }
+
+      function versionSuffix() {
+        var version = value('v', '');
+        return version ? '?v=' + encodeURIComponent(version) : '';
+      }
+
+      function loadPostConfig() {
+        var shardUrl = './data/' + encodeURIComponent(postSlug) + '.json' + versionSuffix();
+        return fetch(shardUrl, { cache: 'force-cache' })
+          .then(function (response) {
+            if (!response.ok) throw new Error('shard_not_found');
+            return response.json();
+          })
+          .catch(function () {
+            return fetch('./data.json' + versionSuffix(), { cache: 'force-cache' })
+              .then(function (response) {
+                if (!response.ok) throw new Error('aggregate_not_found');
+                return response.json();
+              })
+              .then(function (data) { return data[postSlug] || null; });
+          });
+      }
+
+      function signalPilotReady() {
+        var parentOrigin = trustedParentOrigin();
+        if (!framed || !parentOrigin || !postSlug) return;
+        window.parent.postMessage({ type: 'bw-blog-engagement-ready', quickSummaryPost: postSlug }, parentOrigin);
+      }
+
+      if (value('bwredesign', '') === '1') document.body.classList.add('bw-redesign-c');
+
+      if (postSlug) {
+        loadPostConfig()
+          .then(function (config) { render(config); signalPilotReady(); })
+          .catch(function () {
+            if (framed) { renderSilent(); return; }
+            root.innerHTML = '<div class="bw-empty">Quick summary not found for <strong>' + escapeHtml(postSlug) + '</strong>.</div>';
+          });
+        return;
+      }
+
+      render();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Third Reich Berlin: What Survives</title>
+<meta name="description" content="Eleven Third Reich sites in Berlin plotted on two axes: how much of the original is still physically there, and how much the place explains itself when you arrive." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23123D18'/%3E%3Cpath d='M14 50h36' stroke='%23FFE600' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M14 50V14' stroke='%23FFE600' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='24' cy='40' r='4' fill='%23C5E1A5'/%3E%3Ccircle cx='40' cy='24' r='6' fill='%237CB342'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --deep:#123D18; --lime:#7CB342; --light:#C5E1A5;
+    --yellow:#FFE600; --ink:#212121; --muted:#4E5A4E; --line:#E3E8DC;
+    --plot:#12321A; --grid:#2C5233; --paper:#FAFAF5;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);font-family:Montserrat,Arial,sans-serif;color:var(--ink)}
+  .wrap{max-width:900px;margin:0 auto;padding:14px}
+
+  .head{background:var(--deep);color:#fff;border-radius:14px;padding:16px 18px}
+  .kicker{font:700 11px/1.2 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow)}
+  h1{margin:8px 0 6px;font-size:21px;line-height:1.22;font-weight:800}
+  .sub{margin:0;font-size:13.5px;line-height:1.5;color:#dbe7d6}
+
+  .fieldcard{background:#fff;border:2px solid var(--line);border-radius:14px;padding:12px 12px 8px;margin-top:12px}
+  .plotbox{position:relative}
+  svg.plot{display:block;width:100%;height:auto}
+  svg.plot .dot{cursor:pointer}
+  svg.plot .dot:focus{outline:none}
+  svg.plot .dot:focus-visible circle.body{stroke:#0B2410;stroke-width:4}
+  svg.plot .dot circle.body{transition:r .12s ease}
+  svg.plot .dot:hover circle.body{stroke:#0B2410;stroke-width:3}
+
+  .qrow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:10px 0 2px}
+  .qbtn{display:block;width:100%;text-align:left;background:#F3F6EE;border:2px solid var(--line);border-radius:10px;padding:8px 10px;cursor:pointer;font-family:inherit}
+  .qbtn:hover{border-color:var(--lime)}
+  .qbtn[aria-pressed="true"]{background:var(--deep);border-color:var(--deep)}
+  .qbtn[aria-pressed="true"] .qname,.qbtn[aria-pressed="true"] .qcount{color:#fff}
+  .qname{display:block;font-size:12.5px;font-weight:700;color:var(--deep);line-height:1.3}
+  .qcount{display:block;font:600 11px 'IBM Plex Mono',monospace;color:var(--muted);margin-top:2px}
+
+  .keyrow{display:flex;flex-wrap:wrap;gap:12px;margin:10px 2px 2px;font-size:11.5px;color:var(--muted);font-weight:600}
+  .keyrow span{display:inline-flex;align-items:center;gap:6px}
+  .swatch{width:13px;height:13px;border-radius:50%;border:2px solid var(--deep);display:inline-block}
+  .sw-free{background:var(--light)}
+  .sw-paid{background:var(--yellow)}
+  .sw-tour{background:#fff;border-style:dashed}
+
+  h2.sec{font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:16px 2px 8px;font-weight:700}
+
+  ol.legend{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+  ol.legend li{margin:0}
+  .lrow{display:flex;gap:9px;align-items:center;width:100%;text-align:left;background:#fff;border:2px solid var(--line);border-radius:10px;padding:8px 9px;cursor:pointer;font-family:inherit}
+  .lrow:hover{border-color:var(--lime)}
+  .lrow[aria-pressed="true"]{border-color:var(--deep);background:#F3F6EE}
+  .lrow.dim{opacity:.38}
+  .lnum{flex:0 0 auto;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 11px 'IBM Plex Mono',monospace;color:var(--deep);border:2px solid var(--deep)}
+  .ln-free{background:var(--light)} .ln-paid{background:var(--yellow)} .ln-tour{background:#fff;border-style:dashed}
+  .lname{font-size:12.5px;font-weight:700;color:var(--ink);line-height:1.25}
+
+  .detail{margin-top:14px;border:2px solid var(--deep);border-radius:14px;overflow:hidden;background:#fff}
+  .dhead{background:var(--deep);color:#fff;padding:12px 15px}
+  .dtitle{margin:0;font-size:17px;font-weight:800;line-height:1.25}
+  .dwhere{margin:5px 0 0;font:600 11.5px 'IBM Plex Mono',monospace;color:var(--yellow);letter-spacing:.03em}
+  .dbody{padding:13px 15px 15px}
+  .facts{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 11px}
+  .fact{font:700 11px 'IBM Plex Mono',monospace;letter-spacing:.04em;padding:5px 9px;border-radius:20px;background:#F3F6EE;color:var(--deep);border:1px solid var(--line)}
+  .fact.paid{background:var(--yellow);color:var(--deep);border-color:#d9c400}
+  .dl{margin:0 0 10px}
+  .dl dt{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:3px}
+  .dl dd{margin:0 0 10px;font-size:14px;line-height:1.55;color:var(--ink)}
+  .verdict{background:#F3F6EE;border-left:5px solid var(--lime);border-radius:0 10px 10px 0;padding:11px 13px;font-size:14px;line-height:1.55;color:var(--ink)}
+  .verdict b{color:var(--deep)}
+  .bars{margin:11px 0 0}
+  .bar{display:flex;align-items:center;gap:9px;margin-bottom:6px}
+  .blab{flex:0 0 132px;font:700 10.5px 'IBM Plex Mono',monospace;letter-spacing:.04em;color:var(--muted);text-transform:uppercase}
+  .btrack{flex:1 1 auto;height:9px;border-radius:5px;background:var(--line);overflow:hidden}
+  .bfill{height:100%;border-radius:5px;background:var(--lime)}
+  .bfill.b2{background:var(--green)}
+  .bval{flex:0 0 auto;font:700 11px 'IBM Plex Mono',monospace;color:var(--deep);min-width:34px;text-align:right}
+
+  .foot{margin:14px 2px 2px;font-size:11.5px;line-height:1.6;color:var(--muted)}
+
+  @media (max-width:640px){
+    .wrap{padding:11px}
+    h1{font-size:19px}
+    ol.legend{grid-template-columns:1fr}
+    .qrow{grid-template-columns:1fr}
+    .blab{flex-basis:104px;font-size:9.5px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="head">
+    <div class="kicker">Berlin · eleven sites</div>
+    <h1>Third Reich Berlin: what is actually still there</h1>
+    <p class="sub">Two things decide whether a site is worth your afternoon, and they are independent. How much of the original is physically left, and how much the place explains itself once you are standing on it. Every site is already plotted. Tap one to read it.</p>
+  </div>
+
+  <div class="fieldcard">
+    <div class="plotbox">
+      <svg class="plot" viewBox="0 0 430 392" role="img" aria-label="Eleven Third Reich sites in Berlin plotted by how much of the original survives, horizontally, against how much the site explains itself, vertically." id="plot"></svg>
+    </div>
+
+    <div class="keyrow">
+      <span><i class="swatch sw-free"></i>Free to enter</span>
+      <span><i class="swatch sw-paid"></i>Paid ticket</span>
+      <span><i class="swatch sw-tour"></i>Booked tour only</span>
+      <span>Circle size = realistic time on site</span>
+    </div>
+  </div>
+
+  <h2 class="sec">Read one corner at a time</h2>
+  <div class="qrow" id="qrow"></div>
+
+  <h2 class="sec">All eleven sites</h2>
+  <ol class="legend" id="legend"></ol>
+
+  <div class="detail" id="detail" aria-live="polite"></div>
+
+  <p class="foot" id="foot"></p>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var CHECKED = "23 August 2026";
+
+  /* x = how much original fabric physically survives (0-100)
+     y = how much the site explains itself on the ground (0-100)
+     mins = realistic time on site, used for circle size
+     band = free | paid | tour                                        */
+  var SITES = [
+    { n:1, name:"Site of the Führerbunker", where:"In den Ministergärten · U Mohrenstraße",
+      x:2, y:12, mins:10, band:"free", cost:"Free",
+      was:"The concrete bunker complex where the Nazi leadership spent the last weeks of the war, under the garden of the old Reich Chancellery.",
+      now:"A residents' car park behind apartment blocks. Nothing of the bunker is visible and nothing is marked on the ground. There is one information board, put up on 8 June 2006 by Berliner Unterwelten, in German and English, with a plan of the rooms.",
+      verdict:"Go only if you are already walking past on your way from the Holocaust Memorial to Potsdamer Platz. It is four minutes out of your way and it is genuinely nothing, which is the point Berlin was making." },
+
+    { n:2, name:"Bebelplatz book-burning memorial", where:"Bebelplatz, Unter den Linden · U Museumsinsel",
+      x:26, y:30, mins:15, band:"free", cost:"Free, open at all hours",
+      was:"On 10 May 1933 more than 20,000 books were burned on this square by Nazi student organisations, with professors watching.",
+      now:"The square is still the square. Micha Ullman's 1995 memorial is set into the paving: a whitewashed underground room with empty shelves for 20,000 volumes, seen through a glass plate at your feet. A plaque nearby carries Heinrich Heine's line about burning books and burning people.",
+      verdict:"Worth the two-minute stop, but only if you know to look down. People walk over the glass all day without seeing it, and there is almost no explanation on the square itself." },
+
+    { n:3, name:"Memorial to the Murdered Jews of Europe", where:"Cora-Berliner-Straße · S+U Brandenburger Tor",
+      x:5, y:92, mins:75, band:"free", cost:"Free · Information Centre closed Mondays",
+      was:"Nothing. This ground was cleared border strip; the memorial is deliberately built on an absence rather than on a historical site.",
+      now:"2,711 concrete stelae, open day and night. Underneath, the free Information Centre, open Tuesday to Sunday 10:00 to 18:00, gives the names, the families and the scale. Last entry is 45 minutes before closing.",
+      verdict:"Do not treat the stelae as the visit. The field takes ten minutes and the exhibition underneath takes an hour, and the hour is the part that stays with you." },
+
+    { n:4, name:"Topography of Terror", where:"Niederkirchnerstraße 8 · S+U Potsdamer Platz",
+      x:40, y:100, mins:90, band:"free", cost:"Free · daily 10:00 to 20:00",
+      was:"The headquarters of the Gestapo, the SS leadership and the Reich Security Main Office stood along this street. The buildings were bombed, then cleared away entirely.",
+      now:"An excavated line of cellar walls, roughly 200 metres of the outer Berlin Wall above them, an open-air exhibition along the trench and a free documentation centre indoors. It is the fullest, plainest account of the machinery of the regime anywhere in the city.",
+      verdict:"If you only have time for one site on this list, make it this one. Free, central, open late, and it explains everything the other ten sites assume you already know." },
+
+    { n:5, name:"Former Reich Aviation Ministry", where:"Wilhelmstraße 97 · U Mohrenstraße",
+      x:96, y:18, mins:15, band:"free", cost:"Free · exterior only",
+      was:"Built 1935 to 1936 for Hermann Göring's air ministry by Ernst Sagebiel, the architect of the Tempelhof terminal. About 2,000 rooms, finished in eighteen months.",
+      now:"Completely intact and in daily use as the Federal Ministry of Finance. You can only walk the outside. On the Leipziger Straße side there is Max Lingner's 1953 ceramic mural of happy workers building the socialist republic, and sunk into the pavement in front of it, Wolfgang Rüppel's glass memorial photograph of the workers who rose against that republic on 17 June 1953.",
+      verdict:"The most complete Nazi building in central Berlin, and almost nobody stops. Give it ten minutes on your way between Potsdamer Platz and Gendarmenmarkt and read the pavement." },
+
+    { n:6, name:"German Resistance Memorial Center", where:"Stauffenbergstraße 13-14 · U Kurfürstenstraße",
+      x:86, y:84, mins:75, band:"free", cost:"Free · Mon to Fri 09:00 to 18:00, weekends 10:00 to 18:00",
+      was:"The Bendlerblock, army headquarters, and the courtyard where Claus von Stauffenberg and three others were shot on the night of 20 July 1944 after the failed coup.",
+      now:"The original building and the original courtyard, plus a large free permanent exhibition on the whole range of German resistance, not only the officers' plot.",
+      verdict:"The most underrated site in Berlin. It is ten minutes from Potsdamer Platz, it costs nothing, and it is the one place on this list that is about people who said no." },
+
+    { n:7, name:"Gleis 17 deportation memorial", where:"Grunewald S-Bahn station · S7 Grunewald",
+      x:80, y:40, mins:30, band:"free", cost:"Free, open at all hours",
+      was:"The goods platform at Grunewald from which more than fifty thousand Berlin Jews were deported between 1941 and 1945.",
+      now:"The real platform, with the track still in place and trees now growing between the rails. 186 cast-steel plates run along both edges, each carrying one transport: the date, the number of people, the destination. There is no exhibition and almost no text beyond the plates.",
+      verdict:"Twenty-five minutes out from Zoologischer Garten on the S7 and worth every one of them, but read about the deportations first. The memorial explains nothing and is not trying to." },
+
+    { n:8, name:"House of the Wannsee Conference", where:"Am Großen Wannsee 56-58 · S1/S7 Wannsee then bus 114",
+      x:92, y:95, mins:120, band:"free", cost:"Free · daily 10:00 to 18:00",
+      was:"The lakeside villa where, on 20 January 1942, fifteen senior officials coordinated the machinery of the murder of Europe's Jews over breakfast.",
+      now:"The house itself, intact, with a free permanent exhibition through its actual rooms, including the room where they sat, and the garden running down to the lake.",
+      verdict:"Allow half a day including travel: S1 or S7 to Wannsee, then bus 114 to the stop named after the house, about 45 minutes each way in zone AB. Do not put anything else in that afternoon." },
+
+    { n:9, name:"Olympiastadion", where:"Olympischer Platz 3 · U2 Olympia-Stadion",
+      x:94, y:55, mins:90, band:"paid", cost:"€11 adult, self-guided",
+      was:"The 1936 Olympic stadium, the regime's most successful piece of international presentation.",
+      now:"Structurally the same building, still a working stadium. The self-guided ticket gets you the exterior areas and the stands, with boards along the way; the interior rooms need a guided tour. The visitor centre closes on Hertha home-match days and other big events.",
+      verdict:"Go for the scale, which photographs do not carry, and check the event calendar before you travel out. If you want the 1936 politics explained rather than summarised on a board, book the guided tour instead." },
+
+    { n:10, name:"Tempelhof Airport building", where:"Platz der Luftbrücke · U6 Platz der Luftbrücke",
+      x:90, y:35, mins:60, band:"tour", cost:"Field free · building by booked tour",
+      was:"Sagebiel's vast 1930s terminal, planned as the gateway of the rebuilt capital, later the airlift airport.",
+      now:"The building is intact and enormous, and from the outside it tells you almost nothing. The airfield behind it is a free public park you can walk straight onto. The interior, including the hangars and the transit corridors, is only reachable on a booked guided tour; English tours run and are released around four weeks ahead through Museumsdienst Berlin.",
+      verdict:"Walking the free field is a good Berlin afternoon but it is not a history visit. If the building is why you came, book the tour before you fly in; on-the-day tickets are usually gone." },
+
+    { n:11, name:"Sachsenhausen Memorial", where:"Oranienburg · S1 to Oranienburg",
+      x:70, y:98, mins:210, band:"free", cost:"Free · 08:30 to 18:00 in summer",
+      was:"A concentration camp from 1936, built as the model camp and the administrative centre of the whole camp system.",
+      now:"The site, the gate, the roll-call ground and a number of original buildings, with several free museum exhibitions across the grounds. Grounds open 08:30 to 18:00 from 31 March to 26 October, 08:30 to 16:30 in winter.",
+      verdict:"A full half-day and emotionally the heaviest thing on this list. S1 to Oranienburg is about 45 minutes from Friedrichstraße, or 25 minutes on the RE5 from Hauptbahnhof, then 20 minutes on foot or the 804 bus. Do not schedule anything after it." }
+  ];
+
+  var QUADS = [
+    { id:"q1", name:"Nothing left, explained", test:function(s){return s.x<50 && s.y>=50;},
+      note:"The building is gone. The exhibition does the work." },
+    { id:"q2", name:"Standing and explained", test:function(s){return s.x>=50 && s.y>=50;},
+      note:"The original is there and somebody tells you what you are looking at." },
+    { id:"q3", name:"Almost nothing left", test:function(s){return s.x<50 && s.y<50;},
+      note:"A square, a car park, a plate of glass. Bring the story with you." },
+    { id:"q4", name:"Standing, but silent", test:function(s){return s.x>=50 && s.y<50;},
+      note:"Big, real, intact, and it will not explain itself to you." }
+  ];
+
+  var FILL = { free:"#C5E1A5", paid:"#FFE600", tour:"#FFFFFF" };
+  var LCLS = { free:"ln-free", paid:"ln-paid", tour:"ln-tour" };
+
+  /* plot geometry inside the 430 x 392 viewBox */
+  var L = 54, R = 414, T = 16, B = 330;   /* plot rectangle */
+  var PADX = 24, PADTOP = 42, PADBOT = 26;  /* keeps circles inside and clear of the corner labels */
+  function px(x){ return (L+PADX) + (x/100) * ((R-PADX)-(L+PADX)); }
+  function py(y){ return (B-PADBOT) - (y/100) * ((B-PADBOT)-(T+PADTOP)); }
+  function radius(m){ return Math.max(8, Math.min(14.5, 7 + Math.sqrt(m) * 0.5)); }
+
+  var selected = null;   /* site number */
+  var quad = null;       /* quadrant id */
+
+  var svg = document.getElementById("plot");
+  var NS = "http://www.w3.org/2000/svg";
+  function el(tag, attrs, text){
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) if (attrs.hasOwnProperty(k)) e.setAttribute(k, attrs[k]);
+    if (text != null) e.textContent = text;
+    return e;
+  }
+
+  function buildPlot(){
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+
+    svg.appendChild(el("rect",{x:L,y:T,width:R-L,height:B-T,rx:10,fill:"#12321A"}));
+
+    /* quadrant shading + corner names */
+    var midX = (L+R)/2, midY = (T+B)/2;
+    svg.appendChild(el("line",{x1:midX,y1:T,x2:midX,y2:B,stroke:"#2C5233","stroke-width":1.5}));
+    svg.appendChild(el("line",{x1:L,y1:midY,x2:R,y2:midY,stroke:"#2C5233","stroke-width":1.5}));
+
+    var corners = [
+      { id:"q1", x:L+10,  y:T+18, anchor:"start", label:"Nothing left, explained" },
+      { id:"q2", x:R-10,  y:T+18, anchor:"end",   label:"Standing and explained" },
+      { id:"q3", x:L+10,  y:B-10, anchor:"start", label:"Almost nothing left" },
+      { id:"q4", x:R-10,  y:B-10, anchor:"end",   label:"Standing, but silent" }
+    ];
+    corners.forEach(function(c){
+      var t = el("text",{x:c.x,y:c.y,"text-anchor":c.anchor,
+        fill: (quad === c.id ? "#FFE600" : "#7FA987"),
+        "font-family":"'IBM Plex Mono',monospace","font-size":"9.5","font-weight":"700",
+        "letter-spacing":"0.03em"}, c.label.toUpperCase());
+      svg.appendChild(t);
+    });
+
+    /* axes */
+    svg.appendChild(el("text",{x:L,y:B+20,"text-anchor":"start",fill:"#4E5A4E",
+      "font-family":"'IBM Plex Mono',monospace","font-size":"9.5","font-weight":"600"},"NOTHING"));
+    svg.appendChild(el("text",{x:R,y:B+20,"text-anchor":"end",fill:"#4E5A4E",
+      "font-family":"'IBM Plex Mono',monospace","font-size":"9.5","font-weight":"600"},"THE BUILDING"));
+    svg.appendChild(el("text",{x:(L+R)/2,y:B+44,"text-anchor":"middle",fill:"#123D18",
+      "font-family":"Montserrat,Arial,sans-serif","font-size":"11.5","font-weight":"700"},
+      "How much of the original is physically there \u2192"));
+
+    var yl = el("text",{x:0,y:0,"text-anchor":"middle",fill:"#123D18",
+      "font-family":"Montserrat,Arial,sans-serif","font-size":"11.5","font-weight":"700",
+      transform:"translate(16," + ((T+B)/2) + ") rotate(-90)"},
+      "How much the site explains itself →");
+    svg.appendChild(yl);
+    svg.appendChild(el("text",{x:0,y:0,"text-anchor":"start",fill:"#4E5A4E",
+      "font-family":"'IBM Plex Mono',monospace","font-size":"9.5","font-weight":"600",
+      transform:"translate(34," + B + ") rotate(-90)"},"NO SIGN"));
+    svg.appendChild(el("text",{x:0,y:0,"text-anchor":"end",fill:"#4E5A4E",
+      "font-family":"'IBM Plex Mono',monospace","font-size":"9.5","font-weight":"600",
+      transform:"translate(34," + T + ") rotate(-90)"},"FULL EXHIBITION"));
+
+    /* dots, biggest first so small ones stay clickable on top */
+    SITES.slice().sort(function(a,b){ return radius(b.mins) - radius(a.mins); }).forEach(function(s){
+      var dim = !!quad && quadOf(s).id !== quad;
+      var g = el("g",{class:"dot",tabindex:"0",role:"button",
+        "aria-label": s.name + ". " + s.cost + ". Select to read what is left.",
+        opacity: dim ? 0.3 : 1});
+      var r = radius(s.mins);
+      var isSel = (selected === s.n);
+      var c = el("circle",{class:"body",cx:px(s.x),cy:py(s.y),r:r,
+        fill:FILL[s.band],
+        stroke: isSel ? "#FFFFFF" : "#0B2410",
+        "stroke-width": isSel ? 4 : 2,
+        "stroke-dasharray": s.band === "tour" ? "4 3" : "none"});
+      g.appendChild(c);
+      g.appendChild(el("text",{x:px(s.x),y:py(s.y)+4.5,"text-anchor":"middle",
+        fill:"#123D18","font-family":"'IBM Plex Mono',monospace",
+        "font-size":"12","font-weight":"700","pointer-events":"none"}, String(s.n)));
+      g.addEventListener("click", function(){ select(s.n); });
+      g.addEventListener("keydown", function(ev){
+        if (ev.key === "Enter" || ev.key === " " || ev.key === "Spacebar"){ ev.preventDefault(); select(s.n); }
+      });
+      svg.appendChild(g);
+    });
+  }
+
+  function quadOf(s){
+    for (var i=0;i<QUADS.length;i++) if (QUADS[i].test(s)) return QUADS[i];
+    return QUADS[0];
+  }
+
+  function buildQuads(){
+    var host = document.getElementById("qrow");
+    host.innerHTML = "";
+    QUADS.forEach(function(q){
+      var count = SITES.filter(q.test).length;
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "qbtn";
+      b.setAttribute("aria-pressed", quad === q.id ? "true" : "false");
+      b.innerHTML = '<span class="qname">' + q.name + '</span><span class="qcount">' +
+        count + (count === 1 ? " site · " : " sites · ") + q.note + '</span>';
+      b.addEventListener("click", function(){
+        quad = (quad === q.id) ? null : q.id;
+        render();
+      });
+      host.appendChild(b);
+    });
+  }
+
+  function buildLegend(){
+    var host = document.getElementById("legend");
+    host.innerHTML = "";
+    SITES.forEach(function(s){
+      var li = document.createElement("li");
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "lrow" + (quad && quadOf(s).id !== quad ? " dim" : "");
+      b.setAttribute("aria-pressed", selected === s.n ? "true" : "false");
+      b.innerHTML = '<span class="lnum ' + LCLS[s.band] + '">' + s.n + '</span>' +
+                    '<span class="lname">' + s.name + '</span>';
+      b.addEventListener("click", function(){ select(s.n); });
+      li.appendChild(b);
+      host.appendChild(li);
+    });
+  }
+
+  function timeLabel(m){
+    if (m < 60) return m + " min";
+    if (m % 60 === 0) return (m/60) + (m === 60 ? " hour" : " hours");
+    return Math.floor(m/60) + "h " + (m%60) + "m";
+  }
+
+  function buildDetail(){
+    var host = document.getElementById("detail");
+    var s = SITES.filter(function(a){ return a.n === selected; })[0];
+    if (!s){
+      host.innerHTML =
+        '<div class="dhead"><p class="dtitle">Pick a site to see what is left of it</p>' +
+        '<p class="dwhere">Tap a circle above, or any name in the list</p></div>' +
+        '<div class="dbody"><p style="margin:0;font-size:14px;line-height:1.6">' +
+        'Seven of these eleven still have the original building, villa or platform you can stand on. ' +
+        'On the other four the thing you came to see was demolished, and what you get instead is either a full ' +
+        'exhibition or a single sign. The corner a site sits in tells you which kind of afternoon it will be.' +
+        '</p></div>';
+      return;
+    }
+    var q = quadOf(s);
+    host.innerHTML =
+      '<div class="dhead">' +
+        '<p class="dtitle">' + s.n + '. ' + s.name + '</p>' +
+        '<p class="dwhere">' + s.where + '</p>' +
+      '</div>' +
+      '<div class="dbody">' +
+        '<div class="facts">' +
+          '<span class="fact' + (s.band === "free" ? "" : " paid") + '">' + s.cost + '</span>' +
+          '<span class="fact">About ' + timeLabel(s.mins) + ' on site</span>' +
+          '<span class="fact">' + q.name + '</span>' +
+        '</div>' +
+        '<dl class="dl">' +
+          '<dt>What stood here</dt><dd>' + s.was + '</dd>' +
+          '<dt>What you actually see today</dt><dd>' + s.now + '</dd>' +
+        '</dl>' +
+        '<div class="verdict"><b>My move:</b> ' + s.verdict + '</div>' +
+        '<div class="bars">' +
+          bar("Original fabric", s.x, "") +
+          bar("Explained on site", s.y, "b2") +
+        '</div>' +
+      '</div>';
+  }
+
+  function bar(label, val, cls){
+    return '<div class="bar"><span class="blab">' + label + '</span>' +
+           '<span class="btrack"><span class="bfill ' + cls + '" style="width:' + val + '%"></span></span>' +
+           '<span class="bval">' + val + '</span></div>';
+  }
+
+  function select(n){
+    selected = (selected === n) ? null : n;
+    render();
+  }
+
+  function render(){
+    buildPlot();
+    buildQuads();
+    buildLegend();
+    buildDetail();
+  }
+
+  document.getElementById("foot").textContent =
+    "Opening hours, prices and travel times checked on " + CHECKED +
+    " against each site's own published information. The two scores are my own reading as a Berlin guide, not an official rating: the horizontal one is how much original fabric you can physically stand in front of, the vertical one is how much the place explains itself without a book or a guide. Hours move for public holidays and events, so check the day you go.";
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

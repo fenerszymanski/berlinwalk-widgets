@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Booking Deadline Planner | BerlinWalk</title>
+  <meta name="description" content="Check what to book in advance in Berlin and what to keep flexible: Reichstag dome, TV Tower, museums, palaces, restaurants, events and transport.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    :root {
+      --bw-green: #1B5E20;
+      --bw-dark: #164A1A;
+      --bw-lime: #7CB342;
+      --bw-light: #C5E1A5;
+      --bw-yellow: #FFE600;
+      --bw-cream: #FAFAF5;
+      --bw-ink: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-line: rgba(27, 94, 32, .18);
+      --bw-soft: #F4F9EC;
+      --bw-warn: #FFF7D6;
+      --bw-shadow: 0 18px 38px rgba(27, 94, 32, .13);
+      --bw-red: #C62828;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bw-cream);
+      color: var(--bw-ink);
+      font-family: Montserrat, Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    .bw-tool {
+      width: min(100%, 980px);
+      margin: 0 auto;
+      padding: 18px;
+    }
+
+    .bw-shell {
+      overflow: hidden;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: var(--bw-shadow);
+    }
+
+    .bw-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 260px;
+      gap: 18px;
+      padding: 24px;
+      color: #fff;
+      background:
+        radial-gradient(circle at 84% 14%, rgba(255, 230, 0, .38), transparent 34%),
+        linear-gradient(135deg, rgba(27, 94, 32, .99), rgba(54, 119, 44, .95));
+    }
+
+    .bw-kicker {
+      margin: 0 0 8px;
+      color: var(--bw-yellow);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(31px, 5vw, 45px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .bw-hero p {
+      max-width: 62ch;
+      margin: 12px 0 0;
+      color: rgba(255,255,255,.9);
+      font-size: 15px;
+    }
+
+    .bw-ticket-stack {
+      align-self: stretch;
+      display: grid;
+      align-content: center;
+      gap: 10px;
+      min-height: 190px;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 8px;
+      background: rgba(255,255,255,.12);
+    }
+
+    .bw-ticket {
+      display: grid;
+      grid-template-columns: 1fr 54px;
+      min-height: 48px;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #fff;
+      color: var(--bw-green);
+      font-weight: 950;
+      box-shadow: 0 10px 22px rgba(0,0,0,.12);
+    }
+
+    .bw-ticket span {
+      display: grid;
+      place-items: center;
+      padding: 9px 12px;
+    }
+
+    .bw-ticket b {
+      display: grid;
+      place-items: center;
+      border-left: 2px dashed rgba(27,94,32,.22);
+      background: var(--bw-yellow);
+      font-size: 12px;
+    }
+
+    .bw-main {
+      display: grid;
+      grid-template-columns: 335px 1fr;
+      min-height: 700px;
+    }
+
+    .bw-controls {
+      padding: 18px;
+      border-right: 1px solid var(--bw-line);
+      background: linear-gradient(180deg, #fff, #fbfff7);
+    }
+
+    .bw-group {
+      margin: 0 0 16px;
+    }
+
+    .bw-group h2 {
+      margin: 0 0 8px;
+      color: var(--bw-green);
+      font-size: 15px;
+      line-height: 1.22;
+      letter-spacing: 0;
+    }
+
+    .bw-buttons,
+    .bw-toggles {
+      display: grid;
+      gap: 8px;
+    }
+
+    .bw-buttons {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .bw-buttons.single {
+      grid-template-columns: 1fr;
+    }
+
+    button {
+      min-height: 46px;
+      padding: 10px 11px;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--bw-ink);
+      cursor: pointer;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      text-align: left;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      border-color: rgba(27,94,32,.35);
+      background: var(--bw-soft);
+    }
+
+    button[aria-pressed="true"] {
+      border-color: var(--bw-green);
+      background: var(--bw-green);
+      color: #fff;
+      box-shadow: inset 0 -3px 0 rgba(255,230,0,.45);
+    }
+
+    .bw-toggle {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: 9px;
+      align-items: center;
+      min-height: 48px;
+    }
+
+    .bw-toggle::before {
+      content: "";
+      width: 17px;
+      height: 17px;
+      border: 2px solid currentColor;
+      border-radius: 5px;
+      background: transparent;
+    }
+
+    .bw-toggle[aria-pressed="true"]::before {
+      content: "✓";
+      display: grid;
+      place-items: center;
+      background-color: var(--bw-yellow);
+      border-color: var(--bw-yellow);
+      color: var(--bw-green);
+      font-size: 14px;
+      font-weight: 950;
+      line-height: 1;
+    }
+
+    .bw-output {
+      padding: 20px;
+      background: #fff;
+    }
+
+    .bw-recommendation {
+      display: grid;
+      grid-template-columns: 1fr 168px;
+      gap: 16px;
+      align-items: stretch;
+      padding: 18px;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      background: linear-gradient(180deg, #fff, #fbfff7);
+    }
+
+    .bw-label {
+      display: inline-flex;
+      width: fit-content;
+      margin: 0 0 8px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+      font-size: 12px;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .bw-recommendation h2 {
+      margin: 0;
+      color: var(--bw-green);
+      font-size: 25px;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .bw-recommendation p {
+      margin: 9px 0 0;
+      color: var(--bw-muted);
+      font-size: 14px;
+    }
+
+    .bw-score {
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      background: var(--bw-green);
+      color: #fff;
+      text-align: center;
+    }
+
+    .bw-score strong {
+      display: block;
+      color: var(--bw-yellow);
+      font-size: 37px;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .bw-score span {
+      display: block;
+      margin-top: 6px;
+      font-size: 12px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .bw-lanes {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .bw-lane {
+      min-height: 184px;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .bw-lane h3 {
+      margin: 0;
+      padding: 11px 12px;
+      background: var(--bw-soft);
+      color: var(--bw-green);
+      font-size: 14px;
+      letter-spacing: 0;
+    }
+
+    .bw-lane.urgent h3 { background: #FFF3E0; color: #8A3B00; }
+    .bw-lane.wait h3 { background: #F0F7FF; color: #0B4C7A; }
+    .bw-lane.no h3 { background: #F6F6F1; color: var(--bw-muted); }
+
+    .bw-card-list {
+      display: grid;
+      gap: 9px;
+      padding: 10px;
+    }
+
+    .bw-card {
+      padding: 11px;
+      border: 1px solid rgba(27,94,32,.14);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .bw-card strong {
+      display: block;
+      color: var(--bw-ink);
+      font-size: 13px;
+      line-height: 1.25;
+    }
+
+    .bw-card span {
+      display: block;
+      margin-top: 4px;
+      color: var(--bw-muted);
+      font-size: 12px;
+      line-height: 1.42;
+    }
+
+    .bw-plan {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .bw-plan-item {
+      padding: 13px;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      background: var(--bw-soft);
+    }
+
+    .bw-plan-item b {
+      display: block;
+      color: var(--bw-green);
+      font-size: 13px;
+    }
+
+    .bw-plan-item span {
+      display: block;
+      margin-top: 5px;
+      color: var(--bw-muted);
+      font-size: 12px;
+    }
+
+    .bw-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .bw-links a {
+      display: inline-flex;
+      min-height: 36px;
+      align-items: center;
+      padding: 7px 10px;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      color: var(--bw-green);
+      background: #fff;
+      font-size: 12px;
+      font-weight: 850;
+      text-decoration: none;
+    }
+
+    .bw-links a:hover {
+      background: var(--bw-soft);
+    }
+
+    @media (max-width: 760px) {
+      .bw-tool { padding: 10px; }
+
+      .bw-hero,
+      .bw-main,
+      .bw-recommendation,
+      .bw-lanes,
+      .bw-plan {
+        grid-template-columns: 1fr;
+      }
+
+      .bw-hero { padding: 20px; }
+
+      .bw-ticket-stack { min-height: auto; }
+
+      .bw-controls {
+        border-right: 0;
+        border-bottom: 1px solid var(--bw-line);
+      }
+
+      .bw-buttons { grid-template-columns: 1fr; }
+      .bw-output { padding: 14px; }
+      .bw-score { min-height: 118px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="bw-tool">
+    <section class="bw-shell" aria-labelledby="plannerTitle">
+      <header class="bw-hero">
+        <div>
+          <p class="bw-kicker">BerlinWalk.com - Booking Radar</p>
+          <h1 id="plannerTitle">Berlin Booking Deadline Planner</h1>
+          <p>Pick your trip window and the things you actually care about. The radar separates scarce reservations from normal Berlin plans you can keep flexible.</p>
+        </div>
+        <div class="bw-ticket-stack" aria-hidden="true">
+          <div class="bw-ticket"><span>Reichstag dome</span><b>FREE</b></div>
+          <div class="bw-ticket"><span>TV Tower sunset</span><b>TIME</b></div>
+          <div class="bw-ticket"><span>Museum block</span><b>SLOT</b></div>
+        </div>
+      </header>
+
+      <div class="bw-main">
+        <aside class="bw-controls" aria-label="Booking choices">
+          <div class="bw-group">
+            <h2>How close is the trip?</h2>
+            <div class="bw-buttons" data-group="window">
+              <button type="button" data-value="months" aria-pressed="false">2+ months</button>
+              <button type="button" data-value="month" aria-pressed="true">3-6 weeks</button>
+              <button type="button" data-value="soon" aria-pressed="false">7-14 days</button>
+              <button type="button" data-value="now" aria-pressed="false">Already here</button>
+            </div>
+          </div>
+
+          <div class="bw-group">
+            <h2>How busy is the trip?</h2>
+            <div class="bw-buttons" data-group="season">
+              <button type="button" data-value="normal" aria-pressed="true">Normal week</button>
+              <button type="button" data-value="busy" aria-pressed="false">Summer or December</button>
+              <button type="button" data-value="event" aria-pressed="false">Event weekend</button>
+              <button type="button" data-value="rain" aria-pressed="false">Rainy museum weather</button>
+            </div>
+          </div>
+
+          <div class="bw-group">
+            <h2>What matters most?</h2>
+            <div class="bw-toggles" data-needs>
+              <button class="bw-toggle" type="button" data-need="reichstag" aria-pressed="true">Free Reichstag dome view</button>
+              <button class="bw-toggle" type="button" data-need="tower" aria-pressed="true">TV Tower or sunset view</button>
+              <button class="bw-toggle" type="button" data-need="museums" aria-pressed="true">Museum Island or Nefertiti</button>
+              <button class="bw-toggle" type="button" data-need="palaces" aria-pressed="false">Palace interiors or Potsdam</button>
+              <button class="bw-toggle" type="button" data-need="events" aria-pressed="false">Concerts, sports or festivals</button>
+              <button class="bw-toggle" type="button" data-need="food" aria-pressed="false">Special restaurant meals</button>
+              <button class="bw-toggle" type="button" data-need="tour" aria-pressed="true">BerlinWalk walking tour</button>
+              <button class="bw-toggle" type="button" data-need="transport" aria-pressed="false">Public transport tickets</button>
+            </div>
+          </div>
+
+          <div class="bw-group">
+            <h2>Planning style</h2>
+            <div class="bw-buttons single" data-group="style">
+              <button type="button" data-value="fixed" aria-pressed="false">I have must-see times</button>
+              <button type="button" data-value="balanced" aria-pressed="true">I want a few anchors</button>
+              <button type="button" data-value="loose" aria-pressed="false">I prefer flexibility</button>
+            </div>
+          </div>
+        </aside>
+
+        <section class="bw-output" aria-live="polite">
+          <div class="bw-recommendation">
+            <div>
+              <span class="bw-label" id="resultLabel">Anchor first</span>
+              <h2 id="resultTitle">Book the scarce slots, leave the city loose.</h2>
+              <p id="resultText">Start with free or limited reservations, then keep normal food, transport and open-air sightseeing flexible.</p>
+            </div>
+            <div class="bw-score">
+              <div>
+                <strong id="scoreNumber">3</strong>
+                <span>priority anchors</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bw-lanes">
+            <div class="bw-lane urgent">
+              <h3>Book first</h3>
+              <div class="bw-card-list" id="laneFirst"></div>
+            </div>
+            <div class="bw-lane">
+              <h3>Book this week</h3>
+              <div class="bw-card-list" id="laneWeek"></div>
+            </div>
+            <div class="bw-lane wait">
+              <h3>Wait for forecast or mood</h3>
+              <div class="bw-card-list" id="laneWait"></div>
+            </div>
+            <div class="bw-lane no">
+              <h3>Do not pre-book</h3>
+              <div class="bw-card-list" id="laneNo"></div>
+            </div>
+          </div>
+
+          <div class="bw-plan">
+            <div class="bw-plan-item">
+              <b id="stepOne">First move</b>
+              <span id="stepOneText">Reserve the item that can disappear.</span>
+            </div>
+            <div class="bw-plan-item">
+              <b id="stepTwo">Second move</b>
+              <span id="stepTwoText">Add one paid timed slot only if it shapes the day.</span>
+            </div>
+            <div class="bw-plan-item">
+              <b id="stepThree">Keep loose</b>
+              <span id="stepThreeText">Food, transport and outdoor sights work better with flexibility.</span>
+            </div>
+          </div>
+
+          <nav class="bw-links" aria-label="Official booking links">
+            <a href="https://www.bundestag.de/en/visittheBundestag/dome/registration-245686" target="_blank" rel="noopener">Bundestag dome</a>
+            <a href="https://tv-turm.de/en/tickets/" target="_blank" rel="noopener">TV Tower tickets</a>
+            <a href="https://www.smb.museum/en/museums-institutions/museumsinsel-berlin/plan-your-visit/" target="_blank" rel="noopener">Museum Island</a>
+            <a href="https://www.spsg.de/en/palaces-gardens/object/sanssouci-palace/" target="_blank" rel="noopener">Sanssouci Palace</a>
+            <a href="https://www.berlin.de/en/public-transportation/1772016-2913840-tickets-fares-and-route-maps.en.html" target="_blank" rel="noopener">Berlin tickets</a>
+          </nav>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const state = {
+      window: 'month',
+      season: 'normal',
+      style: 'balanced',
+      needs: new Set(['reichstag', 'tower', 'museums', 'tour'])
+    };
+
+    const items = {
+      reichstag: {
+        title: 'Reichstag dome',
+        body: 'Free, popular, ID-based and registration-only. Treat it as the first free slot to secure.',
+        fixed: 'Needs full names and dates of birth for the group.'
+      },
+      tower: {
+        title: 'TV Tower',
+        body: 'Worth booking early only for a fixed time, restaurant plan, sunset slot or very short trip.',
+        fixed: 'Visibility matters, so flexibility can beat an early paid ticket.'
+      },
+      museums: {
+        title: 'Museum Island',
+        body: 'Book when a specific museum or rainy-day block matters. Otherwise keep one museum slot flexible.',
+        fixed: 'Check opening days, holiday hours and the official ticket shop.'
+      },
+      palaces: {
+        title: 'Palace interiors',
+        body: 'Sanssouci and some palace visits use fixed entry times or limited daily tickets.',
+        fixed: 'Buy earlier if the palace interior is the reason for the day.'
+      },
+      events: {
+        title: 'Events and shows',
+        body: 'Concerts, sports, festivals and special exhibitions are the easiest things to miss by waiting.',
+        fixed: 'Secure the hard ticket before arranging the rest of the day.'
+      },
+      food: {
+        title: 'Special meals',
+        body: 'Reserve only the meal you would be disappointed to lose, especially weekend dinner.',
+        fixed: 'Casual food is usually better left open.'
+      },
+      tour: {
+        title: 'BerlinWalk tour',
+        body: 'Book the free spot online so the group size is manageable and your first-morning anchor is clear.',
+        fixed: 'The walking tour works best early in the trip.'
+      },
+      transport: {
+        title: 'Public transport',
+        body: 'Do not over-plan this. Buy the right AB or ABC ticket when you know the route.',
+        fixed: 'Validate paper tickets before riding; app tickets are usually simpler.'
+      }
+    };
+
+    function urgencyFor(key) {
+      const busy = state.season === 'busy' || state.season === 'event';
+      const short = state.window === 'soon' || state.window === 'now';
+      const months = state.window === 'months';
+      const fixed = state.style === 'fixed';
+
+      if (key === 'reichstag') return short || busy || fixed ? 'first' : 'week';
+      if (key === 'tour') return short || busy ? 'first' : 'week';
+      if (key === 'events') return 'first';
+      if (key === 'palaces') return busy || short || fixed ? 'first' : 'week';
+      if (key === 'museums') return state.season === 'rain' || short || fixed ? 'week' : 'wait';
+      if (key === 'tower') return fixed || short || busy ? 'week' : 'wait';
+      if (key === 'food') return busy || fixed ? 'week' : 'wait';
+      if (key === 'transport') return 'no';
+      if (months && (key === 'tower' || key === 'museums')) return 'wait';
+      return 'week';
+    }
+
+    function cardFor(key) {
+      const item = items[key];
+      return `<article class="bw-card"><strong>${item.title}</strong><span>${item.body}</span></article>`;
+    }
+
+    function fallback(lane) {
+      const copy = {
+        first: ['No panic item', 'Nothing selected here needs immediate action.'],
+        week: ['Light planning', 'Choose one or two anchors instead of filling every hour.'],
+        wait: ['Keep space', 'Let weather, energy and location decide the flexible parts.'],
+        no: ['Normal city time', 'Transport, outdoor sights and casual food rarely need advance booking.']
+      }[lane];
+      return `<article class="bw-card"><strong>${copy[0]}</strong><span>${copy[1]}</span></article>`;
+    }
+
+    function render() {
+      const lanes = { first: [], week: [], wait: [], no: [] };
+      state.needs.forEach((key) => {
+        if (!items[key]) return;
+        const lane = urgencyFor(key);
+        lanes[lane].push(key);
+      });
+
+      if (!lanes.no.includes('transport')) lanes.no.push('transport');
+
+      const firstCount = lanes.first.length;
+      const anchorCount = lanes.first.length + lanes.week.length;
+      const label = firstCount ? 'Book first' : anchorCount ? 'Easy anchors' : 'Flexible day';
+      const title = firstCount
+        ? 'Secure the scarce slots before the rest of the plan.'
+        : anchorCount
+          ? 'Make one or two bookings, then leave room.'
+          : 'Berlin is flexible when you skip unnecessary reservations.';
+      const text = firstCount
+        ? 'Your selected trip has at least one reservation that can disappear or shape the day. Handle that first.'
+        : anchorCount
+          ? 'You have useful anchors, but nothing here needs a fully locked itinerary.'
+          : 'Most of your plan can be decided after you see the weather, your energy and the neighborhood you are already in.';
+
+      document.getElementById('resultLabel').textContent = label;
+      document.getElementById('resultTitle').textContent = title;
+      document.getElementById('resultText').textContent = text;
+      document.getElementById('scoreNumber').textContent = String(Math.max(anchorCount, 1));
+
+      document.getElementById('laneFirst').innerHTML = lanes.first.length ? lanes.first.map(cardFor).join('') : fallback('first');
+      document.getElementById('laneWeek').innerHTML = lanes.week.length ? lanes.week.map(cardFor).join('') : fallback('week');
+      document.getElementById('laneWait').innerHTML = lanes.wait.length ? lanes.wait.map(cardFor).join('') : fallback('wait');
+      document.getElementById('laneNo').innerHTML = lanes.no.map(cardFor).join('');
+
+      const primary = lanes.first[0] || lanes.week[0] || lanes.wait[0] || 'transport';
+      document.getElementById('stepOne').textContent = primary === 'transport' ? 'First move' : `First: ${items[primary].title}`;
+      document.getElementById('stepOneText').textContent = primary === 'transport' ? 'Buy transport only when the route is clear.' : items[primary].fixed;
+      document.getElementById('stepTwo').textContent = lanes.week[1] ? `Then: ${items[lanes.week[1]].title}` : 'Second move';
+      document.getElementById('stepTwoText').textContent = lanes.week[1] ? items[lanes.week[1]].fixed : 'Add one paid timed slot only if it protects the day.';
+      document.getElementById('stepThree').textContent = 'Keep loose';
+      document.getElementById('stepThreeText').textContent = state.season === 'rain'
+        ? 'Hold one indoor backup, but do not book the whole rainy day.'
+        : 'Leave normal meals, transport and outdoor sights open.';
+
+      window.dispatchEvent(new Event('resize'));
+    }
+
+    document.querySelectorAll('[data-group]').forEach((group) => {
+      group.addEventListener('click', (event) => {
+        const button = event.target.closest('button[data-value]');
+        if (!button) return;
+        const key = group.dataset.group;
+        state[key] = button.dataset.value;
+        group.querySelectorAll('button').forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+        render();
+      });
+    });
+
+    document.querySelector('[data-needs]').addEventListener('click', (event) => {
+      const button = event.target.closest('button[data-need]');
+      if (!button) return;
+      const key = button.dataset.need;
+      if (state.needs.has(key)) {
+        state.needs.delete(key);
+        button.setAttribute('aria-pressed', 'false');
+      } else {
+        state.needs.add(key);
+        button.setAttribute('aria-pressed', 'true');
+      }
+      render();
+    });
+
+    render();
+  </script>
+  <script src="../js/brand.js"></script>
+</body>
+</html>

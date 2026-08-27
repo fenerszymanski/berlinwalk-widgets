@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Berlin Reading Stop Line | BerlinWalk</title>
+  <link rel="icon" type="image/png" href="../tools-home/icons/berlin-reading-stop-line-160.png">
+  <link rel="stylesheet" href="../css/brand.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <style>
+    :root { --ink: #123d18; --deep: #08250f; --paper: #f8f1e1; --cream: #fffdf8; --yellow: #ffe600; --brass: #b37b19; --moss: #5b7447; --muted: #536256; --line: rgba(18,61,24,.22); }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: transparent; color: var(--ink); font-family: Arial, Helvetica, sans-serif; }
+    button, a { font: inherit; }
+    button { cursor: pointer; }
+    button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+    [hidden] { display: none !important; }
+    .line-tool { max-width: 940px; margin: 0 auto; overflow: hidden; border: 1px solid var(--line); border-radius: 28px; background: var(--paper); box-shadow: 0 18px 52px rgba(18,61,24,.16); }
+    .desk { position: relative; display: grid; grid-template-columns: minmax(0,1fr) 168px; gap: 28px; min-height: 278px; padding: 35px 36px 32px; overflow: hidden; background: radial-gradient(circle at 86% 18%, rgba(255,230,0,.22), transparent 24%), linear-gradient(130deg, #08250f, #123d18 62%, #315b37); color: #fff; }
+    .desk::after { content: ''; position: absolute; right: -110px; bottom: -128px; width: 340px; height: 340px; border: 42px solid rgba(255,255,255,.055); border-radius: 50%; }
+    .eyebrow { position: relative; z-index: 1; margin: 0 0 13px; color: var(--yellow); font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    h1 { position: relative; z-index: 1; max-width: 620px; margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(39px, 5.7vw, 66px); line-height: .94; letter-spacing: -.055em; }
+    .hero-copy { position: relative; z-index: 1; max-width: 650px; margin: 17px 0 0; color: rgba(255,255,255,.91); font-size: 16px; line-height: 1.58; }
+    .tool-icon { position: relative; z-index: 1; align-self: end; width: 160px; height: auto; border-radius: 28px; box-shadow: 0 20px 34px rgba(0,0,0,.28); }
+    .inside { padding: 29px 34px 35px; }
+    .intro { max-width: 740px; margin: 0 auto 23px; color: #314b36; font-size: 17px; line-height: 1.58; text-align: center; }
+    .line-key { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 15px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,.58); }
+    .line-key strong { font-size: 13px; }
+    .line-key p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; text-align: right; }
+    .map-stage { position: relative; min-height: 430px; margin-top: 17px; overflow: hidden; border: 1px solid rgba(18,61,24,.31); border-radius: 22px; background: #dce7d8; box-shadow: 0 11px 26px rgba(18,61,24,.12); }
+    #reading-map { width: 100%; min-height: 430px; background: #dce7d8; }
+    .map-fallback { display: grid; min-height: 430px; place-items: center; padding: 28px; color: #314b36; text-align: center; }
+    .leaflet-control-attribution { font-size: 10px; }
+    .reading-marker { display: grid; width: 38px; height: 52px; place-items: center; filter: drop-shadow(0 4px 5px rgba(0,0,0,.22)); }
+    .reading-marker span { display: grid; width: 31px; height: 31px; place-items: center; border: 3px solid #fffdf7; border-radius: 50% 50% 50% 4px; transform: rotate(-45deg); background: var(--ink); color: var(--yellow); font-family: Georgia,serif; font-size: 14px; font-weight: 800; }
+    .reading-marker span b { transform: rotate(45deg); }
+    .reading-marker.selected span { background: var(--yellow); color: var(--deep); border-color: var(--deep); transform: rotate(-45deg) scale(1.17); }
+    .bookmarks { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin-top: 17px; }
+    .bookmark { position: relative; min-height: 98px; padding: 17px 14px 15px 23px; border: 1px solid rgba(18,61,24,.27); border-radius: 15px; background: var(--cream); color: var(--ink); text-align: left; transition: transform .18s ease, background .18s ease, box-shadow .18s ease; }
+    .bookmark::before { content: ''; position: absolute; top: 13px; bottom: 13px; left: 11px; width: 4px; border-radius: 999px; background: var(--moss); }
+    .bookmark:hover { transform: translateY(-2px); background: #fff8d9; box-shadow: 0 8px 18px rgba(18,61,24,.12); }
+    .bookmark[aria-pressed="true"] { border-color: var(--deep); background: var(--yellow); box-shadow: inset 0 0 0 1px var(--deep); }
+    .bookmark[aria-pressed="true"]::before { background: var(--deep); }
+    .bookmark small { display: block; margin-bottom: 6px; color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .bookmark[aria-pressed="true"] small { color: #27472c; }
+    .bookmark strong { display: block; font-family: Georgia, 'Times New Roman', serif; font-size: 21px; line-height: .98; letter-spacing: -.035em; }
+    .bookmark span { display: block; margin-top: 6px; font-size: 12px; line-height: 1.38; }
+    .place-sheet { display: grid; grid-template-columns: 195px minmax(0,1fr); gap: 20px; align-items: stretch; margin-top: 17px; overflow: hidden; border: 1px solid rgba(179,123,25,.48); border-radius: 20px; background: #fff8df; }
+    .place-image { min-height: 230px; background: #315b37 center / cover no-repeat; }
+    .place-image.dussmann { background-image: linear-gradient(0deg, rgba(8,37,15,.26), rgba(8,37,15,.04)), url('assets/dussmann-exterior.jpg'); }
+    .place-image.shakespeare { background-image: linear-gradient(135deg, #74272b, #315b37); }
+    .place-image.curious { background-image: linear-gradient(135deg, #315b37, #84632d); }
+    .place-detail { padding: 22px 23px 21px 0; }
+    .place-kicker { margin: 0 0 8px; color: #6e4b12; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .place-detail h2 { margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 32px; line-height: .98; letter-spacing: -.04em; }
+    .place-address { margin: 8px 0 0; color: #586148; font-size: 13px; font-weight: 700; }
+    .place-copy { margin: 14px 0 0; color: #3d4c3d; font-size: 14px; line-height: 1.58; }
+    .place-move { margin: 14px 0 0; padding: 11px 13px; border-left: 4px solid var(--brass); background: rgba(255,255,255,.54); color: #314b36; font-size: 13px; line-height: 1.48; }
+    .place-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+    .place-links a { display: inline-flex; align-items: center; min-height: 38px; padding: 9px 12px; border: 1px solid var(--ink); border-radius: 999px; color: var(--ink); font-size: 12px; font-weight: 800; text-decoration: none; }
+    .place-links a:hover { background: var(--ink); color: #fff; }
+    .notice { margin: 20px 0 0; color: var(--muted); font-size: 12px; line-height: 1.58; text-align: center; }
+    #tool-credits { position: relative; min-height: 34px; margin-top: 18px; border-top: 1px solid var(--line); }
+    #tool-credits summary { padding: 15px 0 2px; color: var(--ink); cursor: pointer; font-size: 12px; font-weight: 800; }
+    #tool-credits .credit-copy { color: var(--muted); font-size: 12px; line-height: 1.55; }
+    #tool-credits[open] .credit-copy { position: absolute; z-index: 5; right: 0; bottom: calc(100% + 8px); left: 0; margin: 0; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--cream); box-shadow: 0 12px 26px rgba(18,61,24,.16); }
+    .credit-copy a { color: var(--ink); font-weight: 800; }
+    @media (max-width: 720px) { .line-tool { border-radius: 19px; } .desk { grid-template-columns: minmax(0,1fr) 106px; gap: 15px; min-height: 255px; padding: 27px 22px; } .tool-icon { width: 104px; border-radius: 20px; } .inside { padding: 22px 16px 29px; } .map-stage, #reading-map { min-height: 360px; } .bookmarks { grid-template-columns: 1fr; } .bookmark { min-height: 82px; } .place-sheet { grid-template-columns: 128px minmax(0,1fr); gap: 14px; } .place-image { min-height: 100%; } .place-detail { padding: 19px 16px 19px 0; } .place-detail h2 { font-size: 28px; } }
+    @media (max-width: 430px) { .desk { grid-template-columns: 1fr; } .tool-icon { width: 90px; } .line-key { display: block; } .line-key p { margin-top: 5px; text-align: left; } .map-stage, #reading-map { min-height: 325px; } .place-sheet { grid-template-columns: 1fr; gap: 0; } .place-image { min-height: 155px; } .place-detail { padding: 18px; } .place-links a { width: 100%; justify-content: center; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+  <main class="line-tool" id="bw-reading-line">
+    <section class="desk" aria-labelledby="tool-title">
+      <div>
+        <p class="eyebrow">Berlin bookshop orientation</p>
+        <h1 id="tool-title">Berlin Reading Stop Line</h1>
+        <p class="hero-copy">Open one real stop on the map. The point is not to collect three shops; it is to choose the shelf that fits the part of Berlin you already have.</p>
+      </div>
+      <img class="tool-icon" src="../tools-home/icons/berlin-reading-stop-line.png" alt="" width="512" height="512">
+    </section>
+
+    <section class="inside">
+      <p class="intro">Begin with a place, then let the map move the bookmark. Each stop gives one reason to go and one official page to check. This is not a live stock, opening-hours or route service.</p>
+      <div class="line-key" aria-live="polite">
+        <strong id="line-title">No bookmark placed</strong>
+        <p id="line-copy">Choose a map marker or a stop below to start with a useful part of Berlin.</p>
+      </div>
+
+      <section class="map-stage" aria-label="Map of three Berlin bookshop stops">
+        <div id="reading-map"><div class="map-fallback">Loading the Berlin reading line…</div></div>
+      </section>
+
+      <div class="bookmarks" role="group" aria-label="Choose a Berlin reading stop">
+        <button class="bookmark" type="button" data-stop="dussmann" aria-pressed="false"><small>Mitte · range</small><strong>Dussmann</strong><span>Place the bookmark where a wide English shelf is the task.</span></button>
+        <button class="bookmark" type="button" data-stop="shakespeare" aria-pressed="false"><small>Friedrichshain · pause</small><strong>Shakespeare &amp; Sons</strong><span>Move east when books and a café belong in the same hour.</span></button>
+        <button class="bookmark" type="button" data-stop="curious" aria-pressed="false"><small>Kreuzberg · independent</small><strong>Curious Fox</strong><span>Make the smaller shelf the reason to stay local in Kreuzberg.</span></button>
+      </div>
+
+      <section class="place-sheet" id="place-sheet" aria-live="polite" aria-labelledby="place-title">
+        <div class="place-image dussmann" id="place-image" role="img" aria-label="Dussmann KulturKaufhaus exterior on Friedrichstraße"></div>
+        <div class="place-detail">
+          <p class="place-kicker" id="place-kicker">Mitte · wide English shelf</p>
+          <h2 id="place-title">Dussmann KulturKaufhaus</h2>
+          <p class="place-address" id="place-address">Friedrichstraße 90 · 10117 Berlin</p>
+          <p class="place-copy" id="place-copy">Start here when a particular title or a broad English-language browse is the actual job. Keep it with a central Berlin day rather than pulling it across town.</p>
+          <p class="place-move" id="place-move"><strong>Useful move:</strong> choose a genre or author before you enter, then let the size work for you instead of trying to see every floor.</p>
+          <div class="place-links"><a id="official-link" href="https://www.kulturkaufhaus.de/en/kulturkaufhaus/blick-ins-kulturkaufhaus" target="_blank" rel="noopener">Check the official page</a><a id="map-link" href="https://www.openstreetmap.org/?mlat=52.5186&amp;mlon=13.3889#map=17/52.5186/13.3889" target="_blank" rel="noopener">Open the map</a></div>
+        </div>
+      </section>
+
+      <p class="notice">Marker positions are approximate orientation points. Use the named shop's official page before setting out for live opening, events and stock.</p>
+      <details id="tool-credits"><summary>Tool visual credits</summary><p class="credit-copy">The map uses <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a> and Leaflet. The Dussmann photograph shown in the selected Mitte state is by Gryffindor and is public domain via <a href="https://commons.wikimedia.org/wiki/File:Dussmann_Kulturkaufhaus_4.JPG" target="_blank" rel="noopener">Wikimedia Commons</a>.</p></details>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="../js/brand.js"></script>
+  <script>
+    (function () {
+      var root = document.getElementById('bw-reading-line');
+      var title = document.getElementById('line-title');
+      var copy = document.getElementById('line-copy');
+      var image = document.getElementById('place-image');
+      var kicker = document.getElementById('place-kicker');
+      var placeTitle = document.getElementById('place-title');
+      var address = document.getElementById('place-address');
+      var placeCopy = document.getElementById('place-copy');
+      var move = document.getElementById('place-move');
+      var official = document.getElementById('official-link');
+      var mapLink = document.getElementById('map-link');
+      var buttons = Array.prototype.slice.call(root.querySelectorAll('.bookmark'));
+      var markers = {};
+      var map = null;
+      var stops = {
+        dussmann: { name: 'Dussmann KulturKaufhaus', kicker: 'Mitte · wide English shelf', address: 'Friedrichstraße 90 · 10117 Berlin', point: [52.5186, 13.3889], official: 'https://www.kulturkaufhaus.de/en/kulturkaufhaus/blick-ins-kulturkaufhaus', map: 'https://www.openstreetmap.org/?mlat=52.5186&mlon=13.3889#map=17/52.5186/13.3889', copy: 'Start here when a particular title or a broad English-language browse is the actual job. Keep it with a central Berlin day rather than pulling it across town.', move: 'Choose a genre or author before you enter, then let the size work for you instead of trying to see every floor.', image: 'dussmann', label: 'Mitte bookmark placed', line: 'Wide range belongs in the centre. Make Dussmann the book task after a Mitte morning, not one more attraction.' },
+        shakespeare: { name: 'Shakespeare & Sons', kicker: 'Friedrichshain · bookshop and café', address: 'Warschauer Straße 74 · 10243 Berlin', point: [52.5103, 13.4527], official: 'https://www.shakespeareandsons.com/pages/about-shakespeare-sons', map: 'https://www.openstreetmap.org/?mlat=52.5103&mlon=13.4527#map=17/52.5103/13.4527', copy: 'Choose this east-side stop when the browse needs a slower break with it. It makes more sense after a Friedrichshain afternoon than as a rushed extension of Mitte.', move: 'Give the pause a full hour. Check the current shop page before travelling, then let a book and coffee be enough for this part of the day.', image: 'shakespeare', label: 'East-side bookmark placed', line: 'Books and a café can be the point of the hour. Do not turn the east-side stop into a forced sprint from the centre.' },
+        curious: { name: 'Curious Fox', kicker: 'Kreuzberg · independent English-language shelf', address: 'Lausitzer Platz 17 · 10997 Berlin', point: [52.5002, 13.4299], official: 'https://www.curiousfoxbooks.com/about', map: 'https://www.openstreetmap.org/?mlat=52.5002&mlon=13.4299#map=17/52.5002/13.4299', copy: 'Make this the local independent browse when Kreuzberg is already your neighbourhood for the afternoon or evening. It is the opposite of a department-store errand.', move: 'Choose the smaller shelf on purpose. Pair it with a nearby walk or meal, then check the official page for the current opening and events.', image: 'curious', label: 'Kreuzberg bookmark placed', line: 'The independent stop works when Kreuzberg is already the day. Keep the rest of the plan nearby and let the shelf be specific.' }
+      };
+      function reportHeight() {
+        var height = Math.ceil(Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, root.getBoundingClientRect().bottom));
+        window.parent.postMessage({ type: 'berlinwalk-widget-height', slug: 'berlin-reading-stop-line', height: height }, '*');
+      }
+      function markerIcon(selected) {
+        return L.divIcon({ className: 'reading-marker' + (selected ? ' selected' : ''), html: '<span><b>⌂</b></span>', iconSize: [38, 52], iconAnchor: [19, 49] });
+      }
+      function selectStop(key, pan) {
+        var stop = stops[key]; if (!stop) return;
+        buttons.forEach(function (button) { button.setAttribute('aria-pressed', String(button.dataset.stop === key)); });
+        Object.keys(markers).forEach(function (markerKey) { markers[markerKey].setIcon(markerIcon(markerKey === key)); });
+        title.textContent = stop.label; copy.textContent = stop.line;
+        image.className = 'place-image ' + stop.image;
+        image.setAttribute('aria-label', stop.name + ' place image');
+        kicker.textContent = stop.kicker; placeTitle.textContent = stop.name; address.textContent = stop.address; placeCopy.textContent = stop.copy;
+        move.innerHTML = '<strong>Useful move:</strong> ' + stop.move;
+        official.href = stop.official; mapLink.href = stop.map;
+        if (map && pan) map.flyTo(stop.point, 14, { duration: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : .6 });
+        reportHeight();
+      }
+      function startMap() {
+        if (!window.L) { document.getElementById('reading-map').innerHTML = '<div class="map-fallback">The map could not load here. Use the three named official links below to choose a stop.</div>'; reportHeight(); return; }
+        map = L.map('reading-map', { scrollWheelZoom: false, zoomControl: true, attributionControl: true }).setView([52.509, 13.421], 12);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
+        Object.keys(stops).forEach(function (key) {
+          markers[key] = L.marker(stops[key].point, { icon: markerIcon(false), title: stops[key].name, keyboard: true }).addTo(map);
+          markers[key].on('click', function () { selectStop(key, true); });
+        });
+        setTimeout(function () { map.invalidateSize(); selectStop('dussmann', false); }, 100);
+      }
+      buttons.forEach(function (button) { button.addEventListener('click', function () { selectStop(button.dataset.stop, true); }); });
+      startMap();
+      window.addEventListener('load', reportHeight);
+      window.addEventListener('resize', reportHeight);
+      reportHeight();
+    }());
+  </script>
+</body>
+</html>

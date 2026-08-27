@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bw-green: #1B5E20;
+  --bw-green-dark: #164a1a;
+  --bw-yellow: #FFE600;
+  --bw-lime: #7CB342;
+  --bw-lime-soft: #F2F8E8;
+  --bw-border: #DCE8C8;
+  --bw-cream: #FAFAF5;
+  --bw-text: #212121;
+  --bw-muted: #4E5A4E;
+  --bw-white: #FFFFFF;
+  --bw-safe: #2E7D32;
+  --bw-moderate: #F9A825;
+  --bw-high: #C62828;
+  --bw-red: #B00020;
+  --brand-green: var(--bw-green);
+  --brand-yellow: var(--bw-yellow);
+  --brand-lime: var(--bw-lime);
+  --light-green: #C5E1A5;
+  --cream: var(--bw-cream);
+  --text: var(--bw-text);
+  --muted: var(--bw-muted);
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  font-family: Montserrat, Arial, sans-serif;
+  color: var(--bw-text);
+}
+
+/* Attribution badge injected by brand.js into every widget */
+.bw-attr-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 14px 10px;
+  background: var(--bw-green, #1B5E20);
+  color: var(--bw-yellow, #FFE600);
+  font-family: Montserrat, Arial, sans-serif;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin: 14px 0 0;
+  border-radius: 0;
+  line-height: 1;
+  transition: background 0.15s ease;
+}
+
+.bw-attr-badge:hover,
+.bw-attr-badge:focus {
+  background: var(--bw-green-dark, #164a1a);
+  color: var(--bw-yellow, #FFE600);
+  outline: none;
+}
+
+.bw-attr-badge .bw-attr-logo {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #FAFAF5;
+  display: block;
+  flex: 0 0 18px;
+}
+
+.bw-attr-badge .bw-attr-text {
+  display: inline;
+  color: #FFFFFF;
+  font-weight: 600;
+  letter-spacing: 1.1px;
+}
+
+.bw-attr-badge .bw-attr-text strong {
+  color: var(--bw-yellow, #FFE600);
+  font-weight: 800;
+}
+
+.bw-attr-badge .bw-attr-arrow {
+  font-weight: 900;
+  font-size: 12px;
+  margin-left: 2px;
+}
+
+.bw-tour-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 14px 0 0;
+}
+
+/* Quick Summary already has an internal BERLINWALK.COM line, so brand.js
+   renders only the useful next-tour link and lets it own the complete row. */
+.bw-tour-cta-row.bw-tour-cta-row--full {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.bw-tour-cta-row.bw-tour-cta-row--full .bw-tour-cta-link {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+}
+
+.bw-tour-cta-link {
+  flex: 1 1 240px;
+  min-width: 0;
+  padding: 11px 14px 12px;
+  background: linear-gradient(135deg, #1B5E20 0%, #164a1a 100%);
+  color: #FFFFFF;
+  text-decoration: none;
+  font-family: Montserrat, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.35;
+  border-radius: 0;
+  border: 1px solid var(--bw-border, #DCE8C8);
+}
+
+.bw-tour-cta-link:hover,
+.bw-tour-cta-link:focus {
+  background: linear-gradient(135deg, #164a1a 0%, #123a14 100%);
+  color: #FFFFFF;
+  outline: none;
+}
+
+.bw-tour-cta-text {
+  display: block;
+}
+
+.bw-attr-badge-inline {
+  margin: 0;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+@media (max-width: 460px) {
+  .bw-tour-cta-row {
+    gap: 8px;
+  }
+
+  .bw-tour-cta-link {
+    font-size: 11px;
+    padding: 10px 12px 11px;
+  }
+
+  .bw-attr-badge {
+    font-size: 10px;
+    letter-spacing: 1.1px;
+    padding: 8px 12px 9px;
+    gap: 7px;
+  }
+  .bw-attr-badge .bw-attr-logo {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+  }
+}
