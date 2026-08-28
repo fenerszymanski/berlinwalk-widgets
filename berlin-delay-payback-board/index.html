@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Berlin Delay Payback Board</title>
+<meta name="description" content="A late train out of Berlin pays 25 percent at 60 minutes and 50 percent at 120, but nothing under 4 euros is ever paid out. Drag the delay, add each bad journey, and watch the running total cross the floor." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='32' r='16' fill='%23FFE600'/%3E%3Cpath d='M32 22v11l7 5' stroke='%23123D18' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-dark:#123D18; --green-mid:#2E7D32;
+    --lime:#7CB342; --light:#C5E1A5; --yellow:#FFE600;
+    --ink:#212121; --muted:#4b584b; --line:#E3E8DC; --panel:#F4F7F0;
+    --amber:#B87400; --dead:#8d8d8d;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .wrap{max-width:760px;margin:0 auto;padding:4px 14px 20px}
+  .kicker{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-mid);margin:0 0 6px}
+  h1{font-size:22px;font-weight:800;line-height:1.16;margin:0 0 8px;color:var(--green-dark)}
+  .lede{font-size:14.5px;color:var(--muted);margin:0 0 16px}
+  .lbl{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--green-mid);margin:0 0 7px;display:block}
+
+  .deck{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 13px 14px;margin:0 0 12px}
+  .modes{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 14px}
+  .md{appearance:none;border:2px solid var(--line);background:#fff;border-radius:10px;padding:6px 10px;text-align:left;
+      font-family:inherit;color:var(--green-dark);cursor:pointer;transition:.13s;line-height:1.2}
+  .md:hover{border-color:var(--lime)}
+  .md:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+  .md[aria-pressed="true"]{border-color:var(--green);background:var(--green);color:#fff}
+  .md b{display:block;font-size:12.5px;font-weight:800}
+  .md span{display:block;font-size:10.5px;font-weight:600;opacity:.78;margin-top:1px}
+
+  .slide{margin:0 0 12px}
+  .slide:last-child{margin-bottom:0}
+  .slidehead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px}
+  .read{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:24px;font-weight:700;color:var(--green-dark);line-height:1}
+  .state{font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+  input[type=range]{width:100%;margin:9px 0 2px;-webkit-appearance:none;appearance:none;background:transparent;height:28px;cursor:pointer}
+  input[type=range]:focus-visible{outline:3px solid var(--lime);outline-offset:2px;border-radius:8px}
+  input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:6px;background:var(--light)}
+  input[type=range]::-moz-range-track{height:8px;border-radius:6px;background:var(--light)}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--yellow);
+    border:3px solid var(--green-dark);margin-top:-8px}
+  input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--yellow);border:3px solid var(--green-dark)}
+  .ticks{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10px;color:var(--muted)}
+  .hidden{display:none}
+
+  .stage{border:2px solid var(--green-dark);border-radius:14px;overflow:hidden;background:#EFF1E7;margin:0 0 10px}
+  canvas{display:block;width:100%;height:auto}
+
+  .addbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 14px}
+  .add{appearance:none;border:2px solid var(--green-dark);background:var(--yellow);color:var(--green-dark);border-radius:11px;
+       padding:9px 16px;font-family:inherit;font-size:13.5px;font-weight:800;cursor:pointer;transition:.13s}
+  .add:hover{background:#ffef5c}
+  .add:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+  .addnote{font-size:12px;color:var(--muted)}
+
+  .verdict{border:2px solid var(--green);border-radius:14px;background:#fff;padding:13px 14px 14px;margin:0 0 12px}
+  .verdict h2{font-size:16.5px;font-weight:800;color:var(--green-dark);margin:0 0 3px}
+  .vsub{font-size:13px;color:var(--green-mid);font-weight:700;margin:0 0 10px}
+  .facts{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 11px}
+  .fact{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:5px 9px;font-size:11.5px;color:var(--muted)}
+  .fact b{color:var(--green-dark);font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:700}
+  .verdict p{font-size:13.5px;margin:0 0 9px;color:var(--ink)}
+  .verdict p:last-child{margin-bottom:0}
+  .callout{border-left:4px solid var(--yellow);background:#FFFDF0;padding:8px 11px;border-radius:0 9px 9px 0;font-size:12.5px;margin:0}
+  .callout b{color:var(--green-dark)}
+
+  .cases{display:flex;flex-direction:column;gap:6px;margin:0 0 12px}
+  .case{display:flex;gap:10px;align-items:center;border:2px solid var(--line);background:#fff;border-radius:12px;padding:7px 10px}
+  .case.paid{border-color:var(--green);background:#F1F6EC}
+  .cmain{flex:1 1 auto;min-width:0}
+  .cname{display:block;font-size:12.5px;font-weight:800;color:var(--green-dark);overflow-wrap:anywhere}
+  .cmeta{display:block;font-size:11px;color:var(--muted);margin-top:1px}
+  .camt{flex:0 0 auto;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:14.5px;font-weight:700;color:var(--green-dark)}
+  .drop{appearance:none;flex:0 0 auto;border:2px solid var(--line);background:#fff;border-radius:9px;width:30px;height:30px;
+        font-family:inherit;font-size:15px;font-weight:800;line-height:1;color:var(--muted);cursor:pointer}
+  .drop:hover{border-color:#E63946;color:#E63946}
+  .drop:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+  .empty{font-size:12.5px;color:var(--muted);padding:12px;border:2px dashed var(--line);border-radius:12px;margin:0 0 12px}
+  .src{font-size:10.5px;color:#5c655c;margin:0}
+  .src a{color:var(--green)}
+  @media(max-width:420px){ h1{font-size:19.5px} .read{font-size:21px} .case{padding:6px 8px;gap:8px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Berlin Tools</p>
+  <h1>Berlin Delay Payback Board</h1>
+  <p class="lede">A late train out of Berlin pays 25 percent at 60 minutes and 50 percent at 120, and a late U-Bahn pays nothing at all in money. Underneath both sits a four euro floor that quietly cancels most small claims. Set the journey, drag the delay, then add each bad trip and watch where the running total lands against that floor.</p>
+
+  <div class="deck">
+    <span class="lbl" id="modelbl">What you were travelling on</span>
+    <div class="modes" id="modes" role="group" aria-labelledby="modelbl"></div>
+
+    <div class="slide" id="fareslide">
+      <div class="slidehead">
+        <div>
+          <span class="lbl">Fare you paid for that one journey</span>
+          <span class="read" id="fareread">29.90 EUR</span>
+        </div>
+      </div>
+      <input type="range" id="fare" min="2" max="200" step="0.1" value="29.9" aria-label="Fare paid for the single journey in euros" />
+      <div class="ticks"><span>2</span><span>50</span><span>100</span><span>150</span><span>200</span></div>
+    </div>
+
+    <div class="slide">
+      <div class="slidehead">
+        <div>
+          <span class="lbl">Delay at your destination station</span>
+          <span class="read" id="delayread">70 min</span>
+        </div>
+        <span class="state" id="delaystate"></span>
+      </div>
+      <input type="range" id="delay" min="0" max="240" step="5" value="70" aria-label="Delay at the destination station in minutes" />
+      <div class="ticks"><span>0</span><span>60</span><span>120</span><span>180</span><span>240</span></div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <canvas id="board" width="1400" height="900" role="img" aria-label="Two charts: the payout curve against delay in minutes for the selected ticket, and the running total of every journey added so far measured against the four euro payout floor"></canvas>
+  </div>
+
+  <div class="addbar">
+    <button type="button" class="add" id="addbtn">Add this journey</button>
+    <span class="addnote" id="addnote"></span>
+  </div>
+
+  <div id="verdict"></div>
+  <div class="cases" id="cases"></div>
+  <p class="src" id="src"></p>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var modesEl = document.getElementById('modes');
+  var fareEl = document.getElementById('fare');
+  var fareSlide = document.getElementById('fareslide');
+  var fareRead = document.getElementById('fareread');
+  var delayEl = document.getElementById('delay');
+  var delayRead = document.getElementById('delayread');
+  var delayState = document.getElementById('delaystate');
+  var addBtn = document.getElementById('addbtn');
+  var addNote = document.getElementById('addnote');
+  var casesEl = document.getElementById('cases');
+  var verdictEl = document.getElementById('verdict');
+  var srcEl = document.getElementById('src');
+  var cv = document.getElementById('board');
+
+  var DATA = null;
+  var K = 1; // canvas type scale, so a 360px phone is not drawn at desktop sizes
+  var modeId = 'single';
+  var cases = [];
+  var seq = 0;
+
+  function mode(id) {
+    for (var i = 0; i < DATA.modes.length; i += 1) if (DATA.modes[i].id === (id || modeId)) return DATA.modes[i];
+    return DATA.modes[0];
+  }
+  // Round half up in cents. Plain toFixed turns 7.475 into 7.47 because the
+  // float sits a hair below, and the article quotes 7.48 for the same fare.
+  function cents(v) { return Math.round(v * 100 + 1e-6) / 100; }
+  function eur(v) { return cents(v).toFixed(2).replace('.', ',') + ' EUR'; }
+
+  /** What one journey is worth, in euros, under the selected rule. */
+  function payout(m, minutes, fare) {
+    if (m.kind === 'ticket') return 0;
+    var best = 0;
+    for (var i = 0; i < m.steps.length; i += 1) {
+      var s = m.steps[i];
+      if (minutes < s.fromMin) continue;
+      best = m.kind === 'percentage' ? fare * s.share : s.amount;
+    }
+    return best;
+  }
+  /** A free BVG ticket is an entitlement but not money, so it is counted apart. */
+  function freeTicket(m, minutes) { return m.kind === 'ticket' && minutes > 20 ? 1 : 0; }
+
+  function totals() {
+    var cash = cents(cases.reduce(function (a, c) { return a + cents(c.amount); }, 0));
+    var tickets = cases.reduce(function (a, c) { return a + c.tickets; }, 0);
+    return { cash: cash, tickets: tickets, sum: cash };
+  }
+
+  function currentCase() {
+    var m = mode();
+    var minutes = +delayEl.value;
+    var fare = +fareEl.value;
+    return {
+      modeId: m.id, label: m.label, minutes: minutes,
+      fare: m.kind === 'percentage' ? fare : 0,
+      amount: payout(m, minutes, fare),
+      tickets: freeTicket(m, minutes),
+    };
+  }
+
+  /* ---------------- canvas ---------------- */
+
+  function ft(weight, size, mono) {
+    return weight + ' ' + Math.round(size * K * 10) / 10 + 'px ' + (mono ? '"IBM Plex Mono", monospace' : 'Montserrat, sans-serif');
+  }
+
+  function fit() {
+    var w = cv.parentNode.clientWidth || 700;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    K = Math.max(0.72, Math.min(1, w / 620));
+    var h = Math.round(w * (w < 520 ? 1.12 : 0.66));
+    cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+    cv.style.height = h + 'px';
+    var ctx = cv.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return { ctx: ctx, w: w, h: h };
+  }
+
+  /** BVG pays a ticket, not euros, so that mode gets its own two-state axis. */
+  function visualValue(m, minutes, fare) {
+    return m.kind === 'ticket' ? freeTicket(m, minutes) : payout(m, minutes, fare);
+  }
+  function visualPeak(m, fare) {
+    if (m.kind === 'ticket') return 1.45;
+    // Headroom so the top step never touches the frame and its label stays clear.
+    return Math.max(payout(m, 240, fare) * 1.15, DATA.payoutFloorEur * 1.7, 1);
+  }
+
+  function drawCurve(ctx, x, y, w, h) {
+    var m = mode();
+    var fare = +fareEl.value;
+    var maxMin = 240;
+    var peak = visualPeak(m, fare);
+    var px = function (min) { return x + (min / maxMin) * w; };
+    var py = function (v) { return y + h - (v / peak) * h; };
+
+    ctx.fillStyle = '#fff'; ctx.fillRect(x, y, w, h);
+    ctx.strokeStyle = '#E3E8DC'; ctx.lineWidth = 1;
+    for (var t = 60; t < maxMin; t += 60) {
+      ctx.beginPath(); ctx.moveTo(px(t), y); ctx.lineTo(px(t), y + h); ctx.stroke();
+    }
+    ctx.strokeStyle = '#C5E1A5'; ctx.lineWidth = 1.5;
+    ctx.strokeRect(x + 0.5, y + 0.5, w - 1, h - 1);
+
+    ctx.font = ft('600', 11); ctx.textAlign = 'left';
+    if (m.kind === 'ticket') {
+      // One horizontal band marks the only outcome this mode has.
+      var ty = py(1);
+      ctx.setLineDash([6, 5]); ctx.strokeStyle = '#B87400'; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(x, ty); ctx.lineTo(x + w, ty); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = '#B87400'; ctx.fillText('one free ticket', x + 6 * K, ty - 6 * K);
+    } else {
+      var fy = py(DATA.payoutFloorEur);
+      ctx.fillStyle = 'rgba(141,141,141,0.14)';
+      ctx.fillRect(x + 1, fy, w - 2, y + h - fy - 1);
+      ctx.setLineDash([6, 5]); ctx.strokeStyle = '#8d8d8d'; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(x, fy); ctx.lineTo(x + w, fy); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = '#5c655c'; ctx.fillText('nothing under 4 EUR is paid out', x + 6 * K, fy + 14 * K);
+    }
+
+    // Threshold guides, drawn before the curve so the curve stays on top.
+    for (var i = 0; i < m.steps.length; i += 1) {
+      var s = m.steps[i];
+      if (s.fromMin > maxMin) continue;
+      ctx.setLineDash([3, 4]); ctx.strokeStyle = '#7CB342'; ctx.lineWidth = 1.4;
+      ctx.beginPath(); ctx.moveTo(px(s.fromMin), y); ctx.lineTo(px(s.fromMin), y + h); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = '#2E7D32'; ctx.font = ft('700', 11); ctx.textAlign = 'left';
+      ctx.fillText(s.fromMin + ' min', px(s.fromMin) + 5 * K, y + (15 + i * 15) * K);
+    }
+
+    ctx.strokeStyle = '#1B5E20'; ctx.lineWidth = 3; ctx.lineJoin = 'round';
+    ctx.beginPath();
+    for (var min = 0; min <= maxMin; min += 1) {
+      var cx = px(min), cy = py(visualValue(m, min, fare));
+      if (min === 0) ctx.moveTo(cx, cy); else ctx.lineTo(cx, cy);
+    }
+    ctx.stroke();
+
+    var cur = currentCase();
+    var curV = visualValue(m, cur.minutes, fare);
+    var mx = px(cur.minutes), my = py(curV);
+    ctx.strokeStyle = '#123D18'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(mx, y + h); ctx.lineTo(mx, my); ctx.stroke();
+    ctx.beginPath(); ctx.arc(mx, my, 8, 0, Math.PI * 2);
+    ctx.fillStyle = '#FFE600'; ctx.fill(); ctx.strokeStyle = '#123D18'; ctx.lineWidth = 3; ctx.stroke();
+
+    ctx.fillStyle = '#123D18'; ctx.font = ft('800', 12);
+    var right = mx > x + w * 0.66;
+    ctx.textAlign = right ? 'right' : 'left';
+    var lab = m.kind === 'ticket' ? (cur.tickets ? 'free ticket' : 'nothing owed') : eur(cur.amount);
+    var labY = my < y + 30 * K ? my + 24 * K : my - 13 * K;
+    ctx.fillText(lab, mx + (right ? -13 : 13) * K, labY);
+
+    ctx.fillStyle = '#5c655c'; ctx.font = ft('600', 11); ctx.textAlign = 'center';
+    ctx.fillText('delay at your destination, minutes', x + w / 2, y + h + 17 * K);
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#123D18'; ctx.font = ft('800', 12.5);
+    ctx.fillText('What this one journey pays', x, y - 9 * K);
+  }
+
+  function drawLadder(ctx, x, y, w, h) {
+    var t = totals();
+    var floor = DATA.payoutFloorEur;
+    var scaleMax = Math.max(t.cash * 1.15, floor * 2.2, 1);
+    var px = function (v) { return x + (v / scaleMax) * w; };
+
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#123D18'; ctx.font = ft('800', 12.5);
+    ctx.fillText('Running total on this claim', x, y + 11 * K);
+
+    ctx.font = ft('700', 24, true);
+    ctx.fillStyle = t.cash >= floor ? '#1B5E20' : '#8d8d8d';
+    ctx.fillText(eur(t.cash), x, y + 41 * K);
+
+    if (t.tickets) {
+      ctx.font = ft('700', 12); ctx.fillStyle = '#B87400'; ctx.textAlign = 'right';
+      ctx.fillText('plus ' + t.tickets + ' free BVG ticket' + (t.tickets > 1 ? 's' : ''), x + w, y + 39 * K);
+      ctx.textAlign = 'left';
+    }
+
+    var barY = y + 54 * K, barH = Math.round(30 * K);
+    ctx.fillStyle = '#fff'; ctx.fillRect(x, barY, w, barH);
+    ctx.strokeStyle = '#C5E1A5'; ctx.lineWidth = 1.5;
+    ctx.strokeRect(x + 0.5, barY + 0.5, w - 1, barH - 1);
+
+    var run = 0;
+    for (var i = 0; i < cases.length; i += 1) {
+      var c = cases[i];
+      var x0 = px(run), x1 = px(run + c.amount);
+      run += c.amount;
+      if (x1 - x0 < 0.6) continue;
+      ctx.fillStyle = i % 2 ? '#2E7D32' : '#1B5E20';
+      ctx.fillRect(x0, barY + 1, x1 - x0, barH - 2);
+      ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(x1, barY + 1); ctx.lineTo(x1, barY + barH - 1); ctx.stroke();
+    }
+
+    var fx = px(floor);
+    ctx.strokeStyle = t.cash >= floor ? '#7CB342' : '#E63946'; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(fx, barY - 7); ctx.lineTo(fx, barY + barH + 7); ctx.stroke();
+    ctx.fillStyle = '#5c655c'; ctx.font = ft('700', 11);
+    ctx.textAlign = fx > x + w * 0.8 ? 'right' : 'center';
+    ctx.fillText('4 EUR payout floor', fx, barY + barH + 20 * K);
+    ctx.textAlign = 'left';
+  }
+
+  function draw() {
+    var f = fit();
+    var pad = f.w < 520 ? 16 : 26;
+    var ctx = f.ctx;
+    ctx.clearRect(0, 0, f.w, f.h);
+    ctx.fillStyle = '#EFF1E7'; ctx.fillRect(0, 0, f.w, f.h);
+    var innerW = f.w - pad * 2;
+    var ladderH = Math.round(96 * K);
+    var curveTop = pad + Math.round(20 * K);
+    var curveH = f.h - curveTop - Math.round(28 * K) - ladderH - pad;
+    drawCurve(ctx, pad, curveTop, innerW, curveH);
+    drawLadder(ctx, pad, curveTop + curveH + Math.round(34 * K), innerW, ladderH);
+  }
+
+  /* ---------------- ui ---------------- */
+
+  function renderControls() {
+    var m = mode();
+    fareSlide.className = m.kind === 'percentage' ? 'slide' : 'slide hidden';
+    fareRead.textContent = eur(+fareEl.value);
+    delayRead.textContent = delayEl.value + ' min';
+
+    var cur = currentCase();
+    if (m.kind === 'ticket') {
+      delayState.textContent = cur.tickets ? 'free ticket' : 'nothing owed';
+      delayState.style.color = cur.tickets ? '#B87400' : '#8d8d8d';
+    } else {
+      delayState.textContent = cur.amount > 0 ? eur(cur.amount) : 'nothing owed';
+      delayState.style.color = cur.amount > 0 ? '#1B5E20' : '#8d8d8d';
+    }
+    addNote.textContent = cases.length
+      ? cases.length + ' journey' + (cases.length > 1 ? 's' : '') + ' on this claim'
+      : 'Add every delayed journey, then read the total.';
+  }
+
+  function renderCases() {
+    if (!cases.length) {
+      casesEl.innerHTML = '<p class="empty">No journeys added yet. Set a delay above and press <b>Add this journey</b>. Bundling several small delays into one claim is the only way a travel card ever clears the four euro floor.</p>';
+      return;
+    }
+    var html = '';
+    for (var i = 0; i < cases.length; i += 1) {
+      var c = cases[i];
+      var meta = c.minutes + ' min late';
+      if (c.fare) meta += ' on a ' + eur(c.fare) + ' fare';
+      var amt = c.tickets ? '1 ticket' : eur(c.amount);
+      html += '<div class="case' + (c.amount > 0 || c.tickets ? ' paid' : '') + '">'
+        + '<span class="cmain"><span class="cname">' + c.label + '</span>'
+        + '<span class="cmeta">' + meta + '</span></span>'
+        + '<span class="camt">' + amt + '</span>'
+        + '<button type="button" class="drop" data-i="' + c.id + '" aria-label="Remove this journey">&times;</button>'
+        + '</div>';
+    }
+    casesEl.innerHTML = html;
+  }
+
+  function renderVerdict() {
+    var m = mode();
+    var t = totals();
+    var cur = currentCase();
+    var floor = DATA.payoutFloorEur;
+    var head, sub, body, callout;
+
+    if (!cases.length) {
+      head = cur.amount > 0 ? 'This journey is worth ' + eur(cur.amount)
+        : (cur.tickets ? 'This journey is worth one free ticket' : 'This journey is worth nothing');
+      sub = m.label + ', ' + cur.minutes + ' minutes late at the destination';
+      body = m.kind === 'ticket'
+        ? 'BVG pays in tickets, never in euros. The clause worth remembering is the night one: between 23:00 and 05:00 a taxi you had to take because of the delay is reimbursed up to 25 euros, and the certificate has to reach BVG within 14 days.'
+        : (cur.minutes >= 20 && cur.minutes < 60
+          ? 'Below 60 minutes nothing is owed, but you are already past the 20 minute mark, which releases a saver fare from its booked train. Stop waiting and take the next departure that works.'
+          : (cur.amount > 0
+            ? 'Add it to the claim below. The total on a claim has to reach ' + eur(floor) + ' before anything is paid out, so bundle every bad journey you had.'
+            : 'Nothing is owed at this delay. Drag past 60 minutes to see the first threshold.'));
+      callout = m.note;
+    } else if (t.cash >= floor) {
+      head = 'Worth filing: ' + eur(t.cash);
+      sub = cases.length + ' journey' + (cases.length > 1 ? 's' : '') + ' bundled into one claim';
+      body = 'This clears the ' + eur(floor) + ' payout floor, so the claim will actually pay. Ask for the bank transfer instead of the travel voucher, and file within three months of the journey.';
+      callout = 'Get the delay confirmed while you are still in the station: a stamped Fahrgastrechte form, or the train number with the scheduled and real arrival times.';
+    } else {
+      head = 'Not yet: ' + eur(t.cash);
+      sub = 'Short of the ' + eur(floor) + ' payout floor by ' + eur(floor - t.cash);
+      body = 'Nothing under ' + eur(floor) + ' is ever paid out. Add any other delayed journeys from the same trip, or from the same travel card period, and submit them together.';
+      callout = 'This is exactly why a delayed S-Bahn or a short regional hop inside Berlin is not worth a form on its own.';
+    }
+    if (t.tickets) {
+      body += ' The ' + t.tickets + ' free BVG ticket' + (t.tickets > 1 ? 's' : '') + ' sit' + (t.tickets > 1 ? '' : 's') + ' outside this total and go' + (t.tickets > 1 ? '' : 'es') + ' to BVG on their own certificate.';
+    }
+
+    verdictEl.innerHTML = '<div class="verdict"><h2>' + head + '</h2><p class="vsub">' + sub + '</p>'
+      + '<div class="facts">'
+      + '<span class="fact">Thresholds <b>60 / 120 min</b></span>'
+      + '<span class="fact">Payout floor <b>' + eur(floor) + '</b></span>'
+      + '<span class="fact">Ticket released at <b>20 min</b></span>'
+      + '<span class="fact">Full refund at <b>60 min</b></span>'
+      + '</div><p>' + body + '</p><p class="callout">' + callout + '</p></div>';
+  }
+
+  function render() {
+    renderControls();
+    renderCases();
+    renderVerdict();
+    draw();
+    if (window.bwResize) window.bwResize();
+  }
+
+  function buildModes() {
+    var html = '';
+    for (var i = 0; i < DATA.modes.length; i += 1) {
+      var m = DATA.modes[i];
+      html += '<button type="button" class="md" data-id="' + m.id + '" aria-pressed="'
+        + (m.id === modeId) + '"><b>' + m.label + '</b><span>' + m.sub + '</span></button>';
+    }
+    modesEl.innerHTML = html;
+    var s = '';
+    for (var j = 0; j < DATA.sources.length; j += 1) {
+      s += (j ? ' · ' : '') + '<a href="' + DATA.sources[j].url + '" target="_blank" rel="noopener">' + DATA.sources[j].label + '</a>';
+    }
+    srcEl.innerHTML = 'Thresholds and amounts checked on 28 August 2026 against ' + s + '.';
+  }
+
+  modesEl.addEventListener('click', function (e) {
+    var b = e.target.closest('.md'); if (!b) return;
+    modeId = b.dataset.id;
+    [].forEach.call(modesEl.querySelectorAll('.md'), function (x) {
+      x.setAttribute('aria-pressed', String(x.dataset.id === modeId));
+    });
+    render();
+  });
+  casesEl.addEventListener('click', function (e) {
+    var b = e.target.closest('.drop'); if (!b) return;
+    var target = b.dataset.i;
+    for (var i = 0; i < cases.length; i += 1) {
+      if (String(cases[i].id) === target) { cases.splice(i, 1); break; }
+    }
+    render();
+  });
+  addBtn.addEventListener('click', function () {
+    var c = currentCase();
+    c.id = ++seq;
+    cases.push(c);
+    render();
+  });
+  fareEl.addEventListener('input', render);
+  delayEl.addEventListener('input', render);
+  var rt = null;
+  window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(render, 140); });
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (j) {
+    DATA = j;
+    buildModes();
+    render();
+  }).catch(function () {
+    casesEl.innerHTML = '<p class="empty">The rule data could not load right now. Reload the page and it should come back.</p>';
+    if (window.bwResize) window.bwResize();
+  });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

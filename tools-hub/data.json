@@ -7601,6 +7601,32 @@
       "iconStatus": "live-wix-media",
       "priority": 9,
       "cmsItemId": "0a319d69-759a-4d1d-820d-e178462179c6"
+    },
+    {
+      "slug": "berlin-delay-payback-board",
+      "title": "Berlin Delay Payback Board",
+      "lead": "A late train out of Berlin pays 25 percent at 60 minutes and 50 percent at 120, a late U-Bahn pays nothing in money, and nothing under 4 euros is ever paid out. Drag the delay, add each bad journey, and see whether the claim clears the floor.",
+      "category": "Transport",
+      "hubCategory": "Transport",
+      "type": "Calculator",
+      "tags": [
+        "train delay compensation",
+        "deutsche bahn delay refund",
+        "berlin train delay",
+        "fahrgastrechte",
+        "bvg customer guarantee",
+        "deutschlandticket delay"
+      ],
+      "aliases": [
+        "berlin train delay refund",
+        "db delay compensation calculator",
+        "late train berlin what do i get"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-delay-payback-board/",
+      "embedHeight": 1560,
+      "image": "https://static.wixstatic.com/media/5a08a3_6c41794317474da1ab40becc0c633e37~mv2.png",
+      "iconStatus": "live-wix-media",
+      "priority": 15
     }
   ],
   "hubCategories": [

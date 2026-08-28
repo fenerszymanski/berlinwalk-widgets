@@ -1,0 +1,47 @@
+{
+  "checkedOn": "2026-08-28",
+  "payoutFloorEur": 4,
+  "modes": [
+    {
+      "id": "single",
+      "label": "Single ticket",
+      "sub": "ICE, IC, EC, RE, RB",
+      "kind": "percentage",
+      "steps": [
+        { "fromMin": 60, "share": 0.25 },
+        { "fromMin": 120, "share": 0.5 }
+      ],
+      "note": "Percentages apply to the fare paid for that one journey, measured by the delay at your destination station."
+    },
+    {
+      "id": "card-regional",
+      "label": "Travel card, regional",
+      "sub": "Deutschlandticket, monthly card",
+      "kind": "flat",
+      "steps": [{ "fromMin": 60, "amount": 1.5 }],
+      "capNote": "Total capped at 25 percent of the card's value. Cases from 20 minutes may be bundled into one claim.",
+      "note": "There is no single-journey price on a travel card, so DB pays a flat amount per delayed journey."
+    },
+    {
+      "id": "card-longdistance",
+      "label": "Travel card, long-distance",
+      "sub": "Fernverkehr time ticket",
+      "kind": "flat",
+      "steps": [{ "fromMin": 60, "amount": 5 }],
+      "capNote": "Total capped at 25 percent of the card's value.",
+      "note": "Second class. First class pays 7.50 euros per case."
+    },
+    {
+      "id": "bvg",
+      "label": "Berlin U-Bahn, tram, bus",
+      "sub": "BVG customer guarantee",
+      "kind": "ticket",
+      "steps": [{ "fromMin": 21, "amount": 0 }],
+      "note": "More than 20 minutes late through BVG's own fault earns a free ticket, not money. A taxi between 23:00 and 05:00 is reimbursed up to 25 euros. Claim within 14 days."
+    }
+  ],
+  "sources": [
+    { "label": "Deutsche Bahn passenger rights", "url": "https://www.bahn.de/service/informationen-buchung/fahrgastrechte/rechtliche-regelungen" },
+    { "label": "BVG customer guarantee", "url": "https://www.bvg.de/en/service-and-support/customer-guarantee" }
+  ]
+}
