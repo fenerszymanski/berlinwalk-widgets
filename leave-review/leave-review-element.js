@@ -1,4 +1,5 @@
 const BW_LEAVE_REVIEW_API_URL = 'https://www.berlinwalk.com/_functions/submitReview';
+const BW_LEAVE_REVIEW_FALLBACK_EMAIL = 'info@berlinwalk.com';
 
 const BW_LEAVE_REVIEW_COUNTRIES = [
   'Afghanistan','Albania','Algeria','Andorra','Angola','Argentina','Armenia','Australia',
@@ -301,6 +302,13 @@ class BWLeaveReviewElement extends HTMLElement {
           color: var(--bw-green);
         }
 
+        .bw-leave-review .bw-lr-message a {
+          color: currentColor;
+          font-weight: 700;
+          text-decoration: underline;
+          text-underline-offset: 2px;
+        }
+
         .bw-leave-review .bw-lr-thanks {
           display: none;
           padding: 36px 32px;
@@ -481,15 +489,47 @@ class BWLeaveReviewElement extends HTMLElement {
       const human = errCode === 'rating'      ? 'Please pick a star rating.'
                   : errCode === 'reviewText'  ? 'Please write at least a sentence about the tour.'
                   : errCode === 'firstName'   ? 'Missing first name. Please use the link from your post-tour email.'
-                  : 'Something went wrong. Please try again in a moment.';
-      this._showMsg('error', human);
+                  : '';
+      if (human) {
+        this._showMsg('error', human);
+      } else {
+        this._showSubmitFallback('I could not save the review just now.', payload);
+      }
     } catch (err) {
       if (err && err.name === 'AbortError') return;
       btn.disabled = false;
       btn.textContent = 'Send my review';
-      this._showMsg('error', 'Connection error. Please try again.');
+      this._showSubmitFallback('The connection failed before I could confirm the review was saved.', payload);
       console.error('bw-leave-review submitReview error:', err);
     }
+  }
+
+  _fallbackMailto(payload) {
+    const subject = `BerlinWalk review${payload.firstName ? ` from ${payload.firstName}` : ''}`;
+    const body = [
+      `Rating: ${payload.rating}/5`,
+      payload.country ? `Country: ${payload.country}` : '',
+      payload.bookingId ? `Booking reference: ${payload.bookingId}` : '',
+      '',
+      payload.reviewText
+    ].filter((line, index) => line || index >= 3).join('\n');
+
+    return `mailto:${BW_LEAVE_REVIEW_FALLBACK_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  }
+
+  _showSubmitFallback(text, payload) {
+    const msg = this.querySelector('[data-msg]');
+    if (!msg) return;
+
+    const link = document.createElement('a');
+    link.href = this._fallbackMailto(payload);
+    link.textContent = 'Email it to me instead.';
+
+    msg.className = 'bw-lr-message show error';
+    msg.replaceChildren(
+      document.createTextNode(`${text} Your words are still in the form. Please try again, or `),
+      link
+    );
   }
 
   _showMsg(type, text) {

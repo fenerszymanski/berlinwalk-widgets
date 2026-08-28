@@ -210,6 +210,12 @@
       color: var(--bw-green);
       border: 1px solid var(--bw-green);
     }
+    .bw-message a {
+      color: currentColor;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
 
     .bw-thanks {
       display: none;
@@ -505,6 +511,7 @@
   <script>
     (function () {
       var API_URL = 'https://www.berlinwalk.com/_functions/submitReview';
+      var FALLBACK_EMAIL = 'info@berlinwalk.com';
 
       var params = new URLSearchParams(window.location.search);
       var bookingId = params.get('bid') || '';
@@ -534,6 +541,29 @@
       function clearMsg() {
         msg.className = 'bw-message';
         msg.textContent = '';
+      }
+      function fallbackMailto(payload) {
+        var subject = 'BerlinWalk review' + (payload.firstName ? ' from ' + payload.firstName : '');
+        var lines = [
+          'Rating: ' + payload.rating + '/5',
+          payload.country ? 'Country: ' + payload.country : '',
+          payload.bookingId ? 'Booking reference: ' + payload.bookingId : '',
+          '',
+          payload.reviewText
+        ];
+        var body = lines.filter(function (line, index) { return line || index >= 3; }).join('\n');
+        return 'mailto:' + FALLBACK_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      }
+      function showSubmitFallback(text, payload) {
+        var link = document.createElement('a');
+        link.href = fallbackMailto(payload);
+        link.textContent = 'Email it to me instead.';
+
+        msg.className = 'bw-message show error';
+        msg.replaceChildren(
+          document.createTextNode(text + ' Your words are still in the form. Please try again, or '),
+          link
+        );
       }
 
       function getRating() {
@@ -593,13 +623,17 @@
             var human = errCode === 'rating'      ? 'Please pick a star rating.'
                       : errCode === 'reviewText'  ? 'Please write at least a sentence about the tour.'
                       : errCode === 'firstName'   ? 'Missing first name. Please use the link from your post-tour email.'
-                      : 'Something went wrong. Please try again in a moment.';
-            showMsg('error', human);
+                      : '';
+            if (human) {
+              showMsg('error', human);
+            } else {
+              showSubmitFallback('I could not save the review just now.', payload);
+            }
           }
         } catch (err) {
           btn.disabled = false;
           btn.textContent = 'Send my review';
-          showMsg('error', 'Connection error. Please try again.');
+          showSubmitFallback('The connection failed before I could confirm the review was saved.', payload);
           console.error('submitReview error:', err);
         }
       });
