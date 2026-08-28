@@ -760,7 +760,7 @@
         "svgShapeNodes": 3,
         "svgCount": 1,
         "canvas": 0,
-        "contentImages": 27,
+        "contentImages": 19,
         "mapLibrary": true,
         "range": 0,
         "dateInput": 0,
@@ -877,7 +877,7 @@
       "addedAt": "2026-06-27",
       "measuredBy": "rendered",
       "signals": {
-        "svgShapeNodes": 11,
+        "svgShapeNodes": 1803,
         "svgCount": 2,
         "canvas": 0,
         "contentImages": 13,
@@ -892,7 +892,7 @@
         "ariaPressed": 10,
         "tables": 0,
         "details": 0,
-        "textLength": 1189
+        "textLength": 1224
       },
       "inputModel": "accumulate",
       "stateProgression": "accumulate",
@@ -1072,7 +1072,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 2118
+        "textLength": 2109
       },
       "inputModel": "accumulate",
       "stateProgression": "accumulate",
@@ -1462,7 +1462,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 583
+        "textLength": 543
       },
       "inputModel": "accumulate",
       "stateProgression": "accumulate",
@@ -4702,7 +4702,7 @@
         "ariaPressed": 3,
         "tables": 0,
         "details": 0,
-        "textLength": 1842
+        "textLength": 1839
       },
       "inputModel": "text-entry",
       "stateProgression": "accumulate",
@@ -9424,7 +9424,7 @@
     },
     "berlin-delay-payback-board": {
       "slug": "berlin-delay-payback-board",
-      "addedAt": null,
+      "addedAt": "2026-08-28",
       "measuredBy": "rendered",
       "signals": {
         "svgShapeNodes": 0,
