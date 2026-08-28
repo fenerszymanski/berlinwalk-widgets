@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-08-28T07:46:48.200Z",
+  "updatedAt": "2026-08-28T14:07:58.746Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 335,
-  "toolsTotal": 253,
+  "totalPosts": 336,
+  "toolsTotal": 254,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1618,6 +1618,23 @@
   ],
   "latest": [
     {
+      "title": "Two of Everything in Berlin: The East and West Twins and Which One to Visit",
+      "slug": "two-of-everything-in-berlin",
+      "path": "/post/two-of-everything-in-berlin",
+      "url": "https://www.berlinwalk.com/post/two-of-everything-in-berlin",
+      "excerpt": "Berlin was two cities for forty years and each half built the things a capital is supposed to have. Nobody demolished the spares, so today there are two zoos, two opera houses, two concert halls, two planetariums, two state library buildings, two city halls and two universities on opposite sides of a border you cannot see. Here is why, which twin is actually worth the trip, which pairs the reunified city has already settled, and how to group a day so you are not crossing Berlin twice.",
+      "category": "Berlin History",
+      "categorySlug": "berlin-history",
+      "topic": "history-myths",
+      "topicLabel": "Berlin History & Myths",
+      "readTime": "7 min read",
+      "publishedDate": "2026-08-28T14:06:02.016Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_53ed55c120044ed9a348445802f46101~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-funkturm-fernsehturm-skyline.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_53ed55c120044ed9a348445802f46101~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-funkturm-fernsehturm-skyline.jpg",
+      "alt": "The Funkturm above the Berlin exhibition grounds with the Fernsehturm on the distant skyline",
+      "relatedToolSlug": "east-or-west-1989"
+    },
+    {
       "title": "Train Delay Compensation in Berlin: What You Actually Get Back",
       "slug": "train-delay-compensation-berlin",
       "path": "/post/train-delay-compensation-berlin",
@@ -1803,26 +1820,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_54ac40b9d6384747b629cf9157cf3c49~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-humboldt-forum-facade.jpg",
       "alt": "The reconstructed baroque facades and dome of the Humboldt Forum in central Berlin",
       "relatedToolSlug": "berlin-landmarks-map"
-    },
-    {
-      "title": "Charlottenburg Palace vs Sanssouci: Which Palace Day Fits Your Berlin Trip?",
-      "slug": "charlottenburg-palace-vs-sanssouci",
-      "path": "/post/charlottenburg-palace-vs-sanssouci",
-      "url": "https://www.berlinwalk.com/post/charlottenburg-palace-vs-sanssouci",
-      "excerpt": "Charlottenburg is a compact Berlin palace half-day. Sanssouci is a full Potsdam landscape. Compare travel, walking, tickets, interiors and the time each choice really needs.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-08-24T06:29:50.673Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_ba0f6277482841e181c8676d87e4fc99~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-charlottenburg-palace-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_ba0f6277482841e181c8676d87e4fc99~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-charlottenburg-palace-cover.jpg",
-      "alt": "Charlottenburg Palace reflected in the water with its central dome above the baroque facade",
-      "relatedToolSlug": "berlin-palace-day-balance"
     }
   ],
   "allPosts": [
+    {
+      "title": "Two of Everything in Berlin: The East and West Twins and Which One to Visit",
+      "slug": "two-of-everything-in-berlin",
+      "path": "/post/two-of-everything-in-berlin",
+      "url": "https://www.berlinwalk.com/post/two-of-everything-in-berlin",
+      "excerpt": "Berlin was two cities for forty years and each half built the things a capital is supposed to have. Nobody demolished the spares, so today there are two zoos, two opera houses, two concert halls, two planetariums, two state library buildings, two city halls and two universities on opposite sides of a border you cannot see. Here is why, which twin is actually worth the trip, which pairs the reunified city has already settled, and how to group a day so you are not crossing Berlin twice.",
+      "category": "Berlin History",
+      "categorySlug": "berlin-history",
+      "topic": "history-myths",
+      "topicLabel": "Berlin History & Myths",
+      "readTime": "7 min read",
+      "publishedDate": "2026-08-28T14:06:02.016Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_53ed55c120044ed9a348445802f46101~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-funkturm-fernsehturm-skyline.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_53ed55c120044ed9a348445802f46101~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-funkturm-fernsehturm-skyline.jpg",
+      "alt": "The Funkturm above the Berlin exhibition grounds with the Fernsehturm on the distant skyline",
+      "relatedToolSlug": "east-or-west-1989"
+    },
     {
       "title": "Train Delay Compensation in Berlin: What You Actually Get Back",
       "slug": "train-delay-compensation-berlin",
