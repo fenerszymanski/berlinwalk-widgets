@@ -16,6 +16,10 @@ class BWTestimonialsElement extends HTMLElement {
     this._pointerStartY = 0;
     this._controller = null;
     this._reduceMotion = false;
+    this._shellHeightLock = 0;
+    this._lockedWidth = 0;
+    this._relockTimer = null;
+    this._shellObserver = null;
   }
 
   connectedCallback() {
@@ -28,8 +32,10 @@ class BWTestimonialsElement extends HTMLElement {
 
   disconnectedCallback() {
     if (this._observer) this._observer.disconnect();
+    if (this._shellObserver) this._shellObserver.disconnect();
     if (this._autoRotateTimer) window.clearInterval(this._autoRotateTimer);
     if (this._resumeTimer) window.clearTimeout(this._resumeTimer);
+    if (this._relockTimer) window.clearTimeout(this._relockTimer);
     if (this._controller) this._controller.abort();
   }
 
@@ -118,9 +124,12 @@ class BWTestimonialsElement extends HTMLElement {
         }
 
         .bw-testimonials .bw-carousel-shell {
+          align-items: center;
           background: #FFFFFF;
           border-radius: 20px;
           box-shadow: 0 4px 24px rgba(27, 94, 32, 0.08);
+          display: flex;
+          height: var(--bw-shell-height, auto);
           margin-top: 40px;
           min-height: 360px;
           opacity: 0;
@@ -129,6 +138,13 @@ class BWTestimonialsElement extends HTMLElement {
           position: relative;
           transform: translateY(12px);
           transition: opacity 400ms ease-out, transform 400ms ease-out;
+        }
+
+        /* The card keeps one height while reviews rotate. Only Read more
+           releases it, and only for the review that was opened. */
+        .bw-testimonials .bw-carousel-shell.is-open {
+          align-items: flex-start;
+          height: auto;
         }
 
         .bw-testimonials .bw-carousel-shell.visible {
@@ -154,6 +170,8 @@ class BWTestimonialsElement extends HTMLElement {
         }
 
         .bw-testimonials .bw-carousel-region {
+          flex: 1 1 auto;
+          min-width: 0;
           position: relative;
           z-index: 1;
         }
@@ -636,14 +654,13 @@ class BWTestimonialsElement extends HTMLElement {
     this._renderDots();
     this._renderTrustStrip(data.links || {}, data.stats || {});
     this._renderReview(0, false);
+    this._lockShellHeight();
+    this._observeShellWidth();
+    this._relockAfterFonts();
     this._startAutoRotate();
   }
 
-  _renderReview(index, animate) {
-    const region = this.querySelector('.bw-carousel-region');
-    if (!region || !this._testimonials.length) return;
-
-    const review = this._testimonials[index];
+  _buildSlide(review, index, animate) {
     const rating = Number(review.rating || 5);
     const source = (review.source || '').trim();
     const quote = review.quote || '';
@@ -665,7 +682,17 @@ class BWTestimonialsElement extends HTMLElement {
         ${source ? `<span class="bw-review-source">${this._escapeHtml(source)}</span>` : ''}
       </div>
     `;
+    return slide;
+  }
 
+  _renderReview(index, animate) {
+    const region = this.querySelector('.bw-carousel-region');
+    if (!region || !this._testimonials.length) return;
+
+    const shell = this.querySelector('.bw-carousel-shell');
+    if (shell) shell.classList.remove('is-open');
+
+    const slide = this._buildSlide(this._testimonials[index], index, animate);
     region.replaceChildren(slide);
     this._syncReadMoreControl(slide);
 
@@ -675,6 +702,85 @@ class BWTestimonialsElement extends HTMLElement {
     }
 
     this._updateDots();
+  }
+
+  /* Reviews differ in length, so an auto-height card grew and shrank on every
+     rotation. Measure every review in its collapsed (four-line) state and lock
+     the card to the tallest one, so the box never moves on its own. */
+  _lockShellHeight() {
+    const shell = this.querySelector('.bw-carousel-shell');
+    const region = this.querySelector('.bw-carousel-region');
+    if (!shell || !region || !this._testimonials.length) return;
+
+    const width = Math.round(region.getBoundingClientRect().width);
+    if (!width) return;
+
+    const probe = document.createElement('div');
+    probe.className = 'bw-carousel-region';
+    probe.setAttribute('aria-hidden', 'true');
+    probe.style.cssText = `left:-99999px;position:absolute;top:0;visibility:hidden;width:${width}px;`;
+    shell.appendChild(probe);
+
+    let tallest = 0;
+    this._testimonials.forEach((review, index) => {
+      const slide = this._buildSlide(review, index, false);
+      const quote = slide.querySelector('.bw-review-quote');
+      const control = slide.querySelector('.bw-review-more');
+      if (quote) quote.removeAttribute('id');
+      if (control) control.removeAttribute('aria-controls');
+      probe.replaceChildren(slide);
+      this._syncReadMoreControl(slide);
+      tallest = Math.max(tallest, Math.ceil(probe.getBoundingClientRect().height));
+    });
+    probe.remove();
+    if (!tallest) return;
+
+    const styles = window.getComputedStyle(shell);
+    const frame = parseFloat(styles.paddingTop) + parseFloat(styles.paddingBottom)
+      + parseFloat(styles.borderTopWidth) + parseFloat(styles.borderBottomWidth);
+    const locked = tallest + (isNaN(frame) ? 0 : frame);
+    this._lockedWidth = width;
+    if (locked === this._shellHeightLock) return;
+    this._shellHeightLock = locked;
+    shell.style.setProperty('--bw-shell-height', `${locked}px`);
+  }
+
+  /* Wix reflows this section during hydration without firing a window resize,
+     so watch the card itself. Width changes re-measure; height changes never
+     do, otherwise our own lock would feed the observer back into itself. */
+  _observeShellWidth() {
+    if (typeof ResizeObserver === 'undefined' || this._shellObserver) return;
+    const shell = this.querySelector('.bw-carousel-shell');
+    if (!shell) return;
+
+    this._shellObserver = new ResizeObserver(() => {
+      const region = this.querySelector('.bw-carousel-region');
+      if (!region) return;
+      const width = Math.round(region.getBoundingClientRect().width);
+      if (!width || width === this._lockedWidth) return;
+      this._scheduleRelock();
+    });
+    this._shellObserver.observe(shell);
+  }
+
+  /* Montserrat and Merriweather arrive after first paint on Wix, and they
+     change the line count, so the lock has to be taken again once they land. */
+  _relockAfterFonts() {
+    if (!document.fonts || !document.fonts.ready) return;
+    document.fonts.ready.then(() => {
+      if (!this.isConnected) return;
+      this._lockShellHeight();
+    }).catch(() => {});
+  }
+
+  _scheduleRelock() {
+    if (this._relockTimer) window.clearTimeout(this._relockTimer);
+    this._relockTimer = window.setTimeout(() => {
+      this._relockTimer = null;
+      if (!this.isConnected) return;
+      this._shellHeightLock = 0;
+      this._lockShellHeight();
+    }, 200);
   }
 
   _syncReadMoreControl(slide) {
@@ -743,6 +849,8 @@ class BWTestimonialsElement extends HTMLElement {
       if (readMore) {
         const slide = readMore.closest('.bw-review-slide');
         const expanded = slide ? slide.classList.toggle('is-expanded') : false;
+        const shell = this.querySelector('.bw-carousel-shell');
+        if (shell) shell.classList.toggle('is-open', expanded);
         readMore.setAttribute('aria-expanded', String(expanded));
         readMore.textContent = expanded ? 'Show less' : 'Read more';
         this._markInteraction();
@@ -796,6 +904,7 @@ class BWTestimonialsElement extends HTMLElement {
     let resizeFrame = 0;
     window.addEventListener('resize', () => {
       if (resizeFrame) window.cancelAnimationFrame(resizeFrame);
+      this._scheduleRelock();
       resizeFrame = window.requestAnimationFrame(() => {
         this._syncReadMoreControl(this.querySelector('.bw-review-slide'));
       });
@@ -827,6 +936,7 @@ class BWTestimonialsElement extends HTMLElement {
   _startAutoRotate() {
     if (this._reduceMotion || this._testimonials.length <= 1 || this._autoRotateTimer) return;
     this._autoRotateTimer = window.setInterval(() => {
+      if (this.querySelector('.bw-review-slide.is-expanded')) return;
       this._goToReview(this._currentIndex + 1, false);
     }, 7000);
   }
