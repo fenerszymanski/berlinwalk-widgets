@@ -1,21 +1,30 @@
 const BW_BLOG_HOME_DATA_URL = (() => {
   const script = document.currentScript;
   const base = script && script.src ? script.src : window.location.href;
-  return new URL('./data.json?v=20260827-featured-listings', base).href;
+  return new URL('./data.json?v=20260828-featured-listings', base).href;
 })();
 
 const BW_BLOG_HOME_FALLBACK = {
   featured: {
-    title: 'Berlin Early Morning: What Is Actually Open Before 9am',
-    url: 'https://www.berlinwalk.com/post/berlin-early-morning',
+    title: 'Tempelhofer Feld: Which Gate to Use and How to Get Out After Closing',
+    url: 'https://www.berlinwalk.com/post/tempelhofer-feld-berlin',
     category: 'Tourist Tips',
     readTime: '8 min read',
-    label: 'New: find what opens first',
-    summary: 'Berlin opens late. Museum Island unlocks at 10:00 and nothing with a ticket desk opens before 08:00, but the field of stelae never closes, Tempelhofer Feld opens at 06:00 and the first U-Bahn out of Alexanderplatz is at 04:05. Here is what is really available between first light and nine, in the order it becomes available.',
-    image: 'https://static.wixstatic.com/media/5a08a3_e1327abb9cc543139c3a3fbc91f2fbef~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-bode-museum-sunrise.jpg',
-    alt: 'The sun rising behind the Fernsehturm and the Bode-Museum, seen along the Spree from the Ebertbrücke in central Berlin'
+    label: 'New: choose the right gate',
+    summary: 'Berlin’s old airfield is easy to enjoy and hard to arrive at properly. Ten public gates are spread around a fence that runs seven and a half kilometres, and the barbecue areas, the community gardens and the beer gardens all sit at opposite ends of it. The gate you choose decides whether you walk 175 metres or 1,737. And the field locks at a different time every month, with only five gates that let you back out afterwards.',
+    image: 'https://static.wixstatic.com/media/5a08a3_164e9f6fb7b3418e8945e07de5c6769d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-runway-evening.jpg',
+    alt: 'The old Tempelhof runway at dusk, its painted centre line running towards a low orange horizon'
   },
   miniPosts: [
+    {
+      title: 'Where to Watch Football in Berlin: The Best Sports Bars',
+      url: 'https://www.berlinwalk.com/post/where-to-watch-football-in-berlin',
+      category: 'Tourist Tips',
+      readTime: '9 min read',
+      summary: 'Choose a Berlin football bar by the exact fixture, not only by the league. Compare verified programmes, screens, reservations, smoking rules and the details that decide your night.',
+      image: 'https://static.wixstatic.com/media/5a08a3_21d7860733624b01a85ef09c43c989d3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-football-pub-cover.jpg',
+      alt: 'A crowd watching football together in a Berlin sports bar setting'
+    },
     {
       title: 'The Most Beautiful U-Bahn Stations in Berlin: Which Ones Are Worth Getting Off At',
       url: 'https://www.berlinwalk.com/post/beautiful-u-bahn-stations-berlin',
@@ -42,26 +51,17 @@ const BW_BLOG_HOME_FALLBACK = {
       summary: "Five of Berlin's most-visited sights have no ticket at all, two of the best are free but only the venue can reserve them, and the paid half of a classic list comes to 93.90 euros. Here is which door each one is sold through, and how to spot the venue's own page before you pay.",
       image: 'https://static.wixstatic.com/media/5a08a3_2766c5a7bb034ceb8c2e57bdd51c33c2~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-museumsinsel.jpg',
       alt: 'The Bode-Museum on the tip of Museum Island seen across the Spree, with the Berlin TV Tower behind it'
-    },
-    {
-      title: 'Do You Need Restaurant Reservations in Berlin? When to Book and When to Walk In',
-      url: 'https://www.berlinwalk.com/post/restaurant-reservations-in-berlin',
-      category: 'Tourist Tips',
-      readTime: '6 min read',
-      summary: 'The honest local answer to whether you need restaurant reservations in Berlin: usually not. Here is when to book a table, when to just walk in, and how Berlin restaurants actually take bookings.',
-      image: 'https://static.wixstatic.com/media/5a08a3_1e6e9543b4f34bcc807d9b26d0b0b4c8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-kudamm-terrace-cafes.jpg',
-      alt: 'Pavement cafes with white umbrellas and diners along the Kurfurstendamm in Berlin on a sunny day'
     }
   ],
   posts: [
     {
-      title: 'Berlin in the Evening: What Is Still Open After the Museums Close',
-      url: 'https://www.berlinwalk.com/post/berlin-in-the-evening',
+      title: 'Berlin Early Morning: What Is Actually Open Before 9am',
+      url: 'https://www.berlinwalk.com/post/berlin-early-morning',
       category: 'Tourist Tips',
-      readTime: '7 min read',
-      summary: 'Almost every ticketed sight in central Berlin shuts between 17:00 and 18:30. Here is what stays open late, what the floodlit centre is actually good for, and one twenty-minute walk that turns the dead hours into the best part of the day.',
-      image: 'https://static.wixstatic.com/media/5a08a3_d63dc2cd24cf4b579a376714ce5fb5fd~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-dom-spree.jpg',
-      alt: 'Berlin Cathedral floodlit above the Spree at blue hour, with a boat passing and the embankment lit along Museum Island'
+      readTime: '8 min read',
+      summary: 'Berlin opens late. Museum Island unlocks at 10:00 and nothing with a ticket desk opens before 08:00, but the field of stelae never closes, Tempelhofer Feld opens at 06:00 and the first U-Bahn out of Alexanderplatz is at 04:05. Here is what is really available between first light and nine, in the order it becomes available.',
+      image: 'https://static.wixstatic.com/media/5a08a3_e1327abb9cc543139c3a3fbc91f2fbef~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-bode-museum-sunrise.jpg',
+      alt: 'The sun rising behind the Fernsehturm and the Bode-Museum, seen along the Spree from the Ebertbrücke in central Berlin'
     },
     {
       title: 'Free Berlin Memorials: Four Powerful Places That Are Easy to Visit',
