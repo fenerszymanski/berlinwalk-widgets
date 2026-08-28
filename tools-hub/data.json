@@ -7628,6 +7628,33 @@
       "iconStatus": "live-wix-media",
       "priority": 15,
       "cmsItemId": "e9d5a6b9-10b7-4309-a808-a9e0ebfdbfc2"
+    },
+    {
+      "slug": "berlin-twin-city-map",
+      "title": "Berlin Twin City Map",
+      "lead": "Berlin has two of almost everything because the divided city built each half its own: two zoos, two opera houses, two planetariums, two state library buildings. Pick the twin you would actually visit and the map shows how far apart your day is spread.",
+      "category": "Maps",
+      "hubCategory": "CultureLandmarks",
+      "type": "Map",
+      "tags": [
+        "east and west berlin",
+        "berlin twin institutions",
+        "zoo berlin or tierpark",
+        "staatsoper or deutsche oper",
+        "funkturm",
+        "rathaus schoeneberg"
+      ],
+      "aliases": [
+        "two of everything in berlin",
+        "east west berlin map of twins",
+        "why does berlin have two zoos"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-twin-city-map/",
+      "embedHeight": 2940,
+      "image": "https://static.wixstatic.com/media/5a08a3_e8506b550dad49f7929589e7be684f49~mv2.png",
+      "iconStatus": "live-wix-media",
+      "priority": 15,
+      "cmsItemId": "eaa82686-2494-4b88-b6a3-67c5c9cd2617"
     }
   ],
   "hubCategories": [

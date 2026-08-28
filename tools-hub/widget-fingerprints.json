@@ -498,11 +498,11 @@
         "checkbox": 0,
         "select": 0,
         "textInput": 1,
-        "buttons": 36,
+        "buttons": 18,
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 2474
+        "textLength": 898
       },
       "inputModel": "text-entry",
       "stateProgression": "accumulate",
@@ -760,7 +760,7 @@
         "svgShapeNodes": 3,
         "svgCount": 1,
         "canvas": 0,
-        "contentImages": 19,
+        "contentImages": 43,
         "mapLibrary": true,
         "range": 0,
         "dateInput": 0,
@@ -877,7 +877,7 @@
       "addedAt": "2026-06-27",
       "measuredBy": "rendered",
       "signals": {
-        "svgShapeNodes": 1803,
+        "svgShapeNodes": 11,
         "svgCount": 2,
         "canvas": 0,
         "contentImages": 13,
@@ -892,7 +892,7 @@
         "ariaPressed": 10,
         "tables": 0,
         "details": 0,
-        "textLength": 1224
+        "textLength": 1189
       },
       "inputModel": "accumulate",
       "stateProgression": "accumulate",
@@ -1462,7 +1462,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 543
+        "textLength": 547
       },
       "inputModel": "accumulate",
       "stateProgression": "accumulate",
@@ -1762,7 +1762,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 2936
+        "textLength": 2930
       },
       "inputModel": "date",
       "stateProgression": "accumulate",
@@ -2572,7 +2572,7 @@
         "ariaPressed": 6,
         "tables": 0,
         "details": 0,
-        "textLength": 25154
+        "textLength": 25152
       },
       "inputModel": "text-entry",
       "stateProgression": "replace-on-pick",
@@ -3172,7 +3172,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 697
+        "textLength": 696
       },
       "inputModel": "button-pick",
       "stateProgression": "replace-on-pick",
@@ -3202,7 +3202,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 1746
+        "textLength": 1745
       },
       "inputModel": "button-pick",
       "stateProgression": "replace-on-pick",
@@ -4702,7 +4702,7 @@
         "ariaPressed": 3,
         "tables": 0,
         "details": 0,
-        "textLength": 1839
+        "textLength": 1880
       },
       "inputModel": "text-entry",
       "stateProgression": "accumulate",
@@ -5032,7 +5032,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 1233
+        "textLength": 1281
       },
       "inputModel": "button-pick",
       "stateProgression": "replace-on-pick",
@@ -6952,7 +6952,7 @@
         "ariaPressed": 7,
         "tables": 0,
         "details": 0,
-        "textLength": 1034
+        "textLength": 1092
       },
       "inputModel": "continuous-scrub",
       "stateProgression": "continuous-scrub",
@@ -9202,7 +9202,7 @@
         "ariaPressed": 3,
         "tables": 0,
         "details": 0,
-        "textLength": 1418
+        "textLength": 1453
       },
       "inputModel": "date",
       "stateProgression": "accumulate",
@@ -9352,7 +9352,7 @@
         "ariaPressed": 2,
         "tables": 1,
         "details": 1,
-        "textLength": 3044
+        "textLength": 3010
       },
       "inputModel": "accumulate",
       "stateProgression": "accumulate",
@@ -9382,7 +9382,7 @@
         "ariaPressed": 18,
         "tables": 0,
         "details": 0,
-        "textLength": 2389
+        "textLength": 2388
       },
       "inputModel": "continuous-scrub",
       "stateProgression": "continuous-scrub",
@@ -9448,6 +9448,36 @@
       "stateProgression": "continuous-scrub",
       "outputModel": "running-total",
       "visualGrammar": "canvas",
+      "hasVisualLayer": true,
+      "flatChipCard": false,
+      "pageErrors": []
+    },
+    "berlin-twin-city-map": {
+      "slug": "berlin-twin-city-map",
+      "addedAt": "2026-08-28",
+      "measuredBy": "rendered",
+      "signals": {
+        "svgShapeNodes": 110,
+        "svgCount": 2,
+        "canvas": 0,
+        "contentImages": 0,
+        "mapLibrary": false,
+        "range": 0,
+        "dateInput": 0,
+        "radio": 0,
+        "checkbox": 0,
+        "select": 0,
+        "textInput": 0,
+        "buttons": 19,
+        "ariaPressed": 18,
+        "tables": 0,
+        "details": 0,
+        "textLength": 3789
+      },
+      "inputModel": "accumulate",
+      "stateProgression": "accumulate",
+      "outputModel": "plotted-position",
+      "visualGrammar": "geographic-map",
       "hasVisualLayer": true,
       "flatChipCard": false,
       "pageErrors": []

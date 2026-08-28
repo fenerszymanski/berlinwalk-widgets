@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Berlin Twin City Map</title>
+<meta name="description" content="Berlin has two of almost everything because the divided city built each half its own. Pick your side of each pair and the map draws the day you have just made." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='22' cy='32' r='7' fill='%23FFE600'/%3E%3Ccircle cx='42' cy='32' r='7' fill='%23FFE600'/%3E%3Cpath d='M22 32h20' stroke='%23FFE600' stroke-width='3'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-dark:#123D18; --green-mid:#2E7D32;
+    --lime:#7CB342; --light:#C5E1A5; --yellow:#FFE600;
+    --ink:#212121; --muted:#4b584b; --line:#E3E8DC; --panel:#F4F7F0;
+    --west:#B87400; --east:#1B5E20; --dead:#98a098;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;overflow-x:hidden}
+  body{font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .wrap{max-width:780px;margin:0 auto;padding:4px 14px 20px}
+  .kicker{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-mid);margin:0 0 6px}
+  h1{font-size:22px;font-weight:800;line-height:1.16;margin:0 0 8px;color:var(--green-dark)}
+  .lede{font-size:14.5px;color:var(--muted);margin:0 0 14px}
+
+  .mapcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:10px 10px 8px;margin:0 0 12px}
+  .maphead{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:0 0 6px;padding:0 3px}
+  .legend{display:flex;flex-wrap:wrap;gap:10px;font-size:11px;font-weight:700;color:var(--muted)}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+  .legend .w{background:var(--west)} .legend .e{background:var(--east)} .legend .d{background:var(--dead)}
+  svg.map{display:block;width:100%;height:auto;background:#fff;border-radius:10px;border:1px solid var(--line);touch-action:manipulation}
+  .sector-w{fill:#FBF1DE;stroke:#E4CFA6;stroke-width:.6}
+  .sector-e{fill:#EAF3E1;stroke:#BCD8A6;stroke-width:.6}
+  .link{stroke:#9aa89a;stroke-width:1.1;stroke-dasharray:3 3}
+  .link.on{stroke:var(--lime);stroke-dasharray:none;stroke-width:1.6}
+  .link.gone{stroke:#c9cec9;stroke-dasharray:1.5 3}
+  .dot{cursor:pointer}
+  .dot circle{stroke:#fff;stroke-width:1.4;transition:r .12s}
+  .dot.w circle{fill:var(--west)} .dot.e circle{fill:var(--east)} .dot.gone circle{fill:var(--dead)}
+  .dot.dim circle{opacity:.22}
+  .dot.picked circle{stroke:var(--yellow);stroke-width:2.6}
+  .dot:focus{outline:none}
+  .dot:focus-visible circle{stroke:var(--green-dark);stroke-width:3}
+  .nowdot circle{fill:var(--yellow);stroke:var(--green-dark);stroke-width:1.4}
+  .maplabel{font-size:6.4px;font-weight:800;fill:var(--green-dark);paint-order:stroke;stroke:#fff;stroke-width:1.8px;stroke-linejoin:round;pointer-events:none}
+  .sectorname{font-size:8px;font-weight:800;letter-spacing:.1em;opacity:.5;pointer-events:none}
+  .insetbox{fill:none;stroke:var(--green-mid);stroke-width:1.2;stroke-dasharray:5 4}
+  .insetcap{font-size:11px;color:var(--muted);margin:8px 3px 6px;line-height:1.45}
+  svg.inset{margin-top:0}
+  .leader{stroke:#b6c0b6;stroke-width:.7}
+
+  .readout{background:var(--green-dark);color:#fff;border-radius:12px;padding:12px 14px;margin:0 0 12px}
+  .readout .rl{font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--yellow);margin:0 0 5px}
+  .readout .rv{font-size:15px;font-weight:600;margin:0}
+  .tally{display:flex;gap:8px;flex-wrap:wrap;margin:9px 0 0}
+  .chip{background:rgba(255,255,255,.13);border-radius:999px;padding:3px 11px;font-size:12px;font-weight:700}
+  .chip b{font-family:'IBM Plex Mono',monospace}
+
+  .pairs{display:grid;gap:8px;margin:0 0 12px}
+  .pair{border:1px solid var(--line);border-radius:12px;background:#fff;padding:9px 10px}
+  .pair.retired{background:#F7F7F5;border-style:dashed}
+  .ptheme{font-size:10.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--green-mid);margin:0 0 6px}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  .opt{appearance:none;border:2px solid var(--line);background:#fff;border-radius:10px;padding:7px 9px;text-align:left;
+       font-family:inherit;color:var(--green-dark);cursor:pointer;transition:.13s;line-height:1.25;width:100%}
+  .opt:hover{border-color:var(--lime)}
+  .opt:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+  .opt b{display:block;font-size:12.5px;font-weight:800}
+  .opt span{display:block;font-size:10.5px;font-weight:600;opacity:.72;margin-top:1px}
+  .opt .side{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.08em;padding:1px 5px;border-radius:4px;margin-bottom:3px}
+  .opt .side.w{background:#FBF1DE;color:var(--west)} .opt .side.e{background:#EAF3E1;color:var(--east)}
+  .opt[aria-pressed="true"]{border-color:var(--green);background:var(--green);color:#fff}
+  .opt[aria-pressed="true"] span{opacity:.85}
+  .opt[aria-pressed="true"] .side{background:var(--yellow);color:var(--green-dark)}
+  .why{font-size:12.5px;color:var(--muted);margin:7px 0 0;line-height:1.5}
+  .why b{color:var(--green-dark)}
+  .settled{font-size:12.5px;color:var(--muted);margin:0}
+  .settled .now{display:inline-block;background:var(--yellow);color:var(--green-dark);font-weight:800;border-radius:5px;padding:1px 6px;margin-right:5px;font-size:11.5px}
+  .pairnames{font-size:12.5px;font-weight:700;color:var(--green-dark);margin:0 0 5px}
+
+  .foot{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+  .reset{appearance:none;border:2px solid var(--line);background:#fff;border-radius:10px;padding:7px 13px;font-family:inherit;
+         font-size:12px;font-weight:800;color:var(--green-dark);cursor:pointer}
+  .reset:hover{border-color:var(--lime)}
+  .reset:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+  .note{font-size:11px;color:var(--muted);margin:0}
+
+  @media (max-width:520px){
+    h1{font-size:19.5px}
+    .wrap{padding:4px 11px 18px}
+    .opts{grid-template-columns:1fr}
+    .maplabel{font-size:7.4px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">BerlinWalk tool</p>
+  <h1>Berlin Twin City Map</h1>
+  <p class="lede">Forty years of division left Berlin with two of almost everything, and the copies are still standing on opposite sides of a border that is no longer there. Pick the one you would actually go to and the map draws the day you have just made.</p>
+
+  <div class="mapcard">
+    <div class="maphead">
+      <div class="legend">
+        <span><i class="w"></i>West Berlin</span>
+        <span><i class="e"></i>East Berlin</span>
+        <span><i class="d"></i>Retired</span>
+      </div>
+    </div>
+    <svg class="map" id="map" viewBox="0 0 700 430" role="img" aria-label="Map of Berlin showing paired institutions on the former East and West sides"></svg>
+    <p class="insetcap">The dashed box is the centre, where nine of the pairs sit almost on top of each other. Same data, zoomed in.</p>
+    <svg class="map inset" id="inset" viewBox="0 0 700 372" role="img" aria-label="Zoomed map of central Berlin showing the paired institutions around the former border"></svg>
+  </div>
+
+  <div class="readout" id="readout" aria-live="polite">
+    <p class="rl">Your Berlin</p>
+    <p class="rv" id="verdict">Nothing picked yet. Every line on the map joins one pair, and the length of the line is what the division actually costs you in travel time.</p>
+    <div class="tally" id="tally"></div>
+  </div>
+
+  <div class="pairs" id="pairs"></div>
+
+  <div class="foot">
+    <button class="reset" id="reset" type="button">Start over</button>
+    <p class="note">Coordinates from OpenStreetMap. Sector outlines are the 1989 boundary.</p>
+  </div>
+</div>
+
+<script defer src="../js/brand.js"></script>
+<script>
+(function(){
+  var picks = new Map();
+  var DATA = null, SECT = null;
+  var mapEl = document.getElementById('map');
+  var insetEl = document.getElementById('inset');
+  var pairsEl = document.getElementById('pairs');
+  var verdictEl = document.getElementById('verdict');
+  var tallyEl = document.getElementById('tally');
+
+  var KX = Math.cos(52.5 * Math.PI / 180);
+  // Whole-city frame, from the 1989 sector polygons.
+  var CITY = view(13.088, 13.761, 52.338, 52.676, 700, 430, 18);
+  // The centre, where nine pairs sit within four kilometres of each other.
+  var WIN = { lon0: 13.300, lon1: 13.442, lat0: 52.499, lat1: 52.549 };
+  var MITTE = view(WIN.lon0, WIN.lon1, WIN.lat0, WIN.lat1, 700, 372, 24);
+
+  function view(lon0, lon1, lat0, lat1, w, h, pad){
+    var sx = (lon1 - lon0) * KX, sy = (lat1 - lat0);
+    var sc = Math.min((w - 2*pad) / sx, (h - 2*pad) / sy);
+    return {
+      lon0: lon0, lon1: lon1, lat0: lat0, lat1: lat1, w: w, h: h, sc: sc,
+      ox: (w - sx*sc)/2, oy: (h - sy*sc)/2,
+      x: function(lon){ return this.ox + (lon - this.lon0) * KX * this.sc; },
+      y: function(lat){ return this.oy + (this.lat1 - lat) * this.sc; }
+    };
+  }
+  function inWindow(s){ return s.lon >= WIN.lon0 && s.lon <= WIN.lon1 && s.lat >= WIN.lat0 && s.lat <= WIN.lat1; }
+  function km(a, b){
+    var dx = (a.lon - b.lon) * KX * 111.32, dy = (a.lat - b.lat) * 111.32;
+    return Math.sqrt(dx*dx + dy*dy);
+  }
+  function el(name, attrs, text){
+    var n = document.createElementNS('http://www.w3.org/2000/svg', name);
+    for (var k in attrs) if (attrs[k] !== null && attrs[k] !== undefined) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function ring(coords, v){ return coords.map(function(c){ return v.x(c[0]).toFixed(1) + ',' + v.y(c[1]).toFixed(1); }).join(' '); }
+
+  function sites(){
+    var out = [];
+    DATA.pairs.forEach(function(p){
+      ['west','east'].forEach(function(side){ out.push({ key: p.id + '|' + side, pair: p, side: side, s: p[side] }); });
+      if (p.now) out.push({ key: p.id + '|now', pair: p, side: 'now', s: p.now });
+    });
+    return out;
+  }
+
+  /* Draw one framed view. `labelled` decides which sites get a name. */
+  function draw(svg, v, labelled, opts){
+    svg.textContent = '';
+    var clip = el('clipPath', { id: svg.id + '-clip' });
+    clip.appendChild(el('rect', { x: 0, y: 0, width: v.w, height: v.h }));
+    svg.appendChild(clip);
+    var g = el('g', { 'clip-path': 'url(#' + svg.id + '-clip)' });
+    svg.appendChild(g);
+
+    SECT.west.forEach(function(r){ g.appendChild(el('polygon', { points: ring(r, v), class: 'sector-w' })); });
+    SECT.east.forEach(function(r){ g.appendChild(el('polygon', { points: ring(r, v), class: 'sector-e' })); });
+
+    if (opts && opts.sectorNames) {
+      g.appendChild(el('text', { x: v.x(13.155), y: v.y(52.625), class: 'sectorname', fill: '#B87400' }, 'WEST'));
+      g.appendChild(el('text', { x: v.x(13.595), y: v.y(52.625), class: 'sectorname', fill: '#1B5E20' }, 'EAST'));
+    }
+    if (opts && opts.showWindow) {
+      g.appendChild(el('rect', {
+        x: v.x(WIN.lon0), y: v.y(WIN.lat1),
+        width: v.x(WIN.lon1) - v.x(WIN.lon0), height: v.y(WIN.lat0) - v.y(WIN.lat1),
+        rx: 4, class: 'insetbox'
+      }));
+    }
+
+    DATA.pairs.forEach(function(p){
+      if (opts && opts.linksInsideOnly && !(inWindow(p.west) && inWindow(p.east))) return;
+      var chosen = picks.get(p.id);
+      g.appendChild(el('line', {
+        x1: v.x(p.west.lon), y1: v.y(p.west.lat), x2: v.x(p.east.lon), y2: v.y(p.east.lat),
+        class: 'link' + (p.live ? (chosen ? ' on' : '') : ' gone')
+      }));
+    });
+
+    /* Labels first as a plan, so they can be pushed apart before anything is drawn. */
+    var plan = [];
+    sites().forEach(function(item){
+      if (labelled.indexOf(item.key) === -1) return;
+      var right = item.s.lon > (v.lon0 + v.lon1) / 2;
+      plan.push({ item: item, right: right, px: v.x(item.s.lon), py: v.y(item.s.lat), ly: v.y(item.s.lat) + 3 });
+    });
+    ['L','R'].forEach(function(sideKey){
+      var col = plan.filter(function(q){ return (sideKey === 'R') === q.right; }).sort(function(a,b){ return a.ly - b.ly; });
+      for (var i = 1; i < col.length; i++) {
+        if (col[i].ly - col[i-1].ly < 12) col[i].ly = col[i-1].ly + 12;
+      }
+    });
+
+    sites().forEach(function(item){
+      var p = item.pair, s = item.s, side = item.side;
+      var chosen = picks.get(p.id);
+      if (side === 'now') {
+        var ng = el('g', { class: 'nowdot' });
+        ng.appendChild(el('circle', { cx: v.x(s.lon), cy: v.y(s.lat), r: 6 }));
+        g.appendChild(ng);
+        return;
+      }
+      var classes = ['dot', side === 'west' ? 'w' : 'e'];
+      if (!p.live) classes.push('gone');
+      if (chosen === side) classes.push('picked');
+      if (chosen && chosen !== side) classes.push('dim');
+      var dg = el('g', {
+        class: classes.join(' '),
+        role: p.live ? 'button' : 'img',
+        tabindex: p.live ? '0' : null,
+        'aria-label': s.name + ', ' + (side === 'west' ? 'West' : 'East') + ' Berlin, ' + p.theme
+      });
+      dg.appendChild(el('circle', { cx: v.x(s.lon), cy: v.y(s.lat), r: chosen === side ? 7 : 5 }));
+      if (p.live) {
+        dg.addEventListener('click', function(){ choose(p.id, side); });
+        dg.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); choose(p.id, side); } });
+      }
+      g.appendChild(dg);
+    });
+
+    plan.forEach(function(q){
+      var dx = q.right ? 10 : -10;
+      var anchor = q.right ? 'start' : 'end';
+      if (Math.abs(q.ly - q.py) > 4) {
+        g.appendChild(el('line', { x1: q.px + (q.right ? 5 : -5), y1: q.py, x2: q.px + dx - (q.right ? 1 : -1), y2: q.ly - 3, class: 'leader' }));
+      }
+      g.appendChild(el('text', { x: q.px + dx, y: q.ly, class: 'maplabel', 'text-anchor': anchor }, q.item.s.name));
+    });
+  }
+
+  function drawMaps(){
+    var all = sites();
+    var outside = all.filter(function(i){ return !inWindow(i.s); }).map(function(i){ return i.key; });
+    var inside = all.filter(function(i){ return inWindow(i.s); }).map(function(i){ return i.key; });
+    draw(mapEl, CITY, outside, { sectorNames: true, showWindow: true });
+    draw(insetEl, MITTE, inside, { sectorNames: false, showWindow: false, linksInsideOnly: true });
+  }
+
+  function choose(id, side){
+    if (picks.get(id) === side) picks.delete(id); else picks.set(id, side);
+    render();
+  }
+
+  function drawPairs(){
+    pairsEl.textContent = '';
+    DATA.pairs.forEach(function(p){
+      var card = document.createElement('div');
+      card.className = 'pair' + (p.live ? '' : ' retired');
+      var t = document.createElement('p'); t.className = 'ptheme'; t.textContent = p.theme; card.appendChild(t);
+
+      if (p.live) {
+        var opts = document.createElement('div'); opts.className = 'opts';
+        ['west','east'].forEach(function(side){
+          var s = p[side];
+          var b = document.createElement('button');
+          b.type = 'button'; b.className = 'opt';
+          b.setAttribute('aria-pressed', picks.get(p.id) === side ? 'true' : 'false');
+          var tag = document.createElement('span'); tag.className = 'side ' + (side === 'west' ? 'w' : 'e');
+          tag.textContent = side === 'west' ? 'WEST' : 'EAST';
+          var nm = document.createElement('b'); nm.textContent = s.name;
+          var sb = document.createElement('span'); sb.textContent = s.sub;
+          b.appendChild(tag); b.appendChild(nm); b.appendChild(sb);
+          b.addEventListener('click', function(){ choose(p.id, side); });
+          opts.appendChild(b);
+        });
+        card.appendChild(opts);
+        var w = document.createElement('p'); w.className = 'why';
+        var chosen = picks.get(p.id);
+        if (chosen) {
+          var lead = document.createElement('b'); lead.textContent = p[chosen].name + ': ';
+          w.appendChild(lead); w.append(p[chosen].fact);
+        } else {
+          w.textContent = p.verdict;
+        }
+        card.appendChild(w);
+      } else {
+        var names = document.createElement('p'); names.className = 'pairnames';
+        names.textContent = p.west.name + ' and ' + p.east.name;
+        card.appendChild(names);
+        var st = document.createElement('p'); st.className = 'settled';
+        var badge = document.createElement('span'); badge.className = 'now'; badge.textContent = p.now.name;
+        st.appendChild(badge); st.append(p.now.fact + ' ' + p.verdict);
+        card.appendChild(st);
+      }
+      pairsEl.appendChild(card);
+    });
+  }
+
+  function pairById(id){
+    for (var i = 0; i < DATA.pairs.length; i++) if (DATA.pairs[i].id === id) return DATA.pairs[i];
+    return null;
+  }
+
+  function drawReadout(){
+    var live = DATA.pairs.filter(function(p){ return p.live; });
+    var west = 0, east = 0, widest = null, pts = [];
+    picks.forEach(function(side, id){
+      var p = pairById(id); if (!p) return;
+      if (side === 'west') west++; else east++;
+      pts.push(p[side]);
+      var d = km(p.west, p.east);
+      if (!widest || d > widest.d) widest = { d: d, theme: p.theme };
+    });
+    var n = west + east;
+    tallyEl.textContent = '';
+    function chip(label, value){
+      var c = document.createElement('span'); c.className = 'chip';
+      c.append(label + ' ');
+      var b = document.createElement('b'); b.textContent = value; c.appendChild(b);
+      tallyEl.appendChild(c);
+    }
+    chip('Chosen', n + ' / ' + live.length);
+    if (n) {
+      chip('West', String(west));
+      chip('East', String(east));
+      var spread = 0;
+      for (var i = 0; i < pts.length; i++) for (var j = i+1; j < pts.length; j++) spread = Math.max(spread, km(pts[i], pts[j]));
+      chip('Widest gap', spread.toFixed(1) + ' km');
+    }
+
+    if (!n) {
+      verdictEl.textContent = 'Nothing picked yet. Every line joins one pair, and the length of that line is what the division still costs you in travel time.';
+      return;
+    }
+    var msg;
+    if (west === 0) msg = 'Every pick is on the eastern side, so this is close to a walking day. The historic centre is East Berlin, which is why my free tour starts at Alexanderplatz and never needs a train.';
+    else if (east === 0) msg = 'Every pick is on the western side. It works, but you will spend the day between Charlottenburg and the Tiergarten and see almost nothing of the old centre.';
+    else if (west === east) msg = 'An even split, which means crossing the old border between most stops. Group the eastern picks into one block and the western picks into another, or the U-Bahn eats your afternoon.';
+    else if (west > east) msg = 'Mostly western picks. Start in the centre, then move out to Charlottenburg once, instead of bouncing back and forth across the city.';
+    else msg = 'Mostly eastern picks, which is the efficient way round. Put the western outlier at the start or the end of the day, never in the middle.';
+    if (widest) msg += ' The pair that stretches furthest is ' + widest.theme.toLowerCase() + ', ' + widest.d.toFixed(1) + ' km from twin to twin.';
+    verdictEl.textContent = msg;
+  }
+
+  function render(){ drawMaps(); drawPairs(); drawReadout(); if (window.bwResize) window.bwResize(); }
+
+  document.getElementById('reset').addEventListener('click', function(){ picks.clear(); render(); });
+
+  Promise.all([
+    fetch('data/pairs.json').then(function(r){ return r.json(); }),
+    fetch('data/sectors.json').then(function(r){ return r.json(); })
+  ]).then(function(res){
+    DATA = res[0]; SECT = res[1];
+    render();
+  }).catch(function(){
+    verdictEl.textContent = 'The map data could not load. Reload the page and it should come back.';
+  });
+})();
+</script>
+</body>
+</html>

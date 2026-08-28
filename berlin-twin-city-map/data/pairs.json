@@ -1,0 +1,95 @@
+{
+  "note": "Berlin institutions that exist twice because the city was split. Coordinates geocoded from OpenStreetMap Nominatim on 28 August 2026. Sector polygons derived from the repo's east-west-1989 dataset.",
+  "pairs": [
+    {
+      "id": "towers",
+      "theme": "The tower",
+      "live": true,
+      "west": { "name": "Funkturm", "sub": "Radio tower, 1926", "lat": 52.50503, "lon": 13.27814, "fact": "126 m platform, Tuesday to Sunday 11:00 to 21:00, out at the Messe grounds." },
+      "east": { "name": "Fernsehturm", "sub": "TV tower, 1969", "lat": 52.52083, "lon": 13.40942, "fact": "203 m deck, open every day, straight up from Alexanderplatz." },
+      "verdict": "Take the Fernsehturm if you want to look at the centre. Take the Funkturm if you want to look at the Fernsehturm, from a platform with almost nobody on it."
+    },
+    {
+      "id": "zoos",
+      "theme": "The zoo",
+      "live": true,
+      "west": { "name": "Zoo Berlin", "sub": "1844, Hardenbergplatz", "lat": 52.50845, "lon": 13.33923, "fact": "Germany's oldest zoo, about 33 hectares, five minutes from Bahnhof Zoo." },
+      "east": { "name": "Tierpark", "sub": "1955, Friedrichsfelde", "lat": 52.50155, "lon": 13.53127, "fact": "Built by the GDR when the Zoo ended up in the west. Roughly five times the size, in a Lenne park." },
+      "verdict": "Zoo Berlin if your day is short and already in the west. Tierpark if you want to walk in a park that happens to have animals in it."
+    },
+    {
+      "id": "opera",
+      "theme": "The opera house",
+      "live": true,
+      "west": { "name": "Deutsche Oper", "sub": "1961 building, Bismarckstrasse", "lat": 52.51214, "lon": 13.30838, "fact": "Opened six weeks after the Wall went up, as West Berlin's only opera house." },
+      "east": { "name": "Staatsoper", "sub": "Unter den Linden, 1742", "lat": 52.5167, "lon": 13.39474, "fact": "The royal house, on the boulevard, rebuilt after the war and again after 2010." },
+      "verdict": "Staatsoper for the gilded room and the walk home past the Dom. Deutsche Oper for cheaper seats and a hall that hides nothing behind decoration."
+    },
+    {
+      "id": "concert",
+      "theme": "The concert hall",
+      "live": true,
+      "west": { "name": "Philharmonie", "sub": "1963, Scharoun", "lat": 52.50999, "lon": 13.36961, "fact": "Built a few hundred metres from the Wall, with the orchestra in the middle of the room." },
+      "east": { "name": "Konzerthaus", "sub": "Gendarmenmarkt, reopened 1984", "lat": 52.51354, "lon": 13.39186, "fact": "Schinkel's theatre, rebuilt from a wartime ruin and reopened as a concert hall in October 1984." },
+      "verdict": "Philharmonie if you care how a concert hall can sound. Konzerthaus if you want the room and the square it stands on."
+    },
+    {
+      "id": "library",
+      "theme": "The state library",
+      "live": true,
+      "west": { "name": "Haus Potsdamer Strasse", "sub": "1978, Scharoun", "lat": 52.50737, "lon": 13.37084, "fact": "The terraced reading landscape from Wings of Desire. Same architect as the Philharmonie next door." },
+      "east": { "name": "Haus Unter den Linden", "sub": "1914", "lat": 52.51822, "lon": 13.39152, "fact": "The old Prussian library, with a glass reading cube dropped into the bombed courtyard." },
+      "verdict": "One library, two houses, because the collection was split and never fully put back. Potsdamer Strasse is the one worth walking into if you like buildings."
+    },
+    {
+      "id": "planetarium",
+      "theme": "The planetarium",
+      "live": true,
+      "west": { "name": "Planetarium am Insulaner", "sub": "1965, Schoeneberg", "lat": 52.45758, "lon": 13.34942, "fact": "Sits on a hill made of war rubble, next to an open-air pool." },
+      "east": { "name": "Zeiss-Grossplanetarium", "sub": "1987, Prenzlauer Berg", "lat": 52.54306, "lon": 13.42814, "fact": "One of the last big GDR buildings, put up for Berlin's 750th birthday. 23 m inner dome." },
+      "verdict": "The Zeiss dome in Prenzlauer Berg is the bigger show and the easier trip. The Insulaner is the one you go to for the hill it stands on."
+    },
+    {
+      "id": "townhall",
+      "theme": "The city hall",
+      "live": true,
+      "west": { "name": "Rathaus Schoeneberg", "sub": "West Berlin's seat, 1949 to 1991", "lat": 52.48483, "lon": 13.3441, "fact": "Kennedy said Ich bin ein Berliner from this balcony in 1963. The Freedom Bell in the tower rings at noon." },
+      "east": { "name": "Rotes Rathaus", "sub": "Seat of the mayor again since 1991", "lat": 52.51827, "lon": 13.40783, "fact": "The red brick city hall behind the Neptune Fountain, back in charge of the whole city." },
+      "verdict": "Rotes Rathaus is on your way anywhere in the centre. Schoeneberg is the one to plan for, and to arrive at just before twelve."
+    },
+    {
+      "id": "museums",
+      "theme": "The museum quarter",
+      "live": true,
+      "west": { "name": "Kulturforum", "sub": "Gemaeldegalerie and Dahlem", "lat": 52.50851, "lon": 13.36475, "fact": "Where the western half of the old Prussian collections went. Nefertiti was out here until 2009." },
+      "east": { "name": "Museum Island", "sub": "Five museums, one island", "lat": 52.52093, "lon": 13.39563, "fact": "The eastern half stayed on the island, including the Pergamon collections." },
+      "verdict": "Museum Island first, always. The Kulturforum is where you go on the second visit, when the island has stopped being the only thing you know about."
+    },
+    {
+      "id": "station",
+      "theme": "The main station",
+      "live": false,
+      "west": { "name": "Bahnhof Zoo", "sub": "West Berlin's long-distance station", "lat": 52.50743, "lon": 13.33256, "fact": "Every train into West Berlin ended here." },
+      "east": { "name": "Ostbahnhof", "sub": "Called Hauptbahnhof from 1987", "lat": 52.51038, "lon": 13.43491, "fact": "East Berlin's main station, and it carried the name Hauptbahnhof for eleven years." },
+      "now": { "name": "Berlin Hauptbahnhof", "lat": 52.52464, "lon": 13.36986, "fact": "Opened in May 2006 on empty land between the two, and took the long-distance trains off both." },
+      "verdict": "Settled. Book to Hauptbahnhof unless your hotel is genuinely closer to one of the old two."
+    },
+    {
+      "id": "airport",
+      "theme": "The airport",
+      "live": false,
+      "west": { "name": "Tegel", "sub": "West Berlin, closed 2020", "lat": 52.5646, "lon": 13.29598, "fact": "The hexagon where you walked from the taxi to the gate in a minute. Tempelhof, also in the west, closed in 2008." },
+      "east": { "name": "Schoenefeld", "sub": "East Berlin's airport, outside the city", "lat": 52.36593, "lon": 13.48864, "fact": "The GDR's airport was not even inside Berlin. It kept going as BER's Terminal 5 until it closed for good in 2022." },
+      "now": { "name": "BER", "lat": 52.36593, "lon": 13.48864, "fact": "Opened on the Schoenefeld site on 31 October 2020. One airport, in the far south east." },
+      "verdict": "Settled, and not in your favour: the surviving airport is the far one. Allow the full hour back into town."
+    },
+    {
+      "id": "university",
+      "theme": "The university",
+      "live": true,
+      "west": { "name": "Freie Universitaet", "sub": "Founded December 1948, Dahlem", "lat": 52.45168, "lon": 13.28874, "fact": "Started by students who had been thrown out of the old university in the Soviet sector." },
+      "east": { "name": "Humboldt-Universitaet", "sub": "1810, Unter den Linden", "lat": 52.51834, "lon": 13.39292, "fact": "The original, opposite the Staatsoper, with the second-hand book stalls out front." },
+      "verdict": "Humboldt is a five second stop on any walk down Unter den Linden. The FU is a genuine trip to Dahlem, worth it only if Sixties campus architecture is your thing."
+    }
+  ]
+}
