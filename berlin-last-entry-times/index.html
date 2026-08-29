@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Last Entry Planner</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #FDFBF5; color: #1B2B1B; padding: 14px 12px 10px;
+  }
+  .blet-wrap { max-width: 760px; margin: 0 auto; }
+  .blet-head h1 { font-size: 20px; line-height: 1.25; color: #1B5E20; font-weight: 800; }
+  .blet-head p { font-size: 13px; line-height: 1.5; color: #4A5A4A; margin-top: 4px; }
+
+  .blet-label {
+    font-size: 10.5px; font-weight: 800; letter-spacing: .07em;
+    text-transform: uppercase; color: #4A5A4A; display: block; margin: 13px 0 5px;
+  }
+  .blet-pills { display: flex; gap: 5px; flex-wrap: wrap; }
+  .blet-pills button {
+    font-family: inherit; font-size: 12.5px; font-weight: 700; cursor: pointer;
+    border: 2px solid #1B5E20; background: #fff; color: #1B5E20;
+    border-radius: 999px; padding: 5px 12px; transition: background .15s, color .15s;
+  }
+  .blet-pills button.blet-on { background: #1B5E20; color: #FFE600; }
+
+  .blet-mapbox { margin-top: 13px; border: 2px solid #DCE6D6; border-radius: 14px; overflow: hidden; background: #F4F7F1; }
+  .blet-mapbox svg { display: block; width: 100%; height: auto; }
+  .blet-pin { cursor: pointer; }
+
+  .blet-legend {
+    display: flex; gap: 12px; flex-wrap: wrap; margin: 8px 0 0;
+    font-size: 10.5px; color: #4A5A4A; line-height: 1.6;
+  }
+  .blet-legend span { display: inline-flex; align-items: center; }
+  .blet-legend i { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 5px; border: 2px solid #fff; box-shadow: 0 0 0 1px #B9C6B4; }
+  .blet-legend .k1 i { background: #1B5E20; }
+  .blet-legend .k2 i { background: #E08A2E; }
+  .blet-legend .k3 i { background: #C9CFC6; }
+  .blet-legend .k4 i { background: #FFE600; }
+
+  .blet-chain { margin-top: 14px; border: 2px solid #1B5E20; border-radius: 14px; background: #fff; overflow: hidden; }
+  .blet-chain-top { background: #1B5E20; color: #fff; padding: 11px 14px; display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+  .blet-chain-top b { font-size: 14.5px; font-weight: 800; }
+  .blet-chain-top span { font-size: 12px; color: #FFE600; font-weight: 700; text-align: right; }
+  .blet-chain-body { padding: 4px 0 0; }
+  .blet-empty { padding: 16px 14px; font-size: 13px; line-height: 1.55; color: #4A5A4A; }
+  .blet-leg { padding: 11px 14px; border-bottom: 1px solid #EDF1EA; display: grid; grid-template-columns: 1fr auto; gap: 3px 10px; }
+  .blet-leg:last-child { border-bottom: 0; }
+  .blet-leg-name { font-size: 14px; font-weight: 800; }
+  .blet-leg-walk { font-size: 11px; color: #7A857A; margin-top: 1px; }
+  .blet-leg-state { font-size: 11.5px; font-weight: 800; border-radius: 999px; padding: 4px 10px; white-space: nowrap; align-self: center; }
+  .blet-leg.ok .blet-leg-state { background: #1B5E20; color: #FFE600; }
+  .blet-leg.tight .blet-leg-state { background: #E08A2E; color: #fff; }
+  .blet-leg.miss .blet-leg-state { background: #E2E8DE; color: #455245; }
+  .blet-leg-note { grid-column: 1 / -1; font-size: 12px; line-height: 1.5; color: #3A493A; margin-top: 3px; }
+  .blet-leg-drop {
+    grid-column: 1 / -1; margin-top: 6px; font-family: inherit; font-size: 11px; font-weight: 700;
+    background: none; border: 0; color: #7A857A; cursor: pointer; padding: 0; text-decoration: underline;
+    justify-self: start;
+  }
+  .blet-verdict { background: #FFE600; color: #123D18; padding: 11px 14px; font-size: 12.5px; line-height: 1.5; font-weight: 700; }
+
+  .blet-pickers { margin-top: 14px; display: grid; gap: 6px; }
+  .blet-pick {
+    width: 100%; text-align: left; font-family: inherit; cursor: pointer;
+    border: 2px solid #DCE6D6; border-radius: 11px; background: #fff; padding: 9px 12px;
+    display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; align-items: center;
+  }
+  .blet-pick:hover { border-color: #7CB342; }
+  .blet-pick.chosen { border-color: #1B5E20; background: #F4F8F0; }
+  .blet-pick-name { display: block; font-size: 13.5px; font-weight: 800; color: #1B2B1B; }
+  .blet-pick-sub { display: block; font-size: 11px; color: #7A857A; margin-top: 2px; line-height: 1.45; }
+  .blet-pick-tag { font-size: 11px; font-weight: 800; color: #1B5E20; white-space: nowrap; }
+  .blet-pick.shutday { opacity: .5; }
+  .blet-pick.shutday .blet-pick-tag { color: #7A857A; }
+  .blet-foot { margin-top: 12px; font-size: 10.5px; color: #7A857A; line-height: 1.55; }
+  @media (max-width: 430px) {
+    .blet-head h1 { font-size: 18px; }
+    .blet-pills button { font-size: 12px; padding: 5px 10px; }
+  }
+</style>
+</head>
+<body>
+<div class="blet-wrap">
+  <div class="blet-head">
+    <h1>Berlin Last Entry Planner</h1>
+    <p>Say when your afternoon starts, then add sights in the order you would actually walk them. This counts the walk between each one and checks whether you still arrive before its door closes to new visitors.</p>
+  </div>
+
+  <span class="blet-label" id="blet-daylabel">Which day</span>
+  <div class="blet-pills" role="group" aria-labelledby="blet-daylabel" id="blet-days"></div>
+
+  <span class="blet-label" id="blet-timelabel">Free from</span>
+  <div class="blet-pills" role="group" aria-labelledby="blet-timelabel" id="blet-times"></div>
+
+  <div class="blet-mapbox"><div id="blet-map"></div></div>
+
+  <div class="blet-legend">
+    <span class="k4"><i></i>In your plan</span>
+    <span class="k1"><i></i>You would still get in</span>
+    <span class="k2"><i></i>Open, but not enough time</span>
+    <span class="k3"><i></i>Too late or shut today</span>
+  </div>
+
+  <div class="blet-chain">
+    <div class="blet-chain-top"><b>Your afternoon</b><span id="blet-clock"></span></div>
+    <div class="blet-chain-body" id="blet-chain"></div>
+    <div class="blet-verdict" id="blet-verdict"></div>
+  </div>
+
+  <span class="blet-label" id="blet-addlabel">Add a sight</span>
+  <div class="blet-pickers" role="group" aria-labelledby="blet-addlabel" id="blet-pickers"></div>
+
+  <p class="blet-foot" id="blet-foot"></p>
+</div>
+
+<script src="data.js"></script>
+<script>
+(function () {
+  var D = window.BLET_DATA;
+  var mapBox = document.getElementById('blet-map');
+  var chainBox = document.getElementById('blet-chain');
+  var pickBox = document.getElementById('blet-pickers');
+  var clockEl = document.getElementById('blet-clock');
+  var verdictEl = document.getElementById('blet-verdict');
+  var daysBox = document.getElementById('blet-days');
+  var timesBox = document.getElementById('blet-times');
+  var foot = document.getElementById('blet-foot');
+
+  var WALK_KMH = 4.5;      /* an unhurried city pace with crossings */
+  var DETOUR = 1.35;       /* streets are not straight lines */
+
+  var plan = [];           /* venue names, in walking order */
+  var day = 'Tue';
+  var startAt = 900;       /* 15:00 */
+
+  function hhmm(m) {
+    var h = Math.floor(m / 60) % 24, x = Math.round(m) % 60;
+    return (h < 10 ? '0' : '') + h + ':' + (x < 10 ? '0' : '') + x;
+  }
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  function byName(n) {
+    return D.venues.filter(function (v) { return v.name === n; })[0];
+  }
+  function longDay(d) {
+    return { Mon:'Monday', Tue:'Tuesday', Wed:'Wednesday', Thu:'Thursday', Fri:'Friday', Sat:'Saturday', Sun:'Sunday' }[d];
+  }
+
+  /* Real ground distance between two venues, then a walking time in minutes. */
+  function walkMinutes(a, b) {
+    if (!a) return 0;
+    var R = 6371, rad = Math.PI / 180;
+    var dLat = (b.lat - a.lat) * rad;
+    var dLon = (b.lon - a.lon) * rad * Math.cos(((a.lat + b.lat) / 2) * rad);
+    var km = Math.sqrt(dLat * dLat + dLon * dLon) * R * DETOUR;
+    return Math.round((km / WALK_KMH) * 60);
+  }
+
+  function hoursOn(v) {
+    var h = v.hours[day];
+    if (!h) return null;
+    return { open: h[0], close: h[1], cutoff: h[1] - (v.gap || 0) };
+  }
+
+  /* Walk the chain once and return a leg per stop plus the finishing clock. */
+  function buildLegs() {
+    var legs = [], clock = startAt, prev = null;
+    plan.forEach(function (name) {
+      var v = byName(name), h = hoursOn(v);
+      var walk = walkMinutes(prev, v);
+      var arrive = clock + walk;
+      var leg = { v: v, walk: walk, arrive: arrive, h: h };
+
+      if (!h) {
+        leg.kind = 'miss';
+        leg.state = 'Closed today';
+        leg.note = v.name + ' does not open on ' + longDay(day) + ', so this stop cannot happen at all.';
+      } else if (arrive < h.open) {
+        leg.kind = 'tight';
+        leg.state = 'Opens ' + hhmm(h.open);
+        leg.note = 'You would arrive at ' + hhmm(arrive) + ', before the ' + hhmm(h.open) + ' opening. Waiting costs you ' + (h.open - arrive) + ' minutes of the afternoon.';
+        clock = h.open + v.need;
+        leg.leave = clock;
+      } else if (arrive > h.cutoff) {
+        leg.kind = 'miss';
+        leg.state = 'Too late';
+        leg.note = 'You would arrive at ' + hhmm(arrive) + '. The last entry is ' + hhmm(h.cutoff) +
+          (v.gap ? ', an hour before the ' + hhmm(h.close) + ' close.' : ', which is closing time.');
+        leg.leave = arrive;
+      } else {
+        var inside = h.close - arrive;
+        leg.leave = arrive + Math.min(v.need, inside);
+        if (inside < v.need) {
+          leg.kind = 'tight';
+          leg.state = inside + ' min inside';
+          leg.note = 'You get in at ' + hhmm(arrive) + ', but only ' + inside + ' minutes before it closes. This one wants about ' + v.need + '.';
+        } else {
+          leg.kind = 'ok';
+          leg.state = 'Fits';
+          leg.note = 'In at ' + hhmm(arrive) + ', out around ' + hhmm(leg.leave) + '. Last entry is ' + hhmm(h.cutoff) + '.';
+        }
+        clock = leg.leave;
+      }
+      if (leg.kind === 'miss') clock = arrive;
+      legs.push(leg);
+      prev = v;
+    });
+    return { legs: legs, finish: clock };
+  }
+
+  /* Where the plan leaves you, so the next pin can be judged from there. */
+  function tail() {
+    var b = buildLegs();
+    var last = plan.length ? byName(plan[plan.length - 1]) : null;
+    return { at: b.finish, from: last, legs: b.legs };
+  }
+
+  function judgeNext(v, t) {
+    var h = hoursOn(v);
+    if (!h) return 'shut';
+    var arrive = t.at + walkMinutes(t.from, v);
+    if (arrive > h.cutoff) return 'late';
+    if (h.close - arrive < v.need) return 'tight';
+    return 'ok';
+  }
+
+  var PIN = { ok: '#1B5E20', tight: '#E08A2E', late: '#C9CFC6', shut: '#C9CFC6', chosen: '#FFE600' };
+
+  function drawMap(t) {
+    var lats = D.venues.map(function (v) { return v.lat; });
+    var lons = D.venues.map(function (v) { return v.lon; });
+    var la0 = Math.min.apply(null, lats), la1 = Math.max.apply(null, lats);
+    var lo0 = Math.min.apply(null, lons), lo1 = Math.max.apply(null, lons);
+    var kx = Math.cos(((la0 + la1) / 2) * Math.PI / 180);
+    /* The SVG scales to the container, so a fixed 760 viewBox shrinks 10px
+       label text to about 5px on a phone. Narrow screens get a viewBox close
+       to their real pixel width instead, plus shortened labels. */
+    var narrow = (mapBox.clientWidth || 760) < 520;
+    var W = narrow ? 380 : 760, padX = narrow ? 18 : 34, padY = narrow ? 18 : 26;
+    var FS = narrow ? 9 : 10.5;
+    var spanX = (lo1 - lo0) * kx, spanY = (la1 - la0);
+    /* True aspect would waste half the frame on empty Mitte, so the vertical
+       axis is compressed to a readable board. Distances and walking times are
+       computed from the real coordinates, never from these pixels. */
+    var H = Math.min(narrow ? 300 : 560, Math.round((W - padX * 2) * (spanY / spanX) * 0.62) + padY * 2);
+    var x = function (lon) { return padX + ((lon - lo0) * kx / spanX) * (W - padX * 2); };
+    var y = function (lat) { return H - padY - ((lat - la0) / spanY) * (H - padY * 2); };
+
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Map of thirteen central Berlin sights">';
+    s += '<rect x="0" y="0" width="' + W + '" height="' + H + '" fill="#F4F7F1"/>';
+
+    /* The Spree through the real river bend past Museum Island. */
+    var river = [[13.3745,52.5205],[13.3830,52.5195],[13.3900,52.5222],[13.3960,52.5232],
+                 [13.4010,52.5212],[13.4048,52.5178],[13.4110,52.5158],[13.4180,52.5148]];
+    s += '<polyline points="' + river.map(function (p) { return x(p[0]).toFixed(1) + ',' + y(p[1]).toFixed(1); }).join(' ') +
+         '" fill="none" stroke="#CBDCE8" stroke-width="' + (narrow ? 5 : 8) + '" stroke-linecap="round" stroke-linejoin="round"/>';
+
+    if (plan.length > 1) {
+      var pts = plan.map(function (n) { var v = byName(n); return x(v.lon).toFixed(1) + ',' + y(v.lat).toFixed(1); });
+      s += '<polyline points="' + pts.join(' ') + '" fill="none" stroke="#1B5E20" stroke-width="2.5" stroke-dasharray="7 5" stroke-linejoin="round"/>';
+    }
+
+    /* Six of the thirteen sit within 300 m on Museum Island, so labels placed
+       at the pin overlap into an unreadable clump. Lay them out per side and
+       push them apart to a minimum line spacing, with a leader to the pin. */
+    var items = D.venues.map(function (v) {
+      var inPlan = plan.indexOf(v.name) >= 0;
+      return {
+        v: v, inPlan: inPlan, k: inPlan ? 'chosen' : judgeNext(v, t),
+        cx: x(v.lon), cy: y(v.lat), order: plan.indexOf(v.name) + 1
+      };
+    });
+    var MID = W * 0.58, GAP = narrow ? 11 : 15;
+    ['right', 'left'].forEach(function (side) {
+      var group = items.filter(function (it) { return (it.cx > MID ? 'left' : 'right') === side; });
+      group.sort(function (a, b) { return a.cy - b.cy; });
+      var last = -Infinity;
+      group.forEach(function (it) {
+        it.side = side;
+        it.ly = Math.max(it.cy + 3.5, last + GAP);
+        last = it.ly;
+      });
+      /* If the stack overflowed the frame, slide the whole column back up. */
+      var over = last - (H - 8);
+      if (over > 0) group.forEach(function (it) { it.ly -= over; });
+    });
+
+    items.forEach(function (it) {
+      var v = it.v, cx = it.cx, cy = it.cy;
+      var flip = it.side === 'left';
+      var R = narrow ? 5.5 : 7.5, RP = narrow ? 8.5 : 11;
+      var lx = flip ? cx - (RP + 3) : cx + (RP + 3);
+      var dim = !(it.k === 'ok' || it.inPlan);
+      s += '<g class="blet-pin" data-v="' + esc(v.name) + '" role="button" tabindex="0" aria-label="' + esc(v.name) + '">';
+      if (Math.abs(it.ly - (cy + 3.5)) > 2) {
+        s += '<line x1="' + (flip ? cx - R : cx + R).toFixed(1) + '" y1="' + cy.toFixed(1) +
+             '" x2="' + lx.toFixed(1) + '" y2="' + (it.ly - 3.5).toFixed(1) +
+             '" stroke="#C2CDBE" stroke-width="1"/>';
+      }
+      s += '<circle cx="' + cx.toFixed(1) + '" cy="' + cy.toFixed(1) + '" r="' + (it.inPlan ? RP : R) +
+           '" fill="' + PIN[it.k] + '" stroke="#fff" stroke-width="2.5"/>';
+      if (it.inPlan) {
+        s += '<text x="' + cx.toFixed(1) + '" y="' + (cy + (narrow ? 3 : 4)).toFixed(1) +
+             '" font-size="' + (narrow ? 9 : 11) + '" font-weight="800" fill="#123D18" text-anchor="middle" font-family="Montserrat, sans-serif">' + it.order + '</text>';
+      }
+      s += '<text x="' + lx.toFixed(1) + '" y="' + it.ly.toFixed(1) +
+           '" font-size="' + FS + '" font-weight="700" fill="' + (dim ? '#8B968A' : '#1B2B1B') +
+           '" text-anchor="' + (flip ? 'end' : 'start') + '" font-family="Montserrat, sans-serif">' +
+           esc(narrow ? (v.short || v.name) : v.name) + '</text>';
+      s += '</g>';
+    });
+    s += '</svg>';
+    mapBox.innerHTML = s;
+
+    Array.prototype.forEach.call(mapBox.querySelectorAll('.blet-pin'), function (g) {
+      var toggle = function () { toggleVenue(g.getAttribute('data-v')); };
+      g.addEventListener('click', toggle);
+      g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+    });
+  }
+
+  function toggleVenue(name) {
+    var i = plan.indexOf(name);
+    if (i >= 0) plan.splice(i, 1); else plan.push(name);
+    render();
+  }
+
+  function render() {
+    var t = tail();
+    var legs = t.legs;
+
+    /* Chain panel */
+    if (!plan.length) {
+      chainBox.innerHTML = '<p class="blet-empty">Nothing planned yet. Tap a pin on the map, or a sight in the list below, and it becomes your first stop at ' + hhmm(startAt) + '.</p>';
+      clockEl.textContent = 'starts ' + hhmm(startAt) + ' on ' + longDay(day);
+    } else {
+      var html = '';
+      legs.forEach(function (leg, i) {
+        html += '<div class="blet-leg ' + leg.kind + '">' +
+          '<div><div class="blet-leg-name">' + (i + 1) + '. ' + esc(leg.v.name) + '</div>' +
+          '<div class="blet-leg-walk">' + (i === 0 ? 'start of the afternoon' : leg.walk + ' min walk from ' + esc(legs[i - 1].v.name)) + '</div></div>' +
+          '<div class="blet-leg-state">' + esc(leg.state) + '</div>' +
+          '<div class="blet-leg-note">' + esc(leg.note) + '</div>' +
+          '<button type="button" class="blet-leg-drop" data-drop="' + esc(leg.v.name) + '">remove this stop</button>' +
+          '</div>';
+      });
+      chainBox.innerHTML = html;
+      Array.prototype.forEach.call(chainBox.querySelectorAll('[data-drop]'), function (b) {
+        b.addEventListener('click', function () { toggleVenue(b.getAttribute('data-drop')); });
+      });
+      clockEl.textContent = hhmm(startAt) + ' to ' + hhmm(t.at) + ' on ' + longDay(day);
+    }
+
+    /* Running totals across the chain */
+    var walked = legs.reduce(function (a, l) { return a + l.walk; }, 0);
+    var made = legs.filter(function (l) { return l.kind === 'ok'; }).length;
+    var lost = legs.filter(function (l) { return l.kind === 'miss'; }).length;
+    if (!plan.length) {
+      verdictEl.textContent = 'Everything on the map is judged from ' + hhmm(startAt) + '. Green pins are the ones you could still start now.';
+    } else {
+      var line = made + ' of ' + plan.length + ' stops actually work, ' + walked + ' minutes of that afternoon is walking.';
+      if (lost) line += ' ' + lost + ' would be a locked door: drop ' + (lost > 1 ? 'them' : 'it') + ' or move ' + (lost > 1 ? 'them' : 'it') + ' earlier in the order.';
+      else if (made === plan.length) line += ' This plan holds.';
+      verdictEl.textContent = line;
+    }
+
+    /* Picker list, judged from where the plan currently leaves you */
+    var rows = '';
+    D.venues.forEach(function (v) {
+      var inPlan = plan.indexOf(v.name) >= 0;
+      var k = judgeNext(v, t);
+      var h = hoursOn(v);
+      var tag = inPlan ? 'in plan' : (!h ? 'closed ' + day : (k === 'late' ? 'too late' : (k === 'tight' ? 'tight' : 'fits')));
+      rows += '<button type="button" class="blet-pick' + (inPlan ? ' chosen' : '') + (!h ? ' shutday' : '') + '" data-add="' + esc(v.name) + '" aria-pressed="' + (inPlan ? 'true' : 'false') + '">' +
+        '<span><span class="blet-pick-name">' + esc(v.name) + '</span>' +
+        '<span class="blet-pick-sub">' + esc(v.area) + ' · ' + esc(v.cutoffRule) +
+          (h ? ' · last entry ' + hhmm(h.cutoff) : '') + '</span></span>' +
+        '<span class="blet-pick-tag">' + esc(tag) + '</span></button>';
+    });
+    pickBox.innerHTML = rows;
+    Array.prototype.forEach.call(pickBox.querySelectorAll('[data-add]'), function (b) {
+      b.addEventListener('click', function () { toggleVenue(b.getAttribute('data-add')); });
+    });
+
+    drawMap(t);
+
+    foot.textContent = 'Opening hours read from each venue’s own site on ' + D.checkedOn +
+      '. Walking times are straight-line distance with a detour allowance at 4.5 km/h, so treat them as a floor. ' +
+      'The Berliner Dom row shows its winter hours; between 1 June and 31 August it stays open until 19:00 every day. ' +
+      'Public holidays and special events override all of this.';
+  }
+
+  D.days.forEach(function (d) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.textContent = d;
+    b.setAttribute('aria-pressed', d === day ? 'true' : 'false');
+    if (d === day) b.className = 'blet-on';
+    b.addEventListener('click', function () {
+      day = d;
+      Array.prototype.forEach.call(daysBox.children, function (c) { c.className = ''; c.setAttribute('aria-pressed', 'false'); });
+      b.className = 'blet-on'; b.setAttribute('aria-pressed', 'true');
+      render();
+    });
+    daysBox.appendChild(b);
+  });
+
+  [780, 840, 900, 960, 1020, 1080].forEach(function (m) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.textContent = hhmm(m);
+    b.setAttribute('aria-pressed', m === startAt ? 'true' : 'false');
+    if (m === startAt) b.className = 'blet-on';
+    b.addEventListener('click', function () {
+      startAt = m;
+      Array.prototype.forEach.call(timesBox.children, function (c) { c.className = ''; c.setAttribute('aria-pressed', 'false'); });
+      b.className = 'blet-on'; b.setAttribute('aria-pressed', 'true');
+      render();
+    });
+    timesBox.appendChild(b);
+  });
+
+  var wait = null;
+  window.addEventListener('resize', function () {
+    if (wait) clearTimeout(wait);
+    wait = setTimeout(render, 150);
+  });
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

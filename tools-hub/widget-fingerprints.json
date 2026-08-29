@@ -498,11 +498,11 @@
         "checkbox": 0,
         "select": 0,
         "textInput": 1,
-        "buttons": 18,
+        "buttons": 36,
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 898
+        "textLength": 2474
       },
       "inputModel": "text-entry",
       "stateProgression": "accumulate",
@@ -760,7 +760,7 @@
         "svgShapeNodes": 3,
         "svgCount": 1,
         "canvas": 0,
-        "contentImages": 43,
+        "contentImages": 27,
         "mapLibrary": true,
         "range": 0,
         "dateInput": 0,
@@ -1072,7 +1072,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 2118
+        "textLength": 2109
       },
       "inputModel": "accumulate",
       "stateProgression": "accumulate",
@@ -1462,7 +1462,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 551
+        "textLength": 550
       },
       "inputModel": "accumulate",
       "stateProgression": "accumulate",
@@ -1762,7 +1762,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 2932
+        "textLength": 2914
       },
       "inputModel": "date",
       "stateProgression": "accumulate",
@@ -2572,7 +2572,7 @@
         "ariaPressed": 6,
         "tables": 0,
         "details": 0,
-        "textLength": 25150
+        "textLength": 25152
       },
       "inputModel": "text-entry",
       "stateProgression": "replace-on-pick",
@@ -3172,7 +3172,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 758
+        "textLength": 757
       },
       "inputModel": "button-pick",
       "stateProgression": "replace-on-pick",
@@ -3202,7 +3202,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 1807
+        "textLength": 1806
       },
       "inputModel": "button-pick",
       "stateProgression": "replace-on-pick",
@@ -9202,7 +9202,7 @@
         "ariaPressed": 9,
         "tables": 0,
         "details": 0,
-        "textLength": 1806
+        "textLength": 1808
       },
       "inputModel": "date",
       "stateProgression": "accumulate",
@@ -9538,6 +9538,36 @@
       "stateProgression": "stepped",
       "outputModel": "plotted-position",
       "visualGrammar": "plotted-geometry",
+      "hasVisualLayer": true,
+      "flatChipCard": false,
+      "pageErrors": []
+    },
+    "berlin-last-entry-times": {
+      "slug": "berlin-last-entry-times",
+      "addedAt": "2026-08-29",
+      "measuredBy": "rendered",
+      "signals": {
+        "svgShapeNodes": 35,
+        "svgCount": 1,
+        "canvas": 0,
+        "contentImages": 0,
+        "mapLibrary": false,
+        "range": 0,
+        "dateInput": 0,
+        "radio": 0,
+        "checkbox": 0,
+        "select": 0,
+        "textInput": 0,
+        "buttons": 26,
+        "ariaPressed": 26,
+        "tables": 0,
+        "details": 0,
+        "textLength": 2299
+      },
+      "inputModel": "accumulate",
+      "stateProgression": "accumulate",
+      "outputModel": "running-total",
+      "visualGrammar": "geographic-map",
       "hasVisualLayer": true,
       "flatChipCard": false,
       "pageErrors": []
