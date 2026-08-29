@@ -1,15 +1,24 @@
 {
   "featured": {
-    "title": "Tempelhofer Feld: Which Gate to Use and How to Get Out After Closing",
-    "url": "https://www.berlinwalk.com/post/tempelhofer-feld-berlin",
-    "category": "Tourist Tips",
-    "readTime": "8 min read",
-    "summary": "Berlin’s old airfield is easy to enjoy and hard to arrive at properly. Ten public gates are spread around a fence that runs seven and a half kilometres, and the barbecue areas, the community gardens and the beer gardens all sit at opposite ends of it. The gate you choose decides whether you walk 175 metres or 1,737. And the field locks at a different time every month, with only five gates that let you back out afterwards.",
-    "image": "https://static.wixstatic.com/media/5a08a3_164e9f6fb7b3418e8945e07de5c6769d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-runway-evening.jpg",
-    "alt": "The old Tempelhof runway at dusk, its painted centre line running towards a low orange horizon",
-    "label": "New: choose the right gate"
+    "title": "Two of Everything in Berlin: The East and West Twins and Which One to Visit",
+    "url": "https://www.berlinwalk.com/post/two-of-everything-in-berlin",
+    "category": "Berlin History",
+    "readTime": "7 min read",
+    "summary": "Berlin was two cities for forty years and each half built the things a capital is supposed to have. Nobody demolished the spares, so today there are two zoos, two opera houses, two concert halls, two planetariums, two state library buildings, two city halls and two universities on opposite sides of a border you cannot see. Here is why, which twin is actually worth the trip, which pairs the reunified city has already settled, and how to group a day so you are not crossing Berlin twice.",
+    "image": "https://static.wixstatic.com/media/5a08a3_53ed55c120044ed9a348445802f46101~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-funkturm-fernsehturm-skyline.jpg",
+    "alt": "The Funkturm above the Berlin exhibition grounds with the Fernsehturm on the distant skyline",
+    "label": "New: choose the right twin"
   },
   "miniPosts": [
+    {
+      "title": "Train Delay Compensation in Berlin: What You Actually Get Back",
+      "url": "https://www.berlinwalk.com/post/train-delay-compensation-berlin",
+      "category": "Tourist Tips",
+      "readTime": "9 min read",
+      "summary": "Berlin runs three transport systems on one map and only one of them pays cash. A late ICE or regional train pays 25 percent of the fare at 60 minutes and 50 percent at 120, a late U-Bahn earns a free ticket, and a four euro floor quietly cancels most small claims. Here is what each threshold is worth, the 20 minute rule that frees your ticket from its booked train, the 120 euro clause for being stranded after midnight, and how to file before the deadline.",
+      "image": "https://static.wixstatic.com/media/5a08a3_834b66c22d19425088c341d172915041~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-ice-berlin-hauptbahnhof.jpg",
+      "alt": "An ICE train standing at a deep-level platform inside Berlin Hauptbahnhof"
+    },
     {
       "title": "Where to Watch Football in Berlin: The Best Sports Bars",
       "url": "https://www.berlinwalk.com/post/where-to-watch-football-in-berlin",
@@ -20,6 +29,15 @@
       "alt": "A crowd watching football together in a Berlin sports bar setting"
     },
     {
+      "title": "Tempelhofer Feld: Which Gate to Use and How to Get Out After Closing",
+      "url": "https://www.berlinwalk.com/post/tempelhofer-feld-berlin",
+      "category": "Tourist Tips",
+      "readTime": "8 min read",
+      "summary": "Berlin’s old airfield is easy to enjoy and hard to arrive at properly. Ten public gates are spread around a fence that runs seven and a half kilometres, and the barbecue areas, the community gardens and the beer gardens all sit at opposite ends of it. The gate you choose decides whether you walk 175 metres or 1,737. And the field locks at a different time every month, with only five gates that let you back out afterwards.",
+      "image": "https://static.wixstatic.com/media/5a08a3_164e9f6fb7b3418e8945e07de5c6769d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-runway-evening.jpg",
+      "alt": "The old Tempelhof runway at dusk, its painted centre line running towards a low orange horizon"
+    },
+    {
       "title": "The Most Beautiful U-Bahn Stations in Berlin: Which Ones Are Worth Getting Off At",
       "url": "https://www.berlinwalk.com/post/beautiful-u-bahn-stations-berlin",
       "category": "Tourist Tips",
@@ -27,7 +45,9 @@
       "summary": "Berlin built beautiful underground stations in three short bursts: 1913, the early 1980s and again in 2020. Three of the best sit within four minutes of Alexanderplatz, one hides tiles from the Ishtar Gate project, and the most colourful run is a 48 minute ride out to Spandau. Here is which ones are worth getting off at, what to look at on each platform, and how much riding time the trip really costs.",
       "image": "https://static.wixstatic.com/media/5a08a3_7462992e3403473786a6c027d44b59fe~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/museumsinsel-vault.jpg",
       "alt": "The deep blue starry vault of Museumsinsel U-Bahn station with a yellow U5 train at the platform"
-    },
+    }
+  ],
+  "posts": [
     {
       "title": "Berlin Weekly Markets: Which One Is Open on the Day You Are Free",
       "url": "https://www.berlinwalk.com/post/berlin-weekly-markets",
@@ -45,26 +65,6 @@
       "summary": "Five of Berlin's most-visited sights have no ticket at all, two of the best are free but only the venue can reserve them, and the paid half of a classic list comes to 93.90 euros. Here is which door each one is sold through, and how to spot the venue's own page before you pay.",
       "image": "https://static.wixstatic.com/media/5a08a3_2766c5a7bb034ceb8c2e57bdd51c33c2~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-museumsinsel.jpg",
       "alt": "The Bode-Museum on the tip of Museum Island seen across the Spree, with the Berlin TV Tower behind it"
-    }
-  ],
-  "posts": [
-    {
-      "title": "Berlin Early Morning: What Is Actually Open Before 9am",
-      "url": "https://www.berlinwalk.com/post/berlin-early-morning",
-      "category": "Tourist Tips",
-      "readTime": "8 min read",
-      "summary": "Berlin opens late. Museum Island unlocks at 10:00 and nothing with a ticket desk opens before 08:00, but the field of stelae never closes, Tempelhofer Feld opens at 06:00 and the first U-Bahn out of Alexanderplatz is at 04:05. Here is what is really available between first light and nine, in the order it becomes available.",
-      "image": "https://static.wixstatic.com/media/5a08a3_e1327abb9cc543139c3a3fbc91f2fbef~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-bode-museum-sunrise.jpg",
-      "alt": "The sun rising behind the Fernsehturm and the Bode-Museum, seen along the Spree from the Ebertbrücke in central Berlin"
-    },
-    {
-      "title": "Free Berlin Memorials: Four Powerful Places That Are Easy to Visit",
-      "url": "https://www.berlinwalk.com/post/free-berlin-memorials",
-      "category": "Tourist Tips",
-      "readTime": "5 min read",
-      "summary": "Berlin’s most important memorials are free, but four places can become a rushed checklist. Here is the reading order I use: memory, evidence, division and the human border crossing.",
-      "image": "https://static.wixstatic.com/media/5a08a3_f2af2e72c11942cda3a5db5c5e2bd8d3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-memorial-stelae-detail.jpg",
-      "alt": "The concrete stelae of the Memorial to the Murdered Jews of Europe in Berlin"
     },
     {
       "title": "Berlin Public Transport for Tourists: Tickets, Zones, Prices and Validation",
