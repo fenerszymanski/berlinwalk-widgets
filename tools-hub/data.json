@@ -7655,6 +7655,32 @@
       "iconStatus": "live-wix-media",
       "priority": 15,
       "cmsItemId": "eaa82686-2494-4b88-b6a3-67c5c9cd2617"
+    },
+    {
+      "slug": "berlin-oldest-rooms-timeline",
+      "title": "Berlin Oldest Rooms Timeline",
+      "lead": "Ten of Berlin's oldest restaurants and pubs on one timeline, from the 1571 tavern story to the 1930 sausage stand. The dotted line is the story, the solid bar is the room you would actually sit in, and ranking by room age reshuffles the famous names.",
+      "category": "Discovery",
+      "hubCategory": "FoodNightlife",
+      "type": "Guide",
+      "tags": [
+        "oldest restaurants berlin",
+        "historic pubs berlin",
+        "zur letzten instanz",
+        "old berlin kneipe",
+        "berlin food history",
+        "traditional german restaurants berlin"
+      ],
+      "aliases": [
+        "oldest restaurant in berlin",
+        "historic restaurants berlin",
+        "old pubs berlin timeline"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-oldest-rooms-timeline/",
+      "embedHeight": 1030,
+      "image": "https://static.wixstatic.com/media/5a08a3_cf29929995ca43429896b012d0dca5a7~mv2.png",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "7f27252d-1e0c-4812-ad7a-9be16d1bc9d0"
     }
   ],
   "hubCategories": [

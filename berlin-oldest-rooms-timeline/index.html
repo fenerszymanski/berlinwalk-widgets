@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Oldest Rooms Timeline</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #FDFBF5;
+    color: #1B2B1B;
+    padding: 14px 12px 8px;
+  }
+  .bort-wrap { max-width: 720px; margin: 0 auto; }
+  .bort-head h1 {
+    font-size: 20px; line-height: 1.25; color: #1B5E20; font-weight: 800;
+  }
+  .bort-head p.bort-sub {
+    font-size: 13px; line-height: 1.5; color: #4A5A4A; margin-top: 4px;
+  }
+  .bort-sort {
+    display: flex; gap: 8px; margin: 12px 0 10px; align-items: center; flex-wrap: wrap;
+  }
+  .bort-sort span.bort-sort-label { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; color: #4A5A4A; text-transform: uppercase; }
+  .bort-sort button {
+    font-family: inherit; font-size: 12.5px; font-weight: 700; cursor: pointer;
+    border: 2px solid #1B5E20; background: #fff; color: #1B5E20;
+    border-radius: 999px; padding: 6px 14px; transition: background 0.15s, color 0.15s;
+  }
+  .bort-sort button.bort-on { background: #1B5E20; color: #FFE600; }
+  .bort-chart-box { position: relative; }
+  .bort-chart-box svg { display: block; width: 100%; height: auto; }
+  .bort-rowbtns { display: none; }
+  .bort-legend {
+    display: flex; gap: 14px; flex-wrap: wrap; margin: 6px 0 2px; font-size: 11px; color: #4A5A4A;
+  }
+  .bort-legend b { display: inline-block; width: 18px; height: 8px; border-radius: 2px; margin-right: 5px; vertical-align: middle; }
+  .bort-legend .bort-k-original b { background: #1B5E20; }
+  .bort-legend .bort-k-again b { background: #7CB342; }
+  .bort-legend .bort-k-claim b { background: none; border-bottom: 2px dotted #9AA79A; height: 5px; border-radius: 0; }
+  .bort-card {
+    margin-top: 12px; border: 2px solid #1B5E20; border-radius: 14px; overflow: hidden; background: #fff;
+  }
+  .bort-card-top { background: #1B5E20; color: #fff; padding: 12px 14px; }
+  .bort-card-top .bort-vname { font-size: 17px; font-weight: 800; }
+  .bort-card-top .bort-vyears { font-size: 12.5px; color: #FFE600; font-weight: 700; margin-top: 3px; }
+  .bort-card-body { padding: 12px 14px 14px; }
+  .bort-card-body p.bort-vline { font-size: 13.5px; line-height: 1.55; color: #1B2B1B; }
+  .bort-facts { margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .bort-fact { background: #F2F7EC; border-radius: 9px; padding: 8px 10px; }
+  .bort-fact .bort-fk { font-size: 10px; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; color: #1B5E20; }
+  .bort-fact .bort-fv { font-size: 12.5px; line-height: 1.45; color: #263326; margin-top: 2px; }
+  .bort-move {
+    margin-top: 10px; background: #FFE600; color: #123D18; border-radius: 9px;
+    padding: 9px 11px; font-size: 12.5px; line-height: 1.5; font-weight: 600;
+  }
+  .bort-move b { font-weight: 800; }
+  .bort-foot { margin-top: 10px; font-size: 10.5px; color: #7A857A; line-height: 1.5; }
+  @media (max-width: 480px) {
+    .bort-facts { grid-template-columns: 1fr; }
+    .bort-head h1 { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="bort-wrap">
+  <div class="bort-head">
+    <h1>Berlin Oldest Rooms Timeline</h1>
+    <p class="bort-sub">Ten places that pour the city's oldest claims. The dotted line is how old the story is. The solid bar is how long the room you would actually sit in has existed. They are rarely the same thing.</p>
+  </div>
+  <div class="bort-sort" role="group" aria-label="Sort the timeline">
+    <span class="bort-sort-label">Rank by</span>
+    <button type="button" id="bort-sort-story" class="bort-on">Age of the story</button>
+    <button type="button" id="bort-sort-room" aria-label="Rank by age of the room you sit in">Age of the room</button>
+  </div>
+  <div class="bort-chart-box">
+    <svg id="bort-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Timeline of Berlin's oldest restaurants and pubs from 1550 to today"></svg>
+  </div>
+  <div class="bort-legend">
+    <span class="bort-k-claim"><b></b>the story</span>
+    <span class="bort-k-original"><b></b>the original room, still in service</span>
+    <span class="bort-k-again"><b></b>rebuilt, replica or revived</span>
+  </div>
+  <div class="bort-card" id="bort-card" aria-live="polite"></div>
+  <p class="bort-foot">Opening days and hours checked on 29 August 2026 against each house's own pages. A kitchen can close early on a quiet night, so treat late arrivals with care.</p>
+</div>
+<script>
+(function () {
+  var NOW = 2026;
+  var VENUES = [
+    { id: 'nussbaum', name: 'Zum Nußbaum', kind: 'Inn, Nikolaiviertel', claim: 1571, room: 1987,
+      segs: [ { a: 1571, b: 1943, k: 'original' }, { a: 1987, b: NOW, k: 'again' } ],
+      years: 'Story since 1571 · this building since 1987',
+      where: 'Am Nußbaum 3, Nikolaiviertel · Rotes Rathaus U5',
+      hours: 'Daily 12:00 to 22:00',
+      eat: 'A beer at the tables out front, kitchen does simple Berlin plates',
+      book: 'Walk in',
+      line: 'The 1571 tavern stood two streets away on the Fischerinsel and burned out in 1943. What you visit is the DDR replica built for Berlin’s 750th birthday in 1987, and it is still the prettiest beer stop in the quarter.' },
+    { id: 'instanz', name: 'Zur letzten Instanz', kind: 'Restaurant, Mitte', claim: 1621, room: 1963,
+      segs: [ { a: 1621, b: 1944, k: 'original' }, { a: 1963, b: NOW, k: 'again' } ],
+      years: 'Story since 1621 · this room since 1963',
+      where: 'Waisenstraße 14-16, Mitte · Klosterstraße U2',
+      hours: 'Mon from 17:30 · Tue to Sat 12:00-15:00 and from 17:30 · Sun closed',
+      eat: 'The pork knuckle, eaten near the old tiled stove',
+      book: 'Reserve for dinner',
+      line: 'The famous “oldest restaurant in Berlin”. The tradition on this spot is real and the medieval city wall still stands next to the terrace, but the war wrecked the house and today’s room dates from the 1963 rebuild.' },
+    { id: 'lutter', name: 'Lutter & Wegner', kind: 'Wine restaurant, Gendarmenmarkt', claim: 1811, room: 1997,
+      segs: [ { a: 1811, b: 1944, k: 'original' }, { a: 1997, b: NOW, k: 'again' } ],
+      years: 'Name since 1811 · this house since 1997',
+      where: 'Charlottenstraße 56, Gendarmenmarkt · Hausvogteiplatz U2',
+      hours: 'Daily from 12:00, no closing day',
+      eat: 'Schnitzel and a glass of Sekt, the word was supposedly coined by its regulars',
+      book: 'Reserve for dinner, lunch is easier',
+      line: 'A great 1811 wine-house name revived in 1997 a few doors from the original site. The room is modern and handsome rather than old, and the cellar is one of the deepest wine lists in Mitte.' },
+    { id: 'prater', name: 'Prater Garten', kind: 'Beer garden, Prenzlauer Berg', claim: 1837, room: 1837,
+      segs: [ { a: 1837, b: NOW, k: 'original' } ],
+      years: 'Same courtyard since 1837',
+      where: 'Kastanienallee 7-9, Prenzlauer Berg · Eberswalder Straße U2',
+      hours: 'Garden daily from 12:00 in season, roughly April to September, weather deciding',
+      eat: 'A Prater Pils under the chestnut trees, food from the self-service counter',
+      book: 'Walk in, find a bench',
+      line: 'Berlin’s oldest beer garden has poured on the same courtyard since 1837, through empire, war and the DDR. Come before the season ends in late September, because the garden hibernates in winter.' },
+    { id: 'leydicke', name: 'E. & M. Leydicke', kind: 'Distillery pub, Schöneberg', claim: 1877, room: 1877,
+      segs: [ { a: 1877, b: NOW, k: 'original' } ],
+      years: 'Same family business since 1877',
+      where: 'Mansteinstraße 4, Schöneberg · Yorckstraße S-Bahn',
+      hours: 'Evenings from about 18:00, hours can be irregular, call ahead for a special trip',
+      eat: 'A glass of their own fruit wine, made to the house recipes',
+      book: 'Walk in',
+      line: 'Fourth generation of the same family, an interior barely touched since the 1880s, and fruit wines they still make themselves. A firebomb hit the building in the war and the pub carried on anyway.' },
+    { id: 'hoeck', name: 'Wilhelm Hoeck 1892', kind: 'Kneipe, Charlottenburg', claim: 1892, room: 1892,
+      segs: [ { a: 1892, b: NOW, k: 'original' } ],
+      years: 'Original bar room since 1892',
+      where: 'Wilmersdorfer Straße 149, Charlottenburg · Bismarckstraße U2/U7',
+      hours: 'Mon to Sat 12:00 to 01:00 · Sun 14:00 to 24:00',
+      eat: 'A draught beer at the carved wooden bar, kitchen does Berlin classics',
+      book: 'Walk in',
+      line: 'The wood-and-mirror bar room is the real 1892 article, saved while the liqueur factory behind it burned in the war. If you want to know what a Berlin Kneipe looked like under the Kaiser, it looks like this.' },
+    { id: 'maxmoritz', name: 'Max & Moritz', kind: 'Wirtshaus, Kreuzberg', claim: 1902, room: 1902,
+      segs: [ { a: 1902, b: NOW, k: 'original' } ],
+      years: 'Listed 1902 rooms, running again since 2001',
+      where: 'Oranienstraße 162, Kreuzberg · Moritzplatz U8',
+      hours: 'Wed to Mon from 18:00 · Tue closed',
+      eat: 'Königsberger Klopse or the Bierbraten, with a local draught',
+      book: 'Reserve, same-day by phone works',
+      line: 'A listed Jugendstil inn on Oranienstraße whose painted rooms survived war and Wall. The business itself went dark for a few years and came back in October 2001, so the room is old even where the till is not.' },
+    { id: 'henne', name: 'Henne', kind: 'Wirtshaus, Kreuzberg', claim: 1908, room: 1908,
+      segs: [ { a: 1908, b: NOW, k: 'original' } ],
+      years: 'Same wood-panelled room since 1908',
+      where: 'Leuschnerdamm 25, Kreuzberg · Moritzplatz U8',
+      hours: 'Tue to Sun from 17:00 · Mon closed',
+      eat: 'The milk-fed half chicken, it is the only main worth discussing',
+      book: 'Reserve a day or two ahead',
+      line: 'One dish, one old room, and a wall where the Wall once ran outside. John F. Kennedy was invited in 1963, could not come, and sent the apology letter that still hangs by the bar.' },
+    { id: 'claerchens', name: 'Clärchens Ballhaus', kind: 'Dance hall, Mitte', claim: 1913, room: 1913,
+      segs: [ { a: 1913, b: NOW, k: 'original' } ],
+      years: 'Dancing behind this facade since 1913',
+      where: 'Auguststraße 24, Mitte · Oranienburger Straße S-Bahn',
+      hours: 'Restaurant daily from 17:00 · garden weekends from 14:00 in good weather',
+      eat: 'Dinner in the garden, then stay when the music starts upstairs',
+      book: 'Reserve',
+      line: 'A 1913 ballroom that kept dancing through two wars and the DDR, renovated and running again under new owners. The scarred facade is not neglect, it is the whole point.' },
+    { id: 'konnopke', name: 'Konnopke’s Imbiß', kind: 'Imbiss, Prenzlauer Berg', claim: 1930, room: 1930,
+      segs: [ { a: 1930, b: NOW, k: 'original' } ],
+      years: 'Same family under the viaduct since 1930',
+      where: 'Schönhauser Allee 44a, under the U2 viaduct · Eberswalder Straße U2',
+      hours: 'Tue to Fri 11:00 to 18:00 · Sat 12:00 to 19:00 · Sun and Mon closed',
+      eat: 'Currywurst mit Darm, to the family recipe served here since 1960',
+      book: 'Queue, it moves fast',
+      line: 'Third generation of one family selling sausage under the same U-Bahn viaduct since October 1930. The kiosk is modern, the institution is not, and it keeps East Berlin’s claim in the currywurst argument alive.' }
+  ];
+
+  var svg = document.getElementById('bort-svg');
+  var card = document.getElementById('bort-card');
+  var btnStory = document.getElementById('bort-sort-story');
+  var btnRoom = document.getElementById('bort-sort-room');
+  var state = { sort: 'story', sel: 'instanz' };
+
+  var Y0 = 1550, Y1 = 2030;
+  var W = 720, ROW = 34, TOP = 26, BOT = 20, LEFT = 8, RIGHT = 30;
+  var LABELW = 148;
+  var plotX0 = LEFT + LABELW, plotX1 = W - RIGHT;
+  function xOf(year) { return plotX0 + (year - Y0) / (Y1 - Y0) * (plotX1 - plotX0); }
+  /* On a phone the 720-unit viewBox shrinks to about half size, so the type
+     inside the SVG gets a compensating bump and taller rows. */
+  function scaleFor() {
+    var shown = svg.clientWidth || W;
+    var narrow = shown > 0 && shown < 480;
+    return narrow ? { name: 16, sub: 12, tick: 12.5, era: 12, row: 44 } : { name: 11.5, sub: 8.5, tick: 9, era: 8.5, row: ROW };
+  }
+
+  function orderOf() {
+    var arr = VENUES.slice();
+    arr.sort(function (p, q) {
+      return state.sort === 'story' ? (p.claim - q.claim) : (p.room - q.room || p.claim - q.claim);
+    });
+    return arr;
+  }
+
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+
+  function draw() {
+    var order = orderOf();
+    var F = scaleFor();
+    var rowH = F.row;
+    var H = TOP + order.length * rowH + BOT;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    var parts = [];
+    /* era bands: the years that explain the broken bars */
+    parts = parts.concat([
+      '<rect x="' + xOf(1939) + '" y="' + (TOP - 8) + '" width="' + (xOf(1945) - xOf(1939)) + '" height="' + (H - TOP - BOT + 16) + '" fill="#E63946" opacity="0.10"/>',
+      '<rect x="' + xOf(1961) + '" y="' + (TOP - 8) + '" width="' + (xOf(1989) - xOf(1961)) + '" height="' + (H - TOP - BOT + 16) + '" fill="#4A5A4A" opacity="0.07"/>',
+      '<text x="' + (xOf(1938) - 3) + '" y="' + (TOP - 12) + '" font-size="' + F.era + '" fill="#B0453C" text-anchor="end" font-weight="700">WAR</text>',
+      '<text x="' + xOf(1975) + '" y="' + (TOP - 12) + '" font-size="' + F.era + '" fill="#6A756A" text-anchor="middle" font-weight="700">DIVIDED CITY</text>'
+    ]);
+    /* century grid */
+    var ticks = [1600, 1650, 1700, 1750, 1800, 1850, 1900, 1950, 2000];
+    for (var t = 0; t < ticks.length; t++) {
+      var big = ticks[t] % 100 === 0;
+      parts = parts.concat([
+        '<line x1="' + xOf(ticks[t]) + '" y1="' + (TOP - 6) + '" x2="' + xOf(ticks[t]) + '" y2="' + (H - BOT + 2) + '" stroke="#1B5E20" opacity="' + (big ? 0.14 : 0.07) + '" stroke-width="1"/>'
+      ]);
+      if (big) parts = parts.concat(['<text x="' + xOf(ticks[t]) + '" y="' + (H - 5) + '" font-size="' + F.tick + '" fill="#7A857A" text-anchor="middle">' + ticks[t] + '</text>']);
+    }
+    parts = parts.concat(['<line x1="' + xOf(NOW) + '" y1="' + (TOP - 6) + '" x2="' + xOf(NOW) + '" y2="' + (H - BOT + 2) + '" stroke="#1B5E20" opacity="0.5" stroke-width="1.5" stroke-dasharray="2 3"/>',
+      '<text x="' + xOf(NOW) + '" y="' + (H - 5) + '" font-size="' + F.tick + '" fill="#1B5E20" font-weight="700" text-anchor="middle">today</text>']);
+    for (var i = 0; i < order.length; i++) {
+      var v = order[i];
+      var cy = TOP + i * rowH + rowH / 2;
+      var on = v.id === state.sel;
+      var rowBits = [
+        '<rect x="0" y="' + (cy - rowH / 2 + 2) + '" width="' + W + '" height="' + (rowH - 4) + '" rx="7" fill="' + (on ? '#EAF3E0' : 'transparent') + '"/>',
+        '<text x="' + (LEFT + 2) + '" y="' + (cy - 1) + '" font-size="' + F.name + '" font-weight="' + (on ? '800' : '700') + '" fill="' + (on ? '#123D18' : '#2E3D2E') + '">' + esc(v.name) + '</text>',
+        '<text x="' + (LEFT + 2) + '" y="' + (cy + F.sub + 3) + '" font-size="' + F.sub + '" fill="#7A857A">' + (state.sort === 'story' ? 'story ' + v.claim : 'room ' + v.room) + '</text>',
+        '<line x1="' + xOf(v.claim) + '" y1="' + (cy + 2) + '" x2="' + xOf(NOW) + '" y2="' + (cy + 2) + '" stroke="#9AA79A" stroke-width="1.6" stroke-dasharray="1.5 3.5"/>'
+      ];
+      for (var s = 0; s < v.segs.length; s++) {
+        var g = v.segs[s];
+        var col = g.k === 'original' ? '#1B5E20' : '#7CB342';
+        rowBits = rowBits.concat(['<rect x="' + xOf(g.a) + '" y="' + (cy - 4) + '" width="' + Math.max(2, xOf(g.b) - xOf(g.a)) + '" height="7" rx="3.5" fill="' + col + '"/>']);
+      }
+      rowBits = rowBits.concat(['<circle cx="' + xOf(v.claim) + '" cy="' + (cy + 2) + '" r="2.4" fill="#4A5A4A"/>']);
+      parts = parts.concat(['<g class="bort-row" data-venue="' + v.id + '" style="cursor:pointer">' + rowBits.join('') + '</g>']);
+    }
+    svg.innerHTML = parts.join('');
+    var rows = svg.querySelectorAll('.bort-row');
+    for (var r = 0; r < rows.length; r++) {
+      rows[r].addEventListener('click', function () { select(this.getAttribute('data-venue')); });
+    }
+  }
+
+  function select(idWanted) {
+    state.sel = idWanted;
+    var v = null;
+    for (var i = 0; i < VENUES.length; i++) if (VENUES[i].id === idWanted) v = VENUES[i];
+    if (!v) return;
+    card.innerHTML = [
+      '<div class="bort-card-top">',
+      '<div class="bort-vname">' + esc(v.name) + ' <span style="font-weight:600;font-size:12px;opacity:0.85">· ' + esc(v.kind) + '</span></div>',
+      '<div class="bort-vyears">' + esc(v.years) + '</div>',
+      '</div>',
+      '<div class="bort-card-body">',
+      '<p class="bort-vline">' + esc(v.line) + '</p>',
+      '<div class="bort-facts">',
+      '<div class="bort-fact"><div class="bort-fk">Where</div><div class="bort-fv">' + esc(v.where) + '</div></div>',
+      '<div class="bort-fact"><div class="bort-fk">Open</div><div class="bort-fv">' + esc(v.hours) + '</div></div>',
+      '<div class="bort-fact"><div class="bort-fk">Order</div><div class="bort-fv">' + esc(v.eat) + '</div></div>',
+      '<div class="bort-fact"><div class="bort-fk">Table</div><div class="bort-fv">' + esc(v.book) + '</div></div>',
+      '</div>',
+      '<div class="bort-move"><b>MY MOVE:</b> ' + moveFor(v) + '</div>',
+      '</div>'
+    ].join('');
+    draw();
+  }
+
+  function moveFor(v) {
+    if (v.id === 'instanz') return 'Book the early dinner sitting, ask for the room with the tiled stove, and walk the medieval wall outside before you sit down.';
+    if (v.id === 'nussbaum') return 'Treat it as the beer pause on a Nikolaiviertel wander, not a dinner destination, and read the plaque before you believe the year on the sign.';
+    if (v.id === 'lutter') return 'Come at lunch when no reservation is needed, order the Schnitzel, and let them pick the glass of wine.';
+    if (v.id === 'prater') return 'Go on a warm evening before the season ends in late September. If the benches are wet, the garden is closed, so have the tavern as plan B.';
+    if (v.id === 'leydicke') return 'Make it the first stop of a Schöneberg evening, taste one fruit wine, and buy a bottle to carry home instead of airport souvenirs.';
+    if (v.id === 'hoeck') return 'Come on a weekday afternoon when the regulars have the bar, take the corner table, and order whatever the blackboard says.';
+    if (v.id === 'maxmoritz') return 'Phone the same day for a table, then arrive hungry: the Klopse portion is serious.';
+    if (v.id === 'henne') return 'Call one or two days ahead, order one half chicken per person, and do not ask for a menu.';
+    if (v.id === 'claerchens') return 'Reserve the garden for dinner around 19:00 and stay when the music starts. Leaving before the dancing is the classic first-timer mistake.';
+    return 'Go Tuesday to Friday before noon to skip the queue, and say mit Darm if you want the original.';
+  }
+
+  btnStory.addEventListener('click', function () {
+    state.sort = 'story';
+    btnStory.className = 'bort-on'; btnRoom.className = '';
+    draw();
+  });
+  btnRoom.addEventListener('click', function () {
+    state.sort = 'room';
+    btnRoom.className = 'bort-on'; btnStory.className = '';
+    draw();
+  });
+
+  var redrawWait = null;
+  window.addEventListener('resize', function () {
+    if (redrawWait) clearTimeout(redrawWait);
+    redrawWait = setTimeout(draw, 150);
+  });
+
+  select('instanz');
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
