@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-08-29T09:21:55.292Z",
+  "updatedAt": "2026-08-29T13:50:46.598Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 338,
-  "toolsTotal": 256,
+  "totalPosts": 339,
+  "toolsTotal": 257,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1618,6 +1618,23 @@
   ],
   "latest": [
     {
+      "title": "Last Admission in Berlin: How Late You Can Still Get In",
+      "slug": "last-admission-berlin",
+      "path": "/post/last-admission-berlin",
+      "url": "https://www.berlinwalk.com/post/last-admission-berlin",
+      "excerpt": "Closing time is not entry time. The Berliner Dom stops letting people in an hour early, the Altes and Bode shut at 17:00 on weekdays, and the state museums publish no cutoff at all. What is still open, and when to give up.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "route-stories",
+      "topicLabel": "Tour Route Stories",
+      "readTime": "8 min read",
+      "publishedDate": "2026-08-29T13:47:40.690Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_3020f7a662ff4ce1af7bb70f189ba188~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-museum-island-sunset.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_3020f7a662ff4ce1af7bb70f189ba188~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-museum-island-sunset.jpg",
+      "alt": "The Alte Nationalgalerie and the dome of the Berliner Dom seen across the Spree in warm sunset light",
+      "relatedToolSlug": "berlin-last-entry-times"
+    },
+    {
       "title": "New Year's Eve in Berlin: Where to Actually Be at Midnight",
       "slug": "new-years-eve-in-berlin",
       "path": "/post/new-years-eve-in-berlin",
@@ -1803,23 +1820,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_e1327abb9cc543139c3a3fbc91f2fbef~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-bode-museum-sunrise.jpg",
       "alt": "The sun rising behind the Fernsehturm and the Bode-Museum, seen along the Spree from the Ebertbrücke in central Berlin",
       "relatedToolSlug": "berlin-early-hours-board"
-    },
-    {
-      "title": "Berlin Cemeteries: How to Pick the One That Fits Your Day",
-      "slug": "berlin-cemeteries",
-      "path": "/post/berlin-cemeteries",
-      "url": "https://www.berlinwalk.com/post/berlin-cemeteries",
-      "excerpt": "One is a lawn in Mitte with almost nothing left standing. One is forty hectares of forest past the tram terminus. One shuts at 14:30 every Friday and all day Saturday. Berlin’s historic cemeteries are not a single attraction with a single opening time, and treating them as one is how people end up at a locked gate. Here is what is inside each of the five, how far each really is from Alexanderplatz, and which one fits the time you have.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "9 min read",
-      "publishedDate": "2026-08-25T08:20:56.114Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_691e4432ffbb4c66a4604464aeac8fed~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-weissensee-mausoleum-path.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_691e4432ffbb4c66a4604464aeac8fed~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-weissensee-mausoleum-path.jpg",
-      "alt": "A path lined with grand stone mausoleums under bare trees at the Jüdischer Friedhof Weißensee in Berlin",
-      "relatedToolSlug": ""
     }
   ]
 }
