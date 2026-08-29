@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-08-29T06:44:33.805Z",
+  "updatedAt": "2026-08-29T09:21:55.292Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 337,
-  "toolsTotal": 255,
+  "totalPosts": 338,
+  "toolsTotal": 256,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1618,6 +1618,23 @@
   ],
   "latest": [
     {
+      "title": "New Year's Eve in Berlin: Where to Actually Be at Midnight",
+      "slug": "new-years-eve-in-berlin",
+      "path": "/post/new-years-eve-in-berlin",
+      "url": "https://www.berlinwalk.com/post/new-years-eve-in-berlin",
+      "excerpt": "Berlin has one organized New Year party and ten thousand private ones. The Brandenburg Gate tickets, the bridges and hills locals use, the fireworks rules, and how to pick your midnight.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-08-29T09:18:39.378Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_a53293c313ba42ec9d036922af43aa54~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-brandenburg-gate-fireworks.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_a53293c313ba42ec9d036922af43aa54~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-brandenburg-gate-fireworks.jpg",
+      "alt": "Red fireworks bursting over the Brandenburg Gate at midnight on New Year's Eve in Berlin",
+      "relatedToolSlug": "berlin-new-year-midnight-planner"
+    },
+    {
       "title": "The Oldest Restaurants in Berlin: Where the Room Is Actually Old",
       "slug": "oldest-restaurants-in-berlin",
       "path": "/post/oldest-restaurants-in-berlin",
@@ -1803,26 +1820,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_691e4432ffbb4c66a4604464aeac8fed~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-weissensee-mausoleum-path.jpg",
       "alt": "A path lined with grand stone mausoleums under bare trees at the Jüdischer Friedhof Weißensee in Berlin",
       "relatedToolSlug": ""
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "UNESCO Sites in Berlin: Which Ones Are Worth Crossing the City For",
-      "slug": "unesco-sites-in-berlin",
-      "path": "/post/unesco-sites-in-berlin",
-      "url": "https://www.berlinwalk.com/post/unesco-sites-in-berlin",
-      "excerpt": "Berlin's World Heritage is three properties and about ten places, and only one of them is in the centre. Seven of them are lived-in housing estates in the outer districts, and one was added in July 2026. Measured journey times from Alexanderplatz, what you actually see at each one, and which single trip to make.",
+      "title": "New Year's Eve in Berlin: Where to Actually Be at Midnight",
+      "slug": "new-years-eve-in-berlin",
+      "path": "/post/new-years-eve-in-berlin",
+      "url": "https://www.berlinwalk.com/post/new-years-eve-in-berlin",
+      "excerpt": "Berlin has one organized New Year party and ten thousand private ones. The Brandenburg Gate tickets, the bridges and hills locals use, the fireworks rules, and how to pick your midnight.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "first-day",
       "topicLabel": "First Day in Berlin",
-      "readTime": "9 min read",
-      "publishedDate": "2026-08-24T14:14:43.793Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_fb93cc12cb5d4e6abb85b015c9767479~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-hufeisensiedlung-aerial.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_fb93cc12cb5d4e6abb85b015c9767479~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-hufeisensiedlung-aerial.jpg",
-      "alt": "Aerial view of the horseshoe-shaped Hufeisensiedlung in Berlin-Britz, with its pond inside the curve",
-      "relatedToolSlug": ""
-    }
-  ],
-  "allPosts": [
+      "readTime": "7 min read",
+      "publishedDate": "2026-08-29T09:18:39.378Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_a53293c313ba42ec9d036922af43aa54~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-brandenburg-gate-fireworks.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_a53293c313ba42ec9d036922af43aa54~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-brandenburg-gate-fireworks.jpg",
+      "alt": "Red fireworks bursting over the Brandenburg Gate at midnight on New Year's Eve in Berlin",
+      "relatedToolSlug": "berlin-new-year-midnight-planner"
+    },
     {
       "title": "The Oldest Restaurants in Berlin: Where the Room Is Actually Old",
       "slug": "oldest-restaurants-in-berlin",
