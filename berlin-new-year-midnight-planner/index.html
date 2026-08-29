@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Berlin New Year Midnight Planner</title>
+<meta name="description" content="Answer three questions and see the whole of New Year's Eve in Berlin plotted hour by hour: the Brandenburg Gate party, the bridges, the hills, a reserved table, or a club marathon." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='26' r='10' fill='%23FFE600'/%3E%3Crect x='29' y='38' width='6' height='16' rx='3' fill='%237CB342'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-dark:#123D18; --green-mid:#2E7D32; --lime:#7CB342;
+    --light:#C5E1A5; --yellow:#FFE600; --ink:#212121; --muted:#4b584b;
+    --line:#E3E8DC; --panel:#F4F7F0; --home:#A7B8A2;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:transparent;line-height:1.5}
+  .wrap{max-width:760px;margin:0 auto;padding:4px 14px 18px}
+  .kicker{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-mid);margin:0 0 6px}
+  h1{font-size:21px;font-weight:800;line-height:1.18;margin:0 0 8px;color:var(--green-dark)}
+  .lede{font-size:14px;color:var(--muted);margin:0 0 12px}
+
+  .qbox{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px 13px;margin:0 0 12px}
+  .qlabel{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--green-mid);margin:0 0 8px}
+  .qbtns{display:flex;flex-wrap:wrap;gap:7px}
+  .qbtns button{font-family:inherit;font-size:13.5px;font-weight:700;color:var(--green-dark);background:#fff;
+    border:2px solid var(--green-dark);border-radius:11px;padding:9px 12px;cursor:pointer;min-height:42px}
+  .qbtns button:hover{background:var(--light)}
+  .qbtns button:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+  .answered{font-size:12.5px;color:var(--muted);margin:8px 0 0}
+  .answered b{color:var(--green-dark)}
+  .redo{font-family:inherit;font-size:12px;font-weight:700;color:var(--green-dark);background:none;border:none;
+    text-decoration:underline;cursor:pointer;padding:0;margin-left:6px}
+
+  .stage{border:2px solid var(--green-dark);border-radius:14px;overflow:hidden;background:#08130a;margin:0 auto 9px;max-width:560px}
+  .stage svg{display:block;width:100%;height:auto}
+
+  .legend{display:flex;flex-wrap:wrap;gap:5px 14px;font-size:11.5px;color:var(--muted);margin:0 0 12px}
+  .legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+
+  .card{border:2px solid var(--green-dark);border-radius:14px;background:#fff;padding:13px 15px 14px;margin:0 0 10px}
+  .card .place{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--green-mid);margin:0 0 4px}
+  .card h2{font-size:17px;font-weight:800;color:var(--green-dark);margin:0 0 7px}
+  .card p{font-size:13.5px;margin:0 0 8px}
+  .card .times{display:flex;flex-wrap:wrap;gap:6px}
+  .card .times span{font-size:12px;font-weight:700;background:var(--yellow);color:var(--green-dark);
+    border-radius:8px;padding:4px 9px}
+  .hint{font-size:12px;color:var(--muted);margin:0 0 4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">BERLINWALK.COM &bull; NEW YEAR&rsquo;S EVE</p>
+  <h1>Berlin New Year Midnight Planner</h1>
+  <p class="lede">Five realistic Berlin midnights, plotted hour by hour. Answer three questions and watch the board eliminate the plans that do not fit your night.</p>
+
+  <div class="qbox" id="qbox"></div>
+
+  <div class="stage"><svg id="board" viewBox="0 0 340 552" role="img" aria-label="Five New Year's Eve plans plotted on a timeline from 18:00 to 02:00"></svg></div>
+  <div class="legend">
+    <span><i style="background:#7CB342"></i>Getting there</span>
+    <span><i style="background:#C5E1A5"></i>Holding your spot</span>
+    <span><i style="background:#2E7D32"></i>Eating</span>
+    <span><i style="background:#FFE600"></i>Midnight window</span>
+    <span><i style="background:#A7B8A2"></i>Getting home</span>
+  </div>
+  <p class="hint" id="hint">Tap any column name to read that plan.</p>
+
+  <div class="card" id="card" hidden></div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var NS = 'http://www.w3.org/2000/svg';
+
+  // Times are decimal hours; 24 = midnight, 26 = 02:00.
+  var PLANS = [
+    { id:'gate', short:'Gate', name:'The ticket plan: Brandenburg Gate party', place:'Pariser Platz, Mitte',
+      segs:[[20,21.6,'go','Security queue'],[21.6,23.9,'hold','Inside, stage'],[23.9,24.3,'peak',''],[24.3,25.6,'home','Slow walk out']],
+      advice:'The one organized show in the city. In recent winters entry was free but ticketed, around 20,000 people, doors from about 21:30, a short fireworks and light show over the Gate at midnight. My advice: watch for the ticket release in early December, arrive before 23:00, and count the U-Bahn station under the Gate as shut from the afternoon; walk in from Friedrichstra&szlig;e or Potsdamer Platz.',
+      times:['Tickets: early December','Arrive by 23:00','Walk from Friedrichstra&szlig;e'] },
+    { id:'bridge', short:'Bridge', name:'The bridge plan: Modersohnbr&uuml;cke', place:'Friedrichshain, over the S-Bahn tracks',
+      segs:[[21,22.6,'eat','Eat nearby'],[23,23.9,'hold','Claim your spot'],[23.9,24.8,'peak',''],[24.8,26,'home','Walk + night tram']],
+      advice:'The honest free Berlin midnight. Rockets rise from every side street, the TV Tower stands on the skyline, and everyone around you brought their own bottle. My advice: eat on Simon-Dach-Stra&szlig;e first, be on the bridge by 23:00, wear closed shoes, and expect the pavement to belong to glass and burnt cardboard on the way home.',
+      times:['On the bridge by 23:00','Closed shoes','Warschauer Stra&szlig;e nearby'] },
+    { id:'hill', short:'Hill', name:'The hill plan: Drachenberg', place:'Grunewald, above Teufelsberg',
+      segs:[[21.4,22.3,'go','S-Bahn west'],[22.3,23.3,'go','Climb, phone light'],[23.3,24.8,'peak','Horizon show'],[24.8,26,'home','Down + S-Bahn']],
+      advice:'The wide-angle version. From the open top of Drachenberg the whole city fires at once at midnight, a ring of light from Spandau to Lichtenberg. My advice: take the S-Bahn toward Heerstra&szlig;e by 22:30, climb with a phone light because the path is unlit, and dress for standing still in the wind, not for walking.',
+      times:['S-Bahn out by 22:30','Unlit path, bring light','Dress very warm'] },
+    { id:'dinner', short:'Dinner', name:'The dinner plan: your own Kiez', place:'A reserved table near your bed',
+      segs:[[19,23.8,'eat','One long dinner'],[23.8,24.4,'peak','Corner at 23:50'],[24.4,25.1,'hold','Sekt, back inside']],
+      advice:'The calmest good version, and the right one for most first visits and for families. Book a table in the neighborhood where you sleep, eat slowly, and step to the nearest corner at 23:50 for your own ten-minute show. With small kids, take an early seating and watch from a window instead; the street runs rough between 23:30 and 00:45.',
+      times:['Book in early December','Corner at 23:50','Home in ten minutes'] },
+    { id:'club', short:'Club', name:'The dance plan: a club marathon', place:'Friedrichshain and Kreuzberg doors',
+      segs:[[22,22.7,'go','Doors early'],[22.7,23.9,'hold','Warm up'],[23.9,24.4,'peak',''],[24.4,26,'hold','Keep dancing']],
+      advice:'Midnight happens on the dance floor and the party often runs deep into 1 January. The famous doors sell New Year tickets weeks ahead and the queues peak between 23:00 and 01:00. My advice: buy the ticket when it appears, go in before 22:30 or well after 02:00, and do not build the night around getting into one specific door.',
+      times:['Tickets: weeks ahead','In before 22:30','Or after 02:00'] }
+  ];
+
+  var QUESTIONS = [
+    { label:'1 &middot; Who is your midnight for?', opts:[
+      ['Two of us', {dinner:2, bridge:1, hill:1}],
+      ['A group of friends', {bridge:2, club:1, gate:1, hill:1}],
+      ['Family with kids', {dinner:2, gate:1}],
+      ['Me and the dance floor', {club:3}] ] },
+    { label:'2 &middot; How close do you want the rockets?', opts:[
+      ['In the middle of it', {bridge:2, gate:1}],
+      ['Seeing it all from a distance', {hill:2, bridge:1}],
+      ['One organized show', {gate:2, dinner:1}],
+      ['As far away as possible', {dinner:2, club:2}] ] },
+    { label:'3 &middot; Will you plan ahead?', opts:[
+      ['Yes, tickets and bookings', {gate:2, dinner:2, club:2}],
+      ['A little, not much', {bridge:1, hill:1, dinner:1}],
+      ['We decide that evening', {bridge:2, hill:2}] ] }
+  ];
+  var PRIORITY = ['dinner','bridge','hill','gate','club'];
+
+  var currentStep = 0;
+  var picks = [null, null, null];
+  var openPlan = null;
+
+  function scores(){
+    var s = {gate:0, bridge:0, hill:0, dinner:0, club:0};
+    for (var i = 0; i < picks.length; i++){
+      if (picks[i] === null) continue;
+      var w = QUESTIONS[i].opts[picks[i]][1];
+      for (var k in w){ s[k] = s[k] + w[k]; }
+    }
+    return s;
+  }
+  function leaders(){
+    var s = scores();
+    var max = 0;
+    for (var k in s){ if (s[k] > max) max = s[k]; }
+    var keep = {};
+    var margin = (currentStep >= 3) ? 0 : 1;
+    for (var k2 in s){ keep[k2] = s[k2] >= max - margin; }
+    if (currentStep === 0){ for (var k3 in keep) keep[k3] = true; }
+    return keep;
+  }
+  function winner(){
+    var s = scores();
+    var best = null;
+    for (var i = 0; i < PRIORITY.length; i++){
+      var id = PRIORITY[i];
+      if (best === null || s[id] > s[best]) best = id;
+    }
+    return best;
+  }
+
+  var T0 = 18, T1 = 26, PXH = 54;
+  function yFor(t){ return 64 + (t - T0) * PXH; }
+
+  function el(tag, attrs, text){
+    var n = document.createElementNS(NS, tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text !== undefined) n.textContent = text;
+    return n;
+  }
+
+  function drawBoard(){
+    var svg = document.getElementById('board');
+    var keep = leaders();
+    var win = (currentStep >= 3) ? winner() : null;
+    var parts = [];
+    var frag = document.createDocumentFragment();
+
+    // hour grid + labels
+    for (var t = T0; t <= T1; t++){
+      var y = yFor(t);
+      var hh = (t < 24) ? t : (t - 24);
+      var lab = (hh < 10 ? '0' + hh : '' + hh) + ':00';
+      frag.appendChild(el('line', {x1:40, y1:y, x2:334, y2:y, stroke: t === 24 ? '#FFE600' : '#20321f', 'stroke-width': t === 24 ? 1.6 : 1}));
+      frag.appendChild(el('text', {x:36, y:y+3.5, fill: t === 24 ? '#FFE600' : '#9fb59f', 'font-size':9, 'text-anchor':'end', 'font-family':'Montserrat, sans-serif', 'font-weight': t === 24 ? 800 : 600}, lab));
+    }
+    frag.appendChild(el('text', {x:334, y:yFor(24)-4, fill:'#FFE600', 'font-size':8.5, 'text-anchor':'end', 'font-family':'Montserrat, sans-serif', 'font-weight':800}, 'MIDNIGHT'));
+
+    var colW = 55, gap = 4, x0 = 46;
+    var FILL = {go:'#7CB342', hold:'#C5E1A5', eat:'#2E7D32', peak:'#FFE600', home:'#A7B8A2'};
+
+    for (var p = 0; p < PLANS.length; p++){
+      var plan = PLANS[p];
+      var x = x0 + p * (colW + gap);
+      var g = el('g', {opacity: keep[plan.id] ? 1 : 0.22, 'data-plan':plan.id});
+
+      // header
+      var isWin = (win === plan.id);
+      var hdr = el('g', {cursor:'pointer', 'data-hdr':plan.id});
+      hdr.appendChild(el('rect', {x:x, y:14, width:colW, height:30, rx:8,
+        fill: isWin ? '#FFE600' : '#16281a', stroke: isWin ? '#FFE600' : '#3c5741', 'stroke-width':1.2}));
+      hdr.appendChild(el('text', {x:x+colW/2, y:33, fill: isWin ? '#123D18' : '#cfe0c7', 'font-size':11,
+        'text-anchor':'middle', 'font-family':'Montserrat, sans-serif', 'font-weight':800}, plan.short));
+      g.appendChild(hdr);
+      if (isWin){
+        g.appendChild(el('text', {x:x+colW/2, y:9.5, fill:'#FFE600', 'font-size':7.5, 'text-anchor':'middle',
+          'font-family':'Montserrat, sans-serif', 'font-weight':800, 'letter-spacing':'.08em'}, 'YOUR NIGHT'));
+        g.appendChild(el('rect', {x:x-2.5, y:11.5, width:colW+5, height:yFor(T1)-6, rx:10, fill:'none', stroke:'#FFE600', 'stroke-width':1.6, 'stroke-dasharray':'3 3'}));
+      }
+
+      // column spine
+      g.appendChild(el('line', {x1:x+colW/2, y1:46, x2:x+colW/2, y2:yFor(T1), stroke:'#24391f', 'stroke-width':1}));
+
+      for (var s = 0; s < plan.segs.length; s++){
+        var seg = plan.segs[s];
+        var y1 = yFor(seg[0]), y2 = yFor(seg[1]);
+        var kind = seg[2];
+        g.appendChild(el('rect', {x:x+6, y:y1, width:colW-12, height:Math.max(6, y2-y1), rx:5,
+          fill:FILL[kind] || '#C5E1A5', stroke: kind === 'peak' ? '#8a7a00' : 'none', 'stroke-width':0.8}));
+        if (seg[3]){
+          var mid = (y1 + y2) / 2;
+          var words = seg[3].split(' ');
+          var lines = [];
+          var cur = '';
+          for (var w = 0; w < words.length; w++){
+            var cand = cur ? cur + ' ' + words[w] : words[w];
+            if (cand.length > 10 && cur){ lines = lines.concat([cur]); cur = words[w]; }
+            else cur = cand;
+          }
+          lines = lines.concat([cur]);
+          var ly = mid - (lines.length - 1) * 4.6;
+          var dark = (kind === 'eat');
+          for (var li = 0; li < lines.length; li++){
+            g.appendChild(el('text', {x:x+colW/2, y:ly + li*9.2 + 2.6, fill: dark ? '#eaf4e4' : '#1c2b18',
+              'font-size':7.6, 'text-anchor':'middle', 'font-family':'Montserrat, sans-serif', 'font-weight':700}, lines[li]));
+          }
+        }
+      }
+      frag.appendChild(g);
+      parts = parts.concat([g]);
+    }
+
+    svg.innerHTML = '';
+    svg.appendChild(frag);
+
+    var hdrs = svg.querySelectorAll('[data-hdr]');
+    for (var h = 0; h < hdrs.length; h++){
+      (function(node){
+        node.addEventListener('click', function(){ showCard(node.getAttribute('data-hdr')); });
+      })(hdrs[h]);
+    }
+  }
+
+  function planById(id){
+    for (var i = 0; i < PLANS.length; i++) if (PLANS[i].id === id) return PLANS[i];
+    return PLANS[0];
+  }
+
+  function showCard(id){
+    openPlan = id;
+    var plan = planById(id);
+    var card = document.getElementById('card');
+    var chips = '';
+    for (var i = 0; i < plan.times.length; i++) chips += '<span>' + plan.times[i] + '</span>';
+    card.innerHTML = '<p class="place">' + plan.place + '</p><h2>' + plan.name + '</h2>' +
+      '<p>' + plan.advice + '</p><div class="times">' + chips + '</div>';
+    card.hidden = false;
+  }
+
+  function drawQuestions(){
+    var box = document.getElementById('qbox');
+    var html = '';
+    if (currentStep < 3){
+      var q = QUESTIONS[currentStep];
+      html += '<p class="qlabel">' + q.label + '</p><div class="qbtns" id="qbtns">';
+      for (var i = 0; i < q.opts.length; i++){
+        html += '<button type="button" data-pick="' + i + '">' + q.opts[i][0] + '</button>';
+      }
+      html += '</div>';
+      if (currentStep > 0){
+        html += '<p class="answered">' + summaryLine() + ' <button class="redo" type="button" id="redo">start again</button></p>';
+      }
+    } else {
+      var plan = planById(winner());
+      html += '<p class="qlabel">Your night</p>';
+      html += '<p class="answered"><b>' + plan.short + '</b> &middot; ' + summaryLine() +
+        ' <button class="redo" type="button" id="redo">start again</button></p>';
+    }
+    box.innerHTML = html;
+
+    var btns = box.querySelectorAll('[data-pick]');
+    for (var b = 0; b < btns.length; b++){
+      (function(node){
+        node.addEventListener('click', function(){
+          picks[currentStep] = Number(node.getAttribute('data-pick'));
+          currentStep = currentStep + 1;
+          openPlan = null;
+          render();
+        });
+      })(btns[b]);
+    }
+    var redo = document.getElementById('redo');
+    if (redo) redo.addEventListener('click', function(){
+      currentStep = 0; picks = [null, null, null]; openPlan = null;
+      document.getElementById('card').hidden = true;
+      render();
+    });
+  }
+
+  function summaryLine(){
+    var bits = [];
+    for (var i = 0; i < 3; i++){
+      if (picks[i] !== null) bits = bits.concat([QUESTIONS[i].opts[picks[i]][0].toLowerCase()]);
+    }
+    return bits.join(' &middot; ');
+  }
+
+  function render(){
+    drawQuestions();
+    drawBoard();
+    if (currentStep >= 3 && openPlan === null) showCard(winner());
+    if (window.bwResize) window.bwResize();
+  }
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
