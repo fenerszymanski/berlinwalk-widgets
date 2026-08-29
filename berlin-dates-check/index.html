@@ -235,6 +235,54 @@
   #bw-date-check .gate.is-hydrated { gap: 0; }
   #bw-date-check .gate.is-hydrated h2 { max-width: 38ch; }
 
+  /* ---- email gate experiment: option 3 / checklist handoff ---- */
+  #bw-date-check .gate-option3-preview,
+  #bw-date-check .gate-option3-tail,
+  #bw-date-check .gate-option3-form-copy { display: none; }
+  #bw-date-check .gate-zone.is-option3 {
+    gap: 0; padding: 0; overflow: hidden; border-radius: 14px; background: var(--cream);
+  }
+  #bw-date-check .gate-zone.is-option3 .gate-control-preview { display: none; }
+  #bw-date-check .gate-zone.is-option3 .gate-option3-preview { display: block; }
+  #bw-date-check .gate-zone.is-option3 .pocket-preview {
+    display: block; margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent;
+  }
+  #bw-date-check .gate-option3-meta {
+    margin: 0; padding: 18px 20px; background: var(--hero-green); color: #F8F6F0;
+    font-family: var(--f-mono); font-size: 12px; font-weight: 600; letter-spacing: .14em; line-height: 1.4; text-transform: uppercase;
+  }
+  #bw-date-check .gate-option3-copy { padding: 26px 18px 12px; }
+  #bw-date-check .gate-option3-copy h2 {
+    color: var(--green-ink); font-family: var(--f-display); font-size: clamp(31px, 7.8vw, 46px);
+    font-weight: 600; letter-spacing: -.035em; line-height: 1.04;
+  }
+  #bw-date-check .gate-option3-list { display: flex; flex-direction: column; margin: 24px 0 0; padding: 0; list-style: none; position: relative; }
+  #bw-date-check .gate-option3-list::before { content: ''; position: absolute; top: 21px; bottom: 21px; left: 20px; border-left: 1px solid rgba(27,94,32,.8); }
+  #bw-date-check .gate-option3-item {
+    display: grid; grid-template-columns: 42px minmax(0, 1fr); gap: 14px; padding: 20px 0; border-top: 0; position: relative;
+  }
+  #bw-date-check .gate-option3-item:first-child { border-top: 0; padding-top: 0; }
+  #bw-date-check .gate-option3-step { display: grid; place-items: center; width: 42px; height: 42px; border: 1.5px solid var(--green); border-radius: 50%; background: var(--cream); color: var(--green-ink); font-family: var(--f-mono); font-size: 13px; font-weight: 600; letter-spacing: .04em; line-height: 1; position: relative; z-index: 1; }
+  #bw-date-check .gate-option3-item strong { display: block; color: var(--green-ink); font-size: 18px; line-height: 1.25; }
+  #bw-date-check .gate-option3-item span:last-child { display: block; margin-top: 4px; color: var(--muted); font-size: 13.5px; line-height: 1.45; }
+  #bw-date-check .gate-zone.is-option3 .gate {
+    margin: 0 10px; padding: 20px 16px 18px; border: 1px solid #B8CBB0; border-radius: 12px;
+    background: #EFF5E9;
+  }
+  #bw-date-check .gate-zone.is-option3 .gate-option3-form-copy { display: block; margin-bottom: 16px; }
+  #bw-date-check .gate-option3-form-copy h3 { margin: 0; color: var(--green-ink); font-size: 20px; line-height: 1.18; }
+  #bw-date-check .gate-option3-form-copy p { margin: 8px 0 0; color: #324934; font-size: 14px; line-height: 1.48; }
+  #bw-date-check .gate-zone.is-option3 .gate-row { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  #bw-date-check .gate-zone.is-option3 .gate-row input[type="email"] { min-height: 54px; }
+  #bw-date-check .gate-zone.is-option3 .gate-row button { min-height: 54px; width: 100%; }
+  #bw-date-check .gate-zone.is-option3 .consent { margin-top: 14px; }
+  #bw-date-check .gate-zone.is-option3 .gate-option3-tail { display: block; padding: 26px 18px 28px; position: relative; }
+  #bw-date-check .gate-zone.is-option3 .gate-option3-tail::before { content: ''; position: absolute; top: -26px; left: 38px; height: 28px; border-left: 1px solid rgba(27,94,32,.8); }
+  #bw-date-check .gate-zone.is-option3.is-complete .gate-option3-preview,
+  #bw-date-check .gate-zone.is-option3.is-complete .gate-option3-tail,
+  #bw-date-check .gate-zone.is-option3 .gate.is-complete .gate-option3-form-copy { display: none; }
+  #bw-date-check .gate-zone.is-option3 .gate.is-complete { margin: 0; border: 0; border-radius: 0; background: var(--surface); padding: 24px 22px; }
+
   #bw-date-check .deadline-schedule .dl-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
   #bw-date-check .dl-row { display: grid; grid-template-columns: 78px 1fr auto; gap: 10px; align-items: baseline; padding: 7px 0; border-bottom: 1px solid var(--hair); }
   #bw-date-check .dl-row:last-child { border-bottom: 0; }
@@ -296,6 +344,11 @@
     #bw-date-check .gate-zone { gap: 18px; padding: 22px 18px 20px; }
     #bw-date-check .gate-zone .gate { padding-top: 18px; }
     #bw-date-check .gate-row button { flex: 1 1 100%; width: 100%; min-width: 0; }
+    #bw-date-check .gate-option3-copy { padding: 25px 18px 14px; }
+    #bw-date-check .gate-option3-meta { padding: 16px 18px; }
+    #bw-date-check .gate-zone.is-option3 { margin-left: -16px; margin-right: -16px; }
+    #bw-date-check .gate-zone.is-option3 .gate { margin: 0 10px; padding: 20px 16px 18px; }
+    #bw-date-check .gate-zone.is-option3 .gate-option3-tail { padding: 24px 18px 26px; }
     #bw-date-check .result-stage { padding: 34px 16px 54px; gap: 38px; }
     #bw-date-check .stripwrap { overflow-x: visible; padding-bottom: 0; }
     #bw-date-check .strip { grid-template-columns: repeat(auto-fit, minmax(74px, 1fr)); grid-auto-columns: auto; grid-auto-flow: row; gap: 7px; }
@@ -410,33 +463,49 @@
     <section>
       <div class="readings" id="readings"></div>
     </section>
-    <section class="gate-zone">
+    <section class="gate-zone" id="gateZone">
       <aside class="pocket-preview" id="pocketPreview" aria-labelledby="gateHeading">
-        <div class="pocket-preview-copy">
-          <p class="eyebrow">BerlinWalk bonus</p>
-          <h2 id="gateHeading">BERLIN UNLOCKED</h2>
-          <p class="unlock-promise" id="gateLede">Your dates. My local shortcuts. One phone-ready guide.</p>
-          <p class="gate-stake" id="gateStake"></p>
+        <div class="gate-control-preview" id="gateControlPreview">
+          <div class="pocket-preview-copy">
+            <p class="eyebrow">BerlinWalk bonus</p>
+            <h2 id="gateHeading">BERLIN UNLOCKED</h2>
+            <p class="unlock-promise" id="gateLede">Your dates. My local shortcuts. One phone-ready guide.</p>
+            <p class="gate-stake" id="gateStake"></p>
+          </div>
+          <ul class="pocket-preview-list" aria-label="Berlin Unlocked contents">
+            <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">restaurant</span><span class="pocket-preview-item-copy"><strong>50 picks</strong>Food and drink by situation</span></li>
+            <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">map</span><span class="pocket-preview-item-copy"><strong>Transport</strong>Maps and ticket shortcuts</span></li>
+            <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">account_balance</span><span class="pocket-preview-item-copy"><strong>19 places</strong>Essential landmark map with stations</span></li>
+            <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">rule</span><span class="pocket-preview-item-copy"><strong>12 rules</strong>Small local moves that save time and money</span></li>
+          </ul>
+          <!-- pocket-kit-hero.jpg: real Berlin editorial frame, U-Bahn leaving Alexanderplatz.
+               Source assets/stock-images/berlin-trip-planner/2026-08-04/alexanderplatz-ubahn-motion.jpg
+               (Adobe Express licensed, commercial web use, no public attribution required per that
+               set's README). Replaced the staged AI-looking cafe-table flatlay on 2026-08-24. -->
+          <figure class="pocket-preview-photo">
+            <picture>
+              <source media="(max-width: 620px)" srcset="photos/pocket-kit-hero.jpg">
+              <img src="photos/pocket-kit-hero.jpg" width="1600" height="1066" loading="lazy" decoding="async" alt="A yellow Berlin U-Bahn train pulling out of Alexanderplatz station past the green tiled platform wall.">
+            </picture>
+          </figure>
         </div>
-        <ul class="pocket-preview-list" aria-label="Berlin Unlocked contents">
-          <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">restaurant</span><span class="pocket-preview-item-copy"><strong>50 picks</strong>Food and drink by situation</span></li>
-          <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">map</span><span class="pocket-preview-item-copy"><strong>Transport</strong>Maps and ticket shortcuts</span></li>
-          <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">account_balance</span><span class="pocket-preview-item-copy"><strong>19 places</strong>Essential landmark map with stations</span></li>
-          <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">rule</span><span class="pocket-preview-item-copy"><strong>12 rules</strong>Small local moves that save time and money</span></li>
-        </ul>
-        <!-- pocket-kit-hero.jpg: real Berlin editorial frame, U-Bahn leaving Alexanderplatz.
-             Source assets/stock-images/berlin-trip-planner/2026-08-04/alexanderplatz-ubahn-motion.jpg
-             (Adobe Express licensed, commercial web use, no public attribution required per that
-             set's README). Replaced the staged AI-looking cafe-table flatlay on 2026-08-24. -->
-        <figure class="pocket-preview-photo">
-          <picture>
-            <source media="(max-width: 620px)" srcset="photos/pocket-kit-hero.jpg">
-            <img src="photos/pocket-kit-hero.jpg" width="1600" height="1066" loading="lazy" decoding="async" alt="A yellow Berlin U-Bahn train pulling out of Alexanderplatz station past the green tiled platform wall.">
-          </picture>
-        </figure>
+        <div class="gate-option3-preview" id="gateOption3Preview" hidden>
+          <p class="gate-option3-meta" id="gateOption3Meta"></p>
+          <div class="gate-option3-copy">
+            <h2 id="gateOption3Heading">Your date check is done. Keep the useful bits close.</h2>
+            <ol class="gate-option3-list" aria-label="What Berlin Unlocked adds">
+              <li class="gate-option3-item"><span class="gate-option3-step" aria-hidden="true">01</span><span><strong>50 local picks</strong><span>Food and drink by situation</span></span></li>
+              <li class="gate-option3-item"><span class="gate-option3-step" aria-hidden="true">02</span><span><strong>Transport shortcuts</strong><span>Maps and ticket basics</span></span></li>
+            </ol>
+          </div>
+        </div>
       </aside>
       <div class="gate" id="gate">
         <form id="gateForm" novalidate>
+          <div class="gate-option3-form-copy" id="gateOption3FormCopy" hidden>
+            <h3>Send Berlin Unlocked to my inbox</h3>
+            <p>It is the phone-ready guide for the parts your dates do not answer.</p>
+          </div>
           <div class="gate-row">
             <input type="email" id="gateEmail" name="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required>
             <button type="submit" id="gateSubmit">Send me Berlin Unlocked</button>
@@ -448,6 +517,9 @@
           </label>
         </form>
         <p class="gate-status" id="gateStatus" role="status" aria-live="polite" hidden></p>
+      </div>
+      <div class="gate-option3-tail" id="gateOption3Tail" hidden>
+        <div class="gate-option3-item"><span class="gate-option3-step" aria-hidden="true">03</span><span><strong>12 practical rules</strong><span>Small moves that save time</span></span></div>
       </div>
     </section>
 
@@ -481,7 +553,12 @@
   var DATA_URL = './data.json';
   var API_BASE = 'https://app.berlinwalk.com/api/download-lead';
   var ASSET_ID = 'berlin-date-check';
-  var EXPERIMENT_ID = 'berlin_date_check_v1';
+  // This is deliberately page-load random only. Date Check event rows must
+  // remain aggregate-only, so no visitor, session, cookie, or localStorage
+  // identifier is created for this test.
+  var EXPERIMENT_ID = 'berlin_date_check_email_gate_v2';
+  var GATE_VARIANT_CONTROL = 'control';
+  var GATE_VARIANT_OPTION3 = 'option3_preview_handoff';
   // Static author-written markup, no user input interpolated. Deliberately does
   // not promise a confirmation link: an already-confirmed subscriber gets the
   // pack straight away, a new one gets the DOI mail first.
@@ -494,6 +571,18 @@
     + '</span>';
   var CONSENT_VERSION = 'berlin-date-check-pack-v1-2026-08-21';
   var SOURCE_SLUG = 'berlin-dates-check';
+
+  function isQaRun() {
+    return /[?&]qa=1\b/.test(window.location.search);
+  }
+  function resolveGateVariant() {
+    try {
+      var requested = new URL(window.location.href).searchParams.get('gate_variant');
+      if (isQaRun() && (requested === GATE_VARIANT_CONTROL || requested === GATE_VARIANT_OPTION3)) return requested;
+    } catch (e) {}
+    return Math.random() < 0.5 ? GATE_VARIANT_CONTROL : GATE_VARIANT_OPTION3;
+  }
+  var GATE_VARIANT = resolveGateVariant();
 
   var root = document.getElementById('bw-date-check');
   var DATA = null;
@@ -566,6 +655,22 @@
       return first[2] + ' ' + monthName(firstStr) + '–' + last[2] + ' ' + monthName(lastStr) + ' ' + last[0];
     }
     return first[2] + ' ' + monthName(firstStr) + ' ' + first[0] + '–' + last[2] + ' ' + monthName(lastStr) + ' ' + last[0];
+  }
+
+  function fmtOption3GateMeta(firstStr, lastStr, nights) {
+    if (!firstStr || !lastStr) return '';
+    var first = partsOf(firstStr), last = partsOf(lastStr);
+    var range = '';
+    if (firstStr === lastStr) {
+      range = first[2] + ' ' + monthShort(firstStr).toUpperCase() + ' ' + first[0];
+    } else if (first[0] === last[0] && first[1] === last[1]) {
+      range = first[2] + '–' + last[2] + ' ' + monthShort(lastStr).toUpperCase() + ' ' + last[0];
+    } else if (first[0] === last[0]) {
+      range = first[2] + ' ' + monthShort(firstStr).toUpperCase() + '–' + last[2] + ' ' + monthShort(lastStr).toUpperCase() + ' ' + last[0];
+    } else {
+      range = first[2] + ' ' + monthShort(firstStr).toUpperCase() + ' ' + first[0] + '–' + last[2] + ' ' + monthShort(lastStr).toUpperCase() + ' ' + last[0];
+    }
+    return range + ' · ' + nights + ' NIGHT' + (nights === 1 ? '' : 'S');
   }
 
   function weekdayShort(dateStr) {
@@ -836,6 +941,28 @@
     container.appendChild(el);
   }
 
+  function applyGateExperiment() {
+    var zone = document.getElementById('gateZone');
+    var preview = document.getElementById('pocketPreview');
+    var controlPreview = document.getElementById('gateControlPreview');
+    var option3Preview = document.getElementById('gateOption3Preview');
+    var option3FormCopy = document.getElementById('gateOption3FormCopy');
+    var option3Tail = document.getElementById('gateOption3Tail');
+    var isOption3 = GATE_VARIANT === GATE_VARIANT_OPTION3;
+    if (zone) zone.classList.toggle('is-option3', isOption3);
+    if (preview) preview.setAttribute('aria-labelledby', isOption3 ? 'gateOption3Heading' : 'gateHeading');
+    if (controlPreview) controlPreview.hidden = isOption3;
+    if (option3Preview) option3Preview.hidden = !isOption3;
+    if (option3FormCopy) option3FormCopy.hidden = !isOption3;
+    if (option3Tail) option3Tail.hidden = !isOption3;
+  }
+
+  function gateExposurePlacement() {
+    return STATE.leadAssetStatus === 'confirmed' || STATE.leadAssetStatus === 'sent'
+      ? 'email_gate_returning'
+      : 'email_gate';
+  }
+
   function showHydratedGateStatus() {
     if (STATE.leadAssetStatus !== 'confirmed' && STATE.leadAssetStatus !== 'sent') return false;
     var gate = document.getElementById('gate');
@@ -844,8 +971,10 @@
     var lede = document.getElementById('gateLede');
     var form = document.getElementById('gateForm');
     var status = document.getElementById('gateStatus');
+    var zone = document.getElementById('gateZone');
     if (!gate || !heading || !form) return false;
     gate.classList.add('is-complete', 'is-hydrated');
+    if (zone) zone.classList.add('is-complete');
     heading.textContent = 'BERLIN UNLOCKED';
     if (stake) stake.hidden = true;
     if (lede) lede.hidden = true;
@@ -864,7 +993,9 @@
     var lede = document.getElementById('gateLede');
     var form = document.getElementById('gateForm');
     var status = document.getElementById('gateStatus');
+    var zone = document.getElementById('gateZone');
     if (gate) gate.classList.remove('is-complete', 'is-hydrated');
+    if (zone) zone.classList.remove('is-complete');
     if (stake) stake.hidden = false;
     if (lede) lede.hidden = false;
     if (form) form.hidden = false;
@@ -885,6 +1016,8 @@
     if (stake) {
       stake.textContent = 'Built for ' + fmtCompactTripRange(STATE.arrivalStr, STATE.days[STATE.days.length - 1]) + '.';
     }
+    var option3Meta = document.getElementById('gateOption3Meta');
+    if (option3Meta) option3Meta.textContent = fmtOption3GateMeta(STATE.arrivalStr, STATE.days[STATE.days.length - 1], STATE.nights);
     lede.textContent = 'Your dates. My local shortcuts. One phone-ready guide.';
   }
 
@@ -892,6 +1025,16 @@
   // analytics
   // ---------------------------------------------------------------------
   var analyticsConsent = true; // no consent wall on this tool; matches sitewide pixel embed already firing consent-free
+  function dateCheckEventFields() {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(STATE.arrivalStr || ''))) return {};
+    return {
+      arrivalDate: STATE.arrivalStr,
+      nights: STATE.nights,
+      daysUntilArrival: STATE.daysUntilArrival,
+      resultFlags: STATE.resultFlags.slice(),
+      tourSlotShown: STATE.tourSlotShown === true
+    };
+  }
   function trackEvent(eventName, extra) {
     if (/^(localhost|127\.0\.0\.1)$/.test(window.location.hostname)) return;
     try {
@@ -908,12 +1051,12 @@
         pageUrl: window.location.href,
         referrer: document.referrer || '',
         experiment: EXPERIMENT_ID,
-        variant: 'standalone',
+        variant: GATE_VARIANT,
         placement: 'standalone_page',
         utm: readUtm(),
         device: { width: window.innerWidth || 0, height: window.innerHeight || 0 },
-        qa: /[?&]qa=1\b/.test(window.location.search)
-      }, extra || {});
+        qa: isQaRun()
+      }, dateCheckEventFields(), extra || {});
       fetch(url.toString(), { method: 'POST', headers: { 'content-type': 'application/json' }, keepalive: true, body: JSON.stringify(body) }).catch(function () {});
     } catch (e) {}
   }
@@ -1017,8 +1160,9 @@
 
     var stage = document.getElementById('resultStage');
     stage.classList.add('is-visible');
-    trackEvent('bw_lead_asset_experiment_view');
-    trackEvent('bw_lead_asset_gate_view');
+    var gatePlacement = gateExposurePlacement();
+    trackEvent('bw_lead_asset_experiment_view', { placement: gatePlacement });
+    trackEvent('bw_lead_asset_gate_view', { placement: gatePlacement });
     if (!options || options.scroll !== false) revealResult(stage);
 
   }
@@ -1098,8 +1242,8 @@
       if (val < bounds.min || val > bounds.max) { errLine.textContent = 'Pick a date from today onward.'; arrivalInput.focus(); return; }
       STATE.leadAssetStatus = '';
       clearHydratedGateStatus();
-      trackEvent('bw_lead_asset_form_start', { placement: 'date_input' });
       computeAndRender(val, STATE.nights);
+      trackEvent('bw_lead_asset_form_start', { placement: 'date_input' });
     });
   }
 
@@ -1120,7 +1264,7 @@
     email.addEventListener('focus', function () {
       if (trackedFocus) return;
       trackedFocus = true;
-      trackEvent('bw_lead_asset_gate_seen');
+      trackEvent('bw_lead_asset_gate_seen', { placement: 'email_gate' });
     });
 
     form.addEventListener('submit', function (e) {
@@ -1154,8 +1298,8 @@
         sourceSlug: SOURCE_SLUG,
         sourceUrl: window.location.href,
         experiment: EXPERIMENT_ID,
-        variant: 'standalone',
-        placement: 'standalone_page',
+        variant: GATE_VARIANT,
+        placement: 'email_gate',
         arrivalTiming: arrivalTimingBucket(STATE.daysUntilArrival),
         arrivalDate: STATE.arrivalStr,
         nights: STATE.nights,
@@ -1170,7 +1314,7 @@
         website: website.value || '',
         startedAt: gateStartedAt,
         submittedAt: new Date().toISOString(),
-        qa: /[?&]qa=1\b/.test(window.location.search)
+        qa: isQaRun()
       };
 
       var url = new URL(API_BASE, window.location.href);
@@ -1184,13 +1328,14 @@
       }).then(function (res) {
         if (!res.ok) throw new Error('submit failed ' + res.status);
         document.getElementById('gate').classList.add('is-complete');
+        document.getElementById('gateZone').classList.add('is-complete');
         email.disabled = true;
         consent.disabled = true;
         button.hidden = true;
         status.className = 'gate-status is-success';
         status.hidden = false;
         status.innerHTML = GATE_SENT_HTML;
-        trackEvent('bw_lead_asset_submit', { placement: 'gate' });
+        trackEvent('bw_lead_asset_submit', { placement: 'email_gate' });
       }).catch(function () {
         button.disabled = false;
         button.textContent = 'Send me Berlin Unlocked';
@@ -1256,6 +1401,7 @@
     .then(function (res) { return res.json(); })
     .then(function (json) {
       DATA = json;
+      applyGateExperiment();
       initInput();
       initGate();
       initHeroPhoto();
