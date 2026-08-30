@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Place a Berlin address on a 1989 map and compare it with today.">
+  <link rel="icon" href="data:,">
+  <title>Berlin Address Time Machine</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="batm" data-tool-slug="berlin-address-time-machine">
+    <header class="batm-hero">
+      <div class="batm-hero-content">
+        <p class="batm-kicker">BERLIN · 1989 ↔ TODAY</p>
+        <h1>Where did this Berlin address sit?</h1>
+        <p class="batm-intro">Type a Berlin address, choose a map point, or use your location. I’ll place it in a reconstructed 1989 East/West side area, estimate its distance to the officially mapped front Wall, and point out a documented trace you can still see today.</p>
+      </div>
+      <div class="batm-hero-rail" aria-label="What the result contains">
+        <span><strong>1989 side</strong><small>Administrative reconstruction</small></span>
+        <span><strong>Wall distance</strong><small>Official mapped front Wall</small></span>
+        <span><strong>Trace today</strong><small>A documented place to look for</small></span>
+      </div>
+    </header>
+
+    <div class="batm-layout">
+      <section class="batm-panel batm-controls" aria-labelledby="controls-title">
+        <div class="batm-section-heading">
+          <p class="batm-eyebrow">START WITH A PLACE</p>
+          <h2 id="controls-title">Find your point</h2>
+        </div>
+
+        <form id="address-form" class="batm-form" novalidate>
+          <label for="address-input">Berlin address or street</label>
+          <div class="batm-search-row">
+            <input id="address-input" name="address" type="text" autocomplete="street-address" inputmode="text" spellcheck="false" placeholder="e.g. Alexanderplatz 1" maxlength="80">
+            <button class="batm-button batm-button--primary" type="submit">Search</button>
+          </div>
+          <p class="batm-help">Use a street name with or without a house number. If there is more than one match, choose the exact candidate.</p>
+        </form>
+
+        <div class="batm-or" aria-hidden="true"><span>or</span></div>
+
+        <button id="location-button" class="batm-button batm-button--secondary" type="button">
+          <span aria-hidden="true">◎</span>
+          <span>Use my location</span>
+        </button>
+        <p id="location-status" class="batm-status" role="status" aria-live="polite"></p>
+
+        <div id="candidate-region" class="batm-candidates" hidden>
+          <p class="batm-eyebrow">CHOOSE ONE</p>
+          <h3>Which place did you mean?</h3>
+          <p id="candidate-help" class="batm-help">No result is assigned until you select a candidate.</p>
+          <div id="candidate-list" class="batm-candidate-list"></div>
+        </div>
+
+        <div class="batm-privacy-note">
+          <span class="batm-privacy-mark" aria-hidden="true">◌</span>
+          <p>Your search is used only to resolve this point in the moment. The address, map coordinates, and location permission are not written to analytics, cookies, or browser storage.</p>
+        </div>
+      </section>
+
+      <section class="batm-panel batm-map-panel" aria-labelledby="map-panel-title">
+        <div class="batm-map-heading">
+          <div>
+            <p class="batm-eyebrow">THE MAP IS THE ANSWER</p>
+            <h2 id="map-panel-title">Berlin, two layers</h2>
+          </div>
+          <div class="batm-time-control" role="tablist" aria-label="Choose a historical layer">
+            <button id="layer-1989" class="batm-time-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="history-map" data-layer="1989">1989</button>
+            <button id="layer-today" class="batm-time-tab" type="button" role="tab" aria-selected="false" aria-controls="history-map" data-layer="today">Today</button>
+          </div>
+        </div>
+
+        <div class="batm-map-shell">
+          <svg id="history-map" class="batm-map" viewBox="0 0 1000 620" role="img" aria-labelledby="map-title map-description" tabindex="0">
+            <title id="map-title">Berlin 1989 and today map</title>
+            <desc id="map-description">A data-driven map of reconstructed 1989 East and West side areas, official mapped border installations, and documented present-day traces. Click or tap to choose a point.</desc>
+          </svg>
+          <div id="map-status" class="batm-map-status" role="status" aria-live="polite">Loading the 1989 map layers…</div>
+        </div>
+
+        <div class="batm-map-footer">
+          <div class="batm-legend" aria-label="Map legend">
+            <span><i class="batm-legend-swatch batm-legend-swatch--east" aria-hidden="true"></i>Reconstructed East side</span>
+            <span><i class="batm-legend-swatch batm-legend-swatch--west" aria-hidden="true"></i>Reconstructed West side</span>
+            <span><i class="batm-legend-swatch batm-legend-swatch--strip" aria-hidden="true"></i>Mapped border strip</span>
+            <span><i class="batm-legend-swatch batm-legend-swatch--wall" aria-hidden="true"></i>Mapped front Wall</span>
+            <span><i class="batm-legend-swatch batm-legend-swatch--political" aria-hidden="true"></i>Political boundary where different</span>
+            <span><i class="batm-legend-swatch batm-legend-swatch--trace" aria-hidden="true"></i>Today’s trace</span>
+          </div>
+          <p class="batm-map-help">Click or tap anywhere on the map to drop a pin. Keyboard users can focus the map and press Enter to choose its centre.</p>
+          <p class="batm-accuracy-note"><strong>How to read it:</strong> the coloured areas reconstruct East/West sides from official Berlin administrative geometry. The red line is the mapped front Wall, not the legal border; dashed dark segments show places where the political boundary differed. Berlin’s source says the 1989 installation map is preliminary and not parcel-exact.</p>
+        </div>
+      </section>
+    </div>
+
+    <section id="result-panel" class="batm-result batm-result--empty" aria-labelledby="result-title" aria-live="polite">
+      <div class="batm-result-placeholder">
+        <span class="batm-result-number" aria-hidden="true">01</span>
+        <div>
+          <p class="batm-eyebrow">YOUR READING</p>
+          <h2 id="result-title">Choose an address or map point</h2>
+          <p>The reconstructed 1989 side, mapped front-Wall distance, and nearest documented trace will appear here.</p>
+        </div>
+      </div>
+    </section>
+
+    <p class="batm-source-note">Historical geometry: <a href="https://daten.berlin.de/datensaetze/verlauf-der-berliner-mauer-1989-wfs-3dcda64c" target="_blank" rel="noopener noreferrer">Berlin Open Data’s 1989 Wall WFS</a> and <a href="https://daten.berlin.de/datensaetze/alkis-berlin-ortsteile-wfs-61bd3084" target="_blank" rel="noopener noreferrer">official ALKIS Ortsteil geometry</a>, checked 30 August 2026. This is an orientation tool, not legal or parcel-level evidence. Present-day traces link to their institutional sources in each result.</p>
+  </main>
+
+  <script src="../js/tool-event-bridge.js"></script>
+  <script src="../js/brand.js"></script>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

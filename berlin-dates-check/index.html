@@ -90,7 +90,15 @@
   #bw-date-check .panel { width: min(100%, 540px); padding: 0; display: flex; flex-direction: column; gap: 30px; background: transparent; border-radius: 0; box-shadow: none; }
   #bw-date-check .field { display: flex; flex-direction: column; gap: 9px; }
   #bw-date-check .field > label { font-family: var(--f-mono); font-size: 11px; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; color: #1A4524; }
+  #bw-date-check .field-optional { text-transform: none; font-weight: 500; letter-spacing: normal; opacity: .75; }
   #bw-date-check .datebox { position: relative; border: 1.5px solid #173F20; border-radius: 0; background: rgba(255,255,255,.34); }
+  #bw-date-check select#areaInput {
+    width: 100%; min-height: 64px; border: 0; background: transparent; border-radius: 0;
+    font-family: var(--f-mono); font-size: 15px; font-weight: 600; color: #16211A;
+    padding: 13px 44px 13px 18px; -webkit-appearance: none; appearance: none; cursor: pointer;
+  }
+  #bw-date-check select#areaInput:focus { outline: 2px solid var(--lime); outline-offset: -3px; }
+  #bw-date-check .selectbox-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #1A4524; pointer-events: none; font-size: 24px; }
   #bw-date-check input[type="date"] {
     width: 100%; min-height: 64px; border: 0; background: transparent; border-radius: 0;
     font-family: var(--f-mono); font-size: 17px; font-weight: 600; color: #16211A;
@@ -301,6 +309,49 @@
   #bw-date-check .gate-stake { margin: 10px 0 0; font-size: 15.5px; line-height: 1.45; color: var(--ink); font-weight: 500; }
   #bw-date-check .gate .lede { margin-top: 8px; font-size: 13px; line-height: 1.5; color: var(--muted); }
   @media (max-width: 420px) { #bw-date-check .gate-stake { font-size: 14.5px; } }
+
+  /* ---- this week impact board ---- */
+  #bw-date-check .impact-scope { font-size: 13.5px; line-height: 1.5; color: var(--muted); max-width: 62ch; }
+  #bw-date-check .impact-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+  #bw-date-check .impact-list[hidden] { display: none; }
+  #bw-date-check .impact-card {
+    display: flex; flex-direction: column; gap: 10px; padding: 18px 19px 17px;
+    background: var(--surface); border: 1px solid var(--hair); border-left: 5px solid var(--hair); border-radius: 10px;
+  }
+  #bw-date-check .impact-card[data-severity="high"] { border-left-color: var(--alert); }
+  #bw-date-check .impact-card[data-severity="medium"] { border-left-color: var(--yellow); }
+  #bw-date-check .impact-card[data-severity="low"] { border-left-color: var(--lime); }
+  #bw-date-check .impact-card-head { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; justify-content: space-between; }
+  #bw-date-check .impact-severity, #bw-date-check .impact-type {
+    display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 20px;
+    font-family: var(--f-mono); font-size: 10.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; line-height: 1.3;
+  }
+  #bw-date-check .impact-severity .material-symbols-outlined, #bw-date-check .impact-type .material-symbols-outlined { font-size: 15px; }
+  #bw-date-check .impact-severity.sev-high { background: var(--alert-soft); color: var(--alert); }
+  #bw-date-check .impact-severity.sev-medium { background: var(--yellow); color: var(--green-ink); }
+  #bw-date-check .impact-severity.sev-low { background: var(--green-soft); color: var(--green); }
+  #bw-date-check .impact-type { background: var(--surface-2); color: var(--muted); }
+  #bw-date-check .impact-title { font-family: var(--f-body); font-size: 16.5px; font-weight: 700; line-height: 1.3; color: var(--ink); }
+  #bw-date-check .impact-timeline { display: flex; gap: 3px; }
+  #bw-date-check .impact-timeline .tl-day { flex: 1 1 0; min-width: 0; height: 7px; border-radius: 4px; background: var(--hair); }
+  #bw-date-check .impact-timeline .tl-day.is-hit { background: var(--alert); }
+  #bw-date-check .impact-card[data-severity="low"] .impact-timeline .tl-day.is-hit { background: var(--lime); }
+  #bw-date-check .impact-card[data-severity="medium"] .impact-timeline .tl-day.is-hit { background: #C9A600; }
+  #bw-date-check .impact-when { font-family: var(--f-mono); font-size: 11px; letter-spacing: .02em; color: var(--muted); }
+  #bw-date-check .impact-line { font-size: 13.5px; line-height: 1.5; color: var(--ink); }
+  #bw-date-check .impact-line-label { display: block; font-family: var(--f-mono); font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--green); margin-bottom: 2px; }
+  #bw-date-check .impact-move { display: flex; gap: 8px; align-items: flex-start; font-size: 13.5px; line-height: 1.45; color: var(--green-ink); font-weight: 600; padding-top: 8px; border-top: 1px dashed var(--hair); }
+  #bw-date-check .impact-move .material-symbols-outlined { flex: none; font-size: 18px; margin-top: 1px; color: var(--green); }
+  #bw-date-check .impact-meta { font-family: var(--f-mono); font-size: 10.5px; color: var(--muted); letter-spacing: .02em; }
+  #bw-date-check .impact-meta a { color: var(--green); font-weight: 600; }
+  #bw-date-check .impact-meta a:focus-visible, #bw-date-check .impact-move:focus-visible { outline: 2px solid var(--lime); outline-offset: 2px; }
+  #bw-date-check .impact-empty {
+    display: flex; gap: 10px; align-items: flex-start; padding: 16px 18px; border-radius: 10px;
+    background: var(--green-soft); border: 1px solid var(--hair); font-size: 13.5px; line-height: 1.5; color: var(--ink);
+  }
+  #bw-date-check .impact-empty[hidden] { display: none; }
+  #bw-date-check .impact-empty .material-symbols-outlined { flex: none; font-size: 20px; color: var(--green); margin-top: 1px; }
+
   #bw-date-check footer { padding: 26px 0 50px; font-family: var(--f-mono); font-size: 10px; color: var(--muted); text-align: center; letter-spacing: .04em; }
 
   @media (max-width: 860px) {
@@ -352,6 +403,8 @@
     #bw-date-check .result-stage { padding: 34px 16px 54px; gap: 38px; }
     #bw-date-check .stripwrap { overflow-x: visible; padding-bottom: 0; }
     #bw-date-check .strip { grid-template-columns: repeat(auto-fit, minmax(74px, 1fr)); grid-auto-columns: auto; grid-auto-flow: row; gap: 7px; }
+    #bw-date-check .impact-list { grid-template-columns: 1fr; }
+    #bw-date-check .impact-card { padding: 16px 15px 15px; }
   }
   @media (max-width: 760px) {
     #bw-date-check .pocket-preview { grid-template-columns: 1fr; }
@@ -400,6 +453,21 @@
               <button type="button" data-nights="5">5</button>
               <button type="button" data-nights="6">6</button>
               <button type="button" data-nights="7">7+</button>
+            </div>
+          </div>
+          <div class="field">
+            <label for="areaInput">Where are you staying? <span class="field-optional">(optional)</span></label>
+            <div class="datebox selectbox">
+              <select id="areaInput" name="area">
+                <option value="">Not sure yet</option>
+                <option value="mitte-alexanderplatz">Mitte / Alexanderplatz</option>
+                <option value="friedrichshain">Friedrichshain</option>
+                <option value="kreuzberg-neukolln">Kreuzberg / Neukölln</option>
+                <option value="prenzlauer-berg">Prenzlauer Berg</option>
+                <option value="city-west">City West</option>
+                <option value="other">Other / not sure</option>
+              </select>
+              <span class="material-symbols-outlined selectbox-icon" aria-hidden="true">expand_more</span>
             </div>
           </div>
           <button type="submit" class="cta"><span>Check my dates</span><span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></button>
@@ -463,6 +531,17 @@
     <section>
       <div class="readings" id="readings"></div>
     </section>
+
+    <section aria-labelledby="impactBoardHeading">
+      <div class="sec-head">
+        <p class="eyebrow">This week impact board</p>
+        <h2 id="impactBoardHeading">What actually changes on your dates</h2>
+        <p class="impact-scope" id="impactScope"></p>
+      </div>
+      <div class="impact-list" id="impactList" role="list" hidden></div>
+      <p class="impact-empty" id="impactEmpty" hidden><span class="material-symbols-outlined" aria-hidden="true">verified</span><span id="impactEmptyText"></span></p>
+    </section>
+
     <section class="gate-zone" id="gateZone">
       <aside class="pocket-preview" id="pocketPreview" aria-labelledby="gateHeading">
         <div class="gate-control-preview" id="gateControlPreview">
@@ -544,6 +623,7 @@
 
 </div>
 
+<script src="impact-matching.js"></script>
 <script>
 (function () {
   'use strict';
@@ -587,7 +667,7 @@
   var root = document.getElementById('bw-date-check');
   var DATA = null;
   var startedAt = new Date().toISOString();
-  var STATE = { arrivalStr: null, nights: 4, days: [], daysUntilArrival: null, resultFlags: [], tourSlotShown: false, tourSummary: null, readingTexts: {}, deadlineSchedule: null, leadAssetStatus: '' };
+  var STATE = { arrivalStr: null, nights: 4, days: [], daysUntilArrival: null, resultFlags: [], tourSlotShown: false, tourSummary: null, readingTexts: {}, deadlineSchedule: null, leadAssetStatus: '', areaCode: '', matchedImpacts: [] };
 
   // ---------------------------------------------------------------------
   // date helpers (all date-string math done as Y-M-D strings to sidestep
@@ -941,6 +1021,130 @@
     container.appendChild(el);
   }
 
+  // ---------------------------------------------------------------------
+  // this week impact board -- matching/sorting/freshness logic lives in the
+  // standalone impact-matching.js (loaded above as window.BWImpactMatching)
+  // so it stays unit-testable with real fixtures. Everything in this block
+  // is presentation only. A failure anywhere here is caught so a bad row or
+  // a missing script never breaks the arrival/nights/gate flow above it.
+  // ---------------------------------------------------------------------
+  var AREA_LABELS = {
+    'mitte-alexanderplatz': 'Mitte / Alexanderplatz',
+    'friedrichshain': 'Friedrichshain',
+    'kreuzberg-neukolln': 'Kreuzberg / Neukölln',
+    'prenzlauer-berg': 'Prenzlauer Berg',
+    'city-west': 'City West',
+    'other': 'your area'
+  };
+  var IMPACT_TYPE_META = {
+    citywide_event: { label: 'Citywide event', icon: 'celebration' },
+    holiday_effect: { label: 'Holiday effect', icon: 'event_busy' },
+    transport_disruption: { label: 'Transport disruption', icon: 'directions_transit' },
+    closure: { label: 'Closure', icon: 'block' },
+    area_impact: { label: 'Area impact', icon: 'location_on' },
+    booking_deadline: { label: 'Booking deadline', icon: 'event_available' }
+  };
+  var IMPACT_SEVERITY_META = {
+    high: { label: 'High impact', icon: 'priority_high' },
+    medium: { label: 'Worth planning around', icon: 'info' },
+    low: { label: 'Good to know', icon: 'check_circle' }
+  };
+
+  function warnImpactBoard(err) {
+    if (typeof console !== 'undefined' && console.warn) console.warn('berlin-dates-check: impact board failed to render', err);
+  }
+  function escapeHtml(value) {
+    return String(value === null || value === undefined ? '' : value).replace(/[&<>"']/g, function (ch) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch];
+    });
+  }
+  function fmtImpactDate(dateStr) {
+    var p = partsOf(dateStr);
+    return p[2] + ' ' + monthShort(dateStr) + ' ' + p[0];
+  }
+  function fmtImpactRange(fromStr, toStr) {
+    if (fromStr === toStr) return fmtImpactDate(fromStr);
+    return fmtImpactDate(fromStr) + ' – ' + fmtImpactDate(toStr);
+  }
+  function describeOverlap(overlapCount, totalDays) {
+    if (overlapCount >= totalDays) return 'covers your whole stay';
+    return 'affects ' + overlapCount + ' of your ' + totalDays + ' day' + (totalDays === 1 ? '' : 's');
+  }
+  function areaScopeLabel(areaCode) {
+    return areaCode && AREA_LABELS[areaCode] ? AREA_LABELS[areaCode] : '';
+  }
+
+  function renderImpactTimeline(impact, days) {
+    var cells = days.map(function (d) {
+      var hit = d >= impact.from && d <= impact.to;
+      return '<span class="tl-day' + (hit ? ' is-hit' : '') + '" title="' + escapeHtml(fmtDayLabel(d)) + '"></span>';
+    }).join('');
+    var ariaLabel = describeOverlap(BWImpactMatching.overlapDayCount(impact, days), days.length)
+      + ' between ' + fmtImpactDate(days[0]) + ' and ' + fmtImpactDate(days[days.length - 1]);
+    return '<div class="impact-timeline" role="img" aria-label="' + escapeHtml(ariaLabel) + '">' + cells + '</div>';
+  }
+
+  function renderImpactCard(impact, days) {
+    var sev = IMPACT_SEVERITY_META[impact.severity] || IMPACT_SEVERITY_META.medium;
+    var type = IMPACT_TYPE_META[impact.impactType] || { label: 'Impact', icon: 'info' };
+    var overlapCount = BWImpactMatching.overlapDayCount(impact, days);
+    var areaText = (impact.areas && impact.areas.length)
+      ? impact.areas.map(function (code) { return AREA_LABELS[code] || code; }).join(', ')
+      : 'Citywide';
+    var el = document.createElement('article');
+    el.className = 'impact-card';
+    el.setAttribute('data-severity', impact.severity);
+    el.setAttribute('role', 'listitem');
+    el.innerHTML =
+      '<div class="impact-card-head">'
+      + '<span class="impact-severity sev-' + impact.severity + '"><span class="material-symbols-outlined" aria-hidden="true">' + sev.icon + '</span>' + sev.label + '</span>'
+      + '<span class="impact-type"><span class="material-symbols-outlined" aria-hidden="true">' + type.icon + '</span>' + type.label + '</span>'
+      + '</div>'
+      + '<h3 class="impact-title">' + escapeHtml(impact.title) + '</h3>'
+      + renderImpactTimeline(impact, days)
+      + '<p class="impact-when">' + escapeHtml(fmtImpactRange(impact.from, impact.to)) + ' &middot; ' + escapeHtml(describeOverlap(overlapCount, days.length)) + ' &middot; ' + escapeHtml(areaText) + '</p>'
+      + '<p class="impact-line"><span class="impact-line-label">What changes</span>' + escapeHtml(impact.whatChanges) + '</p>'
+      + '<p class="impact-line"><span class="impact-line-label">Who it affects</span>' + escapeHtml(impact.whoItAffects) + '</p>'
+      + (impact.timeNote ? '<p class="impact-line"><span class="impact-line-label">Exact timing</span>' + escapeHtml(impact.timeNote) + '</p>' : '')
+      + '<p class="impact-move"><span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>' + escapeHtml(impact.visitorMove) + '</p>'
+      + '<p class="impact-meta">Checked ' + escapeHtml(fmtImpactDate(impact.checkedAt)) + ' &middot; <a href="' + escapeHtml(impact.sourceUrl) + '" target="_top" rel="noopener">Source ↗</a></p>';
+    return el;
+  }
+
+  // Reads the area picker directly (rather than taking it as a parameter) so
+  // this never has to change computeAndRender's call signature -- both call
+  // sites (the form submit handler and hydrateFromQuery) stay untouched.
+  function renderImpactBoard(arrivalStr, lastStr, days, todayStrVal) {
+    var list = document.getElementById('impactList');
+    var empty = document.getElementById('impactEmpty');
+    var emptyText = document.getElementById('impactEmptyText');
+    var scope = document.getElementById('impactScope');
+    if (!list || !empty || !emptyText) return;
+    var areaInput = document.getElementById('areaInput');
+    var areaCode = areaInput ? areaInput.value : '';
+    STATE.areaCode = areaCode;
+    if (scope) {
+      scope.textContent = areaScopeLabel(areaCode)
+        ? 'Citywide impacts, plus what is happening in ' + areaScopeLabel(areaCode) + '.'
+        : 'Citywide impacts for your dates. Pick your area above to add neighbourhood-specific results.';
+    }
+    var impacts = (typeof BWImpactMatching !== 'undefined' && BWImpactMatching)
+      ? BWImpactMatching.matchImpacts((DATA && DATA.impactBoard) || [], { firstDay: arrivalStr, lastDay: lastStr, areaCode: areaCode, todayStr: todayStrVal })
+      : [];
+    STATE.matchedImpacts = impacts;
+    list.innerHTML = '';
+    if (!impacts.length) {
+      list.hidden = true;
+      empty.hidden = false;
+      var areaSuffix = areaScopeLabel(areaCode) ? ' or ' + areaScopeLabel(areaCode) : '';
+      emptyText.textContent = 'No verified impact found for your dates' + areaSuffix + '. I only show something here once I can point to an official, dated source.';
+      return;
+    }
+    empty.hidden = true;
+    list.hidden = false;
+    impacts.forEach(function (impact) { list.appendChild(renderImpactCard(impact, days)); });
+  }
+
   function applyGateExperiment() {
     var zone = document.getElementById('gateZone');
     var preview = document.getElementById('pocketPreview');
@@ -1156,7 +1360,12 @@
 
     renderSeasonPhoto(arrivalMonth);
 
-    document.getElementById('checkedOnLine').textContent = 'Checked on ' + DATA.checkedOn + ' · Berlin Date Check';
+    // Presentation-only and independently guarded: a bad impact row or a
+    // missing impact-matching.js load must never take down the arrival date
+    // / nights / gate flow above it.
+    try { renderImpactBoard(arrivalStr, lastStr, days, today); } catch (e) { warnImpactBoard(e); }
+
+    document.getElementById('checkedOnLine').textContent = 'Core date guide checked ' + DATA.checkedOn + ' · Impact sources show their own checked dates';
 
     var stage = document.getElementById('resultStage');
     stage.classList.add('is-visible');
@@ -1205,12 +1414,15 @@
     var arrival = params.get('arrival') || '';
     var nightsText = params.get('nights') || '';
     var status = params.get('lead_asset_status') || '';
+    var area = params.get('area') || '';
     var bounds = inputDateBounds();
     if (!isValidDateString(arrival) || arrival < bounds.min || arrival > bounds.max || !/^[1-7]$/.test(nightsText)) return false;
     var arrivalInput = document.getElementById('arrivalInput');
     if (!arrivalInput) return false;
     arrivalInput.value = arrival;
     setSelectedNights(Number(nightsText));
+    var areaInput = document.getElementById('areaInput');
+    if (areaInput && (area === '' || Object.prototype.hasOwnProperty.call(AREA_LABELS, area))) areaInput.value = area;
     STATE.leadAssetStatus = status === 'confirmed' || status === 'sent' ? status : '';
     // A valid handoff already contains the user's complete input. Reveal the
     // answer and let the iframe-aware scroll bridge move the parent page to it.

@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Check whether a Berlin hotel location fits your sightseeing, transport, BER, nightlife and BerlinWalk meeting-point priorities.">
+    <title>Berlin Hotel Location Checker | BerlinWalk</title>
+    <link rel="stylesheet" href="../css/brand.css">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="icon" type="image/png" href="../tools-home/icons/berlin-hotel-location-checker-160.png">
+  </head>
+  <body>
+    <main id="hotel-location-checker" class="bw-tool-shell">
+      <section class="hero-panel" aria-labelledby="tool-title">
+        <div class="hero-content">
+          <div class="eyebrow">BERLINWALK · STAY BASE DECISION</div>
+          <h1 id="tool-title">Will this Berlin hotel location work for my trip?</h1>
+          <p class="hero-copy">Enter a Berlin address or choose a point on the map. I will compare the location with the things you said matter, so you can judge the base before you book.</p>
+          <div class="scope-callout" role="note">
+            <span class="scope-mark" aria-hidden="true">◎</span>
+            <span><strong>Location fit, not hotel quality.</strong> This checker does not rate rooms, service, price or neighbourhood safety.</span>
+          </div>
+          <div class="hero-facts" aria-label="How the checker works">
+            <div><strong>01</strong><span>Place an address or map point</span></div>
+            <div><strong>02</strong><span>Choose one to three priorities</span></div>
+            <div><strong>03</strong><span>See the trade-offs before booking</span></div>
+          </div>
+        </div>
+        <p id="fixture-notice" class="fixture-notice" hidden>LOCAL QA FIXTURE · not production data</p>
+      </section>
+
+      <section class="tool-step" aria-labelledby="location-heading">
+        <div class="step-kicker">01 · PLACE</div>
+        <div class="section-heading">
+          <div>
+            <h2 id="location-heading">Where is the hotel?</h2>
+            <p>Search an address, or click the map when you are still comparing areas.</p>
+          </div>
+          <span class="step-status">No hotel name needed</span>
+        </div>
+
+        <form id="address-form" class="address-form" novalidate>
+          <label for="address-input">Berlin address</label>
+          <div class="address-row">
+            <input id="address-input" name="address" type="text" autocomplete="street-address" placeholder="e.g. Alexanderplatz 1, Berlin" minlength="3" maxlength="80">
+            <button class="button button-primary" type="submit">Find address</button>
+          </div>
+          <p id="address-status" class="status-line" role="status" aria-live="polite">The address lookup uses the Berlin address dataset when available.</p>
+        </form>
+
+        <div id="candidate-panel" class="candidate-panel" hidden>
+          <div class="candidate-heading">
+            <h3>Which address did you mean?</h3>
+            <span id="candidate-count" class="count-pill"></span>
+          </div>
+          <div id="candidate-list" class="candidate-list"></div>
+        </div>
+
+        <div class="map-heading">
+          <div>
+            <h3>Or choose a map point</h3>
+            <p>Click a named area or anywhere inside the schematic map. The point is approximate.</p>
+          </div>
+          <span class="map-note">Fixed planning anchors</span>
+        </div>
+        <div class="map-card">
+          <svg id="berlin-map" class="berlin-map" viewBox="0 0 680 440" role="group" aria-labelledby="map-title map-description">
+            <title id="map-title">Schematic Berlin planning map</title>
+            <desc id="map-description">A simplified map showing the city centre, west, nightlife areas, south, BER and north. Choose a point with the mouse, touch or keyboard.</desc>
+            <rect class="map-background" x="0" y="0" width="680" height="440" rx="24"></rect>
+            <g class="map-grid" aria-hidden="true"></g>
+            <path class="map-ring" d="M157 115 C260 42 492 72 564 190 C615 275 532 381 365 389 C198 397 98 317 111 210 C116 169 132 137 157 115Z" aria-hidden="true"></path>
+            <path class="map-spree" d="M47 198 C130 184 174 236 247 223 C322 210 367 151 435 168 C497 184 521 238 632 218" aria-hidden="true"></path>
+            <path class="map-spree-secondary" d="M222 29 C244 98 234 151 267 210 C299 268 284 320 318 416" aria-hidden="true"></path>
+            <g id="map-place-labels" class="map-place-labels" aria-hidden="true"></g>
+            <g id="map-places"></g>
+            <g id="map-selection" class="map-selection" hidden aria-hidden="true">
+              <circle class="selection-halo" cx="0" cy="0" r="21"></circle>
+              <path class="selection-pin" d="M0 -17 C-10 -17 -17 -10 -17 -1 C-17 10 0 25 0 25 C0 25 17 10 17 -1 C17 -10 10 -17 0 -17Z"></path>
+              <circle class="selection-dot" cx="0" cy="-1" r="5"></circle>
+            </g>
+            <g class="map-labels" aria-hidden="true">
+              <text x="324" y="210">central Berlin</text>
+              <text x="75" y="357">west</text>
+              <text x="523" y="350">southeast</text>
+              <text x="500" y="64">north</text>
+              <text x="74" y="60">approximate map · not a live route</text>
+            </g>
+          </svg>
+          <div class="map-legend" aria-label="Map legend">
+            <span><i class="legend-dot legend-dot--green" aria-hidden="true"></i>central anchor</span>
+            <span><i class="legend-dot legend-dot--yellow" aria-hidden="true"></i>priority area</span>
+            <span><i class="legend-dot legend-dot--outline" aria-hidden="true"></i>your point</span>
+          </div>
+        </div>
+        <p id="selection-status" class="selection-status" role="status" aria-live="polite">No location selected yet.</p>
+      </section>
+
+      <section class="tool-step" aria-labelledby="priority-heading">
+        <div class="step-kicker">02 · PRIORITIES</div>
+        <div class="section-heading">
+          <div>
+            <h2 id="priority-heading">What should your base make easier?</h2>
+            <p>Choose one to three priorities. The total score averages only those priorities.</p>
+          </div>
+          <span id="priority-count" class="step-status">3 selected</span>
+        </div>
+        <div id="priority-list" class="priority-grid" role="group" aria-label="Trip priorities"></div>
+        <p id="priority-status" class="status-line" role="status" aria-live="polite">You can change this after seeing the first result.</p>
+      </section>
+
+      <section id="score-panel" class="score-panel" aria-labelledby="score-heading" hidden>
+        <div class="step-kicker">03 · LOCATION FIT</div>
+        <div class="result-heading">
+          <div>
+            <h2 id="score-heading">Your location fit</h2>
+            <p id="result-location" class="result-location"></p>
+          </div>
+          <span class="approx-badge">Approximate · fixed anchors</span>
+        </div>
+
+        <div class="result-overview">
+          <div class="score-ring" aria-label="Location fit score">
+            <svg viewBox="0 0 160 160" aria-hidden="true">
+              <circle class="score-ring-track" cx="80" cy="80" r="64"></circle>
+              <circle id="score-ring-progress" class="score-ring-progress" cx="80" cy="80" r="64"></circle>
+              <text id="score-number" class="score-number" x="80" y="78">N/A</text>
+              <text class="score-denominator" x="80" y="101">/ 100</text>
+            </svg>
+          </div>
+          <div class="overview-copy">
+            <p id="score-band" class="score-band"></p>
+            <p id="score-explanation"></p>
+            <p class="fit-disclaimer"><strong>What this means:</strong> a geographical fit for your selected plans, not a verdict on the hotel itself.</p>
+          </div>
+          <div class="radar-wrap">
+            <svg id="score-radar" class="score-radar" viewBox="0 0 320 300" role="img" aria-labelledby="radar-title radar-description">
+              <title id="radar-title">Location fit profile</title>
+              <desc id="radar-description">A radar chart showing the six location subscores.</desc>
+            </svg>
+          </div>
+        </div>
+
+        <div class="subscore-section">
+          <div class="subscore-heading">
+            <h3>Six signals, shown separately</h3>
+            <p>Read these before you accept the total.</p>
+          </div>
+          <div id="subscore-list" class="subscore-list"></div>
+        </div>
+
+        <div class="tradeoff-grid">
+          <article class="tradeoff-card tradeoff-card--accent">
+            <span class="card-label">KEY TRADE-OFF</span>
+            <h3 id="tradeoff-heading"></h3>
+            <p id="tradeoff-copy"></p>
+          </article>
+          <article class="recommendation-card">
+            <span class="card-label">MY PRACTICAL RECOMMENDATION</span>
+            <p id="recommendation-copy"></p>
+          </article>
+        </div>
+
+        <div class="next-actions">
+          <div>
+            <h3>Make the next check live</h3>
+            <p>The score is a planning shortcut. Use VBB for today's actual route before booking.</p>
+          </div>
+          <a id="vbb-link" class="button button-primary action-link" href="https://www.vbb.de/fahrinfo/" target="_blank" rel="noopener">Open VBB Fahrinfo <span aria-hidden="true">↗</span></a>
+        </div>
+
+        <div class="related-links" aria-labelledby="related-heading">
+          <h3 id="related-heading">Keep planning with BerlinWalk</h3>
+          <div class="related-link-grid">
+            <a class="related-link" data-cta-action="article_opened" href="https://www.berlinwalk.com/post/where-to-stay-in-berlin-best-neighborhoods-for-every-type-of-tourist" target="_blank" rel="noopener">
+              <span class="related-number">01</span>
+              <span><strong>Where to stay in Berlin</strong><small>Compare neighbourhoods by traveller type.</small></span>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a class="related-link" data-cta-action="planner_opened" href="https://www.berlinwalk.com/berlin-trip-planner" target="_blank" rel="noopener">
+              <span class="related-number">02</span>
+              <span><strong>Berlin Trip Planner</strong><small>Turn the base into a realistic 1–7 day plan.</small></span>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a class="related-link" data-cta-action="tour_opened" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_blank" rel="noopener">
+              <span class="related-number">03</span>
+              <span><strong>Join my BerlinWalk</strong><small>Check the current World Clock meeting details.</small></span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+
+        <details class="methodology">
+          <summary>Why this score?</summary>
+          <div class="methodology-content">
+            <p id="method-summary">The total is the average of the selected priority subscores.</p>
+            <ul>
+              <li>Each signal uses an approximate distance to named, fixed planning anchors in Berlin.</li>
+              <li>BER connection is a geography signal plus proximity to major fixed transport anchors.</li>
+              <li>The map and address point are not a live journey planner. VBB is the source for today's route, disruptions and departure choices.</li>
+              <li>No hotel quality, service, price or neighbourhood safety claim is included.</li>
+            </ul>
+            <p class="source-line">Sources and checked date: <a href="./SOURCES.md" target="_blank" rel="noopener">read the tool notes</a>.</p>
+          </div>
+        </details>
+      </section>
+    </main>
+
+    <script src="../js/tool-event-bridge.js"></script>
+    <script src="../js/brand.js"></script>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

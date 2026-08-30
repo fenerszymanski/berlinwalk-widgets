@@ -1,0 +1,62 @@
+{
+  "datasetVersion": "berlinwalk-address-time-machine-traces-20260830a",
+  "checkedAt": "2026-08-30",
+  "coordinateSource": "Approximate pins reused from east-west-1989/data/landmarks.json; they are discovery points, not property boundaries.",
+  "traces": [
+    {
+      "id": "erna-berger-watchtower",
+      "title": "Erna-Berger-Straße watchtower",
+      "mapLabel": "Erna-Berger tower",
+      "lat": 52.5097,
+      "lon": 13.3784,
+      "traceKind": "preserved watchtower",
+      "todayText": "One of the last watchtowers of its type survives here and is protected as a listed monument.",
+      "sourceName": "Berlin State Monument Authority",
+      "sourceUrl": "https://www.berlin.de/landesdenkmalamt/denkmale/highlight-berliner-mauer/mauer-denkmale/wachturm-erna-berger-strasse-649745.en.php"
+    },
+    {
+      "id": "traenenpalast",
+      "title": "Tränenpalast at Friedrichstraße",
+      "mapLabel": "Tränenpalast",
+      "lat": 52.5202,
+      "lon": 13.3870,
+      "traceKind": "former border checkpoint museum",
+      "todayText": "The former Friedrichstraße border-crossing building now hosts the Tränenpalast permanent exhibition at the historic site.",
+      "sourceName": "Stiftung Haus der Geschichte",
+      "sourceUrl": "https://www.hdg.de/en/traenenpalast/permanent-exhibition/"
+    },
+    {
+      "id": "schlesischer-busch-command-post",
+      "title": "Schlesischer Busch command post",
+      "mapLabel": "Schlesischer Busch",
+      "lat": 52.4956,
+      "lon": 13.4536,
+      "traceKind": "preserved command post",
+      "todayText": "The former command post survives in Schlesischer Park; the tower and a nearby slab-wall section are documented as historic monuments.",
+      "sourceName": "Berlin State Monument Authority",
+      "sourceUrl": "https://www.berlin.de/landesdenkmalamt/denkmale/highlight-berliner-mauer/mauer-denkmale/fuehrungsstelle-schlesischer-busch-649766.en.php"
+    },
+    {
+      "id": "guenter-litfin-memorial",
+      "title": "Günter Litfin Memorial at Kieler Eck",
+      "mapLabel": "Günter Litfin memorial",
+      "lat": 52.5341,
+      "lon": 13.3531,
+      "traceKind": "preserved watchtower and memorial",
+      "todayText": "The preserved former command-post tower is home to a memorial for Günter Litfin, one of the first victims of the Berlin Wall.",
+      "sourceName": "Berlin.de",
+      "sourceUrl": "https://www.berlin.de/en/museums/6511570-3104050-gedenkstaette-guenter-litfin.en.html"
+    },
+    {
+      "id": "east-side-gallery",
+      "title": "East Side Gallery at Oberbaumbrücke",
+      "mapLabel": "East Side Gallery",
+      "lat": 52.5022,
+      "lon": 13.4453,
+      "traceKind": "preserved Wall section",
+      "todayText": "A long surviving section of the former Hinterlandmauer is known today as the East Side Gallery between Ostbahnhof and Oberbaumbrücke.",
+      "sourceName": "Berlin.de",
+      "sourceUrl": "https://www.berlin.de/en/attractions-and-sights/3561866-3104052-berlin-wall.en.html"
+    }
+  ]
+}

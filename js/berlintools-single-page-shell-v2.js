@@ -29,6 +29,13 @@
   ];
   var CATALOG_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/data.json';
   var ROUTE_RE = /^\/tools\/([^/]+)\/?$/i;
+  var TOOL_EVENT_SLUGS = [
+    'berlin-ticket-machine-simulator',
+    'berlin-address-time-machine',
+    'berlin-hotel-location-checker',
+    'berlin-dates-check',
+    'berlin-doner-price-index'
+  ];
   var state = {
     slug: '',
     record: null,
@@ -796,6 +803,13 @@
     var next = appendToolPageSurface(source);
     if (next && next !== source) iframe.setAttribute('src', next);
     iframe.setAttribute('data-bw-tool-page-surface', '1');
+    if (TOOL_EVENT_SLUGS.indexOf(state.slug) !== -1) {
+      iframe.setAttribute('data-bw-tool-frame', '1');
+      iframe.setAttribute('data-bw-tool-slug', state.slug);
+      if (window.BWToolEventHost && typeof window.BWToolEventHost.scanForToolFrames === 'function') {
+        window.BWToolEventHost.scanForToolFrames(widget);
+      }
+    }
     return true;
   }
 
@@ -981,6 +995,9 @@
     var source = iframe && iframe.getAttribute('src');
     if (!iframe || !hasShellAttribute(iframe, 'data-bw-tool-page-surface', '1') ||
         !/(?:\?|&)surface=tool-page(?:[&#]|$)/.test(source || '')) return false;
+    if (TOOL_EVENT_SLUGS.indexOf(state.slug) !== -1 &&
+        (!hasShellAttribute(iframe, 'data-bw-tool-frame', '1') ||
+         !hasShellAttribute(iframe, 'data-bw-tool-slug', state.slug))) return false;
 
     var entry = shellQuery(widget, '[data-bw-shell-v2-tool-entry]');
     var entryKicker = shellQuery(entry, '.bw-tools-shell-v2-tool-entry-kicker');

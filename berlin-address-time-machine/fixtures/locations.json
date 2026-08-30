@@ -1,0 +1,78 @@
+{
+  "east": {
+    "label": "Alexanderplatz",
+    "lat": 52.5219,
+    "lon": 13.4132
+  },
+  "west": {
+    "label": "Kaiser-Wilhelm-Gedächtniskirche",
+    "lat": 52.5051,
+    "lon": 13.3377
+  },
+  "nearBorder": {
+    "label": "Checkpoint Charlie",
+    "lat": 52.5076,
+    "lon": 13.3904
+  },
+  "splitDistrictChecks": {
+    "reichstagWest": {
+      "label": "Reichstag",
+      "lat": 52.5186,
+      "lon": 13.3762
+    },
+    "brandenburgGateEast": {
+      "label": "Brandenburg Gate",
+      "lat": 52.516275,
+      "lon": 13.377704
+    },
+    "friedrichshainEast": {
+      "label": "Friedrichshain",
+      "lat": 52.515,
+      "lon": 13.45
+    },
+    "kreuzbergWest": {
+      "label": "Kreuzberg",
+      "lat": 52.493,
+      "lon": 13.422
+    },
+    "gesundbrunnenWest": {
+      "label": "Gesundbrunnen",
+      "lat": 52.5485,
+      "lon": 13.389
+    }
+  },
+  "outside": {
+    "label": "Outside supported Berlin scope",
+    "lat": 52.52,
+    "lon": 14
+  },
+  "ambiguousCandidates": [
+    {
+      "street": "Invalidenstraße",
+      "houseNumber": "1",
+      "houseNumberSuffix": "",
+      "postcode": "10115",
+      "district": "Mitte",
+      "locality": "Berlin",
+      "lat": 52.5301,
+      "lon": 13.3786
+    },
+    {
+      "street": "Invalidenstraße",
+      "houseNumber": "2",
+      "houseNumberSuffix": "",
+      "postcode": "10115",
+      "district": "Mitte",
+      "locality": "Berlin",
+      "lat": 52.5302,
+      "lon": 13.3787
+    }
+  ],
+  "geolocationGrant": {
+    "coords": {
+      "latitude": 52.5097,
+      "longitude": 13.3784,
+      "accuracy": 20
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "manifestVersion": 1,
+  "toolSlug": "berlin-address-time-machine",
+  "status": "UNPUBLISHED_DRAFT",
+  "createdAt": "2026-08-30",
+  "writePerformed": false,
+  "collection": "BerlinTools",
+  "cmsItemId": null,
+  "cmsFields": {
+    "title": "Berlin Address Time Machine",
+    "slug": "berlin-address-time-machine",
+    "lead": "Place a Berlin address on the 1989 East/West map, estimate its distance from the former Wall, and find a documented trace you can still look for today.",
+    "category": "Maps",
+    "hubCategory": "CultureLandmarks",
+    "type": "Map",
+    "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-address-time-machine/",
+    "embedHeight": 1500,
+    "image": null,
+    "published": false,
+    "hidden": true
+  },
+  "localAssets": {
+    "icon512": "tools-home/icons/berlin-address-time-machine.png",
+    "icon160": "tools-home/icons/berlin-address-time-machine-160.png",
+    "iconManifest": [
+      "tools-home/icons/manifest.json",
+      "tools-home/icons/chatgpt-standard-2026-06-12/manifest.json"
+    ],
+    "sourceDirectory": "tools-home/icons/_src/berlin-address-time-machine-20260830/"
+  },
+  "writeGate": {
+    "remoteWriteAllowed": false,
+    "reason": "This feature branch is local and unpublished; no Wix or live integration was authorized for this task.",
+    "pending": [
+      "Deploy and read back the future berlin-location backend route.",
+      "Deploy and read back the widget on GitHub Pages.",
+      "Upload the canonical icon to Wix Media and replace cmsFields.image with the exact readback URL.",
+      "Obtain explicit action-time approval for the BerlinTools CMS write."
+    ]
+  },
+  "notes": [
+    "This file is a local dry-run manifest, not a Wix API payload receipt.",
+    "No Wix CMS item, Wix Media asset, backend deployment, Pages deployment or live-site write was created by this task."
+  ]
+}

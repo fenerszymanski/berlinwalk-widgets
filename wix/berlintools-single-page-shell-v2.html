@@ -38,6 +38,7 @@
     var base = 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@' + commit + '/';
     var cssHref = base + 'css/berlintools-single-page-shell-v2.css?commit=' + commit;
     var jsSrc = base + 'js/berlintools-single-page-shell-v2.js?commit=' + commit;
+    var eventBridgeSrc = base + 'js/tool-event-bridge-host.js?commit=' + commit;
 
     if (!document.querySelector('link[data-bw-shell-v2-css]')) {
       var link = document.createElement('link');
@@ -53,6 +54,14 @@
       script.async = false;
       script.setAttribute('data-bw-shell-v2-js', commit);
       document.head.appendChild(script);
+    }
+
+    if (!document.querySelector('script[data-bw-tool-event-host]')) {
+      var eventBridge = document.createElement('script');
+      eventBridge.src = eventBridgeSrc;
+      eventBridge.async = false;
+      eventBridge.setAttribute('data-bw-tool-event-host', commit);
+      document.head.appendChild(eventBridge);
     }
   })();
 </script>
