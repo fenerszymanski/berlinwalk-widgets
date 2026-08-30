@@ -1,19 +1,19 @@
 const BW_BLOG_HOME_DATA_URL = (() => {
   const script = document.currentScript;
   const base = script && script.src ? script.src : window.location.href;
-  return new URL('./data.json?v=20260829-featured-listings', base).href;
+  return new URL('./data.json?v=20260830-featured-listings', base).href;
 })();
 
 const BW_BLOG_HOME_FALLBACK = {
   featured: {
-    title: 'Two of Everything in Berlin: The East and West Twins and Which One to Visit',
-    url: 'https://www.berlinwalk.com/post/two-of-everything-in-berlin',
-    category: 'Berlin History',
-    readTime: '7 min read',
-    label: 'New: choose the right twin',
-    summary: 'Berlin was two cities for forty years and each half built the things a capital is supposed to have. Nobody demolished the spares, so today there are two zoos, two opera houses, two concert halls, two planetariums, two state library buildings, two city halls and two universities on opposite sides of a border you cannot see. Here is why, which twin is actually worth the trip, which pairs the reunified city has already settled, and how to group a day so you are not crossing Berlin twice.',
-    image: 'https://static.wixstatic.com/media/5a08a3_53ed55c120044ed9a348445802f46101~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-funkturm-fernsehturm-skyline.jpg',
-    alt: 'The Funkturm above the Berlin exhibition grounds with the Fernsehturm on the distant skyline'
+    title: 'Last Admission in Berlin: How Late You Can Still Get In',
+    url: 'https://www.berlinwalk.com/post/last-admission-berlin',
+    category: 'Tourist Tips',
+    readTime: '8 min read',
+    label: 'New: check last admission',
+    summary: 'Closing time is not entry time. The Berliner Dom stops letting people in an hour early, the Altes and Bode shut at 17:00 on weekdays, and the state museums publish no cutoff at all. What is still open, and when to give up.',
+    image: 'https://static.wixstatic.com/media/5a08a3_3020f7a662ff4ce1af7bb70f189ba188~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-museum-island-sunset.jpg',
+    alt: 'The Alte Nationalgalerie and the dome of the Berliner Dom seen across the Spree in warm sunset light'
   },
   miniPosts: [
     {
@@ -44,13 +44,13 @@ const BW_BLOG_HOME_FALLBACK = {
       alt: 'The old Tempelhof runway at dusk, its painted centre line running towards a low orange horizon'
     },
     {
-      title: 'The Most Beautiful U-Bahn Stations in Berlin: Which Ones Are Worth Getting Off At',
-      url: 'https://www.berlinwalk.com/post/beautiful-u-bahn-stations-berlin',
-      category: 'Tourist Tips',
-      readTime: '8 min read',
-      summary: 'Berlin built beautiful underground stations in three short bursts: 1913, the early 1980s and again in 2020. Three of the best sit within four minutes of Alexanderplatz, one hides tiles from the Ishtar Gate project, and the most colourful run is a 48 minute ride out to Spandau. Here is which ones are worth getting off at, what to look at on each platform, and how much riding time the trip really costs.',
-      image: 'https://static.wixstatic.com/media/5a08a3_7462992e3403473786a6c027d44b59fe~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/museumsinsel-vault.jpg',
-      alt: 'The deep blue starry vault of Museumsinsel U-Bahn station with a yellow U5 train at the platform'
+      title: 'Two of Everything in Berlin: The East and West Twins and Which One to Visit',
+      url: 'https://www.berlinwalk.com/post/two-of-everything-in-berlin',
+      category: 'Berlin History',
+      readTime: '7 min read',
+      summary: 'Berlin was two cities for forty years and each half built the things a capital is supposed to have. Nobody demolished the spares, so today there are two zoos, two opera houses, two concert halls, two planetariums, two state library buildings, two city halls and two universities on opposite sides of a border you cannot see. Here is why, which twin is actually worth the trip, which pairs the reunified city has already settled, and how to group a day so you are not crossing Berlin twice.',
+      image: 'https://static.wixstatic.com/media/5a08a3_53ed55c120044ed9a348445802f46101~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-funkturm-fernsehturm-skyline.jpg',
+      alt: 'The Funkturm above the Berlin exhibition grounds with the Fernsehturm on the distant skyline'
     }
   ],
   posts: [
