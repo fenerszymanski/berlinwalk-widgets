@@ -9571,6 +9571,36 @@
       "hasVisualLayer": true,
       "flatChipCard": false,
       "pageErrors": []
+    },
+    "berlin-water-access-map": {
+      "slug": "berlin-water-access-map",
+      "addedAt": "2026-08-30",
+      "measuredBy": "rendered",
+      "signals": {
+        "svgShapeNodes": 26,
+        "svgCount": 1,
+        "canvas": 0,
+        "contentImages": 0,
+        "mapLibrary": false,
+        "range": 0,
+        "dateInput": 0,
+        "radio": 0,
+        "checkbox": 0,
+        "select": 0,
+        "textInput": 0,
+        "buttons": 3,
+        "ariaPressed": 0,
+        "tables": 0,
+        "details": 0,
+        "textLength": 2199
+      },
+      "inputModel": "button-pick",
+      "stateProgression": "replace-on-pick",
+      "outputModel": "plotted-position",
+      "visualGrammar": "geographic-map",
+      "hasVisualLayer": true,
+      "flatChipCard": false,
+      "pageErrors": []
     }
   }
 }

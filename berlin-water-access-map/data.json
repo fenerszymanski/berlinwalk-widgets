@@ -1,0 +1,796 @@
+{
+ "checkedOn": "2026-08-30",
+ "mapNote": "Waterway lines are drawn from OpenStreetMap data.",
+ "segments": [
+  {
+   "id": "spree-mitte",
+   "name": "Spree through Mitte",
+   "water": "Kanzleramtssteg to Oberbaumbruecke",
+   "coords": [
+    [
+     52.5216,
+     13.3685
+    ],
+    [
+     52.5229,
+     13.3735
+    ],
+    [
+     52.5218,
+     13.3759
+    ],
+    [
+     52.5198,
+     13.3771
+    ],
+    [
+     52.5192,
+     13.3796
+    ],
+    [
+     52.5223,
+     13.3892
+    ],
+    [
+     52.5214,
+     13.3991
+    ],
+    [
+     52.5162,
+     13.4051
+    ],
+    [
+     52.515,
+     13.4078
+    ],
+    [
+     52.5162,
+     13.4051
+    ],
+    [
+     52.5149,
+     13.4064
+    ],
+    [
+     52.5142,
+     13.4182
+    ],
+    [
+     52.502,
+     13.4451
+    ]
+   ],
+   "width": 3,
+   "rules": {
+    "paddle": [
+     "no",
+     "Closed to kayaks and SUP boards all year. The stretch past the Reichstag, Museum Island and Nikolaiviertel is reserved for licensed traffic."
+    ],
+    "motor": [
+     "no",
+     "Closed to licence-free boats. Only skippers with a German sport boat licence and at least 15 hp may enter."
+    ],
+    "cruise": [
+     "yes",
+     "The classic one-hour city cruise covers exactly this stretch. This is the only way most visitors see Museum Island from the water."
+    ]
+   }
+  },
+  {
+   "id": "spreekanal",
+   "name": "Spreekanal",
+   "water": "Side canal around Museum Island",
+   "coords": [
+    [
+     52.5142,
+     13.4127
+    ],
+    [
+     52.5118,
+     13.4067
+    ],
+    [
+     52.5116,
+     13.4037
+    ],
+    [
+     52.5193,
+     13.3974
+    ],
+    [
+     52.5224,
+     13.393
+    ]
+   ],
+   "width": 2,
+   "rules": {
+    "paddle": [
+     "no",
+     "Part of the closed Mitte zone."
+    ],
+    "motor": [
+     "no",
+     "Part of the closed Mitte zone."
+    ],
+    "cruise": [
+     "caution",
+     "Only some sightseeing routes use this narrow arm."
+    ]
+   }
+  },
+  {
+   "id": "spree-moabit",
+   "name": "Spree at Moabit",
+   "water": "Lessingbruecke to Kanzleramtssteg",
+   "coords": [
+    [
+     52.5227,
+     13.3412
+    ],
+    [
+     52.5224,
+     13.3465
+    ],
+    [
+     52.5173,
+     13.3565
+    ],
+    [
+     52.5216,
+     13.3685
+    ]
+   ],
+   "width": 3,
+   "rules": {
+    "paddle": [
+     "caution",
+     "Paddling is allowed only between 9:00 and 19:00 on this short stretch."
+    ],
+    "motor": [
+     "no",
+     "A seasonal VHF radio rule and rental-contract area limits keep rental boats out of this stretch."
+    ],
+    "cruise": [
+     "yes",
+     "Cruises pass here on the way to the government district."
+    ]
+   }
+  },
+  {
+   "id": "spree-west",
+   "name": "Spree, Charlottenburg to Spandau",
+   "water": "West of Lessingbruecke",
+   "coords": [
+    [
+     52.5356,
+     13.2073
+    ],
+    [
+     52.5365,
+     13.2138
+    ],
+    [
+     52.5343,
+     13.2316
+    ],
+    [
+     52.5331,
+     13.2374
+    ],
+    [
+     52.5275,
+     13.2516
+    ],
+    [
+     52.5302,
+     13.281
+    ],
+    [
+     52.5292,
+     13.285
+    ],
+    [
+     52.5307,
+     13.2933
+    ],
+    [
+     52.5286,
+     13.2958
+    ],
+    [
+     52.5223,
+     13.2981
+    ],
+    [
+     52.5206,
+     13.3066
+    ],
+    [
+     52.5201,
+     13.3162
+    ],
+    [
+     52.5215,
+     13.3182
+    ],
+    [
+     52.524,
+     13.3194
+    ],
+    [
+     52.5249,
+     13.3243
+    ],
+    [
+     52.5224,
+     13.3293
+    ],
+    [
+     52.5184,
+     13.3298
+    ],
+    [
+     52.5169,
+     13.3327
+    ],
+    [
+     52.5175,
+     13.3354
+    ],
+    [
+     52.5227,
+     13.3412
+    ]
+   ],
+   "width": 3,
+   "rules": {
+    "paddle": [
+     "yes",
+     "Open water. Keep right and give barges room."
+    ],
+    "motor": [
+     "yes",
+     "Legal for licence-free boats, but the eastern rental bases do not reach this far."
+    ],
+    "cruise": [
+     "caution",
+     "Only longer round trips come this far west."
+    ]
+   }
+  },
+  {
+   "id": "spree-east",
+   "name": "Spree, Friedrichshain to Koepenick",
+   "water": "Oberbaumbruecke to Koepenick, with Rummelsburger Bucht",
+   "coords": [
+    [
+     52.502,
+     13.4451
+    ],
+    [
+     52.4904,
+     13.4775
+    ],
+    [
+     52.4904,
+     13.4775
+    ],
+    [
+     52.4882,
+     13.4814
+    ],
+    [
+     52.4887,
+     13.4892
+    ],
+    [
+     52.4872,
+     13.4928
+    ],
+    [
+     52.4856,
+     13.4944
+    ],
+    [
+     52.4807,
+     13.4963
+    ],
+    [
+     52.4734,
+     13.4958
+    ],
+    [
+     52.4642,
+     13.5031
+    ],
+    [
+     52.459,
+     13.5147
+    ],
+    [
+     52.4581,
+     13.5197
+    ],
+    [
+     52.4544,
+     13.524
+    ],
+    [
+     52.4534,
+     13.5295
+    ],
+    [
+     52.4563,
+     13.5393
+    ],
+    [
+     52.4537,
+     13.5561
+    ],
+    [
+     52.4542,
+     13.5639
+    ],
+    [
+     52.4531,
+     13.5661
+    ],
+    [
+     52.4498,
+     13.569
+    ],
+    [
+     52.4482,
+     13.5729
+    ],
+    [
+     52.4475,
+     13.5806
+    ],
+    [
+     52.4465,
+     13.5827
+    ],
+    [
+     52.4494,
+     13.5891
+    ],
+    [
+     52.4495,
+     13.6008
+    ],
+    [
+     52.4442,
+     13.618
+    ],
+    [
+     52.4449,
+     13.6246
+    ],
+    [
+     52.4436,
+     13.6266
+    ]
+   ],
+   "width": 3,
+   "rules": {
+    "paddle": [
+     "yes",
+     "The classic visitor paddle. From Rummelsburger Bucht or Treptower Park you can go up to the Oberbaumbruecke, but not past it."
+    ],
+    "motor": [
+     "yes",
+     "Licence-free boats from the Koepenick bases use this stretch. Turn back before the Oberbaumbruecke."
+    ],
+    "cruise": [
+     "caution",
+     "Seasonal east lines only."
+    ]
+   }
+  },
+  {
+   "id": "landwehrkanal",
+   "name": "Landwehrkanal",
+   "water": "Charlottenburg to Kreuzberg",
+   "coords": [
+    [
+     52.4978,
+     13.4491
+    ],
+    [
+     52.497,
+     13.4481
+    ],
+    [
+     52.4997,
+     13.4516
+    ],
+    [
+     52.4914,
+     13.4409
+    ],
+    [
+     52.4906,
+     13.4382
+    ],
+    [
+     52.496,
+     13.4204
+    ],
+    [
+     52.4953,
+     13.4129
+    ],
+    [
+     52.4978,
+     13.3964
+    ],
+    [
+     52.4976,
+     13.3905
+    ],
+    [
+     52.4991,
+     13.3798
+    ],
+    [
+     52.5057,
+     13.3699
+    ],
+    [
+     52.5067,
+     13.3574
+    ],
+    [
+     52.5058,
+     13.3521
+    ],
+    [
+     52.5124,
+     13.3318
+    ],
+    [
+     52.5165,
+     13.3263
+    ],
+    [
+     52.5206,
+     13.3173
+    ]
+   ],
+   "width": 2,
+   "rules": {
+    "paddle": [
+     "yes",
+     "Open to kayaks and SUP boards in both directions, speed capped at 6 km/h. Berlin’s calmest city paddle."
+    ],
+    "motor": [
+     "no",
+     "One-way limits and the 5 hp cap keep rental motorboats off the canal."
+    ],
+    "cruise": [
+     "caution",
+     "Only the longer bridge cruises route through the canal."
+    ]
+   }
+  },
+  {
+   "id": "spandauer-kanal",
+   "name": "Spandauer Schifffahrtskanal",
+   "water": "Westhafen to the Spree mouth",
+   "coords": [
+    [
+     52.5409,
+     13.328
+    ],
+    [
+     52.5408,
+     13.3341
+    ],
+    [
+     52.5386,
+     13.3458
+    ],
+    [
+     52.5393,
+     13.3538
+    ],
+    [
+     52.5382,
+     13.3588
+    ],
+    [
+     52.5363,
+     13.3655
+    ],
+    [
+     52.528,
+     13.3737
+    ],
+    [
+     52.5267,
+     13.3739
+    ],
+    [
+     52.5256,
+     13.3722
+    ],
+    [
+     52.5231,
+     13.3722
+    ]
+   ],
+   "width": 2,
+   "rules": {
+    "paddle": [
+     "no",
+     "Sport boats are banned between Westhafen and the mouth into the Spree."
+    ],
+    "motor": [
+     "no",
+     "Sport boats are banned between Westhafen and the mouth into the Spree."
+    ],
+    "cruise": [
+     "no",
+     "No passenger line uses this canal."
+    ]
+   }
+  },
+  {
+   "id": "dahme",
+   "name": "Dahme",
+   "water": "Koepenick to Schmoeckwitz",
+   "coords": [
+    [
+     52.3715,
+     13.6475
+    ],
+    [
+     52.3726,
+     13.6509
+    ],
+    [
+     52.3768,
+     13.6553
+    ],
+    [
+     52.3786,
+     13.6589
+    ],
+    [
+     52.3853,
+     13.6459
+    ],
+    [
+     52.3912,
+     13.6452
+    ],
+    [
+     52.3948,
+     13.6428
+    ],
+    [
+     52.403,
+     13.6283
+    ],
+    [
+     52.4074,
+     13.6262
+    ],
+    [
+     52.4088,
+     13.6244
+    ],
+    [
+     52.4146,
+     13.5859
+    ],
+    [
+     52.4163,
+     13.5847
+    ],
+    [
+     52.4198,
+     13.5844
+    ],
+    [
+     52.4254,
+     13.5811
+    ],
+    [
+     52.4284,
+     13.5757
+    ],
+    [
+     52.4324,
+     13.5741
+    ],
+    [
+     52.4372,
+     13.5764
+    ],
+    [
+     52.442,
+     13.5714
+    ],
+    [
+     52.4482,
+     13.5729
+    ]
+   ],
+   "width": 3,
+   "rules": {
+    "paddle": [
+     "yes",
+     "Quiet wide water with wooded banks."
+    ],
+    "motor": [
+     "yes",
+     "The heart of licence-free boating. The 15 hp day boats from Wendenschloss and Gruenau run here."
+    ],
+    "cruise": [
+     "caution",
+     "Seasonal excursion boats only."
+    ]
+   }
+  },
+  {
+   "id": "mueggelsee",
+   "name": "Mueggelsee",
+   "water": "Berlin’s largest lake",
+   "coords": [
+    [
+     52.427,
+     13.6305
+    ],
+    [
+     52.4297,
+     13.6222
+    ],
+    [
+     52.4357,
+     13.6205
+    ],
+    [
+     52.4442,
+     13.6251
+    ],
+    [
+     52.4467,
+     13.6332
+    ],
+    [
+     52.4486,
+     13.6524
+    ],
+    [
+     52.446,
+     13.6727
+    ],
+    [
+     52.4443,
+     13.6758
+    ],
+    [
+     52.4371,
+     13.6793
+    ],
+    [
+     52.4332,
+     13.6773
+    ],
+    [
+     52.4308,
+     13.6608
+    ],
+    [
+     52.425,
+     13.6496
+    ],
+    [
+     52.4276,
+     13.6363
+    ],
+    [
+     52.427,
+     13.6305
+    ]
+   ],
+   "width": 0,
+   "polygon": true,
+   "rules": {
+    "paddle": [
+     "caution",
+     "Open to paddlers, but wind builds real waves on 7.4 square kilometres. Stay near the shore."
+    ],
+    "motor": [
+     "yes",
+     "Open water for licence-free boats. Crossing takes under an hour at rental speed."
+    ],
+    "cruise": [
+     "caution",
+     "Seasonal excursion boats only."
+    ]
+   }
+  }
+ ],
+ "bases": [
+  {
+   "id": "kanuliebe",
+   "name": "Kayak & SUP, Insel der Jugend",
+   "lat": 52.4873,
+   "lon": 13.4808,
+   "crafts": [
+    "paddle"
+   ],
+   "line": "Kayaks and SUP boards from 15 EUR per hour, in Treptower Park"
+  },
+  {
+   "id": "ahoi-ostkreuz",
+   "name": "Kayak & SUP, Rummelsburger Bucht",
+   "lat": 52.4993,
+   "lon": 13.4764,
+   "crafts": [
+    "paddle"
+   ],
+   "line": "Walk-in kayak and SUP rental at the Paul-und-Paula-Ufer"
+  },
+  {
+   "id": "flotte-dahme",
+   "name": "15 hp boats, Wendenschloss",
+   "lat": 52.4152,
+   "lon": 13.5996,
+   "crafts": [
+    "motor"
+   ],
+   "line": "Licence-free day boats on the Dahme, briefing on site"
+  },
+  {
+   "id": "pier-friedrichstrasse",
+   "name": "Cruise pier, Friedrichstraße",
+   "lat": 52.5209,
+   "lon": 13.387,
+   "crafts": [
+    "cruise"
+   ],
+   "line": "One-hour city cruises leave from the Reichstagufer"
+  },
+  {
+   "id": "pier-nikolaiviertel",
+   "name": "Cruise pier, Nikolaiviertel",
+   "lat": 52.5213,
+   "lon": 13.4009,
+   "crafts": [
+    "cruise"
+   ],
+   "line": "Departures at Burgstraße, opposite the Berlin Cathedral"
+  }
+ ],
+ "landmarks": [
+  {
+   "name": "TV Tower",
+   "lat": 52.5208,
+   "lon": 13.4094
+  },
+  {
+   "name": "Reichstag",
+   "lat": 52.5186,
+   "lon": 13.3762
+  },
+  {
+   "name": "Oberbaumbruecke",
+   "lat": 52.5019,
+   "lon": 13.4453
+  },
+  {
+   "name": "Treptower Park",
+   "lat": 52.4886,
+   "lon": 13.47
+  },
+  {
+   "name": "Koepenick",
+   "lat": 52.4426,
+   "lon": 13.5717
+  }
+ ]
+}

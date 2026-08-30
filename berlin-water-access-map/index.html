@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Water Access Map</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #FAFAF5;
+    color: #212121;
+    padding: 14px 12px 8px;
+  }
+  .wam-head h2 {
+    font-size: 1.16rem;
+    color: #1B5E20;
+    line-height: 1.3;
+  }
+  .wam-head p {
+    font-size: 0.83rem;
+    color: #4a5548;
+    margin-top: 4px;
+    line-height: 1.45;
+  }
+  .wam-tabs {
+    display: flex;
+    gap: 6px;
+    margin: 12px 0 10px;
+  }
+  .wam-tab {
+    flex: 1 1 0;
+    border: 2px solid #1B5E20;
+    background: #fff;
+    color: #1B5E20;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 0.8rem;
+    line-height: 1.2;
+    padding: 8px 4px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .wam-tab[aria-selected="true"] {
+    background: #1B5E20;
+    color: #FFE600;
+  }
+  .wam-map-wrap {
+    background: #EDF2E6;
+    border: 1px solid #d7e0cf;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .wam-map-wrap svg { display: block; width: 100%; height: auto; }
+  .wam-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 0.72rem;
+    color: #4a5548;
+    margin: 8px 2px 2px;
+  }
+  .wam-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .wam-key {
+    display: inline-block;
+    width: 18px;
+    height: 5px;
+    border-radius: 3px;
+  }
+  .wam-key.ok { background: #2E7D32; }
+  .wam-key.cau { background: #C77800; }
+  .wam-key.no { background: #C62828; }
+  .wam-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2.5px solid #1B5E20;
+  }
+  .wam-panel { margin-top: 10px; }
+  .wam-verdict {
+    font-size: 0.86rem;
+    line-height: 1.5;
+    background: #1B5E20;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+  }
+  .wam-rule {
+    display: flex;
+    gap: 9px;
+    padding: 8px 10px;
+    border-bottom: 1px solid #e4e9de;
+    font-size: 0.8rem;
+    line-height: 1.45;
+  }
+  .wam-rule:last-child { border-bottom: none; }
+  .wam-flag {
+    flex: 0 0 auto;
+    font-weight: 800;
+    font-size: 0.66rem;
+    letter-spacing: 0.04em;
+    padding: 2px 7px;
+    border-radius: 999px;
+    height: fit-content;
+    margin-top: 2px;
+  }
+  .wam-flag.ok  { background: #dcefdc; color: #1B5E20; }
+  .wam-flag.cau { background: #ffe9c7; color: #7a4a00; }
+  .wam-flag.no  { background: #fbdada; color: #9c1f1f; }
+  .wam-rule b { color: #1B5E20; }
+  .wam-rules-list {
+    background: #fff;
+    border: 1px solid #e4e9de;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .wam-bases { margin-top: 8px; }
+  .wam-base-line {
+    font-size: 0.78rem;
+    line-height: 1.45;
+    padding: 6px 10px;
+    background: #F3F7EE;
+    border-left: 4px solid #7CB342;
+    border-radius: 6px;
+    margin-bottom: 5px;
+  }
+  .wam-foot {
+    font-size: 0.67rem;
+    color: #8a948a;
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+  @media (max-width: 430px) {
+    .wam-tab { font-size: 0.72rem; padding: 7px 3px; }
+  }
+</style>
+</head>
+<body>
+  <div class="wam-head">
+    <h2>Berlin Water Access Map</h2>
+    <p>Pick how you want to be on the water. The map shows where that craft may actually go under Berlin's waterway rules, and where the rental bases sit.</p>
+  </div>
+  <div class="wam-tabs" role="tablist" aria-label="Choose your craft" id="wamTabs"></div>
+  <div class="wam-map-wrap"><svg id="wamSvg" viewBox="0 0 1000 600" role="img" aria-label="Map of Berlin waterways colored by access rules"></svg></div>
+  <div class="wam-legend">
+    <span><i class="wam-key ok"></i>open for this craft</span>
+    <span><i class="wam-key cau"></i>restricted</span>
+    <span><i class="wam-key no"></i>closed</span>
+    <span><i class="wam-dot"></i>rental base / pier</span>
+  </div>
+  <div class="wam-panel">
+    <div class="wam-verdict" id="wamVerdict"></div>
+    <div class="wam-rules-list" id="wamRules"></div>
+    <div class="wam-bases" id="wamBases"></div>
+  </div>
+  <p class="wam-foot">Rules per Wasserschutzpolizei Berlin, checked on 30 August 2026. Map lines from OpenStreetMap contributors (ODbL). This is orientation, not legal advice: the water police and the rental briefing have the final word.</p>
+
+  <script>
+  (function () {
+    'use strict';
+    var CRAFTS = [
+      { id: 'paddle', label: 'Kayak & SUP', verdict: 'Paddle east and on the Landwehrkanal. The showpiece stretch through Mitte is closed to you, which is why paddlers meet the city at the Oberbaumbruecke and in Treptower Park instead.' },
+      { id: 'motor', label: 'Rental boat, no licence', verdict: 'Licence-free 15 hp boats live in the southeast: Koepenick, the Dahme and the Mueggelsee. No rental boat may pass the Oberbaumbruecke toward Museum Island.' },
+      { id: 'cruise', label: 'Sightseeing cruise', verdict: 'The guided cruise is the one craft allowed through Mitte. If you want the Reichstag and Museum Island from the water, this is the way it happens.' }
+    ];
+    var COLORS = { yes: '#2E7D32', caution: '#C77800', no: '#C62828' };
+    var FLAG = { yes: ['ok', 'OPEN'], caution: ['cau', 'LIMITED'], no: ['no', 'CLOSED'] };
+    var state = { craft: 'paddle', data: null };
+
+    var LON0 = 13.185, LON1 = 13.710, LAT0 = 52.368, LAT1 = 52.552;
+    var K = Math.cos(52.46 * Math.PI / 180);
+    var W = 1000, H = 600, PAD = 26;
+    function px(p) {
+      var x = PAD + (p[1] - LON0) / (LON1 - LON0) * (W - 2 * PAD);
+      var y = PAD + (LAT1 - p[0]) / (LAT1 - LAT0) * (H - 2 * PAD) * ((LAT1 - LAT0) / ((LON1 - LON0) * K)) * (W - 2 * PAD) / (H - 2 * PAD);
+      return [x, y];
+    }
+    function path(coords) {
+      var d = '';
+      for (var i = 0; i < coords.length; i++) {
+        var q = px(coords[i]);
+        d += (i ? 'L' : 'M') + q[0].toFixed(1) + ' ' + q[1].toFixed(1);
+      }
+      return d;
+    }
+    function esc(t) { return t.split('&').join('&amp;').split('<').join('&lt;'); }
+
+    function drawMap(d) {
+      var svg = ['<rect x="0" y="0" width="' + W + '" height="' + H + '" fill="#EDF2E6"/>'];
+      var i, s, q;
+      for (i = 0; i < d.segments.length; i++) {
+        s = d.segments[i];
+        if (s.polygon) {
+          svg = svg.concat(['<path id="seg-' + s.id + '" d="' + path(s.coords) + 'Z" fill="#2E7D32" fill-opacity="0.3" stroke="#2E7D32" stroke-width="2.5"/>']);
+        } else {
+          svg = svg.concat(['<path id="seg-' + s.id + '" d="' + path(s.coords) + '" fill="none" stroke="#2E7D32" stroke-width="' + (s.width * 2.2) + '" stroke-linecap="round" stroke-linejoin="round"/>']);
+        }
+      }
+      for (i = 0; i < d.landmarks.length; i++) {
+        s = d.landmarks[i]; q = px([s.lat, s.lon]);
+        var anchorEnd = s.name === 'Treptower Park' || s.name === 'Reichstag';
+        var dy = s.name === 'Treptower Park' ? 16 : s.name === 'Reichstag' ? -9 : 4;
+        svg = svg.concat([
+          '<circle cx="' + q[0].toFixed(1) + '" cy="' + q[1].toFixed(1) + '" r="4" fill="#212121"/>',
+          '<text x="' + (anchorEnd ? q[0] - 8 : q[0] + 8).toFixed(1) + '" y="' + (q[1] + dy).toFixed(1) + '" font-size="17" font-weight="600" fill="#39423a" font-family="Montserrat, sans-serif"' + (anchorEnd ? ' text-anchor="end"' : '') + '>' + esc(s.name) + '</text>'
+        ]);
+      }
+      for (i = 0; i < d.bases.length; i++) {
+        s = d.bases[i]; q = px([s.lat, s.lon]);
+        svg = svg.concat([
+          '<g id="base-' + s.id + '"><circle cx="' + q[0].toFixed(1) + '" cy="' + q[1].toFixed(1) + '" r="8" fill="#fff" stroke="#1B5E20" stroke-width="4"/></g>'
+        ]);
+      }
+      var lbl = px([52.4335, 13.6485]);
+      svg = svg.concat(['<text x="' + lbl[0].toFixed(1) + '" y="' + lbl[1].toFixed(1) + '" font-size="17" font-style="italic" fill="#41573f" text-anchor="middle" font-family="Montserrat, sans-serif">Mueggelsee</text>']);
+      document.getElementById('wamSvg').innerHTML = svg.join('');
+    }
+
+    function apply() {
+      var d = state.data, craft = state.craft, i, s, el, rule;
+      for (i = 0; i < d.segments.length; i++) {
+        s = d.segments[i];
+        el = document.getElementById('seg-' + s.id);
+        rule = s.rules[craft][0];
+        var c = COLORS[rule === 'yes' ? 'yes' : rule === 'caution' ? 'caution' : 'no'];
+        el.setAttribute('stroke', c);
+        if (s.polygon) el.setAttribute('fill', c);
+        el.setAttribute('stroke-dasharray', rule === 'no' ? '10 7' : 'none');
+        el.setAttribute('stroke-opacity', rule === 'no' ? '0.75' : '1');
+      }
+      for (i = 0; i < d.bases.length; i++) {
+        s = d.bases[i];
+        document.getElementById('base-' + s.id).setAttribute('display', s.crafts.indexOf(craft) >= 0 ? 'inline' : 'none');
+      }
+      var cdef = null;
+      for (i = 0; i < CRAFTS.length; i++) if (CRAFTS[i].id === craft) cdef = CRAFTS[i];
+      document.getElementById('wamVerdict').textContent = cdef.verdict;
+      var rows = [];
+      for (i = 0; i < d.segments.length; i++) {
+        s = d.segments[i]; rule = s.rules[craft];
+        var f = FLAG[rule[0] === 'yes' ? 'yes' : rule[0] === 'caution' ? 'caution' : 'no'];
+        rows = rows.concat(['<div class="wam-rule"><span class="wam-flag ' + f[0] + '">' + f[1] + '</span><span><b>' + esc(s.name) + '</b> (' + esc(s.water) + '): ' + esc(rule[1]) + '</span></div>']);
+      }
+      document.getElementById('wamRules').innerHTML = rows.join('');
+      var bl = [];
+      for (i = 0; i < d.bases.length; i++) {
+        s = d.bases[i];
+        if (s.crafts.indexOf(craft) >= 0) bl = bl.concat(['<div class="wam-base-line"><b>' + esc(s.name) + '.</b> ' + esc(s.line) + '.</div>']);
+      }
+      document.getElementById('wamBases').innerHTML = bl.join('');
+      var tabs = document.getElementById('wamTabs').children;
+      for (i = 0; i < tabs.length; i++) {
+        tabs[i].setAttribute('aria-selected', tabs[i].getAttribute('data-craft') === craft ? 'true' : 'false');
+      }
+      if (window.__bwRequestEmbedResize) window.__bwRequestEmbedResize();
+    }
+
+    function buildTabs() {
+      var html = [];
+      for (var i = 0; i < CRAFTS.length; i++) {
+        html = html.concat(['<button class="wam-tab" role="tab" data-craft="' + CRAFTS[i].id + '" aria-selected="false">' + CRAFTS[i].label + '</button>']);
+      }
+      var wrap = document.getElementById('wamTabs');
+      wrap.innerHTML = html.join('');
+      wrap.onclick = function (ev) {
+        var b = ev.target.closest('.wam-tab');
+        if (!b) return;
+        state.craft = b.getAttribute('data-craft');
+        apply();
+      };
+    }
+
+    fetch('data.json').then(function (r) { return r.json(); }).then(function (d) {
+      state.data = d;
+      buildTabs();
+      drawMap(d);
+      apply();
+    });
+  })();
+  </script>
+  <script src="../js/brand.js"></script>
+</body>
+</html>
