@@ -438,11 +438,14 @@ function renderResult(result) {
     traceDistance.textContent = `${formatDistance(result.nearestTrace.distanceMeters)} from your point`;
     tracePanel.append(traceContent, traceDistance);
   } else {
+    tracePanel.classList.add('batm-trace--empty');
+    const traceContent = document.createElement('div');
     const traceTitle = document.createElement('h3');
-    traceTitle.textContent = 'No nearby verified trace in this draft';
+    traceTitle.textContent = 'No documented trace close to this point';
     const traceText = document.createElement('p');
     traceText.textContent = 'I only show present-day traces with an institutional source and a nearby approximate pin. This result is not close enough to one of those documented points.';
-    tracePanel.append(traceTitle, traceText);
+    traceContent.append(traceTitle, traceText);
+    tracePanel.appendChild(traceContent);
   }
   elements.result.appendChild(tracePanel);
 }

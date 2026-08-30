@@ -6,6 +6,7 @@
     <meta name="description" content="Check whether a Berlin hotel location fits your sightseeing, transport, BER, nightlife and BerlinWalk meeting-point priorities.">
     <title>Berlin Hotel Location Checker | BerlinWalk</title>
     <link rel="stylesheet" href="../css/brand.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha384-c6Rcwz4e4CITMbu/NBmnNS8yN2sC3cUElMEMfP3vqqKFp7GOYaaBBCqmaWBjmkjb" crossorigin="anonymous">
     <link rel="stylesheet" href="./styles.css">
     <link rel="icon" type="image/png" href="../tools-home/icons/berlin-hotel-location-checker-160.png">
   </head>
@@ -59,41 +60,23 @@
         <div class="map-heading">
           <div>
             <h3>Or choose a map point</h3>
-            <p>Click a named area or anywhere inside the schematic map. The point is approximate.</p>
+            <p>Use the real Berlin map, or jump to one of the six fixed planning anchors.</p>
           </div>
-          <span class="map-note">Fixed planning anchors</span>
+          <span class="map-note">OpenStreetMap basemap</span>
         </div>
         <div class="map-card">
-          <svg id="berlin-map" class="berlin-map" viewBox="0 0 680 440" role="group" aria-labelledby="map-title map-description">
-            <title id="map-title">Schematic Berlin planning map</title>
-            <desc id="map-description">A simplified map showing the city centre, west, nightlife areas, south, BER and north. Choose a point with the mouse, touch or keyboard.</desc>
-            <rect class="map-background" x="0" y="0" width="680" height="440" rx="24"></rect>
-            <g class="map-grid" aria-hidden="true"></g>
-            <path class="map-ring" d="M157 115 C260 42 492 72 564 190 C615 275 532 381 365 389 C198 397 98 317 111 210 C116 169 132 137 157 115Z" aria-hidden="true"></path>
-            <path class="map-spree" d="M47 198 C130 184 174 236 247 223 C322 210 367 151 435 168 C497 184 521 238 632 218" aria-hidden="true"></path>
-            <path class="map-spree-secondary" d="M222 29 C244 98 234 151 267 210 C299 268 284 320 318 416" aria-hidden="true"></path>
-            <g id="map-place-labels" class="map-place-labels" aria-hidden="true"></g>
-            <g id="map-places"></g>
-            <g id="map-selection" class="map-selection" hidden aria-hidden="true">
-              <circle class="selection-halo" cx="0" cy="0" r="21"></circle>
-              <path class="selection-pin" d="M0 -17 C-10 -17 -17 -10 -17 -1 C-17 10 0 25 0 25 C0 25 17 10 17 -1 C17 -10 10 -17 0 -17Z"></path>
-              <circle class="selection-dot" cx="0" cy="-1" r="5"></circle>
-            </g>
-            <g class="map-labels" aria-hidden="true">
-              <text x="324" y="210">central Berlin</text>
-              <text x="75" y="357">west</text>
-              <text x="523" y="350">southeast</text>
-              <text x="500" y="64">north</text>
-              <text x="74" y="60">approximate map · not a live route</text>
-            </g>
-          </svg>
+          <div id="berlin-map" class="berlin-map" role="application" aria-label="Interactive map of Berlin with fixed planning anchors. Click or tap to choose a location.">
+            <p class="map-loading">Loading the Berlin map…</p>
+          </div>
+          <div id="map-quick-points" class="map-quick-points" role="group" aria-label="Choose a fixed Berlin planning anchor"></div>
           <div class="map-legend" aria-label="Map legend">
-            <span><i class="legend-dot legend-dot--green" aria-hidden="true"></i>central anchor</span>
-            <span><i class="legend-dot legend-dot--yellow" aria-hidden="true"></i>priority area</span>
-            <span><i class="legend-dot legend-dot--outline" aria-hidden="true"></i>your point</span>
+            <span><i class="legend-dot legend-dot--green" aria-hidden="true"></i>planning anchor</span>
+            <span><i class="legend-dot legend-dot--yellow" aria-hidden="true"></i>nearest anchor</span>
+            <span><i class="legend-dot legend-dot--selected" aria-hidden="true"></i>selected location</span>
           </div>
         </div>
         <p id="selection-status" class="selection-status" role="status" aria-live="polite">No location selected yet.</p>
+        <p id="map-service-note" class="map-service-note">The visible basemap comes from OpenStreetMap. Your typed address is resolved by Berlin’s address service and is not sent to OpenStreetMap.</p>
       </section>
 
       <section class="tool-step" aria-labelledby="priority-heading">
@@ -109,7 +92,7 @@
         <p id="priority-status" class="status-line" role="status" aria-live="polite">You can change this after seeing the first result.</p>
       </section>
 
-      <section id="score-panel" class="score-panel" aria-labelledby="score-heading" hidden>
+      <section id="score-panel" class="tool-step score-panel" aria-labelledby="score-heading" hidden>
         <div class="step-kicker">03 · LOCATION FIT</div>
         <div class="result-heading">
           <div>
@@ -197,7 +180,7 @@
             <ul>
               <li>Each signal uses an approximate distance to named, fixed planning anchors in Berlin.</li>
               <li>BER connection is a geography signal plus proximity to major fixed transport anchors.</li>
-              <li>The map and address point are not a live journey planner. VBB is the source for today's route, disruptions and departure choices.</li>
+              <li>The map gives geographic context but is not a live journey planner. VBB is the source for today's route, disruptions and departure choices.</li>
               <li>No hotel quality, service, price or neighbourhood safety claim is included.</li>
             </ul>
             <p class="source-line">Sources and checked date: <a href="./SOURCES.md" target="_blank" rel="noopener">read the tool notes</a>.</p>
@@ -208,6 +191,7 @@
 
     <script src="../js/tool-event-bridge.js"></script>
     <script src="../js/brand.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha384-NElt3Op+9NBMCYaef5HxeJmU4Xeard/Lku8ek6hoPTvYkQPh3zLIrJP7KiRocsxO" crossorigin="anonymous"></script>
     <script type="module" src="./app.js"></script>
   </body>
 </html>

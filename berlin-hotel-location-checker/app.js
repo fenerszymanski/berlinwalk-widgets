@@ -8,14 +8,14 @@ import { emitHotelEvent } from './analytics.mjs';
 import { searchBerlinAddress } from './location-adapter.mjs';
 
 const LOCAL_HOSTS = new Set(['localhost', '127.0.0.1', '[::1]']);
-const MAP_BOUNDS = Object.freeze({ south: 52.34, north: 52.60, west: 13.20, east: 13.62 });
+const MAP_BOUNDS = Object.freeze([[52.34, 13.20], [52.60, 13.62]]);
 const MAP_PLACES = Object.freeze([
-  { id: 'central', label: 'Mitte / Alexanderplatz', mapLabel: 'Alexanderplatz', lat: 52.521918, lon: 13.413215, dx: -82, dy: 30 },
-  { id: 'west', label: 'Charlottenburg / west', lat: 52.505, lon: 13.332, dx: -18, dy: 22 },
-  { id: 'nightlife', label: 'Friedrichshain / Kreuzberg', lat: 52.5075, lon: 13.4548, dx: 10, dy: 23 },
-  { id: 'south', label: 'Neukölln / Tempelhof', lat: 52.473, lon: 13.4036, dx: -18, dy: 22 },
-  { id: 'airport', label: 'BER edge', lat: 52.3667, lon: 13.5033, dx: 10, dy: -13 },
-  { id: 'north', label: 'Wedding / north', lat: 52.5351, lon: 13.3903, dx: 12, dy: -13 },
+  { id: 'central', label: 'Mitte / Alexanderplatz', lat: 52.521918, lon: 13.413215 },
+  { id: 'west', label: 'Charlottenburg / west', lat: 52.505, lon: 13.332 },
+  { id: 'nightlife', label: 'Friedrichshain / Kreuzberg', lat: 52.5075, lon: 13.4548 },
+  { id: 'south', label: 'Neukölln / Tempelhof', lat: 52.473, lon: 13.4036 },
+  { id: 'airport', label: 'BER edge', lat: 52.3667, lon: 13.5033 },
+  { id: 'north', label: 'Wedding / north', lat: 52.5351, lon: 13.3903 },
 ]);
 const RADAR_ORDER = Object.freeze(['sightseeing', 'transport', 'ber', 'nightlife', 'quiet', 'meeting']);
 
@@ -23,6 +23,10 @@ const state = {
   selectedLocation: null,
   selectedPriorityIds: [...DEFAULT_PRIORITY_IDS],
   lastResult: null,
+  map: null,
+  mapTileFailed: false,
+  selectedMarker: null,
+  anchorLayers: new Map(),
 };
 
 const $ = (selector) => document.querySelector(selector);
@@ -80,19 +84,6 @@ function normalizeCandidate(candidate) {
   };
 }
 
-function projectPoint(lat, lon) {
-  const x = ((lon - MAP_BOUNDS.west) / (MAP_BOUNDS.east - MAP_BOUNDS.west)) * 640 + 20;
-  const y = ((MAP_BOUNDS.north - lat) / (MAP_BOUNDS.north - MAP_BOUNDS.south)) * 400 + 20;
-  return { x, y };
-}
-
-function unprojectPoint(x, y) {
-  return {
-    lat: MAP_BOUNDS.north - ((y - 20) / 400) * (MAP_BOUNDS.north - MAP_BOUNDS.south),
-    lon: MAP_BOUNDS.west + ((x - 20) / 640) * (MAP_BOUNDS.east - MAP_BOUNDS.west),
-  };
-}
-
 function nearestMapPlace(location) {
   return MAP_PLACES.reduce((best, place) => {
     const distanceKm = haversineKm(location, place);
@@ -102,55 +93,109 @@ function nearestMapPlace(location) {
 }
 
 function renderMap() {
-  const svg = $('#berlin-map');
-  const grid = svg.querySelector('.map-grid');
-  for (let i = 1; i < 8; i += 1) {
-    grid.appendChild(makeSvg('line', { x1: 20 + i * 80, y1: 20, x2: 20 + i * 80, y2: 420 }));
-  }
-  for (let i = 1; i < 5; i += 1) {
-    grid.appendChild(makeSvg('line', { x1: 20, y1: 20 + i * 80, x2: 660, y2: 20 + i * 80 }));
+  const mapNode = $('#berlin-map');
+  const quickPoints = $('#map-quick-points');
+  quickPoints.replaceChildren();
+  MAP_PLACES.forEach((place) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'map-quick-button';
+    button.dataset.mapAnchor = place.id;
+    button.setAttribute('aria-pressed', 'false');
+    button.textContent = place.label;
+    button.addEventListener('click', () => selectLocation(place, 'map'));
+    quickPoints.appendChild(button);
+  });
+
+  if (!window.L) {
+    const fallback = document.createElement('p');
+    fallback.className = 'map-fallback';
+    fallback.textContent = 'The basemap did not load. You can still choose one of the fixed planning anchors below.';
+    mapNode.replaceChildren(fallback);
+    setStatus($('#selection-status'), 'Map tiles are unavailable right now; the fixed planning anchors still work.', 'error');
+    return;
   }
 
-  const placeGroup = $('#map-places');
-  const labelGroup = $('#map-place-labels');
-  MAP_PLACES.forEach((place) => {
-    const { x, y } = projectPoint(place.lat, place.lon);
-    const group = makeSvg('g', {
-      class: 'map-place',
-      role: 'button',
-      tabindex: '0',
-      'data-map-anchor': place.id,
-      'aria-label': `Choose ${place.label}`,
-    });
-    // Keep the named point easy to hit on touch and in browser automation;
-    // the transparent hit target is still the same geographic point.
-    group.appendChild(makeSvg('circle', { cx: x, cy: y, r: 25, class: 'map-hit' }));
-    group.appendChild(makeSvg('circle', { cx: x, cy: y, r: 7 }));
-    const label = makeSvg('text', { x: x + place.dx, y: y + place.dy });
-    label.textContent = place.mapLabel || place.label;
-    labelGroup.appendChild(label);
-    placeGroup.appendChild(group);
+  mapNode.replaceChildren();
+  const leaflet = window.L;
+  const map = leaflet.map(mapNode, {
+    zoomControl: true,
+    scrollWheelZoom: false,
+    doubleClickZoom: true,
+    minZoom: 9,
+    maxZoom: 18,
   });
+  state.map = map;
+  map.fitBounds(MAP_BOUNDS, { padding: [18, 18], maxZoom: 11 });
+
+  const tiles = leaflet.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 19,
+  }).addTo(map);
+  tiles.on('tileerror', () => {
+    if (state.mapTileFailed) return;
+    state.mapTileFailed = true;
+    setStatus($('#selection-status'), 'The basemap is partly unavailable. Fixed planning anchors and address scoring still work.', 'error');
+  });
+
+  MAP_PLACES.forEach((place) => {
+    const layer = leaflet.circleMarker([place.lat, place.lon], {
+      radius: 8,
+      color: '#FFFFFF',
+      weight: 3,
+      fillColor: '#1B5E20',
+      fillOpacity: 1,
+      bubblingMouseEvents: false,
+    }).addTo(map);
+    layer.bindTooltip(place.label, { direction: 'top', offset: [0, -8] });
+    layer.on('click', () => selectLocation(place, 'map'));
+    state.anchorLayers.set(place.id, layer);
+  });
+
+  map.on('click', ({ latlng }) => {
+    const point = { lat: latlng.lat, lon: latlng.lng };
+    selectLocation({ ...point, label: `Map point near ${nearestMapPlace(point).label}` }, 'map');
+  });
+
+  requestAnimationFrame(() => map.invalidateSize());
 }
 
 function selectLocation(location, source = 'map') {
   const normalized = normalizeCandidate({ ...location, source });
   state.selectedLocation = normalized;
   if (source === 'map') emitHotelEvent('action', 'map_pin_selected', { stepIndex: 1 });
-  setStatus($('#selection-status'), `Selected: ${normalized.label}. The point is approximate; choose priorities below.`, 'success');
+  const message = source === 'address'
+    ? `Address placed: ${normalized.label}. The map pin is geographic; the fit scores use approximate straight-line distances to fixed anchors.`
+    : `Map point selected near ${nearestMapPlace(normalized).label}. The fit scores use approximate straight-line distances to fixed anchors.`;
+  setStatus($('#selection-status'), message, 'success');
   drawSelectedPoint(normalized);
   updateScore();
 }
 
 function drawSelectedPoint(location) {
-  const selection = $('#map-selection');
-  const { x, y } = projectPoint(location.lat, location.lon);
-  selection.setAttribute('transform', `translate(${x} ${y})`);
-  selection.hidden = false;
-  selection.setAttribute('aria-label', `Selected point near ${location.label}`);
-  document.querySelectorAll('.map-place').forEach((node) => {
-    const isSelected = node.dataset.mapAnchor === nearestMapPlace(location).id;
-    node.dataset.selected = String(isSelected);
+  const nearest = nearestMapPlace(location);
+  if (state.map && window.L) {
+    const latLng = [location.lat, location.lon];
+    if (state.selectedMarker) state.selectedMarker.setLatLng(latLng);
+    else {
+      state.selectedMarker = window.L.marker(latLng, {
+        alt: 'Selected hotel location',
+        title: location.label,
+        keyboard: false,
+      }).addTo(state.map);
+    }
+    state.selectedMarker.bindTooltip(location.label, { direction: 'top', offset: [0, -20] });
+    state.map.panInside(latLng, { padding: [42, 42] });
+  }
+  state.anchorLayers.forEach((layer, id) => {
+    const selected = id === nearest.id;
+    layer.setStyle({
+      color: selected ? '#123D18' : '#FFFFFF',
+      fillColor: selected ? '#FFE600' : '#1B5E20',
+    });
+  });
+  document.querySelectorAll('.map-quick-button').forEach((button) => {
+    button.setAttribute('aria-pressed', String(button.dataset.mapAnchor === nearest.id));
   });
 }
 
@@ -171,11 +216,8 @@ function renderCandidates(candidates) {
     small.textContent = [normalized.district, `${normalized.lat.toFixed(4)}, ${normalized.lon.toFixed(4)}`].filter(Boolean).join(' · ');
     button.append(strong, small);
     button.addEventListener('click', () => {
-      state.selectedLocation = normalized;
       emitHotelEvent('action', 'address_resolved', { stepIndex: 1, resultCount: candidates.length });
-      setStatus($('#selection-status'), `Selected: ${normalized.label}. The point is approximate; choose priorities below.`, 'success');
-      drawSelectedPoint(normalized);
-      updateScore();
+      selectLocation(normalized, 'address');
     });
     list.appendChild(button);
   });
@@ -351,32 +393,6 @@ function updateScore() {
   renderScore(result);
 }
 
-function wireMap() {
-  const svg = $('#berlin-map');
-  const chooseFromEvent = (event) => {
-    const anchor = event.target.closest?.('[data-map-anchor]');
-    if (anchor) {
-      const place = MAP_PLACES.find((item) => item.id === anchor.dataset.mapAnchor);
-      if (place) selectLocation(place, 'map');
-      return;
-    }
-    const rect = svg.getBoundingClientRect();
-    const viewX = ((event.clientX - rect.left) / rect.width) * 680;
-    const viewY = ((event.clientY - rect.top) / rect.height) * 440;
-    const point = unprojectPoint(viewX, viewY);
-    selectLocation({ ...point, label: `Approximate map point near ${nearestMapPlace(point).label}` }, 'map');
-  };
-  svg.addEventListener('click', chooseFromEvent);
-  svg.addEventListener('keydown', (event) => {
-    if (!['Enter', ' '].includes(event.key)) return;
-    const anchor = event.target.closest?.('[data-map-anchor]');
-    if (!anchor) return;
-    event.preventDefault();
-    const place = MAP_PLACES.find((item) => item.id === anchor.dataset.mapAnchor);
-    if (place) selectLocation(place, 'map');
-  });
-}
-
 function wireAddressSearch() {
   $('#address-form').addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -417,7 +433,6 @@ function init() {
   if (getFixtureKey()) $('#fixture-notice').hidden = false;
   renderMap();
   renderPriorities();
-  wireMap();
   wireAddressSearch();
   wireCtas();
   emitHotelEvent('start', null, { stepIndex: 0 });

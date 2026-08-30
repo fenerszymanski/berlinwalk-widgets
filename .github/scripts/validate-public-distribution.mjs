@@ -56,6 +56,11 @@ const EXPECTED_COMPATIBILITY_HASHES = new Map([
 ]);
 const REQUIRED_SUBRESOURCE_INTEGRITY = [
   {
+    file: 'berlin-hotel-location-checker/index.html',
+    src: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js',
+    integrity: 'sha384-NElt3Op+9NBMCYaef5HxeJmU4Xeard/Lku8ek6hoPTvYkQPh3zLIrJP7KiRocsxO',
+  },
+  {
     file: 'east-west-1989/index.html',
     src: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js',
     integrity: 'sha384-NElt3Op+9NBMCYaef5HxeJmU4Xeard/Lku8ek6hoPTvYkQPh3zLIrJP7KiRocsxO',
