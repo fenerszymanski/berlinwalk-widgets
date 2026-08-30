@@ -15,10 +15,10 @@ const files = [];
 
 const ALLOWED_EXTENSIONS = new Set([
   '.avif', '.css', '.geojson', '.gif', '.html', '.ico', '.jpeg', '.jpg',
-  '.js', '.json', '.m4a', '.mp3', '.mp4', '.ogg', '.otf', '.pdf', '.png',
+  '.js', '.json', '.m4a', '.mjs', '.mp3', '.mp4', '.ogg', '.otf', '.pdf', '.png',
   '.svg', '.ttf', '.txt', '.vtt', '.wav', '.webm', '.webp', '.woff', '.woff2',
 ]);
-const TEXT_EXTENSIONS = new Set(['.css', '.geojson', '.html', '.js', '.json', '.svg', '.txt', '.vtt']);
+const TEXT_EXTENSIONS = new Set(['.css', '.geojson', '.html', '.js', '.json', '.mjs', '.svg', '.txt', '.vtt']);
 const FORBIDDEN_DIRECTORIES = new Set([
   '.agents', '.claude', '.git', '.github', '.playwright-cli', '_src', 'archive',
   'chatgpt-standard-2026-06-12', 'email', 'mockups', 'node_modules', 'output', 'performance', 'previews', 'qa',
@@ -214,6 +214,12 @@ const referencePatterns = [
   /url\(\s*["']?([^"')]+)["']?\s*\)/gi,
 ];
 
+const moduleReferencePatterns = [
+  /\bfrom\s+["']([^"']+)["']/gi,
+  /\bimport\s*["']([^"']+)["']/gi,
+  /\bimport\s*\(\s*["']([^"']+)["']\s*\)/gi,
+];
+
 for (const file of files) {
   if (!['.css', '.html'].includes(path.extname(file.relative).toLowerCase()) || file.size > 12_000_000) continue;
   const body = await readFile(file.absolute, 'utf8');
@@ -226,6 +232,20 @@ for (const file of files) {
         const target = localPathFromUrl(value, file.relative);
         if (!target) continue;
         if (!fileSet.has(target)) warnings.push(`unresolved static reference: ${file.relative} -> ${target}`);
+      }
+    }
+  }
+}
+
+for (const file of files) {
+  if (!['.js', '.mjs'].includes(path.extname(file.relative).toLowerCase()) || file.size > 12_000_000) continue;
+  const body = await readFile(file.absolute, 'utf8');
+  for (const pattern of moduleReferencePatterns) {
+    for (const match of body.matchAll(pattern)) {
+      if (!/^(?:\.{1,2}\/|\/)/.test(match[1])) continue;
+      const localPath = localPathFromUrl(match[1], file.relative);
+      if (localPath && !fileSet.has(localPath)) {
+        errors.push(`missing local module reference: ${file.relative} -> ${localPath}`);
       }
     }
   }
