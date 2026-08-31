@@ -904,7 +904,7 @@
   "items": [
    {
     "q": "How accurate is this East/West Berlin map?",
-    "a": "The Wall geometry on the map is derived from the official Berlin Open Data Portal, which uses the city's own surveying records of the former Wall path. The East and West Berlin polygons are computed from this Wall line plus Berlin's historical city boundary. Boundaries are accurate to within a few meters, which is why the map includes a special 'On the Wall itself' result for any point within 25 meters of the Wall line — at that distance, polygon edges and the actual fortification overlap."
+    "a": "The map uses the official Berlin Open Data Portal's historical Wall geometry, based on the city's surveying records. The East and West fills are an administrative reconstruction, not a parcel-exact 1989 legal boundary. Use it for historical orientation, not property-line or legal questions. The 25-metre 'On the Wall itself' result is a deliberate visitor-facing buffer around the mapped line, not a claim about an exact political boundary."
    },
    {
     "q": "Was the Brandenburg Gate in East or West Berlin?",
@@ -920,7 +920,7 @@
    },
    {
     "q": "How can I see these former Wall sites in person?",
-    "a": "The 2-hour free walking tour from Alexanderplatz to Hackescher Markt covers the historic center on the former East Berlin side of the divide, including spots where the cobblestone Wall line crosses the route and views toward former checkpoint locations. For a focused Wall-only walk, the Bernauer Straße Memorial in the north of the city is the most informative single destination, with a free outdoor exhibition that runs along the original Wall path."
+    "a": "The 2-hour free walking tour starts at Alexanderplatz and explores Berlin's historic centre on the former East Berlin side, connecting divided-city history to the places around you. It is not a walk of the full Wall route. For a focused Wall visit, go to the Berlin Wall Memorial at Bernauer Straße, where the free outdoor exhibition follows the original Wall path."
    },
    {
     "q": "Which side of the Wall was Berlin's historic centre on?",
