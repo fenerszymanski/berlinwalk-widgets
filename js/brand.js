@@ -32,11 +32,23 @@
       // the iframe's reported content height when they are opened.
       if (child.hasAttribute && child.hasAttribute('data-bw-resize-ignore')) continue;
       var rect = child.getBoundingClientRect();
+      // getBoundingClientRect is viewport-relative. Once the frame is a few
+      // pixels short the widget can be scrolled, and a measurement taken in
+      // that state would report an even smaller height and never recover.
+      var bottom = rect.bottom + (window.pageYOffset || 0);
       // getBoundingClientRect ignores margins — add them so iframe doesn't clip
       var cs = window.getComputedStyle ? window.getComputedStyle(child) : null;
-      var marginBottom = cs ? (parseFloat(cs.marginBottom) || 0) : 0;
-      var bottom = rect.bottom + marginBottom;
+      bottom += cs ? (parseFloat(cs.marginBottom) || 0) : 0;
       if (bottom > max) max = bottom;
+    }
+    // body's own bottom padding and border sit below the last child. Leaving
+    // them out sizes the frame shorter than the widget's own document, which
+    // reads as a few-pixel scrollbar inside the frame on every widget that
+    // declares more bottom padding than the parent's small safety pad.
+    var bodyStyle = window.getComputedStyle ? window.getComputedStyle(body) : null;
+    if (bodyStyle) {
+      max += (parseFloat(bodyStyle.paddingBottom) || 0) +
+        (parseFloat(bodyStyle.borderBottomWidth) || 0);
     }
     return Math.ceil(max);
   }
