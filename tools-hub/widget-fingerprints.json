@@ -9721,6 +9721,36 @@
       "hasVisualLayer": true,
       "flatChipCard": false,
       "pageErrors": []
+    },
+    "berlin-laundry-planner": {
+      "slug": "berlin-laundry-planner",
+      "addedAt": "2026-08-31",
+      "measuredBy": "rendered",
+      "signals": {
+        "svgShapeNodes": 0,
+        "svgCount": 0,
+        "canvas": 1,
+        "contentImages": 0,
+        "mapLibrary": false,
+        "range": 0,
+        "dateInput": 0,
+        "radio": 0,
+        "checkbox": 0,
+        "select": 0,
+        "textInput": 1,
+        "buttons": 4,
+        "ariaPressed": 0,
+        "tables": 0,
+        "details": 0,
+        "textLength": 1508
+      },
+      "inputModel": "text-entry",
+      "stateProgression": "replace-on-pick",
+      "outputModel": "numeric-result",
+      "visualGrammar": "canvas",
+      "hasVisualLayer": true,
+      "flatChipCard": false,
+      "pageErrors": []
     }
   }
 }

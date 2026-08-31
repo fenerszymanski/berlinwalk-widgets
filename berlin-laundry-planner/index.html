@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Laundry Cost Planner</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #FAFAF5;
+    color: #212121;
+    padding: 14px 12px 8px;
+  }
+  .blp-wrap { max-width: 760px; margin: 0 auto; }
+  .blp-head h2 { font-size: 21px; line-height: 1.25; color: #1B5E20; margin-bottom: 6px; }
+  .blp-head p { font-size: 13.5px; line-height: 1.55; color: #444; margin-bottom: 12px; }
+  .blp-input-row {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+    background: #FFFFFF; border: 1px solid #DDE5D8; border-radius: 12px;
+    padding: 12px; margin-bottom: 10px;
+  }
+  .blp-input-row label { font-size: 13px; font-weight: 700; color: #1B5E20; }
+  .blp-kg {
+    font-family: inherit; font-size: 16px; font-weight: 700; color: #1B5E20;
+    width: 76px; padding: 7px 8px; border: 2px solid #7CB342; border-radius: 10px;
+    background: #FFFFFF;
+  }
+  .blp-kg:focus { outline: 3px solid #C5E1A5; }
+  .blp-presets { display: flex; flex-wrap: wrap; gap: 7px; }
+  .blp-preset {
+    font-family: inherit; font-size: 12.5px; font-weight: 600; color: #1B5E20;
+    background: #F1F6EC; border: 1.5px solid #C5E1A5; border-radius: 999px;
+    padding: 6px 11px; cursor: pointer;
+  }
+  .blp-preset:hover { border-color: #7CB342; background: #E8F1DF; }
+  .blp-chart-card {
+    background: #FFFFFF; border: 1px solid #DDE5D8; border-radius: 12px;
+    padding: 10px 10px 4px; margin-bottom: 10px;
+  }
+  .blp-chart-card canvas { display: block; width: 100%; height: auto; }
+  .blp-legend {
+    display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 6px 4px 8px;
+    font-size: 12px; color: #333;
+  }
+  .blp-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .blp-key { display: inline-block; width: 18px; height: 0; border-top: 3px solid #1B5E20; }
+  .blp-key.k2 { border-top-color: #7CB342; }
+  .blp-key.k3 { border-top-color: #212121; }
+  .blp-key.k4 { border-top: 3px dashed #8A8A8A; }
+  .blp-result {
+    background: #FFFFFF; border: 1px solid #DDE5D8; border-radius: 12px;
+    padding: 12px; margin-bottom: 10px;
+  }
+  .blp-rows { display: grid; gap: 7px; margin-bottom: 10px; }
+  .blp-row {
+    display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline;
+    gap: 4px 10px; font-size: 13.5px; line-height: 1.45;
+    border-left: 4px solid #C5E1A5; padding: 2px 0 2px 10px;
+  }
+  .blp-row.best { border-left-color: #1B5E20; background: #F4F9EE; border-radius: 0 8px 8px 0; }
+  .blp-row .n { font-weight: 700; color: #1B5E20; }
+  .blp-row .c { font-weight: 700; }
+  .blp-row .t { font-size: 12px; color: #666; width: 100%; }
+  .blp-verdict {
+    background: #FFE600; color: #123D18; border-radius: 10px;
+    font-size: 13.5px; font-weight: 600; line-height: 1.5; padding: 10px 12px;
+  }
+  .blp-note { font-size: 11.5px; color: #777; line-height: 1.5; padding: 8px 2px 2px; }
+</style>
+</head>
+<body>
+<div class="blp-wrap">
+  <div class="blp-head">
+    <h2>Berlin Laundry Cost Planner</h2>
+    <p>Type how many kilograms of dirty clothes you are carrying and compare what the same load costs at a Berlin self-service Waschsalon versus handing it over as a wash-and-fold service. Prices are the salons&rsquo; own posted tariffs, checked on 31 August 2026.</p>
+  </div>
+  <div class="blp-input-row">
+    <label for="blpKg">Your load (kg)</label>
+    <input class="blp-kg" id="blpKg" type="number" min="1" max="24" step="1" value="6" inputmode="numeric">
+    <div class="blp-presets" id="blpPresets"></div>
+  </div>
+  <div class="blp-chart-card">
+    <canvas id="blpCanvas" width="720" height="400" role="img" aria-label="Cost in euros by load size for four Berlin laundry routes"></canvas>
+    <div class="blp-legend">
+      <span><i class="blp-key"></i>Eco-Express self-service</span>
+      <span><i class="blp-key k2"></i>Freddy Leck self-service</span>
+      <span><i class="blp-key k3"></i>Wash &amp; fold (Service Light)</span>
+      <span><i class="blp-key k4"></i>Wash &amp; fold, folded (Deluxe)</span>
+    </div>
+  </div>
+  <div class="blp-result" id="blpResult" aria-live="polite"></div>
+  <p class="blp-note">Model: a normal washer load is about 6 kg, each washed load gets 30 minutes of drying, detergent per load where it is not included. Eco-Express tariff: normal wash 6.00&euro;, XXL 12.00&euro;, dryer 1.70&euro; per 10 min, detergent 0.70&euro; (5.50&euro; wash before 10:00). Freddy Leck tariff: 6 kg 5.50&euro;, 16 kg 12.80&euro;, dryer 1.75&euro;/3.50&euro; per 10 min, Service Light 11.90&euro; and Service Deluxe 15.40&euro; per 6 kg load. Posted prices can change; the machines have the final word.</p>
+</div>
+<script>
+(function () {
+  'use strict';
+  var MAXKG = 24;
+  var presets = [
+    { kg: 3, label: 'Carry-on top-up (3 kg)' },
+    { kg: 6, label: 'One person, one week (6 kg)' },
+    { kg: 10, label: 'Two people (10 kg)' },
+    { kg: 16, label: 'Family load (16 kg)' }
+  ];
+
+  /* Machine mixes: pick the cheapest combination of machines that covers the load. */
+  function machineMix(kg, small, big) {
+    var best = null;
+    for (var b = 0; b * big.cap < kg + big.cap; b += 1) {
+      var rest = kg - b * big.cap;
+      var s = rest > 0 ? Math.ceil(rest / small.cap) : 0;
+      var loads = b + s;
+      if (loads < 1) loads = 1;
+      var washCost = b * big.price + s * small.price;
+      if (kg <= 0) washCost = small.price;
+      var cand = { loads: loads, wash: washCost, bigLoads: b, smallLoads: s };
+      if (!best || cand.wash < best.wash || (cand.wash === best.wash && cand.loads < best.loads)) best = cand;
+    }
+    return best;
+  }
+
+  function ecoCost(kg) {
+    var mix = machineMix(kg, { cap: 6, price: 6.0 }, { cap: 14, price: 12.0 });
+    var dry = mix.loads * 3 * 1.7;
+    var soap = mix.loads * 0.7;
+    return { total: mix.wash + dry + soap, loads: mix.loads };
+  }
+  function freddySelfCost(kg) {
+    var mix = machineMix(kg, { cap: 6, price: 5.5 }, { cap: 16, price: 12.8 });
+    var dry = mix.smallLoads * 3 * 1.75 + mix.bigLoads * 3 * 3.5;
+    var soap = mix.loads * 0.55;
+    return { total: mix.wash + dry + soap, loads: mix.loads };
+  }
+  function serviceCost(kg, perLoad) {
+    var loads = Math.max(1, Math.ceil(kg / 6));
+    return { total: loads * perLoad, loads: loads };
+  }
+
+  var series = [
+    { id: 'eco', color: '#1B5E20', dash: '', fn: ecoCost, name: 'Eco-Express self-service' },
+    { id: 'freddy', color: '#7CB342', dash: '', fn: freddySelfCost, name: 'Freddy Leck self-service' },
+    { id: 'light', color: '#212121', dash: '', fn: function (kg) { return serviceCost(kg, 11.9); }, name: 'Wash & fold (Service Light)' },
+    { id: 'deluxe', color: '#8A8A8A', dash: '6 5', fn: function (kg) { return serviceCost(kg, 15.4); }, name: 'Wash & fold, folded (Deluxe)' }
+  ];
+
+  var W = 720, H = 400, L = 52, R = 16, T = 18, B = 42;
+  var MAXEUR = 66;
+  function x(kg) { return L + (kg / MAXKG) * (W - L - R); }
+  function y(eur) { return H - B - (eur / MAXEUR) * (H - T - B); }
+
+  var canvas = document.getElementById('blpCanvas');
+  var ctx = canvas.getContext('2d');
+  var DPR = Math.min(2, window.devicePixelRatio || 1);
+  canvas.width = W * DPR; canvas.height = H * DPR;
+  ctx.scale(DPR, DPR);
+  var currentKg = 6;
+
+  function drawChart() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.font = '12px Montserrat, sans-serif';
+    var eur;
+    for (eur = 0; eur <= MAXEUR; eur += 10) {
+      ctx.strokeStyle = eur === 0 ? '#9DB08F' : '#EAEFE4';
+      ctx.lineWidth = eur === 0 ? 1.5 : 1;
+      ctx.beginPath(); ctx.moveTo(L, y(eur)); ctx.lineTo(W - R, y(eur)); ctx.stroke();
+      ctx.fillStyle = '#666'; ctx.textAlign = 'right';
+      ctx.fillText(eur + '\u20ac', L - 8, y(eur) + 4);
+    }
+    var kg;
+    ctx.strokeStyle = '#9DB08F'; ctx.lineWidth = 1.5;
+    for (kg = 0; kg <= MAXKG; kg += 4) {
+      ctx.beginPath(); ctx.moveTo(x(kg), H - B); ctx.lineTo(x(kg), H - B + 5); ctx.stroke();
+      ctx.fillStyle = '#666'; ctx.textAlign = 'center';
+      ctx.fillText(String(kg), x(kg), H - B + 20);
+    }
+    ctx.fillStyle = '#1B5E20';
+    ctx.font = '700 12.5px Montserrat, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('kilograms of laundry', (L + W - R) / 2, H - 6);
+    ctx.textAlign = 'left';
+    ctx.fillText('what you pay in total', 14, T - 4);
+
+    var i, j;
+    for (i = 0; i < series.length; i += 1) {
+      ctx.strokeStyle = series[i].color; ctx.lineWidth = 3;
+      ctx.setLineDash(series[i].dash ? [6, 5] : []);
+      ctx.lineJoin = 'round';
+      ctx.beginPath();
+      for (j = 1; j <= MAXKG; j += 1) {
+        var c = Math.min(series[i].fn(j).total, MAXEUR);
+        if (j === 1) ctx.moveTo(x(j), y(c)); else ctx.lineTo(x(j), y(c));
+      }
+      ctx.stroke();
+    }
+    ctx.setLineDash([]);
+
+    var mx = x(currentKg);
+    ctx.strokeStyle = '#E6A800'; ctx.lineWidth = 2; ctx.setLineDash([4, 4]);
+    ctx.beginPath(); ctx.moveTo(mx, T); ctx.lineTo(mx, H - B); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#8A6D00';
+    ctx.textAlign = 'center';
+    ctx.fillText(currentKg + ' kg', Math.max(L + 18, Math.min(W - R - 18, mx)), T + 10);
+    for (i = 0; i < series.length; i += 1) {
+      var cy = y(Math.min(series[i].fn(currentKg).total, MAXEUR));
+      ctx.beginPath();
+      ctx.arc(mx, cy, 6, 0, Math.PI * 2);
+      ctx.fillStyle = series[i].color; ctx.fill();
+      ctx.strokeStyle = '#FFFFFF'; ctx.lineWidth = 2; ctx.stroke();
+    }
+  }
+
+  var input = document.getElementById('blpKg');
+  var result = document.getElementById('blpResult');
+
+  function fmt(n) { return n.toFixed(2).replace('.', ',') + '€'; }
+
+  function timeNote(id, loads) {
+    if (id === 'eco' || id === 'freddy') {
+      var mins = 75 + (loads - 1) * 25;
+      return 'about ' + mins + ' min at the salon, machines do most of it';
+    }
+    return 'about 10 min: drop it off, collect it 4 to 6 hours later';
+  }
+
+  function update() {
+    var v = Math.round(Number(input.value));
+    if (!(v >= 1)) v = 1;
+    if (v > MAXKG) v = MAXKG;
+    currentKg = v;
+    drawChart();
+    var costs = [];
+    for (var s = 0; s < series.length; s += 1) {
+      var r = series[s].fn(v);
+      costs[s] = { name: series[s].name, id: series[s].id, total: r.total, loads: r.loads };
+    }
+    var cheapest = costs[0];
+    for (s = 1; s < costs.length; s += 1) { if (costs[s].total < cheapest.total - 0.001) cheapest = costs[s]; }
+    var html = '<div class="blp-rows">';
+    for (s = 0; s < costs.length; s += 1) {
+      var isBest = costs[s].id === cheapest.id;
+      html += '<div class="blp-row' + (isBest ? ' best' : '') + '">'
+        + '<span class="n">' + costs[s].name + '</span>'
+        + '<span class="c">' + fmt(costs[s].total) + '</span>'
+        + '<span class="t">' + costs[s].loads + (costs[s].loads === 1 ? ' load, ' : ' loads, ') + timeNote(costs[s].id, costs[s].loads) + '</span>'
+        + '</div>';
+    }
+    html += '</div>';
+    var selfBest = Math.min(costs[0].total, costs[1].total);
+    var gap = costs[2].total - selfBest;
+    var verdict;
+    if (gap <= 1.5) {
+      verdict = 'At ' + v + ' kg the wash-and-fold service costs ' + (gap <= 0 ? 'no more than' : 'about ' + fmt(gap) + ' more than') + ' doing it yourself. My move: hand it over in the morning and spend those 90 minutes in the city instead of next to a dryer.';
+    } else if (gap <= 5) {
+      verdict = 'At ' + v + ' kg you save about ' + fmt(gap) + ' by doing it yourself. That is roughly the price of a coffee and a pastry, which is what you would be having next to the machine anyway. Close call; pick the salon that is nearer.';
+    } else {
+      verdict = 'At ' + v + ' kg self-service is clearly cheaper, by about ' + fmt(gap) + '. Big loads reward the XXL machines: one 12 to 16 kg drum instead of three small ones keeps both the price and the waiting time down.';
+    }
+    result.innerHTML = html + '<div class="blp-verdict">' + verdict + '</div>';
+  }
+
+  var presetsBox = document.getElementById('blpPresets');
+  function bindPreset(p) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'blp-preset';
+    b.textContent = p.label;
+    b.onclick = function () { input.value = String(p.kg); update(); };
+    presetsBox.appendChild(b);
+  }
+  var i;
+  for (i = 0; i < presets.length; i += 1) bindPreset(presets[i]);
+  input.oninput = update;
+  update();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
