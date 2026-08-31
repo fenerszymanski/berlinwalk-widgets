@@ -1,0 +1,207 @@
+{
+  "checkedOn": "30 August 2026",
+  "fares": {
+    "singleAB": "4.00 EUR",
+    "singleABC": "5.00 EUR",
+    "day24hAB": "11.20 EUR"
+  },
+  "stops": [
+    {
+      "id": "zob",
+      "name": "ZOB (Central Bus Station)",
+      "lat": 52.5079,
+      "lon": 13.279,
+      "main": true,
+      "note": "Messedamm 8, next to the Funkturm radio tower",
+      "label": {
+        "anchor": "end",
+        "dx": -14,
+        "dy": 16
+      },
+      "mapName": "ZOB"
+    },
+    {
+      "id": "alexanderplatz",
+      "name": "Alexanderplatz",
+      "lat": 52.5219,
+      "lon": 13.4166,
+      "note": "kerbside stop on Alexanderstrasse, opposite the Park Inn hotel",
+      "label": {
+        "anchor": "middle",
+        "dx": 0,
+        "dy": -20
+      }
+    },
+    {
+      "id": "hauptbahnhof",
+      "name": "Hauptbahnhof",
+      "lat": 52.5266,
+      "lon": 13.369,
+      "note": "kerbside stop on Invalidenstrasse by the main station",
+      "label": {
+        "anchor": "end",
+        "dx": -12,
+        "dy": 4
+      }
+    },
+    {
+      "id": "zoo",
+      "name": "Zoologischer Garten",
+      "lat": 52.5069,
+      "lon": 13.3327,
+      "note": "stop by Zoo station in City West",
+      "label": {
+        "anchor": "middle",
+        "dx": 0,
+        "dy": 24
+      }
+    },
+    {
+      "id": "suedkreuz",
+      "name": "Suedkreuz",
+      "lat": 52.4755,
+      "lon": 13.3655,
+      "note": "stop at Hildegard-Knef-Platz by the Ring and mainline station",
+      "label": {
+        "anchor": "middle",
+        "dx": 0,
+        "dy": 24
+      }
+    },
+    {
+      "id": "ostbahnhof",
+      "name": "Ostbahnhof",
+      "lat": 52.5103,
+      "lon": 13.4351,
+      "note": "stop by the mainline station on the eastern Spree bank",
+      "label": {
+        "anchor": "start",
+        "dx": 12,
+        "dy": 6
+      }
+    },
+    {
+      "id": "treptower",
+      "name": "Treptower Park",
+      "lat": 52.4938,
+      "lon": 13.4618,
+      "note": "stop on Puschkinallee by the S-Bahn station",
+      "label": {
+        "anchor": "start",
+        "dx": 12,
+        "dy": -8
+      }
+    },
+    {
+      "id": "wannsee",
+      "name": "Wannsee",
+      "lat": 52.4217,
+      "lon": 13.1789,
+      "note": "stop by S Wannsee in the far south west",
+      "label": {
+        "anchor": "start",
+        "dx": 12,
+        "dy": 4
+      }
+    },
+    {
+      "id": "alttegel",
+      "name": "Alt-Tegel",
+      "lat": 52.5896,
+      "lon": 13.2838,
+      "note": "stop by the U-Bahn terminus in the north west",
+      "label": {
+        "anchor": "start",
+        "dx": 12,
+        "dy": 4
+      }
+    }
+  ],
+  "areas": [
+    {
+      "id": "mitte",
+      "name": "Mitte / Alexanderplatz",
+      "lat": 52.5215,
+      "lon": 13.4095,
+      "best": "alexanderplatz",
+      "why": "The bus stops on Alexanderstrasse, opposite the Park Inn. Most Mitte hotels are a walk or one short U-Bahn hop away.",
+      "move": "Get off here and walk. For hotels toward Hackescher Markt, the M4 or M5 tram leaves from Alexanderplatz.",
+      "zob": "U-Bahn from U Kaiserdamm, about 300 m from the platforms, toward the city centre. Around 30 minutes to Alexanderplatz."
+    },
+    {
+      "id": "hauptbahnhof",
+      "name": "Around Hauptbahnhof",
+      "lat": 52.526,
+      "lon": 13.37,
+      "best": "hauptbahnhof",
+      "why": "The Invalidenstrasse stop is right by the main station, so hotels around Hauptbahnhof and Europacity are on foot.",
+      "move": "Get off at Hauptbahnhof and walk, or ride one S-Bahn stop where needed.",
+      "zob": "S-Bahn from S Messe Nord/ZOB one stop to Westkreuz, then any east-bound S-Bahn to Hauptbahnhof. About 20 minutes."
+    },
+    {
+      "id": "citywest",
+      "name": "City West / Kudamm",
+      "lat": 52.504,
+      "lon": 13.33,
+      "best": "zoo",
+      "why": "The Zoologischer Garten stop puts you in the middle of City West, a short walk from Kudamm and the Memorial Church.",
+      "move": "Get off at Zoo and walk. Most City West hotels are within ten minutes on foot.",
+      "zob": "U-Bahn from U Kaiserdamm to Zoologischer Garten, about 8 minutes, or the M49 or X34 bus from Messedamm.",
+      "labelPlacement": {
+        "anchor": "end",
+        "dx": -16,
+        "dy": 44
+      }
+    },
+    {
+      "id": "kreuzberg",
+      "name": "Kreuzberg",
+      "lat": 52.499,
+      "lon": 13.418,
+      "best": "ostbahnhof",
+      "why": "For eastern Kreuzberg around Wrangelkiez and Goerlitzer Park, Ostbahnhof is just across the Spree.",
+      "move": "Get off at Ostbahnhof, cross the Schillingbruecke, and you are in Kreuzberg. For Bergmannkiez, Suedkreuz plus the Ring works better.",
+      "zob": "U-Bahn from U Kaiserdamm toward Moeckernbruecke, then the U7 one or two stops. Around 30 minutes depending on your corner."
+    },
+    {
+      "id": "neukoelln",
+      "name": "Neukoelln",
+      "lat": 52.481,
+      "lon": 13.435,
+      "best": "suedkreuz",
+      "why": "From Suedkreuz the Ring S-Bahn runs three stops east to Hermannstrasse and Neukoelln station.",
+      "move": "Get off at Suedkreuz and take the S41 or S46 toward Neukoelln, under ten minutes.",
+      "zob": "S42 from S Messe Nord/ZOB straight to Neukoelln, no change, 23 minutes."
+    },
+    {
+      "id": "prenzlauerberg",
+      "name": "Prenzlauer Berg",
+      "lat": 52.539,
+      "lon": 13.424,
+      "best": "alexanderplatz",
+      "why": "From the Alexanderplatz stop the U2 reaches Senefelderplatz and Eberswalder Strasse in a few minutes, and the M1 tram covers Kastanienallee.",
+      "move": "Get off at Alexanderplatz, then U2 toward Pankow, about 9 minutes to Schoenhauser Allee.",
+      "zob": "S41 from S Messe Nord/ZOB straight to Schoenhauser Allee, no change, 17 minutes."
+    },
+    {
+      "id": "friedrichshain",
+      "name": "Friedrichshain",
+      "lat": 52.514,
+      "lon": 13.454,
+      "best": "ostbahnhof",
+      "why": "Ostbahnhof sits on the edge of Friedrichshain. Warschauer Strasse is one S-Bahn stop or a short walk along the East Side Gallery.",
+      "move": "Get off at Ostbahnhof and walk, or ride one stop to Warschauer Strasse.",
+      "zob": "S-Bahn from S Messe Nord/ZOB via Westkreuz to Warschauer Strasse. About 30 minutes."
+    },
+    {
+      "id": "schoeneberg",
+      "name": "Schoeneberg",
+      "lat": 52.497,
+      "lon": 13.355,
+      "best": "suedkreuz",
+      "why": "Suedkreuz sits in southern Schoeneberg with the Ring and mainline station right by the stop. For the northern end around Nollendorfplatz, the Zoologischer Garten stop plus two U-Bahn stops also works.",
+      "move": "Get off at Suedkreuz and take the Ring one stop west to Schoeneberg station, or walk if you stay near the station.",
+      "zob": "S42 from S Messe Nord/ZOB straight to Suedkreuz, no change, 15 minutes."
+    }
+  ]
+}

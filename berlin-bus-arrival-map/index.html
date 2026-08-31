@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Bus Arrival Map</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #FAFAF5;
+    color: #212121;
+    padding: 14px 12px 8px;
+  }
+  .bam-wrap { max-width: 760px; margin: 0 auto; }
+  .bam-head h2 {
+    font-size: 21px;
+    line-height: 1.25;
+    color: #1B5E20;
+    margin-bottom: 6px;
+  }
+  .bam-head p {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: #444;
+    margin-bottom: 12px;
+  }
+  .bam-control { margin-bottom: 12px; }
+  .bam-control label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #1B5E20;
+    margin-bottom: 5px;
+  }
+  .bam-control select {
+    width: 100%;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    color: #123D18;
+    padding: 11px 12px;
+    border: 2px solid #1B5E20;
+    border-radius: 10px;
+    background: #FFFFFF;
+    appearance: auto;
+  }
+  .bam-map-shell {
+    background: #FFFFFF;
+    border: 1px solid #DDE5D8;
+    border-radius: 12px;
+    padding: 8px 8px 2px;
+    margin-bottom: 12px;
+  }
+  .bam-map-shell svg { display: block; width: 100%; height: auto; }
+  .bam-maplegend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    padding: 6px 6px 8px;
+    font-size: 11px;
+    color: #555;
+  }
+  .bam-maplegend span { display: inline-flex; align-items: center; gap: 5px; }
+  .bam-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .bam-verdict {
+    background: #1B5E20;
+    color: #FFFFFF;
+    border-radius: 12px;
+    padding: 14px 15px;
+    margin-bottom: 10px;
+  }
+  .bam-verdict .bam-kicker {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #FFE600;
+    margin-bottom: 4px;
+  }
+  .bam-verdict h3 { font-size: 17px; line-height: 1.3; margin-bottom: 6px; }
+  .bam-verdict p { font-size: 13.5px; line-height: 1.55; color: #E9F1E7; margin-bottom: 7px; }
+  .bam-verdict p:last-child { margin-bottom: 0; }
+  .bam-verdict strong { color: #FFFFFF; }
+  .bam-fallback {
+    background: #FFFFFF;
+    border: 1px solid #DDE5D8;
+    border-left: 4px solid #7CB342;
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+  }
+  .bam-fallback .bam-kicker {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #1B5E20;
+    margin-bottom: 4px;
+  }
+  .bam-fallback p { font-size: 13.5px; line-height: 1.55; color: #333; }
+  .bam-foot {
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: #666;
+    padding: 0 2px 6px;
+  }
+  @media (max-width: 480px) {
+    body { padding: 12px 10px 6px; }
+    .bam-head h2 { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="bam-wrap">
+  <div class="bam-head">
+    <h2>Berlin Bus Arrival Map</h2>
+    <p>FlixBus and the other long-distance coaches call at nine stops in Berlin, and the right one depends on where you sleep. Pick your area: the map shows the stop to choose when your ride offers it, and the plan for when it only serves the ZOB.</p>
+  </div>
+  <div class="bam-control">
+    <label for="bam-area">Where are you staying?</label>
+    <select id="bam-area"></select>
+  </div>
+  <div class="bam-map-shell">
+    <svg id="bam-svg" viewBox="0 0 760 560" role="img" aria-label="Map of Berlin with the nine long-distance bus stops and the recommended stop for the chosen area"></svg>
+    <div class="bam-maplegend">
+      <span><span class="bam-dot" style="background:#1B5E20"></span> Bus stop</span>
+      <span><span class="bam-dot" style="background:#FFE600;border:2px solid #1B5E20"></span> Best stop for your area</span>
+      <span><span class="bam-dot" style="background:#E63946"></span> Where you are staying</span>
+    </div>
+  </div>
+  <div class="bam-verdict" id="bam-verdict"></div>
+  <div class="bam-fallback" id="bam-fallback"></div>
+  <p class="bam-foot" id="bam-foot"></p>
+</div>
+<script>
+(function () {
+  'use strict';
+  var DATA = null;
+  var SHAPE = null;
+  var svg = document.getElementById('bam-svg');
+  var sel = document.getElementById('bam-area');
+  var W = 760, H = 560;
+  var LON0 = 13.07, LON1 = 13.78, LAT0 = 52.33, LAT1 = 52.685;
+  var KX = W / (LON1 - LON0);
+  var KY = H / (LAT1 - LAT0);
+  function px(lon) { return (lon - LON0) * KX; }
+  function py(lat) { return (LAT1 - lat) * KY; }
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function ringPath(ring) {
+    var d = '';
+    for (var i = 0; i < ring.length; i += 1) {
+      d += (i === 0 ? 'M' : 'L') + px(ring[i][0]).toFixed(1) + ' ' + py(ring[i][1]).toFixed(1);
+    }
+    return d + 'Z';
+  }
+  function cityPaths() {
+    var d = '';
+    var groups = [SHAPE.east, SHAPE.west];
+    for (var g = 0; g < groups.length; g += 1) {
+      for (var r = 0; r < groups[g].length; r += 1) d += ringPath(groups[g][r]) + ' ';
+    }
+    return d;
+  }
+  function stopById(idv) {
+    for (var i = 0; i < DATA.stops.length; i += 1) { if (DATA.stops[i].id === idv) return DATA.stops[i]; }
+    return null;
+  }
+  function render(areaId) {
+    var area = null;
+    for (var i = 0; i < DATA.areas.length; i += 1) { if (DATA.areas[i].id === areaId) area = DATA.areas[i]; }
+    if (!area) area = DATA.areas[0];
+    var best = stopById(area.best);
+    var m = '<path d="' + cityPaths() + '" fill="#E4EEDF" stroke="none"></path>';
+    m += '<line x1="' + px(best.lon) + '" y1="' + py(best.lat) + '" x2="' + px(area.lon) + '" y2="' + py(area.lat) + '" stroke="#1B5E20" stroke-width="2.5" stroke-dasharray="6 5" opacity="0.85"></line>';
+    for (var s = 0; s < DATA.stops.length; s += 1) {
+      var st = DATA.stops[s];
+      var isBest = st.id === best.id;
+      var cx = px(st.lon), cy = py(st.lat);
+      if (isBest) {
+        m += '<circle cx="' + cx + '" cy="' + cy + '" r="13" fill="#FFE600" stroke="#1B5E20" stroke-width="3"></circle>';
+      } else {
+        m += '<circle cx="' + cx + '" cy="' + cy + '" r="6.5" fill="#1B5E20" stroke="#FAFAF5" stroke-width="1.5"></circle>';
+      }
+      var lb = st.label;
+      m += '<text x="' + (cx + lb.dx) + '" y="' + (cy + lb.dy) + '" text-anchor="' + lb.anchor + '" font-size="' + (isBest ? 14 : 12) + '" font-weight="' + (isBest ? 800 : 600) + '" fill="#123D18" font-family="Montserrat, sans-serif" paint-order="stroke" stroke="#FAFAF5" stroke-width="3.5" stroke-linejoin="round">' + esc(st.mapName || st.name) + '</text>';
+    }
+    var ax = px(area.lon), ay = py(area.lat);
+    var bx = px(best.lon), by = py(best.lat);
+    var near = Math.abs(ax - bx) < 34 && Math.abs(ay - by) < 22;
+    var areaLabelY = near ? ay + 26 : ay - 14;
+    var areaAnchor = near ? 'end' : 'middle';
+    var areaLabelX = near ? ax - 16 : ax;
+    if (area.labelPlacement) {
+      areaAnchor = area.labelPlacement.anchor;
+      areaLabelX = ax + area.labelPlacement.dx;
+      areaLabelY = ay + area.labelPlacement.dy;
+    }
+    m += '<circle cx="' + ax + '" cy="' + ay + '" r="8" fill="#E63946" stroke="#FAFAF5" stroke-width="2"></circle>';
+    m += '<text x="' + areaLabelX + '" y="' + areaLabelY + '" text-anchor="' + areaAnchor + '" font-size="13" font-weight="800" fill="#E63946" font-family="Montserrat, sans-serif" paint-order="stroke" stroke="#FAFAF5" stroke-width="3.5" stroke-linejoin="round">' + esc(area.name) + '</text>';
+    svg.innerHTML = m;
+    document.getElementById('bam-verdict').innerHTML =
+      '<div class="bam-kicker">Best stop for ' + esc(area.name) + '</div>' +
+      '<h3>' + esc(best.name) + '</h3>' +
+      '<p>' + esc(area.why) + '</p>' +
+      '<p><strong>Your move:</strong> ' + esc(area.move) + '</p>';
+    document.getElementById('bam-fallback').innerHTML =
+      '<div class="bam-kicker">If your ride only serves the ZOB</div>' +
+      '<p>' + esc(area.zob) + '</p>';
+    document.getElementById('bam-foot').textContent =
+      'Onward rides inside zones A and B use a ' + DATA.fares.singleAB + ' single ticket; a 24-hour AB ticket is ' + DATA.fares.day24hAB + '. Times come from the VBB journey planner, checked on ' + DATA.checkedOn + '.';
+  }
+  function boot(payload, shape) {
+    DATA = payload;
+    SHAPE = shape;
+    var opts = '';
+    for (var i = 0; i < DATA.areas.length; i += 1) {
+      opts += '<option value="' + DATA.areas[i].id + '">' + esc(DATA.areas[i].name) + '</option>';
+    }
+    sel.innerHTML = opts;
+    sel.addEventListener('change', function () { render(sel.value); });
+    render(DATA.areas[0].id);
+  }
+  Promise.all([
+    fetch('data.json').then(function (r) { return r.json(); }),
+    fetch('city-shape.json').then(function (r) { return r.json(); })
+  ]).then(function (loaded) { boot(loaded[0], loaded[1]); });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
