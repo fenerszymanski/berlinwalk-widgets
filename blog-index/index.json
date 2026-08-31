@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-08-31T05:11:34.669Z",
+  "updatedAt": "2026-08-31T13:11:05.685Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 341,
-  "toolsTotal": 261,
+  "totalPosts": 342,
+  "toolsTotal": 262,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1618,6 +1618,23 @@
   ],
   "latest": [
     {
+      "title": "German Unity Day in Berlin: What Is Actually Open on 3 October",
+      "slug": "german-unity-day-berlin",
+      "path": "/post/german-unity-day-berlin",
+      "url": "https://www.berlinwalk.com/post/german-unity-day-berlin",
+      "excerpt": "3 October is Germany's national holiday, and in 2026 it falls on a Saturday, so Berlin runs Sunday rules two days in a row. What closes, the station supermarkets that stay open, the museums that keep Sunday hours, and how I would plan the weekend.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-08-31T13:07:42.130Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_ff85376dc8e847509310f5fb022c30d0~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/german-unity-day-berlin-reichstag-flag.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_ff85376dc8e847509310f5fb022c30d0~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/german-unity-day-berlin-reichstag-flag.jpg",
+      "alt": "The German federal flag flying in front of the Reichstag building",
+      "relatedToolSlug": "berlin-unity-day-board"
+    },
+    {
       "title": "Berlin Central Bus Station: Where Your FlixBus Arrives and How to Get Into the City",
       "slug": "berlin-central-bus-station",
       "path": "/post/berlin-central-bus-station",
@@ -1803,23 +1820,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_0066554dcc69430c98f3930d442c0fe1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-koepenicker-76-wall.jpg",
       "alt": "The black painted, heavily graffitied corner building at Brückenstraße 1 and Köpenicker Straße 76 in Berlin-Mitte",
       "relatedToolSlug": "berlin-first-day-planner"
-    },
-    {
-      "title": "The Most Beautiful U-Bahn Stations in Berlin: Which Ones Are Worth Getting Off At",
-      "slug": "beautiful-u-bahn-stations-berlin",
-      "path": "/post/beautiful-u-bahn-stations-berlin",
-      "url": "https://www.berlinwalk.com/post/beautiful-u-bahn-stations-berlin",
-      "excerpt": "Berlin built beautiful underground stations in three short bursts: 1913, the early 1980s and again in 2020. Three of the best sit within four minutes of Alexanderplatz, one hides tiles from the Ishtar Gate project, and the most colourful run is a 48 minute ride out to Spandau. Here is which ones are worth getting off at, what to look at on each platform, and how much riding time the trip really costs.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "8 min read",
-      "publishedDate": "2026-08-26T14:12:38.617Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_7462992e3403473786a6c027d44b59fe~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/museumsinsel-vault.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_7462992e3403473786a6c027d44b59fe~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/museumsinsel-vault.jpg",
-      "alt": "The deep blue starry vault of Museumsinsel U-Bahn station with a yellow U5 train at the platform",
-      "relatedToolSlug": "berlin-ubahn-design-board"
     }
   ]
 }
