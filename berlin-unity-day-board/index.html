@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Unity Day Plan Board</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #FAFAF5;
+    color: #212121;
+    padding: 14px 12px 8px;
+  }
+  .udb-wrap { max-width: 760px; margin: 0 auto; }
+  .udb-head h2 { font-size: 21px; line-height: 1.25; color: #1B5E20; margin-bottom: 6px; }
+  .udb-head p { font-size: 13.5px; line-height: 1.55; color: #444; margin-bottom: 12px; }
+  .udb-picker-label {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+    color: #1B5E20; margin-bottom: 6px;
+  }
+  .udb-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
+  .udb-chip {
+    font-family: inherit; font-size: 13px; font-weight: 600; color: #1B5E20;
+    background: #FFFFFF; border: 2px solid #C5E1A5; border-radius: 999px;
+    padding: 7px 12px; cursor: pointer; transition: background 0.15s, border-color 0.15s;
+  }
+  .udb-chip:hover { border-color: #7CB342; }
+  .udb-chip[aria-pressed="true"] {
+    background: #1B5E20; border-color: #1B5E20; color: #FFFFFF;
+  }
+  .udb-summary {
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+    background: #FFFFFF; border: 1px solid #DDE5D8; border-radius: 12px;
+    padding: 10px 12px; margin-bottom: 12px;
+  }
+  .udb-summary strong { color: #1B5E20; font-size: 14px; }
+  .udb-pill {
+    font-size: 12px; font-weight: 700; border-radius: 999px; padding: 3px 10px;
+  }
+  .udb-pill.works { background: #1B5E20; color: #FFFFFF; }
+  .udb-pill.reroute { background: #FFE600; color: #123D18; }
+  .udb-pill.dead { background: #E63946; color: #FFFFFF; }
+  .udb-board {
+    background: #FFFFFF; border: 1px solid #DDE5D8; border-radius: 12px;
+    padding: 12px 12px 6px; margin-bottom: 10px;
+  }
+  .udb-axis { position: relative; height: 18px; margin: 0 0 4px; }
+  .udb-axis span {
+    position: absolute; transform: translateX(-50%);
+    font-size: 10.5px; font-weight: 600; color: #888; top: 0;
+  }
+  .udb-axis-svg { display: block; width: 100%; height: 8px; }
+  .udb-row { padding: 8px 0 10px; border-top: 1px solid #F0F2EC; }
+  .udb-row-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 5px; }
+  .udb-row-label { font-size: 13.5px; font-weight: 700; color: #212121; }
+  .udb-row-state { font-size: 11px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; }
+  .udb-row-state.works { color: #1B5E20; }
+  .udb-row-state.reroute { color: #8a7b00; }
+  .udb-row-state.dead { color: #E63946; }
+  .udb-bar { display: block; width: 100%; height: 16px; margin-bottom: 6px; }
+  .udb-row-note { font-size: 12.5px; line-height: 1.5; color: #555; }
+  .udb-row-note a { color: #1B5E20; font-weight: 600; }
+  .udb-empty { font-size: 13px; color: #666; padding: 14px 4px; }
+  .udb-foot { font-size: 11.5px; line-height: 1.5; color: #888; margin-top: 4px; }
+  @media (max-width: 420px) {
+    body { padding: 12px 8px 6px; }
+    .udb-head h2 { font-size: 18px; }
+    .udb-chip { font-size: 12px; padding: 6px 10px; }
+  }
+</style>
+</head>
+<body>
+<div class="udb-wrap">
+  <div class="udb-head">
+    <h2>Will your Saturday survive 3 October?</h2>
+    <p>German Unity Day puts Berlin on Sunday rules. Tap everything your day was supposed to include, and the board shows when each plan actually works on the holiday, what replaces it, and what is simply gone until Monday.</p>
+  </div>
+  <div class="udb-picker-label">Tap your plans for the day</div>
+  <div class="udb-chips" id="udbChips"></div>
+  <div class="udb-summary" id="udbSummary"></div>
+  <div class="udb-board">
+    <div class="udb-axis" id="udbAxisLabels"></div>
+    <svg class="udb-axis-svg" id="udbAxisSvg" viewBox="0 0 200 4" preserveAspectRatio="none" aria-hidden="true"></svg>
+    <div id="udbRows"></div>
+  </div>
+  <p class="udb-foot">Hours follow Berlin's holiday shop rules and the store and museum pages, checked on 31 August 2026. On the day itself, trust the door sign over any website.</p>
+</div>
+<script>
+(function () {
+  var DATA = null;
+  var picked = new Set();
+  var START = 6, END = 26;
+
+  function pct(h) { return ((h - START) / (END - START)) * 100; }
+  function hourLabel(h) { var real = h % 24; return (real < 10 ? '0' : '') + real + ':00'; }
+
+  function stateWord(s) {
+    if (s === 'works') return 'works';
+    if (s === 'reroute') return 'reroute';
+    return 'closed';
+  }
+
+  function barSvg(item) {
+    var svg = '<svg class="udb-bar" viewBox="0 0 200 16" preserveAspectRatio="none" role="img" aria-label="' + item.label + ' on 3 October">';
+    svg += '<rect x="0" y="6.5" width="200" height="3" rx="1.5" fill="#EEF1EA"></rect>';
+    if (item.state === 'dead') {
+      svg += '<line x1="4" y1="8" x2="196" y2="8" stroke="#E63946" stroke-width="2.5" stroke-dasharray="7 5"></line>';
+    } else {
+      var fill = item.state === 'works' ? '#1B5E20' : '#FFE600';
+      var stroke = item.state === 'works' ? 'none' : '#8a7b00';
+      for (var i = 0; i < item.windows.length; i++) {
+        var w = item.windows[i];
+        var x = pct(w.from) * 2, wd = (pct(w.to) - pct(w.from)) * 2;
+        svg += '<rect x="' + x.toFixed(1) + '" y="1.5" width="' + wd.toFixed(1) + '" height="13" rx="4" fill="' + fill + '"' + (stroke === 'none' ? '' : ' stroke="' + stroke + '" stroke-width="1"') + '></rect>';
+      }
+    }
+    svg += '</svg>';
+    return svg;
+  }
+
+  function renderAxis() {
+    var labels = document.getElementById('udbAxisLabels');
+    var svg = document.getElementById('udbAxisSvg');
+    var lhtml = '', shtml = '';
+    var labelStep = (document.documentElement.clientWidth < 480) ? 4 : 2;
+    for (var h = START; h <= END; h += 2) {
+      var p = pct(h);
+      var shift = h === START ? 'translateX(0)' : (h === END ? 'translateX(-100%)' : 'translateX(-50%)');
+      if ((h - START) % labelStep === 0) {
+        lhtml += '<span style="left:' + p.toFixed(1) + '%; transform:' + shift + '">' + hourLabel(h) + '</span>';
+      }
+      shtml += '<line x1="' + (p * 2).toFixed(1) + '" y1="0" x2="' + (p * 2).toFixed(1) + '" y2="4" stroke="#D8DDD2" stroke-width="0.7"></line>';
+    }
+    labels.innerHTML = lhtml;
+    svg.innerHTML = shtml;
+  }
+
+  function render() {
+    var rows = document.getElementById('udbRows');
+    var summary = document.getElementById('udbSummary');
+    var chosen = DATA.items.filter(function (it) { return picked.has(it.id); });
+
+    var counts = chosen.reduce(function (acc, it) { acc[it.state] += 1; return acc; }, { works: 0, reroute: 0, dead: 0 });
+    var totalPicked = chosen.length;
+    if (!totalPicked) {
+      summary.innerHTML = '<strong>Tap a plan above to build your board.</strong>';
+      rows.innerHTML = '<div class="udb-empty">Nothing picked yet. Start with the things you already booked or promised someone.</div>';
+      return;
+    }
+    summary.innerHTML =
+      '<strong>' + totalPicked + ' plan' + (totalPicked === 1 ? '' : 's') + ' checked:</strong>' +
+      '<span class="udb-pill works">' + counts.works + ' work as planned</span>' +
+      '<span class="udb-pill reroute">' + counts.reroute + ' need a reroute</span>' +
+      '<span class="udb-pill dead">' + counts.dead + ' closed until Monday</span>';
+
+    var html = '';
+    for (var i = 0; i < chosen.length; i++) {
+      var it = chosen[i];
+      html += '<div class="udb-row">';
+      html += '<div class="udb-row-top"><span class="udb-row-label">' + it.label + '</span>';
+      html += '<span class="udb-row-state ' + it.state + '">' + stateWord(it.state) + '</span></div>';
+      html += barSvg(it);
+      var note = it.note;
+      if (it.id === 'pharmacy') {
+        note = note.replace('aponet.de', '<a href="https://www.aponet.de/apotheke/notdienstsuche" target="_blank" rel="noopener">aponet.de</a>');
+      }
+      html += '<div class="udb-row-note">' + note + '</div>';
+      html += '</div>';
+    }
+    rows.innerHTML = html;
+  }
+
+  function toggle(id, btn) {
+    if (picked.has(id)) { picked.delete(id); btn.setAttribute('aria-pressed', 'false'); }
+    else { picked.add(id); btn.setAttribute('aria-pressed', 'true'); }
+    render();
+    if (window.__bwRequestEmbedResize) window.__bwRequestEmbedResize();
+  }
+
+  function init(data) {
+    DATA = data;
+    START = data.boardStart; END = data.boardEnd;
+    var chips = document.getElementById('udbChips');
+    var defaults = ['bakery', 'grocery', 'shopping', 'dinner'];
+    for (var i = 0; i < defaults.length; i++) picked.add(defaults[i]);
+    data.items.forEach(function (it) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'udb-chip';
+      btn.textContent = it.label;
+      btn.setAttribute('aria-pressed', picked.has(it.id) ? 'true' : 'false');
+      btn.addEventListener('click', function () { toggle(it.id, btn); });
+      chips.appendChild(btn);
+    });
+    renderAxis();
+    render();
+  }
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(init).catch(function () {
+    document.getElementById('udbSummary').innerHTML = '<strong>The board data did not load. Refresh the page to try again.</strong>';
+  });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

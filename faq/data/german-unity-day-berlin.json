@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "slug": "german-unity-day-berlin",
+  "key": "german-unity-day-berlin",
+  "config": {
+    "title": "German Unity Day in Berlin - FAQ",
+    "subtitle": "What 3 October changes in Berlin: which shops close, where groceries still work, what museums and transport do, and what is actually happening in the city.",
+    "items": [
+      {
+        "q": "Is everything closed in Berlin on 3 October?",
+        "a": "No. Shops close the way they do on a Sunday, so **malls, supermarkets and most stores stay shut**. Restaurants, cafes and bars run a normal Saturday, **museums open as on a Sunday**, bakeries may sell from **07:00 to 16:00**, and station and airport shops stay open all day."
+      },
+      {
+        "q": "Where can I buy groceries on German Unity Day in Berlin?",
+        "a": "Use the station supermarkets: **REWE Ostbahnhof (06:00 to 24:00)**, **REWE Hauptbahnhof (about 08:00 to 22:00)**, **EDEKA Friedrichstrasse and EDEKA Suedkreuz (about 08:00 to 22:00)**, denn's Biomarkt at Gesundbrunnen, Zoo, Ostkreuz and Hauptbahnhof, and the REWE in **BER Terminal 1 (05:00 to 24:00)**. Check the store page for the exact day before you rely on one."
+      },
+      {
+        "q": "Are Berlin museums open on 3 October?",
+        "a": "Yes. The Staatliche Museen state that on Saturday 3 October 2026 **all their museums open as on a Sunday**, which for most houses means about 10:00 to 18:00. The **Deutsches Historisches Museum offers free admission to its Pei building** on Unity Day. Book timed tickets ahead; a holiday Saturday fills the popular slots."
+      },
+      {
+        "q": "Is there a big celebration in Berlin on 3 October 2026?",
+        "a": "The official national celebration moves between federal states, and in 2026 it is **in Bremen, not Berlin**, from 2 to 4 October. In Berlin the weekend still has plenty: **TAG DER CLUBKULTUR opens on 3 October**, Spandau Citadel runs a **medieval festival on 3 and 4 October**, and the annual Open Mosque Day falls on the holiday itself."
+      },
+      {
+        "q": "Does public transport run on German Unity Day?",
+        "a": "Yes. U-Bahn, S-Bahn, trams and buses run on the **Sunday timetable**, and because 3 October 2026 is a Saturday, the usual **all-night weekend service** runs as well. Airport connections including the **S9 and the FEX** operate normally."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is everything closed in Berlin on 3 October?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Shops close the way they do on a Sunday, so malls, supermarkets and most stores stay shut. Restaurants, cafes and bars run a normal Saturday, museums open as on a Sunday, bakeries may sell from 07:00 to 16:00, and station and airport shops stay open all day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I buy groceries on German Unity Day in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use the station supermarkets: REWE Ostbahnhof (06:00 to 24:00), REWE Hauptbahnhof (about 08:00 to 22:00), EDEKA Friedrichstrasse and EDEKA Suedkreuz (about 08:00 to 22:00), denn's Biomarkt at Gesundbrunnen, Zoo, Ostkreuz and Hauptbahnhof, and the REWE in BER Terminal 1 (05:00 to 24:00). Check the store page for the exact day before you rely on one."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are Berlin museums open on 3 October?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The Staatliche Museen state that on Saturday 3 October 2026 all their museums open as on a Sunday, which for most houses means about 10:00 to 18:00. The Deutsches Historisches Museum offers free admission to its Pei building on Unity Day. Book timed tickets ahead; a holiday Saturday fills the popular slots."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a big celebration in Berlin on 3 October 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The official national celebration moves between federal states, and in 2026 it is in Bremen, not Berlin, from 2 to 4 October. In Berlin the weekend still has plenty: TAG DER CLUBKULTUR opens on 3 October, Spandau Citadel runs a medieval festival on 3 and 4 October, and the annual Open Mosque Day falls on the holiday itself."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does public transport run on German Unity Day?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. U-Bahn, S-Bahn, trams and buses run on the Sunday timetable, and because 3 October 2026 is a Saturday, the usual all-night weekend service runs as well. Airport connections including the S9 and the FEX operate normally."
+        }
+      }
+    ]
+  }
+}

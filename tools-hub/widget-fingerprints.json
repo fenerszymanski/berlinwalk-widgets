@@ -9691,6 +9691,36 @@
       "hasVisualLayer": true,
       "flatChipCard": false,
       "pageErrors": []
+    },
+    "berlin-unity-day-board": {
+      "slug": "berlin-unity-day-board",
+      "addedAt": "2026-08-31",
+      "measuredBy": "rendered",
+      "signals": {
+        "svgShapeNodes": 19,
+        "svgCount": 5,
+        "canvas": 0,
+        "contentImages": 0,
+        "mapLibrary": false,
+        "range": 0,
+        "dateInput": 0,
+        "radio": 0,
+        "checkbox": 0,
+        "select": 0,
+        "textInput": 0,
+        "buttons": 10,
+        "ariaPressed": 10,
+        "tables": 0,
+        "details": 0,
+        "textLength": 1380
+      },
+      "inputModel": "accumulate",
+      "stateProgression": "accumulate",
+      "outputModel": "running-total",
+      "visualGrammar": "plotted-geometry",
+      "hasVisualLayer": true,
+      "flatChipCard": false,
+      "pageErrors": []
     }
   }
 }

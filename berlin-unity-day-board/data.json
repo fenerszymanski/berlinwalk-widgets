@@ -1,0 +1,76 @@
+{
+  "boardStart": 6,
+  "boardEnd": 26,
+  "items": [
+    {
+      "id": "bakery",
+      "label": "Bakery breakfast",
+      "state": "works",
+      "windows": [{ "from": 7, "to": 16 }],
+      "note": "Berlin lets bakeries sell baked goods from 07:00 to 16:00 on holidays. The queue peaks mid-morning, so go before 09:30 or after 14:00."
+    },
+    {
+      "id": "grocery",
+      "label": "Full grocery run",
+      "state": "reroute",
+      "windows": [{ "from": 6, "to": 24 }],
+      "note": "Regular supermarkets stay closed. Station shops carry the day: REWE Ostbahnhof 06:00 to 24:00, REWE Hauptbahnhof and EDEKA Friedrichstrasse roughly 08:00 to 22:00."
+    },
+    {
+      "id": "shopping",
+      "label": "KaDeWe, malls, big stores",
+      "state": "dead",
+      "windows": [],
+      "note": "Closed on 3 October, and Sunday 4 October is closed anyway. Move real shopping to Friday 2 October."
+    },
+    {
+      "id": "museum",
+      "label": "Museum visit",
+      "state": "works",
+      "windows": [{ "from": 10, "to": 18 }],
+      "note": "The state museums open as on a Sunday, most from 10:00 to 18:00. Museum shops open with them, which quietly solves souvenirs."
+    },
+    {
+      "id": "cafe",
+      "label": "Cafe or brunch table",
+      "state": "works",
+      "windows": [{ "from": 9, "to": 16 }],
+      "note": "Cafes run a normal weekend service, and a holiday Saturday is their busiest shift. Go before 10:00 or reserve."
+    },
+    {
+      "id": "pharmacy",
+      "label": "Pharmacy errand",
+      "state": "reroute",
+      "windows": [{ "from": 6, "to": 26 }],
+      "note": "Regular pharmacies close, but one per area is on emergency duty around the clock. Look up the current Notdienst pharmacy on aponet.de."
+    },
+    {
+      "id": "dinner",
+      "label": "Restaurant dinner",
+      "state": "works",
+      "windows": [{ "from": 17, "to": 23 }],
+      "note": "Restaurants treat 3 October like any strong Saturday. Book a table; the holiday weekend fills the good rooms first."
+    },
+    {
+      "id": "club",
+      "label": "Club night",
+      "state": "works",
+      "windows": [{ "from": 23, "to": 26 }],
+      "note": "A completely normal Berlin club Saturday, and TAG DER CLUBKULTUR opens that same night across dozens of venues."
+    },
+    {
+      "id": "ber",
+      "label": "Airport transfer (BER)",
+      "state": "works",
+      "windows": [{ "from": 6, "to": 26 }],
+      "note": "Trains run the Sunday timetable all day, S9 and FEX included. The REWE in Terminal 1 opens 05:00 to 24:00 if you land hungry."
+    },
+    {
+      "id": "cash",
+      "label": "Cash from a bank",
+      "state": "reroute",
+      "windows": [{ "from": 6, "to": 26 }],
+      "note": "Bank branches stay shut. ATMs run around the clock; stick to bank-branded machines and skip the blue convenience ATMs."
+    }
+  ]
+}
