@@ -316,7 +316,7 @@
     </div>
 
     <div class="bw-footer">
-      Wall geometry: Berlin Open Data Portal · Map: © OpenStreetMap contributors © CARTO · For walking tour booking: <a href="https://www.berlinwalk.com/" target="_top" style="color:inherit;text-decoration:underline;">berlinwalk.com</a>
+      Wall geometry: Berlin Open Data Portal · Map: © OpenStreetMap contributors · For walking tour booking: <a href="https://www.berlinwalk.com/" target="_top" style="color:inherit;text-decoration:underline;">berlinwalk.com</a>
     </div>
   </div>
 
@@ -347,9 +347,8 @@
     });
     map.once('click', function () { map.scrollWheelZoom.enable(); });
 
-    L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/">CARTO</a>',
-      subdomains: 'abcd',
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       maxZoom: 19
     }).addTo(map);
 
