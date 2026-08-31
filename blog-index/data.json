@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-08-31T02:10:42.446Z",
+  "updatedAt": "2026-08-31T05:11:34.669Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 340,
-  "toolsTotal": 260,
+  "totalPosts": 341,
+  "toolsTotal": 261,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1618,6 +1618,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin Central Bus Station: Where Your FlixBus Arrives and How to Get Into the City",
+      "slug": "berlin-central-bus-station",
+      "path": "/post/berlin-central-bus-station",
+      "url": "https://www.berlinwalk.com/post/berlin-central-bus-station",
+      "excerpt": "Berlin's central bus station sits 7 km west of Alexanderplatz, and almost nobody checks the stop list before booking. Which of the nine FlixBus stops to choose for your part of the city, the two stations that split Berlin between them, and the 4 EUR ticket that covers the ride in.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-08-31T05:09:43.512Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_5d84175462c642fd83c46ed523d25cca~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-central-bus-station-zob-boarding.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_5d84175462c642fd83c46ed523d25cca~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-central-bus-station-zob-boarding.jpg",
+      "alt": "Travellers boarding a green FlixBus coach under the departure board at Berlin ZOB",
+      "relatedToolSlug": "berlin-bus-arrival-map"
+    },
+    {
       "title": "Rent a Boat in Berlin: What You Can Drive, and Where You Can Take It",
       "slug": "rent-a-boat-in-berlin",
       "path": "/post/rent-a-boat-in-berlin",
@@ -1803,26 +1820,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_7462992e3403473786a6c027d44b59fe~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/museumsinsel-vault.jpg",
       "alt": "The deep blue starry vault of Museumsinsel U-Bahn station with a yellow U5 train at the platform",
       "relatedToolSlug": "berlin-ubahn-design-board"
-    },
-    {
-      "title": "Berlin Weekly Markets: Which One Is Open on the Day You Are Free",
-      "slug": "berlin-weekly-markets",
-      "path": "/post/berlin-weekly-markets",
-      "url": "https://www.berlinwalk.com/post/berlin-weekly-markets",
-      "excerpt": "Berlin does not have one market you can turn up to whenever you like. It has around a hundred of them, each tied to a fixed weekday and a fixed square, and most are folded away by mid-afternoon. Saturday carries nine, Wednesday is the classic morning, Thursday runs latest, Monday has one, and Sunday has none at all. Here is the shape of the market week, and how to pick the one that fits the day you are actually free.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "food-nightlife",
-      "topicLabel": "Food & Nightlife",
-      "readTime": "6 min read",
-      "publishedDate": "2026-08-26T07:59:49.635Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_d77bfcd37ddb4788a623fb490bc5c077~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/winterfeldt.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_d77bfcd37ddb4788a623fb490bc5c077~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/winterfeldt.jpg",
-      "alt": "A fruit and vegetable stall under a red and white striped canopy at Winterfeldtplatz market in Berlin",
-      "relatedToolSlug": "berlin-market-week"
     }
   ],
   "allPosts": [
+    {
+      "title": "Berlin Central Bus Station: Where Your FlixBus Arrives and How to Get Into the City",
+      "slug": "berlin-central-bus-station",
+      "path": "/post/berlin-central-bus-station",
+      "url": "https://www.berlinwalk.com/post/berlin-central-bus-station",
+      "excerpt": "Berlin's central bus station sits 7 km west of Alexanderplatz, and almost nobody checks the stop list before booking. Which of the nine FlixBus stops to choose for your part of the city, the two stations that split Berlin between them, and the 4 EUR ticket that covers the ride in.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-08-31T05:09:43.512Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_5d84175462c642fd83c46ed523d25cca~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-central-bus-station-zob-boarding.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_5d84175462c642fd83c46ed523d25cca~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-central-bus-station-zob-boarding.jpg",
+      "alt": "Travellers boarding a green FlixBus coach under the departure board at Berlin ZOB",
+      "relatedToolSlug": "berlin-bus-arrival-map"
+    },
     {
       "title": "Rent a Boat in Berlin: What You Can Drive, and Where You Can Take It",
       "slug": "rent-a-boat-in-berlin",
