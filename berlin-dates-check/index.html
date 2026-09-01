@@ -1230,6 +1230,8 @@
   // analytics
   // ---------------------------------------------------------------------
   var analyticsConsent = true; // no consent wall on this tool; matches sitewide pixel embed already firing consent-free
+  var passiveViewStartedAt = Date.now();
+  var PASSIVE_VIEW_STABILITY_MS = 2000;
   function dateCheckEventFields() {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(String(STATE.arrivalStr || ''))) return {};
     return {
@@ -1242,6 +1244,16 @@
   }
   function trackEvent(eventName, extra) {
     if (/^(localhost|127\.0\.0\.1)$/.test(window.location.hostname)) return;
+    var isPassiveView = eventName === 'bw_lead_asset_experiment_view' || eventName === 'bw_lead_asset_gate_view';
+    var passiveViewWait = PASSIVE_VIEW_STABILITY_MS - (Date.now() - passiveViewStartedAt);
+    if (isPassiveView && passiveViewWait > 0) {
+      window.setTimeout(function () {
+        if (document.visibilityState !== 'hidden' && window.innerWidth > 0 && window.innerHeight > 0) {
+          trackEvent(eventName, extra);
+        }
+      }, passiveViewWait);
+      return;
+    }
     try {
       var url = new URL(API_BASE, window.location.href);
       url.searchParams.set('action', 'event');
