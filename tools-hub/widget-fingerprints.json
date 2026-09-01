@@ -498,11 +498,11 @@
         "checkbox": 0,
         "select": 0,
         "textInput": 1,
-        "buttons": 18,
+        "buttons": 36,
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 898
+        "textLength": 2474
       },
       "inputModel": "text-entry",
       "stateProgression": "accumulate",
@@ -760,7 +760,7 @@
         "svgShapeNodes": 3,
         "svgCount": 1,
         "canvas": 0,
-        "contentImages": 31,
+        "contentImages": 43,
         "mapLibrary": true,
         "range": 0,
         "dateInput": 0,
@@ -877,7 +877,7 @@
       "addedAt": "2026-06-27",
       "measuredBy": "rendered",
       "signals": {
-        "svgShapeNodes": 1803,
+        "svgShapeNodes": 11,
         "svgCount": 2,
         "canvas": 0,
         "contentImages": 13,
@@ -892,7 +892,7 @@
         "ariaPressed": 10,
         "tables": 0,
         "details": 0,
-        "textLength": 1224
+        "textLength": 1189
       },
       "inputModel": "accumulate",
       "stateProgression": "accumulate",
@@ -1462,7 +1462,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 552
+        "textLength": 583
       },
       "inputModel": "accumulate",
       "stateProgression": "accumulate",
@@ -1762,7 +1762,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 2929
+        "textLength": 2930
       },
       "inputModel": "date",
       "stateProgression": "accumulate",
@@ -2572,7 +2572,7 @@
         "ariaPressed": 6,
         "tables": 0,
         "details": 0,
-        "textLength": 25154
+        "textLength": 25152
       },
       "inputModel": "text-entry",
       "stateProgression": "replace-on-pick",
@@ -3172,7 +3172,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 684
+        "textLength": 683
       },
       "inputModel": "button-pick",
       "stateProgression": "replace-on-pick",
@@ -3202,7 +3202,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 1733
+        "textLength": 1732
       },
       "inputModel": "button-pick",
       "stateProgression": "replace-on-pick",
@@ -4702,7 +4702,7 @@
         "ariaPressed": 3,
         "tables": 0,
         "details": 0,
-        "textLength": 1819
+        "textLength": 1857
       },
       "inputModel": "text-entry",
       "stateProgression": "accumulate",
@@ -5032,7 +5032,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 1233
+        "textLength": 1281
       },
       "inputModel": "button-pick",
       "stateProgression": "replace-on-pick",
@@ -6952,7 +6952,7 @@
         "ariaPressed": 7,
         "tables": 0,
         "details": 0,
-        "textLength": 1035
+        "textLength": 1093
       },
       "inputModel": "continuous-scrub",
       "stateProgression": "continuous-scrub",
@@ -9202,7 +9202,7 @@
         "ariaPressed": 4,
         "tables": 0,
         "details": 0,
-        "textLength": 1457
+        "textLength": 1496
       },
       "inputModel": "date",
       "stateProgression": "accumulate",
@@ -9352,7 +9352,7 @@
         "ariaPressed": 2,
         "tables": 1,
         "details": 1,
-        "textLength": 3014
+        "textLength": 2980
       },
       "inputModel": "accumulate",
       "stateProgression": "accumulate",
@@ -9382,7 +9382,7 @@
         "ariaPressed": 18,
         "tables": 0,
         "details": 0,
-        "textLength": 2392
+        "textLength": 2391
       },
       "inputModel": "continuous-scrub",
       "stateProgression": "continuous-scrub",
@@ -9778,6 +9778,36 @@
       "stateProgression": "replace-on-pick",
       "outputModel": "verdict-card",
       "visualGrammar": "canvas",
+      "hasVisualLayer": true,
+      "flatChipCard": false,
+      "pageErrors": []
+    },
+    "berlin-classical-ticket-ladder": {
+      "slug": "berlin-classical-ticket-ladder",
+      "addedAt": "2026-09-01",
+      "measuredBy": "rendered",
+      "signals": {
+        "svgShapeNodes": 56,
+        "svgCount": 1,
+        "canvas": 0,
+        "contentImages": 0,
+        "mapLibrary": false,
+        "range": 0,
+        "dateInput": 0,
+        "radio": 0,
+        "checkbox": 0,
+        "select": 0,
+        "textInput": 0,
+        "buttons": 4,
+        "ariaPressed": 4,
+        "tables": 0,
+        "details": 0,
+        "textLength": 1193
+      },
+      "inputModel": "multi-toggle",
+      "stateProgression": "replace-on-pick",
+      "outputModel": "plotted-position",
+      "visualGrammar": "plotted-geometry",
       "hasVisualLayer": true,
       "flatChipCard": false,
       "pageErrors": []

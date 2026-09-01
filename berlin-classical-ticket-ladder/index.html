@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Classical Ticket Ladder</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #FAFAF5;
+    color: #212121;
+    padding: 14px 12px 8px;
+  }
+  .bcl-wrap { max-width: 760px; margin: 0 auto; }
+  .bcl-head h2 { font-size: 21px; line-height: 1.25; color: #1B5E20; margin-bottom: 6px; }
+  .bcl-head p { font-size: 13.5px; line-height: 1.55; color: #444; margin-bottom: 12px; }
+  .bcl-toggles { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 10px; }
+  .bcl-toggles button {
+    font-family: inherit; font-size: 12.5px; font-weight: 600; color: #1B5E20;
+    background: #F1F6EC; border: 1.5px solid #C5E1A5; border-radius: 999px;
+    padding: 7px 13px; cursor: pointer; user-select: none;
+  }
+  .bcl-toggles button:hover { border-color: #7CB342; background: #E8F1DF; }
+  .bcl-toggles button[aria-pressed="true"] {
+    background: #1B5E20; border-color: #1B5E20; color: #FFFFFF;
+  }
+  .bcl-plotcard {
+    background: #FFFFFF; border: 1px solid #DDE5D8; border-radius: 12px;
+    padding: 10px 6px 4px; margin-bottom: 10px;
+  }
+  .bcl-plotcard svg { display: block; width: 100%; height: auto; }
+  .bcl-count {
+    font-size: 12.5px; font-weight: 600; color: #1B5E20;
+    padding: 0 6px 8px;
+  }
+  .bcl-detail {
+    background: #FFFFFF; border: 1px solid #DDE5D8; border-radius: 12px;
+    padding: 12px 14px; margin-bottom: 10px; min-height: 92px;
+  }
+  .bcl-detail h3 { font-size: 15.5px; color: #1B5E20; margin-bottom: 5px; line-height: 1.3; }
+  .bcl-detail .bcl-price {
+    display: inline-block; font-size: 12.5px; font-weight: 700; color: #123D18;
+    background: #FFE600; border-radius: 999px; padding: 3px 10px; margin-bottom: 7px;
+  }
+  .bcl-detail p { font-size: 13px; line-height: 1.55; color: #333; }
+  .bcl-detail .bcl-move { margin-top: 7px; font-size: 13px; line-height: 1.5; }
+  .bcl-detail .bcl-move strong { color: #1B5E20; }
+  .bcl-note { font-size: 11px; color: #777; line-height: 1.5; padding: 0 4px 10px; }
+  .bcl-dot { cursor: pointer; }
+  #bclPlot text, #bclPlot line { pointer-events: none; }
+</style>
+</head>
+<body>
+<div class="bcl-wrap">
+  <div class="bcl-head">
+    <h2>Berlin Classical Ticket Ladder</h2>
+    <p>Every realistic way into a classical concert at the Philharmonie, plotted by price and by how far ahead you have to act. Tap a marker for the exact move; the switches match the ladder to your situation.</p>
+  </div>
+  <div class="bcl-toggles" id="bclToggles">
+    <button type="button" aria-pressed="false" data-flag="u30">I am under 30</button>
+    <button type="button" aria-pressed="false" data-flag="week">My evening is this week</button>
+    <button type="button" aria-pressed="false" data-flag="orch">Full orchestra only</button>
+    <button type="button" aria-pressed="false" data-flag="cheap">Keep it under 20 euro</button>
+  </div>
+  <div class="bcl-plotcard">
+    <div class="bcl-count" id="bclCount"></div>
+    <div id="bclPlot"></div>
+  </div>
+  <div class="bcl-detail" id="bclDetail"></div>
+  <p class="bcl-note">Prices checked on 1 September 2026 on the official Berliner Philharmoniker and DSO sites. Big-name Berliner Philharmoniker nights vary per concert; the range shown is the published span for the season opening. The standing-room price is confirmed at the evening box office.</p>
+</div>
+<script>
+(function () {
+  'use strict';
+
+  /* Each route: x column 0-4, price band [lo, hi] in euro, flags. */
+  var COLS = ['Months ahead', 'Weeks ahead', '2 days before', 'Same evening', 'Walk in'];
+  var COLS_S = ['Months', 'Weeks', '2 days', 'Evening', 'Walk in'];
+  var ROUTES = [
+    { id: 'bph', short: 'Philharmoniker', name: 'Berliner Philharmoniker night', x: 0, lo: 50, hi: 161, dashed: false, u30: false, orch: true,
+      when: 'Online sale opens in blocks: 10 October (noon) for December to April concerts.',
+      why: 'The famous orchestra in the Grosser Saal. Big conductor nights sell out within days of the sale window opening.',
+      move: 'Set a reminder for the sale date on berliner-philharmoniker.de and buy category 5 or 6; the hall has no bad sightlines.' },
+    { id: 'dso', short: 'DSO symphony', name: 'DSO symphony, same hall', x: 1, lo: 24, hi: 70, dashed: false, u30: false, orch: true,
+      when: 'Usually still bookable a few weeks or even days ahead.',
+      why: 'The Deutsches Symphonie-Orchester plays the same Grosser Saal for roughly half the price, and it rarely sells out months ahead.',
+      move: 'Check dso-berlin.de for your dates; category 6 at 24 euro is the best value seat in the building.' },
+    { id: 'dsodebut', short: 'DSO debut', name: 'DSO debut nights', x: 1, lo: 12, hi: 32, dashed: false, u30: false, orch: true,
+      when: 'Bookable close to the date.',
+      why: 'Young soloists with a full orchestra, same stage, tickets from 12 euro.',
+      move: 'Search the DSO calendar for Debut concerts; they are the cheapest full-orchestra seats in the Philharmonie.' },
+    { id: 'tour', short: 'Building tour', name: 'Philharmonie building tour', x: 1, lo: 5, hi: 10, dashed: false, u30: false, orch: false,
+      when: 'Dates go online on the 20th of the month before; a few tours per month.',
+      why: 'One hour inside Scharoun architecture and the famous acoustics story, 10 euro, 5 reduced.',
+      move: 'Book on the official site as soon as the next month opens; tours are online-only and capped at 25 people.' },
+    { id: 'u30', short: 'U30 ticket', name: 'U30 ticket (under 30)', x: 1, lo: 18, hi: 18, dashed: false, u30: true, orch: true,
+      when: 'Online, for selected Berliner Philharmoniker concerts.',
+      why: 'A flat 18 euro for the main orchestra if you are under 30.',
+      move: 'Look for the U30 note on the concert detail page and bring ID matching your birth year.' },
+    { id: 'standby', short: 'Standby', name: 'Standby for sold-out nights', x: 2, lo: 50, hi: 161, dashed: true, u30: false, orch: true,
+      when: 'Box office, two days before the first concert evening, when the house releases held seats.',
+      why: 'Sold out online does not mean sold out. Returned and held tickets go on sale at face price.',
+      move: 'Go to the Philharmonie box office (open 12:00 to 18:00) exactly two days before the concert and ask.' },
+    { id: 'standing', short: 'Standing room', name: 'Standing room, on the night', x: 3, lo: 16, hi: 16, dashed: true, u30: false, orch: true,
+      when: 'Evening box office only, from one hour before the concert.',
+      why: 'A small block of standing places behind the seats is sold only on the night, even for sold-out concerts.',
+      move: 'Arrive well before the evening box office opens and queue; confirm the price at the counter.' },
+    { id: 'classic', short: 'ClassicCard', name: 'ClassicCard rush (14 to 29)', x: 3, lo: 11, hi: 16, dashed: false, u30: true, orch: true,
+      when: 'In the app, or two hours before the concert.',
+      why: 'The ClassicCard gets under-30s in for 16 euro, or 11 euro two hours before start, across Berlin classical houses.',
+      move: 'Get the card in the ClassicCard app, then decide on the day; two hours before start is the sweet spot.' },
+    { id: 'lunch', short: 'Free lunch concert', name: 'Free Wednesday lunch concert', x: 4, lo: 0, hi: 0, dashed: false, u30: false, orch: false,
+      when: 'Every Wednesday at 13:00, September to June. No booking exists.',
+      why: 'Members of the Berliner Philharmoniker play chamber music in the foyer, free, about 45 minutes. Entry is by chip at the door until the space is full.',
+      move: 'Be at the Philharmonie entrance around 12:15; this season restarts on 2 September.' }
+  ];
+
+  var flags = { u30: false, week: false, orch: false, cheap: false };
+  var picked = 'lunch';
+  var plotEl = document.getElementById('bclPlot');
+  var detailEl = document.getElementById('bclDetail');
+  var countEl = document.getElementById('bclCount');
+  var toggleWrap = document.getElementById('bclToggles');
+
+  function fits(r) {
+    if (flags.week && r.x === 0) return false;
+    if (flags.orch && !r.orch) return false;
+    if (flags.cheap && r.lo > 20) return false;
+    if (flags.u30) return true;
+    return !r.u30;
+  }
+
+  function euro(r) {
+    if (r.lo === 0 && r.hi === 0) return 'Free';
+    if (r.lo === r.hi) return r.lo + ' euro';
+    return r.lo + ' to ' + r.hi + ' euro';
+  }
+
+  function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+
+  function render() {
+    var w = Math.max(272, Math.min(plotEl.clientWidth || 700, 740));
+    var narrow = w < 480;
+    var padL = narrow ? 34 : 44;
+    var padR = narrow ? 8 : 14;
+    var padT = 16;
+    var padB = narrow ? 48 : 46;
+    var h = narrow ? 400 : 440;
+    var innerW = w - padL - padR;
+    var innerH = h - padT - padB;
+    var maxE = 170;
+    var yOf = function (v) { return padT + innerH - (v / maxE) * innerH; };
+    var xOf = function (c) { return padL + (c + 0.5) * (innerW / COLS.length); };
+    var fitCount = ROUTES.filter(fits).length;
+    countEl.textContent = fitCount + ' of ' + ROUTES.length + ' routes fit your evening';
+
+    var parts = ['<svg viewBox="0 0 ' + w + ' ' + h + '" width="' + w + '" height="' + h + '" role="img" aria-label="Price versus lead time for Berlin classical concert routes">'];
+
+    /* y grid + labels */
+    var gy = [0, 40, 80, 120, 160];
+    for (var i = 0; i < gy.length; i++) {
+      var yy = yOf(gy[i]);
+      parts = parts.concat(['<line x1="' + padL + '" y1="' + yy + '" x2="' + (w - padR) + '" y2="' + yy + '" stroke="#E4EADF" stroke-width="1"/>',
+        '<text x="' + (padL - 6) + '" y="' + (yy + 3.5) + '" text-anchor="end" font-size="10.5" fill="#7A8577">' + (gy[i] === 0 ? 'Free' : gy[i]) + '</text>']);
+    }
+    /* x columns */
+    var labels = narrow ? COLS_S : COLS;
+    for (var c = 0; c < COLS.length; c++) {
+      var cx = xOf(c);
+      parts = parts.concat(['<line x1="' + cx + '" y1="' + padT + '" x2="' + cx + '" y2="' + (padT + innerH) + '" stroke="#F0F3EC" stroke-width="1"/>',
+        '<text x="' + cx + '" y="' + (h - padB + 30) + '" text-anchor="middle" font-size="' + (narrow ? 10 : 11.5) + '" font-weight="600" fill="#1B5E20">' + labels[c] + '</text>']);
+    }
+    /* axis caption */
+    parts = parts.concat(['<text x="' + (padL + innerW / 2) + '" y="' + (h - 4) + '" text-anchor="middle" font-size="10" fill="#98A295">how far ahead you have to act</text>']);
+
+    /* routes: manual left/right nudges so markers in one column never collide */
+    var nudge = { bph: 0, dso: -0.28, dsodebut: -0.3, tour: 0.3, u30: 0.45, standby: 0, standing: -0.18, classic: 0.22, lunch: 0 };
+    var side = { bph: 'above', dso: 'above', dsodebut: 'above', tour: 'below', u30: 'right', standby: 'above', standing: 'below', classic: 'above', lunch: 'above' };
+    for (var k = 0; k < ROUTES.length; k++) {
+      var r = ROUTES[k];
+      var ok = fits(r);
+      var sel = picked === r.id;
+      var cx2 = xOf(r.x) + (nudge[r.id] || 0) * (innerW / COLS.length);
+      var y1 = yOf(r.hi), y2 = yOf(r.lo);
+      var col = ok ? (sel ? '#123D18' : '#1B5E20') : '#B9C4B4';
+      var bar = '';
+      if (r.hi !== r.lo) {
+        bar = '<line x1="' + cx2 + '" y1="' + y1 + '" x2="' + cx2 + '" y2="' + y2 + '" stroke="' + col + '" stroke-width="' + (sel ? 7 : 5) + '" stroke-linecap="round"' + (r.dashed ? ' stroke-dasharray="2 6"' : '') + ' opacity="' + (ok ? '0.9' : '0.45') + '"/>';
+      }
+      var dotY = r.hi === r.lo ? y1 : y2;
+      var dotR = sel ? 9 : 7;
+      var dotFill = sel ? '#FFE600' : (ok ? '#7CB342' : '#CDD6C8');
+      var ring = sel ? '<circle cx="' + cx2 + '" cy="' + dotY + '" r="' + (dotR + 4) + '" fill="none" stroke="#FFE600" stroke-width="2" opacity="0.7"/>' : '';
+      var tag = '';
+      if (r.u30 && side[r.id] !== 'right') {
+        tag = '<text x="' + (cx2 + dotR + 4) + '" y="' + (dotY + 3.5) + '" font-size="9.5" font-weight="700" fill="' + (ok ? '#1B5E20' : '#AEB9A9') + '">u30</text>';
+      }
+      var lbl = '';
+      if (!narrow || sel) {
+        var lblY = y1 - 8, anchor = 'middle', lblX = cx2;
+        if (side[r.id] === 'below') { lblY = (r.hi === r.lo ? dotY : y2) + dotR + 12; }
+        else if (side[r.id] === 'right') { anchor = 'start'; lblX = cx2 + dotR + 6; lblY = dotY + 3.5; }
+        else if (r.hi === r.lo) { lblY = dotY - dotR - 6; }
+        if (anchor === 'middle') {
+          if (lblX > w - 80) { anchor = 'end'; lblX = Math.min(lblX + 10, w - 4); }
+          else if (lblX < 80) { anchor = 'start'; lblX = Math.max(lblX - 10, 4); }
+        }
+        lbl = '<text x="' + lblX + '" y="' + lblY + '" text-anchor="' + anchor + '" font-size="' + (narrow ? 9.5 : 10.5) + '" font-weight="600" fill="' + (ok ? '#334131' : '#AEB9A9') + '">' + esc(r.short) + '</text>';
+      }
+      parts = parts.concat(['<g class="bcl-dot" data-route="' + r.id + '">', bar, ring,
+        '<circle cx="' + cx2 + '" cy="' + dotY + '" r="' + dotR + '" fill="' + dotFill + '" stroke="' + col + '" stroke-width="2"/>',
+        '<circle cx="' + cx2 + '" cy="' + dotY + '" r="18" fill="rgba(0,0,0,0)"/>', tag, lbl, '</g>']);
+    }
+    parts = parts.concat(['</svg>']);
+    plotEl.innerHTML = parts.join('');
+
+    var route = null;
+    for (var m = 0; m < ROUTES.length; m++) { if (ROUTES[m].id === picked) route = ROUTES[m]; }
+    if (route) {
+      var okNow = fits(route);
+      detailEl.innerHTML = [
+        '<h3>' + esc(route.name) + '</h3>',
+        '<span class="bcl-price">' + euro(route) + (route.dashed ? ' · confirmed at the box office' : '') + '</span>',
+        '<p>' + esc(route.why) + ' ' + esc(route.when) + '</p>',
+        '<p class="bcl-move"><strong>The move:</strong> ' + esc(route.move) + '</p>',
+        okNow ? '' : '<p class="bcl-move"><strong>Note:</strong> this route does not match your current switches.</p>'
+      ].join('');
+    }
+  }
+
+  toggleWrap.onclick = function (e) {
+    var b = e.target.closest ? e.target.closest('button[data-flag]') : null;
+    if (!b) return;
+    var f = b.getAttribute('data-flag');
+    flags[f] = !flags[f];
+    b.setAttribute('aria-pressed', flags[f] ? 'true' : 'false');
+    render();
+  };
+
+  plotEl.onclick = function (e) {
+    var g = e.target.closest ? e.target.closest('g[data-route]') : null;
+    if (!g) return;
+    picked = g.getAttribute('data-route');
+    render();
+  };
+
+  var resizeTimer = null;
+  window.onresize = function () {
+    if (resizeTimer) clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(render, 120);
+  };
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
