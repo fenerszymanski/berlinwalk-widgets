@@ -1655,9 +1655,10 @@
         }
       }
       // The visible Date Check frame itself can be replaced once while Wix
-      // settles its initial height.  A short stability window prevents that
-      // first, soon-aborted document from duplicating the arrival event.
-      window.setTimeout(function () { trackVisibleToolView(0); }, 500);
+      // settles its initial height, especially on mobile.  Count an arrival
+      // only after two stable seconds so the soon-aborted document cannot
+      // duplicate the event and a sub-two-second bounce is not overstated.
+      window.setTimeout(function () { trackVisibleToolView(0); }, 2000);
       hydrateFromQuery();
     })
     .catch(function (err) {
