@@ -992,6 +992,7 @@
 
         .bw-paid-booking-panel bw-booking-calendar .bw-cal-cta {
           color: #FFFFFF;
+          font-size: 14px !important;
         }
 
         .bw-paid-section {
@@ -1494,7 +1495,6 @@
 
           .bw-paid-booking-panel bw-booking-calendar .bw-cal-cta {
             height: 44px;
-            font-size: 14px !important;
           }
 
           .bw-paid-trust-grid,
