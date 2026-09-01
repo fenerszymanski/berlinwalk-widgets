@@ -2,7 +2,7 @@
 
 Run date: 2026-09-01
 
-Build/cache key: `berlin-history-story-v2-20260901g`
+Build/cache key: `berlin-history-story-v2-20260901h`
 
 Status: `DRAFT UPDATE — PUBLISH APPROVAL REQUIRED`
 Worktree: `/Users/yusufucuz/Documents/New project/berlinwalk-widgets/_worktrees/berlin-history-story-v1-20260901`
@@ -64,6 +64,12 @@ Implementation states inspected:
 
 - The History Story custom element adds `bw-history-story-page-active` to `body` while connected and removes it when disconnected, preventing the page-specific state from leaking during Wix SPA navigation.
 - At `769px` and wider, that state hides only `#bw-desktop-cta`. The existing mobile behavior remains unchanged.
+
+## Mobile cover spacing and scroll cue update
+
+- On the 390x844 baseline, the H1 started at 450px. The tall-mobile adjustment moves it to 352px while keeping the archive map above it; the cue remains fully inside the 844px cover.
+- The same native `Scroll to begin` anchor now carries a 1.8-second downward arrow animation on desktop and mobile. Its interactive box is at least 44px high; `prefers-reduced-motion: reduce` computes to `animation-name: none` and no transform.
+- Browser QA passed at 1487x1058, 390x844, 320x568 and 844x390: cue visible, no clipping or overlap, and horizontal overflow 0. Clicking the cue set `#bw-hs-story-start`, scrolled that target to 0px from the viewport top and transferred focus to it. Console errors and warnings: 0.
 
 ## Evidence boundaries
 
