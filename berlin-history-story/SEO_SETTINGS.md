@@ -5,8 +5,8 @@ Status: `UNPUBLISHED`. Apply only to the separate `/berlin-history-story` page a
 - **Page title:** Berlin History Story: 800 Years in 10 Scenes | BerlinWalk
 - **Meta description:** Scroll through 800 years of Berlin history, from Molkenmarkt and medieval Cölln to Greater Berlin, the Wall and the city today.
 - **Canonical:** `https://www.berlinwalk.com/berlin-history-story`
-- **Social title:** Berlin History Story: 800 Years in 10 Scenes
-- **Social description:** A careful ten-scene journey through Berlin's history, with source notes, licensed visual credits and a practical reading list for the city today.
+- **Social title:** Berlin History Story: 800 Years in 10 Scenes | BerlinWalk
+- **Social description:** Scroll through 800 years of Berlin history, from Molkenmarkt and medieval Cölln to Greater Berlin, the Wall and the city today.
 - **Social creative to upload:** `assets/social/berlin-history-story-1200x630.jpg` (exactly 1200x630; a permitted public-domain 1740-map crop recorded in `ASSET_MANIFEST.md`)
 - **Robots after verified publication:** `index,follow`
 
@@ -19,7 +19,7 @@ Status: `UNPUBLISHED`. Apply only to the separate `/berlin-history-story` page a
   "@id": "https://www.berlinwalk.com/berlin-history-story#article",
   "mainEntityOfPage": "https://www.berlinwalk.com/berlin-history-story",
   "headline": "Berlin History Story: 800 Years in 10 Scenes",
-  "description": "A source-led, ten-scene story of Berlin from medieval trading towns to the present city.",
+  "description": "Scroll through 800 years of Berlin history, from Molkenmarkt and medieval Cölln to Greater Berlin, the Wall and the city today.",
   "inLanguage": "en",
   "author": {
     "@type": "Person",

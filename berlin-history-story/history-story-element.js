@@ -19,6 +19,16 @@
   var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=berlin_history_story&utm_medium=story&utm_campaign=history_v1&utm_content=closing_cta';
   var WALL_URL = 'https://www.berlinwalk.com/berlin-wall-timeline?utm_source=berlin_history_story&utm_medium=story&utm_campaign=history_v1&utm_content=scene_8';
   var FINAL_URL = 'https://www.berlinwalk.com/berlin-history-story';
+  var COVER_URL = BASE_URL + 'assets/social/berlin-history-story-1200x630.jpg';
+  var SEO = {
+    title: 'Berlin History Story: 800 Years in 10 Scenes | BerlinWalk',
+    articleHeadline: 'Berlin History Story: 800 Years in 10 Scenes',
+    description: 'Scroll through 800 years of Berlin history, from Molkenmarkt and medieval Cölln to Greater Berlin, the Wall and the city today.',
+    socialTitle: 'Berlin History Story: 800 Years in 10 Scenes | BerlinWalk',
+    socialDescription: 'Scroll through 800 years of Berlin history, from Molkenmarkt and medieval Cölln to Greater Berlin, the Wall and the city today.',
+    image: COVER_URL,
+    imageAlt: 'A c. 1740 map of Berlin by Homann Heirs'
+  };
 
   var CHAPTERS = [
     { key: 'molkenmarkt', year: 2026, h: 150, align: 'left', eyebrow: 'Scene 1 · Today', title: 'Start at Molkenmarkt', body: 'At Molkenmarkt, Berlin is not finished with its own beginning. Since 2019, state archaeologists have been examining the ground before a new quarter is built here. They call this Berlin\'s oldest market and an archive of around 800 years of city life. That is a useful way to start: the streets under your feet are not a backdrop. They are evidence. Look for the low ground by the Spree, then imagine traders, bridges and courts pressing close together.' },
@@ -82,7 +92,48 @@
   }
   function clamp(value) { return Math.max(0, Math.min(1, value)); }
 
-  function seoSafetyNet() {
+  function upsertMeta(kind, key, content) {
+    var selector = 'meta[' + kind + '="' + key + '"]';
+    var element = document.head.querySelector(selector);
+    if (!element) {
+      element = document.createElement('meta');
+      element.setAttribute(kind, key);
+      document.head.appendChild(element);
+    }
+    element.content = content;
+  }
+
+  function upsertLink(rel, href) {
+    var element = document.head.querySelector('link[rel="' + rel + '"]');
+    if (!element) {
+      element = document.createElement('link');
+      element.rel = rel;
+      document.head.appendChild(element);
+    }
+    element.href = href;
+  }
+
+  // Native Wix server metadata is authoritative on the public page. This safety
+  // net exists only for local previews, so it can never overwrite the exact
+  // Wix-uploaded social image or canonical metadata after release.
+  function applySeoSafetyNet() {
+    var path = location.pathname.replace(/\/+$/, '') || '/';
+    var isFinal = /(^|\.)berlinwalk\.com$/i.test(location.hostname) && path === '/berlin-history-story';
+    if (isFinal) return;
+    var canonical = location.origin + path;
+    document.title = 'Berlin History Story | BerlinWalk';
+    upsertMeta('name', 'description', 'Preview of Berlin History Story by BerlinWalk.');
+    upsertLink('canonical', canonical);
+    upsertMeta('property', 'og:type', 'article');
+    upsertMeta('property', 'og:title', document.title);
+    upsertMeta('property', 'og:description', 'Preview of Berlin History Story by BerlinWalk.');
+    upsertMeta('property', 'og:url', canonical);
+    upsertMeta('property', 'og:image', SEO.image);
+    upsertMeta('property', 'og:image:alt', SEO.imageAlt);
+    upsertMeta('name', 'twitter:card', 'summary_large_image');
+    upsertMeta('name', 'twitter:title', document.title);
+    upsertMeta('name', 'twitter:description', 'Preview of Berlin History Story by BerlinWalk.');
+    upsertMeta('name', 'twitter:image', SEO.image);
     if (document.getElementById('bw-berlin-history-story-jsonld')) return;
     var node = document.createElement('script');
     node.id = 'bw-berlin-history-story-jsonld';
@@ -92,13 +143,34 @@
       '@type': 'Article',
       '@id': FINAL_URL + '#article',
       mainEntityOfPage: FINAL_URL,
-      headline: 'Berlin History Story: 800 Years in 10 Scenes',
-      description: 'A source-led, ten-scene story of Berlin from medieval trading towns to the present city.',
+      headline: SEO.articleHeadline,
+      description: SEO.description,
       inLanguage: 'en',
       author: { '@type': 'Person', name: 'Yusuf', url: 'https://www.berlinwalk.com/the-guide' },
       publisher: { '@type': 'Organization', name: 'BerlinWalk', url: 'https://www.berlinwalk.com' }
     });
     document.head.appendChild(node);
+  }
+
+  function analyticsAllowed() {
+    try {
+      var manager = window.consentPolicyManager;
+      var current = manager && typeof manager.getCurrentConsentPolicy === 'function'
+        ? manager.getCurrentConsentPolicy()
+        : null;
+      var policy = current && (current.policy || current);
+      return Boolean(policy && policy.analytics === true);
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function isQaMode() {
+    var query = new URLSearchParams(window.location.search || '');
+    return /^#bwqa=\d+$/.test(window.location.hash || '')
+      || query.has('bwqa')
+      || query.has('bwHistoryStory')
+      || query.has('qa');
   }
 
   function card(chapter) {
@@ -107,8 +179,8 @@
     if (chapter.key === 'molkenmarkt') lead += '<p class="bw-hs-card-title">' + esc(chapter.title) + '</p>';
     var extra = '';
     if (chapter.key === 'molkenmarkt') extra = '<p class="bw-hs-hero-kicker">800 years · 10 scenes · one careful reading of the city</p><span class="bw-hs-scroll-cue">Scroll through the city</span>';
-    if (chapter.key === 'wall') extra = '<a class="bw-hs-source-link" href="' + esc(WALL_URL) + '">Open the full Berlin Wall Timeline</a>';
-    if (chapter.key === 'today') extra = '<div class="bw-hs-place-grid"><div class="bw-hs-place"><b>Molkenmarkt</b>buried market city</div><div class="bw-hs-place"><b>Friedrichstadt</b>planned royal capital</div><div class="bw-hs-place"><b>Gleis 17</b>evidence of deportation</div><div class="bw-hs-place"><b>Potsdamer Platz</b>post-Wall rebuild</div></div><a class="bw-hs-btn" href="' + esc(BOOK_URL) + '">Book my Free Berlin Walking Tour</a><p class="bw-hs-final-note">My free tour starts at Alexanderplatz. It lasts 2 hours and explores the historic centre of former East Berlin: 11 stops, 16 places and about 3 km. It does not follow the Berlin Wall line.</p>';
+    if (chapter.key === 'wall') extra = '<a class="bw-hs-source-link" data-bw-history-track="wall_timeline" href="' + esc(WALL_URL) + '">Open the full Berlin Wall Timeline</a>';
+    if (chapter.key === 'today') extra = '<div class="bw-hs-place-grid"><div class="bw-hs-place"><b>Molkenmarkt</b>buried market city</div><div class="bw-hs-place"><b>Friedrichstadt</b>planned royal capital</div><div class="bw-hs-place"><b>Gleis 17</b>evidence of deportation</div><div class="bw-hs-place"><b>Potsdamer Platz</b>post-Wall rebuild</div></div><a class="bw-hs-btn" data-bw-history-track="closing_cta" href="' + esc(BOOK_URL) + '">Book my Free Berlin Walking Tour</a><p class="bw-hs-final-note">My free tour starts at Alexanderplatz. It lasts 2 hours and explores the historic centre of former East Berlin: 11 stops, 16 places and about 3 km. It does not follow the Berlin Wall line.</p>';
     return '<div class="bw-hs-card">' + lead + heading + '<p>' + esc(chapter.body) + '</p>' + extra + '</div>';
   }
 
@@ -126,7 +198,38 @@
   }
 
   function aftercare() {
-    return '<section class="bw-hs-aftercare" aria-label="Sources, image credits and related reading"><div class="bw-hs-aftercare-inner"><h2>Keep the story connected to the city.</h2><p>These links stay deliberately practical. Use one place, one date or one question as the next thing to investigate.</p><details class="bw-hs-details"><summary>Explore more Berlin notes</summary><div class="bw-hs-details-body">' + related() + '<p class="bw-hs-baseline">This 42-link layer is a fixed handoff baseline from a 22 August 2026 topic snapshot. It is not a claim that these posts are all historical articles or that an orphan audit has been completed.</p></div></details><details class="bw-hs-details"><summary>Sources for this story</summary><div class="bw-hs-details-body"><ol class="bw-hs-source-list"><li><a href="https://www.berlin.de/landesdenkmalamt/archaeologie/bodendenkmalpflege/grabungen/grabung-am-molkenmarkt/">Berlin State Archaeology: Molkenmarkt excavation</a></li><li><a href="https://www.berlin.de/en/history/8476760-8619314-the-medieval-trading-center.en.html">Berlin.de: medieval trading centre</a></li><li><a href="https://www.berlin.de/en/history/8477225-8619314-the-royal-capital.en.html">Berlin.de: royal capital</a></li><li><a href="https://www.berlin.de/rathausblock-fk/gebiet/geschichte-des-dragonerareals/">Berlin Senate: Hobrecht context</a></li><li><a href="https://www.berlin.de/en/history/8481401-8619314-greater-berlin-act.en.html">Berlin.de: Greater Berlin Act</a></li><li><a href="https://www.berlin.de/ba-charlottenburg-wilmersdorf/ueber-den-bezirk/geschichte/gedenkstaetten/artikel.1137369.php">Gleis 17 memorial background</a> and <a href="https://encyclopedia.ushmm.org/content/en/article/berlin">United States Holocaust Memorial Museum: Berlin</a></li><li><a href="https://www.alliiertenmuseum.de/en/thema/the-berlin-airlift-1948-49/">AlliiertenMuseum: Berlin Airlift</a></li><li><a href="https://www.berlin.de/landesdenkmalamt/denkmale/highlight-berliner-mauer/aufbau-und-entwicklung/building-and-development-of-the-berlin-wall-648927.php">Berlin Wall construction and development</a></li><li><a href="https://www.bundestag.de/en/visittheBundestag/exhibitions/bonn-upon-spree-1013402">German Bundestag: Bonn upon Spree</a></li></ol></div></details><details class="bw-hs-details"><summary>Image credits</summary><div class="bw-hs-details-body"><ul class="bw-hs-credit-list"><li><a href="https://commons.wikimedia.org/wiki/File:Ca._1740_map_of_Berlin_by_Homann_Heirs.jpg">Homann Heirs, c. 1740 map of Berlin</a> · public domain</li><li><a href="https://commons.wikimedia.org/wiki/File:Hallesches_Tor,_Berlin_1894.jpg">Robert Prager, Hallesches Tor, 1894</a> · public domain</li><li><a href="https://commons.wikimedia.org/wiki/File:Brandenburger_Tor-2.jpg">AIP Emilio Segrè Visual Archives, Brandenburg Gate ruins, 1945</a> · CC0 1.0</li><li><a href="https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_173-1321,_Berlin,_Mauerbau.jpg">Bundesarchiv Bild 173-1321 / Helmut J. Wolf</a> · CC BY-SA 3.0 DE</li><li><a href="https://commons.wikimedia.org/wiki/File:Brandenburg_gate_1982.jpg">Zika, Brandenburg Gate walled off, 1982</a> · public domain</li><li><a href="https://commons.wikimedia.org/wiki/File:Berlin_-_Sony_Center_am_Potsdamer_Platz_%281%29.jpg">Fred Romero, Sony Center at Potsdamer Platz, 2016</a> · CC BY 2.0</li></ul></div></details></div></section>';
+    var sources = '<ol class="bw-hs-source-list">'
+      + '<li><a href="https://www.berlin.de/landesdenkmalamt/archaeologie/bodendenkmalpflege/grabungen/grabung-am-molkenmarkt/">Berlin State Archaeology: Molkenmarkt excavation</a></li>'
+      + '<li><a href="https://www.berlin.de/en/history/8476760-8619314-the-medieval-trading-center.en.html">Berlin.de: medieval trading centre</a></li>'
+      + '<li><a href="https://www.berlin.de/en/history/8477225-8619314-the-royal-capital.en.html">Berlin.de: royal capital</a></li>'
+      + '<li><a href="https://www.berlin.de/rathausblock-fk/gebiet/geschichte-des-dragonerareals/">Berlin Senate: Hobrecht context</a></li>'
+      + '<li><a href="https://www.berlin.de/en/history/8481401-8619314-greater-berlin-act.en.html">Berlin.de: Greater Berlin Act</a></li>'
+      + '<li><a href="https://www.berlin.de/ba-charlottenburg-wilmersdorf/ueber-den-bezirk/geschichte/gedenkstaetten/artikel.1137369.php">Gleis 17 memorial background</a> and <a href="https://encyclopedia.ushmm.org/content/en/article/berlin">United States Holocaust Memorial Museum: Berlin</a></li>'
+      + '<li><a href="https://www.alliiertenmuseum.de/en/thema/the-berlin-airlift-1948-49/">AlliiertenMuseum: Berlin Airlift</a></li>'
+      + '<li><a href="https://www.berlin.de/landesdenkmalamt/denkmale/highlight-berliner-mauer/aufbau-und-entwicklung/building-and-development-of-the-berlin-wall-648927.php">Berlin Wall construction and development</a></li>'
+      + '<li><a href="https://www.bundestag.de/en/visittheBundestag/exhibitions/bonn-upon-spree-1013402">German Bundestag: Bonn upon Spree</a></li>'
+      + '</ol>';
+    var mapSources = '<ul class="bw-hs-credit-list">'
+      + '<li>Wall geometry: <a href="https://daten.berlin.de/datensaetze/verlauf-der-berliner-mauer-1989-wfs-3dcda64c">Berlin Open Data</a>, Data licence Germany Zero 2.0.</li>'
+      + '<li>District geometry: <a href="https://wfsexplorer.odis-berlin.de/?layer=alkis_ortsteile%3Aortsteile&amp;wfs=https%3A%2F%2Fgdi.berlin.de%2Fservices%2Fwfs%2Falkis_ortsteile">Berlin Geoportal / ODIS</a>.</li>'
+      + '<li>Waterways: <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>.</li>'
+      + '<li>Landmark annotations: BerlinWalk Wall-map dataset. This is a visual story reconstruction, not a survey-grade historical boundary map.</li>'
+      + '</ul>';
+    var credits = '<ul class="bw-hs-credit-list">'
+      + '<li><a href="https://commons.wikimedia.org/wiki/File:Ca._1740_map_of_Berlin_by_Homann_Heirs.jpg">Homann Heirs, c. 1740 map of Berlin</a> · public domain</li>'
+      + '<li><a href="https://commons.wikimedia.org/wiki/File:Hallesches_Tor,_Berlin_1894.jpg">Robert Prager, Hallesches Tor, 1894</a> · public domain</li>'
+      + '<li><a href="https://commons.wikimedia.org/wiki/File:Brandenburger_Tor-2.jpg">AIP Emilio Segrè Visual Archives, Brandenburg Gate ruins, 1945</a> · CC0 1.0</li>'
+      + '<li><a href="https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_173-1321,_Berlin,_Mauerbau.jpg">Bundesarchiv Bild 173-1321 / Helmut J. Wolf</a> · CC BY-SA 3.0 DE</li>'
+      + '<li><a href="https://commons.wikimedia.org/wiki/File:Brandenburg_gate_1982.jpg">Zika, Brandenburg Gate walled off, 1982</a> · public domain</li>'
+      + '<li><a href="https://commons.wikimedia.org/wiki/File:Berlin_-_Sony_Center_am_Potsdamer_Platz_%281%29.jpg">Fred Romero, Sony Center at Potsdamer Platz, 2016</a> · CC BY 2.0</li>'
+      + '</ul>';
+    return '<section class="bw-hs-aftercare" aria-label="Sources, map attribution, image credits and related reading"><div class="bw-hs-aftercare-inner">'
+      + '<h2>Keep the story connected to the city.</h2><p>These links stay deliberately practical. Use one place, one date or one question as the next thing to investigate.</p>'
+      + '<details class="bw-hs-details"><summary>Explore more Berlin notes</summary><div class="bw-hs-details-body">' + related() + '<p class="bw-hs-baseline">This 42-link layer is a fixed handoff baseline from a 22 August 2026 topic snapshot. It is not a claim that these posts are all historical articles or that an orphan audit has been completed.</p></div></details>'
+      + '<details class="bw-hs-details"><summary>Sources for this story</summary><div class="bw-hs-details-body">' + sources + '</div></details>'
+      + '<details class="bw-hs-details"><summary>Map data and attribution</summary><div class="bw-hs-details-body">' + mapSources + '</div></details>'
+      + '<details class="bw-hs-details"><summary>Image credits</summary><div class="bw-hs-details-body">' + credits + '</div></details>'
+      + '</div></section>';
   }
 
   class BWBHistoryStory extends HTMLElement {
@@ -134,7 +237,7 @@
       if (this._booted) return;
       this._booted = true;
       this.setAttribute('data-build', BUILD);
-      seoSafetyNet();
+      applySeoSafetyNet();
       this._render();
       this._wire();
     }
@@ -143,6 +246,7 @@
       if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
       if (this._onResize) window.removeEventListener('resize', this._onResize);
       if (this._applyQaHash) window.removeEventListener('hashchange', this._applyQaHash);
+      if (this._onTrackedLinkClick && this._root) this._root.removeEventListener('click', this._onTrackedLinkClick);
       if (this._observer) this._observer.disconnect();
       if (this._mq && this._onMotion) {
         if (this._mq.removeEventListener) this._mq.removeEventListener('change', this._onMotion);
@@ -187,6 +291,13 @@
         var image = figure.querySelector('img');
         if (image) image.addEventListener('error', function () { figure.classList.add('is-missing'); });
       });
+      this._onTrackedLinkClick = function (event) {
+        if (event.defaultPrevented || (typeof event.button === 'number' && event.button !== 0)) return;
+        var target = event.target && event.target.closest ? event.target.closest('a[data-bw-history-track]') : null;
+        if (!target || !root.contains(target)) return;
+        self._trackLink(target.getAttribute('data-bw-history-track'));
+      };
+      root.addEventListener('click', this._onTrackedLinkClick);
       var rail = this._rail;
       this._dots = this._steps.map(function (step, index) {
         var chapter = CHAPTERS[index];
@@ -234,6 +345,37 @@
       window.requestAnimationFrame(this._applyQaHash);
       this._update();
       this._loadMap();
+    }
+
+    _trackLink(kind) {
+      if (isQaMode() || !analyticsAllowed()) return;
+      var events = {
+        closing_cta: {
+          name: 'bw_history_story_closing_cta_click',
+          payload: {
+            event_source: 'berlin_history_story',
+            event_location: 'closing_cta',
+            story_version: 'v1',
+            page_path: '/berlin-history-story',
+            destination: 'free_tour'
+          }
+        },
+        wall_timeline: {
+          name: 'bw_history_story_wall_timeline_click',
+          payload: {
+            event_source: 'berlin_history_story',
+            event_location: 'scene_8',
+            story_version: 'v1',
+            page_path: '/berlin-history-story',
+            destination: 'wall_timeline'
+          }
+        }
+      };
+      var item = events[kind];
+      if (!item || typeof window.CustomEvent !== 'function') return;
+      document.dispatchEvent(new CustomEvent('bwStickyCtaEvent', {
+        detail: { name: item.name, payload: item.payload }
+      }));
     }
 
     _svg(name, attrs, text) {
@@ -293,7 +435,7 @@
       (data.wall.main || []).forEach(function (path) {
         if (typeof path === 'string') wall.appendChild(self._svg('path', { d: path, class: 'real-wall' }));
       });
-      sectors.appendChild(this._svg('text', { x: 26, y: 613, class: 'real-note' }, 'Sectors, airports and Wall geometry: Berlin Open Data visual reconstruction'));
+      sectors.appendChild(this._svg('text', { x: 26, y: 613, class: 'real-note' }, 'Map data: Berlin Open Data · Geoportal · © OpenStreetMap contributors'));
       map.appendChild(base);
       map.appendChild(sectors);
       map.appendChild(airlift);
