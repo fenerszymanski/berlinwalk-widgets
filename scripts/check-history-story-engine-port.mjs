@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const SOURCE_COMMIT = '2eee9c45d3da46946e872c8b8cf96500bcc5e52f';
 const SOURCE_BLOB_SHA256 = '8e737b380981d6708ad7b50cbd91beaa5f14b4b82216a10d628fbe6dbf65be7d';
-const SEED_COMMIT = '94ba03f2e4ca69e9f969298752b5414b956751fd';
+const SEED_COMMIT = '9745d50c832c7c14b62ff48c584b387cab6eb850';
 const WALL_RUNTIME_PATH = 'berlin-wall-timeline/wall-timeline-element.js';
 const STORY_RUNTIME_PATH = 'berlin-history-story/history-story-element.js';
 
@@ -52,7 +52,7 @@ try {
   const mapData = JSON.parse(gitShow('HEAD', 'berlin-history-story/assets/map/map-data.json'));
 
   assert(sha256(source) === SOURCE_BLOB_SHA256, 'The recorded Wall source SHA-256 does not match its source commit.');
-  assert(sha256(seed) === sha256(source), 'The private seed commit is not byte-identical to the recorded Wall source.');
+  assert(sha256(seed) === sha256(source), 'The public seed commit is not byte-identical to the recorded Wall source.');
   assert(gitPasses(['merge-base', '--is-ancestor', SEED_COMMIT, 'HEAD']), 'The byte-identical seed is not an ancestor of HEAD.');
   assert(gitPasses(['diff', '--quiet', 'HEAD', '--', STORY_RUNTIME_PATH]), 'Runtime has uncommitted changes; commit the data-swap before asserting it.');
   assert(gitPasses(['diff', '--quiet', 'HEAD', '--', 'berlin-history-story/assets/map/map-data.json']), 'Map package has uncommitted changes; commit it before asserting it.');

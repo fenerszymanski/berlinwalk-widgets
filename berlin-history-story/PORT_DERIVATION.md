@@ -6,8 +6,8 @@
 - Source commit: `2eee9c45d3da46946e872c8b8cf96500bcc5e52f`
 - Source git blob: `2d4c2615250ed3ab47b18e5892410a8854ad114c`
 - Source SHA-256: `8e737b380981d6708ad7b50cbd91beaa5f14b4b82216a10d628fbe6dbf65be7d`
-- Byte-identical private seed commit: `94ba03f2e4ca69e9f969298752b5414b956751fd`
-- Data-swap commit: `f43080f06f22b81360e5a72e5043bdb4ef7dd688`
+- Byte-identical public seed commit: `9745d50c832c7c14b62ff48c584b387cab6eb850`
+- Data-swap release: the current committed `HEAD`, verified by `scripts/check-history-story-engine-port.mjs`
 
 The seed commit contains `berlin-history-story/history-story-element.js` with
 the exact bytes of the recorded Wall source. The data-swap runtime then changes
