@@ -1641,13 +1641,19 @@
       initInput();
       initGate();
       initHeroPhoto();
-      // Wix hydrates the iframe with its base src, then the route helper adds
-      // the bounded handoff query almost immediately.  Delay the first view
-      // just long enough for that transient base document to unload, otherwise
-      // one real card arrival also creates a false direct/other page event.
-      window.setTimeout(function () {
-        trackEvent('bw_lead_asset_experiment_view', { placement: 'tool_view' });
-      }, 75);
+      // Wix may keep a zero-size base iframe alive while hydrating the visible
+      // iframe with the bounded handoff query.  Never count that hidden shell
+      // as a direct/other arrival.  A real standalone or embedded tool view is
+      // sent only after the document has a visible viewport.
+      (function trackVisibleToolView(attempt) {
+        if (document.visibilityState !== 'hidden' && window.innerWidth > 0 && window.innerHeight > 0) {
+          trackEvent('bw_lead_asset_experiment_view', { placement: 'tool_view' });
+          return;
+        }
+        if (attempt < 20) {
+          window.setTimeout(function () { trackVisibleToolView(attempt + 1); }, 100);
+        }
+      })(0);
       hydrateFromQuery();
     })
     .catch(function (err) {
