@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-01T08:06:18.694Z",
+  "updatedAt": "2026-09-01T14:13:00.180Z",
   "source": "Wix Blog API",
-  "totalPosts": 344,
+  "totalPosts": 345,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Berlin Philharmonic Tickets: How to Get In, Even When It Says Sold Out",
+      "slug": "berlin-philharmonic-tickets",
+      "path": "/post/berlin-philharmonic-tickets",
+      "url": "https://www.berlinwalk.com/post/berlin-philharmonic-tickets",
+      "excerpt": "The Berlin Philharmonic looks sold out and expensive until you know the ladder: sale windows, standby tickets two days before, standing room on the night, cheaper DSO concerts in the same famous hall, and a completely free chamber concert every Wednesday lunchtime.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-01T14:11:17.375Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_567a2ac88a0c41c4928dd2160d6f107c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-philharmonic-tickets-philharmonie-blue-hour.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_567a2ac88a0c41c4928dd2160d6f107c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-philharmonic-tickets-philharmonie-blue-hour.jpg",
+      "alt": "The golden facade of the Philharmonie Berlin glowing at blue hour",
+      "relatedToolSlug": "transport-ticket-calculator"
+    },
     {
       "title": "Night Trains from Berlin: Six Places You Can Wake Up Tomorrow",
       "slug": "night-trains-from-berlin",
