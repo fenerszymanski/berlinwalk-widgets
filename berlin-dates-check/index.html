@@ -1641,7 +1641,13 @@
       initInput();
       initGate();
       initHeroPhoto();
-      trackEvent('bw_lead_asset_experiment_view', { placement: 'tool_view' });
+      // Wix hydrates the iframe with its base src, then the route helper adds
+      // the bounded handoff query almost immediately.  Delay the first view
+      // just long enough for that transient base document to unload, otherwise
+      // one real card arrival also creates a false direct/other page event.
+      window.setTimeout(function () {
+        trackEvent('bw_lead_asset_experiment_view', { placement: 'tool_view' });
+      }, 75);
       hydrateFromQuery();
     })
     .catch(function (err) {
