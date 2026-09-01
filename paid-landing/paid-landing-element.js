@@ -284,7 +284,7 @@
       this.innerHTML = `
         <style>${this._styles()}</style>
         <main class="bw-paid-landing" style="--bw-paid-hero-image: url('${heroImage}'); --bw-paid-route-image: url('${routeImage}'); --bw-paid-guide-image: url('${guideImage}');">
-          <div class="bw-paid-top-strip">9.8 / 10 on FreeTour - Free reservation - ~2h - Tue-Sat 11:30 - From 3 July 2026: 11:30 + 15:30</div>
+          <div class="bw-paid-top-strip">9.8 / 10 on FreeTour - Free reservation - ~2h - Tue-Sat 11:30 &amp; 15:30 - World Clock</div>
 
           <section class="bw-paid-hero" id="bw-paid-book">
             <div class="bw-paid-inner">
@@ -1494,6 +1494,7 @@
 
           .bw-paid-booking-panel bw-booking-calendar .bw-cal-cta {
             height: 44px;
+            font-size: 14px !important;
           }
 
           .bw-paid-trust-grid,
