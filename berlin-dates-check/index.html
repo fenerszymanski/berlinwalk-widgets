@@ -1645,7 +1645,7 @@
       // iframe with the bounded handoff query.  Never count that hidden shell
       // as a direct/other arrival.  A real standalone or embedded tool view is
       // sent only after the document has a visible viewport.
-      (function trackVisibleToolView(attempt) {
+      function trackVisibleToolView(attempt) {
         if (document.visibilityState !== 'hidden' && window.innerWidth > 0 && window.innerHeight > 0) {
           trackEvent('bw_lead_asset_experiment_view', { placement: 'tool_view' });
           return;
@@ -1653,7 +1653,11 @@
         if (attempt < 20) {
           window.setTimeout(function () { trackVisibleToolView(attempt + 1); }, 100);
         }
-      })(0);
+      }
+      // The visible Date Check frame itself can be replaced once while Wix
+      // settles its initial height.  A short stability window prevents that
+      // first, soon-aborted document from duplicating the arrival event.
+      window.setTimeout(function () { trackVisibleToolView(0); }, 500);
       hydrateFromQuery();
     })
     .catch(function (err) {
