@@ -11,7 +11,7 @@
   'use strict';
 
   var TAG = 'bw-berlin-history-story';
-  var BUILD = 'berlin-history-story-v2-20260901f';
+  var BUILD = 'berlin-history-story-v2-20260901g';
   var SCRIPT_URL = document.currentScript && document.currentScript.src ? document.currentScript.src : '';
   var BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
     ? new URL('./', SCRIPT_URL).toString()
@@ -75,6 +75,7 @@
   ];
 
   var CSS = [
+    "@media (min-width:769px){body.bw-history-story-page-active #bw-desktop-cta{display:none!important;pointer-events:none!important}}",
     "@font-face{font-family:'BW Fraunces';src:url('" + BASE_URL + "assets/fonts/Fraunces-Variable.woff2') format('woff2');font-weight:300 900;font-display:swap}",
     "@font-face{font-family:'BW Space';src:url('" + BASE_URL + "assets/fonts/SpaceGrotesk-Variable.woff2') format('woff2');font-weight:300 700;font-display:swap}",
     "@font-face{font-family:'BW Mono';src:url('" + BASE_URL + "assets/fonts/IBMPlexMono-Regular.woff2') format('woff2');font-weight:400;font-display:swap}",
@@ -316,6 +317,7 @@
 
   class BWBHistoryStory extends HTMLElement {
     connectedCallback() {
+      document.body.classList.add('bw-history-story-page-active');
       if (this._booted) return;
       this._booted = true;
       this.setAttribute('data-build', BUILD);
@@ -325,6 +327,7 @@
     }
 
     disconnectedCallback() {
+      document.body.classList.remove('bw-history-story-page-active');
       if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
       if (this._onResize) window.removeEventListener('resize', this._onResize);
       if (this._applyQaHash) window.removeEventListener('hashchange', this._applyQaHash);

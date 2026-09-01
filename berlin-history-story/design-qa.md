@@ -2,9 +2,9 @@
 
 Run date: 2026-09-01
 
-Build/cache key: `berlin-history-story-v2-20260901f`
+Build/cache key: `berlin-history-story-v2-20260901g`
 
-Status: `UNPUBLISHED`
+Status: `DRAFT UPDATE — PUBLISH APPROVAL REQUIRED`
 Worktree: `/Users/yusufucuz/Documents/New project/berlinwalk-widgets/_worktrees/berlin-history-story-v1-20260901`
 
 ## Source truth and normalization
@@ -59,6 +59,11 @@ Implementation states inspected:
 - P1: none after the new asset is included in the package.
 - P2: none in the local build.
 - P3: at an intermediate desktop 1936 scroll position, the red timeline sits visually close to the `50,000+` fact row. The exact 1941 state is balanced and clear, so this remains optional polish rather than a blocker.
+
+## Desktop sticky banner update
+
+- The History Story custom element adds `bw-history-story-page-active` to `body` while connected and removes it when disconnected, preventing the page-specific state from leaking during Wix SPA navigation.
+- At `769px` and wider, that state hides only `#bw-desktop-cta`. The existing mobile behavior remains unchanged.
 
 ## Evidence boundaries
 
