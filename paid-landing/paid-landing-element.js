@@ -5,7 +5,7 @@
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
   const CALENDAR_SCRIPT_URL = new URL('booking-calendar/booking-calendar-element.js', BASE_URL).toString();
   const TRACK_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/pf-event';
-  const LOGO_URL = 'https://static.wixstatic.com/media/5a08a3_2f62d59b419643c0994771fac5765c79~mv2.png';
+  const LOGO_URL = new URL('assets/berlinwalk-wordmark-white.png', BASE_URL).toString();
   const PAID_TRACKING_KEY = 'bwPaidTracking.v1';
   const PAID_VISITOR_KEY = 'bwVisitorId.v1';
   const PAID_SESSION_KEY = 'bwSessionId.v1';
@@ -831,9 +831,9 @@
         }
 
         .bw-paid-logo {
-          background: rgba(255, 255, 255, 0.96);
-          border-radius: 6px;
-          padding: 8px 14px;
+          display: block;
+          filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.34));
+          height: auto;
           width: 176px;
         }
 
@@ -1372,7 +1372,6 @@
           }
 
           .bw-paid-logo {
-            padding: 6px 11px;
             width: 132px;
           }
 
