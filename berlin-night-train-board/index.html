@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Night Train Board</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #FAFAF5;
+    color: #212121;
+    padding: 14px 12px 8px;
+  }
+  .bnt-wrap { max-width: 760px; margin: 0 auto; }
+  .bnt-head h2 { font-size: 21px; line-height: 1.25; color: #1B5E20; margin-bottom: 6px; }
+  .bnt-head p { font-size: 13.5px; line-height: 1.55; color: #444; margin-bottom: 12px; }
+  .bnt-card {
+    background: #FFFFFF; border: 1px solid #DDE5D8; border-radius: 12px;
+    padding: 10px 10px 6px; margin-bottom: 10px;
+  }
+  .bnt-card h3 { font-size: 13px; color: #1B5E20; letter-spacing: 0.02em; margin: 2px 2px 6px; }
+  .bnt-card canvas { display: block; width: 100%; height: auto; }
+  .bnt-picker { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 10px; }
+  .bnt-picker label {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: 12.5px; font-weight: 600; color: #1B5E20;
+    background: #F1F6EC; border: 1.5px solid #C5E1A5; border-radius: 999px;
+    padding: 6px 12px; cursor: pointer; user-select: none;
+  }
+  .bnt-picker label:hover { border-color: #7CB342; background: #E8F1DF; }
+  .bnt-picker label.bnt-on { background: #1B5E20; border-color: #1B5E20; color: #FFFFFF; }
+  .bnt-picker input { accent-color: #1B5E20; margin: 0; }
+  .bnt-verdict {
+    background: #FFFFFF; border: 1px solid #DDE5D8; border-radius: 12px;
+    padding: 12px; margin-bottom: 10px;
+  }
+  .bnt-verdict h3 { font-size: 16px; color: #1B5E20; margin-bottom: 6px; line-height: 1.3; }
+  .bnt-lines { display: grid; gap: 7px; }
+  .bnt-line {
+    font-size: 13.5px; line-height: 1.5;
+    border-left: 4px solid #C5E1A5; padding: 2px 0 2px 10px;
+  }
+  .bnt-line strong { color: #1B5E20; }
+  .bnt-line.bnt-tonight { border-left-color: #FFE600; background: #FFFDE0; border-radius: 0 8px 8px 0; }
+  .bnt-line.bnt-tonight strong { color: #123D18; }
+  .bnt-move {
+    margin-top: 10px; font-size: 13.5px; line-height: 1.55;
+    background: #F1F6EC; border-radius: 10px; padding: 10px 12px;
+  }
+  .bnt-move strong { color: #1B5E20; }
+  .bnt-foot { font-size: 11.5px; color: #666; line-height: 1.5; padding: 2px 4px 6px; }
+  @media (max-width: 430px) {
+    body { padding: 12px 8px 6px; }
+    .bnt-head h2 { font-size: 19px; }
+    .bnt-picker label { padding: 6px 10px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="bnt-wrap">
+  <div class="bnt-head">
+    <h2>Berlin Night Train Board</h2>
+    <p>Every sleeper that leaves Berlin this season, on one board. Pick where you want to wake up and check which nights the train actually runs. Timetables checked on 1 September 2026.</p>
+  </div>
+
+  <div class="bnt-card">
+    <h3>THE WEEK FROM BERLIN</h3>
+    <canvas id="bntWeek" width="720" height="300" role="img" aria-label="Grid of Berlin night train departures by weekday"></canvas>
+  </div>
+
+  <div class="bnt-picker" id="bntPicker" role="radiogroup" aria-label="Choose a night train destination"></div>
+
+  <div class="bnt-card">
+    <h3 id="bntNightTitle">YOUR NIGHT, HOUR BY HOUR</h3>
+    <canvas id="bntNight" width="720" height="150" role="img" aria-label="Timeline of the selected night train from departure to arrival"></canvas>
+  </div>
+
+  <div class="bnt-verdict" id="bntVerdict"></div>
+
+  <div class="bnt-foot">Exact minutes shift with trackwork, so confirm your own date on the booking site before you plan the evening. The Deutschlandticket is not valid on any of these trains.</div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  // Timetables checked 1 September 2026 against operator sites.
+  var DAY_NAMES = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  var ROUTES = [
+    {
+      id: 'paris', pick: 'Paris', shortName: 'Paris',
+      board: 'Paris (European Sleeper)',
+      nights: [0, 2, 4],
+      dep: 17 * 60 + 25, arr: (24 + 11) * 60 + 28,
+      depLabel: '17:25', station: 'Berlin Gesundbrunnen',
+      arrLabel: '11:28', arrPlace: 'Paris Nord',
+      marks: [],
+      operator: 'European Sleeper', book: 'europeansleeper.eu',
+      price: 'shared sleeping berths from about EUR 79 to Paris',
+      note: 'Runs via Hamburg, Brussels and Liège. The old Nightjet to Paris stopped in December 2025; this train replaced it in March 2026.',
+      move: 'It leaves at 17:25, so this is the one night train that costs you a Berlin evening. Do your sightseeing in the morning, collect your bags by 16:30, and be at Gesundbrunnen with food for the long ride.'
+    },
+    {
+      id: 'brussels', pick: 'Brussels + Amsterdam', shortName: 'Brussels + Ams.',
+      board: 'Brussels / Amsterdam (Eur. Sleeper)',
+      nights: [1, 3, 6],
+      dep: 23 * 60 + 1, arr: (24 + 9) * 60 + 30,
+      depLabel: '23:01', station: 'Berlin Gesundbrunnen',
+      arrLabel: 'mid-morning', arrPlace: 'Brussels-Midi',
+      marks: [{ at: (24 + 7) * 60, text: 'Amsterdam, early morning' }],
+      operator: 'European Sleeper', book: 'europeansleeper.eu',
+      price: 'shared sleeping berths from about EUR 49',
+      note: 'Reaches Amsterdam early in the morning and Brussels mid-morning. Exact arrival minutes vary by date, so read them off your booking.',
+      move: 'The 23:01 departure is the tourist-friendly one: you keep the whole Berlin day and evening, eat a proper dinner, then walk onto the train already tired. Book a berth, not a seat, for this length.'
+    },
+    {
+      id: 'stockholm-rdc', pick: 'Stockholm (fast)', shortName: 'Stockholm fast',
+      board: 'Stockholm (RDC EuroNight)',
+      nights: [0, 4],
+      dep: 18 * 60 + 39, arr: (24 + 9) * 60 + 45,
+      depLabel: '18:39', station: 'Berlin Hbf',
+      arrLabel: '09:45', arrPlace: 'Stockholm C',
+      marks: [],
+      operator: 'RDC EuroNight', book: 'nachtexpress.de',
+      price: 'seats, couchettes and sleeper berths on board',
+      note: 'This is the former SJ train. RDC took it over on 1 September 2026 and now runs it from Berlin on Monday and Friday nights; the Wednesday run starts in Hamburg instead.',
+      move: 'Only two Berlin nights a week, so this train decides your itinerary, not the other way round. Fix the Monday or Friday night first, then build your Berlin days around it.'
+    },
+    {
+      id: 'stockholm-sn', pick: 'Stockholm (via Copenhagen)', shortName: 'Stockholm slow',
+      board: 'Stockholm (Snälltåget)',
+      nights: [0, 1, 2, 3, 4, 6],
+      dep: 21 * 60 + 9, arr: (24 + 13) * 60 + 17,
+      depLabel: '21:09', station: 'Berlin Hbf',
+      arrLabel: '13:17', arrPlace: 'Stockholm C',
+      marks: [{ at: (24 + 8) * 60 + 35, text: 'Malmö, morning' }],
+      operator: 'Snälltåget', book: 'snalltaget.se',
+      price: 'seats from 499 SEK, private compartments from 1999 SEK for two',
+      note: 'The slower, cheaper Swede: via Hamburg and Copenhagen, into Stockholm at 13:17. Runs most nights except Saturday until early November, then thins out and pauses for winter in January.',
+      move: 'If the budget matters more than the arrival time, take this one and treat the Malmö-to-Stockholm morning as scenery. If you need a working morning in Stockholm, pay for the 09:45 arrival instead.'
+    },
+    {
+      id: 'zurich', pick: 'Zurich + Basel', shortName: 'Zurich + Basel',
+      board: 'Zurich / Basel (Nightjet)',
+      nights: [0, 1, 2, 3, 4, 5, 6],
+      dep: 20 * 60 + 48, arr: (24 + 9) * 60 + 5,
+      depLabel: '20:48', station: 'Berlin Hbf',
+      arrLabel: '09:05', arrPlace: 'Zurich HB',
+      marks: [{ at: (24 + 7) * 60 + 21, text: 'Basel, 07:21' }],
+      operator: 'OBB Nightjet', book: 'nightjet.com or bahn.de',
+      price: 'seats from about EUR 30, sleepers well above that',
+      note: 'Runs every night of the week. Basel at 07:21, Zurich at 09:05, with breakfast included in couchettes and sleepers.',
+      move: 'This is the easiest sleeper to build a plan around because it runs nightly. Book about two months out on nightjet.com; the cheap Sparschiene fares go first.'
+    },
+    {
+      id: 'vienna', pick: 'Vienna + Budapest', shortName: 'Vienna + Budapest',
+      board: 'Vienna / Budapest (NJ + EN)',
+      nights: [0, 1, 2, 3, 4, 5, 6],
+      dep: 20 * 60 + 11, arr: (24 + 8) * 60 + 29,
+      depLabel: '20:11', station: 'Berlin Hbf',
+      arrLabel: '08:29', arrPlace: 'Budapest Nyugati',
+      marks: [{ at: (24 + 0) * 60 + 30, text: 'Prague, around 00:30' }, { at: (24 + 7) * 60, text: 'Vienna, 07:00' }],
+      operator: 'OBB Nightjet + MAV EuroNight', book: 'nightjet.com, oebb.at or bahn.de',
+      price: 'couchettes from about EUR 59, two-bed sleepers from about EUR 99',
+      note: 'One evening train, two halves: it runs via Dresden and Prague, then splits, one portion to Vienna for 07:00, one to Budapest for 08:29. Runs nightly.',
+      move: 'Do not book this just to reach Prague: it passes Prague around half past midnight. For Prague take a day train; save the sleeper for Vienna or Budapest, where you wake up at the right hour.'
+    }
+  ];
+
+  var GREEN = '#1B5E20', LIME = '#7CB342', LIGHT = '#C5E1A5', INK = '#212121',
+      CREAM = '#FAFAF5', YELLOW = '#FFE600', GREY = '#8A8A8A';
+  var todayIdx = (new Date().getDay() + 6) % 7;
+  var current = 0;
+
+  var weekCanvas = document.getElementById('bntWeek');
+  var nightCanvas = document.getElementById('bntNight');
+  var picker = document.getElementById('bntPicker');
+  var verdict = document.getElementById('bntVerdict');
+
+  function toLabel(min) {
+    var m = min % (24 * 60);
+    var h = Math.floor(m / 60), mm = m % 60;
+    return (h < 10 ? '0' : '') + h + ':' + (mm < 10 ? '0' : '') + mm;
+  }
+
+  function setupCanvas(canvas, cssHeight) {
+    var ratio = window.devicePixelRatio || 1;
+    var w = canvas.parentNode.clientWidth - 4;
+    if (w < 280) w = 280;
+    canvas.width = w * ratio;
+    canvas.height = cssHeight * ratio;
+    canvas.style.width = w + 'px';
+    canvas.style.height = cssHeight + 'px';
+    var ctx = canvas.getContext('2d');
+    ctx.scale(ratio, ratio);
+    return { ctx: ctx, w: w, h: cssHeight };
+  }
+
+  function drawWeek() {
+    var narrow = weekCanvas.parentNode.clientWidth < 480;
+    var labelW = narrow ? 128 : 218;
+    var rowH = narrow ? 34 : 36;
+    var topH = 30;
+    var c = setupCanvas(weekCanvas, topH + rowH * ROUTES.length + 12);
+    var ctx = c.ctx;
+    var gridW = c.w - labelW - 8;
+    var colW = gridW / 7;
+
+    ctx.fillStyle = CREAM;
+    ctx.fillRect(0, 0, c.w, c.h);
+
+    // today's column
+    ctx.fillStyle = '#FFFDE0';
+    ctx.fillRect(labelW + todayIdx * colW, 4, colW, c.h - 12);
+    ctx.strokeStyle = YELLOW;
+    ctx.lineWidth = 2;
+    ctx.strokeRect(labelW + todayIdx * colW, 4, colW, c.h - 12);
+
+    ctx.textBaseline = 'middle';
+    for (var d = 0; d < 7; d++) {
+      ctx.fillStyle = d === todayIdx ? '#123D18' : GREEN;
+      ctx.font = (d === todayIdx ? '700 ' : '600 ') + (narrow ? '11px' : '12px') + ' Montserrat, sans-serif';
+      ctx.textAlign = 'center';
+      var dLabel = DAY_NAMES[d];
+      ctx.fillText(dLabel, labelW + d * colW + colW / 2, 16);
+      if (d === todayIdx) {
+        ctx.font = '600 9px Montserrat, sans-serif';
+        ctx.fillText('today', labelW + d * colW + colW / 2, 27);
+      }
+    }
+
+    for (var i = 0; i < ROUTES.length; i++) {
+      var r = ROUTES[i];
+      var y = topH + i * rowH + rowH / 2;
+      if (i === current) {
+        ctx.fillStyle = '#F1F6EC';
+        ctx.fillRect(0, topH + i * rowH + 2, labelW - 6, rowH - 4);
+      }
+      ctx.fillStyle = i === current ? GREEN : INK;
+      ctx.font = (i === current ? '700 ' : '600 ') + (narrow ? '10.5px' : '12px') + ' Montserrat, sans-serif';
+      ctx.textAlign = 'left';
+      var name = narrow ? r.shortName : r.board;
+      ctx.fillText(name, 6, y - (narrow ? 6 : 7));
+      ctx.fillStyle = GREY;
+      ctx.font = '600 ' + (narrow ? '9px' : '10px') + ' Montserrat, sans-serif';
+      ctx.fillText(r.depLabel + ' ' + (r.station === 'Berlin Hbf' ? 'Hbf' : 'Gesundbr.'), 6, y + (narrow ? 7 : 8));
+      for (var d2 = 0; d2 < 7; d2++) {
+        var cx = labelW + d2 * colW + colW / 2;
+        var runs = r.nights.indexOf(d2) >= 0;
+        ctx.beginPath();
+        ctx.arc(cx, y, runs ? (narrow ? 6 : 7) : 2.5, 0, Math.PI * 2);
+        if (runs) {
+          ctx.fillStyle = i === current ? GREEN : LIME;
+          ctx.fill();
+        } else {
+          ctx.fillStyle = '#D8DED2';
+          ctx.fill();
+        }
+      }
+      ctx.strokeStyle = '#EAEFE6';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(0, topH + i * rowH);
+      ctx.lineTo(c.w, topH + i * rowH);
+      ctx.stroke();
+    }
+  }
+
+  function drawNight() {
+    var r = ROUTES[current];
+    var narrow = nightCanvas.parentNode.clientWidth < 480;
+    var c = setupCanvas(nightCanvas, narrow ? 150 : 150);
+    var ctx = c.ctx;
+    var startMin = 16 * 60;
+    var endMin = (24 + 14) * 60;
+    var pad = 14;
+    var span = endMin - startMin;
+    var axisY = 96;
+
+    function x(min) { return pad + (min - startMin) / span * (c.w - pad * 2); }
+
+    ctx.fillStyle = CREAM;
+    ctx.fillRect(0, 0, c.w, c.h);
+
+    // sleep window shading 23:00 to 07:00
+    ctx.fillStyle = '#E4E9F2';
+    ctx.fillRect(x(23 * 60), 30, x((24 + 7) * 60) - x(23 * 60), axisY - 30);
+    ctx.fillStyle = '#5A6B8C';
+    ctx.font = '600 10px Montserrat, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('sleep window', (x(23 * 60) + x((24 + 7) * 60)) / 2, 42);
+
+    // axis with hour ticks
+    ctx.strokeStyle = '#D8DED2';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(pad, axisY);
+    ctx.lineTo(c.w - pad, axisY);
+    ctx.stroke();
+    ctx.fillStyle = GREY;
+    ctx.font = '600 9.5px Montserrat, sans-serif';
+    var step = narrow ? 240 : 120;
+    for (var t = 16 * 60; t <= endMin; t += step) {
+      ctx.beginPath();
+      ctx.strokeStyle = '#D8DED2';
+      ctx.moveTo(x(t), axisY - 3);
+      ctx.lineTo(x(t), axisY + 3);
+      ctx.stroke();
+      ctx.fillText(toLabel(t), x(t), axisY + 13);
+    }
+    ctx.fillStyle = '#5A6B8C';
+    ctx.font = '600 9px Montserrat, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('evening', pad, axisY + 28);
+    ctx.textAlign = 'right';
+    ctx.fillText('next morning', c.w - pad, axisY + 28);
+
+    // journey band
+    var bandY = 58, bandH = 26;
+    var gx = ctx.createLinearGradient(x(r.dep), 0, x(r.arr), 0);
+    gx.addColorStop(0, LIME);
+    gx.addColorStop(0.5, GREEN);
+    gx.addColorStop(1, LIME);
+    ctx.fillStyle = gx;
+    ctx.beginPath();
+    var bx = x(r.dep), bw = x(r.arr) - x(r.dep), rr = 9;
+    ctx.moveTo(bx + rr, bandY);
+    ctx.arcTo(bx + bw, bandY, bx + bw, bandY + bandH, rr);
+    ctx.arcTo(bx + bw, bandY + bandH, bx, bandY + bandH, rr);
+    ctx.arcTo(bx, bandY + bandH, bx, bandY, rr);
+    ctx.arcTo(bx, bandY, bx + bw, bandY, rr);
+    ctx.fill();
+
+    // dep + arr labels
+    ctx.fillStyle = GREEN;
+    ctx.font = '700 11px Montserrat, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText(r.depLabel + ' ' + r.station, Math.max(pad, bx - 4), bandY - 6);
+    ctx.textAlign = 'right';
+    ctx.fillText(r.arrLabel + ' ' + r.arrPlace, Math.min(c.w - pad, bx + bw + 4), bandY + bandH + 14);
+
+    // intermediate marks
+    ctx.font = '600 9.5px Montserrat, sans-serif';
+    for (var m = 0; m < r.marks.length; m++) {
+      var mk = r.marks[m];
+      var mx = x(mk.at);
+      ctx.strokeStyle = CREAM;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(mx, bandY + 3);
+      ctx.lineTo(mx, bandY + bandH - 3);
+      ctx.stroke();
+      ctx.fillStyle = '#123D18';
+      ctx.textAlign = 'center';
+      var above = m % 2 === 0;
+      ctx.fillText(mk.text, Math.min(Math.max(mx, 70), c.w - 70), above ? bandY + bandH + 26 : bandY - 6);
+    }
+  }
+
+  function nextNightText(r) {
+    if (r.nights.indexOf(todayIdx) >= 0) {
+      return 'Runs tonight (' + DAY_NAMES[todayIdx] + '), departure ' + r.depLabel + '.';
+    }
+    for (var k = 1; k <= 7; k++) {
+      var d = (todayIdx + k) % 7;
+      if (r.nights.indexOf(d) >= 0) {
+        var when = k === 1 ? 'tomorrow night (' + DAY_NAMES[d] + ')' : DAY_NAMES[d] + ' night';
+        return 'No departure tonight. Next one: ' + when + ' at ' + r.depLabel + '.';
+      }
+    }
+    return 'Check the operator site for the next date.';
+  }
+
+  function nightsText(r) {
+    if (r.nights.length === 7) return 'Every night of the week';
+    var names = [];
+    for (var i = 0; i < r.nights.length; i++) names[names.length] = DAY_NAMES[r.nights[i]];
+    return names.join(', ') + ' nights';
+  }
+
+  function renderVerdict() {
+    var r = ROUTES[current];
+    var tonight = r.nights.indexOf(todayIdx) >= 0;
+    var html = '<h3>' + r.board + '</h3><div class="bnt-lines">';
+    html += '<div class="bnt-line' + (tonight ? ' bnt-tonight' : '') + '"><strong>' + nextNightText(r) + '</strong></div>';
+    html += '<div class="bnt-line"><strong>Nights:</strong> ' + nightsText(r) + '</div>';
+    html += '<div class="bnt-line"><strong>Board at:</strong> ' + r.station + ', departure ' + r.depLabel + '. Wake up: ' + r.arrPlace + ' at ' + r.arrLabel + '.</div>';
+    html += '<div class="bnt-line"><strong>Fares:</strong> ' + r.price + '. Book at ' + r.book + '.</div>';
+    html += '<div class="bnt-line">' + r.note + '</div>';
+    html += '</div><div class="bnt-move"><strong>My move:</strong> ' + r.move + '</div>';
+    verdict.innerHTML = html;
+  }
+
+  function select(i) {
+    current = i;
+    var labels = picker.getElementsByTagName('label');
+    for (var k = 0; k < labels.length; k++) {
+      labels[k].className = k === i ? 'bnt-on' : '';
+    }
+    document.getElementById('bntNightTitle').textContent = 'YOUR NIGHT, HOUR BY HOUR: ' + ROUTES[i].pick.toUpperCase();
+    drawWeek();
+    drawNight();
+    renderVerdict();
+  }
+
+  for (var i = 0; i < ROUTES.length; i++) {
+    (function (idx) {
+      var r = ROUTES[idx];
+      var label = document.createElement('label');
+      var input = document.createElement('input');
+      input.type = 'radio';
+      input.name = 'bntRoute';
+      input.value = r.id;
+      if (idx === 0) input.checked = true;
+      input.onchange = function () { select(idx); };
+      label.appendChild(input);
+      label.appendChild(document.createTextNode(r.pick));
+      picker.appendChild(label);
+    })(i);
+  }
+
+  var resizeTimer = null;
+  window.onresize = function () {
+    if (resizeTimer) clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () { drawWeek(); drawNight(); }, 120);
+  };
+
+  select(0);
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
