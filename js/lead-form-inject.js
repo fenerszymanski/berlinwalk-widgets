@@ -22,11 +22,14 @@
   var DATE_CHECK_MARKER = 'data-bw-date-check-card';
   var BOOKING_STYLE_ID = 'bw-blog-booking-inject-style';
   var DATE_CHECK_STYLE_ID = 'bw-date-check-blog-card-style';
-  // A/B (2026-08-25): 'form' is the shipped in-card date form, 'oneclick' drops
-  // the fields and sends one tap to the tool, which asks for the dates anyway.
-  // The variant travels to /berlin-dates-check as utm_term, which the lead-asset
-  // backend already stores as utmTerm, so nothing server side has to change.
-  var DATE_CHECK_VARIANT_KEY = 'bwDateCheckCardVariant';
+  // A/B phase 2 (prepared 2026-09-01): 'form' is the shipped in-card date form,
+  // 'oneclick' drops the fields and sends one tap to the tool, which asks for
+  // the dates anyway.  The old phase used UTM-only attribution and remains a
+  // separate historical observation.  These bounded first-party fields keep
+  // the new arm measurable without advertising consent and without touching
+  // the Date Check email-gate experiment's own experiment/variant fields.
+  var DATE_CHECK_CARD_EXPERIMENT = 'berlin_date_check_blog_card_ab_v2_2026_09';
+  var DATE_CHECK_VARIANT_KEY = 'bwDateCheckCardVariantV2';
   var DATE_CHECK_VARIANTS = ['form', 'oneclick'];
   var dateCheckVariantMemo = '';
   var LOG = '[BW blog surfaces]';
@@ -444,7 +447,7 @@
       event: name,
       placement: 'blog_inline_after_tour',
       source_slug: slug || currentSlug(),
-      experiment: 'date_check_blog_card_2026_08',
+      experiment: DATE_CHECK_CARD_EXPERIMENT,
       variant: normaliseDateCheckVariant(variant) || 'form'
     });
     return true;
@@ -505,6 +508,10 @@
     url.searchParams.set('utm_campaign', 'berlin_date_check');
     url.searchParams.set('utm_content', sourceSlug || 'blog-post');
     url.searchParams.set('utm_term', normaliseDateCheckVariant(variant) || 'form');
+    url.searchParams.set('bw_entry', 'blog_card');
+    url.searchParams.set('bw_card_exp', DATE_CHECK_CARD_EXPERIMENT);
+    url.searchParams.set('bw_card_variant', normaliseDateCheckVariant(variant) || 'form');
+    url.searchParams.set('bw_card_source', sourceSlug || 'blog-post');
     return url;
   }
 
@@ -595,6 +602,8 @@
       '<input type="hidden" name="utm_source" value="blog"><input type="hidden" name="utm_medium" value="inline_tool">',
       '<input type="hidden" name="utm_campaign" value="berlin_date_check"><input type="hidden" name="utm_content" value="' + escapeAttr(slug || 'blog-post') + '">',
       '<input type="hidden" name="utm_term" value="form">',
+      '<input type="hidden" name="bw_entry" value="blog_card"><input type="hidden" name="bw_card_exp" value="' + DATE_CHECK_CARD_EXPERIMENT + '">',
+      '<input type="hidden" name="bw_card_variant" value="form"><input type="hidden" name="bw_card_source" value="' + escapeAttr(slug || 'blog-post') + '">',
       '<div class="bw-date-check-blog-card__fields"><div class="bw-date-check-blog-card__field"><label for="' + id + '-arrival">When do you arrive?</label><div class="bw-date-check-blog-card__date-control" data-has-value="0"><span class="bw-date-check-blog-card__date-display" aria-hidden="true">Select arrival date</span><input id="' + id + '-arrival" name="arrival" type="date" min="' + todayString() + '" max="' + maxDateString() + '" required></div></div>',
       '<div class="bw-date-check-blog-card__field"><label for="' + id + '-nights">Nights</label><select id="' + id + '-nights" name="nights" required><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option><option value="6">6</option><option value="7">7+</option></select></div></div>',
       '<button class="bw-date-check-blog-card__submit" type="submit"><span>Check my Berlin dates</span><span class="bw-date-check-blog-card__arrow" aria-hidden="true">→</span></button>',

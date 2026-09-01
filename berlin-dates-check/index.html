@@ -651,6 +651,7 @@
     + '</span>';
   var CONSENT_VERSION = 'berlin-date-check-pack-v1-2026-08-21';
   var SOURCE_SLUG = 'berlin-dates-check';
+  var CARD_EXPERIMENT_ID = 'berlin_date_check_blog_card_ab_v2_2026_09';
 
   function isQaRun() {
     return /[?&]qa=1\b/.test(window.location.search);
@@ -1260,7 +1261,7 @@
         utm: readUtm(),
         device: { width: window.innerWidth || 0, height: window.innerHeight || 0 },
         qa: isQaRun()
-      }, dateCheckEventFields(), extra || {});
+      }, dateCheckEventFields(), extra || {}, readCardContext());
       fetch(url.toString(), { method: 'POST', headers: { 'content-type': 'application/json' }, keepalive: true, body: JSON.stringify(body) }).catch(function () {});
     } catch (e) {}
   }
@@ -1274,6 +1275,29 @@
     try {
       var p = new URL(window.location.href).searchParams;
       return { source: p.get('utm_source') || '', medium: p.get('utm_medium') || '', campaign: p.get('utm_campaign') || '', content: p.get('utm_content') || '', term: p.get('utm_term') || '', id: p.get('utm_id') || '' };
+    } catch (e) { return {}; }
+  }
+
+  // First-party, categorical handoff for the blog-card experiment.  All four
+  // fields must validate together; partial or hand-edited values fail closed.
+  // This is intentionally separate from the email gate's EXPERIMENT_ID and
+  // GATE_VARIANT, and contains no contact, URL, cookie, or free-text value.
+  function readCardContext() {
+    try {
+      var p = new URL(window.location.href).searchParams;
+      var entryPoint = p.get('bw_entry') || '';
+      var cardExperiment = p.get('bw_card_exp') || '';
+      var cardVariant = p.get('bw_card_variant') || '';
+      var cardSourceSlug = (p.get('bw_card_source') || '').trim().toLowerCase();
+      var validVariant = cardVariant === 'form' || cardVariant === 'oneclick';
+      var validSlug = /^[a-z0-9](?:[a-z0-9-]{0,78}[a-z0-9])?$/.test(cardSourceSlug);
+      if (entryPoint !== 'blog_card' || cardExperiment !== CARD_EXPERIMENT_ID || !validVariant || !validSlug) return {};
+      return {
+        entryPoint: entryPoint,
+        cardExperiment: cardExperiment,
+        cardVariant: cardVariant,
+        cardSourceSlug: cardSourceSlug
+      };
     } catch (e) { return {}; }
   }
 
