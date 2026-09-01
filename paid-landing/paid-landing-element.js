@@ -871,7 +871,7 @@
           text-wrap: balance;
         }
 
-        .bw-paid-lead {
+        .bw-paid-landing .bw-paid-lead {
           color: #F1F8EE;
           font-size: clamp(16px, 1.8vw, 20px);
           font-weight: 700;
@@ -1392,10 +1392,10 @@
             max-width: none;
           }
 
-          .bw-paid-lead {
+          .bw-paid-landing .bw-paid-lead {
             font-size: 13.5px;
             line-height: 1.35;
-            margin-top: 9px;
+            margin-top: 14px;
           }
 
           .bw-paid-facts {
