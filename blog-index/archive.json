@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-01T02:10:15.657Z",
+  "updatedAt": "2026-09-01T08:06:18.694Z",
   "source": "Wix Blog API",
-  "totalPosts": 343,
+  "totalPosts": 344,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Night Trains from Berlin: Six Places You Can Wake Up Tomorrow",
+      "slug": "night-trains-from-berlin",
+      "path": "/post/night-trains-from-berlin",
+      "url": "https://www.berlinwalk.com/post/night-trains-from-berlin",
+      "excerpt": "Six sleeper routes leave Berlin this season, two of them every night, and the map changed twice this year: European Sleeper took over the Paris run in March and the Stockholm train changed operators on 1 September. Which trains run which nights, which station they use, what beds cost, and the Prague mistake to avoid.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "route-stories",
+      "topicLabel": "Tour Route Stories",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-01T08:03:42.870Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_2d3ed7d2e6bd4244814d2b5c37b5db50~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/night-trains-from-berlin-european-sleeper-berlin-hbf.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_2d3ed7d2e6bd4244814d2b5c37b5db50~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/night-trains-from-berlin-european-sleeper-berlin-hbf.jpg",
+      "alt": "The European Sleeper night train to Paris standing under the glass roof of Berlin Hauptbahnhof",
+      "relatedToolSlug": "berlin-night-train-board"
+    },
     {
       "title": "Laundry in Berlin: How to Get Clean Clothes Without Losing Half a Day",
       "slug": "laundry-in-berlin",
