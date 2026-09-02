@@ -1,8 +1,8 @@
-# Berlin History Story V2 — cover and 1945 image design QA
+# Berlin History Story V2 — cover, 1945 image and lead magnet design QA
 
-Run date: 2026-09-01
+Run date: 2026-09-02
 
-Build/cache key: `berlin-history-story-v2-20260901i`
+Build/cache key: `berlin-history-story-v2-20260902-lead-magnet`
 
 Status: `DRAFT UPDATE — PUBLISH APPROVAL REQUIRED`
 Worktree: `/Users/yusufucuz/Documents/New project/berlinwalk-widgets/_worktrees/berlin-history-story-v1-20260901`
@@ -79,3 +79,24 @@ Implementation states inspected:
 - This is local product/design QA, not live proof. Wix header offset, draft embed pin, native SEO/social metadata, live network delivery and screen-reader behavior remain separate draft/live gates. No Wix write, push, deploy or publication occurred.
 
 final result: passed
+
+## Lead magnet gate design QA
+
+Status: `LOCAL IMPLEMENTATION — BACKEND/DOI AND PUBLISH APPROVAL REQUIRED`
+
+- The final chapter now shows four visual field cards as separate starting points: Molkenmarkt, Friedrichstadt, Gleis 17 and Potsdamer + Leipziger Platz. Every card carries a concise date window and a place-specific move; no numbering implies a route sequence.
+- The preview date windows are exact: Molkenmarkt `2019 to present`; Friedrichstadt `1688 to 1732`; Gleis 17 `autumn 1941 to spring 1942`; Potsdamer + Leipziger Platz `1990 to 2016`.
+- The pre-gate sample uses the public pavement and the A3 fence near Altes Stadthaus. It explicitly says the fenced excavation is a place to read, not an entry.
+- The gate asks for exactly one email address and one unchecked, required consent checkbox. It does not ask for name, phone number, arrival date or arrival timing. Yellow submit text computes to dark green, per the project contrast rule.
+- Submit uses the generic `/api/download-lead?action=submit` contract with the locked `berlin-history-field-card` asset identity. The accepted state instructs the visitor to confirm the email and receive the full field guide through a secure link. No client-side token, asset URL or protected file is generated.
+- The visible consent sentence is `Email me Berlin, Remade: Four Places to Read Berlin, plus occasional BerlinWalk emails about Berlin history, new articles and walking-tour updates. I can unsubscribe at any time. Read the Privacy Policy.` The `Privacy Policy` words are the linked portion; the checkbox starts unchecked and required.
+- With analytics consent unavailable or false, `experiment`, `variant`, `acquisitionCohort` and UTM values are empty while functional `sourceSlug`, `pagePath` and `placement` remain available for the DOI request.
+- The short Today chapter keeps only a four-place overview. The full preview, gate and secondary Book the Tour bridge render in normal flow after the scrolly and before aftercare, so the form is not trapped inside a 168vh sticky step on small screens.
+- The existing Book my Free Berlin Walking Tour link remains after the gate as a secondary action, with the existing 2-hour Alexanderplatz and former-East-Berlin framing intact.
+- Measurement events remain consent-gated. Gate view requires at least 50% visibility for 2 seconds; form start and gate seen fire only on interaction. QA mode suppresses lead network calls.
+
+Evidence to collect before any public embed or publish decision:
+
+- Browser desktop and ~390px mobile readback of the final chapter with the sample, cards, form and secondary tour link visible.
+- Unchecked checkbox and required validation readback, accepted-submit adapter/mock readback, and request-body inspection confirming no name/phone/arrival fields.
+- Backend registry readback for `assetId`, exact `consentVersion`, server-owned `assetVersion`, secure inline access-page delivery mode, DOI confirmation and secure post-DOI access-page link.

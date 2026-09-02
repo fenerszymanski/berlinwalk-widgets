@@ -11,7 +11,7 @@
   'use strict';
 
   var TAG = 'bw-berlin-history-story';
-  var BUILD = 'berlin-history-story-v2-20260901i';
+  var BUILD = 'berlin-history-story-v2-20260902-lead-magnet';
   var SCRIPT_URL = document.currentScript && document.currentScript.src ? document.currentScript.src : '';
   var BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
     ? new URL('./', SCRIPT_URL).toString()
@@ -20,6 +20,30 @@
   var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=berlin_history_story&utm_medium=story&utm_campaign=history_v1&utm_content=closing_cta';
   var WALL_URL = 'https://www.berlinwalk.com/berlin-wall-timeline?utm_source=berlin_history_story&utm_medium=story&utm_campaign=history_v1&utm_content=wall_chapter';
   var FINAL_URL = 'https://www.berlinwalk.com/berlin-history-story';
+  // Lead delivery is intentionally adapter-shaped. The defaults match the
+  // backend registry proposal, while host attributes let the Wix embed switch
+  // registry versions without changing this story runtime.
+  var LEAD_API_DEFAULT = 'https://app.berlinwalk.com/api/download-lead';
+  var LEAD_ASSET_ID_DEFAULT = 'berlin-history-field-card';
+  var LEAD_CONSENT_VERSION_DEFAULT = 'berlin-history-field-card-v1-2026-09-02';
+  var LEAD_EXPERIMENT_DEFAULT = 'berlin_history_field_card_v1';
+  var LEAD_VARIANT_DEFAULT = 'single';
+  var LEAD_PLACEMENT_DEFAULT = 'history_story_epilogue';
+  var LEAD_PRIVACY_URL_DEFAULT = 'https://www.berlinwalk.com/privacy-policy';
+  var LEAD_SOURCE_SLUG = 'berlin-history-story';
+  var LEAD_CONSENT_COPY = 'Email me Berlin, Remade: Four Places to Read Berlin, plus occasional BerlinWalk emails about Berlin history, new articles and walking-tour updates. I can unsubscribe at any time. Read the Privacy Policy.';
+  var LEAD_EVENT_NAMES = {
+    gateView: 'bw_lead_asset_gate_view',
+    gateSeen: 'bw_lead_asset_gate_seen',
+    formStart: 'bw_lead_asset_form_start',
+    submit: 'bw_lead_asset_submit'
+  };
+  var FIELD_PLACES = [
+    { place: 'Molkenmarkt', date: '2019 to present', layer: 'Buried market city', move: 'Read the A3 fence near Altes Stadthaus. Do not enter.' },
+    { place: 'Friedrichstadt', date: '1688 to 1732', layer: 'Planned royal capital', move: 'Read the straight lines around Gendarmenmarkt.' },
+    { place: 'Gleis 17', date: 'autumn 1941 to spring 1942', layer: '186 steel plates at the memorial', move: 'Pause here. This memorial is evidence, not scenery.' },
+    { place: 'Potsdamer + Leipziger Platz', date: '1990 to 2016', layer: 'Post-Wall rebuild', move: 'Compare the new district with the former border void.' }
+  ];
   var COVER_URL = BASE_URL + 'assets/social/berlin-history-story-1200x630.jpg';
   var SEO = {
     title: 'Berlin, Remade: 12 Chapters in Berlin History | BerlinWalk',
@@ -54,7 +78,7 @@
     { key: 'sectors', yearStart: 1945, yearEnd: 1949, visual: 'sectors-fallback', mapState: 'sectors-airlift', h: 154, align: 'left', eyebrow: '1945–1949 · Four sectors', title: 'Four sectors and the Airlift', body: 'After the war, Berlin was divided into four sectors. That is different from Germany\'s four occupation zones, and the distinction matters on every map. In June 1948, Soviet authorities blocked land, rail and water access to West Berlin. The Western Allies supplied the city by air. The blockade was lifted on 12 May 1949, but the Airlift continued into the autumn. Tempelhof, Tegel and Gatow became more than airports: they were working entries to an enclosed city. Follow the arrows as a supply story, not a decorative flight path.' },
     { key: 'wall', yearStart: 1961, yearEnd: 1989, visual: 'wall-fallback', mapState: 'wall', h: 164, align: 'right', eyebrow: '1961–1989 · The Wall', title: 'The Wall', body: 'On the night of 12-13 August 1961, GDR forces began sealing Berlin\'s sector border with barbed wire. The barriers became a fortified Wall system that shaped ordinary journeys for almost three decades. On 9 November 1989, crossings opened after Günter Schabowski\'s confused announcement and the pressure at Bornholmer Straße. That was not German reunification, which came on 3 October 1990. Nor did every concrete section vanish overnight. Use the Berlin Wall Timeline for the fuller map and sequence; this story only marks the hinge.' },
     { key: 'reunited', yearStart: 1990, yearEnd: 2016, visual: 'reunited', mapState: 'none', h: 164, align: 'left', eyebrow: '1990–2016 · Rebuilding', title: 'A reunited capital', body: 'Reunification took effect on 3 October 1990. On 20 June 1991, the Bundestag separately voted to move parliament and government to Berlin. Potsdamer and Leipziger Platz show the long rebuilding process at full scale: a former border void became a dense district of offices, stations and public space. Compare the new skyline with the missing streets beneath it; this dramatic rebuild is only one layer of the reunited city.' },
-    { key: 'today', role: 'epilogue', yearStart: 2026, yearEnd: 2026, visual: 'today', mapState: 'none', h: 168, align: 'center', eyebrow: 'Today · Four starting points', title: 'Four places to read Berlin today', body: 'These four places are separate starting points, not one walking route: Molkenmarkt for the buried market city; Friedrichstraße and Gendarmenmarkt for the planned royal capital; Gleis 17 at S Grunewald for the evidence of deportation; Potsdamer and Leipziger Platz for the post-Wall rebuild. Start with one place and one date, then notice what has changed, what survives and what the map leaves out.' }
+    { key: 'today', role: 'epilogue', yearStart: 2026, yearEnd: 2026, visual: 'today', mapState: 'none', h: 108, align: 'center', eyebrow: 'Today · Four starting points', title: 'Four places to read Berlin today', body: 'These four places are separate starting points, not one walking route: Molkenmarkt for the buried market city; Friedrichstraße and Gendarmenmarkt for the planned royal capital; Gleis 17 at S Grunewald for the evidence of deportation; Potsdamer and Leipziger Platz for the post-Wall rebuild. Start with one place and one date, then notice what has changed, what survives and what the map leaves out.' }
   ];
 
   CHAPTERS.forEach(function (chapter, index) {
@@ -105,7 +129,9 @@
     "@media (max-width:640px){.bw-hs-cover{align-items:end;min-height:100svh;padding:clamp(28px,6vh,52px) 20px 34px}.bw-hs-cover:after{background:linear-gradient(180deg,rgba(8,18,13,.58) 0%,rgba(8,18,13,.75) 46%,rgba(8,18,13,.98) 88%)}.bw-hs-cover-archive{top:9%;right:14px;width:calc(100% - 28px);opacity:.2;transform:none}.bw-hs-cover-brand{top:max(18px,env(safe-area-inset-top));right:18px;width:clamp(108px,32vw,140px)}.bw-hs-cover-content{width:100%;padding-top:22vh}.bw-hs-cover-eyebrow{margin-bottom:.85rem;font-size:.62rem;letter-spacing:.12em}.bw-hs-cover h1{max-width:9ch;font-size:clamp(3.45rem,16vw,5rem);line-height:.92}.bw-hs-cover-deck{margin-top:1.25rem;font-size:1rem;line-height:1.43}.bw-hs-cover-meta{margin-top:1.15rem;font-size:.65rem;line-height:1.45}.bw-hs-cover-start{margin-top:2rem;font-size:.65rem}}",
     "@media (max-width:640px) and (min-height:760px){.bw-hs-cover-content{transform:translateY(-10svh)}}",
     "@media (max-width:360px){.bw-hs-cover{padding-bottom:28px}.bw-hs-cover-content{padding-top:18vh}.bw-hs-cover-deck{font-size:.92rem;line-height:1.38}.bw-hs-cover-meta{font-size:.6rem}.bw-hs-cover-start{margin-top:1.45rem}}",
-    "@media (max-width:900px) and (max-height:540px) and (orientation:landscape){.bw-hs-cover{align-items:center;min-height:100svh;padding:28px 68px 24px}.bw-hs-cover:after{background:linear-gradient(90deg,rgba(8,18,13,.94) 0%,rgba(8,18,13,.76) 58%,rgba(8,18,13,.55) 100%)}.bw-hs-cover-archive{top:8%;right:4%;width:min(50vw,410px);opacity:.22;transform:none}.bw-hs-cover-brand{top:16px;right:30px;width:120px}.bw-hs-cover-content{width:min(510px,58vw);padding-top:22px}.bw-hs-cover-eyebrow{margin-bottom:.55rem;font-size:.58rem}.bw-hs-cover h1{font-size:clamp(3rem,8vw,4.4rem);line-height:.92}.bw-hs-cover-deck{max-width:480px;margin-top:.8rem;font-size:.86rem;line-height:1.3}.bw-hs-cover-meta{margin-top:.75rem;font-size:.58rem}.bw-hs-cover-start{margin-top:1rem;font-size:.58rem}}"
+    "@media (max-width:900px) and (max-height:540px) and (orientation:landscape){.bw-hs-cover{align-items:center;min-height:100svh;padding:28px 68px 24px}.bw-hs-cover:after{background:linear-gradient(90deg,rgba(8,18,13,.94) 0%,rgba(8,18,13,.76) 58%,rgba(8,18,13,.55) 100%)}.bw-hs-cover-archive{top:8%;right:4%;width:min(50vw,410px);opacity:.22;transform:none}.bw-hs-cover-brand{top:16px;right:30px;width:120px}.bw-hs-cover-content{width:min(510px,58vw);padding-top:22px}.bw-hs-cover-eyebrow{margin-bottom:.55rem;font-size:.58rem}.bw-hs-cover h1{font-size:clamp(3rem,8vw,4.4rem);line-height:.92}.bw-hs-cover-deck{max-width:480px;margin-top:.8rem;font-size:.86rem;line-height:1.3}.bw-hs-cover-meta{margin-top:.75rem;font-size:.58rem}.bw-hs-cover-start{margin-top:1rem;font-size:.58rem}}",
+    ".bw-hs-lead-section{position:relative;z-index:3;padding:clamp(46px,8vw,96px) clamp(18px,6vw,88px);background:#102016;color:var(--ink)}.bw-hs-lead-section-inner{width:min(1000px,100%);margin:0 auto}.bw-hs-lead-section .bw-hs-lead-preview{margin-top:0}.bw-hs-step[data-ch=today] .bw-hs-card{width:min(48rem,100%);text-align:left}.bw-hs-lead-preview{margin-top:1.55rem;padding:1.15rem;border:1px solid rgba(255,230,0,.42);background:rgba(18,61,24,.7);text-align:left}.bw-hs-lead-preview-head{max-width:38rem}.bw-hs-field-kicker,.bw-hs-field-sample-label,.bw-hs-tour-bridge-label{margin:0 0 .55rem;color:var(--yellow);font:400 .63rem/1.3 'BW Mono',monospace;letter-spacing:.13em;text-transform:uppercase}.bw-hs-lead-preview h3,.bw-hs-lead-gate h3{margin:0 0 .55rem;color:var(--ink);font:620 clamp(1.45rem,3vw,2.3rem)/1.05 'BW Fraunces',Georgia,serif;letter-spacing:-.02em}.bw-hs-field-intro{max-width:38rem;color:var(--dim);font-size:.91rem!important;line-height:1.45!important}.bw-hs-field-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:1.1rem}.bw-hs-field-card{min-width:0;padding:.85rem .82rem .9rem;border:1px solid rgba(247,245,239,.2);border-left:3px solid var(--lime,#7CB342);background:rgba(247,245,239,.08)}.bw-hs-field-card:nth-child(2){border-left-color:var(--yellow)}.bw-hs-field-card:nth-child(3){border-left-color:#e8b04b}.bw-hs-field-card:nth-child(4){border-left-color:#9cc6c0}.bw-hs-field-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px}.bw-hs-field-number{color:var(--yellow);font:400 .65rem/1 'BW Mono',monospace}.bw-hs-field-label{color:var(--faint);font:400 .5rem/1 'BW Mono',monospace;letter-spacing:.11em}.bw-hs-field-card h4{margin:.7rem 0 .24rem;color:var(--ink);font:620 clamp(1rem,2vw,1.4rem)/1.03 'BW Fraunces',Georgia,serif;letter-spacing:-.015em}.bw-hs-field-date{display:block;color:var(--yellow);font:400 .61rem/1.3 'BW Mono',monospace;letter-spacing:.03em}.bw-hs-field-card p{color:var(--dim);font-size:.72rem!important;line-height:1.3!important}.bw-hs-field-move{display:block;margin-top:.7rem;color:var(--faint);font:400 .61rem/1.35 'BW Mono',monospace}.bw-hs-field-sample{margin-top:10px;padding:.9rem;background:#f7f5ef;color:#16311e}.bw-hs-field-sample-label{color:#123D18}.bw-hs-field-sample-note{display:grid;grid-template-columns:minmax(100px,.42fr) 1fr;gap:12px;align-items:start}.bw-hs-field-sample-note strong{font:620 clamp(1.2rem,2.5vw,1.65rem)/1.05 'BW Fraunces',Georgia,serif}.bw-hs-field-sample-note span{font-size:.82rem;line-height:1.4}.bw-hs-field-sample-meta{display:block;margin-top:.72rem;color:#48634e;font:400 .6rem/1.35 'BW Mono',monospace;letter-spacing:.07em;text-transform:uppercase}.bw-hs-lead-gate{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(280px,.95fr);gap:1.45rem;margin-top:1.15rem;padding:1.2rem 1.15rem;background:#f7f5ef;color:#16311e;text-align:left}.bw-hs-lead-gate-head p{color:#385641;font-size:.88rem!important;line-height:1.45!important}.bw-hs-lead-gate .bw-hs-field-kicker{color:#123D18}.bw-hs-lead-gate h3{color:#123D18}.bw-hs-lead-form{display:grid;align-content:start;gap:.7rem}.bw-hs-lead-field label{display:block;color:#123D18;font:650 .76rem/1.3 'BW Space',Arial,sans-serif}.bw-hs-lead-field input[type=email]{display:block;width:100%;min-height:45px;margin-top:.35rem;padding:.65rem .72rem;border:1px solid #718676;border-radius:2px;background:#fff;color:#16311e;font:400 1rem/1.3 'BW Space',Arial,sans-serif}.bw-hs-lead-field input[type=email]:focus-visible{outline:3px solid #123D18;outline-offset:2px;border-color:#123D18}.bw-hs-lead-help{margin-top:.35rem;color:#53705b!important;font:400 .64rem/1.35 'BW Mono',monospace!important}.bw-hs-lead-consent{display:grid;grid-template-columns:20px 1fr;gap:9px;align-items:start;color:#385641;font-size:.72rem;line-height:1.38;cursor:pointer}.bw-hs-lead-consent input{width:18px;height:18px;margin:1px 0 0;accent-color:#123D18}.bw-hs-lead-consent a{color:#123D18;text-decoration-thickness:1px;text-underline-offset:2px}.bw-hs-lead-honeypot{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}.bw-hs-lead-submit{width:100%;margin-top:.1rem!important;padding:.82rem .95rem;border-color:#FFE600;background:#FFE600;color:#123D18!important;font-size:.9rem;cursor:pointer}.bw-hs-lead-submit:hover{background:#fff36b;border-color:#fff36b}.bw-hs-lead-submit:disabled{opacity:.65;cursor:wait}.bw-hs-lead-status{min-height:1.35em;color:#123D18!important;font-size:.77rem!important;line-height:1.4!important}.bw-hs-lead-status[data-state=error]{color:#9c2530!important}.bw-hs-lead-status[data-state=success]{font-weight:650}.bw-hs-lead-note{margin-top:-.25rem!important;color:#53705b!important;font:400 .61rem/1.35 'BW Mono',monospace!important}.bw-hs-tour-bridge{margin-top:1.35rem;padding-top:1rem;border-top:1px solid var(--line);text-align:left}.bw-hs-tour-bridge .bw-hs-btn-secondary{margin-top:.15rem}.bw-hs a.bw-hs-btn.bw-hs-btn-secondary{background:transparent;border-color:rgba(247,245,239,.56);color:var(--ink)!important}.bw-hs a.bw-hs-btn.bw-hs-btn-secondary:hover{background:rgba(247,245,239,.1);border-color:var(--ink)}.bw-hs a.bw-hs-btn.bw-hs-btn-secondary:visited{color:var(--ink)!important}.bw-hs-tour-bridge .bw-hs-final-note{max-width:40rem}.bw-hs [hidden]{display:none!important}",
+    "@media (max-width:720px){.bw-hs-lead-gate{grid-template-columns:1fr;gap:1rem}.bw-hs-lead-preview{padding:1rem}.bw-hs-field-card{padding:.76rem .7rem .8rem}.bw-hs-field-card h4{font-size:1.05rem}.bw-hs-field-move{font-size:.58rem}.bw-hs-field-sample-note{grid-template-columns:1fr;gap:.35rem}.bw-hs-field-sample-note span{font-size:.8rem}.bw-hs-tour-bridge{margin-top:1.1rem}}"
   ].join('');
 
   var SVG = [
@@ -238,14 +264,104 @@
       || query.has('qa');
   }
 
+  function leadDimension(value, max) {
+    var cleaned = String(value == null ? '' : value).trim().slice(0, max || 120);
+    if (!cleaned || cleaned.indexOf('@') !== -1 || /https?:\/\//i.test(cleaned)) return '';
+    return cleaned.replace(/[^A-Za-z0-9._/-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, max || 120);
+  }
+
+  function leadHttpUrl(value, fallback) {
+    try {
+      var parsed = new URL(String(value || fallback), window.location.href);
+      if (parsed.protocol === 'http:' || parsed.protocol === 'https:') return parsed.toString();
+    } catch (error) {}
+    return fallback;
+  }
+
+  function leadUtm() {
+    var params = new URLSearchParams(window.location.search || '');
+    return {
+      source: leadDimension(params.get('utm_source'), 100),
+      medium: leadDimension(params.get('utm_medium'), 100),
+      campaign: leadDimension(params.get('utm_campaign'), 120),
+      content: leadDimension(params.get('utm_content'), 120),
+      term: leadDimension(params.get('utm_term'), 120)
+    };
+  }
+
+  function emptyLeadUtm() {
+    return { source: '', medium: '', campaign: '', content: '', term: '' };
+  }
+
+  function leadReferrerPath() {
+    try {
+      var parsed = new URL(document.referrer || '');
+      return leadDimension(parsed.pathname, 300);
+    } catch (error) {
+      return '';
+    }
+  }
+
+  function leadFieldPreview() {
+    var cards = FIELD_PLACES.map(function (item) {
+      return '<article class="bw-hs-field-card" data-place="' + esc(item.place) + '">'
+        + '<div class="bw-hs-field-card-top"><span class="bw-hs-field-label">STARTING POINT</span></div>'
+        + '<h4>' + esc(item.place) + '</h4>'
+        + '<span class="bw-hs-field-date">' + esc(item.date) + '</span>'
+        + '<p>' + esc(item.layer) + '</p>'
+        + '<span class="bw-hs-field-move">' + esc(item.move) + '</span>'
+        + '</article>';
+    }).join('');
+    return '<section class="bw-hs-lead-preview" aria-labelledby="bw-hs-field-title">'
+      + '<div class="bw-hs-lead-preview-head">'
+      + '<p class="bw-hs-field-kicker">Berlin, Remade: four-place field guide</p>'
+      + '<h3 id="bw-hs-field-title">Four places. Four starting points.</h3>'
+      + '<p class="bw-hs-field-intro">A compact way to read Berlin in the city, with one practical move at each place. These are separate starts, not one walking route.</p>'
+      + '</div>'
+      + '<div class="bw-hs-field-grid" aria-label="Four separate Berlin starting points">' + cards + '</div>'
+      + '<aside class="bw-hs-field-sample" aria-label="Sample field note">'
+      + '<p class="bw-hs-field-sample-label">Sample from the full guide</p>'
+      + '<div class="bw-hs-field-sample-note"><strong>Molkenmarkt</strong><span>On the public pavement, read the A3 fence near Altes Stadthaus. The fenced excavation is a place to read, not an entry.</span></div>'
+      + '<span class="bw-hs-field-sample-meta">2019 to present · one place · one date · one move</span>'
+      + '</aside>'
+      + '</section>';
+  }
+
+  function leadGate() {
+    var consentCopy = esc(LEAD_CONSENT_COPY).replace('Privacy Policy', '<a data-bw-history-lead-privacy href="' + esc(LEAD_PRIVACY_URL_DEFAULT) + '" target="_blank" rel="noopener">Privacy Policy</a>');
+    return '<section class="bw-hs-lead-gate" data-bw-history-lead-gate aria-labelledby="bw-hs-lead-title">'
+      + '<div class="bw-hs-lead-gate-head">'
+      + '<p class="bw-hs-field-kicker">Get the full field guide</p>'
+      + '<h3 id="bw-hs-lead-title">Keep the four places on your phone.</h3>'
+      + '<p>The full guide adds the place notes, dates and small reading moves behind the sample above. I will send it after you confirm your email.</p>'
+      + '</div>'
+      + '<form class="bw-hs-lead-form" data-bw-history-lead-form novalidate>'
+      + '<div class="bw-hs-lead-field"><label for="bw-hs-lead-email">Email address</label><input id="bw-hs-lead-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="bw-hs-lead-email-help"><p id="bw-hs-lead-email-help" class="bw-hs-lead-help">No name, phone number or arrival date is needed.</p></div>'
+      + '<label class="bw-hs-lead-consent"><input name="consent" type="checkbox" required aria-describedby="bw-hs-lead-consent-copy"><span id="bw-hs-lead-consent-copy">' + consentCopy + '</span></label>'
+      + '<div class="bw-hs-lead-honeypot" aria-hidden="true"><label for="bw-hs-lead-website">Website</label><input id="bw-hs-lead-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>'
+      + '<button class="bw-hs-btn bw-hs-lead-submit" type="submit">Send me the field guide</button>'
+      + '<p class="bw-hs-lead-status" data-bw-history-lead-status role="status" aria-live="polite" aria-atomic="true"></p>'
+      + '<p class="bw-hs-lead-note">One email, then a secure link after confirmation.</p>'
+      + '</form>'
+      + '</section>';
+  }
+
   function card(chapter) {
     var heading = '<h2>' + esc(chapter.title) + '</h2>';
     var lead = '<p class="bw-hs-eyebrow">' + esc(chapter.eyebrow) + '</p>';
     var extra = '';
     if (chapter.key === 'wall') extra = '<a class="bw-hs-source-link" data-bw-history-track="wall_timeline" href="' + esc(WALL_URL) + '">Open the full Berlin Wall Timeline</a>';
     if (chapter.key === 'dictatorship') extra = '<ol class="bw-hs-mobile-evidence" aria-label="Evidence dates"><li>1933</li><li>October 1941</li><li>February 1945</li></ol><div class="bw-hs-evidence-fact"><strong>50,000+</strong><span>Berlin Jews deported and murdered between October 1941 and February 1945</span></div><p class="bw-hs-evidence-note">The 1945 photograph is evidence of physical destruction only.</p>';
-    if (chapter.key === 'today') extra = '<div class="bw-hs-place-grid"><div class="bw-hs-place"><b>Molkenmarkt</b>buried market city</div><div class="bw-hs-place"><b>Friedrichstadt</b>planned royal capital</div><div class="bw-hs-place"><b>Gleis 17</b>evidence of deportation</div><div class="bw-hs-place"><b>Potsdamer Platz</b>post-Wall rebuild</div></div><a class="bw-hs-btn" data-bw-history-track="closing_cta" href="' + esc(BOOK_URL) + '">Book my Free Berlin Walking Tour</a><p class="bw-hs-final-note">My free tour starts at Alexanderplatz. It lasts 2 hours and explores the historic centre of former East Berlin: 11 stops, 16 places and about 3 km. It does not follow the Berlin Wall line.</p>';
+    if (chapter.key === 'today') extra = '<div class="bw-hs-place-grid"><div class="bw-hs-place"><b>Molkenmarkt</b>buried market city</div><div class="bw-hs-place"><b>Friedrichstadt</b>planned royal capital</div><div class="bw-hs-place"><b>Gleis 17</b>evidence of deportation</div><div class="bw-hs-place"><b>Potsdamer + Leipziger Platz</b>post-Wall rebuild</div></div>';
     return '<div class="bw-hs-card">' + lead + heading + '<p>' + esc(chapter.body) + '</p>' + extra + '</div>';
+  }
+
+  function leadSection() {
+    return '<section class="bw-hs-lead-section" aria-label="Berlin, Remade field guide sign-up"><div class="bw-hs-lead-section-inner">'
+      + leadFieldPreview()
+      + leadGate()
+      + '<div class="bw-hs-tour-bridge"><p class="bw-hs-tour-bridge-label">Prefer a live walk?</p><a class="bw-hs-btn bw-hs-btn-secondary" data-bw-history-track="closing_cta" href="' + esc(BOOK_URL) + '">Book my Free Berlin Walking Tour</a><p class="bw-hs-final-note">My free tour starts at Alexanderplatz. It lasts 2 hours and explores the historic centre of former East Berlin: 11 stops, 16 places and about 3 km. It does not follow the Berlin Wall line.</p></div>'
+      + '</div></section>';
   }
 
   function cover() {
@@ -318,6 +434,15 @@
   }
 
   class BWBHistoryStory extends HTMLElement {
+    constructor() {
+      super();
+      this._leadEvents = {};
+      this._leadGateTimer = null;
+      this._leadGateObserver = null;
+      this._leadStartedAt = null;
+      this._leadSubmitting = false;
+    }
+
     connectedCallback() {
       document.body.classList.add('bw-history-story-page-active');
       if (this._booted) return;
@@ -335,6 +460,11 @@
       if (this._applyQaHash) window.removeEventListener('hashchange', this._applyQaHash);
       if (this._onTrackedLinkClick && this._root) this._root.removeEventListener('click', this._onTrackedLinkClick);
       if (this._observer) this._observer.disconnect();
+      if (this._leadGateObserver) this._leadGateObserver.disconnect();
+      if (this._leadGateTimer) window.clearTimeout(this._leadGateTimer);
+      if (this._leadForm && this._onLeadSubmit) this._leadForm.removeEventListener('submit', this._onLeadSubmit);
+      if (this._leadForm && this._onLeadFocus) this._leadForm.removeEventListener('focusin', this._onLeadFocus);
+      if (this._leadForm && this._onLeadInput) this._leadForm.removeEventListener('input', this._onLeadInput);
       if (this._mq && this._onMotion) {
         if (this._mq.removeEventListener) this._mq.removeEventListener('change', this._onMotion);
         else if (this._mq.removeListener) this._mq.removeListener(this._onMotion);
@@ -345,7 +475,7 @@
       var steps = CHAPTERS.map(function (chapter) {
         return '<section class="bw-hs-step" data-ch="' + esc(chapter.key) + '" data-role="' + esc(chapter.role) + '" data-align="' + esc(chapter.align) + '" style="min-height:' + chapter.h + 'vh">' + card(chapter) + '</section>';
       }).join('');
-      this.innerHTML = '<style>' + CSS + '</style><article class="bw-hs" data-map-state="loading">' + cover() + '<div id="bw-hs-story-start" class="bw-hs-scrolly" tabindex="-1" aria-label="Berlin history story chapters"><div class="bw-hs-stage-frame"><div class="bw-hs-stage">' + SVG + '<div class="bw-hs-photo-stack">' + PHOTOS.map(photo).join('') + '</div><div class="bw-hs-vignette"></div><div class="bw-hs-hud"><div class="bw-hs-year"><span>20</span>26</div><div class="bw-hs-chapter">' + esc(chapterHudLabel(CHAPTERS[0])) + '</div><div class="bw-hs-map-state" hidden></div></div><div class="bw-hs-progress" aria-label="Story progress: ' + esc(chapterStatusLabel(CHAPTERS[0], 0)) + '"><span>' + esc(chapterProgressLabel(CHAPTERS[0], 0)) + '</span></div><div class="bw-hs-chapter-status" role="status" aria-live="polite" aria-atomic="true">' + esc(chapterStatusLabel(CHAPTERS[0], 0)) + '</div><a class="bw-hs-brand" href="' + esc(HOME_URL) + '" aria-label="BerlinWalk home"><img src="' + esc(BASE_URL + 'assets/brand/berlinwalk-wordmark-yellow.png') + '" alt="BerlinWalk"></a></div></div><nav class="bw-hs-rail" aria-label="Berlin history story chapters"></nav><div class="bw-hs-steps">' + steps + '</div></div>' + aftercare() + '</article>';
+      this.innerHTML = '<style>' + CSS + '</style><article class="bw-hs" data-map-state="loading">' + cover() + '<div id="bw-hs-story-start" class="bw-hs-scrolly" tabindex="-1" aria-label="Berlin history story chapters"><div class="bw-hs-stage-frame"><div class="bw-hs-stage">' + SVG + '<div class="bw-hs-photo-stack">' + PHOTOS.map(photo).join('') + '</div><div class="bw-hs-vignette"></div><div class="bw-hs-hud"><div class="bw-hs-year"><span>20</span>26</div><div class="bw-hs-chapter">' + esc(chapterHudLabel(CHAPTERS[0])) + '</div><div class="bw-hs-map-state" hidden></div></div><div class="bw-hs-progress" aria-label="Story progress: ' + esc(chapterStatusLabel(CHAPTERS[0], 0)) + '"><span>' + esc(chapterProgressLabel(CHAPTERS[0], 0)) + '</span></div><div class="bw-hs-chapter-status" role="status" aria-live="polite" aria-atomic="true">' + esc(chapterStatusLabel(CHAPTERS[0], 0)) + '</div><a class="bw-hs-brand" href="' + esc(HOME_URL) + '" aria-label="BerlinWalk home"><img src="' + esc(BASE_URL + 'assets/brand/berlinwalk-wordmark-yellow.png') + '" alt="BerlinWalk"></a></div></div><nav class="bw-hs-rail" aria-label="Berlin history story chapters"></nav><div class="bw-hs-steps">' + steps + '</div></div>' + leadSection() + aftercare() + '</article>';
     }
 
     _wire() {
@@ -446,8 +576,205 @@
       window.addEventListener('hashchange', this._applyQaHash);
       this._applyQaHash();
       window.requestAnimationFrame(this._applyQaHash);
+      this._wireLeadGate(root);
       this._update();
       this._loadRealMap();
+    }
+
+    _leadConfig() {
+      return {
+        apiBase: leadHttpUrl(this.getAttribute('lead-api-base') || LEAD_API_DEFAULT, LEAD_API_DEFAULT),
+        assetId: leadDimension(this.getAttribute('lead-asset-id') || LEAD_ASSET_ID_DEFAULT, 100),
+        consentVersion: leadDimension(this.getAttribute('lead-consent-version') || LEAD_CONSENT_VERSION_DEFAULT, 120),
+        experiment: leadDimension(this.getAttribute('lead-experiment') || LEAD_EXPERIMENT_DEFAULT, 100),
+        variant: leadDimension(this.getAttribute('lead-variant') || LEAD_VARIANT_DEFAULT, 80),
+        placement: leadDimension(this.getAttribute('lead-placement') || LEAD_PLACEMENT_DEFAULT, 100),
+        privacyUrl: leadHttpUrl(this.getAttribute('lead-privacy-url') || LEAD_PRIVACY_URL_DEFAULT, LEAD_PRIVACY_URL_DEFAULT)
+      };
+    }
+
+    _leadEndpoint(action) {
+      var config = this._leadConfig();
+      try {
+        var endpoint = new URL(config.apiBase, window.location.href);
+        endpoint.searchParams.set('action', action);
+        return endpoint.toString();
+      } catch (error) {
+        return LEAD_API_DEFAULT + '?action=' + encodeURIComponent(action);
+      }
+    }
+
+    _leadTransport(action, payload) {
+      var adapter = window.BW_HISTORY_STORY_LEAD_ADAPTER;
+      var endpoint = this._leadEndpoint(action);
+      if (adapter && typeof adapter[action] === 'function') {
+        return Promise.resolve(adapter[action]({ endpoint: endpoint, payload: payload, element: this }));
+      }
+      if (typeof fetch !== 'function') return Promise.reject(new Error('Lead transport unavailable'));
+      return fetch(endpoint, {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+        keepalive: action === 'event'
+      });
+    }
+
+    _trackLead(eventName) {
+      if (!eventName || isQaMode() || !analyticsAllowed() || this._leadEvents[eventName]) return false;
+      this._leadEvents[eventName] = true;
+      var config = this._leadConfig();
+      var utm = leadUtm();
+      var payload = {
+        eventName: eventName,
+        assetId: config.assetId,
+        analyticsConsent: true,
+        pagePath: '/berlin-history-story',
+        sourceSlug: LEAD_SOURCE_SLUG,
+        referrer: leadReferrerPath(),
+        experiment: config.experiment,
+        variant: config.variant,
+        placement: config.placement,
+        acquisitionCohort: 'history_story',
+        screenWidth: window.innerWidth || 0,
+        utm: utm
+      };
+      this._leadTransport('event', payload).catch(function () {});
+      return true;
+    }
+
+    _scheduleLeadGateView() {
+      var self = this;
+      if (this._leadGateTimer || this._leadEvents[LEAD_EVENT_NAMES.gateView]) return;
+      this._leadGateTimer = window.setTimeout(function () {
+        self._leadGateTimer = null;
+        self._trackLead(LEAD_EVENT_NAMES.gateView);
+      }, 2000);
+    }
+
+    _wireLeadGate(root) {
+      var self = this;
+      this._leadGate = root.querySelector('[data-bw-history-lead-gate]');
+      if (!this._leadGate) return;
+      this._leadForm = this._leadGate.querySelector('[data-bw-history-lead-form]');
+      var privacyLink = this._leadGate.querySelector('[data-bw-history-lead-privacy]');
+      if (privacyLink) privacyLink.href = this._leadConfig().privacyUrl;
+      if (!this._leadForm) return;
+      this._onLeadFocus = function (event) {
+        if (!event.target || !event.target.matches('input')) return;
+        self._leadStartedAt = self._leadStartedAt || new Date().toISOString();
+        self._trackLead(LEAD_EVENT_NAMES.gateSeen);
+      };
+      this._onLeadInput = function (event) {
+        if (!event.target || !event.target.matches('input')) return;
+        self._leadStartedAt = self._leadStartedAt || new Date().toISOString();
+        self._trackLead(LEAD_EVENT_NAMES.formStart);
+      };
+      this._onLeadSubmit = function (event) {
+        event.preventDefault();
+        self._submitLead();
+      };
+      this._leadForm.addEventListener('focusin', this._onLeadFocus);
+      this._leadForm.addEventListener('input', this._onLeadInput);
+      this._leadForm.addEventListener('submit', this._onLeadSubmit);
+      if (typeof IntersectionObserver !== 'undefined') {
+        this._leadGateObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting && entry.intersectionRatio >= .5) self._scheduleLeadGateView();
+            else if (self._leadGateTimer) {
+              window.clearTimeout(self._leadGateTimer);
+              self._leadGateTimer = null;
+            }
+          });
+        }, { threshold: [.5] });
+        this._leadGateObserver.observe(this._leadGate);
+      }
+    }
+
+    _setLeadStatus(text, state) {
+      var status = this._leadGate && this._leadGate.querySelector('[data-bw-history-lead-status]');
+      if (!status) return;
+      status.textContent = text || '';
+      if (state) status.setAttribute('data-state', state);
+      else status.removeAttribute('data-state');
+    }
+
+    _submitLead() {
+      if (!this._leadForm || this._leadSubmitting) return;
+      var email = this._leadForm.querySelector('input[name=email]');
+      var consent = this._leadForm.querySelector('input[name=consent]');
+      var website = this._leadForm.querySelector('input[name=website]');
+      if (!email || !email.value.trim() || !email.checkValidity()) {
+        this._setLeadStatus('Enter a valid email address.', 'error');
+        if (email) email.focus();
+        return;
+      }
+      if (!consent || !consent.checked) {
+        this._setLeadStatus('Please tick the consent checkbox to request the guide.', 'error');
+        if (consent) consent.focus();
+        return;
+      }
+      if (website && website.value.trim()) {
+        this._setLeadStatus('Please leave the hidden field empty and try again.', 'error');
+        return;
+      }
+      var config = this._leadConfig();
+      var analyticsConsent = analyticsAllowed();
+      var now = Date.now();
+      var started = this._leadStartedAt ? Date.parse(this._leadStartedAt) : now - 1000;
+      if (!Number.isFinite(started) || now - started < 0 || now - started > 7200000) started = now - 1000;
+      this._leadStartedAt = new Date(started).toISOString();
+      var randomPart = window.crypto && typeof window.crypto.randomUUID === 'function'
+        ? window.crypto.randomUUID().replace(/-/g, '')
+        : Math.random().toString(36).slice(2);
+      var payload = {
+        assetId: config.assetId,
+        email: email.value.trim(),
+        consent: true,
+        consentVersion: config.consentVersion,
+        pagePath: '/berlin-history-story',
+        sourceSlug: LEAD_SOURCE_SLUG,
+        referrer: leadReferrerPath(),
+        experiment: analyticsConsent ? config.experiment : '',
+        variant: analyticsConsent ? config.variant : '',
+        placement: config.placement,
+        acquisitionCohort: analyticsConsent ? 'history_story' : '',
+        screenWidth: window.innerWidth || 0,
+        analyticsConsentAtSubmit: analyticsConsent,
+        utm: analyticsConsent ? leadUtm() : emptyLeadUtm(),
+        startedAt: this._leadStartedAt,
+        submittedAt: new Date(now).toISOString(),
+        idempotencyKey: 'bwhistory_' + now.toString(36) + '_' + randomPart.slice(0, 24),
+        qa: isQaMode(),
+        website: ''
+      };
+      if (isQaMode()) {
+        this._setLeadStatus('QA mode: request not sent.', 'pending');
+        return;
+      }
+      this._leadSubmitting = true;
+      this._setLeadStatus('Sending the request...', 'pending');
+      Array.prototype.forEach.call(this._leadForm.querySelectorAll('input,button'), function (control) { control.disabled = true; });
+      var self = this;
+      this._leadTransport('submit', payload)
+        .then(function (response) {
+          if (response && typeof response.ok === 'boolean' && !response.ok) throw new Error('Lead request failed');
+          if (response && typeof response.json === 'function') return response.json().catch(function () { return {}; });
+          return response || {};
+        })
+        .then(function (result) {
+          if (result && result.ok === false) throw new Error('Lead request rejected');
+          self._leadSubmitting = false;
+          self._trackLead(LEAD_EVENT_NAMES.submit);
+          self._setLeadStatus('Check your inbox. Confirm your email there, then receive the full field guide through a secure link.', 'success');
+          var submitButton = self._leadForm.querySelector('button[type=submit]');
+          if (submitButton) submitButton.hidden = true;
+        })
+        .catch(function () {
+          self._leadSubmitting = false;
+          Array.prototype.forEach.call(self._leadForm.querySelectorAll('input,button'), function (control) { control.disabled = false; });
+          self._setLeadStatus('Something went wrong. Please try again in a moment.', 'error');
+        });
     }
 
     _trackLink(kind) {
