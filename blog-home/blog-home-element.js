@@ -1,21 +1,30 @@
 const BW_BLOG_HOME_DATA_URL = (() => {
   const script = document.currentScript;
   const base = script && script.src ? script.src : window.location.href;
-  return new URL('./data.json?v=20260901-featured-listings', base).href;
+  return new URL('./data.json?v=20260902-featured-listings', base).href;
 })();
 
 const BW_BLOG_HOME_FALLBACK = {
   featured: {
-    title: 'Laundry in Berlin: How to Get Clean Clothes Without Losing Half a Day',
-    url: 'https://www.berlinwalk.com/post/laundry-in-berlin',
+    title: 'Berlin Philharmonic Tickets: How to Get In, Even When It Says Sold Out',
+    url: 'https://www.berlinwalk.com/post/berlin-philharmonic-tickets',
     category: 'Tourist Tips',
-    readTime: '7 min read',
-    label: 'New: compare Berlin wash options',
-    summary: 'Mid-trip laundry is a real Berlin decision: sit next to a Waschsalon machine for 90 minutes or hand the bag to a wash-and-fold counter for almost the same price. The verified costs, how the machines work, the Sunday trick, and addresses near where visitors stay.',
-    image: 'https://static.wixstatic.com/media/5a08a3_d9364bf63bb14311aa068c040b17dd2e~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/laundry-in-berlin-freddy-leck-machines.jpg',
-    alt: 'A row of numbered washing machines with open doors at Freddy Leck sein Waschsalon in Berlin-Moabit'
+    readTime: '6 min read',
+    label: 'New: find the less obvious ticket door',
+    summary: 'The Berlin Philharmonic looks sold out and expensive until you know the ladder: sale windows, standby tickets two days before, standing room on the night, cheaper DSO concerts in the same famous hall, and a completely free chamber concert every Wednesday lunchtime.',
+    image: 'https://static.wixstatic.com/media/5a08a3_567a2ac88a0c41c4928dd2160d6f107c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-philharmonic-tickets-philharmonie-blue-hour.jpg',
+    alt: 'The golden facade of the Philharmonie Berlin glowing at blue hour'
   },
   miniPosts: [
+    {
+      title: 'Night Trains from Berlin: Six Places You Can Wake Up Tomorrow',
+      url: 'https://www.berlinwalk.com/post/night-trains-from-berlin',
+      category: 'Tourist Tips',
+      readTime: '7 min read',
+      summary: 'Six sleeper routes leave Berlin this season, two of them every night, and the map changed twice this year: European Sleeper took over the Paris run in March and the Stockholm train changed operators on 1 September. Which trains run which nights, which station they use, what beds cost, and the Prague mistake to avoid.',
+      image: 'https://static.wixstatic.com/media/5a08a3_2d3ed7d2e6bd4244814d2b5c37b5db50~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/night-trains-from-berlin-european-sleeper-berlin-hbf.jpg',
+      alt: 'The European Sleeper night train to Paris standing under the glass roof of Berlin Hauptbahnhof'
+    },
     {
       title: 'German Unity Day in Berlin: What Is Actually Open on 3 October',
       url: 'https://www.berlinwalk.com/post/german-unity-day-berlin',
