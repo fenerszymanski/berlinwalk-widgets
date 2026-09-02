@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-02T07:57:29.497Z",
+  "updatedAt": "2026-09-02T14:03:40.612Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 346,
-  "toolsTotal": 266,
+  "totalPosts": 347,
+  "toolsTotal": 267,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1618,6 +1618,23 @@
   ],
   "latest": [
     {
+      "title": "Running in Berlin: Six Loops That Teach You the City",
+      "slug": "running-in-berlin",
+      "path": "/post/running-in-berlin",
+      "url": "https://www.berlinwalk.com/post/running-in-berlin",
+      "excerpt": "Berlin is flat, its parks are enormous, and before 09:00 the famous centre belongs to whoever is out in it. Six real running loops with honest distances, start stations, surfaces and water, from the Tiergarten to Tempelhofer Feld, plus what marathon week changes.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "history-myths",
+      "topicLabel": "Berlin History & Myths",
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-02T13:59:04.599Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_62a89ea057774b0bb0ec0d66bc301de7~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/running-in-berlin-tiergarten-autumn-path.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_62a89ea057774b0bb0ec0d66bc301de7~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/running-in-berlin-tiergarten-autumn-path.jpg",
+      "alt": "The wide gravel path through the Tiergarten in golden autumn light",
+      "relatedToolSlug": "berlin-run-loop-map"
+    },
+    {
       "title": "Shows in Berlin in English: The Three Doors Past the Language Barrier",
       "slug": "berlin-shows-in-english",
       "path": "/post/berlin-shows-in-english",
@@ -1803,26 +1820,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_53ed55c120044ed9a348445802f46101~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-funkturm-fernsehturm-skyline.jpg",
       "alt": "The Funkturm above the Berlin exhibition grounds with the Fernsehturm on the distant skyline",
       "relatedToolSlug": "berlin-twin-city-map"
-    },
-    {
-      "title": "Train Delay Compensation in Berlin: What You Actually Get Back",
-      "slug": "train-delay-compensation-berlin",
-      "path": "/post/train-delay-compensation-berlin",
-      "url": "https://www.berlinwalk.com/post/train-delay-compensation-berlin",
-      "excerpt": "Berlin runs three transport systems on one map and only one of them pays cash. A late ICE or regional train pays 25 percent of the fare at 60 minutes and 50 percent at 120, a late U-Bahn earns a free ticket, and a four euro floor quietly cancels most small claims. Here is what each threshold is worth, the 20 minute rule that frees your ticket from its booked train, the 120 euro clause for being stranded after midnight, and how to file before the deadline.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "9 min read",
-      "publishedDate": "2026-08-28T07:45:29.609Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_834b66c22d19425088c341d172915041~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-ice-berlin-hauptbahnhof.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_834b66c22d19425088c341d172915041~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-ice-berlin-hauptbahnhof.jpg",
-      "alt": "An ICE train standing at a deep-level platform inside Berlin Hauptbahnhof",
-      "relatedToolSlug": "berlin-delay-payback-board"
     }
   ],
   "allPosts": [
+    {
+      "title": "Running in Berlin: Six Loops That Teach You the City",
+      "slug": "running-in-berlin",
+      "path": "/post/running-in-berlin",
+      "url": "https://www.berlinwalk.com/post/running-in-berlin",
+      "excerpt": "Berlin is flat, its parks are enormous, and before 09:00 the famous centre belongs to whoever is out in it. Six real running loops with honest distances, start stations, surfaces and water, from the Tiergarten to Tempelhofer Feld, plus what marathon week changes.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "history-myths",
+      "topicLabel": "Berlin History & Myths",
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-02T13:59:04.599Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_62a89ea057774b0bb0ec0d66bc301de7~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/running-in-berlin-tiergarten-autumn-path.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_62a89ea057774b0bb0ec0d66bc301de7~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/running-in-berlin-tiergarten-autumn-path.jpg",
+      "alt": "The wide gravel path through the Tiergarten in golden autumn light",
+      "relatedToolSlug": "berlin-run-loop-map"
+    },
     {
       "title": "Shows in Berlin in English: The Three Doors Past the Language Barrier",
       "slug": "berlin-shows-in-english",
