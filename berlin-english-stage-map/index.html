@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Berlin English Stage Map</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --lime: #7CB342;
+    --lightgreen: #C5E1A5;
+    --yellow: #FFE600;
+    --cream: #FAFAF5;
+    --ink: #212121;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+  }
+  .esm-wrap { max-width: 760px; margin: 0 auto; padding: 18px 14px 26px; }
+  .esm-head h1 {
+    font-size: 1.22rem; line-height: 1.3; margin: 0 0 6px;
+    color: var(--green); font-weight: 800;
+  }
+  .esm-head p { margin: 0 0 14px; font-size: .88rem; line-height: 1.5; color: #444; }
+  .esm-modes { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  .esm-mode {
+    border: 2px solid transparent; border-radius: 999px;
+    padding: 7px 14px; font-size: .8rem; font-weight: 700;
+    cursor: pointer; font-family: inherit; transition: opacity .15s, transform .1s;
+  }
+  .esm-mode:active { transform: scale(.97); }
+  .esm-mode[data-mode="nowords"] { background: var(--green); color: #fff; }
+  .esm-mode[data-mode="surtitles"] { background: var(--lime); color: var(--deep); }
+  .esm-mode[data-mode="english"] { background: var(--yellow); color: var(--deep); }
+  .esm-mode[aria-pressed="false"] { opacity: .32; border-color: #bbb; }
+  .esm-mapbox {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid #e2e2d8; background: #f2f4ec;
+  }
+  #esm-canvas { display: block; width: 100%; cursor: pointer; }
+  .esm-maphint {
+    position: absolute; left: 10px; bottom: 8px; font-size: .62rem;
+    color: #667; background: rgba(250,250,245,.82); padding: 2px 7px;
+    border-radius: 6px; pointer-events: none;
+  }
+  .esm-detail {
+    margin-top: 14px; border-radius: 14px; padding: 14px 16px;
+    background: #fff; border: 1px solid #e4e4da;
+    border-left: 6px solid var(--green);
+  }
+  .esm-detail .esm-kicker {
+    font-size: .66rem; letter-spacing: .12em; text-transform: uppercase;
+    font-weight: 800; margin-bottom: 4px;
+  }
+  .esm-detail .esm-kicker.nowords { color: var(--green); }
+  .esm-detail .esm-kicker.surtitles { color: #558B2F; }
+  .esm-detail .esm-kicker.english { color: #8a7400; }
+  .esm-detail h2 { margin: 0 0 2px; font-size: 1.02rem; color: var(--deep); }
+  .esm-detail .esm-addr { font-size: .74rem; color: #666; margin-bottom: 8px; }
+  .esm-detail .esm-now { font-size: .85rem; line-height: 1.55; margin: 0 0 8px; }
+  .esm-detail .esm-lang { font-size: .85rem; line-height: 1.55; margin: 0 0 8px; }
+  .esm-detail .esm-move {
+    font-size: .83rem; line-height: 1.5; margin: 0;
+    background: var(--cream); border-radius: 9px; padding: 9px 11px;
+  }
+  .esm-detail .esm-move strong { color: var(--green); }
+  .esm-dist {
+    display: inline-block; margin-left: 8px; font-size: .68rem; font-weight: 700;
+    color: var(--deep); background: var(--lightgreen); border-radius: 999px;
+    padding: 2px 9px; vertical-align: 2px;
+  }
+  .esm-list { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 7px; }
+  .esm-venue {
+    font-family: inherit; font-size: .74rem; font-weight: 600;
+    border-radius: 9px; padding: 6px 10px; cursor: pointer;
+    background: #fff; border: 1.5px solid #d9d9cc; color: var(--ink);
+  }
+  .esm-venue.sel { border-color: var(--green); background: var(--lightgreen); color: var(--deep); }
+  .esm-venue .dot {
+    display: inline-block; width: 9px; height: 9px; border-radius: 50%;
+    margin-right: 6px;
+  }
+  .esm-venue.hiddenmode { display: none; }
+  .esm-foot { margin-top: 14px; font-size: .68rem; color: #777; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div class="esm-wrap">
+  <div class="esm-head">
+    <h1>Berlin English Stage Map</h1>
+    <p>Nine stages where you do not need German: shows with no words at all, German theatre with English surtitles, and rooms that simply play in English. Tap a dot or a name. The star is Hackescher Markt.</p>
+  </div>
+
+  <div class="esm-modes" role="group" aria-label="Filter stages by language mode">
+    <button class="esm-mode" data-mode="nowords" aria-pressed="true">No words needed</button>
+    <button class="esm-mode" data-mode="surtitles" aria-pressed="true">English surtitles</button>
+    <button class="esm-mode" data-mode="english" aria-pressed="true">All in English</button>
+  </div>
+
+  <div class="esm-mapbox">
+    <canvas id="esm-canvas" aria-label="Map of central Berlin showing nine stages colored by how much German they need"></canvas>
+    <div class="esm-maphint">Dot positions are real coordinates. Blue line: the Spree.</div>
+  </div>
+
+  <div class="esm-detail" id="esm-detail" aria-live="polite"></div>
+
+  <div class="esm-list" id="esm-list" role="group" aria-label="Stage list"></div>
+
+  <div class="esm-foot">Shows, dates and surtitle policies checked on 2 September 2026 against each venue's own site. Surtitle performances are marked in each theatre's calendar; always check the language line for your exact date before buying.</div>
+</div>
+
+<script>
+(function () {
+  var HM = { lat: 52.5225, lon: 13.4021 }; // Hackescher Markt
+
+  var MODES = {
+    nowords:   { label: 'NO WORDS NEEDED',   color: '#1B5E20', css: 'nowords' },
+    surtitles: { label: 'ENGLISH SURTITLES', color: '#7CB342', css: 'surtitles' },
+    english:   { label: 'ALL IN ENGLISH',    color: '#FFE600', css: 'english' }
+  };
+
+  var VENUES = [
+    {
+      id: 'palast', name: 'Friedrichstadt-Palast', mode: 'nowords',
+      lat: 52.5240, lon: 13.3893, addr: 'Friedrichstrasse 107, Mitte',
+      now: 'The new Grand Show BLINDED by DELIGHT premiered on 3 September 2026 and runs into 2027 on the largest theatre stage in Europe. About 2.5 hours of costumes, acrobatics and music.',
+      lang: 'The Grand Show is a visual spectacle. There is no plot dialogue to follow, so German is simply not a factor.',
+      move: 'Book ahead for a weekend, the cheaper seat categories go first. Autumn evening dates were selling from about EUR 64 on the big ticket platforms when I checked.'
+    },
+    {
+      id: 'chamaeleon', name: 'Chamaeleon', mode: 'nowords',
+      lat: 52.5249, lon: 13.4020, addr: 'Hackesche Hoefe, Rosenthaler Strasse 40/41',
+      now: 'Contemporary circus inside the Hackesche Hoefe. Kintsugi by Machine de Cirque runs until 17 January 2027, with table seating and drinks service.',
+      lang: 'Physical storytelling, not spoken theatre. Nothing to translate.',
+      move: 'Tickets run roughly EUR 40 to 72 by date and seat. It sits two minutes from where my free tour ends, so an evening show pairs naturally with an afternoon walk.'
+    },
+    {
+      id: 'wintergarten', name: 'Wintergarten Variete', mode: 'nowords',
+      lat: 52.5010, lon: 13.3654, addr: 'Potsdamer Strasse 96, Tiergarten',
+      now: 'Classic variete: acrobatics, dance and live music under the famous starry ceiling. The show DISCO runs from 27 August 2026 to 14 February 2027.',
+      lang: 'Hosting is light and the acts are visual. You will not miss anything without German.',
+      move: 'Pick the dinner option only if you want the full old-Berlin evening; the show alone is the better value.'
+    },
+    {
+      id: 'gorki', name: 'Maxim Gorki Theater', mode: 'surtitles',
+      lat: 52.5183, lon: 13.3962, addr: 'Am Festungsgraben 2, behind Unter den Linden',
+      now: 'Berlin’s boldest ensemble house, starting its 2026/27 season under new artistic director Cagla Ilk.',
+      lang: 'The most English-friendly German theatre in the city: German-language productions run with English surtitles, premieres excepted.',
+      move: 'If you only try one German-language theatre night in Berlin, start here. It is a five minute walk from my tour route.'
+    },
+    {
+      id: 'be', name: 'Berliner Ensemble', mode: 'surtitles',
+      lat: 52.5223, lon: 13.3866, addr: 'Bertolt-Brecht-Platz 1, by Friedrichstrasse station',
+      now: 'Brecht’s own house on the Spree. Several main-stage performances every month run with English surtitles, marked in the calendar.',
+      lang: 'Surtitles show above the stage. Sit in the balconies or from row 13 in the stalls to read them comfortably.',
+      move: 'Advance sales open on the 3rd of the previous month and students pay EUR 9. Check the surtitle marking for your date first.'
+    },
+    {
+      id: 'dt', name: 'Deutsches Theater', mode: 'surtitles',
+      lat: 52.5240, lon: 13.3822, addr: 'Schumannstrasse 13a, Mitte',
+      now: 'The classic drama house: Chekhov, Ibsen and new writing across three stages.',
+      lang: 'Selected performances carry English surtitles. Fewer dates than Gorki, so filter the schedule before you pick a night.',
+      move: 'Treat it as a second stop after Gorki or the Berliner Ensemble unless a specific production draws you.'
+    },
+    {
+      id: 'schaubuehne', name: 'Schaubuehne', mode: 'surtitles',
+      lat: 52.4995, lon: 13.2907, addr: 'Kurfuerstendamm 153, Charlottenburg',
+      now: 'Thomas Ostermeier’s internationally touring house in a landmark 1928 Mendelsohn building.',
+      lang: 'Several performances each month run with English surtitles on screens, and some let you read surtitles on your own phone in flight mode.',
+      move: 'It is the one big theatre far from the centre; plan the U-Bahn ride back before you book a late show.'
+    },
+    {
+      id: 'etb', name: 'English Theatre Berlin', mode: 'english',
+      lat: 52.4849, lon: 13.3931, addr: 'Fidicinstrasse 40, Kreuzberg',
+      now: 'Berlin’s international performing arts centre: original productions, visiting companies, comedy and concerts.',
+      lang: 'Everything on this stage happens in English. No surtitles needed.',
+      move: 'The program changes fast, so check what is on for your exact dates rather than planning around one show.'
+    },
+    {
+      id: 'ccb', name: 'Comedy Cafe Berlin', mode: 'english',
+      lat: 52.4735, lon: 13.4441, addr: 'Roseggerstrasse 17, Neukoelln',
+      now: 'The home room of Berlin’s English comedy scene: improv, standup and sketch most nights of the week.',
+      lang: 'Shows are mostly in English, including the Wednesday open mic.',
+      move: 'Cheap, informal and easy to add to a Neukoelln evening. Book nothing weeks ahead; just check the week’s lineup.'
+    }
+  ];
+
+  // Spree course through the centre, real coordinates, drawn for orientation.
+  var SPREE = [
+    [52.5070, 13.4780], [52.5120, 13.4350], [52.5162, 13.4190],
+    [52.5205, 13.4090], [52.5218, 13.4010], [52.5215, 13.3940],
+    [52.5205, 13.3870], [52.5220, 13.3800], [52.5205, 13.3730],
+    [52.5145, 13.3500], [52.5110, 13.3360]
+  ];
+
+  var BOUNDS = { latMin: 52.4665, latMax: 52.5330, lonMin: 13.2760, lonMax: 13.4640 };
+
+  var state = {
+    modes: { nowords: true, surtitles: true, english: true },
+    selected: 'palast'
+  };
+
+  var canvas = document.getElementById('esm-canvas');
+  var ctx = canvas.getContext('2d');
+  var detailEl = document.getElementById('esm-detail');
+  var listEl = document.getElementById('esm-list');
+  var cw = 0, chh = 0;
+
+  function kmFromHM(v) {
+    var R = 6371, dLat = (v.lat - HM.lat) * Math.PI / 180, dLon = (v.lon - HM.lon) * Math.PI / 180;
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(HM.lat * Math.PI / 180) * Math.cos(v.lat * Math.PI / 180) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  }
+  function distLabel(v) {
+    var km = kmFromHM(v);
+    if (km <= 2.2) return (km < 0.35 ? 'about ' + Math.round(km * 1000 / 50) * 50 + ' m' : km.toFixed(1) + ' km') + ' walk from Hackescher Markt';
+    return km.toFixed(1) + ' km from Hackescher Markt, take the S- or U-Bahn';
+  }
+
+  function proj(lat, lon) {
+    var x = (lon - BOUNDS.lonMin) / (BOUNDS.lonMax - BOUNDS.lonMin) * cw;
+    var y = (BOUNDS.latMax - lat) / (BOUNDS.latMax - BOUNDS.latMin) * chh;
+    return [x, y];
+  }
+
+  function draw() {
+    var dpr = window.devicePixelRatio || 1;
+    cw = canvas.clientWidth;
+    chh = Math.max(300, Math.min(430, Math.round(cw * 0.62)));
+    canvas.style.height = chh + 'px';
+    canvas.width = cw * dpr; canvas.height = chh * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    // ground
+    ctx.fillStyle = '#f2f4ec';
+    ctx.fillRect(0, 0, cw, chh);
+    // subtle grid
+    ctx.strokeStyle = 'rgba(27,94,32,0.06)'; ctx.lineWidth = 1;
+    for (var gx = 0; gx < cw; gx += 46) { ctx.beginPath(); ctx.moveTo(gx, 0); ctx.lineTo(gx, chh); ctx.stroke(); }
+    for (var gy = 0; gy < chh; gy += 46) { ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(cw, gy); ctx.stroke(); }
+
+    // Spree
+    ctx.strokeStyle = '#9fc4d8'; ctx.lineWidth = Math.max(5, cw * 0.012);
+    ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+    ctx.beginPath();
+    SPREE.forEach(function (p, i) {
+      var xy = proj(p[0], p[1]);
+      if (i === 0) ctx.moveTo(xy[0], xy[1]); else ctx.lineTo(xy[0], xy[1]);
+    });
+    ctx.stroke();
+
+    // Hackescher Markt star
+    var hm = proj(HM.lat, HM.lon);
+    drawStar(hm[0], hm[1], 7, '#123D18');
+    ctx.fillStyle = '#123D18';
+    ctx.font = '700 10px Montserrat, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('Hackescher Markt', hm[0] + 10, hm[1] + 4);
+
+    // venue dots (project all first so label decluttering sees every dot)
+    VENUES.forEach(function (v) { v._xy = proj(v.lat, v.lon); });
+    VENUES.forEach(function (v) {
+      var on = state.modes[v.mode];
+      var xy = v._xy;
+      var sel = v.id === state.selected;
+      var r = sel ? 11 : 8;
+      ctx.globalAlpha = on ? 1 : 0.18;
+      if (sel) {
+        ctx.beginPath(); ctx.arc(xy[0], xy[1], r + 5, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(27,94,32,0.15)'; ctx.fill();
+      }
+      ctx.beginPath(); ctx.arc(xy[0], xy[1], r, 0, Math.PI * 2);
+      ctx.fillStyle = MODES[v.mode].color; ctx.fill();
+      ctx.lineWidth = 2; ctx.strokeStyle = v.mode === 'english' ? '#123D18' : '#fff';
+      ctx.stroke();
+      // label only the selected venue and venues with no close neighbour,
+      // so the Mitte cluster stays readable
+      var crowded = VENUES.some(function (o) {
+        if (o === v || !o._xy || !v._xy) return false;
+        return Math.hypot(o._xy[0] - xy[0], o._xy[1] - xy[1]) < 70;
+      });
+      if (sel || (cw > 560 && !crowded)) {
+        ctx.fillStyle = '#123D18';
+        ctx.font = (sel ? '800 ' : '600 ') + '10px Montserrat, sans-serif';
+        var lx = xy[0], ly = xy[1] - r - 5;
+        ctx.textAlign = 'center';
+        if (ly < 12) { ly = xy[1] + r + 12; }
+        ctx.fillText(v.name, Math.min(Math.max(lx, 46), cw - 46), ly);
+      }
+      ctx.globalAlpha = 1;
+      v._xy = xy;
+    });
+  }
+
+  function drawStar(x, y, r, color) {
+    ctx.beginPath();
+    for (var i = 0; i < 10; i++) {
+      var ang = -Math.PI / 2 + i * Math.PI / 5;
+      var rr = i % 2 === 0 ? r : r * 0.45;
+      var px = x + Math.cos(ang) * rr, py = y + Math.sin(ang) * rr;
+      if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+    }
+    ctx.closePath(); ctx.fillStyle = color; ctx.fill();
+  }
+
+  function renderDetail() {
+    var v = VENUES.filter(function (x) { return x.id === state.selected; })[0];
+    if (!v) { detailEl.innerHTML = '<p class="esm-now">Tap a stage on the map.</p>'; return; }
+    var m = MODES[v.mode];
+    detailEl.style.borderLeftColor = m.color === '#FFE600' ? '#c9b500' : m.color;
+    detailEl.innerHTML =
+      '<div class="esm-kicker ' + m.css + '">' + m.label + '</div>' +
+      '<h2>' + v.name + '<span class="esm-dist">' + distLabel(v) + '</span></h2>' +
+      '<div class="esm-addr">' + v.addr + '</div>' +
+      '<p class="esm-now">' + v.now + '</p>' +
+      '<p class="esm-lang">' + v.lang + '</p>' +
+      '<p class="esm-move"><strong>My move:</strong> ' + v.move + '</p>';
+  }
+
+  function renderList() {
+    listEl.innerHTML = '';
+    VENUES.forEach(function (v) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'esm-venue' + (v.id === state.selected ? ' sel' : '') + (state.modes[v.mode] ? '' : ' hiddenmode');
+      b.innerHTML = '<span class="dot" style="background:' + MODES[v.mode].color +
+        (v.mode === 'english' ? ';border:1px solid #123D18' : '') + '"></span>' + v.name;
+      b.addEventListener('click', function () { select(v.id); });
+      listEl.appendChild(b);
+    });
+  }
+
+  function select(id) {
+    state.selected = id;
+    var v = VENUES.filter(function (x) { return x.id === id; })[0];
+    if (v && !state.modes[v.mode]) { state.modes[v.mode] = true; syncChips(); }
+    draw(); renderDetail(); renderList(); ping();
+  }
+
+  function syncChips() {
+    Array.prototype.forEach.call(document.querySelectorAll('.esm-mode'), function (btn) {
+      btn.setAttribute('aria-pressed', state.modes[btn.dataset.mode] ? 'true' : 'false');
+    });
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('.esm-mode'), function (btn) {
+    btn.addEventListener('click', function () {
+      var mode = btn.dataset.mode;
+      state.modes[mode] = !state.modes[mode];
+      var sel = VENUES.filter(function (x) { return x.id === state.selected; })[0];
+      if (sel && !state.modes[sel.mode]) {
+        var alt = VENUES.filter(function (x) { return state.modes[x.mode]; })[0];
+        state.selected = alt ? alt.id : null;
+      }
+      syncChips(); draw(); renderDetail(); renderList(); ping();
+    });
+  });
+
+  canvas.addEventListener('click', function (ev) {
+    var rect = canvas.getBoundingClientRect();
+    var x = ev.clientX - rect.left, y = ev.clientY - rect.top;
+    var best = null, bestD = 1e9;
+    VENUES.forEach(function (v) {
+      if (!state.modes[v.mode] || !v._xy) return;
+      var d = Math.hypot(v._xy[0] - x, v._xy[1] - y);
+      if (d < bestD) { bestD = d; best = v; }
+    });
+    if (best && bestD < 26) select(best.id);
+  });
+
+  function ping() {
+    if (window.parent && window.parent !== window) {
+      try {
+        window.parent.postMessage({ type: 'bw-resize', height: document.body.scrollHeight }, '*');
+      } catch (e) {}
+    }
+  }
+
+  window.addEventListener('resize', function () { draw(); });
+
+  draw(); renderDetail(); renderList(); syncChips();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
