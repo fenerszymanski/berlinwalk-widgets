@@ -81,6 +81,17 @@ test('privacy policy link resists host inline hiding and cleans up its observer'
   assert.match(runtime, /attributeFilter: \['style', 'hidden'\]/);
 });
 
+test('narrow mobile field cards stack and increase reading size without changing the 390px grid', () => {
+  assert.match(runtime, /\.bw-hs-field-grid\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\);gap:8px/);
+  const breakpointStart = runtime.lastIndexOf('@media (max-width:360px)');
+  assert.notEqual(breakpointStart, -1, 'missing narrow mobile field-card breakpoint');
+  const narrow = runtime.slice(breakpointStart, runtime.indexOf('"', breakpointStart));
+  assert.match(narrow, /\.bw-hs-field-grid\{grid-template-columns:1fr;gap:10px\}/);
+  assert.match(narrow, /\.bw-hs-field-card h4\{font-size:1\.22rem;line-height:1\.06\}/);
+  assert.match(narrow, /\.bw-hs-field-card p\{font-size:\.84rem!important;line-height:1\.42!important\}/);
+  assert.match(narrow, /\.bw-hs-field-move\{font-size:\.68rem;line-height:1\.42\}/);
+});
+
 test('submit adapter keeps DOI and secure delivery on the backend', () => {
   const submit = section('    _submitLead() {', '    _trackLink(kind)');
   assert.match(submit, /this\._leadTransport\('submit', payload\)/);
