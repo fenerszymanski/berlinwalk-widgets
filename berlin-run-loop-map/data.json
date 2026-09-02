@@ -1,0 +1,150 @@
+{
+  "checkedOn": "2026-09-02",
+  "note": "Route lines are drawn by hand for this map and distances are computed from the drawn line. Treat every figure as an approximate value for planning, not a measured course.",
+  "septemberGates": { "tempelhoferFeld": "06:00-20:30" },
+  "loops": [
+    {
+      "id": "tiergarten",
+      "name": "Tiergarten classic",
+      "type": "loop",
+      "start": "Brandenburg Gate",
+      "station": "S+U Brandenburger Tor",
+      "surface": "crushed gravel and firm park paths",
+      "character": "The big green loop every Berlin runner ends up on. Wide paths, old trees, and the Victory Column halfway round.",
+      "water": "Kiosks at the Neuer See cafe side in the daytime; carry your own bottle early.",
+      "afterDark": "warn",
+      "afterDarkNote": "Side paths are unlit once you leave the main axis. After dark, stay on Strasse des 17. Juni itself.",
+      "early": "great",
+      "bands": {
+        "short": "Cut across at the Grosser Stern for a shorter out-and-back on the main axis.",
+        "middle": "One full round as drawn is the natural distance here.",
+        "long": "Add the Spreeweg arm past Bellevue Palace or run a second inner round."
+      },
+      "points": [
+        [52.5163, 13.3777], [52.5158, 13.3722], [52.5152, 13.3655], [52.5147, 13.3565],
+        [52.5145, 13.3501], [52.5128, 13.3468], [52.5108, 13.3428], [52.5099, 13.3470],
+        [52.5104, 13.3535], [52.5113, 13.3572], [52.5121, 13.3610], [52.5127, 13.3655],
+        [52.5133, 13.3705], [52.5147, 13.3748], [52.5163, 13.3777]
+      ]
+    },
+    {
+      "id": "historic-core",
+      "name": "Museum Island sunrise round",
+      "type": "loop",
+      "start": "Hackescher Markt",
+      "station": "S Hackescher Markt",
+      "surface": "pavement and cobbles, flat",
+      "character": "The old East Berlin centre with the Dom, Museum Island and the Nikolaiviertel to yourself. Before 08:00 this is the emptiest famous square kilometre in Berlin.",
+      "water": "Bakeries and kiosks open from about 07:00 around Hackescher Markt.",
+      "afterDark": "ok",
+      "afterDarkNote": "City streets stay lit all night; watch the cobbles when they are wet.",
+      "early": "great",
+      "bands": {
+        "short": "One round as drawn is already the point. Walk the last stretch and look up.",
+        "middle": "Run it twice, once on each bank of the Spree.",
+        "long": "Extend along the Spree promenade toward the East Side Gallery and back."
+      },
+      "points": [
+        [52.5225, 13.4021], [52.5222, 13.3988], [52.5211, 13.3999], [52.5203, 13.3978],
+        [52.5192, 13.3962], [52.5176, 13.3956], [52.5166, 13.3945], [52.5158, 13.3970],
+        [52.5155, 13.4005], [52.5162, 13.4033], [52.5169, 13.4076], [52.5185, 13.4085],
+        [52.5202, 13.4075], [52.5213, 13.4055], [52.5225, 13.4021]
+      ]
+    },
+    {
+      "id": "tempelhofer-feld",
+      "name": "Tempelhofer Feld ring",
+      "type": "loop",
+      "start": "Columbiadamm gate",
+      "station": "U Suedstern or U Boddinstrasse, then a short walk",
+      "surface": "wide asphalt taxiways, completely flat",
+      "character": "An entire former airfield with no cars, no corners and a horizon. The closest thing Berlin has to a running track the size of a district.",
+      "water": "No taps on the field itself; bring a bottle, especially in wind and sun.",
+      "afterDark": "no",
+      "afterDarkNote": "The gates close at 20:30 in September and open again at 06:00.",
+      "early": "great",
+      "bands": {
+        "short": "Run one runway straight and come back along the other.",
+        "middle": "One full ring as drawn.",
+        "long": "Two rings, or one ring plus both runway straights."
+      },
+      "points": [
+        [52.4787, 13.3906], [52.4820, 13.3960], [52.4834, 13.4046], [52.4828, 13.4140],
+        [52.4812, 13.4198], [52.4788, 13.4218], [52.4762, 13.4205], [52.4742, 13.4130],
+        [52.4737, 13.4033], [52.4750, 13.3934], [52.4787, 13.3906]
+      ]
+    },
+    {
+      "id": "landwehrkanal",
+      "name": "Landwehrkanal towpath",
+      "type": "out-and-back",
+      "start": "Urbanhafen at Baerwaldbruecke",
+      "station": "U Prinzenstrasse or U Kottbusser Tor",
+      "surface": "packed gravel and pavement under plane trees",
+      "character": "Kreuzberg's shaded water line past Admiralbruecke and the Maybachufer. Cafes, canoes and swans the whole way.",
+      "water": "Cafes and Spaetis line the banks; the Tuesday and Friday market at Maybachufer makes that stretch a walk, not a run.",
+      "afterDark": "warn",
+      "afterDarkNote": "Stretches between bridges are dim after dark; the pavement side of the Ufer streets is the better line at night.",
+      "early": "great",
+      "bands": {
+        "short": "Turn around at Kottbusser Bruecke.",
+        "middle": "Turn around at the Ohlauer Strasse bridge.",
+        "long": "Run the full drawn line to Lohmuehlenbruecke and back."
+      },
+      "points": [
+        [52.4966, 13.4022], [52.4959, 13.4090], [52.4949, 13.4152], [52.4938, 13.4222],
+        [52.4930, 13.4290], [52.4920, 13.4360], [52.4910, 13.4420], [52.4903, 13.4480]
+      ]
+    },
+    {
+      "id": "treptower",
+      "name": "Treptower Park and the Spree",
+      "type": "loop",
+      "start": "S Treptower Park",
+      "station": "S Treptower Park (Ringbahn)",
+      "surface": "broad paved promenade and park paths",
+      "character": "River air, the bridge to the Insel der Jugend, and the vast Soviet War Memorial on the way back. The most cinematic easy run in the city.",
+      "water": "Kiosks by the harbour and at the island bridge in season.",
+      "afterDark": "warn",
+      "afterDarkNote": "The riverside is quiet and dark late in the evening; go at golden hour instead.",
+      "early": "good",
+      "bands": {
+        "short": "Turn at the Insel der Jugend bridge and come straight back along Puschkinallee.",
+        "middle": "One full round as drawn, through the memorial axis.",
+        "long": "Continue along the Spree into Plaenterwald forest before looping back."
+      },
+      "points": [
+        [52.4946, 13.4610], [52.4922, 13.4660], [52.4899, 13.4703], [52.4869, 13.4749],
+        [52.4861, 13.4694], [52.4877, 13.4645], [52.4900, 13.4620], [52.4917, 13.4611],
+        [52.4946, 13.4610]
+      ]
+    },
+    {
+      "id": "volkspark-friedrichshain",
+      "name": "Volkspark Friedrichshain round",
+      "type": "loop",
+      "start": "Friedensstatue entrance, Friedenstrasse",
+      "station": "Tram M5, M6 or M8 at Platz der Vereinten Nationen",
+      "surface": "smooth park paths, one real hill",
+      "character": "East Berlin's oldest park with the 78-metre rubble hill in the middle. The short loop with an honest climb when you want effort, not distance.",
+      "water": "Cafe Schoenbrunn sits right on the loop in the daytime.",
+      "afterDark": "ok",
+      "afterDarkNote": "The main round is busier and better lit than most Berlin parks in the evening, but the hill paths go dark first.",
+      "early": "good",
+      "bands": {
+        "short": "One round as drawn.",
+        "middle": "Two rounds, or one round plus the climb over the Grosser Bunkerberg.",
+        "long": "Lap it and add the hill each time; three rounds with the climb is a serious session."
+      },
+      "points": [
+        [52.5262, 13.4304], [52.5286, 13.4330], [52.5296, 13.4394], [52.5287, 13.4451],
+        [52.5263, 13.4470], [52.5243, 13.4436], [52.5238, 13.4375], [52.5247, 13.4325],
+        [52.5262, 13.4304]
+      ]
+    }
+  ],
+  "water": [
+    { "name": "Spree", "points": [[52.5310, 13.3660], [52.5230, 13.3860], [52.5215, 13.3990], [52.5160, 13.4040], [52.5145, 13.4180], [52.5075, 13.4280], [52.5020, 13.4450], [52.4960, 13.4530], [52.4900, 13.4700], [52.4860, 13.4760]] },
+    { "name": "Landwehrkanal", "points": [[52.5060, 13.3480], [52.5010, 13.3620], [52.4930, 13.3760], [52.4900, 13.3900], [52.4966, 13.4022], [52.4949, 13.4152], [52.4930, 13.4290], [52.4903, 13.4480], [52.4960, 13.4530]] }
+  ]
+}

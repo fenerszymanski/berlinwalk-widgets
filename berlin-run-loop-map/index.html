@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Berlin Run Loop Map — where to run in Berlin | BerlinWalk</title>
+<meta name="description" content="Six real Berlin running loops on one map: Tiergarten, Tempelhofer Feld, the Landwehrkanal, Museum Island, Treptower Park and Volkspark Friedrichshain, matched to your distance and time of day.">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --bw-green: #1B5E20;
+    --bw-dark: #123D18;
+    --bw-lime: #7CB342;
+    --bw-light: #C5E1A5;
+    --bw-yellow: #FFE600;
+    --bw-cream: #FAFAF5;
+    --bw-ink: #212121;
+    --bw-red: #E63946;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, 'Segoe UI', sans-serif; background: var(--bw-cream); color: var(--bw-ink); }
+  .rlm-wrap { max-width: 960px; margin: 0 auto; padding: 18px 14px 26px; }
+  .rlm-kicker { font-size: 11px; letter-spacing: 0.14em; font-weight: 700; color: var(--bw-lime); text-transform: uppercase; }
+  h1 { font-size: 24px; line-height: 1.2; margin: 6px 0 8px; color: var(--bw-dark); }
+  .rlm-lead { font-size: 14px; line-height: 1.55; margin: 0 0 14px; max-width: 660px; }
+  .rlm-controls { display: flex; flex-wrap: wrap; gap: 14px 26px; margin-bottom: 12px; }
+  .rlm-group-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--bw-green); margin: 0 0 6px; }
+  .rlm-btnrow { display: flex; flex-wrap: wrap; gap: 6px; }
+  .rlm-btn { border: 1.5px solid var(--bw-green); background: #fff; color: var(--bw-green); font: inherit; font-size: 13px; font-weight: 600; padding: 7px 12px; border-radius: 999px; cursor: pointer; }
+  .rlm-btn[aria-pressed="true"] { background: var(--bw-green); color: #fff; }
+  .rlm-map-frame { background: #F2F6EC; border: 1.5px solid var(--bw-light); border-radius: 14px; padding: 6px; }
+  svg { display: block; width: 100%; height: auto; }
+  .rlm-legend { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+  .rlm-loopbtn { border: 1.5px solid var(--bw-light); background: #fff; color: var(--bw-ink); font: inherit; font-size: 12.5px; font-weight: 600; padding: 6px 10px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 7px; }
+  .rlm-loopbtn .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--bw-green); flex: none; }
+  .rlm-loopbtn.fit-adapt .dot { background: var(--bw-lime); }
+  .rlm-loopbtn.fit-no .dot { background: #B9BDB4; }
+  .rlm-loopbtn[aria-pressed="true"] { border-color: var(--bw-green); background: var(--bw-dark); color: #fff; }
+  .rlm-card { background: #fff; border: 1.5px solid var(--bw-light); border-radius: 14px; padding: 16px; }
+  .rlm-card h2 { margin: 0 0 2px; font-size: 18px; color: var(--bw-dark); }
+  .rlm-km { display: inline-block; background: var(--bw-yellow); color: var(--bw-dark); font-weight: 700; font-size: 12.5px; border-radius: 999px; padding: 3px 10px; margin: 6px 6px 10px 0; }
+  .rlm-chip { display: inline-block; background: var(--bw-light); color: var(--bw-dark); font-weight: 600; font-size: 12px; border-radius: 999px; padding: 3px 10px; margin: 0 6px 10px 0; }
+  .rlm-card p { font-size: 13.5px; line-height: 1.55; margin: 6px 0; }
+  .rlm-fact { display: grid; grid-template-columns: 92px 1fr; gap: 2px 10px; font-size: 13px; line-height: 1.5; margin-top: 10px; }
+  .rlm-fact dt { font-weight: 700; color: var(--bw-green); }
+  .rlm-fact dd { margin: 0; }
+  .rlm-note { border-left: 3px solid var(--bw-lime); padding: 6px 10px; background: #F4F8EE; border-radius: 0 8px 8px 0; margin-top: 10px; font-size: 13px; line-height: 1.5; }
+  .rlm-note.closed { border-left-color: var(--bw-red); background: #FBEFEF; }
+  .rlm-foot { font-size: 11.5px; color: #5c6157; line-height: 1.5; margin-top: 12px; }
+  @media (max-width: 480px) {
+    h1 { font-size: 20px; }
+    .rlm-controls { gap: 10px 16px; }
+    .rlm-fact { grid-template-columns: 80px 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="rlm-wrap">
+  <div class="rlm-kicker">Berlin Tools · Free</div>
+  <h1>Berlin Run Loop Map</h1>
+  <p class="rlm-lead">Six loops I actually send running guests to, drawn on one map. Pick how far you want to go and when, and the map shows which loop carries that run naturally, which needs a lap or a turnaround, and which to skip today.</p>
+
+  <div class="rlm-controls">
+    <div>
+      <p class="rlm-group-label">How far today?</p>
+      <div class="rlm-btnrow" id="bandRow">
+        <button type="button" class="rlm-btn" data-band="short" aria-pressed="false">About 3 to 4 km</button>
+        <button type="button" class="rlm-btn" data-band="middle" aria-pressed="true">5 to 6 km</button>
+        <button type="button" class="rlm-btn" data-band="long" aria-pressed="false">8 km or more</button>
+      </div>
+    </div>
+    <div>
+      <p class="rlm-group-label">When?</p>
+      <div class="rlm-btnrow" id="timeRow">
+        <button type="button" class="rlm-btn" data-time="early" aria-pressed="true">Before 09:00</button>
+        <button type="button" class="rlm-btn" data-time="day" aria-pressed="false">Daytime</button>
+        <button type="button" class="rlm-btn" data-time="dark" aria-pressed="false">After dark</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="rlm-map-frame">
+    <svg id="map" viewBox="0 0 960 660" role="img" aria-label="Map of six Berlin running loops between Tiergarten in the west and Treptower Park in the southeast"></svg>
+  </div>
+
+  <div class="rlm-legend" id="legend"></div>
+  <div class="rlm-card" id="card"></div>
+
+  <p class="rlm-foot">Route lines are drawn for this map and every distance is computed from the drawn line, so treat the figures as planning values, not a measured course. Tempelhofer Feld gate times follow the September schedule (06:00 to 20:30). Checked on 2 September 2026.</p>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var svg = document.getElementById('map');
+  var legend = document.getElementById('legend');
+  var card = document.getElementById('card');
+  var NS = 'http://www.w3.org/2000/svg';
+  var state = { band: 'middle', time: 'early', sel: 'tiergarten' };
+  var DATA = null;
+
+  var BAND_FIT = {
+    tiergarten: { short: 'adapt', middle: 'natural', long: 'adapt' },
+    'historic-core': { short: 'natural', middle: 'adapt', long: 'adapt' },
+    'tempelhofer-feld': { short: 'adapt', middle: 'natural', long: 'natural' },
+    landwehrkanal: { short: 'adapt', middle: 'natural', long: 'adapt' },
+    treptower: { short: 'natural', middle: 'adapt', long: 'adapt' },
+    'volkspark-friedrichshain': { short: 'natural', middle: 'adapt', long: 'adapt' }
+  };
+  var TIME_STATE = {
+    tiergarten: { early: 'ok', day: 'ok', dark: 'warn' },
+    'historic-core': { early: 'ok', day: 'warn', dark: 'ok' },
+    'tempelhofer-feld': { early: 'ok', day: 'ok', dark: 'no' },
+    landwehrkanal: { early: 'ok', day: 'ok', dark: 'warn' },
+    treptower: { early: 'ok', day: 'ok', dark: 'warn' },
+    'volkspark-friedrichshain': { early: 'ok', day: 'ok', dark: 'ok' }
+  };
+  var DAY_NOTES = {
+    'historic-core': 'From late morning this square kilometre fills with visitors; before 08:00 or late evening is the honest window for running it.'
+  };
+
+  function haversineKm(a, b) {
+    var rad = Math.PI / 180, R = 6371;
+    var dLat = (b[0] - a[0]) * rad, dLon = (b[1] - a[1]) * rad;
+    var h = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(a[0] * rad) * Math.cos(b[0] * rad) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    return 2 * R * Math.asin(Math.sqrt(h));
+  }
+  function lineKm(pts) {
+    var km = 0, i;
+    for (i = 1; i < pts.length; i++) km += haversineKm(pts[i - 1], pts[i]);
+    return km;
+  }
+
+  var B = { latMin: 52.4695, latMax: 52.5335, lonMin: 13.331, lonMax: 13.482 };
+  var W = 960, H = 660, PAD = 26;
+  var kLon = Math.cos(52.5 * Math.PI / 180);
+  function proj(pt) {
+    var x = (pt[1] - B.lonMin) / (B.lonMax - B.lonMin);
+    var spanY = (B.latMax - B.latMin) / ((B.lonMax - B.lonMin) * kLon) * (W - 2 * PAD);
+    var y = (B.latMax - pt[0]) / (B.latMax - B.latMin);
+    return [PAD + x * (W - 2 * PAD), (H - spanY) / 2 + y * spanY];
+  }
+  function pathFor(pts) {
+    var d = '', i, p;
+    for (i = 0; i < pts.length; i++) { p = proj(pts[i]); d += (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1); }
+    return d;
+  }
+  function el(name, attrs, parent) {
+    var node = document.createElementNS(NS, name), k;
+    for (k in attrs) node.setAttribute(k, attrs[k]);
+    (parent || svg).appendChild(node);
+    return node;
+  }
+
+  function loopKmLabel(loop) {
+    var km = lineKm(loop.points);
+    if (loop.type === 'out-and-back') return '~' + (km * 2).toFixed(1) + ' km there and back';
+    return '~' + km.toFixed(1) + ' km round';
+  }
+  function fitOf(loop) {
+    var t = TIME_STATE[loop.id][state.time];
+    if (t === 'no') return 'no';
+    return BAND_FIT[loop.id][state.band];
+  }
+
+  function drawMap() {
+    svg.textContent = '';
+    var frameW = svg.getBoundingClientRect().width || 960;
+    var compact = frameW < 520;
+    var labelFS = compact ? 22 : 13.5;
+    el('rect', { x: 0, y: 0, width: W, height: H, fill: '#F2F6EC' });
+    var i, wline;
+    for (i = 0; i < DATA.water.length; i++) {
+      wline = DATA.water[i];
+      el('path', { d: pathFor(wline.points), fill: 'none', stroke: '#AFCBDD', 'stroke-width': 10, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', opacity: 0.85 });
+    }
+    var spreeLbl = proj([52.5075, 13.428]);
+    el('text', { x: spreeLbl[0] + 6, y: spreeLbl[1] - 8, 'font-size': 13, fill: '#7A99AC', 'font-style': 'italic' }).textContent = 'Spree';
+    var lkLbl = proj([52.4915, 13.379]);
+    el('text', { x: lkLbl[0], y: lkLbl[1] + 18, 'font-size': 12, fill: '#7A99AC', 'font-style': 'italic' }).textContent = 'Landwehrkanal';
+
+    DATA.loops.forEach(function (loop) {
+      var fit = fitOf(loop);
+      var selected = state.sel === loop.id;
+      var stroke = fit === 'natural' ? '#1B5E20' : (fit === 'adapt' ? '#7CB342' : '#B9BDB4');
+      var width = selected ? 7 : (fit === 'natural' ? 5 : 4);
+      var dash = fit === 'no' ? '7 6' : 'none';
+      if (selected) {
+        el('path', { d: pathFor(loop.points), fill: 'none', stroke: '#FFE600', 'stroke-width': width + 6, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', opacity: 0.9 });
+      }
+      var p = el('path', { d: pathFor(loop.points), fill: 'none', stroke: stroke, 'stroke-width': width, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-dasharray': dash, cursor: 'pointer' });
+      p.addEventListener('click', function () { state.sel = loop.id; render(); });
+      var s = proj(loop.points[0]);
+      el('circle', { cx: s[0], cy: s[1], r: selected ? 8 : 6, fill: '#123D18', stroke: '#FFFFFF', 'stroke-width': 2 });
+      var lp = proj(loop.points[0]);
+      var anchors = {
+        tiergarten: { text: 'Tiergarten classic', dx: -4, dy: -14, anchor: 'start' },
+        'historic-core': { text: 'Museum Island round', dx: -12, dy: -12, anchor: 'end' },
+        'tempelhofer-feld': { text: 'Tempelhofer Feld ring', dx: 8, dy: -14, anchor: 'start' },
+        landwehrkanal: { text: 'Landwehrkanal towpath', dx: -10, dy: -14, anchor: 'start' },
+        treptower: { text: 'Treptower Park', dx: -12, dy: -12, anchor: 'end' },
+        'volkspark-friedrichshain': { text: 'Volkspark Friedrichshain', dx: 8, dy: -14, anchor: 'start' }
+      };
+      var cfg = anchors[loop.id] || { text: loop.name, dx: 8, dy: -10, anchor: 'start' };
+      var t = el('text', { x: lp[0] + cfg.dx, y: lp[1] + cfg.dy, 'text-anchor': cfg.anchor, 'font-size': labelFS, 'font-weight': 700, fill: fit === 'no' ? '#8a8f85' : '#123D18', cursor: 'pointer', 'paint-order': 'stroke', stroke: '#F2F6EC', 'stroke-width': compact ? 5 : 3 });
+      t.textContent = compact ? cfg.text : cfg.text + ' · ' + loopKmLabel(loop).replace(' there and back', '').replace(' round', '');
+      t.addEventListener('click', function () { state.sel = loop.id; render(); });
+    });
+
+    if (!compact) {
+      var lg = el('g', {});
+      el('rect', { x: PAD - 8, y: H - 66, width: 330, height: 52, rx: 9, fill: '#FFFFFF', opacity: 0.92 }, lg);
+      el('circle', { cx: PAD + 8, cy: H - 50, r: 5, fill: '#1B5E20' }, lg);
+      el('text', { x: PAD + 20, y: H - 46, 'font-size': 12, fill: '#212121' }, lg).textContent = 'carries this run naturally';
+      el('circle', { cx: PAD + 8, cy: H - 28, r: 5, fill: '#7CB342' }, lg);
+      el('text', { x: PAD + 20, y: H - 24, 'font-size': 12, fill: '#212121' }, lg).textContent = 'works with a lap or turnaround · grey dash: skip at this time';
+    }
+  }
+
+  function drawLegend() {
+    legend.textContent = '';
+    DATA.loops.forEach(function (loop) {
+      var fit = fitOf(loop);
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'rlm-loopbtn' + (fit === 'adapt' ? ' fit-adapt' : '') + (fit === 'no' ? ' fit-no' : '');
+      b.setAttribute('aria-pressed', state.sel === loop.id ? 'true' : 'false');
+      var dot = document.createElement('span'); dot.className = 'dot'; b.appendChild(dot);
+      b.appendChild(document.createTextNode(loop.name));
+      b.addEventListener('click', function () { state.sel = loop.id; render(); });
+      legend.appendChild(b);
+    });
+  }
+
+  function drawCard() {
+    var loop = null, i;
+    for (i = 0; i < DATA.loops.length; i++) if (DATA.loops[i].id === state.sel) loop = DATA.loops[i];
+    if (!loop) return;
+    var fit = fitOf(loop);
+    var bandKey = state.band;
+    var bandText = loop.bands[bandKey === 'short' ? 'short' : bandKey === 'middle' ? 'middle' : 'long'];
+    var timeState = TIME_STATE[loop.id][state.time];
+    var html = '';
+    html += '<h2>' + loop.name + '</h2>';
+    html += '<span class="rlm-km">' + loopKmLabel(loop) + '</span>';
+    html += '<span class="rlm-chip">Start: ' + loop.start + '</span>';
+    html += '<span class="rlm-chip">' + loop.station + '</span>';
+    html += '<p>' + loop.character + '</p>';
+    html += '<dl class="rlm-fact">';
+    html += '<dt>Surface</dt><dd>' + loop.surface + '</dd>';
+    html += '<dt>Water</dt><dd>' + loop.water + '</dd>';
+    html += '<dt>Your run</dt><dd>' + bandText + '</dd>';
+    html += '</dl>';
+    if (timeState === 'no') {
+      html += '<div class="rlm-note closed"><strong>Skip it after dark:</strong> ' + loop.afterDarkNote + '</div>';
+    } else if (state.time === 'dark' && timeState === 'warn') {
+      html += '<div class="rlm-note"><strong>After dark:</strong> ' + loop.afterDarkNote + '</div>';
+    } else if (state.time === 'dark' && timeState === 'ok') {
+      html += '<div class="rlm-note"><strong>After dark:</strong> ' + loop.afterDarkNote + '</div>';
+    } else if (state.time === 'day' && DAY_NOTES[loop.id]) {
+      html += '<div class="rlm-note"><strong>Daytime:</strong> ' + DAY_NOTES[loop.id] + '</div>';
+    } else if (fit === 'adapt') {
+      html += '<div class="rlm-note"><strong>Make it fit:</strong> ' + bandText + '</div>';
+    }
+    card.innerHTML = html;
+  }
+
+  function wireRow(rowId, key) {
+    var row = document.getElementById(rowId);
+    row.addEventListener('click', function (evt) {
+      var btn = evt.target.closest('button[data-' + key + ']');
+      if (!btn) return;
+      state[key === 'band' ? 'band' : 'time'] = btn.getAttribute('data-' + key);
+      var btns = row.querySelectorAll('button'), i;
+      for (i = 0; i < btns.length; i++) btns[i].setAttribute('aria-pressed', btns[i] === btn ? 'true' : 'false');
+      render();
+    });
+  }
+
+  function render() {
+    drawMap();
+    drawLegend();
+    drawCard();
+    if (window.bwPostResize) window.bwPostResize();
+  }
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (d) {
+    DATA = d;
+    wireRow('bandRow', 'band');
+    wireRow('timeRow', 'time');
+    render();
+    var rt = null;
+    window.addEventListener('resize', function () {
+      if (rt) clearTimeout(rt);
+      rt = setTimeout(render, 180);
+    });
+  });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
