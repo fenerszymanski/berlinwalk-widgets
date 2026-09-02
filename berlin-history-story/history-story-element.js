@@ -439,6 +439,7 @@
       this._leadEvents = {};
       this._leadGateTimer = null;
       this._leadGateObserver = null;
+      this._leadPrivacyObserver = null;
       this._leadStartedAt = null;
       this._leadSubmitting = false;
     }
@@ -461,6 +462,7 @@
       if (this._onTrackedLinkClick && this._root) this._root.removeEventListener('click', this._onTrackedLinkClick);
       if (this._observer) this._observer.disconnect();
       if (this._leadGateObserver) this._leadGateObserver.disconnect();
+      if (this._leadPrivacyObserver) this._leadPrivacyObserver.disconnect();
       if (this._leadGateTimer) window.clearTimeout(this._leadGateTimer);
       if (this._leadForm && this._onLeadSubmit) this._leadForm.removeEventListener('submit', this._onLeadSubmit);
       if (this._leadForm && this._onLeadFocus) this._leadForm.removeEventListener('focusin', this._onLeadFocus);
@@ -652,13 +654,38 @@
       }, 2000);
     }
 
+    _restoreLeadPrivacyVisibility(link) {
+      if (!link) return;
+      if (link.hasAttribute('hidden')) link.removeAttribute('hidden');
+      if (!link.style) return;
+      var hiddenDeclarations = {
+        display: 'none',
+        visibility: 'hidden',
+        'pointer-events': 'none'
+      };
+      Object.keys(hiddenDeclarations).forEach(function (property) {
+        if (link.style.getPropertyValue(property).trim().toLowerCase() === hiddenDeclarations[property]) {
+          link.style.removeProperty(property);
+        }
+      });
+    }
+
     _wireLeadGate(root) {
       var self = this;
       this._leadGate = root.querySelector('[data-bw-history-lead-gate]');
       if (!this._leadGate) return;
       this._leadForm = this._leadGate.querySelector('[data-bw-history-lead-form]');
       var privacyLink = this._leadGate.querySelector('[data-bw-history-lead-privacy]');
-      if (privacyLink) privacyLink.href = this._leadConfig().privacyUrl;
+      if (privacyLink) {
+        privacyLink.href = this._leadConfig().privacyUrl;
+        this._restoreLeadPrivacyVisibility(privacyLink);
+        if (typeof MutationObserver !== 'undefined') {
+          this._leadPrivacyObserver = new MutationObserver(function () {
+            self._restoreLeadPrivacyVisibility(privacyLink);
+          });
+          this._leadPrivacyObserver.observe(privacyLink, { attributes: true, attributeFilter: ['style', 'hidden'] });
+        }
+      }
       if (!this._leadForm) return;
       this._onLeadFocus = function (event) {
         if (!event.target || !event.target.matches('input')) return;

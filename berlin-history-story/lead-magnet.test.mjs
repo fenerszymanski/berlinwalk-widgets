@@ -67,6 +67,20 @@ test('gate has exactly one email field and one unchecked required consent checkb
   assert.match(runtime, /replace\('Privacy Policy', '<a data-bw-history-lead-privacy/);
 });
 
+test('privacy policy link resists host inline hiding and cleans up its observer', () => {
+  const wiring = section('    _restoreLeadPrivacyVisibility(link)', '    _setLeadStatus(text, state)');
+  assert.match(runtime, /_leadPrivacyObserver = null/);
+  assert.match(runtime, /if \(this\._leadPrivacyObserver\) this\._leadPrivacyObserver\.disconnect\(\)/);
+  assert.match(wiring, /link\.hasAttribute\('hidden'\)/);
+  assert.match(wiring, /link\.removeAttribute\('hidden'\)/);
+  assert.match(wiring, /display: 'none'/);
+  assert.match(wiring, /visibility: 'hidden'/);
+  assert.match(wiring, /'pointer-events': 'none'/);
+  assert.match(wiring, /link\.style\.removeProperty\(property\)/);
+  assert.match(runtime, /new MutationObserver\(function \(\) \{[\s\S]*_restoreLeadPrivacyVisibility\(privacyLink\)/);
+  assert.match(runtime, /attributeFilter: \['style', 'hidden'\]/);
+});
+
 test('submit adapter keeps DOI and secure delivery on the backend', () => {
   const submit = section('    _submitLead() {', '    _trackLink(kind)');
   assert.match(submit, /this\._leadTransport\('submit', payload\)/);
