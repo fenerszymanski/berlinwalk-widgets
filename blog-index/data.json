@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-02T02:13:21.532Z",
+  "updatedAt": "2026-09-02T07:57:29.497Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 345,
-  "toolsTotal": 265,
+  "totalPosts": 346,
+  "toolsTotal": 266,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1618,6 +1618,23 @@
   ],
   "latest": [
     {
+      "title": "Shows in Berlin in English: The Three Doors Past the Language Barrier",
+      "slug": "berlin-shows-in-english",
+      "path": "/post/berlin-shows-in-english",
+      "url": "https://www.berlinwalk.com/post/berlin-shows-in-english",
+      "excerpt": "Berlin's stages are not closed to non-German speakers: three big shows need no language at all, the great German theatres project free English surtitles, and a whole scene plays in English. The honest map, venue by venue, with prices and the one warning most guides miss.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "free-budget",
+      "topicLabel": "Free & Budget",
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-02T07:56:05.297Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_d54129b2b18c43f1bb4cce11007606cc~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-shows-in-english-friedrichstadt-palast-night.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_d54129b2b18c43f1bb4cce11007606cc~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-shows-in-english-friedrichstadt-palast-night.jpg",
+      "alt": "The Friedrichstadt-Palast theatre on Friedrichstrasse illuminated at night",
+      "relatedToolSlug": ""
+    },
+    {
       "title": "Berlin Philharmonic Tickets: How to Get In, Even When It Says Sold Out",
       "slug": "berlin-philharmonic-tickets",
       "path": "/post/berlin-philharmonic-tickets",
@@ -1803,26 +1820,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_834b66c22d19425088c341d172915041~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-ice-berlin-hauptbahnhof.jpg",
       "alt": "An ICE train standing at a deep-level platform inside Berlin Hauptbahnhof",
       "relatedToolSlug": "berlin-delay-payback-board"
-    },
-    {
-      "title": "Where to Watch Football in Berlin: The Best Sports Bars",
-      "slug": "where-to-watch-football-in-berlin",
-      "path": "/post/where-to-watch-football-in-berlin",
-      "url": "https://www.berlinwalk.com/post/where-to-watch-football-in-berlin",
-      "excerpt": "Choose a Berlin football bar by the exact fixture, not only by the league. Compare verified programmes, screens, reservations, smoking rules and the details that decide your night.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "9 min read",
-      "publishedDate": "2026-08-27T20:45:54.290Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_21d7860733624b01a85ef09c43c989d3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-football-pub-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_21d7860733624b01a85ef09c43c989d3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-football-pub-cover.jpg",
-      "alt": "A crowd watching football together in a Berlin sports bar setting",
-      "relatedToolSlug": "berlin-football-screen-board"
     }
   ],
   "allPosts": [
+    {
+      "title": "Shows in Berlin in English: The Three Doors Past the Language Barrier",
+      "slug": "berlin-shows-in-english",
+      "path": "/post/berlin-shows-in-english",
+      "url": "https://www.berlinwalk.com/post/berlin-shows-in-english",
+      "excerpt": "Berlin's stages are not closed to non-German speakers: three big shows need no language at all, the great German theatres project free English surtitles, and a whole scene plays in English. The honest map, venue by venue, with prices and the one warning most guides miss.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "free-budget",
+      "topicLabel": "Free & Budget",
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-02T07:56:05.297Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_d54129b2b18c43f1bb4cce11007606cc~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-shows-in-english-friedrichstadt-palast-night.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_d54129b2b18c43f1bb4cce11007606cc~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-shows-in-english-friedrichstadt-palast-night.jpg",
+      "alt": "The Friedrichstadt-Palast theatre on Friedrichstrasse illuminated at night",
+      "relatedToolSlug": ""
+    },
     {
       "title": "Berlin Philharmonic Tickets: How to Get In, Even When It Says Sold Out",
       "slug": "berlin-philharmonic-tickets",
