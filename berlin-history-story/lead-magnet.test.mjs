@@ -113,6 +113,8 @@ test('history story keeps one cover brand and uses an atomic route-scoped Wix bo
   assert.doesNotMatch(embed, /Array\.from\(main\.children\).*setProperty\("display"/s);
   assert.match(embed, /Promise\.all\(\[domReady,load\(P\.relatedScript,"related"\),load\(P\.script,"runtime"\)\]\)/);
   assert.match(embed, /function reveal\(host,ticket\)/);
+  assert.match(embed, /if\(!host\.isConnected\)\{if\(timeoutId\)\{clearTimeout\(timeoutId\);timeoutId=0\}status="idle";scheduleRun\(\);return\}/);
+  assert.doesNotMatch(embed, /\.then\(\(\)=>\{[^}]*clearTimeout\(timeoutId\)[^}]*const host=mount\(\)/);
   assert.match(embed, /document\.fonts&&document\.fonts\.ready/);
   assert.match(embed, /image\.decode/);
   assert.match(embed, /function teardown\(\)/);
