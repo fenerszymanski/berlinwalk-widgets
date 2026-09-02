@@ -2,7 +2,7 @@
 
 Run date: 2026-09-01
 
-Build/cache key: `berlin-history-story-v2-20260901h`
+Build/cache key: `berlin-history-story-v2-20260901i`
 
 Status: `DRAFT UPDATE — PUBLISH APPROVAL REQUIRED`
 Worktree: `/Users/yusufucuz/Documents/New project/berlinwalk-widgets/_worktrees/berlin-history-story-v1-20260901`
@@ -63,6 +63,7 @@ Implementation states inspected:
 ## Desktop sticky banner update
 
 - The History Story custom element adds `bw-history-story-page-active` to `body` while connected and removes it when disconnected, preventing the page-specific state from leaking during Wix SPA navigation.
+- While that route state is active, the exact Wix site-header component `header#comp-mtidm621` is hidden at every viewport, with a structural `.wixui-header` fallback if Wix changes the generated component ID. The story cover retains its own linked BerlinWalk logo, so the page keeps a clear path home without the native navigation interrupting the opening frame.
 - At `769px` and wider, that state hides only `#bw-desktop-cta`. The existing mobile behavior remains unchanged.
 
 ## Mobile cover spacing and scroll cue update

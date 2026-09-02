@@ -11,7 +11,7 @@
   'use strict';
 
   var TAG = 'bw-berlin-history-story';
-  var BUILD = 'berlin-history-story-v2-20260901h';
+  var BUILD = 'berlin-history-story-v2-20260901i';
   var SCRIPT_URL = document.currentScript && document.currentScript.src ? document.currentScript.src : '';
   var BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
     ? new URL('./', SCRIPT_URL).toString()
@@ -75,6 +75,7 @@
   ];
 
   var CSS = [
+    "body.bw-history-story-page-active header#comp-mtidm621,body.bw-history-story-page-active header:has(> section[data-testid='section-container'].wixui-header){display:none!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;visibility:hidden!important;pointer-events:none!important}",
     "@media (min-width:769px){body.bw-history-story-page-active #bw-desktop-cta{display:none!important;pointer-events:none!important}}",
     "@font-face{font-family:'BW Fraunces';src:url('" + BASE_URL + "assets/fonts/Fraunces-Variable.woff2') format('woff2');font-weight:300 900;font-display:swap}",
     "@font-face{font-family:'BW Space';src:url('" + BASE_URL + "assets/fonts/SpaceGrotesk-Variable.woff2') format('woff2');font-weight:300 700;font-display:swap}",
