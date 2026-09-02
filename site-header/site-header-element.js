@@ -6,6 +6,8 @@ const BW_HEADER_LINKS = {
   privateTour: 'https://www.berlinwalk.com/private-tour',
   route: 'https://www.berlinwalk.com/berlin-walking-tour-route',
   guide: 'https://www.berlinwalk.com/the-guide',
+  historyStory: 'https://www.berlinwalk.com/berlin-history-story',
+  wallTimeline: 'https://www.berlinwalk.com/berlin-wall-timeline',
   reviews: 'https://www.berlinwalk.com/reviews',
   meetingPoint: 'https://www.berlinwalk.com/meeting-point',
   plan: 'https://www.berlinwalk.com/berlin-tools',
@@ -1098,6 +1100,8 @@ class BWHeaderElement extends HTMLElement {
                     <li><a href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a></li>
                     <li><a href="${BW_HEADER_LINKS.reviews}">Reviews</a></li>
                     <li><a href="${BW_HEADER_LINKS.guide}">The Guide</a></li>
+                    <li><a href="${BW_HEADER_LINKS.historyStory}">Berlin History Story</a></li>
+                    <li><a href="${BW_HEADER_LINKS.wallTimeline}">Berlin Wall Timeline</a></li>
                     <li><a href="${BW_HEADER_LINKS.privateTour}">Private Tours</a></li>
                   </ul>
                 </li>
@@ -1181,6 +1185,8 @@ class BWHeaderElement extends HTMLElement {
                 <a href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a>
                 <a href="${BW_HEADER_LINKS.reviews}">Reviews</a>
                 <a href="${BW_HEADER_LINKS.guide}">The Guide</a>
+                <a href="${BW_HEADER_LINKS.historyStory}">Berlin History Story</a>
+                <a href="${BW_HEADER_LINKS.wallTimeline}">Berlin Wall Timeline</a>
                 <a href="${BW_HEADER_LINKS.privateTour}">Private Tours</a>
               </details>
 
