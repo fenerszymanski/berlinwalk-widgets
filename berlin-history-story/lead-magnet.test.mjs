@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 const directory = path.dirname(fileURLToPath(import.meta.url));
 const runtime = fs.readFileSync(path.join(directory, 'history-story-element.js'), 'utf8');
 const adapter = fs.readFileSync(path.join(directory, 'LEAD_MAGNET_ADAPTER.md'), 'utf8');
+const embed = fs.readFileSync(path.join(directory, '../scripts/upsert-berlin-history-story-page-wix-embed.mjs'), 'utf8');
 
 function section(start, end) {
   const from = runtime.indexOf(start);
@@ -90,6 +91,35 @@ test('narrow mobile field cards stack and increase reading size without changing
   assert.match(narrow, /\.bw-hs-field-card h4\{font-size:1\.22rem;line-height:1\.06\}/);
   assert.match(narrow, /\.bw-hs-field-card p\{font-size:\.84rem!important;line-height:1\.42!important\}/);
   assert.match(narrow, /\.bw-hs-field-move\{font-size:\.68rem;line-height:1\.42\}/);
+});
+
+test('history story keeps one cover brand and uses an atomic route-scoped Wix boot', () => {
+  assert.equal((runtime.match(/class="bw-hs-cover-brand"/g) || []).length, 1);
+  assert.equal((runtime.match(/class="bw-hs-brand"/g) || []).length, 0);
+  assert.doesNotMatch(runtime, /\.bw-hs-brand(?:[,{:])/);
+  assert.match(embed, /const EMBED_POSITION = 'HEAD'/);
+  assert.match(embed, /!\['HEAD', 'BODY_END'\]\.includes\(embed\.position\)/);
+  assert.match(embed, /bw-berlin-history-story-prehide/);
+  assert.match(embed, /bw-berlin-history-story-booting footer/);
+  assert.match(embed, /main\[data-main-content-parent\] > section:not\(#bw-berlin-history-story-page\)/);
+  assert.match(embed, /#bw-desktop-cta/);
+  assert.match(embed, /berlin-coelln-plan-1652-hero\.jpg/);
+  assert.match(embed, /Fraunces-Variable\.woff2/);
+  assert.match(embed, /SpaceGrotesk-Variable\.woff2/);
+  assert.match(embed, /IBMPlexMono-Regular\.woff2/);
+  assert.match(embed, /function preload\(\)/);
+  assert.match(embed, /function layout\(host\)/);
+  assert.match(embed, /grid-row","2 \/ 3/);
+  assert.doesNotMatch(embed, /Array\.from\(main\.children\).*setProperty\("display"/s);
+  assert.match(embed, /Promise\.all\(\[domReady,load\(P\.relatedScript,"related"\),load\(P\.script,"runtime"\)\]\)/);
+  assert.match(embed, /function reveal\(host,ticket\)/);
+  assert.match(embed, /document\.fonts&&document\.fonts\.ready/);
+  assert.match(embed, /image\.decode/);
+  assert.match(embed, /function teardown\(\)/);
+  assert.match(embed, /observer\.disconnect\(\)/);
+  assert.match(embed, /MutationObserver/);
+  assert.match(embed, /document\.documentElement\.classList\.remove\(BOOT_CLASS\)/);
+  assert.match(embed, /setInterval\(scheduleRun,1000\)/);
 });
 
 test('submit adapter keeps DOI and secure delivery on the backend', () => {
