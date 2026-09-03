@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-03T07:59:39.009Z",
+  "updatedAt": "2026-09-03T19:00:16.866Z",
   "source": "Wix Blog API",
-  "totalPosts": 348,
+  "totalPosts": 349,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Szczecin Day Trip from Berlin: Trains, the Bus Bridge and the Right Ticket",
+      "slug": "szczecin-day-trip-from-berlin",
+      "path": "/post/szczecin-day-trip-from-berlin",
+      "url": "https://www.berlinwalk.com/post/szczecin-day-trip-from-berlin",
+      "excerpt": "Journey planners show a direct Berlin to Szczecin train, but the railway is being rebuilt until December 2026 and part of every trip is a bus. Here is the honest plan: the three real route patterns, the VBB ticket that covers Szczecin trams too, the Deutschlandticket trap at Tantow, and what actually fits into one day on the ground.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-03T18:58:13.070Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_886e8bc6ee674074bb6a3702f5f8fcfe~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-waly-chrobrego.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_886e8bc6ee674074bb6a3702f5f8fcfe~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-waly-chrobrego.jpg",
+      "alt": "The Wały Chrobrego terrace in Szczecin with the maritime museum towers and rotunda above the steps",
+      "relatedToolSlug": "berlin-day-trips-finder"
+    },
     {
       "title": "Warnemünde to Berlin: The Honest Cruise Day Trip Math",
       "slug": "warnemunde-to-berlin",
