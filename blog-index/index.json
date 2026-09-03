@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-03T02:09:51.456Z",
+  "updatedAt": "2026-09-03T07:59:39.009Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 347,
-  "toolsTotal": 267,
+  "totalPosts": 348,
+  "toolsTotal": 268,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1618,6 +1618,23 @@
   ],
   "latest": [
     {
+      "title": "Warnemünde to Berlin: The Honest Cruise Day Trip Math",
+      "slug": "warnemunde-to-berlin",
+      "path": "/post/warnemunde-to-berlin",
+      "url": "https://www.berlinwalk.com/post/warnemunde-to-berlin",
+      "excerpt": "The port brochure says Berlin is about two hours from Warnemünde. The real number is a bit over three hours door to door, each way. Here is the honest math for a cruise day in Berlin: the two trains that matter, tickets, the buffer that protects your ship, and when staying on the coast is the smarter day.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-03T07:57:55.391Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_ef2c2e85520b4ffbb5001522d4ef84bc~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-regal-princess-warnemuende.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_ef2c2e85520b4ffbb5001522d4ef84bc~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-regal-princess-warnemuende.jpg",
+      "alt": "A large cruise ship moored at the Warnemünde cruise pier on a clear day",
+      "relatedToolSlug": "berlin-day-trips-finder"
+    },
+    {
       "title": "Running in Berlin: Six Loops That Teach You the City",
       "slug": "running-in-berlin",
       "path": "/post/running-in-berlin",
@@ -1803,23 +1820,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_40c19d30f8744ab18f0970b6797a89ba~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-zur-letzten-instanz.jpg",
       "alt": "The green anno 1621 sign and entrance of Zur letzten Instanz in Berlin",
       "relatedToolSlug": "berlin-oldest-rooms-timeline"
-    },
-    {
-      "title": "Two of Everything in Berlin: The East and West Twins and Which One to Visit",
-      "slug": "two-of-everything-in-berlin",
-      "path": "/post/two-of-everything-in-berlin",
-      "url": "https://www.berlinwalk.com/post/two-of-everything-in-berlin",
-      "excerpt": "Berlin was two cities for forty years and each half built the things a capital is supposed to have. Nobody demolished the spares, so today there are two zoos, two opera houses, two concert halls, two planetariums, two state library buildings, two city halls and two universities on opposite sides of a border you cannot see. Here is why, which twin is actually worth the trip, which pairs the reunified city has already settled, and how to group a day so you are not crossing Berlin twice.",
-      "category": "Berlin History",
-      "categorySlug": "berlin-history",
-      "topic": "history-myths",
-      "topicLabel": "Berlin History & Myths",
-      "readTime": "7 min read",
-      "publishedDate": "2026-08-28T14:06:02.016Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_53ed55c120044ed9a348445802f46101~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-funkturm-fernsehturm-skyline.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_53ed55c120044ed9a348445802f46101~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-funkturm-fernsehturm-skyline.jpg",
-      "alt": "The Funkturm above the Berlin exhibition grounds with the Fernsehturm on the distant skyline",
-      "relatedToolSlug": "berlin-twin-city-map"
     }
   ]
 }

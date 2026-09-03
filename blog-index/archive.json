@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-03T02:09:51.456Z",
+  "updatedAt": "2026-09-03T07:59:39.009Z",
   "source": "Wix Blog API",
-  "totalPosts": 347,
+  "totalPosts": 348,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Warnemünde to Berlin: The Honest Cruise Day Trip Math",
+      "slug": "warnemunde-to-berlin",
+      "path": "/post/warnemunde-to-berlin",
+      "url": "https://www.berlinwalk.com/post/warnemunde-to-berlin",
+      "excerpt": "The port brochure says Berlin is about two hours from Warnemünde. The real number is a bit over three hours door to door, each way. Here is the honest math for a cruise day in Berlin: the two trains that matter, tickets, the buffer that protects your ship, and when staying on the coast is the smarter day.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-03T07:57:55.391Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_ef2c2e85520b4ffbb5001522d4ef84bc~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-regal-princess-warnemuende.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_ef2c2e85520b4ffbb5001522d4ef84bc~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-regal-princess-warnemuende.jpg",
+      "alt": "A large cruise ship moored at the Warnemünde cruise pier on a clear day",
+      "relatedToolSlug": "berlin-day-trips-finder"
+    },
     {
       "title": "Running in Berlin: Six Loops That Teach You the City",
       "slug": "running-in-berlin",
