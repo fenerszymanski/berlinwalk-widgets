@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-02T14:03:40.612Z",
+  "updatedAt": "2026-09-03T02:09:51.456Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 347,
@@ -44,23 +44,57 @@
   ],
   "hero": {
     "lead": {
-      "title": "Berlin Philharmonic Tickets: How to Get In, Even When It Says Sold Out",
-      "slug": "berlin-philharmonic-tickets",
-      "path": "/post/berlin-philharmonic-tickets",
-      "url": "https://www.berlinwalk.com/post/berlin-philharmonic-tickets",
-      "excerpt": "The Berlin Philharmonic looks sold out and expensive until you know the ladder: sale windows, standby tickets two days before, standing room on the night, cheaper DSO concerts in the same famous hall, and a completely free chamber concert every Wednesday lunchtime.",
+      "title": "Shows in Berlin in English: The Three Doors Past the Language Barrier",
+      "slug": "berlin-shows-in-english",
+      "path": "/post/berlin-shows-in-english",
+      "url": "https://www.berlinwalk.com/post/berlin-shows-in-english",
+      "excerpt": "Berlin's stages are not closed to non-German speakers: three big shows need no language at all, the great German theatres project free English surtitles, and a whole scene plays in English. The honest map, venue by venue, with prices and the one warning most guides miss.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
+      "topic": "free-budget",
+      "topicLabel": "Free & Budget",
       "readTime": "6 min read",
-      "publishedDate": "2026-09-01T14:11:17.375Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_567a2ac88a0c41c4928dd2160d6f107c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-philharmonic-tickets-philharmonie-blue-hour.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_567a2ac88a0c41c4928dd2160d6f107c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-philharmonic-tickets-philharmonie-blue-hour.jpg",
-      "alt": "The golden facade of the Philharmonie Berlin glowing at blue hour",
-      "relatedToolSlug": "transport-ticket-calculator"
+      "publishedDate": "2026-09-02T07:56:05.297Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_d54129b2b18c43f1bb4cce11007606cc~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-shows-in-english-friedrichstadt-palast-night.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_d54129b2b18c43f1bb4cce11007606cc~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-shows-in-english-friedrichstadt-palast-night.jpg",
+      "alt": "The Friedrichstadt-Palast theatre on Friedrichstrasse illuminated at night",
+      "relatedToolSlug": "berlin-english-stage-map"
     },
     "secondary": [
+      {
+        "title": "Running in Berlin: Six Loops That Teach You the City",
+        "slug": "running-in-berlin",
+        "path": "/post/running-in-berlin",
+        "url": "https://www.berlinwalk.com/post/running-in-berlin",
+        "excerpt": "Berlin is flat, its parks are enormous, and before 09:00 the famous centre belongs to whoever is out in it. Six real running loops with honest distances, start stations, surfaces and water, from the Tiergarten to Tempelhofer Feld, plus what marathon week changes.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "history-myths",
+        "topicLabel": "Berlin History & Myths",
+        "readTime": "6 min read",
+        "publishedDate": "2026-09-02T13:59:04.599Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_62a89ea057774b0bb0ec0d66bc301de7~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/running-in-berlin-tiergarten-autumn-path.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_62a89ea057774b0bb0ec0d66bc301de7~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/running-in-berlin-tiergarten-autumn-path.jpg",
+        "alt": "The wide gravel path through the Tiergarten in golden autumn light",
+        "relatedToolSlug": "berlin-run-loop-map"
+      },
+      {
+        "title": "Berlin Philharmonic Tickets: How to Get In, Even When It Says Sold Out",
+        "slug": "berlin-philharmonic-tickets",
+        "path": "/post/berlin-philharmonic-tickets",
+        "url": "https://www.berlinwalk.com/post/berlin-philharmonic-tickets",
+        "excerpt": "The Berlin Philharmonic looks sold out and expensive until you know the ladder: sale windows, standby tickets two days before, standing room on the night, cheaper DSO concerts in the same famous hall, and a completely free chamber concert every Wednesday lunchtime.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "first-day",
+        "topicLabel": "First Day in Berlin",
+        "readTime": "6 min read",
+        "publishedDate": "2026-09-01T14:11:17.375Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_567a2ac88a0c41c4928dd2160d6f107c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-philharmonic-tickets-philharmonie-blue-hour.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_567a2ac88a0c41c4928dd2160d6f107c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-philharmonic-tickets-philharmonie-blue-hour.jpg",
+        "alt": "The golden facade of the Philharmonie Berlin glowing at blue hour",
+        "relatedToolSlug": "transport-ticket-calculator"
+      },
       {
         "title": "Night Trains from Berlin: Six Places You Can Wake Up Tomorrow",
         "slug": "night-trains-from-berlin",
@@ -79,23 +113,6 @@
         "relatedToolSlug": "berlin-night-train-board"
       },
       {
-        "title": "Laundry in Berlin: How to Get Clean Clothes Without Losing Half a Day",
-        "slug": "laundry-in-berlin",
-        "path": "/post/laundry-in-berlin",
-        "url": "https://www.berlinwalk.com/post/laundry-in-berlin",
-        "excerpt": "Mid-trip laundry is a real Berlin decision: sit next to a Waschsalon machine for 90 minutes or hand the bag to a wash-and-fold counter for almost the same price. The verified costs, how the machines work, the Sunday trick, and addresses near where visitors stay.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "first-day",
-        "topicLabel": "First Day in Berlin",
-        "readTime": "7 min read",
-        "publishedDate": "2026-08-31T14:05:38.971Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_d9364bf63bb14311aa068c040b17dd2e~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/laundry-in-berlin-freddy-leck-machines.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_d9364bf63bb14311aa068c040b17dd2e~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/laundry-in-berlin-freddy-leck-machines.jpg",
-        "alt": "A row of numbered washing machines with open doors at Freddy Leck sein Waschsalon in Berlin-Moabit",
-        "relatedToolSlug": "berlin-laundry-planner"
-      },
-      {
         "title": "German Unity Day in Berlin: What Is Actually Open on 3 October",
         "slug": "german-unity-day-berlin",
         "path": "/post/german-unity-day-berlin",
@@ -111,23 +128,6 @@
         "thumb": "https://static.wixstatic.com/media/5a08a3_ff85376dc8e847509310f5fb022c30d0~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/german-unity-day-berlin-reichstag-flag.jpg",
         "alt": "The German federal flag flying in front of the Reichstag building",
         "relatedToolSlug": "berlin-unity-day-board"
-      },
-      {
-        "title": "Berlin Central Bus Station: Where Your FlixBus Arrives and How to Get Into the City",
-        "slug": "berlin-central-bus-station",
-        "path": "/post/berlin-central-bus-station",
-        "url": "https://www.berlinwalk.com/post/berlin-central-bus-station",
-        "excerpt": "Berlin's central bus station sits 7 km west of Alexanderplatz, and almost nobody checks the stop list before booking. Which of the nine FlixBus stops to choose for your part of the city, the two stations that split Berlin between them, and the 4 EUR ticket that covers the ride in.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "first-day",
-        "topicLabel": "First Day in Berlin",
-        "readTime": "5 min read",
-        "publishedDate": "2026-08-31T05:09:43.512Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_5d84175462c642fd83c46ed523d25cca~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-central-bus-station-zob-boarding.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_5d84175462c642fd83c46ed523d25cca~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-central-bus-station-zob-boarding.jpg",
-        "alt": "Travellers boarding a green FlixBus coach under the departure board at Berlin ZOB",
-        "relatedToolSlug": "berlin-bus-arrival-map"
       },
       {
         "title": "Berlin Public Transport for Tourists: Tickets, Zones, Prices and Validation",
@@ -1649,7 +1649,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_d54129b2b18c43f1bb4cce11007606cc~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-shows-in-english-friedrichstadt-palast-night.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_d54129b2b18c43f1bb4cce11007606cc~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-shows-in-english-friedrichstadt-palast-night.jpg",
       "alt": "The Friedrichstadt-Palast theatre on Friedrichstrasse illuminated at night",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-english-stage-map"
     },
     {
       "title": "Berlin Philharmonic Tickets: How to Get In, Even When It Says Sold Out",
