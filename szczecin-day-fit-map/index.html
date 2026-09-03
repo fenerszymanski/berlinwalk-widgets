@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Szczecin Day Fit Map — how much of Szczecin fits your day | BerlinWalk</title>
+<meta name="description" content="Slide the hours you want on the ground in Szczecin and see which walking stops fit, with the exact Berlin trains and the RB66 bus bridge that give you that window.">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --bw-green: #1B5E20;
+    --bw-dark: #123D18;
+    --bw-lime: #7CB342;
+    --bw-light: #C5E1A5;
+    --bw-yellow: #FFE600;
+    --bw-cream: #FAFAF5;
+    --bw-ink: #212121;
+    --bw-red: #E63946;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, 'Segoe UI', sans-serif; background: var(--bw-cream); color: var(--bw-ink); }
+  .szfm-wrap { max-width: 960px; margin: 0 auto; padding: 18px 14px 26px; }
+  .szfm-kicker { font-size: 11px; letter-spacing: 0.14em; font-weight: 700; color: var(--bw-lime); text-transform: uppercase; }
+  h1 { font-size: 24px; line-height: 1.2; margin: 6px 0 8px; color: var(--bw-dark); }
+  .szfm-lead { font-size: 14px; line-height: 1.55; margin: 0 0 16px; max-width: 680px; }
+  .szfm-slider-card { background: #fff; border: 1.5px solid var(--bw-light); border-radius: 14px; padding: 14px 16px 10px; margin-bottom: 12px; }
+  .szfm-slider-label { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .szfm-slider-label label { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--bw-green); }
+  .szfm-hours { font-size: 26px; font-weight: 800; color: var(--bw-dark); }
+  .szfm-hours small { font-size: 13px; font-weight: 600; color: var(--bw-ink); }
+  input[type="range"] { width: 100%; margin: 10px 0 4px; accent-color: var(--bw-green); height: 28px; }
+  .szfm-scale { display: flex; justify-content: space-between; font-size: 11px; color: #5c6157; margin-bottom: 4px; }
+  .szfm-trains { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 0 12px; }
+  .szfm-train { background: var(--bw-dark); color: #fff; border-radius: 14px; padding: 12px 14px; }
+  .szfm-train h2 { margin: 0 0 4px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bw-light); }
+  .szfm-train .t { font-size: 21px; font-weight: 800; }
+  .szfm-train .t b { color: var(--bw-yellow); font-weight: 800; }
+  .szfm-train .via { font-size: 12px; line-height: 1.45; margin-top: 4px; color: #E4EEDC; }
+  .szfm-map-frame { background: #EEF4E6; border: 1.5px solid var(--bw-light); border-radius: 14px; padding: 6px; }
+  svg { display: block; width: 100%; height: auto; }
+  .szfm-plan { background: #fff; border: 1.5px solid var(--bw-light); border-radius: 14px; padding: 8px 16px 12px; margin-top: 12px; }
+  .szfm-plan h2 { font-size: 15px; color: var(--bw-dark); margin: 8px 0 4px; }
+  .szfm-stop { display: grid; grid-template-columns: 52px 1fr; gap: 10px; padding: 8px 0; border-bottom: 1px solid #EDF1E6; font-size: 13.5px; line-height: 1.5; }
+  .szfm-stop:last-child { border-bottom: 0; }
+  .szfm-stop .when { font-weight: 800; color: var(--bw-green); font-variant-numeric: tabular-nums; }
+  .szfm-stop.off { opacity: 0.45; }
+  .szfm-stop.off .when { color: #8a8f84; }
+  .szfm-stop .nm { font-weight: 700; }
+  .szfm-stop .why { margin: 1px 0 0; }
+  .szfm-stop .skip { color: var(--bw-red); font-weight: 600; }
+  .szfm-verdict { border-left: 3px solid var(--bw-lime); padding: 7px 11px; background: #F4F8EE; border-radius: 0 8px 8px 0; margin-top: 10px; font-size: 13.5px; line-height: 1.55; }
+  .szfm-foot { font-size: 11.5px; color: #5c6157; line-height: 1.5; margin-top: 12px; }
+  @media (max-width: 540px) {
+    h1 { font-size: 20px; }
+    .szfm-trains { grid-template-columns: 1fr; }
+    .szfm-hours { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+<div class="szfm-wrap">
+  <div class="szfm-kicker">Berlin Tools · Free</div>
+  <h1>Szczecin Day Fit Map</h1>
+  <p class="szfm-lead">Szczecin sits one region away from Berlin, but the railway is being rebuilt until December 2026, so every plan is really a choice between a fast rail detour and the RB66 bus bridge. Slide how many hours you want on the ground. I match the closest real train pair from Berlin Gesundbrunnen and light up the walking stops that honestly fit.</p>
+
+  <div class="szfm-slider-card">
+    <div class="szfm-slider-label">
+      <label for="szfm-range">Hours on the ground in Szczecin</label>
+      <div class="szfm-hours" id="szfm-hours">6h</div>
+    </div>
+    <input type="range" id="szfm-range" min="4" max="10" step="0.5" value="6" aria-label="Hours on the ground in Szczecin">
+    <div class="szfm-scale"><span>4h quick look</span><span>7h relaxed loop</span><span>10h full day</span></div>
+  </div>
+
+  <div class="szfm-trains">
+    <div class="szfm-train">
+      <h2>Out of Berlin</h2>
+      <div class="t" id="szfm-out-t"></div>
+      <div class="via" id="szfm-out-via"></div>
+    </div>
+    <div class="szfm-train">
+      <h2>Back to Berlin</h2>
+      <div class="t" id="szfm-ret-t"></div>
+      <div class="via" id="szfm-ret-via"></div>
+    </div>
+  </div>
+
+  <div class="szfm-map-frame">
+    <svg id="szfm-svg" viewBox="0 0 800 620" role="img" aria-label="Walking map of central Szczecin with the stops that fit your window highlighted"></svg>
+  </div>
+
+  <div class="szfm-plan">
+    <h2 id="szfm-plan-title">Your walking loop</h2>
+    <div id="szfm-stops"></div>
+    <div class="szfm-verdict" id="szfm-verdict"></div>
+  </div>
+
+  <p class="szfm-foot">Walking times are computed from the stop coordinates at an easy city pace. Train and bus times are the regular daily pattern from the DB and VBB timetables, checked on 3 September 2026; the Angermünde to Szczecin trains are replaced by buses until 12 December 2026, so confirm your exact day on bahn.de or vbb.de before you go. Prices: single Berlin AB to Szczecin 16.80 EUR, 24 hour ticket 33.60 EUR including Szczecin trams and buses.</p>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  // Real train pairs, Berlin Gesundbrunnen anchor. Verified 2026-09-03 (bahn.de live query + DB RB66 timetable of 01.08.2026).
+  var OUT = [
+    { dep: '06:32', arr: '09:38', via: 'RE3 to Angermünde, RB66 bus over the border, arrive Szczecin Główny 09:38.', kind: 'bus' },
+    { dep: '08:32', arr: '10:54', via: 'All rail: RE3 to Angermünde, RE30 to Pasewalk, RE4 into Szczecin Główny 10:54. Needs a DB ticket for the Pasewalk leg.', kind: 'rail' },
+    { dep: '09:32', arr: '12:03', via: 'RE3 to Angermünde, then the POLREGIO express bus, nonstop to Kolumba by the station.', kind: 'express' },
+    { dep: '10:32', arr: '12:54', via: 'All rail: RE3, RE30, RE4 via Pasewalk into Szczecin Główny 12:54.', kind: 'rail' }
+  ];
+  var RET = [
+    { dep: '15:01', arr: '17:21', via: 'RE4 one stop to Gumieńce, express bus to Angermünde, RE3 home.', kind: 'express' },
+    { dep: '15:26', arr: '18:22', via: 'RB66 all stops bus from Kolumba, RE3 from Angermünde.', kind: 'bus' },
+    { dep: '17:01', arr: '19:21', via: 'All rail: RE4 to Pasewalk, RE30, RE3 into Gesundbrunnen 19:21.', kind: 'rail' },
+    { dep: '19:01', arr: '21:21', via: 'All rail: RE4, RE30, RE3 into Gesundbrunnen 21:21.', kind: 'rail' },
+    { dep: '19:26', arr: '22:22', via: 'RB66 all stops bus from Kolumba, RE3 from Angermünde.', kind: 'bus' },
+    { dep: '21:01', arr: '23:26', via: 'Last easy option: RE4, RE30, RE3 into Gesundbrunnen 23:26.', kind: 'rail' }
+  ];
+
+  // Walking stops in loop order. Coordinates are the real places; dwell is a fair visit length in minutes.
+  var STOPS = [
+    { id: 'under', name: 'Underground Routes shelter', lat: 53.4176, lon: 14.5530, dwell: 60,
+      why: 'WWII air raid shelter under the platforms, entrance at Kolumba 2. The walk-in tour for individuals starts daily at 12:00.', needsNoon: true },
+    { id: 'oldtown', name: 'Old Town Hall and Podzamcze', lat: 53.4243, lon: 14.5597, dwell: 35,
+      why: 'The rebuilt merchant quarter under the castle. Gabled houses, the brick Old Town Hall, cafe tables on the square.' },
+    { id: 'castle', name: 'Pomeranian Dukes’ Castle', lat: 53.4274, lon: 14.5567, dwell: 40,
+      why: 'The dukes’ seat above the Oder. The museum rooms are closed for renovation, but the courtyard and the tower steps are open.' },
+    { id: 'waly', name: 'Wały Chrobrego terrace', lat: 53.4305, lon: 14.5648, dwell: 30,
+      why: 'Szczecin’s grand riverside terrace. Walk the full length for the harbour view; this is the postcard.' },
+    { id: 'phil', name: 'Szczecin Philharmonic', lat: 53.4327, lon: 14.5570, dwell: 20,
+      why: 'The white glacier of a concert hall that won Europe’s top architecture prize in 2015. Worth circling even from outside.' },
+    { id: 'paszt', name: 'Bar Pasztecik, Wojska Polskiego 46', lat: 53.4308, lon: 14.5395, dwell: 30,
+      why: 'The 1969 original of the fried pasztecik pastry, eaten standing with a cup of red barszcz. A few złoty, cards accepted.' }
+  ];
+  var STATION = { name: 'Szczecin Główny', lat: 53.4187, lon: 14.5503 };
+
+  var WALK_KMH = 4.5, STREET = 1.3, END_BUFFER = 25;
+
+  function toMin(t) { var p = t.split(':'); return (+p[0]) * 60 + (+p[1]); }
+  function fmt(m) { m = Math.round(m); var h = Math.floor(m / 60) % 24, mm = m % 60; return (h < 10 ? '0' : '') + h + ':' + (mm < 10 ? '0' : '') + mm; }
+  function fmtH(min) { var h = Math.floor(min / 60), m = Math.round(min % 60); return m ? h + 'h' + (m < 10 ? '0' : '') + m : h + 'h'; }
+  function walkMin(a, b) {
+    var R = 6371, dLat = (b.lat - a.lat) * Math.PI / 180, dLon = (b.lon - a.lon) * Math.PI / 180;
+    var la1 = a.lat * Math.PI / 180, la2 = b.lat * Math.PI / 180;
+    var h = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(la1) * Math.cos(la2) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    var km = 2 * R * Math.asin(Math.sqrt(h)) * STREET;
+    return km / WALK_KMH * 60;
+  }
+
+  // Pick the real pair closest to the requested window (prefer the shorter Berlin day on ties).
+  function pickPair(hoursWanted) {
+    var want = hoursWanted * 60, best = null;
+    for (var i = 0; i < OUT.length; i++) {
+      for (var j = 0; j < RET.length; j++) {
+        var ground = toMin(RET[j].dep) - toMin(OUT[i].arr);
+        if (ground < 150) continue;
+        var dayLen = toMin(RET[j].arr) - toMin(OUT[i].dep);
+        var score = Math.abs(ground - want) + dayLen / 400;
+        if (!best || score < best.score) best = { out: OUT[i], ret: RET[j], ground: ground, score: score };
+      }
+    }
+    return best;
+  }
+
+  // Build the day plan inside the window for a given stop order.
+  function planFor(order, pair) {
+    var start = toMin(pair.out.arr), end = toMin(pair.ret.dep) - END_BUFFER;
+    var t = start, at = STATION, rows = [], fitCount = 0;
+    for (var i = 0; i < order.length; i++) {
+      var s = order[i], w = walkMin(at, s);
+      var arrive = t + w;
+      var wait = 0;
+      if (s.needsNoon) {
+        var noon = 12 * 60;
+        if (arrive <= noon) { wait = noon - arrive; }
+        else { rows.push({ stop: s, fits: false, reason: 'The walk-in tour runs at 12:00 and you land after it.' }); continue; }
+        if (wait > 40) { rows.push({ stop: s, fits: false, reason: 'You would wait over 40 minutes for the 12:00 tour; spend it in the old town instead.' }); continue; }
+      }
+      var leave = arrive + wait + s.dwell;
+      var backHome = leave + walkMin(s, STATION);
+      if (backHome <= end && leave <= end) {
+        rows.push({ stop: s, fits: true, at: arrive + wait });
+        t = leave; at = s; fitCount++;
+      } else {
+        rows.push({ stop: s, fits: false, reason: 'Does not fit before your ' + pair.ret.dep + ' departure.' });
+      }
+    }
+    var backWalk = walkMin(at, STATION);
+    return { rows: rows, fitCount: fitCount, backAt: t + backWalk, end: end };
+  }
+
+  // Try the natural loop and the old-town-first variant (useful when you land well before the 12:00 shelter tour).
+  function buildPlan(pair) {
+    var A = STOPS.slice();
+    var B = [STOPS[1], STOPS[0], STOPS[2], STOPS[3], STOPS[4], STOPS[5]];
+    var pa = planFor(A, pair), pb = planFor(B, pair);
+    if (pb.fitCount > pa.fitCount) return pb;
+    if (pb.fitCount === pa.fitCount && pb.backAt < pa.backAt) return pb;
+    return pa;
+  }
+
+  // ---- SVG map ----
+  var SVG_NS = 'http://www.w3.org/2000/svg';
+  var svg = document.getElementById('szfm-svg');
+  var LON0 = 14.5330, LON1 = 14.5760, LAT0 = 53.4130, LAT1 = 53.4380;
+  function px(lon) { return (lon - LON0) / (LON1 - LON0) * 800; }
+  function py(lat) { return 620 - (lat - LAT0) / (LAT1 - LAT0) * 620; }
+  function el(tag, attrs, text) {
+    var e = document.createElementNS(SVG_NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (text) e.textContent = text;
+    return e;
+  }
+
+  // West bank of the Oder, simplified from real points, drawn once.
+  var ODER = [[14.5545, 53.4130], [14.5560, 53.4180], [14.5620, 53.4230], [14.5660, 53.4280], [14.5680, 53.4330], [14.5690, 53.4380]];
+  function drawBase() {
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    var river = 'M ' + ODER.map(function (p) { return px(p[0]) + ' ' + py(p[1]); }).join(' L ');
+    river += ' L 800 ' + py(53.4380) + ' L 800 ' + py(53.4130) + ' Z';
+    svg.appendChild(el('path', { d: river, fill: '#CFE3F2', stroke: '#A9C8DE', 'stroke-width': 2 }));
+    svg.appendChild(el('text', { x: px(14.5695), y: py(53.4260), fill: '#5D82A0', 'font-size': 17, 'font-style': 'italic', 'font-family': 'inherit', transform: 'rotate(75 ' + px(14.5695) + ' ' + py(53.4260) + ')' }, 'Oder'));
+    // Station marker
+    var sx = px(STATION.lon), sy = py(STATION.lat);
+    svg.appendChild(el('rect', { x: sx - 11, y: sy - 8, width: 22, height: 16, rx: 3, fill: '#123D18' }));
+    svg.appendChild(el('text', { x: sx, y: sy + 4, fill: '#FFE600', 'font-size': 11, 'font-weight': 700, 'text-anchor': 'middle', 'font-family': 'inherit' }, 'Gł'));
+    svg.appendChild(el('text', { x: sx - 16, y: sy + 5, fill: '#123D18', 'font-size': 14.5, 'font-weight': 700, 'text-anchor': 'end', 'font-family': 'inherit' }, 'Szczecin Główny'));
+  }
+
+  var LABEL_POS = { under: [14, 16], oldtown: [12, 14], castle: [-8, -12], waly: [10, -10], phil: [-8, -14], paszt: [-8, 20] };
+  var LABEL_ANCHOR = { under: 'start', oldtown: 'start', castle: 'end', waly: 'start', phil: 'end', paszt: 'start' };
+  var SHORT = { under: 'Underground Routes', oldtown: 'Old Town', castle: 'Castle', waly: 'Wały Chrobrego', phil: 'Philharmonic', paszt: 'Bar Pasztecik' };
+
+  function drawPlan(plan) {
+    drawBase();
+    // Route through fitting stops, from and back to the station
+    var pts = [[STATION.lon, STATION.lat]];
+    plan.rows.forEach(function (r) { if (r.fits) pts.push([r.stop.lon, r.stop.lat]); });
+    pts.push([STATION.lon, STATION.lat]);
+    if (pts.length > 2) {
+      var d = 'M ' + pts.map(function (p) { return px(p[0]).toFixed(1) + ' ' + py(p[1]).toFixed(1); }).join(' L ');
+      svg.appendChild(el('path', { d: d, fill: 'none', stroke: '#1B5E20', 'stroke-width': 3.5, 'stroke-dasharray': '1 7', 'stroke-linecap': 'round' }));
+    }
+    plan.rows.forEach(function (r, i) {
+      var s = r.stop, x = px(s.lon), y = py(s.lat);
+      svg.appendChild(el('circle', { cx: x, cy: y, r: r.fits ? 11 : 8, fill: r.fits ? '#1B5E20' : '#B9BDB4', stroke: r.fits ? '#FFE600' : '#fff', 'stroke-width': r.fits ? 3 : 2 }));
+      if (r.fits) svg.appendChild(el('text', { x: x, y: y + 4.5, fill: '#fff', 'font-size': 12, 'font-weight': 800, 'text-anchor': 'middle', 'font-family': 'inherit' }, String(orderOf(plan, i))));
+      var off = LABEL_POS[s.id];
+      svg.appendChild(el('text', { x: x + off[0], y: y + off[1], fill: r.fits ? '#123D18' : '#8a8f84', 'font-size': 15.5, 'font-weight': r.fits ? 800 : 600, 'text-anchor': LABEL_ANCHOR[s.id], 'font-family': 'inherit' }, SHORT[s.id]));
+    });
+  }
+  function orderOf(plan, idx) {
+    var n = 0;
+    for (var i = 0; i <= idx; i++) if (plan.rows[i].fits) n++;
+    return n;
+  }
+
+  var range = document.getElementById('szfm-range');
+  function render() {
+    var hours = parseFloat(range.value);
+    document.getElementById('szfm-hours').innerHTML = fmtH(hours * 60).replace(/(h.*)$/, '$1') + ' <small>wanted</small>';
+    var pair = pickPair(hours);
+    var plan = buildPlan(pair);
+    document.getElementById('szfm-out-t').innerHTML = pair.out.dep + ' <b>→</b> ' + pair.out.arr;
+    document.getElementById('szfm-out-via').textContent = pair.out.via;
+    document.getElementById('szfm-ret-t').innerHTML = pair.ret.dep + ' <b>→</b> ' + pair.ret.arr;
+    document.getElementById('szfm-ret-via').textContent = pair.ret.via;
+    var host = document.getElementById('szfm-stops');
+    host.innerHTML = '';
+    plan.rows.forEach(function (r) {
+      var div = document.createElement('div');
+      div.className = 'szfm-stop' + (r.fits ? '' : ' off');
+      var when = r.fits ? fmt(r.at) : '—';
+      div.innerHTML = '<div class="when">' + when + '</div><div><div class="nm">' + r.stop.name + '</div><p class="why">' +
+        (r.fits ? r.stop.why : '<span class="skip">Skipped.</span> ' + r.reason) + '</p></div>';
+      host.appendChild(div);
+    });
+    var groundTxt = fmtH(plan ? (toMin(pair.ret.dep) - toMin(pair.out.arr)) : 0);
+    var fitTxt = plan.fitCount + ' of ' + STOPS.length;
+    var verdict = 'This pair gives you <b>' + groundTxt + ' on the ground</b> and fits <b>' + fitTxt + ' stops</b>. ' +
+      'You are walking back toward the station around ' + fmt(plan.backAt) + ', with a 25 minute buffer before the ' + pair.ret.dep + ' departure.';
+    if (pair.out.kind === 'rail' || pair.ret.kind === 'rail') {
+      verdict += ' The all rail legs via Pasewalk need a separate DB ticket; the VBB Szczecin tickets cover the RE3 plus RB66 bus corridor.';
+    }
+    document.getElementById('szfm-verdict').innerHTML = verdict;
+    document.getElementById('szfm-plan-title').textContent = 'Your walking loop, ' + pair.out.arr + ' to ' + pair.ret.dep;
+    drawPlan(plan);
+  }
+  range.addEventListener('input', render);
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

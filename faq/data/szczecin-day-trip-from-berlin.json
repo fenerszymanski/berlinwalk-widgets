@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "slug": "szczecin-day-trip-from-berlin",
+  "key": "szczecin-day-trip-from-berlin",
+  "config": {
+    "title": "Szczecin Day Trip from Berlin - FAQ",
+    "subtitle": "How to reach Szczecin while the railway is rebuilt, what tickets cost, and what actually fits into one day on the ground.",
+    "items": [
+      {
+        "q": "How do you get from Berlin to Szczecin right now?",
+        "a": "**Take the RE3 from Berlin Gesundbrunnen to Angermünde, then the RB66 replacement bus over the border.** The through trains are suspended until 12 December 2026 while the line is rebuilt. The all stops bus takes just under 2 hours, the offset POLREGIO express bus about 1 hour 20. On even hours there is also an all rail detour via Pasewalk (RE3, RE30, RE4) that lands in Szczecin in about 2 hours 22 minutes from Gesundbrunnen."
+      },
+      {
+        "q": "How long does the Berlin to Szczecin trip take?",
+        "a": "**Between about 2 hours 22 minutes and 3 hours each way**, depending on the pattern: roughly 3 hours with the all stops bus, about 2 and a half with the express bus, and about 2 hours 22 minutes on the rail detour via Pasewalk. From 2027 the rebuilt line is planned to cut Berlin to Szczecin to about 90 minutes."
+      },
+      {
+        "q": "Which ticket do I need for a Szczecin day trip?",
+        "a": "**The VBB 24 hour ticket Berlin AB to Szczecin costs 33.60 euros** and covers the corridor via Tantow both ways plus Szczecin trams and buses all day; a single is 16.80 euros. Buy it at DB ticket machines by entering Szczecin as the destination. Groups of up to 5 can share a Brandenburg-Berlin-Ticket, valid to Szczecin on weekdays from 09:00 and all day on weekends. The rail detour via Pasewalk lies outside the VBB tariff and needs a normal DB ticket."
+      },
+      {
+        "q": "Is the Deutschlandticket valid to Szczecin?",
+        "a": "**No. It ends at Tantow, the last German station on the corridor.** For the Polish section buy the add on ticket: 4.40 euros one way or 8.80 euros for a 24 hour ticket that also covers Szczecin city transport. That makes the whole day trip cost under 9 euros extra for Deutschlandticket holders."
+      },
+      {
+        "q": "What can you actually see in Szczecin in one day?",
+        "a": "**The walkable core covers a full day**: the WWII Underground Routes shelter tour under the main station (daily at 12:00 for individuals, entrance at Kolumba 2), the rebuilt Old Town with the brick Old Town Hall, the Pomeranian Dukes' Castle courtyard and tower, the Wały Chrobrego riverside terrace, and the white Philharmonic that won Europe's top architecture prize in 2015. Finish with a pasztecik and red barszcz at the 1969 bar at Wojska Polskiego 46."
+      },
+      {
+        "q": "Do I need my passport for Szczecin?",
+        "a": "**Carry it.** Poland and Germany are both in Schengen, but Germany runs temporary checks at its land borders, extended through 15 September 2026 and notified onward into March 2027, so police can board the bus or train for spot ID checks. A passport or EU ID card is enough; note that Poland uses the złoty, though cards are accepted almost everywhere."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do you get from Berlin to Szczecin right now?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Take the RE3 from Berlin Gesundbrunnen to Angermünde, then the RB66 replacement bus over the border. The through trains are suspended until 12 December 2026 while the line is rebuilt. The all stops bus takes just under 2 hours, the offset POLREGIO express bus about 1 hour 20. On even hours there is also an all rail detour via Pasewalk (RE3, RE30, RE4) that lands in Szczecin in about 2 hours 22 minutes from Gesundbrunnen."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does the Berlin to Szczecin trip take?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Between about 2 hours 22 minutes and 3 hours each way, depending on the pattern: roughly 3 hours with the all stops bus, about 2 and a half with the express bus, and about 2 hours 22 minutes on the rail detour via Pasewalk. From 2027 the rebuilt line is planned to cut Berlin to Szczecin to about 90 minutes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which ticket do I need for a Szczecin day trip?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The VBB 24 hour ticket Berlin AB to Szczecin costs 33.60 euros and covers the corridor via Tantow both ways plus Szczecin trams and buses all day; a single is 16.80 euros. Buy it at DB ticket machines by entering Szczecin as the destination. Groups of up to 5 can share a Brandenburg-Berlin-Ticket, valid to Szczecin on weekdays from 09:00 and all day on weekends. The rail detour via Pasewalk lies outside the VBB tariff and needs a normal DB ticket."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Deutschlandticket valid to Szczecin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. It ends at Tantow, the last German station on the corridor. For the Polish section buy the add on ticket: 4.40 euros one way or 8.80 euros for a 24 hour ticket that also covers Szczecin city transport. That makes the whole day trip cost under 9 euros extra for Deutschlandticket holders."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What can you actually see in Szczecin in one day?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The walkable core covers a full day: the WWII Underground Routes shelter tour under the main station (daily at 12:00 for individuals, entrance at Kolumba 2), the rebuilt Old Town with the brick Old Town Hall, the Pomeranian Dukes' Castle courtyard and tower, the Wały Chrobrego riverside terrace, and the white Philharmonic that won Europe's top architecture prize in 2015. Finish with a pasztecik and red barszcz at the 1969 bar at Wojska Polskiego 46."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need my passport for Szczecin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Carry it. Poland and Germany are both in Schengen, but Germany runs temporary checks at its land borders, extended through 15 September 2026 and notified onward into March 2027, so police can board the bus or train for spot ID checks. A passport or EU ID card is enough; note that Poland uses the złoty, though cards are accepted almost everywhere."
+        }
+      }
+    ]
+  }
+}
