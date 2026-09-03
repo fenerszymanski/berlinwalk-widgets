@@ -1100,8 +1100,6 @@ class BWHeaderElement extends HTMLElement {
                     <li><a href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a></li>
                     <li><a href="${BW_HEADER_LINKS.reviews}">Reviews</a></li>
                     <li><a href="${BW_HEADER_LINKS.guide}">The Guide</a></li>
-                    <li><a href="${BW_HEADER_LINKS.historyStory}">Berlin History Story</a></li>
-                    <li><a href="${BW_HEADER_LINKS.wallTimeline}">Berlin Wall Timeline</a></li>
                     <li><a href="${BW_HEADER_LINKS.privateTour}">Private Tours</a></li>
                   </ul>
                 </li>
@@ -1145,9 +1143,11 @@ class BWHeaderElement extends HTMLElement {
                 </li>
                 <li class="bw-header-dropdown">
                   <button class="bw-header-dropdown-trigger" type="button" aria-expanded="false" aria-controls="${this._hacksMenuId}">
-                    Berlin Hacks <span class="bw-header-caret" aria-hidden="true">⌄</span>
+                    Explore Berlin <span class="bw-header-caret" aria-hidden="true">⌄</span>
                   </button>
                   <ul id="${this._hacksMenuId}" class="bw-header-submenu">
+                    <li><a href="${BW_HEADER_LINKS.historyStory}">Berlin History Story</a></li>
+                    <li><a href="${BW_HEADER_LINKS.wallTimeline}">Berlin Wall Timeline</a></li>
                     <li><a href="${BW_HEADER_LINKS.plan}">All Berlin Tools</a></li>
                     <li><a href="${BW_HEADER_LINKS.dateCheck}">Berlin Date Check</a></li>
                     <li><a href="${BW_HEADER_LINKS.whatsOpen}">What's Open Today</a></li>
@@ -1185,8 +1185,6 @@ class BWHeaderElement extends HTMLElement {
                 <a href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a>
                 <a href="${BW_HEADER_LINKS.reviews}">Reviews</a>
                 <a href="${BW_HEADER_LINKS.guide}">The Guide</a>
-                <a href="${BW_HEADER_LINKS.historyStory}">Berlin History Story</a>
-                <a href="${BW_HEADER_LINKS.wallTimeline}">Berlin Wall Timeline</a>
                 <a href="${BW_HEADER_LINKS.privateTour}">Private Tours</a>
               </details>
 
@@ -1219,7 +1217,9 @@ class BWHeaderElement extends HTMLElement {
                 <a href="${BW_HEADER_LINKS.blogRouteStories}">Tour Route Stories</a>
               </details>
               <details class="bw-header-mobile-section">
-                <summary class="bw-header-mobile-section-label">Berlin Hacks</summary>
+                <summary class="bw-header-mobile-section-label">Explore Berlin</summary>
+                <a href="${BW_HEADER_LINKS.historyStory}">Berlin History Story</a>
+                <a href="${BW_HEADER_LINKS.wallTimeline}">Berlin Wall Timeline</a>
                 <a href="${BW_HEADER_LINKS.plan}">All Berlin Tools</a>
                 <a href="${BW_HEADER_LINKS.dateCheck}">Berlin Date Check</a>
                 <a href="${BW_HEADER_LINKS.whatsOpen}">What's Open Today</a>
