@@ -894,7 +894,7 @@ class BWToolsHubElement extends HTMLElement {
       <section class="bw-tools-hub">
         <div class="bw-hub-hero" aria-labelledby="bw-tools-hub-title">
           <div class="bw-hub-hero-inner">
-            <h1 id="bw-tools-hub-title">Plan your Berlin visit with <span class="bw-highlight">free local tools</span></h1>
+            <h1 id="bw-tools-hub-title">Explore Berlin with <span class="bw-highlight">free local tools</span></h1>
             <p class="bw-hero-lead">Quick calculators, maps, and planning guides to help you choose tickets, time your visit, and make better Berlin decisions in seconds.</p>
           </div>
         </div>
