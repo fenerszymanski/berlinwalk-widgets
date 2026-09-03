@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Cruise Day Window</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --lightgreen: #C5E1A5;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --red: #E63946;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+  }
+  .cdw { max-width: 720px; margin: 0 auto; padding: 14px 12px 8px; }
+  .cdw-head { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .cdw-head h2 { font-size: 1.06rem; margin: 0; color: var(--green); }
+  .cdw-head .cdw-sub { font-size: .74rem; color: #555; }
+  .cdw-controls {
+    display: flex; gap: 10px; flex-wrap: wrap; margin: 10px 0 8px;
+  }
+  .cdw-field { flex: 1 1 150px; min-width: 140px; }
+  .cdw-field label {
+    display: block; font-size: .68rem; font-weight: 700; letter-spacing: .04em;
+    text-transform: uppercase; color: var(--deep); margin-bottom: 3px;
+  }
+  .cdw-field select {
+    width: 100%; padding: 8px 10px; font: inherit; font-size: .9rem;
+    border: 2px solid var(--green); border-radius: 8px; background: #fff; color: var(--ink);
+  }
+  .cdw-canvas-wrap { position: relative; }
+  canvas#cdwBoard { width: 100%; display: block; border-radius: 10px; }
+  .cdw-verdict {
+    margin-top: 10px; border-radius: 10px; padding: 11px 13px;
+    border: 2px solid var(--green); background: #fff;
+  }
+  .cdw-verdict.go { border-color: var(--green); }
+  .cdw-verdict.tight { border-color: #b98a00; }
+  .cdw-verdict.no { border-color: var(--red); }
+  .cdw-badge {
+    display: inline-block; font-size: .68rem; font-weight: 800; letter-spacing: .06em;
+    padding: 3px 9px; border-radius: 99px; margin-bottom: 5px;
+  }
+  .cdw-badge.go { background: var(--yellow); color: var(--deep); }
+  .cdw-badge.tight { background: #ffe9a8; color: #6b4e00; }
+  .cdw-badge.no { background: var(--red); color: #fff; }
+  .cdw-verdict h3 { margin: 0 0 4px; font-size: 1rem; color: var(--deep); }
+  .cdw-verdict p { margin: 3px 0; font-size: .84rem; line-height: 1.45; }
+  .cdw-verdict p strong { color: var(--deep); }
+  .cdw-fine {
+    margin-top: 8px; font-size: .68rem; color: #666; line-height: 1.45;
+  }
+</style>
+</head>
+<body>
+<div class="cdw">
+  <div class="cdw-head">
+    <h2>Berlin Cruise Day Window</h2>
+    <span class="cdw-sub">Your ship times against the real Warnemünde trains</span>
+  </div>
+  <div class="cdw-controls">
+    <div class="cdw-field">
+      <label for="cdwDock">Gangway open by</label>
+      <select id="cdwDock"></select>
+    </div>
+    <div class="cdw-field">
+      <label for="cdwAboard">All aboard at</label>
+      <select id="cdwAboard"></select>
+    </div>
+  </div>
+  <div class="cdw-canvas-wrap">
+    <canvas id="cdwBoard" aria-label="Timeline of trains between Warnemünde and Berlin with your usable window"></canvas>
+  </div>
+  <div class="cdw-verdict" id="cdwVerdict" role="status"></div>
+  <div class="cdw-fine" id="cdwFine"></div>
+</div>
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  'use strict';
+  var DATA = null;
+  var dockSel = document.getElementById('cdwDock');
+  var aboardSel = document.getElementById('cdwAboard');
+  var canvas = document.getElementById('cdwBoard');
+  var verdictEl = document.getElementById('cdwVerdict');
+  var fineEl = document.getElementById('cdwFine');
+
+  function toMin(hhmm) {
+    var p = hhmm.split(':');
+    return parseInt(p[0], 10) * 60 + parseInt(p[1], 10);
+  }
+  function fmt(min) {
+    var h = Math.floor(min / 60), m = min % 60;
+    return (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m;
+  }
+  function fmtDur(min) {
+    var h = Math.floor(min / 60), m = min % 60;
+    if (h <= 0) { return m + ' min'; }
+    return h + ' h ' + (m < 10 ? '0' : '') + m + ' min';
+  }
+
+  function fillSelects() {
+    var i, t, opt;
+    for (i = 0; i <= 10; i++) {
+      t = 6 * 60 + i * 30;
+      opt = document.createElement('option');
+      opt.value = String(t);
+      opt.textContent = fmt(t);
+      if (t === 7 * 60 + 30) { opt.selected = true; }
+      dockSel.appendChild(opt);
+    }
+    for (i = 0; i <= 16; i++) {
+      t = 14 * 60 + i * 30;
+      opt = document.createElement('option');
+      opt.value = String(t);
+      opt.textContent = fmt(t);
+      if (t === 19 * 60 + 30) { opt.selected = true; }
+      aboardSel.appendChild(opt);
+    }
+  }
+
+  function compute() {
+    var dock = parseInt(dockSel.value, 10);
+    var aboard = parseInt(aboardSel.value, 10);
+    var ready = dock + DATA.assumptions.gangwayToTrainMinutes;
+    var pierDeadline = aboard - DATA.assumptions.pierBufferMinutes;
+
+    var out = null, i, o;
+    for (i = 0; i < DATA.outbound.length; i++) {
+      o = DATA.outbound[i];
+      if (toMin(o.dep) >= ready) { out = o; break; }
+    }
+    var feasible = DATA.returns.filter(function (r) { return toMin(r.arr) <= pierDeadline; });
+    var last = feasible.length ? feasible[feasible.length - 1] : null;
+    var pick = feasible.length > 1 ? feasible[feasible.length - 2] : last;
+
+    var total = null;
+    if (out && pick) {
+      total = toMin(pick.dep) - toMin(out.arr);
+    }
+    return { dock: dock, aboard: aboard, ready: ready, pierDeadline: pierDeadline,
+      out: out, last: last, pick: pick, total: total };
+  }
+
+  var DAY_START = 5 * 60, DAY_END = 23 * 60;
+
+  function draw(state) {
+    var dpr = window.devicePixelRatio || 1;
+    var cssW = canvas.clientWidth || canvas.parentNode.clientWidth || 640;
+    var narrow = cssW < 480;
+    var barH = 15, subGap = 4;
+    var laneOutTop = 34, laneBackTop = laneOutTop + 2 * (barH + subGap) + 34;
+    var axisY = laneBackTop + 2 * (barH + subGap) + 8;
+    var cssH = axisY + 26;
+    canvas.width = Math.round(cssW * dpr);
+    canvas.height = Math.round(cssH * dpr);
+    canvas.style.height = cssH + 'px';
+    var ctx = canvas.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    var padL = 8, padR = 8;
+    function x(min) {
+      return padL + (min - DAY_START) / (DAY_END - DAY_START) * (cssW - padL - padR);
+    }
+
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, cssW, cssH);
+
+    var winStart = state.out ? toMin(state.out.arr) : null;
+    var winEnd = state.pick ? toMin(state.pick.dep) : null;
+    if (winStart !== null && winEnd !== null && winEnd > winStart) {
+      ctx.fillStyle = 'rgba(255,230,0,0.30)';
+      ctx.fillRect(x(winStart), 18, x(winEnd) - x(winStart), axisY - 24);
+    }
+
+    ctx.strokeStyle = '#e4e4e4';
+    ctx.fillStyle = '#777777';
+    ctx.font = '10px Montserrat, sans-serif';
+    ctx.textAlign = 'center';
+    var h;
+    for (h = 5; h <= 23; h += (narrow ? 3 : 2)) {
+      var hx = x(h * 60);
+      ctx.beginPath();
+      ctx.moveTo(hx, 18);
+      ctx.lineTo(hx, axisY);
+      ctx.stroke();
+      ctx.fillText((h < 10 ? '0' : '') + h + ':00', hx, axisY + 14);
+    }
+
+    ctx.textAlign = 'left';
+    ctx.font = '700 10px Montserrat, sans-serif';
+    ctx.fillStyle = '#1B5E20';
+    ctx.fillText('SHIP → BERLIN', padL, laneOutTop - 5);
+    ctx.fillText('BERLIN → SHIP', padL, laneBackTop - 5);
+
+    function bar(dep, arr, top, sub, isPicked, isLast, type) {
+      var y = top + sub * (barH + subGap);
+      var bx = x(dep), bw = Math.max(3, x(arr) - x(dep));
+      ctx.fillStyle = isPicked ? '#1B5E20' : (type === 'IC' ? '#C5E1A5' : '#7CB342');
+      ctx.fillRect(bx, y, bw, barH);
+      if (isPicked) {
+        ctx.fillStyle = '#FFE600';
+        ctx.fillRect(bx, y, 3, barH);
+      }
+      if (isLast && !isPicked) {
+        ctx.strokeStyle = '#123D18';
+        ctx.setLineDash([3, 2]);
+        ctx.strokeRect(bx + 0.5, y + 0.5, bw - 1, barH - 1);
+        ctx.setLineDash([]);
+      }
+      ctx.font = '700 9px Montserrat, sans-serif';
+      ctx.fillStyle = isPicked ? '#FFE600' : '#123D18';
+      if (!narrow || isPicked || isLast) {
+        ctx.fillText(fmt(dep), bx + 5, y + barH - 4);
+      }
+    }
+
+    var i, o, r;
+    for (i = 0; i < DATA.outbound.length; i++) {
+      o = DATA.outbound[i];
+      bar(toMin(o.dep), toMin(o.arr), laneOutTop, i % 2, state.out && o.dep === state.out.dep, false, o.type);
+    }
+    for (i = 0; i < DATA.returns.length; i++) {
+      r = DATA.returns[i];
+      var picked = state.pick && r.dep === state.pick.dep;
+      var isLast = state.last && r.dep === state.last.dep;
+      bar(toMin(r.dep), toMin(r.arr), laneBackTop, i % 2, picked, isLast, r.type);
+    }
+
+    function marker(min, label, color, yText) {
+      var mx = x(min);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(mx, 18);
+      ctx.lineTo(mx, axisY);
+      ctx.stroke();
+      ctx.lineWidth = 1;
+      ctx.fillStyle = color;
+      ctx.font = '700 9px Montserrat, sans-serif';
+      var align = mx > cssW - 110 ? 'right' : 'left';
+      ctx.textAlign = align;
+      ctx.fillText(label, align === 'right' ? mx - 4 : mx + 4, yText);
+      ctx.textAlign = 'left';
+    }
+    marker(state.dock, 'GANGWAY ' + fmt(state.dock), '#1B5E20', 12);
+    marker(state.aboard, 'ALL ABOARD ' + fmt(state.aboard), '#E63946', 12);
+    marker(state.pierDeadline, 'BACK ON PIER ' + fmt(state.pierDeadline), '#b98a00', axisY - 4);
+
+    if (winStart !== null && winEnd !== null && winEnd > winStart) {
+      ctx.fillStyle = '#123D18';
+      ctx.font = '800 11px Montserrat, sans-serif';
+      ctx.textAlign = 'center';
+      var midY = (laneOutTop + 2 * (barH + subGap) + laneBackTop) / 2;
+      ctx.fillText('BERLIN: ' + fmtDur(winEnd - winStart), (x(winStart) + x(winEnd)) / 2, midY);
+      ctx.textAlign = 'left';
+    }
+  }
+
+  function verdict(state) {
+    var cls, badge, title, body;
+    if (!state.out || !state.pick || state.total === null || state.total < 60) {
+      cls = 'no'; badge = 'STAY LOCAL';
+      title = 'This port day does not pay for Berlin';
+      body = '<p>With the gangway open at <strong>' + fmt(state.dock) + '</strong> and all aboard at <strong>' +
+        fmt(state.aboard) + '</strong>, the trains leave you ' +
+        (state.total !== null && state.total > 0 ? 'only <strong>' + fmtDur(state.total) + '</strong>' : 'no real time') +
+        ' in the city. Spend the day on Warnemünde beach and in Rostock’s old town instead; both are minutes from the pier.</p>';
+    } else {
+      var hoursTotal = state.total;
+      cls = hoursTotal >= 240 ? 'go' : 'tight';
+      badge = hoursTotal >= 240 ? 'BERLIN WORKS' : 'TIGHT BUT POSSIBLE';
+      title = fmtDur(hoursTotal) + ' in central Berlin';
+      var hasSpare = state.last && state.last.dep !== state.pick.dep;
+      body = '<p><strong>Out:</strong> leave Warnemünde ' + fmt(toMin(state.out.dep)) + ' (' + state.out.note +
+        '), in the city ' + fmt(toMin(state.out.arr)) + '.</p>' +
+        '<p><strong>Back (my pick):</strong> the ' + fmt(toMin(state.pick.dep)) + ' from Berlin (' + state.pick.note +
+        '), on the pier ' + fmt(toMin(state.pick.arr)) +
+        (hasSpare ?
+          ', with the ' + fmt(toMin(state.last.dep)) + ' (arriving ' + fmt(toMin(state.last.arr)) + ') as your spare before the ' + fmt(state.aboard) + ' all aboard.' :
+          '. This is the only train that safely fits your ' + fmt(state.aboard) + ' all aboard, so there is no spare behind it. Be at the station early.') + '</p>' +
+        (hoursTotal < 240 ?
+          '<p>Under four hours means one walking line and no museum. Doable, but only if you would truly regret skipping Berlin.</p>' :
+          '<p>Enough for the Reichstag, Brandenburg Gate, Unter den Linden, Museum Island and Alexanderplatz on foot, with lunch.</p>');
+    }
+    verdictEl.className = 'cdw-verdict ' + cls;
+    verdictEl.innerHTML = '<span class="cdw-badge ' + cls + '">' + badge + '</span>' +
+      '<h3>' + title + '</h3>' + body;
+  }
+
+  function update() {
+    var state = compute();
+    draw(state);
+    verdict(state);
+  }
+
+  function boot(data) {
+    DATA = data;
+    fillSelects();
+    fineEl.textContent = 'Times from the Deutsche Bahn timetable, checked on ' + DATA.checkedOn +
+      '. Assumes ' + DATA.assumptions.gangwayToTrainMinutes + ' min from gangway to platform and being back on the pier ' +
+      DATA.assumptions.pierBufferMinutes + ' min before all aboard. Single departures shift; recheck your exact date on bahn.de.';
+    dockSel.addEventListener('change', update);
+    aboardSel.addEventListener('change', update);
+    window.addEventListener('resize', update);
+    update();
+  }
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(boot).catch(function () {
+    fineEl.textContent = 'The timetable could not load. Check trains for your date on bahn.de: Warnemünde to Berlin Hbf.';
+  });
+})();
+</script>
+</body>
+</html>

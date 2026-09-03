@@ -1,0 +1,31 @@
+{
+ "checkedOn": "3 September 2026",
+ "source": "Deutsche Bahn journey planner, Warnemünde and Berlin Hbf, September 2026 timetable",
+ "assumptions": {
+  "gangwayToTrainMinutes": 25,
+  "pierBufferMinutes": 90
+ },
+ "outbound": [
+  { "dep": "05:33", "arr": "08:26", "type": "IC", "note": "S-Bahn + IC to Berlin Ostkreuz" },
+  { "dep": "06:03", "arr": "09:13", "type": "RE", "note": "S-Bahn + RE5 to Berlin Hbf" },
+  { "dep": "07:03", "arr": "10:12", "type": "RE", "note": "S-Bahn + RE50 + RE5 to Berlin Hbf" },
+  { "dep": "07:33", "arr": "10:26", "type": "IC", "note": "S-Bahn + IC to Berlin Ostkreuz" },
+  { "dep": "08:03", "arr": "11:11", "type": "RE", "note": "S-Bahn + RE5 to Berlin Hbf" },
+  { "dep": "08:59", "arr": "12:11", "type": "RE", "note": "S-Bahn + RE50 + RE5 to Berlin Hbf" },
+  { "dep": "09:49", "arr": "12:26", "type": "IC", "note": "S-Bahn + IC to Berlin Ostkreuz" },
+  { "dep": "09:59", "arr": "13:11", "type": "RE", "note": "S-Bahn + RE5 to Berlin Hbf" }
+ ],
+ "returns": [
+  { "dep": "13:11", "arr": "16:08", "type": "IC", "note": "S-Bahn to Ostkreuz, IC north" },
+  { "dep": "13:46", "arr": "16:58", "type": "RE", "note": "RE5 + RE50 from Berlin Hbf" },
+  { "dep": "14:46", "arr": "17:58", "type": "RE", "note": "RE5 direct from Berlin Hbf" },
+  { "dep": "15:11", "arr": "18:08", "type": "IC", "note": "S-Bahn to Ostkreuz, IC north" },
+  { "dep": "15:46", "arr": "18:58", "type": "RE", "note": "RE5 + RE50 from Berlin Hbf" },
+  { "dep": "16:46", "arr": "19:54", "type": "RE", "note": "RE5 direct from Berlin Hbf" },
+  { "dep": "17:16", "arr": "20:09", "type": "IC", "note": "S-Bahn to Ostkreuz, IC north" },
+  { "dep": "17:46", "arr": "20:54", "type": "RE", "note": "RE5 + RE50 from Berlin Hbf" },
+  { "dep": "18:46", "arr": "21:54", "type": "RE", "note": "RE5 direct from Berlin Hbf" },
+  { "dep": "19:11", "arr": "22:09", "type": "IC", "note": "S-Bahn to Ostkreuz, IC north" },
+  { "dep": "19:46", "arr": "22:54", "type": "RE", "note": "RE5 + RE50 from Berlin Hbf" }
+ ]
+}
