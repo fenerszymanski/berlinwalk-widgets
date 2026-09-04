@@ -1,0 +1,24 @@
+{
+  "checkedOn": "4 September 2026",
+  "products": {
+    "vbb24abc": { "label": "24-hour ticket Berlin ABC", "short": "24h ABC", "type": "perPerson", "price": 12.9, "color": "#7CB342" },
+    "kleingruppe": { "label": "24-hour small group ABC, up to 5", "short": "Small group ABC", "type": "flat", "price": 37.7, "color": "#212121", "dash": true },
+    "bb": { "label": "Brandenburg-Berlin-Ticket, up to 5", "short": "BB-Ticket", "type": "flat", "price": 36.5, "color": "#1B5E20", "nineRule": true },
+    "qdl": { "label": "Quer-durchs-Land-Ticket, up to 5", "short": "Quer-durchs-Land", "type": "basePlus", "base": 51, "extra": 12, "color": "#1B5E20", "nineRule": true },
+    "dticket": { "label": "Deutschlandticket, per person per month", "short": "Deutschlandticket", "type": "perPerson", "price": 63, "color": "#8D6E63", "monthly": true },
+    "dticketszc": { "label": "Deutschlandticket plus Tantow to Szczecin 24h add-on", "short": "Deutschlandticket + add-on", "type": "perPerson", "price": 71.8, "ownedPrice": 8.8, "color": "#8D6E63", "monthly": true },
+    "szc24": { "label": "24-hour Berlin to Szczecin ticket", "short": "Szczecin 24h", "type": "perPerson", "price": 33.6, "color": "#7CB342" },
+    "iceband": { "label": "ICE or EC advance fares, day return", "short": "ICE advance fares", "type": "band", "lo": 6.99, "hi": 21.99, "color": "#C5A100" }
+  },
+  "destinations": [
+    { "id": "potsdam", "name": "Potsdam", "ride": "S-Bahn or regional train, roughly 30 minutes", "products": ["vbb24abc", "kleingruppe", "bb", "dticket"], "note": "Potsdam Hauptbahnhof sits inside the Berlin ABC zone, so normal Berlin ABC tickets cover the whole ride." },
+    { "id": "sachsenhausen", "name": "Sachsenhausen memorial (Oranienburg)", "ride": "S1 from Friedrichstrasse, about 45 minutes", "products": ["vbb24abc", "kleingruppe", "bb", "dticket"], "note": "Oranienburg is still zone C. From the station, walk 20 minutes or take bus 804 or 821 to the memorial." },
+    { "id": "spreewald", "name": "Spreewald (Luebbenau)", "ride": "RE2 or RE7 from Ostkreuz, about 1 hour", "products": ["bb", "dticket"], "note": "Get off at Luebbenau (Spreewald), not Luebben one stop earlier. Luebbenau is outside Berlin ABC, so city tickets end before it." },
+    { "id": "tropical", "name": "Tropical Islands (Brand)", "ride": "RE2 or RB24 from Ostkreuz, about 45 minutes", "products": ["bb", "dticket"], "note": "A free shuttle timed to the trains waits at Brand station. It does not wait for a badly delayed train." },
+    { "id": "szczecin", "name": "Szczecin (Poland)", "ride": "RE3 plus a works bus, about 3 hours", "products": ["szc24", "bb", "dticketszc"], "note": "The direct line is being rebuilt until December 2026, so part of every trip is a bus. The faster all-rail detour via Pasewalk sits outside this tariff and needs a normal DB ticket." },
+    { "id": "dresden", "name": "Dresden", "ride": "fast train about 1h40, regional about 3h via Elsterwerda", "products": ["iceband", "qdl", "dticket"], "fastNotCovered": true, "note": "The fast Berlin to Dresden trains are long-distance services. Group tickets and the Deutschlandticket only work on the slower regional route with a change at Elsterwerda." },
+    { "id": "leipzig", "name": "Leipzig", "ride": "ICE a little over 1 hour, regional about 3h via Wittenberg", "products": ["iceband", "qdl", "dticket"], "fastNotCovered": true, "note": "Regional tickets mean the RE3 to Lutherstadt Wittenberg and the S2 onwards, about three hours each way. The ICE from the low-level platforms at Hauptbahnhof is the day-trip train." },
+    { "id": "hamburg", "name": "Hamburg", "ride": "ICE just under 2 hours", "products": ["iceband"], "note": "The regional route eats most of the day each way, so for a Hamburg day trip the ICE is the only realistic train. Book a specific train each way as an advance fare." }
+  ],
+  "holidays": ["2026-10-03", "2026-12-25", "2026-12-26", "2027-01-01", "2027-03-26", "2027-03-29", "2027-05-01", "2027-05-06", "2027-05-17", "2027-10-03"]
+}

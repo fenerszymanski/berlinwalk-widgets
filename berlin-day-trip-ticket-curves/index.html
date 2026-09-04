@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Day Trip Ticket Curves</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --lightgreen: #C5E1A5;
+    --cream: #FAFAF5;
+    --ink: #212121;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .dtc { max-width: 720px; margin: 0 auto; padding: 14px 12px 10px; }
+  .dtc-head h2 { font-size: 1.08rem; margin: 0; color: var(--green); }
+  .dtc-head p { margin: 3px 0 0; font-size: .74rem; color: #555; }
+  .dtc-controls { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0 4px; }
+  .dtc-field { flex: 1 1 155px; min-width: 145px; }
+  .dtc-field label { display: block; font-size: .66rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--deep); margin-bottom: 3px; }
+  .dtc-field select, .dtc-field input[type=date] {
+    width: 100%; padding: 8px 10px; font: inherit; font-size: .88rem;
+    border: 2px solid var(--green); border-radius: 8px; background: #fff; color: var(--ink);
+  }
+  .dtc-group { display: flex; gap: 6px; }
+  .dtc-group button {
+    flex: 1; padding: 8px 0; font: inherit; font-size: .92rem; font-weight: 700; cursor: pointer;
+    border: 2px solid var(--green); border-radius: 8px; background: #fff; color: var(--green);
+  }
+  .dtc-group button[aria-pressed="true"] { background: var(--green); color: #fff; }
+  .dtc-own { display: flex; align-items: center; gap: 8px; margin: 8px 0 2px; font-size: .8rem; color: var(--ink); }
+  .dtc-own input { width: 17px; height: 17px; accent-color: var(--green); }
+  .dtc-badge {
+    display: inline-block; margin: 8px 0 2px; padding: 4px 10px; border-radius: 999px;
+    background: var(--yellow); color: var(--deep); font-size: .72rem; font-weight: 700;
+  }
+  .dtc-badge.dtc-badge-free { background: var(--lightgreen); color: var(--deep); }
+  .dtc-chartwrap { margin: 8px 0 2px; }
+  canvas { display: block; width: 100%; height: auto; }
+  .dtc-verdict {
+    margin: 10px 0 6px; padding: 11px 13px; border-radius: 10px;
+    background: var(--yellow); color: var(--deep); font-size: .88rem; line-height: 1.45;
+  }
+  .dtc-verdict strong { color: var(--deep); }
+  .dtc-note { margin: 6px 0 0; font-size: .76rem; line-height: 1.5; color: #444; }
+  .dtc-foot { margin: 10px 0 0; font-size: .68rem; color: #777; }
+</style>
+</head>
+<body>
+<div class="dtc">
+  <div class="dtc-head">
+    <h2>Berlin Day Trip Ticket Curves</h2>
+    <p>Total ticket cost for your whole group, out and back in one day. Prices checked on 4 September 2026.</p>
+  </div>
+  <div class="dtc-controls">
+    <div class="dtc-field">
+      <label for="dtc-dest">Where is the day trip going?</label>
+      <select id="dtc-dest"></select>
+    </div>
+    <div class="dtc-field">
+      <label for="dtc-date">Which day?</label>
+      <input type="date" id="dtc-date">
+    </div>
+    <div class="dtc-field">
+      <label id="dtc-group-label">How many of you?</label>
+      <div class="dtc-group" role="group" aria-labelledby="dtc-group-label" id="dtc-group"></div>
+    </div>
+  </div>
+  <label class="dtc-own"><input type="checkbox" id="dtc-own"> We already hold Deutschlandtickets for this month</label>
+  <div id="dtc-badge"></div>
+  <div class="dtc-chartwrap"><canvas id="dtc-canvas" aria-label="Chart of total ticket cost against group size for each ticket option"></canvas></div>
+  <div class="dtc-verdict" id="dtc-verdict"></div>
+  <p class="dtc-note" id="dtc-note"></p>
+  <p class="dtc-foot">Second-class prices for adults. Up to three children aged 6 to 14 ride free on the Brandenburg-Berlin and Quer-durchs-Land tickets. Public holidays follow the weekend rules. Advance ICE fares are floor prices and climb as the train fills.</p>
+</div>
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  'use strict';
+  var DATA = null;
+  var state = { dest: 'potsdam', size: 2, owned: false, date: '' };
+  var canvas = document.getElementById('dtc-canvas');
+  var ctx = canvas.getContext('2d');
+
+  function euros(v) { return v.toFixed(2).replace(/\.00$/, '') + ' euros'; }
+
+  function isWeekendLike(iso) {
+    if (!iso) return false;
+    if (DATA.holidays.indexOf(iso) >= 0) return true;
+    var d = new Date(iso + 'T12:00:00');
+    var day = d.getDay();
+    return day === 0 || day === 6;
+  }
+
+  function productTotals(prodId, n) {
+    var p = DATA.products[prodId];
+    if (p.type === 'flat') return { lo: p.price, hi: p.price };
+    if (p.type === 'basePlus') { var t = p.base + p.extra * (n - 1); return { lo: t, hi: t }; }
+    if (p.type === 'band') return { lo: 2 * p.lo * n, hi: 2 * p.hi * n };
+    var unit = p.price;
+    if (p.monthly && state.owned) unit = (typeof p.ownedPrice === 'number') ? p.ownedPrice : 0;
+    return { lo: unit * n, hi: unit * n };
+  }
+
+  function destination() {
+    var found = DATA.destinations[0];
+    DATA.destinations.forEach(function (d) { if (d.id === state.dest) found = d; });
+    return found;
+  }
+
+  function draw() {
+    var d = destination();
+    var prods = d.products;
+    var wrap = canvas.parentElement;
+    var cssW = Math.max(280, wrap.clientWidth);
+    var cssH = Math.min(360, Math.max(250, Math.round(cssW * 0.52)));
+    var dpr = window.devicePixelRatio || 1;
+    canvas.width = Math.round(cssW * dpr);
+    canvas.height = Math.round(cssH * dpr);
+    canvas.style.height = cssH + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    var maxY = 10;
+    prods.forEach(function (id) {
+      for (var n = 1; n <= 5; n++) { var t = productTotals(id, n); if (t.hi > maxY) maxY = t.hi; }
+    });
+    maxY = Math.ceil(maxY / 50) * 50;
+
+    var padL = 46, padR = 14, padT = 16, padB = 34;
+    var plotW = cssW - padL - padR, plotH = cssH - padT - padB;
+    var x = function (n) { return padL + plotW * (n - 1) / 4; };
+    var y = function (v) { return padT + plotH * (1 - v / maxY); };
+
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillRect(0, 0, cssW, cssH);
+
+    ctx.strokeStyle = '#E4E4DC';
+    ctx.fillStyle = '#777';
+    ctx.lineWidth = 1;
+    ctx.font = '11px Montserrat, sans-serif';
+    ctx.textAlign = 'right';
+    for (var g = 0; g <= 4; g++) {
+      var val = maxY * g / 4;
+      ctx.beginPath();
+      ctx.moveTo(padL, y(val));
+      ctx.lineTo(cssW - padR, y(val));
+      ctx.stroke();
+      ctx.fillText(Math.round(val) + '€', padL - 6, y(val) + 4);
+    }
+    for (var n = 1; n <= 5; n++) {
+      ctx.textAlign = n === 1 ? 'left' : n === 5 ? 'right' : 'center';
+      ctx.fillText(n + (n === 1 ? ' person' : ' people'), x(n) + (n === 1 ? -6 : n === 5 ? 6 : 0), cssH - padB + 18);
+    }
+
+    ctx.fillStyle = 'rgba(255, 230, 0, 0.14)';
+    ctx.fillRect(x(state.size) - plotW / 10, padT, plotW / 5, plotH);
+
+    prods.forEach(function (id) {
+      var p = DATA.products[id];
+      if (p.type === 'band') {
+        ctx.beginPath();
+        for (var i = 1; i <= 5; i++) { var t = productTotals(id, i); if (i === 1) ctx.moveTo(x(i), y(t.lo)); else ctx.lineTo(x(i), y(t.lo)); }
+        for (var j = 5; j >= 1; j--) { var u = productTotals(id, j); ctx.lineTo(x(j), y(u.hi)); }
+        ctx.closePath();
+        ctx.fillStyle = 'rgba(197, 225, 165, 0.5)';
+        ctx.fill();
+        ctx.strokeStyle = p.color;
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([5, 4]);
+        ctx.beginPath();
+        for (var k = 1; k <= 5; k++) { var v = productTotals(id, k); if (k === 1) ctx.moveTo(x(k), y(v.lo)); else ctx.lineTo(x(k), y(v.lo)); }
+        ctx.stroke();
+        ctx.setLineDash([]);
+      } else {
+        ctx.strokeStyle = p.color;
+        ctx.lineWidth = (p.type === 'flat') ? 3 : 2;
+        ctx.setLineDash(p.monthly ? [3, 4] : p.dash ? [8, 5] : []);
+        ctx.beginPath();
+        for (var m = 1; m <= 5; m++) { var w = productTotals(id, m); if (m === 1) ctx.moveTo(x(m), y(w.lo)); else ctx.lineTo(x(m), y(w.lo)); }
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+      var at = productTotals(id, state.size);
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(x(state.size), y(at.lo), 4.5, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    ctx.textAlign = 'left';
+    ctx.font = '700 11px Montserrat, sans-serif';
+    var ly = padT + 4;
+    prods.forEach(function (id) {
+      var p = DATA.products[id];
+      ctx.fillStyle = p.color;
+      ctx.fillRect(padL + 8, ly - 8, 14, 4);
+      ctx.fillStyle = '#333';
+      var tag = p.short;
+      if (p.monthly && state.owned) tag = tag + ' (already paid)';
+      ctx.fillText(tag, padL + 27, ly - 2);
+      ly = ly + 16;
+    });
+  }
+
+  function verdict() {
+    var d = destination();
+    var n = state.size;
+    var weekendLike = isWeekendLike(state.date);
+    var bestFixed = null;
+    var band = null;
+    d.products.forEach(function (id) {
+      var p = DATA.products[id];
+      var t = productTotals(id, n);
+      if (p.type === 'band') { band = { id: id, p: p, lo: t.lo, hi: t.hi }; return; }
+      if (!bestFixed || t.lo < bestFixed.lo) bestFixed = { id: id, p: p, lo: t.lo };
+    });
+    var parts = '';
+    var who = n === 1 ? 'One person' : n + ' people';
+    if (!bestFixed) {
+      parts = '<strong>' + who + ' to ' + d.name + ':</strong> booked ahead, <strong>ICE advance fares</strong> start around <strong>' + euros(band.lo) + '</strong> for everyone, day return. That floor climbs as trains fill, so anything under ' + euros(band.hi) + ' is a fair deal.';
+    } else if (bestFixed.p.monthly && state.owned && bestFixed.lo === 0) {
+      parts = '<strong>' + who + ' to ' + d.name + ':</strong> your <strong>Deutschlandtickets</strong> already cover the whole regional ride, so the trains cost <strong>nothing extra</strong>.';
+    } else {
+      var suffix = bestFixed.p.monthly && state.owned ? ' extra on top of the Deutschlandtickets you already hold' : ' total for the whole group';
+      parts = '<strong>' + who + ' to ' + d.name + ':</strong> the cheapest fixed price is the <strong>' + bestFixed.p.short + '</strong> at <strong>' + euros(bestFixed.lo) + '</strong>' + suffix + '.';
+      if (bestFixed.p.nineRule && !weekendLike) parts = parts + ' On your weekday date it is valid from <strong>09:00</strong>, so plan the first train after nine.';
+      if (band && band.lo < bestFixed.lo) parts = parts + ' Booked early, ICE advance fares can beat it from ' + euros(band.lo) + ' return for everyone, but only while the cheap tiers last.';
+    }
+    var iceHint = '';
+    if (d.fastNotCovered) iceHint = ' The fast train is a separate long-distance fare; the shaded band shows where early bookings land.';
+    document.getElementById('dtc-verdict').innerHTML = parts + iceHint;
+    document.getElementById('dtc-note').textContent = d.ride.charAt(0).toUpperCase() + d.ride.slice(1) + '. ' + d.note;
+    var badge = document.getElementById('dtc-badge');
+    if (state.date) {
+      var cls = weekendLike ? 'dtc-badge dtc-badge-free' : 'dtc-badge';
+      var txt = weekendLike
+        ? 'Weekend or holiday: group tickets are valid from the first train of the day'
+        : 'Weekday: Brandenburg-Berlin and Quer-durchs-Land tickets start at 09:00';
+      badge.innerHTML = '<span class="' + cls + '">' + txt + '</span>';
+    } else {
+      badge.innerHTML = '';
+    }
+  }
+
+  function render() { draw(); verdict(); }
+
+  function buildControls() {
+    var sel = document.getElementById('dtc-dest');
+    var opts = '';
+    DATA.destinations.forEach(function (d) { opts = opts + '<option value="' + d.id + '">' + d.name + '</option>'; });
+    sel.innerHTML = opts;
+    sel.value = state.dest;
+    sel.addEventListener('change', function () { state.dest = sel.value; render(); });
+
+    var group = document.getElementById('dtc-group');
+    var html = '';
+    for (var i = 1; i <= 5; i++) html = html + '<button type="button" data-n="' + i + '" aria-pressed="' + (i === state.size) + '">' + i + '</button>';
+    group.innerHTML = html;
+    group.addEventListener('click', function (ev) {
+      var b = ev.target.closest('button');
+      if (!b) return;
+      state.size = parseInt(b.getAttribute('data-n'), 10);
+      var all = group.querySelectorAll('button');
+      for (var k = 0; k < all.length; k++) all[k].setAttribute('aria-pressed', String(all[k] === b));
+      render();
+    });
+
+    var dateInput = document.getElementById('dtc-date');
+    var tomorrow = new Date(Date.now() + 86400000);
+    var iso = tomorrow.toISOString().slice(0, 10);
+    dateInput.value = iso;
+    state.date = iso;
+    dateInput.addEventListener('change', function () { state.date = dateInput.value; render(); });
+
+    var own = document.getElementById('dtc-own');
+    own.addEventListener('change', function () { state.owned = own.checked; render(); });
+
+    window.addEventListener('resize', render);
+  }
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (json) {
+    DATA = json;
+    buildControls();
+    render();
+  });
+})();
+</script>
+</body>
+</html>

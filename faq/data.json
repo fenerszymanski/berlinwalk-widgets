@@ -10449,5 +10449,35 @@
         "a": "**Carry it.** Poland and Germany are both in Schengen, but Germany runs temporary checks at its land borders, extended through 15 September 2026 and notified onward into March 2027, so police can board the bus or train for spot ID checks. A passport or EU ID card is enough; note that Poland uses the złoty, though cards are accepted almost everywhere."
       }
     ]
+  },
+  "berlin-day-trip-train-tickets": {
+    "title": "Train Tickets for Day Trips from Berlin - FAQ",
+    "subtitle": "Which ticket actually wins for each destination and group size, and where the 09:00 weekday rule bites.",
+    "items": [
+      {
+        "q": "What is the cheapest train ticket for a day trip from Berlin?",
+        "a": "**It depends on where you go and how many of you travel.** Inside Brandenburg, the Brandenburg-Berlin-Ticket is 36.50 euros flat for up to 5 people, while solo travellers to Potsdam or Sachsenhausen do better with a 12.90 euro 24 hour Berlin ABC ticket. Beyond Brandenburg, the Quer-durchs-Land-Ticket costs 51 euros plus 12 per extra person, and early ICE bookings start at 6.99 euros each way. The break-even points move with group size, which is exactly what the chart in this guide shows."
+      },
+      {
+        "q": "What is the Brandenburg-Berlin-Ticket and where is it valid?",
+        "a": "**A flat 36.50 euro day ticket for up to 5 people on regional trains (RE and RB) plus VBB local transport.** It covers the whole of Berlin and Brandenburg, so Potsdam, Oranienburg, Luebbenau in the Spreewald, Brand for Tropical Islands and Frankfurt an der Oder are all inside, and it even reaches Szczecin in Poland including the city trams there. On weekdays it starts at 09:00; on weekends and public holidays it works all day. Buying at a DB travel centre costs 2 euros more than online or at a machine."
+      },
+      {
+        "q": "Does the Deutschlandticket cover day trips from Berlin?",
+        "a": "**Yes, on regional trains, and that is the whole trick.** The 63 euro monthly subscription covers every RE, RB and S-Bahn route in this guide, so Potsdam, Sachsenhausen, the Spreewald and even the slow route to Dresden or Leipzig cost nothing extra. It is never valid on ICE, IC or EC trains, and to Szczecin it ends at Tantow, where a 24 hour add-on costs 8.80 euros. It is a subscription, so cancel by the 10th of the month if you only want it once."
+      },
+      {
+        "q": "Is the Quer-durchs-Land-Ticket worth it for Dresden, Leipzig or Hamburg?",
+        "a": "**For groups heading to Dresden or Leipzig on regional trains, usually yes.** It costs 51 euros for the first person and 12 for each additional one, up to 5 people, on regional trains across all of Germany. Four people pay 87 euros total for a Dresden day return that would otherwise need eight separate tickets. The catch is time: the regional route to Dresden or Leipzig takes about three hours each way with a change. For Hamburg the regional route eats the whole day, so book the ICE instead."
+      },
+      {
+        "q": "When is the ICE the better deal for a day trip?",
+        "a": "**When you book early, travel far, or travel alone.** Advance fares start at 6.99 euros each way at the Super Sparpreis floor and around 21.99 at the standard tier, and they are tied to one specific train. Hamburg in just under two hours and Leipzig in a little over one hour only work on the fast trains, and the fast Berlin to Dresden trains are long-distance services too. No group ticket and no Deutschlandticket is valid on ICE, IC or EC, so compare the advance fare against the regional option before you decide."
+      },
+      {
+        "q": "What is the 09:00 rule on German group tickets?",
+        "a": "**On weekdays, the Brandenburg-Berlin-Ticket and the Quer-durchs-Land-Ticket are only valid from 09:00 until 03:00 the next morning.** On Saturdays, Sundays and public holidays they count from midnight, so early starts are free to plan. If you need a weekday train before nine, use single tickets, a 24 hour ticket or the Deutschlandticket for that leg. Up to three children aged 6 to 14 travel free on both group tickets."
+      }
+    ]
   }
 }
