@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-04T14:06:39.395Z",
+  "updatedAt": "2026-09-04T19:00:05.806Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 351,
-  "toolsTotal": 271,
+  "totalPosts": 352,
+  "toolsTotal": 272,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1618,6 +1618,23 @@
   ],
   "latest": [
     {
+      "title": "4 Days in Berlin: What to Do With the Day a Three-Day Trip Cannot Fit",
+      "slug": "4-days-in-berlin",
+      "path": "/post/4-days-in-berlin",
+      "url": "https://www.berlinwalk.com/post/4-days-in-berlin",
+      "excerpt": "Most people who give Berlin four days plan three of them properly and improvise the fourth, then spend it walking back through Mitte past the sights they already saw. The fourth day is the one with no default, which is exactly why it decides how the trip is remembered. Here is what it is actually for, the arithmetic that rules half the options out before you leave the hotel, and the eight real choices with verified travel times from Alexanderplatz.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-04T18:58:28.026Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_b86a4c459881452cad772a52e298f9f2~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-sanssouci-great-fountain.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_b86a4c459881452cad772a52e298f9f2~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-sanssouci-great-fountain.jpg",
+      "alt": "The Great Fountain at Sanssouci with the vineyard terraces and the yellow palace above them",
+      "relatedToolSlug": "berlin-day-four-tradeoff"
+    },
+    {
       "title": "Wittenberg Day Trip from Berlin: Trains, the Theses Door and What Is Actually Open",
       "slug": "wittenberg-day-trip-from-berlin",
       "path": "/post/wittenberg-day-trip-from-berlin",
@@ -1803,26 +1820,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_5d84175462c642fd83c46ed523d25cca~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-central-bus-station-zob-boarding.jpg",
       "alt": "Travellers boarding a green FlixBus coach under the departure board at Berlin ZOB",
       "relatedToolSlug": "berlin-bus-arrival-map"
-    },
-    {
-      "title": "Rent a Boat in Berlin: What You Can Drive, and Where You Can Take It",
-      "slug": "rent-a-boat-in-berlin",
-      "path": "/post/rent-a-boat-in-berlin",
-      "url": "https://www.berlinwalk.com/post/rent-a-boat-in-berlin",
-      "excerpt": "You can rent a 15 hp motorboat, a kayak or a SUP board in Berlin without any licence. What no booking page explains is the map: the stretch past the Reichstag and Museum Island is closed to all of them. Where the rules actually let you go, what it costs, and when the cruise is the honest answer.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "free-budget",
-      "topicLabel": "Free & Budget",
-      "readTime": "7 min read",
-      "publishedDate": "2026-08-30T07:46:45.929Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_9f32307a6a624a05b55fa6e746b47a76~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/rent-a-boat-in-berlin-oberbaum-cruise.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_9f32307a6a624a05b55fa6e746b47a76~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/rent-a-boat-in-berlin-oberbaum-cruise.jpg",
-      "alt": "A sightseeing boat passes under the red twin towers of the Oberbaumbruecke on the Spree",
-      "relatedToolSlug": "berlin-water-access-map"
     }
   ],
   "allPosts": [
+    {
+      "title": "4 Days in Berlin: What to Do With the Day a Three-Day Trip Cannot Fit",
+      "slug": "4-days-in-berlin",
+      "path": "/post/4-days-in-berlin",
+      "url": "https://www.berlinwalk.com/post/4-days-in-berlin",
+      "excerpt": "Most people who give Berlin four days plan three of them properly and improvise the fourth, then spend it walking back through Mitte past the sights they already saw. The fourth day is the one with no default, which is exactly why it decides how the trip is remembered. Here is what it is actually for, the arithmetic that rules half the options out before you leave the hotel, and the eight real choices with verified travel times from Alexanderplatz.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-04T18:58:28.026Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_b86a4c459881452cad772a52e298f9f2~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-sanssouci-great-fountain.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_b86a4c459881452cad772a52e298f9f2~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-sanssouci-great-fountain.jpg",
+      "alt": "The Great Fountain at Sanssouci with the vineyard terraces and the yellow palace above them",
+      "relatedToolSlug": "berlin-day-four-tradeoff"
+    },
     {
       "title": "Wittenberg Day Trip from Berlin: Trains, the Theses Door and What Is Actually Open",
       "slug": "wittenberg-day-trip-from-berlin",

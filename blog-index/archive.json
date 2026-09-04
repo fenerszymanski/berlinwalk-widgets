@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-04T14:06:39.395Z",
+  "updatedAt": "2026-09-04T19:00:05.806Z",
   "source": "Wix Blog API",
-  "totalPosts": 351,
+  "totalPosts": 352,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "4 Days in Berlin: What to Do With the Day a Three-Day Trip Cannot Fit",
+      "slug": "4-days-in-berlin",
+      "path": "/post/4-days-in-berlin",
+      "url": "https://www.berlinwalk.com/post/4-days-in-berlin",
+      "excerpt": "Most people who give Berlin four days plan three of them properly and improvise the fourth, then spend it walking back through Mitte past the sights they already saw. The fourth day is the one with no default, which is exactly why it decides how the trip is remembered. Here is what it is actually for, the arithmetic that rules half the options out before you leave the hotel, and the eight real choices with verified travel times from Alexanderplatz.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-04T18:58:28.026Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_b86a4c459881452cad772a52e298f9f2~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-sanssouci-great-fountain.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_b86a4c459881452cad772a52e298f9f2~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-sanssouci-great-fountain.jpg",
+      "alt": "The Great Fountain at Sanssouci with the vineyard terraces and the yellow palace above them",
+      "relatedToolSlug": "berlin-day-four-tradeoff"
+    },
     {
       "title": "Wittenberg Day Trip from Berlin: Trains, the Theses Door and What Is Actually Open",
       "slug": "wittenberg-day-trip-from-berlin",
