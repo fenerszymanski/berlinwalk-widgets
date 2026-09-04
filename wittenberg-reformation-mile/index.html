@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wittenberg Reformation Mile — BerlinWalk</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root{
+    --bw-green:#1B5E20; --bw-deep:#123D18; --bw-yellow:#FFE600;
+    --bw-lime:#7CB342; --bw-light:#C5E1A5; --bw-cream:#FAFAF5; --bw-ink:#212121;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bw-cream);color:var(--bw-ink)}
+  .wrm{max-width:760px;margin:0 auto;padding:14px 12px 20px;position:relative}
+  .wrm-head h1{font-size:1.22rem;line-height:1.25;margin:0 0 4px;color:var(--bw-deep)}
+  .wrm-head p{margin:0 0 12px;font-size:.86rem;line-height:1.45;color:#3c4a3e}
+  .wrm-head .wrm-kicker{display:inline-block;background:var(--bw-green);color:#fff;font-size:.62rem;letter-spacing:.12em;padding:3px 8px;border-radius:3px;margin-bottom:8px}
+
+  /* distance rail */
+  .wrm-rail{position:relative;height:56px;margin:4px 2px 10px}
+  .wrm-rail-line{position:absolute;left:10px;right:10px;top:26px;height:4px;background:var(--bw-light);border-radius:2px}
+  .wrm-rail-fill{position:absolute;left:10px;top:26px;height:4px;background:var(--bw-green);border-radius:2px;transition:width .25s}
+  .wrm-dot{position:absolute;top:19px;width:18px;height:18px;border-radius:50%;background:#fff;border:3px solid var(--bw-lime);transform:translateX(-50%);cursor:pointer;padding:0}
+  .wrm-dot.on{background:var(--bw-yellow);border-color:var(--bw-deep)}
+  .wrm-rail-cap{position:absolute;top:0;font-size:.6rem;color:#5a675c;letter-spacing:.05em}
+  .wrm-rail-cap.end{right:0}
+  .wrm-rail-km{position:absolute;bottom:0;left:0;right:0;text-align:center;font-size:.62rem;color:#5a675c}
+
+  /* thumb strip */
+  .wrm-strip{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:thin}
+  .wrm-thumb{flex:0 0 86px;border:2px solid transparent;border-radius:9px;padding:0;background:none;cursor:pointer;position:relative}
+  .wrm-thumb img{display:block;width:86px;height:64px;object-fit:cover;border-radius:7px}
+  .wrm-thumb .n{position:absolute;top:3px;left:3px;background:var(--bw-deep);color:#fff;font-size:.62rem;font-weight:700;width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+  .wrm-thumb.on{border-color:var(--bw-green)}
+  .wrm-thumb.on .n{background:var(--bw-yellow);color:var(--bw-deep)}
+
+  /* detail card */
+  .wrm-card{background:#fff;border:1px solid #e2e6df;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(18,61,24,.07)}
+  .wrm-photo{position:relative}
+  .wrm-photo img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
+  .wrm-photo .walkchip{position:absolute;left:10px;bottom:10px;background:var(--bw-yellow);color:var(--bw-deep);font-weight:700;font-size:.74rem;padding:5px 10px;border-radius:16px}
+  .wrm-info{padding:13px 14px 15px}
+  .wrm-info h2{margin:0 0 2px;font-size:1.04rem;color:var(--bw-deep)}
+  .wrm-info .what{margin:0 0 8px;font-size:.85rem;line-height:1.5}
+  .wrm-fact{display:flex;gap:7px;align-items:flex-start;font-size:.8rem;line-height:1.45;margin:0 0 7px;color:#33402f}
+  .wrm-fact .tag{flex:0 0 auto;background:var(--bw-light);color:var(--bw-deep);font-size:.6rem;font-weight:700;letter-spacing:.08em;padding:2px 6px;border-radius:3px;margin-top:2px}
+  .wrm-take{background:var(--bw-cream);border-left:4px solid var(--bw-lime);padding:8px 10px;font-size:.82rem;line-height:1.5;margin-top:9px;border-radius:0 6px 6px 0}
+  .wrm-take b{color:var(--bw-deep)}
+
+  .wrm-nav{display:flex;gap:8px;margin-top:10px}
+  .wrm-nav button{flex:1;border:0;border-radius:8px;padding:10px 8px;font-family:inherit;font-weight:700;font-size:.82rem;cursor:pointer}
+  .wrm-prev{background:#e7ede4;color:var(--bw-deep)}
+  .wrm-next{background:var(--bw-green);color:#fff}
+  .wrm-next:disabled,.wrm-prev:disabled{opacity:.4;cursor:default}
+
+  .wrm-foot{margin-top:10px;font-size:.7rem;color:#5a675c;line-height:1.5;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+  .wrm-credits-btn{border:1px solid #cfd8cb;background:#fff;color:#41503f;font-size:.68rem;padding:4px 9px;border-radius:12px;cursor:pointer;font-family:inherit}
+
+  /* credits overlay: absolute, never changes layout height */
+  .wrm-ov{position:absolute;inset:0;background:rgba(18,61,24,.55);display:flex;align-items:center;justify-content:center;padding:16px;z-index:30}
+  .wrm-ov[hidden]{display:none}
+  .wrm-ov-panel{background:#fff;border-radius:10px;max-width:480px;max-height:80%;overflow-y:auto;padding:14px 16px;font-size:.72rem;line-height:1.55}
+  .wrm-ov-panel h3{margin:0 0 8px;font-size:.85rem;color:var(--bw-deep)}
+  .wrm-ov-panel ul{margin:0 0 10px;padding-left:16px}
+  .wrm-ov-panel a{color:var(--bw-green)}
+  .wrm-ov-close{border:0;background:var(--bw-yellow);color:var(--bw-deep);font-weight:700;padding:7px 14px;border-radius:7px;cursor:pointer;font-family:inherit;font-size:.76rem}
+
+  @media (min-width:560px){
+    .wrm-card{display:grid;grid-template-columns:46% 54%}
+    .wrm-photo img{height:100%;aspect-ratio:auto;min-height:300px}
+  }
+  @media (max-width:340px){
+    .wrm-head h1{font-size:1.05rem}
+    .wrm-thumb{flex-basis:74px}
+    .wrm-thumb img{width:74px;height:56px}
+  }
+</style>
+</head>
+<body>
+<div class="wrm" id="wrm">
+  <div class="wrm-head">
+    <span class="wrm-kicker">WITTENBERG DAY TRIP · BERLINWALK</span>
+    <h1>The Wittenberg Reformation Mile, stop by stop</h1>
+    <p>One street carries the whole town: 1.9 km from the station to the Theses Door. Tap a stop for the photo, the price, the hours and my take. Hours and prices checked on 4 September 2026.</p>
+  </div>
+
+  <div class="wrm-rail" id="rail">
+    <span class="wrm-rail-cap">STATION</span>
+    <span class="wrm-rail-cap end">THESES DOOR</span>
+    <div class="wrm-rail-line"></div>
+    <div class="wrm-rail-fill" id="railFill"></div>
+    <div class="wrm-rail-km" id="railKm"></div>
+  </div>
+
+  <div class="wrm-strip" id="strip"></div>
+
+  <div class="wrm-card">
+    <div class="wrm-photo">
+      <img id="photo" src="img/stop-hbf.jpg" alt="">
+      <span class="walkchip" id="walkchip"></span>
+    </div>
+    <div class="wrm-info">
+      <h2 id="name"></h2>
+      <p class="what" id="what"></p>
+      <p class="wrm-fact"><span class="tag">OPEN</span><span id="open"></span></p>
+      <p class="wrm-fact"><span class="tag">COST</span><span id="cost"></span></p>
+      <div class="wrm-take" id="take"></div>
+      <div class="wrm-nav">
+        <button class="wrm-prev" id="prev" type="button">&#8592; Previous stop</button>
+        <button class="wrm-next" id="next" type="button">Next stop &#8594;</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrm-foot">
+    <span>Walking times are my estimate along the street from Lutherstadt Wittenberg Hbf, at an easy pace.</span>
+    <button class="wrm-credits-btn" id="creditsBtn" type="button" aria-expanded="false">Tool visual credits</button>
+  </div>
+
+  <div class="wrm-ov" id="creditsOv" hidden>
+    <div class="wrm-ov-panel" role="dialog" aria-label="Tool visual credits">
+      <h3>Tool visual credits</h3>
+      <p>Photographs rendered in this tool, via Wikimedia Commons:</p>
+      <ul id="creditsList"></ul>
+      <button class="wrm-ov-close" id="creditsClose" type="button">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var STOPS=[
+    {id:'hbf',name:'Lutherstadt Wittenberg Hbf',lat:51.86748,lon:12.66229,img:'img/stop-hbf.jpg',
+     alt:'Platforms and glass station building of Lutherstadt Wittenberg Hauptbahnhof',
+     what:'Your arrival point. The ICE makes it here from Berlin Hauptbahnhof in 41 minutes, the RE3 regional train in 1 hour 27.',
+     open:'Trains back to Berlin: ICE at :48 past the hour into the evening, RE3 spread between them.',
+     cost:'ICE needs a normal DB ticket. The 63 euro Deutschlandticket covers the RE3, the Brandenburg-Berlin-Ticket does not reach this far.',
+     take:'<b>My take:</b> photograph the departure board before you leave the platform. Knowing your return options makes the whole day calmer.'},
+    {id:'eiche',name:'Luthereiche',lat:51.86410,lon:12.65571,img:'img/stop-luthereiche.jpg',
+     alt:'The Luther oak tree at the edge of the old town of Wittenberg',
+     what:'An oak on the spot where Luther burned the papal bull threatening his excommunication in December 1520. The tree itself was planted in the 19th century.',
+     open:'Always accessible, it stands on a street corner.',
+     cost:'Free.',
+     take:'<b>My take:</b> a two minute stop, and the right mental start: this corner is where the argument became a break.'},
+    {id:'panorama',name:'Panorama LUTHER 1517',lat:51.86586,lon:12.65421,img:'img/stop-panorama.jpg',
+     alt:'The red rotunda of the asisi panorama LUTHER 1517 in Wittenberg',
+     what:'A 360 degree painted panorama by Yadegar Asisi that puts you inside Wittenberg on the day the theses went up.',
+     open:'Daily 10:00 to 17:00, last entry 16:30.',
+     cost:'14 euros, reduced 12, children 6 to 16 pay 7.',
+     take:'<b>My take:</b> the rain plan, and the best stop for kids. On a short dry day I skip it and keep the time for the real street.'},
+    {id:'augusteum',name:'Augusteum, Literally Luther',lat:51.86450,lon:12.65258,img:'img/stop-augusteum.jpg',
+     alt:'Stone portal of the Augusteum leading toward the Lutherhaus in Wittenberg',
+     what:'The Lutherhaus behind this portal is closed for renovation until spring 2027. Its treasures hang here instead: Luther’s monk’s habit, Cranach portraits, the first Wittenberg complete German Bible.',
+     open:'Daily 10:00 to 18:00, exhibition scheduled until early January 2027.',
+     cost:'6 euros, reduced 4.',
+     take:'<b>My take:</b> this is the museum stop that matters right now. Go before midday, the tour groups arrive after.'},
+    {id:'melanchthon',name:'Melanchthonhaus',lat:51.86474,lon:12.65081,img:'img/stop-melanchthon.jpg',
+     alt:'Renaissance gable of the Melanchthonhaus on Collegienstrasse in Wittenberg',
+     what:'The Renaissance home of Philipp Melanchthon, the movement’s quiet organiser, with a garden behind that most visitors never find.',
+     open:'10:00 to 18:00, closed Mondays.',
+     cost:'5 euros, reduced 2.50.',
+     take:'<b>My take:</b> the calmest interior in town. If you only have energy for one paid house after the Augusteum, make it this one.'},
+    {id:'stadtkirche',name:'Stadtkirche St. Marien',lat:51.86657,lon:12.64491,img:'img/stop-stadtkirche.jpg',
+     alt:'The twin towers of the Stadtkirche St. Marien in Wittenberg',
+     what:'The church where Luther actually preached, and where his children were baptised. Inside hangs the Reformation altar by Lucas Cranach, father and son.',
+     open:'April to October: Mon to Sat 11:00 to 17:00, Sun from 12:30. Shorter hours in winter.',
+     cost:'Combined ticket for both churches 5 euros, under 18 free.',
+     take:'<b>My take:</b> find Luther in the Last Supper panel, sitting like a local. The altar alone justifies the church combo ticket.'},
+    {id:'markt',name:'Marktplatz and Rathaus',lat:51.86601,lon:12.64353,img:'img/stop-markt.jpg',
+     alt:'Market square of Wittenberg with the white Renaissance town hall',
+     what:'The Renaissance market square with the statues of Luther and Melanchthon, ringed by cafes. The Cranach courtyards open off the square at Markt 4 and Schlossstrasse 1.',
+     open:'Square always open. Cranach exhibitions Mon to Sat 10:00 to 17:00, Sun from 13:00.',
+     cost:'The square and the courtyards are free to walk into, exhibitions charge separately.',
+     take:'<b>My take:</b> this is the lunch stop. Sit facing the town hall, then poke into the Cranach print room before moving on.'},
+    {id:'schloss',name:'Schlosskirche and the Theses Door',lat:51.86650,lon:12.63769,img:'img/stop-schlosskirche.jpg',
+     alt:'The bronze Theses Door of the Castle Church in Wittenberg under its golden mosaic',
+     what:'The end of the mile. The 1858 bronze door carries the full Latin text of the 95 theses in the portal where the wooden original stood until 1760. Luther and Melanchthon are buried inside.',
+     open:'Mon to Sat 10:00 to 17:00, Sun and holidays from 11:30. Tower: last ascent 16:00.',
+     cost:'3 euro preservation fee, reduced 1. Tower 3 euros extra.',
+     take:'<b>My take:</b> finish here and climb the tower before 16:00. Seeing how small this town is explains the story better than any plaque.'}
+  ];
+  var CREDITS=[
+    ['Lutherstadt Wittenberg Hauptbahnhof (1)','Andre_de','CC BY-SA 4.0','https://commons.wikimedia.org/wiki/File:Lutherstadt_Wittenberg_Hauptbahnhof_%281%29.jpg','https://creativecommons.org/licenses/by-sa/4.0/'],
+    ['Luthereiche in Wittenberg','Markus Sturzbecher','CC BY-SA 4.0','https://commons.wikimedia.org/wiki/File:Luthereiche_in_Wittenberg.jpg','https://creativecommons.org/licenses/by-sa/4.0/'],
+    ['360° Panorama (Wittenberg) 01','C.Suthorn','CC BY-SA 4.0','https://commons.wikimedia.org/wiki/File:360%C2%B0_Panorama_%28Wittenberg%29_01.jpg','https://creativecommons.org/licenses/by-sa/4.0/'],
+    ['Wittenberg Collegienstrasse 54-01','Radler59','CC BY-SA 4.0','https://commons.wikimedia.org/wiki/File:Wittenberg_Collegienstrasse_54-01.jpg','https://creativecommons.org/licenses/by-sa/4.0/'],
+    ['J41 376 Wittenberg, Collegienstraße und Melanchthonhaus','Falk2','CC BY-SA 4.0','https://commons.wikimedia.org/wiki/File:J41_376_Wittenberg,_Collegienstra%C3%9Fe_und_Melanchthonhaus.jpg','https://creativecommons.org/licenses/by-sa/4.0/'],
+    ['00 3418 Wittenberg - Lutherstadt (Stadtkirche)','W. Bulach','CC BY-SA 4.0','https://commons.wikimedia.org/wiki/File:00_3418_Wittenberg_-_Lutherstadt_%28Stadtkirche%29.jpg','https://creativecommons.org/licenses/by-sa/4.0/'],
+    ['Lutherstadt Wittenberg, Marktplatz und Rathaus','Dguendel','CC BY 4.0','https://commons.wikimedia.org/wiki/File:Lutherstadt_Wittenberg,_Marktplatz_und_Rathaus.jpg','https://creativecommons.org/licenses/by/4.0/'],
+    ['Lutherstadt Wittenberg, Schlosskirche, die Thesentür (crop)','Dguendel','CC BY 4.0','https://commons.wikimedia.org/wiki/File:Lutherstadt_Wittenberg,_Schlosskirche,_die_Thesent%C3%BCr.jpg','https://creativecommons.org/licenses/by/4.0/']
+  ];
+
+  function hav(a,b){
+    var R=6371000,rad=Math.PI/180;
+    var dLat=(b.lat-a.lat)*rad,dLon=(b.lon-a.lon)*rad;
+    var s=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(a.lat*rad)*Math.cos(b.lat*rad)*Math.sin(dLon/2)*Math.sin(dLon/2);
+    return 2*R*Math.asin(Math.sqrt(s));
+  }
+  var cum=[0];
+  for(var i=1;i<STOPS.length;i++){ cum[i]=cum[i-1]+hav(STOPS[i-1],STOPS[i])*1.25; }
+  var full=cum[STOPS.length-1];
+  function minutes(m){ return Math.max(1,Math.round(m/75)); } /* ~4.5 km/h */
+
+  var sel=0;
+  var strip=document.getElementById('strip');
+  var rail=document.getElementById('rail');
+  STOPS.forEach(function(s,i){
+    var b=document.createElement('button');
+    b.type='button'; b.className='wrm-thumb'; b.setAttribute('aria-label',s.name);
+    b.innerHTML='<span class="n">'+(i+1)+'</span><img src="'+s.img+'" alt="" loading="'+(i>2?'lazy':'eager')+'">';
+    b.addEventListener('click',function(){ pick(i); });
+    strip.appendChild(b);
+    var d=document.createElement('button');
+    d.type='button'; d.className='wrm-dot'; d.setAttribute('aria-label',s.name);
+    d.addEventListener('click',function(){ pick(i); });
+    rail.appendChild(d);
+  });
+  function layoutDots(){
+    var w=rail.clientWidth-20;
+    var dots=rail.querySelectorAll('.wrm-dot');
+    for(var i=0;i<dots.length;i++){ dots[i].style.left=(10+cum[i]/full*w)+'px'; }
+    document.getElementById('railFill').style.width=(cum[sel]/full*w)+'px';
+  }
+  window.addEventListener('resize',layoutDots);
+
+  function pick(i){
+    sel=i;
+    var s=STOPS[i];
+    var thumbs=strip.querySelectorAll('.wrm-thumb');
+    var dots=rail.querySelectorAll('.wrm-dot');
+    for(var k=0;k<STOPS.length;k++){
+      thumbs[k].className = k===i ? 'wrm-thumb on' : 'wrm-thumb';
+      dots[k].className = k===i ? 'wrm-dot on' : 'wrm-dot';
+    }
+    var ph=document.getElementById('photo');
+    ph.src=s.img; ph.alt=s.alt;
+    document.getElementById('walkchip').textContent = i===0 ? 'Start: the station' : '~'+minutes(cum[i])+' min on foot from the station';
+    document.getElementById('name').textContent=(i+1)+'. '+s.name;
+    document.getElementById('what').textContent=s.what;
+    document.getElementById('open').textContent=s.open;
+    document.getElementById('cost').textContent=s.cost;
+    document.getElementById('take').innerHTML=s.take;
+    document.getElementById('prev').disabled = i===0;
+    document.getElementById('next').disabled = i===STOPS.length-1;
+    document.getElementById('railKm').textContent='about '+(full/1000).toFixed(1)+' km if you walk every stop · stop '+(i+1)+' of '+STOPS.length;
+    layoutDots();
+    if (thumbs[i] && thumbs[i].scrollIntoView){ try{ thumbs[i].scrollIntoView({block:'nearest',inline:'nearest',behavior:'smooth'}); }catch(e){} }
+  }
+  document.getElementById('prev').addEventListener('click',function(){ if(sel>0) pick(sel-1); });
+  document.getElementById('next').addEventListener('click',function(){ if(sel<STOPS.length-1) pick(sel+1); });
+
+  /* tool visual credits overlay: absolute, no layout height change */
+  var ov=document.getElementById('creditsOv');
+  var btn=document.getElementById('creditsBtn');
+  var list=document.getElementById('creditsList');
+  CREDITS.forEach(function(c){
+    var li=document.createElement('li');
+    li.innerHTML='<a href="'+c[3]+'" target="_blank" rel="noopener">'+c[0]+'</a> by '+c[1]+', <a href="'+c[4]+'" target="_blank" rel="noopener">'+c[2]+'</a>';
+    list.appendChild(li);
+  });
+  function setOv(open){
+    ov.hidden=!open;
+    btn.setAttribute('aria-expanded', open?'true':'false');
+  }
+  btn.addEventListener('click',function(){ setOv(ov.hidden); });
+  document.getElementById('creditsClose').addEventListener('click',function(){ setOv(false); });
+  ov.addEventListener('click',function(e){ if(e.target===ov) setOv(false); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && !ov.hidden) setOv(false); });
+
+  pick(0);
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
