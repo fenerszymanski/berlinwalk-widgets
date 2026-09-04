@@ -228,6 +228,7 @@
       "seasonStart": "2026-06-01",
       "seasonEnd": "2026-07-20",
       "seasonLabel": "World Cup 2026",
+      "featured": false,
       "tags": [
         "world cup",
         "football",
@@ -283,6 +284,7 @@
       "priority": 19,
       "seasonal": true,
       "seasonLabel": "World Cup 2026",
+      "featured": true,
       "tags": [
         "basketball",
         "world cup",
@@ -7318,7 +7320,7 @@
       ],
       "iconStatus": "live-wix-media",
       "cmsItemId": "d06ad2e3-69ba-474d-aa39-6d49797f5f64",
-      "featured": true,
+      "featured": false,
       "priority": 27
     },
     {

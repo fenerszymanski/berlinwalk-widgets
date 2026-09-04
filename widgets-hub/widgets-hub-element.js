@@ -15,7 +15,7 @@
  * in the per-widget embed snippet panel.
  */
 
-const BW_WIDGETS_HUB_DATA_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/data.json?v=20260903-featured-listings';
+const BW_WIDGETS_HUB_DATA_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/data.json?v=20260904-featured-listings';
 const BW_EMBED_RESIZE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/embed-resize.js';
 
 const BW_WIDGETS_THEMES = {

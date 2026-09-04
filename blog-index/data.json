@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-03T19:00:16.866Z",
+  "updatedAt": "2026-09-04T02:13:30.003Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 349,
@@ -44,23 +44,74 @@
   ],
   "hero": {
     "lead": {
-      "title": "Shows in Berlin in English: The Three Doors Past the Language Barrier",
-      "slug": "berlin-shows-in-english",
-      "path": "/post/berlin-shows-in-english",
-      "url": "https://www.berlinwalk.com/post/berlin-shows-in-english",
-      "excerpt": "Berlin's stages are not closed to non-German speakers: three big shows need no language at all, the great German theatres project free English surtitles, and a whole scene plays in English. The honest map, venue by venue, with prices and the one warning most guides miss.",
+      "title": "FIBA Women's Basketball World Cup 2026 in Berlin: A Local Guide for Fans",
+      "slug": "fiba-womens-basketball-world-cup-2026-berlin",
+      "path": "/post/fiba-womens-basketball-world-cup-2026-berlin",
+      "url": "https://www.berlinwalk.com/post/fiba-womens-basketball-world-cup-2026-berlin",
+      "excerpt": "The FIBA Women's Basketball World Cup 2026 comes to Berlin from September 4-13. Here is the local fan guide: venues, transport, tickets, fixtures, and what to do between games.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
-      "topic": "free-budget",
-      "topicLabel": "Free & Budget",
-      "readTime": "6 min read",
-      "publishedDate": "2026-09-02T07:56:05.297Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_d54129b2b18c43f1bb4cce11007606cc~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-shows-in-english-friedrichstadt-palast-night.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_d54129b2b18c43f1bb4cce11007606cc~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-shows-in-english-friedrichstadt-palast-night.jpg",
-      "alt": "The Friedrichstadt-Palast theatre on Friedrichstrasse illuminated at night",
-      "relatedToolSlug": "berlin-english-stage-map"
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-06-04T21:56:57.971Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_ea8454716f174a6a8d5990f9131542a8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/fiba-wwc-2026-berlin-hero.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_ea8454716f174a6a8d5990f9131542a8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/fiba-wwc-2026-berlin-hero.jpg",
+      "alt": "Women basketball fans walking toward a warmly lit modern Berlin arena at sunset, with the TV Tower and Spree in the background",
+      "relatedToolSlug": "basketball-worldcup-fixtures"
     },
     "secondary": [
+      {
+        "title": "IFA Berlin: A Visitor Guide to Messe Berlin and the City After the Show",
+        "slug": "ifa-berlin-2026",
+        "path": "/post/ifa-berlin-2026",
+        "url": "https://www.berlinwalk.com/post/ifa-berlin-2026",
+        "excerpt": "A visitor-first IFA Berlin plan: confirmed opening hours, Messe Berlin access and an evening that does not overreach.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "history-myths",
+        "topicLabel": "Berlin History & Myths",
+        "readTime": "4 min read",
+        "publishedDate": "2026-08-02T12:02:06.508Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_8de68741b84e41a0bd18386fbf15d9e8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-messe-berlin-cover.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_8de68741b84e41a0bd18386fbf15d9e8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-messe-berlin-cover.jpg",
+        "alt": "Messe Berlin exterior during an event day",
+        "relatedToolSlug": "ifa-after-show-evening"
+      },
+      {
+        "title": "Szczecin Day Trip from Berlin: Trains, the Bus Bridge and the Right Ticket",
+        "slug": "szczecin-day-trip-from-berlin",
+        "path": "/post/szczecin-day-trip-from-berlin",
+        "url": "https://www.berlinwalk.com/post/szczecin-day-trip-from-berlin",
+        "excerpt": "Journey planners show a direct Berlin to Szczecin train, but the railway is being rebuilt until December 2026 and part of every trip is a bus. Here is the honest plan: the three real route patterns, the VBB ticket that covers Szczecin trams too, the Deutschlandticket trap at Tantow, and what actually fits into one day on the ground.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "first-day",
+        "topicLabel": "First Day in Berlin",
+        "readTime": "7 min read",
+        "publishedDate": "2026-09-03T18:58:13.070Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_886e8bc6ee674074bb6a3702f5f8fcfe~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-waly-chrobrego.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_886e8bc6ee674074bb6a3702f5f8fcfe~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-waly-chrobrego.jpg",
+        "alt": "The Wały Chrobrego terrace in Szczecin with the maritime museum towers and rotunda above the steps",
+        "relatedToolSlug": "szczecin-day-fit-map"
+      },
+      {
+        "title": "Warnemünde to Berlin: The Honest Cruise Day Trip Math",
+        "slug": "warnemunde-to-berlin",
+        "path": "/post/warnemunde-to-berlin",
+        "url": "https://www.berlinwalk.com/post/warnemunde-to-berlin",
+        "excerpt": "The port brochure says Berlin is about two hours from Warnemünde. The real number is a bit over three hours door to door, each way. Here is the honest math for a cruise day in Berlin: the two trains that matter, tickets, the buffer that protects your ship, and when staying on the coast is the smarter day.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "first-day",
+        "topicLabel": "First Day in Berlin",
+        "readTime": "6 min read",
+        "publishedDate": "2026-09-03T07:57:55.391Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_ef2c2e85520b4ffbb5001522d4ef84bc~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-regal-princess-warnemuende.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_ef2c2e85520b4ffbb5001522d4ef84bc~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-regal-princess-warnemuende.jpg",
+        "alt": "A large cruise ship moored at the Warnemünde cruise pier on a clear day",
+        "relatedToolSlug": "berlin-cruise-day-window"
+      },
       {
         "title": "Running in Berlin: Six Loops That Teach You the City",
         "slug": "running-in-berlin",
@@ -77,57 +128,6 @@
         "thumb": "https://static.wixstatic.com/media/5a08a3_62a89ea057774b0bb0ec0d66bc301de7~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/running-in-berlin-tiergarten-autumn-path.jpg",
         "alt": "The wide gravel path through the Tiergarten in golden autumn light",
         "relatedToolSlug": "berlin-run-loop-map"
-      },
-      {
-        "title": "Berlin Philharmonic Tickets: How to Get In, Even When It Says Sold Out",
-        "slug": "berlin-philharmonic-tickets",
-        "path": "/post/berlin-philharmonic-tickets",
-        "url": "https://www.berlinwalk.com/post/berlin-philharmonic-tickets",
-        "excerpt": "The Berlin Philharmonic looks sold out and expensive until you know the ladder: sale windows, standby tickets two days before, standing room on the night, cheaper DSO concerts in the same famous hall, and a completely free chamber concert every Wednesday lunchtime.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "first-day",
-        "topicLabel": "First Day in Berlin",
-        "readTime": "6 min read",
-        "publishedDate": "2026-09-01T14:11:17.375Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_567a2ac88a0c41c4928dd2160d6f107c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-philharmonic-tickets-philharmonie-blue-hour.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_567a2ac88a0c41c4928dd2160d6f107c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-philharmonic-tickets-philharmonie-blue-hour.jpg",
-        "alt": "The golden facade of the Philharmonie Berlin glowing at blue hour",
-        "relatedToolSlug": "transport-ticket-calculator"
-      },
-      {
-        "title": "Night Trains from Berlin: Six Places You Can Wake Up Tomorrow",
-        "slug": "night-trains-from-berlin",
-        "path": "/post/night-trains-from-berlin",
-        "url": "https://www.berlinwalk.com/post/night-trains-from-berlin",
-        "excerpt": "Six sleeper routes leave Berlin this season, two of them every night, and the map changed twice this year: European Sleeper took over the Paris run in March and the Stockholm train changed operators on 1 September. Which trains run which nights, which station they use, what beds cost, and the Prague mistake to avoid.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "route-stories",
-        "topicLabel": "Tour Route Stories",
-        "readTime": "7 min read",
-        "publishedDate": "2026-09-01T08:03:42.870Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_2d3ed7d2e6bd4244814d2b5c37b5db50~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/night-trains-from-berlin-european-sleeper-berlin-hbf.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_2d3ed7d2e6bd4244814d2b5c37b5db50~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/night-trains-from-berlin-european-sleeper-berlin-hbf.jpg",
-        "alt": "The European Sleeper night train to Paris standing under the glass roof of Berlin Hauptbahnhof",
-        "relatedToolSlug": "berlin-night-train-board"
-      },
-      {
-        "title": "German Unity Day in Berlin: What Is Actually Open on 3 October",
-        "slug": "german-unity-day-berlin",
-        "path": "/post/german-unity-day-berlin",
-        "url": "https://www.berlinwalk.com/post/german-unity-day-berlin",
-        "excerpt": "3 October is Germany's national holiday, and in 2026 it falls on a Saturday, so Berlin runs Sunday rules two days in a row. What closes, the station supermarkets that stay open, the museums that keep Sunday hours, and how I would plan the weekend.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "first-day",
-        "topicLabel": "First Day in Berlin",
-        "readTime": "6 min read",
-        "publishedDate": "2026-08-31T13:07:42.130Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_ff85376dc8e847509310f5fb022c30d0~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/german-unity-day-berlin-reichstag-flag.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_ff85376dc8e847509310f5fb022c30d0~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/german-unity-day-berlin-reichstag-flag.jpg",
-        "alt": "The German federal flag flying in front of the Reichstag building",
-        "relatedToolSlug": "berlin-unity-day-board"
       },
       {
         "title": "Berlin Public Transport for Tourists: Tickets, Zones, Prices and Validation",
@@ -1632,7 +1632,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_886e8bc6ee674074bb6a3702f5f8fcfe~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-waly-chrobrego.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_886e8bc6ee674074bb6a3702f5f8fcfe~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-waly-chrobrego.jpg",
       "alt": "The Wały Chrobrego terrace in Szczecin with the maritime museum towers and rotunda above the steps",
-      "relatedToolSlug": "berlin-day-trips-finder"
+      "relatedToolSlug": "szczecin-day-fit-map"
     },
     {
       "title": "Warnemünde to Berlin: The Honest Cruise Day Trip Math",
@@ -1649,7 +1649,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_ef2c2e85520b4ffbb5001522d4ef84bc~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-regal-princess-warnemuende.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_ef2c2e85520b4ffbb5001522d4ef84bc~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-regal-princess-warnemuende.jpg",
       "alt": "A large cruise ship moored at the Warnemünde cruise pier on a clear day",
-      "relatedToolSlug": "berlin-day-trips-finder"
+      "relatedToolSlug": "berlin-cruise-day-window"
     },
     {
       "title": "Running in Berlin: Six Loops That Teach You the City",
@@ -1838,7 +1838,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_886e8bc6ee674074bb6a3702f5f8fcfe~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-waly-chrobrego.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_886e8bc6ee674074bb6a3702f5f8fcfe~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-waly-chrobrego.jpg",
       "alt": "The Wały Chrobrego terrace in Szczecin with the maritime museum towers and rotunda above the steps",
-      "relatedToolSlug": "berlin-day-trips-finder"
+      "relatedToolSlug": "szczecin-day-fit-map"
     },
     {
       "title": "Warnemünde to Berlin: The Honest Cruise Day Trip Math",
@@ -1855,7 +1855,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_ef2c2e85520b4ffbb5001522d4ef84bc~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-regal-princess-warnemuende.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_ef2c2e85520b4ffbb5001522d4ef84bc~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-regal-princess-warnemuende.jpg",
       "alt": "A large cruise ship moored at the Warnemünde cruise pier on a clear day",
-      "relatedToolSlug": "berlin-day-trips-finder"
+      "relatedToolSlug": "berlin-cruise-day-window"
     },
     {
       "title": "Running in Berlin: Six Loops That Teach You the City",
@@ -3079,7 +3079,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_8de68741b84e41a0bd18386fbf15d9e8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-messe-berlin-cover.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_8de68741b84e41a0bd18386fbf15d9e8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-messe-berlin-cover.jpg",
       "alt": "Messe Berlin exterior during an event day",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "ifa-after-show-evening"
     },
     {
       "title": "Musikfest Berlin: Which Concert Venue Fits Your Berlin Day?",

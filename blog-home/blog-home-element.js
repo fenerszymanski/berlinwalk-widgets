@@ -1,21 +1,57 @@
 const BW_BLOG_HOME_DATA_URL = (() => {
   const script = document.currentScript;
   const base = script && script.src ? script.src : window.location.href;
-  return new URL('./data.json?v=20260903-featured-listings', base).href;
+  return new URL('./data.json?v=20260904-featured-listings', base).href;
 })();
 
 const BW_BLOG_HOME_FALLBACK = {
   featured: {
-    title: 'Running in Berlin: Six Loops That Teach You the City',
-    url: 'https://www.berlinwalk.com/post/running-in-berlin',
+    title: 'IFA Berlin: A Visitor Guide to Messe Berlin and the City After the Show',
+    url: 'https://www.berlinwalk.com/post/ifa-berlin-2026',
     category: 'Tourist Tips',
-    readTime: '6 min read',
-    label: 'New: choose a Berlin running loop',
-    summary: 'Berlin is flat, its parks are enormous, and before 09:00 the famous centre belongs to whoever is out in it. Six real running loops with honest distances, start stations, surfaces and water, from the Tiergarten to Tempelhofer Feld, plus what marathon week changes.',
-    image: 'https://static.wixstatic.com/media/5a08a3_62a89ea057774b0bb0ec0d66bc301de7~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/running-in-berlin-tiergarten-autumn-path.jpg',
-    alt: 'The wide gravel path through the Tiergarten in golden autumn light'
+    readTime: '4 min read',
+    label: 'Current: plan IFA at Messe Berlin',
+    summary: 'A visitor-first IFA Berlin plan: confirmed opening hours, Messe Berlin access and an evening that does not overreach.',
+    image: 'https://static.wixstatic.com/media/5a08a3_8de68741b84e41a0bd18386fbf15d9e8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-messe-berlin-cover.jpg',
+    alt: 'Messe Berlin exterior during an event day'
   },
   miniPosts: [
+    {
+      title: "FIBA Women's Basketball World Cup 2026 in Berlin: A Local Guide for Fans",
+      url: 'https://www.berlinwalk.com/post/fiba-womens-basketball-world-cup-2026-berlin',
+      category: 'Tourist Tips',
+      readTime: '7 min read',
+      summary: 'The FIBA Women\'s Basketball World Cup 2026 comes to Berlin from September 4-13. Here is the local fan guide: venues, transport, tickets, fixtures, and what to do between games.',
+      image: 'https://static.wixstatic.com/media/5a08a3_ea8454716f174a6a8d5990f9131542a8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/fiba-wwc-2026-berlin-hero.jpg',
+      alt: 'Women basketball fans walking toward a warmly lit modern Berlin arena at sunset, with the TV Tower and Spree in the background'
+    },
+    {
+      title: 'Szczecin Day Trip from Berlin: Trains, the Bus Bridge and the Right Ticket',
+      url: 'https://www.berlinwalk.com/post/szczecin-day-trip-from-berlin',
+      category: 'Tourist Tips',
+      readTime: '7 min read',
+      summary: 'Journey planners show a direct Berlin to Szczecin train, but the railway is being rebuilt until December 2026 and part of every trip is a bus. Here is the honest plan: the three real route patterns, the VBB ticket that covers Szczecin trams too, the Deutschlandticket trap at Tantow, and what actually fits into one day on the ground.',
+      image: 'https://static.wixstatic.com/media/5a08a3_886e8bc6ee674074bb6a3702f5f8fcfe~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-waly-chrobrego.jpg',
+      alt: 'The Wały Chrobrego terrace in Szczecin with the maritime museum towers and rotunda above the steps'
+    },
+    {
+      title: 'Warnemünde to Berlin: The Honest Cruise Day Trip Math',
+      url: 'https://www.berlinwalk.com/post/warnemunde-to-berlin',
+      category: 'Tourist Tips',
+      readTime: '6 min read',
+      summary: 'The port brochure says Berlin is about two hours from Warnemünde. The real number is a bit over three hours door to door, each way. Here is the honest math for a cruise day in Berlin: the two trains that matter, tickets, the buffer that protects your ship, and when staying on the coast is the smarter day.',
+      image: 'https://static.wixstatic.com/media/5a08a3_ef2c2e85520b4ffbb5001522d4ef84bc~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-regal-princess-warnemuende.jpg',
+      alt: 'A large cruise ship moored at the Warnemünde cruise pier on a clear day'
+    },
+    {
+      title: 'Running in Berlin: Six Loops That Teach You the City',
+      url: 'https://www.berlinwalk.com/post/running-in-berlin',
+      category: 'Tourist Tips',
+      readTime: '6 min read',
+      summary: 'Berlin is flat, its parks are enormous, and before 09:00 the famous centre belongs to whoever is out in it. Six real running loops with honest distances, start stations, surfaces and water, from the Tiergarten to Tempelhofer Feld, plus what marathon week changes.',
+      image: 'https://static.wixstatic.com/media/5a08a3_62a89ea057774b0bb0ec0d66bc301de7~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/running-in-berlin-tiergarten-autumn-path.jpg',
+      alt: 'The wide gravel path through the Tiergarten in golden autumn light'
+    },
     {
       title: 'Shows in Berlin in English: The Three Doors Past the Language Barrier',
       url: 'https://www.berlinwalk.com/post/berlin-shows-in-english',
@@ -24,42 +60,6 @@ const BW_BLOG_HOME_FALLBACK = {
       summary: "Berlin's stages are not closed to non-German speakers: three big shows need no language at all, the great German theatres project free English surtitles, and a whole scene plays in English. The honest map, venue by venue, with prices and the one warning most guides miss.",
       image: 'https://static.wixstatic.com/media/5a08a3_d54129b2b18c43f1bb4cce11007606cc~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-shows-in-english-friedrichstadt-palast-night.jpg',
       alt: 'The Friedrichstadt-Palast theatre on Friedrichstrasse illuminated at night'
-    },
-    {
-      title: 'Night Trains from Berlin: Six Places You Can Wake Up Tomorrow',
-      url: 'https://www.berlinwalk.com/post/night-trains-from-berlin',
-      category: 'Tourist Tips',
-      readTime: '7 min read',
-      summary: 'Six sleeper routes leave Berlin this season, two of them every night, and the map changed twice this year: European Sleeper took over the Paris run in March and the Stockholm train changed operators on 1 September. Which trains run which nights, which station they use, what beds cost, and the Prague mistake to avoid.',
-      image: 'https://static.wixstatic.com/media/5a08a3_2d3ed7d2e6bd4244814d2b5c37b5db50~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/night-trains-from-berlin-european-sleeper-berlin-hbf.jpg',
-      alt: 'The European Sleeper night train to Paris standing under the glass roof of Berlin Hauptbahnhof'
-    },
-    {
-      title: 'Berlin Philharmonic Tickets: How to Get In, Even When It Says Sold Out',
-      url: 'https://www.berlinwalk.com/post/berlin-philharmonic-tickets',
-      category: 'Tourist Tips',
-      readTime: '6 min read',
-      summary: 'The Berlin Philharmonic looks sold out and expensive until you know the ladder: sale windows, standby tickets two days before, standing room on the night, cheaper DSO concerts in the same famous hall, and a completely free chamber concert every Wednesday lunchtime.',
-      image: 'https://static.wixstatic.com/media/5a08a3_567a2ac88a0c41c4928dd2160d6f107c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-philharmonic-tickets-philharmonie-blue-hour.jpg',
-      alt: 'The golden facade of the Philharmonie Berlin glowing at blue hour'
-    },
-    {
-      title: 'Laundry in Berlin: How to Get Clean Clothes Without Losing Half a Day',
-      url: 'https://www.berlinwalk.com/post/laundry-in-berlin',
-      category: 'Tourist Tips',
-      readTime: '7 min read',
-      summary: 'Mid-trip laundry is a real Berlin decision: sit next to a Waschsalon machine for 90 minutes or hand the bag to a wash-and-fold counter for almost the same price. The verified costs, how the machines work, the Sunday trick, and addresses near where visitors stay.',
-      image: 'https://static.wixstatic.com/media/5a08a3_d9364bf63bb14311aa068c040b17dd2e~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/laundry-in-berlin-freddy-leck-machines.jpg',
-      alt: 'A row of numbered washing machines with open doors at Freddy Leck sein Waschsalon in Berlin-Moabit'
-    },
-    {
-      title: 'Two of Everything in Berlin: The East and West Twins and Which One to Visit',
-      url: 'https://www.berlinwalk.com/post/two-of-everything-in-berlin',
-      category: 'Berlin History',
-      readTime: '7 min read',
-      summary: 'Berlin was two cities for forty years and each half built the things a capital is supposed to have. Nobody demolished the spares, so today there are two zoos, two opera houses, two concert halls, two planetariums, two state library buildings, two city halls and two universities on opposite sides of a border you cannot see. Here is why, which twin is actually worth the trip, which pairs the reunified city has already settled, and how to group a day so you are not crossing Berlin twice.',
-      image: 'https://static.wixstatic.com/media/5a08a3_53ed55c120044ed9a348445802f46101~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-funkturm-fernsehturm-skyline.jpg',
-      alt: 'The Funkturm above the Berlin exhibition grounds with the Fernsehturm on the distant skyline'
     }
   ],
   posts: [
