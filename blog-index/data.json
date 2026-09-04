@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-04T08:04:42.058Z",
+  "updatedAt": "2026-09-04T14:06:39.395Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 350,
-  "toolsTotal": 270,
+  "totalPosts": 351,
+  "toolsTotal": 271,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1618,6 +1618,23 @@
   ],
   "latest": [
     {
+      "title": "Wittenberg Day Trip from Berlin: Trains, the Theses Door and What Is Actually Open",
+      "slug": "wittenberg-day-trip-from-berlin",
+      "path": "/post/wittenberg-day-trip-from-berlin",
+      "url": "https://www.berlinwalk.com/post/wittenberg-day-trip-from-berlin",
+      "excerpt": "The town where the modern world cracked open in 1517 sits 41 minutes from Berlin Hauptbahnhof, and almost everything worth seeing stands on one walkable street. Here is which train and ticket to take, what the Theses Door really is, and the closure most visitors discover too late: the Lutherhaus is being renovated until spring 2027.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-04T14:04:15.013Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_b36fba4601d74ee4848048026de0003f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wittenberg-aerial.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_b36fba4601d74ee4848048026de0003f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wittenberg-aerial.jpg",
+      "alt": "Aerial view of Wittenberg with the Town Church, the market square and the Castle Church tower on one street line",
+      "relatedToolSlug": "wittenberg-reformation-mile"
+    },
+    {
       "title": "Train Tickets for Day Trips from Berlin: Group Tickets, the Deutschlandticket and When the ICE Wins",
       "slug": "berlin-day-trip-train-tickets",
       "path": "/post/berlin-day-trip-train-tickets",
@@ -1803,26 +1820,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_9f32307a6a624a05b55fa6e746b47a76~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/rent-a-boat-in-berlin-oberbaum-cruise.jpg",
       "alt": "A sightseeing boat passes under the red twin towers of the Oberbaumbruecke on the Spree",
       "relatedToolSlug": "berlin-water-access-map"
-    },
-    {
-      "title": "Last Admission in Berlin: How Late You Can Still Get In",
-      "slug": "last-admission-berlin",
-      "path": "/post/last-admission-berlin",
-      "url": "https://www.berlinwalk.com/post/last-admission-berlin",
-      "excerpt": "Closing time is not entry time. The Berliner Dom stops letting people in an hour early, the Altes and Bode shut at 17:00 on weekdays, and the state museums publish no cutoff at all. What is still open, and when to give up.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "route-stories",
-      "topicLabel": "Tour Route Stories",
-      "readTime": "8 min read",
-      "publishedDate": "2026-08-29T13:47:40.690Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_3020f7a662ff4ce1af7bb70f189ba188~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-museum-island-sunset.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_3020f7a662ff4ce1af7bb70f189ba188~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-museum-island-sunset.jpg",
-      "alt": "The Alte Nationalgalerie and the dome of the Berliner Dom seen across the Spree in warm sunset light",
-      "relatedToolSlug": "berlin-last-entry-times"
     }
   ],
   "allPosts": [
+    {
+      "title": "Wittenberg Day Trip from Berlin: Trains, the Theses Door and What Is Actually Open",
+      "slug": "wittenberg-day-trip-from-berlin",
+      "path": "/post/wittenberg-day-trip-from-berlin",
+      "url": "https://www.berlinwalk.com/post/wittenberg-day-trip-from-berlin",
+      "excerpt": "The town where the modern world cracked open in 1517 sits 41 minutes from Berlin Hauptbahnhof, and almost everything worth seeing stands on one walkable street. Here is which train and ticket to take, what the Theses Door really is, and the closure most visitors discover too late: the Lutherhaus is being renovated until spring 2027.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-04T14:04:15.013Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_b36fba4601d74ee4848048026de0003f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wittenberg-aerial.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_b36fba4601d74ee4848048026de0003f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wittenberg-aerial.jpg",
+      "alt": "Aerial view of Wittenberg with the Town Church, the market square and the Castle Church tower on one street line",
+      "relatedToolSlug": "wittenberg-reformation-mile"
+    },
     {
       "title": "Train Tickets for Day Trips from Berlin: Group Tickets, the Deutschlandticket and When the ICE Wins",
       "slug": "berlin-day-trip-train-tickets",

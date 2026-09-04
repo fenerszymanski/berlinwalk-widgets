@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-04T08:04:42.058Z",
+  "updatedAt": "2026-09-04T14:06:39.395Z",
   "source": "Wix Blog API",
-  "totalPosts": 350,
+  "totalPosts": 351,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Wittenberg Day Trip from Berlin: Trains, the Theses Door and What Is Actually Open",
+      "slug": "wittenberg-day-trip-from-berlin",
+      "path": "/post/wittenberg-day-trip-from-berlin",
+      "url": "https://www.berlinwalk.com/post/wittenberg-day-trip-from-berlin",
+      "excerpt": "The town where the modern world cracked open in 1517 sits 41 minutes from Berlin Hauptbahnhof, and almost everything worth seeing stands on one walkable street. Here is which train and ticket to take, what the Theses Door really is, and the closure most visitors discover too late: the Lutherhaus is being renovated until spring 2027.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-04T14:04:15.013Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_b36fba4601d74ee4848048026de0003f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wittenberg-aerial.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_b36fba4601d74ee4848048026de0003f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wittenberg-aerial.jpg",
+      "alt": "Aerial view of Wittenberg with the Town Church, the market square and the Castle Church tower on one street line",
+      "relatedToolSlug": "wittenberg-reformation-mile"
+    },
     {
       "title": "Train Tickets for Day Trips from Berlin: Group Tickets, the Deutschlandticket and When the ICE Wins",
       "slug": "berlin-day-trip-train-tickets",
