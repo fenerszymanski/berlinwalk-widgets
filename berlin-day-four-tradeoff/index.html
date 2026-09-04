@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Berlin Day Four Trade-off — what fits in the hours you actually have | BerlinWalk</title>
+<meta name="description" content="Set the hours you can give your fourth day in Berlin and watch the reachable edge move. Seven real options plotted at their true compass bearing and their real door-to-door travel time from Alexanderplatz.">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root{
+    --g:#1B5E20; --gd:#123D18; --lime:#7CB342; --lightg:#C5E1A5;
+    --yellow:#FFE600; --cream:#FAFAF5; --ink:#212121; --mute:#5C6157;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Montserrat',-apple-system,'Segoe UI',sans-serif;background:var(--cream);color:var(--ink);}
+  .d4-wrap{max-width:920px;margin:0 auto;padding:16px 13px 24px;}
+  .d4-kick{font-size:11px;letter-spacing:.14em;font-weight:700;color:var(--lime);text-transform:uppercase;}
+  h1{font-size:23px;line-height:1.2;margin:5px 0 7px;color:var(--gd);}
+  .d4-lead{font-size:14px;line-height:1.55;margin:0 0 14px;max-width:660px;color:#3a4038;}
+
+  .d4-dial-card{background:var(--gd);border-radius:16px;padding:12px 12px 8px;color:#fff;}
+  .d4-dialhead{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;padding:2px 4px 8px;}
+  .d4-dialhead .lab{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--lightg);font-weight:700;}
+  .d4-count{font-size:13px;font-weight:700;color:var(--yellow);}
+  svg{display:block;width:100%;max-width:620px;margin:0 auto;height:auto;}
+
+  .d4-note{font-size:11px;line-height:1.5;color:#B9CBA9;margin:4px 4px 6px;text-align:center;}
+  .d4-slider{background:#fff;border:1.5px solid var(--lightg);border-radius:16px;padding:13px 15px 9px;margin:12px 0;}
+  .d4-srow{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;}
+  .d4-srow label{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--g);}
+  .d4-hours{font-size:27px;font-weight:800;color:var(--gd);line-height:1;}
+  .d4-hours small{font-size:13px;font-weight:600;color:var(--mute);}
+  input[type=range]{width:100%;margin:11px 0 3px;accent-color:var(--g);height:28px;}
+  .d4-scale{display:flex;justify-content:space-between;font-size:11px;color:var(--mute);}
+
+  .d4-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--mute);margin:10px 2px 0;}
+  .d4-legend span{display:inline-flex;align-items:center;gap:6px;}
+  .d4-dot{width:11px;height:11px;border-radius:50%;display:inline-block;}
+
+  .d4-picker{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0 12px;}
+  .d4-picker button{font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;border-radius:999px;
+    border:1.5px solid var(--lightg);background:#fff;color:var(--gd);padding:7px 13px;line-height:1.15;}
+  .d4-picker button[aria-pressed="true"]{background:var(--g);border-color:var(--g);color:#fff;}
+  .d4-picker button:focus-visible{outline:3px solid var(--lime);outline-offset:2px;}
+
+  .d4-card{background:#fff;border:1.5px solid var(--lightg);border-radius:16px;padding:15px 16px 16px;}
+  .d4-card h2{margin:0 0 2px;font-size:19px;color:var(--gd);line-height:1.25;}
+  .d4-where{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--lime);font-weight:700;margin-bottom:10px;}
+  .d4-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 12px;}
+  .d4-num{background:#F1F6EA;border-radius:11px;padding:9px 10px;}
+  .d4-num b{display:block;font-size:19px;color:var(--gd);line-height:1.1;}
+  .d4-num span{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);font-weight:700;}
+  .d4-verdict{border-radius:11px;padding:10px 12px;font-size:13.5px;line-height:1.5;font-weight:600;margin-bottom:11px;}
+  .d4-verdict.fits{background:#EAF4E2;color:#1B5E20;border-left:5px solid var(--lime);}
+  .d4-verdict.tight{background:#FFF9CC;color:#4A3E00;border-left:5px solid var(--yellow);}
+  .d4-verdict.no{background:#F3F1EE;color:#4A4A45;border-left:5px solid #B0B4AA;}
+  .d4-card p{margin:0 0 9px;font-size:13.5px;line-height:1.6;}
+  .d4-card p.watch{background:#F7F8F4;border-radius:10px;padding:9px 11px;font-size:12.5px;color:#3D4238;}
+  .d4-card p.watch b{color:var(--gd);}
+  .d4-line{font-size:12.5px;color:var(--mute);margin:0 0 10px;}
+  .d4-line b{color:var(--gd);}
+  .d4-foot{font-size:11.5px;line-height:1.55;color:var(--mute);margin:14px 2px 0;}
+  @media (max-width:520px){
+    h1{font-size:20px;}
+    .d4-nums{grid-template-columns:1fr 1fr;}
+    .d4-picker button{font-size:12px;padding:6px 11px;}
+  }
+</style>
+</head>
+<body>
+<div class="d4-wrap">
+  <div class="d4-kick">BerlinWalk · Berlin tools</div>
+  <h1>Berlin Day Four Trade-off</h1>
+  <p class="d4-lead">Every option below sits at its real compass bearing from Alexanderplatz, and its distance from the middle is the real door-to-door travel time, not kilometres. Set the hours you can honestly give the day and watch which ones stay lit.</p>
+
+  <div class="d4-slider">
+    <div class="d4-srow">
+      <label for="d4-range">Hours you can give day four</label>
+      <div class="d4-hours"><span id="d4-hours-val">8</span><small> h</small></div>
+    </div>
+    <input type="range" id="d4-range" min="4" max="12" step="0.5" value="8" aria-describedby="d4-count">
+    <div class="d4-scale"><span>4 h</span><span>8 h</span><span>12 h</span></div>
+  </div>
+
+  <div class="d4-dial-card">
+    <div class="d4-dialhead">
+      <span class="lab">Travel time from Alexanderplatz</span>
+      <span class="d4-count" id="d4-count">7 of 7 fit</span>
+    </div>
+    <svg id="d4-svg" viewBox="92 6 428 500" role="img" aria-labelledby="d4-svg-title">
+      <title id="d4-svg-title">A radial map of seven day-four options around Alexanderplatz, placed at their true compass bearing and their real travel time in minutes.</title>
+    </svg>
+    <p class="d4-note">Each dot reads: minutes each way, then the least time worth staying.</p>
+  </div>
+  <div class="d4-legend">
+    <span><i class="d4-dot" style="background:#7CB342"></i>Fits with room</span>
+    <span><i class="d4-dot" style="background:#FFE600"></i>Fits, but only just</span>
+    <span><i class="d4-dot" style="background:#8C9186"></i>Does not fit today</span>
+  </div>
+
+  <div class="d4-picker" id="d4-picker" role="group" aria-label="Choose an option"></div>
+
+  <div class="d4-card" id="d4-card"></div>
+
+  <p class="d4-foot" id="d4-foot"></p>
+</div>
+
+<script>
+(function(){
+  var DATA=null, sel='potsdam', hours=8;
+  var CX=320, CY=268, PX_PER_MIN=2.5, RINGS=[15,30,45,60,75];
+
+  function bearing(o,p){
+    var dy=(p.lat-o.lat);
+    var dx=(p.lon-o.lon)*Math.cos(o.lat*Math.PI/180);
+    var b=Math.atan2(dx,dy)*180/Math.PI;
+    return (b+360)%360;
+  }
+  function pos(o,p){
+    var b=bearing(o,p)*Math.PI/180, r=p.travelMin*PX_PER_MIN;
+    return {x:CX+r*Math.sin(b), y:CY-r*Math.cos(b), r:r};
+  }
+  function statusOf(p){
+    var need=p.travelMin*2+p.onSiteHours*60, have=hours*60;
+    if(need>have) return 'no';
+    if(have-need<=45) return 'tight';
+    return 'fits';
+  }
+  function fmtLoose(h){ return (h%1===0)? String(h) : h.toFixed(1); }
+  function fmtH(m){
+    var h=Math.floor(m/60), r=Math.round(m%60);
+    return r? h+' h '+r+' min' : h+' h';
+  }
+
+  function el(tag,attrs,text){
+    var n=document.createElementNS('http://www.w3.org/2000/svg',tag);
+    for(var k in attrs) n.setAttribute(k,attrs[k]);
+    if(text!=null) n.textContent=text;
+    return n;
+  }
+
+  function drawDial(){
+    var svg=document.getElementById('d4-svg');
+    while(svg.childNodes.length>1) svg.removeChild(svg.lastChild);
+    var o=DATA.meta.origin;
+
+    // The reachable edge: the furthest travel time that still leaves a three-hour stop.
+    var edgeMin=Math.max(0,(hours*60-180)/2);
+    var capped=edgeMin>80;
+    var edgeR=Math.min(edgeMin,80)*PX_PER_MIN;
+    if(edgeR>4){
+      svg.appendChild(el('circle',{cx:CX,cy:CY,r:edgeR,fill:'#2E7D32','fill-opacity':'0.30',
+        stroke:'#7CB342','stroke-width':'2','stroke-dasharray':'7 6'}));
+    }
+
+    RINGS.forEach(function(m){
+      var r=m*PX_PER_MIN, b=45*Math.PI/180;
+      svg.appendChild(el('circle',{cx:CX,cy:CY,r:r,fill:'none',stroke:'#5A7A50','stroke-width':'1','stroke-opacity':'0.5'}));
+      if(m>15) svg.appendChild(el('text',{x:CX+r*Math.sin(b)+6,y:CY-r*Math.cos(b)+4,fill:'#9FB68F','font-size':'10.5',
+        'font-family':'IBM Plex Mono, ui-monospace, monospace'},m+' min'));
+    });
+    [['N',0],['E',90],['S',180],['W',270]].forEach(function(t){
+      var b=t[1]*Math.PI/180, r=190;
+      svg.appendChild(el('text',{x:CX+r*Math.sin(b),y:CY-r*Math.cos(b)+5,fill:'#7E9273','font-size':'12','font-weight':'700','text-anchor':'middle'},t[0]));
+    });
+
+    svg.appendChild(el('text',{x:CX,y:26,fill:'#B9CBA9','font-size':'11','text-anchor':'middle'},
+      capped ? 'at ' + fmtLoose(hours) + ' hours every option on this dial fits' : 'dashed edge: how far a three-hour stop can go today'));
+
+    DATA.options.forEach(function(p){
+      var q=pos(o,p), st=statusOf(p);
+      var fill = st==='fits' ? '#7CB342' : (st==='tight' ? '#FFE600' : '#8C9186');
+      var g=el('g',{});
+      g.appendChild(el('line',{x1:CX,y1:CY,x2:q.x,y2:q.y,stroke:'#4C6A44','stroke-width':'1','stroke-opacity': st==='no'?'0.28':'0.7'}));
+      g.appendChild(el('circle',{cx:q.x,cy:q.y,r: p.id===sel?12:8, fill:fill, stroke: p.id===sel?'#FFFFFF':'#123D18','stroke-width': p.id===sel?'3':'1.5'}));
+      var lx=q.x+p.labelDx, ly=q.y+p.labelDy;
+      g.appendChild(el('text',{x:lx,y:ly,fill: st==='no'?'#93A088':'#FFFFFF','font-size':'12.5','font-weight':'700','text-anchor':p.labelAnchor},p.short));
+      g.appendChild(el('text',{x:lx,y:ly+14,fill: st==='no'?'#7E8B75':'#C5E1A5','font-size':'10.5','text-anchor':p.labelAnchor,
+        'font-family':'IBM Plex Mono, ui-monospace, monospace'},p.travelMin+' min \u00b7 '+p.onSiteHours+' h'));
+      svg.appendChild(g);
+    });
+
+    var cSel = sel==='museum-island', cSt=statusOf(DATA.centre);
+    var cFill = cSt==='fits' ? '#7CB342' : (cSt==='tight' ? '#FFE600' : '#8C9186');
+    svg.appendChild(el('circle',{cx:CX,cy:CY,r: cSel?12:8,fill:cFill,stroke: cSel?'#FFFFFF':'#123D18','stroke-width': cSel?'3':'2'}));
+    svg.appendChild(el('text',{x:CX,y:CY-14,fill:'#FFE600','font-size':'12','font-weight':'700','text-anchor':'middle'},'Alexanderplatz'));
+    svg.appendChild(el('text',{x:CX,y:CY+18,fill:'#C5E1A5','font-size':'10.5','text-anchor':'middle',
+      'font-family':'IBM Plex Mono, ui-monospace, monospace'},'stay here: Museum Island, 3 min'));
+  }
+
+  function drawCard(){
+    var p = sel==='museum-island' ? DATA.centre : DATA.options.filter(function(x){return x.id===sel;})[0];
+    var st=statusOf(p), need=p.travelMin*2+p.onSiteHours*60, spare=hours*60-need;
+    var v, cls;
+    if(st==='no'){
+      cls='no';
+      v='Does not fit in '+hours+' hours. You would need '+fmtH(need)+' door to door, which is '+fmtH(-spare)+' more than you have. Save it for a longer day.';
+    } else if(st==='tight'){
+      cls='tight';
+      v='Fits, with '+Math.round(spare)+' minutes spare. That is one missed connection away from being a rush, so leave early and skip the second coffee.';
+    } else {
+      cls='fits';
+      v='Fits comfortably. '+fmtH(need)+' committed, '+fmtH(spare)+' left over for lunch, a detour or a slower start.';
+    }
+    document.getElementById('d4-card').innerHTML =
+      '<h2>'+p.name+'</h2>'+
+      '<div class="d4-where">'+p.where+'</div>'+
+      '<div class="d4-nums">'+
+        '<div class="d4-num"><b>'+p.travelMin+' min</b><span>each way</span></div>'+
+        '<div class="d4-num"><b>'+p.onSiteHours+' h</b><span>least worth staying</span></div>'+
+        '<div class="d4-num"><b>'+fmtH(need)+'</b><span>total the day costs</span></div>'+
+      '</div>'+
+      '<div class="d4-verdict '+cls+'">'+v+'</div>'+
+      '<p class="d4-line"><b>Getting there:</b> '+p.line+'</p>'+
+      '<p>'+p.why+'</p>'+
+      '<p class="watch"><b>Worth knowing:</b> '+p.watch+'</p>';
+  }
+
+  function drawCount(){
+    var all=[DATA.centre].concat(DATA.options);
+    var n=all.filter(function(p){return statusOf(p)!=='no';}).length;
+    document.getElementById('d4-count').textContent = n+' of '+all.length+' fit';
+  }
+
+  function drawPicker(){
+    var box=document.getElementById('d4-picker');
+    box.innerHTML='';
+    [DATA.centre].concat(DATA.options).forEach(function(p){
+      var b=document.createElement('button');
+      b.type='button';
+      b.textContent = p.short || p.name;
+      b.setAttribute('aria-pressed', p.id===sel ? 'true' : 'false');
+      b.addEventListener('click', function(){ sel=p.id; render(); });
+      box.appendChild(b);
+    });
+  }
+
+  function render(){
+    document.getElementById('d4-hours-val').textContent = fmtLoose(hours);
+    drawDial(); drawCard(); drawCount(); drawPicker();
+  }
+
+  fetch('data.json').then(function(r){return r.json();}).then(function(j){
+    DATA=j;
+    document.getElementById('d4-foot').textContent = j.meta.travelSource+' '+j.meta.onSiteSource;
+    var range=document.getElementById('d4-range');
+    range.addEventListener('input', function(){ hours=parseFloat(range.value); render(); });
+    render();
+  });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
