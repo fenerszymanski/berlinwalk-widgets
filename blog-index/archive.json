@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-04T02:13:30.003Z",
+  "updatedAt": "2026-09-04T07:59:11.777Z",
   "source": "Wix Blog API",
-  "totalPosts": 349,
+  "totalPosts": 350,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Train Tickets for Day Trips from Berlin: Group Tickets, the Deutschlandticket and When the ICE Wins",
+      "slug": "berlin-day-trip-train-tickets",
+      "path": "/post/berlin-day-trip-train-tickets",
+      "url": "https://www.berlinwalk.com/post/berlin-day-trip-train-tickets",
+      "excerpt": "Germany runs a whole family of flat-price group train tickets that most Berlin visitors never hear about: 36.50 euros covers five people to anywhere in Brandenburg, and 87 euros takes four of you to Dresden and back. Here is which ticket wins for each destination and group size, where the 09:00 weekday rule bites, and when the ICE is honestly the better buy.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-04T07:57:14.851Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_aea7c1665e6a4fd1bbc809fdee92bf28~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-re1-berlin-hbf.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_aea7c1665e6a4fd1bbc809fdee92bf28~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-re1-berlin-hbf.jpg",
+      "alt": "An ODEG regional train on the RE1 line waiting under the glass roof of Berlin Hauptbahnhof",
+      "relatedToolSlug": "berlin-day-trips-finder"
+    },
     {
       "title": "Szczecin Day Trip from Berlin: Trains, the Bus Bridge and the Right Ticket",
       "slug": "szczecin-day-trip-from-berlin",

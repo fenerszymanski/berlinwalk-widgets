@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-04T02:13:30.003Z",
+  "updatedAt": "2026-09-04T07:59:11.777Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 349,
-  "toolsTotal": 269,
+  "totalPosts": 350,
+  "toolsTotal": 270,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1618,6 +1618,23 @@
   ],
   "latest": [
     {
+      "title": "Train Tickets for Day Trips from Berlin: Group Tickets, the Deutschlandticket and When the ICE Wins",
+      "slug": "berlin-day-trip-train-tickets",
+      "path": "/post/berlin-day-trip-train-tickets",
+      "url": "https://www.berlinwalk.com/post/berlin-day-trip-train-tickets",
+      "excerpt": "Germany runs a whole family of flat-price group train tickets that most Berlin visitors never hear about: 36.50 euros covers five people to anywhere in Brandenburg, and 87 euros takes four of you to Dresden and back. Here is which ticket wins for each destination and group size, where the 09:00 weekday rule bites, and when the ICE is honestly the better buy.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-04T07:57:14.851Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_aea7c1665e6a4fd1bbc809fdee92bf28~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-re1-berlin-hbf.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_aea7c1665e6a4fd1bbc809fdee92bf28~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-re1-berlin-hbf.jpg",
+      "alt": "An ODEG regional train on the RE1 line waiting under the glass roof of Berlin Hauptbahnhof",
+      "relatedToolSlug": "berlin-day-trips-finder"
+    },
+    {
       "title": "Szczecin Day Trip from Berlin: Trains, the Bus Bridge and the Right Ticket",
       "slug": "szczecin-day-trip-from-berlin",
       "path": "/post/szczecin-day-trip-from-berlin",
@@ -1803,26 +1820,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_3020f7a662ff4ce1af7bb70f189ba188~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-museum-island-sunset.jpg",
       "alt": "The Alte Nationalgalerie and the dome of the Berliner Dom seen across the Spree in warm sunset light",
       "relatedToolSlug": "berlin-last-entry-times"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "New Year's Eve in Berlin: Where to Actually Be at Midnight",
-      "slug": "new-years-eve-in-berlin",
-      "path": "/post/new-years-eve-in-berlin",
-      "url": "https://www.berlinwalk.com/post/new-years-eve-in-berlin",
-      "excerpt": "Berlin has one organized New Year party and ten thousand private ones. The Brandenburg Gate tickets, the bridges and hills locals use, the fireworks rules, and how to pick your midnight.",
+      "title": "Train Tickets for Day Trips from Berlin: Group Tickets, the Deutschlandticket and When the ICE Wins",
+      "slug": "berlin-day-trip-train-tickets",
+      "path": "/post/berlin-day-trip-train-tickets",
+      "url": "https://www.berlinwalk.com/post/berlin-day-trip-train-tickets",
+      "excerpt": "Germany runs a whole family of flat-price group train tickets that most Berlin visitors never hear about: 36.50 euros covers five people to anywhere in Brandenburg, and 87 euros takes four of you to Dresden and back. Here is which ticket wins for each destination and group size, where the 09:00 weekday rule bites, and when the ICE is honestly the better buy.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "first-day",
       "topicLabel": "First Day in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-08-29T09:18:39.378Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_a53293c313ba42ec9d036922af43aa54~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-brandenburg-gate-fireworks.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_a53293c313ba42ec9d036922af43aa54~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-brandenburg-gate-fireworks.jpg",
-      "alt": "Red fireworks bursting over the Brandenburg Gate at midnight on New Year's Eve in Berlin",
-      "relatedToolSlug": "berlin-new-year-midnight-planner"
-    }
-  ],
-  "allPosts": [
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-04T07:57:14.851Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_aea7c1665e6a4fd1bbc809fdee92bf28~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-re1-berlin-hbf.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_aea7c1665e6a4fd1bbc809fdee92bf28~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-re1-berlin-hbf.jpg",
+      "alt": "An ODEG regional train on the RE1 line waiting under the glass roof of Berlin Hauptbahnhof",
+      "relatedToolSlug": "berlin-day-trips-finder"
+    },
     {
       "title": "Szczecin Day Trip from Berlin: Trains, the Bus Bridge and the Right Ticket",
       "slug": "szczecin-day-trip-from-berlin",
