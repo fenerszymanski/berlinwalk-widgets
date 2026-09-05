@@ -1,0 +1,379 @@
+{
+  "meta": {
+    "checkedOn": "5 September 2026",
+    "legalNote": "The fourteen categories are the ones Annex II of Regulation (EU) No 1169/2011 makes compulsory. In Germany, the LMIDV of 5 July 2017 lets a counter give that information in writing, electronically or out loud, but only if a written record exists and can be seen on request.",
+    "states": [
+      {
+        "code": 2,
+        "label": "In the standard recipe"
+      },
+      {
+        "code": 1,
+        "label": "Often in it, kitchen dependent"
+      },
+      {
+        "code": 0,
+        "label": "Not normally in it"
+      }
+    ]
+  },
+  "allergens": [
+    {
+      "id": "gl",
+      "code": "GL",
+      "en": "Cereals with gluten",
+      "de": "Glutenhaltiges Getreide",
+      "say": "Ich vertrage kein Gluten. Ist da Weizen, Roggen, Gerste oder Hafer drin?",
+      "sayEn": "I cannot tolerate gluten. Does this contain wheat, rye, barley or oats?",
+      "note": "The only two phrases with a legal meaning are glutenfrei, at most 20 mg/kg, and sehr geringer Glutengehalt, at most 100 mg/kg."
+    },
+    {
+      "id": "cr",
+      "code": "CR",
+      "en": "Crustaceans",
+      "de": "Krebstiere",
+      "say": "Ich bin allergisch gegen Krebstiere. Sind Garnelen oder Krebs darin?",
+      "sayEn": "I am allergic to crustaceans. Are there prawns or crab in this?",
+      "note": "Rare in German food, common in the Vietnamese and Thai kitchens that Berlin is full of."
+    },
+    {
+      "id": "eg",
+      "code": "EG",
+      "en": "Eggs",
+      "de": "Eier",
+      "say": "Ich bin allergisch gegen Ei. Ist Ei darin, auch in der Soße?",
+      "sayEn": "I am allergic to egg. Is there egg in it, including in the sauce?",
+      "note": "Egg hides in mayonnaise, remoulade and every breadcrumb coating, not only in obvious egg dishes."
+    },
+    {
+      "id": "fi",
+      "code": "FI",
+      "en": "Fish",
+      "de": "Fische",
+      "say": "Ich bin allergisch gegen Fisch. Ist Fisch oder Sardelle darin?",
+      "sayEn": "I am allergic to fish. Is there fish or anchovy in this?",
+      "note": "Anchovy sits inside classic German sauces, and fish sauce sits inside most Vietnamese broths."
+    },
+    {
+      "id": "pn",
+      "code": "PN",
+      "en": "Peanuts",
+      "de": "Erdnüsse",
+      "say": "Ich habe eine Erdnussallergie. Sind Erdnüsse darin?",
+      "sayEn": "I have a peanut allergy. Are there peanuts in this?",
+      "note": "Legally a separate category from tree nuts, so ask about both if you react to both."
+    },
+    {
+      "id": "sy",
+      "code": "SY",
+      "en": "Soybeans",
+      "de": "Sojabohnen",
+      "say": "Ich bin allergisch gegen Soja. Ist Soja darin?",
+      "sayEn": "I am allergic to soy. Is there soy in this?",
+      "note": "Soy flour is a normal bakery improver, so a plain German bread roll is not automatically soy free."
+    },
+    {
+      "id": "mk",
+      "code": "MK",
+      "en": "Milk",
+      "de": "Milch",
+      "say": "Ich vertrage keine Milch. Ist Milch, Butter oder Sahne darin?",
+      "sayEn": "I cannot tolerate milk. Is there milk, butter or cream in it?",
+      "note": "Say Milch rather than laktosefrei if this is an allergy. Lactose free is a different thing and still contains milk protein."
+    },
+    {
+      "id": "nu",
+      "code": "NU",
+      "en": "Tree nuts",
+      "de": "Schalenfrüchte",
+      "say": "Ich bin allergisch gegen Nüsse. Sind Nüsse oder Marzipan darin?",
+      "sayEn": "I am allergic to tree nuts. Are there nuts or marzipan in this?",
+      "note": "German cake counters run on hazelnut and almond, and marzipan is an almond product."
+    },
+    {
+      "id": "ce",
+      "code": "CE",
+      "en": "Celery",
+      "de": "Sellerie",
+      "say": "Ich bin allergisch gegen Sellerie. Ist Sellerie in der Brühe oder im Gewürz?",
+      "sayEn": "I am allergic to celery. Is there celery in the stock or in the seasoning?",
+      "note": "The single most underestimated one in Germany. Suppengrün and most stock powders contain celeriac."
+    },
+    {
+      "id": "mu",
+      "code": "MU",
+      "en": "Mustard",
+      "de": "Senf",
+      "say": "Ich bin allergisch gegen Senf. Ist Senf darin, auch in der Soße?",
+      "sayEn": "I am allergic to mustard. Is there mustard in it, including in the sauce?",
+      "note": "Mustard is inside sausage meat, remoulade, potato salad and most dressings, not only the yellow blob on the plate."
+    },
+    {
+      "id": "se",
+      "code": "SE",
+      "en": "Sesame",
+      "de": "Sesamsamen",
+      "say": "Ich bin allergisch gegen Sesam. Ist Sesam darin?",
+      "sayEn": "I am allergic to sesame. Is there sesame in this?",
+      "note": "Bread rolls, flatbread and every tahini based sauce. Sesame also travels between trays at a bakery counter."
+    },
+    {
+      "id": "su",
+      "code": "SU",
+      "en": "Sulphites",
+      "de": "Schwefeldioxid und Sulphite",
+      "say": "Ich reagiere auf Sulfite. Sind Sulfite darin?",
+      "sayEn": "I react to sulphites. Are there sulphites in this?",
+      "note": "Declared above 10 mg/kg. Wine, dried fruit and many pickled things sit above that line."
+    },
+    {
+      "id": "lu",
+      "code": "LU",
+      "en": "Lupin",
+      "de": "Lupinen",
+      "say": "Ich bin allergisch gegen Lupine. Ist Lupinenmehl darin?",
+      "sayEn": "I am allergic to lupin. Is there lupin flour in this?",
+      "note": "Uncommon but real in German baking and in vegan protein products."
+    },
+    {
+      "id": "ml",
+      "code": "ML",
+      "en": "Molluscs",
+      "de": "Weichtiere",
+      "say": "Ich bin allergisch gegen Weichtiere. Sind Muscheln oder Tintenfisch darin?",
+      "sayEn": "I am allergic to molluscs. Are there mussels or squid in this?",
+      "note": "Mostly a question for the Asian and Mediterranean kitchens rather than for German food."
+    }
+  ],
+  "dishes": [
+    {
+      "name": "Currywurst mit Pommes",
+      "where": "Imbiss",
+      "v": {
+        "gl": 1,
+        "sy": 1,
+        "ce": 1,
+        "mu": 1,
+        "su": 1
+      }
+    },
+    {
+      "name": "Döner im Fladenbrot",
+      "where": "Imbiss",
+      "v": {
+        "gl": 2,
+        "eg": 1,
+        "sy": 1,
+        "mk": 2,
+        "ce": 1,
+        "mu": 1,
+        "se": 1
+      }
+    },
+    {
+      "name": "Bulette or Frikadelle",
+      "where": "Imbiss, Kneipe",
+      "v": {
+        "gl": 2,
+        "eg": 2,
+        "mk": 1,
+        "ce": 1,
+        "mu": 2
+      }
+    },
+    {
+      "name": "Schnitzel, breaded",
+      "where": "Restaurant",
+      "v": {
+        "gl": 2,
+        "eg": 2,
+        "mk": 1
+      }
+    },
+    {
+      "name": "Königsberger Klopse",
+      "where": "Restaurant",
+      "v": {
+        "gl": 2,
+        "eg": 2,
+        "fi": 2,
+        "mk": 2,
+        "ce": 1,
+        "mu": 1
+      }
+    },
+    {
+      "name": "Eisbein mit Erbspüree",
+      "where": "Restaurant",
+      "v": {
+        "ce": 2,
+        "mu": 1
+      }
+    },
+    {
+      "name": "Kartoffelsalat",
+      "where": "Everywhere",
+      "v": {
+        "eg": 2,
+        "ce": 1,
+        "mu": 2,
+        "su": 1
+      }
+    },
+    {
+      "name": "Bratkartoffeln mit Speck",
+      "where": "Kneipe",
+      "v": {
+        "ce": 1
+      }
+    },
+    {
+      "name": "Soljanka",
+      "where": "East Berlin classic",
+      "v": {
+        "gl": 1,
+        "mk": 2,
+        "ce": 2,
+        "mu": 1,
+        "su": 1
+      }
+    },
+    {
+      "name": "Erbsensuppe",
+      "where": "Kneipe, market",
+      "v": {
+        "gl": 1,
+        "ce": 2,
+        "mu": 1
+      }
+    },
+    {
+      "name": "Brezel and Laugengebäck",
+      "where": "Bakery",
+      "v": {
+        "gl": 2,
+        "sy": 1,
+        "mk": 1,
+        "se": 1,
+        "lu": 1
+      }
+    },
+    {
+      "name": "Schrippe, the Berlin roll",
+      "where": "Bakery",
+      "v": {
+        "gl": 2,
+        "sy": 1,
+        "se": 1,
+        "lu": 1
+      }
+    },
+    {
+      "name": "Berliner Pfannkuchen",
+      "where": "Bakery",
+      "v": {
+        "gl": 2,
+        "eg": 2,
+        "sy": 1,
+        "mk": 2,
+        "nu": 1,
+        "lu": 1
+      }
+    },
+    {
+      "name": "Käsekuchen and café cake",
+      "where": "Café",
+      "v": {
+        "gl": 2,
+        "eg": 2,
+        "mk": 2,
+        "nu": 1
+      }
+    },
+    {
+      "name": "Falafel im Fladenbrot",
+      "where": "Imbiss",
+      "v": {
+        "gl": 2,
+        "mk": 1,
+        "ce": 1,
+        "mu": 1,
+        "se": 2
+      }
+    },
+    {
+      "name": "Phở and Sommerrolle",
+      "where": "Vietnamese",
+      "v": {
+        "gl": 1,
+        "cr": 1,
+        "fi": 2,
+        "pn": 2,
+        "sy": 2,
+        "ml": 1
+      }
+    },
+    {
+      "name": "Fischbrötchen",
+      "where": "Market, station",
+      "v": {
+        "gl": 2,
+        "eg": 1,
+        "fi": 2,
+        "mk": 1,
+        "ce": 1,
+        "mu": 2
+      }
+    },
+    {
+      "name": "Pommes rot-weiß",
+      "where": "Imbiss",
+      "v": {
+        "gl": 1,
+        "eg": 2,
+        "mu": 1,
+        "su": 1
+      }
+    },
+    {
+      "name": "Vegan Döner with seitan",
+      "where": "Imbiss",
+      "v": {
+        "gl": 2,
+        "sy": 2,
+        "mu": 1,
+        "se": 1,
+        "lu": 1
+      }
+    },
+    {
+      "name": "Rote Grütze mit Vanillesoße",
+      "where": "Restaurant",
+      "v": {
+        "eg": 1,
+        "mk": 2,
+        "su": 1
+      }
+    },
+    {
+      "name": "Beer and Berliner Weiße",
+      "where": "Everywhere",
+      "v": {
+        "gl": 2,
+        "su": 1
+      }
+    },
+    {
+      "name": "Wine and Sekt",
+      "where": "Everywhere",
+      "v": {
+        "su": 2
+      }
+    },
+    {
+      "name": "Apfelschorle",
+      "where": "Everywhere",
+      "v": {}
+    }
+  ]
+}

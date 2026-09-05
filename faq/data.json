@@ -10611,5 +10611,35 @@
         "a": "**Anywhere with a direct connection to Alexanderplatz.** The historic centre is compact and the free BerlinWalk tour starts at the World Clock on Alexanderplatz, running about two hours through 11 stops and 16 places before finishing at Hackescher Markt. Mitte, Prenzlauer Berg, Friedrichshain and the northern edge of Kreuzberg all reach it easily. Before booking accommodation, put the address into a map and check the travel time to Alexanderplatz. That number tells you more about how your days will feel than the listing photos do."
       }
     ]
+  },
+  "food-allergies-in-berlin": {
+    "title": "Food Allergies in Berlin - FAQ",
+    "subtitle": "What a German counter is obliged to tell you about the fourteen allergen categories, which Berlin dishes hide celery and mustard, and the sentences that get you a real answer.",
+    "items": [
+      {
+        "q": "Do Berlin restaurants have to tell you about allergens?",
+        "a": "**Yes, and that includes unpackaged food served at a counter.** Annex II of Regulation (EU) No 1169/2011 makes fourteen allergen categories compulsory, and in Germany the LMIDV of 5 July 2017 extends the duty to food sold loose: restaurants, bakeries, butchers, market stalls and canteens. The business may give the information in writing, electronically or out loud, but oral information is only lawful where a written or electronic record of the ingredients exists, is easy to see on request, and a visible notice tells customers that it can be asked for."
+      },
+      {
+        "q": "What are the fourteen allergens on a German menu?",
+        "a": "**Cereals containing gluten, crustaceans, eggs, fish, peanuts, soybeans, milk, tree nuts, celery, mustard, sesame, sulphites, lupin and molluscs.** In German they appear as Glutenhaltiges Getreide, Krebstiere, Eier, Fische, Erdnüsse, Sojabohnen, Milch, Schalenfrüchte, Sellerie, Senf, Sesamsamen, Schwefeldioxid und Sulphite, Lupinen and Weichtiere. Peanuts and tree nuts are two separate categories in law, so ask about both if you react to both."
+      },
+      {
+        "q": "Which Berlin dishes hide celery and mustard?",
+        "a": "**Far more than visitors expect, because both sit inside the base rather than on top of the plate.** Celeriac is part of Suppengrün and most stock powders, so it turns up in Erbsensuppe, Soljanka, gravies and the broth under Eisbein. Mustard is inside sausage meat, remoulade, Kartoffelsalat and most dressings, which puts it into Currywurst, Bulette, Fischbrötchen and the potato salad next to them. Those are the two categories worth asking about even when the menu looks harmless."
+      },
+      {
+        "q": "Can you get gluten-free food in Berlin?",
+        "a": "**Yes, and the word itself is legally controlled.** Regulation (EU) No 828/2014 allows glutenfrei only at no more than 20 mg/kg of gluten, and sehr geringer Glutengehalt only at no more than 100 mg/kg. The crossed grain ear symbol is licensed in Germany by the Deutsche Zöliakiegesellschaft under an audited European standard. A spoken reassurance at a counter carries none of that, which is why the useful move is to ask for the written allergen record rather than for an opinion."
+      },
+      {
+        "q": "What does Spuren von mean on German food?",
+        "a": "**It is a voluntary warning with no legal threshold behind it.** German consumer bodies are clear that trace labelling is not regulated, so \"kann Spuren von Nüssen enthalten\" tells you almost nothing about how much is actually there. The fourteen mandatory declarations are the reliable part of the label. Treat the trace line as a hint about how the kitchen works rather than as a measurement."
+      },
+      {
+        "q": "How do you say you have a food allergy in German?",
+        "a": "**Start with \"Ich habe eine Lebensmittelallergie\" and then name the category.** For example, \"Ich bin allergisch gegen Sellerie. Ist Sellerie in der Brühe?\" or \"Ich vertrage kein Gluten. Ist da Weizen drin?\" The sentence that changes the conversation is the second one: \"Haben Sie die Allergenkennzeichnung schriftlich? Ich möchte sie bitte sehen.\" That asks for the written record the business is required to hold, and it works in English too if your German runs out."
+      }
+    ]
   }
 }

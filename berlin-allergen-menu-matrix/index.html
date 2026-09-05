@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Berlin Allergen Menu Matrix: which of the fourteen sits in which Berlin dish | BerlinWalk</title>
+<meta name="description" content="Pick the allergen categories you have to avoid, see where they sit across twenty three things you actually get served in Berlin, and take away the exact German sentence to say at the counter.">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root{
+    --g:#1B5E20; --gd:#123D18; --lime:#7CB342; --lightg:#C5E1A5;
+    --yellow:#FFE600; --amber:#F2A900; --red:#E63946; --deep:#8C1F2A;
+    --cream:#FAFAF5; --ink:#212121; --mute:#5C6157;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Montserrat',-apple-system,'Segoe UI',sans-serif;background:var(--cream);color:var(--ink);}
+  .bw-wrap{max-width:900px;margin:0 auto;padding:16px 13px 24px;}
+  .bw-kick{font-size:11px;letter-spacing:.14em;font-weight:700;color:var(--lime);text-transform:uppercase;margin:0;}
+  h1{font-size:23px;line-height:1.2;margin:5px 0 7px;color:var(--gd);}
+  .bw-lead{font-size:14px;line-height:1.55;margin:0 0 14px;max-width:680px;color:#3a4038;}
+
+  .bw-steps{display:flex;gap:7px;margin:0 0 12px;}
+  .bw-steps button{flex:1 1 0;font-family:inherit;font-size:11px;font-weight:800;letter-spacing:.04em;
+    text-transform:uppercase;line-height:1.3;padding:9px 6px;min-height:44px;border-radius:11px;cursor:pointer;
+    border:1.5px solid var(--lightg);background:#fff;color:var(--mute);}
+  .bw-steps button .n{display:block;font-size:14px;color:var(--g);}
+  .bw-steps button[aria-current="step"]{background:var(--gd);border-color:var(--gd);color:#fff;}
+  .bw-steps button[aria-current="step"] .n{color:var(--yellow);}
+  .bw-steps button:focus-visible{outline:3px solid var(--lime);outline-offset:2px;}
+
+  .bw-panel{background:#fff;border:1.5px solid var(--lightg);border-radius:16px;padding:13px 15px 15px;}
+  .bw-panel + .bw-panel{margin-top:13px;}
+  .bw-panel h2{margin:0 0 4px;font-size:16px;color:var(--gd);line-height:1.3;}
+  .bw-panel p.cap{margin:0 0 11px;font-size:12.5px;line-height:1.55;color:var(--mute);}
+
+  .bw-chips{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 12px;}
+  .bw-chips button{font-family:inherit;font-size:12.5px;font-weight:700;line-height:1.25;text-align:left;
+    padding:8px 11px;min-height:44px;border-radius:11px;cursor:pointer;
+    border:1.5px solid var(--lightg);background:#F1F6EA;color:var(--gd);}
+  .bw-chips button span{display:block;font-size:10.5px;font-weight:600;color:var(--mute);letter-spacing:.01em;}
+  .bw-chips button[aria-pressed="true"]{background:var(--gd);border-color:var(--gd);color:#fff;}
+  .bw-chips button[aria-pressed="true"] span{color:var(--lightg);}
+  .bw-chips button:focus-visible{outline:3px solid var(--lime);outline-offset:2px;}
+
+  .bw-plot{margin:0;}
+  .bw-plot svg{display:block;width:100%;height:auto;}
+  .bw-legend{display:flex;gap:13px;flex-wrap:wrap;font-size:11.5px;color:var(--mute);margin:10px 2px 0;align-items:center;}
+  .bw-legend span{display:inline-flex;align-items:center;gap:6px;}
+  .bw-sw{width:13px;height:13px;border-radius:3px;display:inline-block;border:1px solid rgba(0,0,0,.12);}
+
+  .bw-answer{margin:13px 0 0;border-radius:16px;padding:15px 16px 14px;background:var(--gd);color:#fff;}
+  .bw-answer h2{margin:0 0 3px;font-size:19px;line-height:1.25;color:var(--yellow);}
+  .bw-answer .sub{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--lightg);font-weight:700;margin:0 0 11px;}
+  .bw-answer p{margin:0 0 9px;font-size:13.5px;line-height:1.55;color:#EDF3E7;}
+  .bw-answer p:last-child{margin:0;}
+  .bw-answer b{color:#fff;}
+
+  .bw-say{background:var(--yellow);color:#123D18;border-radius:12px;padding:12px 13px;margin:0 0 10px;}
+  .bw-say .de{font-size:15px;font-weight:800;line-height:1.4;margin:0 0 5px;}
+  .bw-say .en{font-size:12.5px;font-weight:600;line-height:1.45;margin:0;}
+
+  .bw-cards{margin:12px 0 0;display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(226px,1fr));}
+  .bw-card{background:#F1F6EA;border-radius:14px;padding:12px 13px;}
+  .bw-card h3{margin:0 0 5px;font-size:13.5px;color:var(--gd);}
+  .bw-card p{margin:0;font-size:12.5px;line-height:1.55;color:#3D4238;}
+  .bw-card p b{color:var(--gd);}
+
+  .bw-nav{display:flex;gap:9px;margin:13px 0 0;}
+  .bw-nav button{font-family:inherit;font-size:13px;font-weight:800;padding:11px 15px;min-height:44px;
+    border-radius:11px;cursor:pointer;border:1.5px solid var(--gd);}
+  .bw-nav .go{background:var(--gd);color:#fff;flex:1 1 auto;}
+  .bw-nav .back{background:#fff;color:var(--gd);}
+  .bw-nav button:focus-visible{outline:3px solid var(--lime);outline-offset:2px;}
+
+  .bw-foot{margin:13px 2px 0;font-size:11px;line-height:1.6;color:var(--mute);}
+  .bw-foot a{color:var(--g);}
+
+  @media (max-width:400px){
+    .bw-wrap{padding:14px 8px 20px;}
+    .bw-chips button{font-size:11.5px;padding:7px 9px;}
+    .bw-steps button{font-size:9.5px;}
+  }
+</style>
+</head>
+<body>
+<div class="bw-wrap">
+  <p class="bw-kick">BerlinWalk tool</p>
+  <h1>Berlin Allergen Menu Matrix</h1>
+  <p class="bw-lead">German law makes a counter tell you about fourteen allergen categories, and two of them turn up in far more Berlin food than anyone expects. Pick yours, see where they sit across twenty three things you actually get handed in this city, then take the German sentence with you.</p>
+
+  <div class="bw-steps" role="tablist" aria-label="Three stages">
+    <button type="button" id="bw-tab0" data-stage="0" role="tab" aria-current="step"><span class="n">1</span>Your categories</button>
+    <button type="button" id="bw-tab1" data-stage="1" role="tab"><span class="n">2</span>Where they sit</button>
+    <button type="button" id="bw-tab2" data-stage="2" role="tab"><span class="n">3</span>What to say</button>
+  </div>
+
+  <section id="bw-stage0">
+    <div class="bw-panel">
+      <h2>Which of the fourteen is yours?</h2>
+      <p class="cap">These are the exact categories Annex II of the EU food information regulation makes compulsory, in the wording a German menu uses. Peanuts and tree nuts are two separate categories in law, so pick both if you react to both.</p>
+      <div class="bw-chips" id="bw-chips"></div>
+    </div>
+    <div class="bw-panel">
+      <h2>How far each one reaches</h2>
+      <p class="cap">Out of the twenty three Berlin dishes and drinks in this tool, this is how many each category shows up in. The two long bars are the ones visitors never see coming.</p>
+      <div class="bw-plot"><svg id="bw-reach" viewBox="0 0 560 300" role="img" aria-labelledby="bw-reach-t"><title id="bw-reach-t">Bar chart of how many Berlin dishes each of the fourteen allergen categories appears in</title></svg></div>
+      <div class="bw-legend">
+        <span><i class="bw-sw" style="background:#8C1F2A"></i>In the standard recipe</span>
+        <span><i class="bw-sw" style="background:#F2A900"></i>Often in it, kitchen dependent</span>
+      </div>
+    </div>
+    <div class="bw-nav"><button type="button" class="go" id="bw-next0">See where they sit on a Berlin menu</button></div>
+  </section>
+
+  <section id="bw-stage1" hidden>
+    <div class="bw-panel">
+      <h2 id="bw-mtitle">Where they sit</h2>
+      <p class="cap" id="bw-mcap"></p>
+      <div class="bw-plot"><svg id="bw-matrix" viewBox="0 0 560 420" role="img" aria-labelledby="bw-matrix-t"><title id="bw-matrix-t">Grid of Berlin dishes against allergen categories</title></svg></div>
+      <div class="bw-legend">
+        <span><i class="bw-sw" style="background:#8C1F2A"></i>In the standard recipe</span>
+        <span><i class="bw-sw" style="background:#F2A900"></i>Often in it, kitchen dependent</span>
+        <span><i class="bw-sw" style="background:#EDF1E6"></i>Not normally in it</span>
+      </div>
+    </div>
+    <div class="bw-answer" id="bw-verdict" aria-live="polite"></div>
+    <div class="bw-nav">
+      <button type="button" class="back" id="bw-back1">Back</button>
+      <button type="button" class="go" id="bw-next1">Now the sentence to say</button>
+    </div>
+  </section>
+
+  <section id="bw-stage2" hidden>
+    <div class="bw-panel">
+      <h2>Say this, then ask to see it in writing</h2>
+      <p class="cap">Read the German line out. Then use the second one, because it is the one that turns a shrug into a document.</p>
+      <div id="bw-phrases"></div>
+    </div>
+    <div class="bw-cards" id="bw-cards"></div>
+    <div class="bw-nav"><button type="button" class="back" id="bw-back2">Back to the grid</button></div>
+  </section>
+
+  <p class="bw-foot" id="bw-foot"></p>
+</div>
+
+<script>
+(function(){
+  var DATA = null;
+  var picked = [];
+  var stageIndex = 0;
+
+  var FILL = { 2:'#8C1F2A', 1:'#F2A900', 0:'#EDF1E6' };
+
+  function el(x){ return document.getElementById(x); }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function svgEl(name, attrs){
+    var n = document.createElementNS('http://www.w3.org/2000/svg', name), k;
+    for (k in attrs) if (Object.prototype.hasOwnProperty.call(attrs, k)) n.setAttribute(k, attrs[k]);
+    return n;
+  }
+  function resetSvg(svg, titleId, titleText){
+    var t = svgEl('title', { id: titleId });
+    t.textContent = titleText;
+    svg.replaceChildren(t);
+  }
+  function has(id){ return picked.indexOf(id) !== -1; }
+  function score(dish, id){ return dish.v[id] || 0; }
+
+  /* How many of the twenty three dishes each category touches. This is the
+     number that makes the point of the whole tool: celery and mustard reach
+     further into German food than milk or nuts do. */
+  function reach(id){
+    var std = 0, dep = 0, i;
+    for (i = 0; i < DATA.dishes.length; i++){
+      var s = score(DATA.dishes[i], id);
+      if (s === 2) std++; else if (s === 1) dep++;
+    }
+    return { std: std, dep: dep, total: std + dep };
+  }
+
+  /* Worst state any of the reader's own categories reaches in one dish. */
+  function dishLevel(dish){
+    var worst = 0, i;
+    for (i = 0; i < picked.length; i++){
+      var s = score(dish, picked[i]);
+      if (s > worst) worst = s;
+    }
+    return worst;
+  }
+
+  function activeAllergens(){
+    if (!picked.length) return DATA.allergens;
+    return DATA.allergens.filter(function(a){ return has(a.id); });
+  }
+
+  function buildChips(){
+    var box = el('bw-chips');
+    box.innerHTML = '';
+    DATA.allergens.forEach(function(a){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-pressed', has(a.id) ? 'true' : 'false');
+      b.innerHTML = esc(a.en) + '<span>' + esc(a.de) + '</span>';
+      b.addEventListener('click', function(){
+        if (has(a.id)) picked = picked.filter(function(x){ return x !== a.id; });
+        else picked = picked.concat([a.id]);
+        render();
+      });
+      box.appendChild(b);
+    });
+  }
+
+  function syncChips(){
+    var kids = el('bw-chips').children, i;
+    for (i = 0; i < kids.length; i++){
+      kids[i].setAttribute('aria-pressed', has(DATA.allergens[i].id) ? 'true' : 'false');
+    }
+  }
+
+  function drawReach(){
+    var svg = el('bw-reach');
+    resetSvg(svg, 'bw-reach-t', 'Bar chart of how many Berlin dishes each of the fourteen allergen categories appears in');
+    var L = 168, R = 552, top = 12, rowH = 20, barH = 12;
+    var rows = DATA.allergens.map(function(a){ return { a: a, r: reach(a.id) }; })
+      .sort(function(x, y){ return y.r.total - x.r.total || y.r.std - x.r.std; });
+    var max = DATA.dishes.length;
+    svg.setAttribute('viewBox', '0 0 560 ' + (top + rows.length * rowH + 16));
+    rows.forEach(function(row, i){
+      var y = top + i * rowH;
+      var mine = has(row.a.id);
+      svg.appendChild(svgEl('text', { x: L - 8, y: y + barH - 2, 'text-anchor': 'end',
+        'font-size': mine ? 11.5 : 11, 'font-weight': mine ? 800 : 600,
+        fill: mine ? '#123D18' : '#5C6157', 'font-family': 'Montserrat, sans-serif' })).textContent = row.a.en;
+      var unit = (R - L) / max;
+      svg.appendChild(svgEl('rect', { x: L, y: y, width: Math.max(unit * row.r.std, 0), height: barH,
+        rx: 3, fill: FILL[2], opacity: mine || !picked.length ? 1 : 0.32 }));
+      svg.appendChild(svgEl('rect', { x: L + unit * row.r.std, y: y, width: Math.max(unit * row.r.dep, 0), height: barH,
+        rx: 3, fill: FILL[1], opacity: mine || !picked.length ? 1 : 0.32 }));
+      svg.appendChild(svgEl('text', { x: L + unit * row.r.total + 7, y: y + barH - 2,
+        'font-size': 10.5, 'font-weight': 700, fill: '#5C6157', 'font-family': 'Montserrat, sans-serif' }))
+        .textContent = row.r.total + ' of ' + max;
+    });
+  }
+
+  function drawMatrix(){
+    var svg = el('bw-matrix');
+    resetSvg(svg, 'bw-matrix-t', 'Grid of Berlin dishes against allergen categories');
+    var cols = activeAllergens();
+    var L = 176, R = 552, headH = 30, rowH = 15, top = headH + 4;
+    /* With one or two categories picked a full-width cell reads as a bar, not a
+       grid, so cap the cell and centre the block inside the same column area. */
+    var colW = Math.min((R - L) / cols.length, 48);
+    var X0 = L + ((R - L) - colW * cols.length) / 2;
+    var dishes = DATA.dishes.slice().sort(function(x, y){
+      return dishLevel(y) - dishLevel(x)
+        || (Object.keys(y.v).length - Object.keys(x.v).length);
+    });
+    var h = top + dishes.length * rowH + 10;
+    svg.setAttribute('viewBox', '0 0 560 ' + h);
+
+    cols.forEach(function(a, c){
+      var cx = X0 + c * colW + colW / 2;
+      svg.appendChild(svgEl('text', { x: cx, y: headH - 14, 'text-anchor': 'middle', 'font-size': 9.5,
+        'font-weight': 800, fill: '#123D18', 'font-family': 'Montserrat, sans-serif' })).textContent = a.code;
+      svg.appendChild(svgEl('text', { x: cx, y: headH - 3, 'text-anchor': 'middle',
+        'font-size': cols.length > 6 ? 6.5 : 9, 'font-weight': 600, fill: '#5C6157',
+        'font-family': 'Montserrat, sans-serif' })).textContent = cols.length > 6 ? a.en.split(' ')[0] : a.en;
+    });
+
+    dishes.forEach(function(d, r){
+      var y = top + r * rowH;
+      var lvl = picked.length ? dishLevel(d) : 0;
+      svg.appendChild(svgEl('rect', { x: 0, y: y, width: 560, height: rowH,
+        fill: r % 2 ? '#FAFAF5' : '#FFFFFF' }));
+      svg.appendChild(svgEl('text', { x: L - 8, y: y + rowH - 4, 'text-anchor': 'end', 'font-size': 9.5,
+        'font-weight': lvl === 2 ? 800 : 600, fill: lvl === 2 ? '#8C1F2A' : (lvl === 1 ? '#8a6100' : '#3D4238'),
+        'font-family': 'Montserrat, sans-serif' })).textContent = d.name;
+      cols.forEach(function(a, c){
+        var s = score(d, a.id);
+        svg.appendChild(svgEl('rect', { x: X0 + c * colW + 1, y: y + 1.5, width: colW - 2, height: rowH - 3,
+          rx: 2.5, fill: FILL[s], stroke: s ? 'none' : '#E2E8DA' }));
+      });
+    });
+  }
+
+  function verdict(){
+    var box = el('bw-verdict');
+    if (!picked.length){
+      box.innerHTML = '<h2>Nothing picked yet</h2><p class="sub">the grid is showing all fourteen</p>'
+        + '<p>Go back a stage and choose the categories you actually have to avoid. The grid then reorders itself so the dishes that carry yours sit at the top, and the sentence in stage three is built from your own list.</p>';
+      return;
+    }
+    var out = 0, ask = 0, clear = 0;
+    DATA.dishes.forEach(function(d){
+      var l = dishLevel(d);
+      if (l === 2) out++; else if (l === 1) ask++; else clear++;
+    });
+    var names = DATA.allergens.filter(function(a){ return has(a.id); }).map(function(a){ return a.en.toLowerCase(); });
+    var worstList = DATA.dishes.filter(function(d){ return dishLevel(d) === 2; }).slice(0, 3)
+      .map(function(d){ return d.name; }).join(', ');
+    box.innerHTML = '<h2>' + out + ' of ' + DATA.dishes.length + ' are out before you order</h2>'
+      + '<p class="sub">' + esc(names.join(' + ')) + '</p>'
+      + '<p><b>' + out + '</b> carry your category in the standard recipe, <b>' + ask + '</b> depend entirely on the kitchen, and <b>' + clear + '</b> are not normally a problem. '
+      + (out ? 'The first ones to strike off are <b>' + esc(worstList) + '</b>. ' : '')
+      + 'The middle group is the one worth the question, because that is where the same dish is fine in one Imbiss and not in the next.</p>'
+      + '<p>This grid is built from standard recipes, not from any particular kitchen. It is there to tell you which question to ask, never to tell you a plate is safe.</p>';
+  }
+
+  function drawPhrases(){
+    var box = el('bw-phrases');
+    box.innerHTML = '';
+    var mine = DATA.allergens.filter(function(a){ return has(a.id); });
+    if (!mine.length){
+      box.innerHTML = '<div class="bw-say"><p class="de">Ich habe eine Lebensmittelallergie.</p>'
+        + '<p class="en">I have a food allergy. Pick your categories in stage one and this becomes the exact sentence for them.</p></div>';
+    } else {
+      mine.forEach(function(a){
+        var d = document.createElement('div');
+        d.className = 'bw-say';
+        d.innerHTML = '<p class="de">' + esc(a.say) + '</p><p class="en">' + esc(a.sayEn) + '</p>';
+        box.appendChild(d);
+      });
+    }
+    var legal = document.createElement('div');
+    legal.className = 'bw-say';
+    legal.style.background = '#123D18';
+    legal.innerHTML = '<p class="de" style="color:#FFE600">Haben Sie die Allergenkennzeichnung schriftlich? Ich möchte sie bitte sehen.</p>'
+      + '<p class="en" style="color:#EDF3E7">Do you have the allergen information in writing? I would like to see it, please.</p>';
+    box.appendChild(legal);
+
+    var cards = el('bw-cards');
+    cards.innerHTML = '';
+    var notes = DATA.allergens.filter(function(a){ return has(a.id); });
+    if (!notes.length) notes = [DATA.allergens[8], DATA.allergens[9]];
+    notes.slice(0, 6).forEach(function(a){
+      var c = document.createElement('div');
+      c.className = 'bw-card';
+      c.innerHTML = '<h3>' + esc(a.en) + ' / ' + esc(a.de) + '</h3><p>' + esc(a.note) + '</p>';
+      cards.appendChild(c);
+    });
+    var c2 = document.createElement('div');
+    c2.className = 'bw-card';
+    c2.innerHTML = '<h3>What a vague answer means</h3><p>"Ich glaube nicht" is not an answer, it is a guess. '
+      + 'The written record has to exist, so ask for it rather than accepting a shrug. '
+      + 'A printed <b>Spuren von</b> line is the opposite case: it is voluntary, has no legal threshold behind it, and tells you very little.</p>';
+    cards.appendChild(c2);
+  }
+
+  function showStage(){
+    [0,1,2].forEach(function(i){
+      el('bw-stage' + i).hidden = (i !== stageIndex);
+      var tab = el('bw-tab' + i);
+      if (i === stageIndex) tab.setAttribute('aria-current', 'step');
+      else tab.setAttribute('aria-current', 'false');
+    });
+  }
+
+  function render(){
+    syncChips();
+    drawReach();
+    drawMatrix();
+    verdict();
+    drawPhrases();
+    var n = picked.length;
+    el('bw-mtitle').textContent = n ? 'Where your ' + (n === 1 ? 'category' : n + ' categories') + ' sit' : 'Where all fourteen sit';
+    el('bw-mcap').textContent = n
+      ? 'Only your own columns are shown, and the dishes have moved so the ones carrying your category in the standard recipe sit at the top.'
+      : 'All fourteen columns, all twenty three dishes. Pick your categories in stage one and this narrows to the ones that matter to you.';
+    showStage();
+  }
+
+  function boot(){
+    buildChips();
+    [0,1,2].forEach(function(i){
+      el('bw-tab' + i).addEventListener('click', function(){ stageIndex = i; render(); window.scrollTo(0, 0); });
+    });
+    el('bw-next0').addEventListener('click', function(){ stageIndex = 1; render(); window.scrollTo(0, 0); });
+    el('bw-next1').addEventListener('click', function(){ stageIndex = 2; render(); window.scrollTo(0, 0); });
+    el('bw-back1').addEventListener('click', function(){ stageIndex = 0; render(); window.scrollTo(0, 0); });
+    el('bw-back2').addEventListener('click', function(){ stageIndex = 1; render(); window.scrollTo(0, 0); });
+    el('bw-foot').innerHTML = 'The fourteen categories are the ones Annex II of '
+      + '<a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02011R1169-20180101" target="_blank" rel="noopener">Regulation (EU) No 1169/2011</a> makes compulsory. '
+      + 'In Germany, <a href="https://www.gesetze-im-internet.de/lmidv/BJNR227210017.html" target="_blank" rel="noopener">§ 4 LMIDV</a> lets a counter give that information in writing, electronically or out loud, '
+      + 'but only where a written record exists and is easy to see on request. The glutenfrei claim is capped at 20 mg/kg by '
+      + '<a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32014R0828" target="_blank" rel="noopener">Regulation (EU) No 828/2014</a>. '
+      + 'Rules checked on ' + esc(DATA.meta.checkedOn) + '. The dish grid is built from standard recipes and is not a safety judgement about any particular kitchen.';
+    render();
+  }
+
+  fetch('data.json').then(function(r){ return r.json(); }).then(function(j){
+    DATA = j;
+    boot();
+  }).catch(function(){
+    el('bw-chips').innerHTML = '<p style="font-size:13px;color:#5C6157">Could not load the tool. Try a refresh.</p>';
+  });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
