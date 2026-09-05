@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-05T02:08:12.162Z",
+  "updatedAt": "2026-09-05T08:06:51.327Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 352,
-  "toolsTotal": 272,
+  "totalPosts": 353,
+  "toolsTotal": 273,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1618,6 +1618,23 @@
   ],
   "latest": [
     {
+      "title": "When Is Berlin Busiest? The Trade Fair and Event Weeks That Fill the Hotels",
+      "slug": "when-is-berlin-busiest",
+      "path": "/post/when-is-berlin-busiest",
+      "url": "https://www.berlinwalk.com/post/when-is-berlin-busiest",
+      "excerpt": "Berlin does not fill up evenly across a season. It fills up in windows, most of them three to ten days long, and most of them driven by a trade fair out at the Messe grounds in Charlottenburg that no visitor has ever heard of. Here are the dated windows between now and next autumn, taken from the organisers themselves, what each one changes for an ordinary visitor, and how far you would have to shift your dates to step around the expensive ones.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-05T08:03:24.269Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_73951f5d413b449c846ccd8ec62c7bab~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-messe-berlin-grounds.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_73951f5d413b449c846ccd8ec62c7bab~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-messe-berlin-grounds.jpg",
+      "alt": "The Messe Berlin rotunda with its lettering, the exhibition halls stretching back towards the radio tower, and the Charlottenburg skyline behind",
+      "relatedToolSlug": "berlin-busy-week-calendar"
+    },
+    {
       "title": "4 Days in Berlin: What to Do With the Day a Three-Day Trip Cannot Fit",
       "slug": "4-days-in-berlin",
       "path": "/post/4-days-in-berlin",
@@ -1803,23 +1820,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_ff85376dc8e847509310f5fb022c30d0~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/german-unity-day-berlin-reichstag-flag.jpg",
       "alt": "The German federal flag flying in front of the Reichstag building",
       "relatedToolSlug": "berlin-unity-day-board"
-    },
-    {
-      "title": "Berlin Central Bus Station: Where Your FlixBus Arrives and How to Get Into the City",
-      "slug": "berlin-central-bus-station",
-      "path": "/post/berlin-central-bus-station",
-      "url": "https://www.berlinwalk.com/post/berlin-central-bus-station",
-      "excerpt": "Berlin's central bus station sits 7 km west of Alexanderplatz, and almost nobody checks the stop list before booking. Which of the nine FlixBus stops to choose for your part of the city, the two stations that split Berlin between them, and the 4 EUR ticket that covers the ride in.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "5 min read",
-      "publishedDate": "2026-08-31T05:09:43.512Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_5d84175462c642fd83c46ed523d25cca~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-central-bus-station-zob-boarding.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_5d84175462c642fd83c46ed523d25cca~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-central-bus-station-zob-boarding.jpg",
-      "alt": "Travellers boarding a green FlixBus coach under the departure board at Berlin ZOB",
-      "relatedToolSlug": "berlin-bus-arrival-map"
     }
   ]
 }
