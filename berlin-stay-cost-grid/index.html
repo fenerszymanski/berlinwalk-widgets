@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Berlin Stay Cost Grid: where a hotel, an apartment or hostel beds win | BerlinWalk</title>
+<meta name="description" content="Put in the three nightly prices you are actually looking at and see which one wins at every combination of nights and travellers, city tax included.">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root{
+    --g:#1B5E20; --gd:#123D18; --lime:#7CB342; --lightg:#C5E1A5;
+    --yellow:#FFE600; --amber:#F2A900; --cream:#FAFAF5; --ink:#212121; --mute:#5C6157;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Montserrat',-apple-system,'Segoe UI',sans-serif;background:var(--cream);color:var(--ink);}
+  .bw-wrap{max-width:900px;margin:0 auto;padding:16px 13px 24px;}
+  .bw-kick{font-size:11px;letter-spacing:.14em;font-weight:700;color:var(--lime);text-transform:uppercase;margin:0;}
+  h1{font-size:23px;line-height:1.2;margin:5px 0 7px;color:var(--gd);}
+  .bw-lead{font-size:14px;line-height:1.55;margin:0 0 14px;max-width:670px;color:#3a4038;}
+
+  .bw-panel{background:#fff;border:1.5px solid var(--lightg);border-radius:16px;padding:13px 15px 14px;}
+  .bw-panel + .bw-panel{margin-top:13px;}
+  .bw-panel h2{margin:0 0 10px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--g);font-weight:800;}
+  .bw-row{display:flex;gap:12px;flex-wrap:wrap;}
+  .bw-field{display:flex;flex-direction:column;gap:5px;flex:1 1 148px;min-width:132px;}
+  .bw-field label{font-size:11px;font-weight:700;letter-spacing:.05em;color:var(--gd);line-height:1.35;}
+  .bw-field .hint{font-size:10.5px;font-weight:600;color:var(--mute);letter-spacing:0;}
+  .bw-field input, .bw-field select{font-family:inherit;font-size:15px;font-weight:600;color:var(--gd);
+    background:#fff;border:1.5px solid var(--lightg);border-radius:10px;padding:9px 10px;width:100%;min-height:44px;}
+  .bw-field input:focus-visible, .bw-field select:focus-visible{outline:3px solid var(--lime);outline-offset:1px;}
+
+  .bw-plot{margin:13px 0 0;background:#fff;border:1.5px solid var(--lightg);border-radius:16px;padding:14px 12px 10px;}
+  .bw-plot h2{margin:0 0 2px;font-size:15px;color:var(--gd);}
+  .bw-plot p.cap{margin:0 0 10px;font-size:12px;line-height:1.5;color:var(--mute);}
+  .bw-plot svg{display:block;width:100%;height:auto;}
+
+  .bw-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--mute);margin:10px 2px 0;align-items:center;}
+  .bw-legend span{display:inline-flex;align-items:center;gap:6px;}
+  .bw-sw{width:13px;height:13px;border-radius:3px;display:inline-block;}
+
+  .bw-answer{margin:13px 0 0;border-radius:16px;padding:15px 16px 14px;background:var(--gd);color:#fff;}
+  .bw-answer h2{margin:0 0 3px;font-size:19px;line-height:1.25;color:var(--yellow);}
+  .bw-answer .sub{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--lightg);font-weight:700;margin:0 0 11px;}
+  .bw-bars{margin:0 0 11px;}
+  .bw-bar{display:grid;grid-template-columns:96px 1fr auto;gap:9px;align-items:center;margin:0 0 7px;font-size:13px;}
+  .bw-bar .nm{font-weight:700;color:#EDF3E7;}
+  .bw-bar .tr{background:rgba(255,255,255,.12);border-radius:5px;height:14px;overflow:hidden;}
+  .bw-bar .fl{height:100%;border-radius:5px;}
+  .bw-bar .vl{font-weight:800;color:#fff;font-variant-numeric:tabular-nums;}
+  .bw-bar.win .nm{color:var(--yellow);}
+  .bw-flip{background:var(--yellow);color:#123D18;border-radius:10px;padding:10px 12px;font-size:13.5px;line-height:1.5;font-weight:600;margin:0 0 9px;}
+  .bw-why{background:rgba(255,255,255,.09);border-left:4px solid var(--lime);border-radius:10px;padding:11px 12px;font-size:13.5px;line-height:1.55;color:#EDF3E7;}
+  .bw-why b{color:#fff;}
+
+  .bw-cards{margin:13px 0 0;display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(216px,1fr));}
+  .bw-card{background:#F1F6EA;border-radius:14px;padding:12px 13px;}
+  .bw-card h3{margin:0 0 5px;font-size:13.5px;color:var(--gd);display:flex;align-items:center;gap:7px;}
+  .bw-card p{margin:0 0 7px;font-size:12.5px;line-height:1.55;color:#3D4238;}
+  .bw-card p:last-child{margin:0;}
+  .bw-card p b{color:var(--gd);}
+
+  .bw-foot{margin:13px 2px 0;font-size:11px;line-height:1.6;color:var(--mute);}
+  .bw-foot a{color:var(--g);}
+
+  @media (max-width:400px){
+    .bw-wrap{padding:14px 8px 20px;}
+    .bw-field{flex:1 1 128px;min-width:118px;}
+    .bw-bar{grid-template-columns:80px 1fr auto;gap:7px;font-size:12.5px;}
+  }
+</style>
+</head>
+<body>
+<div class="bw-wrap">
+  <p class="bw-kick">BerlinWalk tool</p>
+  <h1>Berlin Stay Cost Grid</h1>
+  <p class="bw-lead">A hotel, a whole apartment and a set of hostel beds do not get more expensive in the same way, so the cheapest one changes as your party grows and your stay gets longer. Put in the three prices you are actually looking at and the grid below redraws to show which one wins in every case.</p>
+
+  <div class="bw-panel">
+    <h2>The three prices you are looking at</h2>
+    <p style="margin:-4px 0 11px;font-size:12px;line-height:1.5;color:#5C6157">These four numbers are placeholders so the grid has something to draw. Replace them with the actual prices in the tabs you have open, otherwise the answer is about my numbers instead of your trip.</p>
+    <div class="bw-row">
+      <div class="bw-field">
+        <label for="bw-hotel">Hotel, per room per night <span class="hint">EUR, one room sleeps two</span></label>
+        <input type="number" id="bw-hotel" min="10" max="900" step="5" value="80" inputmode="numeric">
+      </div>
+      <div class="bw-field">
+        <label for="bw-apt">Apartment, per night <span class="hint">EUR, whole flat</span></label>
+        <input type="number" id="bw-apt" min="10" max="900" step="5" value="150" inputmode="numeric">
+      </div>
+      <div class="bw-field">
+        <label for="bw-clean">Cleaning fee <span class="hint">EUR, charged once</span></label>
+        <input type="number" id="bw-clean" min="0" max="400" step="5" value="70" inputmode="numeric">
+      </div>
+      <div class="bw-field">
+        <label for="bw-hostel">Hostel, per bed per night <span class="hint">EUR, dorm or shared</span></label>
+        <input type="number" id="bw-hostel" min="5" max="400" step="5" value="45" inputmode="numeric">
+      </div>
+    </div>
+  </div>
+
+  <div class="bw-panel">
+    <h2>Your trip</h2>
+    <div class="bw-row">
+      <div class="bw-field">
+        <label for="bw-nights">Nights</label>
+        <select id="bw-nights"></select>
+      </div>
+      <div class="bw-field">
+        <label for="bw-people">Travellers</label>
+        <select id="bw-people"></select>
+      </div>
+    </div>
+  </div>
+
+  <div class="bw-answer" id="bw-answer" aria-live="polite"></div>
+
+  <div class="bw-plot">
+    <h2>Where each one wins</h2>
+    <p class="cap">Every square is one combination of nights and travellers, coloured by whichever option costs least there. The darker the square, the bigger the gap. Your own trip is the ringed one.</p>
+    <svg id="bw-grid" viewBox="0 0 520 300" role="img" aria-labelledby="bw-grid-title"><title id="bw-grid-title">Grid of nights against travellers, each square coloured by the cheapest accommodation type</title></svg>
+    <div class="bw-legend" id="bw-legend"></div>
+  </div>
+
+  <div class="bw-cards" id="bw-cards"></div>
+
+  <p class="bw-foot" id="bw-foot"></p>
+</div>
+
+<script>
+(function(){
+  var DATA = null;
+  var COST = null;
+
+  function esc(s){
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+  function eur(n){ return '€' + Math.round(n).toLocaleString('en-GB'); }
+  function el(x){ return document.getElementById(x); }
+  function num(x, min, max, fallback){
+    var v = parseFloat(el(x).value);
+    if (!isFinite(v)) return fallback;
+    if (v < min) return min;
+    if (v > max) return max;
+    return v;
+  }
+
+  /* Berlin charges 7.5 % of the net accommodation price on every paid bed in the
+     city, hotel, hostel and holiday flat alike. Extras are outside the base, so
+     the one-off cleaning fee is added after the tax rather than inside it. */
+  function withTax(net){ return net * (1 + DATA.meta.cityTaxRate); }
+
+  function rooms(people){ return Math.ceil(people / DATA.meta.hotelBedsPerRoom); }
+
+  function costs(nights, people){
+    var p = COST;
+    return {
+      hotel: withTax(p.hotelNight * rooms(people) * nights),
+      apartment: withTax(p.apartmentNight * nights) + p.apartmentClean,
+      hostel: withTax(p.hostelNight * people * nights)
+    };
+  }
+
+  function ranked(c){
+    var keys = ['hotel','apartment','hostel'];
+    var order = keys.slice().sort(function(a,b){ return c[a] - c[b]; });
+    return { winner: order[0], runnerUp: order[1], order: order };
+  }
+
+  /* Smallest number of nights at this party size where the flat beats the rooms.
+     This is the number a reader actually wants, and no search snippet can give
+     it, because it depends on their own three prices. */
+  function flipNight(people){
+    var n;
+    for (n = 1; n <= DATA.meta.maxNights; n++){
+      var c = costs(n, people);
+      if (c.apartment < c.hotel) return n;
+    }
+    return null;
+  }
+
+  function labelOf(key){
+    var i;
+    for (i = 0; i < DATA.options.length; i++) if (DATA.options[i].key === key) return DATA.options[i].label;
+    return key;
+  }
+  function colourOf(key){
+    var i;
+    for (i = 0; i < DATA.options.length; i++) if (DATA.options[i].key === key) return DATA.options[i].colour;
+    return '#888';
+  }
+
+  function readInputs(){
+    COST = {
+      hotelNight: num('bw-hotel', 10, 900, DATA.defaults.hotelNight),
+      apartmentNight: num('bw-apt', 10, 900, DATA.defaults.apartmentNight),
+      apartmentClean: num('bw-clean', 0, 400, DATA.defaults.apartmentClean),
+      hostelNight: num('bw-hostel', 5, 400, DATA.defaults.hostelNight)
+    };
+  }
+
+  function drawGrid(selN, selP){
+    var maxN = DATA.meta.maxNights, maxP = DATA.meta.maxTravellers;
+    var padL = 46, padT = 26, padR = 10, padB = 30;
+    var w = 520, h = 300;
+    var cw = (w - padL - padR) / maxN;
+    var ch = (h - padT - padB) / maxP;
+    var parts = '<title id="bw-grid-title">Grid of nights against travellers, each square coloured by the cheapest accommodation type</title>';
+    var n, p, c, r, gap, share, cx, cy;
+
+    for (p = 1; p <= maxP; p++){
+      for (n = 1; n <= maxN; n++){
+        c = costs(n, p);
+        r = ranked(c);
+        gap = c[r.runnerUp] - c[r.winner];
+        /* Opacity carries how decisive the win is, capped at a 25 % margin. */
+        share = Math.min(1, gap / Math.max(1, c[r.runnerUp]) / 0.25);
+        cx = padL + (n - 1) * cw;
+        cy = padT + (maxP - p) * ch;
+        parts += '<rect x="' + (cx + 1).toFixed(1) + '" y="' + (cy + 1).toFixed(1) + '" '
+          + 'width="' + (cw - 2).toFixed(1) + '" height="' + (ch - 2).toFixed(1) + '" rx="3" '
+          + 'fill="' + colourOf(r.winner) + '" fill-opacity="' + (0.3 + 0.7 * share).toFixed(3) + '"></rect>';
+      }
+    }
+
+    /* Your own cell, ringed rather than recoloured so the field stays readable. */
+    cx = padL + (selN - 1) * cw;
+    cy = padT + (maxP - selP) * ch;
+    parts += '<rect x="' + (cx - 1).toFixed(1) + '" y="' + (cy - 1).toFixed(1) + '" '
+      + 'width="' + (cw + 2).toFixed(1) + '" height="' + (ch + 2).toFixed(1) + '" rx="5" '
+      + 'fill="none" stroke="#123D18" stroke-width="3"></rect>';
+    parts += '<rect x="' + (cx + 0.5).toFixed(1) + '" y="' + (cy + 0.5).toFixed(1) + '" '
+      + 'width="' + (cw - 1).toFixed(1) + '" height="' + (ch - 1).toFixed(1) + '" rx="4" '
+      + 'fill="none" stroke="#FFE600" stroke-width="2"></rect>';
+
+    for (n = 1; n <= maxN; n++){
+      parts += '<text x="' + (padL + (n - 0.5) * cw).toFixed(1) + '" y="' + (h - padB + 15)
+        + '" font-size="11" font-weight="700" fill="#5C6157" text-anchor="middle">' + n + '</text>';
+    }
+    for (p = 1; p <= maxP; p++){
+      parts += '<text x="' + (padL - 9) + '" y="' + (padT + (maxP - p + 0.5) * ch + 4).toFixed(1)
+        + '" font-size="11" font-weight="700" fill="#5C6157" text-anchor="end">' + p + '</text>';
+    }
+    parts += '<text x="' + (padL + (w - padL - padR) / 2).toFixed(1) + '" y="' + (h - 4)
+      + '" font-size="11" font-weight="800" fill="#123D18" text-anchor="middle" letter-spacing="1">NIGHTS</text>';
+    parts += '<text x="14" y="' + (padT + (h - padT - padB) / 2).toFixed(1)
+      + '" font-size="11" font-weight="800" fill="#123D18" text-anchor="middle" letter-spacing="1" '
+      + 'transform="rotate(-90 14 ' + (padT + (h - padT - padB) / 2).toFixed(1) + ')">TRAVELLERS</text>';
+
+    el('bw-grid').innerHTML = parts;
+  }
+
+  function drawAnswer(nights, people){
+    var c = costs(nights, people);
+    var r = ranked(c);
+    var top = Math.max(c.hotel, c.apartment, c.hostel);
+    var gap = c[r.runnerUp] - c[r.winner];
+    var flip = flipNight(people);
+    var i, k, bars = '';
+
+    for (i = 0; i < r.order.length; i++){
+      k = r.order[i];
+      bars += '<div class="bw-bar' + (i === 0 ? ' win' : '') + '">'
+        + '<span class="nm">' + esc(labelOf(k)) + '</span>'
+        + '<span class="tr"><span class="fl" style="width:' + (100 * c[k] / top).toFixed(1) + '%;background:'
+        + colourOf(k) + '"></span></span>'
+        + '<span class="vl">' + eur(c[k]) + '</span>'
+        + '</div>';
+    }
+
+    var flipLine;
+    if (flip === 1){
+      flipLine = 'At ' + people + (people === 1 ? ' traveller' : ' travellers') + ' the flat is already cheaper than the rooms on <b>the very first night</b>. The cleaning fee never gets a chance to matter here.';
+    } else if (r.winner === 'apartment' && flip){
+      flipLine = 'At ' + people + (people === 1 ? ' traveller' : ' travellers') + ' the flat overtakes the rooms at <b>'
+        + flip + ' nights</b>. Any shorter and the cleaning fee is still eating the difference.';
+    } else if (flip){
+      flipLine = flip > nights
+        ? 'Stay <b>' + flip + ' nights</b> at this party size and the apartment overtakes the hotel. You are ' + (flip - nights) + (flip - nights === 1 ? ' night' : ' nights') + ' short of that.'
+        : 'The apartment already beats the hotel here, from <b>' + flip + ' nights</b> upwards. It is the hostel beds that are undercutting both.';
+    } else {
+      flipLine = 'At these prices the apartment never catches the rooms inside ' + DATA.meta.maxNights + ' nights, at any party size on the grid.';
+    }
+
+    var why = '';
+    for (i = 0; i < DATA.options.length; i++){
+      if (DATA.options[i].key === r.winner) why = DATA.options[i].scales;
+    }
+
+    el('bw-answer').innerHTML =
+      '<h2>' + esc(labelOf(r.winner)) + ', by ' + eur(gap) + '</h2>'
+      + '<p class="sub">' + nights + (nights === 1 ? ' night' : ' nights') + ' · ' + people
+      + (people === 1 ? ' traveller' : ' travellers') + ' · city tax included</p>'
+      + '<div class="bw-bars">' + bars + '</div>'
+      + '<div class="bw-flip">' + flipLine + '</div>'
+      + '<div class="bw-why">' + esc(why) + '</div>';
+  }
+
+  function drawCards(){
+    var out = '', i, o;
+    for (i = 0; i < DATA.options.length; i++){
+      o = DATA.options[i];
+      out += '<div class="bw-card"><h3><span class="bw-sw" style="background:' + o.colour + '"></span>'
+        + esc(o.label) + '</h3><p>' + esc(o.note) + '</p></div>';
+    }
+    el('bw-cards').innerHTML = out;
+  }
+
+  function drawLegend(){
+    var out = '', i, o;
+    for (i = 0; i < DATA.options.length; i++){
+      o = DATA.options[i];
+      out += '<span><i class="bw-sw" style="background:' + o.colour + '"></i>' + esc(o.label) + ' cheapest</span>';
+    }
+    out += '<span><i class="bw-sw" style="background:#fff;border:2px solid #123D18"></i>your trip</span>';
+    el('bw-legend').innerHTML = out;
+  }
+
+  function render(){
+    readInputs();
+    var nights = parseInt(el('bw-nights').value, 10);
+    var people = parseInt(el('bw-people').value, 10);
+    drawAnswer(nights, people);
+    drawGrid(nights, people);
+  }
+
+  function fillSelects(){
+    var n, p, a = '', b = '';
+    for (n = 1; n <= DATA.meta.maxNights; n++){
+      a += '<option value="' + n + '"' + (n === 3 ? ' selected' : '') + '>' + n + (n === 1 ? ' night' : ' nights') + '</option>';
+    }
+    for (p = 1; p <= DATA.meta.maxTravellers; p++){
+      b += '<option value="' + p + '"' + (p === 2 ? ' selected' : '') + '>' + p + (p === 1 ? ' traveller' : ' travellers') + '</option>';
+    }
+    el('bw-nights').innerHTML = a;
+    el('bw-people').innerHTML = b;
+  }
+
+  function boot(){
+    fillSelects();
+    drawLegend();
+    drawCards();
+    el('bw-foot').innerHTML = 'Every price on this grid carries Berlin’s '
+      + (DATA.meta.cityTaxRate * 100) + ' % accommodation tax, which applies to hotels, hostels and holiday flats alike, on the '
+      + esc(DATA.meta.cityTaxBase) + '. The cleaning fee is treated as an extra and sits outside that base. '
+      + 'Hotel rooms are counted at ' + DATA.meta.hotelBedsPerRoom + ' people per room. Tax rule checked on 5 September 2026 against the '
+      + '<a href="https://service.berlin.de/dienstleistung/326105/" target="_blank" rel="noopener">Berlin service portal</a>. '
+      + 'Prices are yours to fill in, not mine to guess.';
+    var ids = ['bw-hotel','bw-apt','bw-clean','bw-hostel','bw-nights','bw-people'], i;
+    for (i = 0; i < ids.length; i++){
+      el(ids[i]).addEventListener('input', render);
+      el(ids[i]).addEventListener('change', render);
+    }
+    render();
+  }
+
+  fetch('data.json').then(function(r){ return r.json(); }).then(function(j){
+    DATA = j;
+    boot();
+  }).catch(function(){
+    el('bw-answer').innerHTML = '<h2>Could not load the tool</h2><p class="sub">try a refresh</p>';
+  });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "checkedOn": "2026-09-05",
+    "cityTaxRate": 0.075,
+    "cityTaxBase": "net accommodation price, breakfast and other extras excluded",
+    "maxNights": 10,
+    "maxTravellers": 6,
+    "hotelBedsPerRoom": 2,
+    "apartmentSleeps": 6,
+    "sources": [
+      "https://service.berlin.de/dienstleistung/326105/",
+      "https://www.berlin.de/sen/finanzen/steuern/informationen-fuer-steuerzahler-/faq-steuern/artikel.57911.php"
+    ]
+  },
+  "defaults": {
+    "hotelNight": 80,
+    "apartmentNight": 150,
+    "apartmentClean": 70,
+    "hostelNight": 45
+  },
+  "options": [
+    {
+      "key": "hotel",
+      "label": "Hotel",
+      "colour": "#1B5E20",
+      "scales": "One room sleeps two, so a party of three needs a second room. The price does not care how many nights you stay.",
+      "note": "Reception is open when your flight lands late. That is worth money on an arrival night and nothing at all on the other five."
+    },
+    {
+      "key": "apartment",
+      "label": "Apartment",
+      "colour": "#7CB342",
+      "scales": "One flat, one price, whether you are two people or five. The cleaning fee is charged once, so it hurts a two-night trip and disappears into a ten-night one.",
+      "note": "Check the 17 character registration number in the listing before you pay. Berlin requires it to be visible."
+    },
+    {
+      "key": "hostel",
+      "label": "Hostel beds",
+      "colour": "#F2A900",
+      "scales": "Priced per bed, so it is the only option that gets more expensive with every person you add and every night you stay. Cheapest alone, rarely cheapest as a family of five.",
+      "note": "Private twin rooms in Berlin hostels are usually priced closer to a budget hotel than to a dorm bed, so put that number in the hotel field instead."
+    }
+  ]
+}

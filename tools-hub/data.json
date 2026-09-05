@@ -8158,6 +8158,31 @@
       "image": "https://static.wixstatic.com/media/5a08a3_ae6da24b05a14674a91afe253cd528d8~mv2.png",
       "iconStatus": "live-wix-media",
       "cmsItemId": "2a9e7cc0-afc1-4bba-8b92-72ac51bfb910"
+    },
+    {
+      "slug": "berlin-stay-cost-grid",
+      "title": "Berlin Stay Cost Grid",
+      "lead": "A hotel is priced per room, an apartment per flat with a one-off cleaning fee, and hostel beds per person per night, so the cheapest one moves with your party size and your length of stay. Put in the three prices you are looking at and see which wins at every combination, Berlin city tax included.",
+      "category": "Money",
+      "hubCategory": "MoneyShopping",
+      "type": "Calculator",
+      "tags": [
+        "hotel or apartment in berlin",
+        "berlin accommodation cost",
+        "berlin hostel vs hotel",
+        "berlin city tax 7.5 percent",
+        "berlin apartment cleaning fee",
+        "where to stay in berlin cost"
+      ],
+      "aliases": [
+        "berlin accommodation comparison",
+        "is an apartment cheaper than a hotel in berlin",
+        "berlin stay cost calculator"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-stay-cost-grid/",
+      "embedHeight": 1620,
+      "image": "https://static.wixstatic.com/media/5a08a3_a9c95678ada3410796df75b5665c67bf~mv2.png",
+      "iconStatus": "live-wix-media"
     }
   ],
   "hubCategories": [
