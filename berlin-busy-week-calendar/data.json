@@ -1,0 +1,183 @@
+{
+  "meta": {
+    "checked": "5 September 2026",
+    "range": { "from": "2026-09-01", "to": "2027-09-30" },
+    "note": "Dated windows come from the organisers' own sites, read on 5 September 2026. The pressure level is my own judgement as a Berlin guide, not a price feed."
+  },
+  "levels": {
+    "3": { "label": "City fills up", "colour": "#1B5E20" },
+    "2": { "label": "Noticeably busier", "colour": "#7CB342" },
+    "1": { "label": "Spread across the city", "colour": "#C5E1A5" }
+  },
+  "windows": [
+    {
+      "id": "ifa26",
+      "name": "IFA Berlin",
+      "start": "2026-09-04",
+      "end": "2026-09-08",
+      "level": 3,
+      "where": "Messe Berlin, Charlottenburg",
+      "size": "Around 220,000 visitors from 140 countries in 2025",
+      "reader": "Europe's big consumer technology fair. Trade and private visitors both attend, so five days of hotel demand land in City West and spill east into Mitte.",
+      "source": "ifa-berlin.com"
+    },
+    {
+      "id": "artweek26",
+      "name": "Berlin Art Week",
+      "start": "2026-09-09",
+      "end": "2026-09-13",
+      "level": 1,
+      "where": "Galleries and museums across the city",
+      "size": "No single venue",
+      "reader": "Good week to be here. The crowd is spread over dozens of small venues rather than one hall, so it changes what is open in the evening more than what a room costs.",
+      "source": "berlinartweek.de"
+    },
+    {
+      "id": "innotrans26",
+      "name": "InnoTrans",
+      "start": "2026-09-22",
+      "end": "2026-09-25",
+      "level": 3,
+      "where": "Messe Berlin, Charlottenburg",
+      "size": "169,214 visitors from 128 countries in 2024",
+      "reader": "The rail industry fair, every two years. Almost entirely business travellers on expense accounts, which is exactly the crowd that empties the mid-range hotels first.",
+      "source": "innotrans.de"
+    },
+    {
+      "id": "marathon26",
+      "name": "BMW Berlin-Marathon",
+      "start": "2026-09-26",
+      "end": "2026-09-27",
+      "level": 3,
+      "where": "Straight through the centre, finish at the Brandenburg Gate",
+      "size": "Close to 80,000 participants from 160 nations",
+      "reader": "Runners book months ahead and bring family. The Sunday route closes roads through Mitte and Tiergarten until the afternoon, so plan a walking day, not a driving one.",
+      "source": "bmw-berlin-marathon.com"
+    },
+    {
+      "id": "unity26",
+      "name": "German Unity Day",
+      "start": "2026-10-03",
+      "end": "2026-10-03",
+      "level": 2,
+      "where": "Brandenburg Gate and Unter den Linden",
+      "size": "National public holiday",
+      "reader": "Germans travel domestically on this weekend and the centre carries a public programme. Museums and sights are open, most shops are not.",
+      "source": "berlinwalk.com"
+    },
+    {
+      "id": "lights26",
+      "name": "Festival of Lights",
+      "start": "2026-10-09",
+      "end": "2026-10-18",
+      "level": 2,
+      "where": "Landmarks across the centre, after dark",
+      "size": "Ten evenings",
+      "reader": "Ten evenings of projections on the Dom, the Rathaus and the Gate. Daytime feels normal; the pressure is on the evening, on the trains after 20:00 and on the two weekends.",
+      "source": "festival-of-lights.de"
+    },
+    {
+      "id": "xmas26",
+      "name": "Christmas market season",
+      "start": "2026-11-18",
+      "end": "2027-01-03",
+      "level": 2,
+      "where": "Humboldt Forum, Gendarmenmarkt, and dozens more",
+      "size": "Weekends are the peak, not the weekdays",
+      "reader": "The Humboldt Forum market runs 18 November to 3 January. A Tuesday in early December is calm. The three weekends before Christmas are the busiest shopping days of the Berlin year.",
+      "source": "berlin.de"
+    },
+    {
+      "id": "nye26",
+      "name": "New Year's Eve",
+      "start": "2026-12-30",
+      "end": "2027-01-01",
+      "level": 3,
+      "where": "Brandenburg Gate, Alexanderplatz, everywhere else",
+      "size": "The single most expensive night of the year",
+      "reader": "Hotels sell minimum-stay packages and the centre is fenced for the Gate party. If you only want the fireworks, you can see plenty from any bridge.",
+      "source": "berlinwalk.com"
+    },
+    {
+      "id": "gw27",
+      "name": "Gruene Woche",
+      "start": "2027-01-15",
+      "end": "2027-01-24",
+      "level": 3,
+      "where": "Messe Berlin, Charlottenburg",
+      "size": "Ten days, 91st edition",
+      "reader": "The food and farming fair, open to the public and busy every single day for ten days. It turns the quietest month in Berlin into a booked-out one.",
+      "source": "gruenewoche.de"
+    },
+    {
+      "id": "fl27",
+      "name": "Fruit Logistica",
+      "start": "2027-02-03",
+      "end": "2027-02-05",
+      "level": 2,
+      "where": "Messe Berlin, Charlottenburg",
+      "size": "Trade visitors only",
+      "reader": "Three days, trade badges only, so it never touches the sights. It does take rooms, and it lands in the week before the Berlinale.",
+      "source": "fruitlogistica.com"
+    },
+    {
+      "id": "berlinale27",
+      "name": "Berlinale",
+      "start": "2027-02-10",
+      "end": "2027-02-21",
+      "level": 3,
+      "where": "Potsdamer Platz and cinemas across the city",
+      "size": "77th edition, twelve days",
+      "reader": "The film market runs 10 to 16 February and fills hotels with industry guests. The two public audience days are 20 and 21 February, when tickets are easiest to get.",
+      "source": "berlinale.de"
+    },
+    {
+      "id": "itb27",
+      "name": "ITB Berlin",
+      "start": "2027-03-16",
+      "end": "2027-03-18",
+      "level": 3,
+      "where": "Messe Berlin, Charlottenburg",
+      "size": "The world's largest travel trade show",
+      "reader": "Trade only, and the whole global travel industry is in town. Of every week in the calendar this is the one where a normal visitor gets the worst room for the money.",
+      "source": "itb.com"
+    },
+    {
+      "id": "lolla27",
+      "name": "Lollapalooza Berlin",
+      "start": "2027-07-17",
+      "end": "2027-07-18",
+      "level": 2,
+      "where": "Olympiastadion and Olympiapark",
+      "size": "Two festival days",
+      "reader": "A weekend festival out at the Olympiastadion. The centre keeps working normally; the S-Bahn to Westend does not.",
+      "source": "lollapaloozade.com"
+    }
+  ],
+  "undated": [
+    {
+      "name": "CSD Berlin, the Pride demonstration",
+      "usual": "Traditionally the fourth Saturday of July",
+      "months": ["2027-07"],
+      "note": "The 2025 demonstration was on 26 July. No 2027 date published yet."
+    },
+    {
+      "name": "Karneval der Kulturen",
+      "usual": "The Whitsun weekend, which in 2027 is 14 to 17 May",
+      "months": ["2027-05"],
+      "note": "Whit Monday, 17 May 2027, is a public holiday in Berlin. The organisers have not published the 2027 dates."
+    },
+    {
+      "name": "DFB-Pokal final",
+      "usual": "Late May, at the Olympiastadion",
+      "months": ["2027-05"],
+      "note": "Two travelling fanbases arrive for one Saturday. Not announced for 2027."
+    },
+    {
+      "name": "Formula E Berlin E-Prix",
+      "usual": "Spring, on the old Tempelhof airport apron",
+      "months": ["2027-04", "2027-05"],
+      "note": "The 2027 calendar is not published yet."
+    }
+  ]
+}

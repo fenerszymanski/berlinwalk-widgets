@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Berlin Busy Week Calendar — the fair and event windows that fill the hotels | BerlinWalk</title>
+<meta name="description" content="Put in your arrival date and see which Berlin trade fair, festival or race window your stay lands in, and how far you would have to move it to find a clear one.">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root{
+    --g:#1B5E20; --gd:#123D18; --lime:#7CB342; --lightg:#C5E1A5;
+    --yellow:#FFE600; --cream:#FAFAF5; --ink:#212121; --mute:#5C6157;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Montserrat',-apple-system,'Segoe UI',sans-serif;background:var(--cream);color:var(--ink);}
+  .bw-wrap{max-width:900px;margin:0 auto;padding:16px 13px 24px;}
+  .bw-kick{font-size:11px;letter-spacing:.14em;font-weight:700;color:var(--lime);text-transform:uppercase;}
+  h1{font-size:23px;line-height:1.2;margin:5px 0 7px;color:var(--gd);}
+  .bw-lead{font-size:14px;line-height:1.55;margin:0 0 14px;max-width:660px;color:#3a4038;}
+
+  .bw-controls{background:#fff;border:1.5px solid var(--lightg);border-radius:16px;padding:13px 15px;
+    display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;}
+  .bw-field{display:flex;flex-direction:column;gap:6px;min-width:150px;flex:1 1 170px;}
+  .bw-field label{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--g);}
+  .bw-field input, .bw-field select{font-family:inherit;font-size:15px;font-weight:600;color:var(--gd);
+    background:#fff;border:1.5px solid var(--lightg);border-radius:10px;padding:9px 10px;width:100%;min-height:44px;}
+  .bw-field input:focus-visible, .bw-field select:focus-visible{outline:3px solid var(--lime);outline-offset:1px;}
+
+  .bw-answer{margin:13px 0 0;border-radius:16px;padding:15px 16px 14px;background:var(--gd);color:#fff;}
+  .bw-answer h2{margin:0 0 3px;font-size:19px;line-height:1.25;color:var(--yellow);}
+  .bw-answer .sub{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--lightg);font-weight:700;margin:0 0 11px;}
+  .bw-hit{background:rgba(255,255,255,.09);border-left:4px solid var(--yellow);border-radius:10px;padding:10px 12px;margin:0 0 9px;}
+  .bw-hit b{display:block;font-size:15px;line-height:1.3;color:#fff;}
+  .bw-hit .when{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--lightg);font-weight:700;margin:3px 0 6px;}
+  .bw-hit p{margin:0;font-size:13.5px;line-height:1.55;color:#E8EFE2;}
+  .bw-hit .sz{margin:6px 0 0;font-size:12px;color:#B9CBA9;}
+  .bw-clear{background:rgba(255,255,255,.09);border-left:4px solid var(--lime);border-radius:10px;padding:11px 12px;font-size:14px;line-height:1.55;color:#EDF3E7;}
+  .bw-move{margin:9px 0 0;background:var(--yellow);color:#123D18;border-radius:10px;padding:10px 12px;font-size:13.5px;line-height:1.5;font-weight:600;}
+  .bw-move b{color:#123D18;}
+
+  .bw-cal{margin:16px 0 0;display:grid;gap:11px;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));}
+  .bw-month{background:#fff;border:1.5px solid #E4EAD9;border-radius:13px;padding:9px 9px 7px;}
+  .bw-month h3{margin:0 0 6px;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--g);font-weight:800;}
+  .bw-month svg{display:block;width:100%;height:auto;}
+  .bw-month .mnote{margin:6px 0 0;font-size:10.5px;line-height:1.45;color:var(--mute);}
+
+  .bw-legend{display:flex;gap:13px;flex-wrap:wrap;font-size:11.5px;color:var(--mute);margin:14px 2px 0;}
+  .bw-legend span{display:inline-flex;align-items:center;gap:6px;}
+  .bw-sw{width:12px;height:12px;border-radius:3px;display:inline-block;}
+
+  .bw-undated{margin:15px 0 0;background:#F1F6EA;border-radius:14px;padding:13px 15px;}
+  .bw-undated h2{margin:0 0 4px;font-size:15px;color:var(--gd);}
+  .bw-undated p.intro{margin:0 0 9px;font-size:13px;line-height:1.55;color:#3D4238;}
+  .bw-undated ul{margin:0;padding:0 0 0 17px;}
+  .bw-undated li{font-size:12.5px;line-height:1.6;color:#3D4238;margin:0 0 6px;}
+  .bw-undated li b{color:var(--gd);}
+
+  .bw-foot{margin:13px 2px 0;font-size:11px;line-height:1.55;color:var(--mute);}
+
+  @media (max-width:400px){
+    .bw-wrap{padding:14px 8px 20px;}
+    .bw-cal{gap:8px;}
+    .bw-month{padding:8px 6px 6px;}
+  }
+</style>
+</head>
+<body>
+<div class="bw-wrap">
+  <p class="bw-kick">BerlinWalk tool</p>
+  <h1>Berlin Busy Week Calendar</h1>
+  <p class="bw-lead">Berlin does not get busy evenly. It gets busy in windows, and most of them are trade fairs out at the Messe grounds in Charlottenburg. Put your arrival date in and see what your stay lands on.</p>
+
+  <div class="bw-controls">
+    <div class="bw-field">
+      <label for="bw-date">Arriving on</label>
+      <input type="date" id="bw-date" min="2026-09-01" max="2027-09-30" value="2026-09-05">
+    </div>
+    <div class="bw-field">
+      <label for="bw-nights">Staying</label>
+      <select id="bw-nights">
+        <option value="2">2 nights</option>
+        <option value="3" selected>3 nights</option>
+        <option value="4">4 nights</option>
+        <option value="7">7 nights</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="bw-answer" id="bw-answer" aria-live="polite"></div>
+
+  <div class="bw-cal" id="bw-cal"></div>
+
+  <div class="bw-legend" id="bw-legend"></div>
+
+  <div class="bw-undated">
+    <h2>Recurring, but not dated yet</h2>
+    <p class="intro">These come back every year and they are not on the grid above, because the organisers have not published a 2027 date. If your trip touches one of these months, check the organiser's own site before you book.</p>
+    <ul id="bw-undated-list"></ul>
+  </div>
+
+  <p class="bw-foot" id="bw-foot"></p>
+</div>
+
+<script>
+(function(){
+  var DATA = null;
+  var MON = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var DOW = ['M','T','W','T','F','S','S'];
+
+  function key(d){
+    var m = d.getMonth()+1, day = d.getDate();
+    return d.getFullYear()+'-'+(m<10?'0':'')+m+'-'+(day<10?'0':'')+day;
+  }
+  function parse(s){ var p = s.split('-'); return new Date(Date.UTC(+p[0], +p[1]-1, +p[2])); }
+  function shift(d, n){ return new Date(d.getTime() + n*86400000); }
+  function pretty(s){
+    var d = parse(s);
+    return d.getUTCDate()+' '+MON[d.getUTCMonth()].slice(0,3)+' '+d.getUTCFullYear();
+  }
+  function span(w){
+    if (w.start === w.end) return pretty(w.start);
+    return pretty(w.start)+' to '+pretty(w.end);
+  }
+
+  /* Every day in the stay, arrival night plus the following nights. */
+  function stayDays(arrival, nights){
+    var out = [], d = parse(arrival), i;
+    for (i = 0; i <= nights; i++) out[i] = key(shift(d, i));
+    return out;
+  }
+  function overlaps(w, days){
+    var i;
+    for (i = 0; i < days.length; i++){
+      if (days[i] >= w.start && days[i] <= w.end) return true;
+    }
+    return false;
+  }
+  function hitsFor(arrival, nights){
+    var days = stayDays(arrival, nights), out = [], i;
+    for (i = 0; i < DATA.windows.length; i++){
+      if (overlaps(DATA.windows[i], days)) out[out.length] = DATA.windows[i];
+    }
+    return out;
+  }
+  function heaviest(list){
+    var top = 0, i;
+    for (i = 0; i < list.length; i++) if (list[i].level > top) top = list[i].level;
+    return top;
+  }
+
+  /* Nearest arrival date within three weeks whose stay misses every level-3 window. */
+  function nearestClear(arrival, nights){
+    var lo = DATA.meta.range.from, hi = DATA.meta.range.to, off, dir, cand, list;
+    for (off = 1; off <= 21; off++){
+      for (dir = -1; dir <= 1; dir += 2){
+        cand = key(shift(parse(arrival), off*dir));
+        if (cand < lo || cand > hi) continue;
+        list = hitsFor(cand, nights);
+        if (heaviest(list) < 3) return { date: cand, offset: off*dir };
+      }
+    }
+    return null;
+  }
+
+  function colourFor(day){
+    var best = null, i, w;
+    for (i = 0; i < DATA.windows.length; i++){
+      w = DATA.windows[i];
+      if (day >= w.start && day <= w.end){
+        if (!best || w.level > best.level) best = w;
+      }
+    }
+    return best;
+  }
+
+  function esc(s){
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function drawAnswer(){
+    var arrival = document.getElementById('bw-date').value;
+    var nights = parseInt(document.getElementById('bw-nights').value, 10);
+    var box = document.getElementById('bw-answer');
+    if (!arrival || arrival < DATA.meta.range.from || arrival > DATA.meta.range.to){
+      box.innerHTML = '<h2>Pick a date inside the calendar</h2>'
+        + '<p class="sub">'+esc(pretty(DATA.meta.range.from))+' to '+esc(pretty(DATA.meta.range.to))+'</p>'
+        + '<div class="bw-clear">This calendar runs from September 2026 to September 2027. Choose an arrival date inside that range and I will tell you what it lands on.</div>';
+      return;
+    }
+    var list = hitsFor(arrival, nights);
+    var last = key(shift(parse(arrival), nights));
+    var head = '<h2>' + esc(pretty(arrival)) + ' plus ' + nights + ' nights</h2>'
+      + '<p class="sub">Checking ' + esc(pretty(arrival)) + ' to ' + esc(pretty(last)) + '</p>';
+
+    if (!list.length){
+      box.innerHTML = head + '<div class="bw-clear">Nothing on this calendar touches those dates. That is the good version of a Berlin week: normal hotel prices, normal trains, and the museums to yourself on a weekday morning.</div>';
+      return;
+    }
+
+    var body = '', i, w;
+    for (i = 0; i < list.length; i++){
+      w = list[i];
+      body += '<div class="bw-hit"><b>' + esc(w.name) + '</b>'
+        + '<span class="when">' + esc(span(w)) + ' &middot; ' + esc(DATA.levels[w.level].label) + '</span>'
+        + '<p>' + esc(w.reader) + '</p>'
+        + '<p class="sz">' + esc(w.where) + '. ' + esc(w.size) + '.</p></div>';
+    }
+
+    if (heaviest(list) >= 3){
+      var alt = nearestClear(arrival, nights);
+      if (alt){
+        var n = Math.abs(alt.offset);
+        var way = alt.offset < 0 ? 'earlier' : 'later';
+        body += '<p class="bw-move">Move your arrival <b>' + n + (n === 1 ? ' day ' : ' days ') + way
+          + '</b>, to ' + esc(pretty(alt.date)) + ', and the same stay clears every one of the heavy windows.</p>';
+      } else {
+        body += '<p class="bw-move">Nothing within three weeks either side clears the heavy windows, so this is a stretch of the year to book early instead of shift.</p>';
+      }
+    }
+    box.innerHTML = head + body;
+  }
+
+  function drawMonth(year, monthIdx, selected){
+    var first = new Date(Date.UTC(year, monthIdx, 1));
+    var startCol = (first.getUTCDay() + 6) % 7;
+    var daysIn = new Date(Date.UTC(year, monthIdx + 1, 0)).getUTCDate();
+    var rows = Math.ceil((startCol + daysIn) / 7);
+    var W = 153, H = 18 + rows * 22;
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="'
+      + MON[monthIdx] + ' ' + year + '">';
+    var c, r, i;
+    for (c = 0; c < 7; c++){
+      s += '<text x="' + (c*22 + 10.5) + '" y="11" text-anchor="middle" font-size="8.5" fill="#8A907F" font-family="Montserrat,sans-serif">' + DOW[c] + '</text>';
+    }
+    for (i = 1; i <= daysIn; i++){
+      var cell = startCol + i - 1;
+      c = cell % 7; r = Math.floor(cell / 7);
+      var x = c*22, y = 18 + r*22;
+      var day = key(new Date(Date.UTC(year, monthIdx, i)));
+      var hit = colourFor(day);
+      var fill = hit ? DATA.levels[hit.level].colour : '#F2F4EE';
+      var ink = hit && hit.level === 3 ? '#FFFFFF' : (hit && hit.level === 2 ? '#123D18' : '#5C6157');
+      s += '<rect x="' + x + '" y="' + y + '" width="21" height="21" rx="4" fill="' + fill + '"';
+      if (day === selected) s += ' stroke="#212121" stroke-width="2.4"';
+      s += '></rect>';
+      s += '<text x="' + (x + 10.5) + '" y="' + (y + 14.5) + '" text-anchor="middle" font-size="9.5" font-weight="600" fill="' + ink + '" font-family="Montserrat,sans-serif">' + i + '</text>';
+    }
+    s += '</svg>';
+    return s;
+  }
+
+  function monthNote(year, monthIdx){
+    var tag = year + '-' + ((monthIdx + 1) < 10 ? '0' : '') + (monthIdx + 1);
+    var names = [], i, j, u;
+    for (i = 0; i < DATA.undated.length; i++){
+      u = DATA.undated[i];
+      for (j = 0; j < u.months.length; j++){
+        if (u.months[j] === tag) names[names.length] = u.name.split(',')[0];
+      }
+    }
+    if (!names.length) return '';
+    return '<p class="mnote">Also usually this month: ' + esc(names.join(', ')) + '.</p>';
+  }
+
+  function drawCalendar(){
+    var selected = document.getElementById('bw-date').value;
+    var cal = document.getElementById('bw-cal');
+    var from = parse(DATA.meta.range.from), to = parse(DATA.meta.range.to);
+    var y = from.getUTCFullYear(), m = from.getUTCMonth(), out = '';
+    while (y < to.getUTCFullYear() || (y === to.getUTCFullYear() && m <= to.getUTCMonth())){
+      out += '<div class="bw-month"><h3>' + MON[m] + ' ' + y + '</h3>' + drawMonth(y, m, selected) + monthNote(y, m) + '</div>';
+      m += 1;
+      if (m > 11){ m = 0; y += 1; }
+    }
+    cal.innerHTML = out;
+  }
+
+  function drawStatic(){
+    var lg = '', k;
+    for (k = 3; k >= 1; k--){
+      lg += '<span><i class="bw-sw" style="background:' + DATA.levels[k].colour + '"></i>' + esc(DATA.levels[k].label) + '</span>';
+    }
+    lg += '<span><i class="bw-sw" style="background:#F2F4EE;border:1px solid #DDE3D4"></i>Nothing scheduled</span>';
+    document.getElementById('bw-legend').innerHTML = lg;
+
+    var ul = '', i, u;
+    for (i = 0; i < DATA.undated.length; i++){
+      u = DATA.undated[i];
+      ul += '<li><b>' + esc(u.name) + '.</b> ' + esc(u.usual) + '. ' + esc(u.note) + '</li>';
+    }
+    document.getElementById('bw-undated-list').innerHTML = ul;
+
+    document.getElementById('bw-foot').textContent =
+      'Dates read from the organisers on ' + DATA.meta.checked + '. ' + DATA.meta.note;
+  }
+
+  function render(){ drawAnswer(); drawCalendar(); }
+
+  fetch('data.json').then(function(r){ return r.json(); }).then(function(j){
+    DATA = j;
+    drawStatic();
+    document.getElementById('bw-date').addEventListener('change', render);
+    document.getElementById('bw-date').addEventListener('input', render);
+    document.getElementById('bw-nights').addEventListener('change', render);
+    render();
+  });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
