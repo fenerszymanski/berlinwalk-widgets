@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-05T08:06:51.327Z",
+  "updatedAt": "2026-09-05T13:52:20.061Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 353,
-  "toolsTotal": 273,
+  "totalPosts": 354,
+  "toolsTotal": 274,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1618,6 +1618,23 @@
   ],
   "latest": [
     {
+      "title": "Hotel or Apartment in Berlin: Where the Cost Flips and What to Check Before You Book",
+      "slug": "hotel-or-apartment-in-berlin",
+      "path": "/post/hotel-or-apartment-in-berlin",
+      "url": "https://www.berlinwalk.com/post/hotel-or-apartment-in-berlin",
+      "excerpt": "Most people settle the Berlin neighbourhood first and the type of bed second, which is the wrong way round. A hotel is priced per room, an apartment per flat with a cleaning fee charged once, and hostel beds per person per night, so the cheapest option moves with your party size and your length of stay. Here is where each one wins, the accommodation tax that applies to all three, and the registration number to look for before you pay for a Berlin flat.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-05T13:48:35.799Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_33e8970d4de941438d35180249a00a43~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-berlin-altbau-facade.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_33e8970d4de941438d35180249a00a43~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-berlin-altbau-facade.jpg",
+      "alt": "A classic Berlin Altbau facade on Templiner Strasse in Prenzlauer Berg, with tall windows, stucco detail and balconies",
+      "relatedToolSlug": "berlin-stay-cost-grid"
+    },
+    {
       "title": "When Is Berlin Busiest? The Trade Fair and Event Weeks That Fill the Hotels",
       "slug": "when-is-berlin-busiest",
       "path": "/post/when-is-berlin-busiest",
@@ -1803,26 +1820,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_d9364bf63bb14311aa068c040b17dd2e~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/laundry-in-berlin-freddy-leck-machines.jpg",
       "alt": "A row of numbered washing machines with open doors at Freddy Leck sein Waschsalon in Berlin-Moabit",
       "relatedToolSlug": "berlin-laundry-planner"
-    },
-    {
-      "title": "German Unity Day in Berlin: What Is Actually Open on 3 October",
-      "slug": "german-unity-day-berlin",
-      "path": "/post/german-unity-day-berlin",
-      "url": "https://www.berlinwalk.com/post/german-unity-day-berlin",
-      "excerpt": "3 October is Germany's national holiday, and in 2026 it falls on a Saturday, so Berlin runs Sunday rules two days in a row. What closes, the station supermarkets that stay open, the museums that keep Sunday hours, and how I would plan the weekend.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-08-31T13:07:42.130Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_ff85376dc8e847509310f5fb022c30d0~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/german-unity-day-berlin-reichstag-flag.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_ff85376dc8e847509310f5fb022c30d0~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/german-unity-day-berlin-reichstag-flag.jpg",
-      "alt": "The German federal flag flying in front of the Reichstag building",
-      "relatedToolSlug": "berlin-unity-day-board"
     }
   ],
   "allPosts": [
+    {
+      "title": "Hotel or Apartment in Berlin: Where the Cost Flips and What to Check Before You Book",
+      "slug": "hotel-or-apartment-in-berlin",
+      "path": "/post/hotel-or-apartment-in-berlin",
+      "url": "https://www.berlinwalk.com/post/hotel-or-apartment-in-berlin",
+      "excerpt": "Most people settle the Berlin neighbourhood first and the type of bed second, which is the wrong way round. A hotel is priced per room, an apartment per flat with a cleaning fee charged once, and hostel beds per person per night, so the cheapest option moves with your party size and your length of stay. Here is where each one wins, the accommodation tax that applies to all three, and the registration number to look for before you pay for a Berlin flat.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-05T13:48:35.799Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_33e8970d4de941438d35180249a00a43~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-berlin-altbau-facade.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_33e8970d4de941438d35180249a00a43~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-berlin-altbau-facade.jpg",
+      "alt": "A classic Berlin Altbau facade on Templiner Strasse in Prenzlauer Berg, with tall windows, stucco detail and balconies",
+      "relatedToolSlug": "berlin-stay-cost-grid"
+    },
     {
       "title": "When Is Berlin Busiest? The Trade Fair and Event Weeks That Fill the Hotels",
       "slug": "when-is-berlin-busiest",
