@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-06T02:06:15.640Z",
+  "updatedAt": "2026-09-06T14:07:29.737Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 355,
-  "toolsTotal": 275,
+  "totalPosts": 356,
+  "toolsTotal": 276,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1572,7 +1572,7 @@
           "categorySlug": "tourist-tips",
           "topic": "when-to-visit",
           "topicLabel": "Month-by-Month Berlin",
-          "readTime": "8 min read",
+          "readTime": "7 min read",
           "publishedDate": "2026-05-31T20:09:40.767Z",
           "image": "https://static.wixstatic.com/media/5a08a3_a68f85c43a134c31aee35fce276e2d14~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-in-october-2026-01-hero-autumn-berlin.jpg",
           "thumb": "https://static.wixstatic.com/media/5a08a3_a68f85c43a134c31aee35fce276e2d14~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-in-october-2026-01-hero-autumn-berlin.jpg",
@@ -1617,6 +1617,23 @@
     }
   ],
   "latest": [
+    {
+      "title": "Berlin War Damage Still Visible: The Walls That Were Never Repaired",
+      "slug": "berlin-war-damage-still-visible",
+      "path": "/post/berlin-war-damage-still-visible",
+      "url": "https://www.berlinwalk.com/post/berlin-war-damage-still-visible",
+      "excerpt": "Berlin never patched most of what April 1945 did to its walls. The clearest place to start is a free, open courtyard on Museum Island, where bullet strikes sit in the colonnade stone at the height of a standing person. Here are seventeen places across the city where the marks are still there to find, how to tell what made each one, and which two need planning before you go.",
+      "category": "Berlin History",
+      "categorySlug": "berlin-history",
+      "topic": "free-budget",
+      "topicLabel": "Free & Budget",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-06T14:03:38.210Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_7998bec069d345c68e9461b70634a209~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-anhalter-bahnhof-portico.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_7998bec069d345c68e9461b70634a209~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-anhalter-bahnhof-portico.jpg",
+      "alt": "The rear of the ruined portico of the Anhalter Bahnhof in Berlin-Kreuzberg, its brick arches open to the sky with modern office towers behind",
+      "relatedToolSlug": "berlin-war-scars-map"
+    },
     {
       "title": "Food Allergies in Berlin: What a Counter Must Tell You and Where the Allergen Hides",
       "slug": "food-allergies-in-berlin",
@@ -1803,23 +1820,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_567a2ac88a0c41c4928dd2160d6f107c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-philharmonic-tickets-philharmonie-blue-hour.jpg",
       "alt": "The golden facade of the Philharmonie Berlin glowing at blue hour",
       "relatedToolSlug": "transport-ticket-calculator"
-    },
-    {
-      "title": "Night Trains from Berlin: Six Places You Can Wake Up Tomorrow",
-      "slug": "night-trains-from-berlin",
-      "path": "/post/night-trains-from-berlin",
-      "url": "https://www.berlinwalk.com/post/night-trains-from-berlin",
-      "excerpt": "Six sleeper routes leave Berlin this season, two of them every night, and the map changed twice this year: European Sleeper took over the Paris run in March and the Stockholm train changed operators on 1 September. Which trains run which nights, which station they use, what beds cost, and the Prague mistake to avoid.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "route-stories",
-      "topicLabel": "Tour Route Stories",
-      "readTime": "7 min read",
-      "publishedDate": "2026-09-01T08:03:42.870Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_2d3ed7d2e6bd4244814d2b5c37b5db50~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/night-trains-from-berlin-european-sleeper-berlin-hbf.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_2d3ed7d2e6bd4244814d2b5c37b5db50~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/night-trains-from-berlin-european-sleeper-berlin-hbf.jpg",
-      "alt": "The European Sleeper night train to Paris standing under the glass roof of Berlin Hauptbahnhof",
-      "relatedToolSlug": "berlin-night-train-board"
     }
   ]
 }
