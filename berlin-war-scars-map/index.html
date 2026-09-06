@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin War Scars Map</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --rust: #A6402B;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+  }
+  .wsm { max-width: 720px; margin: 0 auto; padding: 14px 12px 10px; }
+  .wsm-head h2 { font-size: 1.06rem; margin: 0 0 2px; color: var(--green); }
+  .wsm-head p { margin: 0; font-size: .76rem; color: #555; line-height: 1.45; }
+
+  .wsm-filters { margin: 11px 0 9px; }
+  .wsm-filters .wsm-legend-label {
+    font-size: .66rem; font-weight: 800; letter-spacing: .07em;
+    text-transform: uppercase; color: var(--deep); display: block; margin-bottom: 6px;
+  }
+  .wsm-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .wsm-chip {
+    font: inherit; font-size: .76rem; font-weight: 700; cursor: pointer;
+    border: 2px solid #cfd8cd; background: #fff; color: #6b6b6b;
+    border-radius: 99px; padding: 6px 11px 6px 8px;
+    display: inline-flex; align-items: center; gap: 6px; line-height: 1.15;
+  }
+  .wsm-chip .wsm-dot {
+    width: 11px; height: 11px; border-radius: 50%; flex: 0 0 auto;
+    background: #cfd8cd; border: 1px solid rgba(0,0,0,.18);
+  }
+  .wsm-chip[aria-pressed="true"] { border-color: var(--green); color: var(--deep); background: #fff; }
+  .wsm-chip:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+  .wsm-hint { margin: 6px 0 0; font-size: .7rem; color: #666; min-height: 1.2em; line-height: 1.4; }
+
+  .wsm-mapwrap { position: relative; margin-top: 6px; }
+  canvas#wsmMap {
+    width: 100%; display: block; border-radius: 10px;
+    border: 2px solid #dfe6dc; background: #fff; touch-action: manipulation;
+  }
+  .wsm-maphelp { margin: 5px 0 0; font-size: .68rem; color: #6b6b6b; line-height: 1.45; }
+
+  .wsm-detail {
+    margin-top: 11px; border: 2px solid var(--green); border-radius: 10px;
+    background: #fff; padding: 12px 13px;
+  }
+  .wsm-detail .wsm-rank {
+    display: inline-block; background: var(--yellow); color: var(--deep);
+    font-size: .68rem; font-weight: 800; letter-spacing: .05em;
+    border-radius: 99px; padding: 3px 10px; margin-bottom: 6px;
+  }
+  .wsm-detail h3 { margin: 0 0 3px; font-size: 1rem; color: var(--deep); }
+  .wsm-detail .wsm-where { margin: 0 0 8px; font-size: .76rem; color: #555; }
+  .wsm-detail h4 {
+    margin: 9px 0 3px; font-size: .68rem; font-weight: 800; letter-spacing: .07em;
+    text-transform: uppercase; color: var(--green);
+  }
+  .wsm-detail p { margin: 0; font-size: .84rem; line-height: 1.48; }
+  .wsm-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 9px; }
+  .wsm-tag {
+    font-size: .66rem; font-weight: 700; border-radius: 99px; padding: 3px 9px;
+    background: #eef3ec; color: var(--deep); display: inline-flex; align-items: center; gap: 5px;
+  }
+  .wsm-tag .wsm-dot { width: 9px; height: 9px; border-radius: 50%; border: 1px solid rgba(0,0,0,.18); }
+  .wsm-tag.wsm-access { background: var(--yellow); color: var(--deep); }
+  .wsm-tag.wsm-access.wsm-shut { background: #f6ded9; color: #7d2d1c; }
+
+  .wsm-listhead {
+    margin: 14px 0 6px; font-size: .68rem; font-weight: 800; letter-spacing: .07em;
+    text-transform: uppercase; color: var(--deep);
+  }
+  .wsm-band {
+    margin: 9px 0 4px; font-size: .7rem; font-weight: 700; color: var(--green);
+    border-top: 1px dashed #cfd8cd; padding-top: 6px;
+  }
+  .wsm-list { list-style: none; margin: 0; padding: 0; }
+  .wsm-row {
+    width: 100%; text-align: left; font: inherit; cursor: pointer;
+    background: #fff; border: 2px solid #e3e8e1; border-radius: 9px;
+    padding: 6px 10px; margin-bottom: 4px; display: flex; gap: 9px; align-items: baseline;
+  }
+  .wsm-row:hover { border-color: var(--lime); }
+  .wsm-row[aria-pressed="true"] { border-color: var(--green); background: #f4f8f2; }
+  .wsm-row:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+  .wsm-row .wsm-n {
+    flex: 0 0 auto; font-size: .74rem; font-weight: 800; color: #fff;
+    background: var(--green); border-radius: 50%; width: 21px; height: 21px;
+    display: inline-flex; align-items: center; justify-content: center; align-self: center;
+  }
+  .wsm-row .wsm-rowmain { flex: 1 1 auto; min-width: 0; }
+  .wsm-row .wsm-rowname { font-size: .84rem; font-weight: 700; color: var(--deep); }
+  .wsm-row .wsm-rowmeta { font-size: .69rem; color: #666; margin-top: 1px; line-height: 1.35; }
+  .wsm-empty { font-size: .8rem; color: #666; padding: 10px 2px; }
+  .wsm-fine { margin-top: 10px; font-size: .68rem; color: #666; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div class="wsm">
+  <div class="wsm-head">
+    <h2>Berlin War Scars Map</h2>
+    <p>Seventeen places in Berlin where the marks of 1943 to 1945 are still there to find. Pick the kinds of mark you want, then work down the list, which runs outward from Museum Island.</p>
+  </div>
+
+  <div class="wsm-filters">
+    <span class="wsm-legend-label">What am I looking for</span>
+    <div class="wsm-chips" id="wsmChips"></div>
+    <p class="wsm-hint" id="wsmHint"></p>
+  </div>
+
+  <div class="wsm-mapwrap">
+    <canvas id="wsmMap" width="660" height="620" role="img" aria-label="Map of central Berlin showing the Spree, the Landwehrkanal, the Ringbahn and the numbered sites where war damage is still visible"></canvas>
+  </div>
+  <p class="wsm-maphelp" id="wsmMapHelp">Tap a numbered pin to read what to look at. Five of these stand within 200 metres of each other on Museum Island, so those pins are fanned apart and a hairline runs back to the real spot.</p>
+
+  <div class="wsm-detail" id="wsmDetail"></div>
+
+  <p class="wsm-listhead" id="wsmListHead">Nearest first from Museum Island</p>
+  <ul class="wsm-list" id="wsmList"></ul>
+
+  <p class="wsm-fine" id="wsmFine"></p>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var KIND_COLOR = {
+    pock: '#1B5E20',
+    splinter: '#7CB342',
+    heavy: '#A6402B',
+    ruin: '#4A5A66',
+    patch: '#C79A00',
+    writing: '#5C3B8C'
+  };
+
+  var chipsEl = document.getElementById('wsmChips');
+  var hintEl = document.getElementById('wsmHint');
+  var canvas = document.getElementById('wsmMap');
+  var ctx = canvas.getContext('2d');
+  var detailEl = document.getElementById('wsmDetail');
+  var listEl = document.getElementById('wsmList');
+  var listHeadEl = document.getElementById('wsmListHead');
+  var fineEl = document.getElementById('wsmFine');
+
+  var DATA = null;
+  var active = {};
+  var selectedId = null;
+  var placed = [];
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text !== undefined) n.textContent = text;
+    return n;
+  }
+
+  function km(a, b) {
+    var R = 6371;
+    var p = Math.PI / 180;
+    var dLat = (b.lat - a.lat) * p;
+    var dLon = (b.lon - a.lon) * p;
+    var h = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(a.lat * p) * Math.cos(b.lat * p) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    return R * 2 * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
+  }
+
+  function bandFor(d) {
+    for (var i = 0; i < DATA.bands.length; i++) {
+      if (d <= DATA.bands[i].maxKm) return DATA.bands[i].label;
+    }
+    return DATA.bands[DATA.bands.length - 1].label;
+  }
+
+  function visible(site) {
+    for (var i = 0; i < site.kinds.length; i++) {
+      if (active[site.kinds[i]]) return true;
+    }
+    return false;
+  }
+
+  /** Sites in view, nearest first. This ordering is the tool's answer. */
+  function ordered() {
+    var rows = [];
+    for (var i = 0; i < DATA.sites.length; i++) {
+      var s = DATA.sites[i];
+      rows.push({ site: s, km: km(DATA.anchor, s), on: visible(s) });
+    }
+    rows.sort(function (a, b) { return a.km - b.km; });
+    return rows;
+  }
+
+  /* ---------- map ---------- */
+
+  function projector(w, h) {
+    var v = DATA.view;
+    var midLat = (v.latMin + v.latMax) / 2;
+    var kx = Math.cos(midLat * Math.PI / 180);
+    var geoW = (v.lonMax - v.lonMin) * kx;
+    var geoH = (v.latMax - v.latMin);
+    var pad = 10;
+    var scale = Math.min((w - pad * 2) / geoW, (h - pad * 2) / geoH);
+    var offX = (w - geoW * scale) / 2;
+    var offY = (h - geoH * scale) / 2;
+    return {
+      scale: scale,
+      x: function (lon) { return offX + (lon - v.lonMin) * kx * scale; },
+      y: function (lat) { return offY + (v.latMax - lat) * scale; },
+      left: offX,
+      right: offX + geoW * scale
+    };
+  }
+
+  function stroke(p, pts, colour, width, dash, close) {
+    if (!pts || pts.length < 2) return;
+    ctx.save();
+    ctx.beginPath();
+    ctx.setLineDash(dash || []);
+    ctx.lineWidth = width;
+    ctx.strokeStyle = colour;
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
+    ctx.moveTo(p.x(pts[0][1]), p.y(pts[0][0]));
+    for (var i = 1; i < pts.length; i++) ctx.lineTo(p.x(pts[i][1]), p.y(pts[i][0]));
+    if (close) ctx.closePath();
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function draw() {
+    var cssW = canvas.clientWidth || 660;
+    var cssH = Math.max(380, Math.min(560, Math.round(cssW * 0.95)));
+    var dpr = window.devicePixelRatio || 1;
+    canvas.style.height = cssH + 'px';
+    canvas.width = Math.round(cssW * dpr);
+    canvas.height = Math.round(cssH * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, cssW, cssH);
+
+    ctx.fillStyle = '#FBFCFA';
+    ctx.fillRect(0, 0, cssW, cssH);
+
+    var p = projector(cssW, cssH);
+
+    stroke(p, DATA.geom.Ringbahn, '#D6DED2', 6, [], true);
+    stroke(p, DATA.geom.Ringbahn, '#9FB59A', 1.6, [7, 6], true);
+    stroke(p, DATA.geom.Spree, '#AFC7D6', 4.2, []);
+    stroke(p, DATA.geom.Landwehrkanal, '#C6D8E2', 3, []);
+
+    var ax = p.x(DATA.anchor.lon);
+    var ay = p.y(DATA.anchor.lat);
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(ax, ay, 13, 0, Math.PI * 2);
+    ctx.strokeStyle = '#FFE600';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.restore();
+
+    ctx.save();
+    ctx.font = '700 10px Montserrat, Arial, sans-serif';
+    ctx.fillStyle = '#8a7a00';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(DATA.anchor.name, ax + 18, ay + 16);
+    ctx.restore();
+
+    var rows = ordered();
+    placed = [];
+    var n = 0;
+    var i;
+    var badge = null;
+
+    for (i = 0; i < rows.length; i++) {
+      if (rows[i].on) continue;
+      var dx = p.x(rows[i].site.lon);
+      var dy = p.y(rows[i].site.lat);
+      ctx.save();
+      ctx.globalAlpha = 0.28;
+      ctx.beginPath();
+      ctx.arc(dx, dy, 5, 0, Math.PI * 2);
+      ctx.fillStyle = '#8d968b';
+      ctx.fill();
+      ctx.restore();
+    }
+
+    /* Five of the seventeen sit inside 200 metres of each other on the island, so
+       drawn at true scale they are one blob. Fan the overlaps apart and keep a
+       hairline back to the real spot. */
+    var shown = [];
+    for (i = 0; i < rows.length; i++) {
+      if (!rows[i].on) continue;
+      shown.push({
+        row: rows[i],
+        tx: p.x(rows[i].site.lon), ty: p.y(rows[i].site.lat),
+        x: p.x(rows[i].site.lon), y: p.y(rows[i].site.lat)
+      });
+    }
+    var minGap = 28;
+    for (var pass = 0; pass < 90; pass++) {
+      var moved = false;
+      for (var a = 0; a < shown.length; a++) {
+        for (var b = a + 1; b < shown.length; b++) {
+          var ddx = shown[b].x - shown[a].x;
+          var ddy = shown[b].y - shown[a].y;
+          var dist = Math.hypot(ddx, ddy);
+          if (dist >= minGap) continue;
+          if (dist < 0.01) { ddx = (a % 2 ? 1 : -1) * 0.6; ddy = 0.6; dist = 0.85; }
+          var push = (minGap - dist) / 2;
+          var ux = ddx / dist;
+          var uy = ddy / dist;
+          shown[a].x -= ux * push; shown[a].y -= uy * push;
+          shown[b].x += ux * push; shown[b].y += uy * push;
+          moved = true;
+        }
+      }
+      if (!moved) break;
+    }
+
+    for (i = 0; i < shown.length; i++) {
+      var lead = shown[i];
+      if (Math.hypot(lead.x - lead.tx, lead.y - lead.ty) < 3) continue;
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(lead.tx, lead.ty);
+      ctx.lineTo(lead.x, lead.y);
+      ctx.strokeStyle = 'rgba(90,100,88,.55)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(lead.tx, lead.ty, 1.8, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(90,100,88,.75)';
+      ctx.fill();
+      ctx.restore();
+    }
+
+    for (i = 0; i < shown.length; i++) {
+      n += 1;
+      shown[i].row.n = n;
+      var s = shown[i].row.site;
+      var x = shown[i].x;
+      var y = shown[i].y;
+      var colour = KIND_COLOR[s.kinds[0]] || '#1B5E20';
+      var chosen = s.id === selectedId;
+      var r = chosen ? 15 : 12;
+
+      if (chosen) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(x, y, r + 6, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,230,0,.55)';
+        ctx.fill();
+        ctx.restore();
+      }
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fillStyle = colour;
+      ctx.fill();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#FBFCFA';
+      ctx.stroke();
+      ctx.restore();
+
+      ctx.save();
+      ctx.fillStyle = '#fff';
+      ctx.font = '700 ' + (chosen ? 13 : 11) + 'px Montserrat, Arial, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(String(n), x, y + 0.5);
+      ctx.restore();
+
+      if (chosen) badge = { name: s.name, x: x, y: y, r: r };
+
+      placed.push({ id: s.id, x: x, y: y, r: r + 6 });
+    }
+
+    if (badge) {
+      ctx.save();
+      ctx.font = '700 12px Montserrat, Arial, sans-serif';
+      var tw = ctx.measureText(badge.name).width;
+      var lx = Math.min(Math.max(badge.x, tw / 2 + 10), cssW - tw / 2 - 10);
+      var ly = badge.y - badge.r - 17;
+      if (ly < 18) ly = badge.y + badge.r + 21;
+      ctx.fillStyle = 'rgba(18,61,24,.95)';
+      ctx.beginPath();
+      ctx.rect(lx - tw / 2 - 7, ly - 11, tw + 14, 21);
+      ctx.fill();
+      ctx.fillStyle = '#fff';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(badge.name, lx, ly);
+      ctx.restore();
+    }
+
+    ctx.save();
+    ctx.font = '600 10px Montserrat, Arial, sans-serif';
+    ctx.fillStyle = '#7c877a';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'alphabetic';
+    ctx.fillText('Spree', p.x(13.404) + 4, p.y(52.505));
+    ctx.fillText('Ringbahn', p.left + 6, p.y(52.462));
+    ctx.fillText('N', p.right - 12, 20);
+    ctx.restore();
+
+    ctx.save();
+    ctx.strokeStyle = '#7c877a';
+    ctx.lineWidth = 1.4;
+    var kmPx = p.scale * (1 / 111.32);
+    ctx.beginPath();
+    ctx.moveTo(p.left + 8, cssH - 16);
+    ctx.lineTo(p.left + 8 + kmPx * 2, cssH - 16);
+    ctx.moveTo(p.left + 8, cssH - 20);
+    ctx.lineTo(p.left + 8, cssH - 12);
+    ctx.moveTo(p.left + 8 + kmPx * 2, cssH - 20);
+    ctx.lineTo(p.left + 8 + kmPx * 2, cssH - 12);
+    ctx.stroke();
+    ctx.fillStyle = '#7c877a';
+    ctx.font = '600 10px Montserrat, Arial, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('2 km', p.left + 8, cssH - 22);
+    ctx.restore();
+
+    return rows;
+  }
+
+  /* ---------- panels ---------- */
+
+  function kindLabel(id) {
+    for (var i = 0; i < DATA.kinds.length; i++) if (DATA.kinds[i].id === id) return DATA.kinds[i].label;
+    return id;
+  }
+
+  function tag(text, colour) {
+    var t = el('span', 'wsm-tag');
+    if (colour) {
+      var d = el('span', 'wsm-dot');
+      d.style.background = colour;
+      t.appendChild(d);
+    }
+    t.appendChild(document.createTextNode(text));
+    return t;
+  }
+
+  function renderDetail(rows) {
+    var chosen = null;
+    var i;
+    for (i = 0; i < rows.length; i++) if (rows[i].site.id === selectedId) chosen = rows[i];
+    detailEl.replaceChildren();
+
+    if (!chosen) {
+      var lead = el('p', null, 'Choose a pin on the map or a line in the list. Every entry says what is on that wall, where to stand, and what happened there.');
+      detailEl.appendChild(lead);
+      return;
+    }
+
+    var s = chosen.site;
+    detailEl.appendChild(el('span', 'wsm-rank', 'No. ' + (chosen.n || '-') + ' · ' + chosen.km.toFixed(1) + ' km from Museum Island'));
+    detailEl.appendChild(el('h3', null, s.name));
+    detailEl.appendChild(el('p', 'wsm-where', s.where + ' · nearest station ' + s.station));
+
+    detailEl.appendChild(el('h4', null, 'What to look at'));
+    detailEl.appendChild(el('p', null, s.look));
+    detailEl.appendChild(el('h4', null, 'Why it is there'));
+    detailEl.appendChild(el('p', null, s.story));
+
+    var tags = el('div', 'wsm-tags');
+    for (i = 0; i < s.kinds.length; i++) tags.appendChild(tag(kindLabel(s.kinds[i]), KIND_COLOR[s.kinds[i]]));
+    var acc = tag(DATA.accessLabels[s.access], null);
+    acc.className = 'wsm-tag wsm-access' + (s.access === 'closed' ? ' wsm-shut' : '');
+    tags.appendChild(acc);
+    detailEl.appendChild(tags);
+  }
+
+  function renderList(rows) {
+    listEl.replaceChildren();
+    var shown = 0;
+    var band = null;
+    var i;
+
+    for (i = 0; i < rows.length; i++) {
+      if (!rows[i].on) continue;
+      shown += 1;
+      var r = rows[i];
+      var s = r.site;
+      var b = bandFor(r.km);
+      if (b !== band) {
+        band = b;
+        var head = el('li', 'wsm-band', b);
+        listEl.appendChild(head);
+      }
+      var li = el('li');
+      var btn = el('button', 'wsm-row');
+      btn.type = 'button';
+      btn.setAttribute('aria-pressed', s.id === selectedId ? 'true' : 'false');
+      btn.setAttribute('data-site', s.id);
+      btn.appendChild(el('span', 'wsm-n', String(r.n)));
+      var main = el('div', 'wsm-rowmain');
+      main.appendChild(el('div', 'wsm-rowname', s.name));
+      var kindNames = [];
+      for (var k = 0; k < s.kinds.length; k++) kindNames.push(kindLabel(s.kinds[k]).toLowerCase());
+      main.appendChild(el('div', 'wsm-rowmeta', kindNames.join(', ') + ' · ' + r.km.toFixed(1) + ' km · ' + s.station));
+      btn.appendChild(main);
+      li.appendChild(btn);
+      listEl.appendChild(li);
+    }
+
+    if (!shown) {
+      var none = el('li', 'wsm-empty', 'No marks of that kind are on this map. Switch a filter back on.');
+      listEl.appendChild(none);
+      listHeadEl.textContent = 'Nearest first from Museum Island';
+    } else {
+      listHeadEl.textContent = shown + ' of 17 places, nearest first from Museum Island';
+    }
+  }
+
+  function update() {
+    var rows = draw();
+    renderDetail(rows);
+    renderList(rows);
+  }
+
+  /* ---------- controls ---------- */
+
+  function buildChips() {
+    for (var i = 0; i < DATA.kinds.length; i++) {
+      (function (kind) {
+        var b = el('button', 'wsm-chip');
+        b.type = 'button';
+        b.setAttribute('aria-pressed', 'true');
+        b.setAttribute('data-kind', kind.id);
+        var dot = el('span', 'wsm-dot');
+        dot.style.background = KIND_COLOR[kind.id];
+        b.appendChild(dot);
+        b.appendChild(document.createTextNode(kind.label));
+        b.addEventListener('click', function () {
+          active[kind.id] = !active[kind.id];
+          b.setAttribute('aria-pressed', active[kind.id] ? 'true' : 'false');
+          hintEl.textContent = kind.label + ': ' + kind.hint;
+          if (selectedId) {
+            var still = null;
+            for (var j = 0; j < DATA.sites.length; j++) {
+              if (DATA.sites[j].id === selectedId && visible(DATA.sites[j])) still = selectedId;
+            }
+            selectedId = still;
+          }
+          update();
+        });
+        b.addEventListener('mouseenter', function () {
+          hintEl.textContent = kind.label + ': ' + kind.hint;
+        });
+        chipsEl.appendChild(b);
+      })(DATA.kinds[i]);
+    }
+  }
+
+  function pickAt(cx, cy) {
+    var best = null;
+    for (var i = 0; i < placed.length; i++) {
+      var d = Math.hypot(placed[i].x - cx, placed[i].y - cy);
+      if (d <= placed[i].r + 8 && (!best || d < best.d)) best = { id: placed[i].id, d: d };
+    }
+    return best ? best.id : null;
+  }
+
+  canvas.addEventListener('click', function (ev) {
+    var box = canvas.getBoundingClientRect();
+    var hit = pickAt(ev.clientX - box.left, ev.clientY - box.top);
+    if (hit) {
+      selectedId = hit === selectedId ? null : hit;
+      update();
+    }
+  });
+
+  listEl.addEventListener('click', function (ev) {
+    var row = ev.target.closest ? ev.target.closest('.wsm-row') : null;
+    if (!row) return;
+    var id = row.getAttribute('data-site');
+    selectedId = id === selectedId ? null : id;
+    update();
+  });
+
+  var resizeTimer = null;
+  window.addEventListener('resize', function () {
+    if (resizeTimer) clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(update, 120);
+  });
+
+  function boot(data) {
+    DATA = data;
+    for (var i = 0; i < DATA.kinds.length; i++) active[DATA.kinds[i].id] = true;
+    buildChips();
+    hintEl.textContent = 'All six kinds are on. Switch one off to thin the map down to what you actually want to find.';
+    fineEl.textContent = 'Sites and access checked on ' + DATA.checkedOn +
+      '. Distances are straight lines from Museum Island, so a walking route will be longer. ' +
+      'The river, canal and Ringbahn are drawn from OpenStreetMap data. Nothing here is behind a fence except the Reichstag interior, ' +
+      'and the Pergamonmuseum plot is a building site.';
+    update();
+  }
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(boot).catch(function () {
+    fineEl.textContent = 'The map data could not load. Reload the page, or open the article above for the same seventeen places in writing.';
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,888 @@
+{
+ "checkedOn": "6 September 2026",
+ "anchor": {
+  "name": "Museum Island",
+  "lat": 52.5199,
+  "lon": 13.3986
+ },
+ "view": {
+  "latMin": 52.444,
+  "latMax": 52.556,
+  "lonMin": 13.3,
+  "lonMax": 13.45
+ },
+ "kinds": [
+  {
+   "id": "pock",
+   "label": "Bullet pocks",
+   "hint": "Small, scattered, mostly below three metres"
+  },
+  {
+   "id": "splinter",
+   "label": "Shell splinter",
+   "hint": "Fans outward from one impact point"
+  },
+  {
+   "id": "heavy",
+   "label": "Heavy weapons",
+   "hint": "Craters, gouges, pierced steel"
+  },
+  {
+   "id": "ruin",
+   "label": "Kept as a ruin",
+   "hint": "The building was never made whole again"
+  },
+  {
+   "id": "patch",
+   "label": "Repairs you can read",
+   "hint": "New material set deliberately against old"
+  },
+  {
+   "id": "writing",
+   "label": "Writing on the wall",
+   "hint": "Marks left by hand, not by weapons"
+  }
+ ],
+ "accessLabels": {
+  "street": "Public street, any time",
+  "ticket": "Facade is free, inside needs a ticket",
+  "closed": "Building shut for refurbishment",
+  "booking": "Register in advance, no charge"
+ },
+ "bands": [
+  {
+   "maxKm": 0.6,
+   "label": "On the island"
+  },
+  {
+   "maxKm": 2.2,
+   "label": "Walk from the island"
+  },
+  {
+   "maxKm": 5.5,
+   "label": "One short ride"
+  },
+  {
+   "maxKm": 999,
+   "label": "Its own trip"
+  }
+ ],
+ "geom": {
+  "Spree": [
+   [
+    52.49037,
+    13.47746
+   ],
+   [
+    52.49337,
+    13.46859
+   ],
+   [
+    52.49771,
+    13.45849
+   ],
+   [
+    52.50198,
+    13.44505
+   ],
+   [
+    52.50452,
+    13.43885
+   ],
+   [
+    52.51177,
+    13.42465
+   ],
+   [
+    52.51415,
+    13.41822
+   ],
+   [
+    52.51466,
+    13.41605
+   ],
+   [
+    52.51472,
+    13.41187
+   ],
+   [
+    52.51446,
+    13.41378
+   ],
+   [
+    52.51422,
+    13.41273
+   ],
+   [
+    52.51465,
+    13.40822
+   ],
+   [
+    52.51549,
+    13.40541
+   ],
+   [
+    52.51489,
+    13.40643
+   ],
+   [
+    52.51477,
+    13.40916
+   ],
+   [
+    52.51513,
+    13.40704
+   ],
+   [
+    52.51617,
+    13.40511
+   ],
+   [
+    52.52114,
+    13.39962
+   ],
+   [
+    52.52217,
+    13.39565
+   ],
+   [
+    52.52221,
+    13.38833
+   ],
+   [
+    52.52018,
+    13.38446
+   ],
+   [
+    52.51918,
+    13.37957
+   ],
+   [
+    52.52001,
+    13.37678
+   ],
+   [
+    52.52178,
+    13.37593
+   ],
+   [
+    52.52259,
+    13.37451
+   ],
+   [
+    52.523,
+    13.37123
+   ],
+   [
+    52.52252,
+    13.36959
+   ],
+   [
+    52.52049,
+    13.36691
+   ],
+   [
+    52.51726,
+    13.35708
+   ],
+   [
+    52.5177,
+    13.35444
+   ],
+   [
+    52.52243,
+    13.34653
+   ],
+   [
+    52.52285,
+    13.34262
+   ],
+   [
+    52.52203,
+    13.3397
+   ],
+   [
+    52.52013,
+    13.33871
+   ],
+   [
+    52.51747,
+    13.33543
+   ],
+   [
+    52.51692,
+    13.33269
+   ],
+   [
+    52.51837,
+    13.32978
+   ],
+   [
+    52.52101,
+    13.32992
+   ],
+   [
+    52.52239,
+    13.3293
+   ],
+   [
+    52.52458,
+    13.32556
+   ],
+   [
+    52.52492,
+    13.32301
+   ],
+   [
+    52.52434,
+    13.31999
+   ],
+   [
+    52.52329,
+    13.31865
+   ],
+   [
+    52.52149,
+    13.31818
+   ],
+   [
+    52.5202,
+    13.31659
+   ],
+   [
+    52.52073,
+    13.31236
+   ],
+   [
+    52.52063,
+    13.30664
+   ],
+   [
+    52.52245,
+    13.29786
+   ],
+   [
+    52.52357,
+    13.29709
+   ],
+   [
+    52.52814,
+    13.29602
+   ],
+   [
+    52.5305,
+    13.29418
+   ],
+   [
+    52.53017,
+    13.28824
+   ]
+  ],
+  "Landwehrkanal": [
+   [
+    52.497,
+    13.44806
+   ],
+   [
+    52.49145,
+    13.44086
+   ],
+   [
+    52.49064,
+    13.43822
+   ],
+   [
+    52.496,
+    13.42043
+   ],
+   [
+    52.49525,
+    13.41286
+   ],
+   [
+    52.4978,
+    13.39642
+   ],
+   [
+    52.49758,
+    13.39051
+   ],
+   [
+    52.49886,
+    13.38436
+   ],
+   [
+    52.49908,
+    13.3798
+   ],
+   [
+    52.4998,
+    13.37809
+   ],
+   [
+    52.50149,
+    13.37684
+   ],
+   [
+    52.50458,
+    13.37255
+   ],
+   [
+    52.50569,
+    13.36987
+   ],
+   [
+    52.50607,
+    13.36681
+   ],
+   [
+    52.50571,
+    13.36208
+   ],
+   [
+    52.50667,
+    13.35741
+   ],
+   [
+    52.50576,
+    13.35213
+   ],
+   [
+    52.51119,
+    13.33718
+   ],
+   [
+    52.51241,
+    13.33185
+   ],
+   [
+    52.51648,
+    13.32631
+   ],
+   [
+    52.52062,
+    13.31731
+   ]
+  ],
+  "Ringbahn": [
+   [
+    52.53495,
+    13.33434
+   ],
+   [
+    52.53751,
+    13.35506
+   ],
+   [
+    52.54808,
+    13.38067
+   ],
+   [
+    52.54927,
+    13.39263
+   ],
+   [
+    52.54929,
+    13.41505
+   ],
+   [
+    52.53673,
+    13.44726
+   ],
+   [
+    52.52604,
+    13.4584
+   ],
+   [
+    52.52184,
+    13.46991
+   ],
+   [
+    52.51411,
+    13.475
+   ],
+   [
+    52.51046,
+    13.47554
+   ],
+   [
+    52.5039,
+    13.46929
+   ],
+   [
+    52.49823,
+    13.46706
+   ],
+   [
+    52.49406,
+    13.46176
+   ],
+   [
+    52.49015,
+    13.45896
+   ],
+   [
+    52.47449,
+    13.45642
+   ],
+   [
+    52.47169,
+    13.45408
+   ],
+   [
+    52.46608,
+    13.42011
+   ],
+   [
+    52.465,
+    13.40433
+   ],
+   [
+    52.47112,
+    13.38413
+   ],
+   [
+    52.47229,
+    13.36933
+   ],
+   [
+    52.47367,
+    13.36697
+   ],
+   [
+    52.47766,
+    13.36405
+   ],
+   [
+    52.47977,
+    13.35818
+   ],
+   [
+    52.47811,
+    13.34621
+   ],
+   [
+    52.47771,
+    13.33123
+   ],
+   [
+    52.47776,
+    13.31865
+   ],
+   [
+    52.47933,
+    13.31312
+   ],
+   [
+    52.50198,
+    13.28308
+   ],
+   [
+    52.50608,
+    13.28274
+   ],
+   [
+    52.51307,
+    13.28625
+   ],
+   [
+    52.5264,
+    13.2828
+   ],
+   [
+    52.52808,
+    13.28433
+   ],
+   [
+    52.52912,
+    13.28724
+   ],
+   [
+    52.53495,
+    13.33434
+   ],
+   [
+    52.52915,
+    13.28723
+   ],
+   [
+    52.52794,
+    13.28404
+   ],
+   [
+    52.52595,
+    13.28262
+   ],
+   [
+    52.51248,
+    13.28601
+   ],
+   [
+    52.50641,
+    13.28259
+   ],
+   [
+    52.50235,
+    13.28263
+   ],
+   [
+    52.49997,
+    13.28461
+   ],
+   [
+    52.4795,
+    13.31256
+   ],
+   [
+    52.47772,
+    13.31871
+   ],
+   [
+    52.47759,
+    13.33131
+   ],
+   [
+    52.47809,
+    13.34635
+   ],
+   [
+    52.47974,
+    13.35813
+   ],
+   [
+    52.47783,
+    13.36329
+   ],
+   [
+    52.4734,
+    13.36682
+   ],
+   [
+    52.47179,
+    13.36952
+   ],
+   [
+    52.47117,
+    13.38325
+   ],
+   [
+    52.46493,
+    13.40478
+   ],
+   [
+    52.46604,
+    13.42013
+   ],
+   [
+    52.4707,
+    13.45209
+   ],
+   [
+    52.47386,
+    13.45631
+   ],
+   [
+    52.49176,
+    13.46037
+   ],
+   [
+    52.49833,
+    13.4674
+   ],
+   [
+    52.50436,
+    13.47017
+   ],
+   [
+    52.51139,
+    13.47572
+   ],
+   [
+    52.51493,
+    13.47471
+   ],
+   [
+    52.522,
+    13.4698
+   ],
+   [
+    52.52606,
+    13.45845
+   ],
+   [
+    52.53704,
+    13.44681
+   ],
+   [
+    52.54907,
+    13.41645
+   ],
+   [
+    52.54975,
+    13.40802
+   ],
+   [
+    52.54812,
+    13.38067
+   ],
+   [
+    52.53759,
+    13.35521
+   ],
+   [
+    52.53519,
+    13.33524
+   ]
+  ]
+ },
+ "sites": [
+  {
+   "id": "neues-museum",
+   "name": "Neues Museum",
+   "where": "Bodestraße 1-3, Museum Island",
+   "station": "S Hackescher Markt",
+   "lat": 52.52017,
+   "lon": 13.39772,
+   "kinds": [
+    "pock",
+    "splinter",
+    "patch"
+   ],
+   "access": "ticket",
+   "look": "Walk the outside first. The north and east walls carry pocked sandstone at head height, and the plain brick panels beside them are the parts that were gone. Inside, bullet marks sit on the columns and the surviving frescoes stop at a raw plaster edge.",
+   "story": "Gutted in 1943 and 1945, then left open to the weather for decades. David Chipperfield’s restoration, finished in 2009, kept the wounds and rebuilt around them in plain brick and concrete. It won the Mies van der Rohe Award in 2011."
+  },
+  {
+   "id": "kolonnadenhof",
+   "name": "Kolonnadenhof colonnades",
+   "where": "Bodestraße, between Alte Nationalgalerie and Neues Museum",
+   "station": "S Hackescher Markt",
+   "lat": 52.52041,
+   "lon": 13.39885,
+   "kinds": [
+    "pock"
+   ],
+   "access": "street",
+   "look": "Stand in the courtyard and look at the columns from about two metres away. The pocks run in scattered clusters, mostly below three metres, which is roughly where a person stands.",
+   "story": "The colonnades were caught in the fighting for the island in the last days of April 1945. Nobody patched them, so this courtyard is the easiest place in Berlin to see small-arms damage without leaving a paved path."
+  },
+  {
+   "id": "alte-nationalgalerie",
+   "name": "Alte Nationalgalerie",
+   "where": "Bodestraße 1-3, Museum Island",
+   "station": "S Hackescher Markt",
+   "lat": 52.52086,
+   "lon": 13.39827,
+   "kinds": [
+    "pock",
+    "splinter"
+   ],
+   "access": "ticket",
+   "look": "The temple front and the wall along the base of the outside staircase. Splinter marks fan outward from a few impact points, which is what a bursting shell leaves.",
+   "story": "Berlin’s first public art gallery, opened in 1876, badly damaged in the war and reopened in stages. The exterior stonework still carries what the island took in 1945."
+  },
+  {
+   "id": "pergamon",
+   "name": "Pergamonmuseum pillars",
+   "where": "Am Kupfergraben 5, Museum Island",
+   "station": "U Friedrichstraße",
+   "lat": 52.52093,
+   "lon": 13.39563,
+   "kinds": [
+    "pock"
+   ],
+   "access": "closed",
+   "look": "The pillars of the front block, seen from the Kupfergraben side. Much of the plot is a building site, so this is a look-across rather than a walk-up.",
+   "story": "The museum has been shut since 23 October 2023. The north wing and the northern central building are due back on 4 June 2027, and the south wing is not expected until around 2037."
+  },
+  {
+   "id": "spree-embankment",
+   "name": "Museum Island embankment wall",
+   "where": "Spree bank at Friedrichsbrücke, Bodestraße",
+   "station": "S Hackescher Markt",
+   "lat": 52.52047,
+   "lon": 13.40016,
+   "kinds": [
+    "pock",
+    "splinter"
+   ],
+   "access": "street",
+   "look": "Lean on the parapet and look down at the stone facing of the embankment itself. The strikes sit low, near the waterline, because people fired along the river.",
+   "story": "The island was defended as one block and the river walls were part of that fight. The German federal culture portal lists the Museum Island riverbank reinforcements among the places where the marks are still visible."
+  },
+  {
+   "id": "naturkunde",
+   "name": "Museum für Naturkunde",
+   "where": "Invalidenstraße 43",
+   "station": "U Naturkundemuseum",
+   "lat": 52.53049,
+   "lon": 13.37912,
+   "kinds": [
+    "pock",
+    "patch"
+   ],
+   "access": "ticket",
+   "look": "Two different things on one building. The front facade carries bullet holes you can pick out from the pavement. The east wing is the giveaway: its surviving stone is completed in flat grey concrete cast to the old pattern, so you can read exactly where the wall ended.",
+   "story": "Incendiaries in November 1943, then a heavy American daylight raid on 3 February 1945 that brought the east wing down to basement level, then splinter damage in the April fighting. The dome was never rebuilt. The east wing reopened in 2010. The museum says all of this on its own building pages."
+  },
+  {
+   "id": "friedrichstrasse",
+   "name": "Friedrichstraße station arches",
+   "where": "Under the Stadtbahn viaduct, Friedrichstraße",
+   "station": "S+U Friedrichstraße",
+   "lat": 52.5205,
+   "lon": 13.38682,
+   "kinds": [
+    "pock",
+    "splinter"
+   ],
+   "access": "street",
+   "look": "Go under the viaduct and look at the brick and stone of the archways, not the station hall. Then follow the viaduct east on foot, because the scarring carries on for several blocks toward the island.",
+   "story": "The Stadtbahn was a fighting line on 30 April and 1 May 1945. These are the most walked-past damaged surfaces in Berlin: thousands of people pass under them every hour without looking up."
+  },
+  {
+   "id": "sophienkirche",
+   "name": "Sophienkirche",
+   "where": "Große Hamburger Straße 29, Mitte",
+   "station": "S Hackescher Markt",
+   "lat": 52.52556,
+   "lon": 13.40017,
+   "kinds": [
+    "pock"
+   ],
+   "access": "street",
+   "look": "The churchyard walls and the lower stonework of the church. The pattern is dense and small, the signature of rifle and machine-gun fire rather than artillery.",
+   "story": "On 24 April 1945 Soviet units of the 7th Corps fought mixed German forces through this quarter and the church was in the middle of it. The graveyard next door is one of the quietest corners in Mitte, which makes the walls harder to explain, not easier."
+  },
+  {
+   "id": "gropius-bau",
+   "name": "Gropius Bau",
+   "where": "Niederkirchnerstraße 7",
+   "station": "S+U Potsdamer Platz",
+   "lat": 52.50662,
+   "lon": 13.38195,
+   "kinds": [
+    "pock",
+    "splinter"
+   ],
+   "access": "street",
+   "look": "Walk the full outside of the building. Damage sits on every side, and several of the figures in the facade decoration are broken off rather than worn down.",
+   "story": "The Gestapo headquarters stood next door. On 29 April 1945 Soviet riflemen assaulted that block and the museum caught the return fire. The open ground beside it is now the Topography of Terror."
+  },
+  {
+   "id": "humboldthain",
+   "name": "Humboldthain flak tower",
+   "where": "Volkspark Humboldthain",
+   "station": "S Gesundbrunnen",
+   "lat": 52.54735,
+   "lon": 13.38473,
+   "kinds": [
+    "heavy",
+    "ruin"
+   ],
+   "access": "street",
+   "look": "The exposed concrete faces on the north side. The craters are the size of a dinner plate and deeper than a fist, which is a different order of damage from a bullet pock.",
+   "story": "Soviet 203mm howitzers worked on the tower on 26 April 1945 and barely marked it. Postwar demolition only partly succeeded, so the north tower is still standing, with climbers now using the scarred concrete as a practice wall."
+  },
+  {
+   "id": "anhalter",
+   "name": "Anhalter Bahnhof portico",
+   "where": "Askanischer Platz",
+   "station": "S Anhalter Bahnhof",
+   "lat": 52.50257,
+   "lon": 13.38088,
+   "kinds": [
+    "ruin"
+   ],
+   "access": "street",
+   "look": "Nothing here is subtle. The fragment of entrance front is all that was kept, and the lawn behind it is the footprint of a hall that was 62 metres wide.",
+   "story": "Franz Schwechten’s 1880 station burned out in February 1945. Demolition started in 1959 and public protest saved the portal. It is a listed monument and was restored between 2003 and 2005."
+  },
+  {
+   "id": "gedaechtniskirche",
+   "name": "Kaiser Wilhelm Memorial Church",
+   "where": "Breitscheidplatz",
+   "station": "U Kurfürstendamm",
+   "lat": 52.50471,
+   "lon": 13.33503,
+   "kinds": [
+    "ruin"
+   ],
+   "access": "street",
+   "look": "The broken tower is the point, but go into the old entrance hall as well. The surviving ceiling mosaics run straight into the torn edge of the building.",
+   "story": "The church was wrecked in the raid on the night of 22 to 23 November 1943. Berlin argued about knocking it down, then kept the stump, about 70 metres of it, and built the new church around it."
+  },
+  {
+   "id": "reichstag",
+   "name": "Reichstag, Soviet inscriptions",
+   "where": "Platz der Republik 1",
+   "station": "U Bundestag",
+   "lat": 52.51865,
+   "lon": 13.3761,
+   "kinds": [
+    "writing"
+   ],
+   "access": "booking",
+   "look": "Inside, on the corridor walls, in Cyrillic. Names, home towns and dates written by soldiers from May 1945 onward, left exactly where they were found.",
+   "story": "The inscriptions were covered over in the 1960s and came back to light during Norman Foster’s conversion at the end of the 1990s. They were kept on purpose. You have to register in advance for a visit, and it costs nothing."
+  },
+  {
+   "id": "villa-parey",
+   "name": "Villa Parey",
+   "where": "Sigismundstraße, at the Kulturforum",
+   "station": "S+U Potsdamer Platz",
+   "lat": 52.50779,
+   "lon": 13.36612,
+   "kinds": [
+    "pock"
+   ],
+   "access": "street",
+   "look": "A single surviving villa in an area where nearly everything else went. The bullet holes were kept during its renovation instead of being filled in.",
+   "story": "The German federal culture portal describes the preserved marks on this facade as wounds of memory. It is a five minute detour from the Gemäldegalerie and almost nobody makes it."
+  },
+  {
+   "id": "yorckbruecken",
+   "name": "Yorckbrücken",
+   "where": "Yorckstraße, Schöneberg side",
+   "station": "S+U Yorckstraße",
+   "lat": 52.49195,
+   "lon": 13.37356,
+   "kinds": [
+    "heavy",
+    "patch"
+   ],
+   "access": "street",
+   "look": "Look at the supporting columns and the ironwork, not the deck. Rivets have been forced out of line, plate is warped, and patches of the off-white wartime paint are still on the steel.",
+   "story": "More than forty bridges once carried the tracks into Anhalter and Potsdamer stations across this street. Bombing and artillery did the first part of the damage and the end of two railway systems did the rest. Several spans are now a park path."
+  },
+  {
+   "id": "aeg",
+   "name": "AEG works walls",
+   "where": "Gustav-Meyer-Allee, Wedding",
+   "station": "U Voltastraße",
+   "lat": 52.54382,
+   "lon": 13.38812,
+   "kinds": [
+    "pock",
+    "splinter"
+   ],
+   "access": "street",
+   "look": "Brick, not stone, so the marks read differently: chipped corners and shallow craters where the face of the brick has gone.",
+   "story": "The Soviet assault reached this industrial quarter on 26 April 1945. The AEG buildings are Peter Behrens’ work, some of the most copied industrial architecture in Europe, and they are still marked."
+  },
+  {
+   "id": "prellerweg",
+   "name": "Prellerweg railway bridge",
+   "where": "Prellerweg, Schöneberg",
+   "station": "S Priesterweg",
+   "lat": 52.4568,
+   "lon": 13.35913,
+   "kinds": [
+    "heavy"
+   ],
+   "access": "street",
+   "look": "The gouges in the cement side walls under the bridge. They sit higher than a bicycle, which is the quickest way to understand what made them.",
+   "story": "Tank tracks cut these. It is the one site on this map where the damage is not from something fired but from something driven, and that is the reason it is worth the trip out."
+  }
+ ]
+}

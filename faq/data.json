@@ -10641,5 +10641,35 @@
         "a": "**Start with \"Ich habe eine Lebensmittelallergie\" and then name the category.** For example, \"Ich bin allergisch gegen Sellerie. Ist Sellerie in der Brühe?\" or \"Ich vertrage kein Gluten. Ist da Weizen drin?\" The sentence that changes the conversation is the second one: \"Haben Sie die Allergenkennzeichnung schriftlich? Ich möchte sie bitte sehen.\" That asks for the written record the business is required to hold, and it works in English too if your German runs out."
       }
     ]
+  },
+  "berlin-war-damage-still-visible": {
+    "title": "Berlin War Damage Still Visible - FAQ",
+    "subtitle": "Which Berlin buildings still carry the marks of 1943 to 1945, where on each wall to look, and how to tell a bullet pock from shell splinter and from a deliberate repair.",
+    "items": [
+      {
+        "q": "Where can you still see bullet holes in Berlin?",
+        "a": "**The easiest place is the Kolonnadenhof on Museum Island, and you do not need a ticket for it.** The colonnades between the Alte Nationalgalerie and the Neues Museum carry scattered pocks, mostly below three metres. Within a few hundred metres you also have the Neues Museum walls, the Alte Nationalgalerie, the embankment stone at Friedrichsbrücke and the Pergamonmuseum pillars. Beyond the island, the front facade of the Museum für Naturkunde on Invalidenstraße, the archways under Friedrichstraße station, the Sophienkirche walls on Große Hamburger Straße, the outside of the Gropius Bau and the brickwork of the AEG works on Gustav-Meyer-Allee all still show it."
+      },
+      {
+        "q": "How do you tell a bullet hole from other damage on an old building?",
+        "a": "**Look at the pattern, not the single hole.** Rifle and machine-gun fire leaves small round pocks in loose clusters, concentrated at the height a person stands or lies. A bursting shell leaves splinter marks that fan outward from one point, so the marks get sparser the further they are from the centre. Heavy weapons leave something you cannot mistake: craters the width of a plate at the Humboldthain flak tower, gouges cut by tank tracks in the walls under the Prellerweg bridge, and a hole punched clean through a steel column at the S-Bahn bridge on Leibnizstraße. Ordinary weathering is even and follows the run of the stone; damage does not."
+      },
+      {
+        "q": "Why has Berlin never repaired the damage?",
+        "a": "**Two different reasons, and they look different on the wall.** Some of it was simply never worth patching, which is most of the colonnades, the station arches and the industrial brickwork. Some of it was kept as a decision. The Neues Museum is the clearest case: the restoration finished in 2009 left the ruins, the bomb holes and the bullet marks in place and rebuilt the missing parts in plain brick and concrete, so the join is legible from the pavement. The Kaiser Wilhelm Memorial Church and the Anhalter Bahnhof portico are the same idea at building scale. The Anhalter portal survived demolition in 1959 only because people protested, and it is now a listed monument, restored between 2003 and 2005."
+      },
+      {
+        "q": "When was the damage done?",
+        "a": "**Two separate periods, and it is worth knowing which you are looking at.** Bombing did the first part: the Kaiser Wilhelm Memorial Church was wrecked in the raid of the night of 22 to 23 November 1943, and the east wing of the Museum für Naturkunde came down in an American daylight raid on 3 February 1945. Ground fighting did the rest, and it was compressed into about ten days. Soviet units reached the Sophienkirche quarter on 24 April 1945, the AEG works and the Humboldthain flak tower on 26 April, the Gestapo block next to the Gropius Bau on 29 April, and the Stadtbahn viaduct at Friedrichstraße on 30 April and 1 May."
+      },
+      {
+        "q": "Can you see the Soviet inscriptions inside the Reichstag?",
+        "a": "**Yes, but not by turning up.** Soldiers wrote names, home towns and dates on the interior walls from May 1945 onward. The writing was covered over in the 1960s and reappeared during Norman Foster’s conversion at the end of the 1990s, and it was deliberately kept. Seeing it means a registered visit, which is free but has to be arranged in advance. Everything else on this list is on a public street, with two qualifications: the Neues Museum, the Alte Nationalgalerie and the Museum für Naturkunde only need a ticket for the inside, and the Pergamonmuseum plot is a building site until at least 4 June 2027."
+      },
+      {
+        "q": "Is any of this signposted?",
+        "a": "**Almost none of it.** A few places carry their own explanation, mostly the ones that were preserved on purpose: the Kaiser Wilhelm Memorial Church, the Anhalter portico as a listed monument, and the Museum für Naturkunde, which documents the damage on its own building pages. The rest is simply there. That is why the pattern matters more than a plaque: once you can tell a pock from splinter, you start noticing it on ordinary buildings all over the eastern half of the centre, without anyone having to point it out."
+      }
+    ]
   }
 }
