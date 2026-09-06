@@ -1,85 +1,85 @@
 const BW_BLOG_HOME_DATA_URL = (() => {
   const script = document.currentScript;
   const base = script && script.src ? script.src : window.location.href;
-  return new URL('./data.json?v=20260905-featured-listings', base).href;
+  return new URL('./data.json?v=20260906-featured-listings', base).href;
 })();
 
 const BW_BLOG_HOME_FALLBACK = {
-  featured: {
-    title: '4 Days in Berlin: What to Do With the Day a Three-Day Trip Cannot Fit',
-    url: 'https://www.berlinwalk.com/post/4-days-in-berlin',
-    category: 'Tourist Tips',
-    readTime: '8 min read',
-    label: 'New: choose your fourth Berlin day',
-    summary: 'Most people who give Berlin four days plan three of them properly and improvise the fourth, then spend it walking back through Mitte past the sights they already saw. The fourth day is the one with no default, which is exactly why it decides how the trip is remembered. Here is what it is actually for, the arithmetic that rules half the options out before you leave the hotel, and the eight real choices with verified travel times from Alexanderplatz.',
-    image: 'https://static.wixstatic.com/media/5a08a3_b86a4c459881452cad772a52e298f9f2~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-sanssouci-great-fountain.jpg',
-    alt: 'The Great Fountain at Sanssouci with the vineyard terraces and the yellow palace above them'
+  "featured": {
+    "title": "Hotel or Apartment in Berlin: Where the Cost Flips and What to Check Before You Book",
+    "url": "https://www.berlinwalk.com/post/hotel-or-apartment-in-berlin",
+    "category": "Tourist Tips",
+    "readTime": "7 min read",
+    "summary": "Most people settle the Berlin neighbourhood first and the type of bed second, which is the wrong way round. A hotel is priced per room, an apartment per flat with a cleaning fee charged once, and hostel beds per person per night, so the cheapest option moves with your party size and your length of stay. Here is where each one wins, the accommodation tax that applies to all three, and the registration number to look for before you pay for a Berlin flat.",
+    "image": "https://static.wixstatic.com/media/5a08a3_33e8970d4de941438d35180249a00a43~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-berlin-altbau-facade.jpg",
+    "alt": "A classic Berlin Altbau facade on Templiner Strasse in Prenzlauer Berg, with tall windows, stucco detail and balconies",
+    "label": "New: compare your Berlin stay"
   },
-  miniPosts: [
+  "miniPosts": [
     {
-      title: "FIBA Women's Basketball World Cup 2026 in Berlin: A Local Guide for Fans",
-      url: 'https://www.berlinwalk.com/post/fiba-womens-basketball-world-cup-2026-berlin',
-      category: 'Tourist Tips',
-      readTime: '7 min read',
-      summary: 'The FIBA Women\'s Basketball World Cup 2026 comes to Berlin from September 4-13. Here is the local fan guide: venues, transport, tickets, fixtures, and what to do between games.',
-      image: 'https://static.wixstatic.com/media/5a08a3_ea8454716f174a6a8d5990f9131542a8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/fiba-wwc-2026-berlin-hero.jpg',
-      alt: 'Women basketball fans walking toward a warmly lit modern Berlin arena at sunset, with the TV Tower and Spree in the background'
+      "title": "FIBA Women's Basketball World Cup 2026 in Berlin: A Local Guide for Fans",
+      "url": "https://www.berlinwalk.com/post/fiba-womens-basketball-world-cup-2026-berlin",
+      "category": "Tourist Tips",
+      "readTime": "7 min read",
+      "summary": "The FIBA Women's Basketball World Cup 2026 comes to Berlin from September 4-13. Here is the local fan guide: venues, transport, tickets, fixtures, and what to do between games.",
+      "image": "https://static.wixstatic.com/media/5a08a3_ea8454716f174a6a8d5990f9131542a8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/fiba-wwc-2026-berlin-hero.jpg",
+      "alt": "Women basketball fans walking toward a warmly lit modern Berlin arena at sunset, with the TV Tower and Spree in the background"
     },
     {
-      title: 'Train Tickets for Day Trips from Berlin: Group Tickets, the Deutschlandticket and When the ICE Wins',
-      url: 'https://www.berlinwalk.com/post/berlin-day-trip-train-tickets',
-      category: 'Tourist Tips',
-      readTime: '6 min read',
-      summary: 'Germany runs a whole family of flat-price group train tickets that most Berlin visitors never hear about: 36.50 euros covers five people to anywhere in Brandenburg, and 87 euros takes four of you to Dresden and back. Here is which ticket wins for each destination and group size, where the 09:00 weekday rule bites, and when the ICE is honestly the better buy.',
-      image: 'https://static.wixstatic.com/media/5a08a3_aea7c1665e6a4fd1bbc809fdee92bf28~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-re1-berlin-hbf.jpg',
-      alt: 'An ODEG regional train on the RE1 line waiting under the glass roof of Berlin Hauptbahnhof'
+      "title": "When Is Berlin Busiest? The Trade Fair and Event Weeks That Fill the Hotels",
+      "url": "https://www.berlinwalk.com/post/when-is-berlin-busiest",
+      "category": "Tourist Tips",
+      "readTime": "8 min read",
+      "summary": "Berlin does not fill up evenly across a season. It fills up in windows, most of them three to ten days long, and most of them driven by a trade fair out at the Messe grounds in Charlottenburg that no visitor has ever heard of. Here are the dated windows between now and next autumn, taken from the organisers themselves, what each one changes for an ordinary visitor, and how far you would have to shift your dates to step around the expensive ones.",
+      "image": "https://static.wixstatic.com/media/5a08a3_73951f5d413b449c846ccd8ec62c7bab~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-messe-berlin-grounds.jpg",
+      "alt": "The Messe Berlin rotunda with its lettering, the exhibition halls stretching back towards the radio tower, and the Charlottenburg skyline behind"
     },
     {
-      title: 'Wittenberg Day Trip from Berlin: Trains, the Theses Door and What Is Actually Open',
-      url: 'https://www.berlinwalk.com/post/wittenberg-day-trip-from-berlin',
-      category: 'Tourist Tips',
-      readTime: '6 min read',
-      summary: 'The town where the modern world cracked open in 1517 sits 41 minutes from Berlin Hauptbahnhof, and almost everything worth seeing stands on one walkable street. Here is which train and ticket to take, what the Theses Door really is, and the closure most visitors discover too late: the Lutherhaus is being renovated until spring 2027.',
-      image: 'https://static.wixstatic.com/media/5a08a3_b36fba4601d74ee4848048026de0003f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wittenberg-aerial.jpg',
-      alt: 'Aerial view of Wittenberg with the Town Church, the market square and the Castle Church tower on one street line'
+      "title": "4 Days in Berlin: What to Do With the Day a Three-Day Trip Cannot Fit",
+      "url": "https://www.berlinwalk.com/post/4-days-in-berlin",
+      "category": "Tourist Tips",
+      "readTime": "8 min read",
+      "summary": "Most people who give Berlin four days plan three of them properly and improvise the fourth, then spend it walking back through Mitte past the sights they already saw. The fourth day is the one with no default, which is exactly why it decides how the trip is remembered. Here is what it is actually for, the arithmetic that rules half the options out before you leave the hotel, and the eight real choices with verified travel times from Alexanderplatz.",
+      "image": "https://static.wixstatic.com/media/5a08a3_b86a4c459881452cad772a52e298f9f2~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-sanssouci-great-fountain.jpg",
+      "alt": "The Great Fountain at Sanssouci with the vineyard terraces and the yellow palace above them"
     },
     {
-      title: 'IFA Berlin: A Visitor Guide to Messe Berlin and the City After the Show',
-      url: 'https://www.berlinwalk.com/post/ifa-berlin-2026',
-      category: 'Tourist Tips',
-      readTime: '4 min read',
-      summary: 'A visitor-first IFA Berlin plan: confirmed opening hours, Messe Berlin access and an evening that does not overreach.',
-      image: 'https://static.wixstatic.com/media/5a08a3_8de68741b84e41a0bd18386fbf15d9e8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-messe-berlin-cover.jpg',
-      alt: 'Messe Berlin exterior during an event day'
+      "title": "Food Allergies in Berlin: What a Counter Must Tell You and Where the Allergen Hides",
+      "url": "https://www.berlinwalk.com/post/food-allergies-in-berlin",
+      "category": "Tourist Tips",
+      "readTime": "6 min read",
+      "summary": "A guest told me she had eaten supermarket fruit for two days because every Berlin counter answered her celery question with a shrug. She had it backwards: fourteen allergen categories are compulsory in Germany, the duty covers unpackaged food at an Imbiss or bakery counter, and the written record has to be there for you to see. Here is where celery and mustard actually hide in Berlin food, what glutenfrei legally means, and the two German sentences that get you a real answer.",
+      "image": "https://static.wixstatic.com/media/5a08a3_09fcb879985f46da956feb737738bb4b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlinwalk-food-allergies-cover-berlin-imbiss-counter.jpg",
+      "alt": "The counter of a Berlin Imbiss, with a lit menu board above and open trays of salad and sauces below"
     }
   ],
-  posts: [
+  "posts": [
     {
-      title: 'Berlin Weekly Markets: Which One Is Open on the Day You Are Free',
-      url: 'https://www.berlinwalk.com/post/berlin-weekly-markets',
-      category: 'Tourist Tips',
-      readTime: '6 min read',
-      summary: 'Berlin does not have one market you can turn up to whenever you like. It has around a hundred of them, each tied to a fixed weekday and a fixed square, and most are folded away by mid-afternoon. Saturday carries nine, Wednesday is the classic morning, Thursday runs latest, Monday has one, and Sunday has none at all. Here is the shape of the market week, and how to pick the one that fits the day you are actually free.',
-      image: 'https://static.wixstatic.com/media/5a08a3_d77bfcd37ddb4788a623fb490bc5c077~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/winterfeldt.jpg',
-      alt: 'A fruit and vegetable stall under a red and white striped canopy at Winterfeldtplatz market in Berlin'
+      "title": "Berlin Weekly Markets: Which One Is Open on the Day You Are Free",
+      "url": "https://www.berlinwalk.com/post/berlin-weekly-markets",
+      "category": "Tourist Tips",
+      "readTime": "6 min read",
+      "summary": "Berlin does not have one market you can turn up to whenever you like. It has around a hundred of them, each tied to a fixed weekday and a fixed square, and most are folded away by mid-afternoon. Saturday carries nine, Wednesday is the classic morning, Thursday runs latest, Monday has one, and Sunday has none at all. Here is the shape of the market week, and how to pick the one that fits the day you are actually free.",
+      "image": "https://static.wixstatic.com/media/5a08a3_d77bfcd37ddb4788a623fb490bc5c077~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/winterfeldt.jpg",
+      "alt": "A fruit and vegetable stall under a red and white striped canopy at Winterfeldtplatz market in Berlin"
     },
     {
-      title: 'Berlin Attraction Tickets: Where to Buy Them and When a Reseller Costs You More',
-      url: 'https://www.berlinwalk.com/post/berlin-attraction-tickets',
-      category: 'Tourist Tips',
-      readTime: '7 min read',
-      summary: "Five of Berlin's most-visited sights have no ticket at all, two of the best are free but only the venue can reserve them, and the paid half of a classic list comes to 93.90 euros. Here is which door each one is sold through, and how to spot the venue's own page before you pay.",
-      image: 'https://static.wixstatic.com/media/5a08a3_2766c5a7bb034ceb8c2e57bdd51c33c2~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-museumsinsel.jpg',
-      alt: 'The Bode-Museum on the tip of Museum Island seen across the Spree, with the Berlin TV Tower behind it'
+      "title": "Berlin Attraction Tickets: Where to Buy Them and When a Reseller Costs You More",
+      "url": "https://www.berlinwalk.com/post/berlin-attraction-tickets",
+      "category": "Tourist Tips",
+      "readTime": "7 min read",
+      "summary": "Five of Berlin's most-visited sights have no ticket at all, two of the best are free but only the venue can reserve them, and the paid half of a classic list comes to 93.90 euros. Here is which door each one is sold through, and how to spot the venue's own page before you pay.",
+      "image": "https://static.wixstatic.com/media/5a08a3_2766c5a7bb034ceb8c2e57bdd51c33c2~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-museumsinsel.jpg",
+      "alt": "The Bode-Museum on the tip of Museum Island seen across the Spree, with the Berlin TV Tower behind it"
     },
     {
-      title: 'Berlin Public Transport for Tourists: Tickets, Zones, Prices and Validation',
-      url: 'https://www.berlinwalk.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
-      category: 'Tourist Tips',
-      readTime: '7 min read',
-      summary: 'Berlin public transport uses one shared ticket system for U-Bahn, S-Bahn, tram and bus. This local guide covers zones, prices, validation, BER airport trips, and the EUR 60 fine.',
-      image: 'https://static.wixstatic.com/media/5a08a3_09bdf461857549d291c3769973fe3a9b~mv2.png/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_8c97b9e50ab54e0b9a53b8d3982f4ce4~mv2.jpg',
-      alt: 'Yellow train speeding through Konstanzer Strasse station. The wall has bold stripes and text. Ceiling lights illuminate the platform.'
+      "title": "Berlin Public Transport for Tourists: Tickets, Zones, Prices and Validation",
+      "url": "https://www.berlinwalk.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus",
+      "category": "Tourist Tips",
+      "readTime": "7 min read",
+      "summary": "Berlin public transport uses one shared ticket system for U-Bahn, S-Bahn, tram and bus. This local guide covers zones, prices, validation, BER airport trips, and the EUR 60 fine.",
+      "image": "https://static.wixstatic.com/media/5a08a3_09bdf461857549d291c3769973fe3a9b~mv2.png/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_8c97b9e50ab54e0b9a53b8d3982f4ce4~mv2.jpg",
+      "alt": "Yellow train speeding through Konstanzer Strasse station. The wall has bold stripes and text. Ceiling lights illuminate the platform."
     }
   ]
 };
