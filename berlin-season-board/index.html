@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Season Board</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --lightgreen: #C5E1A5;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --grey: #D8D8D0;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); overflow-x: hidden; }
+  .sb { max-width: 760px; margin: 0 auto; padding: 14px 12px 12px; }
+  .sb-head h2 { margin: 0; font-size: 1.08rem; color: var(--green); }
+  .sb-head p { margin: 4px 0 0; font-size: .78rem; line-height: 1.5; color: #4a4a4a; }
+  .sb-pick { margin: 12px 0 6px; }
+  .sb-pick label { display: block; font-size: .66rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--deep); margin-bottom: 4px; }
+  .sb-pick input[type=date] {
+    width: 100%; max-width: 260px; padding: 9px 10px; font: inherit; font-size: .92rem;
+    border: 2px solid var(--green); border-radius: 8px; background: #fff; color: var(--ink);
+  }
+  .sb-chartwrap { margin: 10px 0 0; }
+  canvas { display: block; width: 100%; height: auto; border-radius: 10px; }
+  .sb-legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 8px 0 0; font-size: .72rem; color: #444; }
+  .sb-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .sb-key { width: 14px; height: 10px; border-radius: 2px; display: inline-block; border: 1px solid rgba(0,0,0,.14); }
+  .sb-key-open { background: var(--green); }
+  .sb-key-reduced { background: var(--yellow); }
+  .sb-key-shut { background: var(--grey); }
+  .sb-state { margin: 14px 0 0; display: grid; gap: 8px; }
+  .sb-card { border-radius: 10px; padding: 10px 12px; font-size: .82rem; line-height: 1.5; }
+  .sb-card h3 { margin: 0 0 4px; font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; }
+  .sb-card ul { margin: 0; padding-left: 17px; }
+  .sb-card li { margin: 2px 0; }
+  .sb-open { background: var(--lightgreen); color: var(--deep); }
+  .sb-open h3 { color: var(--deep); }
+  .sb-reduced { background: var(--yellow); color: var(--deep); }
+  .sb-reduced h3 { color: var(--deep); }
+  .sb-shut { background: #ECECE6; color: #3d3d3d; }
+  .sb-shut h3 { color: #3d3d3d; }
+  .sb-next { margin: 14px 0 0; }
+  .sb-next h3 { margin: 0 0 6px; font-size: .78rem; color: var(--green); }
+  .sb-next ol { margin: 0; padding-left: 20px; }
+  .sb-next li { margin: 5px 0; font-size: .82rem; line-height: 1.5; }
+  .sb-when { font-weight: 700; color: var(--deep); }
+  .sb-note { margin: 12px 0 0; font-size: .72rem; line-height: 1.55; color: #555; }
+  .sb-note a { color: var(--green); }
+  @media (max-width: 430px) {
+    .sb { padding: 12px 10px 10px; }
+    .sb-head h2 { font-size: 1rem; }
+    .sb-pick input[type=date] { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="sb">
+  <div class="sb-head">
+    <h2>Berlin Season Board</h2>
+    <p>Berlin does not close all at once. Pick the day you arrive and see what is still running, what has moved to short winter hours, and what has not opened yet.</p>
+  </div>
+
+  <div class="sb-pick">
+    <label for="sb-date">The day you are in Berlin</label>
+    <input type="date" id="sb-date" min="2026-09-01" max="2027-01-31">
+  </div>
+
+  <div class="sb-chartwrap"><canvas id="sb-canvas" role="img" aria-label="Season chart showing when Berlin outdoor and seasonal places are open, on short hours, or shut between September and January"></canvas></div>
+
+  <div class="sb-legend">
+    <span><i class="sb-key sb-key-open"></i> Running normally</span>
+    <span><i class="sb-key sb-key-reduced"></i> Short or partial hours</span>
+    <span><i class="sb-key sb-key-shut"></i> Shut or not open yet</span>
+  </div>
+
+  <div class="sb-state" id="sb-state"></div>
+
+  <div class="sb-next">
+    <h3 id="sb-next-title">What changes next</h3>
+    <ol id="sb-next-list"></ol>
+  </div>
+
+  <p class="sb-note" id="sb-note"></p>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var DATA = null;
+  var canvas = document.getElementById('sb-canvas');
+  var ctx = canvas.getContext('2d');
+  var dateInput = document.getElementById('sb-date');
+  var COLORS = { open: '#1B5E20', reduced: '#FFE600', shut: '#D8D8D0' };
+  var LABELS = { open: 'Running normally', reduced: 'Short or partial hours', shut: 'Shut or not open yet' };
+
+  function day(iso) { return new Date(iso + 'T12:00:00'); }
+  function dayNumber(iso) { return Math.round(day(iso).getTime() / 86400000); }
+  function pretty(iso) {
+    var d = day(iso);
+    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    return d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+  }
+  function clamp(iso) {
+    if (iso < DATA.window.start) return DATA.window.start;
+    if (iso > DATA.window.end) return DATA.window.end;
+    return iso;
+  }
+  function segmentAt(row, iso) {
+    var hit = row.segments[0];
+    row.segments.forEach(function (s) { if (iso >= s.from && iso <= s.to) hit = s; });
+    return hit;
+  }
+
+  function draw(iso) {
+    var wrap = canvas.parentElement;
+    var cssW = Math.max(280, wrap.clientWidth);
+    var rows = DATA.rows;
+    var rowH = cssW < 430 ? 40 : 36;
+    var padL = 4, padR = 4, padT = 26, padB = 8;
+    var cssH = padT + rows.length * rowH + padB;
+    var dpr = window.devicePixelRatio || 1;
+    canvas.width = Math.round(cssW * dpr);
+    canvas.height = Math.round(cssH * dpr);
+    canvas.style.height = cssH + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    var t0 = dayNumber(DATA.window.start);
+    var t1 = dayNumber(DATA.window.end);
+    var plotW = cssW - padL - padR;
+    var x = function (n) { return padL + plotW * (n - t0) / (t1 - t0); };
+
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillRect(0, 0, cssW, cssH);
+
+    var months = ['2026-09-01','2026-10-01','2026-11-01','2026-12-01','2027-01-01'];
+    var names = ['Sep','Oct','Nov','Dec','Jan'];
+    ctx.font = (cssW < 430 ? '10px' : '11px') + " Montserrat, sans-serif";
+    ctx.textBaseline = 'alphabetic';
+    months.forEach(function (m, i) {
+      var mx = x(dayNumber(m));
+      ctx.strokeStyle = '#EDEDE6';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(mx, padT - 12);
+      ctx.lineTo(mx, cssH - padB);
+      ctx.stroke();
+      ctx.fillStyle = '#8a8a82';
+      ctx.textAlign = 'left';
+      ctx.fillText(names[i], mx + 4, 12);
+    });
+
+    var barH = 12;
+    rows.forEach(function (row, i) {
+      var top = padT + i * rowH;
+      ctx.fillStyle = '#333';
+      ctx.textAlign = 'left';
+      ctx.font = (cssW < 430 ? '11px' : '12px') + " Montserrat, sans-serif";
+      ctx.fillText(row.name, padL, top + 11);
+      row.segments.forEach(function (s) {
+        var sx = x(dayNumber(s.from));
+        var ex = x(dayNumber(s.to) + 1);
+        ctx.fillStyle = COLORS[s.status];
+        ctx.fillRect(sx, top + 18, Math.max(1, ex - sx), barH);
+        if (s.status === 'reduced') {
+          ctx.strokeStyle = '#C9B900';
+          ctx.lineWidth = 1;
+          ctx.strokeRect(sx + 0.5, top + 18.5, Math.max(1, ex - sx) - 1, barH - 1);
+        }
+      });
+    });
+
+    var cx = x(dayNumber(DATA.clockChange.date));
+    ctx.strokeStyle = '#9a9a90';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([3, 3]);
+    ctx.beginPath();
+    ctx.moveTo(cx, padT - 12);
+    ctx.lineTo(cx, cssH - padB);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    var mx2 = x(dayNumber(iso));
+    ctx.strokeStyle = '#1B5E20';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(mx2, padT - 14);
+    ctx.lineTo(mx2, cssH - padB);
+    ctx.stroke();
+    ctx.fillStyle = '#1B5E20';
+    ctx.beginPath();
+    ctx.moveTo(mx2, padT - 14);
+    ctx.lineTo(mx2 + 7, padT - 18);
+    ctx.lineTo(mx2 - 7, padT - 18);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  function bucketList(iso) {
+    var buckets = { open: [], reduced: [], shut: [] };
+    DATA.rows.forEach(function (row) {
+      var seg = segmentAt(row, iso);
+      buckets[seg.status].push({ name: row.name, note: seg.note });
+    });
+    return buckets;
+  }
+
+  function changeList(iso) {
+    var now = dayNumber(iso);
+    var events = [];
+    DATA.rows.forEach(function (row) {
+      row.segments.forEach(function (s) {
+        var start = dayNumber(s.from);
+        if (start > now) {
+          events.push({ days: start - now, date: s.from, name: row.name, status: s.status, note: s.note });
+        }
+      });
+    });
+    events.sort(function (a, b) { return a.days - b.days; });
+    return events;
+  }
+
+  function render() {
+    var iso = clamp(dateInput.value || DATA.window.start);
+    if (dateInput.value !== iso) dateInput.value = iso;
+    draw(iso);
+
+    var buckets = bucketList(iso);
+    var stateEl = document.getElementById('sb-state');
+    var html = '';
+    ['open', 'reduced', 'shut'].forEach(function (key) {
+      var items = buckets[key];
+      if (!items.length) return;
+      html += '<div class="sb-card sb-' + key + '"><h3>' + LABELS[key] + ' on ' + pretty(iso) + '</h3><ul>';
+      items.forEach(function (it) {
+        html += '<li><strong>' + it.name + '.</strong> ' + it.note + '</li>';
+      });
+      html += '</ul></div>';
+    });
+    stateEl.innerHTML = html;
+
+    var events = changeList(iso).slice(0, 6);
+    var listEl = document.getElementById('sb-next-list');
+    var titleEl = document.getElementById('sb-next-title');
+    if (!events.length) {
+      titleEl.textContent = 'Nothing else changes inside this window';
+      listEl.innerHTML = '';
+    } else {
+      titleEl.textContent = 'What changes next, soonest first';
+      var out = '';
+      events.forEach(function (e) {
+        out += '<li><span class="sb-when">' + (e.days === 1 ? 'Tomorrow' : 'In ' + e.days + ' days') + ', ' + pretty(e.date) + '.</span> ' +
+          e.name + ': ' + e.note + '</li>';
+      });
+      listEl.innerHTML = out;
+    }
+
+    var sources = DATA.rows.map(function (r) { return r.sourceLabel; }).filter(function (v, i, a) { return v && a.indexOf(v) === i; });
+    document.getElementById('sb-note').innerHTML =
+      'The dashed grey line is 25 October 2026, the night the clocks go back. Dates checked on 6 September 2026 against ' +
+      sources.join(', ') + '. Seasonal dates move by a week or two each year, so check the operator before a long trip across the city.';
+  }
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (json) {
+    DATA = json;
+    var today = new Date();
+    var iso = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+    dateInput.value = clamp(iso);
+    dateInput.addEventListener('change', render);
+    window.addEventListener('resize', render);
+    render();
+  });
+})();
+</script>
+</body>
+</html>

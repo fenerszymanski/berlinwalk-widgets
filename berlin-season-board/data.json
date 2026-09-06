@@ -1,0 +1,275 @@
+{
+  "checkedOn": "2026-09-06",
+  "window": {
+    "start": "2026-09-01",
+    "end": "2027-01-31"
+  },
+  "clockChange": {
+    "date": "2026-10-25",
+    "label": "Clocks go back"
+  },
+  "rows": [
+    {
+      "name": "Lake swimming, Strandbad Wannsee",
+      "source": "https://www.berlinerbaeder.de/baeder/strandbad-wannsee/",
+      "sourceLabel": "Berliner Bäder-Betriebe",
+      "segments": [
+        {
+          "from": "2026-09-01",
+          "to": "2026-09-13",
+          "status": "open",
+          "note": "Bathing season, daily 10:00 to 18:00"
+        },
+        {
+          "from": "2026-09-14",
+          "to": "2026-10-04",
+          "status": "reduced",
+          "note": "Sunbathing and sauna only, no bathing season"
+        },
+        {
+          "from": "2026-10-05",
+          "to": "2027-01-31",
+          "status": "shut",
+          "note": "Closed for the winter"
+        }
+      ]
+    },
+    {
+      "name": "Neighbourhood outdoor pools",
+      "source": "https://www.berlinerbaeder.de/news/detail/ende-der-sommer-saison-und-beginn-der-hallenbad-saison-2026/",
+      "sourceLabel": "Berliner Bäder-Betriebe",
+      "segments": [
+        {
+          "from": "2026-09-01",
+          "to": "2026-09-13",
+          "status": "open",
+          "note": "Last days: Humboldthain, Insulaner and Pankow on 11 September, Neukölln and Gropiusstadt on 13 September"
+        },
+        {
+          "from": "2026-09-14",
+          "to": "2027-01-31",
+          "status": "shut",
+          "note": "Closed for the winter"
+        }
+      ]
+    },
+    {
+      "name": "Sommerbad Kreuzberg (Prinzenbad)",
+      "source": "https://www.berlinerbaeder.de/news/detail/ende-der-sommer-saison-und-beginn-der-hallenbad-saison-2026/",
+      "sourceLabel": "Berliner Bäder-Betriebe",
+      "segments": [
+        {
+          "from": "2026-09-01",
+          "to": "2026-10-30",
+          "status": "open",
+          "note": "The one Berlin outdoor pool that keeps going into late October"
+        },
+        {
+          "from": "2026-10-31",
+          "to": "2027-01-31",
+          "status": "shut",
+          "note": "Closed for the winter"
+        }
+      ]
+    },
+    {
+      "name": "Indoor pools (Hallenbäder)",
+      "source": "https://www.berlinerbaeder.de/news/detail/ende-der-sommer-saison-und-beginn-der-hallenbad-saison-2026/",
+      "sourceLabel": "Berliner Bäder-Betriebe",
+      "segments": [
+        {
+          "from": "2026-09-01",
+          "to": "2026-10-20",
+          "status": "reduced",
+          "note": "Reopening in waves: 7, 14 and 21 September, then 3, 5 and 21 October"
+        },
+        {
+          "from": "2026-10-21",
+          "to": "2027-01-31",
+          "status": "open",
+          "note": "The indoor season is fully running"
+        }
+      ]
+    },
+    {
+      "name": "Public saunas in the city pools",
+      "source": "https://www.berlinerbaeder.de/news/detail/ende-der-sommer-saison-und-beginn-der-hallenbad-saison-2026/",
+      "sourceLabel": "Berliner Bäder-Betriebe",
+      "segments": [
+        {
+          "from": "2026-09-01",
+          "to": "2026-10-31",
+          "status": "shut",
+          "note": "Summer break, the city saunas are shut"
+        },
+        {
+          "from": "2026-11-01",
+          "to": "2027-01-31",
+          "status": "open",
+          "note": "Sauna season opens on 1 November"
+        }
+      ]
+    },
+    {
+      "name": "Open-air cinemas",
+      "source": "https://www.berlin.de/kino/freiluftkinos/",
+      "sourceLabel": "Berlin.de",
+      "segments": [
+        {
+          "from": "2026-09-01",
+          "to": "2026-09-13",
+          "status": "reduced",
+          "note": "Final screenings, the season runs mid-May to early September"
+        },
+        {
+          "from": "2026-09-14",
+          "to": "2027-01-31",
+          "status": "shut",
+          "note": "Season over"
+        }
+      ]
+    },
+    {
+      "name": "Spree city boat tours, Friedrichstraße",
+      "source": "https://www.sternundkreis.de/shop/schiffstouren/",
+      "sourceLabel": "Stern und Kreis Schiffahrt",
+      "segments": [
+        {
+          "from": "2026-09-01",
+          "to": "2026-11-19",
+          "status": "open",
+          "note": "Regular city tours from Friedrichstraße"
+        },
+        {
+          "from": "2026-11-20",
+          "to": "2026-12-20",
+          "status": "reduced",
+          "note": "Winter city tour only, Friday to Sunday"
+        },
+        {
+          "from": "2026-12-21",
+          "to": "2027-01-31",
+          "status": "shut",
+          "note": "Winter break apart from special sailings"
+        }
+      ]
+    },
+    {
+      "name": "Tempelhofer Feld gates",
+      "source": "https://www.berlin.de/en/parks-and-gardens/3561883-4407152-park-tempelhofer-feld.en.html",
+      "sourceLabel": "Berlin.de",
+      "segments": [
+        {
+          "from": "2026-09-01",
+          "to": "2026-09-30",
+          "status": "open",
+          "note": "Gates 06:00 to 20:30"
+        },
+        {
+          "from": "2026-10-01",
+          "to": "2026-10-31",
+          "status": "reduced",
+          "note": "Gates 07:00 to 19:00"
+        },
+        {
+          "from": "2026-11-01",
+          "to": "2026-11-30",
+          "status": "reduced",
+          "note": "Gates 07:00 to 18:00"
+        },
+        {
+          "from": "2026-12-01",
+          "to": "2027-01-31",
+          "status": "reduced",
+          "note": "Gates 07:30 to 17:00"
+        }
+      ]
+    },
+    {
+      "name": "Botanic Garden",
+      "source": "https://www.bgbm.org/en/visit-us/opening-hours-and-box-office",
+      "sourceLabel": "Botanischer Garten Berlin",
+      "segments": [
+        {
+          "from": "2026-09-01",
+          "to": "2026-09-30",
+          "status": "open",
+          "note": "Ticket desk to 19:00, garden exits close 20:00"
+        },
+        {
+          "from": "2026-10-01",
+          "to": "2027-01-31",
+          "status": "reduced",
+          "note": "Ticket desk 09:00 to 18:00, garden exits close 19:00"
+        }
+      ]
+    },
+    {
+      "name": "Zoo Berlin",
+      "source": "https://www.zoo-berlin.de/de/tickets-service/oeffnungszeiten",
+      "sourceLabel": "Zoo Berlin",
+      "segments": [
+        {
+          "from": "2026-09-01",
+          "to": "2026-09-20",
+          "status": "open",
+          "note": "09:00 to 18:30, last admission 17:00"
+        },
+        {
+          "from": "2026-09-21",
+          "to": "2026-10-25",
+          "status": "open",
+          "note": "09:00 to 18:00, last admission 17:00"
+        },
+        {
+          "from": "2026-10-26",
+          "to": "2027-01-31",
+          "status": "reduced",
+          "note": "09:00 to 16:30, last admission 15:30"
+        }
+      ]
+    },
+    {
+      "name": "Christmas markets",
+      "source": "https://www.berlin.de/en/christmas-markets/",
+      "sourceLabel": "Berlin.de",
+      "segments": [
+        {
+          "from": "2026-09-01",
+          "to": "2026-11-22",
+          "status": "shut",
+          "note": "Not open yet"
+        },
+        {
+          "from": "2026-11-23",
+          "to": "2026-12-31",
+          "status": "open",
+          "note": "Season starts 23 November, Gendarmenmarkt runs to 31 December"
+        },
+        {
+          "from": "2027-01-01",
+          "to": "2027-01-03",
+          "status": "reduced",
+          "note": "A few markets, including Breitscheidplatz, run to 3 January"
+        },
+        {
+          "from": "2027-01-04",
+          "to": "2027-01-31",
+          "status": "shut",
+          "note": "Season over"
+        }
+      ]
+    },
+    {
+      "name": "Museums and indoor sights",
+      "segments": [
+        {
+          "from": "2026-09-01",
+          "to": "2027-01-31",
+          "status": "open",
+          "note": "No season at all. Individual opening hours can still change over the Christmas holidays"
+        }
+      ]
+    }
+  ]
+}
