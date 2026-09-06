@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Quiet Clock</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lightgreen: #C5E1A5;
+    --cream: #FAFAF5;
+    --ink: #212121;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .qc { max-width: 720px; margin: 0 auto; padding: 14px 12px 12px; }
+  .qc-head h2 { font-size: 1.08rem; margin: 0; color: var(--green); }
+  .qc-head p { margin: 4px 0 0; font-size: .75rem; line-height: 1.5; color: #555; }
+  .qc-label { display: block; font-size: .66rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--deep); margin: 14px 0 5px; }
+  .qc-acts { display: flex; flex-wrap: wrap; gap: 6px; }
+  .qc-acts button {
+    padding: 7px 11px; font: inherit; font-size: .8rem; font-weight: 600; cursor: pointer;
+    border: 2px solid var(--green); border-radius: 999px; background: #fff; color: var(--green);
+  }
+  .qc-acts button[aria-pressed="true"] { background: var(--green); color: #fff; }
+  .qc-scrub { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
+  .qc-scrub input[type=range] { flex: 1 1 auto; width: 100%; accent-color: var(--green); height: 26px; }
+  .qc-when { flex: 0 0 auto; min-width: 132px; text-align: right; font-size: .82rem; font-weight: 700; color: var(--deep); }
+  .qc-gridwrap { margin: 10px 0 0; }
+  canvas { display: block; width: 100%; height: auto; }
+  .qc-legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 8px 0 0; font-size: .72rem; color: #444; }
+  .qc-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .qc-swatch { width: 13px; height: 13px; border-radius: 3px; border: 1px solid rgba(0,0,0,.25); }
+  .qc-verdict { margin: 12px 0 0; padding: 12px 14px; border-radius: 10px; background: var(--yellow); color: var(--deep); }
+  .qc-verdict h3 { margin: 0 0 5px; font-size: .95rem; }
+  .qc-verdict p { margin: 0; font-size: .86rem; line-height: 1.5; }
+  .qc-foot { margin: 10px 0 0; font-size: .69rem; line-height: 1.55; color: #777; }
+</style>
+</head>
+<body>
+<div class="qc">
+  <div class="qc-head">
+    <h2>Berlin Quiet Clock</h2>
+    <p>Pick what you are about to do in the flat, then drag through the week. Green is normal, yellow means restricted, either by your building's own rulebook or because only a quiet version is allowed, and red is the Berlin noise law a neighbour can call in.</p>
+  </div>
+
+  <span class="qc-label" id="qc-acts-label">What are you doing?</span>
+  <div class="qc-acts" role="group" aria-labelledby="qc-acts-label" id="qc-acts"></div>
+
+  <label class="qc-label" for="qc-range">Drag through the week</label>
+  <div class="qc-scrub">
+    <input type="range" id="qc-range" min="0" max="191" step="1" value="94" aria-label="Hour of the week">
+    <span class="qc-when" id="qc-when">Thursday 22:00</span>
+  </div>
+
+  <div class="qc-gridwrap"><canvas id="qc-canvas" aria-label="Grid of the week showing which hours are normal, which are restricted, and which are against the Berlin noise law"></canvas></div>
+
+  <div class="qc-legend">
+    <span><i class="qc-swatch" style="background:#C5E1A5"></i>Normal</span>
+    <span><i class="qc-swatch" style="background:#FFD24D"></i>Restricted</span>
+    <span><i class="qc-swatch" style="background:#B3261E"></i>Against Berlin law</span>
+  </div>
+
+  <div class="qc-verdict" id="qc-verdict">
+    <h3 id="qc-verdict-title">&nbsp;</h3>
+    <p id="qc-verdict-body">&nbsp;</p>
+  </div>
+
+  <p class="qc-foot">Berlin's Landes-Immissionsschutzgesetz protects the night between 22:00 and 06:00, and Sundays and public holidays for the whole day. Building sites count 20:00 to 07:00 as night. A house rulebook is a private agreement, so it binds you through the flat, not through the city. Rules checked on 6 September 2026.</p>
+</div>
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  'use strict';
+  var DATA = null;
+  var current = null;
+  var pos = 94;
+  var canvas = document.getElementById('qc-canvas');
+  var ctx = canvas.getContext('2d');
+
+  function two(n) { return (n < 10 ? '0' : '') + n; }
+
+  function levelFor(row, hour, act) {
+    if (hour >= 22 || hour < 6) return act.night;
+    if (row >= 6) return act.quiet;
+    if (hour >= 13 && hour < 15) return act.midday;
+    return act.day;
+  }
+
+  function noteFor(row, hour, act) {
+    if (hour >= 22 || hour < 6) return act.nightNote;
+    if (row >= 6) return act.quietNote;
+    if (hour >= 13 && hour < 15) return act.middayNote;
+    return act.dayNote;
+  }
+
+  function draw() {
+    if (!DATA || !current) return;
+    var wrap = canvas.parentElement;
+    var cssW = Math.max(280, wrap.clientWidth);
+    var gutter = cssW < 420 ? 62 : 88;
+    var topAxis = 20;
+    var rowH = cssW < 420 ? 21 : 26;
+    var cssH = topAxis + DATA.rows.length * rowH + 6;
+    var dpr = window.devicePixelRatio || 1;
+    canvas.width = Math.round(cssW * dpr);
+    canvas.height = Math.round(cssH * dpr);
+    canvas.style.height = cssH + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, cssW, cssH);
+
+    var cellW = (cssW - gutter - 4) / 24;
+    var small = cssW < 420;
+
+    ctx.font = (small ? '9px ' : '10px ') + "'Montserrat', sans-serif";
+    ctx.fillStyle = '#666';
+    ctx.textBaseline = 'alphabetic';
+    ctx.textAlign = 'center';
+    for (var h = 0; h < 24; h += 3) {
+      ctx.fillText(two(h), gutter + h * cellW + cellW / 2, 13);
+    }
+
+    for (var r = 0; r < DATA.rows.length; r++) {
+      var y = topAxis + r * rowH;
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = r >= 6 ? '#123D18' : '#444';
+      ctx.font = (r >= 6 ? '700 ' : '') + (small ? '9.5px ' : '11px ') + "'Montserrat', sans-serif";
+      var name = DATA.rows[r];
+      if (small && name === 'Public holiday') name = 'Holiday';
+      ctx.fillText(name, gutter - 8, y + rowH / 2);
+
+      for (var c = 0; c < 24; c++) {
+        var lv = DATA.levels[levelFor(r, c, current)];
+        ctx.fillStyle = lv.colour;
+        ctx.fillRect(gutter + c * cellW, y + 1, cellW - 1, rowH - 3);
+      }
+    }
+
+    var pr = Math.floor(pos / 24);
+    var ph = pos % 24;
+    var px = gutter + ph * cellW;
+    var py = topAxis + pr * rowH;
+    ctx.strokeStyle = '#123D18';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(px - 0.5, py, cellW, rowH - 2);
+    ctx.strokeStyle = 'rgba(18,61,24,.45)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(px + cellW / 2, topAxis - 6);
+    ctx.lineTo(px + cellW / 2, topAxis + DATA.rows.length * rowH);
+    ctx.stroke();
+  }
+
+  function render() {
+    if (!DATA || !current) return;
+    var row = Math.floor(pos / 24);
+    var hour = pos % 24;
+    var when = DATA.rows[row] + ' ' + two(hour) + ':00';
+    document.getElementById('qc-when').textContent = when;
+    var lv = DATA.levels[levelFor(row, hour, current)];
+    var box = document.getElementById('qc-verdict');
+    box.style.background = lv.colour;
+    box.style.color = lv.ink;
+    document.getElementById('qc-verdict-title').textContent = current.label + ', ' + when + ': ' + lv.label;
+    document.getElementById('qc-verdict-body').textContent = noteFor(row, hour, current);
+    draw();
+  }
+
+  function buildActs() {
+    var host = document.getElementById('qc-acts');
+    var markup = '';
+    for (var i = 0; i < DATA.activities.length; i++) {
+      var a = DATA.activities[i];
+      markup += '<button type="button" data-id="' + a.id + '" aria-pressed="' + (i === 0) + '">' + a.label + '</button>';
+    }
+    host.innerHTML = markup;
+    current = DATA.activities[0];
+    host.addEventListener('click', function (ev) {
+      var b = ev.target.closest('button');
+      if (!b) return;
+      var all = host.querySelectorAll('button');
+      for (var k = 0; k < all.length; k++) all[k].setAttribute('aria-pressed', String(all[k] === b));
+      for (var j = 0; j < DATA.activities.length; j++) {
+        if (DATA.activities[j].id === b.getAttribute('data-id')) current = DATA.activities[j];
+      }
+      render();
+    });
+  }
+
+  var range = document.getElementById('qc-range');
+  range.addEventListener('input', function () { pos = parseInt(range.value, 10); render(); });
+  window.addEventListener('resize', draw);
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (json) {
+    DATA = json;
+    buildActs();
+    render();
+  });
+})();
+</script>
+</body>
+</html>

@@ -10201,6 +10201,36 @@
       "hasVisualLayer": true,
       "flatChipCard": false,
       "pageErrors": []
+    },
+    "berlin-quiet-clock": {
+      "slug": "berlin-quiet-clock",
+      "addedAt": null,
+      "measuredBy": "rendered",
+      "signals": {
+        "svgShapeNodes": 0,
+        "svgCount": 0,
+        "canvas": 1,
+        "contentImages": 0,
+        "mapLibrary": false,
+        "range": 1,
+        "dateInput": 0,
+        "radio": 0,
+        "checkbox": 0,
+        "select": 0,
+        "textInput": 0,
+        "buttons": 8,
+        "ariaPressed": 8,
+        "tables": 0,
+        "details": 0,
+        "textLength": 1128
+      },
+      "inputModel": "continuous-scrub",
+      "stateProgression": "continuous-scrub",
+      "outputModel": "time-position",
+      "visualGrammar": "canvas",
+      "hasVisualLayer": true,
+      "flatChipCard": false,
+      "pageErrors": []
     }
   }
 }

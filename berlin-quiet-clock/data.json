@@ -1,0 +1,128 @@
+{
+  "checkedOn": "6 September 2026",
+  "rows": [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+    "Public holiday"
+  ],
+  "levels": {
+    "ok": {
+      "label": "Normal",
+      "colour": "#C5E1A5",
+      "ink": "#123D18"
+    },
+    "house": {
+      "label": "Restricted",
+      "colour": "#FFD24D",
+      "ink": "#3A2B00"
+    },
+    "law": {
+      "label": "Against Berlin law",
+      "colour": "#B3261E",
+      "ink": "#FFFFFF"
+    }
+  },
+  "activities": [
+    {
+      "id": "speaker",
+      "label": "Music or a speaker",
+      "night": "law",
+      "quiet": "house",
+      "midday": "house",
+      "day": "ok",
+      "nightNote": "Between 22:00 and 06:00 a speaker that carries into the next flat is exactly what the noise law is written for. Drop it to the level where the room next door hears nothing distinct.",
+      "quietNote": "Sundays and public holidays have no clock. A speaker at room level is fine at 11:00 and still fine at 18:00. A speaker the neighbours can follow is an offence at both.",
+      "middayNote": "Many Berlin buildings write 13:00 to 15:00 into their own rulebook. That is the building talking, not the city.",
+      "dayNote": "Room level on a weekday afternoon is ordinary use of a flat. Nobody is going to knock."
+    },
+    {
+      "id": "party",
+      "label": "People round for drinks",
+      "night": "law",
+      "quiet": "house",
+      "midday": "ok",
+      "day": "ok",
+      "nightNote": "This is the one that actually gets the police called. After 22:00 close the windows, move everyone off the balcony and take the voices down. A Berlin flat has old floorboards and a courtyard that works like a funnel.",
+      "quietNote": "A Sunday afternoon with guests is normal. A Sunday afternoon with the windows open and twelve voices is the thing your neighbour has a form for.",
+      "middayNote": "No Berlin law protects the early afternoon. Only your building's own rulebook might.",
+      "dayNote": "Daytime voices in a flat are simply life in a Berlin building."
+    },
+    {
+      "id": "vacuum",
+      "label": "Vacuuming",
+      "night": "law",
+      "quiet": "house",
+      "midday": "house",
+      "day": "ok",
+      "nightNote": "A vacuum at 23:00 travels through the whole staircase. Leave it for the morning.",
+      "quietNote": "Sunday vacuuming is the classic Berlin flashpoint. State law only catches it if it is genuinely disturbing, but almost every house rulebook bans it outright, and the neighbour below will assume the rulebook.",
+      "middayNote": "The 13:00 to 15:00 pause you may see posted in the hallway is a house rule.",
+      "dayNote": "Weekday daytime vacuuming is fine anywhere in Berlin."
+    },
+    {
+      "id": "machine",
+      "label": "Washing machine or dishwasher",
+      "night": "house",
+      "quiet": "ok",
+      "midday": "ok",
+      "day": "ok",
+      "nightNote": "A modern machine is usually quiet enough to be legal at night, but a large number of Berlin house rulebooks still ban it between 22:00 and 06:00 or 07:00. Check the folder in the flat before you press start.",
+      "quietNote": "Berlin law does not stop you doing laundry on a Sunday. The building might.",
+      "middayNote": "No problem from the city. Read the rulebook if the machine is in a shared cellar.",
+      "dayNote": "Run it whenever. Just do not leave the spin cycle to a 23:00 finish."
+    },
+    {
+      "id": "shower",
+      "label": "A shower or a bath",
+      "night": "ok",
+      "quiet": "ok",
+      "midday": "ok",
+      "day": "ok",
+      "nightNote": "Washing at night is ordinary use of a home and Berlin has no rule against it. German courts have struck down house rulebooks that tried to ban night showering, and around half an hour is treated as normal household noise. Do not run a bath for an hour at 02:00 and you are fine.",
+      "quietNote": "Nothing to think about. Sundays change nothing here.",
+      "middayNote": "Nothing to think about.",
+      "dayNote": "Nothing to think about."
+    },
+    {
+      "id": "suitcase",
+      "label": "A suitcase in the stairwell",
+      "night": "law",
+      "quiet": "house",
+      "midday": "ok",
+      "day": "ok",
+      "nightNote": "Hard wheels on old Berlin stair tiles at 06:20 for an early flight is the most common complaint a short-stay guest generates. Carry the case down. It takes ninety seconds and it is the single best thing you can do in that building.",
+      "quietNote": "A Sunday arrival with three cases is fine. Do it without the wheels and without a conversation on the landing.",
+      "middayNote": "Nothing here beyond the building's own rulebook.",
+      "dayNote": "Wheel it in normally. Daytime stairwell noise is expected."
+    },
+    {
+      "id": "stairs",
+      "label": "Talking on the stairs or in the courtyard",
+      "night": "law",
+      "quiet": "house",
+      "midday": "ok",
+      "day": "ok",
+      "nightNote": "A Berlin Hinterhof is a stone box open at the top. Four people saying goodbye at 01:00 in a courtyard reaches every window on five floors. Say goodbye on the pavement outside the front door instead.",
+      "quietNote": "Courtyard voices carry the same on a Sunday morning as on a Saturday night. Keep it short.",
+      "middayNote": "Fine, though the courtyard still amplifies everything.",
+      "dayNote": "Fine. The stairwell is a shared space and daytime voices belong there."
+    },
+    {
+      "id": "diy",
+      "label": "Drilling, hammering, moving furniture",
+      "night": "law",
+      "quiet": "law",
+      "midday": "house",
+      "day": "ok",
+      "nightNote": "Structure-borne noise travels further than air noise. At night this one is not negotiable.",
+      "quietNote": "Sunday and public holiday are the clearest case in the whole grid. Do not drill, and do not drag a wardrobe across the floor.",
+      "middayNote": "The early-afternoon pause is a house rule, but for drilling it is a house rule people actually enforce.",
+      "dayNote": "Weekday daytime is the window for anything loud."
+    }
+  ]
+}
