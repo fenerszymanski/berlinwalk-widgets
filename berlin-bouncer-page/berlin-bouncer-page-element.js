@@ -9,7 +9,6 @@ const BOUNCER_READY_MESSAGE = 'bw-berghain-bouncer-ready';
 const BOUNCER_VISIBLE_MESSAGE = 'bw-berghain-bouncer-visible';
 const BOUNCER_TRACK_MESSAGE = 'bw-berghain-bouncer-track';
 const BOUNCER_PAGE_SESSION_KEY = 'bw_berghain_bouncer_page_session_id';
-const BOUNCER_ENTRY_VARIANT_KEY = 'bw_berghain_bouncer_entry_variant_v1';
 const BOUNCER_LOCAL_HOSTS = new Set(['localhost', '127.0.0.1']);
 const BOUNCER_IFRAME_ORIGINS = new Set([
   'https://fenerszymanski.github.io',
@@ -140,32 +139,11 @@ function bouncerDeviceClass(viewportWidth) {
   return 'desktop';
 }
 
-function bouncerEntryVariantFor(element, consentState) {
-  const params = new URLSearchParams(window.location.search || '');
-  const explicit = element.getAttribute('data-experiment-variant')
-    || params.get('bouncer_variant')
-    || params.get('experiment_variant');
-  if (explicit) return bouncerSafeToken(explicit, 60) || 'control';
-  if (element._bwEntryVariant) {
-    if (consentState === 'granted' && !bouncerStorageGet(window.sessionStorage, BOUNCER_ENTRY_VARIANT_KEY)) {
-      bouncerStorageSet(window.sessionStorage, BOUNCER_ENTRY_VARIANT_KEY, element._bwEntryVariant);
-    }
-    return element._bwEntryVariant;
-  }
-
-  // Unknown/denied pages get an in-memory choice. Persist the page-session
-  // assignment only after analytics consent is granted.
-  const existing = consentState === 'granted'
-    ? bouncerStorageGet(window.sessionStorage, BOUNCER_ENTRY_VARIANT_KEY)
-    : '';
-  const variant = existing === 'mobile_play_now' || existing === 'control'
-    ? existing
-    : (Math.random() < 0.5 ? 'control' : 'mobile_play_now');
-  element._bwEntryVariant = variant;
-  if (consentState === 'granted' && !existing) {
-    bouncerStorageSet(window.sessionStorage, BOUNCER_ENTRY_VARIANT_KEY, variant);
-  }
-  return variant;
+function bouncerEntryVariantFor() {
+  // The mobile-entry A/B test closed on 2026-09-06. Keep the established
+  // control experience for every visitor while retaining the field in the
+  // privacy-safe event context for historical reporting continuity.
+  return 'control';
 }
 
 function bouncerPageSessionId(element, consentState) {
@@ -194,7 +172,7 @@ function bouncerContextFor(element) {
     params.get('qa_label') || params.get('qaLabel') || element.getAttribute('data-qa-label') || '',
     80,
   );
-  const entryVariant = bouncerEntryVariantFor(element, consentState);
+  const entryVariant = bouncerEntryVariantFor();
   const parentUrl = bouncerCanonicalParentUrl();
   const context = {
     parentPath: bouncerCanonicalParentPath(),
@@ -269,10 +247,6 @@ class BwBerlinBouncerPage extends HTMLElement {
     }
     if (this._visibilityChangeHandler) document.removeEventListener('visibilitychange', this._visibilityChangeHandler);
     if (this._iframeLoadHandler && this._iframe) this._iframe.removeEventListener('load', this._iframeLoadHandler);
-    if (this._playNowHandler) {
-      const playNow = this.querySelector('#bouncer-play-now');
-      if (playNow) playNow.removeEventListener('click', this._playNowHandler);
-    }
     if (this._tourClickHandler) {
       const link = this.querySelector('.bw-bouncer-tour-cta a');
       if (link) link.removeEventListener('click', this._tourClickHandler);
@@ -293,7 +267,7 @@ class BwBerlinBouncerPage extends HTMLElement {
   }
 
   _render() {
-    const entryVariant = bouncerEntryVariantFor(this, bouncerAnalyticsConsent());
+    const entryVariant = bouncerEntryVariantFor();
     this.dataset.entryVariant = entryVariant;
     const iframeUrl = new URL(`berlin-bouncer/index.html?attribution=none&resize=none&v=${ASSET_BUILD}`, BASE_URL);
     const parentParams = new URLSearchParams(window.location.search || '');
@@ -388,29 +362,6 @@ class BwBerlinBouncerPage extends HTMLElement {
           max-width: 500px;
         }
 
-        .bw-bouncer-play-now {
-          display: none;
-          align-items: center;
-          justify-content: center;
-          border: 2px solid var(--bw-neon);
-          border-radius: 6px;
-          background: var(--bw-neon);
-          color: var(--bw-dark);
-          cursor: pointer;
-          font: inherit;
-          font-size: 14px;
-          font-weight: 900;
-          letter-spacing: 0.8px;
-          padding: 13px 20px;
-          text-transform: uppercase;
-        }
-
-        .bw-bouncer-play-now:hover {
-          background: #CCFF00;
-          transform: translateY(-1px);
-        }
-
-        .bw-bouncer-play-now:focus-visible,
         .bw-bouncer-tour-cta a:focus-visible,
         .bw-bouncer-games-preview a:focus-visible {
           outline: 3px solid var(--bw-neon);
@@ -596,21 +547,6 @@ class BwBerlinBouncerPage extends HTMLElement {
             box-shadow: 0 0 0 6px #222, 0 20px 40px rgba(0,0,0,0.8);
           }
 
-          bw-berlin-bouncer-page[data-entry-variant="mobile_play_now"] .bw-bouncer-layout {
-            grid-template-areas:
-              "content"
-              "game"
-              "features"
-              "seo"
-              "cta"
-              "more";
-          }
-
-          bw-berlin-bouncer-page[data-entry-variant="mobile_play_now"] .bw-bouncer-play-now {
-            display: inline-flex;
-            margin: -12px auto 0;
-            min-width: min(100%, 220px);
-          }
         }
       </style>
 
@@ -620,7 +556,6 @@ class BwBerlinBouncerPage extends HTMLElement {
           <div class="bw-bouncer-eyebrow">Playable Now</div>
           <h1>Can You Get <span>Into Berghain?</span></h1>
           <p>Play this fast Berghain simulator, choose your outfit and test your door instincts in under a minute.</p>
-          <button class="bw-bouncer-play-now" id="bouncer-play-now" type="button">PLAY NOW</button>
         </div>
 
         <div class="bw-bouncer-features">
@@ -694,19 +629,6 @@ class BwBerlinBouncerPage extends HTMLElement {
     window.addEventListener('message', this._handleBouncerMessage);
     this._iframeLoadHandler = () => this._sendBouncerContext();
     if (this._iframe) this._iframe.addEventListener('load', this._iframeLoadHandler);
-    const playNow = this.querySelector('#bouncer-play-now');
-    if (playNow) {
-      this._playNowHandler = () => {
-        const device = this.querySelector('.bw-bouncer-device');
-        if (!device) return;
-        const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        device.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
-        window.setTimeout(() => {
-          if (this._iframe && typeof this._iframe.focus === 'function') this._iframe.focus({ preventScroll: true });
-        }, reduceMotion ? 0 : 450);
-      };
-      playNow.addEventListener('click', this._playNowHandler);
-    }
     this._handleConsentChange = () => this._sendBouncerContext();
     document.addEventListener('consentPolicyChanged', this._handleConsentChange);
     document.addEventListener('consentPolicyInitialized', this._handleConsentChange);

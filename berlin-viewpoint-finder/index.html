@@ -82,9 +82,6 @@
   .vpf__row { font-size: 13px; line-height: 1.5; margin: 0 0 7px; }
   .vpf__row:last-child { margin-bottom: 0; }
   .vpf__row .k { font-weight: 800; color: var(--bw-text); }
-  .vpf__source { font-size: 11.5px; line-height: 1.45; color: var(--bw-muted); margin: 9px 0 0; }
-  .vpf__source a { color: var(--bw-green); font-weight: 800; }
-  .vpf__source a:hover { text-decoration-thickness: 2px; }
   .vpf__tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; }
   .vpf__tag { font-size: 11px; font-weight: 700; padding: 4px 9px; border-radius: 999px;
     background: var(--bw-lime-soft); color: var(--bw-green); border: 1px solid var(--bw-border); }
@@ -176,13 +173,10 @@
     {
       id: 'tvtower', short: 'TV Tower', name: 'Fernsehturm (TV Tower)',
       where: 'Alexanderplatz, U/S Alexanderplatz', m: 203,
-      price: 'from €20', priceLabel: 'Adult online', access: '40s lift', air: 'Enclosed',
-      priceNum: 20,
-      priceDetail: 'Standard adult tickets start at €20 online. Prices change by date and 15-minute time slot. View & Drink starts at €31.',
-      priceCheckedAt: '6 September 2026',
-      priceUrl: 'https://tv-turm.de/en/tickets-and-bundles/',
+      price: 'from €25.50', access: '40s lift', air: 'Enclosed',
+      priceNum: 25.5,
       what: 'The 203 m enclosed deck inside the tower you can see from half of Berlin, plus a revolving restaurant above it. It is the highest and the most iconic public view, and by far the most expensive.',
-      book: 'Strongly recommended. Choose a date and time online to see the exact adult price; walk-up queues can be long.',
+      book: 'Strongly recommended. Prices are dynamic and rise close to the date, and walk-up queues can be long.',
       best: 'The highest, most iconic view, if you plan and pay for it.',
       tags: ['Highest', 'Most iconic', 'Book ahead', 'Enclosed'],
       pri: { cheapest: false, highest: true, nobooking: false, openair: false, sunset: false }
@@ -267,8 +261,6 @@
     var v = VIEWS.filter(function (x) { return x.id === id; })[0];
     if (!v) return;
     var tags = v.tags.map(function (t) { return '<span class="vpf__tag">' + t + '</span>'; }).join('');
-    var priceDetail = v.priceDetail ? '<p class="vpf__row"><span class="k">Price:</span> ' + v.priceDetail + '</p>' : '';
-    var priceSource = v.priceUrl ? '<p class="vpf__source">Checked ' + v.priceCheckedAt + '. <a href="' + v.priceUrl + '" target="_blank" rel="noopener">Check live TV Tower prices</a>.</p>' : '';
     card.innerHTML =
       '<div class="vpf__card-top">' +
         '<p class="vpf__card-name">' + v.name + '</p>' +
@@ -276,15 +268,14 @@
       '</div>' +
       '<div class="vpf__stats">' +
         '<div class="vpf__stat"><b>' + v.m + ' m</b><span>Height</span></div>' +
-        '<div class="vpf__stat"><b>' + v.price + '</b><span>' + (v.priceLabel || 'Adult') + '</span></div>' +
+        '<div class="vpf__stat"><b>' + v.price + '</b><span>Adult</span></div>' +
         '<div class="vpf__stat"><b>' + v.access + '</b><span>Getting up</span></div>' +
       '</div>' +
       '<div class="vpf__card-body">' +
         '<p class="vpf__row">' + v.what + '</p>' +
-        priceDetail +
         '<p class="vpf__row"><span class="k">Booking:</span> ' + v.book + '</p>' +
         '<p class="vpf__row"><span class="k">Best for:</span> ' + v.best + '</p>' +
-        '<div class="vpf__tags">' + tags + '</div>' + priceSource +
+        '<div class="vpf__tags">' + tags + '</div>' +
       '</div>';
   }
 
