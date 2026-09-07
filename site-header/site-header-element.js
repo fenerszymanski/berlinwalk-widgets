@@ -1,5 +1,5 @@
 const BW_HEADER_MONTH = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Berlin', year: 'numeric', month: '2-digit' }).format(new Date());
-const BW_HEADER_SCHEDULE = BW_HEADER_MONTH === '2026-09' ? 'Sep: Tue-Sat 11:30 &amp; 15:30 · Oct: selected Wed-Sun 11:30 · Check dates' : BW_HEADER_MONTH === '2026-10' ? 'Oct: selected Wed-Sun 11:30 · Check calendar dates · World Clock' : 'Check the calendar for dates and times · World Clock';
+const BW_HEADER_SCHEDULE = BW_HEADER_MONTH === '2026-09' ? 'Sep: 11:30 &amp; 15:30 (Tue-Sat) · Oct: 11:30 (selected Wed-Sun) · Check dates' : BW_HEADER_MONTH === '2026-10' ? 'Oct: selected Wed-Sun 11:30 · Check calendar dates · World Clock' : 'Check the calendar for dates and times · World Clock';
 const BW_HEADER_SCRIPT_URL = (document.currentScript && document.currentScript.src) || 'https://fenerszymanski.github.io/berlinwalk-widgets/site-header/site-header-element.js';
 const BW_HEADER_LOGO_URL = new URL('../assets/berlinwalk-wordmark-green.png', BW_HEADER_SCRIPT_URL).href;
 const BW_HEADER_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
