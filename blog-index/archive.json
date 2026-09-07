@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-07T14:00:09.363Z",
+  "updatedAt": "2026-09-07T19:51:29.707Z",
   "source": "Wix Blog API",
-  "totalPosts": 360,
+  "totalPosts": 361,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "BER Flight Delay Compensation: What You Are Owed and the Line That Decides It",
+      "slug": "ber-flight-delay-compensation",
+      "path": "/post/ber-flight-delay-compensation",
+      "url": "https://www.berlinwalk.com/post/ber-flight-delay-compensation",
+      "excerpt": "A delayed flight out of Berlin pays 250, 400 or 600 euro, and the number is set by the distance to your final destination and whether that airport is inside the EU. Of the 157 destinations BER serves, only nine reach 600 euro. Here is how to work out yours, what the airline owes you while you wait, and how to claim it.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "10 min read",
+      "publishedDate": "2026-09-07T19:49:30.149Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_7ff51c867eaa44b2a4944d20e5758c3b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/ber-terminal-1-exterior.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_7ff51c867eaa44b2a4944d20e5758c3b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/ber-terminal-1-exterior.jpg",
+      "alt": "Terminal 1 at Berlin Brandenburg Airport photographed from the forecourt at dusk",
+      "relatedToolSlug": ""
+    },
     {
       "title": "Park and Ride in Berlin: Which Lots Still Have Room and Which Are Already Full",
       "slug": "park-and-ride-berlin",
