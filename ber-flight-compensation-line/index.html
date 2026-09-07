@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BER Flight Compensation Line</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --amber: #E08600;
+    --red: #C62828;
+    --line: #E0E4DA;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .fc { max-width: 760px; margin: 0 auto; padding: 14px 12px 12px; }
+  .fc-head h2 { font-size: 1.08rem; margin: 0; color: var(--green); }
+  .fc-head p { margin: 5px 0 0; font-size: .76rem; line-height: 1.55; color: #555; }
+  .fc-step { display: block; font-size: .66rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--deep); margin: 15px 0 6px; }
+  .fc-step em { font-style: normal; color: #7a7a7a; }
+
+  .fc-search { position: relative; }
+  .fc-search input {
+    width: 100%; font: inherit; font-size: .86rem; padding: 9px 34px 9px 11px;
+    border: 2px solid var(--green); border-radius: 10px; background: #fff; color: var(--ink);
+  }
+  .fc-search input:focus { outline: 3px solid rgba(27,94,32,.25); outline-offset: 1px; }
+  .fc-clear {
+    position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+    border: 0; background: transparent; font: inherit; font-size: 1rem; line-height: 1;
+    color: #777; cursor: pointer; padding: 4px 6px;
+  }
+  .fc-results { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 4px; max-height: 208px; overflow: auto; }
+  .fc-results li { margin: 0; }
+  .fc-results button {
+    width: 100%; text-align: left; font: inherit; font-size: .79rem; cursor: pointer;
+    background: #fff; border: 1px solid var(--line); border-left: 5px solid var(--lime);
+    border-radius: 8px; padding: 7px 9px; color: var(--ink); display: flex;
+    justify-content: space-between; gap: 8px; align-items: baseline;
+  }
+  .fc-results button.b400 { border-left-color: var(--amber); }
+  .fc-results button.b600 { border-left-color: var(--red); }
+  .fc-results button:hover, .fc-results button:focus-visible { background: #F2F7EC; }
+  .fc-rname { font-weight: 700; color: var(--deep); }
+  .fc-rmeta { font-size: .71rem; color: #666; }
+  .fc-rkm { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--green); white-space: nowrap; }
+  .fc-none { margin: 8px 2px 0; font-size: .76rem; color: #777; }
+
+  .fc-plotwrap { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 8px 6px 4px; margin-top: 12px; overflow: hidden; }
+  .fc-plot { display: block; width: 100%; height: auto; }
+  .fc-legend { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 4px 3px; font-size: .68rem; color: #555; }
+  .fc-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .fc-key { width: 11px; height: 11px; border-radius: 3px; border: 1px solid rgba(0,0,0,.25); }
+
+  .fc-delay { display: flex; flex-wrap: wrap; gap: 6px; }
+  .fc-delay button {
+    font: inherit; font-size: .76rem; font-weight: 700; cursor: pointer;
+    padding: 6px 11px; border-radius: 999px; border: 2px solid var(--green);
+    background: #fff; color: var(--deep); line-height: 1.2;
+  }
+  .fc-delay button.is-on { background: var(--green); color: #fff; }
+  .fc-delay button[disabled] { opacity: .45; cursor: default; }
+
+  .fc-out { margin: 12px 0 0; padding: 13px 14px; border-radius: 10px; background: var(--yellow); color: var(--deep); }
+  .fc-out h3 { margin: 0 0 5px; font-size: 1.02rem; color: var(--deep); }
+  .fc-out p { margin: 0; font-size: .84rem; line-height: 1.55; color: var(--deep); }
+  .fc-out p + p { margin-top: 6px; }
+  .fc-out .fc-big { font-size: 1.5rem; font-weight: 800; display: block; margin: 2px 0 4px; color: var(--deep); }
+  .fc-note { margin: 10px 0 0; padding: 10px 12px; border-radius: 9px; background: #FFF6E0; border: 1px solid #EBD08A; color: #6B4B00; font-size: .77rem; line-height: 1.5; }
+  .fc-foot { margin: 11px 0 0; font-size: .68rem; line-height: 1.6; color: #777; }
+  .fc-hide { display: none; }
+</style>
+</head>
+<body>
+<div class="fc">
+  <div class="fc-head">
+    <h2>BER Flight Compensation Line</h2>
+    <p>Every scheduled destination from Berlin Brandenburg Airport, placed at its real great circle distance. That distance, and whether the other airport is inside the EU, is what decides whether a three hour delay is worth 250, 400 or 600 euro.</p>
+  </div>
+
+  <span class="fc-step">Step 1 <em>&middot; where were you flying to?</em></span>
+  <div class="fc-search">
+    <label class="fc-hide" for="fc-q">Search BER destinations</label>
+    <input id="fc-q" type="search" autocomplete="off" placeholder="Type a city, for example Tenerife, Dubai or Vienna">
+    <button class="fc-clear fc-hide" id="fc-clear" type="button" aria-label="Clear">&times;</button>
+  </div>
+  <ul class="fc-results" id="fc-results"></ul>
+  <p class="fc-none fc-hide" id="fc-none"></p>
+
+  <div class="fc-plotwrap">
+    <svg class="fc-plot" id="fc-plot" viewBox="0 0 700 210" role="img" aria-label="BER destinations plotted by distance, with the 1500 and 3500 kilometre compensation boundaries"></svg>
+    <div class="fc-legend">
+      <span><i class="fc-key" style="background:#7CB342"></i> 250 euro band</span>
+      <span><i class="fc-key" style="background:#E08600"></i> 400 euro band</span>
+      <span><i class="fc-key" style="background:#C62828"></i> 600 euro band</span>
+    </div>
+  </div>
+
+  <span class="fc-step" id="fc-step2">Step 2 <em>&middot; how late did you actually land?</em></span>
+  <div class="fc-delay" id="fc-delay"></div>
+
+  <div class="fc-out" id="fc-out"></div>
+  <p class="fc-note fc-hide" id="fc-warn"></p>
+  <p class="fc-foot" id="fc-foot"></p>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var DATA = null, DESTS = [], chosen = null, currentStep = 1, delayPick = null;
+  var qEl = document.getElementById('fc-q');
+  var clearEl = document.getElementById('fc-clear');
+  var resEl = document.getElementById('fc-results');
+  var noneEl = document.getElementById('fc-none');
+  var plotEl = document.getElementById('fc-plot');
+  var delayEl = document.getElementById('fc-delay');
+  var outEl = document.getElementById('fc-out');
+  var warnEl = document.getElementById('fc-warn');
+  var footEl = document.getElementById('fc-foot');
+
+  var DELAYS = [
+    { id: 'under', label: 'Under 3 hours' },
+    { id: 'three', label: '3 to 4 hours' },
+    { id: 'over', label: 'More than 4 hours' }
+  ];
+
+  var SVG = 'http://www.w3.org/2000/svg';
+  function el(name, attrs) {
+    var n = document.createElementNS(SVG, name);
+    for (var k in attrs) { if (attrs[k] !== null && attrs[k] !== undefined) n.setAttribute(k, attrs[k]); }
+    return n;
+  }
+  function num(v) { return String(v).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+  function bandColour(b) { return b === 250 ? '#7CB342' : (b === 400 ? '#E08600' : '#C62828'); }
+  function norm(s) {
+    return s.toLowerCase()
+      .replace(/[ä]/g, 'a').replace(/[öø]/g, 'o').replace(/[ü]/g, 'u')
+      .replace(/[ß]/g, 'ss').replace(/[éèê]/g, 'e').replace(/[íî]/g, 'i')
+      .replace(/[șş]/g, 's').replace(/[ăâà]/g, 'a').replace(/[ç]/g, 'c')
+      .replace(/[^a-z0-9]+/g, ' ').trim();
+  }
+
+  /* Distance is compressed with a square root so the short European routes,
+     which is where most of the network sits, do not pile into one pixel while
+     Beijing stretches the axis. The two legal boundaries stay readable. */
+  var X0 = 60, X1 = 668, MINKM = 250, MAXKM = 7600;
+  var R0 = Math.sqrt(MINKM), R1 = Math.sqrt(MAXKM);
+  function xOf(km) { return X0 + ((Math.sqrt(Math.max(km, MINKM)) - R0) / (R1 - R0)) * (X1 - X0); }
+
+  function drawPlot() {
+    while (plotEl.firstChild) plotEl.removeChild(plotEl.firstChild);
+    var TOP = 34, BOT = 150;
+
+    // Band backgrounds
+    var bands = [[0, 1500, '#F2F8EC'], [1500, 3500, '#FDF3E3'], [3500, MAXKM, '#FCECEC']];
+    bands.forEach(function (b) {
+      plotEl.appendChild(el('rect', { x: xOf(b[0]), y: TOP, width: xOf(b[1]) - xOf(b[0]), height: BOT - TOP, fill: b[2] }));
+    });
+
+    // Band labels
+    var labels = [[0, 1500, '250 euro'], [1500, 3500, '400 euro'], [3500, MAXKM, '600 euro']];
+    labels.forEach(function (b) {
+      var t = el('text', { x: (xOf(b[0]) + xOf(b[1])) / 2, y: TOP - 12, 'text-anchor': 'middle', 'font-size': '13', 'font-weight': '700', fill: '#123D18' });
+      t.textContent = b[2];
+      plotEl.appendChild(t);
+    });
+
+    // Boundary rules
+    [1500, 3500].forEach(function (k) {
+      plotEl.appendChild(el('line', { x1: xOf(k), y1: TOP - 4, x2: xOf(k), y2: BOT + 6, stroke: '#123D18', 'stroke-width': '2', 'stroke-dasharray': '5 4' }));
+      var t = el('text', { x: xOf(k), y: BOT + 22, 'text-anchor': 'middle', 'font-size': '12', 'font-weight': '700', fill: '#123D18' });
+      t.textContent = num(k) + ' km';
+      plotEl.appendChild(t);
+    });
+
+    // Every destination as a tick, height carrying whether it is an EU airport
+    DESTS.forEach(function (d) {
+      var x = xOf(d.k);
+      var isSel = chosen && chosen.i === d.i;
+      plotEl.appendChild(el('line', {
+        x1: x, y1: d.e ? TOP + 12 : TOP + 58, x2: x, y2: d.e ? TOP + 54 : BOT - 6,
+        stroke: bandColour(d.b), 'stroke-width': isSel ? '3.5' : '1.6', 'stroke-opacity': isSel ? '1' : '.55'
+      }));
+    });
+
+    var eu = el('text', { x: X0 - 6, y: TOP + 36, 'text-anchor': 'end', 'font-size': '11', fill: '#666' });
+    eu.textContent = 'EU';
+    plotEl.appendChild(eu);
+    var non = el('text', { x: X0 - 6, y: BOT - 18, 'text-anchor': 'end', 'font-size': '11', fill: '#666' });
+    non.textContent = 'non-EU';
+    plotEl.appendChild(non);
+
+    if (chosen) {
+      var cx = xOf(chosen.k);
+      plotEl.appendChild(el('circle', { cx: cx, cy: chosen.e ? TOP + 12 : BOT - 6, r: '5', fill: bandColour(chosen.b), stroke: '#123D18', 'stroke-width': '2' }));
+      var anchor = cx > 560 ? 'end' : (cx < 120 ? 'start' : 'middle');
+      var lab = el('text', { x: cx, y: BOT + 42, 'text-anchor': anchor, 'font-size': '14', 'font-weight': '700', fill: '#123D18' });
+      lab.textContent = chosen.n + ' · ' + num(Math.round(chosen.k)) + ' km';
+      plotEl.appendChild(lab);
+      plotEl.appendChild(el('line', { x1: cx, y1: BOT + 6, x2: cx, y2: BOT + 12, stroke: '#123D18', 'stroke-width': '2' }));
+    } else {
+      var hint = el('text', { x: (X0 + X1) / 2, y: BOT + 42, 'text-anchor': 'middle', 'font-size': '13', fill: '#777' });
+      hint.textContent = 'All ' + DATA.meta.destCount + ' BER destinations. Pick one above to place your flight.';
+      plotEl.appendChild(hint);
+    }
+  }
+
+  function renderResults() {
+    var q = norm(qEl.value);
+    resEl.innerHTML = '';
+    clearEl.classList.toggle('fc-hide', !qEl.value);
+    if (!q) { noneEl.classList.add('fc-hide'); return; }
+    var hits = DESTS.filter(function (d) {
+      return norm(d.n).indexOf(q) === 0 || norm(d.n).indexOf(' ' + q) > -1
+        || norm(d.c).indexOf(q) === 0 || (d.i || '').toLowerCase() === q;
+    });
+    if (!hits.length) {
+      hits = DESTS.filter(function (d) { return norm(d.n).indexOf(q) > -1 || norm(d.c).indexOf(q) > -1; });
+    }
+    if (!hits.length) {
+      noneEl.classList.remove('fc-hide');
+      noneEl.textContent = 'Nothing scheduled from BER matches that. Try the country, or the city the airport serves.';
+      return;
+    }
+    noneEl.classList.add('fc-hide');
+    hits.slice(0, 40).forEach(function (d) {
+      var li = document.createElement('li');
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = d.b === 400 ? 'b400' : (d.b === 600 ? 'b600' : '');
+      b.innerHTML = '<span><span class="fc-rname">' + d.n + '</span> <span class="fc-rmeta">' + d.c + (d.i ? ' · ' + d.i : '') + '</span></span>'
+        + '<span class="fc-rkm">' + num(Math.round(d.k)) + ' km</span>';
+      b.addEventListener('click', function () {
+        chosen = d;
+        currentStep = 2;
+        delayPick = null;
+        qEl.value = d.n;
+        resEl.innerHTML = '';
+        noneEl.classList.add('fc-hide');
+        render();
+      });
+      li.appendChild(b);
+      resEl.appendChild(li);
+    });
+  }
+
+  function buildDelay() {
+    delayEl.innerHTML = '';
+    DELAYS.forEach(function (o) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = o.label;
+      b.className = delayPick === o.id ? 'is-on' : '';
+      b.disabled = currentStep < 2;
+      b.setAttribute('aria-pressed', delayPick === o.id ? 'true' : 'false');
+      b.addEventListener('click', function () { delayPick = o.id; render(); });
+      delayEl.appendChild(b);
+    });
+  }
+
+  function payout() {
+    if (!chosen || !delayPick) return null;
+    if (delayPick === 'under') return 0;
+    if (delayPick === 'three' && chosen.b === 600) return 300;
+    return chosen.b;
+  }
+
+  function renderOut() {
+    warnEl.classList.add('fc-hide');
+    if (!chosen) {
+      outEl.innerHTML = '<h3>Start with your destination</h3><p>The regulation does not care how long you sat at the gate. It cares how far the flight was going and how late you finally arrived.</p>';
+      return;
+    }
+    var euLine = chosen.e
+      ? chosen.c + ' is inside the EU, so this counts as an intra-EU flight.'
+      : chosen.c + ' is outside the EU, so the 3,500 kilometre line applies to it.';
+    var bandWhy;
+    if (chosen.b === 250) bandWhy = 'At ' + num(Math.round(chosen.k)) + ' kilometres it is under 1,500, so it sits in the 250 euro band.';
+    else if (chosen.b === 400 && chosen.e && chosen.k > 3500) bandWhy = 'At ' + num(Math.round(chosen.k)) + ' kilometres it is well past 3,500, but an intra-EU flight never reaches the 600 euro band. It stays at 400 euro.';
+    else if (chosen.b === 400) bandWhy = 'At ' + num(Math.round(chosen.k)) + ' kilometres it lands in the 400 euro band.';
+    else bandWhy = 'At ' + num(Math.round(chosen.k)) + ' kilometres, outside the EU, it is in the 600 euro band. Only ' + DATA.meta.count600 + ' of the ' + DATA.meta.destCount + ' destinations from BER get there.';
+
+    if (!delayPick) {
+      outEl.innerHTML = '<h3>BER to ' + chosen.n + '</h3><p>' + bandWhy + ' ' + euLine + '</p>'
+        + '<p>Now say how late you actually landed. Nothing is owed until the arrival delay passes three hours.</p>';
+      return;
+    }
+    var p = payout();
+    if (p === 0) {
+      outEl.innerHTML = '<h3>BER to ' + chosen.n + '</h3><span class="fc-big">No compensation</span>'
+        + '<p>Under three hours late at the destination pays nothing, however long you waited in the terminal. ' + bandWhy + '</p>'
+        + '<p>You may still be owed food, drinks and a hotel for the waiting itself, and those are separate from compensation.</p>';
+      return;
+    }
+    outEl.innerHTML = '<h3>BER to ' + chosen.n + '</h3><span class="fc-big">' + p + ' euro per passenger</span>'
+      + '<p>' + bandWhy + ' ' + euLine + '</p>'
+      + '<p>That is per person on the booking, children included, and it is separate from any refund of the ticket.</p>';
+    if (delayPick === 'three' && chosen.b === 600) {
+      warnEl.classList.remove('fc-hide');
+      warnEl.textContent = 'Halved on purpose: if the airline cancelled and rebooked you onto another flight, a long haul arrival that is only three to four hours late can be cut by 50 per cent, from 600 to 300 euro. If nobody rebooked you and the same flight simply landed late, argue for the full 600.';
+    }
+  }
+
+  function render() {
+    buildDelay();
+    drawPlot();
+    renderOut();
+  }
+
+  qEl.addEventListener('input', function () {
+    if (chosen && norm(qEl.value) !== norm(chosen.n)) { chosen = null; currentStep = 1; delayPick = null; render(); }
+    renderResults();
+  });
+  clearEl.addEventListener('click', function () {
+    qEl.value = ''; chosen = null; currentStep = 1; delayPick = null;
+    renderResults(); render(); qEl.focus();
+  });
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (json) {
+    DATA = json;
+    DESTS = json.dests;
+    footEl.innerHTML = 'Distances are great circle distances from BER to each destination airport, the measure Regulation 261/2004 uses, computed from published airport coordinates. Route list checked on '
+      + DATA.meta.checked + ': ' + DATA.meta.destCount + ' scheduled destinations, of which ' + DATA.meta.count250 + ' pay 250 euro, '
+      + DATA.meta.count400 + ' pay 400 euro and ' + DATA.meta.count600 + ' pay 600 euro. Nothing BER flies sits between '
+      + num(DATA.meta.gapLow) + ' and ' + num(DATA.meta.gapHigh) + ' kilometres, so the 1,500 kilometre line falls in an empty gap. This is a guide to the bands, not legal advice.';
+    render();
+  });
+})();
+</script>
+</body>
+</html>

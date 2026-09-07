@@ -8344,6 +8344,33 @@
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_5d35f29051e04d619a86d086d7372432~mv2.png",
       "cmsItemId": "088a66bc-afd0-4e87-b4a4-95996499ad80"
+    },
+    {
+      "slug": "ber-flight-compensation-line",
+      "title": "BER Flight Compensation Line",
+      "lead": "A delayed flight out of Berlin pays 250, 400 or 600 euro, and the number is decided by the great circle distance to your final destination and by whether that airport is inside the EU. This plots all 157 scheduled BER destinations on one distance line with both legal boundaries drawn. Search for your city, say how late you landed, and it gives the band and the reason.",
+      "category": "Money",
+      "hubCategory": "Transport",
+      "type": "Calculator",
+      "tags": [
+        "ber flight delay",
+        "flight delay compensation",
+        "eu261",
+        "berlin airport delay",
+        "cancelled flight berlin",
+        "regulation 261/2004"
+      ],
+      "aliases": [
+        "how much compensation for a delayed flight from berlin",
+        "is my berlin flight delay worth 250 or 400 euro",
+        "what am i owed if my flight from ber is cancelled",
+        "eu261 distance bands from berlin"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/ber-flight-compensation-line/",
+      "embedHeight": 1120,
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_8a5c12c841ad4b279a6364ddb4a04ac9~mv2.png",
+      "cmsItemId": "aa597e1b-ef1d-43ad-bcd4-3839b9a3c784"
     }
   ],
   "hubCategories": [
