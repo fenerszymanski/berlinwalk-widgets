@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-07T02:08:16.857Z",
+  "updatedAt": "2026-09-07T07:51:11.959Z",
   "source": "Wix Blog API",
-  "totalPosts": 358,
+  "totalPosts": 359,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Berlin to Prague: Train, Bus, and Whether the Day Trip Works",
+      "slug": "berlin-to-prague",
+      "path": "/post/berlin-to-prague",
+      "url": "https://www.berlinwalk.com/post/berlin-to-prague",
+      "excerpt": "Berlin to Prague looks close on a map: 388 kilometres, seven direct trains a day, just under four hours. Nobody flies it, because nobody sells the flight. Here is what actually runs, what a ticket costs, the Monday engineering work that deletes most of the timetable until December, and whether the day trip is worth doing at all.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-07T07:49:15.092Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_bb9b5cc01dcb4062b99fa60d6e6c8477~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-comfortjet-decin.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_bb9b5cc01dcb4062b99fa60d6e6c8477~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-comfortjet-decin.jpg",
+      "alt": "A blue and white Czech Railways ComfortJet train standing at the platform at Decin, the first Czech stop on the Berlin to Prague line",
+      "relatedToolSlug": "berlin-day-trips-finder"
+    },
     {
       "title": "Quiet Hours in Berlin: The Flat Rules Visitors Break Without Knowing",
       "slug": "quiet-hours-in-berlin",
