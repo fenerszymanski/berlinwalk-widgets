@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-07T07:51:11.959Z",
+  "updatedAt": "2026-09-07T14:00:09.363Z",
   "source": "Wix Blog API",
-  "totalPosts": 359,
+  "totalPosts": 360,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Park and Ride in Berlin: Which Lots Still Have Room and Which Are Already Full",
+      "slug": "park-and-ride-berlin",
+      "path": "/post/park-and-ride-berlin",
+      "url": "https://www.berlinwalk.com/post/park-and-ride-berlin",
+      "excerpt": "Berlin has 49 park and ride lots and 4,523 free spaces, and the city's own survey puts 27 of them over 90 per cent full. Here is which lot to aim for from each side of the city, what the ride in costs, and the green sticker rule that decides how close you can legally drive.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "free-budget",
+      "topicLabel": "Free & Budget",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-07T13:56:28.379Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_718d703e5ca2492c8b4319ac3e9a9ba8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/park-and-ride-berlin-cover-wuhletal.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_718d703e5ca2492c8b4319ac3e9a9ba8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/park-and-ride-berlin-cover-wuhletal.jpg",
+      "alt": "S-Bahn and U-Bahn trains meeting at Wuhletal station in east Berlin",
+      "relatedToolSlug": "berlin-park-and-ride-map"
+    },
     {
       "title": "Berlin to Prague: Train, Bus, and Whether the Day Trip Works",
       "slug": "berlin-to-prague",

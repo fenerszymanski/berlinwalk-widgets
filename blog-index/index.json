@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-07T07:51:11.959Z",
+  "updatedAt": "2026-09-07T14:00:09.363Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 359,
-  "toolsTotal": 279,
+  "totalPosts": 360,
+  "toolsTotal": 280,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1618,6 +1618,23 @@
   ],
   "latest": [
     {
+      "title": "Park and Ride in Berlin: Which Lots Still Have Room and Which Are Already Full",
+      "slug": "park-and-ride-berlin",
+      "path": "/post/park-and-ride-berlin",
+      "url": "https://www.berlinwalk.com/post/park-and-ride-berlin",
+      "excerpt": "Berlin has 49 park and ride lots and 4,523 free spaces, and the city's own survey puts 27 of them over 90 per cent full. Here is which lot to aim for from each side of the city, what the ride in costs, and the green sticker rule that decides how close you can legally drive.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "free-budget",
+      "topicLabel": "Free & Budget",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-07T13:56:28.379Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_718d703e5ca2492c8b4319ac3e9a9ba8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/park-and-ride-berlin-cover-wuhletal.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_718d703e5ca2492c8b4319ac3e9a9ba8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/park-and-ride-berlin-cover-wuhletal.jpg",
+      "alt": "S-Bahn and U-Bahn trains meeting at Wuhletal station in east Berlin",
+      "relatedToolSlug": "berlin-park-and-ride-map"
+    },
+    {
       "title": "Berlin to Prague: Train, Bus, and Whether the Day Trip Works",
       "slug": "berlin-to-prague",
       "path": "/post/berlin-to-prague",
@@ -1803,23 +1820,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_886e8bc6ee674074bb6a3702f5f8fcfe~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-waly-chrobrego.jpg",
       "alt": "The Wały Chrobrego terrace in Szczecin with the maritime museum towers and rotunda above the steps",
       "relatedToolSlug": "szczecin-day-fit-map"
-    },
-    {
-      "title": "Warnemünde to Berlin: The Honest Cruise Day Trip Math",
-      "slug": "warnemunde-to-berlin",
-      "path": "/post/warnemunde-to-berlin",
-      "url": "https://www.berlinwalk.com/post/warnemunde-to-berlin",
-      "excerpt": "The port brochure says Berlin is about two hours from Warnemünde. The real number is a bit over three hours door to door, each way. Here is the honest math for a cruise day in Berlin: the two trains that matter, tickets, the buffer that protects your ship, and when staying on the coast is the smarter day.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-09-03T07:57:55.391Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_ef2c2e85520b4ffbb5001522d4ef84bc~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-regal-princess-warnemuende.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_ef2c2e85520b4ffbb5001522d4ef84bc~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-regal-princess-warnemuende.jpg",
-      "alt": "A large cruise ship moored at the Warnemünde cruise pier on a clear day",
-      "relatedToolSlug": "berlin-cruise-day-window"
     }
   ]
 }
