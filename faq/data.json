@@ -10773,5 +10773,35 @@
         "a": "**Carry your passport or national ID card.** Both countries are in the Schengen area, but Germany has notified the European Commission of controls at all nine of its land borders, Czechia included, and the current notified period runs to 15 March 2027. On this line a check is usually a walk through the carriage, but it does happen. Remember also that Czechia uses the koruna and not the euro, and when a card terminal offers to charge you in euros, decline it and pay in koruna."
       }
     ]
+  },
+  "park-and-ride-berlin": {
+    "title": "Park and Ride in Berlin - FAQ",
+    "subtitle": "How many park and ride lots Berlin has, whether they cost anything, which ones still have space, which ticket you need, and why the green sticker matters before you drive in.",
+    "items": [
+      {
+        "q": "How many park and ride lots does Berlin have, and do they cost anything?",
+        "a": "**49 lots at 38 stations, holding 4,523 cars, and every one of them is free.** That is the city's own register, surveyed to the end of 2025. There are also 3,247 bike spaces at the same sites. None of the lots is run as a paid car park and none of them takes a reservation."
+      },
+      {
+        "q": "Which park and ride lot in Berlin is most likely to have space?",
+        "a": "**Pankow-Heinersdorf P1.** It is the largest single lot in the network at 407 spaces and it was recorded under 75 per cent full, which only 7 of the 49 lots manage. From the station it is 17 minutes to Alexanderplatz on the S26 with one change to the U2. The other under-75-per-cent lots are Ahrensfelde P3, Bundesplatz P1, Hohenschönhausen P1, Raoul-Wallenberg-Straße P1, Plänterwald P1 and Wuhlheide P1."
+      },
+      {
+        "q": "Which ticket do I need after parking at a Berlin park and ride lot?",
+        "a": "**A Berlin AB ticket, always.** Forty-four of the 49 lots are in fare zone B and five are in zone A, so nothing inside the city needs an ABC ticket. A single AB ticket is 4.00 euro, a 24 hour AB ticket is 11.20 euro, and a 24 hour small group ticket covering up to five people is 35.30 euro. Children aged 6 to 14 pay 2.50 euro for a single."
+      },
+      {
+        "q": "Do I need a green Umweltplakette to use park and ride in Berlin?",
+        "a": "**Not for the lots themselves, but you need one to reach the centre by car.** Berlin's low-emission zone covers the whole area inside the inner S-Bahn Ring, and driving or parking there without a green sticker costs 80 euro. All 49 park and ride lots sit outside that boundary. Visitors arriving from abroad need the sticker too, and it has to be ordered from the vehicle registration authority with your vehicle papers, so it is not something you can buy on arrival."
+      },
+      {
+        "q": "Is it better to park in Brandenburg before entering Berlin?",
+        "a": "**Often yes, if you can accept the ABC ticket.** The surrounding Brandenburg belt has 59 park and ride sites with about 10,730 spaces, more than twice Berlin's own total. The multi-storey car parks at Potsdam Hauptbahnhof (1,392 spaces) and Hennigsdorf (719) are the biggest, followed by Bernau-Friedenstal (590), Oranienburg (509) and Erkner (381). Because those sit outside the city boundary the ride in needs an ABC ticket: 5.00 euro single, 12.90 euro for 24 hours."
+      },
+      {
+        "q": "How long does the ride from a park and ride lot into central Berlin take?",
+        "a": "**Usually between 15 and 30 minutes.** Checked against live timetables for a weekday morning into Alexanderplatz: Berlin-Lichtenberg is 12 minutes on the U5, Plänterwald 14 on the S9, Pankow-Heinersdorf 17, Springpfuhl 18 direct on the S7, Biesdorf 19 on the S5, Wuhletal 21, Ahrensfelde 28 direct on the S7 and Hönow 33 on the U5. The far southern and western lots at Breitenbachplatz, Wannsee and Stresow are around 30 to 33 minutes."
+      }
+    ]
   }
 }

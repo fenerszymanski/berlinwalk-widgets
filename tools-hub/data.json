@@ -8317,6 +8317,33 @@
       "image": "https://static.wixstatic.com/media/5a08a3_69a34c289de24c36968dfe8183620531~mv2.png",
       "iconStatus": "live-wix-media",
       "cmsItemId": "157213a5-8048-41a6-a56b-7dc7d3b8f929"
+    },
+    {
+      "slug": "berlin-park-and-ride-map",
+      "title": "Berlin Park and Ride Map",
+      "lead": "Berlin has 49 free park and ride lots and 4,523 spaces, but the city's own survey puts 27 of them over 90 per cent full. This map plots every lot at its real position, sized by capacity and coloured by how full it was found, with the low-emission zone boundary drawn in. Pick the side you are driving in from and it ranks what is there with the verified ride time to Alexanderplatz.",
+      "category": "Transport",
+      "hubCategory": "Transport",
+      "type": "Map",
+      "tags": [
+        "park and ride berlin",
+        "p+r berlin",
+        "berlin parking",
+        "berlin umweltzone",
+        "driving to berlin",
+        "berlin ab ticket"
+      ],
+      "aliases": [
+        "where to park and ride in berlin",
+        "free parking near berlin s-bahn",
+        "cheapest way to park a car in berlin",
+        "do i need a green sticker to drive into berlin"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-park-and-ride-map/",
+      "embedHeight": 1180,
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_5d35f29051e04d619a86d086d7372432~mv2.png",
+      "cmsItemId": "088a66bc-afd0-4e87-b4a4-95996499ad80"
     }
   ],
   "hubCategories": [

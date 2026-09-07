@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Park and Ride Map</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --amber: #E08600;
+    --red: #C62828;
+    --line: #E0E4DA;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .pr { max-width: 760px; margin: 0 auto; padding: 14px 12px 12px; }
+  .pr-head h2 { font-size: 1.08rem; margin: 0; color: var(--green); }
+  .pr-head p { margin: 5px 0 0; font-size: .76rem; line-height: 1.55; color: #555; }
+  .pr-label { display: block; font-size: .66rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--deep); margin: 14px 0 6px; }
+  .pr-dirs { display: flex; flex-wrap: wrap; gap: 6px; }
+  .pr-dirs button {
+    font: inherit; font-size: .76rem; font-weight: 700; cursor: pointer;
+    padding: 6px 11px; border-radius: 999px; border: 2px solid var(--green);
+    background: #fff; color: var(--deep); line-height: 1.2;
+  }
+  .pr-dirs button.is-on { background: var(--green); color: #fff; }
+  .pr-stage { display: grid; grid-template-columns: 1fr 260px; gap: 14px; margin-top: 12px; align-items: start; }
+  @media (max-width: 660px) { .pr-stage { grid-template-columns: 1fr; } }
+  .pr-mapwrap { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 6px; position: relative; }
+  .pr-canvas { display: block; width: 100%; height: auto; border-radius: 8px; cursor: pointer; }
+  .pr-legend { display: flex; flex-wrap: wrap; gap: 10px; margin: 7px 2px 1px; font-size: .68rem; color: #555; }
+  .pr-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .pr-dot { width: 11px; height: 11px; border-radius: 50%; border: 1px solid rgba(0,0,0,.25); }
+  .pr-side { min-width: 0; }
+  .pr-count { margin: 0 0 8px; font-size: .78rem; color: #555; line-height: 1.5; }
+  .pr-count strong { color: var(--deep); }
+  .pr-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; max-height: 340px; overflow: auto; }
+  .pr-list li {
+    background: #fff; border: 1px solid var(--line); border-left: 5px solid var(--lime);
+    border-radius: 8px; padding: 7px 9px; font-size: .78rem; cursor: pointer;
+  }
+  .pr-list li.occ-mid { border-left-color: var(--amber); }
+  .pr-list li.occ-high { border-left-color: var(--red); }
+  .pr-list li.is-sel { background: #F2F7EC; box-shadow: 0 0 0 2px rgba(27,94,32,.35); }
+  .pr-row1 { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+  .pr-name { font-weight: 700; color: var(--deep); }
+  .pr-min { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--green); white-space: nowrap; }
+  .pr-row2 { margin-top: 2px; font-size: .71rem; color: #666; line-height: 1.45; }
+  .pr-detail { margin: 12px 0 0; padding: 12px 14px; border-radius: 10px; background: var(--yellow); color: var(--deep); }
+  .pr-detail h3 { margin: 0 0 5px; font-size: .95rem; color: var(--deep); }
+  .pr-detail p { margin: 0; font-size: .84rem; line-height: 1.55; color: var(--deep); }
+  .pr-detail p + p { margin-top: 6px; }
+  .pr-warn { margin: 10px 0 0; padding: 10px 12px; border-radius: 9px; background: #FDECEA; border: 1px solid #F3B9B3; color: #7F1D18; font-size: .78rem; line-height: 1.5; }
+  .pr-foot { margin: 11px 0 0; font-size: .68rem; line-height: 1.6; color: #777; }
+</style>
+</head>
+<body>
+<div class="pr">
+  <div class="pr-head">
+    <h2>Berlin Park and Ride Map</h2>
+    <p>Every public park and ride lot inside Berlin, drawn at its real position, sized by how many cars it holds and coloured by how full the city found it. Pick the side you are driving in from.</p>
+  </div>
+
+  <span class="pr-label" id="pr-lab">Which side of Berlin are you coming from?</span>
+  <div class="pr-dirs" id="pr-dirs"></div>
+
+  <div class="pr-stage">
+    <div class="pr-mapwrap">
+      <canvas class="pr-canvas" id="pr-map" width="900" height="720" aria-label="Map of Berlin park and ride lots"></canvas>
+      <div class="pr-legend">
+        <span><i class="pr-dot" style="background:#7CB342"></i>under 75 per cent full</span>
+        <span><i class="pr-dot" style="background:#E08600"></i>75 to 90 per cent</span>
+        <span><i class="pr-dot" style="background:#C62828"></i>over 90 per cent</span>
+        <span><i class="pr-dot" style="background:#DDE3D2;border-color:#9AA98C"></i>low-emission zone</span>
+      </div>
+    </div>
+    <div class="pr-side">
+      <p class="pr-count" id="pr-count"></p>
+      <ul class="pr-list" id="pr-list"></ul>
+    </div>
+  </div>
+
+  <div class="pr-detail">
+    <h3 id="pr-dt">&nbsp;</h3>
+    <p id="pr-dp1"></p>
+    <p id="pr-dp2"></p>
+  </div>
+  <div class="pr-warn" id="pr-warn"></div>
+  <p class="pr-foot" id="pr-foot"></p>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  'use strict';
+  var DIRS = [
+    { key: 'ALL', label: 'Show all' },
+    { key: 'N', label: 'North' },
+    { key: 'NE', label: 'North east' },
+    { key: 'E', label: 'East' },
+    { key: 'SE', label: 'South east' },
+    { key: 'S', label: 'South' },
+    { key: 'SW', label: 'South west' },
+    { key: 'W', label: 'West' },
+    { key: 'NW', label: 'North west' }
+  ];
+  var COLOUR = { low: '#7CB342', mid: '#E08600', high: '#C62828' };
+  var WORDS = { low: 'under 75 per cent full', mid: '75 to 90 per cent full', high: 'over 90 per cent full' };
+
+  var canvas = document.getElementById('pr-map');
+  var ctx = canvas.getContext('2d');
+  var listEl = document.getElementById('pr-list');
+  var countEl = document.getElementById('pr-count');
+  var dirsEl = document.getElementById('pr-dirs');
+  var titleEl = document.getElementById('pr-dt');
+  var p1El = document.getElementById('pr-dp1');
+  var p2El = document.getElementById('pr-dp2');
+  var warnEl = document.getElementById('pr-warn');
+  var footEl = document.getElementById('pr-foot');
+
+  var DATA = null;
+  var pick = 'ALL';
+  var chosen = null;
+  var placed = [];
+
+  function proj(lon, lat, box) {
+    var k = Math.cos(52.52 * Math.PI / 180);
+    return {
+      x: box.pad + (lon - box.minLon) * k * box.scale,
+      y: box.pad + (box.maxLat - lat) * box.scale
+    };
+  }
+
+  function makeBox(w, h) {
+    var k = Math.cos(52.52 * Math.PI / 180);
+    var b = DATA.cityOutline;
+    var minLon = 99, maxLon = -99, minLat = 99, maxLat = -99, i;
+    for (i = 0; i < b.length; i++) {
+      if (b[i][0] < minLon) minLon = b[i][0];
+      if (b[i][0] > maxLon) maxLon = b[i][0];
+      if (b[i][1] < minLat) minLat = b[i][1];
+      if (b[i][1] > maxLat) maxLat = b[i][1];
+    }
+    var pad = 16;
+    var scale = Math.min((w - 2 * pad) / ((maxLon - minLon) * k), (h - 2 * pad) / (maxLat - minLat));
+    return { minLon: minLon, maxLat: maxLat, scale: scale, pad: pad };
+  }
+
+  function ring(pts, box) {
+    ctx.beginPath();
+    for (var i = 0; i < pts.length; i++) {
+      var p = proj(pts[i][0], pts[i][1], box);
+      if (i === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y);
+    }
+    ctx.closePath();
+  }
+
+  function draw() {
+    var dpr = window.devicePixelRatio || 1;
+    var cssW = canvas.clientWidth || 560;
+    var cssH = Math.round(cssW * 0.8);
+    canvas.width = Math.round(cssW * dpr);
+    canvas.height = Math.round(cssH * dpr);
+    canvas.style.height = cssH + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, cssW, cssH);
+
+    var box = makeBox(cssW, cssH);
+    placed = [];
+
+    ring(DATA.cityOutline, box);
+    ctx.fillStyle = '#F1F4EA';
+    ctx.fill();
+    ctx.strokeStyle = '#B9C4AB';
+    ctx.lineWidth = 1.2;
+    ctx.stroke();
+
+    ring(DATA.lowEmissionZone, box);
+    ctx.fillStyle = '#DDE3D2';
+    ctx.fill();
+    ctx.setLineDash([5, 4]);
+    ctx.strokeStyle = '#7C8B6C';
+    ctx.lineWidth = 1.4;
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    var i, lot, p, r, on;
+    for (i = 0; i < DATA.lots.length; i++) {
+      lot = DATA.lots[i];
+      p = proj(lot.lon, lot.lat, box);
+      r = 4 + Math.sqrt(lot.spaces) * 0.62;
+      on = (pick === 'ALL' || lot.sector === pick);
+      placed[placed.length] = { x: p.x, y: p.y, r: Math.max(r, 8), lot: lot };
+      ctx.globalAlpha = on ? 1 : 0.18;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, r, 0, 6.2832);
+      ctx.fillStyle = COLOUR[lot.occupancy] || '#999';
+      ctx.fill();
+      ctx.lineWidth = (chosen && chosen.lot === lot.lot) ? 3 : 1;
+      ctx.strokeStyle = (chosen && chosen.lot === lot.lot) ? '#123D18' : 'rgba(0,0,0,.35)';
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+    }
+
+    var alex = proj(DATA.meta.alexanderplatz.lon, DATA.meta.alexanderplatz.lat, box);
+    ctx.beginPath();
+    ctx.arc(alex.x, alex.y, 5.5, 0, 6.2832);
+    ctx.fillStyle = '#123D18';
+    ctx.fill();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = '#fff';
+    ctx.stroke();
+    ctx.font = '700 11.5px Montserrat, sans-serif';
+    ctx.lineWidth = 3.5;
+    ctx.strokeStyle = 'rgba(255,255,255,.95)';
+    ctx.lineJoin = 'round';
+    ctx.strokeText('Alexanderplatz', alex.x + 9, alex.y + 4);
+    ctx.fillStyle = '#123D18';
+    ctx.fillText('Alexanderplatz', alex.x + 9, alex.y + 4);
+
+    if (chosen) {
+      p = proj(chosen.lon, chosen.lat, box);
+      ctx.font = '700 11.5px Montserrat, sans-serif';
+      var text = chosen.station.replace(/^[SUR+]+\s+/, '');
+      var wid = ctx.measureText(text).width;
+      var bx = Math.min(Math.max(p.x - wid / 2 - 5, 2), cssW - wid - 12);
+      var by = p.y - 26;
+      if (by < 6) by = p.y + 12;
+      ctx.fillStyle = 'rgba(255,255,255,.92)';
+      ctx.fillRect(bx, by, wid + 10, 17);
+      ctx.strokeStyle = '#123D18';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(bx, by, wid + 10, 17);
+      ctx.fillStyle = '#123D18';
+      ctx.fillText(text, bx + 5, by + 12.5);
+    }
+  }
+
+  function visible() {
+    var out = [];
+    for (var i = 0; i < DATA.lots.length; i++) {
+      if (pick === 'ALL' || DATA.lots[i].sector === pick) out[out.length] = DATA.lots[i];
+    }
+    var rank = { low: 0, mid: 1, high: 2 };
+    out.sort(function (a, b) {
+      return (rank[a.occupancy] - rank[b.occupancy]) || (b.spaces - a.spaces) || (a.minutesToAlex - b.minutesToAlex);
+    });
+    return out;
+  }
+
+  function num(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+
+  function ride(lot) {
+    if (lot.minutesToAlex === null) return 'no verified ride time';
+    return lot.minutesToAlex + ' min on the ' + lot.route + (lot.changes === 0 ? ', no change' : ', ' + lot.changes + ' change' + (lot.changes > 1 ? 's' : ''));
+  }
+
+  function paintList(rows) {
+    var html = '';
+    for (var i = 0; i < rows.length; i++) {
+      var lot = rows[i];
+      html += '<li class="occ-' + lot.occupancy + (chosen && chosen.lot === lot.lot ? ' is-sel' : '') + '" data-lot="' + lot.lot + '">'
+        + '<div class="pr-row1"><span class="pr-name">' + lot.lot + '</span><span class="pr-min">' + (lot.minutesToAlex === null ? '' : lot.minutesToAlex + ' min') + '</span></div>'
+        + '<div class="pr-row2">' + num(lot.spaces) + ' spaces, ' + WORDS[lot.occupancy] + ' &middot; ' + lot.station + ' &middot; zone ' + lot.zone + '</div>'
+        + '</li>';
+    }
+    listEl.innerHTML = html;
+  }
+
+  function verdict(rows) {
+    var totalSpaces = rows.reduce(function (acc, lot) { return acc + lot.spaces; }, 0);
+    var where = pick === 'ALL' ? 'across the whole city' : 'on this side of the city';
+    countEl.innerHTML = '<strong>' + rows.length + ' lots</strong> ' + where + ', <strong>' + num(totalSpaces) + ' spaces</strong> between them. Best first.';
+
+    if (chosen) {
+      titleEl.textContent = chosen.lot + ', ' + chosen.station;
+      p1El.textContent = num(chosen.spaces) + ' spaces, ' + WORDS[chosen.occupancy] + ' when the city surveyed it, free to park, fare zone ' + chosen.zone
+        + '. From here it is ' + ride(chosen) + ' to Alexanderplatz.'
+        + (chosen.bikeSpaces ? ' There are also ' + chosen.bikeSpaces + ' bike spaces.' : '');
+      p2El.textContent = chosen.restriction
+        ? 'Watch the local rule here: ' + chosen.restriction + '.'
+        : (chosen.occupancy === 'high'
+          ? 'My advice: this one is a gamble after about 08:00 on a weekday. Have a second lot in mind before you set off.'
+          : 'My advice: this is one of the safer bets, but it is still first come first served. No lot in Berlin takes a booking.');
+      warnEl.style.display = chosen.restriction ? 'block' : 'none';
+      warnEl.textContent = chosen.restriction || '';
+      return;
+    }
+
+    var best = rows[0];
+    if (!best) {
+      titleEl.textContent = 'Nothing on this side';
+      p1El.textContent = 'Berlin has no park and ride lot in this direction. Pick a neighbouring side, or stop at a Brandenburg lot before the city boundary and buy an ABC ticket.';
+      p2El.textContent = '';
+      warnEl.style.display = 'none';
+      return;
+    }
+    var green = 0, biggest = rows[0];
+    for (var i = 0; i < rows.length; i++) {
+      if (rows[i].occupancy === 'low') green++;
+      if (rows[i].spaces > biggest.spaces) biggest = rows[i];
+    }
+    titleEl.textContent = 'Aim for ' + best.lot;
+    p1El.textContent = num(best.spaces) + ' spaces at ' + best.station + ', ' + WORDS[best.occupancy] + ', ' + ride(best) + ' to Alexanderplatz. Parking is free and the ride in is a normal AB ticket.';
+    var line2;
+    if (green === 0) {
+      line2 = 'Nothing ' + where + ' was under 75 per cent full, so treat every one of these as a maybe and set off with a second lot in mind.';
+    } else {
+      line2 = green + ' of these ' + rows.length + ' lots ' + (green === 1 ? 'was' : 'were') + ' under 75 per cent full, so start with the green circles.';
+    }
+    if (biggest.lot !== best.lot) {
+      line2 += ' The biggest one here is ' + biggest.lot + ' with ' + num(biggest.spaces) + ' spaces, ' + WORDS[biggest.occupancy] + ', ' + ride(biggest) + '.';
+    }
+    p2El.textContent = line2;
+    warnEl.style.display = 'none';
+  }
+
+  function render() {
+    var rows = visible();
+    paintList(rows);
+    verdict(rows);
+    draw();
+  }
+
+  function findLot(name) {
+    for (var i = 0; i < DATA.lots.length; i++) { if (DATA.lots[i].lot === name) return DATA.lots[i]; }
+    return null;
+  }
+
+  function buildDirs() {
+    var html = '';
+    for (var i = 0; i < DIRS.length; i++) {
+      html += '<button type="button" data-dir="' + DIRS[i].key + '" class="' + (DIRS[i].key === pick ? 'is-on' : '') + '">' + DIRS[i].label + '</button>';
+    }
+    dirsEl.innerHTML = html;
+  }
+
+  dirsEl.addEventListener('click', function (ev) {
+    var btn = ev.target.closest('button[data-dir]');
+    if (!btn) return;
+    pick = btn.getAttribute('data-dir');
+    chosen = null;
+    buildDirs();
+    render();
+  });
+
+  listEl.addEventListener('click', function (ev) {
+    var li = ev.target.closest('li[data-lot]');
+    if (!li) return;
+    chosen = findLot(li.getAttribute('data-lot'));
+    render();
+  });
+
+  canvas.addEventListener('click', function (ev) {
+    var rect = canvas.getBoundingClientRect();
+    var mx = ev.clientX - rect.left, my = ev.clientY - rect.top;
+    var hit = null, hd = 1e9;
+    for (var i = 0; i < placed.length; i++) {
+      var it = placed[i];
+      if (pick !== 'ALL' && it.lot.sector !== pick) continue;
+      var d = Math.hypot(mx - it.x, my - it.y);
+      if (d < it.r + 5 && d < hd) { hd = d; hit = it.lot; }
+    }
+    chosen = hit;
+    render();
+  });
+
+  window.addEventListener('resize', function () { if (DATA) draw(); });
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (json) {
+    DATA = json;
+    footEl.innerHTML = 'Lot positions, capacities and how-full bands come from the Berlin Senate Department for Mobility and Transport, ' + DATA.meta.dataDate
+      + '. Ride times were checked against live timetables for a weekday 09:00 arrival at Alexanderplatz. Beyond the city boundary there are another '
+      + DATA.meta.umlandSites + ' Brandenburg lots with about ' + num(DATA.meta.umlandSpaces) + ' spaces, but those need an ABC ticket.';
+    buildDirs();
+    render();
+  });
+})();
+</script>
+</body>
+</html>
