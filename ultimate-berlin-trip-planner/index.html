@@ -16004,9 +16004,9 @@
         ? 'Meet at the World Clock at ' + ((slot && slot.startLabel) || TOUR_START_LABEL) + '. The tour takes about two hours.'
         : slot && slot.insideTrip
           ? 'Take the BerlinWalk tour on ' + slot.dayLabel + ' at ' + slot.startLabel + '. Use Day 1 for check-in.'
-          : 'There is no BerlinWalk tour during this trip. Tours run from Tuesday to Saturday.';
+          : 'There is no BerlinWalk tour during this trip. Check the live calendar for available dates.';
     if (slot && !arrivalDayTourEligible() && !slot.insideTrip && state.tourIntent !== 'booked') {
-      tourCopy = 'There is no Tuesday-to-Saturday tour during these dates. The tour is not included in the daily plan.';
+      tourCopy = 'There is no scheduled tour during these dates. The tour is not included in the daily plan.';
     }
     return '<div class="bw-preview-flow" aria-label="Day ' + escapeHtml(day.dayNumber) + ' simple route outline">' +
       '<div class="bw-preview-flow-item">' +
@@ -17285,6 +17285,8 @@
   }
 
   function isBerlinWalkTourDay(dateKey) {
+    if (dateKey >= '2026-11-01') return false;
+    if (dateKey.slice(0, 7) === '2026-10') return [1,2,3,7,8,9,10,11,21,22,23,24,25,28,29,30,31].indexOf(Number(dateKey.slice(8))) !== -1;
     var weekday = dateFromKey(dateKey).getUTCDay();
     return weekday >= 2 && weekday <= 6;
   }
@@ -17373,7 +17375,7 @@
     if (offset === 0) return 'Arrival day';
     if (offset > 0 && offset < state.tripLength) return 'Day ' + (offset + 1);
     if (offset > 0) return formatReminderDate(addDays(state.arrivalDate, offset));
-    return 'Next Tue-Sat';
+    return 'Next available';
   }
 
   function recommendedTourDay() {
@@ -17382,7 +17384,7 @@
     var slot = tourSlotForOffset(offset) || makeTourSlot(addDays(state.arrivalDate, offset), TOUR_DEFAULT_SLOT);
     if (offset === 0) return 'Arrival day ' + slot.startLabel;
     if (offset > 0 && offset < state.tripLength) return tourDayLabelFromOffset(offset) + ' at ' + slot.startLabel;
-    return 'Next Tue-Sat ' + slot.startLabel;
+    return 'Next available ' + slot.startLabel;
   }
 
   function planTitle() {
@@ -17467,7 +17469,7 @@
       ? 'Tour anchor: arrival-day ' + slot.startLabel
       : offset < state.tripLength
         ? 'Tour anchor: ' + dayLabel + ' at ' + slot.startLabel
-        : 'Tour anchor: next Tue-Sat ' + slot.startLabel;
+        : 'Tour anchor: next available ' + slot.startLabel;
     return {
       booked: false,
       title: title,
@@ -20170,7 +20172,7 @@
       : 'Save the first route, check the weather one more time, and keep your arrival ticket choice ready.';
     var nextCopy = state.tourIntent === 'booked'
       ? 'Save the World Clock meeting point and plan to arrive 5 minutes early.'
-      : (arrivalDayTourEligible() ? 'Use the ' + slot.startLabel + ' tour as your first guided introduction.' : 'Keep Day 1 light and use the next Tue-Sat tour slot as the guided start.');
+      : (arrivalDayTourEligible() ? 'Use the ' + slot.startLabel + ' tour as your first guided introduction.' : 'Keep Day 1 light and use the next available tour slot as the guided start.');
     var laterCopy = state.mustHandle.indexOf('rain') !== -1
       ? 'Keep the rain backup near the same area. Do not cross Berlin for a backup.'
       : 'Stop before the day feels finished. Berlin works better when tomorrow still has energy.';
@@ -20631,7 +20633,7 @@
     var slot = bridge.slot || tourSlotForPlan(plan);
     var timing = state.tourIntent === 'booked'
       ? 'World Clock meeting point'
-      : (slot && slot.insideTrip ? slot.dayLabel + ' at ' + slot.startLabel : 'Tue-Sat at 11:30');
+      : (slot && slot.insideTrip ? slot.dayLabel + ' at ' + slot.startLabel : 'Check tour dates');
     var copy = 'Your plan is strongest if you get the city context early. This match is based on ' + bridge.reason + '.';
     return '<article class="bw-tour-card" data-tour-anchor data-tour-tier="' + escapeHtml(bridge.tier) + '">' +
       '<span class="bw-tour-symbol" aria-hidden="true">' + iconSvg('route') + '</span>' +
@@ -20711,7 +20713,7 @@
     if (state.tourIntent === 'booked') {
       return { label: 'Save World Clock meeting point', href: meetingPointUrl(), target: '_blank', kind: 'meeting', surface: bookingSurface };
     }
-    var weekday = slot && slot.dateKey ? formatWeekday(slot.dateKey) : 'next Tue-Sat';
+    var weekday = slot && slot.dateKey ? formatWeekday(slot.dateKey) : 'next available';
     var label = 'Reserve the ' + weekday + ' ' + (slot && slot.startLabel || TOUR_START_LABEL) + ' spot';
     var kind = state.tourIntent === 'maybe' ? 'tour_details' : 'tour_day';
     if (arrivalDayTourEligible()) {
