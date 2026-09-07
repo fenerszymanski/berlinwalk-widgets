@@ -2310,7 +2310,7 @@
     if (slot && slot.relativeLabel && slot.slotsLabel) {
       return 'Next free walk' + (slot.slotCount > 1 ? 's' : '') + ': ' + slot.relativeLabel + ' at ' + slot.slotsLabel;
     }
-    return 'Next free walk: Tue-Sat at 11:30';
+    return 'Check the calendar for the next free walk';
   }
 
   function insertToolBridge(data) {

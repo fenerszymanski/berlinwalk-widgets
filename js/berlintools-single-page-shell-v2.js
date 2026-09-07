@@ -73,7 +73,7 @@
     },
     'berlin-tour-time-window': {
       title: 'Berlin Tour Time Window: Morning or Afternoon?',
-      lead: 'Set the earliest time you can reach the World Clock and the latest time you must be free near Hackescher Markt. See whether the current 11:30 or 15:30 planning window fits without rushing the rest of your Berlin day.'
+      lead: 'Set the earliest time you can reach the World Clock and the latest time you must be free near Hackescher Markt. See whether the September 2026 11:30 or 15:30 planning window (October offers 11:30 only) fits without rushing the rest of your Berlin day.'
     }
   };
 
@@ -630,6 +630,10 @@
       setShellSectionVisibility(section, false);
       return false;
     }
+    var oldSchedule = 'Walk Berlin with someone who actually lives here. Free 2-hour tour, tip-based, runs every Tuesday to Saturday at 11:30.';
+    section.querySelectorAll('p,span').forEach(function (node) {
+      if (cleanText(node.textContent) === oldSchedule) node.textContent = 'Walk Berlin with me. Free, tip-based, about 2 hours. September 2026: Tue-Sat at 11:30 and 15:30. October: Wed-Sun at 11:30, except 4 and 13-20 October. Check the calendar for your date.';
+    });
     section.classList.add('bw-tools-shell-v2-tour-band');
     section.setAttribute('data-bw-shell-v2-tour-band', '1');
     section.removeAttribute('data-bw-tools-shell-v2-hidden');

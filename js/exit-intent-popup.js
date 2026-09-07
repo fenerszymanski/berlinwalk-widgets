@@ -520,38 +520,7 @@
   }
 
   function nextTourLine() {
-    try {
-      var now = new Date();
-      var today = berlinParts(now);
-      var tomorrow = berlinParts(new Date(now.getTime() + DAY_MS));
-      var target = null;
-      var labels = [];
-
-      if (TOUR_DAYS[today.weekdayShort]) {
-        labels = bookableStartLabels(today, today);
-      }
-      if (labels.length) {
-        target = today;
-      } else {
-        for (var offset = 1; offset <= 8; offset += 1) {
-          var candidate = berlinParts(new Date(now.getTime() + (offset * DAY_MS)));
-          if (TOUR_DAYS[candidate.weekdayShort]) {
-            target = candidate;
-            labels = bookableStartLabels(candidate, today);
-            break;
-          }
-        }
-      }
-
-      var slotsLabel = slotsLabelFor(labels);
-      if (!target || !slotsLabel) return '';
-      var relativeLabel = target.weekdayLabel;
-      if (target.dateKey === today.dateKey) relativeLabel = 'Today (' + target.weekdayShort + ')';
-      else if (target.dateKey === tomorrow.dateKey) relativeLabel = 'Tomorrow (' + target.weekdayShort + ')';
-      return 'Next: ' + relativeLabel + ' at ' + slotsLabel;
-    } catch (err) {
-      return '';
-    }
+    return 'Check the calendar for available tour dates';
   }
 
   function liveNextTourLineFromAvailability(availability, now) {

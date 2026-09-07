@@ -284,7 +284,7 @@
       this.innerHTML = `
         <style>${this._styles()}</style>
         <main class="bw-paid-landing" style="--bw-paid-hero-image: url('${heroImage}'); --bw-paid-route-image: url('${routeImage}'); --bw-paid-guide-image: url('${guideImage}');">
-          <div class="bw-paid-top-strip">9.8 / 10 on FreeTour - Free reservation - ~2h - Tue-Sat 11:30 &amp; 15:30 - World Clock</div>
+          <div class="bw-paid-top-strip">9.8 / 10 on FreeTour - Free reservation - ~2h - Sep: Tue-Sat 11:30 &amp; 15:30 - Oct: selected Wed-Sun 11:30 - Check calendar</div>
 
           <section class="bw-paid-hero" id="bw-paid-book">
             <div class="bw-paid-inner">

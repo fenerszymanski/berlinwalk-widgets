@@ -1,3 +1,5 @@
+const BW_HEADER_MONTH = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Berlin', year: 'numeric', month: '2-digit' }).format(new Date());
+const BW_HEADER_SCHEDULE = BW_HEADER_MONTH === '2026-09' ? 'Sep: Tue-Sat 11:30 &amp; 15:30 · Oct: selected Wed-Sun 11:30 · Check dates' : BW_HEADER_MONTH === '2026-10' ? 'Oct: selected Wed-Sun 11:30 · Check calendar dates · World Clock' : 'Check the calendar for dates and times · World Clock';
 const BW_HEADER_SCRIPT_URL = (document.currentScript && document.currentScript.src) || 'https://fenerszymanski.github.io/berlinwalk-widgets/site-header/site-header-element.js';
 const BW_HEADER_LOGO_URL = new URL('../assets/berlinwalk-wordmark-green.png', BW_HEADER_SCRIPT_URL).href;
 const BW_HEADER_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
@@ -1095,7 +1097,7 @@ class BWHeaderElement extends HTMLElement {
               <span class="bw-header-top-sep" aria-hidden="true">•</span>
               <span class="bw-header-top-item">Free · Tip-based</span>
               <span class="bw-header-top-sep bw-header-top-item-hide-sm" aria-hidden="true">•</span>
-              <span class="bw-header-top-item bw-header-top-item-hide-sm">Tue-Sat 11:30 &amp; 15:30 · World Clock</span>
+              <span class="bw-header-top-item bw-header-top-item-hide-sm">${BW_HEADER_SCHEDULE}</span>
             </div>
           </div>
         </div>
@@ -1223,7 +1225,7 @@ class BWHeaderElement extends HTMLElement {
 
             <div class="bw-header-mobile-cta">
               <a class="bw-header-book" href="${BW_HEADER_BOOKING_URL}">Book Your Free Tour</a>
-              <p class="bw-header-mobile-trust"><span aria-hidden="true">★ </span><strong>9.8 / 10</strong> on FreeTour · Tue-Sat 11:30 &amp; 15:30 · World Clock</p>
+              <p class="bw-header-mobile-trust"><span aria-hidden="true">★ </span><strong>9.8 / 10</strong> on FreeTour · ${BW_HEADER_SCHEDULE}</p>
             </div>
           </div>
         </div>

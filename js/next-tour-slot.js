@@ -64,6 +64,7 @@
     var parts = berlinParts(date);
     return {
       dateKey: dateKey(parts),
+      year: parts.year,
       month: parts.month,
       day: parts.day,
       weekdayShort: WEEKDAY_SHORT_FORMATTER.format(date),
@@ -73,8 +74,10 @@
     };
   }
 
-  function isTourDay(weekdayShort) {
-    return Boolean(TOUR_DAYS[weekdayShort]);
+  function isTourDay(parts) {
+    if (parts.year === 2026 && parts.month === 10) return [1,2,3,7,8,9,10,11,21,22,23,24,25,28,29,30,31].indexOf(parts.day) !== -1;
+    if (parts.dateKey >= "2026-11-01") return false;
+    return Boolean(TOUR_DAYS[parts.weekdayShort]);
   }
 
   function monthDayKey(parts) {
@@ -151,13 +154,12 @@
 
     for (var offset = 0; offset <= 14 && targets.length < count; offset += 1) {
       var candidate = slotInfo(new Date(now.getTime() + (offset * DAY_MS)));
-      if (!isTourDay(candidate.weekdayShort) || seen[candidate.dateKey]) continue;
+      if (!isTourDay(candidate) || seen[candidate.dateKey]) continue;
       if (!bookableStartLabels(candidate, today).length) continue;
       targets.push(candidate);
       seen[candidate.dateKey] = true;
     }
 
-    if (!targets.length) targets.push(today);
     return targets;
   }
 
@@ -168,7 +170,7 @@
 
     for (var offset = 0; offset <= 14 && entries.length < count; offset += 1) {
       var candidate = slotInfo(new Date(now.getTime() + (offset * DAY_MS)));
-      if (!isTourDay(candidate.weekdayShort)) continue;
+      if (!isTourDay(candidate)) continue;
       bookableStartLabels(candidate, today).forEach(function (label) {
         if (entries.length >= count) return;
         entries.push({
@@ -296,6 +298,7 @@
 
   function bwNextTourSlot(input) {
     var target = bwNextTourSlots(input, 1)[0];
+    if (!target) return null;
     return {
       dateKey: target.dateKey,
       weekdayShort: target.weekdayShort,

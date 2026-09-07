@@ -401,7 +401,7 @@
           <div class="at-cta">
             <div class="at-cta-text">
               <small>Liked what you heard?</small>
-              Walk the rest with me. Free, tip-based, Tue-Sat at 11:30 and 15:30 at the World Clock.
+              Walk the rest with me. Free and tip-based, starting at the World Clock. September: Tue-Sat at 11:30 and 15:30. October: selected Wed-Sun dates at 11:30. Check the booking calendar for your date.
             </div>
             <a class="at-cta-btn" href="${BOOK_URL}" target="_top" rel="noopener" data-at-cta="book">Book Free Tour →</a>
           </div>

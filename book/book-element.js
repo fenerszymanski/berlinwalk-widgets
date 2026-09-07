@@ -383,14 +383,14 @@ class BWBookHeroElement extends HTMLElement {
                   <span class="bw-book-meta-chip">Free · Tip-based</span>
                   <span class="bw-book-meta-chip">~2 hours</span>
                   <span class="bw-book-meta-chip">English</span>
-                  <span class="bw-book-meta-chip">Tue-Sat</span>
+                  <span class="bw-book-meta-chip">Dates in the calendar</span>
                 </div>
 
                 <div class="bw-book-actions">
                   <a class="bw-book-btn bw-book-btn-primary" href="#${BW_BOOK_ANCHOR_ID}">Pick your date ↓</a>
                   <a class="bw-book-btn bw-book-btn-ghost" href="${BW_BOOK_MEETING_POINT_URL}">Meeting point</a>
                 </div>
-                <p class="bw-book-cta-note">Free to reserve. You pay nothing upfront and tip only if the walk was worth it.</p>
+                <p class="bw-book-cta-note">September 2026: Tue-Sat at 11:30 and 15:30. October 2026: Wed-Sun at 11:30, except 4 and 13-20 October. Pick an available date in the calendar. Free to reserve; tip at the end.</p>
 
                 <div class="bw-book-trust" aria-label="Tour rating">
                   <span class="bw-book-trust-score">9.8 / 10</span>
