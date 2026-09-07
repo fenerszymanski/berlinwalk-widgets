@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin to Prague Route Board</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --lightgreen: #C5E1A5;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --red: #C62828;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .rb { max-width: 760px; margin: 0 auto; padding: 14px 12px 12px; }
+  .rb-head h2 { font-size: 1.08rem; margin: 0; color: var(--green); }
+  .rb-head p { margin: 5px 0 0; font-size: .76rem; line-height: 1.55; color: #555; }
+  .rb-label { display: block; font-size: .66rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--deep); margin: 15px 0 5px; }
+  .rb-datebar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .rb-datebar input[type=date] {
+    font: inherit; font-size: .86rem; padding: 7px 9px; border: 2px solid var(--green);
+    border-radius: 8px; background: #fff; color: var(--deep); min-width: 168px;
+  }
+  .rb-day { font-size: .8rem; font-weight: 700; color: var(--deep); }
+  .rb-day.rb-day-bad { color: var(--red); }
+  .rb-body { display: grid; grid-template-columns: 200px 1fr; gap: 14px; margin-top: 12px; align-items: start; }
+  @media (max-width: 620px) { .rb-body { grid-template-columns: 1fr; } }
+  .rb-mapwrap { background: #fff; border: 1px solid #E0E4DA; border-radius: 12px; padding: 8px 4px; }
+  .rb-map { display: block; width: 100%; height: auto; }
+  .rb-board { min-width: 0; }
+  .rb-runs { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; }
+  .rb-runs li {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px;
+    background: #fff; border: 1px solid #E0E4DA; border-left: 5px solid var(--lime);
+    border-radius: 8px; padding: 7px 10px; font-size: .82rem;
+  }
+  .rb-runs li.rb-off { border-left-color: #BDBDBD; background: #F3F3EE; color: #8A8A85; text-decoration: line-through; }
+  .rb-runs li.rb-best { border-left-color: var(--green); background: #F2F7EC; }
+  .rb-time { font-weight: 700; color: var(--deep); font-variant-numeric: tabular-nums; }
+  .rb-off .rb-time { color: #8A8A85; }
+  .rb-note { font-size: .7rem; color: #666; text-decoration: none; }
+  .rb-verdict { margin: 12px 0 0; padding: 12px 14px; border-radius: 10px; background: var(--yellow); color: var(--deep); }
+  .rb-verdict h3 { margin: 0 0 5px; font-size: .95rem; color: var(--deep); }
+  .rb-verdict p { margin: 0; font-size: .85rem; line-height: 1.55; color: var(--deep); }
+  .rb-verdict p + p { margin-top: 6px; }
+  .rb-alert { margin: 10px 0 0; padding: 10px 12px; border-radius: 9px; background: #FDECEA; border: 1px solid #F3B9B3; color: #7F1D18; font-size: .8rem; line-height: 1.5; }
+  .rb-bus { margin: 12px 0 0; padding: 11px 13px; border-radius: 10px; background: #fff; border: 1px solid #E0E4DA; }
+  .rb-bus h3 { margin: 0 0 6px; font-size: .84rem; color: var(--green); }
+  .rb-bus ul { margin: 0; padding-left: 18px; font-size: .79rem; line-height: 1.6; color: #444; }
+  .rb-legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 9px 0 0; font-size: .71rem; color: #555; }
+  .rb-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .rb-swatch { width: 13px; height: 13px; border-radius: 3px; border: 1px solid rgba(0,0,0,.22); }
+  .rb-foot { margin: 11px 0 0; font-size: .69rem; line-height: 1.6; color: #777; }
+  .rb-foot a { color: var(--green); }
+</style>
+</head>
+<body>
+<div class="rb">
+  <div class="rb-head">
+    <h2>Berlin to Prague Route Board</h2>
+    <p>One line runs south out of Berlin, down the Elbe through Saxon Switzerland and across the border into Bohemia. Pick your travel day to see which of the direct trains actually run, where the line is cut, and how many hours you would really get in Prague if you came back the same evening.</p>
+  </div>
+
+  <label class="rb-label" for="rb-date">Your travel day out of Berlin</label>
+  <div class="rb-datebar">
+    <input type="date" id="rb-date" min="2026-09-07" max="2026-12-12">
+    <span class="rb-day" id="rb-day"></span>
+  </div>
+
+  <div class="rb-body">
+    <div class="rb-mapwrap">
+      <svg class="rb-map" id="rb-map" viewBox="0 0 200 430" role="img" aria-label="The Berlin to Prague railway drawn from real station positions, from Berlin Hauptbahnhof south through Dresden and Bad Schandau to Praha hlavní nádraží"></svg>
+      <div class="rb-legend">
+        <span><i class="rb-swatch" style="background:#1B5E20"></i>Train runs</span>
+        <span><i class="rb-swatch" style="background:#BDBDBD"></i>Bus replaces the train</span>
+      </div>
+    </div>
+    <div class="rb-board">
+      <span class="rb-label" style="margin-top:0">Direct trains that day, Berlin Hbf to Praha hl.n.</span>
+      <ul class="rb-runs" id="rb-runs"></ul>
+      <div class="rb-alert" id="rb-alert" hidden></div>
+      <div class="rb-verdict" aria-live="polite">
+        <h3 id="rb-vh"></h3>
+        <p id="rb-vp"></p>
+        <p id="rb-vp2"></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="rb-bus">
+    <h3>The bus, for comparison</h3>
+    <ul>
+      <li>FlixBus lists around <strong>25 departures a day</strong> from Berlin, with a fastest scheduled run of <strong>3 hours 40 minutes</strong>. RegioJet runs the same corridor from Südkreuz.</li>
+      <li id="rb-busfrom">Buses leave from several points across Berlin and land at <strong>Florenc</strong>, which is two metro stops out from the old town rather than a walk from it.</li>
+      <li>The bus is the one that keeps running when the railway does not, and it takes the motorway, so its risk is traffic rather than trackwork.</li>
+    </ul>
+  </div>
+
+  <p class="rb-foot">Scheduled times checked on 7 September 2026, and the Monday engineering work on the German side of the border runs until 12 December 2026. Confirm your exact date before you book at <a href="https://int.bahn.de" target="_blank" rel="noopener">int.bahn.de</a>.</p>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var STOPS = [
+    { name: 'Berlin Hbf', country: 'DE', lat: 52.5249, lon: 13.3696, major: true },
+    { name: 'Südkreuz', country: 'DE', lat: 52.4762, lon: 13.3659, major: false, labelLeft: true },
+    { name: 'Dresden Hbf', country: 'DE', lat: 51.0402, lon: 13.7314, major: true },
+    { name: 'Bad Schandau', country: 'DE', lat: 50.9187, lon: 14.1399, major: false },
+    { name: 'Děčín', country: 'CZ', lat: 50.7740, lon: 14.2015, major: false },
+    { name: 'Ústí nad Labem', country: 'CZ', lat: 50.6596, lon: 14.0447, major: false, labelLeft: true },
+    { name: 'Praha hl.n.', country: 'CZ', lat: 50.0831, lon: 14.4360, major: true }
+  ];
+  // Berlin bus origins, named in the comparison strip below the map.
+  var BUS_ORIGINS = [
+    { name: 'the central bus station at Messe Nord', lat: 52.5075, lon: 13.2835 },
+    { name: 'Alexanderplatz', lat: 52.5215, lon: 13.4111 },
+    { name: 'Südkreuz', lat: 52.4762, lon: 13.3659 },
+    { name: 'Hauptbahnhof', lat: 52.5249, lon: 13.3696 }
+  ];
+  var SOUTH = [
+    { dep: '07:28', arr: '11:25' },
+    { dep: '09:28', arr: '13:25' },
+    { dep: '11:28', arr: '15:25' },
+    { dep: '13:28', arr: '17:25' },
+    { dep: '15:28', arr: '19:25' },
+    { dep: '17:28', arr: '21:25' },
+    { dep: '19:28', arr: '23:31' }
+  ];
+  var NORTH = [
+    { dep: '06:31', arr: '10:29' },
+    { dep: '08:31', arr: '12:30' },
+    { dep: '10:31', arr: '14:29' },
+    { dep: '12:31', arr: '16:29' },
+    { dep: '14:31', arr: '18:29' },
+    { dep: '16:31', arr: '20:29' }
+  ];
+  var WORKS = {
+    firstDay: '2026-03-16',
+    lastDay: '2026-12-12',
+    southRuns: ['17:28', '19:28'],
+    northRuns: ['06:31'],
+    cutStart: 2, // Dresden Hbf
+    cutEnd: 5    // Usti nad Labem
+  };
+  var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+  var dateEl = document.getElementById('rb-date');
+  var dayEl = document.getElementById('rb-day');
+  var runsEl = document.getElementById('rb-runs');
+  var alertEl = document.getElementById('rb-alert');
+  var mapEl = document.getElementById('rb-map');
+  var vhEl = document.getElementById('rb-vh');
+  var vpEl = document.getElementById('rb-vp');
+  var vp2El = document.getElementById('rb-vp2');
+
+  function minutes(hhmm) {
+    var bits = hhmm.split(':');
+    return parseInt(bits[0], 10) * 60 + parseInt(bits[1], 10);
+  }
+  function spell(mins) {
+    var h = Math.floor(mins / 60);
+    var m = mins % 60;
+    if (h === 0) return m + ' minutes';
+    if (m === 0) return h + (h === 1 ? ' hour' : ' hours');
+    return h + (h === 1 ? ' hour ' : ' hours ') + m + ' minutes';
+  }
+  function isWorksMonday(iso) {
+    var d = new Date(iso + 'T12:00:00');
+    if (d.getDay() !== 1) return false;
+    return iso >= WORKS.firstDay && iso <= WORKS.lastDay;
+  }
+  function project() {
+    var lats = STOPS.map(function (s) { return s.lat; });
+    var lons = STOPS.map(function (s) { return s.lon; });
+    var north = Math.max.apply(null, lats), south = Math.min.apply(null, lats);
+    var west = Math.min.apply(null, lons), east = Math.max.apply(null, lons);
+    // Longitude degrees are shorter this far north, so scale them by cos(latitude)
+    // before laying the line out. The strip stays geographically honest.
+    var squeeze = Math.cos((north + south) / 2 * Math.PI / 180);
+    var spanX = (east - west) * squeeze;
+    var spanY = north - south;
+    return STOPS.map(function (s) {
+      return {
+        stop: s,
+        x: 96 + ((s.lon - (west + east) / 2) * squeeze / spanX) * 74,
+        y: 26 + ((north - s.lat) / spanY) * 372
+      };
+    });
+  }
+  var PTS = project();
+
+  function svgEl(tag, attrs, text) {
+    var node = document.createElementNS('http://www.w3.org/2000/svg', tag);
+    for (var key in attrs) node.setAttribute(key, attrs[key]);
+    if (text !== undefined) node.textContent = text;
+    return node;
+  }
+
+  function drawMap(cut) {
+    var frag = document.createDocumentFragment();
+    frag.appendChild(svgEl('rect', { x: 0, y: 0, width: 200, height: 430, fill: '#ffffff' }));
+    // Border line between Bad Schandau and Decin, drawn where it really falls.
+    var borderY = (PTS[3].y + PTS[4].y) / 2;
+    frag.appendChild(svgEl('line', { x1: 6, y1: borderY, x2: 104, y2: borderY, stroke: '#C9CFC0', 'stroke-width': 1, 'stroke-dasharray': '3 3' }));
+    frag.appendChild(svgEl('text', { x: 6, y: borderY + 9, 'font-size': 7.4, fill: '#9AA192' }, 'DE / CZ border'));
+
+    for (var i = 0; i < PTS.length - 1; i += 1) {
+      var broken = cut && i >= WORKS.cutStart && i < WORKS.cutEnd;
+      frag.appendChild(svgEl('line', {
+        x1: PTS[i].x, y1: PTS[i].y, x2: PTS[i + 1].x, y2: PTS[i + 1].y,
+        stroke: broken ? '#BDBDBD' : '#1B5E20',
+        'stroke-width': broken ? 3 : 4,
+        'stroke-linecap': 'round',
+        'stroke-dasharray': broken ? '5 5' : 'none'
+      }));
+    }
+    for (var j = 0; j < PTS.length; j += 1) {
+      var p = PTS[j];
+      var inCut = cut && j > WORKS.cutStart && j < WORKS.cutEnd;
+      frag.appendChild(svgEl('circle', {
+        cx: p.x, cy: p.y, r: p.stop.major ? 5.4 : 3.6,
+        fill: inCut ? '#BDBDBD' : (p.stop.major ? '#1B5E20' : '#7CB342'),
+        stroke: '#ffffff', 'stroke-width': 1.6
+      }));
+      frag.appendChild(svgEl('text', {
+        x: p.stop.labelLeft ? p.x - 8 : p.x + (p.stop.major ? 10 : 8),
+        y: p.y + 3.4,
+        'text-anchor': p.stop.labelLeft ? 'end' : 'start',
+        'font-size': p.stop.major ? 9.2 : 8,
+        'font-weight': p.stop.major ? 700 : 400,
+        fill: inCut ? '#8A8A85' : '#212121'
+      }, p.stop.name));
+    }
+    if (cut) {
+      var midY = (PTS[WORKS.cutStart].y + borderY) / 2 - 6;
+      frag.appendChild(svgEl('rect', { x: 4, y: midY - 9, width: 54, height: 18, rx: 4, fill: '#FDECEA', stroke: '#F3B9B3', 'stroke-width': 1 }));
+      frag.appendChild(svgEl('text', { x: 31, y: midY + 3.2, 'text-anchor': 'middle', 'font-size': 7.4, 'font-weight': 700, fill: '#7F1D18' }, 'BUS SECTION'));
+    }
+    mapEl.innerHTML = '';
+    mapEl.appendChild(frag);
+  }
+
+  function render() {
+    var iso = dateEl.value;
+    if (!iso) return;
+    var d = new Date(iso + 'T12:00:00');
+    var cut = isWorksMonday(iso);
+    var dayName = DAYS[d.getDay()];
+    dayEl.textContent = cut ? dayName + ', engineering work day' : dayName;
+    dayEl.className = cut ? 'rb-day rb-day-bad' : 'rb-day';
+
+    var rows = '';
+    var running = [];
+    for (var i = 0; i < SOUTH.length; i += 1) {
+      var run = SOUTH[i];
+      var on = !cut || WORKS.southRuns.indexOf(run.dep) !== -1;
+      if (on) running.push(run);
+      var cls = on ? (running.length === 1 && on ? 'rb-best' : '') : 'rb-off';
+      rows += '<li class="' + cls + '"><span class="rb-time">' + run.dep + '</span>'
+        + '<span aria-hidden="true">to</span>'
+        + '<span class="rb-time">' + run.arr + '</span>'
+        + '<span class="rb-note">' + (on ? spell(minutes(run.arr) - minutes(run.dep)) : 'cancelled, bus between Dresden and Ústí') + '</span></li>';
+    }
+    runsEl.innerHTML = rows;
+
+    var backs = [];
+    for (var k = 0; k < NORTH.length; k += 1) {
+      if (!cut || WORKS.northRuns.indexOf(NORTH[k].dep) !== -1) backs.push(NORTH[k]);
+    }
+
+    if (cut) {
+      alertEl.hidden = false;
+      alertEl.innerHTML = '<strong>Monday trackwork.</strong> On Mondays until 12 December 2026 the line between Dresden and Ústí nad Labem is worked on and buses cover that section, so the through service is split and Bad Schandau is skipped. Only the late departures survive.';
+    } else {
+      alertEl.hidden = true;
+      alertEl.innerHTML = '';
+    }
+
+    var first = running[0];
+    var last = null;
+    for (var n = backs.length - 1; n >= 0; n -= 1) {
+      if (first && minutes(backs[n].dep) > minutes(first.arr) + 30) { last = backs[n]; break; }
+    }
+    if (!first) {
+      vhEl.textContent = 'No direct train that day';
+      vpEl.textContent = 'Take the bus, or move the trip by a day.';
+      vp2El.textContent = '';
+      drawMap(cut);
+      return;
+    }
+    var travel = (minutes(first.arr) - minutes(first.dep)) + (last ? (minutes(last.arr) - minutes(last.dep)) : 0);
+    if (last) {
+      var inCity = minutes(last.dep) - minutes(first.arr);
+      vhEl.textContent = dayName + ' as a day trip: ' + spell(inCity) + ' in Prague';
+      vpEl.textContent = 'Out on the ' + first.dep + ', into Praha hl.n. at ' + first.arr + ', back on the ' + last.dep + ' and home at ' + last.arr + '. That is ' + spell(travel) + ' sitting on a train for ' + spell(inCity) + ' in the city, and the last hour of it goes on walking back to the station.';
+      vp2El.textContent = inCity < 360
+        ? 'My call: that is not a day out, it is a train day with a lunch in it. Give Prague one night and the same tickets suddenly buy you an evening and a morning.'
+        : 'My call: this is the widest day the timetable offers, and it still leaves you queuing for the Astronomical Clock at the worst hour. One night turns it into a real visit.';
+    } else {
+      vhEl.textContent = dayName + ': there is no way back the same day';
+      vpEl.textContent = 'What survives out of Berlin is the ' + running.map(function (r) { return r.dep; }).join(' and the ') + ', arriving ' + first.arr + ' at the earliest, and the only northbound train that day has already left at 06:31.';
+      vp2El.textContent = 'My call: on a Monday, either take the bus both ways or plan to sleep in Prague.';
+    }
+    drawMap(cut);
+  }
+
+  function startDate() {
+    var now = new Date();
+    now.setDate(now.getDate() + 7);
+    var iso = now.toISOString().slice(0, 10);
+    if (iso < '2026-09-07') iso = '2026-09-07';
+    if (iso > '2026-12-12') iso = '2026-12-12';
+    return iso;
+  }
+
+  var busFrom = document.getElementById('rb-busfrom');
+  var origins = BUS_ORIGINS.map(function (o) { return o.name; });
+  busFrom.innerHTML = 'Buses leave from ' + origins.slice(0, -1).join(', ') + ' and ' + origins[origins.length - 1]
+    + ', and land at <strong>Florenc</strong>, which is two metro stops out from the old town rather than a walk from it.';
+
+  dateEl.value = startDate();
+  dateEl.addEventListener('change', render);
+  dateEl.addEventListener('input', render);
+  render();
+})();
+</script>
+</body>
+</html>
