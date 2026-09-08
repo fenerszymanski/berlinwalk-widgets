@@ -633,10 +633,9 @@
   var DATA_URL = './data.json';
   var API_BASE = 'https://app.berlinwalk.com/api/download-lead';
   var ASSET_ID = 'berlin-date-check';
-  // This is deliberately page-load random only. Date Check event rows must
-  // remain aggregate-only, so no visitor, session, cookie, or localStorage
-  // identifier is created for this test.
-  var EXPERIMENT_ID = 'berlin_date_check_email_gate_v2';
+  // Email-gate experiment ended by owner decision on 2026-09-08.
+  // Keep subsequent control traffic out of the historical A/B cohort.
+  var EXPERIMENT_ID = 'berlin_date_check_email_gate_control_only_20260908';
   var GATE_VARIANT_CONTROL = 'control';
   var GATE_VARIANT_OPTION3 = 'option3_preview_handoff';
   // Static author-written markup, no user input interpolated. Deliberately does
@@ -657,11 +656,7 @@
     return /[?&]qa=1\b/.test(window.location.search);
   }
   function resolveGateVariant() {
-    try {
-      var requested = new URL(window.location.href).searchParams.get('gate_variant');
-      if (isQaRun() && (requested === GATE_VARIANT_CONTROL || requested === GATE_VARIANT_OPTION3)) return requested;
-    } catch (e) {}
-    return Math.random() < 0.5 ? GATE_VARIANT_CONTROL : GATE_VARIANT_OPTION3;
+    return GATE_VARIANT_CONTROL;
   }
   var GATE_VARIANT = resolveGateVariant();
 
