@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-08T02:13:11.902Z",
+  "updatedAt": "2026-09-08T07:51:29.931Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 361,
-  "toolsTotal": 281,
+  "totalPosts": 362,
+  "toolsTotal": 282,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1618,6 +1618,23 @@
   ],
   "latest": [
     {
+      "title": "Hohenschönhausen: The Stasi Prison You Can Only See on a Tour",
+      "slug": "hohenschonhausen-memorial-berlin",
+      "path": "/post/hohenschonhausen-memorial-berlin",
+      "url": "https://www.berlinwalk.com/post/hohenschonhausen-memorial-berlin",
+      "excerpt": "The former Stasi remand prison in Lichtenberg is not a museum you can wander. The cells, corridors and interrogation rooms open only on a guided tour, and in English that means 10:40, 12:40 or 14:40, nine euro, about two hours, twenty-five people. Here is how to reach it, which of the four similarly named stops is the right one, and how much of your day it really costs.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "route-stories",
+      "topicLabel": "Tour Route Stories",
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-08T07:49:42.007Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_0f632cdd4bf3403fabc2a2537adf3799~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/hohenschonhausen-wall-watchtower.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_0f632cdd4bf3403fabc2a2537adf3799~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/hohenschonhausen-wall-watchtower.jpg",
+      "alt": "The perimeter wall and a watchtower of the former Stasi prison seen from the street",
+      "relatedToolSlug": ""
+    },
+    {
       "title": "BER Flight Delay Compensation: What You Are Owed and the Line That Decides It",
       "slug": "ber-flight-delay-compensation",
       "path": "/post/ber-flight-delay-compensation",
@@ -1803,23 +1820,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_b36fba4601d74ee4848048026de0003f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wittenberg-aerial.jpg",
       "alt": "Aerial view of Wittenberg with the Town Church, the market square and the Castle Church tower on one street line",
       "relatedToolSlug": "wittenberg-reformation-mile"
-    },
-    {
-      "title": "Train Tickets for Day Trips from Berlin: Group Tickets, the Deutschlandticket and When the ICE Wins",
-      "slug": "berlin-day-trip-train-tickets",
-      "path": "/post/berlin-day-trip-train-tickets",
-      "url": "https://www.berlinwalk.com/post/berlin-day-trip-train-tickets",
-      "excerpt": "Germany runs a whole family of flat-price group train tickets that most Berlin visitors never hear about: 36.50 euros covers five people to anywhere in Brandenburg, and 87 euros takes four of you to Dresden and back. Here is which ticket wins for each destination and group size, where the 09:00 weekday rule bites, and when the ICE is honestly the better buy.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-09-04T07:57:14.851Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_aea7c1665e6a4fd1bbc809fdee92bf28~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-re1-berlin-hbf.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_aea7c1665e6a4fd1bbc809fdee92bf28~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-re1-berlin-hbf.jpg",
-      "alt": "An ODEG regional train on the RE1 line waiting under the glass roof of Berlin Hauptbahnhof",
-      "relatedToolSlug": "berlin-day-trip-ticket-curves"
     }
   ]
 }
