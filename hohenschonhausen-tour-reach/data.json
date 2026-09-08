@@ -1,0 +1,208 @@
+{
+  "meta": {
+    "checked": "8 September 2026",
+    "bufferMin": 15,
+    "tourBlockMin": 120,
+    "source": "Journey times from the VBB journey planner API for a normal weekday, door to door, including the walk from the stop to Genslerstraße 66. English tour times from the memorial's own visitor pages.",
+    "note": "The prison can only be seen on a guided tour. English tours run daily at 10.40, 12.40 and 14.40 and cost 9 euro, 5 euro concession. Numbers were read on 8 September 2026."
+  },
+  "tours": [
+    {
+      "start": "10:40",
+      "label": "Morning English tour"
+    },
+    {
+      "start": "12:40",
+      "label": "Midday English tour"
+    },
+    {
+      "start": "14:40",
+      "label": "Afternoon English tour"
+    }
+  ],
+  "starts": [
+    {
+      "name": "Warschauer Straße",
+      "min": 31,
+      "low": 31,
+      "changes": 1,
+      "lines": [
+        "S7",
+        "256"
+      ],
+      "alight": "Große-Leege-Str./Freienwalder Str.",
+      "walkMin": 4,
+      "walkM": 316
+    },
+    {
+      "name": "Alexanderplatz",
+      "min": 33,
+      "low": 30,
+      "changes": 0,
+      "lines": [
+        "M5"
+      ],
+      "alight": "Freienwalder Str.",
+      "walkMin": 9,
+      "walkM": 664
+    },
+    {
+      "name": "Ostbahnhof",
+      "min": 34,
+      "low": 34,
+      "changes": 1,
+      "lines": [
+        "S7",
+        "256"
+      ],
+      "alight": "Große-Leege-Str./Freienwalder Str.",
+      "walkMin": 4,
+      "walkM": 316
+    },
+    {
+      "name": "Gesundbrunnen",
+      "min": 36,
+      "low": 30,
+      "changes": 1,
+      "lines": [
+        "S41",
+        "M5"
+      ],
+      "alight": "Freienwalder Str.",
+      "walkMin": 9,
+      "walkM": 664
+    },
+    {
+      "name": "Hackescher Markt",
+      "min": 39,
+      "low": 36,
+      "changes": 0,
+      "lines": [
+        "M5"
+      ],
+      "alight": "Freienwalder Str.",
+      "walkMin": 9,
+      "walkM": 664
+    },
+    {
+      "name": "Friedrichstraße",
+      "min": 42,
+      "low": 39,
+      "changes": 1,
+      "lines": [
+        "S3",
+        "M5"
+      ],
+      "alight": "Freienwalder Str.",
+      "walkMin": 9,
+      "walkM": 664
+    },
+    {
+      "name": "Brandenburger Tor",
+      "min": 42,
+      "low": 42,
+      "changes": 1,
+      "lines": [
+        "U5",
+        "256"
+      ],
+      "alight": "Große-Leege-Str./Freienwalder Str.",
+      "walkMin": 4,
+      "walkM": 316
+    },
+    {
+      "name": "Prenzlauer Allee",
+      "min": 42,
+      "low": 39,
+      "changes": 1,
+      "lines": [
+        "U2",
+        "M5"
+      ],
+      "alight": "Freienwalder Str.",
+      "walkMin": 9,
+      "walkM": 664
+    },
+    {
+      "name": "Berlin Hauptbahnhof",
+      "min": 44,
+      "low": 38,
+      "changes": 2,
+      "lines": [
+        "S15",
+        "S41",
+        "M5"
+      ],
+      "alight": "Freienwalder Str.",
+      "walkMin": 9,
+      "walkM": 664
+    },
+    {
+      "name": "Kottbusser Tor",
+      "min": 45,
+      "low": 44,
+      "changes": 1,
+      "lines": [
+        "U8",
+        "M5"
+      ],
+      "alight": "Freienwalder Str.",
+      "walkMin": 9,
+      "walkM": 664
+    },
+    {
+      "name": "Potsdamer Platz",
+      "min": 48,
+      "low": 46,
+      "changes": 2,
+      "lines": [
+        "S25",
+        "S3",
+        "M5"
+      ],
+      "alight": "Freienwalder Str.",
+      "walkMin": 9,
+      "walkM": 664
+    },
+    {
+      "name": "Zoologischer Garten",
+      "min": 50,
+      "low": 45,
+      "changes": 2,
+      "lines": [
+        "U9",
+        "S41",
+        "M5"
+      ],
+      "alight": "Freienwalder Str.",
+      "walkMin": 9,
+      "walkM": 664
+    }
+  ],
+  "stops": [
+    {
+      "name": "Große-Leege-Str./Freienwalder Str.",
+      "served": "Bus 256 only",
+      "metres": 278,
+      "verdict": "closest"
+    },
+    {
+      "name": "Freienwalder Str.",
+      "served": "Tram M5 only",
+      "metres": 569,
+      "verdict": "usual"
+    },
+    {
+      "name": "Genslerstr.",
+      "served": "Trams M5, M6 and 16",
+      "metres": 854,
+      "verdict": "far"
+    },
+    {
+      "name": "S Hohenschönhausen Bhf",
+      "served": "S75 and RB32",
+      "metres": 2793,
+      "verdict": "wrong"
+    }
+  ]
+}
