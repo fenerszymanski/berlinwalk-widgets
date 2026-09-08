@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-08T07:51:29.931Z",
+  "updatedAt": "2026-09-08T14:05:38.781Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 362,
-  "toolsTotal": 282,
+  "totalPosts": 363,
+  "toolsTotal": 283,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1618,6 +1618,23 @@
   ],
   "latest": [
     {
+      "title": "Which City to Visit After Berlin: What the Train Actually Reaches",
+      "slug": "which-city-to-visit-after-berlin",
+      "path": "/post/which-city-to-visit-after-berlin",
+      "url": "https://www.berlinwalk.com/post/which-city-to-visit-after-berlin",
+      "excerpt": "Germany does not sit in a circle around Berlin. The fast lines run north-west to Hamburg and south to Leipzig, Erfurt and Munich, while the same distance east into Poland costs about twice the time. Here is what the train genuinely reaches, which places are day trips and which deserve a night, and the five-day plan I would actually use.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "history-myths",
+      "topicLabel": "Berlin History & Myths",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-08T13:58:49.992Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_a43a90b2ad404818b3b49ced5d88a65c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ice-berlin-hauptbahnhof.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_a43a90b2ad404818b3b49ced5d88a65c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ice-berlin-hauptbahnhof.jpg",
+      "alt": "An ICE train waiting at the underground long-distance platform at Berlin Hauptbahnhof",
+      "relatedToolSlug": "berlin-second-city-board"
+    },
+    {
       "title": "Hohenschönhausen: The Stasi Prison You Can Only See on a Tour",
       "slug": "hohenschonhausen-memorial-berlin",
       "path": "/post/hohenschonhausen-memorial-berlin",
@@ -1803,23 +1820,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_b86a4c459881452cad772a52e298f9f2~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-sanssouci-great-fountain.jpg",
       "alt": "The Great Fountain at Sanssouci with the vineyard terraces and the yellow palace above them",
       "relatedToolSlug": "berlin-day-four-tradeoff"
-    },
-    {
-      "title": "Wittenberg Day Trip from Berlin: Trains, the Theses Door and What Is Actually Open",
-      "slug": "wittenberg-day-trip-from-berlin",
-      "path": "/post/wittenberg-day-trip-from-berlin",
-      "url": "https://www.berlinwalk.com/post/wittenberg-day-trip-from-berlin",
-      "excerpt": "The town where the modern world cracked open in 1517 sits 41 minutes from Berlin Hauptbahnhof, and almost everything worth seeing stands on one walkable street. Here is which train and ticket to take, what the Theses Door really is, and the closure most visitors discover too late: the Lutherhaus is being renovated until spring 2027.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-09-04T14:04:15.013Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_b36fba4601d74ee4848048026de0003f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wittenberg-aerial.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_b36fba4601d74ee4848048026de0003f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wittenberg-aerial.jpg",
-      "alt": "Aerial view of Wittenberg with the Town Church, the market square and the Castle Church tower on one street line",
-      "relatedToolSlug": "wittenberg-reformation-mile"
     }
   ]
 }
