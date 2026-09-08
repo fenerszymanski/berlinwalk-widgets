@@ -12,9 +12,9 @@ const BW_ROUTE_GALLERY = [
     caption: 'Storytelling outside the Altes Museum'
   },
   {
-    id: '02',
-    alt: 'Small Berlin walking tour group smiling on a city street',
-    caption: 'A small group between city stories'
+    id: '09',
+    alt: 'Yusuf with a BerlinWalk tour group near Alexanderplatz',
+    caption: 'A group moment near Alexanderplatz'
   },
   {
     id: '04',
