@@ -760,7 +760,7 @@
         "svgShapeNodes": 3,
         "svgCount": 1,
         "canvas": 0,
-        "contentImages": 38,
+        "contentImages": 19,
         "mapLibrary": true,
         "range": 0,
         "dateInput": 0,
@@ -1462,7 +1462,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 550
+        "textLength": 547
       },
       "inputModel": "accumulate",
       "stateProgression": "accumulate",
@@ -1762,7 +1762,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 2931
+        "textLength": 2930
       },
       "inputModel": "date",
       "stateProgression": "accumulate",
@@ -2572,7 +2572,7 @@
         "ariaPressed": 6,
         "tables": 0,
         "details": 0,
-        "textLength": 25152
+        "textLength": 25156
       },
       "inputModel": "text-entry",
       "stateProgression": "replace-on-pick",
@@ -4702,7 +4702,7 @@
         "ariaPressed": 3,
         "tables": 0,
         "details": 0,
-        "textLength": 1859
+        "textLength": 1922
       },
       "inputModel": "text-entry",
       "stateProgression": "accumulate",
@@ -5032,7 +5032,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 1281
+        "textLength": 1255
       },
       "inputModel": "button-pick",
       "stateProgression": "replace-on-pick",
@@ -6940,7 +6940,7 @@
         "svgShapeNodes": 3,
         "svgCount": 1,
         "canvas": 0,
-        "contentImages": 4,
+        "contentImages": 6,
         "mapLibrary": false,
         "range": 1,
         "dateInput": 0,
@@ -6952,7 +6952,7 @@
         "ariaPressed": 7,
         "tables": 0,
         "details": 0,
-        "textLength": 1093
+        "textLength": 1092
       },
       "inputModel": "continuous-scrub",
       "stateProgression": "continuous-scrub",
@@ -9202,7 +9202,7 @@
         "ariaPressed": 4,
         "tables": 0,
         "details": 0,
-        "textLength": 1497
+        "textLength": 1470
       },
       "inputModel": "date",
       "stateProgression": "accumulate",
@@ -9352,7 +9352,7 @@
         "ariaPressed": 2,
         "tables": 1,
         "details": 1,
-        "textLength": 2980
+        "textLength": 2934
       },
       "inputModel": "accumulate",
       "stateProgression": "accumulate",
@@ -9382,7 +9382,7 @@
         "ariaPressed": 18,
         "tables": 0,
         "details": 0,
-        "textLength": 2391
+        "textLength": 2465
       },
       "inputModel": "continuous-scrub",
       "stateProgression": "continuous-scrub",
@@ -10378,6 +10378,36 @@
       "stateProgression": "accumulate",
       "outputModel": "running-total",
       "visualGrammar": "canvas",
+      "hasVisualLayer": true,
+      "flatChipCard": false,
+      "pageErrors": []
+    },
+    "berlin-museum-closure-timeline": {
+      "slug": "berlin-museum-closure-timeline",
+      "addedAt": "2026-09-08",
+      "measuredBy": "rendered",
+      "signals": {
+        "svgShapeNodes": 42,
+        "svgCount": 1,
+        "canvas": 0,
+        "contentImages": 0,
+        "mapLibrary": false,
+        "range": 0,
+        "dateInput": 0,
+        "radio": 0,
+        "checkbox": 0,
+        "select": 1,
+        "textInput": 0,
+        "buttons": 0,
+        "ariaPressed": 0,
+        "tables": 0,
+        "details": 0,
+        "textLength": 2563
+      },
+      "inputModel": "single-choice",
+      "stateProgression": "replace-on-pick",
+      "outputModel": "plotted-position",
+      "visualGrammar": "plotted-geometry",
       "hasVisualLayer": true,
       "flatChipCard": false,
       "pageErrors": []

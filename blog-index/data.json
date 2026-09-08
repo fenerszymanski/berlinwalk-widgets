@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-08T14:05:38.781Z",
+  "updatedAt": "2026-09-08T19:51:33.492Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 363,
-  "toolsTotal": 283,
+  "totalPosts": 364,
+  "toolsTotal": 284,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1618,6 +1618,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin Museums Closed for Renovation: What Is Shut and What to See Instead",
+      "slug": "berlin-museums-closed-for-renovation",
+      "path": "/post/berlin-museums-closed-for-renovation",
+      "url": "https://www.berlinwalk.com/post/berlin-museums-closed-for-renovation",
+      "excerpt": "The Pergamonmuseum has been shut since October 2023, Museum Berggruen since 2022, and the Zeughaus is a building site with no announced reopening. Here is what is actually closed in Berlin right now, which reopening dates you can trust, why the Ishtar Gate is on a far longer clock than the 2027 headlines suggest, and what is genuinely worth doing instead this week.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "history-myths",
+      "topicLabel": "Berlin History & Myths",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-08T19:49:35.137Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_f6f2fbb5b5534bf39049cba1c30e60e6~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ishtar-gate-pergamonmuseum.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_f6f2fbb5b5534bf39049cba1c30e60e6~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ishtar-gate-pergamonmuseum.jpg",
+      "alt": "The Ishtar Gate reconstructed inside the Pergamonmuseum, a blue glazed brick gateway with rows of golden animals",
+      "relatedToolSlug": ""
+    },
+    {
       "title": "Which City to Visit After Berlin: What the Train Actually Reaches",
       "slug": "which-city-to-visit-after-berlin",
       "path": "/post/which-city-to-visit-after-berlin",
@@ -1803,26 +1820,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_73951f5d413b449c846ccd8ec62c7bab~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-messe-berlin-grounds.jpg",
       "alt": "The Messe Berlin rotunda with its lettering, the exhibition halls stretching back towards the radio tower, and the Charlottenburg skyline behind",
       "relatedToolSlug": "berlin-busy-week-calendar"
-    },
-    {
-      "title": "4 Days in Berlin: What to Do With the Day a Three-Day Trip Cannot Fit",
-      "slug": "4-days-in-berlin",
-      "path": "/post/4-days-in-berlin",
-      "url": "https://www.berlinwalk.com/post/4-days-in-berlin",
-      "excerpt": "Most people who give Berlin four days plan three of them properly and improvise the fourth, then spend it walking back through Mitte past the sights they already saw. The fourth day is the one with no default, which is exactly why it decides how the trip is remembered. Here is what it is actually for, the arithmetic that rules half the options out before you leave the hotel, and the eight real choices with verified travel times from Alexanderplatz.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "8 min read",
-      "publishedDate": "2026-09-04T18:58:28.026Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_b86a4c459881452cad772a52e298f9f2~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-sanssouci-great-fountain.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_b86a4c459881452cad772a52e298f9f2~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-sanssouci-great-fountain.jpg",
-      "alt": "The Great Fountain at Sanssouci with the vineyard terraces and the yellow palace above them",
-      "relatedToolSlug": "berlin-day-four-tradeoff"
     }
   ],
   "allPosts": [
+    {
+      "title": "Berlin Museums Closed for Renovation: What Is Shut and What to See Instead",
+      "slug": "berlin-museums-closed-for-renovation",
+      "path": "/post/berlin-museums-closed-for-renovation",
+      "url": "https://www.berlinwalk.com/post/berlin-museums-closed-for-renovation",
+      "excerpt": "The Pergamonmuseum has been shut since October 2023, Museum Berggruen since 2022, and the Zeughaus is a building site with no announced reopening. Here is what is actually closed in Berlin right now, which reopening dates you can trust, why the Ishtar Gate is on a far longer clock than the 2027 headlines suggest, and what is genuinely worth doing instead this week.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "history-myths",
+      "topicLabel": "Berlin History & Myths",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-08T19:49:35.137Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_f6f2fbb5b5534bf39049cba1c30e60e6~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ishtar-gate-pergamonmuseum.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_f6f2fbb5b5534bf39049cba1c30e60e6~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ishtar-gate-pergamonmuseum.jpg",
+      "alt": "The Ishtar Gate reconstructed inside the Pergamonmuseum, a blue glazed brick gateway with rows of golden animals",
+      "relatedToolSlug": ""
+    },
     {
       "title": "Which City to Visit After Berlin: What the Train Actually Reaches",
       "slug": "which-city-to-visit-after-berlin",
