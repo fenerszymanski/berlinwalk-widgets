@@ -1,56 +1,55 @@
 const BW_BLOG_HOME_DATA_URL = (() => {
   const script = document.currentScript;
   const base = script && script.src ? script.src : window.location.href;
-  return new URL('./data.json?v=20260907-featured-listings', base).href;
+  return new URL('./data.json?v=20260908-featured-listings', base).href;
 })();
-
 const BW_BLOG_HOME_FALLBACK = {
   "featured": {
-    "title": "Quiet Hours in Berlin: The Flat Rules Visitors Break Without Knowing",
-    "url": "https://www.berlinwalk.com/post/quiet-hours-in-berlin",
+    "title": "FIBA Women's Basketball World Cup 2026 in Berlin: A Local Guide for Fans",
+    "url": "https://www.berlinwalk.com/post/fiba-womens-basketball-world-cup-2026-berlin",
     "category": "Tourist Tips",
     "readTime": "7 min read",
-    "summary": "Berlin protects the night from 22:00 to 06:00 and the whole of every Sunday and public holiday, and the 13:00 to 15:00 pause posted in your hallway is the building’s own rulebook rather than city law. Here is what actually crosses the line in a Berlin flat, hour by hour, why the courtyard and the stairwell are louder than the flat itself, and what happens if somebody does complain.",
-    "image": "https://static.wixstatic.com/media/5a08a3_e5da5edfa7fd415593b28ec9b9cd6911~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-landshuter-strasse-night.jpg",
-    "alt": "A lit Berlin apartment doorway glowing at night on Landshuter Strasse in Schoeneberg",
-    "label": "New: understand Berlin quiet hours"
+    "summary": "The FIBA Women's Basketball World Cup 2026 comes to Berlin from September 4-13. Here is the local fan guide: venues, transport, tickets, fixtures, and what to do between games.",
+    "image": "https://static.wixstatic.com/media/5a08a3_ea8454716f174a6a8d5990f9131542a8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/fiba-wwc-2026-berlin-hero.jpg",
+    "alt": "Women basketball fans walking toward a warmly lit modern Berlin arena at sunset, with the TV Tower and Spree in the background",
+    "label": "Happening now: FIBA in Berlin"
   },
   "miniPosts": [
     {
-      "title": "FIBA Women's Basketball World Cup 2026 in Berlin: A Local Guide for Fans",
-      "url": "https://www.berlinwalk.com/post/fiba-womens-basketball-world-cup-2026-berlin",
+      "title": "BER Flight Delay Compensation: What You Are Owed and the Line That Decides It",
+      "url": "https://www.berlinwalk.com/post/ber-flight-delay-compensation",
       "category": "Tourist Tips",
-      "readTime": "7 min read",
-      "summary": "The FIBA Women's Basketball World Cup 2026 comes to Berlin from September 4-13. Here is the local fan guide: venues, transport, tickets, fixtures, and what to do between games.",
-      "image": "https://static.wixstatic.com/media/5a08a3_ea8454716f174a6a8d5990f9131542a8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/fiba-wwc-2026-berlin-hero.jpg",
-      "alt": "Women basketball fans walking toward a warmly lit modern Berlin arena at sunset, with the TV Tower and Spree in the background"
+      "readTime": "10 min read",
+      "summary": "A delayed flight out of Berlin pays 250, 400 or 600 euro, and the number is set by the distance to your final destination and whether that airport is inside the EU. Of the 157 destinations BER serves, only nine reach 600 euro. Here is how to work out yours, what the airline owes you while you wait, and how to claim it.",
+      "image": "https://static.wixstatic.com/media/5a08a3_7ff51c867eaa44b2a4944d20e5758c3b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/ber-terminal-1-exterior.jpg",
+      "alt": "Terminal 1 at Berlin Brandenburg Airport photographed from the forecourt at dusk"
     },
     {
-      "title": "What Closes in Berlin in Winter: The Dates the Lakes, Pools and Boats Stop",
-      "url": "https://www.berlinwalk.com/post/what-closes-in-berlin-in-winter",
+      "title": "Park and Ride in Berlin: Which Lots Still Have Room and Which Are Already Full",
+      "url": "https://www.berlinwalk.com/post/park-and-ride-berlin",
       "category": "Tourist Tips",
-      "readTime": "6 min read",
-      "summary": "What closes in Berlin in winter and exactly when: the lake and outdoor pool dates, the park gates, the weekend-only winter boats, and what opens on 1 and 23 November.",
-      "image": "https://static.wixstatic.com/media/5a08a3_f031656109a245e0bcb70c7214ef1e08~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-strandbad-wannsee.jpg",
-      "alt": "An empty sandy beach at Strandbad Wannsee under a grey sky, with wicker beach chairs stacked along the shoreline"
+      "readTime": "8 min read",
+      "summary": "Berlin has 49 park and ride lots and 4,523 free spaces, and the city's own survey puts 27 of them over 90 per cent full. Here is which lot to aim for from each side of the city, what the ride in costs, and the green sticker rule that decides how close you can legally drive.",
+      "image": "https://static.wixstatic.com/media/5a08a3_718d703e5ca2492c8b4319ac3e9a9ba8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/park-and-ride-berlin-cover-wuhletal.jpg",
+      "alt": "S-Bahn and U-Bahn trains meeting at Wuhletal station in east Berlin"
     },
     {
-      "title": "Berlin War Damage Still Visible: The Walls That Were Never Repaired",
-      "url": "https://www.berlinwalk.com/post/berlin-war-damage-still-visible",
-      "category": "Berlin History",
-      "readTime": "7 min read",
-      "summary": "Berlin never patched most of what April 1945 did to its walls. The clearest place to start is a free, open courtyard on Museum Island, where bullet strikes sit in the colonnade stone at the height of a standing person. Here are seventeen places across the city where the marks are still there to find, how to tell what made each one, and which two need planning before you go.",
-      "image": "https://static.wixstatic.com/media/5a08a3_7998bec069d345c68e9461b70634a209~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-anhalter-bahnhof-portico.jpg",
-      "alt": "The rear of the ruined portico of the Anhalter Bahnhof in Berlin-Kreuzberg, its brick arches open to the sky with modern office towers behind"
-    },
-    {
-      "title": "Hotel or Apartment in Berlin: Where the Cost Flips and What to Check Before You Book",
-      "url": "https://www.berlinwalk.com/post/hotel-or-apartment-in-berlin",
+      "title": "Berlin to Prague: Train, Bus, and Whether the Day Trip Works",
+      "url": "https://www.berlinwalk.com/post/berlin-to-prague",
       "category": "Tourist Tips",
       "readTime": "7 min read",
-      "summary": "Most people settle the Berlin neighbourhood first and the type of bed second, which is the wrong way round. A hotel is priced per room, an apartment per flat with a cleaning fee charged once, and hostel beds per person per night, so the cheapest option moves with your party size and your length of stay. Here is where each one wins, the accommodation tax that applies to all three, and the registration number to look for before you pay for a Berlin flat.",
-      "image": "https://static.wixstatic.com/media/5a08a3_33e8970d4de941438d35180249a00a43~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-berlin-altbau-facade.jpg",
-      "alt": "A classic Berlin Altbau facade on Templiner Strasse in Prenzlauer Berg, with tall windows, stucco detail and balconies"
+      "summary": "Berlin to Prague looks close on a map: 388 kilometres, seven direct trains a day, just under four hours. Nobody flies it, because nobody sells the flight. Here is what actually runs, what a ticket costs, the Monday engineering work that deletes most of the timetable until December, and whether the day trip is worth doing at all.",
+      "image": "https://static.wixstatic.com/media/5a08a3_bb9b5cc01dcb4062b99fa60d6e6c8477~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-comfortjet-decin.jpg",
+      "alt": "A blue and white Czech Railways ComfortJet train standing at the platform at Decin, the first Czech stop on the Berlin to Prague line"
+    },
+    {
+      "title": "Quiet Hours in Berlin: The Flat Rules Visitors Break Without Knowing",
+      "url": "https://www.berlinwalk.com/post/quiet-hours-in-berlin",
+      "category": "Tourist Tips",
+      "readTime": "7 min read",
+      "summary": "Berlin protects the night from 22:00 to 06:00 and the whole of every Sunday and public holiday, and the 13:00 to 15:00 pause posted in your hallway is the building’s own rulebook rather than city law. Here is what actually crosses the line in a Berlin flat, hour by hour, why the courtyard and the stairwell are louder than the flat itself, and what happens if somebody does complain.",
+      "image": "https://static.wixstatic.com/media/5a08a3_e5da5edfa7fd415593b28ec9b9cd6911~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-landshuter-strasse-night.jpg",
+      "alt": "A lit Berlin apartment doorway glowing at night on Landshuter Strasse in Schoeneberg"
     }
   ],
   "posts": [

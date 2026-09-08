@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-07T19:51:29.707Z",
+  "updatedAt": "2026-09-08T02:13:11.902Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 361,
@@ -44,23 +44,74 @@
   ],
   "hero": {
     "lead": {
-      "title": "FIBA Women's Basketball World Cup 2026 in Berlin: A Local Guide for Fans",
-      "slug": "fiba-womens-basketball-world-cup-2026-berlin",
-      "path": "/post/fiba-womens-basketball-world-cup-2026-berlin",
-      "url": "https://www.berlinwalk.com/post/fiba-womens-basketball-world-cup-2026-berlin",
-      "excerpt": "The FIBA Women's Basketball World Cup 2026 comes to Berlin from September 4-13. Here is the local fan guide: venues, transport, tickets, fixtures, and what to do between games.",
+      "title": "BER Flight Delay Compensation: What You Are Owed and the Line That Decides It",
+      "slug": "ber-flight-delay-compensation",
+      "path": "/post/ber-flight-delay-compensation",
+      "url": "https://www.berlinwalk.com/post/ber-flight-delay-compensation",
+      "excerpt": "A delayed flight out of Berlin pays 250, 400 or 600 euro, and the number is set by the distance to your final destination and whether that airport is inside the EU. Of the 157 destinations BER serves, only nine reach 600 euro. Here is how to work out yours, what the airline owes you while you wait, and how to claim it.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "first-day",
       "topicLabel": "First Day in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-06-04T21:56:57.971Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_ea8454716f174a6a8d5990f9131542a8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/fiba-wwc-2026-berlin-hero.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_ea8454716f174a6a8d5990f9131542a8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/fiba-wwc-2026-berlin-hero.jpg",
-      "alt": "Women basketball fans walking toward a warmly lit modern Berlin arena at sunset, with the TV Tower and Spree in the background",
-      "relatedToolSlug": "basketball-worldcup-fixtures"
+      "readTime": "10 min read",
+      "publishedDate": "2026-09-07T19:49:30.149Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_7ff51c867eaa44b2a4944d20e5758c3b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/ber-terminal-1-exterior.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_7ff51c867eaa44b2a4944d20e5758c3b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/ber-terminal-1-exterior.jpg",
+      "alt": "Terminal 1 at Berlin Brandenburg Airport photographed from the forecourt at dusk",
+      "relatedToolSlug": "ber-flight-compensation-line"
     },
     "secondary": [
+      {
+        "title": "FIBA Women's Basketball World Cup 2026 in Berlin: A Local Guide for Fans",
+        "slug": "fiba-womens-basketball-world-cup-2026-berlin",
+        "path": "/post/fiba-womens-basketball-world-cup-2026-berlin",
+        "url": "https://www.berlinwalk.com/post/fiba-womens-basketball-world-cup-2026-berlin",
+        "excerpt": "The FIBA Women's Basketball World Cup 2026 comes to Berlin from September 4-13. Here is the local fan guide: venues, transport, tickets, fixtures, and what to do between games.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "first-day",
+        "topicLabel": "First Day in Berlin",
+        "readTime": "7 min read",
+        "publishedDate": "2026-06-04T21:56:57.971Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_ea8454716f174a6a8d5990f9131542a8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/fiba-wwc-2026-berlin-hero.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_ea8454716f174a6a8d5990f9131542a8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/fiba-wwc-2026-berlin-hero.jpg",
+        "alt": "Women basketball fans walking toward a warmly lit modern Berlin arena at sunset, with the TV Tower and Spree in the background",
+        "relatedToolSlug": "basketball-worldcup-fixtures"
+      },
+      {
+        "title": "Park and Ride in Berlin: Which Lots Still Have Room and Which Are Already Full",
+        "slug": "park-and-ride-berlin",
+        "path": "/post/park-and-ride-berlin",
+        "url": "https://www.berlinwalk.com/post/park-and-ride-berlin",
+        "excerpt": "Berlin has 49 park and ride lots and 4,523 free spaces, and the city's own survey puts 27 of them over 90 per cent full. Here is which lot to aim for from each side of the city, what the ride in costs, and the green sticker rule that decides how close you can legally drive.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "free-budget",
+        "topicLabel": "Free & Budget",
+        "readTime": "8 min read",
+        "publishedDate": "2026-09-07T13:56:28.379Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_718d703e5ca2492c8b4319ac3e9a9ba8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/park-and-ride-berlin-cover-wuhletal.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_718d703e5ca2492c8b4319ac3e9a9ba8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/park-and-ride-berlin-cover-wuhletal.jpg",
+        "alt": "S-Bahn and U-Bahn trains meeting at Wuhletal station in east Berlin",
+        "relatedToolSlug": "berlin-park-and-ride-map"
+      },
+      {
+        "title": "Berlin to Prague: Train, Bus, and Whether the Day Trip Works",
+        "slug": "berlin-to-prague",
+        "path": "/post/berlin-to-prague",
+        "url": "https://www.berlinwalk.com/post/berlin-to-prague",
+        "excerpt": "Berlin to Prague looks close on a map: 388 kilometres, seven direct trains a day, just under four hours. Nobody flies it, because nobody sells the flight. Here is what actually runs, what a ticket costs, the Monday engineering work that deletes most of the timetable until December, and whether the day trip is worth doing at all.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "first-day",
+        "topicLabel": "First Day in Berlin",
+        "readTime": "7 min read",
+        "publishedDate": "2026-09-07T07:49:15.092Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_bb9b5cc01dcb4062b99fa60d6e6c8477~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-comfortjet-decin.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_bb9b5cc01dcb4062b99fa60d6e6c8477~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-comfortjet-decin.jpg",
+        "alt": "A blue and white Czech Railways ComfortJet train standing at the platform at Decin, the first Czech stop on the Berlin to Prague line",
+        "relatedToolSlug": "berlin-prague-route-board"
+      },
       {
         "title": "Quiet Hours in Berlin: The Flat Rules Visitors Break Without Knowing",
         "slug": "quiet-hours-in-berlin",
@@ -77,57 +128,6 @@
         "thumb": "https://static.wixstatic.com/media/5a08a3_e5da5edfa7fd415593b28ec9b9cd6911~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-landshuter-strasse-night.jpg",
         "alt": "A lit Berlin apartment doorway glowing at night on Landshuter Strasse in Schoeneberg",
         "relatedToolSlug": "berlin-quiet-clock"
-      },
-      {
-        "title": "What Closes in Berlin in Winter: The Dates the Lakes, Pools and Boats Stop",
-        "slug": "what-closes-in-berlin-in-winter",
-        "path": "/post/what-closes-in-berlin-in-winter",
-        "url": "https://www.berlinwalk.com/post/what-closes-in-berlin-in-winter",
-        "excerpt": "What closes in Berlin in winter and exactly when: the lake and outdoor pool dates, the park gates, the weekend-only winter boats, and what opens on 1 and 23 November.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "when-to-visit",
-        "topicLabel": "Month-by-Month Berlin",
-        "readTime": "6 min read",
-        "publishedDate": "2026-09-06T19:45:59.326Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_f031656109a245e0bcb70c7214ef1e08~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-strandbad-wannsee.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_f031656109a245e0bcb70c7214ef1e08~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-strandbad-wannsee.jpg",
-        "alt": "An empty sandy beach at Strandbad Wannsee under a grey sky, with wicker beach chairs stacked along the shoreline",
-        "relatedToolSlug": "berlin-season-board"
-      },
-      {
-        "title": "Hotel or Apartment in Berlin: Where the Cost Flips and What to Check Before You Book",
-        "slug": "hotel-or-apartment-in-berlin",
-        "path": "/post/hotel-or-apartment-in-berlin",
-        "url": "https://www.berlinwalk.com/post/hotel-or-apartment-in-berlin",
-        "excerpt": "Most people settle the Berlin neighbourhood first and the type of bed second, which is the wrong way round. A hotel is priced per room, an apartment per flat with a cleaning fee charged once, and hostel beds per person per night, so the cheapest option moves with your party size and your length of stay. Here is where each one wins, the accommodation tax that applies to all three, and the registration number to look for before you pay for a Berlin flat.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "practical",
-        "topicLabel": "Practical Berlin",
-        "readTime": "7 min read",
-        "publishedDate": "2026-09-05T13:48:35.799Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_33e8970d4de941438d35180249a00a43~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-berlin-altbau-facade.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_33e8970d4de941438d35180249a00a43~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-berlin-altbau-facade.jpg",
-        "alt": "A classic Berlin Altbau facade on Templiner Strasse in Prenzlauer Berg, with tall windows, stucco detail and balconies",
-        "relatedToolSlug": "berlin-stay-cost-grid"
-      },
-      {
-        "title": "Berlin War Damage Still Visible: The Walls That Were Never Repaired",
-        "slug": "berlin-war-damage-still-visible",
-        "path": "/post/berlin-war-damage-still-visible",
-        "url": "https://www.berlinwalk.com/post/berlin-war-damage-still-visible",
-        "excerpt": "Berlin never patched most of what April 1945 did to its walls. The clearest place to start is a free, open courtyard on Museum Island, where bullet strikes sit in the colonnade stone at the height of a standing person. Here are seventeen places across the city where the marks are still there to find, how to tell what made each one, and which two need planning before you go.",
-        "category": "Berlin History",
-        "categorySlug": "berlin-history",
-        "topic": "free-budget",
-        "topicLabel": "Free & Budget",
-        "readTime": "7 min read",
-        "publishedDate": "2026-09-06T14:03:38.210Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_7998bec069d345c68e9461b70634a209~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-anhalter-bahnhof-portico.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_7998bec069d345c68e9461b70634a209~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-anhalter-bahnhof-portico.jpg",
-        "alt": "The rear of the ruined portico of the Anhalter Bahnhof in Berlin-Kreuzberg, its brick arches open to the sky with modern office towers behind",
-        "relatedToolSlug": "berlin-war-scars-map"
       },
       {
         "title": "Berlin Public Transport for Tourists: Tickets, Zones, Prices and Validation",
@@ -310,21 +310,21 @@
       "relatedToolSlug": ""
     },
     {
-      "title": "Shopping in Berlin: Where to Actually Shop (A Local Guide)",
-      "slug": "shopping-in-berlin",
-      "path": "/post/shopping-in-berlin",
-      "url": "https://www.berlinwalk.com/post/shopping-in-berlin",
-      "excerpt": "Forget the luxury-mall clichés. Where to actually shop in Berlin, from a local guide: famous streets, concept stores, vintage, flea markets, souvenirs, and the practical rules.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
+      "title": "Oktoberfest in Berlin 2026: What Is Actually On",
+      "slug": "oktoberfest-in-berlin",
+      "path": "/post/oktoberfest-in-berlin",
+      "url": "https://www.berlinwalk.com/post/oktoberfest-in-berlin",
+      "excerpt": "Berlin has several Oktoberfest-style events in 2026, but none is Munich's city-defining Wiesn. Compare confirmed dates, places, transport and the event that best fits your trip.",
+      "category": "Berlin Myths",
+      "categorySlug": "berlin-myths",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
       "readTime": "6 min read",
-      "publishedDate": "2026-06-01T10:30:41Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_5a8c23b571f44144825e3d3c6029eb9e~mv2.jpeg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-shopping-hero.jpeg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_5a8c23b571f44144825e3d3c6029eb9e~mv2.jpeg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-shopping-hero.jpeg",
-      "alt": "Woman in beige coat walks down a Berlin shopping street past clothing racks, with the TV Tower in the background.",
-      "relatedToolSlug": "berlin-shopping-areas"
+      "publishedDate": "2026-07-20T06:12:12.761Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_6fbee3dcfb5547b6a5d1ce4d0045d4bb~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-oktoberfest-in-berlin-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_6fbee3dcfb5547b6a5d1ce4d0045d4bb~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-oktoberfest-in-berlin-cover.jpg",
+      "alt": "Illuminated Prater Garten sign at dusk on Kastanienallee in Prenzlauer Berg, Berlin's oldest beer garden",
+      "relatedToolSlug": "berlin-beer-season-calendar"
     }
   ],
   "shelves": [
@@ -1632,7 +1632,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_7ff51c867eaa44b2a4944d20e5758c3b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/ber-terminal-1-exterior.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_7ff51c867eaa44b2a4944d20e5758c3b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/ber-terminal-1-exterior.jpg",
       "alt": "Terminal 1 at Berlin Brandenburg Airport photographed from the forecourt at dusk",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "ber-flight-compensation-line"
     },
     {
       "title": "Park and Ride in Berlin: Which Lots Still Have Room and Which Are Already Full",
@@ -1666,7 +1666,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_bb9b5cc01dcb4062b99fa60d6e6c8477~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-comfortjet-decin.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_bb9b5cc01dcb4062b99fa60d6e6c8477~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-comfortjet-decin.jpg",
       "alt": "A blue and white Czech Railways ComfortJet train standing at the platform at Decin, the first Czech stop on the Berlin to Prague line",
-      "relatedToolSlug": "berlin-day-trips-finder"
+      "relatedToolSlug": "berlin-prague-route-board"
     },
     {
       "title": "Quiet Hours in Berlin: The Flat Rules Visitors Break Without Knowing",
@@ -1838,7 +1838,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_7ff51c867eaa44b2a4944d20e5758c3b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/ber-terminal-1-exterior.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_7ff51c867eaa44b2a4944d20e5758c3b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/ber-terminal-1-exterior.jpg",
       "alt": "Terminal 1 at Berlin Brandenburg Airport photographed from the forecourt at dusk",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "ber-flight-compensation-line"
     },
     {
       "title": "Park and Ride in Berlin: Which Lots Still Have Room and Which Are Already Full",
@@ -1872,7 +1872,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_bb9b5cc01dcb4062b99fa60d6e6c8477~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-comfortjet-decin.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_bb9b5cc01dcb4062b99fa60d6e6c8477~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-comfortjet-decin.jpg",
       "alt": "A blue and white Czech Railways ComfortJet train standing at the platform at Decin, the first Czech stop on the Berlin to Prague line",
-      "relatedToolSlug": "berlin-day-trips-finder"
+      "relatedToolSlug": "berlin-prague-route-board"
     },
     {
       "title": "Quiet Hours in Berlin: The Flat Rules Visitors Break Without Knowing",
