@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-bw-component="quick-summary">
+<html lang="en" data-bw-component="quick-summary" data-bw-resize-pending>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -384,6 +384,13 @@
       var pilotConfig = null;
       var QUICK_SUMMARY_AUDIO_HOST = 'static.wixstatic.com';
 
+      // A remounted Wix iframe must not publish the empty heading-only card
+      // between its first paint and the asynchronous summary response.
+      function finishInitialRender() {
+        document.documentElement.removeAttribute('data-bw-resize-pending');
+        if (typeof window.__bwRequestEmbedResize === 'function') window.__bwRequestEmbedResize();
+      }
+
       function safeAudioUrl(value) {
         if (typeof value !== 'string' || !value.trim()) return '';
         try {
@@ -571,19 +578,37 @@
 
       function loadPostConfig() {
         var shardUrl = './data/' + encodeURIComponent(postSlug) + '.json' + versionSuffix();
-        return fetch(shardUrl, { cache: 'force-cache' })
+        var controller = typeof AbortController === 'function' ? new AbortController() : null;
+        var fetchOptions = { cache: 'force-cache' };
+        if (controller) fetchOptions.signal = controller.signal;
+        var deadline;
+        var request = fetch(shardUrl, fetchOptions)
           .then(function (response) {
             if (!response.ok) throw new Error('shard_not_found');
             return response.json();
           })
-          .catch(function () {
-            return fetch('./data.json' + versionSuffix(), { cache: 'force-cache' })
+          .catch(function (error) {
+            if (controller && controller.signal.aborted) throw error;
+            return fetch('./data.json' + versionSuffix(), fetchOptions)
               .then(function (response) {
                 if (!response.ok) throw new Error('aggregate_not_found');
                 return response.json();
               })
               .then(function (data) { return data[postSlug] || null; });
           });
+        var timeout = new Promise(function (_, reject) {
+          deadline = window.setTimeout(function () {
+            if (controller) controller.abort();
+            reject(new Error('summary_timeout'));
+          }, 8000);
+        });
+        return Promise.race([request, timeout]).then(function (config) {
+          window.clearTimeout(deadline);
+          return config;
+        }, function (error) {
+          window.clearTimeout(deadline);
+          throw error;
+        });
       }
 
       function signalPilotReady() {
@@ -600,11 +625,13 @@
           .catch(function () {
             if (framed) { renderSilent(); return; }
             root.innerHTML = '<div class="bw-empty">Quick summary not found for <strong>' + escapeHtml(postSlug) + '</strong>.</div>';
-          });
+          })
+          .then(finishInitialRender, finishInitialRender);
         return;
       }
 
       render();
+      finishInitialRender();
     })();
   </script>
 </body>

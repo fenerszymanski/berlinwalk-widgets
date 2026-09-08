@@ -549,15 +549,20 @@
     if (watching) state.observer.disconnect();
     try { paint(); } finally {
       state.rendering = false;
-      if (watching) requestAnimationFrame(function () {
+      if (watching) {
+        // Reconnect before yielding: Wix can insert the replacement article
+        // before the next animation frame. Our own writes happened detached.
+        state.observer.takeRecords();
         if (state.observer && Date.now() < state.until) state.observer.observe(document.documentElement, { childList: true, subtree: true });
-      });
+      }
     }
   }
   function schedule(delay) { clearTimeout(state.timer); state.timer = setTimeout(render, delay || 0); }
   function boot() {
     if (!enabled() || !postPage()) return;
-    state.until = Date.now() + 31000; loadData(); [0, 160, 650, 1600, 4000, 9000, 16000, 30000].forEach(function (delay) { setTimeout(render, delay); });
+    // The first complete native header must be enhanced in this task, not a
+    // later timer after it has already painted. Hydration remains observed.
+    state.until = Date.now() + 31000; loadData(); render(); [160, 650, 1600, 4000, 9000, 16000, 30000].forEach(function (delay) { setTimeout(render, delay); });
     if (state.observer) state.observer.disconnect();
     // A hydration pass that removes the hero must be repaired in the same
     // mutation microtask, before the browser paints. The trailing debounce

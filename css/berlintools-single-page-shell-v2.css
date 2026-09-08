@@ -256,6 +256,35 @@ html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozco5et {
   z-index: 2 !important;
 }
 
+/* Keep the entry row's space even when Wix replaces its host and the shell
+ * has not reattached the row yet. :has swaps the reserve in the same layout
+ * pass as the real row; no measured height is written to the Wix host. */
+html.bw-tools-detail.bw-tools-shell-v2[data-bw-tools-slug="whats-open-in-berlin-today"] body #comp-mozco5et:not(:has(> [data-bw-shell-v2-tool-entry]))::before {
+  content: '';
+  display: block;
+  height: 65px;
+}
+
+/* The measured default state of this one high-traffic tool. Accepted inline
+ * child measurements still win, including legitimate interactive shrinking.
+ * Never pin the managed #comp-mozco5et root: that can remount Wix iframes. */
+html.bw-tools-detail.bw-tools-shell-v2[data-bw-tools-slug="whats-open-in-berlin-today"] body .comp-mozc935g3-container {
+  grid-template-rows: minmax(44px, auto) auto auto auto auto !important;
+}
+html.bw-tools-detail.bw-tools-shell-v2[data-bw-tools-slug="whats-open-in-berlin-today"] {
+  --bw-today-initial-height: clamp(982px, calc(1054px - 5.27vw), 1000px);
+}
+html.bw-tools-detail.bw-tools-shell-v2[data-bw-tools-slug="whats-open-in-berlin-today"] body #comp-mozco5et iframe {
+  height: var(--bw-today-initial-height) !important;
+}
+
+/* The HTML component itself mounts late. Reserve its GRID TRACK, not the
+ * managed component, until this particular frame sends a valid measurement.
+ * A remount loses the marker and automatically regains the reserve. */
+html.bw-tools-detail.bw-tools-shell-v2[data-bw-tools-slug="whats-open-in-berlin-today"] body .comp-mozc935g3-container:not(:has(#comp-mozco5et iframe[data-bw-shell-sized])) {
+  grid-template-rows: minmax(44px, auto) auto auto auto minmax(calc(var(--bw-today-initial-height) + 68px), auto) !important;
+}
+
 html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozco5et iframe {
   background: var(--bw-shell-paper) !important;
   border: 0 !important;
@@ -1488,6 +1517,17 @@ html.bw-tools-detail.bw-tools-shell-v2 body .bw-tour-cta-row .bw-tour-cta-link:f
     padding: 13px 16px 22px !important;
   }
 
+  html.bw-tools-detail.bw-tools-shell-v2[data-bw-tools-slug="whats-open-in-berlin-today"] body #comp-mozco5et:not(:has(> [data-bw-shell-v2-tool-entry]))::before { height: 62px; }
+  html.bw-tools-detail.bw-tools-shell-v2[data-bw-tools-slug="whats-open-in-berlin-today"] body .comp-mozc935g3-container {
+    grid-template-rows: minmax(40px, auto) auto auto auto auto !important;
+  }
+  html.bw-tools-detail.bw-tools-shell-v2[data-bw-tools-slug="whats-open-in-berlin-today"] {
+    --bw-today-initial-height: clamp(1354px, calc(1905px - 92vw), 1547px);
+  }
+  html.bw-tools-detail.bw-tools-shell-v2[data-bw-tools-slug="whats-open-in-berlin-today"] body .comp-mozc935g3-container:not(:has(#comp-mozco5et iframe[data-bw-shell-sized])) {
+    grid-template-rows: minmax(40px, auto) auto auto minmax(calc(var(--bw-today-initial-height) + 84px), auto) auto !important;
+  }
+
   /* On mobile this row follows the dynamic widget and sits on cream, so it
    * needs its own readable light-surface treatment instead of hero white. */
   html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozcllqt {
@@ -1563,6 +1603,16 @@ html.bw-tools-detail.bw-tools-shell-v2 body .bw-tour-cta-row .bw-tour-cta-link:f
     overflow-wrap: anywhere !important;
     text-overflow: clip !important;
     white-space: normal !important;
+  }
+
+  /* Keep the restored navigation above Wix's decorative background layer;
+   * a static mobile container otherwise lets that layer consume link taps. */
+  html.bw-tools-detail.bw-tools-shell-v2[data-bw-tools-slug="whats-open-in-berlin-today"] body #comp-mozmt2at .comp-mozmt2at-container {
+    position: relative !important;
+    z-index: 3 !important;
+  }
+  html.bw-tools-detail.bw-tools-shell-v2[data-bw-tools-slug="whats-open-in-berlin-today"] body [data-bw-shell-v2-toc] {
+    pointer-events: auto !important;
   }
 
   /* Keep the rail's tour note desktop-only. The native full-width band below
@@ -1747,6 +1797,20 @@ html.bw-tools-detail.bw-tools-shell-v2 body .bw-tour-cta-row .bw-tour-cta-link:f
     margin-left: 16px !important;
     margin-right: 16px !important;
     width: calc(100% - 32px) !important;
+  }
+}
+
+/* Initial estimates follow the widget's single/two-column breakpoint at an
+ * iframe width of 600px (the host adds 34px). Real child reports always win.
+ * Avoid using the 390px phone height on narrow phones or tablets. */
+@media (max-width:389px) {
+  html.bw-tools-detail.bw-tools-shell-v2[data-bw-tools-slug="whats-open-in-berlin-today"] {
+    --bw-today-initial-height: clamp(1547px, calc(2583px - 265vw), 1733px);
+  }
+}
+@media (min-width:635px) and (max-width:899px) {
+  html.bw-tools-detail.bw-tools-shell-v2[data-bw-tools-slug="whats-open-in-berlin-today"] {
+    --bw-today-initial-height: clamp(1036px, calc(1505px - 54.4vw), 1160px);
   }
 }
 

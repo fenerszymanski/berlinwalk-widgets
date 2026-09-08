@@ -492,7 +492,30 @@
       if (introSection) introSection.removeAttribute('data-bw-shell-v2-toc-host');
     }
     bodySection.removeAttribute('data-bw-shell-v2-no-toc');
+    if (state.slug === 'whats-open-in-berlin-today') state.stableToc = toc;
     return true;
+  }
+
+  // Restore only the already-built navigation when Wix replaces the intro.
+  // This small write is separate from the full, timer-bounded decorator.
+  // Reusing the same nav preserves its footprint during the hydration frame.
+  function repairKnownToc() {
+    var toc = state.stableToc;
+    if (!toc || toc.isConnected || state.slug !== 'whats-open-in-berlin-today') return;
+    var section = byId('comp-mozmt2at');
+    var container = section && section.querySelector('.comp-mozmt2at-container');
+    var intro = container && container.querySelector('#comp-mozmtefi');
+    if (!intro || container.querySelector('[data-bw-shell-v2-toc]')) return;
+    var observer = state.mutationObserver;
+    if (observer) observer.disconnect();
+    try {
+      container.insertBefore(toc, intro);
+      section.setAttribute('data-bw-shell-v2-toc-host', '1');
+      var body = byId('comp-mozn18up');
+      if (body) body.setAttribute('data-bw-shell-v2-body-follow-rail', '1');
+    } finally {
+      if (observer) observer.observe(document.body, state.mutationObserverOptions);
+    }
   }
 
   function decorateAdvice(root) {
@@ -1218,6 +1241,7 @@
       var observer = new MutationObserver(function (records) {
         if (state.decorating || !records || !records.length) return;
         if (!shellMutationRelevant(records)) return;
+        repairKnownToc();
         /* A later Wix remount is a new hydration cycle. The old bounded
          * budget must not make recovery impossible after it was exhausted. */
         if (state.attempt >= 40) state.attempt = 0;

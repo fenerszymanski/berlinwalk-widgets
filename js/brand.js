@@ -77,6 +77,10 @@
   }
 
   function reportNow() {
+    // Opt-in only: async widgets retain their parent's last valid geometry
+    // until content (or their explicit empty/error state) has been rendered.
+    // All existing widgets without the marker retain their resize behavior.
+    if (document.documentElement.hasAttribute('data-bw-resize-pending')) return;
     var h = contentHeight();
     // Skip tiny drift (sub-pixel rendering, font hinting) to avoid loops
     if (h > 0 && Math.abs(h - lastReported) > 2) {

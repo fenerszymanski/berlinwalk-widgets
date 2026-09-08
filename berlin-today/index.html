@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-bw-resize-pending>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,6 +7,20 @@
   <meta name="description" content="Live daily check: what's open and closed in Berlin today, public holidays, Sunday rules, and museum closing days — written by a local Berlin guide.">
   <link rel="stylesheet" href="../css/brand.css">
   <script defer src="../js/brand.js"></script>
+  <script>
+    // The first narrow-phone measurement must include the real font metrics
+    // and the tool-page surface styles. Keep later responsive resizing live.
+    document.addEventListener('DOMContentLoaded', function () {
+      void document.body.offsetHeight;
+      var fonts = document.fonts ? document.fonts.ready : Promise.resolve();
+      Promise.race([fonts, new Promise(function (resolve) { setTimeout(resolve, 1500); })]).then(function () {
+        setTimeout(function () {
+          document.documentElement.removeAttribute('data-bw-resize-pending');
+          if (typeof window.__bwRequestEmbedResize === 'function') window.__bwRequestEmbedResize();
+        }, 120);
+      });
+    }, { once: true });
+  </script>
 </head>
 <body>
 <div id="bw-berlin-today">

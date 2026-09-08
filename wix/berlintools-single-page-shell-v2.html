@@ -34,6 +34,22 @@
   (function () {
     var path = String(window.location.pathname || '').toLowerCase().replace(/\/{2,}/g, '/');
     if (!/^\/tools\/[^/]+\/?$/.test(path)) return;
+    // Native component selectors can now use the final shell before its JS
+    // downloads. Do not hide the page while Wix hydrates.
+    var slug = decodeURIComponent(path.split('/')[2]);
+    var html = document.documentElement;
+    if (slug === 'whats-open-in-berlin-today') {
+      html.classList.add('bw-tools-detail', 'bw-tools-shell-v2');
+      html.setAttribute('data-bw-tools-slug', slug);
+      html.setAttribute('data-bw-host-repair', 'pilot');
+      html.classList.add('bw-host-repair-pilot');
+      window.addEventListener('message', function (event) {
+        var data = event.data;
+        if (event.origin !== 'https://fenerszymanski.github.io' || !data || data.type !== 'bw-resize' || typeof data.height !== 'number' || !isFinite(data.height) || data.height <= 0 || data.height > 30000) return;
+        var frame = document.querySelector('#comp-mozco5et iframe');
+        if (frame && frame.contentWindow === event.source) frame.setAttribute('data-bw-shell-sized', '1');
+      });
+    }
     var commit = '__COMMIT_SHA__';
     var base = 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@' + commit + '/';
     var cssHref = base + 'css/berlintools-single-page-shell-v2.css?commit=' + commit;
@@ -43,6 +59,8 @@
     if (!document.querySelector('link[data-bw-shell-v2-css]')) {
       var link = document.createElement('link');
       link.rel = 'stylesheet';
+      // A dynamically inserted stylesheet is otherwise not render-blocking.
+      if (slug === 'whats-open-in-berlin-today') link.setAttribute('blocking', 'render');
       link.href = cssHref;
       link.setAttribute('data-bw-shell-v2-css', commit);
       document.head.appendChild(link);
