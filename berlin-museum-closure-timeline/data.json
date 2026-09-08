@@ -1,0 +1,176 @@
+{
+  "checkedOn": "8 September 2026",
+  "nowLabel": "September 2026",
+  "nowValue": 2026.69,
+  "axis": {
+    "from": 2026.0,
+    "to": 2038.0
+  },
+  "sources": [
+    "Staatliche Museen zu Berlin, Pergamonmuseum renovation page, read 8 September 2026",
+    "Staatliche Museen zu Berlin, opening hours overview, read 8 September 2026",
+    "Museum Berggruen profile page, read 8 September 2026",
+    "Deutsches Historisches Museum, building works FAQ, read 8 September 2026",
+    "Komische Oper Berlin renovation page, read 8 September 2026",
+    "go~mus ticket API behind shop.smb.museum, read 8 September 2026"
+  ],
+  "rows": [
+    {
+      "id": "pergamon-altar",
+      "want": "The Pergamon Altar",
+      "where": "Antikensammlung, Pergamonmuseum north-central building",
+      "closedSince": "October 2023 for the public",
+      "returns": 2027.42,
+      "returnLabel": "4 June 2027",
+      "certainty": "dated",
+      "detail": "The altar hall and the hall of hellenistic architecture are in the part of the building that reopens first. The house has published a fixed date and is running a public countdown to it.",
+      "instead": "Das Panorama, the rotunda beside the building, pairs Yadegar Asisi's 360-degree reconstruction of the ancient city with masterpieces of the Antikensammlung. Open Tuesday to Sunday, 14 euro, 7 reduced, free under 18.",
+      "insteadShort": "Das Panorama, 14 euro",
+      "short": "The Pergamon Altar"
+    },
+    {
+      "id": "islamic-art",
+      "want": "The Mschatta façade, the Aleppo Room, the Alhambra dome",
+      "where": "Museum für Islamische Kunst, Pergamonmuseum north wing",
+      "closedSince": "2013 in stages, fully since October 2023",
+      "returns": 2027.42,
+      "returnLabel": "4 June 2027",
+      "certainty": "dated",
+      "detail": "The whole collection comes back on the same date, in 25 new rooms across two floors of the north wing. This is the single largest thing that reopens in 2027.",
+      "instead": "There is no interim display of this collection anywhere in Berlin. The Humboldt Forum's Asian and African galleries are the nearest thing in scale and are open every day except Tuesday.",
+      "insteadShort": "Humboldt Forum, closed Tuesdays",
+      "short": "Islamic art: Mschatta, Aleppo"
+    },
+    {
+      "id": "ishtar-gate",
+      "want": "The Ishtar Gate and the Processional Way",
+      "where": "Vorderasiatisches Museum, Pergamonmuseum south wing",
+      "closedSince": "23 October 2023",
+      "returns": 2037.0,
+      "returnLabel": "about 2037",
+      "certainty": "approximate",
+      "detail": "This is the fact most trip plans get wrong. The south wing stays shut after the 2027 reopening and the museum expects it back around 2037. From June 2027 the collection shows only a selection of highlights in one hall of the north wing, and the house has not published which objects those are.",
+      "instead": "Nothing in Berlin replaces it. If ancient monumental architecture is why you are coming, the Neues Museum's Egyptian and prehistory floors are the closest equivalent and they are open now.",
+      "insteadShort": "Neues Museum, open now",
+      "short": "Ishtar Gate, Processional Way"
+    },
+    {
+      "id": "roman-hall",
+      "want": "The hall of Roman architecture",
+      "where": "Antikensammlung, Pergamonmuseum south wing",
+      "closedSince": "23 October 2023",
+      "returns": 2037.0,
+      "returnLabel": "about 2037",
+      "certainty": "approximate",
+      "detail": "Same wing, same second construction phase, same long wait. The market gate of Miletus sits inside it.",
+      "instead": "The Altes Museum, two minutes away on the Lustgarten, holds the rest of the Antikensammlung and is open Tuesday to Sunday for 14 euro, 7 reduced.",
+      "insteadShort": "Altes Museum, 14 euro",
+      "short": "Hall of Roman architecture"
+    },
+    {
+      "id": "berggruen",
+      "want": "Berggruen's Picasso, Klee, Matisse and Giacometti",
+      "where": "Museum Berggruen, Stüler building, Charlottenburg",
+      "closedSince": "5 September 2022",
+      "returns": null,
+      "returnLabel": "no date published",
+      "certainty": "none",
+      "detail": "Four years shut for a full overhaul of the Stueler building, with the collection travelling instead. It was a guest of the Museum of Fine Arts in Houston until September 2026.",
+      "instead": "The Neue Nationalgalerie at the Kulturforum holds the rest of the classical modern collection and is open, 20 euro for everything or 14 euro for the collection alone.",
+      "insteadShort": "Neue Nationalgalerie, from 14 euro",
+      "short": "Berggruen: Picasso and Klee"
+    },
+    {
+      "id": "dhm-permanent",
+      "want": "The German history overview exhibition",
+      "where": "Deutsches Historisches Museum, Zeughaus, Unter den Linden",
+      "closedSince": "closed for building work",
+      "returns": null,
+      "returnLabel": "no date published",
+      "certainty": "none",
+      "detail": "The museum says plainly that no reliable date can be given yet. Strip-out work runs into mid-2027, and only after that can the builders commit to a schedule. Treat this as gone for the rest of the decade.",
+      "instead": "The Pei building next door stays open every day from 10 to 18 with changing exhibitions. Single ticket 7 euro, all exhibitions 10 euro, free under 18. It is one of the few central museums that opens on a Monday.",
+      "insteadShort": "DHM Pei building, 7 euro, open daily",
+      "short": "German history overview"
+    },
+    {
+      "id": "komische-oper",
+      "want": "A night at the Komische Oper",
+      "where": "Behrenstraße, a block behind Unter den Linden",
+      "closedSince": "summer 2023",
+      "returns": null,
+      "returnLabel": "no date published",
+      "certainty": "none",
+      "detail": "The building is being rebuilt and extended. The company itself did not stop, it moved.",
+      "instead": "The company plays its full season at the Schillertheater, Bismarckstraße 110 in Charlottenburg, seven U-Bahn stops west of Mitte on the U2.",
+      "insteadShort": "Schillertheater, Charlottenburg",
+      "short": "Komische Oper, own house"
+    }
+  ],
+  "openNow": [
+    {
+      "name": "Neues Museum",
+      "note": "Nefertiti, the Egyptian collection, prehistory"
+    },
+    {
+      "name": "Altes Museum",
+      "note": "the rest of the Antikensammlung, 14 euro"
+    },
+    {
+      "name": "Bode-Museum",
+      "note": "sculpture and the coin cabinet, 14 euro"
+    },
+    {
+      "name": "Alte Nationalgalerie",
+      "note": "19th century painting"
+    },
+    {
+      "name": "James-Simon-Galerie",
+      "note": "the entrance building, open right through the works"
+    },
+    {
+      "name": "Das Panorama",
+      "note": "the Pergamon substitute, 14 euro"
+    },
+    {
+      "name": "Humboldt Forum",
+      "note": "open daily except Tuesday"
+    },
+    {
+      "name": "DHM Pei building",
+      "note": "open every day, 10 to 18"
+    }
+  ],
+  "oddDays": [
+    {
+      "name": "Humboldt Forum",
+      "shut": "closed Tuesday, open Monday",
+      "why": "the opposite of every other museum on this list"
+    },
+    {
+      "name": "Kunstgewerbemuseum",
+      "shut": "closed Monday and Tuesday",
+      "why": "Kulturforum"
+    },
+    {
+      "name": "Sammlung Scharf-Gerstenberg",
+      "shut": "closed Monday and Tuesday",
+      "why": "Charlottenburg"
+    },
+    {
+      "name": "Museum Europäischer Kulturen",
+      "shut": "closed Monday and Tuesday",
+      "why": "Dahlem"
+    },
+    {
+      "name": "Friedrichswerdersche Kirche",
+      "shut": "closed Monday and Tuesday",
+      "why": "a five minute walk from Museum Island"
+    },
+    {
+      "name": "Schloss Köpenick",
+      "shut": "Thursday to Sunday from October",
+      "why": "the winter week is shorter than the summer one"
+    }
+  ]
+}

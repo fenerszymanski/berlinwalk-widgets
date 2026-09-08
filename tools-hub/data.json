@@ -8425,6 +8425,31 @@
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_7d5ba809917040588de4f876f4083a88~mv2.png",
       "cmsItemId": "638e5336-aa4a-4ff3-939f-77fd522e38bd"
+    },
+    {
+      "slug": "berlin-museum-closure-timeline",
+      "title": "Berlin Museum Closure Timeline",
+      "lead": "Which Berlin museums are shut for renovation, when each collection actually comes back, and what is worth doing instead this week. Pick the thing you came to see and read its return date off a real timeline that runs from today to 2038.",
+      "category": "Discovery",
+      "hubCategory": "Essentials",
+      "type": "Planner",
+      "tags": [
+        "berlin museums closed",
+        "pergamon museum closed",
+        "when does the pergamon museum reopen",
+        "museum berggruen closed",
+        "deutsches historisches museum zeughaus",
+        "ishtar gate berlin"
+      ],
+      "aliases": [
+        "berlin museum renovation",
+        "is the pergamon museum open",
+        "which berlin museums are closed"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-museum-closure-timeline/",
+      "embedHeight": 1260,
+      "image": "https://static.wixstatic.com/media/5a08a3_3473a33c681a4ad882379c7a5a9571e1~mv2.png",
+      "iconStatus": "live-wix-media"
     }
   ],
   "hubCategories": [

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Museum Closure Timeline</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --muted: #5a665b;
+    --line: rgba(27, 94, 32, .18);
+    --rust: #A6402B;
+    --sand: #C8A65B;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+  }
+  .mct { max-width: 760px; margin: 0 auto; padding: 14px 12px 14px; }
+  .mct-head h2 { font-size: 1.06rem; margin: 0 0 3px; color: var(--green); }
+  .mct-head p { margin: 0; font-size: .78rem; color: var(--muted); line-height: 1.5; }
+
+  .mct-pick {
+    display: flex; max-width: 100%; align-items: center; gap: 9px; flex-wrap: wrap;
+    margin: 12px 0 10px; padding: 9px 11px;
+    background: #fff; border: 1px solid var(--line); border-radius: 10px;
+  }
+  .mct-pick label { font-size: .74rem; font-weight: 700; color: var(--deep); }
+  .mct-pick select {
+    flex: 1 1 240px; min-width: 0; max-width: 100%; width: 100%;
+    font-family: inherit; font-size: .8rem; font-weight: 600; color: var(--deep);
+    padding: 7px 9px; border: 1px solid var(--green); border-radius: 8px; background: #fff;
+  }
+
+  .mct-chart { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 8px 6px 4px; }
+  .mct-chart svg { display: block; width: 100%; height: auto; }
+
+  .mct-legend { display: flex; flex-wrap: wrap; gap: 7px 14px; margin: 9px 4px 0; font-size: .68rem; color: var(--muted); }
+  .mct-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .mct-key { width: 16px; height: 8px; border-radius: 2px; display: inline-block; }
+
+  .mct-detail {
+    margin-top: 14px; padding: 13px 14px; border-radius: 10px;
+    background: var(--deep); color: #fff;
+  }
+  .mct-detail-top { display: flex; flex-wrap: wrap; gap: 10px 20px; align-items: baseline; }
+  .mct-cell .k { display: block; font-size: .63rem; text-transform: uppercase; letter-spacing: .06em; color: rgba(255,255,255,.7); }
+  .mct-cell .v { display: block; font-size: 1.02rem; font-weight: 700; line-height: 1.25; }
+  .mct-cell .v.wide { font-size: .88rem; }
+  .mct-detail .why { margin: 10px 0 0; font-size: .8rem; line-height: 1.55; color: rgba(255,255,255,.93); }
+  .mct-instead {
+    margin-top: 11px; padding: 10px 11px; border-radius: 8px;
+    background: rgba(255,255,255,.09); border-left: 3px solid var(--yellow);
+    font-size: .79rem; line-height: 1.55;
+  }
+  .mct-instead b { color: var(--yellow); display: block; font-size: .63rem; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px; }
+
+  .mct-sub { margin: 18px 0 7px; font-size: .72rem; font-weight: 700; color: var(--deep); text-transform: uppercase; letter-spacing: .05em; }
+  .mct-open { display: flex; flex-wrap: wrap; gap: 6px; }
+  .mct-open li {
+    list-style: none; background: #fff; border: 1px solid var(--line); border-radius: 9px;
+    padding: 6px 9px; font-size: .74rem; line-height: 1.35;
+  }
+  .mct-open li b { display: block; color: var(--green); font-size: .77rem; }
+  .mct-open li span { color: var(--muted); font-size: .68rem; }
+  .mct-open { padding: 0; margin: 0; }
+
+  .mct-odd { margin: 0; padding: 0; }
+  .mct-odd li {
+    list-style: none; display: flex; flex-wrap: wrap; gap: 3px 10px; align-items: baseline;
+    padding: 7px 2px; border-top: 1px solid var(--line); font-size: .77rem;
+  }
+  .mct-odd li:first-child { border-top: 0; }
+  .mct-odd .n { font-weight: 700; color: var(--deep); }
+  .mct-odd .s { color: var(--rust); font-weight: 700; font-size: .74rem; }
+  .mct-odd .w { color: var(--muted); font-size: .71rem; }
+
+  .mct-foot { margin-top: 13px; font-size: .67rem; color: var(--muted); line-height: 1.5; }
+
+  @media (max-width: 430px) {
+    .mct { padding: 12px 10px; }
+    .mct-pick { flex-direction: column; align-items: stretch; gap: 6px; }
+    .mct-pick select { flex: 0 1 auto; width: 100%; max-width: 100%; }
+    .mct-detail-top { gap: 8px 14px; }
+  }
+</style>
+</head>
+<body>
+<div class="mct">
+  <div class="mct-head">
+    <h2>What is shut in Berlin, and until when</h2>
+    <p>Every bar is a collection you cannot walk into today. The bar ends where the museum has published a reopening date. Where there is no date, the bar runs off the edge.</p>
+  </div>
+
+  <div class="mct-pick">
+    <label for="mct-select">What did you come to see?</label>
+    <select id="mct-select" aria-describedby="mct-detail"></select>
+  </div>
+
+  <div class="mct-chart">
+    <svg id="mct-svg" viewBox="0 0 720 300" role="img" aria-label="Timeline of Berlin museum closures from 2026 to 2038"></svg>
+  </div>
+
+  <div class="mct-legend">
+    <span><i class="mct-key" style="background:#A6402B"></i>closed, reopening date published</span>
+    <span><i class="mct-key" style="background:#C8A65B"></i>closed, date approximate</span>
+    <span><i class="mct-key" style="background:#8d9a8d"></i>closed, no date published</span>
+  </div>
+
+  <div class="mct-detail" id="mct-detail" aria-live="polite"></div>
+
+  <div class="mct-sub">Open right now, same city, same week</div>
+  <ul class="mct-open" id="mct-open"></ul>
+
+  <div class="mct-sub">And the closing days that catch people out</div>
+  <ul class="mct-odd" id="mct-odd"></ul>
+
+  <p class="mct-foot" id="mct-foot"></p>
+</div>
+
+<script>
+(function () {
+  var DATA = null;
+  var svg = document.getElementById('mct-svg');
+  var sel = document.getElementById('mct-select');
+  var detail = document.getElementById('mct-detail');
+
+  var W = 720, PADL = 208, PADR = 26, PADT = 30, ROWH = 30, PADB = 34;
+  var COLOR = { dated: '#A6402B', approximate: '#C8A65B', none: '#8d9a8d' };
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+
+  function draw(activeId) {
+    var rows = DATA.rows;
+    var a0 = DATA.axis.from, a1 = DATA.axis.to;
+    var H = PADT + rows.length * ROWH + PADB;
+    var innerW = W - PADL - PADR;
+    var x = function (year) { return PADL + (Math.min(Math.max(year, a0), a1) - a0) / (a1 - a0) * innerW; };
+    var parts = [];
+
+    parts.push('<defs><linearGradient id="mctFade" x1="0" x2="1">'
+      + '<stop offset="0" stop-color="#8d9a8d" stop-opacity="0.95"/>'
+      + '<stop offset="1" stop-color="#8d9a8d" stop-opacity="0.12"/></linearGradient></defs>');
+
+    for (var y = Math.ceil(a0); y <= a1; y += 2) {
+      var gx = x(y);
+      parts.push('<line x1="' + gx.toFixed(1) + '" y1="' + (PADT - 12) + '" x2="' + gx.toFixed(1) + '" y2="' + (PADT + rows.length * ROWH + 4) + '" stroke="rgba(27,94,32,.13)" stroke-width="1"/>');
+      parts.push('<text x="' + gx.toFixed(1) + '" y="' + (PADT + rows.length * ROWH + 20) + '" font-size="11" fill="#5a665b" text-anchor="middle">' + y + '</text>');
+    }
+
+    var nx = x(DATA.nowValue);
+    parts.push('<line x1="' + nx.toFixed(1) + '" y1="' + (PADT - 20) + '" x2="' + nx.toFixed(1) + '" y2="' + (PADT + rows.length * ROWH + 4) + '" stroke="#1B5E20" stroke-width="2"/>');
+    parts.push('<text x="' + (nx + 5).toFixed(1) + '" y="' + (PADT - 12) + '" font-size="11" font-weight="700" fill="#1B5E20">today</text>');
+
+    rows.forEach(function (r, i) {
+      var top = PADT + i * ROWH;
+      var cy = top + ROWH / 2;
+      var active = r.id === activeId;
+      var end = r.returns === null ? a1 : r.returns;
+      var x0 = nx, x1 = x(end);
+      var fill = r.returns === null ? 'url(#mctFade)' : COLOR[r.certainty];
+
+      if (active) {
+        parts.push('<rect x="4" y="' + (top + 1) + '" width="' + (W - 8) + '" height="' + (ROWH - 2) + '" rx="6" fill="rgba(124,179,66,.16)"/>');
+      }
+      parts.push('<text x="' + (PADL - 10) + '" y="' + (cy + 4) + '" font-size="11.5" text-anchor="end" fill="' + (active ? '#123D18' : '#41503f') + '" font-weight="' + (active ? '700' : '500') + '">' + esc(r.short || r.want) + '</text>');
+      parts.push('<rect x="' + x0.toFixed(1) + '" y="' + (cy - 7) + '" width="' + Math.max(3, x1 - x0).toFixed(1) + '" height="14" rx="4" fill="' + fill + '" opacity="' + (active ? '1' : '.72') + '"/>');
+
+      if (r.returns !== null) {
+        parts.push('<circle cx="' + x1.toFixed(1) + '" cy="' + cy + '" r="4.5" fill="#fff" stroke="#1B5E20" stroke-width="2"/>');
+        var labW = r.returnLabel.length * 5.8 + 12;
+        var inside = x1 + labW > W - 4;
+        parts.push('<text x="' + (inside ? (x1 - 9) : (x1 + 9)).toFixed(1) + '" y="' + (cy + 4) + '" font-size="10.5" fill="' + (inside ? '#fff' : '#123D18') + '" text-anchor="' + (inside ? 'end' : 'start') + '" font-weight="700">' + esc(r.returnLabel) + '</text>');
+      } else {
+        parts.push('<text x="' + (x1 - 6).toFixed(1) + '" y="' + (cy + 4) + '" font-size="10.5" fill="#5a665b" text-anchor="end" font-style="italic">no date</text>');
+      }
+    });
+
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    svg.innerHTML = parts.join('');
+  }
+
+  function renderDetail(r) {
+    var back = r.returns === null
+      ? 'Not announced'
+      : (r.certainty === 'approximate' ? 'About ' + r.returnLabel.replace('about ', '') : r.returnLabel);
+    detail.innerHTML =
+      '<div class="mct-detail-top">'
+      + '<div class="mct-cell"><span class="k">You wanted</span><span class="v wide">' + esc(r.want) + '</span></div>'
+      + '<div class="mct-cell"><span class="k">Back on show</span><span class="v">' + esc(back) + '</span></div>'
+      + '</div>'
+      + '<p class="why"><b style="color:#FFE600">' + esc(r.where) + '.</b> ' + esc(r.detail) + '</p>'
+      + '<div class="mct-instead"><b>Instead, this week</b>' + esc(r.instead) + '</div>';
+  }
+
+  function pick(id) {
+    var r = null;
+    for (var i = 0; i < DATA.rows.length; i++) { if (DATA.rows[i].id === id) r = DATA.rows[i]; }
+    if (!r) r = DATA.rows[0];
+    draw(r.id);
+    renderDetail(r);
+  }
+
+  function boot(d) {
+    DATA = d;
+    var opts = '';
+    d.rows.forEach(function (r) { opts += '<option value="' + esc(r.id) + '">' + esc(r.want) + '</option>'; });
+    sel.innerHTML = opts;
+
+    var open = '';
+    d.openNow.forEach(function (o) { open += '<li><b>' + esc(o.name) + '</b><span>' + esc(o.note) + '</span></li>'; });
+    document.getElementById('mct-open').innerHTML = open;
+
+    var odd = '';
+    d.oddDays.forEach(function (o) { odd += '<li><span class="n">' + esc(o.name) + '</span><span class="s">' + esc(o.shut) + '</span><span class="w">' + esc(o.why) + '</span></li>'; });
+    document.getElementById('mct-odd').innerHTML = odd;
+
+    document.getElementById('mct-foot').textContent =
+      'Opening days, reopening dates and prices read from the museums’ own pages and the state museums’ ticket system on ' + d.checkedOn + '. Building schedules move, so check the house before you travel.';
+
+    sel.addEventListener('change', function () { pick(sel.value); });
+    pick(d.rows[0].id);
+  }
+
+  fetch('data.json', { cache: 'no-store' })
+    .then(function (r) { return r.json(); })
+    .then(boot)
+    .catch(function () {
+      detail.innerHTML = '<p class="why">The closure data could not be loaded. Please reload the page.</p>';
+    });
+})();
+</script>
+<script defer src="../js/brand.js"></script>
+</body>
+</html>
