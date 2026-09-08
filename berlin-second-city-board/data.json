@@ -1,0 +1,193 @@
+{
+ "checkedOn": "8 September 2026",
+ "origin": "Berlin Hauptbahnhof",
+ "cities": [
+  {
+   "key": "Wittenberg",
+   "name": "Wittenberg",
+   "lat": 51.867534,
+   "lon": 12.661999,
+   "minutes": 40,
+   "label": "40 min",
+   "nights": 0,
+   "why": "Luther door, one square, back for dinner",
+   "direct": true
+  },
+  {
+   "key": "Leipzig",
+   "name": "Leipzig",
+   "lat": 51.34482,
+   "lon": 12.381319,
+   "minutes": 75,
+   "label": "1h15",
+   "nights": 0,
+   "why": "Bach, 1989 and the best station hall in Germany",
+   "direct": true
+  },
+  {
+   "key": "Hanover",
+   "name": "Hanover",
+   "lat": 52.377249,
+   "lon": 9.741403,
+   "minutes": 95,
+   "label": "1h35",
+   "nights": 0,
+   "why": "Herrenhausen gardens, little else you cannot skip",
+   "direct": true
+  },
+  {
+   "key": "Erfurt",
+   "name": "Erfurt",
+   "lat": 50.97255,
+   "lon": 11.038493,
+   "minutes": 95,
+   "label": "1h35",
+   "nights": 1,
+   "why": "Intact medieval centre, Weimar half an hour further",
+   "direct": true
+  },
+  {
+   "key": "Dresden",
+   "name": "Dresden",
+   "lat": 51.040724,
+   "lon": 13.732191,
+   "minutes": 100,
+   "label": "1h40",
+   "nights": 1,
+   "why": "The Frauenkirche needs an evening, not a lunch break",
+   "direct": true
+  },
+  {
+   "key": "Hamburg",
+   "name": "Hamburg",
+   "lat": 53.553506,
+   "lon": 10.006261,
+   "minutes": 110,
+   "label": "1h50",
+   "nights": 2,
+   "why": "Harbour, Speicherstadt and a completely different Germany",
+   "direct": true
+  },
+  {
+   "key": "Schwerin",
+   "name": "Schwerin",
+   "lat": 53.635263,
+   "lon": 11.407518,
+   "minutes": 110,
+   "label": "1h50",
+   "nights": 1,
+   "why": "One lake castle, and it earns the detour",
+   "direct": false
+  },
+  {
+   "key": "Szczecin",
+   "name": "Szczecin",
+   "lat": 53.418155,
+   "lon": 14.549203,
+   "minutes": 150,
+   "label": "2h30",
+   "nights": 0,
+   "why": "Poland on a regional ticket, once the bus bridge is done",
+   "direct": false
+  },
+  {
+   "key": "Rostock",
+   "name": "Rostock",
+   "lat": 54.078296,
+   "lon": 12.130988,
+   "minutes": 140,
+   "label": "2h20",
+   "nights": 2,
+   "why": "Brick gothic plus Warnemünde beach in one base",
+   "direct": false
+  },
+  {
+   "key": "Stralsund",
+   "name": "Stralsund",
+   "lat": 54.308761,
+   "lon": 13.077687,
+   "minutes": 155,
+   "label": "2h35",
+   "nights": 2,
+   "why": "UNESCO old town and the gateway to Rügen",
+   "direct": true
+  },
+  {
+   "key": "Poznan",
+   "name": "Poznań",
+   "lat": 52.400846,
+   "lon": 16.910795,
+   "minutes": 170,
+   "label": "2h50",
+   "nights": 2,
+   "why": "Renaissance square, real city, almost no crowds",
+   "direct": false
+  },
+  {
+   "key": "Goerlitz",
+   "name": "Görlitz",
+   "lat": 51.146815,
+   "lon": 14.978735,
+   "minutes": 175,
+   "label": "2h55",
+   "nights": 2,
+   "why": "Undamaged old town on the Polish border",
+   "direct": false
+  },
+  {
+   "key": "Frankfurt",
+   "name": "Frankfurt",
+   "lat": 50.107212,
+   "lon": 8.663884,
+   "minutes": 230,
+   "label": "3h50",
+   "nights": 1,
+   "why": "A skyline and a museum bank, one night is plenty",
+   "direct": true
+  },
+  {
+   "key": "Munich",
+   "name": "Munich",
+   "lat": 48.140229,
+   "lon": 11.558339,
+   "minutes": 245,
+   "label": "4h05",
+   "nights": 3,
+   "why": "Four hours each way only makes sense for three nights",
+   "direct": true
+  },
+  {
+   "key": "Cologne",
+   "name": "Cologne",
+   "lat": 50.94302,
+   "lon": 6.958721,
+   "minutes": 250,
+   "label": "4h10",
+   "nights": 2,
+   "why": "The cathedral, the Rhine, and a very different mood",
+   "direct": true
+  },
+  {
+   "key": "Wroclaw",
+   "name": "Wrocław",
+   "lat": 51.096026,
+   "lon": 17.036653,
+   "minutes": 255,
+   "label": "4h15",
+   "nights": 2,
+   "why": "Islands, bridges and the dwarves, worth the long ride",
+   "direct": false
+  },
+  {
+   "key": "Warsaw",
+   "name": "Warsaw",
+   "lat": 52.228685,
+   "lon": 21.003224,
+   "minutes": 325,
+   "label": "5h25",
+   "nights": 3,
+   "why": "A capital in its own right, not a side trip",
+   "direct": false
+  }
+ ]
+}

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Second City Board</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --muted: #5a665b;
+    --line: rgba(27, 94, 32, .18);
+    --rust: #A6402B;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+  }
+  .scb { max-width: 760px; margin: 0 auto; padding: 14px 12px 12px; }
+  .scb-head h2 { font-size: 1.06rem; margin: 0 0 3px; color: var(--green); }
+  .scb-head p { margin: 0; font-size: .78rem; color: var(--muted); line-height: 1.5; }
+
+  .scb-budget {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    margin: 12px 0 10px; padding: 9px 11px;
+    background: #fff; border: 1px solid var(--line); border-radius: 10px;
+  }
+  .scb-budget .lab { font-size: .74rem; font-weight: 700; color: var(--deep); letter-spacing: .01em; }
+  .scb-step { display: inline-flex; align-items: center; gap: 8px; }
+  .scb-step button {
+    width: 30px; height: 30px; border-radius: 8px; cursor: pointer;
+    border: 1px solid var(--green); background: #fff; color: var(--green);
+    font-size: 1.05rem; line-height: 1; font-weight: 700;
+  }
+  .scb-step button:hover { background: var(--green); color: #fff; }
+  .scb-step .val { min-width: 74px; text-align: center; font-size: .84rem; font-weight: 700; color: var(--deep); }
+
+  .scb-canvas-wrap { position: relative; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 6px; }
+  canvas { display: block; width: 100%; height: auto; touch-action: manipulation; }
+
+  .scb-legend { display: flex; flex-wrap: wrap; gap: 8px 14px; margin: 9px 2px 0; font-size: .69rem; color: var(--muted); }
+  .scb-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .scb-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+  .scb-sub { margin: 16px 0 6px; font-size: .74rem; font-weight: 700; color: var(--deep); text-transform: uppercase; letter-spacing: .05em; }
+  .scb-grid { display: flex; flex-wrap: wrap; gap: 7px; }
+  .scb-city {
+    border: 1px solid var(--line); background: #fff; border-radius: 9px;
+    padding: 7px 10px; cursor: pointer; text-align: left; line-height: 1.25;
+    font-family: inherit; color: var(--ink); min-width: 0;
+  }
+  .scb-city:hover { border-color: var(--green); }
+  .scb-city[aria-pressed="true"] { background: var(--green); border-color: var(--green); color: #fff; }
+  .scb-city[aria-pressed="true"] .scb-city-meta { color: rgba(255,255,255,.86); }
+  .scb-city[data-over="1"]:not([aria-pressed="true"]) { opacity: .48; }
+  .scb-city-name { display: block; font-size: .8rem; font-weight: 700; }
+  .scb-city-meta { display: block; font-size: .67rem; color: var(--muted); margin-top: 1px; }
+
+  .scb-total {
+    margin-top: 14px; padding: 12px 13px; border-radius: 10px;
+    background: var(--deep); color: #fff;
+  }
+  .scb-total-row { display: flex; flex-wrap: wrap; gap: 12px 22px; }
+  .scb-total-cell .k { display: block; font-size: .64rem; text-transform: uppercase; letter-spacing: .06em; color: rgba(255,255,255,.7); }
+  .scb-total-cell .v { display: block; font-size: 1.22rem; font-weight: 700; line-height: 1.2; }
+  .scb-verdict { margin-top: 10px; font-size: .8rem; line-height: 1.55; color: #fff; }
+  .scb-verdict b { color: var(--yellow); }
+
+  .scb-plan { margin-top: 11px; }
+  .scb-plan-item {
+    display: flex; justify-content: space-between; gap: 10px; align-items: baseline;
+    padding: 7px 0; border-top: 1px solid var(--line); font-size: .78rem;
+  }
+  .scb-plan-item:first-child { border-top: 0; }
+  .scb-plan-item .why { color: var(--muted); font-size: .71rem; }
+  .scb-plan-empty { font-size: .78rem; color: var(--muted); line-height: 1.55; }
+
+  .scb-reset {
+    margin-top: 12px; border: 1px solid var(--line); background: #fff; color: var(--deep);
+    border-radius: 8px; padding: 7px 13px; font-size: .74rem; font-weight: 700; cursor: pointer; font-family: inherit;
+  }
+  .scb-reset:hover { border-color: var(--green); }
+  .scb-fine { margin: 12px 2px 0; font-size: .67rem; color: var(--muted); line-height: 1.55; }
+</style>
+</head>
+<body>
+<div class="scb">
+  <div class="scb-head">
+    <h2>Berlin Second City Board</h2>
+    <p>Berlin sits at the centre. Every city is drawn in its real compass direction, but its distance from the middle is the fastest train time, not the kilometres. Add the ones you are considering and watch what they cost you in nights.</p>
+  </div>
+
+  <div class="scb-budget">
+    <span class="lab">Nights you can spend outside Berlin</span>
+    <span class="scb-step">
+      <button type="button" id="scbMinus" aria-label="One night fewer">&minus;</button>
+      <span class="val" id="scbBudget">3 nights</span>
+      <button type="button" id="scbPlus" aria-label="One night more">+</button>
+    </span>
+  </div>
+
+  <div class="scb-canvas-wrap">
+    <canvas id="scbCanvas" width="1560" height="1080" role="img"
+      aria-label="Time-space map of cities reachable by train from Berlin, plotted by compass direction and fastest train time"></canvas>
+  </div>
+  <div class="scb-legend">
+    <span><i class="scb-dot" style="background:#7CB342"></i> day trip, no night needed</span>
+    <span><i class="scb-dot" style="background:#1B5E20"></i> worth one night</span>
+    <span><i class="scb-dot" style="background:#123D18"></i> worth two nights</span>
+    <span><i class="scb-dot" style="background:#A6402B"></i> three nights or leave it</span>
+  </div>
+
+  <div class="scb-sub">Under two hours from Berlin Hauptbahnhof</div>
+  <div class="scb-grid" id="scbNear"></div>
+  <div class="scb-sub">Two to three hours</div>
+  <div class="scb-grid" id="scbMid"></div>
+  <div class="scb-sub">Over three hours</div>
+  <div class="scb-grid" id="scbFar"></div>
+
+  <div class="scb-total">
+    <div class="scb-total-row">
+      <span class="scb-total-cell"><span class="k">Nights committed</span><span class="v" id="scbNights">0</span></span>
+      <span class="scb-total-cell"><span class="k">Hours on trains, return</span><span class="v" id="scbHours">0</span></span>
+      <span class="scb-total-cell"><span class="k">Nights left</span><span class="v" id="scbLeft">3</span></span>
+    </div>
+    <p class="scb-verdict" id="scbVerdict">Pick a city to start. Berlin itself needs three or four days before anywhere else earns a night.</p>
+  </div>
+
+  <div class="scb-plan" id="scbPlan"><p class="scb-plan-empty">Nothing added yet.</p></div>
+  <button type="button" class="scb-reset" id="scbReset">Clear the plan</button>
+
+  <p class="scb-fine" id="scbFine">Loading the timetable data.</p>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var DATA = null;
+  var chosen = new Set();
+  var budget = 3;
+
+  var cv = document.getElementById('scbCanvas');
+  var ctx = cv.getContext('2d');
+  var nightsEl = document.getElementById('scbNights');
+  var hoursEl = document.getElementById('scbHours');
+  var leftEl = document.getElementById('scbLeft');
+  var verdictEl = document.getElementById('scbVerdict');
+  var planEl = document.getElementById('scbPlan');
+  var budgetEl = document.getElementById('scbBudget');
+  var fineEl = document.getElementById('scbFine');
+
+  var BERLIN = { lat: 52.5250, lon: 13.3694 };
+  var BANDS = [
+    { max: 0, color: '#7CB342' },
+    { max: 1, color: '#1B5E20' },
+    { max: 2, color: '#123D18' },
+    { max: 9, color: '#A6402B' }
+  ];
+
+  function colorFor(nights) {
+    for (var i = 0; i < BANDS.length; i++) if (nights <= BANDS[i].max) return BANDS[i].color;
+    return '#A6402B';
+  }
+
+  function bearing(city) {
+    var t = Math.PI / 180;
+    var dy = (city.lat - BERLIN.lat);
+    var dx = (city.lon - BERLIN.lon) * Math.cos(BERLIN.lat * t);
+    return Math.atan2(dx, dy); // 0 = north, clockwise
+  }
+
+  function draw() {
+    if (!DATA) return;
+    var W = cv.width, H = cv.height;
+    var pad = 190;
+
+    // Minute-space coordinates: real bearing, radius = train minutes.
+    var pts = DATA.cities.map(function (c) {
+      var a = bearing(c);
+      var rr = Math.sqrt(c.minutes);
+      return { c: c, mx: Math.sin(a) * rr, my: -Math.cos(a) * rr };
+    });
+    var minX = 0, maxX = 0, minY = 0, maxY = 0;
+    pts.forEach(function (p) {
+      if (p.mx < minX) minX = p.mx; if (p.mx > maxX) maxX = p.mx;
+      if (p.my < minY) minY = p.my; if (p.my > maxY) maxY = p.my;
+    });
+    var scale = Math.min((W - pad * 2) / (maxX - minX), (H - pad * 2) / (maxY - minY));
+    var cx = pad + (0 - minX) * scale;
+    var cy = pad + (0 - minY) * scale;
+
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, W, H);
+
+    var maxMin = 0;
+    DATA.cities.forEach(function (c) { if (c.minutes > maxMin) maxMin = c.minutes; });
+    for (var h = 1; h * 60 <= maxMin + 60; h++) {
+      var r = Math.sqrt(h * 60) * scale;
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(27,94,32,.15)';
+      ctx.lineWidth = 2;
+      ctx.setLineDash(h % 2 === 0 ? [] : [7, 9]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = 'rgba(27,94,32,.5)';
+      ctx.font = '600 22px Montserrat, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(h + 'h', cx, cy - r);
+    }
+
+    // Screen positions, then push overlapping labels apart on each side.
+    pts.forEach(function (p) { p.x = cx + p.mx * scale; p.y = cy + p.my * scale; p.right = p.x >= cx; p.ly = p.y; });
+    [true, false].forEach(function (side) {
+      var col = pts.filter(function (p) { return p.right === side; }).sort(function (a, b) { return a.ly - b.ly; });
+      for (var i = 1; i < col.length; i++) {
+        if (col[i].ly - col[i - 1].ly < 52) col[i].ly = col[i - 1].ly + 52;
+      }
+    });
+
+    pts.forEach(function (p) {
+      if (chosen.has(p.c.key)) {
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(p.x, p.y);
+        ctx.strokeStyle = colorFor(p.c.nights);
+        ctx.lineWidth = 6;
+        ctx.stroke();
+      }
+    });
+
+    pts.forEach(function (p) {
+      var c = p.c;
+      c._x = p.x; c._y = p.y;
+      var on = chosen.has(c.key);
+      var fits = c.nights <= budget;
+      ctx.globalAlpha = (fits || on) ? 1 : 0.3;
+
+      var lx = p.x + (p.right ? 26 : -26);
+      if (Math.abs(p.ly - p.y) > 3) {
+        ctx.beginPath();
+        ctx.moveTo(p.x + (p.right ? 15 : -15), p.y);
+        ctx.lineTo(lx - (p.right ? 6 : -6), p.ly);
+        ctx.strokeStyle = 'rgba(27,94,32,.32)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, on ? 16 : 10, 0, Math.PI * 2);
+      ctx.fillStyle = colorFor(c.nights);
+      ctx.fill();
+      if (on) { ctx.lineWidth = 5; ctx.strokeStyle = '#FFE600'; ctx.stroke(); }
+
+      ctx.textBaseline = 'middle';
+      ctx.textAlign = p.right ? 'left' : 'right';
+      ctx.font = (on ? '700 ' : '600 ') + '25px Montserrat, sans-serif';
+      ctx.fillStyle = on ? '#123D18' : '#3d463d';
+      ctx.fillText(c.name, lx, p.ly - 13);
+      ctx.font = '500 21px Montserrat, sans-serif';
+      ctx.fillStyle = '#6a746a';
+      ctx.fillText(c.label, lx, p.ly + 13);
+      ctx.globalAlpha = 1;
+    });
+
+    ctx.beginPath();
+    ctx.arc(cx, cy, 20, 0, Math.PI * 2);
+    ctx.fillStyle = '#FFE600';
+    ctx.fill();
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = '#123D18';
+    ctx.stroke();
+    ctx.font = '700 29px Montserrat, sans-serif';
+    ctx.fillStyle = '#123D18';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'bottom';
+    ctx.fillText('BERLIN', cx, cy - 28);
+    ctx.font = '500 22px Montserrat, sans-serif';
+    ctx.fillStyle = '#7a827a';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'bottom';
+    ctx.fillText('Rings are train hours from Berlin Hauptbahnhof. Direction is real, spacing is squeezed so the near cities stay readable.', 24, H - 20);
+  }
+
+  function nightsWord(n) { return n + (n === 1 ? ' night' : ' nights'); }
+
+  function update() {
+    if (!DATA) return;
+    var picked = DATA.cities.filter(function (c) { return chosen.has(c.key); });
+    var nights = picked.reduce(function (sum, c) { return sum + c.nights; }, 0);
+    var minutes = picked.reduce(function (sum, c) { return sum + c.minutes * 2; }, 0);
+    var left = budget - nights;
+
+    nightsEl.textContent = nights;
+    hoursEl.textContent = (minutes / 60).toFixed(1);
+    leftEl.textContent = left;
+    leftEl.style.color = left < 0 ? '#FFE600' : '#fff';
+
+    var hours = minutes / 60;
+    var furthest = picked.slice().sort(function (a, b) { return b.minutes - a.minutes; })[0];
+    var msg;
+    if (!picked.length) {
+      msg = 'Pick a city to start. Berlin itself needs three or four days before anywhere else earns a night.';
+    } else if (left < 0) {
+      msg = 'This plan wants <b>' + nightsWord(nights) + '</b> and you have ' + nightsWord(budget) + '. ' +
+        furthest.name + ' is the one to drop first: ' + (furthest.minutes * 2 / 60).toFixed(1) +
+        ' hours of train before you see anything.';
+    } else if (nights === 0) {
+      msg = 'Every one of these is a day trip. You sleep in Berlin the whole time, so there is no second hotel, no packing, and your Berlin days stay whole. It costs you <b>' +
+        hours.toFixed(1) + ' hours</b> of train time instead.';
+    } else if (hours / nights > 3.5) {
+      msg = '<b>' + hours.toFixed(1) + ' hours on trains</b> for ' + nightsWord(nights) +
+        ' away. That is the ratio where a second city stops being a trip and starts being a commute. ' +
+        furthest.name + ' is what is doing it.';
+    } else {
+      msg = 'This works: <b>' + nightsWord(nights) + '</b> away, ' + hours.toFixed(1) +
+        ' hours of train in total, ' + nightsWord(left) + ' still in Berlin.';
+    }
+    verdictEl.innerHTML = msg;
+
+    if (!picked.length) {
+      planEl.innerHTML = '<p class="scb-plan-empty">Nothing added yet.</p>';
+    } else {
+      planEl.innerHTML = picked.slice().sort(function (a, b) { return a.minutes - b.minutes; }).map(function (c) {
+        return '<div class="scb-plan-item"><span><b>' + c.name + '</b> <span class="why">' + c.why + '</span></span>' +
+          '<span class="why">' + c.label + ' &middot; ' + (c.nights === 0 ? 'no night' : nightsWord(c.nights)) + '</span></div>';
+      }).join('');
+    }
+
+    document.querySelectorAll('.scb-city').forEach(function (b) {
+      var key = b.getAttribute('data-key');
+      b.setAttribute('aria-pressed', chosen.has(key) ? 'true' : 'false');
+      var city = DATA.cities.filter(function (c) { return c.key === key; })[0];
+      b.setAttribute('data-over', city && city.nights > budget ? '1' : '0');
+    });
+
+    draw();
+  }
+
+  function toggle(key) {
+    if (chosen.has(key)) chosen.delete(key); else chosen.add(key);
+    update();
+  }
+
+  function buildChips() {
+    var buckets = { near: [], mid: [], far: [] };
+    DATA.cities.forEach(function (c) {
+      if (c.minutes < 120) buckets.near.push(c);
+      else if (c.minutes < 180) buckets.mid.push(c);
+      else buckets.far.push(c);
+    });
+    ['near', 'mid', 'far'].forEach(function (b) {
+      var host = document.getElementById('scb' + b.charAt(0).toUpperCase() + b.slice(1));
+      host.innerHTML = '';
+      buckets[b].sort(function (a, c) { return a.minutes - c.minutes; }).forEach(function (c) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'scb-city';
+        btn.setAttribute('data-key', c.key);
+        btn.setAttribute('aria-pressed', 'false');
+        btn.innerHTML = '<span class="scb-city-name">' + c.name + '</span><span class="scb-city-meta">' +
+          c.label + ' &middot; ' + (c.nights === 0 ? 'day trip' : nightsWord(c.nights)) + '</span>';
+        btn.addEventListener('click', function () { toggle(c.key); });
+        host.appendChild(btn);
+      });
+    });
+  }
+
+  function setBudget(n) {
+    budget = Math.max(1, Math.min(7, n));
+    budgetEl.textContent = nightsWord(budget);
+    update();
+  }
+
+  document.getElementById('scbPlus').addEventListener('click', function () { setBudget(budget + 1); });
+  document.getElementById('scbMinus').addEventListener('click', function () { setBudget(budget - 1); });
+  document.getElementById('scbReset').addEventListener('click', function () { chosen.clear(); update(); });
+
+  cv.addEventListener('click', function (ev) {
+    if (!DATA) return;
+    var rect = cv.getBoundingClientRect();
+    var sx = cv.width / rect.width, sy = cv.height / rect.height;
+    var px = (ev.clientX - rect.left) * sx, py = (ev.clientY - rect.top) * sy;
+    var best = null, bd = 1e9;
+    DATA.cities.forEach(function (c) {
+      var d = Math.hypot(c._x - px, c._y - py);
+      if (d < bd) { bd = d; best = c; }
+    });
+    if (best && bd < 90) toggle(best.key);
+  });
+
+  function boot(data) {
+    DATA = data;
+    buildChips();
+    fineEl.textContent = 'Train times are the fastest scheduled journey from Berlin Hauptbahnhof, read from the live VBB journey planner on ' +
+      data.checkedOn + ' across eight departure times on one ordinary weekday, and rounded to the nearest five minutes. ' +
+      'They move with engineering work and the December timetable change, so check your own date before booking. ' +
+      'The night counts are my judgement of what each city needs to be worth the trip, not an official figure.';
+    setBudget(3);
+  }
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(boot).catch(function () {
+    fineEl.textContent = 'The timetable data could not load. Reload the page, or read the same times in the article above.';
+  });
+})();
+</script>
+</body>
+</html>
