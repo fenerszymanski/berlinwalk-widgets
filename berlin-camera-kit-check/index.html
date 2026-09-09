@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Camera Kit Check</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --muted: #5a665b;
+    --line: rgba(27, 94, 32, .18);
+    --ok: #4E8C3F;
+    --care: #C8A65B;
+    --stop: #A6402B;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .ck { max-width: 760px; margin: 0 auto; padding: 14px 12px; }
+  .ck-head h2 { font-size: 1.06rem; margin: 0 0 3px; color: var(--green); }
+  .ck-head p { margin: 0; font-size: .78rem; color: var(--muted); line-height: 1.5; }
+
+  .ck-bag { margin: 12px 0 0; padding: 10px 11px 11px; background: #fff; border: 1px solid var(--line); border-radius: 10px; }
+  .ck-bag .lbl { display: block; font-size: .66rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--deep); margin-bottom: 8px; }
+  .ck-gear { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ck-gear button {
+    font-family: inherit; font-size: .75rem; font-weight: 600; line-height: 1.25;
+    text-align: left; cursor: pointer; padding: 7px 10px; border-radius: 8px;
+    border: 1px solid var(--green); background: #fff; color: var(--deep);
+  }
+  .ck-gear button .s { display: block; font-size: .62rem; font-weight: 500; color: var(--muted); }
+  .ck-gear button[aria-pressed="true"] { background: var(--deep); color: #fff; border-color: var(--deep); }
+  .ck-gear button[aria-pressed="true"] .s { color: rgba(255,255,255,.72); }
+  .ck-gear button:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+
+  .ck-score { margin: 12px 0 0; padding: 12px 14px; border-radius: 10px; background: var(--deep); color: #fff; }
+  .ck-score .n { font-size: 1.5rem; font-weight: 700; line-height: 1.1; display: block; }
+  .ck-score .t { font-size: .78rem; line-height: 1.5; color: rgba(255,255,255,.9); margin: 4px 0 0; display: block; }
+
+  .ck-chart { margin-top: 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 8px 6px 4px; }
+  .ck-chart svg { display: block; width: 100%; height: auto; }
+  .ck-chart text { font-family: 'Montserrat', sans-serif; }
+
+  .ck-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 9px 4px 0; font-size: .68rem; color: var(--muted); }
+  .ck-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .ck-key { width: 16px; height: 8px; border-radius: 2px; display: inline-block; }
+
+  .ck-why { margin-top: 12px; }
+  .ck-why h3 { font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--deep); margin: 0 0 7px; }
+  .ck-why ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
+  .ck-why li { padding: 9px 11px; border-radius: 9px; border: 1px solid var(--line); background: #fff; font-size: .76rem; line-height: 1.5; }
+  .ck-why li .p { display: block; font-weight: 700; color: var(--deep); }
+  .ck-why li .r { display: block; color: var(--muted); margin-top: 2px; }
+  .ck-why li.stop { border-left: 4px solid var(--stop); }
+  .ck-why li.care { border-left: 4px solid var(--care); }
+
+  .ck-foot { margin: 11px 2px 0; font-size: .67rem; line-height: 1.55; color: var(--muted); }
+  @media (max-width: 420px) {
+    .ck-gear button { flex: 1 1 calc(50% - 3px); }
+  }
+</style>
+</head>
+<body>
+<div class="ck">
+  <div class="ck-head">
+    <h2>Berlin Camera Kit Check</h2>
+    <p>Tap what is actually in your bag. The chart shows how far that kit gets you at fourteen places in the historic centre, in walking order, before somebody asks you to change something.</p>
+  </div>
+
+  <div class="ck-bag">
+    <span class="lbl" id="ck-bag-label">What you are carrying</span>
+    <div class="ck-gear" id="ck-gear" role="group" aria-labelledby="ck-bag-label"></div>
+  </div>
+
+  <div class="ck-score" aria-live="polite">
+    <span class="n" id="ck-n">14 of 14</span>
+    <span class="t" id="ck-t">places where nothing in your bag causes a conversation.</span>
+  </div>
+
+  <div class="ck-chart"><svg id="ck-svg" role="img" aria-labelledby="ck-svg-t"><title id="ck-svg-t">How far your kit gets you at each place</title></svg></div>
+
+  <div class="ck-legend">
+    <span><i class="ck-key" style="background:#4E8C3F"></i> walk in</span>
+    <span><i class="ck-key" style="background:#C8A65B"></i> something goes to the cloakroom</span>
+    <span><i class="ck-key" style="background:#A6402B"></i> stopped, or camera off</span>
+  </div>
+
+  <div class="ck-why">
+    <h3 id="ck-why-h">What changes, and why</h3>
+    <ul id="ck-why-list" aria-labelledby="ck-why-h"></ul>
+  </div>
+
+  <p class="ck-foot" id="ck-foot"></p>
+</div>
+
+<script>
+(function () {
+  var RANK = { clear: 0, care: 1, blocked: 2 };
+  var COLOR = { clear: '#4E8C3F', care: '#C8A65B', blocked: '#A6402B' };
+  var bag = [];
+  var data = null;
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function carrying(id) { return bag.indexOf(id) !== -1; }
+
+  function toggle(id) {
+    var at = bag.indexOf(id);
+    if (at === -1) { bag.push(id); } else { bag.splice(at, 1); }
+    render();
+  }
+
+  // Worst verdict this bag triggers at one place, plus the reasons that caused it.
+  function verdict(place) {
+    var state = place.base;
+    var reasons = [];
+    for (var i = 0; i < bag.length; i++) {
+      var rule = place.rules[bag[i]];
+      if (!rule) continue;
+      reasons.push({ gear: bag[i], level: rule[0], why: rule[1] });
+      if (RANK[rule[0]] > RANK[state]) state = rule[0];
+    }
+    return { state: state, reasons: reasons };
+  }
+
+  function label(id) {
+    for (var i = 0; i < data.gear.length; i++) { if (data.gear[i].id === id) return data.gear[i].label; }
+    return id;
+  }
+
+  function drawChart(results) {
+    var svg = document.getElementById('ck-svg');
+    var rowH = 26, padTop = 10, padBottom = 6, labelW = 190, barW = 300, gap = 10;
+    var W = labelW + gap + barW + 8;
+    var H = padTop + results.length * rowH + padBottom;
+    var parts = ['<title id="ck-svg-t">How far your kit gets you at each place</title>'];
+
+    // Track lines mark the three bands the bar can reach.
+    var stops = [barW * 0.34, barW * 0.67, barW];
+    for (var g = 0; g < stops.length; g++) {
+      var gx = labelW + gap + stops[g];
+      parts.push('<line x1="' + gx.toFixed(1) + '" y1="' + (padTop - 4) + '" x2="' + gx.toFixed(1) + '" y2="' + (H - padBottom + 1) + '" stroke="rgba(27,94,32,.13)" stroke-width="1"/>');
+    }
+
+    for (var i = 0; i < results.length; i++) {
+      var r = results[i];
+      var y = padTop + i * rowH;
+      var reach = r.state === 'clear' ? stops[2] : (r.state === 'care' ? stops[1] : stops[0]);
+      parts.push('<text x="0" y="' + (y + 13) + '" font-size="11" font-weight="600" fill="#123D18">' + esc(r.place.name.length > 30 ? r.place.name.slice(0, 29) + '…' : r.place.name) + '</text>');
+      parts.push('<rect x="' + (labelW + gap) + '" y="' + (y + 4) + '" width="' + barW + '" height="12" rx="6" fill="rgba(27,94,32,.07)"/>');
+      parts.push('<rect x="' + (labelW + gap) + '" y="' + (y + 4) + '" width="' + reach.toFixed(1) + '" height="12" rx="6" fill="' + COLOR[r.state] + '"><title>' + esc(r.place.name) + '</title></rect>');
+    }
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    svg.innerHTML = parts.join('');
+  }
+
+  function render() {
+    var results = [];
+    var clearCount = 0;
+    for (var i = 0; i < data.places.length; i++) {
+      var v = verdict(data.places[i]);
+      results.push({ place: data.places[i], state: v.state, reasons: v.reasons });
+      if (v.state === 'clear') clearCount += 1;
+    }
+
+    document.getElementById('ck-n').textContent = clearCount + ' of ' + data.places.length;
+    document.getElementById('ck-t').textContent = bag.length === 0
+      ? 'places where an empty-handed visitor walks straight in. Now add what you are actually carrying.'
+      : 'places where nothing in your bag causes a conversation.';
+
+    drawChart(results);
+
+    var seen = {};
+    var html = '';
+    for (var j = 0; j < results.length; j++) {
+      var r = results[j];
+      if (r.state === 'clear' && r.reasons.length === 0) continue;
+      if (r.state === 'clear') continue;
+      var lines = [];
+      for (var k = 0; k < r.reasons.length; k++) {
+        if (r.reasons[k].level === 'clear') continue;
+        lines.push(label(r.reasons[k].gear) + ': ' + r.reasons[k].why);
+      }
+      if (r.place.base !== 'clear') lines.unshift(r.place.baseNote);
+      if (!lines.length) continue;
+      var key = r.place.id;
+      if (seen[key]) continue;
+      seen[key] = 1;
+      html += '<li class="' + (r.state === 'blocked' ? 'stop' : 'care') + '">'
+        + '<span class="p">' + esc(r.place.name) + '</span>'
+        + '<span class="r">' + esc(lines.join(' ')) + '</span></li>';
+    }
+    if (!html) {
+      html = '<li><span class="p">Nothing in the way.</span><span class="r">'
+        + esc('This kit walks into all fourteen places. Read the sign at each room anyway: the state museums may ban photography in a single exhibition at any time.')
+        + '</span></li>';
+    }
+    document.getElementById('ck-why-list').innerHTML = html;
+  }
+
+  function boot(d) {
+    data = d;
+    var wrap = document.getElementById('ck-gear');
+    var html = '';
+    for (var i = 0; i < d.gear.length; i++) {
+      var g = d.gear[i];
+      html += '<button type="button" data-gear="' + esc(g.id) + '" aria-pressed="false">' + esc(g.label)
+        + (g.sub ? '<span class="s">' + esc(g.sub) + '</span>' : '') + '</button>';
+    }
+    wrap.innerHTML = html;
+    wrap.addEventListener('click', function (e) {
+      var btn = e.target.closest ? e.target.closest('button[data-gear]') : null;
+      if (!btn) return;
+      toggle(btn.getAttribute('data-gear'));
+      btn.setAttribute('aria-pressed', carrying(btn.getAttribute('data-gear')) ? 'true' : 'false');
+    });
+    document.getElementById('ck-foot').textContent =
+      'Rules read on ' + d.checkedOn + ' from the museum regulations of the Staatliche Museen zu Berlin, the Humboldt Forum’s own photography guidelines, the Berlin TV Tower visitor information, the Memorial Foundation’s visitor pages and the federal drone platform dipul. House rules change, and the sign at the door is always the final word.';
+    render();
+  }
+
+  fetch('data.json', { cache: 'no-store' })
+    .then(function (r) { return r.json(); })
+    .then(boot)
+    .catch(function () {
+      document.getElementById('ck-why-list').innerHTML = '<li><span class="r">The rule data could not be loaded. Please reload the page.</span></li>';
+    });
+})();
+</script>
+<script defer src="../js/brand.js"></script>
+</body>
+</html>

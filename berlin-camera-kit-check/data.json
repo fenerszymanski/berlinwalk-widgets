@@ -1,0 +1,186 @@
+{
+  "checkedOn": "9 September 2026",
+  "gear": [
+    { "id": "phone", "label": "Phone", "sub": "worn, not bagged" },
+    { "id": "camera", "label": "Camera + case", "sub": "mirrorless or DSLR" },
+    { "id": "tripod", "label": "Tripod", "sub": "any size" },
+    { "id": "selfie", "label": "Selfie stick", "sub": "" },
+    { "id": "flash", "label": "Flash", "sub": "on-camera" },
+    { "id": "daypack", "label": "Day rucksack", "sub": "about 20 litres" },
+    { "id": "suitcase", "label": "Cabin suitcase", "sub": "straight off the train" },
+    { "id": "drone", "label": "Drone", "sub": "sub-250 g counts" }
+  ],
+  "places": [
+    {
+      "id": "streets",
+      "name": "Streets and squares of the centre",
+      "where": "Alexanderplatz, Lustgarten, Unter den Linden",
+      "base": "clear",
+      "baseNote": "Section 59 UrhG lets you photograph and publish works permanently on public paths, roads and open spaces. For buildings that covers the façade.",
+      "rules": {
+        "drone": ["blocked", "Section 21h(3) LuftVO puts government seats, embassies, police property, federal trunk roads, railway installations and federal waterways off limits without consent. The centre is covered several times over."]
+      }
+    },
+    {
+      "id": "hf-yard",
+      "name": "Humboldt Forum, outdoor areas",
+      "where": "Schlüterhof, Passage, Spreeterrasse",
+      "base": "clear",
+      "baseNote": "The foundation's guidelines allow photography here for commercial and non-commercial purposes, and explicitly allow tripods and flash.",
+      "rules": {
+        "drone": ["blocked", "Aerial shots in the outdoor areas need prior permission from the foundation, applied for at least 14 days ahead, and the airspace restrictions still apply on top."]
+      }
+    },
+    {
+      "id": "hf-open",
+      "name": "Humboldt Forum, foyer and roof terrace",
+      "where": "staircases, roof terrace, foundation exhibitions",
+      "base": "clear",
+      "baseNote": "Private, non-commercial photography is permitted. This is where the Unter den Linden view is taken from.",
+      "rules": {
+        "tripod": ["blocked", "Tripods are not permitted indoors at the Humboldt Forum."],
+        "flash": ["blocked", "Objects in the display areas are light-sensitive and may only be photographed without flash."],
+        "drone": ["blocked", "Indoors, and inside a restricted airspace zone."]
+      }
+    },
+    {
+      "id": "hf-ethno",
+      "name": "Humboldt Forum, 2nd and 3rd floors",
+      "where": "Ethnologisches Museum, Museum für Asiatische Kunst",
+      "base": "clear",
+      "baseNote": "Visitors may photograph for their own private use. Any commercial use needs prior permission.",
+      "rules": {
+        "tripod": ["blocked", "Tripods are not permitted indoors at the Humboldt Forum."],
+        "flash": ["blocked", "No flash on the display objects."],
+        "camera": ["care", "Fine to carry, but the state museums' rules count a camera case as a bulky object to be checked in."],
+        "drone": ["blocked", "Indoors."]
+      }
+    },
+    {
+      "id": "hf-global",
+      "name": "Humboldt Forum, BERLIN GLOBAL",
+      "where": "1st floor, Stadtmuseum Berlin",
+      "base": "blocked",
+      "baseNote": "All photographic and film recordings are strictly prohibited, private and commercial alike, because of third-party rights. Pictograms mark the motifs.",
+      "rules": {}
+    },
+    {
+      "id": "hf-lab",
+      "name": "Humboldt Forum, Humboldt Lab",
+      "where": "1st floor, \"After Nature\"",
+      "base": "blocked",
+      "baseNote": "All photography and filming is prohibited, whether private or commercial. Only prior written permission changes that.",
+      "rules": {}
+    },
+    {
+      "id": "neues",
+      "name": "Neues Museum",
+      "where": "Museum Island",
+      "base": "clear",
+      "baseNote": "Private photography is normal. The museum regulations do not ban it, but the management board may ban it in any single exhibition or room.",
+      "rules": {
+        "tripod": ["blocked", "Tripods are named as bulky objects that must be checked into the cloakroom or a locker."],
+        "selfie": ["blocked", "Selfie sticks are prohibited in the exhibition rooms."],
+        "camera": ["care", "The camera is fine. Its case is named as a bulky object and goes to the cloakroom."],
+        "daypack": ["care", "Bags and backpacks larger than 30 x 20 x 10 cm must be checked in."],
+        "suitcase": ["blocked", "Storage is very limited and the museums cannot accommodate anything bigger than carry-on luggage."],
+        "drone": ["blocked", "Indoors."]
+      }
+    },
+    {
+      "id": "altes",
+      "name": "Altes Museum",
+      "where": "Museum Island",
+      "base": "clear",
+      "baseNote": "Same shared museum regulations as the rest of the Staatliche Museen zu Berlin.",
+      "rules": {
+        "tripod": ["blocked", "Tripods must be checked into the cloakroom or a locker."],
+        "selfie": ["blocked", "Selfie sticks are prohibited."],
+        "camera": ["care", "Camera cases count as bulky objects and are checked in."],
+        "daypack": ["care", "Anything larger than 30 x 20 x 10 cm goes to the cloakroom."],
+        "suitcase": ["blocked", "Nothing bigger than carry-on luggage can be stored."],
+        "drone": ["blocked", "Indoors."]
+      }
+    },
+    {
+      "id": "altenat",
+      "name": "Alte Nationalgalerie",
+      "where": "Museum Island",
+      "base": "clear",
+      "baseNote": "Painting galleries are the rooms where a temporary show is most likely to carry its own photography ban, so read the sign at that door.",
+      "rules": {
+        "tripod": ["blocked", "Tripods must be checked into the cloakroom or a locker."],
+        "selfie": ["blocked", "Selfie sticks are prohibited."],
+        "camera": ["care", "Camera cases are checked in."],
+        "daypack": ["care", "Anything larger than 30 x 20 x 10 cm goes to the cloakroom."],
+        "suitcase": ["blocked", "Nothing bigger than carry-on luggage can be stored."],
+        "drone": ["blocked", "Indoors."]
+      }
+    },
+    {
+      "id": "bode",
+      "name": "Bode-Museum",
+      "where": "Museum Island",
+      "base": "clear",
+      "baseNote": "The quietest of the five houses, and the easiest place on the island to photograph without a crowd in the frame.",
+      "rules": {
+        "tripod": ["blocked", "Tripods must be checked into the cloakroom or a locker."],
+        "selfie": ["blocked", "Selfie sticks are prohibited."],
+        "camera": ["care", "Camera cases are checked in."],
+        "daypack": ["care", "Anything larger than 30 x 20 x 10 cm goes to the cloakroom."],
+        "suitcase": ["blocked", "Nothing bigger than carry-on luggage can be stored."],
+        "drone": ["blocked", "Indoors."]
+      }
+    },
+    {
+      "id": "panorama",
+      "name": "Pergamonmuseum. Das Panorama",
+      "where": "Am Kupfergraben, beside the closed Pergamonmuseum",
+      "base": "clear",
+      "baseNote": "The rotunda runs under the same museum regulations. It is the one part of the Pergamon complex you can still walk into.",
+      "rules": {
+        "tripod": ["blocked", "Tripods must be checked into the cloakroom or a locker."],
+        "selfie": ["blocked", "Selfie sticks are prohibited."],
+        "camera": ["care", "Camera cases are checked in."],
+        "daypack": ["care", "Anything larger than 30 x 20 x 10 cm goes to the cloakroom."],
+        "suitcase": ["blocked", "Nothing bigger than carry-on luggage can be stored."],
+        "drone": ["blocked", "Indoors."]
+      }
+    },
+    {
+      "id": "tvtower",
+      "name": "Berlin TV Tower",
+      "where": "Panoramastraße, Alexanderplatz",
+      "base": "clear",
+      "baseNote": "Private photos are permitted at the top. Security is airport-style and every bag is opened.",
+      "rules": {
+        "tripod": ["blocked", "The tower states plainly that tripods are not permitted."],
+        "drone": ["blocked", "The tower states plainly that drones are not permitted."],
+        "daypack": ["care", "A backpack has to fit inside 45 x 35 x 20 cm, and there are no lockers at all."],
+        "suitcase": ["blocked", "Suitcases, large bags and shopping bags may not go up, and the tower has no lockers."]
+      }
+    },
+    {
+      "id": "stelae",
+      "name": "Memorial, Field of Stelae",
+      "where": "Cora-Berliner-Straße, open 24 hours",
+      "base": "clear",
+      "baseNote": "Open ground, free, and covered by the same panorama rule as the streets. Legal is not the whole question here.",
+      "rules": {
+        "drone": ["blocked", "Inside the government-quarter restriction zone and beside federal roads."]
+      }
+    },
+    {
+      "id": "ortinfo",
+      "name": "Memorial, Information Centre",
+      "where": "underneath the Field of Stelae",
+      "base": "clear",
+      "baseNote": "Tuesday to Sunday, 10:00 to 18:00, last admission 45 minutes before closing, closed Mondays. The foundation asks for appropriate behaviour in the exhibition.",
+      "rules": {
+        "suitcase": ["blocked", "Suitcases and small bags may not be taken into the exhibition. Lockers are at Friedrichstraße and Potsdamer Platz stations."],
+        "daypack": ["care", "Entry is through a security gate, and bags are the reason the queue moves slowly."],
+        "drone": ["blocked", "Indoors, inside a restricted zone."]
+      }
+    }
+  ]
+}

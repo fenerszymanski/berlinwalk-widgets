@@ -10969,5 +10969,39 @@
         "a": "**It can, because it was never a Pergamon ticket.** The three day pass costs 32 euro, 16 reduced, and covers around twenty houses across the city. With four Museum Island houses at 14 euro each, the pass pays for itself quickly if you are actually going to use three days of museums."
       }
     ]
+  },
+  "taking-photos-in-berlin": {
+    "title": "Taking Photos in Berlin - FAQ",
+    "subtitle": "Where the rules change indoors, which Berlin exhibitions ban cameras outright, the bag sizes that decide your museum day, and what German law says about drones and strangers in your frame.",
+    "items": [
+      {
+        "q": "Can you take photos freely in Berlin?",
+        "a": "**Outdoors, in almost every case, yes.** Section 59 of the Urheberrechtsgesetz permits you to reproduce, distribute and make available to the public works that are permanently located on public paths, roads and open spaces, and for buildings that permission covers the façade. Standing on the public pavement you can photograph and post the Berliner Dom, the Rotes Rathaus, the World Clock, the East Side Gallery and the Field of Stelae. Everything complicated in Berlin photography happens after you walk through a door."
+      },
+      {
+        "q": "Which Berlin museums ban photography?",
+        "a": "**Two exhibitions inside the Humboldt Forum ban it outright.** In the Humboldt Lab \"After Nature\" on the first floor, all photography and filming is prohibited for private and commercial purposes. In BERLIN GLOBAL, the Stadtmuseum exhibition on the same floor, all photographic and film recordings are strictly prohibited because of third-party rights, and pictograms mark the motifs. Elsewhere in the building private photography is allowed. The state museums do not ban photography across the board, but their management board may impose a ban on any single exhibition or room, which is why the sign at the door is the final word."
+      },
+      {
+        "q": "Can you take a tripod into the museums on Museum Island?",
+        "a": "**No, it goes to the cloakroom.** The museum regulations of the Staatliche Museen zu Berlin name tripods, camera cases, umbrellas and bags larger than 30 x 20 x 10 cm as bulky objects that must be checked into the cloakroom or a locker. Selfie sticks are prohibited outright, and so are laser pointers. Storage is limited and the museums cannot take anything bigger than carry-on luggage, so a museum is a poor first stop if you are still carrying a suitcase."
+      },
+      {
+        "q": "Can you take photos at the top of the Berlin TV Tower?",
+        "a": "**Yes, private photos are permitted, but tripods and drones are not.** Security at the base is airport-style, with a metal detector and a bag check for everyone. Suitcases, large bags and shopping bags may not go up at all, and a backpack has to fit inside 45 x 35 x 20 cm. The detail that catches people out is that the tower has no lockers, so an oversized bag becomes your problem out on Alexanderplatz."
+      },
+      {
+        "q": "Is it allowed to photograph the Holocaust Memorial in Berlin?",
+        "a": "**Legally yes, and the memorial does not stop you.** The Field of Stelae is open around the clock, admission is free, and it falls under the same panorama rule as the surrounding streets. The Information Centre underneath is a separate space: it opens Tuesday to Sunday from 10:00 to 18:00 with last admission 45 minutes before closing, entry is through a security gate, and suitcases and small bags may not be taken inside. The foundation asks for appropriate behaviour in the exhibition and leaves the judgement to visitors. My own line to groups is short: photograph the place, not a performance in it."
+      },
+      {
+        "q": "Can you fly a drone over central Berlin?",
+        "a": "**In practice, no.** Section 21h(3) of the Luftverkehrs-Ordnung, mapped on the federal platform dipul, restricts flights over and within 100 metres of the seats of federal and state constitutional bodies, top-level authorities, diplomatic missions and police property, and the same 100 metre rule applies to federal trunk roads, railway installations and federal waterways. The Berliner Spree and the Spreekanal, the two channels around Museum Island, are listed as federal waterways, and the government quarter sits beside the Field of Stelae. Individual sites add their own bans on top: the TV Tower names drones explicitly."
+      },
+      {
+        "q": "Do you need permission to photograph people in Berlin?",
+        "a": "**To publish the picture, sometimes. To take it, generally not.** Section 22 of the Kunsturhebergesetz says portraits may only be distributed or publicly displayed with the consent of the person depicted. Section 23 then carves out the ordinary holiday cases, including pictures in which people appear only as an incidental part of a landscape or locality, and pictures of assemblies and processions taken of the people who took part. A final clause removes the exception where publication would harm a legitimate interest of the person. The practical line is distance and intent: a wide square with people crossing it is fine, a stranger's face filling the frame is the case the law was written for."
+      }
+    ]
   }
 }
