@@ -1,0 +1,171 @@
+{
+  "year": 2027,
+  "checkedOn": "9 September 2026",
+  "allowanceDefault": 30,
+  "holidays": {
+    "2027-01-01": "New Year's Day",
+    "2027-03-08": "International Women's Day",
+    "2027-03-26": "Good Friday",
+    "2027-03-29": "Easter Monday",
+    "2027-05-01": "Labour Day",
+    "2027-05-06": "Ascension Day",
+    "2027-05-17": "Whit Monday",
+    "2027-10-03": "Day of German Unity",
+    "2027-12-25": "Christmas Day",
+    "2027-12-26": "Boxing Day"
+  },
+  "schoolWindows": [
+    {
+      "from": "2027-01-01",
+      "to": "2027-01-02",
+      "label": "Christmas holidays 2026/27"
+    },
+    {
+      "from": "2027-02-01",
+      "to": "2027-02-06",
+      "label": "Winter holidays"
+    },
+    {
+      "from": "2027-03-22",
+      "to": "2027-04-02",
+      "label": "Easter holidays"
+    },
+    {
+      "from": "2027-05-07",
+      "to": "2027-05-07",
+      "label": "No classes, the day after Ascension"
+    },
+    {
+      "from": "2027-05-18",
+      "to": "2027-05-19",
+      "label": "Whitsun holidays"
+    },
+    {
+      "from": "2027-07-01",
+      "to": "2027-08-14",
+      "label": "Summer holidays"
+    },
+    {
+      "from": "2027-10-11",
+      "to": "2027-10-23",
+      "label": "Autumn holidays"
+    },
+    {
+      "from": "2027-12-22",
+      "to": "2027-12-31",
+      "label": "Christmas holidays 2027/28"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "newyear",
+      "name": "New Year run",
+      "request": "Mon 4 to Fri 8 January",
+      "leave": [
+        "2027-01-04",
+        "2027-01-05",
+        "2027-01-06",
+        "2027-01-07",
+        "2027-01-08"
+      ],
+      "from": "2027-01-01",
+      "to": "2027-01-10",
+      "note": "New Year's Day is a Friday, so the free part is only the weekend. Everything after it is bought at full price."
+    },
+    {
+      "id": "frauentag",
+      "name": "Women's Day week",
+      "request": "Tue 9 to Fri 12 March",
+      "leave": [
+        "2027-03-09",
+        "2027-03-10",
+        "2027-03-11",
+        "2027-03-12"
+      ],
+      "from": "2027-03-06",
+      "to": "2027-03-14",
+      "note": "The Berlin-only holiday on 8 March lands on a Monday, and no Berlin school is off that week, so this is the least contested nine days in the year."
+    },
+    {
+      "id": "easter1",
+      "name": "Easter, school week one",
+      "request": "Mon 22 to Thu 25 March",
+      "leave": [
+        "2027-03-22",
+        "2027-03-23",
+        "2027-03-24",
+        "2027-03-25"
+      ],
+      "from": "2027-03-20",
+      "to": "2027-03-29",
+      "note": "Sits inside the Berlin Easter school holidays, so colleagues with school-age children will be asking for exactly these days."
+    },
+    {
+      "id": "easter2",
+      "name": "Easter, school week two",
+      "request": "Tue 30 March to Fri 2 April",
+      "leave": [
+        "2027-03-30",
+        "2027-03-31",
+        "2027-04-01",
+        "2027-04-02"
+      ],
+      "from": "2027-03-26",
+      "to": "2027-04-04",
+      "note": "Same price as week one and the same school-holiday competition, but it starts on the free Easter weekend instead of ending on it."
+    },
+    {
+      "id": "ascension",
+      "name": "Ascension bridge",
+      "request": "Fri 7 May",
+      "leave": [
+        "2027-05-07"
+      ],
+      "from": "2027-05-06",
+      "to": "2027-05-09",
+      "note": "The one true bridge day of 2027. Berlin schools are already closed on 7 May, so every parent in the office wants it too."
+    },
+    {
+      "id": "whitsun",
+      "name": "Whitsun week",
+      "request": "Tue 18 to Fri 21 May",
+      "leave": [
+        "2027-05-18",
+        "2027-05-19",
+        "2027-05-20",
+        "2027-05-21"
+      ],
+      "from": "2027-05-15",
+      "to": "2027-05-23",
+      "note": "Berlin schools are off on 18 and 19 May, so a parent reaches the same nine days for two leave days and you need four."
+    },
+    {
+      "id": "unity",
+      "name": "Unity Day Monday",
+      "request": "Mon 4 October",
+      "leave": [
+        "2027-10-04"
+      ],
+      "from": "2027-10-02",
+      "to": "2027-10-04",
+      "note": "Not a bridge at all. German Unity Day falls on a Sunday in 2027, so this is worth exactly what any other Monday is worth."
+    },
+    {
+      "id": "christmas",
+      "name": "Christmas run",
+      "request": "Mon 27 to Fri 31 December",
+      "leave": [
+        "2027-12-27",
+        "2027-12-28",
+        "2027-12-29",
+        "2027-12-30",
+        "2027-12-31"
+      ],
+      "from": "2027-12-25",
+      "to": "2027-12-31",
+      "note": "Both Christmas holidays fall on the weekend in 2027, so the week between them costs five full leave days. It runs on into 1 and 2 January 2028.",
+      "spillDays": 2
+    }
+  ],
+  "sources": "Public holidays and school holiday dates from the Berlin Senate; leave rules from the Bundesurlaubsgesetz."
+}

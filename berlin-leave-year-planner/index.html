@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Leave Year Planner</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --muted: #5a665b;
+    --line: rgba(27, 94, 32, .18);
+    --spent: #1B5E20;
+    --won: #A8CBA1;
+    --school: #C8A65B;
+    --wknd: #E4E8E1;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .ly { max-width: 780px; margin: 0 auto; padding: 14px 12px 16px; }
+
+  .ly-head h2 { font-size: 1.06rem; margin: 0 0 3px; color: var(--green); }
+  .ly-head p { margin: 0; font-size: .78rem; color: var(--muted); line-height: 1.5; }
+
+  .ly-bar { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; margin: 12px 0 0; padding: 11px 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; }
+  .ly-bar label { font-size: .66rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--deep); display: block; margin-bottom: 5px; }
+  .ly-bar input { font-family: inherit; font-size: 1rem; font-weight: 700; color: var(--deep); width: 84px; padding: 6px 8px; border: 1px solid var(--green); border-radius: 8px; background: #fff; }
+  .ly-bar input:focus-visible { outline: 3px solid var(--yellow); outline-offset: 1px; }
+  .ly-bar .hint { font-size: .68rem; color: var(--muted); line-height: 1.45; flex: 1 1 220px; min-width: 180px; }
+
+  .ly-cal { margin-top: 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 10px 8px 6px; }
+  .ly-cal svg { display: block; width: 100%; height: auto; }
+  .ly-cal text { font-family: 'Montserrat', sans-serif; }
+
+  .ly-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 9px 4px 2px; font-size: .67rem; color: var(--muted); }
+  .ly-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .ly-key { width: 15px; height: 10px; border-radius: 2px; display: inline-block; border: 1px solid rgba(0,0,0,.12); }
+
+  .ly-total { margin-top: 12px; padding: 12px 14px; border-radius: 10px; background: var(--deep); color: #fff; }
+  .ly-total .grid { display: flex; flex-wrap: wrap; gap: 14px 26px; }
+  .ly-total .cell { min-width: 92px; }
+  .ly-total .n { font-size: 1.5rem; font-weight: 700; line-height: 1.05; display: block; }
+  .ly-total .k { font-size: .62rem; letter-spacing: .07em; text-transform: uppercase; color: rgba(255,255,255,.66); display: block; margin-top: 2px; }
+  .ly-total .say { font-size: .78rem; line-height: 1.55; color: rgba(255,255,255,.92); margin: 10px 0 0; }
+  .ly-total .say.over { color: var(--yellow); font-weight: 600; }
+
+  .ly-pick { margin-top: 12px; }
+  .ly-pick h3 { font-size: .66rem; letter-spacing: .07em; text-transform: uppercase; color: var(--deep); margin: 0 0 8px; }
+  .ly-blocks { display: grid; grid-template-columns: repeat(auto-fit, minmax(214px, 1fr)); gap: 7px; }
+  .ly-blocks button {
+    font-family: inherit; text-align: left; cursor: pointer; padding: 9px 11px;
+    border-radius: 9px; border: 1px solid var(--green); background: #fff; color: var(--deep);
+    display: block; width: 100%;
+  }
+  .ly-blocks button .nm { font-size: .8rem; font-weight: 700; line-height: 1.3; display: block; }
+  .ly-blocks button .dt { font-size: .68rem; font-weight: 500; color: var(--muted); display: block; margin-top: 2px; }
+  .ly-blocks button .mt { font-size: .7rem; font-weight: 700; display: block; margin-top: 5px; }
+  .ly-blocks button[aria-pressed="true"] { background: var(--deep); color: #fff; border-color: var(--deep); }
+  .ly-blocks button[aria-pressed="true"] .dt { color: rgba(255,255,255,.72); }
+  .ly-blocks button[aria-pressed="true"] .mt { color: var(--yellow); }
+  .ly-blocks button:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+
+  .ly-notes { margin-top: 12px; }
+  .ly-notes h3 { font-size: .66rem; letter-spacing: .07em; text-transform: uppercase; color: var(--deep); margin: 0 0 7px; }
+  .ly-notes ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
+  .ly-notes li { padding: 9px 11px; border-radius: 9px; background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--green); font-size: .74rem; line-height: 1.55; color: var(--ink); }
+  .ly-notes li.warn { border-left-color: var(--school); }
+  .ly-notes li b { color: var(--deep); }
+  .ly-notes li.empty { border-left-color: var(--line); color: var(--muted); }
+
+  .ly-foot { margin: 11px 2px 0; font-size: .66rem; color: var(--muted); line-height: 1.55; }
+  .ly-hint-scroll { display: none; margin: 6px 4px 0; font-size: .66rem; color: var(--muted); }
+
+  @media (max-width: 560px) {
+    /* At phone width a day cell is about nine pixels across. The numbers stop
+       being readable and start being noise, so the year reads as a pattern and
+       the exact dates come from the break cards below it. */
+    .ly-cal text.dnum { display: none; }
+  }
+  @media (max-width: 470px) {
+    /* Inside a narrow blog iframe the year would shrink to about six pixels a
+       day, which is no longer a calendar. Let the card scroll sideways on its
+       own instead, so a day stays wide enough to see. The page itself still
+       has no horizontal overflow. */
+    .ly-cal { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .ly-cal svg { min-width: 470px; }
+    .ly-hint-scroll { display: block; }
+  }
+  @media (max-width: 430px) {
+    .ly { padding: 12px 10px 14px; }
+    .ly-blocks { grid-template-columns: 1fr; }
+    .ly-total .n { font-size: 1.32rem; }
+  }
+</style>
+</head>
+<body>
+<div class="ly">
+  <div class="ly-head">
+    <h2>Berlin Leave Year Planner: 2027</h2>
+    <p>The whole Berlin working year, with the ten public holidays, the school holidays and the weekends already drawn. Set the leave days you actually have, then add the breaks you want and watch the year fill up.</p>
+  </div>
+
+  <div class="ly-bar">
+    <div>
+      <label for="ly-allow">Leave days for 2027</label>
+      <input id="ly-allow" type="number" min="0" max="60" step="1" value="30" inputmode="numeric">
+    </div>
+    <p class="hint" id="ly-hint">German law sets a floor of 20 days on a five-day week. Most Berlin contracts run 25 to 30.</p>
+  </div>
+
+  <div class="ly-cal">
+    <svg id="ly-svg" viewBox="0 0 712 296" role="img" aria-labelledby="ly-svg-title">
+      <title id="ly-svg-title">A calendar of 2027 showing weekends, Berlin public holidays, Berlin school holidays and the leave days of the breaks you have chosen.</title>
+    </svg>
+  </div>
+
+  <p class="ly-hint-scroll">Scroll the calendar sideways to reach the later months.</p>
+
+  <div class="ly-legend">
+    <span><i class="ly-key" style="background:#fff"></i> working day</span>
+    <span><i class="ly-key" style="background:#E4E8E1"></i> weekend</span>
+    <span><i class="ly-key" style="background:#FFE600"></i> public holiday</span>
+    <span><i class="ly-key" style="background:#C8A65B"></i> Berlin school holiday</span>
+    <span><i class="ly-key" style="background:#1B5E20"></i> leave day you spend</span>
+    <span><i class="ly-key" style="background:#A8CBA1"></i> day off you win</span>
+  </div>
+
+  <div class="ly-total">
+    <div class="grid">
+      <div class="cell"><span class="n" id="ly-spent">0</span><span class="k">leave days spent</span></div>
+      <div class="cell"><span class="n" id="ly-left">30</span><span class="k">still in the bank</span></div>
+      <div class="cell"><span class="n" id="ly-off">0</span><span class="k">days off won</span></div>
+      <div class="cell"><span class="n" id="ly-ratio">&ndash;</span><span class="k">days off per leave day</span></div>
+    </div>
+    <p class="say" id="ly-say">Nothing chosen yet. In 2027 only six of the ten Berlin public holidays fall on a working day, and every one of them is in the first four and a half months of the year.</p>
+  </div>
+
+  <div class="ly-pick">
+    <h3>Add a break</h3>
+    <div class="ly-blocks" id="ly-blocks"></div>
+  </div>
+
+  <div class="ly-notes">
+    <h3>What that plan means</h3>
+    <ul id="ly-notes"><li class="empty">Add a break above and the trade-off for that window appears here.</li></ul>
+  </div>
+
+  <p class="ly-foot" id="ly-foot"></p>
+</div>
+
+<script>
+(function () {
+  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var MSHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var DAY = 86400000;
+  var chosen = new Set();
+  var data = null;
+  var allowance = 30;
+
+  function iso(d) { return d.toISOString().slice(0, 10); }
+  function mk(s) { return new Date(s + 'T00:00:00Z'); }
+  function span(fromIso, toIso) {
+    var out = [], a = mk(fromIso), b = mk(toIso);
+    for (var d = new Date(a); d <= b; d.setUTCDate(d.getUTCDate() + 1)) out.push(iso(d));
+    return out;
+  }
+  function pretty(isoStr) {
+    var d = mk(isoStr);
+    return d.getUTCDate() + ' ' + MSHORT[d.getUTCMonth()];
+  }
+
+  /* ---------- the drawn year ---------- */
+
+  function drawCalendar(spentSet, wonSet) {
+    var CELL = 17, GAP = 1, LEFT = 40, TOP = 30;
+    var svg = document.getElementById('ly-svg');
+    var parts = ['<title id="ly-svg-title">A calendar of 2027 showing weekends, Berlin public holidays, Berlin school holidays and the leave days of the breaks you have chosen.</title>'];
+
+    // Column header: the weekday letters repeat every seven columns.
+    var letters = ['M','T','W','T','F','S','S'];
+    for (var c = 0; c < 37; c++) {
+      parts.push('<text x="' + (LEFT + c * (CELL + GAP) + CELL / 2) + '" y="20" text-anchor="middle" font-size="8" fill="#8a958b">' +
+        letters[c % 7] + '</text>');
+    }
+
+    for (var m = 0; m < 12; m++) {
+      var y = TOP + m * (CELL + GAP + 1);
+      parts.push('<text x="0" y="' + (y + CELL - 4) + '" font-size="9.5" font-weight="600" fill="#123D18">' + MSHORT[m] + '</text>');
+      var first = new Date(Date.UTC(2027, m, 1));
+      var offset = (first.getUTCDay() + 6) % 7; // Monday-first
+      var last = new Date(Date.UTC(2027, m + 1, 0)).getUTCDate();
+      for (var day = 1; day <= last; day++) {
+        var d = new Date(Date.UTC(2027, m, day));
+        var key = iso(d);
+        var col = offset + day - 1;
+        var x = LEFT + col * (CELL + GAP);
+        var weekend = d.getUTCDay() === 0 || d.getUTCDay() === 6;
+        var holiday = !!data.holidays[key];
+        var fill = '#ffffff', stroke = 'rgba(27,94,32,.16)', textFill = '#7d877e', weight = '400';
+        if (weekend) fill = '#E4E8E1';
+        if (holiday) { fill = '#FFE600'; textFill = '#123D18'; weight = '700'; }
+        if (wonSet.has(key)) { fill = '#A8CBA1'; textFill = '#123D18'; }
+        if (spentSet.has(key)) { fill = '#1B5E20'; textFill = '#ffffff'; weight = '700'; stroke = '#123D18'; }
+        parts.push('<rect x="' + x + '" y="' + y + '" width="' + CELL + '" height="' + CELL +
+          '" rx="2.5" fill="' + fill + '" stroke="' + stroke + '" stroke-width="0.7"/>');
+        parts.push('<text class="dnum" x="' + (x + CELL / 2) + '" y="' + (y + CELL - 5) +
+          '" text-anchor="middle" font-size="7.6" font-weight="' + weight + '" fill="' + textFill + '">' + day + '</text>');
+        if (schoolDays.has(key)) {
+          parts.push('<rect x="' + (x + 2.5) + '" y="' + (y + CELL - 2.2) + '" width="' + (CELL - 5) +
+            '" height="2" rx="1" fill="#C8A65B"/>');
+        }
+      }
+    }
+    svg.innerHTML = parts.join('');
+  }
+
+  /* ---------- state ---------- */
+
+  var schoolDays = new Set();
+
+  function currentSets() {
+    var spent = new Set(), won = new Set();
+    data.blocks.forEach(function (b) {
+      if (!chosen.has(b.id)) return;
+      b.leave.forEach(function (k) { spent.add(k); });
+      span(b.from, b.to).forEach(function (k) { if (k.slice(0, 4) === '2027') won.add(k); });
+    });
+    spent.forEach(function (k) { won.delete(k); });
+    return { spent: spent, won: won };
+  }
+
+  function render() {
+    var sets = currentSets();
+    var picked = data.blocks.filter(function (b) { return chosen.has(b.id); });
+    var spentCount = sets.spent.size;
+    var spill = picked.reduce(function (acc, b) { return acc + (b.spillDays || 0); }, 0);
+    var total = sets.spent.size + sets.won.size + spill;
+
+    drawCalendar(sets.spent, sets.won);
+
+    document.getElementById('ly-spent').textContent = spentCount;
+    document.getElementById('ly-left').textContent = allowance - spentCount;
+    document.getElementById('ly-off').textContent = total;
+    document.getElementById('ly-ratio').textContent = spentCount ? (total / spentCount).toFixed(2) : '–';
+
+    var say = document.getElementById('ly-say');
+    say.classList.remove('over');
+    if (!spentCount) {
+      say.textContent = 'Nothing chosen yet. In 2027 only six of the ten Berlin public holidays fall on a working day, and every one of them is in the first four and a half months of the year.';
+    } else if (spentCount > allowance) {
+      say.classList.add('over');
+      say.textContent = 'That is ' + (spentCount - allowance) + ' day' + (spentCount - allowance === 1 ? '' : 's') +
+        ' more than you have. Drop the block with the worst ratio first, not the one you like least.';
+    } else {
+      var rest = allowance - spentCount;
+      say.textContent = spentCount + ' leave day' + (spentCount === 1 ? '' : 's') + ' buys you ' + total +
+        ' days off, and leaves ' + rest + ' day' + (rest === 1 ? '' : 's') +
+        ' for the 228 days between 18 May and the end of the year when no Berlin holiday falls on a working day.';
+    }
+
+    // Which chosen block gives the best return, and which windows are contested.
+    var notes = document.getElementById('ly-notes');
+    if (!picked.length) {
+      notes.innerHTML = '<li class="empty">Add a break above and the trade-off for that window appears here.</li>';
+    } else {
+      var rows = picked.map(function (b) {
+        var days = span(b.from, b.to).filter(function (k) { return k.slice(0, 4) === '2027'; }).length + (b.spillDays || 0);
+        var r = (days / b.leave.length).toFixed(2);
+        var clash = b.leave.some(function (k) { return schoolDays.has(k); });
+        return '<li class="' + (clash ? 'warn' : '') + '"><b>' + b.name + ', ' + b.request + '.</b> ' +
+          b.leave.length + ' leave day' + (b.leave.length === 1 ? '' : 's') + ' for ' + days + ' days off, ' + r + ' per day. ' +
+          b.note + '</li>';
+      });
+      notes.innerHTML = rows.join('');
+    }
+
+    document.querySelectorAll('#ly-blocks button').forEach(function (btn) {
+      btn.setAttribute('aria-pressed', chosen.has(btn.getAttribute('data-id')) ? 'true' : 'false');
+    });
+  }
+
+  function boot(d) {
+    data = d;
+    d.schoolWindows.forEach(function (w) { span(w.from, w.to).forEach(function (k) { schoolDays.add(k); }); });
+
+    var wrap = document.getElementById('ly-blocks');
+    wrap.innerHTML = d.blocks.map(function (b) {
+      var days = span(b.from, b.to).filter(function (k) { return k.slice(0, 4) === '2027'; }).length + (b.spillDays || 0);
+      return '<button type="button" data-id="' + b.id + '" aria-pressed="false">' +
+        '<span class="nm">' + b.name + '</span>' +
+        '<span class="dt">' + b.request + '</span>' +
+        '<span class="mt">' + b.leave.length + ' leave → ' + days + ' days off</span>' +
+        '</button>';
+    }).join('');
+
+    wrap.addEventListener('click', function (e) {
+      var btn = e.target.closest('button');
+      if (!btn) return;
+      var id = btn.getAttribute('data-id');
+      if (chosen.has(id)) chosen.delete(id); else chosen.add(id);
+      render();
+    });
+
+    var input = document.getElementById('ly-allow');
+    input.value = d.allowanceDefault;
+    allowance = d.allowanceDefault;
+    input.addEventListener('input', function () {
+      var v = parseInt(input.value, 10);
+      allowance = isNaN(v) ? 0 : Math.max(0, Math.min(60, v));
+      render();
+    });
+
+    document.getElementById('ly-foot').textContent =
+      'Holiday and school holiday dates checked on ' + d.checkedOn +
+      ' against the Berlin Senate listings. A break that runs past 31 December is counted in full but drawn only to the end of the year. ' +
+      'Days off assume a Monday to Friday week; part-time and shift patterns change the arithmetic.';
+
+    render();
+  }
+
+  fetch('data.json', { cache: 'no-store' })
+    .then(function (r) { return r.json(); })
+    .then(boot)
+    .catch(function () {
+      document.getElementById('ly-notes').innerHTML =
+        '<li class="empty">The 2027 calendar could not be loaded. Please reload the page.</li>';
+    });
+})();
+</script>
+<script defer src="../js/brand.js"></script>
+</body>
+</html>
