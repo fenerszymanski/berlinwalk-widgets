@@ -207,8 +207,20 @@
   function catalogImage(record) {
     var image = record && record.image;
     if (!image) return '';
+    if (state.slug === 'whats-open-in-berlin-today') image = smallWixToolIcon(image);
     if (/^https?:\/\//i.test(image)) return image;
     return 'https://fenerszymanski.github.io/berlinwalk-widgets/' + String(image).replace(/^\//, '');
+  }
+
+  // The 76px rail icon is not the LCP image. Keep the exact licensed image,
+  // but do not download its 267KB original or block Wix's load lifecycle.
+  function smallWixToolIcon(image) {
+    try {
+      var url = new URL(image, 'https://www.berlinwalk.com');
+      var match = url.pathname.match(/^\/media\/([^/]+\.(?:png|jpg|jpeg|webp))$/i);
+      if (url.protocol !== 'https:' || url.hostname !== 'static.wixstatic.com' || !match || url.search || url.hash) return image;
+      return url.origin + url.pathname + '/v1/fit/w_160,h_160,q_85/' + match[1].replace(/\.[^.]+$/, '.webp');
+    } catch (e) { return image; }
   }
 
   function typeLabel(record) {
@@ -370,9 +382,10 @@
     }
     var image = catalogImage(state.record);
     var category = categoryLabel(state.record);
-    card.innerHTML = [
+    var efficientIcon = state.slug === 'whats-open-in-berlin-today';
+    var markup = [
       '<div class="bw-tools-shell-v2-summary-head">',
-      image ? '<img class="bw-tools-shell-v2-summary-icon" src="' + escapeHtml(image) + '" alt="" aria-hidden="true">' : '',
+      image ? '<img class="bw-tools-shell-v2-summary-icon"' + (efficientIcon ? ' loading="lazy" decoding="async" fetchpriority="low" width="76" height="76"' : '') + ' src="' + escapeHtml(image) + '" alt="" aria-hidden="true">' : '',
       '<div><span class="bw-tools-shell-v2-summary-kicker">Berlin tool</span><strong>' + escapeHtml(typeLabel(state.record)) + '</strong></div>',
       '</div>',
       '<dl class="bw-tools-shell-v2-summary-facts">',
@@ -380,6 +393,14 @@
       '<div><dt>Format</dt><dd>Interactive tool</dd></div>',
       '</dl>'
     ].join('');
+    // Wix's bounded retries must repair a remount, not recreate the same img
+    // on every pass (which can keep restarting a failed/slow icon request).
+    if (efficientIcon && card.__bwSummaryMarkup === markup &&
+        card.querySelector('.bw-tools-shell-v2-summary-head') &&
+        card.querySelector('.bw-tools-shell-v2-summary-facts') &&
+        (!image || card.querySelector('img.bw-tools-shell-v2-summary-icon'))) return;
+    card.innerHTML = markup;
+    if (efficientIcon) card.__bwSummaryMarkup = markup;
   }
 
   function richRoot(container) {
