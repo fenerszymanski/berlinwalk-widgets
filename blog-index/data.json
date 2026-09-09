@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-09T02:11:41.900Z",
+  "updatedAt": "2026-09-09T07:46:41.382Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 364,
-  "toolsTotal": 284,
+  "totalPosts": 365,
+  "toolsTotal": 285,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1618,6 +1618,23 @@
   ],
   "latest": [
     {
+      "title": "Taking Photos in Berlin: Where the Rules Actually Change",
+      "slug": "taking-photos-in-berlin",
+      "path": "/post/taking-photos-in-berlin",
+      "url": "https://www.berlinwalk.com/post/taking-photos-in-berlin",
+      "excerpt": "Almost nothing in central Berlin is off limits from the street. Then you walk through a door and the rule changes three times inside one building. Here is where photography is fine, where the tripod goes to the cloakroom, which two exhibitions ban cameras outright, and what German law actually says about drones and strangers in your frame.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "history-myths",
+      "topicLabel": "Berlin History & Myths",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-09T07:43:30.001Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_91ab48f180cc4aa1908075965114fb56~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-humboldt-forum-roof-view.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_91ab48f180cc4aa1908075965114fb56~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-humboldt-forum-roof-view.jpg",
+      "alt": "The view from the Humboldt Forum roof terrace in Berlin over the Lustgarten, the Altes Museum and the domed Berliner Dom",
+      "relatedToolSlug": ""
+    },
+    {
       "title": "Berlin Museums Closed for Renovation: What Is Shut and What to See Instead",
       "slug": "berlin-museums-closed-for-renovation",
       "path": "/post/berlin-museums-closed-for-renovation",
@@ -1803,26 +1820,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_33e8970d4de941438d35180249a00a43~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-berlin-altbau-facade.jpg",
       "alt": "A classic Berlin Altbau facade on Templiner Strasse in Prenzlauer Berg, with tall windows, stucco detail and balconies",
       "relatedToolSlug": "berlin-stay-cost-grid"
-    },
-    {
-      "title": "When Is Berlin Busiest? The Trade Fair and Event Weeks That Fill the Hotels",
-      "slug": "when-is-berlin-busiest",
-      "path": "/post/when-is-berlin-busiest",
-      "url": "https://www.berlinwalk.com/post/when-is-berlin-busiest",
-      "excerpt": "Berlin does not fill up evenly across a season. It fills up in windows, most of them three to ten days long, and most of them driven by a trade fair out at the Messe grounds in Charlottenburg that no visitor has ever heard of. Here are the dated windows between now and next autumn, taken from the organisers themselves, what each one changes for an ordinary visitor, and how far you would have to shift your dates to step around the expensive ones.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "8 min read",
-      "publishedDate": "2026-09-05T08:03:24.269Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_73951f5d413b449c846ccd8ec62c7bab~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-messe-berlin-grounds.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_73951f5d413b449c846ccd8ec62c7bab~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-messe-berlin-grounds.jpg",
-      "alt": "The Messe Berlin rotunda with its lettering, the exhibition halls stretching back towards the radio tower, and the Charlottenburg skyline behind",
-      "relatedToolSlug": "berlin-busy-week-calendar"
     }
   ],
   "allPosts": [
+    {
+      "title": "Taking Photos in Berlin: Where the Rules Actually Change",
+      "slug": "taking-photos-in-berlin",
+      "path": "/post/taking-photos-in-berlin",
+      "url": "https://www.berlinwalk.com/post/taking-photos-in-berlin",
+      "excerpt": "Almost nothing in central Berlin is off limits from the street. Then you walk through a door and the rule changes three times inside one building. Here is where photography is fine, where the tripod goes to the cloakroom, which two exhibitions ban cameras outright, and what German law actually says about drones and strangers in your frame.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "history-myths",
+      "topicLabel": "Berlin History & Myths",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-09T07:43:30.001Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_91ab48f180cc4aa1908075965114fb56~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-humboldt-forum-roof-view.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_91ab48f180cc4aa1908075965114fb56~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-humboldt-forum-roof-view.jpg",
+      "alt": "The view from the Humboldt Forum roof terrace in Berlin over the Lustgarten, the Altes Museum and the domed Berliner Dom",
+      "relatedToolSlug": ""
+    },
     {
       "title": "Berlin Museums Closed for Renovation: What Is Shut and What to See Instead",
       "slug": "berlin-museums-closed-for-renovation",
