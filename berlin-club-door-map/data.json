@@ -1,0 +1,517 @@
+{
+  "checkedOn": "9 September 2026",
+  "axes": {
+    "x": {
+      "label": "How much your outfit decides it",
+      "lo": "Nobody looks",
+      "hi": "The outfit is the ticket"
+    },
+    "y": {
+      "label": "How much everything else decides it",
+      "lo": "Almost nothing",
+      "hi": "Everything is read"
+    }
+  },
+  "clubs": [
+    {
+      "n": 1,
+      "name": "Berghain / Panorama Bar",
+      "code": "BGH",
+      "area": "Friedrichshain, Am Wriezener Bahnhof, S Ostbahnhof",
+      "windows": [
+        [
+          24,
+          36
+        ],
+        [
+          48,
+          82
+        ]
+      ],
+      "season": "all year",
+      "when": "Panorama Bar from around midnight on Friday, Klubnacht from around midnight on Saturday until Monday morning",
+      "reads": "Whether you look like someone who came for the room and not for the story about the room. Groups get split, phones get read, loud English gets read, drunk gets read.",
+      "rule": "Both phone lenses are covered with a sticker at the door and photography inside is not allowed.",
+      "line": "The hardest door in the city, and the one where an outfit helps you least. People overdress for it constantly.",
+      "queue": "One to three hours at peak. Sunday afternoon is the quiet arrival.",
+      "lat": 52.5111,
+      "lon": 13.443,
+      "addr": "Am Wriezener Bahnhof, 10243",
+      "outfit": 3,
+      "everything": 9.6
+    },
+    {
+      "n": 2,
+      "name": "Tresor",
+      "code": "TRE",
+      "area": "Mitte, Kraftwerk on Kopenicker Strasse, U Heinrich-Heine-Strasse",
+      "windows": [
+        [
+          24,
+          32
+        ],
+        [
+          48,
+          58
+        ]
+      ],
+      "season": "all year",
+      "when": "Friday and Saturday nights from around midnight",
+      "reads": "Sobriety, group size and whether you are calm in the queue. There is no published dress code at all.",
+      "rule": "Tresor's own guest information says strictly no filming or photos inside, and guests found doing it are removed. The cloakroom is self-service, so bring a charged phone with NFC switched on.",
+      "line": "Easier than Berghain and still not a guarantee. Dark and plain is not a rule, it is just what people wear.",
+      "queue": "Twenty minutes to an hour on a normal Saturday.",
+      "lat": 52.5104,
+      "lon": 13.4191,
+      "addr": "Koepenicker Strasse 70, 10179",
+      "outfit": 2.4,
+      "everything": 7
+    },
+    {
+      "n": 3,
+      "name": "Sisyphos",
+      "code": "SIS",
+      "area": "Lichtenberg, Rummelsburg, S Rummelsburg or S Ostkreuz then a bus",
+      "windows": [
+        [
+          23,
+          82
+        ]
+      ],
+      "season": "all year, best in summer",
+      "when": "Friday night straight through to Monday",
+      "reads": "Whether you arrive as a person or as a tour group. It is a former dog biscuit factory turned festival site and the door protects that feeling.",
+      "rule": "Phone cameras are stickered at the door.",
+      "line": "The queue is the real filter here. In summer it can run for hours before anyone even looks at you.",
+      "queue": "Up to several hours on a warm weekend.",
+      "lat": 52.4966,
+      "lon": 13.4915,
+      "addr": "Hauptstrasse 15, 10317",
+      "outfit": 2,
+      "everything": 8.2
+    },
+    {
+      "n": 4,
+      "name": "://about blank",
+      "code": "ABL",
+      "area": "Friedrichshain, Markgrafendamm, S Ostkreuz",
+      "windows": [
+        [
+          24,
+          36
+        ],
+        [
+          48,
+          84
+        ]
+      ],
+      "season": "all year, garden in summer",
+      "when": "Friday night and Saturday night, often running into Monday",
+      "reads": "Whether you understand it is a political collective with a garden attached, not a nightlife product. Awareness culture is loud and taken seriously.",
+      "rule": "Camera stickers at the door and a visible awareness team inside.",
+      "line": "One of the friendlier doors if you are quiet and alone or in a pair, one of the harder ones for a stag party.",
+      "queue": "Half an hour to two hours.",
+      "lat": 52.503,
+      "lon": 13.47,
+      "addr": "Markgrafendamm 24c, 10245",
+      "outfit": 1.5,
+      "everything": 6.4
+    },
+    {
+      "n": 5,
+      "name": "RSO.Berlin",
+      "code": "RSO",
+      "area": "Niederschoeneweide, Schnellerstrasse, on the old Baerenquell brewery site",
+      "windows": [
+        [
+          23,
+          34
+        ],
+        [
+          47,
+          62
+        ]
+      ],
+      "season": "all year, open air in summer",
+      "when": "Friday and Saturday nights, often with a Sunday daytime floor",
+      "reads": "Effort. Not money, effort. This is the club that grew out of Griessmuehle after it lost its site, and the door protects that inheritance.",
+      "rule": "Camera stickers at the door.",
+      "line": "The furthest out of the twelve and the one most likely to reject a group that turns up in holiday clothes at 01:00.",
+      "queue": "Long at peak, short before midnight.",
+      "lat": 52.4562,
+      "lon": 13.511,
+      "addr": "Schnellerstrasse 137, 12439",
+      "outfit": 4.2,
+      "everything": 8.4
+    },
+    {
+      "n": 6,
+      "name": "Kater",
+      "code": "KAT",
+      "area": "Friedrichshain, Holzmarktstrasse 25, S Jannowitzbruecke or S Ostbahnhof",
+      "windows": [
+        [
+          22,
+          86
+        ]
+      ],
+      "season": "all year, riverside in summer",
+      "when": "Friday night until Monday afternoon",
+      "reads": "Very little beyond being sober and pleasant. This is the wooden shacks and circus tents club on the Spree.",
+      "rule": "Camera stickers at the door. Tickets are usually bought at the door, roughly 20 to 25 euro.",
+      "line": "It was Kater Blau until August 2025 and the name is still what everyone searches. Same site, same door, shorter name.",
+      "queue": "Twenty minutes to an hour.",
+      "lat": 52.5122,
+      "lon": 13.4272,
+      "addr": "Holzmarktstrasse 25, 10243",
+      "outfit": 3.2,
+      "everything": 3.8
+    },
+    {
+      "n": 7,
+      "name": "Salon zur Wilden Renate",
+      "code": "REN",
+      "area": "Friedrichshain, Alt-Stralau, S Ostkreuz",
+      "windows": [
+        [
+          24,
+          34
+        ],
+        [
+          48,
+          60
+        ]
+      ],
+      "season": "all year",
+      "when": "Friday and Saturday nights",
+      "reads": "Whether you are going to treat an old flat full of rooms like a nightclub or like someone's home.",
+      "rule": "Camera stickers at the door.",
+      "line": "It announced its own closure for the end of 2025 and then secured the lease in December 2025. It is still here, which is not something Berlin says often.",
+      "queue": "Half an hour at peak.",
+      "lat": 52.5006,
+      "lon": 13.4741,
+      "addr": "Alt-Stralau 70, 10245",
+      "outfit": 3,
+      "everything": 5.2
+    },
+    {
+      "n": 8,
+      "name": "Ritter Butzke",
+      "code": "RIT",
+      "area": "Kreuzberg, Ritterstrasse, U Moritzplatz",
+      "windows": [
+        [
+          24,
+          32
+        ],
+        [
+          48,
+          58
+        ]
+      ],
+      "season": "all year, courtyard in summer",
+      "when": "Friday and Saturday nights",
+      "reads": "Sobriety and group size, mostly. A relaxed individual look reads better here than an expensive one.",
+      "rule": "House rules on phones vary by night.",
+      "line": "A fair door with a very long queue, because it is popular and the rooms fill fast. Four floors and a summer courtyard.",
+      "queue": "Often over an hour.",
+      "lat": 52.503,
+      "lon": 13.4093,
+      "addr": "Ritterstrasse 26, 10969",
+      "outfit": 5,
+      "everything": 4.4
+    },
+    {
+      "n": 9,
+      "name": "Club der Visionaere",
+      "code": "CDV",
+      "area": "Treptow, Am Flutgraben, on the canal, U Schlesisches Tor",
+      "windows": [
+        [
+          16,
+          78
+        ]
+      ],
+      "season": "summer only, completely shut in winter",
+      "when": "Afternoons onward through the weekend, weather permitting",
+      "reads": "Almost nothing. It is a wooden shack and a terrace over the water.",
+      "rule": "No special phone rule. It is an outdoor bar as much as a club.",
+      "line": "The one on this chart with effectively no door. If you have been rejected somewhere and want the night to still be good, this is where you go.",
+      "queue": "Rarely more than a few minutes.",
+      "lat": 52.4971,
+      "lon": 13.4525,
+      "addr": "Am Flutgraben 1, 12435",
+      "outfit": 1,
+      "everything": 1.4
+    },
+    {
+      "n": 10,
+      "name": "Else",
+      "code": "ELS",
+      "area": "Alt-Treptow, under the Elsenbruecke, S Treptower Park",
+      "windows": [
+        [
+          16,
+          80
+        ]
+      ],
+      "season": "summer only, opened for the 2026 season on 24 April",
+      "when": "Friday afternoon through to Monday morning",
+      "reads": "Very little. Sand, a bar and a bridge overhead.",
+      "rule": "No special phone rule most nights.",
+      "line": "The daylight option next door to about blank. Different door, same corner of the city.",
+      "queue": "Short outside peak hours.",
+      "lat": 52.4938,
+      "lon": 13.4595,
+      "addr": "An den Treptowers 10, 12435",
+      "outfit": 1.2,
+      "everything": 2.6
+    },
+    {
+      "n": 11,
+      "name": "Matrix",
+      "code": "MTX",
+      "area": "Friedrichshain, Warschauer Platz, under the U-Bahn arches",
+      "windows": [
+        [
+          22,
+          29
+        ],
+        [
+          46,
+          53
+        ]
+      ],
+      "season": "all year",
+      "when": "Several nights a week, closing around 05:00",
+      "reads": "Your clothes, and almost nothing else. This is the one venue here that runs a normal commercial dress code and turns people away for sportswear.",
+      "rule": "No underground camera rule. Phones are used freely.",
+      "line": "It is on this chart because it is the opposite of everything else on it. Chart music, big crowd, smart-casual door. Nobody is testing your taste.",
+      "queue": "Fast most nights.",
+      "lat": 52.5051,
+      "lon": 13.4494,
+      "addr": "Warschauer Platz 18, 10245",
+      "outfit": 6.2,
+      "everything": 1.8
+    },
+    {
+      "n": 12,
+      "name": "KitKatClub",
+      "code": "KKC",
+      "area": "Mitte, Brueckenstrasse, U Heinrich-Heine-Strasse",
+      "windows": [
+        [
+          23,
+          32
+        ],
+        [
+          47,
+          59
+        ]
+      ],
+      "season": "all year",
+      "when": "Friday and Saturday nights",
+      "reads": "The outfit, completely and openly. This is the only door on the chart with a published, enforced dress code, and street clothes are refused.",
+      "rule": "Strict no photography. Changing rooms on site.",
+      "line": "The far right edge of the chart exists because of this club. Everywhere else, dressing up is a guess. Here it is the entry condition.",
+      "queue": "Moderate, and the check is at the door not in the queue.",
+      "lat": 52.5131,
+      "lon": 13.418,
+      "addr": "Brueckenstrasse 1, 10179",
+      "outfit": 9.6,
+      "everything": 5
+    }
+  ],
+  "moments": [
+    {
+      "h": 23,
+      "label": "Fri 23:00"
+    },
+    {
+      "h": 26,
+      "label": "Sat 02:00"
+    },
+    {
+      "h": 39,
+      "label": "Sat 15:00"
+    },
+    {
+      "h": 52,
+      "label": "Sun 04:00"
+    },
+    {
+      "h": 64,
+      "label": "Sun 16:00"
+    },
+    {
+      "h": 80,
+      "label": "Mon 08:00"
+    }
+  ],
+  "bounds": {
+    "latMin": 52.45,
+    "latMax": 52.5185,
+    "lonMin": 13.402,
+    "lonMax": 13.519
+  },
+  "river": [
+    [
+      [
+        52.5142,
+        13.412
+      ],
+      [
+        52.5128,
+        13.4265
+      ],
+      [
+        52.51,
+        13.4382
+      ],
+      [
+        52.503,
+        13.4472
+      ],
+      [
+        52.4962,
+        13.4602
+      ],
+      [
+        52.49,
+        13.4682
+      ],
+      [
+        52.4828,
+        13.4792
+      ],
+      [
+        52.47,
+        13.4934
+      ],
+      [
+        52.459,
+        13.507
+      ]
+    ],
+    [
+      [
+        52.4996,
+        13.4702
+      ],
+      [
+        52.4962,
+        13.4834
+      ],
+      [
+        52.4952,
+        13.493
+      ]
+    ]
+  ],
+  "stations": [
+    {
+      "n": "U Heinrich-Heine-Str",
+      "lat": 52.5108,
+      "lon": 13.4143,
+      "dx": 3,
+      "dy": -7,
+      "anchor": "start"
+    },
+    {
+      "n": "S+U Jannowitzbruecke",
+      "lat": 52.5148,
+      "lon": 13.4181,
+      "dx": 0,
+      "dy": -7,
+      "anchor": "middle"
+    },
+    {
+      "n": "U Moritzplatz",
+      "lat": 52.5033,
+      "lon": 13.4113,
+      "dx": 0,
+      "dy": 12,
+      "anchor": "middle"
+    },
+    {
+      "n": "S Ostbahnhof",
+      "lat": 52.5107,
+      "lon": 13.4348,
+      "dx": 0,
+      "dy": -8,
+      "anchor": "middle"
+    },
+    {
+      "n": "S+U Warschauer Str",
+      "lat": 52.5053,
+      "lon": 13.449,
+      "dx": -8,
+      "dy": 13,
+      "anchor": "end"
+    },
+    {
+      "n": "S Ostkreuz",
+      "lat": 52.5028,
+      "lon": 13.4692,
+      "dx": 6,
+      "dy": -6,
+      "anchor": "start"
+    },
+    {
+      "n": "S Treptower Park",
+      "lat": 52.4937,
+      "lon": 13.4593,
+      "dx": 0,
+      "dy": 13,
+      "anchor": "middle"
+    },
+    {
+      "n": "S Rummelsburg",
+      "lat": 52.497,
+      "lon": 13.483,
+      "dx": 0,
+      "dy": -7,
+      "anchor": "middle"
+    },
+    {
+      "n": "S Schoeneweide",
+      "lat": 52.4552,
+      "lon": 13.509,
+      "dx": 0,
+      "dy": 14,
+      "anchor": "middle"
+    }
+  ],
+  "districts": [
+    {
+      "n": "Kreuzberg",
+      "lat": 52.493,
+      "lon": 13.416
+    },
+    {
+      "n": "Friedrichshain",
+      "lat": 52.515,
+      "lon": 13.462
+    },
+    {
+      "n": "Treptow",
+      "lat": 52.479,
+      "lon": 13.452
+    },
+    {
+      "n": "Lichtenberg",
+      "lat": 52.509,
+      "lon": 13.499
+    },
+    {
+      "n": "Neukoelln",
+      "lat": 52.464,
+      "lon": 13.429
+    },
+    {
+      "n": "Schoeneweide",
+      "lat": 52.464,
+      "lon": 13.493
+    }
+  ]
+}

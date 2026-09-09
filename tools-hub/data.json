@@ -8477,6 +8477,34 @@
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_b199510827ee4829a592e591f2dc9552~mv2.png",
       "cmsItemId": "9092cfca-4f7b-4f0b-8a14-a39b8328c587"
+    },
+    {
+      "slug": "berlin-club-door-map",
+      "title": "Berlin Club Door Map",
+      "lead": "Twelve Berlin club doors on the real map, from Kreuzberg to Schoeneweide, with what each door actually reads and which ones are even open at the hour you plan to arrive. Pick a door and the map shows the nearest open fallback and how far you would have to walk.",
+      "category": "Discovery",
+      "hubCategory": "FoodNightlife",
+      "type": "Map",
+      "tags": [
+        "berlin club dress code",
+        "tresor berlin dress code",
+        "rso berlin dress code",
+        "kater blau dress code",
+        "ritter butzke dress code",
+        "about blank dress code",
+        "sisyphos door policy",
+        "berlin club opening hours"
+      ],
+      "aliases": [
+        "berlin club door policy",
+        "what to wear berlin clubs",
+        "berlin nightclub entry rules"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-club-door-map/",
+      "embedHeight": 1560,
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_e3f33123712c411cab7d863809fd9adc~mv2.png",
+      "cmsItemId": "1cc9621a-70a9-4239-a5c8-b4713d8e064d"
     }
   ],
   "hubCategories": [

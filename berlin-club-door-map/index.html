@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Club Door Map</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --muted: #5a665b;
+    --line: rgba(27, 94, 32, .18);
+    --shut: #b9c2ba;
+    --water: #cfe0e8;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .dm { max-width: 780px; margin: 0 auto; padding: 14px 12px 18px; }
+
+  .dm-head h2 { font-size: 1.06rem; margin: 0 0 4px; color: var(--green); line-height: 1.3; }
+  .dm-head p { margin: 0; font-size: .78rem; color: var(--muted); line-height: 1.55; }
+
+  .dm-when { margin: 14px 0 0; padding: 11px 12px 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; }
+  .dm-when .lbl { display: block; font-size: .64rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--deep); margin-bottom: 8px; }
+  .dm-moments { display: flex; flex-wrap: wrap; gap: 6px; }
+  .dm-moments button {
+    font-family: inherit; font-size: .74rem; font-weight: 600; cursor: pointer;
+    padding: 7px 11px; border-radius: 999px; border: 1px solid var(--green);
+    background: #fff; color: var(--deep); line-height: 1.2;
+  }
+  .dm-moments button[aria-current="true"] { background: var(--deep); color: #fff; border-color: var(--deep); }
+  .dm-moments button:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+  .dm-count { margin: 9px 0 0; font-size: .76rem; line-height: 1.55; color: var(--ink); }
+  .dm-count b { color: var(--green); }
+
+  .dm-map { margin-top: 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 6px 5px 4px; }
+  .dm-map svg { display: block; width: 100%; height: auto; }
+  .dm-map text { font-family: 'Montserrat', -apple-system, sans-serif; }
+  .pin { cursor: pointer; }
+  .pin:focus-visible .ring { stroke: #123D18; stroke-width: 3.4; }
+
+  .dm-panel { margin-top: 12px; border: 1px solid var(--line); border-radius: 10px; background: #fff; overflow: hidden; }
+  .dm-panel .top { background: var(--deep); color: #fff; padding: 11px 13px; }
+  .dm-panel .top h3 { margin: 0; font-size: .95rem; line-height: 1.3; }
+  .dm-panel .top .sub { display: block; margin-top: 3px; font-size: .69rem; color: rgba(255,255,255,.82); line-height: 1.45; }
+  .dm-panel .body { padding: 11px 13px 13px; }
+  .dm-panel .state { display: inline-block; font-size: .62rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 4px 9px; border-radius: 999px; margin-bottom: 10px; }
+  .dm-panel .state.open { background: var(--yellow); color: #123D18; }
+  .dm-panel .state.shut { background: #eceee9; color: #4a544b; }
+
+  .dm-bars { display: grid; gap: 7px; margin: 0 0 11px; }
+  .dm-bars .b { display: grid; grid-template-columns: 1fr; gap: 3px; }
+  .dm-bars .cap { font-size: .64rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--green); }
+  .dm-bars .track { display: block; height: 9px; border-radius: 999px; background: #edf1ea; overflow: hidden; }
+  .dm-bars .fill { display: block; height: 100%; border-radius: 999px; background: var(--green); }
+  .dm-bars .fill.alt { background: var(--lime); }
+
+  .dm-panel dl { margin: 0; display: grid; gap: 9px; }
+  .dm-panel dt { font-size: .62rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--green); margin-bottom: 2px; }
+  .dm-panel dd { margin: 0; font-size: .79rem; line-height: 1.6; color: var(--ink); }
+  .dm-panel .judge { margin: 11px 0 0; padding: 10px 11px; border-left: 4px solid var(--lime); background: #f4f8f1; border-radius: 0 8px 8px 0; font-size: .79rem; line-height: 1.6; }
+  .dm-panel .judge b { color: var(--deep); }
+  .dm-panel .fallback { margin: 10px 0 0; padding: 10px 11px; border: 1px dashed var(--green); border-radius: 8px; font-size: .78rem; line-height: 1.6; background: #fbfdf9; }
+  .dm-panel .fallback b { color: var(--deep); }
+
+  .dm-legend { margin-top: 12px; }
+  .dm-legend h3 { font-size: .64rem; letter-spacing: .06em; text-transform: uppercase; color: var(--deep); margin: 0 0 8px; }
+  .dm-legend ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 6px; }
+  .dm-legend button {
+    width: 100%; font-family: inherit; text-align: left; cursor: pointer;
+    display: flex; align-items: center; gap: 8px;
+    padding: 7px 9px; border-radius: 8px; border: 1px solid var(--line);
+    background: #fff; color: var(--ink); font-size: .73rem; line-height: 1.3;
+  }
+  .dm-legend button .num {
+    flex: 0 0 auto; width: 20px; height: 20px; border-radius: 50%;
+    background: var(--green); color: #fff; font-size: .62rem; font-weight: 700;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .dm-legend button[data-open="0"] .num { background: var(--shut); }
+  .dm-legend button[data-open="0"] .nm { color: var(--muted); }
+  .dm-legend button[aria-current="true"] { border-color: var(--deep); background: var(--yellow); }
+  .dm-legend button[aria-current="true"] .nm { color: #123D18; font-weight: 700; }
+  .dm-legend button[aria-current="true"] .num { background: #123D18; color: var(--yellow); }
+  .dm-legend button:focus-visible { outline: 3px solid var(--deep); outline-offset: 2px; }
+
+  .dm-foot { margin: 13px 2px 0; font-size: .67rem; line-height: 1.6; color: var(--muted); }
+
+  @media (max-width: 430px) {
+    .dm { padding: 12px 10px 16px; }
+    .dm-legend ul { grid-template-columns: 1fr 1fr; }
+    .dm-legend button { font-size: .68rem; padding: 6px 7px; gap: 6px; }
+    .dm-moments button { font-size: .69rem; padding: 6px 9px; }
+  }
+</style>
+</head>
+<body>
+<div class="dm">
+  <div class="dm-head">
+    <h2>Berlin club door map</h2>
+    <p>Twelve doors at their real addresses, from Moritzplatz in Kreuzberg out to the old brewery in Schoeneweide. Pick the hour you would actually turn up, then tap a door to see what it reads and where the nearest open fallback is.</p>
+  </div>
+
+  <div class="dm-when">
+    <span class="lbl">When are you arriving</span>
+    <div class="dm-moments" id="dm-moments"></div>
+    <p class="dm-count" id="dm-count"></p>
+  </div>
+
+  <div class="dm-map">
+    <svg id="dm-svg" viewBox="0 0 420 340" role="img" aria-labelledby="dm-svg-t">
+      <title id="dm-svg-t">Map of twelve Berlin nightclubs at their real addresses between Kreuzberg and Schoeneweide, with the Spree and nearby S-Bahn and U-Bahn stations</title>
+      <rect x="0" y="0" width="420" height="340" fill="#f7f9f4"/>
+      <g id="dm-districts"></g>
+      <g id="dm-water"></g>
+      <g id="dm-stations"></g>
+      <g id="dm-link"></g>
+      <g id="dm-pins"></g>
+    </svg>
+  </div>
+
+  <div class="dm-panel" id="dm-panel"></div>
+
+  <div class="dm-legend">
+    <h3>All twelve doors</h3>
+    <ul id="dm-list"></ul>
+  </div>
+
+  <p class="dm-foot" id="dm-foot"></p>
+</div>
+
+<script>
+(function () {
+  var DAYS = ['Fri', 'Sat', 'Sun', 'Mon'];
+  var W = 420, H = 340, M = 16;
+  var data = null, hour = 26, sel = 1;
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function fmt(h) {
+    var d = Math.floor(h / 24), t = h % 24;
+    return DAYS[d] + ' ' + (t < 10 ? '0' + t : t) + ':00';
+  }
+  function isOpen(club, h) {
+    var i;
+    for (i = 0; i < club.windows.length; i++) {
+      if (h >= club.windows[i][0] && h < club.windows[i][1]) return true;
+    }
+    return false;
+  }
+  function mx(lon) {
+    var b = data.bounds;
+    return M + ((lon - b.lonMin) / (b.lonMax - b.lonMin)) * (W - 2 * M);
+  }
+  function my(lat) {
+    var b = data.bounds;
+    return (H - M) - ((lat - b.latMin) / (b.latMax - b.latMin)) * (H - 2 * M);
+  }
+  /* Rough metres between two Berlin points, flat-earth is fine at this scale. */
+  function metres(a, b) {
+    var dLat = (a.lat - b.lat) * 111320;
+    var dLon = (a.lon - b.lon) * 111320 * 0.609;
+    return Math.sqrt(dLat * dLat + dLon * dLon);
+  }
+  function walkMinutes(m) { return Math.max(1, Math.round(m / 80)); }
+
+  function drawWater() {
+    var s = '', i, j;
+    for (i = 0; i < data.river.length; i++) {
+      var pts = [];
+      for (j = 0; j < data.river[i].length; j++) {
+        pts.push(mx(data.river[i][j][1]).toFixed(1) + ',' + my(data.river[i][j][0]).toFixed(1));
+      }
+      s += '<polyline points="' + pts.join(' ') + '" fill="none" stroke="#cfe0e8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>';
+    }
+    document.getElementById('dm-water').innerHTML = s;
+  }
+
+  function drawDistricts() {
+    var s = '', i;
+    for (i = 0; i < data.districts.length; i++) {
+      var d = data.districts[i];
+      s += '<text x="' + mx(d.lon).toFixed(1) + '" y="' + my(d.lat).toFixed(1)
+        + '" text-anchor="middle" font-size="10.5" font-weight="700" letter-spacing="1.4" fill="#dfe6da">'
+        + esc(d.n.toUpperCase()) + '</text>';
+    }
+    document.getElementById('dm-districts').innerHTML = s;
+  }
+
+  function drawStations() {
+    var s = '', i;
+    for (i = 0; i < data.stations.length; i++) {
+      var st = data.stations[i], x = mx(st.lon), y = my(st.lat);
+      var anchor = st.anchor || 'start';
+      var lx = x + (st.dx == null ? 5 : st.dx), ly = y + (st.dy == null ? 3 : st.dy);
+      s += '<rect x="' + (x - 2.6).toFixed(1) + '" y="' + (y - 2.6).toFixed(1) + '" width="5.2" height="5.2" rx="1" fill="#8b968c"/>';
+      s += '<text x="' + lx.toFixed(1) + '" y="' + ly.toFixed(1) + '" text-anchor="' + anchor + '" font-size="7.4" fill="#5f6a60" stroke="#f7f9f4" stroke-width="2.4" paint-order="stroke" stroke-linejoin="round">' + esc(st.n) + '</text>';
+    }
+    document.getElementById('dm-stations').innerHTML = s;
+  }
+
+  function nearestOpen(club) {
+    var best = null, bestD = Infinity, i;
+    for (i = 0; i < data.clubs.length; i++) {
+      var o = data.clubs[i];
+      if (o.n === club.n || !isOpen(o, hour)) continue;
+      var d = metres(club, o);
+      if (d < bestD) { bestD = d; best = o; }
+    }
+    return best ? { club: best, metres: bestD } : null;
+  }
+
+  function drawPins() {
+    var s = '', i, cur = null;
+    for (i = 0; i < data.clubs.length; i++) if (data.clubs[i].n === sel) cur = data.clubs[i];
+
+    var link = '';
+    var near = cur ? nearestOpen(cur) : null;
+    if (cur && near) {
+      link = '<line x1="' + mx(cur.lon).toFixed(1) + '" y1="' + my(cur.lat).toFixed(1)
+        + '" x2="' + mx(near.club.lon).toFixed(1) + '" y2="' + my(near.club.lat).toFixed(1)
+        + '" stroke="#123D18" stroke-width="1.6" stroke-dasharray="4 3" opacity=".55"/>';
+    }
+    document.getElementById('dm-link').innerHTML = link;
+
+    for (i = 0; i < data.clubs.length; i++) {
+      var c = data.clubs[i], open = isOpen(c, hour), on = c.n === sel;
+      var x = mx(c.lon), y = my(c.lat);
+      var fill = on ? '#FFE600' : (open ? '#1B5E20' : '#eceee9');
+      var stroke = on ? '#123D18' : (open ? '#123D18' : '#b9c2ba');
+      var txt = on ? '#123D18' : (open ? '#ffffff' : '#8b968c');
+      s += '<g class="pin" tabindex="0" role="button" data-n="' + c.n + '" aria-label="' + esc(c.name) + ', ' + esc(c.addr) + ', ' + (open ? 'open' : 'shut') + ' at ' + fmt(hour) + '">'
+        + '<circle class="ring" cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="' + (on ? 13 : 11)
+        + '" fill="' + fill + '" stroke="' + stroke + '" stroke-width="' + (on ? 2.6 : 1.4) + '"' + (open ? '' : ' stroke-dasharray="3 2"') + '/>'
+        + '<text x="' + x.toFixed(1) + '" y="' + (y + 3.4).toFixed(1) + '" text-anchor="middle" font-size="10" font-weight="700" fill="' + txt + '" pointer-events="none">' + c.n + '</text>'
+        + '</g>';
+    }
+    document.getElementById('dm-pins').innerHTML = s;
+  }
+
+  function bar(cap, value, alt) {
+    return '<div class="b"><span class="cap">' + esc(cap) + '</span>'
+      + '<span class="track"><span class="fill' + (alt ? ' alt' : '') + '" style="width:' + (value * 10) + '%"></span></span></div>';
+  }
+
+  function drawPanel() {
+    var c = null, i;
+    for (i = 0; i < data.clubs.length; i++) if (data.clubs[i].n === sel) c = data.clubs[i];
+    if (!c) return;
+    var open = isOpen(c, hour);
+    var near = nearestOpen(c);
+    var fb;
+    if (!near) {
+      fb = '<p class="fallback">Nothing else on this map is open at ' + esc(fmt(hour)) + '. Go home and sleep.</p>';
+    } else {
+      var mins = walkMinutes(near.metres);
+      var km = (near.metres / 1000).toFixed(1);
+      fb = '<p class="fallback"><b>If this door says no at ' + esc(fmt(hour)) + ':</b> the nearest door that is open is <b>'
+        + esc(near.club.name) + '</b>, about ' + km + ' km away, roughly ' + mins
+        + ' minutes on foot in a straight line and longer by street. It is drawn on the map as the dashed line.</p>';
+    }
+    document.getElementById('dm-panel').innerHTML =
+      '<div class="top"><h3>' + c.n + '. ' + esc(c.name) + '</h3><span class="sub">' + esc(c.addr) + ' &middot; ' + esc(c.area) + '</span></div>'
+      + '<div class="body">'
+      + '<span class="state ' + (open ? 'open' : 'shut') + '">' + (open ? 'Open at ' + fmt(hour) : 'Shut at ' + fmt(hour)) + '</span>'
+      + '<div class="dm-bars">'
+      + bar('How much your outfit decides it', c.outfit, false)
+      + bar('How much everything else decides it', c.everything, true)
+      + '</div>'
+      + '<dl>'
+      + '<div><dt>When it runs</dt><dd>' + esc(c.when) + '. ' + esc(c.season.charAt(0).toUpperCase() + c.season.slice(1)) + '.</dd></div>'
+      + '<div><dt>What the door reads</dt><dd>' + esc(c.reads) + '</dd></div>'
+      + '<div><dt>House rule to know</dt><dd>' + esc(c.rule) + '</dd></div>'
+      + '<div><dt>Queue</dt><dd>' + esc(c.queue) + '</dd></div>'
+      + '</dl>'
+      + '<p class="judge"><b>My read:</b> ' + esc(c.line) + '</p>'
+      + fb
+      + '</div>';
+  }
+
+  function drawList() {
+    var s = '', i;
+    for (i = 0; i < data.clubs.length; i++) {
+      var c = data.clubs[i], open = isOpen(c, hour);
+      s += '<li><button type="button" data-n="' + c.n + '" data-open="' + (open ? 1 : 0) + '" aria-current="' + (c.n === sel) + '">'
+        + '<span class="num">' + c.n + '</span><span class="nm">' + esc(c.name) + '</span></button></li>';
+    }
+    document.getElementById('dm-list').innerHTML = s;
+  }
+
+  function drawMoments() {
+    var s = '', i;
+    for (i = 0; i < data.moments.length; i++) {
+      var m = data.moments[i];
+      s += '<button type="button" data-h="' + m.h + '" aria-current="' + (m.h === hour) + '">' + esc(m.label) + '</button>';
+    }
+    document.getElementById('dm-moments').innerHTML = s;
+  }
+
+  function drawCount() {
+    var n = 0, i;
+    for (i = 0; i < data.clubs.length; i++) if (isOpen(data.clubs[i], hour)) n++;
+    var tail = n === 0 ? 'Every door here is shut. This is the one hour of the weekend when Berlin is genuinely closed.'
+      : (n <= 3 ? 'The quiet end of the weekend. Short queues, and the doors that are open barely have a door at all.'
+        : (n >= 10 ? 'Peak. Longest queues and the hardest reads of the weekend.'
+          : 'A normal weekend hour, with real choice and shorter queues than peak.'));
+    document.getElementById('dm-count').innerHTML =
+      '<b>' + n + ' of 12</b> doors open at ' + esc(fmt(hour)) + '. ' + esc(tail);
+  }
+
+  function render() { drawMoments(); drawPins(); drawPanel(); drawList(); drawCount(); }
+
+  function boot(d) {
+    data = d;
+    hour = d.moments[1].h;
+
+    document.getElementById('dm-moments').addEventListener('click', function (e) {
+      var b = e.target.closest ? e.target.closest('button[data-h]') : null;
+      if (!b) return;
+      hour = parseInt(b.getAttribute('data-h'), 10);
+      render();
+    });
+    document.getElementById('dm-pins').addEventListener('click', function (e) {
+      var g = e.target.closest ? e.target.closest('g[data-n]') : null;
+      if (g) { sel = parseInt(g.getAttribute('data-n'), 10); render(); }
+    });
+    document.getElementById('dm-pins').addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      var g = e.target.closest ? e.target.closest('g[data-n]') : null;
+      if (g) { e.preventDefault(); sel = parseInt(g.getAttribute('data-n'), 10); render(); }
+    });
+    document.getElementById('dm-list').addEventListener('click', function (e) {
+      var b = e.target.closest ? e.target.closest('button[data-n]') : null;
+      if (b) { sel = parseInt(b.getAttribute('data-n'), 10); render(); }
+    });
+
+    document.getElementById('dm-foot').textContent =
+      'Pins sit at each club’s real street address. The river and station markers are simplified for orientation, so use this to understand which part of the city you are heading into, not to navigate the last hundred metres. Opening windows are the typical weekend pattern, read on '
+      + d.checkedOn + ' from each club’s own programme and the Berlin.de and visitBerlin venue listings. The two bars in each card are my judgement, not a published score, because almost no Berlin club publishes a door policy at all. Programmes change every week, so check the night before you travel.';
+
+    drawDistricts();
+    drawWater();
+    drawStations();
+    render();
+  }
+
+  fetch('data.json', { cache: 'no-store' })
+    .then(function (r) { return r.json(); })
+    .then(boot)
+    .catch(function () {
+      document.getElementById('dm-panel').innerHTML =
+        '<div class="body"><p style="margin:0;font-size:.8rem">The door data could not be loaded. Please reload the page.</p></div>';
+    });
+})();
+</script>
+<script defer src="../js/brand.js"></script>
+</body>
+</html>
