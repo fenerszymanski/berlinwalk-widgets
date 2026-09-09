@@ -1,7 +1,7 @@
 const BW_BLOG_HOME_DATA_URL = (() => {
   const script = document.currentScript;
   const base = script && script.src ? script.src : window.location.href;
-  return new URL('./data.json?v=20260908-featured-listings', base).href;
+  return new URL('./data.json?v=20260909-featured-listings', base).href;
 })();
 const BW_BLOG_HOME_FALLBACK = {
   "featured": {
@@ -16,6 +16,33 @@ const BW_BLOG_HOME_FALLBACK = {
   },
   "miniPosts": [
     {
+      "title": "Berlin Museums Closed for Renovation: What Is Shut and What to See Instead",
+      "url": "https://www.berlinwalk.com/post/berlin-museums-closed-for-renovation",
+      "category": "Tourist Tips",
+      "readTime": "7 min read",
+      "summary": "The Pergamonmuseum has been shut since October 2023, Museum Berggruen since 2022, and the Zeughaus is a building site with no announced reopening. Here is what is actually closed in Berlin right now, which reopening dates you can trust, why the Ishtar Gate is on a far longer clock than the 2027 headlines suggest, and what is genuinely worth doing instead this week.",
+      "image": "https://static.wixstatic.com/media/5a08a3_f6f2fbb5b5534bf39049cba1c30e60e6~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ishtar-gate-pergamonmuseum.jpg",
+      "alt": "The Ishtar Gate reconstructed inside the Pergamonmuseum, a blue glazed brick gateway with rows of golden animals"
+    },
+    {
+      "title": "Which City to Visit After Berlin: What the Train Actually Reaches",
+      "url": "https://www.berlinwalk.com/post/which-city-to-visit-after-berlin",
+      "category": "Tourist Tips",
+      "readTime": "7 min read",
+      "summary": "Germany does not sit in a circle around Berlin. The fast lines run north-west to Hamburg and south to Leipzig, Erfurt and Munich, while the same distance east into Poland costs about twice the time. Here is what the train genuinely reaches, which places are day trips and which deserve a night, and the five-day plan I would actually use.",
+      "image": "https://static.wixstatic.com/media/5a08a3_a43a90b2ad404818b3b49ced5d88a65c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ice-berlin-hauptbahnhof.jpg",
+      "alt": "An ICE train waiting at the underground long-distance platform at Berlin Hauptbahnhof"
+    },
+    {
+      "title": "Hohenschönhausen: The Stasi Prison You Can Only See on a Tour",
+      "url": "https://www.berlinwalk.com/post/hohenschonhausen-memorial-berlin",
+      "category": "Tourist Tips",
+      "readTime": "6 min read",
+      "summary": "The former Stasi remand prison in Lichtenberg is not a museum you can wander. The cells, corridors and interrogation rooms open only on a guided tour, and in English that means 10:40, 12:40 or 14:40, nine euro, about two hours, twenty-five people. Here is how to reach it, which of the four similarly named stops is the right one, and how much of your day it really costs.",
+      "image": "https://static.wixstatic.com/media/5a08a3_0f632cdd4bf3403fabc2a2537adf3799~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/hohenschonhausen-wall-watchtower.jpg",
+      "alt": "The perimeter wall and a watchtower of the former Stasi prison seen from the street"
+    },
+    {
       "title": "BER Flight Delay Compensation: What You Are Owed and the Line That Decides It",
       "url": "https://www.berlinwalk.com/post/ber-flight-delay-compensation",
       "category": "Tourist Tips",
@@ -23,33 +50,6 @@ const BW_BLOG_HOME_FALLBACK = {
       "summary": "A delayed flight out of Berlin pays 250, 400 or 600 euro, and the number is set by the distance to your final destination and whether that airport is inside the EU. Of the 157 destinations BER serves, only nine reach 600 euro. Here is how to work out yours, what the airline owes you while you wait, and how to claim it.",
       "image": "https://static.wixstatic.com/media/5a08a3_7ff51c867eaa44b2a4944d20e5758c3b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/ber-terminal-1-exterior.jpg",
       "alt": "Terminal 1 at Berlin Brandenburg Airport photographed from the forecourt at dusk"
-    },
-    {
-      "title": "Park and Ride in Berlin: Which Lots Still Have Room and Which Are Already Full",
-      "url": "https://www.berlinwalk.com/post/park-and-ride-berlin",
-      "category": "Tourist Tips",
-      "readTime": "8 min read",
-      "summary": "Berlin has 49 park and ride lots and 4,523 free spaces, and the city's own survey puts 27 of them over 90 per cent full. Here is which lot to aim for from each side of the city, what the ride in costs, and the green sticker rule that decides how close you can legally drive.",
-      "image": "https://static.wixstatic.com/media/5a08a3_718d703e5ca2492c8b4319ac3e9a9ba8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/park-and-ride-berlin-cover-wuhletal.jpg",
-      "alt": "S-Bahn and U-Bahn trains meeting at Wuhletal station in east Berlin"
-    },
-    {
-      "title": "Berlin to Prague: Train, Bus, and Whether the Day Trip Works",
-      "url": "https://www.berlinwalk.com/post/berlin-to-prague",
-      "category": "Tourist Tips",
-      "readTime": "7 min read",
-      "summary": "Berlin to Prague looks close on a map: 388 kilometres, seven direct trains a day, just under four hours. Nobody flies it, because nobody sells the flight. Here is what actually runs, what a ticket costs, the Monday engineering work that deletes most of the timetable until December, and whether the day trip is worth doing at all.",
-      "image": "https://static.wixstatic.com/media/5a08a3_bb9b5cc01dcb4062b99fa60d6e6c8477~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-comfortjet-decin.jpg",
-      "alt": "A blue and white Czech Railways ComfortJet train standing at the platform at Decin, the first Czech stop on the Berlin to Prague line"
-    },
-    {
-      "title": "Quiet Hours in Berlin: The Flat Rules Visitors Break Without Knowing",
-      "url": "https://www.berlinwalk.com/post/quiet-hours-in-berlin",
-      "category": "Tourist Tips",
-      "readTime": "7 min read",
-      "summary": "Berlin protects the night from 22:00 to 06:00 and the whole of every Sunday and public holiday, and the 13:00 to 15:00 pause posted in your hallway is the building’s own rulebook rather than city law. Here is what actually crosses the line in a Berlin flat, hour by hour, why the courtyard and the stairwell are louder than the flat itself, and what happens if somebody does complain.",
-      "image": "https://static.wixstatic.com/media/5a08a3_e5da5edfa7fd415593b28ec9b9cd6911~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-landshuter-strasse-night.jpg",
-      "alt": "A lit Berlin apartment doorway glowing at night on Landshuter Strasse in Schoeneberg"
     }
   ],
   "posts": [
