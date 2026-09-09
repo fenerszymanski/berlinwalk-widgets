@@ -136,7 +136,7 @@
 
   function drawChart(results) {
     var svg = document.getElementById('ck-svg');
-    var rowH = 26, padTop = 10, padBottom = 6, labelW = 190, barW = 300, gap = 10;
+    var rowH = 26, padTop = 10, padBottom = 6, labelW = 224, barW = 286, gap = 10;
     var W = labelW + gap + barW + 8;
     var H = padTop + results.length * rowH + padBottom;
     var parts = ['<title id="ck-svg-t">How far your kit gets you at each place</title>'];
@@ -152,7 +152,7 @@
       var r = results[i];
       var y = padTop + i * rowH;
       var reach = r.state === 'clear' ? stops[2] : (r.state === 'care' ? stops[1] : stops[0]);
-      parts.push('<text x="0" y="' + (y + 13) + '" font-size="11" font-weight="600" fill="#123D18">' + esc(r.place.name.length > 30 ? r.place.name.slice(0, 29) + '…' : r.place.name) + '</text>');
+      parts.push('<text x="0" y="' + (y + 13) + '" font-size="11" font-weight="600" fill="#123D18">' + esc(r.place.name.length > 36 ? r.place.name.slice(0, 35) + '…' : r.place.name) + '</text>');
       parts.push('<rect x="' + (labelW + gap) + '" y="' + (y + 4) + '" width="' + barW + '" height="12" rx="6" fill="rgba(27,94,32,.07)"/>');
       parts.push('<rect x="' + (labelW + gap) + '" y="' + (y + 4) + '" width="' + reach.toFixed(1) + '" height="12" rx="6" fill="' + COLOR[r.state] + '"><title>' + esc(r.place.name) + '</title></rect>');
     }
