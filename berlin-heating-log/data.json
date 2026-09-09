@@ -1,0 +1,62 @@
+{
+  "checkedOn": "9 September 2026",
+  "rooms": [
+    {
+      "id": "living",
+      "label": "Living room",
+      "dayFloor": 20,
+      "dayCeiling": 22,
+      "note": "20 to 22 C is the range Berlin tenant advice treats as sufficient when the contract says nothing."
+    },
+    {
+      "id": "kitchen",
+      "label": "Kitchen",
+      "dayFloor": 20,
+      "dayCeiling": 22,
+      "note": "Kitchens are held to the same range as living rooms."
+    },
+    {
+      "id": "bath",
+      "label": "Bathroom",
+      "dayFloor": 23,
+      "dayCeiling": 23,
+      "note": "The bathroom carries the highest figure, 23 C, because you are wet and standing still in it."
+    },
+    {
+      "id": "bed",
+      "label": "Bedroom",
+      "dayFloor": 20,
+      "dayCeiling": 22,
+      "note": "A bedroom is a living room during the day. Only the night window is different."
+    }
+  ],
+  "dayWindow": {
+    "from": 6,
+    "to": 24
+  },
+  "nightBand": {
+    "low": 16,
+    "high": 18
+  },
+  "axis": {
+    "minTemp": 12,
+    "maxTemp": 26
+  },
+  "sample": [
+    {
+      "hour": 7,
+      "room": "living",
+      "temp": 17.5
+    },
+    {
+      "hour": 13,
+      "room": "living",
+      "temp": 18.5
+    },
+    {
+      "hour": 21,
+      "room": "living",
+      "temp": 17
+    }
+  ]
+}

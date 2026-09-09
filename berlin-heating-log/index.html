@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Heating Log</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --muted: #5a665b;
+    --line: rgba(27, 94, 32, .18);
+    --owed: #A8CBA1;
+    --short: #B4472E;
+    --night: #E4E8E1;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .hl { max-width: 780px; margin: 0 auto; padding: 14px 12px 16px; }
+
+  .hl-head h2 { font-size: 1.06rem; margin: 0 0 3px; color: var(--green); }
+  .hl-head p { margin: 0; font-size: .78rem; color: var(--muted); line-height: 1.5; }
+
+  .hl-rooms { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 0; }
+  .hl-rooms button {
+    font-family: inherit; font-size: .74rem; font-weight: 700; cursor: pointer;
+    padding: 7px 12px; border-radius: 999px; border: 1px solid var(--green);
+    background: #fff; color: var(--deep);
+  }
+  .hl-rooms button[aria-pressed="true"] { background: var(--green); color: #fff; }
+  .hl-rooms button:focus-visible { outline: 3px solid var(--yellow); outline-offset: 1px; }
+  .hl-roomnote { margin: 7px 2px 0; font-size: .7rem; color: var(--muted); line-height: 1.5; }
+
+  .hl-bar { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px; margin: 11px 0 0; padding: 11px 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; }
+  .hl-bar label { font-size: .63rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--deep); display: block; margin-bottom: 5px; }
+  .hl-bar input { font-family: inherit; font-size: 1rem; font-weight: 700; color: var(--deep); width: 88px; padding: 6px 8px; border: 1px solid var(--green); border-radius: 8px; background: #fff; }
+  .hl-bar input:focus-visible { outline: 3px solid var(--yellow); outline-offset: 1px; }
+  .hl-bar .go {
+    font-family: inherit; font-size: .78rem; font-weight: 700; cursor: pointer;
+    padding: 9px 16px; border-radius: 8px; border: 1px solid var(--green);
+    background: var(--green); color: #fff;
+  }
+  .hl-bar .go:focus-visible { outline: 3px solid var(--yellow); outline-offset: 1px; }
+
+  .hl-chart { margin-top: 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 10px 8px 4px; }
+  .hl-chart svg { display: block; width: 100%; height: auto; }
+  .hl-chart text { font-family: 'Montserrat', sans-serif; }
+
+  .hl-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 9px 4px 2px; font-size: .67rem; color: var(--muted); }
+  .hl-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .hl-key { width: 15px; height: 10px; border-radius: 2px; display: inline-block; border: 1px solid rgba(0,0,0,.12); }
+
+  .hl-read { margin-top: 12px; padding: 12px 14px; border-radius: 10px; background: var(--deep); color: #fff; }
+  .hl-read .grid { display: flex; flex-wrap: wrap; gap: 14px 26px; }
+  .hl-read .cell { min-width: 90px; }
+  .hl-read .n { font-size: 1.5rem; font-weight: 700; line-height: 1.05; display: block; }
+  .hl-read .k { font-size: .61rem; letter-spacing: .07em; text-transform: uppercase; color: rgba(255,255,255,.66); display: block; margin-top: 2px; }
+  .hl-read .say { font-size: .78rem; line-height: 1.55; color: rgba(255,255,255,.92); margin: 10px 0 0; }
+  .hl-read .say.bad { color: var(--yellow); font-weight: 600; }
+
+  .hl-rows { margin-top: 12px; }
+  .hl-rows h3 { font-size: .64rem; letter-spacing: .07em; text-transform: uppercase; color: var(--deep); margin: 0 0 8px; }
+  .hl-rows ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .hl-rows li { display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: #fff; border: 1px solid var(--line); border-radius: 9px; font-size: .76rem; }
+  .hl-rows li.under { border-color: rgba(180, 71, 46, .5); }
+  .hl-rows .when { font-weight: 700; color: var(--deep); min-width: 54px; }
+  .hl-rows .what { flex: 1 1 auto; color: var(--muted); line-height: 1.4; }
+  .hl-rows .gap { font-weight: 700; color: var(--short); white-space: nowrap; }
+  .hl-rows .ok { font-weight: 700; color: var(--green); white-space: nowrap; }
+  .hl-rows .drop {
+    font-family: inherit; cursor: pointer; border: 0; background: none; color: var(--muted);
+    font-size: 1rem; line-height: 1; padding: 2px 4px; border-radius: 6px;
+  }
+  .hl-rows .drop:focus-visible { outline: 3px solid var(--yellow); outline-offset: 1px; }
+  .hl-rows .empty { color: var(--muted); font-size: .76rem; padding: 10px 2px; border: 0; background: none; }
+
+  .hl-proto { margin-top: 12px; }
+  .hl-proto h3 { font-size: .64rem; letter-spacing: .07em; text-transform: uppercase; color: var(--deep); margin: 0 0 8px; }
+  .hl-proto textarea {
+    width: 100%; min-height: 118px; font-family: 'SFMono-Regular', Menlo, Consolas, monospace;
+    font-size: .72rem; line-height: 1.6; color: var(--ink); background: #fff;
+    border: 1px solid var(--line); border-radius: 9px; padding: 10px 11px; resize: vertical;
+  }
+  .hl-proto textarea:focus-visible { outline: 3px solid var(--yellow); outline-offset: 1px; }
+
+  .hl-foot { margin: 11px 2px 0; font-size: .68rem; color: var(--muted); line-height: 1.55; }
+
+  @media (max-width: 420px) {
+    .hl { padding: 12px 10px 14px; }
+    .hl-bar input { width: 100%; }
+    .hl-bar > div { flex: 1 1 100%; }
+    .hl-bar .go { width: 100%; }
+    .hl-read .n { font-size: 1.3rem; }
+  }
+</style>
+</head>
+<body>
+<div class="hl">
+  <div class="hl-head">
+    <h2>Berlin heating log</h2>
+    <p>Berlin tenant advice asks for a written record, because the tenant has to prove the flat was cold. Log a reading and it lands on the chart against the temperature a landlord owes at that hour.</p>
+  </div>
+
+  <div class="hl-rooms" id="hl-rooms" role="group" aria-label="Room"></div>
+  <p class="hl-roomnote" id="hl-roomnote"></p>
+
+  <div class="hl-bar">
+    <div>
+      <label for="hl-hour">Hour of day</label>
+      <input id="hl-hour" type="number" min="0" max="23" step="1" value="21" inputmode="numeric">
+    </div>
+    <div>
+      <label for="hl-temp">Measured &deg;C</label>
+      <input id="hl-temp" type="number" min="0" max="35" step="0.1" value="17.5" inputmode="decimal">
+    </div>
+    <button class="go" id="hl-add" type="button">Log this reading</button>
+  </div>
+
+  <div class="hl-chart">
+    <svg id="hl-svg" viewBox="0 0 760 330" role="img" aria-label="Chart of logged room temperatures against the temperature owed at each hour"></svg>
+  </div>
+
+  <div class="hl-legend">
+    <span><i class="hl-key" style="background:#A8CBA1"></i> Owed range</span>
+    <span><i class="hl-key" style="background:#E4E8E1"></i> Night window, 00:00 to 06:00</span>
+    <span><i class="hl-key" style="background:#123D18;border-radius:999px;width:10px;height:10px"></i> Reading at or above the floor</span>
+    <span><i class="hl-key" style="background:#B4472E;border-radius:999px;width:10px;height:10px"></i> Reading below the floor</span>
+  </div>
+
+  <div class="hl-read">
+    <div class="grid">
+      <div class="cell"><span class="n" id="hl-n-logged">0</span><span class="k">Readings logged</span></div>
+      <div class="cell"><span class="n" id="hl-n-under">0</span><span class="k">Below the floor</span></div>
+      <div class="cell"><span class="n" id="hl-n-gap">&mdash;</span><span class="k">Deepest shortfall</span></div>
+    </div>
+    <p class="say" id="hl-say"></p>
+  </div>
+
+  <div class="hl-rows">
+    <h3>The log</h3>
+    <ul id="hl-list"></ul>
+  </div>
+
+  <div class="hl-proto">
+    <h3>Paste this into the email</h3>
+    <textarea id="hl-proto" readonly aria-label="Temperature protocol text"></textarea>
+  </div>
+
+  <p class="hl-foot" id="hl-foot"></p>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var W = 760, H = 330;
+  var PAD = { l: 42, r: 14, t: 14, b: 30 };
+  var readings = [];
+  var room = null;
+  var cfg = null;
+
+  function x(hour) { return PAD.l + (hour / 24) * (W - PAD.l - PAD.r); }
+  function y(temp) {
+    var lo = cfg.axis.minTemp, hi = cfg.axis.maxTemp;
+    var clamped = Math.max(lo, Math.min(hi, temp));
+    return PAD.t + (1 - (clamped - lo) / (hi - lo)) * (H - PAD.t - PAD.b);
+  }
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function pad2(n) { return (n < 10 ? '0' : '') + n; }
+
+  /** The temperature owed in this room at this hour, and the night ambiguity. */
+  function floorAt(hour, r) {
+    if (hour >= cfg.dayWindow.from && hour < cfg.dayWindow.to) {
+      return { floor: r.dayFloor, ceiling: r.dayCeiling, night: false };
+    }
+    return { floor: cfg.nightBand.low, ceiling: cfg.nightBand.high, night: true };
+  }
+
+  function draw() {
+    var r = room;
+    var parts = [];
+    var plotW = W - PAD.l - PAD.r;
+    var lo = cfg.axis.minTemp, hi = cfg.axis.maxTemp;
+
+    // Night window behind everything.
+    parts.push('<rect x="' + x(0) + '" y="' + PAD.t + '" width="' + (x(cfg.dayWindow.from) - x(0)) +
+      '" height="' + (H - PAD.t - PAD.b) + '" fill="var(--night)"></rect>');
+
+    // Horizontal grid and the temperature scale.
+    for (var t = lo; t <= hi; t += 2) {
+      parts.push('<line x1="' + PAD.l + '" y1="' + y(t) + '" x2="' + (W - PAD.r) + '" y2="' + y(t) +
+        '" stroke="rgba(27,94,32,.13)" stroke-width="1"></line>');
+      parts.push('<text x="' + (PAD.l - 7) + '" y="' + (y(t) + 3.5) + '" text-anchor="end" font-size="10" fill="#5a665b">' + t + '</text>');
+    }
+
+    // Hour scale.
+    for (var h = 0; h <= 24; h += 3) {
+      parts.push('<line x1="' + x(h) + '" y1="' + (H - PAD.b) + '" x2="' + x(h) + '" y2="' + (H - PAD.b + 4) +
+        '" stroke="rgba(27,94,32,.35)" stroke-width="1"></line>');
+      parts.push('<text x="' + x(h) + '" y="' + (H - PAD.b + 16) + '" text-anchor="middle" font-size="10" fill="#5a665b">' + pad2(h % 24) + ':00</text>');
+    }
+
+    // The owed band: day range in solid green, night band hatched because courts differ.
+    // When a room has a single agreed figure the band collapses, so keep a
+    // readable stripe sitting on the floor line instead of a zero-height rect.
+    var bandTop = Math.min(y(r.dayCeiling), y(r.dayFloor) - 4);
+    parts.push('<rect x="' + x(cfg.dayWindow.from) + '" y="' + bandTop + '" width="' + (x(cfg.dayWindow.to) - x(cfg.dayWindow.from)) +
+      '" height="' + (y(r.dayFloor) - bandTop) + '" fill="var(--owed)" opacity=".55"></rect>');
+    parts.push('<rect x="' + x(0) + '" y="' + y(cfg.nightBand.high) + '" width="' + (x(cfg.dayWindow.from) - x(0)) +
+      '" height="' + (y(cfg.nightBand.low) - y(cfg.nightBand.high)) + '" fill="url(#hl-hatch)"></rect>');
+
+    // The floor line is the number that decides a reading.
+    parts.push('<path d="M ' + x(0) + ' ' + y(cfg.nightBand.low) + ' L ' + x(cfg.dayWindow.from) + ' ' + y(cfg.nightBand.low) +
+      ' L ' + x(cfg.dayWindow.from) + ' ' + y(r.dayFloor) + ' L ' + x(cfg.dayWindow.to) + ' ' + y(r.dayFloor) +
+      '" fill="none" stroke="var(--green)" stroke-width="2.2" stroke-linejoin="round"></path>');
+
+    var owedLabel = r.dayCeiling > r.dayFloor
+      ? r.dayFloor + ' to ' + r.dayCeiling + ' °C owed, 06:00 to 24:00'
+      : r.dayFloor + ' °C owed, 06:00 to 24:00';
+    parts.push('<text x="' + (x(cfg.dayWindow.from) + 8) + '" y="' + (bandTop - 6) + '" font-size="10.5" font-weight="700" fill="#123D18">' +
+      esc(owedLabel) + '</text>');
+    parts.push('<text x="' + (x(0) + 6) + '" y="' + (y(cfg.nightBand.high) - 6) + '" font-size="9.5" fill="#5a665b">' +
+      esc('night ' + cfg.nightBand.low + '-' + cfg.nightBand.high) + '</text>');
+
+    // Axis lines.
+    parts.push('<line x1="' + PAD.l + '" y1="' + PAD.t + '" x2="' + PAD.l + '" y2="' + (H - PAD.b) + '" stroke="rgba(27,94,32,.35)" stroke-width="1"></line>');
+    parts.push('<line x1="' + PAD.l + '" y1="' + (H - PAD.b) + '" x2="' + (W - PAD.r) + '" y2="' + (H - PAD.b) + '" stroke="rgba(27,94,32,.35)" stroke-width="1"></line>');
+
+    // Readings, oldest hour first, with a drop line down from the floor where short.
+    var mine = readings.filter(function (d) { return d.room === r.id; });
+    var ordered = mine.slice().sort(function (a, b) { return a.hour - b.hour; });
+
+    if (ordered.length > 1) {
+      var line = ordered.map(function (d, i) { return (i ? 'L' : 'M') + ' ' + x(d.hour + 0.5) + ' ' + y(d.temp); }).join(' ');
+      parts.push('<path d="' + line + '" fill="none" stroke="#123D18" stroke-width="1.5" stroke-opacity=".45" stroke-dasharray="4 3"></path>');
+    }
+
+    ordered.forEach(function (d) {
+      var owed = floorAt(d.hour, r);
+      var under = d.temp < owed.floor;
+      var px = x(d.hour + 0.5);
+      if (under) {
+        parts.push('<line x1="' + px + '" y1="' + y(owed.floor) + '" x2="' + px + '" y2="' + y(d.temp) +
+          '" stroke="var(--short)" stroke-width="2"></line>');
+        parts.push('<text x="' + px + '" y="' + (y(d.temp) + 15) + '" text-anchor="middle" font-size="9.5" font-weight="700" fill="#B4472E">-' +
+          (owed.floor - d.temp).toFixed(1) + 'K</text>');
+      }
+      parts.push('<circle cx="' + px + '" cy="' + y(d.temp) + '" r="5" fill="' + (under ? 'var(--short)' : '#123D18') + '" stroke="#fff" stroke-width="1.5"></circle>');
+    });
+
+    if (!mine.length) {
+      parts.push('<text x="' + (PAD.l + plotW / 2) + '" y="' + (PAD.t + 42) + '" text-anchor="middle" font-size="12" fill="#5a665b">' +
+        esc('No readings for the ' + r.label.toLowerCase() + ' yet.') + '</text>');
+    }
+
+    document.getElementById('hl-svg').innerHTML =
+      '<defs><pattern id="hl-hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">' +
+      '<rect width="7" height="7" fill="#EDF1EA"></rect>' +
+      '<line x1="0" y1="0" x2="0" y2="7" stroke="#A8CBA1" stroke-width="2.4"></line></pattern></defs>' + parts.join('');
+  }
+
+  function renderRows() {
+    var r = room;
+    var mine = readings.filter(function (d) { return d.room === r.id; })
+      .slice().sort(function (a, b) { return a.hour - b.hour; });
+    var list = document.getElementById('hl-list');
+
+    if (!mine.length) {
+      list.innerHTML = '<li class="empty">Nothing logged for the ' + esc(r.label.toLowerCase()) +
+        '. Measure in the middle of the room, about one metre above the floor, and log it.</li>';
+    } else {
+      list.innerHTML = mine.map(function (d) {
+        var owed = floorAt(d.hour, r);
+        var under = d.temp < owed.floor;
+        var idx = readings.indexOf(d);
+        return '<li class="' + (under ? 'under' : '') + '">' +
+          '<span class="when">' + pad2(d.hour) + ':00</span>' +
+          '<span class="what">' + d.temp.toFixed(1) + ' °C, ' + esc(r.label.toLowerCase()) +
+          (owed.night ? ', night window' : '') + '. Owed ' + owed.floor + ' °C.</span>' +
+          (under
+            ? '<span class="gap">-' + (owed.floor - d.temp).toFixed(1) + ' K</span>'
+            : '<span class="ok">on the line</span>') +
+          '<button class="drop" type="button" data-idx="' + idx + '" aria-label="Delete this reading">×</button>' +
+          '</li>';
+      }).join('');
+    }
+  }
+
+  function renderNumbers() {
+    var r = room;
+    var mine = readings.filter(function (d) { return d.room === r.id; });
+    var short = [];
+    mine.forEach(function (d) {
+      var owed = floorAt(d.hour, r);
+      if (d.temp < owed.floor) short.push({ gap: owed.floor - d.temp, hour: d.hour, night: owed.night });
+    });
+    var deepest = 0;
+    short.forEach(function (s) { if (s.gap > deepest) deepest = s.gap; });
+
+    document.getElementById('hl-n-logged').textContent = mine.length;
+    document.getElementById('hl-n-under').textContent = short.length;
+    document.getElementById('hl-n-gap').textContent = deepest ? '-' + deepest.toFixed(1) + ' K' : '—';
+
+    var say = document.getElementById('hl-say');
+    var dayShort = short.filter(function (s) { return !s.night; }).length;
+    if (!mine.length) {
+      say.className = 'say';
+      say.textContent = 'Log a few readings across one day. Three at different hours is the pattern Berlin tenant advice describes.';
+    } else if (!short.length) {
+      say.className = 'say';
+      say.textContent = 'Every reading in the ' + r.label.toLowerCase() + ' sits at or above the temperature owed at that hour. Keep logging anyway if the flat feels cold at other times, because one warm afternoon is not the case.';
+    } else if (dayShort) {
+      say.className = 'say bad';
+      say.textContent = dayShort + ' reading' + (dayShort === 1 ? '' : 's') + ' inside the 06:00 to 24:00 window sit below ' +
+        r.dayFloor + ' °C, the deepest by ' + deepest.toFixed(1) + ' K. That is the part of the log a landlord has to answer. Send it in writing with a deadline before you do anything about the rent.';
+    } else {
+      say.className = 'say bad';
+      say.textContent = 'The shortfalls are all in the night window, where the floor is argued between ' +
+        cfg.nightBand.low + ' and ' + cfg.nightBand.high + ' °C. That is the weaker half of the case. Get a daytime reading before you write.';
+    }
+  }
+
+  function renderProtocol() {
+    var box = document.getElementById('hl-proto');
+    if (!readings.length) {
+      box.value = 'Readings you log appear here as a dated protocol you can paste into an email to the landlord.';
+      return;
+    }
+    var byRoom = {};
+    readings.forEach(function (d) { (byRoom[d.room] = byRoom[d.room] || []).push(d); });
+    var lines = ['Temperature protocol, flat address:', 'Date: ____________', ''];
+    cfg.rooms.forEach(function (r) {
+      var mine = (byRoom[r.id] || []).slice().sort(function (a, b) { return a.hour - b.hour; });
+      if (!mine.length) return;
+      lines.push(r.label + ':');
+      mine.forEach(function (d) {
+        var owed = floorAt(d.hour, r);
+        lines.push('  ' + pad2(d.hour) + ':00  ' + d.temp.toFixed(1) + ' C  (owed ' + owed.floor + ' C' +
+          (d.temp < owed.floor ? ', short by ' + (owed.floor - d.temp).toFixed(1) + ' K' : '') + ')');
+      });
+      lines.push('');
+    });
+    lines.push('Measured in the middle of the room, about one metre above the floor.');
+    box.value = lines.join('\n');
+  }
+
+  function render() { draw(); renderRows(); renderNumbers(); renderProtocol(); }
+
+  function boot(d) {
+    cfg = d;
+    room = d.rooms[0];
+    d.sample.forEach(function (s) { readings.push({ hour: s.hour, room: s.room, temp: s.temp }); });
+
+    var wrap = document.getElementById('hl-rooms');
+    wrap.innerHTML = d.rooms.map(function (r) {
+      return '<button type="button" data-id="' + r.id + '" aria-pressed="' + (r.id === room.id) + '">' + esc(r.label) + '</button>';
+    }).join('');
+    wrap.addEventListener('click', function (e) {
+      var btn = e.target.closest('button');
+      if (!btn) return;
+      var id = btn.getAttribute('data-id');
+      d.rooms.forEach(function (r) { if (r.id === id) room = r; });
+      [].forEach.call(wrap.querySelectorAll('button'), function (b) {
+        b.setAttribute('aria-pressed', String(b.getAttribute('data-id') === id));
+      });
+      document.getElementById('hl-roomnote').textContent = room.note;
+      render();
+    });
+    document.getElementById('hl-roomnote').textContent = room.note;
+
+    document.getElementById('hl-add').addEventListener('click', function () {
+      var hEl = document.getElementById('hl-hour');
+      var tEl = document.getElementById('hl-temp');
+      var h = parseInt(hEl.value, 10);
+      var t = parseFloat(tEl.value);
+      if (isNaN(h) || isNaN(t)) return;
+      h = Math.max(0, Math.min(23, h));
+      t = Math.max(0, Math.min(35, t));
+      readings.push({ hour: h, room: room.id, temp: t });
+      render();
+    });
+
+    document.getElementById('hl-list').addEventListener('click', function (e) {
+      var btn = e.target.closest('.drop');
+      if (!btn) return;
+      var idx = parseInt(btn.getAttribute('data-idx'), 10);
+      if (idx >= 0) readings.splice(idx, 1);
+      render();
+    });
+
+    document.getElementById('hl-foot').textContent =
+      'Ranges checked on ' + d.checkedOn + ' against Berlin tenant-advice guidance and reported rulings. ' +
+      'A tenancy agreement can set its own figures, and the night floor is the contested one. This is a record-keeping aid, not legal advice: ' +
+      'every Berlin district runs a free tenant advice service, and that is the place to take the finished log.';
+
+    render();
+  }
+
+  fetch('data.json', { cache: 'no-store' })
+    .then(function (r) { return r.json(); })
+    .then(boot)
+    .catch(function () {
+      document.getElementById('hl-list').innerHTML =
+        '<li class="empty">The heating log could not be loaded. Please reload the page.</li>';
+    });
+})();
+</script>
+<script defer src="../js/brand.js"></script>
+</body>
+</html>
