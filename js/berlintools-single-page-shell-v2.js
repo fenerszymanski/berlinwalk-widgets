@@ -252,6 +252,12 @@
 
   function fetchCatalog() {
     if (typeof fetch !== 'function') return Promise.resolve(null);
+    if (state.slug === 'whats-open-in-berlin-today' && typeof window.BW_IS_OPEN_TODAY_TEST === 'function' && window.BW_IS_OPEN_TODAY_TEST() && typeof window.BW_GET_OPEN_TODAY_CATALOG === 'function') {
+      return window.BW_GET_OPEN_TODAY_CATALOG().then(function (data) {
+        state.record = catalogRecord(data);
+        return state.record;
+      }).catch(function () { state.record = null; return null; });
+    }
     return fetch(catalogUrl(), { credentials: 'omit', cache: 'no-cache' })
       .then(function (response) {
         if (!response || !response.ok) throw new Error('tools catalog unavailable');

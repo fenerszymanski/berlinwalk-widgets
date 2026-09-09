@@ -39,6 +39,38 @@
     var slug = decodeURIComponent(path.split('/')[2]);
     var html = document.documentElement;
     if (slug === 'whats-open-in-berlin-today') {
+      // Opt-in diagnostic only, not authentication. No cookie/storage or random
+      // visitor assignment. Exact query prevents links retaining unrelated flags.
+      window.BW_IS_OPEN_TODAY_TEST = function () {
+        try {
+          return window.location.origin === 'https://www.berlinwalk.com'
+            && /^\/tools\/whats-open-in-berlin-today\/?$/.test(window.location.pathname)
+            && window.location.search === '?bwStartupTest=open-today-20260909'
+            && Date.now() < Date.UTC(2026, 8, 11);
+        } catch (_) { return false; }
+      };
+      // Shared by the shell, native related-card icons, and the tour bridge.
+      // No fetch interception: all unrelated requests and consent code stay intact.
+      if (window.BW_IS_OPEN_TODAY_TEST()) {
+      window.BW_GET_OPEN_TODAY_CATALOG = window.BW_GET_OPEN_TODAY_CATALOG || (function () {
+        var pending = null;
+        function valid(data) {
+          if (!window.BW_IS_OPEN_TODAY_TEST()) throw new Error('Test no longer active');
+          if (!data || !Array.isArray(data.tools) || data.tools.filter(function (tool) { return tool.slug === 'whats-open-in-berlin-today'; }).length !== 1) throw new Error('Open Today catalog unavailable');
+          return data;
+        }
+        function request(file) {
+          if (!window.BW_IS_OPEN_TODAY_TEST()) return Promise.reject(new Error('Test not active'));
+          return fetch('https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/' + file, {credentials:'omit', cache:'no-cache'})
+            .then(function (response) { if (!response.ok) throw new Error('Catalog HTTP error'); return response.json(); }).then(valid);
+        }
+        return function () {
+          if (!window.BW_IS_OPEN_TODAY_TEST()) return Promise.reject(new Error('Outside Open Today test'));
+          if (!pending) pending = request('open-today.json').catch(function () { return request('data.json'); }).catch(function (error) { pending = null; throw error; });
+          return pending;
+        };
+      })();
+      }
       html.classList.add('bw-tools-detail', 'bw-tools-shell-v2');
       html.setAttribute('data-bw-tools-slug', slug);
       html.setAttribute('data-bw-host-repair', 'pilot');

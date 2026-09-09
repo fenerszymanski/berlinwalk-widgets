@@ -7,6 +7,8 @@ import {
   readdir,
 } from 'node:fs/promises';
 import path from 'node:path';
+import { isDeepStrictEqual } from 'node:util';
+import { compactCatalog } from './build-open-today-catalog.mjs';
 
 const root = path.resolve(process.argv[2] || '_public-dist');
 const errors = [];
@@ -46,6 +48,7 @@ const REQUIRED_PATHS = [
   'kitkat-door-test/index.html',
   'page-editorial/page-editorial.css',
   'tools-hub/data.json',
+  'tools-hub/open-today.json',
   'tools-hub/tools-hub-element.js',
   'widgets-hub/widgets-hub-element.js',
 ];
@@ -257,6 +260,14 @@ for (const file of files) {
 }
 
 const toolsData = JSON.parse(await readFile(path.join(root, 'tools-hub/data.json'), 'utf8'));
+try {
+  const pilotData = JSON.parse(await readFile(path.join(root, 'tools-hub/open-today.json'), 'utf8'));
+  if (!isDeepStrictEqual(pilotData, compactCatalog(toolsData))) {
+    errors.push('Open Today catalog differs from canonical tools catalog');
+  }
+} catch (error) {
+  errors.push(`Open Today catalog unavailable or invalid: ${error.message}`);
+}
 const tools = toolsData.tools || [];
 let visibleTools = 0;
 for (const tool of tools) {

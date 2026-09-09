@@ -3000,6 +3000,18 @@
     ensureNextTourSlotHelper();
     injectStyle();
     if (isToolPage()) {
+      if (location.pathname.replace(/\/$/, '') === '/tools/whats-open-in-berlin-today' && typeof window.BW_IS_OPEN_TODAY_TEST === 'function' && window.BW_IS_OPEN_TODAY_TEST() && typeof window.BW_GET_OPEN_TODAY_CATALOG === 'function') {
+        window.BW_GET_OPEN_TODAY_CATALOG().then(function (catalog) {
+          if (!window.BW_IS_OPEN_TODAY_TEST()) return;
+          // Only currentTool() consumes this branch: no blog archive is needed.
+          // Do not mutate the catalog shared with the other page consumers.
+          insertToolBridge({ toolsHub: catalog.tools });
+        }).catch(function () {
+          if (!window.BW_IS_OPEN_TODAY_TEST()) return;
+          loadData().then(function (data) { insertToolBridge(data); });
+        });
+        return;
+      }
       loadData().then(function (data) {
         insertToolBridge(data);
       });
