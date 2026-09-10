@@ -1,0 +1,211 @@
+{
+  "meta": {
+    "source": "Berliner Betriebskostenübersicht, billing year 2024, published by the Senatsverwaltung für Stadtentwicklung, Bauen und Wohnen with the Berliner Mietspiegel 2026 (data: ALP Institut für Wohnen und Stadtentwicklung GmbH). Values in euro per square metre per month. Lower and upper values are the ends of the 4/5 range, the middle value is the mean.",
+    "sourceUrl": "https://www.berlin.de/sen/wohnen/service/betriebskostenuebersicht/",
+    "billingYear": 2024,
+    "coldTotalMean": 1.93,
+    "warmTotalMean": 1.5,
+    "coldBuildings": 1700,
+    "warmBuildings": 1300,
+    "checkedOn": "2026-09-10"
+  },
+  "lines": [
+    {
+      "key": "grundsteuer",
+      "label": "Property tax",
+      "de": "Grundsteuer",
+      "group": "cold",
+      "lower": 0.17,
+      "mean": 0.27,
+      "upper": 0.46,
+      "note": "First bill with the 2025 reform. Ask for the Grundsteuerbescheid in the file review if this line moved."
+    },
+    {
+      "key": "wasser",
+      "label": "Water supply",
+      "de": "Wasserversorgung",
+      "group": "cold",
+      "lower": 0.14,
+      "mean": 0.24,
+      "upper": 0.39,
+      "note": "Should follow a meter. If the house has flat meters, the split has to use them."
+    },
+    {
+      "key": "entwaesserung",
+      "label": "Sewage",
+      "de": "Entwässerung",
+      "group": "cold",
+      "lower": 0.15,
+      "mean": 0.21,
+      "upper": 0.3,
+      "note": "Usually billed on the same cubic metres as water."
+    },
+    {
+      "key": "niederschlag",
+      "label": "Rainwater charge",
+      "de": "Niederschlagswasser",
+      "group": "cold",
+      "lower": 0.02,
+      "mean": 0.05,
+      "upper": 0.07,
+      "note": "Depends on sealed surface, not on you. Small, and hard to influence.",
+      "short": "Rainwater charge"
+    },
+    {
+      "key": "aufzug",
+      "label": "Lift",
+      "de": "Aufzug",
+      "group": "cold",
+      "lower": 0.06,
+      "mean": 0.16,
+      "upper": 0.28,
+      "note": "Running, inspection and servicing only. A repair is maintenance and cannot be passed on."
+    },
+    {
+      "key": "strassenreinigung",
+      "label": "Street cleaning",
+      "de": "Straßenreinigung",
+      "group": "cold",
+      "lower": 0.01,
+      "mean": 0.03,
+      "upper": 0.06,
+      "note": "The BSR tariff for the street class the house sits on.",
+      "short": "Street cleaning"
+    },
+    {
+      "key": "muell",
+      "label": "Waste collection",
+      "de": "Müllbeseitigung",
+      "group": "cold",
+      "lower": 0.14,
+      "mean": 0.22,
+      "upper": 0.3,
+      "note": "BSR bins. A house with too much residual-waste volume pays for it every fortnight."
+    },
+    {
+      "key": "hauswart",
+      "label": "Caretaker",
+      "de": "Hauswart/Hausmeister",
+      "group": "cold",
+      "lower": 0.08,
+      "mean": 0.16,
+      "upper": 0.27,
+      "note": "Only the caretaking share. Repairs and administration inside the caretaker contract have to be split out."
+    },
+    {
+      "key": "reinigung",
+      "label": "Building cleaning and pest control",
+      "de": "Gebäudereinigung und Ungezieferbekämpfung",
+      "group": "cold",
+      "lower": 0.09,
+      "mean": 0.19,
+      "upper": 0.29,
+      "note": "Stairwell and common areas. Ask for the contract if the stairs are visibly not being cleaned.",
+      "short": "Cleaning and pests"
+    },
+    {
+      "key": "schnee",
+      "label": "Snow clearing",
+      "de": "Schneebeseitigung",
+      "group": "cold",
+      "lower": 0.01,
+      "mean": 0.03,
+      "upper": 0.06,
+      "note": "Winter service contracts are often flat rate, snow or no snow."
+    },
+    {
+      "key": "garten",
+      "label": "Garden care",
+      "de": "Gartenpflege",
+      "group": "cold",
+      "lower": 0.02,
+      "mean": 0.11,
+      "upper": 0.21,
+      "note": "Includes courtyard greenery. New planting after a building site is not maintenance and not yours."
+    },
+    {
+      "key": "beleuchtung",
+      "label": "Common lighting",
+      "de": "Beleuchtung (Allgemeinstrom)",
+      "group": "cold",
+      "lower": 0.02,
+      "mean": 0.06,
+      "upper": 0.11,
+      "note": "Stairwell, cellar and courtyard electricity."
+    },
+    {
+      "key": "schornstein",
+      "label": "Chimney sweep",
+      "de": "Schornsteinreinigung",
+      "group": "cold",
+      "lower": 0.01,
+      "mean": 0.06,
+      "upper": 0.13,
+      "note": "Legally required checks. Often already inside the heating line in district-heated houses."
+    },
+    {
+      "key": "versicherung",
+      "label": "Building and liability insurance",
+      "de": "Sach- und Haftpflichtversicherung",
+      "group": "cold",
+      "lower": 0.1,
+      "mean": 0.3,
+      "upper": 0.49,
+      "note": "Building, fire, water and liability. Legal expenses or rent-loss insurance for the owner do not belong here.",
+      "short": "Building insurance"
+    },
+    {
+      "key": "antenne",
+      "label": "Aerial and cable network",
+      "de": "Gemeinschaftsantenne / Breitbandnetz",
+      "group": "cold",
+      "lower": 0.02,
+      "mean": 0.05,
+      "upper": 0.09,
+      "note": "Cable TV subscription fees stopped being passable on 1 July 2024. Operating the in-house network can still appear.",
+      "short": "Aerial and cable"
+    },
+    {
+      "key": "sonstige_kalt",
+      "label": "Other cold costs",
+      "de": "Sonstige kalte Betriebskosten",
+      "group": "cold",
+      "lower": 0.01,
+      "mean": 0.05,
+      "upper": 0.11,
+      "note": "Only items named in your contract count. An unnamed lump sum here is the first thing to query.",
+      "short": "Other cold costs"
+    },
+    {
+      "key": "heizung",
+      "label": "Heating",
+      "de": "Heizung",
+      "group": "warm",
+      "lower": 0.51,
+      "mean": 1.13,
+      "upper": 1.82,
+      "note": "Split at least 50 and at most 70 per cent by consumption. A bill with no consumption share is open to a 15 per cent cut."
+    },
+    {
+      "key": "warmwasser",
+      "label": "Hot water",
+      "de": "Warmwasser",
+      "group": "warm",
+      "lower": 0.22,
+      "mean": 0.46,
+      "upper": 0.75,
+      "note": "Same consumption rule as heating."
+    },
+    {
+      "key": "sonstige_warm",
+      "label": "Other warm costs",
+      "de": "Sonstige warme Betriebskosten, z.B. Wartung",
+      "group": "warm",
+      "lower": 0.07,
+      "mean": 0.2,
+      "upper": 0.35,
+      "note": "Servicing and meter reading. A new boiler is not servicing.",
+      "short": "Other warm costs"
+    }
+  ]
+}

@@ -8636,6 +8636,39 @@
       ],
       "iconStatus": "live-wix-media",
       "cmsItemId": "2f4c6cd9-a622-484c-8e1f-1a37e3cf15d4"
+    },
+    {
+      "slug": "berlin-nebenkosten-line-check",
+      "title": "Berlin Nebenkosten Line Check",
+      "lead": "Type the lines from your own Betriebskostenabrechnung, with your flat size and billing period, and see each one land on the official Berlin range for that cost per square metre and month. It marks the lines worth a file review, adds up your total against the Berlin mean, and shows the two twelve-month deadlines.",
+      "category": "Money",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-nebenkosten-line-check/",
+      "embedHeight": 1500,
+      "image": "https://static.wixstatic.com/media/5a08a3_37114ee85f1c405788507114fba5161e~mv2.png",
+      "hubCategory": "MoneyShopping",
+      "type": "Calculator",
+      "priority": 3,
+      "tags": [
+        "nebenkosten",
+        "betriebskosten",
+        "utility bill",
+        "rent",
+        "tenant",
+        "landlord",
+        "grundsteuer",
+        "heating costs",
+        "berlin flat",
+        "deadline"
+      ],
+      "aliases": [
+        "nebenkostenabrechnung check",
+        "betriebskostenabrechnung prüfen",
+        "berlin utility bill too high",
+        "nebenkosten berlin durchschnitt",
+        "operating costs berlin tenant"
+      ],
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "de3c1364-80a5-4076-9ee4-5900de24c4fe"
     }
   ],
   "hubCategories": [

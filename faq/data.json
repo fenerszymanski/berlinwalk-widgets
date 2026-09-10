@@ -11197,5 +11197,39 @@
         "a": "At a small number of stations, through the **Bike+Ride** programme of secured collective lock-ups and individual boxes. There is much less than the city needs: infraVelo estimates **42,000 additional spaces are required at public transport stations by 2030**. A bike parking garage with more than 1,100 spaces is under construction at **Schöneweide** and one is in planning at Mahlsdorf, but garages at **Ostkreuz, Haselhorst and Landsberger Allee** passed their feasibility studies and are not being pursued because funding for further planning is not secured."
       }
     ]
+  },
+  "berlin-nebenkostenabrechnung": {
+    "title": "Berlin Nebenkostenabrechnung - FAQ",
+    "subtitle": "The deadlines, what a normal Berlin line costs per square metre, what a landlord may never pass on, the 2025 Grundsteuer change, and how to see the invoices.",
+    "items": [
+      {
+        "q": "When does the Berlin Nebenkostenabrechnung for 2025 have to arrive?",
+        "a": "For a calendar-year billing period the statement must reach you **by 31 December 2026**, the end of the twelfth month after the period closed (§ 556 Abs. 3 BGB). A statement that arrives later can still pay you a refund, but the landlord can no longer claim a top-up from you unless the delay was not their fault. Do not remind anyone in December; a missed deadline is the landlord’s loss, not yours."
+      },
+      {
+        "q": "How long do I have to object to a Betriebskostenabrechnung?",
+        "a": "**Twelve months from the day the statement reaches you.** Objections have to be in writing and should name the lines you dispute. After the twelve months the numbers stand even if they are wrong, so write the arrival date on the envelope and ask for the documents early rather than in month eleven."
+      },
+      {
+        "q": "What are average Nebenkosten in Berlin per square metre?",
+        "a": "The official Berliner Betriebskostenübersicht for billing year 2024 gives a mean of **€1.93 per m² and month for cold operating costs** and **€1.50 for heating and hot water**, from about 1,700 and 1,300 buildings respectively. For a 68 m² flat that is roughly €1,575 cold and €1,225 warm for a full year. The biggest cold lines are building and liability insurance (mean €0.30), property tax (€0.27), water (€0.24) and waste (€0.22)."
+      },
+      {
+        "q": "Which costs can a landlord in Berlin not pass on as Betriebskosten?",
+        "a": "Anything outside the seventeen categories of the Betriebskostenverordnung. That excludes **administration and management fees, repairs, maintenance, modernisation, bank charges, vacancy** and the owner’s own legal-expenses or rent-loss insurance. The caretaker line may only carry the caretaking share of the contract, and since 1 July 2024 cable TV subscription fees can no longer be passed through the rent. “Sonstige Betriebskosten” is only allowed for items named in your rental contract."
+      },
+      {
+        "q": "Why is the Grundsteuer line different on the 2025 statement?",
+        "a": "Germany recalculated property tax from 1 January 2025. Berlin lowered its multiplier from 810 to 470 per cent and set a lower rate for residential land so that the city collects about the same in total, but the new valuation follows land values, so the line **rises in central districts such as Friedrichshain-Kreuzberg, Prenzlauer Berg, Mitte and Tiergarten and falls in Wedding, Tempelhof and Reinickendorf**. The 2025 statement is the first one tenants receive under the new system. If your line moved noticeably, ask to see the Grundsteuerbescheid."
+      },
+      {
+        "q": "How do I ask for Belegeinsicht?",
+        "a": "Send a short written request naming the billing year and the lines you want to see, for example: “Ich bitte um Einsicht in die Belege zur Betriebskostenabrechnung 2025, insbesondere zu den Positionen Hauswart, Versicherung und Grundsteuer, sowie in den Verteilerschlüssel.” You may inspect the original invoices, contracts and the distribution key; the landlord may send copies instead if you agree or if travelling would be unreasonable. Check the **square metres, the billing unit, how vacancy is handled and the invoice dates** first."
+      },
+      {
+        "q": "Do I have to pay a Nachzahlung while I am still checking the statement?",
+        "a": "Pay the part you do not dispute within the period given and state in writing which lines are disputed and why. Withholding the whole top-up because one line looks wrong turns a bookkeeping question into rent arrears. After a top-up the landlord may raise your monthly advance payment; after a refund you may ask for it to be lowered. If the sums are large, every Berlin district funds free tenant advice, and the Berliner Mieterverein or Berliner MieterGemeinschaft will check a statement for a member."
+      }
+    ]
   }
 }

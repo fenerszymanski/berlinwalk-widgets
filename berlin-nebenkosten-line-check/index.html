@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Nebenkosten Line Check</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --soft: #C5E1A5;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --muted: #5a665b;
+    --line: rgba(27, 94, 32, .18);
+    --warn: #B4472E;
+    --amber: #C98A00;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .nk { max-width: 780px; margin: 0 auto; padding: 14px 12px 16px; }
+  .nk-head h2 { font-size: 1.06rem; margin: 0 0 3px; color: var(--green); }
+  .nk-head p { margin: 0; font-size: .78rem; color: var(--muted); line-height: 1.5; }
+
+  .nk-stage { margin-top: 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 11px 12px 12px; }
+  .nk-stage[hidden] { display: none; }
+  .nk-stage h3 { font-size: .63rem; letter-spacing: .07em; text-transform: uppercase; color: var(--deep); margin: 0 0 8px; display: flex; align-items: center; gap: 7px; }
+  .nk-stage h3 .num { display: inline-flex; align-items: center; justify-content: center; width: 17px; height: 17px; border-radius: 999px; background: var(--green); color: #fff; font-size: .62rem; }
+  .nk-stage.is-done h3 .num { background: var(--yellow); color: var(--deep); }
+
+  .nk-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
+  .nk-grid.two { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
+  @media (max-width: 460px) { .nk-grid, .nk-grid.two { grid-template-columns: 1fr; } }
+  .nk-field label { display: block; font-size: .68rem; font-weight: 600; color: var(--deep); margin-bottom: 4px; }
+  .nk-field input, .nk-field select {
+    font-family: inherit; font-size: .82rem; width: 100%; padding: 8px 10px;
+    border: 1px solid var(--green); border-radius: 8px; background: #fff; color: var(--ink);
+  }
+  .nk-field input:focus-visible, .nk-field select:focus-visible, .nk-btn:focus-visible, .nk-x:focus-visible { outline: 3px solid var(--yellow); outline-offset: 1px; }
+  .nk-hint { font-size: .66rem; color: var(--muted); margin-top: 7px; line-height: 1.5; }
+
+  .nk-btn { margin-top: 10px; font-family: inherit; font-weight: 700; font-size: .78rem; padding: 9px 14px; border-radius: 999px; border: 0; background: var(--green); color: #fff; cursor: pointer; }
+  .nk-btn.y { background: var(--yellow); color: var(--deep); }
+  .nk-btn:disabled { opacity: .5; cursor: default; }
+  .nk-btn.ghost { background: transparent; color: var(--green); border: 1px solid var(--green); }
+
+  .nk-added { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .nk-added li { display: inline-flex; align-items: center; gap: 6px; font-size: .68rem; background: var(--cream); border: 1px solid var(--line); border-radius: 999px; padding: 4px 6px 4px 10px; }
+  .nk-added li b { color: var(--deep); }
+  .nk-x { width: 18px; height: 18px; border-radius: 999px; border: 0; background: var(--deep); color: #fff; font-size: .7rem; line-height: 18px; cursor: pointer; padding: 0; font-family: inherit; }
+
+  .nk-chart svg { display: block; width: 100%; height: auto; }
+  .nk-chart text { font-family: 'Montserrat', -apple-system, sans-serif; }
+  .nk-key { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 8px; font-size: .64rem; color: var(--muted); }
+  .nk-key i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -2px; margin-right: 4px; }
+
+  .nk-out { margin-top: 12px; border-radius: 10px; background: var(--deep); color: #fff; padding: 13px 14px 14px; }
+  .nk-out[hidden] { display: none; }
+  .nk-out .big { font-size: 1.6rem; font-weight: 800; line-height: 1; color: var(--yellow); }
+  .nk-out .big span { font-size: .78rem; font-weight: 600; color: #fff; display: block; margin-top: 6px; line-height: 1.45; }
+  .nk-cells { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 12px; padding-top: 11px; border-top: 1px solid rgba(255,255,255,.2); }
+  .nk-cells .cell { min-width: 120px; }
+  .nk-cells .v { font-size: 1rem; font-weight: 700; color: var(--yellow); }
+  .nk-cells .k { font-size: .65rem; color: rgba(255,255,255,.82); line-height: 1.4; margin-top: 2px; }
+  .nk-move { margin-top: 12px; padding: 10px 12px; border-radius: 8px; background: var(--yellow); color: var(--deep); font-size: .77rem; line-height: 1.5; font-weight: 600; }
+  .nk-move b { text-transform: uppercase; letter-spacing: .06em; font-size: .63rem; display: block; margin-bottom: 3px; }
+  .nk-flags { margin: 10px 0 0; padding: 0 0 0 16px; font-size: .74rem; line-height: 1.5; }
+  .nk-flags li { margin-bottom: 4px; }
+  .nk-note { margin-top: 10px; font-size: .66rem; color: var(--muted); line-height: 1.55; }
+  .nk-note a { color: var(--green); }
+</style>
+</head>
+<body>
+<div class="nk">
+  <div class="nk-head">
+    <h2>Berlin Nebenkosten line check</h2>
+    <p>Type the lines from your own Betriebskostenabrechnung and see each one land on the official Berlin range for the same cost, per square metre and month. The lines that fall outside the band are the ones worth a file review.</p>
+  </div>
+
+  <section class="nk-stage" id="st1">
+    <h3><span class="num">1</span> Your flat and the bill</h3>
+    <div class="nk-grid">
+      <div class="nk-field"><label for="m2">Flat size in m² (from the bill, not the contract)</label><input id="m2" type="number" inputmode="decimal" min="10" max="400" step="0.5" placeholder="e.g. 68"></div>
+      <div class="nk-field"><label for="yr">Billing year</label><select id="yr"><option value="2025" selected>2025</option><option value="2024">2024</option><option value="2026">2026</option></select></div>
+      <div class="nk-field"><label for="mo">Months covered</label><input id="mo" type="number" inputmode="numeric" min="1" max="12" step="1" value="12"></div>
+    </div>
+    <p class="nk-hint">Use the square metres printed on the statement. If that number is bigger than the flat, that is already a finding.</p>
+    <button class="nk-btn" id="go1" type="button">Next: add the lines</button>
+  </section>
+
+  <section class="nk-stage" id="st2" hidden>
+    <h3><span class="num">2</span> Add a line as it appears on the bill</h3>
+    <div class="nk-grid two">
+      <div class="nk-field"><label for="ln">Cost line</label><select id="ln"></select></div>
+      <div class="nk-field"><label for="amt">Your share in € for the whole period</label><input id="amt" type="number" inputmode="decimal" min="0" step="0.01" placeholder="e.g. 214.50"></div>
+    </div>
+    <p class="nk-hint" id="lnnote"></p>
+    <button class="nk-btn y" id="add" type="button">Add this line</button>
+    <ul class="nk-added" id="added"></ul>
+  </section>
+
+  <section class="nk-stage" id="st3">
+    <h3><span class="num">3</span> Where each line lands on the Berlin range</h3>
+    <div class="nk-chart" id="chart"></div>
+    <div class="nk-key">
+      <span><i style="background:#C5E1A5"></i>Berlin 4/5 range, billing year 2024</span>
+      <span><i style="background:#1B5E20"></i>Berlin mean</span>
+      <span><i style="background:#FFE600;border:1px solid #123D18"></i>your line inside the range</span>
+      <span><i style="background:#C98A00"></i>above the range</span>
+      <span><i style="background:#B4472E"></i>more than half again above it</span>
+    </div>
+  </section>
+
+  <div class="nk-out" id="out" hidden>
+    <div class="big" id="bigline"></div>
+    <div class="nk-cells" id="cells"></div>
+    <ul class="nk-flags" id="flags"></ul>
+    <div class="nk-move" id="move"></div>
+  </div>
+
+  <p class="nk-note" id="src"></p>
+</div>
+
+<script>
+(function () {
+  var DATA = null;
+  var currentStep = 0;
+  var entered = [];
+  var flat = { m2: 0, year: 2025, months: 12 };
+  var W = 720, ROW = 26, LABW = 178, PADR = 14, TOP = 26, MAXV = 2.0;
+
+  var $ = function (id) { return document.getElementById(id); };
+  var elChart = $('chart'), elLn = $('ln'), elAmt = $('amt'), elAdded = $('added'), elOut = $('out');
+
+  function money(v) { return '€' + v.toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 0 }); }
+  function perM2(v) { return '€' + v.toFixed(2); }
+  function lineByKey(k) { for (var i = 0; i < DATA.lines.length; i += 1) if (DATA.lines[i].key === k) return DATA.lines[i]; return null; }
+  function rate(e) { return e.amount / flat.m2 / flat.months; }
+  function x(v) { return LABW + (Math.min(v, MAXV) / MAXV) * (W - LABW - PADR); }
+
+  function fillSelect() {
+    var html = '<optgroup label="Cold operating costs">';
+    DATA.lines.forEach(function (l) {
+      if (l.group !== 'cold') return;
+      html += '<option value="' + l.key + '">' + l.label + ' (' + l.de + ')</option>';
+    });
+    html += '</optgroup><optgroup label="Heating and hot water">';
+    DATA.lines.forEach(function (l) {
+      if (l.group !== 'warm') return;
+      html += '<option value="' + l.key + '">' + l.label + ' (' + l.de + ')</option>';
+    });
+    html += '</optgroup>';
+    elLn.innerHTML = html;
+    showNote();
+  }
+  function showNote() { var l = lineByKey(elLn.value); $('lnnote').textContent = l ? l.note : ''; }
+
+  function verdict(l, r) {
+    if (r > l.upper * 1.5) return 'red';
+    if (r > l.upper) return 'amber';
+    return 'ok';
+  }
+
+  function drawChart() {
+    var rows = DATA.lines;
+    var narrow = elChart.clientWidth > 0 && elChart.clientWidth < 520;
+    W = narrow ? 440 : 720; LABW = narrow ? 132 : 190; ROW = narrow ? 24 : 26;
+    var H = TOP + rows.length * ROW + 30;
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Berlin operating cost ranges per square metre and month with your own lines marked">';
+    // axis ticks
+    for (var t = 0; t <= MAXV + 0.001; t += 0.5) {
+      var tx = x(t);
+      s += '<line x1="' + tx + '" y1="' + (TOP - 8) + '" x2="' + tx + '" y2="' + (H - 24) + '" stroke="rgba(27,94,32,.14)" stroke-width="1"/>';
+      s += '<text x="' + tx + '" y="' + (H - 8) + '" font-size="10" fill="#5a665b" text-anchor="middle">' + t.toFixed(2) + '</text>';
+    }
+    s += '<text x="' + x(MAXV) + '" y="' + (TOP - 12) + '" font-size="10" fill="#5a665b" text-anchor="end">€ per m² per month</text>';
+    var byKey = {};
+    entered.forEach(function (e) { byKey[e.key] = e; });
+    rows.forEach(function (l, i) {
+      var y = TOP + i * ROW + ROW / 2;
+      var e = byKey[l.key];
+      var strong = !!e;
+      s += '<text x="' + (LABW - 8) + '" y="' + (y + 4) + '" font-size="11" text-anchor="end" fill="' + (strong ? '#123D18' : '#5a665b') + '" font-weight="' + (strong ? '700' : '500') + '">' + (l.short || l.label) + '</text>';
+      s += '<rect x="' + x(l.lower) + '" y="' + (y - 7) + '" width="' + Math.max(2, x(l.upper) - x(l.lower)) + '" height="14" rx="4" fill="#C5E1A5"/>';
+      s += '<rect x="' + (x(l.mean) - 1.5) + '" y="' + (y - 9) + '" width="3" height="18" fill="#1B5E20"/>';
+      if (e) {
+        var r = rate(e);
+        var v = verdict(l, r);
+        var fill = v === 'red' ? '#B4472E' : v === 'amber' ? '#C98A00' : '#FFE600';
+        var cx = x(r);
+        if (r > MAXV) {
+          s += '<polygon points="' + (W - PADR - 2) + ',' + y + ' ' + (W - PADR - 14) + ',' + (y - 8) + ' ' + (W - PADR - 14) + ',' + (y + 8) + '" fill="' + fill + '" stroke="#123D18" stroke-width="1.2"/>';
+        } else {
+          s += '<circle cx="' + cx + '" cy="' + y + '" r="7" fill="' + fill + '" stroke="#123D18" stroke-width="1.6"/>';
+        }
+        var lx = Math.min(cx + 11, W - PADR - 60);
+        s += '<text x="' + lx + '" y="' + (y + 4) + '" font-size="10.5" font-weight="700" fill="#123D18">' + r.toFixed(2) + '</text>';
+      }
+    });
+    s += '</svg>';
+    elChart.innerHTML = s;
+  }
+
+  function renderAdded() {
+    elAdded.innerHTML = entered.map(function (e, i) {
+      var l = lineByKey(e.key);
+      return '<li><b>' + l.label + '</b> ' + money(e.amount) + ' <button class="nk-x" type="button" data-i="' + i + '" aria-label="Remove ' + l.label + '">×</button></li>';
+    }).join('');
+  }
+
+  function summarise() {
+    if (!entered.length) { elOut.hidden = true; return; }
+    var yourCold = 0, berlinCold = 0, coldCount = 0, over = [], overEuro = 0;
+    entered.forEach(function (e) {
+      var l = lineByKey(e.key);
+      var r = rate(e);
+      if (l.group === 'cold') { yourCold += r; berlinCold += l.mean; coldCount += 1; }
+      var v = verdict(l, r);
+      if (v !== 'ok') {
+        var excess = (r - l.upper) * flat.m2 * flat.months;
+        overEuro += excess;
+        over.push({ l: l, r: r, v: v, excess: excess });
+      }
+    });
+    var yourTotal = entered.reduce(function (sum, e) { return sum + e.amount; }, 0);
+    var yourAll = entered.reduce(function (sum, e) { return sum + rate(e); }, 0);
+    var berlinAll = entered.reduce(function (sum, e) { return sum + lineByKey(e.key).mean; }, 0);
+    var diffYear = (yourAll - berlinAll) * flat.m2 * flat.months;
+
+    var big = '';
+    if (over.length === 0) {
+      big = perM2(yourAll) + '<span>per m² and month across the ' + entered.length + ' line' + (entered.length > 1 ? 's' : '') + ' you entered. Every one sits inside the Berlin range. The bill is expensive or cheap, but it is not unusual.</span>';
+    } else {
+      big = over.length + ' line' + (over.length > 1 ? 's' : '') + ' above the range<span>' + money(Math.round(overEuro)) + ' of this bill sits above the top of the Berlin 4/5 range for those lines. That is the amount a file review is about, not the whole statement.</span>';
+    }
+    $('bigline').innerHTML = big;
+
+    var lastDay = '31 December ' + (flat.year + 1);
+    var cells = [
+      { v: perM2(yourAll) + ' vs ' + perM2(berlinAll), k: 'you vs the Berlin mean for the same lines, per m² and month' },
+      { v: (diffYear >= 0 ? '+' : '−') + money(Math.abs(Math.round(diffYear))), k: 'per year against a Berlin-average house of your size, on these lines' },
+      { v: money(Math.round(yourTotal)), k: 'entered so far for the ' + flat.months + '-month period' },
+      { v: lastDay, k: 'last day the landlord may send the ' + flat.year + ' statement and still claim a top-up' },
+      { v: '12 months', k: 'from the day it landed to raise written objections' }
+    ];
+    if (coldCount) cells.splice(1, 0, { v: perM2(yourCold), k: 'your cold costs per m² and month on the lines entered (Berlin mean for all cold lines together: €' + DATA.meta.coldTotalMean.toFixed(2) + ')' });
+    $('cells').innerHTML = cells.map(function (c) { return '<div class="cell"><div class="v">' + c.v + '</div><div class="k">' + c.k + '</div></div>'; }).join('');
+
+    $('flags').innerHTML = over.map(function (o) {
+      return '<li><strong>' + o.l.label + '</strong>: ' + perM2(o.r) + ' against a Berlin top of ' + perM2(o.l.upper) + '. ' + o.l.note + '</li>';
+    }).join('');
+
+    var move;
+    if (over.length) {
+      var names = over.map(function (o) { return o.l.de; }).join(', ');
+      move = '<b>My move</b>Write to the landlord or Hausverwaltung, name these lines by their German label (' + names + '), and ask for Belegeinsicht: the invoices and the distribution key behind them. Pay the undisputed part of any top-up on time and say in the same letter that the rest is disputed. Keep the whole thing inside twelve months of the day the statement arrived.';
+    } else if (entered.length < 4) {
+      move = '<b>My move</b>Add the big lines before deciding anything: heating, property tax, caretaker and insurance carry most of the money. A bill can look normal on the first three lines and fail on the fourth.';
+    } else {
+      move = '<b>My move</b>Check two things that no range can see: whether the square metres on the statement match your flat, and whether every line is actually named in your rental contract. If both hold, pay it and file it.';
+    }
+    $('move').innerHTML = move;
+    elOut.hidden = false;
+  }
+
+  function advance() {
+    $('st1').classList.toggle('is-done', currentStep >= 1);
+    $('st2').hidden = currentStep < 1;
+    $('st2').classList.toggle('is-done', entered.length > 0);
+    $('st3').classList.toggle('is-done', entered.length > 0);
+    drawChart();
+    renderAdded();
+    summarise();
+  }
+
+  $('go1').addEventListener('click', function () {
+    var m2 = parseFloat($('m2').value);
+    var mo = parseInt($('mo').value, 10);
+    if (!(m2 > 0)) { $('m2').focus(); $('m2').setAttribute('aria-invalid', 'true'); return; }
+    flat.m2 = m2; flat.year = parseInt($('yr').value, 10); flat.months = (mo >= 1 && mo <= 12) ? mo : 12;
+    $('m2').removeAttribute('aria-invalid');
+    if (currentStep < 1) currentStep += 1;
+    advance();
+    elAmt.focus();
+  });
+  ['m2', 'yr', 'mo'].forEach(function (id) {
+    $(id).addEventListener('change', function () {
+      if (currentStep < 1) return;
+      var m2 = parseFloat($('m2').value); if (m2 > 0) flat.m2 = m2;
+      flat.year = parseInt($('yr').value, 10);
+      var mo = parseInt($('mo').value, 10); flat.months = (mo >= 1 && mo <= 12) ? mo : 12;
+      advance();
+    });
+  });
+  elLn.addEventListener('change', showNote);
+  var rsz = null;
+  window.addEventListener('resize', function () { clearTimeout(rsz); rsz = setTimeout(function () { if (DATA) drawChart(); }, 120); });
+  $('add').addEventListener('click', function () {
+    var amount = parseFloat(elAmt.value);
+    if (!(amount >= 0)) { elAmt.focus(); return; }
+    var key = elLn.value;
+    var idx = -1;
+    entered.forEach(function (e, i) { if (e.key === key) idx = i; });
+    if (idx >= 0) entered.splice(idx, 1);
+    entered.push({ key: key, amount: amount });
+    elAmt.value = '';
+    advance();
+  });
+  elAmt.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); $('add').click(); } });
+  elAdded.addEventListener('click', function (e) {
+    var b = e.target.closest ? e.target.closest('button[data-i]') : null;
+    if (!b) return;
+    entered.splice(parseInt(b.getAttribute('data-i'), 10), 1);
+    advance();
+  });
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (j) {
+    DATA = j;
+    fillSelect();
+    $('src').innerHTML = 'Ranges from the <a href="' + DATA.meta.sourceUrl + '" target="_blank" rel="noopener">Berliner Betriebskostenübersicht</a> for billing year ' + DATA.meta.billingYear + ', published with the Berliner Mietspiegel 2026 from about 1,700 buildings for cold costs and 1,300 for heating and hot water. The band is the 4/5 range, so one house in five legitimately sits outside it: a line above the band is a reason to ask for the invoices, not proof of a mistake. Deadlines follow § 556 BGB. Checked on 10 September 2026.';
+    advance();
+  });
+}());
+</script>
+<script defer src="../js/brand.js"></script>
+</body>
+</html>
