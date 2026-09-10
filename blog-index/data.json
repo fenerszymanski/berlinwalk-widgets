@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-10T02:11:02.258Z",
+  "updatedAt": "2026-09-10T07:51:03.960Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 368,
-  "toolsTotal": 288,
+  "totalPosts": 369,
+  "toolsTotal": 289,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1618,6 +1618,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin Bulky Waste: What Sperrmüll Costs and Where It Actually Goes",
+      "slug": "berlin-bulky-waste",
+      "path": "/post/berlin-bulky-waste",
+      "url": "https://www.berlinwalk.com/post/berlin-bulky-waste",
+      "excerpt": "Three cubic metres is the number that decides everything, and partial unloading is not allowed, so a load one armchair over the line is turned away entirely. What each route costs, which things are always free, and why the pavement version now starts at €300.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "free-budget",
+      "topicLabel": "Free & Budget",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-10T07:49:14.180Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_4ec1d2efbf1e4037bee7c1faed811631~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-recycling-yard-containers.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_4ec1d2efbf1e4037bee7c1faed811631~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-recycling-yard-containers.jpg",
+      "alt": "Orange BSR containers and glass banks lined up inside the recycling yard on Ilsenburger Strasse in Berlin-Charlottenburg",
+      "relatedToolSlug": ""
+    },
+    {
       "title": "Berlin Heating Season: What Your Landlord Owes You When the Flat Goes Cold",
       "slug": "berlin-heating-season",
       "path": "/post/berlin-heating-season",
@@ -1803,26 +1820,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_e5da5edfa7fd415593b28ec9b9cd6911~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-landshuter-strasse-night.jpg",
       "alt": "A lit Berlin apartment doorway glowing at night on Landshuter Strasse in Schoeneberg",
       "relatedToolSlug": "berlin-quiet-clock"
-    },
-    {
-      "title": "What Closes in Berlin in Winter: The Dates the Lakes, Pools and Boats Stop",
-      "slug": "what-closes-in-berlin-in-winter",
-      "path": "/post/what-closes-in-berlin-in-winter",
-      "url": "https://www.berlinwalk.com/post/what-closes-in-berlin-in-winter",
-      "excerpt": "What closes in Berlin in winter and exactly when: the lake and outdoor pool dates, the park gates, the weekend-only winter boats, and what opens on 1 and 23 November.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "when-to-visit",
-      "topicLabel": "Month-by-Month Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-09-06T19:45:59.326Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_f031656109a245e0bcb70c7214ef1e08~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-strandbad-wannsee.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_f031656109a245e0bcb70c7214ef1e08~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-strandbad-wannsee.jpg",
-      "alt": "An empty sandy beach at Strandbad Wannsee under a grey sky, with wicker beach chairs stacked along the shoreline",
-      "relatedToolSlug": "berlin-season-board"
     }
   ],
   "allPosts": [
+    {
+      "title": "Berlin Bulky Waste: What Sperrmüll Costs and Where It Actually Goes",
+      "slug": "berlin-bulky-waste",
+      "path": "/post/berlin-bulky-waste",
+      "url": "https://www.berlinwalk.com/post/berlin-bulky-waste",
+      "excerpt": "Three cubic metres is the number that decides everything, and partial unloading is not allowed, so a load one armchair over the line is turned away entirely. What each route costs, which things are always free, and why the pavement version now starts at €300.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "free-budget",
+      "topicLabel": "Free & Budget",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-10T07:49:14.180Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_4ec1d2efbf1e4037bee7c1faed811631~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-recycling-yard-containers.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_4ec1d2efbf1e4037bee7c1faed811631~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-recycling-yard-containers.jpg",
+      "alt": "Orange BSR containers and glass banks lined up inside the recycling yard on Ilsenburger Strasse in Berlin-Charlottenburg",
+      "relatedToolSlug": ""
+    },
     {
       "title": "Berlin Heating Season: What Your Landlord Owes You When the Flat Goes Cold",
       "slug": "berlin-heating-season",
