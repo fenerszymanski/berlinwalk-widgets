@@ -1,0 +1,276 @@
+{
+  "checkedOn": "10 September 2026",
+  "streams": [
+    {
+      "id": "bulky",
+      "label": "Bulky waste",
+      "scaleMax": 6,
+      "unit": "m³",
+      "marks": [
+        {
+          "at": 3,
+          "label": "free at the yard ends here",
+          "tone": "limit"
+        },
+        {
+          "at": 5,
+          "label": "€50 collection covers to here",
+          "tone": "note"
+        }
+      ],
+      "rule": "Old furniture, scrap wood, scrap metal and hard plastics count as one waste type. Free up to 3 m³ per vehicle at a recycling yard, and the yard refuses the whole load above that because partial unloading is not allowed.",
+      "freeTo": 3,
+      "overAt": 3
+    },
+    {
+      "id": "electrical",
+      "label": "Electrical appliances",
+      "scaleMax": 2,
+      "unit": "m³",
+      "marks": [],
+      "rule": "Free at every recycling yard in household quantities with no volume limit, and free again if you let a booked collection take them. Pull the batteries out and tape the poles.",
+      "freeTo": "all",
+      "overAt": null
+    },
+    {
+      "id": "rubble",
+      "label": "Mineral rubble",
+      "scaleMax": 1,
+      "unit": "m³",
+      "marks": [
+        {
+          "at": 0.25,
+          "label": "€100 of tiles",
+          "tone": "note"
+        }
+      ],
+      "rule": "€4 per started 10 litres, so €400 a cubic metre. A booked collection will not take it at any price, and mixed building waste is refused at the yard as well.",
+      "freeTo": 0,
+      "overAt": null
+    },
+    {
+      "id": "bagged",
+      "label": "Bagged household and renovation waste",
+      "scaleMax": 0.75,
+      "unit": "m³",
+      "marks": [
+        {
+          "at": 0.5,
+          "label": "500 litre ceiling",
+          "tone": "limit"
+        }
+      ],
+      "rule": "€3 per started 50 litres, up to 500 litres in one go.",
+      "freeTo": 0,
+      "overAt": null
+    },
+    {
+      "id": "garden",
+      "label": "Branches and hedge cuttings",
+      "scaleMax": 2,
+      "unit": "m³",
+      "marks": [
+        {
+          "at": 1,
+          "label": "1 m³ ceiling",
+          "tone": "limit"
+        }
+      ],
+      "rule": "Free up to 1 m³ per vehicle, refused as one load above that.",
+      "freeTo": 1,
+      "overAt": 1
+    }
+  ],
+  "items": [
+    {
+      "id": "wardrobe",
+      "label": "Two-door wardrobe",
+      "stream": "bulky",
+      "volume": 1.2
+    },
+    {
+      "id": "sofa",
+      "label": "Two-seat sofa",
+      "stream": "bulky",
+      "volume": 1.1
+    },
+    {
+      "id": "bedframe",
+      "label": "Bed frame",
+      "stream": "bulky",
+      "volume": 0.5
+    },
+    {
+      "id": "mattress",
+      "label": "Double mattress",
+      "stream": "bulky",
+      "volume": 0.35
+    },
+    {
+      "id": "drawers",
+      "label": "Chest of drawers",
+      "stream": "bulky",
+      "volume": 0.4
+    },
+    {
+      "id": "shelf",
+      "label": "Bookshelf",
+      "stream": "bulky",
+      "volume": 0.5
+    },
+    {
+      "id": "table",
+      "label": "Dining table",
+      "stream": "bulky",
+      "volume": 0.4
+    },
+    {
+      "id": "chairs",
+      "label": "Four chairs",
+      "stream": "bulky",
+      "volume": 0.3
+    },
+    {
+      "id": "desk",
+      "label": "Desk",
+      "stream": "bulky",
+      "volume": 0.4
+    },
+    {
+      "id": "carpet",
+      "label": "Rolled-up carpet",
+      "stream": "bulky",
+      "volume": 0.3
+    },
+    {
+      "id": "fridge",
+      "label": "Fridge freezer",
+      "stream": "electrical",
+      "volume": 0.6,
+      "hazardParts": true
+    },
+    {
+      "id": "washer",
+      "label": "Washing machine",
+      "stream": "electrical",
+      "volume": 0.35,
+      "hazardParts": true
+    },
+    {
+      "id": "tv",
+      "label": "Television",
+      "stream": "electrical",
+      "volume": 0.1,
+      "hazardParts": true
+    },
+    {
+      "id": "cables",
+      "label": "Box of cables and small devices",
+      "stream": "electrical",
+      "volume": 0.08
+    },
+    {
+      "id": "tiles",
+      "label": "Tiles off 4 m² of floor",
+      "stream": "rubble",
+      "volume": 0.06
+    },
+    {
+      "id": "brick",
+      "label": "Half a cube of broken brick",
+      "stream": "rubble",
+      "volume": 0.5
+    },
+    {
+      "id": "bags",
+      "label": "Five bags of renovation waste",
+      "stream": "bagged",
+      "volume": 0.3
+    },
+    {
+      "id": "hedge",
+      "label": "A boot of hedge cuttings",
+      "stream": "garden",
+      "volume": 0.4
+    },
+    {
+      "id": "toilet",
+      "label": "Toilet or washbasin",
+      "stream": "piece",
+      "volume": 0.15,
+      "piecePrice": 6
+    },
+    {
+      "id": "tyres",
+      "label": "Four car tyres",
+      "stream": "piece",
+      "volume": 0.3,
+      "piecePrice": 12
+    },
+    {
+      "id": "paint",
+      "label": "Three tins of old paint",
+      "stream": "hazard",
+      "volume": 0.03
+    }
+  ],
+  "routes": {
+    "yard": {
+      "label": "Recycling yard, driven yourself",
+      "freeLimit": 3
+    },
+    "saturday": {
+      "label": "Gradestraße yard, Saturday only",
+      "min": 3,
+      "max": 5,
+      "price": 180
+    },
+    "saver": {
+      "label": "BSR collection, saver fee",
+      "blockLimit": 5,
+      "blockPrice": 50,
+      "extraPerCubic": 10,
+      "wait": "from the 16th working day"
+    },
+    "standard": {
+      "label": "BSR collection, standard fee",
+      "blockLimit": 5,
+      "blockPrice": 100,
+      "extraPerCubic": 20,
+      "wait": "within 6 to 15 working days"
+    },
+    "plant": {
+      "label": "Sorting plant, Gradestraße 81",
+      "pricePerTonne": 180,
+      "floorPrice": 72,
+      "floorKg": 400,
+      "kgPerCubic": 100
+    }
+  },
+  "fine": {
+    "bands": [
+      {
+        "maxVolume": 1,
+        "lo": 300,
+        "hi": 8000
+      },
+      {
+        "maxVolume": 999,
+        "lo": 8000,
+        "hi": 11000
+      }
+    ],
+    "hazard": {
+      "lo": 1000,
+      "hi": 15000
+    },
+    "note": "Berlin fine catalogue for environmental offences, items 2.1 to 2.5: €300 to €1,500 for one small item, €1,500 to €4,000 for several or one large one, €4,000 to €8,000 at a cubic metre or 100 kg, €8,000 to €11,000 above that."
+  },
+  "notes": {
+    "rubbleNoCollection": "A booked collection will not take rubble. That part of the load has to be driven to a yard whatever else you decide.",
+    "hazardPoint": "Paint, solvents and weedkiller need a hazardous waste point, and only five Berlin yards have one. Free up to 20 kg per type per day, then €1.30 to €6.40 a kg.",
+    "empty": "Add what you are actually getting rid of. The bars below are the Berlin rules drawn to scale, so you can see the free line before you load the car.",
+    "vehicle": "Every limit counts per vehicle rather than per person, and nothing is weighed. Staff estimate volume by eye, and their rule of thumb is that a full Multivan boot is about 3 m³."
+  },
+  "source": "Fees from the BSR fee list and acceptance conditions for recycling yards and the BSR collection booking page. Fine ranges from the Berlin fine catalogue for environmental offences, Amtsblatt für Berlin number 47 of 14 November 2025."
+}

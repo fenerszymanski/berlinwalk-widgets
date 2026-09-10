@@ -4665,5 +4665,19 @@
       "**Two quiet rights.** If your building has remotely readable meters and you are not sent monthly consumption information, you may cut your heating share by 3 per cent. Meters that cannot be read remotely must be replaced by 31 December 2026.",
       "**Every Berlin district runs a free tenant advice service.** It is funded by the Senate and open to any tenant in that district. Take the printed log with you."
     ]
+  },
+  "berlin-bulky-waste": {
+    "title": "Berlin Bulky Waste - Quick Summary",
+    "icon": "🛋️",
+    "kicker": "BERLINWALK.COM • LIVING IN BERLIN",
+    "items": [
+      "**Three cubic metres is the line everything turns on.** A recycling yard takes that much old furniture free per vehicle, and a full Multivan boot is roughly that. Above it the yard refuses the load rather than taking part of it.",
+      "**Partial unloading is not allowed.** Turn up with four cubic metres and you drive all four home again. BSR's own example: four cubic metres of furniture plus a fridge, the fridge is accepted and the furniture is sent away.",
+      "**Electrical appliances are always free and never counted.** Fridges, washing machines, televisions, cables, in household quantities, with no volume limit at any of the fourteen yards.",
+      "**A collection to your door is €50 or €100.** The saver fee is €50 for up to five cubic metres and comes from the sixteenth working day, the standard fee is €100 and comes inside fifteen. Electricals and clean bagged textiles ride along free.",
+      "**Rubble is the expensive one.** Tiles, brick and concrete cost €4 per started ten litres, which is €400 a cubic metre, and no collection will take it at any price.",
+      "**Paint, solvents and weedkiller are free up to 20 kg per type per day,** but only at the five yards with a hazardous waste counter.",
+      "**Leaving it on the pavement is the costly option.** Berlin's fine catalogue starts at €300 for one small item and runs to €11,000 above a cubic metre. Anything with hazardous parts, so a fridge or a television, reaches €15,000."
+    ]
   }
 }

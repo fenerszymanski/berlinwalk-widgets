@@ -4465,7 +4465,7 @@
       "category": "Discovery",
       "image": "https://static.wixstatic.com/media/5a08a3_40b85d0571b640688e879bf73f466b05~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/how-many-days-in-berlin/",
-      "embedHeight": 1560,
+      "embedHeight": 1550,
       "hubCategory": "TripPlans",
       "type": "Planner",
       "tags": [
@@ -6554,7 +6554,7 @@
         "Berlin groundwater construction"
       ],
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-pink-pipe-decoder/",
-      "embedHeight": 1560,
+      "embedHeight": 1550,
       "image": "https://static.wixstatic.com/media/5a08a3_50d5a04ebd5e4918ad3d898e3178fede~mv2.png",
       "iconStatus": "live-wix-media",
       "cmsItemId": "f469e394-396c-470b-a7e3-07ba838d882c"
@@ -6879,7 +6879,7 @@
         "are berlin attractions worth it"
       ],
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-attractions-worth-it-matcher/",
-      "embedHeight": 1560,
+      "embedHeight": 1550,
       "image": "https://static.wixstatic.com/media/5a08a3_1b88dafd75784899870655a380cbe23b~mv2.png",
       "iconStatus": "live-wix-media",
       "cmsItemId": "36ae97a4-7def-42eb-be44-ddc6c514fde4",
@@ -6972,7 +6972,7 @@
         "berlin station ausgang map"
       ],
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-station-exit-map/",
-      "embedHeight": 1560,
+      "embedHeight": 1550,
       "image": "https://static.wixstatic.com/media/5a08a3_7261c75cc50e4f2098163990824ab5a8~mv2.png",
       "iconStatus": "live-wix-media",
       "relatedBlog": "/post/berlin-station-exits",
@@ -7508,7 +7508,7 @@
         "berlin saturday market"
       ],
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-market-week/",
-      "embedHeight": 1560,
+      "embedHeight": 1550,
       "relatedBlog": "/post/berlin-weekly-markets",
       "image": "https://static.wixstatic.com/media/5a08a3_6fb70b55e85141b58a52635c0e5c6dad~mv2.png",
       "iconStatus": "live-wix-media",
@@ -7540,7 +7540,7 @@
         "which berlin u-bahn stations are worth seeing"
       ],
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-ubahn-design-board/",
-      "embedHeight": 1560,
+      "embedHeight": 1550,
       "relatedBlog": "/post/beautiful-u-bahn-stations-berlin",
       "image": "https://static.wixstatic.com/media/5a08a3_d2e0a065533d4cbc97fe6471bb7f91b4~mv2.png",
       "iconStatus": "live-wix-media",
@@ -8569,6 +8569,39 @@
       ],
       "iconStatus": "live-wix-media",
       "cmsItemId": "680c5122-2206-4298-b766-1e93a18fcf9b"
+    },
+    {
+      "slug": "berlin-disposal-cost-ladder",
+      "title": "Berlin Disposal Cost Ladder",
+      "lead": "Build the actual pile you are getting rid of, watch it fill against the 3 m³ free line at a Berlin recycling yard, and see what every route charges next to the fine for leaving it on the pavement.",
+      "category": "Money",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-disposal-cost-ladder/",
+      "embedHeight": 1550,
+      "image": "https://static.wixstatic.com/media/5a08a3_1caeb91ebaf745df826f838d0b830130~mv2.png",
+      "hubCategory": "Essentials",
+      "type": "Calculator",
+      "priority": 3,
+      "tags": [
+        "sperrmull",
+        "bulky waste",
+        "bsr",
+        "recycling yard",
+        "recyclinghof",
+        "furniture",
+        "mattress",
+        "rubble",
+        "electrical waste",
+        "fine"
+      ],
+      "aliases": [
+        "sperrmüll",
+        "bulky waste",
+        "recycling centre",
+        "throw away furniture",
+        "get rid of a sofa",
+        "waste disposal"
+      ],
+      "iconStatus": "live-wix-media"
     }
   ],
   "hubCategories": [

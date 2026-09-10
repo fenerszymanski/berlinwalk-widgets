@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Disposal Cost Ladder</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --muted: #5a665b;
+    --line: rgba(27, 94, 32, .18);
+    --free: #2E7D32;
+    --fine: #B4472E;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .dl { max-width: 780px; margin: 0 auto; padding: 14px 12px 16px; }
+
+  .dl-head h2 { font-size: 1.06rem; margin: 0 0 3px; color: var(--green); }
+  .dl-head p { margin: 0; font-size: .78rem; color: var(--muted); line-height: 1.5; }
+
+  .dl-pick { margin-top: 12px; }
+  .dl-pick h3 { font-size: .63rem; letter-spacing: .07em; text-transform: uppercase; color: var(--deep); margin: 0 0 8px; }
+  .dl-pick .grid { display: flex; flex-wrap: wrap; gap: 6px; }
+  .dl-pick button {
+    font-family: inherit; font-size: .72rem; font-weight: 600; cursor: pointer;
+    padding: 7px 11px; border-radius: 999px; border: 1px solid var(--green);
+    background: #fff; color: var(--deep); line-height: 1.25;
+  }
+  .dl-pick button:hover { background: #f1f6ef; }
+  .dl-pick button:focus-visible { outline: 3px solid var(--yellow); outline-offset: 1px; }
+  .dl-pick button .n[hidden] { display: none; }
+  .dl-pick button .n { display: inline-block; margin-left: 6px; padding: 0 5px; border-radius: 999px; background: var(--green); color: #fff; font-size: .66rem; }
+
+  .dl-load { margin-top: 11px; padding: 10px 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; }
+  .dl-load h3 { font-size: .63rem; letter-spacing: .07em; text-transform: uppercase; color: var(--deep); margin: 0 0 8px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  .dl-load .clear { font-family: inherit; font-size: .66rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; cursor: pointer; background: none; border: 0; color: var(--fine); padding: 2px 4px; }
+  .dl-load .clear:focus-visible { outline: 3px solid var(--yellow); outline-offset: 1px; }
+  .dl-load .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .dl-load .chips button {
+    font-family: inherit; font-size: .71rem; font-weight: 600; cursor: pointer;
+    padding: 6px 9px 6px 11px; border-radius: 8px; border: 1px solid var(--line);
+    background: #f4f8f2; color: var(--deep);
+  }
+  .dl-load .chips button::after { content: ' ×'; font-weight: 700; color: var(--fine); }
+  .dl-load .chips button:focus-visible { outline: 3px solid var(--yellow); outline-offset: 1px; }
+  .dl-load .empty { font-size: .74rem; color: var(--muted); line-height: 1.5; margin: 0; }
+
+  .dl-chart { margin-top: 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 10px 4px 6px; }
+  .dl-chart svg { display: block; width: 100%; height: auto; }
+  .dl-chart text { font-family: 'Montserrat', -apple-system, sans-serif; }
+
+  .dl-read { margin-top: 12px; padding: 13px 14px; border-radius: 10px; background: var(--deep); color: #fff; }
+  .dl-read .grid { display: flex; flex-wrap: wrap; gap: 14px 26px; }
+  .dl-read .cell { min-width: 104px; }
+  .dl-read .n { font-size: 1.4rem; font-weight: 700; line-height: 1.05; display: block; }
+  .dl-read .n.bad { color: var(--yellow); }
+  .dl-read .k { font-size: .61rem; letter-spacing: .07em; text-transform: uppercase; color: rgba(255,255,255,.66); display: block; margin-top: 3px; }
+  .dl-read .say { font-size: .79rem; line-height: 1.55; color: rgba(255,255,255,.93); margin: 11px 0 0; }
+
+  .dl-routes { margin-top: 12px; }
+  .dl-routes h3 { font-size: .63rem; letter-spacing: .07em; text-transform: uppercase; color: var(--deep); margin: 0 0 8px; }
+  .dl-routes ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .dl-routes li { padding: 9px 11px; background: #fff; border: 1px solid var(--line); border-radius: 9px; font-size: .75rem; line-height: 1.5; }
+  .dl-routes li b { color: var(--deep); }
+  .dl-routes li.off { border-color: rgba(180, 71, 46, .45); background: #fdf6f4; }
+  .dl-routes li .price { float: right; font-weight: 700; color: var(--deep); margin-left: 10px; }
+  .dl-routes li.off .price { color: var(--fine); }
+
+  .dl-flags { margin-top: 11px; display: grid; gap: 6px; }
+  .dl-flags p { margin: 0; padding: 9px 11px; border-radius: 9px; background: #fffbe6; border: 1px solid rgba(255,230,0,.55); font-size: .74rem; line-height: 1.5; color: #4a3d00; }
+
+  .dl-foot { margin: 11px 3px 0; font-size: .69rem; color: var(--muted); line-height: 1.55; }
+
+  @media (max-width: 480px) {
+    .dl { padding: 12px 9px 14px; }
+    .dl-read .n { font-size: 1.22rem; }
+    .dl-routes li .price { float: none; display: block; margin: 4px 0 0; }
+  }
+</style>
+</head>
+<body>
+<div class="dl">
+  <div class="dl-head">
+    <h2>Build the load, then see what Berlin charges for it</h2>
+    <p>Tap what you are actually getting rid of. The bars are the Berlin rules drawn to scale, so the free line is visible before you load the car.</p>
+  </div>
+
+  <div class="dl-pick">
+    <h3>What is going out</h3>
+    <div class="grid" id="dl-pal"></div>
+  </div>
+
+  <div class="dl-load">
+    <h3>Your load <button class="clear" id="dl-clear" type="button">clear</button></h3>
+    <div class="chips" id="dl-chips"></div>
+    <p class="empty" id="dl-empty"></p>
+  </div>
+
+  <div class="dl-chart">
+    <svg id="dl-svg" viewBox="0 0 560 360" role="img" aria-labelledby="dl-svgtitle">
+      <title id="dl-svgtitle">Each Berlin waste stream drawn to scale with its free limit, and your load stacked against it</title>
+    </svg>
+  </div>
+
+  <div class="dl-read">
+    <div class="grid">
+      <div class="cell"><span class="n" id="dl-total">€0</span><span class="k">cheapest lawful total</span></div>
+      <div class="cell"><span class="n" id="dl-route">nothing yet</span><span class="k">how you would do it</span></div>
+      <div class="cell"><span class="n bad" id="dl-fine">—</span><span class="k">fine if you leave it out</span></div>
+    </div>
+    <p class="say" id="dl-say"></p>
+  </div>
+
+  <div class="dl-routes">
+    <h3>What each route would charge for this load</h3>
+    <ul id="dl-list"></ul>
+  </div>
+
+  <div class="dl-flags" id="dl-flagbox"></div>
+
+  <p class="dl-foot" id="dl-foot"></p>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  var PAD_L = 8, BAR_L = 8, BAR_R = 486, ROW_H = 68, TOP = 16;
+
+  function el(name, attrs, text) {
+    var n = document.createElementNS(SVGNS, name);
+    for (var k in attrs) { if (attrs[k] !== null && attrs[k] !== undefined) n.setAttribute(k, attrs[k]); }
+    if (text !== undefined) n.textContent = text;
+    return n;
+  }
+  function euro(n) { return '€' + Math.round(n).toLocaleString('en-GB'); }
+  function m3(n) { return (Math.round(n * 100) / 100) + ' m³'; }
+
+  function boot(d) {
+    var picked = [];
+    var byId = {};
+    d.items.forEach(function (it) { byId[it.id] = it; });
+
+    var pal = document.getElementById('dl-pal');
+    pal.innerHTML = d.items.map(function (it) {
+      return '<button type="button" data-add="' + it.id + '">' + it.label +
+        '<span class="n" data-count="' + it.id + '" hidden>0</span></button>';
+    }).join('');
+
+    document.getElementById('dl-foot').textContent =
+      d.source + ' Checked on ' + d.checkedOn + '. ' + d.notes.vehicle +
+      ' The volumes behind each item are working estimates for a normal Berlin flat, not measured figures.';
+
+    function volumeOf(stream) {
+      return picked.reduce(function (a, id) {
+        var it = byId[id];
+        return a + (it.stream === stream ? it.volume : 0);
+      }, 0);
+    }
+    function totalVolume() {
+      return picked.reduce(function (a, id) { return a + byId[id].volume; }, 0);
+    }
+    function pieceCost() {
+      return picked.reduce(function (a, id) { return a + (byId[id].piecePrice || 0); }, 0);
+    }
+    function hasHazardParts() {
+      return picked.some(function (id) { return byId[id].hazardParts; });
+    }
+
+    function rubbleCost(v) { return v > 0 ? 4 * Math.ceil(v * 1000 / 10 - 1e-9) : 0; }
+    function baggedCost(v) { return v > 0 ? 3 * Math.ceil(v * 1000 / 50 - 1e-9) : 0; }
+
+    function bulkyRoutes(bulk) {
+      var r = d.routes, out = [];
+      out.push({
+        id: 'yard', label: r.yard.label,
+        open: bulk <= r.yard.freeLimit + 1e-9, cost: 0,
+        why: bulk > r.yard.freeLimit
+          ? 'Over 3 m³ in one vehicle, so the yard turns the whole load away. Partial unloading is not allowed.'
+          : 'Free up to 3 m³ per vehicle. Take a passport or ID card with a Berlin address, and go midweek or at the edges of the day.'
+      });
+      out.push({
+        id: 'saturday', label: r.saturday.label,
+        open: bulk > r.saturday.min - 1e-9 && bulk <= r.saturday.max + 1e-9, cost: r.saturday.price,
+        why: 'A flat €180 on Saturdays for 3 to 5 m³, paid by card or cash before you unload. This is the only counter that takes an over-size load across a yard gate.'
+      });
+      ['saver', 'standard'].forEach(function (key) {
+        var c = r[key];
+        var extra = Math.max(0, Math.ceil(bulk - 1e-9) - c.blockLimit);
+        out.push({
+          id: key, label: c.label, open: bulk > 0,
+          cost: c.blockPrice + extra * c.extraPerCubic,
+          why: 'Booked online, collected ' + c.wait +
+            '. Everything has to be out on the pavement or in the yard by the collection morning, furniture taken apart. Electrical appliances and clean bagged textiles ride along free.'
+        });
+      });
+      var p = r.plant;
+      var kg = bulk * p.kgPerCubic;
+      out.push({
+        id: 'plant', label: p.label, open: bulk > 0,
+        cost: kg <= p.floorKg ? p.floorPrice : Math.max(p.floorPrice, p.pricePerTonne * kg / 1000),
+        why: 'The overflow route with no volume limit: €180 a tonne, minimum €72 up to 400 kg. Weight is read here off the 1 m³ to 100 kg equivalence the fine catalogue itself uses.'
+      });
+      return out;
+    }
+
+    function fineFor(v) {
+      if (hasHazardParts()) return d.fine.hazard;
+      for (var i = 0; i < d.fine.bands.length; i++) {
+        if (v <= d.fine.bands[i].maxVolume + 1e-9) return d.fine.bands[i];
+      }
+      return d.fine.bands[d.fine.bands.length - 1];
+    }
+
+    function drawBars() {
+      var svg = document.getElementById('dl-svg');
+      while (svg.childNodes.length > 1) svg.removeChild(svg.lastChild);
+      var streams = d.streams;
+      var height = TOP + streams.length * ROW_H + 8;
+      svg.setAttribute('viewBox', '0 0 560 ' + height);
+
+      streams.forEach(function (st, i) {
+        var top = TOP + i * ROW_H;
+        var vol = volumeOf(st.id);
+        var scale = Math.max(st.scaleMax, Math.ceil(vol * 4) / 4);
+        var w = BAR_R - BAR_L;
+        var px = function (v) { return BAR_L + (v / scale) * w; };
+        var barY = top + 22, barH = 17;
+
+        svg.appendChild(el('text', {
+          x: PAD_L, y: top + 12, 'font-size': 11.5, 'font-weight': 700, fill: '#123D18'
+        }, st.label));
+        svg.appendChild(el('text', {
+          x: BAR_R + 6, y: barY + 13, 'font-size': 11, 'font-weight': 700,
+          fill: vol > 0 ? '#123D18' : '#9aa89b'
+        }, m3(vol)));
+
+        svg.appendChild(el('rect', {
+          x: BAR_L, y: barY, width: w, height: barH, rx: 4,
+          fill: '#f1f4ef', stroke: 'rgba(27,94,32,.14)', 'stroke-width': 1
+        }));
+
+        if (st.freeTo === 'all') {
+          svg.appendChild(el('rect', {
+            x: BAR_L, y: barY, width: w, height: barH, rx: 4, fill: 'rgba(46,125,50,.10)'
+          }));
+        } else if (typeof st.freeTo === 'number' && st.freeTo > 0 && st.freeTo < scale) {
+          svg.appendChild(el('rect', {
+            x: BAR_L, y: barY, width: px(st.freeTo) - BAR_L, height: barH, rx: 4,
+            fill: 'rgba(46,125,50,.10)'
+          }));
+        }
+
+        var x0 = BAR_L, seg = 0;
+        picked.forEach(function (id) {
+          var it = byId[id];
+          if (it.stream !== st.id) return;
+          var segW = (it.volume / scale) * w;
+          svg.appendChild(el('rect', {
+            x: x0, y: barY + 1, width: Math.max(1.5, segW - 1.5), height: barH - 2, rx: 2,
+            fill: seg % 2 ? '#4C9A52' : '#2E7D32'
+          }));
+          x0 += segW;
+          seg += 1;
+        });
+
+        var overAt = st.overAt;
+        if (overAt !== null && overAt !== undefined && vol > overAt + 1e-9) {
+          svg.appendChild(el('rect', {
+            x: px(overAt), y: barY + 1,
+            width: Math.max(2, px(Math.min(vol, scale)) - px(overAt)),
+            height: barH - 2, rx: 2, fill: '#B4472E'
+          }));
+        }
+
+        st.marks.forEach(function (mk, mi) {
+          if (mk.at > scale) return;
+          var mx = px(mk.at);
+          var tone = mk.tone === 'limit' ? '#B4472E' : '#5a665b';
+          svg.appendChild(el('line', {
+            x1: mx, y1: barY - 6, x2: mx, y2: barY + barH + 6,
+            stroke: tone, 'stroke-width': 1.6, 'stroke-dasharray': '4 3'
+          }));
+          var flip = mx > BAR_R - 170;
+          svg.appendChild(el('text', {
+            x: flip ? mx - 5 : mx + 5, y: barY + barH + 17 + mi * 12,
+            'font-size': 10, 'font-weight': 700, fill: tone,
+            'text-anchor': flip ? 'end' : 'start'
+          }, mk.label));
+        });
+
+        if (st.freeTo === 'all') {
+          svg.appendChild(el('text', {
+            x: BAR_L + 2, y: barY + barH + 17, 'font-size': 10, 'font-weight': 700, fill: '#2E7D32'
+          }, 'no limit, free either way'));
+        }
+      });
+    }
+
+    function render() {
+      var bulk = volumeOf('bulky');
+      var rub = volumeOf('rubble');
+      var bag = volumeOf('bagged');
+      var gar = volumeOf('garden');
+      var haz = volumeOf('hazard');
+      var tot = totalVolume();
+
+      d.items.forEach(function (it) {
+        var n = picked.filter(function (id) { return id === it.id; }).length;
+        var badge = pal.querySelector('[data-count="' + it.id + '"]');
+        badge.textContent = n;
+        badge.hidden = n === 0;
+      });
+
+      var chips = document.getElementById('dl-chips');
+      chips.innerHTML = picked.map(function (id, i) {
+        return '<button type="button" data-drop="' + i + '">' + byId[id].label + '</button>';
+      }).join('');
+      document.getElementById('dl-empty').textContent = picked.length ? '' : d.notes.empty;
+      document.getElementById('dl-empty').hidden = picked.length > 0;
+
+      drawBars();
+
+      var routes = bulkyRoutes(bulk);
+      var fixed = rubbleCost(rub) + baggedCost(bag) + pieceCost();
+      var openRoutes = routes.filter(function (r) { return r.open; });
+      var best = null;
+      openRoutes.forEach(function (r) { if (!best || r.cost < best.cost) best = r; });
+
+      var totalCost = (best ? best.cost : 0) + fixed;
+      document.getElementById('dl-total').textContent = picked.length ? euro(totalCost) : '€0';
+      document.getElementById('dl-route').textContent = picked.length
+        ? (bulk > 0 && best ? best.label.split(',')[0] : 'drive it to a yard')
+        : 'nothing yet';
+
+      var f = fineFor(tot);
+      document.getElementById('dl-fine').textContent = picked.length
+        ? euro(f.lo) + ' to ' + euro(f.hi) : '—';
+
+      var say;
+      if (!picked.length) {
+        say = 'Nothing loaded yet. The bars are Berlin\'s own limits drawn to scale: 3 m\u00B3 of furniture free at a yard, 1 m\u00B3 of cuttings, 500 litres of bagged waste, and no limit at all on electricals.';
+      } else if (totalCost === 0) {
+        say = 'This whole load is free, as long as it goes through the gate in one vehicle. Left outside instead it starts at ' +
+          euro(f.lo) + '.';
+      } else {
+        say = 'Cheapest lawful way to move ' + m3(tot) + ' is ' + euro(totalCost) +
+          '. The pavement version starts at ' + euro(f.lo) + ', about ' +
+          Math.round(f.lo / totalCost) + ' times as much.';
+      }
+      document.getElementById('dl-say').textContent = say;
+
+      document.getElementById('dl-list').innerHTML = routes.map(function (r) {
+        var price = r.open ? (r.cost === 0 ? 'free' : euro(r.cost)) : 'not open for this load';
+        var extra = '';
+        if (r.open && r.id !== 'yard' && r.id !== 'saturday' && rub > 0) {
+          extra = ' ' + d.notes.rubbleNoCollection;
+        }
+        return '<li' + (r.open ? '' : ' class="off"') + '><span class="price">' + price +
+          '</span><b>' + r.label + '.</b> ' + r.why + extra + '</li>';
+      }).join('') + (fixed > 0
+        ? '<li><span class="price">' + euro(fixed) + '</span><b>Charged on top wherever it goes.</b> ' +
+          'Rubble at €4 per started 10 litres, bagged waste at €3 per started 50 litres, and per-piece items such as a toilet at €6 or a car tyre at €3.</li>'
+        : '');
+
+      var flags = [];
+      if (bulk > 3) flags.push('Your bulky pile is ' + m3(bulk) + ', past the 3 m³ line. The yard will not take part of it and send you home with the rest: it refuses the load.');
+      if (rub > 0) flags.push(d.notes.rubbleNoCollection);
+      if (haz > 0) flags.push(d.notes.hazardPoint);
+      if (gar > 1) flags.push('Over 1 m³ of cuttings is refused as one load, same rule as the furniture.');
+      if (bag > 0.5) flags.push('Above 500 litres bagged waste stops counting as a household quantity and the yard will not take it.');
+      if (hasHazardParts()) flags.push('A fridge, a washing machine or a television counts as electrical waste with hazardous parts. It is free at any yard, and the fine for leaving it out runs to €15,000.');
+      document.getElementById('dl-flagbox').innerHTML =
+        flags.map(function (t) { return '<p>' + t + '</p>'; }).join('');
+    }
+
+    pal.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-add]');
+      if (!b) return;
+      picked.push(b.getAttribute('data-add'));
+      render();
+    });
+
+    document.getElementById('dl-chips').addEventListener('click', function (e) {
+      var b = e.target.closest('[data-drop]');
+      if (!b) return;
+      picked.splice(parseInt(b.getAttribute('data-drop'), 10), 1);
+      render();
+    });
+
+    document.getElementById('dl-clear').addEventListener('click', function () {
+      picked.splice(0, picked.length);
+      render();
+    });
+
+    render();
+  }
+
+  fetch('data.json', { cache: 'no-store' })
+    .then(function (r) { return r.json(); })
+    .then(boot)
+    .catch(function () {
+      document.getElementById('dl-empty').textContent =
+        'The cost ladder could not be loaded. Please reload the page.';
+    });
+})();
+</script>
+<script defer src="../js/brand.js"></script>
+</body>
+</html>
