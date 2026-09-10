@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-10T07:51:03.960Z",
+  "updatedAt": "2026-09-10T13:47:12.818Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 369,
-  "toolsTotal": 289,
+  "totalPosts": 370,
+  "toolsTotal": 290,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1618,6 +1618,23 @@
   ],
   "latest": [
     {
+      "title": "Bike Theft in Berlin: Where It Happens, When, and What It Costs",
+      "slug": "bike-theft-in-berlin",
+      "path": "/post/bike-theft-in-berlin",
+      "url": "https://www.berlinwalk.com/post/bike-theft-in-berlin",
+      "excerpt": "The hour in a Berlin bike theft file is not when the thief turned up, it is when the owner last saw the bike. Read as a parking clock, 31% of losses were locked up between six and ten in the evening, and a third of everything went inside three hours.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-10T13:45:03.063Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_3f70db1a8c4745d689118079eca889f5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ostkreuz-bike-racks.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_3f70db1a8c4745d689118079eca889f5~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ostkreuz-bike-racks.jpg",
+      "alt": "Two levels of bicycle racks packed with bikes under the railway structure at Bahnhof Ostkreuz in Berlin",
+      "relatedToolSlug": ""
+    },
+    {
       "title": "Berlin Bulky Waste: What Sperrmüll Costs and Where It Actually Goes",
       "slug": "berlin-bulky-waste",
       "path": "/post/berlin-bulky-waste",
@@ -1803,23 +1820,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_bb9b5cc01dcb4062b99fa60d6e6c8477~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-comfortjet-decin.jpg",
       "alt": "A blue and white Czech Railways ComfortJet train standing at the platform at Decin, the first Czech stop on the Berlin to Prague line",
       "relatedToolSlug": "berlin-prague-route-board"
-    },
-    {
-      "title": "Quiet Hours in Berlin: The Flat Rules Visitors Break Without Knowing",
-      "slug": "quiet-hours-in-berlin",
-      "path": "/post/quiet-hours-in-berlin",
-      "url": "https://www.berlinwalk.com/post/quiet-hours-in-berlin",
-      "excerpt": "Berlin protects the night from 22:00 to 06:00 and the whole of every Sunday and public holiday, and the 13:00 to 15:00 pause posted in your hallway is the building’s own rulebook rather than city law. Here is what actually crosses the line in a Berlin flat, hour by hour, why the courtyard and the stairwell are louder than the flat itself, and what happens if somebody does complain.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-09-06T19:57:40.477Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_e5da5edfa7fd415593b28ec9b9cd6911~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-landshuter-strasse-night.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_e5da5edfa7fd415593b28ec9b9cd6911~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-landshuter-strasse-night.jpg",
-      "alt": "A lit Berlin apartment doorway glowing at night on Landshuter Strasse in Schoeneberg",
-      "relatedToolSlug": "berlin-quiet-clock"
     }
   ]
 }
