@@ -880,11 +880,11 @@
 
     function openConsentSettings(event) {
       if (event) event.preventDefault();
+      closeConsentPreferencesFallback();
       var attemptedNative = tryNativeConsentSettings();
       if (attemptedNative) {
-        window.setTimeout(function () {
-          if (!hasVisibleConsentLayer()) showConsentPreferencesFallback();
-        }, 900);
+        // Usercentrics renders inside a shadow root. A document-only visibility
+        // check misses it and can open a second, stale settings form behind it.
         return;
       }
       showConsentPreferencesFallback();
