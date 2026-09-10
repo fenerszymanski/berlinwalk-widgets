@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-10T13:47:12.818Z",
+  "updatedAt": "2026-09-10T18:01:42.748Z",
   "source": "Wix Blog API",
-  "totalPosts": 370,
+  "totalPosts": 371,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Berlin Nebenkostenabrechnung: How to Check the Bill Line by Line Before the Deadline",
+      "slug": "berlin-nebenkostenabrechnung",
+      "path": "/post/berlin-nebenkostenabrechnung",
+      "url": "https://www.berlinwalk.com/post/berlin-nebenkostenabrechnung",
+      "excerpt": "Berlin publishes what every line on a Nebenkostenabrechnung normally costs per square metre. Put your own statement against it, watch the two twelve-month deadlines, and ask for the invoices behind the lines that sit above the range. This year the property-tax line is the one to compare.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "history-myths",
+      "topicLabel": "Berlin History & Myths",
+      "readTime": "9 min read",
+      "publishedDate": "2026-09-10T17:59:37.488Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_373b6da9ba0b4d65bf538d3a6407d96f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-weserstrasse-neukoelln.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_373b6da9ba0b4d65bf538d3a6407d96f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-weserstrasse-neukoelln.jpg",
+      "alt": "The yellow corner Altbau at Weserstrasse 58 and Wildenbruchstrasse 87 in Berlin-Neukölln with parked cars along both streets",
+      "relatedToolSlug": ""
+    },
     {
       "title": "Bike Theft in Berlin: Where It Happens, When, and What It Costs",
       "slug": "bike-theft-in-berlin",
