@@ -22,16 +22,17 @@
   var DATE_CHECK_MARKER = 'data-bw-date-check-card';
   var BOOKING_STYLE_ID = 'bw-blog-booking-inject-style';
   var DATE_CHECK_STYLE_ID = 'bw-date-check-blog-card-style';
-  // A/B phase 2 (prepared 2026-09-01): 'form' is the shipped in-card date form,
-  // 'oneclick' drops the fields and sends one tap to the tool, which asks for
-  // the dates anyway.  The old phase used UTM-only attribution and remains a
-  // separate historical observation.  These bounded first-party fields keep
-  // the new arm measurable without advertising consent and without touching
-  // the Date Check email-gate experiment's own experiment/variant fields.
+  // Card A/B ended by owner decision on 2026-09-10.  'form', the shipped
+  // in-card date form, is the only arm that still ships.  The 'oneclick'
+  // challenger drew marginally more arrivals and produced no email submits at
+  // all, so it was dropped; no statistical winner was claimed.
+  // The experiment id deliberately does NOT change: the Date Check page
+  // validates the card handoff against this exact string, so renaming it here
+  // would silently drop blog-card attribution.  Reports cut the A/B window at
+  // the decision timestamp instead of relying on a new cohort id.
   var DATE_CHECK_CARD_EXPERIMENT = 'berlin_date_check_blog_card_ab_v2_2026_09';
-  var DATE_CHECK_VARIANT_KEY = 'bwDateCheckCardVariantV2';
-  var DATE_CHECK_VARIANTS = ['form', 'oneclick'];
-  var dateCheckVariantMemo = '';
+  var DATE_CHECK_CARD_VARIANT = 'form';
+  var DATE_CHECK_VARIANTS = [DATE_CHECK_CARD_VARIANT];
   var LOG = '[BW blog surfaces]';
   var MAX_RETRIES = 12;
   var RETRY_DELAYS = [0, 120, 420, 900, 1600, 2800, 4500, 7000, 10000, 14000, 18000, 24000];
@@ -474,28 +475,12 @@
     return DATE_CHECK_VARIANTS.indexOf(token) > -1 ? token : '';
   }
 
-  // Assignment order: explicit QA override, then this page load's own choice,
-  // then the session (only once analytics consent is granted, matching the
-  // bouncer experiment), then a fresh 50/50 draw. Without consent the reader
-  // still gets a valid coin flip, it just does not follow them across posts.
+  // The A/B is over, so there is no draw, no session key and no URL override:
+  // every reader gets the control card and nothing can put the retired arm back
+  // on a live post.  The value is still stamped on the card and on every event
+  // so the arm dimension keeps the shape it had while the test ran.
   function dateCheckCardVariant() {
-    var override = '';
-    try {
-      override = normaliseDateCheckVariant(new URLSearchParams(window.location.search || '').get('bw_dc_variant'));
-    } catch (err) { override = ''; }
-    if (override) return override;
-    if (dateCheckVariantMemo) return dateCheckVariantMemo;
-    var canPersist = analyticsAllowed();
-    var stored = '';
-    if (canPersist) {
-      try { stored = normaliseDateCheckVariant(window.sessionStorage.getItem(DATE_CHECK_VARIANT_KEY)); } catch (err) { stored = ''; }
-    }
-    var variant = stored || (Math.random() < 0.5 ? 'form' : 'oneclick');
-    dateCheckVariantMemo = variant;
-    if (canPersist && !stored) {
-      try { window.sessionStorage.setItem(DATE_CHECK_VARIANT_KEY, variant); } catch (err) {}
-    }
-    return variant;
+    return DATE_CHECK_CARD_VARIANT;
   }
 
   function dateCheckTargetUrl(destination, sourceSlug, arrival, nights, baseHref, variant) {
@@ -544,41 +529,13 @@
     return match ? decodeURIComponent(match[1]) : 'blog-post';
   }
 
-  function dateCheckVisualHtml(id, withHeadline) {
+  function dateCheckVisualHtml(id) {
     return [
       '<div class="bw-date-check-blog-card__visual"><img src="' + DATE_CHECK_IMAGE + '" alt="World Clock at Alexanderplatz" loading="lazy" decoding="async"><div class="bw-date-check-blog-card__scrim">',
       '<div class="bw-date-check-blog-card__eyebrow">Berlin Date Check</div>',
-      withHeadline === false ? '' : '<h2 class="bw-date-check-blog-card__title" id="' + id + '-title">Check your Berlin trip dates</h2><div class="bw-date-check-blog-card__copy">See closures, book-by dates and daylight for your exact stay.</div>',
+      '<h2 class="bw-date-check-blog-card__title" id="' + id + '-title">Check your Berlin trip dates</h2><div class="bw-date-check-blog-card__copy">See closures, book-by dates and daylight for your exact stay.</div>',
       '<div class="bw-date-check-blog-card__proof" aria-label="Date Check covers"><span>Closures</span><span>Book-by</span><span>Daylight</span></div></div></div>'
     ].join('');
-  }
-
-  // Variant B: same eyebrow, headline, copy and proof chips as the form arm.
-  // The only thing that changes is that the two fields are gone, so the arms
-  // differ in friction and not in wording.
-  function buildDateCheckOneClickCard(card, id, slug) {
-    var href = dateCheckTargetUrl(DATE_CHECK_URL, slug, '', '', window.location.href, 'oneclick').toString();
-    // Redesign C, which owns how this card actually looks on a live post, is
-    // loaded from a pinned jsDelivr commit. It moves the headline and copy into
-    // the panel itself, but only for a card that has date fields, so this arm
-    // ships that structure ready-made instead of waiting to be rewritten. Its
-    // scrim therefore carries no headline, which also keeps the text from
-    // appearing twice if the skin is ever off.
-    card.innerHTML = [
-      dateCheckVisualHtml(id, false),
-      '<div class="bw-date-check-blog-card__form">',
-      '<div class="bw-c-date-intro"><h2 class="bw-date-check-blog-card__title" id="' + id + '-title">Check your Berlin trip dates</h2>',
-      '<p>See closures, book-by dates and daylight for your exact stay.</p></div>',
-      '<a class="bw-date-check-blog-card__submit" href="' + escapeAttr(href) + '" target="_top" rel="noopener"><span>Check my Berlin dates</span><span class="bw-date-check-blog-card__arrow" aria-hidden="true">\u2192</span></a>',
-      '<div class="bw-date-check-blog-card__micro">Takes about 20 seconds. No email needed for the result.</div></div>'
-    ].join('');
-    var link = card.querySelector('a.bw-date-check-blog-card__submit');
-    link.addEventListener('click', function () {
-      pushDateCheckEvent('bw_date_check_blog_card_submit', slug, 'oneclick');
-    });
-    pushDateCheckEvent('bw_date_check_blog_card_mount', slug, 'oneclick');
-    trackDateCheckSeen(card, slug, 'oneclick');
-    return card;
   }
 
   function buildDateCheckCard(slug, forcedVariant) {
@@ -593,9 +550,8 @@
     card.className = 'bw-date-check-blog-card';
     card.setAttribute('role', 'region');
     card.setAttribute('aria-labelledby', id + '-title');
-    if (variant === 'oneclick') return buildDateCheckOneClickCard(card, id, slug);
     card.innerHTML = [
-      dateCheckVisualHtml(id, true),
+      dateCheckVisualHtml(id),
       '<form class="bw-date-check-blog-card__form" method="get" action="' + escapeAttr(DATE_CHECK_URL) + '" target="_top">',
       // Without these the native GET fallback would arrive untagged and the
       // experiment would silently undercount this variant.
@@ -826,7 +782,6 @@
       dateCheckTargetUrl: dateCheckTargetUrl,
       dateCheckCardVariant: dateCheckCardVariant,
       normaliseDateCheckVariant: normaliseDateCheckVariant,
-      resetDateCheckVariantMemo: function () { dateCheckVariantMemo = ''; },
       validDateFields: validDateFields,
       shouldRequestDatePicker: shouldRequestDatePicker,
       insertionTarget: insertionTarget,
