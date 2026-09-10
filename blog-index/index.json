@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-09T20:36:04.009Z",
+  "updatedAt": "2026-09-10T02:11:02.258Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 368,
@@ -44,21 +44,21 @@
   ],
   "hero": {
     "lead": {
-      "title": "Berlin Museums Closed for Renovation: What Is Shut and What to See Instead",
-      "slug": "berlin-museums-closed-for-renovation",
-      "path": "/post/berlin-museums-closed-for-renovation",
-      "url": "https://www.berlinwalk.com/post/berlin-museums-closed-for-renovation",
-      "excerpt": "The Pergamonmuseum has been shut since October 2023, Museum Berggruen since 2022, and the Zeughaus is a building site with no announced reopening. Here is what is actually closed in Berlin right now, which reopening dates you can trust, why the Ishtar Gate is on a far longer clock than the 2027 headlines suggest, and what is genuinely worth doing instead this week.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
+      "title": "Berlin Heating Season: What Your Landlord Owes You When the Flat Goes Cold",
+      "slug": "berlin-heating-season",
+      "path": "/post/berlin-heating-season",
+      "url": "https://www.berlinwalk.com/post/berlin-heating-season",
+      "excerpt": "The Heizperiode starts on 1 October, but in four of the last eleven autumns Berlin crossed the cold snap threshold in September. This is what a landlord owes at which hour, how to measure so the number counts, and the order of the steps before anyone touches the rent.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
       "topic": "history-myths",
       "topicLabel": "Berlin History & Myths",
       "readTime": "7 min read",
-      "publishedDate": "2026-09-08T19:49:35.137Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_f6f2fbb5b5534bf39049cba1c30e60e6~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ishtar-gate-pergamonmuseum.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_f6f2fbb5b5534bf39049cba1c30e60e6~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ishtar-gate-pergamonmuseum.jpg",
-      "alt": "The Ishtar Gate reconstructed inside the Pergamonmuseum, a blue glazed brick gateway with rows of golden animals",
-      "relatedToolSlug": "berlin-museum-closure-timeline"
+      "publishedDate": "2026-09-09T20:34:28.261Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_3a463bc9d35846ae99c9804c12cd86b3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-heating-season-cover-friedenau-entrance.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_3a463bc9d35846ae99c9804c12cd86b3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-heating-season-cover-friedenau-entrance.jpg",
+      "alt": "A lit Altbau entrance on Handjerystrasse in Berlin-Friedenau at night, with snow on the hedges and the front steps",
+      "relatedToolSlug": "berlin-heating-log"
     },
     "secondary": [
       {
@@ -79,6 +79,40 @@
         "relatedToolSlug": "basketball-worldcup-fixtures"
       },
       {
+        "title": "Berlin Museums Closed for Renovation: What Is Shut and What to See Instead",
+        "slug": "berlin-museums-closed-for-renovation",
+        "path": "/post/berlin-museums-closed-for-renovation",
+        "url": "https://www.berlinwalk.com/post/berlin-museums-closed-for-renovation",
+        "excerpt": "The Pergamonmuseum has been shut since October 2023, Museum Berggruen since 2022, and the Zeughaus is a building site with no announced reopening. Here is what is actually closed in Berlin right now, which reopening dates you can trust, why the Ishtar Gate is on a far longer clock than the 2027 headlines suggest, and what is genuinely worth doing instead this week.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "history-myths",
+        "topicLabel": "Berlin History & Myths",
+        "readTime": "7 min read",
+        "publishedDate": "2026-09-08T19:49:35.137Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_f6f2fbb5b5534bf39049cba1c30e60e6~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ishtar-gate-pergamonmuseum.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_f6f2fbb5b5534bf39049cba1c30e60e6~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ishtar-gate-pergamonmuseum.jpg",
+        "alt": "The Ishtar Gate reconstructed inside the Pergamonmuseum, a blue glazed brick gateway with rows of golden animals",
+        "relatedToolSlug": "berlin-museum-closure-timeline"
+      },
+      {
+        "title": "Berlin Bridge Days 2027: The Brückentage Worth Booking",
+        "slug": "berlin-bridge-days-2027",
+        "path": "/post/berlin-bridge-days-2027",
+        "url": "https://www.berlinwalk.com/post/berlin-bridge-days-2027",
+        "excerpt": "Only six of Berlin’s ten public holidays fall on a working day in 2027, and every one of them lands before 18 May. This is what each bridge day costs in leave, what it returns in days off, and which windows your colleagues with school-age children already have a claim on.",
+        "category": "Living in Berlin",
+        "categorySlug": "living-in-berlin",
+        "topic": "practical",
+        "topicLabel": "Practical Berlin",
+        "readTime": "7 min read",
+        "publishedDate": "2026-09-09T19:31:50.921Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_a2c402a057ff4d41a7e3025e73759776~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hauptbahnhof-sbahn.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_a2c402a057ff4d41a7e3025e73759776~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hauptbahnhof-sbahn.jpg",
+        "alt": "An S-Bahn train pulling out of Berlin Hauptbahnhof past an almost empty platform, with the station name sign lit above the tracks",
+        "relatedToolSlug": "berlin-leave-year-planner"
+      },
+      {
         "title": "Which City to Visit After Berlin: What the Train Actually Reaches",
         "slug": "which-city-to-visit-after-berlin",
         "path": "/post/which-city-to-visit-after-berlin",
@@ -94,40 +128,6 @@
         "thumb": "https://static.wixstatic.com/media/5a08a3_a43a90b2ad404818b3b49ced5d88a65c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ice-berlin-hauptbahnhof.jpg",
         "alt": "An ICE train waiting at the underground long-distance platform at Berlin Hauptbahnhof",
         "relatedToolSlug": "berlin-second-city-board"
-      },
-      {
-        "title": "Hohenschönhausen: The Stasi Prison You Can Only See on a Tour",
-        "slug": "hohenschonhausen-memorial-berlin",
-        "path": "/post/hohenschonhausen-memorial-berlin",
-        "url": "https://www.berlinwalk.com/post/hohenschonhausen-memorial-berlin",
-        "excerpt": "The former Stasi remand prison in Lichtenberg is not a museum you can wander. The cells, corridors and interrogation rooms open only on a guided tour, and in English that means 10:40, 12:40 or 14:40, nine euro, about two hours, twenty-five people. Here is how to reach it, which of the four similarly named stops is the right one, and how much of your day it really costs.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "route-stories",
-        "topicLabel": "Tour Route Stories",
-        "readTime": "6 min read",
-        "publishedDate": "2026-09-08T07:49:42.007Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_0f632cdd4bf3403fabc2a2537adf3799~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/hohenschonhausen-wall-watchtower.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_0f632cdd4bf3403fabc2a2537adf3799~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/hohenschonhausen-wall-watchtower.jpg",
-        "alt": "The perimeter wall and a watchtower of the former Stasi prison seen from the street",
-        "relatedToolSlug": "hohenschonhausen-tour-reach"
-      },
-      {
-        "title": "BER Flight Delay Compensation: What You Are Owed and the Line That Decides It",
-        "slug": "ber-flight-delay-compensation",
-        "path": "/post/ber-flight-delay-compensation",
-        "url": "https://www.berlinwalk.com/post/ber-flight-delay-compensation",
-        "excerpt": "A delayed flight out of Berlin pays 250, 400 or 600 euro, and the number is set by the distance to your final destination and whether that airport is inside the EU. Of the 157 destinations BER serves, only nine reach 600 euro. Here is how to work out yours, what the airline owes you while you wait, and how to claim it.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "first-day",
-        "topicLabel": "First Day in Berlin",
-        "readTime": "10 min read",
-        "publishedDate": "2026-09-07T19:49:30.149Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_7ff51c867eaa44b2a4944d20e5758c3b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/ber-terminal-1-exterior.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_7ff51c867eaa44b2a4944d20e5758c3b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/ber-terminal-1-exterior.jpg",
-        "alt": "Terminal 1 at Berlin Brandenburg Airport photographed from the forecourt at dusk",
-        "relatedToolSlug": "ber-flight-compensation-line"
       },
       {
         "title": "Berlin Public Transport for Tourists: Tickets, Zones, Prices and Validation",
@@ -1632,7 +1632,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_3a463bc9d35846ae99c9804c12cd86b3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-heating-season-cover-friedenau-entrance.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_3a463bc9d35846ae99c9804c12cd86b3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-heating-season-cover-friedenau-entrance.jpg",
       "alt": "A lit Altbau entrance on Handjerystrasse in Berlin-Friedenau at night, with snow on the hedges and the front steps",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-heating-log"
     },
     {
       "title": "Berlin Bridge Days 2027: The Brückentage Worth Booking",
@@ -1649,7 +1649,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_a2c402a057ff4d41a7e3025e73759776~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hauptbahnhof-sbahn.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_a2c402a057ff4d41a7e3025e73759776~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hauptbahnhof-sbahn.jpg",
       "alt": "An S-Bahn train pulling out of Berlin Hauptbahnhof past an almost empty platform, with the station name sign lit above the tracks",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-leave-year-planner"
     },
     {
       "title": "Berlin Club Dress Codes: What Tresor, Sisyphos and RSO Actually Read",
@@ -1666,7 +1666,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_5b17ca2df88c4d93b07c866cebde4595~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-berghain-approach.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_5b17ca2df88c4d93b07c866cebde4595~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-berghain-approach.jpg",
       "alt": "The gravel forecourt and fence on the approach to the Berghain and Panorama Bar building in Berlin, with people walking towards the entrance",
-      "relatedToolSlug": "berlin-club-picker"
+      "relatedToolSlug": "berlin-club-door-map"
     },
     {
       "title": "Taking Photos in Berlin: Where the Rules Actually Change",
@@ -1683,7 +1683,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_91ab48f180cc4aa1908075965114fb56~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-humboldt-forum-roof-view.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_91ab48f180cc4aa1908075965114fb56~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-humboldt-forum-roof-view.jpg",
       "alt": "The view from the Humboldt Forum roof terrace in Berlin over the Lustgarten, the Altes Museum and the domed Berliner Dom",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-camera-kit-check"
     },
     {
       "title": "Berlin Museums Closed for Renovation: What Is Shut and What to See Instead",
