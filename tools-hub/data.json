@@ -8603,6 +8603,39 @@
       ],
       "iconStatus": "live-wix-media",
       "cmsItemId": "7de08039-d328-4ed0-96ac-e13abc03c970"
+    },
+    {
+      "slug": "berlin-bike-theft-clock",
+      "title": "Berlin Bike Theft Clock",
+      "lead": "Pick your district on the real Berlin map and the time of day you lock up and walk away, then read what 16,153 police reports say about that hour: the share of local losses, how many went inside three hours, and how often the cellar was the scene.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-bike-theft-clock/",
+      "embedHeight": 1560,
+      "image": "https://static.wixstatic.com/media/5a08a3_2c262f6ab0644c47a9fde52080c9e3c9~mv2.png",
+      "hubCategory": "Essentials",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "bike theft",
+        "fahrraddiebstahl",
+        "bike",
+        "cycling",
+        "police data",
+        "district",
+        "lock",
+        "insurance",
+        "stolen bike",
+        "berlin districts"
+      ],
+      "aliases": [
+        "bike stolen berlin",
+        "fahrraddiebstahl berlin",
+        "bike theft map",
+        "where do bikes get stolen",
+        "stolen bicycle berlin"
+      ],
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "2f4c6cd9-a622-484c-8e1f-1a37e3cf15d4"
     }
   ],
   "hubCategories": [

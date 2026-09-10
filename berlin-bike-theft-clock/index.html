@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Bike Theft Clock</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --muted: #5a665b;
+    --line: rgba(27, 94, 32, .18);
+    --warm: #B4472E;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .bt { max-width: 780px; margin: 0 auto; padding: 14px 12px 16px; }
+
+  .bt-head h2 { font-size: 1.06rem; margin: 0 0 3px; color: var(--green); }
+  .bt-head p { margin: 0; font-size: .78rem; color: var(--muted); line-height: 1.5; }
+
+  .bt-step { margin-top: 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 11px 12px 12px; }
+  .bt-step.is-waiting { opacity: .45; }
+  .bt-step h3 { font-size: .63rem; letter-spacing: .07em; text-transform: uppercase; color: var(--deep); margin: 0 0 8px; display: flex; align-items: center; gap: 7px; }
+  .bt-step h3 .num { display: inline-flex; align-items: center; justify-content: center; width: 17px; height: 17px; border-radius: 999px; background: var(--green); color: #fff; font-size: .62rem; }
+  .bt-step.is-done h3 .num { background: var(--yellow); color: var(--deep); }
+
+  .bt-map svg { display: block; width: 100%; height: auto; }
+  .bt-map path.d { cursor: pointer; stroke: #fff; stroke-width: 2.4; transition: fill .12s ease; }
+  .bt-map path.d:hover { fill: var(--yellow); }
+  .bt-map path.d:focus { outline: none; }
+  .bt-map path.d:focus-visible { outline: none; stroke: var(--ink); stroke-width: 5; }
+  .bt-map path.d.on { stroke: var(--ink); stroke-width: 5; fill: var(--yellow); }
+  .bt-map text.lab { font-family: 'Montserrat', -apple-system, sans-serif; font-size: 21px; font-weight: 700; fill: #fff; paint-order: stroke; stroke: rgba(18,61,24,.55); stroke-width: 4; pointer-events: none; }
+
+  .bt-key { display: flex; align-items: center; gap: 7px; margin-top: 8px; font-size: .66rem; color: var(--muted); flex-wrap: wrap; }
+  .bt-key .ramp { display: flex; border-radius: 3px; overflow: hidden; }
+  .bt-key .ramp i { width: 20px; height: 9px; display: block; }
+
+  .bt-field { margin-top: 9px; }
+  .bt-field label { display: block; font-size: .7rem; font-weight: 600; color: var(--deep); margin-bottom: 5px; }
+  .bt-field select {
+    font-family: inherit; font-size: .78rem; width: 100%; padding: 8px 10px;
+    border: 1px solid var(--green); border-radius: 8px; background: #fff; color: var(--ink);
+  }
+  .bt-field select:focus-visible { outline: 3px solid var(--yellow); outline-offset: 1px; }
+  .bt-field select:disabled { border-color: var(--line); color: var(--muted); background: #f6f6f2; }
+
+  .bt-out { margin-top: 12px; border-radius: 10px; background: var(--deep); color: #fff; padding: 13px 14px 14px; }
+  .bt-out .wrap { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .bt-clock { flex: 0 0 auto; }
+  .bt-clock svg { display: block; width: 178px; height: 178px; }
+  .bt-clock text { font-family: 'Montserrat', -apple-system, sans-serif; }
+  .bt-say { flex: 1 1 250px; min-width: 220px; }
+  .bt-say .big { font-size: 1.7rem; font-weight: 800; line-height: 1; color: var(--yellow); }
+  .bt-say .big span { font-size: .8rem; font-weight: 600; color: #fff; display: block; margin-top: 6px; line-height: 1.45; }
+  .bt-stats { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 13px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.2); }
+  .bt-stats .cell { min-width: 96px; }
+  .bt-stats .v { font-size: 1.02rem; font-weight: 700; color: var(--yellow); }
+  .bt-stats .k { font-size: .66rem; color: rgba(255,255,255,.82); line-height: 1.4; margin-top: 2px; }
+  .bt-move { margin-top: 12px; padding: 10px 12px; border-radius: 8px; background: var(--yellow); color: var(--deep); font-size: .77rem; line-height: 1.5; font-weight: 600; }
+  .bt-move b { text-transform: uppercase; letter-spacing: .06em; font-size: .63rem; display: block; margin-bottom: 3px; }
+
+  .bt-note { margin-top: 10px; font-size: .66rem; color: var(--muted); line-height: 1.55; }
+  .bt-note a { color: var(--green); }
+
+  @media (max-width: 430px) {
+    .bt-clock svg { width: 150px; height: 150px; }
+    .bt-say .big { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+<div class="bt">
+  <div class="bt-head">
+    <h2>Berlin bike theft clock</h2>
+    <p>The hour in a Berlin bike theft file is not the hour a thief turned up. It is the hour the owner last saw the bike. So this reads as a parking clock: pick your district and the time of day you lock up and walk away.</p>
+  </div>
+
+  <section class="bt-step is-done" id="step1">
+    <h3><span class="num">1</span> Where do you park it?</h3>
+    <div class="bt-map" id="map"></div>
+    <div class="bt-key">
+      <span>Reported thefts per 100,000 residents, 2025</span>
+      <span class="ramp" id="ramp"></span>
+      <span id="rampLo"></span><span>to</span><span id="rampHi"></span>
+    </div>
+    <div class="bt-field">
+      <label for="dsel">District</label>
+      <select id="dsel"><option value="">Pick a district</option></select>
+    </div>
+  </section>
+
+  <section class="bt-step is-waiting" id="step2">
+    <h3><span class="num">2</span> When do you lock it up?</h3>
+    <div class="bt-field">
+      <label for="wsel">The time of day you last touch it and walk away</label>
+      <select id="wsel" disabled><option value="">Pick a district first</option></select>
+    </div>
+  </section>
+
+  <section class="bt-step is-waiting" id="step3">
+    <h3><span class="num">3</span> What the file says</h3>
+    <div id="out"><p class="bt-note" style="margin:0">Finish the two steps above and the clock fills in.</p></div>
+  </section>
+
+  <p class="bt-note" id="src"></p>
+</div>
+
+<script>
+(function () {
+  var DATA = null;
+  var currentStep = 1;
+  var pickedCode = '';
+  var pickedBand = '';
+
+  var elMap = document.getElementById('map');
+  var elDsel = document.getElementById('dsel');
+  var elWsel = document.getElementById('wsel');
+  var elOut = document.getElementById('out');
+
+  var RAMP = ['#e4efe0', '#c3ddbc', '#9cc794', '#6faa68', '#43873f', '#1B5E20'];
+
+  function band(rate, lo, hi) {
+    var t = (rate - lo) / (hi - lo || 1);
+    var i = Math.round(t * (RAMP.length - 1));
+    return RAMP[Math.max(0, Math.min(RAMP.length - 1, i))];
+  }
+
+  function inWindow(hour, w) {
+    return w.from <= w.to ? (hour >= w.from && hour < w.to) : (hour >= w.from || hour < w.to);
+  }
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function setStepState(el, state) {
+    el.className = 'bt-step ' + state;
+  }
+
+  /* ---------- step 1: the map ---------- */
+  function drawMap() {
+    var rates = DATA.districts.map(function (d) { return d.ratePer100k; });
+    var lo = Math.min.apply(null, rates);
+    var hi = Math.max.apply(null, rates);
+    document.getElementById('ramp').innerHTML = RAMP.map(function (c) {
+      return '<i style="background:' + c + '"></i>';
+    }).join('');
+    document.getElementById('rampLo').textContent = lo;
+    document.getElementById('rampHi').textContent = hi;
+
+    var m = DATA.map;
+    var body = DATA.districts.map(function (d) {
+      var paths = d.paths.map(function (p) {
+        return '<path class="d" d="' + p + '" data-code="' + d.code + '" tabindex="0" role="button"'
+          + ' aria-label="' + esc(d.name) + ', ' + d.ratePer100k + ' reported thefts per 100,000 residents"'
+          + ' fill="' + band(d.ratePer100k, lo, hi) + '"></path>';
+      }).join('');
+      return paths;
+    }).join('');
+    elMap.innerHTML = '<svg viewBox="0 0 ' + m.width + ' ' + m.height + '" role="group" aria-label="Map of the twelve Berlin districts shaded by reported bike thefts per 100,000 residents">'
+      + body + '</svg>';
+
+    elDsel.innerHTML = '<option value="">Pick a district</option>'
+      + DATA.districts.slice().sort(function (a, b) { return b.ratePer100k - a.ratePer100k; })
+        .map(function (d) { return '<option value="' + d.code + '">' + esc(d.name) + '</option>'; }).join('');
+  }
+
+  function markMap() {
+    var paths = elMap.querySelectorAll('path.d');
+    for (var i = 0; i < paths.length; i += 1) {
+      paths[i].classList.toggle('on', paths[i].getAttribute('data-code') === pickedCode);
+    }
+  }
+
+  /* ---------- step 3: the clock ---------- */
+  function clockSvg(d, w) {
+    var R = 78;
+    var C = 89;
+    var peak = Math.max.apply(null, d.window.hours);
+    var bars = d.window.hours.map(function (n, h) {
+      var a0 = (h / 24) * Math.PI * 2 - Math.PI / 2;
+      var a1 = ((h + 0.82) / 24) * Math.PI * 2 - Math.PI / 2;
+      var r0 = 30;
+      var r1 = 30 + (n / peak) * (R - 32);
+      var on = inWindow(h, w);
+      var pts = [
+        [C + Math.cos(a0) * r0, C + Math.sin(a0) * r0],
+        [C + Math.cos(a0) * r1, C + Math.sin(a0) * r1],
+        [C + Math.cos(a1) * r1, C + Math.sin(a1) * r1],
+        [C + Math.cos(a1) * r0, C + Math.sin(a1) * r0]
+      ].map(function (p) { return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join(' ');
+      return '<polygon points="' + pts + '" fill="' + (on ? '#FFE600' : 'rgba(255,255,255,.28)') + '"></polygon>';
+    }).join('');
+    var ticks = [0, 6, 12, 18].map(function (h) {
+      var a = (h / 24) * Math.PI * 2 - Math.PI / 2;
+      return '<text x="' + (C + Math.cos(a) * (R + 8)).toFixed(1) + '" y="' + (C + Math.sin(a) * (R + 8) + 3.4).toFixed(1)
+        + '" text-anchor="middle" font-size="9" font-weight="700" fill="rgba(255,255,255,.75)">' + h + '</text>';
+    }).join('');
+    return '<svg viewBox="0 0 178 178" role="img" aria-label="Twenty-four hour clock of the hour a bike was last seen in ' + esc(d.name) + '">'
+      + '<circle cx="' + C + '" cy="' + C + '" r="28" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="1"></circle>'
+      + bars + ticks + '</svg>';
+  }
+
+  function verdict(d, b, share, cityShare) {
+    var city = DATA.city;
+    if (b.id === 'evening' && share >= cityShare) {
+      return 'You have picked the worst band in the city, and ' + d.name + ' is worse than average in it. '
+        + 'The bike you leave outside a bar at nine is the one that goes. If you are staying past one drink, '
+        + 'pick a spot you will walk past on the way to the toilet, not the quiet corner around the side.';
+    }
+    if (b.id === 'earlymorning' && share >= cityShare + 3) {
+      return d.name + ' loses an unusual share of its bikes to the morning commute: ' + share
+        + '% of thefts here start in the 06:00 to 10:00 band against ' + cityShare + '% citywide. '
+        + 'That is the station rack, standing all day. If there is a lockable Fahrradbox or a staffed '
+        + 'Radstation on your line, this is the district where paying for it pays off.';
+    }
+    if (d.window.cellarShare >= city.cellarShare * 1.4) {
+      return 'In ' + d.name + ' the cellar is a far bigger part of this than in the rest of Berlin: '
+        + d.window.cellarShare + '% of reported thefts here came out of a cellar or a bike room, against '
+        + city.cellarShare + '% citywide. Wheeling it in through the back door is not the end of the job. '
+        + 'Lock the frame to something fixed down there as well.';
+    }
+    if (d.window.quickShare >= 35) {
+      return 'The long stand is not really the problem here. ' + d.window.quickShare + '% of thefts in '
+        + d.name + ' happened inside a window of three hours or less, so the loss that gets you is the quick '
+        + 'stop, the one where you leave the good lock at home because you are only going in for bread.';
+    }
+    return 'In this band ' + d.name + ' runs ' + (share > cityShare ? 'above' : share < cityShare ? 'below' : 'level with')
+      + ' the city, ' + share + '% against ' + cityShare + '%. The number that should move you more is the one to its '
+      + 'left: ' + d.window.quickShare + '% of the bikes lost here had been standing for three hours or less.';
+  }
+
+  function render() {
+    var d = DATA.districts.filter(function (x) { return x.code === pickedCode; })[0];
+    var b = DATA.bands.filter(function (x) { return x.id === pickedBand; })[0];
+    if (!d || !b) return;
+    var hit = d.window.hours.filter(function (n, h) { return inWindow(h, b); })
+      .reduce(function (a, x) { return a + x; }, 0);
+    var share = Math.round((100 * hit) / d.window.total);
+    var cityTotal = DATA.city.hours.reduce(function (a, x) { return a + x; }, 0);
+    var cityShare = Math.round((100 * DATA.city.hours.filter(function (n, h) { return inWindow(h, b); })
+      .reduce(function (a, x) { return a + x; }, 0)) / cityTotal);
+    var perWeek = Math.round((hit / 52) * 10) / 10;
+    var money = function (n) { return '\u20ac' + n.toLocaleString('en-GB'); };
+
+    elOut.innerHTML = '<div class="bt-out">'
+      + '<div class="wrap">'
+      + '<div class="bt-clock">' + clockSvg(d, b) + '</div>'
+      + '<div class="bt-say"><div class="big">' + share + '%'
+      + '<span>of the ' + d.window.total.toLocaleString('en-GB') + ' bikes reported stolen in ' + esc(d.name)
+      + ' in ' + DATA.meta.caseWindowLabel + ' were last locked up in this band. Across Berlin the same band carries '
+      + cityShare + '%.</span></div>'
+      + '<div style="font-size:.74rem;margin-top:9px;color:rgba(255,255,255,.9);line-height:1.5">That is about <b style="color:#FFE600">'
+      + perWeek + (perWeek === 1 ? ' bike' : ' bikes') + ' a week</b> in this district alone, parked in these hours alone.</div>'
+      + '</div></div>'
+      + '<div class="bt-stats">'
+      + '<div class="cell"><div class="v">' + d.window.quickShare + '%</div><div class="k">gone within three hours of being parked</div></div>'
+      + '<div class="cell"><div class="v">' + d.window.cellarShare + '%</div><div class="k">taken from a cellar or bike room</div></div>'
+      + '<div class="cell"><div class="v">' + money(d.window.medianValue) + '</div><div class="k">median value declared</div></div>'
+      + '<div class="cell"><div class="v">' + d.window.overGrandShare + '%</div><div class="k">declared at &euro;1,000 or more</div></div>'
+      + '</div></div>'
+      + '<div class="bt-move"><b>What that changes</b>' + esc(verdict(d, b, share, cityShare)) + '</div>';
+  }
+
+  /* ---------- state ---------- */
+  function advance() {
+    if (pickedCode && !pickedBand) currentStep = 2;
+    else if (pickedCode && pickedBand) currentStep = 3;
+    else currentStep = 1;
+
+    setStepState(document.getElementById('step1'), 'is-done');
+    setStepState(document.getElementById('step2'), currentStep >= 2 ? 'is-done' : 'is-waiting');
+    setStepState(document.getElementById('step3'), currentStep >= 3 ? 'is-done' : 'is-waiting');
+
+    if (currentStep >= 2 && elWsel.disabled) {
+      elWsel.disabled = false;
+      elWsel.innerHTML = '<option value="">Pick the time of day</option>'
+        + DATA.bands.map(function (w) { return '<option value="' + w.id + '">' + esc(w.label) + '</option>'; }).join('');
+    }
+    if (currentStep >= 3) render();
+  }
+
+  function pickDistrict(code) {
+    pickedCode = code;
+    elDsel.value = code;
+    markMap();
+    advance();
+  }
+
+  elMap.addEventListener('click', function (e) {
+    var t = e.target.closest ? e.target.closest('path.d') : null;
+    if (t) pickDistrict(t.getAttribute('data-code'));
+  });
+  elMap.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var t = e.target.closest ? e.target.closest('path.d') : null;
+    if (t) { e.preventDefault(); pickDistrict(t.getAttribute('data-code')); }
+  });
+  elDsel.addEventListener('change', function () { pickDistrict(elDsel.value); });
+  elWsel.addEventListener('change', function () { pickedBand = elWsel.value; advance(); });
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (j) {
+    DATA = j;
+    drawMap();
+    document.getElementById('src').innerHTML = 'Case shape from the Polizei Berlin open dataset '
+      + '<a href="https://daten.berlin.de/datensaetze/fahrraddiebstahl-in-berlin" target="_blank" rel="noopener">Fahrraddiebstahl in Berlin</a>, '
+      + DATA.meta.caseTotal.toLocaleString('en-GB') + ' reports with an offence start between 1 September 2025 and 31 August 2026. '
+      + 'Annual counts and the rate per 100,000 residents from the '
+      + '<a href="https://www.kriminalitaetsatlas.berlin.de/" target="_blank" rel="noopener">Kriminalit&auml;tsatlas Berlin</a> for 2025. '
+      + 'District outlines from the Berlin Geoportal. The hour shown is the start of the police offence window, which is when the owner last saw the bike, not the moment it was taken.';
+    advance();
+  });
+}());
+</script>
+<script defer src="../js/brand.js"></script>
+</body>
+</html>
