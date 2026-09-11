@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Off-Leash Map</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20; --deep: #123D18; --yellow: #FFE600; --lime: #7CB342; --soft: #C5E1A5;
+    --cream: #FAFAF5; --ink: #212121; --muted: #5a665b; --red: #E63946; --line: rgba(27,94,32,.16);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .ol { max-width: 780px; margin: 0 auto; padding: 12px 12px 14px; }
+  .ol-top { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; border-bottom: 3px solid var(--green); padding-bottom: 10px; }
+  .ol-top h2 { margin: 0; font-size: 1.05rem; color: var(--green); line-height: 1.25; flex: 1 1 260px; }
+  .ol-top p { margin: 4px 0 0; font-size: .76rem; color: var(--muted); line-height: 1.5; flex-basis: 100%; }
+
+  .ol-station { margin-top: 10px; display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: end; }
+  .ol-station label { display: block; font-size: .68rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--deep); margin-bottom: 4px; }
+  .ol-station input { width: 100%; font: inherit; font-size: .9rem; padding: 10px 12px; border: 2px solid var(--green); border-radius: 999px; background: #fff; color: var(--ink); }
+  .ol-station input:focus-visible { outline: 3px solid var(--yellow); outline-offset: 1px; }
+  .ol-station button { font: inherit; font-size: .8rem; font-weight: 700; padding: 11px 16px; border-radius: 999px; border: 0; background: var(--yellow); color: var(--deep); cursor: pointer; }
+  .ol-station button:hover { background: #f2d900; }
+  .ol-hint { font-size: .7rem; color: var(--muted); margin: 5px 0 0; min-height: 1em; }
+
+  .ol-map { margin-top: 10px; position: relative; background: #fff; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .ol-map svg { display: block; width: 100%; height: auto; }
+  .ol-map path.dist { fill: #f4f6ef; stroke: #b9c9b3; stroke-width: 1.6; }
+  .ol-map path.forest { fill: rgba(124,179,66,.55); stroke: var(--green); stroke-width: 1.8; cursor: pointer; }
+  .ol-map circle.forestpt { fill: rgba(124,179,66,.45); stroke: var(--green); stroke-width: 1.8; stroke-dasharray: 5 4; cursor: pointer; }
+  .ol-map circle.run { fill: var(--yellow); stroke: var(--deep); stroke-width: 1.6; cursor: pointer; }
+  .ol-map circle.run.osm { fill: #fff; stroke: #b48f00; stroke-width: 2; }
+  .ol-map circle.run.closed { fill: #ddd; stroke: #888; }
+  .ol-map path.ban { stroke: var(--red); stroke-width: 3; fill: none; }
+  .ol-map .hit { stroke: var(--ink); stroke-width: 3.5; }
+  .ol-map .dim { opacity: .28; }
+  .ol-map text.fl { font-size: 19px; font-weight: 700; fill: var(--deep); pointer-events: none; paint-order: stroke; stroke: rgba(255,255,255,.85); stroke-width: 4; }
+  .ol-map text.pinl { font-size: 22px; font-weight: 800; fill: var(--ink); paint-order: stroke; stroke: #fff; stroke-width: 5; pointer-events: none; }
+  .ol-map circle.ring { fill: none; stroke: var(--ink); stroke-width: 1.4; stroke-dasharray: 6 5; opacity: .55; }
+  .ol-map text.ringl { font-size: 15px; fill: var(--ink); opacity: .7; pointer-events: none; }
+  .ol-map .pin { fill: var(--ink); }
+  .ol-key { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: .66rem; color: var(--muted); margin-top: 7px; }
+  .ol-key span { display: inline-flex; align-items: center; gap: 5px; }
+  .ol-key i { display: inline-block; width: 12px; height: 12px; border-radius: 999px; }
+  .ol-key i.f { background: rgba(124,179,66,.6); border: 1.5px solid var(--green); border-radius: 3px; }
+  .ol-key i.r { background: var(--yellow); border: 1.5px solid var(--deep); }
+  .ol-key i.o { background: #fff; border: 2px solid #b48f00; }
+  .ol-key i.b { background: transparent; border: 0; color: var(--red); font-style: normal; font-weight: 800; width: auto; }
+
+  .ol-need { margin-top: 12px; }
+  .ol-need h3 { font-size: .68rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--deep); margin: 0 0 6px; }
+  .ol-need.is-waiting { opacity: .45; pointer-events: none; }
+  .ol-need .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .ol-need button { font: inherit; font-size: .74rem; font-weight: 600; line-height: 1.3; padding: 9px 8px; border-radius: 10px; border: 1.5px solid var(--green); background: #fff; color: var(--deep); cursor: pointer; text-align: left; }
+  .ol-need button small { display: block; font-weight: 400; font-size: .64rem; color: var(--muted); margin-top: 2px; }
+  .ol-need button.on { background: var(--green); color: #fff; }
+  .ol-need button.on small { color: #d9ead3; }
+  .ol-need button:focus-visible { outline: 3px solid var(--yellow); outline-offset: 1px; }
+
+  .ol-out { margin-top: 12px; }
+  .ol-move { background: var(--yellow); color: var(--deep); border-radius: 10px; padding: 10px 12px; font-size: .8rem; line-height: 1.5; font-weight: 600; }
+  .ol-list { list-style: none; margin: 8px 0 0; padding: 0; }
+  .ol-list li { display: grid; grid-template-columns: 34px 1fr auto; gap: 8px 10px; align-items: center; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; background: #fff; margin-top: 6px; cursor: pointer; }
+  .ol-list li:hover, .ol-list li.on { border-color: var(--green); background: #f6faf0; }
+  .ol-list .n { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 999px; font-weight: 800; font-size: .78rem; }
+  .ol-list .n.f { background: var(--soft); color: var(--deep); border-radius: 6px; }
+  .ol-list .n.r { background: var(--yellow); color: var(--deep); }
+  .ol-list .n.o { background: #fff; border: 2px solid #b48f00; color: var(--deep); }
+  .ol-list .t { font-size: .8rem; font-weight: 700; color: var(--deep); line-height: 1.3; }
+  .ol-list .s { font-size: .68rem; color: var(--muted); line-height: 1.4; margin-top: 2px; }
+  .ol-list .d { text-align: right; font-size: .78rem; font-weight: 800; color: var(--ink); white-space: nowrap; }
+  .ol-list .d small { display: block; font-weight: 400; font-size: .62rem; color: var(--muted); }
+  .ol-list .bar { grid-column: 1 / -1; height: 4px; border-radius: 2px; background: #eef1e8; overflow: hidden; }
+  .ol-list .bar i { display: block; height: 100%; background: var(--green); }
+  .ol-empty { font-size: .78rem; color: var(--muted); margin-top: 8px; }
+  .ol-rules { margin-top: 12px; font-size: .7rem; color: var(--muted); line-height: 1.5; border-top: 1px solid var(--line); padding-top: 8px; }
+  .ol-rules b { color: var(--deep); }
+  .ol-src { margin-top: 6px; font-size: .62rem; color: var(--muted); line-height: 1.45; }
+  @media (max-width: 480px) {
+    .ol-station { grid-template-columns: 1fr; }
+    .ol-need .row { grid-template-columns: 1fr; }
+    .ol-map text.fl { font-size: 26px; }
+    .ol-map text.pinl { font-size: 30px; }
+    .ol-map text.ringl { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+<div class="ol" id="app">
+  <div class="ol-top">
+    <h2>Where the leash comes off in Berlin</h2>
+    <p>Twelve forest areas from Berliner Forsten, the fenced runs four districts publish as open data, and the runs mapped in the other eight. Type your station and the map measures every one from your front door.</p>
+  </div>
+
+  <div class="ol-station">
+    <div>
+      <label for="stn">Your S- or U-Bahn station</label>
+      <input id="stn" type="text" list="stlist" placeholder="e.g. Warschauer Straße, Schlesisches Tor, Rathaus Steglitz" autocomplete="off">
+      <datalist id="stlist"></datalist>
+    </div>
+    <button id="go" type="button">Measure from here</button>
+  </div>
+  <p class="ol-hint" id="hint">Start typing and pick a station from the list.</p>
+
+  <div class="ol-map"><svg id="map" viewBox="0 0 1000 824" role="img" aria-label="Map of Berlin with forest dog areas, fenced dog runs and dog-ban zones"></svg></div>
+  <div class="ol-key">
+    <span><i class="f"></i> forest area, dog runs free</span>
+    <span><i class="r"></i> fenced run, city open data</span>
+    <span><i class="o"></i> fenced run, community-mapped</span>
+    <span><i class="b">✕</i> dogs not allowed at all</span>
+  </div>
+
+  <div class="ol-need is-waiting" id="need">
+    <h3>What does your dog need today?</h3>
+    <div class="row">
+      <button type="button" data-need="fenced">A fence<small>no reliable recall yet, or a young dog</small></button>
+      <button type="button" data-need="forest">Open forest<small>an hour off the lead, recall works</small></button>
+      <button type="button" data-need="any">Whatever is closest<small>a quick run before work</small></button>
+    </div>
+  </div>
+
+  <div class="ol-out" id="out" hidden>
+    <div class="ol-move" id="move"></div>
+    <ul class="ol-list" id="list"></ul>
+    <p class="ol-empty" id="empty" hidden></p>
+  </div>
+
+  <div class="ol-rules">
+    <b>The rule everywhere else:</b> since 1 January 2019 dogs are on the lead across Berlin unless they are inside one of these areas or the owner holds a Bestandshund or Sachkunde exemption. Distances here are straight lines from the station, not walking routes. Closed-off patches inside a forest area (nature reserves, fenced plots, bathing spots in summer) stay off limits even when the map shows green.
+  </div>
+  <p class="ol-src">Tool visual credits: forest areas from Berliner Forsten, Hundeauslauf im Wald; fenced runs and ban zones from the Berlin Geoportal Hundefreilauf dataset (Datenlizenz Deutschland Zero 2.0, four districts); runs in the other districts, forest outlines and station positions © OpenStreetMap contributors (ODbL); district borders from the Berlin Geoportal ALKIS.</p>
+</div>
+
+<script>
+(async function () {
+  const res = await fetch('data.json');
+  const D = await res.json();
+  const svg = document.getElementById('map');
+  const NS = 'http://www.w3.org/2000/svg';
+  const el = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+
+  // ---- state (a two-stage flow: station first, then what the dog needs) ----
+  let currentStep = 0;      // 0 = no station, 1 = station set, 2 = need chosen
+  let origin = null;        // { n, lon, lat, pt }
+  let need = 'any';
+  let hitId = null;
+
+  // ---- stations datalist ----
+  const dl = document.getElementById('stlist');
+  D.stations.forEach(s => { const o = document.createElement('option'); o.value = s.n; dl.appendChild(o); });
+
+  // ---- geometry ----
+  const toRad = d => d * Math.PI / 180;
+  const km = (a, b) => { // haversine, straight line
+    const R = 6371, dLat = toRad(b.lat - a.lat), dLon = toRad(b.lon - a.lon);
+    const h = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(a.lat)) * Math.cos(toRad(b.lat)) * Math.sin(dLon / 2) ** 2;
+    return 2 * R * Math.asin(Math.sqrt(h));
+  };
+  const M = D.map;
+  const px = (lon, lat) => [((lon - M.lonMin) / (M.lonMax - M.lonMin)) * M.width, ((M.latMax - lat) / (M.latMax - M.latMin)) * M.height];
+  const kmPerPxX = (km({ lon: M.lonMin, lat: M.latRef }, { lon: M.lonMax, lat: M.latRef })) / M.width;
+
+  // unified place list
+  const places = [];
+  D.forests.forEach(f => places.push({ kind: 'forest', id: f.id, name: f.name, district: f.district, station: f.station, lon: f.lon, lat: f.lat, pt: f.pt, polys: f.polys, approx: !!f.approx, lab: f.lab }));
+  D.runs.forEach(r => places.push({ kind: 'run', id: r.id, name: r.name, district: r.district, lon: r.lon, lat: r.lat, pt: r.pt, m2: r.m2, fence: r.fence, big: r.big, closed: r.note === 'closed', addr: r.addr, official: true }));
+  D.osmRuns.forEach(r => places.push({ kind: 'run', id: r.id, name: r.name, district: r.district, lon: r.lon, lat: r.lat, pt: r.pt, fenced: r.fenced, official: false }));
+
+  // ---- draw base map ----
+  const gDist = el('g', { id: 'g-dist' });
+  D.districts.forEach(d => d.paths.forEach(p => el('path', { d: p, class: 'dist' }, gDist)));
+  const gRings = el('g', { id: 'g-rings' });
+  const gForest = el('g', { id: 'g-forest' });
+  const gBan = el('g', { id: 'g-ban' });
+  const gRun = el('g', { id: 'g-run' });
+  const gLab = el('g', { id: 'g-lab' });
+  const gPin = el('g', { id: 'g-pin' });
+  const nodes = {};
+  places.filter(p => p.kind === 'forest').forEach(f => {
+    if (f.polys.length) {
+      const d = f.polys.map(poly => 'M' + poly.map(pt => pt[0].toFixed(1) + ' ' + pt[1].toFixed(1)).join('L') + 'Z').join('');
+      nodes[f.id] = el('path', { d, class: 'forest', 'data-id': f.id }, gForest);
+    } else {
+      nodes[f.id] = el('circle', { cx: f.pt[0], cy: f.pt[1], r: 16, class: 'forestpt', 'data-id': f.id }, gForest);
+    }
+  });
+  // forest labels (one per named area)
+  const labelled = new Set();
+  places.filter(p => p.kind === 'forest').forEach(f => {
+    const short = f.name.replace(/\s*\(.*\)$/, '');
+    if (labelled.has(short)) return; labelled.add(short);
+    const off = f.lab || [0, -14];
+    const t = el('text', { x: f.pt[0] + off[0], y: f.pt[1] + off[1], class: 'fl', 'text-anchor': 'middle' }, gLab); t.textContent = short;
+  });
+  D.bans.forEach(b => { const [x, y] = b.pt; el('path', { d: `M${x - 6} ${y - 6}L${x + 6} ${y + 6}M${x + 6} ${y - 6}L${x - 6} ${y + 6}`, class: 'ban' }, gBan).append(Object.assign(document.createElementNS(NS, 'title'), { textContent: b.name + ': dogs not allowed' })); });
+  places.filter(p => p.kind === 'run').forEach(r => {
+    nodes[r.id] = el('circle', { cx: r.pt[0], cy: r.pt[1], r: 7, class: 'run' + (r.official ? '' : ' osm') + (r.closed ? ' closed' : ''), 'data-id': r.id }, gRun);
+  });
+  Object.keys(nodes).forEach(id => { nodes[id].addEventListener('click', () => highlight(id)); });
+
+  // ---- station step ----
+  const input = document.getElementById('stn');
+  const hint = document.getElementById('hint');
+  const needBox = document.getElementById('need');
+  const out = document.getElementById('out');
+  function setStation() {
+    const q = input.value.trim().toLowerCase();
+    const s = D.stations.find(x => x.n.toLowerCase() === q) || D.stations.find(x => x.n.toLowerCase().startsWith(q) && q.length > 2);
+    if (!s) { hint.textContent = 'No station by that name. Pick one from the list.'; return; }
+    input.value = s.n;
+    origin = { n: s.n, lon: s.lon, lat: s.lat, pt: px(s.lon, s.lat) };
+    currentStep = Math.max(currentStep, 1);
+    hint.textContent = 'Measuring from ' + s.n + '. Rings are 2 km and 5 km as the crow flies.';
+    needBox.classList.remove('is-waiting');
+    drawPin();
+    if (currentStep >= 2) render(); else { out.hidden = false; render(); }
+  }
+  document.getElementById('go').addEventListener('click', setStation);
+  input.addEventListener('change', setStation);
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); setStation(); } });
+
+  function drawPin() {
+    gRings.innerHTML = ''; gPin.innerHTML = '';
+    const [x, y] = origin.pt;
+    [2, 5].forEach(r => {
+      const rp = r / kmPerPxX;
+      el('circle', { cx: x, cy: y, r: rp, class: 'ring' }, gRings);
+      const t = el('text', { x: x + rp + 4, y: y + 5, class: 'ringl' }, gRings); t.textContent = r + ' km';
+    });
+    el('path', { d: `M${x} ${y}c-9 -12 -14 -19 -14 -27a14 14 0 0 1 28 0c0 8 -5 15 -14 27z`, class: 'pin' }, gPin);
+    el('circle', { cx: x, cy: y - 27, r: 5, fill: '#fff' }, gPin);
+    const t = el('text', { x: x, y: y - 44, class: 'pinl', 'text-anchor': 'middle' }, gPin); t.textContent = origin.n;
+  }
+
+  // ---- need step ----
+  needBox.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+    needBox.querySelectorAll('button').forEach(x => x.classList.remove('on'));
+    b.classList.add('on'); need = b.dataset.need; currentStep = 2; render();
+  }));
+
+  // ---- ranking + rendering ----
+  const fmt = k => k < 10 ? k.toFixed(1) + ' km' : Math.round(k) + ' km';
+  function distanceTo(p) {
+    if (p.kind === 'forest' && p.polys.length) {
+      // nearest outline vertex, so a big forest counts from its closest edge
+      let best = Infinity;
+      p.polys.forEach(poly => poly.forEach(pt => {
+        const lon = M.lonMin + (pt[0] / M.width) * (M.lonMax - M.lonMin);
+        const lat = M.latMax - (pt[1] / M.height) * (M.latMax - M.latMin);
+        const d = km(origin, { lon, lat }); if (d < best) best = d;
+      }));
+      return best;
+    }
+    return km(origin, p);
+  }
+  function passes(p) {
+    if (need === 'forest') return p.kind === 'forest';
+    if (need === 'fenced') return p.kind === 'run' && !p.closed && (p.official || p.fenced);
+    return !(p.kind === 'run' && p.closed);
+  }
+  function render() {
+    if (!origin) return;
+    const ranked = places.filter(passes).map(p => ({ p, d: distanceTo(p) })).sort((a, b) => a.d - b.d).slice(0, 7);
+    const list = document.getElementById('list'); list.innerHTML = '';
+    const maxD = ranked.length ? ranked[ranked.length - 1].d : 1;
+    ranked.forEach((r, i) => {
+      const p = r.p;
+      const li = document.createElement('li'); li.dataset.id = p.id;
+      const cls = p.kind === 'forest' ? 'f' : (p.official ? 'r' : 'o');
+      let sub = p.district;
+      if (p.kind === 'forest') sub += (p.station ? ' · ' + p.station : '') + (p.approx ? ' · position approximate, see the forest map' : '');
+      else if (p.official) { sub += p.m2 ? ' · about ' + p.m2.toLocaleString('en-GB') + ' m²' : ''; sub += p.fence ? ' · fence ' + p.fence.toFixed(2).replace('.', ',') + ' m' + (p.big ? ', suits big dogs' : '') : ''; sub += ' · city open data'; }
+      else sub += (p.fenced ? ' · fenced' : '') + ' · community-mapped, check the sign on site';
+      li.innerHTML = `<span class="n ${cls}">${i + 1}</span><div><div class="t">${p.name}</div><div class="s">${sub}</div></div><div class="d">${fmt(r.d)}<small>${p.kind === 'forest' ? 'to the edge' : 'straight line'}</small></div><div class="bar"><i style="width:${Math.max(4, (r.d / maxD) * 100)}%"></i></div>`;
+      li.addEventListener('click', () => highlight(p.id));
+      list.appendChild(li);
+    });
+    const empty = document.getElementById('empty');
+    empty.hidden = ranked.length > 0; empty.textContent = 'Nothing matches that. Try another need.';
+    // the move
+    const nearestFence = places.filter(p => p.kind === 'run' && !p.closed && (p.official || p.fenced)).map(p => ({ p, d: distanceTo(p) })).sort((a, b) => a.d - b.d)[0];
+    const nearestForest = places.filter(p => p.kind === 'forest').map(p => ({ p, d: distanceTo(p) })).sort((a, b) => a.d - b.d)[0];
+    let move = '';
+    if (need === 'fenced' && nearestFence) move = `From ${origin.n} the closest fence is ${nearestFence.p.name}, ${fmt(nearestFence.d)} away. ${nearestFence.p.fence ? 'The fence there is ' + nearestFence.p.fence.toFixed(2).replace('.', ',') + ' m, so judge it against your dog before you unclip.' : 'Go once on the lead first and look at the fence height before you unclip.'}`;
+    else if (need === 'forest' && nearestForest) move = `From ${origin.n} the nearest forest area is ${nearestForest.p.name}, ${fmt(nearestForest.d)} to its edge${nearestForest.p.station ? ' (' + nearestForest.p.station + ')' : ''}. Lead on until you pass the green sign, then an hour is realistic.`;
+    else if (nearestFence && nearestForest) move = `From ${origin.n}: fence at ${nearestFence.p.name} in ${fmt(nearestFence.d)}, forest at ${nearestForest.p.name} in ${fmt(nearestForest.d)}. Under 2 km is a before-work walk; the forest is a Saturday.`;
+    document.getElementById('move').textContent = move;
+    out.hidden = false;
+    // dim what does not pass
+    const keep = new Set(ranked.map(r => r.p.id));
+    Object.keys(nodes).forEach(id => nodes[id].classList.toggle('dim', currentStep >= 2 && !keep.has(id)));
+    if (window.bwResize) window.bwResize();
+  }
+  function highlight(id) {
+    hitId = id;
+    Object.keys(nodes).forEach(k => nodes[k].classList.toggle('hit', k === id));
+    document.querySelectorAll('#list li').forEach(li => li.classList.toggle('on', li.dataset.id === id));
+    const p = places.find(x => x.id === id);
+    if (p && !origin) hint.textContent = p.name + ' · ' + p.district + (p.kind === 'forest' ? ' · forest area, dogs run free' : (p.official ? ' · fenced run from the city open-data layer' : ' · community-mapped run'));
+  }
+})();
+</script>
+<script defer src="../js/brand.js"></script>
+</body>
+</html>

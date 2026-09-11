@@ -8669,6 +8669,39 @@
       ],
       "iconStatus": "live-wix-media",
       "cmsItemId": "de3c1364-80a5-4076-9ee4-5900de24c4fe"
+    },
+    {
+      "slug": "berlin-off-leash-map",
+      "title": "Berlin Off-Leash Map",
+      "lead": "Type your S- or U-Bahn station and the map ranks every place a Berlin dog may legally run free: the twelve forest areas from Berliner Forsten and the fenced runs from the city open-data layer, with sizes, fence heights and the greens where dogs are banned.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-off-leash-map/",
+      "embedHeight": 1700,
+      "image": "https://static.wixstatic.com/media/5a08a3_c1a6e20b4fa24b7ab5a45c6da6473ef8~mv2.png",
+      "hubCategory": "Essentials",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "dogs",
+        "dog park",
+        "leash",
+        "hundeauslaufgebiet",
+        "forest",
+        "fenced run",
+        "living in berlin",
+        "berlin districts",
+        "open data",
+        "map"
+      ],
+      "aliases": [
+        "dog parks berlin",
+        "hundeauslaufgebiete berlin",
+        "off leash berlin",
+        "where can my dog run free in berlin",
+        "leinenpflicht berlin"
+      ],
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "25289cc8-b3b9-45d4-94d9-b52ea952b606"
     }
   ],
   "hubCategories": [
