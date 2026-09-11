@@ -1,7 +1,7 @@
 const BW_BLOG_HOME_DATA_URL = (() => {
   const script = document.currentScript;
   const base = script && script.src ? script.src : window.location.href;
-  return new URL('./data.json?v=20260909-featured-listings', base).href;
+  return new URL('./data.json?v=20260911-featured-listings', base).href;
 })();
 const BW_BLOG_HOME_FALLBACK = {
   "featured": {
@@ -16,6 +16,33 @@ const BW_BLOG_HOME_FALLBACK = {
   },
   "miniPosts": [
     {
+      "title": "Bike Theft in Berlin: Where It Happens, When, and What It Costs",
+      "url": "https://www.berlinwalk.com/post/bike-theft-in-berlin",
+      "category": "Living in Berlin",
+      "readTime": "7 min read",
+      "summary": "The hour in a Berlin bike theft file is not when the thief turned up, it is when the owner last saw the bike. Read as a parking clock, 31% of losses were locked up between six and ten in the evening, and a third of everything went inside three hours.",
+      "image": "https://static.wixstatic.com/media/5a08a3_3f70db1a8c4745d689118079eca889f5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ostkreuz-bike-racks.jpg",
+      "alt": "Two levels of bicycle racks packed with bikes under the railway structure at Bahnhof Ostkreuz in Berlin"
+    },
+    {
+      "title": "Berlin Nebenkostenabrechnung: How to Check the Bill Line by Line Before the Deadline",
+      "url": "https://www.berlinwalk.com/post/berlin-nebenkostenabrechnung",
+      "category": "Living in Berlin",
+      "readTime": "9 min read",
+      "summary": "Berlin publishes what every line on a Nebenkostenabrechnung normally costs per square metre. Put your own statement against it, watch the two twelve-month deadlines, and ask for the invoices behind the lines that sit above the range. This year the property-tax line is the one to compare.",
+      "image": "https://static.wixstatic.com/media/5a08a3_373b6da9ba0b4d65bf538d3a6407d96f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-weserstrasse-neukoelln.jpg",
+      "alt": "The yellow corner Altbau at Weserstrasse 58 and Wildenbruchstrasse 87 in Berlin-Neukölln with parked cars along both streets"
+    },
+    {
+      "title": "Berlin Heating Season: What Your Landlord Owes You When the Flat Goes Cold",
+      "url": "https://www.berlinwalk.com/post/berlin-heating-season",
+      "category": "Living in Berlin",
+      "readTime": "7 min read",
+      "summary": "The Heizperiode starts on 1 October, but in four of the last eleven autumns Berlin crossed the cold snap threshold in September. This is what a landlord owes at which hour, how to measure so the number counts, and the order of the steps before anyone touches the rent.",
+      "image": "https://static.wixstatic.com/media/5a08a3_3a463bc9d35846ae99c9804c12cd86b3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-heating-season-cover-friedenau-entrance.jpg",
+      "alt": "A lit Altbau entrance on Handjerystrasse in Berlin-Friedenau at night, with snow on the hedges and the front steps"
+    },
+    {
       "title": "Berlin Museums Closed for Renovation: What Is Shut and What to See Instead",
       "url": "https://www.berlinwalk.com/post/berlin-museums-closed-for-renovation",
       "category": "Tourist Tips",
@@ -23,33 +50,6 @@ const BW_BLOG_HOME_FALLBACK = {
       "summary": "The Pergamonmuseum has been shut since October 2023, Museum Berggruen since 2022, and the Zeughaus is a building site with no announced reopening. Here is what is actually closed in Berlin right now, which reopening dates you can trust, why the Ishtar Gate is on a far longer clock than the 2027 headlines suggest, and what is genuinely worth doing instead this week.",
       "image": "https://static.wixstatic.com/media/5a08a3_f6f2fbb5b5534bf39049cba1c30e60e6~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ishtar-gate-pergamonmuseum.jpg",
       "alt": "The Ishtar Gate reconstructed inside the Pergamonmuseum, a blue glazed brick gateway with rows of golden animals"
-    },
-    {
-      "title": "Which City to Visit After Berlin: What the Train Actually Reaches",
-      "url": "https://www.berlinwalk.com/post/which-city-to-visit-after-berlin",
-      "category": "Tourist Tips",
-      "readTime": "7 min read",
-      "summary": "Germany does not sit in a circle around Berlin. The fast lines run north-west to Hamburg and south to Leipzig, Erfurt and Munich, while the same distance east into Poland costs about twice the time. Here is what the train genuinely reaches, which places are day trips and which deserve a night, and the five-day plan I would actually use.",
-      "image": "https://static.wixstatic.com/media/5a08a3_a43a90b2ad404818b3b49ced5d88a65c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ice-berlin-hauptbahnhof.jpg",
-      "alt": "An ICE train waiting at the underground long-distance platform at Berlin Hauptbahnhof"
-    },
-    {
-      "title": "Hohenschönhausen: The Stasi Prison You Can Only See on a Tour",
-      "url": "https://www.berlinwalk.com/post/hohenschonhausen-memorial-berlin",
-      "category": "Tourist Tips",
-      "readTime": "6 min read",
-      "summary": "The former Stasi remand prison in Lichtenberg is not a museum you can wander. The cells, corridors and interrogation rooms open only on a guided tour, and in English that means 10:40, 12:40 or 14:40, nine euro, about two hours, twenty-five people. Here is how to reach it, which of the four similarly named stops is the right one, and how much of your day it really costs.",
-      "image": "https://static.wixstatic.com/media/5a08a3_0f632cdd4bf3403fabc2a2537adf3799~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/hohenschonhausen-wall-watchtower.jpg",
-      "alt": "The perimeter wall and a watchtower of the former Stasi prison seen from the street"
-    },
-    {
-      "title": "BER Flight Delay Compensation: What You Are Owed and the Line That Decides It",
-      "url": "https://www.berlinwalk.com/post/ber-flight-delay-compensation",
-      "category": "Tourist Tips",
-      "readTime": "10 min read",
-      "summary": "A delayed flight out of Berlin pays 250, 400 or 600 euro, and the number is set by the distance to your final destination and whether that airport is inside the EU. Of the 157 destinations BER serves, only nine reach 600 euro. Here is how to work out yours, what the airline owes you while you wait, and how to claim it.",
-      "image": "https://static.wixstatic.com/media/5a08a3_7ff51c867eaa44b2a4944d20e5758c3b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/ber-terminal-1-exterior.jpg",
-      "alt": "Terminal 1 at Berlin Brandenburg Airport photographed from the forecourt at dusk"
     }
   ],
   "posts": [
