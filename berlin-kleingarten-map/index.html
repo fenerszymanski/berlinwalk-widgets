@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Kleingarten Colony Map</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #FAFAF5; color: #212121; padding: 16px 14px 10px;
+  }
+  .kgm-head h1 { font-size: 19px; color: #1B5E20; line-height: 1.25; }
+  .kgm-head p { font-size: 13px; color: #4a5548; margin-top: 5px; line-height: 1.45; }
+  .kgm-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 13px 0 10px; }
+  .kgm-chip {
+    font-family: inherit; font-size: 11.5px; font-weight: 600; color: #1B5E20;
+    background: #fff; border: 1.5px solid #C5E1A5; border-radius: 999px;
+    padding: 6px 10px; cursor: pointer; line-height: 1;
+  }
+  .kgm-chip[aria-pressed="true"] { background: #1B5E20; color: #FFE600; border-color: #1B5E20; }
+  .kgm-map-wrap { background: #eef3e4; border: 1px solid #d7e3c2; border-radius: 12px; overflow: hidden; }
+  .kgm-map-wrap svg { display: block; width: 100%; height: auto; }
+  .kgm-dot { cursor: pointer; }
+  .kgm-legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 11px; color: #4a5548; padding: 7px 10px; border-top: 1px solid #d7e3c2; background: #f6f8ee; }
+  .kgm-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .kgm-swatch { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .kgm-panel { margin-top: 12px; background: #fff; border: 1px solid #e2e8d5; border-radius: 12px; padding: 14px 14px 12px; }
+  .kgm-panel h2 { font-size: 15px; color: #1B5E20; }
+  .kgm-panel h3 { font-size: 12px; color: #1B5E20; text-transform: uppercase; letter-spacing: .04em; margin: 12px 0 5px; }
+  .kgm-stats { display: flex; gap: 8px; margin-top: 9px; flex-wrap: wrap; }
+  .kgm-stat { flex: 1 1 90px; background: #FAFAF5; border: 1px solid #e8ecdd; border-radius: 9px; padding: 8px 9px; }
+  .kgm-stat b { display: block; font-size: 19px; color: #1B5E20; }
+  .kgm-stat i { font-style: normal; font-size: 10.5px; color: #6a7565; }
+  .kgm-note { font-size: 12.5px; line-height: 1.5; color: #33402f; margin-top: 10px; }
+  .kgm-note strong { color: #1B5E20; }
+  .kgm-list { list-style: none; }
+  .kgm-list li { font-size: 12.5px; line-height: 1.5; padding: 4px 0; border-bottom: 1px dashed #e6ebdc; display: flex; justify-content: space-between; gap: 10px; }
+  .kgm-list li:last-child { border-bottom: none; }
+  .kgm-list .kgm-v { color: #6a7565; white-space: nowrap; }
+  .kgm-bars { margin-top: 3px; }
+  .kgm-barrow { display: flex; align-items: center; gap: 8px; padding: 2.5px 0; }
+  .kgm-barlabel { flex: 0 0 34%; font-size: 11px; color: #4a5548; line-height: 1.25; }
+  .kgm-bartrack { flex: 1 1 auto; height: 11px; background: #eef3e4; border-radius: 4px; overflow: hidden; }
+  .kgm-barfill { display: block; height: 100%; background: #7CB342; border-radius: 4px; }
+  .kgm-barval { flex: 0 0 44px; text-align: right; font-size: 11px; font-weight: 600; color: #1B5E20; }
+  @media (max-width: 420px) { .kgm-barlabel { flex-basis: 40%; font-size: 10px; } }
+  .kgm-colony-card { margin-top: 10px; background: #F4F8EA; border: 1.5px solid #C5E1A5; border-radius: 10px; padding: 10px 12px; }
+  .kgm-colony-card h4 { font-size: 13.5px; color: #1B5E20; }
+  .kgm-colony-card p { font-size: 12px; color: #4a5548; margin-top: 3px; line-height: 1.5; }
+  .kgm-src { font-size: 10.5px; color: #8b937f; margin-top: 10px; line-height: 1.45; }
+  @media (max-width: 420px) {
+    body { padding: 12px 10px 8px; }
+    .kgm-head h1 { font-size: 17px; }
+    .kgm-chip { font-size: 10.5px; padding: 5px 8px; }
+    .kgm-stat b { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="kgm-head">
+  <h1>Berlin Kleingarten Colony Map</h1>
+  <p>Every allotment colony in the city, sized by how many plots it holds. Tap your district to see how thin or generous the supply really is, and which association runs the waiting list you would join.</p>
+</div>
+<div class="kgm-chips" id="kgmChips"></div>
+<div class="kgm-map-wrap">
+  <svg id="kgmSvg" viewBox="0 0 740 560" role="img" aria-label="Map of Berlin with all allotment garden colonies plotted as dots sized by plot count"></svg>
+  <div class="kgm-legend">
+    <span><span class="kgm-swatch" style="background:#1B5E20"></span>Colony run by a district association</span>
+    <span><span class="kgm-swatch" style="background:#b98a2e"></span>Railway-land colony (Bahn-Landwirtschaft)</span>
+    <span>Dot size = number of plots</span>
+  </div>
+</div>
+<div class="kgm-panel" id="kgmPanel"></div>
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  'use strict';
+  var DATA = null;
+  var state = { district: null, colony: null };
+  var chipsEl = document.getElementById('kgmChips');
+  var svgEl = document.getElementById('kgmSvg');
+  var panelEl = document.getElementById('kgmPanel');
+
+  var W = 740, H = 560, PAD = 14;
+  var bounds = null;
+
+  function computeBounds() {
+    var minLon = 999, maxLon = -999, minLat = 999, maxLat = -999;
+    DATA.outlines.forEach(function (o) {
+      o.rings.forEach(function (ring) {
+        ring.forEach(function (pt) {
+          if (pt[0] < minLon) minLon = pt[0];
+          if (pt[0] > maxLon) maxLon = pt[0];
+          if (pt[1] < minLat) minLat = pt[1];
+          if (pt[1] > maxLat) maxLat = pt[1];
+        });
+      });
+    });
+    var kx = Math.cos(((minLat + maxLat) / 2) * Math.PI / 180);
+    var spanX = (maxLon - minLon) * kx, spanY = maxLat - minLat;
+    var scale = Math.min((W - 2 * PAD) / spanX, (H - 2 * PAD) / spanY);
+    bounds = { minLon: minLon, maxLat: maxLat, kx: kx, scale: scale,
+      ox: (W - spanX * scale) / 2, oy: (H - spanY * scale) / 2 };
+  }
+  function px(lon) { return bounds.ox + (lon - bounds.minLon) * bounds.kx * bounds.scale; }
+  function py(lat) { return bounds.oy + (bounds.maxLat - lat) * bounds.scale; }
+
+  function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
+
+  function districtNames() {
+    return Object.keys(DATA.districts).sort(function (a, b) {
+      return DATA.districts[b].parcels - DATA.districts[a].parcels;
+    });
+  }
+
+  function renderChips() {
+    var html = districtNames().map(function (name) {
+      var on = state.district === name;
+      return '<button type="button" class="kgm-chip" aria-pressed="' + (on ? 'true' : 'false') +
+        '" data-d="' + name + '">' + name + '</button>';
+    }).join('');
+    chipsEl.innerHTML = html;
+  }
+
+  function renderMap() {
+    var sel = state.district;
+    var paths = DATA.outlines.map(function (o) {
+      var active = !sel || sel === o.name;
+      var d = o.rings.map(function (ring) {
+        return 'M' + ring.map(function (pt) {
+          return px(pt[0]).toFixed(1) + ' ' + py(pt[1]).toFixed(1);
+        }).join('L') + 'Z';
+      }).join('');
+      return '<path d="' + d + '" fill="' + (sel === o.name ? '#dcebc4' : '#f2f6e6') + '"' +
+        ' stroke="#b9cf96" stroke-width="1" opacity="' + (active ? '1' : '0.45') + '" data-dp="' + o.name + '"/>';
+    }).join('');
+    var dots = DATA.colonies.map(function (c, i) {
+      var active = !sel || sel === c.d;
+      var r = Math.max(1.6, Math.sqrt(c.pz) * 0.42);
+      var isBahn = c.zp === 'BLW';
+      var picked = state.colony === i;
+      return '<circle class="kgm-dot" cx="' + px(c.lon).toFixed(1) + '" cy="' + py(c.lat).toFixed(1) +
+        '" r="' + (picked ? (r + 2).toFixed(1) : r.toFixed(1)) + '" fill="' + (isBahn ? '#b98a2e' : '#1B5E20') +
+        '" opacity="' + (active ? (picked ? '1' : '0.78') : '0.13') + '"' +
+        (picked ? ' stroke="#FFE600" stroke-width="2.5"' : '') + ' data-c="' + i + '"><title>' +
+        esc(c.n) + ' (' + c.pz + ' plots)</title></circle>';
+    }).join('');
+    svgEl.innerHTML = paths + dots;
+  }
+
+  function barChart() {
+    var names = districtNames();
+    var max = DATA.districts[names[0]].parcels;
+    return names.map(function (name) {
+      var d = DATA.districts[name];
+      var w = Math.max(1.5, (d.parcels / max) * 100);
+      return '<div class="kgm-barrow"><span class="kgm-barlabel">' + name + '</span>' +
+        '<span class="kgm-bartrack"><span class="kgm-barfill" style="width:' + w.toFixed(1) + '%"></span></span>' +
+        '<span class="kgm-barval">' + fmt(d.parcels) + '</span></div>';
+    }).join('');
+  }
+
+  function colonyCard() {
+    if (state.colony === null) return '';
+    var c = DATA.colonies[state.colony];
+    var zp = c.zp === 'BLW' ? 'Bahn-Landwirtschaft (railway land)' : (c.zp === 'ohne Zwischenpächter' ? 'the district green space office directly' : c.zp);
+    return '<div class="kgm-colony-card"><h4>' + esc(c.n) + '</h4><p>' +
+      (c.s ? esc(c.s) + ', ' : '') + c.d + ' · <strong>' + fmt(c.pz) + ' plots</strong> on ' + c.ha +
+      ' ha · managed by ' + zp + '</p></div>';
+  }
+
+  function renderPanel() {
+    var t = DATA.totals;
+    if (!state.district) {
+      panelEl.innerHTML =
+        '<h2>All Berlin: ' + fmt(t.parcels) + ' plots in ' + fmt(t.colonies) + ' colonies</h2>' +
+        '<div class="kgm-stats">' +
+        '<div class="kgm-stat"><b>' + fmt(t.colonies) + '</b><i>colonies</i></div>' +
+        '<div class="kgm-stat"><b>' + fmt(t.parcels) + '</b><i>plots</i></div>' +
+        '<div class="kgm-stat"><b>' + fmt(t.ha) + ' ha</b><i>garden land</i></div>' +
+        '</div>' +
+        '<h3>Plots per district</h3><div class="kgm-bars">' + barChart() + '</div>' +
+        colonyCard() +
+        '<p class="kgm-note">The east and the edge hold the supply. Pick your district above to see its colonies, its plot count and the association that runs its waiting list.</p>' +
+        '<p class="kgm-src">Colony locations, sizes and managing associations: Berlin Senate open data (Kleingartenbestand, February 2025 revision). Waiting lists move in registration order; register with the district association, not with this map.</p>';
+      return;
+    }
+    var d = DATA.districts[state.district];
+    var mine = DATA.colonies.filter(function (c) { return c.d === state.district; });
+    var top = mine.slice().sort(function (a, b) { return b.pz - a.pz; }).slice(0, 3);
+    var share = ((d.parcels / t.parcels) * 100).toFixed(1);
+    var supply;
+    if (d.parcels < 1000) supply = 'the thinnest supply band in Berlin. Register here for the location, but put realistic hope on a neighbouring district too.';
+    else if (d.parcels < 5000) supply = 'a mid-band supply. Lists move, but slowly; name several colonies on your application if the form allows it.';
+    else supply = 'one of the deepest supplies in the city. This is where first offers tend to arrive soonest.';
+    panelEl.innerHTML =
+      '<h2>' + state.district + '</h2>' +
+      '<div class="kgm-stats">' +
+      '<div class="kgm-stat"><b>' + fmt(d.colonies) + '</b><i>colonies</i></div>' +
+      '<div class="kgm-stat"><b>' + fmt(d.parcels) + '</b><i>plots</i></div>' +
+      '<div class="kgm-stat"><b>' + share + '%</b><i>of all Berlin plots</i></div>' +
+      '</div>' +
+      colonyCard() +
+      '<p class="kgm-note"><strong>' + fmt(d.parcels) + ' plots</strong> for a whole district is ' + supply + '</p>' +
+      '<h3>Who runs the waiting lists here</h3>' +
+      '<ul class="kgm-list">' + d.associations.map(function (a) {
+        return '<li><span>' + a + '</span></li>';
+      }).join('') + '</ul>' +
+      '<h3>Largest colonies</h3>' +
+      '<ul class="kgm-list">' + top.map(function (c) {
+        return '<li><span>' + esc(c.n) + (c.s ? ' · ' + esc(c.s) : '') + '</span><span class="kgm-v">' + fmt(c.pz) + ' plots</span></li>';
+      }).join('') + '</ul>' +
+      '<p class="kgm-src">Tap a dot on the map for a single colony. Data: Berlin Senate open data, February 2025 revision.</p>';
+  }
+
+  function renderAll() { renderChips(); renderMap(); renderPanel(); }
+
+  chipsEl.addEventListener('click', function (ev) {
+    var btn = ev.target.closest('.kgm-chip');
+    if (!btn) return;
+    var name = btn.getAttribute('data-d');
+    state.district = state.district === name ? null : name;
+    state.colony = null;
+    renderAll();
+  });
+  svgEl.addEventListener('click', function (ev) {
+    var dot = ev.target.closest('.kgm-dot');
+    if (dot) {
+      var i = parseInt(dot.getAttribute('data-c'), 10);
+      state.colony = state.colony === i ? null : i;
+      var c = DATA.colonies[i];
+      if (state.colony !== null && state.district && c.d !== state.district) state.district = c.d;
+      renderAll();
+      return;
+    }
+    var dp = ev.target.closest('[data-dp]');
+    if (dp) {
+      var name = dp.getAttribute('data-dp');
+      state.district = state.district === name ? null : name;
+      state.colony = null;
+      renderAll();
+    }
+  });
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (j) {
+    DATA = j;
+    computeBounds();
+    renderAll();
+  });
+})();
+</script>
+</body>
+</html>

@@ -8769,6 +8769,40 @@
       ],
       "iconStatus": "live-wix-media",
       "cmsItemId": "252e4bf7-2575-4b63-b892-670b07088fd4"
+    },
+    {
+      "slug": "berlin-kleingarten-map",
+      "title": "Berlin Kleingarten Colony Map",
+      "lead": "All 1,038 real allotment colonies from the Berlin Senate register plotted on one map, sized by how many plots each holds. Tap your district to see its true supply, from 10,258 plots in Pankow down to 228 in Friedrichshain-Kreuzberg, the association that runs its waiting list, and the largest colonies near you.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-kleingarten-map/",
+      "embedHeight": 1300,
+      "image": "https://static.wixstatic.com/media/5a08a3_e6dd337e684f4f0b997f231486484012~mv2.png",
+      "hubCategory": "Essentials",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "kleingarten",
+        "allotment garden",
+        "schrebergarten",
+        "garden colony",
+        "waiting list",
+        "districts",
+        "living in berlin",
+        "outdoors",
+        "gardening",
+        "laube"
+      ],
+      "aliases": [
+        "kleingarten berlin",
+        "allotment berlin",
+        "how to get a kleingarten",
+        "schrebergarten berlin",
+        "garden plot berlin",
+        "kleingarten waiting list"
+      ],
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "a6755493-f8da-4074-bbb1-9fb51a76c55f"
     }
   ],
   "hubCategories": [
