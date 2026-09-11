@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-11T13:20:26.579Z",
+  "updatedAt": "2026-09-11T14:04:45.414Z",
   "source": "Wix Blog API",
-  "totalPosts": 373,
+  "totalPosts": 374,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Berlin Water Hardness: What Your Postcode Says About the Scale in Your Kettle",
+      "slug": "berlin-water-hardness",
+      "path": "/post/berlin-water-hardness",
+      "url": "https://www.berlinwalk.com/post/berlin-water-hardness",
+      "excerpt": "Every Berlin postcode runs officially hard water, but a kettle in Wedding and one in Köpenick do not scale at the same speed. The official per-postcode ranges, mapped, with the dishwasher setting, the detergent column and the descaling rhythm that follow.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-11T14:00:36.645Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_a24bdb7a928e4839bf741659dbb152e8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wasserturm-1600.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_a24bdb7a928e4839bf741659dbb152e8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wasserturm-1600.jpg",
+      "alt": "The two brick towers of the former Prenzlauer Berg waterworks above the trees of the Wasserturm park in autumn",
+      "relatedToolSlug": "berlin-water-hardness-map"
+    },
     {
       "title": "Mushroom Picking Around Berlin: Ten Forests on Your Ticket and the Rules Before the Pan",
       "slug": "mushroom-picking-berlin",

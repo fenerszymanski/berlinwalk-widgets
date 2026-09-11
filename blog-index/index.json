@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-11T13:20:26.579Z",
+  "updatedAt": "2026-09-11T14:04:45.414Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 373,
-  "toolsTotal": 293,
+  "totalPosts": 374,
+  "toolsTotal": 294,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1745,11 +1745,45 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_f0e8e550d4394fe2a6fac72f402a1d20~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-maronen.jpg",
           "alt": "Two bay bolete mushrooms in green moss, one lying on its side showing the pale yellow pore layer under the brown cap",
           "relatedToolSlug": "berlin-mushroom-forest-finder"
+        },
+        {
+          "title": "Berlin Water Hardness: What Your Postcode Says About the Scale in Your Kettle",
+          "slug": "berlin-water-hardness",
+          "path": "/post/berlin-water-hardness",
+          "url": "https://www.berlinwalk.com/post/berlin-water-hardness",
+          "excerpt": "Every Berlin postcode runs officially hard water, but a kettle in Wedding and one in Köpenick do not scale at the same speed. The official per-postcode ranges, mapped, with the dishwasher setting, the detergent column and the descaling rhythm that follow.",
+          "category": "Living in Berlin",
+          "categorySlug": "living-in-berlin",
+          "topic": "living-in-berlin",
+          "topicLabel": "Living in Berlin",
+          "readTime": "6 min read",
+          "publishedDate": "2026-09-11T14:00:36.645Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_a24bdb7a928e4839bf741659dbb152e8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wasserturm-1600.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_a24bdb7a928e4839bf741659dbb152e8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wasserturm-1600.jpg",
+          "alt": "The two brick towers of the former Prenzlauer Berg waterworks above the trees of the Wasserturm park in autumn",
+          "relatedToolSlug": "berlin-water-hardness-map"
         }
       ]
     }
   ],
   "latest": [
+    {
+      "title": "Berlin Water Hardness: What Your Postcode Says About the Scale in Your Kettle",
+      "slug": "berlin-water-hardness",
+      "path": "/post/berlin-water-hardness",
+      "url": "https://www.berlinwalk.com/post/berlin-water-hardness",
+      "excerpt": "Every Berlin postcode runs officially hard water, but a kettle in Wedding and one in Köpenick do not scale at the same speed. The official per-postcode ranges, mapped, with the dishwasher setting, the detergent column and the descaling rhythm that follow.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-11T14:00:36.645Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_a24bdb7a928e4839bf741659dbb152e8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wasserturm-1600.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_a24bdb7a928e4839bf741659dbb152e8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wasserturm-1600.jpg",
+      "alt": "The two brick towers of the former Prenzlauer Berg waterworks above the trees of the Wasserturm park in autumn",
+      "relatedToolSlug": "berlin-water-hardness-map"
+    },
     {
       "title": "Mushroom Picking Around Berlin: Ten Forests on Your Ticket and the Rules Before the Pan",
       "slug": "mushroom-picking-berlin",
@@ -1936,23 +1970,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_a43a90b2ad404818b3b49ced5d88a65c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ice-berlin-hauptbahnhof.jpg",
       "alt": "An ICE train waiting at the underground long-distance platform at Berlin Hauptbahnhof",
       "relatedToolSlug": "berlin-second-city-board"
-    },
-    {
-      "title": "Hohenschönhausen: The Stasi Prison You Can Only See on a Tour",
-      "slug": "hohenschonhausen-memorial-berlin",
-      "path": "/post/hohenschonhausen-memorial-berlin",
-      "url": "https://www.berlinwalk.com/post/hohenschonhausen-memorial-berlin",
-      "excerpt": "The former Stasi remand prison in Lichtenberg is not a museum you can wander. The cells, corridors and interrogation rooms open only on a guided tour, and in English that means 10:40, 12:40 or 14:40, nine euro, about two hours, twenty-five people. Here is how to reach it, which of the four similarly named stops is the right one, and how much of your day it really costs.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "route-stories",
-      "topicLabel": "Tour Route Stories",
-      "readTime": "6 min read",
-      "publishedDate": "2026-09-08T07:49:42.007Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_0f632cdd4bf3403fabc2a2537adf3799~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/hohenschonhausen-wall-watchtower.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_0f632cdd4bf3403fabc2a2537adf3799~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/hohenschonhausen-wall-watchtower.jpg",
-      "alt": "The perimeter wall and a watchtower of the former Stasi prison seen from the street",
-      "relatedToolSlug": "hohenschonhausen-tour-reach"
     }
   ]
 }
