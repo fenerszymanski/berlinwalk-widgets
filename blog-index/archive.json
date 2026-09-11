@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-11T02:08:55.676Z",
+  "updatedAt": "2026-09-11T05:03:55.770Z",
   "source": "Wix Blog API",
-  "totalPosts": 371,
+  "totalPosts": 372,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Dog Parks in Berlin: Where the Leash Comes Off and Which Run Fits Your Dog",
+      "slug": "dog-parks-in-berlin",
+      "path": "/post/dog-parks-in-berlin",
+      "url": "https://www.berlinwalk.com/post/dog-parks-in-berlin",
+      "excerpt": "Berlin has had a citywide leash rule since 2019, and the places where it comes off are more uneven than the word dog park suggests: twelve forest areas of about 1,220 hectares, fenced runs of 1,200 to 9,000 square metres with 0.80 or 1.40 metre fences, and greens where a dog may not enter at all. Here is how to read them from your own station.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-11T04:55:08.401Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_b60ed643db534c739f1bd325331f2446~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hundeplatz-lichtenberg-run.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_b60ed643db534c739f1bd325331f2446~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hundeplatz-lichtenberg-run.jpg",
+      "alt": "The sandy fenced dog run at Hundeplatz Lichtenberg with wooden agility steps, stacked tyres and a blue barrel under the trees",
+      "relatedToolSlug": "berlin-off-leash-map"
+    },
     {
       "title": "Berlin Nebenkostenabrechnung: How to Check the Bill Line by Line Before the Deadline",
       "slug": "berlin-nebenkostenabrechnung",
@@ -19,7 +36,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_373b6da9ba0b4d65bf538d3a6407d96f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-weserstrasse-neukoelln.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_373b6da9ba0b4d65bf538d3a6407d96f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-weserstrasse-neukoelln.jpg",
       "alt": "The yellow corner Altbau at Weserstrasse 58 and Wildenbruchstrasse 87 in Berlin-Neukölln with parked cars along both streets",
-      "relatedToolSlug": "berlin-nebenkosten-line-check"
+      "relatedToolSlug": ""
     },
     {
       "title": "Bike Theft in Berlin: Where It Happens, When, and What It Costs",
@@ -36,7 +53,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_3f70db1a8c4745d689118079eca889f5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ostkreuz-bike-racks.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_3f70db1a8c4745d689118079eca889f5~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ostkreuz-bike-racks.jpg",
       "alt": "Two levels of bicycle racks packed with bikes under the railway structure at Bahnhof Ostkreuz in Berlin",
-      "relatedToolSlug": "berlin-bike-theft-clock"
+      "relatedToolSlug": ""
     },
     {
       "title": "Berlin Bulky Waste: What Sperrmüll Costs and Where It Actually Goes",
@@ -53,7 +70,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_4ec1d2efbf1e4037bee7c1faed811631~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-recycling-yard-containers.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_4ec1d2efbf1e4037bee7c1faed811631~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-recycling-yard-containers.jpg",
       "alt": "Orange BSR containers and glass banks lined up inside the recycling yard on Ilsenburger Strasse in Berlin-Charlottenburg",
-      "relatedToolSlug": "berlin-disposal-cost-ladder"
+      "relatedToolSlug": ""
     },
     {
       "title": "Berlin Heating Season: What Your Landlord Owes You When the Flat Goes Cold",
