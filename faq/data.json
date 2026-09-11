@@ -11269,5 +11269,43 @@
         "a": "The law allows fines **up to €10,000**. In practice Friedrichshain-Kreuzberg says a first offence is usually a **€45 warning**, with up to €5,000 possible for repeat cases. Not picking up after the dog is fined separately."
       }
     ]
+  },
+  "mushroom-picking-berlin": {
+    "title": "Mushroom Picking Around Berlin - FAQ",
+    "subtitle": "What the forest laws allow, which species carry a protection exception, where the free Pilzberatung sits, and which forests you reach by S-Bahn and regional train.",
+    "items": [
+      {
+        "q": "Is it legal to pick mushrooms in Berlin?",
+        "a": "Yes, in small amounts for personal use. The Berlin forest law allows collecting mushrooms, berries and other fruits in the city forests **in small quantities for your own needs**, and the Brandenburg forest law carries the same personal-use rule for the forests around the city. Selling foraged mushrooms is not covered by that permission, and Brandenburg does not grant commercial collecting permits for the state forest at all."
+      },
+      {
+        "q": "How much am I allowed to take?",
+        "a": "Neither law prints a number. The working standard is **a meal or two for your own kitchen**; foresters usually treat a small basket as fine. What draws enforcement is scale: buckets, crates and repeat car-boot loads read as commercial collecting, which is an administrative offence and can end in a serious fine."
+      },
+      {
+        "q": "Are porcini and chanterelles not protected species?",
+        "a": "They are protected under the federal species ordinance, but with a built-in exception: **Steinpilz (porcini), Pfifferling (chanterelle), Birkenpilz, Rotkappe and Brätling may be taken in small amounts for personal use**. The protection is aimed at commercial harvesting, not at your risotto."
+      },
+      {
+        "q": "Where is picking banned around Berlin?",
+        "a": "In **signed nature reserves (Naturschutzgebiete)**, where you must stay on the paths and take nothing, and in fenced or posted forest sections. City parks are the wrong place anyway: roadside and inner-city fungi accumulate pollutants, so serious pickers head for the big forests."
+      },
+      {
+        "q": "Who can check whether my mushrooms are edible?",
+        "a": "The free **Pilzberatung at the Botanical Garden** in Steglitz, in the Botanikschule at Unter den Eichen 5, has been checking Berlin baskets since 1890 and is the only advisory office in the city. It runs sessions in the season, free of charge. Bring every mushroom **fresh and whole**, keep species separate, and note that only mushrooms physically shown to the adviser can be cleared for the pan; a phone photo is not enough."
+      },
+      {
+        "q": "What do I do if someone ate a suspect mushroom?",
+        "a": "Call the **Giftnotruf Berlin on 030 19240**, day or night, and keep the cleaning scraps or leftovers so the species can be identified. Do not wait for symptoms to get worse before calling."
+      },
+      {
+        "q": "When is mushroom season around Berlin?",
+        "a": "After rain: chanterelles from high summer, porcini from late summer, bay boletes (Maronen) from September into November. **The 2026 season started late** because the summer stayed dry into September; the forest floor wakes two to five days after a proper wet spell, so watch the rain radar rather than the calendar."
+      },
+      {
+        "q": "Which mushroom forest can I reach without a car?",
+        "a": "All ten in the article. Inside Berlin, the **Köpenicker Stadtforst at S Rahnsdorf (S3, about 33 minutes from Alexanderplatz)** and **Grunewald (S7, 22 minutes)** are the classics. In Brandenburg, the beech forest at **Chorin (RE3, 54 minutes)** and the **Liepnitzwald via the RB27 Heidekrautbahn (56 minutes)** are worth the ride, and every one of them is covered by a Deutschlandticket."
+      }
+    ]
   }
 }

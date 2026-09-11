@@ -51,6 +51,39 @@
   ],
   "tools": [
     {
+      "slug": "berlin-mushroom-forest-finder",
+      "title": "Berlin Mushroom Forest Finder",
+      "lead": "Ten mushroom forests you reach on a normal VBB ticket, plotted by real Saturday-morning travel minutes from Alexanderplatz: filter by Berlin or Brandenburg rules, pine or beech ground and a lake for afterwards, then read the line, the access walk and the law that applies before you pick.",
+      "category": "Discovery",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-mushroom-forest-finder/",
+      "embedHeight": 1500,
+      "image": "https://static.wixstatic.com/media/5a08a3_8ed1bcbb97374ea1b0e058a9fcbaf9a5~mv2.png",
+      "hubCategory": "WeatherOutdoor",
+      "type": "Planner",
+      "priority": 3,
+      "tags": [
+        "mushrooms",
+        "foraging",
+        "pilze sammeln",
+        "forest",
+        "brandenburg",
+        "s-bahn",
+        "regional train",
+        "autumn",
+        "living in berlin",
+        "weekend"
+      ],
+      "aliases": [
+        "mushroom picking berlin",
+        "mushroom foraging berlin",
+        "pilze sammeln berlin",
+        "mushroom season berlin",
+        "forests near berlin train"
+      ],
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "eefd79c1-2f5b-43db-82fa-cb8a5a6a2d63"
+    },
+    {
       "slug": "berlin-crosswalk-standoff",
       "title": "Berlin Crosswalk Standoff",
       "lead": "Four real corners from my walking route, one red light each time. Wait or cross, then see what actually happens and get your Patience Score.",

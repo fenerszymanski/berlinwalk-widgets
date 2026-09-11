@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Mushroom Forest Finder</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20; --deep: #123D18; --yellow: #FFE600; --lime: #7CB342;
+    --lightgreen: #C5E1A5; --cream: #FAFAF5; --ink: #212121; --red: #E63946;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--cream); color: var(--ink); padding: 14px 12px 8px;
+  }
+  .mff-wrap { max-width: 720px; margin: 0 auto; }
+  .mff-head h2 { color: var(--green); font-size: 1.22rem; line-height: 1.3; }
+  .mff-head p { font-size: .86rem; color: #444; margin-top: 5px; line-height: 1.45; }
+  .mff-chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 12px 0 4px; }
+  .mff-chip {
+    border: 2px solid var(--green); background: #fff; color: var(--green);
+    border-radius: 999px; padding: 6px 12px; font-size: .8rem; font-weight: 600;
+    cursor: pointer; font-family: inherit; transition: background .15s, color .15s;
+  }
+  .mff-chip[aria-pressed="true"] { background: var(--green); color: #fff; }
+  .mff-chip:focus-visible { outline: 3px solid var(--lime); outline-offset: 1px; }
+  .mff-boardbox { background: #fff; border: 1px solid #e2e2d8; border-radius: 14px; margin-top: 10px; padding: 6px 4px 2px; }
+  .mff-board svg { display: block; width: 100%; height: auto; }
+  .mff-legend { display: flex; flex-wrap: wrap; gap: 12px; padding: 4px 10px 8px; font-size: .72rem; color: #555; }
+  .mff-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .mff-dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+  .mff-detail {
+    margin-top: 12px; background: var(--deep); color: var(--cream);
+    border-radius: 14px; padding: 14px 16px;
+  }
+  .mff-detail h3 { font-size: 1.02rem; color: var(--yellow); }
+  .mff-detail .mff-sub { font-size: .8rem; color: var(--lightgreen); margin-top: 2px; }
+  .mff-detail p { font-size: .86rem; line-height: 1.5; margin-top: 8px; }
+  .mff-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
+  .mff-badge {
+    background: var(--yellow); color: var(--deep); font-weight: 700;
+    font-size: .72rem; border-radius: 6px; padding: 3px 8px;
+  }
+  .mff-badge.line { background: var(--lightgreen); color: var(--deep); }
+  .mff-list { margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .mff-card {
+    text-align: left; font-family: inherit; background: #fff; border: 1px solid #e0e0d4;
+    border-radius: 11px; padding: 9px 11px; cursor: pointer; transition: opacity .15s, border-color .15s;
+  }
+  .mff-card.dim { opacity: .32; }
+  .mff-card.sel { border-color: var(--green); box-shadow: 0 0 0 2px var(--lightgreen); }
+  .mff-card .n {
+    display: inline-flex; width: 20px; height: 20px; border-radius: 50%; background: var(--green);
+    color: #fff; font-size: .72rem; font-weight: 700; align-items: center; justify-content: center; margin-right: 6px;
+  }
+  .mff-card .nm { font-weight: 700; font-size: .84rem; color: var(--deep); }
+  .mff-card .mt { font-size: .74rem; color: #666; margin-top: 3px; }
+  .mff-rules {
+    margin-top: 14px; background: var(--yellow); color: var(--deep);
+    border-radius: 12px; padding: 12px 14px; font-size: .8rem; line-height: 1.55;
+  }
+  .mff-rules strong { color: var(--deep); }
+  .mff-note { font-size: .72rem; color: #777; margin-top: 8px; line-height: 1.45; }
+  @media (max-width: 480px) {
+    .mff-list { grid-template-columns: 1fr; }
+    .mff-head h2 { font-size: 1.08rem; }
+  }
+</style>
+</head>
+<body>
+<div class="mff-wrap">
+  <div class="mff-head">
+    <h2>Berlin Mushroom Forest Finder</h2>
+    <p>Ten forests you can reach on a normal VBB ticket, plotted by real Saturday-morning travel time from Alexanderplatz. Rings mark 30, 60 and 90 minutes; direction on the board is the real compass direction out of the city. Tap a numbered stop for the ground, the line and the rules that apply there.</p>
+  </div>
+  <div class="mff-chips" id="mffChips" role="group" aria-label="Filter forests">
+    <button class="mff-chip" type="button" data-f="fast" aria-pressed="false">Under 45 min</button>
+    <button class="mff-chip" type="button" data-f="berlin" aria-pressed="false">Berlin city forest</button>
+    <button class="mff-chip" type="button" data-f="brandenburg" aria-pressed="false">Brandenburg</button>
+    <button class="mff-chip" type="button" data-f="pine" aria-pressed="false">Pine ground</button>
+    <button class="mff-chip" type="button" data-f="lake" aria-pressed="false">Lake for after</button>
+  </div>
+  <div class="mff-boardbox">
+    <div class="mff-board" id="mffBoard" aria-label="Travel time board: forests plotted by direction and minutes from Alexanderplatz"></div>
+    <div class="mff-legend">
+      <span><span class="mff-dot" style="background:#1B5E20"></span> Berlin forest</span>
+      <span><span class="mff-dot" style="background:#7CB342"></span> Brandenburg</span>
+      <span>Rings = 30 / 60 / 90 min from Alexanderplatz</span>
+    </div>
+  </div>
+  <div class="mff-detail" id="mffDetail" aria-live="polite"></div>
+  <div class="mff-list" id="mffList"></div>
+  <div class="mff-rules">
+    <strong>The rules in one breath:</strong> small amounts for your own pan are fine in both Berlin and Brandenburg state forest. Signed nature reserves are off limits, and selling what you picked is banned. Not sure about a find? The free Pilzberatung at the Botanical Garden (Botanikschule, Unter den Eichen 5) checks your basket; bring each species whole and separate. Suspected poisoning: Giftnotruf 030 19240.
+  </div>
+  <p class="mff-note">Travel times are typical Saturday-morning journeys measured from live VBB data in September 2026; individual connections vary by a few minutes. Always check signage on site; forest areas can close after storms.</p>
+</div>
+<script>
+(function () {
+  'use strict';
+  var FORESTS = [
+    { k: 'grunewald', name: 'Grunewald', station: 'S Grunewald', lines: ['S7'], min: 22, brg: 250,
+      zone: 'berlin', pine: true, lake: true, walk: 'Forest starts at the station exit',
+      grows: 'Mixed pine and oak on sandy soil. The classic quick option: paths fill on weekends, so leave the main tracks. The moor patches are signed nature reserves; stay out of those.',
+      after: 'Schlachtensee or Krumme Lanke for a swim on the S1 side.' },
+    { k: 'tegel', name: 'Tegeler Forst', station: 'S Tegel', lines: ['S25'], min: 29, brg: 312,
+      zone: 'berlin', pine: false, lake: true, walk: 'About 10 minutes toward Tegeler See',
+      grows: 'One of Berlin’s oldest mixed stands, oaks and pines together. Varied ground means varied finds after rain.',
+      after: 'Greenwichpromenade at Tegeler See for the lakeside walk.' },
+    { k: 'rahnsdorf', name: 'Köpenicker Stadtforst', station: 'S Rahnsdorf', lines: ['S3'], min: 33, brg: 112,
+      zone: 'berlin', pine: true, lake: true, walk: 'Forest on both sides of the station',
+      grows: 'Berlin’s biggest forest belt around the Müggelsee. Pine litter is bay-bolete ground; locals treat this as the city’s serious picking forest.',
+      after: 'Müggelsee shore, or Friedrichshagen’s Bölschestraße for coffee.' },
+    { k: 'spandau', name: 'Spandauer Forst', station: 'S+U Rathaus Spandau', lines: ['S3', 'S9'], min: 36, brg: 276,
+      zone: 'berlin', pine: false, lake: false, walk: 'Bus 130 to Johannesstift, then you are in',
+      grows: 'Quieter mixed forest on the city’s western edge. Fewer pickers than Grunewald, which matters late in a dry season.',
+      after: 'Spandau old town on the way back.' },
+    { k: 'strausberg', name: 'Strausberg forests', station: 'S Strausberg', lines: ['S5'], min: 46, brg: 87,
+      zone: 'brandenburg', pine: true, lake: true, walk: 'Woods begin west of the station',
+      grows: 'Pine forest with mixed edges around the town and the Straussee. Easy S-Bahn access makes it a good first Brandenburg trip.',
+      after: 'Straussee ferry and the lakeside path.' },
+    { k: 'kw', name: 'Königs Wusterhausen', station: 'S Königs Wusterhausen', lines: ['S46', 'RE2'], min: 49, brg: 149,
+      zone: 'brandenburg', pine: true, lake: false, walk: 'About 20 minutes south into the pines',
+      grows: 'Sandy pine country south of the town, bay-bolete ground for generations of Berlin pickers. The RE2 gets you there faster than the S46.',
+      after: 'Nottekanal walk back toward the station.' },
+    { k: 'chorin', name: 'Choriner Wald', station: 'Chorin', lines: ['RE3'], min: 54, brg: 36,
+      zone: 'brandenburg', pine: false, lake: true, walk: 'Station sits inside the forest',
+      grows: 'Old beech forest at the edge of the Schorfheide. Beech litter is porcini ground; this is the most beautiful forest on the list.',
+      after: 'Kloster Chorin, the brick Gothic monastery ruin, 15 minutes on foot.' },
+    { k: 'wandlitz', name: 'Liepnitzwald', station: 'Wandlitzsee', lines: ['RB27'], min: 56, brg: 9,
+      zone: 'brandenburg', pine: false, lake: true, walk: 'About 25 minutes east toward Liepnitzsee',
+      grows: 'Tall beeches and pines between Wandlitz and Lanke. The Heidekrautbahn from Berlin-Karow is half the charm; locals guard their spots here for a reason.',
+      after: 'Liepnitzsee, one of the clearest lakes near Berlin.' },
+    { k: 'michendorf', name: 'Michendorf pines', station: 'Michendorf', lines: ['RE7'], min: 63, brg: 229,
+      zone: 'brandenburg', pine: true, lake: true, walk: 'Pines start south of the station',
+      grows: 'Classic Teltow sand pine forest near the Ravensberge. Unspectacular to look at, reliable underfoot after proper rain.',
+      after: 'Seddiner See is one stop further on the RE7.' },
+    { k: 'belzig', name: 'Hoher Fläming', station: 'Bad Belzig', lines: ['RE7'], min: 84, brg: 233,
+      zone: 'brandenburg', pine: false, lake: false, walk: 'About 25 minutes toward the Burg Eisenhardt woods',
+      grows: 'Rolling mixed woodland, the closest thing to hill-country forest on a Berlin ticket. Make it a full day; the travel time only pays off that way.',
+      after: 'Burg Eisenhardt castle above the town.' }
+  ];
+
+  var state = { sel: 'rahnsdorf', filters: { fast: false, berlin: false, brandenburg: false, pine: false, lake: false } };
+
+  function matches(f) {
+    var ft = state.filters;
+    if (ft.fast && f.min >= 45) return false;
+    if (ft.berlin && f.zone !== 'berlin') return false;
+    if (ft.brandenburg && f.zone !== 'brandenburg') return false;
+    if (ft.pine && !f.pine) return false;
+    if (ft.lake && !f.lake) return false;
+    return true;
+  }
+
+  var ranked = FORESTS.slice().sort(function (a, b) { return a.min - b.min; });
+
+  function svgEl(tag, attrs, text) {
+    var el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+    for (var key in attrs) { el.setAttribute(key, attrs[key]); }
+    if (text) { el.textContent = text; }
+    return el;
+  }
+
+  function drawBoard() {
+    var host = document.getElementById('mffBoard');
+    var w = host.clientWidth || 700;
+    var big = w >= 540;
+    var margin = big ? 74 : 30;
+    var h = Math.round(Math.min(w * 0.92, 560));
+    var cx = w / 2, cy = h / 2 + 6;
+    var maxR = Math.min(w, h) / 2 - margin;
+    var scale = maxR / 90;
+    var svg = svgEl('svg', { viewBox: '0 0 ' + w + ' ' + h, width: w, height: h, role: 'img' });
+    var rings = [30, 60, 90];
+    for (var ri = 0; ri < rings.length; ri += 1) {
+      var rr = rings[ri] * scale;
+      svg.appendChild(svgEl('circle', { cx: cx, cy: cy, r: rr, fill: 'none', stroke: '#dcdccb', 'stroke-width': 1.2, 'stroke-dasharray': ri === 2 ? 'none' : '4 5' }));
+      svg.appendChild(svgEl('text', { x: cx + 4, y: cy - rr + (big ? 15 : 12), fill: '#9a9a88', 'font-size': big ? 11 : 9, 'font-family': 'inherit' }, rings[ri] + ' min'));
+    }
+    svg.appendChild(svgEl('text', { x: cx, y: cy - maxR - (big ? 10 : 6), fill: '#9a9a88', 'font-size': big ? 11 : 9, 'text-anchor': 'middle', 'font-family': 'inherit' }, 'N'));
+    svg.appendChild(svgEl('circle', { cx: cx, cy: cy, r: 5.5, fill: '#212121' }));
+    svg.appendChild(svgEl('text', { x: cx, y: cy + (big ? 22 : 18), fill: '#212121', 'font-size': big ? 12 : 10, 'font-weight': 700, 'text-anchor': 'middle', 'font-family': 'inherit' }, 'Alex'));
+    for (var i = 0; i < ranked.length; i += 1) {
+      (function (f, idx) {
+        var ok = matches(f);
+        var selNow = state.sel === f.k;
+        var rad = f.min * scale;
+        var ang = (f.brg - 90) * Math.PI / 180;
+        var x = cx + rad * Math.cos(ang);
+        var y = cy + rad * Math.sin(ang);
+        var g = svgEl('g', { cursor: 'pointer', opacity: ok ? 1 : 0.22, 'aria-label': f.name });
+        g.appendChild(svgEl('line', { x1: cx, y1: cy, x2: x, y2: y, stroke: selNow ? '#FFE600' : '#e7e7da', 'stroke-width': selNow ? 2.5 : 1 }));
+        var nodeR = big ? 13 : 11;
+        if (selNow) { g.appendChild(svgEl('circle', { cx: x, cy: y, r: nodeR + 4, fill: 'none', stroke: '#FFE600', 'stroke-width': 3 })); }
+        g.appendChild(svgEl('circle', { cx: x, cy: y, r: nodeR, fill: f.zone === 'berlin' ? '#1B5E20' : '#7CB342' }));
+        g.appendChild(svgEl('text', { x: x, y: y + 4, fill: '#fff', 'font-size': big ? 12 : 11, 'font-weight': 700, 'text-anchor': 'middle', 'font-family': 'inherit' }, String(idx + 1)));
+        if (big) {
+          var lx = x + (x >= cx ? nodeR + 5 : -(nodeR + 5));
+          var anchor = x >= cx ? 'start' : 'end';
+          g.appendChild(svgEl('text', { x: lx, y: y + 4, fill: '#3c3c30', 'font-size': 12, 'font-weight': 600, 'text-anchor': anchor, 'font-family': 'inherit' }, f.name));
+        }
+        g.addEventListener('click', function () { state.sel = f.k; render(); });
+        svg.appendChild(g);
+      })(ranked[i], i);
+    }
+    host.textContent = '';
+    host.appendChild(svg);
+  }
+
+  function renderDetail() {
+    var f = null;
+    for (var i = 0; i < FORESTS.length; i += 1) { if (FORESTS[i].k === state.sel) { f = FORESTS[i]; } }
+    if (!f) { return; }
+    var el = document.getElementById('mffDetail');
+    var zoneTxt = f.zone === 'berlin'
+      ? 'Berlin city forest: small amounts for personal use are allowed under the Berlin forest law.'
+      : 'Brandenburg forest: the same personal-use rule applies under the Brandenburg forest law.';
+    el.innerHTML =
+      '<h3>' + f.name + '</h3>' +
+      '<div class="mff-sub">' + f.station + ' · about ' + f.min + ' min from Alexanderplatz · ' + f.walk.toLowerCase() + '</div>' +
+      '<div class="mff-badges">' + f.lines.map(function (l) { return '<span class="mff-badge line">' + l + '</span>'; }).join('') +
+      '<span class="mff-badge">' + (f.zone === 'berlin' ? 'Berlin rules' : 'Brandenburg rules') + '</span>' +
+      (f.pine ? '<span class="mff-badge">Pine ground</span>' : '') +
+      (f.lake ? '<span class="mff-badge">Lake nearby</span>' : '') + '</div>' +
+      '<p>' + f.grows + '</p>' +
+      '<p><strong style="color:#FFE600">After the basket:</strong> ' + f.after + '</p>' +
+      '<p style="font-size:.76rem;color:#C5E1A5">' + zoneTxt + '</p>';
+  }
+
+  function renderList() {
+    var host = document.getElementById('mffList');
+    host.innerHTML = ranked.map(function (f, idx) {
+      var cls = 'mff-card' + (matches(f) ? '' : ' dim') + (state.sel === f.k ? ' sel' : '');
+      return '<button type="button" class="' + cls + '" data-k="' + f.k + '">' +
+        '<span class="n">' + (idx + 1) + '</span><span class="nm">' + f.name + '</span>' +
+        '<div class="mt">' + f.station + ' · ' + f.lines.join(' + ') + ' · ~' + f.min + ' min</div></button>';
+    }).join('');
+    var cards = host.querySelectorAll('.mff-card');
+    for (var i = 0; i < cards.length; i += 1) {
+      cards[i].addEventListener('click', function () { state.sel = this.getAttribute('data-k'); render(); });
+    }
+  }
+
+  function render() { drawBoard(); renderDetail(); renderList(); }
+
+  var chipHost = document.getElementById('mffChips');
+  var chips = chipHost.querySelectorAll('.mff-chip');
+  for (var ci = 0; ci < chips.length; ci += 1) {
+    chips[ci].addEventListener('click', function () {
+      var key = this.getAttribute('data-f');
+      var on = this.getAttribute('aria-pressed') === 'true';
+      this.setAttribute('aria-pressed', on ? 'false' : 'true');
+      state.filters[key] = !on;
+      if (key === 'berlin' && state.filters.berlin && state.filters.brandenburg) {
+        state.filters.brandenburg = false;
+        chipHost.querySelector('[data-f="brandenburg"]').setAttribute('aria-pressed', 'false');
+      }
+      if (key === 'brandenburg' && state.filters.brandenburg && state.filters.berlin) {
+        state.filters.berlin = false;
+        chipHost.querySelector('[data-f="berlin"]').setAttribute('aria-pressed', 'false');
+      }
+      render();
+    });
+  }
+
+  var resizeTimer = null;
+  window.addEventListener('resize', function () {
+    if (resizeTimer) { clearTimeout(resizeTimer); }
+    resizeTimer = setTimeout(drawBoard, 150);
+  });
+
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
