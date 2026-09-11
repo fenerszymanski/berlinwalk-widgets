@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "slug": "kleingarten-berlin",
+  "key": "kleingarten-berlin",
+  "config": {
+    "title": "Kleingarten in Berlin - FAQ",
+    "subtitle": "How the waiting lists work, what a plot really costs, and the rules that come with the lease.",
+    "items": [
+      {
+        "q": "How do I get a Kleingarten in Berlin?",
+        "a": "Register with the Bezirksverband der Gartenfreunde for the district where you want the garden. Each district association keeps its own waiting list and offers free plots in the order people registered. Some associations charge a registration fee, for example 20 euros in Spandau and 50 euros in Lichtenberg, and most ask for a Berlin address. When a plot is offered, the association arranges the valuation and the sublease."
+      },
+      {
+        "q": "How long is the waiting list for a Kleingarten in Berlin?",
+        "a": "Years almost everywhere. The Lichtenberg association states at least 3 to 4 years, Spandau estimates around 5 years without commitment, and central districts move slower because they have far fewer plots. Friedrichshain-Kreuzberg has only 228 plots in the whole district, so people living there usually register in a neighbouring district as well."
+      },
+      {
+        "q": "How much does a Kleingarten cost in Berlin?",
+        "a": "Plan two layers. First the one-off takeover: you compensate the leaving tenant for the Laube, trees and plantings at a valuated price, on average around 4,000 euros. Then the running costs: lease, association fee, insurance, water and electricity together average roughly 700 euros a year. The lease itself is small because federal law caps it at four times the local rate for commercial fruit and vegetable growing."
+      },
+      {
+        "q": "Can I live in my Kleingarten Laube?",
+        "a": "No. The federal allotment law limits the Laube to 24 square metres including the covered seating area and says it must not be equipped for permanent living. Colonies enforce this, and a plot used as a cheap flat risks the lease. Overnight stays in summer are tolerated in many colonies, but the garden is legally a garden, not housing."
+      },
+      {
+        "q": "What is the one-third rule in a German allotment garden?",
+        "a": "At least one third of the plot must be used to grow fruit and vegetables. This kleingärtnerische Nutzung is what legally separates a Kleingarten from a leisure plot and keeps the protective law and the low lease in force. Associations check it, and a pure lawn-and-barbecue garden can get a warning."
+      },
+      {
+        "q": "Are Berlin Kleingärten safe from development?",
+        "a": "Much safer since this year. In February 2026 Berlin passed the Kleingartenflächensicherungsgesetz, the first law of its kind in Germany, which permanently secures the colonies on state-owned land, over 56,000 plots. Exceptions need the approval of the state parliament plus replacement land nearby. Colonies on railway land are not covered by that law."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I get a Kleingarten in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Register with the Bezirksverband der Gartenfreunde for the district where you want the garden. Each district association keeps its own waiting list and offers free plots in the order people registered. Some associations charge a registration fee, for example 20 euros in Spandau and 50 euros in Lichtenberg, and most ask for a Berlin address. When a plot is offered, the association arranges the valuation and the sublease."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long is the waiting list for a Kleingarten in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Years almost everywhere. The Lichtenberg association states at least 3 to 4 years, Spandau estimates around 5 years without commitment, and central districts move slower because they have far fewer plots. Friedrichshain-Kreuzberg has only 228 plots in the whole district, so people living there usually register in a neighbouring district as well."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does a Kleingarten cost in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Plan two layers. First the one-off takeover: you compensate the leaving tenant for the Laube, trees and plantings at a valuated price, on average around 4,000 euros. Then the running costs: lease, association fee, insurance, water and electricity together average roughly 700 euros a year. The lease itself is small because federal law caps it at four times the local rate for commercial fruit and vegetable growing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I live in my Kleingarten Laube?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The federal allotment law limits the Laube to 24 square metres including the covered seating area and says it must not be equipped for permanent living. Colonies enforce this, and a plot used as a cheap flat risks the lease. Overnight stays in summer are tolerated in many colonies, but the garden is legally a garden, not housing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the one-third rule in a German allotment garden?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "At least one third of the plot must be used to grow fruit and vegetables. This kleingärtnerische Nutzung is what legally separates a Kleingarten from a leisure plot and keeps the protective law and the low lease in force. Associations check it, and a pure lawn-and-barbecue garden can get a warning."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are Berlin Kleingärten safe from development?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Much safer since this year. In February 2026 Berlin passed the Kleingartenflächensicherungsgesetz, the first law of its kind in Germany, which permanently secures the colonies on state-owned land, over 56,000 plots. Exceptions need the approval of the state parliament plus replacement land nearby. Colonies on railway land are not covered by that law."
+        }
+      }
+    ]
+  }
+}
