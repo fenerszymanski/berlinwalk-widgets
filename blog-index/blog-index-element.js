@@ -26,6 +26,7 @@ const BW_BLOG_INDEX_TOPIC_TAGS = {
   'history-myths': 'CONTEXT · LEGENDS',
   'food-nightlife': 'DÖNER · CLUBS · SPÄTIS',
   'when-to-visit': 'TIMING · SEASONS',
+  'living-in-berlin': 'BILLS · RULES · DISTRICTS',
 };
 
 function bwBlogIndexRedesignOn() {

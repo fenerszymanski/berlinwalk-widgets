@@ -34,6 +34,7 @@ const BW_HEADER_LINKS = {
   blogHistoryMyths: 'https://www.berlinwalk.com/blog#bw-topic-history-myths',
   blogFoodNightlife: 'https://www.berlinwalk.com/blog#bw-topic-food-nightlife',
   blogWhenToVisit: 'https://www.berlinwalk.com/blog#bw-topic-when-to-visit',
+  blogLivingInBerlin: 'https://www.berlinwalk.com/blog#bw-topic-living-in-berlin',
   firstDayRescue: 'https://www.berlinwalk.com/products/berlin-first-day-rescue-plan',
   dateCheck: 'https://www.berlinwalk.com/berlin-dates-check',
   whatsOpen: 'https://www.berlinwalk.com/tools/whats-open-in-berlin-today',
@@ -1145,6 +1146,7 @@ class BWHeaderElement extends HTMLElement {
                     <li><a href="${BW_HEADER_LINKS.blogPractical}">Practical Berlin</a></li>
                     <li><a href="${BW_HEADER_LINKS.blogFoodNightlife}">Food &amp; Nightlife</a></li>
                     <li><a href="${BW_HEADER_LINKS.blogRouteStories}">Tour Route Stories</a></li>
+                    <li><a href="${BW_HEADER_LINKS.blogLivingInBerlin}">Living in Berlin</a></li>
                   </ul>
                 </li>
                 <li class="bw-header-dropdown">
@@ -1211,6 +1213,7 @@ class BWHeaderElement extends HTMLElement {
                 <a href="${BW_HEADER_LINKS.blogPractical}">Practical Berlin</a>
                 <a href="${BW_HEADER_LINKS.blogFoodNightlife}">Food &amp; Nightlife</a>
                 <a href="${BW_HEADER_LINKS.blogRouteStories}">Tour Route Stories</a>
+                <a href="${BW_HEADER_LINKS.blogLivingInBerlin}">Living in Berlin</a>
               </details>
               <details class="bw-header-mobile-section">
                 <summary class="bw-header-mobile-section-label"><a class="bw-header-mobile-section-link" href="${BW_HEADER_LINKS.plan}">Explore Berlin</a></summary>

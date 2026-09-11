@@ -328,6 +328,7 @@
     if (/(route|itinerary|walk|stops|alexanderplatz|hackescher)/.test(path)) return 'tour-route';
     if (/(before|after|then|now|old|rebuilt|changed)/.test(path)) return 'before-after';
     if (/(history|wall|cold-war|reichstag|museum|church|death|nikolaiviertel)/.test(path)) return 'berlin-history';
+    if (/(nebenkosten|bulky-waste|heating-season|bridge-days|bike-theft|dog-parks|mushroom-picking)/.test(path)) return 'living-in-berlin';
     return 'tourist-tips';
   }
 
@@ -339,7 +340,8 @@
       ['tourist-tips', 'Tourist Tips', 'https://www.berlinwalk.com/blog/categories/tourist-tips'],
       ['before-after', 'Before & After', 'https://www.berlinwalk.com/blog/categories/before-after'],
       ['german-language', 'German Language', 'https://www.berlinwalk.com/blog/categories/german-language'],
-      ['berlin-history', 'Berlin History', 'https://www.berlinwalk.com/blog/categories/berlin-history']
+      ['berlin-history', 'Berlin History', 'https://www.berlinwalk.com/blog/categories/berlin-history'],
+      ['living-in-berlin', 'Living in Berlin', 'https://www.berlinwalk.com/blog/categories/living-in-berlin']
     ];
     return links.map(function (link) {
       var cls = 'bw-blog-sidebar-nav-link' + (link[0] === active ? ' bw-blog-sidebar-nav-link-active' : '');

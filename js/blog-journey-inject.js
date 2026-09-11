@@ -935,7 +935,8 @@
     { slug: 'berlin-history', label: 'History', url: 'https://www.berlinwalk.com/blog/categories/berlin-history' },
     { slug: 'berlin-myths', label: 'Berlin Myths', url: 'https://www.berlinwalk.com/blog/categories/berlin-myths' },
     { slug: 'before-after', label: 'Before & After', url: 'https://www.berlinwalk.com/blog/categories/before-after' },
-    { slug: 'german-language', label: 'German Language', url: 'https://www.berlinwalk.com/blog/categories/german-language' }
+    { slug: 'german-language', label: 'German Language', url: 'https://www.berlinwalk.com/blog/categories/german-language' },
+    { slug: 'living-in-berlin', label: 'Living in Berlin', url: 'https://www.berlinwalk.com/blog/categories/living-in-berlin' }
   ];
 
   var TOOL_FALLBACKS = {
@@ -1588,6 +1589,7 @@
     if (/(myth|myths)/.test(path)) return 'berlin-myths';
     if (/(history|wall|cold-war|reichstag|museum|church|death|nikolaiviertel|ampelmann)/.test(path)) return 'berlin-history';
     if (/(route|itinerary|walking-tour|tour-starts|12-stops|hackescher|humboldt|weltzeituhr|berliner-dom)/.test(path)) return 'tour-route';
+    if (/(nebenkosten|bulky-waste|heating-season|bridge-days|bike-theft|dog-parks|mushroom-picking)/.test(path)) return 'living-in-berlin';
     return 'tourist-tips';
   }
 
