@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Berlin Water Hardness Map</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root{
+    --green:#1B5E20; --yellow:#FFE600; --lime:#7CB342; --light:#C5E1A5;
+    --ink:#212121; --paper:#FDFBF4;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Montserrat',-apple-system,'Segoe UI',sans-serif;background:var(--paper);color:var(--ink)}
+  .whm{max-width:760px;margin:0 auto;padding:14px 12px 8px}
+  .whm-head h1{font-size:1.25rem;margin:0 0 4px;color:var(--green)}
+  .whm-head p{margin:0 0 10px;font-size:.9rem;line-height:1.45}
+  .whm-lookup{display:flex;gap:8px;margin:0 0 10px}
+  .whm-lookup input{flex:1;max-width:190px;padding:10px 12px;font-size:1.05rem;border:2px solid var(--green);border-radius:10px;font-family:inherit;letter-spacing:.06em}
+  .whm-lookup input:focus{outline:3px solid var(--lime);outline-offset:1px}
+  .whm-lookup button{padding:10px 18px;font-size:.95rem;font-weight:700;border:0;border-radius:10px;background:var(--yellow);color:#123D18;cursor:pointer;font-family:inherit}
+  .whm-lookup button:hover{background:#f5dc00;color:#123D18}
+  .whm-hint{font-size:.78rem;margin:-4px 0 8px;color:#555}
+  .whm-maprow{position:relative;background:#EAF2E0;border-radius:12px;overflow:hidden}
+  canvas{display:block;width:100%;height:auto;cursor:pointer}
+  .whm-legend{display:flex;align-items:center;gap:6px;font-size:.72rem;padding:6px 10px;background:#fff;border-radius:0 0 12px 12px;border:1px solid #E3E8D9;border-top:0}
+  .whm-ramp{flex:1;max-width:220px;height:10px;border-radius:5px;background:linear-gradient(90deg,#CDE3A8,#7CB342,#33691E,#123D18)}
+  .whm-detail{margin-top:12px;background:#fff;border:1px solid #E3E8D9;border-radius:12px;padding:12px 14px}
+  .whm-detail h2{font-size:1.02rem;margin:0 0 2px;color:var(--green)}
+  .whm-klass{display:inline-block;background:var(--yellow);color:#123D18;font-weight:700;font-size:.78rem;padding:2px 10px;border-radius:999px;margin-left:6px;vertical-align:2px}
+  .whm-range{font-size:.85rem;margin:2px 0 8px}
+  .whm-scale{width:100%;height:auto}
+  .whm-facts{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;margin:8px 0 0;padding:0;list-style:none}
+  .whm-facts b{color:var(--green)}
+  .whm-set{margin:10px 0 0;border-top:2px solid var(--light);padding-top:8px}
+  .whm-set h3{font-size:.9rem;margin:0 0 4px;color:var(--green)}
+  .whm-set ul{margin:0;padding-left:18px;font-size:.84rem;line-height:1.5}
+  .whm-foot{font-size:.7rem;color:#666;margin:10px 0 4px;line-height:1.4}
+  .whm-foot a{color:var(--green)}
+  @media (max-width:430px){
+    .whm-head h1{font-size:1.1rem}
+    .whm-facts{gap:4px 12px}
+  }
+  @media (max-width:340px){
+    .whm-lookup input{max-width:120px;min-width:0;padding:9px 8px;font-size:.95rem}
+    .whm-lookup button{padding:9px 10px;font-size:.85rem}
+    .whm-legend{flex-wrap:wrap}
+  }
+</style>
+</head>
+<body>
+<div class="whm">
+  <div class="whm-head">
+    <h1>Berlin Water Hardness Map</h1>
+    <p>Every Berlin tap runs hard water, but not equally hard. Type your postcode or tap your area to see the official hardness range for your street and the machine settings that follow.</p>
+  </div>
+  <div class="whm-lookup">
+    <input id="whmPlz" type="text" inputmode="numeric" maxlength="5" placeholder="e.g. 10437" aria-label="Your Berlin postcode">
+    <button id="whmGo" type="button">Check my tap</button>
+  </div>
+  <p class="whm-hint">Values are Berliner Wasserbetriebe network medians per postcode. Checked on 11 September 2026.</p>
+  <div class="whm-maprow">
+    <canvas id="whmMap" width="740" height="520" aria-label="Map of Berlin postcodes coloured by water hardness"></canvas>
+  </div>
+  <div class="whm-legend">
+    <span>Softer, around 14&nbsp;&deg;dH</span>
+    <div class="whm-ramp" aria-hidden="true"></div>
+    <span>Hardest, up to 25.7&nbsp;&deg;dH</span>
+  </div>
+  <div class="whm-detail" id="whmDetail" aria-live="polite">
+    <h2 id="whmTitle">Berlin citywide</h2>
+    <p class="whm-range" id="whmRangeText">Official range across all postcodes: 10.3 to 25.7 &deg;dH total hardness. Everything above 14 &deg;dH counts as hard.</p>
+    <svg id="whmScale" class="whm-scale" viewBox="0 0 700 120" role="img" aria-label="Hardness scale from 0 to 26 German degrees with the selected range marked"></svg>
+    <ul class="whm-facts" id="whmFacts"></ul>
+    <div class="whm-set">
+      <h3 id="whmSetTitle">What this means at home</h3>
+      <ul id="whmSetList">
+        <li>Pick a postcode above to get the settings for your own kitchen.</li>
+        <li>All of Berlin sits in the <b>hard</b> class, so the hard-water rules below apply everywhere; only the intensity changes.</li>
+      </ul>
+    </div>
+    <p class="whm-foot">Source: <a href="https://www.bwb.de/de/analysedaten-nach-postleitzahlen.php" target="_blank" rel="noopener">Berliner Wasserbetriebe per-postcode analysis data</a>. The network blends water from nine waterworks, so your tap moves inside the range shown, not on one fixed number.</p>
+  </div>
+</div>
+<script src="../js/brand.js"></script>
+<script>
+(function(){
+  'use strict';
+  var DATA=null, sel=null, features=[], bbox=null;
+  var canvas=document.getElementById('whmMap'), ctx=canvas.getContext('2d');
+  var DPR=Math.min(window.devicePixelRatio||1,2);
+
+  function ghColor(mid){
+    // 14 -> light, 26 -> darkest
+    var t=Math.max(0,Math.min(1,(mid-13.5)/12));
+    var stops=[[205,227,168],[124,179,66],[51,105,30],[18,61,24]];
+    var f=t*(stops.length-1), i=Math.floor(f), r=f-i;
+    var a=stops[i], b=stops[Math.min(i+1,stops.length-1)];
+    return 'rgb('+Math.round(a[0]+(b[0]-a[0])*r)+','+Math.round(a[1]+(b[1]-a[1])*r)+','+Math.round(a[2]+(b[2]-a[2])*r)+')';
+  }
+  function proj(lon,lat){
+    var kx=Math.cos(52.5*Math.PI/180);
+    var x=(lon-bbox.minX)*kx, y=(bbox.maxY-lat);
+    var s=Math.min((canvas.width-16*DPR)/((bbox.maxX-bbox.minX)*kx),(canvas.height-16*DPR)/(bbox.maxY-bbox.minY));
+    return [8*DPR+x*s, 8*DPR+y*s];
+  }
+  function drawMap(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    for(var i=0;i<features.length;i++){
+      var f=features[i], mid=(f.gh[0]+f.gh[1])/2;
+      ctx.beginPath();
+      tracePaths(f);
+      ctx.fillStyle=ghColor(mid);
+      ctx.fill();
+      ctx.strokeStyle='rgba(253,251,244,0.85)';
+      ctx.lineWidth=0.7*DPR;
+      ctx.stroke();
+    }
+    if(sel){
+      ctx.beginPath();
+      tracePaths(sel);
+      ctx.strokeStyle='#FFE600';
+      ctx.lineWidth=3*DPR;
+      ctx.stroke();
+      ctx.strokeStyle='#123D18';
+      ctx.lineWidth=1.2*DPR;
+      ctx.stroke();
+    }
+  }
+  function tracePaths(f){
+    for(var p=0;p<f.polys.length;p++){
+      var poly=f.polys[p];
+      for(var r=0;r<poly.length;r++){
+        var ring=poly[r];
+        for(var k=0;k<ring.length;k++){
+          var pt=proj(ring[k][0],ring[k][1]);
+          if(k===0) ctx.moveTo(pt[0],pt[1]); else ctx.lineTo(pt[0],pt[1]);
+        }
+        ctx.closePath();
+      }
+    }
+  }
+  function inRing(pt,ring){
+    var x=pt[0],y=pt[1],ins=false;
+    for(var i=0,j=ring.length-1;i<ring.length;j=i++){
+      var xi=ring[i][0],yi=ring[i][1],xj=ring[j][0],yj=ring[j][1];
+      if(((yi>y)!==(yj>y)) && (x < (xj-xi)*(y-yi)/(yj-yi)+xi)) ins=!ins;
+    }
+    return ins;
+  }
+  function featureAt(lon,lat){
+    for(var i=0;i<features.length;i++){
+      var f=features[i];
+      for(var p=0;p<f.polys.length;p++){
+        if(inRing([lon,lat],f.polys[p][0])) return f;
+      }
+    }
+    return null;
+  }
+
+  function scaleSvg(f){
+    var W=700,H=120,x0=30,x1=W-16,y=64;
+    var toX=function(v){return x0+(x1-x0)*(v/26);};
+    var s='';
+    // class bands
+    s+='<rect x="'+toX(0)+'" y="'+(y-14)+'" width="'+(toX(8.4)-toX(0))+'" height="28" fill="#EAF2E0"/>';
+    s+='<rect x="'+toX(8.4)+'" y="'+(y-14)+'" width="'+(toX(14)-toX(8.4))+'" height="28" fill="#D9E8C4"/>';
+    s+='<rect x="'+toX(14)+'" y="'+(y-14)+'" width="'+(toX(26)-toX(14))+'" height="28" fill="#C5E1A5"/>';
+    s+='<text x="'+((toX(0)+toX(8.4))/2)+'" y="'+(y-22)+'" text-anchor="middle" font-size="15" fill="#555">soft</text>';
+    s+='<text x="'+((toX(8.4)+toX(14))/2)+'" y="'+(y-22)+'" text-anchor="middle" font-size="15" fill="#555">medium</text>';
+    s+='<text x="'+((toX(14)+toX(26))/2)+'" y="'+(y-22)+'" text-anchor="middle" font-size="15" fill="#33691E" font-weight="700">hard</text>';
+    // axis ticks
+    var ticks=[0,5,10,15,20,25];
+    for(var i=0;i<ticks.length;i++){
+      var tx=toX(ticks[i]);
+      s+='<line x1="'+tx+'" y1="'+(y+14)+'" x2="'+tx+'" y2="'+(y+20)+'" stroke="#999" stroke-width="1"/>';
+      s+='<text x="'+tx+'" y="'+(y+34)+'" text-anchor="middle" font-size="13.5" fill="#666">'+ticks[i]+'</text>';
+    }
+    s+='<text x="'+x1+'" y="'+(y+52)+'" text-anchor="end" font-size="13.5" fill="#666">&deg;dH total hardness</text>';
+    // waterworks dots
+    for(var w=0;w<DATA.works.length;w++){
+      var wx=toX(DATA.works[w].gh);
+      s+='<circle cx="'+wx+'" cy="'+(y+8)+'" r="3.5" fill="#33691E" opacity="0.55"/>';
+    }
+    s+='<text x="'+toX(0)+'" y="'+(y+52)+'" font-size="13.5" fill="#33691E">dots: the nine waterworks, 15.1 to 23.3 &deg;dH</text>';
+    // selected range bar
+    if(f){
+      var a=toX(f.gh[0]), b=toX(f.gh[1]);
+      s+='<rect x="'+a+'" y="'+(y-8)+'" width="'+Math.max(b-a,4)+'" height="16" rx="8" fill="#FFE600" stroke="#123D18" stroke-width="1.5"/>';
+      s+='<text x="'+a+'" y="'+(y-32)+'" text-anchor="start" font-size="16" font-weight="700" fill="#123D18">'+f.gh[0].toFixed(1)+'</text>';
+      s+='<text x="'+b+'" y="'+(y-32)+'" text-anchor="end" font-size="16" font-weight="700" fill="#123D18">'+f.gh[1].toFixed(1)+'</text>';
+    }
+    document.getElementById('whmScale').innerHTML=s;
+  }
+
+  function fmtRange(r){return r?(String(r[0]).replace('.',',')+' to '+String(r[1]).replace('.',',')):'n/a';}
+  function show(f){
+    sel=f; drawMap(); scaleSvg(f);
+    document.getElementById('whmTitle').innerHTML=f?('Postcode '+f.plz+'<span class="whm-klass">'+(f.klass||'hart (3)')+'</span>'):'Berlin citywide';
+    var upper=f?f.gh[1]:25.7;
+    if(f){
+      document.getElementById('whmRangeText').innerHTML='Official total hardness at this postcode: <b>'+fmtRange(f.gh)+' &deg;dH</b>'+(f.kh?(', carbonate hardness '+fmtRange(f.kh)+' &deg;dH'):'')+'. Supply zone '+f.zone+'.';
+      var facts='';
+      facts+='<li><b>pH:</b> '+(f.ph||'7,1 to 7,8')+'</li>';
+      facts+='<li><b>Sodium:</b> '+(f.na||'')+' mg/l</li>';
+      facts+='<li><b>Hardness in mmol/l:</b> about '+(f.gh[0]*0.1783).toFixed(1)+' to '+(f.gh[1]*0.1783).toFixed(1)+'</li>';
+      document.getElementById('whmFacts').innerHTML=facts;
+      document.getElementById('whmSetTitle').textContent='Settings for '+f.plz;
+      document.getElementById('whmSetList').innerHTML=
+        '<li><b>Dishwasher:</b> set the water hardness to about <b>'+Math.round(upper)+' &deg;dH</b>, the upper end of your range, and keep regenerating salt topped up.</li>'+
+        '<li><b>Washing machine:</b> dose detergent from the <b>hard</b> column on the pack. Extra softener products are unnecessary if you dose for hard water.</li>'+
+        '<li><b>Kettle and coffee machine:</b> at this hardness, plan on descaling with citric acid roughly monthly with daily use'+(upper>=20?'; at your postcode the scale builds faster than the Berlin average':'')+'.</li>';
+    }
+    var input=document.getElementById('whmPlz');
+    if(f&&input.value!==f.plz) input.value=f.plz;
+  }
+
+  function lookup(){
+    var v=document.getElementById('whmPlz').value.replace(/\D/g,'');
+    if(v.length<5) return;
+    var f=null;
+    for(var i=0;i<features.length;i++){ if(features[i].plz===v){f=features[i];break;} }
+    if(f){ show(f); }
+    else{
+      document.getElementById('whmTitle').textContent='Postcode '+v;
+      document.getElementById('whmRangeText').innerHTML='That postcode is outside the Berliner Wasserbetriebe data set. Inside Berlin, try the map instead; in Brandenburg, your local supplier publishes its own values.';
+    }
+  }
+
+  fetch('data.json').then(function(r){return r.json();}).then(function(d){
+    DATA=d; features=d.plz;
+    var minX=99,minY=99,maxX=-99,maxY=-99;
+    for(var i=0;i<features.length;i++){
+      var flat=[];
+      for(var p=0;p<features[i].polys.length;p++){
+        for(var r=0;r<features[i].polys[p].length;r++){ flat=flat.concat(features[i].polys[p][r]); }
+      }
+      for(var k=0;k<flat.length;k++){
+        if(flat[k][0]<minX)minX=flat[k][0]; if(flat[k][0]>maxX)maxX=flat[k][0];
+        if(flat[k][1]<minY)minY=flat[k][1]; if(flat[k][1]>maxY)maxY=flat[k][1];
+      }
+    }
+    bbox={minX:minX,minY:minY,maxX:maxX,maxY:maxY};
+    var wrap=canvas.parentElement.clientWidth||740;
+    canvas.width=Math.round(wrap*DPR);
+    canvas.height=Math.round(wrap*0.72*DPR);
+    drawMap(); scaleSvg(null);
+    if(window.BW&&window.BW.resize) window.BW.resize();
+  });
+
+  canvas.addEventListener('click',function(ev){
+    var rect=canvas.getBoundingClientRect();
+    var cx=(ev.clientX-rect.left)*(canvas.width/rect.width);
+    var cy=(ev.clientY-rect.top)*(canvas.height/rect.height);
+    // invert projection
+    var kx=Math.cos(52.5*Math.PI/180);
+    var s=Math.min((canvas.width-16*DPR)/((bbox.maxX-bbox.minX)*kx),(canvas.height-16*DPR)/(bbox.maxY-bbox.minY));
+    var lon=bbox.minX+((cx-8*DPR)/s)/kx;
+    var lat=bbox.maxY-((cy-8*DPR)/s);
+    var f=featureAt(lon,lat);
+    if(f) show(f);
+  });
+  document.getElementById('whmGo').addEventListener('click',lookup);
+  document.getElementById('whmPlz').addEventListener('keydown',function(e){ if(e.key==='Enter') lookup(); });
+  window.addEventListener('resize',function(){
+    if(!bbox) return;
+    var wrap=canvas.parentElement.clientWidth||740;
+    canvas.width=Math.round(wrap*DPR);
+    canvas.height=Math.round(wrap*0.72*DPR);
+    drawMap();
+  });
+})();
+</script>
+</body>
+</html>

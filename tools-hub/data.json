@@ -8735,6 +8735,40 @@
       ],
       "iconStatus": "live-wix-media",
       "cmsItemId": "25289cc8-b3b9-45d4-94d9-b52ea952b606"
+    },
+    {
+      "slug": "berlin-water-hardness-map",
+      "title": "Berlin Water Hardness Map",
+      "lead": "Type your postcode or tap your area on a real map of all 190 Berlin postcodes, coloured with the official Berliner Wasserbetriebe hardness values: read your street's range in German degrees, see it against the soft, medium and hard bands, then take the dishwasher setting, the detergent column and the descaling rhythm that follow.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-water-hardness-map/",
+      "embedHeight": 1250,
+      "image": "https://static.wixstatic.com/media/5a08a3_155fc48b154f4c6b99c576ff4d8d3018~mv2.png",
+      "hubCategory": "Essentials",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "water",
+        "hardness",
+        "limescale",
+        "kalk",
+        "dishwasher",
+        "washing machine",
+        "descaling",
+        "tap water",
+        "living in berlin",
+        "household"
+      ],
+      "aliases": [
+        "berlin water hardness",
+        "wasserhärte berlin",
+        "hard water berlin",
+        "limescale berlin",
+        "berlin tap water hardness",
+        "water hardness by postcode"
+      ],
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "252e4bf7-2575-4b63-b892-670b07088fd4"
     }
   ],
   "hubCategories": [
