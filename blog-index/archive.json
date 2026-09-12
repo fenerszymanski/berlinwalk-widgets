@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-12T08:04:19.276Z",
+  "updatedAt": "2026-09-12T14:23:54.060Z",
   "source": "Wix Blog API",
-  "totalPosts": 376,
+  "totalPosts": 377,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Berlin Parking Zones: When the Meter Stops and What the Resident Permit Covers",
+      "slug": "berlin-parking-zones",
+      "path": "/post/berlin-parking-zones",
+      "url": "https://www.berlinwalk.com/post/berlin-parking-zones",
+      "excerpt": "Berlin runs 103 managed parking zones, and the price is the part people get right. The charged week runs from 45 hours to 105, exactly one zone charges on a Sunday, and two more switch on this autumn. What your zone actually does, and whether the permit is worth it.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-12T14:18:56.176Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_6c3d7d2e92794fd4ad4dc96cc378ea5d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-parking-zones-cover-kopenhagener.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_6c3d7d2e92794fd4ad4dc96cc378ea5d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-parking-zones-cover-kopenhagener.jpg",
+      "alt": "A Berlin residential street in Prenzlauer Berg with cars parked along both kerbs under bare plane trees",
+      "relatedToolSlug": "berlin-parking-zone-clock"
+    },
     {
       "title": "Berlin Public Libraries: What the 10 Euro Card Unlocks and Which Doors Open on Sunday",
       "slug": "berlin-public-libraries",

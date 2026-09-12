@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-12T08:04:19.276Z",
+  "updatedAt": "2026-09-12T14:23:54.060Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 376,
-  "toolsTotal": 296,
+  "totalPosts": 377,
+  "toolsTotal": 297,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -298,23 +298,6 @@
       "relatedToolSlug": "berlin-landmarks-map"
     },
     {
-      "title": "5 Best Döner Kebab Spots in Berlin You Need to Try",
-      "slug": "5-best-döner-kebab-spots-in-berlin-you-need-to-try-in-2026",
-      "path": "/post/5-best-döner-kebab-spots-in-berlin-you-need-to-try-in-2026",
-      "url": "https://www.berlinwalk.com/post/5-best-döner-kebab-spots-in-berlin-you-need-to-try-in-2026",
-      "excerpt": "Discover the 5 best döner kebab spots in Berlin — from cult Gemüse Kebab stands to top-rated yaprak döner shops locals swear by. If you want the most delicious kebab in the city, these places are worth the trip.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "food-nightlife",
-      "topicLabel": "Food & Nightlife",
-      "readTime": "6 min read",
-      "publishedDate": "2026-03-14T19:02:16.557Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_f6946ba54fe44a2ba5ca74e810732917~mv2.jpeg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/DonerBerlin.jpeg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_f6946ba54fe44a2ba5ca74e810732917~mv2.jpeg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/DonerBerlin.jpeg",
-      "alt": "Berlin döner kebab in flatbread with grilled vegetables, chicken meat, fresh salad and garlic sauce",
-      "relatedToolSlug": ""
-    },
-    {
       "title": "Oktoberfest in Berlin 2026: What Is Actually On",
       "slug": "oktoberfest-in-berlin",
       "path": "/post/oktoberfest-in-berlin",
@@ -330,6 +313,23 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_6fbee3dcfb5547b6a5d1ce4d0045d4bb~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-oktoberfest-in-berlin-cover.jpg",
       "alt": "Illuminated Prater Garten sign at dusk on Kastanienallee in Prenzlauer Berg, Berlin's oldest beer garden",
       "relatedToolSlug": "berlin-beer-season-calendar"
+    },
+    {
+      "title": "5 Best Döner Kebab Spots in Berlin You Need to Try",
+      "slug": "5-best-döner-kebab-spots-in-berlin-you-need-to-try-in-2026",
+      "path": "/post/5-best-döner-kebab-spots-in-berlin-you-need-to-try-in-2026",
+      "url": "https://www.berlinwalk.com/post/5-best-döner-kebab-spots-in-berlin-you-need-to-try-in-2026",
+      "excerpt": "Discover the 5 best döner kebab spots in Berlin — from cult Gemüse Kebab stands to top-rated yaprak döner shops locals swear by. If you want the most delicious kebab in the city, these places are worth the trip.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "food-nightlife",
+      "topicLabel": "Food & Nightlife",
+      "readTime": "6 min read",
+      "publishedDate": "2026-03-14T19:02:16.557Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_f6946ba54fe44a2ba5ca74e810732917~mv2.jpeg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/DonerBerlin.jpeg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_f6946ba54fe44a2ba5ca74e810732917~mv2.jpeg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/DonerBerlin.jpeg",
+      "alt": "Berlin döner kebab in flatbread with grilled vegetables, chicken meat, fresh salad and garlic sauce",
+      "relatedToolSlug": ""
     }
   ],
   "shelves": [
@@ -1628,6 +1628,23 @@
       "description": "Berlin for people who live here. City rules, bills, transport, seasons, and the districts beyond the tourist centre.",
       "posts": [
         {
+          "title": "Berlin Parking Zones: When the Meter Stops and What the Resident Permit Covers",
+          "slug": "berlin-parking-zones",
+          "path": "/post/berlin-parking-zones",
+          "url": "https://www.berlinwalk.com/post/berlin-parking-zones",
+          "excerpt": "Berlin runs 103 managed parking zones, and the price is the part people get right. The charged week runs from 45 hours to 105, exactly one zone charges on a Sunday, and two more switch on this autumn. What your zone actually does, and whether the permit is worth it.",
+          "category": "Living in Berlin",
+          "categorySlug": "living-in-berlin",
+          "topic": "living-in-berlin",
+          "topicLabel": "Living in Berlin",
+          "readTime": "8 min read",
+          "publishedDate": "2026-09-12T14:18:56.176Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_6c3d7d2e92794fd4ad4dc96cc378ea5d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-parking-zones-cover-kopenhagener.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_6c3d7d2e92794fd4ad4dc96cc378ea5d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-parking-zones-cover-kopenhagener.jpg",
+          "alt": "A Berlin residential street in Prenzlauer Berg with cars parked along both kerbs under bare plane trees",
+          "relatedToolSlug": "berlin-parking-zone-clock"
+        },
+        {
           "title": "Berlin Public Libraries: What the 10 Euro Card Unlocks and Which Doors Open on Sunday",
           "slug": "berlin-public-libraries",
           "path": "/post/berlin-public-libraries",
@@ -1779,28 +1796,28 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_3f70db1a8c4745d689118079eca889f5~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ostkreuz-bike-racks.jpg",
           "alt": "Two levels of bicycle racks packed with bikes under the railway structure at Bahnhof Ostkreuz in Berlin",
           "relatedToolSlug": "berlin-bike-theft-clock"
-        },
-        {
-          "title": "Berlin Bridge Days 2027: The Brückentage Worth Booking",
-          "slug": "berlin-bridge-days-2027",
-          "path": "/post/berlin-bridge-days-2027",
-          "url": "https://www.berlinwalk.com/post/berlin-bridge-days-2027",
-          "excerpt": "Only six of Berlin’s ten public holidays fall on a working day in 2027, and every one of them lands before 18 May. This is what each bridge day costs in leave, what it returns in days off, and which windows your colleagues with school-age children already have a claim on.",
-          "category": "Living in Berlin",
-          "categorySlug": "living-in-berlin",
-          "topic": "living-in-berlin",
-          "topicLabel": "Living in Berlin",
-          "readTime": "7 min read",
-          "publishedDate": "2026-09-09T19:31:50.921Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_a2c402a057ff4d41a7e3025e73759776~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hauptbahnhof-sbahn.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_a2c402a057ff4d41a7e3025e73759776~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hauptbahnhof-sbahn.jpg",
-          "alt": "An S-Bahn train pulling out of Berlin Hauptbahnhof past an almost empty platform, with the station name sign lit above the tracks",
-          "relatedToolSlug": "berlin-leave-year-planner"
         }
       ]
     }
   ],
   "latest": [
+    {
+      "title": "Berlin Parking Zones: When the Meter Stops and What the Resident Permit Covers",
+      "slug": "berlin-parking-zones",
+      "path": "/post/berlin-parking-zones",
+      "url": "https://www.berlinwalk.com/post/berlin-parking-zones",
+      "excerpt": "Berlin runs 103 managed parking zones, and the price is the part people get right. The charged week runs from 45 hours to 105, exactly one zone charges on a Sunday, and two more switch on this autumn. What your zone actually does, and whether the permit is worth it.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-12T14:18:56.176Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_6c3d7d2e92794fd4ad4dc96cc378ea5d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-parking-zones-cover-kopenhagener.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_6c3d7d2e92794fd4ad4dc96cc378ea5d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-parking-zones-cover-kopenhagener.jpg",
+      "alt": "A Berlin residential street in Prenzlauer Berg with cars parked along both kerbs under bare plane trees",
+      "relatedToolSlug": "berlin-parking-zone-clock"
+    },
     {
       "title": "Berlin Public Libraries: What the 10 Euro Card Unlocks and Which Doors Open on Sunday",
       "slug": "berlin-public-libraries",
@@ -1987,23 +2004,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_5b17ca2df88c4d93b07c866cebde4595~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-berghain-approach.jpg",
       "alt": "The gravel forecourt and fence on the approach to the Berghain and Panorama Bar building in Berlin, with people walking towards the entrance",
       "relatedToolSlug": "berlin-club-door-map"
-    },
-    {
-      "title": "Taking Photos in Berlin: Where the Rules Actually Change",
-      "slug": "taking-photos-in-berlin",
-      "path": "/post/taking-photos-in-berlin",
-      "url": "https://www.berlinwalk.com/post/taking-photos-in-berlin",
-      "excerpt": "Almost nothing in central Berlin is off limits from the street. Then you walk through a door and the rule changes three times inside one building. Here is where photography is fine, where the tripod goes to the cloakroom, which two exhibitions ban cameras outright, and what German law actually says about drones and strangers in your frame.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "history-myths",
-      "topicLabel": "Berlin History & Myths",
-      "readTime": "8 min read",
-      "publishedDate": "2026-09-09T07:43:30.001Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_91ab48f180cc4aa1908075965114fb56~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-humboldt-forum-roof-view.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_91ab48f180cc4aa1908075965114fb56~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-humboldt-forum-roof-view.jpg",
-      "alt": "The view from the Humboldt Forum roof terrace in Berlin over the Lustgarten, the Altes Museum and the domed Berliner Dom",
-      "relatedToolSlug": "berlin-camera-kit-check"
     }
   ]
 }
