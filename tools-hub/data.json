@@ -8837,6 +8837,41 @@
       ],
       "iconStatus": "live-wix-media",
       "cmsItemId": "ef17d40a-70cb-42b9-8473-fdb9b1249c7e"
+    },
+    {
+      "slug": "berlin-parking-zone-clock",
+      "title": "Berlin Parking Zone Clock",
+      "lead": "All 103 managed parking zones in Berlin on one map, repainted for any weekday and hour so you can see which kerbs are charging and which are already free. Pick a zone to read its whole week hour by hour, its tariff, and how long the 20.40 euro resident permit takes to pay for itself there.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-parking-zone-clock/",
+      "embedHeight": 1440,
+      "image": "https://static.wixstatic.com/media/5a08a3_1ffd360f2c7b486d91bb6c05592c1439~mv2.png",
+      "hubCategory": "Transport",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "parking",
+        "parking zones",
+        "anwohnerparken",
+        "resident parking permit",
+        "bewohnerparkausweis",
+        "parkraumbewirtschaftung",
+        "parking fees",
+        "driving in berlin",
+        "living in berlin",
+        "parkschein"
+      ],
+      "aliases": [
+        "berlin parking zones",
+        "berlin parking zone map",
+        "anwohnerparkausweis berlin",
+        "resident parking permit berlin",
+        "berlin parking hours",
+        "when do berlin parking meters stop",
+        "parkraumbewirtschaftung berlin"
+      ],
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "dcd87fe9-9231-4845-8540-c47ba9b33c0a"
     }
   ],
   "hubCategories": [

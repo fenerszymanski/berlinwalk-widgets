@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Parking Zone Clock</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --amber: #E08600;
+    --red: #C62828;
+    --line: #E0E4DA;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .pz { max-width: 780px; margin: 0 auto; padding: 14px 12px 12px; }
+  .pz-head h2 { font-size: 1.08rem; margin: 0; color: var(--green); }
+  .pz-head p { margin: 5px 0 0; font-size: .77rem; line-height: 1.55; color: #555; }
+
+  .pz-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 10px; margin: 13px 0 0; }
+  .pz-controls .pz-wide { grid-column: 1 / -1; }
+  .pz-controls label { display: block; font-size: .63rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--deep); margin: 0 0 4px; }
+  .pz-controls select {
+    font: inherit; font-size: .81rem; font-weight: 600; color: var(--deep);
+    width: 100%; padding: 8px 9px; border-radius: 9px; border: 2px solid var(--green);
+    background: #fff; cursor: pointer; min-height: 40px;
+  }
+
+  .pz-now { margin: 12px 0 0; padding: 9px 11px; border-radius: 9px; background: #fff; border: 1px solid var(--line); font-size: .82rem; line-height: 1.5; color: #444; }
+  .pz-now strong { color: var(--deep); font-variant-numeric: tabular-nums; }
+
+  .pz-stage { display: grid; grid-template-columns: 1fr 268px; gap: 13px; margin-top: 11px; align-items: start; }
+  @media (max-width: 680px) { .pz-stage { grid-template-columns: 1fr; } }
+
+  .pz-card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 7px; }
+  .pz-canvas { display: block; width: 100%; height: auto; border-radius: 8px; cursor: pointer; }
+  .pz-weekcanvas { display: block; width: 100%; height: auto; border-radius: 6px; }
+  .pz-legend { display: flex; flex-wrap: wrap; gap: 9px; margin: 7px 3px 2px; font-size: .67rem; color: #555; }
+  .pz-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .pz-swatch { width: 12px; height: 12px; border-radius: 3px; border: 1px solid rgba(0,0,0,.22); }
+  .pz-side { min-width: 0; display: grid; gap: 11px; }
+  .pz-weekhead { margin: 0 0 6px; font-size: .63rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--deep); }
+
+  .pz-detail { padding: 12px 13px; border-radius: 11px; background: var(--yellow); color: var(--deep); }
+  .pz-detail h3 { margin: 0 0 3px; font-size: .95rem; color: var(--deep); line-height: 1.3; }
+  .pz-where { margin: 0 0 8px; font-size: .74rem; line-height: 1.45; color: #3A4A2E; }
+  .pz-facts { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; }
+  .pz-facts li { font-size: .8rem; line-height: 1.45; color: var(--deep); display: flex; justify-content: space-between; gap: 10px; }
+  .pz-facts li span:last-child { font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+  .pz-verdict { margin: 9px 0 0; padding-top: 8px; border-top: 2px solid rgba(18,61,24,.28); font-size: .81rem; line-height: 1.5; color: var(--deep); font-weight: 600; }
+
+  .pz-foot { margin: 11px 0 0; font-size: .68rem; line-height: 1.6; color: #777; }
+</style>
+</head>
+<body>
+<div class="pz">
+  <div class="pz-head">
+    <h2>Berlin Parking Zone Clock</h2>
+    <p>All <strong id="pzCount">103</strong> managed parking zones in Berlin, with the hour each one actually stops charging. Pick a moment and the map repaints. Tap a zone on the map to read its week.</p>
+  </div>
+
+  <div class="pz-controls">
+    <div class="pz-wide">
+      <label for="pzZone">Zone</label>
+      <select id="pzZone"></select>
+    </div>
+    <div>
+      <label for="pzDay">Day</label>
+      <select id="pzDay"></select>
+    </div>
+    <div>
+      <label for="pzHour">Hour</label>
+      <select id="pzHour"></select>
+    </div>
+  </div>
+
+  <p class="pz-now" id="pzNow"></p>
+
+  <div class="pz-stage">
+    <div class="pz-card">
+      <canvas id="pzMap" class="pz-canvas" width="1040" height="880"></canvas>
+      <div class="pz-legend">
+        <span><i class="pz-swatch" style="background:#7CB342"></i> charging, 2 euro/h</span>
+        <span><i class="pz-swatch" style="background:#E08600"></i> 3 euro/h</span>
+        <span><i class="pz-swatch" style="background:#C62828"></i> 4 euro/h</span>
+        <span><i class="pz-swatch" style="background:#DCE3D4"></i> free at this hour</span>
+      </div>
+    </div>
+    <div class="pz-side">
+      <div class="pz-card">
+        <p class="pz-weekhead" id="pzWeekHead">The selected zone, hour by hour</p>
+        <canvas id="pzWeek" class="pz-weekcanvas" width="536" height="320"></canvas>
+      </div>
+      <div class="pz-detail">
+        <h3 id="pzTitle">Zone</h3>
+        <p class="pz-where" id="pzWhere"></p>
+        <ul class="pz-facts" id="pzFacts"></ul>
+        <p class="pz-verdict" id="pzVerdict"></p>
+      </div>
+    </div>
+  </div>
+
+  <p class="pz-foot" id="pzFoot"></p>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  var DAYS_SHORT = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  var FEE_COLOUR = { 2: '#7CB342', 3: '#E08600', 4: '#C62828' };
+  var OFF_FILL = '#DCE3D4';
+  var OFF_STROKE = '#B4C0A6';
+
+  var zoneEl = document.getElementById('pzZone');
+  var dayEl = document.getElementById('pzDay');
+  var hourEl = document.getElementById('pzHour');
+  var nowEl = document.getElementById('pzNow');
+  var mapEl = document.getElementById('pzMap');
+  var weekEl = document.getElementById('pzWeek');
+  var weekHeadEl = document.getElementById('pzWeekHead');
+  var titleEl = document.getElementById('pzTitle');
+  var whereEl = document.getElementById('pzWhere');
+  var factsEl = document.getElementById('pzFacts');
+  var verdictEl = document.getElementById('pzVerdict');
+  var footEl = document.getElementById('pzFoot');
+  var countEl = document.getElementById('pzCount');
+
+  var DATA = null;
+  var picked = 0;
+  var day = 0;
+  var hour = 12;
+  var proj = null;
+
+  /* ---------- small helpers ---------- */
+
+  function topFee(z) { return Array.isArray(z.f) ? z.f[1] : z.f; }
+  function lowFee(z) { return Array.isArray(z.f) ? z.f[0] : z.f; }
+  function feeText(z) { return Array.isArray(z.f) ? z.f[0].toFixed(2) + ' to ' + z.f[1].toFixed(2) + ' euro' : z.f.toFixed(2) + ' euro'; }
+  function hourText(h) { return (h < 10 ? '0' + h : h) + ':00'; }
+
+  function isCharging(z, d, h) {
+    var w = z.h[d];
+    return !!w && h >= w[0] && h < w[1];
+  }
+
+  // Two zones carry a district suffix in the official record ("51-Arena Süd"),
+  // so keep the number and let the name say the rest.
+  function zoneNumber(z) { return z.z.split('-')[0]; }
+
+  function zoneLabel(z) {
+    var head = 'Zone ' + zoneNumber(z);
+    if (z.n) head += ' · ' + z.n;
+    else if (z.s.length) head += ' · ' + z.s[0];
+    return head;
+  }
+
+  /* ---------- Berlin clock, so the default is the reader's actual moment ---------- */
+
+  function berlinNow() {
+    var parts;
+    try {
+      parts = new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Europe/Berlin', weekday: 'short', hour: '2-digit', hour12: false
+      }).formatToParts(new Date());
+    } catch (e) {
+      var local = new Date();
+      return { d: (local.getDay() + 6) % 7, h: local.getHours() };
+    }
+    var wd = 'Mon', hh = '12';
+    parts.forEach(function (p) {
+      if (p.type === 'weekday') wd = p.value;
+      if (p.type === 'hour') hh = p.value;
+    });
+    var idx = DAYS_SHORT.indexOf(wd);
+    return { d: idx < 0 ? 0 : idx, h: Math.min(23, parseInt(hh, 10) || 0) };
+  }
+
+  /* ---------- projection ---------- */
+
+  function buildProjection(w, h) {
+    var minx = 180, maxx = -180, miny = 90, maxy = -90;
+    DATA.districts.forEach(function (d) {
+      d.g.forEach(function (ring) {
+        ring.forEach(function (p) {
+          if (p[0] < minx) minx = p[0];
+          if (p[0] > maxx) maxx = p[0];
+          if (p[1] < miny) miny = p[1];
+          if (p[1] > maxy) maxy = p[1];
+        });
+      });
+    });
+    var k = Math.cos(((miny + maxy) / 2) * Math.PI / 180);
+    var spanX = (maxx - minx) * k;
+    var spanY = maxy - miny;
+    var pad = 10;
+    var scale = Math.min((w - pad * 2) / spanX, (h - pad * 2) / spanY);
+    var offX = (w - spanX * scale) / 2;
+    var offY = (h - spanY * scale) / 2;
+    return function (lon, lat) {
+      return [offX + (lon - minx) * k * scale, offY + (maxy - lat) * scale];
+    };
+  }
+
+  function tracePath(ctx, ring) {
+    for (var i = 0; i < ring.length; i++) {
+      var p = proj(ring[i][0], ring[i][1]);
+      if (i === 0) ctx.moveTo(p[0], p[1]); else ctx.lineTo(p[0], p[1]);
+    }
+    ctx.closePath();
+  }
+
+  /* ---------- the map ---------- */
+
+  function drawMap() {
+    var ctx = mapEl.getContext('2d');
+    var w = mapEl.width, h = mapEl.height;
+    proj = buildProjection(w, h);
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = '#F4F6F0';
+    ctx.fillRect(0, 0, w, h);
+
+    DATA.districts.forEach(function (d) {
+      var hasZones = DATA.zones.some(function (z) { return z.d === d.n; });
+      ctx.beginPath();
+      d.g.forEach(function (ring) { tracePath(ctx, ring); });
+      ctx.fillStyle = hasZones ? '#E8EDE1' : '#F0F1EC';
+      ctx.fill();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = hasZones ? '#C2CDB4' : '#DDE0D6';
+      ctx.stroke();
+    });
+
+    // Quiet zones first, so the live ones sit on top.
+    [false, true].forEach(function (live) {
+      DATA.zones.forEach(function (z, i) {
+        if (isCharging(z, day, hour) !== live) return;
+        ctx.beginPath();
+        z.g.forEach(function (ring) { tracePath(ctx, ring); });
+        ctx.fillStyle = live ? FEE_COLOUR[topFee(z)] || '#E08600' : OFF_FILL;
+        ctx.globalAlpha = live ? 0.9 : 0.95;
+        ctx.fill();
+        ctx.globalAlpha = 1;
+        ctx.lineWidth = i === picked ? 5 : 1.4;
+        ctx.strokeStyle = i === picked ? '#123D18' : (live ? 'rgba(18,61,24,.5)' : OFF_STROKE);
+        ctx.stroke();
+      });
+    });
+
+    // A leader ring around the chosen zone, because some zones are a few blocks wide.
+    var sel = DATA.zones[picked];
+    var c = proj(sel.c[0], sel.c[1]);
+    [[44, 7, '#FFE600'], [44, 3, '#123D18']].forEach(function (ring) {
+      ctx.beginPath();
+      ctx.arc(c[0], c[1], ring[0], 0, Math.PI * 2);
+      ctx.lineWidth = ring[1];
+      ctx.strokeStyle = ring[2];
+      ctx.stroke();
+    });
+  }
+
+  /* ---------- the selected zone's whole week ---------- */
+
+  function drawWeek() {
+    var ctx = weekEl.getContext('2d');
+    var w = weekEl.width, h = weekEl.height;
+    var z = DATA.zones[picked];
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, w, h);
+
+    var left = 62, top = 26, right = 10, bottom = 20;
+    var gw = (w - left - right) / 24;
+    var gh = (h - top - bottom) / 7;
+
+    ctx.font = '600 15px Montserrat, sans-serif';
+    ctx.fillStyle = '#666';
+    ctx.textBaseline = 'middle';
+    [0, 6, 9, 12, 15, 18, 21, 24].forEach(function (t) {
+      ctx.textAlign = 'center';
+      ctx.fillText(t === 24 ? '24' : String(t), left + t * gw, 13);
+    });
+
+    var colour = FEE_COLOUR[topFee(z)] || '#E08600';
+    for (var d = 0; d < 7; d++) {
+      var y = top + d * gh;
+      ctx.textAlign = 'right';
+      ctx.fillStyle = d === day ? '#123D18' : '#777';
+      ctx.font = (d === day ? '700 ' : '500 ') + '15px Montserrat, sans-serif';
+      ctx.fillText(DAYS_SHORT[d], left - 9, y + gh / 2);
+      for (var t2 = 0; t2 < 24; t2++) {
+        var on = isCharging(z, d, t2);
+        ctx.fillStyle = on ? colour : '#EFF2EA';
+        ctx.fillRect(left + t2 * gw + 0.8, y + 1.2, gw - 1.6, gh - 2.4);
+      }
+    }
+
+    // The chosen moment.
+    var mx = left + hour * gw;
+    ctx.strokeStyle = '#123D18';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(mx, top - 6);
+    ctx.lineTo(mx, top + 7 * gh + 4);
+    ctx.stroke();
+    ctx.fillStyle = '#123D18';
+    ctx.fillRect(left + hour * gw + 0.8, top + day * gh + 1.2, gw - 1.6, 3);
+    ctx.fillRect(left + hour * gw + 0.8, top + (day + 1) * gh - 4.2, gw - 1.6, 3);
+
+    ctx.textAlign = 'left';
+    ctx.font = '500 14px Montserrat, sans-serif';
+    ctx.fillStyle = '#888';
+    ctx.fillText('hour of the day', left, h - 8);
+  }
+
+  /* ---------- readouts ---------- */
+
+  function render() {
+    var z = DATA.zones[picked];
+    var liveNow = DATA.zones.filter(function (q) { return isCharging(q, day, hour); });
+    var total = DATA.zones.length;
+
+    nowEl.innerHTML = 'At <strong>' + hourText(hour) + ' on ' + DAYS[day] + '</strong>, '
+      + '<strong>' + liveNow.length + '</strong> of ' + total + ' zones are charging and '
+      + '<strong>' + (total - liveNow.length) + '</strong> are free.';
+
+    titleEl.textContent = zoneLabel(z);
+    whereEl.textContent = z.d + ' · ' + (z.s.length ? 'around ' + z.s.join(', ') : 'see the map');
+
+    var charging = isCharging(z, day, hour);
+    var hoursWeek = z.h.reduce(function (sum, win) { return sum + (win ? win[1] - win[0] : 0); }, 0);
+    var closes = z.h[day] ? hourText(z.h[day][1]) : null;
+    var payDays = z.h.filter(function (win) { return !!win; }).length;
+
+    factsEl.innerHTML = ''
+      + row('Right now', charging ? 'paying, until ' + closes : 'free')
+      + row('Tariff', feeText(z) + ' an hour')
+      + row('Official hours', z.t)
+      + row('Charged days', payDays + ' of 7')
+      + row('Charged hours a week', hoursWeek + ' h');
+
+    var fee = topFee(z);
+    var breakEven = DATA.meta.permitFee / fee;
+    var bh = Math.floor(breakEven);
+    var bm = Math.round((breakEven - bh) * 60);
+    verdictEl.textContent = 'A resident permit here costs ' + DATA.meta.permitFee.toFixed(2)
+      + ' euro for two years, which is what ' + bh + ' hours ' + bm + ' minutes at this meter costs once.';
+
+    weekHeadEl.textContent = 'Zone ' + zoneNumber(z) + ', hour by hour';
+    drawMap();
+    drawWeek();
+  }
+
+  function row(k, v) {
+    return '<li><span>' + k + '</span><span>' + v + '</span></li>';
+  }
+
+  /* ---------- controls ---------- */
+
+  function buildZoneSelect() {
+    var groups = {};
+    var order = [];
+    DATA.zones.forEach(function (z, i) {
+      if (!groups[z.d]) { groups[z.d] = []; order.push(z.d); }
+      groups[z.d].push(i);
+    });
+    order.sort();
+    var html = '';
+    order.forEach(function (d) {
+      html += '<optgroup label="' + d + '">';
+      groups[d].forEach(function (i) {
+        var z = DATA.zones[i];
+        var extra = z.s.length ? ' — ' + z.s.slice(0, 2).join(', ') : '';
+        html += '<option value="' + i + '">' + zoneLabel(z) + extra + '</option>';
+      });
+      html += '</optgroup>';
+    });
+    zoneEl.innerHTML = html;
+  }
+
+  function buildTimeSelects() {
+    var dh = '';
+    DAYS.forEach(function (name, i) { dh += '<option value="' + i + '">' + name + '</option>'; });
+    dayEl.innerHTML = dh;
+    var hh = '';
+    for (var t = 0; t < 24; t++) hh += '<option value="' + t + '">' + hourText(t) + '</option>';
+    hourEl.innerHTML = hh;
+  }
+
+  zoneEl.addEventListener('change', function () { picked = parseInt(zoneEl.value, 10) || 0; render(); });
+  dayEl.addEventListener('change', function () { day = parseInt(dayEl.value, 10) || 0; render(); });
+  hourEl.addEventListener('change', function () { hour = parseInt(hourEl.value, 10) || 0; render(); });
+
+  function pointInRing(x, y, ring) {
+    var inside = false;
+    for (var i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+      var xi = ring[i][0], yi = ring[i][1], xj = ring[j][0], yj = ring[j][1];
+      if (((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi)) inside = !inside;
+    }
+    return inside;
+  }
+
+  mapEl.addEventListener('click', function (ev) {
+    if (!DATA || !proj) return;
+    var r = mapEl.getBoundingClientRect();
+    var x = (ev.clientX - r.left) * (mapEl.width / r.width);
+    var y = (ev.clientY - r.top) * (mapEl.height / r.height);
+    var hit = -1, best = 1e9;
+    for (var i = 0; i < DATA.zones.length; i++) {
+      var z = DATA.zones[i];
+      for (var g = 0; g < z.g.length; g++) {
+        var screenRing = z.g[g].map(function (p) { return proj(p[0], p[1]); });
+        if (pointInRing(x, y, screenRing)) { hit = i; best = -1; break; }
+      }
+      if (best === -1) break;
+      var c = proj(z.c[0], z.c[1]);
+      var d2 = (c[0] - x) * (c[0] - x) + (c[1] - y) * (c[1] - y);
+      if (d2 < best && d2 < 900) { best = d2; hit = i; }
+    }
+    if (hit < 0) return;
+    picked = hit;
+    zoneEl.value = String(hit);
+    render();
+  });
+
+  window.addEventListener('resize', function () { if (DATA) { drawMap(); drawWeek(); } });
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (json) {
+    DATA = json;
+    countEl.textContent = String(DATA.meta.zoneCount);
+    var now = berlinNow();
+    day = now.d;
+    hour = now.h;
+    picked = 0;
+    for (var i = 0; i < DATA.zones.length; i++) { if (DATA.zones[i].z === '29') { picked = i; break; } }
+    buildZoneSelect();
+    buildTimeSelects();
+    zoneEl.value = String(picked);
+    dayEl.value = String(day);
+    hourEl.value = String(hour);
+    footEl.textContent = 'Zone outlines, enforcement hours and tariffs come from the Berlin Senate Department for Mobility, Transport, Climate Protection and the Environment, last revised '
+      + DATA.meta.dataDate + ' and checked on ' + DATA.meta.checkedOn + '. '
+      + DATA.meta.districtCount + ' of Berlin’s 12 districts run managed zones. Street names are added from OpenStreetMap to help you find your zone and are not part of the official record. '
+      + 'Fees and hours can differ on short stretches inside a zone, so the sign at the kerb is what counts.';
+    render();
+  });
+})();
+</script>
+</body>
+</html>
