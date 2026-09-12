@@ -1,0 +1,406 @@
+{
+  "checkedOn": "12 September 2026",
+  "libraries": [
+    {
+      "id": "agb",
+      "short": "AGB Blücherplatz",
+      "district": "Kreuzberg (ZLB)",
+      "name": "Amerika-Gedenkbibliothek (ZLB)",
+      "address": "Blücherplatz 1, 10961 Berlin",
+      "lat": 52.498,
+      "lon": 13.391,
+      "hours": {
+        "mon": "10:00-21:00",
+        "tue": "10:00-21:00",
+        "wed": "10:00-21:00",
+        "thu": "10:00-21:00",
+        "fri": "10:00-21:00",
+        "sat": "10:00-19:00",
+        "sun": "11:00-17:00"
+      },
+      "note": "Sundays run as SoAGB: doors and events, no librarian consultation.",
+      "selfService": [
+        "sun"
+      ]
+    },
+    {
+      "id": "bstb",
+      "short": "Berliner Stadtbibliothek",
+      "district": "Mitte (ZLB)",
+      "name": "Berliner Stadtbibliothek (ZLB)",
+      "address": "Breite Straße 30-36, 10178 Berlin",
+      "lat": 52.5148,
+      "lon": 13.404,
+      "hours": {
+        "mon": "10:00-21:00",
+        "tue": "10:00-21:00",
+        "wed": "10:00-21:00",
+        "thu": "10:00-21:00",
+        "fri": "10:00-21:00",
+        "sat": "10:00-19:00",
+        "sun": "closed"
+      },
+      "note": "The quieter ZLB house, behind the Fritz Kühn portal.",
+      "selfService": []
+    },
+    {
+      "id": "stabi",
+      "short": "Staatsbibliothek (2 houses)",
+      "district": "Mitte / Tiergarten",
+      "name": "Staatsbibliothek zu Berlin",
+      "address": "Potsdamer Straße 33 and Unter den Linden 8",
+      "lat": 52.5075,
+      "lon": 13.37,
+      "hours": {
+        "mon": "08:00-22:00",
+        "tue": "08:00-22:00",
+        "wed": "08:00-22:00",
+        "thu": "08:00-22:00",
+        "fri": "08:00-22:00",
+        "sat": "08:00-22:00",
+        "sun": "10:00-18:00"
+      },
+      "note": "Research library: reading rooms, own free card, no children's section. Same hours at both houses; Sunday runs without the service desk.",
+      "selfService": [
+        "sun"
+      ]
+    },
+    {
+      "id": "bezirkszentralbibliothek-philipp-schaeff",
+      "short": "Philipp Schaeffer (Mitte)",
+      "district": "Mitte",
+      "name": "Bezirkszentralbibliothek Philipp Schaeffer",
+      "address": "Brunnenstr. 181, 10119 Berlin",
+      "lat": 52.53171,
+      "lon": 13.39849,
+      "hours": {
+        "mon": "10:00-19:30",
+        "tue": "10:00-19:30",
+        "wed": "10:00-19:30",
+        "thu": "10:00-19:30",
+        "fri": "10:00-19:30",
+        "sat": "10:00-14:00",
+        "sun": "closed"
+      },
+      "note": "No Sunday opening.",
+      "selfService": []
+    },
+    {
+      "id": "bezirkszentralbibliothek-pablo-neruda",
+      "short": "Pablo Neruda (F'hain)",
+      "district": "Friedrichshain-Kreuzberg",
+      "name": "Bezirkszentralbibliothek Pablo Neruda",
+      "address": "Frankfurter Allee 14A, 10247 Berlin",
+      "lat": 52.51455,
+      "lon": 13.45705,
+      "hours": {
+        "mon": "10:00-19:00",
+        "tue": "10:00-19:00",
+        "wed": "10:00-19:00",
+        "thu": "10:00-19:00",
+        "fri": "10:00-17:00",
+        "sat": "10:00-15:00",
+        "sun": "10:00-19:00"
+      },
+      "note": "Sunday open year-round, self-service only (lending/returns with card, no consultations).",
+      "selfService": [
+        "sun"
+      ]
+    },
+    {
+      "id": "heinrich-boell-bibliothek",
+      "short": "Heinrich Böll (Pankow)",
+      "district": "Pankow",
+      "name": "Heinrich-Böll-Bibliothek",
+      "address": "Greifswalder Str. 87, 10409 Berlin",
+      "lat": 52.54182,
+      "lon": 13.44085,
+      "hours": {
+        "mon": "09:00-19:00",
+        "tue": "09:00-19:00",
+        "wed": "13:00-19:00",
+        "thu": "09:00-19:00",
+        "fri": "09:00-19:00",
+        "sat": "10:00-19:00",
+        "sun": "10:00-19:00"
+      },
+      "note": "Early weekday hour and Sunday run without staff (Open Library).",
+      "selfService": [
+        "sun"
+      ]
+    },
+    {
+      "id": "heinrich-schulz-bibliothek",
+      "short": "Heinrich Schulz (Charl.)",
+      "district": "Charlottenburg-Wilmersdorf",
+      "name": "Heinrich-Schulz-Bibliothek",
+      "address": "Otto-Suhr-Allee 98, 10585 Berlin",
+      "lat": 52.51711,
+      "lon": 13.30887,
+      "hours": {
+        "mon": "10:00-19:00",
+        "tue": "10:00-19:00",
+        "wed": "10:00-19:00",
+        "thu": "10:00-19:00",
+        "fri": "10:00-19:00",
+        "sat": "11:00-19:00",
+        "sun": "12:00-18:00"
+      },
+      "note": "Sunday and late Saturday without professional staff: no registrations, PCs or copying.",
+      "selfService": [
+        "sun"
+      ]
+    },
+    {
+      "id": "bezirkszentralbibliothek-spandau",
+      "short": "BZB Spandau",
+      "district": "Spandau",
+      "name": "Bezirkszentralbibliothek Spandau",
+      "address": "Carl-Schurz-Str. 13, 13597 Berlin",
+      "lat": 52.53613,
+      "lon": 13.20139,
+      "hours": {
+        "mon": "10:00-19:00",
+        "tue": "10:00-19:00",
+        "wed": "10:00-19:00",
+        "thu": "10:00-19:00",
+        "fri": "10:00-19:00",
+        "sat": "10:00-18:00",
+        "sun": "10:00-18:00"
+      },
+      "note": "Sunday fully self-checkout, no registrations or printing.",
+      "selfService": [
+        "sun"
+      ]
+    },
+    {
+      "id": "ingeborg-drewitz-bibliothek",
+      "short": "Ingeborg Drewitz (Stegl.)",
+      "district": "Steglitz-Zehlendorf",
+      "name": "Ingeborg-Drewitz-Bibliothek",
+      "address": "Grunewaldstr. 3, 12165 Berlin",
+      "lat": 52.45778,
+      "lon": 13.31963,
+      "hours": {
+        "mon": "11:00-19:00",
+        "tue": "11:00-19:00",
+        "wed": "11:00-19:00",
+        "thu": "11:00-19:00",
+        "fri": "11:00-19:00",
+        "sat": "11:00-16:00",
+        "sun": "closed"
+      },
+      "note": "Inside Das Schloss shopping centre, 3rd floor. No Sunday opening.",
+      "selfService": []
+    },
+    {
+      "id": "bibliothek-tempelhof-eva-maria-buch-haus",
+      "short": "Bibliothek Tempelhof",
+      "district": "Tempelhof-Schöneberg",
+      "name": "Bibliothek Tempelhof (Eva-Maria-Buch-Haus)",
+      "address": "Götzstr. 8-12, 12099 Berlin",
+      "lat": 52.46378,
+      "lon": 13.38778,
+      "hours": {
+        "mon": "10:00-19:00",
+        "tue": "10:00-19:00",
+        "wed": "10:00-19:00",
+        "thu": "10:00-19:00",
+        "fri": "10:00-19:00",
+        "sat": "10:00-19:00",
+        "sun": "11:00-17:00"
+      },
+      "note": "Sunday and late Saturday self-service only.",
+      "selfService": [
+        "sun"
+      ]
+    },
+    {
+      "id": "helene-nathan-bibliothek",
+      "short": "Helene Nathan (Neukölln)",
+      "district": "Neukölln",
+      "name": "Helene-Nathan-Bibliothek",
+      "address": "Karl-Marx-Str. 66, 12043 Berlin",
+      "lat": 52.48201,
+      "lon": 13.43329,
+      "hours": {
+        "mon": "11:00-18:00",
+        "tue": "11:00-20:00",
+        "wed": "11:00-18:00",
+        "thu": "11:00-20:00",
+        "fri": "11:00-18:00",
+        "sat": "10:00-13:00",
+        "sun": "closed"
+      },
+      "note": "Inside Neukölln Arcaden. No Sunday opening.",
+      "selfService": []
+    },
+    {
+      "id": "mittelpunktbibliothek-koepenick",
+      "short": "Köpenick Alter Markt",
+      "district": "Treptow-Köpenick",
+      "name": "Mittelpunktbibliothek Köpenick",
+      "address": "Alter Markt 2, 12555 Berlin",
+      "lat": 52.44588,
+      "lon": 13.57904,
+      "hours": {
+        "mon": "10:00-19:00",
+        "tue": "10:00-19:00",
+        "wed": "13:00-19:00",
+        "thu": "10:00-19:00",
+        "fri": "10:00-19:00",
+        "sat": "10:00-19:00",
+        "sun": "11:00-17:00"
+      },
+      "note": "Sunday without professional staff.",
+      "selfService": [
+        "sun"
+      ]
+    },
+    {
+      "id": "bezirkszentralbibliothek-mark-twain",
+      "short": "Mark Twain (Marzahn)",
+      "district": "Marzahn-Hellersdorf",
+      "name": "Bezirkszentralbibliothek Mark Twain",
+      "address": "Marzahner Promenade 54/55, 12679 Berlin",
+      "lat": 52.54677,
+      "lon": 13.55672,
+      "hours": {
+        "mon": "10:00-19:30",
+        "tue": "10:00-19:30",
+        "wed": "14:00-19:30",
+        "thu": "10:00-19:30",
+        "fri": "10:00-19:30",
+        "sat": "10:00-14:00",
+        "sun": "closed"
+      },
+      "note": "No Sunday opening.",
+      "selfService": []
+    },
+    {
+      "id": "anna-seghers-bibliothek",
+      "short": "Anna Seghers (Lichtenb.)",
+      "district": "Lichtenberg",
+      "name": "Anna-Seghers-Bibliothek",
+      "address": "Prerower Platz 2, 13051 Berlin",
+      "lat": 52.56498,
+      "lon": 13.50612,
+      "hours": {
+        "mon": "09:00-19:00",
+        "tue": "09:00-19:00",
+        "wed": "13:00-19:00",
+        "thu": "09:00-18:00",
+        "fri": "09:00-18:00",
+        "sat": "09:00-19:00",
+        "sun": "closed"
+      },
+      "note": "Inside Linden-Center, closed Sundays with the mall. Saturday runs to 19:00 since 22 August 2026.",
+      "selfService": []
+    },
+    {
+      "id": "humboldt-bibliothek",
+      "short": "Humboldt-Bibl. (Tegel)",
+      "district": "Reinickendorf",
+      "name": "Humboldt-Bibliothek",
+      "address": "Karolinenstr. 19, 13507 Berlin",
+      "lat": 52.59194,
+      "lon": 13.2806,
+      "hours": {
+        "mon": "11:00-19:00",
+        "tue": "11:00-19:00",
+        "wed": "11:00-19:00",
+        "thu": "11:00-19:00",
+        "fri": "11:00-19:00",
+        "sat": "11:00-16:00",
+        "sun": "closed"
+      },
+      "note": "No Sunday opening.",
+      "selfService": []
+    },
+    {
+      "id": "bonhoeffer",
+      "short": "D. Bonhoeffer (Wilm.)",
+      "district": "Charlottenburg-Wilmersdorf",
+      "name": "Dietrich-Bonhoeffer-Bibliothek",
+      "address": "Brandenburgische Str. 2, 10713 Berlin",
+      "lat": 52.48721,
+      "lon": 13.32004,
+      "hours": {
+        "mon": "10:00-19:00",
+        "tue": "10:00-19:00",
+        "wed": "10:00-19:00",
+        "thu": "10:00-19:00",
+        "fri": "10:00-19:00",
+        "sat": "11:00-16:00",
+        "sun": "12:00-16:00"
+      },
+      "note": "New Sunday hours since September, run with volunteers: self-checkout, WLAN and seats, no staff or printers.",
+      "selfService": [
+        "sun"
+      ]
+    },
+    {
+      "id": "saefkow",
+      "short": "Anton Saefkow (Lichtenb.)",
+      "district": "Lichtenberg",
+      "name": "Anton-Saefkow-Bibliothek",
+      "address": "Anton-Saefkow-Platz 14, 10369 Berlin",
+      "lat": 52.53063,
+      "lon": 13.47051,
+      "hours": {
+        "mon": "09:00-19:00",
+        "tue": "09:00-19:00",
+        "wed": "13:00-19:00",
+        "thu": "09:00-18:00",
+        "fri": "09:00-18:00",
+        "sat": "09:00-19:00",
+        "sun": "09:00-19:00"
+      },
+      "note": "Weekend 9 to 19 since 22 August, Sundays fully in Open Library mode.",
+      "selfService": [
+        "sun"
+      ]
+    },
+    {
+      "id": "kisch",
+      "short": "E. E. Kisch (Lichtenb.)",
+      "district": "Lichtenberg",
+      "name": "Egon-Erwin-Kisch-Bibliothek",
+      "address": "Frankfurter Allee 149, 10365 Berlin",
+      "lat": 52.51358,
+      "lon": 13.48125,
+      "hours": {
+        "mon": "09:00-18:00",
+        "tue": "09:00-18:00",
+        "wed": "13:00-18:00",
+        "thu": "09:00-18:00",
+        "fri": "09:00-18:00",
+        "sat": "09:00-19:00",
+        "sun": "09:00-19:00"
+      },
+      "note": "Weekend 9 to 19 since 22 August, Sundays fully in Open Library mode.",
+      "selfService": [
+        "sun"
+      ]
+    }
+  ],
+  "holidays": {
+    "2026-10-03": "Day of German Unity",
+    "2026-12-24": "Christmas Eve",
+    "2026-12-25": "First Christmas Day",
+    "2026-12-26": "Second Christmas Day",
+    "2026-12-31": "New Year's Eve",
+    "2027-01-01": "New Year's Day",
+    "2027-03-08": "International Women's Day",
+    "2027-03-26": "Good Friday",
+    "2027-03-29": "Easter Monday",
+    "2027-05-01": "Labour Day",
+    "2027-05-06": "Ascension Day",
+    "2027-05-17": "Whit Monday",
+    "2027-10-03": "Day of German Unity",
+    "2027-12-24": "Christmas Eve",
+    "2027-12-25": "First Christmas Day",
+    "2027-12-26": "Second Christmas Day",
+    "2027-12-31": "New Year's Eve"
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "slug": "berlin-public-libraries",
+  "key": "berlin-public-libraries",
+  "config": {
+    "title": "Berlin Public Libraries - FAQ",
+    "subtitle": "The card, the Sunday openings, and where you can actually sit and work.",
+    "items": [
+      {
+        "q": "How much does a Berlin library card cost?",
+        "a": "The VÖBB card costs 10 euros for twelve months and works in every public library in the city. Students, trainees and people in voluntary service pay 5 euros, and it is free for anyone under 18 and for Berlin-Pass or social-benefit holders. You can register online from age 16 or at any library desk with photo ID and proof of a Berlin address."
+      },
+      {
+        "q": "Which Berlin libraries are open on Sunday?",
+        "a": "The Amerika-Gedenkbibliothek at Blücherplatz opens Sundays 11:00 to 17:00. District libraries with Sunday hours now include Pablo Neruda in Friedrichshain (10:00-19:00), Heinrich Böll in Pankow (10:00-19:00), Heinrich Schulz in Charlottenburg (12:00-18:00), the central library in Spandau (10:00-18:00), Bibliothek Tempelhof (11:00-17:00), Mittelpunktbibliothek Köpenick (11:00-17:00), Dietrich Bonhoeffer in Wilmersdorf (12:00-16:00) and the Anton Saefkow and Egon Erwin Kisch libraries in Lichtenberg (both 9:00-19:00). Most Sunday openings run in self-service mode without librarians. The Staatsbibliothek is also open Sundays 10:00 to 18:00."
+      },
+      {
+        "q": "Can I use Berlin's libraries without a card?",
+        "a": "Yes. Reading, studying and sitting in the buildings is free for everyone, and so is the WLAN in most houses. You only need the card to borrow anything, to use the eBook and streaming services, or to reserve items. The Staatsbibliothek issues its own separate card, which is free."
+      },
+      {
+        "q": "What is included in the 10 euro VÖBB card besides books?",
+        "a": "The digital side is the quiet bargain: the Onleihe for German and English eBooks and audiobooks, PressReader for thousands of international newspapers and magazines, and the filmfriend film streaming service. Several libraries also run a Bibliothek der Dinge where the card borrows real objects such as drills, projectors, e-readers or a karaoke machine."
+      },
+      {
+        "q": "Where can I work or study all day in Berlin without paying?",
+        "a": "The Staatsbibliothek runs the longest free desks: Monday to Saturday 8:00 to 22:00 and Sunday 10:00 to 18:00 at both houses, with a free card issued from age 14. The two ZLB houses run Monday to Friday until 21:00. District central libraries close between 18:00 and 19:30 on weekdays, so for late evenings the Staatsbibliothek and the ZLB are the realistic options."
+      },
+      {
+        "q": "Are Berlin libraries open on public holidays?",
+        "a": "No. Public libraries and the Staatsbibliothek close on Berlin public holidays, including the ones that fall on weekdays. The digital services on the card keep working on those days."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much does a Berlin library card cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The VÖBB card costs 10 euros for twelve months and works in every public library in the city. Students, trainees and people in voluntary service pay 5 euros, and it is free for anyone under 18 and for Berlin-Pass or social-benefit holders. You can register online from age 16 or at any library desk with photo ID and proof of a Berlin address."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Berlin libraries are open on Sunday?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Amerika-Gedenkbibliothek at Blücherplatz opens Sundays 11:00 to 17:00. District libraries with Sunday hours now include Pablo Neruda in Friedrichshain (10:00-19:00), Heinrich Böll in Pankow (10:00-19:00), Heinrich Schulz in Charlottenburg (12:00-18:00), the central library in Spandau (10:00-18:00), Bibliothek Tempelhof (11:00-17:00), Mittelpunktbibliothek Köpenick (11:00-17:00), Dietrich Bonhoeffer in Wilmersdorf (12:00-16:00) and the Anton Saefkow and Egon Erwin Kisch libraries in Lichtenberg (both 9:00-19:00). Most Sunday openings run in self-service mode without librarians. The Staatsbibliothek is also open Sundays 10:00 to 18:00."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use Berlin's libraries without a card?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Reading, studying and sitting in the buildings is free for everyone, and so is the WLAN in most houses. You only need the card to borrow anything, to use the eBook and streaming services, or to reserve items. The Staatsbibliothek issues its own separate card, which is free."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is included in the 10 euro VÖBB card besides books?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The digital side is the quiet bargain: the Onleihe for German and English eBooks and audiobooks, PressReader for thousands of international newspapers and magazines, and the filmfriend film streaming service. Several libraries also run a Bibliothek der Dinge where the card borrows real objects such as drills, projectors, e-readers or a karaoke machine."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I work or study all day in Berlin without paying?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Staatsbibliothek runs the longest free desks: Monday to Saturday 8:00 to 22:00 and Sunday 10:00 to 18:00 at both houses, with a free card issued from age 14. The two ZLB houses run Monday to Friday until 21:00. District central libraries close between 18:00 and 19:30 on weekdays, so for late evenings the Staatsbibliothek and the ZLB are the realistic options."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are Berlin libraries open on public holidays?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Public libraries and the Staatsbibliothek close on Berlin public holidays, including the ones that fall on weekdays. The digital services on the card keep working on those days."
+        }
+      }
+    ]
+  }
+}

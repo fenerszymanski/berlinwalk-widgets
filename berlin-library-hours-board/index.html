@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Library Hours Board</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root{
+    --green:#1B5E20; --deep:#123D18; --yellow:#FFE600; --lime:#7CB342;
+    --lightgreen:#C5E1A5; --cream:#FAFAF5; --ink:#212121; --red:#E63946;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--cream);color:var(--ink);padding:14px 12px 8px}
+  .blb-wrap{max-width:760px;margin:0 auto}
+  .blb-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+  .blb-head h1{font-size:1.15rem;color:var(--green)}
+  .blb-head p{font-size:.8rem;color:#4b5245}
+  .blb-card{background:#fff;border:1px solid #e2e5da;border-radius:12px;padding:16px;margin-bottom:10px}
+  .blb-step-label{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);font-weight:700;margin-bottom:6px}
+  .blb-pick h2{font-size:1rem;color:var(--deep);margin-bottom:10px}
+  .blb-daterow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .blb-daterow input[type=date]{font-family:inherit;font-size:1rem;padding:10px 12px;border:2px solid var(--green);border-radius:10px;background:#fff;color:var(--ink)}
+  .blb-go{background:var(--yellow);color:var(--deep);font-weight:800;border:0;border-radius:999px;padding:12px 22px;font-size:.95rem;cursor:pointer;font-family:inherit}
+  .blb-go:hover{background:#f5dc00}
+  .blb-quickdays{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+  .blb-quickdays button{font-family:inherit;font-size:.78rem;font-weight:600;border:1.5px solid #cfd6c4;background:#fff;color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+  .blb-quickdays button:hover{border-color:var(--green);color:var(--green)}
+  .blb-hint{font-size:.75rem;color:#68705e;margin-top:10px;line-height:1.45}
+  .blb-board-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+  .blb-board-head h2{font-size:1rem;color:var(--deep)}
+  .blb-back{background:none;border:1.5px solid var(--green);color:var(--green);font-weight:700;border-radius:999px;padding:6px 14px;font-size:.78rem;cursor:pointer;font-family:inherit}
+  .blb-back:hover{background:var(--green);color:#fff}
+  .blb-holiday{background:var(--yellow);color:var(--deep);font-weight:700;border-radius:10px;padding:10px 12px;font-size:.82rem;margin:8px 0}
+  .blb-svgbox{width:100%;overflow:hidden}
+  svg{display:block;width:100%;height:auto}
+  .blb-detail{background:#f4f7ee;border:1px solid #dde5cf;border-radius:10px;padding:12px 14px;margin-top:8px;font-size:.83rem;line-height:1.5;display:none}
+  .blb-detail strong{color:var(--deep)}
+  .blb-detail a{color:var(--green);font-weight:700}
+  .blb-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.7rem;color:#4b5245;margin-top:6px}
+  .blb-legend span{display:inline-flex;align-items:center;gap:5px}
+  .blb-swatch{width:14px;height:9px;border-radius:3px;display:inline-block}
+  @media (max-width:480px){
+    .blb-head h1{font-size:1.02rem}
+    .blb-daterow{flex-direction:column;align-items:stretch}
+    .blb-go{width:100%}
+  }
+</style>
+</head>
+<body>
+<div class="blb-wrap">
+  <div class="blb-head">
+    <h1>Berlin Library Hours Board</h1>
+    <p>Every big public reading room in the city, hour by hour, for the day you pick.</p>
+  </div>
+
+  <div class="blb-card blb-pick" id="blbStep0">
+    <div class="blb-step-label">Step 1 of 2</div>
+    <h2>When do you want a library?</h2>
+    <div class="blb-daterow">
+      <input type="date" id="blbDate" aria-label="Pick a date">
+      <button class="blb-go" id="blbGo">Show the day&rsquo;s doors</button>
+    </div>
+    <div class="blb-quickdays" id="blbQuick"></div>
+    <p class="blb-hint">The board covers the two ZLB houses, the twelve district central libraries and the three branch libraries with new Sunday hours. Public holidays are caught automatically: every door on this board stays shut on them.</p>
+  </div>
+
+  <div class="blb-card" id="blbStep1" hidden>
+    <div class="blb-board-head">
+      <div>
+        <div class="blb-step-label">Step 2 of 2</div>
+        <h2 id="blbDayTitle"></h2>
+      </div>
+      <button class="blb-back" id="blbBack">&larr; Pick another day</button>
+    </div>
+    <div class="blb-holiday" id="blbHoliday" hidden></div>
+    <div class="blb-svgbox" id="blbBoard"></div>
+    <div class="blb-legend">
+      <span><span class="blb-swatch" style="background:#1B5E20"></span> open</span>
+      <span><span class="blb-swatch" style="background:#7CB342"></span> open, self-service only</span>
+      <span><span class="blb-swatch" style="background:#e3e6dc"></span> closed</span>
+      <span><span class="blb-swatch" style="background:#E63946;width:3px;height:14px"></span> right now</span>
+    </div>
+    <div class="blb-detail" id="blbDetail"></div>
+    <div class="blb-svgbox" id="blbMap" style="margin-top:10px"></div>
+  </div>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function(){
+  'use strict';
+  var LIBS=[], HOLIDAYS={}, currentStep=0, selectedId=null, chosenDate=null;
+
+  function pad(n){return (n<10?'0':'')+n;}
+  function isoOf(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
+  function parseHours(str){
+    if(!str||str==='closed') return [];
+    return str.split(',').map(function(seg){
+      var m=seg.trim().match(/(\d{1,2}):(\d{2})-(\d{1,2}):(\d{2})/);
+      if(!m) return null;
+      return [(+m[1])+(+m[2])/60, (+m[3])+(+m[4])/60];
+    }).filter(Boolean);
+  }
+  var DAYKEYS=['sun','mon','tue','wed','thu','fri','sat'];
+  var DAYNAMES=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+  function renderQuick(){
+    var box=document.getElementById('blbQuick');
+    var today=new Date();
+    var html='';
+    for(var i=0;i<7;i++){
+      var d=new Date(today.getFullYear(),today.getMonth(),today.getDate()+i);
+      var label=i===0?'Today':(i===1?'Tomorrow':DAYNAMES[d.getDay()].slice(0,3)+' '+d.getDate());
+      html+='<button type="button" data-iso="'+isoOf(d)+'">'+label+'</button>';
+    }
+    box.innerHTML=html;
+    box.addEventListener('click',function(e){
+      var b=e.target.closest('button'); if(!b) return;
+      document.getElementById('blbDate').value=b.getAttribute('data-iso');
+      showBoard();
+    });
+  }
+
+  function showBoard(){
+    var v=document.getElementById('blbDate').value;
+    if(!v) return;
+    chosenDate=v;
+    currentStep=1;
+    selectedId=null;
+    document.getElementById('blbStep0').hidden=true;
+    document.getElementById('blbStep1').hidden=false;
+    document.getElementById('blbDetail').style.display='none';
+    drawBoard();
+    if(window.__bwRequestEmbedResize) window.__bwRequestEmbedResize();
+  }
+  function backToPick(){
+    currentStep=0;
+    document.getElementById('blbStep1').hidden=true;
+    document.getElementById('blbStep0').hidden=false;
+    if(window.__bwRequestEmbedResize) window.__bwRequestEmbedResize();
+  }
+
+  function drawBoard(){
+    var parts=chosenDate.split('-');
+    var d=new Date(+parts[0],+parts[1]-1,+parts[2]);
+    var dow=d.getDay();
+    var dayKey=DAYKEYS[dow];
+    var holidayName=HOLIDAYS[chosenDate]||null;
+    var todayIso=isoOf(new Date());
+    var isToday=chosenDate===todayIso;
+    var now=new Date(); var nowH=now.getHours()+now.getMinutes()/60;
+
+    document.getElementById('blbDayTitle').textContent=DAYNAMES[dow]+', '+d.getDate()+' '+MONTHS[d.getMonth()]+(isToday?' (today)':'');
+    var hb=document.getElementById('blbHoliday');
+    if(holidayName){ hb.hidden=false; hb.textContent=holidayName+': a public holiday in Berlin. Every library on this board is closed today. The eBooks, PressReader and filmfriend side of the card keeps working.'; }
+    else { hb.hidden=true; }
+
+    var boxW=document.getElementById('blbBoard').clientWidth||720;
+    var compact=boxW<560;
+    var VW=compact?400:760;
+    var X0=compact?10:176, X1=compact?390:738, T0=8, T1=22;
+    var ROWH=compact?46:30, PAD_TOP=compact?34:28;
+    var BARY=compact?20:2, BARH=compact?15:13;
+    var rows=LIBS.map(function(L){
+      var spans=holidayName?[]:parseHours(L.hours[dayKey]);
+      return {lib:L,spans:spans};
+    });
+    rows.sort(function(a,b){
+      var ao=a.spans.length?0:1, bo=b.spans.length?0:1;
+      if(ao!==bo) return ao-bo;
+      return a.lib.name.localeCompare(b.lib.name);
+    });
+    var H=PAD_TOP+rows.length*ROWH+14;
+    var s='<svg viewBox="0 0 '+VW+' '+H+'" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Opening hours of Berlin libraries for the chosen day">';
+    for(var t=T0;t<=T1;t+=(compact?4:2)){
+      var x=X0+(t-T0)/(T1-T0)*(X1-X0);
+      s+='<line x1="'+x+'" y1="'+(PAD_TOP-8)+'" x2="'+x+'" y2="'+(H-12)+'" stroke="#e8ebe0" stroke-width="1"/>';
+      var anchor=(t===T0)?'start':((t>=T1-1)?'end':'middle');
+      s+='<text x="'+x+'" y="'+(PAD_TOP-14)+'" font-size="'+(compact?11:10)+'" text-anchor="'+anchor+'" fill="#8a917d" font-family="Montserrat,sans-serif">'+t+':00</text>';
+    }
+    rows.forEach(function(r,i){
+      var y=PAD_TOP+i*ROWH;
+      var open=r.spans.length>0;
+      var sel=selectedId===r.lib.id;
+      s+='<g class="blb-row" data-id="'+r.lib.id+'" style="cursor:pointer">';
+      if(sel) s+='<rect x="0" y="'+(y-2)+'" width="'+VW+'" height="'+(ROWH-2)+'" fill="#F4F7EE"/>';
+      s+='<text x="'+(compact?X0:4)+'" y="'+(y+14)+'" font-size="'+(compact?13:11.5)+'" font-weight="'+(sel?'700':'600')+'" fill="'+(open?'#123D18':'#9aa08e')+'" font-family="Montserrat,sans-serif">'+esc(r.lib.short)+'</text>';
+      s+='<rect x="'+X0+'" y="'+(y+BARY)+'" width="'+(X1-X0)+'" height="'+BARH+'" rx="4" fill="#eef0e8"/>';
+      if(!open){
+        s+='<text x="'+(X0+8)+'" y="'+(y+BARY+BARH-3)+'" font-size="'+(compact?10.5:9.5)+'" fill="#a8ae9c" font-family="Montserrat,sans-serif">closed</text>';
+      }
+      r.spans.forEach(function(sp){
+        var xa=X0+(Math.max(sp[0],T0)-T0)/(T1-T0)*(X1-X0);
+        var xb=X0+(Math.min(sp[1],T1)-T0)/(T1-T0)*(X1-X0);
+        var fill=(r.lib.selfService&&r.lib.selfService.indexOf(dayKey)>-1)?'#7CB342':'#1B5E20';
+        s+='<rect x="'+xa+'" y="'+(y+BARY)+'" width="'+Math.max(xb-xa,2)+'" height="'+BARH+'" rx="4" fill="'+fill+'"/>';
+        s+='<text x="'+(xa+4)+'" y="'+(y+BARY+BARH-3)+'" font-size="'+(compact?10:8.5)+'" fill="#FAFAF5" font-family="Montserrat,sans-serif">'+fmtH(sp[0])+'&#8211;'+fmtH(sp[1])+'</text>';
+      });
+      s+='</g>';
+    });
+    if(isToday&&nowH>=T0&&nowH<=T1&&!holidayName){
+      var xn=X0+(nowH-T0)/(T1-T0)*(X1-X0);
+      s+='<line x1="'+xn+'" y1="'+(PAD_TOP-6)+'" x2="'+xn+'" y2="'+(H-12)+'" stroke="#E63946" stroke-width="2"/>';
+    }
+    s+='</svg>';
+    document.getElementById('blbBoard').innerHTML=s;
+    drawMap(dayKey,holidayName);
+    bindRows();
+    if(window.__bwRequestEmbedResize) window.__bwRequestEmbedResize();
+  }
+  function fmtH(h){
+    var hh=Math.floor(h), mm=Math.round((h-hh)*60);
+    return hh+(mm?':'+pad(mm):'');
+  }
+
+  function drawMap(dayKey,holidayName){
+    var latA=52.40,latB=52.62,lonA=13.14,lonB=13.66;
+    var boxW=document.getElementById('blbMap').clientWidth||720;
+    var compact=boxW<560;
+    var W=compact?400:760,H=compact?300:380;
+    var s='<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Map of the libraries on the board">';
+    s+='<rect x="0" y="0" width="'+W+'" height="'+H+'" rx="12" fill="#eef3e6"/>';
+    s+='<text x="14" y="24" font-size="'+(compact?13:12)+'" font-weight="700" fill="#123D18" font-family="Montserrat,sans-serif">Where the open doors are</text>';
+    LIBS.forEach(function(L){
+      var x=(L.lon-lonA)/(lonB-lonA)*(W-60)+30;
+      var y=H-((L.lat-latA)/(latB-latA)*(H-70)+35);
+      var open=!holidayName&&parseHours(L.hours[dayKey]).length>0;
+      var sel=selectedId===L.id;
+      s+='<g class="blb-dot" data-id="'+L.id+'" style="cursor:pointer">';
+      s+='<circle cx="'+x+'" cy="'+y+'" r="'+(sel?(compact?9:11):(compact?6.5:8))+'" fill="'+(open?'#1B5E20':'#c3c9b7')+'" stroke="'+(sel?'#FFE600':'#FAFAF5')+'" stroke-width="'+(sel?4:2)+'"/>';
+      if(sel) s+='<text x="'+x+'" y="'+(y-13)+'" font-size="'+(compact?10:11)+'" font-weight="700" text-anchor="middle" fill="#123D18" font-family="Montserrat,sans-serif">'+esc(L.short)+'</text>';
+      s+='</g>';
+    });
+    s+='</svg>';
+    document.getElementById('blbMap').innerHTML=s;
+  }
+  var resizeTimer=null;
+  window.addEventListener('resize',function(){
+    if(currentStep!==1) return;
+    clearTimeout(resizeTimer);
+    resizeTimer=setTimeout(function(){ drawBoard(); },220);
+  });
+
+  function bindRows(){
+    Array.prototype.forEach.call(document.querySelectorAll('.blb-row,.blb-dot'),function(g){
+      g.addEventListener('click',function(){
+        selectedId=g.getAttribute('data-id');
+        showDetail();
+        drawBoard();
+      });
+    });
+  }
+  function showDetail(){
+    var L=null;
+    LIBS.forEach(function(x){ if(x.id===selectedId) L=x; });
+    if(!L) return;
+    var parts=chosenDate.split('-');
+    var d=new Date(+parts[0],+parts[1]-1,+parts[2]);
+    var dayKey=DAYKEYS[d.getDay()];
+    var todays=HOLIDAYS[chosenDate]?'closed (public holiday)':(L.hours[dayKey]==='closed'?'closed':L.hours[dayKey]);
+    var el=document.getElementById('blbDetail');
+    el.innerHTML='<strong>'+esc(L.name)+'</strong> &middot; '+esc(L.district)+'<br>'+esc(L.address)+'<br>This day: <strong>'+esc(todays)+'</strong>'+(L.note?'<br>'+esc(L.note):'');
+    el.style.display='block';
+  }
+
+  document.getElementById('blbGo').addEventListener('click',showBoard);
+  document.getElementById('blbBack').addEventListener('click',backToPick);
+
+  fetch('data.json').then(function(r){return r.json();}).then(function(j){
+    LIBS=j.libraries; HOLIDAYS=j.holidays;
+    var di=document.getElementById('blbDate');
+    di.value=isoOf(new Date());
+    renderQuick();
+    if(window.__bwRequestEmbedResize) window.__bwRequestEmbedResize();
+  });
+})();
+</script>
+</body>
+</html>
