@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-11T19:58:28.090Z",
+  "updatedAt": "2026-09-12T02:09:47.516Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 375,
@@ -49,21 +49,21 @@
   ],
   "hero": {
     "lead": {
-      "title": "Berlin Heating Season: What Your Landlord Owes You When the Flat Goes Cold",
-      "slug": "berlin-heating-season",
-      "path": "/post/berlin-heating-season",
-      "url": "https://www.berlinwalk.com/post/berlin-heating-season",
-      "excerpt": "The Heizperiode starts on 1 October, but in four of the last eleven autumns Berlin crossed the cold snap threshold in September. This is what a landlord owes at which hour, how to measure so the number counts, and the order of the steps before anyone touches the rent.",
+      "title": "Kleingarten in Berlin: Where the 70,000 Plots Are and How the Wait Really Works",
+      "slug": "kleingarten-berlin",
+      "path": "/post/kleingarten-berlin",
+      "url": "https://www.berlinwalk.com/post/kleingarten-berlin",
+      "excerpt": "Berlin has 70,390 allotment plots in 1,038 colonies, but Pankow holds over ten thousand and Friedrichshain-Kreuzberg 228. Where the plots actually are, who runs the waiting lists, what the takeover really costs, and the registration move to make this week.",
       "category": "Living in Berlin",
       "categorySlug": "living-in-berlin",
       "topic": "living-in-berlin",
       "topicLabel": "Living in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-09-09T20:34:28.261Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_3a463bc9d35846ae99c9804c12cd86b3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-heating-season-cover-friedenau-entrance.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_3a463bc9d35846ae99c9804c12cd86b3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-heating-season-cover-friedenau-entrance.jpg",
-      "alt": "A lit Altbau entrance on Handjerystrasse in Berlin-Friedenau at night, with snow on the hedges and the front steps",
-      "relatedToolSlug": "berlin-heating-log"
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-11T19:48:50.750Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_69bc83334bda4af091ff449f3b07a3d4~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/kleingarten-berlin-cover-feierabend-sunrise.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_69bc83334bda4af091ff449f3b07a3d4~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/kleingarten-berlin-cover-feierabend-sunrise.jpg",
+      "alt": "Sunrise in morning fog over the main path of the Feierabend allotment colony in Berlin-Mariendorf, with hedges and garden gates on both sides",
+      "relatedToolSlug": "berlin-kleingarten-map"
     },
     "secondary": [
       {
@@ -84,6 +84,40 @@
         "relatedToolSlug": "basketball-worldcup-fixtures"
       },
       {
+        "title": "Berlin Water Hardness: What Your Postcode Says About the Scale in Your Kettle",
+        "slug": "berlin-water-hardness",
+        "path": "/post/berlin-water-hardness",
+        "url": "https://www.berlinwalk.com/post/berlin-water-hardness",
+        "excerpt": "Every Berlin postcode runs officially hard water, but a kettle in Wedding and one in Köpenick do not scale at the same speed. The official per-postcode ranges, mapped, with the dishwasher setting, the detergent column and the descaling rhythm that follow.",
+        "category": "Living in Berlin",
+        "categorySlug": "living-in-berlin",
+        "topic": "living-in-berlin",
+        "topicLabel": "Living in Berlin",
+        "readTime": "6 min read",
+        "publishedDate": "2026-09-11T14:00:36.645Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_a24bdb7a928e4839bf741659dbb152e8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wasserturm-1600.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_a24bdb7a928e4839bf741659dbb152e8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wasserturm-1600.jpg",
+        "alt": "The two brick towers of the former Prenzlauer Berg waterworks above the trees of the Wasserturm park in autumn",
+        "relatedToolSlug": "berlin-water-hardness-map"
+      },
+      {
+        "title": "Mushroom Picking Around Berlin: Ten Forests on Your Ticket and the Rules Before the Pan",
+        "slug": "mushroom-picking-berlin",
+        "path": "/post/mushroom-picking-berlin",
+        "url": "https://www.berlinwalk.com/post/mushroom-picking-berlin",
+        "excerpt": "Small amounts for your own pan are legal in both Berlin and Brandenburg forest, porcini and chanterelles carry a personal-use exception, and the free Pilzberatung at the Botanical Garden has checked baskets since 1890. Ten forests from S Rahnsdorf to Chorin, plotted by real travel minutes from Alexanderplatz.",
+        "category": "Living in Berlin",
+        "categorySlug": "living-in-berlin",
+        "topic": "living-in-berlin",
+        "topicLabel": "Living in Berlin",
+        "readTime": "7 min read",
+        "publishedDate": "2026-09-11T07:40:47.477Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_f0e8e550d4394fe2a6fac72f402a1d20~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-maronen.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_f0e8e550d4394fe2a6fac72f402a1d20~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-maronen.jpg",
+        "alt": "Two bay bolete mushrooms in green moss, one lying on its side showing the pale yellow pore layer under the brown cap",
+        "relatedToolSlug": "berlin-mushroom-forest-finder"
+      },
+      {
         "title": "Berlin Museums Closed for Renovation: What Is Shut and What to See Instead",
         "slug": "berlin-museums-closed-for-renovation",
         "path": "/post/berlin-museums-closed-for-renovation",
@@ -99,40 +133,6 @@
         "thumb": "https://static.wixstatic.com/media/5a08a3_f6f2fbb5b5534bf39049cba1c30e60e6~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ishtar-gate-pergamonmuseum.jpg",
         "alt": "The Ishtar Gate reconstructed inside the Pergamonmuseum, a blue glazed brick gateway with rows of golden animals",
         "relatedToolSlug": "berlin-museum-closure-timeline"
-      },
-      {
-        "title": "Berlin Bridge Days 2027: The Brückentage Worth Booking",
-        "slug": "berlin-bridge-days-2027",
-        "path": "/post/berlin-bridge-days-2027",
-        "url": "https://www.berlinwalk.com/post/berlin-bridge-days-2027",
-        "excerpt": "Only six of Berlin’s ten public holidays fall on a working day in 2027, and every one of them lands before 18 May. This is what each bridge day costs in leave, what it returns in days off, and which windows your colleagues with school-age children already have a claim on.",
-        "category": "Living in Berlin",
-        "categorySlug": "living-in-berlin",
-        "topic": "living-in-berlin",
-        "topicLabel": "Living in Berlin",
-        "readTime": "7 min read",
-        "publishedDate": "2026-09-09T19:31:50.921Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_a2c402a057ff4d41a7e3025e73759776~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hauptbahnhof-sbahn.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_a2c402a057ff4d41a7e3025e73759776~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hauptbahnhof-sbahn.jpg",
-        "alt": "An S-Bahn train pulling out of Berlin Hauptbahnhof past an almost empty platform, with the station name sign lit above the tracks",
-        "relatedToolSlug": "berlin-leave-year-planner"
-      },
-      {
-        "title": "Which City to Visit After Berlin: What the Train Actually Reaches",
-        "slug": "which-city-to-visit-after-berlin",
-        "path": "/post/which-city-to-visit-after-berlin",
-        "url": "https://www.berlinwalk.com/post/which-city-to-visit-after-berlin",
-        "excerpt": "Germany does not sit in a circle around Berlin. The fast lines run north-west to Hamburg and south to Leipzig, Erfurt and Munich, while the same distance east into Poland costs about twice the time. Here is what the train genuinely reaches, which places are day trips and which deserve a night, and the five-day plan I would actually use.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "history-myths",
-        "topicLabel": "Berlin History & Myths",
-        "readTime": "7 min read",
-        "publishedDate": "2026-09-08T13:58:49.992Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_a43a90b2ad404818b3b49ced5d88a65c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ice-berlin-hauptbahnhof.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_a43a90b2ad404818b3b49ced5d88a65c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ice-berlin-hauptbahnhof.jpg",
-        "alt": "An ICE train waiting at the underground long-distance platform at Berlin Hauptbahnhof",
-        "relatedToolSlug": "berlin-second-city-board"
       },
       {
         "title": "Berlin Public Transport for Tourists: Tickets, Zones, Prices and Validation",
@@ -1628,6 +1628,74 @@
       "description": "Berlin for people who live here. City rules, bills, transport, seasons, and the districts beyond the tourist centre.",
       "posts": [
         {
+          "title": "Kleingarten in Berlin: Where the 70,000 Plots Are and How the Wait Really Works",
+          "slug": "kleingarten-berlin",
+          "path": "/post/kleingarten-berlin",
+          "url": "https://www.berlinwalk.com/post/kleingarten-berlin",
+          "excerpt": "Berlin has 70,390 allotment plots in 1,038 colonies, but Pankow holds over ten thousand and Friedrichshain-Kreuzberg 228. Where the plots actually are, who runs the waiting lists, what the takeover really costs, and the registration move to make this week.",
+          "category": "Living in Berlin",
+          "categorySlug": "living-in-berlin",
+          "topic": "living-in-berlin",
+          "topicLabel": "Living in Berlin",
+          "readTime": "6 min read",
+          "publishedDate": "2026-09-11T19:48:50.750Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_69bc83334bda4af091ff449f3b07a3d4~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/kleingarten-berlin-cover-feierabend-sunrise.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_69bc83334bda4af091ff449f3b07a3d4~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/kleingarten-berlin-cover-feierabend-sunrise.jpg",
+          "alt": "Sunrise in morning fog over the main path of the Feierabend allotment colony in Berlin-Mariendorf, with hedges and garden gates on both sides",
+          "relatedToolSlug": "berlin-kleingarten-map"
+        },
+        {
+          "title": "Berlin Water Hardness: What Your Postcode Says About the Scale in Your Kettle",
+          "slug": "berlin-water-hardness",
+          "path": "/post/berlin-water-hardness",
+          "url": "https://www.berlinwalk.com/post/berlin-water-hardness",
+          "excerpt": "Every Berlin postcode runs officially hard water, but a kettle in Wedding and one in Köpenick do not scale at the same speed. The official per-postcode ranges, mapped, with the dishwasher setting, the detergent column and the descaling rhythm that follow.",
+          "category": "Living in Berlin",
+          "categorySlug": "living-in-berlin",
+          "topic": "living-in-berlin",
+          "topicLabel": "Living in Berlin",
+          "readTime": "6 min read",
+          "publishedDate": "2026-09-11T14:00:36.645Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_a24bdb7a928e4839bf741659dbb152e8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wasserturm-1600.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_a24bdb7a928e4839bf741659dbb152e8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wasserturm-1600.jpg",
+          "alt": "The two brick towers of the former Prenzlauer Berg waterworks above the trees of the Wasserturm park in autumn",
+          "relatedToolSlug": "berlin-water-hardness-map"
+        },
+        {
+          "title": "Mushroom Picking Around Berlin: Ten Forests on Your Ticket and the Rules Before the Pan",
+          "slug": "mushroom-picking-berlin",
+          "path": "/post/mushroom-picking-berlin",
+          "url": "https://www.berlinwalk.com/post/mushroom-picking-berlin",
+          "excerpt": "Small amounts for your own pan are legal in both Berlin and Brandenburg forest, porcini and chanterelles carry a personal-use exception, and the free Pilzberatung at the Botanical Garden has checked baskets since 1890. Ten forests from S Rahnsdorf to Chorin, plotted by real travel minutes from Alexanderplatz.",
+          "category": "Living in Berlin",
+          "categorySlug": "living-in-berlin",
+          "topic": "living-in-berlin",
+          "topicLabel": "Living in Berlin",
+          "readTime": "7 min read",
+          "publishedDate": "2026-09-11T07:40:47.477Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_f0e8e550d4394fe2a6fac72f402a1d20~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-maronen.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_f0e8e550d4394fe2a6fac72f402a1d20~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-maronen.jpg",
+          "alt": "Two bay bolete mushrooms in green moss, one lying on its side showing the pale yellow pore layer under the brown cap",
+          "relatedToolSlug": "berlin-mushroom-forest-finder"
+        },
+        {
+          "title": "Dog Parks in Berlin: Where the Leash Comes Off and Which Run Fits Your Dog",
+          "slug": "dog-parks-in-berlin",
+          "path": "/post/dog-parks-in-berlin",
+          "url": "https://www.berlinwalk.com/post/dog-parks-in-berlin",
+          "excerpt": "Berlin has had a citywide leash rule since 2019, and the places where it comes off are more uneven than the word dog park suggests: twelve forest areas of about 1,220 hectares, fenced runs of 1,200 to 9,000 square metres with 0.80 or 1.40 metre fences, and greens where a dog may not enter at all. Here is how to read them from your own station.",
+          "category": "Living in Berlin",
+          "categorySlug": "living-in-berlin",
+          "topic": "living-in-berlin",
+          "topicLabel": "Living in Berlin",
+          "readTime": "7 min read",
+          "publishedDate": "2026-09-11T04:55:08.401Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_b60ed643db534c739f1bd325331f2446~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hundeplatz-lichtenberg-run.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_b60ed643db534c739f1bd325331f2446~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hundeplatz-lichtenberg-run.jpg",
+          "alt": "The sandy fenced dog run at Hundeplatz Lichtenberg with wooden agility steps, stacked tyres and a blue barrel under the trees",
+          "relatedToolSlug": "berlin-off-leash-map"
+        },
+        {
           "title": "Berlin Nebenkostenabrechnung: How to Check the Bill Line by Line Before the Deadline",
           "slug": "berlin-nebenkostenabrechnung",
           "path": "/post/berlin-nebenkostenabrechnung",
@@ -1642,7 +1710,7 @@
           "image": "https://static.wixstatic.com/media/5a08a3_373b6da9ba0b4d65bf538d3a6407d96f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-weserstrasse-neukoelln.jpg",
           "thumb": "https://static.wixstatic.com/media/5a08a3_373b6da9ba0b4d65bf538d3a6407d96f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-weserstrasse-neukoelln.jpg",
           "alt": "The yellow corner Altbau at Weserstrasse 58 and Wildenbruchstrasse 87 in Berlin-Neukölln with parked cars along both streets",
-          "relatedToolSlug": ""
+          "relatedToolSlug": "berlin-nebenkosten-line-check"
         },
         {
           "title": "Berlin Heating Season: What Your Landlord Owes You When the Flat Goes Cold",
@@ -1676,7 +1744,7 @@
           "image": "https://static.wixstatic.com/media/5a08a3_4ec1d2efbf1e4037bee7c1faed811631~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-recycling-yard-containers.jpg",
           "thumb": "https://static.wixstatic.com/media/5a08a3_4ec1d2efbf1e4037bee7c1faed811631~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-recycling-yard-containers.jpg",
           "alt": "Orange BSR containers and glass banks lined up inside the recycling yard on Ilsenburger Strasse in Berlin-Charlottenburg",
-          "relatedToolSlug": ""
+          "relatedToolSlug": "berlin-disposal-cost-ladder"
         },
         {
           "title": "Bike Theft in Berlin: Where It Happens, When, and What It Costs",
@@ -1693,7 +1761,7 @@
           "image": "https://static.wixstatic.com/media/5a08a3_3f70db1a8c4745d689118079eca889f5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ostkreuz-bike-racks.jpg",
           "thumb": "https://static.wixstatic.com/media/5a08a3_3f70db1a8c4745d689118079eca889f5~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ostkreuz-bike-racks.jpg",
           "alt": "Two levels of bicycle racks packed with bikes under the railway structure at Bahnhof Ostkreuz in Berlin",
-          "relatedToolSlug": ""
+          "relatedToolSlug": "berlin-bike-theft-clock"
         },
         {
           "title": "Berlin Bridge Days 2027: The Brückentage Worth Booking",
@@ -1711,74 +1779,6 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_a2c402a057ff4d41a7e3025e73759776~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hauptbahnhof-sbahn.jpg",
           "alt": "An S-Bahn train pulling out of Berlin Hauptbahnhof past an almost empty platform, with the station name sign lit above the tracks",
           "relatedToolSlug": "berlin-leave-year-planner"
-        },
-        {
-          "title": "Dog Parks in Berlin: Where the Leash Comes Off and Which Run Fits Your Dog",
-          "slug": "dog-parks-in-berlin",
-          "path": "/post/dog-parks-in-berlin",
-          "url": "https://www.berlinwalk.com/post/dog-parks-in-berlin",
-          "excerpt": "Berlin has had a citywide leash rule since 2019, and the places where it comes off are more uneven than the word dog park suggests: twelve forest areas of about 1,220 hectares, fenced runs of 1,200 to 9,000 square metres with 0.80 or 1.40 metre fences, and greens where a dog may not enter at all. Here is how to read them from your own station.",
-          "category": "Living in Berlin",
-          "categorySlug": "living-in-berlin",
-          "topic": "living-in-berlin",
-          "topicLabel": "Living in Berlin",
-          "readTime": "7 min read",
-          "publishedDate": "2026-09-11T04:55:08.401Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_b60ed643db534c739f1bd325331f2446~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hundeplatz-lichtenberg-run.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_b60ed643db534c739f1bd325331f2446~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hundeplatz-lichtenberg-run.jpg",
-          "alt": "The sandy fenced dog run at Hundeplatz Lichtenberg with wooden agility steps, stacked tyres and a blue barrel under the trees",
-          "relatedToolSlug": "berlin-off-leash-map"
-        },
-        {
-          "title": "Mushroom Picking Around Berlin: Ten Forests on Your Ticket and the Rules Before the Pan",
-          "slug": "mushroom-picking-berlin",
-          "path": "/post/mushroom-picking-berlin",
-          "url": "https://www.berlinwalk.com/post/mushroom-picking-berlin",
-          "excerpt": "Small amounts for your own pan are legal in both Berlin and Brandenburg forest, porcini and chanterelles carry a personal-use exception, and the free Pilzberatung at the Botanical Garden has checked baskets since 1890. Ten forests from S Rahnsdorf to Chorin, plotted by real travel minutes from Alexanderplatz.",
-          "category": "Living in Berlin",
-          "categorySlug": "living-in-berlin",
-          "topic": "living-in-berlin",
-          "topicLabel": "Living in Berlin",
-          "readTime": "7 min read",
-          "publishedDate": "2026-09-11T07:40:47.477Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_f0e8e550d4394fe2a6fac72f402a1d20~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-maronen.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_f0e8e550d4394fe2a6fac72f402a1d20~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-maronen.jpg",
-          "alt": "Two bay bolete mushrooms in green moss, one lying on its side showing the pale yellow pore layer under the brown cap",
-          "relatedToolSlug": "berlin-mushroom-forest-finder"
-        },
-        {
-          "title": "Kleingarten in Berlin: Where the 70,000 Plots Are and How the Wait Really Works",
-          "slug": "kleingarten-berlin",
-          "path": "/post/kleingarten-berlin",
-          "url": "https://www.berlinwalk.com/post/kleingarten-berlin",
-          "excerpt": "Berlin has 70,390 allotment plots in 1,038 colonies, but Pankow holds over ten thousand and Friedrichshain-Kreuzberg 228. Where the plots actually are, who runs the waiting lists, what the takeover really costs, and the registration move to make this week.",
-          "category": "Living in Berlin",
-          "categorySlug": "living-in-berlin",
-          "topic": "living-in-berlin",
-          "topicLabel": "Living in Berlin",
-          "readTime": "6 min read",
-          "publishedDate": "2026-09-11T19:48:50.750Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_69bc83334bda4af091ff449f3b07a3d4~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/kleingarten-berlin-cover-feierabend-sunrise.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_69bc83334bda4af091ff449f3b07a3d4~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/kleingarten-berlin-cover-feierabend-sunrise.jpg",
-          "alt": "Sunrise in morning fog over the main path of the Feierabend allotment colony in Berlin-Mariendorf, with hedges and garden gates on both sides",
-          "relatedToolSlug": "berlin-kleingarten-map"
-        },
-        {
-          "title": "Berlin Water Hardness: What Your Postcode Says About the Scale in Your Kettle",
-          "slug": "berlin-water-hardness",
-          "path": "/post/berlin-water-hardness",
-          "url": "https://www.berlinwalk.com/post/berlin-water-hardness",
-          "excerpt": "Every Berlin postcode runs officially hard water, but a kettle in Wedding and one in Köpenick do not scale at the same speed. The official per-postcode ranges, mapped, with the dishwasher setting, the detergent column and the descaling rhythm that follow.",
-          "category": "Living in Berlin",
-          "categorySlug": "living-in-berlin",
-          "topic": "living-in-berlin",
-          "topicLabel": "Living in Berlin",
-          "readTime": "6 min read",
-          "publishedDate": "2026-09-11T14:00:36.645Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_a24bdb7a928e4839bf741659dbb152e8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wasserturm-1600.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_a24bdb7a928e4839bf741659dbb152e8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wasserturm-1600.jpg",
-          "alt": "The two brick towers of the former Prenzlauer Berg waterworks above the trees of the Wasserturm park in autumn",
-          "relatedToolSlug": "berlin-water-hardness-map"
         }
       ]
     }
@@ -1867,7 +1867,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_373b6da9ba0b4d65bf538d3a6407d96f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-weserstrasse-neukoelln.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_373b6da9ba0b4d65bf538d3a6407d96f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-weserstrasse-neukoelln.jpg",
       "alt": "The yellow corner Altbau at Weserstrasse 58 and Wildenbruchstrasse 87 in Berlin-Neukölln with parked cars along both streets",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-nebenkosten-line-check"
     },
     {
       "title": "Bike Theft in Berlin: Where It Happens, When, and What It Costs",
@@ -1884,7 +1884,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_3f70db1a8c4745d689118079eca889f5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ostkreuz-bike-racks.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_3f70db1a8c4745d689118079eca889f5~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ostkreuz-bike-racks.jpg",
       "alt": "Two levels of bicycle racks packed with bikes under the railway structure at Bahnhof Ostkreuz in Berlin",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-bike-theft-clock"
     },
     {
       "title": "Berlin Bulky Waste: What Sperrmüll Costs and Where It Actually Goes",
@@ -1901,7 +1901,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_4ec1d2efbf1e4037bee7c1faed811631~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-recycling-yard-containers.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_4ec1d2efbf1e4037bee7c1faed811631~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-recycling-yard-containers.jpg",
       "alt": "Orange BSR containers and glass banks lined up inside the recycling yard on Ilsenburger Strasse in Berlin-Charlottenburg",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-disposal-cost-ladder"
     },
     {
       "title": "Berlin Heating Season: What Your Landlord Owes You When the Flat Goes Cold",
@@ -2073,7 +2073,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_373b6da9ba0b4d65bf538d3a6407d96f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-weserstrasse-neukoelln.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_373b6da9ba0b4d65bf538d3a6407d96f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-weserstrasse-neukoelln.jpg",
       "alt": "The yellow corner Altbau at Weserstrasse 58 and Wildenbruchstrasse 87 in Berlin-Neukölln with parked cars along both streets",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-nebenkosten-line-check"
     },
     {
       "title": "Bike Theft in Berlin: Where It Happens, When, and What It Costs",
@@ -2090,7 +2090,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_3f70db1a8c4745d689118079eca889f5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ostkreuz-bike-racks.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_3f70db1a8c4745d689118079eca889f5~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ostkreuz-bike-racks.jpg",
       "alt": "Two levels of bicycle racks packed with bikes under the railway structure at Bahnhof Ostkreuz in Berlin",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-bike-theft-clock"
     },
     {
       "title": "Berlin Bulky Waste: What Sperrmüll Costs and Where It Actually Goes",
@@ -2107,7 +2107,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_4ec1d2efbf1e4037bee7c1faed811631~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-recycling-yard-containers.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_4ec1d2efbf1e4037bee7c1faed811631~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-recycling-yard-containers.jpg",
       "alt": "Orange BSR containers and glass banks lined up inside the recycling yard on Ilsenburger Strasse in Berlin-Charlottenburg",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-disposal-cost-ladder"
     },
     {
       "title": "Berlin Heating Season: What Your Landlord Owes You When the Flat Goes Cold",

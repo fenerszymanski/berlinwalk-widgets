@@ -1,7 +1,7 @@
 const BW_BLOG_HOME_DATA_URL = (() => {
   const script = document.currentScript;
   const base = script && script.src ? script.src : window.location.href;
-  return new URL('./data.json?v=20260911-featured-listings', base).href;
+  return new URL('./data.json?v=20260912-featured-listings', base).href;
 })();
 const BW_BLOG_HOME_FALLBACK = {
   "featured": {
@@ -16,6 +16,33 @@ const BW_BLOG_HOME_FALLBACK = {
   },
   "miniPosts": [
     {
+      "title": "Kleingarten in Berlin: Where the 70,000 Plots Are and How the Wait Really Works",
+      "url": "https://www.berlinwalk.com/post/kleingarten-berlin",
+      "category": "Living in Berlin",
+      "readTime": "6 min read",
+      "summary": "Berlin has 70,390 allotment plots in 1,038 colonies, but Pankow holds over ten thousand and Friedrichshain-Kreuzberg 228. Where the plots actually are, who runs the waiting lists, what the takeover really costs, and the registration move to make this week.",
+      "image": "https://static.wixstatic.com/media/5a08a3_69bc83334bda4af091ff449f3b07a3d4~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/kleingarten-berlin-cover-feierabend-sunrise.jpg",
+      "alt": "Sunrise in morning fog over the main path of the Feierabend allotment colony in Berlin-Mariendorf, with hedges and garden gates on both sides"
+    },
+    {
+      "title": "Berlin Water Hardness: What Your Postcode Says About the Scale in Your Kettle",
+      "url": "https://www.berlinwalk.com/post/berlin-water-hardness",
+      "category": "Living in Berlin",
+      "readTime": "6 min read",
+      "summary": "Every Berlin postcode runs officially hard water, but a kettle in Wedding and one in Köpenick do not scale at the same speed. The official per-postcode ranges, mapped, with the dishwasher setting, the detergent column and the descaling rhythm that follow.",
+      "image": "https://static.wixstatic.com/media/5a08a3_a24bdb7a928e4839bf741659dbb152e8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wasserturm-1600.jpg",
+      "alt": "The two brick towers of the former Prenzlauer Berg waterworks above the trees of the Wasserturm park in autumn"
+    },
+    {
+      "title": "Mushroom Picking Around Berlin: Ten Forests on Your Ticket and the Rules Before the Pan",
+      "url": "https://www.berlinwalk.com/post/mushroom-picking-berlin",
+      "category": "Living in Berlin",
+      "readTime": "7 min read",
+      "summary": "Small amounts for your own pan are legal in both Berlin and Brandenburg forest, porcini and chanterelles carry a personal-use exception, and the free Pilzberatung at the Botanical Garden has checked baskets since 1890. Ten forests from S Rahnsdorf to Chorin, plotted by real travel minutes from Alexanderplatz.",
+      "image": "https://static.wixstatic.com/media/5a08a3_f0e8e550d4394fe2a6fac72f402a1d20~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-maronen.jpg",
+      "alt": "Two bay bolete mushrooms in green moss, one lying on its side showing the pale yellow pore layer under the brown cap"
+    },
+    {
       "title": "Bike Theft in Berlin: Where It Happens, When, and What It Costs",
       "url": "https://www.berlinwalk.com/post/bike-theft-in-berlin",
       "category": "Living in Berlin",
@@ -23,33 +50,6 @@ const BW_BLOG_HOME_FALLBACK = {
       "summary": "The hour in a Berlin bike theft file is not when the thief turned up, it is when the owner last saw the bike. Read as a parking clock, 31% of losses were locked up between six and ten in the evening, and a third of everything went inside three hours.",
       "image": "https://static.wixstatic.com/media/5a08a3_3f70db1a8c4745d689118079eca889f5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ostkreuz-bike-racks.jpg",
       "alt": "Two levels of bicycle racks packed with bikes under the railway structure at Bahnhof Ostkreuz in Berlin"
-    },
-    {
-      "title": "Berlin Nebenkostenabrechnung: How to Check the Bill Line by Line Before the Deadline",
-      "url": "https://www.berlinwalk.com/post/berlin-nebenkostenabrechnung",
-      "category": "Living in Berlin",
-      "readTime": "9 min read",
-      "summary": "Berlin publishes what every line on a Nebenkostenabrechnung normally costs per square metre. Put your own statement against it, watch the two twelve-month deadlines, and ask for the invoices behind the lines that sit above the range. This year the property-tax line is the one to compare.",
-      "image": "https://static.wixstatic.com/media/5a08a3_373b6da9ba0b4d65bf538d3a6407d96f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-weserstrasse-neukoelln.jpg",
-      "alt": "The yellow corner Altbau at Weserstrasse 58 and Wildenbruchstrasse 87 in Berlin-Neukölln with parked cars along both streets"
-    },
-    {
-      "title": "Berlin Heating Season: What Your Landlord Owes You When the Flat Goes Cold",
-      "url": "https://www.berlinwalk.com/post/berlin-heating-season",
-      "category": "Living in Berlin",
-      "readTime": "7 min read",
-      "summary": "The Heizperiode starts on 1 October, but in four of the last eleven autumns Berlin crossed the cold snap threshold in September. This is what a landlord owes at which hour, how to measure so the number counts, and the order of the steps before anyone touches the rent.",
-      "image": "https://static.wixstatic.com/media/5a08a3_3a463bc9d35846ae99c9804c12cd86b3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-heating-season-cover-friedenau-entrance.jpg",
-      "alt": "A lit Altbau entrance on Handjerystrasse in Berlin-Friedenau at night, with snow on the hedges and the front steps"
-    },
-    {
-      "title": "Berlin Museums Closed for Renovation: What Is Shut and What to See Instead",
-      "url": "https://www.berlinwalk.com/post/berlin-museums-closed-for-renovation",
-      "category": "Tourist Tips",
-      "readTime": "7 min read",
-      "summary": "The Pergamonmuseum has been shut since October 2023, Museum Berggruen since 2022, and the Zeughaus is a building site with no announced reopening. Here is what is actually closed in Berlin right now, which reopening dates you can trust, why the Ishtar Gate is on a far longer clock than the 2027 headlines suggest, and what is genuinely worth doing instead this week.",
-      "image": "https://static.wixstatic.com/media/5a08a3_f6f2fbb5b5534bf39049cba1c30e60e6~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ishtar-gate-pergamonmuseum.jpg",
-      "alt": "The Ishtar Gate reconstructed inside the Pergamonmuseum, a blue glazed brick gateway with rows of golden animals"
     }
   ],
   "posts": [
