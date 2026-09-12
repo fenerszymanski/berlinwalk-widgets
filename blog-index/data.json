@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-12T14:23:54.060Z",
+  "updatedAt": "2026-09-12T19:56:18.658Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 377,
-  "toolsTotal": 297,
+  "totalPosts": 378,
+  "toolsTotal": 298,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin Bathing Season: What Stops on 15 September and What the Grade Leaves Out",
+      "slug": "berlin-bathing-season",
+      "path": "/post/berlin-bathing-season",
+      "url": "https://www.berlinwalk.com/post/berlin-bathing-season",
+      "excerpt": "Every one of Berlin’s 39 official bathing sites carries the same top water grade, worked out from two gut bacteria over four years, with blue-green algae excluded by regulation. On 15 September the sampling stops. Here is what each shore really offers, flag by flag.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-12T19:52:15.685Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_1ab1430ead034a74ba32cbe3d82f776a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/orankesee-strandbad-september.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_1ab1430ead034a74ba32cbe3d82f776a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/orankesee-strandbad-september.jpg",
+      "alt": "The beach and buoyed swimming area at Strandbad Orankesee in Lichtenberg under a wide blue sky in mid-September",
+      "relatedToolSlug": "berlin-bathing-site-small-print"
+    },
+    {
       "title": "Berlin Parking Zones: When the Meter Stops and What the Resident Permit Covers",
       "slug": "berlin-parking-zones",
       "path": "/post/berlin-parking-zones",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_a2c402a057ff4d41a7e3025e73759776~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hauptbahnhof-sbahn.jpg",
       "alt": "An S-Bahn train pulling out of Berlin Hauptbahnhof past an almost empty platform, with the station name sign lit above the tracks",
       "relatedToolSlug": "berlin-leave-year-planner"
-    },
-    {
-      "title": "Berlin Club Dress Codes: What Tresor, Sisyphos and RSO Actually Read",
-      "slug": "berlin-club-dress-codes-by-venue",
-      "path": "/post/berlin-club-dress-codes-by-venue",
-      "url": "https://www.berlinwalk.com/post/berlin-club-dress-codes-by-venue",
-      "excerpt": "The most searched thing about Berlin nightlife is the one thing nearly every serious door refuses to publish. This is a venue-by-venue read of twelve Berlin doors: what each one is really looking at, when it runs, the phone sticker rule, and what to do when the answer is no.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "food-nightlife",
-      "topicLabel": "Food & Nightlife",
-      "readTime": "8 min read",
-      "publishedDate": "2026-09-09T13:52:07.780Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_5b17ca2df88c4d93b07c866cebde4595~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-berghain-approach.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_5b17ca2df88c4d93b07c866cebde4595~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-berghain-approach.jpg",
-      "alt": "The gravel forecourt and fence on the approach to the Berghain and Panorama Bar building in Berlin, with people walking towards the entrance",
-      "relatedToolSlug": "berlin-club-door-map"
     }
   ],
   "allPosts": [
+    {
+      "title": "Berlin Bathing Season: What Stops on 15 September and What the Grade Leaves Out",
+      "slug": "berlin-bathing-season",
+      "path": "/post/berlin-bathing-season",
+      "url": "https://www.berlinwalk.com/post/berlin-bathing-season",
+      "excerpt": "Every one of Berlin’s 39 official bathing sites carries the same top water grade, worked out from two gut bacteria over four years, with blue-green algae excluded by regulation. On 15 September the sampling stops. Here is what each shore really offers, flag by flag.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-12T19:52:15.685Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_1ab1430ead034a74ba32cbe3d82f776a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/orankesee-strandbad-september.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_1ab1430ead034a74ba32cbe3d82f776a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/orankesee-strandbad-september.jpg",
+      "alt": "The beach and buoyed swimming area at Strandbad Orankesee in Lichtenberg under a wide blue sky in mid-September",
+      "relatedToolSlug": "berlin-bathing-site-small-print"
+    },
     {
       "title": "Berlin Parking Zones: When the Meter Stops and What the Resident Permit Covers",
       "slug": "berlin-parking-zones",
