@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Bathing Site Small Print</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --amber: #E08600;
+    --red: #C62828;
+    --slate: #7A8471;
+    --line: #E0E4DA;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .bp { max-width: 800px; margin: 0 auto; padding: 14px 12px 12px; }
+  .bp-head h2 { font-size: 1.08rem; margin: 0; color: var(--green); line-height: 1.3; }
+  .bp-head p { margin: 5px 0 0; font-size: .77rem; line-height: 1.55; color: #555; }
+
+  .bp-ribbon { margin: 13px 0 0; background: #fff; border: 1px solid var(--line); border-radius: 11px; padding: 9px 10px 6px; }
+  .bp-ribbon svg { display: block; width: 100%; height: auto; }
+
+  .bp-rail { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 0; }
+  .bp-rail button {
+    font: inherit; font-size: .72rem; font-weight: 700; line-height: 1.25;
+    padding: 8px 10px; min-height: 40px; border-radius: 9px; cursor: pointer;
+    border: 2px solid var(--green); background: #fff; color: var(--deep);
+    display: inline-flex; align-items: center; gap: 6px; flex: 1 1 auto;
+  }
+  .bp-rail button i { font-style: normal; font-size: .68rem; font-weight: 800; color: var(--slate); }
+  .bp-rail button[aria-current="step"] { background: var(--green); color: #fff; border-color: var(--green); }
+  .bp-rail button[aria-current="step"] i { color: var(--yellow); }
+
+  .bp-cap { margin: 11px 0 0; padding: 11px 13px; border-radius: 11px; background: var(--yellow); color: var(--deep); }
+  .bp-cap h3 { margin: 0 0 4px; font-size: .93rem; line-height: 1.3; color: var(--deep); }
+  .bp-cap p { margin: 0; font-size: .8rem; line-height: 1.55; color: var(--deep); }
+
+  .bp-board { margin: 11px 0 0; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 8px 6px 4px; }
+  .bp-board svg { display: block; width: 100%; height: auto; }
+  .bp-board svg .row-hit { cursor: pointer; }
+
+  .bp-legend { display: flex; flex-wrap: wrap; gap: 8px 12px; margin: 8px 6px 4px; font-size: .67rem; color: #555; }
+  .bp-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .bp-key { width: 12px; height: 12px; border-radius: 3px; border: 1px solid rgba(0,0,0,.25); }
+
+  .bp-detail { margin: 11px 0 0; padding: 12px 13px; border-radius: 11px; background: #fff; border: 2px solid var(--green); }
+  .bp-detail h3 { margin: 0 0 2px; font-size: .95rem; line-height: 1.3; color: var(--green); }
+  .bp-detail .bp-where { margin: 0 0 8px; font-size: .74rem; color: #566; }
+  .bp-detail ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; }
+  .bp-detail li { font-size: .79rem; line-height: 1.45; display: flex; justify-content: space-between; gap: 12px; color: #333; }
+  .bp-detail li b { color: var(--deep); text-align: right; font-weight: 700; }
+  .bp-detail .bp-link { margin: 9px 0 0; font-size: .74rem; }
+  .bp-detail .bp-link a { color: var(--green); font-weight: 700; }
+
+  .bp-foot { margin: 11px 0 0; font-size: .68rem; line-height: 1.6; color: #777; }
+
+  @media (max-width: 520px) {
+    .bp-rail button { flex: 1 1 100%; }
+    .bp-cap h3 { font-size: .89rem; }
+  }
+</style>
+</head>
+<body>
+<div class="bp">
+  <div class="bp-head">
+    <h2>Berlin Bathing Site Small Print</h2>
+    <p>All <strong id="bpCount">39</strong> official Berlin bathing sites on one board. Step through what the water grade measures, what it leaves out, and what each shore actually gives you. Tap any row to read that site.</p>
+  </div>
+
+  <div class="bp-ribbon">
+    <svg id="bpRibbon" viewBox="0 0 760 118" role="img" aria-label="The Berlin bathing season and its sampling dates"></svg>
+  </div>
+
+  <div class="bp-rail" id="bpRail" role="group" aria-label="Layers of the board"></div>
+
+  <div class="bp-cap">
+    <h3 id="bpStepTitle"></h3>
+    <p id="bpStepCap"></p>
+  </div>
+
+  <div class="bp-board">
+    <svg id="bpBoard" role="img" aria-label="Every official Berlin bathing site and its listed small print"></svg>
+    <div class="bp-legend">
+      <span><i class="bp-key" style="background:#1B5E20"></i> listed and in your favour</span>
+      <span><i class="bp-key" style="background:#E08600"></i> flagged, worth knowing</span>
+      <span><i class="bp-key" style="background:#C62828"></i> not there, or not allowed</span>
+      <span><i class="bp-key" style="background:#DDE2D6"></i> not part of this layer</span>
+    </div>
+  </div>
+
+  <div class="bp-detail" id="bpDetail"></div>
+  <p class="bp-foot" id="bpFoot"></p>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var DATA = null;
+  var currentStep = 0;
+  var pickedRow = -1;
+
+  var railEl = document.getElementById('bpRail');
+  var boardEl = document.getElementById('bpBoard');
+  var ribbonEl = document.getElementById('bpRibbon');
+  var titleEl = document.getElementById('bpStepTitle');
+  var capEl = document.getElementById('bpStepCap');
+  var detailEl = document.getElementById('bpDetail');
+  var footEl = document.getElementById('bpFoot');
+  var countEl = document.getElementById('bpCount');
+
+  var GREEN = '#1B5E20', AMBER = '#E08600', RED = '#C62828', OFF = '#DDE2D6', DEEP = '#123D18';
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  /* One cell of the board: a colour and a one-word reading for a column. */
+  function cell(site, key) {
+    if (key === 'grade') return { c: GREEN, t: 'Ausgezeichnet' };
+    if (key === 'algae') return site.algae ? { c: AMBER, t: 'algae possible' } : { c: GREEN, t: 'no algae note' };
+    if (key === 'itch') return site.itch ? { c: AMBER, t: 'cercariae note' } : { c: GREEN, t: 'no itch note' };
+    if (key === 'weed') return site.weed ? { c: AMBER, t: 'water plants' } : { c: GREEN, t: 'no weed note' };
+    if (key === 'rescue') return site.rescue ? { c: GREEN, t: site.rescue === 'yes' ? 'rescue at times' : site.rescue + ' at times' } : { c: RED, t: 'no rescue listed' };
+    if (key === 'boat') return site.boat ? { c: GREEN, t: 'screened from boats' } : { c: AMBER, t: 'open to boat traffic' };
+    if (key === 'wc') {
+      if (site.wc === 'permanent') return { c: GREEN, t: 'toilet on site' };
+      if (site.wc === 'mobile') return { c: AMBER, t: 'portable toilet' };
+      return { c: RED, t: 'no toilet' };
+    }
+    if (key === 'step') return site.step ? { c: GREEN, t: 'step-free to the water' } : { c: RED, t: 'not step-free' };
+    if (key === 'dogs') return site.dogs === 'no' ? { c: RED, t: 'no dogs' } : { c: AMBER, t: 'leashed, terrace only' };
+    return { c: OFF, t: '' };
+  }
+
+  function activeCols() { return DATA.steps[currentStep].cols; }
+
+  function drawRail() {
+    var html = '';
+    for (var i = 0; i < DATA.steps.length; i++) {
+      html += '<button type="button" data-step="' + i + '"' + (i === currentStep ? ' aria-current="step"' : '') + '>'
+        + '<i>' + (i + 1) + '</i>' + esc(DATA.steps[i].t) + '</button>';
+    }
+    railEl.innerHTML = html;
+  }
+
+  /* The season as a real line: the monitored window, its nine sampling dates,
+     the July point where the blooms start, and where today sits. */
+  function drawRibbon() {
+    var W = 760, padL = 14, padR = 14, y = 52, h = 15;
+    var span = W - padL - padR;
+    /* day 0 = 1 May, day 183 = 31 October */
+    var startDay = 14, endDay = 137, totalDays = 183;
+    var xOf = function (d) { return padL + span * (d / totalDays); };
+    var post = currentStep === DATA.steps.length - 1;
+    var s = '';
+    s += '<rect x="' + padL + '" y="' + y + '" width="' + span + '" height="' + h + '" rx="7" fill="#EFF1EA"></rect>';
+    s += '<rect x="' + xOf(startDay) + '" y="' + y + '" width="' + (xOf(endDay) - xOf(startDay)) + '" height="' + h + '" rx="7" fill="' + (post ? '#B9C2B0' : GREEN) + '"></rect>';
+    s += '<rect x="' + xOf(endDay) + '" y="' + y + '" width="' + (xOf(totalDays) - xOf(endDay)) + '" height="' + h + '" rx="7" fill="' + (post ? '#8A9481' : '#DDE2D6') + '"></rect>';
+    for (var k = 0; k < 9; k++) {
+      var d = startDay + k * 14;
+      s += '<line x1="' + xOf(d) + '" y1="' + (y - 6) + '" x2="' + xOf(d) + '" y2="' + (y + h + 6) + '" stroke="' + (post ? '#8A9481' : DEEP) + '" stroke-width="2"></line>';
+    }
+    var julyX = xOf(61);
+    s += '<line x1="' + julyX + '" y1="' + (y + h + 10) + '" x2="' + julyX + '" y2="' + (y + h + 24) + '" stroke="' + AMBER + '" stroke-width="3"></line>';
+    s += '<text x="' + (julyX + 6) + '" y="' + (y + h + 24) + '" font-size="11" fill="' + AMBER + '" font-weight="700">blooms build from July</text>';
+    s += '<text x="' + padL + '" y="' + (y - 14) + '" font-size="12" fill="' + DEEP + '" font-weight="700">Sampled every 14 days, 15 May to 15 September</text>';
+    s += '<text x="' + padL + '" y="' + (y - 30) + '" font-size="11" fill="#777">The Berlin bathing season, 1 May to 31 October</text>';
+    s += '<text x="' + xOf(startDay) + '" y="' + (y + h + 40) + '" font-size="11" fill="#777">15 May</text>';
+    s += '<text x="' + (xOf(endDay) - 30) + '" y="' + (y + h + 40) + '" font-size="11" fill="#777">15 Sep</text>';
+    s += '<text x="' + (xOf(totalDays) - 42) + '" y="' + (y + h + 40) + '" font-size="11" fill="#777">31 Oct</text>';
+    if (post) {
+      var mid = (xOf(endDay) + xOf(totalDays)) / 2;
+      s += '<text x="' + mid + '" y="' + (y - 14) + '" font-size="12" fill="' + DEEP + '" font-weight="700" text-anchor="middle">nobody sampling</text>';
+    }
+    ribbonEl.innerHTML = s;
+  }
+
+  function drawBoard() {
+    var wide = boardEl.parentNode.clientWidth || 700;
+    var narrow = wide < 560;
+    var nameW = narrow ? 132 : 208;
+    var cols = DATA.columns;
+    var cellW = narrow ? 26 : 40;
+    var gap = narrow ? 3 : 5;
+    var rowH = narrow ? 17 : 19;
+    var headH = narrow ? 58 : 68;
+    var W = nameW + cols.length * (cellW + gap) + 10;
+    var H = headH + DATA.sites.length * rowH + 8;
+    var live = activeCols();
+    var s = '';
+
+    for (var ci = 0; ci < cols.length; ci++) {
+      var cx = nameW + ci * (cellW + gap);
+      var on = live.indexOf(cols[ci].k) > -1;
+      var hy = headH - 9;
+      s += '<text x="' + (cx + cellW / 2) + '" y="' + hy + '" font-size="' + (narrow ? 8.5 : 10) + '" '
+        + 'font-weight="700" fill="' + (on ? DEEP : '#AFB8A5') + '" text-anchor="start" '
+        + 'transform="rotate(-52 ' + (cx + cellW / 2) + ' ' + hy + ')">' + esc(cols[ci].s) + '</text>';
+    }
+
+    for (var i = 0; i < DATA.sites.length; i++) {
+      var site = DATA.sites[i];
+      var ry = headH + i * rowH;
+      var picked = i === pickedRow;
+      if (picked) s += '<rect x="0" y="' + ry + '" width="' + W + '" height="' + (rowH - 2) + '" rx="4" fill="#FFF8B0"></rect>';
+      else if (i % 2 === 1) s += '<rect x="0" y="' + ry + '" width="' + W + '" height="' + (rowH - 2) + '" rx="4" fill="#F7F8F4"></rect>';
+      var label = site.n;
+      var limit = narrow ? 19 : 30;
+      if (label.length > limit) label = label.slice(0, limit - 1) + '…';
+      s += '<text x="4" y="' + (ry + rowH - 6) + '" font-size="' + (narrow ? 9.5 : 11) + '" '
+        + 'fill="' + (picked ? DEEP : '#3B4636') + '" font-weight="' + (picked ? 700 : 500) + '">' + esc(label) + '</text>';
+      for (var j = 0; j < cols.length; j++) {
+        var x = nameW + j * (cellW + gap);
+        var onCol = live.indexOf(cols[j].k) > -1;
+        var v = cell(site, cols[j].k);
+        s += '<rect x="' + x + '" y="' + (ry + 3) + '" width="' + cellW + '" height="' + (rowH - 8) + '" rx="3" '
+          + 'fill="' + (onCol ? v.c : OFF) + '" opacity="' + (onCol ? 1 : 0.5) + '"></rect>';
+      }
+      s += '<rect class="row-hit" x="0" y="' + ry + '" width="' + W + '" height="' + (rowH - 2) + '" fill="transparent" data-row="' + i + '"></rect>';
+    }
+    boardEl.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    boardEl.innerHTML = s;
+  }
+
+  function drawDetail() {
+    if (pickedRow < 0) {
+      detailEl.innerHTML = '<h3>Pick a site</h3><p class="bp-where">Tap any row on the board to read that shore’s own lines, straight from its official page.</p>';
+      return;
+    }
+    var site = DATA.sites[pickedRow];
+    var keys = ['algae', 'itch', 'weed', 'rescue', 'boat', 'wc', 'step', 'dogs'];
+    var rows = '';
+    for (var i = 0; i < keys.length; i++) {
+      var col = null;
+      for (var j = 0; j < DATA.columns.length; j++) { if (DATA.columns[j].k === keys[i]) col = DATA.columns[j]; }
+      var v = cell(site, keys[i]);
+      rows += '<li><span>' + esc(col.s) + '</span><b style="color:' + v.c + '">' + esc(v.t) + '</b></li>';
+    }
+    var where = site.w && site.w !== site.n ? site.w + ', ' + site.d : site.d;
+    var extra = site.forecast
+      ? 'This is one of the five Unterhavel sites with a forecast model behind it, so short pollution spells there are predicted as well as sampled.'
+      : 'Its grade rests on the same four-year run of samples as every other site here.';
+    detailEl.innerHTML = '<h3>' + esc(site.n) + '</h3>'
+      + '<p class="bp-where">' + esc(where) + '. ' + esc(extra) + '</p>'
+      + '<ul>' + rows + '</ul>'
+      + '<p class="bp-link"><a href="' + esc(site.url) + '" target="_blank" rel="noopener">Read the official page for ' + esc(site.n) + '</a></p>';
+  }
+
+  function render() {
+    titleEl.textContent = DATA.steps[currentStep].t;
+    capEl.textContent = DATA.steps[currentStep].cap;
+    drawRail();
+    drawRibbon();
+    drawBoard();
+    drawDetail();
+  }
+
+  railEl.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-step]');
+    if (!btn) return;
+    currentStep = Number(btn.getAttribute('data-step'));
+    render();
+  });
+
+  boardEl.addEventListener('click', function (e) {
+    var hit = e.target.closest('[data-row]');
+    if (!hit) return;
+    var r = Number(hit.getAttribute('data-row'));
+    pickedRow = r === pickedRow ? -1 : r;
+    drawBoard();
+    drawDetail();
+  });
+
+  window.addEventListener('resize', function () { if (DATA) drawBoard(); });
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (json) {
+    DATA = json;
+    countEl.textContent = String(DATA.meta.siteCount);
+    footEl.textContent = 'Site lists, water-quality classifications and the per-site notes come from the '
+      + DATA.meta.source + ', with the bathing-site geodata published ' + DATA.meta.dataDate
+      + ' and every site page read on ' + DATA.meta.checkedOn + '. '
+      + 'The EU classification is worked out after each season from ' + DATA.meta.gradeBasis
+      + ' and covers ' + DATA.meta.gradeParameters + ' only; blue-green algae are assessed separately under the Berlin bathing-water regulation. '
+      + 'A shore changes with the wind and the week, so treat this board as the site’s standing profile and not as today’s reading.';
+    render();
+  });
+})();
+</script>
+</body>
+</html>

@@ -11443,5 +11443,47 @@
         "a": "Friedrichshain-Kreuzberg is converting the district in stages. Friedenstraße started on 1 April 2026, Alexandrinenviertel on 1 June, and Mehringplatz plus the Graefekiez extension on 1 August. Askanischer Platz, zone 58, starts on 1 October 2026 at 4 euros an hour until 22:00, and Samariterviertel, zone 31, starts on 1 December 2026 at 3 euros an hour until midnight. Blücherstraße, Rathaus Yorckstraße, Richard-Sorge-Viertel, Hausburgviertel and Alt-Stralau follow in 2027 and 2028."
       }
     ]
+  },
+  "berlin-bathing-season": {
+    "title": "Berlin Bathing Season - FAQ",
+    "subtitle": "When the testing stops, what the water grade covers, and what each shore actually gives you.",
+    "items": [
+      {
+        "q": "When does the Berlin bathing season end?",
+        "a": "The official monitoring season runs from 15 May to 15 September every year. Within it, the Landesamt fuer Gesundheit und Soziales samples all 39 official bathing sites every 14 days under the EU bathing water directive and the Berlin bathing water regulation. From 16 September there are no samples and no published assessment until the following May. Staffed beaches set their own dates on top of that: Strandbad Wannsee closed its swimming season on 13 September 2026 and stays open for sunbathing and the sauna until 4 October."
+      },
+      {
+        "q": "Are Berlin lakes safe to swim in after the season ends?",
+        "a": "Nothing about the water changes on a date, and in most respects autumn helps. Swimmer’s itch needs warm water, and the blue-green algae that build from July fade as temperatures drop. What you lose is the backstop: if something goes wrong with the water at your spot after 15 September, no fortnightly sample will catch it and no warning will be published. Read your site’s own page before the season closes, note its flags, and judge the shore with your eyes when you get there."
+      },
+      {
+        "q": "What does the official water quality grade actually cover?",
+        "a": "Two things: Escherichia coli and intestinal enterococci, both indicators of faecal contamination. The grade is not this week’s reading either. It is a classification calculated after each season closes from 40 results per site across the previous four seasons, in four categories from excellent to poor. Every one of Berlin’s 39 official sites currently holds the top category, checked on 12 September 2026, which means the grade tells you Berlin’s bathing water is not contaminated with sewage and nothing at all about which lake to pick."
+      },
+      {
+        "q": "Which Berlin bathing sites have blue-green algae?",
+        "a": "30 of the 39 official sites are flagged for possible mass growth of blue-green algae, including the Mueggelsee, Wannsee, Ploetzensee, Weissensee and most of the Havel and Dahme sites. Almost all Berlin bathing spots lie on shallow, nutrient-rich river lakes, and blooms develop from July onwards. The flag is deliberately kept out of the water quality classification and assessed separately, so a site can hold the top grade and carry a bloom at the same time. Avoid visible green or blue-green streaks, flakes and mats, keep children away from them, shower afterwards and rinse your swimwear."
+      },
+      {
+        "q": "What is swimmer’s itch and which Berlin lakes have it?",
+        "a": "It is bathing dermatitis, caused by cercariae: roughly one millimetre long flatworm larvae that live in ducks and other waterfowl, reach the water in bird droppings, multiply in shoreline snails and then swarm in warm water looking for a bird. A swimmer is the wrong host, so the larvae burrow into the skin and die there, leaving itchy wheals two to eight millimetres across that can last up to three weeks. It is harmless beyond the itch and only treated symptomatically. 14 of the 39 official sites carry the note, among them Wannsee, Schlachtensee, Krumme Lanke, Strandbad Mueggelsee and Strandbad Ploetzensee. The risk rises after the water first passes 20 degrees and can return in a second late-summer window."
+      },
+      {
+        "q": "Which Berlin bathing sites have a lifeguard?",
+        "a": "29 of the 39 list water rescue, and in every case only as present at times rather than all day: the DLRG at 15 sites, the ASB at 6, the DRK at 1 and the rest unnamed. 10 sites list no rescue cover at all, including Schlachtensee, Krumme Lanke, Strandbad Halensee, Flughafensee and Strandbad Tegel. Separately, 24 of the 39 bathing areas are not screened from boat traffic, and eight sites have neither a screened area nor any listed rescue."
+      },
+      {
+        "q": "Can you take a dog to a Berlin bathing site?",
+        "a": "Almost never. 38 of the 39 official bathing sites forbid dogs outright. The single exception is Strandbad Weissensee, which allows a dog on a lead on the terrace only. There is also a health reason to keep dogs out of some lakes: after dogs died at the Tegeler See in 2017, a class of water-plant-associated cyanobacteria producing anatoxin was identified that occurs in clear, clean-looking water and was not covered by the old monitoring strategy."
+      },
+      {
+        "q": "Which Berlin bathing sites have step-free access to the water?",
+        "a": "Five of the 39: Strandbad Wannsee, Strandbad Orankesee, Strandbad Gruenau, Strandbad Luebars and Strandbad Heiligensee. Every other official site is listed as not barrier-free, and 21 of them note that both the water access and the toilet are not barrier-free. On toilets generally, 16 sites have a permanent one, 13 only a portable one and 10 have none at all."
+      },
+      {
+        "q": "Which Berlin districts have official bathing sites?",
+        "a": "Eight of the twelve, and the distribution is lopsided. Treptow-Koepenick has 11 and Reinickendorf 9, so half of all the official bathing sites in Berlin sit in two districts. Steglitz-Zehlendorf has 7, Spandau 5, Charlottenburg-Wilmersdorf 4, and Lichtenberg, Mitte and Pankow have one each. Friedrichshain-Kreuzberg, Tempelhof-Schoeneberg, Neukoelln and Marzahn-Hellersdorf have none, which is why swimming in Berlin usually starts with an S-Bahn ride."
+      }
+    ]
   }
 }
