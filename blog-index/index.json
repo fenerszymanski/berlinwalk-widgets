@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-12T19:56:18.658Z",
+  "updatedAt": "2026-09-13T02:07:25.048Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 378,
@@ -49,21 +49,21 @@
   ],
   "hero": {
     "lead": {
-      "title": "Kleingarten in Berlin: Where the 70,000 Plots Are and How the Wait Really Works",
-      "slug": "kleingarten-berlin",
-      "path": "/post/kleingarten-berlin",
-      "url": "https://www.berlinwalk.com/post/kleingarten-berlin",
-      "excerpt": "Berlin has 70,390 allotment plots in 1,038 colonies, but Pankow holds over ten thousand and Friedrichshain-Kreuzberg 228. Where the plots actually are, who runs the waiting lists, what the takeover really costs, and the registration move to make this week.",
+      "title": "Berlin Bathing Season: What Stops on 15 September and What the Grade Leaves Out",
+      "slug": "berlin-bathing-season",
+      "path": "/post/berlin-bathing-season",
+      "url": "https://www.berlinwalk.com/post/berlin-bathing-season",
+      "excerpt": "Every one of Berlin’s 39 official bathing sites carries the same top water grade, worked out from two gut bacteria over four years, with blue-green algae excluded by regulation. On 15 September the sampling stops. Here is what each shore really offers, flag by flag.",
       "category": "Living in Berlin",
       "categorySlug": "living-in-berlin",
       "topic": "living-in-berlin",
       "topicLabel": "Living in Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-09-11T19:48:50.750Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_69bc83334bda4af091ff449f3b07a3d4~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/kleingarten-berlin-cover-feierabend-sunrise.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_69bc83334bda4af091ff449f3b07a3d4~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/kleingarten-berlin-cover-feierabend-sunrise.jpg",
-      "alt": "Sunrise in morning fog over the main path of the Feierabend allotment colony in Berlin-Mariendorf, with hedges and garden gates on both sides",
-      "relatedToolSlug": "berlin-kleingarten-map"
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-12T19:52:15.685Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_1ab1430ead034a74ba32cbe3d82f776a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/orankesee-strandbad-september.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_1ab1430ead034a74ba32cbe3d82f776a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/orankesee-strandbad-september.jpg",
+      "alt": "The beach and buoyed swimming area at Strandbad Orankesee in Lichtenberg under a wide blue sky in mid-September",
+      "relatedToolSlug": "berlin-bathing-site-small-print"
     },
     "secondary": [
       {
@@ -84,38 +84,21 @@
         "relatedToolSlug": "basketball-worldcup-fixtures"
       },
       {
-        "title": "Berlin Water Hardness: What Your Postcode Says About the Scale in Your Kettle",
-        "slug": "berlin-water-hardness",
-        "path": "/post/berlin-water-hardness",
-        "url": "https://www.berlinwalk.com/post/berlin-water-hardness",
-        "excerpt": "Every Berlin postcode runs officially hard water, but a kettle in Wedding and one in Köpenick do not scale at the same speed. The official per-postcode ranges, mapped, with the dishwasher setting, the detergent column and the descaling rhythm that follow.",
+        "title": "Berlin Parking Zones: When the Meter Stops and What the Resident Permit Covers",
+        "slug": "berlin-parking-zones",
+        "path": "/post/berlin-parking-zones",
+        "url": "https://www.berlinwalk.com/post/berlin-parking-zones",
+        "excerpt": "Berlin runs 103 managed parking zones, and the price is the part people get right. The charged week runs from 45 hours to 105, exactly one zone charges on a Sunday, and two more switch on this autumn. What your zone actually does, and whether the permit is worth it.",
         "category": "Living in Berlin",
         "categorySlug": "living-in-berlin",
         "topic": "living-in-berlin",
         "topicLabel": "Living in Berlin",
-        "readTime": "6 min read",
-        "publishedDate": "2026-09-11T14:00:36.645Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_a24bdb7a928e4839bf741659dbb152e8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wasserturm-1600.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_a24bdb7a928e4839bf741659dbb152e8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wasserturm-1600.jpg",
-        "alt": "The two brick towers of the former Prenzlauer Berg waterworks above the trees of the Wasserturm park in autumn",
-        "relatedToolSlug": "berlin-water-hardness-map"
-      },
-      {
-        "title": "Mushroom Picking Around Berlin: Ten Forests on Your Ticket and the Rules Before the Pan",
-        "slug": "mushroom-picking-berlin",
-        "path": "/post/mushroom-picking-berlin",
-        "url": "https://www.berlinwalk.com/post/mushroom-picking-berlin",
-        "excerpt": "Small amounts for your own pan are legal in both Berlin and Brandenburg forest, porcini and chanterelles carry a personal-use exception, and the free Pilzberatung at the Botanical Garden has checked baskets since 1890. Ten forests from S Rahnsdorf to Chorin, plotted by real travel minutes from Alexanderplatz.",
-        "category": "Living in Berlin",
-        "categorySlug": "living-in-berlin",
-        "topic": "living-in-berlin",
-        "topicLabel": "Living in Berlin",
-        "readTime": "7 min read",
-        "publishedDate": "2026-09-11T07:40:47.477Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_f0e8e550d4394fe2a6fac72f402a1d20~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-maronen.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_f0e8e550d4394fe2a6fac72f402a1d20~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-maronen.jpg",
-        "alt": "Two bay bolete mushrooms in green moss, one lying on its side showing the pale yellow pore layer under the brown cap",
-        "relatedToolSlug": "berlin-mushroom-forest-finder"
+        "readTime": "8 min read",
+        "publishedDate": "2026-09-12T14:18:56.176Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_6c3d7d2e92794fd4ad4dc96cc378ea5d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-parking-zones-cover-kopenhagener.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_6c3d7d2e92794fd4ad4dc96cc378ea5d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-parking-zones-cover-kopenhagener.jpg",
+        "alt": "A Berlin residential street in Prenzlauer Berg with cars parked along both kerbs under bare plane trees",
+        "relatedToolSlug": "berlin-parking-zone-clock"
       },
       {
         "title": "Berlin Museums Closed for Renovation: What Is Shut and What to See Instead",
@@ -150,6 +133,23 @@
         "thumb": "https://static.wixstatic.com/media/5a08a3_09bdf461857549d291c3769973fe3a9b~mv2.png/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_8c97b9e50ab54e0b9a53b8d3982f4ce4~mv2.jpg",
         "alt": "Yellow train speeding through Konstanzer Strasse station. The wall has bold stripes and text. Ceiling lights illuminate the platform.",
         "relatedToolSlug": "transport-ticket-calculator"
+      },
+      {
+        "title": "Public Toilets in Berlin: Where to Find Them, What They Cost, and Free Options",
+        "slug": "public-toilets-in-berlin",
+        "path": "/post/public-toilets-in-berlin",
+        "url": "https://www.berlinwalk.com/post/public-toilets-in-berlin",
+        "excerpt": "Need a toilet in Berlin? This tourist guide shows where to find public toilets, what they cost, where the free options are, and when stations, malls, or the Berliner Toilette app help.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "first-day",
+        "topicLabel": "First Day in Berlin",
+        "readTime": "5 min read",
+        "publishedDate": "2026-05-16T18:51:08.424Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_75e950f67226457e8af15fbe3a7f46fd~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_7bdfcc030bd74d1d99d1624e3799f48d~mv2.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_75e950f67226457e8af15fbe3a7f46fd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_7bdfcc030bd74d1d99d1624e3799f48d~mv2.jpg",
+        "alt": "Restroom sign with male and female symbols on a brick wall, pointing right. Green trees and glass buildings in the background.",
+        "relatedToolSlug": "berlin-public-toilets"
       }
     ]
   },
