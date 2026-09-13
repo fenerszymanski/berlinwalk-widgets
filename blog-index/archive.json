@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-13T08:08:35.695Z",
+  "updatedAt": "2026-09-13T12:26:06.678Z",
   "source": "Wix Blog API",
-  "totalPosts": 379,
+  "totalPosts": 380,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "German Courses in Berlin: What a Lesson Costs and Why the Rules Change at B1",
+      "slug": "german-courses-in-berlin",
+      "path": "/post/german-courses-in-berlin",
+      "url": "https://www.berlinwalk.com/post/german-courses-in-berlin",
+      "excerpt": "The same 45 minutes of German teaching in Berlin can legally cost you nothing, 80 cents or 10 euro. Up to B1 the Volkshochschule price is capped by a federal number and nobody gets a discount. Above B1 the cap disappears and the discounts come back. Here is what each route really costs.",
+      "category": "German Language",
+      "categorySlug": "german-language",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-13T12:21:25.723Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_d96e9eed84f1438ca8380c957bf0f6c9~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/vhs-kreuzberg-wassertorstrasse.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_d96e9eed84f1438ca8380c957bf0f6c9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/vhs-kreuzberg-wassertorstrasse.jpg",
+      "alt": "Volkshochschule Friedrichshain-Kreuzberg in the Wassertorstrasse, a four-storey brick school building on a Kreuzberg street",
+      "relatedToolSlug": "berlin-german-course-ladder"
+    },
     {
       "title": "Berlin Hiking Trails: The 20 Green Routes and Where the Trains Meet Them",
       "slug": "berlin-hiking-trails",

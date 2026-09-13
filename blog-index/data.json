@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-13T08:08:35.695Z",
+  "updatedAt": "2026-09-13T12:26:06.678Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 379,
-  "toolsTotal": 299,
+  "totalPosts": 380,
+  "toolsTotal": 300,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1628,6 +1628,23 @@
       "description": "Berlin for people who live here. City rules, bills, transport, seasons, and the districts beyond the tourist centre.",
       "posts": [
         {
+          "title": "German Courses in Berlin: What a Lesson Costs and Why the Rules Change at B1",
+          "slug": "german-courses-in-berlin",
+          "path": "/post/german-courses-in-berlin",
+          "url": "https://www.berlinwalk.com/post/german-courses-in-berlin",
+          "excerpt": "The same 45 minutes of German teaching in Berlin can legally cost you nothing, 80 cents or 10 euro. Up to B1 the Volkshochschule price is capped by a federal number and nobody gets a discount. Above B1 the cap disappears and the discounts come back. Here is what each route really costs.",
+          "category": "German Language",
+          "categorySlug": "german-language",
+          "topic": "living-in-berlin",
+          "topicLabel": "Living in Berlin",
+          "readTime": "8 min read",
+          "publishedDate": "2026-09-13T12:21:25.723Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_d96e9eed84f1438ca8380c957bf0f6c9~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/vhs-kreuzberg-wassertorstrasse.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_d96e9eed84f1438ca8380c957bf0f6c9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/vhs-kreuzberg-wassertorstrasse.jpg",
+          "alt": "Volkshochschule Friedrichshain-Kreuzberg in the Wassertorstrasse, a four-storey brick school building on a Kreuzberg street",
+          "relatedToolSlug": "berlin-german-course-ladder"
+        },
+        {
           "title": "Berlin Parking Zones: When the Meter Stops and What the Resident Permit Covers",
           "slug": "berlin-parking-zones",
           "path": "/post/berlin-parking-zones",
@@ -1779,28 +1796,28 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_4ec1d2efbf1e4037bee7c1faed811631~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-recycling-yard-containers.jpg",
           "alt": "Orange BSR containers and glass banks lined up inside the recycling yard on Ilsenburger Strasse in Berlin-Charlottenburg",
           "relatedToolSlug": "berlin-disposal-cost-ladder"
-        },
-        {
-          "title": "Bike Theft in Berlin: Where It Happens, When, and What It Costs",
-          "slug": "bike-theft-in-berlin",
-          "path": "/post/bike-theft-in-berlin",
-          "url": "https://www.berlinwalk.com/post/bike-theft-in-berlin",
-          "excerpt": "The hour in a Berlin bike theft file is not when the thief turned up, it is when the owner last saw the bike. Read as a parking clock, 31% of losses were locked up between six and ten in the evening, and a third of everything went inside three hours.",
-          "category": "Living in Berlin",
-          "categorySlug": "living-in-berlin",
-          "topic": "living-in-berlin",
-          "topicLabel": "Living in Berlin",
-          "readTime": "7 min read",
-          "publishedDate": "2026-09-10T13:45:03.063Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_3f70db1a8c4745d689118079eca889f5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ostkreuz-bike-racks.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_3f70db1a8c4745d689118079eca889f5~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ostkreuz-bike-racks.jpg",
-          "alt": "Two levels of bicycle racks packed with bikes under the railway structure at Bahnhof Ostkreuz in Berlin",
-          "relatedToolSlug": "berlin-bike-theft-clock"
         }
       ]
     }
   ],
   "latest": [
+    {
+      "title": "German Courses in Berlin: What a Lesson Costs and Why the Rules Change at B1",
+      "slug": "german-courses-in-berlin",
+      "path": "/post/german-courses-in-berlin",
+      "url": "https://www.berlinwalk.com/post/german-courses-in-berlin",
+      "excerpt": "The same 45 minutes of German teaching in Berlin can legally cost you nothing, 80 cents or 10 euro. Up to B1 the Volkshochschule price is capped by a federal number and nobody gets a discount. Above B1 the cap disappears and the discounts come back. Here is what each route really costs.",
+      "category": "German Language",
+      "categorySlug": "german-language",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-13T12:21:25.723Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_d96e9eed84f1438ca8380c957bf0f6c9~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/vhs-kreuzberg-wassertorstrasse.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_d96e9eed84f1438ca8380c957bf0f6c9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/vhs-kreuzberg-wassertorstrasse.jpg",
+      "alt": "Volkshochschule Friedrichshain-Kreuzberg in the Wassertorstrasse, a four-storey brick school building on a Kreuzberg street",
+      "relatedToolSlug": "berlin-german-course-ladder"
+    },
     {
       "title": "Berlin Hiking Trails: The 20 Green Routes and Where the Trains Meet Them",
       "slug": "berlin-hiking-trails",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_4ec1d2efbf1e4037bee7c1faed811631~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-recycling-yard-containers.jpg",
       "alt": "Orange BSR containers and glass banks lined up inside the recycling yard on Ilsenburger Strasse in Berlin-Charlottenburg",
       "relatedToolSlug": "berlin-disposal-cost-ladder"
-    },
-    {
-      "title": "Berlin Heating Season: What Your Landlord Owes You When the Flat Goes Cold",
-      "slug": "berlin-heating-season",
-      "path": "/post/berlin-heating-season",
-      "url": "https://www.berlinwalk.com/post/berlin-heating-season",
-      "excerpt": "The Heizperiode starts on 1 October, but in four of the last eleven autumns Berlin crossed the cold snap threshold in September. This is what a landlord owes at which hour, how to measure so the number counts, and the order of the steps before anyone touches the rent.",
-      "category": "Living in Berlin",
-      "categorySlug": "living-in-berlin",
-      "topic": "living-in-berlin",
-      "topicLabel": "Living in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-09-09T20:34:28.261Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_3a463bc9d35846ae99c9804c12cd86b3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-heating-season-cover-friedenau-entrance.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_3a463bc9d35846ae99c9804c12cd86b3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-heating-season-cover-friedenau-entrance.jpg",
-      "alt": "A lit Altbau entrance on Handjerystrasse in Berlin-Friedenau at night, with snow on the hedges and the front steps",
-      "relatedToolSlug": "berlin-heating-log"
     }
   ],
   "allPosts": [
+    {
+      "title": "German Courses in Berlin: What a Lesson Costs and Why the Rules Change at B1",
+      "slug": "german-courses-in-berlin",
+      "path": "/post/german-courses-in-berlin",
+      "url": "https://www.berlinwalk.com/post/german-courses-in-berlin",
+      "excerpt": "The same 45 minutes of German teaching in Berlin can legally cost you nothing, 80 cents or 10 euro. Up to B1 the Volkshochschule price is capped by a federal number and nobody gets a discount. Above B1 the cap disappears and the discounts come back. Here is what each route really costs.",
+      "category": "German Language",
+      "categorySlug": "german-language",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-13T12:21:25.723Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_d96e9eed84f1438ca8380c957bf0f6c9~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/vhs-kreuzberg-wassertorstrasse.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_d96e9eed84f1438ca8380c957bf0f6c9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/vhs-kreuzberg-wassertorstrasse.jpg",
+      "alt": "Volkshochschule Friedrichshain-Kreuzberg in the Wassertorstrasse, a four-storey brick school building on a Kreuzberg street",
+      "relatedToolSlug": "berlin-german-course-ladder"
+    },
     {
       "title": "Berlin Hiking Trails: The 20 Green Routes and Where the Trains Meet Them",
       "slug": "berlin-hiking-trails",
