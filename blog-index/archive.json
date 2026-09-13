@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-13T14:03:13.374Z",
+  "updatedAt": "2026-09-13T19:42:56.494Z",
   "source": "Wix Blog API",
-  "totalPosts": 381,
+  "totalPosts": 382,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Berlin Rent Increase: Which of the Four Limits Actually Stops the Letter",
+      "slug": "berlin-rent-increase",
+      "path": "/post/berlin-rent-increase",
+      "url": "https://www.berlinwalk.com/post/berlin-rent-increase",
+      "excerpt": "The Berliner Mietspiegel 2026 put the median net cold rent at 7.71 euro per square metre, and the rent letters built on it are landing now. Four separate limits decide whether yours holds up, and for most Berlin tenants the famous 15 per cent is not the one doing the work.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-13T19:40:22.423Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_7123a9cf01154bfa8808b77d3fc83749~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hermannstrasse-neukoelln.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_7123a9cf01154bfa8808b77d3fc83749~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hermannstrasse-neukoelln.jpg",
+      "alt": "A Gruenderzeit apartment building on Hermannstrasse in Berlin-Neukoelln, with red brick and stucco ornament above the ground floor windows and blue sky reflected in the panes",
+      "relatedToolSlug": "berlin-rent-increase-limits"
+    },
     {
       "title": "Balcony Solar in Berlin: What Your Wall Earns Now the Grant Has Gone",
       "slug": "balcony-solar-berlin",
