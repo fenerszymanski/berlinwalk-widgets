@@ -8911,6 +8911,46 @@
       ],
       "iconStatus": "live-wix-media",
       "cmsItemId": "8d4aed60-ae78-4d17-b8b6-a382439df03a"
+    },
+    {
+      "slug": "berlin-green-path-stages",
+      "title": "Berlin Green Path Stage Finder",
+      "lead": "Berlin signposts twenty official walking routes across about 575 km, and almost nobody walks one end to end. Set the hours you actually have and this finds, for every route, the longest walk between two stations that still fits, drawn on the real geometry with all 282 station points on it.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-green-path-stages/",
+      "embedHeight": 2200,
+      "image": "https://static.wixstatic.com/media/5a08a3_feb68327410341a1873aa1e9d32edad6~mv2.png",
+      "hubCategory": "WeatherOutdoor",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "hiking",
+        "walking routes",
+        "gruene hauptwege",
+        "green main routes",
+        "berlin trails",
+        "s-bahn",
+        "day walk",
+        "living in berlin",
+        "wanderweg",
+        "tiergartenring",
+        "innerer parkring",
+        "autumn"
+      ],
+      "aliases": [
+        "berlin hiking trails",
+        "hiking in berlin",
+        "walking trails berlin",
+        "gruene hauptwege berlin",
+        "long walks in berlin",
+        "berlin wanderwege",
+        "berlin trail map",
+        "walk from station to station berlin",
+        "tiergartenring walk",
+        "innerer parkring walk"
+      ],
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "517864cd-790f-4bb8-8303-e572a5b30d07"
     }
   ],
   "hubCategories": [

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Green Path Stage Finder</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root{
+    --green:#1B5E20; --deep:#123D18; --yellow:#FFE600; --lime:#7CB342;
+    --lightgreen:#C5E1A5; --cream:#FAFAF5; --ink:#212121;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--cream);color:var(--ink);padding:14px 12px 8px}
+  .gps-wrap{max-width:900px;margin:0 auto}
+  .gps-head h1{font-size:1.15rem;color:var(--green);margin-bottom:3px}
+  .gps-head p{font-size:.8rem;color:#4b5245;line-height:1.45}
+  .gps-card{background:#fff;border:1px solid #e2e5da;border-radius:12px;padding:14px 16px;margin-top:10px}
+  .gps-dialrow{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .gps-dialrow .gps-label{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);font-weight:700}
+  .gps-clock{font-size:1.45rem;font-weight:800;color:var(--deep);line-height:1.1}
+  .gps-clock small{font-size:.78rem;font-weight:700;color:#68705e;margin-left:6px}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:26px;background:transparent;margin-top:8px;cursor:pointer}
+  input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:999px;background:linear-gradient(90deg,var(--lightgreen),var(--lime))}
+  input[type=range]::-moz-range-track{height:8px;border-radius:999px;background:linear-gradient(90deg,var(--lightgreen),var(--lime))}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;margin-top:-9px;border-radius:50%;background:var(--yellow);border:3px solid var(--green)}
+  input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--yellow);border:3px solid var(--green)}
+  input[type=range]:focus{outline:none}
+  input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 4px rgba(27,94,32,.28)}
+  .gps-ticks{display:flex;justify-content:space-between;font-size:.66rem;color:#7b8272;margin-top:-2px}
+  .gps-readout{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .gps-stat{flex:1 1 130px;background:#f4f7ee;border:1px solid #dde5cf;border-radius:10px;padding:9px 11px}
+  .gps-stat b{display:block;font-size:1.25rem;color:var(--deep);line-height:1.15}
+  .gps-stat span{font-size:.68rem;color:#68705e;line-height:1.35;display:block}
+  .gps-mapbox{width:100%;overflow:hidden;margin-top:10px}
+  svg{display:block;width:100%;height:auto}
+  .gps-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.69rem;color:#4b5245;margin-top:6px}
+  .gps-legend span{display:inline-flex;align-items:center;gap:5px}
+  .gps-swatch{width:16px;height:4px;border-radius:999px;display:inline-block}
+  .gps-listhead{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;margin:14px 0 6px}
+  .gps-listhead h2{font-size:.95rem;color:var(--deep)}
+  .gps-listhead em{font-size:.72rem;color:#68705e;font-style:normal}
+  .gps-rows{display:flex;flex-direction:column;gap:6px}
+  .gps-row{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;width:100%;text-align:left;font-family:inherit;background:#fff;border:1.5px solid #e2e5da;border-radius:10px;padding:9px 11px;cursor:pointer}
+  .gps-row:hover{border-color:var(--green)}
+  .gps-row.is-on{border-color:var(--green);background:#f4f7ee}
+  .gps-no{width:30px;height:30px;border-radius:50%;background:var(--green);color:#fff;font-weight:800;font-size:.82rem;display:flex;align-items:center;justify-content:center}
+  .gps-row.is-ring .gps-no{background:var(--deep)}
+  .gps-leg{display:block;font-size:.85rem;font-weight:700;color:var(--deep);line-height:1.3}
+  .gps-sub{display:block;font-size:.7rem;color:#68705e;margin-top:3px;line-height:1.35}
+  .gps-km{font-size:.95rem;font-weight:800;color:var(--green);text-align:right;white-space:nowrap}
+  .gps-km small{display:block;font-size:.66rem;font-weight:600;color:#68705e}
+  .gps-mode{display:inline-block;font-size:.6rem;font-weight:800;letter-spacing:.04em;border-radius:4px;padding:1px 4px;margin-left:4px;background:var(--yellow);color:var(--deep)}
+  .gps-none{background:var(--yellow);color:var(--deep);border-radius:10px;padding:10px 12px;font-size:.8rem;font-weight:600;line-height:1.45}
+  .gps-detail{background:#f4f7ee;border:1px solid #dde5cf;border-radius:10px;padding:12px 14px;margin-top:8px;font-size:.8rem;line-height:1.55}
+  .gps-detail h3{font-size:.9rem;color:var(--deep);margin-bottom:4px}
+  .gps-detail a{color:var(--green);font-weight:700}
+  .gps-chain{font-size:.74rem;color:#4b5245;margin-top:6px;line-height:1.7;word-break:break-word}
+  .gps-chain b{color:var(--deep)}
+  .gps-foot{font-size:.68rem;color:#7b8272;line-height:1.5;margin-top:10px}
+  .gps-foot a{color:var(--green)}
+  @media (max-width:520px){
+    .gps-head h1{font-size:1.02rem}
+    .gps-row{grid-template-columns:28px 1fr;grid-template-areas:"no leg" ". km"}
+    .gps-no{grid-area:no;width:26px;height:26px;font-size:.75rem}
+    .gps-km{grid-area:km;text-align:left;margin-top:2px}
+    .gps-km small{display:inline;margin-left:6px}
+  }
+</style>
+</head>
+<body>
+<div class="gps-wrap">
+  <div class="gps-head">
+    <h1>Berlin Green Path Stage Finder</h1>
+    <p>Berlin signposts 20 official walking routes across 575 km. Almost nobody walks one end to end. Set the time you actually have and see which station-to-station stage fits.</p>
+  </div>
+
+  <div class="gps-card">
+    <div class="gps-dialrow">
+      <div class="gps-label">Time on foot</div>
+      <div class="gps-clock" id="gpsClock">3h 00m<small id="gpsKm">about 12.0 km</small></div>
+    </div>
+    <input type="range" id="gpsDial" min="1" max="7" step="0.25" value="3"
+           aria-label="Hours you want to walk">
+    <div class="gps-ticks"><span>1h</span><span>3h</span><span>5h</span><span>7h</span></div>
+    <div class="gps-readout">
+      <div class="gps-stat"><b id="gpsFit">0</b><span>stages fit, out of 3,684 station pairs on the network</span></div>
+      <div class="gps-stat"><b id="gpsPaths">0</b><span>of the 20 routes give you at least one</span></div>
+      <div class="gps-stat"><b id="gpsBest">0 km</b><span>longest single stage inside your time</span></div>
+    </div>
+  </div>
+
+  <div class="gps-mapbox">
+    <svg id="gpsMap" viewBox="0 0 900 640" role="img" aria-label="Map of Berlin's 20 green main routes with the stages that fit the chosen walking time"></svg>
+  </div>
+  <div class="gps-legend">
+    <span><i class="gps-swatch" style="background:#c8d2bd"></i> route, too long for your time</span>
+    <span><i class="gps-swatch" style="background:#1B5E20;height:6px"></i> longest stage that fits</span>
+    <span><i class="gps-swatch" style="background:#FFE600;height:10px;width:10px;border-radius:50%;border:1.5px solid #1B5E20"></i> S-Bahn, U-Bahn or regional station on the route</span>
+  </div>
+
+  <div class="gps-listhead">
+    <h2>Best stage on each route</h2>
+    <em>longest walk between two stations that still fits</em>
+  </div>
+  <div class="gps-rows" id="gpsRows"></div>
+  <div class="gps-detail" id="gpsDetail" hidden></div>
+
+  <p class="gps-foot">Route geometry: <a href="https://www.berlin.de/sen/uvk/natur-und-gruen/landschaftsplanung/gruene-hauptwege/" target="_blank" rel="noopener">Grüne Hauptwege Berlin</a>, Geoportal Berlin, Datenlizenz Deutschland Zero 2.0. Stations from OpenStreetMap contributors (ODbL). A station counts when it sits within 1 km of the route, and that walk to and from the platform is already inside the distance shown. Time is figured at 4 km/h, which is slow on purpose: these are hiking routes, not pavements. Trams and buses reach several more points than the ones drawn here. Checked on 13 September 2026.</p>
+</div>
+<script>
+(function () {
+  var DATA = null;
+  var PACE = 4;            // km/h, deliberately unhurried
+  var MIN_KM = 2;          // below this it is an errand, not a walk
+  var selected = 0;        // 0 = nothing picked yet
+  var fits = [];
+
+  var dial = document.getElementById('gpsDial');
+  var clock = document.getElementById('gpsClock');
+  var kmOut = document.getElementById('gpsKm');
+  var fitOut = document.getElementById('gpsFit');
+  var pathOut = document.getElementById('gpsPaths');
+  var bestOut = document.getElementById('gpsBest');
+  var rowsBox = document.getElementById('gpsRows');
+  var detail = document.getElementById('gpsDetail');
+  var svg = document.getElementById('gpsMap');
+
+  var W = 900, H = 640, PAD = 18;
+  var proj = null;
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function hhmm(h) {
+    var m = Math.round(h * 60);
+    return Math.floor(m / 60) + 'h ' + String(m % 60).padStart(2, '0') + 'm';
+  }
+  function modeLabel(m) {
+    var out = [];
+    if (m.indexOf('S') >= 0) out[out.length] = 'S';
+    if (m.indexOf('U') >= 0) out[out.length] = 'U';
+    if (m.indexOf('R') >= 0) out[out.length] = 'RE';
+    return out.join('/') || 'rail';
+  }
+
+  function buildProjection() {
+    var minLat = 90, maxLat = -90, minLon = 180, maxLon = -180;
+    DATA.paths.forEach(function (p) {
+      p.line.forEach(function (v) {
+        if (v[0] < minLat) minLat = v[0]; if (v[0] > maxLat) maxLat = v[0];
+        if (v[1] < minLon) minLon = v[1]; if (v[1] > maxLon) maxLon = v[1];
+      });
+    });
+    var kx = Math.cos(52.5 * Math.PI / 180);
+    var w = (maxLon - minLon) * kx, h = (maxLat - minLat);
+    var s = Math.min((W - PAD * 2) / w, (H - PAD * 2) / h);
+    var ox = (W - w * s) / 2, oy = (H - h * s) / 2;
+    proj = function (lat, lon) {
+      return [ox + (lon - minLon) * kx * s, oy + (maxLat - lat) * s];
+    };
+  }
+
+  function poly(points) {
+    var d = '';
+    for (var i = 0; i < points.length; i++) {
+      var q = proj(points[i][0], points[i][1]);
+      d += (i ? 'L' : 'M') + q[0].toFixed(1) + ' ' + q[1].toFixed(1);
+    }
+    return d;
+  }
+
+  /**
+   * Distance between two stations on one route. On the two ring routes the
+   * short way round can be the other way, so take whichever side is shorter.
+   * The walk from each platform to the line is part of the day, so it counts.
+   */
+  function legFor(path, i, j) {
+    var s = path.stops;
+    var along = s[j].at - s[i].at;
+    var toPlatform = (s[i].off + s[j].off) / 1000;
+    if (path.ring) {
+      var loop = path.line[path.line.length - 1][2];
+      var back = loop - along;
+      if (back < along) return { km: back + toPlatform, wrap: true };
+    }
+    return { km: along + toPlatform, wrap: false };
+  }
+
+  /** Longest station-to-station run on one route that fits the budget. */
+  function bestStage(path, budgetKm) {
+    var s = path.stops, best = null;
+    for (var i = 0; i < s.length; i++) {
+      for (var j = i + 1; j < s.length; j++) {
+        var leg = legFor(path, i, j);
+        if (leg.km < MIN_KM || leg.km > budgetKm) continue;
+        if (!best || leg.km > best.km) best = { km: leg.km, wrap: leg.wrap, a: i, b: j };
+      }
+    }
+    return best;
+  }
+
+  function countFits(path, budgetKm) {
+    var s = path.stops, n = 0;
+    for (var i = 0; i < s.length; i++) {
+      for (var j = i + 1; j < s.length; j++) {
+        var km = legFor(path, i, j).km;
+        if (km >= MIN_KM && km <= budgetKm) n++;
+      }
+    }
+    return n;
+  }
+
+  function sliceLine(path, fromKm, toKm, wrap) {
+    var pts = [], i, v;
+    if (wrap) {
+      for (i = 0; i < path.line.length; i++) { v = path.line[i]; if (v[2] >= toKm) pts[pts.length] = v; }
+      for (i = 0; i < path.line.length; i++) { v = path.line[i]; if (v[2] <= fromKm) pts[pts.length] = v; }
+      return pts;
+    }
+    for (i = 0; i < path.line.length; i++) {
+      v = path.line[i];
+      if (v[2] >= fromKm && v[2] <= toKm) pts[pts.length] = v;
+    }
+    return pts;
+  }
+
+  function drawMap(budgetKm) {
+    var parts = [];
+    parts[parts.length] = '<rect x="0" y="0" width="' + W + '" height="' + H + '" fill="#f2f5ec"/>';
+    // every route, pale
+    DATA.paths.forEach(function (p) {
+      p.extra.forEach(function (e) {
+        if (e.length > 1) parts[parts.length] = '<path d="' + poly(e) + '" fill="none" stroke="#d7dfcb" stroke-width="1.6" stroke-linecap="round"/>';
+      });
+      parts[parts.length] = '<path d="' + poly(p.line) + '" fill="none" stroke="#c8d2bd" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>';
+    });
+    // the fitting stage on each route
+    fits.forEach(function (f) {
+      var p = f.path;
+      var pts = sliceLine(p, p.stops[f.a].at, p.stops[f.b].at, f.wrap);
+      if (pts.length < 2) return;
+      var on = (selected === 0 || selected === p.no);
+      parts[parts.length] = '<path d="' + poly(pts) + '" fill="none" stroke="' + (selected === p.no ? '#123D18' : '#1B5E20')
+        + '" stroke-width="' + (selected === p.no ? 6.5 : 4.2) + '" stroke-linejoin="round" stroke-linecap="round" opacity="' + (on ? 1 : 0.22) + '"/>';
+    });
+    // stations
+    DATA.paths.forEach(function (p) {
+      var dim = (selected !== 0 && selected !== p.no);
+      p.stops.forEach(function (st) {
+        var q = proj(0, 0);
+        var idx = nearestVertex(p, st.at);
+        if (idx < 0) return;
+        q = proj(p.line[idx][0], p.line[idx][1]);
+        parts[parts.length] = '<circle cx="' + q[0].toFixed(1) + '" cy="' + q[1].toFixed(1) + '" r="'
+          + (selected === p.no ? 3.6 : 2.4) + '" fill="#FFE600" stroke="#1B5E20" stroke-width="1.1" opacity="'
+          + (dim ? 0.25 : 1) + '"/>';
+      });
+    });
+    // endpoint labels for the selected route
+    var sel = DATA.paths.filter(function (p) { return p.no === selected; })[0];
+    var selFit = fits.filter(function (f) { return f.path.no === selected; })[0];
+    if (sel && selFit) {
+      [selFit.a, selFit.b].forEach(function (k) {
+        var st = sel.stops[k];
+        var idx = nearestVertex(sel, st.at);
+        if (idx < 0) return;
+        var q = proj(sel.line[idx][0], sel.line[idx][1]);
+        var anchor = q[0] > W * 0.72 ? 'end' : 'start';
+        var dx = anchor === 'end' ? -8 : 8;
+        parts[parts.length] = '<text x="' + (q[0] + dx).toFixed(1) + '" y="' + (q[1] - 8).toFixed(1)
+          + '" text-anchor="' + anchor + '" font-family="Montserrat,sans-serif" font-size="14" font-weight="700" fill="#123D18"'
+          + ' paint-order="stroke" stroke="#f2f5ec" stroke-width="4">' + esc(st.n) + '</text>';
+      });
+    }
+    svg.innerHTML = parts.join('');
+  }
+
+  function nearestVertex(path, atKm) {
+    var lo = 0, hi = path.line.length - 1, bestI = -1, bestD = 1e9;
+    for (var i = lo; i <= hi; i++) {
+      var d = Math.abs(path.line[i][2] - atKm);
+      if (d < bestD) { bestD = d; bestI = i; }
+    }
+    return bestI;
+  }
+
+  function drawRows(budgetKm) {
+    if (!fits.length) {
+      rowsBox.innerHTML = '<div class="gps-none">Nothing on the network fits that yet. Every stage between two stations is at least ' + MIN_KM
+        + ' km once the walk to the platform is counted, so give it a little more time.</div>';
+      return;
+    }
+    var html = '';
+    fits.forEach(function (f) {
+      var p = f.path, a = p.stops[f.a], b = p.stops[f.b];
+      html += '<button type="button" class="gps-row' + (selected === p.no ? ' is-on' : '') + (p.ring ? ' is-ring' : '')
+        + '" data-no="' + p.no + '" aria-pressed="' + (selected === p.no) + '">'
+        + '<span class="gps-no">' + p.no + '</span>'
+        + '<span><span class="gps-leg">' + esc(a.n) + ' to ' + esc(b.n)
+        + '<span class="gps-mode">' + modeLabel(a.m) + '</span><span class="gps-mode">' + modeLabel(b.m) + '</span></span>'
+        + '<span class="gps-sub">' + esc(p.name) + (p.ring ? ', a ring' : '') + ', ' + p.km + ' km end to end'
+        + ' &middot; ' + f.count + ' stage' + (f.count === 1 ? '' : 's') + ' fit here</span></span>'
+        + '<span class="gps-km">' + f.km.toFixed(1) + ' km<small>' + hhmm(f.km / PACE) + '</small></span>'
+        + '</button>';
+    });
+    rowsBox.innerHTML = html;
+    var btns = rowsBox.querySelectorAll('.gps-row');
+    for (var i = 0; i < btns.length; i++) btns[i].onclick = onPick;
+  }
+
+  function onPick(ev) {
+    var no = Number(ev.currentTarget.getAttribute('data-no'));
+    selected = (selected === no) ? 0 : no;
+    render();
+  }
+
+  function drawDetail() {
+    var p = DATA.paths.filter(function (x) { return x.no === selected; })[0];
+    if (!p) { detail.hidden = true; return; }
+    var chain = p.stops.map(function (s) {
+      return '<b>' + esc(s.n) + '</b> <span>' + s.at.toFixed(1) + ' km</span>';
+    }).join(' &rarr; ');
+    detail.innerHTML = '<h3>Weg ' + p.no + ', ' + esc(p.name) + '</h3>'
+      + '<div>' + esc(p.km + ' km signposted') + (p.ring ? ', and it comes back to where it started.' : '.')
+      + ' ' + p.stops.length + ' S-Bahn, U-Bahn or regional station' + (p.stops.length === 1 ? ' sits' : 's sit')
+      + ' within 1 km of the line.</div>'
+      + '<div class="gps-chain">' + chain + '</div>'
+      + (p.url ? '<div style="margin-top:8px"><a href="' + esc(p.url) + '" target="_blank" rel="noopener">Official route page for Weg ' + p.no + ' &rarr;</a></div>' : '');
+    detail.hidden = false;
+  }
+
+  function render() {
+    var hours = Number(dial.value);
+    var budget = hours * PACE;
+    clock.firstChild.nodeValue = hhmm(hours);
+    kmOut.textContent = 'about ' + budget.toFixed(1) + ' km';
+
+    fits = [];
+    var total = 0;
+    DATA.paths.forEach(function (p) {
+      var b = bestStage(p, budget);
+      total += countFits(p, budget);
+      if (b) fits[fits.length] = { path: p, km: b.km, wrap: b.wrap, a: b.a, b: b.b, count: countFits(p, budget) };
+    });
+    fits.sort(function (x, y) { return y.km - x.km; });
+    if (selected && !fits.filter(function (f) { return f.path.no === selected; }).length) selected = 0;
+
+    fitOut.textContent = total.toLocaleString('en-GB');
+    pathOut.textContent = fits.length;
+    bestOut.textContent = (fits.length ? fits[0].km.toFixed(1) : '0') + ' km';
+    drawMap(budget);
+    drawRows(budget);
+    drawDetail();
+  }
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (j) {
+    DATA = j;
+    buildProjection();
+    dial.oninput = render;
+    dial.onchange = render;
+    render();
+  });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
