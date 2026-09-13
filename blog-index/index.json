@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-13T02:07:25.048Z",
+  "updatedAt": "2026-09-13T08:08:35.695Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 378,
-  "toolsTotal": 298,
+  "totalPosts": 379,
+  "toolsTotal": 299,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin Hiking Trails: The 20 Green Routes and Where the Trains Meet Them",
+      "slug": "berlin-hiking-trails",
+      "path": "/post/berlin-hiking-trails",
+      "url": "https://www.berlinwalk.com/post/berlin-hiking-trails",
+      "excerpt": "Berlin signposts twenty official long-distance footpaths across about 575 km, and almost nobody who lives here has walked one. 282 station points touch those routes, which turns 575 km into 3,684 station-to-station walks. Here is how to pick the one that fits your Saturday.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-13T08:05:05.269Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_8102d2c31e4e487da7edb81f46ca9e5d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-barnimer-doerferweg.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_8102d2c31e4e487da7edb81f46ca9e5d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-barnimer-doerferweg.jpg",
+      "alt": "A gravel track running between an autumn meadow and a line of half bare trees on the Barnimer Doerferweg in northern Berlin",
+      "relatedToolSlug": "berlin-green-path-stages"
+    },
+    {
       "title": "Berlin Bathing Season: What Stops on 15 September and What the Grade Leaves Out",
       "slug": "berlin-bathing-season",
       "path": "/post/berlin-bathing-season",
@@ -1987,23 +2004,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_3a463bc9d35846ae99c9804c12cd86b3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-heating-season-cover-friedenau-entrance.jpg",
       "alt": "A lit Altbau entrance on Handjerystrasse in Berlin-Friedenau at night, with snow on the hedges and the front steps",
       "relatedToolSlug": "berlin-heating-log"
-    },
-    {
-      "title": "Berlin Bridge Days 2027: The Brückentage Worth Booking",
-      "slug": "berlin-bridge-days-2027",
-      "path": "/post/berlin-bridge-days-2027",
-      "url": "https://www.berlinwalk.com/post/berlin-bridge-days-2027",
-      "excerpt": "Only six of Berlin’s ten public holidays fall on a working day in 2027, and every one of them lands before 18 May. This is what each bridge day costs in leave, what it returns in days off, and which windows your colleagues with school-age children already have a claim on.",
-      "category": "Living in Berlin",
-      "categorySlug": "living-in-berlin",
-      "topic": "living-in-berlin",
-      "topicLabel": "Living in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-09-09T19:31:50.921Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_a2c402a057ff4d41a7e3025e73759776~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hauptbahnhof-sbahn.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_a2c402a057ff4d41a7e3025e73759776~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hauptbahnhof-sbahn.jpg",
-      "alt": "An S-Bahn train pulling out of Berlin Hauptbahnhof past an almost empty platform, with the station name sign lit above the tracks",
-      "relatedToolSlug": "berlin-leave-year-planner"
     }
   ]
 }

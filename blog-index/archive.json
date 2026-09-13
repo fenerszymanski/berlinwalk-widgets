@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-13T02:07:25.048Z",
+  "updatedAt": "2026-09-13T08:08:35.695Z",
   "source": "Wix Blog API",
-  "totalPosts": 378,
+  "totalPosts": 379,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Berlin Hiking Trails: The 20 Green Routes and Where the Trains Meet Them",
+      "slug": "berlin-hiking-trails",
+      "path": "/post/berlin-hiking-trails",
+      "url": "https://www.berlinwalk.com/post/berlin-hiking-trails",
+      "excerpt": "Berlin signposts twenty official long-distance footpaths across about 575 km, and almost nobody who lives here has walked one. 282 station points touch those routes, which turns 575 km into 3,684 station-to-station walks. Here is how to pick the one that fits your Saturday.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-13T08:05:05.269Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_8102d2c31e4e487da7edb81f46ca9e5d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-barnimer-doerferweg.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_8102d2c31e4e487da7edb81f46ca9e5d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-barnimer-doerferweg.jpg",
+      "alt": "A gravel track running between an autumn meadow and a line of half bare trees on the Barnimer Doerferweg in northern Berlin",
+      "relatedToolSlug": "berlin-green-path-stages"
+    },
     {
       "title": "Berlin Bathing Season: What Stops on 15 September and What the Grade Leaves Out",
       "slug": "berlin-bathing-season",
