@@ -51,6 +51,42 @@
   ],
   "tools": [
     {
+      "slug": "berlin-german-course-ladder",
+      "title": "Berlin German Course Price Ladder",
+      "lead": "The same 45 minutes of German can legally cost you nothing or 10 euro in Berlin, and the rules change the moment you pass B1. Set your level and your situation and this ranks every route, from the free federal programmes to the weekly private rate, on one price scale.",
+      "category": "Money",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-german-course-ladder/",
+      "embedHeight": 1560,
+      "image": "https://static.wixstatic.com/media/5a08a3_12914d2795b940a8ab0f25c40fcf541d~mv2.png",
+      "hubCategory": "MoneyShopping",
+      "type": "Calculator",
+      "priority": 3,
+      "tags": [
+        "german course",
+        "volkshochschule",
+        "vhs",
+        "integrationskurs",
+        "berufssprachkurs",
+        "language school",
+        "course fees",
+        "bildungszeit",
+        "living in berlin",
+        "learning german"
+      ],
+      "aliases": [
+        "german courses in berlin",
+        "learn german in berlin",
+        "german course price berlin",
+        "vhs german course berlin",
+        "cheap german course berlin",
+        "integration course berlin cost",
+        "berufssprachkurs berlin",
+        "german language school berlin price"
+      ],
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "4693bd18-4369-440d-88d6-d670b0dd3e8c"
+    },
+    {
       "slug": "berlin-mushroom-forest-finder",
       "title": "Berlin Mushroom Forest Finder",
       "lead": "Ten mushroom forests you reach on a normal VBB ticket, plotted by real Saturday-morning travel minutes from Alexanderplatz: filter by Berlin or Brandenburg rules, pine or beech ground and a lake for afterwards, then read the line, the access walk and the law that applies before you pick.",
