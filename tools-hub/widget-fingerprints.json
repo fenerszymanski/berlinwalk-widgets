@@ -498,11 +498,11 @@
         "checkbox": 0,
         "select": 0,
         "textInput": 1,
-        "buttons": 36,
+        "buttons": 18,
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 2474
+        "textLength": 898
       },
       "inputModel": "text-entry",
       "stateProgression": "accumulate",
@@ -760,7 +760,7 @@
         "svgShapeNodes": 3,
         "svgCount": 1,
         "canvas": 0,
-        "contentImages": 43,
+        "contentImages": 38,
         "mapLibrary": true,
         "range": 0,
         "dateInput": 0,
@@ -877,7 +877,7 @@
       "addedAt": "2026-06-27",
       "measuredBy": "rendered",
       "signals": {
-        "svgShapeNodes": 1803,
+        "svgShapeNodes": 11,
         "svgCount": 2,
         "canvas": 0,
         "contentImages": 13,
@@ -892,7 +892,7 @@
         "ariaPressed": 10,
         "tables": 0,
         "details": 0,
-        "textLength": 1224
+        "textLength": 1189
       },
       "inputModel": "accumulate",
       "stateProgression": "accumulate",
@@ -1462,7 +1462,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 543
+        "textLength": 551
       },
       "inputModel": "accumulate",
       "stateProgression": "accumulate",
@@ -10888,6 +10888,36 @@
       "stateProgression": "replace-on-pick",
       "outputModel": "ranked-order",
       "visualGrammar": "canvas",
+      "hasVisualLayer": true,
+      "flatChipCard": false,
+      "pageErrors": []
+    },
+    "berlin-balcony-solar-year": {
+      "slug": "berlin-balcony-solar-year",
+      "addedAt": "2026-09-13",
+      "measuredBy": "rendered",
+      "signals": {
+        "svgShapeNodes": 78,
+        "svgCount": 2,
+        "canvas": 0,
+        "contentImages": 0,
+        "mapLibrary": false,
+        "range": 1,
+        "dateInput": 0,
+        "radio": 0,
+        "checkbox": 0,
+        "select": 0,
+        "textInput": 1,
+        "buttons": 11,
+        "ariaPressed": 11,
+        "tables": 0,
+        "details": 0,
+        "textLength": 1802
+      },
+      "inputModel": "continuous-scrub",
+      "stateProgression": "continuous-scrub",
+      "outputModel": "time-position",
+      "visualGrammar": "plotted-geometry",
       "hasVisualLayer": true,
       "flatChipCard": false,
       "pageErrors": []

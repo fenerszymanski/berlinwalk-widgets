@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-13T12:26:06.678Z",
+  "updatedAt": "2026-09-13T14:03:13.374Z",
   "source": "Wix Blog API",
-  "totalPosts": 380,
+  "totalPosts": 381,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Balcony Solar in Berlin: What Your Wall Earns Now the Grant Has Gone",
+      "slug": "balcony-solar-berlin",
+      "path": "/post/balcony-solar-berlin",
+      "url": "https://www.berlinwalk.com/post/balcony-solar-berlin",
+      "excerpt": "Berlin dropped its 500 euro balcony solar grant in January 2026, so the only question left is whether your own wall pays. A south railing makes 595 kWh a year here and a north one makes 153, but the number that really decides it is how much your flat is drawing while the sun is up.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "9 min read",
+      "publishedDate": "2026-09-13T13:56:17.660Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_10bbb87af829462c958d6708c15de1a9~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-moabit-balconies.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_10bbb87af829462c958d6708c15de1a9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-moabit-balconies.jpg",
+      "alt": "A Berlin apartment block on Lübecker Strasse in Moabit with solar panels on six balconies, some flat against the railing and some tilted out, in evening light",
+      "relatedToolSlug": "berlin-balcony-solar-year"
+    },
     {
       "title": "German Courses in Berlin: What a Lesson Costs and Why the Rules Change at B1",
       "slug": "german-courses-in-berlin",

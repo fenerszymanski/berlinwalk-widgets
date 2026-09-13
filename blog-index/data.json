@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-13T12:26:06.678Z",
+  "updatedAt": "2026-09-13T14:03:13.374Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 380,
-  "toolsTotal": 300,
+  "totalPosts": 381,
+  "toolsTotal": 301,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Balcony Solar in Berlin: What Your Wall Earns Now the Grant Has Gone",
+      "slug": "balcony-solar-berlin",
+      "path": "/post/balcony-solar-berlin",
+      "url": "https://www.berlinwalk.com/post/balcony-solar-berlin",
+      "excerpt": "Berlin dropped its 500 euro balcony solar grant in January 2026, so the only question left is whether your own wall pays. A south railing makes 595 kWh a year here and a north one makes 153, but the number that really decides it is how much your flat is drawing while the sun is up.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "9 min read",
+      "publishedDate": "2026-09-13T13:56:17.660Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_10bbb87af829462c958d6708c15de1a9~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-moabit-balconies.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_10bbb87af829462c958d6708c15de1a9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-moabit-balconies.jpg",
+      "alt": "A Berlin apartment block on Lübecker Strasse in Moabit with solar panels on six balconies, some flat against the railing and some tilted out, in evening light",
+      "relatedToolSlug": "berlin-balcony-solar-year"
+    },
+    {
       "title": "German Courses in Berlin: What a Lesson Costs and Why the Rules Change at B1",
       "slug": "german-courses-in-berlin",
       "path": "/post/german-courses-in-berlin",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_3f70db1a8c4745d689118079eca889f5~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ostkreuz-bike-racks.jpg",
       "alt": "Two levels of bicycle racks packed with bikes under the railway structure at Bahnhof Ostkreuz in Berlin",
       "relatedToolSlug": "berlin-bike-theft-clock"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Berlin Bulky Waste: What Sperrmüll Costs and Where It Actually Goes",
-      "slug": "berlin-bulky-waste",
-      "path": "/post/berlin-bulky-waste",
-      "url": "https://www.berlinwalk.com/post/berlin-bulky-waste",
-      "excerpt": "Three cubic metres is the number that decides everything, and partial unloading is not allowed, so a load one armchair over the line is turned away entirely. What each route costs, which things are always free, and why the pavement version now starts at €300.",
+      "title": "Balcony Solar in Berlin: What Your Wall Earns Now the Grant Has Gone",
+      "slug": "balcony-solar-berlin",
+      "path": "/post/balcony-solar-berlin",
+      "url": "https://www.berlinwalk.com/post/balcony-solar-berlin",
+      "excerpt": "Berlin dropped its 500 euro balcony solar grant in January 2026, so the only question left is whether your own wall pays. A south railing makes 595 kWh a year here and a north one makes 153, but the number that really decides it is how much your flat is drawing while the sun is up.",
       "category": "Living in Berlin",
       "categorySlug": "living-in-berlin",
       "topic": "living-in-berlin",
       "topicLabel": "Living in Berlin",
-      "readTime": "8 min read",
-      "publishedDate": "2026-09-10T07:49:14.180Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_4ec1d2efbf1e4037bee7c1faed811631~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-recycling-yard-containers.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_4ec1d2efbf1e4037bee7c1faed811631~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-recycling-yard-containers.jpg",
-      "alt": "Orange BSR containers and glass banks lined up inside the recycling yard on Ilsenburger Strasse in Berlin-Charlottenburg",
-      "relatedToolSlug": "berlin-disposal-cost-ladder"
-    }
-  ],
-  "allPosts": [
+      "readTime": "9 min read",
+      "publishedDate": "2026-09-13T13:56:17.660Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_10bbb87af829462c958d6708c15de1a9~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-moabit-balconies.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_10bbb87af829462c958d6708c15de1a9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-moabit-balconies.jpg",
+      "alt": "A Berlin apartment block on Lübecker Strasse in Moabit with solar panels on six balconies, some flat against the railing and some tilted out, in evening light",
+      "relatedToolSlug": "berlin-balcony-solar-year"
+    },
     {
       "title": "German Courses in Berlin: What a Lesson Costs and Why the Rules Change at B1",
       "slug": "german-courses-in-berlin",
