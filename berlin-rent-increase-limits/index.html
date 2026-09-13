@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Rent Increase Limits</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --soft: #C5E1A5;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --muted: #5a665b;
+    --line: rgba(27, 94, 32, .18);
+    --warn: #B4472E;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .rl { max-width: 800px; margin: 0 auto; padding: 14px 12px 16px; }
+  .rl-head h2 { font-size: 1.06rem; margin: 0 0 4px; color: var(--green); }
+  .rl-head p { margin: 0; font-size: .78rem; color: var(--muted); line-height: 1.55; }
+
+  .rl-box { margin-top: 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 11px 12px 13px; }
+  .rl-box h3 { font-size: .63rem; letter-spacing: .07em; text-transform: uppercase; color: var(--deep); margin: 0 0 9px; }
+
+  .rl-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
+  .rl-grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (max-width: 520px) { .rl-grid, .rl-grid.two { grid-template-columns: 1fr; } }
+  .rl-f label { display: block; font-size: .68rem; font-weight: 600; color: var(--deep); margin-bottom: 4px; line-height: 1.35; }
+  .rl-f input {
+    font-family: inherit; font-size: .82rem; width: 100%; padding: 8px 10px;
+    border: 1px solid var(--green); border-radius: 8px; background: #fff; color: var(--ink);
+  }
+  .rl-f input:focus-visible, button:focus-visible { outline: 3px solid var(--yellow); outline-offset: 1px; }
+  .rl-hint { font-size: .66rem; color: var(--muted); margin-top: 8px; line-height: 1.55; }
+  .rl-hint a { color: var(--green); }
+
+  .rl-kinds { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+  .rl-kind {
+    font-family: inherit; font-size: .68rem; font-weight: 600; padding: 6px 11px; border-radius: 999px;
+    border: 1px solid var(--green); background: #fff; color: var(--green); cursor: pointer;
+  }
+  .rl-kind[aria-pressed="true"] { background: var(--green); color: #fff; }
+  .rl-lease { font-size: .68rem; color: var(--muted); line-height: 1.55; margin: 8px 0 0; }
+
+  .rl-btn { font-family: inherit; font-weight: 700; font-size: .76rem; padding: 8px 14px; border-radius: 999px; border: 0; background: var(--green); color: #fff; cursor: pointer; }
+  .rl-btn.ghost { background: transparent; color: var(--green); border: 1px solid var(--green); }
+  .rl-rows { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  .rl-rows li { display: flex; align-items: center; gap: 9px; font-size: .71rem; background: var(--cream); border: 1px solid var(--line); border-radius: 8px; padding: 6px 7px 6px 11px; }
+  .rl-rows li b { color: var(--deep); }
+  .rl-rows li .tag { font-size: .62rem; color: var(--muted); }
+  .rl-rows li .sp { margin-left: auto; }
+  .rl-x { width: 20px; height: 20px; border-radius: 999px; border: 0; background: var(--deep); color: #fff; font-size: .72rem; line-height: 20px; cursor: pointer; padding: 0; font-family: inherit; }
+  .rl-empty { font-size: .68rem; color: var(--muted); margin: 10px 0 0; line-height: 1.5; }
+
+  .rl-chart svg { display: block; width: 100%; height: auto; }
+  .rl-key { display: flex; flex-wrap: wrap; gap: 5px 16px; margin-top: 9px; font-size: .64rem; color: var(--muted); }
+  .rl-key i { display: inline-block; width: 13px; height: 4px; border-radius: 2px; vertical-align: 3px; margin-right: 5px; }
+
+  .rl-out { margin-top: 12px; border-radius: 10px; background: var(--deep); color: #fff; padding: 13px 14px 14px; }
+  .rl-out .big { font-size: 1.55rem; font-weight: 800; line-height: 1.1; color: var(--yellow); }
+  .rl-out .big span { font-size: .78rem; font-weight: 600; color: #fff; display: block; margin-top: 6px; line-height: 1.5; }
+  .rl-cells { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 12px; padding-top: 11px; border-top: 1px solid rgba(255,255,255,.2); }
+  .rl-cells .cell { min-width: 128px; }
+  .rl-cells .v { font-size: 1rem; font-weight: 700; color: var(--yellow); }
+  .rl-cells .k { font-size: .64rem; color: rgba(255,255,255,.85); line-height: 1.45; margin-top: 2px; }
+  .rl-flags { margin: 11px 0 0; padding: 0; list-style: none; font-size: .74rem; line-height: 1.55; }
+  .rl-flags li { margin-bottom: 5px; padding-left: 16px; position: relative; }
+  .rl-flags li::before { content: ""; position: absolute; left: 0; top: .48em; width: 7px; height: 7px; border-radius: 2px; background: var(--lime); }
+  .rl-flags li.bad::before { background: var(--yellow); }
+  .rl-move { margin-top: 12px; padding: 10px 12px; border-radius: 8px; background: var(--yellow); color: var(--deep); font-size: .77rem; line-height: 1.5; font-weight: 600; }
+  .rl-move b { text-transform: uppercase; letter-spacing: .06em; font-size: .62rem; display: block; margin-bottom: 3px; }
+  .rl-note { margin-top: 11px; font-size: .66rem; color: var(--muted); line-height: 1.6; }
+  .rl-note a { color: var(--green); }
+</style>
+</head>
+<body>
+<div class="rl">
+  <div class="rl-head">
+    <h2>Berlin rent increase limits</h2>
+    <p>A Berlin rent rise has to clear four separate hurdles, and only one of them is the famous 15 per cent. Put in your own figures and dates and the tool shows which hurdle stops the letter first, and the two dates you are actually working to.</p>
+  </div>
+
+  <section class="rl-box">
+    <h3>Your flat and the letter</h3>
+    <div class="rl-grid">
+      <div class="rl-f"><label for="size">Flat size in m²</label><input id="size" type="number" inputmode="decimal" min="10" max="400" step="0.5" value="62"></div>
+      <div class="rl-f"><label for="now">Net cold rent you pay now, € a month</label><input id="now" type="number" inputmode="decimal" min="50" max="6000" step="1" value="465"></div>
+      <div class="rl-f"><label for="ask">Net cold rent the letter asks for, € a month</label><input id="ask" type="number" inputmode="decimal" min="50" max="6000" step="1" value="540"></div>
+    </div>
+    <div class="rl-grid" style="margin-top:9px">
+      <div class="rl-f"><label for="ms">Your Mietspiegel value, € per m²</label><input id="ms" type="number" inputmode="decimal" min="2" max="30" step="0.01" value="7.71"></div>
+      <div class="rl-f"><label for="letter">Date the letter reached you</label><input id="letter" type="date" value="2026-09-10"></div>
+      <div class="rl-f"><label for="last">Date your rent last changed</label><input id="last" type="date" value="2025-07-01"></div>
+    </div>
+    <p class="rl-hint">The Mietspiegel value is the one for your own building, not a city average. Look it up by street at the Senate's <a href="https://mietspiegel.berlin.de/berliner-mietspiegel/mietspiegelabfrage/" target="_blank" rel="noopener">Mietspiegel query service</a>. The 7.71 shown here is only the citywide median of the 2026 edition, so treat it as a placeholder until you have replaced it.</p>
+  </section>
+
+  <section class="rl-box">
+    <h3>Rises you have already had in the last three years</h3>
+    <div class="rl-grid">
+      <div class="rl-f"><label for="rdate">Date it took effect</label><input id="rdate" type="date" value="2025-07-01"></div>
+      <div class="rl-f"><label for="ramt">How much the rent went up, € a month</label><input id="ramt" type="number" inputmode="decimal" min="1" max="2000" step="1" value="40"></div>
+      <div class="rl-f">
+        <label id="kindlab">What kind of rise it was</label>
+        <div class="rl-kinds" role="group" aria-labelledby="kindlab" id="kinds"></div>
+      </div>
+    </div>
+    <button class="rl-btn" id="add" type="button" style="margin-top:10px">Add this rise</button>
+    <button class="rl-btn ghost" id="clear" type="button" style="margin-top:10px;margin-left:6px">Clear the list</button>
+    <ul class="rl-rows" id="rows"></ul>
+    <p class="rl-empty" id="empty">Nothing added yet, so the tool assumes the rent you pay now is also what you paid three years ago.</p>
+    <p class="rl-hint">Modernisation and operating cost rises are the ones that trip people up. They are real money out of your account, but section 558(3) BGB leaves them out of the 15 per cent, so adding them here raises your ceiling rather than lowering it.</p>
+  </section>
+
+  <section class="rl-box">
+    <h3>Which ceiling bites</h3>
+    <div class="rl-chart" id="chart"></div>
+    <div class="rl-key">
+      <span><i style="background:#123D18"></i>What you have paid</span>
+      <span><i style="background:#7CB342"></i>15 per cent ceiling</span>
+      <span><i style="background:#1B5E20"></i>Mietspiegel ceiling</span>
+      <span><i style="background:#FFE600"></i>What the letter asks</span>
+    </div>
+  </section>
+
+  <div class="rl-out" id="out"></div>
+
+  <p class="rl-note">Checked on 13 September 2026 against sections 557a, 557b, 558, 558a, 558b and 559 BGB and the Berlin Kappungsgrenzenverordnung of 14 March 2023. This is a reading aid, not legal advice, and it cannot see your contract. If the numbers look wrong to you, take the letter to a Mieterverein or a district Mieterberatung before the reply date passes.</p>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var DATA = null;
+  var rises = [];
+  var kind = 'vergleich';
+  var kindLease = 'standard';
+
+  var el = function (id) { return document.getElementById(id); };
+  var eur = function (v) { return (Math.round(v * 100) / 100).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
+  var eur0 = function (v) { return Math.round(v).toLocaleString('en-GB'); };
+
+  function parseDay(s) {
+    var p = String(s || '').split('-');
+    if (p.length !== 3) return null;
+    var d = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2]));
+    return isNaN(d.getTime()) ? null : d;
+  }
+  function addMonths(d, n) { return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + n, d.getUTCDate())); }
+  function firstOfMonth(d, n) { return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + (n || 0), 1)); }
+  function lastOfMonth(d, n) { return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + (n || 0) + 1, 0)); }
+  function fmt(d) {
+    if (!d) return 'not set';
+    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+  }
+  function fmtShort(d) { return d.toLocaleDateString('en-GB', { month: 'short', year: '2-digit', timeZone: 'UTC' }); }
+
+  function kindOf(id) {
+    var list = (DATA && DATA.increaseKinds) || [];
+    for (var i = 0; i < list.length; i += 1) if (list[i].id === id) return list[i];
+    return { id: id, label: id, countsToCap: false };
+  }
+
+  function num(id, fallback) {
+    var v = parseFloat(el(id).value);
+    return isFinite(v) && v > 0 ? v : fallback;
+  }
+
+  function model() {
+    var size = num('size', 62);
+    var nowRent = num('now', 465);
+    var ask = num('ask', 540);
+    var msPerSqm = num('ms', 7.71);
+    var letter = parseDay(el('letter').value);
+    var last = parseDay(el('last').value);
+
+    // The higher rent is owed from the start of the third calendar month after
+    // the letter lands, so that is the date every other clock is measured to.
+    var effective = letter ? firstOfMonth(letter, 3) : null;
+    var replyBy = letter ? lastOfMonth(letter, 2) : null;
+    var windowStart = effective ? addMonths(effective, -36) : null;
+    var canSendFrom = last ? addMonths(last, 12) : null;
+    var canTakeEffectFrom = last ? addMonths(last, 15) : null;
+
+    // Only the rises inside the three year window move the base.
+    var inWindow = rises.filter(function (r) {
+      return windowStart && r.date >= windowStart && (!effective || r.date <= effective);
+    });
+    var capCounted = inWindow.filter(function (r) { return r.countsToCap; })
+      .reduce(function (a, r) { return a + r.amount; }, 0);
+    var capExempt = inWindow.filter(function (r) { return !r.countsToCap; })
+      .reduce(function (a, r) { return a + r.amount; }, 0);
+
+    var baseRent = Math.max(0, nowRent - capCounted - capExempt);
+    var kapCeiling = baseRent * 1.15 + capExempt;
+    var msCeiling = size * msPerSqm;
+    var binding = Math.min(kapCeiling, msCeiling);
+    var bindingName = kapCeiling <= msCeiling ? 'the 15 per cent ceiling' : 'the Mietspiegel';
+
+    return {
+      size: size, nowRent: nowRent, ask: ask, msPerSqm: msPerSqm,
+      letter: letter, last: last, effective: effective, replyBy: replyBy,
+      windowStart: windowStart, canSendFrom: canSendFrom, canTakeEffectFrom: canTakeEffectFrom,
+      inWindow: inWindow, capCounted: capCounted, capExempt: capExempt,
+      baseRent: baseRent, kapCeiling: kapCeiling, msCeiling: msCeiling,
+      binding: binding, bindingName: bindingName,
+      lease: kindLease
+    };
+  }
+
+  // ---- chart -------------------------------------------------------------
+  function chart(m) {
+    var W = 720, H = 280, L = 52, R = 16, T = 16, B = 30;
+    if (!m.effective || !m.windowStart) { el('chart').innerHTML = ''; return; }
+    var t0 = addMonths(m.windowStart, -2).getTime();
+    var t1 = addMonths(m.effective, 3).getTime();
+    var vals = [m.baseRent, m.nowRent, m.ask, m.kapCeiling, m.msCeiling];
+    var lo = Math.min.apply(null, vals) * 0.86;
+    var hi = Math.max.apply(null, vals) * 1.08;
+    if (hi - lo < 20) { hi = lo + 20; }
+
+    var x = function (t) { return L + (t - t0) / (t1 - t0) * (W - L - R); };
+    var y = function (v) { return T + (1 - (v - lo) / (hi - lo)) * (H - T - B); };
+
+    var s = [];
+    s.push('<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Your rent over the last three years against the two legal ceilings">');
+    s.push('<rect x="' + x(m.windowStart.getTime()) + '" y="' + T + '" width="' + (x(m.effective.getTime()) - x(m.windowStart.getTime())) + '" height="' + (H - T - B) + '" fill="#C5E1A5" opacity=".28"></rect>');
+
+    // y grid
+    var stepY = Math.max(10, Math.round((hi - lo) / 4 / 10) * 10);
+    for (var v = Math.ceil(lo / stepY) * stepY; v < hi; v += stepY) {
+      s.push('<line x1="' + L + '" y1="' + y(v) + '" x2="' + (W - R) + '" y2="' + y(v) + '" stroke="#1B5E20" stroke-opacity=".12"></line>');
+      s.push('<text x="' + (L - 7) + '" y="' + (y(v) + 4) + '" text-anchor="end" font-size="11" fill="#5a665b">' + eur0(v) + '</text>');
+    }
+
+    // x ticks, one a year
+    for (var k = 0; k <= 3; k += 1) {
+      var tick = addMonths(m.effective, -12 * (3 - k));
+      s.push('<line x1="' + x(tick.getTime()) + '" y1="' + T + '" x2="' + x(tick.getTime()) + '" y2="' + (H - B) + '" stroke="#1B5E20" stroke-opacity=".14"></line>');
+      s.push('<text x="' + x(tick.getTime()) + '" y="' + (H - B + 15) + '" text-anchor="middle" font-size="11" fill="#5a665b">' + fmtShort(tick) + '</text>');
+    }
+
+    // the rent step line, walked forward from the base
+    var pts = [[t0, m.baseRent]];
+    var running = m.baseRent;
+    var ordered = m.inWindow.slice().sort(function (a, b) { return a.date - b.date; });
+    ordered.forEach(function (r) {
+      pts.push([r.date.getTime(), running]);
+      running += r.amount;
+      pts.push([r.date.getTime(), running]);
+    });
+    pts.push([m.effective.getTime(), running]);
+    var d = pts.map(function (p, i) { return (i ? 'L' : 'M') + x(p[0]).toFixed(1) + ' ' + y(p[1]).toFixed(1); }).join(' ');
+    s.push('<path d="' + d + '" fill="none" stroke="#123D18" stroke-width="2.6" stroke-linejoin="round"></path>');
+
+    // the two ceilings
+    var kapY = y(Math.min(hi, m.kapCeiling));
+    var msY = y(Math.min(hi, m.msCeiling));
+    var bindKap = m.kapCeiling <= m.msCeiling;
+    s.push('<line x1="' + L + '" y1="' + kapY + '" x2="' + (W - R) + '" y2="' + kapY + '" stroke="#7CB342" stroke-width="' + (bindKap ? 2.6 : 1.6) + '" stroke-dasharray="' + (bindKap ? 'none' : '5 4') + '"></line>');
+    s.push('<line x1="' + L + '" y1="' + msY + '" x2="' + (W - R) + '" y2="' + msY + '" stroke="#1B5E20" stroke-width="' + (bindKap ? 1.6 : 2.6) + '" stroke-dasharray="' + (bindKap ? '5 4' : 'none') + '"></line>');
+    var kapLab = kapY - 6;
+    var msLab = msY - 6;
+    if (Math.abs(kapLab - msLab) < 13) { if (kapY <= msY) { msLab = kapLab + 14; } else { kapLab = msLab + 14; } }
+    s.push('<text x="' + (L + 6) + '" y="' + kapLab + '" font-size="11" font-weight="' + (bindKap ? 700 : 500) + '" fill="#4b7d23">15 per cent ceiling, ' + eur0(m.kapCeiling) + ' €</text>');
+    s.push('<text x="' + (L + 6) + '" y="' + msLab + '" font-size="11" font-weight="' + (bindKap ? 500 : 700) + '" fill="#1B5E20">Mietspiegel ceiling, ' + eur0(m.msCeiling) + ' €</text>');
+
+    // what the letter asks
+    var ok = m.ask <= m.binding + 0.005;
+    var ay = y(Math.max(lo, Math.min(hi, m.ask)));
+    var ax = x(m.effective.getTime());
+    s.push('<line x1="' + ax + '" y1="' + y(running) + '" x2="' + ax + '" y2="' + ay + '" stroke="#123D18" stroke-width="1.6" stroke-dasharray="4 3"></line>');
+    s.push('<circle cx="' + ax + '" cy="' + ay + '" r="7" fill="' + (ok ? '#FFE600' : '#B4472E') + '" stroke="#123D18" stroke-width="2"></circle>');
+    s.push('<text x="' + (ax - 12) + '" y="' + (ay + 4) + '" text-anchor="end" font-size="11.5" font-weight="700" fill="#123D18">letter asks ' + eur0(m.ask) + ' €</text>');
+    s.push('<text x="' + (x(m.windowStart.getTime()) + 6) + '" y="' + (H - B - 8) + '" font-size="10.5" fill="#4b7d23">the three years the 15 per cent looks back over</text>');
+    s.push('</svg>');
+    el('chart').innerHTML = s.join('');
+  }
+
+  // ---- verdict -----------------------------------------------------------
+  function verdict(m) {
+    var flags = [];
+    var ok = m.ask <= m.binding + 0.005;
+
+    if (kindLease === 'staffel') {
+      flags.push(['bad', 'Your contract is a Staffelmiete. While the steps run, section 557a(2) BGB shuts out both a comparable rent rise and a modernisation rise, so a letter asking for either is asking for something the contract already gave away.']);
+    } else if (kindLease === 'index') {
+      flags.push(['bad', 'Your contract is an Indexmiete. Section 557b(2) BGB excludes a comparable rent rise altogether, and the rent still has to sit still for a year between index changes.']);
+    }
+
+    if (m.canSendFrom && m.letter && m.letter < m.canSendFrom) {
+      flags.push(['bad', 'The letter is early. It cannot be sent before ' + fmt(m.canSendFrom) + ', one year after your last rise.']);
+    }
+    if (m.canTakeEffectFrom && m.effective && m.effective < m.canTakeEffectFrom) {
+      flags.push(['bad', 'The date is too soon. Your rent has to have been unchanged for fifteen months when the rise starts, so the earliest start is ' + fmt(m.canTakeEffectFrom) + '.']);
+    }
+    if (m.capExempt > 0) {
+      flags.push(['ok', 'You added ' + eur(m.capExempt) + ' € of modernisation or operating cost rises. Those sit outside the 15 per cent, which pushes your ceiling up by the same amount.']);
+    }
+    if (!m.inWindow.length) {
+      flags.push(['ok', 'No earlier rise inside the window, so the whole 15 per cent is still there to be used.']);
+    }
+    flags.push(['ok', 'Whatever the numbers say, the landlord also has to quote the Berliner Mietspiegel 2026 figures for your flat in the letter itself, even when the reason given is three comparable flats. Section 558a(3) BGB.']);
+
+    var gap = m.ask - m.binding;
+    var head = ok
+      ? eur(m.ask) + ' € is inside the line'
+      : eur(Math.abs(gap)) + ' € a month too much';
+    var sub = ok
+      ? 'The lowest ceiling here is ' + m.bindingName + ' at ' + eur(m.binding) + ' € a month, and the letter stays under it. That does not make the letter valid on its own, it means the amount is not where you would fight it.'
+      : 'The lowest ceiling here is ' + m.bindingName + ' at ' + eur(m.binding) + ' € a month. Agreeing to the full amount would hand over ' + eur0(Math.abs(gap) * 12) + ' € a year more than that line allows.';
+
+    var cells = [
+      ['' + eur0(m.baseRent) + ' €', 'What you paid three years before the start date, which is the base the 15 per cent works from'],
+      ['' + eur0(m.kapCeiling) + ' €', 'Ceiling from the 15 per cent rule'],
+      ['' + eur0(m.msCeiling) + ' €', 'Ceiling from your Mietspiegel value at ' + eur(m.msPerSqm) + ' € per m²'],
+      [m.replyBy ? fmt(m.replyBy) : 'not set', 'Last day to answer. Silence is not agreement, but it does open the landlord\'s three months to sue'],
+      [m.effective ? fmt(m.effective) : 'not set', 'First month the higher rent would be owed if you agree']
+    ];
+
+    var s = [];
+    s.push('<div class="big">' + head + '<span>' + sub + '</span></div>');
+    s.push('<div class="rl-cells">' + cells.map(function (c) {
+      return '<div class="cell"><div class="v">' + c[0] + '</div><div class="k">' + c[1] + '</div></div>';
+    }).join('') + '</div>');
+    s.push('<ul class="rl-flags">' + flags.map(function (f) {
+      return '<li class="' + (f[0] === 'bad' ? 'bad' : '') + '">' + f[1] + '</li>';
+    }).join('') + '</ul>');
+    s.push('<div class="rl-move"><b>My move</b>' + (ok
+      ? 'Do not sign anything on the day it arrives. Check the Mietspiegel value for your own street first, because the field value is what decides this, and a wrong Wohnlage is the single most common error in these letters.'
+      : 'Partial agreement is the move here, not silence. Agree in writing to ' + eur0(m.binding) + ' € and say plainly that you are not agreeing above that. It keeps you out of court for the part that is clearly right and keeps the rest open.') + '</div>');
+    el('out').innerHTML = s.join('');
+  }
+
+  function renderRows() {
+    var ul = el('rows');
+    ul.innerHTML = rises.slice().sort(function (a, b) { return a.date - b.date; }).map(function (r, i) {
+      return '<li><b>' + eur0(r.amount) + ' €</b> <span class="tag">from ' + fmt(r.date) + ', ' + r.label + '</span>'
+        + '<span class="sp"></span><button class="rl-x" type="button" data-i="' + r.uid + '" aria-label="Remove this rise">&times;</button></li>';
+    }).join('');
+    el('empty').hidden = rises.length > 0;
+    Array.prototype.forEach.call(ul.querySelectorAll('.rl-x'), function (b) {
+      b.addEventListener('click', function () {
+        var uid = b.getAttribute('data-i');
+        for (var i = 0; i < rises.length; i += 1) {
+          if (String(rises[i].uid) === uid) { rises.splice(i, 1); break; }
+        }
+        renderRows(); run();
+      });
+    });
+  }
+
+  function run() {
+    var m = model();
+    chart(m);
+    verdict(m);
+    if (window.bwResize) window.bwResize();
+  }
+
+  function renderKinds() {
+    var list = (DATA && DATA.increaseKinds) || [];
+    el('kinds').innerHTML = list.map(function (k) {
+      return '<button class="rl-kind" type="button" aria-pressed="' + (k.id === kind) + '" data-k="' + k.id + '">' + k.label + '</button>';
+    }).join('');
+    Array.prototype.forEach.call(el('kinds').querySelectorAll('.rl-kind'), function (b) {
+      b.addEventListener('click', function () {
+        kind = b.getAttribute('data-k');
+        renderKinds();
+      });
+    });
+  }
+
+  var uid = 1;
+  function boot() {
+    renderKinds();
+    el('add').addEventListener('click', function () {
+      var d = parseDay(el('rdate').value);
+      var a = parseFloat(el('ramt').value);
+      if (!d || !isFinite(a) || a <= 0) return;
+      var k = kindOf(kind);
+      rises.push({ uid: uid++, date: d, amount: a, countsToCap: !!k.countsToCap, label: k.label });
+      renderRows(); run();
+    });
+    el('clear').addEventListener('click', function () { rises = []; renderRows(); run(); });
+    Array.prototype.forEach.call(document.querySelectorAll('.rl-f input'), function (i) {
+      i.addEventListener('input', run);
+      i.addEventListener('change', run);
+    });
+    renderRows();
+    run();
+  }
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (j) {
+    DATA = j;
+    boot();
+    buildLease();
+  }).catch(function () { boot(); });
+
+  function buildLease() {
+    var wrap = document.createElement('div');
+    wrap.className = 'rl-box';
+    wrap.innerHTML = '<h3>What kind of contract you signed</h3><div class="rl-kinds" role="group" aria-label="Lease type" id="leases"></div><p class="rl-lease" id="leasenote"></p>';
+    var host = document.querySelector('.rl-head').parentNode;
+    host.insertBefore(wrap, document.querySelectorAll('.rl-box')[0]);
+    var list = (DATA && DATA.leaseTypes) || [];
+    function draw() {
+      el('leases').innerHTML = list.map(function (l) {
+        return '<button class="rl-kind" type="button" aria-pressed="' + (l.id === kindLease) + '" data-l="' + l.id + '">' + l.label + '</button>';
+      }).join('');
+      var found = list.filter(function (l) { return l.id === kindLease; })[0];
+      el('leasenote').textContent = found ? found.note : '';
+      Array.prototype.forEach.call(el('leases').querySelectorAll('.rl-kind'), function (b) {
+        b.addEventListener('click', function () { kindLease = b.getAttribute('data-l'); draw(); run(); });
+      });
+    }
+    draw();
+    run();
+  }
+})();
+</script>
+</body>
+</html>

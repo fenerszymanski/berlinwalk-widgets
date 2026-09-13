@@ -11611,5 +11611,51 @@
         "a": "Any time, but know what you are buying into. A south-facing vertical kit makes about 63 kWh in September and roughly 89 kWh across November, December and January put together, so a panel bought this week will look disappointing for its first three months. That is the shape of the Berlin year, not a fault in the hardware. Hang it, read your own meter through one winter, and judge it in June."
       }
     ]
+  },
+  "berlin-rent-increase": {
+    "title": "Berlin Rent Increase - FAQ",
+    "subtitle": "What a Berlin landlord may ask for, which ceiling stops it first, and the dates you are working to.",
+    "items": [
+      {
+        "q": "How much can rent go up in Berlin?",
+        "a": "Two ceilings apply at the same time and the lower one wins. The Kappungsgrenze limits a rise to the ortsuebliche Vergleichsmiete to 15 per cent over three years in Berlin, set by the Kappungsgrenzenverordnung of 14 March 2023 under section 558(3) BGB. Separately, the rent may not go above the ortsuebliche Vergleichsmiete itself, which for most flats comes from the Berliner Mietspiegel. Whichever of the two is lower is your actual ceiling. For a flat already near its Mietspiegel value the percentage never comes into play at all."
+      },
+      {
+        "q": "When does the 15 per cent actually protect me?",
+        "a": "Only when you are well below your Mietspiegel field. Your ceiling is the lower of current rent times 1.15 and flat size times your Mietspiegel value, so the percentage only binds while you pay less than about 87 per cent of that value. At the citywide median of 7.71 euro per square metre the crossover sits at 6.70. A 62 square metre flat at 465 euro has a 15 per cent ceiling of 534.75 and a Mietspiegel ceiling of 478.02, so the percentage is 57 euro above the line that stops the letter. The same flat at 322 euro has a 15 per cent ceiling of 370.76, and there the percentage is holding 107 euro a month."
+      },
+      {
+        "q": "How long do I have to answer a rent increase letter in Berlin?",
+        "a": "Until the end of the second calendar month after the letter reaches you, under section 558b(1) and (2) BGB. If you agree, the higher rent is owed from the start of the third calendar month. A letter that arrives on 10 September 2026 gives you until 30 November, with the first higher payment on 1 December. That is one deadline for the whole letter, whatever the amount."
+      },
+      {
+        "q": "What happens if I just ignore the letter?",
+        "a": "Nothing is taken from your account, because a rise to the ortsuebliche Vergleichsmiete only works if you agree to it. What happens instead is that the landlord gets three further months from your deadline to sue you for that consent, under section 558b(2) BGB. If the demand was correct, that case is winnable and the arrears come with it. Partial agreement is usually the better answer: agree in writing to the amount you think is right, state that you are not agreeing above it, and keep paying."
+      },
+      {
+        "q": "How soon after the last increase can my rent go up again?",
+        "a": "Section 558(1) BGB gives two separate clocks. The rent has to have been unchanged for 15 months on the day the new rise is meant to start, and the demand itself cannot be made until 12 months after the last rise. Increases for modernisation under section 559 and for operating costs under section 560 do not restart either clock."
+      },
+      {
+        "q": "Does the landlord have to quote the Mietspiegel?",
+        "a": "In Berlin, effectively yes. Under section 558a(3) BGB, where the qualified Mietspiegel contains figures for your flat, the landlord has to state those figures in the demand even when the reason given is three comparable flats or a surveyor report. The Berliner Mietspiegel 2026 is a qualified Mietspiegel recognised by the Senate and by both landlord and tenant organisations, so the presumption in section 558d(3) applies to the fields inside its scope."
+      },
+      {
+        "q": "Do modernisation increases count towards the 15 per cent?",
+        "a": "No, and that catches people out. Section 558(3) BGB leaves increases under sections 559 and 560 out of the three year calculation, so a modernisation rise or an operating cost adjustment does not use up your 15 per cent. It raises what the landlord may reach in total. Modernisation has its own limits instead: 8 per cent of the chargeable cost per year, capped at 3 euro per square metre over six years, or 2 euro if the monthly rent was under 7 euro per square metre before the work."
+      },
+      {
+        "q": "What is the Berliner Mietspiegel 2026 and what does it say?",
+        "a": "It is the Senate survey of what flats of a comparable age, size, fittings and location actually rent for in Berlin, published on 28 May 2026 with a reference date of 1 September 2025. It covers about 1.6 million flats and is based on roughly 17,000 rent and fittings records. The median net cold rent in it is 7.71 euro per square metre, against 7.21 in the 2024 edition. It splits the city into simple, middle and good Wohnlagen, holding 29.4, 49.9 and 20.7 per cent of flats."
+      },
+      {
+        "q": "My contract is a Staffelmiete. Can they still send me a rent increase?",
+        "a": "Not for the ortsuebliche Vergleichsmiete and not for modernisation. Section 557a(2) BGB says each step has to hold for at least a year and that increases under sections 558 to 559b are excluded while a Staffelmiete runs. An Indexmiete is similar: section 557b(2) excludes a comparable rent rise altogether, the rent has to sit unchanged for a year between adjustments, and a modernisation rise is only possible for work the landlord did not cause. Plenty of agents send the standard letter to everyone on their list, so check your contract type before you check the sum."
+      },
+      {
+        "q": "Where do I get help with a rent increase in Berlin?",
+        "a": "Look up your own Mietspiegel field first at the Senate query service, because the Wohnlage is assigned street by street and it is the single most disputed line in these letters. Then take the letter to a Mieterverein or to your district free Mieterberatung, well before the end of the second calendar month. Membership costs around a hundred euro a year and pays for itself the first time it takes a wrong forty euro off a letter that would otherwise have run for years. Checked on 13 September 2026."
+      }
+    ]
   }
 }

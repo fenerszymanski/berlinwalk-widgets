@@ -1,0 +1,37 @@
+{
+  "source": "BGB sections 557a, 557b, 558, 558a, 558b, 559, 559b; Berlin Kappungsgrenzenverordnung of 14 March 2023 (GVBl. p. 112); Berliner Mietspiegel 2026 of 28 May 2026 (ABl. no. 22).",
+  "checkedOn": "2026-09-13",
+  "limits": {
+    "kappungsgrenzePercent": 15,
+    "kappungsgrenzeYears": 3,
+    "standstillMonths": 15,
+    "resendMonths": 12,
+    "replyMonths": 2,
+    "effectiveMonths": 3,
+    "modernisationSharePercent": 8,
+    "modernisationCapPerSqm": 3,
+    "modernisationCapPerSqmLowRent": 2,
+    "modernisationLowRentThreshold": 7,
+    "modernisationCapYears": 6
+  },
+  "mietspiegel": {
+    "edition": "Berliner Mietspiegel 2026",
+    "publishedOn": "2026-05-28",
+    "referenceDate": "2025-09-01",
+    "medianNetColdPerSqm": 7.71,
+    "previousMedianNetColdPerSqm": 7.21,
+    "previousEdition": "Berliner Mietspiegel 2024",
+    "flatsCovered": 1600000,
+    "sampleSize": 17000
+  },
+  "leaseTypes": [
+    { "id": "standard", "label": "Ordinary lease", "note": "The rent is whatever the contract says and the landlord has to ask for every rise." },
+    { "id": "staffel", "label": "Staffelmiete", "note": "Steps are written into the contract. While a Staffelmiete runs, a comparable-rent rise and a modernisation rise are both blocked (section 557a(2) BGB)." },
+    { "id": "index", "label": "Indexmiete", "note": "The rent follows the national consumer price index. A comparable-rent rise is excluded (section 557b(2) BGB), and the rent has to sit still for a year between changes." }
+  ],
+  "increaseKinds": [
+    { "id": "vergleich", "label": "Comparable rent (558)", "countsToCap": true },
+    { "id": "modern", "label": "Modernisation (559)", "countsToCap": false },
+    { "id": "betrieb", "label": "Operating costs (560)", "countsToCap": false }
+  ]
+}
