@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Balcony Solar Year</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root{
+    --green:#1B5E20; --deep:#123D18; --yellow:#FFE600; --lime:#7CB342;
+    --lightgreen:#C5E1A5; --cream:#FAFAF5; --ink:#212121; --pale:#e4ead6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--cream);color:var(--ink);padding:14px 12px 8px}
+  .bsy-wrap{max-width:900px;margin:0 auto}
+  .bsy-head h1{font-size:1.15rem;color:var(--green);margin-bottom:3px}
+  .bsy-head p{font-size:.8rem;color:#4b5245;line-height:1.45}
+  .bsy-card{background:#fff;border:1px solid #e2e5da;border-radius:12px;padding:14px 16px;margin-top:10px}
+  .bsy-dialrow{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .bsy-label{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);font-weight:700}
+  .bsy-facing{font-size:1.45rem;font-weight:800;color:var(--deep);line-height:1.1}
+  .bsy-facing small{font-size:.78rem;font-weight:700;color:#68705e;margin-left:6px}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:26px;background:transparent;margin-top:8px;cursor:pointer}
+  input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:999px;background:linear-gradient(90deg,var(--lightgreen),var(--lime),var(--yellow),var(--lime),var(--lightgreen))}
+  input[type=range]::-moz-range-track{height:8px;border-radius:999px;background:linear-gradient(90deg,var(--lightgreen),var(--lime),var(--yellow),var(--lime),var(--lightgreen))}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;margin-top:-9px;border-radius:50%;background:var(--yellow);border:3px solid var(--green)}
+  input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--yellow);border:3px solid var(--green)}
+  input[type=range]:focus{outline:none}
+  input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 4px rgba(27,94,32,.28)}
+  .bsy-ticks{display:flex;justify-content:space-between;font-size:.66rem;color:#7b8272;margin-top:-2px}
+  .bsy-opts{display:flex;flex-direction:column;gap:9px;margin-top:14px}
+  .bsy-opt .bsy-label{display:block;margin-bottom:5px}
+  .bsy-chips{display:flex;gap:6px;flex-wrap:wrap}
+  .bsy-chip{font-family:inherit;font-size:.74rem;font-weight:700;color:#4b5245;background:#fff;border:1.5px solid #e2e5da;border-radius:999px;padding:6px 11px;cursor:pointer;line-height:1.25}
+  .bsy-chip:hover{border-color:var(--lime)}
+  .bsy-chip[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+  .bsy-chip small{display:block;font-size:.62rem;font-weight:600;opacity:.8}
+  .bsy-panels{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:14px;align-items:start;margin-top:12px}
+  svg{display:block;width:100%;height:auto}
+  .bsy-stats{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .bsy-stat{flex:1 1 128px;background:#f4f7ee;border:1px solid #dde5cf;border-radius:10px;padding:9px 11px}
+  .bsy-stat b{display:block;font-size:1.25rem;color:var(--deep);line-height:1.15}
+  .bsy-stat span{font-size:.68rem;color:#68705e;line-height:1.35;display:block}
+  .bsy-verdict{background:var(--yellow);color:var(--deep);border-radius:10px;padding:11px 13px;font-size:.82rem;font-weight:600;line-height:1.5;margin-top:10px}
+  .bsy-verdict b{font-weight:800}
+  .bsy-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.69rem;color:#4b5245;margin-top:6px}
+  .bsy-legend span{display:inline-flex;align-items:center;gap:5px}
+  .bsy-swatch{width:14px;height:10px;border-radius:3px;display:inline-block}
+  .bsy-price{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px;font-size:.75rem;color:#4b5245}
+  .bsy-price label{font-weight:700}
+  .bsy-price input{font-family:inherit;font-size:.85rem;font-weight:700;color:var(--deep);width:92px;padding:6px 8px;border:1.5px solid #e2e5da;border-radius:8px;background:#fff}
+  .bsy-price input:focus{outline:none;border-color:var(--green)}
+  .bsy-foot{font-size:.68rem;color:#7b8272;line-height:1.5;margin-top:10px}
+  .bsy-foot a{color:var(--green)}
+  @media (max-width:640px){
+    .bsy-panels{grid-template-columns:minmax(0,1fr)}
+    .bsy-head h1{font-size:1.02rem}
+    .bsy-facing{font-size:1.25rem}
+  }
+</style>
+</head>
+<body>
+<div class="bsy-wrap">
+  <div class="bsy-head">
+    <h1>Berlin Balcony Solar Year</h1>
+    <p>An 800 watt kit is sold on one number. What lands on your bill depends on which wall it hangs on, how it hangs, and how much your flat is drawing while the sun is up. Turn your balcony to its real direction and watch the year change.</p>
+  </div>
+
+  <div class="bsy-card">
+    <div class="bsy-dialrow">
+      <div class="bsy-label">Your balcony faces</div>
+      <div class="bsy-facing" id="facing">South<small id="deg">180&deg;</small></div>
+    </div>
+    <input type="range" id="dial" min="0" max="355" step="5" value="180" aria-label="Direction the balcony faces, in degrees from north">
+    <div class="bsy-ticks"><span>N</span><span>E</span><span>S</span><span>W</span><span>N</span></div>
+
+    <div class="bsy-opts">
+      <div class="bsy-opt">
+        <span class="bsy-label">How the panel hangs</span>
+        <div class="bsy-chips" id="mountChips"></div>
+      </div>
+      <div class="bsy-opt">
+        <span class="bsy-label">Module power behind the 800 W inverter</span>
+        <div class="bsy-chips" id="sizeChips"></div>
+      </div>
+      <div class="bsy-opt">
+        <span class="bsy-label">What the flat draws while the sun is up</span>
+        <div class="bsy-chips" id="loadChips"></div>
+      </div>
+    </div>
+
+    <div class="bsy-panels">
+      <div>
+        <div class="bsy-label" style="margin-bottom:4px">Kept over the year, by direction</div>
+        <svg id="rose" viewBox="0 0 220 220" role="img" aria-label="Compass showing how many kilowatt hours each balcony direction keeps"></svg>
+      </div>
+      <div>
+        <div class="bsy-label" style="margin-bottom:4px">Month by month</div>
+        <svg id="chart" viewBox="0 0 620 250" role="img" aria-label="Monthly production and the share the flat uses"></svg>
+        <div class="bsy-legend">
+          <span><i class="bsy-swatch" style="background:var(--green)"></i> used in the flat</span>
+          <span><i class="bsy-swatch" style="background:var(--pale)"></i> given to the grid for nothing</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="bsy-stats">
+      <div class="bsy-stat"><b id="sProd">0</b><span>kWh made in a year</span></div>
+      <div class="bsy-stat"><b id="sUsed">0</b><span>kWh you actually use</span></div>
+      <div class="bsy-stat"><b id="sEur">0</b><span>off the bill per year at 37.93 ct</span></div>
+      <div class="bsy-stat"><b id="sPay">0</b><span>years to pay the kit back</span></div>
+    </div>
+
+    <div class="bsy-price">
+      <label for="price">Kit price you are looking at</label>
+      <input type="number" id="price" min="80" max="3000" step="10" value="400" inputmode="numeric" aria-label="Kit price in euro">
+      <span>euro, panels and mounting together. The starting figures follow the Verbraucherzentrale range for a kit plus brackets.</span>
+    </div>
+
+    <p class="bsy-verdict" id="verdict"></p>
+
+    <p class="bsy-foot">Yields modelled for Berlin Mitte with <a href="https://re.jrc.ec.europa.eu/pvg_tools/en/" target="_blank" rel="noopener">PVGIS</a> (European Commission JRC), clean sky, nothing shading the panel. A courtyard balcony with a building opposite will sit well under these numbers. The flat is modelled as a steady background draw, and everything above it leaves at the standard unpaid feed-in. Above 960 Wp of module the current product standard wants a proper feed-in socket instead of a Schuko plug, so the three larger sizes carry an electrician with them.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var AZ = [-180,-150,-120,-90,-60,-30,0,30,60,90,120,150];
+  var MOUNTS = [
+    { tilt: 90, name: 'Flat on the railing', note: 'vertical' },
+    { tilt: 60, name: 'Angled out', note: '60 degrees' },
+    { tilt: 30, name: 'Laid back', note: '30 degrees' }
+  ];
+  var SIZES = [
+    { wp: 800, name: '800 Wp', note: 'two panels', price: 400 },
+    { wp: 1200, name: '1200 Wp', note: 'three panels', price: 520 },
+    { wp: 1600, name: '1600 Wp', note: 'four panels', price: 640 },
+    { wp: 2000, name: '2000 Wp', note: 'legal ceiling', price: 780 }
+  ];
+  var LOADS = [
+    { w: 80, name: '80 W', note: 'out all day' },
+    { w: 130, name: '130 W', note: 'fridge, router, standby' },
+    { w: 200, name: '200 W', note: 'someone home' },
+    { w: 320, name: '320 W', note: 'home office and freezer' }
+  ];
+  var COMPASS = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+
+  var DATA = null;
+  var state = { bearing: 180, tilt: 90, wp: 800, load: 130, price: 400 };
+  var priceTouched = false;
+
+  var dial = document.getElementById('dial');
+  var priceInput = document.getElementById('price');
+  var facing = document.getElementById('facing');
+  var degOut = document.getElementById('deg');
+  var rose = document.getElementById('rose');
+  var chart = document.getElementById('chart');
+  var verdict = document.getElementById('verdict');
+  var sProd = document.getElementById('sProd'), sUsed = document.getElementById('sUsed');
+  var sEur = document.getElementById('sEur'), sPay = document.getElementById('sPay');
+
+  function sum(a) { var t = 0; for (var i = 0; i < a.length; i++) t += a[i]; return t; }
+  function el(tag, attrs) {
+    var n = document.createElementNS('http://www.w3.org/2000/svg', tag);
+    for (var k in attrs) if (attrs[k] !== null && attrs[k] !== undefined) n.setAttribute(k, attrs[k]);
+    return n;
+  }
+  /** Compass bearing (0 = north, clockwise) to the PVGIS aspect convention (0 = south). */
+  function bearingToAspect(b) { var a = b - 180; if (a > 180) a -= 360; if (a <= -180) a += 360; return a; }
+  function cellFor(tilt, aspect) { return DATA.cells[tilt + '_' + aspect]; }
+
+  /** Monthly arrays for any bearing, read straight off the grid or mixed between two neighbours. */
+  function profile(bearing, tilt, wp, load) {
+    var a = bearingToAspect(bearing);
+    var lo = Math.floor((a + 180) / 30), frac = ((a + 180) / 30) - lo;
+    var aLo = AZ[lo % 12], aHi = AZ[(lo + 1) % 12];
+    var cLo = cellFor(tilt, aLo)[wp], cHi = cellFor(tilt, aHi)[wp];
+    var prod = [], used = [];
+    for (var m = 0; m < 12; m++) {
+      prod[m] = cLo.prod[m] + (cHi.prod[m] - cLo.prod[m]) * frac;
+      used[m] = cLo.used[load][m] + (cHi.used[load][m] - cLo.used[load][m]) * frac;
+    }
+    return { prod: prod, used: used };
+  }
+
+  function compassName(b) { return COMPASS[Math.round(((b % 360) + 360) % 360 / 22.5) % 16]; }
+  function longName(b) {
+    var short = compassName(b);
+    var words = { N: 'North', NNE: 'North-north-east', NE: 'North-east', ENE: 'East-north-east',
+      E: 'East', ESE: 'East-south-east', SE: 'South-east', SSE: 'South-south-east', S: 'South',
+      SSW: 'South-south-west', SW: 'South-west', WSW: 'West-south-west', W: 'West',
+      WNW: 'West-north-west', NW: 'North-west', NNW: 'North-north-west' };
+    return words[short];
+  }
+
+  function chips(host, items, key, labelFor) {
+    host.textContent = '';
+    items.forEach(function (it) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'bsy-chip';
+      b.innerHTML = labelFor(it);
+      b.setAttribute('aria-pressed', String(state[key] === it.value));
+      b.onclick = function () {
+        state[key] = it.value;
+        // A four panel kit costs more than a two panel kit, so the payback figure
+        // would lie if the price stayed at 400 euro. It stops moving the moment
+        // the reader types a real price of their own.
+        if (key === 'wp' && !priceTouched && it.price) {
+          state.price = it.price;
+          priceInput.value = it.price;
+        }
+        [].forEach.call(host.children, function (c, i) {
+          c.setAttribute('aria-pressed', String(items[i].value === it.value));
+        });
+        render();
+      };
+      host.appendChild(b);
+    });
+  }
+
+  /** Petal length for every one of the twelve measured directions, on one fixed scale. */
+  function roseValues() {
+    var out = [], ceiling = 0;
+    for (var t = 0; t < MOUNTS.length; t++) {
+      for (var i = 0; i < AZ.length; i++) {
+        var v = sum(cellFor(MOUNTS[t].tilt, AZ[i])[state.wp].used[state.load]);
+        if (v > ceiling) ceiling = v;
+      }
+    }
+    for (var j = 0; j < AZ.length; j++) {
+      var aspect = AZ[j];
+      var bearing = ((aspect + 180) % 360 + 360) % 360;
+      out.push({ bearing: bearing, kwh: sum(cellFor(state.tilt, aspect)[state.wp].used[state.load]) });
+    }
+    return { petals: out, ceiling: ceiling };
+  }
+
+  function drawRose() {
+    rose.textContent = '';
+    var cx = 110, cy = 110, rMin = 10, rMax = 92;
+    var r = roseValues();
+    rose.appendChild(el('circle', { cx: cx, cy: cy, r: rMax, fill: '#f4f7ee', stroke: '#dde5cf' }));
+    rose.appendChild(el('circle', { cx: cx, cy: cy, r: (rMin + rMax) / 2, fill: 'none', stroke: '#e4ead6', 'stroke-dasharray': '3 4' }));
+
+    var pts = r.petals.map(function (p) {
+      var rad = (p.bearing - 90) * Math.PI / 180;
+      var len = rMin + (rMax - rMin) * (r.ceiling ? p.kwh / r.ceiling : 0);
+      return { x: cx + Math.cos(rad) * len, y: cy + Math.sin(rad) * len, p: p };
+    });
+    var d = pts.map(function (q, i) { return (i ? 'L' : 'M') + q.x.toFixed(1) + ' ' + q.y.toFixed(1); }).join(' ') + ' Z';
+    rose.appendChild(el('path', { d: d, fill: 'rgba(124,179,66,.32)', stroke: '#7CB342', 'stroke-width': 2, 'stroke-linejoin': 'round' }));
+    pts.forEach(function (q) { rose.appendChild(el('circle', { cx: q.x.toFixed(1), cy: q.y.toFixed(1), r: 2.6, fill: '#1B5E20' })); });
+
+    ['N','E','S','W'].forEach(function (lab, i) {
+      var rad = (i * 90 - 90) * Math.PI / 180;
+      var t = el('text', { x: (cx + Math.cos(rad) * (rMax + 12)).toFixed(1), y: (cy + Math.sin(rad) * (rMax + 12) + 4).toFixed(1),
+        'text-anchor': 'middle', 'font-size': 12, 'font-weight': 700, fill: '#68705e' });
+      t.textContent = lab;
+      rose.appendChild(t);
+    });
+
+    var mrad = (state.bearing - 90) * Math.PI / 180;
+    rose.appendChild(el('line', { x1: cx, y1: cy, x2: (cx + Math.cos(mrad) * rMax).toFixed(1), y2: (cy + Math.sin(mrad) * rMax).toFixed(1),
+      stroke: '#1B5E20', 'stroke-width': 3, 'stroke-linecap': 'round' }));
+    rose.appendChild(el('circle', { cx: (cx + Math.cos(mrad) * rMax).toFixed(1), cy: (cy + Math.sin(mrad) * rMax).toFixed(1),
+      r: 7, fill: '#FFE600', stroke: '#1B5E20', 'stroke-width': 2.5 }));
+    rose.appendChild(el('circle', { cx: cx, cy: cy, r: rMin - 4, fill: '#fff', stroke: '#dde5cf' }));
+    var mid = el('text', { x: cx, y: cy + 4, 'text-anchor': 'middle', 'font-size': 12, 'font-weight': 800, fill: '#123D18' });
+    mid.textContent = compassName(state.bearing);
+    rose.appendChild(mid);
+  }
+
+  /** The tallest month anywhere at this mounting and size, so turning the dial really shrinks the year. */
+  function chartCeiling() {
+    var top = 0;
+    for (var i = 0; i < AZ.length; i++) {
+      var p = cellFor(state.tilt, AZ[i])[state.wp].prod;
+      for (var m = 0; m < 12; m++) if (p[m] > top) top = p[m];
+    }
+    return top;
+  }
+
+  function drawChart(pr) {
+    chart.textContent = '';
+    var left = 34, right = 8, top = 12, bottom = 30;
+    var w = 620, h = 250;
+    var plotW = w - left - right, plotH = h - top - bottom;
+    var ceiling = chartCeiling() || 1;
+    var band = plotW / 12, barW = band * 0.62;
+
+    [0, 0.5, 1].forEach(function (f) {
+      var y = top + plotH * (1 - f);
+      chart.appendChild(el('line', { x1: left, y1: y.toFixed(1), x2: w - right, y2: y.toFixed(1), stroke: '#e4ead6' }));
+      var t = el('text', { x: left - 6, y: (y + 4).toFixed(1), 'text-anchor': 'end', 'font-size': 10, fill: '#8a9180' });
+      t.textContent = Math.round(ceiling * f);
+      chart.appendChild(t);
+    });
+
+    for (var m = 0; m < 12; m++) {
+      var x = left + band * m + (band - barW) / 2;
+      var hp = plotH * (pr.prod[m] / ceiling);
+      var hu = plotH * (pr.used[m] / ceiling);
+      chart.appendChild(el('rect', { x: x.toFixed(1), y: (top + plotH - hp).toFixed(1), width: barW.toFixed(1), height: Math.max(hp, 0.6).toFixed(1), rx: 3, fill: '#e4ead6' }));
+      chart.appendChild(el('rect', { x: x.toFixed(1), y: (top + plotH - hu).toFixed(1), width: barW.toFixed(1), height: Math.max(hu, 0.6).toFixed(1), rx: 3, fill: '#1B5E20' }));
+      var lab = el('text', { x: (x + barW / 2).toFixed(1), y: h - 14, 'text-anchor': 'middle', 'font-size': 10, fill: '#68705e' });
+      lab.textContent = MONTHS[m];
+      chart.appendChild(lab);
+      var val = el('text', { x: (x + barW / 2).toFixed(1), y: h - 3, 'text-anchor': 'middle', 'font-size': 9, 'font-weight': 700, fill: '#123D18' });
+      val.textContent = Math.round(pr.used[m]);
+      chart.appendChild(val);
+    }
+    var cap = el('text', { x: w - right, y: top - 2, 'text-anchor': 'end', 'font-size': 9, fill: '#8a9180' });
+    cap.textContent = 'kWh per month, number under each bar is what the flat uses';
+    chart.appendChild(cap);
+  }
+
+  function verdictLine(prod, used, eur, years) {
+    var share = prod > 0 ? Math.round(used / prod * 100) : 0;
+    var wasted = Math.round(prod - used);
+    if (share >= 90) {
+      return 'This wall keeps nearly everything it makes, <b>' + share + '% of it</b>, because it never produces more than the flat is already drawing. The limit here is the wall, not the inverter.';
+    }
+    if (years > 8) {
+      return 'At <b>' + Math.round(eur) + ' euro a year</b> this takes <b>' + years.toFixed(1) + ' years</b> to pay for itself, and <b>' + wasted + ' kWh</b> leave the flat unpaid. Try a brighter wall or a smaller kit before you buy.';
+    }
+    return 'You keep <b>' + share + '%</b> of what this makes. The other <b>' + wasted + ' kWh</b> go to the grid for nothing, which is why the flat’s own draw matters more than the last hundred watts of panel.';
+  }
+
+  function render() {
+    var pr = profile(state.bearing, state.tilt, state.wp, state.load);
+    var prod = sum(pr.prod), used = sum(pr.used);
+    var eur = used * DATA.meta.tariffCtPerKwh / 100;
+    var years = eur > 0 ? state.price / eur : 99;
+
+    facing.firstChild.nodeValue = longName(state.bearing);
+    degOut.textContent = state.bearing + '°';
+    sProd.textContent = Math.round(prod);
+    sUsed.textContent = Math.round(used);
+    sEur.textContent = '€' + Math.round(eur);
+    sPay.textContent = years > 40 ? '40+' : years.toFixed(1);
+    verdict.innerHTML = verdictLine(prod, used, eur, years);
+    drawRose();
+    drawChart(pr);
+  }
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (j) {
+    DATA = j;
+    chips(document.getElementById('mountChips'), MOUNTS.map(function (m) { return { value: m.tilt, name: m.name, note: m.note }; }), 'tilt',
+      function (it) { return it.name + '<small>' + it.note + '</small>'; });
+    chips(document.getElementById('sizeChips'), SIZES.map(function (s) { return { value: s.wp, name: s.name, note: s.note, price: s.price }; }), 'wp',
+      function (it) { return it.name + '<small>' + it.note + '</small>'; });
+    chips(document.getElementById('loadChips'), LOADS.map(function (l) { return { value: l.w, name: l.name, note: l.note }; }), 'load',
+      function (it) { return it.name + '<small>' + it.note + '</small>'; });
+    dial.oninput = function () { state.bearing = Number(dial.value); render(); };
+    dial.onchange = dial.oninput;
+    priceInput.oninput = function () {
+      priceTouched = true;
+      var v = Number(priceInput.value);
+      state.price = (isFinite(v) && v > 0) ? v : 400;
+      render();
+    };
+    render();
+  });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
