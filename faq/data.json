@@ -11721,5 +11721,43 @@
         "a": "It may. On 20 February 2026 the independent commission that works out what the broadcasters need, the KEF, handed its 25th report to the federal states in Berlin and recommended 18.64 euro a month from 1 January 2027, an increase of 28 cents. That is a recommendation and not law: the sixteen states still have to confirm it, and a new procedure from 2027 lets a minority of them object. For a single household the change would be 3.36 euro a year, which is worth far less than checking whether your own address is being billed once or twice."
       }
     ]
+  },
+  "wbs-berlin": {
+    "title": "WBS Berlin - FAQ",
+    "subtitle": "What income the Wohnungsamt actually tests, the five Berlin bands and the gross figures behind them, and the rules that catch flatshares out.",
+    "items": [
+      {
+        "q": "What income counts for a WBS in Berlin?",
+        "a": "The gross income the household expects over the next twelve months, which the office can also take from the last twelve months. Kindergeld does not count. From that gross figure it deducts the Werbungskosten allowance, which for anyone on a payslip is the 1,230 euro employee lump sum and is claimed once per earner, then up to three separate ten percent deductions: one for income tax, one for compulsory health and care insurance, and one for compulsory pension contributions. Someone on a normal German contract pays all three, so thirty percent of the remainder comes off. Only after that do any Freibetraege apply."
+      },
+      {
+        "q": "How much can you earn and still get a WBS in Berlin?",
+        "a": "More than most people think. A single employee clears the WBS 100 on about 18,370 euro gross a year, the WBS 140 on about 25,230 euro, the WBS 160 on about 28,660 euro, the WBS 180 on about 32,090 euro and the WBS 220 on about 38,940 euro. Two adults both on payslips with no children clear the WBS 180 on roughly 48,750 euro between them, and two adults with two children clear it on about 72,400 euro. These are gross figures for the standard employee case; a freelancer or a pensioner loses fewer of the ten percent deductions and therefore has a lower gross ceiling."
+      },
+      {
+        "q": "What is the difference between WBS 100, 140, 160, 180 and 220?",
+        "a": "They are the same federal income limit raised by different amounts. WBS 100 is the limit exactly as section 9 of the Wohnraumfoerderungsgesetz writes it: 12,000 euro for a single household, 18,000 for two people, 4,100 for each further person and 500 more per child. Berlin is allowed to raise that by up to 80 percent, so WBS 140 adds 40 percent, WBS 160 adds 60 percent, WBS 180 adds 80 percent and a narrow WBS 220 adds 120 percent for a small slice of newer flats. Almost every social flat in Berlin asks for a WBS 100 or a WBS 140; the higher bands cover newer subsidised blocks and buying a share in a housing cooperative."
+      },
+      {
+        "q": "Can a flatshare apply for a WBS together?",
+        "a": "No. A joint application is only possible for people who are related or who sign a Partnerschaftserklaerung, and several individual certificates cannot be combined into one. If three friends want one large flat, each of them is treated as a one person household with a one person income limit and a one person size entitlement. This is the rule that quietly ends the most searches in Berlin, and it is worth knowing before anyone signs a viewing list."
+      },
+      {
+        "q": "How big a flat does a WBS allow?",
+        "a": "One room per person is the basic rule, so a couple with three children may take a flat with five rooms. Since May 2018 a single person may also take a one and a half or two room flat with a total floor area of up to 50 square metres. Someone over 65 who gives up a three room flat in Berlin can be issued a certificate for a two room one. Extra space beyond that is possible in individual cases, for a disability, a serious health need, or work that genuinely requires a separate room."
+      },
+      {
+        "q": "How long does a WBS last and what does it cost?",
+        "a": "It is free, there is no fee in any district, and it is normally valid for one year. That makes applying long before you intend to move pointless, because the certificate will expire while you are still searching. Once issued it is valid across the whole of Berlin, whichever district processed it, so you can apply to any landlord in the city with it."
+      },
+      {
+        "q": "Where do you apply for a WBS in Berlin?",
+        "a": "At the Buergeramt or Wohnungsamt of the district where you are registered, by post or online. If you are moving to Berlin from elsewhere you may send the application to any Berlin housing office you choose. The two documents that hold applications up are both about money: the Einkommenserklaerung, which every adult in the household fills in and signs separately, and the Einkommensbescheinigung, which your employer completes and signs. Request the employer form first, because that is the one that waits in somebody's inbox."
+      },
+      {
+        "q": "Does a WBS actually get you a flat?",
+        "a": "No. It is permission to apply, not an allocation and not a place on a waiting list. Berlin counted about 95,000 social rental flats at the start of 2019 and the Senate's own projection puts the stock at roughly 59,000 by the start of 2028 as old subsidy agreements expire, with new construction meant to hold the line. The certificate costs nothing and takes twenty minutes, so the sensible order is to get it first and then search, instead of filtering out every listing marked WBS erforderlich on an assumption about your own income."
+      }
+    ]
   }
 }

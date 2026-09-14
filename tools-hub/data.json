@@ -9139,6 +9139,45 @@
       ],
       "iconStatus": "live-wix-media",
       "cmsItemId": "a2ad2169-8baa-403d-b478-24509ad96355"
+    },
+    {
+      "slug": "berlin-wbs-income-ladder",
+      "title": "Berlin WBS Income Ladder",
+      "lead": "A Wohnberechtigungsschein is not tested on your salary. The Wohnungsamt takes off the employee allowance, then up to three separate ten percent deductions, then any Freibetraege, and only compares what is left. Tell the ladder who is in your household and roughly what it earns before tax, and it draws your gross year as one column, strips the deductions off in visible layers and marks where the remainder lands against all five Berlin bands, from WBS 100 to WBS 220.",
+      "category": "Money",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-wbs-income-ladder/",
+      "embedHeight": 1080,
+      "image": "https://static.wixstatic.com/media/5a08a3_caac828f2ba444ad849042b4cce0242a~mv2.png",
+      "hubCategory": "MoneyShopping",
+      "type": "Calculator",
+      "priority": 3,
+      "tags": [
+        "wbs",
+        "wohnberechtigungsschein",
+        "social housing",
+        "sozialwohnung",
+        "income limit",
+        "wohnungsamt",
+        "housing",
+        "living in berlin",
+        "berlin money",
+        "rent",
+        "household income",
+        "wofg"
+      ],
+      "aliases": [
+        "wbs berlin",
+        "wohnberechtigungsschein berlin",
+        "wbs 140",
+        "wbs 180",
+        "wbs income limit",
+        "social housing berlin",
+        "sozialwohnung berlin",
+        "berlin housing certificate",
+        "wbs rechner"
+      ],
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "2707f245-d9a4-4228-afd2-01611aa2eaa6"
     }
   ],
   "hubCategories": [
