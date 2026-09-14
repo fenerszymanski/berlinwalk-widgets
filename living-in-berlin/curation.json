@@ -1,0 +1,141 @@
+{
+  "_note": "Hand-curated layer for the /blog/categories/living-in-berlin page. The generator pulls title, excerpt, image, read time and date from the live Wix Blog API; everything in this file is the part a human decides. A post with no entry here still appears on its shelf through the keyword fallback in the generator, but it will not appear in the glossary. Add one entry per new Living in Berlin post.",
+  "_shelves": {
+    "wohnung": "Wohnung & Nebenkosten",
+    "geld": "Geld & Papiere",
+    "draussen": "Draussen",
+    "wege": "Wege"
+  },
+  "posts": {
+    "berlin-rent-increase": {
+      "shelf": "wohnung",
+      "figure": "7.71 &euro;/m&sup2;",
+      "line": "median net cold rent, and the famous 15 per cent is not the limit doing the work.",
+      "term": "Mietspiegel",
+      "gloss": "The rent table your increase letter is built on. The median net cold rent sits at 7.71 euro per square metre, and four separate limits decide whether the letter holds up.",
+      "termCta": "Which limit stops it",
+      "tool": "berlin-rent-increase-limits"
+    },
+    "berlin-nebenkostenabrechnung": {
+      "shelf": "wohnung",
+      "figure": "12 months",
+      "line": "twice. Put your own statement against the city's published per square metre table.",
+      "term": "Nebenkostenabrechnung",
+      "gloss": "The yearly statement that says what your flat really cost. Two twelve-month deadlines decide whether it still counts, and the city publishes what every line normally costs per square metre.",
+      "termCta": "Check it line by line",
+      "tool": "berlin-nebenkosten-line-check"
+    },
+    "berlin-heating-season": {
+      "shelf": "wohnung",
+      "figure": "1 October",
+      "line": "but four of the last eleven autumns crossed the cold snap threshold in September.",
+      "term": "Heizperiode",
+      "gloss": "The heating season, and the reason your landlord owes you something at a particular hour. Four of the last eleven autumns crossed the cold snap threshold before it even began.",
+      "termCta": "What you are owed",
+      "tool": "berlin-heating-log"
+    },
+    "balcony-solar-berlin": {
+      "shelf": "wohnung",
+      "figure": "595 kWh",
+      "line": "a year from a south railing, 153 from a north one, now the grant has gone.",
+      "tool": "berlin-balcony-solar-year"
+    },
+    "berlin-water-hardness": {
+      "shelf": "wohnung",
+      "figure": "hard",
+      "line": "in every postcode, but a kettle in Wedding and one in K&ouml;penick do not scale at the same speed."
+    },
+    "health-insurance-in-berlin": {
+      "shelf": "geld",
+      "figure": "46 funds",
+      "line": "are open to a Berlin address, and the Zusatzbeitrag runs from 2.18 to 4.39 per cent.",
+      "term": "Zusatzbeitrag",
+      "gloss": "The part of statutory health insurance that is not the same everywhere. It runs from 2.18 to 4.39 per cent, and only seven of the 46 funds open to a Berlin address match the ministry's own reference figure.",
+      "termCta": "Which fund you can join",
+      "tool": "berlin-krankenkasse-cost-spread"
+    },
+    "german-courses-in-berlin": {
+      "shelf": "geld",
+      "figure": "0, 0.80 or 10 &euro;",
+      "line": "for the same 45 minutes of German teaching, and the rule changes at B1.",
+      "term": "Volkshochschule",
+      "gloss": "The adult education centre. Up to B1 the price of a German lesson is capped by a federal number and nobody gets a discount. Above B1 the cap disappears and the discounts come back.",
+      "termCta": "What a lesson costs",
+      "tool": "berlin-german-course-ladder"
+    },
+    "berlin-bulky-waste": {
+      "shelf": "geld",
+      "figure": "3 m&sup3;",
+      "line": "decides everything, and a load one armchair over the line is turned away entirely.",
+      "term": "Sperrm&uuml;ll",
+      "gloss": "Bulky waste. Three cubic metres is the number that decides everything, partial unloading is not allowed, and the pavement version now starts at 300 euro.",
+      "termCta": "What each route costs",
+      "tool": "berlin-disposal-cost-ladder"
+    },
+    "rundfunkbeitrag-berlin": {
+      "shelf": "geld",
+      "figure": "18.36 &euro;",
+      "line": "a month per flat, whoever lives there, and four places Berliners quietly pay it twice.",
+      "term": "Rundfunkbeitrag",
+      "gloss": "The broadcasting contribution. One flat, one fee, 18.36 euro a month whoever lives there and whatever they own, which lands harder in a city where 977,000 households hold a single person.",
+      "termCta": "Who owes it, and the double payments"
+    },
+    "berlin-public-libraries": {
+      "shelf": "geld",
+      "figure": "10 &euro; a year",
+      "line": "for eBooks, PressReader and film streaming. The Staatsbibliothek card is free."
+    },
+    "berlin-bridge-days-2027": {
+      "shelf": "geld",
+      "figure": "6 of 10",
+      "line": "public holidays fall on a working day next year, and all of them before 18 May.",
+      "term": "Br&uuml;ckentage",
+      "gloss": "The bridge days. Only six of Berlin's ten public holidays fall on a working day next year, and every one of them lands before 18 May, so the leave you book now decides your spring.",
+      "termCta": "Which ones pay",
+      "tool": "berlin-leave-year-planner"
+    },
+    "berlin-hiking-trails": {
+      "shelf": "draussen",
+      "figure": "575 km",
+      "line": "signposted across 20 routes, with 282 station points touching them.",
+      "tool": "berlin-green-path-stages"
+    },
+    "berlin-bathing-season": {
+      "shelf": "draussen",
+      "figure": "39 sites",
+      "line": "carry the same top grade, and the sampling behind it stops on 15 September.",
+      "tool": "berlin-bathing-site-small-print"
+    },
+    "mushroom-picking-berlin": {
+      "shelf": "draussen",
+      "figure": "10 forests",
+      "line": "from S Rahnsdorf to Chorin, plotted by real travel minutes from Alexanderplatz.",
+      "tool": "berlin-mushroom-forest-finder"
+    },
+    "kleingarten-berlin": {
+      "shelf": "draussen",
+      "figure": "70,390 plots",
+      "line": "in 1,038 colonies. Pankow holds over ten thousand, Friedrichshain-Kreuzberg holds 228.",
+      "term": "Kleingarten",
+      "gloss": "The allotment. 70,390 plots in 1,038 colonies, waiting lists run by the colonies themselves, and a takeover price nobody quotes up front.",
+      "termCta": "How the wait works"
+    },
+    "dog-parks-in-berlin": {
+      "shelf": "draussen",
+      "figure": "1,220 ha",
+      "line": "of forest where the leash comes off, plus fenced runs from 1,200 to 9,000 m&sup2;.",
+      "tool": "berlin-off-leash-map"
+    },
+    "berlin-parking-zones": {
+      "shelf": "wege",
+      "figure": "103 zones",
+      "line": "with a charged week from 45 to 105 hours, and exactly one that charges on a Sunday.",
+      "tool": "berlin-parking-zone-clock"
+    },
+    "bike-theft-in-berlin": {
+      "shelf": "wege",
+      "figure": "31 %",
+      "line": "of losses were locked up between six and ten in the evening."
+    }
+  }
+}
