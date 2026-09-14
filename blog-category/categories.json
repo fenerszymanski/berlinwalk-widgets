@@ -1,0 +1,65 @@
+{
+  "_note": "One entry per live Wix blog category. `lede` is the standfirst under the H1 and is written in Yusuf's voice. `shelfMode` picks how the posts below the lead story are grouped: \"curated\" uses curation/<slug>.json, \"topic\" groups by the blog-index topic each post already carries, \"flat\" is one plain list for categories too small to split. `glossary` only renders where a curation file supplies terms.",
+  "categories": {
+    "living-in-berlin": {
+      "id": "00af1018-ef7b-465a-93b6-916187609da4",
+      "label": "Living in Berlin",
+      "shelfMode": "curated",
+      "lede": "I write these for people who already live here, not for people passing through. Every guide starts from a Berlin date, a Berlin price or a Berlin rule that just moved, and ends with the one thing I would actually do about it.",
+      "shelfLegend": "By the part of life it hits",
+      "shelfLegendSub": "Four shelves, because that is how the questions actually arrive"
+    },
+    "tourist-tips": {
+      "id": "6da64e22-3360-42ec-a558-e906e4deeb19",
+      "label": "Tourist Tips",
+      "shelfMode": "topic",
+      "lede": "The archive I built for people arriving in Berlin: airports, tickets, opening hours, and the small decisions that go wrong on a first trip. I still check the ones that expire, and the guide underneath each of them is the one I would give you on the street.",
+      "shelfLegend": "What the trip actually asks you",
+      "shelfLegendSub": "Grouped by the moment the question turns up"
+    },
+    "berlin-history": {
+      "id": "5f58da11-347d-43f0-b3c3-2cb1cdeb7a79",
+      "label": "Berlin History",
+      "shelfMode": "topic",
+      "lede": "Berlin history told from places you can still stand in. Each one starts at a spot on my route or a street you already walk past, and explains what happened there, who decided it, and what is left to see.",
+      "shelfLegend": "Where the story is standing",
+      "shelfLegendSub": "Grouped by the kind of ground it covers"
+    },
+    "tour-route": {
+      "id": "f9b304de-4490-4535-b9e9-64b8f2ff63b0",
+      "label": "Tour Route",
+      "shelfMode": "topic",
+      "lede": "The eleven stops and sixteen places on my free walking tour through the historic centre, one at a time. What you are looking at, why it is there, and the part most people walk past without seeing.",
+      "shelfLegend": "Along the walk",
+      "shelfLegendSub": "Grouped by what each stop is really about"
+    },
+    "german-language": {
+      "id": "bf46ccbb-3db8-499a-95fe-4623868d6e1a",
+      "label": "German Language",
+      "shelfMode": "flat",
+      "lede": "The German you actually meet in Berlin: on signs, in forms, at counters, and in the words nobody translates for you. Enough to get the thing done, not a course."
+    },
+    "berlin-myths": {
+      "id": "97df9d0a-4e2e-49fc-bbc8-12f48f5bf671",
+      "label": "Berlin Myths",
+      "shelfMode": "flat",
+      "lede": "The Berlin stories people repeat that are wrong, half right, or stranger than the version you heard. I check each one against the record and say which part survives."
+    },
+    "before-after": {
+      "id": "af526c68-60e5-4783-a31b-4e215760626f",
+      "label": "Before & After",
+      "shelfMode": "flat",
+      "lede": "The same Berlin corner then and now, photographed from as close to the same spot as the street still allows. What the war took, what the Wall split, and what got built over the gap."
+    }
+  },
+  "topicShelves": {
+    "first-day": { "title": "First days and arrival", "lead": "Airports, tickets, and the first hours" },
+    "practical": { "title": "Practical Berlin", "lead": "Transport, money, opening hours, safety" },
+    "free-budget": { "title": "Free and cheap", "lead": "What costs nothing, and what is worth paying for" },
+    "route-stories": { "title": "The historic centre", "lead": "The streets and squares my route runs through" },
+    "history-myths": { "title": "History and what survived it", "lead": "Context, legends, and the record behind them" },
+    "food-nightlife": { "title": "Food and nights out", "lead": "Doener, clubs, Spaetis, and where to eat late" },
+    "when-to-visit": { "title": "Seasons and timing", "lead": "Month by month, and what the weather decides" },
+    "more": { "title": "More in this category", "lead": "Everything else filed here" }
+  }
+}

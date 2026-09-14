@@ -1,5 +1,11 @@
 {
   "_note": "Hand-curated layer for the /blog/categories/living-in-berlin page. The generator pulls title, excerpt, image, read time and date from the live Wix Blog API; everything in this file is the part a human decides. A post with no entry here still appears on its shelf through the keyword fallback in the generator, but it will not appear in the glossary. Add one entry per new Living in Berlin post.",
+  "_shelfLeads": {
+    "wohnung": "The flat, and what it costs to keep",
+    "geld": "Money, forms and the rules behind them",
+    "draussen": "Weekends, water and forest inside the ticket",
+    "wege": "Getting around, and keeping the bike you got around on"
+  },
   "_shelves": {
     "wohnung": "Wohnung & Nebenkosten",
     "geld": "Geld & Papiere",

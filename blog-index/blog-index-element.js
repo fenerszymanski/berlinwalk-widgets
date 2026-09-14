@@ -29,19 +29,19 @@ const BW_BLOG_INDEX_TOPIC_TAGS = {
   'living-in-berlin': 'BILLS · RULES · DISTRICTS',
 };
 
-// Living in Berlin mode. The /blog/categories/living-in-berlin page carries
-// this same <bw-blog-index> tag, and until now it rendered the full tourist
-// blog hub with the Wix native category feed stacked underneath it. On that
-// one path only, hand the element to living-in-berlin/living-in-berlin-element.js.
-// Every other blog surface keeps the behaviour below, unchanged.
+// Category mode. Every /blog/categories/<slug> page carries this same
+// <bw-blog-index> tag, so until now each of them rendered the full tourist blog
+// hub with the Wix native category feed stacked underneath it. On those paths
+// hand the element to blog-category/blog-category-element.js instead. /blog
+// itself and every other surface keep the behaviour below, unchanged.
 // `?bwlib=0` is the per-request rollback.
-const BW_BLOG_INDEX_LIVING_PATH = '/blog/categories/living-in-berlin';
-const BW_BLOG_INDEX_LIVING_SRC = `${new URL('../living-in-berlin/living-in-berlin-element.js', BW_BLOG_INDEX_BASE_URL).href}?v=20260914-aushang-1`;
+const BW_BLOG_INDEX_CATEGORY_RE = /^\/blog\/categories\/[^/]+$/;
+const BW_BLOG_INDEX_CATEGORY_SRC = `${new URL('../blog-category/blog-category-element.js', BW_BLOG_INDEX_BASE_URL).href}?v=20260914-aushang-2`;
 
-function bwBlogIndexLivingModeOn() {
+function bwBlogIndexCategoryModeOn() {
   try {
     const path = window.location.pathname.replace(/\/+$/, '').toLowerCase();
-    if (path !== BW_BLOG_INDEX_LIVING_PATH) return false;
+    if (!BW_BLOG_INDEX_CATEGORY_RE.test(path)) return false;
     return new URLSearchParams(window.location.search).get('bwlib') !== '0';
   } catch (error) {
     return false;
@@ -144,8 +144,8 @@ class BWBlogIndexElement extends HTMLElement {
   }
 
   connectedCallback() {
-    if (bwBlogIndexLivingModeOn()) {
-      this._bootLivingInBerlin();
+    if (bwBlogIndexCategoryModeOn()) {
+      this._bootCategoryMode();
       return;
     }
     this._renderNormal();
@@ -162,32 +162,33 @@ class BWBlogIndexElement extends HTMLElement {
     if (this._redesignOn) this._scheduleScheduleRecheckC();
   }
 
-  // Loads the Living in Berlin renderer and hands this element to it. Any
-  // failure (script blocked, data 404, empty payload) falls back to the normal
-  // hub, so the worst case is today's page rather than an empty one.
-  _bootLivingInBerlin() {
+  // Loads the category renderer and hands this element to it. Any failure
+  // (script blocked, data 404 for a category with no file yet, empty payload)
+  // falls back to the normal hub, so the worst case is today's page rather
+  // than an empty one.
+  _bootCategoryMode() {
     const fallback = () => {
-      if (this._livingFellBack) return;
-      this._livingFellBack = true;
+      if (this._categoryFellBack) return;
+      this._categoryFellBack = true;
       this._renderNormal();
     };
     const start = () => {
-      if (!window.BWLivingInBerlin || typeof window.BWLivingInBerlin.mount !== 'function') {
+      if (!window.BWBlogCategory || typeof window.BWBlogCategory.mount !== 'function') {
         fallback();
         return;
       }
       try {
-        window.BWLivingInBerlin.mount(this).catch(fallback);
+        window.BWBlogCategory.mount(this).catch(fallback);
       } catch (error) {
         fallback();
       }
     };
-    if (window.BWLivingInBerlin) {
+    if (window.BWBlogCategory) {
       start();
       return;
     }
     const script = document.createElement('script');
-    script.src = BW_BLOG_INDEX_LIVING_SRC;
+    script.src = BW_BLOG_INDEX_CATEGORY_SRC;
     script.async = true;
     script.onload = start;
     script.onerror = fallback;

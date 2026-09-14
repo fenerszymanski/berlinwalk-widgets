@@ -1,0 +1,145 @@
+{
+ "updatedAt": "2026-09-14T18:02:51.970Z",
+ "source": "Wix Blog API + blog-category/categories.json",
+ "slug": "before-after",
+ "categoryId": "af526c68-60e5-4783-a31b-4e215760626f",
+ "label": "Before & After",
+ "lede": "The same Berlin corner then and now, photographed from as close to the same spot as the street still allows. What the war took, what the Wall split, and what got built over the gap.",
+ "shelfMode": "flat",
+ "shelfLegend": "",
+ "shelfLegendSub": "",
+ "totalPosts": 11,
+ "toolCount": 8,
+ "lead": {
+  "title": "The Brandenburg Gate, Before and After: One Landmark, Berlin’s Whole Century",
+  "slug": "brandenburg-gate-before-after",
+  "path": "/post/brandenburg-gate-before-after",
+  "excerpt": "The Brandenburg Gate looks permanent, but it is really the survivor of Pariser Platz. Napoleon took its statue, 1945 left it damaged among the ruins, and for nearly thirty years it was locked inside the Berlin Wall death strip. Here is the Gate before and after each turning point, and what you can still read in the stone today.",
+  "minutes": 5,
+  "readTime": "5 min read",
+  "publishedDate": "2026-07-26T01:44:02.380Z",
+  "alt": "The Brandenburg Gate today, floodlit at dusk seen from Pariser Platz",
+  "lead": "https://static.wixstatic.com/media/5a08a3_116283e46ab94c5799f54db068c3b499~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "thumb": "https://static.wixstatic.com/media/5a08a3_116283e46ab94c5799f54db068c3b499~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "square": "https://static.wixstatic.com/media/5a08a3_116283e46ab94c5799f54db068c3b499~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "shelf": "",
+  "topic": "history-myths",
+  "figure": "",
+  "line": "The Brandenburg Gate looks permanent, but it is really the survivor of Pariser Platz.",
+  "term": "",
+  "gloss": "",
+  "termCta": "",
+  "tool": "brandenburg-gate-before-after"
+ },
+ "glossary": [],
+ "shelves": [],
+ "flat": [
+  {
+   "title": "The Brandenburg Gate, Before and After: One Landmark, Berlin’s Whole Century",
+   "slug": "brandenburg-gate-before-after",
+   "path": "/post/brandenburg-gate-before-after",
+   "minutes": 5,
+   "alt": "The Brandenburg Gate today, floodlit at dusk seen from Pariser Platz",
+   "thumb": "https://static.wixstatic.com/media/5a08a3_116283e46ab94c5799f54db068c3b499~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "The Brandenburg Gate looks permanent, but it is really the survivor of Pariser Platz.",
+   "tool": "brandenburg-gate-before-after"
+  },
+  {
+   "title": "The Reichstag, Before and After: How One Building Holds Germany’s Whole Century",
+   "slug": "reichstag-before-and-after",
+   "path": "/post/reichstag-before-and-after",
+   "minutes": 6,
+   "alt": "The Reichstag in Berlin at sunset, its stone facade lit warm gold beneath the modern glass dome, with the German flag flying.",
+   "thumb": "https://static.wixstatic.com/media/5a08a3_4303d7d2474a404281d823dbe6d7abe2~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "From the front the Reichstag looks like one stern old parliament with a modern glass hat.",
+   "tool": "reichstag-read-the-building"
+  },
+  {
+   "title": "Berlin Then and Now: How to See the City That Disappeared",
+   "slug": "berlin-then-and-now",
+   "path": "/post/berlin-then-and-now",
+   "minutes": 6,
+   "alt": "A colour photochrom looking through Hallesches Tor toward Belle-Alliance-Platz around 1900",
+   "thumb": "https://static.wixstatic.com/media/5a08a3_dea26d70fd4c43e5afa6a660f2fdeea8~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "Berlin rarely preserves an old street whole.",
+   "tool": "mehringplatz-time-layer-viewer"
+  },
+  {
+   "title": "Tempelhof Airport Berlin: Field, Tours and What to Do",
+   "slug": "tempelhof-airport-berlin",
+   "path": "/post/tempelhof-airport-berlin",
+   "minutes": 7,
+   "alt": "Sunset over the former runway at Tempelhofer Feld in Berlin",
+   "thumb": "https://static.wixstatic.com/media/5a08a3_47cdba7486c24c55bdd56ef3a599d1f1~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "A clear tourist guide to Tempelhof Airport Berlin and Tempelhofer Feld: field vs building, entrances, opening hours, tours, rules and the best first-visit plan.",
+   "tool": "tempelhof-field-planner"
+  },
+  {
+   "title": "Potsdamer Platz Berlin: Wall Trace, Skyline and What to See Today",
+   "slug": "potsdamer-platz-berlin",
+   "path": "/post/potsdamer-platz-berlin",
+   "minutes": 6,
+   "alt": "Modern high-rise skyline at Potsdamer Platz in Berlin with the Kollhoff Tower and surrounding buildings",
+   "thumb": "https://static.wixstatic.com/media/5a08a3_aa19c35c29014115a9a1fc3495bcd760~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "A practical Potsdamer Platz Berlin guide: read the Wall trace, modern skyline and before-and-after history without wasting the stop on the wrong things.",
+   "tool": "potsdamer-platz-time-layer-walk"
+  },
+  {
+   "title": "Berlin TV Tower Construction: Before, During, and After",
+   "slug": "berlin-tv-tower-construction-before-during-and-after",
+   "path": "/post/berlin-tv-tower-construction-before-during-and-after",
+   "minutes": 10,
+   "alt": "TV tower with a metallic sphere in a clear blue sky. Modern building edges frame the sides. A sense of stillness and architectural focus.",
+   "thumb": "https://static.wixstatic.com/media/5a08a3_6469c4947d0d424e9dfd082ca297cbe2~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "How East Germany built the Berlin TV Tower from 1965 to 1969: Marienviertel, Sputnik design, Pope's Revenge, cost overruns and what to see today."
+  },
+  {
+   "title": "Berliner Dom Before and After WWII: The Cathedral That Lost Its Crown",
+   "slug": "berliner-dom-before-and-after-wwii-the-cathedral-that-lost-its-crown",
+   "path": "/post/berliner-dom-before-and-after-wwii-the-cathedral-that-lost-its-crown",
+   "minutes": 9,
+   "alt": "berlin catherdal dome",
+   "thumb": "https://static.wixstatic.com/media/5a08a3_78189c2e03174a62b403590dfb14c3ac~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "Berliner Dom before and after WWII: how the 1905 imperial cathedral lost its Memorial Church, survived wartime damage and became today's rebuilt landmark.",
+   "tool": "berlin-landmarks-map"
+  },
+  {
+   "title": "Hackescher Markt Before and After: From Rubble to Berlin's Coolest Neighborhood",
+   "slug": "hackescher-markt-before-and-after-from-rubble-to-berlin-s-coolest-neighborhood",
+   "path": "/post/hackescher-markt-before-and-after-from-rubble-to-berlin-s-coolest-neighborhood",
+   "minutes": 9,
+   "alt": "",
+   "thumb": "https://static.wixstatic.com/media/nsplsh_53a00ec0a8314d9cac48c3d06b9cbafd~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "Hackescher Markt before and after: Jewish Berlin, WWII damage, GDR neglect, restored Hackesche Hoefe, what to see today and why my tour ends here."
+  },
+  {
+   "title": "Museum Island Before and After WWII: The Destruction Nobody Expected",
+   "slug": "museum-island-before-and-after-wwii-the-destruction-nobody-expected",
+   "path": "/post/museum-island-before-and-after-wwii-the-destruction-nobody-expected",
+   "minutes": 8,
+   "alt": "",
+   "thumb": "https://static.wixstatic.com/media/5a08a3_07ca02f254c3496db8689f9b5519f85e~mv2.webp/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "Museum Island before and after WWII: how Berlin's UNESCO museum island was damaged, divided and rebuilt from Altes Museum to Neues Museum and Pergamon.",
+   "tool": "berlin-landmarks-map"
+  },
+  {
+   "title": "Berlin's Lost Neighborhood: What the GDR Demolished to Build a Socialist Utopia",
+   "slug": "berlin-s-lost-neighborhood-what-the-gdr-demolished-to-build-a-socialist-utopia",
+   "path": "/post/berlin-s-lost-neighborhood-what-the-gdr-demolished-to-build-a-socialist-utopia",
+   "minutes": 10,
+   "alt": "Marienviertel information panel and open space near St. Mary's Church in Berlin",
+   "thumb": "https://static.wixstatic.com/media/5a08a3_c3ff467d4f2a4a95af1380c59d80e738~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "Berlin's lost Marienviertel explains why the space near the TV Tower feels so open: Nazi plans, war damage, GDR demolition and a vanished medieval street plan."
+  },
+  {
+   "title": "Alexanderplatz Then and Now: From Medieval Market to Modern Chaos",
+   "slug": "alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos",
+   "path": "/post/alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos",
+   "minutes": 10,
+   "alt": "Alexanderplatz photo in 1889",
+   "thumb": "https://static.wixstatic.com/media/5a08a3_d800723c43a94bf2ace1623c83b07f1c~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "Alexanderplatz then and now: how Berlin changed from medieval market edge to Weimar hub, GDR showcase, 1989 protest stage and modern chaos.",
+   "tool": "medieval-berlin-mini-walk"
+  }
+ ]
+}

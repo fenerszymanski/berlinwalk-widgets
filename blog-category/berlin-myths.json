@@ -1,0 +1,210 @@
+{
+ "updatedAt": "2026-09-14T18:02:51.606Z",
+ "source": "Wix Blog API + blog-category/categories.json",
+ "slug": "berlin-myths",
+ "categoryId": "97df9d0a-4e2e-49fc-bbc8-12f48f5bf671",
+ "label": "Berlin Myths",
+ "lede": "The Berlin stories people repeat that are wrong, half right, or stranger than the version you heard. I check each one against the record and say which part survives.",
+ "shelfMode": "flat",
+ "shelfLegend": "",
+ "shelfLegendSub": "",
+ "totalPosts": 18,
+ "toolCount": 10,
+ "lead": {
+  "title": "Rebuilt Buildings in Berlin: How Old Its Famous Landmarks Actually Are",
+  "slug": "rebuilt-buildings-in-berlin",
+  "path": "/post/rebuilt-buildings-in-berlin",
+  "excerpt": "A palace finished in 2020. A medieval quarter finished in 1987. A chariot cast in 1958. Of the fourteen landmarks between the Staatsoper and Alexanderplatz, only four are still the material they were built from. Here is what each one really is, and four checks that let you tell on site without knowing a single date.",
+  "minutes": 8,
+  "readTime": "8 min read",
+  "publishedDate": "2026-08-24T08:31:12.087Z",
+  "alt": "The reconstructed baroque facades and dome of the Humboldt Forum in central Berlin",
+  "lead": "https://static.wixstatic.com/media/5a08a3_54ac40b9d6384747b629cf9157cf3c49~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "thumb": "https://static.wixstatic.com/media/5a08a3_54ac40b9d6384747b629cf9157cf3c49~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "square": "https://static.wixstatic.com/media/5a08a3_54ac40b9d6384747b629cf9157cf3c49~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "shelf": "",
+  "topic": "first-day",
+  "figure": "",
+  "line": "A palace finished in 2020. A medieval quarter finished in 1987.",
+  "term": "",
+  "gloss": "",
+  "termCta": "",
+  "tool": "berlin-landmarks-map"
+ },
+ "glossary": [],
+ "shelves": [],
+ "flat": [
+  {
+   "title": "Rebuilt Buildings in Berlin: How Old Its Famous Landmarks Actually Are",
+   "slug": "rebuilt-buildings-in-berlin",
+   "path": "/post/rebuilt-buildings-in-berlin",
+   "minutes": 8,
+   "alt": "The reconstructed baroque facades and dome of the Humboldt Forum in central Berlin",
+   "thumb": "https://static.wixstatic.com/media/5a08a3_54ac40b9d6384747b629cf9157cf3c49~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "A palace finished in 2020. A medieval quarter finished in 1987.",
+   "tool": "berlin-landmarks-map"
+  },
+  {
+   "title": "How to Get Into Berghain: What You Can and Cannot Control",
+   "slug": "how-to-get-into-berghain",
+   "path": "/post/how-to-get-into-berghain",
+   "minutes": 5,
+   "alt": "Berghain, the tall grey former power plant that is now Berlin's most famous techno club",
+   "thumb": "https://static.wixstatic.com/media/5a08a3_a73f1018217f4e6faf6301b3c727d7e4~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "Nobody outside the door team can give you a guaranteed way into Berghain.",
+   "tool": "berlin-club-night-clock"
+  },
+  {
+   "title": "Oktoberfest in Berlin 2026: What Is Actually On",
+   "slug": "oktoberfest-in-berlin",
+   "path": "/post/oktoberfest-in-berlin",
+   "minutes": 6,
+   "alt": "Illuminated Prater Garten sign at dusk on Kastanienallee in Prenzlauer Berg, Berlin's oldest beer garden",
+   "thumb": "https://static.wixstatic.com/media/5a08a3_6fbee3dcfb5547b6a5d1ce4d0045d4bb~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "Berlin has several Oktoberfest-style events in 2026, but none is Munich's city-defining Wiesn.",
+   "tool": "berlin-beer-season-calendar"
+  },
+  {
+   "title": "Berlin Ghost Stations: The 15 Stops Trains Passed Without Stopping",
+   "slug": "berlin-ghost-stations",
+   "path": "/post/berlin-ghost-stations",
+   "minutes": 7,
+   "alt": "The empty tiled mezzanine level of Nordbahnhof S-Bahn station in Berlin",
+   "thumb": "https://static.wixstatic.com/media/5a08a3_00d7de5001374180a09ddafe932dab79~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "For 28 years West Berlin trains ran through East Berlin without stopping, past 15 sealed and guarded platforms.",
+   "tool": "berlin-ghost-stations"
+  },
+  {
+   "title": "Jaywalking in Berlin: Is Crossing on Red Actually Illegal?",
+   "slug": "jaywalking-in-berlin",
+   "path": "/post/jaywalking-in-berlin",
+   "minutes": 5,
+   "alt": "Ampelmann souvenir shop near Karl-Liebknecht-Straße with the green walking figure statue outside",
+   "thumb": "https://static.wixstatic.com/media/5a08a3_906713cdb89a4212bcf70b766e79cfb6~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "A Berlin guide's honest take on jaywalking: the real StVO rule, the EUR 5-10 fine, the social pressure around children, and when locals actually break the rule."
+  },
+  {
+   "title": "Berlin Tourist Scams: What to Ignore, What to Check and How to Stay Calm",
+   "slug": "berlin-tourist-scams",
+   "path": "/post/berlin-tourist-scams",
+   "minutes": 5,
+   "alt": "Calm Berlin tourist at a yellow train platform holding phone and map with a subtle street-pressure moment nearby",
+   "thumb": "https://static.wixstatic.com/media/5a08a3_9e4260a087a146babf453389b286404f~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "A calm, practical Berlin tourist scams guide: what to ignore, what to check, and what to do around stations, landmarks, tickets, taxis and ATMs.",
+   "tool": "berlin-street-sense-drill"
+  },
+  {
+   "title": "Can You Drink Alcohol in Public in Berlin? Rules Tourists Should Know",
+   "slug": "drink-alcohol-in-public-berlin",
+   "path": "/post/drink-alcohol-in-public-berlin",
+   "minutes": 7,
+   "alt": "People sitting on the grass in James-Simon-Park near Museum Island and the Berlin TV Tower",
+   "thumb": "https://static.wixstatic.com/media/5a08a3_08df2967779745edb1a653ebd530bf12~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "A practical Berlin tourist guide to public drinking: parks, Spätis, public transport, beer gardens, youth rules, and the 2026 Zoo/Ostbahnhof station exception."
+  },
+  {
+   "title": "Ampelmann Berlin: The Traffic Light Man, His History, and Where to See Him",
+   "slug": "the-ampelmann-how-a-traffic-light-became-berlin-s-most-beloved-symbol",
+   "path": "/post/the-ampelmann-how-a-traffic-light-became-berlin-s-most-beloved-symbol",
+   "minutes": 10,
+   "alt": "Green pedestrian signal in front of a historic building with columns, statue of a horse and rider on the left, people sitting on steps.",
+   "thumb": "https://static.wixstatic.com/media/5a08a3_9fe58e0576cb45ad93991c2325419807~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "Who is Berlin's traffic light man? This guide explains the Ampelmann's East German history, why he survived reunification, and where to see the original signals and shops."
+  },
+  {
+   "title": "Is Berlin Still Cheap? The Myth of Cheap Berlin in 2026",
+   "slug": "the-myth-of-cheap-berlin-what-changed-and-why-it-still-matters-for-tourists",
+   "path": "/post/the-myth-of-cheap-berlin-what-changed-and-why-it-still-matters-for-tourists",
+   "minutes": 9,
+   "alt": "High-rise apartment building with rows of balconies featuring various awnings and umbrellas in muted colors. No visible people, neutral mood.",
+   "thumb": "https://static.wixstatic.com/media/nsplsh_079a69ddf2ff41b8904ca03ef9abcbb2~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "Berlin is no longer cheap in the old way, but it can still be strong value for visitors.",
+   "tool": "berlin-daily-budget"
+  },
+  {
+   "title": "Do You Really Need to Validate Your Ticket on Berlin Trains?",
+   "slug": "do-you-really-need-to-validate-your-ticket-on-berlin-trains",
+   "path": "/post/do-you-really-need-to-validate-your-ticket-on-berlin-trains",
+   "minutes": 7,
+   "alt": "",
+   "thumb": "https://static.wixstatic.com/media/nsplsh_379c0cc89f52448a9fd4dcb6158c8925~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "Berlin's public transport runs on an honor system — no turnstiles, no barriers.",
+   "tool": "transport-ticket-calculator"
+  },
+  {
+   "title": "Was Berlin Really the Most Decadent City in the 1920s?",
+   "slug": "was-berlin-really-the-most-decadent-city-in-the-1920s",
+   "path": "/post/was-berlin-really-the-most-decadent-city-in-the-1920s",
+   "minutes": 9,
+   "alt": "The Eldorado bar in Berlin in 1932, one of Weimar Berlin's famous queer nightlife venues",
+   "thumb": "https://static.wixstatic.com/media/5a08a3_3f764d8ba588410086a3f18bc3a2ef1f~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "Was 1920s Berlin really decadent? The real Weimar story mixes cabaret, queer nightlife, art, inflation, political violence and a very short golden window."
+  },
+  {
+   "title": "Why Berlin's Streets Are So Wide (It Wasn't Always the Plan)",
+   "slug": "why-berlin-s-streets-are-so-wide-it-wasn-t-always-the-plan",
+   "path": "/post/why-berlin-s-streets-are-so-wide-it-wasn-t-always-the-plan",
+   "minutes": 9,
+   "alt": "Aerial view of the 90 meter wide Karl-Marx-Allee in Berlin, looking toward the TV Tower",
+   "thumb": "https://static.wixstatic.com/media/5a08a3_4e51be48876e454682adb801218dfb11~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "Berlin's wide streets are the result of war damage, clearance and GDR urban planning, not just a grand capital design."
+  },
+  {
+   "title": "Did JFK Really Call Himself a Jelly Donut? The Ich Bin Ein Berliner Myth",
+   "slug": "did-jfk-really-call-himself-a-jelly-donut-the-ich-bin-ein-berliner-myth",
+   "path": "/post/did-jfk-really-call-himself-a-jelly-donut-the-ich-bin-ein-berliner-myth",
+   "minutes": 7,
+   "alt": "@dpa",
+   "thumb": "https://static.wixstatic.com/media/5a08a3_42bff55d66fb465eb52d8c5d7e2d8b79~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "Did JFK call himself a jelly donut? No. Here is the real Ich bin ein Berliner story, the German grammar, the Berlin pastry name and why the myth spread."
+  },
+  {
+   "title": "Why Marx and Engels Face West: The Statues Berlin Almost Removed",
+   "slug": "why-marx-and-engels-face-west-the-statues-berlin-almost-removed",
+   "path": "/post/why-marx-and-engels-face-west-the-statues-berlin-almost-removed",
+   "minutes": 8,
+   "alt": "",
+   "thumb": "https://static.wixstatic.com/media/5a08a3_1024c3b22dd743288a42fea17c73426c~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "Why do Marx and Engels face west in Berlin?",
+   "tool": "east-or-west-1989"
+  },
+  {
+   "title": "The TV Tower: 10 Things You Didn't Know About Berlin's Most Famous Landmark",
+   "slug": "the-tv-tower-10-things-you-didn-t-know-about-berlin-s-most-famous-landmark",
+   "path": "/post/the-tv-tower-10-things-you-didn-t-know-about-berlin-s-most-famous-landmark",
+   "minutes": 8,
+   "alt": "",
+   "thumb": "https://static.wixstatic.com/media/5a08a3_f435f757d489469da7dca259fae9d1c3~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "10 surprising Berlin TV Tower facts: 368 metres, Sputnik design, Pope's Revenge, 203m observation deck, GDR history, visitor tips and what to notice.",
+   "tool": "berlin-landmarks-map"
+  },
+  {
+   "title": "Why Berlin Doesn't Have a Beautiful Old Town (And Why That's the Point)",
+   "slug": "why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point",
+   "path": "/post/why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point",
+   "minutes": 9,
+   "alt": "Nikolaiviertel in old Berlin around 1880, showing narrow streets and dense historic buildings",
+   "thumb": "https://static.wixstatic.com/media/5a08a3_2311051e8d1249d5b57ad5beebbd337d~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "Berlin has no classic beautiful old town because war, division and East Berlin planning reshaped the historic centre.",
+   "tool": "medieval-berlin-mini-walk"
+  },
+  {
+   "title": "Rotes Rathaus: Why Berlin's City Hall Is Red (And It Has Nothing to Do With Communism)",
+   "slug": "rotes-rathaus-why-berlin-s-city-hall-is-red-and-it-has-nothing-to-do-with-communism",
+   "path": "/post/rotes-rathaus-why-berlin-s-city-hall-is-red-and-it-has-nothing-to-do-with-communism",
+   "minutes": 9,
+   "alt": "The red-brick facade and tower of the Rotes Rathaus in Berlin",
+   "thumb": "https://static.wixstatic.com/media/5a08a3_df4933cbba354030adbd3433c260eb65~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "The Rotes Rathaus is not red because of communism."
+  },
+  {
+   "title": "Why Berliners Aren't Rude — They're Just Honest",
+   "slug": "why-berliners-aren-t-rude-they-re-just-honest",
+   "path": "/post/why-berliners-aren-t-rude-they-re-just-honest",
+   "minutes": 4,
+   "alt": "A waiter takes an order from a seated woman at an outdoor café. A yellow tram passes in the background. The scene is bustling and urban.",
+   "thumb": "https://static.wixstatic.com/media/5a08a3_76b381ba7c8e42c798b577b29efdcac5~mv2.jpeg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "line": "Why do Berliners seem rude to tourists? The answer lies in a cultural trait called Berliner Schnauze — a blunt communication style that’s more about honesty than hostility."
+  }
+ ]
+}

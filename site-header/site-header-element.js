@@ -27,14 +27,17 @@ const BW_HEADER_LINKS = {
   berlinRewind: 'https://www.berlinwalk.com/games/berlin-rewind',
   smileChallenge: 'https://www.berlinwalk.com/games/berlin-smile-challenge',
   blog: 'https://www.berlinwalk.com/blog',
-  blogFirstDay: 'https://www.berlinwalk.com/blog#bw-topic-first-day',
-  blogPractical: 'https://www.berlinwalk.com/blog#bw-topic-practical',
-  blogFreeBudget: 'https://www.berlinwalk.com/blog#bw-topic-free-budget',
-  blogRouteStories: 'https://www.berlinwalk.com/blog#bw-topic-route-stories',
-  blogHistoryMyths: 'https://www.berlinwalk.com/blog#bw-topic-history-myths',
-  blogFoodNightlife: 'https://www.berlinwalk.com/blog#bw-topic-food-nightlife',
-  blogWhenToVisit: 'https://www.berlinwalk.com/blog#bw-topic-when-to-visit',
-  blogLivingInBerlin: 'https://www.berlinwalk.com/blog#bw-topic-living-in-berlin',
+  // The blog menu points at the real Wix blog categories, each of which now
+  // renders its own category page, instead of at #bw-topic anchors inside the
+  // /blog hub. Two taxonomies were being shown as one: the hub's seven derived
+  // topics and the seven categories a post is actually filed under.
+  blogLivingInBerlin: 'https://www.berlinwalk.com/blog/categories/living-in-berlin',
+  blogTouristTips: 'https://www.berlinwalk.com/blog/categories/tourist-tips',
+  blogBerlinHistory: 'https://www.berlinwalk.com/blog/categories/berlin-history',
+  blogTourRoute: 'https://www.berlinwalk.com/blog/categories/tour-route',
+  blogGermanLanguage: 'https://www.berlinwalk.com/blog/categories/german-language',
+  blogBerlinMyths: 'https://www.berlinwalk.com/blog/categories/berlin-myths',
+  blogBeforeAfter: 'https://www.berlinwalk.com/blog/categories/before-after',
   firstDayRescue: 'https://www.berlinwalk.com/products/berlin-first-day-rescue-plan',
   dateCheck: 'https://www.berlinwalk.com/berlin-dates-check',
   whatsOpen: 'https://www.berlinwalk.com/tools/whats-open-in-berlin-today',
@@ -1141,12 +1144,13 @@ class BWHeaderElement extends HTMLElement {
                     Blog <span class="bw-header-caret" aria-hidden="true">⌄</span>
                   </a>
                   <ul id="${this._blogMenuId}" class="bw-header-submenu">
-                    <li><a href="${BW_HEADER_LINKS.blogFirstDay}">First Day in Berlin</a></li>
-                    <li><a href="${BW_HEADER_LINKS.blogHistoryMyths}">Berlin History &amp; Myths</a></li>
-                    <li><a href="${BW_HEADER_LINKS.blogPractical}">Practical Berlin</a></li>
-                    <li><a href="${BW_HEADER_LINKS.blogFoodNightlife}">Food &amp; Nightlife</a></li>
-                    <li><a href="${BW_HEADER_LINKS.blogRouteStories}">Tour Route Stories</a></li>
                     <li><a href="${BW_HEADER_LINKS.blogLivingInBerlin}">Living in Berlin</a></li>
+                    <li><a href="${BW_HEADER_LINKS.blogTouristTips}">Tourist Tips</a></li>
+                    <li><a href="${BW_HEADER_LINKS.blogBerlinHistory}">Berlin History</a></li>
+                    <li><a href="${BW_HEADER_LINKS.blogTourRoute}">Tour Route</a></li>
+                    <li><a href="${BW_HEADER_LINKS.blogGermanLanguage}">German Language</a></li>
+                    <li><a href="${BW_HEADER_LINKS.blogBerlinMyths}">Berlin Myths</a></li>
+                    <li><a href="${BW_HEADER_LINKS.blogBeforeAfter}">Before &amp; After</a></li>
                   </ul>
                 </li>
                 <li class="bw-header-dropdown">
@@ -1208,12 +1212,13 @@ class BWHeaderElement extends HTMLElement {
 
               <details class="bw-header-mobile-section">
                 <summary class="bw-header-mobile-section-label"><a class="bw-header-mobile-section-link" href="${BW_HEADER_LINKS.blog}">Blog</a></summary>
-                <a href="${BW_HEADER_LINKS.blogFirstDay}">First Day in Berlin</a>
-                <a href="${BW_HEADER_LINKS.blogHistoryMyths}">Berlin History &amp; Myths</a>
-                <a href="${BW_HEADER_LINKS.blogPractical}">Practical Berlin</a>
-                <a href="${BW_HEADER_LINKS.blogFoodNightlife}">Food &amp; Nightlife</a>
-                <a href="${BW_HEADER_LINKS.blogRouteStories}">Tour Route Stories</a>
                 <a href="${BW_HEADER_LINKS.blogLivingInBerlin}">Living in Berlin</a>
+                <a href="${BW_HEADER_LINKS.blogTouristTips}">Tourist Tips</a>
+                <a href="${BW_HEADER_LINKS.blogBerlinHistory}">Berlin History</a>
+                <a href="${BW_HEADER_LINKS.blogTourRoute}">Tour Route</a>
+                <a href="${BW_HEADER_LINKS.blogGermanLanguage}">German Language</a>
+                <a href="${BW_HEADER_LINKS.blogBerlinMyths}">Berlin Myths</a>
+                <a href="${BW_HEADER_LINKS.blogBeforeAfter}">Before &amp; After</a>
               </details>
               <details class="bw-header-mobile-section">
                 <summary class="bw-header-mobile-section-label"><a class="bw-header-mobile-section-link" href="${BW_HEADER_LINKS.plan}">Explore Berlin</a></summary>

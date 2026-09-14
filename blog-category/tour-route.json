@@ -1,0 +1,377 @@
+{
+ "updatedAt": "2026-09-14T18:02:50.656Z",
+ "source": "Wix Blog API + blog-category/categories.json",
+ "slug": "tour-route",
+ "categoryId": "f9b304de-4490-4535-b9e9-64b8f2ff63b0",
+ "label": "Tour Route",
+ "lede": "The eleven stops and sixteen places on my free walking tour through the historic centre, one at a time. What you are looking at, why it is there, and the part most people walk past without seeing.",
+ "shelfMode": "topic",
+ "shelfLegend": "Along the walk",
+ "shelfLegendSub": "Grouped by what each stop is really about",
+ "totalPosts": 32,
+ "toolCount": 16,
+ "lead": {
+  "title": "Berlin War Damage Still Visible: The Walls That Were Never Repaired",
+  "slug": "berlin-war-damage-still-visible",
+  "path": "/post/berlin-war-damage-still-visible",
+  "excerpt": "Berlin never patched most of what April 1945 did to its walls. The clearest place to start is a free, open courtyard on Museum Island, where bullet strikes sit in the colonnade stone at the height of a standing person. Here are seventeen places across the city where the marks are still there to find, how to tell what made each one, and which two need planning before you go.",
+  "minutes": 7,
+  "readTime": "7 min read",
+  "publishedDate": "2026-09-06T14:03:38.210Z",
+  "alt": "The rear of the ruined portico of the Anhalter Bahnhof in Berlin-Kreuzberg, its brick arches open to the sky with modern office towers behind",
+  "lead": "https://static.wixstatic.com/media/5a08a3_7998bec069d345c68e9461b70634a209~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "thumb": "https://static.wixstatic.com/media/5a08a3_7998bec069d345c68e9461b70634a209~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "square": "https://static.wixstatic.com/media/5a08a3_7998bec069d345c68e9461b70634a209~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "shelf": "",
+  "topic": "free-budget",
+  "figure": "",
+  "line": "Berlin never patched most of what April 1945 did to its walls.",
+  "term": "",
+  "gloss": "",
+  "termCta": "",
+  "tool": "berlin-war-scars-map"
+ },
+ "glossary": [],
+ "shelves": [
+  {
+   "key": "first-day",
+   "title": "First days and arrival",
+   "lead": "Airports, tickets, and the first hours",
+   "posts": [
+    {
+     "title": "Berlin Sights Within Walking Distance of Alexanderplatz",
+     "slug": "berlin-sights-near-alexanderplatz-walking-distance",
+     "path": "/post/berlin-sights-near-alexanderplatz-walking-distance",
+     "minutes": 3,
+     "alt": "Alexanderplatz station, where most visitors arrive before walking into central Berlin.",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_0c1a3060152c463697c671fa4288a9a5~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Almost the entire historic core of Berlin is a short walk west of Alexanderplatz.",
+     "tool": "berlin-landmarks-map"
+    },
+    {
+     "title": "Is the Berlin TV Tower Worth It? An Honest Guide",
+     "slug": "is-the-berlin-tv-tower-worth-it-an-honest-guide-for-2026",
+     "path": "/post/is-the-berlin-tv-tower-worth-it-an-honest-guide-for-2026",
+     "minutes": 9,
+     "alt": "Berlin TV tower on a sunny day",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_d0a0ba18b5ae4601aed35c9bfefa7d10~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Is the Berlin TV Tower worth it in 2026? A local guide compares the view, EUR 28.50 tickets, queues, accessibility and better free or cheap alternatives."
+    },
+    {
+     "title": "The Totentanz: A 700-Year-Old Dance of Death Inside Berlin's Oldest Parish Church",
+     "slug": "the-totentanz-a-700-year-old-dance-of-death-inside-berlin-s-oldest-church",
+     "path": "/post/the-totentanz-a-700-year-old-dance-of-death-inside-berlin-s-oldest-church",
+     "minutes": 7,
+     "alt": "",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_1c71ee51e7e84ec8b7bb9ad0c6090064~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Hidden inside St. Mary's Church near Alexanderplatz is the Totentanz, a 22-metre medieval Dance of Death fresco that reveals Berlin's oldest layer."
+    },
+    {
+     "title": "St. Mary's Church: The Medieval Survivor in the Shadow of the TV Tower",
+     "slug": "st-mary-s-church-the-medieval-survivor-in-the-shadow-of-the-tv-tower",
+     "path": "/post/st-mary-s-church-the-medieval-survivor-in-the-shadow-of-the-tv-tower",
+     "minutes": 9,
+     "alt": "St. Mary's Church in Berlin near Alexanderplatz with autumn trees and open space",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_7b7b631e94b04e159091391249bc4906~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "St. Mary's Church near Alexanderplatz explains medieval Berlin, the vanished Marienviertel, the Totentanz and the TV Tower contrast.",
+     "tool": "medieval-berlin-mini-walk"
+    },
+    {
+     "title": "The Berliner Dom: A Cathedral That Survived Everything",
+     "slug": "the-berliner-dom-a-cathedral-that-survived-everything",
+     "path": "/post/the-berliner-dom-a-cathedral-that-survived-everything",
+     "minutes": 10,
+     "alt": "Berliner Dom with its green dome and the TV Tower behind it on Museum Island",
+     "thumb": "https://static.wixstatic.com/media/nsplsh_5a722d5a6e544e656b4559~mv2_d_5446_4000_s_4_2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Why the Berliner Dom survived by changing: imperial ambition, World War II damage, GDR reconstruction, Hohenzollern Crypt, tickets and dome view.",
+     "tool": "berlin-landmarks-map"
+    },
+    {
+     "title": "The Humboldt Forum: Berlin's Most Controversial Building",
+     "slug": "the-humboldt-forum-berlin-s-most-controversial-building",
+     "path": "/post/the-humboldt-forum-berlin-s-most-controversial-building",
+     "minutes": 8,
+     "alt": "humboldt forum berlin",
+     "thumb": "https://static.wixstatic.com/media/nsplsh_4d8cbfe279ae44afafc90bd121d63210~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Why the Humboldt Forum is Berlin's most controversial building: palace reconstruction, Palast der Republik memory, colonial collections, tickets, roof terrace and what to see."
+    },
+    {
+     "title": "Museum Island: Why Prussia Built an Entire Island of Museums",
+     "slug": "museum-island-why-prussia-built-an-entire-island-of-museums",
+     "path": "/post/museum-island-why-prussia-built-an-entire-island-of-museums",
+     "minutes": 10,
+     "alt": "Museum Island and the Bode Museum seen from the Spree with the TV Tower behind",
+     "thumb": "https://static.wixstatic.com/media/nsplsh_f83d2c2ec63f4e978cea87bd171d6b55~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Why Prussia built Museum Island: the five museums, UNESCO status, war damage, restoration, tickets and how to read the island on foot.",
+     "tool": "berlin-landmarks-map"
+    },
+    {
+     "title": "The Pope's Revenge: How East Germany's TV Tower Backfired",
+     "slug": "the-pope-s-revenge-how-east-germany-s-tv-tower-backfired",
+     "path": "/post/the-pope-s-revenge-how-east-germany-s-tv-tower-backfired",
+     "minutes": 5,
+     "alt": "TV Tower with a metallic sphere and antennas against a clear blue sky, flanked by two modern buildings with large windows.",
+     "thumb": "https://static.wixstatic.com/media/nsplsh_644e491769034414871b0141a6e205a3~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "A strange Cold War irony hidden in plain sight: Berlin’s TV Tower was built to symbolize socialist power, yet under the right sunlight it reveals a glowing cross — the fa",
+     "tool": "east-or-west-1989"
+    }
+   ]
+  },
+  {
+   "key": "practical",
+   "title": "Practical Berlin",
+   "lead": "Transport, money, opening hours, safety",
+   "posts": [
+    {
+     "title": "What Happens on a Berlin Free Walking Tour",
+     "slug": "what-happens-on-a-berlin-free-walking-tour",
+     "path": "/post/what-happens-on-a-berlin-free-walking-tour",
+     "minutes": 3,
+     "alt": "The World Clock at Alexanderplatz, the meeting point where the Berlin free walking tour begins.",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_2ba54013e5c1450fb569794b3b665f62~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "The thing that stops most people booking a free walking tour is not knowing what happens."
+    },
+    {
+     "title": "The Hidden Courtyards of Berlin: A Walk Through the Höfe Around Hackescher Markt",
+     "slug": "berlin-courtyards-hoefe",
+     "path": "/post/berlin-courtyards-hoefe",
+     "minutes": 6,
+     "alt": "The illuminated Art Nouveau tiled facade of the first courtyard of the Hackesche Höfe in Berlin at night.",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_99d2ac9a98a747a0ade198570536bb5c~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Behind the facades around Hackescher Markt, Berlin hides a second layer: connected inner courtyards, the Höfe, that most visitors walk straight past.",
+     "tool": "berlin-courtyard-walk"
+    },
+    {
+     "title": "Berlin Marathon 2026: What Closes, Where to Watch and How to Cross the City",
+     "slug": "berlin-marathon-2026",
+     "path": "/post/berlin-marathon-2026",
+     "minutes": 8,
+     "alt": "The Berlin Marathon finish straight on Straße des 17. Juni, with runners, spectator barriers, the Brandenburg Gate and the TV Tower",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_e5c1848fa7b54e0db6aef0d8a55662c3~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "The Berlin Marathon puts a closed 42 kilometre loop through the middle of the city.",
+     "tool": "berlin-marathon-day"
+    },
+    {
+     "title": "The Altes Museum: How One Building Made Berlin a Cultural Capital",
+     "slug": "the-altes-museum-how-one-building-made-berlin-a-cultural-capital",
+     "path": "/post/the-altes-museum-how-one-building-made-berlin-a-cultural-capital",
+     "minutes": 11,
+     "alt": "Altes Museum in Berlin with Ionic columns, staircase and blue sky above Museum Island",
+     "thumb": "https://static.wixstatic.com/media/nsplsh_a45f3abf367c4c529063dca91fd5b3c1~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Why Schinkel’s Altes Museum matters: Berlin’s first museum building, its classical architecture, current collection, war damage and practical 2026 visit notes."
+    }
+   ]
+  },
+  {
+   "key": "route-stories",
+   "title": "The historic centre",
+   "lead": "The streets and squares my route runs through",
+   "posts": [
+    {
+     "title": "Self-Guided Berlin Walking Tour with Audio: How to Choose a Route",
+     "slug": "self-guided-berlin-walking-tour-audio-guide",
+     "path": "/post/self-guided-berlin-walking-tour-audio-guide",
+     "minutes": 5,
+     "alt": "The preserved former border strip at the Berlin Wall Memorial on Bernauer Strasse.",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_5304f80fb26349a8b0eed05ffb95d359~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Compare the real start, finish and walking time of five self-guided Berlin audio routes."
+    },
+    {
+     "title": "Unter den Linden Berlin: How to Walk the Grand Boulevard Without Missing the Point",
+     "slug": "unter-den-linden-berlin",
+     "path": "/post/unter-den-linden-berlin",
+     "minutes": 7,
+     "alt": "Unter den Linden boulevard in Berlin with trees, the Frederick the Great statue and the TV Tower in the distance",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_bf98985572c44e1ca26711a80de8bff0~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "A practical local guide to walking Unter den Linden in Berlin, with the best direction, stops, shortcuts, mistakes to avoid and a simple route planner."
+    },
+    {
+     "title": "Is the Pergamon Museum Closed? What Every Tourist Needs to Know in 2026",
+     "slug": "is-the-pergamon-museum-closed-what-every-tourist-needs-to-know-in-2026",
+     "path": "/post/is-the-pergamon-museum-closed-what-every-tourist-needs-to-know-in-2026",
+     "minutes": 4,
+     "alt": "Ancient mosaic of a striding lion in beige and orange on a blue brick background. Decorative patterns above. Historic and vibrant.",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_6cde1d163a1e499b882d8c86fe340505~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "The Pergamon Museum in Berlin is completely closed for renovation until at least 4 June 2027."
+    },
+    {
+     "title": "7 Things Most Tourists Don't Know About the Berliner Dom",
+     "slug": "7-things-most-tourists-dont-know-about-the-berliner-dom",
+     "path": "/post/7-things-most-tourists-dont-know-about-the-berliner-dom",
+     "minutes": 6,
+     "alt": "Illuminated historic cathedral and bridge at night, with reflections on calm water. Trees and a colonnade line the background under a deep blue sky.",
+     "thumb": "https://static.wixstatic.com/media/nsplsh_649641d059db4fa18bf4cfce7876a1f4~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "The Berliner Dom is one of Berlin's most photographed landmarks — but most visitors know almost nothing about it.",
+     "tool": "berlin-landmarks-map"
+    },
+    {
+     "title": "Humboldt Forum Berlin: Free Entry, Big Controversy — Is It Worth Visiting?",
+     "slug": "humboldt-forum-berlin-free-entry-big-controversy-is-it-worth-visiting",
+     "path": "/post/humboldt-forum-berlin-free-entry-big-controversy-is-it-worth-visiting",
+     "minutes": 5,
+     "alt": "Ornate building facade with two winged stone statues, gold crown, and swirling patterns. Blue arched window beneath. Regal and majestic.",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_c077387b1d794dbb9e6fe188e5994d22~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Berlin spent €680 million rebuilding a Baroque palace and turned it into a cultural center."
+    },
+    {
+     "title": "Berlin Alte Nationalgalerie: The Greek Temple on Museum Island That Almost Disappeared",
+     "slug": "alte-nationalgalerie-berlin-the-greek-temple-on-museum-island-that-almost-disappeared",
+     "path": "/post/alte-nationalgalerie-berlin-the-greek-temple-on-museum-island-that-almost-disappeared",
+     "minutes": 9,
+     "alt": "Alte Nationalgalerie on Museum Island in Berlin with columns, staircase and equestrian statue",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_cb3e095918d94d2fa11269a6e3c9b26c~mv2.jpeg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "A practical guide to the Alte Nationalgalerie on Museum Island: temple architecture, Caspar David Friedrich, Impressionism, war damage and 2026 visit notes.",
+     "tool": "berlin-landmarks-map"
+    },
+    {
+     "title": "Why My Tour Starts at Alexanderplatz (And Not at Brandenburg Gate)",
+     "slug": "why-our-tour-starts-at-alexanderplatz-and-not-at-brandenburg-gate",
+     "path": "/post/why-our-tour-starts-at-alexanderplatz-and-not-at-brandenburg-gate",
+     "minutes": 8,
+     "alt": "",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_78882b1305df4a809e1db2ea70d67cb8~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Why my Berlin walking tour starts at Alexanderplatz, not Brandenburg Gate: route logic, World Clock meeting point, transport and where the tour ends.",
+     "tool": "berlin-landmarks-map"
+    },
+    {
+     "title": "The Lustgarten: From Royal Garden to Nazi Rally Ground to Berlin's Favorite Picnic Spot",
+     "slug": "the-lustgarten-from-royal-garden-to-nazi-rally-ground-to-berlin-s-favorite-picnic-spot",
+     "path": "/post/the-lustgarten-from-royal-garden-to-nazi-rally-ground-to-berlin-s-favorite-picnic-spot",
+     "minutes": 9,
+     "alt": "",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_08d87afc06684bfa8e24aaf0c9d65973~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "The Lustgarten in Berlin looks peaceful today."
+    },
+    {
+     "title": "The Weltzeituhr: Why Alexanderplatz Has a World Clock",
+     "slug": "the-weltzeituhr-why-alexanderplatz-has-a-world-clock",
+     "path": "/post/the-weltzeituhr-why-alexanderplatz-has-a-world-clock",
+     "minutes": 9,
+     "alt": "The Weltzeituhr world clock on Alexanderplatz with the Berlin TV Tower behind it at blue hour",
+     "thumb": "https://static.wixstatic.com/media/nsplsh_f660b91f062648b8b5e991eea2e9b53e~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "A clear guide to the Weltzeituhr on Alexanderplatz: why East Berlin built a world clock in 1969, what the design means and how to read it today.",
+     "tool": "berlin-landmarks-map"
+    },
+    {
+     "title": "The Neues Museum: From Bombed Ruin to Nefertiti's Home",
+     "slug": "the-neues-museum-from-bombed-ruin-to-nefertiti-s-home",
+     "path": "/post/the-neues-museum-from-bombed-ruin-to-nefertiti-s-home",
+     "minutes": 9,
+     "alt": "The painted bust of Queen Nefertiti displayed at the Neues Museum in Berlin",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_b67f4b760a3c413da352bb68a0dde47e~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "The Neues Museum on Museum Island was a bombed-out ruin for decades."
+    },
+    {
+     "title": "The Spree River: The Waterway That Built Berlin",
+     "slug": "the-spree-river-the-waterway-that-built-berlin",
+     "path": "/post/the-spree-river-the-waterway-that-built-berlin",
+     "minutes": 10,
+     "alt": "Berlin skyline at night with the Spree River, TV Tower and Berliner Dom",
+     "thumb": "https://static.wixstatic.com/media/nsplsh_87c4d5d7683643d9b7adbfbf84754012~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "A local guide to the Spree River in Berlin: old Berlin, Coelln, Museum Island, Cold War border history, boat tours and best walking views.",
+     "tool": "berlin-boat-tour-finder"
+    },
+    {
+     "title": "Friedrichsbrücke: The Quiet Bridge That Tells Berlin's Entire Story",
+     "slug": "friedrichsbrücke-the-quiet-bridge-that-tells-berlin-s-entire-story",
+     "path": "/post/friedrichsbrücke-the-quiet-bridge-that-tells-berlin-s-entire-story",
+     "minutes": 9,
+     "alt": "Friedrichsbruecke bridge over the Spree River near Museum Island in Berlin",
+     "thumb": "https://static.wixstatic.com/media/nsplsh_23ed74708d784a0e8da1f3b29094bbea~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "A quiet bridge beside Museum Island tells the story of royal Berlin, wartime destruction, GDR rebuilding and the Spree city."
+    },
+    {
+     "title": "Neptune Fountain: The Baroque Masterpiece That Moved Across Berlin",
+     "slug": "neptune-fountain-the-baroque-masterpiece-that-moved-across-berlin",
+     "path": "/post/neptune-fountain-the-baroque-masterpiece-that-moved-across-berlin",
+     "minutes": 10,
+     "alt": "Neptune Fountain statue with St Marys Church roof behind it in central Berlin",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_96baa8ef90154861b51d758e6cf0a9b0~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Why Berlin Neptune Fountain moved from palace symbolism to the GDR city centre, and what the 2026 restoration means for visitors."
+    },
+    {
+     "title": "Marx and Engels Are Still Standing in Berlin: Here's Why",
+     "slug": "marx-and-engels-are-still-standing-in-berlin-here-s-why",
+     "path": "/post/marx-and-engels-are-still-standing-in-berlin-here-s-why",
+     "minutes": 8,
+     "alt": "Marx-Engels Statue",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_6727bf0dc1f3438b82c1e43740fdd5b7~mv2.png/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Why are Marx and Engels still standing in Berlin?"
+    },
+    {
+     "title": "12 Stops Through Berlin’s Ancient Core: What You’ll See on My Free Walking Tour",
+     "slug": "12-stops-through-berlin-s-ancient-core-what-you-ll-see-on-our-free-walking-tour",
+     "path": "/post/12-stops-through-berlin-s-ancient-core-what-you-ll-see-on-our-free-walking-tour",
+     "minutes": 8,
+     "alt": "Illustration of Berlin landmarks in green and yellow. Features buildings like the Berlin TV Tower, Brandenburg Gate, and Berlin Cathedral.",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_4aee725fb5764dfb9f69f6485b9c8a36~mv2.jpeg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Most Berlin free walking tours start at the Brandenburg Gate and head west."
+    }
+   ]
+  },
+  {
+   "key": "history-myths",
+   "title": "History and what survived it",
+   "lead": "Context, legends, and the record behind them",
+   "posts": [
+    {
+     "title": "The Berlin Wall in Mitte: Where the Line Crosses the Centre",
+     "slug": "berlin-wall-in-mitte-city-centre",
+     "path": "/post/berlin-wall-in-mitte-city-centre",
+     "minutes": 4,
+     "alt": "Preserved stretch of the Berlin Wall border strip in central Berlin, with the TV Tower and Berliner Dom on the skyline behind it.",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_edf807b1e7ac448ba3f165f4da3ea0f7~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "The Berlin Wall runs straight through central Berlin, marked by a cobblestone line most visitors walk over without noticing.",
+     "tool": "east-or-west-1989"
+    },
+    {
+     "title": "Hohenzollern Berlin: The Royal Family Behind the City's Grandest Streets",
+     "slug": "hohenzollern-berlin",
+     "path": "/post/hohenzollern-berlin",
+     "minutes": 8,
+     "alt": "Humboldt Forum palace-style architecture in central Berlin, the main starting point for reading Hohenzollern Berlin on foot",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_207da8cab01648dea2f634ecdb06c22b~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "A walking guide to the Hohenzollern footprint in Berlin: palace site, cathedral crypt, royal boulevard, museums and the places where Prussian power still shapes the city.",
+     "tool": "hohenzollern-berlin-footprint-map"
+    },
+    {
+     "title": "Berlin TV Tower Construction: Before, During, and After",
+     "slug": "berlin-tv-tower-construction-before-during-and-after",
+     "path": "/post/berlin-tv-tower-construction-before-during-and-after",
+     "minutes": 10,
+     "alt": "TV tower with a metallic sphere in a clear blue sky. Modern building edges frame the sides. A sense of stillness and architectural focus.",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_6469c4947d0d424e9dfd082ca297cbe2~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "How East Germany built the Berlin TV Tower from 1965 to 1969: Marienviertel, Sputnik design, Pope's Revenge, cost overruns and what to see today."
+    }
+   ]
+  },
+  {
+   "key": "more",
+   "title": "More in this category",
+   "lead": "Everything else filed here",
+   "posts": [
+    {
+     "title": "Berlin War Damage Still Visible: The Walls That Were Never Repaired",
+     "slug": "berlin-war-damage-still-visible",
+     "path": "/post/berlin-war-damage-still-visible",
+     "minutes": 7,
+     "alt": "The rear of the ruined portico of the Anhalter Bahnhof in Berlin-Kreuzberg, its brick arches open to the sky with modern office towers behind",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_7998bec069d345c68e9461b70634a209~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Berlin never patched most of what April 1945 did to its walls.",
+     "tool": "berlin-war-scars-map"
+    },
+    {
+     "title": "Is Museum Island Free? Tickets, Prices, and What to Actually Skip",
+     "slug": "is-museum-island-free-tickets-prices-and-what-to-actually-skip",
+     "path": "/post/is-museum-island-free-tickets-prices-and-what-to-actually-skip",
+     "minutes": 5,
+     "alt": "Bode Museum's domed exterior with statues at dusk. The museum's name is illuminated in yellow against a clear evening sky.",
+     "thumb": "https://static.wixstatic.com/media/nsplsh_a5647fd543ad4eb4bff208148e83d6ae~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Museum Island has five world-class museums, but tickets aren't cheap and the Pergamon is closed until 2027.",
+     "tool": "berlin-landmarks-map"
+    }
+   ]
+  }
+ ],
+ "flat": []
+}

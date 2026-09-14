@@ -1,0 +1,661 @@
+{
+ "updatedAt": "2026-09-14T18:02:50.119Z",
+ "source": "Wix Blog API + blog-category/categories.json",
+ "slug": "berlin-history",
+ "categoryId": "5f58da11-347d-43f0-b3c3-2cb1cdeb7a79",
+ "label": "Berlin History",
+ "lede": "Berlin history told from places you can still stand in. Each one starts at a spot on my route or a street you already walk past, and explains what happened there, who decided it, and what is left to see.",
+ "shelfMode": "topic",
+ "shelfLegend": "Where the story is standing",
+ "shelfLegendSub": "Grouped by the kind of ground it covers",
+ "totalPosts": 59,
+ "toolCount": 50,
+ "lead": {
+  "title": "Berlin War Damage Still Visible: The Walls That Were Never Repaired",
+  "slug": "berlin-war-damage-still-visible",
+  "path": "/post/berlin-war-damage-still-visible",
+  "excerpt": "Berlin never patched most of what April 1945 did to its walls. The clearest place to start is a free, open courtyard on Museum Island, where bullet strikes sit in the colonnade stone at the height of a standing person. Here are seventeen places across the city where the marks are still there to find, how to tell what made each one, and which two need planning before you go.",
+  "minutes": 7,
+  "readTime": "7 min read",
+  "publishedDate": "2026-09-06T14:03:38.210Z",
+  "alt": "The rear of the ruined portico of the Anhalter Bahnhof in Berlin-Kreuzberg, its brick arches open to the sky with modern office towers behind",
+  "lead": "https://static.wixstatic.com/media/5a08a3_7998bec069d345c68e9461b70634a209~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "thumb": "https://static.wixstatic.com/media/5a08a3_7998bec069d345c68e9461b70634a209~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "square": "https://static.wixstatic.com/media/5a08a3_7998bec069d345c68e9461b70634a209~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "shelf": "",
+  "topic": "free-budget",
+  "figure": "",
+  "line": "Berlin never patched most of what April 1945 did to its walls.",
+  "term": "",
+  "gloss": "",
+  "termCta": "",
+  "tool": "berlin-war-scars-map"
+ },
+ "glossary": [],
+ "shelves": [
+  {
+   "key": "first-day",
+   "title": "First days and arrival",
+   "lead": "Airports, tickets, and the first hours",
+   "posts": [
+    {
+     "title": "Berlin Cemeteries: How to Pick the One That Fits Your Day",
+     "slug": "berlin-cemeteries",
+     "path": "/post/berlin-cemeteries",
+     "minutes": 9,
+     "alt": "A path lined with grand stone mausoleums under bare trees at the Jüdischer Friedhof Weißensee in Berlin",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_691e4432ffbb4c66a4604464aeac8fed~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "One is a lawn in Mitte with almost nothing left standing."
+    },
+    {
+     "title": "Gemäldegalerie Berlin: The Old Masters Gallery Most Visitors Miss",
+     "slug": "gemaldegalerie-berlin",
+     "path": "/post/gemaldegalerie-berlin",
+     "minutes": 6,
+     "alt": "A quiet exhibition hall in the Gemäldegalerie Berlin with a large altarpiece, old master paintings and an empty wooden bench",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_49b4d7bfbc61401ca5204dd8781e48b1~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "The Gemäldegalerie is Berlin's old masters gallery: a hall of Rembrandts, two Vermeers, Caravaggio and Bruegel, usually with far less pressure than Museum Island.",
+     "tool": "gemaldegalerie-highlights-walk"
+    },
+    {
+     "title": "Berliner Unterwelten: How to Actually Get Into Berlin's Bunker Tours",
+     "slug": "berliner-unterwelten",
+     "path": "/post/berliner-unterwelten",
+     "minutes": 8,
+     "alt": "The concrete ruin of the Humboldthain flak tower in Volkspark Humboldthain, Berlin",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_cd8018676fd442ce93f641513f5f1c22~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Berlin kept most of its twentieth century underground, and the only way in is a guided tour you have to book properly.",
+     "tool": "berliner-unterwelten-tour-board"
+    },
+    {
+     "title": "Stasi Museum Berlin: The Secret Police HQ and Prison",
+     "slug": "stasi-museum-berlin",
+     "path": "/post/stasi-museum-berlin",
+     "minutes": 5,
+     "alt": "Erich Mielke's preserved office suite inside the Stasi Museum in Berlin-Lichtenberg",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_39b570565e264bd9948810ece49d2134~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "The Stasi Museum Berlin sits inside the real headquarters of East Germany's secret police, with Erich Mielke's preserved office and the surveillance gadgets.",
+     "tool": "stasi-surveillance-scale"
+    },
+    {
+     "title": "KaDeWe Berlin: A Visitor's Guide to the Grand Store and Its Famous Food Hall",
+     "slug": "kadewe-berlin",
+     "path": "/post/kadewe-berlin",
+     "minutes": 6,
+     "alt": "The KaDeWe department store building with its red roofline on Tauentzienstraße in west Berlin",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_326ea893a3864cf49a6e3b65274e164a~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "KaDeWe is Berlin's grand old department store, and its sixth-floor food hall is the real reason to go.",
+     "tool": "berlin-shopping-areas"
+    },
+    {
+     "title": "Olympiastadion Berlin: How to Visit the 1936 Olympic Stadium",
+     "slug": "olympiastadion-berlin",
+     "path": "/post/olympiastadion-berlin",
+     "minutes": 5,
+     "alt": "The Olympic flame cauldron on its pillars at the Marathon Gate inside Berlin's Olympiastadion, framed by the stadium roof opening",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_be407886b9334da08006905dce9b9e17~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "The stadium the Nazis built for the 1936 Olympics is still standing and still full most weekends."
+    },
+    {
+     "title": "Berliner Dom Tickets: Dome Climb, Crypt and Visit Tips",
+     "slug": "berliner-dom-tickets",
+     "path": "/post/berliner-dom-tickets",
+     "minutes": 5,
+     "alt": "Berliner Dom and Alte Nationalgalerie on Museum Island at sunset",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_6e28eeb7cea94f71bf910641e1db3244~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Decide whether Berliner Dom tickets are worth it for your day: check official times, use the dome climb wisely, and make the crypt or Museum Island context count.",
+     "tool": "berliner-dom-visit-planner"
+    },
+    {
+     "title": "Victory Column Berlin: View, Tickets and Climb Tips",
+     "slug": "victory-column-berlin",
+     "path": "/post/victory-column-berlin",
+     "minutes": 8,
+     "alt": "Golden Victory Column rising above Tiergarten and Großer Stern in Berlin at warm evening light",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_de77d2d617484aea9972b239de8e0fbe~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "A practical guide to the Berlin Victory Column: whether to climb it, current ticket and opening-hour checks, stairs, accessibility, safe access and nearby route ideas.",
+     "tool": "victory-column-climb-planner"
+    },
+    {
+     "title": "Berlin Museum Pass vs. Single Tickets: Which One Saves You Money?",
+     "slug": "berlin-museum-pass-vs-single-tickets-which-one-saves-you-money",
+     "path": "/post/berlin-museum-pass-vs-single-tickets-which-one-saves-you-money",
+     "minutes": 9,
+     "alt": "Museum Island Berlin with historic museums and Spree River view in the city centre",
+     "thumb": "https://static.wixstatic.com/media/nsplsh_9dff584f90f24766a4132e0e9995af55~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Museum Island has five world-class museums, and tickets aren't cheap.",
+     "tool": "transport-ticket-calculator"
+    },
+    {
+     "title": "The Pope's Revenge: How East Germany's TV Tower Backfired",
+     "slug": "the-pope-s-revenge-how-east-germany-s-tv-tower-backfired",
+     "path": "/post/the-pope-s-revenge-how-east-germany-s-tv-tower-backfired",
+     "minutes": 5,
+     "alt": "TV Tower with a metallic sphere and antennas against a clear blue sky, flanked by two modern buildings with large windows.",
+     "thumb": "https://static.wixstatic.com/media/nsplsh_644e491769034414871b0141a6e205a3~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "A strange Cold War irony hidden in plain sight: Berlin’s TV Tower was built to symbolize socialist power, yet under the right sunlight it reveals a glowing cross — the fa",
+     "tool": "east-or-west-1989"
+    }
+   ]
+  },
+  {
+   "key": "practical",
+   "title": "Practical Berlin",
+   "lead": "Transport, money, opening hours, safety",
+   "posts": [
+    {
+     "title": "Stolpersteine in Berlin: How to Read the Brass Stones Under Your Feet",
+     "slug": "stolpersteine-berlin",
+     "path": "/post/stolpersteine-berlin",
+     "minutes": 7,
+     "alt": "Four brass Stolpersteine for the Salinger family set into dark cobblestones in a Berlin pavement",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_ec6b4612f521499282b397c9e9eac16a~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Berlin’s pavements hold more than 11,000 small brass memorials, and most visitors walk over them without seeing one.",
+     "tool": "stolperstein-reader"
+    },
+    {
+     "title": "Treptower Park & the Soviet War Memorial: Berlin's Most Overwhelming Monument",
+     "slug": "treptower-park-berlin",
+     "path": "/post/treptower-park-berlin",
+     "minutes": 6,
+     "alt": "The Soviet War Memorial in Treptower Park seen down its full central axis, with sunken lawns, sarcophagi, two red flags and the distant statue mound.",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_1b094457bc414b5dbdce3cdcdf48d1f7~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Treptower Park holds the largest Soviet monument in Germany and the grave of around 7,000 soldiers.",
+     "tool": "treptower-memorial-walk"
+    },
+    {
+     "title": "Where Was Hitler's Bunker in Berlin? What You'll Actually Find Today",
+     "slug": "hitlers-bunker-berlin",
+     "path": "/post/hitlers-bunker-berlin",
+     "minutes": 5,
+     "alt": "The site of Hitler's bunker in Berlin today, an ordinary car park with a small information board and apartment blocks behind it",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_2390e27e589e40369cc46747042a3046~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "The site of Hitler's bunker in Berlin is one of the city's most searched-for spots, and there is almost nothing to see.",
+     "tool": "berlin-landmarks-map"
+    },
+    {
+     "title": "Cold War Berlin in 5 Key Locations You Can Still Visit",
+     "slug": "cold-war-berlin-in-5-key-locations-you-can-still-visit",
+     "path": "/post/cold-war-berlin-in-5-key-locations-you-can-still-visit",
+     "minutes": 8,
+     "alt": "",
+     "thumb": "https://static.wixstatic.com/media/nsplsh_644e491769034414871b0141a6e205a3~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Berlin was the frontline of the Cold War.",
+     "tool": "east-or-west-1989"
+    }
+   ]
+  },
+  {
+   "key": "free-budget",
+   "title": "Free and cheap",
+   "lead": "What costs nothing, and what is worth paying for",
+   "posts": [
+    {
+     "title": "Berlin War Damage Still Visible: The Walls That Were Never Repaired",
+     "slug": "berlin-war-damage-still-visible",
+     "path": "/post/berlin-war-damage-still-visible",
+     "minutes": 7,
+     "alt": "The rear of the ruined portico of the Anhalter Bahnhof in Berlin-Kreuzberg, its brick arches open to the sky with modern office towers behind",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_7998bec069d345c68e9461b70634a209~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Berlin never patched most of what April 1945 did to its walls.",
+     "tool": "berlin-war-scars-map"
+    },
+    {
+     "title": "Wannsee Berlin: The Beach, the Peacocks and the Villa Shore",
+     "slug": "wannsee-berlin",
+     "path": "/post/wannsee-berlin",
+     "minutes": 7,
+     "alt": "Rows of blue and white striped wicker beach chairs on the sand at Strandbad Wannsee",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_6770d8e1ecbc4313937f77e3c032e91f~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Everyone on the summer S7 says they are going to Wannsee, and they are all going to different places: a 1907 sand beach, an island of free-roaming peacocks, a villa shore",
+     "tool": "wannsee-shore-planner"
+    },
+    {
+     "title": "Tiergarten Berlin: What's Actually Worth Seeing in the City's Biggest Park",
+     "slug": "tiergarten-berlin",
+     "path": "/post/tiergarten-berlin",
+     "minutes": 7,
+     "alt": "A cyclist crossing an ornamental stone bridge over a calm waterway in Berlin's Tiergarten, framed by spring blossoms",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_aaf86f406f66468b95e545784fcc5cb8~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Tiergarten is 210 hectares of woodland, lakes and formal garden sitting right between the Brandenburg Gate and Zoologischer Garten station, open around the clock and free to walk into.",
+     "tool": "tiergarten-loop-planner"
+    },
+    {
+     "title": "Gendarmenmarkt: A Local Guide to Berlin's Most Beautiful Square",
+     "slug": "gendarmenmarkt-berlin",
+     "path": "/post/gendarmenmarkt-berlin",
+     "minutes": 6,
+     "alt": "Wide view across Gendarmenmarkt in Berlin, with the Konzerthaus on the left, the Schiller monument in the middle, and the French Cathedral with its green domed tower on the right",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_fedc190718194fc5bfa281a6e1c8cabe~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Two of Gendarmenmarkt's three landmarks are called cathedrals, and neither one is."
+    },
+    {
+     "title": "Jewish Museum Berlin: Free Entry, How Long and What to See",
+     "slug": "jewish-museum-berlin-guide",
+     "path": "/post/jewish-museum-berlin-guide",
+     "minutes": 7,
+     "alt": "Baroque Old Building and zinc-clad Libeskind Building of the Jewish Museum Berlin seen from Lindenstrasse.",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_d3ee6a028d234005b82402da57a8300d~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "A practical first-visit guide to the Jewish Museum Berlin: free entry, how long to allow, what to see first, security, accessibility and a route through Libeskind's building.",
+     "tool": "jewish-museum-visit-sequence"
+    },
+    {
+     "title": "Kaiser Wilhelm Memorial Church: How to Visit Berlin's Broken Tower",
+     "slug": "kaiser-wilhelm-memorial-church-berlin",
+     "path": "/post/kaiser-wilhelm-memorial-church-berlin",
+     "minutes": 5,
+     "alt": "The blue-lit modern church and the floodlit broken old tower of the Kaiser Wilhelm Memorial Church at night on Breitscheidplatz",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_9e407dc4339c4218861c3f7820e560a3~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Berlin's 'hollow tooth' is free, quick, and easy to miss the point of.",
+     "tool": "memorial-church-visit-planner"
+    },
+    {
+     "title": "How to Visit the Reichstag Dome for Free (And Why You Should Book Now)",
+     "slug": "how-to-visit-the-reichstag-dome-for-free-and-why-you-should-book-now",
+     "path": "/post/how-to-visit-the-reichstag-dome-for-free-and-why-you-should-book-now",
+     "minutes": 10,
+     "alt": "Historic building with a glass dome and flags, set against a moody, cloudy sky. Lush green hedges in the foreground add depth.",
+     "thumb": "https://static.wixstatic.com/media/nsplsh_19211d510c114056a7f993c8fda158eb~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "How to visit the Reichstag dome for free in 2026: official booking link, ID rules, closure dates, best times, what to expect and why it beats many paid views.",
+     "tool": "berlin-free-things-to-do"
+    }
+   ]
+  },
+  {
+   "key": "route-stories",
+   "title": "The historic centre",
+   "lead": "The streets and squares my route runs through",
+   "posts": [
+    {
+     "title": "Karl-Marx-Allee: How to Walk East Berlin's Showpiece Boulevard",
+     "slug": "karl-marx-allee-berlin",
+     "path": "/post/karl-marx-allee-berlin",
+     "minutes": 7,
+     "alt": "The twin towers of Frankfurter Tor with Karl-Marx-Allee running between them under a blue sky",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_30cc262e4ab0434081dd1dc7a34a4959~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Karl-Marx-Allee is East Berlin's 2.3 km showpiece boulevard, and most visitors never see it.",
+     "tool": "karl-marx-allee-spotter"
+    },
+    {
+     "title": "Holocaust Memorial Berlin: How to Visit Respectfully and What to Know",
+     "slug": "holocaust-memorial-berlin",
+     "path": "/post/holocaust-memorial-berlin",
+     "minutes": 6,
+     "alt": "Concrete stelae at the Holocaust Memorial Berlin",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_35d060b00a4f4e738340348218748faa~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "A practical, respectful guide to the Holocaust Memorial Berlin: what the stelae mean, how long to spend, Information Centre hours, etiquette and nearby route choices."
+    },
+    {
+     "title": "Bebelplatz Berlin: Book-Burning Memorial, Empty Library and What Tourists Miss",
+     "slug": "bebelplatz-berlin",
+     "path": "/post/bebelplatz-berlin",
+     "minutes": 5,
+     "alt": "Bebelplatz Berlin square with the State Opera, St. Hedwig's Cathedral and surrounding facades",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_9d6c6b1ead7c4cc29650ad26e058da3f~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "A practical Berlin guide to Bebelplatz, the Empty Library memorial, the 1933 book burning and how to turn this easy-to-miss square into a meaningful stop.",
+     "tool": "bebelplatz-memory-lens"
+    },
+    {
+     "title": "Unter den Linden Berlin: How to Walk the Grand Boulevard Without Missing the Point",
+     "slug": "unter-den-linden-berlin",
+     "path": "/post/unter-den-linden-berlin",
+     "minutes": 7,
+     "alt": "Unter den Linden boulevard in Berlin with trees, the Frederick the Great statue and the TV Tower in the distance",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_bf98985572c44e1ca26711a80de8bff0~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "A practical local guide to walking Unter den Linden in Berlin, with the best direction, stops, shortcuts, mistakes to avoid and a simple route planner."
+    },
+    {
+     "title": "Berlin Pride 2026 (CSD): The Parade, the Whole Week, and the History Behind It",
+     "slug": "berlin-pride-csd-2026",
+     "path": "/post/berlin-pride-csd-2026",
+     "minutes": 7,
+     "alt": "Feathered dancers and a rainbow-flag truck at a crowded pride parade near the Brandenburg Gate under a bright blue sky",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_c2dbe2e682b94caf857dcc811ab5f7d6~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Berlin Pride 2026 (CSD) holds its main parade on July 25."
+    },
+    {
+     "title": "7 Things Most Tourists Don't Know About the Berliner Dom",
+     "slug": "7-things-most-tourists-dont-know-about-the-berliner-dom",
+     "path": "/post/7-things-most-tourists-dont-know-about-the-berliner-dom",
+     "minutes": 6,
+     "alt": "Illuminated historic cathedral and bridge at night, with reflections on calm water. Trees and a colonnade line the background under a deep blue sky.",
+     "thumb": "https://static.wixstatic.com/media/nsplsh_649641d059db4fa18bf4cfce7876a1f4~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "The Berliner Dom is one of Berlin's most photographed landmarks — but most visitors know almost nothing about it.",
+     "tool": "berlin-landmarks-map"
+    },
+    {
+     "title": "Humboldt Forum Berlin: Free Entry, Big Controversy — Is It Worth Visiting?",
+     "slug": "humboldt-forum-berlin-free-entry-big-controversy-is-it-worth-visiting",
+     "path": "/post/humboldt-forum-berlin-free-entry-big-controversy-is-it-worth-visiting",
+     "minutes": 5,
+     "alt": "Ornate building facade with two winged stone statues, gold crown, and swirling patterns. Blue arched window beneath. Regal and majestic.",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_c077387b1d794dbb9e6fe188e5994d22~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Berlin spent €680 million rebuilding a Baroque palace and turned it into a cultural center."
+    },
+    {
+     "title": "Berlin Alte Nationalgalerie: The Greek Temple on Museum Island That Almost Disappeared",
+     "slug": "alte-nationalgalerie-berlin-the-greek-temple-on-museum-island-that-almost-disappeared",
+     "path": "/post/alte-nationalgalerie-berlin-the-greek-temple-on-museum-island-that-almost-disappeared",
+     "minutes": 9,
+     "alt": "Alte Nationalgalerie on Museum Island in Berlin with columns, staircase and equestrian statue",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_cb3e095918d94d2fa11269a6e3c9b26c~mv2.jpeg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "A practical guide to the Alte Nationalgalerie on Museum Island: temple architecture, Caspar David Friedrich, Impressionism, war damage and 2026 visit notes.",
+     "tool": "berlin-landmarks-map"
+    },
+    {
+     "title": "Berliner Dom Before and After WWII: The Cathedral That Lost Its Crown",
+     "slug": "berliner-dom-before-and-after-wwii-the-cathedral-that-lost-its-crown",
+     "path": "/post/berliner-dom-before-and-after-wwii-the-cathedral-that-lost-its-crown",
+     "minutes": 9,
+     "alt": "berlin catherdal dome",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_78189c2e03174a62b403590dfb14c3ac~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Berliner Dom before and after WWII: how the 1905 imperial cathedral lost its Memorial Church, survived wartime damage and became today's rebuilt landmark.",
+     "tool": "berlin-landmarks-map"
+    },
+    {
+     "title": "The Berlin Wall: Where It Stood and What's Left",
+     "slug": "the-berlin-wall-where-it-stood-and-what-s-left-in-2026",
+     "path": "/post/the-berlin-wall-where-it-stood-and-what-s-left-in-2026",
+     "minutes": 5,
+     "alt": "Painting of two men kissing on a wall. Red and black Cyrillic text below, with German text at the bottom. Emotional and intense scene.",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_fe62f0fe9b474116862da1ab152783fb~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "The Berlin Wall divided a city for 28 years.",
+     "tool": "east-or-west-1989"
+    }
+   ]
+  },
+  {
+   "key": "history-myths",
+   "title": "History and what survived it",
+   "lead": "Context, legends, and the record behind them",
+   "posts": [
+    {
+     "title": "The Oldest Restaurants in Berlin: Where the Room Is Actually Old",
+     "slug": "oldest-restaurants-in-berlin",
+     "path": "/post/oldest-restaurants-in-berlin",
+     "minutes": 8,
+     "alt": "The green anno 1621 sign and entrance of Zur letzten Instanz in Berlin",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_40c19d30f8744ab18f0970b6797a89ba~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Berlin claims restaurants from 1571 and 1621, but the war decided what is really old.",
+     "tool": "berlin-oldest-rooms-timeline"
+    },
+    {
+     "title": "Two of Everything in Berlin: The East and West Twins and Which One to Visit",
+     "slug": "two-of-everything-in-berlin",
+     "path": "/post/two-of-everything-in-berlin",
+     "minutes": 7,
+     "alt": "The Funkturm above the Berlin exhibition grounds with the Fernsehturm on the distant skyline",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_53ed55c120044ed9a348445802f46101~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Berlin was two cities for forty years and each half built the things a capital is supposed to have.",
+     "tool": "berlin-twin-city-map"
+    },
+    {
+     "title": "Third Reich Sites in Berlin: What Is Actually Left to See",
+     "slug": "third-reich-sites-in-berlin",
+     "path": "/post/third-reich-sites-in-berlin",
+     "minutes": 9,
+     "alt": "The excavated cellar walls, the open-air exhibition trench and the surviving stretch of Berlin Wall at the Topography of Terror on Niederkirchnerstraße",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_1039705c22ec444ba5b50cd7bff261f0~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Hitler's bunker is a car park with one sign.",
+     "tool": "third-reich-berlin-what-survives"
+    },
+    {
+     "title": "The Oberbaumbrücke: Berlin's Prettiest Bridge and the Border That Ran Through It",
+     "slug": "oberbaumbruecke-berlin",
+     "path": "/post/oberbaumbruecke-berlin",
+     "minutes": 5,
+     "alt": "The Oberbaumbrücke carrying a U-Bahn over the Spree between Kreuzberg and Friedrichshain",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_41b307c8d5304bd4a2ffa9c073d32746~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "It looks medieval, but it is younger than the U-Bahn, and for twenty-eight years the East-West border ran across the water beneath its arches.",
+     "tool": "oberbaumbruecke-crossing"
+    },
+    {
+     "title": "Spandau Berlin: The Old Town Berlin Is Not Supposed to Have",
+     "slug": "spandau-berlin",
+     "path": "/post/spandau-berlin",
+     "minutes": 7,
+     "alt": "Aerial view of Spandau Citadel showing the complete star-shaped Renaissance fortress surrounded by its moat, with the Juliusturm tower rising at one corner",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_41cb270e5fd349edab54ebdbd06329d6~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Berlin is supposed to have no old town, but Spandau never got that memo.",
+     "tool": "spandau-old-town-loop"
+    },
+    {
+     "title": "The Berlin Wall Trail: Which Section Is Actually Worth Your Time",
+     "slug": "berlin-wall-trail",
+     "path": "/post/berlin-wall-trail",
+     "minutes": 11,
+     "alt": "Preserved section of the Berlin Wall at the Bernauer Strasse memorial, running into the distance with rusted steel posts continuing the line",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_8e7569c5c5294e7280e2604533da1ce9~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "The Berliner Mauerweg rings the whole of former West Berlin, so about 50 km runs through the city and roughly 110 km is forest, lake and farmland.",
+     "tool": "berlin-wall-trail-sections"
+    },
+    {
+     "title": "Schöneberg Berlin: Bowie, Kennedy and the District That Whispers",
+     "slug": "schoneberg-berlin",
+     "path": "/post/schoneberg-berlin",
+     "minutes": 10,
+     "alt": "A cheese and egg stall at Winterfeldtmarkt with a stallholder serving customers under white awnings, the tower of the Apostel-Paulus-Kirche behind",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_eeba5aefc2ba4fafb899cac82b8e3091~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Schöneberg keeps its history at eye level, on plaques screwed to buildings people still live in.",
+     "tool": "schoneberg-plaque-check"
+    },
+    {
+     "title": "Kurfürstendamm Berlin: A Local Guide to City West",
+     "slug": "kurfurstendamm-berlin",
+     "path": "/post/kurfurstendamm-berlin",
+     "minutes": 7,
+     "alt": "The Kaiser Wilhelm Memorial Church and the boulevard at Breitscheidplatz in Berlin",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_04d1ec7e8afc48f8bd350f652588b90f~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "The useful Kurfürstendamm visit is shorter than the street.",
+     "tool": "kurfurstendamm-walk"
+    },
+    {
+     "title": "Berlin Ghost Stations: The 15 Stops Trains Passed Without Stopping",
+     "slug": "berlin-ghost-stations",
+     "path": "/post/berlin-ghost-stations",
+     "minutes": 7,
+     "alt": "The empty tiled mezzanine level of Nordbahnhof S-Bahn station in Berlin",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_00d7de5001374180a09ddafe932dab79~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "For 28 years West Berlin trains ran through East Berlin without stopping, past 15 sealed and guarded platforms.",
+     "tool": "berlin-ghost-stations"
+    },
+    {
+     "title": "Famous Movies and TV Shows Filmed in Berlin",
+     "slug": "famous-movies-tv-shows-filmed-in-berlin",
+     "path": "/post/famous-movies-tv-shows-filmed-in-berlin",
+     "minutes": 16,
+     "alt": "World Time Clock at Alexanderplatz in Berlin with a film-style graphic overlay",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_115f474167e5492e8007f4965f47d3aa~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Explore famous movies and TV shows filmed in Berlin, from Run Lola Run and Babylon Berlin to Kleo, Tár, Unorthodox, and the real streets behind them.",
+     "tool": "screen-mood-finder"
+    },
+    {
+     "title": "Berlin Then and Now: How to See the City That Disappeared",
+     "slug": "berlin-then-and-now",
+     "path": "/post/berlin-then-and-now",
+     "minutes": 6,
+     "alt": "A colour photochrom looking through Hallesches Tor toward Belle-Alliance-Platz around 1900",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_dea26d70fd4c43e5afa6a660f2fdeea8~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Berlin rarely preserves an old street whole.",
+     "tool": "mehringplatz-time-layer-viewer"
+    },
+    {
+     "title": "Teufelsberg Berlin: The Cold War Spy Station on a Man-Made Hill",
+     "slug": "teufelsberg-berlin",
+     "path": "/post/teufelsberg-berlin",
+     "minutes": 5,
+     "alt": "The radar domes and tower of the former Teufelsberg spy station in Berlin above walls covered in street art",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_b63d3880d44b4e2eaa29be619bbed52b~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Teufelsberg is one of Berlin's strangest places: a hill built by hand from wartime rubble, over a buried Nazi building, topped by an abandoned NSA spy station and now covered in street art.",
+     "tool": "berlin-viewpoint-finder"
+    },
+    {
+     "title": "Berlin Wall Memorial (Bernauer Strasse): How to Visit the Real Wall Site",
+     "slug": "berlin-wall-memorial-bernauer-strasse",
+     "path": "/post/berlin-wall-memorial-bernauer-strasse",
+     "minutes": 7,
+     "alt": "The preserved Berlin Wall death strip on Bernauer Strasse seen from the viewing tower, with the TV Tower on the skyline",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_56c8fde64eb04e31828d5a7a4273fd21~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "A Berlin guide's practical guide to the Berlin Wall Memorial on Bernauer Strasse: the preserved death strip, the viewing tower, the ghost station and the Window of Rememb",
+     "tool": "berlin-wall-remnants"
+    },
+    {
+     "title": "Tempelhof Airport Berlin: Field, Tours and What to Do",
+     "slug": "tempelhof-airport-berlin",
+     "path": "/post/tempelhof-airport-berlin",
+     "minutes": 7,
+     "alt": "Sunset over the former runway at Tempelhofer Feld in Berlin",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_47cdba7486c24c55bdd56ef3a599d1f1~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "A clear tourist guide to Tempelhof Airport Berlin and Tempelhofer Feld: field vs building, entrances, opening hours, tours, rules and the best first-visit plan.",
+     "tool": "tempelhof-field-planner"
+    },
+    {
+     "title": "Potsdamer Platz Berlin: Wall Trace, Skyline and What to See Today",
+     "slug": "potsdamer-platz-berlin",
+     "path": "/post/potsdamer-platz-berlin",
+     "minutes": 6,
+     "alt": "Modern high-rise skyline at Potsdamer Platz in Berlin with the Kollhoff Tower and surrounding buildings",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_aa19c35c29014115a9a1fc3495bcd760~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "A practical Potsdamer Platz Berlin guide: read the Wall trace, modern skyline and before-and-after history without wasting the stop on the wrong things.",
+     "tool": "potsdamer-platz-time-layer-walk"
+    },
+    {
+     "title": "Hohenzollern Berlin: The Royal Family Behind the City's Grandest Streets",
+     "slug": "hohenzollern-berlin",
+     "path": "/post/hohenzollern-berlin",
+     "minutes": 8,
+     "alt": "Humboldt Forum palace-style architecture in central Berlin, the main starting point for reading Hohenzollern Berlin on foot",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_207da8cab01648dea2f634ecdb06c22b~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "A walking guide to the Hohenzollern footprint in Berlin: palace site, cathedral crypt, royal boulevard, museums and the places where Prussian power still shapes the city.",
+     "tool": "hohenzollern-berlin-footprint-map"
+    },
+    {
+     "title": "Topography of Terror Berlin: Free Museum, Wall Remains and How to Visit It Right",
+     "slug": "topography-of-terror-berlin",
+     "path": "/post/topography-of-terror-berlin",
+     "minutes": 7,
+     "alt": "Topography of Terror site in Berlin with the preserved Wall section, exhibition trench and documentation centre",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_298ee4a95f9a480ba2ac9bc0c1051c2b~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "A practical guide to visiting Topography of Terror Berlin: what it covers, how long to allow, free entry, opening hours, audio guide, nearby stops and mistakes to avoid.",
+     "tool": "topography-of-terror-visit-planner"
+    },
+    {
+     "title": "Sachsenhausen from Berlin: Train, Tickets and How to Visit Respectfully",
+     "slug": "sachsenhausen-from-berlin",
+     "path": "/post/sachsenhausen-from-berlin",
+     "minutes": 6,
+     "alt": "Tower A entrance building at Sachsenhausen Memorial in Oranienburg near Berlin",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_3446c472b6ac429fa4780b19ba7a40ab~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "A practical guide to visiting Sachsenhausen from Berlin: train routes, ABC tickets, opening hours, free entry, audio guides, public tours and respectful timing.",
+     "tool": "sachsenhausen-visit-planner"
+    },
+    {
+     "title": "Tränenpalast Berlin: The Free Cold War Museum Tourists Shouldn't Skip",
+     "slug": "traenenpalast-berlin",
+     "path": "/post/traenenpalast-berlin",
+     "minutes": 5,
+     "alt": "Tränenpalast Berlin glowing at dusk beside Friedrichstraße station",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_4e82650eed3741c5b150278473f327d2~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "A practical guide to Tränenpalast Berlin, the free Palace of Tears museum at Friedrichstraße: what it is, how long to spend and when to choose it over other Cold War stops.",
+     "tool": "traenenpalast-visit-planner"
+    },
+    {
+     "title": "Charlottenburg Palace Berlin: Tickets, Gardens and What to See First",
+     "slug": "charlottenburg-palace-berlin",
+     "path": "/post/charlottenburg-palace-berlin",
+     "minutes": 6,
+     "alt": "Charlottenburg Palace in Berlin seen across water and fountains with the palace dome above",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_38a5398327814054a24c8a865b3a4acc~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "A practical, historically grounded Charlottenburg Palace Berlin guide: which ticket to buy, how long to allow, what to see first, and how to avoid the common planning mistakes.",
+     "tool": "charlottenburg-palace-visit-planner"
+    },
+    {
+     "title": "Why Is Berlin's Founding Year 1237? Cölln, Medieval Berlin and the City Before 1933",
+     "slug": "why-is-berlin-founding-year-1237",
+     "path": "/post/why-is-berlin-founding-year-1237",
+     "minutes": 7,
+     "alt": "St. Mary's Church in central Berlin with the TV Tower rising behind it",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_5a36f32f42ba4fd9a09c87375614a024~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Berlin's official birthday comes from a 1237 document mentioning Cölln, not Berlin itself.",
+     "tool": "medieval-berlin-mini-walk"
+    },
+    {
+     "title": "East Side Gallery: Berlin's Open-Air Wall Guide",
+     "slug": "east-side-gallery-berlin-guide",
+     "path": "/post/east-side-gallery-berlin-guide",
+     "minutes": 6,
+     "alt": "The Fraternal Kiss mural by Dmitri Vrubel at the East Side Gallery, showing Soviet leader Brezhnev kissing East German leader Honecker.",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_ba75705fa8c7457d9955584d709988eb~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "The longest surviving stretch of the Berlin Wall, explained by a local guide: the famous murals and what they mean, how to visit, and how it fits the wider Wall story.",
+     "tool": "east-side-gallery-murals"
+    },
+    {
+     "title": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
+     "slug": "where-was-the-berlin-wall-interactive-map",
+     "path": "/post/where-was-the-berlin-wall-interactive-map",
+     "minutes": 8,
+     "alt": "",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "The Berlin Wall ran 155 kilometers around West Berlin.",
+     "tool": "east-or-west-1989"
+    },
+    {
+     "title": "Ampelmann Berlin: The Traffic Light Man, His History, and Where to See Him",
+     "slug": "the-ampelmann-how-a-traffic-light-became-berlin-s-most-beloved-symbol",
+     "path": "/post/the-ampelmann-how-a-traffic-light-became-berlin-s-most-beloved-symbol",
+     "minutes": 10,
+     "alt": "Green pedestrian signal in front of a historic building with columns, statue of a horse and rider on the left, people sitting on steps.",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_9fe58e0576cb45ad93991c2325419807~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Who is Berlin's traffic light man? This guide explains the Ampelmann's East German history, why he survived reunification, and where to see the original signals and shops."
+    },
+    {
+     "title": "How Berlin Was Divided: A Simple Guide to East vs. West",
+     "slug": "how-berlin-was-divided-a-simple-guide-to-east-vs-west",
+     "path": "/post/how-berlin-was-divided-a-simple-guide-to-east-vs-west",
+     "minutes": 8,
+     "alt": "berlin wall",
+     "thumb": "https://static.wixstatic.com/media/nsplsh_5e0bfccefabe4d938ab2653b1ef9f091~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "A simple guide to East vs. West Berlin: how the city was divided, why West Berlin was an island, which landmarks were on each side and what clues remain today.",
+     "tool": "east-or-west-1989"
+    },
+    {
+     "title": "Checkpoint Charlie: What to See, What to Skip and Why It Still Matters",
+     "slug": "exploring-checkpoint-charlie-a-historical-journey-through-cold-war-berlin-s-iconic-border-crossing",
+     "path": "/post/exploring-checkpoint-charlie-a-historical-journey-through-cold-war-berlin-s-iconic-border-crossing",
+     "minutes": 10,
+     "alt": "Replica Checkpoint Charlie guardhouse and American Sector sign on Friedrichstrasse in Berlin",
+     "thumb": "https://static.wixstatic.com/media/nsplsh_c8512191523547568f7016414632ca86~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "A realistic guide to Checkpoint Charlie: what is original, what is rebuilt, why the 1961 tank standoff mattered and how to visit without wasting time.",
+     "tool": "east-or-west-1989"
+    }
+   ]
+  },
+  {
+   "key": "more",
+   "title": "More in this category",
+   "lead": "Everything else filed here",
+   "posts": [
+    {
+     "title": "What to Eat in Berlin: 12 Must-Try Local Foods",
+     "slug": "what-to-eat-in-berlin-12-must-try-local-foods",
+     "path": "/post/what-to-eat-in-berlin-12-must-try-local-foods",
+     "minutes": 8,
+     "alt": "Fries covered in ketchup and mayo on a paper tray, resting on a shiny metal surface. The colors are vibrant with a casual atmosphere.",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_02afdc19095046f5b7cd8b12db4bf21d~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Discover what locals actually eat in Berlin — from Currywurst at a street Imbiss to Berliner Weiße in a summer beer garden."
+    },
+    {
+     "title": "Visiting Berlin in June: A Walking Guide's Local Take",
+     "slug": "visiting-berlin-in-june",
+     "path": "/post/visiting-berlin-in-june",
+     "minutes": 10,
+     "alt": "Berlin skyline with TV Tower at sunset. People sit by the river. Text: Berlin in June. Weather, Events & Travel Tips. Real Berlin.",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_e2d3a1af57814d08b60cb934076abe79~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "What June in Berlin is actually like, told by a local walking guide.",
+     "tool": "best-month-to-visit-berlin"
+    }
+   ]
+  }
+ ],
+ "flat": []
+}

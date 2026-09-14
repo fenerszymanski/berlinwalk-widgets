@@ -1,25 +1,42 @@
 /*
- * Living in Berlin mode for <bw-blog-index>.
+ * Category mode for <bw-blog-index>.
  *
- * Scope is deliberately narrow: blog-index-element.js only loads this file on
- * /blog/categories/living-in-berlin. Every other blog surface, the /blog hub
- * included, is untouched by anything in here.
+ * Every /blog/categories/<slug> page carries the same <bw-blog-index> tag as
+ * /blog, so until now each of them rendered the whole tourist blog hub with
+ * the Wix native category feed stacked underneath. blog-index-element.js hands
+ * the element to this file on those paths only; /blog itself is untouched.
  *
  * Design direction "Der Aushang", approved 2026-09-14. Paper ground, hairline
  * rules, no rounded corners, one stamp green, yellow only on the lead flag.
  * IBM Plex Mono carries the masthead, the German terms and every figure;
- * Montserrat carries reading copy. Fraunces is deliberately absent, so this
- * page does not read as the tourist blog hub in a different colour.
+ * Montserrat carries reading copy. Fraunces is deliberately absent, so a
+ * category page does not read as the hub in a different colour.
+ *
+ * The page shape adapts to the category: a curated shelf set where
+ * curation/<slug>.json supplies one, the blog-index topic grouping for the big
+ * categories, and one flat list where a category is too small to split.
  */
 (function () {
   var BASE = (function () {
     var s = document.currentScript;
     return s && s.src ? s.src : window.location.href;
   })();
-  var DATA_URL = new URL('./data.json', BASE).href + '?v=20260914-aushang-1';
+  var DATA_VERSION = '20260914-aushang-2';
   var MONO_URL = new URL('../brand/fonts/editorial-v2/IBMPlexMono-SemiBold.woff2', BASE).href;
   var WORDMARK = new URL('../assets/berlinwalk-wordmark-green.png', BASE).href;
   var STYLE_ID = 'bw-lib-styles';
+  // A shelf longer than this opens collapsed. The rows are already in the DOM,
+  // so expanding is a class toggle and costs no request.
+  var SHELF_PREVIEW = 10;
+
+  function categorySlug() {
+    var m = window.location.pathname.toLowerCase().match(/\/blog\/categories\/([^/?#]+)/);
+    return m ? decodeURIComponent(m[1]) : '';
+  }
+
+  function dataUrl(slug) {
+    return new URL('./' + slug + '.json', BASE).href + '?v=' + DATA_VERSION;
+  }
 
   function esc(v) {
     return String(v == null ? '' : v);
@@ -96,6 +113,13 @@
       '.bw-lib-row .mt{padding:13px 18px;text-align:right;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);}',
       '.bw-lib-row .mt .c{display:inline-block;margin-top:5px;background:var(--stamp);color:#fff;padding:2px 6px;letter-spacing:.1em;}',
 
+      '.bw-lib-extra{display:none;}',
+      '.bw-lib-shelf.bw-lib-open .bw-lib-extra{display:grid;}',
+      '.bw-lib-more{display:block;width:100%;appearance:none;cursor:pointer;background:#FBFBF6;border:0;border-top:1px solid var(--hair);',
+      'padding:13px 18px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--stamp);text-align:center;}',
+      '.bw-lib-more:hover{background:var(--hl);color:#123D18;}',
+      '.bw-lib-more:focus-visible{outline:2px solid var(--stamp);outline-offset:-2px;}',
+
       /* closing note */
       '.bw-lib-note{margin-top:40px;border:2px solid var(--ink);background:#fff;display:grid;grid-template-columns:1.3fr 1fr;}',
       '.bw-lib-note .l{padding:26px 28px;border-right:1px solid var(--ink);}',
@@ -120,6 +144,7 @@
       '.bw-lib{font-size:15px;}',
       '.bw-lib .bw-lib-in{padding:0 16px;}',
       '.bw-lib-row{grid-template-columns:34px 76px minmax(0,1fr);}',
+      '.bw-lib-shelf.bw-lib-open .bw-lib-extra{display:grid;}',
       '.bw-lib-row img{width:66px;height:52px;}',
       '.bw-lib-row .mt{grid-column:2 / -1;text-align:left;padding:0 18px 13px 12px;}',
       '.bw-lib-row .mt .c{margin-top:0;margin-left:8px;}',
@@ -161,7 +186,7 @@
       '<div class="bw-lib-lead"><a href="' + esc(p.path) + '">' +
       '<img src="' + esc(p.lead) + '" alt="' + esc(p.alt) + '" width="1400" height="620">' +
       '<div class="tx">' +
-      '<span class="bw-lib-flag m">Newest &middot; ' + esc(p.readTime) + '</span>' +
+      '<span class="bw-lib-flag m">Latest &middot; ' + shortDate(p.publishedDate) + ' &middot; ' + esc(p.readTime) + '</span>' +
       '<h3>' + esc(p.title) + '</h3>' +
       '<p>' + esc(p.excerpt) + '</p>' +
       '<span class="bw-lib-src m">Read it' + (p.tool ? ', then put your own number in' : '') + '</span>' +
@@ -169,6 +194,8 @@
     );
   }
 
+  // Only categories with a curation file have terms, so this whole block is
+  // absent everywhere except Living in Berlin rather than faked.
   function glossaryHtml(d) {
     if (!d.glossary || !d.glossary.length) return '';
     var cards = d.glossary.map(function (p) {
@@ -190,34 +217,64 @@
     );
   }
 
-  function shelvesHtml(d) {
-    var n = 0;
-    var blocks = (d.shelves || []).map(function (shelf) {
-      var rows = shelf.posts.map(function (p) {
-        n += 1;
-        var num = n < 10 ? '0' + n : String(n);
-        var fig = p.figure ? '<span class="f m">' + p.figure + '</span> ' : '';
-        return (
-          '<a class="bw-lib-row" href="' + esc(p.path) + '">' +
-          '<span class="n m">' + num + '</span>' +
-          '<img src="' + esc(p.thumb) + '" alt="' + esc(p.alt) + '" loading="lazy" width="88" height="66">' +
-          '<span class="tx"><b>' + esc(p.title) + '</b><i>' + fig + (p.line || '') + '</i></span>' +
-          '<span class="mt m">' + esc(p.minutes) + ' min' +
-          (p.tool ? '<span class="c">Calculator</span>' : '') + '</span>' +
-          '</a>'
-        );
-      }).join('');
+  function rowHtml(p, index) {
+    var num = index < 9 ? '0' + (index + 1) : String(index + 1);
+    var fig = p.figure ? '<span class="f m">' + p.figure + '</span> ' : '';
+    var hidden = index >= SHELF_PREVIEW ? ' bw-lib-extra' : '';
+    return (
+      '<a class="bw-lib-row' + hidden + '" href="' + esc(p.path) + '">' +
+      '<span class="n m">' + num + '</span>' +
+      '<img src="' + esc(p.thumb) + '" alt="' + esc(p.alt) + '" loading="lazy" width="88" height="66">' +
+      '<span class="tx"><b>' + esc(p.title) + '</b><i>' + fig + (p.line || '') + '</i></span>' +
+      '<span class="mt m">' + esc(p.minutes) + ' min' +
+      (p.tool ? '<span class="c">Calculator</span>' : '') + '</span>' +
+      '</a>'
+    );
+  }
+
+  function moreButton(count) {
+    if (count <= 0) return '';
+    return (
+      '<button type="button" class="bw-lib-more m" data-bw-more>' +
+      'Show the other ' + count + '</button>'
+    );
+  }
+
+  function listHtml(d) {
+    // Flat categories render one list; the rest render their shelves. Either
+    // way a long block opens at SHELF_PREVIEW rows with the remainder one
+    // click away, so a 295-post category does not land as a wall.
+    var body;
+    if (d.shelfMode === 'flat') {
+      var flat = d.flat || [];
+      if (!flat.length) return '';
+      body =
+        '<div class="bw-lib-shelf">' +
+        '<div class="bw-lib-shelf-h"><h3 class="m">All ' + flat.length + ' guides</h3>' +
+        '<span>Newest first</span></div>' +
+        flat.map(rowHtml).join('') +
+        moreButton(flat.length - SHELF_PREVIEW) +
+        '</div>';
+      return '<div class="bw-lib-sect"><div class="bw-lib-in">' + body + '</div></div>';
+    }
+
+    var shelves = d.shelves || [];
+    if (!shelves.length) return '';
+    body = shelves.map(function (shelf) {
       return (
         '<div class="bw-lib-shelf">' +
-        '<div class="bw-lib-shelf-h"><h3 class="m">' + shelf.title + '</h3><span>' + shelf.lead + '</span></div>' +
-        rows + '</div>'
+        '<div class="bw-lib-shelf-h"><h3 class="m">' + shelf.title + '</h3>' +
+        '<span>' + (shelf.lead || '') + '</span></div>' +
+        shelf.posts.map(rowHtml).join('') +
+        moreButton(shelf.posts.length - SHELF_PREVIEW) +
+        '</div>'
       );
     }).join('');
     return (
       '<div class="bw-lib-sect"><div class="bw-lib-in">' +
-      '<div class="bw-lib-legend"><h2 class="m">By the part of life it hits</h2>' +
-      '<div class="s">Four shelves, because that is how the questions actually arrive</div></div>' +
-      blocks +
+      '<div class="bw-lib-legend"><h2 class="m">' + esc(d.shelfLegend || 'Everything in this category') + '</h2>' +
+      '<div class="s">' + esc(d.shelfLegendSub || '') + '</div></div>' +
+      body +
       '</div></div>'
     );
   }
@@ -226,17 +283,26 @@
     return (
       '<div class="bw-lib-sect"><div class="bw-lib-in">' +
       '<div class="bw-lib-note">' +
-      '<div class="l"><h3 class="m">Why this shelf exists</h3>' +
-      '<p>I guide Berlin’s historic centre most days, and the questions I get from people who live here are not the ones a visitor asks. ' +
-      'These guides start from a Berlin price, a Berlin rule or a German word on a letter, and end with the one thing I would actually do about it. ' +
-      'A new one lands most weekdays.</p></div>' +
+      '<div class="l"><h3 class="m">Who writes these</h3>' +
+      '<p>I am Yusuf, and I guide Berlin’s historic centre most days. Everything filed here starts from a real Berlin price, ' +
+      'a rule that just moved or a word on a letter nobody translated, and ends with the one thing I would actually do about it. ' +
+      'A new guide lands most weekdays.</p></div>' +
       '<div class="r">' +
-      '<a class="m" href="/tools">' + esc(d.toolCount) + ' of these carry a free calculator</a>' +
+      (d.toolCount ? '<a class="m" href="/tools">' + esc(d.toolCount) + ' of these carry a free calculator</a>' : '<a class="m" href="/tools">Free Berlin tools</a>') +
       '<a class="m" href="/blog">The rest of the blog</a>' +
       '</div></div>' +
-      '<div class="bw-lib-foot"><img src="' + WORDMARK + '" alt="BerlinWalk"><span class="m">Living in Berlin &middot; ' + esc(d.totalPosts) + ' guides</span></div>' +
+      '<div class="bw-lib-foot"><img src="' + WORDMARK + '" alt="BerlinWalk">' +
+      '<span class="m">' + esc(d.label) + ' &middot; ' + esc(d.totalPosts) + ' guides</span></div>' +
       '</div></div>'
     );
+  }
+
+  function shortDate(iso) {
+    try {
+      return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    } catch (e) {
+      return '';
+    }
   }
 
   function checkedOn(iso) {
@@ -248,40 +314,58 @@
     }
   }
 
+  function bindMoreButtons(host) {
+    host.querySelectorAll('[data-bw-more]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var shelf = btn.closest('.bw-lib-shelf');
+        if (!shelf) return;
+        shelf.classList.add('bw-lib-open');
+        btn.remove();
+      });
+    });
+  }
+
   function render(host, d) {
     ensureStyles();
     host.innerHTML =
       '<div class="bw-lib">' +
       '<div class="bw-lib-mast"><div class="bw-lib-in">' +
       '<p class="bw-lib-kick m">The blog &middot; Category</p>' +
-      '<h1 class="m">Living in Berlin</h1>' +
-      '<p class="bw-lib-lede">I write these for people who already live here, not for people passing through. ' +
-      'Every guide starts from a Berlin date, a Berlin price or a Berlin rule that just moved, and ends with the one thing I would actually do about it.</p>' +
+      '<h1 class="m">' + esc(d.label) + '</h1>' +
+      '<p class="bw-lib-lede">' + esc(d.lede) + '</p>' +
       '<div class="bw-lib-meta m">' +
       '<span><b>' + esc(d.totalPosts) + '</b> guides</span>' +
-      '<span><b>' + esc(d.toolCount) + '</b> with a calculator</span>' +
+      (d.toolCount ? '<span><b>' + esc(d.toolCount) + '</b> with a calculator</span>' : '') +
       '<span>Checked on <b>' + checkedOn(d.updatedAt) + '</b></span>' +
-      '<span>New one most weekdays</span>' +
       '</div></div></div>' +
       '<div class="bw-lib-sect"><div class="bw-lib-in">' + leadHtml(d) + '</div></div>' +
       glossaryHtml(d) +
-      shelvesHtml(d) +
+      listHtml(d) +
       noteHtml(d) +
       '</div>';
+    bindMoreButtons(host);
     hideNativeFeed(host);
   }
 
-  window.BWLivingInBerlin = {
-    // Returns a promise so the caller can fall back to the normal hub if the
-    // data never arrives. A half-rendered page is worse than the old one.
-    mount: function (host) {
-      return fetch(DATA_URL, { cache: 'force-cache' })
+  window.BWBlogCategory = {
+    // Resolves only once a category actually rendered. Any rejection sends the
+    // caller back to the old hub, so the worst case is today's page.
+    // slugOverride exists for preview.html, which cannot fake a pathname.
+    // The live hook never passes it.
+    mount: function (host, slugOverride) {
+      var slug = slugOverride || categorySlug();
+      if (!slug) return Promise.reject(new Error('no category slug in path'));
+      // Not force-cache: the category files are rebuilt every time a post is
+      // published, and a pinned version plus force-cache would freeze a reader
+      // on whatever shipped the day the element last changed. Plain default
+      // caching lets the Pages Cache-Control header expire it normally.
+      return fetch(dataUrl(slug), { cache: 'default' })
         .then(function (r) {
-          if (!r.ok) throw new Error('living-in-berlin data ' + r.status);
+          if (!r.ok) throw new Error('category data ' + slug + ' ' + r.status);
           return r.json();
         })
         .then(function (d) {
-          if (!d || !d.posts || !d.posts.length) throw new Error('living-in-berlin data empty');
+          if (!d || !d.totalPosts) throw new Error('category data ' + slug + ' empty');
           render(host, d);
           return true;
         });
