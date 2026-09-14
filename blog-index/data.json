@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-14T07:45:05.079Z",
+  "updatedAt": "2026-09-14T13:48:59.757Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 383,
-  "toolsTotal": 303,
+  "totalPosts": 384,
+  "toolsTotal": 304,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Rundfunkbeitrag in Berlin: One Flat, One Fee, and Four Ways to Pay Twice",
+      "slug": "rundfunkbeitrag-berlin",
+      "path": "/post/rundfunkbeitrag-berlin",
+      "url": "https://www.berlinwalk.com/post/rundfunkbeitrag-berlin",
+      "excerpt": "One flat, one contribution, 18.36 euro a month, whoever lives there and whatever they own. In a city where 977,000 households hold a single person that lands harder than anywhere else. Here is who owes it, the four places Berliners quietly pay twice, and the exemptions that are never granted automatically.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-14T13:46:44.773Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_d5ae3461b0684a15b23eb839d532cade~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/haus-des-rundfunks.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_d5ae3461b0684a15b23eb839d532cade~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/haus-des-rundfunks.jpg",
+      "alt": "The main entrance of the Haus des Rundfunks on Masurenallee in Berlin-Charlottenburg, gold lettering above a brick and glass doorway with people walking in",
+      "relatedToolSlug": ""
+    },
+    {
       "title": "Health Insurance in Berlin: Which Krankenkasse You Can Actually Join and What the Gap Costs",
       "slug": "health-insurance-in-berlin",
       "path": "/post/health-insurance-in-berlin",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_f0e8e550d4394fe2a6fac72f402a1d20~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-maronen.jpg",
       "alt": "Two bay bolete mushrooms in green moss, one lying on its side showing the pale yellow pore layer under the brown cap",
       "relatedToolSlug": "berlin-mushroom-forest-finder"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Dog Parks in Berlin: Where the Leash Comes Off and Which Run Fits Your Dog",
-      "slug": "dog-parks-in-berlin",
-      "path": "/post/dog-parks-in-berlin",
-      "url": "https://www.berlinwalk.com/post/dog-parks-in-berlin",
-      "excerpt": "Berlin has had a citywide leash rule since 2019, and the places where it comes off are more uneven than the word dog park suggests: twelve forest areas of about 1,220 hectares, fenced runs of 1,200 to 9,000 square metres with 0.80 or 1.40 metre fences, and greens where a dog may not enter at all. Here is how to read them from your own station.",
+      "title": "Rundfunkbeitrag in Berlin: One Flat, One Fee, and Four Ways to Pay Twice",
+      "slug": "rundfunkbeitrag-berlin",
+      "path": "/post/rundfunkbeitrag-berlin",
+      "url": "https://www.berlinwalk.com/post/rundfunkbeitrag-berlin",
+      "excerpt": "One flat, one contribution, 18.36 euro a month, whoever lives there and whatever they own. In a city where 977,000 households hold a single person that lands harder than anywhere else. Here is who owes it, the four places Berliners quietly pay twice, and the exemptions that are never granted automatically.",
       "category": "Living in Berlin",
       "categorySlug": "living-in-berlin",
       "topic": "living-in-berlin",
       "topicLabel": "Living in Berlin",
       "readTime": "7 min read",
-      "publishedDate": "2026-09-11T04:55:08.401Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_b60ed643db534c739f1bd325331f2446~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hundeplatz-lichtenberg-run.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_b60ed643db534c739f1bd325331f2446~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hundeplatz-lichtenberg-run.jpg",
-      "alt": "The sandy fenced dog run at Hundeplatz Lichtenberg with wooden agility steps, stacked tyres and a blue barrel under the trees",
-      "relatedToolSlug": "berlin-off-leash-map"
-    }
-  ],
-  "allPosts": [
+      "publishedDate": "2026-09-14T13:46:44.773Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_d5ae3461b0684a15b23eb839d532cade~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/haus-des-rundfunks.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_d5ae3461b0684a15b23eb839d532cade~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/haus-des-rundfunks.jpg",
+      "alt": "The main entrance of the Haus des Rundfunks on Masurenallee in Berlin-Charlottenburg, gold lettering above a brick and glass doorway with people walking in",
+      "relatedToolSlug": ""
+    },
     {
       "title": "Health Insurance in Berlin: Which Krankenkasse You Can Actually Join and What the Gap Costs",
       "slug": "health-insurance-in-berlin",
