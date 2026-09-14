@@ -24,6 +24,7 @@
   var DATA_VERSION = '20260914-aushang-2';
   var MONO_URL = new URL('../brand/fonts/editorial-v2/IBMPlexMono-SemiBold.woff2', BASE).href;
   var WORDMARK = new URL('../assets/berlinwalk-wordmark-green.png', BASE).href;
+  var PORTRAIT = new URL('./assets/yusuf-portrait.jpg', BASE).href;
   var STYLE_ID = 'bw-lib-styles';
   // A shelf longer than this opens collapsed. The rows are already in the DOM,
   // so expanding is a class toggle and costs no request.
@@ -155,7 +156,8 @@
 
       /* closing note */
       '.bw-lib-note{margin-top:40px;border:2px solid var(--ink);background:#fff;display:grid;grid-template-columns:1.3fr 1fr;}',
-      '.bw-lib-note .l{padding:26px 28px;border-right:1px solid var(--ink);}',
+      '.bw-lib-note .l{padding:26px 28px;border-right:1px solid var(--ink);display:grid;grid-template-columns:108px minmax(0,1fr);gap:20px;align-items:start;}',
+      '.bw-lib-face{width:108px;height:108px;object-fit:cover;display:block;border:1px solid var(--hair);filter:saturate(.9) contrast(1.02);}',
       '.bw-lib-note .l h3{font-size:19px;letter-spacing:-.01em;margin:0 0 12px;color:var(--ink);}',
       '.bw-lib-note .l p{margin:0;max-width:52ch;font-size:15px;color:#2F3729;}',
       '.bw-lib-note .r{padding:26px 28px;display:flex;flex-direction:column;justify-content:center;gap:12px;background:#FBFBF6;}',
@@ -186,6 +188,8 @@
       '.bw-lib-wd a{grid-template-columns:72px minmax(0,1fr);gap:13px;}',
       '.bw-lib-wd img{width:72px;height:72px;}',
       '.bw-lib-meta span{padding-right:14px;margin-right:14px;font-size:10.5px;}',
+      '.bw-lib-note .l{grid-template-columns:76px minmax(0,1fr);gap:14px;}',
+      '.bw-lib-face{width:76px;height:76px;}',
       '}',
     ].join('');
   }
@@ -412,10 +416,12 @@
     return (
       '<div class="bw-lib-sect"><div class="bw-lib-in">' +
       '<div class="bw-lib-note">' +
-      '<div class="l"><h3 class="m">Who writes these</h3>' +
+      '<div class="l">' +
+      '<img class="bw-lib-face" src="' + PORTRAIT + '" alt="Yusuf, who writes these guides and runs the walking tour" width="108" height="108" loading="lazy">' +
+      '<div><h3 class="m">Who writes these</h3>' +
       '<p>I am Yusuf, and I guide Berlin’s historic centre most days. Everything filed here starts from a real Berlin price, ' +
       'a rule that just moved or a word on a letter nobody translated, and ends with the one thing I would actually do about it. ' +
-      'A new guide lands most weekdays.</p></div>' +
+      'A new guide lands most weekdays.</p></div></div>' +
       '<div class="r">' +
       (d.toolCount ? '<a class="m" href="/tools">' + esc(d.toolCount) + ' of these carry a free calculator</a>' : '<a class="m" href="/tools">Free Berlin tools</a>') +
       '<a class="m" href="/blog">The rest of the blog</a>' +
