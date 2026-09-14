@@ -28,6 +28,15 @@
   // A shelf longer than this opens collapsed. The rows are already in the DOM,
   // so expanding is a class toggle and costs no request.
   var SHELF_PREVIEW = 10;
+  // The Monday letter is a real subscription: this posts to the same lead-asset
+  // API every magnet uses, so it inherits double opt-in, the stored consent
+  // snapshot and one-click unsubscribe. The Newsletter label is applied only
+  // after the reader clicks the confirmation link.
+  var LETTER_API = 'https://app.berlinwalk.com/api/download-lead';
+  var LETTER_ASSET_ID = 'berlin-weekly-letter';
+  var LETTER_ASSET_VERSION = '2026-09-v1';
+  var LETTER_CONSENT_VERSION = 'berlin-weekly-letter-v1-2026-09-14';
+  var LETTER_CONSENT_TEXT = 'Send me the BerlinWalk Monday letter: one email a week about what is actually changing in Berlin, plus occasional BerlinWalk emails. I can unsubscribe from any email with one click.';
 
   function categorySlug() {
     var m = window.location.pathname.toLowerCase().match(/\/blog\/categories\/([^/?#]+)/);
@@ -120,6 +129,30 @@
       '.bw-lib-more:hover{background:var(--hl);color:#123D18;}',
       '.bw-lib-more:focus-visible{outline:2px solid var(--stamp);outline-offset:-2px;}',
 
+      /* newsletter form */
+      '.bw-lib-letter{margin-top:40px;border:2px solid var(--ink);background:#fff;display:grid;grid-template-columns:1.15fr 1fr;}',
+      '.bw-lib-letter .l{padding:26px 28px;border-right:1px solid var(--ink);}',
+      '.bw-lib-letter .l h3{font-size:21px;letter-spacing:-.01em;margin:0 0 12px;color:var(--ink);}',
+      '.bw-lib-letter .l p{margin:0;max-width:48ch;font-size:15px;color:#2F3729;}',
+      '.bw-lib-letter .r{padding:26px 28px;display:flex;flex-direction:column;justify-content:center;gap:12px;background:#FBFBF6;}',
+      '.bw-lib-letter label.f{display:block;}',
+      '.bw-lib-letter label.f span{display:block;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin-bottom:6px;}',
+      '.bw-lib-letter input[type=email]{width:100%;border:1px solid var(--ink);background:#fff;padding:11px 12px;font:inherit;font-size:15px;border-radius:0;color:var(--ink);}',
+      '.bw-lib-letter input[type=email]:focus{outline:2px solid var(--stamp);outline-offset:-1px;}',
+      '.bw-lib-letter .cs{display:flex;gap:9px;align-items:flex-start;font-size:12px;line-height:1.45;color:#2F3729;}',
+      '.bw-lib-letter .cs input{margin:2px 0 0;flex:0 0 auto;width:15px;height:15px;accent-color:#1B5E20;}',
+      '.bw-lib-letter .cs a{color:var(--stamp);text-decoration:underline;text-underline-offset:2px;}',
+      '.bw-lib-letter button{appearance:none;border:1px solid #123D18;background:var(--hl);color:#123D18;cursor:pointer;',
+      'font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:13px 16px;border-radius:0;}',
+      '.bw-lib-letter button:hover{background:#123D18;color:var(--hl);}',
+      '.bw-lib-letter button[disabled]{opacity:.55;cursor:default;}',
+      '.bw-lib-letter .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}',
+      '.bw-lib-letter .msg{margin:0;font-size:13px;line-height:1.45;color:var(--stamp);}',
+      '.bw-lib-letter .msg.err{color:#8A1616;}',
+      '.bw-lib-letter .done{padding:26px 28px;}',
+      '.bw-lib-letter .done h3{font-size:21px;margin:0 0 10px;color:var(--ink);}',
+      '.bw-lib-letter .done p{margin:0;font-size:15px;color:#2F3729;max-width:52ch;}',
+
       /* closing note */
       '.bw-lib-note{margin-top:40px;border:2px solid var(--ink);background:#fff;display:grid;grid-template-columns:1.3fr 1fr;}',
       '.bw-lib-note .l{padding:26px 28px;border-right:1px solid var(--ink);}',
@@ -138,6 +171,8 @@
       '.bw-lib-wd{grid-template-columns:1fr;}',
       '.bw-lib-wd a{border-right:0;}',
       '.bw-lib-note{grid-template-columns:1fr;}',
+      '.bw-lib-letter{grid-template-columns:1fr;}',
+      '.bw-lib-letter .l{border-right:0;border-bottom:1px solid var(--ink);}',
       '.bw-lib-note .l{border-right:0;border-bottom:1px solid var(--ink);}',
       '}',
       '@media (max-width:640px){',
@@ -288,6 +323,91 @@
     );
   }
 
+  function letterHtml(d) {
+    return (
+      '<div class="bw-lib-sect"><div class="bw-lib-in">' +
+      '<div class="bw-lib-letter" data-bw-letter>' +
+      '<div class="l">' +
+      '<h3 class="m">One letter a week, about the week that is coming</h3>' +
+      '<p>Every Monday I send one email: the Berlin dates about to land, what I checked myself that week, ' +
+      'and the one move I would make. No tour pitch in it. If you live here, that is the part worth having.</p>' +
+      '</div>' +
+      '<form class="r" novalidate>' +
+      '<label class="f"><span>Your email</span>' +
+      '<input type="email" name="email" autocomplete="email" required placeholder="you@example.com"></label>' +
+      '<label class="cs"><input type="checkbox" name="consent" required>' +
+      '<span>' + LETTER_CONSENT_TEXT + ' <a href="/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>.</span></label>' +
+      '<label class="hp" aria-hidden="true" tabindex="-1">Leave this empty' +
+      '<input type="text" name="website" tabindex="-1" autocomplete="off"></label>' +
+      '<button type="submit" class="m">Send it to me</button>' +
+      '<p class="msg" data-bw-msg role="status" aria-live="polite"></p>' +
+      '</form></div></div></div>'
+    );
+  }
+
+  function bindLetter(host, d) {
+    var wrap = host.querySelector('[data-bw-letter]');
+    if (!wrap) return;
+    var form = wrap.querySelector('form');
+    var msg = wrap.querySelector('[data-bw-msg]');
+    var button = wrap.querySelector('button');
+    var startedAt = new Date().toISOString();
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var email = String(form.email.value || '').trim().toLowerCase();
+      if (!email || email.indexOf('@') < 1) {
+        msg.className = 'msg err';
+        msg.textContent = 'That email does not look right. Check it and try again.';
+        return;
+      }
+      if (!form.consent.checked) {
+        msg.className = 'msg err';
+        msg.textContent = 'Tick the box so I am allowed to email you.';
+        return;
+      }
+      button.disabled = true;
+      msg.className = 'msg';
+      msg.textContent = 'Sending.';
+      fetch(LETTER_API + '?action=submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          consent: true,
+          consentVersion: LETTER_CONSENT_VERSION,
+          assetId: LETTER_ASSET_ID,
+          assetVersion: LETTER_ASSET_VERSION,
+          sourceSlug: d.slug || '',
+          sourceUrl: window.location.href,
+          placement: 'category_footer',
+          variant: 'letter',
+          analyticsConsentAtSubmit: false,
+          screenWidth: Number(window.innerWidth || 0),
+          screenHeight: Number(window.innerHeight || 0),
+          website: String(form.website.value || ''),
+          startedAt: startedAt,
+          submittedAt: new Date().toISOString(),
+        }),
+      }).then(function (r) {
+        if (!r.ok) throw new Error('submit ' + r.status);
+        return r.json();
+      }).then(function () {
+        // The API answers the same way whatever it decides, so this only
+        // reports that the request was taken, never that a list was joined.
+        // The confirmation email is what actually subscribes the reader.
+        wrap.innerHTML =
+          '<div class="done"><h3 class="m">Check your inbox</h3>' +
+          '<p>I have sent one email to <strong>' + esc(email) + '</strong>. ' +
+          'Click the link in it to confirm, and the next letter reaches you on Monday morning. ' +
+          'If it is not there in a minute, look in the promotions or spam folder.</p></div>';
+      }).catch(function () {
+        button.disabled = false;
+        msg.className = 'msg err';
+        msg.textContent = 'That did not go through. Try again in a moment.';
+      });
+    });
+  }
+
   function noteHtml(d) {
     return (
       '<div class="bw-lib-sect"><div class="bw-lib-in">' +
@@ -350,9 +470,11 @@
       '<div class="bw-lib-sect"><div class="bw-lib-in">' + leadHtml(d) + '</div></div>' +
       glossaryHtml(d) +
       listHtml(d) +
+      letterHtml(d) +
       noteHtml(d) +
       '</div>';
     bindMoreButtons(host);
+    bindLetter(host, d);
     hideNativeFeed(host);
   }
 
