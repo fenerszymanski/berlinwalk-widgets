@@ -66,10 +66,17 @@ function bwBlogIndexRedesignOn() {
   }
 }
 
+// Deliberately not a force-cache. index.json and archive.json are rebuilt by
+// every daily blog publish, but BW_BLOG_INDEX_DATA_VERSION is bumped once a
+// day, so a reader who cached the file in the morning kept that morning's list
+// until the next day's bump. Three posts a day go out; two of them stayed
+// invisible until tomorrow. 'default' still treats the pin as a hard cache
+// break when it moves, and otherwise lets the Pages Cache-Control
+// (max-age=600) revalidate, which costs a 304 rather than a re-download.
 function bwBlogIndexFetchJsonOnce(url) {
   const store = window.__BW_BLOG_DATA_PROMISES || (window.__BW_BLOG_DATA_PROMISES = {});
   if (!store[url]) {
-    store[url] = fetch(url, { cache: 'force-cache' })
+    store[url] = fetch(url, { cache: 'default' })
       .then((response) => {
         if (!response.ok) throw new Error(`Blog data unavailable: ${response.status}`);
         return response.json();
