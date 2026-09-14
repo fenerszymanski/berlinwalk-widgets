@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-14T02:10:23.128Z",
+  "updatedAt": "2026-09-14T07:45:05.079Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 382,
-  "toolsTotal": 302,
+  "totalPosts": 383,
+  "toolsTotal": 303,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Health Insurance in Berlin: Which Krankenkasse You Can Actually Join and What the Gap Costs",
+      "slug": "health-insurance-in-berlin",
+      "path": "/post/health-insurance-in-berlin",
+      "url": "https://www.berlinwalk.com/post/health-insurance-in-berlin",
+      "excerpt": "The treatment catalogue is written into federal law and is the same in every statutory fund. The Zusatzbeitrag is not, and in 2026 it runs from 2.18 to 4.39 per cent. Here is which of the 46 funds a Berlin address can actually join, what the spread costs you at your own pay, and the two dates in section 175 SGB V that decide when you can leave.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-14T07:40:56.197Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_db8037a509db45ae887bf592fbf437d2~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/aok-hochhaus-kreuzberg.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_db8037a509db45ae887bf592fbf437d2~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/aok-hochhaus-kreuzberg.jpg",
+      "alt": "The AOK administration tower on Wilhelmstrasse in Berlin-Kreuzberg, a 1960s high-rise by Hans Scharoun and Bodo Fleischer, with the green AOK logo near the roof and a lower wing in front of it",
+      "relatedToolSlug": "berlin-krankenkasse-cost-spread"
+    },
+    {
       "title": "Berlin Rent Increase: Which of the Four Limits Actually Stops the Letter",
       "slug": "berlin-rent-increase",
       "path": "/post/berlin-rent-increase",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_b60ed643db534c739f1bd325331f2446~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hundeplatz-lichtenberg-run.jpg",
       "alt": "The sandy fenced dog run at Hundeplatz Lichtenberg with wooden agility steps, stacked tyres and a blue barrel under the trees",
       "relatedToolSlug": "berlin-off-leash-map"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Berlin Nebenkostenabrechnung: How to Check the Bill Line by Line Before the Deadline",
-      "slug": "berlin-nebenkostenabrechnung",
-      "path": "/post/berlin-nebenkostenabrechnung",
-      "url": "https://www.berlinwalk.com/post/berlin-nebenkostenabrechnung",
-      "excerpt": "Berlin publishes what every line on a Nebenkostenabrechnung normally costs per square metre. Put your own statement against it, watch the two twelve-month deadlines, and ask for the invoices behind the lines that sit above the range. This year the property-tax line is the one to compare.",
+      "title": "Health Insurance in Berlin: Which Krankenkasse You Can Actually Join and What the Gap Costs",
+      "slug": "health-insurance-in-berlin",
+      "path": "/post/health-insurance-in-berlin",
+      "url": "https://www.berlinwalk.com/post/health-insurance-in-berlin",
+      "excerpt": "The treatment catalogue is written into federal law and is the same in every statutory fund. The Zusatzbeitrag is not, and in 2026 it runs from 2.18 to 4.39 per cent. Here is which of the 46 funds a Berlin address can actually join, what the spread costs you at your own pay, and the two dates in section 175 SGB V that decide when you can leave.",
       "category": "Living in Berlin",
       "categorySlug": "living-in-berlin",
       "topic": "living-in-berlin",
       "topicLabel": "Living in Berlin",
-      "readTime": "9 min read",
-      "publishedDate": "2026-09-10T17:59:37.488Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_373b6da9ba0b4d65bf538d3a6407d96f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-weserstrasse-neukoelln.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_373b6da9ba0b4d65bf538d3a6407d96f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-weserstrasse-neukoelln.jpg",
-      "alt": "The yellow corner Altbau at Weserstrasse 58 and Wildenbruchstrasse 87 in Berlin-Neukölln with parked cars along both streets",
-      "relatedToolSlug": "berlin-nebenkosten-line-check"
-    }
-  ],
-  "allPosts": [
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-14T07:40:56.197Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_db8037a509db45ae887bf592fbf437d2~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/aok-hochhaus-kreuzberg.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_db8037a509db45ae887bf592fbf437d2~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/aok-hochhaus-kreuzberg.jpg",
+      "alt": "The AOK administration tower on Wilhelmstrasse in Berlin-Kreuzberg, a 1960s high-rise by Hans Scharoun and Bodo Fleischer, with the green AOK logo near the roof and a lower wing in front of it",
+      "relatedToolSlug": "berlin-krankenkasse-cost-spread"
+    },
     {
       "title": "Berlin Rent Increase: Which of the Four Limits Actually Stops the Letter",
       "slug": "berlin-rent-increase",
