@@ -11657,5 +11657,35 @@
         "a": "Look up your own Mietspiegel field first at the Senate query service, because the Wohnlage is assigned street by street and it is the single most disputed line in these letters. Then take the letter to a Mieterverein or to your district free Mieterberatung, well before the end of the second calendar month. Membership costs around a hundred euro a year and pays for itself the first time it takes a wrong forty euro off a letter that would otherwise have run for years. Checked on 13 September 2026."
       }
     ]
+  },
+  "health-insurance-in-berlin": {
+    "title": "Health Insurance in Berlin - FAQ",
+    "subtitle": "Which funds a Berlin address can actually join, what the difference costs at your income, and the two dates that let you move.",
+    "items": [
+      {
+        "q": "How much does health insurance cost in Berlin?",
+        "a": "The general contribution rate is fixed nationally at 14.6 per cent of gross pay, or 14.0 per cent for people with no claim to sick pay. On top of that each fund charges its own Zusatzbeitrag, which in 2026 runs from 2.18 per cent at BKK firmus to 4.39 per cent at BKK24. If you are employed, your employer pays half of both parts, so on 4,000 euro gross a month your own share is between 335.60 and 379.80 euro depending only on which fund you are in. Nothing you earn above 5,812.50 euro a month is counted. Care insurance of 3.6 per cent, or 4.2 per cent if you are childless and over 23, sits on top and is the same everywhere."
+      },
+      {
+        "q": "Which Krankenkassen can I actually join in Berlin?",
+        "a": "Forty-six of them. The GKV-Spitzenverband register lists every statutory fund with the federal states it is open in. Thirty-four are open nationwide, so a Berlin address qualifies automatically. Twelve more are regional funds whose list of states includes Berlin, among them BKK firmus, SKD BKK, Bosch BKK, Bertelsmann BKK, AOK Nordost and Innungskrankenkasse Brandenburg und Berlin. The remaining funds on the register are betriebsbezogen, meaning only the employees of that company may join, which is why some very cheap rates in comparison tables are not available to you."
+      },
+      {
+        "q": "Is the cover worse at a cheaper Krankenkasse?",
+        "a": "No. The catalogue of treatment is set by the Sozialgesetzbuch and is the same in every statutory fund: the same doctors, the same hospitals, the same prescriptions and the same co-payments. What differs is at the edges. A fund may add Satzungsleistungen in its own statute, such as extra vaccinations or more osteopathy sessions, and many run bonus programmes that pay something back for check-ups or a gym card. The practical difference in Berlin is often how well a fund handles English, which no table measures. Send one email in English before you move and judge the answer."
+      },
+      {
+        "q": "Can I change my health insurance fund at any time?",
+        "a": "Almost. Under section 175 SGB V you are bound to the fund you chose for at least twelve months, and a change takes effect at the end of the second calendar month counted from the month you declare it, so a September declaration means cover starts at the new fund on 1 December. There is one exception: if your fund raises its Zusatzbeitrag you may move regardless of the twelve months, and that right runs until the end of the month for which the higher rate is first charged. Because rates normally change on 1 January, January is when almost everybody is briefly free to switch."
+      },
+      {
+        "q": "Do I have to cancel my old Krankenkasse myself?",
+        "a": "No, and you should not try. Since 2021 the notification from your new fund replaces your own cancellation, under section 175(4) SGB V. You fill in one application at the fund you want, it tells the old one, and the handover happens without a day of missing cover. Your Versichertennummer stays the same and the new card arrives before the change takes effect."
+      },
+      {
+        "q": "What do freelancers and students in Berlin pay?",
+        "a": "A self-employed person who is voluntarily insured carries the whole contribution with no employer half, which doubles the effect of the Zusatzbeitrag. On 4,000 euro a month at the reduced 14.0 per cent rate, that is 647.20 euro at the cheapest open fund and 700.00 euro at AOK Nordost. The contribution is calculated on at least 1,318.33 euro a month even in a month with no income. A student under 30 pays a flat sum instead: 87.38 euro for the health part plus the Zusatzbeitrag charged on an assessment base of 855.00 euro, so between 106.02 and 124.91 euro a month depending on the fund."
+      }
+    ]
   }
 }

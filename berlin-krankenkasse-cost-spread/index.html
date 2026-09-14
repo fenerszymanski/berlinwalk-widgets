@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Krankenkasse Cost Spread</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --soft: #C5E1A5;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --muted: #5a665b;
+    --line: rgba(27, 94, 32, .18);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .ks { max-width: 800px; margin: 0 auto; padding: 14px 12px 16px; }
+  .ks-head h2 { font-size: 1.06rem; margin: 0 0 4px; color: var(--green); }
+  .ks-head p { margin: 0; font-size: .78rem; color: var(--muted); line-height: 1.55; }
+
+  .ks-box { margin-top: 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 11px 12px 13px; }
+  .ks-box h3 { font-size: .63rem; letter-spacing: .07em; text-transform: uppercase; color: var(--deep); margin: 0 0 9px; }
+
+  .ks-modes { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ks-mode {
+    font-family: inherit; font-size: .68rem; font-weight: 600; padding: 6px 11px; border-radius: 999px;
+    border: 1px solid var(--green); background: #fff; color: var(--green); cursor: pointer;
+  }
+  .ks-mode[aria-pressed="true"] { background: var(--green); color: #fff; }
+  .ks-mode:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid var(--yellow); outline-offset: 1px; }
+
+  .ks-fields { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 10px; margin-top: 11px; align-items: end; }
+  @media (max-width: 520px) { .ks-fields { grid-template-columns: 1fr; } }
+  .ks-f label { display: block; font-size: .68rem; font-weight: 600; color: var(--deep); margin-bottom: 4px; line-height: 1.35; }
+  .ks-f input, .ks-f select {
+    font-family: inherit; font-size: .82rem; width: 100%; padding: 8px 10px;
+    border: 1px solid var(--green); border-radius: 8px; background: #fff; color: var(--ink);
+  }
+  .ks-f input[disabled] { background: #f1f2ef; color: var(--muted); border-color: var(--line); }
+  .ks-modenote { font-size: .66rem; color: var(--muted); line-height: 1.55; margin: 9px 0 0; }
+
+  .ks-plot { margin-top: 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 11px 10px 9px; }
+  .ks-plot canvas { display: block; width: 100%; height: 236px; }
+  .ks-key { display: flex; flex-wrap: wrap; gap: 5px 16px; margin-top: 7px; font-size: .64rem; color: var(--muted); }
+  .ks-key i { display: inline-block; width: 10px; height: 10px; border-radius: 999px; vertical-align: -1px; margin-right: 5px; }
+  .ks-key i.bar { width: 3px; height: 12px; border-radius: 1px; vertical-align: -2px; }
+
+  .ks-out { margin-top: 12px; border-radius: 10px; background: var(--deep); color: #fff; padding: 13px 14px 14px; }
+  .ks-out .big { font-size: 1.55rem; font-weight: 800; line-height: 1.1; color: var(--yellow); }
+  .ks-out .big span { font-size: .78rem; font-weight: 600; color: #fff; display: block; margin-top: 6px; line-height: 1.5; }
+  .ks-cells { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 12px; padding-top: 11px; border-top: 1px solid rgba(255,255,255,.2); }
+  .ks-cells .cell { min-width: 126px; }
+  .ks-cells .v { font-size: 1rem; font-weight: 700; color: var(--yellow); }
+  .ks-cells .k { font-size: .64rem; color: rgba(255,255,255,.85); line-height: 1.45; margin-top: 2px; }
+
+  .ks-rows { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+  .ks-rows li { display: flex; align-items: baseline; gap: 9px; font-size: .71rem; background: var(--cream); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; }
+  .ks-rows li b { color: var(--deep); }
+  .ks-rows li .tag { font-size: .6rem; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
+  .ks-rows li .sp { margin-left: auto; font-weight: 700; color: var(--green); white-space: nowrap; }
+  .ks-rows li.mine { border-color: var(--green); background: #fff; }
+
+  .ks-move { margin-top: 12px; padding: 10px 12px; border-radius: 8px; background: var(--yellow); color: var(--deep); font-size: .77rem; line-height: 1.5; font-weight: 600; }
+  .ks-move b { text-transform: uppercase; letter-spacing: .06em; font-size: .62rem; display: block; margin-bottom: 3px; }
+  .ks-note { margin-top: 11px; font-size: .66rem; color: var(--muted); line-height: 1.6; }
+  .ks-note a { color: var(--green); }
+</style>
+</head>
+<body>
+<div class="ks">
+  <div class="ks-head">
+    <h2>Berlin Krankenkasse Cost Spread</h2>
+    <p>Every statutory health fund a Berlin address can join, placed on one axis at what it would take from you each month. The care contribution is identical everywhere, so it is not on this axis.</p>
+  </div>
+
+  <div class="ks-box">
+    <h3>How you are insured</h3>
+    <div class="ks-modes" role="group" aria-label="How you are insured" id="modes"></div>
+    <div class="ks-fields">
+      <div class="ks-f">
+        <label for="pay">Gross pay, euros a month</label>
+        <input id="pay" type="number" min="0" max="20000" step="50" value="4000" inputmode="numeric">
+      </div>
+      <div class="ks-f">
+        <label for="mine">The fund you are in now</label>
+        <select id="mine"></select>
+      </div>
+    </div>
+    <p class="ks-modenote" id="modenote"></p>
+  </div>
+
+  <div class="ks-plot">
+    <canvas id="plot" aria-label="Every health fund open in Berlin plotted by what it costs you each month"></canvas>
+    <div class="ks-key">
+      <span><i style="background:#7CB342"></i>Open nationwide</span>
+      <span><i style="background:#1B5E20"></i>Open in Berlin by region</span>
+      <span><i class="bar" style="background:#123D18"></i>Your fund</span>
+      <span><i class="bar" style="background:#B4472E"></i>Official average, 2.9 per cent</span>
+    </div>
+  </div>
+
+  <div class="ks-out">
+    <div class="big" id="gap">&nbsp;<span id="gapline"></span></div>
+    <div class="ks-cells">
+      <div class="cell"><div class="v" id="v-mine"></div><div class="k" id="k-mine"></div></div>
+      <div class="cell"><div class="v" id="v-low"></div><div class="k" id="k-low"></div></div>
+      <div class="cell"><div class="v" id="v-rank"></div><div class="k">where your fund sits in the 46</div></div>
+    </div>
+  </div>
+
+  <div class="ks-box">
+    <h3>The six cheapest funds a Berlin address can join</h3>
+    <ul class="ks-rows" id="rows"></ul>
+  </div>
+
+  <div class="ks-move">
+    <b>My move</b>
+    <span id="move"></span>
+  </div>
+
+  <p class="ks-note" id="note"></p>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var DATA = null;
+  var mode = 'employed';
+  var mineName = 'AOK Nordost - Die Gesundheitskasse';
+  var MODES = [
+    { id: 'employed', label: 'Employed', note: 'Your employer pays half of the 14.6 per cent and half of the Zusatzbeitrag, so the figures below are your half only. Nothing above the ceiling of 5,812.50 euros a month counts.' },
+    { id: 'freelance', label: 'Freelance, voluntarily insured', note: 'Voluntarily insured and self-employed means you carry the whole contribution yourself. This uses the reduced rate of 14.0 per cent, which is the one without sick pay; with sick pay it is 14.6. The assessment floor is 1,318.33 euros a month and the ceiling is 5,812.50.' },
+    { id: 'student', label: 'Student under 30', note: 'Student cover is a flat sum, not a share of what you earn, so the pay field is switched off here. The health part is 87.38 euros plus the Zusatzbeitrag charged on an assessment base of 855.00 euros a month.' }
+  ];
+  function el(id) { return document.getElementById(id); }
+  function euro(n) { return n.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+  function euro0(n) { return Math.round(n).toLocaleString('en-GB'); }
+
+  function monthly(rate) {
+    var r = DATA.rates;
+    if (mode === 'student') return r.studentHealthMonthly + r.studentBase * rate / 100;
+    var pay = Number(el('pay').value);
+    if (!isFinite(pay) || pay < 0) pay = 0;
+    if (mode === 'freelance') {
+      var base = Math.min(Math.max(pay, r.voluntaryMinBase), r.ceilingMonthly);
+      return base * (r.reducedPercent + rate) / 100;
+    }
+    var b = Math.min(pay, r.ceilingMonthly);
+    return b * (r.generalPercent + rate) / 200;
+  }
+
+  function draw(list, mineCost, lowCost) {
+    var cv = el('plot');
+    var box = cv.getBoundingClientRect();
+    var dpr = window.devicePixelRatio || 1;
+    var W = Math.max(280, Math.round(box.width));
+    var H = 236;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    var g = cv.getContext('2d');
+    g.setTransform(dpr, 0, 0, dpr, 0, 0);
+    g.clearRect(0, 0, W, H);
+
+    var padL = 14, padR = 14, axisY = H - 34, topY = 46;
+    var lo = list[0].cost, hi = list[list.length - 1].cost;
+    var span = Math.max(hi - lo, 0.01);
+    lo -= span * 0.08; hi += span * 0.08; span = hi - lo;
+    function x(c) { return padL + (c - lo) / span * (W - padL - padR); }
+
+    // band between the cheapest fund and yours
+    if (mineCost > lowCost) {
+      g.fillStyle = 'rgba(255, 230, 0, .30)';
+      g.fillRect(x(lowCost), topY - 8, x(mineCost) - x(lowCost), axisY - topY + 8);
+    }
+
+    // axis
+    g.strokeStyle = 'rgba(27,94,32,.35)'; g.lineWidth = 1;
+    g.beginPath(); g.moveTo(padL, axisY + .5); g.lineTo(W - padR, axisY + .5); g.stroke();
+    g.fillStyle = '#5a665b'; g.font = '10px Montserrat, sans-serif';
+    var ticks = 4;
+    for (var t = 0; t <= ticks; t++) {
+      var c = lo + span * t / ticks;
+      var px = x(c);
+      g.strokeStyle = 'rgba(27,94,32,.18)';
+      g.beginPath(); g.moveTo(px + .5, topY - 10); g.lineTo(px + .5, axisY); g.stroke();
+      g.textAlign = t === 0 ? 'left' : (t === ticks ? 'right' : 'center');
+      g.fillText(euro0(c) + ' €', px, axisY + 14);
+    }
+    g.textAlign = 'center';
+    g.fillText('your share of the health contribution, euros a month', W / 2, axisY + 28);
+
+    // dots, jittered into rows so the crowd is readable
+    var rows = 7, rowH = (axisY - topY) / rows;
+    for (var i = 0; i < list.length; i++) {
+      var f = list[i];
+      var px2 = x(f.cost);
+      var py = topY + rowH * (i % rows) + rowH / 2;
+      g.beginPath();
+      g.arc(px2, py, 5, 0, Math.PI * 2);
+      g.fillStyle = f.reach === 'nationwide' ? '#7CB342' : '#1B5E20';
+      g.globalAlpha = .92; g.fill(); g.globalAlpha = 1;
+      g.strokeStyle = '#FAFAF5'; g.lineWidth = 1.2; g.stroke();
+    }
+
+    // the official average, as a reference line
+    var avgCost = monthly(DATA.rates.averageZusatzPercent);
+    if (avgCost > lo && avgCost < hi) {
+      g.strokeStyle = '#B4472E'; g.lineWidth = 2;
+      g.setLineDash([4, 3]);
+      g.beginPath(); g.moveTo(x(avgCost), topY - 12); g.lineTo(x(avgCost), axisY); g.stroke();
+      g.setLineDash([]);
+    }
+
+    // your fund
+    g.strokeStyle = '#123D18'; g.lineWidth = 3;
+    g.beginPath(); g.moveTo(x(mineCost), topY - 18); g.lineTo(x(mineCost), axisY); g.stroke();
+    g.fillStyle = '#123D18'; g.font = '700 11px Montserrat, sans-serif';
+    var labelX = Math.min(Math.max(x(mineCost), padL + 42), W - padR - 42);
+    g.textAlign = 'center';
+    g.fillText('you pay ' + euro(mineCost) + ' €', labelX, topY - 24);
+
+    // the cheapest one
+    g.fillStyle = '#1B5E20'; g.font = '600 10px Montserrat, sans-serif';
+    g.textAlign = 'center';
+    var lowX = Math.min(Math.max(x(lowCost), padL + 48), W - padR - 48);
+    if (Math.abs(lowX - labelX) > 96) g.fillText('cheapest open here', lowX, topY - 24);
+  }
+
+  function run() {
+    if (!DATA) return;
+    var list = DATA.funds.map(function (f) {
+      return { name: f.name, rate: f.rate, reach: f.reach, cost: monthly(f.rate) };
+    });
+    list.sort(function (a, b) { return a.cost - b.cost; });
+
+    var mineIdx = 0;
+    for (var i = 0; i < list.length; i++) if (list[i].name === mineName) mineIdx = i;
+    var mine = list[mineIdx];
+    var low = list[0];
+    var gapMonth = mine.cost - low.cost;
+
+    draw(list, mine.cost, low.cost);
+
+    el('gap').childNodes[0].nodeValue = euro0(gapMonth * 12) + ' € a year';
+    el('gapline').textContent = gapMonth < 0.5
+      ? 'You are already in the cheapest fund open to a Berlin address. There is nothing to win by moving.'
+      : 'is what the gap between ' + mine.name + ' and ' + low.name + ' is worth to you, at ' + euro(gapMonth) + ' € a month.';
+
+    el('v-mine').textContent = euro(mine.cost) + ' €';
+    el('k-mine').textContent = mine.name + ', Zusatzbeitrag ' + mine.rate.toFixed(2).replace('.', ',') + ' per cent';
+    el('v-low').textContent = euro(low.cost) + ' €';
+    el('k-low').textContent = low.name + ', Zusatzbeitrag ' + low.rate.toFixed(2).replace('.', ',') + ' per cent';
+    el('v-rank').textContent = (mineIdx + 1) + ' of ' + list.length;
+
+    var six = list.slice(0, 6);
+    var html = '';
+    for (var j = 0; j < six.length; j++) {
+      var f = six[j];
+      html += '<li' + (f.name === mineName ? ' class="mine"' : '') + '><b>' + f.name + '</b>'
+        + '<span class="tag">' + (f.reach === 'nationwide' ? 'nationwide' : 'open in Berlin') + '</span>'
+        + '<span class="sp">' + euro(f.cost) + ' €</span></li>';
+    }
+    el('rows').innerHTML = html;
+
+    el('move').textContent = gapMonth < 0.5
+      ? 'Stay where you are and check this again in January, when the funds publish the rates for the next year.'
+      : 'Do not cancel anything. Apply to the fund you want, let it tell your old one, and your cover carries on without a gap. You are bound to a fund for twelve months, and a move takes effect at the end of the second calendar month after you declare it.';
+
+    el('note').innerHTML = 'Rates and openness read from the GKV-Spitzenverband Krankenkassenliste of 14 September 2026; contribution rates and ceilings from its Rechengroessen factsheet for 2026. '
+      + 'Pflegeversicherung of 3.6 per cent, or 4.2 per cent if you are childless and over 23, is identical in every fund and is not counted here. '
+      + 'Checked on ' + DATA.checkedOn + '. <a href="' + DATA.sourceUrl + '" target="_blank" rel="noopener">Official fund list</a>.';
+  }
+
+  function paint() {
+    el('modes').innerHTML = MODES.map(function (m) {
+      return '<button class="ks-mode" type="button" aria-pressed="' + (m.id === mode) + '" data-m="' + m.id + '">' + m.label + '</button>';
+    }).join('');
+    Array.prototype.forEach.call(el('modes').querySelectorAll('.ks-mode'), function (b) {
+      b.addEventListener('click', function () {
+        mode = b.getAttribute('data-m');
+        paint();
+        run();
+      });
+    });
+    var m = MODES.filter(function (x) { return x.id === mode; })[0];
+    el('modenote').textContent = m.note;
+    el('pay').disabled = mode === 'student';
+  }
+
+  function boot() {
+    if (!DATA) { el('note').textContent = 'The fund list could not be loaded.'; return; }
+    var opts = DATA.funds.slice();
+    opts.sort(function (a, b) { return a.name.localeCompare(b.name); });
+    el('mine').innerHTML = opts.map(function (f) {
+      return '<option value="' + f.name.replace(/"/g, '&quot;') + '"' + (f.name === mineName ? ' selected' : '') + '>'
+        + f.name + ' (' + f.rate.toFixed(2).replace('.', ',') + ' %)</option>';
+    }).join('');
+    el('mine').addEventListener('change', function () { mineName = el('mine').value; run(); });
+    el('pay').addEventListener('input', run);
+    paint();
+    run();
+  }
+
+  var redrawTimer = null;
+  window.addEventListener('resize', function () {
+    if (redrawTimer) clearTimeout(redrawTimer);
+    redrawTimer = setTimeout(run, 120);
+  });
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (j) {
+    DATA = j;
+    boot();
+  }).catch(function () { boot(); });
+})();
+</script>
+</body>
+</html>

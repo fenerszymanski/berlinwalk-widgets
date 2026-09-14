@@ -1,0 +1,295 @@
+{
+  "source": "GKV-Spitzenverband Krankenkassenliste of 14 September 2026 (every statutory fund, its Zusatzbeitragssatz and the states it is open in). Rates and ceilings: GKV-Spitzenverband factsheet Rechengroessen und Grenzwerte im Versicherungs- und Beitragsrecht fuer das Jahr 2026, 26 November 2025.",
+  "sourceUrl": "https://www.gkv-spitzenverband.de/krankenkassenliste.pdf",
+  "checkedOn": "2026-09-14",
+  "rates": {
+    "generalPercent": 14.6,
+    "reducedPercent": 14,
+    "averageZusatzPercent": 2.9,
+    "carePercent": 3.6,
+    "careChildlessExtraPercent": 0.6,
+    "ceilingMonthly": 5812.5,
+    "ceilingYearly": 69750,
+    "studentBase": 855,
+    "studentHealthMonthly": 87.38,
+    "voluntaryMinBase": 1318.33
+  },
+  "funds": [
+    {
+      "name": "BKK firmus",
+      "rate": 2.18,
+      "reach": "regional",
+      "openIn": "Baden-Württemberg, Bayern, Berlin, Bremen, Hamburg, Hessen, Niedersachsen, Nordrhein-Westfalen, Sachsen, Sachsen-Anhalt"
+    },
+    {
+      "name": "TUI BKK",
+      "rate": 2.5,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "Handelskrankenkasse (hkk)",
+      "rate": 2.59,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "Audi BKK",
+      "rate": 2.6,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "Techniker Krankenkasse",
+      "rate": 2.69,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "WMF BKK",
+      "rate": 2.85,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "HEK - Hanseatische Krankenkasse",
+      "rate": 2.89,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "SKD BKK",
+      "rate": 2.98,
+      "reach": "regional",
+      "openIn": "Baden-Württemberg, Bayern, Berlin, Bremen, Hamburg, Hessen, Niedersachsen, Nordrhein-Westfalen, Saarland, Sachsen, Schleswig-Holstein Sozialversicherung für Landwirtschaft, Forsten und Gartenbau (SVLFG)"
+    },
+    {
+      "name": "BKK Freudenberg",
+      "rate": 2.99,
+      "reach": "regional",
+      "openIn": "Baden-Württemberg, Bayern, Berlin, Hessen, Niedersachsen, Nordrhein-Westfalen, Rheinland-Pfalz, Sachsen"
+    },
+    {
+      "name": "BKK Linde",
+      "rate": 2.99,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "Bosch BKK",
+      "rate": 3.18,
+      "reach": "regional",
+      "openIn": "Baden-Württemberg, Bayern, Berlin, Brandenburg, Hamburg, Hessen, Mecklenburg-Vorpommern, Niedersachsen, Nordrhein-Westfalen, Rheinland-Pfalz, Saarland, Sachsen, Sachsen-Anhalt, Thüringen"
+    },
+    {
+      "name": "Bertelsmann BKK",
+      "rate": 3.2,
+      "reach": "regional",
+      "openIn": "Baden-Württemberg, Bayern, Berlin, Hamburg, Hessen, Mecklenburg-Vorpommern, Niedersachsen, Nordrhein-Westfalen, Sachsen, Thüringen"
+    },
+    {
+      "name": "DAK-Gesundheit",
+      "rate": 3.2,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "Debeka BKK",
+      "rate": 3.25,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "BARMER",
+      "rate": 3.29,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "Salus BKK",
+      "rate": 3.29,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "Continentale Betriebskrankenkasse",
+      "rate": 3.33,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "IKK gesund plus",
+      "rate": 3.39,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "BKK GILDEMEISTER SEIDENSTICKER",
+      "rate": 3.4,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "ZF BKK",
+      "rate": 3.4,
+      "reach": "regional",
+      "openIn": "Baden-Württemberg, Bayern, Berlin, Brandenburg, Bremen, Hamburg, Hessen, Niedersachsen, Nordrhein-Westfalen, Rheinland-Pfalz, Saarland, Sachsen, Sachsen-Anhalt, Thüringen"
+    },
+    {
+      "name": "R+V Betriebskrankenkasse",
+      "rate": 3.49,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "AOK Nordost - Die Gesundheitskasse",
+      "rate": 3.5,
+      "reach": "regional",
+      "openIn": "Berlin, Brandenburg, Mecklenburg-Vorpommern AOK NordWest -Die Gesundheitskasse"
+    },
+    {
+      "name": "BKK mkk - meine krankenkasse",
+      "rate": 3.5,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "novitas bkk",
+      "rate": 3.6,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "BAHN-BKK",
+      "rate": 3.65,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "BIG direkt gesund",
+      "rate": 3.69,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "Pronova BKK",
+      "rate": 3.7,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "KKH Kaufmännische Krankenkasse",
+      "rate": 3.78,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "BKK ProVita",
+      "rate": 3.79,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "vivida bkk",
+      "rate": 3.79,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "BKK Diakonie",
+      "rate": 3.8,
+      "reach": "regional",
+      "openIn": "Baden-Württemberg, Bayern, Berlin, Brandenburg, Bremen, Hamburg, Hessen, Mecklenburg-Vorpommern, Niedersachsen, Nordrhein-Westfalen, Rheinland-Pfalz, Sachsen, Sachsen-Anhalt, Schleswig-Holstein"
+    },
+    {
+      "name": "Siemens-Betriebskrankenkasse (SBK)",
+      "rate": 3.8,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "IKK classic",
+      "rate": 3.85,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "mhplus Betriebskrankenkasse",
+      "rate": 3.86,
+      "reach": "regional",
+      "openIn": "Baden-Württemberg, Bayern, Berlin, Bremen, Hamburg, Hessen, Mecklenburg-Vorpommern, Niedersachsen, Nordrhein-Westfalen, Rheinland-Pfalz, Saarland, Sachsen, Schleswig-Holstein, Thüringen"
+    },
+    {
+      "name": "Betriebskrankenkasse Mobil",
+      "rate": 3.89,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "BKK VerbundPlus",
+      "rate": 3.89,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "BKK Pfalz",
+      "rate": 3.9,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "Heimat Krankenkasse",
+      "rate": 3.9,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "SECURVITA BKK",
+      "rate": 3.9,
+      "reach": "regional",
+      "openIn": "Baden-Württemberg, Bayern, Berlin, Brandenburg, Hamburg, Hessen, Mecklenburg-Vorpommern, Niedersachsen, Nordrhein-Westfalen, Rheinland-Pfalz, Sachsen, Sachsen-Anhalt, Schleswig-Holstein, Thüringen"
+    },
+    {
+      "name": "energie-Betriebskrankenkasse",
+      "rate": 3.98,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "BKK WIRTSCHAFT UND FINANZEN",
+      "rate": 3.99,
+      "reach": "regional",
+      "openIn": "Baden-Württemberg, Bayern, Berlin, Brandenburg, Bremen, Hamburg, Hessen, Niedersachsen, Nordrhein-Westfalen, Rheinland-Pfalz, Saarland, Sachsen"
+    },
+    {
+      "name": "VIACTIV Krankenkasse",
+      "rate": 4.19,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "IKK - Die Innovationskasse",
+      "rate": 4.3,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "KNAPPSCHAFT",
+      "rate": 4.3,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    },
+    {
+      "name": "INNUNGSKRANKENKASSE BRANDENBURG UND BERLIN",
+      "rate": 4.35,
+      "reach": "regional",
+      "openIn": "Berlin, Brandenburg"
+    },
+    {
+      "name": "BKK24",
+      "rate": 4.39,
+      "reach": "nationwide",
+      "openIn": "bundesweit"
+    }
+  ]
+}
