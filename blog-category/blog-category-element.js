@@ -217,10 +217,18 @@
     );
   }
 
-  function rowHtml(p, index) {
+  // A block only collapses when collapsing actually saves the reader
+  // something. Hiding one or two rows behind a button is worse than showing
+  // them, and a flat category is small enough to show whole.
+  function previewLimit(total, mode) {
+    if (mode === 'flat') return Infinity;
+    return total - SHELF_PREVIEW < 3 ? Infinity : SHELF_PREVIEW;
+  }
+
+  function rowHtml(p, index, limit) {
     var num = index < 9 ? '0' + (index + 1) : String(index + 1);
     var fig = p.figure ? '<span class="f m">' + p.figure + '</span> ' : '';
-    var hidden = index >= SHELF_PREVIEW ? ' bw-lib-extra' : '';
+    var hidden = index >= limit ? ' bw-lib-extra' : '';
     return (
       '<a class="bw-lib-row' + hidden + '" href="' + esc(p.path) + '">' +
       '<span class="n m">' + num + '</span>' +
@@ -233,7 +241,7 @@
   }
 
   function moreButton(count) {
-    if (count <= 0) return '';
+    if (!isFinite(count) || count <= 0) return '';
     return (
       '<button type="button" class="bw-lib-more m" data-bw-more>' +
       'Show the other ' + count + '</button>'
@@ -248,12 +256,12 @@
     if (d.shelfMode === 'flat') {
       var flat = d.flat || [];
       if (!flat.length) return '';
+      var flatLimit = previewLimit(flat.length, 'flat');
       body =
         '<div class="bw-lib-shelf">' +
         '<div class="bw-lib-shelf-h"><h3 class="m">All ' + flat.length + ' guides</h3>' +
         '<span>Newest first</span></div>' +
-        flat.map(rowHtml).join('') +
-        moreButton(flat.length - SHELF_PREVIEW) +
+        flat.map(function (p, i) { return rowHtml(p, i, flatLimit); }).join('') +
         '</div>';
       return '<div class="bw-lib-sect"><div class="bw-lib-in">' + body + '</div></div>';
     }
@@ -261,12 +269,13 @@
     var shelves = d.shelves || [];
     if (!shelves.length) return '';
     body = shelves.map(function (shelf) {
+      var limit = previewLimit(shelf.posts.length, d.shelfMode);
       return (
         '<div class="bw-lib-shelf">' +
         '<div class="bw-lib-shelf-h"><h3 class="m">' + shelf.title + '</h3>' +
         '<span>' + (shelf.lead || '') + '</span></div>' +
-        shelf.posts.map(rowHtml).join('') +
-        moreButton(shelf.posts.length - SHELF_PREVIEW) +
+        shelf.posts.map(function (p, i) { return rowHtml(p, i, limit); }).join('') +
+        moreButton(isFinite(limit) ? shelf.posts.length - limit : 0) +
         '</div>'
       );
     }).join('');
