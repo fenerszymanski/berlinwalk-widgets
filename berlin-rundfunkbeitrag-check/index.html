@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rundfunkbeitrag Check</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --soft: #C5E1A5;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --muted: #5a665b;
+    --line: rgba(27, 94, 32, .18);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .rk { max-width: 800px; margin: 0 auto; padding: 14px 12px 16px; }
+  .rk-head h2 { font-size: 1.06rem; margin: 0 0 4px; color: var(--green); }
+  .rk-head p { margin: 0; font-size: .78rem; color: var(--muted); line-height: 1.55; }
+
+  .rk-box { margin-top: 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 11px 12px 13px; }
+  .rk-box h3 { font-size: .63rem; letter-spacing: .07em; text-transform: uppercase; color: var(--deep); margin: 0 0 9px; }
+
+  .rk-fields { display: grid; grid-template-columns: 168px minmax(0, 1fr); gap: 10px 12px; align-items: end; }
+  @media (max-width: 560px) { .rk-fields { grid-template-columns: 1fr; } }
+  .rk-f label { display: block; font-size: .68rem; font-weight: 600; color: var(--deep); margin-bottom: 4px; line-height: 1.35; }
+  .rk-f input, .rk-f select {
+    font-family: inherit; font-size: .82rem; width: 100%; padding: 8px 10px;
+    border: 1px solid var(--green); border-radius: 8px; background: #fff; color: var(--ink);
+  }
+  .rk-f.wide { grid-column: 1 / -1; }
+  input:focus-visible, select:focus-visible { outline: 3px solid var(--yellow); outline-offset: 1px; }
+  .rk-note { font-size: .66rem; color: var(--muted); line-height: 1.55; margin: 9px 0 0; }
+
+  .rk-plot { margin-top: 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 11px 10px 9px; }
+  .rk-plot canvas { display: block; width: 100%; height: 220px; }
+  .rk-key { display: flex; flex-wrap: wrap; gap: 5px 16px; margin-top: 8px; font-size: .64rem; color: var(--muted); }
+  .rk-key i { display: inline-block; width: 11px; height: 11px; border-radius: 2px; vertical-align: -1px; margin-right: 5px; }
+
+  .rk-out { margin-top: 12px; border-radius: 10px; background: var(--deep); color: #fff; padding: 13px 14px 14px; }
+  .rk-out .big { font-size: 1.5rem; font-weight: 800; line-height: 1.15; color: var(--yellow); }
+  .rk-out .big span { font-size: .78rem; font-weight: 600; color: #fff; display: block; margin-top: 6px; line-height: 1.5; }
+  .rk-cells { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 12px; padding-top: 11px; border-top: 1px solid rgba(255,255,255,.2); }
+  .rk-cells .cell { min-width: 132px; }
+  .rk-cells .v { font-size: 1rem; font-weight: 700; color: var(--yellow); }
+  .rk-cells .k { font-size: .64rem; color: rgba(255,255,255,.85); line-height: 1.45; margin-top: 2px; }
+  .rk-move { margin-top: 12px; padding: 11px 12px; border-radius: 9px; background: var(--yellow); color: var(--deep); font-size: .76rem; line-height: 1.55; font-weight: 600; }
+  .rk-foot { margin-top: 11px; font-size: .63rem; color: var(--muted); line-height: 1.55; }
+  .rk-foot a { color: var(--green); }
+</style>
+</head>
+<body>
+<div class="rk">
+  <div class="rk-head">
+    <h2>Rundfunkbeitrag check: what your Berlin address owes</h2>
+    <p>The contribution is charged on the flat, not on you and not on your devices. One flat owes 18.36 euro a month. Tell this what is actually registered at your door and it draws the months since you moved in, so a second account shows up as a widening band.</p>
+  </div>
+
+  <div class="rk-box">
+    <h3>Your address</h3>
+    <div class="rk-fields">
+      <div class="rk-f">
+        <label for="rk-start">The month this living situation started</label>
+        <input type="date" id="rk-start" min="2021-08-01">
+      </div>
+      <div class="rk-f">
+        <label for="rk-case">What is registered for this flat</label>
+        <select id="rk-case">
+          <option value="one-mine">One account, and it is mine</option>
+          <option value="one-other">One account, and a flatmate holds it</option>
+          <option value="two-flat" selected>Two accounts behind this one flat door</option>
+          <option value="two-old">My account here, plus the flat I moved out of</option>
+          <option value="second-home">This is my second home, I pay for my main one</option>
+          <option value="hall-room">A hall room off a shared corridor, one account</option>
+          <option value="none">Nobody is registered here</option>
+        </select>
+      </div>
+      <div class="rk-f wide">
+        <label for="rk-relief">Relief you are entitled to</label>
+        <select id="rk-relief">
+          <option value="none" selected>None of the listed grounds</option>
+          <option value="exempt">Grundsicherungsgeld, BAfoeG away from parents or another listed benefit</option>
+          <option value="third">RF mark on the disability pass, one third of the contribution</option>
+        </select>
+      </div>
+    </div>
+    <p class="rk-note" id="rk-note"></p>
+  </div>
+
+  <div class="rk-plot">
+    <canvas id="rk-canvas" width="760" height="220" role="img" aria-label="Month by month band of what the flat owes against what is being charged"></canvas>
+    <div class="rk-key">
+      <span><i style="background:#1B5E20"></i>What the flat owes</span>
+      <span><i style="background:#FFE600;border:1px solid rgba(27,94,32,.35)"></i>Charged on top</span>
+      <span><i style="background:#C5E1A5"></i>Relief already applied</span>
+    </div>
+  </div>
+
+  <div class="rk-out">
+    <div class="big" id="rk-big">&nbsp;<span id="rk-line"></span></div>
+    <div class="rk-cells">
+      <div class="cell"><div class="v" id="rk-v1"></div><div class="k">the flat owes each month</div></div>
+      <div class="cell"><div class="v" id="rk-v2"></div><div class="k">actually charged each month</div></div>
+      <div class="cell"><div class="v" id="rk-v3"></div><div class="k">months counted since that date</div></div>
+    </div>
+  </div>
+
+  <div class="rk-move" id="rk-move"></div>
+
+  <p class="rk-foot">Figures from the <a href="https://www.rundfunkbeitrag.de/buergerinnen_und_buerger/informationen/index_ger.html" target="_blank" rel="noopener">Beitragsservice</a>: 18.36 euro a month per flat since August 2021, 6.12 euro with the RF mark. An independent commission has recommended 18.64 euro from January 2027, which the federal states still have to confirm. This is a plain arithmetic check, not legal advice.</p>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var FULL = 18.36, THIRD = 6.12;
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var startEl = document.getElementById('rk-start');
+  var caseEl = document.getElementById('rk-case');
+  var reliefEl = document.getElementById('rk-relief');
+  var cv = document.getElementById('rk-canvas');
+  var ctx = cv.getContext('2d');
+
+  var today = new Date();
+  var iso = function (d) {
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  };
+  startEl.max = iso(today);
+  var def = new Date(today.getFullYear() - 1, today.getMonth(), 1);
+  startEl.value = iso(def);
+
+  var euro = function (n) { return n.toFixed(2).replace('.', ',') + ' euro'; };
+
+  var CASES = {
+    'one-mine':    { accounts: 1, owed: 1, note: 'This is the tidy case. One adult per flat is registered and everyone else in the flat is deregistered against that nine digit Beitragsnummer.' },
+    'one-other':   { accounts: 1, owed: 1, note: 'The flat is covered and you personally owe nothing. If you ever had your own account at an earlier address, check that it was closed.' },
+    'two-flat':    { accounts: 2, owed: 1, note: 'Two accounts, one flat. This is the most common way Berliners overpay: somebody moves in and keeps the account from their old address.' },
+    'two-old':     { accounts: 2, owed: 1, note: 'Moving out does not close an account. The old flat keeps billing until somebody deregisters it or a new occupier registers it.' },
+    'second-home': { accounts: 1, owed: 0, note: 'A second home can be released from the contribution on application if you already pay for your main home. It is never automatic, and it starts from the month you apply, or up to three months earlier.' },
+    'hall-room':   { accounts: 1, owed: 1, note: 'A room that opens onto a shared corridor counts as a flat of its own, so this one is correct. Rooms behind a single flat door share one contribution instead.' },
+    'none':        { accounts: 0, owed: 1, note: 'An unregistered flat is not an invisible flat. Registration data is compared nationally, the letter follows, and an unanswered letter becomes an enforceable demand.' }
+  };
+
+  function monthsBetween(a, b) {
+    return (b.getFullYear() - a.getFullYear()) * 12 + (b.getMonth() - a.getMonth()) + 1;
+  }
+
+  function state() {
+    var c = CASES[caseEl.value];
+    var relief = reliefEl.value;
+    var rate = relief === 'third' ? THIRD : FULL;
+    var owedMonthly = relief === 'exempt' ? 0 : c.owed * rate;
+    var chargedMonthly = relief === 'exempt' ? 0 : c.accounts * rate;
+    if (caseEl.value === 'second-home' && relief !== 'exempt') { chargedMonthly = c.accounts * rate; }
+    var d = startEl.valueAsDate || def;
+    var first = new Date(d.getFullYear(), d.getMonth(), 1);
+    var n = monthsBetween(first, new Date(today.getFullYear(), today.getMonth(), 1));
+    if (!(n > 0)) n = 1;
+    if (n > 120) n = 120;
+    return { c: c, relief: relief, rate: rate, owed: owedMonthly, charged: chargedMonthly, first: first, n: n };
+  }
+
+  function draw(s) {
+    var w = cv.width, h = cv.height;
+    ctx.clearRect(0, 0, w, h);
+    var padL = 46, padR = 12, padT = 14, padB = 30;
+    var plotW = w - padL - padR, plotH = h - padT - padB;
+    var top = Math.max(s.charged, s.owed, FULL) * 1.28;
+    var y = function (v) { return padT + plotH - (v / top) * plotH; };
+
+    ctx.strokeStyle = 'rgba(27,94,32,.16)';
+    ctx.fillStyle = '#5a665b';
+    ctx.font = '10px Montserrat, sans-serif';
+    ctx.textAlign = 'right';
+    for (var g = 0; g <= 4; g++) {
+      var val = top * g / 4;
+      var gy = Math.round(y(val)) + 0.5;
+      ctx.beginPath(); ctx.moveTo(padL, gy); ctx.lineTo(w - padR, gy); ctx.stroke();
+      ctx.fillText(val.toFixed(val < 10 ? 1 : 0), padL - 6, gy + 3);
+    }
+
+    var bw = plotW / s.n;
+    for (var i = 0; i < s.n; i++) {
+      var x = padL + i * bw;
+      var inner = Math.max(1, bw - (bw > 6 ? 2 : 0.6));
+      if (s.relief === 'exempt') {
+        ctx.fillStyle = '#C5E1A5';
+        ctx.fillRect(x, y(FULL), inner, padT + plotH - y(FULL));
+      } else {
+        if (s.owed > 0) {
+          ctx.fillStyle = '#1B5E20';
+          ctx.fillRect(x, y(s.owed), inner, padT + plotH - y(s.owed));
+        }
+        if (s.charged > s.owed) {
+          ctx.fillStyle = '#FFE600';
+          ctx.fillRect(x, y(s.charged), inner, y(s.owed) - y(s.charged));
+          ctx.strokeStyle = 'rgba(27,94,32,.35)';
+          ctx.lineWidth = 1;
+          ctx.strokeRect(Math.round(x) + 0.5, Math.round(y(s.charged)) + 0.5, Math.max(1, Math.round(inner) - 1), Math.max(1, Math.round(y(s.owed) - y(s.charged)) - 1));
+        }
+      }
+    }
+
+    ctx.strokeStyle = 'rgba(27,94,32,.45)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(padL, Math.round(padT + plotH) + 0.5);
+    ctx.lineTo(w - padR, Math.round(padT + plotH) + 0.5);
+    ctx.stroke();
+
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#5a665b';
+    var everyN = s.n <= 14 ? 1 : (s.n <= 30 ? 3 : (s.n <= 60 ? 6 : 12));
+    for (var j = 0; j < s.n; j += everyN) {
+      var d2 = new Date(s.first.getFullYear(), s.first.getMonth() + j, 1);
+      var lx = padL + j * bw + bw / 2;
+      if (lx > padL + 8 && lx < w - padR - 8) {
+        ctx.fillText(MONTHS[d2.getMonth()] + ' ' + String(d2.getFullYear()).slice(2), lx, h - 14);
+      }
+    }
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#123D18';
+    ctx.font = '10px Montserrat, sans-serif';
+    ctx.fillText('euro per month', padL, 10);
+  }
+
+  function render() {
+    var s = state();
+    draw(s);
+    var gapMonthly = s.charged - s.owed;
+    var gapSoFar = gapMonthly * s.n;
+    var big = document.getElementById('rk-big');
+    var line = document.getElementById('rk-line');
+    var move = document.getElementById('rk-move');
+
+    if (s.relief === 'exempt') {
+      big.firstChild.nodeValue = '0,00 euro';
+      line.textContent = 'A granted exemption covers the whole contribution for this flat. It has to be applied for with evidence, and it is not backdated for you.';
+      move.textContent = 'My move: check the end date on the exemption letter. It runs out with the benefit decision and it does not renew itself, so a lapse turns into arrears without a single warning.';
+    } else if (gapMonthly > 0.001) {
+      big.firstChild.nodeValue = euro(gapSoFar);
+      line.textContent = 'paid on top of what this address owes since ' + MONTHS[s.first.getMonth()] + ' ' + s.first.getFullYear() + ', at ' + euro(gapMonthly) + ' a month.';
+      move.textContent = 'My move: find the nine digit Beitragsnummer on the account that stays, then deregister the other one with that number on the form. Ten minutes, and it stops the meter today.';
+    } else if (s.owed === 0) {
+      big.firstChild.nodeValue = '0,00 euro';
+      line.textContent = 'Nothing is owed here once the second home application has gone in and been granted.';
+      move.textContent = 'My move: send the second home application now. It starts from the month it arrives, or up to three months earlier, so every month you wait is 18,36 euro you will not get back.';
+    } else if (s.c.accounts === 0) {
+      big.firstChild.nodeValue = euro(s.owed * s.n);
+      line.textContent = 'is what this flat has owed since ' + MONTHS[s.first.getMonth()] + ' ' + s.first.getFullYear() + ' with nobody registered for it.';
+      move.textContent = 'My move: register the flat yourself before the letter arrives. Arrears are charged either way, and answering first keeps it a bill instead of an enforcement file.';
+    } else {
+      big.firstChild.nodeValue = '0,00 euro';
+      line.textContent = 'Nothing is being overpaid at this address. One flat, one contribution, which is exactly how it should read.';
+      move.textContent = 'My move: nothing to do today. Put a note in your phone for the next time you move, because the account follows the flat and not the person.';
+    }
+
+    document.getElementById('rk-v1').textContent = euro(s.owed);
+    document.getElementById('rk-v2').textContent = euro(s.charged);
+    document.getElementById('rk-v3').textContent = String(s.n);
+    document.getElementById('rk-note').textContent = s.c.note;
+  }
+
+  function fit() {
+    var r = cv.getBoundingClientRect();
+    var dpr = window.devicePixelRatio || 1;
+    cv.width = Math.max(320, Math.round(r.width * dpr));
+    cv.height = Math.round(220 * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    cv.width = Math.max(320, Math.round(r.width));
+    cv.height = 220;
+    render();
+  }
+
+  startEl.addEventListener('change', render);
+  startEl.addEventListener('input', render);
+  caseEl.addEventListener('change', render);
+  reliefEl.addEventListener('change', render);
+  window.addEventListener('resize', fit);
+  fit();
+})();
+</script>
+</body>
+</html>

@@ -11687,5 +11687,39 @@
         "a": "A self-employed person who is voluntarily insured carries the whole contribution with no employer half, which doubles the effect of the Zusatzbeitrag. On 4,000 euro a month at the reduced 14.0 per cent rate, that is 647.20 euro at the cheapest open fund and 700.00 euro at AOK Nordost. The contribution is calculated on at least 1,318.33 euro a month even in a month with no income. A student under 30 pays a flat sum instead: 87.38 euro for the health part plus the Zusatzbeitrag charged on an assessment base of 855.00 euro, so between 106.02 and 124.91 euro a month depending on the fund."
       }
     ]
+  },
+  "rundfunkbeitrag-berlin": {
+    "title": "Rundfunkbeitrag in Berlin - FAQ",
+    "subtitle": "Who owes the contribution at a Berlin address, the four situations where people pay twice, and what actually happens if you leave the letters unopened.",
+    "items": [
+      {
+        "q": "How much is the Rundfunkbeitrag in Berlin?",
+        "a": "18.36 euro a month, which is 220.32 euro a year, and it is charged once per flat. It has been at that level since August 2021, when the Bundesverfassungsgericht ordered the figure into force after the federal states failed to agree on it. Berlin has no local rate and no local discount: the contribution is identical in every Bundesland. The number of people in the flat makes no difference, and neither does whether anyone there owns a television or a radio."
+      },
+      {
+        "q": "Does every person in a shared flat have to pay?",
+        "a": "No. One adult per flat is registered and pays, and the flat decides between themselves who that is. Everyone else deregisters, quoting the nine digit Beitragsnummer of the account that stays. This is where most of the money is lost in Berlin: somebody moves into a shared flat or in with a partner and keeps the contribution account from their old address, so the same flat door is billed twice. A duplicate left running for a year is 220.32 euro nobody had to spend."
+      },
+      {
+        "q": "I moved flats. Does my old account close by itself?",
+        "a": "It does not. Re-registering your address at the Buergeramt does not close a contribution account, and nothing closes automatically. If you left a flat where other people stayed, one of the people staying has to register it in their own name. If you gave the flat up completely, you deregister it yourself with evidence. Until one of those two things happens, the old address keeps producing a bill in your name."
+      },
+      {
+        "q": "Do I pay twice if I have a second home?",
+        "a": "Not if you apply. Since 1 June 2020 anyone who can show they already pay for their main home can be released from the contribution on a Nebenwohnung, and spouses or registered partners can apply on the same basis. The rule followed a 2018 Bundesverfassungsgericht ruling that nobody should be charged twice for the same person. It is never granted automatically, and it starts from the month the application arrives, or up to three months earlier if the conditions were already met. Holiday flats, Gartenlauben and Datschen outside an allotment colony count as second homes if you are registered at them."
+      },
+      {
+        "q": "Who can be exempted from the Rundfunkbeitrag?",
+        "a": "Exemption depends on the benefit you receive, not on how much you earn, and you have to apply with evidence. It covers Grundsicherungsgeld, which used to be called Buergergeld, Hilfe zum Lebensunterhalt, Grundsicherung im Alter und bei Erwerbsminderung, benefits under the Asylbewerberleistungsgesetz, and BAfoeG or Berufsausbildungsbeihilfe when you are not living with your parents. It does not cover Arbeitslosengeld I, Wohngeld or Uebergangsgeld. If your income is above the benefit threshold by less than the contribution itself, you can apply as a besonderer Haertefall. People granted the RF mark on their disability pass pay a reduced 6.12 euro a month."
+      },
+      {
+        "q": "What happens if I never answer the letters?",
+        "a": "The registration offices pass data to the Beitragsservice when something changes, such as a move, and there is a nationwide comparison of records on top of that under section 11 paragraph 5 of the state treaty. Anyone who cannot be matched to an account gets written to, and silence does not make the flat disappear from the data. The next step is a Festsetzungsbescheid, which is an enforceable title without any court behind it, and from there the case goes to the enforcement authority or a bailiff. If you believe the demand is wrong, object in writing with your Beitragsnummer and keep a copy."
+      },
+      {
+        "q": "Is the Rundfunkbeitrag going up in 2027?",
+        "a": "It may. On 20 February 2026 the independent commission that works out what the broadcasters need, the KEF, handed its 25th report to the federal states in Berlin and recommended 18.64 euro a month from 1 January 2027, an increase of 28 cents. That is a recommendation and not law: the sixteen states still have to confirm it, and a new procedure from 2027 lets a minority of them object. For a single household the change would be 3.36 euro a year, which is worth far less than checking whether your own address is being billed once or twice."
+      }
+    ]
   }
 }

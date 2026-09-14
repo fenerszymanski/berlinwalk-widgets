@@ -9027,6 +9027,44 @@
       "cmsItemId": "0059d437-59b7-4ff1-817d-77e33a9bbb84"
     },
     {
+      "slug": "berlin-rundfunkbeitrag-check",
+      "title": "Berlin Rundfunkbeitrag Check",
+      "lead": "The broadcasting contribution is charged on the flat and not on the person, so one Berlin address owes 18.36 euro a month however many people live behind the door. Give the tool the month your living situation started and say what is actually registered, and it draws every month since then as what the flat owes against what is being charged, so a duplicate account shows up as a widening band with a euro figure on it.",
+      "category": "Money",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-rundfunkbeitrag-check/",
+      "embedHeight": 1000,
+      "image": "https://static.wixstatic.com/media/5a08a3_22f096a6aae247cba32adace7e87da94~mv2.png",
+      "hubCategory": "MoneyShopping",
+      "type": "Calculator",
+      "priority": 3,
+      "tags": [
+        "rundfunkbeitrag",
+        "beitragsservice",
+        "broadcasting fee",
+        "wg",
+        "flatshare",
+        "nebenwohnung",
+        "second home",
+        "befreiung",
+        "bafoeg",
+        "living in berlin",
+        "berlin money",
+        "household bills"
+      ],
+      "aliases": [
+        "rundfunkbeitrag berlin",
+        "german tv licence",
+        "gez berlin",
+        "broadcasting fee germany",
+        "rundfunkbeitrag wg",
+        "rundfunkbeitrag abmelden",
+        "rundfunkbeitrag befreiung",
+        "tv tax germany"
+      ],
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "2fb6872a-82d0-4308-aaa7-1fa03eb9fc41"
+    },
+    {
       "slug": "berlin-krankenkasse-cost-spread",
       "title": "Berlin Krankenkasse Cost Spread",
       "lead": "Forty-six statutory health funds are open to a Berlin address and the only figure that differs between them runs from 2.18 to 4.39 per cent. Put in your gross pay and say how you are insured, and the tool plots every one of them on a single euro axis so you can see what the fund you are in is costing you against the cheapest one you could actually join.",
