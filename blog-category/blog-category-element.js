@@ -423,7 +423,8 @@
       'a rule that just moved or a word on a letter nobody translated, and ends with the one thing I would actually do about it. ' +
       'A new guide lands most weekdays.</p></div></div>' +
       '<div class="r">' +
-      (d.toolCount ? '<a class="m" href="/tools">' + esc(d.toolCount) + ' of these carry a free calculator</a>' : '<a class="m" href="/tools">Free Berlin tools</a>') +
+      // The hub is /berlin-tools. Bare /tools is a 404; only /tools/<slug> works.
+      (d.toolCount ? '<a class="m" href="/berlin-tools">' + esc(d.toolCount) + ' of these carry a free calculator</a>' : '<a class="m" href="/berlin-tools">Free Berlin tools</a>') +
       '<a class="m" href="/blog">The rest of the blog</a>' +
       '</div></div>' +
       '<div class="bw-lib-foot"><img src="' + WORDMARK + '" alt="BerlinWalk">' +
