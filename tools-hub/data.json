@@ -353,7 +353,6 @@
       "priority": 19,
       "seasonal": true,
       "seasonLabel": "World Cup 2026",
-      "featured": true,
       "tags": [
         "basketball",
         "world cup",
@@ -702,6 +701,7 @@
       "hubCategory": "MoneyShopping",
       "type": "Calculator",
       "priority": 12,
+      "featured": true,
       "tags": [
         "budget",
         "money",

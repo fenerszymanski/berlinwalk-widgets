@@ -1,18 +1,18 @@
 const BW_BLOG_HOME_DATA_URL = (() => {
   const script = document.currentScript;
   const base = script && script.src ? script.src : window.location.href;
-  return new URL('./data.json?v=20260912-featured-listings', base).href;
+  return new URL('./data.json?v=20260914-featured-listings', base).href;
 })();
 const BW_BLOG_HOME_FALLBACK = {
   "featured": {
-    "title": "FIBA Women's Basketball World Cup 2026 in Berlin: A Local Guide for Fans",
-    "url": "https://www.berlinwalk.com/post/fiba-womens-basketball-world-cup-2026-berlin",
-    "category": "Tourist Tips",
-    "readTime": "7 min read",
-    "summary": "The FIBA Women's Basketball World Cup 2026 comes to Berlin from September 4-13. Here is the local fan guide: venues, transport, tickets, fixtures, and what to do between games.",
-    "image": "https://static.wixstatic.com/media/5a08a3_ea8454716f174a6a8d5990f9131542a8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/fiba-wwc-2026-berlin-hero.jpg",
-    "alt": "Women basketball fans walking toward a warmly lit modern Berlin arena at sunset, with the TV Tower and Spree in the background",
-    "label": "Happening now: FIBA in Berlin"
+    "title": "Berlin Rent Increase: Which of the Four Limits Actually Stops the Letter",
+    "url": "https://www.berlinwalk.com/post/berlin-rent-increase",
+    "category": "Living in Berlin",
+    "readTime": "8 min read",
+    "summary": "The Berliner Mietspiegel 2026 put the median net cold rent at 7.71 euro per square metre, and the rent letters built on it are landing now. Four separate limits decide whether yours holds up, and for most Berlin tenants the famous 15 per cent is not the one doing the work.",
+    "image": "https://static.wixstatic.com/media/5a08a3_7123a9cf01154bfa8808b77d3fc83749~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hermannstrasse-neukoelln.jpg",
+    "alt": "A Gruenderzeit apartment building on Hermannstrasse in Berlin-Neukoelln, with red brick and stucco ornament above the ground floor windows and blue sky reflected in the panes",
+    "label": "New: rent increase limits"
   },
   "miniPosts": [
     {
