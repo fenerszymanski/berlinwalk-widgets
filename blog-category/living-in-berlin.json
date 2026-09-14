@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-09-14T18:02:47.595Z",
+ "updatedAt": "2026-09-14T19:38:49.056Z",
  "source": "Wix Blog API + blog-category/categories.json",
  "slug": "living-in-berlin",
  "categoryId": "00af1018-ef7b-465a-93b6-916187609da4",
@@ -8,28 +8,28 @@
  "shelfMode": "curated",
  "shelfLegend": "By the part of life it hits",
  "shelfLegendSub": "Four shelves, because that is how the questions actually arrive",
- "totalPosts": 18,
- "toolCount": 13,
+ "totalPosts": 19,
+ "toolCount": 18,
  "lead": {
-  "title": "Rundfunkbeitrag in Berlin: One Flat, One Fee, and Four Ways to Pay Twice",
-  "slug": "rundfunkbeitrag-berlin",
-  "path": "/post/rundfunkbeitrag-berlin",
-  "excerpt": "One flat, one contribution, 18.36 euro a month, whoever lives there and whatever they own. In a city where 977,000 households hold a single person that lands harder than anywhere else. Here is who owes it, the four places Berliners quietly pay twice, and the exemptions that are never granted automatically.",
+  "title": "WBS Berlin: The Income Limit Is Not Your Salary",
+  "slug": "wbs-berlin",
+  "path": "/post/wbs-berlin",
+  "excerpt": "Most people rule themselves out of a Wohnberechtigungsschein by comparing a payslip with the wrong number. The Wohnungsamt takes off an employee allowance and up to thirty percent before it compares anything, and Berlin issues five certificates rather than one. A single employee still clears a WBS 180 on about 32,090 euro gross a year.",
   "minutes": 7,
   "readTime": "7 min read",
-  "publishedDate": "2026-09-14T13:46:44.773Z",
-  "alt": "The main entrance of the Haus des Rundfunks on Masurenallee in Berlin-Charlottenburg, gold lettering above a brick and glass doorway with people walking in",
-  "lead": "https://static.wixstatic.com/media/5a08a3_d5ae3461b0684a15b23eb839d532cade~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "thumb": "https://static.wixstatic.com/media/5a08a3_d5ae3461b0684a15b23eb839d532cade~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "square": "https://static.wixstatic.com/media/5a08a3_d5ae3461b0684a15b23eb839d532cade~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "shelf": "geld",
-  "topic": "",
-  "figure": "18.36 &euro;",
-  "line": "a month per flat, whoever lives there, and four places Berliners quietly pay it twice.",
-  "term": "Rundfunkbeitrag",
-  "gloss": "The broadcasting contribution. One flat, one fee, 18.36 euro a month whoever lives there and whatever they own, which lands harder in a city where 977,000 households hold a single person.",
-  "termCta": "Who owes it, and the double payments",
-  "tool": ""
+  "publishedDate": "2026-09-14T19:36:00.730Z",
+  "alt": "An aerial view of the Hufeisensiedlung in Berlin-Britz, the horseshoe-shaped white housing block curving around a green courtyard and a small pond, with rows of red-roofed terraced houses beyond",
+  "lead": "https://static.wixstatic.com/media/5a08a3_6826ea13f1064d0c94df3606f6480d8a~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "thumb": "https://static.wixstatic.com/media/5a08a3_6826ea13f1064d0c94df3606f6480d8a~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "square": "https://static.wixstatic.com/media/5a08a3_6826ea13f1064d0c94df3606f6480d8a~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "shelf": "",
+  "topic": "living-in-berlin",
+  "figure": "",
+  "line": "Most people rule themselves out of a Wohnberechtigungsschein by comparing a payslip with the wrong number.",
+  "term": "",
+  "gloss": "",
+  "termCta": "",
+  "tool": "berlin-wbs-income-ladder"
  },
  "glossary": [
   {
@@ -168,7 +168,8 @@
      "alt": "The two brick towers of the former Prenzlauer Berg waterworks above the trees of the Wasserturm park in autumn",
      "thumb": "https://static.wixstatic.com/media/5a08a3_a24bdb7a928e4839bf741659dbb152e8~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
      "line": "in every postcode, but a kettle in Wedding and one in K&ouml;penick do not scale at the same speed.",
-     "figure": "hard"
+     "figure": "hard",
+     "tool": "berlin-water-hardness-map"
     },
     {
      "title": "Berlin Nebenkostenabrechnung: How to Check the Bill Line by Line Before the Deadline",
@@ -239,7 +240,8 @@
      "alt": "Reading room of the Staatsbibliothek zu Berlin at Potsdamer Strasse with its ceiling of round white light domes above bookshelves and desks",
      "thumb": "https://static.wixstatic.com/media/5a08a3_2b90b45e38394dec94e22bff89b48c73~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
      "line": "for eBooks, PressReader and film streaming. The Staatsbibliothek card is free.",
-     "figure": "10 &euro; a year"
+     "figure": "10 &euro; a year",
+     "tool": "berlin-library-hours-board"
     },
     {
      "title": "Berlin Bulky Waste: What Sperrmüll Costs and Where It Actually Goes",
@@ -300,7 +302,8 @@
      "alt": "Sunrise in morning fog over the main path of the Feierabend allotment colony in Berlin-Mariendorf, with hedges and garden gates on both sides",
      "thumb": "https://static.wixstatic.com/media/5a08a3_69bc83334bda4af091ff449f3b07a3d4~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
      "line": "in 1,038 colonies. Pankow holds over ten thousand, Friedrichshain-Kreuzberg holds 228.",
-     "figure": "70,390 plots"
+     "figure": "70,390 plots",
+     "tool": "berlin-kleingarten-map"
     },
     {
      "title": "Mushroom Picking Around Berlin: Ten Forests on Your Ticket and the Rules Before the Pan",
@@ -350,7 +353,25 @@
      "alt": "Two levels of bicycle racks packed with bikes under the railway structure at Bahnhof Ostkreuz in Berlin",
      "thumb": "https://static.wixstatic.com/media/5a08a3_3f70db1a8c4745d689118079eca889f5~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
      "line": "of losses were locked up between six and ten in the evening.",
-     "figure": "31 %"
+     "figure": "31 %",
+     "tool": "berlin-bike-theft-clock"
+    }
+   ]
+  },
+  {
+   "key": "more",
+   "title": "More in this category",
+   "lead": "Everything else filed here",
+   "posts": [
+    {
+     "title": "WBS Berlin: The Income Limit Is Not Your Salary",
+     "slug": "wbs-berlin",
+     "path": "/post/wbs-berlin",
+     "minutes": 7,
+     "alt": "An aerial view of the Hufeisensiedlung in Berlin-Britz, the horseshoe-shaped white housing block curving around a green courtyard and a small pond, with rows of red-roofed terraced houses beyond",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_6826ea13f1064d0c94df3606f6480d8a~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Most people rule themselves out of a Wohnberechtigungsschein by comparing a payslip with the wrong number.",
+     "tool": "berlin-wbs-income-ladder"
     }
    ]
   }

@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-14T13:48:59.757Z",
+  "updatedAt": "2026-09-14T19:38:36.315Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 384,
-  "toolsTotal": 304,
+  "totalPosts": 385,
+  "toolsTotal": 305,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "WBS Berlin: The Income Limit Is Not Your Salary",
+      "slug": "wbs-berlin",
+      "path": "/post/wbs-berlin",
+      "url": "https://www.berlinwalk.com/post/wbs-berlin",
+      "excerpt": "Most people rule themselves out of a Wohnberechtigungsschein by comparing a payslip with the wrong number. The Wohnungsamt takes off an employee allowance and up to thirty percent before it compares anything, and Berlin issues five certificates rather than one. A single employee still clears a WBS 180 on about 32,090 euro gross a year.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-14T19:36:00.730Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_6826ea13f1064d0c94df3606f6480d8a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/hufeisensiedlung-aerial.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_6826ea13f1064d0c94df3606f6480d8a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/hufeisensiedlung-aerial.jpg",
+      "alt": "An aerial view of the Hufeisensiedlung in Berlin-Britz, the horseshoe-shaped white housing block curving around a green courtyard and a small pond, with rows of red-roofed terraced houses beyond",
+      "relatedToolSlug": "berlin-wbs-income-ladder"
+    },
+    {
       "title": "Rundfunkbeitrag in Berlin: One Flat, One Fee, and Four Ways to Pay Twice",
       "slug": "rundfunkbeitrag-berlin",
       "path": "/post/rundfunkbeitrag-berlin",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_a24bdb7a928e4839bf741659dbb152e8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wasserturm-1600.jpg",
       "alt": "The two brick towers of the former Prenzlauer Berg waterworks above the trees of the Wasserturm park in autumn",
       "relatedToolSlug": "berlin-water-hardness-map"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Mushroom Picking Around Berlin: Ten Forests on Your Ticket and the Rules Before the Pan",
-      "slug": "mushroom-picking-berlin",
-      "path": "/post/mushroom-picking-berlin",
-      "url": "https://www.berlinwalk.com/post/mushroom-picking-berlin",
-      "excerpt": "Small amounts for your own pan are legal in both Berlin and Brandenburg forest, porcini and chanterelles carry a personal-use exception, and the free Pilzberatung at the Botanical Garden has checked baskets since 1890. Ten forests from S Rahnsdorf to Chorin, plotted by real travel minutes from Alexanderplatz.",
+      "title": "WBS Berlin: The Income Limit Is Not Your Salary",
+      "slug": "wbs-berlin",
+      "path": "/post/wbs-berlin",
+      "url": "https://www.berlinwalk.com/post/wbs-berlin",
+      "excerpt": "Most people rule themselves out of a Wohnberechtigungsschein by comparing a payslip with the wrong number. The Wohnungsamt takes off an employee allowance and up to thirty percent before it compares anything, and Berlin issues five certificates rather than one. A single employee still clears a WBS 180 on about 32,090 euro gross a year.",
       "category": "Living in Berlin",
       "categorySlug": "living-in-berlin",
       "topic": "living-in-berlin",
       "topicLabel": "Living in Berlin",
       "readTime": "7 min read",
-      "publishedDate": "2026-09-11T07:40:47.477Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_f0e8e550d4394fe2a6fac72f402a1d20~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-maronen.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_f0e8e550d4394fe2a6fac72f402a1d20~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-maronen.jpg",
-      "alt": "Two bay bolete mushrooms in green moss, one lying on its side showing the pale yellow pore layer under the brown cap",
-      "relatedToolSlug": "berlin-mushroom-forest-finder"
-    }
-  ],
-  "allPosts": [
+      "publishedDate": "2026-09-14T19:36:00.730Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_6826ea13f1064d0c94df3606f6480d8a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/hufeisensiedlung-aerial.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_6826ea13f1064d0c94df3606f6480d8a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/hufeisensiedlung-aerial.jpg",
+      "alt": "An aerial view of the Hufeisensiedlung in Berlin-Britz, the horseshoe-shaped white housing block curving around a green courtyard and a small pond, with rows of red-roofed terraced houses beyond",
+      "relatedToolSlug": "berlin-wbs-income-ladder"
+    },
     {
       "title": "Rundfunkbeitrag in Berlin: One Flat, One Fee, and Four Ways to Pay Twice",
       "slug": "rundfunkbeitrag-berlin",

@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-09-14T18:02:51.121Z",
+ "updatedAt": "2026-09-14T19:38:52.352Z",
  "source": "Wix Blog API + blog-category/categories.json",
  "slug": "german-language",
  "categoryId": "bf46ccbb-3db8-499a-95fe-4623868d6e1a",
@@ -9,7 +9,7 @@
  "shelfLegend": "",
  "shelfLegendSub": "",
  "totalPosts": 19,
- "toolCount": 10,
+ "toolCount": 11,
  "lead": {
   "title": "German Courses in Berlin: What a Lesson Costs and Why the Rules Change at B1",
   "slug": "german-courses-in-berlin",
@@ -23,13 +23,13 @@
   "thumb": "https://static.wixstatic.com/media/5a08a3_d96e9eed84f1438ca8380c957bf0f6c9~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
   "square": "https://static.wixstatic.com/media/5a08a3_d96e9eed84f1438ca8380c957bf0f6c9~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
   "shelf": "",
-  "topic": "",
+  "topic": "living-in-berlin",
   "figure": "",
   "line": "The same 45 minutes of German teaching in Berlin can legally cost you nothing, 80 cents or 10 euro.",
   "term": "",
   "gloss": "",
   "termCta": "",
-  "tool": ""
+  "tool": "berlin-german-course-ladder"
  },
  "glossary": [],
  "shelves": [],
@@ -41,7 +41,8 @@
    "minutes": 8,
    "alt": "Volkshochschule Friedrichshain-Kreuzberg in the Wassertorstrasse, a four-storey brick school building on a Kreuzberg street",
    "thumb": "https://static.wixstatic.com/media/5a08a3_d96e9eed84f1438ca8380c957bf0f6c9~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-   "line": "The same 45 minutes of German teaching in Berlin can legally cost you nothing, 80 cents or 10 euro."
+   "line": "The same 45 minutes of German teaching in Berlin can legally cost you nothing, 80 cents or 10 euro.",
+   "tool": "berlin-german-course-ladder"
   },
   {
    "title": "Food Allergies in Berlin: What a Counter Must Tell You and Where the Allergen Hides",
