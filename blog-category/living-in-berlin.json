@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-09-14T19:38:49.056Z",
+ "updatedAt": "2026-09-14T21:20:02.179Z",
  "source": "Wix Blog API + blog-category/categories.json",
  "slug": "living-in-berlin",
  "categoryId": "00af1018-ef7b-465a-93b6-916187609da4",
@@ -22,16 +22,27 @@
   "lead": "https://static.wixstatic.com/media/5a08a3_6826ea13f1064d0c94df3606f6480d8a~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
   "thumb": "https://static.wixstatic.com/media/5a08a3_6826ea13f1064d0c94df3606f6480d8a~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
   "square": "https://static.wixstatic.com/media/5a08a3_6826ea13f1064d0c94df3606f6480d8a~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "shelf": "",
+  "shelf": "wohnung",
   "topic": "living-in-berlin",
-  "figure": "",
-  "line": "Most people rule themselves out of a Wohnberechtigungsschein by comparing a payslip with the wrong number.",
-  "term": "",
-  "gloss": "",
-  "termCta": "",
+  "figure": "32,090 &euro;",
+  "line": "gross a year still clears a WBS 180, because the Wohnungsamt does not compare your salary.",
+  "term": "Wohnberechtigungsschein",
+  "gloss": "The certificate that unlocks subsidised flats. The Wohnungsamt takes off an employee allowance and up to thirty percent before it compares anything, and Berlin issues five of them rather than one, which is why most people rule themselves out against the wrong number.",
+  "termCta": "Which certificate you clear",
   "tool": "berlin-wbs-income-ladder"
  },
  "glossary": [
+  {
+   "title": "WBS Berlin: The Income Limit Is Not Your Salary",
+   "slug": "wbs-berlin",
+   "path": "/post/wbs-berlin",
+   "readTime": "7 min read",
+   "alt": "An aerial view of the Hufeisensiedlung in Berlin-Britz, the horseshoe-shaped white housing block curving around a green courtyard and a small pond, with rows of red-roofed terraced houses beyond",
+   "square": "https://static.wixstatic.com/media/5a08a3_6826ea13f1064d0c94df3606f6480d8a~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "term": "Wohnberechtigungsschein",
+   "gloss": "The certificate that unlocks subsidised flats. The Wohnungsamt takes off an employee allowance and up to thirty percent before it compares anything, and Berlin issues five of them rather than one, which is why most people rule themselves out against the wrong number.",
+   "termCta": "Which certificate you clear"
+  },
   {
    "title": "Berlin Rent Increase: Which of the Four Limits Actually Stops the Letter",
    "slug": "berlin-rent-increase",
@@ -138,6 +149,17 @@
    "title": "Wohnung & Nebenkosten",
    "lead": "The flat, and what it costs to keep",
    "posts": [
+    {
+     "title": "WBS Berlin: The Income Limit Is Not Your Salary",
+     "slug": "wbs-berlin",
+     "path": "/post/wbs-berlin",
+     "minutes": 7,
+     "alt": "An aerial view of the Hufeisensiedlung in Berlin-Britz, the horseshoe-shaped white housing block curving around a green courtyard and a small pond, with rows of red-roofed terraced houses beyond",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_6826ea13f1064d0c94df3606f6480d8a~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "gross a year still clears a WBS 180, because the Wohnungsamt does not compare your salary.",
+     "figure": "32,090 &euro;",
+     "tool": "berlin-wbs-income-ladder"
+    },
     {
      "title": "Berlin Rent Increase: Which of the Four Limits Actually Stops the Letter",
      "slug": "berlin-rent-increase",
@@ -355,23 +377,6 @@
      "line": "of losses were locked up between six and ten in the evening.",
      "figure": "31 %",
      "tool": "berlin-bike-theft-clock"
-    }
-   ]
-  },
-  {
-   "key": "more",
-   "title": "More in this category",
-   "lead": "Everything else filed here",
-   "posts": [
-    {
-     "title": "WBS Berlin: The Income Limit Is Not Your Salary",
-     "slug": "wbs-berlin",
-     "path": "/post/wbs-berlin",
-     "minutes": 7,
-     "alt": "An aerial view of the Hufeisensiedlung in Berlin-Britz, the horseshoe-shaped white housing block curving around a green courtyard and a small pond, with rows of red-roofed terraced houses beyond",
-     "thumb": "https://static.wixstatic.com/media/5a08a3_6826ea13f1064d0c94df3606f6480d8a~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "Most people rule themselves out of a Wohnberechtigungsschein by comparing a payslip with the wrong number.",
-     "tool": "berlin-wbs-income-ladder"
     }
    ]
   }
