@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "slug": "berlin-flat-notice-period",
+  "key": "berlin-flat-notice-period",
+  "config": {
+    "title": "Berlin Flat Notice Period - FAQ",
+    "subtitle": "The exact day your notice has to arrive, why Berlin’s holiday calendar moves it, what a Kündigungsverzicht does to your plans, and how long a landlord can sit on your deposit.",
+    "items": [
+      {
+        "q": "How much notice do I have to give on a flat in Berlin?",
+        "a": "Three months, and no contract can make that worse for you. The useful part is how the three months are counted. § 573c Absatz 1 BGB says the notice is admissible at the latest on the third working day of a calendar month, to the end of the month after next. So a letter arriving by the third working day of October ends the tenancy on 31 December, and a letter arriving on the fourth working day of October ends it on 31 January instead. Your landlord’s notice period grows to six and then nine months as the tenancy gets older, but yours never changes."
+      },
+      {
+        "q": "Does Saturday count as a working day for the deadline?",
+        "a": "Yes. A Werktag is every day except Sunday and a public holiday, and the Federal Court of Justice confirmed on 27 April 2005 in case VIII ZR 206/04 that Saturday belongs in that count for § 573c. What the court did not settle is what happens when the third working day itself falls on a Saturday, and whether § 193 BGB then pushes it to the Monday. That question is still open, so the safe move is to have the letter there by the Friday before."
+      },
+      {
+        "q": "Which Berlin public holidays change the deadline?",
+        "a": "All ten of them, because a public holiday is not a working day. Berlin keeps New Year’s Day, 8 March for International Women’s Day, Good Friday, Easter Monday, 1 May, Ascension Day, Whit Monday, 3 October, and both Christmas days. The 8 March holiday exists only in Berlin and Mecklenburg-Vorpommern, so a calculator built for the rest of Germany will get a March deadline wrong here. In practice the shift always gives you more time, never less: October 2026 moves to Monday 5 October because 3 October is a Saturday holiday, and January 2027 moves to Tuesday 5 January."
+      },
+      {
+        "q": "Can I send the notice by email or WhatsApp?",
+        "a": "No. § 568 BGB requires written form, which means a signed paper letter. An email, a PDF scan of a signature and a chat message all fail. Every person named as a tenant on the contract has to sign, even if only one of you is moving out. Keep a copy of what you sent and note the day it was delivered."
+      },
+      {
+        "q": "What is the safest way to deliver the letter?",
+        "a": "Hand delivery into the landlord’s letterbox with somebody standing next to you who is willing to confirm it later is the strongest. After that, an Einwurf-Einschreiben, which the postman simply posts and logs. Avoid a Rückschein registered letter for this: it needs a person to sign for it, and if nobody is home the postman leaves a collection card, which does not count as delivery. Whatever you choose, allow several working days, because the deadline measures arrival and not posting."
+      },
+      {
+        "q": "My contract has a Mindestmietdauer. Can I still leave?",
+        "a": "Not while it runs, unless the clause itself is defective. A Kündigungsverzicht in a standard form contract is valid for four years at most, counted from the day the contract was signed rather than the day you moved in, and it has to bind both sides. Anything longer is void under § 307 BGB. If you break it anyway you keep paying rent until the flat is let again."
+      },
+      {
+        "q": "Can I find a Nachmieter and leave early?",
+        "a": "Usually not as a right. Your landlord is under no general obligation to accept a replacement tenant, and outside narrow hardship cases there is no legal claim to substitute one. Offering three serious, solvent candidates often works in practice in Berlin, because an empty flat helps nobody, but treat it as goodwill rather than leverage and do not plan your move around it."
+      },
+      {
+        "q": "How much deposit can a Berlin landlord ask for?",
+        "a": "Three months of cold rent at most, under § 551 BGB, with the Nebenkosten prepayment left out of the calculation. You have the right to pay it in three equal monthly instalments, the first due at the start of the tenancy. The money must be held separately from the landlord’s own assets at a bank, at the usual savings rate, and the interest belongs to you."
+      },
+      {
+        "q": "How long can my landlord keep the deposit after I move out?",
+        "a": "There is no fixed statutory deadline, which is why this drags. The clock that does bind is § 548 BGB: claims for damage to the flat time-bar six months after the flat is returned, so a handover on 31 December makes 30 June the last day for such a claim. A landlord may hold back a reasonable amount against the final Nebenkosten settlement, and that bill can legitimately arrive up to a year later. Holding the entire sum for a year is a different matter and worth a written demand."
+      },
+      {
+        "q": "Do I have to repaint before I hand the flat back?",
+        "a": "Check the clause before you buy a roller. Rigid decorating schedules in form contracts have been struck down repeatedly, and a flat handed over unrenovated at the start generally cannot carry an unrenovated-out obligation. What always helps is a written handover protocol with meter readings, existing damage and the key count in it, plus your own dated photographs taken on the day."
+      },
+      {
+        "q": "Do I need to deregister when I move within Berlin?",
+        "a": "No Abmeldung is needed as long as you are moving to another address in Germany. You register the new address instead, within two weeks of moving in, under § 17 Bundesmeldegesetz. Your new landlord has the same two weeks to give you the Wohnungsgeberbestätigung you need for the appointment. Set up a Nachsendeauftrag with Deutsche Post for at least six months, because the Nebenkosten settlement will be sent to the old letterbox."
+      },
+      {
+        "q": "What does missing the deadline actually cost?",
+        "a": "One full month of rent, warm. At the median cold rent in the Berliner Mietspiegel 2026, 7.71 euro per square metre, a 70 square metre flat is about 540 euro of Kaltmiete, and the amount that leaves your account each month is higher once the Nebenkosten prepayment is added. That is the price of posting a letter on the wrong day, and it is the reason to work out the date before anything else."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much notice do I have to give on a flat in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Three months, and no contract can make that worse for you. The useful part is how the three months are counted. § 573c Absatz 1 BGB says the notice is admissible at the latest on the third working day of a calendar month, to the end of the month after next. So a letter arriving by the third working day of October ends the tenancy on 31 December, and a letter arriving on the fourth working day of October ends it on 31 January instead. Your landlord’s notice period grows to six and then nine months as the tenancy gets older, but yours never changes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Saturday count as a working day for the deadline?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. A Werktag is every day except Sunday and a public holiday, and the Federal Court of Justice confirmed on 27 April 2005 in case VIII ZR 206/04 that Saturday belongs in that count for § 573c. What the court did not settle is what happens when the third working day itself falls on a Saturday, and whether § 193 BGB then pushes it to the Monday. That question is still open, so the safe move is to have the letter there by the Friday before."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Berlin public holidays change the deadline?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "All ten of them, because a public holiday is not a working day. Berlin keeps New Year’s Day, 8 March for International Women’s Day, Good Friday, Easter Monday, 1 May, Ascension Day, Whit Monday, 3 October, and both Christmas days. The 8 March holiday exists only in Berlin and Mecklenburg-Vorpommern, so a calculator built for the rest of Germany will get a March deadline wrong here. In practice the shift always gives you more time, never less: October 2026 moves to Monday 5 October because 3 October is a Saturday holiday, and January 2027 moves to Tuesday 5 January."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I send the notice by email or WhatsApp?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. § 568 BGB requires written form, which means a signed paper letter. An email, a PDF scan of a signature and a chat message all fail. Every person named as a tenant on the contract has to sign, even if only one of you is moving out. Keep a copy of what you sent and note the day it was delivered."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the safest way to deliver the letter?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Hand delivery into the landlord’s letterbox with somebody standing next to you who is willing to confirm it later is the strongest. After that, an Einwurf-Einschreiben, which the postman simply posts and logs. Avoid a Rückschein registered letter for this: it needs a person to sign for it, and if nobody is home the postman leaves a collection card, which does not count as delivery. Whatever you choose, allow several working days, because the deadline measures arrival and not posting."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "My contract has a Mindestmietdauer. Can I still leave?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not while it runs, unless the clause itself is defective. A Kündigungsverzicht in a standard form contract is valid for four years at most, counted from the day the contract was signed rather than the day you moved in, and it has to bind both sides. Anything longer is void under § 307 BGB. If you break it anyway you keep paying rent until the flat is let again."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I find a Nachmieter and leave early?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Usually not as a right. Your landlord is under no general obligation to accept a replacement tenant, and outside narrow hardship cases there is no legal claim to substitute one. Offering three serious, solvent candidates often works in practice in Berlin, because an empty flat helps nobody, but treat it as goodwill rather than leverage and do not plan your move around it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much deposit can a Berlin landlord ask for?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Three months of cold rent at most, under § 551 BGB, with the Nebenkosten prepayment left out of the calculation. You have the right to pay it in three equal monthly instalments, the first due at the start of the tenancy. The money must be held separately from the landlord’s own assets at a bank, at the usual savings rate, and the interest belongs to you."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long can my landlord keep the deposit after I move out?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "There is no fixed statutory deadline, which is why this drags. The clock that does bind is § 548 BGB: claims for damage to the flat time-bar six months after the flat is returned, so a handover on 31 December makes 30 June the last day for such a claim. A landlord may hold back a reasonable amount against the final Nebenkosten settlement, and that bill can legitimately arrive up to a year later. Holding the entire sum for a year is a different matter and worth a written demand."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I have to repaint before I hand the flat back?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Check the clause before you buy a roller. Rigid decorating schedules in form contracts have been struck down repeatedly, and a flat handed over unrenovated at the start generally cannot carry an unrenovated-out obligation. What always helps is a written handover protocol with meter readings, existing damage and the key count in it, plus your own dated photographs taken on the day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to deregister when I move within Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No Abmeldung is needed as long as you are moving to another address in Germany. You register the new address instead, within two weeks of moving in, under § 17 Bundesmeldegesetz. Your new landlord has the same two weeks to give you the Wohnungsgeberbestätigung you need for the appointment. Set up a Nachsendeauftrag with Deutsche Post for at least six months, because the Nebenkosten settlement will be sent to the old letterbox."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does missing the deadline actually cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "One full month of rent, warm. At the median cold rent in the Berliner Mietspiegel 2026, 7.71 euro per square metre, a 70 square metre flat is about 540 euro of Kaltmiete, and the amount that leaves your account each month is higher once the Nebenkosten prepayment is added. That is the price of posting a letter on the wrong day, and it is the reason to work out the date before anything else."
+        }
+      }
+    ]
+  }
+}

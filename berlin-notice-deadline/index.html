@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Notice Deadline</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --amber: #E08600;
+    --red: #C62828;
+    --line: #E0E4DA;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .nd { max-width: 780px; margin: 0 auto; padding: 14px 12px 12px; }
+  .nd-head h2 { font-size: 1.08rem; margin: 0; color: var(--green); }
+  .nd-head p { margin: 5px 0 0; font-size: .77rem; line-height: 1.55; color: #555; }
+
+  .nd-block { margin: 13px 0 0; }
+  .nd-label { display: block; font-size: .63rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--deep); margin: 0 0 6px; }
+  .nd-row { display: flex; flex-wrap: wrap; gap: 6px; }
+  .nd-row button {
+    font: inherit; font-size: .76rem; font-weight: 700; color: var(--deep);
+    padding: 8px 11px; border-radius: 9px; border: 2px solid var(--line);
+    background: #fff; cursor: pointer; min-height: 40px; line-height: 1.2;
+  }
+  .nd-row button small { display: block; font-size: .62rem; font-weight: 600; color: #6b7360; margin-top: 2px; }
+  .nd-row button.on { border-color: var(--green); background: var(--yellow); color: var(--deep); }
+  .nd-row button.on small { color: #3A4A2E; }
+  .nd-row button:focus-visible { outline: 3px solid var(--green); outline-offset: 2px; }
+
+  .nd-steps { display: flex; gap: 6px; margin: 15px 0 0; }
+  .nd-steps button {
+    flex: 1 1 0; font: inherit; font-size: .72rem; font-weight: 700; color: #6b7360;
+    padding: 9px 6px; border-radius: 9px 9px 0 0; border: 2px solid var(--line); border-bottom: none;
+    background: #fff; cursor: pointer; min-height: 42px; line-height: 1.25; text-align: left;
+  }
+  .nd-steps button b { display: block; font-size: .62rem; letter-spacing: .05em; text-transform: uppercase; color: #9aa392; }
+  .nd-steps button.on { background: var(--green); color: #fff; border-color: var(--green); }
+  .nd-steps button.on b { color: var(--yellow); }
+  .nd-steps button:focus-visible { outline: 3px solid var(--deep); outline-offset: 2px; }
+
+  .nd-card { background: #fff; border: 2px solid var(--green); border-radius: 0 0 12px 12px; padding: 10px; }
+  .nd-canvas { display: block; width: 100%; height: auto; border-radius: 8px; }
+
+  .nd-result { margin: 10px 0 0; padding: 12px 13px; border-radius: 11px; background: var(--yellow); color: var(--deep); }
+  .nd-result h3 { margin: 0 0 6px; font-size: .97rem; color: var(--deep); line-height: 1.3; }
+  .nd-result .nd-big { font-size: 1.5rem; font-weight: 800; line-height: 1.15; font-variant-numeric: tabular-nums; display: block; margin: 0 0 6px; }
+  .nd-result p { margin: 0; font-size: .81rem; line-height: 1.5; color: var(--deep); }
+  .nd-result p + p { margin-top: 7px; }
+  .nd-result strong { font-variant-numeric: tabular-nums; }
+
+  .nd-flag { margin: 9px 0 0; padding: 9px 11px; border-radius: 9px; background: #FFF4E0; border: 1px solid #F0D9A8; font-size: .77rem; line-height: 1.5; color: #6B4A00; }
+
+  .nd-nav { display: flex; gap: 8px; margin: 11px 0 0; }
+  .nd-nav button {
+    font: inherit; font-size: .78rem; font-weight: 700; padding: 10px 14px; border-radius: 9px;
+    border: 2px solid var(--green); background: var(--green); color: #fff; cursor: pointer; min-height: 42px;
+  }
+  .nd-nav button.ghost { background: #fff; color: var(--green); }
+  .nd-nav button:focus-visible { outline: 3px solid var(--deep); outline-offset: 2px; }
+
+  .nd-legend { display: flex; flex-wrap: wrap; gap: 9px; margin: 8px 3px 2px; font-size: .67rem; color: #555; }
+  .nd-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .nd-swatch { width: 12px; height: 12px; border-radius: 3px; border: 1px solid rgba(0,0,0,.22); }
+  .nd-foot { margin: 11px 0 0; font-size: .68rem; line-height: 1.6; color: #777; }
+</style>
+</head>
+<body>
+<div class="nd">
+  <div class="nd-head">
+    <h2>Berlin Notice Deadline</h2>
+    <p>German law does not start counting when you post the letter. It counts back from the third working day of a month, and that day moves, because Saturdays count as working days and public holidays do not. Pick the month you want to be out of the flat and this walks the three dates that follow.</p>
+  </div>
+
+  <div class="nd-block">
+    <span class="nd-label" id="ndMonthLabel">I want my tenancy to end on</span>
+    <div class="nd-row" id="ndMonths" role="group" aria-labelledby="ndMonthLabel"></div>
+  </div>
+
+  <div class="nd-block">
+    <span class="nd-label" id="ndRentLabel">My cold rent (Kaltmiete) is about</span>
+    <div class="nd-row" id="ndRents" role="group" aria-labelledby="ndRentLabel"></div>
+  </div>
+
+  <div class="nd-steps" id="ndSteps" role="group" aria-label="Stages"></div>
+
+  <div class="nd-card">
+    <canvas id="ndCanvas" class="nd-canvas" width="1040" height="600"></canvas>
+    <div class="nd-legend" id="ndLegend"></div>
+  </div>
+
+  <div class="nd-result" id="ndResult" aria-live="polite"></div>
+  <div class="nd-flag" id="ndFlag"></div>
+
+  <div class="nd-nav">
+    <button type="button" class="ghost" id="ndBack">Back a stage</button>
+    <button type="button" id="ndNext">Next stage</button>
+  </div>
+
+  <p class="nd-foot" id="ndFoot"></p>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  /* Berlin public holidays. Berlin is one of two states that keeps 8 March,
+     and 8 March plus 3 October are exactly the days that shift the third
+     working day in the months people most often want to leave. */
+  var HOLIDAYS = {
+    '2026-01-01': 1, '2026-03-08': 1, '2026-04-03': 1, '2026-04-06': 1, '2026-05-01': 1,
+    '2026-05-14': 1, '2026-05-25': 1, '2026-10-03': 1, '2026-12-25': 1, '2026-12-26': 1,
+    '2027-01-01': 1, '2027-03-08': 1, '2027-03-26': 1, '2027-03-29': 1, '2027-05-01': 1,
+    '2027-05-06': 1, '2027-05-17': 1, '2027-10-03': 1, '2027-12-25': 1, '2027-12-26': 1,
+    '2028-01-01': 1, '2028-03-08': 1, '2028-04-14': 1, '2028-04-17': 1, '2028-05-01': 1,
+    '2028-05-25': 1, '2028-06-05': 1, '2028-10-03': 1, '2028-12-25': 1, '2028-12-26': 1
+  };
+  var HOLIDAY_NAMES = {
+    '2026-10-03': 'German Unity Day', '2026-12-25': 'Christmas Day', '2026-12-26': 'Boxing Day',
+    '2027-01-01': "New Year's Day", '2027-03-08': "International Women's Day",
+    '2027-03-26': 'Good Friday', '2027-03-29': 'Easter Monday', '2027-05-01': 'Labour Day',
+    '2027-05-06': 'Ascension Day', '2027-05-17': 'Whit Monday', '2027-10-03': 'German Unity Day',
+    '2027-12-25': 'Christmas Day', '2027-12-26': 'Boxing Day', '2028-01-01': "New Year's Day"
+  };
+
+  var MONTH_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var MONTH_LONG = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var DAY_SHORT = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  var MIETSPIEGEL = 7.71; /* euro per square metre, Berliner Mietspiegel 2026 */
+  var RENTS = [450, 600, 800, 1050, 1400];
+
+  var CV = document.getElementById('ndCanvas');
+  var CTX = CV.getContext('2d');
+  var monthsEl = document.getElementById('ndMonths');
+  var rentsEl = document.getElementById('ndRents');
+  var stepsEl = document.getElementById('ndSteps');
+  var resultEl = document.getElementById('ndResult');
+  var flagEl = document.getElementById('ndFlag');
+  var legendEl = document.getElementById('ndLegend');
+  var footEl = document.getElementById('ndFoot');
+
+  var STAGES = [
+    { key: 'letter', tag: 'Stage 1', name: 'The letter' },
+    { key: 'rent', tag: 'Stage 2', name: 'The rent you still owe' },
+    { key: 'deposit', tag: 'Stage 3', name: 'The deposit clock' }
+  ];
+
+  var currentStep = 0;
+  var pickedMonth = 0;
+  var pickedRent = 1;
+  var options = [];
+
+  function iso(d) {
+    return d.getUTCFullYear() + '-' + pad(d.getUTCMonth() + 1) + '-' + pad(d.getUTCDate());
+  }
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function isWorkingDay(d) {
+    return d.getUTCDay() !== 0 && !HOLIDAYS[iso(d)];
+  }
+  function thirdWorkingDay(year, monthIndex) {
+    var count = 0;
+    var d = new Date(Date.UTC(year, monthIndex, 1));
+    while (count < 3) {
+      if (isWorkingDay(d)) { count += 1; if (count === 3) { return d; } }
+      d = new Date(d.getTime() + 86400000);
+    }
+    return d;
+  }
+  function lastDayOfMonth(year, monthIndex) {
+    return new Date(Date.UTC(year, monthIndex + 1, 0));
+  }
+  function fmt(d) {
+    return d.getUTCDate() + ' ' + MONTH_LONG[d.getUTCMonth()] + ' ' + d.getUTCFullYear();
+  }
+  function fmtShort(d) {
+    return d.getUTCDate() + ' ' + MONTH_SHORT[d.getUTCMonth()];
+  }
+  function euro(n) {
+    return '€' + Math.round(n).toLocaleString('en-GB');
+  }
+  function dayDiff(a, b) {
+    return Math.round((b.getTime() - a.getTime()) / 86400000);
+  }
+
+  function berlinToday() {
+    var parts = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Europe/Berlin', year: 'numeric', month: '2-digit', day: '2-digit'
+    }).formatToParts(new Date());
+    var got = {};
+    for (var i = 0; i < parts.length; i++) { got[parts[i].type] = parts[i].value; }
+    return new Date(Date.UTC(Number(got.year), Number(got.month) - 1, Number(got.day)));
+  }
+  var TODAY = berlinToday();
+
+  /* Build the reachable end-of-tenancy months: every month whose notice window
+     has not already closed, out to fifteen months ahead. */
+  function buildOptions() {
+    var list = [];
+    var probe = new Date(Date.UTC(TODAY.getUTCFullYear(), TODAY.getUTCMonth(), 1));
+    var guard = 0;
+    while (list.length < 15 && guard < 40) {
+      var deadline = thirdWorkingDay(probe.getUTCFullYear(), probe.getUTCMonth());
+      if (deadline.getTime() >= TODAY.getTime()) {
+        var end = lastDayOfMonth(probe.getUTCFullYear(), probe.getUTCMonth() + 2);
+        list.push({
+          noticeMonth: new Date(probe.getTime()),
+          deadline: deadline,
+          end: end,
+          shifted: deadline.getUTCDate() !== 3,
+          saturday: deadline.getUTCDay() === 6
+        });
+      }
+      probe = new Date(Date.UTC(probe.getUTCFullYear(), probe.getUTCMonth() + 1, 1));
+      guard += 1;
+    }
+    return list;
+  }
+
+  function missedThisMonth() {
+    var d = thirdWorkingDay(TODAY.getUTCFullYear(), TODAY.getUTCMonth());
+    return d.getTime() < TODAY.getTime() ? d : null;
+  }
+
+  function paintButtons() {
+    var html = '';
+    for (var i = 0; i < options.length; i++) {
+      var o = options[i];
+      html += '<button type="button" data-month="' + i + '" class="' + (i === pickedMonth ? 'on' : '') + '"'
+        + ' aria-current="' + (i === pickedMonth ? 'true' : 'false') + '">'
+        + fmtShort(o.end) + '<small>' + o.end.getUTCFullYear() + '</small></button>';
+    }
+    monthsEl.innerHTML = html;
+
+    var rentHtml = '';
+    for (var r = 0; r < RENTS.length; r++) {
+      var sqm = Math.round(RENTS[r] / MIETSPIEGEL);
+      rentHtml += '<button type="button" data-rent="' + r + '" class="' + (r === pickedRent ? 'on' : '') + '"'
+        + ' aria-current="' + (r === pickedRent ? 'true' : 'false') + '">'
+        + euro(RENTS[r]) + '<small>about ' + sqm + ' m²</small></button>';
+    }
+    rentsEl.innerHTML = rentHtml;
+
+    var stepHtml = '';
+    for (var s = 0; s < STAGES.length; s++) {
+      stepHtml += '<button type="button" data-step="' + s + '" class="' + (s === currentStep ? 'on' : '') + '"'
+        + ' aria-current="' + (s === currentStep ? 'true' : 'false') + '">'
+        + '<b>' + STAGES[s].tag + '</b>' + STAGES[s].name + '</button>';
+    }
+    stepsEl.innerHTML = stepHtml;
+  }
+
+  /* ---- canvas helpers ----
+     The canvas is drawn in its own pixel space and then scaled by CSS. Rendered
+     type size is fontPx * cssWidth / canvasWidth, so a phone needs a narrower
+     coordinate space, not smaller numbers. Two layouts, one set of font sizes. */
+  function narrow() { return (CV.clientWidth || CV.parentNode.clientWidth || 700) < 520; }
+
+  function sizeTo(w, h) {
+    CV.width = w; CV.height = h;
+    CV.style.aspectRatio = w + ' / ' + h;
+    CTX.setTransform(1, 0, 0, 1, 0, 0);
+    CTX.clearRect(0, 0, w, h);
+    CTX.fillStyle = '#FFFFFF';
+    CTX.fillRect(0, 0, w, h);
+  }
+  function roundRect(x, y, w, h, r, fill, stroke, lw) {
+    CTX.beginPath();
+    CTX.moveTo(x + r, y);
+    CTX.arcTo(x + w, y, x + w, y + h, r);
+    CTX.arcTo(x + w, y + h, x, y + h, r);
+    CTX.arcTo(x, y + h, x, y, r);
+    CTX.arcTo(x, y, x + w, y, r);
+    CTX.closePath();
+    if (fill) { CTX.fillStyle = fill; CTX.fill(); }
+    if (stroke) { CTX.strokeStyle = stroke; CTX.lineWidth = lw || 2; CTX.stroke(); }
+  }
+  function label(text, x, y, size, colour, weight, align) {
+    CTX.fillStyle = colour;
+    CTX.font = (weight || '600') + ' ' + size + 'px Montserrat, -apple-system, Segoe UI, sans-serif';
+    CTX.textAlign = align || 'left';
+    CTX.textBaseline = 'alphabetic';
+    CTX.fillText(text, x, y);
+  }
+  function wrap(text, x, y, maxW, size, colour, weight, lead) {
+    CTX.font = (weight || '600') + ' ' + size + 'px Montserrat, -apple-system, Segoe UI, sans-serif';
+    var words = text.split(' ');
+    var line = '';
+    var yy = y;
+    for (var i = 0; i < words.length; i++) {
+      var test = line ? line + ' ' + words[i] : words[i];
+      if (CTX.measureText(test).width > maxW && line) {
+        label(line, x, yy, size, colour, weight);
+        line = words[i];
+        yy += lead || Math.round(size * 1.45);
+      } else {
+        line = test;
+      }
+    }
+    if (line) { label(line, x, yy, size, colour, weight); }
+    return yy + (lead || Math.round(size * 1.45));
+  }
+
+  /* ---- Stage 1: the calendar of the notice month ---- */
+  function drawLetter(o) {
+    var thin = narrow();
+    var W = thin ? 500 : 1040;
+    var pad = thin ? 16 : 30;
+    var gap = thin ? 4 : 10;
+    var cell = (W - pad * 2 - gap * 6) / 7;
+    var cellH = thin ? cell * 0.78 : cell * 0.62;
+
+    var year = o.noticeMonth.getUTCFullYear();
+    var mi = o.noticeMonth.getUTCMonth();
+    var first = new Date(Date.UTC(year, mi, 1));
+    var offset = (first.getUTCDay() + 6) % 7;
+    var days = lastDayOfMonth(year, mi).getUTCDate();
+    var rows = Math.ceil((offset + days) / 7);
+
+    var gridY = thin ? 108 : 130;
+    var H = gridY + rows * (cellH + gap) + (thin ? 86 : 78);
+    sizeTo(W, H);
+
+    label('The letter has to be in the landlord’s hands by', pad, thin ? 34 : 46, thin ? 15 : 22, '#6b7360', '600');
+    label(fmt(o.deadline), pad, thin ? 66 : 84, thin ? 26 : 34, '#1B5E20', '800');
+
+    for (var c = 0; c < 7; c++) {
+      label(thin ? DAY_SHORT[c].slice(0, 2) : DAY_SHORT[c], pad + c * (cell + gap) + cell / 2, gridY - 10, thin ? 13 : 17, '#9aa392', '700', 'center');
+    }
+
+    var workingCount = 0;
+    for (var d = 1; d <= days; d++) {
+      var date = new Date(Date.UTC(year, mi, d));
+      var idx = offset + d - 1;
+      var x = pad + (idx % 7) * (cell + gap);
+      var y = gridY + Math.floor(idx / 7) * (cellH + gap);
+      var working = isWorkingDay(date);
+      if (working) { workingCount += 1; }
+      var rank = working ? workingCount : 0;
+      var isDeadline = date.getTime() === o.deadline.getTime();
+      var isToday = date.getTime() === TODAY.getTime();
+      var past = date.getTime() < TODAY.getTime();
+
+      var fill = '#F4F6F0';
+      var ink = '#9aa392';
+      if (working && rank <= 3) { fill = '#EAF3E2'; ink = '#1B5E20'; }
+      if (!working) { fill = '#EFEFEF'; ink = '#B0B0B0'; }
+      if (isDeadline) { fill = '#FFE600'; ink = '#123D18'; }
+      if (past && !isDeadline) { fill = '#FAFAFA'; ink = '#C8CCC2'; }
+
+      roundRect(x, y, cell, cellH, thin ? 7 : 10, fill, isDeadline ? '#1B5E20' : '#E0E4DA', isDeadline ? (thin ? 4 : 5) : 1.5);
+      label(String(d), x + (thin ? 7 : 12), y + (thin ? 24 : 32), thin ? 17 : 22, ink, isDeadline ? '800' : '700');
+
+      if (thin) {
+        if (working && rank <= 3) { label(String(rank), x + cell - 7, y + cellH - 9, 13, isDeadline ? '#123D18' : '#7CB342', '800', 'right'); }
+      } else if (!working) {
+        label(HOLIDAYS[iso(date)] ? 'holiday' : 'Sunday', x + 12, y + 58, 13, ink, '600');
+      } else if (rank <= 3) {
+        label('working day ' + rank, x + 12, y + 58, 13, ink, '700');
+      }
+      if (isToday) {
+        roundRect(x + 3, y + 3, cell - 6, cellH - 6, thin ? 5 : 8, null, '#E08600', 3);
+        if (!thin) { label('today', x + cell - 12, y + 32, 13, '#E08600', '800', 'right'); }
+      }
+    }
+
+    var by = gridY + rows * (cellH + gap) + (thin ? 26 : 30);
+    var note = MONTH_LONG[mi] + ' ' + year + '. Sundays and Berlin public holidays are not working days, Saturdays are. '
+      + 'What counts is the day the letter arrives, not the day you send it.';
+    wrap(note, pad, by, W - pad * 2, thin ? 13 : 17, '#6b7360', '600');
+  }
+
+  /* ---- Stage 2: the rent still to pay ---- */
+  function drawRent(o) {
+    var thin = narrow();
+    var W = thin ? 500 : 1040;
+    var pad = thin ? 16 : 30;
+    var rent = RENTS[pickedRent];
+    var months = monthsBetween(TODAY, o.end);
+    var total = months.length * rent;
+    var barY = thin ? 108 : 140;
+    var barH = thin ? 72 : 86;
+    var panelY = barY + barH + (thin ? 76 : 84);
+    var H = panelY + (thin ? 150 : 128);
+    sizeTo(W, H);
+
+    label('Rent from today until you hand back the keys', pad, thin ? 34 : 46, thin ? 15 : 22, '#6b7360', '600');
+    label(euro(total) + ' cold, over ' + months.length + ' month' + (months.length === 1 ? '' : 's'), pad, thin ? 66 : 84, thin ? 23 : 34, '#1B5E20', '800');
+
+    var barW = W - pad * 2;
+    var unit = barW / (months.length + 1);
+    for (var i = 0; i < months.length; i++) {
+      var x = pad + i * unit;
+      roundRect(x + 2, barY, unit - 4, barH, 9, '#EAF3E2', '#1B5E20', 2);
+      label(MONTH_SHORT[months[i].getUTCMonth()], x + unit / 2 - 2, barY + (thin ? 32 : 36), thin ? 15 : 19, '#1B5E20', '800', 'center');
+      label(euro(rent), x + unit / 2 - 2, barY + (thin ? 54 : 62), thin ? 13 : 16, '#42654A', '600', 'center');
+    }
+    var ghostX = pad + months.length * unit;
+    roundRect(ghostX + 2, barY, unit - 4, barH, 9, '#FDECEC', '#C62828', 2);
+    label(MONTH_SHORT[(o.end.getUTCMonth() + 1) % 12], ghostX + unit / 2 - 2, barY + (thin ? 32 : 36), thin ? 15 : 19, '#C62828', '800', 'center');
+    label(euro(rent), ghostX + unit / 2 - 2, barY + (thin ? 54 : 62), thin ? 13 : 16, '#C62828', '600', 'center');
+
+    label('what you pay if the letter lands on time', pad, barY + barH + (thin ? 28 : 30), thin ? 14 : 18, '#1B5E20', '700');
+    label('the month a late letter buys you', pad, barY + barH + (thin ? 52 : 58), thin ? 14 : 18, '#C62828', '700');
+
+    roundRect(pad, panelY, W - pad * 2, H - panelY - (thin ? 8 : 6), 12, '#FFFDF0', '#E0E4DA', 2);
+    label('Three days late is not three days of rent.', pad + (thin ? 14 : 24), panelY + (thin ? 32 : 42), thin ? 17 : 24, '#123D18', '800');
+    wrap('Notice given on ' + fmtShort(new Date(o.deadline.getTime() + 86400000)) + ' does not end your tenancy on ' + fmt(o.end)
+      + '. It ends it on ' + fmt(lastDayOfMonth(o.end.getUTCFullYear(), o.end.getUTCMonth() + 1)) + ', and that is '
+      + euro(rent) + ' of cold rent plus a month of Nebenkosten for a flat you are not living in.',
+      pad + (thin ? 14 : 24), panelY + (thin ? 58 : 76), W - pad * 2 - (thin ? 28 : 48), thin ? 13 : 19, '#42654A', '600');
+  }
+
+  /* Six months on from the 31st is the 30th, not the 1st of the next month:
+     the civil code lands on the last day of the month when the day is missing. */
+  function addMonths(date, n) {
+    var y = date.getUTCFullYear();
+    var m = date.getUTCMonth() + n;
+    var d = date.getUTCDate();
+    var last = new Date(Date.UTC(y, m + 1, 0)).getUTCDate();
+    return new Date(Date.UTC(y, m, Math.min(d, last)));
+  }
+
+  function monthsBetween(from, to) {
+    var list = [];
+    var cur = new Date(Date.UTC(from.getUTCFullYear(), from.getUTCMonth(), 1));
+    var stop = new Date(Date.UTC(to.getUTCFullYear(), to.getUTCMonth(), 1));
+    var guard = 0;
+    while (cur.getTime() <= stop.getTime() && guard < 40) {
+      list.push(new Date(cur.getTime()));
+      cur = new Date(Date.UTC(cur.getUTCFullYear(), cur.getUTCMonth() + 1, 1));
+      guard += 1;
+    }
+    return list;
+  }
+
+  /* ---- Stage 3: the deposit clock ---- */
+  function drawDeposit(o) {
+    var thin = narrow();
+    var W = thin ? 500 : 1040;
+    var pad = thin ? 16 : 30;
+    var rent = RENTS[pickedRent];
+    var cap = rent * 3;
+    var sixMonths = addMonths(o.end, 6);
+    var lineY = thin ? 176 : 210;
+    var panelY = thin ? 250 : 300;
+    var H = panelY + (thin ? 150 : 142);
+    sizeTo(W, H);
+
+    label('The most your landlord was ever allowed to hold', pad, thin ? 34 : 46, thin ? 15 : 22, '#6b7360', '600');
+    label(euro(cap) + ', three cold rents', pad, thin ? 66 : 84, thin ? 23 : 34, '#1B5E20', '800');
+    label('and not a cent more', pad, thin ? 88 : 112, thin ? 14 : 19, '#6b7360', '600');
+
+    var lineX = pad + (thin ? 26 : 40);
+    var lineW = W - lineX * 2;
+    CTX.lineCap = 'round';
+    CTX.strokeStyle = '#E0E4DA'; CTX.lineWidth = thin ? 6 : 8;
+    CTX.beginPath(); CTX.moveTo(lineX, lineY); CTX.lineTo(lineX + lineW, lineY); CTX.stroke();
+    CTX.strokeStyle = '#1B5E20'; CTX.lineWidth = thin ? 6 : 8;
+    CTX.beginPath(); CTX.moveTo(lineX, lineY); CTX.lineTo(lineX + lineW * 0.62, lineY); CTX.stroke();
+
+    var marks = [
+      { at: 0, top: 'Keys back', bottom: thin ? fmtShort(o.end) : fmt(o.end), bound: true },
+      { at: 0.62, top: 'Six months on', bottom: thin ? fmtShort(sixMonths) : fmt(sixMonths), bound: true },
+      { at: 1, top: 'Last bill', bottom: thin ? 'up to a year' : 'up to a year after', bound: false }
+    ];
+    for (var i = 0; i < marks.length; i++) {
+      var mx = lineX + lineW * marks[i].at;
+      CTX.beginPath();
+      CTX.arc(mx, lineY, thin ? 10 : 14, 0, Math.PI * 2);
+      CTX.fillStyle = marks[i].bound ? '#FFE600' : '#FFFFFF';
+      CTX.fill();
+      CTX.strokeStyle = marks[i].bound ? '#1B5E20' : '#9aa392';
+      CTX.lineWidth = thin ? 4 : 5;
+      CTX.stroke();
+      var align = i === 0 ? 'left' : (i === marks.length - 1 ? 'right' : 'center');
+      var tx = i === 0 ? mx - (thin ? 8 : 6) : (i === marks.length - 1 ? mx + (thin ? 8 : 6) : mx);
+      label(marks[i].top, tx, lineY - (thin ? 32 : 40), thin ? 14 : 20, '#123D18', '800', align);
+      label(marks[i].bottom, tx, lineY - (thin ? 14 : 16), thin ? 12 : 17, '#6b7360', '600', align);
+    }
+    label('damage claims time-bar here', lineX + lineW * 0.62, lineY + (thin ? 34 : 44), thin ? 12 : 18, '#1B5E20', '700', 'center');
+
+    roundRect(pad, panelY, W - pad * 2, H - panelY - (thin ? 8 : 6), 12, '#FFFDF0', '#E0E4DA', 2);
+    label('The deposit was never the landlord’s money.', pad + (thin ? 14 : 24), panelY + (thin ? 32 : 40), thin ? 16 : 23, '#123D18', '800');
+    wrap('It has to sit in a separate bank account, earning interest, and the interest is yours. Once the flat goes back, '
+      + 'claims for damage run out after six months. Only a slice held against the last Nebenkosten bill can honestly stay longer.',
+      pad + (thin ? 14 : 24), panelY + (thin ? 58 : 74), W - pad * 2 - (thin ? 28 : 48), thin ? 13 : 19, '#42654A', '600');
+  }
+
+  /* ---- results and flags ---- */
+  function render() {
+    var o = options[pickedMonth];
+    var rent = RENTS[pickedRent];
+    paintButtons();
+
+    if (currentStep === 0) {
+      drawLetter(o);
+      var left = dayDiff(TODAY, o.deadline);
+      var lede = left === 0 ? 'Today is the last day.'
+        : (left === 1 ? 'One day left.' : left + ' days left.');
+      resultEl.innerHTML = '<h3>To be out on ' + fmt(o.end) + '</h3>'
+        + '<span class="nd-big">' + lede + '</span>'
+        + '<p>Your notice has to have reached the landlord by <strong>' + fmt(o.deadline) + '</strong>, the third working day of '
+        + MONTH_LONG[o.noticeMonth.getUTCMonth()] + '. Three months of rent then run to the end of '
+        + MONTH_LONG[o.end.getUTCMonth()] + '.</p>';
+      legendEl.innerHTML = swatch('#FFE600', 'the deadline') + swatch('#EAF3E2', 'working days one to three')
+        + swatch('#EFEFEF', 'Sunday or Berlin holiday') + swatch('#FAFAFA', 'already gone');
+    } else if (currentStep === 1) {
+      drawRent(o);
+      var monthsLeft = monthsBetween(TODAY, o.end).length;
+      resultEl.innerHTML = '<h3>What the last stretch costs</h3>'
+        + '<span class="nd-big">' + euro(monthsLeft * rent) + '</span>'
+        + '<p>Cold rent from this month to the end of ' + MONTH_LONG[o.end.getUTCMonth()] + ', at '
+        + euro(rent) + ' a month. Miss ' + fmtShort(o.deadline) + ' and one more month joins the total: <strong>'
+        + euro((monthsLeft + 1) * rent) + '</strong>.</p>';
+      legendEl.innerHTML = swatch('#EAF3E2', 'months you were always going to pay') + swatch('#FDECEC', 'the month a late letter buys you');
+    } else {
+      drawDeposit(o);
+      resultEl.innerHTML = '<h3>The deposit clock</h3>'
+        + '<span class="nd-big">' + euro(rent * 3) + '</span>'
+        + '<p>Three cold rents is the legal ceiling, and you were always allowed to pay it in three instalments. '
+        + 'After the keys go back on ' + fmt(o.end) + ', claims for damage to the flat run out six months later.</p>';
+      legendEl.innerHTML = swatch('#FFE600', 'a date that binds') + swatch('#FFFFFF', 'a date that is only habit');
+    }
+
+    flagEl.innerHTML = flagFor(o);
+    footEl.textContent = 'Notice period from § 573c BGB, deposit rules from § 551 BGB, the six-month limitation from § 548 BGB. '
+      + 'Saturday counts as a working day here because the Federal Court of Justice said so on 27 April 2005 (VIII ZR 206/04). '
+      + 'Berlin public holidays are the ten in the Berlin holiday act, including 8 March. The square metre figures next to each rent use '
+      + 'the median cold rent of €' + MIETSPIEGEL.toFixed(2).replace('.', ',') + ' per square metre in the Berliner Mietspiegel 2026. '
+      + 'This is a planning tool and not legal advice: a notice waiver in your contract can override all of it.';
+  }
+
+  function swatch(colour, text) {
+    return '<span><i class="nd-swatch" style="background:' + colour + '"></i> ' + text + '</span>';
+  }
+
+  function flagFor(o) {
+    var missed = missedThisMonth();
+    if (o.saturday) {
+      return '<strong>This one falls on a Saturday.</strong> Saturday counts as a working day for the deadline itself, but the courts have never settled '
+        + 'what happens when the third working day <em>is</em> a Saturday. Get the letter in by Friday '
+        + fmt(new Date(o.deadline.getTime() - 86400000)) + ' and the argument never starts.';
+    }
+    if (o.shifted) {
+      return '<strong>This deadline is not the 3rd.</strong> ' + MONTH_LONG[o.noticeMonth.getUTCMonth()] + ' '
+        + o.noticeMonth.getUTCFullYear() + ' opens with a Sunday or a Berlin public holiday, so the third working day lands on '
+        + fmt(o.deadline) + '. You have longer than the calendar suggests, which is the one direction this rule ever moves in your favour.';
+    }
+    if (missed && pickedMonth === 0) {
+      return '<strong>This month has already closed.</strong> The window for a '
+        + MONTH_LONG[(TODAY.getUTCMonth() + 2) % 12] + ' exit shut on ' + fmt(missed) + '. The earliest end date still open to you is the one selected above.';
+    }
+    return '<strong>Check your contract before you post anything.</strong> Many Berlin leases carry a notice waiver for the first year or two. '
+      + 'A waiver can run four years at most, counted from the day the contract was signed, and until it expires the third working day does nothing for you.';
+  }
+
+  /* ---- events ---- */
+  monthsEl.addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (!b) { return; }
+    pickedMonth = Number(b.getAttribute('data-month'));
+    render();
+  });
+  rentsEl.addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (!b) { return; }
+    pickedRent = Number(b.getAttribute('data-rent'));
+    render();
+  });
+  stepsEl.addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (!b) { return; }
+    currentStep = Number(b.getAttribute('data-step'));
+    render();
+  });
+  document.getElementById('ndNext').addEventListener('click', function () {
+    currentStep = (currentStep + 1) % STAGES.length;
+    render();
+  });
+  document.getElementById('ndBack').addEventListener('click', function () {
+    currentStep = (currentStep + STAGES.length - 1) % STAGES.length;
+    render();
+  });
+
+  options = buildOptions();
+  render();
+
+  var lastNarrow = narrow();
+  window.addEventListener('resize', function () {
+    var n = narrow();
+    if (n !== lastNarrow) { lastNarrow = n; render(); }
+  });
+})();
+</script>
+</body>
+</html>
