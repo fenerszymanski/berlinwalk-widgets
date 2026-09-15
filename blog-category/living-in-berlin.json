@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-09-15T06:00:12.641Z",
+ "updatedAt": "2026-09-15T08:03:08.584Z",
  "source": "Wix Blog API + blog-category/categories.json",
  "slug": "living-in-berlin",
  "categoryId": "00af1018-ef7b-465a-93b6-916187609da4",
@@ -8,28 +8,28 @@
  "shelfMode": "curated",
  "shelfLegend": "By the part of life it hits",
  "shelfLegendSub": "Four shelves, because that is how the questions actually arrive",
- "totalPosts": 20,
+ "totalPosts": 21,
  "toolCount": 20,
  "lead": {
-  "title": "Berlin Election 2026: Which Ballot Your Passport Gets You",
-  "slug": "berlin-election-2026",
-  "path": "/post/berlin-election-2026",
-  "excerpt": "Berlin elects the Abgeordnetenhaus and twelve district assemblies on Sunday 20 September 2026, with no referendum attached. German citizens get two sheets and three votes, EU citizens get the district ballot only, everyone else gets none. The online postal-vote form closes on Tuesday, the Briefwahlstelle on Friday at 15:00, and the red envelope has to be in the district office by 18:00 on Sunday.",
-  "minutes": 8,
-  "readTime": "8 min read",
-  "publishedDate": "2026-09-15T05:57:21.521Z",
-  "alt": "The Abgeordnetenhaus von Berlin on Niederkirchnerstrasse, the former Prussian Landtag, a long neoclassical facade with columns and flags flying in front under a blue sky",
-  "lead": "https://static.wixstatic.com/media/5a08a3_3c027bc2db78482192ec61bf04dccd7b~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "thumb": "https://static.wixstatic.com/media/5a08a3_3c027bc2db78482192ec61bf04dccd7b~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "square": "https://static.wixstatic.com/media/5a08a3_3c027bc2db78482192ec61bf04dccd7b~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "shelf": "geld",
+  "title": "Doctor Appointment in Berlin: The Four-Week Rule and What It Cannot Give You",
+  "slug": "doctor-appointment-berlin",
+  "path": "/post/doctor-appointment-berlin",
+  "excerpt": "The Berlin appointment service on 116117 places you with a specialist within four weeks, and for most specialties that clock only starts if your referral carries a twelve-digit code. It also states plainly that it cannot take language into account. Here is what each of the five routes into a Berlin specialist actually costs you, including the five open hours a week almost nobody uses.",
+  "minutes": 7,
+  "readTime": "7 min read",
+  "publishedDate": "2026-09-15T08:01:03.137Z",
+  "alt": "The Aerztehaus Treptow, a listed nineteenth century villa in Berlin Alt-Treptow painted with enormous daisies and green leaves across its white facade, with a Haus Apotheke sign at street level",
+  "lead": "https://static.wixstatic.com/media/5a08a3_b7a93d17fcc04940ac210e41275dfb44~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "thumb": "https://static.wixstatic.com/media/5a08a3_b7a93d17fcc04940ac210e41275dfb44~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "square": "https://static.wixstatic.com/media/5a08a3_b7a93d17fcc04940ac210e41275dfb44~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "shelf": "",
   "topic": "living-in-berlin",
-  "figure": "Sun 20 Sep",
-  "line": "is election day. A German passport gets two sheets, an EU passport gets the district assembly, and the red envelope has to be in by 18:00.",
-  "term": "Briefwahl",
-  "gloss": "The postal vote. The online form closes on the Tuesday before the election, written applications and walk-in voting at the Briefwahlstelle on the Friday at 15:00, and the red Wahlbrief has to be physically at the Bezirkswahlamt by 18:00 on election day. Postmarked is not there.",
-  "termCta": "Which sheets and which deadline are yours",
-  "tool": "berlin-ballot-board"
+  "figure": "",
+  "line": "The Berlin appointment service on 116117 places you with a specialist within four weeks, and for most specialties that clock only starts if your referral carries a twelve-digit code.",
+  "term": "",
+  "gloss": "",
+  "termCta": "",
+  "tool": ""
  },
  "glossary": [
   {
@@ -400,6 +400,22 @@
      "line": "of losses were locked up between six and ten in the evening.",
      "figure": "31 %",
      "tool": "berlin-bike-theft-clock"
+    }
+   ]
+  },
+  {
+   "key": "more",
+   "title": "More in this category",
+   "lead": "Everything else filed here",
+   "posts": [
+    {
+     "title": "Doctor Appointment in Berlin: The Four-Week Rule and What It Cannot Give You",
+     "slug": "doctor-appointment-berlin",
+     "path": "/post/doctor-appointment-berlin",
+     "minutes": 7,
+     "alt": "The Aerztehaus Treptow, a listed nineteenth century villa in Berlin Alt-Treptow painted with enormous daisies and green leaves across its white facade, with a Haus Apotheke sign at street level",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_b7a93d17fcc04940ac210e41275dfb44~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "The Berlin appointment service on 116117 places you with a specialist within four weeks, and for most specialties that clock only starts if your referral carries a twelve-digit code."
     }
    ]
   }

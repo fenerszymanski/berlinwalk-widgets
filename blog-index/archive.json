@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-15T06:00:11.839Z",
+  "updatedAt": "2026-09-15T08:02:57.642Z",
   "source": "Wix Blog API",
-  "totalPosts": 386,
+  "totalPosts": 387,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Doctor Appointment in Berlin: The Four-Week Rule and What It Cannot Give You",
+      "slug": "doctor-appointment-berlin",
+      "path": "/post/doctor-appointment-berlin",
+      "url": "https://www.berlinwalk.com/post/doctor-appointment-berlin",
+      "excerpt": "The Berlin appointment service on 116117 places you with a specialist within four weeks, and for most specialties that clock only starts if your referral carries a twelve-digit code. It also states plainly that it cannot take language into account. Here is what each of the five routes into a Berlin specialist actually costs you, including the five open hours a week almost nobody uses.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-15T08:01:03.137Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_b7a93d17fcc04940ac210e41275dfb44~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-aerztehaus-treptow.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_b7a93d17fcc04940ac210e41275dfb44~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-aerztehaus-treptow.jpg",
+      "alt": "The Aerztehaus Treptow, a listed nineteenth century villa in Berlin Alt-Treptow painted with enormous daisies and green leaves across its white facade, with a Haus Apotheke sign at street level",
+      "relatedToolSlug": ""
+    },
     {
       "title": "Berlin Election: Which Ballot Your Passport Gets You",
       "slug": "berlin-election-2026",
