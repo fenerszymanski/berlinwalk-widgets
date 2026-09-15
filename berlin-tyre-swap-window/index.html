@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Tyre Swap Window</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --soft: #C5E1A5;
+    --pale: #EEF5E4;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --muted: #5a665b;
+    --line: rgba(27, 94, 32, .18);
+    --cold: #5B8FC9;
+    --deepcold: #1F3A63;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .tw { max-width: 820px; margin: 0 auto; padding: 14px 12px 16px; }
+  .tw-head h2 { font-size: 1.06rem; margin: 0 0 4px; color: var(--green); }
+  .tw-head p { margin: 0; font-size: .78rem; color: var(--muted); line-height: 1.55; }
+
+  .tw-plot { margin-top: 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 11px 10px 10px; }
+  .tw-plot h3 { font-size: .63rem; letter-spacing: .07em; text-transform: uppercase; color: var(--deep); margin: 0 0 8px; }
+  .tw-canvas-wrap { position: relative; touch-action: pan-y; }
+  canvas { display: block; width: 100%; height: auto; cursor: ew-resize; border-radius: 4px; }
+  .tw-scrub { width: 100%; margin: 9px 0 0; display: block; accent-color: var(--green); }
+  .tw-scrub:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+  .tw-date { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-top: 7px; flex-wrap: wrap; }
+  .tw-date .d { font-size: 1.02rem; font-weight: 800; color: var(--deep); }
+  .tw-date .h { font-size: .66rem; color: var(--muted); line-height: 1.5; }
+  .tw-key { display: flex; flex-wrap: wrap; gap: 5px 16px; margin-top: 9px; font-size: .64rem; color: var(--muted); }
+  .tw-key i { display: inline-block; width: 11px; height: 11px; border-radius: 2px; vertical-align: -1px; margin-right: 5px; border: 1px solid rgba(0,0,0,.08); }
+
+  .tw-out { margin-top: 12px; border-radius: 10px; background: var(--deep); color: #fff; padding: 13px 14px 14px; }
+  .tw-out .big { font-size: 1.45rem; font-weight: 800; line-height: 1.15; color: var(--yellow); }
+  .tw-out .big span { font-size: .78rem; font-weight: 600; color: #fff; display: block; margin-top: 6px; line-height: 1.5; }
+  .tw-cells { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 12px; padding-top: 11px; border-top: 1px solid rgba(255,255,255,.2); }
+  .tw-cells .cell { min-width: 140px; flex: 1 1 140px; }
+  .tw-cells .v { font-size: .92rem; font-weight: 700; color: var(--yellow); line-height: 1.3; }
+  .tw-cells .k { font-size: .64rem; color: rgba(255,255,255,.85); line-height: 1.45; margin-top: 2px; }
+  .tw-move { margin-top: 12px; padding: 11px 12px; border-radius: 9px; background: var(--yellow); color: var(--deep); font-size: .76rem; line-height: 1.55; font-weight: 600; }
+  .tw-foot { margin-top: 11px; font-size: .63rem; color: var(--muted); line-height: 1.55; }
+  .tw-foot a { color: var(--green); }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+</style>
+</head>
+<body>
+<div class="tw">
+  <div class="tw-head">
+    <h2>Berlin tyre swap window</h2>
+    <p>Every column below is one day between 1 September and 30 April. Every row is one winter at the Berlin-Tempelhof weather station, thirty of them, oldest at the top. Drag the marker to the date you were planning to put the winter tyres on and the board counts how many of those thirty winters had already turned by then.</p>
+  </div>
+
+  <div class="tw-plot">
+    <h3>Thirty Berlin winters, day by day</h3>
+    <div class="tw-canvas-wrap">
+      <canvas id="tw-canvas" width="740" height="268" role="img" aria-label="Heat map of thirty Berlin winters showing ground frost, air frost and ice days for every day from 1 September to 30 April"></canvas>
+    </div>
+    <label class="sr" for="tw-scrub">Planned swap date</label>
+    <input class="tw-scrub" id="tw-scrub" type="range" min="0" max="241" step="1" value="45">
+    <div class="tw-date">
+      <div class="d" id="tw-date">16 October</div>
+      <div class="h" id="tw-hint">Drag the marker, or use the arrow keys.</div>
+    </div>
+    <div class="tw-key">
+      <span><i style="background:#EEF5E4"></i>above freezing</span>
+      <span><i style="background:#FFE600"></i>ground frost only</span>
+      <span><i style="background:#5B8FC9"></i>air frost at night</span>
+      <span><i style="background:#1F3A63"></i>ice day, never above zero</span>
+    </div>
+  </div>
+
+  <div class="tw-out">
+    <div class="big"><span id="tw-headline">&nbsp;</span></div>
+    <div class="tw-cells">
+      <div class="cell"><div class="v" id="tw-v1">&nbsp;</div><div class="k">winters with ground frost before this date</div></div>
+      <div class="cell"><div class="v" id="tw-v2">&nbsp;</div><div class="k">ground frost nights behind you, median winter</div></div>
+      <div class="cell"><div class="v" id="tw-v3">&nbsp;</div><div class="k">winters with a full air frost before this date</div></div>
+      <div class="cell"><div class="v" id="tw-v4">&nbsp;</div><div class="k">winters with an ice day before this date</div></div>
+    </div>
+  </div>
+
+  <div class="tw-move" id="tw-move">&nbsp;</div>
+
+  <div class="tw-foot">
+    Daily records for Berlin-Tempelhof, station 433, winters 1995/96 to 2024/25, from the
+    <a href="https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/daily/kl/historical/" target="_blank" rel="noopener">Deutscher Wetterdienst Climate Data Center</a>.
+    Ground frost is the minimum 5 cm above the ground, which is the reading closest to the road surface. Air frost is the standard minimum at 2 m. 29 February is left out so every winter is the same length.
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var GRID = [
+  ["1995/96","00000000000000000000000000000000000000000000000000011111001010122220200002000220222202222023333333221002233332232022233333332333212222222233233333333333323333333332122320112333221222222222222323222022220102222112222110110022202111100000000000"],
+  ["1996/97","00000000000000000000000000000000000000001010100000001001100000000000010000120000100222222220100122222221222202333333333333333333333333212222221200122200222210200200000122200000000110001202211101001222222222200010011010220001200201122111010000"],
+  ["1997/98","00000000000000000001100000011000000000000000111000220102221012122200000010001002222222022100212211010000023332211120001002000000000011220000002222323222233222010010000001010101000002200010022222011001022222200100000000100001011010010000000000"],
+  ["1998/99","00000000000000000000000000000000000000000000000010000000000000000100110002002123233333322223333233333320000010022222000012222100000233320001102002000233321000122233322212211002221000000101220012210222000011100111111110000000000000111000000001"],
+  ["1999/00","00000000000000000000000000000000000000000000111122200000000100001000000122222212222222000000000120000000022202222221022222200002010122332200222333320010000010000000211102200221200200001210002000011122101110100000100012110211001000000000000000"],
+  ["2000/01","00000000000000000000000000000000000000000000000000000000000000000000000010000101000100000000001001000000000022233233322222221200011022332223222211112002223332000022002222221002322222222222000000001112222112222100000000001001122000121000000000"],
+  ["2001/02","00000000000000000000000000000000000000000000000000000000000000000000022202221202201122000002222000222012322221222332020223223332023322222322100000000000000000000000012222211221120001220000000110020000001012022211110122222000000000001100000000"],
+  ["2002/03","00000000000000000000000110010000000011111110000001100010000010122222011100000012220000000000110233333333332222333333221023212333333332200012102210010022332222332232322233333222222222222222200002222121222221101111101212222222110010000011000000"],
+  ["2003/04","00000000000000000000000000010000000000000111111222122221222000000111001222210000000000000001000022222222012122002221001012323333222221101102223333333322200000001222320220222222222222022222221120000000000100221111000000010121111000010000000000"],
+  ["2004/05","00000000000000001000000000000000000000111100000011100000000000000001201101220002221122200110102200002202322112222001212100001000000000002221100122333332122212222201212222322232222333223332222212110002222100000112211101001101010000022111000110"],
+  ["2005/06","00000000000000000000000000000000000000000001110110000000000000000001011011001202222022222222221122022222002222110002233332221223333320223323322333333322233223210122222200022122232222222222222333222222222220001110000121110110000000000000000000"],
+  ["2006/07","00000000000000000000000000000000000000000000011100000000000002222001000000000000001000010001000000001100000010000001122120000000000000001100000233322210000001122232000000211102200100011100110010111001211100001000111100000001000000101100000011"],
+  ["2007/08","00000000000000000000000000000000000011010011100011122000000000001100001112222002221022222200000000001000222232333202221211223322212101220010000220001100101220000121012222000000010000001220000000001122212222221110000111211001010000110011001000"],
+  ["2008/09","00000000000000000000000000100000010000010000000000000100000001100000000001100120012222202222012120120010000010000102323333332123333333232221122221222332232211221222322223322320100000012000110101100011220022001011101001000000001000111111100000"],
+  ["2009/10","00000000000000000000000000000000000000000011000012000000001112000001000100000000000000000001112100000123223333332220121233333333333333333322223333333222322222233333233322222221200000122222222220221100000110000000011011010000101111110111000100"],
+  ["2010/11","00000000000000000000000000000110000000011111001200000001100011000001012000000000010022233333333223322123333333333223333332023232000220000010022211022222332210000121222223333333222222222222210011000001121000222110000000001100001101000000100000"],
+  ["2011/12","00000000000000000000000000000000000000000011110000121000000000000001111222201220122211001211010001000221000000110000000001000001000000022212010112223333333333333333332120012200002200222222110000011100100111100000100012221000110010111110000000"],
+  ["2012/13","00000000000000000000001000000000000000100100010000000001122000001000000011222210001200000022221233322333210000233200002000000000000223333323333333332100002202222232222211123333200012222221223332222223223332222222222202221000110000000000000000"],
+  ["2013/14","00000000000000000000000000110011110000000011000110000010000010000000000111101000010022220000222112100002211110100000000022211011000000200011233333333333221222100011110001100011111112110012111111100000001111111111100000000110001111100000000010"],
+  ["2014/15","00000000000000000000000000010000000000000000000000000000001000000001110100000100000001112333321011122100110100000001233321000102210000001022202222101111222222322100222222122122122212001111011122000011212211000000001121211100010001111111000100"],
+  ["2015/16","00000000000000000000000000111111100000011100000000000101000001112000000000000000002220122000000000001001200000000110000022123333322200122233333320000110000001000001220022211000222212112012220012101210000110000010110000111000011001011001001110"],
+  ["2016/17","00000000000000000000010000000000100000000000000000000001000110010000022222210000000112212220222221000022112200222110000222121233333221222323320232222222222200233323322220010000110001000010000122100001001011111000001000000000000011220001111111"],
+  ["2017/18","00000000000000000010001000000000000000000000000000000000000000010011000011200110100000100122121000122112110122000000111220100011222000222111122220000001112222222221222211122223233333332221112100002322221012011121120001101000000000000100001100"],
+  ["2018/19","00000000000000000000000010001110000011100000000011110000000011010000100000001220010000222210000100000010222211000010000000022211100110010002223233320122221221120000101121210022211111000010001100000001200011100111210000111110001111111000000000"],
+  ["2019/20","00000000000000000011000000000000001110000000000000000000001222000000111111001200000000000120121220001112011011111000012200221121200001110110012122221000000001001000011100001000000110001101100000221100022222211222201111111111110111111111011000"],
+  ["2020/21","00000000000000000110000000000000000000000110000001000000000000000101100000000000110112202222222101102210000011100000211121122000010221122332000111122222222012333333333220011011000111220220222000002222211011101011011212001001111011111011122100"],
+  ["2021/22","00000000000000000000000000000000000000111000000000001111000000010000011101000000011100012000220022232320000001222222332000000002222232011212022100000000201100000001221000000001102222222222222222111001111111111112122100010011000111100000011110"],
+  ["2022/23","00000000000000000000000000000100000000001100000000000000000000000000000010010022232111000002232001233333333332000001000000001011000000000022222002222220001022222210001210000000022222220122220120022000000000012100012222111111000000100000001101"],
+  ["2023/24","00000000000000000000000000000000000000000000001200000000000000000000000000000000022011223222333220100000010000001110000000000122333322002233222000110211000000022100011000100000111020000222210110000122100001100000000000000010000011012220111000"],
+  ["2024/25","00000000000000000000000000000000000000000100000000000100000000120100000001000001022200000122200000000011200000000011022221002220011122220023223220000000011222012222332222222111200011011111111101012222210000112110011112111000000000000000000100"]
+  ];
+
+  var MONTHS = [
+    ['Sep', 30], ['Oct', 31], ['Nov', 30], ['Dec', 31],
+    ['Jan', 31], ['Feb', 28], ['Mar', 31], ['Apr', 30]
+  ];
+  var NAMES = ['September', 'October', 'November', 'December', 'January', 'February', 'March', 'April'];
+  var DAYS = 242, ROWS = GRID.length;
+  var COLORS = ['#EEF5E4', '#FFE600', '#5B8FC9', '#1F3A63'];
+
+  function dateLabel(i) {
+    var n = i;
+    for (var m = 0; m < MONTHS.length; m++) {
+      if (n < MONTHS[m][1]) return (n + 1) + ' ' + NAMES[m];
+      n -= MONTHS[m][1];
+    }
+    return '30 April';
+  }
+
+  // Pre-compute, for every day index, what the thirty winters had already done by then.
+  var STATS = [];
+  (function () {
+    var firstGround = [], firstAir = [], firstIce = [];
+    for (var r = 0; r < ROWS; r++) {
+      var s = GRID[r][1], fg = -1, fa = -1, fi = -1;
+      for (var d = 0; d < DAYS; d++) {
+        var lv = s.charCodeAt(d) - 48;
+        if (fg < 0 && lv >= 1) fg = d;
+        if (fa < 0 && lv >= 2) fa = d;
+        if (fi < 0 && lv >= 3) fi = d;
+      }
+      firstGround.push(fg); firstAir.push(fa); firstIce.push(fi);
+    }
+    for (var i = 0; i < DAYS; i++) {
+      var g = 0, a = 0, ic = 0, nights = [];
+      for (var k = 0; k < ROWS; k++) {
+        if (firstGround[k] >= 0 && firstGround[k] < i) g++;
+        if (firstAir[k] >= 0 && firstAir[k] < i) a++;
+        if (firstIce[k] >= 0 && firstIce[k] < i) ic++;
+        var c = 0, row = GRID[k][1];
+        for (var d2 = 0; d2 < i; d2++) if (row.charCodeAt(d2) - 48 >= 1) c++;
+        nights.push(c);
+      }
+      nights.sort(function (x, y) { return x - y; });
+      var median = ROWS % 2 ? nights[(ROWS - 1) / 2] : Math.round((nights[ROWS / 2 - 1] + nights[ROWS / 2]) / 2);
+      STATS.push({ ground: g, air: a, ice: ic, medianNights: median, worstNights: nights[ROWS - 1] });
+    }
+  })();
+
+  var canvas = document.getElementById('tw-canvas');
+  var ctx = canvas.getContext('2d');
+  var scrub = document.getElementById('tw-scrub');
+  var W = 740, H = 268;
+  var PAD_L = 46, PAD_R = 6, PAD_T = 24, PAD_B = 20;
+  var plotW, plotH, cellW, cellH;
+
+  function layout() {
+    var wrap = canvas.parentNode;
+    var cssW = Math.max(240, Math.round(wrap.getBoundingClientRect().width));
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = cssW;
+    H = cssW < 420 ? 244 : 268;
+    PAD_L = cssW < 420 ? 42 : 52;
+    canvas.width = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
+    canvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    plotW = W - PAD_L - PAD_R;
+    plotH = H - PAD_T - PAD_B;
+    cellW = plotW / DAYS;
+    cellH = plotH / ROWS;
+  }
+
+  function draw(idx) {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0, 0, W, H);
+
+    for (var r = 0; r < ROWS; r++) {
+      var s = GRID[r][1];
+      for (var d = 0; d < DAYS; d++) {
+        var lv = s.charCodeAt(d) - 48;
+        ctx.fillStyle = COLORS[lv];
+        ctx.fillRect(PAD_L + d * cellW, PAD_T + r * cellH, cellW + 0.6, cellH + 0.6);
+      }
+    }
+
+    var small = W < 420;
+    ctx.fillStyle = '#5a665b';
+    ctx.font = '600 ' + (small ? 8.5 : 9.5) + 'px Montserrat, sans-serif';
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'middle';
+    for (var r2 = 0; r2 < ROWS; r2++) {
+      if (r2 % 3 !== 0 && r2 !== ROWS - 1) continue;
+      ctx.fillText(GRID[r2][0], PAD_L - 6, PAD_T + r2 * cellH + cellH / 2);
+    }
+
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'top';
+    ctx.font = '700 ' + (small ? 9 : 10) + 'px Montserrat, sans-serif';
+    var acc = 0;
+    for (var m = 0; m < MONTHS.length; m++) {
+      var x = PAD_L + acc * cellW;
+      ctx.strokeStyle = 'rgba(27,94,32,.22)';
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(x, PAD_T); ctx.lineTo(x, PAD_T + plotH); ctx.stroke();
+      ctx.fillStyle = '#123D18';
+      ctx.fillText(MONTHS[m][0], x + 3, PAD_T + plotH + 5);
+      acc += MONTHS[m][1];
+    }
+    ctx.strokeStyle = 'rgba(27,94,32,.30)';
+    ctx.strokeRect(PAD_L + .5, PAD_T + .5, plotW - 1, plotH - 1);
+
+    var mx = PAD_L + idx * cellW;
+    ctx.fillStyle = 'rgba(230, 57, 70, .12)';
+    ctx.fillRect(PAD_L, PAD_T, mx - PAD_L, plotH);
+
+    ctx.strokeStyle = '#1B5E20';
+    ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(mx, PAD_T - 9); ctx.lineTo(mx, PAD_T + plotH + 1); ctx.stroke();
+    ctx.fillStyle = '#1B5E20';
+    ctx.beginPath();
+    ctx.moveTo(mx - 6, PAD_T - 9); ctx.lineTo(mx + 6, PAD_T - 9); ctx.lineTo(mx, PAD_T - 1);
+    ctx.closePath(); ctx.fill();
+
+    ctx.font = '700 ' + (small ? 10 : 11) + 'px Montserrat, sans-serif';
+    ctx.fillStyle = '#123D18';
+    ctx.textBaseline = 'alphabetic';
+    var label = 'swap: ' + dateLabel(idx);
+    var tw = ctx.measureText(label).width;
+    ctx.textAlign = 'left';
+    var tx = Math.min(Math.max(mx - tw / 2, 0), W - tw);
+    ctx.fillText(label, tx, PAD_T - 13);
+  }
+
+  function band(idx) {
+    var st = STATS[idx];
+    if (st.ice > 0) {
+      return 'That is late. In ' + st.ice + ' of these thirty winters Berlin had already had a day that never climbed above zero before this date. Book the swap for the first free slot instead and drive the summer tyres to the garage, not through January.';
+    }
+    if (st.air >= 8) {
+      return 'By this date a real night frost had already arrived in ' + st.air + ' of thirty winters, and that is the kind you can see on the windscreen. If the garage cannot take you this week, take the next slot it offers rather than the one that suits you.';
+    }
+    if (st.ground >= 20) {
+      return 'The road has usually turned before this date even though the air has not. In ' + st.ground + ' of thirty winters the ground was already freezing, and almost none of those nights looked like winter from a window. This is the week to ring the garage.';
+    }
+    if (st.ground >= 8) {
+      return 'You are close to the edge. Ground frost had already happened in ' + st.ground + ' of thirty winters by this date, so this is about as late as I would leave the booking.';
+    }
+    return 'Comfortably early. Ground frost had only happened in ' + st.ground + ' of thirty winters by this date, so the tyres are on before the road ever asks for them, and you get a garage slot nobody is fighting over.';
+  }
+
+  function render() {
+    layout();
+    var idx = +scrub.value;
+    var st = STATS[idx];
+    draw(idx);
+    document.getElementById('tw-date').textContent = dateLabel(idx);
+    document.getElementById('tw-headline').textContent =
+      st.ground + ' of the last 30 Berlin winters had already frozen at ground level before ' + dateLabel(idx) + '.';
+    document.getElementById('tw-v1').textContent = st.ground + ' of 30';
+    document.getElementById('tw-v2').textContent = st.medianNights + (st.medianNights === 1 ? ' night' : ' nights');
+    document.getElementById('tw-v3').textContent = st.air + ' of 30';
+    document.getElementById('tw-v4').textContent = st.ice + ' of 30';
+    document.getElementById('tw-move').textContent = band(idx);
+  }
+
+  function fromPointer(clientX) {
+    var rect = canvas.getBoundingClientRect();
+    var x = clientX - rect.left;
+    var idx = Math.round((x - PAD_L) / cellW);
+    if (idx < 0) idx = 0;
+    if (idx > DAYS - 1) idx = DAYS - 1;
+    scrub.value = idx;
+    render();
+  }
+
+  var dragging = false;
+  canvas.addEventListener('pointerdown', function (e) {
+    dragging = true;
+    if (canvas.setPointerCapture) { try { canvas.setPointerCapture(e.pointerId); } catch (err) {} }
+    fromPointer(e.clientX);
+    e.preventDefault();
+  });
+  canvas.addEventListener('pointermove', function (e) {
+    if (!dragging) return;
+    fromPointer(e.clientX);
+    e.preventDefault();
+  });
+  ['pointerup', 'pointercancel', 'pointerleave'].forEach(function (t) {
+    canvas.addEventListener(t, function () { dragging = false; });
+  });
+  scrub.addEventListener('input', render);
+  scrub.addEventListener('change', render);
+
+  window.addEventListener('resize', render);
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
