@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-15T02:08:07.168Z",
+  "updatedAt": "2026-09-15T06:00:11.839Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 385,
-  "toolsTotal": 305,
+  "totalPosts": 386,
+  "toolsTotal": 306,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin Election: Which Ballot Your Passport Gets You",
+      "slug": "berlin-election-2026",
+      "path": "/post/berlin-election-2026",
+      "url": "https://www.berlinwalk.com/post/berlin-election-2026",
+      "excerpt": "Berlin elects the Abgeordnetenhaus and twelve district assemblies on Sunday 20 September 2026, with no referendum attached. German citizens get two sheets and three votes, EU citizens get the district ballot only, everyone else gets none. The online postal-vote form closes on Tuesday, the Briefwahlstelle on Friday at 15:00, and the red envelope has to be in the district office by 18:00 on Sunday.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-15T05:57:21.521Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_3c027bc2db78482192ec61bf04dccd7b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/abgeordnetenhaus-niederkirchnerstrasse.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_3c027bc2db78482192ec61bf04dccd7b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/abgeordnetenhaus-niederkirchnerstrasse.jpg",
+      "alt": "The Abgeordnetenhaus von Berlin on Niederkirchnerstrasse, the former Prussian Landtag, a long neoclassical facade with columns and flags flying in front under a blue sky",
+      "relatedToolSlug": "berlin-ballot-board"
+    },
+    {
       "title": "WBS Berlin: The Income Limit Is Not Your Salary",
       "slug": "wbs-berlin",
       "path": "/post/wbs-berlin",
@@ -1987,23 +2004,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_69bc83334bda4af091ff449f3b07a3d4~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/kleingarten-berlin-cover-feierabend-sunrise.jpg",
       "alt": "Sunrise in morning fog over the main path of the Feierabend allotment colony in Berlin-Mariendorf, with hedges and garden gates on both sides",
       "relatedToolSlug": "berlin-kleingarten-map"
-    },
-    {
-      "title": "Berlin Water Hardness: What Your Postcode Says About the Scale in Your Kettle",
-      "slug": "berlin-water-hardness",
-      "path": "/post/berlin-water-hardness",
-      "url": "https://www.berlinwalk.com/post/berlin-water-hardness",
-      "excerpt": "Every Berlin postcode runs officially hard water, but a kettle in Wedding and one in Köpenick do not scale at the same speed. The official per-postcode ranges, mapped, with the dishwasher setting, the detergent column and the descaling rhythm that follow.",
-      "category": "Living in Berlin",
-      "categorySlug": "living-in-berlin",
-      "topic": "living-in-berlin",
-      "topicLabel": "Living in Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-09-11T14:00:36.645Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_a24bdb7a928e4839bf741659dbb152e8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wasserturm-1600.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_a24bdb7a928e4839bf741659dbb152e8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wasserturm-1600.jpg",
-      "alt": "The two brick towers of the former Prenzlauer Berg waterworks above the trees of the Wasserturm park in autumn",
-      "relatedToolSlug": "berlin-water-hardness-map"
     }
   ]
 }
