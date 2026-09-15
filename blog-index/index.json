@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-15T08:02:57.642Z",
+  "updatedAt": "2026-09-15T13:40:40.516Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 387,
-  "toolsTotal": 307,
+  "totalPosts": 388,
+  "toolsTotal": 308,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Winter Tyres in Berlin: When the Road Actually Freezes",
+      "slug": "winter-tyres-berlin",
+      "path": "/post/winter-tyres-berlin",
+      "url": "https://www.berlinwalk.com/post/winter-tyres-berlin",
+      "excerpt": "German law does not give you a date for winter tyres. It gives you a condition, and in Berlin that condition arrives on the road about five weeks before you can feel it in the air. Thirty winters of station records put the median first ground frost on 30 September and the median first air frost on 6 November. Here is what that means for the week you book the swap, what the Alpine symbol changed in 2024, and what the gap costs in fines and insurance.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-15T13:38:36.643Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_1b164f39ea934b0da1933829edfe8d85~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-wilmersdorf-snow-junction-night.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_1b164f39ea934b0da1933829edfe8d85~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-wilmersdorf-snow-junction-night.jpg",
+      "alt": "A snowy junction at Konstanzer Strasse and Berliner Strasse in Berlin-Wilmersdorf at night, street lamps lit, a car blurring past through packed snow on the carriageway",
+      "relatedToolSlug": ""
+    },
+    {
       "title": "Doctor Appointment in Berlin: The Four-Week Rule and What It Cannot Give You",
       "slug": "doctor-appointment-berlin",
       "path": "/post/doctor-appointment-berlin",
@@ -1987,23 +2004,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_6c3d7d2e92794fd4ad4dc96cc378ea5d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-parking-zones-cover-kopenhagener.jpg",
       "alt": "A Berlin residential street in Prenzlauer Berg with cars parked along both kerbs under bare plane trees",
       "relatedToolSlug": "berlin-parking-zone-clock"
-    },
-    {
-      "title": "Berlin Public Libraries: What the 10 Euro Card Unlocks and Which Doors Open on Sunday",
-      "slug": "berlin-public-libraries",
-      "path": "/post/berlin-public-libraries",
-      "url": "https://www.berlinwalk.com/post/berlin-public-libraries",
-      "excerpt": "The 10 euro VÖBB card covers eBooks, PressReader and film streaming, the Staatsbibliothek card is free, and this September even more libraries open on Sunday. Which doors are open when, where you can work all day, and the two defaults worth picking.",
-      "category": "Living in Berlin",
-      "categorySlug": "living-in-berlin",
-      "topic": "living-in-berlin",
-      "topicLabel": "Living in Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-09-12T07:53:25.888Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_2b90b45e38394dec94e22bff89b48c73~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-public-libraries-cover-stabi-lesesaal.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_2b90b45e38394dec94e22bff89b48c73~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-public-libraries-cover-stabi-lesesaal.jpg",
-      "alt": "Reading room of the Staatsbibliothek zu Berlin at Potsdamer Strasse with its ceiling of round white light domes above bookshelves and desks",
-      "relatedToolSlug": "berlin-library-hours-board"
     }
   ]
 }
