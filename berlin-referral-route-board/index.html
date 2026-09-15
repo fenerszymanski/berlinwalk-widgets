@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Referral Route Board</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --soft: #C5E1A5;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --muted: #5a665b;
+    --line: rgba(27, 94, 32, .18);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .rb { max-width: 820px; margin: 0 auto; padding: 14px 12px 16px; }
+  .rb-head h2 { font-size: 1.06rem; margin: 0 0 4px; color: var(--green); }
+  .rb-head p { margin: 0; font-size: .78rem; color: var(--muted); line-height: 1.55; }
+
+  .rb-step { margin-top: 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 11px 12px 13px; }
+  .rb-step[data-locked="true"] { opacity: .45; }
+  .rb-step h3 { font-size: .63rem; letter-spacing: .07em; text-transform: uppercase; color: var(--deep); margin: 0 0 9px; }
+  .rb-step h3 i { font-style: normal; color: var(--muted); font-weight: 600; margin-right: 6px; }
+
+  .rb-opts { display: flex; flex-wrap: wrap; gap: 6px; }
+  .rb-opt {
+    font-family: inherit; font-size: .68rem; font-weight: 600; padding: 6px 11px; border-radius: 999px;
+    border: 1px solid var(--green); background: #fff; color: var(--green); cursor: pointer; line-height: 1.3;
+  }
+  .rb-opt[aria-pressed="true"] { background: var(--green); color: #fff; }
+  .rb-opt:disabled { cursor: not-allowed; border-color: var(--line); color: var(--muted); background: #fff; }
+  .rb-opt:disabled[aria-pressed="true"] { background: #eceee9; color: var(--muted); border-color: var(--line); }
+  .rb-opt:focus-visible { outline: 3px solid var(--yellow); outline-offset: 1px; }
+  .rb-hint { font-size: .66rem; color: var(--muted); line-height: 1.55; margin: 9px 0 0; }
+
+  .rb-plot { margin-top: 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 11px 10px 9px; }
+  .rb-plot canvas { display: block; width: 100%; height: 268px; }
+  .rb-key { display: flex; flex-wrap: wrap; gap: 5px 16px; margin-top: 7px; font-size: .64rem; color: var(--muted); }
+  .rb-key i { display: inline-block; width: 11px; height: 11px; border-radius: 2px; vertical-align: -1px; margin-right: 5px; }
+
+  .rb-pick { margin-top: 12px; border-radius: 10px; background: var(--deep); color: #fff; padding: 13px 14px 14px; }
+  .rb-pick .big { font-size: 1.16rem; font-weight: 800; line-height: 1.25; color: var(--yellow); }
+  .rb-pick .why { font-size: .76rem; line-height: 1.55; margin-top: 7px; color: #fff; }
+  .rb-pick .cost { display: flex; flex-wrap: wrap; gap: 9px 20px; margin-top: 11px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,.2); }
+  .rb-pick .cost div { min-width: 118px; }
+  .rb-pick .cost .v { font-size: .9rem; font-weight: 700; color: var(--yellow); }
+  .rb-pick .cost .k { font-size: .63rem; color: rgba(255,255,255,.85); line-height: 1.45; margin-top: 2px; }
+
+  .rb-shut { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+  .rb-shut li { font-size: .71rem; line-height: 1.5; background: var(--cream); border: 1px solid var(--line); border-radius: 8px; padding: 7px 10px; }
+  .rb-shut li b { color: var(--deep); }
+
+  .rb-move { margin-top: 12px; padding: 10px 12px; border-radius: 8px; background: var(--yellow); color: var(--deep); font-size: .77rem; line-height: 1.5; font-weight: 600; }
+  .rb-move b { text-transform: uppercase; letter-spacing: .06em; font-size: .62rem; display: block; margin-bottom: 3px; }
+  .rb-note { margin-top: 11px; font-size: .66rem; color: var(--muted); line-height: 1.6; }
+  .rb-note a { color: var(--green); }
+</style>
+</head>
+<body>
+<div class="rb">
+  <div class="rb-head">
+    <h2>Berlin Referral Route Board</h2>
+    <p>Five ways into a Berlin specialist, drawn against the longest each one is allowed to take. Say what you need and what is in your hand, and the shut doors grey out.</p>
+  </div>
+
+  <div class="rb-step" id="step1">
+    <h3><i>1</i>What do you need seen?</h3>
+    <div class="rb-opts" role="group" aria-label="What do you need seen" id="needs"></div>
+    <p class="rb-hint" id="needNote"></p>
+  </div>
+
+  <div class="rb-step" id="step2">
+    <h3><i>2</i>What is in your hand?</h3>
+    <div class="rb-opts" role="group" aria-label="What is in your hand" id="holds"></div>
+    <p class="rb-hint" id="holdNote"></p>
+  </div>
+
+  <div class="rb-step" id="step3">
+    <h3><i>3</i>What matters most to you?</h3>
+    <div class="rb-opts" role="group" aria-label="What matters most to you" id="cares"></div>
+    <p class="rb-hint">Press as many as apply. They change the order of the board, never the law.</p>
+  </div>
+
+  <div class="rb-plot">
+    <canvas id="board" aria-label="The five routes into a Berlin specialist, drawn against the longest each is allowed to take"></canvas>
+    <div class="rb-key">
+      <span><i style="background:#1B5E20"></i>Open to you</span>
+      <span><i style="background:#FFE600;border:1px solid #1B5E20"></i>The route the board would take</span>
+      <span><i style="background:#d7dad4"></i>Shut for this case</span>
+      <span><b style="color:#1B5E20">&times;</b> marks a route that cannot honour a request for English</span>
+    </div>
+  </div>
+
+  <div class="rb-pick">
+    <div class="big" id="pickName">&nbsp;</div>
+    <div class="why" id="pickWhy"></div>
+    <div class="cost">
+      <div><div class="v" id="v-ceiling"></div><div class="k">longest it is allowed to take</div></div>
+      <div><div class="v" id="v-choice"></div><div class="k">do you pick the practice</div></div>
+      <div><div class="v" id="v-english"></div><div class="k">can you ask for English</div></div>
+    </div>
+  </div>
+
+  <div class="rb-step">
+    <h3>What is shut, and why</h3>
+    <ul class="rb-shut" id="shut"></ul>
+  </div>
+
+  <div class="rb-move">
+    <b>My move</b>
+    <span id="move"></span>
+  </div>
+
+  <p class="rb-note" id="note"></p>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var DATA = null;
+  var currentStep = 1;
+  var needId = '';
+  var holdId = 'nothing';
+  var cares = { english: false, choice: false, urgent: false };
+
+  var HOLDS = [
+    { id: 'nothing', label: 'Nothing yet' },
+    { id: 'plain', label: 'A referral, no code' },
+    { id: 'coded', label: 'A referral with a 12-digit code' }
+  ];
+  var CARES = [
+    { id: 'english', label: 'I need English' },
+    { id: 'choice', label: 'I want to pick the practice' },
+    { id: 'urgent', label: 'It cannot wait until tomorrow' }
+  ];
+
+  function el(id) { return document.getElementById(id); }
+  function need() {
+    var list = DATA.needs, i;
+    for (i = 0; i < list.length; i += 1) if (list[i].id === needId) return list[i];
+    return list[0];
+  }
+
+  function chip(box, items, isOn, onTap) {
+    var html = '', i;
+    for (i = 0; i < items.length; i += 1) {
+      html += '<button type="button" class="rb-opt" data-id="' + items[i].id + '" aria-pressed="'
+        + (isOn(items[i]) ? 'true' : 'false') + '">' + items[i].label + '</button>';
+    }
+    box.innerHTML = html;
+    var nodes = box.querySelectorAll('.rb-opt'), j;
+    for (j = 0; j < nodes.length; j += 1) {
+      nodes[j].addEventListener('click', function () { onTap(this.getAttribute('data-id')); });
+    }
+  }
+
+  /* Which doors this case can actually use, and the plain reason when one is shut. */
+  function shutReason(route, n) {
+    if (route.id === 'urgent' && n.id === 'zahn') {
+      return 'Berlin runs a separate dental on-call service. The 116117 doctor on call is not the door for a tooth.';
+    }
+    if (route.id === 'urgent' && !cares.urgent) {
+      return 'The doctor on call treats what cannot wait until practices open. It is not a way into a routine specialist queue, so press the third button only if that is really where you are.';
+    }
+    if (n.id === 'zahn' && (route.id === 'online' || route.id === 'phone')) {
+      return 'The 116117 booking service places no dental or orthodontic appointments at all.';
+    }
+    if (n.id === 'zahn' && route.id === 'walkin') {
+      return 'Open hours are a rule for doctors, not for dental practices.';
+    }
+    if (route.id === 'walkin' && !n.walkIn) {
+      return n.de + ' is not one of the groups that owes five open hours a week.';
+    }
+    if ((route.id === 'online' || route.id === 'phone') && n.referral === 'coded') {
+      if (holdId === 'nothing') return 'A ' + n.de + ' appointment is only placed on a referral carrying a twelve-digit code. You do not have one yet.';
+      if (holdId === 'plain') return 'A plain referral is not enough here. Without the twelve-digit code there is no four-week ceiling.';
+    }
+    return '';
+  }
+
+  function score(route, open) {
+    var value = route.ceilingDays;
+    if (!open) return 9000 + value;
+    if (cares.english && route.english === 'no') value += 150;
+    if (cares.english && route.english === 'maybe') value += 15;
+    if (cares.choice && route.choice === 'no') value += 60;
+    return value;
+  }
+
+  function ranked() {
+    var n = need();
+    var rows = DATA.routes.map(function (r) {
+      var why = shutReason(r, n);
+      return { route: r, open: why === '', why: why, rank: 0 };
+    });
+    rows.forEach(function (row) { row.rank = score(row.route, row.open); });
+    rows.sort(function (a, b) { return a.rank - b.rank; });
+    return rows;
+  }
+
+  /* A log-ish axis, because one day and four months cannot share a linear scale. */
+  function axisX(days, x0, w) {
+    var v = Math.log(days + 1) / Math.log(121);
+    return x0 + v * w;
+  }
+
+  function paint(rows) {
+    var cv = el('board');
+    var ratio = window.devicePixelRatio || 1;
+    var w = cv.clientWidth || 640;
+    var h = cv.clientHeight || 268;
+    cv.width = Math.round(w * ratio);
+    cv.height = Math.round(h * ratio);
+    var c = cv.getContext('2d');
+    c.setTransform(ratio, 0, 0, ratio, 0, 0);
+    c.clearRect(0, 0, w, h);
+
+    var narrow = w < 470;
+    var gutter = narrow ? 8 : 168;
+    var padTop = narrow ? 16 : 20;
+    var padBottom = 30;
+    var x0 = gutter + 8;
+    var plotW = w - x0 - 14;
+    var rowH = (h - padTop - padBottom) / rows.length;
+
+    c.font = '10px Montserrat, sans-serif';
+    c.textBaseline = 'middle';
+
+    var ticks = [
+      { d: 0, label: 'same day' },
+      { d: 7, label: '1 week' },
+      { d: 28, label: '4 weeks' },
+      { d: 120, label: 'no ceiling' }
+    ];
+    ticks.forEach(function (t) {
+      var x = axisX(t.d, x0, plotW);
+      c.strokeStyle = 'rgba(27,94,32,.14)';
+      c.lineWidth = 1;
+      c.beginPath();
+      c.moveTo(x, padTop - 6);
+      c.lineTo(x, h - padBottom + 4);
+      c.stroke();
+      c.fillStyle = '#5a665b';
+      c.textAlign = t.d === 120 ? 'right' : (t.d === 0 ? 'left' : 'center');
+      c.fillText(t.label, x, h - padBottom + 15);
+    });
+
+    rows.forEach(function (row, i) {
+      var cy = padTop + rowH * i + rowH / 2;
+      var barH = Math.min(20, rowH * 0.46);
+      var best = i === 0 && row.open;
+      var x1 = axisX(row.route.ceilingDays, x0, plotW);
+
+      if (narrow) {
+        c.textAlign = 'left';
+        c.fillStyle = row.open ? '#123D18' : '#8a938a';
+        c.font = '600 10px Montserrat, sans-serif';
+        c.fillText(row.route.name, x0, cy - barH / 2 - 9);
+      } else {
+        c.textAlign = 'right';
+        c.fillStyle = row.open ? '#123D18' : '#8a938a';
+        c.font = '600 10px Montserrat, sans-serif';
+        c.fillText(row.route.name, gutter, cy);
+      }
+
+      c.fillStyle = row.open ? (best ? '#FFE600' : '#1B5E20') : '#d7dad4';
+      c.beginPath();
+      var rr = 3;
+      var bw = Math.max(6, x1 - x0);
+      c.moveTo(x0 + rr, cy - barH / 2);
+      c.lineTo(x0 + bw - rr, cy - barH / 2);
+      c.quadraticCurveTo(x0 + bw, cy - barH / 2, x0 + bw, cy - barH / 2 + rr);
+      c.lineTo(x0 + bw, cy + barH / 2 - rr);
+      c.quadraticCurveTo(x0 + bw, cy + barH / 2, x0 + bw - rr, cy + barH / 2);
+      c.lineTo(x0 + rr, cy + barH / 2);
+      c.quadraticCurveTo(x0, cy + barH / 2, x0, cy + barH / 2 - rr);
+      c.lineTo(x0, cy - barH / 2 + rr);
+      c.quadraticCurveTo(x0, cy - barH / 2, x0 + rr, cy - barH / 2);
+      c.closePath();
+      c.fill();
+
+      if (best) {
+        c.strokeStyle = '#1B5E20';
+        c.lineWidth = 1.5;
+        c.stroke();
+      }
+
+      /* A shut door is hatched, so it reads as closed even without colour. */
+      if (!row.open) {
+        c.save();
+        c.beginPath();
+        c.rect(x0, cy - barH / 2, bw, barH);
+        c.clip();
+        c.strokeStyle = '#ffffff';
+        c.lineWidth = 2;
+        for (var hx = x0 - barH; hx < x0 + bw + barH; hx += 7) {
+          c.beginPath();
+          c.moveTo(hx, cy + barH / 2);
+          c.lineTo(hx + barH, cy - barH / 2);
+          c.stroke();
+        }
+        c.restore();
+      }
+
+      if (row.route.openEnded && row.open) {
+        c.fillStyle = best ? '#123D18' : '#ffffff';
+        c.textAlign = 'right';
+        c.font = '600 9px Montserrat, sans-serif';
+        c.fillText('no ceiling at all', x0 + bw - 8, cy);
+      }
+
+      /* The language mark: a cross on any route that cannot honour English. */
+      if (row.open && row.route.english === 'no') {
+        var mx = x0 + bw - 14;
+        var my = cy;
+        c.strokeStyle = best ? '#123D18' : '#FFE600';
+        c.lineWidth = 1.8;
+        c.beginPath();
+        c.moveTo(mx - 4, my - 4); c.lineTo(mx + 4, my + 4);
+        c.moveTo(mx + 4, my - 4); c.lineTo(mx - 4, my + 4);
+        c.stroke();
+      }
+    });
+  }
+
+  function label(v) {
+    if (v === 'yes') return 'Yes';
+    if (v === 'no') return 'No';
+    return 'Sometimes';
+  }
+  function ceilingLabel(r) {
+    if (r.openEnded) return 'No limit';
+    if (r.ceilingDays === 1) return 'Same day';
+    if (r.ceilingDays === 7) return 'That week';
+    return r.ceilingDays + ' days';
+  }
+
+  function moveLine(rows, n) {
+    var top = rows[0];
+    if (n.id === 'zahn') {
+      return 'Teeth never touch the 116117 booking service. Ring practices yourself, and keep the separate Berlin dental on-call line for a night you cannot sleep through.';
+    }
+    if (!top.open) {
+      return 'Nothing is open to you yet. Get to a Hausarzt first and ask, in these words, for an Überweisung mit Vermittlungscode.';
+    }
+    if (top.route.id === 'self' && cares.english) {
+      return 'Because you want English, book it yourself and use the practice search language filter. The four-week service is faster on paper and cannot honour a single word of that request.';
+    }
+    if (top.route.id === 'walkin') {
+      return 'Take the open hours. Ring the practice the day before, ask when their offene Sprechstunde falls this week, and arrive at the start of it rather than the middle.';
+    }
+    if (top.route.id === 'online' || top.route.id === 'phone') {
+      return 'Use the four-week service, but book it the day the referral is written. The clock starts at your call, not at the date on the paper.';
+    }
+    if (top.route.id === 'urgent') {
+      return 'Ring 116117 now. It answers at any hour and will send you to a Berlin on-call practice tonight. Anything that is genuinely an emergency is 112 instead.';
+    }
+    return 'Ring the practice yourself and ask what their next free slot looks like before you give up the right to choose it.';
+  }
+
+  function run() {
+    if (!DATA) return;
+    var n = need();
+    var rows = ranked();
+    var top = rows[0];
+
+    el('needNote').textContent = n.note;
+    el('step2').setAttribute('data-locked', currentStep < 2 ? 'true' : 'false');
+    el('step3').setAttribute('data-locked', currentStep < 3 ? 'true' : 'false');
+
+    var holdBox = el('holds');
+    var holdButtons = holdBox.querySelectorAll('.rb-opt'), i;
+    for (i = 0; i < holdButtons.length; i += 1) {
+      holdButtons[i].disabled = n.referral === 'none';
+    }
+    if (n.id === 'zahn') {
+      el('holdNote').textContent = 'No referral changes anything for a tooth. The booking service does not reach dental practices at all, so the paper in your hand is beside the point here.';
+    } else if (n.referral === 'none') {
+      el('holdNote').textContent = 'For ' + n.de + ' the paper does not decide anything. The booking service places this one with no referral at all.';
+    } else {
+      el('holdNote').textContent = 'Only the twelve-digit code on a referral opens the four-week ceiling. A referral without it is still useful at the practice itself.';
+    }
+
+    paint(rows);
+
+    el('pickName').textContent = top.open ? top.route.name : 'No route is open yet';
+    el('pickWhy').textContent = top.open ? top.route.line : top.why;
+    el('v-ceiling').textContent = top.open ? ceilingLabel(top.route) : '-';
+    el('v-choice').textContent = top.open ? label(top.route.choice) : '-';
+    el('v-english').textContent = top.open ? label(top.route.english) : '-';
+
+    var shutHtml = '', found = 0;
+    rows.forEach(function (row) {
+      if (row.open) return;
+      found += 1;
+      shutHtml += '<li><b>' + row.route.name + '.</b> ' + row.why + '</li>';
+    });
+    el('shut').innerHTML = found ? shutHtml : '<li>Every route on the board is open to this case. The order above is the one I would work down.</li>';
+
+    el('move').textContent = moveLine(rows, n);
+    el('note').innerHTML = 'Rules read from the <a href="https://www.kvberlin.de/fuer-patienten/terminservice" target="_blank" rel="noopener">KV Berlin appointment service</a> and the open-hours duty in the Terminservice- und Versorgungsgesetz. Checked on 15 September 2026.';
+  }
+
+  function boot() {
+    needId = DATA.needs[0].id;
+    chip(el('needs'), DATA.needs.map(function (n) { return { id: n.id, label: n.label }; }),
+      function (item) { return item.id === needId; },
+      function (id) { needId = id; if (currentStep < 2) currentStep = 2; buildAll(); });
+
+    chip(el('holds'), HOLDS,
+      function (item) { return item.id === holdId; },
+      function (id) { holdId = id; if (currentStep < 3) currentStep = 3; buildAll(); });
+
+    chip(el('cares'), CARES,
+      function (item) { return cares[item.id]; },
+      function (id) { cares[id] = !cares[id]; currentStep = 3; buildAll(); });
+
+    run();
+  }
+
+  function buildAll() {
+    chip(el('needs'), DATA.needs.map(function (n) { return { id: n.id, label: n.label }; }),
+      function (item) { return item.id === needId; },
+      function (id) { needId = id; if (currentStep < 2) currentStep = 2; buildAll(); });
+    chip(el('holds'), HOLDS,
+      function (item) { return item.id === holdId; },
+      function (id) { holdId = id; if (currentStep < 3) currentStep = 3; buildAll(); });
+    chip(el('cares'), CARES,
+      function (item) { return cares[item.id]; },
+      function (id) { cares[id] = !cares[id]; currentStep = 3; buildAll(); });
+    run();
+  }
+
+  var redrawTimer = null;
+  window.addEventListener('resize', function () {
+    if (redrawTimer) clearTimeout(redrawTimer);
+    redrawTimer = setTimeout(run, 120);
+  });
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (j) {
+    DATA = j;
+    boot();
+  });
+})();
+</script>
+</body>
+</html>

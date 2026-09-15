@@ -4904,5 +4904,18 @@
       "**The postal vote clock:** online application until **Tuesday 15 September**, written application or a walk-in vote at the Briefwahlstelle until **Friday 18 September, 15:00**, a replacement Wahlschein until **Saturday 12:00**, and the red envelope physically at the Bezirkswahlamt by **Sunday 18:00**. Allow three working days by post.",
       "**Bring photo ID on Sunday**, even an expired one. The notice is helpful, not required; the Wahllokalsuche finds your station from your address. Nobody can vote in your place, and once you hold a Wahlschein you cannot vote without it."
     ]
+  },
+  "doctor-appointment-berlin": {
+    "title": "Doctor Appointment in Berlin - Quick Summary",
+    "icon": "🩺",
+    "kicker": "BERLINWALK.COM • LIVING IN BERLIN",
+    "items": [
+      "**The four-week promise is real but narrow.** The KV Berlin appointment service on **116117** places you with a specialist within **four weeks at most**, and it says in the same breath that minor complaints and routine check-ups are outside that promise.",
+      "**For most specialists the clock only starts with a twelve-digit code.** A plain referral opens nothing at the service. Ask your GP for an **Überweisung mit Vermittlungscode**. No referral at all is needed for a GP, an eye doctor, a gynaecologist, a children's doctor or a first psychotherapy consultation.",
+      "**The fast route cannot give you English.** The service states plainly that treatment in a foreign language cannot be taken into account when it places you. The separate public practice search at arztsuche.116117.de does have a **Fremdsprachen** filter, so booking yourself is the only route that protects language.",
+      "**Five open hours a week, no appointment.** Full specialist practices in skin, eyes, ENT, orthopaedics, urology, gynaecology, surgery, neurology and psychiatry owe **five hours of offene Sprechstunde** every week. Practices choose their own times, so ring and ask.",
+      "**A referral is valid in its own quarter and the next one.** One written in September runs to **31 December 2026**. One written on 2 October runs to the end of March.",
+      "**Teeth are outside all of it.** The appointment service places **no dental or orthodontic appointments**, whatever paper you hold. Berlin runs a separate dental on-call service."
+    ]
   }
 }

@@ -1,0 +1,141 @@
+{
+  "checkedOn": "2026-09-15",
+  "source": "KV Berlin Terminservice 116117, KBV Arzt- und Psychotherapeutensuche, Terminservice- und Versorgungsgesetz",
+  "needs": [
+    {
+      "id": "haut",
+      "label": "Skin",
+      "de": "Hautarzt",
+      "referral": "coded",
+      "walkIn": true,
+      "note": "Dermatology is one of the groups that must hold open hours every week."
+    },
+    {
+      "id": "ortho",
+      "label": "Back, knee, joints",
+      "de": "Orthopädie",
+      "referral": "coded",
+      "walkIn": true,
+      "note": "Orthopaedics must hold open hours, and it is the specialty Berliners queue for longest."
+    },
+    {
+      "id": "neuro",
+      "label": "Nerves, migraine",
+      "de": "Neurologie",
+      "referral": "coded",
+      "walkIn": true,
+      "note": "Neurology must hold open hours. Bring anything an earlier doctor wrote down."
+    },
+    {
+      "id": "hno",
+      "label": "Ear, nose, throat",
+      "de": "HNO",
+      "referral": "coded",
+      "walkIn": true,
+      "note": "ENT must hold open hours, which is why a blocked ear on a Monday is often walk-in work."
+    },
+    {
+      "id": "uro",
+      "label": "Urology",
+      "de": "Urologie",
+      "referral": "coded",
+      "walkIn": true,
+      "note": "Urology must hold open hours every week."
+    },
+    {
+      "id": "augen",
+      "label": "Eyes",
+      "de": "Augenarzt",
+      "referral": "none",
+      "walkIn": true,
+      "note": "Eyes need no referral at all for the booking service, and the practice must also hold open hours."
+    },
+    {
+      "id": "frauen",
+      "label": "Gynaecology",
+      "de": "Frauenarzt",
+      "referral": "none",
+      "walkIn": true,
+      "note": "Gynaecology needs no referral for the booking service, and must hold open hours."
+    },
+    {
+      "id": "kinder",
+      "label": "A child",
+      "de": "Kinderarzt",
+      "referral": "none",
+      "walkIn": false,
+      "note": "Paediatrics needs no referral, and the booking service also places the U check-ups."
+    },
+    {
+      "id": "herz",
+      "label": "Heart",
+      "de": "Kardiologie",
+      "referral": "coded",
+      "walkIn": false,
+      "note": "Cardiology sits outside the open-hours list, so the coded referral is the whole game."
+    },
+    {
+      "id": "psy",
+      "label": "Therapy, first talk",
+      "de": "Psychotherapie",
+      "referral": "none",
+      "walkIn": false,
+      "note": "A first psychotherapy consultation is placed without a referral. Acute sessions need a coded report from a therapist instead."
+    },
+    {
+      "id": "zahn",
+      "label": "Teeth",
+      "de": "Zahnarzt",
+      "referral": "none",
+      "walkIn": false,
+      "note": "Dentists and orthodontists sit outside the booking service completely. No paper you hold changes that."
+    }
+  ],
+  "routes": [
+    {
+      "id": "self",
+      "name": "Ring the practice yourself",
+      "ceilingDays": 120,
+      "openEnded": true,
+      "english": "yes",
+      "choice": "yes",
+      "line": "No ceiling and no promise. In exchange you pick the practice, and you can ask on the phone whether they work in English."
+    },
+    {
+      "id": "online",
+      "name": "116117 booking service, online",
+      "ceilingDays": 28,
+      "openEnded": false,
+      "english": "no",
+      "choice": "no",
+      "line": "Four weeks at the outside, a practice you do not choose, and language is not a field the service can honour."
+    },
+    {
+      "id": "phone",
+      "name": "116117 booking service, by phone",
+      "ceilingDays": 28,
+      "openEnded": false,
+      "english": "no",
+      "choice": "no",
+      "line": "The same four-week ceiling, answered day and night. Use it when the online path cannot read your paper."
+    },
+    {
+      "id": "walkin",
+      "name": "Sit in the open hours",
+      "ceilingDays": 7,
+      "openEnded": false,
+      "english": "maybe",
+      "choice": "yes",
+      "line": "Every full practice in these groups owes five open hours a week with no appointment. You pick the door, you pay in waiting time."
+    },
+    {
+      "id": "urgent",
+      "name": "116117 on-call doctor",
+      "ceilingDays": 1,
+      "openEnded": false,
+      "english": "maybe",
+      "choice": "no",
+      "line": "Same day, but only for something that cannot wait. It is not a shortcut into a routine specialist queue."
+    }
+  ]
+}
