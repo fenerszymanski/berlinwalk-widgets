@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-15T13:40:40.516Z",
+  "updatedAt": "2026-09-15T20:05:18.941Z",
   "source": "Wix Blog API",
-  "totalPosts": 388,
+  "totalPosts": 389,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Berlin Flat Notice Period: The Three Days That Decide Your Last Month",
+      "slug": "berlin-flat-notice-period",
+      "path": "/post/berlin-flat-notice-period",
+      "url": "https://www.berlinwalk.com/post/berlin-flat-notice-period",
+      "excerpt": "German law does not count your notice from the day you post it. It counts back from the third working day of a calendar month, and in Berlin that day moves, because Saturdays are working days here and the city keeps ten public holidays that are not. Miss it by one day and the tenancy runs a whole month longer. Here is the exact date for the month you want to leave, how to deliver the letter so it counts, the clause that can cancel all of it, and what really happens to your deposit.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-15T20:02:40.220Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_a96e5d84fdcc4c40957471c6814c2d28~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-weidenweg-corner-block.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_a96e5d84fdcc4c40957471c6814c2d28~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-weidenweg-corner-block.jpg",
+      "alt": "A corner block on Weidenweg in Berlin-Friedrichshain under a clear blue sky, five storeys of pale render above an arcade of ground-floor openings, bare trees along the pavement and cars parked in front",
+      "relatedToolSlug": "best-month-to-visit-berlin"
+    },
     {
       "title": "Winter Tyres in Berlin: When the Road Actually Freezes",
       "slug": "winter-tyres-berlin",
