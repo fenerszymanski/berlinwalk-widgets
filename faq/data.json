@@ -11759,5 +11759,43 @@
         "a": "No. It is permission to apply, not an allocation and not a place on a waiting list. Berlin counted about 95,000 social rental flats at the start of 2019 and the Senate's own projection puts the stock at roughly 59,000 by the start of 2028 as old subsidy agreements expire, with new construction meant to hold the line. The certificate costs nothing and takes twenty minutes, so the sensible order is to get it first and then search, instead of filtering out every listing marked WBS erforderlich on an assumption about your own income."
       }
     ]
+  },
+  "berlin-election-2026": {
+    "title": "Berlin Election 2026 - FAQ",
+    "subtitle": "Who gets which ballot on 20 September 2026, the postal vote deadlines that still apply this week, and what changed since the 2021 election Berlin had to repeat.",
+    "items": [
+      {
+        "q": "Who can vote in the Berlin election on 20 September 2026?",
+        "a": "German citizens who are 16 on election day, so born before 21 September 2010, who have had their main home in Berlin since at least 20 June 2026 and have not lost the right to vote by court order. They vote for the Abgeordnetenhaus and for their district assembly, the BVV. Citizens of another EU member state who meet the same age and residence conditions vote for the BVV only. Anyone with a passport from outside the EU cannot vote in either election."
+      },
+      {
+        "q": "Can EU citizens vote in the Berlin election?",
+        "a": "Yes, for the Bezirksverordnetenversammlung of their district, with one vote for a list. They are entered in the register automatically if they were registered with their main home in Berlin by 20 June 2026 and are 16 or older on election day, and their notice should have arrived by 30 August. They cannot vote for the Abgeordnetenhaus. Berlin counts about 250,000 eligible EU citizens, which is the difference between roughly 2.5 million voters for the state parliament and 2.75 million for the district assemblies."
+      },
+      {
+        "q": "How many votes do I have and what does the ballot paper look like?",
+        "a": "German citizens receive two sheets. The Abgeordnetenhaus paper carries both votes on one sheet for the first time: a first vote for a person standing in one of the 78 constituencies on the left, and a second vote for a district-wide or Berlin-wide party list on the right. The two do not have to match. The BVV paper is a separate sheet with one vote for a list. Every ballot has its top right corner cut off, and the BVV sheet also has two punched holes so blind voters can tell them apart."
+      },
+      {
+        "q": "Is there a referendum (Volksentscheid) on 20 September 2026?",
+        "a": "No. The two citizens' initiatives that were heading for the same day, Berlin autofrei and Berlin Werbefrei, both fell short of the signatures they needed by 8 May 2026, and the Landeswahlleiter declared both failed on 22 May. Only the Abgeordnetenhaus and the twelve BVVs are elected on Sunday."
+      },
+      {
+        "q": "What are the postal vote deadlines for the Berlin election 2026?",
+        "a": "The online application closed on Tuesday 15 September. A written application, using the form on the back of the notice, an email or a fax to the Bezirkswahlamt, is possible until Friday 18 September at 15:00. Until the same time you can walk into your district's Briefwahlstelle with photo ID, get the papers and vote on the spot. A replacement Wahlschein for lost or missing papers is issued only until Saturday 19 September at 12:00. The red Wahlbrief must physically reach the Bezirkswahlamt by Sunday 20 September at 18:00; the office asks you to allow three working days by post, and you can hand it in yourself."
+      },
+      {
+        "q": "What if my postal voting papers have not arrived?",
+        "a": "Contact your Bezirkswahlamt immediately. If you can credibly declare that the papers never reached you or were lost, the office can issue a replacement Wahlschein until Saturday 19 September 2026 at 12:00. Once you have applied for a postal vote you cannot simply vote at the polling station on Sunday without that Wahlschein. About 1,400 postal voters in Charlottenburg-Wilmersdorf constituencies 3 and 4 were sent the ballot for the wrong constituency in documents issued on 24 and 25 August; the district office is contacting them and issuing new papers."
+      },
+      {
+        "q": "What do I need to bring to the polling station on Sunday?",
+        "a": "Photo ID: a Personalausweis, a passport or a driving licence, and it may exceptionally be expired. The Wahlbenachrichtigung is useful but not required; if you lost it, the Wahllokalsuche on the Landeswahlleiter's site shows your polling station from your address. Polling stations are open from 8:00 to 18:00, there are about 2,550 of them, and nobody can vote on your behalf. If you fall ill on the day, someone with a signed authority can collect postal papers for you from the Bezirkswahlamt until 15:00."
+      },
+      {
+        "q": "Why does the BVV election matter?",
+        "a": "Each of the twelve district assemblies has 55 members, needs 3 percent for a list to get in, and elects the Bezirksbuergermeister and five Bezirksstadtraete who run the district office. Parking zones, dog runs, bulky waste collection, library opening hours, playgrounds, pedestrian crossings, Kita places, cycle lanes and the Ordnungsamt are decided at this level. For EU citizens it is the only Berlin vote they hold, and for everyone else it is the vote that changes the street they live on."
+      }
+    ]
   }
 }
