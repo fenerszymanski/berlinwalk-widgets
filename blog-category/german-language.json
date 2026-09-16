@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-09-15T13:40:53.184Z",
+ "updatedAt": "2026-09-16T14:18:04.872Z",
  "source": "Wix Blog API + blog-category/categories.json",
  "slug": "german-language",
  "categoryId": "bf46ccbb-3db8-499a-95fe-4623868d6e1a",
@@ -9,7 +9,7 @@
  "shelfLegend": "",
  "shelfLegendSub": "",
  "totalPosts": 19,
- "toolCount": 11,
+ "toolCount": 13,
  "lead": {
   "title": "German Courses in Berlin: What a Lesson Costs and Why the Rules Change at B1",
   "slug": "german-courses-in-berlin",
@@ -160,7 +160,8 @@
    "minutes": 8,
    "alt": "A smiling couple takes a selfie in front of Brandenburg Gate. The woman holds a German flag. Sunny day, clear sky, crowd in the background.",
    "thumb": "https://static.wixstatic.com/media/5a08a3_e4ec2e0f6af54f639fff634c6bc36d5f~mv2.jpeg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-   "line": "Learn 50 essential German phrases with pronunciation guides to make your Berlin trip smoother."
+   "line": "Learn 50 essential German phrases with pronunciation guides to make your Berlin trip smoother.",
+   "tool": "german-phrases-quiz"
   },
   {
    "title": "Do I Need to Speak German to Visit Berlin?",
@@ -214,7 +215,8 @@
    "minutes": 7,
    "alt": "",
    "thumb": "https://static.wixstatic.com/media/nsplsh_f0208352f62b402b81731e60049ad692~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-   "line": "Learn 10 practical German words and phrases for a smoother Berlin trip, from Danke and Bitte to Stimmt so, Karte and transport signs."
+   "line": "Learn 10 practical German words and phrases for a smoother Berlin trip, from Danke and Bitte to Stimmt so, Karte and transport signs.",
+   "tool": "german-phrases-quiz"
   }
  ]
 }

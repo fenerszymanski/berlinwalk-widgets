@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-09-15T13:40:52.214Z",
+ "updatedAt": "2026-09-16T14:18:03.675Z",
  "source": "Wix Blog API + blog-category/categories.json",
  "slug": "berlin-history",
  "categoryId": "5f58da11-347d-43f0-b3c3-2cb1cdeb7a79",
@@ -9,7 +9,7 @@
  "shelfLegend": "Where the story is standing",
  "shelfLegendSub": "Grouped by the kind of ground it covers",
  "totalPosts": 59,
- "toolCount": 50,
+ "toolCount": 54,
  "lead": {
   "title": "Berlin War Damage Still Visible: The Walls That Were Never Repaired",
   "slug": "berlin-war-damage-still-visible",
@@ -94,7 +94,8 @@
      "minutes": 5,
      "alt": "The Olympic flame cauldron on its pillars at the Marathon Gate inside Berlin's Olympiastadion, framed by the stadium roof opening",
      "thumb": "https://static.wixstatic.com/media/5a08a3_be407886b9334da08006905dce9b9e17~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "The stadium the Nazis built for the 1936 Olympics is still standing and still full most weekends."
+     "line": "The stadium the Nazis built for the 1936 Olympics is still standing and still full most weekends.",
+     "tool": "olympiastadion-visit-planner"
     },
     {
      "title": "Berliner Dom Tickets: Dome Climb, Crypt and Visit Tips",
@@ -283,7 +284,8 @@
      "minutes": 6,
      "alt": "Concrete stelae at the Holocaust Memorial Berlin",
      "thumb": "https://static.wixstatic.com/media/5a08a3_35d060b00a4f4e738340348218748faa~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "A practical, respectful guide to the Holocaust Memorial Berlin: what the stelae mean, how long to spend, Information Centre hours, etiquette and nearby route choices."
+     "line": "A practical, respectful guide to the Holocaust Memorial Berlin: what the stelae mean, how long to spend, Information Centre hours, etiquette and nearby route choices.",
+     "tool": "holocaust-memorial-visit-planner"
     },
     {
      "title": "Bebelplatz Berlin: Book-Burning Memorial, Empty Library and What Tourists Miss",
@@ -302,7 +304,8 @@
      "minutes": 7,
      "alt": "Unter den Linden boulevard in Berlin with trees, the Frederick the Great statue and the TV Tower in the distance",
      "thumb": "https://static.wixstatic.com/media/5a08a3_bf98985572c44e1ca26711a80de8bff0~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "A practical local guide to walking Unter den Linden in Berlin, with the best direction, stops, shortcuts, mistakes to avoid and a simple route planner."
+     "line": "A practical local guide to walking Unter den Linden in Berlin, with the best direction, stops, shortcuts, mistakes to avoid and a simple route planner.",
+     "tool": "unter-den-linden-walk-planner"
     },
     {
      "title": "Berlin Pride 2026 (CSD): The Parade, the Whole Week, and the History Behind It",
@@ -311,7 +314,8 @@
      "minutes": 7,
      "alt": "Feathered dancers and a rainbow-flag truck at a crowded pride parade near the Brandenburg Gate under a bright blue sky",
      "thumb": "https://static.wixstatic.com/media/5a08a3_c2dbe2e682b94caf857dcc811ab5f7d6~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "Berlin Pride 2026 (CSD) holds its main parade on July 25."
+     "line": "Berlin Pride 2026 (CSD) holds its main parade on July 25.",
+     "tool": "berlin-pride-week-timeline"
     },
     {
      "title": "7 Things Most Tourists Don't Know About the Berliner Dom",

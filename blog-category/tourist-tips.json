@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-09-15T13:40:51.631Z",
+ "updatedAt": "2026-09-16T14:18:03.148Z",
  "source": "Wix Blog API + blog-category/categories.json",
  "slug": "tourist-tips",
  "categoryId": "6da64e22-3360-42ec-a558-e906e4deeb19",
@@ -9,7 +9,7 @@
  "shelfLegend": "What the trip actually asks you",
  "shelfLegendSub": "Grouped by the moment the question turns up",
  "totalPosts": 295,
- "toolCount": 248,
+ "toolCount": 271,
  "lead": {
   "title": "Berlin Club Dress Codes: What Tresor, Sisyphos and RSO Actually Read",
   "slug": "berlin-club-dress-codes-by-venue",
@@ -323,7 +323,8 @@
      "minutes": 5,
      "alt": "A free lunchtime concert in the foyer of the Berliner Philharmonie, with the audience seated on folding chairs and a grand piano at the side",
      "thumb": "https://static.wixstatic.com/media/5a08a3_cdb608b17b264077b31b0779f4db7326~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "The live music you remember in Berlin is rarely the show you paid the most for."
+     "line": "The live music you remember in Berlin is rarely the show you paid the most for.",
+     "tool": "berlin-live-music-week"
     },
     {
      "title": "Berlin Opera for First-Time Visitors: Which House Fits Your Evening?",
@@ -1107,7 +1108,8 @@
      "minutes": 8,
      "alt": "A smiling couple takes a selfie in front of Brandenburg Gate. The woman holds a German flag. Sunny day, clear sky, crowd in the background.",
      "thumb": "https://static.wixstatic.com/media/5a08a3_e4ec2e0f6af54f639fff634c6bc36d5f~mv2.jpeg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "Learn 50 essential German phrases with pronunciation guides to make your Berlin trip smoother."
+     "line": "Learn 50 essential German phrases with pronunciation guides to make your Berlin trip smoother.",
+     "tool": "german-phrases-quiz"
     },
     {
      "title": "Where to Find Free Drinking Water in Berlin: Fountains, Refill Stations & Local Tips",
@@ -1299,7 +1301,8 @@
      "minutes": 6,
      "alt": "The Brandenburg Gate seen from Unter den Linden in central Berlin under a blue sky",
      "thumb": "https://static.wixstatic.com/media/5a08a3_c3487d418bd84fd1b361bc92522f2d30~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "An honest local take on whether Berlin's paid attractions are worth it: Madame Tussauds, the Berlin Dungeon and LEGOLAND Discovery Centre, who each one suits, and the two"
+     "line": "An honest local take on whether Berlin's paid attractions are worth it: Madame Tussauds, the Berlin Dungeon and LEGOLAND Discovery Centre, who each one suits, and the two",
+     "tool": "berlin-attractions-worth-it-matcher"
     },
     {
      "title": "How to Watch Films in English in Berlin",
@@ -1377,7 +1380,8 @@
      "minutes": 4,
      "alt": "Interior view of ICC Berlin during a previous Open Monument Day",
      "thumb": "https://static.wixstatic.com/media/5a08a3_8a02c52f847249fc8ff5e8e289f3d08f~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "Use Berlin's Open Monument Day 2026 programme without criss-crossing the city: one priority site, one local back-up and live access checks."
+     "line": "Use Berlin's Open Monument Day 2026 programme without criss-crossing the city: one priority site, one local back-up and live access checks.",
+     "tool": "open-monument-day-shortlist"
     },
     {
      "title": "International Literature Festival Berlin 2026: English-Friendly Events and a Realistic City Plan",
@@ -1525,7 +1529,8 @@
      "minutes": 6,
      "alt": "The sun setting through the arches of the Oberbaumbrücke over the Spree in Berlin, with a yellow U-Bahn crossing the bridge",
      "thumb": "https://static.wixstatic.com/media/5a08a3_b12916e0ba6b42819129df08d0acb49b~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "A Berlin guide's practical guide to the sunset in Berlin: real sunset and golden-hour timing by season, and the best spots to watch the light over water, the city or a wide-open horizon."
+     "line": "A Berlin guide's practical guide to the sunset in Berlin: real sunset and golden-hour timing by season, and the best spots to watch the light over water, the city or a wide-open horizon.",
+     "tool": "berlin-sunset-planner"
     },
     {
      "title": "E-Scooters in Berlin: How to Rent One and the Rules That Get You Fined",
@@ -1662,7 +1667,8 @@
      "minutes": 9,
      "alt": "Prater Biergarten with cozy outdoor seating and yellow chairs under leafy green chestnut trees",
      "thumb": "https://static.wixstatic.com/media/5a08a3_154f3b8d6a6547f8a03cb4c471155392~mv2.png/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "A local guide's detailed breakdown of the 12 best beer gardens in Berlin, including historic institutions like Prater, lakeside gems, forest escapes, and modern craft bee"
+     "line": "A local guide's detailed breakdown of the 12 best beer gardens in Berlin, including historic institutions like Prater, lakeside gems, forest escapes, and modern craft bee",
+     "tool": "berlin-beer-gardens-map"
     },
     {
      "title": "Where to Watch the 2026 World Cup in Berlin (No, There's No Brandenburg Gate Fan Mile This Year)",
@@ -1797,7 +1803,8 @@
      "minutes": 10,
      "alt": "The colonnaded 1914 swimming hall of Stadtbad Neukölln, with turquoise water running between two rows of stone columns",
      "thumb": "https://static.wixstatic.com/media/5a08a3_cd93cd17e4b94f61b1de8124856ab277~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "Berlin sells sauna time in blocks, and every venue cuts the blocks differently, so the cheapest place changes with the length of your gap."
+     "line": "Berlin sells sauna time in blocks, and every venue cuts the blocks differently, so the cheapest place changes with the length of your gap.",
+     "tool": "berlin-sauna-cost-curve"
     },
     {
      "title": "Berlin Freedom Week 2026: Plan Around What Is Confirmed",
@@ -1856,7 +1863,8 @@
      "minutes": 4,
      "alt": "A train on display at InnoTrans 2024 in Berlin",
      "thumb": "https://static.wixstatic.com/media/5a08a3_178c66ebfd684ed1b021fa0f640eeb5a~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "A realistic InnoTrans Berlin 2026 plan: official fair facts, Messe Berlin logistics and three evening choices that fit a long trade-fair day."
+     "line": "A realistic InnoTrans Berlin 2026 plan: official fair facts, Messe Berlin logistics and three evening choices that fit a long trade-fair day.",
+     "tool": "innotrans-three-evening-board"
     },
     {
      "title": "Tropical Islands from Berlin: A Rainforest Day Trip Inside a Giant Airship Hangar",
@@ -1905,7 +1913,8 @@
      "minutes": 6,
      "alt": "The giant \"Astronaut Cosmonaut\" mural by Victor Ash on a Kreuzberg building wall, a stencilled spaceman in black and white above a line of trees under a blue sky",
      "thumb": "https://static.wixstatic.com/media/5a08a3_a9b73d95a0854efcae5e344d635e8fda~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "You land expecting street art everywhere, then barely see a spray can around Museum Island."
+     "line": "You land expecting street art everywhere, then barely see a spray can around Museum Island.",
+     "tool": "berlin-street-art-worth-the-trip"
     },
     {
      "title": "Kaiser Wilhelm Memorial Church: How to Visit Berlin's Broken Tower",
@@ -1934,7 +1943,8 @@
      "minutes": 8,
      "alt": "Airplane displayed atop the Deutsches Technikmuseum. Modern glass facade with cylindrical structures. Blue sky background. Text visible: Deutsches Technikmuseum.",
      "thumb": "https://static.wixstatic.com/media/5a08a3_552f1bf6909f4e159d997aacc7a1f50e~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "Some Berlin museums are always free, some are free only on special days, and Museum Sunday has ended."
+     "line": "Some Berlin museums are always free, some are free only on special days, and Museum Sunday has ended.",
+     "tool": "berlin-museums-map"
     },
     {
      "title": "Is Museum Island Free? Tickets, Prices, and What to Actually Skip",
@@ -2060,7 +2070,8 @@
      "minutes": 4,
      "alt": "Neue Nationalgalerie at the Kulturforum in Berlin",
      "thumb": "https://static.wixstatic.com/media/5a08a3_4bc7697f4d4543a5957f10411a756b5d~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "Plan Berlin Art Week 2026 around one district at a time, with the confirmed dates, live-programme checks and room for the rest of Berlin."
+     "line": "Plan Berlin Art Week 2026 around one district at a time, with the confirmed dates, live-programme checks and room for the rest of Berlin.",
+     "tool": "berlin-art-week-route-builder"
     },
     {
      "title": "Musikfest Berlin 2026: Which Concert Venue Fits Your Berlin Day?",
@@ -2078,7 +2089,8 @@
      "minutes": 4,
      "alt": "Bode Museum illuminated at night on Berlin's Museum Island",
      "thumb": "https://static.wixstatic.com/media/5a08a3_8e322674b4ce4bffa822de5812164c06~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "How to build a realistic Long Night of Museums route in Berlin, with the confirmed 2026 timing and practical queue advice."
+     "line": "How to build a realistic Long Night of Museums route in Berlin, with the confirmed 2026 timing and practical queue advice.",
+     "tool": "museum-night-route-shaper"
     },
     {
      "title": "Rave The Planet Berlin 2026: A Practical Guide to the Parade Day",
@@ -2087,7 +2099,8 @@
      "minutes": 5,
      "alt": "A Rave The Planet crowd and float on Straße des 17. Juni in Berlin",
      "thumb": "https://static.wixstatic.com/media/5a08a3_010f5024b8e443aa87bfde0f93072849~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "A realistic Berlin plan for Rave The Planet: confirmed time and route context, plus how to keep the day flexible."
+     "line": "A realistic Berlin plan for Rave The Planet: confirmed time and route context, plus how to keep the day flexible.",
+     "tool": "rave-the-planet-day-fit"
     },
     {
      "title": "Karl-Marx-Allee: How to Walk East Berlin's Showpiece Boulevard",
@@ -2126,7 +2139,8 @@
      "minutes": 5,
      "alt": "The preserved former border strip at the Berlin Wall Memorial on Bernauer Strasse.",
      "thumb": "https://static.wixstatic.com/media/5a08a3_5304f80fb26349a8b0eed05ffb95d359~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "Compare the real start, finish and walking time of five self-guided Berlin audio routes."
+     "line": "Compare the real start, finish and walking time of five self-guided Berlin audio routes.",
+     "tool": "free-berlin-audio-tour"
     },
     {
      "title": "Berlin Audio Guide App vs No-App Audio Tour: Which Is Better?",
@@ -2135,7 +2149,8 @@
      "minutes": 5,
      "alt": "The World Clock and TV Tower at Alexanderplatz, where several Berlin audio walks begin or finish.",
      "thumb": "https://static.wixstatic.com/media/5a08a3_e30dba2ac4b241a18834437e2f9d9595~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "A practical Berlin field test for audio guide apps, no-app browser routes and MP3 backups."
+     "line": "A practical Berlin field test for audio guide apps, no-app browser routes and MP3 backups.",
+     "tool": "free-berlin-audio-tour"
     },
     {
      "title": "How to Pronounce Berlin Station Names: A Simple Guide for Tourists",
@@ -2174,7 +2189,8 @@
      "minutes": 6,
      "alt": "Concrete stelae at the Holocaust Memorial Berlin",
      "thumb": "https://static.wixstatic.com/media/5a08a3_35d060b00a4f4e738340348218748faa~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "A practical, respectful guide to the Holocaust Memorial Berlin: what the stelae mean, how long to spend, Information Centre hours, etiquette and nearby route choices."
+     "line": "A practical, respectful guide to the Holocaust Memorial Berlin: what the stelae mean, how long to spend, Information Centre hours, etiquette and nearby route choices.",
+     "tool": "holocaust-memorial-visit-planner"
     },
     {
      "title": "Bebelplatz Berlin: Book-Burning Memorial, Empty Library and What Tourists Miss",
@@ -2193,7 +2209,8 @@
      "minutes": 7,
      "alt": "Altes Museum and Museum Island at sunset, a strong reminder to check Monday opening hours before planning Berlin museums",
      "thumb": "https://static.wixstatic.com/media/5a08a3_0027372f452e4bb6b423583d1eae963e~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "A practical Monday guide for Berlin tourists: what closes, what stays open, which museums work, and how to plan a strong day without wasting time at locked doors."
+     "line": "A practical Monday guide for Berlin tourists: what closes, what stays open, which museums work, and how to plan a strong day without wasting time at locked doors.",
+     "tool": "berlin-monday-plan-checker"
     },
     {
      "title": "Berlin Pride 2026 (CSD): The Parade, the Whole Week, and the History Behind It",
@@ -2202,7 +2219,8 @@
      "minutes": 7,
      "alt": "Feathered dancers and a rainbow-flag truck at a crowded pride parade near the Brandenburg Gate under a bright blue sky",
      "thumb": "https://static.wixstatic.com/media/5a08a3_c2dbe2e682b94caf857dcc811ab5f7d6~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "Berlin Pride 2026 (CSD) holds its main parade on July 25."
+     "line": "Berlin Pride 2026 (CSD) holds its main parade on July 25.",
+     "tool": "berlin-pride-week-timeline"
     },
     {
      "title": "What to Do Near Hackescher Markt After the Walking Tour",
@@ -2211,7 +2229,8 @@
      "minutes": 9,
      "alt": "Hackescher Markt S-Bahn station after a Berlin walking tour",
      "thumb": "https://static.wixstatic.com/media/5a08a3_0d90550575d5404cb1598b4cabf27149~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "A Berlin guide's practical after-tour plan for Hackescher Markt: where to eat, how to reset, which courtyards to walk, and what to do if it rains."
+     "line": "A Berlin guide's practical after-tour plan for Hackescher Markt: where to eat, how to reset, which courtyards to walk, and what to do if it rains.",
+     "tool": "hackescher-after-tour-planner"
     },
     {
      "title": "Berlin Lakes Guide 2026: Where to Swim, Picnic, and Beat the Summer Heat",
@@ -2230,7 +2249,8 @@
      "minutes": 4,
      "alt": "Ancient mosaic of a striding lion in beige and orange on a blue brick background. Decorative patterns above. Historic and vibrant.",
      "thumb": "https://static.wixstatic.com/media/5a08a3_6cde1d163a1e499b882d8c86fe340505~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "The Pergamon Museum in Berlin is completely closed for renovation until at least 4 June 2027."
+     "line": "The Pergamon Museum in Berlin is completely closed for renovation until at least 4 June 2027.",
+     "tool": "berlin-museum-closure-timeline"
     },
     {
      "title": "Humboldt Forum Berlin: Free Entry, Big Controversy — Is It Worth Visiting?",
@@ -2422,7 +2442,8 @@
      "minutes": 5,
      "alt": "A food counter inside Markthalle Neun in Kreuzberg",
      "thumb": "https://static.wixstatic.com/media/5a08a3_ce1ca92c04304dc6831172e3bcea71fa~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "Choose where to eat in Berlin by neighbourhood, not a random restaurant list: a practical three-night dinner plan for Kreuzberg, City West and Prenzlauer Berg."
+     "line": "Choose where to eat in Berlin by neighbourhood, not a random restaurant list: a practical three-night dinner plan for Kreuzberg, City West and Prenzlauer Berg.",
+     "tool": "dinner-neighbourhood-picker"
     },
     {
      "title": "IFA Berlin 2026: A Visitor Guide to Messe Berlin and the City After the Show",
@@ -2727,7 +2748,8 @@
      "minutes": 11,
      "alt": "WeihnachtsZauber Gendarmenmarkt under the winter lights",
      "thumb": "https://static.wixstatic.com/media/5a08a3_f8ac892c6dfd4b5eb74c6252ca2ee8a2~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "A local guide's honest breakdown of the best Christmas markets in Berlin for 2026."
+     "line": "A local guide's honest breakdown of the best Christmas markets in Berlin for 2026.",
+     "tool": "christmas-markets-map"
     },
     {
      "title": "What to Wear to Berlin Clubs: Dress Codes, Door Difficulty & Club-by-Club Tips",
@@ -2775,7 +2797,8 @@
      "minutes": 6,
      "alt": "Berlin döner kebab in flatbread with grilled vegetables, chicken meat, fresh salad and garlic sauce",
      "thumb": "https://static.wixstatic.com/media/5a08a3_f6946ba54fe44a2ba5ca74e810732917~mv2.jpeg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "Discover the 5 best döner kebab spots in Berlin — from cult Gemüse Kebab stands to top-rated yaprak döner shops locals swear by."
+     "line": "Discover the 5 best döner kebab spots in Berlin — from cult Gemüse Kebab stands to top-rated yaprak döner shops locals swear by.",
+     "tool": "berlin-doner-order-builder"
     },
     {
      "title": "Where to Eat Near Alexanderplatz Without Getting Ripped Off",

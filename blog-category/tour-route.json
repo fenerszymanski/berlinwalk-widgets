@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-09-15T13:40:52.783Z",
+ "updatedAt": "2026-09-16T14:18:04.245Z",
  "source": "Wix Blog API + blog-category/categories.json",
  "slug": "tour-route",
  "categoryId": "f9b304de-4490-4535-b9e9-64b8f2ff63b0",
@@ -9,7 +9,7 @@
  "shelfLegend": "Along the walk",
  "shelfLegendSub": "Grouped by what each stop is really about",
  "totalPosts": 32,
- "toolCount": 16,
+ "toolCount": 19,
  "lead": {
   "title": "Berlin War Damage Still Visible: The Walls That Were Never Repaired",
   "slug": "berlin-war-damage-still-visible",
@@ -174,7 +174,8 @@
      "minutes": 5,
      "alt": "The preserved former border strip at the Berlin Wall Memorial on Bernauer Strasse.",
      "thumb": "https://static.wixstatic.com/media/5a08a3_5304f80fb26349a8b0eed05ffb95d359~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "Compare the real start, finish and walking time of five self-guided Berlin audio routes."
+     "line": "Compare the real start, finish and walking time of five self-guided Berlin audio routes.",
+     "tool": "free-berlin-audio-tour"
     },
     {
      "title": "Unter den Linden Berlin: How to Walk the Grand Boulevard Without Missing the Point",
@@ -183,7 +184,8 @@
      "minutes": 7,
      "alt": "Unter den Linden boulevard in Berlin with trees, the Frederick the Great statue and the TV Tower in the distance",
      "thumb": "https://static.wixstatic.com/media/5a08a3_bf98985572c44e1ca26711a80de8bff0~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "A practical local guide to walking Unter den Linden in Berlin, with the best direction, stops, shortcuts, mistakes to avoid and a simple route planner."
+     "line": "A practical local guide to walking Unter den Linden in Berlin, with the best direction, stops, shortcuts, mistakes to avoid and a simple route planner.",
+     "tool": "unter-den-linden-walk-planner"
     },
     {
      "title": "Is the Pergamon Museum Closed? What Every Tourist Needs to Know in 2026",
@@ -192,7 +194,8 @@
      "minutes": 4,
      "alt": "Ancient mosaic of a striding lion in beige and orange on a blue brick background. Decorative patterns above. Historic and vibrant.",
      "thumb": "https://static.wixstatic.com/media/5a08a3_6cde1d163a1e499b882d8c86fe340505~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "The Pergamon Museum in Berlin is completely closed for renovation until at least 4 June 2027."
+     "line": "The Pergamon Museum in Berlin is completely closed for renovation until at least 4 June 2027.",
+     "tool": "berlin-museum-closure-timeline"
     },
     {
      "title": "7 Things Most Tourists Don't Know About the Berliner Dom",

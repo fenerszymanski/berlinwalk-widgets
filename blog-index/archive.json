@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-16T08:05:13.068Z",
+  "updatedAt": "2026-09-16T14:17:40.861Z",
   "source": "Wix Blog API",
-  "totalPosts": 390,
+  "totalPosts": 391,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Halteverbotszone Berlin: How to Hold the Space for Your Moving Van",
+      "slug": "halteverbotszone-berlin",
+      "path": "/post/halteverbotszone-berlin",
+      "url": "https://www.berlinwalk.com/post/halteverbotszone-berlin",
+      "excerpt": "In Berlin the kerb outside your door belongs to everyone until a district office says otherwise, and that order takes longer to get than the van does. The fee starts at 21 euros, the district issues the paper but never the signs, and the Bundesverwaltungsgericht wants three full days of signage before a towed driver can be billed. Four weeks of processing plus four days of signs is thirty-two days, and almost every removals guide says fourteen.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-16T14:15:52.796Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_a231bbc34bb54a2caf7de236a96fa105~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-neukoelln-weserstrasse-parked-cars.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_a231bbc34bb54a2caf7de236a96fa105~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-neukoelln-weserstrasse-parked-cars.jpg",
+      "alt": "Weserstrasse in Berlin-Neukoelln on an ordinary day, cars parked nose to tail along both kerbs under bare spring trees, cobbled carriageway, five-storey Altbau blocks and shopfronts running away down the street",
+      "relatedToolSlug": ""
+    },
     {
       "title": "Kita Place in Berlin: Nobody Finds It for You",
       "slug": "kita-place-berlin",
