@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Berlin Audio Route Map</title>
-  <meta name="description" content="Compare the real start and finish of five Berlin audio walks and a free sampler on an interactive map.">
+  <meta name="description" content="Compare the real start and finish of the available Berlin audio walks and a free sampler on an interactive map.">
   <meta name="robots" content="noindex,follow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -215,9 +215,7 @@
       <button class="route-tab" type="button" aria-pressed="true" data-route="all">All routes</button>
       <button class="route-tab" type="button" aria-pressed="false" data-route="hidden">Hidden</button>
       <button class="route-tab" type="button" aria-pressed="false" data-route="wall">Berlin Wall</button>
-      <button class="route-tab" type="button" aria-pressed="false" data-route="medieval">Medieval</button>
       <button class="route-tab" type="button" aria-pressed="false" data-route="third-reich">Third Reich</button>
-      <button class="route-tab" type="button" aria-pressed="false" data-route="kreuzberg">Street art</button>
       <button class="route-tab" type="button" aria-pressed="false" data-route="sample">Free sampler</button>
     </nav>
 
@@ -231,7 +229,7 @@
 
       <aside class="route-panel">
         <div class="route-panel-head">
-          <p class="eyebrow" style="color:var(--green)">Six starting lines</p>
+          <p class="eyebrow" style="color:var(--green)">Three walks and a sampler</p>
           <h2>Choose by geography.</h2>
           <p>A route near your current station usually beats a stronger theme on the other side of the city.</p>
         </div>
@@ -279,33 +277,21 @@
       var routes = [
         {
           id: 'hidden', name: 'Hidden Berlin', theme: 'Lost places and divided-city traces',
-          start: 'Anhalter Bahnhof', finish: 'Alexanderplatz', time: '90-120 min', price: '€4.99', color: '#1b5e20',
+          start: 'Anhalter Bahnhof', finish: 'Alexanderplatz', time: '90-120 min', price: '€9.90', color: '#1b5e20',
           points: [[52.50312, 13.38178], [52.52133, 13.41331]],
           url: 'https://www.berlinwalk.com/products/hidden-berlin-audio-route'
         },
         {
           id: 'wall', name: 'Berlin Wall', theme: 'Bernauer Strasse and the former border strip',
-          start: 'S Nordbahnhof', finish: 'Mauerpark', time: 'about 90 min', price: '€4.99', color: '#365f91',
+          start: 'S Nordbahnhof', finish: 'Mauerpark', time: 'about 90 min', price: '€9.90', color: '#365f91',
           points: [[52.53215, 13.38710], [52.54332, 13.40238]],
           url: 'https://www.berlinwalk.com/products/death-strip-audio-route'
         },
         {
-          id: 'medieval', name: 'Medieval Berlin', theme: 'Berlin-Cölln origins and Nikolaiviertel',
-          start: 'World Clock', finish: 'Lustgarten', time: '75-90 min', price: '€4.99', color: '#9b6b18',
-          points: [[52.52133, 13.41331], [52.51811, 13.39972]],
-          url: 'https://www.berlinwalk.com/products/medieval-berlin-audio-tour'
-        },
-        {
           id: 'third-reich', name: 'Third Reich Berlin', theme: 'Power, persecution and resistance',
-          start: 'Reichstag', finish: 'Topography of Terror', time: '100-120 min', price: '€4.99', color: '#7f4038',
+          start: 'Reichstag', finish: 'Topography of Terror', time: '100-120 min', price: '€9.90', color: '#7f4038',
           points: [[52.51862, 13.37618], [52.50684, 13.38254]],
           url: 'https://www.berlinwalk.com/products/third-reich-berlin-audio-tour'
-        },
-        {
-          id: 'kreuzberg', name: 'Kreuzberg Street Art', theme: 'Murals, protest and neighbourhood change',
-          start: 'East Side Gallery', finish: 'Kottbusser Tor', time: 'about 120 min', price: '€4.99', color: '#8f2d73',
-          points: [[52.50173, 13.44501], [52.49907, 13.41833]],
-          url: 'https://www.berlinwalk.com/products/kreuzberg-street-art-audio-tour'
         },
         {
           id: 'sample', name: 'Berlin in 9 Minutes', theme: 'A free test of the format',
@@ -395,7 +381,7 @@
         title.textContent = route.name;
         copy.textContent = route.start + ' to ' + route.finish + '. ' + route.time + '. ' + route.theme + '.';
         link.href = route.url;
-        link.textContent = route.price === 'Free' ? 'Open the free sampler' : 'Open this €4.99 route';
+        link.textContent = route.price === 'Free' ? 'Open the free sampler' : 'Open this ' + route.price + ' route';
       }
 
       function selectRoute(id) {

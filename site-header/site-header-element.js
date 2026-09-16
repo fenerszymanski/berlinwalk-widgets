@@ -1133,7 +1133,7 @@ class BWHeaderElement extends HTMLElement {
                   <ul id="${this._productsMenuId}" class="bw-header-submenu">
                     <li><a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner · <span style="font-size:.82em;font-weight:500;opacity:.85">from</span> €7.99</a></li>
                     <li><a href="${BW_HEADER_LINKS.landmarksGuide}">Berlin Landmarks Guide · €2.99</a></li>
-                    <li><a href="${BW_HEADER_LINKS.audioTours}">Audio Tours · <span style="font-size:.82em;font-weight:500;opacity:.85">from</span> €4.99</a></li>
+                    <li><a href="${BW_HEADER_LINKS.audioTours}">Audio Tours · <span style="font-size:.82em;font-weight:500;opacity:.85">from</span> €9.90</a></li>
                     <li><a href="${BW_HEADER_LINKS.firstDayRescue}">First-Day Rescue Plan · €4.99</a></li>
                     <li><a href="${BW_HEADER_LINKS.photoMissions}">Photo Missions · €3.99</a></li>
                   </ul>
@@ -1203,7 +1203,7 @@ class BWHeaderElement extends HTMLElement {
                 <summary class="bw-header-mobile-section-label">Guides &amp; Downloads</summary>
                 <a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner · <span style="font-size:.82em;font-weight:500;opacity:.85">from</span> €7.99</a>
                 <a href="${BW_HEADER_LINKS.landmarksGuide}">Berlin Landmarks Guide · €2.99</a>
-                <a href="${BW_HEADER_LINKS.audioTours}">Audio Tours · <span style="font-size:.82em;font-weight:500;opacity:.85">from</span> €4.99</a>
+                <a href="${BW_HEADER_LINKS.audioTours}">Audio Tours · <span style="font-size:.82em;font-weight:500;opacity:.85">from</span> €9.90</a>
                 <a href="${BW_HEADER_LINKS.firstDayRescue}">First-Day Rescue Plan · €4.99</a>
                 <a href="${BW_HEADER_LINKS.photoMissions}">Photo Missions · €3.99</a>
               </details>
