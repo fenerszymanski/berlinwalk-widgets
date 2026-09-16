@@ -9395,6 +9395,43 @@
       ],
       "iconStatus": "live-wix-media",
       "cmsItemId": "55751466-84ab-493e-9481-7f938d8a6318"
+    },
+    {
+      "slug": "berlin-pavement-duty-map",
+      "title": "Berlin Pavement Duty Map",
+      "lead": "In a Berlin winter BSR clears the road and you clear the pavement, and how wide a path you owe depends on the cleaning class of your own street: 1.5 metres on a main or shopping street, 1 metre on everything else. That class is not something you can guess, and nearly a quarter of Berlin streets change it partway along. This draws BSR's whole open cleaning register, all 89,141 registered street sides at their real coordinates, coloured by the path you have to clear there. Search your street, tap the stretch your building stands on, and keep both pavements if you live on a corner.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-pavement-duty-map/",
+      "embedHeight": 1260,
+      "image": "https://static.wixstatic.com/media/5a08a3_32b5810e27bd4ba5a71f814cbde6bef2~mv2.png",
+      "hubCategory": "Essentials",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "snow",
+        "winter",
+        "pavement",
+        "gehweg",
+        "winterdienst",
+        "street cleaning",
+        "bsr",
+        "living in berlin",
+        "reinigungsklasse",
+        "raeumpflicht"
+      ],
+      "aliases": [
+        "berlin snow clearing rules",
+        "who clears snow in berlin",
+        "raeum und streupflicht berlin",
+        "berlin winterdienst gehweg",
+        "how wide do i have to clear snow berlin",
+        "berlin street cleaning class",
+        "reinigungsklasse berlin strasse",
+        "berlin pavement snow duty",
+        "streupflicht berlin mieter"
+      ],
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "af15e80f-75d3-4e2c-8d6d-672dc377fb13"
     }
   ],
   "hubCategories": [

@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "slug": "berlin-snow-clearing-rules",
+  "key": "berlin-snow-clearing-rules",
+  "config": {
+    "title": "Berlin Snow Clearing Rules - FAQ",
+    "subtitle": "Who has to clear the pavement in a Berlin winter, how wide the path has to be on your street, the 07:00 and 09:00 deadlines, why salt is banned, what renters owe, and the streets where the carriageway is yours as well.",
+    "items": [
+      {
+        "q": "Who has to clear snow from the pavement in Berlin?",
+        "a": "The Anlieger, which the Straßenreinigungsgesetz defines as the owner of the adjoining property, a holder of a heritable building right, a usufructuary, or anyone with a use right entered in the land register. BSR handles the carriageway, the cycle paths, the pedestrian crossings, the bus stops and a list of named squares and pedestrian zones, but not the pavement in front of your building. Owners may pass the work to a tenant in the lease, or hire a winter service and pass the cost on through the service charges."
+      },
+      {
+        "q": "How wide does the cleared path have to be?",
+        "a": "At least 1 metre on an ordinary Berlin street, and at least 1.5 metres on the pavements of main roads and shopping streets, which the cleaning register lists as categories A1 and A2. A small number of special cases require 3 metres. The law also asks for whatever width the actual pedestrian traffic needs, so the figures are a floor and not a target. Across Berlin, about 19 percent of registered street sides carry the 1.5 metre duty and 81 percent the 1 metre one."
+      },
+      {
+        "q": "What time do I have to have the pavement cleared by?",
+        "a": "Snow has to be cleared as soon as the snowfall stops, and repeatedly during a long snowfall. Ice is dealt with as soon as it forms. If the snowfall continues past 20:00, or snow or ice starts after that time, the path has to be clear by 07:00 the following morning, and by 09:00 on a Sunday or a public holiday. Separately, BSR asks that the way to your bins is clear to one bin's width by 06:00, or your collection can be missed."
+      },
+      {
+        "q": "Can I use salt on the pavement in Berlin?",
+        "a": "No. Salt and every other de-icing agent are banned for residents in Berlin; the rule covers all Auftaumittel and not only salt. Only BSR may use them, and only in defined exceptional cases. Spread an abrasive instead: sand, grit or granulate, sold as Splitt in any hardware shop from October. In a hard frost, gritting on its own is not enough, because BSR's own instruction is to break the ice up, lift the pieces off, and only then grit. Once the thaw comes, sweep your grit into a pile and the normal street cleaning round takes it away."
+      },
+      {
+        "q": "I rent my flat. Do I have to shovel?",
+        "a": "It depends on your lease, and both arrangements are common in Berlin. The duty starts with the owner. The owner can transfer the work to you in the lease, in which case you own the shovel and the 07:00 deadline, or hire a winter service and put the bill in your annual service charges, in which case you own a line item. Read the winter clause before the first snow, or ask your Hausverwaltung which of the two you are on. A Winterdienst charge, if there is one, shows up in the Nebenkostenabrechnung."
+      },
+      {
+        "q": "What is a cleaning class and how do I find mine?",
+        "a": "Berlin's Straßenreinigungsverzeichnis puts every public street, square and path into directory A, B or C, and then into a class by how often it is swept: 10 times a week for class 1a down to once a week for class 4. That class decides both the street cleaning fee and the minimum width you have to clear in winter. It is not something you can guess from looking at the street. The Berlin Pavement Duty Map on this page holds all 89,141 registered street sides at their real coordinates, so you can search your street and read the class off it."
+      },
+      {
+        "q": "Are there streets where I also have to clear the road?",
+        "a": "Yes. On category C streets, which the register lists as insufficiently built up, the Anlieger cleans the carriageway to the middle of the road all year, and carries an extended winter duty where the pavement continues across the junction. That is about 1,684 kilometres of Berlin, roughly 15 percent of the city's registered street sides, and it is heavily concentrated outside the ring: 32 percent of Marzahn-Hellersdorf, 27 percent of Treptow-Köpenick, 22 percent of Pankow and Spandau, against effectively none in Mitte, Friedrichshain-Kreuzberg or Charlottenburg-Wilmersdorf."
+      },
+      {
+        "q": "What happens if I do not clear it?",
+        "a": "The district Ordnungsamt is responsible for checking pavements. If an Anlieger does not act, the office can order a substitute clearance at that person's cost and open an administrative offence procedure, with a fine of up to 10,000 euros. If somebody is injured because of the ice, criminal proceedings and a compensation claim are possible on top. Delegating the work to a firm or a neighbour is allowed, but it does not move the responsibility, and it adds a duty to check the job was done."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Who has to clear snow from the pavement in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Anlieger, which the Straßenreinigungsgesetz defines as the owner of the adjoining property, a holder of a heritable building right, a usufructuary, or anyone with a use right entered in the land register. BSR handles the carriageway, the cycle paths, the pedestrian crossings, the bus stops and a list of named squares and pedestrian zones, but not the pavement in front of your building. Owners may pass the work to a tenant in the lease, or hire a winter service and pass the cost on through the service charges."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How wide does the cleared path have to be?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "At least 1 metre on an ordinary Berlin street, and at least 1.5 metres on the pavements of main roads and shopping streets, which the cleaning register lists as categories A1 and A2. A small number of special cases require 3 metres. The law also asks for whatever width the actual pedestrian traffic needs, so the figures are a floor and not a target. Across Berlin, about 19 percent of registered street sides carry the 1.5 metre duty and 81 percent the 1 metre one."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What time do I have to have the pavement cleared by?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Snow has to be cleared as soon as the snowfall stops, and repeatedly during a long snowfall. Ice is dealt with as soon as it forms. If the snowfall continues past 20:00, or snow or ice starts after that time, the path has to be clear by 07:00 the following morning, and by 09:00 on a Sunday or a public holiday. Separately, BSR asks that the way to your bins is clear to one bin's width by 06:00, or your collection can be missed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use salt on the pavement in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Salt and every other de-icing agent are banned for residents in Berlin; the rule covers all Auftaumittel and not only salt. Only BSR may use them, and only in defined exceptional cases. Spread an abrasive instead: sand, grit or granulate, sold as Splitt in any hardware shop from October. In a hard frost, gritting on its own is not enough, because BSR's own instruction is to break the ice up, lift the pieces off, and only then grit. Once the thaw comes, sweep your grit into a pile and the normal street cleaning round takes it away."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "I rent my flat. Do I have to shovel?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on your lease, and both arrangements are common in Berlin. The duty starts with the owner. The owner can transfer the work to you in the lease, in which case you own the shovel and the 07:00 deadline, or hire a winter service and put the bill in your annual service charges, in which case you own a line item. Read the winter clause before the first snow, or ask your Hausverwaltung which of the two you are on. A Winterdienst charge, if there is one, shows up in the Nebenkostenabrechnung."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a cleaning class and how do I find mine?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin's Straßenreinigungsverzeichnis puts every public street, square and path into directory A, B or C, and then into a class by how often it is swept: 10 times a week for class 1a down to once a week for class 4. That class decides both the street cleaning fee and the minimum width you have to clear in winter. It is not something you can guess from looking at the street. The Berlin Pavement Duty Map on this page holds all 89,141 registered street sides at their real coordinates, so you can search your street and read the class off it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are there streets where I also have to clear the road?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. On category C streets, which the register lists as insufficiently built up, the Anlieger cleans the carriageway to the middle of the road all year, and carries an extended winter duty where the pavement continues across the junction. That is about 1,684 kilometres of Berlin, roughly 15 percent of the city's registered street sides, and it is heavily concentrated outside the ring: 32 percent of Marzahn-Hellersdorf, 27 percent of Treptow-Köpenick, 22 percent of Pankow and Spandau, against effectively none in Mitte, Friedrichshain-Kreuzberg or Charlottenburg-Wilmersdorf."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if I do not clear it?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The district Ordnungsamt is responsible for checking pavements. If an Anlieger does not act, the office can order a substitute clearance at that person's cost and open an administrative offence procedure, with a fine of up to 10,000 euros. If somebody is injured because of the ice, criminal proceedings and a compensation claim are possible on top. Delegating the work to a firm or a neighbour is allowed, but it does not move the responsibility, and it adds a duty to check the job was done."
+        }
+      }
+    ]
+  }
+}
