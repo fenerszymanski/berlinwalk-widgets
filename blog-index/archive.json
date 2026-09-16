@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-16T14:17:40.861Z",
+  "updatedAt": "2026-09-16T20:09:38.291Z",
   "source": "Wix Blog API",
-  "totalPosts": 391,
+  "totalPosts": 392,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Berlin Snow Clearing Rules: Which Pavement Is Yours and How Wide",
+      "slug": "berlin-snow-clearing-rules",
+      "path": "/post/berlin-snow-clearing-rules",
+      "url": "https://www.berlinwalk.com/post/berlin-snow-clearing-rules",
+      "excerpt": "Berlin gives BSR the carriageway and leaves the pavement in front of your building to you, even though BSR already sweeps that same pavement up to ten times a week in normal weather. The width you owe depends on the cleaning class of your own street, nearly a quarter of Berlin streets change class partway along, and on 1,684 kilometres of category C the carriageway is yours as well.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-16T20:04:56.281Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_38890040cf0e4b36a7f3f4fe65c9e223~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hertelstrasse.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_38890040cf0e4b36a7f3f4fe65c9e223~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hertelstrasse.jpg",
+      "alt": "A snow covered residential street in Berlin-Friedenau at night, cars parked along both kerbs under a thin layer of snow, tyre tracks down the middle of the carriageway and lit windows in the Altbau blocks on either side",
+      "relatedToolSlug": "berlin-pavement-duty-map"
+    },
     {
       "title": "Halteverbotszone Berlin: How to Hold the Space for Your Moving Van",
       "slug": "halteverbotszone-berlin",
@@ -19,7 +36,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_a231bbc34bb54a2caf7de236a96fa105~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-neukoelln-weserstrasse-parked-cars.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_a231bbc34bb54a2caf7de236a96fa105~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-neukoelln-weserstrasse-parked-cars.jpg",
       "alt": "Weserstrasse in Berlin-Neukoelln on an ordinary day, cars parked nose to tail along both kerbs under bare spring trees, cobbled carriageway, five-storey Altbau blocks and shopfronts running away down the street",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-moving-permit-planner"
     },
     {
       "title": "Kita Place in Berlin: Nobody Finds It for You",
